@@ -102,7 +102,7 @@ pt:
         connection: "Login"
         password_forgotten: "Esqueceu sua senha?"
         confirm_my_account: "Confirmar sua conta"
-        not_registered_to_the_fablab: "Ainda não registrado no Fablab?"
+        not_registered_to_the_fablab: "Not registered to the FabLab?"
         create_an_account: "Criar conta"
         wrong_email_or_password: "E-mail ou senha incorretos."
         caps_lock_is_on: "A tecla Caps Lock está ativada."
@@ -148,10 +148,10 @@ pt:
         from_time_to_time: "Das {START} até {END}"
         free_entry: "Entrada franca"
         free_admission: "Admissão grátis"
-        full_price: "Valor inteira"
+        full_price: "Full price: "
         event_full: "Evento lotado"
-        still_available: "Locais disponíveis"
-        all_day: "O dia inteiro"
+        still_available: "Available place(s): "
+        all_day: "All day"
       #projects gallery
       projects_list:
         the_fablab_projects: "Projetos do Fab Lab"
@@ -259,7 +259,7 @@ pt:
         subscription_confirmation: "Inscrição confirmada"
         here_is_the_NAME_subscription_summary: "Aqui é o sumário de inscrição do {NAME}:"
         confirm_payment_of_html: "{ROLE, select, admin{Cash} other{Pay}}: {AMOUNT}" #(contexte : validate a payment of $20,00)
-        online_payment_disabled: "Payment by credit card is not available. Please contact the Fablab's reception directly."
+        online_payment_disabled: "Payment by credit card is not available. Please contact the FabLab's reception directly."
       #Fablab's events list
       events_list:
         the_fablab_s_events: "Eventos do Fablab"
@@ -302,7 +302,7 @@ pt:
         book: "Reservar"
         confirm_and_pay: "Confirm and pay"
         confirm_payment_of_html: "{ROLE, select, admin{Cash} other{Pay}}: {AMOUNT}" #(contexte : validate a payment of $20,00)
-        online_payment_disabled: "Payment by credit card is not available. Please contact the Fablab's reception directly."
+        online_payment_disabled: "Payment by credit card is not available. Please contact the FabLab's reception directly."
         please_select_a_member_first: "Please select a member first"
         change_the_reservation: "Alterar reserva"
         you_can_shift_this_reservation_on_the_following_slots: "Você pode alterar essa reserva nos campos a seguir:"
@@ -312,15 +312,15 @@ pt:
         delete_this_event: "Only this event"
         delete_this_and_next: "This event and the following"
         delete_all: "All events"
-        event_successfully_deleted: "Evento excluído com sucesso"
+        event_successfully_deleted: "Event successfully deleted."
         events_deleted: "The event, and {COUNT, plural, =1{one other} other{{COUNT} others}}, have been deleted"
         unable_to_delete_the_event: "Unable to delete the event, it may be booked by a member"
         events_not_deleted: "On {TOTAL} events, {COUNT, plural, =1{one was not deleted} other{{COUNT} were not deleted}}. Some reservations may exists on {COUNT, plural, =1{it} other{them}}."
         cancel_the_reservation: "Cancel the reservation"
         do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "Do you really want to cancel this reservation? This apply to ALL booked tickets."
-        reservation_was_successfully_cancelled: "Reservation was successfully cancelled"
+        reservation_was_successfully_cancelled: "Reservation was successfully cancelled."
         cancellation_failed: "Cancellation failed."
-        event_is_over: "The event is over"
+        event_is_over: "The event is over."
         thanks_for_coming: "Thanks for coming!"
         view_event_list: "View events to come"
         share_on_facebook: "Share on Facebook"
@@ -382,7 +382,7 @@ pt:
             content: "Visualize at a glance everything that is scheduled for the next coming weeks (events, training, machines available, etc.)."
           projects:
             title: "Projects"
-            content: "<p>Document and share all your creations with the community.</p><p>If you use OpenLab, you will also be able to consult the projects of the entire Fab-Manager network. <a href='mailto:contact@fab-manager.com'>Contact-us</a> to get your access, it's free!</p>"
+            content: "<p>Document and share all your creations with the community.</p><p>If you use OpenLab, you will also be able to consult the projects of the entire Fab-manager network. <a href='mailto:contact@fab-manager.com'>Contact-us</a> to get your access, it's free!</p>"
           plans:
             title: "Subscriptions"
             content: "Subscriptions provide a way to segment your prices and provide benefits to regular users."
@@ -400,13 +400,13 @@ pt:
             content: "<p>Find your personal information here as well as all your activity on Fab-manager.</p><p>This space is also available for all your members.</p>"
           news:
             title: "News"
-            content: "<p>This space allows you to display the latest news from your structure.</p><p>You can easily change its content from [Customization]> [Home page].</p>"
+            content: "<p>This space allows you to display the latest news from your structure.</p><p>You can easily change its content from « Customization », « Home page».</p>"
           last_projects:
             title: "Last projects"
             content: "<p>This carousel scrolls through the latest projects documented by your members.</p>"
           last_tweet:
             title: "Last tweet"
-            content: "<p>Le dernier tweet de votre flux Twitter peut s'afficher ici.</p><p>Configure it from [Customization]> [Home page].</p>"
+            content: "<p>Le dernier tweet de votre flux Twitter peut s'afficher ici.</p><p>Configure it from « Customization », « Home page».</p>"
           last_members:
             title: "Last members"
             content: "The last registered members who have validated their address and agreed to be contacted will be shown here."
