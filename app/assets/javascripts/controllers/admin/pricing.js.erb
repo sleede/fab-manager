@@ -714,8 +714,6 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       if (Fablab.featureTourDisplay !== 'manual' && $scope.currentUser.profile.tours.indexOf('pricing') < 0) {
         uitour.start();
       }
-      // start this tour when an user press F1 - this is contextual help
-      window.addEventListener('keydown', handleF1);
     }
 
     /* PRIVATE SCOPE */
@@ -725,11 +723,6 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
      */
     const initialize = function () {
       $scope.trainingCreditsGroups = groupCreditsByPlan($scope.trainingCredits);
-
-      // listen the $destroy event of the controller to remove the F1 key binding
-      $scope.$on('$destroy', function () {
-        window.removeEventListener('keydown', handleF1);
-      });
 
       // adds empty array for plan which hasn't any credits yet
       return (function () {
@@ -743,18 +736,6 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
         }
         return result;
       })();
-    };
-
-    /**
-     * Callback used to trigger the feature tour when the user press the F1 key.
-     * @param e {KeyboardEvent}
-     */
-    const handleF1 = function (e) {
-      if (e.key === 'F1') {
-        e.preventDefault();
-        const tour = uiTourService.getTourByName('pricing');
-        if (tour) { tour.start(); }
-      }
     };
 
     /**

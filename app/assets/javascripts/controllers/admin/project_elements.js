@@ -26,7 +26,7 @@ Application.Controllers.controller('ProjectElementsController', ['$scope', '$sta
     /**
      * Saves a new component / Update an existing material to the server (form validation callback)
      * @param data {Object} component name
-     * @param [data] {number} component id, in case of update
+     * @param [id] {number} component id, in case of update
      */
     $scope.saveComponent = function (data, id) {
       if (id != null) {
@@ -49,9 +49,8 @@ Application.Controllers.controller('ProjectElementsController', ['$scope', '$sta
      * Creates a new empty entry in the $scope.components array
      */
     $scope.addComponent = function () {
-      $scope.inserted =
-      { name: '' };
-      return $scope.components.push($scope.inserted);
+      $scope.inserted = { name: '' };
+      $scope.components.push($scope.inserted);
     };
 
     /**
@@ -93,9 +92,8 @@ Application.Controllers.controller('ProjectElementsController', ['$scope', '$sta
      * Creates a new empty entry in the $scope.themes array
      */
     $scope.addTheme = function () {
-      $scope.inserted =
-      { name: '' };
-      return $scope.themes.push($scope.inserted);
+      $scope.inserted = { name: '' };
+      $scope.themes.push($scope.inserted);
     };
 
     /**
@@ -105,16 +103,16 @@ Application.Controllers.controller('ProjectElementsController', ['$scope', '$sta
      */
     $scope.cancelTheme = function (rowform, index) {
       if ($scope.themes[index].id != null) {
-        return rowform.$cancel();
+        rowform.$cancel();
       } else {
-        return $scope.themes.splice(index, 1);
+        $scope.themes.splice(index, 1);
       }
     };
 
     /**
      * Saves a new licence / Update an existing licence to the server (form validation callback)
      * @param data {Object} licence name and description
-     * @param [data] {number} licence id, in case of update
+     * @param [id] {number} licence id, in case of update
      */
     $scope.saveLicence = function (data, id) {
       if (id != null) {
@@ -203,8 +201,6 @@ Application.Controllers.controller('ProjectElementsController', ['$scope', '$sta
       if (Fablab.featureTourDisplay !== 'manual' && $scope.currentUser.profile.tours.indexOf('project-elements') < 0) {
         uitour.start();
       }
-      // start this tour when an user press F1 - this is contextual help
-      window.addEventListener('keydown', handleF1);
     };
 
     /* PRIVATE SCOPE */
@@ -212,24 +208,7 @@ Application.Controllers.controller('ProjectElementsController', ['$scope', '$sta
     /**
      * Kind of constructor: these actions will be realized first when the controller is loaded
      */
-    const initialize = function () {
-      // listen the $destroy event of the controller to remove the F1 key binding
-      $scope.$on('$destroy', function () {
-        window.removeEventListener('keydown', handleF1);
-      });
-    };
-
-    /**
-     * Callback used to trigger the feature tour when the user press the F1 key.
-     * @param e {KeyboardEvent}
-     */
-    const handleF1 = function (e) {
-      if (e.key === 'F1') {
-        e.preventDefault();
-        const tour = uiTourService.getTourByName('project-elements');
-        if (tour) { tour.start(); }
-      }
-    };
+    const initialize = function () {};
 
     // !!! MUST BE CALLED AT THE END of the controller
     return initialize();
