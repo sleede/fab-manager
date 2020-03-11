@@ -95,7 +95,7 @@ ach:
         event_in_the_past: "crwdns6845:0crwdne6845:0"
         edit_event: "crwdns6847:0crwdne6847:0"
         view_reservations: "crwdns6849:0crwdne6849:0"
-        legend: "crwdns6851:0crwdne6851:0"
+        legend: "crwdns20198:0crwdne20198:0"
         and: "crwdns6853:0crwdne6853:0"
         external_sync: "crwdns19774:0crwdne19774:0"
       #import external iCal calendar
@@ -240,7 +240,7 @@ ach:
         edit_this_and_next: "crwdns19790:0crwdne19790:0"
         edit_all: "crwdns19792:0crwdne19792:0"
         date_wont_change: "crwdns19794:0crwdne19794:0"
-        event_successfully_updated: "crwdns19796:0crwdne19796:0"
+        event_successfully_updated: "crwdns20200:0crwdne20200:0"
         events_updated: "crwdns19798:0COUNT={COUNT}crwdnd19798:0COUNT={COUNT}crwdne19798:0"
         unable_to_update_the_event: "crwdns19800:0crwdne19800:0"
         events_not_updated: "crwdns19802:0TOTAL={TOTAL}crwdnd19802:0COUNT={COUNT}crwdnd19802:0COUNT={COUNT}crwdne19802:0"
@@ -340,7 +340,7 @@ ach:
       #ajouter un code promotionnel
       coupons_new:
         add_a_coupon: "crwdns7271:0crwdne7271:0"
-        unable_to_create_the_coupon_check_code_already_used: "crwdns7273:0crwdne7273:0"
+        unable_to_create_the_coupon_check_code_already_used: "crwdns20202:0crwdne20202:0"
       #mettre à jour un code promotionnel
       coupons_edit:
         coupon: "crwdns7275:0crwdne7275:0"
@@ -692,7 +692,7 @@ ach:
       #import results
       members_import_result:
         import_results: "crwdns7927:0crwdne7927:0"
-        import_details: "crwdns7929:0#{ID}crwdnd7929:0{DATE}crwdnd7929:0{USER}crwdne7929:0"
+        import_details: "crwdns20204:0{ID}crwdnd20204:0{DATE}crwdnd20204:0{USER}crwdne20204:0"
         results: "crwdns7931:0crwdne7931:0"
         pending: "crwdns7933:0crwdne7933:0"
         status_create: "crwdns7935:0crwdne7935:0"
@@ -768,7 +768,7 @@ ach:
         add_a_new_authentication_provider: "crwdns8063:0crwdne8063:0"
         a_local_database_provider_already_exists_unable_to_create_another: "crwdns8065:0crwdne8065:0"
         local_provider_successfully_saved: "crwdns8067:0crwdne8067:0"
-        it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider: "crwdns8069:0crwdne8069:0"
+        it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider: "crwdns20206:0crwdne20206:0"
         security_issue_detected: "crwdns8071:0crwdne8071:0"
         beware_the_oauth2_authenticatoin_provider_you_are_about_to_add_isnt_using_HTTPS: "crwdns8073:0crwdne8073:0"
         this_is_a_serious_security_issue_on_internet_and_should_never_be_used_except_for_testing_purposes: "crwdns8075:0crwdne8075:0"
@@ -778,8 +778,8 @@ ach:
       #edit an authentication provider (SSO)
       authentication_edit:
         provider: "crwdns8083:0crwdne8083:0"
-        it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider: "crwdns8085:0crwdne8085:0"
-        provider_successfully_updated: "crwdns8087:0crwdne8087:0"
+        it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider: "crwdns20208:0crwdne20208:0"
+        provider_successfully_updated: "crwdns20210:0crwdne20210:0"
         an_error_occurred_unable_to_update_the_provider: "crwdns8089:0crwdne8089:0"
       #statistics tables
       statistics:
@@ -800,7 +800,7 @@ ach:
         entries: "crwdns8121:0crwdne8121:0"
         revenue_: "crwdns8123:0crwdne8123:0"
         average_age: "crwdns8125:0crwdne8125:0"
-        years_old: "crwdns8127:0crwdne8127:0"
+        years_old: "crwdns20212:0crwdne20212:0"
         total: "crwdns8129:0crwdne8129:0"
         available_hours: "crwdns8131:0crwdne8131:0"
         available_tickets: "crwdns8133:0crwdne8133:0"
@@ -1008,10 +1008,10 @@ ach:
         api_documentation: "crwdns8445:0crwdne8445:0"
         open_api_clients: "crwdns8447:0crwdne8447:0"
         name: "crwdns8449:0crwdne8449:0"
-        calls_count: "crwdns8451:0crwdne8451:0"
+        calls_count: "crwdns20214:0crwdne20214:0"
         token: "crwdns8453:0crwdne8453:0"
         created_at: "crwdns8455:0crwdne8455:0"
-        reset_token: "crwdns8457:0crwdne8457:0"
+        reset_token: "crwdns20216:0crwdne20216:0"
         client_name: "crwdns8459:0crwdne8459:0"
         confirmation_required: "crwdns8461:0crwdne8461:0"
         do_you_really_want_to_delete_this_open_api_client: "crwdns8463:0crwdne8463:0"
@@ -1041,6 +1041,7 @@ ach:
         report_will_be_destroyed: "crwdns8499:0crwdne8499:0"
         report_removed: "crwdns8501:0crwdne8501:0"
         failed_to_remove: "crwdns8503:0crwdne8503:0"
+      #feature tour
       tour:
         conclusion:
           title: "crwdns19898:0crwdne19898:0"
@@ -1051,7 +1052,7 @@ ach:
             content: "crwdns19904:0crwdne19904:0"
           trainings:
             title: "crwdns19906:0crwdne19906:0"
-            content: "crwdns19908:0[Calendar]crwdne19908:0"
+            content: "crwdns20218:0crwdne20218:0"
           filter:
             title: "crwdns19910:0crwdne19910:0"
             content: "crwdns19912:0crwdne19912:0"
