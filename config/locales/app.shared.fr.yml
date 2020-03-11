@@ -1,8 +1,8 @@
 fr:
   app:
     shared:
+      #translations of common buttons
       buttons:
-        # traductions de boutons communs
         confirm_changes: "Valider les modifications"
         consult: "Consulter"
         edit: "Éditer"
@@ -18,14 +18,12 @@ fr:
         "yes": "Oui"
         "no": "Non"
         apply: "Appliquer"
-
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "Vous perdrez les modifications non enregistrées si vous quittez cette page"
         you_will_lose_any_unsaved_modification_if_you_reload_this_page: "Vous perdrez les modifications non enregistrées si vous rechargez cette page"
         payment_card_error: "Un problème est survenu avec votre carte bancaire :"
-
+      #user edition form
       user:
-        # formulaire d'édition du profil utilisateur
         man: "Homme"
         woman: "Femme"
         add_an_avatar: "Ajouter un avatar"
@@ -59,14 +57,13 @@ fr:
         phone_number: "Numéro de téléphone"
         phone_number_is_required: "Le numéro de téléphone est requis."
         i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "J'autorise les utilisateurs du Fab Lab inscrits sur le site à me contacter"
-        i_accept_to_receive_information_from_the_fablab: "J'accepte de recevoir des informations du Fab Lab"
+        i_accept_to_receive_information_from_the_fablab: "I accept to receive information from the FabLab"
         used_for_statistics: "Cette donnée sera utilisée à des fins statistiques"
         used_for_invoicing: "Cette donnée sera utilisée à des fins de facturation"
         used_for_reservation: "Cette donnée sera utilisée en cas de changement sur une de vos réservations"
         used_for_profile: "Cette donnée sera seulement affichée sur votre profil"
-
+      #project edition form
       project:
-        # formulaire d'étition d'un projet
         name: "Nom"
         name_is_required: "Le nom est requis."
         illustration: "Illustration"
@@ -94,9 +91,8 @@ fr:
         themes: "Thématiques"
         tags: "Étiquettes"
         save_as_draft: "Enregistrer comme brouillon"
-
+      #machine edition form
       machine:
-        # formulaire d'édition d'une machine
         name: "Nom"
         name_is_required: "Le nom est requis."
         illustration: "Visuel"
@@ -110,33 +106,28 @@ fr:
         add_an_attachment: "Ajouter une pièce jointe"
         disable_machine: "Désactiver la machine"
         validate_your_machine: "Valider votre machine"
-
+      #frame to select a plan to subscribe
       plan_subscribe:
-        # cadre de souscription à un abonnement
         subscribe_online: "je m'abonne en ligne"
         do_not_subscribe: "je ne souhaite pas m'abonner"
-
+      #admin: choose a member to interact with
       member_select:
-        # admin : choisir un membre avec lequel interagir
         select_a_member: "Sélectionnez un membre"
         start_typing: "Commencez à écrire..."
-
+      #stripe payment modal
       stripe:
-        # fenêtre de paiement stripe
         online_payment: "Paiement en ligne"
         i_have_read_and_accept_: "J'ai bien pris connaissance, et accepte"
         _the_general_terms_and_conditions: "les conditions générales de vente."
         credit_amount_for_pay_reservation: "Il vous reste {amount} {currency} à payer pour valider votre réservation"
         client_credit_amount_for_pay_reservation: "Il reste {amount} {currency} à payer pour valider la réservation"
         confirm_payment_of_: "Payer : {AMOUNT}"
-
+      #dialog of on site payment for reservations
       valid_reservation_modal:
-        # fenêtre de paiement sur place d'une réservation
         booking_confirmation: "Validation réservation"
         here_is_the_summary_of_the_slots_to_book_for_the_current_user: "Voici le récapitulatif des créneaux à réserver pour l'utilisateur courant :"
-
+      #event edition form
       event:
-        # formulaire d'édition d'un événement
         title: "Titre"
         title_is_required: "Le titre est requis."
         matching_visual: "Visuel associé"
@@ -160,9 +151,8 @@ fr:
         tickets_available: "Places disponibles"
         event_theme: "Thème de l'évènement"
         age_range: "Tranche d'âge"
-
+      #subscription plan edition form
       plan:
-        # formulaire d'édition d'une formule d'abonnement
         general_information: "Informations générales"
         name: "Nom"
         name_is_required: "Le nom est requis"
@@ -203,9 +193,8 @@ fr:
         email_address_is_required: "L'adresse e-mail est requise."
         disabled: "Désactiver l'abonnement"
         disable_plan_will_not_unsubscribe_users: "Attention : désactiver l'abonnement ne désabonnera pas les utilisateurs ayant actuellement cet abonnement actif."
-
+      #training edition form
       trainings:
-        # formulaire d'édition d'une formation
         name: "Nom"
         name_is_required: "Le nom est requis."
         illustration: "Visuel"
@@ -218,9 +207,8 @@ fr:
         number_of_tickets: "Nombre de places"
         public_page: "Afficher dans la liste de formation"
         disable_training: "Désactiver la formation"
-
+      #partial form to edit/create an user (admin view)
       user_admin:
-        # formulaire partiel d'édition/création utilisateur (vue admin)
         user: "Utilisateur"
         incomplete_profile: "Profil incomplet"
         user_profile: "Profil utilisateur"
@@ -229,9 +217,8 @@ fr:
         group_is_required: "Le groupe est requis."
         trainings: "Formations"
         tags: "Étiquettes"
-
+      #partial form to edit/create an authentication provider (SSO)
       authentication:
-        # formulaire partiel d'édition/création d'un fournisseur d'authentification (SSO)
         name: "Nom"
         provider_name_is_required: "Le nom du fournisseur est requis."
         authentication_type: "Type d'authentification"
@@ -242,9 +229,8 @@ fr:
         expected_data_type: "Type de données attendues"
         input_format: "Format d'entrée"
         mappings: "Correspondances"
-
+      #edition/creation form of an OAuth2 authentication provider
       oauth2:
-        # formulaire d'édition/création d'un fournisseur d'authentification de type OAuth2
         common_url: "URL commune"
         common_url_is_required: "L'URL commune est requise."
         provided_url_is_not_a_valid_url: "L'URL fournie n'est pas une URL valide."
@@ -267,29 +253,25 @@ fr:
         api_endpoint_url: "Terminaison/URL de l'API"
         api_type: "Type d'API"
         api_fields: "Champ de l'API"
-
+      #machine/training slot modification modal
       confirm_modify_slot_modal:
-        # fenêtre de modification d'un créneau de réservation machine/formation
         change_the_slot: "Modifier le créneau"
         do_you_want_to_change_your_booking_slot_initially_planned_at: "Souhaitez-vous changer votre créneau de réservation initialement prévu au :"
         do_you_want_to_change_NAME_s_booking_slot_initially_planned_at: "Souhaitez-vous changer le créneau de réservation de {NAME}, initialement prévu au :"
         cancel_this_reservation: "Annuler cette réservation"
         i_want_to_change_date: "Je veux changer de date"
-
+      #modal introducing that a training is requested before booking a machine
       request_training_modal:
-        # fenêtre présentant l'obligation de participer à une formation avant de réserver une machine
         to_book_the_MACHINE_you_must_have_completed_the_TRAINING: "Pour réserver la machine \"{MACHINE}\" vous devez avoir suivi la {TRAINING}."
         register_for_the_training: "S'inscrire à la formation"
         i_dont_want_to_register_now: "Je ne souhaite pas m'inscrire pour l'instant"
-
+      #modal introducing that a user must wait for his training being validated before booking a machine
       training_reservation_modal:
-        # fenêtre présentant l'obligation d'attendre la validation de la formation pour réserver une machine
         machine_reservation: "Réservation machine"
         you_must_wait_for_your_training_is_being_validated_by_the_fablab_team_to_book_this_machine: "Il faut attendre que votre formation soit validée par l'équipe du Fab Lab pour réserver cette machine."
         your_training_will_occur_: "Votre formation aura lieu le"
-
+      #user public profile
       public_profile:
-        # profil publique d'un utilisateur
         last_activity_html: "Dernière activité <br><strong>le {DATE}</strong>"
         to_come: "à venir"
         approved: "validée"
@@ -303,9 +285,8 @@ fr:
         email_address: "Adresse électronique"
         trainings: "Formations"
         no_trainings: "Aucune formation"
-
+      #wallet
       wallet:
-        # porte-monnaie
         wallet: 'Porte-monnaie'
         your_wallet_amount: 'Votre montant disponible'
         wallet_amount: 'Montant disponible'
@@ -340,9 +321,8 @@ fr:
         debit_reservation_machine: "Payer un reservation de machine"
         debit_reservation_event: "Payer un reservation d'évenement"
         warning_uneditable_credit: "Attention : une fois validé, le montant crédité ne sera plus modifiable."
-
+      #promotional coupon (creation/edition form)
       coupon:
-        # code promotionnel (formulaire de création/édition)
         name: "Nom"
         name_is_required: "le nom est requis."
         code: "Code"
@@ -364,9 +344,8 @@ fr:
         max_usages: "Nombre maximum d'utilisations autorisées"
         max_usages_must_be_equal_or_greater_than_0: "Le nombre d'utilisations maximum doit être supérieur ou égal à 0."
         enabled: "Activé"
-
+      #coupon (input zone for users)
       coupon_input:
-        # code promotionnel (zone de saisie pour les utilisateurs)
         i_have_a_coupon: "J'ai un code promo !"
         code_: "Code :"
         the_coupon_has_been_applied_you_get_PERCENT_discount: "Le code promo a bien été appliqué. Vous bénéficiez d'une remise de {PERCENT} %."
@@ -378,9 +357,8 @@ fr:
         unable_to_apply_the_coupon_because_amount_exceeded: "Impossible d'appliquer la réduction : la réduction dépasse le total de cet achat."
         unable_to_apply_the_coupon_because_undefined: "Impossible d'appliquer la réduction : une erreur inattendue s'est produite, veuillez contacter le gestionnaire du Fablab."
         unable_to_apply_the_coupon_because_rejected: "Ce code promo n'existe pas."
-
+      #form to create/edit a space
       space:
-        # formulaire de création/modification d'un espace
         name: "Nom"
         name_is_required: "Le nom est requis."
         illustration: "Visuel"
@@ -395,13 +373,12 @@ fr:
         default_places: "Maximum de places par défaut"
         default_places_is_required: "Le nombre de places maximum par défaut est requis."
         disable_space: "Désactiver l'espace"
-
+      #shopping cart module for reservations
       cart:
-        # module de panier d'achat de réservations
         summary: "Résumé"
         select_one_or_more_slots_in_the_calendar: "Sélectionnez un {SINGLE, select, true{créneau} other{ou plusieurs créneaux}} dans le calendrier"
         you_ve_just_selected_the_slot: "Vous venez de sélectionner le créneau :"
-        datetime_to_time: "{START_DATETIME} à {END_TIME}"  # eg: Thursday, September 4 1986 8:30 PM to 10:00 PM
+        datetime_to_time: "{START_DATETIME} à {END_TIME}" #eg: Thursday, September 4 1986 8:30 PM to 10:00 PM
         cost_of_TYPE: "Coût de {TYPE, select, Machine{l'heure machine} Training{la formation} other{l'élément}}"
         offer_this_slot: "Offrir ce créneau"
         confirm_this_slot: "Valider ce créneau"
@@ -427,7 +404,7 @@ fr:
         tags_of_the_destination_slot: "Étiquettes du créneau de destination :"
         confirm_my_modification: "Valider ma modification"
         your_booking_slot_was_successfully_moved_from_: "Votre créneau de réservation a bien été déplacé du"
-        to_date: "au" # eg. from 01/01 to 01/05
+        to_date: "au" #eg. from 01/01 to 01/05
         please_select_a_member_first: "Veuillez tout d'abord sélectionner un membre"
         unable_to_select_plan_if_slots_in_the_past: "Impossible de sélectionner un abonnement si l'un des créneaux sélectionné est dans le passé"
         unable_to_change_the_reservation: "Impossible de modifier la réservation"
@@ -435,12 +412,12 @@ fr:
         do_you_really_want_to_cancel_this_reservation: "Êtes-vous sur de vouloir annuler cette réservation ?"
         reservation_was_cancelled_successfully: "La réservation a bien été annulée."
         cancellation_failed: "L'annulation a échouée."
-        confirm_payment_of_html: "{ROLE, select, admin{Paiement sur place} other{Payer}} : {AMOUNT}"  # eg. valider mon paiement de 20,00 €
+        confirm_payment_of_html: "{ROLE, select, admin{Paiement sur place} other{Payer}} : {AMOUNT}" #eg. confirm my payment of $20.00
         a_problem_occurred_during_the_payment_process_please_try_again_later: "Il y a eu un problème lors de la procédure de paiement. Veuillez réessayer plus tard."
         none: "Aucune"
-        online_payment_disabled: "Le payment par carte bancaire n'est pas disponible. Merci de contacter directement l'accueil du Fablab."
-        slot_restrict_plans: "Ce créneau est restreint pour les formules d'abonnement ci-desous:"
-        slot_restrict_subscriptions_must_select_plan: "Le créneau est restreint pour les abonnés. Veuillez tout d'abord sélectionner une formule d'abonnement"
+        online_payment_disabled: "Le paiement par carte bancaire n'est pas disponible. Merci de contacter directement l'accueil du FabLab."
+        slot_restrict_plans: "Ce créneau est restreint pour les formules d'abonnement ci-dessous:"
+        slot_restrict_subscriptions_must_select_plan: "Le créneau est restreint pour les abonnés. Veuillez tout d'abord sélectionner une formule d'abonnement."
         slot_restrict_plans_of_others_groups: "Ce créneau est restreint pour les abonnés d'autres groupes."
         selected_plan_dont_match_slot: "L'abonnement sélectionné ne correspondent pas ce créneau"
         user_plan_dont_match_slot: "L'abonnement du membre ne correspondent pas ce créneau"
@@ -448,8 +425,14 @@ fr:
         slot_at_same_time: "Conflit avec d'autres réservations"
         do_you_really_want_to_book_slot_at_same_time: "Êtes-vous sûr de réserver ce créneau ? D'autres réservations ont lieu en même temps"
         unable_to_book_slot_because_really_have_reservation_at_same_time: "Impossible de réserver ce créneau car les réservations ci-dessous ont lieu en même temps."
-
+      #feature-tour modal
       tour:
         previous: "Précédent"
         next: "Suivant"
         end: "Terminer la visite"
+      #help modal
+      help:
+        title: "Aide"
+        what_to_do: "Que voulez-vous faire ?"
+        tour: "Lancer la visite guidée"
+        guide: "Ouvrir le manuel de l'utilisateur"

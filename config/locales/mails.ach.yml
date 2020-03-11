@@ -250,7 +250,7 @@ ach:
         this_coupon_is_valid_USAGE_times_until_DATE_for_all_your_purchases: "crwdns4187:0USAGE={USAGE}crwdnd4187:0TYPE={TYPE}crwdnd4187:0DATE={DATE}crwdnd4187:0DATE={DATE}crwdne4187:0"
     notify_admin_free_disk_space:
       subject: "crwdns4189:0crwdne4189:0"
-      body: "crwdns4191:0%{THRESHOLD}crwdnd4191:0%{AVAILABLE}crwdne4191:0"
+      body: "crwdns20156:0%{THRESHOLD}crwdnd20156:0%{AVAILABLE}crwdne20156:0"
     notify_admin_close_period_reminder:
       subject: "crwdns4193:0crwdne4193:0"
       body:

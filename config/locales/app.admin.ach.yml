@@ -1,16 +1,16 @@
 ach:
   app:
     admin:
+      #add a new machine
       machines_new:
-        #add a new machine
         declare_a_new_machine: "crwdns6699:0crwdne6699:0"
         watch_out_when_creating_a_new_machine_its_prices_are_initialized_at_0_for_all_subscriptions: "crwdns6701:0crwdne6701:0"
         consider_changing_them_before_creating_any_reservation_slot: "crwdns6703:0crwdne6703:0"
+      #machine edition
       machines_edit:
-        #machine edition
         machine_edit: "crwdns6705:0crwdne6705:0"
+      #manage the trainings & machines slots
       calendar:
-        #manage the trainings & machines slots
         calendar_management: "crwdns6707:0crwdne6707:0"
         trainings: "crwdns6709:0crwdne6709:0"
         machines: "crwdns6711:0crwdne6711:0"
@@ -30,6 +30,8 @@ ach:
         beware_this_cannot_be_reverted: "crwdns6739:0crwdne6739:0"
         the_machine_was_successfully_removed_from_the_slot: "crwdns6741:0crwdne6741:0"
         deletion_failed: "crwdns6743:0crwdne6743:0"
+        do_you_really_want_to_remove_PLAN_from_this_slot: "crwdns19746:0{PLAN}crwdne19746:0"
+        the_plan_was_successfully_removed_from_the_slot: "crwdns19748:0crwdne19748:0"
         DATE_slot: "crwdns6745:0{DATE}crwdne6745:0"
         what_kind_of_slot_do_you_want_to_create: "crwdns6747:0crwdne6747:0"
         training: "crwdns6749:0crwdne6749:0"
@@ -38,12 +40,19 @@ ach:
         next: "crwdns6755:0crwdne6755:0"
         previous: "crwdns6757:0crwdne6757:0"
         select_some_machines: "crwdns6759:0crwdne6759:0"
-        select_all: "crwdns19459:0crwdne19459:0"
-        select_none: "crwdns19461:0crwdne19461:0"
+        select_all: "crwdns19750:0crwdne19750:0"
+        select_none: "crwdns19752:0crwdne19752:0"
+        manage_machines: "crwdns19754:0crwdne19754:0"
+        manage_spaces: "crwdns19756:0crwdne19756:0"
+        manage_trainings: "crwdns19758:0crwdne19758:0"
         number_of_tickets: "crwdns6761:0crwdne6761:0"
         adjust_the_opening_hours: "crwdns6763:0crwdne6763:0"
-        to_time: crwdns10109:0crwdne10109:0
-        restrict_with_labels: "crwdns6767:0crwdne6767:0"
+        to_time: "crwdns19760:0crwdne19760:0" #eg. from 18:00 to 21:00
+        restrict_options: "crwdns19762:0crwdne19762:0"
+        restrict_with_labels: "crwdns19764:0crwdne19764:0"
+        restrict_for_subscriptions: "crwdns19766:0crwdne19766:0"
+        select_some_plans: "crwdns19768:0crwdne19768:0"
+        plans: "crwdns19770:0crwdne19770:0"
         recurrence: "crwdns6769:0crwdne6769:0"
         enabled: "crwdns6771:0crwdne6771:0"
         period: "crwdns6773:0crwdne6773:0"
@@ -56,6 +65,7 @@ ach:
         select_nb_period: "crwdns6787:0crwdne6787:0"
         select_end_date: "crwdns6789:0crwdne6789:0"
         about_to_create: "crwdns6791:0TYPE={TYPE}crwdnd6791:0NUMBER={NUMBER}crwdne6791:0"
+        divided_in_slots: "crwdns20172:0COUNT={COUNT}crwdnd20172:0DURATION={DURATION}crwdne20172:0"
         reservable: "crwdns6793:0crwdne6793:0"
         labels: "crwdns6795:0crwdne6795:0"
         none: "crwdns6797:0crwdne6797:0"
@@ -85,11 +95,13 @@ ach:
         event_in_the_past: "crwdns6845:0crwdne6845:0"
         edit_event: "crwdns6847:0crwdne6847:0"
         view_reservations: "crwdns6849:0crwdne6849:0"
-        legend: "crwdns6851:0crwdne6851:0"
+        legend: "crwdns20198:0crwdne20198:0"
         and: "crwdns6853:0crwdne6853:0"
+        external_sync: "crwdns19774:0crwdne19774:0"
+      #import external iCal calendar
       icalendar:
         icalendar_import: "crwdns6855:0crwdne6855:0"
-        intro: "crwdns6857:0crwdne6857:0"
+        intro: "crwdns19776:0crwdne19776:0"
         new_import: "crwdns6859:0crwdne6859:0"
         color: "crwdns6861:0crwdne6861:0"
         text_color: "crwdns6863:0crwdne6863:0"
@@ -107,8 +119,8 @@ ach:
         confirmation_required: "crwdns6887:0crwdne6887:0"
         confirm_delete_import: "crwdns6889:0crwdne6889:0"
         delete_success: "crwdns6891:0crwdne6891:0"
+      #management of the projects' components
       project_elements:
-        #management of the projects' components
         name: "crwdns6893:0crwdne6893:0"
         projects_elements_management: "crwdns6895:0crwdne6895:0"
         materials: "crwdns6897:0crwdne6897:0"
@@ -119,9 +131,10 @@ ach:
         description: "crwdns6907:0crwdne6907:0"
         add_a_new_licence: "crwdns6909:0crwdne6909:0"
         manage_abuses: "crwdns6911:0crwdne6911:0"
+      #track and monitor the trainings
       trainings:
-        #track and monitor the trainings
         trainings_monitoring: "crwdns6913:0crwdne6913:0"
+        plan_session: "crwdns19778:0crwdne19778:0"
         trainings: "crwdns6915:0crwdne6915:0"
         add_a_new_training: "crwdns6917:0crwdne6917:0"
         name: "crwdns6919:0crwdne6919:0"
@@ -151,13 +164,13 @@ ach:
         status_enabled: "crwdns6967:0crwdne6967:0"
         status_disabled: "crwdns6969:0crwdne6969:0"
         status_all: "crwdns6971:0crwdne6971:0"
+      #create a new training
       trainings_new:
-        #create a new training
         add_a_new_training: "crwdns6973:0crwdne6973:0"
         beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero: "crwdns6975:0crwdne6975:0"
         dont_forget_to_change_them_before_creating_slots_for_this_training: "crwdns6977:0crwdne6977:0"
+      #events tracking and management
       events:
-        #events tracking and management
         events_monitoring: "crwdns6979:0crwdne6979:0"
         manage_filters: "crwdns6981:0crwdne6981:0"
         fablab_events: "crwdns6983:0crwdne6983:0"
@@ -169,8 +182,8 @@ ach:
         on_DATE: "crwdns6995:0{DATE}crwdne6995:0"
         from_DATE: "crwdns6997:0{DATE}crwdne6997:0"
         from_TIME: "crwdns6999:0{TIME}crwdne6999:0"
-        to_date: crwdns10111:0crwdne10111:0
-        to_time: crwdns10113:0crwdne10113:0
+        to_date: "crwdns19780:0crwdne19780:0" #eg: from 01/01 to 01/05
+        to_time: "crwdns19782:0crwdne19782:0" #eg. from 18:00 to 21:00
         title: "crwdns7005:0crwdne7005:0"
         dates: "crwdns7007:0crwdne7007:0"
         booking: "crwdns7009:0crwdne7009:0"
@@ -210,19 +223,31 @@ ach:
         do_you_really_want_to_delete_this_price_category: "crwdns7077:0crwdne7077:0"
         price_category_successfully_deleted: "crwdns7079:0crwdne7079:0"
         price_category_deletion_failed: "crwdns7081:0crwdne7081:0"
+      #add a new event
       events_new:
-        #add a new event
         add_an_event: "crwdns7083:0crwdne7083:0"
         none: "crwdns7085:0crwdne7085:0"
         every_days: "crwdns7087:0crwdne7087:0"
         every_week: "crwdns7089:0crwdne7089:0"
         every_month: "crwdns7091:0crwdne7091:0"
         every_year: "crwdns7093:0crwdne7093:0"
+      #edit an existing event
       events_edit:
-        #edit an existing event
         edit_the_event: "crwdns7095:0crwdne7095:0"
+        confirmation_required: "crwdns19784:0crwdne19784:0"
+        edit_recurring_event: "crwdns19786:0crwdne19786:0"
+        edit_this_event: "crwdns19788:0crwdne19788:0"
+        edit_this_and_next: "crwdns19790:0crwdne19790:0"
+        edit_all: "crwdns19792:0crwdne19792:0"
+        date_wont_change: "crwdns19794:0crwdne19794:0"
+        event_successfully_updated: "crwdns20200:0crwdne20200:0"
+        events_updated: "crwdns19798:0COUNT={COUNT}crwdnd19798:0COUNT={COUNT}crwdne19798:0"
+        unable_to_update_the_event: "crwdns19800:0crwdne19800:0"
+        events_not_updated: "crwdns19802:0TOTAL={TOTAL}crwdnd19802:0COUNT={COUNT}crwdnd19802:0COUNT={COUNT}crwdne19802:0"
+        error_deleting_reserved_price: "crwdns19804:0crwdne19804:0"
+        other_error: "crwdns19806:0crwdne19806:0"
+      #event reservations list
       event_reservations:
-        #event reservations list
         the_reservations: "crwdns7097:0crwdne7097:0"
         user: "crwdns7099:0crwdne7099:0"
         payment_date: "crwdns7101:0crwdne7101:0"
@@ -232,8 +257,8 @@ ach:
         no_reservations_for_now: "crwdns7109:0crwdne7109:0"
         back_to_monitoring: "crwdns7111:0crwdne7111:0"
         canceled: "crwdns7113:0crwdne7113:0"
+      #subscriptions, prices, credits and coupons management
       pricing:
-        #subscriptions, prices, credits and coupons management
         pricing_management: "crwdns7115:0crwdne7115:0"
         subscriptions: "crwdns7117:0crwdne7117:0"
         trainings: "crwdns7119:0crwdne7119:0"
@@ -262,7 +287,7 @@ ach:
         hours: "crwdns7165:0{DURATION}crwdne7165:0"
         related_subscriptions: "crwdns7167:0crwdne7167:0"
         please_specify_a_number: "crwdns7169:0crwdne7169:0"
-        none: crwdns7171:0crwdne7171:0
+        none: "crwdns19808:0crwdne19808:0" #grammar concordance with training.
         an_error_occurred_while_saving_the_number_of_credits: "crwdns7173:0crwdne7173:0"
         an_error_occurred_while_deleting_credit_with_the_TRAINING: "crwdns7175:0{TRAINING}crwdne7175:0"
         an_error_occurred_unable_to_find_the_credit_to_revoke: "crwdns7177:0crwdne7177:0"
@@ -312,23 +337,23 @@ ach:
         status_enabled: "crwdns7265:0crwdne7265:0"
         status_disabled: "crwdns7267:0crwdne7267:0"
         status_all: "crwdns7269:0crwdne7269:0"
+      #ajouter un code promotionnel
       coupons_new:
-        #ajouter un code promotionnel
         add_a_coupon: "crwdns7271:0crwdne7271:0"
-        unable_to_create_the_coupon_check_code_already_used: "crwdns7273:0crwdne7273:0"
+        unable_to_create_the_coupon_check_code_already_used: "crwdns20202:0crwdne20202:0"
+      #mettre à jour un code promotionnel
       coupons_edit:
-        #mettre à jour un code promotionnel
         coupon: "crwdns7275:0crwdne7275:0"
         unable_to_update_the_coupon_an_error_occurred: "crwdns7277:0crwdne7277:0"
       plans:
+        #add a subscription plan on the platform
         new:
-          #add a subscription plan on the platform
           add_a_subscription_plan: "crwdns7279:0crwdne7279:0"
           unable_to_create_the_subscription_please_try_again: "crwdns7281:0crwdne7281:0"
           successfully_created_subscriptions_dont_forget_to_redefine_prices: "crwdns7283:0crwdne7283:0"
           unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name: "crwdns7285:0crwdne7285:0"
+        #edit a subscription plan / machine slots prices
         edit:
-          #edit a subscription plan / machine slots prices
           subscription_plan: "crwdns7287:0crwdne7287:0"
           prices: "crwdns7289:0crwdne7289:0"
           copy_prices_from: "crwdns7291:0crwdne7291:0"
@@ -339,8 +364,8 @@ ach:
           space: "crwdns7301:0crwdne7301:0"
           unable_to_save_subscription_changes_please_try_again: "crwdns7303:0crwdne7303:0"
           subscription_successfully_changed: "crwdns7305:0crwdne7305:0"
+      #list of all invoices & invoicing parameters
       invoices:
-        #list of all invoices & invoicing parameters
         invoices: "crwdns7307:0crwdne7307:0"
         accounting_periods: "crwdns7309:0crwdne7309:0"
         invoices_list: "crwdns7311:0crwdne7311:0"
@@ -386,7 +411,7 @@ ach:
         year: "crwdns7391:0crwdne7391:0"
         month: "crwdns7393:0crwdne7393:0"
         day: "crwdns7395:0crwdne7395:0"
-        num_of_invoice: "crwdns7397:0crwdne7397:0"
+        num_of_invoice: "crwdns20196:0crwdne20196:0"
         online_sales: "crwdns7399:0crwdne7399:0"
         wallet: "crwdns7401:0crwdne7401:0"
         refund: "crwdns7403:0crwdne7403:0"
@@ -438,7 +463,7 @@ ach:
         description: "crwdns7495:0crwdne7495:0"
         description_optional: "crwdns7497:0crwdne7497:0"
         will_appear_on_the_refund_invoice: "crwdns7499:0crwdne7499:0"
-        none: "crwdns7501:0crwdne7501:0"
+        none: "crwdns19810:0crwdne19810:0" #grammar concordance with payment mean
         by_cash: "crwdns7503:0crwdne7503:0"
         by_cheque: "crwdns7505:0crwdne7505:0"
         by_transfer: "crwdns7507:0crwdne7507:0"
@@ -556,8 +581,8 @@ ach:
           debit_euro: "crwdns7729:0crwdne7729:0"
           credit_euro: "crwdns7731:0crwdne7731:0"
           lettering: "crwdns7733:0crwdne7733:0"
+      #management of users, labels, groups, and so on
       members:
-        #management of users, labels, groups, and so on
         users_management: "crwdns7735:0crwdne7735:0"
         members: "crwdns7737:0crwdne7737:0"
         subscriptions: "crwdns7739:0crwdne7739:0"
@@ -632,15 +657,15 @@ ach:
           status_enabled: "crwdns7871:0crwdne7871:0"
           status_disabled: "crwdns7873:0crwdne7873:0"
           status_all: "crwdns7875:0crwdne7875:0"
-          member_filter_all: "crwdns19463:0crwdne19463:0"
-          member_filter_not_confirmed: "crwdns19465:0crwdne19465:0"
-          member_filter_inactive_for_3_years: "crwdns19467:0crwdne19467:0"
+          member_filter_all: "crwdns19812:0crwdne19812:0"
+          member_filter_not_confirmed: "crwdns19814:0crwdne19814:0"
+          member_filter_inactive_for_3_years: "crwdns19816:0crwdne19816:0"
+      #add a member
       members_new:
-        #add a member
         add_a_member: "crwdns7877:0crwdne7877:0"
         user_is_an_organization: "crwdns7879:0crwdne7879:0"
+      #members bulk import
       members_import:
-        #members bulk import
         import_members: "crwdns7881:0crwdne7881:0"
         info: "crwdns7883:0crwdne7883:0"
         required_fields: "crwdns7885:0crwdne7885:0"
@@ -664,10 +689,10 @@ ach:
         update_on_id: "crwdns7921:0crwdne7921:0"
         update_on_username: "crwdns7923:0crwdne7923:0"
         update_on_email: "crwdns7925:0crwdne7925:0"
+      #import results
       members_import_result:
-        #import results
         import_results: "crwdns7927:0crwdne7927:0"
-        import_details: "crwdns7929:0#{ID}crwdnd7929:0{DATE}crwdnd7929:0{USER}crwdne7929:0"
+        import_details: "crwdns20204:0{ID}crwdnd20204:0{DATE}crwdnd20204:0{USER}crwdne20204:0"
         results: "crwdns7931:0crwdne7931:0"
         pending: "crwdns7933:0crwdne7933:0"
         status_create: "crwdns7935:0crwdne7935:0"
@@ -675,8 +700,8 @@ ach:
         success: "crwdns7939:0crwdne7939:0"
         failed: "crwdns7941:0crwdne7941:0"
         error_details: "crwdns7943:0crwdne7943:0"
+      #edit a member
       members_edit:
-        #edit a member
         subscription: "crwdns7945:0crwdne7945:0"
         duration: "crwdns7947:0crwdne7947:0"
         expires_at: "crwdns7949:0crwdne7949:0"
@@ -718,8 +743,8 @@ ach:
         a_problem_occurred_while_taking_the_subscription: "crwdns8021:0crwdne8021:0"
         wallet: "crwdns8023:0crwdne8023:0"
         to_credit: 'crwdns8025:0crwdne8025:0'
+      #add a new administrator to the platform
       admins_new:
-        #add a new administrator to the platform
         add_an_administrator: "crwdns8027:0crwdne8027:0"
         administrator_successfully_created_he_will_receive_his_connection_directives_by_email: "crwdns8029:0GENDER={GENDER}crwdnd8029:0GENDER={GENDER}crwdne8029:0"
         failed_to_create_admin: "crwdns8031:0crwdne8031:0"
@@ -736,34 +761,33 @@ ach:
         birth_date: "crwdns8053:0crwdne8053:0"
         address: "crwdns8055:0crwdne8055:0"
         phone_number: "crwdns8057:0crwdne8057:0"
+      #add a new authentication provider (SSO)
       authentication_new:
-        #add a new authentication provider (SSO)
         local_database: "crwdns8059:0crwdne8059:0"
         o_auth2: "crwdns8061:0crwdne8061:0"
         add_a_new_authentication_provider: "crwdns8063:0crwdne8063:0"
         a_local_database_provider_already_exists_unable_to_create_another: "crwdns8065:0crwdne8065:0"
         local_provider_successfully_saved: "crwdns8067:0crwdne8067:0"
-        it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider: "crwdns8069:0crwdne8069:0"
+        it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider: "crwdns20206:0crwdne20206:0"
         security_issue_detected: "crwdns8071:0crwdne8071:0"
         beware_the_oauth2_authenticatoin_provider_you_are_about_to_add_isnt_using_HTTPS: "crwdns8073:0crwdne8073:0"
         this_is_a_serious_security_issue_on_internet_and_should_never_be_used_except_for_testing_purposes: "crwdns8075:0crwdne8075:0"
         do_you_really_want_to_continue: "crwdns8077:0crwdne8077:0"
         unsecured_oauth2_provider_successfully_added: "crwdns8079:0crwdne8079:0"
         oauth2_provider_successfully_added: "crwdns8081:0crwdne8081:0"
+      #edit an authentication provider (SSO)
       authentication_edit:
-        #edit an authentication provider (SSO)
         provider: "crwdns8083:0crwdne8083:0"
-        it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider: "crwdns8085:0crwdne8085:0"
-        provider_successfully_updated: "crwdns8087:0crwdne8087:0"
+        it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider: "crwdns20208:0crwdne20208:0"
+        provider_successfully_updated: "crwdns20210:0crwdne20210:0"
         an_error_occurred_unable_to_update_the_provider: "crwdns8089:0crwdne8089:0"
+      #statistics tables
       statistics:
-        #statistics tables
         statistics: "crwdns8091:0crwdne8091:0"
         evolution: "crwdns8093:0crwdne8093:0"
         age_filter: "crwdns8095:0crwdne8095:0"
-        from_age: "crwdns8097:0crwdne8097:0" #context: age. eg: from 8 to 40 years old
-        to_age: "crwdns8099:0crwdne8099:0" #context: age. eg: from 8 to 40 years old
-        _years_old: "crwdns8101:0crwdne8101:0"
+        from_age: "crwdns8097:0crwdne8097:0" #eg. from 8 to 40 years old
+        to_age: "crwdns8099:0crwdne8099:0" #eg. from 8 to 40 years old
         start: "crwdns8103:0crwdne8103:0"
         end: "crwdns8105:0crwdne8105:0"
         custom_filter: "crwdns8107:0crwdne8107:0"
@@ -771,12 +795,12 @@ ach:
         criterion: "crwdns8111:0crwdne8111:0"
         value: "crwdns8113:0crwdne8113:0"
         exclude: "crwdns8115:0crwdne8115:0"
-        from_date: crwdns10115:0crwdne10115:0
-        to_date: crwdns10117:0crwdne10117:0
+        from_date: "crwdns19818:0crwdne19818:0" #eg: from 01/01 to 01/05
+        to_date: "crwdns19820:0crwdne19820:0" #eg: from 01/01 to 01/05
         entries: "crwdns8121:0crwdne8121:0"
         revenue_: "crwdns8123:0crwdne8123:0"
         average_age: "crwdns8125:0crwdne8125:0"
-        years_old: "crwdns8127:0crwdne8127:0"
+        years_old: "crwdns20212:0crwdne20212:0"
         total: "crwdns8129:0crwdne8129:0"
         available_hours: "crwdns8131:0crwdne8131:0"
         available_tickets: "crwdns8133:0crwdne8133:0"
@@ -797,14 +821,16 @@ ach:
         man: "crwdns8163:0crwdne8163:0"
         woman: "crwdns8165:0crwdne8165:0"
         export_is_running_you_ll_be_notified_when_its_ready: "crwdns8167:0crwdne8167:0"
+        create_plans_to_start: "crwdns20160:0crwdne20160:0"
+        click_here: "crwdns20162:0crwdne20162:0"
+      #statistics graphs
       stats_graphs:
-        #statistics graphs
         statistics: "crwdns8169:0crwdne8169:0"
         data: "crwdns8171:0crwdne8171:0"
         day: "crwdns8173:0crwdne8173:0"
         week: "crwdns8175:0crwdne8175:0"
-        from_date: crwdns10119:0crwdne10119:0
-        to_date: crwdns10121:0crwdne10121:0
+        from_date: "crwdns19822:0crwdne19822:0" #eg: from 01/01 to 01/05
+        to_date: "crwdns19824:0crwdne19824:0" #eg: from 01/01 to 01/05
         month: "crwdns8181:0crwdne8181:0"
         start: "crwdns8183:0crwdne8183:0"
         end: "crwdns8185:0crwdne8185:0"
@@ -816,8 +842,8 @@ ach:
         week_of_START_to_END: "crwdns8197:0{START}crwdnd8197:0{END}crwdne8197:0"
         no_data_for_this_period: "crwdns8199:0crwdne8199:0"
         date: "crwdns8201:0crwdne8201:0"
+      #global application parameters and customization
       settings:
-        #global application parameters and customization
         title: "crwdns8203:0crwdne8203:0"
         customize_the_application: "crwdns8205:0crwdne8205:0"
         general: "crwdns8207:0crwdne8207:0"
@@ -829,7 +855,7 @@ ach:
         neutral: "crwdns8219:0crwdne8219:0"
         eg: "crwdns8221:0crwdne8221:0"
         about: "crwdns8223:0crwdne8223:0"
-        the_team: "crwdns19469:0crwdne19469:0"
+        the_team: "crwdns19826:0crwdne19826:0"
         male_preposition: "crwdns8225:0crwdne8225:0"
         female_preposition: "crwdns8227:0crwdne8227:0"
         neutral_preposition: "crwdns8229:0crwdne8229:0"
@@ -866,9 +892,9 @@ ach:
         leave_it_empty_to_not_bring_up_any_news_on_the_home_page: "crwdns8291:0crwdne8291:0"
         twitter_stream: "crwdns8293:0crwdne8293:0"
         name_of_the_twitter_account: "crwdns8295:0crwdne8295:0"
-        link: "crwdns19471:0crwdne19471:0"
-        link_to_about: 'crwdns19473:0crwdne19473:0'
-        content: "crwdns19475:0crwdne19475:0"
+        link: "crwdns19828:0crwdne19828:0"
+        link_to_about: 'crwdns19830:0crwdne19830:0'
+        content: "crwdns19832:0crwdne19832:0"
         title_of_the_about_page: "crwdns8297:0crwdne8297:0"
         shift_enter_to_force_carriage_return: "crwdns8299:0crwdne8299:0"
         input_the_main_content: "crwdns8301:0crwdne8301:0"
@@ -902,22 +928,22 @@ ach:
         space_explications_alert: "crwdns8357:0crwdne8357:0"
         main_color: "crwdns8359:0crwdne8359:0"
         secondary_color: "crwdns8361:0crwdne8361:0"
-        customize_home_page: "crwdns19477:0crwdne19477:0"
-        reset_home_page: "crwdns19479:0crwdne19479:0"
-        confirmation_required: "crwdns19481:0crwdne19481:0"
-        confirm_reset_home_page: "crwdns19483:0crwdne19483:0"
-        home_items: "crwdns19485:0crwdne19485:0"
-        item_news: "crwdns19487:0crwdne19487:0"
-        item_projects: "crwdns19489:0crwdne19489:0"
-        item_twitter: "crwdns19491:0crwdne19491:0"
-        item_members: "crwdns19493:0crwdne19493:0"
-        item_events: "crwdns19495:0crwdne19495:0"
-        home_content: "crwdns19497:0crwdne19497:0"
-        home_content_reset: "crwdns19499:0crwdne19499:0"
-        home_css: "crwdns19501:0crwdne19501:0"
+        customize_home_page: "crwdns19834:0crwdne19834:0"
+        reset_home_page: "crwdns19836:0crwdne19836:0"
+        confirmation_required: "crwdns19838:0crwdne19838:0"
+        confirm_reset_home_page: "crwdns19840:0crwdne19840:0"
+        home_items: "crwdns19842:0crwdne19842:0"
+        item_news: "crwdns19844:0crwdne19844:0"
+        item_projects: "crwdns19846:0crwdne19846:0"
+        item_twitter: "crwdns19848:0crwdne19848:0"
+        item_members: "crwdns19850:0crwdne19850:0"
+        item_events: "crwdns19852:0crwdne19852:0"
+        home_content: "crwdns19854:0crwdne19854:0"
+        home_content_reset: "crwdns19856:0crwdne19856:0"
+        home_css: "crwdns19858:0crwdne19858:0"
         home_blogpost: "crwdns8363:0crwdne8363:0"
         twitter_name: "crwdns8365:0crwdne8365:0"
-        link_name: "crwdns19503:0crwdne19503:0"
+        link_name: "crwdns19860:0crwdne19860:0"
         about_title: "crwdns8367:0crwdne8367:0"
         about_body: "crwdns8369:0crwdne8369:0"
         about_contacts: "crwdns8371:0crwdne8371:0"
@@ -940,13 +966,13 @@ ach:
         display_name: "crwdns8405:0crwdne8405:0"
         display_name_enable: "crwdns8407:0crwdne8407:0"
         machines_sort_by: "crwdns8409:0crwdne8409:0"
-        fab_analytics: "crwdns19505:0crwdne19505:0"
+        fab_analytics: "crwdns19862:0crwdne19862:0"
         elements_ordering: "crwdns8411:0crwdne8411:0"
         machines_order: "crwdns8413:0crwdne8413:0"
         display_machines_sorted_by: "crwdns8415:0crwdne8415:0"
-        advanced: "crwdns19507:0crwdne19507:0"
-        customize_home_page_css: "crwdns19509:0crwdne19509:0"
-        home_css_notice_html: "crwdns19511:0crwdne19511:0"
+        advanced: "crwdns19864:0crwdne19864:0"
+        customize_home_page_css: "crwdns19866:0crwdne19866:0"
+        home_css_notice_html: "crwdns19868:0crwdne19868:0"
         sort_by:
           default: "crwdns8417:0crwdne8417:0"
           name: "crwdns8419:0crwdne8419:0"
@@ -962,29 +988,30 @@ ach:
           publish_will_notify: "crwdns8437:0crwdne8437:0"
           publish: "crwdns8439:0crwdne8439:0"
           users_notified: "crwdns8441:0crwdne8441:0"
-          about_analytics: "crwdns19513:0crwdne19513:0"
-          read_more: "crwdns19515:0crwdne19515:0"
+          about_analytics: "crwdns19870:0crwdne19870:0"
+          read_more: "crwdns19872:0crwdne19872:0"
           analytics:
-            intro_analytics_html: "crwdns19517:0crwdne19517:0"
-            version: "crwdns19519:0crwdne19519:0"
-            members: "crwdns19521:0crwdne19521:0"
-            admins: "crwdns19523:0crwdne19523:0"
-            availabilities: "crwdns19525:0crwdne19525:0"
-            reservations: "crwdns19527:0crwdne19527:0"
-            plans: "crwdns19529:0crwdne19529:0"
-            spaces: "crwdns19531:0crwdne19531:0"
-            online_payment: "crwdns19533:0crwdne19533:0"
-            invoices: "crwdns19535:0crwdne19535:0"
-            openlab: "crwdns19537:0crwdne19537:0"
+            title: "crwdns19874:0crwdne19874:0"
+            intro_analytics_html: "crwdns19876:0crwdne19876:0"
+            version: "crwdns19878:0crwdne19878:0"
+            members: "crwdns19880:0crwdne19880:0"
+            admins: "crwdns19882:0crwdne19882:0"
+            availabilities: "crwdns19884:0crwdne19884:0"
+            reservations: "crwdns19886:0crwdne19886:0"
+            plans: "crwdns19888:0crwdne19888:0"
+            spaces: "crwdns19890:0crwdne19890:0"
+            online_payment: "crwdns19892:0crwdne19892:0"
+            invoices: "crwdns19894:0crwdne19894:0"
+            openlab: "crwdns19896:0crwdne19896:0"
       open_api_clients:
         add_new_client: "crwdns8443:0crwdne8443:0"
         api_documentation: "crwdns8445:0crwdne8445:0"
         open_api_clients: "crwdns8447:0crwdne8447:0"
         name: "crwdns8449:0crwdne8449:0"
-        calls_count: "crwdns8451:0crwdne8451:0"
+        calls_count: "crwdns20214:0crwdne20214:0"
         token: "crwdns8453:0crwdne8453:0"
         created_at: "crwdns8455:0crwdne8455:0"
-        reset_token: "crwdns8457:0crwdne8457:0"
+        reset_token: "crwdns20216:0crwdne20216:0"
         client_name: "crwdns8459:0crwdne8459:0"
         confirmation_required: "crwdns8461:0crwdne8461:0"
         do_you_really_want_to_delete_this_open_api_client: "crwdns8463:0crwdne8463:0"
@@ -993,18 +1020,18 @@ ach:
         client_successfully_updated: "crwdns8469:0crwdne8469:0"
         client_successfully_deleted: "crwdns8471:0crwdne8471:0"
         access_successfully_revoked: "crwdns8473:0crwdne8473:0"
+      #create a new space
       space_new:
-        #create a new space
         add_a_new_space: "crwdns8475:0crwdne8475:0"
         watch_out_when_creating_a_new_space_its_prices_are_initialized_at_0_for_all_subscriptions: "crwdns8477:0crwdne8477:0"
         consider_changing_its_prices_before_creating_any_reservation_slot: "crwdns8479:0crwdne8479:0"
         add_this_space: "crwdns8481:0crwdne8481:0"
+      #modify an exiting space
       space_edit:
-        #modify an exiting space
         edit_the_space_NAME: "crwdns8483:0{NAME}crwdne8483:0"
         validate_the_changes: "crwdns8485:0crwdne8485:0"
+      #process and delete abuses reports
       manage_abuses:
-        #process and delete abuses reports
         abuses_list: "crwdns8487:0crwdne8487:0"
         no_reports: "crwdns8489:0crwdne8489:0"
         published_by: "crwdns8491:0crwdne8491:0"
@@ -1014,3 +1041,192 @@ ach:
         report_will_be_destroyed: "crwdns8499:0crwdne8499:0"
         report_removed: "crwdns8501:0crwdne8501:0"
         failed_to_remove: "crwdns8503:0crwdne8503:0"
+      #feature tour
+      tour:
+        conclusion:
+          title: "crwdns19898:0crwdne19898:0"
+          content: "crwdns20174:0crwdne20174:0"
+        trainings:
+          welcome:
+            title: "crwdns19902:0crwdne19902:0"
+            content: "crwdns19904:0crwdne19904:0"
+          trainings:
+            title: "crwdns19906:0crwdne19906:0"
+            content: "crwdns20218:0crwdne20218:0"
+          filter:
+            title: "crwdns19910:0crwdne19910:0"
+            content: "crwdns19912:0crwdne19912:0"
+          tracking:
+            title: "crwdns19914:0crwdne19914:0"
+            content: "crwdns19916:0crwdne19916:0"
+        calendar:
+          welcome:
+            title: "crwdns19918:0crwdne19918:0"
+            content: "crwdns19920:0crwdne19920:0"
+          agenda:
+            title: "crwdns19922:0crwdne19922:0"
+            content: "crwdns19924:0crwdne19924:0"
+          export:
+            title: "crwdns19926:0crwdne19926:0"
+            content: "crwdns19928:0crwdne19928:0"
+          import:
+            title: "crwdns19930:0crwdne19930:0"
+            content: "crwdns19932:0crwdne19932:0"
+        members:
+          welcome:
+            title: "crwdns19934:0crwdne19934:0"
+            content: "crwdns19936:0crwdne19936:0"
+          list:
+            title: "crwdns19938:0crwdne19938:0"
+            content: "crwdns19940:0crwdne19940:0"
+          search:
+            title: "crwdns19942:0crwdne19942:0"
+            content: "crwdns19944:0crwdne19944:0"
+          filter:
+            title: "crwdns19946:0crwdne19946:0"
+            content: "crwdns19948:0crwdne19948:0"
+          actions:
+            title: "crwdns19950:0crwdne19950:0"
+            content: "crwdns19952:0crwdne19952:0"
+          exports:
+            title: "crwdns19954:0crwdne19954:0"
+            content: "crwdns19956:0crwdne19956:0"
+          import:
+            title: "crwdns19958:0crwdne19958:0"
+            content: "crwdns19960:0crwdne19960:0"
+          admins:
+            title: "crwdns19962:0crwdne19962:0"
+            content: "crwdns19964:0crwdne19964:0"
+          groups:
+            title: "crwdns19966:0crwdne19966:0"
+            content: "crwdns20164:0crwdne20164:0"
+          labels:
+            title: "crwdns19970:0crwdne19970:0"
+            content: "crwdns19972:0crwdne19972:0"
+          sso:
+            title: "crwdns19974:0crwdne19974:0"
+            content: "crwdns19976:0crwdne19976:0"
+        invoices:
+          welcome:
+            title: "crwdns19978:0crwdne19978:0"
+            content: "crwdns19980:0crwdne19980:0"
+          list:
+            title: "crwdns19982:0crwdne19982:0"
+            content: "crwdns19984:0crwdne19984:0"
+          chained:
+            title: "crwdns19986:0crwdne19986:0"
+            content: "crwdns19988:0crwdne19988:0"
+          download:
+            title: "crwdns19990:0crwdne19990:0"
+            content: "crwdns19992:0crwdne19992:0"
+          refund:
+            title: "crwdns19994:0crwdne19994:0"
+            content: "crwdns19996:0crwdne19996:0"
+          settings:
+            title: "crwdns19998:0crwdne19998:0"
+            content: "crwdns20000:0crwdne20000:0"
+          codes:
+            title: "crwdns20002:0crwdne20002:0"
+            content: "crwdns20004:0crwdne20004:0"
+          export:
+            title: "crwdns20006:0crwdne20006:0"
+            content: "crwdns20008:0crwdne20008:0"
+          periods:
+            title: "crwdns20010:0crwdne20010:0"
+            content: "crwdns20012:0crwdne20012:0"
+        pricing:
+          welcome:
+            title: "crwdns20014:0crwdne20014:0"
+            content: "crwdns20016:0crwdne20016:0"
+          new_plan:
+            title: "crwdns20018:0crwdne20018:0"
+            content: "crwdns20020:0crwdne20020:0"
+          trainings:
+            title: "crwdns20022:0crwdne20022:0"
+            content: "crwdns20024:0crwdne20024:0"
+          machines:
+            title: "crwdns20026:0crwdne20026:0"
+            content: "crwdns20028:0crwdne20028:0"
+          spaces:
+            title: "crwdns20030:0crwdne20030:0"
+            content: "crwdns20032:0crwdne20032:0"
+          credits:
+            title: "crwdns20034:0crwdne20034:0"
+            content: "crwdns20036:0crwdne20036:0"
+          coupons:
+            title: "crwdns20038:0crwdne20038:0"
+            content: "crwdns20040:0crwdne20040:0"
+        events:
+          welcome:
+            title: "crwdns20042:0crwdne20042:0"
+            content: "crwdns20044:0crwdne20044:0"
+          list:
+            title: "crwdns20046:0crwdne20046:0"
+            content: "crwdns20048:0crwdne20048:0"
+          filter:
+            title: "crwdns20050:0crwdne20050:0"
+            content: "crwdns20052:0crwdne20052:0"
+          categories:
+            title: "crwdns20054:0crwdne20054:0"
+            content: "crwdns20056:0crwdne20056:0"
+          themes:
+            title: "crwdns20058:0crwdne20058:0"
+            content: "crwdns20060:0crwdne20060:0"
+          ages:
+            title: "crwdns20062:0crwdne20062:0"
+            content: "crwdns20064:0crwdne20064:0"
+          prices:
+            title: "crwdns20066:0crwdne20066:0"
+            content: "crwdns20068:0crwdne20068:0"
+        project_elements:
+          welcome:
+            title: "crwdns20070:0crwdne20070:0"
+            content: "crwdns20072:0crwdne20072:0"
+          abuses:
+            title: "crwdns20074:0crwdne20074:0"
+            content: "crwdns20076:0crwdne20076:0"
+        statistics:
+          welcome:
+            title: "crwdns20078:0crwdne20078:0"
+            content: "crwdns20080:0crwdne20080:0"
+          export:
+            title: "crwdns20082:0crwdne20082:0"
+            content: "crwdns20084:0crwdne20084:0"
+          trending:
+            title: "crwdns20086:0crwdne20086:0"
+            content: "crwdns20088:0crwdne20088:0"
+        settings:
+          welcome:
+            title: "crwdns20090:0crwdne20090:0"
+            content: "crwdns20092:0crwdne20092:0"
+          home:
+            title: "crwdns20094:0crwdne20094:0"
+            content: "crwdns20096:0crwdne20096:0"
+          components:
+            title: "crwdns20098:0crwdne20098:0"
+            content: "crwdns20100:0crwdne20100:0"
+          codeview:
+            title: "crwdns20102:0crwdne20102:0"
+            content: "crwdns20104:0crwdne20104:0"
+          reset:
+            title: "crwdns20106:0crwdne20106:0"
+            content: "crwdns20108:0crwdne20108:0"
+          css:
+            title: "crwdns20110:0crwdne20110:0"
+            content: "crwdns20112:0crwdne20112:0"
+          about:
+            title: "crwdns20114:0crwdne20114:0"
+            content: "crwdns20116:0crwdne20116:0"
+          privacy:
+            title: "crwdns20118:0crwdne20118:0"
+            content: "crwdns20120:0crwdne20120:0"
+          draft:
+            title: "crwdns20122:0crwdne20122:0"
+            content: "crwdns20124:0crwdne20124:0"
+        open_api:
+          welcome:
+            title: "crwdns20126:0crwdne20126:0"
+            content: "crwdns20128:0crwdne20128:0"
+          doc:
+            title: "crwdns20130:0crwdne20130:0"
+            content: "crwdns20132:0crwdne20132:0"

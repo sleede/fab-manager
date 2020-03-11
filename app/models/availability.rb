@@ -159,9 +159,9 @@ class Availability < ActiveRecord::Base
   private
 
   def length_must_be_slot_multiple
-    if end_at < (start_at + Rails.application.secrets.slot_duration.minutes)
-      errors.add(:end_at, I18n.t('availabilities.length_must_be_slot_multiple', MIN: Rails.application.secrets.slot_duration))
-    end
+    return unless end_at < (start_at + ApplicationHelper::SLOT_DURATION.minutes)
+
+    errors.add(:end_at, I18n.t('availabilities.length_must_be_slot_multiple', MIN: ApplicationHelper::SLOT_DURATION))
   end
 
   def should_be_associated

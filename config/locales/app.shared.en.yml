@@ -1,8 +1,8 @@
 en:
   app:
     shared:
+      #translations of common buttons
       buttons:
-        # translations of common buttons
         confirm_changes: "Confirm changes"
         consult: "Consult"
         edit: "Edit"
@@ -18,14 +18,12 @@ en:
         "yes": "Yes"
         "no": "No"
         apply: "Apply"
-
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "You will lose any unsaved modification if you quit this page"
         you_will_lose_any_unsaved_modification_if_you_reload_this_page: "You will lose any unsaved modification if you reload this page"
         payment_card_error: "A problem has occurred with your credit card:"
-
+      #user edition form
       user:
-        # user edition form
         man: "Man"
         woman: "Woman"
         add_an_avatar: "Add an avatar"
@@ -64,9 +62,8 @@ en:
         used_for_invoicing: "This data will be used for billing purposes"
         used_for_reservation: "This data will be used in case of change on one of your bookings"
         used_for_profile: "This data will only be displayed on your profile"
-
+      #project edition form
       project:
-        # project edition form
         name: "Name"
         name_is_required: "Name is required."
         illustration: "Visual"
@@ -94,9 +91,8 @@ en:
         themes: "Themes"
         tags: "Tags"
         save_as_draft: "Save as draft"
-
+      #machine edition form
       machine:
-        # machine edition form
         name: "Name"
         name_is_required: "Name is required."
         illustration: "Visual"
@@ -110,33 +106,28 @@ en:
         add_an_attachment: "Add an attachment"
         disable_machine: "Disable machine"
         validate_your_machine: "Validate your machine"
-
+      #frame to select a plan to subscribe
       plan_subscribe:
-        # frame to select a plan to subscribe
         subscribe_online: "subscribe online"
         do_not_subscribe: "do not subscribe"
-
+      #admin: choose a member to interact with
       member_select:
-        # admin: choose a member to interact with
         select_a_member: "Select a member"
         start_typing: "Start typing..."
-
+      #stripe payment modal
       stripe:
-        # stripe payment modal
         online_payment: "Online payment"
         i_have_read_and_accept_: "I have read, and accept"
         _the_general_terms_and_conditions: "the general terms and conditions."
         credit_amount_for_pay_reservation: "{amount} {currency} remains to be paid to confirm your reservation"
         client_credit_amount_for_pay_reservation: "{amount} {currency} remains to be paid to confirm reservation of client"
         confirm_payment_of_: "Pay: {AMOUNT}"
-
+      #dialog of on site payment for reservations
       valid_reservation_modal:
-        # dialog of on site payment for reservations
         booking_confirmation: "Booking confirmation"
         here_is_the_summary_of_the_slots_to_book_for_the_current_user: "Here is the summary of the slots to book for the current user:"
-
+      #event edition form
       event:
-        # event edition form
         title: "Title"
         title_is_required: "Title is required."
         matching_visual: "Matching visual"
@@ -160,9 +151,8 @@ en:
         tickets_available: "Tickets available"
         event_theme: "Event theme"
         age_range: "Age range"
-
+      #subscription plan edition form
       plan:
-        # subscription plan edition form
         general_information: "General information"
         name: "Name"
         name_is_required: "Name is required"
@@ -203,9 +193,8 @@ en:
         email_address_is_required: "Email address is required."
         disabled: "Disable subscription"
         disable_plan_will_not_unsubscribe_users: "Beware: disabling this plan won't unsubscribe users having active subscriptions with it."
-
+      #training edition form
       trainings:
-        # training edition form
         name: "Name"
         name_is_required: "Name is required."
         illustration: "Illustration"
@@ -218,20 +207,18 @@ en:
         number_of_tickets: "Number of tickets"
         public_page: "Show in training lists"
         disable_training: "Disable the training"
-
+      #partial form to edit/create an user (admin view)
       user_admin:
-        # partial form to edit/create an user (admin view)
         user: "User"
         incomplete_profile: "Incomplete profile"
         user_profile: "User profile"
         warning_incomplete_user_profile_probably_imported_from_sso: "Warning: This user's profile is incomplete. As \"single sign-on\" (SSO) authentication is currently enabled, it may probably be an imported but non merged account. Do not modify it unless you know what your doing."
         group: "Group"
-        group_is_required: "Group is required"
+        group_is_required: "Group is required."
         trainings: "Trainings"
         tags: "Tags"
-
+      #partial form to edit/create an authentication provider (SSO)
       authentication:
-        # partial form to edit/create an authentication provider (SSO)
         name: "Name"
         provider_name_is_required: "Provider name is required."
         authentication_type: "Authentication type"
@@ -242,9 +229,8 @@ en:
         expected_data_type: "Expected data type"
         input_format: "Input format"
         mappings: "Mappings"
-
+      #edition/creation form of an OAuth2 authentication provider
       oauth2:
-        # edition/creation form of an OAuth2 authentication provider
         common_url: "Common URL"
         common_url_is_required: "Common URL is required."
         provided_url_is_not_a_valid_url: "Provided URL is not a valid URL."
@@ -267,29 +253,25 @@ en:
         api_endpoint_url: "API endpoint URL"
         api_type: "API type"
         api_fields: "API fields"
-
+      #machine/training slot modification modal
       confirm_modify_slot_modal:
-        # machine/training slot modification modal
         change_the_slot: "Change the slot"
         do_you_want_to_change_your_booking_slot_initially_planned_at: "Do you want to change your booking slot, initially planned at:"
         do_you_want_to_change_NAME_s_booking_slot_initially_planned_at: "Do you want to change {NAME}'s booking slot, initially planned at:"
         cancel_this_reservation: "Cancel this reservation"
         i_want_to_change_date: "I want to change date"
-
+      #modal introducing that a training is requested before booking a machine
       request_training_modal:
-        # modal introducing that a training is requested before booking a machine
         to_book_the_MACHINE_you_must_have_completed_the_TRAINING: "To book the \"{MACHINE}\" you must have completed the {TRAINING}."
         register_for_the_training: "Enroll in the training"
         i_dont_want_to_register_now: "I don't want to enroll now"
-
+      #modal introducing that a user must wait for his training being validated before booking a machine
       training_reservation_modal:
-        # modal introducing that a user must wait for his training being validated before booking a machine
         machine_reservation: "Machine reservation"
         you_must_wait_for_your_training_is_being_validated_by_the_fablab_team_to_book_this_machine: "You must wait for your training is being validated by the FabLab team to book this machine."
         your_training_will_occur_: "Your training will occur"
-
+      #user public profile
       public_profile:
-        # user public profile
         last_activity_html: "Last activity <br><strong>on {DATE}</strong>"
         to_come: "to come"
         approved: "approved"
@@ -303,9 +285,8 @@ en:
         email_address: "Email address"
         trainings: "Trainings"
         no_trainings: "No trainings"
-
+      #wallet
       wallet:
-        # wallet
         wallet: 'Wallet'
         your_wallet_amount: 'Your amount available'
         wallet_amount: 'Amount available'
@@ -327,10 +308,10 @@ en:
         to_credit: 'Credit'
         wallet_credit_successfully: "Wallet of user is credited successfully."
         a_problem_occurred_for_wallet_credit: "A problem is occurred while taking the credit of wallet"
-        amount_is_required: "The amount is required"
+        amount_is_required: "The amount is required."
         amount_minimum_1: "The amount minimum is 1"
-        amount_confirm_is_required: "The amount confirmation is required"
-        amount_confirm_does_not_match: "The amount confirmation does not match"
+        amount_confirm_is_required: "The amount confirmation is required."
+        amount_confirm_does_not_match: "The amount confirmation does not match."
         you_have_amount_in_wallet: "You have {amount} {currency} in your wallet"
         client_have_amount_in_wallet: "Client has {amount} {currency} in wallet"
         wallet_pay_reservation: "You can pay direct your reservation"
@@ -340,9 +321,8 @@ en:
         debit_reservation_machine: "Debit by reservation of machine"
         debit_reservation_event: "Debit by reservation of event"
         warning_uneditable_credit: "Warning: once validated, the credited amount won't be editable anymore."
-
+      #promotional coupon (creation/edition form)
       coupon:
-        # promotional coupon (creation/edition form)
         name: "Name"
         name_is_required: "Name is required."
         code: "Code"
@@ -364,9 +344,8 @@ en:
         max_usages: "Maximum usages allowed"
         max_usages_must_be_equal_or_greater_than_0: "The maximum usages allowed must be greater than 0."
         enabled: "Active"
-
+      #coupon (input zone for users)
       coupon_input:
-        # coupon (input zone for users)
         i_have_a_coupon: "I have a coupon!"
         code_: "Code:"
         the_coupon_has_been_applied_you_get_PERCENT_discount: "The coupon has been applied. You get a {PERCENT}% discount."
@@ -378,9 +357,8 @@ en:
         unable_to_apply_the_coupon_because_amount_exceeded: "Unable to apply the coupon: the discount exceed the total amount of this purchase."
         unable_to_apply_the_coupon_because_undefined: "Unable to apply the coupon: an unexpected error occurred, please contact the Fablab's manager."
         unable_to_apply_the_coupon_because_rejected: "This code does not exists."
-
+      #form to create/edit a space
       space:
-        # form to create/edit a space
         name: "Name"
         name_is_required: "Name is required."
         illustration: "Illustration"
@@ -395,13 +373,12 @@ en:
         default_places: "Default maximum tickets"
         default_places_is_required: "Default maximum tickets is required."
         disable_space: "Disable space"
-
+      #shopping cart module for reservations
       cart:
-        # module de panier d'achat de réservations
         summary: "Summary"
         select_one_or_more_slots_in_the_calendar: "Select one {SINGLE, select, true{slot} other{or more slots}} in the calendar"
         you_ve_just_selected_the_slot: "You've just selected the slot:"
-        datetime_to_time: "{START_DATETIME} to {END_TIME}"  # eg: Thursday, September 4 1986 8:30 PM to 10:00 PM
+        datetime_to_time: "{START_DATETIME} to {END_TIME}"  #eg: Thursday, September 4 1986 8:30 PM to 10:00 PM
         cost_of_TYPE: "Cost of {TYPE, select, Machine{a machine hour} Training{the training} other{the element}}"
         offer_this_slot: "Offer this slot"
         confirm_this_slot: "Confirm this slot"
@@ -427,18 +404,18 @@ en:
         tags_of_the_destination_slot: "Tags of the destination slot:"
         confirm_my_modification: "Confirm my modification"
         your_booking_slot_was_successfully_moved_from_: "Your booking slot was successfully moved from"
-        to_date: "to" # eg. from 01/01 to 01/05
-        please_select_a_member_first: 'Please select a member first'
-        unable_to_select_plan_if_slots_in_the_past: 'Unable to select a plan if any of the selected slots is in the past'
+        to_date: "to" #eg. from 01/01 to 01/05
+        please_select_a_member_first: "Please select a member first"
+        unable_to_select_plan_if_slots_in_the_past: "Unable to select a plan if any of the selected slots is in the past"
         unable_to_change_the_reservation: "Unable to change the reservation"
         confirmation_required: "Confirmation required"
         do_you_really_want_to_cancel_this_reservation: "Do you really want to cancel this reservation?"
         reservation_was_cancelled_successfully: "Reservation was cancelled successfully."
         cancellation_failed: "Cancellation failed."
-        confirm_payment_of_html: "{ROLE, select, admin{Payment on site} other{Pay}}: {AMOUNT}"  # eg. confirm my payment of $20.00
+        confirm_payment_of_html: "{ROLE, select, admin{Payment on site} other{Pay}}: {AMOUNT}"  #eg. confirm my payment of $20.00
         a_problem_occurred_during_the_payment_process_please_try_again_later: "A problem occurred during the payment process. Please try again later."
         none: "None"
-        online_payment_disabled: "Online payment is not available. Please contact the Fablab reception directly."
+        online_payment_disabled: "Online payment is not available. Please contact the FabLab's reception directly."
         slot_restrict_plans: "This slot is restricted for the plans below:"
         slot_restrict_subscriptions_must_select_plan: "The slot is restricted for the subscribers. Please select a plan first."
         slot_restrict_plans_of_others_groups: "The slot is restricted for the subscribers of others groups."
@@ -448,8 +425,14 @@ en:
         slot_at_same_time: "Conflict with others reservations"
         do_you_really_want_to_book_slot_at_same_time: "Do you really want to book this slot? Other bookings take place at the same time"
         unable_to_book_slot_because_really_have_reservation_at_same_time: "Unable to book this slot because the following reservation occurs at the same time."
-
+      # feature-tour modal
       tour:
         previous: "Previous"
         next: "Next"
         end: "End the tour"
+      # help modal
+      help:
+        title: "Help"
+        what_to_do: "What do you want to do?"
+        tour: "Start the feature tour"
+        guide: "Open the user's manual"

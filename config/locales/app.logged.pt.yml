@@ -1,8 +1,8 @@
 pt:
   app:
     logged:
+      #user's profile completion page when logging from an SSO provider
       profile_completion:
-        # user's profile completion page when logging from an SSO provider
         confirm_your_new_account: "Confirme sua nova conta"
         you_ve_just_created_a_new_account_on_the_fablab_by_logging_from: "Você acabou de criar uma nova conta como {GENDER, select, male{o} female{a} neutral{} other{do}} {NAME}"
         we_need_some_more_details: "Para finalizar a configuração da plataforma, precisamos de mais detalhes"
@@ -39,14 +39,13 @@ pt:
         _click_on_the_synchronization_button_opposite_: "click on the synchronization button opposite"
         _disconnect_then_reconnect_: "disconnect then reconnect"
         _for_your_changes_to_take_effect: "for your changes to take effect."
-
       dashboard:
-        # dashboard: public profile
+        #dashboard: public profile
         profile:
           empty: ''
+        #dashboard: edit my profile
         settings:
-          # dashboard: edit my profile
-          last_activity_on_: "Última atividade em"
+          last_activity_on_: "Última atividade em {DATE}"
           i_want_to_change_group: "Eu quero trocar de grupo!"
           your_subscription_expires_on_: "Sua inscrição expira em"
           no_subscriptions: "Sem inscrições"
@@ -92,8 +91,8 @@ pt:
           _click_on_the_synchronization_button_opposite_: "clique no botão de sincronização"
           _disconnect_then_reconnect_: "disconecte e se conecte novamente"
           _for_your_changes_to_take_effect: "para que suas alterações tenham efeitos."
+        #dashboard: my projects
         projects:
-          # dashboard: my projects
           you_dont_have_any_projects: "Você não tem nenhum projeto."
           add_a_project: "Add a project"
           author: "Autor"
@@ -104,35 +103,33 @@ pt:
           machines: "Machines"
           materials: "Materials"
           collaborators: "Collaborators"
+        #dashboard: my trainings
         trainings:
-          # dashboard: my trainings
           your_next_trainings: "Seus próximos treinamentos"
           your_previous_trainings: "Seus treinamentos anteriores"
           your_approved_trainings: "Seus treinamentos aprovados"
           no_trainings: "No trainings"
+        #dashboard: my events
         events:
-          # dashboard: my events
           your_next_events: "Seus próximos eventos"
           no_events_to_come: "Sem eventos futuros"
           your_previous_events: "Seus eventos anteriores"
           no_passed_events: "No passed events"
           NUMBER_normal_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{lugar normal reservado} other{lugares normais reservados}}"
           NUMBER_of_NAME_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{{NAME} lugar reservado} other{{NAME} lugares reservados}}"
+        #dashboard: my invoices
         invoices:
-          # dashboard: my invoices
           reference_number: "Número de referência"
           date: "Date"
           price: "Price"
           download_the_invoice: "Download the invoice"
           download_the_credit_note: "Download the refund invoice"
           no_invoices_for_now: "No invoices for now."
-
+      #public profil of a member
       members_show:
-        # public profil of a member
         members_list: "Lista de membros"
-
+      #list of members accepting to be contacted
       members:
-        # list of members accepting to be contacted
         the_fablab_members: "Membros do FabLab"
         display_more_members: "Mostrar mais membros..."
         no_members_for_now: "Sem membros"
@@ -140,19 +137,16 @@ pt:
         user: "User"
         pseudonym: "Pseudonym"
         email_address: "Email address"
-
+      #add a new project
       projects_new:
-        # add a new project
         add_a_new_project: "Adicionar novo projeto"
-
+      #modify an existing project
       projects_edit:
-        # modify an existing project
         edit_the_project: "Editar projeto"
         rough_draft: "Draft"
         publish: "Publicar"
-
+      #book a machine
       machines_reserve:
-        # book a machine
         machine_planning: "Planejamento de máquinas"
         i_ve_reserved: "Eu tenho reserva"
         not_available: "Não disponível"
@@ -163,24 +157,21 @@ pt:
         reservation_was_cancelled_successfully: "Reservation was cancelled successfully."
         cancellation_failed: "Cancellation failed."
         a_problem_occured_during_the_payment_process_please_try_again_later: "A problem occurred during the payment process. Please try again later."
-
+      #book a training
       trainings_reserve:
-        # book a training
         trainings_planning: "Planos de treinamento"
-        planning_of: "Planejamento de"   # followed by the training name (eg. "Planning of 3d printer training")
+        planning_of: "Planejamento de " #eg. Planning of 3d printer training
         all_trainings: "Todos treinamentos"
         cancel_my_selection: "Cancelar minha seleção"
         i_change: "I change"
         i_shift: "I shift"
         i_ve_reserved: "Eu reservei"
-
+      #book a space
       space_reserve:
-        # book a space
         planning_of_space_NAME: "Plano de {NAME} espaço"
         i_ve_reserved: "Eu reservei"
         i_shift: "Eu troco"
         i_change: "Eu altero"
-
       notifications:
         notifications_center: "Centro de notificações"
         mark_all_as_read: "Marcar todas como lidas"

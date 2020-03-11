@@ -43,7 +43,8 @@ docker-compose down
 docker-compose up -d postgres
 docker-compose exec postgres dropdb -U postgres fabmanager_production
 docker-compose exec postgres createdb -U postgres fabmanager_production
-docker-compose exec postgres pg_restore -U postgres -d fablab_production /var/lib/postgresql/data/fabmanager_production_$(date -I).sql
+docker-compose exec postgres psql -U postgres -d fablab_production -f /var/lib/postgresql/data/fabmanager_production_$(date -I).sql
+docker-compose up -d
 ```
 
 <a name="postgresql-limitations"></a>

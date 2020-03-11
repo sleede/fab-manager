@@ -32,28 +32,23 @@ You can access it at [in-context.translate.fab-manager.com](https://in-context.t
 
 <a name="from-the-files"></a>
 ### From the files
-If you don't wan't want to use the TMS, you can write translations with in the source files. 
-This is more complicated and you must know what you're doing. 
-Please prefer the [TMS method](#using-a-tms) if your're not familiar with software development.
+You **should not** translate Fab-manager from the source files, because it will conflict with the TMS.
+Please refer to the [TMS method](#using-a-tms) for more details.
 
-First, consider that it can be a good idea to setup a development environment to contribute to the software translation.
-This is not mandatory, but this will allow you to test your changes in context and see if anything went wrong, especially with the special syntaxes.
-Please refer to the [development readme](development_readme.md) or to the [virtual machine instructions](virtual-machine.md) to setup such an environment. 
+Anyway, **if you add a new feature** that requires some new translations, just add them to the english files.
+You'll be able to provide translations for other languages later, using our TMS. 
 
-Once done, check the files located in `config/locales`:
+To add the english translations, check the files located in `config/locales`:
 
-- Front app translations (angular.js) are located in  `config/locales/app.scope.XX.yml`.
- Where scope has one the following meaning :
+- Front app translations (angular.js) are located in  `config/locales/app.SCOPE.en.yml`.
+ Where SCOPE has one the following meaning :
     - admin: translations of the administrator views (manage and configure the FabLab).
     - logged: translations of the end-user's views accessible only to connected users.
     - public: translation of end-user's views publicly accessible to anyone.
     - shared: translations shared by many views (like forms or buttons).
-- Back app translations (Ruby on Rails) are located in  `config/locales/XX.yml`.
-- Emails translations are located in `config/locales/mails.XX.yml`.
-- Messages related to the authentication system are located in `config/locales/devise.XX.yml`.
-
-If you plan to translate the application to a new locale, please consider that the reference translation is French.
-Indeed, in some cases, the English texts/sentences can seems confuse or lack of context as they were originally translated from French.
+- Back app translations (Ruby on Rails) are located in  `config/locales/en.yml`.
+- Emails translations are located in `config/locales/mails.en.yml`.
+- Messages related to the authentication system are located in `config/locales/devise.en.yml`.
 
 To prevent syntax mistakes while translating locale files, we **STRONGLY advise** you to use a text editor which support syntax coloration for YML and Ruby.
 As an example, [Visual Studio Code](https://code.visualstudio.com/), with the [Ruby extension](https://marketplace.visualstudio.com/items?itemName=rebornix.Ruby) and the [YAML extension](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml) will do the job.
@@ -62,9 +57,9 @@ As an example, [Visual Studio Code](https://code.visualstudio.com/), with the [R
 #### Front-end translations
 
 Front-end translations uses [angular-translate](http://angular-translate.github.io) with interpolations interpreted by [MessageFormat](https://github.com/SlexAxton/messageformat.js/).
-**Please read the documentation about the [ICU MessageFormat syntax](http://userguide.icu-project.org/formatparse/messages#TOC-MessageFormat) before translating.**
+**Please read the documentation about the [ICU MessageFormat syntax](http://userguide.icu-project.org/formatparse/messages#TOC-MessageFormat) before writing new strings.**
 
-Anyway, it is strongly recommended to use our [translation management system](https://translate.fab-manager.com/).
+To translate existing strings, you should use our [translation management system](https://translate.fab-manager.com/).
 
 <a name="i18n-translation-back"></a>
 #### Back-end translations

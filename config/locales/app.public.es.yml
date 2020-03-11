@@ -1,19 +1,17 @@
 es:
   app:
     public:
+      #header and "about" page
       common:
-        # header and "about" page
         about_the_fablab: "Acerca de {GENDER, select, male{el} female{la} neutral{} other{las}} {NAME}"
         return: "Volver"
-
-        # cookies
+        #cookies
         cookies:
           about_cookies: "Este sitio web utiliza cookies para medir la audiencia."
           learn_more: "Saber más"
           accept: "Aceptar cookies"
           decline: "Rechazar"
-
-        # dashboard sections
+        #dashboard sections
         dashboard: "Panel"
         my_profile: "My Perfil"
         my_settings: "Mis ajustes"
@@ -22,21 +20,17 @@ es:
         my_events: "Mis eventos"
         my_invoices: "Mis facturas"
         my_wallet: "Mi cartera"
-
-        # contextual help
+        #contextual help
         help: "Help"
-
-        # login/logout
+        #login/logout
         sign_out: "Salir"
         sign_up: "Registrarse"
         sign_in: "Ingresar"
-
-        # left menu
+        #left menu
         notifications: "Notificaciones"
         admin: "Administrador"
         reduce_panel: "Reducir panel"
-
-        # left menu (public)
+        #left menu (public)
         home: "Menú principal"
         reserve_a_machine: "Reservar una máquina"
         trainings_registrations: "Registro de cursos"
@@ -45,8 +39,7 @@ es:
         projects_gallery: "Galería de proyectos"
         subscriptions: "Suscripciones"
         public_calendar: "Agenda"
-
-        # left menu (admin)
+        #left menu (admin)
         trainings_monitoring: "Cursos"
         manage_the_calendar: "Agenda"
         manage_the_users: "Usuarios"
@@ -59,8 +52,7 @@ es:
         statistics: "Estadísticas"
         customization: "Customización"
         open_api_clients: "Clientes OpenAPI"
-
-        # account creation modal
+        #account creation modal
         create_your_account: "Crear su cuenta"
         man: "Hombre"
         woman: "Mujer"
@@ -102,29 +94,24 @@ es:
         used_for_profile: "This data will only be displayed on your profile"
         public_profile: "You will have a public profile and other users will be able to associate you in their projects"
         you_will_receive_confirmation_instructions_by_email_detailed: "Recibirá un correo electrónico con instrucciones sobre cómo confirmar su cuenta en unos minutos."
-
-        # password modification modal
+        #password modification modal
         change_your_password: "Cambiar contraseña"
         your_new_password: "Nueva contraseña"
         your_password_was_successfully_changed: "Su contraseña ha sido cambiada con éxito."
-
-        # connection modal
+        #connection modal
         connection: "Conexión"
         password_forgotten: "¿Ha olvidado su contraseña?"
         confirm_my_account: "Confirmar mi E-mail"
-        not_registered_to_the_fablab: "¿No está registrado en el fablab todavía?"
+        not_registered_to_the_fablab: "¿No está registrado en el FabLab todavía?"
         create_an_account: "Crear una cuenta"
         wrong_email_or_password: "E-mail o contraseña incorrecta."
         caps_lock_is_on: "Las mayusculas están activadas."
-
-        # confirmation modal
+        #confirmation modal
         you_will_receive_confirmation_instructions_by_email: "Recibirá las instrucciones de confirmación por email."
-
-        # forgotten password modal
+        #forgotten password modal
         your_email_address_is_unknown: "Se desconoce su email."
         you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password: "En un momento recibirá las instrucciones para restablecer su contraseña en su mail."
-
-        # Fab-manager's version
+        #Fab-manager's version
         version: "Version:"
         upgrade_fabmanager: "Upgrade Fab-manager"
         current_version: "You are currently using version {VERSION} of Fab-manager."
@@ -132,33 +119,28 @@ es:
         read_more: "View the details of this release"
         security_version_html: "<strong>Your current version is vulnerable!</strong><br> A later version, currently available, includes security fixes. Upgrade as soon as possible!"
         how_to: "How to upgrade?"
-
-        # Notifications
+        #Notifications
         and_NUMBER_other_notifications: "y {NUMBER, plural, =0{no other notifications} =1{one other notification} otras{{NUMBER} other notifications}}..."
-
+      #about page
       about:
-        #about page
         read_the_fablab_policy: "Leer la politica del FabLab"
         read_the_fablab_s_general_terms_and_conditions: "Leer los terminos y condiciones del FabLab"
         your_fablab_s_contacts: "Sus contactos del FabLab"
         privacy_policy: "Política de privacidad"
-
+      #'privacy policy' page
       privacy:
-        #'privacy policy' page
         title: "Política de privacidad"
         dpo: "Oficial de protección de datos"
         last_update: "Última actualización,"
-
+      #home page
       home:
-        # home page
         latest_documented_projects: "Los últimos proyectos documentados"
         follow_us: "Siguenos"
         latest_tweets: "Los últimos tweets"
         latest_registered_members: "Miembros más recientes"
         create_an_account: "Crear una cuenta"
         discover_members: "Descubrir miembros"
-
-        # next events summary on the home page
+        #next events summary on the home page
         fablab_s_next_events: "Próximos eventos del FabLab"
         every_events: "Todos los eventos"
         from_date_to_date: "Desde {START} hasta {END}"
@@ -166,12 +148,12 @@ es:
         from_time_to_time: "Desde {START} hasta {END}"
         free_entry: "Entrada gratuita"
         free_admission: "Admisión gratuita"
-        full_price: "Precio final"
+        full_price: "Precio completo: "
         event_full: "Evento lleno"
-        still_available: "Available place(s)"
-
+        still_available: "Asiento(s) disponible(s): "
+        all_day: "Todo el día"
+      #projects gallery
       projects_list:
-        # projects gallery
         the_fablab_projects: "Los proyectos del FabLab"
         add_a_project: "Añadir un proyecto"
         search_over_the_whole_network: "Buscar en toda la red de FabLab"
@@ -188,9 +170,8 @@ es:
         all_materials: "Todo el material"
         load_next_projects: "Cargar más proyectos"
         rough_draft: "Borrador"
-
+      #details of a projet
       projects_show:
-        # details of a projet
         rough_draft: "Draft"
         project_description: "Descripción de proyecto"
         by_name: "Por {NAME}"
@@ -218,9 +199,8 @@ es:
         message_is_required: "El mensaje es obligatorio."
         report: "Reportar"
         do_you_really_want_to_delete_this_project: "¿Está seguro de querer eliminar este proyecto?"
-
+      #list of machines
       machines_list:
-        # list of machines
         the_fablab_s_machines: "Las máquinas del FabLab"
         add_a_machine: "Añadir una máquina"
         new_availability: "Open reservations"
@@ -229,9 +209,8 @@ es:
         status_enabled: "Activas"
         status_disabled: "No activas"
         status_all: "Todas"
-
+      #details of a machine
       machines_show:
-        # details of a machine
         book_this_machine: "Alquilar máquina"
         technical_specifications: "Technical specifications"
         files_to_download: "Archivos a descargar"
@@ -241,22 +220,19 @@ es:
         do_you_really_want_to_delete_this_machine: "¿Está seguro de querer eliminar esta máquina?"
         unauthorized_operation: "Unauthorized operation"
         the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users: "La máquina no puede borrarse porque está siendo usada o ha sido reservada por algún usuario."
-
+      #list of trainings
       trainings_list:
-        # list of trainings
         book: "Reservar"
         the_trainings: "Lista de cursos"
-
+      #details of a training
       training_show:
-        # details of a training
         book_this_training: "reservar plaza en este curso"
         do_you_really_want_to_delete_this_training: "Está seguro de querer eliminar este curso?"
         unauthorized_operation: "Operación no autorizada"
         confirmation_required: "Confirmation required"
         the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "El curso no puede borrarse porque ya ha sido reservado por algún usuario."
-
+      #summary of the subscriptions
       plans:
-        # summary of the subscriptions
         subscriptions: "Suscripciones"
         i_choose_that_plan: "Elijo este plan"
         i_subscribe_online: "Suscribirme online"
@@ -283,26 +259,24 @@ es:
         subscription_confirmation: "Confirmar suscripción"
         here_is_the_NAME_subscription_summary: "Resumen de la suscrpición de {NAME}:"
         confirm_payment_of_html: "{ROLE, select, admin{Cash} other{Pay}}: {AMOUNT}" #(contexte : validate a payment of $20,00)
-        online_payment_disabled: "Payment by credit card is not available. Please contact the Fablab's reception directly."
-
+        online_payment_disabled: "Payment by credit card is not available. Please contact the FabLab's reception directly."
+      #Fablab's events list
       events_list:
-        # Fablab's events list
         the_fablab_s_events: "Los eventos del FabLab"
         all_categories: "Todas las categorías"
         for_all: "Para todo"
         sold_out: "Sold Out"
         cancelled: "Cancelled"
         free_admission: "Free admission"
-        still_available: "available place(s)"
+        still_available: "asiento(s) disponible(s)"
         free_entry: "Free entry"
         add_an_event: "Add an event"
         load_the_next_events: "Cargar los próximos eventos..."
-        full_price_: "Full price:"
-        to_date: "to" # eg. from 01/01 to 01/05
+        full_price_: "Precio completo:"
+        to_date: "to" #eg. from 01/01 to 01/05
         all_themes: "All themes"
-
+      #details and booking of an event
       events_show:
-        # details and booking of an event
         event_description: "Descripción del evento"
         downloadable_documents: "Archivos descargables"
         information_and_booking: "Información y reservas"
@@ -310,10 +284,10 @@ es:
         beginning: "Empieza:"
         ending: "Termina:"
         opening_hours: "Hora de apertura:"
-        all_day: "All day"
-        from_time: "From" # eg. from 18:00 to 21:00
-        to_time: "to"  # eg. from 18:00 to 21:00
-        full_price_: "Full price:"
+        all_day: "Todo el día"
+        from_time: "From" #eg. from 18:00 to 21:00
+        to_time: "to" #eg. from 18:00 to 21:00
+        full_price_: "Precio completo:"
         tickets_still_availables: "Entradas disponibles:"
         sold_out: "Entradas vendidas."
         free_entry: "Entrada gratuita"
@@ -328,7 +302,7 @@ es:
         book: "Reservar"
         confirm_and_pay: "Confirm and pay"
         confirm_payment_of_html: "{ROLE, select, admin{Cash} other{Pay}}: {AMOUNT}" #(contexte : validate a payment of $20,00)
-        online_payment_disabled: "Payment by credit card is not available. Please contact the Fablab's reception directly."
+        online_payment_disabled: "Payment by credit card is not available. Please contact the FabLab's reception directly."
         please_select_a_member_first: "Please select a member first"
         change_the_reservation: "Cambiar la reserva"
         you_can_shift_this_reservation_on_the_following_slots: "Puede cambiar la reserva en los siguientes campos:"
@@ -338,22 +312,21 @@ es:
         delete_this_event: "Only this event"
         delete_this_and_next: "This event and the following"
         delete_all: "All events"
-        event_successfully_deleted: "Event successfully deleted"
+        event_successfully_deleted: "Event successfully deleted."
         events_deleted: "The event, and {COUNT, plural, =1{one other} other{{COUNT} others}}, have been deleted"
         unable_to_delete_the_event: "Unable to delete the event, it may be booked by a member"
         events_not_deleted: "On {TOTAL} events, {COUNT, plural, =1{one was not deleted} other{{COUNT} were not deleted}}. Some reservations may exists on {COUNT, plural, =1{it} other{them}}."
         cancel_the_reservation: "Cancel the reservation"
         do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "Do you really want to cancel this reservation? This apply to ALL booked tickets."
-        reservation_was_successfully_cancelled: "Reservation was successfully cancelled"
+        reservation_was_successfully_cancelled: "Reservation was successfully cancelled."
         cancellation_failed: "Cancellation failed."
-        event_is_over: "The event is over"
+        event_is_over: "The event is over."
         thanks_for_coming: "Thanks for coming!"
         view_event_list: "View events to come"
         share_on_facebook: "Share on Facebook"
         share_on_twitter: "Share on Twitter"
-
+      #public calendar
       calendar:
-        # public calendar
         calendar: "Calendario"
         show_unavailables: "Mostrar campos inválidos"
         filter_calendar: "Filtrar calendario"
@@ -362,9 +335,8 @@ es:
         spaces: "Espacios"
         events: "Eventos"
         externals: "Otros calendarios"
-
+      #list of spaces
       spaces_list:
-        # list of spaces
         the_spaces: "Espacios"
         new_availability: "Open reservations"
         add_a_space: "Añadir espacios"
@@ -372,9 +344,8 @@ es:
         status_disabled: "No activos"
         status_all: "Todos"
         book: "Reservar"
-
+      #display the details of a space
       space_show:
-        # display the details of a space
         book_this_space: "Reservar este espacio"
         unauthorized_operation: "Operación no autorizada"
         confirmation_required: "Confirmación requerida"
@@ -383,7 +354,6 @@ es:
         characteristics: "Características"
         files_to_download: "Archivos para descargar"
         projects_using_the_space: "Proyectos que usan el espacio"
-
       tour:
         conclusion:
           title: "Thank you for your attention"
@@ -412,7 +382,7 @@ es:
             content: "Visualize at a glance everything that is scheduled for the next coming weeks (events, training, machines available, etc.)."
           projects:
             title: "Projects"
-            content: "<p>Document and share all your creations with the community.</p><p>If you use OpenLab, you will also be able to consult the projects of the entire Fab-Manager network. <a href='mailto:contact@fab-manager.com'>Contact-us</a> to get your access, it's free!</p>"
+            content: "<p>Document and share all your creations with the community.</p><p>If you use OpenLab, you will also be able to consult the projects of the entire Fab-manager network. <a href='mailto:contact@fab-manager.com'>Contact-us</a> to get your access, it's free!</p>"
           plans:
             title: "Subscriptions"
             content: "Subscriptions provide a way to segment your prices and provide benefits to regular users."
@@ -430,13 +400,13 @@ es:
             content: "<p>Find your personal information here as well as all your activity on Fab-manager.</p><p>This space is also available for all your members.</p>"
           news:
             title: "News"
-            content: "<p>This space allows you to display the latest news from your structure.</p><p>You can easily change its content from [Customization]> [Home page].</p>"
+            content: "<p>This space allows you to display the latest news from your structure.</p><p>You can easily change its content from « Customization », « Home page ».</p>"
           last_projects:
             title: "Last projects"
             content: "<p>This carousel scrolls through the latest projects documented by your members.</p>"
           last_tweet:
             title: "Last tweet"
-            content: "<p>Le dernier tweet de votre flux Twitter peut s'afficher ici.</p><p>Configure it from [Customization]> [Home page].</p>"
+            content: "<p>The last tweet of your Tweeter feed can be shown here.</p><p>Configure it from « Customization », « Home page ».</p>"
           last_members:
             title: "Last members"
             content: "The last registered members who have validated their address and agreed to be contacted will be shown here."

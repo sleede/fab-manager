@@ -1,6 +1,6 @@
 fr:
+  #subscription plan duration
   duration:
-    # durée d'une formule d'abonnement
     year:
       one: 'un an'
       other: '%{count} ans'
@@ -10,15 +10,9 @@ fr:
     week:
       one: 'une semaine'
       other: '%{count} semaines'
-
-  time:
-    formats:
-      # Liste des directives disponibles sur http://apidock.com/ruby/DateTime/strftime
-      hour_minute: "%H:%M"
-
-  errors: &errors
-    messages: &errors_messages
-      # CarrierWave
+  errors:
+    #CarrierWave
+    messages:
       carrierwave_processing_error: "n'a pas pu être traité"
       carrierwave_integrity_error: "n'est pas d'un type de fichier autorisé"
       carrierwave_download_error: "ne peut pas être téléchargé"
@@ -27,9 +21,9 @@ fr:
       rmagick_processing_error: "La manipulation avec rmagick a échoué, peut-être ne s'agit-il pas d'une image ? Erreur d'origine : %{e}"
       mime_types_processing_error: "Le traitement avec MIME::Types a échoué, le content-type est-il correct ? Erreur d'origine : %{e}"
       mini_magick_processing_error: "La manipulation avec MiniMagick a échoué, peut-être ne s'agit-il pas d'une image ? Erreur d'origine : %{e}"
-      wrong_size: "ne fait pas la taille du fichier (doit comporter %{file_size})"
-      size_too_small: "est trop petite (au moins %{file_size})"
-      size_too_big: "est trop grande (pas plus de %{file_size})"
+      wrong_size: "ne fait pas la bonne taille (doit comporter %{file_size})"
+      size_too_small: "est trop petit (au moins %{file_size})"
+      size_too_big: "est trop grand (pas plus de %{file_size})"
       export_not_found: "L'export demandé n'a pas été trouvé. Il a probablement été supprimé, veuillez lancer la génération d'un nouvel export."
       percentage_out_of_range: "Le pourcentage doit être inclus entre 0 et 100"
       cannot_be_blank_at_same_time: "ou %{field} doit être rempli(e)"
@@ -42,38 +36,29 @@ fr:
       end_before_start: "La date de fin ne peut pas être antérieure à la date de début. Choisissez une date après le %{START}"
       invalid_duration: "La durée doit être comprise entre 1 jour et 1 an. Votre période dure %{DAYS} jours."
       must_be_in_the_past: "La période doit être strictement antérieure à la date du jour."
-
-  activemodel:
-    errors:
-      <<: *errors
-
   apipie:
     api_documentation: "Documentation de l'API"
-
+  #error messages when importing an account from a SSO
   omniauth:
-    # messages d'erreur lors de l'import d'un compte depuis un SSO
     email_already_linked_to_another_account_please_input_your_authentication_code: "L'adresse de courriel \"%{OLD_MAIL}\" est déjà associée à un compte utilisateur, merci de saisir votre code d'authentification."
     your_username_is_already_linked_to_another_account_unable_to_update_it: "Votre nom d'utilisateur (%{USERNAME}) est déjà associée à un autre compte utilisateur, impossible de le mettre à jour."
     your_email_address_is_already_linked_to_another_account_unable_to_update_it: "Votre adresse de courriel (%{EMAIL}) est déjà associée à un autre compte utilisateur, impossible de la mettre à jour."
     this_account_is_already_linked_to_an_user_of_the_platform: "Ce compte %{NAME} est déjà lié à un utilisateur de la plate-forme."
-
+  #availability slots in the calendar
   availabilities:
-    # créneaux de disponibilité dans le calendrier
     not_available: "Non disponible"
     i_ve_reserved: "J'ai réservé"
     length_must_be_slot_multiple: "doit être au moins %{MIN} minutes après la date de début"
     must_be_associated_with_at_least_1_machine: "doit être associé avec au moins 1 machine"
-
+  #members management
   members:
-    # gestion des membres
     unable_to_change_the_group_while_a_subscription_is_running: "Impossible de changer le groupe tant qu'un abonnement est en cours"
     please_input_the_authentication_code_sent_to_the_address: "Merci d'enter le code d'authentification qui a été envoyé à l'adresse de courriel %{EMAIL}"
     your_authentication_code_is_not_valid: "Votre code d'authentification n'est pas valide."
     current_authentication_method_no_code: "La méthode d'authentification actuelle ne requiert pas de code de migration"
     requested_account_does_not_exists: "Le compte utilisateur demandé n'existe pas"
-
+  #PDF invoices generation
   invoices:
-    # génération des factures en PDF
     refund_invoice_reference: "Référence de l'avoir : %{REF}"
     invoice_reference: "Référence facture : %{REF}"
     code: "Code : %{CODE}"
@@ -101,7 +86,7 @@ fr:
       one: "Une place %{NAME}"
       other: "%{count} places %{NAME}"
     reservation_other: "Réservation (autre)"
-    coupon_CODE_discount_of_DISCOUNT: "Code {CODE} : remise de {DISCOUNT} {TYPE, select, percent_off{%} other{}}"  # messageFormat interpolation
+    coupon_CODE_discount_of_DISCOUNT: "Code {CODE} : remise de {DISCOUNT} {TYPE, select, percent_off{%} other{}}" #messageFormat interpolation
     total_including_all_taxes: "Total TTC"
     including_VAT_RATE: "Dont TVA %{RATE}%"
     including_total_excluding_taxes: "Dont total HT"
@@ -119,12 +104,12 @@ fr:
     settlement_by_wallet: "Règlement effectué par porte-monnaie"
     on_DATE_at_TIME: "le %{DATE} à %{TIME},"
     for_an_amount_of_AMOUNT: "pour un montant de %{AMOUNT}"
-    on_DATE_from_START_to_END: "Le %{DATE} de %{START} à %{END}" # eg: on feb. 7 from 7AM to 9AM
-    from_STARTDATE_to_ENDDATE_from_STARTTIME_to_ENDTIME: "Du %{STARTDATE} au %{ENDDATE}, de %{STARTTIME} à %{ENDTIME}" # eg: from feb. 7 to feb. 10, from 6PM to 10PM
+    on_DATE_from_START_to_END: "Le %{DATE} de %{START} à %{END}" #eg: on feb. 7 from 7AM to 9AM
+    from_STARTDATE_to_ENDDATE_from_STARTTIME_to_ENDTIME: "Du %{STARTDATE} au %{ENDDATE}, de %{STARTTIME} à %{ENDTIME}" #eg: from feb. 7 to feb. 10, from 6PM to 10PM
     subscription_of_NAME_for_DURATION_starting_from_DATE: "Abonnement de %{NAME} pour %{DURATION} à compter du %{DATE}"
     subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "Prolongement Abonnement (Jours gratuits) de %{NAME} à compter du %{STARTDATE} jusqu'au %{ENDDATE}"
     and: 'et'
-
+  #CVS accounting export (columns headers)
   accounting_export:
     journal_code: "Code journal"
     date: "Date écriture"
@@ -144,22 +129,19 @@ fr:
     Event_reservation: "réserv. évènement"
     Space_reservation: "réserv. espace"
     wallet: "porte-monnaie"
-
+  #training availabilities
   trainings:
-    # disponibilités formations
     i_ve_reserved: "J'ai réservé"
     completed: "Complet"
-
+  #error messages when updating an event
   events:
-    # messages d'erreur lors de la mise à jour d'un évènement
     error_deleting_reserved_price: "Impossible de supprimer le tarif demandé car il est associé à des réservations"
     other_error: "Une erreur inattendue est survenue lors de la mise à jour de l'évènement"
-    # durée d'un évènement
+    #event duration
     from_STARTDATE_to_ENDDATE: "Du %{STARTDATE} au %{ENDDATE},"
     from_STARTTIME_to_ENDTIME: "de %{STARTTIME} à %{ENDTIME}"
-
+  #members list export to EXCEL format
   export_members:
-    # export de la liste des members au format EXCEL
     members: "Membres"
     id: "ID"
     surname: "Nom"
@@ -190,9 +172,8 @@ fr:
     man: "Homme"
     woman: "Femme"
     without_subscriptions: "Sans Abonnement"
-
+  #machines/trainings/events reservations list to EXCEL format
   export_reservations:
-    # export de la liste des réservations machines/formations/évènements au format EXCEL
     reservations: "Réservations"
     customer_id: "ID client"
     customer: "Client"
@@ -204,9 +185,8 @@ fr:
     payment_method: "Méthode de paiement"
     local_payment: "Paiement à l'accueil"
     online_payment: "Paiement en ligne"
-
+  #subscriptions list export to EXCEL format
   export_subscriptions:
-    # export de la liste des abonnements au format EXCEL
     subscriptions: "Abonnements"
     id: "ID"
     customer: "Client"
@@ -219,9 +199,8 @@ fr:
     payment_method: "Méthode de paiement"
     local_payment: "Paiement à l'accueil"
     online_payment: "Paiement en ligne"
-
+  #reservation slots export, by type, to EXCEL format
   export_availabilities:
-    # export des listes de créneaux de réservations, par type, au format EXCEL
     machines: "Machines"
     trainings: "Formations"
     spaces: "Espaces"
@@ -235,10 +214,9 @@ fr:
     event: "Évènement"
     reservations: "Réservations"
     available_seats: "Places disponibles"
-
   api:
+    #internal app notifications
     notifications:
-      # notifications internes à l'application
       deleted_user: "Utilisateur supprimé"
       notify_admin_abuse_reported:
         an_abuse_was_reported_on_TYPE_ID_NAME_html: "Un abus a été signalé sur <strong>%{TYPE} %{ID} : <em>%{NAME}</em></strong>."
@@ -255,15 +233,15 @@ fr:
       notify_admin_subscription_canceled:
         USER_s_subscription_has_been_cancelled: "L'abonnement de %{USER} a été annulé."
       notify_admin_subscription_extended:
-        subscription_PLAN_of_the_member_USER_has_been_extended_FREE_until_DATE_html: "L'abonnement <strong><em>{PLAN}</em></strong> du membre <strong><em>{USER}</strong></em> a été prolongé {FREE, select, true{gratuitement} other{}} jusqu'au {DATE}."  # messageFormat interpolation
+        subscription_PLAN_of_the_member_USER_has_been_extended_FREE_until_DATE_html: "L'abonnement <strong><em>{PLAN}</em></strong> du membre <strong><em>{USER}</strong></em> a été prolongé {FREE, select, true{gratuitement} other{}} jusqu'au {DATE}." #messageFormat interpolation
       notify_admin_subscription_is_expired:
         USER_s_subscription_has_expired: "L'abonnement de %{USER} est arrivé à expiration."
       notify_admin_subscription_will_expire_in_7_days:
         USER_s_subscription_will_expire_in_7_days: "L'abonnement de %{USER} expire dans 7 jours."
       notify_admin_user_group_changed:
-        user_NAME_changed_his_group_html: "L'utilisateur <strong><em>{NAME}</strong></em> a changé de groupe."  # messageFormat interpolation
+        user_NAME_changed_his_group_html: "L'utilisateur <strong><em>{NAME}</strong></em> a changé de groupe." #messageFormat interpolation
       notify_admin_user_merged:
-        user_NAME_has_merged_his_account_with_the_one_imported_from_PROVIDER_UID_html: "L'utilisateur <strong><em>{NAME}</strong></em> a fusionné son compte avec le compte importé depuis <strong><em>{PROVIDER} </strong> ({UID})</em>."  # messageFormat interpolation
+        user_NAME_has_merged_his_account_with_the_one_imported_from_PROVIDER_UID_html: "L'utilisateur <strong><em>{NAME}</strong></em> a fusionné son compte avec le compte importé depuis <strong><em>{PROVIDER} </strong> ({UID})</em>." #messageFormat interpolation
       notify_admin_when_project_published:
         project_NAME_has_been_published_html: "Le projet <a href='/#!/projects/%{ID}'><strong><em>%{NAME}<em></strong></a> vient d'être publié."
       notify_admin_when_user_is_created:
@@ -285,7 +263,7 @@ fr:
       notify_member_subscription_canceled:
         your_subscription_PLAN_was_successfully_cancelled_html: "Votre abonnement <strong><em>%{PLAN}</em></strong> est bien annulé."
       notify_member_subscription_extended:
-        your_subscription_PLAN_has_been_extended_FREE_until_DATE_html: "Votre abonnement <strong><em>{PLAN}</em></strong> a été prolongé {FREE, select, true{gratuitement} other{}} jusqu'au {DATE}."  # messageFormat interpolation
+        your_subscription_PLAN_has_been_extended_FREE_until_DATE_html: "Votre abonnement <strong><em>{PLAN}</em></strong> a été prolongé {FREE, select, true{gratuitement} other{}} jusqu'au {DATE}." #messageFormat interpolation
       notify_member_subscription_is_expired:
         your_subscription_has_expired: "Votre abonnement est arrivé à expiration."
       notify_member_subscription_will_expire_in_7_days:
@@ -351,9 +329,8 @@ fr:
         click_to_show: "Cliquez ici pour la consulter"
       notify_admin_refund_created:
         refund_created: "Un avoir de %{AMOUNT} a été généré pour l'utilisateur %{USER}"
-
+  #statistics tools for admins
   statistics:
-    # outil de statistiques pour les administrateurs
     subscriptions: "Abonnements"
     machines_hours: "Créneaux machines"
     spaces: "Espaces"
@@ -379,9 +356,8 @@ fr:
     revenue: "Chiffre d'affaires"
     account_creation: "Création de compte"
     project_publication: "Publication de projet"
-
+  #statistics exports to the excel file format
   export:
-    # export des statistiques au format excel
     entries: "Entrées"
     revenue: "Chiffre d'affaires"
     average_age: "Âge moyen"
@@ -395,12 +371,10 @@ fr:
     type: "Type"
     male: "Homme"
     female: "Femme"
-
+  #initial price's category for events, created to replace the old "reduced amount" property
   price_category:
-    # catégorie initiale de prix pour les évènements, en remplacement de l'ancienne propriété "montant réduit"
     reduced_fare: "Tarif réduit"
     reduced_fare_if_you_are_under_25_student_or_unemployed: "Tarif réduit si vous avez moins de 25 ans, que vous êtes étudiant ou demandeur d'emploi."
-
   group:
-    # nom du groupe utilisateur pour les administrateurs
+    #name of the user's group for administrators
     admins: 'Administrateurs'

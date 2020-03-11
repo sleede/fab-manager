@@ -1,17 +1,16 @@
 fr:
   layouts:
     notifications_mailer:
-      see_you_later: "A très bientôt sur {GENDER, select, male{le} female{la} neutral{} other{les}}"  # messageFormat interpolation
+      see_you_later: "A très bientôt sur {GENDER, select, male{le} female{la} neutral{} other{les}}" #messageFormat interpolation
       sincerely: "Cordialement,"
       signature: "L'équipe du Fab Lab."
       do_not_reply: "Merci de ne pas répondre directement à cet email."
-
   users_mailer:
     notify_user_account_created:
       subject: "Votre compte Fab Lab a bien été créé"
       body:
         hello: "Bonjour %{NAME},"
-        intro: "L’équipe du Fab Lab vient de vous créer un compte sur le site {GENDER, select, male{du} female{de la} neutral{} other{des}} {FABLAB} :"  # messageFormat interpolation
+        intro: "L’équipe du Fab Lab vient de vous créer un compte sur le site {GENDER, select, male{du} female{de la} neutral{} other{des}} {FABLAB} :" #messageFormat interpolation
         connection_parameters: "Voici vos paramètres de connexion :"
         account_name: "Nom de compte :"
         password: "Mot de passe :"
@@ -20,25 +19,21 @@ fr:
         to_use_platform: "Pour pouvoir utiliser la plateforme, merci de vous"
         logon_or_login: "créer un compte sur %{PROVIDER} ou utiliser un compte pré-existant en cliquant ici."
         token_if_link_problem: "En cas de problème avec le lien, vous pourrez saisir manuellement le code suivant lors de votre première connexion :"
-
   notifications_mailer:
     notify_user_user_group_changed:
       subject: "Vous avez changé de groupe"
       body:
         warning: "Vous venez de changer de groupe utilisateurs. Des contrôles pourront être opérés au Fab Lab afin de vérifier que ce changement est justifié."
-
     notify_admin_user_group_changed:
       subject: "Un membre a changé de groupe"
       body:
         user_changed_group_html: "L'utilisateur <em><strong>%{NAME}</strong></em> a changé de groupe."
         previous_group: "Ancien groupe :"
         new_group: "Nouveau groupe :"
-
     notify_admin_subscription_extended:
       subject: "Un abonnement a été prolongé"
       body:
-        subscription_extended_html: "L'abonnement <strong><em>{PLAN}</em></strong> du membre <strong><em>{NAME}</strong></em> a été prolongé {FREE, select, true{gratuitment} other{}} jusqu'au {DATE}."   # messageFormat interpolation
-
+        subscription_extended_html: "L'abonnement <strong><em>{PLAN}</em></strong> du membre <strong><em>{NAME}</strong></em> a été prolongé {FREE, select, true{gratuitment} other{}} jusqu'au {DATE}." #messageFormat interpolation
     notify_member_subscription_extended:
       subject: "Votre abonnement a été prolongé"
       body:
@@ -46,111 +41,93 @@ fr:
         has_been_extended: "a été prolongé"
         free: "gratuitement"
         until: "jusqu'au"
-
     notify_partner_subscribed_plan:
       subject: "Un abonnement a été souscrit"
       body:
         a_plan: "Un abonnement"
         was_purchased_by_member: "vient d'être souscrit par le membre"
-
     notify_admin_when_project_published:
       subject: "Un projet a été publié."
       body:
         new_project_published: "Un nouveau projet vient d'être publié :"
-
     notify_project_collaborator_to_valid:
       subject: "Invitation à collaborer sur un projet"
       body:
         your_are_invited_to_take_part_in_a_project: "Vous êtes invité à collaborer sur ce projet :"
         to_accept_the_invitation_click_on_following_link: "Pour accepter cette invitation, il vous suffit de cliquer sur le lien suivant:"
-
     notify_project_author_when_collaborator_valid:
       subject: "Un nouveau collaborateur dans votre projet"
       body:
         the_member: "Le membre"
         accepted_your_invitation_to_take_part_in_the_project: "a accepté votre demande de collaboration sur votre projet :"
-
     notify_user_training_valid:
       subject: "Votre formation a été validée"
       body:
         your_training: "Votre formation"
         has_been_validated: "a bien été validée"
-
     notify_member_subscribed_plan:
       subject: "Votre abonnement a bien été souscrit"
       body:
         plan_subscribed_html: "Vous avez souscrit à l'abonnement : <strong><em>%{PLAN}</em></strong>."
         rolling_subscription_stops_on: "Votre abonnement s'arrêtera automatiquement %{DURATION} après votre première formation. À défaut, il s'arrêtera le %{DATE}."
         subscription_stops_on: "Votre abonnement s'arrêtera automatiquement le %{DATE}."
-
     notify_member_create_reservation:
       subject: "Votre réservation a bien été enregistrée"
       body:
         reservation_saved_html: "Votre réservation <strong><em>%{RESERVATION}</em></strong> a bien été enregistrée."
         your_reserved_slots: "Les créneaux que vous avez réservés sont :"
-
     notify_member_subscribed_plan_is_changed:
       subject: "Votre abonnement a été mis à jour"
       body:
         new_plan_html: "Vous avez changé votre abonnement à <strong><em>%{PLAN}</em></strong>."
-
     notify_admin_member_create_reservation:
       subject: "Nouvelle réservation"
       body:
         member_reserved_html: "Le membre %{NAME} a réservé <strong><em>%{RESERVABLE}</em></strong>."
         reserved_slots: "Les créneaux réservés sont :"
-
     notify_member_slot_is_modified:
       subject: "Votre créneau de réservation a bien été modifié"
       body:
         reservation_changed_to: "Votre créneau de réservation a bien été déplacé au :"
         previous_date: "Ancienne date :"
-
     notify_admin_slot_is_modified:
       subject: "Un créneau de réservation a été modifié"
       body:
         slot_modified: "Le membre %{NAME} a modifié son créneau de réservation."
         new_date: "Nouvelle date :"
         old_date: "Ancienne date :"
-
     notify_admin_when_user_is_created:
       subject: "Un compte utilisateur a été créé"
       body:
         new_account_created: "Un nouveau compte utilisateur vient d'être créé sur la plateforme :"
         account_for_organization: "Ce compte gère une structure :"
-
     notify_admin_subscribed_plan:
       subject: "Un abonnement a été souscrit"
       body:
         plan_subscribed_html: "Un abonnement <strong><em>%{PLAN}</em></strong> vient d'être souscrit par le membre <strong><em>%{NAME}</strong></em>."
-
     notify_member_invoice_ready:
       subject: "Votre facture du FabLab"
       body:
-        please_find_attached_html: "Vous trouverez en pièce jointe votre facture du {DATE}, d'un montant de {AMOUNT} concernant votre {TYPE, select, Reservation{réservation} other{abonnement}}."  # messageFormat interpolation
+        please_find_attached_html: "Vous trouverez en pièce jointe votre facture du {DATE}, d'un montant de {AMOUNT} concernant votre {TYPE, select, Reservation{réservation} other{abonnement}}." #messageFormat interpolation
         invoice_in_your_dashboard_html: "Vous pouvez à tout moment retrouver votre facture dans %{DASHBOARD} sur le site du Fab Lab."
         your_dashboard: "votre tableau de bord"
-
     notify_member_reservation_reminder:
       subject: "Rappel de réservation"
       body:
         this_is_a_reminder_about_your_reservation_RESERVABLE_to_be_held_on_DATE_html: "Ceci est un rappel concernant votre réservation <strong>%{RESERVABLE}</strong> qui aura lieu le <em>%{DATE}</em>"
         this_reservation_concerns_the_following_slots: "Cette réservation concerne les créneaux suivants :"
-
     notify_member_avoir_ready:
       subject: "Votre facture d'avoir du FabLab"
       body:
-        please_find_attached_html: "Vous trouverez en pièce jointe votre facture d'avoir du {DATE}, d'un montant de {AMOUNT} concernant votre {TYPE, select, Reservation{réservation} WalletTransaction{crédit du porte-monnaie} other{abonnement}}."  # messageFormat interpolation
+        please_find_attached_html: "Vous trouverez en pièce jointe votre facture d'avoir du {DATE}, d'un montant de {AMOUNT} concernant votre {TYPE, select, Reservation{réservation} WalletTransaction{crédit du porte-monnaie} other{abonnement}}." #messageFormat interpolation
         invoice_in_your_dashboard_html: "Vous pouvez à tout moment retrouver votre facture d'avoir dans %{DASHBOARD} sur le site du Fab Lab."
         your_dashboard: "votre tableau de bord"
-
     notify_member_subscription_will_expire_in_7_days:
       subject: "Votre abonnement expire dans 7 jours"
       body:
         your_plan: "Votre abonnement"
         expires_in_7_days: "expire dans 7 jours"
         to_renew_your_plan_follow_the_link: "Si vous souhaitez renouveler votre abonnement, vous pouvez vous rendre sur"
-
     notify_member_subscription_is_expired:
       subject: "Votre abonnement est arrivé à expiration"
       body:
@@ -158,41 +135,34 @@ fr:
         has_expired: "est arrivé à expiration"
         you_can_go_to: "Vous pouvez vous rendre sur notre page"
         to_renew_your_plan: "afin de renouveler votre abonnement"
-
     notify_admin_subscription_will_expire_in_7_days:
       subject: "L'abonnement d'un membre expire dans 7 jours"
       body:
         subscription_will_expire_html: "L'abonnement du membre %{NAME} <strong><em>%{PLAN}</em></strong> expire dans 7 jours."
-
     notify_admin_subscription_is_expired:
       subject: "L'abonnement d'un membre est arrivé à expiration"
       body:
         subscription_expired_html: "L'abonnement du membre %{NAME} <strong><em>%{PLAN}</em></strong> est arrivé à expiration."
-
     notify_admin_subscription_canceled:
       subject: "L'abonnement d'un membre a été annulé"
       body:
         subscription_canceled_html: "L'abonnement <strong><em>%{PLAN}</em></strong> du membre %{NAME} vient d'être annulé."
-
     notify_member_subscription_canceled:
       subject: "Votre abonnement a été annulé"
       body:
         your_plan_was_canceled: "Votre abonnement a bien été annulé"
         your_plan: "votre abonnement"
         end_at: "fin au"
-
     notify_member_slot_is_canceled:
       subject: "Votre réservation a bien été annulée"
       body:
         reservation_canceled: "Votre réservation %{RESERVABLE} a bien été annulée :"
-
     notify_admin_slot_is_canceled:
       subject: "Une réservation a été annulée"
       body:
         member_cancelled: "Le membre %{NAME} a annulé sa réservation :"
         item_details: "%{START} - %{END}, concernant %{RESERVABLE}"
         generate_refund: "Pensez à générer un avoir ou un remboursement pour cette annulation, le cas échéant."
-
     notify_admin_when_user_is_imported:
       subject: "Un compte utilisateur a été importé depuis le SSO"
       body:
@@ -201,12 +171,10 @@ fr:
         known_information: "Voici les informations connues à son propos :"
         address_already_used: "Cette adresse est déjà associée à un autre utilisateur"
         no_more_info_available: "Aucune autre information sur cet utilisateur n'est disponible tant que celui-ci n'aura pas complété son profil."
-
     notify_user_profile_complete:
       subject: "Vous avez désormais accès à l'ensemble de la plate-forme"
       body:
         message: "Les informations de votre nouveau compte ont correctement été mises à jour, vous avez désormais accès à l'ensemble de la plateforme."
-
     notify_user_auth_migration:
       subject: "Changement important pour votre compte FabLab"
       body:
@@ -218,20 +186,17 @@ fr:
         create_an_account_on: "créer un compte sur"
         or_use_an_existing_account_clicking_here: "ou utiliser un compte pré-existant en cliquant ici"
         in_case_of_problem_enter_the_following_code: "En cas de problème avec le lien, vous pourrez saisir manuellement le code suivant lors de votre première connexion, pour migrer votre compte actuel vers le nouveau système d'authentification :"
-
     notify_admin_user_merged:
       subject: "Un compte importé a été fusionné avec un compte existant"
       body:
         imported_account_merged: "Un compte utilisateur précédemment importé via %{PROVIDER} vient d'être fusionné avec le compte existant de %{NAME}"
         provider_uid: "Son identifiant fournisseur est %{UID}"
-
     notify_admin_profile_complete:
       subject: "Un compte importé a complété ses informations"
       body:
         account_completed: "Un compte utilisateur vient de compléter ses informations de profil :"
         imported_account_completed: "Un compte utilisateur précédemment importé via %{PROVIDER} vient de compléter ses informations de profil :"
         provider_id: "Son identifiant fournisseur est %{UID}"
-
     notify_admin_abuse_reported:
       subject: "Un contenu abusif a été rapporté"
       body:
@@ -241,17 +206,14 @@ fr:
         signaled_on: "Signalé le :"
         message: "Message :"
         visit_management_interface: "Reportez-vous à l'interface de gestion des signalements pour plus d'informations."
-
     notify_user_wallet_is_credited:
       subject: "Votre porte-monnaie a bien été crédité"
       body:
         wallet_credit_html: "Votre porte-monnaie a bien été crédité de %{AMOUNT} par l'administrateur."
-
     notify_admin_user_wallet_is_credited:
       subject: "Le porte-monnaie d'un utilisateur a bien été crédité"
       body:
         wallet_credit_html: "Le porte-monnaie du membre %{USER} a bien été crédité de %{AMOUNT} par l'administrateur %{ADMIN}."
-
     notify_admin_export_complete:
       subject: "Export terminé"
       body:
@@ -274,31 +236,26 @@ fr:
         file_type:
           xlsx: "Excel"
           csv: "CSV"
-
     notify_admin_import_complete:
       subject: "Import terminé"
       body:
         you_made_an_import: "Vous avez initié un import %{CATEGORY}"
         category_members: "des membres"
         click_to_view_results: "Cliquez ici pour voir les résultats"
-
     notify_member_about_coupon:
       subject: "Code promo"
       body:
         enjoy_a_discount_of_PERCENT_with_code_CODE: "Bénéficiez d'une remise de %{PERCENT} % sur tout le site en utilisant le code promo %{CODE}."
         enjoy_a_discount_of_AMOUNT_with_code_CODE: "Bénéficiez d'une remise de %{AMOUNT} sur tout le site en utilisant le code promo %{CODE}."
         this_coupon_is_valid_USAGE_times_until_DATE_for_all_your_purchases: "Ce code promo est valable {USAGE, plural, =1{une seule fois} other{plusieurs fois}} : pour tous vos achats {TYPE, select, amount_off{dont le montant est au moins égal à celui du code promo} other{}}, dès maintenant {DATE, select, NO-DATE{et sans limitation de durée} other{et jusqu'au {DATE}}}."
-
     notify_admin_free_disk_space:
       subject: "Espace disque faible"
       body: "Attention : l'espace disque disponible sur le serveur hébergeant Fab-manager est inférieur à %{THRESHOLD} MiO. Cela peut nuire à son bon fonctionnement et empêcher la sauvegarde de certaines données. Actuellement, il reste %{AVAILABLE} MiO d'espace libre sur le point de montage."
-
     notify_admin_close_period_reminder:
       subject: "Pensez à clôturer vos périodes comptables"
       body:
         warning_last_closed_period_over_1_year: "Pensez à clôturer régulièrement vos périodes comptables. Les comptes sont actuellement clôturés jusqu'au %{LAST_END}."
         warning_no_closed_periods: "Pensez à clôturer régulièrement vos périodes comptables. Vous devez clôturer des périodes depuis le %{FIRST_DATE}."
-
     notify_admin_archive_complete:
       subject: "Archivage terminé"
       body:
@@ -306,18 +263,15 @@ fr:
         click_to_download: "Pour télécharger l'archive ZIP, cliquez"
         here: "ici."
         save_on_secured: "N'oubliez pas que vous devez obligatoirement enregistrer cette archive sur un support externe sécurisé, qui peut vous être demandé par l'administration fiscale lors d'un contrôle."
-
     notify_privacy_policy_changed:
       subject: "Mise à jour de la Politique de confidentialité"
       body:
         content_html: "<p>Nous souhaitons vous signaler que nous venons de mettre à jour notre politique de confidentialité.</p><p>Nous pouvons apporter régulièrement des modifications à notre politique de confidentialité. Conformément à la réglementation, une notification vous sera envoyée à chaque mise à jour.</p><p>En accédant ou en utilisant nos services après la mise à jour de la Politique de confidentialité, nous considérerons que vous acceptez les termes de celle-ci, mises à jour comprises.</p>"
         link_to_policy: "Cliquez ici pour consultez la politique de confidentialité."
-
     notify_admin_refund_created:
       subject: "Un avoir a été généré"
       body:
         refund_created: "Un avoir de %{AMOUNT} a été généré sur la facture %{INVOICE} de l'utilisateur %{USER}"
         download: "Cliquez ici pour télécharger cet avoir"
-
     shared:
       hello: "Bonjour %{user_name}"

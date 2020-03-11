@@ -350,8 +350,6 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
       if (Fablab.featureTourDisplay !== 'manual' && $scope.currentUser.profile.tours.indexOf('calendar') < 0) {
         uitour.start();
       }
-      // start this tour when an user press F1 - this is contextual help
-      window.addEventListener('keydown', handleF1);
     }
 
     /* PRIVATE SCOPE */
@@ -359,12 +357,7 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
     /**
      * Kind of constructor: these actions will be realized first when the controller is loaded
      */
-    const initialize = function () {
-      // listen the $destroy event of the controller to remove the F1 key binding
-      $scope.$on('$destroy', function () {
-        window.removeEventListener('keydown', handleF1);
-      });
-    };
+    const initialize = function () {};
 
     /**
      * Return an enumerable meaninful string for the gender of the provider user
@@ -522,18 +515,6 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
       // we unselect the current event to keep consistency
       $scope.availability = null;
       $scope.availabilityDom = null;
-    };
-
-    /**
-     * Callback used to trigger the feature tour when the user press the F1 key.
-     * @param e {KeyboardEvent}
-     */
-    const handleF1 = function (e) {
-      if (e.key === 'F1') {
-        e.preventDefault();
-        const tour = uiTourService.getTourByName('calendar');
-        if (tour) { tour.start(); }
-      }
     };
 
     // !!! MUST BE CALLED AT THE END of the controller

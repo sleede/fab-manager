@@ -1,8 +1,8 @@
 ach:
   app:
     public:
+      #header and "about" page
       common:
-        #header and "about" page
         about_the_fablab: "crwdns8805:0GENDER={GENDER}crwdnd8805:0NAME={NAME}crwdne8805:0"
         return: "crwdns8807:0crwdne8807:0"
         #cookies
@@ -20,6 +20,8 @@ ach:
         my_events: "crwdns8827:0crwdne8827:0"
         my_invoices: "crwdns8829:0crwdne8829:0"
         my_wallet: "crwdns8831:0crwdne8831:0"
+        #contextual help
+        help: "crwdns19580:0crwdne19580:0"
         #login/logout
         sign_out: "crwdns8833:0crwdne8833:0"
         sign_up: "crwdns8835:0crwdne8835:0"
@@ -38,15 +40,15 @@ ach:
         subscriptions: "crwdns8857:0crwdne8857:0"
         public_calendar: "crwdns8859:0crwdne8859:0"
         #left menu (admin)
-        trainings_monitoring: "crwdns8861:0crwdne8861:0"
-        manage_the_calendar: "crwdns8863:0crwdne8863:0"
-        manage_the_users: "crwdns8865:0crwdne8865:0"
-        manage_the_invoices: "crwdns8867:0crwdne8867:0"
+        trainings_monitoring: "crwdns19582:0crwdne19582:0"
+        manage_the_calendar: "crwdns19584:0crwdne19584:0"
+        manage_the_users: "crwdns19586:0crwdne19586:0"
+        manage_the_invoices: "crwdns19588:0crwdne19588:0"
         subscriptions_and_prices: "crwdns8869:0crwdne8869:0"
-        manage_the_events: "crwdns8871:0crwdne8871:0"
-        manage_the_machines: "crwdns8873:0crwdne8873:0"
-        manage_the_spaces: "crwdns8875:0crwdne8875:0"
-        manage_the_projects_elements: "crwdns8877:0crwdne8877:0"
+        manage_the_events: "crwdns19590:0crwdne19590:0"
+        manage_the_machines: "crwdns19592:0crwdne19592:0"
+        manage_the_spaces: "crwdns19594:0crwdne19594:0"
+        manage_the_projects_elements: "crwdns19596:0crwdne19596:0"
         statistics: "crwdns8879:0crwdne8879:0"
         customization: "crwdns8881:0crwdne8881:0"
         open_api_clients: "crwdns8883:0crwdne8883:0"
@@ -91,7 +93,7 @@ ach:
         used_for_reservation: "crwdns8959:0crwdne8959:0"
         used_for_profile: "crwdns8961:0crwdne8961:0"
         public_profile: "crwdns8963:0crwdne8963:0"
-        you_will_receive_confirmation_instructions_by_email_detailed: "crwdns19539:0crwdne19539:0"
+        you_will_receive_confirmation_instructions_by_email_detailed: "crwdns19598:0crwdne19598:0"
         #password modification modal
         change_your_password: "crwdns8965:0crwdne8965:0"
         your_new_password: "crwdns8967:0crwdne8967:0"
@@ -99,39 +101,39 @@ ach:
         #connection modal
         connection: "crwdns8971:0crwdne8971:0"
         password_forgotten: "crwdns8973:0crwdne8973:0"
-        confirm_my_account: "crwdns19541:0crwdne19541:0"
-        not_registered_to_the_fablab: "crwdns8975:0crwdne8975:0"
+        confirm_my_account: "crwdns19600:0crwdne19600:0"
+        not_registered_to_the_fablab: "crwdns20240:0crwdne20240:0"
         create_an_account: "crwdns8977:0crwdne8977:0"
         wrong_email_or_password: "crwdns8979:0crwdne8979:0"
         caps_lock_is_on: "crwdns8981:0crwdne8981:0"
         #confirmation modal
-        you_will_receive_confirmation_instructions_by_email: crwdns19543:0crwdne19543:0
+        you_will_receive_confirmation_instructions_by_email: "crwdns19602:0crwdne19602:0"
         #forgotten password modal
         your_email_address_is_unknown: "crwdns8983:0crwdne8983:0"
         you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password: "crwdns8985:0crwdne8985:0"
         #Fab-manager's version
         version: "crwdns8987:0crwdne8987:0"
-        upgrade_fabmanager: "crwdns19545:0crwdne19545:0"
-        current_version: "crwdns19547:0{VERSION}crwdne19547:0"
-        upgrade_to: "crwdns19549:0{VERSION}crwdne19549:0"
-        read_more: "crwdns19551:0crwdne19551:0"
-        security_version_html: "crwdns19553:0crwdne19553:0"
-        how_to: "crwdns19555:0crwdne19555:0"
+        upgrade_fabmanager: "crwdns19604:0crwdne19604:0"
+        current_version: "crwdns19606:0{VERSION}crwdne19606:0"
+        upgrade_to: "crwdns19608:0{VERSION}crwdne19608:0"
+        read_more: "crwdns19610:0crwdne19610:0"
+        security_version_html: "crwdns19612:0crwdne19612:0"
+        how_to: "crwdns19614:0crwdne19614:0"
         #Notifications
         and_NUMBER_other_notifications: "crwdns8989:0NUMBER={NUMBER}crwdnd8989:0NUMBER={NUMBER}crwdne8989:0"
+      #about page
       about:
-        #about page
         read_the_fablab_policy: "crwdns8991:0crwdne8991:0"
         read_the_fablab_s_general_terms_and_conditions: "crwdns8993:0crwdne8993:0"
         your_fablab_s_contacts: "crwdns8995:0crwdne8995:0"
         privacy_policy: "crwdns8997:0crwdne8997:0"
+      #'privacy policy' page
       privacy:
-        #'privacy policy' page
         title: "crwdns8999:0crwdne8999:0"
         dpo: "crwdns9001:0crwdne9001:0"
         last_update: "crwdns9003:0crwdne9003:0"
+      #home page
       home:
-        #home page
         latest_documented_projects: "crwdns9005:0crwdne9005:0"
         follow_us: "crwdns9007:0crwdne9007:0"
         latest_tweets: "crwdns9009:0crwdne9009:0"
@@ -146,14 +148,15 @@ ach:
         from_time_to_time: "crwdns9025:0{START}crwdnd9025:0{END}crwdne9025:0"
         free_entry: "crwdns9027:0crwdne9027:0"
         free_admission: "crwdns9029:0crwdne9029:0"
-        full_price: "crwdns9031:0crwdne9031:0"
+        full_price: "crwdns20242:0crwdne20242:0"
         event_full: "crwdns9033:0crwdne9033:0"
-        still_available: "crwdns9035:0crwdne9035:0"
+        still_available: "crwdns20244:0crwdne20244:0"
+        all_day: "crwdns20246:0crwdne20246:0"
+      #projects gallery
       projects_list:
-        #projects gallery
         the_fablab_projects: "crwdns9037:0crwdne9037:0"
         add_a_project: "crwdns9039:0crwdne9039:0"
-        search_over_the_whole_network: "crwdns9041:0crwdne9041:0"
+        search_over_the_whole_network: "crwdns19616:0crwdne19616:0"
         tooltip_openlab_projects_switch: "crwdns9043:0crwdne9043:0"
         openlab_search_not_available_at_the_moment: "crwdns9045:0crwdne9045:0"
         project_search_result_is_empty: "crwdns9047:0crwdne9047:0"
@@ -167,8 +170,8 @@ ach:
         all_materials: "crwdns9063:0crwdne9063:0"
         load_next_projects: "crwdns9065:0crwdne9065:0"
         rough_draft: "crwdns9067:0crwdne9067:0"
+      #details of a projet
       projects_show:
-        #details of a projet
         rough_draft: "crwdns9069:0crwdne9069:0"
         project_description: "crwdns9071:0crwdne9071:0"
         by_name: "crwdns9073:0{NAME}crwdne9073:0"
@@ -196,17 +199,18 @@ ach:
         message_is_required: "crwdns9117:0crwdne9117:0"
         report: "crwdns9119:0crwdne9119:0"
         do_you_really_want_to_delete_this_project: "crwdns9121:0crwdne9121:0"
+      #list of machines
       machines_list:
-        #list of machines
         the_fablab_s_machines: "crwdns9123:0crwdne9123:0"
         add_a_machine: "crwdns9125:0crwdne9125:0"
+        new_availability: "crwdns19618:0crwdne19618:0"
         book: "crwdns9127:0crwdne9127:0"
         _or_the_: "crwdns9129:0crwdne9129:0"
         status_enabled: "crwdns9131:0crwdne9131:0"
         status_disabled: "crwdns9133:0crwdne9133:0"
         status_all: "crwdns9135:0crwdne9135:0"
+      #details of a machine
       machines_show:
-        #details of a machine
         book_this_machine: "crwdns9137:0crwdne9137:0"
         technical_specifications: "crwdns9139:0crwdne9139:0"
         files_to_download: "crwdns9141:0crwdne9141:0"
@@ -216,20 +220,20 @@ ach:
         do_you_really_want_to_delete_this_machine: "crwdns9149:0crwdne9149:0"
         unauthorized_operation: "crwdns9151:0crwdne9151:0"
         the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users: "crwdns9153:0crwdne9153:0"
+      #list of trainings
       trainings_list:
-        #list of trainings
         book: "crwdns9155:0crwdne9155:0"
         the_trainings: "crwdns9157:0crwdne9157:0"
+      #details of a training
       training_show:
-        #details of a training
         book_this_training: "crwdns9159:0crwdne9159:0"
         do_you_really_want_to_delete_this_training: "crwdns9161:0crwdne9161:0"
         unauthorized_operation: "crwdns9163:0crwdne9163:0"
         confirmation_required: "crwdns9165:0crwdne9165:0"
         the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "crwdns9167:0crwdne9167:0"
+      #summary of the subscriptions
       plans:
-        #summary of the subscriptions
-        subscriptions: "crwdns9169:0crwdne9169:0"
+        subscriptions: "crwdns19620:0crwdne19620:0"
         i_choose_that_plan: "crwdns9171:0crwdne9171:0"
         i_subscribe_online: "crwdns9173:0crwdne9173:0"
         i_already_subscribed: "crwdns9175:0crwdne9175:0"
@@ -255,9 +259,9 @@ ach:
         subscription_confirmation: "crwdns9215:0crwdne9215:0"
         here_is_the_NAME_subscription_summary: "crwdns9217:0{NAME}crwdne9217:0"
         confirm_payment_of_html: "crwdns9219:0ROLE={ROLE}crwdnd9219:0AMOUNT={AMOUNT}crwdne9219:0" #(contexte : validate a payment of $20,00)
-        online_payment_disabled: "crwdns9221:0crwdne9221:0"
+        online_payment_disabled: "crwdns20248:0crwdne20248:0"
+      #Fablab's events list
       events_list:
-        #Fablab's events list
         the_fablab_s_events: "crwdns9223:0crwdne9223:0"
         all_categories: "crwdns9225:0crwdne9225:0"
         for_all: "crwdns9227:0crwdne9227:0"
@@ -269,9 +273,10 @@ ach:
         add_an_event: "crwdns9239:0crwdne9239:0"
         load_the_next_events: "crwdns9241:0crwdne9241:0"
         full_price_: "crwdns9243:0crwdne9243:0"
-        to_date: crwdns10123:0crwdne10123:0
+        to_date: "crwdns19622:0crwdne19622:0" #eg. from 01/01 to 01/05
+        all_themes: "crwdns19624:0crwdne19624:0"
+      #details and booking of an event
       events_show:
-        #details and booking of an event
         event_description: "crwdns9247:0crwdne9247:0"
         downloadable_documents: "crwdns9249:0crwdne9249:0"
         information_and_booking: "crwdns9251:0crwdne9251:0"
@@ -280,8 +285,8 @@ ach:
         ending: "crwdns9257:0crwdne9257:0"
         opening_hours: "crwdns9259:0crwdne9259:0"
         all_day: "crwdns9261:0crwdne9261:0"
-        from_time: crwdns10125:0crwdne10125:0
-        to_time: crwdns10127:0crwdne10127:0
+        from_time: "crwdns19626:0crwdne19626:0" #eg. from 18:00 to 21:00
+        to_time: "crwdns19628:0crwdne19628:0" #eg. from 18:00 to 21:00
         full_price_: "crwdns9267:0crwdne9267:0"
         tickets_still_availables: "crwdns9269:0crwdne9269:0"
         sold_out: "crwdns9271:0crwdne9271:0"
@@ -297,31 +302,31 @@ ach:
         book: "crwdns9291:0crwdne9291:0"
         confirm_and_pay: "crwdns9293:0crwdne9293:0"
         confirm_payment_of_html: "crwdns9295:0ROLE={ROLE}crwdnd9295:0AMOUNT={AMOUNT}crwdne9295:0" #(contexte : validate a payment of $20,00)
-        online_payment_disabled: "crwdns9297:0crwdne9297:0"
+        online_payment_disabled: "crwdns20250:0crwdne20250:0"
         please_select_a_member_first: "crwdns9299:0crwdne9299:0"
         change_the_reservation: "crwdns9301:0crwdne9301:0"
         you_can_shift_this_reservation_on_the_following_slots: "crwdns9303:0crwdne9303:0"
         confirmation_required: "crwdns9305:0crwdne9305:0"
         do_you_really_want_to_delete_this_event: "crwdns9307:0crwdne9307:0"
-        delete_recurring_event: "crwdns19557:0crwdne19557:0"
-        delete_this_event: "crwdns19559:0crwdne19559:0"
-        delete_this_and_next: "crwdns19561:0crwdne19561:0"
-        delete_all: "crwdns19563:0crwdne19563:0"
-        event_successfully_deleted: "crwdns9309:0crwdne9309:0"
-        events_deleted: "crwdns19565:0COUNT={COUNT}crwdnd19565:0COUNT={COUNT}crwdne19565:0"
-        unable_to_delete_the_event: "crwdns19567:0crwdne19567:0"
-        events_not_deleted: "crwdns19569:0TOTAL={TOTAL}crwdnd19569:0COUNT={COUNT}crwdnd19569:0COUNT={COUNT}crwdnd19569:0COUNT={COUNT}crwdne19569:0"
+        delete_recurring_event: "crwdns19630:0crwdne19630:0"
+        delete_this_event: "crwdns19632:0crwdne19632:0"
+        delete_this_and_next: "crwdns19634:0crwdne19634:0"
+        delete_all: "crwdns19636:0crwdne19636:0"
+        event_successfully_deleted: "crwdns20252:0crwdne20252:0"
+        events_deleted: "crwdns19638:0COUNT={COUNT}crwdnd19638:0COUNT={COUNT}crwdne19638:0"
+        unable_to_delete_the_event: "crwdns19640:0crwdne19640:0"
+        events_not_deleted: "crwdns19642:0TOTAL={TOTAL}crwdnd19642:0COUNT={COUNT}crwdnd19642:0COUNT={COUNT}crwdnd19642:0COUNT={COUNT}crwdne19642:0"
         cancel_the_reservation: "crwdns9313:0crwdne9313:0"
         do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "crwdns9315:0crwdne9315:0"
-        reservation_was_successfully_cancelled: "crwdns9317:0crwdne9317:0"
+        reservation_was_successfully_cancelled: "crwdns20254:0crwdne20254:0"
         cancellation_failed: "crwdns9319:0crwdne9319:0"
-        event_is_over: "crwdns9321:0crwdne9321:0"
+        event_is_over: "crwdns20256:0crwdne20256:0"
         thanks_for_coming: "crwdns9323:0crwdne9323:0"
         view_event_list: "crwdns9325:0crwdne9325:0"
         share_on_facebook: "crwdns9327:0crwdne9327:0"
         share_on_twitter: "crwdns9329:0crwdne9329:0"
+      #public calendar
       calendar:
-        #public calendar
         calendar: "crwdns9331:0crwdne9331:0"
         show_unavailables: "crwdns9333:0crwdne9333:0"
         filter_calendar: "crwdns9335:0crwdne9335:0"
@@ -330,16 +335,17 @@ ach:
         spaces: "crwdns9341:0crwdne9341:0"
         events: "crwdns9343:0crwdne9343:0"
         externals: "crwdns9345:0crwdne9345:0"
+      #list of spaces
       spaces_list:
-        #list of spaces
         the_spaces: "crwdns9347:0crwdne9347:0"
+        new_availability: "crwdns19644:0crwdne19644:0"
         add_a_space: "crwdns9349:0crwdne9349:0"
         status_enabled: "crwdns9351:0crwdne9351:0"
         status_disabled: "crwdns9353:0crwdne9353:0"
         status_all: "crwdns9355:0crwdne9355:0"
         book: "crwdns9357:0crwdne9357:0"
+      #display the details of a space
       space_show:
-        #display the details of a space
         book_this_space: "crwdns9359:0crwdne9359:0"
         unauthorized_operation: "crwdns9361:0crwdne9361:0"
         confirmation_required: "crwdns9363:0crwdne9363:0"
@@ -348,3 +354,82 @@ ach:
         characteristics: "crwdns9369:0crwdne9369:0"
         files_to_download: "crwdns9371:0crwdne9371:0"
         projects_using_the_space: "crwdns9373:0crwdne9373:0"
+      tour:
+        conclusion:
+          title: "crwdns19646:0crwdne19646:0"
+          content: "crwdns20176:0crwdne20176:0"
+        welcome:
+          welcome:
+            title: "crwdns19650:0crwdne19650:0"
+            content: "crwdns19652:0crwdne19652:0"
+          home:
+            title: "crwdns19654:0crwdne19654:0"
+            content: "crwdns19656:0crwdne19656:0"
+          machines:
+            title: "crwdns19658:0crwdne19658:0"
+            content: "crwdns19660:0crwdne19660:0"
+          trainings:
+            title: "crwdns19662:0crwdne19662:0"
+            content: "crwdns19664:0crwdne19664:0"
+          spaces:
+            title: "crwdns19666:0crwdne19666:0"
+            content: "crwdns19668:0crwdne19668:0"
+          events:
+            title: "crwdns19670:0crwdne19670:0"
+            content: "crwdns19672:0crwdne19672:0"
+          calendar:
+            title: "crwdns19674:0crwdne19674:0"
+            content: "crwdns19676:0crwdne19676:0"
+          projects:
+            title: "crwdns19678:0crwdne19678:0"
+            content: "crwdns20258:0crwdne20258:0"
+          plans:
+            title: "crwdns19682:0crwdne19682:0"
+            content: "crwdns19684:0crwdne19684:0"
+          admin:
+            title: "crwdns19686:0crwdne19686:0"
+            content: "crwdns19688:0crwdne19688:0"
+          about:
+            title: "crwdns19690:0crwdne19690:0"
+            content: "crwdns19692:0crwdne19692:0"
+          notifications:
+            title: "crwdns19694:0crwdne19694:0"
+            content: "crwdns19696:0crwdne19696:0"
+          profile:
+            title: "crwdns19698:0crwdne19698:0"
+            content: "crwdns19700:0crwdne19700:0"
+          news:
+            title: "crwdns19702:0crwdne19702:0"
+            content: "crwdns20264:0crwdne20264:0"
+          last_projects:
+            title: "crwdns19706:0crwdne19706:0"
+            content: "crwdns19708:0crwdne19708:0"
+          last_tweet:
+            title: "crwdns19710:0crwdne19710:0"
+            content: "crwdns20266:0crwdne20266:0"
+          last_members:
+            title: "crwdns19714:0crwdne19714:0"
+            content: "crwdns19716:0crwdne19716:0"
+          next_events:
+            title: "crwdns19718:0crwdne19718:0"
+            content: "crwdns19720:0crwdne19720:0"
+          customize:
+            title: "crwdns19722:0crwdne19722:0"
+            content: "crwdns19724:0crwdne19724:0"
+          version:
+            title: "crwdns19726:0crwdne19726:0"
+            content: "crwdns19728:0crwdne19728:0"
+        machines:
+          welcome:
+            title: "crwdns19730:0crwdne19730:0"
+            content: "crwdns19732:0crwdne19732:0"
+          view:
+            title: "crwdns19734:0crwdne19734:0"
+            content: "crwdns19736:0crwdne19736:0"
+        spaces:
+          welcome:
+            title: "crwdns19738:0crwdne19738:0"
+            content: "crwdns19740:0crwdne19740:0"
+          view:
+            title: "crwdns19742:0crwdne19742:0"
+            content: "crwdns19744:0crwdne19744:0"

@@ -1,53 +1,53 @@
 ach:
   date:
     abbr_day_names:
-      - crwdns4217:0crwdne4217:0
-      - crwdns4219:0crwdne4219:0
-      - crwdns4221:0crwdne4221:0
-      - crwdns4223:0crwdne4223:0
-      - crwdns4225:0crwdne4225:0
-      - crwdns4227:0crwdne4227:0
-      - crwdns4229:0crwdne4229:0
+    - Sun
+    - Mon
+    - Tue
+    - Wed
+    - Thu
+    - Fri
+    - Sat
     abbr_month_names:
-      -
-      - crwdns4231:0crwdne4231:0
-      - crwdns4233:0crwdne4233:0
-      - crwdns4235:0crwdne4235:0
-      - crwdns4237:0crwdne4237:0
-      - crwdns4239:0crwdne4239:0
-      - crwdns4241:0crwdne4241:0
-      - crwdns4243:0crwdne4243:0
-      - crwdns4245:0crwdne4245:0
-      - crwdns4247:0crwdne4247:0
-      - crwdns4249:0crwdne4249:0
-      - crwdns4251:0crwdne4251:0
-      - crwdns4253:0crwdne4253:0
+    -
+    - Jan
+    - Feb
+    - Mar
+    - Apr
+    - May
+    - Jun
+    - Jul
+    - Aug
+    - Sep
+    - Oct
+    - Nov
+    - Dec
     day_names:
-      - crwdns4255:0crwdne4255:0
-      - crwdns4257:0crwdne4257:0
-      - crwdns4259:0crwdne4259:0
-      - crwdns4261:0crwdne4261:0
-      - crwdns4263:0crwdne4263:0
-      - crwdns4265:0crwdne4265:0
-      - crwdns4267:0crwdne4267:0
+    - Sunday
+    - Monday
+    - Tuesday
+    - Wednesday
+    - Thursday
+    - Friday
+    - Saturday
     formats:
       default: "%Y-%m-%d"
       long: "%B %d, %Y"
       short: "%b %d"
     month_names:
-      -
-      - crwdns4275:0crwdne4275:0
-      - crwdns4277:0crwdne4277:0
-      - crwdns4279:0crwdne4279:0
-      - crwdns4281:0crwdne4281:0
-      - crwdns4283:0crwdne4283:0
-      - crwdns4285:0crwdne4285:0
-      - crwdns4287:0crwdne4287:0
-      - crwdns4289:0crwdne4289:0
-      - crwdns4291:0crwdne4291:0
-      - crwdns4293:0crwdne4293:0
-      - crwdns4295:0crwdne4295:0
-      - crwdns4297:0crwdne4297:0
+    -
+    - January
+    - February
+    - March
+    - April
+    - May
+    - June
+    - July
+    - August
+    - September
+    - October
+    - November
+    - December
     order:
     - :year
     - :month
@@ -55,94 +55,94 @@ ach:
   datetime:
     distance_in_words:
       about_x_hours:
-        one: crwdns4305:1crwdne4305:1
-        other: crwdns4305:5%{count}crwdne4305:5
+        one: about 1 hour
+        other: about %{count} hours
       about_x_months:
-        one: crwdns4307:1crwdne4307:1
-        other: crwdns4307:5%{count}crwdne4307:5
+        one: about 1 month
+        other: about %{count} months
       about_x_years:
-        one: crwdns4309:1crwdne4309:1
-        other: crwdns4309:5%{count}crwdne4309:5
+        one: about 1 year
+        other: about %{count} years
       almost_x_years:
-        one: crwdns4311:1crwdne4311:1
-        other: crwdns4311:5%{count}crwdne4311:5
-      half_a_minute: crwdns4313:0crwdne4313:0
+        one: almost 1 year
+        other: almost %{count} years
+      half_a_minute: half a minute
       less_than_x_minutes:
-        one: crwdns4315:1crwdne4315:1
-        other: crwdns4315:5%{count}crwdne4315:5
+        one: less than a minute
+        other: less than %{count} minutes
       less_than_x_seconds:
-        one: crwdns4317:1crwdne4317:1
-        other: crwdns4317:5%{count}crwdne4317:5
+        one: less than 1 second
+        other: less than %{count} seconds
       over_x_years:
-        one: crwdns4319:1crwdne4319:1
-        other: crwdns4319:5%{count}crwdne4319:5
+        one: over 1 year
+        other: over %{count} years
       x_days:
-        one: crwdns4321:1crwdne4321:1
-        other: "crwdns4321:5%{count}crwdne4321:5"
+        one: 1 day
+        other: "%{count} days"
       x_minutes:
-        one: crwdns4323:1crwdne4323:1
-        other: "crwdns4323:5%{count}crwdne4323:5"
+        one: 1 minute
+        other: "%{count} minutes"
       x_months:
-        one: crwdns4325:1crwdne4325:1
-        other: "crwdns4325:5%{count}crwdne4325:5"
+        one: 1 month
+        other: "%{count} months"
       x_seconds:
-        one: crwdns4327:1crwdne4327:1
-        other: "crwdns4327:5%{count}crwdne4327:5"
+        one: 1 second
+        other: "%{count} seconds"
     prompts:
-      day: crwdns4329:0crwdne4329:0
-      hour: crwdns4331:0crwdne4331:0
-      minute: crwdns4333:0crwdne4333:0
-      month: crwdns4335:0crwdne4335:0
-      second: crwdns4337:0crwdne4337:0
-      year: crwdns4339:0crwdne4339:0
+      day: Day
+      hour: Hour
+      minute: Minute
+      month: Month
+      second: Seconds
+      year: Year
   errors:
-    format: "crwdns4341:0%{attribute}crwdnd4341:0%{message}crwdne4341:0"
+    format: "%{attribute} %{message}"
     messages:
-      accepted: crwdns4343:0crwdne4343:0
-      blank: crwdns4345:0crwdne4345:0
-      present: crwdns4347:0crwdne4347:0
-      confirmation: crwdns4349:0%{attribute}crwdne4349:0
-      empty: crwdns4351:0crwdne4351:0
-      equal_to: crwdns4353:0%{count}crwdne4353:0
-      even: crwdns4355:0crwdne4355:0
-      exclusion: crwdns4357:0crwdne4357:0
-      greater_than: crwdns4359:0%{count}crwdne4359:0
-      greater_than_or_equal_to: crwdns4361:0%{count}crwdne4361:0
-      inclusion: crwdns4363:0crwdne4363:0
-      invalid: crwdns4365:0crwdne4365:0
-      less_than: crwdns4367:0%{count}crwdne4367:0
-      less_than_or_equal_to: crwdns4369:0%{count}crwdne4369:0
-      not_a_number: crwdns4371:0crwdne4371:0
-      not_an_integer: crwdns4373:0crwdne4373:0
-      odd: crwdns4375:0crwdne4375:0
-      record_invalid: 'crwdns4377:0%{errors}crwdne4377:0'
+      accepted: must be accepted
+      blank: can't be blank
+      present: must be blank
+      confirmation: doesn't match %{attribute}
+      empty: can't be empty
+      equal_to: must be equal to %{count}
+      even: must be even
+      exclusion: is reserved
+      greater_than: must be greater than %{count}
+      greater_than_or_equal_to: must be greater than or equal to %{count}
+      inclusion: is not included in the list
+      invalid: is invalid
+      less_than: must be less than %{count}
+      less_than_or_equal_to: must be less than or equal to %{count}
+      not_a_number: is not a number
+      not_an_integer: must be an integer
+      odd: must be odd
+      record_invalid: 'Validation failed: %{errors}'
       restrict_dependent_destroy:
-        one: crwdns4379:0%{record}crwdne4379:0
-        many: crwdns4381:0%{record}crwdne4381:0
-      taken: crwdns4383:0crwdne4383:0
+        one: Cannot delete record because a dependent %{record} exists
+        many: Cannot delete record because dependent %{record} exist
+      taken: has already been taken
       too_long:
-        one: crwdns4385:1crwdne4385:1
-        other: crwdns4385:5%{count}crwdne4385:5
+        one: is too long (maximum is 1 character)
+        other: is too long (maximum is %{count} characters)
       too_short:
-        one: crwdns4387:1crwdne4387:1
-        other: crwdns4387:5%{count}crwdne4387:5
+        one: is too short (minimum is 1 character)
+        other: is too short (minimum is %{count} characters)
       wrong_length:
-        one: crwdns4389:1crwdne4389:1
-        other: crwdns4389:5%{count}crwdne4389:5
-      other_than: crwdns4391:0%{count}crwdne4391:0
-      wrong_content_type: "crwdns4393:0crwdne4393:0"
+        one: is the wrong length (should be 1 character)
+        other: is the wrong length (should be %{count} characters)
+      other_than: must be other than %{count}
+      wrong_content_type: "content type is not allowed"
     template:
-      body: 'crwdns4395:0crwdne4395:0'
+      body: 'There were problems with the following fields:'
       header:
-        one: crwdns4397:1%{model}crwdne4397:1
-        other: "crwdns4397:5%{count}crwdnd4397:5%{model}crwdne4397:5"
+        one: 1 error prohibited this %{model} from being saved
+        other: "%{count} errors prohibited this %{model} from being saved"
   helpers:
     select:
-      prompt: crwdns4399:0crwdne4399:0
+      prompt: Please select
     submit:
-      create: crwdns4401:0%{model}crwdne4401:0
-      submit: crwdns4403:0%{model}crwdne4403:0
-      update: crwdns4405:0%{model}crwdne4405:0
+      create: Create %{model}
+      submit: Save %{model}
+      update: Update %{model}
   number:
     currency:
       format:
@@ -163,11 +163,11 @@ ach:
       decimal_units:
         format: "%n %u"
         units:
-          billion: crwdns4425:0crwdne4425:0
-          million: crwdns4427:0crwdne4427:0
-          quadrillion: crwdns4429:0crwdne4429:0
-          thousand: crwdns4431:0crwdne4431:0
-          trillion: crwdns4433:0crwdne4433:0
+          billion: Billion
+          million: Million
+          quadrillion: Quadrillion
+          thousand: Thousand
+          trillion: Trillion
           unit: ''
       format:
         delimiter: ''
@@ -178,12 +178,12 @@ ach:
         format: "%n %u"
         units:
           byte:
-            one: crwdns4443:1crwdne4443:1
-            other: crwdns4443:5crwdne4443:5
-          gb: crwdns4445:0crwdne4445:0
-          kb: crwdns4447:0crwdne4447:0
-          mb: crwdns4449:0crwdne4449:0
-          tb: crwdns4451:0crwdne4451:0
+            one: Byte
+            other: Bytes
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
     percentage:
       format:
         delimiter: ''
@@ -193,9 +193,9 @@ ach:
         delimiter: ''
   support:
     array:
-      last_word_connector: "crwdns4459:0crwdne4459:0"
-      two_words_connector: "crwdns4461:0crwdne4461:0"
-      words_connector: "crwdns4463:0crwdne4463:0"
+      last_word_connector: ", and "
+      two_words_connector: " and "
+      words_connector: ", "
   time:
     am: am
     formats:

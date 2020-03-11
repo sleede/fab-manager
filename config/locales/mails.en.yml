@@ -1,17 +1,16 @@
 en:
   layouts:
     notifications_mailer:
-      see_you_later: "See you soon on {GENDER, select, neutral{} other{the}}"  # messageFormat interpolation
+      see_you_later: "See you soon on {GENDER, select, neutral{} other{the}}"  #messageFormat interpolation
       sincerely: "Sincerely,"
       signature: "The Fab Lab team."
       do_not_reply: "Please do not reply to this email."
-
   users_mailer:
     notify_user_account_created:
       subject: "Your FabLab account has been successfully created"
       body:
         hello: "Hello %{NAME},"
-        intro: "The FabLab team has just created an account for you, on {GENDER, select, neutral{} other{the}} {FABLAB} website:"  # messageFormat interpolation
+        intro: "The FabLab team has just created an account for you, on {GENDER, select, neutral{} other{the}} {FABLAB} website:"  #messageFormat interpolation
         connection_parameters: "Here are your connection parameters:"
         account_name: "Account name:"
         password: "Password:"
@@ -20,25 +19,21 @@ en:
         to_use_platform: "To use the website, please"
         logon_or_login: "create a new account or log in by clicking here."
         token_if_link_problem: "If you experience issues with the link, you can enter the following code at your first connection attempt:"
-
   notifications_mailer:
     notify_user_user_group_changed:
       subject: "Your have changed group"
       body:
         warning: "You have changed group. Inspections can be conducted at the lab to verify the legitimacy of this change."
-
     notify_admin_user_group_changed:
       subject: "A member has changed group"
       body:
         user_changed_group_html: "User <em><strong>%{NAME}</strong></em> has changed group."
         previous_group: "Previous group:"
         new_group: "New group:"
-
     notify_admin_subscription_extended:
       subject: "A subscription has been extended"
       body:
-        subscription_extended_html: "Subscription <strong><em>{PLAN}</em></strong> for user <strong><em>{NAME}</strong></em> has been extended {FREE, select, true{for free} other{}} until {DATE}."   # messageFormat interpolation
-
+        subscription_extended_html: "Subscription <strong><em>{PLAN}</em></strong> for user <strong><em>{NAME}</strong></em> has been extended {FREE, select, true{for free} other{}} until {DATE}."   #messageFormat interpolation
     notify_member_subscription_extended:
       subject: "Your subscription plan has been extended"
       body:
@@ -46,111 +41,93 @@ en:
         has_been_extended: "has been extended"
         free: "for free"
         until: "until"
-
     notify_partner_subscribed_plan:
       subject: "A subscription plan has been purchased"
       body:
         a_plan: "A subscription plan"
         was_purchased_by_member: "has been purchased by user"
-
     notify_admin_when_project_published:
       subject: "A project has been published"
       body:
         new_project_published: "A new project has been published:"
-
     notify_project_collaborator_to_valid:
       subject: "Invitation to collaborate on a project"
       body:
         your_are_invited_to_take_part_in_a_project: "You are invited to join this project:"
         to_accept_the_invitation_click_on_following_link: "To accept this invitation, please click on the following link:"
-
     notify_project_author_when_collaborator_valid:
       subject: "New collaborator in your project"
       body:
         the_member: "the user"
         accepted_your_invitation_to_take_part_in_the_project: "has accepted your invitation to join your project:"
-
     notify_user_training_valid:
       subject: "Your training has been validated"
       body:
         your_training: "Your training"
         has_been_validated: "has been validated"
-
     notify_member_subscribed_plan:
       subject: "Your subscription has been successfully purchased"
       body:
         plan_subscribed_html: "You have subscribed the plan: <strong><em>%{PLAN}</em></strong>."
         rolling_subscription_stops_on: "Your subscription will end %{DURATION} after your first training. Otherwise, it will stop on %{DATE}."
         subscription_stops_on: "Your subscription will end on %{DATE}."
-
     notify_member_create_reservation:
       subject: "Your reservation has been successfully saved"
       body:
         reservation_saved_html: "You reservation <strong><em>%{RESERVATION}</em></strong> has been successfully saved"
         your_reserved_slots: "Your reserved slots are:"
-
     notify_member_subscribed_plan_is_changed:
       subject: "Your subscription has been updated"
       body:
         new_plan_html: "You have changed your plan to <strong><em>%{PLAN}</em></strong>."
-
     notify_admin_member_create_reservation:
       subject: "New reservation"
       body:
         member_reserved_html: "User %{NAME} has reserved <strong><em>%{RESERVABLE}</em></strong>."
         reserved_slots: "Reserved slots are:"
-
     notify_member_slot_is_modified:
       subject: "Your reservation slot has been successfully changed"
       body:
         reservation_changed_to: "Your reservation slot has been changed to:"
         previous_date: "Previous date:"
-
     notify_admin_slot_is_modified:
       subject: "A reservation slot has been modified"
       body:
         slot_modified: "User %{NAME} had modified his reservation slot"
         new_date: "New slot"
         old_date: "Previous slot"
-
     notify_admin_when_user_is_created:
       subject: "A user account has been created"
       body:
         new_account_created: "A new user account has been created on the website:"
         account_for_organization: "This account manage an organization:"
-
     notify_admin_subscribed_plan:
       subject: "A subscription has been purchased"
       body:
         plan_subscribed_html: "A plan <strong><em>%{PLAN}</em></strong> has been subscribed by user <strong><em>%{NAME}</strong></em>."
-
     notify_member_invoice_ready:
       subject: "Your FabLab's invoice"
       body:
-        please_find_attached_html: "Please find as attached file your invoice from {DATE}, with an amount of {AMOUNT} concerning your {TYPE, select, Reservation{reservation} other{subscription}}."  # messageFormat interpolation
+        please_find_attached_html: "Please find as attached file your invoice from {DATE}, with an amount of {AMOUNT} concerning your {TYPE, select, Reservation{reservation} other{subscription}}."  #messageFormat interpolation
         invoice_in_your_dashboard_html:  "You can access your invoice in %{DASHBOARD} on the Fab Lab website."
         your_dashboard: "your dashboard"
-
     notify_member_reservation_reminder:
       subject: "Reservation reminder"
       body:
         this_is_a_reminder_about_your_reservation_RESERVABLE_to_be_held_on_DATE_html: "This is a reminder about your reservation <strong>%{RESERVABLE}</strong> to be held on <em>%{DATE}</em>"
         this_reservation_concerns_the_following_slots: "This reservation concerns the following slots:"
-
     notify_member_avoir_ready:
       subject: "Your FabLab's refund invoice"
       body:
-        please_find_attached_html: "Please find as attached file your refund invoice from {DATE}, with an amount of {AMOUNT} concerning your {TYPE, select, Reservation{reservation} WalletTransaction{wallet credit} other{subscription}}."  # messageFormat interpolation
+        please_find_attached_html: "Please find as attached file your refund invoice from {DATE}, with an amount of {AMOUNT} concerning your {TYPE, select, Reservation{reservation} WalletTransaction{wallet credit} other{subscription}}."  #messageFormat interpolation
         invoice_in_your_dashboard_html: "You can access your refund invoice in %{DASHBOARD} on the Fab Lab website."
         your_dashboard: "your dashboard"
-
     notify_member_subscription_will_expire_in_7_days:
       subject: "Your subscription expires in 7 days"
       body:
         your_plan: "you plan"
         expires_in_7_days: "will expire in 7 days."
         to_renew_your_plan_follow_the_link: "Please, follow this link to renew your plan"
-
     notify_member_subscription_is_expired:
       subject: "Your subscription has expired"
       body:
@@ -158,41 +135,34 @@ en:
         has_expired: "has expired."
         you_can_go_to: "Please go to"
         to_renew_your_plan: "to renew you plan"
-
     notify_admin_subscription_will_expire_in_7_days:
       subject: "A member subscription expires in 7 days"
       body:
         subscription_will_expire_html: "Subscription plan for user %{NAME} <strong><em>%{PLAN}</em></strong> will expire in 7 days."
-
     notify_admin_subscription_is_expired:
       subject: "A member subscription has expired"
       body:
         subscription_expired_html: "Subscription plan for user %{NAME} <strong><em>%{PLAN}</em></strong> is now expired."
-
     notify_admin_subscription_canceled:
       subject: "A member subscription has been cancelled"
       body:
         subscription_canceled_html: "Subscription <strong><em>%{PLAN}</em></strong> for user %{NAME} has been cancelled."
-
     notify_member_subscription_canceled:
       subject: "Your subscription has been cancelled"
       body:
         your_plan_was_canceled: "Your subscription plan has been cancelled."
         your_plan: "your subscription plan"
         end_at: "ends on"
-
     notify_member_slot_is_canceled:
       subject: "Your reservation has been canceled"
       body:
         reservation_canceled: "Your reservation for %{RESERVABLE} has been canceled"
-
     notify_admin_slot_is_canceled:
       subject: "A reservation has been cancelled"
       body:
         member_cancelled: "User %{NAME} has cancelled his reservation"
         item_details: "%{START} - %{END}, concerning %{RESERVABLE}"
         generate_refund: "Do not forget to generate a credit note or a refund for this cancellation."
-
     notify_admin_when_user_is_imported:
       subject: "A user account has been imported from the SSO"
       body:
@@ -201,12 +171,10 @@ en:
         known_information: "Here is what we know about this provider:"
         address_already_used: "This address is already associated with another user"
         no_more_info_available: "No other info about this user can be provided before he completes his profile."
-
     notify_user_profile_complete:
       subject: "You now have access to the whole website"
       body:
         message: "Your account informations has been correctly updated, you now have access to the whole website."
-
     notify_user_auth_migration:
       subject: "Important change to your FabLab account"
       body:
@@ -218,20 +186,17 @@ en:
         create_an_account_on: "create an account on"
         or_use_an_existing_account_clicking_here: "or use an existing account by clicking here"
         in_case_of_problem_enter_the_following_code: "In case of problem with this link, you can enter the following code at your first connection attempt in order to migrate your actual account into the new authentification system:"
-
     notify_admin_user_merged:
       subject: "An imported account has been merged with an existing account"
       body:
         imported_account_merged: "A previously imported user account via %{PROVIDER) has been merged with the existing account %{NAME}"
         provider_uid: "its provider ID is:"
-
     notify_admin_profile_complete:
       subject: "An imported account has completed its profile"
       body:
         account_completed: "An user account has completed its profile:"
         imported_account_completed: "An user account, previously imported through %{PROVIDER}, has completed its profile:"
         provider_id: "its provider ID is:"
-
     notify_admin_abuse_reported:
       subject: "An abusive content has been reported"
       body:
@@ -241,17 +206,14 @@ en:
         signaled_on: "flagged on:"
         message: "Message:"
         visit_management_interface: "Refer to the Reporting Management Interface for more information."
-
     notify_user_wallet_is_credited:
       subject: "Your wallet has been credited"
       body:
         wallet_credit_html: "Your wallet has been credited %{AMOUNT} by administrator."
-
     notify_admin_user_wallet_is_credited:
       subject: "The wallet of an user has been credited"
       body:
         wallet_credit_html: "The wallet of member %{USER} has been credited %{AMOUNT} by administrator %{ADMIN}."
-
     notify_admin_export_complete:
       subject: "Export completed"
       body:
@@ -274,31 +236,26 @@ en:
         file_type:
           xlsx: "Excel"
           csv: "CSV"
-
     notify_admin_import_complete:
       subject: "Import completed"
       body:
         you_made_an_import: "You have initiated an import %{CATEGORY}"
         category_members: "of the members"
         click_to_view_results: "Click here to view results"
-
     notify_member_about_coupon:
       subject: "Coupon"
       body:
         enjoy_a_discount_of_PERCENT_with_code_CODE: "Enjoy a discount of %{PERCENT}% on the whole site with the code %{CODE}."
         enjoy_a_discount_of_AMOUNT_with_code_CODE:  "Enjoy a discount of %{AMOUNT} on the whole site with the code %{CODE}."
         this_coupon_is_valid_USAGE_times_until_DATE_for_all_your_purchases: "This coupon is valid {USAGE, plural, =1{just once} other{many times}}: for all your purchases {TYPE, select, amount_off{at least equal to the amount of the coupon} other{}}, from now {DATE, select, NO-DATE{and without time limit} other{and until {DATE}}}."
-
     notify_admin_free_disk_space:
       subject: "Low disk space"
       body: "Warning: available disk space on the server hosting Fab-manager is less than %{THRESHOLD} MiB. This can affect its operation and prevent saving some data. Currently, %{AVAILABLE} MiB of free disk space remains available on the mount point."
-
     notify_admin_close_period_reminder:
       subject: "Remind to close your accounting periods"
       body:
         warning_last_closed_period_over_1_year: "Please remind to periodically close your accounting periods. Last closed period ended at %{LAST_END}."
         warning_no_closed_periods: "Please remind to periodically close your accounting periods. You have to close periods from %{FIRST_DATE}."
-
     notify_admin_archive_complete:
       subject: "Archiving completed"
       body:
@@ -306,18 +263,15 @@ en:
         click_to_download: "To download the ZIP archive, click"
         here: "here."
         save_on_secured: "Remember that you must save this archive on a secured external support, which may be requested by the tax authorities during a check."
-
     notify_privacy_policy_changed:
       subject: "Privacy policy updated"
       body:
         content_html: "<p>We wish to inform you that we have just updated our privacy policy.</p><p>We may change our privacy policy regularly. In accordance with the regulations, you will receive a notification for each update.</p><p>By accessing or using our services after the privacy policy update, we will consider that you agree its terms, updates included.</p>"
         link_to_policy: "Cliquez ici pour consultez la politique de confidentialité."
-
     notify_admin_refund_created:
       subject: "A refund has been generated"
       body:
         refund_created: "A refund of %{AMOUNT} has been generated on invoice %{INVOICE} of user %{USER}"
         download: "Click here to download this refund invoice"
-
     shared:
       hello: "Hello %{user_name}"
