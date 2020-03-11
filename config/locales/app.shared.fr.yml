@@ -307,7 +307,7 @@ fr:
         will_appear_on_the_refund_invoice: "Apparaîtra sur la facture de remboursement."
         to_credit: 'Créditer'
         wallet_credit_successfully: "Le porte-monnaie de l'utilisateur a été chargé avec succès."
-        a_problem_occurred_for_wallet_credit: "Un problème est survenu lors du chargement du porte-monnaie."
+        a_problem_occurred_for_wallet_credit: "A problem is occurred while taking the credit of wallet."
         amount_is_required: "Le montant est requis."
         amount_minimum_1: "Le montant minimum est de 1"
         amount_confirm_is_required: "La confirmation du montant est requise."
