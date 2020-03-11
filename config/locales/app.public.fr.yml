@@ -143,14 +143,14 @@ fr:
         #next events summary on the home page
         fablab_s_next_events: "Les prochains évènements du Fab Lab"
         every_events: "Tous les évènements"
-        from_date_to_date: "Du {START} au {END}"
-        on_the_date: "Le {DATE}"
-        from_time_to_time: "De {START} à {END}"
+        from_date_to_date: "du {START} au {END}"
+        on_the_date: "le {DATE}"
+        from_time_to_time: "de {START} à {END}"
         free_entry: "Accès libre"
         free_admission: "Entrée gratuite"
         full_price: "Plein tarif : "
         event_full: "Événement complet"
-        still_available: "Place(s) disponible(s) :"
+        still_available: "Place(s) disponible(s) : "
         all_day: "Toute la journée"
       #projects gallery
       projects_list:
@@ -259,7 +259,7 @@ fr:
         subscription_confirmation: "Validation de l'abonnement"
         here_is_the_NAME_subscription_summary: "Voici le récapitulatif de l'abonnement de {NAME} :"
         confirm_payment_of_html: "{ROLE, select, admin{Encaisser} other{Payer}} : {AMOUNT}" #(contexte : validate a payment of $20,00)
-        online_payment_disabled: "Le paiement par carte bancaire n'est pas disponible. Merci de contacter directement l'accueil du Fablab."
+        online_payment_disabled: "Le paiement par carte bancaire n'est pas disponible. Merci de contacter directement l'accueil du FabLab."
       #Fablab's events list
       events_list:
         the_fablab_s_events: "Les évènements du Fab Lab"
@@ -302,7 +302,7 @@ fr:
         book: "Réserver"
         confirm_and_pay: "Valider et payer"
         confirm_payment_of_html: "{ROLE, select, admin{Encaisser} other{Payer}} : {AMOUNT}" #(contexte : validate a payment of $20,00)
-        online_payment_disabled: "Le payment par carte bancaire n'est pas disponible. Merci de contacter directement l'accueil du Fablab."
+        online_payment_disabled: "Le paiement par carte bancaire n'est pas disponible. Merci de contacter directement l'accueil du FabLab."
         please_select_a_member_first: "Veuillez tout d'abord sélectionner un membre"
         change_the_reservation: "Modifier la réservation"
         you_can_shift_this_reservation_on_the_following_slots: "Vous pouvez déplacer cette réservation sur les créneaux suivants :"
@@ -312,7 +312,7 @@ fr:
         delete_this_event: "Uniquement cet évènement"
         delete_this_and_next: "Cet évènement et tous les suivants"
         delete_all: "Tous les évènements"
-        event_successfully_deleted: "L'évènement a bien été supprimé."
+        event_successfully_deleted: "L’événement a bien été supprimé."
         events_deleted: "L'évènement, ainsi {COUNT, plural, =1{qu'un autre} other{que {COUNT} autres}}, ont été supprimés"
         unable_to_delete_the_event: "L'évènement n'a pu être supprimé, probablement car il est déjà réservé par un membre"
         events_not_deleted: "Sur {TOTAL} évènements, {COUNT, plural, =1{un n'a pas pu être supprimé} other{{COUNT} n'ont pas pu être supprimés}}. Il est possible que des réservations existent sur {COUNT, plural, =1{celui-ci} other{ceux-ci}}."
@@ -320,7 +320,7 @@ fr:
         do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "Êtes vous sur de vouloir annuler cette réservation? Ceci s'applique à TOUTES les places réservées."
         reservation_was_successfully_cancelled: "La réservation a bien été annulée."
         cancellation_failed: "L'annulation a échoué."
-        event_is_over: "L'évènement est terminé."
+        event_is_over: "L'événement est terminé."
         thanks_for_coming: "Merci d'avoir participé !"
         view_event_list: "Voir les évènements à venir"
         share_on_facebook: "Partager sur Facebook"
@@ -382,7 +382,7 @@ fr:
             content: "Visualisez en un clin d'oeil tout ce qui est prévu au programme des prochaines semaines (évènements, formations, machines disponibles, etc.)."
           projects:
             title: "Projets"
-            content: "<p>Documentez et partagez toutes vos réalisations avec la communauté.</p><p>Si vous utilisez OpenLab, vous pourrez également consulter les projets de l'ensemble du réseau Fab-Manager. <a href='mailto:contact@fab-manager.com'>Contactez-nous</a> pour obtenir votre accès, c'est gratuit !</p>"
+            content: "<p>Documentez et partagez toutes vos réalisations avec la communauté.</p><p>Si vous utilisez OpenLab, vous pourrez également consulter les projets de l'ensemble du réseau Fab-manager. <a href='mailto:contact@fab-manager.com'>Contactez-nous</a> pour obtenir votre accès, c'est gratuit !</p>"
           plans:
             title: "Abonnements"
             content: "Les abonnements offrent un moyen de segmenter vos tarifs et d'accorder des avantages aux utilisateurs réguliers."
@@ -400,13 +400,13 @@ fr:
             content: "<p>Retrouvez ici vos informations personnelles ainsi que toute votre activité sur Fab-manager.</p><p>Cet espace est également disponible pour tous vos membres.</p>"
           news:
             title: "Les brèves"
-            content: "<p>Cet espace vous permet d'afficher les dernières actualités de votre structure.</p><p>Vous pouvez facilement changer son contenu depuis [Personnalisation] > [Page d'accueil].</p>"
+            content: "<p>Cet espace vous permet d'afficher les dernières actualités de votre structure.</p><p>Vous pouvez facilement changer son contenu depuis « Personnalisation », « Page d'accueil ».</p>"
           last_projects:
             title: "les derniers projets"
             content: "<p>Ce carousel fait défiler les derniers projets documentés par vos membres.</p>"
           last_tweet:
             title: "Dernier tweet"
-            content: "<p>Le dernier tweet de votre flux Twitter peut s'afficher ici.</p><p>Configurez-le depuis [Personnalisation] > [Page d'accueil].</p>"
+            content: "<p>Le dernier tweet de votre flux Twitter peut être affiché ici.</p><p>Configurez-le à partir de « Personnalisation », « Page d'accueil ».</p>"
           last_members:
             title: "Derniers membres"
             content: "Les derniers membres inscrits qui ont validé leur adresse et accepté d'être contactés, seront affichés ici."

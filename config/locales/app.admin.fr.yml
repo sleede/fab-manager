@@ -240,7 +240,7 @@ fr:
         edit_this_and_next: "Cet évènement et tous les suivants"
         edit_all: "Tous les évènements"
         date_wont_change: "Attention : vous avez modifié la date de l'évènement. Cette modification ne sera pas être répercutée sur les autres occurrences de l'évènement périodique."
-        event_successfully_updated: "L'évènement a bien été modifié."
+        event_successfully_updated: "L’événement a bien été modifié."
         events_updated: "L'évènement, ainsi {COUNT, plural, =1{qu'un autre} other{que {COUNT} autres}}, ont été modifiés"
         unable_to_update_the_event: "L'évènement n'a pu être modifié"
         events_not_updated: "Sur {TOTAL} évènements, {COUNT, plural, =1{un n'a pas pu être modifié} other{{COUNT} n'ont pas pu être modifiés}}."
@@ -692,7 +692,7 @@ fr:
       #import results
       members_import_result:
         import_results: "Résultats de l'import"
-        import_details: "Import n°{ID}, du {DATE}, initié par {USER}"
+        import_details: "Import n° {ID}, du {DATE}, initié par {USER}"
         results: "Résultats"
         pending: "En cours..."
         status_create: "Création d'un nouvel utilisateur"
@@ -1052,7 +1052,7 @@ fr:
             content: "Ici vous pourrez créer, modifier et supprimer des formations. C'est également l'endroit où vous pourrez valider les formations suivies par vos membres."
           trainings:
             title: "Gérer les formations"
-            content: "<p>Lors de la création d'une formation, vous pouvez définir un nombre de places par défaut. Néanmoins, le nombre de places effectives pourra être modifié pour chaque session.</p><p>La programmation des sessions de formation se fait depuis l'onglet administrateur [Agenda].</p><p>D'autre part, il est possible d'associer une ou plusieurs machines à une formation. Cela permet d'en faire un pré-requis pour la réservation de ces machines.</p>"
+            content: "<p>Lors de la création d'une formation, vous pouvez définir un nombre de places par défaut. Néanmoins, le nombre de places effectives pourra être modifié pour chaque session.</p><p>La programmation des sessions de formation se fait depuis l'onglet administrateur « Agenda ».</p><p>D'autre part, il est possible d'associer une ou plusieurs machines à une formation. Cela permet d'en faire un pré-requis pour la réservation de ces machines.</p>"
           filter:
             title: "Filtre"
             content: "Par défaut, seules les formations actives sont affichées ici. Affichez les autres en choisissant un autre filtre ici."

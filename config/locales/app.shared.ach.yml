@@ -214,7 +214,7 @@ ach:
         user_profile: "crwdns9745:0crwdne9745:0"
         warning_incomplete_user_profile_probably_imported_from_sso: "crwdns9747:0crwdne9747:0"
         group: "crwdns9749:0crwdne9749:0"
-        group_is_required: "crwdns9751:0crwdne9751:0"
+        group_is_required: "crwdns20220:0crwdne20220:0"
         trainings: "crwdns9753:0crwdne9753:0"
         tags: "crwdns9755:0crwdne9755:0"
       #partial form to edit/create an authentication provider (SSO)
@@ -308,10 +308,10 @@ ach:
         to_credit: 'crwdns9905:0crwdne9905:0'
         wallet_credit_successfully: "crwdns9907:0crwdne9907:0"
         a_problem_occurred_for_wallet_credit: "crwdns9909:0crwdne9909:0"
-        amount_is_required: "crwdns9911:0crwdne9911:0"
+        amount_is_required: "crwdns20222:0crwdne20222:0"
         amount_minimum_1: "crwdns9913:0crwdne9913:0"
-        amount_confirm_is_required: "crwdns9915:0crwdne9915:0"
-        amount_confirm_does_not_match: "crwdns9917:0crwdne9917:0"
+        amount_confirm_is_required: "crwdns20224:0crwdne20224:0"
+        amount_confirm_does_not_match: "crwdns20226:0crwdne20226:0"
         you_have_amount_in_wallet: "crwdns9919:0{amount}crwdnd9919:0{currency}crwdne9919:0"
         client_have_amount_in_wallet: "crwdns9921:0{amount}crwdnd9921:0{currency}crwdne9921:0"
         wallet_pay_reservation: "crwdns9923:0crwdne9923:0"
@@ -415,7 +415,7 @@ ach:
         confirm_payment_of_html: "crwdns10101:0ROLE={ROLE}crwdnd10101:0AMOUNT={AMOUNT}crwdne10101:0" #eg. confirm my payment of $20.00
         a_problem_occurred_during_the_payment_process_please_try_again_later: "crwdns10103:0crwdne10103:0"
         none: "crwdns10105:0crwdne10105:0"
-        online_payment_disabled: "crwdns10107:0crwdne10107:0"
+        online_payment_disabled: "crwdns20228:0crwdne20228:0"
         slot_restrict_plans: "crwdns20138:0crwdne20138:0"
         slot_restrict_subscriptions_must_select_plan: "crwdns20140:0crwdne20140:0"
         slot_restrict_plans_of_others_groups: "crwdns20142:0crwdne20142:0"
@@ -425,7 +425,14 @@ ach:
         slot_at_same_time: "crwdns20150:0crwdne20150:0"
         do_you_really_want_to_book_slot_at_same_time: "crwdns20152:0crwdne20152:0"
         unable_to_book_slot_because_really_have_reservation_at_same_time: "crwdns20154:0crwdne20154:0"
+      #feature-tour modal
       tour:
         previous: "crwdns20166:0crwdne20166:0"
         next: "crwdns20168:0crwdne20168:0"
         end: "crwdns20170:0crwdne20170:0"
+      #help modal
+      help:
+        title: "crwdns20230:0crwdne20230:0"
+        what_to_do: "crwdns20232:0crwdne20232:0"
+        tour: "crwdns20234:0crwdne20234:0"
+        guide: "crwdns20236:0crwdne20236:0"
