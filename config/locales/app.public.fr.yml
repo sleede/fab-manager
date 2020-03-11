@@ -406,7 +406,7 @@ fr:
             content: "<p>Ce carousel fait défiler les derniers projets documentés par vos membres.</p>"
           last_tweet:
             title: "Dernier tweet"
-            content: "<p>Le dernier tweet de votre flux Tweeter peut être affiché ici.</p><p>Configurez-le à partir de « Personnalisation », « Page d'accueil ».</p>"
+            content: "<p>Le dernier tweet de votre flux Twitter peut être affiché ici.</p><p>Configurez-le à partir de « Personnalisation », « Page d'accueil ».</p>"
           last_members:
             title: "Derniers membres"
             content: "Les derniers membres inscrits qui ont validé leur adresse et accepté d'être contactés, seront affichés ici."
