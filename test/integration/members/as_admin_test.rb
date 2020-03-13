@@ -13,7 +13,7 @@ class MembersTest < ActionDispatch::IntegrationTest
     email = 'robert.dubois@gmail.com'
 
     VCR.use_cassette('members_admin_create_success') do
-      post members_path, { user: {
+      post members_path, params: { user: {
         username: 'bob',
         email: email,
         group_id: group_id,
@@ -31,12 +31,12 @@ class MembersTest < ActionDispatch::IntegrationTest
           gender: true,
           birthday: '2018-02-08'
         }
-      } }.to_json, default_headers
+      } }.to_json, headers: default_headers
     end
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime::JSON, response.content_type
+    assert_equal Mime[:json], response.content_type
 
     # Check that the user's match
     user = json_response(response.body)
@@ -48,13 +48,13 @@ class MembersTest < ActionDispatch::IntegrationTest
     user = User.friendly.find('kdumas')
 
     # we cannot update an kevin's group because he's got a running subscription
-    put "/api/members/#{user.id}", { user: {
+    put "/api/members/#{user.id}", params: { user: {
       group_id: 1
-    } }.to_json, default_headers
+    } }.to_json, headers: default_headers
 
     # Check response format & status
     assert_equal 422, response.status, response.body
-    assert_equal Mime::JSON, response.content_type
+    assert_equal Mime[:json], response.content_type
 
     # Check error message
     res = json_response(response.body)
@@ -70,18 +70,18 @@ class MembersTest < ActionDispatch::IntegrationTest
     }
     instagram = 'https://www.instagram.com/vanessa/'
 
-    put "/api/members/#{user.id}", user_hash.deep_merge(
+    put "/api/members/#{user.id}", params: user_hash.deep_merge(
       user: {
         group_id: 2,
         profile_attributes: {
           instagram: instagram
         }
       }
-    ).to_json, default_headers
+    ).to_json, headers: default_headers
 
     # Check response format & status
     assert_equal 200, response.status, response.body
-    assert_equal Mime::JSON, response.content_type
+    assert_equal Mime[:json], response.content_type
 
     # Check update result
     res = json_response(response.body)
@@ -94,7 +94,7 @@ class MembersTest < ActionDispatch::IntegrationTest
 
   ## Check response format & status
   # assert_equal 200, response.status, response.body
-  # assert_equal Mime::JSON, response.content_type
+  # assert_equal Mime[:json], response.content_type
 
   ## Check search result
   # res = json_response(response.body)

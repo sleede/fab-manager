@@ -2,7 +2,6 @@
 
 module Credits
   class TrainingTest < ActionDispatch::IntegrationTest
-
     # Called before every test method runs. Can be used
     # to set up fixture information.
     def setup
@@ -11,10 +10,9 @@ module Credits
     end
 
     test 'create machine credit' do
-
       # First, we create a new credit
       post '/api/credits',
-           {
+           params: {
              credit: {
                creditable_id: 5,
                creditable_type: 'Machine',
@@ -22,11 +20,11 @@ module Credits
                plan_id: 1
              }
            }.to_json,
-           default_headers
+           headers: default_headers
 
       # Check response format & status
       assert_equal 201, response.status, response.body
-      assert_equal Mime::JSON, response.content_type
+      assert_equal Mime[:json], response.content_type
 
       # Check the credit was created correctly
       credit = json_response(response.body)
@@ -39,7 +37,7 @@ module Credits
 
     test 'update a credit' do
       put '/api/credits/13',
-          {
+          params: {
             credit: {
               creditable_id: 4,
               creditable_type: 'Machine',
@@ -47,11 +45,11 @@ module Credits
               plan_id: 3
             }
           }.to_json,
-          default_headers
+          headers: default_headers
 
       # Check response format & status
       assert_equal 200, response.status, response.body
-      assert_equal Mime::JSON, response.content_type
+      assert_equal Mime[:json], response.content_type
 
       # Check the credit was correctly updated
       credit = json_response(response.body)

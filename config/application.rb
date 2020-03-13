@@ -14,6 +14,10 @@ Bundler.require(*Rails.groups)
 module Fablab
   class Application < Rails::Application
     require 'fab_manager'
+
+    # Initialize configuration defaults for originally generated Rails version.
+    # config.load_defaults 5.1
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -30,18 +34,8 @@ module Fablab
     config.i18n.default_locale = Rails.application.secrets.rails_locale
     config.i18n.fallbacks = [Rails.application.secrets.app_locale, :en]
 
-    config.assets.paths << Rails.root.join('node_modules').to_s
-
     config.to_prepare do
       Devise::Mailer.layout 'notifications_mailer'
-    end
-
-    # allow use rails helpers in angular templates
-    Rails.application.config.assets.configure do |env|
-      env.context_class.class_eval do
-        include ActionView::Helpers
-        include Rails.application.routes.url_helpers
-      end
     end
 
     config.active_job.queue_adapter = :sidekiq

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Reservations
   class CreateTest < ActionDispatch::IntegrationTest
     setup do
@@ -19,7 +21,7 @@ module Reservations
 
       VCR.use_cassette('reservations_create_for_machine_without_subscription_success') do
         post '/api/payments/confirm_payment',
-             {
+             params: {
                payment_method_id: stripe_payment_method,
                cart_items: {
                  reservation: {
@@ -34,7 +36,7 @@ module Reservations
                    ]
                  }
                }
-             }.to_json, default_headers
+             }.to_json, headers: default_headers
       end
 
       # general assertions
@@ -89,7 +91,7 @@ module Reservations
 
       VCR.use_cassette('reservations_create_for_machine_without_subscription_error') do
         post '/api/payments/confirm_payment',
-             {
+             params: {
                payment_method_id: stripe_payment_method(error: :card_declined),
                cart_items: {
                  reservation: {
@@ -104,12 +106,12 @@ module Reservations
                    ]
                  }
                }
-             }.to_json, default_headers
+             }.to_json, headers: default_headers
       end
 
       # Check response format & status
       assert_equal 200, response.status, "API does not return the expected status. #{response.body}"
-      assert_equal Mime::JSON, response.content_type
+      assert_equal Mime[:json], response.content_type
 
       # Check the error was handled
       assert_match /Your card was declined/, response.body
@@ -137,7 +139,7 @@ module Reservations
 
       VCR.use_cassette('reservations_create_for_training_without_subscription_success') do
         post '/api/payments/confirm_payment',
-             {
+             params: {
                payment_method_id: stripe_payment_method,
                cart_items: {
                  reservation: {
@@ -152,7 +154,7 @@ module Reservations
                    ]
                  }
                }
-             }.to_json, default_headers
+             }.to_json, headers: default_headers
       end
 
       # general assertions
@@ -206,7 +208,7 @@ module Reservations
 
       VCR.use_cassette('reservations_create_for_machine_with_subscription_success') do
         post '/api/payments/confirm_payment',
-             {
+             params: {
                payment_method_id: stripe_payment_method,
                cart_items: {
                  reservation: {
@@ -226,7 +228,7 @@ module Reservations
                    ]
                  }
                }
-             }.to_json, default_headers
+             }.to_json, headers: default_headers
       end
 
       # general assertions
@@ -290,7 +292,7 @@ module Reservations
 
       VCR.use_cassette('reservations_create_for_training_with_subscription_success') do
         post '/api/reservations',
-             {
+             params: {
                reservation: {
                  reservable_id: training.id,
                  reservable_type: training.class.name,
@@ -302,7 +304,7 @@ module Reservations
                    }
                  ]
                }
-             }.to_json, default_headers
+             }.to_json, headers: default_headers
       end
 
       # general assertions
@@ -361,7 +363,7 @@ module Reservations
 
       VCR.use_cassette('reservations_create_for_machine_and_pay_wallet_success') do
         post '/api/payments/confirm_payment',
-             {
+             params: {
                payment_method_id: stripe_payment_method,
                cart_items: {
                  reservation: {
@@ -378,7 +380,7 @@ module Reservations
                    ]
                  }
                }
-             }.to_json, default_headers
+             }.to_json, headers: default_headers
       end
 
       @vlonchamp.wallet.reload
@@ -445,7 +447,7 @@ module Reservations
 
       VCR.use_cassette('reservations_create_for_training_and_plan_by_pay_wallet_success') do
         post '/api/payments/confirm_payment',
-             {
+             params: {
                payment_method_id: stripe_payment_method,
                cart_items: {
                  reservation: {
@@ -461,7 +463,7 @@ module Reservations
                    ]
                  }
                }
-             }.to_json, default_headers
+             }.to_json, headers: default_headers
       end
 
       @vlonchamp.wallet.reload
@@ -523,7 +525,7 @@ module Reservations
 
       VCR.use_cassette('reservations_machine_and_plan_using_coupon_success') do
         post '/api/payments/confirm_payment',
-             {
+             params: {
                payment_method_id: stripe_payment_method,
                cart_items: {
                  reservation: {
@@ -540,7 +542,7 @@ module Reservations
                  },
                  coupon_code: 'SUNNYFABLAB'
                }
-             }.to_json, default_headers
+             }.to_json, headers: default_headers
       end
 
       # general assertions
@@ -614,7 +616,7 @@ module Reservations
 
       VCR.use_cassette('reservations_training_with_expired_coupon_error') do
         post '/api/payments/confirm_payment',
-             {
+             params: {
                payment_method_id: stripe_payment_method,
                cart_items: {
                  reservation: {
@@ -624,15 +626,15 @@ module Reservations
                    card_token: stripe_payment_method,
                    slots_attributes: [
                      {
-                        start_at: availability.start_at.to_s(:iso8601),
-                        end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-                        availability_id: availability.id
-                      }
+                       start_at: availability.start_at.to_s(:iso8601),
+                       end_at: (availability.start_at + 1.hour).to_s(:iso8601),
+                       availability_id: availability.id
+                     }
                    ]
                  },
                  coupon_code: 'XMAS10'
                }
-             }.to_json, default_headers
+             }.to_json, headers: default_headers
       end
 
       # general assertions

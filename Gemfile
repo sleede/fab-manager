@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 
 gem 'compass-rails', '3.0.2'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0.7.2'
+gem 'rails', '~> 5.1.7'
 # Use Puma as web server
 gem 'puma', '3.12.4'
 # Use SCSS for stylesheets
@@ -30,6 +30,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   # comment over to use visual debugger (eg. RubyMine), uncomment to use manual debugging
   # gem 'byebug'
+  gem 'dotenv-rails'
 end
 
 group :development do
@@ -54,7 +55,6 @@ end
 
 group :test do
   gem 'database_cleaner'
-  gem 'dotenv-rails'
   gem 'faker'
   gem 'minitest-reporters'
   gem 'pdf-reader'

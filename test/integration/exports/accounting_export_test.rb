@@ -3,17 +3,15 @@
 module Exports; end
 
 class Exports::AccountingExportTest < ActionDispatch::IntegrationTest
-
   setup do
     admin = User.with_role(:admin).first
     login_as(admin, scope: :user)
   end
 
   test 'creation modification reservation and re-modification scenario' do
-
     # First, we create a new export
     post '/api/accounting/export',
-         {
+         params: {
            query: {
              columns: %w[journal_code date account_code account_label piece line_label debit_origin credit_origin debit_euro credit_euro lettering],
              encoding: 'ISO-8859-1',
@@ -28,11 +26,11 @@ class Exports::AccountingExportTest < ActionDispatch::IntegrationTest
            type: 'acd',
            key: ';'
          }.to_json,
-         default_headers
+         headers: default_headers
 
     # Check response format & status
     assert_equal 200, response.status, response.body
-    assert_equal Mime::JSON, response.content_type
+    assert_equal Mime[:json], response.content_type
 
     # Check the export was created correctly
     res = json_response(response.body)
@@ -134,10 +132,8 @@ class Exports::AccountingExportTest < ActionDispatch::IntegrationTest
       STDERR.puts "WARNING: unable to test accurately accounting export: invoice #{last_invoice.id} is not a Machine reservation"
     end
 
-
     # Clean CSV file
     require 'fileutils'
     FileUtils.rm(e.file)
   end
 end
-

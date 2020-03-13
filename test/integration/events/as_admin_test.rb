@@ -1,17 +1,16 @@
 # frozen_string_literal: true
+
 module Events
   class AsAdminTest < ActionDispatch::IntegrationTest
-
     setup do
       admin = User.with_role(:admin).first
       login_as(admin, scope: :user)
     end
 
     test 'creation modification reservation and re-modification scenario' do
-
       # First, we create a new event
       post '/api/events',
-           {
+           params: {
              event: {
                title: 'OpenLab discovery day',
                description: 'A day to discover the Fablab and try its machines and possibilities.',
@@ -23,11 +22,11 @@ module Events
                amount: 0
              }
            }.to_json,
-           default_headers
+           headers: default_headers
 
       # Check response format & status
       assert_equal 201, response.status, response.body
-      assert_equal Mime::JSON, response.content_type
+      assert_equal Mime[:json], response.content_type
 
       # Check the event was created correctly
       event = json_response(response.body)
@@ -39,21 +38,23 @@ module Events
 
       # Then, modify the event to set a nb of places
       put "/api/events/#{e.id}",
-          event: {
-            title: 'OpenLab discovery day',
-            description: 'A day to discover the Fablab and try its machines and possibilities.',
-            start_date: 1.week.from_now.utc,
-            start_time: 1.week.from_now.utc.change(hour: 16),
-            end_date: 1.week.from_now.utc,
-            end_time: 1.week.from_now.utc.change(hour: 20),
-            category_id: Category.first.id,
-            amount: 0,
-            nb_total_places: 10
+          params: {
+            event: {
+              title: 'OpenLab discovery day',
+              description: 'A day to discover the Fablab and try its machines and possibilities.',
+              start_date: 1.week.from_now.utc,
+              start_time: 1.week.from_now.utc.change(hour: 16),
+              end_date: 1.week.from_now.utc,
+              end_time: 1.week.from_now.utc.change(hour: 20),
+              category_id: Category.first.id,
+              amount: 0,
+              nb_total_places: 10
+            }
           }
 
       # Check response format & status
       assert_equal 200, response.status, response.body
-      assert_equal Mime::JSON, response.content_type
+      assert_equal Mime[:json], response.content_type
 
       # Check the places numbers were updated successfully
       e = Event.where(id: event[:id]).first
@@ -62,7 +63,7 @@ module Events
 
       # Now, let's make a reservation on this event
       post '/api/reservations',
-           {
+           params: {
              reservation: {
                user_id: User.find_by(username: 'pdurand').id,
                reservable_id: e.id,
@@ -78,11 +79,11 @@ module Events
                ]
              }
            }.to_json,
-           default_headers
+           headers: default_headers
 
       # Check response format & status
       assert_equal 201, response.status, response.body
-      assert_equal Mime::JSON, response.content_type
+      assert_equal Mime[:json], response.content_type
 
       # Check the remaining places were updated successfully
       e = Event.where(id: event[:id]).first
@@ -90,21 +91,23 @@ module Events
 
       # Finally, modify the event to add some places
       put "/api/events/#{e.id}",
-          event: {
-            title: 'OpenLab discovery day',
-            description: 'A day to discover the Fablab and try its machines and possibilities.',
-            start_date: 1.week.from_now.utc,
-            start_time: 1.week.from_now.utc.change(hour: 16),
-            end_date: 1.week.from_now.utc,
-            end_time: 1.week.from_now.utc.change(hour: 20),
-            category_id: Category.first.id,
-            amount: 0,
-            nb_total_places: 20
+          params: {
+            event: {
+              title: 'OpenLab discovery day',
+              description: 'A day to discover the Fablab and try its machines and possibilities.',
+              start_date: 1.week.from_now.utc,
+              start_time: 1.week.from_now.utc.change(hour: 16),
+              end_date: 1.week.from_now.utc,
+              end_time: 1.week.from_now.utc.change(hour: 20),
+              category_id: Category.first.id,
+              amount: 0,
+              nb_total_places: 20
+            }
           }
 
       # Check response format & status
       assert_equal 200, response.status, response.body
-      assert_equal Mime::JSON, response.content_type
+      assert_equal Mime[:json], response.content_type
 
       # Check the places numbers were updated successfully
       e = Event.where(id: event[:id]).first
@@ -113,12 +116,11 @@ module Events
     end
 
     test 'create event with custom price and reserve it with success' do
-
       price_category = PriceCategory.first
 
       # First, we create a new event
       post '/api/events',
-           {
+           params: {
              event: {
                title: 'Electronics initiation',
                description: 'A workshop about electronics and the abilities to create robots.',
@@ -137,11 +139,11 @@ module Events
                ]
              }
            }.to_json,
-           default_headers
+           headers: default_headers
 
       # Check response format & status
       assert_equal 201, response.status, response.body
-      assert_equal Mime::JSON, response.content_type
+      assert_equal Mime[:json], response.content_type
 
       # Check the event was created correctly
       event = json_response(response.body)
@@ -155,7 +157,7 @@ module Events
 
       # Now, let's make a reservation on this event
       post '/api/reservations',
-           {
+           params: {
              reservation: {
                user_id: User.find_by(username: 'lseguin').id,
                reservable_id: e.id,
@@ -177,11 +179,11 @@ module Events
                ]
              }
            }.to_json,
-           default_headers
+           headers: default_headers
 
       # Check response format & status
       assert_equal 201, response.status, response.body
-      assert_equal Mime::JSON, response.content_type
+      assert_equal Mime[:json], response.content_type
 
       # Check the reservation match the required event
       reservation = json_response(response.body)
@@ -197,7 +199,6 @@ module Events
       # Check the resulting invoice generation and it has right price
       assert_invoice_pdf r.invoice
       assert_equal (4 * 20) + (4 * 16), r.invoice.total / 100.0
-
     end
   end
 end
