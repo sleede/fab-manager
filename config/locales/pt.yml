@@ -257,7 +257,7 @@ pt:
       notify_member_slot_is_modified:
         your_reservation_slot_was_successfully_changed: "Seu slot de reserva foi alterado com sucesso."
       notify_member_subscribed_plan:
-        you_have_subscribed_to_PLAN_html: "Você assinou <strong><em>%{PLAN}</em></strong>."
+        you_have_subscribed_to_PLAN_html: "You have subscribed to <strong><em>%{PLAN}</em></strong>."
       notify_member_subscribed_plan_is_changed:
         you_have_changed_your_subscription_to_PLAN_html: "Você alterou sua assinatura para <strong> <em> %{PLAN} </em> </strong>."
       notify_member_subscription_canceled:
