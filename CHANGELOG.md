@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- Updated instructions to setup a development environment
 - Updated translations
 
 ## v4.3.2 2020 March 11
