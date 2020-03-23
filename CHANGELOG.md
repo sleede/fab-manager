@@ -5,6 +5,7 @@
 - Updated translations
 - Updated angular-translate
 - Updated eslint
+- Fix a security issue: updated mkdirp to fix [CVE-2020-7598](https://nvd.nist.gov/vuln/detail/CVE-2020-7598)
 - Fix a security issue: updated acorn to fix [CVE-2020-7598](https://nvd.nist.gov/vuln/detail/CVE-2020-7598)
 
 ## v4.3.2 2020 March 11
