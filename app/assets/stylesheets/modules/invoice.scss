@@ -197,7 +197,7 @@
 }
 
 table.closings-table {
-  @extend table.scrollable-3-cols;
+  @extend .scrollable-3-cols;
 
   tbody .actions {
     padding-left: 2em;
