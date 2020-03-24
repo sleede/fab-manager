@@ -41,16 +41,16 @@ Contributions are welcome. Please read [the contribution guidelines](CONTRIBUTIN
 <a name="setup-a-production-environment"></a>
 ## Setup a production environment
 
-To run Fab-manager as a production application, this is highly recommended to use [Docker-compose](https://docs.docker.com/compose/overview/).
-The procedure to follow is described in the [docker-compose readme](doc/docker-compose_readme.md).
+To run Fab-manager as a production application, you must follow the procedure described in the [production readme](doc/production_readme.md).
+This procedure is using [Docker-compose](https://docs.docker.com/compose/overview/) to manage the application and its dependencies.
 
 <a name="setup-a-development-environment"></a>
 ## Setup a development environment
 
 In you intend to run Fab-manager on your local machine to contribute to the project development, you can set it up by following the [development readme](doc/development_readme.md). 
-This procedure relies on docker to set-up the dependencies.
+This procedure relies on [Docker-compose](https://docs.docker.com/compose/overview/) to set-up the dependencies.
 
-Optionally, you can use a virtual development environment that relies on Vagrant and Virtual Box by following the [virtual machine instructions](virtual-machine.md).
+Optionally, you can use a virtual development environment that relies on Vagrant and Virtual Box by following the [virtual machine instructions](doc/virtual-machine.md).
 
 <a name="i18n"></a>
 ## Internationalization (i18n)

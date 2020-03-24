@@ -10,7 +10,7 @@ This document will guide you through all the steps needed to set up a developmen
 3.1. [Rebuild statistics](#rebuild-stats)<br/>
 3.2. [Backup and Restore](#backup-and-restore-elasticsearch)
 
-This procedure is not easy to follow so if you don't need to write some code for Fab-manager, please prefer the [docker-compose installation method](docker-compose_readme.md).
+This procedure is not easy to follow so if you don't need to write some code for Fab-manager, please prefer the [production installation method](doc/production_readme.md).
 
 
 <a name="general-guidelines"></a>
