@@ -81,6 +81,8 @@ config()
     read_domain
     MAIN_DOMAIN=("${DOMAINS[0]}")
     OTHER_DOMAINS=${DOMAINS[*]/$MAIN_DOMAIN}
+  else
+    LETSENCRYPT="n"
   fi
 }
 
