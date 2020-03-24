@@ -8,6 +8,7 @@
 - Renamed production documentation
 - Fix a bug: invalid translation keys in closing accounting period interface
 - Fix a bug: since PostgreSQL release 9.6.17, the new installations will fail to start complaining for missing password (#194)
+- Fix a bug: missing translations for some error messages
 - Fix a security issue: updated mkdirp to fix [CVE-2020-7598](https://nvd.nist.gov/vuln/detail/CVE-2020-7598)
 - Fix a security issue: updated acorn to fix [CVE-2020-7598](https://nvd.nist.gov/vuln/detail/CVE-2020-7598)
 

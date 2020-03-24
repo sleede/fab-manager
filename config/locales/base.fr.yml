@@ -3,10 +3,3 @@ fr:
     formats:
       # Liste des directives disponibles sur http://apidock.com/ruby/DateTime/strftime
       hour_minute: "%H:%M"
-
-  errors: &errors
-    messages: &errors_messages
-
-  activemodel:
-    errors:
-      <<: *errors
