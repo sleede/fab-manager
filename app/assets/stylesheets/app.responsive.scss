@@ -1,6 +1,8 @@
-
 @media screen and (max-width: $screen-sm-min) {
-  .modal-dialog { top: 0; }
+  .modal-dialog {
+    top: 0;
+  }
+
   .modal-header {
     .modal-logo {
       display: none;
@@ -8,38 +10,43 @@
   }
 
   .about-fablab {
-  	.about-title {
-    	font-size: rem-calc(30);
-    	line-height: rem-calc(28);
-    	text-align: center;
-	}
-	.about-picture {
-	  padding: 70px 0;
-	  height: 226px;
-	}
+    .about-title {
+      font-size: rem-calc(30);
+      line-height: rem-calc(28);
+      text-align: center;
+    }
+
+    .about-picture {
+      padding: 70px 0;
+      height: 226px;
+    }
   }
 
   // fix for full-calendar display on small devices
   .fc-toolbar {
     margin-bottom: 2.5em !important;
   }
-
 }
 
 @media screen and (max-width: $screen-md-min) {
+  .heading {
+    .heading-title {
+      h1 {
+        font-size: rem-calc(16);
+        padding: 26px 15px;
+      }
+    }
+  }
 
-	.heading {
-		.heading-title {
-			h1 {
-			  font-size: rem-calc(16);
-			  padding: 26px 15px;
-			}
-		}
-	}
+  .m-t-xxl-on-md {
+    margin-top: 60px;
+  }
 
-  .m-t-xxl-on-md { margin-top: 60px; }
-  .m-t-3xl-on-md { margin-top: 80px; }
-  .m-t-4xl-on-md { margin-top: 100px; }
+  .m-t-3xl-on-md {
+    margin-top: 80px;
+  }
+
+  .m-t-4xl-on-md {
+    margin-top: 100px;
+  }
 }
-
-

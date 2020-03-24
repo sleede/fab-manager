@@ -1,320 +1,363 @@
 /*layout*/
 .header,
-.footer{
-	min-height: 50px;
-	padding: 0 15px;
-	> p{
-		margin-top: 15px;
-		display: inline-block;
-	}
-	> .btn,
-	> .btn-group,
-	> .btn-toolbar
-	{
-		margin-top: 14px;
-	}
-	> .btn-lg{
-		margin-top: 0;
-	}
-	.nav-tabs {
-		border: none;
-		margin-left: -15px;
-		margin-right: -15px;
-		> li {
-			a{
-				border: none !important;
-				border-radius: 0;
-				padding-top: 15px;
-				padding-bottom: 15px;
-				line-height: 20px;
-				&:hover,
-				&:focus
-				{
-					background-color: transparent;
-				}
-			}
-			&.active a{
-				color: $text-color;
-				&,
-				&:hover{
-					background-color: $body-bg;
-				}
-			}
-		}
-		&.nav-white{
-			> li.active a{
-				&,
-				&:hover{
-					background-color: #fff;
-				}
-			}
-		}
-	}
-	&.navbar{
-		border-radius: 0;
-		border: none;
-		margin-bottom: 0;
-		padding:0;
-		position: relative !important;
-		z-index: 1000;
-	}
+.footer {
+  min-height: 50px;
+  padding: 0 15px;
+
+  > p {
+    margin-top: 15px;
+    display: inline-block;
+  }
+
+  > .btn,
+  > .btn-group,
+  > .btn-toolbar {
+    margin-top: 14px;
+  }
+
+  > .btn-lg {
+    margin-top: 0;
+  }
+
+  .nav-tabs {
+    border: none;
+    margin-left: -15px;
+    margin-right: -15px;
+
+    > li {
+      a {
+        border: none !important;
+        border-radius: 0;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        line-height: 20px;
+
+        &:hover,
+        &:focus {
+          background-color: transparent;
+        }
+      }
+
+      &.active a {
+        color: $text-color;
+
+        &,
+        &:hover {
+          background-color: $body-bg;
+        }
+      }
+    }
+
+    &.nav-white {
+      > li.active a {
+        &,
+        &:hover {
+          background-color: #fff;
+        }
+      }
+    }
+  }
+
+  &.navbar {
+    border-radius: 0;
+    border: none;
+    margin-bottom: 0;
+    padding: 0;
+    position: relative !important;
+    z-index: 1000;
+  }
 }
 
 .header {
-	background-color: $header-bg;
-	@include box-shadow(0 1px 0px #cfcfcf);
+  background-color: $header-bg;
+
+  @include box-shadow(0 1px 0px #cfcfcf);
 }
 
-
 .heading {
+  .heading-btn {
+    a {
+      width: 100%;
+      padding: 35px 40%;
+      display: inline-block;
+      cursor: pointer;
+      color: black;
 
-	.heading-btn {
-		a {
-			width: 100%;
-			padding: 35px 40%;
-			display: inline-block;
-			cursor: pointer;
-			color: black;
-			&:hover {
-				//background-color: $yellow;
-			}
-			i:before { content: "\f177"; }
-		}
-	}
+      &:hover {
+        //background-color: $yellow;
+     
+      }
+
+      i:before {
+        content: "\f177";
+      }
+    }
+  }
+
   .heading-icon {
     width: 100%;
     padding: 35px 40%;
     display: inline-block;
     color: black;
   }
-	.heading-title {
-		//overflow: hidden;
-		height: 94px;
-		h1 {
-		  margin: 0 0 0 15px;
-		  padding: 36px 15px;
-		}
-	}
-	.heading-actions {
-		height: 94px;
-		text-align: center;
-	}
+
+  .heading-title {
+    //overflow: hidden;
+    height: 94px;
+
+    h1 {
+      margin: 0 0 0 15px;
+      padding: 36px 15px;
+    }
+  }
+
+  .heading-actions {
+    height: 94px;
+    text-align: center;
+  }
 }
 
-body.container{
-	padding: 0;
+body.container {
+  padding: 0;
 }
 
-.aside-md{
-	width: 250px;
+.aside-md {
+  width: 250px;
 }
 
 @media (min-width: 768px) {
-	body.container{
-		@include box-shadow(0 3px 60px rgba(0,0,0,0.3));
-		border-left: 1px solid darken($border-color, 10%);
-		border-right: 1px solid darken($border-color, 10%);
-	}
-	.app{
-		&,
-		body{
-			height:100%;
-			overflow: hidden;
-		}
-		.hbox{
-			&.stretch{
-				height:100%;
-			}
-		}
-		.vbox{
-			> section,
-			> footer{
-				position: absolute;
-			}
-			&.flex{
-				> section{
-					> section{
-						overflow: auto;
-					}
-				}
-			}
-		}
-	}
+  body.container {
+    @include box-shadow(0 3px 60px rgba(0, 0, 0, 0.3));
 
-	.hbox{
-		display: table;
-		table-layout: fixed;
-		border-spacing: 0;
-		width: 100%;
-		> aside,
-		> section{
-			display: table-cell;
-			vertical-align: top;
-			height: 100%;
-			float: none;
-			&.show,
-			&.hidden-sm	{
-				display: table-cell !important;
-			}
-		}
-	}
+    border-left: 1px solid darken($border-color, 10%);
+    border-right: 1px solid darken($border-color, 10%);
+  }
 
-	.vbox{
-		display: table;
-		border-spacing:0;
-		position: relative;
-		height: 100%;
-		width: 100%;
-		> section,
-		> footer {
-			top: 0;
-			bottom: 0;
-			width: 100%;
-		}
-		> header{
-			~ section {
-				top: 50px;
-			}
-			&.header-md{
-				~ section {
-					top: $header-md-height+2;
-				}
-			}
-		}
-		> section{
-			&.w-f{
-				bottom: 50px;
-			}
-		}
-		> footer {
-			top: auto;
-			z-index: 100;
-			~ section {
-				bottom: 50px;
-			}
-		}
-		&.flex{
-			> header,
-			> section,
-			> footer {
-				position: inherit;
-			}
-			> section{
-				display: table-row;
-				height: 100%;
-				> section {
-					position: relative;
-					height: 100%;
-					-webkit-overflow-scrolling:touch;
-					.ie & {
-						display: table-cell;
-					}
-					> section {
-						position: absolute;
-						top: 0;
-						bottom: 0;
-						left: 0;
-						right: 0;
-					}
-				}
-			}
-		}
-	}
+  .app {
+    &,
+    body {
+      height: 100%;
+      overflow: hidden;
+    }
 
-	.aside-xs{
-		width: 60px;
-	}
-	.aside-sm{
-		width: 150px;
-	}
-	.aside{
-		width: 200px;
-	}
-	.aside-md{
-		width: 250px;
-	}
-	.aside-lg{
-		width: 300px;
-	}
-	.aside-xl{
-		width: 360px;
-	}
-	.aside-xxl{
-		width: 480px;
-	}
+    .hbox {
+      &.stretch {
+        height: 100%;
+      }
+    }
 
-	.header-md{
-		height: $header-md-height;
-		.navbar-form{
-			margin-top: floor( ($header-md-height - 30)/2 );
-			margin-bottom: floor( ($header-md-height - 30)/2 );
-		}
-	}
+    .vbox {
+      > section,
+      > footer {
+        position: absolute;
+      }
 
-	.scrollable{
-		-webkit-overflow-scrolling:touch;
-	}
+      &.flex {
+        > section {
+          > section {
+            overflow: auto;
+          }
+        }
+      }
+    }
+  }
 
-	::-webkit-scrollbar {
-		width: 10px;
-		height: 10px;
-	}
-	::-webkit-scrollbar-thumb {
-		background-color:rgba(50,50,50,0.25);
-		border: 2px solid transparent;
-		border-radius: 10px;
-		background-clip: padding-box;
-	}
-	::-webkit-scrollbar-thumb:hover{
-		background-color:rgba(50,50,50,0.5);
-	}
-	::-webkit-scrollbar-track {
-		background-color:rgba(50,50,50,0.05);
-	}
+  .hbox {
+    display: table;
+    table-layout: fixed;
+    border-spacing: 0;
+    width: 100%;
+
+    > aside,
+    > section {
+      display: table-cell;
+      vertical-align: top;
+      height: 100%;
+      float: none;
+
+      &.show,
+      &.hidden-sm {
+        display: table-cell !important;
+      }
+    }
+  }
+
+  .vbox {
+    display: table;
+    border-spacing: 0;
+    position: relative;
+    height: 100%;
+    width: 100%;
+
+    > section,
+    > footer {
+      top: 0;
+      bottom: 0;
+      width: 100%;
+    }
+
+    > header {
+      ~ section {
+        top: 50px;
+      }
+
+      &.header-md {
+        ~ section {
+          top: $header-md-height + 2;
+        }
+      }
+    }
+
+    > section {
+      &.w-f {
+        bottom: 50px;
+      }
+    }
+
+    > footer {
+      top: auto;
+      z-index: 100;
+
+      ~ section {
+        bottom: 50px;
+      }
+    }
+
+    &.flex {
+      > header,
+      > section,
+      > footer {
+        position: inherit;
+      }
+
+      > section {
+        display: table-row;
+        height: 100%;
+
+        > section {
+          position: relative;
+          height: 100%;
+          -webkit-overflow-scrolling: touch;
+
+          .ie & {
+            display: table-cell;
+          }
+
+          > section {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .aside-xs {
+    width: 60px;
+  }
+
+  .aside-sm {
+    width: 150px;
+  }
+
+  .aside {
+    width: 200px;
+  }
+
+  .aside-md {
+    width: 250px;
+  }
+
+  .aside-lg {
+    width: 300px;
+  }
+
+  .aside-xl {
+    width: 360px;
+  }
+
+  .aside-xxl {
+    width: 480px;
+  }
+
+  .header-md {
+    height: $header-md-height;
+
+    .navbar-form {
+      margin-top: floor(($header-md-height - 30) / 2);
+      margin-bottom: floor(($header-md-height - 30) / 2);
+    }
+  }
+
+  .scrollable {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(50, 50, 50, 0.25);
+    border: 2px solid transparent;
+    border-radius: 10px;
+    background-clip: padding-box;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(50, 50, 50, 0.5);
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: rgba(50, 50, 50, 0.05);
+  }
 }
 
-.scrollable{
-	overflow-x: hidden;
-	overflow-y: auto;
+.scrollable {
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .no-touch {
-	.scrollable.hover {
-		overflow-y: hidden;
-		&:hover
-		{
-			overflow: visible;
-			overflow-y: auto;
-		}
-	}
-	::-webkit-scrollbar-button {
-		width: 10px;
-		height: 6px;
-		background-color:rgba(50,50,50,0.05);
-	}
+  .scrollable.hover {
+    overflow-y: hidden;
+
+    &:hover {
+      overflow: visible;
+      overflow-y: auto;
+    }
+  }
+
+  ::-webkit-scrollbar-button {
+    width: 10px;
+    height: 6px;
+    background-color: rgba(50, 50, 50, 0.05);
+  }
 }
 
-.slimScrollBar{
-	border-radius: 5px;
-	border: 2px solid transparent;
-	border-radius: 10px;
-	background-clip: padding-box !important;
+.slimScrollBar {
+  border-radius: 5px;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  background-clip: padding-box !important;
 }
-
 
 @media print {
-  html, body, .hbox, .vbox{
+  html, body, .hbox, .vbox {
     height: auto;
   }
-  .vbox{
-		> section,
-		> footer{
-			position: relative;
-		}
-	}
+
+  .vbox {
+    > section,
+    > footer {
+      position: relative;
+    }
+  }
 }
-
-
 
 .datepicker-container {
   position: relative;
@@ -327,7 +370,7 @@ body.container{
   padding-top: 0.5em;
   padding-bottom: 0.5em;
   position: absolute;
-  right:0;
+  right: 0;
   left: 0;
   background-color: #ffffff;
 
@@ -339,7 +382,7 @@ body.container{
     vertical-align: middle;
 
     div.input-group {
-      float:right;
+      float: right;
 
       ul.dropdown-menu {
         left: -5em !important;
@@ -355,9 +398,8 @@ body.container{
 }
 
 .customMenuInput {
-  width:100% !important;
+  width: 100% !important;
 }
-
 
 .reservations-locked {
   background-color: #f5f5f5;
@@ -369,8 +411,8 @@ body.container{
   background-color: #e4e4e4;
   padding: 0.7em 0.7em;
   font-size: 90%;
-  display:inline-block;
-  vertical-align:middle;
+  display: inline-block;
+  vertical-align: middle;
 
   .reservation-time {
     color: #606060;
@@ -387,7 +429,6 @@ body.container{
     float: left;
     margin-right: 1em;
   }
-
 }
 
 .custom-logo-container {
@@ -410,7 +451,7 @@ body.container{
       width: auto;
       max-height: 44px;
       max-width: 100%;
-      margin:auto;
+      margin: auto;
     }
 
     &:hover .tools-box {
@@ -453,7 +494,7 @@ body.container{
       width: auto;
       max-height: 16px;
       max-width: 16px;
-      margin:auto;
+      margin: auto;
     }
 
     &:hover .tools-box {
@@ -491,7 +532,7 @@ body.container{
       width: auto;
       max-height: 185px;
       max-width: 100%;
-      margin:auto;
+      margin: auto;
     }
 
     &:hover .tools-box {
@@ -546,7 +587,6 @@ body.container{
   .profile-top-infos {
     padding: 30px 15px 30px 15px;
 
-
     .private-profile {
       color: #000;
       border: 1px solid $border-color;
@@ -565,10 +605,10 @@ body.container{
     padding: 43px 15px 15px 15px;
     text-align: center;
 
-
     .avatar {
       display: inline-block;
       width: 140px;
+
       img {
         border: 9px solid #fff;
         background-color: #fff;
@@ -593,7 +633,9 @@ body.container{
         color: $input-color;
         margin-bottom: 5px;
 
-        i { vertical-align: middle; }
+        i {
+          vertical-align: middle;
+        }
       }
     }
 
