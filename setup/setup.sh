@@ -50,6 +50,11 @@ system_requirements()
       echo -e "\e[91m[ ❌ ] $_command was not found, exiting...\e[39m" && exit 1
     fi
   done
+  if ! command -v awk || ! [[ $(awk -W version) =~ ^GNU ]]
+  then
+    echo "Please install GNU Awk before running this script."
+    echo "\e[91m[ ❌ ] GNU awk was not found, exiting...\e[39m" && exit 1
+  fi
   printf "\e[92m[ ✔ ] All requirements successfully checked.\e[39m \n\n"
 }
 
@@ -149,6 +154,9 @@ prepare_nginx()
     sed -i.bak "s/MAIN_DOMAIN/${MAIN_DOMAIN[0]}/g" "$FABMANAGER_PATH/config/nginx/fabmanager.conf.ssl"
     sed -i.bak "s/ANOTHER_DOMAIN_1/$OTHER_DOMAINS/g" "$FABMANAGER_PATH/config/nginx/fabmanager.conf.ssl"
     sed -i.bak "s/URL_WITH_PROTOCOL_HTTPS/https:\/\/${MAIN_DOMAIN[0]}/g" "$FABMANAGER_PATH/config/nginx/fabmanager.conf.ssl"
+  else
+    # if nginx is not installed, remove its associated block from docker-compose.yml
+    awk '$1 == "nginx:"{t=1; next};t==1 && /:[[:blank:]]*$/{t=0};t != 1' docker-compose.yml > "$FABMANAGER_PATH/.awktmpfile" && mv "$FABMANAGER_PATH/.awktmpfile" "$FABMANAGER_PATH/docker-compose.yml"
   fi
 }
 
