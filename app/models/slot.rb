@@ -53,11 +53,11 @@ class Slot < ActiveRecord::Base
   end
 
   def dates_were_modified?
-    start_at_changed? or end_at_changed?
+    saved_change_to_start_at? || saved_change_to_end_at?
   end
 
   def canceled?
-    canceled_at_changed?
+    saved_change_to_canceled_at?
   end
 
   def set_ex_start_end_dates_attrs

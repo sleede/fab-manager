@@ -1,4 +1,6 @@
-class CreateStatisticIndices < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class CreateStatisticIndices < ActiveRecord::Migration[4.2]
   def change
     create_table :statistic_indices do |t|
       t.string :es_type_key

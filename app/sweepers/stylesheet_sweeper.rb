@@ -5,6 +5,6 @@ class StylesheetSweeper < ActionController::Caching::Sweeper
   observe Stylesheet
 
   def after_update(record)
-    expire_page(controller: 'stylesheets', action: 'show', id: record.id) if record.contents_changed?
+    expire_page(controller: 'stylesheets', action: 'show', id: record.id) if record.saved_change_to_contents?
   end
 end

@@ -1,4 +1,6 @@
-class CreateInvoices < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class CreateInvoices < ActiveRecord::Migration[4.2]
   def change
     create_table :invoices do |t|
       t.references :invoiced,  polymorphic: true

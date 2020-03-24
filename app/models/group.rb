@@ -19,8 +19,8 @@ class Group < ActiveRecord::Base
 
   after_create :create_prices
   after_create :create_statistic_subtype
-  after_update :update_statistic_subtype, if: :name_changed?
-  after_update :disable_plans, if: :disabled_changed?
+  after_update :update_statistic_subtype, if: :saved_change_to_name?
+  after_update :disable_plans, if: :saved_change_to_disabled?
 
   def destroyable?
     users.empty? and plans.empty?

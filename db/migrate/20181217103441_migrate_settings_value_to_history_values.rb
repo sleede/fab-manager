@@ -1,4 +1,6 @@
-class MigrateSettingsValueToHistoryValues < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class MigrateSettingsValueToHistoryValues < ActiveRecord::Migration[4.2]
   def up
     user = User.admins.first
     Setting.all.each do |setting|

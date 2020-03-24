@@ -1,4 +1,6 @@
-class CreateOpenAPIClients < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class CreateOpenAPIClients < ActiveRecord::Migration[4.2]
   def change
     create_table :open_api_clients do |t|
       t.string :name

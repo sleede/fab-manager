@@ -1,4 +1,6 @@
-class CreateProjectsMachines < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class CreateProjectsMachines < ActiveRecord::Migration[4.2]
   def change
     create_table :projects_machines do |t|
       t.belongs_to :project, index: true

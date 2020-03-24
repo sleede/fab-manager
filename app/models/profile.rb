@@ -37,7 +37,7 @@ class Profile < ActiveRecord::Base
   private
 
   def invoicing_data_was_modified?
-    first_name_changed? or last_name_changed? or new_record?
+    saved_change_to_first_name? || saved_change_to_last_name? || new_record?
   end
 
   def update_invoicing_profile

@@ -1,4 +1,6 @@
-class AddPublishedAtToProjects < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class AddPublishedAtToProjects < ActiveRecord::Migration[4.2]
   def up
     add_column :projects, :published_at, :datetime
 

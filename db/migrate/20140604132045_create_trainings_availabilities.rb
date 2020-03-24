@@ -1,4 +1,6 @@
-class CreateTrainingsAvailabilities < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class CreateTrainingsAvailabilities < ActiveRecord::Migration[4.2]
   def change
     create_table :trainings_availabilities do |t|
       t.belongs_to :training, index: true

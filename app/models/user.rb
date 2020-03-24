@@ -54,7 +54,7 @@ class User < ActiveRecord::Base
   after_commit :create_stripe_customer, on: [:create]
   after_commit :notify_admin_when_user_is_created, on: :create
   after_create :init_dependencies
-  after_update :notify_group_changed, if: :group_id_changed?
+  after_update :notify_group_changed, if: :saved_change_to_group_id?
   after_update :update_invoicing_profile, if: :invoicing_data_was_modified?
   after_update :update_statistic_profile, if: :statistic_data_was_modified?
   before_destroy :remove_orphan_drafts
@@ -354,11 +354,11 @@ class User < ActiveRecord::Base
   end
 
   def invoicing_data_was_modified?
-    email_changed?
+    saved_change_to_email?
   end
 
   def statistic_data_was_modified?
-    group_id_changed?
+    saved_change_to_group_id?
   end
 
   def init_dependencies

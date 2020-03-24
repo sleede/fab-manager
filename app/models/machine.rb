@@ -29,7 +29,7 @@ class Machine < ActiveRecord::Base
 
   after_create :create_statistic_subtype
   after_create :create_machine_prices
-  after_update :update_statistic_subtype, if: :name_changed?
+  after_update :update_statistic_subtype, if: :saved_change_to_name?
   after_destroy :remove_statistic_subtype
 
   def not_subscribe_price(group_id)

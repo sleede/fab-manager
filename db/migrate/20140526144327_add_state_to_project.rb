@@ -1,4 +1,6 @@
-class AddStateToProject < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class AddStateToProject < ActiveRecord::Migration[4.2]
   def change
     add_column :projects, :state, :string
     Project.all.each do |p|

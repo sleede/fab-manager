@@ -1,4 +1,6 @@
-class SingleizeEventCategories < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class SingleizeEventCategories < ActiveRecord::Migration[4.2]
   def up
     execute 'UPDATE events AS e
              SET category_id = ec.category_id

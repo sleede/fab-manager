@@ -1,4 +1,6 @@
-class CreatePrices < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class CreatePrices < ActiveRecord::Migration[4.2]
   def change
     create_table :prices do |t|
       t.belongs_to :group, index: true, foreign_key: true

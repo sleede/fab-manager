@@ -1,4 +1,6 @@
-class AddTrainingCreditNbToPlan < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class AddTrainingCreditNbToPlan < ActiveRecord::Migration[4.2]
   def change
     add_column :plans, :training_credit_nb, :integer
 

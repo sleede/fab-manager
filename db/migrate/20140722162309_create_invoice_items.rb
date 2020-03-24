@@ -1,4 +1,6 @@
-class CreateInvoiceItems < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class CreateInvoiceItems < ActiveRecord::Migration[4.2]
   def change
     create_table :invoice_items do |t|
       t.text :description

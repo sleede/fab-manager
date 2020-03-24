@@ -4,7 +4,7 @@
 # This is due to Strong Customer Authentication changes, that don't store any more an stp_invoice_id in table
 # "invoices". The new stp_payment_intent_id is not populated if the invoice total = 0 but we must know if the
 # payment was made on site or online.
-class RenameAvoirModeToPaymentMethodFromInvoices < ActiveRecord::Migration
+class RenameAvoirModeToPaymentMethodFromInvoices < ActiveRecord::Migration[4.2]
   def change
     rename_column :invoices, :avoir_mode, :payment_method
   end

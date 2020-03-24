@@ -1,4 +1,6 @@
-class AddReceiverTypeAndIsSendToNotification < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class AddReceiverTypeAndIsSendToNotification < ActiveRecord::Migration[4.2]
   def change
     add_column :notifications, :receiver_type, :string
     add_column :notifications, :is_send, :boolean, default: false

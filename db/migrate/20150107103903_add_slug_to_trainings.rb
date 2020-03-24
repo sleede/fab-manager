@@ -1,4 +1,6 @@
-class AddSlugToTrainings < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class AddSlugToTrainings < ActiveRecord::Migration[4.2]
   def up
     add_column :trainings, :slug, :string
     add_index :trainings, :slug, unique: true

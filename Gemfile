@@ -42,9 +42,6 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   # Preview mail in the browser
   gem 'listen', '~> 3.0.5'
-  # don't put mailcatcher into your Gemfile. It will conflict with your applications gems at some point.
-  # Instead, pop a note in your README stating you use mailcatcher, and to run gem install mailcatcher then mailcatcher to get started.
-  # gem 'mailcatcher'
   gem 'rb-readline'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'railroady'

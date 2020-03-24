@@ -1,4 +1,6 @@
-class MigrateProfileToStatisticProfile < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class MigrateProfileToStatisticProfile < ActiveRecord::Migration[4.2]
   def up
     User.all.each do |u|
       p = u.profile
