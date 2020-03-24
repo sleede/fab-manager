@@ -97,7 +97,7 @@ GEM
       sass (>= 3.3.0, < 3.5)
     compass-import-once (1.0.5)
       sass (>= 3.2, < 3.5)
-    compass-rails (3.0.2)
+    compass-rails (3.1.0)
       compass (~> 1.0.0)
       sass-rails (< 5.1)
       sprockets (< 4.0)
@@ -457,7 +457,7 @@ DEPENDENCIES
   caxlsx
   caxlsx_rails
   chroma
-  compass-rails (= 3.0.2)
+  compass-rails (= 3.1.0)
   coveralls
   database_cleaner
   devise (>= 4.6.0)
