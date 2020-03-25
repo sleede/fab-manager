@@ -10,7 +10,6 @@ class Plan < ApplicationRecord
   has_many :machine_credits, -> { where(creditable_type: 'Machine') }, class_name: 'Credit'
   has_many :space_credits, -> { where(creditable_type: 'Space') }, class_name: 'Credit'
   has_many :subscriptions
-  has_one :plan_image, as: :viewable, dependent: :destroy
   has_one :plan_file, as: :viewable, dependent: :destroy
   has_many :prices, dependent: :destroy
 
