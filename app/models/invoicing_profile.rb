@@ -3,7 +3,7 @@
 # This table will save the user's profile data needed for legal accounting (invoices, wallet, etc.)
 # Legal accounting must be kept for 10 years but GDPR requires that an user can delete his account at any time.
 # The data will be kept even if the user is deleted, but it will be unlinked from the user's account.
-class InvoicingProfile < ActiveRecord::Base
+class InvoicingProfile < ApplicationRecord
   belongs_to :user
   has_one :address, as: :placeable, dependent: :destroy
   accepts_nested_attributes_for :address, allow_destroy: true

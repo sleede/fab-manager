@@ -1,4 +1,4 @@
-class Notification < ActiveRecord::Base
+class Notification < ApplicationRecord
   include NotifyWith::Notification
 
   def get_meta_data(key)

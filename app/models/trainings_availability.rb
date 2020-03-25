@@ -1,4 +1,4 @@
-class TrainingsAvailability < ActiveRecord::Base
+class TrainingsAvailability < ApplicationRecord
   belongs_to :training
   belongs_to :availability
   after_destroy :cleanup_availability

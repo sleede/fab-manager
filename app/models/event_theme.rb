@@ -1,4 +1,4 @@
-class EventTheme < ActiveRecord::Base
+class EventTheme < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
 

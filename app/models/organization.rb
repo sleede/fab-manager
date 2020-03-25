@@ -1,4 +1,4 @@
-class Organization < ActiveRecord::Base
+class Organization < ApplicationRecord
   belongs_to :profile
   belongs_to :invoicing_profile
   has_one :address, as: :placeable, dependent: :destroy

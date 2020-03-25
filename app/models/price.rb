@@ -2,7 +2,7 @@
 
 # Store customized price for various items (Machine, Space), depending on the group and on the plan
 # Also provides a static helper method to compute the price details of a shopping cart
-class Price < ActiveRecord::Base
+class Price < ApplicationRecord
   belongs_to :group
   belongs_to :plan
   belongs_to :priceable, polymorphic: true

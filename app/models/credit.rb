@@ -1,4 +1,4 @@
-class Credit < ActiveRecord::Base
+class Credit < ApplicationRecord
   belongs_to :creditable, polymorphic: true
   belongs_to :plan
   has_many :users_credits, dependent: :destroy

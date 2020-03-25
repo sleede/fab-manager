@@ -3,7 +3,7 @@
 require 'checksum'
 
 # A single line inside an invoice. Can be a subscription or a reservation
-class InvoiceItem < ActiveRecord::Base
+class InvoiceItem < ApplicationRecord
   belongs_to :invoice
   belongs_to :subscription
 

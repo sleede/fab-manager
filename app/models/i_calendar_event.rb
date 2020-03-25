@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # iCalendar (RFC 5545) event, belonging to an ICalendar object (its source)
-class ICalendarEvent < ActiveRecord::Base
+class ICalendarEvent < ApplicationRecord
   belongs_to :i_calendar
 
   def self.update_or_create_by(args, attributes)

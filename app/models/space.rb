@@ -1,4 +1,4 @@
-class Space < ActiveRecord::Base
+class Space < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
 

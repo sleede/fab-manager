@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # track of all transactions payed using the given wallet
-class WalletTransaction < ActiveRecord::Base
+class WalletTransaction < ApplicationRecord
   include AmountConcern
 
   belongs_to :invoicing_profile

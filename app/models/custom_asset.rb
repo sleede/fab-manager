@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Admin defined assets (like PDF or images uploaded)
-class CustomAsset < ActiveRecord::Base
+class CustomAsset < ApplicationRecord
   has_one :custom_asset_file, as: :viewable, dependent: :destroy
   accepts_nested_attributes_for :custom_asset_file, allow_destroy: true
 

@@ -6,7 +6,7 @@ AVG_DAYS_PER_YEAR = 365.2425
 # GDPR requires that an user can delete his account at any time but we need to keep the statistics original data to being able to
 # rebuild them at any time.
 # The data will be kept even if the user is deleted, but it will be unlinked from the user's account (ie. anonymized)
-class StatisticProfile < ActiveRecord::Base
+class StatisticProfile < ApplicationRecord
   belongs_to :user
   belongs_to :group
   belongs_to :role

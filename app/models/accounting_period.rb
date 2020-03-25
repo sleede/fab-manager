@@ -6,7 +6,7 @@ require 'zip'
 
 # AccountingPeriod is a period of N days (N > 0) which as been closed by an admin
 # to prevent writing new accounting lines (invoices & refunds) during this period of time.
-class AccountingPeriod < ActiveRecord::Base
+class AccountingPeriod < ApplicationRecord
   before_destroy { false }
   before_update { false }
   before_create :compute_totals

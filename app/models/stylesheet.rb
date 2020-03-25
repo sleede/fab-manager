@@ -3,7 +3,7 @@
 # Stylesheet is a cached CSS file that allows to easily customize the interface of Fab-manager with some configurable colors and
 # a picture for the background of the user's profile.
 # There's only one stylesheet record in the database, which is updated on each colour change.
-class Stylesheet < ActiveRecord::Base
+class Stylesheet < ApplicationRecord
   validates_presence_of :contents
 
   ## ===== THEME =====

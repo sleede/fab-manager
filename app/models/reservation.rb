@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Reservation < ActiveRecord::Base
+class Reservation < ApplicationRecord
   include NotifyWith::NotificationAttachedObject
 
   belongs_to :statistic_profile

@@ -4,7 +4,7 @@ require 'file_size_validator'
 
 # An Import is a file uploaded by an user that provides some data to the database.
 # Currently, this is used to import some users from a CSV file
-class Import < ActiveRecord::Base
+class Import < ApplicationRecord
   mount_uploader :attachment, ImportUploader
 
   belongs_to :user

@@ -1,4 +1,4 @@
-class AgeRange < ActiveRecord::Base
+class AgeRange < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
 

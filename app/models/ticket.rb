@@ -1,4 +1,4 @@
-class Ticket < ActiveRecord::Base
+class Ticket < ApplicationRecord
   belongs_to :reservation
   belongs_to :event_price_category
 

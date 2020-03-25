@@ -2,7 +2,7 @@
 
 # Project is the documentation about an object built by a fab-user
 # It can describe the steps taken by the fab-user to build his object, provide photos, description, attached CAO files, etc.
-class Project < ActiveRecord::Base
+class Project < ApplicationRecord
   include AASM
   include NotifyWith::NotificationAttachedObject
   include OpenlabSync

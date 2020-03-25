@@ -2,7 +2,7 @@
 
 # Abuse is a report made by a visitor (not especially a logged user) who has signaled a content that seems abusive to his eyes.
 # It is currently used with projects.
-class Abuse < ActiveRecord::Base
+class Abuse < ApplicationRecord
   include NotifyWith::NotificationAttachedObject
 
   belongs_to :signaled, polymorphic: true

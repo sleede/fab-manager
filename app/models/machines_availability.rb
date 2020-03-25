@@ -1,4 +1,4 @@
-class MachinesAvailability < ActiveRecord::Base
+class MachinesAvailability < ApplicationRecord
   belongs_to :machine
   belongs_to :availability
   after_destroy :cleanup_availability

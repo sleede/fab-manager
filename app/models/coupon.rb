@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Coupon is a textual code associated with a discount rate or an amount of discount
-class Coupon < ActiveRecord::Base
+class Coupon < ApplicationRecord
   has_many :invoices
 
   after_commit :create_stripe_coupon, on: [:create]

@@ -1,4 +1,4 @@
-class UsersCredit < ActiveRecord::Base
+class UsersCredit < ApplicationRecord
   belongs_to :user
   belongs_to :credit
 

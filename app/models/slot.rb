@@ -3,7 +3,7 @@
 # Time range of duration defined by ApplicationHelper::SLOT_DURATION, slicing an Availability.
 # During a slot a Reservation is possible
 # Only reserved slots are persisted in DB, others are instanciated on the fly
-class Slot < ActiveRecord::Base
+class Slot < ApplicationRecord
   include NotifyWith::NotificationAttachedObject
 
   has_many :slots_reservations, dependent: :destroy

@@ -1,4 +1,4 @@
-class DatabaseProvider < ActiveRecord::Base
+class DatabaseProvider < ApplicationRecord
   has_one :auth_provider, as: :providable, dependent: :destroy
 
   def protected_fields

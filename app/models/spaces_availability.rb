@@ -1,4 +1,4 @@
-class SpacesAvailability < ActiveRecord::Base
+class SpacesAvailability < ApplicationRecord
   belongs_to :space
   belongs_to :availability
   after_destroy :cleanup_availability

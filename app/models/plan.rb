@@ -2,7 +2,7 @@
 
 # Plan is a generic description of a subscription plan, which can be subscribed by a member to benefit from advantageous prices.
 # Subscribers can also get some Credits for some reservable items
-class Plan < ActiveRecord::Base
+class Plan < ApplicationRecord
   belongs_to :group
 
   has_many :credits, dependent: :destroy

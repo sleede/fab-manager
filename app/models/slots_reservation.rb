@@ -1,4 +1,4 @@
-class SlotsReservation < ActiveRecord::Base
+class SlotsReservation < ApplicationRecord
   belongs_to :slot
   belongs_to :reservation
   after_destroy :cleanup_slots

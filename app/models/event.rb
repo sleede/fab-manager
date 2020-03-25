@@ -1,4 +1,4 @@
-class Event < ActiveRecord::Base
+class Event < ApplicationRecord
   include NotifyWith::NotificationAttachedObject
   include ApplicationHelper
 

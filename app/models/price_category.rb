@@ -1,4 +1,4 @@
-class PriceCategory < ActiveRecord::Base
+class PriceCategory < ApplicationRecord
   has_many :event_price_category
   has_many :events, through: :event_price_categories
 

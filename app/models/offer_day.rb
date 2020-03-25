@@ -1,4 +1,4 @@
-class OfferDay < ActiveRecord::Base
+class OfferDay < ApplicationRecord
   include NotifyWith::NotificationAttachedObject
 
   has_many :invoices, as: :invoiced, dependent: :destroy

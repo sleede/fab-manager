@@ -2,7 +2,7 @@
 
 # User is a physical or moral person with its authentication parameters
 # It is linked to the Profile model with hold informations about this person (like address, name, etc.)
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   include NotifyWith::NotificationReceiver
   include NotifyWith::NotificationAttachedObject
   # Include default devise modules. Others available are:

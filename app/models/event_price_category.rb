@@ -1,4 +1,4 @@
-class EventPriceCategory < ActiveRecord::Base
+class EventPriceCategory < ApplicationRecord
   belongs_to :event
   belongs_to :price_category
 

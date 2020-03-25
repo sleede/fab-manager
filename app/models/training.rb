@@ -1,4 +1,4 @@
-class Training < ActiveRecord::Base
+class Training < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
 

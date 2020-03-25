@@ -1,3 +1,3 @@
-class StatisticGraph < ActiveRecord::Base
+class StatisticGraph < ApplicationRecord
   belongs_to :statistic_index
 end

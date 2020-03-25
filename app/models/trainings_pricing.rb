@@ -1,4 +1,4 @@
-class TrainingsPricing < ActiveRecord::Base
+class TrainingsPricing < ApplicationRecord
   belongs_to :training
   belongs_to :group
 

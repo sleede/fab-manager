@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Personal data attached to an user (like first_name, date of birth, etc.)
-class Profile < ActiveRecord::Base
+class Profile < ApplicationRecord
   belongs_to :user
   has_one :user_avatar, as: :viewable, dependent: :destroy
   accepts_nested_attributes_for :user_avatar,

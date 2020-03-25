@@ -1,4 +1,4 @@
-class OAuth2Provider < ActiveRecord::Base
+class OAuth2Provider < ApplicationRecord
   has_one :auth_provider, as: :providable
   has_many :o_auth2_mappings, dependent: :destroy
   accepts_nested_attributes_for :o_auth2_mappings, allow_destroy: true

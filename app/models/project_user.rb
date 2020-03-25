@@ -1,4 +1,4 @@
-class ProjectUser < ActiveRecord::Base
+class ProjectUser < ApplicationRecord
   include NotifyWith::NotificationAttachedObject
 
   belongs_to :project
