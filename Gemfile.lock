@@ -1,3 +1,21 @@
+GIT
+  remote: https://github.com/judynjagi/compass.git
+  revision: 1692c0a7fd8ada392ad5f524bef756ab74e300d0
+  branch: stable
+  specs:
+    compass (1.0.3)
+      chunky_png (~> 1.2)
+      compass-core (~> 1.0.2)
+      compass-import-once (~> 1.0.5)
+      rb-fsevent (>= 0.9.3)
+      rb-inotify (>= 0.9)
+      sass (>= 3.3.13, < 3.5)
+    compass-core (1.0.2)
+      multi_json (~> 1.0)
+      sass (>= 3.3.0, < 3.5)
+    compass-import-once (1.0.5)
+      sass (>= 3.2, < 3.5)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -85,18 +103,6 @@ GEM
     cldr-plurals-runtime-rb (1.0.1)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
-    compass (1.0.3)
-      chunky_png (~> 1.2)
-      compass-core (~> 1.0.2)
-      compass-import-once (~> 1.0.5)
-      rb-fsevent (>= 0.9.3)
-      rb-inotify (>= 0.9)
-      sass (>= 3.3.13, < 3.5)
-    compass-core (1.0.3)
-      multi_json (~> 1.0)
-      sass (>= 3.3.0, < 3.5)
-    compass-import-once (1.0.5)
-      sass (>= 3.2, < 3.5)
     compass-rails (3.1.0)
       compass (~> 1.0.0)
       sass-rails (< 5.1)
@@ -457,6 +463,7 @@ DEPENDENCIES
   caxlsx
   caxlsx_rails
   chroma
+  compass-core!
   compass-rails (= 3.1.0)
   coveralls
   database_cleaner

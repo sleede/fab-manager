@@ -2,6 +2,10 @@
 
 source 'https://rubygems.org'
 
+git 'https://github.com/judynjagi/compass.git', branch: 'stable' do
+  gem 'compass-core'
+end
+
 gem 'compass-rails', '3.1.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.7'

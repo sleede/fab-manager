@@ -5,6 +5,7 @@
 - Updated translations
 - Updated angular-translate
 - Updated eslint
+- Updated compass-rails & compass-core
 - Renamed production documentation
 - Syntax improvements in scss files
 - Fix a bug: invalid translation keys in closing accounting period interface
