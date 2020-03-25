@@ -556,3 +556,31 @@ value_history_59:
   created_at: 2019-09-20 11:02:32.125400000 Z
   updated_at: 2019-09-20 11:02:32.125400000 Z
   footprint:
+
+value_history_60:
+  id: 60
+  setting_id: 60
+  invoicing_profile_id: 1
+  value: |-
+    <div>
+    <div class="m-sm">
+    <div id="news">#{I18n.t('app.admin.settings.item_news')}</div>
+    </div>
+    <div class="row wrapper">
+    <div class="col-lg-8">
+    <div id="projects">#{I18n.t('app.admin.settings.item_projects')}</div>
+    </div>
+    <div class="col-lg-4 m-t-lg">
+    <div id="twitter">#{I18n.t('app.admin.settings.item_twitter')}</div>
+    <div id="members">#{I18n.t('app.admin.settings.item_members')}</div>
+    </div>
+    </div>
+    <div class="row wrapper m-t-sm">
+    <div class="col-lg-12">
+    <div id="events">#{I18n.t('app.admin.settings.item_events')}</div>
+    </div>
+    </div>
+    </div>
+  created_at: 2020-03-25 09:24:09.016676894 Z
+  updated_at: 2020-03-25 09:24:09.016676894 Z
+  footprint:

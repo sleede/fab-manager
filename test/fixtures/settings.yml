@@ -346,3 +346,9 @@ setting_59:
   name: accounting_Space_label
   created_at: 2019-09-20 11:02:32.125400000 Z
   updated_at: 2019-09-20 11:02:32.125400000 Z
+
+setting_60:
+  id: 60
+  name: home_content
+  created_at: 2020-03-25 09:21:35.200795784 Z
+  updated_at: 2020-03-25 09:21:35.200795784 Z
