@@ -3,6 +3,7 @@
 - Docker build will no longer embed development dependencies
 - Updated instructions to setup a development environment
 - Updated translations
+- Removed `MESSAGEFORMAT_LOCALE` as it is now handled by make-plural
 - Updated angular-translate
 - Updated eslint
 - Updated compass-rails & compass-core

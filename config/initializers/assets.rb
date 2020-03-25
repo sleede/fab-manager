@@ -35,6 +35,5 @@ Rails.application.config.assets.precompile += %w[
   angular-i18n/angular-locale_*.js
   moment/locale/*.js
   summernote/lang/*.js
-  messageformat/locale/*.js
   fullcalendar/dist/lang/*.js
 ]

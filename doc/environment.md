@@ -312,13 +312,6 @@ Please, be aware that **the configured locale will imply the CURRENCY displayed 
 _Eg.: configuring **fr-fr** will set the currency symbol to **€** but **fr-ca** will set **$** as currency symbol, so setting the `ANGULAR_LOCALE` to simple **fr** (without country indication) will probably not do what you expect._
 
 See [code.angularjs.org/i18n/angular-locale_*.js](https://code.angularjs.org/1.6.10/i18n/) for a list of available locales. Default is **en**.
-<a name="MESSAGEFORMAT_LOCALE"></a>
-
-    MESSAGEFORMAT_LOCALE
-
-Configure the messageformat.js library, used by angular-translate.
-
-See [github.com/messageformat/messageformat/locale/*.js](https://github.com/messageformat/messageformat/tree/v0.1.8/locale) for a list of available locales.
 <a name="FULLCALENDAR_LOCALE"></a>
 
     FULLCALENDAR_LOCALE
