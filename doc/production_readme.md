@@ -137,7 +137,7 @@ docker-compose restart nginx
  ```
 - Example of command passing env variables
 ```bash
-docker-compose run --rm -e ADMIN_EMAIL=xxx -e ADMIN_PASSWORD=xxx fabmanager bundle exec rake db:seed
+docker-compose run --rm -e ADMIN_EMAIL=xxx -e ADMIN_PASSWORD=xxx fabmanager bundle exec rails db:seed
 ```
 <a name="update-fabmanager"></a>
 ## Update Fab-manager
@@ -170,7 +170,7 @@ You can subscribe to [this atom feed](https://github.com/sleede/fab-manager/rele
 
 5. compile new assets
 
-   `docker-compose run --rm fabmanager bundle exec rake assets:precompile`
+   `docker-compose run --rm fabmanager bundle exec rails assets:precompile`
 
 6. run specific commands
 
