@@ -1,3 +1,8 @@
+# frozen_string_literal: true
+
+# Space is a reservable item that can be booked by multiple people on the same Slot.
+# It represents a physical place, in the Fablab, like a meeting room where multiple people will be able to work at
+# the same time.
 class Space < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged

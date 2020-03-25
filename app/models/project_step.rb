@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# ProjectStep is a detail in the documentation of a Project.
 class ProjectStep < ApplicationRecord
   belongs_to :project
   has_many :project_step_images, as: :viewable, dependent: :destroy

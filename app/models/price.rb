@@ -29,16 +29,16 @@ class Price < ApplicationRecord
       all_elements[:slots] = []
 
       # initialize Plan
-      if user.subscribed_plan
-        plan = user.subscribed_plan
-        new_plan_being_bought = false
-      elsif plan_id
-        plan = Plan.find(plan_id)
-        new_plan_being_bought = true
-      else
-        plan = nil
-        new_plan_being_bought = false
-      end
+      plan = if user.subscribed_plan
+               new_plan_being_bought = false
+               user.subscribed_plan
+             elsif plan_id
+               new_plan_being_bought = true
+               Plan.find(plan_id)
+             else
+               new_plan_being_bought = false
+               nil
+             end
 
       # === compute reservation price ===
 

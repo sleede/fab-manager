@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# AgeRange is an optional filter used to categorize Events
 class AgeRange < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged

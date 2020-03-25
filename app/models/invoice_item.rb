@@ -7,7 +7,7 @@ class InvoiceItem < ApplicationRecord
   belongs_to :invoice
   belongs_to :subscription
 
-  has_one :invoice_item # to associated invoice_items of an invoice to invoice_items of an avoir
+  has_one :invoice_item # associates invoice_items of an invoice to invoice_items of an Avoir
 
   after_create :chain_record
   after_update :log_changes

@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# Organization is a special attribute for a member, used to mark him as corporation or a non-profit organization.
+# This is mainly used for invoicing.
 class Organization < ApplicationRecord
   belongs_to :profile
   belongs_to :invoicing_profile

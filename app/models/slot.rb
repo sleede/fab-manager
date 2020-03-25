@@ -2,7 +2,7 @@
 
 # Time range of duration defined by ApplicationHelper::SLOT_DURATION, slicing an Availability.
 # During a slot a Reservation is possible
-# Only reserved slots are persisted in DB, others are instanciated on the fly
+# Only reserved slots are persisted in DB, others are instantiated on the fly
 class Slot < ApplicationRecord
   include NotifyWith::NotificationAttachedObject
 

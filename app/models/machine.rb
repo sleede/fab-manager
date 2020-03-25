@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Machine is an hardware equipment hosted in the fablab that is available for reservation to the members
+# Machine is an hardware equipment hosted in the Fablab that is available for reservation to the members
 class Machine < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged

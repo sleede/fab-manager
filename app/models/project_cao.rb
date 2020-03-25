@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# CAO file attached to a project documentation
+# CAD file attached to a project documentation
 class ProjectCao < Asset
   mount_uploader :attachment, ProjectCaoUploader
 

@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# SlotsReservation is the relation table between a Slot and a Reservation.
 class SlotsReservation < ApplicationRecord
   belongs_to :slot
   belongs_to :reservation
@@ -6,8 +9,8 @@ class SlotsReservation < ApplicationRecord
   # when the SlotsReservation is deleted (from Reservation destroy cascade), we delete the
   # corresponding slot
   def cleanup_slots
-    unless slot.destroying
-      slot.destroy
-    end
+    return unless slot.destroying
+
+    slot.destroy
   end
 end

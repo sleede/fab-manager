@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# AuthProvider is a configuration record, storing parameters of an external Single-Sign On server
 class AuthProvider < ApplicationRecord
   # this is a simple stub used for database creation & configuration
   class SimpleAuthProvider < Object

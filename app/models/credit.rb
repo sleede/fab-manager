@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Credit is a way to offer free reservations for subscribing members.
 class Credit < ApplicationRecord
   belongs_to :creditable, polymorphic: true
   belongs_to :plan

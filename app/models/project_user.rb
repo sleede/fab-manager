@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# ProjectUser is the relation table between a Project and an User.
+# Users are collaborators to a Project, with write access if they have confirmed their participation.
 class ProjectUser < ApplicationRecord
   include NotifyWith::NotificationAttachedObject
 
@@ -9,10 +13,12 @@ class ProjectUser < ApplicationRecord
   after_update :notify_project_author_when_collaborator_valid, if: :saved_change_to_is_valid?
 
   private
+
   def generate_valid_token
-    begin
+    loop do
       self.valid_token = SecureRandom.hex
-    end while self.class.exists?(valid_token: valid_token)
+      break unless self.class.exists?(valid_token: valid_token)
+    end
   end
 
   def notify_project_collaborator_to_valid

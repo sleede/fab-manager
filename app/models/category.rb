@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# Category is a first-level filter, used to categorize Events.
+# It is mandatory to choose a Category when creating an event.
 class Category < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
