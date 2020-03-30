@@ -4,8 +4,6 @@ require 'sidekiq/web'
 require 'sidekiq/cron/web'
 
 Rails.application.routes.draw do
-  post 'webhooks' => 'webhooks#create'
-
   if AuthProvider.active.providable_type == DatabaseProvider.name
     # with local authentification we do not use omniAuth so we must differentiate the config
     devise_for :users, controllers: {
