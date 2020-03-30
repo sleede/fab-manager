@@ -8,7 +8,7 @@ end
 
 gem 'compass-rails', '3.1.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.7'
+gem 'rails', '~> 5.2.4'
 # Use Puma as web server
 gem 'puma', '3.12.4'
 # Use SCSS for stylesheets
