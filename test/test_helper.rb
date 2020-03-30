@@ -5,6 +5,7 @@ Coveralls.wear!('rails')
 
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
+require 'action_dispatch'
 require 'rails/test_help'
 require 'vcr'
 require 'sidekiq/testing'

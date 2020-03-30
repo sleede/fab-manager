@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'test_helper'
+
 class AbusesTest < ActionDispatch::IntegrationTest
   # Called before every test method runs. Can be used
   # to set up fixture information.

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class PriceCategoryTest < ActiveSupport::TestCase
   test 'price category name must be unique' do
-    pc = PriceCategory.new({name: '- DE 25 ANS', conditions: 'Tarif préférentiel pour les jeunes'})
+    pc = PriceCategory.new(name: '- DE 25 ANS', conditions: 'Tarif préférentiel pour les jeunes')
     assert pc.invalid?
     assert pc.errors[:name].present?
   end
