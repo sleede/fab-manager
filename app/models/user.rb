@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # User is a physical or moral person with its authentication parameters
-# It is linked to the Profile model with hold informations about this person (like address, name, etc.)
+# It is linked to the Profile model with hold information about this person (like address, name, etc.)
 class User < ApplicationRecord
   include NotifyWith::NotificationReceiver
   include NotifyWith::NotificationAttachedObject

@@ -1,3 +1,8 @@
+# frozen_string_literal: true
+
+# Training is a course for members to acquire knowledge on a specific matter.
+# Trainings are designed to be scheduled periodically through Availabilities.
+# A Training can be a prerequisite before members can book a Machine.
 class Training < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
