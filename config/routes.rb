@@ -5,7 +5,7 @@ require 'sidekiq/cron/web'
 
 Rails.application.routes.draw do
   if AuthProvider.active.providable_type == DatabaseProvider.name
-    # with local authentification we do not use omniAuth so we must differentiate the config
+    # with local authentication we do not use omniAuth so we must differentiate the config
     devise_for :users, controllers: {
       registrations: 'registrations', sessions: 'sessions', confirmations: 'confirmations', passwords: 'passwords'
     }
