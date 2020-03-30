@@ -17,12 +17,10 @@ class AuthProvider < ApplicationRecord
 
   belongs_to :providable, polymorphic: true, dependent: :destroy
   accepts_nested_attributes_for :providable
-  # add gem 'protected_attributes_continued' for Rails 5+
-  # attr_accessible :name, :providable_type, :providable_attributes
 
   before_create :set_initial_state
 
-  def build_providable(params, _assignment_options)
+  def build_providable(params)
     raise "Unknown providable_type: #{providable_type}" unless PROVIDABLE_TYPES.include?(providable_type)
 
     self.providable = providable_type.constantize.new(params)
