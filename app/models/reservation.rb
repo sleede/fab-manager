@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
-class Reservation < ActiveRecord::Base
+# Reservation is a Slot or a Ticket booked by a member.
+# Slots are for Machine, Space and Training reservations.
+# Tickets are for Event reservations.
+class Reservation < ApplicationRecord
   include NotifyWith::NotificationAttachedObject
 
   belongs_to :statistic_profile

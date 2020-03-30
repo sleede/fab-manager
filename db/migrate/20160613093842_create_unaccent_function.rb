@@ -1,5 +1,6 @@
-class CreateUnaccentFunction < ActiveRecord::Migration
+# frozen_string_literal:true
 
+class CreateUnaccentFunction < ActiveRecord::Migration[4.2]
   # PostgreSQL only
   def up
     execute 'CREATE EXTENSION IF NOT EXISTS unaccent;'

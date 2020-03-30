@@ -1,4 +1,6 @@
-class AddDefaultForTrainingNbCreditToPlans < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class AddDefaultForTrainingNbCreditToPlans < ActiveRecord::Migration[4.2]
   def up
     change_column_default :plans, :training_credit_nb, 0
 

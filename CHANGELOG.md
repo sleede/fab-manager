@@ -3,9 +3,12 @@
 - Docker build will no longer embed development dependencies
 - Updated instructions to setup a development environment
 - Updated translations
+- Removed `MESSAGEFORMAT_LOCALE` as it is now handled by make-plural
 - Updated angular-translate
 - Updated eslint
+- Updated compass-rails & compass-core
 - Renamed production documentation
+- Syntax improvements in scss files
 - Fix a bug: invalid translation keys in closing accounting period interface
 - Fix a bug: since PostgreSQL release 9.6.17, the new installations will fail to start complaining for missing password (#194)
 - Fix a bug: missing translations for some error messages

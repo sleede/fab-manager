@@ -2,7 +2,7 @@
 
 # Plan is a generic description of a subscription plan, which can be subscribed by a member to benefit from advantageous prices.
 # Subscribers can also get some Credits for some reservable items
-class Plan < ActiveRecord::Base
+class Plan < ApplicationRecord
   belongs_to :group
 
   has_many :credits, dependent: :destroy
@@ -10,7 +10,6 @@ class Plan < ActiveRecord::Base
   has_many :machine_credits, -> { where(creditable_type: 'Machine') }, class_name: 'Credit'
   has_many :space_credits, -> { where(creditable_type: 'Space') }, class_name: 'Credit'
   has_many :subscriptions
-  has_one :plan_image, as: :viewable, dependent: :destroy
   has_one :plan_file, as: :viewable, dependent: :destroy
   has_many :prices, dependent: :destroy
 

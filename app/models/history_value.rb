@@ -3,7 +3,7 @@
 require 'checksum'
 
 # Setting values, kept history of modifications
-class HistoryValue < ActiveRecord::Base
+class HistoryValue < ApplicationRecord
   belongs_to :setting
   belongs_to :invoicing_profile
 

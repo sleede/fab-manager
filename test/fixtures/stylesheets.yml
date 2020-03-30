@@ -35,5 +35,15 @@ stylesheet_1:
          .pricing-panel .cta-button .btn:hover, .pricing-panel .cta-button .custom-invoice .modal-body .elements li:hover, .custom-invoice .modal-body .elements .pricing-panel .cta-button li:hover { background-color: #ffdd00 !important; }
          a.label:hover, .form-control.form-control-ui-select .select2-choices a.select2-search-choice:hover, a.label:focus, .form-control.form-control-ui-select .select2-choices a.select2-search-choice:focus { color: #cb1117; }
          .about-picture { background: linear-gradient( rgba(255,255,255,0.12), rgba(255,255,255,0.13) ), linear-gradient( rgba(203, 17, 23, 0.78), rgba(203, 17, 23, 0.82) ), url('/about-fablab.jpg') no-repeat; }
+         .social-icons > div:hover { background-color: #ffdd00; }
+         .profile-top { background: linear-gradient( rgba(255,255,255,0.12), rgba(255,255,255,0.13) ), linear-gradient(rgba(203, 17, 23, 0.78), rgba(203, 17, 23, 0.82) ), url('/about-fablab.jpg') no-repeat; }
+         .profile-top .social-links a:hover { background-color: #ffdd00 !important; border-color: #ffdd00 !important; }
+         section#cookies-modal div.cookies-consent .cookies-actions button.accept { background-color: #ffdd00; }
+  name: theme
   created_at: 2016-04-04 14:11:34.712927000 Z
   updated_at: 2016-04-04 14:11:34.712927000 Z
+
+stylesheet_2:
+  id: 2
+  contents: ".home-page { }"
+  name: home_page

@@ -1,4 +1,6 @@
-class CreateAbuses < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class CreateAbuses < ActiveRecord::Migration[4.2]
   def change
     create_table :abuses do |t|
       t.references :signaled, polymorphic: true, index: true

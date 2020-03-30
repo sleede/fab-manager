@@ -2,8 +2,8 @@
 
 # Time range of duration defined by ApplicationHelper::SLOT_DURATION, slicing an Availability.
 # During a slot a Reservation is possible
-# Only reserved slots are persisted in DB, others are instanciated on the fly
-class Slot < ActiveRecord::Base
+# Only reserved slots are persisted in DB, others are instantiated on the fly
+class Slot < ApplicationRecord
   include NotifyWith::NotificationAttachedObject
 
   has_many :slots_reservations, dependent: :destroy
@@ -53,11 +53,11 @@ class Slot < ActiveRecord::Base
   end
 
   def dates_were_modified?
-    start_at_changed? or end_at_changed?
+    saved_change_to_start_at? || saved_change_to_end_at?
   end
 
   def canceled?
-    canceled_at_changed?
+    saved_change_to_canceled_at?
   end
 
   def set_ex_start_end_dates_attrs

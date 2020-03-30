@@ -1,4 +1,6 @@
-class CreateInvoicingProfiles < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class CreateInvoicingProfiles < ActiveRecord::Migration[4.2]
   def change
     create_table :invoicing_profiles do |t|
       t.references :user, index: true, foreign_key: true

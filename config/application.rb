@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
-require File.expand_path('../boot', __FILE__)
+require_relative 'boot'
 
 require 'csv'
 require 'rails/all'
 require 'elasticsearch/rails/instrumentation'
 require 'elasticsearch/persistence/model'
-
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -15,6 +14,10 @@ Bundler.require(*Rails.groups)
 module Fablab
   class Application < Rails::Application
     require 'fab_manager'
+
+    # Initialize configuration defaults for originally generated Rails version.
+    # config.load_defaults 5.1
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -31,19 +34,8 @@ module Fablab
     config.i18n.default_locale = Rails.application.secrets.rails_locale
     config.i18n.fallbacks = [Rails.application.secrets.app_locale, :en]
 
-    config.assets.paths << Rails.root.join('node_modules').to_s
-
-    # Do not swallow errors in after_commit/after_rollback callbacks.
-    config.active_record.raise_in_transactional_callbacks = true
-
     config.to_prepare do
       Devise::Mailer.layout 'notifications_mailer'
-    end
-
-    # allow use rails helpers in angular templates
-    Rails.application.assets.context_class.class_eval do
-      include ActionView::Helpers
-      include Rails.application.routes.url_helpers
     end
 
     config.active_job.queue_adapter = :sidekiq

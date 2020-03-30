@@ -1,49 +1,140 @@
+.bg-light {
+  background-color: $brand-light;
+}
 
-.bg-light { background-color: $brand-light; }
 //.bg-red { background-color: $red; color: white; }
 //.bg-red-dark { background-color: $red-dark; }
 //.bg-yellow { background-color: $yellow !important; }
-.bg-token { background-color: rgba(230, 208, 137, 0.49); }
-.bg-machine { background-color: $beige; }
-.bg-space { background-color: $cyan }
-.bg-formation { background-color: $violet; }
-.bg-event { background-color: $japonica; }
-.bg-atelier { background-color: $blue; }
-.bg-stage { background-color: $violet; }
-.bg-success { background-color: $brand-success; }
-.bg-info { background-color: $brand-info; }
-.border-machine { border-color: $beige !important; }
-.border-space { border-color: $cyan !important; }
-.border-formation { border-color: $violet !important; }
-.border-event { border-color: $japonica !important; }
+.bg-token {
+  background-color: rgba(230, 208, 137, 0.49);
+}
 
-.bg-black-light { background-color: #424242 !important; }
+.bg-machine {
+  background-color: $beige;
+}
+
+.bg-space {
+  background-color: $cyan;
+}
+
+.bg-formation {
+  background-color: $violet;
+}
+
+.bg-event {
+  background-color: $japonica;
+}
+
+.bg-atelier {
+  background-color: $blue;
+}
+
+.bg-stage {
+  background-color: $violet;
+}
+
+.bg-success {
+  background-color: $brand-success;
+}
+
+.bg-info {
+  background-color: $brand-info;
+}
+
+.border-machine {
+  border-color: $beige !important;
+}
+
+.border-space {
+  border-color: $cyan !important;
+}
+
+.border-formation {
+  border-color: $violet !important;
+}
+
+.border-event {
+  border-color: $japonica !important;
+}
+
+.bg-black-light {
+  background-color: #424242 !important;
+}
 
 .bg-white {
-	background-color: #fff;
-	color: $text-color;
-	a {
-		color: $link-color;
-		&:hover{
-			color: darken($link-color, 10%);
-		}
-	}
-	.text-muted{color: $text-muted !important;}
-}
-.bg-white-only{background-color:#fff;}
-.bg-empty{background-color: transparent;}
+  background-color: #fff;
+  color: $text-color;
 
-.text-black{ color: #000 !important; };
-.text-black-light { color: #424242 !important; }
-.text-gray { color: #5a5a5a !important; }
-.text-white { color: #fff !important; }
+  a {
+    color: $link-color;
+
+    &:hover {
+      color: darken($link-color, 10%);
+    }
+  }
+
+  .text-muted {
+    color: $text-muted !important;
+  }
+}
+
+.bg-white-only {
+  background-color: #fff;
+}
+
+.bg-empty {
+  background-color: transparent;
+}
+
+.text-black {
+  color: #000 !important;
+}
+
+.text-black-light {
+  color: #424242 !important;
+}
+
+.text-gray {
+  color: #5a5a5a !important;
+}
+
+.text-white {
+  color: #fff !important;
+}
+
 //.text-yellow { color: $yellow !important; }
-.text-blue { color: $blue; }
-.text-muted { color: $text-muted; }
-.text-danger, .red { color: $red !important; }
-.text-red-only { color: $red !important; }
-.text-purple { color: $violet !important; }
-.text-japonica { color: $japonica !important; }
-.text-beige { color: $beige !important; }
-.text-cyan { color: $cyan !important; }
-.text-green, .green { color: #79C84A !important; }
+.text-blue {
+  color: $blue;
+}
+
+.text-muted {
+  color: $text-muted;
+}
+
+.text-danger, .red {
+  color: $red !important;
+}
+
+.text-red-only {
+  color: $red !important;
+}
+
+.text-purple {
+  color: $violet !important;
+}
+
+.text-japonica {
+  color: $japonica !important;
+}
+
+.text-beige {
+  color: $beige !important;
+}
+
+.text-cyan {
+  color: $cyan !important;
+}
+
+.text-green, .green {
+  color: #79C84A !important;
+}

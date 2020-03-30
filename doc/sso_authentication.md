@@ -31,7 +31,7 @@ rails g model LdapMapping ldap_provider:belongs_to local_field:string local_mode
 Complete the Provider Model ( **app/model/ldap_provider.rb** )
 
 ```ruby
-class LdapProvider < ActiveRecord::Base
+class LdapProvider < ApplicationRecord
   has_one :auth_provider, as: :providable
   has_many :ldap_mappings, dependent: :destroy
   accepts_nested_attributes_for :ldap_mappings, allow_destroy: true

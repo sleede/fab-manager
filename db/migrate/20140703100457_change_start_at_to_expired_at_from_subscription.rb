@@ -1,4 +1,6 @@
-class ChangeStartAtToExpiredAtFromSubscription < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class ChangeStartAtToExpiredAtFromSubscription < ActiveRecord::Migration[4.2]
   def change
     remove_column :subscriptions, :start_at, :datetime
     add_column :subscriptions, :expired_at, :datetime

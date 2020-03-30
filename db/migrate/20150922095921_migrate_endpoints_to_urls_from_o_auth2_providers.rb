@@ -1,4 +1,6 @@
-class MigrateEndpointsToUrlsFromOAuth2Providers < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class MigrateEndpointsToUrlsFromOAuth2Providers < ActiveRecord::Migration[4.2]
   def change
     rename_column :o_auth2_providers, :base_url, :api_url
     rename_column :o_auth2_providers, :token_endpoint, :token_url

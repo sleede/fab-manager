@@ -1,4 +1,6 @@
-class MigrateWalletToInvoicingProfile < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class MigrateWalletToInvoicingProfile < ActiveRecord::Migration[4.2]
   def up
     Wallet.all.each do |w|
       user = User.find(w.user_id)

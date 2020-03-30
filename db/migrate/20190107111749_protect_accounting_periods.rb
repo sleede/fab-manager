@@ -1,5 +1,6 @@
-class ProtectAccountingPeriods < ActiveRecord::Migration
+# frozen_string_literal:true
 
+class ProtectAccountingPeriods < ActiveRecord::Migration[4.2]
   # PostgreSQL only
   def up
     return if Rails.env.development? || Rails.env.test?

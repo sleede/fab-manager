@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-json.extract! invoiced, :created_at, :stp_invoice_id
+json.extract! invoiced, :created_at
 json.reservable do
   json.type invoiced.reservable_type
   json.id invoiced.reservable_id

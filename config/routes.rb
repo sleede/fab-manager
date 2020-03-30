@@ -4,10 +4,8 @@ require 'sidekiq/web'
 require 'sidekiq/cron/web'
 
 Rails.application.routes.draw do
-  post 'webhooks' => 'webhooks#create'
-
   if AuthProvider.active.providable_type == DatabaseProvider.name
-    # with local authentification we do not use omniAuth so we must differentiate the config
+    # with local authentication we do not use omniAuth so we must differentiate the config
     devise_for :users, controllers: {
       registrations: 'registrations', sessions: 'sessions', confirmations: 'confirmations', passwords: 'passwords'
     }
@@ -19,10 +17,8 @@ Rails.application.routes.draw do
     get '/sso-redirect', to: 'application#sso_redirect', as: :sso_redirect
   end
 
-
   ## The priority is based upon order of creation: first created -> highest priority.
   ## See how all your routes lay out with "rake routes".
-
 
   constraints user_agent: %r{facebookexternalhit/[0-9]|Twitterbot|Pinterest|Google.*snippet} do
     root to: 'social_bot#share', as: :bot_root

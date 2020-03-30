@@ -1,4 +1,6 @@
-class AddSlugsToExistingCategories < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class AddSlugsToExistingCategories < ActiveRecord::Migration[4.2]
   def up
     execute 'UPDATE categories
              SET slug=name

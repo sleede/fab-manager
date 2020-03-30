@@ -1,11 +1,15 @@
-class Category < ActiveRecord::Base
+# frozen_string_literal: true
+
+# Category is a first-level filter, used to categorize Events.
+# It is mandatory to choose a Category when creating an event.
+class Category < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
 
   has_many :events, dependent: :destroy
 
   after_create :create_statistic_subtype
-  after_update :update_statistic_subtype, if: :name_changed?
+  after_update :update_statistic_subtype, if: :saved_change_to_name?
   after_destroy :remove_statistic_subtype
 
 

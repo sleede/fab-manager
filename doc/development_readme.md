@@ -112,19 +112,19 @@ This procedure is not easy to follow so if you don't need to write some code for
    ```
 
 13. Build the databases.
-   > **⚠ Warning**: **DO NOT** run `rake db:setup` instead of these commands, as this will not run some required raw SQL instructions.
+   > **⚠ Warning**: **DO NOT** run `rails db:setup` instead of these commands, as this will not run some required raw SQL instructions.
 
    > **🛈 Please note**: Your password length must be between 8 and 128 characters, otherwise db:seed will be rejected. This is configured in [config/initializers/devise.rb](config/initializers/devise.rb)
 
    ```bash
    # for dev
-   rake db:create
-   rake db:migrate
-   ADMIN_EMAIL='youradminemail' ADMIN_PASSWORD='youradminpassword' rake db:seed
-   rake fablab:es:build_stats
+   rails db:create
+   rails db:migrate
+   ADMIN_EMAIL='youradminemail' ADMIN_PASSWORD='youradminpassword' rails db:seed
+   rails fablab:es:build_stats
    # for tests
-   RAILS_ENV=test rake db:create
-   RAILS_ENV=test rake db:migrate
+   RAILS_ENV=test rails db:create
+   RAILS_ENV=test rails db:migrate
    ```
 
 14. Create the pids folder used by Sidekiq. If you want to use a different location, you can configure it in `config/sidekiq.yml`
@@ -170,7 +170,7 @@ If the scheduled task wasn't executed for any reason (eg. you are in a dev envir
 
 ```bash
 # Here for the 50 last days
-rake fablab:es:generate_stats[50]
+rails fablab:es:generate_stats[50]
 ```
 
 <a name="backup-and-restore-elasticsearch"></a>

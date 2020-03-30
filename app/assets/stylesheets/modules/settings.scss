@@ -5,6 +5,7 @@
         .note-toolbar .note-btn-group .note-btn .nugget {
           font-family: "FontAwesome";
         }
+
         .note-editing-area .note-editable {
           #news {
             width: 100%;
@@ -20,29 +21,35 @@
 
           #projects {
             @extend #news;
+
             line-height: 523px;
           }
 
           #twitter {
             @extend #news;
+
             line-height: 162px;
           }
 
           #members {
             @extend #news;
+
             line-height: 320px;
           }
 
           #events {
             @extend #news;
+
             line-height: 621px;
           }
         }
       }
     }
+
     .home-page-style {
       .panel {
         border: 0;
+
         .panel-heading {
           background: none;
 

@@ -5,24 +5,29 @@
       display: inline-block;
     }
   }
+
   .required-row {
     div.input-group {
       width: 95%;
       display: inline-table;
     }
+
     select.form-control {
       width: 95%;
       display: inline-block;
     }
+
     .exponent {
       position: relative;
       top: -14px;
       right: -4px;
     }
+
     .exponent-select {
       top: -1px;
     }
   }
+
   .info-required {
     color: #5a5a5a;
     font-size: 8pt;

@@ -1,6 +1,6 @@
+# frozen_string_literal: true
+
 class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
-
-
   setup do
     @user = User.find_by(username: 'jdupond')
     login_as(@user, scope: :user)
@@ -11,19 +11,19 @@ class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
 
     VCR.use_cassette('subscriptions_user_create_success') do
       post '/api/payments/confirm_payment',
-           {
+           params: {
              payment_method_id: stripe_payment_method,
              cart_items: {
                subscription: {
                  plan_id: plan.id
                }
              }
-           }.to_json, default_headers
+           }.to_json, headers: default_headers
     end
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime::JSON, response.content_type
+    assert_equal Mime[:json], response.content_type
 
     # Check the correct plan was subscribed
     subscription = json_response(response.body)
@@ -65,27 +65,25 @@ class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
     assert_equal plan.amount, invoice.total, 'Invoice total price does not match the bought subscription'
   end
 
-
-
   test 'user fails to take a subscription' do
     # get plan for wrong group
     plan = Plan.where.not(group_id: @user.group.id).first
 
     VCR.use_cassette('subscriptions_user_create_failed') do
       post '/api/payments/confirm_payment',
-           {
+           params: {
              payment_method_id: stripe_payment_method,
              cart_items: {
                subscription: {
                  plan_id: plan.id
                }
              }
-           }.to_json, default_headers
+           }.to_json, headers: default_headers
     end
 
     # Check response format & status
     assert_equal 422, response.status, response.body
-    assert_equal Mime::JSON, response.content_type
+    assert_equal Mime[:json], response.content_type
 
     # Check the error was handled
     assert_match /plan is not compatible/, response.body
@@ -94,7 +92,6 @@ class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
     assert_nil @user.subscription, "user's subscription was found"
   end
 
-
   test 'user successfully takes a subscription with wallet' do
     @vlonchamp = User.find_by(username: 'vlonchamp')
     login_as(@vlonchamp, scope: :user)
@@ -102,21 +99,21 @@ class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
 
     VCR.use_cassette('subscriptions_user_create_success_with_wallet') do
       post '/api/payments/confirm_payment',
-           {
+           params: {
              payment_method_id: stripe_payment_method,
              cart_items: {
                subscription: {
                  plan_id: plan.id
                }
              }
-           }.to_json, default_headers
+           }.to_json, headers: default_headers
     end
 
     @vlonchamp.wallet.reload
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime::JSON, response.content_type
+    assert_equal Mime[:json], response.content_type
 
     # Check the correct plan was subscribed
     subscription = json_response(response.body)
@@ -138,7 +135,8 @@ class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
     assert_equal 10,
                  (printer.prices.find_by(
                    group_id: @vlonchamp.group_id,
-                   plan_id: @vlonchamp.subscription.plan_id).amount / 100.00
+                   plan_id: @vlonchamp.subscription.plan_id
+                 ).amount / 100.00
                  ),
                  'machine hourly price does not match'
 

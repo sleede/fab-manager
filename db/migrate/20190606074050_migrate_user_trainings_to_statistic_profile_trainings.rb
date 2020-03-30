@@ -1,4 +1,6 @@
-class MigrateUserTrainingsToStatisticProfileTrainings < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class MigrateUserTrainingsToStatisticProfileTrainings < ActiveRecord::Migration[4.2]
   def up
     user_trainings = execute('SELECT * FROM user_trainings')
 

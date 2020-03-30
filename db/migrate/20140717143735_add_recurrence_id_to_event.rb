@@ -1,4 +1,6 @@
-class AddRecurrenceIdToEvent < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class AddRecurrenceIdToEvent < ActiveRecord::Migration[4.2]
   def change
     add_column :events, :recurrence_id, :integer
     add_index :events, :recurrence_id

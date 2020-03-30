@@ -1,6 +1,6 @@
+# frozen_string_literal: true
+
 class Subscriptions::RenewAsUserTest < ActionDispatch::IntegrationTest
-
-
   setup do
     @user = User.find_by(username: 'lseguin')
     login_as(@user, scope: :user)
@@ -12,19 +12,19 @@ class Subscriptions::RenewAsUserTest < ActionDispatch::IntegrationTest
 
     VCR.use_cassette('subscriptions_user_renew_success', erb: true) do
       post '/api/payments/confirm_payment',
-           {
+           params: {
              payment_method_id: stripe_payment_method,
              cart_items: {
                subscription: {
                  plan_id: plan.id
                }
              }
-           }.to_json, default_headers
+           }.to_json, headers: default_headers
     end
 
     # Check response format & status
     assert_equal 201, response.status, "API does not return the expected status. #{response.body}"
-    assert_equal Mime::JSON, response.content_type
+    assert_equal Mime[:json], response.content_type
 
     # Check the correct plan was subscribed
     subscription = json_response(response.body)
@@ -69,8 +69,6 @@ class Subscriptions::RenewAsUserTest < ActionDispatch::IntegrationTest
     assert_equal plan.amount, invoice.total, 'Invoice total price does not match the bought subscription'
   end
 
-
-
   test 'user fails to renew a subscription' do
     plan = Plan.find_by(group_id: @user.group.id, type: 'Plan', base_name: 'Mensuel')
 
@@ -78,19 +76,19 @@ class Subscriptions::RenewAsUserTest < ActionDispatch::IntegrationTest
 
     VCR.use_cassette('subscriptions_user_renew_failed') do
       post '/api/payments/confirm_payment',
-           {
+           params: {
              payment_method_id: stripe_payment_method(error: :card_declined),
              cart_items: {
                subscription: {
                  plan_id: plan.id
                }
              }
-           }.to_json, default_headers
+           }.to_json, headers: default_headers
     end
 
     # Check response format & status
     assert_equal 200, response.status, "API does not return the expected status. #{response.body}"
-    assert_equal Mime::JSON, response.content_type
+    assert_equal Mime[:json], response.content_type
 
     # Check the error was handled
     assert_match /Your card was declined/, response.body
@@ -100,7 +98,5 @@ class Subscriptions::RenewAsUserTest < ActionDispatch::IntegrationTest
 
     # Check the subscription was not saved
     assert_equal 1, @user.subscriptions.count
-
   end
-
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Subscription is an active or archived subscription of an User to a Plan
-class Subscription < ActiveRecord::Base
+class Subscription < ApplicationRecord
   include NotifyWith::NotificationAttachedObject
 
   belongs_to :plan

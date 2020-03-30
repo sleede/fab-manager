@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Reservations
   class CreateAsAdminTest < ActionDispatch::IntegrationTest
     setup do
@@ -16,7 +18,7 @@ module Reservations
       invoice_items_count = InvoiceItem.count
       users_credit_count = UsersCredit.count
 
-      post reservations_path, { reservation: {
+      post reservations_path, params: { reservation: {
         user_id: @user_without_subscription.id,
         reservable_id: machine.id,
         reservable_type: machine.class.name,
@@ -27,7 +29,7 @@ module Reservations
             availability_id: availability.id
           }
         ]
-      } }.to_json, default_headers
+      } }.to_json, headers: default_headers
 
       # general assertions
       assert_equal 201, response.status
@@ -73,7 +75,7 @@ module Reservations
       invoice_count = Invoice.count
       invoice_items_count = InvoiceItem.count
 
-      post reservations_path, { reservation: {
+      post reservations_path, params: { reservation: {
         user_id: @user_without_subscription.id,
         reservable_id: training.id,
         reservable_type: training.class.name,
@@ -84,7 +86,7 @@ module Reservations
             availability_id: availability.id
           }
         ]
-      } }.to_json, default_headers
+      } }.to_json, headers: default_headers
 
       # general assertions
       assert_equal 201, response.status
@@ -130,7 +132,7 @@ module Reservations
       invoice_items_count = InvoiceItem.count
       users_credit_count = UsersCredit.count
 
-      post reservations_path, { reservation: {
+      post reservations_path, params: { reservation: {
         user_id: @user_with_subscription.id,
         reservable_id: machine.id,
         reservable_type: machine.class.name,
@@ -146,7 +148,7 @@ module Reservations
             availability_id: availability.id
           }
         ]
-      } }.to_json, default_headers
+      } }.to_json, headers: default_headers
 
       # general assertions
       assert_equal 201, response.status
@@ -203,7 +205,7 @@ module Reservations
       invoice_items_count = InvoiceItem.count
       users_credit_count = UsersCredit.count
 
-      post reservations_path, { reservation: {
+      post reservations_path, params: { reservation: {
         user_id: @vlonchamp.id,
         reservable_id: machine.id,
         reservable_type: machine.class.name,
@@ -214,7 +216,7 @@ module Reservations
             availability_id: availability.id
           }
         ]
-      } }.to_json, default_headers
+      } }.to_json, headers: default_headers
 
       # general assertions
       assert_equal 201, response.status
@@ -273,7 +275,7 @@ module Reservations
       users_credit_count = UsersCredit.count
       wallet_transactions_count = WalletTransaction.count
 
-      post reservations_path, { reservation: {
+      post reservations_path, params: { reservation: {
         user_id: @vlonchamp.id,
         reservable_id: machine.id,
         reservable_type: machine.class.name,
@@ -285,7 +287,7 @@ module Reservations
             availability_id: availability.id
           }
         ]
-      } }.to_json, default_headers
+      } }.to_json, headers: default_headers
 
       # general assertions
       assert_equal 201, response.status
@@ -340,7 +342,7 @@ module Reservations
       invoice_items_count = InvoiceItem.count
       users_credit_count = UsersCredit.count
 
-      post reservations_path, { reservation: {
+      post reservations_path, params: { reservation: {
         user_id: @vlonchamp.id,
         reservable_id: machine.id,
         reservable_type: machine.class.name,
@@ -351,7 +353,7 @@ module Reservations
             availability_id: availability.id
           }
         ]
-      } }.to_json, default_headers
+      } }.to_json, headers: default_headers
 
       # general assertions
       assert_equal 201, response.status
@@ -383,7 +385,7 @@ module Reservations
       invoice_items_count = InvoiceItem.count
       users_credit_count = UsersCredit.count
 
-      post reservations_path, { reservation: {
+      post reservations_path, params: { reservation: {
         user_id: @user_without_subscription.id,
         plan_id: plan.id,
         reservable_id: training.id,
@@ -396,11 +398,11 @@ module Reservations
             availability_id: availability.id
           }
         ]
-      } }.to_json, default_headers
+      } }.to_json, headers: default_headers
 
       # general assertions
       assert_equal 201, response.status
-      assert_equal Mime::JSON, response.content_type
+      assert_equal Mime[:json], response.content_type
       result = json_response(response.body)
 
       # Check the DB objects have been created as they should

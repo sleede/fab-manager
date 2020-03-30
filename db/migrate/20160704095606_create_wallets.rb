@@ -1,4 +1,6 @@
-class CreateWallets < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class CreateWallets < ActiveRecord::Migration[4.2]
   def up
     create_table :wallets do |t|
       t.belongs_to :user, index: true, foreign_key: true

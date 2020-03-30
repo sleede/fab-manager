@@ -1,4 +1,6 @@
-class CreateOAuth2Mappings < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class CreateOAuth2Mappings < ActiveRecord::Migration[4.2]
   def change
     create_table :o_auth2_mappings do |t|
       t.belongs_to :o_auth2_provider, index: true, foreign_key: true

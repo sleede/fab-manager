@@ -45,6 +45,7 @@ provision
 Dockerfile
 docker-compose*
 test
+.env
 
 # Docs
 *.md

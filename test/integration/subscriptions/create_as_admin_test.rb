@@ -2,8 +2,6 @@
 
 module Subscriptions
   class CreateAsAdminTest < ActionDispatch::IntegrationTest
-
-
     setup do
       @admin = User.find_by(username: 'admin')
       login_as(@admin, scope: :user)
@@ -15,18 +13,17 @@ module Subscriptions
 
       VCR.use_cassette('subscriptions_admin_create_success') do
         post '/api/subscriptions',
-             {
+             params: {
                subscription: {
                  plan_id: plan.id,
                  user_id: user.id
                }
-             }.to_json, default_headers
+             }.to_json, headers: default_headers
       end
-
 
       # Check response format & status
       assert_equal 201, response.status, response.body
-      assert_equal Mime::JSON, response.content_type
+      assert_equal Mime[:json], response.content_type
 
       # Check the correct plan was subscribed
       subscription = json_response(response.body)
@@ -58,6 +55,5 @@ module Subscriptions
       assert_invoice_pdf invoice
       assert_equal plan.amount, invoice.total, 'Invoice total price does not match the bought subscription'
     end
-
   end
 end

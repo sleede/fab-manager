@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Availabilities::AsUserTest < ActionDispatch::IntegrationTest
   setup do
     user = User.find_by(username: 'kdumas')
@@ -11,7 +13,7 @@ class Availabilities::AsUserTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 200, response.status
-    assert_equal Mime::JSON, response.content_type
+    assert_equal Mime[:json], response.content_type
 
     # Check the correct availabilities was returned
     availabilities = json_response(response.body)
@@ -27,8 +29,7 @@ class Availabilities::AsUserTest < ActionDispatch::IntegrationTest
 
     # Check that we don't get availabilities in more than a month
     availabilities.each do |a|
-      assert_not a[:start] > 1.month.from_now , 'retrieved a slot in more than 1 month for user who has no yearly subscription'
+      assert_not a[:start] > 1.month.from_now, 'retrieved a slot in more than 1 month for user who has no yearly subscription'
     end
   end
 end
-

@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module Credits
   class TrainingTest < ActionDispatch::IntegrationTest
-
     # Called before every test method runs. Can be used
     # to set up fixture information.
     def setup
@@ -9,21 +10,20 @@ module Credits
     end
 
     test 'create training credit' do
-
       # First, we create a new credit
       post '/api/credits',
-           {
+           params: {
              credit: {
                creditable_id: 4,
                creditable_type: 'Training',
-               plan_id: '1',
+               plan_id: '1'
              }
            }.to_json,
-           default_headers
+           headers: default_headers
 
       # Check response format & status
       assert_equal 201, response.status, response.body
-      assert_equal Mime::JSON, response.content_type
+      assert_equal Mime[:json], response.content_type
 
       # Check the credit was created correctly
       credit = json_response(response.body)
@@ -36,18 +36,18 @@ module Credits
 
     test 'create a existing credit' do
       post '/api/credits',
-           {
+           params: {
              credit: {
                creditable_id: 4,
                creditable_type: 'Training',
                plan_id: '2'
              }
            }.to_json,
-           default_headers
+           headers: default_headers
 
       # Check response format & status
       assert_equal 422, response.status, response.body
-      assert_equal Mime::JSON, response.content_type
+      assert_equal Mime[:json], response.content_type
     end
   end
 end

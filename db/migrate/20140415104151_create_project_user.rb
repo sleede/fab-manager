@@ -1,4 +1,6 @@
-class CreateProjectUser < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class CreateProjectUser < ActiveRecord::Migration[4.2]
   def change
     create_table :project_users do |t|
       t.belongs_to :project, index: true

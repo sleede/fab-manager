@@ -54,14 +54,14 @@ For this guide, we will use [GitHub](https://developer.github.com/v3/oauth/) as 
 
 ```bash
 # replace GitHub with the name of the provider you just created
-rake fablab:auth:switch_provider[GitHub]
+rails fablab:auth:switch_provider[GitHub]
 ```
 
 - As the command just prompted you, you have to re-compile the assets
-  - In development, `rake tmp:clear` will do the job.
-  - In production with Docker, `rm -rf public/assets`, followed by `docker-compose run --rm fabmanager bundle exec rake assets:precompile`
+  - In development, `rails tmp:clear` will do the job.
+  - In production with Docker, `rm -rf public/assets`, followed by `docker-compose run --rm fabmanager bundle exec rails assets:precompile`
 - Then restart the web-server or the container.
 - Finally, to notify all existing users about the change (and send them their migration code/link), run:
 ```bash
-rake fablab:auth:notify_changed
+rails fablab:auth:notify_changed
 ```

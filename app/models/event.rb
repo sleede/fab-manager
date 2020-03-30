@@ -1,4 +1,7 @@
-class Event < ActiveRecord::Base
+# frozen_string_literal: true
+
+# Event is an happening organized by the Fablab about a general topic, which does not involve Machines or trainings member's skills.
+class Event < ApplicationRecord
   include NotifyWith::NotificationAttachedObject
   include ApplicationHelper
 

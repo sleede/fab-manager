@@ -139,7 +139,6 @@
 
 <!-- i18n of external libraries -->
 <script type="text/javascript" src="<%= asset_path "angular-i18n/angular-locale_#{Rails.application.secrets.angular_locale}.js" %>"></script>
-<script type="text/javascript" src="<%= asset_path "messageformat/locale/#{Rails.application.secrets.messageformat_locale}.js" %>"></script>
 <% if Rails.env.staging? && Rails.application.secrets.enable_in_context_translation %>
   <script type="text/javascript">MessageFormat.locale.ach=function(n){return n===0||n===1?"one":"other"};</script>
 <% end %>

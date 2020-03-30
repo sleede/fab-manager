@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Availabilities
   class AsAdminTest < ActionDispatch::IntegrationTest
     setup do
@@ -12,7 +14,7 @@ module Availabilities
 
       # Check response format & status
       assert_equal 200, response.status
-      assert_equal Mime::JSON, response.content_type
+      assert_equal Mime[:json], response.content_type
 
       # Check the correct availability was returned
       availability = json_response(response.body)
@@ -26,7 +28,7 @@ module Availabilities
 
       # Check response format & status
       assert_equal 200, response.status
-      assert_equal Mime::JSON, response.content_type
+      assert_equal Mime[:json], response.content_type
 
       # Check the correct availabilities was returned
       availabilities = json_response(response.body)
@@ -50,7 +52,7 @@ module Availabilities
 
       # Check response format & status
       assert_equal 200, response.status
-      assert_equal Mime::JSON, response.content_type
+      assert_equal Mime[:json], response.content_type
 
       # Check the correct availabilities was returned
       availabilities = json_response(response.body)
@@ -72,15 +74,14 @@ module Availabilities
 
       # Check response format & status
       assert_equal 200, response.status
-      assert_equal Mime::JSON, response.content_type
+      assert_equal Mime[:json], response.content_type
 
       # Check the correct availabilities was returned
       availabilities = json_response(response.body)
       assert_not_empty availabilities, 'no availabilities were found'
       assert_not_nil availabilities[0], 'first availability was unexpectedly nil'
 
-      assert availabilities.map {|a| a[:available_type] }.include?('space'), 'space availability not found instead that it was enabled'
+      assert availabilities.map { |a| a[:available_type] }.include?('space'), 'space availability not found instead that it was enabled'
     end
   end
 end
-

@@ -1,4 +1,6 @@
-class CreateWalletTransactions < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class CreateWalletTransactions < ActiveRecord::Migration[4.2]
   def change
     create_table :wallet_transactions do |t|
       t.belongs_to :user, index: true, foreign_key: true

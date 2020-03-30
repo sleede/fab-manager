@@ -50,7 +50,7 @@ When using docker-compose, you should provide the name of the service in your [d
 
 Used by the authentication system to generate random tokens, eg. for resetting passwords.
 Used by Rails to verify the integrity of signed cookies.
-You can generate such a random key by running `rake secret`.
+You can generate such a random key by running `rails secret`.
 <a name="STRIPE_API_KEY"></a><a name="STRIPE_PUBLISHABLE_KEY"></a>
 
     STRIPE_API_KEY & STRIPE_PUBLISHABLE_KEY
@@ -60,7 +60,7 @@ Retrieve them from https://dashboard.stripe.com/account/apikeys.
 
 **MANDATORY**: Even if you don't want to charge your customers, you must fill this settings.
 For this purpose, you can use a stripe account in test mode, which will provide you test keys.
-If you change these keys during the application lifecycle, you must run `rake fablab:stripe:sync_members`, otherwise your users won't be able to do card payments.
+If you change these keys during the application lifecycle, you must run `rails fablab:stripe:sync_members`, otherwise your users won't be able to do card payments.
 <a name="STRIPE_CURRENCY"></a>
 
     STRIPE_CURRENCY
@@ -239,7 +239,7 @@ The check will run every weeks and if the threshold is exceeded, an alert will b
     ADMIN_EMAIL, ADMIN_PASSWORD
 
 Credentials for the first admin user created when seeding the project.
-By default, theses variables are not present in application.yml because they are only used once, when running the database seed with the command `rake db:seed`.
+By default, theses variables are not present in application.yml because they are only used once, when running the database seed with the command `rails db:seed`.
 <a name="SUPERADMIN_EMAIL"></a>
 
     SUPERADMIN_EMAIL
@@ -312,13 +312,6 @@ Please, be aware that **the configured locale will imply the CURRENCY displayed 
 _Eg.: configuring **fr-fr** will set the currency symbol to **€** but **fr-ca** will set **$** as currency symbol, so setting the `ANGULAR_LOCALE` to simple **fr** (without country indication) will probably not do what you expect._
 
 See [code.angularjs.org/i18n/angular-locale_*.js](https://code.angularjs.org/1.6.10/i18n/) for a list of available locales. Default is **en**.
-<a name="MESSAGEFORMAT_LOCALE"></a>
-
-    MESSAGEFORMAT_LOCALE
-
-Configure the messageformat.js library, used by angular-translate.
-
-See [github.com/messageformat/messageformat/locale/*.js](https://github.com/messageformat/messageformat/tree/v0.1.8/locale) for a list of available locales.
 <a name="FULLCALENDAR_LOCALE"></a>
 
     FULLCALENDAR_LOCALE
@@ -336,7 +329,7 @@ See [ElasticSearch guide](https://www.elastic.co/guide/en/elasticsearch/referenc
 
     TIME_ZONE
 
-In Rails: set Time.zone default to the specified zone and make Active Record auto-convert to this zone. Run `rake time:zones:all` for a list of available time zone names.
+In Rails: set Time.zone default to the specified zone and make Active Record auto-convert to this zone. Run `rails time:zones:all` for a list of available time zone names.
 Default is **UTC**.
 <a name="WEEK_STARTING_DAY"></a>
 

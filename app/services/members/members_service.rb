@@ -2,7 +2,6 @@
 
 # Provides helper methods for User actions
 class Members::MembersService
-
   attr_accessor :member
 
   def initialize(member)
@@ -10,10 +9,9 @@ class Members::MembersService
   end
 
   def update(params)
-
     if params[:group_id] && @member.group_id != params[:group_id].to_i && !@member.subscribed_plan.nil?
       # here a group change is requested but unprocessable, handle the exception
-      @member.errors[:group_id] = I18n.t('members.unable_to_change_the_group_while_a_subscription_is_running')
+      @member.errors.add(:group_id, I18n.t('members.unable_to_change_the_group_while_a_subscription_is_running'))
       return false
     end
 
@@ -80,5 +78,4 @@ class Members::MembersService
       params[:password]
     end
   end
-
 end

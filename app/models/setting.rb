@@ -4,7 +4,7 @@
 # For some settings, changing them will involve some callback actions (like rebuilding the stylesheets if the theme color Setting is changed).
 # A full history of the previous values is kept in database with the date and the author of the change
 # after_update callback is handled by SettingService
-class Setting < ActiveRecord::Base
+class Setting < ApplicationRecord
   has_many :history_values
   validates :name, inclusion:
                     { in: %w[about_title

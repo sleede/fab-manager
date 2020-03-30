@@ -2,7 +2,7 @@
 
 # From this migration, we store URL to iCalendar files and a piece of configuration about them.
 # This allows to display the events of these external calendars in Fab-manager
-class CreateICalendars < ActiveRecord::Migration
+class CreateICalendars < ActiveRecord::Migration[4.2]
   def change
     create_table :i_calendars do |t|
       t.string :url

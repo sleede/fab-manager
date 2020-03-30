@@ -1,4 +1,6 @@
-class CreateEventPriceCategories < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class CreateEventPriceCategories < ActiveRecord::Migration[4.2]
   def change
     create_table :event_price_categories do |t|
       t.belongs_to :event, index: true, foreign_key: true
