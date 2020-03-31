@@ -4,7 +4,7 @@
 - Updated instructions to setup a development environment
 - Updated translations
 - Removed `MESSAGEFORMAT_LOCALE` as it is now handled by make-plural
-- Updated rails framework to v5
+- Updated rails framework to v5.2
 - Updated angular-translate
 - Updated eslint
 - Updated compass-rails & compass-core
@@ -17,6 +17,7 @@
 - Fix a bug: unable to export accounting data to ACD
 - Fix a security issue: updated mkdirp to fix [CVE-2020-7598](https://nvd.nist.gov/vuln/detail/CVE-2020-7598)
 - Fix a security issue: updated acorn to fix [CVE-2020-7598](https://nvd.nist.gov/vuln/detail/CVE-2020-7598)
+- Fix a security issue: updated actionview to fix [CVE-2020-5267](https://nvd.nist.gov/vuln/detail/CVE-2020-5267)
 
 ## v4.3.2 2020 March 11
 
