@@ -1117,9 +1117,10 @@ Application.Controllers.controller('AccountingExportModalController', ['$scope',
 
   /**
    * Will fill the export settings, according to the selected software
+   * @param software {String} must be one of SETTINGS.*
    */
-  $scope.fillSettings = function() {
-    $scope.exportTarget.settings = SETTINGS[$scope.exportTarget.software];
+  $scope.fillSettings = function(software) {
+    $scope.exportTarget.settings = SETTINGS[software];
   };
 
   /**
