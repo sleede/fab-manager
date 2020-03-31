@@ -682,7 +682,7 @@ es:
         tags: "Tags"
         tag_name: "Tag name"
         tag_identifier: "Identifier to use"
-        download_example: "Download the exemple file"
+        download_example: "Example file"
         select_file: "Choose a file"
         import: "Import"
         update_field: "Reference field for users to update"
