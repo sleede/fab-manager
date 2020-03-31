@@ -6,6 +6,7 @@ class Members::ImportService
     def import(import)
       require 'csv'
       log = []
+      begin
       CSV.foreach(import.attachment.url, headers: true, col_sep: ';') do |row|
         begin
           password = hide_password(row)
@@ -30,6 +31,11 @@ class Members::ImportService
           puts e
           puts e.backtrace
         end
+      end
+      rescue ArgumentError => e
+        log << e.to_s
+        puts e
+        puts e.backtrace
       end
       log
     end

@@ -15,6 +15,7 @@
 - Fix a bug: missing translations for some error messages
 - Fix a bug: invalid footprints in invoices fixtures
 - Fix a bug: unable to export accounting data to ACD
+- Fix a bug: report error on invalid encoding in members import
 - Fix a security issue: updated mkdirp to fix [CVE-2020-7598](https://nvd.nist.gov/vuln/detail/CVE-2020-7598)
 - Fix a security issue: updated acorn to fix [CVE-2020-7598](https://nvd.nist.gov/vuln/detail/CVE-2020-7598)
 - Fix a security issue: updated actionview to fix [CVE-2020-5267](https://nvd.nist.gov/vuln/detail/CVE-2020-5267)
