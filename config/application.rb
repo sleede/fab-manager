@@ -16,7 +16,10 @@ module Fablab
     require 'fab_manager'
 
     # Initialize configuration defaults for originally generated Rails version.
-    # config.load_defaults 5.1
+    config.load_defaults 5.2
+    # prevent this new behavior with rails >= 5.0
+    # see https://edgeguides.rubyonrails.org/upgrading_ruby_on_rails.html#active-record-belongs-to-required-by-default-option
+    config.active_record.belongs_to_required_by_default = false
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

@@ -16,6 +16,10 @@ Rails.application.configure do
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
 
+  # Ensures that a master key has been made available in either ENV["RAILS_MASTER_KEY"]
+  # or in config/master.key. This key is used to decrypt credentials (and other encrypted files).
+  # config.require_master_key = true
+
   config.action_controller.default_url_options = {
     host: Rails.application.secrets.default_host,
     protocol: Rails.application.secrets.default_protocol
@@ -45,6 +49,9 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for Apache
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
 
+  # Store uploaded files on the local file system (see config/storage.yml for options)
+  config.active_storage.service = :local
+
   # Mount Action Cable outside main process or domain
   # config.action_cable.mount_path = nil
   # config.action_cable.url = 'wss://example.com/cable'
@@ -56,7 +63,7 @@ Rails.application.configure do
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
   # config.log_level = :debug
-  config.log_level = Rails.application.secrets.log_level.blank? ? :debug : Rails.application.secrets.log_level
+  config.log_level = ENV.fetch('LOG_LEVEL') { :debug }.to_sym
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :request_id ]
@@ -67,6 +74,7 @@ Rails.application.configure do
   # Use a real queuing backend for Active Job (and separate queues per environment)
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "fablab_#{Rails.env}"
+
   config.action_mailer.perform_caching = false
 
   config.action_mailer.default_url_options = {
@@ -110,7 +118,7 @@ Rails.application.configure do
   if ENV['RAILS_LOG_TO_STDOUT'].present?
     logger           = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
-    config.logger = ActiveSupport::TaggedLogging.new(logger)
+    config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
 
   # Do not dump schema after migrations.

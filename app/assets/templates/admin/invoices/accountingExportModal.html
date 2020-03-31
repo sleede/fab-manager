@@ -45,7 +45,7 @@
       <h4 class="control-label m-l" translate>{{ 'app.admin.invoices.export_to' }}</h4>
       <div class="form-group m-l-lg">
         <label for="acd">
-          <input type="radio" name="acd" id="acd" ng-model="exportTarget.software" ng-value="'acd'" ng-click="fillSettings()" required/>
+          <input type="radio" name="acd" id="acd" ng-model="exportTarget.software" ng-value="'acd'" ng-click="fillSettings('acd')" required/>
           {{ 'app.admin.invoices.acd' | translate }}
         </label>
       </div>
