@@ -247,7 +247,7 @@ fr:
         your_subscription_has_expired_on_the_DATE: "Votre abonnement a expiré au {DATE}"
         subscription_price: "Coût de l'abonnement"
         you_ve_just_selected_a_subscription_html: "Vous venez de sélectionner un <strong>abonnement</strong> :"
-        confirm_and_pay: "Valider et payer"
+        confirm_and_pay: "Confirm and pay"
         you_ve_just_payed_the_subscription_html: "Vous venez de régler <strong>l'abonnement</strong> :"
         thank_you_your_subscription_is_successful: "Merci. Votre abonnement a bien été pris en compte !"
         your_invoice_will_be_available_soon_from_your_dashboard: "Votre facture sera bientôt disponible depuis votre tableau de bord"
@@ -280,7 +280,7 @@ fr:
         event_description: "Description de l'évènement"
         downloadable_documents: "Documents à télécharger"
         information_and_booking: "Informations et réservation"
-        dates: "Dates"
+        dates: "Date"
         beginning: "Début :"
         ending: "Fin :"
         opening_hours: "Horaires :"
@@ -357,7 +357,7 @@ fr:
       tour:
         conclusion:
           title: "Merci de votre attention"
-          content: "<p>If you want to restart this contextual help, press <strong>F1</strong> at any time or click on « ? Help » from the user's menu.</p><p>If you need additional help, you can <a href='https://github.com/sleede/fab-manager/raw/master/doc/fr/guide_utilisation_fab_manager_v4.3.pdf' target='_blank'>check the user guide</a> (only in French for now).</p><p>The Fab-manager's team also provides personalized support (help with getting started, help with installation, customization, etc.), <a href='mailto:contact@fab-manager.com'>contact-us</a> for more info.</p>"
+          content: "<p>Si vous souhaitez relancer cette aide contextuelle, appuyez sur <strong>F1</strong> à n'importe quel moment ou cliquez sur « ? Aide » depuis le menu utilisateur.</p><p>Si vous avez besoin d'aide supplémentaire, vous pouvez <a href='https://github.com/sleede/fab-manager/raw/master/doc/fr/guide_utilisation_fab_manager_v4.3.pdf' target='_blank'>consulter le guide d'utilisation</a> disponible en Français.</p><p>L'équipe de Fab-manager propose également du support personnalisé (aide à la prise en main, aide à l'installation, personnalisation, etc.), <a href='mailto:contact@fab-manager.com'>contactez-nous</a> pour plus d'informations.</p>"
         welcome:
           welcome:
             title: "Bienvenue dans Fab-manager"
