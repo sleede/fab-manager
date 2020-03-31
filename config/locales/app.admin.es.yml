@@ -1148,7 +1148,7 @@ es:
             title: "Machines"
             content: "Define here the prices of the machine slots, by user group. These prices will be applied to users who do not have subscriptions."
           spaces:
-            title: "Espaces"
+            title: "Spaces"
             content: "In the same way, define here the prices of the spaces slots, for the users without subscriptions."
           credits:
             title: "Credits"
