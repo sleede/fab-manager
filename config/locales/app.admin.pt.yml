@@ -682,7 +682,7 @@ pt:
         tags: "Tags"
         tag_name: "Tag name"
         tag_identifier: "Identifier to use"
-        download_example: "Download the exemple file"
+        download_example: "Example file"
         select_file: "Choose a file"
         import: "Import"
         update_field: "Reference field for users to update"
@@ -1148,7 +1148,7 @@ pt:
             title: "Machines"
             content: "Define here the prices of the machine slots, by user group. These prices will be applied to users who do not have subscriptions."
           spaces:
-            title: "Espaces"
+            title: "Spaces"
             content: "In the same way, define here the prices of the spaces slots, for the users without subscriptions."
           credits:
             title: "Credits"
