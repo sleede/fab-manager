@@ -185,7 +185,7 @@ fr:
         to_date: "au" #eg: from 01/01 to 01/05
         to_time: "à" #eg. from 18:00 to 21:00
         title: "Titre"
-        dates: "Dates"
+        dates: "Date"
         booking: "Réservations"
         sold_out: "Complet"
         cancelled: "Annulé"
