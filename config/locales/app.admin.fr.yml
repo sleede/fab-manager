@@ -682,7 +682,7 @@ fr:
         tags: "Étiquettes"
         tag_name: "Nom de l'étiquette"
         tag_identifier: "Identifiant à utiliser"
-        download_example: "Télécharger le fichier d'exemple"
+        download_example: "Example file"
         select_file: "Choisissez un fichier"
         import: "Importer"
         update_field: "Champ de référence pour les utilisateurs à mettre à jour"
