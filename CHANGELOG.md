@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v4.3.3 2020 April 1st
+
 - Docker build will no longer embed development dependencies
 - Updated instructions to setup a development environment
 - Updated translations
