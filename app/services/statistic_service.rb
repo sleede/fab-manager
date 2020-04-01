@@ -147,7 +147,7 @@ class StatisticService
         plan_interval_count: p.interval_count,
         plan_group_name: p.group.name,
         slug: p.slug,
-        duration: p.duration.to_i,
+        duration: p.find_statistic_type.key,
         subscription_id: sub.id,
         invoice_item_id: i.id,
         ca: ca

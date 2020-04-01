@@ -356,6 +356,7 @@ fr:
     revenue: "Chiffre d'affaires"
     account_creation: "Création de compte"
     project_publication: "Publication de projet"
+    duration: "Durée"
   #statistics exports to the excel file format
   export:
     entries: "Entrées"
