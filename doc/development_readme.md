@@ -9,6 +9,7 @@ This document will guide you through all the steps needed to set up a developmen
 3. [ElasticSearch](#elasticsearch)<br/>
 3.1. [Rebuild statistics](#rebuild-stats)<br/>
 3.2. [Backup and Restore](#backup-and-restore-elasticsearch)
+3.3. [Debugging](debugging-elasticsearch)
 
 This procedure is not easy to follow so if you don't need to write some code for Fab-manager, please prefer the [production installation method](doc/production_readme.md).
 
@@ -180,3 +181,9 @@ To backup and restore the ElasticSearch database, use the [elasticsearch-dump](h
 
 Dump the database with: `elasticdump --input=http://localhost:9200/stats --output=fablab_stats.json`.
 Restore it with: `elasticdump --input=fablab_stats.json --output=http://localhost:9200/stats`.
+
+
+<a name="debugging-elasticsearch"></a>
+### Debugging
+
+In development, visit http://fabmanager-kibana:5601 to use Kibana, the web UI for ElasticSearch
