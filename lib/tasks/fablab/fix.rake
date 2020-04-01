@@ -150,5 +150,19 @@ namespace :fablab do
         name: 'theme'
       )
     end
+
+    desc '[release 4.3.3] add statistic_profile_id to refund invoices for WalletTransactions'
+    task avoirs_wallet_transaction: :environment do
+      Avoir.where(invoiced_type: WalletTransaction.name).each do |a|
+        next unless a.statistic_profile_id.nil?
+
+        begin
+          a.statistic_profile_id = a.invoiced.wallet.user&.statistic_profile&.id
+          a.save!
+        rescue ActiveRecord::RecordInvalid => e
+          printf "Unable to modify the refund invoice (id %<id>s): %<error>s\nIgnoring that record...\n", id: a.id, error: e
+        end
+      end
+    end
   end
 end

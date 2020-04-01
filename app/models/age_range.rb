@@ -1,4 +1,7 @@
-class AgeRange < ActiveRecord::Base
+# frozen_string_literal: true
+
+# AgeRange
+class AgeRange < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
 

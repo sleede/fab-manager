@@ -981,7 +981,7 @@ Application.Controllers.controller('ClosePeriodModalController', ['$scope', '$ui
                 title: _t('app.admin.invoices.confirmation_required'),
                 msg: $sce.trustAsHtml(
                   _t(
-                    'invoices.confirm_close_START_END',
+                    'app.admin.invoices.confirm_close_START_END',
                     { START: moment.utc($scope.period.start_at).format('LL'), END: moment.utc($scope.period.end_at).format('LL') }
                   )
                   + '<br/><br/><strong>'
@@ -1005,7 +1005,7 @@ Application.Controllers.controller('ClosePeriodModalController', ['$scope', '$ui
             function (resp) {
               $scope.pendingCreation = false;
               growl.success(_t(
-                'invoices.period_START_END_closed_success',
+                'app.admin.invoices.period_START_END_closed_success',
                 { START: moment.utc(resp.start_at).format('LL'), END: moment.utc(resp.end_at).format('LL') }
               ));
               $uibModalInstance.close(resp);
@@ -1117,9 +1117,10 @@ Application.Controllers.controller('AccountingExportModalController', ['$scope',
 
   /**
    * Will fill the export settings, according to the selected software
+   * @param software {String} must be one of SETTINGS.*
    */
-  $scope.fillSettings = function() {
-    $scope.exportTarget.settings = SETTINGS[$scope.exportTarget.software];
+  $scope.fillSettings = function(software) {
+    $scope.exportTarget.settings = SETTINGS[software];
   };
 
   /**

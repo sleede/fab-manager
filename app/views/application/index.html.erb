@@ -139,12 +139,11 @@
 
 <!-- i18n of external libraries -->
 <script type="text/javascript" src="<%= asset_path "angular-i18n/angular-locale_#{Rails.application.secrets.angular_locale}.js" %>"></script>
-<script type="text/javascript" src="<%= asset_path "messageformat/locale/#{Rails.application.secrets.messageformat_locale}.js" %>"></script>
 <% if Rails.env.staging? && Rails.application.secrets.enable_in_context_translation %>
   <script type="text/javascript">MessageFormat.locale.ach=function(n){return n===0||n===1?"one":"other"};</script>
 <% end %>
 <!-- if required locale does not exist, use the default "en" -->
-<% if Rails.application.assets.find_asset "moment/locale/#{Rails.application.secrets.moment_locale}.js" %>
+<% if asset_available?("moment/locale/#{Rails.application.secrets.moment_locale}.js") %>
   <script type="text/javascript" src="<%= asset_path "moment/locale/#{Rails.application.secrets.moment_locale}.js" %>"></script>
 <%
   elsif Rails.application.secrets.moment_locale != 'en'
@@ -152,7 +151,7 @@
   end
 %>
 <!-- if required locale does not exist, use the default "en-US" -->
-<% if Rails.application.assets.find_asset "summernote/lang/summernote-#{Rails.application.secrets.summernote_locale}.js" %>
+<% if asset_available?("summernote/lang/summernote-#{Rails.application.secrets.summernote_locale}.js") %>
   <script type="text/javascript" src="<%= asset_path "summernote/lang/summernote-#{Rails.application.secrets.summernote_locale}.js" %>"></script>
 <%
   elsif Rails.application.secrets.summernote_locale != 'en-US'
@@ -160,7 +159,7 @@
   end
 %>
 <!-- if required locale does not exist, use the default "en" -->
-<% if Rails.application.assets.find_asset "fullcalendar/dist/lang/#{Rails.application.secrets.fullcalendar_locale}.js" %>
+<% if asset_available?("fullcalendar/dist/lang/#{Rails.application.secrets.fullcalendar_locale}.js") %>
   <script type="text/javascript" src="<%= asset_path "fullcalendar/dist/lang/#{Rails.application.secrets.fullcalendar_locale}.js" %>"></script>
 <%
   elsif Rails.application.secrets.fullcalendar_locale != 'en'

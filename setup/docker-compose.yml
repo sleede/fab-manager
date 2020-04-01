@@ -27,6 +27,8 @@ services:
     volumes:
       - ${PWD}/postgresql:/var/lib/postgresql/data
     restart: always
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
 
   elasticsearch:
     image: elasticsearch:5.6

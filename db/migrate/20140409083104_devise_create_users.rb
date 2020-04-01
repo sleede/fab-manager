@@ -1,9 +1,12 @@
-class DeviseCreateUsers < ActiveRecord::Migration
+# frozen_string_literal: true
+
+# create the Users table, storing the user's accounts
+class DeviseCreateUsers < ActiveRecord::Migration[4.2]
   def change
     create_table(:users) do |t|
       ## Database authenticatable
-      t.string :email,              null: false, default: ""
-      t.string :encrypted_password, null: false, default: ""
+      t.string :email,              null: false, default: ''
+      t.string :encrypted_password, null: false, default: ''
 
       ## Recoverable
       t.string   :reset_password_token

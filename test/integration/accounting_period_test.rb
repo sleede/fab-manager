@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class AccountingPeriodTest < ActionDispatch::IntegrationTest
-
   def setup
     @admin = User.find_by(username: 'admin')
     login_as(@admin, scope: :user)
@@ -12,16 +11,16 @@ class AccountingPeriodTest < ActionDispatch::IntegrationTest
     end_at = '2012-12-31T00:00:00.000Z'
 
     post '/api/accounting_periods',
-         {
+         params: {
            accounting_period: {
              start_at: start_at,
              end_at: end_at
            }
-         }.to_json, default_headers
+         }.to_json, headers: default_headers
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime::JSON, response.content_type
+    assert_equal Mime[:json], response.content_type
 
     # Check the correct period was closed successfully
     period = json_response(response.body)
@@ -39,16 +38,16 @@ class AccountingPeriodTest < ActionDispatch::IntegrationTest
     diff = (end_at.to_date - start_at.to_date).to_i
 
     post '/api/accounting_periods',
-         {
+         params: {
            accounting_period: {
              start_at: start_at,
              end_at: end_at
            }
-         }.to_json, default_headers
+         }.to_json, headers: default_headers
 
     # Check response format & status
     assert_equal 422, response.status, response.body
-    assert_equal Mime::JSON, response.content_type
+    assert_equal Mime[:json], response.content_type
 
     # check the error
     assert_match(/#{I18n.t('errors.messages.invalid_duration', DAYS: diff)}/, response.body)
@@ -59,16 +58,16 @@ class AccountingPeriodTest < ActionDispatch::IntegrationTest
     end_at = '2015-02-27T00:00:00.000Z'
 
     post '/api/accounting_periods',
-         {
+         params: {
            accounting_period: {
              start_at: start_at,
              end_at: end_at
            }
-         }.to_json, default_headers
+         }.to_json, headers: default_headers
 
     # Check response format & status
     assert_equal 422, response.status, response.body
-    assert_equal Mime::JSON, response.content_type
+    assert_equal Mime[:json], response.content_type
 
     # check the error
     assert_match(/#{I18n.t('errors.messages.cannot_overlap')}/, response.body)
@@ -79,16 +78,16 @@ class AccountingPeriodTest < ActionDispatch::IntegrationTest
     end_at = Date.today.end_of_day.iso8601
 
     post '/api/accounting_periods',
-         {
+         params: {
            accounting_period: {
              start_at: start_at,
              end_at: end_at
            }
-         }.to_json, default_headers
+         }.to_json, headers: default_headers
 
     # Check response format & status
     assert_equal 422, response.status, response.body
-    assert_equal Mime::JSON, response.content_type
+    assert_equal Mime[:json], response.content_type
 
     # check the error
     assert_match(/#{I18n.t('errors.messages.must_be_in_the_past')}/, response.body)

@@ -147,7 +147,7 @@ class StatisticService
         plan_interval_count: p.interval_count,
         plan_group_name: p.group.name,
         slug: p.slug,
-        duration: p.duration.to_i,
+        duration: p.find_statistic_type.key,
         subscription_id: sub.id,
         invoice_item_id: i.id,
         ca: ca
@@ -273,10 +273,12 @@ class StatisticService
     Avoir.where('invoices.created_at >= :start_date AND invoices.created_at <= :end_date', options)
          .eager_load(:invoice_items, statistic_profile: [:group])
          .each do |i|
+      # the following line is a workaround for issue #196
+      profile = i.statistic_profile || i.invoiced&.wallet&.user&.statistic_profile
       avoirs_ca_list.push OpenStruct.new({
         date: options[:start_date].to_date,
         ca: calcul_avoir_ca(i)
-      }.merge(user_info(i.statistic_profile)))
+      }.merge(user_info(profile)))
     end
     reservations_ca_list.concat(subscriptions_ca_list).concat(avoirs_ca_list).each do |e|
       profile = StatisticProfile.find(e.statistic_profile_id)
@@ -365,6 +367,8 @@ class StatisticService
   end
 
   def user_info(statistic_profile)
+    return {} unless statistic_profile
+
     {
       statistic_profile_id: statistic_profile.id,
       user_id: statistic_profile.user_id,

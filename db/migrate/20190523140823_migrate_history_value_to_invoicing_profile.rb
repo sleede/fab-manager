@@ -1,4 +1,6 @@
-class MigrateHistoryValueToInvoicingProfile < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class MigrateHistoryValueToInvoicingProfile < ActiveRecord::Migration[4.2]
   def up
     HistoryValue.all.each do |hv|
       user = User.find_by(id: hv.user_id)

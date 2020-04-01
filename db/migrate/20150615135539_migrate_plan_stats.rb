@@ -1,4 +1,6 @@
-class MigratePlanStats < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class MigratePlanStats < ActiveRecord::Migration[4.2]
   def up
     index = StatisticIndex.where({es_type_key: 'subscription'}).first
     if index

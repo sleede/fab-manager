@@ -1,4 +1,6 @@
-class AddStepNbToProjectStep < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class AddStepNbToProjectStep < ActiveRecord::Migration[4.2]
   def up
     add_column :project_steps, :step_nb, :integer
     execute 'UPDATE project_steps

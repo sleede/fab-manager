@@ -267,7 +267,7 @@ fr:
       subject: "Mise à jour de la Politique de confidentialité"
       body:
         content_html: "<p>Nous souhaitons vous signaler que nous venons de mettre à jour notre politique de confidentialité.</p><p>Nous pouvons apporter régulièrement des modifications à notre politique de confidentialité. Conformément à la réglementation, une notification vous sera envoyée à chaque mise à jour.</p><p>En accédant ou en utilisant nos services après la mise à jour de la Politique de confidentialité, nous considérerons que vous acceptez les termes de celle-ci, mises à jour comprises.</p>"
-        link_to_policy: "Cliquez ici pour consultez la politique de confidentialité."
+        link_to_policy: "Cliquez ici pour consulter la politique de confidentialité."
     notify_admin_refund_created:
       subject: "Un avoir a été généré"
       body:

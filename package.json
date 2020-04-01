@@ -1,6 +1,6 @@
 {
   "name": "fab-manager",
-  "version": "4.3.2",
+  "version": "4.3.3",
   "description": "Fab-manager is the FabLab management solution. It provides a comprehensive, web-based, open-source tool to simplify your administrative tasks and your marker's projects.",
   "keywords": [
     "fablab",
@@ -17,12 +17,13 @@
   },
   "license": "AGPL-3.0-only",
   "devDependencies": {
-    "eslint": "^5.7.0",
-    "eslint-config-standard": "^12.0.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-node": "^8.0.0",
-    "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-standard": "^4.0.0"
+    "eslint": "~6.8.0",
+    "eslint-config-standard": "~14.1.1",
+    "eslint-plugin-import": "~2.20.1",
+    "eslint-plugin-node": "~11.0.0",
+    "eslint-plugin-promise": "~4.2.1",
+    "eslint-plugin-standard": "~4.0.1",
+    "maildev": "^1.1.0"
   },
   "dependencies": {
     "@uirouter/angularjs": "0.4",
@@ -67,7 +68,6 @@
     "jquery": ">=3.4.0",
     "jquery-minicolors": "^2.1.10",
     "medium-editor": "4.4.0",
-    "messageformat": "0.1.8",
     "moment": "2.22",
     "moment-timezone": "0.5",
     "ng-caps-lock": "https://github.com/FabioMR/ng-caps-lock.git#1.0.3",

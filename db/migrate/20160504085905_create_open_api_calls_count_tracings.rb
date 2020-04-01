@@ -1,4 +1,6 @@
-class CreateOpenAPICallsCountTracings < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class CreateOpenAPICallsCountTracings < ActiveRecord::Migration[4.2]
   def change
     create_table :open_api_calls_count_tracings do |t|
       t.belongs_to :open_api_client, foreign_key: true, index: true

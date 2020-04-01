@@ -267,7 +267,7 @@ ach:
       subject: "crwdns4209:0crwdne4209:0"
       body:
         content_html: "crwdns4211:0crwdne4211:0"
-        link_to_policy: "crwdns4213:0crwdne4213:0"
+        link_to_policy: "crwdns20268:0crwdne20268:0"
     notify_admin_refund_created:
       subject: "crwdns4565:0crwdne4565:0"
       body:

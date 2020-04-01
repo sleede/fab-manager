@@ -1,4 +1,6 @@
-class MigrateEventReducedAmountToPriceCategory < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class MigrateEventReducedAmountToPriceCategory < ActiveRecord::Migration[4.2]
   def up
     pc = PriceCategory.new(
       name: I18n.t('price_category.reduced_fare'),

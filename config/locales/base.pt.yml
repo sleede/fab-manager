@@ -3,10 +3,3 @@ pt:
     formats:
       # See http://apidock.com/ruby/DateTime/strftime for a list of available directives
       hour_minute: "%I:%M %p"
-
-  errors: &errors
-    messages: &errors_messages
-
-  activemodel:
-    errors:
-      <<: *errors

@@ -3,7 +3,7 @@
 # Availability stores time slots that are available to reservation for an associated reservable
 # Eg. a 3D printer will be reservable on thursday from 9 to 11 pm
 # Availabilities may be subdivided into Slots (of 1h), for some types of reservables (eg. Machine)
-class Availability < ActiveRecord::Base
+class Availability < ApplicationRecord
   # elastic initialisations
   include Elasticsearch::Model
   index_name 'fablab'

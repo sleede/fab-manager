@@ -83,11 +83,11 @@ es:
       one: "Una entrada de precio completo"
       other: "%{count} entradas de precio completo"
     other_rate_ticket:
-      one: "un %{NAME} entrada"
+      one: "Un %{NAME} entrada"
       other: "%{count} %{NAME} entradas"
     reservation_other: "Reserva (other)"
     coupon_CODE_discount_of_DISCOUNT: "Cupón {CODE}: descuento de {DISCOUNT}{TYPE, select, percent_off{%} other{}}" #messageFormat interpolation
-    total_including_all_taxes: "total impuestos incluidos"
+    total_including_all_taxes: "Total impuestos incluidos"
     including_VAT_RATE: "Incluyendo IVA %{RATE}%"
     including_total_excluding_taxes: "Excluyendo IVA"
     including_amount_payed_on_ordering: "Incluyendo cantidad pagada en el pedido"
@@ -166,11 +166,11 @@ es:
     projects: "Proyectos"
     facebook: "Facebook"
     twitter: "Twitter"
-    echo_sciences: "Ecociencia"
+    echo_sciences: "Echociences"
     organization: "Organización"
     organization_address: "Dirección de la organización"
-    man: "hombre"
-    woman: "mujer"
+    man: "Hombre"
+    woman: "Mujer"
     without_subscriptions: "Sin suscripciones"
   #machines/trainings/events reservations list to EXCEL format
   export_reservations:
@@ -178,10 +178,10 @@ es:
     customer_id: "Identificación del cliente"
     customer: "Cliente"
     email: "Correo electrónico"
-    reservation_date: "fecha de reserva"
-    reservation_type: "tipo de reserva"
-    reservation_object: "objetivo de reserva"
-    slots_number_hours_tickets: "espacios reservados (horas/entradas)"
+    reservation_date: "Fecha de reserva"
+    reservation_type: "Tipo de reserva"
+    reservation_object: "Objetivo de reserva"
+    slots_number_hours_tickets: "Espacios reservados (horas/entradas)"
     payment_method: "Método de pago"
     local_payment: "Pago en recepción"
     online_payment: "Pago online"
@@ -231,11 +231,11 @@ es:
       notify_admin_subscribed_plan:
         subscription_PLAN_has_been_subscribed_by_USER_html: "La suscripción <strong><em>%{PLAN}</em></strong> ha sido solicitada por <strong><em>%{USER}</strong></em>."
       notify_admin_subscription_canceled:
-        USER_s_subscription_has_been_cancelled: "La suscripción de %{USER}ha sido cancelada."
+        USER_s_subscription_has_been_cancelled: "La suscripción de %{USER} ha sido cancelada."
       notify_admin_subscription_extended:
         subscription_PLAN_of_the_member_USER_has_been_extended_FREE_until_DATE_html: "La suscripción <strong><em>{PLAN}</em></strong> de <strong><em>{USER}</strong></em> se ha extendido {FREE, select, true{for free} other{}} hasta {DATE}." #messageFormat interpolation
       notify_admin_subscription_is_expired:
-        USER_s_subscription_has_expired: "%La suscripción de {USER} ha expirado."
+        USER_s_subscription_has_expired: "La suscripción de %{USER} ha expirado."
       notify_admin_subscription_will_expire_in_7_days:
         USER_s_subscription_will_expire_in_7_days: "La suscripción de %{USER} expirará en 7 días."
       notify_admin_user_group_changed:
@@ -257,7 +257,7 @@ es:
       notify_member_slot_is_modified:
         your_reservation_slot_was_successfully_changed: "Su reserva ha sido cambiada correctamente."
       notify_member_subscribed_plan:
-        you_have_subscribed_to_PLAN_html: "Se ha suscrito tp <strong><em>%{PLAN}</em></strong>."
+        you_have_subscribed_to_PLAN_html: "Se ha suscrito al <strong><em>%{PLAN}</em></strong>."
       notify_member_subscribed_plan_is_changed:
         you_have_changed_your_subscription_to_PLAN_html: "Ha cambiado su suscripción a <strong><em>%{PLAN}</em></strong>."
       notify_member_subscription_canceled:
@@ -356,6 +356,7 @@ es:
     revenue: "Ingresos"
     account_creation: "Creación de cuenta"
     project_publication: "Publicación de proyectos"
+    duration: "Duración"
   #statistics exports to the excel file format
   export:
     entries: "Entradas"

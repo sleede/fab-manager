@@ -1,5 +1,6 @@
-class AdminsTest < ActionDispatch::IntegrationTest
+# frozen_string_literal: true
 
+class AdminsTest < ActionDispatch::IntegrationTest
   # Called before every test method runs. Can be used
   # to set up fixture information.
   def setup
@@ -16,7 +17,7 @@ class AdminsTest < ActionDispatch::IntegrationTest
 
   test 'create an admin' do
     post '/api/admins',
-         {
+         params: {
            admin: {
              username: 'glepower',
              email: 'gerard.lepower@admins.net',
@@ -36,11 +37,11 @@ class AdminsTest < ActionDispatch::IntegrationTest
              }
            }
          }.to_json,
-         default_headers
+         headers: default_headers
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime::JSON, response.content_type
+    assert_equal Mime[:json], response.content_type
 
     # Check the correct admin was created
     admin = json_response(response.body)
@@ -54,10 +55,9 @@ class AdminsTest < ActionDispatch::IntegrationTest
   test 'list all admins' do
     get '/api/admins'
 
-
     # Check response format & status
     assert_equal 200, response.status, response.body
-    assert_equal Mime::JSON, response.content_type
+    assert_equal Mime[:json], response.content_type
 
     # Check the list items are ok
     admins = json_response(response.body)

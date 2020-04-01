@@ -1,4 +1,6 @@
-class CreateStatisticProfile < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class CreateStatisticProfile < ActiveRecord::Migration[4.2]
   def change
     create_table :statistic_profiles do |t|
       t.boolean :gender

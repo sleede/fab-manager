@@ -1,5 +1,32 @@
 # Changelog Fab-manager
 
+## v4.3.3 2020 April 1st
+
+- Docker build will no longer embed development dependencies
+- Updated instructions to setup a development environment
+- Updated translations
+- Removed `MESSAGEFORMAT_LOCALE` as it is now handled by make-plural
+- Updated rails framework to v5.2
+- Updated angular-translate
+- Updated eslint
+- Updated compass-rails & compass-core
+- Renamed production documentation
+- Syntax improvements in scss files
+- Fix a bug: crediting a wallet w/ refund invoice prevent statistics generation (#196)
+- Fix a bug: no statistics for subscriptions (#196)
+- Fix a bug: invalid translation keys in closing accounting period interface
+- Fix a bug: since PostgreSQL release 9.6.17, the new installations will fail to start complaining for missing password (#194)
+- Fix a bug: missing translations for some error messages
+- Fix a bug: invalid footprints in invoices fixtures
+- Fix a bug: unable to export accounting data to ACD
+- Fix a bug: report error on invalid encoding in members import
+- Fix a bug: missing translation for subscriptions statistics > duration
+- Fix a security issue: updated mkdirp to fix [CVE-2020-7598](https://nvd.nist.gov/vuln/detail/CVE-2020-7598)
+- Fix a security issue: updated acorn to fix [CVE-2020-7598](https://nvd.nist.gov/vuln/detail/CVE-2020-7598)
+- Fix a security issue: updated actionview to fix [CVE-2020-5267](https://nvd.nist.gov/vuln/detail/CVE-2020-5267)
+- [TODO DEPLOY] `rails fablab:fix:avoirs_wallet_transaction`
+- [TODO DEPLOY] `rails fablab:es:generate_stats[289]` only if you had missing statistics since some date ago (here 289 days)
+
 ## v4.3.2 2020 March 11
 
 - Secure the session cookie

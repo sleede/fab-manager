@@ -1,4 +1,6 @@
-class CreateHistoryValues < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class CreateHistoryValues < ActiveRecord::Migration[4.2]
   def change
     create_table :history_values do |t|
       t.references :setting, index: true, foreign_key: true

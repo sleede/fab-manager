@@ -4,7 +4,6 @@
   z-index: 10000;
 }
 
-
 .ui-tour-popup.popover {
   max-width: 414px;
 }
@@ -22,10 +21,22 @@
   }
 }
 
-.shift-right-40 { margin-left: 40px; }
+.shift-right-40 {
+  margin-left: 40px;
+}
 
-.shift-left-40 { margin-left: -40px; }
-.shift-left-50 { margin-left: -50px; }
-.shift-left-80 { margin-left: -80px; }
+.shift-left-40 {
+  margin-left: -40px;
+}
 
-.width-350 { width: 350px; }
+.shift-left-50 {
+  margin-left: -50px;
+}
+
+.shift-left-80 {
+  margin-left: -80px;
+}
+
+.width-350 {
+  width: 350px;
+}

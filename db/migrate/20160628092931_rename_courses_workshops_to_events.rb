@@ -1,4 +1,6 @@
-class RenameCoursesWorkshopsToEvents < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class RenameCoursesWorkshopsToEvents < ActiveRecord::Migration[4.2]
   def up
     execute "UPDATE statistic_indices
              SET label='Évènements'

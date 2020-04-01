@@ -1,4 +1,6 @@
-class AddOmniauthToUsers < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class AddOmniauthToUsers < ActiveRecord::Migration[4.2]
   def change
     add_column :users, :provider, :string
     add_index :users, :provider

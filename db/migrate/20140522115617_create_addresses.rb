@@ -1,4 +1,6 @@
-class CreateAddresses < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class CreateAddresses < ActiveRecord::Migration[4.2]
   def change
     create_table :addresses do |t|
       t.string :address

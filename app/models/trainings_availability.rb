@@ -1,4 +1,8 @@
-class TrainingsAvailability < ActiveRecord::Base
+# frozen_string_literal: true
+
+# TrainingsAvailability is the relation table between a Training and an Availability.
+# Is is used to schedule a training session, for members to be able to book it.
+class TrainingsAvailability < ApplicationRecord
   belongs_to :training
   belongs_to :availability
   after_destroy :cleanup_availability

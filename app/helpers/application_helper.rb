@@ -94,6 +94,17 @@ module ApplicationHelper
     res
   end
 
+  ##
+  # check if the provided asset file is available
+  # @see https://github.com/rails/sprockets-rails/issues/298
+  #
+  def asset_available?(logical_path)
+    if Rails.configuration.assets.compile
+      Rails.application.precompiled_assets.include? logical_path
+    else
+      Rails.application.assets_manifest.assets[logical_path].present?
+    end
+  end
 
   private
 

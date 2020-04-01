@@ -2,7 +2,7 @@
 
 # From this migration, we save the file imports into the database.
 # Currently, imports are limited to users import from a CSV file
-class CreateImports < ActiveRecord::Migration
+class CreateImports < ActiveRecord::Migration[4.2]
   def change
     create_table :imports do |t|
       t.integer :user_id

@@ -267,7 +267,7 @@ en:
       subject: "Privacy policy updated"
       body:
         content_html: "<p>We wish to inform you that we have just updated our privacy policy.</p><p>We may change our privacy policy regularly. In accordance with the regulations, you will receive a notification for each update.</p><p>By accessing or using our services after the privacy policy update, we will consider that you agree its terms, updates included.</p>"
-        link_to_policy: "Cliquez ici pour consultez la politique de confidentialité."
+        link_to_policy: "Click here to view the privacy policy."
     notify_admin_refund_created:
       subject: "A refund has been generated"
       body:

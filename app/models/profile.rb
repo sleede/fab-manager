@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Personal data attached to an user (like first_name, date of birth, etc.)
-class Profile < ActiveRecord::Base
+class Profile < ApplicationRecord
   belongs_to :user
   has_one :user_avatar, as: :viewable, dependent: :destroy
   accepts_nested_attributes_for :user_avatar,
@@ -28,7 +28,7 @@ class Profile < ActiveRecord::Base
     blacklist = %w[id user_id created_at updated_at]
     # model-relationships must be added manually
     additional = [%w[avatar string], %w[address string], %w[organization_name string], %w[organization_address string]]
-    Profile.column_types
+    Profile.columns_hash
            .map { |k, v| [k, v.type.to_s] }
            .delete_if { |col| blacklist.include?(col[0]) }
            .concat(additional)
@@ -37,7 +37,7 @@ class Profile < ActiveRecord::Base
   private
 
   def invoicing_data_was_modified?
-    first_name_changed? or last_name_changed? or new_record?
+    saved_change_to_first_name? || saved_change_to_last_name? || new_record?
   end
 
   def update_invoicing_profile

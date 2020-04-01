@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Event PDF attachements
+# EventFile is a PDF attachment for Events
 class EventFile < Asset
   mount_uploader :attachment, EventFileUploader
 

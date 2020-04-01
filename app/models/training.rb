@@ -1,4 +1,9 @@
-class Training < ActiveRecord::Base
+# frozen_string_literal: true
+
+# Training is a course for members to acquire knowledge on a specific matter.
+# Trainings are designed to be scheduled periodically through Availabilities.
+# A Training can be a prerequisite before members can book a Machine.
+class Training < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
 
@@ -23,7 +28,7 @@ class Training < ActiveRecord::Base
 
   after_create :create_statistic_subtype
   after_create :create_trainings_pricings
-  after_update :update_statistic_subtype, if: :name_changed?
+  after_update :update_statistic_subtype, if: :saved_change_to_name?
   after_destroy :remove_statistic_subtype
 
   def amount_by_group(group)

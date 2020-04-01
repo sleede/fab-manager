@@ -1,4 +1,8 @@
-class Ticket < ActiveRecord::Base
+# frozen_string_literal: true
+
+# Ticket is an reservation of a member for an Event, with a specific PriceCategory
+# For example, Member John Smith smith has book 2 places on Event "Arduino initiation" at price "reduces fare"
+class Ticket < ApplicationRecord
   belongs_to :reservation
   belongs_to :event_price_category
 

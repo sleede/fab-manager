@@ -5,22 +5,20 @@ This document will guide you through all the steps needed to set up a developmen
 ##### Table of contents
 
 1. [General Guidelines](#general-guidelines)<br/>
-2. [PostgreSQL](#postgresql)<br/>
-2.1. [Install PostgreSQL 9.6](#setup-postgresql)
+2. [PostgreSQL](#postgresql)
 3. [ElasticSearch](#elasticsearch)<br/>
-3.1. [Install ElasticSearch](#setup-elasticsearch)<br/>
-3.2. [Rebuild statistics](#rebuild-stats)<br/>
-3.3. [Backup and Restore](#backup-and-restore-elasticsearch)
+3.1. [Rebuild statistics](#rebuild-stats)<br/>
+3.2. [Backup and Restore](#backup-and-restore-elasticsearch)
+3.3. [Debugging](debugging-elasticsearch)
 
-This procedure is not easy to follow so if you don't need to write some code for Fab-manager, please prefer the [docker-compose installation method](docker-compose_readme.md).
+This procedure is not easy to follow so if you don't need to write some code for Fab-manager, please prefer the [production installation method](doc/production_readme.md).
 
 
 <a name="general-guidelines"></a>
 ## General Guidelines
 
 1. Install RVM, with the ruby version specified in the [.ruby-version file](../.ruby-version).
-   For more details about the process, please read the [official RVM documentation](http://rvm.io/rvm/install).
-   If you're using ArchLinux, you may have to [read this](archlinux_readme.md) before.
+   For more details about the process, please read the [official RVM documentation](http://rvm.io/rvm/install)
 
 2. Install NVM, with the node.js version specified in the [.nvmrc file](../.nvmrc).
    For instructions about installing NVM, please refer to [the NVM readme](https://github.com/nvm-sh/nvm#installation-and-update).
@@ -42,46 +40,55 @@ This procedure is not easy to follow so if you don't need to write some code for
    sudo reboot
    ```
 
-6. Create a docker network for Fab-manager.
-   You may have to change the network address if it is already in use.
-   > 🍏 If you're using MacOS, this is not required.
-   ```bash
-   docker network create --subnet=172.18.0.0/16 fabmanager
-   ```
-
-7. Retrieve the project from Git
+6. Retrieve the project from Git
 
    ```bash
    git clone https://github.com/sleede/fab-manager.git
    ```
 
-8. Install the software dependencies.
-   First install [PostgreSQL](#postgresql) and [ElasticSearch](#elasticsearch) as specified in their respective documentations (see below).
-   Then install the other dependencies:
+7. Move into the project directory and install the docker-based dependencies.
+   > ⚠ If you are using MacOS X, you must *first* edit the files located in docker/development to use port binding instead of ip-based binding.
+   > This can be achieved by uncommenting the "port" directives and commenting the "networks" directives in the docker-compose.yml file.
+   > The hosts file must be modified too, accordingly.
+  ```bash
+  cd fab-manager
+  cat docker/development/hosts | sudo tee -a /etc/hosts
+  mkdir -p .docker/elasticsearch/config
+  cp docker/development/docker-compose.yml .docker
+  cp docker/elasticsearch.yml .docker/elasticsearch/config
+  cp docker/log4j2.properties .docker/elasticsearch/config
+  cd .docker
+  docker-compose up -d
+  cd -
+  ```
+
+8. Install the other dependencies.
    - For Ubuntu/Debian:
 
    ```bash
    # on Ubuntu 18.04 server, you may have to enable the "universe" repository
    sudo add-apt-repository universe
    # then, install the dependencies
-   sudo apt-get install libpq-dev redis-server imagemagick
+   sudo apt-get install libpq-dev imagemagick
    ```
    - For MacOS X:
 
    ```bash
-   brew install redis imagemagick
+   brew install imagemagick
    ```
 
 9. Init the RVM and NVM instances and check they were correctly configured
 
    ```bash
-   cd fab-manager
    rvm current | grep -q `cat .ruby-version`@fab-manager && echo "ok"
    # Must print ok
    nvm use
    node --version | grep -q `cat .nvmrc` && echo "ok"
    # Must print ok
    ```
+   
+   If one of these commands does not print "ok", then try to input `rvm use` or `nvm use`
+```
 
 10. Install bundler in the current RVM gemset
 
@@ -106,18 +113,19 @@ This procedure is not easy to follow so if you don't need to write some code for
    ```
 
 13. Build the databases.
-   - **Warning**: **DO NOT** run `rake db:setup` instead of these commands, as this will not run some required raw SQL instructions.
-   - **Please note**: Your password length must be between 8 and 128 characters, otherwise db:seed will be rejected. This is configured in [config/initializers/devise.rb](config/initializers/devise.rb)
+   > **⚠ Warning**: **DO NOT** run `rails db:setup` instead of these commands, as this will not run some required raw SQL instructions.
+
+   > **🛈 Please note**: Your password length must be between 8 and 128 characters, otherwise db:seed will be rejected. This is configured in [config/initializers/devise.rb](config/initializers/devise.rb)
 
    ```bash
    # for dev
-   rake db:create
-   rake db:migrate
-   ADMIN_EMAIL='youradminemail' ADMIN_PASSWORD='youradminpassword' rake db:seed
-   rake fablab:es:build_stats
+   rails db:create
+   rails db:migrate
+   ADMIN_EMAIL='youradminemail' ADMIN_PASSWORD='youradminpassword' rails db:seed
+   rails fablab:es:build_stats
    # for tests
-   RAILS_ENV=test rake db:create
-   RAILS_ENV=test rake db:migrate
+   RAILS_ENV=test rails db:create
+   RAILS_ENV=test rails db:migrate
    ```
 
 14. Create the pids folder used by Sidekiq. If you want to use a different location, you can configure it in `config/sidekiq.yml`
@@ -129,7 +137,7 @@ This procedure is not easy to follow so if you don't need to write some code for
 15. Start the development web server
 
    ```bash
-   foreman s -p 3000
+   foreman s -p 5000
    ```
 
 16. You should now be able to access your local development Fab-manager instance by accessing `http://localhost:3000` in your web browser.
@@ -143,83 +151,27 @@ This procedure is not easy to follow so if you don't need to write some code for
 <a name="postgresql"></a>
 ## PostgreSQL
 
-<a name="setup-postgresql"></a>
-### Install PostgreSQL 9.6
-
-We will use docker to easily install the required version of PostgreSQL.
-
-1. Create the docker binding folder
-   ```bash
-   mkdir -p .docker/postgresql
-   ```
-
-2. Start the PostgreSQL container.
-   > 🍏 If you're using MacOS, remove the --network and --ip parameters, and add -p 5432:5432.
-   ```bash
-   docker run --restart=always -d --name fabmanager-postgres \
-   -v $(pwd)/.docker/postgresql:/var/lib/postgresql/data \
-   --network fabmanager --ip 172.18.0.2 \
-   postgres:9.6
-   ```
-
-3. Configure Fab-manager to use it.
-   On linux systems, PostgreSQL will be available at 172.18.0.2.
-   On MacOS, you'll have to set the host to 127.0.0.1 (or localhost).
-   See [environment.md](environment.md) for more details.
-
-4 . Finally, you may want to have a look at detailed informations about PostgreSQL usage in Fab-manager.
-    Some information about that is available in the [PostgreSQL Readme](postgresql_readme.md).
+Some information about PostgreSQL usage in fab-manager is available in the [PostgreSQL Readme](postgresql_readme.md).
 
 <a name="elasticsearch"></a>
 ## ElasticSearch
 
 ElasticSearch is a powerful search engine based on Apache Lucene combined with a NoSQL database used as a cache to index data and quickly process complex requests on it.
 
-In Fab-manager, it is used for the admin's statistics module and to perform searches in projects.
+In FabManager, it is used for the admin's statistics module and to perform searches in projects.
 
-<a name="setup-elasticsearch"></a>
-### Install ElasticSearch
-
-1. Create the docker binding folders
-   ```bash
-   mkdir -p .docker/elasticsearch/config
-   mkdir -p .docker/elasticsearch/plugins
-   mkdir -p .docker/elasticsearch/backups
-   ```
-
-2. Copy the default configuration files
-   ```bash
-   cp docker/elasticsearch.yml .docker/elasticsearch/config
-   cp docker/log4j2.properties .docker/elasticsearch/config
-   ```
-
-3. Start the ElasticSearch container.
-   > 🍏 If you're using MacOS, remove the --network and --ip parameters, and add -p 9200:9200.
-   ```bash
-   docker run --restart=always -d --name fabmanager-elastic \
-   -v $(pwd)/.docker/elasticsearch/config:/usr/share/elasticsearch/config \
-   -v $(pwd)/.docker/elasticsearch:/usr/share/elasticsearch/data \
-   -v $(pwd)/.docker/elasticsearch/plugins:/usr/share/elasticsearch/plugins \
-   -v $(pwd)/.docker/elasticsearch/backups:/usr/share/elasticsearch/backups \
-   --network fabmanager --ip 172.18.0.3 \
-   elasticsearch:5.6
-   ```
-
-4. Configure Fab-manager to use it.
-   On linux systems, ElasticSearch will be available at 172.18.0.3.
-   On MacOS, you'll have to set the host to 127.0.0.1 (or localhost).
-   See [environment.md](environment.md) for more details.
+The organisation if the data in the ElasticSearch database is documented in [elasticsearch.md](elasticsearch.md) 
 
 <a name="rebuild-stats"></a>
 ### Rebuild statistics
 
-Every nights, the statistics for the day that just ended are built automatically at 01:00 (AM) and stored in ElastricSearch.
+Every nights, the statistics for the day that just ended are built automatically at 01:00 (AM) and stored in ElasticSearch.
 See [schedule.yml](config/schedule.yml) to modify this behavior.
 If the scheduled task wasn't executed for any reason (eg. you are in a dev environment and your computer was turned off at 1 AM), you can force the statistics data generation in ElasticSearch, running the following command.
 
 ```bash
 # Here for the 50 last days
-rake fablab:es:generate_stats[50]
+rails fablab:es:generate_stats[50]
 ```
 
 <a name="backup-and-restore-elasticsearch"></a>
@@ -229,3 +181,9 @@ To backup and restore the ElasticSearch database, use the [elasticsearch-dump](h
 
 Dump the database with: `elasticdump --input=http://localhost:9200/stats --output=fablab_stats.json`.
 Restore it with: `elasticdump --input=fablab_stats.json --output=http://localhost:9200/stats`.
+
+
+<a name="debugging-elasticsearch"></a>
+### Debugging
+
+In development, visit http://fabmanager-kibana:5601 to use Kibana, the web UI for ElasticSearch

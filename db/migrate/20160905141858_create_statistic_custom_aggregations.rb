@@ -1,4 +1,6 @@
-class CreateStatisticCustomAggregations < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class CreateStatisticCustomAggregations < ActiveRecord::Migration[4.2]
   def change
     create_table :statistic_custom_aggregations do |t|
       t.text :query

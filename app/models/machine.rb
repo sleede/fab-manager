@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# Machine is an hardware equipment hosted in the fablab that is available for reservation to the members
-class Machine < ActiveRecord::Base
+# Machine is an hardware equipment hosted in the Fablab that is available for reservation to the members
+class Machine < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
 
@@ -29,7 +29,7 @@ class Machine < ActiveRecord::Base
 
   after_create :create_statistic_subtype
   after_create :create_machine_prices
-  after_update :update_statistic_subtype, if: :name_changed?
+  after_update :update_statistic_subtype, if: :saved_change_to_name?
   after_destroy :remove_statistic_subtype
 
   def not_subscribe_price(group_id)

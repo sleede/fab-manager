@@ -1,4 +1,6 @@
-class CreateNotifications < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class CreateNotifications < ActiveRecord::Migration[4.2]
   def change
     create_table :notifications do |t|
       t.integer :receiver_id

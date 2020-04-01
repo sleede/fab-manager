@@ -11,7 +11,7 @@ namespace :fablab do
       end
 
       if AccountingPeriod.count.positive?
-        last_period = AccountingPeriod.order(start_at: 'DESC').first
+        last_period = AccountingPeriod.order(start_at: :desc).first
         puts "Regenerating from #{last_period.end_at}..."
         Invoice.where('created_at > ?', last_period.end_at).order(:id).each(&:chain_record)
       else
@@ -29,7 +29,7 @@ namespace :fablab do
       end
 
       if AccountingPeriod.count.positive?
-        last_period = AccountingPeriod.order(start_at: 'DESC').first
+        last_period = AccountingPeriod.order(start_at: :desc).first
         puts "Regenerating from #{last_period.end_at}..."
         InvoiceItem.where('created_at > ?', last_period.end_at).order(:id).each(&:chain_record)
       else
@@ -59,7 +59,7 @@ namespace :fablab do
 
     desc 'add missing VAT rate to history'
     task :add_vat_rate, %i[rate date] => :environment do |_task, args|
-      raise 'Missing argument. Usage exemple: rake fablab:setup:add_vat_rate[20,2014-01-01]. Use 0 to disable' unless args.rate && args.date
+      raise 'Missing argument. Usage exemple: rails fablab:setup:add_vat_rate[20,2014-01-01]. Use 0 to disable' unless args.rate && args.date
 
       if args.rate == '0'
         setting = Setting.find_by(name: 'invoice_VAT-active')

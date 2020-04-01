@@ -1,4 +1,7 @@
-class EventPriceCategory < ActiveRecord::Base
+# frozen_string_literal: true
+
+# EventPriceCategory is the relation table between Event and PriceCategory.
+class EventPriceCategory < ApplicationRecord
   belongs_to :event
   belongs_to :price_category
 
@@ -10,8 +13,9 @@ class EventPriceCategory < ActiveRecord::Base
   before_destroy :verify_no_associated_tickets
 
   protected
+
   def verify_no_associated_tickets
-    tickets.count == 0
+    throw(:abort) if tickets.count.zero?
   end
 
 end

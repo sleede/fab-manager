@@ -11,7 +11,7 @@ class EventService
                                              start_at: range[:start_at],
                                              end_at: range[:end_at],
                                              available_type: 'event' })
-          .except!(:start_date, :end_date, :start_time, :end_time, :all_day)
+          .extract!(:start_date, :end_date, :start_time, :end_time, :all_day)
     # convert main price to centimes
     params[:amount] = (params[:amount].to_f * 100 if params[:amount].present?)
     # delete non-complete "other" prices and convert them to centimes

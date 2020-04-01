@@ -126,7 +126,7 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
      * Return the group object, identified by the ID set in $scope.userGroup
      */
     $scope.getUserGroup = function () {
-      for (let group of Array.from($scope.groups)) {
+      for (const group of Array.from($scope.groups)) {
         if (group.id === $scope.userGroup) {
           return group;
         }
@@ -319,7 +319,7 @@ Application.Controllers.controller('ShowProfileController', ['$scope', 'memberPr
    */
   var filterNetworks = function () {
     const networks = [];
-    for (let network of Array.from(SocialNetworks)) {
+    for (const network of Array.from(SocialNetworks)) {
       if ($scope.user.profile[network] && ($scope.user.profile[network].length > 0)) {
         networks.push(network);
       }

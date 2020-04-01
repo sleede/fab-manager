@@ -1,4 +1,6 @@
-class MigrateSubscriptionToStatisticProfile < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class MigrateSubscriptionToStatisticProfile < ActiveRecord::Migration[4.2]
   def up
     Subscription.all.each do |s|
       user = User.find(s.user_id)

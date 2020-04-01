@@ -257,7 +257,7 @@ ach:
       notify_member_slot_is_modified:
         your_reservation_slot_was_successfully_changed: "crwdns3595:0crwdne3595:0"
       notify_member_subscribed_plan:
-        you_have_subscribed_to_PLAN_html: "crwdns3597:0%{PLAN}crwdne3597:0"
+        you_have_subscribed_to_PLAN_html: "crwdns20274:0%{PLAN}crwdne20274:0"
       notify_member_subscribed_plan_is_changed:
         you_have_changed_your_subscription_to_PLAN_html: "crwdns3599:0%{PLAN}crwdne3599:0"
       notify_member_subscription_canceled:
@@ -356,6 +356,7 @@ ach:
     revenue: "crwdns3733:0crwdne3733:0"
     account_creation: "crwdns3735:0crwdne3735:0"
     project_publication: "crwdns3737:0crwdne3737:0"
+    duration: "crwdns20282:0crwdne20282:0"
   #statistics exports to the excel file format
   export:
     entries: "crwdns3739:0crwdne3739:0"

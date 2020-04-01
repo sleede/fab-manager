@@ -1,28 +1,28 @@
-class Subscriptions::RenewAsAdminTest < ActionDispatch::IntegrationTest
+# frozen_string_literal: true
 
+class Subscriptions::RenewAsAdminTest < ActionDispatch::IntegrationTest
   setup do
     @admin = User.find_by(username: 'admin')
     login_as(@admin, scope: :user)
   end
 
   test 'admin successfully renew a subscription before it has ended' do
-
     user = User.find_by(username: 'kdumas')
     plan = Plan.find_by(base_name: 'Mensuel tarif réduit')
 
     VCR.use_cassette('subscriptions_admin_renew_success') do
       post '/api/subscriptions',
-           {
+           params: {
              subscription: {
                plan_id: plan.id,
                user_id: user.id
              }
-           }.to_json, default_headers
+           }.to_json, headers: default_headers
     end
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime::JSON, response.content_type
+    assert_equal Mime[:json], response.content_type
 
     # Check the correct plan was subscribed
     subscription = json_response(response.body)
@@ -74,17 +74,17 @@ class Subscriptions::RenewAsAdminTest < ActionDispatch::IntegrationTest
 
     VCR.use_cassette('subscriptions_admin_offer_free_days') do
       put "/api/subscriptions/#{subscription.id}",
-          {
+          params: {
             subscription: {
               expired_at: new_date.strftime('%Y-%m-%d %H:%M:%S.%9N Z'),
               free: true
             }
-          }.to_json, default_headers
+          }.to_json, headers: default_headers
     end
 
     # Check response format & status
     assert_equal 200, response.status, response.body
-    assert_equal Mime::JSON, response.content_type
+    assert_equal Mime[:json], response.content_type
 
     # Check that the subscribed plan was not altered
     res_subscription = json_response(response.body)
@@ -114,16 +114,16 @@ class Subscriptions::RenewAsAdminTest < ActionDispatch::IntegrationTest
 
     VCR.use_cassette('subscriptions_admin_extends_subscription') do
       put "/api/subscriptions/#{subscription.id}",
-          {
+          params: {
             subscription: {
               expired_at: new_date.strftime('%Y-%m-%d %H:%M:%S.%9N Z')
             }
-          }.to_json, default_headers
+          }.to_json, headers: default_headers
     end
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime::JSON, response.content_type
+    assert_equal Mime[:json], response.content_type
 
     # Check that the subscribed plan is still the same
     res_subscription = json_response(response.body)
@@ -145,5 +145,4 @@ class Subscriptions::RenewAsAdminTest < ActionDispatch::IntegrationTest
     assert_not_nil notification, 'user notification was not created'
     assert_equal user.id, notification.receiver_id, 'wrong user notified'
   end
-
 end

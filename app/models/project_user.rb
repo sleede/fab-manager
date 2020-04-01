@@ -1,4 +1,8 @@
-class ProjectUser < ActiveRecord::Base
+# frozen_string_literal: true
+
+# ProjectUser is the relation table between a Project and an User.
+# Users are collaborators to a Project, with write access if they have confirmed their participation.
+class ProjectUser < ApplicationRecord
   include NotifyWith::NotificationAttachedObject
 
   belongs_to :project
@@ -6,13 +10,15 @@ class ProjectUser < ActiveRecord::Base
 
   before_create :generate_valid_token
   after_commit :notify_project_collaborator_to_valid, on: :create
-  after_update :notify_project_author_when_collaborator_valid, if: :is_valid_changed?
+  after_update :notify_project_author_when_collaborator_valid, if: :saved_change_to_is_valid?
 
   private
+
   def generate_valid_token
-    begin
+    loop do
       self.valid_token = SecureRandom.hex
-    end while self.class.exists?(valid_token: valid_token)
+      break unless self.class.exists?(valid_token: valid_token)
+    end
   end
 
   def notify_project_collaborator_to_valid

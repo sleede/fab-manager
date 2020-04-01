@@ -1,8 +1,8 @@
+# frozen_string_literal: true
+
 module Events
   class AsUserTest < ActionDispatch::IntegrationTest
-
     test 'reserve event with many prices and payment means and VAT' do
-
       vlonchamp = User.find_by(username: 'vlonchamp')
       login_as(vlonchamp, scope: :user)
 
@@ -27,7 +27,7 @@ module Events
       # Reserve the 'radio' event
       VCR.use_cassette('reserve_event_with_many_prices_and_payment_means') do
         post '/api/payments/confirm_payment',
-             {
+             params: {
                payment_method_id: stripe_payment_method,
                cart_items: {
                  reservation: {
@@ -56,7 +56,7 @@ module Events
                  },
                  coupon_code: 'SUNNYFABLAB'
                }
-             }.to_json, default_headers
+             }.to_json, headers: default_headers
       end
 
       vlonchamp.wallet.reload
@@ -80,14 +80,14 @@ module Events
 
       refute invoice.stp_payment_intent_id.blank?
       refute invoice.total.blank?
-      assert_equal 43350, invoice.total # total minus coupon
+      assert_equal 43_350, invoice.total # total minus coupon
 
       # invoice_items assertions
       ## reservation
       reservation_item = invoice.invoice_items.first
 
       assert_not_nil reservation_item
-      assert_equal 51000, reservation_item.amount # full total
+      assert_equal 51_000, reservation_item.amount # full total
 
       # invoice assertions
       invoice = Invoice.find_by(invoiced: reservation)
@@ -109,7 +109,6 @@ module Events
       # notifications
       assert_not_empty Notification.where(attached_object: reservation)
       assert_not_empty Notification.where(attached_object: invoice)
-
     end
   end
 end

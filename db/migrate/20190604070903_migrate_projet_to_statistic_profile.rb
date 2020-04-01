@@ -1,4 +1,6 @@
-class MigrateProjetToStatisticProfile < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class MigrateProjetToStatisticProfile < ActiveRecord::Migration[4.2]
   def up
     Project.all.each do |p|
       author = User.find(p.author_id)

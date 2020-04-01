@@ -1,4 +1,6 @@
-class CreateProjectSteps < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class CreateProjectSteps < ActiveRecord::Migration[4.2]
   def change
     create_table :project_steps do |t|
       t.text :description

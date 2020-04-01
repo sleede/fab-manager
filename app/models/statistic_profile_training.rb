@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Stores trainings validated per user (non validated trainings are only recorded in reservations)
-class StatisticProfileTraining < ActiveRecord::Base
+class StatisticProfileTraining < ApplicationRecord
   include NotifyWith::NotificationAttachedObject
 
   belongs_to :statistic_profile

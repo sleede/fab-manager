@@ -1,4 +1,6 @@
-class CreateTickets < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class CreateTickets < ActiveRecord::Migration[4.2]
   def change
     create_table :tickets do |t|
       t.belongs_to :reservation, index: true, foreign_key: true

@@ -1,4 +1,6 @@
-class ChangeEvent < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class ChangeEvent < ActiveRecord::Migration[4.2]
   def change
     add_column :events, :availability_id, :integer
     add_index :events, :availability_id

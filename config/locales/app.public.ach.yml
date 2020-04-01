@@ -247,7 +247,7 @@ ach:
         your_subscription_has_expired_on_the_DATE: "crwdns9191:0{DATE}crwdne9191:0"
         subscription_price: "crwdns9193:0crwdne9193:0"
         you_ve_just_selected_a_subscription_html: "crwdns9195:0crwdne9195:0"
-        confirm_and_pay: "crwdns9197:0crwdne9197:0"
+        confirm_and_pay: "crwdns20280:0crwdne20280:0"
         you_ve_just_payed_the_subscription_html: "crwdns9199:0crwdne9199:0"
         thank_you_your_subscription_is_successful: "crwdns9201:0crwdne9201:0"
         your_invoice_will_be_available_soon_from_your_dashboard: "crwdns9203:0crwdne9203:0"
@@ -357,7 +357,7 @@ ach:
       tour:
         conclusion:
           title: "crwdns19646:0crwdne19646:0"
-          content: "crwdns20176:0crwdne20176:0"
+          content: "crwdns20270:0crwdne20270:0"
         welcome:
           welcome:
             title: "crwdns19650:0crwdne19650:0"

@@ -5,6 +5,7 @@ Coveralls.wear!('rails')
 
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
+require 'action_dispatch'
 require 'rails/test_help'
 require 'vcr'
 require 'sidekiq/testing'
@@ -20,9 +21,6 @@ end
 Sidekiq::Testing.fake!
 Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(color: true)]
 
-
-
-
 class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
 
@@ -33,7 +31,7 @@ class ActiveSupport::TestCase
   end
 
   def default_headers
-    { 'Accept' => Mime::JSON, 'Content-Type' => Mime::JSON.to_s }
+    { 'Accept' => Mime[:json], 'Content-Type' => Mime[:json].to_s }
   end
 
   def stripe_payment_method(error: nil)
@@ -190,8 +188,8 @@ class ActiveSupport::TestCase
   # Parse a line of text read from a PDF file and return the price included inside
   # Line of text should be of form 'Label              $10.00'
   # @returns {float}
-  def parse_amount_from_invoice_line line
-    line[line.rindex(' ')+1..-1].tr(I18n.t('number.currency.format.unit'), '').to_f
+  def parse_amount_from_invoice_line(line)
+    line[line.rindex(' ') + 1..-1].tr(I18n.t('number.currency.format.unit'), '').to_f
   end
 end
 

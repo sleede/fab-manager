@@ -50,14 +50,14 @@ the host can provide but will usually be much more slower than a production envi
     included in the migrations. Password minimal length is 8 characters):
 
    ```bash
-   rake db:create
-   rake db:migrate
+   rails db:create
+   rails db:migrate
    # Be sure not to use the default values below in production
-   ADMIN_EMAIL='admin@email' ADMIN_PASSWORD='adminpass' rake db:seed
-   rake fablab:es:build_stats
+   ADMIN_EMAIL='admin@email' ADMIN_PASSWORD='adminpass' rails db:seed
+   rails fablab:es:build_stats
    # for tests
-   RAILS_ENV=test rake db:create
-   RAILS_ENV=test rake db:migrate
+   RAILS_ENV=test rails db:create
+   RAILS_ENV=test rails db:migrate
    ```
 
 8. Start the application and visit `localhost:3000` on your browser to check that it works:

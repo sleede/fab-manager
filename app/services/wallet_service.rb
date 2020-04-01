@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Provides methods to manage wallets
 class WalletService
   def initialize(user: nil, wallet: nil)
     @user = user
@@ -8,7 +11,12 @@ class WalletService
   def credit(amount)
     ActiveRecord::Base.transaction do
       if @wallet.credit(amount)
-        transaction = WalletTransaction.new(invoicing_profile: @user.invoicing_profile, wallet: @wallet, transaction_type: 'credit', amount: amount)
+        transaction = WalletTransaction.new(
+          invoicing_profile: @user.invoicing_profile,
+          wallet: @wallet,
+          transaction_type: 'credit',
+          amount: amount
+        )
         if transaction.save
           NotificationCenter.call type: 'notify_user_wallet_is_credited',
                                   receiver: @wallet.user,
@@ -54,6 +62,7 @@ class WalletService
     avoir.payment_method = 'wallet'
     avoir.subscription_to_expire = false
     avoir.invoicing_profile_id = wallet_transaction.wallet.user.invoicing_profile.id
+    avoir.statistic_profile_id = wallet_transaction.wallet.user.statistic_profile.id
     avoir.total = wallet_transaction.amount * 100.0
     avoir.save!
 

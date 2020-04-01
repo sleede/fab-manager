@@ -2,7 +2,7 @@
 
 # Store customized price for various items (Machine, Space), depending on the group and on the plan
 # Also provides a static helper method to compute the price details of a shopping cart
-class Price < ActiveRecord::Base
+class Price < ApplicationRecord
   belongs_to :group
   belongs_to :plan
   belongs_to :priceable, polymorphic: true
@@ -29,16 +29,16 @@ class Price < ActiveRecord::Base
       all_elements[:slots] = []
 
       # initialize Plan
-      if user.subscribed_plan
-        plan = user.subscribed_plan
-        new_plan_being_bought = false
-      elsif plan_id
-        plan = Plan.find(plan_id)
-        new_plan_being_bought = true
-      else
-        plan = nil
-        new_plan_being_bought = false
-      end
+      plan = if user.subscribed_plan
+               new_plan_being_bought = false
+               user.subscribed_plan
+             elsif plan_id
+               new_plan_being_bought = true
+               Plan.find(plan_id)
+             else
+               new_plan_being_bought = false
+               nil
+             end
 
       # === compute reservation price ===
 

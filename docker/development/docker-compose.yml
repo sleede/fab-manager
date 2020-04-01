@@ -1,0 +1,75 @@
+version: '2'
+services:
+  postgres:
+    image: postgres:9.6
+    volumes:
+     - ${PWD}/postgresql:/var/lib/postgresql/data
+    restart: always
+    ## linux
+    networks:
+      fabmanager:
+         ipv4_address: 172.18.0.2
+    ## osx
+    #ports:
+    #  - "5432:5432"
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+
+  elasticsearch:
+    image: elasticsearch:5.6
+    environment:
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ${PWD}/elasticsearch/config:/usr/share/elasticsearch/config
+      - ${PWD}/elasticsearch:/usr/share/elasticsearch/data
+      - ${PWD}/elasticsearch/plugins:/usr/share/elasticsearch/plugins
+      - ${PWD}/elasticsearch/backups:/usr/share/elasticsearch/backups
+    restart: always
+    ## linux
+    networks:
+      fabmanager:
+        ipv4_address: 172.18.0.3
+    ## osx
+    #ports:
+    #  - "9200:9200"
+    #  - "9300:9300"
+
+  kibana:
+    image: kibana:5.6
+    environment:
+      ELASTICSEARCH_HOSTS: http://fabmanager-elastic:9200
+    restart: always
+    ## linux
+    networks:
+      fabmanager:
+        ipv4_address: 172.18.0.5
+    ## osx
+    #ports:
+    #  - "5601:5601"
+
+  redis:
+    image: redis:5
+    volumes:
+      - ${PWD}/redis:/data
+    restart: always
+    ## linux
+    networks:
+      fabmanager:
+        ipv4_address: 172.18.0.4
+    ## osx
+    #ports:
+    #  - "6379:6379"
+
+## linux
+networks:
+  fabmanager:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.18.0.0/16
+          gateway: 172.18.0.1
+

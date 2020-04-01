@@ -1,4 +1,4 @@
-class OpenAPI::Client < ActiveRecord::Base
+class OpenAPI::Client < ApplicationRecord
   has_many :calls_count_tracings, foreign_key: :open_api_client_id, dependent: :destroy
   has_secure_token
   validates :name, presence: true

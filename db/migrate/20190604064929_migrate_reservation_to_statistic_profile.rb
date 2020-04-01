@@ -1,4 +1,6 @@
-class MigrateReservationToStatisticProfile < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class MigrateReservationToStatisticProfile < ActiveRecord::Migration[4.2]
   def up
     Reservation.all.each do |r|
       user = User.find(r.user_id)

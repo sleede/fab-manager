@@ -307,7 +307,7 @@ es:
         will_appear_on_the_refund_invoice: "Aparecerá en el informe de devolución."
         to_credit: 'Credito'
         wallet_credit_successfully: "La cartera del usuario ha sido acreditada con éxito."
-        a_problem_occurred_for_wallet_credit: "Ocurrió un problema mientras se acreditaba la cartera"
+        a_problem_occurred_for_wallet_credit: "Ocurrió un problema mientras se acreditaba la cartera."
         amount_is_required: "Se requiere la cantidad."
         amount_minimum_1: "La cantidad mínima es 1"
         amount_confirm_is_required: "Debe confirmarse la cantidad."

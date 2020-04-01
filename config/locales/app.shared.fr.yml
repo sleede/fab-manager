@@ -186,9 +186,9 @@ fr:
         as_part_of_a_partner_subscription_some_notifications_may_be_sent_to_this_user: "Dans le cadre d'un abonnement partenaire, certaines notifications pourront être adressées à cet utilisateur."
         new_partner: "Nouveau partenaire"
         first_name: "Prénom"
-        first_name_is_required: "Le prénom est requis"
+        first_name_is_required: "Le prénom est requis."
         surname: "Nom"
-        surname_is_required: "le nom est requis"
+        surname_is_required: "Le nom est requis."
         email_address: "Adresse de courriel"
         email_address_is_required: "L'adresse e-mail est requise."
         disabled: "Désactiver l'abonnement"
@@ -319,12 +319,12 @@ fr:
         debit_subscription: "Payer un abonnement"
         debit_reservation_training: "Payer un reservation de formation"
         debit_reservation_machine: "Payer un reservation de machine"
-        debit_reservation_event: "Payer un reservation d'évenement"
+        debit_reservation_event: "Payer une réservation d’événement"
         warning_uneditable_credit: "Attention : une fois validé, le montant crédité ne sera plus modifiable."
       #promotional coupon (creation/edition form)
       coupon:
         name: "Nom"
-        name_is_required: "le nom est requis."
+        name_is_required: "Le nom est requis."
         code: "Code"
         code_is_required: "Le code est requis."
         code_must_be_composed_of_capital_letters_digits_and_or_dashes: "Le code doit être composé de lettres majuscules, de chiffres et/ou de tirets."
@@ -355,7 +355,7 @@ fr:
         unable_to_apply_the_coupon_because_sold_out: "Impossible d'appliquer la réduction : ce code promo a atteint son quota."
         unable_to_apply_the_coupon_because_already_used: "Impossible d'appliquer la réduction : vous avez déjà utilisé ce code promo par le passé."
         unable_to_apply_the_coupon_because_amount_exceeded: "Impossible d'appliquer la réduction : la réduction dépasse le total de cet achat."
-        unable_to_apply_the_coupon_because_undefined: "Impossible d'appliquer la réduction : une erreur inattendue s'est produite, veuillez contacter le gestionnaire du Fablab."
+        unable_to_apply_the_coupon_because_undefined: "Impossible d'appliquer la réduction : une erreur inattendue s'est produite, veuillez contacter le gestionnaire du FabLab."
         unable_to_apply_the_coupon_because_rejected: "Ce code promo n'existe pas."
       #form to create/edit a space
       space:

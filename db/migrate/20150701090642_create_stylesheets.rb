@@ -1,4 +1,6 @@
-class CreateStylesheets < ActiveRecord::Migration
+# frozen_string_literal:true
+
+class CreateStylesheets < ActiveRecord::Migration[4.2]
   def change
     create_table :stylesheets do |t|
       t.text :contents

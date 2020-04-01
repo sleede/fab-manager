@@ -42,7 +42,7 @@ value_history_4:
   id: 4
   setting_id: 4
   invoicing_profile_id: 1
-  value: fablabgrenoble
+  value: fab_manager
   created_at: 2018-12-17 11:23:01.572468000 Z
   updated_at: 2018-12-17 11:23:01.572468000 Z
   footprint: c9c1ae97e6f6cf1363f5d942419534c8f729752fa6c0d389b441caad9a7dbbc3
@@ -555,4 +555,32 @@ value_history_59:
   value: 'Space reservation'
   created_at: 2019-09-20 11:02:32.125400000 Z
   updated_at: 2019-09-20 11:02:32.125400000 Z
+  footprint:
+
+value_history_60:
+  id: 60
+  setting_id: 60
+  invoicing_profile_id: 1
+  value: |-
+    <div>
+    <div class="m-sm">
+    <div id="news">News</div>
+    </div>
+    <div class="row wrapper">
+    <div class="col-lg-8">
+    <div id="projects">Projects</div>
+    </div>
+    <div class="col-lg-4 m-t-lg">
+    <div id="twitter">Last tweet</div>
+    <div id="members">Last members</div>
+    </div>
+    </div>
+    <div class="row wrapper m-t-sm">
+    <div class="col-lg-12">
+    <div id="events">Next events</div>
+    </div>
+    </div>
+    </div>
+  created_at: 2020-03-25 09:24:09.016676894 Z
+  updated_at: 2020-03-25 09:24:09.016676894 Z
   footprint:
