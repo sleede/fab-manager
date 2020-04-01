@@ -61,7 +61,7 @@ class WalletService
     avoir.description = description
     avoir.payment_method = 'wallet'
     avoir.subscription_to_expire = false
-    avoir.invoicing_profile_id = wallet_transaction.invoicing_profile_id
+    avoir.invoicing_profile_id = wallet_transaction.wallet.user.invoicing_profile.id
     avoir.statistic_profile_id = wallet_transaction.wallet.user.statistic_profile.id
     avoir.total = wallet_transaction.amount * 100.0
     avoir.save!
