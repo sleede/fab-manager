@@ -10,6 +10,7 @@
 - Updated compass-rails & compass-core
 - Renamed production documentation
 - Syntax improvements in scss files
+- Fix a bug: crediting a wallet w/ refund invoice prevent statistics generation (#196)
 - Fix a bug: invalid translation keys in closing accounting period interface
 - Fix a bug: since PostgreSQL release 9.6.17, the new installations will fail to start complaining for missing password (#194)
 - Fix a bug: missing translations for some error messages
@@ -19,6 +20,8 @@
 - Fix a security issue: updated mkdirp to fix [CVE-2020-7598](https://nvd.nist.gov/vuln/detail/CVE-2020-7598)
 - Fix a security issue: updated acorn to fix [CVE-2020-7598](https://nvd.nist.gov/vuln/detail/CVE-2020-7598)
 - Fix a security issue: updated actionview to fix [CVE-2020-5267](https://nvd.nist.gov/vuln/detail/CVE-2020-5267)
+- [TODO DEPLOY] `rails fablab:fix:avoirs_wallet_transaction`
+- [TODO DEPLOY] `rails fablab:es:generate_stats[289]` only if you had missing statistics since some date ago. You can replace 289 by the difference of days between the day you run this task and the last day you had statistics
 
 ## v4.3.2 2020 March 11
 
