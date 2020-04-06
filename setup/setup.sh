@@ -50,6 +50,7 @@ system_requirements()
       echo -e "\e[91m[ ❌ ] $_command was not found, exiting...\e[39m" && exit 1
     fi
   done
+  echo "detecting gawk..."
   if ! command -v awk || ! [[ $(awk -W version) =~ ^GNU ]]
   then
     echo "Please install GNU Awk before running this script."
@@ -111,6 +112,10 @@ prepare_files()
 {
   FABMANAGER_PATH=${1:-/apps/fabmanager}
 
+  echo -e "Fab-Manager will be installed in \e[31m$FABMANAGER_PATH\e[0m"
+  read -rp "Continue? (Y/n) " confirm </dev/tty
+  if [[ "$confirm" = "n" ]]; then exit 1; fi
+
   sudo mkdir -p "$FABMANAGER_PATH/config"
   sudo chown -R "$(whoami)" "$FABMANAGER_PATH"
 
@@ -156,7 +161,8 @@ prepare_nginx()
     sed -i.bak "s/URL_WITH_PROTOCOL_HTTPS/https:\/\/${MAIN_DOMAIN[0]}/g" "$FABMANAGER_PATH/config/nginx/fabmanager.conf.ssl"
   else
     # if nginx is not installed, remove its associated block from docker-compose.yml
-    awk '$1 == "nginx:"{t=1; next};t==1 && /:[[:blank:]]*$/{t=0};t != 1' docker-compose.yml > "$FABMANAGER_PATH/.awktmpfile" && mv "$FABMANAGER_PATH/.awktmpfile" "$FABMANAGER_PATH/docker-compose.yml"
+    echo "Removing nginx..."
+    awk '$1 == "nginx:"{t=1; next};t==1{t=1;next};t==1 && /:[[:blank:]]*$/{t=0};t != 1' "$FABMANAGER_PATH/docker-compose.yml" > "$FABMANAGER_PATH/.awktmpfile" && mv "$FABMANAGER_PATH/.awktmpfile" "$FABMANAGER_PATH/docker-compose.yml"
   fi
 }
 
@@ -271,6 +277,7 @@ setup_assets_and_databases()
   printf "\n\nWe will now create the default administrator of Fab-manager.\n"
   read_email
   PASSWORD=$(read_password)
+  printf "\nOK. We will fulfilling the database now...\n"
   cd "$FABMANAGER_PATH" && docker-compose run --rm -e ADMIN_EMAIL="$EMAIL" -e ADMIN_PASSWORD="$PASSWORD" fabmanager bundle exec rake db:seed # seed the database
 
   # now build the assets
