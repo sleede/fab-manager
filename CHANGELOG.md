@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Changed some default values for new installations
+- Updated documentation
 - Fix a bug: installation without nginx does not remove the service from the docker-compose file
 
 ## v4.3.3 2020 April 1st
