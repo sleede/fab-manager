@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'version'
 
 # API Controller to get the Fab-manager version
@@ -7,6 +8,13 @@ class API::VersionController < API::ApiController
 
   def show
     authorize :version
+    # save the origin
+    origin = Setting.find_or_create_by(name: 'origin')
+    if origin.value != params[:origin]
+      origin.value = params[:origin]
+      origin.save!
+    end
+    # get the last version
     update_status = Setting.find_by(name: 'hub_last_version')&.value || '{}'
 
     json = JSON.parse(update_status)

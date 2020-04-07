@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- Improved version check
 - Improved setup script for installations without nginx
 - Changed some default values for new installations
 - Updated documentation

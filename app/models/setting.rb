@@ -73,7 +73,9 @@ class Setting < ApplicationRecord
                              fab_analytics
                              link_name
                              home_content
-                             home_css] }
+                             home_css
+                             origin
+                             uuid] }
   def value
     last_value = history_values.order(HistoryValue.arel_table['created_at'].desc).first
     last_value&.value

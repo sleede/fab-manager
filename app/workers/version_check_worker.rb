@@ -21,9 +21,15 @@ class VersionCheckWorker
     setting_ver.save!
 
     setting_key = Setting.find_or_initialize_by(name: 'hub_public_key')
-    return if setting_key.value == res['key']
+    if setting_key.value != res['key']
+      setting_key.value = res['key']
+      setting_key.save!
+    end
 
-    setting_key.value = res['key']
-    setting_key.save!
+    setting_uuid = Setting.find_or_initialize_by(name: 'uuid')
+    return if setting_uuid.value == res['uuid']
+
+    setting_uuid.value = res['uuid']
+    setting_uuid.save!
   end
 end

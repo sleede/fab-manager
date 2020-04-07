@@ -3,8 +3,11 @@
 # Fab-manager central hub (remote host)
 class FabHub
   def self.version_check_payload
+    uuid = Setting.find_by(name: 'uuid').value
+    origin = Setting.find_by(name: 'origin').value || "#{Rails.application.secrets.default_protocol}://#{Rails.application.secrets.default_host}"
     {
-      origin: "#{Rails.application.secrets.default_protocol}://#{Rails.application.secrets.default_host}",
+      uuid: uuid,
+      origin: origin,
       version: Version.current,
       lang: I18n.default_locale.to_s
     }
