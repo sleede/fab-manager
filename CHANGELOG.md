@@ -5,6 +5,7 @@
 - Updated documentation
 - Fix a bug: installation without nginx does not remove the service from the docker-compose file
 - Fix a bug: default twitter feed is invalid
+- Fix a bug: default nginx configuration does not allows secure cookies
 
 ## v4.3.3 2020 April 1st
 
