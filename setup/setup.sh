@@ -50,12 +50,6 @@ system_requirements()
       echo -e "\e[91m[ ❌ ] $_command was not found, exiting...\e[39m" && exit 1
     fi
   done
-  echo "detecting gawk..."
-  if ! command -v awk || ! [[ $(awk -W version) =~ ^GNU ]]
-  then
-    echo "Please install GNU Awk before running this script."
-    echo "\e[91m[ ❌ ] GNU awk was not found, exiting...\e[39m" && exit 1
-  fi
   printf "\e[92m[ ✔ ] All requirements successfully checked.\e[39m \n\n"
 }
 
@@ -152,6 +146,10 @@ prepare_files()
   \curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/setup/docker-compose.yml > "$FABMANAGER_PATH/docker-compose.yml"
 }
 
+yq() {
+  docker run --rm -i -v "${FABMANAGER_PATH}:/workdir" mikefarah/yq yq "$@"
+}
+
 prepare_nginx()
 {
   if [ "$NGINX" != "n" ]; then
@@ -162,7 +160,17 @@ prepare_nginx()
   else
     # if nginx is not installed, remove its associated block from docker-compose.yml
     echo "Removing nginx..."
-    awk '$1 == "nginx:"{t=1; next};t==1{t=1;next};t==1 && /:[[:blank:]]*$/{t=0};t != 1' "$FABMANAGER_PATH/docker-compose.yml" > "$FABMANAGER_PATH/.awktmpfile" && mv "$FABMANAGER_PATH/.awktmpfile" "$FABMANAGER_PATH/docker-compose.yml"
+    yq d -i docker-compose.yml services.nginx
+    read -rp "Do you want to map the Fab-manager's service to an external network? (Y/n) " confirm </dev/tty
+    if [ "$confirm" != "n" ]; then
+      echo "Adding a network configuration to the docker-compose.yml file..."
+      yq w -i docker-compose.yml networks.web.external true
+      yq w -i docker-compose.yml networks.db ''
+      yq w -i docker-compose.yml services.fabmanager.networks[+] web
+      yq w -i docker-compose.yml services.fabmanager.networks[+] db
+      yq w -i docker-compose.yml services.postgres.networks[+] db
+      yq w -i docker-compose.yml services.redis.networks[+] db
+    fi
   fi
 }
 

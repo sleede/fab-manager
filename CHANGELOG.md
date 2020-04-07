@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- Improved setup script for installations without nginx
 - Changed some default values for new installations
 - Updated documentation
 - Fix a bug: installation without nginx does not remove the service from the docker-compose file
