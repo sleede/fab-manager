@@ -62,7 +62,7 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
       $translateProvider.useSanitizeValueStrategy('escapeParameters');
       // Use the MessageFormat interpolation by default (used for pluralization)
       $translateProvider.useMessageFormatInterpolation();
-      // Set the langage of the instance (from ruby configuration)
+      // Set the language of the instance (from ruby configuration)
       $translateProvider.preferredLanguage(Fablab.locale);
       // End the tour when the user clicks the forward or back buttons of the browser
       TourConfigProvider.enableNavigationInterceptors();
