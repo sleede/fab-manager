@@ -8,6 +8,7 @@
 - Fix a bug: default nginx configuration does not allows secure cookies
 - Fix a bug: in-context translation is loading invalid locale for MessageFormat
 - Fix a bug: invalid link to upgrade procedure
+- Fix a bug: unable to access health endpoint
 
 ## v4.3.3 2020 April 1st
 
