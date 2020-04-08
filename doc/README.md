@@ -33,14 +33,10 @@ The following guide describes what you can do and how to use Fab-manager.
 - [Create a new SSO method](sso_authentication.md)
 
 #### Diagrams
-- Database diagram
-![40% center](diagram.png)
+- [Database diagram](database.svg)
 
-- Class diagram
-![40% center](class-diagram.svg)
+- [Class diagram](class-diagram.svg)
 
-- Javascript dependencies
-![40% center](js-modules-dependencies.svg)
+- [Javascript dependencies](js-modules-dependencies.svg)
 
-- Ruby dependencies
-![40% center](gem-dependencies.svg)
+- [Ruby dependencies](gem-dependencies.svg)
