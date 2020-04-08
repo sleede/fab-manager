@@ -3,6 +3,7 @@
 - Improved version check
 - Improved setup script for installations without nginx
 - Changed some default values for new installations
+- Compatible database with Fab-manager v1, to allow upgrades
 - Updated documentation
 - Fix a bug: installation without nginx does not remove the service from the docker-compose file
 - Fix a bug: default twitter feed is invalid

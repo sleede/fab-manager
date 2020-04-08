@@ -3,7 +3,7 @@
 class RenameCoursesWorkshopsToEvents < ActiveRecord::Migration[4.2]
   def up
     execute "UPDATE statistic_indices
-             SET label='Évènements'
+             SET label='Événements'
              WHERE es_type_key='event';"
   end
 
