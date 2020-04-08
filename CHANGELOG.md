@@ -5,6 +5,7 @@
 - Changed some default values for new installations
 - Compatible database with Fab-manager v1, to allow upgrades
 - Updated documentation
+- Changed In-Context pseudo-language to Zulu instead of Acholi
 - Fix a bug: installation without nginx does not remove the service from the docker-compose file
 - Fix a bug: default twitter feed is invalid
 - Fix a bug: default nginx configuration does not allows secure cookies
@@ -12,6 +13,7 @@
 - Fix a bug: invalid link to upgrade procedure
 - Fix a bug: unable to access health endpoint
 - Fix a bug: migration 20160704095606 cannot run due to GDPR refactoring
+- Fix a bug: in-context translation is not working
 
 ## v4.3.3 2020 April 1st
 
