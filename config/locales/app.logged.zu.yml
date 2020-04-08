@@ -1,0 +1,183 @@
+zu:
+  app:
+    logged:
+      #user's profile completion page when logging from an SSO provider
+      profile_completion:
+        confirm_your_new_account: "crwdns8505:0crwdne8505:0"
+        you_ve_just_created_a_new_account_on_the_fablab_by_logging_from: "crwdns8507:0GENDER={GENDER}crwdnd8507:0NAME={NAME}crwdne8507:0"
+        we_need_some_more_details: "crwdns8509:0crwdne8509:0"
+        your_email_is_already_used_by_another_account_on_the_platform: "crwdns8511:0crwdne8511:0"
+        or: "crwdns8513:0crwdne8513:0"
+        please_fill_the_following_form: "crwdns8515:0crwdne8515:0"
+        some_data_may_have_already_been_provided_by_provider_and_cannot_be_modified: "crwdns8517:0{NAME}crwdne8517:0"
+        then_click_on_: "crwdns8519:0crwdne8519:0"
+        _to_start_using_the_application: "crwdns8521:0crwdne8521:0"
+        new_on_this_platform: "crwdns8523:0crwdne8523:0"
+        your_email_: "crwdns8525:0crwdne8525:0"
+        _is_currently_associated_with_another_account_on_this_platform: "crwdns8527:0crwdne8527:0"
+        please_click_to_change_email_associated_with_your_PROVIDER_account: "crwdns8529:0{PROVIDER}crwdne8529:0"
+        do_you_already_have_an_account: "crwdns8531:0crwdne8531:0"
+        do_not_fill_the_form_beside_but_specify_here_the_code_you_ve_received_by_email_to_recover_your_access: "crwdns8533:0crwdne8533:0"
+        just_specify_code_here_to_recover_access: "crwdns8535:0crwdne8535:0"
+        i_did_not_receive_the_code: "crwdns8537:0crwdne8537:0"
+        authentification_code: "crwdns8539:0crwdne8539:0"
+        confirm_my_code: "crwdns8541:0crwdne8541:0"
+        an_unexpected_error_occurred_check_your_authentication_code: "crwdns8543:0crwdne8543:0"
+        send_code_again: "crwdns8545:0crwdne8545:0"
+        email_address_associated_with_your_account: "crwdns8547:0crwdne8547:0"
+        email_is_required: "crwdns8549:0crwdne8549:0"
+        email_format_is_incorrect: "crwdns8551:0crwdne8551:0"
+        code_successfully_sent_again: "crwdns8553:0crwdne8553:0"
+        used_for_statistics: "crwdns8555:0crwdne8555:0"
+        your_user_s_profile: "crwdns8557:0crwdne8557:0"
+        user_s_profile_is_required: "crwdns8559:0crwdne8559:0"
+        i_ve_read_and_i_accept_: "crwdns8561:0crwdne8561:0"
+        _the_fablab_policy: "crwdns8563:0crwdne8563:0"
+        change_my_data: "crwdns8565:0crwdne8565:0"
+        sync_my_profile: "crwdns8567:0crwdne8567:0"
+        once_your_data_are_up_to_date_: "crwdns8569:0crwdne8569:0"
+        _click_on_the_synchronization_button_opposite_: "crwdns8571:0crwdne8571:0"
+        _disconnect_then_reconnect_: "crwdns8573:0crwdne8573:0"
+        _for_your_changes_to_take_effect: "crwdns8575:0crwdne8575:0"
+      dashboard:
+        #dashboard: public profile
+        profile:
+          empty: 'crwdns8577:0crwdne8577:0'
+        #dashboard: edit my profile
+        settings:
+          last_activity_on_: "crwdns20238:0{DATE}crwdne20238:0"
+          i_want_to_change_group: "crwdns8581:0crwdne8581:0"
+          your_subscription_expires_on_: "crwdns8583:0crwdne8583:0"
+          no_subscriptions: "crwdns8585:0crwdne8585:0"
+          i_want_to_subscribe: "crwdns8587:0crwdne8587:0"
+          to_come: "crwdns8589:0crwdne8589:0"
+          approved: "crwdns8591:0crwdne8591:0"
+          projects: "crwdns8593:0crwdne8593:0"
+          no_projects: "crwdns8595:0crwdne8595:0"
+          labels: "crwdns8597:0crwdne8597:0"
+          no_labels: "crwdns8599:0crwdne8599:0"
+          cookies: "crwdns8601:0crwdne8601:0"
+          cookies_accepted: "crwdns8603:0crwdne8603:0"
+          cookies_declined: "crwdns8605:0crwdne8605:0"
+          cookies_unset: "crwdns8607:0crwdne8607:0"
+          reset_cookies: "crwdns8609:0crwdne8609:0"
+          delete_my_account: "crwdns8611:0crwdne8611:0"
+          edit_my_profile: "crwdns8613:0crwdne8613:0"
+          your_group_has_been_successfully_changed: "crwdns8615:0crwdne8615:0"
+          an_unexpected_error_prevented_your_group_from_being_changed: "crwdns8617:0crwdne8617:0"
+          confirmation_required: "crwdns8619:0crwdne8619:0"
+          confirm_delete_your_account: "crwdns8621:0crwdne8621:0"
+          all_data_will_be_lost: "crwdns8623:0crwdne8623:0"
+          invoicing_data_kept: "crwdns8625:0crwdne8625:0"
+          statistic_data_anonymized: "crwdns8627:0crwdne8627:0"
+          no_further_access_to_projects: "crwdns8629:0crwdne8629:0"
+          your_user_account_has_been_successfully_deleted_goodbye: "crwdns8631:0crwdne8631:0"
+          an_error_occured_preventing_your_account_from_being_deleted: "crwdns8633:0crwdne8633:0"
+          used_for_statistics: "crwdns8635:0crwdne8635:0"
+          used_for_invoicing: "crwdns8637:0crwdne8637:0"
+          used_for_reservation: "crwdns8639:0crwdne8639:0"
+          used_for_profile: "crwdns8641:0crwdne8641:0"
+          used_for_pricing_stats: "crwdns8643:0crwdne8643:0"
+          public_profile: "crwdns8645:0crwdne8645:0"
+          trainings: "crwdns8647:0crwdne8647:0"
+          no_trainings: "crwdns8649:0crwdne8649:0"
+          subscription: "crwdns8651:0crwdne8651:0"
+          group: "crwdns8653:0crwdne8653:0"
+          or: "crwdns8655:0crwdne8655:0"
+          confirm_changes: "crwdns8657:0crwdne8657:0"
+          change_my_data: "crwdns8659:0crwdne8659:0"
+          sync_my_profile: "crwdns8661:0crwdne8661:0"
+          once_your_data_are_up_to_date_: "crwdns8663:0crwdne8663:0"
+          _click_on_the_synchronization_button_opposite_: "crwdns8665:0crwdne8665:0"
+          _disconnect_then_reconnect_: "crwdns8667:0crwdne8667:0"
+          _for_your_changes_to_take_effect: "crwdns8669:0crwdne8669:0"
+        #dashboard: my projects
+        projects:
+          you_dont_have_any_projects: "crwdns8671:0crwdne8671:0"
+          add_a_project: "crwdns8673:0crwdne8673:0"
+          author: "crwdns8675:0crwdne8675:0"
+          collaborator: "crwdns8677:0crwdne8677:0"
+          rough_draft: "crwdns8679:0crwdne8679:0"
+          description: "crwdns8681:0crwdne8681:0"
+          machines_and_materials: "crwdns8683:0crwdne8683:0"
+          machines: "crwdns8685:0crwdne8685:0"
+          materials: "crwdns8687:0crwdne8687:0"
+          collaborators: "crwdns8689:0crwdne8689:0"
+        #dashboard: my trainings
+        trainings:
+          your_next_trainings: "crwdns8691:0crwdne8691:0"
+          your_previous_trainings: "crwdns8693:0crwdne8693:0"
+          your_approved_trainings: "crwdns8695:0crwdne8695:0"
+          no_trainings: "crwdns8697:0crwdne8697:0"
+        #dashboard: my events
+        events:
+          your_next_events: "crwdns8699:0crwdne8699:0"
+          no_events_to_come: "crwdns8701:0crwdne8701:0"
+          your_previous_events: "crwdns8703:0crwdne8703:0"
+          no_passed_events: "crwdns8705:0crwdne8705:0"
+          NUMBER_normal_places_reserved: "crwdns8707:0NUMBER={NUMBER}crwdnd8707:0NUMBER={NUMBER}crwdne8707:0"
+          NUMBER_of_NAME_places_reserved: "crwdns8709:0NUMBER={NUMBER}crwdnd8709:0NUMBER={NUMBER}crwdnd8709:0NAME={NAME}crwdnd8709:0NAME={NAME}crwdne8709:0"
+        #dashboard: my invoices
+        invoices:
+          reference_number: "crwdns8711:0crwdne8711:0"
+          date: "crwdns8713:0crwdne8713:0"
+          price: "crwdns8715:0crwdne8715:0"
+          download_the_invoice: "crwdns8717:0crwdne8717:0"
+          download_the_credit_note: "crwdns8719:0crwdne8719:0"
+          no_invoices_for_now: "crwdns8721:0crwdne8721:0"
+      #public profil of a member
+      members_show:
+        members_list: "crwdns8723:0crwdne8723:0"
+      #list of members accepting to be contacted
+      members:
+        the_fablab_members: "crwdns8725:0crwdne8725:0"
+        display_more_members: "crwdns8727:0crwdne8727:0"
+        no_members_for_now: "crwdns8729:0crwdne8729:0"
+        avatar: "crwdns8731:0crwdne8731:0"
+        user: "crwdns8733:0crwdne8733:0"
+        pseudonym: "crwdns8735:0crwdne8735:0"
+        email_address: "crwdns8737:0crwdne8737:0"
+      #add a new project
+      projects_new:
+        add_a_new_project: "crwdns8739:0crwdne8739:0"
+      #modify an existing project
+      projects_edit:
+        edit_the_project: "crwdns8741:0crwdne8741:0"
+        rough_draft: "crwdns8743:0crwdne8743:0"
+        publish: "crwdns8745:0crwdne8745:0"
+      #book a machine
+      machines_reserve:
+        machine_planning: "crwdns8747:0crwdne8747:0"
+        i_ve_reserved: "crwdns8749:0crwdne8749:0"
+        not_available: "crwdns8751:0crwdne8751:0"
+        i_reserve: "crwdns8753:0crwdne8753:0"
+        i_shift: "crwdns8755:0crwdne8755:0"
+        i_change: "crwdns8757:0crwdne8757:0"
+        do_you_really_want_to_cancel_this_reservation: "crwdns8759:0crwdne8759:0"
+        reservation_was_cancelled_successfully: "crwdns8761:0crwdne8761:0"
+        cancellation_failed: "crwdns8763:0crwdne8763:0"
+        a_problem_occured_during_the_payment_process_please_try_again_later: "crwdns8765:0crwdne8765:0"
+      #book a training
+      trainings_reserve:
+        trainings_planning: "crwdns8767:0crwdne8767:0"
+        planning_of: "crwdns20194:0crwdne20194:0" #eg. Planning of 3d printer training
+        all_trainings: "crwdns8771:0crwdne8771:0"
+        cancel_my_selection: "crwdns8773:0crwdne8773:0"
+        i_change: "crwdns8775:0crwdne8775:0"
+        i_shift: "crwdns8777:0crwdne8777:0"
+        i_ve_reserved: "crwdns8779:0crwdne8779:0"
+      #book a space
+      space_reserve:
+        planning_of_space_NAME: "crwdns8781:0{NAME}crwdne8781:0"
+        i_ve_reserved: "crwdns8783:0crwdne8783:0"
+        i_shift: "crwdns8785:0crwdne8785:0"
+        i_change: "crwdns8787:0crwdne8787:0"
+      notifications:
+        notifications_center: "crwdns8789:0crwdne8789:0"
+        mark_all_as_read: "crwdns8791:0crwdne8791:0"
+        date: "crwdns8793:0crwdne8793:0"
+        notif_title: "crwdns8795:0crwdne8795:0"
+        no_new_notifications: "crwdns8797:0crwdne8797:0"
+        archives: "crwdns8799:0crwdne8799:0"
+        no_archived_notifications: "crwdns8801:0crwdne8801:0"
+        load_the_next_notifications: "crwdns8803:0crwdne8803:0"
