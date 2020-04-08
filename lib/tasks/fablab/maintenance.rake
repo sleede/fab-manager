@@ -68,5 +68,13 @@ namespace :fablab do
     task rebuild_stylesheet: :environment do
       Stylesheet.build_sheet!
     end
+
+    desc 'migration notifications from Fab-manager v1'
+    task migrate_v1_notifications: :environment do
+      Notification.where(notification_type_id: 4).each do |n|
+        n.notification_type_id = 11
+        n.save!
+      end
+    end
   end
 end
