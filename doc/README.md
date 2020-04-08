@@ -5,7 +5,7 @@ The following guide describes what you can do and how to use Fab-manager.
  - [Français](fr/guide_utilisation_fab_manager_v4.3.pdf)
 
 ### System administrator
-- [Setup a production environment](production_readme.md)
+- [Setup and update a production environment](production_readme.md)
 
 - [Configuring the environment variables](environment.md)
 
