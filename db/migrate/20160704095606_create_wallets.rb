@@ -9,8 +9,8 @@ class CreateWallets < ActiveRecord::Migration[4.2]
       t.timestamps null: false
     end
 
-    User.all.each do |u|
-      Wallet.create(user: u)
+    User.includes(:invoicing_profile).each do |u|
+      Wallet.create(invoicing_profile: u.invoicing_profile.id)
     end
   end
 

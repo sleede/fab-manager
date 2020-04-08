@@ -11,6 +11,7 @@
 - Fix a bug: in-context translation is loading invalid locale for MessageFormat
 - Fix a bug: invalid link to upgrade procedure
 - Fix a bug: unable to access health endpoint
+- Fix a bug: migration 20160704095606 cannot run due to GDPR refactoring
 
 ## v4.3.3 2020 April 1st
 
