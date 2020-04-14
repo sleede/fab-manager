@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v4.3.4 2020 April 14
+
 - Improved version check
 - Improved setup script for installations without nginx
 - Changed some default values for new installations
