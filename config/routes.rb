@@ -159,7 +159,7 @@ Rails.application.routes.draw do
     end
 
     # Fab-manager's version
-    get 'version' => 'version#show'
+    post 'version' => 'version#show'
 
     # payments handling
     post 'payments/confirm_payment' => 'payments/confirm_payment'

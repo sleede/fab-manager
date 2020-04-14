@@ -145,7 +145,7 @@ This procedure is not easy to follow so if you don't need to write some code for
 17. You can login as the default administrator using the credentials defined previously.
 
 18. Email notifications will be caught by MailCatcher.
-    To see the emails sent by the platform, open your web browser at `http://localhost:1080` to access the MailCatcher interface.
+    To see the emails sent by the platform, open your web browser at `http://fabmanager-mailcatcher:1080` to access the MailCatcher interface.
 
 
 <a name="postgresql"></a>

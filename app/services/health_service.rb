@@ -28,7 +28,7 @@ class HealthService
   end
 
   def self.migrations?
-    !ActiveRecord::Migrator.needs_migration?
+    !ActiveRecord::Base.connection.migration_context.needs_migration?
   end
 
   def self.row_stats

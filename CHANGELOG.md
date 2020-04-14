@@ -1,5 +1,27 @@
 # Changelog Fab-manager
 
+## v4.3.4 2020 April 14
+
+- Improved version check
+- Improved setup script for installations without nginx
+- Changed some default values for new installations
+- Compatible database with Fab-manager v1, to allow upgrades
+- Updated documentation
+- Changed In-Context pseudo-language to Zulu instead of Acholi
+- Allow removing contacts from the about page
+- Maintenance task to migrate notifications for Fab-manager v1
+- Maintenance task to display the current version
+- Now using MailCatcher with docker
+- Fix a bug: installation without nginx does not remove the service from the docker-compose file
+- Fix a bug: default twitter feed is invalid
+- Fix a bug: default nginx configuration does not allows secure cookies
+- Fix a bug: in-context translation is loading invalid locale for MessageFormat
+- Fix a bug: invalid link to upgrade procedure
+- Fix a bug: unable to access health endpoint
+- Fix a bug: migration 20160704095606 cannot run due to GDPR refactoring
+- Fix a bug: in-context translation is not working
+- [TODO DEPLOY] -> (only dev) add mailcatcher to your [docker-compose.yml](docker/development/docker-compose.yml)
+
 ## v4.3.3 2020 April 1st
 
 - Docker build will no longer embed development dependencies

@@ -64,6 +64,18 @@ services:
     #ports:
     #  - "6379:6379"
 
+  mailcatcher:
+    image: sj26/mailcatcher
+    restart: always
+    ## linux
+    networks:
+      fabmanager:
+        ipv4_address: 172.18.0.6
+    ## osx
+    #ports:
+    #  - "1080:1080"
+    #  - "1025:1025"
+
 ## linux
 networks:
   fabmanager:

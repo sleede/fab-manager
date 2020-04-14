@@ -39,9 +39,10 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
         getNotifications();
         // Fab-manager's app-version
         if (user.role === 'admin') {
-          return $scope.version = Version.get();
+          // get the version
+          $scope.version = Version.get({origin: window.location.origin});
         } else {
-          return $scope.version = { current: '' };
+          $scope.version = { current: '' };
         }
       }
     };

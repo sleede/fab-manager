@@ -11,6 +11,8 @@ class API::SettingsController < API::ApiController
   def update
     authorize Setting
     @setting = Setting.find_or_initialize_by(name: params[:name])
+    render status: :not_modified and return if setting_params[:value] == @setting.value
+
     if @setting.save && @setting.history_values.create(value: setting_params[:value], invoicing_profile: current_user.invoicing_profile)
       SettingService.new.after_update(@setting)
       render status: :ok

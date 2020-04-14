@@ -1,11 +1,13 @@
 ## == fab-manager ==
 ## linux
+172.18.0.6       fabmanager-mailcatcher
 172.18.0.5       fabmanager-kibana
 172.18.0.4       fabmanager-redis
 172.18.0.3       fabmanager-elastic
 172.18.0.2       fabmanager-postgres
 
 ## osx
+# 127.0.0.1        fabmanager-mailcatcher
 # 127.0.0.1        fabmanager-kibana
 # 127.0.0.1        fabmanager-redis
 # 127.0.0.1        fabmanager-elastic

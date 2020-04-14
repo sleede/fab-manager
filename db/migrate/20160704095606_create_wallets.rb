@@ -9,9 +9,12 @@ class CreateWallets < ActiveRecord::Migration[4.2]
       t.timestamps null: false
     end
 
-    User.all.each do |u|
-      Wallet.create(user: u)
-    end
+    # create all wallets
+    execute <<-SQL
+      INSERT INTO wallets (user_id, amount, created_at, updated_at)
+      SELECT users.id, 0, '#{DateTime.current.iso8601}', '#{DateTime.current.iso8601}'
+      FROM users
+    SQL
   end
 
   def down

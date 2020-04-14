@@ -32,6 +32,6 @@ class Version
       job = Sidekiq::Cron::Job.new(name: job_name, cron: "#{m} #{h} * * #{d}", class: 'VersionCheckWorker')
       job.save
     end
-    job.enque! if !job.last_enqueue_time || job.last_enqueue_time < DateTime.current - 24.hours
+    job.enque!
   end
 end

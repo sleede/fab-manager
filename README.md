@@ -102,7 +102,6 @@ Fab-manager can be connected to a [Single Sign-On](https://en.wikipedia.org/wiki
 Currently OAuth 2 is the only supported protocol for SSO authentication.
 
 For an example of how to use configure a SSO in Fab-manager, please read [sso_with_github.md](doc/sso_with_github.md).
-Developers may find information on how to implement their own authentication protocol in [sso_authentication.md](doc/sso_authentication.md).
 
 <a name="known-issues"></a>
 ## Known issues

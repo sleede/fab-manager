@@ -61,6 +61,10 @@ Retrieve them from https://dashboard.stripe.com/account/apikeys.
 **MANDATORY**: Even if you don't want to charge your customers, you must fill this settings.
 For this purpose, you can use a stripe account in test mode, which will provide you test keys.
 If you change these keys during the application lifecycle, you must run `rails fablab:stripe:sync_members`, otherwise your users won't be able to do card payments.
+
+Please note that Stripe have changed the naming of their keys. Here's the matching:
+`STRIPE_API_KEY` = secret key
+`STRIPE_PUBLISHABLE_KEY` = public key
 <a name="STRIPE_CURRENCY"></a>
 
     STRIPE_CURRENCY
@@ -362,7 +366,7 @@ See [Microsoft support](https://support.microsoft.com/en-us/kb/264372) for a lis
 
 If set to `true`, and the application in started into a staging environment, this will enable the Crowdin In-context translation layer for the front-end application.
 See [Crowdin documentation](https://support.crowdin.com/in-context-localization/) for more details about this.
-Accordingly, `RAILS_LOCALE` and `APP_LOCALE` must be configured to `ach`.
+Accordingly, `RAILS_LOCALE` and `APP_LOCALE` must be configured to `zu`.
 <a name="open-projects-settings"></a>
 ## OpenLab settings
 <a name="OPENLAB_APP_ID"></a><a name="OPENLAB_APP_SECRET"></a>

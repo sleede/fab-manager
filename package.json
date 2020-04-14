@@ -1,6 +1,6 @@
 {
   "name": "fab-manager",
-  "version": "4.3.3",
+  "version": "4.3.4",
   "description": "Fab-manager is the FabLab management solution. It provides a comprehensive, web-based, open-source tool to simplify your administrative tasks and your marker's projects.",
   "keywords": [
     "fablab",
@@ -22,8 +22,7 @@
     "eslint-plugin-import": "~2.20.1",
     "eslint-plugin-node": "~11.0.0",
     "eslint-plugin-promise": "~4.2.1",
-    "eslint-plugin-standard": "~4.0.1",
-    "maildev": "^1.1.0"
+    "eslint-plugin-standard": "~4.0.1"
   },
   "dependencies": {
     "@uirouter/angularjs": "0.4",
