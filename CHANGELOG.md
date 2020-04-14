@@ -9,6 +9,7 @@
 - Allow removing contacts from the about page
 - Maintenance task to migrate notifications for Fab-manager v1
 - Maintenance task to display the current version
+- Now using MailCatcher with docker
 - Fix a bug: installation without nginx does not remove the service from the docker-compose file
 - Fix a bug: default twitter feed is invalid
 - Fix a bug: default nginx configuration does not allows secure cookies
@@ -17,6 +18,7 @@
 - Fix a bug: unable to access health endpoint
 - Fix a bug: migration 20160704095606 cannot run due to GDPR refactoring
 - Fix a bug: in-context translation is not working
+- [TODO DEPLOY] -> (only dev) add mailcatcher to your [docker-compose.yml](docker/development/docker-compose.yml)
 
 ## v4.3.3 2020 April 1st
 
