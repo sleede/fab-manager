@@ -37,7 +37,7 @@ The following guides should help those who want to contribute to the code.
 #### Externals
 - [ElasticSearch mapping](elasticsearch.md)
 
-- [Changing the database system](postgresql_readme.md)
+- [Changing the database system](postgresql_readme.md#using-another-dbms)
 
 #### Diagrams
 - [Database diagram](database.svg)

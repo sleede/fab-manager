@@ -76,5 +76,11 @@ namespace :fablab do
         n.save!
       end
     end
+
+    desc 'get the version'
+    task version: :environment do
+      require 'version'
+      puts Version.current
+    end
   end
 end

@@ -8,6 +8,7 @@
 - Changed In-Context pseudo-language to Zulu instead of Acholi
 - Allow removing contacts from the about page
 - Maintenance task to migrate notifications for Fab-manager v1
+- Maintenance task to display the current version
 - Fix a bug: installation without nginx does not remove the service from the docker-compose file
 - Fix a bug: default twitter feed is invalid
 - Fix a bug: default nginx configuration does not allows secure cookies
