@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-# Time range of duration defined by ApplicationHelper::SLOT_DURATION, slicing an Availability.
+# Time range, slicing an Availability.
+# Its duration is defined by globally by ApplicationHelper::SLOT_DURATION but can be overridden per availability
 # During a slot a Reservation is possible
 # Only reserved slots are persisted in DB, others are instantiated on the fly
 class Slot < ApplicationRecord

@@ -417,8 +417,9 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
         templateUrl: '<%= asset_path "admin/calendar/eventModal.html" %>',
         controller: 'CreateEventModalController',
         resolve: {
-          start () { return start; },
-          end () { return end; },
+          start() { return start; },
+          end() { return end; },
+          slots() { return Math.ceil(slots); },
           machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
           trainingsPromise: ['Training', function (Training) { return Training.query().$promise; }],
           spacesPromise: ['Space', function (Space) { return Space.query().$promise; }],
@@ -526,8 +527,8 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
 /**
  * Controller used in the slot creation modal window
  */
-Application.Controllers.controller('CreateEventModalController', ['$scope', '$uibModalInstance', '$sce', 'moment', 'start', 'end', 'machinesPromise', 'Availability', 'trainingsPromise', 'spacesPromise', 'tagsPromise', 'plansPromise', 'groupsPromise', 'growl', '_t',
-  function ($scope, $uibModalInstance, $sce, moment, start, end, machinesPromise, Availability, trainingsPromise, spacesPromise, tagsPromise, plansPromise, groupsPromise, growl, _t) {
+Application.Controllers.controller('CreateEventModalController', ['$scope', '$uibModalInstance', '$sce', 'moment', 'start', 'end', 'slots', 'machinesPromise', 'Availability', 'trainingsPromise', 'spacesPromise', 'tagsPromise', 'plansPromise', 'groupsPromise', 'growl', '_t',
+  function ($scope, $uibModalInstance, $sce, moment, start, end, slots, machinesPromise, Availability, trainingsPromise, spacesPromise, tagsPromise, plansPromise, groupsPromise, growl, _t) {
     // $uibModal parameter
     $scope.start = start;
 
@@ -551,15 +552,6 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
     $scope.selectedPlansBinding = {};
     // list of plans, classified by group
     $scope.plansClassifiedByGroup = [];
-    for (let group of Array.from(groupsPromise)) {
-      const groupObj = { id: group.id, name: group.name, plans: [] };
-      for (let plan of Array.from(plansPromise)) {
-        if (plan.group_id === group.id) { groupObj.plans.push(plan); }
-      }
-      if (groupObj.plans.length > 0) {
-        $scope.plansClassifiedByGroup.push(groupObj);
-      }
-    }
 
     // machines associated with the created slot
     $scope.selectedMachines = [];
@@ -598,7 +590,8 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
       is_recurrent: false,
       period: 'week',
       nb_periods: 1,
-      end_date: undefined // recurrence end
+      end_date: undefined, // recurrence end
+      slot_duration: Fablab.slotDuration
     };
 
     // recurrent slots
@@ -612,9 +605,6 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
 
     // localized name(s) of the selected plan(s)
     $scope.plansName = '';
-
-    // make the duration available for display
-    $scope.slotDuration = Fablab.slotDuration;
 
     /**
      * Adds or removes the provided machine from the current slot
@@ -731,6 +721,13 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
       }
     };
 
+    /*
+     * Test if the current availability type is divided in slots
+     */
+    $scope.isTypeDivided = function () {
+      return isTypeDivided($scope.availability.available_type);
+    }
+
     /* PRIVATE SCOPE */
 
     /**
@@ -752,35 +749,53 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
         }
       });
 
+      // group plans by Group
+      for (let group of Array.from(groupsPromise)) {
+          const groupObj = { id: group.id, name: group.name, plans: [] };
+          for (let plan of Array.from(plansPromise)) {
+              if (plan.group_id === group.id) { groupObj.plans.push(plan); }
+          }
+          if (groupObj.plans.length > 0) {
+              $scope.plansClassifiedByGroup.push(groupObj);
+          }
+      }
+
+      // When the slot duration changes, we increment the availability to match the value
+      $scope.$watch('availability.slot_duration', function (newValue, oldValue, scope) {
+        start = moment($scope.start);
+        start.add(newValue * slots, 'minutes');
+        $scope.end = start.toDate();
+      });
+
       // When we configure a machine/space availability, do not let the user change the end time, as the total
-      // time must be dividable by Fablab.slotDuration minutes (base slot duration). For training availabilities, the user
+      // time must be dividable by $scope.availability.slot_duration minutes (base slot duration). For training availabilities, the user
       // can configure any duration as it does not matters.
       $scope.$watch('availability.available_type', function (newValue, oldValue, scope) {
-        if ((newValue === 'machines') || (newValue === 'space')) {
+        if (isTypeDivided(newValue)) {
           $scope.endDateReadOnly = true;
-          const slots = Math.trunc(($scope.end.valueOf() - $scope.start.valueOf()) / (60 * 1000)) / Fablab.slotDuration;
+          const slots = Math.trunc(($scope.end.valueOf() - $scope.start.valueOf()) / (60 * 1000)) / $scope.availability.slot_duration;
           if (!Number.isInteger(slots)) {
             // otherwise, round it to upper decimal
-            const upper = Math.ceil(slots) * Fablab.slotDuration;
+            const upper = Math.ceil(slots) * $scope.availability.slot_duration;
             $scope.end = moment($scope.start).add(upper, 'minutes').toDate();
           }
-          return $scope.availability.end_at = $scope.end;
+          $scope.availability.end_at = $scope.end;
         } else {
-          return $scope.endDateReadOnly = false;
+          $scope.endDateReadOnly = false;
         }
       });
 
       // When the start date is changed, if we are configuring a machine/space availability,
       // maintain the relative length of the slot (ie. change the end time accordingly)
       $scope.$watch('start', function (newValue, oldValue, scope) {
-      // for machine or space availabilities, adjust the end time
-        if (($scope.availability.available_type === 'machines') || ($scope.availability.available_type === 'space')) {
+        // for machine or space availabilities, adjust the end time
+        if ($scope.isTypeDivided()) {
           end = moment($scope.end);
           end.add(moment(newValue).diff(oldValue), 'milliseconds');
           $scope.end = end.toDate();
         } else { // for training availabilities
-        // prevent the admin from setting the beginning after the end
-          if (moment(newValue).add(Fablab.slotDuration, 'minutes').isAfter($scope.end)) {
+          // prevent the admin from setting the beginning after the end
+          if (moment(newValue).add($scope.availability.slot_duration, 'minutes').isAfter($scope.end)) {
             $scope.start = oldValue;
           }
         }
@@ -791,13 +806,20 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
       // Maintain consistency between the end time and the date object in the availability object
       $scope.$watch('end', function (newValue, oldValue, scope) {
       // we prevent the admin from setting the end of the availability before its beginning
-        if (moment($scope.start).add(Fablab.slotDuration, 'minutes').isAfter(newValue)) {
+        if (moment($scope.start).add($scope.availability.slot_duration, 'minutes').isAfter(newValue)) {
           $scope.end = oldValue;
         }
         // update availability object
         $scope.availability.end_at = $scope.end;
       });
     };
+
+    /*
+     * Test if the provided availability type is divided in slots
+     */
+    const isTypeDivided = function (type) {
+        return ((type === 'machines') || (type === 'space'));
+    }
 
     /**
      * Validates that a machine or more was/were selected before continuing to step 3 (adjust time + tags)

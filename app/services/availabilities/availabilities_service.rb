@@ -17,12 +17,13 @@ class Availabilities::AvailabilitiesService
 
     slots = []
     availabilities.each do |a|
-      ((a.end_at - a.start_at) / ApplicationHelper::SLOT_DURATION.minutes).to_i.times do |i|
-        next unless (a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes) > DateTime.current || user.admin?
+      slot_duration = a.slot_duration || ApplicationHelper::SLOT_DURATION
+      ((a.end_at - a.start_at) / slot_duration.minutes).to_i.times do |i|
+        next unless (a.start_at + (i * slot_duration).minutes) > DateTime.current || user.admin?
 
         slot = Slot.new(
-          start_at: a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes,
-          end_at: a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes + ApplicationHelper::SLOT_DURATION.minutes,
+          start_at: a.start_at + (i * slot_duration).minutes,
+          end_at: a.start_at + (i * slot_duration).minutes + slot_duration.minutes,
           availability_id: a.id,
           availability: a,
           machine: machine,
@@ -43,12 +44,13 @@ class Availabilities::AvailabilitiesService
 
     slots = []
     availabilities.each do |a|
-      ((a.end_at - a.start_at) / ApplicationHelper::SLOT_DURATION.minutes).to_i.times do |i|
-        next unless (a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes) > DateTime.current || user.admin?
+      slot_duration = a.slot_duration || ApplicationHelper::SLOT_DURATION
+      ((a.end_at - a.start_at) / slot_duration.minutes).to_i.times do |i|
+        next unless (a.start_at + (i * slot_duration).minutes) > DateTime.current || user.admin?
 
         slot = Slot.new(
-          start_at: a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes,
-          end_at: a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes + ApplicationHelper::SLOT_DURATION.minutes,
+          start_at: a.start_at + (i * slot_duration).minutes,
+          end_at: a.start_at + (i * slot_duration).minutes + slot_duration.minutes,
           availability_id: a.id,
           availability: a,
           space: space,

@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Ability to define, per availability, a custom duration for the reservation slots
+
 ## v4.3.4 2020 April 14
 
 - Improved version check

@@ -16,10 +16,11 @@ wb.add_worksheet(name: t('export_availabilities.machines')) do |sheet|
 
   # data rows
   @availabilities.where(available_type: 'machines').order(:start_at).each do |a|
+    slot_duration = a.slot_duration || ApplicationHelper::SLOT_DURATION
     a.machines.each do |m|
-      ((a.end_at - a.start_at) / ApplicationHelper::SLOT_DURATION.minutes).to_i.times do |i|
-        start_at = a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes
-        end_at = a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes + ApplicationHelper::SLOT_DURATION.minutes
+      ((a.end_at - a.start_at) / slot_duration.minutes).to_i.times do |i|
+        start_at = a.start_at + (i * slot_duration).minutes
+        end_at = a.start_at + (i * slot_duration).minutes + slot_duration.minutes
         reservations = 0
         if a.slots&.map(&:start_at)&.include? start_at
           reservations = Reservation.where(reservable: m).includes(:slots).where('slots.id' => a.slots, 'slots.start_at' => start_at).count
@@ -83,9 +84,10 @@ if Rails.application.secrets.fablab_without_spaces != 'false'
 
     # data rows
     @availabilities.where(available_type: 'space').order(:start_at).each do |a|
-      ((a.end_at - a.start_at) / ApplicationHelper::SLOT_DURATION.minutes).to_i.times do |i|
-        start_at = a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes
-        end_at = a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes + ApplicationHelper::SLOT_DURATION.minutes
+      slot_duration = a.slot_duration || ApplicationHelper::SLOT_DURATION
+      ((a.end_at - a.start_at) / slot_duration.minutes).to_i.times do |i|
+        start_at = a.start_at + (i * slot_duration).minutes
+        end_at = a.start_at + (i * slot_duration).minutes + slot_duration.minutes
         reservations = a.slots.where(start_at: start_at).count
 
         data = [

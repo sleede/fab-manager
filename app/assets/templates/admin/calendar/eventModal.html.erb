@@ -75,6 +75,13 @@
   </div>
 </div>
 <div class="modal-body" ng-show="step === 3">
+  <div id="slotDuration" class="m-t-sm" ng-show="isTypeDivided()">
+    <p class="text-center font-sbold" translate>{{ 'app.admin.calendar.divide_this_availability' }}</p>
+    <div class="input-group">
+      <input type="number" class="form-control" ng-model="availability.slot_duration" step="5" />
+      <span class="input-group-addon" translate>{{ 'app.admin.calendar.minutes' }}</span>
+    </div>
+  </div>
   <div id="timeAdjust" class="m-t-sm">
       <p class="text-center font-sbold" translate>{{ 'app.admin.calendar.adjust_the_opening_hours' }}</p>
       <div class="row">
@@ -204,7 +211,7 @@
       </ul>
       <div class="alert alert-info text-xs">
         <i class="fa fa-lightbulb-o m-r" aria-hidden="true"></i>
-        <span translate translate-values="{DURATION: slotDuration, COUNT: occurrences.length}"> {{ 'app.admin.calendar.divided_in_slots' }}</span>
+        <span translate translate-values="{DURATION: availability.slot_duration, COUNT: occurrences.length}"> {{ 'app.admin.calendar.divided_in_slots' }}</span>
       </div>
       <div>
         <span class="underline" translate>{{ 'app.admin.calendar.reservable' }}</span>

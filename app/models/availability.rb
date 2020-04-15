@@ -89,7 +89,8 @@ class Availability < ApplicationRecord
   def available_space_places
     return unless available_type == 'space'
 
-    ((end_at - start_at) / ApplicationHelper::SLOT_DURATION.minutes).to_i * nb_total_places
+    duration = slot_duration || ApplicationHelper::SLOT_DURATION
+    ((end_at - start_at) / duration.minutes).to_i * nb_total_places
   end
 
   def title(filter = {})
@@ -159,9 +160,10 @@ class Availability < ApplicationRecord
   private
 
   def length_must_be_slot_multiple
-    return unless end_at < (start_at + ApplicationHelper::SLOT_DURATION.minutes)
+    duration = slot_duration || ApplicationHelper::SLOT_DURATION
+    return unless end_at < (start_at + duration.minutes)
 
-    errors.add(:end_at, I18n.t('availabilities.length_must_be_slot_multiple', MIN: ApplicationHelper::SLOT_DURATION))
+    errors.add(:end_at, I18n.t('availabilities.length_must_be_slot_multiple', MIN: duration))
   end
 
   def should_be_associated
