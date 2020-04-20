@@ -379,7 +379,7 @@ zu:
         select_one_or_more_slots_in_the_calendar: "crwdns10031:0SINGLE={SINGLE}crwdne10031:0"
         you_ve_just_selected_the_slot: "crwdns10033:0crwdne10033:0"
         datetime_to_time: "crwdns10035:0{START_DATETIME}crwdnd10035:0{END_TIME}crwdne10035:0" #eg: Thursday, September 4 1986 8:30 PM to 10:00 PM
-        cost_of_TYPE: "crwdns10037:0TYPE={TYPE}crwdne10037:0"
+        cost_of_TYPE: "crwdns20298:0TYPE={TYPE}crwdne20298:0"
         offer_this_slot: "crwdns10039:0crwdne10039:0"
         confirm_this_slot: "crwdns10041:0crwdne10041:0"
         remove_this_slot: "crwdns10043:0crwdne10043:0"
