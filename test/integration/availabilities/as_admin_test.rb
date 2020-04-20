@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'test_helper'
+
 module Availabilities
   class AsAdminTest < ActionDispatch::IntegrationTest
     setup do
@@ -82,6 +84,49 @@ module Availabilities
       assert_not_nil availabilities[0], 'first availability was unexpectedly nil'
 
       assert availabilities.map { |a| a[:available_type] }.include?('space'), 'space availability not found instead that it was enabled'
+    end
+
+    test 'create availabilities' do
+      date = DateTime.current.change(hour: 8, min: 0, sec: 0)
+      post '/api/availabilities',
+           params: {
+             availability: {
+               start_at: date.iso8601,
+               end_at: (date + 6.hours).iso8601,
+               available_type: 'machines',
+               tag_ids: [],
+               is_recurrent: true,
+               period: 'week',
+               nb_periods: 1,
+               end_date: (date + 2.weeks).end_of_day.iso8601,
+               slot_duration: 90,
+               machine_ids: [2, 3, 5],
+               occurrences: [
+                 { start_at: date.iso8601, end_at: (date + 6.hours).iso8601 },
+                 { start_at: (date + 1.week).iso8601, end_at: (date + 1.week + 6.hours).iso8601 },
+                 { start_at: (date + 2.weeks).iso8601, end_at: (date + 2.weeks + 6.hours).iso8601 }
+               ],
+               plan_ids: [1]
+             }
+           }
+
+      # Check response format & status
+      assert_equal 201, response.status
+      assert_equal Mime[:json], response.content_type
+
+      # Check the id
+      availability = json_response(response.body)
+      assert_not_nil availability[:id], 'availability ID was unexpectedly nil'
+
+      # Check the slots
+      assert_equal (availability[:start_at].to_datetime + availability[:slot_duration].minutes * 4).iso8601,
+                   availability[:end_at],
+                   'expected end_at = start_at + 4 slots of 90 minutes'
+
+      # Check the recurrence
+      assert_equal (availability[:start_at].to_date + 2.weeks),
+                   availability[:end_date].to_date,
+                   'expected end_date = start_at + 2 weeks'
     end
   end
 end
