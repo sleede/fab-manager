@@ -21,7 +21,7 @@ zu:
         ongoing_reservations: "crwdns6721:0crwdne6721:0"
         no_reservations: "crwdns6723:0crwdne6723:0"
         confirmation_required: "crwdns6725:0crwdne6725:0"
-        do_you_really_want_to_cancel_the_USER_s_reservation_the_DATE_at_TIME_concerning_RESERVATION: "crwdns6727:0{USER}crwdnd6727:0{DATE}crwdnd6727:0{TIME}crwdnd6727:0{RESERVATION}crwdne6727:0"
+        do_you_really_want_to_cancel_the_USER_s_reservation_the_DATE_at_TIME_concerning_RESERVATION: "crwdns20296:0GENDER={GENDER}crwdnd20296:0USER={USER}crwdnd20296:0DATE={DATE}crwdnd20296:0TIME={TIME}crwdnd20296:0RESERVATION={RESERVATION}crwdne20296:0"
         reservation_was_successfully_cancelled: "crwdns6729:0crwdne6729:0"
         reservation_cancellation_failed: "crwdns6731:0crwdne6731:0"
         unable_to_remove_the_last_machine_of_the_slot_delete_the_slot_rather: "crwdns6733:0crwdne6733:0"
