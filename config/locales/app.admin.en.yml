@@ -21,7 +21,7 @@ en:
         ongoing_reservations: "Ongoing reservations"
         no_reservations: "No reservations"
         confirmation_required: "Confirmation required"
-        do_you_really_want_to_cancel_the_USER_s_reservation_the_DATE_at_TIME_concerning_RESERVATION: "Do you really want to cancel the {USER}'s reservation, the {DATE} at {TIME}, concerning {RESERVATION}?"
+        do_you_really_want_to_cancel_the_USER_s_reservation_the_DATE_at_TIME_concerning_RESERVATION: "Do you really {GENDER, select, other {want}} to cancel the {USER}'s reservation, the {DATE} at {TIME}, concerning {RESERVATION}?"
         reservation_was_successfully_cancelled: "Reservation was successfully cancelled."
         reservation_cancellation_failed: "Reservation cancellation failed."
         unable_to_remove_the_last_machine_of_the_slot_delete_the_slot_rather: "Unable to remove the last machine of the slot. Delete the slot rather."
