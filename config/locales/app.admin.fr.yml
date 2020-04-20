@@ -21,7 +21,7 @@ fr:
         ongoing_reservations: "Réservations en cours"
         no_reservations: "Aucune réservation"
         confirmation_required: "Confirmation requise"
-        do_you_really_want_to_cancel_the_USER_s_reservation_the_DATE_at_TIME_concerning_RESERVATION: "Do you really {GENDER, select, other {want}} to cancel the {USER}'s reservation, the {DATE} at {TIME}, concerning {RESERVATION}?"
+        do_you_really_want_to_cancel_the_USER_s_reservation_the_DATE_at_TIME_concerning_RESERVATION: "Êtes-vous {GENDER, select, female{sûre} other{sûr}} de vouloir annuler la réservation de {USER}, le {DATE} à {TIME}, concernant {RESERVATION} ?"
         reservation_was_successfully_cancelled: "La réservation a bien été annulée."
         reservation_cancellation_failed: "L'annulation de la réservation a échouée."
         unable_to_remove_the_last_machine_of_the_slot_delete_the_slot_rather: "Impossible de supprimer la dernière machine du créneau. Supprimez plutôt le créneau."
