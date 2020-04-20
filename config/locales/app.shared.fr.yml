@@ -379,7 +379,7 @@ fr:
         select_one_or_more_slots_in_the_calendar: "Sélectionnez un {SINGLE, select, true{créneau} other{ou plusieurs créneaux}} dans le calendrier"
         you_ve_just_selected_the_slot: "Vous venez de sélectionner le créneau :"
         datetime_to_time: "{START_DATETIME} à {END_TIME}" #eg: Thursday, September 4 1986 8:30 PM to 10:00 PM
-        cost_of_TYPE: "Cost of the {TYPE, select, Machine{machine slot} Training{training} Space{space slot} other{element}}"
+        cost_of_TYPE: "Coût {TYPE, select, Machine{du créneau machine} Training{de la formation} Space{du créneau espace} other{de l'élément}}"
         offer_this_slot: "Offrir ce créneau"
         confirm_this_slot: "Valider ce créneau"
         remove_this_slot: "Supprimer ce créneau"
