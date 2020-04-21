@@ -588,6 +588,7 @@ fr:
       #management of users, labels, groups, and so on
       members:
         users_management: "Gestion des utilisateurs"
+        users: "Users"
         members: "Membres"
         subscriptions: "Abonnements"
         search_for_an_user: "Recherchez un utilisateur"
@@ -603,6 +604,15 @@ fr:
         administrators: "Administrateurs"
         search_for_an_administrator: "Recherchez un administrateur"
         add_a_new_administrator: "Ajouter un nouvel administrateur"
+        partners: "Partners"
+        partners_info: "A partner is a special user that can be associated with the «Partner» plans. These users will only receive notifications about subscriptions to these plans."
+        search_for_a_partner: "Search for a partner"
+        add_a_new_partner: "Add a new partner"
+        delete_this_partner: "Do you really want to delete this partner? This cannot be undone."
+        partner_successfully_deleted: "Partner successfully deleted."
+        unable_to_delete_the_partner: "Unable to delete the partner."
+        associated_plan: "Associated plan"
+        managers: "Managers"
         groups: "Groupes"
         tags: "Étiquettes"
         authentication: "Authentification"
