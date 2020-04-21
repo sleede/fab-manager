@@ -588,6 +588,7 @@ zu:
       #management of users, labels, groups, and so on
       members:
         users_management: "crwdns7735:0crwdne7735:0"
+        users: "crwdns20306:0crwdne20306:0"
         members: "crwdns7737:0crwdne7737:0"
         subscriptions: "crwdns7739:0crwdne7739:0"
         search_for_an_user: "crwdns7741:0crwdne7741:0"
@@ -603,6 +604,15 @@ zu:
         administrators: "crwdns7761:0crwdne7761:0"
         search_for_an_administrator: "crwdns7763:0crwdne7763:0"
         add_a_new_administrator: "crwdns7765:0crwdne7765:0"
+        partners: "crwdns20308:0crwdne20308:0"
+        partners_info: "crwdns20310:0crwdne20310:0"
+        search_for_a_partner: "crwdns20312:0crwdne20312:0"
+        add_a_new_partner: "crwdns20314:0crwdne20314:0"
+        delete_this_partner: "crwdns20316:0crwdne20316:0"
+        partner_successfully_deleted: "crwdns20318:0crwdne20318:0"
+        unable_to_delete_the_partner: "crwdns20320:0crwdne20320:0"
+        associated_plan: "crwdns20322:0crwdne20322:0"
+        managers: "crwdns20324:0crwdne20324:0"
         groups: "crwdns7767:0crwdne7767:0"
         tags: "crwdns7769:0crwdne7769:0"
         authentication: "crwdns7771:0crwdne7771:0"
