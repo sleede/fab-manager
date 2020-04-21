@@ -98,7 +98,9 @@ pt:
         legend: "Legenda"
         and: "and"
         external_sync: "Calendar synchronization"
-        divide_this_availability: "Divide this availability in slots of"
+        divide_this_availability: "Divide this availability in"
+        slots: "slots"
+        slots_of: "of"
         minutes: "minutes"
       #import external iCal calendar
       icalendar:
