@@ -126,8 +126,8 @@ class MembersController {
 /**
  * Controller used in the members/groups management page
  */
-Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 'membersPromise', 'adminsPromise', 'growl', 'Admin', 'dialogs', '_t', 'Member', 'Export', 'uiTourService',
-  function ($scope, $sce, membersPromise, adminsPromise, growl, Admin, dialogs, _t, Member, Export, uiTourService) {
+Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', '$uibModal', 'membersPromise', 'adminsPromise', 'partnersPromise', 'managersPromise', 'growl', 'Admin', 'dialogs', '_t', 'Member', 'Export', 'User', 'uiTourService',
+  function ($scope, $sce, $uibModal, membersPromise, adminsPromise, partnersPromise, managersPromise, growl, Admin, dialogs, _t, Member, Export, User, uiTourService) {
   /* PRIVATE STATIC CONSTANTS */
 
     // number of users loaded each time we click on 'load more...'
@@ -163,8 +163,20 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
     // Admins ordering/sorting. Default: not sorted
     $scope.orderAdmin = null;
 
+    // partners list
+    $scope.partners = partnersPromise.users;
+
+    // Partners ordering/sorting. Default: not sorted
+    $scope.orderPartner = null;
+
+    // managers list
+    $scope.managers = managersPromise.users;
+
+    // Managers ordering/sorting. Default: not sorted
+    $scope.orderManager = null;
+
     // default tab: members list
-    $scope.tabs = { active: 0 };
+    $scope.tabs = { active: 0, sub: 0 };
 
     /**
      * Change the members ordering criterion to the one provided
@@ -192,6 +204,55 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
         return $scope.orderAdmin = orderAdmin;
       }
     };
+
+    /**
+     * Change the partners ordering criterion to the one provided
+     * @param orderPartner {string} ordering criterion
+     */
+    $scope.setOrderPartner = function (orderPartner) {
+        if ($scope.orderPartner === orderPartner) {
+        return $scope.orderPartner = `-${orderPartner}`;
+      } else {
+        return $scope.orderPartner = orderPartner;
+      }
+    };
+
+
+    /**
+     * Open a modal dialog allowing the admin to create a new partner user
+     */
+    $scope.openPartnerNewModal = function () {
+      const modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: '<%= asset_path "shared/_partner_new_modal.html" %>',
+        size: 'lg',
+        controller: ['$scope', '$uibModalInstance', 'User', function ($scope, $uibModalInstance, User) {
+          $scope.partner = {};
+
+          $scope.ok = function () {
+            User.save(
+              {},
+              { user: $scope.partner },
+              function (user) {
+                $scope.partner.id = user.id;
+                $scope.partner.name = `${user.first_name} ${user.last_name}`;
+                $uibModalInstance.close($scope.partner);
+              },
+              function (error) {
+                growl.error(_t('app.admin.plans.new.unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name'));
+                console.error(error);
+              }
+            );
+          };
+          $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
+        }]
+      });
+      // once the form was validated successfully ...
+      return modalInstance.result.then(function (partner) {
+        $scope.partners.push(partner);
+      });
+    };
+
 
     /**
      * Ask for confirmation then delete the specified user
@@ -251,6 +312,36 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
         }
       );
     };
+
+    /**
+     * Ask for confirmation then delete the specified partner
+     * @param partners {Array} full list of partners
+     * @param partner {Object} partner to delete
+     */
+    $scope.destroyPartner = function (partners, partner) {
+      dialogs.confirm(
+        {
+          resolve: {
+            object () {
+              return {
+                title: _t('app.admin.members.confirmation_required'),
+                msg: $sce.trustAsHtml(_t('app.admin.members.delete_this_partner') + '<br/><br/>' + _t('app.admin.members.this_may_take_a_while_please_wait'))
+              };
+            }
+          }
+        },
+        function () { // cancel confirmed
+          User.delete(
+            { id: partner.id },
+            function () {
+              partners.splice(findItemIdxById(partners, partner.id), 1);
+              return growl.success(_t('app.admin.members.partner_successfully_deleted'));
+            },
+            function (error) { growl.error(_t('app.admin.members.unable_to_delete_the_partner')); }
+          );
+        }
+      );
+    }
 
     /**
      * Callback for the 'load more' button.
@@ -405,18 +496,20 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
       uitour.on('stepChanged', function (nextStep) {
         if (nextStep.stepId === 'list' || nextStep.stepId === 'import') {
           $scope.tabs.active = 0;
+          $scope.tabs.sub = 0;
         }
         if (nextStep.stepId === 'admins') {
-          $scope.tabs.active = 1;
+          $scope.tabs.active = 0;
+          $scope.tabs.sub = 1;
         }
         if (nextStep.stepId === 'groups') {
-          $scope.tabs.active = 2;
+          $scope.tabs.active = 1;
         }
         if (nextStep.stepId === 'labels') {
-          $scope.tabs.active = 3;
+          $scope.tabs.active = 2;
         }
         if (nextStep.stepId === 'sso') {
-          $scope.tabs.active = 4;
+          $scope.tabs.active = 3;
         }
       });
       // on tour end, save the status in database

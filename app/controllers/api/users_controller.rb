@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
-# API Controller for resources of type Users with role :partner
+# API Controller for resources of type Users with role :partner or :manager
 class API::UsersController < API::ApiController
   before_action :authenticate_user!
+  before_action :set_user, only: %i[destroy]
 
   def index
-    if current_user.admin? && params[:role] == 'partner'
-      @users = User.with_role(:partner).includes(:profile)
+    if current_user.admin? && %w[partner manager].include?(params[:role])
+      @users = User.with_role(params[:role].to_sym).includes(:profile)
     else
       head 403
     end
@@ -19,12 +20,22 @@ class API::UsersController < API::ApiController
     if res[:saved]
       @user = res[:user]
       render status: :created
-    else
+    else²
       render json: res[:user].errors.full_messages, status: :unprocessable_entity
     end
   end
 
+  def destroy
+    authorize User
+    @user.destroy
+    head :no_content
+  end
+
   private
+
+  def set_user
+    @user = User.find(params[:id])
+  end
 
   def partner_params
     params.require(:user).permit(:email, :first_name, :last_name)

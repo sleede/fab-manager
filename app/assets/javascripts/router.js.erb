@@ -866,6 +866,8 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           membersPromise: ['Member', function (Member) { return Member.list({ query: { search: '', order_by: 'id', page: 1, size: 20 } }).$promise; }],
           adminsPromise: ['Admin', function (Admin) { return Admin.query().$promise; }],
+          partnersPromise: ['User', function (User) { return User.query({ role: 'partner' }).$promise; }],
+          managersPromise: ['User', function (User) { return User.query({ role: 'manager' }).$promise; }],
           groupsPromise: ['Group', function (Group) { return Group.query().$promise; }],
           tagsPromise: ['Tag', function (Tag) { return Tag.query().$promise; }],
           authProvidersPromise: ['AuthProvider', function (AuthProvider) { return AuthProvider.query().$promise; }]

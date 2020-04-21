@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- Interface to manage partners
 - Ability to define, per availability, a custom duration for the reservation slots
 
 ## v4.3.4 2020 April 14

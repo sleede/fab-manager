@@ -32,23 +32,19 @@
     <div class="col-md-12">
       <uib-tabset justified="true" active="tabs.active">
 
-        <uib-tab heading="{{ 'app.admin.members.members' | translate }}" index="0">
-          <ng-include src="'<%= asset_path "admin/members/members.html" %>'"></ng-include>
+        <uib-tab heading="{{ 'app.admin.members.users' | translate }}" index="0">
+          <ng-include src="'<%= asset_path "admin/members/users.html" %>'"></ng-include>
         </uib-tab>
 
-        <uib-tab heading="{{ 'app.admin.members.administrators' | translate }}" class="admins-tab" index="1">
-          <ng-include src="'<%= asset_path "admin/members/administrators.html" %>'"></ng-include>
-        </uib-tab>
-
-        <uib-tab heading="{{ 'app.admin.members.groups' | translate }}" class="groups-tab" index="2">
+        <uib-tab heading="{{ 'app.admin.members.groups' | translate }}" class="groups-tab" index="1">
           <div ui-view="groups"></div>
         </uib-tab>
 
-        <uib-tab heading="{{ 'app.admin.members.tags' | translate }}" class="labels-tab" index="3">
+        <uib-tab heading="{{ 'app.admin.members.tags' | translate }}" class="labels-tab" index="2">
           <div ui-view="tags"></div>
         </uib-tab>
 
-        <uib-tab heading="{{ 'app.admin.members.authentication' | translate }}" class="sso-tab" index="4">
+        <uib-tab heading="{{ 'app.admin.members.authentication' | translate }}" class="sso-tab" index="3">
           <div ui-view="authentification"></div>
         </uib-tab>
       </uib-tabset>

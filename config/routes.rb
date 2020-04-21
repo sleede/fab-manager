@@ -45,7 +45,7 @@ Rails.application.routes.draw do
       patch '/bulk_update', action: 'bulk_update', on: :collection
       put '/reset/:name', action: 'reset', on: :collection
     end
-    resources :users, only: %i[index create]
+    resources :users, only: %i[index create destroy]
     resources :members, only: %i[index show create update destroy] do
       get '/export_subscriptions', action: 'export_subscriptions', on: :collection
       get '/export_reservations', action: 'export_reservations', on: :collection

@@ -1,0 +1,43 @@
+<p class="alert alert-info m-t-lg" translate>
+  {{ 'app.admin.members.partners_info' }}
+</p>
+
+<div class="col-md-5">
+  <div class="form-group">
+    <div class="input-group">
+      <span class="input-group-addon"><i class="fa fa-filter"></i></span>
+      <input type="text" ng-model="searchFilter" class="form-control" placeholder="{{ 'app.admin.members.search_for_a_partner' | translate }}">
+    </div>
+  </div>
+</div>
+<div class="col-md-12">
+  <button type="button" class="btn btn-warning m-t m-b" ng-click="openPartnerNewModal()" translate>{{ 'app.admin.members.add_a_new_partner' }}</button>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th style="width:15%"><a href="" ng-click="setOrderPartner('last_name')">{{ 'app.admin.members.surname' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderPartner =='last_name', 'fa fa-sort-alpha-desc': orderPartner =='-last_name', 'fa fa-arrows-v': orderPartner  }"></i></a></th>
+
+      <th style="width:15%"><a href="" ng-click="setOrderPartner('first_name')">{{ 'app.admin.members.first_name' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderPartner =='first_name', 'fa fa-sort-alpha-desc': orderPartner =='-first_name', 'fa fa-arrows-v': orderPartner  }"></i></a></th>
+
+      <th style="width:15%"><a href="" ng-click="setOrderPartner('email')">{{ 'app.admin.members.email' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderPartner =='email', 'fa fa-sort-alpha-desc': orderPartner =='-email', 'fa fa-arrows-v': orderPartner  }"></i></a></th>
+
+      <th style="width:10%"><a href="" ng-click="setOrderPartner('resource')">{{ 'app.admin.members.associated_plan' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': orderPartner =='resource', 'fa fa-sort-numeric-desc': orderPartner =='-resource', 'fa fa-arrows-v': orderPartner  }"></i></a></th>
+      <th style="width:10%"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="partner in partners | filter:searchFilter | orderBy: orderPartner">
+      <td class="text-c">{{ partner.last_name }}</td>
+      <td class="text-c">{{ partner.first_name }}</td>
+      <td>{{ partner.email }}</td>
+      <td><a ui-sref="app.admin.plans.edit({id:partner.resource.id})">{{ partner.resource ? partner.resource.base_name : '' }}</a></td>
+      <td>
+        <button class="btn btn-danger" ng-if="partner.id != currentUser.id" ng-click="destroyPartner(partners, partner)">
+          <i class="fa fa-trash-o"></i>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
