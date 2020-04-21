@@ -98,7 +98,9 @@ fr:
         legend: "Légende"
         and: "et"
         external_sync: "Synchronisation d'agendas"
-        divide_this_availability: "Diviser cette disponibilité en créneaux de"
+        divide_this_availability: "Divide this availability in"
+        slots: "slots"
+        slots_of: "of"
         minutes: "minutes"
       #import external iCal calendar
       icalendar:
