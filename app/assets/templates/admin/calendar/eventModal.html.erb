@@ -77,9 +77,22 @@
 <div class="modal-body" ng-show="step === 3">
   <div id="slotDuration" class="m-t-sm" ng-show="isTypeDivided()">
     <p class="text-center font-sbold" translate>{{ 'app.admin.calendar.divide_this_availability' }}</p>
-    <div class="input-group">
-      <input type="number" class="form-control" ng-model="availability.slot_duration" step="5" />
-      <span class="input-group-addon" translate>{{ 'app.admin.calendar.minutes' }}</span>
+    <div class="row">
+      <div class="col-md-5">
+        <div class="input-group">
+          <input type="number" class="form-control" ng-model="slots_nb" step="1" />
+          <span class="input-group-addon" translate>{{ 'app.admin.calendar.slots' }}</span>
+        </div>
+        </div>
+      <p class="col-md-2 middle-of-inputs" translate>
+        {{ 'app.admin.calendar.slots_of' }}
+      </p>
+      <div class="col-md-5">
+        <div class="input-group">
+          <input type="number" class="form-control" ng-model="availability.slot_duration" step="5" />
+          <span class="input-group-addon" translate>{{ 'app.admin.calendar.minutes' }}</span>
+        </div>
+      </div>
     </div>
   </div>
   <div id="timeAdjust" class="m-t-sm">

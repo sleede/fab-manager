@@ -606,6 +606,9 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
     // localized name(s) of the selected plan(s)
     $scope.plansName = '';
 
+    // number of slots for this availability
+    $scope.slots_nb = slots;
+
     /**
      * Adds or removes the provided machine from the current slot
      * @param machine {Object}
@@ -763,8 +766,15 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
       // When the slot duration changes, we increment the availability to match the value
       $scope.$watch('availability.slot_duration', function (newValue, oldValue, scope) {
         start = moment($scope.start);
-        start.add(newValue * slots, 'minutes');
+        start.add(newValue * $scope.slots_nb, 'minutes');
         $scope.end = start.toDate();
+      });
+
+      // When the number of slot changes, we increment the availability to match the value
+      $scope.$watch('slots_nb', function (newValue, oldValue, scope) {
+          start = moment($scope.start);
+          start.add($scope.availability.slot_duration * newValue, 'minutes');
+          $scope.end = start.toDate();
       });
 
       // When we configure a machine/space availability, do not let the user change the end time, as the total
@@ -773,11 +783,15 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
       $scope.$watch('availability.available_type', function (newValue, oldValue, scope) {
         if (isTypeDivided(newValue)) {
           $scope.endDateReadOnly = true;
-          const slots = Math.trunc(($scope.end.valueOf() - $scope.start.valueOf()) / (60 * 1000)) / $scope.availability.slot_duration;
-          if (!Number.isInteger(slots)) {
+          const slotsCurrentRange = Math.trunc(($scope.end.valueOf() - $scope.start.valueOf()) / (60 * 1000)) / $scope.availability.slot_duration;
+          if (!Number.isInteger(slotsCurrentRange)) {
             // otherwise, round it to upper decimal
-            const upper = Math.ceil(slots) * $scope.availability.slot_duration;
+            const upperSlots = Math.ceil(slotsCurrentRange);
+            const upper = upperSlots * $scope.availability.slot_duration;
             $scope.end = moment($scope.start).add(upper, 'minutes').toDate();
+            $scope.slots_nb = upperSlots;
+          } else {
+             $scope.slots_nb = slotsCurrentRange;
           }
           $scope.availability.end_at = $scope.end;
         } else {
