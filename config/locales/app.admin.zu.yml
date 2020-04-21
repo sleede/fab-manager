@@ -98,7 +98,9 @@ zu:
         legend: "crwdns20198:0crwdne20198:0"
         and: "crwdns6853:0crwdne6853:0"
         external_sync: "crwdns19774:0crwdne19774:0"
-        divide_this_availability: "crwdns20286:0crwdne20286:0"
+        divide_this_availability: "crwdns20300:0crwdne20300:0"
+        slots: "crwdns20302:0crwdne20302:0"
+        slots_of: "crwdns20304:0crwdne20304:0"
         minutes: "crwdns20288:0crwdne20288:0"
       #import external iCal calendar
       icalendar:
