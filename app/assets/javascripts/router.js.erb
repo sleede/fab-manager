@@ -931,8 +931,17 @@ angular.module('application.router', ['ui.router'])
           }
         }
       })
+      .state('app.admin.managers_new', {
+        url: '/admin/managers/new',
+        views: {
+          'main@': {
+            templateUrl: '<%= asset_path "admin/managers/new.html" %>',
+            controller: 'NewManagerController'
+          }
+        }
+      })
 
-      // authentification providers
+      // authentication providers
       .state('app.admin.authentication_new', {
         url: '/admin/authentications/new',
         views: {

@@ -33,7 +33,7 @@
       <td>{{ partner.email }}</td>
       <td><a ui-sref="app.admin.plans.edit({id:partner.resource.id})">{{ partner.resource ? partner.resource.base_name : '' }}</a></td>
       <td>
-        <button class="btn btn-danger" ng-if="partner.id != currentUser.id" ng-click="destroyPartner(partners, partner)">
+        <button class="btn btn-danger" ng-if="!partner.resource" ng-click="destroyPartner(partners, partner)">
           <i class="fa fa-trash-o"></i>
         </button>
       </td>

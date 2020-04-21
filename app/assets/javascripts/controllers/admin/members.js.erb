@@ -217,6 +217,18 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
       }
     };
 
+    /**
+     * Change the managers ordering criterion to the one provided
+     * @param orderManager {string} ordering criterion
+     */
+    $scope.setOrderManager = function (orderManager) {
+      if ($scope.orderManager === orderManager) {
+        return $scope.orderManager = `-${orderManager}`;
+      } else {
+        return $scope.orderManager = orderManager;
+      }
+    };
+
 
     /**
      * Open a modal dialog allowing the admin to create a new partner user
@@ -338,6 +350,36 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
               return growl.success(_t('app.admin.members.partner_successfully_deleted'));
             },
             function (error) { growl.error(_t('app.admin.members.unable_to_delete_the_partner')); }
+          );
+        }
+      );
+    }
+
+    /**
+     * Ask for confirmation then delete the specified manager
+     * @param managers {Array} full list of managers
+     * @param manager {Object} manager to delete
+     */
+    $scope.destroyManager = function (managers, manager) {
+      dialogs.confirm(
+        {
+          resolve: {
+            object () {
+              return {
+                title: _t('app.admin.members.confirmation_required'),
+                msg: $sce.trustAsHtml(_t('app.admin.members.delete_this_manager') + '<br/><br/>' + _t('app.admin.members.this_may_take_a_while_please_wait'))
+              };
+            }
+          }
+        },
+        function () { // cancel confirmed
+          User.delete(
+            { id: manager.id },
+            function () {
+              managers.splice(findItemIdxById(managers, manager.id), 1);
+              return growl.success(_t('app.admin.members.manager_successfully_deleted'));
+            },
+            function (error) { growl.error(_t('app.admin.members.unable_to_delete_the_manager')); }
           );
         }
       );
@@ -1022,6 +1064,68 @@ Application.Controllers.controller('NewAdminController', ['$state', '$scope', 'A
    * @return {string} 'male' or 'female'
    */
   return getGender = function (user) {
+    if (user.statistic_profile_attributes) {
+      if (user.statistic_profile_attributes.gender) { return 'male'; } else { return 'female'; }
+    } else { return 'other'; }
+  };
+}
+
+]);
+
+/**
+ * Controller used in the manager's creation page (admin view)
+ */
+Application.Controllers.controller('NewManagerController', ['$state', '$scope', 'User', 'growl', '_t', function ($state, $scope, User, growl, _t) {
+  // default admin profile
+  $scope.manager = {
+    statistic_profile_attributes: {
+      gender: true
+    },
+    profile_attributes: {},
+    invoicing_profile_attributes: {}
+  };
+
+  // Default parameters for AngularUI-Bootstrap datepicker
+  $scope.datePicker = {
+    format: Fablab.uibDateFormat,
+    opened: false,
+    options: {
+      startingDay: Fablab.weekStartingDay
+    }
+  };
+
+  /**
+   * Shows the birth day datepicker
+   * @param $event {Object} jQuery event object
+   */
+  $scope.openDatePicker = function ($event) { $scope.datePicker.opened = true; };
+
+  /**
+   * Send the new manager, currently stored in $scope.manager, to the server for database saving
+   */
+  $scope.saveManager = function () {
+    User.save(
+      {},
+      { manager: $scope.manager },
+      function () {
+        growl.success(_t('app.admin.manager_new.manager_successfully_created', { GENDER: getGender($scope.manager) }));
+        return $state.go('app.admin.members');
+      }
+      , function (error) {
+        growl.error(_t('app.admin.admins_new.failed_to_create_admin') + JSON.stringify(error.data ? error.data : error));
+        console.error(error);
+      }
+    );
+  };
+
+  /* PRIVATE SCOPE */
+
+  /**
+   * Return an enumerable meaningful string for the gender of the provider user
+   * @param user {Object} Database user record
+   * @return {string} 'male' or 'female'
+   */
+  const getGender = function (user) {
     if (user.statistic_profile_attributes) {
       if (user.statistic_profile_attributes.gender) { return 'male'; } else { return 'female'; }
     } else { return 'other'; }
