@@ -57,7 +57,7 @@ es:
         phone_number: "Phone number"
         phone_number_is_required: "Phone number is required."
         i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "I authorize FabLab users, registered on the site, to contact me"
-        i_accept_to_receive_information_from_the_fablab: "I accept to receive information from the FabLab"
+        i_accept_to_receive_information_from_the_fablab: "Acepto recibir información del FabLab"
         used_for_statistics: "This data will be used for statistical purposes"
         used_for_invoicing: "This data will be used for billing purposes"
         used_for_reservation: "This data will be used in case of change on one of your bookings"
