@@ -29,6 +29,7 @@ en:
         #left menu
         notifications: "Notifications"
         admin: "Admin"
+        manager: "Manager"
         reduce_panel: "Reduce panel"
         #left menu (public)
         home: "Home"

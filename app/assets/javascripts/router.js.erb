@@ -55,7 +55,7 @@ angular.module('application.router', ['ui.router'])
       .state('app.logged', {
         abstract: true,
         data: {
-          authorizedRoles: ['member', 'admin']
+          authorizedRoles: ['member', 'admin', 'manager']
         },
         resolve: {
           currentUser: ['Auth', function (Auth) { return Auth.currentUser(); }],
@@ -68,7 +68,7 @@ angular.module('application.router', ['ui.router'])
       .state('app.admin', {
         abstract: true,
         data: {
-          authorizedRoles: ['admin']
+          authorizedRoles: ['admin', 'manager']
         },
         resolve: {
           currentUser: ['Auth', function (Auth) { return Auth.currentUser(); }],
