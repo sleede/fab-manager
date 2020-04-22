@@ -588,6 +588,7 @@ fr:
       #management of users, labels, groups, and so on
       members:
         users_management: "Gestion des utilisateurs"
+        users: "Utilisateurs"
         members: "Membres"
         subscriptions: "Abonnements"
         search_for_an_user: "Recherchez un utilisateur"
@@ -603,6 +604,15 @@ fr:
         administrators: "Administrateurs"
         search_for_an_administrator: "Recherchez un administrateur"
         add_a_new_administrator: "Ajouter un nouvel administrateur"
+        partners: "Partenaires"
+        partners_info: "Un partenaire est un utilisateur spécial qui peut être associé à une formule d'abonnement de type «Partenaire». Ces utilisateurs ne feront que recevoir des notifications, à propos des souscriptions à ces abonnements."
+        search_for_a_partner: "Rechercher un partenaire"
+        add_a_new_partner: "Ajouter un partenaire"
+        delete_this_partner: "Voulez-vous vraiment supprimer ce partenaire ? Cette opération est irréversible."
+        partner_successfully_deleted: "Le partenaire a bien été supprimé."
+        unable_to_delete_the_partner: "Impossible de supprimer le partenaire."
+        associated_plan: "Abonnement associé"
+        managers: "Gestionnaires"
         groups: "Groupes"
         tags: "Étiquettes"
         authentication: "Authentification"

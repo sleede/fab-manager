@@ -57,7 +57,7 @@ fr:
         phone_number: "Numéro de téléphone"
         phone_number_is_required: "Le numéro de téléphone est requis."
         i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "J'autorise les utilisateurs du Fab Lab inscrits sur le site à me contacter"
-        i_accept_to_receive_information_from_the_fablab: "I accept to receive information from the FabLab"
+        i_accept_to_receive_information_from_the_fablab: "J'accepte de recevoir des informations du Fab Lab"
         used_for_statistics: "Cette donnée sera utilisée à des fins statistiques"
         used_for_invoicing: "Cette donnée sera utilisée à des fins de facturation"
         used_for_reservation: "Cette donnée sera utilisée en cas de changement sur une de vos réservations"
