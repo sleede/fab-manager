@@ -15,9 +15,9 @@ class API::UsersController < API::ApiController
 
   def create
     authorize User
-    res = if params[:user]
+    res = if !params[:user].empty?
             UserService.create_partner(partner_params)
-          elsif params[:manager]
+          elsif !params[:manager].empty?
             UserService.create_manager(manager_params)
           else
             nil

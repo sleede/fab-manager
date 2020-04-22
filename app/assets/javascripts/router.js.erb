@@ -938,6 +938,10 @@ angular.module('application.router', ['ui.router'])
             templateUrl: '<%= asset_path "admin/managers/new.html" %>',
             controller: 'NewManagerController'
           }
+        },
+        resolve: {
+          groupsPromise: ['Group', function (Group) { return Group.query().$promise; }],
+          tagsPromise: ['Tag', function (Tag) { return Tag.query().$promise; }]
         }
       })
 

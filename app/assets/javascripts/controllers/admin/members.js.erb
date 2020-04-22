@@ -1075,7 +1075,8 @@ Application.Controllers.controller('NewAdminController', ['$state', '$scope', 'A
 /**
  * Controller used in the manager's creation page (admin view)
  */
-Application.Controllers.controller('NewManagerController', ['$state', '$scope', 'User', 'growl', '_t', function ($state, $scope, User, growl, _t) {
+Application.Controllers.controller('NewManagerController', ['$state', '$scope', 'User', 'groupsPromise', 'tagsPromise', 'growl', '_t',
+  function ($state, $scope, User, groupsPromise, tagsPromise, growl, _t) {
   // default admin profile
   $scope.manager = {
     statistic_profile_attributes: {
@@ -1093,6 +1094,12 @@ Application.Controllers.controller('NewManagerController', ['$state', '$scope', 
       startingDay: Fablab.weekStartingDay
     }
   };
+
+  // list of all groups
+  $scope.groups = groupsPromise;
+
+  // list of all tags
+  $scope.tags = tagsPromise;
 
   /**
    * Shows the birth day datepicker
@@ -1112,7 +1119,7 @@ Application.Controllers.controller('NewManagerController', ['$state', '$scope', 
         return $state.go('app.admin.members');
       }
       , function (error) {
-        growl.error(_t('app.admin.admins_new.failed_to_create_admin') + JSON.stringify(error.data ? error.data : error));
+        growl.error(_t('app.admin.admins_new.failed_to_create_manager') + JSON.stringify(error.data ? error.data : error));
         console.error(error);
       }
     );

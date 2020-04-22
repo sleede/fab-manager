@@ -59,7 +59,7 @@ class UserService
     saved = manager.save
     if saved
       manager.send_confirmation_instructions
-      manager.add_role(:admin)
+      manager.add_role(:manager)
       manager.remove_role(:member)
       UsersMailer.delay.notify_user_account_created(manager, generated_password)
     end
