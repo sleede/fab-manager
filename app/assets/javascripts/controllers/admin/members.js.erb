@@ -1096,7 +1096,7 @@ Application.Controllers.controller('NewManagerController', ['$state', '$scope', 
   };
 
   // list of all groups
-  $scope.groups = groupsPromise;
+  $scope.groups = groupsPromise.filter(function (g) { return (g.slug !== 'admins') && !g.disabled; });
 
   // list of all tags
   $scope.tags = tagsPromise;

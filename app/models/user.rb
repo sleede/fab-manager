@@ -97,6 +97,14 @@ class User < ApplicationRecord
     User.with_role(:member)
   end
 
+  def self.partners
+    User.with_role(:partner)
+  end
+
+  def self.managers
+    User.with_role(:manager)
+  end
+
   def self.superadmin
     return unless Rails.application.secrets.superadmin_email.present?
 

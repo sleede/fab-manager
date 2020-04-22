@@ -49,10 +49,11 @@ class API::UsersController < API::ApiController
 
   def manager_params
     params.require(:manager).permit(
-        :username, :email, :group_id, :tag_ids,
-        profile_attributes: %i[first_name last_name phone],
-        invoicing_profile_attributes: [address_attributes: [:address]],
-        statistic_profile_attributes: %i[gender birthday]
+      :username, :email, :group_id,
+      tag_ids: [],
+      profile_attributes: %i[first_name last_name phone],
+      invoicing_profile_attributes: [address_attributes: [:address]],
+      statistic_profile_attributes: %i[gender birthday]
     )
   end
 end
