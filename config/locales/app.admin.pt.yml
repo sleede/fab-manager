@@ -98,7 +98,9 @@ pt:
         legend: "Legenda"
         and: "and"
         external_sync: "Calendar synchronization"
-        divide_this_availability: "Divide this availability in slots of"
+        divide_this_availability: "Divide this availability in"
+        slots: "slots"
+        slots_of: "of"
         minutes: "minutes"
       #import external iCal calendar
       icalendar:
@@ -586,6 +588,7 @@ pt:
       #management of users, labels, groups, and so on
       members:
         users_management: "Gerenciamento de usuários"
+        users: "Users"
         members: "Membros"
         subscriptions: "Subscriptions"
         search_for_an_user: "Buscar por usuário"
@@ -601,6 +604,15 @@ pt:
         administrators: "Administradores"
         search_for_an_administrator: "Buscar por administrador"
         add_a_new_administrator: "Adicionar novo administrador"
+        partners: "Partners"
+        partners_info: "A partner is a special user that can be associated with the «Partner» plans. These users will only receive notifications about subscriptions to these plans."
+        search_for_a_partner: "Search for a partner"
+        add_a_new_partner: "Add a new partner"
+        delete_this_partner: "Do you really want to delete this partner? This cannot be undone."
+        partner_successfully_deleted: "Partner successfully deleted."
+        unable_to_delete_the_partner: "Unable to delete the partner."
+        associated_plan: "Associated plan"
+        managers: "Managers"
         groups: "Grupos"
         tags: "Tags"
         authentication: "Autenticação"
