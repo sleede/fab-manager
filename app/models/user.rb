@@ -112,7 +112,7 @@ class User < ApplicationRecord
   end
 
   def training_machine?(machine)
-    return true if admin?
+    return true if admin? || manager?
 
     trainings.map(&:machines).flatten.uniq.include?(machine)
   end
@@ -137,6 +137,14 @@ class User < ApplicationRecord
 
   def member?
     has_role? :member
+  end
+
+  def manager?
+    has_role? :manager
+  end
+
+  def partner?
+    has_role? :partner
   end
 
   def all_projects

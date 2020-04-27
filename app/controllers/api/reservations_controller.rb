@@ -25,12 +25,13 @@ class API::ReservationsController < API::ApiController
   def show; end
 
   # Admins can create any reservations. Members can directly create reservations if total = 0,
-  # otherwise, they must use payments_controller#confirm_payment
+  # otherwise, they must use payments_controller#confirm_payment.
+  # Managers can create reservations for other users
   def create
-    user_id = current_user.admin? ? params[:reservation][:user_id] : current_user.id
+    user_id = current_user.admin? || current_user.manager? ? params[:reservation][:user_id] : current_user.id
     amount = transaction_amount(current_user.admin?, user_id)
 
-    authorize ReservationContext.new(Reservation, amount)
+    authorize ReservationContext.new(Reservation, amount, user_id)
 
     @reservation = Reservation.new(reservation_params)
     is_reserve = Reservations::Reserve.new(user_id, current_user.invoicing_profile.id)

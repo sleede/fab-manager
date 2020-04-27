@@ -45,7 +45,7 @@
   </div>
 
   <div class="col-sm-12 col-md-12 col-lg-3">
-    <div class="m text-center">
+    <div class="m text-center" ng-show="AuthService.isAuthorized('admin')">
       <a class="btn btn-default export-xls-button"
          ng-href="api/availabilities/export_index.xlsx"
          target="export-frame"
