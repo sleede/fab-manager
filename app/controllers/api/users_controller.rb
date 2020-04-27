@@ -6,7 +6,9 @@ class API::UsersController < API::ApiController
   before_action :set_user, only: %i[destroy]
 
   def index
-    if current_user.admin? && %w[partner manager].include?(params[:role])
+    authorize User
+
+    if %w[partner manager].include?(params[:role])
       @users = User.with_role(params[:role].to_sym).includes(:profile)
     else
       head 403

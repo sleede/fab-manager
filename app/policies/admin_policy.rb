@@ -1,6 +1,6 @@
 class AdminPolicy < ApplicationPolicy
   def index?
-    user.admin?
+    user.admin? || user.manager?
   end
 
   def create?

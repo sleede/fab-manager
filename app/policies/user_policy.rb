@@ -16,26 +16,30 @@ class UserPolicy < ApplicationPolicy
   end
 
   def show?
-    user.admin? || (record.is_allow_contact && record.member?) || (user.id == record.id)
+    user.admin? || user.manager? || (record.is_allow_contact && record.member?) || (user.id == record.id)
   end
 
   def update?
-    user.admin? || (user.id == record.id)
+    user.admin? || user.manager? || (user.id == record.id)
   end
 
   def destroy?
     user.admin? || (user.id == record.id)
   end
 
-  def merge?
-    user.id == record.id
+  %w[merge complete_tour].each do |action|
+    define_method "#{action}?" do
+      user.id == record.id
+    end
   end
 
-  def complete_tour?
-    user.id == record.id
+  %w[list index].each do |action|
+    define_method "#{action}?" do
+      user.admin? || user.manager?
+    end
   end
 
-  %w[list create mapping].each do |action|
+  %w[create mapping].each do |action|
     define_method "#{action}?" do
       user.admin?
     end
