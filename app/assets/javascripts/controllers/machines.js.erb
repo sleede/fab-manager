@@ -524,12 +524,13 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
      * When modifying an already booked reservation, callback when the modification was successfully done.
      */
     $scope.modifyMachineSlot = function () {
-      $scope.events.placable.title = $scope.currentUser.role !== 'admin' ? _t('app.logged.machines_reserve.i_ve_reserved') : _t('app.logged.machines_reserve.not_available');
+      $scope.events.placable.title = $scope.currentUser.id === $scope.events.modifiable.user.id ? _t('app.logged.machines_reserve.i_ve_reserved') : _t('app.logged.machines_reserve.not_available');
       $scope.events.placable.backgroundColor = 'white';
       $scope.events.placable.borderColor = $scope.events.modifiable.borderColor;
       $scope.events.placable.id = $scope.events.modifiable.id;
       $scope.events.placable.is_reserved = true;
       $scope.events.placable.can_modify = true;
+      $scope.events.placable.user = angular.copy($scope.events.modifiable.user);
 
       $scope.events.modifiable.backgroundColor = 'white';
       $scope.events.modifiable.title = '';
@@ -549,7 +550,7 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
         $scope.events.placable.backgroundColor = 'white';
         $scope.events.placable.title = '';
       }
-      $scope.events.modifiable.title = $scope.currentUser.role !== 'admin' ? _t('app.logged.machines_reserve.i_ve_reserved') : _t('app.logged.machines_reserve.not_available');
+      $scope.events.modifiable.title = $scope.currentUser.id === $scope.events.modifiable.user.id ? _t('app.logged.machines_reserve.i_ve_reserved') : _t('app.logged.machines_reserve.not_available');
       $scope.events.modifiable.backgroundColor = 'white';
 
       return updateCalendar();

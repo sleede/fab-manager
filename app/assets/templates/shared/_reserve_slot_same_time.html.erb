@@ -10,7 +10,7 @@
       <span>{{::r.reservable.name}}{{::r.reservable.title}}</span>
       <div class="font-sbold text-u-c">{{ 'app.shared.cart.datetime_to_time' | translate:{START_DATETIME:(r.start_at | amDateFormat:'LLLL'), END_TIME:(r.end_at | amDateFormat:'LT') } }}</div>
     </li>
-  </div>
+  </ul>
 </div>
 <div class="modal-footer">
   <button ng-if="bookSlotAtSameTime || currentUser.role === 'admin'" class="btn btn-info" ng-click="ok()" translate>{{ 'app.shared.buttons.confirm' }}</button>

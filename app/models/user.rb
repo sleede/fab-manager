@@ -147,6 +147,16 @@ class User < ApplicationRecord
     has_role? :partner
   end
 
+  def role
+    if admin?
+      'admin'
+    elsif manager?
+      'manager'
+    else
+      'other'
+    end
+  end
+
   def all_projects
     my_projects.to_a.concat projects
   end
