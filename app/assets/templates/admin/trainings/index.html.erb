@@ -35,7 +35,7 @@
       <uib-tabset justified="true" active="tabs.active">
         <uib-tab heading="{{ 'app.admin.trainings.trainings' | translate }}" index="0" class="manage-trainings">
           <div class="m-t m-b">
-            <button type="button" class="btn btn-warning" ui-sref="app.admin.trainings_new">
+            <button type="button" class="btn btn-warning" ui-sref="app.admin.trainings_new" ng-show="isAuthorized('admin')">
               <i class="fa fa-plus m-r"></i>
               <span translate>{{ 'app.admin.trainings.add_a_new_training' }}</span>
             </button>
@@ -64,7 +64,7 @@
               <td>{{ showMachines(training) }}</td>
               <td>{{ training.nb_total_places }}</td>
               <td>
-                <div class="buttons">
+                <div class="buttons" ng-show="isAuthorized('admin')">
                   <button class="btn btn-default" ui-sref="app.admin.trainings_edit({id:training.id})">
                     <i class="fa fa-edit"></i> {{ 'app.shared.buttons.edit' | translate }}
                   </button>
