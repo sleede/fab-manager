@@ -727,10 +727,11 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
 /**
  * Controller of modal for show reservations the same date at the same time
  */
-Application.Controllers.controller('ReserveSlotSameTimeController', ['$scope', '$uibModalInstance', 'sameTimeReservations', 'growl', '_t',
-  function ($scope, $uibModalInstance, sameTimeReservations, growl, _t) {
+Application.Controllers.controller('ReserveSlotSameTimeController', ['$scope', '$uibModalInstance', 'AuthService', 'sameTimeReservations', 'growl', '_t',
+  function ($scope, $uibModalInstance, AuthService, sameTimeReservations, growl, _t) {
     $scope.sameTimeReservations = sameTimeReservations;
     $scope.bookSlotAtSameTime = Fablab.bookSlotAtSameTime;
+    $scope.isAuthorized = AuthService.isAuthorized;
     /**
      * Confirmation callback
      */
