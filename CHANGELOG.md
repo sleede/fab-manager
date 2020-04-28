@@ -7,6 +7,7 @@
 - Fix a bug: unable to delete an unreserved event
 - Fix a bug: "Free entry" label for events without reservation
 - Fix a bug: updating a setting without any changes triggers an error
+- Fix a bug: plan edition does not show the associated group
 
 ## v4.3.4 2020 April 14
 
