@@ -160,6 +160,8 @@ class Availability < ApplicationRecord
   private
 
   def length_must_be_slot_multiple
+    return unless available_type == 'machines' || available_type == 'space'
+
     duration = slot_duration || ApplicationHelper::SLOT_DURATION
     return unless end_at < (start_at + duration.minutes)
 

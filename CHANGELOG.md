@@ -3,6 +3,7 @@
 - Interface to manage partners
 - Ability to define, per availability, a custom duration for the reservation slots
 - Fix a bug: unable to change group if the previous was deactivated
+- Fix a bug: unable to create events or trainings that are not multiples of SLOT_DURATION
 
 ## v4.3.4 2020 April 14
 
