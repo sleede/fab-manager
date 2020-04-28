@@ -364,7 +364,7 @@ class User < ApplicationRecord
   end
 
   def notify_group_changed
-    return if changes[:group_id].first.nil?
+    return unless changes[:group_id]&.first
 
     ex_group = Group.find(changes[:group_id].first)
     meta_data = { ex_group_name: ex_group.name }
