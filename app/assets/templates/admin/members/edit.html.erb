@@ -229,9 +229,12 @@
             <ng-include src="'<%= asset_path "wallet/show.html" %>'"></ng-include>
 
             <div class="clearfix"></div>
-            <div class="col-sm-4 text-center">
+            <div class="col-sm-4 text-center" ng-hide="user.id === currentUser.id">
               <button type="button" class="btn btn-warning m-t m-b" ng-click="createWalletCreditModal(user, wallet)" translate>{{ 'app.admin.members_edit.to_credit' }}</button>
             </div>
+            <p class="col-sm-4 alert alert-info" ng-show="user.id === currentUser.id" translate>
+              {{ 'app.admin.members_edit.cannot_credit_own_wallet' }}
+            </p>
 
           </div>
 

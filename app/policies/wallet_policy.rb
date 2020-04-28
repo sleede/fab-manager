@@ -9,6 +9,6 @@ class WalletPolicy < ApplicationPolicy
   end
 
   def credit?
-    user.admin?
+    user.admin? || (user.manager? && user != record.user)
   end
 end

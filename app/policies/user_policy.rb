@@ -33,7 +33,7 @@ class UserPolicy < ApplicationPolicy
     end
   end
 
-  %w[list index].each do |action|
+  %w[list index create_member].each do |action|
     define_method "#{action}?" do
       user.admin? || user.manager?
     end
