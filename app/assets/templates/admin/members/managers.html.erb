@@ -7,7 +7,9 @@
   </div>
 </div>
 <div class="col-md-12">
-  <button type="button" class="btn btn-warning m-t m-b" ui-sref="app.admin.managers_new" translate>{{ 'app.admin.members.add_a_new_manager' }}</button>
+  <button type="button" class="btn btn-warning m-t m-b" ui-sref="app.admin.managers_new" ng-show="isAuthorized('admin')" translate>
+    {{ 'app.admin.members.add_a_new_manager' }}
+  </button>
 
   <table class="table">
     <thead>
@@ -32,7 +34,7 @@
         <button class="btn btn-default edit-member" ui-sref="app.admin.members_edit({id: manager.id})">
           <i class="fa fa-edit"></i>
         </button>
-        <button class="btn btn-danger" ng-if="manager.id != currentUser.id" ng-click="destroyManager(managers, manager)">
+        <button class="btn btn-danger" ng-if="isAuthorized('admin')" ng-click="destroyManager(managers, manager)">
           <i class="fa fa-trash-o"></i>
         </button>
       </td>

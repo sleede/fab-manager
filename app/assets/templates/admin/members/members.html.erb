@@ -18,8 +18,10 @@
   </div>
 </div>
 <div class="col-md-12">
-  <button type="button" class="btn btn-warning m-t m-b" ui-sref="app.admin.members_new" translate>{{ 'app.admin.members.add_a_new_member' }}</button>
-  <div class="pull-right exports-buttons">
+  <button type="button" class="btn btn-warning m-t m-b" ui-sref="app.admin.members_new" ng-show="isAuthorized('admin')" translate>
+    {{ 'app.admin.members.add_a_new_member' }}
+  </button>
+  <div class="pull-right exports-buttons" ng-show="isAuthorized('admin')">
     <a class="btn btn-default" ng-href="api/members/export_members.xlsx" target="export-frame" ng-click="alertExport('members')">
       <i class="fa fa-file-excel-o"></i> {{ 'app.admin.members.members' | translate }}
     </a>
@@ -57,7 +59,7 @@
           <button class="btn btn-default edit-member" ui-sref="app.admin.members_edit({id: m.id})">
             <i class="fa fa-edit"></i>
           </button>
-          <button class="btn btn-danger delete-member" ng-click="deleteMember(m.id)">
+          <button class="btn btn-danger delete-member" ng-click="deleteMember(m.id)" ng-show="isAuthorized('admin')">
             <i class="fa fa-trash"></i>
           </button>
           <span class="label label-danger text-white" ng-show="m.need_completion" translate>{{ 'app.shared.user_admin.incomplete_profile' }}</span>
