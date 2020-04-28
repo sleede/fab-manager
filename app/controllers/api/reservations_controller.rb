@@ -9,13 +9,13 @@ class API::ReservationsController < API::ApiController
 
   def index
     if params[:reservable_id] && params[:reservable_type] && params[:user_id]
-      params[:user_id] = current_user.id unless current_user.admin?
+      params[:user_id] = current_user.id unless current_user.admin? || current_user.manager?
 
       where_clause = params.permit(:reservable_id, :reservable_type).to_h
       where_clause[:statistic_profile_id] = StatisticProfile.find_by!(user_id: params[:user_id])
 
       @reservations = Reservation.where(where_clause)
-    elsif params[:reservable_id] && params[:reservable_type] && current_user.admin?
+    elsif params[:reservable_id] && params[:reservable_type] && (current_user.admin? || current_user.manager?)
       @reservations = Reservation.where(params.permit(:reservable_id, :reservable_type))
     else
       @reservations = []

@@ -311,7 +311,7 @@ class User < ApplicationRecord
 
   protected
 
-  # remove projets drafts that are not linked to another user
+  # remove projects drafts that are not linked to another user
   def remove_orphan_drafts
     orphans = my_projects
               .joins('LEFT JOIN project_users ON projects.id = project_users.project_id')

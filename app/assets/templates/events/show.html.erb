@@ -14,11 +14,11 @@
       </section>
     </div>
 
-    <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md" ng-if="isAuthorized('admin')">
+    <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md" ng-if="isAuthorized(['admin', 'manager'])">
       <section class="heading-actions wrapper">
 
-          <a ui-sref="app.admin.events_edit({id: event.id})" ng-if="isAuthorized('admin')" class="btn btn-lg btn-warning bg-white b-2x rounded m-t-xs text-u-c text-sm"><i class="fa fa-edit"></i> {{ 'app.shared.buttons.edit' | translate }}</a>
-          <a ng-click="deleteEvent(event)" ng-if="isAuthorized('admin')" class="btn btn-lg btn-danger b-2x rounded no-b m-t-xs"><i class="fa fa-trash-o"></i></a>
+          <a ui-sref="app.admin.events_edit({id: event.id})" class="btn btn-lg btn-warning bg-white b-2x rounded m-t-xs text-u-c text-sm"><i class="fa fa-edit"></i> {{ 'app.shared.buttons.edit' | translate }}</a>
+          <a ng-click="deleteEvent(event)" class="btn btn-lg btn-danger b-2x rounded no-b m-t-xs"><i class="fa fa-trash-o"></i></a>
 
       </section>
     </div>
@@ -62,7 +62,7 @@
         </ul>
     </section>
 
-    <div ng-if="currentUser.role === 'admin'">
+    <div ng-if="isAuthorized(['admin', 'manager'])">
       <select-member></select-member>
     </div>
 
