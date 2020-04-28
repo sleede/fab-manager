@@ -15,7 +15,7 @@ class EventPriceCategory < ApplicationRecord
   protected
 
   def verify_no_associated_tickets
-    throw(:abort) if tickets.count.zero?
+    throw(:abort) unless tickets.count.zero?
   end
 
 end
