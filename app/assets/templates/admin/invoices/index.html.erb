@@ -11,7 +11,7 @@
       </section>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-3">
-      <section class="heading-actions wrapper">
+      <section class="heading-actions wrapper" ng-show="isAuthorized('admin')">
         <a class="btn btn-default rounded m-t-sm export-accounting-button" ng-click="toggleExportModal()"><i class="fa fa-book"></i></a>
         <iframe name="export-frame" height="0" width="0" class="none" id="accounting-export-frame"></iframe>
         <a class="btn btn-lg btn-default rounded m-t-sm text-sm close-accounting-periods-button" ng-click="closeAnAccountingPeriod()"><i class="fa fa-calendar-check-o"></i> {{ 'app.admin.invoices.accounting_periods' | translate }}</a>
@@ -28,7 +28,7 @@
          ui-tour-scroll-parent-id="content-main"
          post-render="setupInvoicesTour">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12" ng-show="isAuthorized('admin')">
       <uib-tabset justified="true" active="tabs.active">
         <uib-tab heading="{{ 'app.admin.invoices.invoices_list' | translate }}" ng-hide="fablabWithoutInvoices" index="0">
           <ng-include src="'<%= asset_path "admin/invoices/list.html" %>'"></ng-include>
@@ -43,6 +43,10 @@
         </uib-tab>
 	    </uib-tabset>
 	  </div>
+
+    <div class="col-md-12" ng-show="isAuthorized('manager')">
+      <ng-include src="'<%= asset_path "admin/invoices/list.html" %>'"></ng-include>
+    </div>
   </div>
 </section>
 
