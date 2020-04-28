@@ -119,7 +119,7 @@ Application.Controllers.controller('MainNavController', ['$scope', function ($sc
       state: 'app.admin.invoices',
       linkText: 'app.public.common.manage_the_invoices',
       linkIcon: 'file-pdf-o',
-      authorizedRoles: ['admin']
+      authorizedRoles: ['admin', 'manager']
     },
     {
       state: 'app.admin.statistics',
@@ -127,7 +127,10 @@ Application.Controllers.controller('MainNavController', ['$scope', function ($sc
       linkIcon: 'bar-chart-o',
       authorizedRoles: ['admin']
     },
-    { class: 'menu-spacer' },
+    {
+      class: 'menu-spacer',
+      authorizedRoles: ['admin']
+    },
     {
       state: 'app.admin.settings',
       linkText: 'app.public.common.customization',

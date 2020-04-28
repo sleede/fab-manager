@@ -291,8 +291,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           growl.success(_t('app.admin.invoices.invoice_reference_successfully_saved'));
         }
         , function (error) {
-          growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_invoice_reference'));
-          console.error(error);
+            if (error.status === 304) return;
+
+            growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_invoice_reference'));
+            console.error(error);
         });
       });
     };
@@ -330,8 +332,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           }
         }
         , function (error) {
-          growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_invoicing_code'));
-          return console.error(error);
+            if (error.status === 304) return;
+
+            growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_invoicing_code'));
+            console.error(error);
         });
 
         return Setting.update({ name: 'invoice_code-active' }, { value: result.active ? 'true' : 'false' }, function (data) {
@@ -343,8 +347,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           }
         }
         , function (error) {
-          growl.error(_t('app.admin.invoices.an_error_occurred_while_activating_the_invoicing_code'));
-          return console.error(error);
+            if (error.status === 304) return;
+
+            growl.error(_t('app.admin.invoices.an_error_occurred_while_activating_the_invoicing_code'));
+            console.error(error);
         });
       });
     };
@@ -375,8 +381,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           return growl.success(_t('app.admin.invoices.order_number_successfully_saved'));
         }
         , function (error) {
-          growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_order_number'));
-          return console.error(error);
+            if (error.status === 304) return;
+
+            growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_order_number'));
+            console.error(error);
         });
       });
     };
@@ -434,8 +442,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           }
         }
         , function (error) {
-          growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_VAT_rate'));
-          return console.error(error);
+            if (error.status === 304) return;
+
+            growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_VAT_rate'));
+            console.error(error);
         });
 
         return Setting.update({ name: 'invoice_VAT-active' }, { value: result.active ? 'true' : 'false' }, function (data) {
@@ -447,8 +457,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           }
         }
         , function (error) {
-          growl.error(_t('app.admin.invoices.an_error_occurred_while_activating_the_VAT'));
-          return console.error(error);
+            if (error.status === 304) return;
+
+            growl.error(_t('app.admin.invoices.an_error_occurred_while_activating_the_VAT'));
+            console.error(error);
         });
       });
     };
@@ -463,8 +475,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         return growl.success(_t('app.admin.invoices.text_successfully_saved'));
       }
       , function (error) {
-        growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_text'));
-        return console.error(error);
+          if (error.status === 304) return;
+
+          growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_text'));
+          console.error(error);
       });
     };
 
@@ -478,8 +492,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         return growl.success(_t('app.admin.invoices.address_and_legal_information_successfully_saved'));
       }
       , function (error) {
-        growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_address_and_the_legal_information'));
-        return console.error(error);
+          if (error.status === 304) return;
+
+          growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_address_and_the_legal_information'));
+          console.error(error);
       });
     };
 
@@ -710,8 +726,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
             { value: $scope.invoice.logo.base64 },
             function (data) { growl.success(_t('app.admin.invoices.logo_successfully_saved')); },
             function (error) {
+              if (error.status === 304) return;
+
               growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_logo'));
-              return console.error(error);
+              console.error(error);
             }
           );
         }

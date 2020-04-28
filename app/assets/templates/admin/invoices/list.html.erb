@@ -1,0 +1,86 @@
+<h3 class="m-t-xs"><i class="fa fa-filter"></i> {{ 'app.admin.invoices.filter_invoices' | translate }}</h3>
+
+<div class="row">
+  <div class="col-md-4">
+    <div class="form-group">
+      <div class="input-group">
+        <span class="input-group-addon" translate>{{ 'app.admin.invoices.invoice_num_' }}</span>
+        <input type="text" ng-model="searchInvoice.reference" class="form-control" placeholder="" ng-change="handleFilterChange()">
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="form-group">
+      <div class="input-group">
+        <span class="input-group-addon" translate>{{ 'app.admin.invoices.customer_' }}</span>
+        <input type="text" ng-model="searchInvoice.name" class="form-control" placeholder="" ng-change="handleFilterChange()">
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="form-group">
+      <div class="input-group">
+        <span class="input-group-addon">{{ "app.admin.invoices.date_" | translate }}</span>
+        <input type="date" ng-model="searchInvoice.date" class="form-control" ng-change="handleFilterChange()">
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+
+    <table class="table invoices-list" ng-if="invoices.length > 0">
+      <thead>
+      <tr>
+        <th style="width:5%"></th>
+        <th style="width:15%"><a href="" ng-click="setOrderInvoice('reference')">{{ 'app.admin.invoices.invoice_num' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': orderInvoice=='reference', 'fa fa-sort-numeric-desc': orderInvoice=='-reference', 'fa fa-arrows-v': orderInvoice }"></i></a></th>
+
+        <th style="width:20%"><a href="" ng-click="setOrderInvoice('date')">{{ 'app.admin.invoices.date' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': orderInvoice=='date', 'fa fa-sort-numeric-desc': orderInvoice=='-date', 'fa fa-arrows-v': orderInvoice }"></i></a></th>
+
+        <th style="width:10%"><a href="" ng-click="setOrderInvoice('total')"> {{ 'app.admin.invoices.price' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': orderInvoice=='total', 'fa fa-sort-numeric-desc': orderInvoice=='-total', 'fa fa-arrows-v': orderInvoice }"></i></a></th>
+
+        <th style="width:20%"><a href="" ng-click="setOrderInvoice('name')">{{ 'app.admin.invoices.customer' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderInvoice=='name', 'fa fa-sort-alpha-desc': orderInvoice=='-name', 'fa fa-arrows-v': orderInvoice }"></i></a></th>
+
+        <th style="width:30%"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="invoice in invoices">
+        <td class="chained-indicator">
+          <i class="fa fa-link chained" ng-show="invoice.chained_footprint"/>
+          <i class="fa fa-chain-broken broken" ng-hide="invoice.chained_footprint"/>
+        </td>
+        <td>{{ invoice.reference }}</td>
+        <td ng-if="!invoice.is_avoir">{{ invoice.date | amDateFormat:'L LTS' }}</td>
+        <td ng-if="invoice.is_avoir">{{ invoice.date | amDateFormat:'L' }}</td>
+        <td>{{ invoice.total | currency}}</td>
+        <td>
+          <a href="" ui-sref="app.admin.members_edit({id: invoice.user_id})" ng-show="invoice.user_id">{{ invoice.name }}</a>
+          <span ng-hide="invoice.user_id">{{ invoice.name }}</span>
+        <td>
+          <div class="buttons">
+            <a class="btn btn-default download-button" ng-href="api/invoices/{{invoice.id}}/download" target="_blank" ng-if="!invoice.is_avoir">
+              <i class="fa fa-file-pdf-o"></i> {{ 'app.admin.invoices.download_the_invoice' | translate }}
+            </a>
+            <a class="btn btn-default" ng-href="api/invoices/{{invoice.id}}/download" target="_blank" ng-if="invoice.is_avoir">
+              <i class="fa fa-file-pdf-o"></i> {{ 'app.admin.invoices.download_the_credit_note' | translate }}
+            </a>
+            <a class="btn btn-default refund-button" ng-click="generateAvoirForInvoice(invoice)" ng-if="(!invoice.has_avoir || invoice.has_avoir == 'partial') && !invoice.is_avoir && !invoice.prevent_refund && !isDateClosed(invoice.created_at)">
+              <i class="fa fa-reply"></i> {{ 'app.admin.invoices.credit_note' | translate }}
+            </a>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="text-center">
+      <button class="btn btn-warning" ng-click="showNextInvoices()" ng-hide="noMoreResults"><i class="fa fa-search-plus" aria-hidden="true"></i> {{ 'app.admin.invoices.display_more_invoices' | translate }}</button>
+    </div>
+    <p ng-if="invoices.length == 0" translate>{{ 'app.admin.invoices.no_invoices_for_now' }}</p>
+
+  </div>
+</div>

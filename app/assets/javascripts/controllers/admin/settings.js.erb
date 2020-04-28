@@ -209,7 +209,12 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
         { name: setting.name },
         { value },
         function () { growl.success(_t('app.admin.settings.customization_of_SETTING_successfully_saved', { SETTING: _t(`app.admin.settings.${setting.name}`) })); },
-        function (error) { console.log(error); }
+        function (error) {
+          if (error.status === 304) return;
+
+          growl.error(_t('app.admin.settings.an_error_occurred_saving_the_setting'));
+          console.log(error);
+        }
       );
     };
 

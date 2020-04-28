@@ -6,6 +6,7 @@
 - Fix a bug: unable to create events or trainings that are not multiples of SLOT_DURATION
 - Fix a bug: unable to delete an unreserved event
 - Fix a bug: "Free entry" label for events without reservation
+- Fix a bug: updating a setting without any changes triggers an error
 
 ## v4.3.4 2020 April 14
 

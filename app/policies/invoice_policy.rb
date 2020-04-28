@@ -12,7 +12,7 @@ class InvoicePolicy < ApplicationPolicy
   end
 
   def list?
-    user.admin?
+    user.admin? || user.manager?
   end
 
   def first?

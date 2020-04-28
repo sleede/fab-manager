@@ -1011,6 +1011,7 @@ en:
         advanced: "Advanced settings"
         customize_home_page_css: "Customise the stylesheet og the home page"
         home_css_notice_html: "You can customize the stylesheet which will apply to the home page, using the <a href=\"https://sass-lang.com/documentation\" target=\"_blank\">SASS</a> syntax. These styles will be automatically subordinated to the <code>.home-page</code> selector to prevent any risk of breaking the application. Meanwhile please be careful, any changes in the home page editor at the top of the page may broke your styles, always refer to the HTML code."
+        an_error_occurred_saving_the_setting: "An error occurred while saving the setting. Please try again later."
         sort_by:
           default: "Default"
           name: "Name"
