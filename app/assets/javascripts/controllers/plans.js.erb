@@ -28,7 +28,7 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
 
     // list of plans, classified by group
     $scope.plansClassifiedByGroup = [];
-    for (var group of Array.from($scope.groups)) {
+    for (const group of Array.from($scope.groups)) {
       const groupObj = { id: group.id, name: group.name, plans: [] };
       for (let plan of Array.from(plansPromise)) {
         if (plan.group_id === group.id) { groupObj.plans.push(plan); }
@@ -68,9 +68,9 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
       $scope.selectedPlan = null;
       $scope.paid.plan = null;
       $scope.group.change = false;
-      return Member.get({ id: $scope.ctrl.member.id }, function (member) {
+      Member.get({ id: $scope.ctrl.member.id }, function (member) {
         $scope.ctrl.member = member;
-        return $scope.group.id = $scope.ctrl.member.group_id;
+        $scope.group.id = $scope.ctrl.member.group_id;
       });
     };
 
@@ -115,7 +115,7 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
      * Return the group object, identified by the ID set in $scope.group.id
      */
     $scope.getUserGroup = function () {
-      for (group of Array.from($scope.groups)) {
+      for (const group of Array.from($scope.groups)) {
         if (group.id === $scope.group.id) {
           return group;
         }
@@ -223,7 +223,7 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
     /**
      * Open a modal window which trigger the stripe payment process
      */
-    var payByStripe = function () {
+    const payByStripe = function () {
       $uibModal.open({
         templateUrl: '<%= asset_path "stripe/payment_modal.html" %>',
         size: 'md',
@@ -283,7 +283,7 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
     /**
      * Open a modal window which trigger the local payment process
      */
-    var payOnSite = function () {
+    const payOnSite = function () {
       $uibModal.open({
         templateUrl: '<%= asset_path "plans/payment_modal.html" %>',
         size: 'sm',
