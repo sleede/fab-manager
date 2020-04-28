@@ -71,7 +71,7 @@
               <span class="btn btn-warning btn-xs" ng-click="cancelBooking(r)" ng-if="!r.canceled_at"><i class="fa fa-times red"></i></span>
           </li>
         </ul>
-        <div ng-show="reservations.length == 0" translate>{{ 'app.admin.calendar.no_reservations' }}</div>
+        <div ng-show="reservations.length == 0" translate>{{ 'app.admin.calendar.without_reservation' }}</div>
         <div class="m-t" ng-show="availability.lock"><i class="fa fa-ban"></i> <span class="m-l-xs" translate>{{ 'app.admin.calendar.reservations_locked' }}</span></div>
       </div>
     </div>

@@ -193,7 +193,7 @@ fr:
         booking: "Réservations"
         sold_out: "Complet"
         cancelled: "Annulé"
-        free_entry: "Entrée libre"
+        without_reservation: "Sans réservation"
         free_admission: "Entrée gratuite"
         view_reservations: "Consulter les réservations"
         load_the_next_events: "Charger les évènements suivants..."

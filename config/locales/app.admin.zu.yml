@@ -193,7 +193,7 @@ zu:
         booking: "crwdns7009:0crwdne7009:0"
         sold_out: "crwdns7011:0crwdne7011:0"
         cancelled: "crwdns7013:0crwdne7013:0"
-        free_entry: "crwdns7015:0crwdne7015:0"
+        without_reservation: "crwdns7015:0crwdne7015:0"
         free_admission: "crwdns7017:0crwdne7017:0"
         view_reservations: "crwdns7019:0crwdne7019:0"
         load_the_next_events: "crwdns7021:0crwdne7021:0"
