@@ -763,6 +763,7 @@ en:
         wallet: "Wallet"
         to_credit: 'Credit'
         cannot_credit_own_wallet: "You cannot credit your own wallet. Please ask another manager or an administrator to credit your wallet."
+        cannot_extend_own_subscription: "You cannot extend your own subscription. Please ask another manager or an administrator to extend your subscription."
       #add a new administrator to the platform
       admins_new:
         add_an_administrator: "Add an administrator"

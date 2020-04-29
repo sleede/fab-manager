@@ -12,6 +12,6 @@ class SubscriptionPolicy < ApplicationPolicy
   end
 
   def update?
-    user.admin?
+    user.admin? || (user.manager? && record.user.id != user.id)
   end
 end
