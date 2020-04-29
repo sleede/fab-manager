@@ -432,17 +432,17 @@ fr:
             content: "Pour modifier ou supprimer une machine, cliquez tout d'abord ici. Vous ne pourrez pas supprimer une machine qui a déjà été associée à des créneaux de disponibilité, mais vous pourrez la désactiver."
           reserve:
             title: "Réserver"
-            content: "Click here to access an agenda showing free slots. This will let you book this machine for an user and manage existing reservations."
+            content: "Cliquez ici pour accéder à un agenda montrant les créneaux libres. Cela vous permettra de réserver cette machine pour un utilisateur et de gérer les réservations existantes."
         spaces:
           welcome:
             title: "Espaces"
             content: "<p>Les espaces sont des lieux que vous mettez à disposition de vos utilisateurs. Par exemple, une salle de réunion ou un atelier bois. Vous devez créer ici les espaces qui pourront ensuite être réservées par les membres.</p><p>La spécificité des espaces est qu'ils peuvent être réservés par plusieurs utilisateurs en même temps.</p>"
           welcome_manager:
             title: "Espaces"
-            content: "<p>Spaces are places available to users, by reservation. For example, a meeting room or a woodshop.</p><p>The specificity of the spaces is that they can be reserved by several users at the same time.</p>"
+            content: "<p>Les espaces sont des lieux à disposition des utilisateurs, sur réservation. Par exemple, une salle de réunion ou un atelier bois.</p><p>La spécificité des espaces est qu'ils peuvent être réservés par plusieurs utilisateurs en même temps.</p>"
           view:
             title: "Consulter"
             content: "Pour modifier ou supprimer un espace, cliquez tout d'abord ici. Vous ne pourrez pas supprimer un espace qui a déjà été associée à des créneaux de disponibilité, mais vous pourrez le désactiver."
           reserve:
             title: "Réserver"
-            content: "Click here to access an agenda showing free slots. This will let you book this space for an user and manage existing reservations."
+            content: "Cliquez ici pour accéder à un agenda montrant les créneaux libres. Cela vous permettra de réserver cet espace pour un utilisateur et de gérer les réservations existantes."
