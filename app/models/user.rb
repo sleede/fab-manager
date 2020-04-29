@@ -105,6 +105,10 @@ class User < ApplicationRecord
     User.with_role(:manager)
   end
 
+  def self.admins_and_managers
+    User.with_any_role(:admin, :manager)
+  end
+
   def self.online_payers
     User.with_any_role(:manager, :member)
   end
@@ -362,7 +366,7 @@ class User < ApplicationRecord
                               attached_object: self
     else
       NotificationCenter.call type: 'notify_admin_when_user_is_created',
-                              receiver: User.admins,
+                              receiver: User.admins_and_managers,
                               attached_object: self
     end
   end
@@ -374,7 +378,7 @@ class User < ApplicationRecord
     meta_data = { ex_group_name: ex_group.name }
 
     NotificationCenter.call type: :notify_admin_user_group_changed,
-                            receiver: User.admins,
+                            receiver: User.admins_and_managers,
                             attached_object: self,
                             meta_data: meta_data
 

@@ -148,7 +148,7 @@ class Subscription < ApplicationRecord
 
   def notify_admin_subscription_canceled
     NotificationCenter.call type: 'notify_admin_subscription_canceled',
-                            receiver: User.admins,
+                            receiver: User.admins_and_managers,
                             attached_object: self
   end
 
@@ -173,7 +173,7 @@ class Subscription < ApplicationRecord
                             meta_data: meta_data
 
     NotificationCenter.call type: :notify_admin_subscription_extended,
-                            receiver: User.admins,
+                            receiver: User.admins_and_managers,
                             attached_object: self,
                             meta_data: meta_data
   end

@@ -23,7 +23,7 @@ class Avoir < Invoice
 
   def notify_admins_refund_created
     NotificationCenter.call type: 'notify_admin_refund_created',
-                            receiver: User.admins,
+                            receiver: User.admins_and_managers,
                             attached_object: self
   end
 end
