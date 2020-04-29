@@ -29,6 +29,7 @@ pt:
         #left menu
         notifications: "Nofificações"
         admin: "Admin"
+        manager: "Manager"
         reduce_panel: "Reduzir painel"
         #left menu (public)
         home: "Início"
@@ -146,7 +147,7 @@ pt:
         from_date_to_date: "De {START} até {END}"
         on_the_date: "Em {DATE}"
         from_time_to_time: "Das {START} até {END}"
-        free_entry: "Entrada franca"
+        without_reservation: "Without reservation"
         free_admission: "Admissão grátis"
         full_price: "Valor inteira: "
         event_full: "Evento lotado"
@@ -241,8 +242,8 @@ pt:
         your_subscription_expires_on_the_DATE: "Sua inscrição expira em {DATE}"
         my_group: "Meu grupo"
         his_group: "{GENDER, select, male{Ele} female{Ela} other{Esses}} grupo"
-        he_wants_to_change_group: "{ROLE, select, admin{O usuário quer} other{Eu quero}} trocar de grupo"
-        change_my_group: "Mudar {ROLE, select, admin{{GENDER, select, male{dele} female{dela} other{esses}}} other{meu}} grupo"
+        he_wants_to_change_group: "{ROLE, select, member{I want} other{The user wants}} to change group"
+        change_my_group: "Change {ROLE, select, member{my} other{{GENDER, select, male{his} female{her} other{its}}}} group"
         summary: "Summary"
         your_subscription_has_expired_on_the_DATE: "Sua inscrição expirou em {DATE}"
         subscription_price: "Subscription price"
@@ -269,7 +270,7 @@ pt:
         cancelled: "Cancelado"
         free_admission: "Admissão grátis"
         still_available: "lugares disponíveis"
-        free_entry: "Entrada franca"
+        without_reservation: "Without reservation"
         add_an_event: "Add an event"
         load_the_next_events: "Load the next events..."
         full_price_: "Valor inteira:"
@@ -290,7 +291,7 @@ pt:
         full_price_: "Valor inteira:"
         tickets_still_availables: "Tickets ainda disponíveis:"
         sold_out: "Esgotado."
-        free_entry: "Entrada franca"
+        without_reservation: "Without reservation"
         cancelled: "Cancelado"
         ticket: "{NUMBER, plural, one{ticket} other{tickets}}"
         make_a_gift_of_this_reservation: "Doe esta reserva"
@@ -387,8 +388,8 @@ pt:
             title: "Subscriptions"
             content: "Subscriptions provide a way to segment your prices and provide benefits to regular users."
           admin:
-            title: "Administrator section"
-            content: "<p>All of the elements below are only accessible to administrators. They allow you to manage and configure Fab-manager.</p><p>At the end of this visit, click on one of them to find out more.</p>"
+            title: "{ROLE} section"
+            content: "<p>All of the elements below are only accessible to administrators and managers. They allow you to manage and configure Fab-manager.</p><p>At the end of this visit, click on one of them to find out more.</p>"
           about:
             title: "About"
             content: "A page that you can fully customize, to present your activity and your structure."
@@ -423,13 +424,25 @@ pt:
           welcome:
             title: "Machines"
             content: "<p>Machines are the tools available for your users. You must create here the machines which can then be reserved by the members.</p><p>You can also create entries for non-bookable or free access machines, then you just need to not associate availability slots with them.</p>"
+          welcome_manager:
+            title: "Machines"
+            content: "Machines are the tools available for the users to reserve."
           view:
             title: "View"
             content: "To modify or delete a machine, click here first. You will not be able to delete a machine that has already been associated with availability slots, but you can deactivate it."
+          reserve:
+            title: "Reserve"
+            content: "Click here to access an agenda showing free slots. This will let you book this machine for an user and manage exiting reservations."
         spaces:
           welcome:
             title: "Spaces"
             content: "<p>Spaces are places available for your users. For example, a meeting room or a woodshop. You must create here the spaces which can then be reserved by members.</p><p>The specificity of the spaces is that they can be reserved by several users at the same time.</p>"
+          welcome_manager:
+            title: "Spaces"
+            content: "<p>Spaces are the places available for the users to reserve. For example, a meeting room or a woodshop.</p><p>The specificity of the spaces is that they can be reserved by several users at the same time.</p>"
           view:
             title: "View"
             content: "To modify or delete a space, click here first. You will not be able to delete a space that has already been associated with availability slots, but you can deactivate it."
+          reserve:
+            title: "Reserve"
+            content: "Click here to access an agenda showing free slots. This will let you book this space for an user and manage exiting reservations."
