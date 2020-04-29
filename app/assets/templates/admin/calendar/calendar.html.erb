@@ -45,7 +45,7 @@
   </div>
 
   <div class="col-sm-12 col-md-12 col-lg-3">
-    <div class="m text-center">
+    <div class="m text-center" ng-show="isAuthorized('admin')">
       <a class="btn btn-default export-xls-button"
          ng-href="api/availabilities/export_index.xlsx"
          target="export-frame"
@@ -71,7 +71,7 @@
               <span class="btn btn-warning btn-xs" ng-click="cancelBooking(r)" ng-if="!r.canceled_at"><i class="fa fa-times red"></i></span>
           </li>
         </ul>
-        <div ng-show="reservations.length == 0" translate>{{ 'app.admin.calendar.no_reservations' }}</div>
+        <div ng-show="reservations.length == 0" translate>{{ 'app.admin.calendar.without_reservation' }}</div>
         <div class="m-t" ng-show="availability.lock"><i class="fa fa-ban"></i> <span class="m-l-xs" translate>{{ 'app.admin.calendar.reservations_locked' }}</span></div>
       </div>
     </div>

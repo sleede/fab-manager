@@ -6,7 +6,9 @@ class API::UsersController < API::ApiController
   before_action :set_user, only: %i[destroy]
 
   def index
-    if current_user.admin? && %w[partner manager].include?(params[:role])
+    authorize User
+
+    if %w[partner manager].include?(params[:role])
       @users = User.with_role(params[:role].to_sym).includes(:profile)
     else
       head 403
@@ -15,12 +17,18 @@ class API::UsersController < API::ApiController
 
   def create
     authorize User
-    res = UserService.create_partner(partner_params)
+    res = if !params[:user].empty?
+            UserService.create_partner(partner_params)
+          elsif !params[:manager].empty?
+            UserService.create_manager(manager_params)
+          else
+            nil
+          end
 
     if res[:saved]
       @user = res[:user]
       render status: :created
-    else²
+    else
       render json: res[:user].errors.full_messages, status: :unprocessable_entity
     end
   end
@@ -39,5 +47,15 @@ class API::UsersController < API::ApiController
 
   def partner_params
     params.require(:user).permit(:email, :first_name, :last_name)
+  end
+
+  def manager_params
+    params.require(:manager).permit(
+      :username, :email, :group_id,
+      tag_ids: [],
+      profile_attributes: %i[first_name last_name phone],
+      invoicing_profile_attributes: [address_attributes: [:address]],
+      statistic_profile_attributes: %i[gender birthday]
+    )
   end
 end

@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
+# Devise controller used for the "forgotten password" feature
 class PasswordsController < Devise::PasswordsController
-  # POST /resource/password
+  # POST /users/password.json
   def create
     self.resource = resource_class.send_reset_password_instructions(resource_params)
     yield resource if block_given?

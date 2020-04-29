@@ -97,6 +97,22 @@ class User < ApplicationRecord
     User.with_role(:member)
   end
 
+  def self.partners
+    User.with_role(:partner)
+  end
+
+  def self.managers
+    User.with_role(:manager)
+  end
+
+  def self.admins_and_managers
+    User.with_any_role(:admin, :manager)
+  end
+
+  def self.online_payers
+    User.with_any_role(:manager, :member)
+  end
+
   def self.superadmin
     return unless Rails.application.secrets.superadmin_email.present?
 
@@ -104,7 +120,7 @@ class User < ApplicationRecord
   end
 
   def training_machine?(machine)
-    return true if admin?
+    return true if admin? || manager?
 
     trainings.map(&:machines).flatten.uniq.include?(machine)
   end
@@ -129,6 +145,24 @@ class User < ApplicationRecord
 
   def member?
     has_role? :member
+  end
+
+  def manager?
+    has_role? :manager
+  end
+
+  def partner?
+    has_role? :partner
+  end
+
+  def role
+    if admin?
+      'admin'
+    elsif manager?
+      'manager'
+    else
+      'other'
+    end
   end
 
   def all_projects
@@ -285,7 +319,7 @@ class User < ApplicationRecord
 
   protected
 
-  # remove projets drafts that are not linked to another user
+  # remove projects drafts that are not linked to another user
   def remove_orphan_drafts
     orphans = my_projects
               .joins('LEFT JOIN project_users ON projects.id = project_users.project_id')
@@ -332,19 +366,19 @@ class User < ApplicationRecord
                               attached_object: self
     else
       NotificationCenter.call type: 'notify_admin_when_user_is_created',
-                              receiver: User.admins,
+                              receiver: User.admins_and_managers,
                               attached_object: self
     end
   end
 
   def notify_group_changed
-    return if changes[:group_id].first.nil?
+    return unless changes[:group_id]&.first
 
     ex_group = Group.find(changes[:group_id].first)
     meta_data = { ex_group_name: ex_group.name }
 
     NotificationCenter.call type: :notify_admin_user_group_changed,
-                            receiver: User.admins,
+                            receiver: User.admins_and_managers,
                             attached_object: self,
                             meta_data: meta_data
 

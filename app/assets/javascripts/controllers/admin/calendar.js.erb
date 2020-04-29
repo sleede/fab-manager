@@ -18,8 +18,8 @@
  * Controller used in the calendar management page
  */
 
-Application.Controllers.controller('AdminCalendarController', ['$scope', '$state', '$uibModal', 'moment', 'Availability', 'Slot', 'Setting', 'Export', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', 'machinesPromise', 'plansPromise', 'groupsPromise', '_t', 'uiCalendarConfig', 'CalendarConfig', 'Member', 'uiTourService',
-  function ($scope, $state, $uibModal, moment, Availability, Slot, Setting, Export, growl, dialogs, bookingWindowStart, bookingWindowEnd, machinesPromise, plansPromise, groupsPromise, _t, uiCalendarConfig, CalendarConfig, Member, uiTourService) {
+Application.Controllers.controller('AdminCalendarController', ['$scope', '$state', '$uibModal', 'moment', 'AuthService', 'Availability', 'Slot', 'Setting', 'Export', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', 'machinesPromise', 'plansPromise', 'groupsPromise', '_t', 'uiCalendarConfig', 'CalendarConfig', 'Member', 'uiTourService',
+  function ($scope, $state, $uibModal, moment, AuthService, Availability, Slot, Setting, Export, growl, dialogs, bookingWindowStart, bookingWindowEnd, machinesPromise, plansPromise, groupsPromise, _t, uiCalendarConfig, CalendarConfig, Member, uiTourService) {
     /* PRIVATE STATIC CONSTANTS */
 
     // The calendar is divided in slots of 30 minutes
@@ -313,14 +313,16 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
         placement: 'right',
         popupClass: 'width-350'
       });
-      uitour.createStep({
-        selector: '.admin-calendar .export-xls-button',
-        stepId: 'export',
-        order: 2,
-        title: _t('app.admin.tour.calendar.export.title'),
-        content: _t('app.admin.tour.calendar.export.content'),
-        placement: 'left'
-      });
+      if (AuthService.isAuthorized('admin')) {
+        uitour.createStep({
+          selector: '.admin-calendar .export-xls-button',
+          stepId: 'export',
+          order: 2,
+          title: _t('app.admin.tour.calendar.export.title'),
+          content: _t('app.admin.tour.calendar.export.content'),
+          placement: 'left'
+        });
+      }
       uitour.createStep({
         selector: '.heading .import-ics-button',
         stepId: 'import',

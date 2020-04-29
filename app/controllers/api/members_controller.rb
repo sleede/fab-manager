@@ -38,7 +38,7 @@ class API::MembersController < API::ApiController
   end
 
   def create
-    authorize User
+    authorize :user, :create_member?
 
     @member = User.new(user_params.permit!)
     members_service = Members::MembersService.new(@member)
@@ -222,7 +222,7 @@ class API::MembersController < API::ApiController
                                    ],
                                    statistic_profile_attributes: %i[id gender birthday])
 
-    elsif current_user.admin?
+    elsif current_user.admin? || current_user.manager?
       params.require(:user).permit(:username, :email, :password, :password_confirmation, :is_allow_contact, :is_allow_newsletter, :group_id,
                                    tag_ids: [],
                                    profile_attributes: [:id, :first_name, :last_name, :phone, :interest, :software_mastered, :website, :job,

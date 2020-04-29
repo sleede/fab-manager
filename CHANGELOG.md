@@ -2,13 +2,22 @@
 
 - Interface to manage partners
 - Ability to define, per availability, a custom duration for the reservation slots
+- Corrected the documentation about BOOK_SLOT_AT_SAME_TIME
+- Fix a bug: unable to change group if the previous was deactivated
+- Fix a bug: unable to create events or trainings that are not multiples of SLOT_DURATION
+- Fix a bug: unable to delete an unreserved event
+- Fix a bug: "Free entry" label for events without reservation
+- Fix a bug: updating a setting without any changes triggers an error
+- Fix a bug: plan edition does not show the associated group
+- Fix a bug: subscription page shows the groups without any active plans
+- Fix a bug: cart price inconsistently updated after a subscription
 
 ## v4.3.4 2020 April 14
 
 - Improved version check
 - Improved setup script for installations without nginx
 - Changed some default values for new installations
-- Compatible database with Fab-manager v1, to allow upgrades
+- Database is now compatible with Fab-manager v1, to allow upgrades
 - Updated documentation
 - Changed In-Context pseudo-language to Zulu instead of Acholi
 - Allow removing contacts from the about page
@@ -28,7 +37,7 @@
 ## v4.3.3 2020 April 1st
 
 - Docker build will no longer embed development dependencies
-- Updated instructions to setup a development environment
+- Updated instructions to set up a development environment
 - Updated translations
 - Removed `MESSAGEFORMAT_LOCALE` as it is now handled by make-plural
 - Updated rails framework to v5.2
@@ -64,7 +73,7 @@
 ## v4.3.1 2020 March 04
 
 - Updated user's manual for v4.3 (fr)
-- Display user's manual when help is asked, if no tour is available
+- Display user's manual when asking for help, if no tour is available
 - Change style and pluralize the text of the slot division alert in new availability assistant
 - Fix a bug: in feature tours, next and previous arrows may be broken on some systems
 - Fix a bug: in the user's menu, two links to the personal wallet

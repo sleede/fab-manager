@@ -1,0 +1,157 @@
+<div class="row m-t">
+  <div class="col-sm-offset-3 col-sm-6">
+    <div class="form-group" ng-class="{'has-error': managerForm['manager[statistic_profile_attributes][gender]'].$dirty && managerForm['manager[statistic_profile_attributes][gender]'].$invalid}">
+      <label class="checkbox-inline btn btn-default">
+        <input type="radio"
+               name="manager[statistic_profile_attributes][gender]"
+               ng-model="manager.statistic_profile_attributes.gender"
+               ng-value="true"
+               required/>
+          <i class="fa fa-male m-l-sm"></i> {{ 'app.admin.manager_new.man' | translate }}
+      </label>
+      <label class="checkbox-inline btn btn-default">
+        <input type="radio"
+               name="manager[statistic_profile_attributes][gender]"
+               ng-model="manager.statistic_profile_attributes.gender"
+               ng-value="false"/>
+          <i class="fa fa-female m-l-sm"></i> {{ 'app.admin.manager_new.woman' | translate }}
+      </label>
+      <span class="exponent m-l-xs help-cursor"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': managerForm['manager[username]'].$dirty && managerForm['manager[username]'].$invalid}">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-user"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
+        <input ng-model="manager.username"
+               type="text" name="manager[username]"
+               class="form-control"
+               id="user_username"
+               placeholder="{{ 'app.admin.manager_new.pseudonym' | translate }}"
+               required>
+      </div>
+      <span class="help-block" ng-show="managerForm['manager[username]'].$dirty && managerForm['manager[username]'].$error.required" translate>{{ 'app.admin.manager_new.pseudonym_is_required' }}</span>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': managerForm['manager[profile_attributes][last_name]'].$dirty && managerForm['manager[profile_attributes][last_name]'].$invalid}">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-user"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
+        <input ng-model="manager.profile_attributes.last_name"
+               type="text"
+               name="manager[profile_attributes][last_name]"
+               class="form-control"
+               id="user_last_name"
+               placeholder="{{ 'app.admin.manager_new.surname' | translate }}"
+               required>
+      </div>
+      <span class="help-block" ng-show="managerForm['manager[profile_attributes][last_name]'].$dirty && managerForm['manager[profile_attributes][last_name]'].$error.required" translate>{{ 'app.admin.manager_new.surname_is_required' }}</span>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': managerForm['manager[profile_attributes][first_name]'].$dirty && managerForm['manager[profile_attributes][first_name]'].$invalid}">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-user"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
+        <input ng-model="manager.profile_attributes.first_name"
+               type="text"
+               name="manager[profile_attributes][first_name]"
+               class="form-control"
+               id="user_first_name"
+               placeholder="{{ 'app.admin.manager_new.first_name' | translate }}"
+               required>
+      </div>
+      <span class="help-block" ng-show="managerForm['manager[profile_attributes][first_name]'].$dirty && managerForm['manager[profile_attributes][first_name]'].$error.required" translate>{{ 'app.admin.manager_new.first_name_is_required' }}</span>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': managerForm['manager[email]'].$dirty && managerForm['manager[email]'].$invalid}">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-envelope"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
+        <input ng-model="manager.email"
+               type="email"
+               name="manager[email]"
+               class="form-control"
+               id="user_email"
+               placeholder="{{ 'app.admin.manager_new.email_address' | translate }}"
+               required>
+      </div>
+      <span class="help-block" ng-show="managerForm['manager[email]'].$dirty && managerForm['manager[email]'].$error.required" translate>{{ 'app.admin.manager_new.email_is_required' }}</span>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': managerForm['manager[statistic_profile_attributes][birthday]'].$dirty && managerForm['manager[statistic_profile_attributes][birthday]'].$invalid}">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-calendar-o"></i> </span>
+        <input type="text"
+               id="user_birthday"
+               class="form-control"
+               ng-model="manager.statistic_profile_attributes.birthday"
+               uib-datepicker-popup="{{datePicker.format}}"
+               datepicker-options="datePicker.options"
+               is-open="datePicker.opened"
+               placeholder="{{ 'app.admin.manager_new.birth_date' | translate }}"
+               ng-click="openDatePicker($event)"
+               />
+        <input type="hidden"
+               name="manager[statistic_profile_attributes][birthday]"
+               value="{{manager.statistic_profile_attributes.birthday | toIsoDate}}" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-map-marker"></i> </span>
+        <input type="hidden"
+               name="manager[invoicing_profile_attributes][address_attributes][id]"
+               ng-value="manager.invoicing_profile_attributes.address.id" />
+        <input ng-model="manager.invoicing_profile_attributes.address_attributes.address"
+               type="text"
+               name="manager[invoicing_profile_attributes][address_attributes][address]"
+               class="form-control"
+               id="user_address"
+               placeholder="{{ 'app.admin.manager_new.address' | translate }}">
+      </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': managerForm['manager[profile_attributes][phone]'].$dirty && managerForm['manager[profile_attributes][phone]'].$invalid}">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-phone"></i> </span>
+        <input ng-model="manager.profile_attributes.phone"
+               type="text"
+               name="manager[profile_attributes][phone]"
+               class="form-control" id="user_phone"
+               placeholder="{{ 'app.admin.manager_new.phone_number' | translate }}">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="form-group" ng-class="{'has-error': managerForm['manager[group_id]'].$dirty && managerForm['manager[group_id]'].$invalid}">
+    <label for="manager_group_id" class="col-sm-3 control-label">
+      <span translate>{{ 'app.shared.user_admin.group' }}</span>
+      <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+    </label>
+    <div class="col-sm-6">
+      <select ng-model="manager.group_id" class="form-control" name="manager[group_id]" id="manager_group_id"
+              ng-options="g.id as g.name for g in groups" required>
+      </select>
+      <input type="hidden" name="manager[group_id]" ng-value="manager.group_id" />
+      <span class="help-block" ng-show="managerForm['manager[group_id]'].$dirty && managerForm['manager[group_id]'].$error.required" translate>{{ 'app.shared.user_admin.group_is_required' }}</span>
+    </div>
+  </div>
+</div>
+
+<div>
+  <div class="form-group">
+    <label class="col-sm-3 control-label" translate>{{ 'app.shared.user_admin.tags' }}</label>
+    <div class="col-sm-6 nopadding">
+      <input type="hidden" name="manager[tag_ids][]" value="" />
+      <ui-select multiple ng-model="manager.tag_ids" name="user[tag_ids][]" class="form-control">
+        <ui-select-match>
+          <span ng-bind="$item.name"></span>
+          <input type="hidden" name="manager[tag_ids][]" value="{{$item.id}}" />
+        </ui-select-match>
+        <ui-select-choices repeat="t.id as t in (tags | filter: $select.search)">
+          <span ng-bind-html="t.name | highlight: $select.search"></span>
+        </ui-select-choices>
+      </ui-select>
+    </div>
+  </div>
+
+</div>

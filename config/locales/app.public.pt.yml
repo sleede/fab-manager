@@ -148,7 +148,7 @@ pt:
         on_the_date: "Em {DATE}"
         from_time_to_time: "Das {START} até {END}"
         without_reservation: "Sem reservas"
-        free_admission: "Admissão grátis"
+        free_admission: "Entrada grátis"
         full_price: "Valor inteira: "
         event_full: "Evento lotado"
         still_available: "Locais disponíveis: "

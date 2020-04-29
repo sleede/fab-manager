@@ -126,8 +126,8 @@ class MembersController {
 /**
  * Controller used in the members/groups management page
  */
-Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', '$uibModal', 'membersPromise', 'adminsPromise', 'partnersPromise', 'managersPromise', 'growl', 'Admin', 'dialogs', '_t', 'Member', 'Export', 'User', 'uiTourService',
-  function ($scope, $sce, $uibModal, membersPromise, adminsPromise, partnersPromise, managersPromise, growl, Admin, dialogs, _t, Member, Export, User, uiTourService) {
+Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', '$uibModal', 'membersPromise', 'adminsPromise', 'partnersPromise', 'managersPromise', 'growl', 'Admin', 'AuthService', 'dialogs', '_t', 'Member', 'Export', 'User', 'uiTourService',
+  function ($scope, $sce, $uibModal, membersPromise, adminsPromise, partnersPromise, managersPromise, growl, Admin, AuthService, dialogs, _t, Member, Export, User, uiTourService) {
   /* PRIVATE STATIC CONSTANTS */
 
     // number of users loaded each time we click on 'load more...'
@@ -214,6 +214,18 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
         return $scope.orderPartner = `-${orderPartner}`;
       } else {
         return $scope.orderPartner = orderPartner;
+      }
+    };
+
+    /**
+     * Change the managers ordering criterion to the one provided
+     * @param orderManager {string} ordering criterion
+     */
+    $scope.setOrderManager = function (orderManager) {
+      if ($scope.orderManager === orderManager) {
+        return $scope.orderManager = `-${orderManager}`;
+      } else {
+        return $scope.orderManager = orderManager;
       }
     };
 
@@ -344,6 +356,36 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
     }
 
     /**
+     * Ask for confirmation then delete the specified manager
+     * @param managers {Array} full list of managers
+     * @param manager {Object} manager to delete
+     */
+    $scope.destroyManager = function (managers, manager) {
+      dialogs.confirm(
+        {
+          resolve: {
+            object () {
+              return {
+                title: _t('app.admin.members.confirmation_required'),
+                msg: $sce.trustAsHtml(_t('app.admin.members.delete_this_manager') + '<br/><br/>' + _t('app.admin.members.this_may_take_a_while_please_wait'))
+              };
+            }
+          }
+        },
+        function () { // cancel confirmed
+          User.delete(
+            { id: manager.id },
+            function () {
+              managers.splice(findItemIdxById(managers, manager.id), 1);
+              return growl.success(_t('app.admin.members.manager_successfully_deleted'));
+            },
+            function (error) { growl.error(_t('app.admin.members.unable_to_delete_the_manager')); }
+          );
+        }
+      );
+    }
+
+    /**
      * Callback for the 'load more' button.
      * Will load the next results of the current search, if any
      */
@@ -434,22 +476,24 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
           placement: 'left'
         });
       }
-      uitour.createStep({
-        selector: '.members-management .exports-buttons',
-        stepId: 'exports',
-        order: 5,
-        title: _t('app.admin.tour.members.exports.title'),
-        content: _t('app.admin.tour.members.exports.content'),
-        placement: 'bottom'
-      });
-      uitour.createStep({
-        selector: '.heading .import-members',
-        stepId: 'import',
-        order: 6,
-        title: _t('app.admin.tour.members.import.title'),
-        content: _t('app.admin.tour.members.import.content'),
-        placement: 'left'
-      });
+      if (AuthService.isAuthorized('admin')) {
+        uitour.createStep({
+          selector: '.members-management .exports-buttons',
+          stepId: 'exports',
+          order: 5,
+          title: _t('app.admin.tour.members.exports.title'),
+          content: _t('app.admin.tour.members.exports.content'),
+          placement: 'bottom'
+        });
+        uitour.createStep({
+          selector: '.heading .import-members',
+          stepId: 'import',
+          order: 6,
+          title: _t('app.admin.tour.members.import.title'),
+          content: _t('app.admin.tour.members.import.content'),
+          placement: 'left'
+        });
+      }
       uitour.createStep({
         selector: '.members-management .admins-tab',
         stepId: 'admins',
@@ -458,31 +502,33 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
         content: _t('app.admin.tour.members.admins.content'),
         placement: 'bottom'
       });
-      uitour.createStep({
-        selector: '.members-management .groups-tab',
-        stepId: 'groups',
-        order: 8,
-        title: _t('app.admin.tour.members.groups.title'),
-        content: _t('app.admin.tour.members.groups.content'),
-        placement: 'bottom'
-      });
-      uitour.createStep({
-        selector: '.members-management .labels-tab',
-        stepId: 'labels',
-        order: 9,
-        title: _t('app.admin.tour.members.labels.title'),
-        content: _t('app.admin.tour.members.labels.content'),
-        placement: 'bottom'
-      });
-      uitour.createStep({
-        selector: '.members-management .sso-tab',
-        stepId: 'sso',
-        order: 10,
-        title: _t('app.admin.tour.members.sso.title'),
-        content: _t('app.admin.tour.members.sso.content'),
-        placement: 'bottom',
-        popupClass: 'shift-left-50'
-      });
+      if (AuthService.isAuthorized('admin')) {
+        uitour.createStep({
+          selector: '.members-management .groups-tab',
+          stepId: 'groups',
+          order: 8,
+          title: _t('app.admin.tour.members.groups.title'),
+          content: _t('app.admin.tour.members.groups.content'),
+          placement: 'bottom'
+        });
+        uitour.createStep({
+          selector: '.members-management .labels-tab',
+          stepId: 'labels',
+          order: 9,
+          title: _t('app.admin.tour.members.labels.title'),
+          content: _t('app.admin.tour.members.labels.content'),
+          placement: 'bottom'
+        });
+        uitour.createStep({
+          selector: '.members-management .sso-tab',
+          stepId: 'sso',
+          order: 10,
+          title: _t('app.admin.tour.members.sso.title'),
+          content: _t('app.admin.tour.members.sso.content'),
+          placement: 'bottom',
+          popupClass: 'shift-left-50'
+        });
+      }
       uitour.createStep({
         selector: 'body',
         stepId: 'conclusion',
@@ -1022,6 +1068,75 @@ Application.Controllers.controller('NewAdminController', ['$state', '$scope', 'A
    * @return {string} 'male' or 'female'
    */
   return getGender = function (user) {
+    if (user.statistic_profile_attributes) {
+      if (user.statistic_profile_attributes.gender) { return 'male'; } else { return 'female'; }
+    } else { return 'other'; }
+  };
+}
+
+]);
+
+/**
+ * Controller used in the manager's creation page (admin view)
+ */
+Application.Controllers.controller('NewManagerController', ['$state', '$scope', 'User', 'groupsPromise', 'tagsPromise', 'growl', '_t',
+  function ($state, $scope, User, groupsPromise, tagsPromise, growl, _t) {
+  // default admin profile
+  $scope.manager = {
+    statistic_profile_attributes: {
+      gender: true
+    },
+    profile_attributes: {},
+    invoicing_profile_attributes: {}
+  };
+
+  // Default parameters for AngularUI-Bootstrap datepicker
+  $scope.datePicker = {
+    format: Fablab.uibDateFormat,
+    opened: false,
+    options: {
+      startingDay: Fablab.weekStartingDay
+    }
+  };
+
+  // list of all groups
+  $scope.groups = groupsPromise.filter(function (g) { return (g.slug !== 'admins') && !g.disabled; });
+
+  // list of all tags
+  $scope.tags = tagsPromise;
+
+  /**
+   * Shows the birth day datepicker
+   * @param $event {Object} jQuery event object
+   */
+  $scope.openDatePicker = function ($event) { $scope.datePicker.opened = true; };
+
+  /**
+   * Send the new manager, currently stored in $scope.manager, to the server for database saving
+   */
+  $scope.saveManager = function () {
+    User.save(
+      {},
+      { manager: $scope.manager },
+      function () {
+        growl.success(_t('app.admin.manager_new.manager_successfully_created', { GENDER: getGender($scope.manager) }));
+        return $state.go('app.admin.members');
+      }
+      , function (error) {
+        growl.error(_t('app.admin.admins_new.failed_to_create_manager') + JSON.stringify(error.data ? error.data : error));
+        console.error(error);
+      }
+    );
+  };
+
+  /* PRIVATE SCOPE */
+
+  /**
+   * Return an enumerable meaningful string for the gender of the provider user
+   * @param user {Object} Database user record
+   * @return {string} 'male' or 'female'
+   */
+  const getGender = function (user) {
     if (user.statistic_profile_attributes) {
       if (user.statistic_profile_attributes.gender) { return 'male'; } else { return 'female'; }
     } else { return 'other'; }

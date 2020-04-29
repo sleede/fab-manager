@@ -80,7 +80,7 @@ class API::AvailabilitiesController < API::ApiController
   end
 
   def machine
-    @current_user_role = current_user.admin? ? 'admin' : 'user'
+    @current_user_role = current_user.role
 
     service = Availabilities::AvailabilitiesService.new(current_user, other: @visi_max_other, year: @visi_max_year)
     @slots = service.machines(params[:machine_id], user)
@@ -92,7 +92,7 @@ class API::AvailabilitiesController < API::ApiController
   end
 
   def spaces
-    @current_user_role = current_user.admin? ? 'admin' : 'user'
+    @current_user_role = current_user.role
 
     service = Availabilities::AvailabilitiesService.new(current_user, other: @visi_max_other, year: @visi_max_year)
     @slots = service.spaces(params[:space_id], user)

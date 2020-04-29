@@ -51,7 +51,7 @@
 	<td style="vertical-align:middle">
 	  <span class="ng-binding" ng-if="event.nb_total_places > 0">{{ event.nb_total_places - event.nb_free_places }} / {{ event.nb_total_places }}</span>
 	  <span class="badge font-sbold cancelled" ng-if="event.nb_total_places == -1" translate>{{ 'app.admin.events.cancelled' }}</span>
-      <span class="badge font-sbold" ng-if="!event.nb_total_places" translate>{{ 'app.admin.events.free_entry' }}</span>
+      <span class="badge font-sbold" ng-if="!event.nb_total_places" translate>{{ 'app.admin.events.without_reservation' }}</span>
 	</td>
 
     <td style="vertical-align:middle">

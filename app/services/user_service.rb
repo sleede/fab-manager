@@ -50,4 +50,19 @@ class UserService
     end
     { saved: saved, user: admin }
   end
+
+  def self.create_manager(params)
+    generated_password = Devise.friendly_token.first(8)
+    manager = User.new(params.merge(password: generated_password))
+    manager.send :set_slug
+
+    saved = manager.save
+    if saved
+      manager.send_confirmation_instructions
+      manager.add_role(:manager)
+      manager.remove_role(:member)
+      UsersMailer.delay.notify_user_account_created(manager, generated_password)
+    end
+    { saved: saved, user: manager }
+  end
 end

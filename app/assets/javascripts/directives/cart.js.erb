@@ -10,8 +10,8 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs', 'growl', 'Auth', 'Price', 'Wallet', 'CustomAsset', 'Slot', 'helpers', '_t', '$uibModal',
-  function ($rootScope, $uibModal, dialogs, growl, Auth, Price, Wallet, CustomAsset, Slot, helpers, _t, $uibModal) {
+Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs', 'growl', 'Auth', 'Price', 'Wallet', 'CustomAsset', 'Slot', 'AuthService', 'helpers', '_t',
+  function ($rootScope, $uibModal, dialogs, growl, Auth, Price, Wallet, CustomAsset, Slot, AuthService, helpers, _t) {
     return ({
       restrict: 'E',
       scope: {
@@ -167,7 +167,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
         // first, we check that a user was selected
           if (Object.keys($scope.user).length > 0) {
 
-            // check user was selected a plan if slot is restricted for subscriptions
+            // check selected user has a subscription, if any slot is restricted for subscriptions
             const slotValidations = [];
             let slotNotValid;
             let slotNotValidError;
@@ -195,7 +195,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
             });
             const hasPlanForSlot = slotValidations.every(function (a) { return a; });
             if (!hasPlanForSlot) {
-              if (!$scope.isAdmin()) {
+              if (!AuthService.isAuthorized(['admin', 'manager'])) {
                 return growl.error(_t('app.shared.cart.slot_restrict_subscriptions_must_select_plan'));
               } else {
                 const modalInstance = $uibModal.open({
@@ -216,7 +216,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
               return paySlots();
             }
           } else {
-          // otherwise we alert, this error musn't occur when the current user is not admin
+          // otherwise we alert, this error musn't occur when the current user is not admin or manager
             return growl.error(_t('app.shared.cart.please_select_a_member_first'));
           }
         };
@@ -285,12 +285,6 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
           return false;
         };
 
-        /**
-         * Check if the currently logged user has teh 'admin' role?
-         * @returns {boolean}
-         */
-        $scope.isAdmin = function () { return $rootScope.currentUser && ($rootScope.currentUser.role === 'admin'); };
-
         /* PRIVATE SCOPE */
 
         /**
@@ -325,11 +319,13 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
         /**
          * Callback triggered when the selected slot changed
          */
-        var slotSelectionChanged = function () {
+        const slotSelectionChanged = function () {
           if ($scope.slot) {
-            // build a list of plans if this slot is restricted for subscriptions
+            // if this slot is restricted for subscribers...
             if ($scope.slot.plan_ids.length > 0) {
+              // ... we select all the plans matching these restrictions...
               const _plans = _.filter($scope.plans, function (p) { return _.include($scope.slot.plan_ids, p.id) });
+              // ... and we group these plans, by Group...
               $scope.slot.plansGrouped = [];
               $scope.slot.group_ids = [];
               for (let group of Array.from($scope.groups)) {
@@ -338,7 +334,9 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
                   if (plan.group_id === group.id) { groupObj.plans.push(plan); }
                 }
                 if (groupObj.plans.length > 0) {
-                  if ($scope.isAdmin()) {
+                  // ... Finally, we only keep the plans matching the group of the current user
+                  // OR all plans if the current user is admin or manager
+                  if (AuthService.isAuthorized(['admin', 'manager'])) {
                     $scope.slot.plansGrouped.push(groupObj);
                   } else if ($scope.user.group_id === groupObj.id) {
                     $scope.slot.plansGrouped.push(groupObj);
@@ -398,7 +396,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
                 }
               }
               , function (type) {
-              // the user has choosen an action, so we proceed
+              // the user has chosen an action, so we proceed
                 if (type === 'move') {
                   if (typeof $scope.onSlotStartToModify === 'function') { $scope.onSlotStartToModify(); }
                   return $scope.events.modifiable = $scope.slot;
@@ -433,7 +431,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
         /**
          * Reset the parameters that may lead to a wrong price but leave the content (events added to cart)
          */
-        var resetCartState = function () {
+        const resetCartState = function () {
           $scope.selectedPlan = null;
           $scope.coupon.applied = null;
           $scope.events.moved = null;
@@ -446,8 +444,8 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
          * Determines if the provided booked slot is able to be modified by the user.
          * @param slot {Object} fullCalendar event object
          */
-        var slotCanBeModified = function (slot) {
-          if ($scope.isAdmin()) { return true; }
+        const slotCanBeModified = function (slot) {
+          if (AuthService.isAuthorized(['admin', 'manager'])) { return true; }
           const slotStart = moment(slot.start);
           const now = moment();
           return (slot.can_modify && $scope.enableBookingMove && (slotStart.diff(now, 'hours') >= $scope.moveBookingDelay));
@@ -457,8 +455,8 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
          * Determines if the provided booked slot is able to be canceled by the user.
          * @param slot {Object} fullCalendar event object
          */
-        var slotCanBeCanceled = function (slot) {
-          if ($scope.isAdmin()) { return true; }
+        const slotCanBeCanceled = function (slot) {
+          if (AuthService.isAuthorized(['admin', 'manager'])) { return true; }
           const slotStart = moment(slot.start);
           const now = moment();
           return (slot.can_modify && $scope.enableBookingCancel && (slotStart.diff(now, 'hours') >= $scope.cancelBookingDelay));
@@ -467,7 +465,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
         /**
          * Callback triggered when the selected slot changed
          */
-        var planSelectionChanged = function () {
+        const planSelectionChanged = function () {
           if (Auth.isAuthenticated()) {
             if ($scope.selectedPlan !== $scope.plan) {
               $scope.selectedPlan = $scope.plan;
@@ -486,7 +484,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
         /**
          * Update the total price of the current selection/reservation
          */
-        var updateCartPrice = function () {
+        const updateCartPrice = function () {
           if (Object.keys($scope.user).length > 0) {
             const r = mkReservation($scope.user, $scope.events.reserved, $scope.selectedPlan);
             return Price.compute(mkRequestParams(r, $scope.coupon.applied), function (res) {
@@ -501,7 +499,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
           }
         };
 
-        var setSlotsDetails = function (details) {
+        const setSlotsDetails = function (details) {
           angular.forEach($scope.events.reserved, function (slot) {
             angular.forEach(details.slots, function (s) {
               if (moment(s.start_at).isSame(slot.start)) {
@@ -518,7 +516,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
          * @param coupon {Object} Coupon as returned from the API
          * @return {{reservation:Object, coupon_code:string}}
          */
-        var mkRequestParams = function (reservation, coupon) {
+        const mkRequestParams = function (reservation, coupon) {
           return {
             reservation,
             coupon_code: ((coupon ? coupon.code : undefined))
@@ -532,7 +530,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
          * @param [plan] {Object} Plan as retrieved from the API: plan to buy with the current reservation
          * @return {{user_id:Number, reservable_id:Number, reservable_type:String, slots_attributes:Array<Object>, plan_id:Number|null}}
          */
-        var mkReservation = function (member, slots, plan) {
+        const mkReservation = function (member, slots, plan) {
           const reservation = {
             user_id: member.id,
             reservable_id: $scope.reservableId,
@@ -555,7 +553,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
         /**
          * Open a modal window that allows the user to process a credit card payment for his current shopping cart.
          */
-        var payByStripe = function (reservation) {
+        const payByStripe = function (reservation) {
           $uibModal.open({
             templateUrl: '<%= asset_path "stripe/payment_modal.html" %>',
             size: 'md',
@@ -612,7 +610,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
         /**
          * Open a modal window that allows the user to process a local payment for his current shopping cart (admin only).
          */
-        var payOnSite = function (reservation) {
+        const payOnSite = function (reservation) {
           $uibModal.open({
             templateUrl: '<%= asset_path "shared/valid_reservation_modal.html" %>',
             size: 'sm',
@@ -681,7 +679,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
         /**
          * Actions to run after the payment was successful
          */
-        var afterPayment = function (reservation) {
+        const afterPayment = function (reservation) {
           // we set the cart content as 'paid' to display a summary of the transaction
           $scope.events.paid = $scope.events.reserved;
           $scope.amountPaid = $scope.amountTotal;
@@ -697,19 +695,22 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
         /**
          * Actions to pay slots
          */
-        var paySlots = function() {
+        const paySlots = function() {
           const reservation = mkReservation($scope.user, $scope.events.reserved, $scope.selectedPlan);
 
           return Wallet.getWalletByUser({ user_id: $scope.user.id }, function (wallet) {
             const amountToPay = helpers.getAmountToPay($scope.amountTotal, wallet.amount);
-            if (!$scope.isAdmin() && (amountToPay > 0)) {
+            if ((AuthService.isAuthorized(['member']) && amountToPay > 0)
+              || (AuthService.isAuthorized('manager') && $scope.user.id === $rootScope.currentUser.id && amountToPay > 0)) {
               if ($rootScope.fablabWithoutOnlinePayment) {
                 growl.error(_t('app.shared.cart.online_payment_disabled'));
               } else {
                 return payByStripe(reservation);
               }
             } else {
-              if ($scope.isAdmin() || (amountToPay === 0)) {
+              if (AuthService.isAuthorized(['admin'])
+                || (AuthService.isAuthorized('manager') && $scope.user.id !== $rootScope.currentUser.id)
+                || amountToPay === 0) {
                 return payOnSite(reservation);
               }
             }
@@ -726,10 +727,11 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
 /**
  * Controller of modal for show reservations the same date at the same time
  */
-Application.Controllers.controller('ReserveSlotSameTimeController', ['$scope', '$uibModalInstance', 'sameTimeReservations', 'growl', '_t',
-  function ($scope, $uibModalInstance, sameTimeReservations, growl, _t) {
+Application.Controllers.controller('ReserveSlotSameTimeController', ['$scope', '$uibModalInstance', 'AuthService', 'sameTimeReservations', 'growl', '_t',
+  function ($scope, $uibModalInstance, AuthService, sameTimeReservations, growl, _t) {
     $scope.sameTimeReservations = sameTimeReservations;
     $scope.bookSlotAtSameTime = Fablab.bookSlotAtSameTime;
+    $scope.isAuthorized = AuthService.isAuthorized;
     /**
      * Confirmation callback
      */

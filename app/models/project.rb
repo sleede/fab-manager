@@ -144,7 +144,7 @@ class Project < ApplicationRecord
 
   def notify_admin_when_project_published
     NotificationCenter.call type: 'notify_admin_when_project_published',
-                            receiver: User.admins,
+                            receiver: User.admins_and_managers,
                             attached_object: self
   end
 

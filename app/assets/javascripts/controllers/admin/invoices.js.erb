@@ -17,8 +17,8 @@
 /**
  * Controller used in the admin invoices listing page
  */
-Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'Invoice', 'AccountingPeriod', 'invoices', 'closedPeriods', '$uibModal', 'growl', '$filter', 'Setting', 'settings', '_t', 'Member', 'uiTourService',
-  function ($scope, $state, Invoice, AccountingPeriod, invoices, closedPeriods, $uibModal, growl, $filter, Setting, settings, _t, Member, uiTourService) {
+Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'Invoice', 'AccountingPeriod', 'AuthService', 'invoices', 'closedPeriods', '$uibModal', 'growl', '$filter', 'Setting', 'settings', '_t', 'Member', 'uiTourService',
+  function ($scope, $state, Invoice, AccountingPeriod, AuthService, invoices, closedPeriods, $uibModal, growl, $filter, Setting, settings, _t, Member, uiTourService) {
   /* PRIVATE STATIC CONSTANTS */
 
     // number of invoices loaded each time we click on 'load more...'
@@ -291,8 +291,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           growl.success(_t('app.admin.invoices.invoice_reference_successfully_saved'));
         }
         , function (error) {
-          growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_invoice_reference'));
-          console.error(error);
+            if (error.status === 304) return;
+
+            growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_invoice_reference'));
+            console.error(error);
         });
       });
     };
@@ -330,8 +332,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           }
         }
         , function (error) {
-          growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_invoicing_code'));
-          return console.error(error);
+            if (error.status === 304) return;
+
+            growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_invoicing_code'));
+            console.error(error);
         });
 
         return Setting.update({ name: 'invoice_code-active' }, { value: result.active ? 'true' : 'false' }, function (data) {
@@ -343,8 +347,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           }
         }
         , function (error) {
-          growl.error(_t('app.admin.invoices.an_error_occurred_while_activating_the_invoicing_code'));
-          return console.error(error);
+            if (error.status === 304) return;
+
+            growl.error(_t('app.admin.invoices.an_error_occurred_while_activating_the_invoicing_code'));
+            console.error(error);
         });
       });
     };
@@ -375,8 +381,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           return growl.success(_t('app.admin.invoices.order_number_successfully_saved'));
         }
         , function (error) {
-          growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_order_number'));
-          return console.error(error);
+            if (error.status === 304) return;
+
+            growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_order_number'));
+            console.error(error);
         });
       });
     };
@@ -434,8 +442,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           }
         }
         , function (error) {
-          growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_VAT_rate'));
-          return console.error(error);
+            if (error.status === 304) return;
+
+            growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_VAT_rate'));
+            console.error(error);
         });
 
         return Setting.update({ name: 'invoice_VAT-active' }, { value: result.active ? 'true' : 'false' }, function (data) {
@@ -447,8 +457,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           }
         }
         , function (error) {
-          growl.error(_t('app.admin.invoices.an_error_occurred_while_activating_the_VAT'));
-          return console.error(error);
+            if (error.status === 304) return;
+
+            growl.error(_t('app.admin.invoices.an_error_occurred_while_activating_the_VAT'));
+            console.error(error);
         });
       });
     };
@@ -463,8 +475,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         return growl.success(_t('app.admin.invoices.text_successfully_saved'));
       }
       , function (error) {
-        growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_text'));
-        return console.error(error);
+          if (error.status === 304) return;
+
+          growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_text'));
+          console.error(error);
       });
     };
 
@@ -478,8 +492,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         return growl.success(_t('app.admin.invoices.address_and_legal_information_successfully_saved'));
       }
       , function (error) {
-        growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_address_and_the_legal_information'));
-        return console.error(error);
+          if (error.status === 304) return;
+
+          growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_address_and_the_legal_information'));
+          console.error(error);
       });
     };
 
@@ -566,15 +582,27 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     $scope.setupInvoicesTour = function () {
       // get the tour defined by the ui-tour directive
       const uitour = uiTourService.getTourByName('invoices');
-      uitour.createStep({
-        selector: 'body',
-        stepId: 'welcome',
-        order: 0,
-        title: _t('app.admin.tour.invoices.welcome.title'),
-        content: _t('app.admin.tour.invoices.welcome.content'),
-        placement: 'bottom',
-        orphan: true
-      });
+      if (AuthService.isAuthorized('admin')) {
+        uitour.createStep({
+          selector: 'body',
+          stepId: 'welcome',
+          order: 0,
+          title: _t('app.admin.tour.invoices.welcome.title'),
+          content: _t('app.admin.tour.invoices.welcome.content'),
+          placement: 'bottom',
+          orphan: true
+        });
+      } else {
+        uitour.createStep({
+          selector: 'body',
+          stepId: 'welcome_manager',
+          order: 0,
+          title: _t('app.admin.tour.invoices.welcome_manager.title'),
+          content: _t('app.admin.tour.invoices.welcome_manager.content'),
+          placement: 'bottom',
+          orphan: true
+        });
+      }
       if (!Fablab.withoutInvoices && $scope.invoices.length > 0) {
         uitour.createStep({
           selector: '.invoices-management .invoices-list',
@@ -609,39 +637,41 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           placement: 'left'
         });
       }
-      uitour.createStep({
-        selector: '.invoices-management .invoices-settings',
-        stepId: 'settings',
-        order: 5,
-        title: _t('app.admin.tour.invoices.settings.title'),
-        content: _t('app.admin.tour.invoices.settings.content'),
-        placement: 'bottom'
-      });
-      uitour.createStep({
-        selector: '.invoices-management .accounting-codes-tab',
-        stepId: 'codes',
-        order: 6,
-        title: _t('app.admin.tour.invoices.codes.title'),
-        content: _t('app.admin.tour.invoices.codes.content'),
-        placement: 'bottom'
-      });
-      uitour.createStep({
-        selector: '.heading .export-accounting-button',
-        stepId: 'export',
-        order: 7,
-        title: _t('app.admin.tour.invoices.export.title'),
-        content: _t('app.admin.tour.invoices.export.content'),
-        placement: 'bottom'
-      });
-      uitour.createStep({
-        selector: '.heading .close-accounting-periods-button',
-        stepId: 'periods',
-        order: 8,
-        title: _t('app.admin.tour.invoices.periods.title'),
-        content: _t('app.admin.tour.invoices.periods.content'),
-        placement: 'bottom',
-        popupClass: 'shift-left-50'
-      });
+      if (AuthService.isAuthorized('admin')) {
+        uitour.createStep({
+          selector: '.invoices-management .invoices-settings',
+          stepId: 'settings',
+          order: 5,
+          title: _t('app.admin.tour.invoices.settings.title'),
+          content: _t('app.admin.tour.invoices.settings.content'),
+          placement: 'bottom'
+        });
+        uitour.createStep({
+          selector: '.invoices-management .accounting-codes-tab',
+          stepId: 'codes',
+          order: 6,
+          title: _t('app.admin.tour.invoices.codes.title'),
+          content: _t('app.admin.tour.invoices.codes.content'),
+          placement: 'bottom'
+        });
+        uitour.createStep({
+          selector: '.heading .export-accounting-button',
+          stepId: 'export',
+          order: 7,
+          title: _t('app.admin.tour.invoices.export.title'),
+          content: _t('app.admin.tour.invoices.export.content'),
+          placement: 'bottom'
+        });
+        uitour.createStep({
+          selector: '.heading .close-accounting-periods-button',
+          stepId: 'periods',
+          order: 8,
+          title: _t('app.admin.tour.invoices.periods.title'),
+          content: _t('app.admin.tour.invoices.periods.content'),
+          placement: 'bottom',
+          popupClass: 'shift-left-50'
+        });
+      }
       uitour.createStep({
         selector: 'body',
         stepId: 'conclusion',
@@ -710,8 +740,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
             { value: $scope.invoice.logo.base64 },
             function (data) { growl.success(_t('app.admin.invoices.logo_successfully_saved')); },
             function (error) {
+              if (error.status === 304) return;
+
               growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_logo'));
-              return console.error(error);
+              console.error(error);
             }
           );
         }

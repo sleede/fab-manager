@@ -76,8 +76,13 @@
                   <p>
                     {{ 'app.admin.members_edit.price_' | translate }} {{ subscription.plan.amount | currency}}
                   </p>
-                  <button class="btn btn-default" ng-click="updateSubscriptionModal(subscription, true)" translate>{{ 'app.admin.members_edit.offer_free_days' }}</button>
-                  <button class="btn btn-default" ng-click="updateSubscriptionModal(subscription, false)" translate>{{ 'app.admin.members_edit.extend_subscription' }}</button>
+                  <div ng-hide="user.id === currentUser.id">
+                    <button class="btn btn-default" ng-click="updateSubscriptionModal(subscription, true)" translate>{{ 'app.admin.members_edit.offer_free_days' }}</button>
+                    <button class="btn btn-default" ng-click="updateSubscriptionModal(subscription, false)" translate>{{ 'app.admin.members_edit.extend_subscription' }}</button>
+                  </div>
+                  <p class="alert alert-info" ng-show="user.id === currentUser.id" translate>
+                    {{ 'app.admin.members_edit.cannot_extend_own_subscription' }}
+                  </p>
                 </div>
 
 
@@ -229,9 +234,12 @@
             <ng-include src="'<%= asset_path "wallet/show.html" %>'"></ng-include>
 
             <div class="clearfix"></div>
-            <div class="col-sm-4 text-center">
+            <div class="col-sm-4 text-center" ng-hide="user.id === currentUser.id">
               <button type="button" class="btn btn-warning m-t m-b" ng-click="createWalletCreditModal(user, wallet)" translate>{{ 'app.admin.members_edit.to_credit' }}</button>
             </div>
+            <p class="col-sm-4 alert alert-info" ng-show="user.id === currentUser.id" translate>
+              {{ 'app.admin.members_edit.cannot_credit_own_wallet' }}
+            </p>
 
           </div>
 

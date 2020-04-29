@@ -16,13 +16,13 @@ json.array!(@slots) do |slot|
     json.id slot.space.id
     json.name slot.space.name
   end
-  # the user who booked the slot ...
-  if (@current_user_role == 'admin') && slot.reservation
+  # the user who booked the slot, if the slot was reserved
+  if (%w[admin manager].include? @current_user_role) && slot.reservation
     json.user do
       json.id slot.reservation.user.id
       json.name slot.reservation.user.profile.full_name
     end
-  end # ... if the slot was reserved
+  end
   json.tag_ids slot.availability.tag_ids
   json.tags slot.availability.tags do |t|
     json.id t.id

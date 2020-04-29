@@ -40,7 +40,7 @@ class Slot < ApplicationRecord
                             receiver: reservation.user,
                             attached_object: self
     NotificationCenter.call type: 'notify_admin_slot_is_modified',
-                            receiver: User.admins,
+                            receiver: User.admins_and_managers,
                             attached_object: self
   end
 
@@ -49,7 +49,7 @@ class Slot < ApplicationRecord
                             receiver: reservation.user,
                             attached_object: self
     NotificationCenter.call type: 'notify_admin_slot_is_canceled',
-                            receiver: User.admins,
+                            receiver: User.admins_and_managers,
                             attached_object: self
   end
 

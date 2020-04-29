@@ -306,7 +306,7 @@ class Reservation < ApplicationRecord
 
   def notify_admin_member_create_reservation
     NotificationCenter.call type: 'notify_admin_member_create_reservation',
-                            receiver: User.admins,
+                            receiver: User.admins_and_managers,
                             attached_object: self
   end
 

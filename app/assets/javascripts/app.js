@@ -64,8 +64,6 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
       $translateProvider.useMessageFormatInterpolation();
       // Set the language of the instance (from ruby configuration)
       $translateProvider.preferredLanguage(Fablab.locale);
-      // In any cases, fallback to english
-      $translateProvider.fallbackLanguage('en');
       // End the tour when the user clicks the forward or back buttons of the browser
       TourConfigProvider.enableNavigationInterceptors();
     }]).run(['$rootScope', '$log', 'AuthService', 'Auth', 'amMoment', '$state', 'editableOptions', 'Analytics',

@@ -3,8 +3,8 @@
   <h1 translate>{{ 'app.shared.confirm_modify_slot_modal.change_the_slot' }}</h1>
 </div>
 <div class="modal-body">
-  <p ng-show="currentUser.role != 'admin'" translate>{{ 'app.shared.confirm_modify_slot_modal.do_you_want_to_change_your_booking_slot_initially_planned_at' }} </p>
-  <p ng-show="currentUser.role == 'admin'" translate translate-values="{NAME: object.user.name}">{{ 'app.shared.confirm_modify_slot_modal.do_you_want_to_change_NAME_s_booking_slot_initially_planned_at' }}</p>
+  <p ng-show="currentUser.id === object.user.id" translate>{{ 'app.shared.confirm_modify_slot_modal.do_you_want_to_change_your_booking_slot_initially_planned_at' }} </p>
+  <p ng-show="currentUser.id !== object.user.id" translate translate-values="{NAME: object.user.name}">{{ 'app.shared.confirm_modify_slot_modal.do_you_want_to_change_NAME_s_booking_slot_initially_planned_at' }}</p>
   <p><strong>{{object.start | amDateFormat: 'LL'}} : {{object.start | amDateFormat:'LT'}} - {{object.end | amDateFormat:'LT'}}</strong></p>
 </div>
 <div class="modal-footer">
