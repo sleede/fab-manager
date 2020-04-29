@@ -242,8 +242,8 @@ fr:
         your_subscription_expires_on_the_DATE: "Votre abonnement expire au {DATE}"
         my_group: "Mon groupe"
         his_group: "Son groupe"
-        he_wants_to_change_group: "{ROLE, select, admin{L'utilisateur veut} other{Je veux}} changer de groupe"
-        change_my_group: "Changer {ROLE, select, admin{son} other{mon}} groupe"
+        he_wants_to_change_group: "{ROLE, select, member{Je veux} other{L'utilisateur veut}} changer de groupe"
+        change_my_group: "Changer {ROLE, select, member{mon} other{{GENDER, select, other{son}}}} groupe"
         summary: "Résumé"
         your_subscription_has_expired_on_the_DATE: "Votre abonnement a expiré au {DATE}"
         subscription_price: "Coût de l'abonnement"
@@ -424,13 +424,25 @@ fr:
           welcome:
             title: "Machines"
             content: "<p>Les machines sont les outils que vous mettez à disposition de vos utilisateurs. Vous devez créer ici les machines qui pourront ensuite être réservées par les membres.</p><p>Vous pouvez également créer des entrées pour des machines non réservables ou en libre accès, il vous suffira ensuite de ne pas associer de créneaux de disponibilités à celles-ci.</p>"
+          welcome_manager:
+            title: "Machines"
+            content: "Les machines sont les outils disponibles pour être réservés par les utilisateurs."
           view:
             title: "Consulter"
             content: "Pour modifier ou supprimer une machine, cliquez tout d'abord ici. Vous ne pourrez pas supprimer une machine qui a déjà été associée à des créneaux de disponibilité, mais vous pourrez la désactiver."
+          reserve:
+            title: "Réserver"
+            content: "Cliquez ici pour accéder à un agenda montrant les créneaux libres. Cela vous permettra de réserver cette machine pour un utilisateur et de gérer les réservations existantes."
         spaces:
           welcome:
             title: "Espaces"
             content: "<p>Les espaces sont des lieux que vous mettez à disposition de vos utilisateurs. Par exemple, une salle de réunion ou un atelier bois. Vous devez créer ici les espaces qui pourront ensuite être réservées par les membres.</p><p>La spécificité des espaces est qu'ils peuvent être réservés par plusieurs utilisateurs en même temps.</p>"
+          welcome_manager:
+            title: "Espaces"
+            content: "<p>Les espaces sont des lieux à disposition des utilisateurs, sur réservation. Par exemple, une salle de réunion ou un atelier bois.</p><p>La spécificité des espaces est qu'ils peuvent être réservés par plusieurs utilisateurs en même temps.</p>"
           view:
             title: "Consulter"
             content: "Pour modifier ou supprimer un espace, cliquez tout d'abord ici. Vous ne pourrez pas supprimer un espace qui a déjà été associée à des créneaux de disponibilité, mais vous pourrez le désactiver."
+          reserve:
+            title: "Réserver"
+            content: "Cliquez ici pour accéder à un agenda montrant les créneaux libres. Cela vous permettra de réserver cet espace pour un utilisateur et de gérer les réservations existantes."

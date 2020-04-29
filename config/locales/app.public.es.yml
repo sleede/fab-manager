@@ -29,6 +29,7 @@ es:
         #left menu
         notifications: "Notificaciones"
         admin: "Administrador"
+        manager: "Manager"
         reduce_panel: "Reducir panel"
         #left menu (public)
         home: "Menú principal"
@@ -241,8 +242,8 @@ es:
         your_subscription_expires_on_the_DATE: "Su suscripción termina {DATE}"
         my_group: "My grupo"
         his_group: "{GENDER, select, male{His} female{Her} other{Its}} group"
-        he_wants_to_change_group: "{ROLE, select, admin{The user wants} other{I want}} cambiar el grupo"
-        change_my_group: "Cambiar {ROLE, select, admin{{GENDER, select, male{his} female{her} other{its}}} other{my}} grupo"
+        he_wants_to_change_group: "{ROLE, select, member{Quiero} other{El usuario quiere}} cambiar el grupo"
+        change_my_group: "Cambiar {ROLE, select, member{mi} other{{GENDER, select, other{su}}}} grupo"
         summary: "Summary"
         your_subscription_has_expired_on_the_DATE: "Sus suscripcion expiró el {DATE}"
         subscription_price: "Subscription price"
@@ -387,8 +388,8 @@ es:
             title: "Subscriptions"
             content: "Subscriptions provide a way to segment your prices and provide benefits to regular users."
           admin:
-            title: "Administrator section"
-            content: "<p>All of the elements below are only accessible to administrators. They allow you to manage and configure Fab-manager.</p><p>At the end of this visit, click on one of them to find out more.</p>"
+            title: "{ROLE} section"
+            content: "<p>All of the elements below are only accessible to administrators and managers. They allow you to manage and configure Fab-manager.</p><p>At the end of this visit, click on one of them to find out more.</p>"
           about:
             title: "About"
             content: "A page that you can fully customize, to present your activity and your structure."
@@ -423,13 +424,25 @@ es:
           welcome:
             title: "Machines"
             content: "<p>Machines are the tools available for your users. You must create here the machines which can then be reserved by the members.</p><p>You can also create entries for non-bookable or free access machines, then you just need to not associate availability slots with them.</p>"
+          welcome_manager:
+            title: "Machines"
+            content: "Machines are the tools available for the users to reserve."
           view:
             title: "View"
             content: "To modify or delete a machine, click here first. You will not be able to delete a machine that has already been associated with availability slots, but you can deactivate it."
+          reserve:
+            title: "Reserve"
+            content: "Click here to access an agenda showing free slots. This will let you book this machine for an user and manage existing reservations."
         spaces:
           welcome:
             title: "Spaces"
             content: "<p>Spaces are places available for your users. For example, a meeting room or a woodshop. You must create here the spaces which can then be reserved by members.</p><p>The specificity of the spaces is that they can be reserved by several users at the same time.</p>"
+          welcome_manager:
+            title: "Spaces"
+            content: "<p>Spaces are places available to users, by reservation. For example, a meeting room or a woodshop.</p><p>The specificity of the spaces is that they can be reserved by several users at the same time.</p>"
           view:
             title: "View"
             content: "To modify or delete a space, click here first. You will not be able to delete a space that has already been associated with availability slots, but you can deactivate it."
+          reserve:
+            title: "Reserve"
+            content: "Click here to access an agenda showing free slots. This will let you book this space for an user and manage existing reservations."

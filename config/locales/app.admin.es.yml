@@ -604,15 +604,21 @@ es:
         administrators: "Administradores"
         search_for_an_administrator: "Buscar un administrador"
         add_a_new_administrator: "Agregar un nuevo administrador"
+        managers: "Managers"
+        managers_info: "A manager is a restricted administrator that cannot modify the settings of the application. However, he will be able to take reservations for any members and for all managers, including himself, and to process payments and refunds."
+        search_for_a_manager: "Search for a manager"
+        add_a_new_manager: "Add a new manager"
+        delete_this_manager: "Do you really want to delete this manager? This cannot be undone."
+        manager_successfully_deleted: "Manager successfully deleted."
+        unable_to_delete_the_manager: "Unable to delete the manager."
         partners: "Partners"
-        partners_info: "A partner is a special user that can be associated with the «Partner» plans. These users will only receive notifications about subscriptions to these plans."
+        partners_info: "A partner is a special user that can be associated with the «Partner» plans. These users won't be able to connect and will just receive notifications about subscriptions to their associated plan."
         search_for_a_partner: "Search for a partner"
         add_a_new_partner: "Add a new partner"
         delete_this_partner: "Do you really want to delete this partner? This cannot be undone."
         partner_successfully_deleted: "Partner successfully deleted."
         unable_to_delete_the_partner: "Unable to delete the partner."
         associated_plan: "Associated plan"
-        managers: "Managers"
         groups: "Grupos"
         tags: "Tags"
         authentication: "Autenticación"
@@ -757,11 +763,31 @@ es:
         a_problem_occurred_while_taking_the_subscription: "Se ha producido un problema al realizar la suscripción."
         wallet: "Wallet"
         to_credit: 'Credit'
+        cannot_credit_own_wallet: "You cannot credit your own wallet. Please ask another manager or an administrator to credit your wallet."
+        cannot_extend_own_subscription: "You cannot extend your own subscription. Please ask another manager or an administrator to extend your subscription."
       #add a new administrator to the platform
       admins_new:
         add_an_administrator: "Agregar un administrador"
         administrator_successfully_created_he_will_receive_his_connection_directives_by_email: "administrador creado correctamente. {GENDER, select, female{She} other{He}} receive {GENDER, select, female{her} other{his}} directivas de conexión por e-mail."
         failed_to_create_admin: "No se puede crear el administrador :"
+        man: "Man"
+        woman: "Woman"
+        pseudonym: "Pseudonym"
+        pseudonym_is_required: "Pseudonym is required."
+        first_name: "First name"
+        first_name_is_required: "First name is required."
+        surname: "Last name"
+        surname_is_required: "Last name is required."
+        email_address: "Email address"
+        email_is_required: "Email address is required."
+        birth_date: "Date of birth"
+        address: "Address"
+        phone_number: "Phone number"
+      #add a new manager to the platform
+      manager_new:
+        add_a_manager: "Add a manager"
+        manager_successfully_created: "Manager successfully created. {GENDER, select, female{She} other{He}} receive {GENDER, select, female{her} other{his}} connection directives by e-mail."
+        failed_to_create_manager: "Unable to create the manager:"
         man: "Man"
         woman: "Woman"
         pseudonym: "Pseudonym"
@@ -987,6 +1013,7 @@ es:
         advanced: "Advanced settings"
         customize_home_page_css: "Customise the stylesheet og the home page"
         home_css_notice_html: "You can customize the stylesheet which will apply to the home page, using the <a href=\"https://sass-lang.com/documentation\" target=\"_blank\">SASS</a> syntax. These styles will be automatically subordinated to the <code>.home-page</code> selector to prevent any risk of breaking the application. Meanwhile please be careful, any changes in the home page editor at the top of the page may broke your styles, always refer to the HTML code."
+        an_error_occurred_saving_the_setting: "An error occurred while saving the setting. Please try again later."
         sort_by:
           default: "Defecto"
           name: "Nombre"
@@ -1064,9 +1091,12 @@ es:
           welcome:
             title: "Trainings"
             content: "Here you can create, modify and delete trainings. It is also the place where you can validate the training courses followed by your members."
+          welcome_manager:
+            title: "Trainings"
+            content: "This is the place where you can view the trainings and their associations with the machines. It is also the place where you can validate the training courses followed by your members."
           trainings:
             title: "Manage trainings"
-            content: "<p>When creating a training, you can define a default number of places. However, the number of actual places may be modified for each session.</p><p>The training sessions are scheduled from the administrator tab « Calendar ».</p><p>Another thing: it is possible to associate one or more machines with a training. This makes it a prerequisite for the reservation of these machines.</p>"
+            content: "<p>With each training, a default number of places is associated. However, the number of actual places may be modified for each session.</p><p>The training sessions are scheduled from the administrator tab « Calendar ».</p><p>Furthermore, a training may be associated with one or more machines. This makes it a prerequisite for the reservation of these machines.</p>"
           filter:
             title: "Filter"
             content: "By default, only active courses are displayed here. Display the others by choosing another filter here."
@@ -1124,6 +1154,9 @@ es:
           welcome:
             title: "Invoices"
             content: "<p>Here you will be able to download invoices and credit notes issued, as well as manage everything related to accounting and invoicing.</p><p>If you use third-party software to manage your invoices, it is possible to deactivate the billing module. For this, contact your system administrator.</p>"
+          welcome_manager:
+            title: "Invoices"
+            content: "Here you will be able to download invoices and create credit notes."
           list:
             title: "Invoices list"
             content: "By default, this table lists all the invoices and credit notes issued by Fab-manager. You can sort the list in a different order by clicking on the header of each column."

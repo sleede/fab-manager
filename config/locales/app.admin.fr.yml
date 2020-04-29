@@ -19,7 +19,7 @@ fr:
         availabilities: "Disponibilités"
         availabilities_notice: "Exporter dans un classeur Excel tous les créneaux ouverts à la réservation et leurs taux d'occupation."
         ongoing_reservations: "Réservations en cours"
-        no_reservations: "Aucune réservation"
+        without_reservation: "Sans réservation"
         confirmation_required: "Confirmation requise"
         do_you_really_want_to_cancel_the_USER_s_reservation_the_DATE_at_TIME_concerning_RESERVATION: "Êtes-vous {GENDER, select, female{sûre} other{sûr}} de vouloir annuler la réservation de {USER}, le {DATE} à {TIME}, concernant {RESERVATION} ?"
         reservation_was_successfully_cancelled: "La réservation a bien été annulée."
@@ -604,15 +604,21 @@ fr:
         administrators: "Administrateurs"
         search_for_an_administrator: "Recherchez un administrateur"
         add_a_new_administrator: "Ajouter un nouvel administrateur"
+        managers: "Gestionnaires"
+        managers_info: "Un gestionnaire est un administrateur restreint qui ne peut pas modifier les paramètres de l'application. Cependant, il pourra effectuer des réservations pour l'ensemble des membres et pour tous les gestionnaires, y compris lui-même, et traiter les paiements et les remboursements."
+        search_for_a_manager: "Rechercher un gestionnaire"
+        add_a_new_manager: "Ajouter un nouveau gestionnaire"
+        delete_this_manager: "Êtes-vous sûr de vouloir supprimer ce gestionnaire ? Cette opération est irréversible."
+        manager_successfully_deleted: "Le gestionnaire a bien été supprimé."
+        unable_to_delete_the_manager: "Le gestionnaire n'a pas pu être supprimé."
         partners: "Partenaires"
-        partners_info: "Un partenaire est un utilisateur spécial qui peut être associé à une formule d'abonnement de type «Partenaire». Ces utilisateurs ne feront que recevoir des notifications, à propos des souscriptions à ces abonnements."
+        partners_info: "Un partenaire est un utilisateur spécial qui peut être associé à une formule d'abonnement de type «Partenaire». Ces utilisateurs ne pourront pas se connecter et ne feront que recevoir des notifications, à propos des souscriptions à la formule d'abonnement à laquelle ils sont associés."
         search_for_a_partner: "Rechercher un partenaire"
         add_a_new_partner: "Ajouter un partenaire"
         delete_this_partner: "Voulez-vous vraiment supprimer ce partenaire ? Cette opération est irréversible."
         partner_successfully_deleted: "Le partenaire a bien été supprimé."
         unable_to_delete_the_partner: "Impossible de supprimer le partenaire."
         associated_plan: "Abonnement associé"
-        managers: "Gestionnaires"
         groups: "Groupes"
         tags: "Étiquettes"
         authentication: "Authentification"
@@ -757,11 +763,31 @@ fr:
         a_problem_occurred_while_taking_the_subscription: "Il y a eu un problème lors de la souscription à l'abonnement"
         wallet: "Porte-monnaie"
         to_credit: 'Créditer'
+        cannot_credit_own_wallet: "Vous ne pouvez pas créditer votre propre porte-monnaie. Veuillez demander à un autre gestionnaire ou à un administrateur de créditer votre porte-monnaie."
+        cannot_extend_own_subscription: "Vous ne pouvez pas prolonger votre propre abonnement. Veuillez demander à un autre gestionnaire ou à un administrateur de prolonger votre abonnement."
       #add a new administrator to the platform
       admins_new:
         add_an_administrator: "Ajouter un administrateur"
         administrator_successfully_created_he_will_receive_his_connection_directives_by_email: "L'administrateur a bien été créé. {GENDER, select, female{Elle} other{Il}} recevra ses instructions de connexion par email."
         failed_to_create_admin: "Impossible de créer l'administrateur :"
+        man: "Homme"
+        woman: "Femme"
+        pseudonym: "Pseudonyme"
+        pseudonym_is_required: "Le pseudonyme est requis."
+        first_name: "Prénom"
+        first_name_is_required: "Le prénom est requis."
+        surname: "Nom"
+        surname_is_required: "Le nom est requis."
+        email_address: "Adresse de courriel"
+        email_is_required: "L'adresse de courriel est requise."
+        birth_date: "Date de naissance"
+        address: "Adresse"
+        phone_number: "Numéro de téléphone"
+      #add a new manager to the platform
+      manager_new:
+        add_a_manager: "Ajouter un gestionnaire"
+        manager_successfully_created: "Le gestionnaire a bien été créé. {GENDER, select, female{Elle} other{Il}} recevra ses instructions de connexion par courriel."
+        failed_to_create_manager: "Impossible de créer le gestionnaire :"
         man: "Homme"
         woman: "Femme"
         pseudonym: "Pseudonyme"
@@ -987,6 +1013,7 @@ fr:
         advanced: "Paramètres avancés"
         customize_home_page_css: "Personnaliser la feuille de style de la page d'accueil"
         home_css_notice_html: "Vous pouvez personnaliser la feuille de style qui s'appliquera à la page d'accueil en utilisant la syntaxe <a href=\"https://sass-lang.com/documentation\" target=\"_blank\">SASS</a>. Ces styles seront automatiquement subordonnées au sélecteur <code>.home-page</code> pour prévenir tout risque de casse de l'application. Attention toutefois, les modifications de la page d'accueil dans l'éditeur en haut de page peuvent rendre caduque vos styles, référez vous toujours au code HTML."
+        an_error_occurred_saving_the_setting: "Une erreur est survenue pendant l'enregistrement du paramètre. Veuillez réessayer plus tard."
         sort_by:
           default: "Défaut"
           name: "Nom"
@@ -1064,9 +1091,12 @@ fr:
           welcome:
             title: "Formations"
             content: "Ici vous pourrez créer, modifier et supprimer des formations. C'est également l'endroit où vous pourrez valider les formations suivies par vos membres."
+          welcome_manager:
+            title: "Formations"
+            content: "C'est ici que vous pouvez voir les formations et les machines avec lesquelles elles sont associées. C'est également l'endroit où vous pouvez valider les formation suivies par vos membres."
           trainings:
             title: "Gérer les formations"
-            content: "<p>Lors de la création d'une formation, vous pouvez définir un nombre de places par défaut. Néanmoins, le nombre de places effectives pourra être modifié pour chaque session.</p><p>La programmation des sessions de formation se fait depuis l'onglet administrateur « Agenda ».</p><p>D'autre part, il est possible d'associer une ou plusieurs machines à une formation. Cela permet d'en faire un pré-requis pour la réservation de ces machines.</p>"
+            content: "<p>À chaque formation, un nombre de places par défaut est associé. Néanmoins, le nombre de places effectives pourra être modifié pour chaque session.</p><p>La programmation des sessions de formation se fait depuis l'onglet administrateur « Agenda ».</p><p>De plus, une formation peut être associée à une ou plusieurs machines. Cela permet d'en faire un pré-requis pour la réservation de ces machines.</p>"
           filter:
             title: "Filtre"
             content: "Par défaut, seules les formations actives sont affichées ici. Affichez les autres en choisissant un autre filtre ici."
@@ -1124,6 +1154,9 @@ fr:
           welcome:
             title: "Factures"
             content: "<p>Ici, vous pourrez télécharger les factures et les avoirs émis, ainsi que gérer tout ce qui a trait à la comptabilité et à la facturation.</p><p>Si vous utilisez un logiciel tiers pour gérer vos factures, il est possible de désactiver le module de facturation. Pour cela, contactez votre administrateur système.</p>"
+          welcome_manager:
+            title: "Factures"
+            content: "Ici vous pourrez télécharger des factures et créer des avoirs."
           list:
             title: "Liste des factures"
             content: "Par défaut, ce tableau liste l'ensemble des factures et avoirs émis via Fab-manager. Vous pouvez trier la liste dans un ordre différent en cliquant sur l'entête de chaque colonne."

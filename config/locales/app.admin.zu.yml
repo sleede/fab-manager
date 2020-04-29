@@ -19,7 +19,7 @@ zu:
         availabilities: "crwdns6717:0crwdne6717:0"
         availabilities_notice: "crwdns6719:0crwdne6719:0"
         ongoing_reservations: "crwdns6721:0crwdne6721:0"
-        no_reservations: "crwdns6723:0crwdne6723:0"
+        without_reservation: "crwdns20326:0crwdne20326:0"
         confirmation_required: "crwdns6725:0crwdne6725:0"
         do_you_really_want_to_cancel_the_USER_s_reservation_the_DATE_at_TIME_concerning_RESERVATION: "crwdns20296:0GENDER={GENDER}crwdnd20296:0USER={USER}crwdnd20296:0DATE={DATE}crwdnd20296:0TIME={TIME}crwdnd20296:0RESERVATION={RESERVATION}crwdne20296:0"
         reservation_was_successfully_cancelled: "crwdns6729:0crwdne6729:0"
@@ -193,7 +193,7 @@ zu:
         booking: "crwdns7009:0crwdne7009:0"
         sold_out: "crwdns7011:0crwdne7011:0"
         cancelled: "crwdns7013:0crwdne7013:0"
-        without_reservation: "crwdns7015:0crwdne7015:0"
+        without_reservation: "crwdns20328:0crwdne20328:0"
         free_admission: "crwdns7017:0crwdne7017:0"
         view_reservations: "crwdns7019:0crwdne7019:0"
         load_the_next_events: "crwdns7021:0crwdne7021:0"
@@ -604,15 +604,21 @@ zu:
         administrators: "crwdns7761:0crwdne7761:0"
         search_for_an_administrator: "crwdns7763:0crwdne7763:0"
         add_a_new_administrator: "crwdns7765:0crwdne7765:0"
+        managers: "crwdns20324:0crwdne20324:0"
+        managers_info: "crwdns20330:0crwdne20330:0"
+        search_for_a_manager: "crwdns20332:0crwdne20332:0"
+        add_a_new_manager: "crwdns20334:0crwdne20334:0"
+        delete_this_manager: "crwdns20336:0crwdne20336:0"
+        manager_successfully_deleted: "crwdns20338:0crwdne20338:0"
+        unable_to_delete_the_manager: "crwdns20340:0crwdne20340:0"
         partners: "crwdns20308:0crwdne20308:0"
-        partners_info: "crwdns20310:0crwdne20310:0"
+        partners_info: "crwdns20342:0crwdne20342:0"
         search_for_a_partner: "crwdns20312:0crwdne20312:0"
         add_a_new_partner: "crwdns20314:0crwdne20314:0"
         delete_this_partner: "crwdns20316:0crwdne20316:0"
         partner_successfully_deleted: "crwdns20318:0crwdne20318:0"
         unable_to_delete_the_partner: "crwdns20320:0crwdne20320:0"
         associated_plan: "crwdns20322:0crwdne20322:0"
-        managers: "crwdns20324:0crwdne20324:0"
         groups: "crwdns7767:0crwdne7767:0"
         tags: "crwdns7769:0crwdne7769:0"
         authentication: "crwdns7771:0crwdne7771:0"
@@ -757,6 +763,8 @@ zu:
         a_problem_occurred_while_taking_the_subscription: "crwdns8021:0crwdne8021:0"
         wallet: "crwdns8023:0crwdne8023:0"
         to_credit: 'crwdns8025:0crwdne8025:0'
+        cannot_credit_own_wallet: "crwdns20344:0crwdne20344:0"
+        cannot_extend_own_subscription: "crwdns20346:0crwdne20346:0"
       #add a new administrator to the platform
       admins_new:
         add_an_administrator: "crwdns8027:0crwdne8027:0"
@@ -775,6 +783,24 @@ zu:
         birth_date: "crwdns8053:0crwdne8053:0"
         address: "crwdns8055:0crwdne8055:0"
         phone_number: "crwdns8057:0crwdne8057:0"
+      #add a new manager to the platform
+      manager_new:
+        add_a_manager: "crwdns20348:0crwdne20348:0"
+        manager_successfully_created: "crwdns20350:0GENDER={GENDER}crwdnd20350:0GENDER={GENDER}crwdne20350:0"
+        failed_to_create_manager: "crwdns20352:0crwdne20352:0"
+        man: "crwdns20354:0crwdne20354:0"
+        woman: "crwdns20356:0crwdne20356:0"
+        pseudonym: "crwdns20358:0crwdne20358:0"
+        pseudonym_is_required: "crwdns20360:0crwdne20360:0"
+        first_name: "crwdns20362:0crwdne20362:0"
+        first_name_is_required: "crwdns20364:0crwdne20364:0"
+        surname: "crwdns20366:0crwdne20366:0"
+        surname_is_required: "crwdns20368:0crwdne20368:0"
+        email_address: "crwdns20370:0crwdne20370:0"
+        email_is_required: "crwdns20372:0crwdne20372:0"
+        birth_date: "crwdns20374:0crwdne20374:0"
+        address: "crwdns20376:0crwdne20376:0"
+        phone_number: "crwdns20378:0crwdne20378:0"
       #add a new authentication provider (SSO)
       authentication_new:
         local_database: "crwdns8059:0crwdne8059:0"
@@ -987,6 +1013,7 @@ zu:
         advanced: "crwdns19864:0crwdne19864:0"
         customize_home_page_css: "crwdns19866:0crwdne19866:0"
         home_css_notice_html: "crwdns19868:0crwdne19868:0"
+        an_error_occurred_saving_the_setting: "crwdns20380:0crwdne20380:0"
         sort_by:
           default: "crwdns8417:0crwdne8417:0"
           name: "crwdns8419:0crwdne8419:0"
@@ -1064,9 +1091,12 @@ zu:
           welcome:
             title: "crwdns19902:0crwdne19902:0"
             content: "crwdns19904:0crwdne19904:0"
+          welcome_manager:
+            title: "crwdns20382:0crwdne20382:0"
+            content: "crwdns20384:0crwdne20384:0"
           trainings:
             title: "crwdns19906:0crwdne19906:0"
-            content: "crwdns20218:0crwdne20218:0"
+            content: "crwdns20386:0crwdne20386:0"
           filter:
             title: "crwdns19910:0crwdne19910:0"
             content: "crwdns19912:0crwdne19912:0"
@@ -1124,6 +1154,9 @@ zu:
           welcome:
             title: "crwdns19978:0crwdne19978:0"
             content: "crwdns19980:0crwdne19980:0"
+          welcome_manager:
+            title: "crwdns20388:0crwdne20388:0"
+            content: "crwdns20390:0crwdne20390:0"
           list:
             title: "crwdns19982:0crwdne19982:0"
             content: "crwdns19984:0crwdne19984:0"

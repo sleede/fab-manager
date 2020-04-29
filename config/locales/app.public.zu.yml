@@ -29,6 +29,7 @@ zu:
         #left menu
         notifications: "crwdns8839:0crwdne8839:0"
         admin: "crwdns8841:0crwdne8841:0"
+        manager: "crwdns20392:0crwdne20392:0"
         reduce_panel: "crwdns8843:0crwdne8843:0"
         #left menu (public)
         home: "crwdns8845:0crwdne8845:0"
@@ -146,7 +147,7 @@ zu:
         from_date_to_date: "crwdns9021:0{START}crwdnd9021:0{END}crwdne9021:0"
         on_the_date: "crwdns9023:0{DATE}crwdne9023:0"
         from_time_to_time: "crwdns9025:0{START}crwdnd9025:0{END}crwdne9025:0"
-        without_reservation: "crwdns9027:0crwdne9027:0"
+        without_reservation: "crwdns20394:0crwdne20394:0"
         free_admission: "crwdns9029:0crwdne9029:0"
         full_price: "crwdns20242:0crwdne20242:0"
         event_full: "crwdns9033:0crwdne9033:0"
@@ -241,8 +242,8 @@ zu:
         your_subscription_expires_on_the_DATE: "crwdns9179:0{DATE}crwdne9179:0"
         my_group: "crwdns9181:0crwdne9181:0"
         his_group: "crwdns9183:0GENDER={GENDER}crwdne9183:0"
-        he_wants_to_change_group: "crwdns9185:0ROLE={ROLE}crwdne9185:0"
-        change_my_group: "crwdns9187:0ROLE={ROLE}crwdnd9187:0GENDER={GENDER}crwdne9187:0"
+        he_wants_to_change_group: "crwdns20396:0ROLE={ROLE}crwdne20396:0"
+        change_my_group: "crwdns20398:0ROLE={ROLE}crwdnd20398:0GENDER={GENDER}crwdne20398:0"
         summary: "crwdns9189:0crwdne9189:0"
         your_subscription_has_expired_on_the_DATE: "crwdns9191:0{DATE}crwdne9191:0"
         subscription_price: "crwdns9193:0crwdne9193:0"
@@ -269,7 +270,7 @@ zu:
         cancelled: "crwdns9231:0crwdne9231:0"
         free_admission: "crwdns9233:0crwdne9233:0"
         still_available: "crwdns9235:0crwdne9235:0"
-        without_reservation: "crwdns9237:0crwdne9237:0"
+        without_reservation: "crwdns20400:0crwdne20400:0"
         add_an_event: "crwdns9239:0crwdne9239:0"
         load_the_next_events: "crwdns9241:0crwdne9241:0"
         full_price_: "crwdns9243:0crwdne9243:0"
@@ -290,7 +291,7 @@ zu:
         full_price_: "crwdns9267:0crwdne9267:0"
         tickets_still_availables: "crwdns9269:0crwdne9269:0"
         sold_out: "crwdns9271:0crwdne9271:0"
-        without_reservation: "crwdns9273:0crwdne9273:0"
+        without_reservation: "crwdns20402:0crwdne20402:0"
         cancelled: "crwdns9275:0crwdne9275:0"
         ticket: "crwdns9277:0NUMBER={NUMBER}crwdne9277:0"
         make_a_gift_of_this_reservation: "crwdns9279:0crwdne9279:0"
@@ -387,8 +388,8 @@ zu:
             title: "crwdns19682:0crwdne19682:0"
             content: "crwdns19684:0crwdne19684:0"
           admin:
-            title: "crwdns19686:0crwdne19686:0"
-            content: "crwdns19688:0crwdne19688:0"
+            title: "crwdns20404:0{ROLE}crwdne20404:0"
+            content: "crwdns20406:0crwdne20406:0"
           about:
             title: "crwdns19690:0crwdne19690:0"
             content: "crwdns19692:0crwdne19692:0"
@@ -423,13 +424,25 @@ zu:
           welcome:
             title: "crwdns19730:0crwdne19730:0"
             content: "crwdns19732:0crwdne19732:0"
+          welcome_manager:
+            title: "crwdns20408:0crwdne20408:0"
+            content: "crwdns20410:0crwdne20410:0"
           view:
             title: "crwdns19734:0crwdne19734:0"
             content: "crwdns19736:0crwdne19736:0"
+          reserve:
+            title: "crwdns20412:0crwdne20412:0"
+            content: "crwdns20424:0crwdne20424:0"
         spaces:
           welcome:
             title: "crwdns19738:0crwdne19738:0"
             content: "crwdns19740:0crwdne19740:0"
+          welcome_manager:
+            title: "crwdns20416:0crwdne20416:0"
+            content: "crwdns20426:0crwdne20426:0"
           view:
             title: "crwdns19742:0crwdne19742:0"
             content: "crwdns19744:0crwdne19744:0"
+          reserve:
+            title: "crwdns20420:0crwdne20420:0"
+            content: "crwdns20428:0crwdne20428:0"
