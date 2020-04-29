@@ -19,7 +19,7 @@ fr:
         availabilities: "Disponibilités"
         availabilities_notice: "Exporter dans un classeur Excel tous les créneaux ouverts à la réservation et leurs taux d'occupation."
         ongoing_reservations: "Réservations en cours"
-        no_reservations: "Aucune réservation"
+        without_reservation: "Without reservation"
         confirmation_required: "Confirmation requise"
         do_you_really_want_to_cancel_the_USER_s_reservation_the_DATE_at_TIME_concerning_RESERVATION: "Êtes-vous {GENDER, select, female{sûre} other{sûr}} de vouloir annuler la réservation de {USER}, le {DATE} à {TIME}, concernant {RESERVATION} ?"
         reservation_was_successfully_cancelled: "La réservation a bien été annulée."
@@ -193,7 +193,7 @@ fr:
         booking: "Réservations"
         sold_out: "Complet"
         cancelled: "Annulé"
-        free_entry: "Entrée libre"
+        without_reservation: "Without reservation"
         free_admission: "Entrée gratuite"
         view_reservations: "Consulter les réservations"
         load_the_next_events: "Charger les évènements suivants..."
@@ -604,15 +604,21 @@ fr:
         administrators: "Administrateurs"
         search_for_an_administrator: "Recherchez un administrateur"
         add_a_new_administrator: "Ajouter un nouvel administrateur"
+        managers: "Gestionnaires"
+        managers_info: "A manager is a restricted administrator that cannot modify the settings of the application. However, he will be able to take reservations for any members and for all managers, including himself, and to process payments and refunds."
+        search_for_a_manager: "Search for a manager"
+        add_a_new_manager: "Add a new manager"
+        delete_this_manager: "Do you really want to delete this manager? This cannot be undone."
+        manager_successfully_deleted: "Manager successfully deleted."
+        unable_to_delete_the_manager: "Unable to delete the manager."
         partners: "Partenaires"
-        partners_info: "Un partenaire est un utilisateur spécial qui peut être associé à une formule d'abonnement de type «Partenaire». Ces utilisateurs ne feront que recevoir des notifications, à propos des souscriptions à ces abonnements."
+        partners_info: "A partner is a special user that can be associated with the «Partner» plans. These users won't be able to connect and will just receive notifications about subscriptions to their associated plan."
         search_for_a_partner: "Rechercher un partenaire"
         add_a_new_partner: "Ajouter un partenaire"
         delete_this_partner: "Voulez-vous vraiment supprimer ce partenaire ? Cette opération est irréversible."
         partner_successfully_deleted: "Le partenaire a bien été supprimé."
         unable_to_delete_the_partner: "Impossible de supprimer le partenaire."
         associated_plan: "Abonnement associé"
-        managers: "Gestionnaires"
         groups: "Groupes"
         tags: "Étiquettes"
         authentication: "Authentification"
@@ -757,6 +763,8 @@ fr:
         a_problem_occurred_while_taking_the_subscription: "Il y a eu un problème lors de la souscription à l'abonnement"
         wallet: "Porte-monnaie"
         to_credit: 'Créditer'
+        cannot_credit_own_wallet: "You cannot credit your own wallet. Please ask another manager or an administrator to credit your wallet."
+        cannot_extend_own_subscription: "You cannot extend your own subscription. Please ask another manager or an administrator to extend your subscription."
       #add a new administrator to the platform
       admins_new:
         add_an_administrator: "Ajouter un administrateur"
@@ -775,6 +783,24 @@ fr:
         birth_date: "Date de naissance"
         address: "Adresse"
         phone_number: "Numéro de téléphone"
+      #add a new manager to the platform
+      manager_new:
+        add_a_manager: "Add a manager"
+        manager_successfully_created: "Manager successfully created. {GENDER, select, female{She} other{He}} receive {GENDER, select, female{her} other{his}} connection directives by e-mail."
+        failed_to_create_manager: "Unable to create the manager:"
+        man: "Man"
+        woman: "Woman"
+        pseudonym: "Pseudonym"
+        pseudonym_is_required: "Pseudonym is required."
+        first_name: "First name"
+        first_name_is_required: "First name is required."
+        surname: "Last name"
+        surname_is_required: "Last name is required."
+        email_address: "Email address"
+        email_is_required: "Email address is required."
+        birth_date: "Date of birth"
+        address: "Address"
+        phone_number: "Phone number"
       #add a new authentication provider (SSO)
       authentication_new:
         local_database: "Base de données locale"
@@ -987,6 +1013,7 @@ fr:
         advanced: "Paramètres avancés"
         customize_home_page_css: "Personnaliser la feuille de style de la page d'accueil"
         home_css_notice_html: "Vous pouvez personnaliser la feuille de style qui s'appliquera à la page d'accueil en utilisant la syntaxe <a href=\"https://sass-lang.com/documentation\" target=\"_blank\">SASS</a>. Ces styles seront automatiquement subordonnées au sélecteur <code>.home-page</code> pour prévenir tout risque de casse de l'application. Attention toutefois, les modifications de la page d'accueil dans l'éditeur en haut de page peuvent rendre caduque vos styles, référez vous toujours au code HTML."
+        an_error_occurred_saving_the_setting: "An error occurred while saving the setting. Please try again later."
         sort_by:
           default: "Défaut"
           name: "Nom"
@@ -1064,9 +1091,12 @@ fr:
           welcome:
             title: "Formations"
             content: "Ici vous pourrez créer, modifier et supprimer des formations. C'est également l'endroit où vous pourrez valider les formations suivies par vos membres."
+          welcome_manager:
+            title: "Trainings"
+            content: "This is the place where you can view the trainings and their associations with the machines. It is also the place where you can validate the training courses followed by your members."
           trainings:
             title: "Gérer les formations"
-            content: "<p>Lors de la création d'une formation, vous pouvez définir un nombre de places par défaut. Néanmoins, le nombre de places effectives pourra être modifié pour chaque session.</p><p>La programmation des sessions de formation se fait depuis l'onglet administrateur « Agenda ».</p><p>D'autre part, il est possible d'associer une ou plusieurs machines à une formation. Cela permet d'en faire un pré-requis pour la réservation de ces machines.</p>"
+            content: "<p>With each training, a default number of places is associated. However, the number of actual places may be modified for each session.</p><p>The training sessions are scheduled from the administrator tab « Calendar ».</p><p>Furthermore, a training may be associated with one or more machines. This makes it a prerequisite for the reservation of these machines.</p>"
           filter:
             title: "Filtre"
             content: "Par défaut, seules les formations actives sont affichées ici. Affichez les autres en choisissant un autre filtre ici."
@@ -1124,6 +1154,9 @@ fr:
           welcome:
             title: "Factures"
             content: "<p>Ici, vous pourrez télécharger les factures et les avoirs émis, ainsi que gérer tout ce qui a trait à la comptabilité et à la facturation.</p><p>Si vous utilisez un logiciel tiers pour gérer vos factures, il est possible de désactiver le module de facturation. Pour cela, contactez votre administrateur système.</p>"
+          welcome_manager:
+            title: "Invoices"
+            content: "Here you will be able to download invoices and create credit notes."
           list:
             title: "Liste des factures"
             content: "Par défaut, ce tableau liste l'ensemble des factures et avoirs émis via Fab-manager. Vous pouvez trier la liste dans un ordre différent en cliquant sur l'entête de chaque colonne."
