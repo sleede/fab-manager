@@ -105,6 +105,10 @@ class User < ApplicationRecord
     User.with_role(:manager)
   end
 
+  def self.online_payers
+    User.with_any_role(:manager, :member)
+  end
+
   def self.superadmin
     return unless Rails.application.secrets.superadmin_email.present?
 

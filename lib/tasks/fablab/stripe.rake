@@ -48,7 +48,10 @@ namespace :fablab do
 
     desc 'sync users to the stripe database'
     task sync_members: :environment do
-      User.members.each do |member|
+      puts 'We create all non-existing customers on stripe. This may take a while, please wait...'
+      total = User.online_payers.count
+      User.online_payers.each_with_index do |member, index|
+        print_on_line "#{index} / #{total}"
         begin
           stp_customer = Stripe::Customer.retrieve member.stp_customer_id
           StripeWorker.perform_async(:create_stripe_customer, member.id) if stp_customer.nil? || stp_customer[:deleted]
@@ -56,6 +59,12 @@ namespace :fablab do
           StripeWorker.perform_async(:create_stripe_customer, member.id)
         end
       end
+      puts 'Done'
+    end
+
+    def print_on_line(str)
+      print "#{str}\r"
+      $stdout.flush
     end
   end
 end

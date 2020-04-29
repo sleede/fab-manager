@@ -8,6 +8,8 @@
 - Fix a bug: "Free entry" label for events without reservation
 - Fix a bug: updating a setting without any changes triggers an error
 - Fix a bug: plan edition does not show the associated group
+- Fix a bug: subscription page shows the groups without any active plans
+- Fix a bug: cart price inconsistently updated after a subscription
 
 ## v4.3.4 2020 April 14
 
