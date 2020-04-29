@@ -424,13 +424,25 @@ en:
           welcome:
             title: "Machines"
             content: "<p>Machines are the tools available for your users. You must create here the machines which can then be reserved by the members.</p><p>You can also create entries for non-bookable or free access machines, then you just need to not associate availability slots with them.</p>"
+          welcome_manager:
+            title: "Machines"
+            content: "Machines are the tools available for the users to reserve."
           view:
             title: "View"
             content: "To modify or delete a machine, click here first. You will not be able to delete a machine that has already been associated with availability slots, but you can deactivate it."
+          reserve:
+            title: "Reserve"
+            content: "Click here to access an agenda showing free slots. This will let you book this machine for an user and manage exiting reservations."
         spaces:
           welcome:
             title: "Spaces"
             content: "<p>Spaces are places available for your users. For example, a meeting room or a woodshop. You must create here the spaces which can then be reserved by members.</p><p>The specificity of the spaces is that they can be reserved by several users at the same time.</p>"
+          welcome_manager:
+            title: "Spaces"
+            content: "<p>Spaces are the places available for the users to reserve. For example, a meeting room or a woodshop.</p><p>The specificity of the spaces is that they can be reserved by several users at the same time.</p>"
           view:
             title: "View"
             content: "To modify or delete a space, click here first. You will not be able to delete a space that has already been associated with availability slots, but you can deactivate it."
+          reserve:
+            title: "Reserve"
+            content: "Click here to access an agenda showing free slots. This will let you book this space for an user and manage exiting reservations."

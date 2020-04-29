@@ -605,6 +605,7 @@ en:
         search_for_an_administrator: "Search for an administrator"
         add_a_new_administrator: "Add a new administrator"
         managers: "Managers"
+        managers_info: "A manager is a restricted administrator that cannot modify the settings of the application. However, he will be able to take reservations for any members and for all managers, including himself, and to process payments and refunds."
         search_for_a_manager: "Search for a manager"
         add_a_new_manager: "Add a new manager"
         delete_this_manager: "Do you really want to delete this manager? This cannot be undone."
@@ -1090,9 +1091,12 @@ en:
           welcome:
             title: "Trainings"
             content: "Here you can create, modify and delete trainings. It is also the place where you can validate the training courses followed by your members."
+          welcome_manager:
+            title: "Trainings"
+            content: "This is the place where you can view the trainings and their associations with the machines. It is also the place where you can validate the training courses followed by your members."
           trainings:
             title: "Manage trainings"
-            content: "<p>When creating a training, you can define a default number of places. However, the number of actual places may be modified for each session.</p><p>The training sessions are scheduled from the administrator tab « Calendar ».</p><p>Another thing: it is possible to associate one or more machines with a training. This makes it a prerequisite for the reservation of these machines.</p>"
+            content: "<p>With each training, a default number of places is associated. However, the number of actual places may be modified for each session.</p><p>The training sessions are scheduled from the administrator tab « Calendar ».</p><p>Furthermore, a training may be associated with one or more machines. This makes it a prerequisite for the reservation of these machines.</p>"
           filter:
             title: "Filter"
             content: "By default, only active courses are displayed here. Display the others by choosing another filter here."
@@ -1150,6 +1154,9 @@ en:
           welcome:
             title: "Invoices"
             content: "<p>Here you will be able to download invoices and credit notes issued, as well as manage everything related to accounting and invoicing.</p><p>If you use third-party software to manage your invoices, it is possible to deactivate the billing module. For this, contact your system administrator.</p>"
+          welcome_manager:
+            title: "Invoices"
+            content: "Here you will be able to download invoices and create credit notes."
           list:
             title: "Invoices list"
             content: "By default, this table lists all the invoices and credit notes issued by Fab-manager. You can sort the list in a different order by clicking on the header of each column."

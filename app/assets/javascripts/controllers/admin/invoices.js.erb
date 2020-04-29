@@ -582,15 +582,27 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     $scope.setupInvoicesTour = function () {
       // get the tour defined by the ui-tour directive
       const uitour = uiTourService.getTourByName('invoices');
-      uitour.createStep({
-        selector: 'body',
-        stepId: 'welcome',
-        order: 0,
-        title: _t('app.admin.tour.invoices.welcome.title'),
-        content: _t('app.admin.tour.invoices.welcome.content'),
-        placement: 'bottom',
-        orphan: true
-      });
+      if (AuthService.isAuthorized('admin')) {
+        uitour.createStep({
+          selector: 'body',
+          stepId: 'welcome',
+          order: 0,
+          title: _t('app.admin.tour.invoices.welcome.title'),
+          content: _t('app.admin.tour.invoices.welcome.content'),
+          placement: 'bottom',
+          orphan: true
+        });
+      } else {
+        uitour.createStep({
+          selector: 'body',
+          stepId: 'welcome_manager',
+          order: 0,
+          title: _t('app.admin.tour.invoices.welcome_manager.title'),
+          content: _t('app.admin.tour.invoices.welcome_manager.content'),
+          placement: 'bottom',
+          orphan: true
+        });
+      }
       if (!Fablab.withoutInvoices && $scope.invoices.length > 0) {
         uitour.createStep({
           selector: '.invoices-management .invoices-list',

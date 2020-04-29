@@ -222,29 +222,51 @@ Application.Controllers.controller('MachinesController', ['$scope', '$state', '_
       if (AuthService.isAuthorized(['admin', 'manager'])) {
         // get the tour defined by the ui-tour directive
         const uitour = uiTourService.getTourByName('machines');
-        uitour.createStep({
-          selector: 'body',
-          stepId: 'welcome',
-          order: 0,
-          title: _t('app.public.tour.machines.welcome.title'),
-          content: _t('app.public.tour.machines.welcome.content'),
-          placement: 'bottom',
-          orphan: true
-        });
+        if (AuthService.isAuthorized('admin')) {
+          uitour.createStep({
+            selector: 'body',
+            stepId: 'welcome',
+            order: 0,
+            title: _t('app.public.tour.machines.welcome.title'),
+            content: _t('app.public.tour.machines.welcome.content'),
+            placement: 'bottom',
+            orphan: true
+          });
+          if ($scope.machines.length > 0) {
+            uitour.createStep({
+              selector: '.machines-list .show-button',
+              stepId: 'view',
+              order: 1,
+              title: _t('app.public.tour.machines.view.title'),
+              content: _t('app.public.tour.machines.view.content'),
+              placement: 'top'
+            });
+          }
+        } else {
+          uitour.createStep({
+            selector: 'body',
+            stepId: 'welcome_manager',
+            order: 0,
+            title: _t('app.public.tour.machines.welcome_manager.title'),
+            content: _t('app.public.tour.machines.welcome_manager.content'),
+            placement: 'bottom',
+            orphan: true
+          });
+        }
         if ($scope.machines.length > 0) {
           uitour.createStep({
-            selector: '.machines-list .show-button',
-            stepId: 'view',
-            order: 1,
-            title: _t('app.public.tour.machines.view.title'),
-            content: _t('app.public.tour.machines.view.content'),
+            selector: '.machines-list .reserve-button',
+            stepId: 'reserve',
+            order: 2,
+            title: _t('app.public.tour.machines.reserve.title'),
+            content: _t('app.public.tour.machines.reserve.content'),
             placement: 'top'
           });
         }
         uitour.createStep({
           selector: 'body',
           stepId: 'conclusion',
-          order: 2,
+          order: 3,
           title: _t('app.public.tour.conclusion.title'),
           content: _t('app.public.tour.conclusion.content'),
           placement: 'bottom',

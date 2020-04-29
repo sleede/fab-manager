@@ -134,6 +134,7 @@ Application.Controllers.controller('SpacesController', ['$scope', '$state', 'spa
       if (AuthService.isAuthorized(['admin', 'manager'])) {
         // get the tour defined by the ui-tour directive
         const uitour = uiTourService.getTourByName('spaces');
+        if (AuthService.isAuthorized('admin')) {
         uitour.createStep({
           selector: 'body',
           stepId: 'welcome',
@@ -153,10 +154,31 @@ Application.Controllers.controller('SpacesController', ['$scope', '$state', 'spa
             placement: 'top'
           });
         }
+        } else {
+          uitour.createStep({
+            selector: 'body',
+            stepId: 'welcome_manager',
+            order: 0,
+            title: _t('app.public.tour.spaces.welcome_manager.title'),
+            content: _t('app.public.tour.spaces.welcome_manager.content'),
+            placement: 'bottom',
+            orphan: true
+          });
+        }
+        if ($scope.spaces.length > 0) {
+          uitour.createStep({
+            selector: '.spaces-list .reserve-button',
+            stepId: 'reserve',
+            order: 2,
+            title: _t('app.public.tour.spaces.reserve.title'),
+            content: _t('app.public.tour.spaces.reserve.content'),
+            placement: 'top'
+          });
+        }
         uitour.createStep({
           selector: 'body',
           stepId: 'conclusion',
-          order: 2,
+          order: 3,
           title: _t('app.public.tour.conclusion.title'),
           content: _t('app.public.tour.conclusion.content'),
           placement: 'bottom',

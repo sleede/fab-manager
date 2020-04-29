@@ -22,7 +22,7 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
      */
     $scope.setupHomeTour = function () {
       if (AuthService.isAuthorized(['admin', 'manager'])) {
-        // Workaround for the following bug: as a manager, when the feature tour is shown, the translations keys are not
+        // Workaround for the following bug: sometimes, when the feature tour is shown, the translations keys are not
         // interpreted. This is an ugly hack, but we can't do better for now because angular-ui-tour does not support
         // removing steps (this would allow us to recreate the steps when the translations are loaded), and we can't use
         // promises with _t's translations (this would be a very big refactoring)
