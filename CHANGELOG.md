@@ -2,6 +2,7 @@
 
 - Interface to manage partners
 - Ability to define, per availability, a custom duration for the reservation slots
+- Corrected the documentation about BOOK_SLOT_AT_SAME_TIME
 - Fix a bug: unable to change group if the previous was deactivated
 - Fix a bug: unable to create events or trainings that are not multiples of SLOT_DURATION
 - Fix a bug: unable to delete an unreserved event

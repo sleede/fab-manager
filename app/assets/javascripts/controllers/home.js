@@ -1,7 +1,7 @@
 'use strict';
 
-Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 'settingsPromise', 'Member', 'uiTourService', '_t', 'Help',
-  function ($scope, $stateParams, settingsPromise, Member, uiTourService, _t, Help) {
+Application.Controllers.controller('HomeController', ['$scope', '$stateParams', '$translatePartialLoader', 'AuthService', 'settingsPromise', 'Member', 'uiTourService', '_t', 'Help',
+  function ($scope, $stateParams, $translatePartialLoader, AuthService, settingsPromise, Member, uiTourService, _t, Help) {
   /* PUBLIC SCOPE */
 
     // Home page HTML content
@@ -21,8 +21,10 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
      * This is intended as a contextual help (when pressing F1)
      */
     $scope.setupHomeTour = function () {
-      if ($scope.currentUser && $scope.currentUser.role === 'admin') {
-        setupWelcomeTour();
+      if (AuthService.isAuthorized(['admin', 'manager'])) {
+        // this is an ugly hack, but we can't do better for now because angular-ui-tour does not support removing steps
+        // and we can't use promises with _t's translations (needs a very big refactoring)
+        setTimeout(setupWelcomeTour, 1000);
       }
     };
 
@@ -271,14 +273,16 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
         placement: 'bottom',
         orphan: 'true'
       });
-      uitour.createStep({
-        selector: '.app-generator .app-version',
-        stepId: 'version',
-        order: 19,
-        title: _t('app.public.tour.welcome.version.title'),
-        content: _t('app.public.tour.welcome.version.content'),
-        placement: 'top'
-      });
+      if (AuthService.isAuthorized('admin')) {
+        uitour.createStep({
+          selector: '.app-generator .app-version',
+          stepId: 'version',
+          order: 19,
+          title: _t('app.public.tour.welcome.version.title'),
+          content: _t('app.public.tour.welcome.version.content'),
+          placement: 'top'
+        });
+      }
       uitour.createStep({
         selector: 'body',
         stepId: 'conclusion',
