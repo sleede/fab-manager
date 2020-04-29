@@ -29,7 +29,7 @@ fr:
         #left menu
         notifications: "Notifications"
         admin: "Admin"
-        manager: "Manager"
+        manager: "Gestionnaire"
         reduce_panel: "Réduire le volet"
         #left menu (public)
         home: "Accueil"
@@ -147,7 +147,7 @@ fr:
         from_date_to_date: "Du {START} au {END}"
         on_the_date: "Le {DATE}"
         from_time_to_time: "De {START} à {END}"
-        without_reservation: "Without reservation"
+        without_reservation: "Sans réservation"
         free_admission: "Entrée gratuite"
         full_price: "Plein tarif : "
         event_full: "Événement complet"
@@ -242,8 +242,8 @@ fr:
         your_subscription_expires_on_the_DATE: "Votre abonnement expire au {DATE}"
         my_group: "Mon groupe"
         his_group: "Son groupe"
-        he_wants_to_change_group: "{ROLE, select, member{I want} other{The user wants}} to change group"
-        change_my_group: "Change {ROLE, select, member{my} other{{GENDER, select, male{his} female{her} other{its}}}} group"
+        he_wants_to_change_group: "{ROLE, select, member{Je veux} other{L'utilisateur veut}} changer de groupe"
+        change_my_group: "Changer {ROLE, select, member{mon} other{{GENDER, select, other{son}}}} groupe"
         summary: "Résumé"
         your_subscription_has_expired_on_the_DATE: "Votre abonnement a expiré au {DATE}"
         subscription_price: "Coût de l'abonnement"
@@ -270,7 +270,7 @@ fr:
         cancelled: "Annulé"
         free_admission: "Gratuit"
         still_available: "place(s) disponible(s)"
-        without_reservation: "Without reservation"
+        without_reservation: "Sans réservation"
         add_an_event: "Ajouter un évènement"
         load_the_next_events: "Charger les évènements suivants..."
         full_price_: "Plein tarif :"
@@ -291,7 +291,7 @@ fr:
         full_price_: "Plein tarif :"
         tickets_still_availables: "Places encore disponibles :"
         sold_out: "Événement complet."
-        without_reservation: "Without reservation"
+        without_reservation: "Sans réservation"
         cancelled: "Annulé"
         ticket: "{NUMBER, plural, =0{place} one{place} other{places}}"
         make_a_gift_of_this_reservation: "Offrir cette réservation"
@@ -388,8 +388,8 @@ fr:
             title: "Abonnements"
             content: "Les abonnements offrent un moyen de segmenter vos tarifs et d'accorder des avantages aux utilisateurs réguliers."
           admin:
-            title: "{ROLE} section"
-            content: "<p>All of the elements below are only accessible to administrators and managers. They allow you to manage and configure Fab-manager.</p><p>At the end of this visit, click on one of them to find out more.</p>"
+            title: "Section {ROLE}"
+            content: "<p>L'ensemble des éléments ci-dessous ne sont accessibles qu'aux administrateurs et aux gestionnaires. Ils permettent de gérer et de configurer Fab-manager.</p><p>À la fin de cette visite, cliquez sur l'un d'entre eux pour en savoir plus.</p>"
           about:
             title: "À propos"
             content: "Une page que vous pouvez entièrement personnaliser, pour y présenter votre activité et votre structure."
@@ -426,23 +426,23 @@ fr:
             content: "<p>Les machines sont les outils que vous mettez à disposition de vos utilisateurs. Vous devez créer ici les machines qui pourront ensuite être réservées par les membres.</p><p>Vous pouvez également créer des entrées pour des machines non réservables ou en libre accès, il vous suffira ensuite de ne pas associer de créneaux de disponibilités à celles-ci.</p>"
           welcome_manager:
             title: "Machines"
-            content: "Machines are the tools available for the users to reserve."
+            content: "Les machines sont les outils disponibles pour être réservés par les utilisateurs."
           view:
             title: "Consulter"
             content: "Pour modifier ou supprimer une machine, cliquez tout d'abord ici. Vous ne pourrez pas supprimer une machine qui a déjà été associée à des créneaux de disponibilité, mais vous pourrez la désactiver."
           reserve:
-            title: "Reserve"
-            content: "Click here to access an agenda showing free slots. This will let you book this machine for an user and manage exiting reservations."
+            title: "Réserver"
+            content: "Click here to access an agenda showing free slots. This will let you book this machine for an user and manage existing reservations."
         spaces:
           welcome:
             title: "Espaces"
             content: "<p>Les espaces sont des lieux que vous mettez à disposition de vos utilisateurs. Par exemple, une salle de réunion ou un atelier bois. Vous devez créer ici les espaces qui pourront ensuite être réservées par les membres.</p><p>La spécificité des espaces est qu'ils peuvent être réservés par plusieurs utilisateurs en même temps.</p>"
           welcome_manager:
-            title: "Spaces"
-            content: "<p>Spaces are the places available for the users to reserve. For example, a meeting room or a woodshop.</p><p>The specificity of the spaces is that they can be reserved by several users at the same time.</p>"
+            title: "Espaces"
+            content: "<p>Spaces are places available to users, by reservation. For example, a meeting room or a woodshop.</p><p>The specificity of the spaces is that they can be reserved by several users at the same time.</p>"
           view:
             title: "Consulter"
             content: "Pour modifier ou supprimer un espace, cliquez tout d'abord ici. Vous ne pourrez pas supprimer un espace qui a déjà été associée à des créneaux de disponibilité, mais vous pourrez le désactiver."
           reserve:
-            title: "Reserve"
-            content: "Click here to access an agenda showing free slots. This will let you book this space for an user and manage exiting reservations."
+            title: "Réserver"
+            content: "Click here to access an agenda showing free slots. This will let you book this space for an user and manage existing reservations."
