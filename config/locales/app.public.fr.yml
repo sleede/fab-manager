@@ -388,8 +388,8 @@ fr:
             title: "Abonnements"
             content: "Les abonnements offrent un moyen de segmenter vos tarifs et d'accorder des avantages aux utilisateurs réguliers."
           admin:
-            title: "Section administrateur"
-            content: "<p>L'ensemble des éléments ci-dessous ne sont accessibles qu'aux administrateurs. Ils permettent de gérer et de configurer Fab-manager.</p><p>À la fin de cette visite, cliquez sur l'un d'entre eux pour en savoir plus.</p>"
+            title: "Section {ROLE}"
+            content: "<p>L'ensemble des éléments ci-dessous ne sont accessibles qu'aux administrateurs et aux gestionnaires. Ils permettent de gérer et de configurer Fab-manager.</p><p>À la fin de cette visite, cliquez sur l'un d'entre eux pour en savoir plus.</p>"
           about:
             title: "À propos"
             content: "Une page que vous pouvez entièrement personnaliser, pour y présenter votre activité et votre structure."

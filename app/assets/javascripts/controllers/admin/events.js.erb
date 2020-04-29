@@ -153,8 +153,8 @@ class EventsController {
 /**
  * Controller used in the events listing page (admin view)
  */
-Application.Controllers.controller('AdminEventsController', ['$scope', '$state', 'dialogs', '$uibModal', 'growl', 'Event', 'Category', 'EventTheme', 'AgeRange', 'PriceCategory', 'eventsPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', 'priceCategoriesPromise', '_t', 'Member', 'uiTourService',
-  function ($scope, $state, dialogs, $uibModal, growl, Event, Category, EventTheme, AgeRange, PriceCategory, eventsPromise, categoriesPromise, themesPromise, ageRangesPromise, priceCategoriesPromise, _t, Member, uiTourService) {
+Application.Controllers.controller('AdminEventsController', ['$scope', '$state', 'dialogs', '$uibModal', 'growl', 'AuthService', 'Event', 'Category', 'EventTheme', 'AgeRange', 'PriceCategory', 'eventsPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', 'priceCategoriesPromise', '_t', 'Member', 'uiTourService',
+  function ($scope, $state, dialogs, $uibModal, growl, AuthService, Event, Category, EventTheme, AgeRange, PriceCategory, eventsPromise, categoriesPromise, themesPromise, ageRangesPromise, priceCategoriesPromise, _t, Member, uiTourService) {
   /* PUBLIC SCOPE */
 
     // By default, the pagination mode is activated to limit the page size
@@ -407,38 +407,40 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
         content: _t('app.admin.tour.events.filter.content'),
         placement: 'bottom'
       });
-      uitour.createStep({
-        selector: '.events-management .events-categories',
-        stepId: 'categories',
-        order: 3,
-        title: _t('app.admin.tour.events.categories.title'),
-        content: _t('app.admin.tour.events.categories.content'),
-        placement: 'bottom'
-      });
-      uitour.createStep({
-        selector: '.events-management .events-themes',
-        stepId: 'themes',
-        order: 4,
-        title: _t('app.admin.tour.events.themes.title'),
-        content: _t('app.admin.tour.events.themes.content'),
-        placement: 'top'
-      });
-      uitour.createStep({
-        selector: '.events-management .events-age-ranges',
-        stepId: 'ages',
-        order: 5,
-        title: _t('app.admin.tour.events.ages.title'),
-        content: _t('app.admin.tour.events.ages.content'),
-        placement: 'top'
-      });
-      uitour.createStep({
-        selector: '.events-management .prices-tab',
-        stepId: 'prices',
-        order: 6,
-        title: _t('app.admin.tour.events.prices.title'),
-        content: _t('app.admin.tour.events.prices.content'),
-        placement: 'bottom'
-      });
+      if (AuthService.isAuthorized('admin')) {
+        uitour.createStep({
+          selector: '.events-management .events-categories',
+          stepId: 'categories',
+          order: 3,
+          title: _t('app.admin.tour.events.categories.title'),
+          content: _t('app.admin.tour.events.categories.content'),
+          placement: 'bottom'
+        });
+        uitour.createStep({
+          selector: '.events-management .events-themes',
+          stepId: 'themes',
+          order: 4,
+          title: _t('app.admin.tour.events.themes.title'),
+          content: _t('app.admin.tour.events.themes.content'),
+          placement: 'top'
+        });
+        uitour.createStep({
+          selector: '.events-management .events-age-ranges',
+          stepId: 'ages',
+          order: 5,
+          title: _t('app.admin.tour.events.ages.title'),
+          content: _t('app.admin.tour.events.ages.content'),
+          placement: 'top'
+        });
+        uitour.createStep({
+          selector: '.events-management .prices-tab',
+          stepId: 'prices',
+          order: 6,
+          title: _t('app.admin.tour.events.prices.title'),
+          content: _t('app.admin.tour.events.prices.content'),
+          placement: 'bottom'
+        });
+      }
       uitour.createStep({
         selector: 'body',
         stepId: 'conclusion',

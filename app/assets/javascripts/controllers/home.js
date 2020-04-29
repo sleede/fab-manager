@@ -22,8 +22,10 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
      */
     $scope.setupHomeTour = function () {
       if (AuthService.isAuthorized(['admin', 'manager'])) {
-        // this is an ugly hack, but we can't do better for now because angular-ui-tour does not support removing steps
-        // and we can't use promises with _t's translations (needs a very big refactoring)
+        // Workaround for the following bug: as a manager, when the feature tour is shown, the translations keys are not
+        // interpreted. This is an ugly hack, but we can't do better for now because angular-ui-tour does not support
+        // removing steps (this would allow us to recreate the steps when the translations are loaded), and we can't use
+        // promises with _t's translations (this would be a very big refactoring)
         setTimeout(setupWelcomeTour, 1000);
       }
     };
@@ -184,7 +186,7 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
         selector: '.nav-primary .admin-section',
         stepId: 'admin',
         order: 9,
-        title: _t('app.public.tour.welcome.admin.title'),
+        title: _t('app.public.tour.welcome.admin.title', { ROLE: _t(`app.public.common.${$scope.currentUser.role}`) }),
         content: _t('app.public.tour.welcome.admin.content'),
         placement: 'right'
       });

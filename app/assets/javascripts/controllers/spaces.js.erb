@@ -98,8 +98,8 @@ class SpacesController {
 /**
  * Controller used in the public listing page, allowing everyone to see the list of spaces
  */
-Application.Controllers.controller('SpacesController', ['$scope', '$state', 'spacesPromise', '_t', 'Member', 'uiTourService',
-  function ($scope, $state, spacesPromise, _t, Member, uiTourService) {
+Application.Controllers.controller('SpacesController', ['$scope', '$state', 'spacesPromise', 'AuthService', '_t', 'Member', 'uiTourService',
+  function ($scope, $state, spacesPromise, AuthService, _t, Member, uiTourService) {
     /* PUBLIC SCOPE */
 
     // Retrieve the list of spaces
@@ -131,7 +131,7 @@ Application.Controllers.controller('SpacesController', ['$scope', '$state', 'spa
      */
     $scope.setupSpacesTour = function () {
       // setup the tour for admins only
-      if ($scope.currentUser && $scope.currentUser.role === 'admin') {
+      if (AuthService.isAuthorized(['admin', 'manager'])) {
         // get the tour defined by the ui-tour directive
         const uitour = uiTourService.getTourByName('spaces');
         uitour.createStep({

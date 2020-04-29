@@ -30,7 +30,7 @@
          post-render="setupMembersTour">
   <div class="row">
     <div class="col-md-12">
-      <uib-tabset justified="true" active="tabs.active" ng-show="isAuthorized('admin')">
+      <uib-tabset justified="true" active="tabs.active" ng-if="isAuthorized('admin')">
 
         <uib-tab heading="{{ 'app.admin.members.users' | translate }}" index="0">
           <ng-include src="'<%= asset_path "admin/members/users.html" %>'"></ng-include>
@@ -49,7 +49,7 @@
         </uib-tab>
       </uib-tabset>
 
-      <div ng-show="isAuthorized('manager')">
+      <div ng-if="isAuthorized('manager')">
         <ng-include src="'<%= asset_path "admin/members/users.html" %>'"></ng-include>
       </div>
     </div>
