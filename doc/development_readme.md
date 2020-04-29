@@ -107,8 +107,8 @@ This procedure is not easy to follow so if you don't need to write some code for
 
    ```bash
    cp config/database.yml.default config/database.yml
-   cp config/application.yml.default config/application.yml
-   vi config/application.yml
+   cp env.example .env
+   vi .env
    # or use your favorite text editor instead of vi (nano, ne...)
    ```
 
