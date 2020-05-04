@@ -205,8 +205,8 @@ class API::MembersController < API::ApiController
   def update_role
     authorize @member
 
-    user.remove_role @member.role.to_sym
-    user.add_role params[:role]
+    @member.remove_role @member.role.to_sym
+    @member.add_role params[:role]
 
     render json: @member
   end
