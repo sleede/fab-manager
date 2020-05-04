@@ -374,6 +374,7 @@ en:
         accounting_periods: "Accounting periods"
         invoices_list: "Invoices list"
         filter_invoices: "Filter invoices"
+        operator_: "Operator:"
         invoice_num_: "Invoice #:"
         customer_: "Customer:"
         date_: "Date:"

@@ -576,6 +576,15 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     }
 
     /**
+     * Return the name of the operator that creates the invoice
+     */
+    $scope.operatorName = function(invoice) {
+      if (!invoice.operator) return '';
+
+      return `${invoice.operator.first_name} ${invoice.operator.last_name}`;
+    }
+
+    /**
      * Setup the feature-tour for the admin/invoices page.
      * This is intended as a contextual help (when pressing F1)
      */
