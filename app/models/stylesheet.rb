@@ -6,7 +6,7 @@
 class Stylesheet < ApplicationRecord
   validates_presence_of :contents
 
-  ## ===== THEME =====
+  ## ===== COMMON =====
 
   def rebuild!
     if Stylesheet.primary && Stylesheet.secondary && name == 'theme'
@@ -16,7 +16,9 @@ class Stylesheet < ApplicationRecord
     end
   end
 
-  def self.build_sheet!
+  ## ===== THEME =====
+
+  def self.build_theme!
     return unless Stylesheet.primary && Stylesheet.secondary
 
     if Stylesheet.theme

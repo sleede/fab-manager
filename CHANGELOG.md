@@ -13,6 +13,7 @@
 - Fix a bug: plan edition does not show the associated group
 - Fix a bug: subscription page shows the groups without any active plans
 - Fix a bug: cart price inconsistently updated after a subscription
+- Fix a bug: background image of the profile is not shown and wrong menu hover color
 
 ## v4.3.4 2020 April 14
 
