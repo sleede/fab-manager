@@ -47,6 +47,6 @@ class API::ICalendarController < API::ApiController
   end
 
   def i_calendar_params
-    params.require(:i_calendar).permit(:name, :url, :color, :text_color, :text_hidden)
+    params.require(:i_calendar).permit(:name, :url, :color, :primary_text_color, :text_hidden)
   end
 end
