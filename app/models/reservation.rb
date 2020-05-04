@@ -212,7 +212,8 @@ class Reservation < ApplicationRecord
   end
 
   def save_with_payment(operator_profile_id, coupon_code = nil, payment_intent_id = nil)
-    method = InvoicingProfile.find(operator_profile_id)&.user&.admin? ? nil : 'stripe'
+    operator = InvoicingProfile.find(operator_profile_id)&.user
+    method = operator&.admin? || (operator&.manager? && operator != user) ? nil : 'stripe'
 
     build_invoice(
       invoicing_profile: user.invoicing_profile,
