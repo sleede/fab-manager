@@ -64,7 +64,7 @@
     "fullcalendar": "2.3.1",
     "holderjs": "2.6",
     "jasny-bootstrap": "3.1",
-    "jquery": ">=3.4.0",
+    "jquery": ">=3.5.0",
     "jquery-minicolors": "^2.1.10",
     "medium-editor": "4.4.0",
     "moment": "2.22",
