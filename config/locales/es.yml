@@ -215,9 +215,9 @@ es:
     reservations: "Reservas"
     available_seats: "Asientos disponibles"
   roles:
-    member: "Member"
-    manager: "Manager"
-    admin: "Administrator"
+    member: "Miembro"
+    manager: "Gerente"
+    admin: "Administrador"
   api:
     #internal app notifications
     notifications:
