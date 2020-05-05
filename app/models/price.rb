@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+MINUTES_PER_HOUR = 60
+SECONDS_PER_MINUTE = 60
+
 # Store customized price for various items (Machine, Space), depending on the group and on the plan
 # Also provides a static helper method to compute the price details of a shopping cart
 class Price < ApplicationRecord
@@ -52,16 +55,16 @@ class Price < ApplicationRecord
           if space_credit
             hours_available = credits_hours(space_credit, user, new_plan_being_bought)
             slots.each_with_index do |slot, index|
-              total_amount += get_slot_price(base_amount, slot, admin, all_elements, (index < hours_available))
+              total_amount += get_slot_price(base_amount, slot, admin, elements: all_elements, has_credits: (index < hours_available))
             end
           else
             slots.each do |slot|
-              total_amount += get_slot_price(base_amount, slot, admin, all_elements)
+              total_amount += get_slot_price(base_amount, slot, admin, elements: all_elements)
             end
           end
         else
           slots.each do |slot|
-            total_amount += get_slot_price(base_amount, slot, admin, all_elements)
+            total_amount += get_slot_price(base_amount, slot, admin, elements: all_elements)
           end
         end
 
@@ -83,7 +86,7 @@ class Price < ApplicationRecord
           end
         end
         slots.each do |slot|
-          total_amount += get_slot_price(amount, slot, admin, all_elements)
+          total_amount += get_slot_price(amount, slot, admin, elements: all_elements, is_division: false)
         end
 
       # Event reservation
@@ -93,7 +96,7 @@ class Price < ApplicationRecord
           amount += ticket[:booked] * EventPriceCategory.find(ticket[:event_price_category_id]).amount
         end
         slots.each do |slot|
-          total_amount += get_slot_price(amount, slot, admin, all_elements)
+          total_amount += get_slot_price(amount, slot, admin, elements: all_elements, is_division: false)
         end
 
       # Space reservation
@@ -105,16 +108,16 @@ class Price < ApplicationRecord
           if space_credit
             hours_available = credits_hours(space_credit, user, new_plan_being_bought)
             slots.each_with_index do |slot, index|
-              total_amount += get_slot_price(base_amount, slot, admin, all_elements, (index < hours_available))
+              total_amount += get_slot_price(base_amount, slot, admin, elements: all_elements, has_credits: (index < hours_available))
             end
           else
             slots.each do |slot|
-              total_amount += get_slot_price(base_amount, slot, admin, all_elements)
+              total_amount += get_slot_price(base_amount, slot, admin, elements: all_elements)
             end
           end
         else
           slots.each do |slot|
-            total_amount += get_slot_price(base_amount, slot, admin, all_elements)
+            total_amount += get_slot_price(base_amount, slot, admin, elements: all_elements)
           end
         end
 
@@ -144,20 +147,37 @@ class Price < ApplicationRecord
 
     private
 
+    GET_SLOT_PRICE_DEFAULT_OPTS = { has_credits: false, elements: nil, is_division: true }.freeze
     ##
     # Compute the price of a single slot, according to the base price and the ability for an admin
     # to offer the slot.
-    # @param base_amount {Number} base price of a slot
+    # @param hourly_rate {Number} base price of a slot
     # @param slot {Hash} Slot object
     # @param is_admin {Boolean} true if the current user has the 'admin' role
-    # @param [elements] {Array} optional, if provided the resulting price will be append into elements.slots
-    # @param [has_credits] {Boolean} true if the user still has credits for the given slot
+    # @param [options] {Hash} optional parameters, allowing the following options:
+    #  - elements {Array} if provided the resulting price will be append into elements.slots
+    #  - has_credits {Boolean} true if the user still has credits for the given slot, false if not provided
+    #  - is_division {boolean} false if the slot covers an full availability, true if it is a subdivision (default)
     # @return {Number} price of the slot
     ##
-    def get_slot_price(base_amount, slot, is_admin, elements = nil, has_credits = false)
-      ii_amount = has_credits || (slot[:offered] && is_admin) ? 0 : base_amount
-      elements[:slots].push(start_at: slot[:start_at], price: ii_amount, promo: (ii_amount != base_amount)) unless elements.nil?
-      ii_amount
+    def get_slot_price(hourly_rate, slot, is_admin, options = {})
+      options = GET_SLOT_PRICE_DEFAULT_OPTS.merge(options)
+
+      slot_rate = options[:has_credits] || (slot[:offered] && is_admin) ? 0 : hourly_rate
+      real_price = if options[:is_division]
+                     (slot_rate / MINUTES_PER_HOUR) * ((slot[:end_at].to_time - slot[:start_at].to_time) / SECONDS_PER_MINUTE)
+                   else
+                     slot_rate
+                   end
+
+      unless options[:elements].nil?
+        options[:elements][:slots].push(
+          start_at: slot[:start_at],
+          price: real_price,
+          promo: (slot_rate != hourly_rate)
+        )
+      end
+      real_price
     end
 
     ##
