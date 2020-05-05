@@ -723,6 +723,13 @@ zu:
         error_details: "crwdns7943:0crwdne7943:0"
       #edit a member
       members_edit:
+        change_role: "crwdns20432:0crwdne20432:0"
+        warning_role_change: "crwdns20434:0crwdne20434:0"
+        admin: "crwdns20436:0crwdne20436:0"
+        manager: "crwdns20438:0crwdne20438:0"
+        member: "crwdns20440:0crwdne20440:0"
+        role_changed: "crwdns20442:0{OLD}crwdnd20442:0{NEW}crwdne20442:0"
+        error_while_changing_role: "crwdns20444:0crwdne20444:0"
         subscription: "crwdns7945:0crwdne7945:0"
         duration: "crwdns7947:0crwdne7947:0"
         expires_at: "crwdns7949:0crwdne7949:0"
