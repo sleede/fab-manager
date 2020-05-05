@@ -418,6 +418,8 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
       const modalInstance = $uibModal.open({
         templateUrl: '<%= asset_path "admin/calendar/eventModal.html" %>',
         controller: 'CreateEventModalController',
+        backdrop: 'static',
+        keyboard: false,
         resolve: {
           start() { return start; },
           end() { return end; },
