@@ -9,7 +9,7 @@ class ProjectIndexerWorker
     logger = Sidekiq.logger.level == Logger::DEBUG ? Sidekiq.logger : nil
     client = Elasticsearch::Model.client
 
-    logger.debug [operation, "ID: #{record_id}"]
+    logger&.debug [operation, "ID: #{record_id}"]
 
     case operation.to_s
     when /index/
