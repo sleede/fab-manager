@@ -4,6 +4,7 @@
 - The invoices list displays the operator in case of offline payment
 - Interface to manage partners
 - Ability to define, per availability, a custom duration for the reservation slots
+- Ability to promote a user to a higher role (member > manager > admin)
 - Corrected the documentation about BOOK_SLOT_AT_SAME_TIME
 - Auto-adjusts text colors based on the selected theme colors
 - Fix a bug: unable to change group if the previous was deactivated

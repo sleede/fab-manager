@@ -160,6 +160,8 @@ class User < ApplicationRecord
       'admin'
     elsif manager?
       'manager'
+    elsif member?
+      'member'
     else
       'other'
     end

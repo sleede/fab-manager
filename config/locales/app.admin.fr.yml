@@ -723,6 +723,13 @@ fr:
         error_details: "Détails de l'erreur :"
       #edit a member
       members_edit:
+        change_role: "Changer de rôle"
+        warning_role_change: "<p><strong>Attention :</strong> changer le rôle d'un utilisateur n'est pas une opération anodine. Il n'est actuellement pas possible de destituer un utilisateur vers un rôle de moindre privilège.</p><ul><li><strong>Les membres</strong> ne peuvent que prendre des réservations pour eux-même, en payant par carte bancaire ou par porte-monnaie.</li><li><strong>Les gestionnaires</strong> peuvent prendre des réservations pour eux-même, en payant par carte bancaire ou par porte-monnaie, ainsi que pour les autres membres et gestionnaires, en encaissant les paiements à la caisse.</li><li><strong>Les administrateurs</strong> ne peuvent que prendre des réservations pour les membres et gestionnaires, en encaissant les paiements à la caisse. De plus, ils peuvent modifier l'ensemble des paramètres de l'application.</li></ul>"
+        admin: "Administrateur"
+        manager: "Gestionnaire"
+        member: "Membre"
+        role_changed: "Le rôle de {OLD} à été changé en {NEW}."
+        error_while_changing_role: "Une erreur est survenue lors du changement de rôle. Merci de réessayer plus tard."
         subscription: "Abonnement"
         duration: "Durée :"
         expires_at: "Expire le :"
