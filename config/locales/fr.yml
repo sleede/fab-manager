@@ -215,9 +215,9 @@ fr:
     reservations: "Réservations"
     available_seats: "Places disponibles"
   roles:
-    member: "Member"
-    manager: "Manager"
-    admin: "Administrator"
+    member: "Membre"
+    manager: "Gestionnaire"
+    admin: "Administrateur"
   api:
     #internal app notifications
     notifications:
@@ -334,9 +334,9 @@ fr:
       notify_admin_refund_created:
         refund_created: "Un avoir de %{AMOUNT} a été généré pour l'utilisateur %{USER}"
       notify_user_role_update:
-        your_role_is_ROLE: "Your role has been changed to %{ROLE}."
+        your_role_is_ROLE: "Votre rôle a été changé en %{ROLE}."
       notify_admins_role_update:
-        user_NAME_changed_ROLE_html: "User <strong><em>%{NAME}</strong></em> is now %{ROLE}."
+        user_NAME_changed_ROLE_html: "L'utilisateur <strong><em>%{NAME}</strong></em> est maintenant %{ROLE}."
   #statistics tools for admins
   statistics:
     subscriptions: "Abonnements"
