@@ -374,6 +374,7 @@ zu:
         accounting_periods: "crwdns7309:0crwdne7309:0"
         invoices_list: "crwdns7311:0crwdne7311:0"
         filter_invoices: "crwdns7313:0crwdne7313:0"
+        operator_: "crwdns20430:0crwdne20430:0"
         invoice_num_: "crwdns7315:0crwdne7315:0"
         customer_: "crwdns7317:0crwdne7317:0"
         date_: "crwdns7319:0crwdne7319:0"
