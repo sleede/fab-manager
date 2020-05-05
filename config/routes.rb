@@ -55,6 +55,7 @@ Rails.application.routes.draw do
       get 'search/:query', action: 'search', on: :collection
       get 'mapping', action: 'mapping', on: :collection
       patch ':id/complete_tour', action: 'complete_tour', on: :collection
+      patch ':id/update_role', action: 'update_role', on: :collection
     end
     resources :reservations, only: %i[show create index update]
     resources :notifications, only: %i[index show update] do

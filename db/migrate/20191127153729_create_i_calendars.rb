@@ -8,7 +8,7 @@ class CreateICalendars < ActiveRecord::Migration[4.2]
       t.string :url
       t.string :name
       t.string :color
-      t.string :text_color
+      t.string :primary_text_color
       t.boolean :text_hidden
 
       t.timestamps null: false

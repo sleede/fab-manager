@@ -1,8 +1,12 @@
 # Changelog Fab-manager
 
+- Manager: a new role between the member and the administrator
+- The invoices list displays the operator in case of offline payment
 - Interface to manage partners
 - Ability to define, per availability, a custom duration for the reservation slots
+- Ability to promote a user to a higher role (member > manager > admin)
 - Corrected the documentation about BOOK_SLOT_AT_SAME_TIME
+- Auto-adjusts text colors based on the selected theme colors
 - Fix a bug: unable to change group if the previous was deactivated
 - Fix a bug: unable to create events or trainings that are not multiples of SLOT_DURATION
 - Fix a bug: unable to delete an unreserved event
@@ -11,6 +15,7 @@
 - Fix a bug: plan edition does not show the associated group
 - Fix a bug: subscription page shows the groups without any active plans
 - Fix a bug: cart price inconsistently updated after a subscription
+- Fix a bug: background image of the profile is not shown and wrong menu hover color
 
 ## v4.3.4 2020 April 14
 

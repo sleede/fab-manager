@@ -46,7 +46,8 @@ class Subscription < ApplicationRecord
   def generate_invoice(operator_profile_id, coupon_code = nil, payment_intent_id = nil)
     coupon_id = nil
     total = plan.amount
-    method = InvoicingProfile.find(operator_profile_id)&.user&.admin? ? nil : 'stripe'
+    operator = InvoicingProfile.find(operator_profile_id)&.user
+    method = operator&.admin? || (operator&.manager? && operator != user) ? nil : 'stripe'
 
     unless coupon_code.nil?
       @coupon = Coupon.find_by(code: coupon_code)

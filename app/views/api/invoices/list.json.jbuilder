@@ -16,4 +16,10 @@ json.array!(@invoices) do |invoice|
   json.date invoice.is_a?(Avoir) ? invoice.avoir_date : invoice.created_at
   json.prevent_refund invoice.prevent_refund?
   json.chained_footprint invoice.check_footprint
+  if invoice.operator_profile
+    json.operator do
+      json.id invoice.operator_profile.user_id
+      json.extract! invoice.operator_profile, :first_name, :last_name
+    end
+  end
 end

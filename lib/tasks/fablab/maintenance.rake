@@ -66,7 +66,7 @@ namespace :fablab do
 
     desc '(re)build customization stylesheet'
     task rebuild_stylesheet: :environment do
-      Stylesheet.build_sheet!
+      Stylesheet.build_theme!
     end
 
     desc 'migration notifications from Fab-manager v1'

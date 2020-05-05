@@ -39,7 +39,7 @@ class UserPolicy < ApplicationPolicy
     end
   end
 
-  %w[create mapping].each do |action|
+  %w[create mapping update_role].each do |action|
     define_method "#{action}?" do
       user.admin?
     end

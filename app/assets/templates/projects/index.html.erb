@@ -11,7 +11,7 @@
       </section>
     </div>
 
-    <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md" ng-if="isAuthorized(['admin','member'])">
+    <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md" ng-if="isAuthorized(['admin','member', 'manager'])">
       <section class="heading-actions wrapper">
        <a class="btn btn-lg btn-warning bg-white b-2x rounded m-t-sm upper text-sm" ui-sref="app.logged.projects_new" role="button" translate>{{ 'app.public.projects_list.add_a_project' }}</a>
       </section>
