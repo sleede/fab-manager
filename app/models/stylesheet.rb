@@ -6,7 +6,7 @@
 class Stylesheet < ApplicationRecord
 
   # brightness limits to change the font color to black or white
-  BRIGHTNESS_HIGH_LIMIT = 180
+  BRIGHTNESS_HIGH_LIMIT = 160
   BRIGHTNESS_LOW_LIMIT = 40
 
   validates_presence_of :contents
