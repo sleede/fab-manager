@@ -214,6 +214,10 @@ pt:
     event: "Evento"
     reservations: "Reservas"
     available_seats: "Assentos disponíveis"
+  roles:
+    member: "Member"
+    manager: "Manager"
+    admin: "Administrator"
   api:
     #internal app notifications
     notifications:
@@ -329,6 +333,10 @@ pt:
         click_to_show: "Click here to consult"
       notify_admin_refund_created:
         refund_created: "A refund of %{AMOUNT} has been created for user %{USER}"
+      notify_user_role_update:
+        your_role_is_ROLE: "Your role has been changed to %{ROLE}."
+      notify_admins_role_update:
+        user_NAME_changed_ROLE_html: "User <strong><em>%{NAME}</strong></em> is now %{ROLE}."
   #statistics tools for admins
   statistics:
     subscriptions: "Assinaturas"

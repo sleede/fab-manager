@@ -268,7 +268,7 @@ es:
         for_all: "Para todo"
         sold_out: "Sold Out"
         cancelled: "Cancelled"
-        free_admission: "Free admission"
+        free_admission: "Entrada gratuita"
         still_available: "asiento(s) disponible(s)"
         without_reservation: "Sin reserva"
         add_an_event: "Add an event"
