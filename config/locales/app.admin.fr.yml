@@ -374,7 +374,7 @@ fr:
         accounting_periods: "Périodes comptables"
         invoices_list: "Liste des factures"
         filter_invoices: "Filtrer les factures"
-        operator_: "Operator:"
+        operator_: "Opérateur:"
         invoice_num_: "Facture n° :"
         customer_: "Client :"
         date_: "Date :"
@@ -723,6 +723,13 @@ fr:
         error_details: "Détails de l'erreur :"
       #edit a member
       members_edit:
+        change_role: "Change role"
+        warning_role_change: "<p><strong>Warning:</strong> changing the role of a user is not a harmless operation. Is not currently possible to dismiss a user to a lower privileged role.</p><ul><li><strong>Members</strong> can only book reservations for themselves, paying by card or wallet.</li><li><strong>Managers</strong> can book reservations for themselves, paying by card or wallet, and for other members and managers, by collecting payments at the checkout.</li><li><strong>Administrators</strong> can only book reservations for members and managers, by collecting payments at the checkout. Moreover, they can change every settings of the application.</li></ul>"
+        admin: "Administrator"
+        manager: "Manager"
+        member: "Member"
+        role_changed: "Role successfully changed from {OLD} to {NEW}."
+        error_while_changing_role: "An error occurred while changing the role. Please try again later."
         subscription: "Abonnement"
         duration: "Durée :"
         expires_at: "Expire le :"
