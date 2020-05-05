@@ -148,7 +148,7 @@ es:
         on_the_date: "El {DATE}"
         from_time_to_time: "Desde {START} hasta {END}"
         without_reservation: "Sin reserva"
-        free_admission: "Entrada gratuita"
+        free_admission: "Admisión gratuita"
         full_price: "Precio completo: "
         event_full: "Evento lleno"
         still_available: "Asiento(s) disponible(s): "
