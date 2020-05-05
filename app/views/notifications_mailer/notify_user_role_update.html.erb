@@ -1,0 +1,7 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<%
+  name = Setting.find_by(name: 'fablab_name').value
+  gender = Setting.find_by(name: 'name_genre').value
+%>
+<p><%= t('.body.role_changed', NAME: name, GENDER: gender, ROLE: t("roles.#{@attached_object.role}")) %></p>

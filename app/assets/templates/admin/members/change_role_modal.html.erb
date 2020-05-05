@@ -4,7 +4,7 @@
 </div>
 <div class="modal-body">
   <p class="alert alert-warning" translate>{{ 'app.admin.members_edit.warning_role_change' }}</p>
-  <select ng-model="role" class="form-control" ng-options="r in roles"></select>
+  <select ng-model="role" class="form-control" ng-options="role.key as role.label disable when role.notAnOption for role in roles"></select>
 </div>
 <div class="modal-footer">
   <button class="btn btn-info" ng-click="ok()" translate>{{ 'app.shared.buttons.confirm' }}</button>

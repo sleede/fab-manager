@@ -59,9 +59,6 @@
           <button class="btn btn-default edit-member" ui-sref="app.admin.members_edit({id: m.id})">
             <i class="fa fa-edit"></i>
           </button>
-          <button class="btn btn-default promote-member">
-            <img src="/rank-icon.svg" alt="promote member" ng-click="changeUserRole(m.id)" ng-show="isAuthorized('admin')"/>
-          </button>
           <button class="btn btn-danger delete-member" ng-click="deleteMember(m.id)" ng-show="isAuthorized('admin')">
             <i class="fa fa-trash"></i>
           </button>

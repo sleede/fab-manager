@@ -265,47 +265,6 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
       });
     };
 
-    /**
-     * Open a modal dialog asking for confirmation to change the role of the given user
-     * @param userId {number} id of the user to "promote"
-     * @returns {*}
-     */
-    $scope.changeUserRole = function(userId) {
-      const modalInstance = $uibModal.open({
-        animation: true,
-        templateUrl: '<%= asset_path "admin/members/change_role_modal.html" %>',
-        size: 'lg',
-        resolve: {
-          userPromise: ['Member', function (Member) { return Member.get({ id: userId }).$promise; }]
-        },
-        controller: ['$scope', '$uibModalInstance', 'Member', 'userPromise', function ($scope, $uibModalInstance, Member, userPromise) {
-          $scope.user = userPromise;
-
-          $scope.role = userPromise.role;
-
-          $scope.roles  = ['admin', 'manager', 'member'];
-
-          $scope.ok = function () {
-            Member.updateRole(
-              { id: $scope.user.id },
-              { role: $scope.role },
-              function (_res) {
-                growl.success(_t('app.admin.members_edit.role_changed'));
-                return $uibModalInstance.close(_res);
-              },
-              function (error) { growl.error(_t('app.admin.members_edit.error_while_changing_role')); }
-            );
-          };
-
-          $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
-        }]
-      });
-      // once the form was validated successfully ...
-      return modalInstance.result.then(function (user) {
-        // remove the user for the old list add to the new
-      });
-    }
-
 
     /**
      * Ask for confirmation then delete the specified user
@@ -731,6 +690,54 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
 
     // current active authentication provider
     $scope.activeProvider = activeProviderPromise;
+
+    /**
+     * Open a modal dialog asking for confirmation to change the role of the given user
+     * @param userId {number} id of the user to "promote"
+     * @returns {*}
+     */
+    $scope.changeUserRole = function() {
+      const modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: '<%= asset_path "admin/members/change_role_modal.html" %>',
+        size: 'lg',
+        resolve: {
+          user() { return $scope.user; }
+        },
+        controller: ['$scope', '$uibModalInstance', 'Member', 'user', '_t', function ($scope, $uibModalInstance, Member, user, _t) {
+          $scope.user = user;
+
+          $scope.role = user.role;
+
+          $scope.roles = [
+            { key: 'admin', label: _t('app.admin.members_edit.admin') },
+            { key: 'manager', label: _t('app.admin.members_edit.manager'), notAnOption: (user.role === 'admin') },
+            { key: 'member', label: _t('app.admin.members_edit.member'), notAnOption: (user.role === 'admin' || user.role === 'manager') },
+          ];
+
+          $scope.ok = function () {
+            Member.updateRole(
+              { id: $scope.user.id },
+              { role: $scope.role },
+              function (_res) {
+                growl.success(_t('app.admin.members_edit.role_changed', { OLD: _t(`app.admin.members_edit.${user.role}`), NEW: _t(`app.admin.members_edit.${$scope.role}`) }));
+                return $uibModalInstance.close(_res);
+              },
+              function (error) {
+                growl.error(_t('app.admin.members_edit.error_while_changing_role'));
+                console.error(error);
+              }
+            );
+          };
+
+          $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
+        }]
+      });
+      // once the form was validated successfully ...
+      return modalInstance.result.then(function (user) {
+        // remove the user for the old list add to the new
+      });
+    }
 
     /**
      * Open a modal dialog, allowing the admin to extend the current user's subscription (freely or not)

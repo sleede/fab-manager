@@ -205,8 +205,28 @@ class API::MembersController < API::ApiController
   def update_role
     authorize @member
 
-    @member.remove_role @member.role.to_sym
+    # we do not allow dismissing a user to a lower role
+    if params[:role] == 'member'
+      render 403 and return if @member.role == 'admin' || @member.role == 'manager'
+    elsif params[:role] == 'manager'
+      render 403 and return if @member.role == 'admin'
+    end
+
+    # do nothing if the role does not change
+    render json: @member and return if params[:role] == @member.role
+
+    ex_role = @member.role.to_sym
+    @member.remove_role ex_role
     @member.add_role params[:role]
+
+    NotificationCenter.call type: 'notify_user_role_update',
+                            receiver: @member,
+                            attached_object: @member
+
+    NotificationCenter.call type: 'notify_admins_role_update',
+                            receiver: User.admins_and_managers,
+                            attached_object: @member,
+                            meta_data: { ex_role: ex_role }
 
     render json: @member
   end
