@@ -374,6 +374,7 @@ fr:
         accounting_periods: "Périodes comptables"
         invoices_list: "Liste des factures"
         filter_invoices: "Filtrer les factures"
+        operator_: "Operator:"
         invoice_num_: "Facture n° :"
         customer_: "Client :"
         date_: "Date :"
