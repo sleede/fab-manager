@@ -74,38 +74,12 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
          * @param slot {Object} fullCalendar event object
          */
         $scope.validateSlot = function (slot) {
-          let sameTimeReservations = [
-            'training_reservations',
-            'machine_reservations',
-            'space_reservations',
-            'events_reservations'
-          ].map(function (k) {
-            return _.filter($scope.user[k], function(r) {
-              return slot.start.isSame(r.start_at) ||
-                (slot.end.isAfter(r.start_at) && slot.end.isBefore(r.end_at)) ||
-                (slot.start.isAfter(r.start_at) && slot.start.isBefore(r.end_at)) ||
-                (slot.start.isBefore(r.start_at) && slot.end.isAfter(r.end_at));
-            })
-          });
-          sameTimeReservations = _.union.apply(null, sameTimeReservations);
-          if (sameTimeReservations.length > 0) {
-            const modalInstance = $uibModal.open({
-              animation: true,
-              templateUrl: '<%= asset_path "shared/_reserve_slot_same_time.html" %>',
-              size: 'md',
-              controller: 'ReserveSlotSameTimeController',
-              resolve: {
-                sameTimeReservations: function() { return sameTimeReservations; }
-              }
-            });
-            modalInstance.result.then(function(res) {
+          validateTags(slot, function () {
+            validateSameTimeReservations(slot, function () {
               slot.isValid = true;
-              return updateCartPrice();
-            });
-          } else {
-            slot.isValid = true;
-            return updateCartPrice();
-          }
+              updateCartPrice();
+            })
+          })
         };
 
         /**
@@ -331,6 +305,74 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
         };
 
         /**
+         * Validates that the current slot is reserved by a member with an authorized tag. Admin and managers can overpass
+         * the mismatch.
+         * @param slot {Object} fullCalendar event object.
+         * @param callback {function}
+         */
+        const validateTags = function (slot, callback) {
+          const interTags = _.intersection.apply(null, [slot.tag_ids, $scope.user.tag_ids]);
+          if (slot.tag_ids.length === 0 || interTags.length > 0) {
+            if (typeof callback === 'function') callback();
+          } else {
+            // ask confirmation
+            const modalInstance = $uibModal.open({
+              animation: true,
+              templateUrl: '<%= asset_path "shared/_reserve_slot_tags_mismatch.html" %>',
+              size: 'md',
+              controller: 'ReserveSlotTagsMismatchController',
+              resolve: {
+                slotTags: function() { return slot.tags; },
+                userTags: function () { return $scope.user.tags; },
+                userName: function () { return $scope.user.name; }
+              }
+            });
+            modalInstance.result.then(function(res) {
+              if (typeof callback === 'function') callback(res);
+            });
+          }
+        }
+
+        /**
+         * Validates that no other reservations were made that conflict the current slot and alert the user about the conflict.
+         * If the user is an administrator or a manager, he can overpass the conflict.
+         * @param slot {Object} fullCalendar event object.
+         * @param callback {function}
+         */
+        const validateSameTimeReservations = function (slot, callback) {
+          let sameTimeReservations = [
+            'training_reservations',
+            'machine_reservations',
+            'space_reservations',
+            'events_reservations'
+          ].map(function (k) {
+            return _.filter($scope.user[k], function(r) {
+              return slot.start.isSame(r.start_at) ||
+                (slot.end.isAfter(r.start_at) && slot.end.isBefore(r.end_at)) ||
+                (slot.start.isAfter(r.start_at) && slot.start.isBefore(r.end_at)) ||
+                (slot.start.isBefore(r.start_at) && slot.end.isAfter(r.end_at));
+            })
+          });
+          sameTimeReservations = _.union.apply(null, sameTimeReservations);
+          if (sameTimeReservations.length > 0) {
+            const modalInstance = $uibModal.open({
+              animation: true,
+              templateUrl: '<%= asset_path "shared/_reserve_slot_same_time.html" %>',
+              size: 'md',
+              controller: 'ReserveSlotSameTimeController',
+              resolve: {
+                sameTimeReservations: function() { return sameTimeReservations; }
+              }
+            });
+            modalInstance.result.then(function(res) {
+              if (typeof callback === 'function') callback(res);
+            });
+          } else {
+            if (typeof callback === 'function') callback();
+          }
+        }
+
+        /**
          * Callback triggered when the selected slot changed
          */
         const slotSelectionChanged = function () {
@@ -504,12 +546,12 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
             return Price.compute(mkRequestParams(r, $scope.coupon.applied), function (res) {
               $scope.amountTotal = res.price;
               $scope.totalNoCoupon = res.price_without_coupon;
-              return setSlotsDetails(res.details);
+              setSlotsDetails(res.details);
             });
           } else {
             // otherwise we alert, this error musn't occur when the current user is not admin
             growl.warning(_t('app.shared.cart.please_select_a_member_first'));
-            return $scope.amountTotal = null;
+            $scope.amountTotal = null;
           }
         };
 
@@ -518,7 +560,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
             angular.forEach(details.slots, function (s) {
               if (moment(s.start_at).isSame(slot.start)) {
                 slot.promo = s.promo;
-                return slot.price = s.price;
+                slot.price = s.price;
               }
             });
           });
@@ -739,12 +781,37 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
 ]);
 
 /**
- * Controller of modal for show reservations the same date at the same time
+ * Controller of the modal showing the reservations the same date at the same time
  */
-Application.Controllers.controller('ReserveSlotSameTimeController', ['$scope', '$uibModalInstance', 'AuthService', 'sameTimeReservations', 'growl', '_t',
-  function ($scope, $uibModalInstance, AuthService, sameTimeReservations, growl, _t) {
+Application.Controllers.controller('ReserveSlotSameTimeController', ['$scope', '$uibModalInstance', 'AuthService', 'sameTimeReservations',
+  function ($scope, $uibModalInstance, AuthService, sameTimeReservations) {
     $scope.sameTimeReservations = sameTimeReservations;
     $scope.bookSlotAtSameTime = Fablab.bookSlotAtSameTime;
+    $scope.isAuthorized = AuthService.isAuthorized;
+    /**
+     * Confirmation callback
+     */
+    $scope.ok = function () {
+      $uibModalInstance.close({});
+    }
+    /**
+     * Cancellation callback
+     */
+    $scope.cancel = function () {
+      $uibModalInstance.dismiss('cancel');
+    }
+  }
+]);
+
+
+/**
+ * Controller of the modal showing the slot tags
+ */
+Application.Controllers.controller('ReserveSlotTagsMismatchController', ['$scope', '$uibModalInstance', 'AuthService', 'slotTags', 'userTags', 'userName',
+  function ($scope, $uibModalInstance, AuthService, slotTags, userTags, userName) {
+    $scope.slotTags = slotTags;
+    $scope.userTags = userTags;
+    $scope.userName = userName;
     $scope.isAuthorized = AuthService.isAuthorized;
     /**
      * Confirmation callback
