@@ -425,6 +425,12 @@ fr:
         slot_at_same_time: "Conflit avec d'autres réservations"
         do_you_really_want_to_book_slot_at_same_time: "Êtes-vous sûr de réserver ce créneau ? D'autres réservations ont lieu en même temps"
         unable_to_book_slot_because_really_have_reservation_at_same_time: "Impossible de réserver ce créneau car les réservations ci-dessous ont lieu en même temps."
+        tags_mismatch: "Étiquettes incompatibles"
+        confirm_book_slot_tags_mismatch: "Êtes-vous sûr de vouloir réserver ce créneau ? {USER} ne possède aucune des étiquettes requises."
+        unable_to_book_slot_tags_mismatch: "Impossible de réserver ce créneau car vous ne possédez aucune des étiquettes requises."
+        slot_tags: "Étiquettes du créneau"
+        user_tags: "Étiquettes de l'utilisateur"
+        no_tags: "Aucune étiquette"
       #feature-tour modal
       tour:
         previous: "Précédent"

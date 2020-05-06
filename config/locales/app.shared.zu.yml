@@ -425,6 +425,12 @@ zu:
         slot_at_same_time: "crwdns20150:0crwdne20150:0"
         do_you_really_want_to_book_slot_at_same_time: "crwdns20152:0crwdne20152:0"
         unable_to_book_slot_because_really_have_reservation_at_same_time: "crwdns20154:0crwdne20154:0"
+        tags_mismatch: "crwdns20484:0crwdne20484:0"
+        confirm_book_slot_tags_mismatch: "crwdns20486:0{USER}crwdne20486:0"
+        unable_to_book_slot_tags_mismatch: "crwdns20488:0crwdne20488:0"
+        slot_tags: "crwdns20490:0crwdne20490:0"
+        user_tags: "crwdns20492:0crwdne20492:0"
+        no_tags: "crwdns20494:0crwdne20494:0"
       #feature-tour modal
       tour:
         previous: "crwdns20166:0crwdne20166:0"
