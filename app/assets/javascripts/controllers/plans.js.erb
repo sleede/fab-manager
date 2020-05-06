@@ -183,7 +183,7 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
         for (let plan of plansPromise) {
           if (plan.group_id === group.id) {
             groupObj.plans.push(plan);
-            if (!plan.disabled) { groupObj.actives++; }
+            if (!plan.disabled) { groupplansClassifiedByGroupObj.actives++; }
           }
         }
         $scope.plansClassifiedByGroup.push(groupObj);

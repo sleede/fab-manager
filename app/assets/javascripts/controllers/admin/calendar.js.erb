@@ -757,9 +757,9 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
       });
 
       // group plans by Group
-      for (let group of Array.from(groupsPromise)) {
+      for (let group of groupsPromise.filter(g => !g.disabled)) {
           const groupObj = { id: group.id, name: group.name, plans: [] };
-          for (let plan of Array.from(plansPromise)) {
+          for (let plan of plansPromise.filter(g => !g.disabled)) {
               if (plan.group_id === group.id) { groupObj.plans.push(plan); }
           }
           if (groupObj.plans.length > 0) {

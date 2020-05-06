@@ -17,6 +17,7 @@
 - Fix a bug: subscription page shows the groups without any active plans
 - Fix a bug: cart price inconsistently updated after a subscription
 - Fix a bug: background image of the profile is not shown and wrong menu hover color
+- Fix a bug: do not show disabled groups and plans during availability creation
 - Fix a security issue: updated jquery to fix [CVE-2020-11023](https://nvd.nist.gov/vuln/detail/CVE-2020-11023)
 
 ## v4.3.4 2020 April 14
