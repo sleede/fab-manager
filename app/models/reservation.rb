@@ -35,7 +35,7 @@ class Reservation < ApplicationRecord
   # Generate an array of {Stripe::InvoiceItem} with the elements in the current reservation, price included.
   # The training/machine price is depending of the member's group, subscription and credits already used
   # @param on_site {Boolean} true if an admin triggered the call
-  # @param coupon_code {String} pass a valid code to appy a coupon
+  # @param coupon_code {String} pass a valid code to apply a coupon
   ##
   def generate_invoice_items(on_site = false, coupon_code = nil)
     # prepare the plan

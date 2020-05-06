@@ -14,7 +14,7 @@ class API::SubscriptionsController < API::ApiController
   # Managers can create subscriptions for other users
   def create
     user_id = current_user.admin? || current_user.manager? ? params[:subscription][:user_id] : current_user.id
-    amount = transaction_amount(current_user.admin?, user_id)
+    amount = transaction_amount(current_user.admin? || (current_user.manager? && current_user.id != user_id), user_id)
 
     authorize SubscriptionContext.new(Subscription, amount, user_id)
 

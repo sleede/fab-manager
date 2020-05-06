@@ -285,6 +285,20 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
           return false;
         };
 
+        /**
+         * Check if the currently logged user has the 'admin' role OR the 'manager' role, but is not taking reseravtion for himself
+         * @returns {boolean}
+         */
+        $scope.isAuthorized = function () {
+          if (AuthService.isAuthorized('admin')) return true;
+
+          if (AuthService.isAuthorized('manager')) {
+            return ($rootScope.currentUser.id !== $scope.user.id);
+          }
+
+          return false;
+        }
+
         /* PRIVATE SCOPE */
 
         /**

@@ -45,7 +45,7 @@ class API::PricesController < API::ApiController
       @amount = { elements: nil, total: 0, before_coupon: 0 }
     else
       reservable = price_parameters[:reservable_type].constantize.find(price_parameters[:reservable_id])
-      @amount = Price.compute(current_user.admin?,
+      @amount = Price.compute(current_user.admin? || (current_user.manager? && current_user.id != user.id),
                               user,
                               reservable,
                               price_parameters[:slots_attributes] || [],
