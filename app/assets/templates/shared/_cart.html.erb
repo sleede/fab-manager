@@ -16,7 +16,7 @@
       <div class="panel-body">
         <div class="font-sbold text-u-c">{{ 'app.shared.cart.datetime_to_time' | translate:{START_DATETIME:(slot.start | amDateFormat:'LLLL'), END_TIME:(slot.end | amDateFormat:'LT') } }}</div>
         <div class="text-base">{{ 'app.shared.cart.cost_of_TYPE' | translate:{TYPE:reservableType} }} <span ng-class="{'text-blue': !slot.promo, 'red': slot.promo}">{{slot.price | currency}}</span></div>
-        <div ng-show="isAuthorized(['admin', 'manager'])" class="m-t">
+        <div ng-show="isAuthorized()" class="m-t">
           <label for="offerSlot" class="control-label m-r" translate>{{ 'app.shared.cart.offer_this_slot' }}</label>
           <input bs-switch
                  ng-model="slot.offered"

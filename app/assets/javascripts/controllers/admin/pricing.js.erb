@@ -618,6 +618,22 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
     }
 
     /**
+     * Return the exemple price based on the configuration of the default slot duration.
+     * @param type {string} 'hourly_rate' | *
+     * @returns {number} price for Fablab.slotDuration minutes.
+     */
+    $scope.examplePrice = function(type) {
+      const hourlyRate = 10;
+
+      if (type === 'hourly_rate') {
+        return $filter('currency')(hourlyRate);
+      }
+
+      const price = (hourlyRate / 60) * Fablab.slotDuration;
+      return $filter('currency')(price);
+    }
+
+    /**
      * Setup the feature-tour for the admin/pricing page.
      * This is intended as a contextual help (when pressing F1)
      */

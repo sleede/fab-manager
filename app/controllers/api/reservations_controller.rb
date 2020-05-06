@@ -29,13 +29,13 @@ class API::ReservationsController < API::ApiController
   # Managers can create reservations for other users
   def create
     user_id = current_user.admin? || current_user.manager? ? params[:reservation][:user_id] : current_user.id
-    amount = transaction_amount(current_user.admin?, user_id)
+    price = transaction_amount(current_user.admin? || (current_user.manager? && current_user.id != user_id), user_id)
 
-    authorize ReservationContext.new(Reservation, amount, user_id)
+    authorize ReservationContext.new(Reservation, price[:amount], user_id)
 
     @reservation = Reservation.new(reservation_params)
     is_reserve = Reservations::Reserve.new(user_id, current_user.invoicing_profile.id)
-                                      .pay_and_save(@reservation, coupon: coupon_params[:coupon_code])
+                                      .pay_and_save(@reservation, payment_details: price[:price_details])
 
     if is_reserve
       SubscriptionExtensionAfterReservation.new(@reservation).extend_subscription_if_eligible
@@ -73,7 +73,8 @@ class API::ReservationsController < API::ApiController
     # Subtract wallet amount from total
     total = price_details[:total]
     wallet_debit = get_wallet_debit(user, total)
-    total - wallet_debit
+
+    { price_details: price_details, amount: (total - wallet_debit) }
   end
 
   def get_wallet_debit(user, total_amount)

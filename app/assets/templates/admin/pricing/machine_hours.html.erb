@@ -1,5 +1,7 @@
 <div class="alert alert-warning m-t">
-  {{ 'app.admin.pricing.these_prices_match_machine_hours_rates_' | translate:{DURATION:slotDuration} }} <span class="font-bold" translate>{{ 'app.admin.pricing._without_subscriptions' }}</span>.
+  <p ng-bind-html="'app.admin.pricing.these_prices_match_machine_hours_rates_html' | translate"></p>
+  <p ng-bind-html="'app.admin.pricing.prices_calculated_on_hourly_rate_html' | translate:{ DURATION:slotDuration, RATE: examplePrice('hourly_rate'), PRICE: examplePrice('final_price') }"></p>
+  <p translate>{{ 'app.admin.pricing.you_can_override' }}</p>
 </div>
 <table class="table">
   <thead>

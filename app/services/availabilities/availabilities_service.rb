@@ -101,7 +101,7 @@ class Availabilities::AvailabilitiesService
   end
 
   def availabilities(reservable, type, user)
-    if user.admin?
+    if user.admin? || user.manager?
       reservable.availabilities
                 .includes(:tags)
                 .where('end_at > ? AND available_type = ?', 1.month.ago, type)

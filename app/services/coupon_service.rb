@@ -37,6 +37,21 @@ class CouponService
   end
 
   ##
+  # Find the coupon associated with the given code and check it is valid for the given user
+  # @param code {String} the literal code of the coupon
+  # @param user_id {Number} identifier of the user who is applying the coupon
+  # @return {Coupon}
+  ##
+  def validate(code, user_id)
+    return nil unless code && user_id
+
+    coupon = Coupon.find_by(code: code)
+    raise InvalidCouponError if coupon.nil? || coupon.status(user_id) != 'active'
+
+    coupon
+  end
+
+  ##
   # Ventilate the discount of the provided coupon over the given amount proportionately to the invoice's total
   # @param total {Number} total amount of the invoice expressed in monetary units
   # @param amount {Number} price of the invoice's sub-item expressed in monetary units
