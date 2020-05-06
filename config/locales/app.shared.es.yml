@@ -425,6 +425,12 @@ es:
         slot_at_same_time: "Conflict with others reservations"
         do_you_really_want_to_book_slot_at_same_time: "Do you really want to book this slot? Other bookings take place at the same time"
         unable_to_book_slot_because_really_have_reservation_at_same_time: "Unable to book this slot because the following reservation occurs at the same time."
+        tags_mismatch: "Tags mismatch"
+        confirm_book_slot_tags_mismatch: "Do you really want to book this slot? {USER} does not have any of the required tags."
+        unable_to_book_slot_tags_mismatch: "Unable to book this slot because you don't have any of the required tags."
+        slot_tags: "Slot tags"
+        user_tags: "User tags"
+        no_tags: "No tags"
       #feature-tour modal
       tour:
         previous: "Previous"
