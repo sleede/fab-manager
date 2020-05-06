@@ -425,6 +425,12 @@ fr:
         slot_at_same_time: "Conflit avec d'autres réservations"
         do_you_really_want_to_book_slot_at_same_time: "Êtes-vous sûr de réserver ce créneau ? D'autres réservations ont lieu en même temps"
         unable_to_book_slot_because_really_have_reservation_at_same_time: "Impossible de réserver ce créneau car les réservations ci-dessous ont lieu en même temps."
+        tags_mismatch: "Tags mismatch"
+        confirm_book_slot_tags_mismatch: "Do you really want to book this slot? {USER} does not have any of the required tags."
+        unable_to_book_slot_tags_mismatch: "Unable to book this slot because you don't have any of the required tags."
+        slot_tags: "Slot tags"
+        user_tags: "User tags"
+        no_tags: "No tags"
       #feature-tour modal
       tour:
         previous: "Précédent"
