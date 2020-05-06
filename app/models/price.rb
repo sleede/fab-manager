@@ -138,10 +138,12 @@ class Price < ApplicationRecord
 
       # === apply Coupon if any ===
       _amount_no_coupon = total_amount
-      total_amount = CouponService.new.apply(total_amount, coupon_code)
+      cs = CouponService.new
+      cp = cs.validate(coupon_code, user.id)
+      total_amount = cs.apply(total_amount, cp)
 
       # return result
-      { elements: all_elements, total: total_amount.to_i, before_coupon: _amount_no_coupon.to_i }
+      { elements: all_elements, total: total_amount.to_i, before_coupon: _amount_no_coupon.to_i, coupon: cp }
     end
 
 

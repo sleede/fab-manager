@@ -51,10 +51,10 @@ class API::PaymentsController < API::ApiController
 
   private
 
-  def on_reservation_success(intent)
+  def on_reservation_success(intent, details)
     @reservation = Reservation.new(reservation_params)
     is_reserve = Reservations::Reserve.new(current_user.id, current_user.invoicing_profile.id)
-                                      .pay_and_save(@reservation, coupon: coupon_params[:coupon_code], payment_intent_id: intent.id)
+                                      .pay_and_save(@reservation, payment_details: details, payment_intent_id: intent.id)
     Stripe::PaymentIntent.update(
       intent.id,
       description: "Invoice reference: #{@reservation.invoice.reference}"
