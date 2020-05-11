@@ -264,11 +264,17 @@ read_password()
   local password confirmation
   >&2 echo "Please input a password for this administrator's account"
   read -rsp " > " password </dev/tty
-  >&2 printf "\nConfirm the password\n"
-  read -rsp " > " confirmation </dev/tty
-  if [ "$password" != "$confirmation" ]; then
-    >&2 printf "\nError: passwords mismatch\n"
-    password=$(read_password)
+  if [ ${#password} -lt 8 ]; then
+    >&2 printf "\nError: password is too short (minimal length: 8 characters)\n"
+    password=$(read_password 'no-confirm')
+  fi
+  if [ "$1" != 'no-confirm' ]; then
+    >&2 printf "\nConfirm the password\n"
+    read -rsp " > " confirmation </dev/tty
+    if [ "$password" != "$confirmation" ]; then
+      >&2 printf "\nError: passwords mismatch\n"
+      password=$(read_password)
+    fi
   fi
   echo "$password"
 }

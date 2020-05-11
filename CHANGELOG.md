@@ -8,6 +8,7 @@
 - Ask for confirmation before booking a slot for a member without the required tag
 - Corrected the documentation about BOOK_SLOT_AT_SAME_TIME
 - Auto-adjusts text colors based on the selected theme colors
+- Check password length during installation
 - Fix a bug: accounting periods totals are wrong for periods closed after 2019-08-01
 - Fix a bug: unable to change group if the previous was deactivated
 - Fix a bug: unable to create events or trainings that are not multiples of SLOT_DURATION
