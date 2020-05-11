@@ -11,7 +11,7 @@ class VatHistoryService
     end
   end
 
-  # return the VAT rate foe the given date
+  # return the VAT rate for the given date
   def vat_rate(date)
     @vat_rates = vat_history if @vat_rates.nil?
 

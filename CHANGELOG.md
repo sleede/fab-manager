@@ -8,6 +8,7 @@
 - Ask for confirmation before booking a slot for a member without the required tag
 - Corrected the documentation about BOOK_SLOT_AT_SAME_TIME
 - Auto-adjusts text colors based on the selected theme colors
+- Fix a bug: accounting periods totals are wrong for periods closed after 2019-08-01
 - Fix a bug: unable to change group if the previous was deactivated
 - Fix a bug: unable to create events or trainings that are not multiples of SLOT_DURATION
 - Fix a bug: unable to delete an unreserved event
@@ -19,6 +20,7 @@
 - Fix a bug: background image of the profile is not shown and wrong menu hover color
 - Fix a bug: do not show disabled groups and plans during availability creation
 - Fix a security issue: updated jquery to fix [CVE-2020-11023](https://nvd.nist.gov/vuln/detail/CVE-2020-11023)
+- [TODO DEPLOY] `rails db:migrate`
 
 ## v4.3.4 2020 April 14
 
