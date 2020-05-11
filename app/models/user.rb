@@ -196,7 +196,7 @@ class User < ApplicationRecord
       auth.info.mapping.each do |key, value|
         user.set_data_from_sso_mapping(key, value)
       end
-      user.password = Devise.friendly_token[0,20]
+      user.password = Devise.friendly_token[0, 20]
     end
   end
 
