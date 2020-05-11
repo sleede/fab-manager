@@ -30,7 +30,7 @@ class FixAccountingPeriods < ActiveRecord::Migration[5.2]
 
   # will return an array of hash containing the removed periods data
   def backup_and_remove_periods
-    return [] unless AccountingPeriod.where("created_at > '2019-08-01'").count.positive?
+    return [] unless AccountingPeriod.where("created_at > '2019-08-01' AND created_at < '2020-05-12'").count.positive?
 
     puts 'Removing erroneous accounting archives...'
     # 1. remove protection for AccountingPeriods
