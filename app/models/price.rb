@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-MINUTES_PER_HOUR = 60
-SECONDS_PER_MINUTE = 60
+MINUTES_PER_HOUR = 60.0
+SECONDS_PER_MINUTE = 60.0
 
 # Store customized price for various items (Machine, Space), depending on the group and on the plan
 # Also provides a static helper method to compute the price details of a shopping cart
@@ -51,9 +51,9 @@ class Price < ApplicationRecord
       when Machine
         base_amount = reservable.prices.find_by(group_id: user.group_id, plan_id: plan.try(:id)).amount
         if plan
-          space_credit = plan.machine_credits.select { |credit| credit.creditable_id == reservable.id }.first
-          if space_credit
-            hours_available = credits_hours(space_credit, user, new_plan_being_bought)
+          machine_credit = plan.machine_credits.select { |credit| credit.creditable_id == reservable.id }.first
+          if machine_credit
+            hours_available = credits_hours(machine_credit, user, new_plan_being_bought)
             slots.each_with_index do |slot, index|
               total_amount += get_slot_price(base_amount, slot, admin, elements: all_elements, has_credits: (index < hours_available))
             end

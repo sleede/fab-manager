@@ -57,7 +57,7 @@ module Reservations
       # invoice_items assertions
       invoice_item = InvoiceItem.last
 
-      assert_equal invoice_item.amount, machine.prices.find_by(group_id: @user_without_subscription.group_id, plan_id: nil).amount
+      assert_equal machine.prices.find_by(group_id: @user_without_subscription.group_id, plan_id: nil).amount, invoice_item.amount
 
       # invoice assertions
       invoice = Invoice.find_by(invoiced: reservation)
@@ -244,7 +244,7 @@ module Reservations
       # invoice_items assertions
       invoice_item = InvoiceItem.last
 
-      assert_equal invoice_item.amount, machine.prices.find_by(group_id: @vlonchamp.group_id, plan_id: nil).amount
+      assert_equal machine.prices.find_by(group_id: @vlonchamp.group_id, plan_id: nil).amount, invoice_item.amount
 
       # invoice assertions
       invoice = Invoice.find_by(invoiced: reservation)
