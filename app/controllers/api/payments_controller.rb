@@ -12,7 +12,12 @@ class API::PaymentsController < API::ApiController
   def confirm_payment
     render(json: { error: 'Online payment is disabled' }, status: :unauthorized) and return if Rails.application.secrets.fablab_without_online_payments
 
+    amount = nil # will contains the amount and the details of each invoice lines
+    intent = nil # stripe's payment intent
+    res = nil # json of the API answer
+
     begin
+      amount = card_amount
       if params[:payment_method_id].present?
         check_coupon
         check_plan
@@ -20,7 +25,7 @@ class API::PaymentsController < API::ApiController
         # Create the PaymentIntent
         intent = Stripe::PaymentIntent.create(
           payment_method: params[:payment_method_id],
-          amount: card_amount,
+          amount: amount[:amount],
           currency: Rails.application.secrets.stripe_currency,
           confirmation_method: 'manual',
           confirm: true,
@@ -40,7 +45,7 @@ class API::PaymentsController < API::ApiController
 
     if intent&.status == 'succeeded'
       if params[:cart_items][:reservation]
-        res = on_reservation_success(intent)
+        res = on_reservation_success(intent, amount[:details])
       elsif params[:cart_items][:subscription]
         res = on_subscription_success(intent)
       end
@@ -142,7 +147,7 @@ class API::PaymentsController < API::ApiController
     # Subtract wallet amount from total
     total = price_details[:total]
     wallet_debit = get_wallet_debit(current_user, total)
-    total - wallet_debit
+    { amount: total - wallet_debit, details: price_details }
   end
 
   def check_coupon

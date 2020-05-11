@@ -267,7 +267,7 @@ class Reservation < ApplicationRecord
 
     unless coupon.nil?
       total = CouponService.new.apply(total, coupon, user.id)
-      invoice.coupon_id = cp.id
+      invoice.coupon_id = coupon.id
     end
 
     invoice.total = total
