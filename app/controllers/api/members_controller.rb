@@ -219,6 +219,9 @@ class API::MembersController < API::ApiController
     @member.remove_role ex_role
     @member.add_role params[:role]
 
+    # if the new role is 'admin', then change the group to the admins group
+    @member.update_attributes(group_id: Group.find_by(slug: 'admins').id) if params[:role] == 'admin'
+
     NotificationCenter.call type: 'notify_user_role_update',
                             receiver: @member,
                             attached_object: @member

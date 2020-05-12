@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Fix a bug: the subscription page is not available
+- Fix a bug: users promoted to the administrator role are not in the admin group
 
 ## v4.4.0 2020 May 12
 
