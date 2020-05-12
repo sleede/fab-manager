@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v4.4.0 2020 May 12
+
 - Manager: a new role between the member and the administrator
 - The invoices list displays the operator in case of offline payment
 - Interface to manage partners
