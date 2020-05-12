@@ -11,7 +11,7 @@
       </section>
     </div>
 
-    <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md" ng-if="isAuthorized(['admin'])">
+    <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md" ng-if="isAuthorized(['admin', 'manager'])">
       <section class="heading-actions wrapper">
         <a class="btn btn-lg btn-warning bg-white b-2x rounded m-t-sm upper text-sm" ui-sref="app.admin.events_new" role="button" translate>{{ 'app.admin.events.add_an_event' }}</a>
       </section>
@@ -26,7 +26,7 @@
            ui-tour-scroll-parent-id="content-main"
            post-render="setupEventsTour">
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-12" ng-if="isAuthorized('admin')">
         <uib-tabset justified="true" active="tabs.active">
           <uib-tab heading="{{ 'app.admin.events.events_monitoring' | translate }}" index="0">
             <ng-include src="'<%= asset_path "admin/events/monitoring.html" %>'"></ng-include>
@@ -40,6 +40,9 @@
             <ng-include src="'<%= asset_path "admin/events/prices.html" %>'"></ng-include>
           </uib-tab>
         </uib-tabset>
+      </div>
+      <div class="col-md-12" ng-if="isAuthorized('manager')">
+        <ng-include src="'<%= asset_path "admin/events/monitoring.html" %>'"></ng-include>
       </div>
     </div>
   </section>

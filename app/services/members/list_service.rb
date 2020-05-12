@@ -50,7 +50,7 @@ class Members::ListService
                              'SELECT max("created_at") ' \
                              'FROM "subscriptions" ' \
                              'WHERE "statistic_profile_id" = "statistic_profiles"."id")')
-                    .where("users.is_active = 'true' AND roles.name = 'member'")
+                    .where("users.is_active = 'true' AND (roles.name = 'member' OR roles.name = 'manager')")
                     .limit(50)
       query.downcase.split(' ').each do |word|
         members = members.where('lower(f_unaccent(profiles.first_name)) ~ :search OR ' \

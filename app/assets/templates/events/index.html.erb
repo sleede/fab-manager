@@ -67,7 +67,7 @@
                 <span class="text-black-light text-xs" ng-if="event.nb_free_places > 0">{{event.nb_free_places}} {{ 'app.public.events_list.still_available' | translate }}</span>
                 <span class="text-black-light text-xs" ng-if="event.nb_total_places > 0 && event.nb_free_places <= 0" translate>{{ 'app.public.events_list.sold_out' }}</span>
                 <span class="text-black-light text-xs" ng-if="event.nb_total_places == -1" translate>{{ 'app.public.events_list.cancelled' }}</span>
-                <span class="text-black-light text-xs" ng-if="!event.nb_total_places" translate>{{ 'app.public.events_list.free_entry' }}</span>
+                <span class="text-black-light text-xs" ng-if="!event.nb_total_places" translate>{{ 'app.public.events_list.without_reservation' }}</span>
               </div>
             </div>
 

@@ -126,8 +126,8 @@ Application.Controllers.controller('EventsController', ['$scope', '$state', 'Eve
   }
 ]);
 
-Application.Controllers.controller('ShowEventController', ['$scope', '$state', '$stateParams', '$rootScope', 'Event', '$uibModal', 'Member', 'Reservation', 'Price', 'CustomAsset', 'Slot', 'eventPromise', 'growl', '_t', 'Wallet', 'helpers', 'dialogs', 'priceCategoriesPromise', 'settingsPromise',
-  function ($scope, $state, $stateParams, $rootScope, Event, $uibModal, Member, Reservation, Price, CustomAsset, Slot, eventPromise, growl, _t, Wallet, helpers, dialogs, priceCategoriesPromise, settingsPromise) {
+Application.Controllers.controller('ShowEventController', ['$scope', '$state', '$stateParams', '$rootScope', 'Event', '$uibModal', 'Member', 'Reservation', 'Price', 'CustomAsset', 'Slot', 'eventPromise', 'growl', '_t', 'Wallet', 'AuthService', 'helpers', 'dialogs', 'priceCategoriesPromise', 'settingsPromise',
+  function ($scope, $state, $stateParams, $rootScope, Event, $uibModal, Member, Reservation, Price, CustomAsset, Slot, eventPromise, growl, _t, Wallet, AuthService, helpers, dialogs, priceCategoriesPromise, settingsPromise) {
     /* PUBLIC SCOPE */
 
     // reservations for the currently shown event
@@ -245,32 +245,32 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
       if ($scope.event.nb_total_places > 0) {
         $scope.reserveSuccess = false;
         if (!$scope.isAuthenticated()) {
-          return $scope.login(null, function (user) {
-            if (user.role !== 'admin') {
-              return $scope.ctrl.member = user;
+          $scope.login(null, function (user) {
+            if (user.role !== 'admin' || user.role !== 'manager') {
+              $scope.ctrl.member = user;
             }
             const sameTimeReservations = findReservationsAtSameTime();
             if (sameTimeReservations.length > 0) {
               showReserveSlotSameTimeModal(sameTimeReservations, function(res) {
-                return $scope.reserve.toReserve = !$scope.reserve.toReserve;
+                $scope.reserve.toReserve = !$scope.reserve.toReserve;
               });
             } else {
-              return $scope.reserve.toReserve = !$scope.reserve.toReserve;
+              $scope.reserve.toReserve = !$scope.reserve.toReserve;
             }
           });
         } else {
-          if ($scope.currentUser.role === 'admin') {
-            return $scope.reserve.toReserve = !$scope.reserve.toReserve;
+          if (AuthService.isAuthorized(['admin', 'manager'])) {
+            $scope.reserve.toReserve = !$scope.reserve.toReserve;
           } else {
             Member.get({ id: $scope.currentUser.id }, function (member) {
               $scope.ctrl.member = member;
               const sameTimeReservations = findReservationsAtSameTime();
               if (sameTimeReservations.length > 0) {
                 showReserveSlotSameTimeModal(sameTimeReservations, function(res) {
-                  return $scope.reserve.toReserve = !$scope.reserve.toReserve;
+                  $scope.reserve.toReserve = !$scope.reserve.toReserve;
                 });
               } else {
-                return $scope.reserve.toReserve = !$scope.reserve.toReserve;
+                $scope.reserve.toReserve = !$scope.reserve.toReserve;
               }
             });
           }
@@ -286,9 +286,9 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
       resetEventReserve();
       $scope.reserveSuccess = false;
       if ($scope.ctrl.member) {
-        return Member.get({ id: $scope.ctrl.member.id }, function (member) {
+        Member.get({ id: $scope.ctrl.member.id }, function (member) {
           $scope.ctrl.member = member;
-          return getReservations($scope.event.id, 'Event', $scope.ctrl.member.id);
+          getReservations($scope.event.id, 'Event', $scope.ctrl.member.id);
         });
       }
     };
@@ -303,14 +303,17 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
 
         return Wallet.getWalletByUser({ user_id: $scope.ctrl.member.id }, function (wallet) {
           const amountToPay = helpers.getAmountToPay($scope.reserve.amountTotal, wallet.amount);
-          if (($scope.currentUser.role !== 'admin') && (amountToPay > 0)) {
+          if ((AuthService.isAuthorized(['member']) && amountToPay > 0)
+            || (AuthService.isAuthorized('manager') && $scope.ctrl.member.id === $rootScope.currentUser.id && amountToPay > 0)) {
             if ($rootScope.fablabWithoutOnlinePayment) {
               growl.error(_t('app.public.events_show.online_payment_disabled'));
             } else {
               return payByStripe(reservation);
             }
           } else {
-            if (($scope.currentUser.role === 'admin') || (amountToPay === 0)) {
+            if (AuthService.isAuthorized('admin')
+              || (AuthService.isAuthorized('manager') && $scope.ctrl.member.id !== $rootScope.currentUser.id)
+              || amountToPay === 0) {
               return payOnSite(reservation);
             }
           }
@@ -564,7 +567,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
       }
 
       // watch when a coupon is applied to re-compute the total price
-      return $scope.$watch('coupon.applied', function (newValue, oldValue) {
+      $scope.$watch('coupon.applied', function (newValue, oldValue) {
         if ((newValue !== null) || (oldValue !== null)) {
           return $scope.computeEventAmount();
         }
@@ -577,7 +580,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
      * @param reservable_type {string} 'Event'
      * @param user_id {number} the user's id (current or managed)
      */
-    var getReservations = function (reservable_id, reservable_type, user_id) {
+    const getReservations = function (reservable_id, reservable_type, user_id) {
       Reservation.query({
         reservable_id,
         reservable_type,
@@ -592,7 +595,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
      * @param event {Object} Current event
      * @return {{user_id:number, reservable_id:number, reservable_type:string, slots_attributes:Array<Object>, nb_reserve_places:number}}
      */
-    var mkReservation = function (member, reserve, event) {
+    const mkReservation = function (member, reserve, event) {
       const reservation = {
         user_id: member.id,
         reservable_id: event.id,
@@ -628,7 +631,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
      * @param coupon {Object} Coupon as returned from the API
      * @return {{reservation:Object, coupon_code:string}}
      */
-    var mkRequestParams = function (reservation, coupon) {
+    const mkRequestParams = function (reservation, coupon) {
       const params = {
         reservation,
         coupon_code: ((coupon ? coupon.code : undefined))
@@ -640,7 +643,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
     /**
      * Set the current reservation to the default values. This implies the reservation form to be hidden.
      */
-    var resetEventReserve = function () {
+    const resetEventReserve = function () {
       if ($scope.event) {
         $scope.reserve = {
           nbPlaces: {
@@ -666,7 +669,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
      * Open a modal window which trigger the stripe payment process
      * @param reservation {Object} to book
      */
-    var payByStripe = function (reservation) {
+    const payByStripe = function (reservation) {
       $uibModal.open({
         templateUrl: '<%= asset_path "stripe/payment_modal.html" %>',
         size: 'md',
@@ -730,7 +733,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
      * Open a modal window which trigger the local payment process
      * @param reservation {Object} to book
      */
-    var payOnSite = function (reservation) {
+    const payOnSite = function (reservation) {
       $uibModal.open({
         templateUrl: '<%= asset_path "shared/valid_reservation_modal.html" %>',
         size: 'sm',
@@ -808,7 +811,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
      * What to do after the payment was successful
      * @param reservation {Object} booked reservation
      */
-    var afterPayment = function (reservation) {
+    const afterPayment = function (reservation) {
       $scope.event.nb_free_places = $scope.event.nb_free_places - reservation.total_booked_seats;
       resetEventReserve();
       $scope.reserveSuccess = true;
@@ -822,7 +825,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
     /**
      * Find user's reservations, the same date at the same time, with event
      */
-    var findReservationsAtSameTime = function () {
+    const findReservationsAtSameTime = function () {
       let sameTimeReservations = [
         'training_reservations',
         'machine_reservations',
@@ -848,7 +851,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
      * @param sameTimeReservations {Array} reservations the same date at the same time
      * @param callback {function} callback will invoke when user confirm
      */
-    var showReserveSlotSameTimeModal = function(sameTimeReservations, callback) {
+    const showReserveSlotSameTimeModal = function(sameTimeReservations, callback) {
       const modalInstance = $uibModal.open({
         animation: true,
         templateUrl: '<%= asset_path "shared/_reserve_slot_same_time.html" %>',

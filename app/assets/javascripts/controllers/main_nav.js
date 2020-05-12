@@ -81,59 +81,73 @@ Application.Controllers.controller('MainNavController', ['$scope', function ($sc
     {
       state: 'app.admin.calendar',
       linkText: 'app.public.common.manage_the_calendar',
-      linkIcon: 'calendar'
+      linkIcon: 'calendar',
+      authorizedRoles: ['admin', 'manager']
     },
     {
       state: 'app.public.machines_list',
       linkText: 'app.public.common.manage_the_machines',
-      linkIcon: 'cogs'
+      linkIcon: 'cogs',
+      authorizedRoles: ['admin', 'manager']
     },
     {
       state: 'app.admin.trainings',
       linkText: 'app.public.common.trainings_monitoring',
-      linkIcon: 'graduation-cap'
+      linkIcon: 'graduation-cap',
+      authorizedRoles: ['admin', 'manager']
     },
     {
       state: 'app.admin.events',
       linkText: 'app.public.common.manage_the_events',
-      linkIcon: 'tags'
+      linkIcon: 'tags',
+      authorizedRoles: ['admin', 'manager']
     },
     { class: 'menu-spacer' },
     {
       state: 'app.admin.members',
       linkText: 'app.public.common.manage_the_users',
-      linkIcon: 'users'
+      linkIcon: 'users',
+      authorizedRoles: ['admin', 'manager']
     },
     {
       state: 'app.admin.pricing',
       linkText: 'app.public.common.subscriptions_and_prices',
-      linkIcon: 'money'
+      linkIcon: 'money',
+      authorizedRoles: ['admin']
     },
     {
       state: 'app.admin.invoices',
       linkText: 'app.public.common.manage_the_invoices',
-      linkIcon: 'file-pdf-o'
+      linkIcon: 'file-pdf-o',
+      authorizedRoles: ['admin', 'manager']
     },
     {
       state: 'app.admin.statistics',
       linkText: 'app.public.common.statistics',
-      linkIcon: 'bar-chart-o'
+      linkIcon: 'bar-chart-o',
+      authorizedRoles: ['admin']
     },
-    { class: 'menu-spacer' },
+    {
+      class: 'menu-spacer',
+      authorizedRoles: ['admin']
+    },
     {
       state: 'app.admin.settings',
       linkText: 'app.public.common.customization',
-      linkIcon: 'gear'
+      linkIcon: 'gear',
+      authorizedRoles: ['admin']
     },
     {
       state: 'app.admin.project_elements',
       linkText: 'app.public.common.manage_the_projects_elements',
-      linkIcon: 'tasks'
+      linkIcon: 'tasks',
+      authorizedRoles: ['admin']
     },
     {
       state: 'app.admin.open_api_clients',
       linkText: 'app.public.common.open_api_clients',
-      linkIcon: 'cloud'
+      linkIcon: 'cloud',
+      authorizedRoles: ['admin']
     }
   ].concat(Fablab.adminNavLinks);
 

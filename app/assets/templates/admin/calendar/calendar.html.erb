@@ -45,7 +45,7 @@
   </div>
 
   <div class="col-sm-12 col-md-12 col-lg-3">
-    <div class="m text-center">
+    <div class="m text-center" ng-show="isAuthorized('admin')">
       <a class="btn btn-default export-xls-button"
          ng-href="api/availabilities/export_index.xlsx"
          target="export-frame"
@@ -56,6 +56,21 @@
         <i class="fa fa-file-excel-o"></i> {{ 'app.admin.calendar.availabilities' | translate }}
       </a>
       <iframe name="export-frame" height="0" width="0" class="none"></iframe>
+    </div>
+
+    <div class="widget panel b-a m m-t-lg" ng-if="availability" ng-hide="availability.available_type == 'event'">
+      <div class="panel-heading b-b small">
+        <h3><i class="fa fa-info-circle m-r" aria-hidden="true"></i><span translate>{{ 'app.admin.calendar.info' }}</span></h3>
+      </div>
+      <div class="widget-content no-bg auto wrapper">
+        <div translate translate-values="{DURATION: availability.slot_duration}">{{ 'app.admin.calendar.slot_duration' }}</div>
+        <div class="m-t-sm" ng-show="availability.tags.length > 0">
+          <span translate>{{ 'app.admin.calendar.tags' }}</span>
+          <ul>
+            <li ng-repeat="tag in availability.tags">{{tag.name}}</li>
+          </ul>
+        </div>
+      </div>
     </div>
 
     <div class="widget panel b-a m m-t-lg" ng-if="availability" ng-hide="availability.available_type == 'event'">
@@ -71,7 +86,7 @@
               <span class="btn btn-warning btn-xs" ng-click="cancelBooking(r)" ng-if="!r.canceled_at"><i class="fa fa-times red"></i></span>
           </li>
         </ul>
-        <div ng-show="reservations.length == 0" translate>{{ 'app.admin.calendar.no_reservations' }}</div>
+        <div ng-show="reservations.length == 0" translate>{{ 'app.admin.calendar.without_reservation' }}</div>
         <div class="m-t" ng-show="availability.lock"><i class="fa fa-ban"></i> <span class="m-l-xs" translate>{{ 'app.admin.calendar.reservations_locked' }}</span></div>
       </div>
     </div>

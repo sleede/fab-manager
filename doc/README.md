@@ -26,6 +26,9 @@ The following guides are designed for the people that perform software maintenan
 - [PostgreSQL](postgres_upgrade.md)
 - [ElasticSearch](elastic_upgrade.md)
 
+### Translator's documentation
+If you intend to translate Fab-manager to a new, or an already supported language, you'll find here the information you need. 
+- [Guide for translators](translation_readme.md)
 
 ### Developer's documentation
 The following guides should help those who want to contribute to the code.

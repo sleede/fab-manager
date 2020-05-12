@@ -1,0 +1,19 @@
+<uib-tabset justified="true" active="tabs.sub" class="m-t">
+
+    <uib-tab classes="{{isAuthorized('admin') ? 'level-2-tab' : ''}}" heading="{{ 'app.admin.members.members' | translate }}" index="0">
+      <ng-include src="'<%= asset_path "admin/members/members.html" %>'"></ng-include>
+    </uib-tab>
+
+    <uib-tab classes="{{isAuthorized('admin') ? 'level-2-tab' : ''}}" heading="{{ 'app.admin.members.administrators' | translate }}" class="admins-tab" index="1">
+      <ng-include src="'<%= asset_path "admin/members/administrators.html" %>'"></ng-include>
+    </uib-tab>
+
+    <uib-tab classes="{{isAuthorized('admin') ? 'level-2-tab' : ''}}" heading="{{ 'app.admin.members.managers' | translate }}" class="admins-tab" index="2">
+      <ng-include src="'<%= asset_path "admin/members/managers.html" %>'"></ng-include>
+    </uib-tab>
+
+  <uib-tab classes="{{isAuthorized('admin') ? 'level-2-tab' : ''}}" heading="{{ 'app.admin.members.partners' | translate }}" class="admins-tab" index="3" ng-show="isAuthorized('admin')">
+    <ng-include src="'<%= asset_path "admin/members/partners.html" %>'"></ng-include>
+  </uib-tab>
+
+</uib-tabset>

@@ -17,7 +17,7 @@
 <div class="row no-gutter">
   <div class="col-sm-12 col-md-9 b-r">
 
-    <div class="row m-t m-b padder" ng-repeat="plansGroup in plansClassifiedByGroup | groupFilter:ctrl.member">
+    <div class="row m-t m-b padder" ng-repeat="plansGroup in plansClassifiedByGroup | groupFilter:ctrl.member" ng-show="plansGroup.actives > 0">
 
       <div class="col-md-12 text-center">
         <h2 class="text-u-c">{{plansGroup.name}}</h2>
@@ -36,25 +36,24 @@
                 <div class="wrap">
                   <div class="price">
                     <div class="amount" data-fittext>{{plan.amount | currency}}</div>
-                      <span class="period">{{ plan.interval | planIntervalFilter: plan.interval_count }}</span>
+                    <span class="period">{{ plan.interval | planIntervalFilter: plan.interval_count }}</span>
                   </div>
                 </div>
               </div>
 
-              <div class="cta-button" ng-if="!currentUser || currentUser.role == 'member'">
-                <button class="btn btn-default rounded" ng-click="selectPlan(plan)" ng-if="currentUser.subscribed_plan.id != plan.id" ng-disabled="currentUser.subscribed_plan" ng-class="{ 'bg-yellow': selectedPlan==plan }">
-
-                <span ng-if="currentUser" translate>{{ 'app.public.plans.i_choose_that_plan' }}</span>
-
-                <span ng-if="!currentUser" translate>{{ 'app.public.plans.i_subscribe_online' }}</span>
-
+              <div class="cta-button" ng-if="!ctrl.member || ctrl.member.role == 'member' || (ctrl.member.role == 'manager' && ctrl.member.id === currentUser.id)">
+                <button class="btn btn-default rounded" ng-click="selectPlan(plan)" ng-if="ctrl.member.subscribed_plan.id != plan.id" ng-disabled="ctrl.member.subscribed_plan" ng-class="{ 'bg-yellow': selectedPlan==plan }">
+                  <span ng-if="ctrl.member" translate>{{ 'app.public.plans.i_choose_that_plan' }}</span>
+                  <span ng-if="!ctrl.member" translate>{{ 'app.public.plans.i_subscribe_online' }}</span>
                 </button>
 
-                <button class="btn btn-warning bg-yellow rounded" ng-if="currentUser.subscribed_plan.id == plan.id" ng-disabled="currentUser.subscribed_plan.id == plan.id" translate>{{ 'app.public.plans.i_already_subscribed' }}</button>
+                <button class="btn btn-warning bg-yellow rounded" ng-if="ctrl.member.subscribed_plan.id == plan.id" ng-disabled="ctrl.member.subscribed_plan.id == plan.id" translate>
+                  {{ 'app.public.plans.i_already_subscribed' }}
+                </button>
 
               </div>
 
-              <div class="cta-button" ng-if="currentUser.role == 'admin'">
+              <div class="cta-button" ng-if="isAuthorized('admin') || (ctrl.member.role == 'manager' && ctrl.member.id != currentUser.id)">
                 <button class="btn btn-default rounded" ng-click="selectPlan(plan)" ng-class="{ 'bg-yellow': selectedPlan==plan }" ng-disabled="!ctrl.member">
                   <span translate>{{ 'app.public.plans.i_choose_that_plan' }}</span>
                 </button>
@@ -67,9 +66,9 @@
         </div>
 
 
-        <div class="col-xs-12 col-md-12 col-lg-10 col-centered no-gutter" ng-if="currentUser.subscription && isInPast(currentUser.subscription.expired_at)">
+        <div class="col-xs-12 col-md-12 col-lg-10 col-centered no-gutter" ng-if="ctrl.member.subscription && isInPast(ctrl.member.subscription.expired_at)">
           <uib-alert type="info">
-            {{ 'app.public.plans.your_subscription_expires_on_the_DATE' | translate:{DATE:(currentUser.subscription.expired_at | amDateFormat:'L' )} }}
+            {{ 'app.public.plans.your_subscription_expires_on_the_DATE' | translate:{DATE:(ctrl.member.subscription.expired_at | amDateFormat:'L' )} }}
           </uib-alert>
         </div>
 
@@ -81,14 +80,14 @@
 
   <div class="col-sm-12 col-md-12 col-lg-3">
 
-    <div ng-if="currentUser.role === 'admin'">
+    <div ng-if="isAuthorized(['admin', 'manager'])">
       <select-member subscription="false"></select-member>
     </div>
 
     <section class="widget panel b-a m m-t-lg" ng-show="ctrl.member">
       <div class="panel-heading b-b">
-          <h3 ng-show="currentUser.role != 'admin'" translate>{{ 'app.public.plans.my_group' }}</h3>
-          <h3 ng-show="currentUser.role === 'admin'" translate translate-values="{GENDER:getGender(currentUser)}">{{ 'app.public.plans.his_group' }}</h3>
+          <h3 ng-show="isAuthorized('member')" translate>{{ 'app.public.plans.my_group' }}</h3>
+          <h3 ng-show="isAuthorized(['admin', 'manager'])" translate translate-values="{GENDER:getGender(ctrl.member)}">{{ 'app.public.plans.his_group' }}</h3>
       </div>
       <div class="widget-content no-bg auto wrapper">
           <div ng-show="!group.change">
@@ -99,14 +98,14 @@
                       ng-click="group.change = !group.change"
                       ng-show="(!selectedPlan && ctrl.member && !ctrl.member.subscribed_plan && ctrl.member.subscription) || (!paid.plan)"
                       translate
-                      translate-values="{ROLE:currentUser.role}">{{ 'app.public.plans.he_wants_to_change_group' }}</button>
+                      translate-values="{ROLE:ctrl.member.role}">{{ 'app.public.plans.he_wants_to_change_group' }}</button>
           </div>
           <div ng-show="group.change">
               <select class="form-control" ng-options="g.id as g.name for g in groups" ng-model="group.id"></select>
               <button class="btn btn-success m-t"
                       ng-click="selectGroup()"
                       translate
-                      translate-values="{ROLE:currentUser.role, GENDER:getGender(currentUser)}">{{ 'app.public.plans.change_my_group' }}</button>
+                      translate-values="{ROLE:ctrl.member.role, GENDER:getGender(ctrl.member)}">{{ 'app.public.plans.change_my_group' }}</button>
           </div>
       </div>
     </section>

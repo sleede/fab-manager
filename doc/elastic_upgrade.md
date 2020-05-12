@@ -4,19 +4,19 @@
 
 Fab-manager release 2.6.5 has upgraded its dependency to ElasticSearch from version 1.7 to version 5.6 as the previous was unsupported for months.
 To keep using Fab-manager you need to upgrade your installation with the new version.
-We've wrote a script to automate the process while keeping your data integrity, but there's some requirements to understand before running it.
+We've written a script to automate the process while keeping your data integrity, but there are some requirements to understand before running it.
 
 - You need to install *curl*, *jq*, *GNU awk* and *sudo* on your system before running the script. 
   Usually, `apt update && apt install curl jq sudo gawk`, ran as root, will do the trick but this may change, depending upon your system.
 - Your current user must be part of the *docker* and *sudo* groups. 
   Using the root user is a possible alternative, but not recommended.
-- You'll need at least 4GB of RAM for the data migration to complete successfully.
-  The script will try to add 4GB of swap memory if this requirement is detected as missing but this will consume you hard disk space (see below).
-- 1,2GB of free disk space are also required to perform the data migration.
+- You'll need at least 4 GB of RAM for the data migration to complete successfully.
+  The script will try to add 4 GB of swap memory if this requirement is detected as missing but this will consume you hard disk space (see below).
+- 1,2 GB of free disk space are also required to perform the data migration.
   Please ensure that you'll have enough space, considering the point above. The script won't run otherwise.
 - This script will run on any Linux or Macintoch systems if you installed ElasticSearch using docker or docker-compose.
   Otherwise, only Debian compatible OS (like Ubuntu) and MacOS X are supported for classical installations. On any other cases you'll need to perform the upgrade yourself manually.
-- If your ElasticSearch instance uses replicas shards, you can't use this script and you must perform a manual upgrade (if you have a standard Fab-manager installation and you don't understand what this mean, you're probably not concerned).
+- If your ElasticSearch instance uses replicas shards, you can't use this script, and you must perform a manual upgrade (if you have a standard Fab-manager installation, and you don't understand what this mean, you're probably not concerned).
 
 Once you've understood all the points above, you can run the migration script with the following:
 
@@ -35,7 +35,7 @@ For instructions regarding a manual upgrade, please refer to the official docume
 
 ## Restart the upgrade
 
-So something goes wrong and the upgrade failed during ES 2.4 reindexing? 
+So something goes wrong, and the upgrade failed during ES 2.4 reindexing? 
 Sad news, but everything isn't lost, follow this procedure to start the upgrade again.
 
 First, check the status of your indices:
@@ -145,7 +145,7 @@ Stop and remove your container, then edit your [docker-compose.yml](../docker/do
 
 Copy [elasticsearch.yml](../docker/elasticsearch.yml) and [log4j2.properties](../docker/log4j2.properties) to `elasticsearch/config`, then pull and restart your containers.
 
-Finally reindex your data:
+Finally, reindex your data:
 ```bash
 rails fablab:es:build_stats
 rails fablab:es:generate_stats[3000]

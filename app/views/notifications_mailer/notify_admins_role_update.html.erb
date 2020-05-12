@@ -1,0 +1,8 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p><%= t('.body.user_role_changed_html', NAME: @attached_object&.profile&.full_name || t('api.notifications.deleted_user')) %></p>
+
+<p>
+  <small><%= t('.body.previous_role') %> <strong><%= t("roles.#{@notification.get_meta_data(:ex_role)}") %></strong></small>
+  <br/><%= t('.body.new_role') %> <strong><%= t("roles.#{@attached_object.role}") %></strong>
+</p>

@@ -45,7 +45,7 @@ Rails.application.routes.draw do
       patch '/bulk_update', action: 'bulk_update', on: :collection
       put '/reset/:name', action: 'reset', on: :collection
     end
-    resources :users, only: %i[index create]
+    resources :users, only: %i[index create destroy]
     resources :members, only: %i[index show create update destroy] do
       get '/export_subscriptions', action: 'export_subscriptions', on: :collection
       get '/export_reservations', action: 'export_reservations', on: :collection
@@ -55,6 +55,7 @@ Rails.application.routes.draw do
       get 'search/:query', action: 'search', on: :collection
       get 'mapping', action: 'mapping', on: :collection
       patch ':id/complete_tour', action: 'complete_tour', on: :collection
+      patch ':id/update_role', action: 'update_role', on: :collection
     end
     resources :reservations, only: %i[show create index update]
     resources :notifications, only: %i[index show update] do

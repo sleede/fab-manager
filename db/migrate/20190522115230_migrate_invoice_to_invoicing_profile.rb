@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 # migrate the invoices from being attached to a user to invoicing_profiles which are GDPR compliant
-# frozen_string_literal:true
-
 class MigrateInvoiceToInvoicingProfile < ActiveRecord::Migration[4.2]
   def up
     # first, check the footprints

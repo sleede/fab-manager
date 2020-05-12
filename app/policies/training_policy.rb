@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Check the access policies for API::TrainingsController
 class TrainingPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
@@ -5,17 +8,19 @@ class TrainingPolicy < ApplicationPolicy
     end
   end
 
-  %w(create update).each do |action|
-    define_method "#{action}?" do
-      user.admin?
-    end
+  def create
+    user.admin?
+  end
+
+  def update?
+    user.admin? || user.manager?
   end
 
   def destroy?
-    user.admin? and record.destroyable?
+    user.admin? && record.destroyable?
   end
 
   def availabilities?
-    user.admin?
+    user.admin? || user.manager?
   end
 end

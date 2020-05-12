@@ -214,6 +214,10 @@ zu:
     event: "crwdns3551:0crwdne3551:0"
     reservations: "crwdns3553:0crwdne3553:0"
     available_seats: "crwdns3555:0crwdne3555:0"
+  roles:
+    member: "crwdns20446:0crwdne20446:0"
+    manager: "crwdns20448:0crwdne20448:0"
+    admin: "crwdns20450:0crwdne20450:0"
   api:
     #internal app notifications
     notifications:
@@ -329,6 +333,10 @@ zu:
         click_to_show: "crwdns3687:0crwdne3687:0"
       notify_admin_refund_created:
         refund_created: "crwdns4559:0%{AMOUNT}crwdnd4559:0%{USER}crwdne4559:0"
+      notify_user_role_update:
+        your_role_is_ROLE: "crwdns20452:0%{ROLE}crwdne20452:0"
+      notify_admins_role_update:
+        user_NAME_changed_ROLE_html: "crwdns20454:0%{NAME}crwdnd20454:0%{ROLE}crwdne20454:0"
   #statistics tools for admins
   statistics:
     subscriptions: "crwdns3689:0crwdne3689:0"

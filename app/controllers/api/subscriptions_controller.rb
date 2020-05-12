@@ -10,12 +10,13 @@ class API::SubscriptionsController < API::ApiController
   end
 
   # Admins can create any subscriptions. Members can directly create subscriptions if total = 0,
-  # otherwise, they must use payments_controller#confirm_payment
+  # otherwise, they must use payments_controller#confirm_payment.
+  # Managers can create subscriptions for other users
   def create
-    user_id = current_user.admin? ? params[:subscription][:user_id] : current_user.id
-    amount = transaction_amount(current_user.admin?, user_id)
+    user_id = current_user.admin? || current_user.manager? ? params[:subscription][:user_id] : current_user.id
+    amount = transaction_amount(current_user.admin? || (current_user.manager? && current_user.id != user_id), user_id)
 
-    authorize SubscriptionContext.new(Subscription, amount)
+    authorize SubscriptionContext.new(Subscription, amount, user_id)
 
     @subscription = Subscription.new(subscription_params)
     is_subscribe = Subscriptions::Subscribe.new(current_user.invoicing_profile.id, user_id)

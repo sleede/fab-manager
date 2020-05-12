@@ -5,6 +5,7 @@ json.array!(@availabilities) do |availability|
   json.title availability.title
   json.start availability.start_at.iso8601
   json.end availability.end_at.iso8601
+  json.slot_duration availability.slot_duration
   json.available_type availability.available_type
   json.machine_ids availability.machine_ids
   json.training_ids availability.training_ids

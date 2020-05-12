@@ -107,7 +107,6 @@
     > li.menu-spacer {
       height: 1px;
       margin: 6px 80% 6px 5px;
-      background: linear-gradient(45deg, black, transparent);
     }
 
     ul {
@@ -535,3 +534,13 @@
   display: inline-block !important;
   padding: 11px 44px !important;
 }
+
+li.level-2-tab > a {
+  line-height: 14px;
+  font-size: 12px;
+}
+
+li.active.level-2-tab > a {
+  background: linear-gradient(#eee, #fff);
+}
+

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
@@ -17,11 +19,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     1080, # mailcatcher web ui
     4040  # ngrok web ui
   ].each do |port|
-    config.vm.network "forwarded_port", guest: port, host: port
+    config.vm.network 'forwarded_port', guest: port, host: port
   end
 
   # nginx server
-  config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.network 'forwarded_port', guest: 80, host: 8080
 
   # Configuration to allocate resources fro the virtual machine
   config.vm.provider 'virtualbox' do |vb|
@@ -32,29 +34,29 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # configuration below for file syncronization
   config.vm.synced_folder '.', '/vagrant', type: 'virtualbox'
 
-  # Copy default configuration files for the database conenction and the Rails application
-  config.vm.provision "file", source: "./config/database.yml.default", destination: "/vagrant/config/database.yml"
-  config.vm.provision "file", source: "./config/application.yml.default", destination: "/vagrant/config/application.yml"
+  # Copy default configuration files for the database connection and the Rails application
+  config.vm.provision 'file', source: './config/database.yml.default', destination: '/vagrant/config/database.yml'
+  config.vm.provision 'file', source: './env.example', destination: '/vagrant/.env'
 
   # Copy default configuration files to allow reviewing the Docker Compose integration
-  config.vm.provision "file", source: "./docker/docker-compose.yml", destination: "/home/vagrant/docker-compose.yml"
-  config.vm.provision "file", source: "./docker/env.example", destination: "/home/vagrant/config/env"
-  config.vm.provision "file", source: "./docker/nginx.conf.example", destination: "/home/vagrant/config/nginx/fabmanager.conf"
-  config.vm.provision "file", source: "./docker/elasticsearch.yml", destination: "/home/vagrant/elasticsearch/config/elasticsearch.yml"
-  config.vm.provision "file", source: "./docker/log4j2.properties", destination: "/home/vagrant/elasticsearch/config/log4j2.properties"
+  config.vm.provision 'file', source: './docker/development/docker-compose.yml', destination: '/home/vagrant/docker-compose.yml'
+  config.vm.provision 'file', source: './setup/env.example', destination: '/home/vagrant/config/env'
+  config.vm.provision 'file', source: './setup/nginx.conf.example', destination: '/home/vagrant/config/nginx/fabmanager.conf'
+  config.vm.provision 'file', source: './setup/elasticsearch.yml', destination: '/home/vagrant/elasticsearch/config/elasticsearch.yml'
+  config.vm.provision 'file', source: './setup/log4j2.properties', destination: '/home/vagrant/elasticsearch/config/log4j2.properties'
 
   ## Provision software dependencies
-  config.vm.provision "shell", privileged: false, run: "once",
-    path: "provision/zsh_setup.sh"
+  config.vm.provision 'shell', privileged: false, run: 'once',
+                               path: 'provision/zsh_setup.sh'
 
-  config.vm.provision "shell", privileged: false, run: "once",
-    path: "provision/box_setup.zsh",
-    env: {
-      "LC_ALL"   => "en_US.UTF-8",
-      "LANG"     => "en_US.UTF-8",
-      "LANGUAGE" => "en_US.UTF-8",
-    }
+  config.vm.provision 'shell', privileged: false, run: 'once',
+                               path: 'provision/box_setup.zsh',
+                               env: {
+                                 'LC_ALL' => 'en_US.UTF-8',
+                                 'LANG' => 'en_US.UTF-8',
+                                 'LANGUAGE' => 'en_US.UTF-8'
+                               }
 
-  config.vm.provision "shell", privileged: true, run: "once",
-    path: "provision/box_tuning.zsh"
+  config.vm.provision 'shell', privileged: true, run: 'once',
+                               path: 'provision/box_tuning.zsh'
 end

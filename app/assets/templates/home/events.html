@@ -42,7 +42,7 @@
               <i class="fa fa-user red col-xs-3 padder-icon"></i>
               <h6 class="m-n col-xs-9 ">
                 <span ng-if="event.nb_free_places > 0">{{ 'app.public.home.still_available' | translate }} {{event.nb_free_places}}</span>
-                <span ng-if="!event.nb_total_places" translate>{{ 'app.public.home.free_entry' }}</span>
+                <span ng-if="!event.nb_total_places" translate>{{ 'app.public.home.without_reservation' }}</span>
                 <span ng-if="event.nb_total_places > 0 && event.nb_free_places <= 0" translate>{{ 'app.public.home.event_full' }}</span>
               </h6>
             </div>

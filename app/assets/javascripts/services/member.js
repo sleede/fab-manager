@@ -44,6 +44,10 @@ Application.Services.factory('Member', ['$resource', '$q', function ($resource, 
             return response.data;
           }
         }
+      },
+      updateRole: {
+        method: 'PATCH',
+        url: '/api/members/:id/update_role'
       }
     }
   );

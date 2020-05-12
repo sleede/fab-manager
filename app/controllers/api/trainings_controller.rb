@@ -41,7 +41,8 @@ class API::TrainingsController < API::ApiController
       end
 
       head :no_content
-    elsif @training.update(training_params)
+    elsif current_user.admin? && @training.update(training_params)
+      # only admins can fully update a training, not managers
       render :show, status: :ok, location: @training
     else
       render json: @training.errors, status: :unprocessable_entity

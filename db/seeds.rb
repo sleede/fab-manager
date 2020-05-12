@@ -284,7 +284,7 @@ end
 
 unless Setting.find_by(name: 'machine_explications_alert').try(:value)
   setting = Setting.find_or_initialize_by(name: 'machine_explications_alert')
-  setting.value = "Tout achat d'heure machine est définitif. Aucune" \
+  setting.value = 'Tout achat de créneau machine est définitif. Aucune' \
   ' annulation ne pourra être effectuée, néanmoins au plus tard 24h avant le créneau fixé, vous pouvez en' \
   " modifier la date et l'horaire à votre convenance et en fonction du calendrier proposé. Passé ce délais," \
   ' aucun changement ne pourra être effectué.'
@@ -699,7 +699,7 @@ unless Setting.find_by(name: 'secondary_color').try(:value)
   setting.save
 end
 
-Stylesheet.build_sheet!
+Stylesheet.build_theme!
 Stylesheet.build_home!
 
 unless Setting.find_by(name: 'training_information_message').try(:value)

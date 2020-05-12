@@ -15,13 +15,14 @@ class Availabilities::PublicAvailabilitiesService
                                  .where(lock: false)
     slots = []
     availabilities.each do |a|
+      slot_duration = a.slot_duration || ApplicationHelper::SLOT_DURATION
       a.machines.each do |machine|
         next unless machine_ids&.include?(machine.id.to_s)
 
-        ((a.end_at - a.start_at) / ApplicationHelper::SLOT_DURATION.minutes).to_i.times do |i|
+        ((a.end_at - a.start_at) / slot_duration.minutes).to_i.times do |i|
           slot = Slot.new(
-            start_at: a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes,
-            end_at: a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes + ApplicationHelper::SLOT_DURATION.minutes,
+            start_at: a.start_at + (i * slot_duration).minutes,
+            end_at: a.start_at + (i * slot_duration).minutes + slot_duration.minutes,
             availability_id: a.id,
             availability: a,
             machine: machine,
@@ -45,13 +46,14 @@ class Availabilities::PublicAvailabilitiesService
 
     slots = []
     availabilities.each do |a|
+      slot_duration = a.slot_duration || ApplicationHelper::SLOT_DURATION
       space = a.spaces.first
-      ((a.end_at - a.start_at) / ApplicationHelper::SLOT_DURATION.minutes).to_i.times do |i|
-        next unless (a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes) > DateTime.current
+      ((a.end_at - a.start_at) / slot_duration.minutes).to_i.times do |i|
+        next unless (a.start_at + (i * slot_duration).minutes) > DateTime.current
 
         slot = Slot.new(
-          start_at: a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes,
-          end_at: a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes + ApplicationHelper::SLOT_DURATION.minutes,
+          start_at: a.start_at + (i * slot_duration).minutes,
+          end_at: a.start_at + (i * slot_duration).minutes + slot_duration.minutes,
           availability_id: a.id,
           availability: a,
           space: space,

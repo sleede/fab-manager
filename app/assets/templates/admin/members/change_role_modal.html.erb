@@ -1,0 +1,12 @@
+<div class="modal-header">
+  <img ng-src="{{logoBlack.custom_asset_file_attributes.attachment_url}}" alt="{{logo.custom_asset_file_attributes.attachment}}" class="modal-logo"/>
+  <h1 translate>{{ 'app.admin.members_edit.change_role' }}</h1>
+</div>
+<div class="modal-body">
+  <p class="alert alert-warning" translate>{{ 'app.admin.members_edit.warning_role_change' }}</p>
+  <select ng-model="role" class="form-control" ng-options="role.key as role.label disable when role.notAnOption for role in roles"></select>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-info" ng-click="ok()" translate>{{ 'app.shared.buttons.confirm' }}</button>
+  <button class="btn btn-default" ng-click="cancel()" translate>{{ 'app.shared.buttons.cancel' }}</button>
+</div>

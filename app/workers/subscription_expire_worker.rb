@@ -9,14 +9,14 @@ class SubscriptionExpireWorker
                                   receiver: s.user,
                                   attached_object: s
           NotificationCenter.call type: 'notify_admin_subscription_will_expire_in_7_days',
-                                  receiver: User.admins,
+                                  receiver: User.admins_and_managers,
                                   attached_object: s
         else
           NotificationCenter.call type: 'notify_member_subscription_is_expired',
                                   receiver: s.user,
                                   attached_object: s
           NotificationCenter.call type: 'notify_admin_subscription_is_expired',
-                                  receiver: User.admins,
+                                  receiver: User.admins_and_managers,
                                   attached_object: s
         end
       end

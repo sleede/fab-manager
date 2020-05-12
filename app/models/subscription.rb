@@ -46,7 +46,8 @@ class Subscription < ApplicationRecord
   def generate_invoice(operator_profile_id, coupon_code = nil, payment_intent_id = nil)
     coupon_id = nil
     total = plan.amount
-    method = InvoicingProfile.find(operator_profile_id)&.user&.admin? ? nil : 'stripe'
+    operator = InvoicingProfile.find(operator_profile_id)&.user
+    method = operator&.admin? || (operator&.manager? && operator != user) ? nil : 'stripe'
 
     unless coupon_code.nil?
       @coupon = Coupon.find_by(code: coupon_code)
@@ -148,7 +149,7 @@ class Subscription < ApplicationRecord
 
   def notify_admin_subscription_canceled
     NotificationCenter.call type: 'notify_admin_subscription_canceled',
-                            receiver: User.admins,
+                            receiver: User.admins_and_managers,
                             attached_object: self
   end
 
@@ -173,7 +174,7 @@ class Subscription < ApplicationRecord
                             meta_data: meta_data
 
     NotificationCenter.call type: :notify_admin_subscription_extended,
-                            receiver: User.admins,
+                            receiver: User.admins_and_managers,
                             attached_object: self,
                             meta_data: meta_data
   end

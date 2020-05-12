@@ -22,7 +22,7 @@ class WalletService
                                   receiver: @wallet.user,
                                   attached_object: transaction
           NotificationCenter.call type: 'notify_admin_user_wallet_is_credited',
-                                  receiver: User.admins,
+                                  receiver: User.admins_and_managers,
                                   attached_object: transaction
           return transaction
         end

@@ -57,7 +57,7 @@ es:
         phone_number: "Phone number"
         phone_number_is_required: "Phone number is required."
         i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "I authorize FabLab users, registered on the site, to contact me"
-        i_accept_to_receive_information_from_the_fablab: "I accept to receive information from the FabLab"
+        i_accept_to_receive_information_from_the_fablab: "Acepto recibir información del FabLab"
         used_for_statistics: "This data will be used for statistical purposes"
         used_for_invoicing: "This data will be used for billing purposes"
         used_for_reservation: "This data will be used in case of change on one of your bookings"
@@ -379,7 +379,7 @@ es:
         select_one_or_more_slots_in_the_calendar: "Selecciona uno {SINGLE, select, true{slot} other{or more slots}} en el calendario"
         you_ve_just_selected_the_slot: "Acaba de seleccionar el espacio :"
         datetime_to_time: "{START_DATETIME} hasta {END_TIME}" #eg: Thursday, September 4 1986 8:30 PM to 10:00 PM
-        cost_of_TYPE: "Coste de {TYPE, select, Machine{a machine hour} Training{the training} other{the element}}"
+        cost_of_TYPE: "Cost of the {TYPE, select, Machine{machine slot} Training{training} Space{space slot} other{element}}"
         offer_this_slot: "Ofertar este espacio"
         confirm_this_slot: "Confirmar este espacio"
         remove_this_slot: "Eliminar este espacio"
@@ -425,6 +425,12 @@ es:
         slot_at_same_time: "Conflict with others reservations"
         do_you_really_want_to_book_slot_at_same_time: "Do you really want to book this slot? Other bookings take place at the same time"
         unable_to_book_slot_because_really_have_reservation_at_same_time: "Unable to book this slot because the following reservation occurs at the same time."
+        tags_mismatch: "Tags mismatch"
+        confirm_book_slot_tags_mismatch: "Do you really want to book this slot? {USER} does not have any of the required tags."
+        unable_to_book_slot_tags_mismatch: "Unable to book this slot because you don't have any of the required tags."
+        slot_tags: "Slot tags"
+        user_tags: "User tags"
+        no_tags: "No tags"
       #feature-tour modal
       tour:
         previous: "Previous"

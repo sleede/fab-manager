@@ -180,8 +180,8 @@ const _reserveMachine = function (machine, e) {
 /**
  * Controller used in the public listing page, allowing everyone to see the list of machines
  */
-Application.Controllers.controller('MachinesController', ['$scope', '$state', '_t', 'Machine', '$uibModal', 'machinesPromise', 'Member', 'uiTourService',
-  function ($scope, $state, _t, Machine, $uibModal, machinesPromise, Member, uiTourService) {
+Application.Controllers.controller('MachinesController', ['$scope', '$state', '_t', 'AuthService', 'Machine', '$uibModal', 'machinesPromise', 'Member', 'uiTourService',
+  function ($scope, $state, _t, AuthService, Machine, $uibModal, machinesPromise, Member, uiTourService) {
     /* PUBLIC SCOPE */
 
     // Retrieve the list of machines
@@ -219,32 +219,54 @@ Application.Controllers.controller('MachinesController', ['$scope', '$state', '_
      */
     $scope.setupMachinesTour = function () {
       // setup the tour for admins only
-      if ($scope.currentUser && $scope.currentUser.role === 'admin') {
+      if (AuthService.isAuthorized(['admin', 'manager'])) {
         // get the tour defined by the ui-tour directive
         const uitour = uiTourService.getTourByName('machines');
-        uitour.createStep({
-          selector: 'body',
-          stepId: 'welcome',
-          order: 0,
-          title: _t('app.public.tour.machines.welcome.title'),
-          content: _t('app.public.tour.machines.welcome.content'),
-          placement: 'bottom',
-          orphan: true
-        });
+        if (AuthService.isAuthorized('admin')) {
+          uitour.createStep({
+            selector: 'body',
+            stepId: 'welcome',
+            order: 0,
+            title: _t('app.public.tour.machines.welcome.title'),
+            content: _t('app.public.tour.machines.welcome.content'),
+            placement: 'bottom',
+            orphan: true
+          });
+          if ($scope.machines.length > 0) {
+            uitour.createStep({
+              selector: '.machines-list .show-button',
+              stepId: 'view',
+              order: 1,
+              title: _t('app.public.tour.machines.view.title'),
+              content: _t('app.public.tour.machines.view.content'),
+              placement: 'top'
+            });
+          }
+        } else {
+          uitour.createStep({
+            selector: 'body',
+            stepId: 'welcome_manager',
+            order: 0,
+            title: _t('app.public.tour.machines.welcome_manager.title'),
+            content: _t('app.public.tour.machines.welcome_manager.content'),
+            placement: 'bottom',
+            orphan: true
+          });
+        }
         if ($scope.machines.length > 0) {
           uitour.createStep({
-            selector: '.machines-list .show-button',
-            stepId: 'view',
-            order: 1,
-            title: _t('app.public.tour.machines.view.title'),
-            content: _t('app.public.tour.machines.view.content'),
+            selector: '.machines-list .reserve-button',
+            stepId: 'reserve',
+            order: 2,
+            title: _t('app.public.tour.machines.reserve.title'),
+            content: _t('app.public.tour.machines.reserve.content'),
             placement: 'top'
           });
         }
         uitour.createStep({
           selector: 'body',
           stepId: 'conclusion',
-          order: 2,
+          order: 3,
           title: _t('app.public.tour.conclusion.title'),
           content: _t('app.public.tour.conclusion.content'),
           placement: 'bottom',
@@ -406,7 +428,7 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
     // indicates the state of the current view : calendar or plans information
     $scope.plansAreShown = false;
 
-    // will store the user's plan if he choosed to buy one
+    // will store the user's plan if he chose to buy one
     $scope.selectedPlan = null;
 
     // the moment when the plan selection changed for the last time, used to trigger changes in the cart
@@ -524,12 +546,13 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
      * When modifying an already booked reservation, callback when the modification was successfully done.
      */
     $scope.modifyMachineSlot = function () {
-      $scope.events.placable.title = $scope.currentUser.role !== 'admin' ? _t('app.logged.machines_reserve.i_ve_reserved') : _t('app.logged.machines_reserve.not_available');
+      $scope.events.placable.title = $scope.currentUser.id === $scope.events.modifiable.user.id ? _t('app.logged.machines_reserve.i_ve_reserved') : _t('app.logged.machines_reserve.not_available');
       $scope.events.placable.backgroundColor = 'white';
       $scope.events.placable.borderColor = $scope.events.modifiable.borderColor;
       $scope.events.placable.id = $scope.events.modifiable.id;
       $scope.events.placable.is_reserved = true;
       $scope.events.placable.can_modify = true;
+      $scope.events.placable.user = angular.copy($scope.events.modifiable.user);
 
       $scope.events.modifiable.backgroundColor = 'white';
       $scope.events.modifiable.title = '';
@@ -549,7 +572,7 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
         $scope.events.placable.backgroundColor = 'white';
         $scope.events.placable.title = '';
       }
-      $scope.events.modifiable.title = $scope.currentUser.role !== 'admin' ? _t('app.logged.machines_reserve.i_ve_reserved') : _t('app.logged.machines_reserve.not_available');
+      $scope.events.modifiable.title = $scope.currentUser.id === $scope.events.modifiable.user.id ? _t('app.logged.machines_reserve.i_ve_reserved') : _t('app.logged.machines_reserve.not_available');
       $scope.events.modifiable.backgroundColor = 'white';
 
       return updateCalendar();
@@ -604,16 +627,18 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
       angular.forEach($scope.events.reserved, function (machineSlot, key) {
         machineSlot.is_reserved = true;
         machineSlot.can_modify = true;
-        if ($scope.currentUser.role !== 'admin') {
-          machineSlot.title = _t('app.logged.machines_reserve.i_ve_reserved');
-          machineSlot.borderColor = BOOKED_SLOT_BORDER_COLOR;
-          updateMachineSlot(machineSlot, reservation, $scope.currentUser);
-        } else {
+        if ($scope.currentUser.role === 'admin' || ($scope.currentUser.role === 'manager' && reservation.user_id !== $scope.currentUser.id)) {
+          // an admin or a manager booked for someone else
           machineSlot.title = _t('app.logged.machines_reserve.not_available');
           machineSlot.borderColor = UNAVAILABLE_SLOT_BORDER_COLOR;
           updateMachineSlot(machineSlot, reservation, $scope.ctrl.member);
+        } else {
+          // booked for "myself"
+          machineSlot.title = _t('app.logged.machines_reserve.i_ve_reserved');
+          machineSlot.borderColor = BOOKED_SLOT_BORDER_COLOR;
+          updateMachineSlot(machineSlot, reservation, $scope.currentUser);
         }
-        return machineSlot.backgroundColor = 'white';
+        machineSlot.backgroundColor = 'white';
       });
 
       if ($scope.selectedPlan) {

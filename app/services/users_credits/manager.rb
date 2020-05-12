@@ -1,8 +1,11 @@
+# frozen_string_literal: true
+
 require 'forwardable'
 
 module UsersCredits
   class AlreadyUpdatedError < StandardError; end
 
+  # You must use UsersCredits::Manager to consume the credits of a user or to reset them
   class Manager
     extend Forwardable
     attr_reader :manager
@@ -30,6 +33,8 @@ module UsersCredits
     def_delegators :@manager, :will_use_credits?, :free_hours_count, :update_credits, :reset_credits
   end
 
+  # The classes contained in UsersCredits::Managers are used by UsersCredits::Manager (no s) to handle the credits for
+  # the various kinds of reservations and for the user
   module Managers
     # that class is responsible for resetting users_credits of a user
     class User
@@ -44,6 +49,7 @@ module UsersCredits
       end
     end
 
+    # Parent class of all reservations managers
     class Reservation
       attr_reader :reservation
 
@@ -119,7 +125,7 @@ module UsersCredits
             return false, free_hours_count, machine_credit
           end
         end
-        return false, 0
+        [false, 0]
       end
     end
 
@@ -149,10 +155,11 @@ module UsersCredits
             return true, training_credit
           end
         end
-        return false, nil
+        [false, nil]
       end
     end
 
+    # same as class Machine but for Event reservation
     class Event < Reservation
       def will_use_credits?
         false
@@ -161,6 +168,7 @@ module UsersCredits
       def update_credits; end
     end
 
+    # same as class Machine but for Space reservation
     class Space < Reservation
       # to known if a credit will be used in the context of the given reservation
       def will_use_credits?
@@ -206,7 +214,7 @@ module UsersCredits
             return false, free_hours_count, space_credit
           end
         end
-        return false, 0
+        [false, 0]
       end
     end
   end

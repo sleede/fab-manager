@@ -379,7 +379,7 @@ zu:
         select_one_or_more_slots_in_the_calendar: "crwdns10031:0SINGLE={SINGLE}crwdne10031:0"
         you_ve_just_selected_the_slot: "crwdns10033:0crwdne10033:0"
         datetime_to_time: "crwdns10035:0{START_DATETIME}crwdnd10035:0{END_TIME}crwdne10035:0" #eg: Thursday, September 4 1986 8:30 PM to 10:00 PM
-        cost_of_TYPE: "crwdns10037:0TYPE={TYPE}crwdne10037:0"
+        cost_of_TYPE: "crwdns20298:0TYPE={TYPE}crwdne20298:0"
         offer_this_slot: "crwdns10039:0crwdne10039:0"
         confirm_this_slot: "crwdns10041:0crwdne10041:0"
         remove_this_slot: "crwdns10043:0crwdne10043:0"
@@ -425,6 +425,12 @@ zu:
         slot_at_same_time: "crwdns20150:0crwdne20150:0"
         do_you_really_want_to_book_slot_at_same_time: "crwdns20152:0crwdne20152:0"
         unable_to_book_slot_because_really_have_reservation_at_same_time: "crwdns20154:0crwdne20154:0"
+        tags_mismatch: "crwdns20484:0crwdne20484:0"
+        confirm_book_slot_tags_mismatch: "crwdns20486:0{USER}crwdne20486:0"
+        unable_to_book_slot_tags_mismatch: "crwdns20488:0crwdne20488:0"
+        slot_tags: "crwdns20490:0crwdne20490:0"
+        user_tags: "crwdns20492:0crwdne20492:0"
+        no_tags: "crwdns20494:0crwdne20494:0"
       #feature-tour modal
       tour:
         previous: "crwdns20166:0crwdne20166:0"

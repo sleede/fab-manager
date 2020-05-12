@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'test_helper'
+
 module Reservations
   class CreateTest < ActionDispatch::IntegrationTest
     setup do
@@ -67,7 +69,7 @@ module Reservations
       # invoice_items assertions
       invoice_item = InvoiceItem.last
 
-      assert_equal invoice_item.amount, machine.prices.find_by(group_id: @user_without_subscription.group_id, plan_id: nil).amount
+      assert_equal machine.prices.find_by(group_id: @user_without_subscription.group_id, plan_id: nil).amount, invoice_item.amount
       assert invoice_item.check_footprint
 
       # invoice assertions
@@ -413,7 +415,7 @@ module Reservations
       # invoice_items assertions
       invoice_item = InvoiceItem.last
 
-      assert_equal invoice_item.amount, machine.prices.find_by(group_id: @vlonchamp.group_id, plan_id: nil).amount
+      assert_equal machine.prices.find_by(group_id: @vlonchamp.group_id, plan_id: nil).amount, invoice_item.amount
       assert invoice_item.check_footprint
 
       # invoice assertions

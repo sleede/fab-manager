@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-# Time range of duration defined by ApplicationHelper::SLOT_DURATION, slicing an Availability.
+# Time range, slicing an Availability.
+# Its duration is defined by globally by ApplicationHelper::SLOT_DURATION but can be overridden per availability
 # During a slot a Reservation is possible
 # Only reserved slots are persisted in DB, others are instantiated on the fly
 class Slot < ApplicationRecord
@@ -39,7 +40,7 @@ class Slot < ApplicationRecord
                             receiver: reservation.user,
                             attached_object: self
     NotificationCenter.call type: 'notify_admin_slot_is_modified',
-                            receiver: User.admins,
+                            receiver: User.admins_and_managers,
                             attached_object: self
   end
 
@@ -48,7 +49,7 @@ class Slot < ApplicationRecord
                             receiver: reservation.user,
                             attached_object: self
     NotificationCenter.call type: 'notify_admin_slot_is_canceled',
-                            receiver: User.admins,
+                            receiver: User.admins_and_managers,
                             attached_object: self
   end
 

@@ -1,11 +1,12 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class AvailabilityTest < ActiveSupport::TestCase
-  test "length must be at least 1h" do
+  test 'any duration is allowed' do
     a = Availability.first
     a.end_at = a.start_at + 15.minutes
-    assert a.invalid?
-    assert a.errors.key?(:end_at)
+    assert a.valid?
   end
 
   test "if type available_type is 'machines' check that there is minimum 1 association" do

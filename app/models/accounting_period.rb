@@ -30,7 +30,7 @@ class AccountingPeriod < ApplicationRecord
   def invoices_with_vat(invoices)
     vat_service = VatHistoryService.new
     invoices.map do |i|
-      { invoice: i, vat_rate: vat_service.invoice_vat(i) }
+      { invoice: i, vat_rate: vat_service.invoice_vat(i) / 100.0 }
     end
   end
 

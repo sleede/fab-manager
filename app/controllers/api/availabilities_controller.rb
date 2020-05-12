@@ -80,7 +80,7 @@ class API::AvailabilitiesController < API::ApiController
   end
 
   def machine
-    @current_user_role = current_user.admin? ? 'admin' : 'user'
+    @current_user_role = current_user.role
 
     service = Availabilities::AvailabilitiesService.new(current_user, other: @visi_max_other, year: @visi_max_year)
     @slots = service.machines(params[:machine_id], user)
@@ -92,7 +92,7 @@ class API::AvailabilitiesController < API::ApiController
   end
 
   def spaces
-    @current_user_role = current_user.admin? ? 'admin' : 'user'
+    @current_user_role = current_user.role
 
     service = Availabilities::AvailabilitiesService.new(current_user, other: @visi_max_other, year: @visi_max_year)
     @slots = service.spaces(params[:space_id], user)
@@ -147,7 +147,7 @@ class API::AvailabilitiesController < API::ApiController
 
   def availability_params
     params.require(:availability).permit(:start_at, :end_at, :available_type, :machine_ids, :training_ids, :nb_total_places,
-                                         :is_recurrent, :period, :nb_periods, :end_date,
+                                         :is_recurrent, :period, :nb_periods, :end_date, :slot_duration,
                                          machine_ids: [], training_ids: [], space_ids: [], tag_ids: [], plan_ids: [],
                                          machines_attributes: %i[id _destroy], plans_attributes: %i[id _destroy])
   end

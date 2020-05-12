@@ -1,6 +1,7 @@
 'use strict';
 
-Application.Services.factory('Help', ['$rootScope', '$uibModal', '$state', function ($rootScope, $uibModal, $state) {
+Application.Services.factory('Help', ['$rootScope', '$uibModal', '$state', 'AuthService',
+  function ($rootScope, $uibModal, $state, AuthService) {
   const TOURS = {
     'app.public.home': 'welcome',
     'app.public.machines_list': 'machines',
@@ -19,7 +20,7 @@ Application.Services.factory('Help', ['$rootScope', '$uibModal', '$state', funct
 
 
   return function (e) {
-    if (!$rootScope.currentUser || $rootScope.currentUser.role !== 'admin') return;
+    if (!AuthService.isAuthorized(['admin', 'manager'])) return;
 
     if (e.key === 'F1') {
       e.preventDefault();

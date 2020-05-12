@@ -273,5 +273,15 @@ fr:
       body:
         refund_created: "Un avoir de %{AMOUNT} a été généré sur la facture %{INVOICE} de l'utilisateur %{USER}"
         download: "Cliquez ici pour télécharger cet avoir"
+    notify_admins_role_update:
+      subject: "Le rôle d'un utilisateur a changé"
+      body:
+        user_role_changed_html: "Le rôle de l'utilisateur <em><strong>%{NAME}</strong></em> a changé."
+        previous_role: "Rôle précédent :"
+        new_role: "Nouveau rôle :"
+    notify_user_role_update:
+      subject: "Vous avez changé de rôle"
+      body:
+        role_changed_html: "Votre rôle {GENDER, select, male{au} female{à la} neutral{} other{aux}} {NAME} a changé. Vous êtes maintenant <strong>{ROLE}</strong>.<br/>Avec un grand pouvoir vient une grande responsabilité, utilisez vos nouveaux privilèges de manière juste et respectueuse."
     shared:
       hello: "Bonjour %{user_name}"

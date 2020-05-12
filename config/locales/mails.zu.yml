@@ -273,5 +273,15 @@ zu:
       body:
         refund_created: "crwdns4567:0%{AMOUNT}crwdnd4567:0%{INVOICE}crwdnd4567:0%{USER}crwdne4567:0"
         download: "crwdns4569:0crwdne4569:0"
+    notify_admins_role_update:
+      subject: "crwdns20456:0crwdne20456:0"
+      body:
+        user_role_changed_html: "crwdns20458:0%{NAME}crwdne20458:0"
+        previous_role: "crwdns20460:0crwdne20460:0"
+        new_role: "crwdns20462:0crwdne20462:0"
+    notify_user_role_update:
+      subject: "crwdns20464:0crwdne20464:0"
+      body:
+        role_changed_html: "crwdns20466:0GENDER={GENDER}crwdnd20466:0NAME={NAME}crwdnd20466:0ROLE={ROLE}crwdne20466:0"
     shared:
       hello: "crwdns4215:0%{user_name}crwdne4215:0"
