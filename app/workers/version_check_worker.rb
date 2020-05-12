@@ -6,7 +6,15 @@ class VersionCheckWorker
 
   def perform
     require 'fab_hub'
-    res = FabHub.fab_manager_version_check
+    begin
+      res = FabHub.fab_manager_version_check
+    rescue Errno::ECONNREFUSED => e
+      if Rails.env.development?
+        puts "Unable to check the version, maybe FabHub is not running: #{e}"
+        return
+      end
+    end
+
 
     setting_ver = Setting.find_or_initialize_by(name: 'hub_last_version')
     value = {
