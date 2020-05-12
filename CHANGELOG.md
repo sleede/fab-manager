@@ -1,5 +1,13 @@
 # Changelog Fab-manager
 
+## v4.4.1 2020 May 12
+
+- Prevent VersionCheckWorker from polluting the sidekiq stack in development
+- Fix a bug: the subscription page is not available
+- Fix a bug: users promoted to the administrator role are not in the admin group
+- Fix a bug: menu separators are not visible
+- [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
+
 ## v4.4.0 2020 May 12
 
 - Manager: a new role between the member and the administrator
