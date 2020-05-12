@@ -75,7 +75,8 @@ class Setting < ApplicationRecord
                              home_content
                              home_css
                              origin
-                             uuid] }
+                             uuid
+                             phone_required] }
   def value
     last_value = history_values.order(HistoryValue.arel_table['created_at'].desc).first
     last_value&.value

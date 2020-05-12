@@ -1019,6 +1019,7 @@ fr:
         display_name_enable: "l'affichage du nom"
         machines_sort_by: "l'ordre d'affichage des machines"
         fab_analytics: "Fab Analytics"
+        phone_required: "téléphone requis"
         elements_ordering: "Ordre d'affichage des éléments"
         machines_order: "Ordre des machines"
         display_machines_sorted_by: "Afficher les machines triées par"
@@ -1032,7 +1033,8 @@ fr:
           created_at: "Date de création"
           updated_at: "Date de mise à jour"
         privacy:
-          title: "Politique de confidentialité"
+          title: "Confidentialité"
+          privacy_policy: "Politique de confidentialité"
           input_the_dpo: "Saisir le contact du Délégué à la protection des données"
           current_policy: "Politique courante"
           draft_from_USER_DATE: "Brouillon, enregistré par {USER}, le {DATE}"
@@ -1056,6 +1058,9 @@ fr:
             online_payment: "Le module de paiement par carte bancaire est-il actif ?"
             invoices: "Le module est facturation est-il actif ?"
             openlab: "Le module de partage de projets (OpenLab) est-il actif ?"
+          various_settings: "Paramètres divers"
+          phone_required: "Téléphone requis"
+          phone_required_info: "Vous pouvez définir si le numéro de téléphone doit être requis, lors de l'enregistrement d'un nouvel utilisateur sur Fab-manager."
       open_api_clients:
         add_new_client: "Créer un compte client"
         api_documentation: "Documentation de l'API"

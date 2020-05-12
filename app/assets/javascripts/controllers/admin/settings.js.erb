@@ -134,6 +134,11 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
       value: (settingsPromise.fab_analytics === 'true')
     };
 
+    $scope.phoneRequired = {
+      name: 'phone_required',
+      value: (settingsPromise.phone_required === 'true')
+    };
+
     // By default, we display the currently published privacy policy
     $scope.privacyPolicy = {
       version: null,
