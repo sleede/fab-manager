@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: the subscription page is not available
+
 ## v4.4.0 2020 May 12
 
 - Manager: a new role between the member and the administrator
