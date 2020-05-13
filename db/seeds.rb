@@ -927,7 +927,7 @@ end
 
 unless Setting.find_by(name: 'phone_required').try(:value)
   setting = Setting.find_or_initialize_by(name: 'phone_required')
-  setting.value = 'true'
+  setting.value = ENV.fetch('PHONE_REQUIRED', 'true')
   setting.save
 end
 
