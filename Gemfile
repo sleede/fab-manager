@@ -122,7 +122,7 @@ gem 'pundit'
 
 gem 'oj'
 
-gem 'actionpack-page_caching', '1.1.0'
+gem 'actionpack-page_caching', '1.2.1'
 gem 'rails-observers'
 
 gem 'chroma'
