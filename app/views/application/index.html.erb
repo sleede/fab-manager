@@ -27,7 +27,7 @@
       Fablab.withoutSpaces = ('<%= Rails.application.secrets.fablab_without_spaces %>' !== 'false');
       Fablab.withoutOnlinePayment = ('<%= Rails.application.secrets.fablab_without_online_payments %>' === 'true');
       Fablab.withoutInvoices = ('<%= Rails.application.secrets.fablab_without_invoices %>' === 'true');
-      Fablab.phoneRequired = ('<%= Rails.application.secrets.phone_required %>' === 'true');
+      Fablab.phoneRequired = ('<%= Setting.get('phone_required') %>' === 'true');
       Fablab.fablabWithoutWallet = ('<%= Rails.application.secrets.fablab_without_wallet %>' === 'true');
       Fablab.bookSlotAtSameTime = ('<%= Rails.application.secrets.book_slot_at_same_time %>' === 'true');
       Fablab.eventsInCalendar = ('<%= Rails.application.secrets.events_in_calendar %>' === 'true');

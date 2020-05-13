@@ -93,11 +93,17 @@ class Setting < ApplicationRecord
   end
 
   ##
-  # Return the value of the requested setting
+  # Return the value of the requested setting, if any.
   # Usage: Setting.get('my_setting')
-  # @return {string}
+  # @return {String}
   ##
   def self.get(name)
-    find_by(name: name)&.value
+    res = find_by(name: name)&.value
+
+    # handle boolean values
+    return true if res == 'true'
+    return false if res == 'false'
+
+    res
   end
 end

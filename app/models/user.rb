@@ -203,7 +203,7 @@ class User < ApplicationRecord
   def need_completion?
     statistic_profile.gender.nil? || profile.first_name.blank? || profile.last_name.blank? || username.blank? ||
       email.blank? || encrypted_password.blank? || group_id.nil? || statistic_profile.birthday.blank? ||
-      (Rails.application.secrets.phone_required && profile.phone.blank?)
+      (Setting.get('phone_required') && profile.phone.blank?)
   end
 
   ## Retrieve the requested data in the User and user's Profile tables
