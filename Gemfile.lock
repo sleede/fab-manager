@@ -165,7 +165,7 @@ GEM
     execjs (2.7.0)
     faker (2.10.2)
       i18n (>= 1.6, < 2)
-    faraday (1.0.0)
+    faraday (0.17.3)
       multipart-post (>= 1.2, < 3)
     ffi (1.12.2)
     font-awesome-rails (4.7.0.5)
@@ -484,6 +484,7 @@ DEPENDENCIES
   elasticsearch-persistence (~> 5)
   elasticsearch-rails (~> 5)
   faker
+  faraday (~> 0.17)
   font-awesome-rails
   foreman
   forgery
