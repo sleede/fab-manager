@@ -1,7 +1,8 @@
 # Changelog Fab-manager
 
 - Prevent admins from leaving their dedicated group
-- Downgraded faraday from 1.0 to 0.17 for better compatibility with elasticsearch-ruby 5 (#205 #196)
+- Faraday was downgraded from 1.0 to 0.17 for better compatibility with elasticsearch-ruby 5 (#205 #196)
+- Added an option to allow usage in production without HTTPS
 - Fix a bug: when an admin logs on the subscription page, his view is broken
 - Fix a bug: admin's members list shows the same members multiple times
 

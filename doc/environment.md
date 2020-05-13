@@ -265,6 +265,13 @@ You can change this behavior by setting this variable to one of the following va
 - "once" to keep the default behavior.
 - "session" to display the tours each time you reopen the application.
 - "manual" to prevent displaying the tours automatically; you'll still be able to trigger them by pressing the F1 key.
+<a name="ALLOW_INSECURE_HTTP"></a>
+
+    ALLOW_INSECURE_HTTP
+    
+In production and staging environments, the session cookie won't be sent to the server unless through the HTTPS protocol.
+If you're using Fab-manager on a non-public network or for testing purposes, you can disable this behavior by setting this variable to `true`.
+Please, ensure you know what you're doing, as this can lead to serious security issues. 
 
 <a name="internationalization-settings"></a>
 ## Internationalization setting.
