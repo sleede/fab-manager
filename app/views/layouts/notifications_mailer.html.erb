@@ -1,5 +1,5 @@
-<% fablab_name = Setting.find_by(name: 'fablab_name').value %>
-<% fablab_gender = Setting.find_by(name: 'name_genre').value %>
+<% fablab_name = Setting.get('fablab_name') %>
+<% fablab_gender = Setting.get('name_genre') %>
 <% primary_color = Stylesheet.primary %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

@@ -918,8 +918,8 @@ end
 unless Setting.find_by(name: 'link_name').try(:value)
   include ApplicationHelper # rubocop:disable Style/MixinUsage
 
-  name = Setting.find_by(name: 'fablab_name').value
-  gender = Setting.find_by(name: 'name_genre').value
+  name = Setting.get('fablab_name')
+  gender = Setting.get('name_genre')
   setting = Setting.find_or_initialize_by(name: 'link_name')
   setting.value = _t('app.public.common.about_the_fablab', NAME: name, GENDER: gender)
   setting.save

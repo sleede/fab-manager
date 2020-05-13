@@ -4,7 +4,7 @@
 class InvoiceReferenceService
   class << self
     def generate_reference(invoice, date: DateTime.current, avoir: false)
-      pattern = Setting.find_by(name: 'invoice_reference').value
+      pattern = Setting.get('invoice_reference')
 
       reference = replace_invoice_number_pattern(pattern, invoice)
       reference = replace_date_pattern(reference, date)
@@ -31,7 +31,7 @@ class InvoiceReferenceService
     end
 
     def generate_order_number(invoice)
-      pattern = Setting.find_by(name: 'invoice_order-nb').value
+      pattern = Setting.get('invoice_order-nb')
 
       # global invoice number (nn..nn)
       reference = pattern.gsub(/n+(?![^\[]*\])/) do |match|

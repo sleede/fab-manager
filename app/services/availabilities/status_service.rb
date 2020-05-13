@@ -4,7 +4,7 @@
 class Availabilities::StatusService
   def initialize(current_user_role)
     @current_user_role = current_user_role
-    @show_name = (@current_user_role == 'admin' || Setting.find_by(name: 'display_name_enable').value == 'true')
+    @show_name = (@current_user_role == 'admin' || Setting.get('display_name_enable') == 'true')
   end
 
   # check that the provided machine slot is reserved or not and modify it accordingly

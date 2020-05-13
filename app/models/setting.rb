@@ -91,4 +91,13 @@ class Setting < ApplicationRecord
     admin = User.admins.first
     save && history_values.create(invoicing_profile: admin.invoicing_profile, value: val)
   end
+
+  ##
+  # Return the value of the requested setting
+  # Usage: Setting.get('my_setting')
+  # @return {string}
+  ##
+  def self.get(name)
+    find_by(name: name)&.value
+  end
 end

@@ -112,11 +112,6 @@ This is useful if you have your own invoicing system and you want to prevent Fab
 
 If set to 'true', the wallet will be disabled.
 This is useful if you won't use wallet system.
-<a name="PHONE_REQUIRED"></a>
-
-    PHONE_REQUIRED
-
-If set to 'false' the phone number won't be required to register a new user on the software.
 <a name="BOOK_SLOT_AT_SAME_TIME"></a>
 
     BOOK_SLOT_AT_SAME_TIME

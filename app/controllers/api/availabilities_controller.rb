@@ -193,7 +193,7 @@ class API::AvailabilitiesController < API::ApiController
   end
 
   def define_max_visibility
-    @visi_max_year = Setting.find_by(name: 'visibility_yearly').value.to_i.months.since
-    @visi_max_other = Setting.find_by(name: 'visibility_others').value.to_i.months.since
+    @visi_max_year = Setting.get('visibility_yearly').to_i.months.since
+    @visi_max_other = Setting.get('visibility_others').to_i.months.since
   end
 end
