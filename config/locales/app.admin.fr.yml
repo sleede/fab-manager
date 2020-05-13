@@ -1061,6 +1061,8 @@ fr:
           various_settings: "Paramètres divers"
           phone_required: "Téléphone requis"
           phone_required_info: "Vous pouvez définir si le numéro de téléphone doit être requis, lors de l'enregistrement d'un nouvel utilisateur sur Fab-manager."
+          google_analytics_info_html: "Pour activer les suivi statistique des visites utilisant Google Analytics, définissez ici votre ID de suivi. Il se présente sous la forme UA-000000-2. Visitez <a href='https://analytics.google.com/analytics/web/' target='_blank'>le site web de Google Analytics</a> pour en obtenir un.<br/><strong>Attention :</strong> si vous activez cette fonctionnalité, pensez à l'indiquer dans votre politique de confidentialité, ci-dessus."
+          google_analytics: "ID de suivi"
       open_api_clients:
         add_new_client: "Créer un compte client"
         api_documentation: "Documentation de l'API"
