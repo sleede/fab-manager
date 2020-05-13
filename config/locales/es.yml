@@ -53,6 +53,7 @@ es:
   #members management
   members:
     unable_to_change_the_group_while_a_subscription_is_running: "No se puede cambiar de grupo mientras haya una suscripción en curso"
+    admins_cant_change_group: "Unable to remove an administrator from his dedicated group"
     please_input_the_authentication_code_sent_to_the_address: "Por favor Ingrese el código de autenticación enviado a la dirección de correo electrónico %{EMAIL}"
     your_authentication_code_is_not_valid: "Su código de autenticación no es válido."
     current_authentication_method_no_code: "El método de autenticación actual no requiere ningún código de migración"
