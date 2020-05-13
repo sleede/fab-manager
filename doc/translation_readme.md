@@ -79,8 +79,8 @@ Use it to generate a similar localised PNG image which keep the default image si
 <a name="configuration"></a>
 ## Configuration
 
-In development, locales configurations are made in [config/application.yml](../config/application.yml.default).
-In production, locales configuration are made in the [config/env](../docker/env.example) file.
+In development, locales configurations are made in [.env](../env.example).
+In production, locales configuration are made in the [config/env](../setup/env.example) file.
 If you are in a development environment, your can keep the default values, otherwise, in production, values must be configured carefully.
 
 <a name="settings"></a>

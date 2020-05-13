@@ -13,8 +13,8 @@
 The following environment variables configure the addresses of the databases, some credentials, some application behaviours and the localization preferences.
 If you are in a development environment, your can keep most of the default values, otherwise, in production, values must be configured carefully.
 
-The settings in [config/application.yml](../config/application.yml.default) configure the environment variables when the application run in development mode.
-If you run the application in production with docker, the settings are localized in [config/env](../docker/env.example).
+The settings in [.env](../env.example) configure the environment variables when the application run in development mode.
+If you run the application in production with docker, the settings are localized in [config/env](../setup/env.example).
 
 <a name="general-settings"></a>
 ## General settings
