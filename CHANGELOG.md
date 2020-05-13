@@ -2,6 +2,7 @@
 
 - Prevent admins from leaving their dedicated group
 - Fix a bug: when an admin logs on the subscription page, his view is broken
+- Fix a bug: admin's members list shows the same members multiple times
 
 ## v4.4.1 2020 May 12
 
