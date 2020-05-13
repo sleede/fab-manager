@@ -1,5 +1,8 @@
 # Changelog Fab-manager
 
+- Prevent admins from leaving their dedicated group
+- Fix a bug: when an admin logs on the subscription page, his view is broken
+
 ## v4.4.1 2020 May 12
 
 - Prevent VersionCheckWorker from polluting the sidekiq stack in development

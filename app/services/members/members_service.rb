@@ -15,6 +15,12 @@ class Members::MembersService
       return false
     end
 
+    if params[:group_id] && params[:group_id].to_i != Group.find_by(slug: 'admins').id && @member.admin?
+      # an admin cannot change his group
+      @member.errors.add(:group_id, I18n.t('members.admins_cant_change_group'))
+      return false
+    end
+
     not_complete = member.need_completion?
     up_result = member.update(params)
 
