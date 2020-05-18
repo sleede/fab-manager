@@ -28,6 +28,8 @@ RUN apk update && apk upgrade && \
       git \
       patch
 
+RUN gem install bundler
+
 # Throw error if Gemfile has been modified since Gemfile.lock
 RUN bundle config --global frozen 1
 
