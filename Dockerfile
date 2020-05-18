@@ -1,4 +1,4 @@
-FROM ruby:2.3.8-alpine
+FROM ruby:2.6.5-alpine
 MAINTAINER peng@sleede.com
 
 # Install upgrade system packages
