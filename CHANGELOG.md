@@ -1,10 +1,12 @@
 # Changelog Fab-manager
 
+- Upgraded to ruby 2.6.5
 - Prevent admins from leaving their dedicated group
 - Faraday was downgraded from 1.0 to 0.17 for better compatibility with elasticsearch-ruby 5 (#205 #196)
 - Added an option to allow usage in production without HTTPS
 - Fix a bug: when an admin logs on the subscription page, his view is broken
 - Fix a bug: admin's members list shows the same members multiple times
+- Fix a security issue: updated actionpack-page_caching from 1.1.0 to 1.2.1 to fix [CVE-2020-8159](https://nvd.nist.gov/vuln/detail/CVE-2020-8159)
 
 ## v4.4.1 2020 May 12
 
