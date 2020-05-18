@@ -53,6 +53,7 @@ zu:
   #members management
   members:
     unable_to_change_the_group_while_a_subscription_is_running: "crwdns3275:0crwdne3275:0"
+    admins_cant_change_group: "crwdns20496:0crwdne20496:0"
     please_input_the_authentication_code_sent_to_the_address: "crwdns3277:0%{EMAIL}crwdne3277:0"
     your_authentication_code_is_not_valid: "crwdns3279:0crwdne3279:0"
     current_authentication_method_no_code: "crwdns3281:0crwdne3281:0"
