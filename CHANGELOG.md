@@ -9,6 +9,7 @@
 - Fix a bug: when an admin logs on the subscription page, his view is broken
 - Fix a bug: admin's members list shows the same members multiple times
 - Fix a bug: when a new account is created through the sign-up modal, the role is not reported in the StatisticProfile (#196)
+- Fix a bug: openAPI clients interface has a bugged behavior when creating/editing a client
 - Fix a security issue: updated actionpack-page_caching from 1.1.0 to 1.2.2 to fix [CVE-2020-8159](https://nvd.nist.gov/vuln/detail/CVE-2020-8159)
 - [TODO DEPLOY] `rails fablab:fix:role_in_statistic_profile`
 - [TODO DEPLOY] `rails fablab:es:generate_stats[2019-06-13]` (run after the command above!)
