@@ -8,7 +8,7 @@ class TrainingPolicy < ApplicationPolicy
     end
   end
 
-  def create
+  def create?
     user.admin?
   end
 
