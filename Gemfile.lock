@@ -179,8 +179,6 @@ GEM
       raabro (~> 1.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    has_secure_token (1.0.0)
-      activerecord (>= 3.0)
     hashdiff (1.0.1)
     hashery (2.1.2)
     hashie (4.1.0)
@@ -484,7 +482,6 @@ DEPENDENCIES
   foreman
   forgery
   friendly_id (~> 5.1.0)
-  has_secure_token
   icalendar
   jbuilder (~> 2.5)
   jbuilder_cache_multi

@@ -132,7 +132,6 @@ gem 'openlab_ruby'
 
 gem 'api-pagination'
 gem 'apipie-rails'
-gem 'has_secure_token'
 
 # XLS files generation
 gem 'caxlsx'

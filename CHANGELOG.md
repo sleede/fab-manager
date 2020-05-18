@@ -5,6 +5,7 @@
 - Faraday was downgraded from 1.0 to 0.17 for better compatibility with elasticsearch-ruby 5 (#205 #196)
 - Added [an option](doc/environment.md#ALLOW_INSECURE_HTTP) to allow usage in production without HTTPS
 - Now using node.js instead of therubyracer for building javascript assets
+- Removed dependency to has_secure_token to fix warnings about already initialized constant
 - Fix a bug: when an admin logs on the subscription page, his view is broken
 - Fix a bug: admin's members list shows the same members multiple times
 - Fix a bug: when a new account is created through the sign-up modal, the role is not reported in the StatisticProfile (#196)
