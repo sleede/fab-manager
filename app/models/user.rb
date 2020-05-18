@@ -9,7 +9,7 @@ class User < ApplicationRecord
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable,
          :confirmable
-  rolify
+  rolify after_add: :update_statistic_profile, after_remove: :update_statistic_profile
 
   # enable OmniAuth authentication only if needed
   devise :omniauthable, omniauth_providers: [AuthProvider.active.strategy_name.to_sym] unless
@@ -431,12 +431,14 @@ class User < ApplicationRecord
     )
   end
 
-  # will update the statistic_profile after a group switch. Updating the role is not supported
-  def update_statistic_profile
+  # will update the statistic_profile after a group switch
+  # Rolify callbacks will call this function with an argument unused here
+  def update_statistic_profile(_param = nil)
     raise NoProfileError if statistic_profile.nil?
 
     statistic_profile.update_attributes(
-      group_id: group_id
+      group_id: group_id,
+      role_id: roles.first.id
     )
   end
 end

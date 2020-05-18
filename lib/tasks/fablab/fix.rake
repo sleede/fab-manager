@@ -164,5 +164,15 @@ namespace :fablab do
         end
       end
     end
+
+    desc '[release 4.4.2] add missing role to StatisticProfile'
+    task role_in_statistic_profile: :environment do
+      puts "Fixing #{StatisticProfile.where(role_id: nil).count} bugged profiles...\n"
+      StatisticProfile.where(role_id: nil).each do |sp|
+        role_id = sp&.user&.roles&.first&.id
+        sp.role_id = role_id
+        sp.save!
+      end
+    end
   end
 end

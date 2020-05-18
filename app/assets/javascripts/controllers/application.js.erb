@@ -450,9 +450,9 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
           return $state.go(toState, toParams);
         }
       }, function (reason) {
-        // authentication did not ended successfully
+        // authentication did not end successfully
         if (reason === 'signup') {
-          // open signup modal
+          // open sign-up modal
           $scope.signup();
         } else if (reason === 'resetPassword') {
           // open the 'reset password' modal

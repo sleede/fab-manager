@@ -3,11 +3,14 @@
 - Upgraded to ruby 2.6.5
 - Prevent admins from leaving their dedicated group
 - Faraday was downgraded from 1.0 to 0.17 for better compatibility with elasticsearch-ruby 5 (#205 #196)
-- Added an option to allow usage in production without HTTPS
+- Added [an option](doc/environment.md#ALLOW_INSECURE_HTTP) to allow usage in production without HTTPS
 - Now using node.js instead of therubyracer for building javascript assets
 - Fix a bug: when an admin logs on the subscription page, his view is broken
 - Fix a bug: admin's members list shows the same members multiple times
+- Fix a bug: when a new account is created through the sign-up modal, the role is not reported in the StatisticProfile (#196)
 - Fix a security issue: updated actionpack-page_caching from 1.1.0 to 1.2.2 to fix [CVE-2020-8159](https://nvd.nist.gov/vuln/detail/CVE-2020-8159)
+- [TODO DEPLOY] `rails fablab:fix:role_in_statistic_profile`
+- [TODO DEPLOY] `rails fablab:es:generate_stats[2019-06-13]` (run after the command above!)
 
 ## v4.4.1 2020 May 12
 
