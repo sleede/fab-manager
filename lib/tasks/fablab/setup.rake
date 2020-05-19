@@ -100,5 +100,19 @@ namespace :fablab do
       FileUtils.rm_rf 'invoices'
       FileUtils.mv 'tmp/invoices', 'invoices'
     end
+
+    desc 'migrate environment variables to the database (settings)'
+    task env_to_db: :environment do
+      mapping = [
+        %w[PHONE_REQUIRED phone_required true],
+        %w[GA_ID tracking_id]
+      ]
+
+      mapping.each do |m|
+        setting = Setting.find_or_initialize_by(name: m[1])
+        setting.value = ENV.fetch(m[0], m[2])
+        setting.save if setting.value
+      end
+    end
   end
 end

@@ -155,11 +155,6 @@ See http://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-config
 When DELIVERY_METHOD is set to **smtp**, configure the SMTP server parameters.
 See https://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration for more details.
 DEFAULT_HOST is also used to configure Google Analytics.
-<a name="GA_ID"></a>
-
-    GA_ID
-
-Identifier of your Google Analytics account.
 <a name="RECAPTCHA_SITE_KEY"></a><a name="RECAPTCHA_SECRET_KEY"></a>
 
     RECAPTCHA_SITE_KEY, RECAPTCHA_SECRET_KEY

@@ -35,7 +35,7 @@
       Fablab.featureTourDisplay =  "<%= Rails.application.secrets.feature_tour_display %>";
       Fablab.disqusShortname = "<%= Rails.application.secrets.disqus_shortname %>";
       Fablab.defaultHost = "<%= Rails.application.secrets.default_host %>";
-      Fablab.gaId = "<%= Rails.application.secrets.google_analytics_id %>";
+      Fablab.gaId = "<%= Setting.get('tracking_id') %>";
       Fablab.superadminId = parseInt("<%= User.superadmin&.id %>", 10);
 
       // i18n stuff

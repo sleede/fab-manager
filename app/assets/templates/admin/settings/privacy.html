@@ -81,18 +81,18 @@
         <button name="button" class="btn btn-warning m-l" ng-click="save(phoneRequired)" translate>{{ 'app.shared.buttons.save' }}</button>
       </div>
     </div>
-    <p class="alert alert-warning m-t" ng-bind-html="'app.admin.settings.privacy.google_analytics_info_html' | translate"></p>
+    <p class="alert alert-warning m-t" ng-bind-html="'app.admin.settings.privacy.tracking_id_info_html' | translate"></p>
     <div class="row">
       <div class="col-md-4 col-md-offset-1">
-        <label for="google_analytics" translate>{{ 'app.admin.settings.privacy.google_analytics' }}</label>
-        <input ng-model="googleAnalytics.value"
-               id="google_analytics"
+        <label for="tracking_id" translate>{{ 'app.admin.settings.privacy.tracking_id' }}</label>
+        <input ng-model="trackingId.value"
+               id="tracking_id"
                type="text"
                class="form-control"
                placeholder="UA-000000-2"
                />
 
-        <button name="button" class="btn btn-warning m-t" ng-click="save(googleAnalytics)" translate>{{ 'app.shared.buttons.save' }}</button>
+        <button name="button" class="btn btn-warning m-t" ng-click="save(trackingId)" translate>{{ 'app.shared.buttons.save' }}</button>
       </div>
     </div>
 

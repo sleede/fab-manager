@@ -925,12 +925,6 @@ unless Setting.find_by(name: 'link_name').try(:value)
   setting.save
 end
 
-unless Setting.find_by(name: 'phone_required').try(:value)
-  setting = Setting.find_or_initialize_by(name: 'phone_required')
-  setting.value = ENV.fetch('PHONE_REQUIRED', 'true')
-  setting.save
-end
-
 unless Setting.find_by(name: 'home_content').try(:value)
   setting = Setting.find_or_initialize_by(name: 'home_content')
   setting.value = <<~HTML

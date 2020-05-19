@@ -1009,7 +1009,7 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           settingsPromise: ['Setting', function (Setting) {
             return Setting.query({
-              names: `['twitter_name', 'about_title', 'about_body', \
+              names: `['twitter_name', 'about_title', 'about_body', 'tracking_id',\
                        'privacy_body', 'privacy_dpo', 'about_contacts', \
                        'home_blogpost', 'machine_explications_alert', 'training_explications_alert', \
                        'training_information_message', 'subscription_explications_alert', 'event_explications_alert', \
