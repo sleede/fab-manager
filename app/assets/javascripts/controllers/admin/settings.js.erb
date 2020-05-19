@@ -140,6 +140,11 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
       value: (settingsPromise.phone_required === 'true')
     };
 
+    $scope.bookOverlappingSlots = {
+      name: 'book_overlapping_slots',
+      value: (settingsPromise.book_overlapping_slots === 'true')
+    }
+
     // By default, we display the currently published privacy policy
     $scope.privacyPolicy = {
       version: null,

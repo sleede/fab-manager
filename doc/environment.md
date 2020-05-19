@@ -112,11 +112,6 @@ This is useful if you have your own invoicing system and you want to prevent Fab
 
 If set to 'true', the wallet will be disabled.
 This is useful if you won't use wallet system.
-<a name="BOOK_SLOT_AT_SAME_TIME"></a>
-
-    BOOK_SLOT_AT_SAME_TIME
-
-If set to 'true', users will be able to book a machine/formation/event slot, even if they already have a reservation the same day at the same time.
 <a name="USER_CONFIRMATION_NEEDED_TO_SIGN_IN"></a>
 
     USER_CONFIRMATION_NEEDED_TO_SIGN_IN

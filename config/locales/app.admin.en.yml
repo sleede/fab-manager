@@ -1021,6 +1021,7 @@ en:
         fab_analytics: "Fab Analytics"
         phone_required: "phone required"
         tracking_id: "tracking ID"
+        book_overlapping_slots: "book overlapping slots"
         elements_ordering: "Elements ordering"
         machines_order: "Machines order"
         display_machines_sorted_by: "Display machines sorted by"
@@ -1028,6 +1029,8 @@ en:
         customize_home_page_css: "Customise the stylesheet og the home page"
         home_css_notice_html: "You can customize the stylesheet which will apply to the home page, using the <a href=\"https://sass-lang.com/documentation\" target=\"_blank\">SASS</a> syntax. These styles will be automatically subordinated to the <code>.home-page</code> selector to prevent any risk of breaking the application. Meanwhile please be careful, any changes in the home page editor at the top of the page may broke your styles, always refer to the HTML code."
         an_error_occurred_saving_the_setting: "An error occurred while saving the setting. Please try again later."
+        book_overlapping_slots_info: "Allow / prevent the reservation of overlapping slots"
+        allow_booking: "Allow booking"
         sort_by:
           default: "Default"
           name: "Name"

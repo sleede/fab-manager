@@ -29,7 +29,7 @@
       Fablab.withoutInvoices = ('<%= Rails.application.secrets.fablab_without_invoices %>' === 'true');
       Fablab.phoneRequired = ('<%= Setting.get('phone_required') %>' === 'true');
       Fablab.fablabWithoutWallet = ('<%= Rails.application.secrets.fablab_without_wallet %>' === 'true');
-      Fablab.bookSlotAtSameTime = ('<%= Rails.application.secrets.book_slot_at_same_time %>' === 'true');
+      Fablab.bookSlotAtSameTime = ('<%= Setting.get('book_overlapping_slots') %>' === 'true');
       Fablab.eventsInCalendar = ('<%= Rails.application.secrets.events_in_calendar %>' === 'true');
       Fablab.slotDuration = parseInt("<%= ApplicationHelper::SLOT_DURATION %>", 10);
       Fablab.featureTourDisplay =  "<%= Rails.application.secrets.feature_tour_display %>";
