@@ -157,11 +157,11 @@ install_rvm() {
 install_ruby() {
   echo 'Installing Ruby'
   sudo apt-get install -y libxml2-dev libxslt1-dev libpq-dev libidn11-dev
-  rvm install ruby-2.3.8
-  rvm use ruby-2.3.8@global
+  rvm install ruby-2.6.5
+  rvm use ruby-2.6.5@global
   gem update --system --no-doc
   gem update --no-doc
-  rvm use ruby-2.3.8 --default
+  rvm use ruby-2.6.5 --default
   rvm cleanup all
 }
 

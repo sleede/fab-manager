@@ -197,10 +197,10 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
         }
       }
 
-      $scope.$on('devise:new-session', function (event, user) { $scope.ctrl.member = user; });
+      $scope.$on('devise:new-session', function (event, user) { if (user.role !== 'admin') { $scope.ctrl.member = user; } });
 
       // watch when a coupon is applied to re-compute the total price
-      return $scope.$watch('coupon.applied', function (newValue, oldValue) {
+      $scope.$watch('coupon.applied', function (newValue, oldValue) {
         if ((newValue !== null) || (oldValue !== null)) {
           return updateCartPrice();
         }

@@ -39,8 +39,8 @@ GEM
       rack-test (>= 0.6.3)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
-    actionpack-page_caching (1.1.0)
-      actionpack (>= 4.0.0, < 6)
+    actionpack-page_caching (1.2.2)
+      actionpack (>= 5.0.0)
     actionview (5.2.4.2)
       activesupport (= 5.2.4.2)
       builder (~> 3.1)
@@ -165,7 +165,7 @@ GEM
     execjs (2.7.0)
     faker (2.10.2)
       i18n (>= 1.6, < 2)
-    faraday (1.0.0)
+    faraday (0.17.3)
       multipart-post (>= 1.2, < 3)
     ffi (1.12.2)
     font-awesome-rails (4.7.0.5)
@@ -179,8 +179,6 @@ GEM
       raabro (~> 1.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    has_secure_token (1.0.0)
-      activerecord (>= 3.0)
     hashdiff (1.0.1)
     hashery (2.1.2)
     hashie (4.1.0)
@@ -217,11 +215,10 @@ GEM
       activerecord
       kaminari-core (= 1.2.0)
     kaminari-core (1.2.0)
-    libv8 (3.16.14.19)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
-    loofah (2.4.0)
+    loofah (2.5.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
@@ -348,7 +345,6 @@ GEM
     redis (4.1.3)
     redis-namespace (1.6.0)
       redis (>= 3.0.4)
-    ref (2.0.0)
     repost (0.3.2)
     responders (2.4.1)
       actionpack (>= 4.2.0, < 6.0)
@@ -419,9 +415,6 @@ GEM
       ffi
     term-ansicolor (1.7.1)
       tins (~> 1.0)
-    therubyracer (0.12.0)
-      libv8 (~> 3.16.14.0)
-      ref
     thor (1.0.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
@@ -432,7 +425,7 @@ GEM
       camertron-eprun
       cldr-plurals-runtime-rb (~> 1.0)
       tzinfo
-    tzinfo (1.2.6)
+    tzinfo (1.2.7)
       thread_safe (~> 0.1)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
@@ -463,7 +456,7 @@ PLATFORMS
 
 DEPENDENCIES
   aasm
-  actionpack-page_caching (= 1.1.0)
+  actionpack-page_caching (= 1.2.2)
   active_record_query_trace
   api-pagination
   apipie-rails
@@ -484,11 +477,11 @@ DEPENDENCIES
   elasticsearch-persistence (~> 5)
   elasticsearch-rails (~> 5)
   faker
+  faraday (~> 0.17)
   font-awesome-rails
   foreman
   forgery
   friendly_id (~> 5.1.0)
-  has_secure_token
   icalendar
   jbuilder (~> 2.5)
   jbuilder_cache_multi
@@ -533,11 +526,10 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   stripe (= 5.1.1)
   sys-filesystem
-  therubyracer (= 0.12.0)
   uglifier (>= 4.1.20)
   vcr (= 3.0.1)
   web-console (>= 3.3.0)
   webmock
 
 BUNDLED WITH
-   1.17.3
+   2.1.4

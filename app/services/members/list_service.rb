@@ -16,7 +16,7 @@ class Members::ListService
                                   SELECT MAX("created_at") AS "s2_created_at", "statistic_profile_id" AS "s2_statistic_profile_id"
                                   FROM "subscriptions"
                                   GROUP BY "statistic_profile_id"
-                              ) As s2
+                              ) AS s2
                               ON "s1"."statistic_profile_id" =  "s2"."s2_statistic_profile_id"
                               WHERE "s1"."expiration_date" > now()::date
                           ) AS "subscriptions" ON "subscriptions"."statistic_profile_id" = "statistic_profiles"."id" ' \
@@ -78,7 +78,7 @@ class Members::ListService
       direction = (params[:order_by][0] == '-' ? 'DESC' : 'ASC')
       order_key = (params[:order_by][0] == '-' ? params[:order_by][1, params[:order_by].size] : params[:order_by])
       limit = params[:size]
-      offset = (params[:page]&.to_i || 1) - 1
+      offset = ((params[:page]&.to_i || 1) - 1) * (params[:size]&.to_i || 1)
 
       order_key = case order_key
                   when 'last_name'
@@ -97,7 +97,7 @@ class Members::ListService
                     'users.id'
                   end
 
-      "#{order_key} #{direction} LIMIT #{limit} OFFSET #{offset}"
+      "#{order_key} #{direction}, users.id ASC LIMIT #{limit} OFFSET #{offset}"
     end
   end
 end

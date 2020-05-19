@@ -111,7 +111,7 @@ Before reporting an issue, please check if your issue is not listed in the [know
 <a name="related-documentation"></a>
 ## Related Documentation
 
-- [Ruby 2.3.0](http://ruby-doc.org/core-2.3.0/)
+- [Ruby 2.6.5](http://ruby-doc.org/core-2.6.5/)
 - [Ruby on Rails](http://api.rubyonrails.org)
 - [AngularJS](https://docs.angularjs.org/api)
 - [Angular-Bootstrap](http://angular-ui.github.io/bootstrap/)

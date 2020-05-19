@@ -18,8 +18,6 @@ gem 'sass-rails', '~> 5.0', '>= 5.0.6'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 4.1.20'
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-gem 'therubyracer', '= 0.12.0', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -115,6 +113,7 @@ gem 'prawn-table'
 gem 'elasticsearch-model', '~> 5'
 gem 'elasticsearch-persistence', '~> 5'
 gem 'elasticsearch-rails', '~> 5'
+gem 'faraday', '~> 0.17'
 
 gem 'notify_with'
 
@@ -122,7 +121,7 @@ gem 'pundit'
 
 gem 'oj'
 
-gem 'actionpack-page_caching', '1.1.0'
+gem 'actionpack-page_caching', '1.2.2'
 gem 'rails-observers'
 
 gem 'chroma'
@@ -133,7 +132,6 @@ gem 'openlab_ruby'
 
 gem 'api-pagination'
 gem 'apipie-rails'
-gem 'has_secure_token'
 
 # XLS files generation
 gem 'caxlsx'

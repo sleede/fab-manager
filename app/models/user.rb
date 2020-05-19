@@ -319,6 +319,16 @@ class User < ApplicationRecord
         .delete_if { |col| blacklist.include?(col[0]) }
   end
 
+  # will update the statistic_profile after a group switch or a role update
+  def update_statistic_profile
+    raise NoProfileError if statistic_profile.nil? || statistic_profile.id.nil?
+
+    statistic_profile.update_attributes(
+      group_id: group_id,
+      role_id: roles.first.id
+    )
+  end
+
   protected
 
   # remove projects drafts that are not linked to another user
@@ -428,15 +438,6 @@ class User < ApplicationRecord
 
     invoicing_profile.update_attributes(
       email: email
-    )
-  end
-
-  # will update the statistic_profile after a group switch. Updating the role is not supported
-  def update_statistic_profile
-    raise NoProfileError if statistic_profile.nil?
-
-    statistic_profile.update_attributes(
-      group_id: group_id
     )
   end
 end
