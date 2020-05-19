@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v4.4.2 2020 May 19
+
 - Upgraded to ruby 2.6.5
 - Prevent admins from leaving their dedicated group
 - Faraday was downgraded from 1.0 to 0.17 for better compatibility with elasticsearch-ruby 5 (#205 #196)
@@ -13,6 +15,7 @@
 - Fix a security issue: updated actionpack-page_caching from 1.1.0 to 1.2.2 to fix [CVE-2020-8159](https://nvd.nist.gov/vuln/detail/CVE-2020-8159)
 - [TODO DEPLOY] `rails fablab:fix:role_in_statistic_profile`
 - [TODO DEPLOY] `rails fablab:es:generate_stats[2019-06-13]` (run after the command above!)
+- [TODO DEPLOY] -> (only dev) `rvm use && bundle install`
 
 ## v4.4.1 2020 May 12
 
