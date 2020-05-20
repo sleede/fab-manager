@@ -38,20 +38,17 @@
     <div class="panel-body">
       <div class="row">
         <div class="col-md-10 col-md-offset-1">
-          <label for="fab_analytics" translate>{{ 'app.admin.settings.fab_analytics' }}</label>
-          <input bs-switch
-                 ng-model="fabAnalytics.value"
-                 id="fab_analytics"
-                 type="checkbox"
-                 class="form-control"
-                 switch-on-text="{{ 'app.shared.buttons.yes' | translate }}"
-                 switch-off-text="{{ 'app.shared.buttons.no' | translate }}"
-                 switch-animate="true"/>
+          <boolean-setting
+              name="fab_analytics"
+              settings="allSettings"
+              label="app.admin.settings.fab_analytics"
+              yes-label="app.shared.buttons.yes"
+              no-label="app.shared.buttons.no">
+          </boolean-setting>
           <p>
             <span translate>{{ 'app.admin.settings.privacy.about_analytics' }}</span>
             <a ng-click="analyticsModal()" class="pointer" translate>{{ 'app.admin.settings.privacy.read_more' }}</a>
           </p>
-          <button name="button" class="btn btn-warning" ng-click="save(fabAnalytics)" translate>{{ 'app.shared.buttons.save' }}</button>
         </div>
       </div>
 
@@ -68,17 +65,13 @@
     </p>
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
-        <label for="phone_required" translate>{{ 'app.admin.settings.privacy.phone_required' }}</label>
-        <input bs-switch
-               ng-model="phoneRequired.value"
-               id="phone_required"
-               type="checkbox"
-               class="form-control"
-               switch-on-text="{{ 'app.shared.buttons.yes' | translate }}"
-               switch-off-text="{{ 'app.shared.buttons.no' | translate }}"
-               switch-animate="true"/>
-
-        <button name="button" class="btn btn-warning m-l" ng-click="save(phoneRequired)" translate>{{ 'app.shared.buttons.save' }}</button>
+        <boolean-setting
+            name="phone_required"
+            settings="allSettings"
+            label="app.admin.settings.privacy.phone_required"
+            yes-label="app.shared.buttons.yes"
+            no-label="app.shared.buttons.no">
+        </boolean-setting>
       </div>
     </div>
     <p class="alert alert-warning m-t" ng-bind-html="'app.admin.settings.privacy.tracking_id_info_html' | translate"></p>

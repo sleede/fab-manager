@@ -88,29 +88,14 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
     $scope.customFavicon = faviconFile.custom_asset;
     $scope.profileImage = profileImageFile.custom_asset;
 
-    $scope.enableMove = {
-      name: 'booking_move_enable',
-      value: (settingsPromise.booking_move_enable === 'true')
-    };
-
     $scope.moveDelay = {
       name: 'booking_move_delay',
       value: parseInt(settingsPromise.booking_move_delay, 10)
     };
 
-    $scope.enableCancel = {
-      name: 'booking_cancel_enable',
-      value: (settingsPromise.booking_cancel_enable === 'true')
-    };
-
     $scope.cancelDelay = {
       name: 'booking_cancel_delay',
       value: parseInt(settingsPromise.booking_cancel_delay, 10)
-    };
-
-    $scope.enableReminder = {
-      name: 'reminder_enable',
-      value: (settingsPromise.reminder_enable === 'true')
     };
 
     $scope.reminderDelay = {
@@ -127,26 +112,6 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
       name: 'visibility_others',
       value: parseInt(settingsPromise.visibility_others, 10)
     };
-
-    $scope.displayNameEnable = {
-      name: 'display_name_enable',
-      value: (settingsPromise.display_name_enable === 'true')
-    };
-
-    $scope.fabAnalytics = {
-      name: 'fab_analytics',
-      value: (settingsPromise.fab_analytics === 'true')
-    };
-
-    $scope.phoneRequired = {
-      name: 'phone_required',
-      value: (settingsPromise.phone_required === 'true')
-    };
-
-    $scope.bookOverlappingSlots = {
-      name: 'book_overlapping_slots',
-      value: (settingsPromise.book_overlapping_slots === 'true')
-    }
 
     // By default, we display the currently published privacy policy
     $scope.privacyPolicy = {

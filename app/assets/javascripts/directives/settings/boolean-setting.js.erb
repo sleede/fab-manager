@@ -5,7 +5,10 @@ Application.Directives.directive('booleanSetting', ['Setting', 'growl', '_t',
       scope: {
         name: '@',
         label: '@',
-        settings: '='
+        settings: '=',
+        yesLabel: '@',
+        noLabel: '@',
+        classes: '@'
       },
       templateUrl: '<%= asset_path "admin/settings/boolean.html" %>',
       link ($scope, element, attributes) {
@@ -14,6 +17,10 @@ Application.Directives.directive('booleanSetting', ['Setting', 'growl', '_t',
           name: $scope.name,
           value: ($scope.settings[$scope.name] === 'true')
         };
+
+        // default values for the switch labels
+        $scope.yesLabel =  $scope.yesLabel || 'app.admin.settings.enabled';
+        $scope.noLabel = $scope.noLabel || 'app.admin.settings.disabled';
 
         /**
          * Callback to save the setting value to the database
