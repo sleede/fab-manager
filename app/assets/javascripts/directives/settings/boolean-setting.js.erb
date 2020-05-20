@@ -27,12 +27,15 @@ Application.Directives.directive('booleanSetting', ['Setting', 'growl', '_t',
          * @param setting {{value:*, name:string}} note that the value will be stringified
          */
         $scope.save = function (setting) {
-          const { value } = setting;
+          const value = setting.value.toString();
 
           Setting.update(
             { name: setting.name },
-            { value: value.toString() },
-            function () { growl.success(_t('app.admin.settings.customization_of_SETTING_successfully_saved', { SETTING: _t(`app.admin.settings.${setting.name}`) })); },
+            { value },
+            function () {
+              growl.success(_t('app.admin.settings.customization_of_SETTING_successfully_saved', { SETTING: _t(`app.admin.settings.${setting.name}`) }));
+              $scope.settings[$scope.name] = value;
+            },
             function (error) {
               if (error.status === 304) return;
 

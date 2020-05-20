@@ -52,7 +52,7 @@
                 <h3 class="m-l m-t-lg" translate>{{ 'app.admin.settings.ability_for_the_users_to_move_their_reservations' }}</h3>
                 <boolean-setting name="booking_move_enable" settings="allSettings" label="app.admin.settings.reservations_shifting" classes="m-l"></boolean-setting>
             </div>
-            <div class="row" ng-show="enableMove.value">
+            <div class="row" ng-show="allSettings.booking_move_enable === 'true'">
                 <form class="col-md-4" name="moveDelayForm">
                     <label for="moveDelay" class="control-label m-r" translate>{{ 'app.admin.settings.prior_period_hours' }}</label>
                     <div class="form-group">
@@ -70,7 +70,7 @@
                 <h3 class="m-l m-t-lg" translate>{{ 'app.admin.settings.ability_for_the_users_to_cancel_their_reservations' }}</h3>
                 <boolean-setting name="booking_cancel_enable" settings="allSettings" label="app.admin.settings.reservations_cancelling" classes="m-l"></boolean-setting>
             </div>
-            <div class="row" ng-show="enableCancel.value">
+            <div class="row" ng-show="allSettings.booking_cancel_enable === 'true'">
                 <form class="col-md-4" name="cancelDelayForm">
                     <label for="cancelDelay" class="control-label m-r" translate>{{ 'app.admin.settings.prior_period_hours' }}</label>
                     <div class="form-group">
@@ -101,7 +101,7 @@
             <h3 class="m-l" translate>{{ 'app.admin.settings.notification_sending_before_the_reservation_occurs' }}</h3>
             <boolean-setting name="reminder_enable" settings="allSettings" label="app.admin.settings.reservations_reminders" classes="m-l"></boolean-setting>
         </div>
-        <div class="row" ng-show="enableReminder.value">
+        <div class="row" ng-show="allSettings.reminder_enable === 'true'">
             <form class="col-md-4" name="reminderDelayForm">
                 <label for="reminderDelay" class="control-label m-r" translate>{{ 'app.admin.settings.prior_period_hours' }}</label>
                 <div class="form-group">
