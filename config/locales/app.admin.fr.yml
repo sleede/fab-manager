@@ -1022,6 +1022,7 @@ fr:
         phone_required: "téléphone requis"
         tracking_id: "ID de suivi"
         book_overlapping_slots: "réservation de créneaux simultanés"
+        slot_duration: "durée des créneaux"
         elements_ordering: "Ordre d'affichage des éléments"
         machines_order: "Ordre des machines"
         display_machines_sorted_by: "Afficher les machines triées par"
@@ -1031,6 +1032,9 @@ fr:
         an_error_occurred_saving_the_setting: "Une erreur est survenue pendant l'enregistrement du paramètre. Veuillez réessayer plus tard."
         book_overlapping_slots_info: "Autoriser / empêcher la réservation de créneaux qui se chevauchent"
         allow_booking: "Autoriser la réservation"
+        default_slot_duration: "Durée par défaut pour les créneaux"
+        duration_minutes: "Durée (en minutes)"
+        default_slot_duration_info: "Les disponibilités des machines et des espaces sont divisées en plusieurs créneaux de cette durée. Cette valeur peur être changée pour chaque disponibilité."
         sort_by:
           default: "Défaut"
           name: "Nom"

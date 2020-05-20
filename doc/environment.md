@@ -123,15 +123,6 @@ Set to 'false' if you don't want this behaviour.
     EVENTS_IN_CALENDAR
 
 If set to 'true', the admin calendar will display the scheduled events in the current view, as read-only items.
-<a name="SLOT_DURATION"></a>
-
-    SLOT_DURATION
-
-Machine and space availabilities are divided in multiple slots of the duration set by this variable.
-Default value is 60 minutes (1 hour).
-
-⚠ Changing this value during the application life may cause serious issues.
-Please ensure there's no machine/space availabilities opened to reservation or already reserved **in the future** when you change this value.
 <a name="DEFAULT_MAIL_FROM"></a>
 
     DEFAULT_MAIL_FROM

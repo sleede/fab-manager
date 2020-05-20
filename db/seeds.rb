@@ -951,6 +951,12 @@ unless Setting.find_by(name: 'home_content').try(:value)
   setting.save
 end
 
+unless Setting.find_by(name: 'slot_duration').try(:value)
+  setting = Setting.find_or_initialize_by(name: 'slot_duration')
+  setting.value = '60'
+  setting.save
+end
+
 if StatisticCustomAggregation.count.zero?
   # available reservations hours for machines
   machine_hours = StatisticType.find_by(key: 'hour', statistic_index_id: 2)

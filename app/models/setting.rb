@@ -78,7 +78,8 @@ class Setting < ApplicationRecord
                              uuid
                              phone_required
                              tracking_id
-                             book_overlapping_slots] }
+                             book_overlapping_slots
+                             slot_duration] }
   def value
     last_value = history_values.order(HistoryValue.arel_table['created_at'].desc).first
     last_value&.value

@@ -106,7 +106,8 @@ namespace :fablab do
       mapping = [
         %w[PHONE_REQUIRED phone_required true],
         %w[GA_ID tracking_id],
-        %w[BOOK_SLOT_AT_SAME_TIME book_overlapping_slots true]
+        %w[BOOK_SLOT_AT_SAME_TIME book_overlapping_slots true],
+        %w[SLOT_DURATION slot_duration 60]
       ]
 
       mapping.each do |m|
