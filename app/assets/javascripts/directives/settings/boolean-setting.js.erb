@@ -1,0 +1,40 @@
+Application.Directives.directive('booleanSetting', ['Setting', 'growl', '_t',
+  function (Setting, growl, _t) {
+    return ({
+      restrict: 'E',
+      scope: {
+        name: '@',
+        label: '@',
+        settings: '='
+      },
+      templateUrl: '<%= asset_path "admin/settings/boolean.html" %>',
+      link ($scope, element, attributes) {
+        // The setting
+        $scope.setting = {
+          name: $scope.name,
+          value: ($scope.settings[$scope.name] === 'true')
+        };
+
+        /**
+         * Callback to save the setting value to the database
+         * @param setting {{value:*, name:string}} note that the value will be stringified
+         */
+        $scope.save = function (setting) {
+          const { value } = setting;
+
+          Setting.update(
+            { name: setting.name },
+            { value: value.toString() },
+            function () { growl.success(_t('app.admin.settings.customization_of_SETTING_successfully_saved', { SETTING: _t(`app.admin.settings.${setting.name}`) })); },
+            function (error) {
+              if (error.status === 304) return;
+
+              growl.error(_t('app.admin.settings.an_error_occurred_saving_the_setting'));
+              console.log(error);
+            }
+          );
+        };
+      }
+    });
+  }
+]);

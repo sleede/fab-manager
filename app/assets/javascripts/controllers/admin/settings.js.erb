@@ -54,6 +54,9 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
     // full history of privacy policy drafts
     $scope.privacyDraftsHistory = [];
 
+    // all settings as retrieved from database
+    $scope.allSettings = settingsPromise;
+
     // various configurable settings
     $scope.twitterSetting = { name: 'twitter_name', value: settingsPromise.twitter_name };
     $scope.linkName = { name: 'link_name', value: settingsPromise.link_name };
