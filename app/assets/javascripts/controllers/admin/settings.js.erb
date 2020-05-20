@@ -88,31 +88,6 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
     $scope.customFavicon = faviconFile.custom_asset;
     $scope.profileImage = profileImageFile.custom_asset;
 
-    $scope.moveDelay = {
-      name: 'booking_move_delay',
-      value: parseInt(settingsPromise.booking_move_delay, 10)
-    };
-
-    $scope.cancelDelay = {
-      name: 'booking_cancel_delay',
-      value: parseInt(settingsPromise.booking_cancel_delay, 10)
-    };
-
-    $scope.reminderDelay = {
-      name: 'reminder_delay',
-      value: parseInt(settingsPromise.reminder_delay, 10)
-    };
-
-    $scope.visibilityYearly = {
-      name: 'visibility_yearly',
-      value: parseInt(settingsPromise.visibility_yearly, 10)
-    };
-
-    $scope.visibilityOthers = {
-      name: 'visibility_others',
-      value: parseInt(settingsPromise.visibility_others, 10)
-    };
-
     // By default, we display the currently published privacy policy
     $scope.privacyPolicy = {
       version: null,
