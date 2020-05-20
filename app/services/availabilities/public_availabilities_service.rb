@@ -15,7 +15,7 @@ class Availabilities::PublicAvailabilitiesService
                                  .where(lock: false)
     slots = []
     availabilities.each do |a|
-      slot_duration = a.slot_duration || ApplicationHelper::SLOT_DURATION
+      slot_duration = a.slot_duration || Setting.get('slot_duration')
       a.machines.each do |machine|
         next unless machine_ids&.include?(machine.id.to_s)
 
@@ -46,7 +46,7 @@ class Availabilities::PublicAvailabilitiesService
 
     slots = []
     availabilities.each do |a|
-      slot_duration = a.slot_duration || ApplicationHelper::SLOT_DURATION
+      slot_duration = a.slot_duration || Setting.get('slot_duration')
       space = a.spaces.first
       ((a.end_at - a.start_at) / slot_duration.minutes).to_i.times do |i|
         next unless (a.start_at + (i * slot_duration).minutes) > DateTime.current

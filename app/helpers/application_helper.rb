@@ -4,9 +4,6 @@
 module ApplicationHelper
   require 'message_format'
 
-  ## machine/spaces availabilities are divided in multiple slots of 60 minutes
-  SLOT_DURATION ||= Setting.get('slot_duration') || 60
-
   ##
   # Verify if the provided attribute is in the provided attributes array, whatever it exists or not
   # @param attributes {Array|nil}

@@ -89,7 +89,7 @@ class Availability < ApplicationRecord
   def available_space_places
     return unless available_type == 'space'
 
-    duration = slot_duration || ApplicationHelper::SLOT_DURATION
+    duration = slot_duration || Setting.get('slot_duration')
     ((end_at - start_at) / duration.minutes).to_i * nb_total_places
   end
 
@@ -162,7 +162,7 @@ class Availability < ApplicationRecord
   def length_must_be_slot_multiple
     return unless available_type == 'machines' || available_type == 'space'
 
-    duration = slot_duration || ApplicationHelper::SLOT_DURATION
+    duration = slot_duration || Setting.get('slot_duration')
     return unless end_at < (start_at + duration.minutes)
 
     errors.add(:end_at, I18n.t('availabilities.length_must_be_slot_multiple', MIN: duration))
