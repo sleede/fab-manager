@@ -27,7 +27,7 @@ Fab-manager is the Fab Lab management solution. It provides a comprehensive, web
 Fab-manager is a Ruby on Rails / AngularJS web application that runs on the following software:
 
 - Ubuntu LTS 14.04+ / Debian 8+
-- Ruby 2.3
+- Ruby 2.6
 - Redis 2.8.4+
 - Sidekiq 3.3.4+
 - Elasticsearch 5.6
@@ -99,9 +99,9 @@ You can see an example on the [repo of navinum gamification plugin](https://gith
 ## Single Sign-On
 
 Fab-manager can be connected to a [Single Sign-On](https://en.wikipedia.org/wiki/Single_sign-on) server which will provide its own authentication for the platform's users.
-Currently OAuth 2 is the only supported protocol for SSO authentication.
+Currently, OAuth 2 is the only supported protocol for SSO authentication.
 
-For an example of how to use configure a SSO in Fab-manager, please read [sso_with_github.md](doc/sso_with_github.md).
+For an example of how to use configure an SSO in Fab-manager, please read [sso_with_github.md](doc/sso_with_github.md).
 
 <a name="known-issues"></a>
 ## Known issues
