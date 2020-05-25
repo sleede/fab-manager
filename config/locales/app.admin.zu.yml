@@ -1013,7 +1013,7 @@ zu:
         default_value_is_24_hours: "crwdns8395:0crwdne8395:0"
         visibility_yearly: "crwdns8397:0crwdne8397:0"
         visibility_others: "crwdns8399:0crwdne8399:0"
-        confidentiality: "crwdns8401:0crwdne8401:0"
+        display: "crwdns8401:0crwdne8401:0"
         display_machine_reservation_user_name: "crwdns8403:0crwdne8403:0"
         display_name: "crwdns8405:0crwdne8405:0"
         display_name_enable: "crwdns8407:0crwdne8407:0"

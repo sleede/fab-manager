@@ -123,11 +123,12 @@
 
 <div class="panel panel-default m-t-lg">
     <div class="panel-heading">
-        <span class="font-sbold" translate>{{ 'app.admin.settings.confidentiality' }}</span>
+        <span class="font-sbold" translate>{{ 'app.admin.settings.display' }}</span>
     </div>
     <div class="panel-body">
         <div class="row">
             <h3 class="m-l" translate>{{ 'app.admin.settings.display_machine_reservation_user_name' }}</h3>
+            <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.display_name_info_html' | translate"></p>
             <boolean-setting name="display_name_enable" settings="allSettings" label="app.admin.settings.display_name" classes="m-l"></boolean-setting>
         </div>
     </div>
