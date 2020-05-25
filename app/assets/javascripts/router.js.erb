@@ -126,6 +126,7 @@ angular.module('application.router', ['ui.router'])
           groupsPromise: ['Group', function (Group) { return Group.query().$promise; }],
           cguFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'cgu-file' }).$promise; }],
           memberPromise: ['Member', 'currentUser', function (Member, currentUser) { return Member.get({ id: currentUser.id }).$promise; }],
+          phoneRequiredPromise: ['Setting', function (Setting) { return Setting.get({ name: 'phone_required' }).$promise; }]
         }
       })
 
@@ -157,6 +158,7 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           groups: ['Group', function (Group) { return Group.query().$promise; }],
           activeProviderPromise: ['AuthProvider', function (AuthProvider) { return AuthProvider.active().$promise; }],
+          phoneRequiredPromise: ['Setting', function (Setting) { return Setting.get({ name: 'phone_required' }).$promise; }]
         }
       })
       .state('app.logged.dashboard.projects', {
@@ -882,6 +884,9 @@ angular.module('application.router', ['ui.router'])
             templateUrl: '<%= asset_path "admin/members/new.html" %>',
             controller: 'NewMemberController'
           }
+        },
+        resolve: {
+          phoneRequiredPromise: ['Setting', function (Setting) { return Setting.get({ name: 'phone_required' }).$promise; }]
         }
       })
       .state('app.admin.members_import', {
@@ -921,7 +926,8 @@ angular.module('application.router', ['ui.router'])
           activeProviderPromise: ['AuthProvider', function (AuthProvider) { return AuthProvider.active().$promise; }],
           walletPromise: ['Wallet', '$stateParams', function (Wallet, $stateParams) { return Wallet.getWalletByUser({ user_id: $stateParams.id }).$promise; }],
           transactionsPromise: ['Wallet', 'walletPromise', function (Wallet, walletPromise) { return Wallet.transactions({ id: walletPromise.id }).$promise; }],
-          tagsPromise: ['Tag', function (Tag) { return Tag.query().$promise; }]
+          tagsPromise: ['Tag', function (Tag) { return Tag.query().$promise; }],
+          phoneRequiredPromise: ['Setting', function (Setting) { return Setting.get({ name: 'phone_required' }).$promise; }]
         }
       })
       .state('app.admin.admins_new', {

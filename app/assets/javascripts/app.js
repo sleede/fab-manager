@@ -89,8 +89,6 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
       $rootScope.fablabWithoutOnlinePayment = Fablab.withoutOnlinePayment;
       // Global config: if true, no invoices will be generated
       $rootScope.fablabWithoutInvoices = Fablab.withoutInvoices;
-      // Global config: if true, the phone number is required to create an account
-      $rootScope.phoneRequired = Fablab.phoneRequired;
       // Global config: if true, the events are shown in the admin calendar
       $rootScope.eventsInCalendar = Fablab.eventsInCalendar;
       // Global config: if true, user must confirm his email to sign in

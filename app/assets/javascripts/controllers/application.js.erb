@@ -91,7 +91,10 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
       return $uibModal.open({
         templateUrl: '<%= asset_path "shared/signupModal.html" %>',
         size: 'md',
-        controller: ['$scope', '$uibModalInstance', 'Group', 'CustomAsset', 'growl', '_t', function ($scope, $uibModalInstance, Group, CustomAsset, growl, _t) {
+        resolve: {
+          phoneRequiredPromise: ['Setting', function (Setting) { return Setting.get({ name: 'phone_required' }).$promise; }]
+        },
+        controller: ['$scope', '$uibModalInstance', 'Group', 'CustomAsset', 'phoneRequiredPromise', 'growl', '_t', function ($scope, $uibModalInstance, Group, CustomAsset, phoneRequiredPromise, growl, _t) {
           // default parameters for the date picker in the account creation modal
           $scope.datePicker = {
             format: Fablab.uibDateFormat,
@@ -100,6 +103,9 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
               startingDay: Fablab.weekStartingDay
             }
           };
+
+          // is the phone number required to sign-up?
+          $scope.phoneRequired = (phoneRequiredPromise.setting.value === 'true');
 
           // reCaptcha v2 site key (or undefined)
           $scope.recaptchaSiteKey = Fablab.recaptchaSiteKey;
