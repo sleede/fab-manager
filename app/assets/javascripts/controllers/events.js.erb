@@ -859,6 +859,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
         controller: 'ReserveSlotSameTimeController',
         resolve: {
           sameTimeReservations: function() { return sameTimeReservations; },
+          bookOverlappingSlotsPromise: ['Setting', function (Setting) { return Setting.get({ name: 'book_overlapping_slots' }).$promise; }]
         }
       });
       modalInstance.result.then(callback);
