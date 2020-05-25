@@ -6,7 +6,7 @@ class Availabilities::AvailabilitiesService
   def initialize(current_user, maximum_visibility = {})
     @current_user = current_user
     @maximum_visibility = maximum_visibility
-    @service = Availabilities::StatusService.new(current_user.admin? ? 'admin' : 'user')
+    @service = Availabilities::StatusService.new(current_user.role)
   end
 
   # list all slots for the given machine, with reservations info, relatives to the given user

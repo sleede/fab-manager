@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Improved display of the icons alerting about an outdated version
+- Fix a bug: managers do not see the name of the user who reserved a slot
 - [TODO DEPLOY] `rails fablab:setup:env_to_db`
 
 ## v4.4.4 2020 May 25
