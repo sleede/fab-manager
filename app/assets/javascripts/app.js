@@ -89,11 +89,9 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
       $rootScope.fablabWithoutOnlinePayment = Fablab.withoutOnlinePayment;
       // Global config: if true, no invoices will be generated
       $rootScope.fablabWithoutInvoices = Fablab.withoutInvoices;
-      // Global config: if true, the events are shown in the admin calendar
-      $rootScope.eventsInCalendar = Fablab.eventsInCalendar;
       // Global config: if true, user must confirm his email to sign in
       $rootScope.userConfirmationNeededToSignIn = Fablab.userConfirmationNeededToSignIn;
-      // Global config: if true, wallet will be disable
+      // Global config: if true, wallet will be disabled
       $rootScope.fablabWithoutWallet = Fablab.fablabWithoutWallet;
 
       // Global function to allow the user to navigate to the previous screen (ie. $state).

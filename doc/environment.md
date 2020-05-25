@@ -118,11 +118,6 @@ This is useful if you won't use wallet system.
 
 If set to 'true' the users will need to confirm their email address to be able to sign in.
 Set to 'false' if you don't want this behaviour.
-<a name="EVENTS_IN_CALENDAR"></a>
-
-    EVENTS_IN_CALENDAR
-
-If set to 'true', the admin calendar will display the scheduled events in the current view, as read-only items.
 <a name="DEFAULT_MAIL_FROM"></a>
 
     DEFAULT_MAIL_FROM
