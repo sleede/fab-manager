@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v4.4.3 2020 May 25
+
 - Fix a bug: recurrent availabilities do not keep the custom duration
 - [TODO DEPLOY] `rails fablab:fix:availabilities_duration`
 
