@@ -12,7 +12,7 @@ gem 'rails', '~> 5.2.4'
 # Used by rails 5.2 to reduce the app boot time by over 50%
 gem 'bootsnap'
 # Use Puma as web server
-gem 'puma', '3.12.4'
+gem 'puma', '3.12.6'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0', '>= 5.0.6'
 
