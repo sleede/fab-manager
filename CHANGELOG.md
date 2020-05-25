@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a security issue: updated puma from 3.12.4 to 3.12.6 to fix [CVE-2020-11077](https://nvd.nist.gov/vuln/detail/CVE-2020-11077)
+
 ## v4.4.3 2020 May 25
 
 - Fix a bug: recurrent availabilities do not keep the custom duration
