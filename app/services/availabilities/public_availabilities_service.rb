@@ -4,7 +4,7 @@
 class Availabilities::PublicAvailabilitiesService
   def initialize(current_user)
     @current_user = current_user
-    @service = Availabilities::StatusService.new('')
+    @service = Availabilities::StatusService.new('public')
   end
 
   # provides a list of slots and availabilities for the machines, between the given dates

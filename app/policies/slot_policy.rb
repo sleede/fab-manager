@@ -5,7 +5,7 @@ class SlotPolicy < ApplicationPolicy
   def update?
     # check that the update is allowed and the prevention delay has not expired
     delay = Setting.get('booking_move_delay').to_i
-    enabled = (Setting.get('booking_move_enable') == 'true')
+    enabled = Setting.get('booking_move_enable')
 
     # these condition does not apply to admins
     user.admin? || user.manager? ||

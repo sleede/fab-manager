@@ -41,7 +41,7 @@ class PDF::Invoice < Prawn::Document
       else
         text I18n.t('invoices.invoice_reference', REF: invoice.reference), leading: 3
       end
-      if Setting.get('invoice_code-active') == 'true'
+      if Setting.get('invoice_code-active')
         text I18n.t('invoices.code', CODE: Setting.get('invoice_code-value')), leading: 3
       end
       if invoice.invoiced_type != WalletTransaction.name
@@ -251,7 +251,7 @@ class PDF::Invoice < Prawn::Document
         row(0).font_style = :bold
         column(1).style align: :right
 
-        if Setting.get('invoice_VAT-active') == 'true'
+        if Setting.get('invoice_VAT-active')
           # Total incl. taxes
           row(-1).style align: :right
           row(-1).background_color = 'E4E4E4'
