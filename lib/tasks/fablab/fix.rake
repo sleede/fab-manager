@@ -174,5 +174,18 @@ namespace :fablab do
         sp.save!
       end
     end
+
+    desc '[release 4.4.3] fix duration of recurring availabilities'
+    task availabilities_duration: :environment do
+      Availability.select(:occurrence_id).where(is_recurrent: true).group(:occurrence_id).each do |a|
+        occurrences = Availability.where(occurrence_id: a.occurrence_id)
+        next unless occurrences.map(&:slot_duration).uniq.size > 1
+
+        duration = occurrences.map(&:slot_duration).uniq.detect { |e| !e.nil? }
+        occurrences.each do |o|
+          o.update_attributes(slot_duration: duration)
+        end
+      end
+    end
   end
 end

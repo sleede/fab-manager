@@ -21,7 +21,8 @@ class Availabilities::CreateAvailabilitiesService
         training_ids: availability.training_ids,
         space_ids: availability.space_ids,
         tag_ids: availability.tag_ids,
-        nb_total_places: availability.nb_total_places
+        nb_total_places: availability.nb_total_places,
+        slot_duration: availability.slot_duration
       ).save!
     end
   end
