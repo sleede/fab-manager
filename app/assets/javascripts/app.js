@@ -93,8 +93,6 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
       $rootScope.phoneRequired = Fablab.phoneRequired;
       // Global config: if true, the events are shown in the admin calendar
       $rootScope.eventsInCalendar = Fablab.eventsInCalendar;
-      // Global config: machine/space slot duration
-      $rootScope.slotDuration = Fablab.slotDuration;
       // Global config: if true, user must confirm his email to sign in
       $rootScope.userConfirmationNeededToSignIn = Fablab.userConfirmationNeededToSignIn;
       // Global config: if true, wallet will be disable

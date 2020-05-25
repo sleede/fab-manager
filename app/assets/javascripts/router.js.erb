@@ -586,7 +586,8 @@ angular.module('application.router', ['ui.router'])
           bookingWindowEnd: ['Setting', function (Setting) { return Setting.get({ name: 'booking_window_end' }).$promise; }],
           machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
           plansPromise: ['Plan', function (Plan) { return Plan.query().$promise; }],
-          groupsPromise: ['Group', function (Group) { return Group.query().$promise; }]
+          groupsPromise: ['Group', function (Group) { return Group.query().$promise; }],
+          slotDurationPromise: ['Setting', function (Setting) { return Setting.get({ name: 'slot_duration' }).$promise; }]
         }
       })
       .state('app.admin.calendar.icalendar', {
@@ -752,7 +753,8 @@ angular.module('application.router', ['ui.router'])
           couponsPromise: ['Coupon', function (Coupon) { return Coupon.query({ page: 1, filter: 'all' }).$promise; }],
           spacesPromise: ['Space', function (Space) { return Space.query().$promise; }],
           spacesPricesPromise: ['Price', function (Price) { return Price.query({ priceable_type: 'Space', plan_id: 'null' }).$promise; }],
-          spacesCreditsPromise: ['Credit', function (Credit) { return Credit.query({ creditable_type: 'Space' }).$promise; }]
+          spacesCreditsPromise: ['Credit', function (Credit) { return Credit.query({ creditable_type: 'Space' }).$promise; }],
+          slotDurationPromise: ['Setting', function (Setting) { return Setting.get({ name: 'slot_duration' }).$promise; }]
         }
       })
 

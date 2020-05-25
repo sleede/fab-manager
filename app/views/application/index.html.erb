@@ -31,7 +31,6 @@
       Fablab.fablabWithoutWallet = ('<%= Rails.application.secrets.fablab_without_wallet %>' === 'true');
       Fablab.bookSlotAtSameTime = ('<%= Setting.get('book_overlapping_slots') %>' === 'true');
       Fablab.eventsInCalendar = ('<%= Rails.application.secrets.events_in_calendar %>' === 'true');
-      Fablab.slotDuration = parseInt("<%= Setting.get('slot_duration') %>", 10);
       Fablab.featureTourDisplay =  "<%= Rails.application.secrets.feature_tour_display %>";
       Fablab.disqusShortname = "<%= Rails.application.secrets.disqus_shortname %>";
       Fablab.defaultHost = "<%= Rails.application.secrets.default_host %>";
