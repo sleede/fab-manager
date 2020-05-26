@@ -188,7 +188,7 @@ class Invoice < ApplicationRecord
   private
 
   def generate_and_send_invoice
-    return if Rails.application.secrets.fablab_without_invoices == 'true'
+    return unless Setting.get('invoicing_module')
 
     unless Rails.env.test?
       puts "Creating an InvoiceWorker job to generate the following invoice: id(#{id}), invoiced_id(#{invoiced_id}), " \

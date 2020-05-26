@@ -82,7 +82,8 @@ class Setting < ApplicationRecord
                              slot_duration
                              events_in_calendar
                              spaces_module
-                             plans_module] }
+                             plans_module
+                             invoicing_module] }
   def value
     last_value = history_values.order(HistoryValue.arel_table['created_at'].desc).first
     last_value&.value

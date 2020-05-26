@@ -112,7 +112,8 @@ namespace :fablab do
         %w[_ SLOT_DURATION slot_duration 60],
         %w[_ EVENTS_IN_CALENDAR events_in_calendar false],
         %w[! FABLAB_WITHOUT_SPACES spaces_module true],
-        %w[! FABLAB_WITHOUT_PLANS plans_module false]
+        %w[! FABLAB_WITHOUT_PLANS plans_module false],
+        %w[! FABLAB_WITHOUT_INVOICES invoicing_module false]
       ]
 
       mapping.each do |m|

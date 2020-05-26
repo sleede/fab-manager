@@ -56,7 +56,7 @@
                     <i class="fa fa-calendar-o"></i> <span translate>{{ 'app.public.common.my_events' }}</span>
                 </a>
             </li>
-            <li class="hidden-sm hidden-md hidden-lg" ng-hide="fablabWithoutInvoices" ng-if-end>
+            <li class="hidden-sm hidden-md hidden-lg" ng-show="modules.invoicing" ng-if-end>
                 <a ui-sref="app.logged.dashboard.invoices">
                     <i class="fa fa-file-pdf-o"></i> <span translate>{{ 'app.public.common.my_invoices' }}</span>
                 </a>

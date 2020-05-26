@@ -28,7 +28,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
 
     // default active tab
     $scope.tabs = {
-      active: Fablab.withoutInvoices ? 1 : 0
+      active: settings.invoicing_module === 'true' ? 0 : 1
     };
 
     // List of all invoices
@@ -612,7 +612,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           orphan: true
         });
       }
-      if (!Fablab.withoutInvoices && $scope.invoices.length > 0) {
+      if (settings.invoicing_module === 'true' && $scope.invoices.length > 0) {
         uitour.createStep({
           selector: '.invoices-management .invoices-list',
           stepId: 'list',

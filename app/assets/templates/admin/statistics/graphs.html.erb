@@ -102,7 +102,7 @@
       </form>
 
       <uib-tabset justified="true">
-        <uib-tab ng-repeat="stat in statistics" heading="{{stat.label}}" select="setActiveTab(stat)" ng-if="stat.graph && !(stat.es_type_key == 'subscription' && plansModule)" class="row">
+        <uib-tab ng-repeat="stat in statistics" heading="{{stat.label}}" select="setActiveTab(stat)" ng-if="stat.graph && !(stat.es_type_key == 'subscription' && modules.plans)" class="row">
 
           <div ng-if="stat.graph.chart_type == 'discreteBarChart'">
             <div id="rankingFilters">

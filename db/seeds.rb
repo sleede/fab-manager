@@ -851,6 +851,10 @@ Setting.set('slot_duration', 60) unless Setting.find_by(name: 'slot_duration').t
 
 Setting.set('spaces_module', false) unless Setting.find_by(name: 'spaces_module').try(:value)
 
+Setting.set('plans_module', true) unless Setting.find_by(name: 'plans_module').try(:value)
+
+Setting.set('invoicing_module', true) unless Setting.find_by(name: 'invoicing_module').try(:value)
+
 if StatisticCustomAggregation.count.zero?
   # available reservations hours for machines
   machine_hours = StatisticType.find_by(key: 'hour', statistic_index_id: 2)

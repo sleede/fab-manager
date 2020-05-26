@@ -87,13 +87,6 @@ The PDF file name will be of the form "(INVOICE_PREFIX) - (invoice ID) _ (invoic
 
 If set to 'true', the online payment won't be available and the you'll be only able to process reservations when logged as admin.
 Valid stripe API keys are still required, even if you don't require online payments.
-<a name="FABLAB_WITHOUT_INVOICES"></a>
-
-    FABLAB_WITHOUT_INVOICES
-
-If set to 'true', the invoices will be disabled.
-This is useful if you have your own invoicing system and you want to prevent Fab-manager from generating and sending invoices to members.
-**Very important**: if you disable invoices, you still have to configure VAT in the interface to prevent errors in accounting and prices.
 <a name="FABLAB_WITHOUT_WALLET"></a>
 
     FABLAB_WITHOUT_WALLET

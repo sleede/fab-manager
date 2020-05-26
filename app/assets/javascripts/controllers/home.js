@@ -140,7 +140,7 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
         content: _t('app.public.tour.welcome.machines.content'),
         placement: 'right'
       });
-      if ($scope.spacesModule) {
+      if ($scope.modules.spaces) {
         uitour.createStep({
           selector: '.nav-primary li.reserve-space-link',
           stepId: 'spaces',

@@ -42,7 +42,7 @@ class HealthService
       plans: Settings.get('plans_module'),
       spaces: Setting.get('spaces_module'),
       online_payment: !Rails.application.secrets.fablab_without_online_payments,
-      invoices: !Rails.application.secrets.fablab_without_invoices,
+      invoices: Setting.get('invoicing_module'),
       openlab: Rails.application.secrets.openlab_app_secret.present?
     }
   end

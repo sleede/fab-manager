@@ -37,17 +37,19 @@ angular.module('application.router', ['ui.router'])
           logoFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'logo-file' }).$promise; }],
           logoBlackFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'logo-black-file' }).$promise; }],
           sharedTranslations: ['Translations', function (Translations) { return Translations.query(['app.shared', 'app.public.common']).$promise; }],
-          spacesModulePromise: ['Setting', function (Setting) { return Setting.get({ name: 'spaces_module' }).$promise; }],
-          plansModulePromise: ['Setting', function (Setting) { return Setting.get({ name: 'plans_module' }).$promise; }]
+          modulesPromise: ['Setting', function (Setting) { return Setting.query({ names: "['spaces_module', 'plans_module', 'invoicing_module']" }).$promise; }]
         },
-        onEnter: ['$rootScope', 'logoFile', 'logoBlackFile', 'spacesModulePromise', 'plansModulePromise', 'CSRF', function ($rootScope, logoFile, logoBlackFile, spacesModulePromise, plansModulePromise, CSRF) {
+        onEnter: ['$rootScope', 'logoFile', 'logoBlackFile', 'modulesPromise', 'CSRF', function ($rootScope, logoFile, logoBlackFile, modulesPromise, CSRF) {
           // Retrieve Anti-CSRF tokens from cookies
           CSRF.setMetaTags();
           // Application logo
           $rootScope.logo = logoFile.custom_asset;
           $rootScope.logoBlack = logoBlackFile.custom_asset;
-          $rootScope.spacesModule = (spacesModulePromise.setting.value === 'true');
-          $rootScope.plansModule = (plansModulePromise.setting.value === 'true');
+          $rootScope.modules = {
+            spaces: (modulesPromise.spaces_module === 'true'),
+            plans: (modulesPromise.plans_module === 'true'),
+            invoicing: (modulesPromise.invoicing_module === 'true'),
+          };
         }]
       })
       .state('app.public', {
@@ -761,8 +763,7 @@ angular.module('application.router', ['ui.router'])
           spacesPromise: ['Space', function (Space) { return Space.query().$promise; }],
           spacesPricesPromise: ['Price', function (Price) { return Price.query({ priceable_type: 'Space', plan_id: 'null' }).$promise; }],
           spacesCreditsPromise: ['Credit', function (Credit) { return Credit.query({ creditable_type: 'Space' }).$promise; }],
-          slotDurationPromise: ['Setting', function (Setting) { return Setting.get({ name: 'slot_duration' }).$promise; }],
-          spacesModulePromise: ['Setting', function (Setting) { return Setting.get({ name: 'spaces_module' }).$promise; }]
+          slotDurationPromise: ['Setting', function (Setting) { return Setting.get({ name: 'slot_duration' }).$promise; }]
         }
       })
 
@@ -837,7 +838,7 @@ angular.module('application.router', ['ui.router'])
             return Setting.query({
               names: `['invoice_legals', 'invoice_text', 'invoice_VAT-rate', 'invoice_VAT-active', 'invoice_order-nb', 'invoice_code-value', \
                        'invoice_code-active', 'invoice_reference', 'invoice_logo', 'accounting_journal_code', 'accounting_card_client_code', \
-                       'accounting_card_client_label', 'accounting_wallet_client_code', 'accounting_wallet_client_label', \
+                       'accounting_card_client_label', 'accounting_wallet_client_code', 'accounting_wallet_client_label', 'invoicing_module', \
                        'accounting_other_client_code', 'accounting_other_client_label', 'accounting_wallet_code', 'accounting_wallet_label', \
                        'accounting_VAT_code', 'accounting_VAT_label', 'accounting_subscription_code', 'accounting_subscription_label', \
                        'accounting_Machine_code', 'accounting_Machine_label', 'accounting_Training_code', 'accounting_Training_label', \
@@ -1024,7 +1025,7 @@ angular.module('application.router', ['ui.router'])
           settingsPromise: ['Setting', function (Setting) {
             return Setting.query({
               names: `['twitter_name', 'about_title', 'about_body', 'tracking_id', \
-                       'privacy_body', 'privacy_dpo', 'about_contacts', 'book_overlapping_slots', \
+                       'privacy_body', 'privacy_dpo', 'about_contacts', 'book_overlapping_slots', 'invoicing_module', \
                        'home_blogpost', 'machine_explications_alert', 'training_explications_alert', 'slot_duration', \
                        'training_information_message', 'subscription_explications_alert', 'event_explications_alert', \
                        'space_explications_alert', 'booking_window_start', 'booking_window_end', 'events_in_calendar', \

@@ -58,7 +58,7 @@ Application.Controllers.controller('MainNavController', ['$scope', function ($sc
 
   ];
 
-  if ($scope.plansModule) {
+  if ($scope.modules.plans) {
     $scope.navLinks.push({
       state: 'app.public.plans',
       linkText: 'app.public.common.subscriptions',
@@ -67,7 +67,7 @@ Application.Controllers.controller('MainNavController', ['$scope', function ($sc
     });
   }
 
-  if ($scope.spacesModule) {
+  if ($scope.modules.spaces) {
     $scope.navLinks.splice(4, 0, {
       state: 'app.public.spaces_list',
       linkText: 'app.public.common.reserve_a_space',
@@ -153,7 +153,7 @@ Application.Controllers.controller('MainNavController', ['$scope', function ($sc
 
   $scope.adminNavLinks = adminNavLinks;
 
-  if ($scope.spacesModule) {
+  if ($scope.modules.spaces) {
     return $scope.adminNavLinks.splice(3, 0, {
       state: 'app.public.spaces_list',
       linkText: 'app.public.common.manage_the_spaces',
