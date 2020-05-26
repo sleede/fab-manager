@@ -111,4 +111,15 @@ class Setting < ApplicationRecord
 
     res
   end
+
+  ##
+  # Create or update the provided setting with the given value
+  # Usage: Setting.set('my_setting', true)
+  # Optionally (but recommended when possible), the user updating the value can be provided as the third parameter
+  # Eg.: Setting.set('my_setting', true, User.find_by(slug: 'admin'))
+  ##
+  def self.set(name, value, user = User.admins.first)
+    setting = find_or_initialize_by(name: name)
+    setting.save && setting.history_values.create(invoicing_profile: user.invoicing_profile, value: value.to_s)
+  end
 end

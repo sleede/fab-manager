@@ -87,12 +87,6 @@ The PDF file name will be of the form "(INVOICE_PREFIX) - (invoice ID) _ (invoic
 
 If set to 'true', the subscription plans will be fully disabled and invisible in the application.
 It is not recommended to disable plans if at least one subscription was took on the platform.
-<a name="FABLAB_WITHOUT_SPACES"></a>
-
-    FABLAB_WITHOUT_SPACES
-
-If set to 'false', enable the spaces management and reservation in the application.
-It is not recommended to disable spaces if at least one space reservation was made on the system.
 <a name="FABLAB_WITHOUT_ONLINE_PAYMENT"></a>
 
     FABLAB_WITHOUT_ONLINE_PAYMENT

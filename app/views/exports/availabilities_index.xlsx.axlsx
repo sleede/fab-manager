@@ -72,7 +72,7 @@ wb.add_worksheet(name: t('export_availabilities.trainings')) do |sheet|
 end
 
 ## Spaces slots
-if Rails.application.secrets.fablab_without_spaces != 'false'
+if Setting.get('spaces_module')
   wb.add_worksheet(name: t('export_availabilities.spaces')) do |sheet|
 
     ## data table

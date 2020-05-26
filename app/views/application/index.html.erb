@@ -24,7 +24,7 @@
       var Fablab = Fablab || {};
 
       Fablab.withoutPlans = ('<%= Rails.application.secrets.fablab_without_plans %>' === 'true');
-      Fablab.withoutSpaces = ('<%= Rails.application.secrets.fablab_without_spaces %>' !== 'false');
+      Fablab.spacesModule = ('<%= Setting.get('spaces_module') %>' === 'true');
       Fablab.withoutOnlinePayment = ('<%= Rails.application.secrets.fablab_without_online_payments %>' === 'true');
       Fablab.withoutInvoices = ('<%= Rails.application.secrets.fablab_without_invoices %>' === 'true');
       Fablab.fablabWithoutWallet = ('<%= Rails.application.secrets.fablab_without_wallet %>' === 'true');

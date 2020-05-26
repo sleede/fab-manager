@@ -16,7 +16,7 @@ angular.module('application.router', ['ui.router'])
 
     // abstract root parents states
     // these states controls the access rights to the various routes inherited from them
-    return $stateProvider
+    $stateProvider
       .state('app', {
         abstract: true,
         views: {
@@ -36,14 +36,16 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           logoFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'logo-file' }).$promise; }],
           logoBlackFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'logo-black-file' }).$promise; }],
-          sharedTranslations: ['Translations', function (Translations) { return Translations.query(['app.shared', 'app.public.common']).$promise; }]
+          sharedTranslations: ['Translations', function (Translations) { return Translations.query(['app.shared', 'app.public.common']).$promise; }],
+          spacesModulePromise: ['Setting', function (Setting) { return Setting.get({ name: 'spaces_module' }).$promise; }]
         },
-        onEnter: ['$rootScope', 'logoFile', 'logoBlackFile', 'CSRF', function ($rootScope, logoFile, logoBlackFile, CSRF) {
+        onEnter: ['$rootScope', 'logoFile', 'logoBlackFile', 'spacesModulePromise', 'CSRF', function ($rootScope, logoFile, logoBlackFile, spacesModulePromise, CSRF) {
           // Retrieve Anti-CSRF tokens from cookies
           CSRF.setMetaTags();
           // Application logo
           $rootScope.logo = logoFile.custom_asset;
           $rootScope.logoBlack = logoBlackFile.custom_asset;
+          $rootScope.spacesModule = (spacesModulePromise.setting.value === 'true');
         }]
       })
       .state('app.public', {
@@ -98,7 +100,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['home_content', 'home_blogpost']" }).$promise; }]
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['home_content', 'home_blogpost', 'spaces_module']" }).$promise; }]
         }
       })
       .state('app.public.privacy', {
@@ -366,7 +368,7 @@ angular.module('application.router', ['ui.router'])
       // spaces
       .state('app.public.spaces_list', {
         url: '/spaces',
-        abstract: Fablab.withoutSpaces,
+        abstract: !Fablab.spacesModule,
         views: {
           'main@': {
             templateUrl: '<%= asset_path "spaces/index.html" %>',
@@ -379,7 +381,7 @@ angular.module('application.router', ['ui.router'])
       })
       .state('app.admin.space_new', {
         url: '/spaces/new',
-        abstract: Fablab.withoutSpaces,
+        abstract: !Fablab.spacesModule,
         views: {
           'main@': {
             templateUrl: '<%= asset_path "spaces/new.html" %>',
@@ -389,7 +391,7 @@ angular.module('application.router', ['ui.router'])
       })
       .state('app.public.space_show', {
         url: '/spaces/:id',
-        abstract: Fablab.withoutSpaces,
+        abstract: !Fablab.spacesModule,
         views: {
           'main@': {
             templateUrl: '<%= asset_path "spaces/show.html" %>',
@@ -402,7 +404,7 @@ angular.module('application.router', ['ui.router'])
       })
       .state('app.admin.space_edit', {
         url: '/spaces/:id/edit',
-        abstract: Fablab.withoutSpaces,
+        abstract: !Fablab.spacesModule,
         views: {
           'main@': {
             templateUrl: '<%= asset_path "spaces/edit.html" %>',
@@ -415,7 +417,7 @@ angular.module('application.router', ['ui.router'])
       })
       .state('app.logged.space_reserve', {
         url: '/spaces/:id/reserve',
-        abstract: Fablab.withoutSpaces,
+        abstract: !Fablab.spacesModule,
         views: {
           'main@': {
             templateUrl: '<%= asset_path "spaces/reserve.html" %>',
@@ -757,7 +759,8 @@ angular.module('application.router', ['ui.router'])
           spacesPromise: ['Space', function (Space) { return Space.query().$promise; }],
           spacesPricesPromise: ['Price', function (Price) { return Price.query({ priceable_type: 'Space', plan_id: 'null' }).$promise; }],
           spacesCreditsPromise: ['Credit', function (Credit) { return Credit.query({ creditable_type: 'Space' }).$promise; }],
-          slotDurationPromise: ['Setting', function (Setting) { return Setting.get({ name: 'slot_duration' }).$promise; }]
+          slotDurationPromise: ['Setting', function (Setting) { return Setting.get({ name: 'slot_duration' }).$promise; }],
+          spacesModulePromise: ['Setting', function (Setting) { return Setting.get({ name: 'spaces_module' }).$promise; }]
         }
       })
 

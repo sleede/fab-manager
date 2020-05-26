@@ -73,8 +73,8 @@
                   </tbody>
               </table>
 
-              <h3 ng-hide="fablabWithoutSpaces" translate>{{ 'app.admin.plans.edit.spaces' }}</h3>
-              <table class="table" ng-hide="fablabWithoutSpaces">
+              <h3 ng-show="spacesModule" translate>{{ 'app.admin.plans.edit.spaces' }}</h3>
+              <table class="table" ng-show="spacesModule">
                 <thead>
                   <th translate>{{ 'app.admin.plans.edit.space' }}</th>
                   <th translate>{{ 'app.admin.plans.edit.hourly_rate' }}</th>

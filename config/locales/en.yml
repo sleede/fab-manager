@@ -110,6 +110,7 @@ en:
     subscription_of_NAME_for_DURATION_starting_from_DATE: "Subscription of %{NAME} for %{DURATION} starting from %{DATE}"
     subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "Subscription of %{NAME} extended (Free days) starting from %{STARTDATE} until %{ENDDATE}"
     and: 'and'
+    invoice_text_example: "Our association is not subject to VAT"
   # CVS accounting export (columns headers)
   accounting_export:
     journal_code: "Journal code"

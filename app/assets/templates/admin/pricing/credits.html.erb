@@ -96,11 +96,11 @@
   </tbody>
 </table>
 
-<h2 ng-hide="fablabWithoutSpaces" class="m-t-lg" translate>{{ 'app.admin.pricing.spaces' }}</h2>
-<div ng-hide="fablabWithoutSpaces" class="btn-group m-t-md m-b-md">
+<h2 ng-show="spacesModule" class="m-t-lg" translate>{{ 'app.admin.pricing.spaces' }}</h2>
+<div ng-show="spacesModule" class="btn-group m-t-md m-b-md">
   <button type="button" class="btn btn-warning" ng-click="addSpaceCredit($event)" translate>{{ 'app.admin.pricing.add_a_space_credit' }}</button>
 </div>
-<table ng-hide="fablabWithoutSpaces" class="table">
+<table ng-show="spacesModule" class="table">
   <thead>
   <tr>
     <th style="width:20%" translate>{{ 'app.admin.pricing.space' }}</th>

@@ -18,7 +18,7 @@ class API::AvailabilitiesController < API::ApiController
 
     @availabilities = @availabilities.where.not(available_type: 'event') unless Setting.get('events_in_calendar')
 
-    @availabilities = @availabilities.where.not(available_type: 'space') if fablab_spaces_deactivated?
+    @availabilities = @availabilities.where.not(available_type: 'space') unless Setting.get('spaces_module')
   end
 
   def public

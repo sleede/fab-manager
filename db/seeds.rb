@@ -253,11 +253,7 @@ unless Setting.find_by(name: 'about_body').try(:value)
   setting.save
 end
 
-unless Setting.find_by(name: 'about_title').try(:value)
-  setting = Setting.find_or_initialize_by(name: 'about_title')
-  setting.value = 'Imaginer, Fabriquer, <br>Partager avec Fab-manager'
-  setting.save
-end
+Setting.set('about_title', 'Imaginer, Fabriquer, <br>Partager avec Fab-manager') unless Setting.find_by(name: 'about_title').try(:value)
 
 unless Setting.find_by(name: 'about_contacts').try(:value)
   setting = Setting.find_or_initialize_by(name: 'about_contacts')
@@ -276,11 +272,7 @@ unless Setting.find_by(name: 'about_contacts').try(:value)
   setting.save
 end
 
-unless Setting.find_by(name: 'twitter_name').try(:value)
-  setting = Setting.find_or_initialize_by(name: 'twitter_name')
-  setting.value = 'Fab_Manager'
-  setting.save
-end
+Setting.set('twitter_name', 'Fab_Manager') unless Setting.find_by(name: 'twitter_name').try(:value)
 
 unless Setting.find_by(name: 'machine_explications_alert').try(:value)
   setting = Setting.find_or_initialize_by(name: 'machine_explications_alert')
@@ -599,47 +591,19 @@ unless Setting.find_by(name: 'invoice_logo').try(:value)
   setting.save
 end
 
-unless Setting.find_by(name: 'invoice_reference').try(:value)
-  setting = Setting.find_or_initialize_by(name: 'invoice_reference')
-  setting.value = 'YYMMmmmX[/VL]R[/A]'
-  setting.save
-end
+Setting.set('invoice_reference', 'YYMMmmmX[/VL]R[/A]') unless Setting.find_by(name: 'invoice_reference').try(:value)
 
-unless Setting.find_by(name: 'invoice_code-active').try(:value)
-  setting = Setting.find_or_initialize_by(name: 'invoice_code-active')
-  setting.value = 'true'
-  setting.save
-end
+Setting.set('invoice_code-active', true) unless Setting.find_by(name: 'invoice_code-active').try(:value)
 
-unless Setting.find_by(name: 'invoice_code-value').try(:value)
-  setting = Setting.find_or_initialize_by(name: 'invoice_code-value')
-  setting.value = 'INMEDFABLAB'
-  setting.save
-end
+Setting.set('invoice_code-value', 'FABMGRFABLAB') unless Setting.find_by(name: 'invoice_code-value').try(:value)
 
-unless Setting.find_by(name: 'invoice_order-nb').try(:value)
-  setting = Setting.find_or_initialize_by(name: 'invoice_order-nb')
-  setting.value = 'nnnnnn-MM-YY'
-  setting.save
-end
+Setting.set('invoice_order-nb', 'nnnnnn-MM-YY') unless Setting.find_by(name: 'invoice_order-nb').try(:value)
 
-unless Setting.find_by(name: 'invoice_VAT-active').try(:value)
-  setting = Setting.find_or_initialize_by(name: 'invoice_VAT-active')
-  setting.value = 'false'
-  setting.save
-end
+Setting.set('invoice_VAT-active', false) unless Setting.find_by(name: 'invoice_VAT-active').try(:value)
 
-unless Setting.find_by(name: 'invoice_VAT-rate').try(:value)
-  setting = Setting.find_or_initialize_by(name: 'invoice_VAT-rate')
-  setting.value = '20.0'
-  setting.save
-end
+Setting.set('invoice_VAT-rate', 20.0) unless Setting.find_by(name: 'invoice_VAT-rate').try(:value)
 
-unless Setting.find_by(name: 'invoice_text').try(:value)
-  setting = Setting.find_or_initialize_by(name: 'invoice_text')
-  setting.value = "Notre association n'est pas assujettie à la TVA"
-  setting.save
-end
+Setting.set('invoice_text', t('invoices.invoice_text_example')) unless Setting.find_by(name: 'invoice_text').try(:value)
 
 unless Setting.find_by(name: 'invoice_legals').try(:value)
   setting = Setting.find_or_initialize_by(name: 'invoice_legals')
@@ -651,53 +615,21 @@ unless Setting.find_by(name: 'invoice_legals').try(:value)
   setting.save
 end
 
-unless Setting.find_by(name: 'booking_window_start').try(:value)
-  setting = Setting.find_or_initialize_by(name: 'booking_window_start')
-  setting.value = '1970-01-01 08:00:00'
-  setting.save
-end
+Setting.set('booking_window_start', '1970-01-01 08:00:00') unless Setting.find_by(name: 'booking_window_start').try(:value)
 
-unless Setting.find_by(name: 'booking_window_end').try(:value)
-  setting = Setting.find_or_initialize_by(name: 'booking_window_end')
-  setting.value = '1970-01-01 23:59:59'
-  setting.save
-end
+Setting.set('booking_window_end', '1970-01-01 23:59:59') unless Setting.find_by(name: 'booking_window_end').try(:value)
 
-unless Setting.find_by(name: 'booking_move_enable').try(:value)
-  setting = Setting.find_or_initialize_by(name: 'booking_move_enable')
-  setting.value = 'true'
-  setting.save
-end
+Setting.set('booking_move_enable', true) unless Setting.find_by(name: 'booking_move_enable').try(:value)
 
-unless Setting.find_by(name: 'booking_move_delay').try(:value)
-  setting = Setting.find_or_initialize_by(name: 'booking_move_delay')
-  setting.value = '24'
-  setting.save
-end
+Setting.set('booking_move_delay', 24) unless Setting.find_by(name: 'booking_move_delay').try(:value)
 
-unless Setting.find_by(name: 'booking_cancel_enable').try(:value)
-  setting = Setting.find_or_initialize_by(name: 'booking_cancel_enable')
-  setting.value = 'false'
-  setting.save
-end
+Setting.set('booking_cancel_enable', false) unless Setting.find_by(name: 'booking_cancel_enable').try(:value)
 
-unless Setting.find_by(name: 'booking_cancel_delay').try(:value)
-  setting = Setting.find_or_initialize_by(name: 'booking_cancel_delay')
-  setting.value = '24'
-  setting.save
-end
+Setting.set('booking_cancel_delay', 24) unless Setting.find_by(name: 'booking_cancel_delay').try(:value)
 
-unless Setting.find_by(name: 'main_color').try(:value)
-  setting = Setting.find_or_initialize_by(name: 'main_color')
-  setting.value = '#cb1117'
-  setting.save
-end
+Setting.set('main_color', '#cb1117') unless Setting.find_by(name: 'main_color').try(:value)
 
-unless Setting.find_by(name: 'secondary_color').try(:value)
-  setting = Setting.find_or_initialize_by(name: 'secondary_color')
-  setting.value = '#ffdd00'
-  setting.save
-end
+Setting.set('secondary_color', '#ffdd00') unless Setting.find_by(name: 'secondary_color').try(:value)
 
 Stylesheet.build_theme!
 Stylesheet.build_home!
@@ -709,17 +641,9 @@ unless Setting.find_by(name: 'training_information_message').try(:value)
   setting.save
 end
 
-unless Setting.find_by(name: 'fablab_name').try(:value)
-  setting = Setting.find_or_initialize_by(name: 'fablab_name')
-  setting.value = 'Fab-manager'
-  setting.save
-end
+Setting.set('fablab_name', 'Fab-manager') unless Setting.find_by(name: 'fablab_name').try(:value)
 
-unless Setting.find_by(name: 'name_genre').try(:value)
-  setting = Setting.find_or_initialize_by(name: 'name_genre')
-  setting.value = 'male'
-  setting.save
-end
+Setting.set('name_genre', 'male') unless Setting.find_by(name: 'name_genre').try(:value)
 
 unless DatabaseProvider.count.positive?
   db_provider = DatabaseProvider.new
@@ -734,41 +658,17 @@ unless DatabaseProvider.count.positive?
   end
 end
 
-unless Setting.find_by(name: 'reminder_enable').try(:value)
-  setting = Setting.find_or_initialize_by(name: 'reminder_enable')
-  setting.value = 'true'
-  setting.save
-end
+Setting.set('reminder_enable', true) unless Setting.find_by(name: 'reminder_enable').try(:value)
 
-unless Setting.find_by(name: 'reminder_delay').try(:value)
-  setting = Setting.find_or_initialize_by(name: 'reminder_delay')
-  setting.value = '24'
-  setting.save
-end
+Setting.set('reminder_delay', 24) unless Setting.find_by(name: 'reminder_delay').try(:value)
 
-unless Setting.find_by(name: 'visibility_yearly').try(:value)
-  setting = Setting.find_or_initialize_by(name: 'visibility_yearly')
-  setting.value = '3'
-  setting.save
-end
+Setting.set('visibility_yearly', 3) unless Setting.find_by(name: 'visibility_yearly').try(:value)
 
-unless Setting.find_by(name: 'visibility_others').try(:value)
-  setting = Setting.find_or_initialize_by(name: 'visibility_others')
-  setting.value = '1'
-  setting.save
-end
+Setting.set('visibility_others', 1) unless Setting.find_by(name: 'visibility_others').try(:value)
 
-unless Setting.find_by(name: 'display_name_enable').try(:value)
-  setting = Setting.find_or_initialize_by(name: 'display_name_enable')
-  setting.value = 'false'
-  setting.save
-end
+Setting.set('display_name_enable', false) unless Setting.find_by(name: 'display_name_enable').try(:value)
 
-unless Setting.find_by(name: 'machines_sort_by').try(:value)
-  setting = Setting.find_or_initialize_by(name: 'machines_sort_by')
-  setting.value = 'default'
-  setting.save
-end
+Setting.set('machines_sort_by', 'default') unless Setting.find_by(name: 'machines_sort_by').try(:value)
 
 unless Setting.find_by(name: 'privacy_draft').try(:value)
   setting = Setting.find_or_initialize_by(name: 'privacy_draft')
@@ -909,11 +809,7 @@ unless Setting.find_by(name: 'privacy_draft').try(:value)
   setting.save
 end
 
-unless Setting.find_by(name: 'fab_analytics').try(:value)
-  setting = Setting.find_or_initialize_by(name: 'fab_analytics')
-  setting.value = 'true'
-  setting.save
-end
+Setting.set('fab_analytics', true) unless Setting.find_by(name: 'fab_analytics').try(:value)
 
 unless Setting.find_by(name: 'link_name').try(:value)
   include ApplicationHelper # rubocop:disable Style/MixinUsage
@@ -951,11 +847,9 @@ unless Setting.find_by(name: 'home_content').try(:value)
   setting.save
 end
 
-unless Setting.find_by(name: 'slot_duration').try(:value)
-  setting = Setting.find_or_initialize_by(name: 'slot_duration')
-  setting.value = '60'
-  setting.save
-end
+Setting.set('slot_duration', 60) unless Setting.find_by(name: 'slot_duration').try(:value)
+
+Setting.set('spaces_module', false) unless Setting.find_by(name: 'spaces_module').try(:value)
 
 if StatisticCustomAggregation.count.zero?
   # available reservations hours for machines

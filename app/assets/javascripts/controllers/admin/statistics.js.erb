@@ -181,7 +181,7 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
       if (tab.table) {
         if ((tab.es_type_key === 'subscription') && $rootScope.fablabWithoutPlans) {
           return true;
-        } else return (tab.es_type_key === 'space') && $rootScope.fablabWithoutSpaces;
+        } else return (tab.es_type_key === 'space') && !$rootScope.spacesModule;
       } else {
         return true;
       }

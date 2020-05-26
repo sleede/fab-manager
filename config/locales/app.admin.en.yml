@@ -1044,6 +1044,7 @@ en:
         spaces: "Spaces"
         spaces_info_html: "<p>A space can be, for example, a woodshop or a meeting room. Their particularity is that they can be booked by several people at the same time.</p><p><strong>Warning:</strong> It is not recommended to disable spaces if at least one space reservation was made on the system.</p>"
         enable_spaces: "Enable the spaces"
+        spaces_module: "spaces module"
         sort_by:
           default: "Default"
           name: "Name"
