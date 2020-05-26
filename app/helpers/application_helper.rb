@@ -13,7 +13,7 @@ module ApplicationHelper
     attributes.try(:include?, attribute)
   end
 
-  def bootstrap_class_for flash_type
+  def bootstrap_class_for(flash_type)
     { flash: 'alert-success', alert: 'alert-danger', notice: 'alert-info' }[flash_type.to_sym] || flash_type.to_s
   end
 
@@ -55,6 +55,10 @@ module ApplicationHelper
 
   def bool_to_sym(bool)
     bool ? :true : :false # rubocop:disable Lint/BooleanSymbol
+  end
+
+  def str_to_bool(str, default = 'true')
+    str.to_s.casecmp(default).zero?
   end
 
   def amount_to_f(amount)

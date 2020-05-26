@@ -103,18 +103,25 @@ namespace :fablab do
 
     desc 'migrate environment variables to the database (settings)'
     task env_to_db: :environment do
+      include ApplicationHelper
+
       mapping = [
-        %w[PHONE_REQUIRED phone_required true],
-        %w[GA_ID tracking_id],
-        %w[BOOK_SLOT_AT_SAME_TIME book_overlapping_slots true],
-        %w[SLOT_DURATION slot_duration 60],
-        %w[EVENTS_IN_CALENDAR events_in_calendar false]
+        %w[_ PHONE_REQUIRED phone_required true],
+        %w[_ GA_ID tracking_id],
+        %w[_ BOOK_SLOT_AT_SAME_TIME book_overlapping_slots true],
+        %w[_ SLOT_DURATION slot_duration 60],
+        %w[_ EVENTS_IN_CALENDAR events_in_calendar false],
+        %w[! FABLAB_WITHOUT_SPACES spaces_module]
       ]
 
       mapping.each do |m|
-        setting = Setting.find_or_initialize_by(name: m[1])
-        setting.value = ENV.fetch(m[0], m[2])
-        setting.save if setting.value
+        setting = Setting.find_or_initialize_by(name: m[2])
+        value = ENV.fetch(m[1], m[3])
+        next unless value
+
+        value = (!str_to_bool(value)).to_s if m[0] == '!'
+        setting.value = value
+        setting.save
       end
     end
   end

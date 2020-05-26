@@ -347,3 +347,21 @@
         </div>
     </div>
 </div>
+
+<div class="panel panel-default m-t-lg">
+  <div class="panel-heading">
+    <span class="font-sbold" translate>{{ 'app.admin.settings.modules' }}</span>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <h3 class="m-l" translate>{{ 'app.admin.settings.spaces' }}</h3>
+      <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.spaces_info_html' | translate"></p>
+      <boolean-setting name="spaces_module"
+                       settings="allSettings"
+                       label="app.admin.settings.enable_spaces"
+                       classes="m-l"
+                       yes-label="app.shared.buttons.yes"
+                       no-label="app.shared.buttons.no"></boolean-setting>
+    </div>
+  </div>
+</div>
