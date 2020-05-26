@@ -39,7 +39,7 @@ class HealthService
       admins: User.admins.count,
       availabilities: last_week_availabilities,
       reservations: last_week_new_reservations,
-      plans: !Rails.application.secrets.fablab_without_plans,
+      plans: Settings.get('plans_module'),
       spaces: Setting.get('spaces_module'),
       online_payment: !Rails.application.secrets.fablab_without_online_payments,
       invoices: !Rails.application.secrets.fablab_without_invoices,

@@ -58,7 +58,7 @@ Application.Controllers.controller('MainNavController', ['$scope', function ($sc
 
   ];
 
-  if (!Fablab.withoutPlans) {
+  if ($scope.plansModule) {
     $scope.navLinks.push({
       state: 'app.public.plans',
       linkText: 'app.public.common.subscriptions',

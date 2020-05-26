@@ -81,12 +81,6 @@ So set this setting carefully before starting the application for the first time
 
 When payments are done on the platform, an invoice will be generated as a PDF file.
 The PDF file name will be of the form "(INVOICE_PREFIX) - (invoice ID) _ (invoice date) .pdf".
-<a name="FABLAB_WITHOUT_PLANS"></a>
-
-    FABLAB_WITHOUT_PLANS
-
-If set to 'true', the subscription plans will be fully disabled and invisible in the application.
-It is not recommended to disable plans if at least one subscription was took on the platform.
 <a name="FABLAB_WITHOUT_ONLINE_PAYMENT"></a>
 
     FABLAB_WITHOUT_ONLINE_PAYMENT

@@ -111,7 +111,8 @@ namespace :fablab do
         %w[_ BOOK_SLOT_AT_SAME_TIME book_overlapping_slots true],
         %w[_ SLOT_DURATION slot_duration 60],
         %w[_ EVENTS_IN_CALENDAR events_in_calendar false],
-        %w[! FABLAB_WITHOUT_SPACES spaces_module true]
+        %w[! FABLAB_WITHOUT_SPACES spaces_module true],
+        %w[! FABLAB_WITHOUT_PLANS plans_module false]
       ]
 
       mapping.each do |m|

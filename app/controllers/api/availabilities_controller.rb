@@ -2,8 +2,6 @@
 
 # API Controller for resources of type Availability
 class API::AvailabilitiesController < API::ApiController
-  include FablabConfiguration
-
   before_action :authenticate_user!, except: [:public]
   before_action :set_availability, only: %i[show update reservations lock]
   before_action :define_max_visibility, only: %i[machine trainings spaces]

@@ -270,6 +270,7 @@ en:
         subscriptions: "Subscriptions"
         trainings: "Trainings"
         list_of_the_subscription_plans: "List of the subscription plans"
+        disabled_plans_info_html: "<p><strong>Warning:</strong> the subscriptions are disabled on this application.</p><p>You can still create some, but they won't be available until the activation of the plans module, from the « Customization » section.</p>"
         beware_the_subscriptions_are_disabled_on_this_application: "Beware, the subscriptions are disabled on this application."
         you_can_create_some_but_they_wont_be_available_until_the_project_is_redeployed_by_the_server_manager: "You can create some but they won't be available until the project is redeployed by the server manager."
         for_safety_reasons_please_dont_create_subscriptions_if_you_dont_want_intend_to_use_them_later: "For safety reasons, please don't create subscriptions if you don't intend to use them later."
@@ -1045,6 +1046,10 @@ en:
         spaces_info_html: "<p>A space can be, for example, a woodshop or a meeting room. Their particularity is that they can be booked by several people at the same time.</p><p><strong>Warning:</strong> It is not recommended to disable spaces if at least one space reservation was made on the system.</p>"
         enable_spaces: "Enable the spaces"
         spaces_module: "spaces module"
+        plans: "Plans"
+        plans_info_html: "<p>Subscriptions provide a way to segment your prices and provide benefits to regular users.</p><p><strong>Warning:</strong> It is not recommended to disable plans if at least one subscription is active on the system.</p>"
+        enable_plans: "Enable the plans"
+        plans_module: "plans module"
         sort_by:
           default: "Default"
           name: "Name"

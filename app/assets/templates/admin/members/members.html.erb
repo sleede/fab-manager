@@ -25,7 +25,7 @@
     <a class="btn btn-default" ng-href="api/members/export_members.xlsx" target="export-frame" ng-click="alertExport('members')">
       <i class="fa fa-file-excel-o"></i> {{ 'app.admin.members.members' | translate }}
     </a>
-    <a class="btn btn-default" ng-href="api/members/export_subscriptions.xlsx" target="export-frame" ng-if="!fablabWithoutPlans" ng-click="alertExport('subscriptions')">
+    <a class="btn btn-default" ng-href="api/members/export_subscriptions.xlsx" target="export-frame" ng-if="plansModule" ng-click="alertExport('subscriptions')">
       <i class="fa fa-file-excel-o"></i> {{ 'app.admin.members.subscriptions' | translate }}
     </a>
     <a class="btn btn-default" ng-href="api/members/export_reservations.xlsx" target="export-frame" ng-click="alertExport('reservations')">
