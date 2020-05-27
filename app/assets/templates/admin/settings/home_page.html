@@ -20,20 +20,11 @@
                 <button name="button" class="btn btn-warning" ng-click="save(homeBlogpostSetting)" translate>{{ 'app.shared.buttons.save' }}</button>
             </div>
             <div class="col-md-6">
-                <h4 translate>{{ 'app.admin.settings.twitter_stream' }}</h4>
-                <form role="form" class="form-inline" name="twitterForm" novalidate>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-addon">
-                                <i class="fa fa-twitter"></i>
-                            </div>
-                            <input type="text" ng-model="twitterSetting.value" class="form-control" placeholder="{{ 'app.admin.settings.name_of_the_twitter_account' | translate }}"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <button name="button" class="btn btn-warning" ng-click="save(twitterSetting)" translate>{{ 'app.shared.buttons.save' }}</button>
-                    </div>
-                </form>
+                <text-setting name="twitter_name"
+                              settings="allSettings"
+                              label="app.admin.settings.twitter_stream"
+                              fa-icon="fa-twitter">
+                </text-setting>
             </div>
         </div>
         <div class="row m-t-lg home-page-style">

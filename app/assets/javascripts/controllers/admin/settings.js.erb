@@ -58,8 +58,6 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
     $scope.allSettings = settingsPromise;
 
     // various configurable settings
-    $scope.twitterSetting = { name: 'twitter_name', value: settingsPromise.twitter_name };
-    $scope.linkName = { name: 'link_name', value: settingsPromise.link_name };
     $scope.aboutTitleSetting = { name: 'about_title', value: settingsPromise.about_title };
     $scope.aboutBodySetting = { name: 'about_body', value: settingsPromise.about_body };
     $scope.privacyDpoSetting = { name: 'privacy_dpo', value: settingsPromise.privacy_dpo };
@@ -77,7 +75,6 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
     $scope.windowEnd = { name: 'booking_window_end', value: settingsPromise.booking_window_end };
     $scope.mainColorSetting = { name: 'main_color', value: settingsPromise.main_color };
     $scope.secondColorSetting = { name: 'secondary_color', value: settingsPromise.secondary_color };
-    $scope.fablabName = { name: 'fablab_name', value: settingsPromise.fablab_name };
     $scope.nameGenre = { name: 'name_genre', value: settingsPromise.name_genre };
     $scope.machinesSortBy = { name: 'machines_sort_by', value: settingsPromise.machines_sort_by };
     $scope.cguFile = cguFile.custom_asset;

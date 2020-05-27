@@ -5,16 +5,11 @@
     <div class="panel-body">
         <div class="row m-t-lg">
             <div class="col-md-4">
-                <form role="form" novalidate>
-                    <label for="fablabName" class="control-label m-r" translate>{{ 'app.admin.settings.fablab_title' }}</label>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-addon"><i class="fa fa-font"></i></div>
-                            <input type="text" id="fablabName" ng-model="fablabName.value" class="form-control" placeholder="{{ 'app.admin.settings.fablab_name' | translate }}"/>
-                        </div>
-                    </div>
-                    <button name="button" class="btn btn-warning" ng-click="save(fablabName)" translate>{{ 'app.shared.buttons.save' }}</button>
-                </form>
+                <text-setting name="fablab_name"
+                              settings="allSettings"
+                              label="app.admin.settings.fablab_title"
+                              fa-icon="fa-font">
+                </text-setting>
             </div>
 
             <div class="col-md-4 col-md-offset-1">
@@ -23,17 +18,17 @@
                     <div class="form-group">
                         <label for="nameGenreMale">
                           <input type="radio" name="nameGenre" id="nameGenreMale" ng-model="nameGenre.value" ng-value="'male'" />
-                          {{ 'app.admin.settings.male' | translate }} <span style="font-weight: normal">{{ 'app.admin.settings.eg' | translate }} <cite>{{ 'app.admin.settings.the_team' | translate }} <strong translate>{{ 'app.admin.settings.male_preposition' }}</strong> {{fablabName.value}}</cite></span>
+                          {{ 'app.admin.settings.male' | translate }} <span style="font-weight: normal">{{ 'app.admin.settings.eg' | translate }} <cite>{{ 'app.admin.settings.the_team' | translate }} <strong translate>{{ 'app.admin.settings.male_preposition' }}</strong> {{allSettings.fablab_name}}</cite></span>
                         </label>
                         <br/>
                         <label for="nameGenreFemale">
                           <input type="radio" name="nameGenre" id="nameGenreFemale" ng-model="nameGenre.value" ng-value="'female'" />
-                          {{ 'app.admin.settings.female' | translate }} <span style="font-weight: normal">{{ 'app.admin.settings.eg' | translate }} <cite>{{ 'app.admin.settings.the_team' | translate }} <strong translate>{{ 'app.admin.settings.female_preposition' }}</strong> {{fablabName.value}}</cite></span>
+                          {{ 'app.admin.settings.female' | translate }} <span style="font-weight: normal">{{ 'app.admin.settings.eg' | translate }} <cite>{{ 'app.admin.settings.the_team' | translate }} <strong translate>{{ 'app.admin.settings.female_preposition' }}</strong> {{allSettings.fablab_name}}</cite></span>
                         </label>
                         <br/>
                         <label for="nameGenreNeutral">
                           <input type="radio" name="nameGenre" id="nameGenreNeutral" ng-model="nameGenre.value" ng-value="'neutral'" />
-                          {{ 'app.admin.settings.neutral' | translate }} <span style="font-weight: normal">{{ 'app.admin.settings.eg' | translate }} <cite>{{ 'app.admin.settings.the_team' | translate }} <strong translate>{{ 'app.admin.settings.neutral_preposition' }}</strong> {{fablabName.value}}</cite></span>
+                          {{ 'app.admin.settings.neutral' | translate }} <span style="font-weight: normal">{{ 'app.admin.settings.eg' | translate }} <cite>{{ 'app.admin.settings.the_team' | translate }} <strong translate>{{ 'app.admin.settings.neutral_preposition' }}</strong> {{allSettings.fablab_name}}</cite></span>
                         </label>
                     </div>
                     <button name="button" class="btn btn-warning" ng-click="save(nameGenre)" translate>{{ 'app.shared.buttons.save' }}</button>
