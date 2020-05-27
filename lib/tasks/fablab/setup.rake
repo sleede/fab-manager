@@ -114,7 +114,8 @@ namespace :fablab do
         %w[! FABLAB_WITHOUT_SPACES spaces_module true],
         %w[! FABLAB_WITHOUT_PLANS plans_module false],
         %w[! FABLAB_WITHOUT_INVOICES invoicing_module false],
-        %w[_ FACEBOOK_APP_ID facebook_app_id]
+        %w[_ FACEBOOK_APP_ID facebook_app_id],
+        %w[_ TWITTER_NAME twitter_analytics]
       ]
 
       mapping.each do |m|
@@ -122,6 +123,7 @@ namespace :fablab do
         value = ENV.fetch(m[1], m[3])
         next unless value
 
+        # if the array starts with a "!", invert the boolean value
         value = (!str_to_bool(value)).to_s if m[0] == '!'
         setting.value = value
         setting.save

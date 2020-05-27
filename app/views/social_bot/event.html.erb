@@ -23,7 +23,7 @@
 
   <!-- Twitter Cards-->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="<%= ENV['TWITTER_NAME'] %>">
+  <meta name="twitter:site" content="<%= Setting.get('twitter_analytics') %>">
   <meta name="twitter:title" content="<%= @event.title %>">
   <meta name="twitter:description" content="<%= strip_tags(@event.description) %>">
   <% if @event.event_image %>

@@ -105,5 +105,17 @@
       </div>
     </div>
 
+    <div class="row">
+      <h3 class="m-l" translate>{{ 'app.admin.settings.privacy.twitter' }}</h3>
+      <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.privacy.twitter_info_html' | translate"></p>
+      <div class="col-md-4 col-md-offset-1">
+        <text-setting name="twitter_analytics"
+                      settings="allSettings"
+                      label="app.admin.settings.privacy.twitter_analytics"
+                      placeholder="@username">
+        </text-setting>
+      </div>
+    </div>
+
   </div>
 </div>

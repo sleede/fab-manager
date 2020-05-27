@@ -130,12 +130,6 @@ This is optional, the captcha will be displayed on the sign-up form, only if the
 Unique identifier of your [Disqus](http://www.disqus.com) forum.
 Disqus forums are used to allow visitors to comment on projects.
 See https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname- for more information.
-<a name="TWITTER_NAME"></a>
-
-    TWITTER_NAME
-
-Identifier of the Twitter account for Twitter share project, event or training
-It will also be used for [Twitter Card analytics](https://dev.twitter.com/cards/analytics).
 <a name="LOG_LEVEL"></a>
 
     LOG_LEVEL
