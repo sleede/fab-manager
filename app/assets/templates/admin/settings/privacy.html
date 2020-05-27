@@ -75,15 +75,11 @@
     <p class="alert alert-warning m-t" ng-bind-html="'app.admin.settings.privacy.tracking_id_info_html' | translate"></p>
     <div class="row">
       <div class="col-md-4 col-md-offset-1">
-        <label for="tracking_id" translate>{{ 'app.admin.settings.privacy.tracking_id' }}</label>
-        <input ng-model="trackingId.value"
-               id="tracking_id"
-               type="text"
-               class="form-control"
-               placeholder="UA-000000-2"
-               />
-
-        <button name="button" class="btn btn-warning m-t" ng-click="save(trackingId)" translate>{{ 'app.shared.buttons.save' }}</button>
+        <text-setting name="tracking_id"
+                      settings="allSettings"
+                      label="app.admin.settings.privacy.tracking_id"
+                      placeholder="UA-000000-2">
+        </text-setting>
       </div>
     </div>
 

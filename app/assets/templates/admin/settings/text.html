@@ -1,0 +1,17 @@
+<form class="{{classes}}" name="setting-text-form">
+  <label for="setting-{{setting.name}}" class="control-label m-r" translate>{{ label }}</label>
+  <div ng-class="{'form-group': faIcon}">
+      <div ng-class="{'input-group': faIcon}">
+          <div class="input-group-addon" ng-if="faIcon">
+              <i class="fa {{faIcon}}"></i>
+          </div>
+          <input type="text"
+                 class="form-control"
+                 id="setting-{{setting.name}}"
+                 placeholder="{{placeholder}}"
+                 ng-model="setting.value"
+                 ng-required="required">
+      </div>
+  </div>
+  <button name="button" class="btn btn-warning m-t" ng-click="save(setting)" ng-disabled="setting-text-form.$invalid" translate>{{ 'app.shared.buttons.save' }}</button>
+</form>
