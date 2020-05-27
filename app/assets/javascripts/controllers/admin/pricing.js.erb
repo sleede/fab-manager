@@ -18,8 +18,8 @@
 /**
  * Controller used in the prices edition page
  */
-Application.Controllers.controller('EditPricingController', ['$scope', '$state', '$uibModal', '$filter', 'TrainingsPricing', 'Credit', 'Pricing', 'Plan', 'Coupon', 'plans', 'groups', 'growl', 'machinesPricesPromise', 'Price', 'dialogs', 'trainingsPricingsPromise', 'trainingsPromise', 'machineCreditsPromise', 'machinesPromise', 'trainingCreditsPromise', 'couponsPromise', 'spacesPromise', 'spacesPricesPromise', 'spacesCreditsPromise', 'slotDurationPromise', '_t', 'Member', 'uiTourService',
-  function ($scope, $state, $uibModal, $filter, TrainingsPricing, Credit, Pricing, Plan, Coupon, plans, groups, growl, machinesPricesPromise, Price, dialogs, trainingsPricingsPromise, trainingsPromise, machineCreditsPromise, machinesPromise, trainingCreditsPromise, couponsPromise, spacesPromise, spacesPricesPromise, spacesCreditsPromise, slotDurationPromise, _t, Member, uiTourService) {
+Application.Controllers.controller('EditPricingController', ['$scope', '$state', '$uibModal', '$filter', 'TrainingsPricing', 'Credit', 'Pricing', 'Plan', 'Coupon', 'plans', 'groups', 'growl', 'machinesPricesPromise', 'Price', 'dialogs', 'trainingsPricingsPromise', 'trainingsPromise', 'machineCreditsPromise', 'machinesPromise', 'trainingCreditsPromise', 'couponsPromise', 'spacesPromise', 'spacesPricesPromise', 'spacesCreditsPromise', 'settingsPromise', '_t', 'Member', 'uiTourService',
+  function ($scope, $state, $uibModal, $filter, TrainingsPricing, Credit, Pricing, Plan, Coupon, plans, groups, growl, machinesPricesPromise, Price, dialogs, trainingsPricingsPromise, trainingsPromise, machineCreditsPromise, machinesPromise, trainingCreditsPromise, couponsPromise, spacesPromise, spacesPricesPromise, spacesCreditsPromise, settingsPromise, _t, Member, uiTourService) {
     /* PUBLIC SCOPE */
 
     // List of machines prices (not considering any plan)
@@ -77,7 +77,7 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
     $scope.planFiltering = 'enabled';
 
     // Default duration for the slots
-    $scope.slotDuration = parseInt(slotDurationPromise.setting.value, 10);
+    $scope.slotDuration = parseInt(settingsPromise.slot_duration, 10);
 
     // Available options for filtering plans by status
     $scope.filterDisabled = [
@@ -730,7 +730,7 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
         }
       });
       // if the user has never seen the tour, show him now
-      if (Fablab.featureTourDisplay !== 'manual' && $scope.currentUser.profile.tours.indexOf('pricing') < 0) {
+      if (settingsPromise.feature_tour_display !== 'manual' && $scope.currentUser.profile.tours.indexOf('pricing') < 0) {
         uitour.start();
       }
     }

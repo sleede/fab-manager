@@ -12,8 +12,8 @@
  */
 'use strict';
 
-Application.Controllers.controller('ProjectElementsController', ['$scope', '$state', 'Component', 'Licence', 'Theme', 'componentsPromise', 'licencesPromise', 'themesPromise', '_t', 'Member', 'uiTourService',
-  function ($scope, $state, Component, Licence, Theme, componentsPromise, licencesPromise, themesPromise, _t, Member, uiTourService) {
+Application.Controllers.controller('ProjectElementsController', ['$scope', '$state', 'Component', 'Licence', 'Theme', 'componentsPromise', 'licencesPromise', 'themesPromise', '_t', 'Member', 'uiTourService', 'settingsPromise',
+  function ($scope, $state, Component, Licence, Theme, componentsPromise, licencesPromise, themesPromise, _t, Member, uiTourService, settingsPromise) {
     // Materials list (plastic, wood ...)
     $scope.components = componentsPromise;
 
@@ -198,7 +198,7 @@ Application.Controllers.controller('ProjectElementsController', ['$scope', '$sta
         }
       });
       // if the user has never seen the tour, show him now
-      if (Fablab.featureTourDisplay !== 'manual' && $scope.currentUser.profile.tours.indexOf('project-elements') < 0) {
+      if (settingsPromise.feature_tour_display !== 'manual' && $scope.currentUser.profile.tours.indexOf('project-elements') < 0) {
         uitour.start();
       }
     };

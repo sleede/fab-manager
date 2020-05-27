@@ -153,8 +153,8 @@ class EventsController {
 /**
  * Controller used in the events listing page (admin view)
  */
-Application.Controllers.controller('AdminEventsController', ['$scope', '$state', 'dialogs', '$uibModal', 'growl', 'AuthService', 'Event', 'Category', 'EventTheme', 'AgeRange', 'PriceCategory', 'eventsPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', 'priceCategoriesPromise', '_t', 'Member', 'uiTourService',
-  function ($scope, $state, dialogs, $uibModal, growl, AuthService, Event, Category, EventTheme, AgeRange, PriceCategory, eventsPromise, categoriesPromise, themesPromise, ageRangesPromise, priceCategoriesPromise, _t, Member, uiTourService) {
+Application.Controllers.controller('AdminEventsController', ['$scope', '$state', 'dialogs', '$uibModal', 'growl', 'AuthService', 'Event', 'Category', 'EventTheme', 'AgeRange', 'PriceCategory', 'eventsPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', 'priceCategoriesPromise', '_t', 'Member', 'uiTourService', 'settingsPromise',
+  function ($scope, $state, dialogs, $uibModal, growl, AuthService, Event, Category, EventTheme, AgeRange, PriceCategory, eventsPromise, categoriesPromise, themesPromise, ageRangesPromise, priceCategoriesPromise, _t, Member, uiTourService, settingsPromise) {
   /* PUBLIC SCOPE */
 
     // By default, the pagination mode is activated to limit the page size
@@ -465,7 +465,7 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
         }
       });
       // if the user has never seen the tour, show him now
-      if (Fablab.featureTourDisplay !== 'manual' && $scope.currentUser.profile.tours.indexOf('events') < 0) {
+      if (settingsPromise.feature_tour_display !== 'manual' && $scope.currentUser.profile.tours.indexOf('events') < 0) {
         uitour.start();
       }
     }

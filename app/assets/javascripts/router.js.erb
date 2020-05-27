@@ -104,7 +104,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['home_content', 'home_blogpost', 'spaces_module']" }).$promise; }]
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['home_content', 'home_blogpost', 'spaces_module', 'feature_tour_display']" }).$promise; }]
         }
       })
       .state('app.public.privacy', {
@@ -306,7 +306,8 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }]
+          machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['feature_tour_display']" }).$promise; }]
         }
       })
       .state('app.admin.machines_new', {
@@ -380,7 +381,8 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          spacesPromise: ['Space', function (Space) { return Space.query().$promise; }]
+          spacesPromise: ['Space', function (Space) { return Space.query().$promise; }],
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['feature_tour_display']" }).$promise; }]
         }
       })
       .state('app.admin.space_new', {
@@ -595,8 +597,7 @@ angular.module('application.router', ['ui.router'])
           machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
           plansPromise: ['Plan', function (Plan) { return Plan.query().$promise; }],
           groupsPromise: ['Group', function (Group) { return Group.query().$promise; }],
-          slotDurationPromise: ['Setting', function (Setting) { return Setting.get({ name: 'slot_duration' }).$promise; }],
-          eventsInCalendarPromise: ['Setting', function (Setting) { return Setting.get({ name: 'events_in_calendar' }).$promise; }]
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['slot_duration', 'events_in_calendar', 'feature_tour_display']" }).$promise; }]
         }
       })
       .state('app.admin.calendar.icalendar', {
@@ -624,7 +625,8 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           componentsPromise: ['Component', function (Component) { return Component.query().$promise; }],
           licencesPromise: ['Licence', function (Licence) { return Licence.query().$promise; }],
-          themesPromise: ['Theme', function (Theme) { return Theme.query().$promise; }]
+          themesPromise: ['Theme', function (Theme) { return Theme.query().$promise; }],
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['feature_tour_display']" }).$promise; }]
         }
       })
       .state('app.admin.manage_abuses', {
@@ -651,7 +653,8 @@ angular.module('application.router', ['ui.router'])
         },
         resolve: {
           trainingsPromise: ['Training', function (Training) { return Training.query().$promise; }],
-          machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }]
+          machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['feature_tour_display']" }).$promise; }]
         }
       })
       .state('app.admin.trainings_new', {
@@ -693,7 +696,8 @@ angular.module('application.router', ['ui.router'])
           categoriesPromise: ['Category', function (Category) { return Category.query().$promise; }],
           themesPromise: ['EventTheme', function (EventTheme) { return EventTheme.query().$promise; }],
           ageRangesPromise: ['AgeRange', function (AgeRange) { return AgeRange.query().$promise; }],
-          priceCategoriesPromise: ['PriceCategory', function (PriceCategory) { return PriceCategory.query().$promise; }]
+          priceCategoriesPromise: ['PriceCategory', function (PriceCategory) { return PriceCategory.query().$promise; }],
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['feature_tour_display']" }).$promise; }]
         }
       })
       .state('app.admin.events_new', {
@@ -763,7 +767,7 @@ angular.module('application.router', ['ui.router'])
           spacesPromise: ['Space', function (Space) { return Space.query().$promise; }],
           spacesPricesPromise: ['Price', function (Price) { return Price.query({ priceable_type: 'Space', plan_id: 'null' }).$promise; }],
           spacesCreditsPromise: ['Credit', function (Credit) { return Credit.query({ creditable_type: 'Space' }).$promise; }],
-          slotDurationPromise: ['Setting', function (Setting) { return Setting.get({ name: 'slot_duration' }).$promise; }]
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['feature_tour_display', 'slot_duration']" }).$promise; }]
         }
       })
 
@@ -842,7 +846,8 @@ angular.module('application.router', ['ui.router'])
                        'accounting_other_client_code', 'accounting_other_client_label', 'accounting_wallet_code', 'accounting_wallet_label', \
                        'accounting_VAT_code', 'accounting_VAT_label', 'accounting_subscription_code', 'accounting_subscription_label', \
                        'accounting_Machine_code', 'accounting_Machine_label', 'accounting_Training_code', 'accounting_Training_label', \
-                       'accounting_Event_code', 'accounting_Event_label', 'accounting_Space_code', 'accounting_Space_label']` }).$promise;
+                       'accounting_Event_code', 'accounting_Event_label', 'accounting_Space_code', 'accounting_Space_label', \
+                       'feature_tour_display']` }).$promise;
           }],
           invoices: [ 'Invoice', function (Invoice) {
             return Invoice.list({
@@ -881,7 +886,8 @@ angular.module('application.router', ['ui.router'])
           managersPromise: ['User', function (User) { return User.query({ role: 'manager' }).$promise; }],
           groupsPromise: ['Group', function (Group) { return Group.query().$promise; }],
           tagsPromise: ['Tag', function (Tag) { return Tag.query().$promise; }],
-          authProvidersPromise: ['AuthProvider', function (AuthProvider) { return AuthProvider.query().$promise; }]
+          authProvidersPromise: ['AuthProvider', function (AuthProvider) { return AuthProvider.query().$promise; }],
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['feature_tour_display']" }).$promise; }]
         }
       })
       .state('app.admin.members_new', {
@@ -999,7 +1005,8 @@ angular.module('application.router', ['ui.router'])
         },
         resolve: {
           membersPromise: ['Member', function (Member) { return Member.mapping().$promise; }],
-          statisticsPromise: ['Statistics', function (Statistics) { return Statistics.query().$promise; }]
+          statisticsPromise: ['Statistics', function (Statistics) { return Statistics.query().$promise; }],
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['feature_tour_display']" }).$promise; }]
         }
       })
       .state('app.admin.stats_graphs', {
@@ -1029,7 +1036,7 @@ angular.module('application.router', ['ui.router'])
                        'home_blogpost', 'machine_explications_alert', 'training_explications_alert', 'slot_duration', \
                        'training_information_message', 'subscription_explications_alert', 'event_explications_alert', \
                        'space_explications_alert', 'booking_window_start', 'booking_window_end', 'events_in_calendar', \
-                       'booking_move_enable', 'booking_move_delay', 'booking_cancel_enable', \
+                       'booking_move_enable', 'booking_move_delay', 'booking_cancel_enable', 'feature_tour_display', \
                        'booking_cancel_delay', 'main_color', 'secondary_color', 'spaces_module', 'twitter_analytics', \
                        'fablab_name', 'name_genre', 'reminder_enable', 'plans_module', \
                        'reminder_delay', 'visibility_yearly', 'visibility_others', \
@@ -1054,7 +1061,8 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          clientsPromise: ['OpenAPIClient', function (OpenAPIClient) { return OpenAPIClient.query().$promise; }]
+          clientsPromise: ['OpenAPIClient', function (OpenAPIClient) { return OpenAPIClient.query().$promise; }],
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['feature_tour_display']" }).$promise; }]
         }
       });
   }

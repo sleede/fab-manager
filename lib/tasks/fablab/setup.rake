@@ -117,7 +117,8 @@ namespace :fablab do
         %w[_ FACEBOOK_APP_ID facebook_app_id],
         %w[_ TWITTER_NAME twitter_analytics],
         %w[_ RECAPTCHA_SITE_KEY recaptcha_site_key],
-        %w[_ RECAPTCHA_SECRET_KEY recaptcha_secret_key]
+        %w[_ RECAPTCHA_SECRET_KEY recaptcha_secret_key],
+        %w[_ FEATURE_TOUR_DISPLAY feature_tour_display once]
       ]
 
       mapping.each do |m|

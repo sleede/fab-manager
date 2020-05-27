@@ -303,7 +303,7 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
         }
       });
       // if the user has never seen the tour, show him now
-      if (Fablab.featureTourDisplay !== 'manual' && $scope.currentUser.profile.tours.indexOf('welcome') < 0) {
+      if (settingsPromise.feature_tour_display !== 'manual' && $scope.currentUser.profile.tours.indexOf('welcome') < 0) {
         uitour.start();
       }
     };

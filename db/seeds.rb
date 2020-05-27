@@ -855,6 +855,8 @@ Setting.set('plans_module', true) unless Setting.find_by(name: 'plans_module').t
 
 Setting.set('invoicing_module', true) unless Setting.find_by(name: 'invoicing_module').try(:value)
 
+Setting.set('feature_tour_display', 'once') unless Setting.find_by(name: 'feature_tour_display').try(:value)
+
 if StatisticCustomAggregation.count.zero?
   # available reservations hours for machines
   machine_hours = StatisticType.find_by(key: 'hour', statistic_index_id: 2)

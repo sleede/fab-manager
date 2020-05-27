@@ -418,7 +418,7 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
         }
       });
       // if the user has never seen the tour, show him now
-      if (Fablab.featureTourDisplay !== 'manual' && $scope.currentUser.profile.tours.indexOf('settings') < 0) {
+      if ($scope.allSettings.feature_tour_display !== 'manual' && $scope.currentUser.profile.tours.indexOf('settings') < 0) {
         uitour.start();
       }
     }
@@ -473,6 +473,19 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
       $scope.$watch('advancedSettings.open', function (newValue) {
         if (newValue) $scope.codeMirrorEditor.refresh();
       })
+
+      // use the tours list, based on the selected value
+      $scope.$watch('allSettings.feature_tour_display', function (newValue, oldValue, scope) {
+        if (newValue === oldValue) return;
+
+        if (newValue === 'session') {
+          $scope.currentUser.profile.tours = Fablab.sessionTours;
+        } else if (newValue === 'once') {
+          Member.get({ id: $scope.currentUser.id }, function (user) {
+            $scope.currentUser.profile.tours = user.profile.tours;
+          });
+        }
+      });
     };
 
     // init the controller (call at the end !)

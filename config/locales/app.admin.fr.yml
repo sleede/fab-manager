@@ -1063,6 +1063,15 @@ fr:
         secret_key: "Clef secrète"
         recaptcha_site_key: "clef de site reCAPTCHA"
         recaptcha_secret_key: "clef secrète reCAPTCHA"
+        help: "Aide"
+        feature_tour: "Visite guidée des fonctionnalités"
+        feature_tour_info_html: "<p>Lorsque un administrateur ou un gestionnaire est connecté, une visite guidée des fonctionnalités se déclenchera lors de la première visite de chaque section de l'application. Vous pouvez modifier ce comportement pour une des valeur suivantes :</p><ul><li>« Une fois » pour garder le comportment par défaut.</li><li>« Par session » pour afficher les visites guidées chaque fois que l'application est ouverte de nouveau.</li><li>« Lancement manuel » pour éviter l'affichage automatique des visites guidées. Il sera toujours possible de les déclencher en appuyant sur F1 ou en cliquant sur « Aide » dans le menu utilisateur.</li></ul>"
+        feature_tour_display_mode: "Mode d'affichage des visites guidées"
+        feature_tour_display: "l'affichage des visites guidées"
+        display_mode:
+          once: "Une fois"
+          session: "Par session"
+          manual: "Lancement manuel"
         sort_by:
           default: "Défaut"
           name: "Nom"

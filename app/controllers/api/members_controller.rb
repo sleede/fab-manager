@@ -192,7 +192,7 @@ class API::MembersController < API::ApiController
   def complete_tour
     authorize @member
 
-    if Rails.application.secrets.feature_tour_display == 'session'
+    if Setting.get('feature_tour_display') == 'session'
       render json: { tours: [params[:tour]] }
     else
       tours = "#{@member.profile.tours} #{params[:tour]}"

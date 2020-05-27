@@ -190,16 +190,6 @@ If not specified, every admins will receive system administration notifications.
     FORCE_VERSION_CHECK
 
 In test and development environments, the version won't be check automatically, unless this variable is set to "true".
-<a name="FEATURE_TOUR_DISPLAY"></a>
-
-    FEATURE_TOUR_DISPLAY
-
-When logged-in as an administrator, a feature tour will be triggered the first time you visit each section of the application.
-You can change this behavior by setting this variable to one of the following values:
-- "once" to keep the default behavior.
-- "session" to display the tours each time you reopen the application.
-- "manual" to prevent displaying the tours automatically; you'll still be able to trigger them by pressing the F1 key.
-
 <a name="ALLOW_INSECURE_HTTP"></a>
 
     ALLOW_INSECURE_HTTP

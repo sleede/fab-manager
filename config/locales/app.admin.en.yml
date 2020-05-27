@@ -1063,6 +1063,15 @@ en:
         secret_key: "Secret key"
         recaptcha_site_key: "reCAPTCHA Site Key"
         recaptcha_secret_key: "reCAPTCHA Secret Key"
+        help: "Help"
+        feature_tour: "Feature tour"
+        feature_tour_info_html: "<p>When an administrator or a manager in logged-in, a feature tour will be triggered the first time he/she visits each section of the application. You can change this behavior to one of the following values:</p><ul><li>« Once » to keep the default behavior.</li><li>« By session » to display the tours each time you reopen the application.</li><li>« Manual trigger » to prevent displaying the tours automatically. It'll still be possible to trigger them by pressing the F1 key or by clicking on « Help » in the user's menu.</li></ul>"
+        feature_tour_display_mode: "Feature tour display mode"
+        feature_tour_display: "feature tour display"
+        display_mode:
+          once: "Once"
+          session: "By session"
+          manual: "Manual trigger"
         sort_by:
           default: "Default"
           name: "Name"

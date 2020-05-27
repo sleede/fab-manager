@@ -338,6 +338,29 @@
     </div>
 </div>
 
+<div class="panel panel-default m-t-lg">
+  <div class="panel-heading">
+    <span class="font-sbold" translate>{{ 'app.admin.settings.help' }}</span>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <h3 class="m-l" translate>{{ 'app.admin.settings.feature_tour' }}</h3>
+      <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.feature_tour_info_html' | translate"></p>
+      <div class="col-md-4">
+        <select-setting name="feature_tour_display"
+                        settings="allSettings"
+                        classes="m-l"
+                        required="true"
+                        label="app.admin.settings.feature_tour_display_mode"
+                        option-1="['once', 'app.admin.settings.display_mode.once']"
+                        option-2="['session', 'app.admin.settings.display_mode.session']"
+                        option-3="['manual', 'app.admin.settings.display_mode.manual']">
+        </select-setting>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="panel panel-default m-t-md">
   <div class="panel-heading">
     <span class="font-sbold" translate>{{ 'app.admin.settings.account_creation' }}</span>
