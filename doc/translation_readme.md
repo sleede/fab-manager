@@ -35,10 +35,12 @@ You can access it at [in-context.translate.fab-manager.com](https://in-context.t
 You **should not** translate Fab-manager from the source files, because it will conflict with the TMS.
 Please refer to the [TMS method](#using-a-tms) for more details.
 
-Anyway, **if you add a new feature** that requires some new translations, just add them to the english files.
-You'll be able to provide translations for other languages later, using our TMS. 
+Nevertheless, **if you add a new feature** that requires some new translations, just add them to the english files.
+You'll be able to provide translations for other languages later, using our TMS.
 
-To add the english translations, check the files located in `config/locales`:
+Moreover, if you want to improve the english texts, you'll need to modify the english files.
+
+To add or edit the english translations, check the files located in `config/locales`:
 
 - Front app translations (angular.js) are located in  `config/locales/app.SCOPE.en.yml`.
  Where SCOPE has one the following meaning :
