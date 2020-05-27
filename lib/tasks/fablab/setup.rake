@@ -113,7 +113,8 @@ namespace :fablab do
         %w[_ EVENTS_IN_CALENDAR events_in_calendar false],
         %w[! FABLAB_WITHOUT_SPACES spaces_module true],
         %w[! FABLAB_WITHOUT_PLANS plans_module false],
-        %w[! FABLAB_WITHOUT_INVOICES invoicing_module false]
+        %w[! FABLAB_WITHOUT_INVOICES invoicing_module false],
+        %w[_ FACEBOOK_APP_ID facebook_app_id]
       ]
 
       mapping.each do |m|

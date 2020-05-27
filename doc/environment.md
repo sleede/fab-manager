@@ -136,12 +136,6 @@ See https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname- 
 
 Identifier of the Twitter account for Twitter share project, event or training
 It will also be used for [Twitter Card analytics](https://dev.twitter.com/cards/analytics).
-<a name="FACEBOOK_APP_ID"></a>
-
-    FACEBOOK_APP_ID
-
-This is optional. You can follow [this guide to get your personal App ID](https://developers.facebook.com/docs/apps/register).
-If you do so, you'll be able to customize and get statistics about project shares on Facebook.
 <a name="LOG_LEVEL"></a>
 
     LOG_LEVEL
