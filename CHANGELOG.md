@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a security issue: updated rails to 5.2.4.2 to fix [CVE-2020-8162](https://nvd.nist.gov/vuln/detail/CVE-2020-8162), [CVE-2020-8165](https://nvd.nist.gov/vuln/detail/CVE-2020-8165) and [CVE-2020-8166](https://nvd.nist.gov/vuln/detail/CVE-2020-8166)
+
 ## v4.4.4 2020 May 25
 
 - Fix a security issue: updated puma from 3.12.4 to 3.12.6 to fix [CVE-2020-11077](https://nvd.nist.gov/vuln/detail/CVE-2020-11077) and [CVE-2020-11076](https://nvd.nist.gov/vuln/detail/CVE-2020-11076)
