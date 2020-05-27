@@ -115,7 +115,9 @@ namespace :fablab do
         %w[! FABLAB_WITHOUT_PLANS plans_module false],
         %w[! FABLAB_WITHOUT_INVOICES invoicing_module false],
         %w[_ FACEBOOK_APP_ID facebook_app_id],
-        %w[_ TWITTER_NAME twitter_analytics]
+        %w[_ TWITTER_NAME twitter_analytics],
+        %w[_ RECAPTCHA_SITE_KEY recaptcha_site_key],
+        %w[_ RECAPTCHA_SECRET_KEY recaptcha_secret_key]
       ]
 
       mapping.each do |m|

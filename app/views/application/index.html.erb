@@ -55,9 +55,6 @@
       <% if Rails.application.secrets.openlab_app_id.present? %>
       Fablab.openlabAppId = "<%= Rails.application.secrets.openlab_app_id %>";
       <% end %>
-      <% if RecaptchaService.recaptcha_enabled? %>
-      Fablab.recaptchaSiteKey = "<%= RecaptchaService.site_key %>";
-      <% end %>
       Fablab.userConfirmationNeededToSignIn = ('<%= Rails.application.secrets.user_confirmation_needed_to_sign_in %>' === 'true');
 
       // feature tour (used when feature_tour_display = session)

@@ -117,12 +117,6 @@ See http://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-config
 When DELIVERY_METHOD is set to **smtp**, configure the SMTP server parameters.
 See https://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration for more details.
 DEFAULT_HOST is also used to configure Google Analytics.
-<a name="RECAPTCHA_SITE_KEY"></a><a name="RECAPTCHA_SECRET_KEY"></a>
-
-    RECAPTCHA_SITE_KEY, RECAPTCHA_SECRET_KEY
-
-Configuration keys of Google ReCaptcha V2 (Checkbox).
-This is optional, the captcha will be displayed on the sign-up form, only if these keys are provided.
 <a name="DISQUS_SHORTNAME"></a>
 
     DISQUS_SHORTNAME

@@ -343,6 +343,49 @@
     </div>
 </div>
 
+<div class="panel panel-default m-t-md">
+  <div class="panel-heading">
+    <span class="font-sbold" translate>{{ 'app.admin.settings.account_creation' }}</span>
+  </div>
+  <div class="panel-body">
+    <h3 class="m-l" translate>{{ 'app.admin.settings.phone' }}</h3>
+    <p class="alert alert-warning m-t" translate>
+      {{ 'app.admin.settings.phone_required_info' }}
+    </p>
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <boolean-setting
+            name="phone_required"
+            settings="allSettings"
+            label="app.admin.settings.phone_is_required"
+            yes-label="app.shared.buttons.yes"
+            no-label="app.shared.buttons.no">
+        </boolean-setting>
+      </div>
+    </div>
+    <div class="row">
+      <h3 class="m-l" translate>{{ 'app.admin.settings.captcha' }}</h3>
+      <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.captcha_info_html' | translate"></p>
+      <div class="col-md-6">
+        <text-setting name="recaptcha_site_key"
+                      settings="allSettings"
+                      label="app.admin.settings.site_key"
+                      fa-icon="fa-info"
+                      placeholder="0000000000000000000000000000000000000000">
+        </text-setting>
+      </div>
+      <div class="col-md-6">
+        <text-setting name="recaptcha_secret_key"
+                      settings="allSettings"
+                      label="app.admin.settings.secret_key"
+                      fa-icon="fa-key"
+                      placeholder="0000000000000000000000000000000000000000">
+        </text-setting>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="panel panel-default m-t-lg">
   <div class="panel-heading">
     <span class="font-sbold" translate>{{ 'app.admin.settings.modules' }}</span>

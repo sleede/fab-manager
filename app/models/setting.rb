@@ -85,7 +85,9 @@ class Setting < ApplicationRecord
                              plans_module
                              invoicing_module
                              facebook_app_id
-                             twitter_analytics] }
+                             twitter_analytics
+                             recaptcha_site_key
+                             recaptcha_secret_key] }
   def value
     last_value = history_values.order(HistoryValue.arel_table['created_at'].desc).first
     last_value&.value
