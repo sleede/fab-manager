@@ -324,20 +324,15 @@
         <div class="row">
             <div class="col-md-4">
                 <h3 class="m-l" translate>{{ 'app.admin.settings.machines_order' }}</h3>
-                <div class="form-group m-l">
-                    <label for="machinesSortBy" class="control-label m-r" translate>{{ 'app.admin.settings.display_machines_sorted_by' }}</label>
-                    <select id="machinesSortBy"
-                            class="form-control"
-                            ng-model="machinesSortBy.value">
-                      <option value="default" translate>{{ 'app.admin.settings.sort_by.default' }}</option>
-                      <option value="name" translate>{{ 'app.admin.settings.sort_by.name' }}</option>
-                      <option value="created_at" translate>{{ 'app.admin.settings.sort_by.created_at' }}</option>
-                      <option value="updated_at" translate>{{ 'app.admin.settings.sort_by.updated_at' }}</option>
-                    </select>
-                    <button name="button" class="btn btn-warning m-t" ng-click="save(machinesSortBy)" translate>{{ 'app.shared.buttons.save' }}</button>
-                </div>
-                <div class="col-md-4">
-                </div>
+                <select-setting name="machines_sort_by"
+                                settings="allSettings"
+                                classes="m-l"
+                                label="app.admin.settings.display_machines_sorted_by"
+                                option-1="['default', 'app.admin.settings.sort_by.default']"
+                                option-2="['name', 'app.admin.settings.sort_by.name']"
+                                option-3="['created_at', 'app.admin.settings.sort_by.created_at']"
+                                option-4="['updated_at', 'app.admin.settings.sort_by.updated_at']">
+                </select-setting>
             </div>
         </div>
     </div>
@@ -348,18 +343,17 @@
     <span class="font-sbold" translate>{{ 'app.admin.settings.account_creation' }}</span>
   </div>
   <div class="panel-body">
-    <h3 class="m-l" translate>{{ 'app.admin.settings.phone' }}</h3>
-    <p class="alert alert-warning m-t" translate>
-      {{ 'app.admin.settings.phone_required_info' }}
-    </p>
     <div class="row">
+      <h3 class="m-l" translate>{{ 'app.admin.settings.phone' }}</h3>
+      <p class="alert alert-warning m-h-md" translate>
+        {{ 'app.admin.settings.phone_required_info' }}
+      </p>
       <div class="col-md-10 col-md-offset-1">
-        <boolean-setting
-            name="phone_required"
-            settings="allSettings"
-            label="app.admin.settings.phone_is_required"
-            yes-label="app.shared.buttons.yes"
-            no-label="app.shared.buttons.no">
+        <boolean-setting name="phone_required"
+                         settings="allSettings"
+                         label="app.admin.settings.phone_is_required"
+                         yes-label="app.shared.buttons.yes"
+                         no-label="app.shared.buttons.no">
         </boolean-setting>
       </div>
     </div>
