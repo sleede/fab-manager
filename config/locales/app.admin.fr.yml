@@ -127,9 +127,9 @@ fr:
         confirm_delete_import: "Êtes-vous sur de vouloir supprimer cet import iCalendar ?"
         delete_success: "L'import iCalendar a bien été supprimé"
       #management of the projects' components
-      project_elements:
+      projects:
         name: "Nom"
-        projects_elements_management: "Gestion des éléments projets"
+        projects_settings: "Paramètres des projets"
         materials: "Matériaux"
         add_a_material: "Ajouter un matériau"
         themes: "Thématiques"
@@ -1309,10 +1309,10 @@ fr:
           prices:
             title: "Catégories tarifaires"
             content: "Le prix des évènements ne dépend pas des groupes ou des abonnements, mais des catégories que vous définissez sur cette page."
-        project_elements:
+        projects:
           welcome:
             title: "Projets"
-            content: "Vous pouvez définir ici l'ensemble des éléments qui seront disponibles pour que les membres documentent les projets qu'ils réalisent."
+            content: "Vous pouvez définir ici l'ensemble des éléments qui seront disponibles pour que les membres documentent les projets qu'ils réalisent. Vous pourrez également définir les différents paramètres ayant trait aux projets."
           abuses:
             title: "Gérer les signalements"
             content: "<p>Accédez par ici à la gestion des signalements.</p><p>Des visiteurs peuvent effectuer des signalements sur les projets, par exemple pour une atteinte au droit d'auteur ou pour un texte incitant à la haine.</p><p>La RGPD vous impose de supprimer ces données de signalement une fois que les actions requises ont été effectuées.</p>"

@@ -127,7 +127,7 @@ zu:
         confirm_delete_import: "crwdns6889:0crwdne6889:0"
         delete_success: "crwdns6891:0crwdne6891:0"
       #management of the projects' components
-      project_elements:
+      projects:
         name: "crwdns6893:0crwdne6893:0"
         projects_elements_management: "crwdns6895:0crwdne6895:0"
         materials: "crwdns6897:0crwdne6897:0"
@@ -1237,7 +1237,7 @@ zu:
           prices:
             title: "crwdns20066:0crwdne20066:0"
             content: "crwdns20068:0crwdne20068:0"
-        project_elements:
+        projects:
           welcome:
             title: "crwdns20070:0crwdne20070:0"
             content: "crwdns20072:0crwdne20072:0"

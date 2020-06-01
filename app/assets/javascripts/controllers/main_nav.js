@@ -138,8 +138,8 @@ Application.Controllers.controller('MainNavController', ['$scope', function ($sc
       authorizedRoles: ['admin']
     },
     {
-      state: 'app.admin.project_elements',
-      linkText: 'app.public.common.manage_the_projects_elements',
+      state: 'app.admin.projects',
+      linkText: 'app.public.common.projects',
       linkIcon: 'tasks',
       authorizedRoles: ['admin']
     },

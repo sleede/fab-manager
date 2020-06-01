@@ -127,7 +127,7 @@ es:
         confirm_delete_import: "Do you really want to delete this iCalendar import?"
         delete_success: "iCalendar import successfully deleted"
       #management of the projects' components
-      project_elements:
+      projects:
         name: "Name"
         projects_elements_management: "Gestión de elementos de proyectos"
         materials: "Materials"
@@ -1238,7 +1238,7 @@ es:
           prices:
             title: "Pricing categories"
             content: "The price of events does not depend on groups or subscriptions, but on the categories you define on this page."
-        project_elements:
+        projects:
           welcome:
             title: "Projects"
             content: "Here you can define all the elements that will be available for members to document the projects they carry out."

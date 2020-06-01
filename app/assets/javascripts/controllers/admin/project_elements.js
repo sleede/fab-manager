@@ -156,18 +156,18 @@ Application.Controllers.controller('ProjectElementsController', ['$scope', '$sta
     };
 
     /**
-     * Setup the feature-tour for the admin/project_elements page.
+     * Setup the feature-tour for the admin/projects page.
      * This is intended as a contextual help (when pressing F1)
      */
     $scope.setupProjectElementsTour = function () {
       // get the tour defined by the ui-tour directive
-      const uitour = uiTourService.getTourByName('project-elements');
+      const uitour = uiTourService.getTourByName('projects');
       uitour.createStep({
         selector: 'body',
         stepId: 'welcome',
         order: 0,
-        title: _t('app.admin.tour.project_elements.welcome.title'),
-        content: _t('app.admin.tour.project_elements.welcome.content'),
+        title: _t('app.admin.tour.projects.welcome.title'),
+        content: _t('app.admin.tour.projects.welcome.content'),
         placement: 'bottom',
         orphan: true
       });
@@ -175,8 +175,8 @@ Application.Controllers.controller('ProjectElementsController', ['$scope', '$sta
         selector: '.heading .abuses-button',
         stepId: 'abuses',
         order: 1,
-        title: _t('app.admin.tour.project_elements.abuses.title'),
-        content: _t('app.admin.tour.project_elements.abuses.content'),
+        title: _t('app.admin.tour.projects.abuses.title'),
+        content: _t('app.admin.tour.projects.abuses.content'),
         placement: 'bottom',
         popupClass: 'shift-left-40'
       });
@@ -191,14 +191,14 @@ Application.Controllers.controller('ProjectElementsController', ['$scope', '$sta
       });
       // on tour end, save the status in database
       uitour.on('ended', function () {
-        if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile.tours.indexOf('project-elements') < 0) {
-          Member.completeTour({ id: $scope.currentUser.id }, { tour: 'project-elements' }, function (res) {
+        if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile.tours.indexOf('projects') < 0) {
+          Member.completeTour({ id: $scope.currentUser.id }, { tour: 'projects' }, function (res) {
             $scope.currentUser.profile.tours = res.tours;
           });
         }
       });
       // if the user has never seen the tour, show him now
-      if (settingsPromise.feature_tour_display !== 'manual' && $scope.currentUser.profile.tours.indexOf('project-elements') < 0) {
+      if (settingsPromise.feature_tour_display !== 'manual' && $scope.currentUser.profile.tours.indexOf('projects') < 0) {
         uitour.start();
       }
     };
