@@ -121,7 +121,8 @@ namespace :fablab do
         %w[_ FEATURE_TOUR_DISPLAY feature_tour_display once],
         %w[_ DEFAULT_MAIL_FROM email_from],
         %w[_ DEFAULT_HOST base_url_host demo.fab-manager.com],
-        %w[_ DEFAULT_PROTOCOL base_url_protocol https]
+        %w[_ DEFAULT_PROTOCOL base_url_protocol https],
+        %w[_ DISQUS_SHORTNAME disqus_shortname]
       ]
 
       mapping.each do |m|

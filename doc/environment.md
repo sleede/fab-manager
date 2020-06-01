@@ -111,13 +111,6 @@ See http://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-config
 
 When DELIVERY_METHOD is set to **smtp**, configure the SMTP server parameters.
 See https://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration for more details.
-<a name="DISQUS_SHORTNAME"></a>
-
-    DISQUS_SHORTNAME
-
-Unique identifier of your [Disqus](http://www.disqus.com) forum.
-Disqus forums are used to allow visitors to comment on projects.
-See https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname- for more information.
 <a name="LOG_LEVEL"></a>
 
     LOG_LEVEL

@@ -12,7 +12,7 @@
  */
 'use strict';
 
-Application.Controllers.controller('ProjectElementsController', ['$scope', '$state', 'Component', 'Licence', 'Theme', 'componentsPromise', 'licencesPromise', 'themesPromise', '_t', 'Member', 'uiTourService', 'settingsPromise',
+Application.Controllers.controller('AdminProjectsController', ['$scope', '$state', 'Component', 'Licence', 'Theme', 'componentsPromise', 'licencesPromise', 'themesPromise', '_t', 'Member', 'uiTourService', 'settingsPromise',
   function ($scope, $state, Component, Licence, Theme, componentsPromise, licencesPromise, themesPromise, _t, Member, uiTourService, settingsPromise) {
     // Materials list (plastic, wood ...)
     $scope.components = componentsPromise;
@@ -22,6 +22,9 @@ Application.Controllers.controller('ProjectElementsController', ['$scope', '$sta
 
     // Themes list (cooking, sport ...)
     $scope.themes = themesPromise;
+
+    // Application settings
+    $scope.allSettings = settingsPromise;
 
     /**
      * Saves a new component / Update an existing material to the server (form validation callback)

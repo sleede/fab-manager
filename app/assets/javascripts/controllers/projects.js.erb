@@ -501,14 +501,14 @@ Application.Controllers.controller('EditProjectController', ['$rootScope', '$sco
 /**
  * Controller used in the public project's details page
  */
-Application.Controllers.controller('ShowProjectController', ['$scope', '$state', 'projectPromise', '$location', '$uibModal', 'dialogs', '_t',
-  function ($scope, $state, projectPromise, $location, $uibModal, dialogs, _t) {
+Application.Controllers.controller('ShowProjectController', ['$scope', '$state', 'projectPromise', 'shortnamePromise', '$location', '$uibModal', 'dialogs', '_t',
+  function ($scope, $state, projectPromise, shortnamePromise, $location, $uibModal, dialogs, _t) {
   /* PUBLIC SCOPE */
 
     // Store the project's details
     $scope.project = projectPromise;
     $scope.projectUrl = $location.absUrl();
-    $scope.disqusShortname = Fablab.disqusShortname;
+    $scope.disqusShortname = shortnamePromise.setting.value;
 
     /**
      * Test if the provided user has the edition rights on the current project

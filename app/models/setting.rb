@@ -91,7 +91,8 @@ class Setting < ApplicationRecord
                              feature_tour_display
                              email_from
                              base_url_protocol
-                             base_url_host] }
+                             base_url_host
+                             disqus_shortname] }
   def value
     last_value = history_values.order(HistoryValue.arel_table['created_at'].desc).first
     last_value&.value

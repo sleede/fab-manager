@@ -279,7 +279,8 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          projectPromise: ['$stateParams', 'Project', function ($stateParams, Project) { return Project.get({ id: $stateParams.id }).$promise; }]
+          projectPromise: ['$stateParams', 'Project', function ($stateParams, Project) { return Project.get({ id: $stateParams.id }).$promise; }],
+          shortnamePromise: ['Setting', function (Setting) { return Setting.get({ name: 'disqus_shortname' }).$promise; }]
         }
       })
       .state('app.logged.projects_edit', {
@@ -619,14 +620,14 @@ angular.module('application.router', ['ui.router'])
         views: {
           'main@': {
             templateUrl: '<%= asset_path "admin/projects/index.html.erb" %>',
-            controller: 'ProjectElementsController'
+            controller: 'AdminProjectsController'
           }
         },
         resolve: {
           componentsPromise: ['Component', function (Component) { return Component.query().$promise; }],
           licencesPromise: ['Licence', function (Licence) { return Licence.query().$promise; }],
           themesPromise: ['Theme', function (Theme) { return Theme.query().$promise; }],
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['feature_tour_display']" }).$promise; }]
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['feature_tour_display', 'disqus_shortname']" }).$promise; }]
         }
       })
       .state('app.admin.manage_abuses', {

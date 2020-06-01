@@ -27,7 +27,6 @@
       Fablab.spacesModule = ('<%= Setting.get('spaces_module') %>' === 'true');
       Fablab.withoutOnlinePayment = ('<%= Rails.application.secrets.fablab_without_online_payments %>' === 'true');
       Fablab.fablabWithoutWallet = ('<%= Rails.application.secrets.fablab_without_wallet %>' === 'true');
-      Fablab.disqusShortname = "<%= Rails.application.secrets.disqus_shortname %>";
       Fablab.baseHostUrl = "<%= Setting.get('base_url_host') %>";
       Fablab.trackingId = "<%= Setting.get('tracking_id') %>";
       Fablab.superadminId = parseInt("<%= User.superadmin&.id %>", 10);

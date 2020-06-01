@@ -138,6 +138,12 @@ fr:
         description: "Description"
         add_a_new_licence: "Ajouter une nouvelle licence"
         manage_abuses: "Gérer les signalements"
+        settings:
+          title: "Paramètres"
+          comments: "Commentaires"
+          disqus: "Disqus"
+          disqus_info: "Si vous voulez permettre à vos membres et visiteurs de commenter les projets, vous pouvez activer les forums Disqus en définissant le paramètre suivant. Rendez-vous sur <a href='https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname-' target='_blank'>le site web de Disqus</a> pour plus d'informations."
+          shortname: "Nom court"
       #track and monitor the trainings
       trainings:
         trainings_monitoring: "Suivi formations"
@@ -1054,6 +1060,7 @@ fr:
         base_url_protocol: "protocole du site"
         base_url_host: "l'hôte du site"
         base_url: "l'url du site"
+        disqus_shortname: "nom court Disqus"
         general:
           general: "Général"
           title: "Titre"
