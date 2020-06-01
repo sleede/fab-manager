@@ -569,7 +569,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         { settings: Object.values($scope.settings) },
         function () { growl.success(_t('app.admin.invoices.codes_customization_success')); },
         function (error) {
-          growl.error('unexpected_error_occurred');
+          growl.error('app.admin.invoices.unexpected_error_occurred');
           console.error(error);
         }
       );

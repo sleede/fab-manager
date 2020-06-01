@@ -119,7 +119,9 @@ namespace :fablab do
         %w[_ RECAPTCHA_SITE_KEY recaptcha_site_key],
         %w[_ RECAPTCHA_SECRET_KEY recaptcha_secret_key],
         %w[_ FEATURE_TOUR_DISPLAY feature_tour_display once],
-        %w[_ DEFAULT_MAIL_FROM email_from]
+        %w[_ DEFAULT_MAIL_FROM email_from],
+        %w[_ DEFAULT_HOST base_url_host demo.fab-manager.com],
+        %w[_ DEFAULT_PROTOCOL base_url_protocol https]
       ]
 
       mapping.each do |m|

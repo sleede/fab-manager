@@ -28,10 +28,10 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
       // first we check the user acceptance
       const cookiesConsent = document.cookie.replace(/(?:(?:^|.*;\s*)fab-manager-cookies-consent\s*=\s*([^;]*).*$)|^.*$/, '$1');
       if (cookiesConsent === 'accept') {
-        AnalyticsProvider.setAccount(Fablab.gaId);
+        AnalyticsProvider.setAccount(Fablab.trackingId);
         // track all routes (or not)
         AnalyticsProvider.trackPages(true);
-        AnalyticsProvider.setDomainName(Fablab.defaultHost);
+        AnalyticsProvider.setDomainName(Fablab.baseHostUrl);
         AnalyticsProvider.useAnalytics(true);
         AnalyticsProvider.setPageEvent('$stateChangeSuccess');
       } else {

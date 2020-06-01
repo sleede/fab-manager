@@ -315,6 +315,29 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
     }
 
     /**
+     * Assign the current URL to the settings ( base_url_protocol & base_url_host )
+     * and save them to teh database.
+     */
+    $scope.detectFillUrl = function () {
+      $scope.allSettings.base_url_protocol = window.location.protocol.match(/^([a-z]+):?$/)[1]
+      $scope.allSettings.base_url_host = window.location.host;
+
+      Setting.bulkUpdate(
+        {
+          settings: [
+            { name: 'base_url_protocol', value: $scope.allSettings.base_url_protocol } ,
+            { name: 'base_url_host', value: $scope.allSettings.base_url_host }
+          ]
+        },
+        function () { growl.success(_t('app.admin.settings.customization_of_SETTING_successfully_saved', { SETTING: _t(`app.admin.settings.base_url`) })); },
+        function (error) {
+          growl.error('app.admin.settings.an_error_occurred_saving_the_setting');
+          console.error(error);
+        }
+      );
+    }
+
+    /**
      * Setup the feature-tour for the admin/settings page.
      * This is intended as a contextual help (when pressing F1)
      */

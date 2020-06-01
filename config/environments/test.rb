@@ -25,8 +25,8 @@ Rails.application.configure do
   config.action_controller.perform_caching = false
 
   config.action_controller.default_url_options = {
-    host: Rails.application.secrets.default_host,
-    protocol: Rails.application.secrets.default_protocol
+    host: Setting.get('base_url_host'),
+    protocol: Setting.get('base_url_protocol')
   }
 
   # Raise exceptions instead of rendering exception templates.

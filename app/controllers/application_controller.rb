@@ -50,7 +50,10 @@ class ApplicationController < ActionController::Base
   end
 
   def default_url_options
-    { host: Rails.application.secrets.default_host, protocol: Rails.application.secrets.default_protocol }
+    {
+      host: Setting.get('base_url_host'),
+      protocol: Setting.get('base_url_protocol')
+    }
   end
 
   def permission_denied
