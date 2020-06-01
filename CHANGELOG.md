@@ -2,7 +2,9 @@
 
 - Improved display of the icons alerting about an outdated version
 - Fix a bug: managers do not see the name of the user who reserved a slot
+- Fix a bug: mailcatcher is not showing all emails
 - [TODO DEPLOY] `rails fablab:setup:env_to_db`
+- [TODO DEPLOY] -> (only dev) update mailcatcher from your [docker-compose.yml](docker/development/docker-compose.yml)
 
 ## v4.4.4 2020 May 25
 

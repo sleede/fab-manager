@@ -857,6 +857,8 @@ Setting.set('invoicing_module', true) unless Setting.find_by(name: 'invoicing_mo
 
 Setting.set('feature_tour_display', 'once') unless Setting.find_by(name: 'feature_tour_display').try(:value)
 
+Setting.set('email_from', 'noreply@fab-manager.com') unless Setting.find_by(name: 'email_from').try(:value)
+
 if StatisticCustomAggregation.count.zero?
   # available reservations hours for machines
   machine_hours = StatisticType.find_by(key: 'hour', statistic_index_id: 2)

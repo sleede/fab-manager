@@ -358,3 +358,28 @@ setting_61:
   name: slot_duration
   created_at: 2020-05-22 15:20:25.254250000 Z
   updated_at: 2020-05-22 15:20:25.254250000 Z
+
+setting_62:
+  id: 62
+  name: spaces_module
+  created_at: 2020-06-01 11:12:21.255550000 Z
+  updated_at: 2020-06-01 11:12:21.255550000 Z
+
+setting_63:
+  id: 63
+  name: plans_module
+  created_at: 2020-06-01 11:12:21.255550000 Z
+  updated_at: 2020-06-01 11:12:21.255550000 Z
+
+setting_64:
+  id: 64
+  name: feature_tour_display
+  created_at: 2020-06-01 11:12:21.255550000 Z
+  updated_at: 2020-06-01 11:12:21.255550000 Z
+
+setting_65:
+  id: 65
+  name: email_from
+  created_at: 2020-06-01 11:12:21.255550000 Z
+  updated_at: 2020-06-01 11:12:21.255550000 Z
+

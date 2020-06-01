@@ -65,7 +65,7 @@ services:
     #  - "6379:6379"
 
   mailcatcher:
-    image: sj26/mailcatcher
+    image: sleede/mailcatcher
     restart: always
     ## linux
     networks:

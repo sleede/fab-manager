@@ -88,7 +88,8 @@ class Setting < ApplicationRecord
                              twitter_analytics
                              recaptcha_site_key
                              recaptcha_secret_key
-                             feature_tour_display] }
+                             feature_tour_display
+                             email_from] }
   def value
     last_value = history_values.order(HistoryValue.arel_table['created_at'].desc).first
     last_value&.value

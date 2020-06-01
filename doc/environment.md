@@ -99,11 +99,6 @@ This is useful if you won't use wallet system.
 
 If set to 'true' the users will need to confirm their email address to be able to sign in.
 Set to 'false' if you don't want this behaviour.
-<a name="DEFAULT_MAIL_FROM"></a>
-
-    DEFAULT_MAIL_FROM
-
-When sending notification mails, the platform will use this address to identify the sender.
 <a name="DELIVERY_METHOD"></a>
 
     DELIVERY_METHOD

@@ -593,3 +593,39 @@ history_value_61:
   created_at: 2020-05-22 15:22:08.254410000 Z
   updated_at: 2020-05-22 15:22:08.254410000 Z
   footprint:
+
+history_value_62:
+  id: 62
+  setting_id: 62
+  invoicing_profile_id: 1
+  value: 'false'
+  created_at: 2020-06-01 11:12:21.255550000 Z
+  updated_at: 2020-06-01 11:12:21.255550000 Z
+  footprint:
+
+history_value_63:
+  id: 63
+  setting_id: 63
+  invoicing_profile_id: 1
+  value: 'true'
+  created_at: 2020-06-01 11:12:21.255550000 Z
+  updated_at: 2020-06-01 11:12:21.255550000 Z
+  footprint:
+
+history_value_64:
+  id: 64
+  setting_id: 64
+  invoicing_profile_id: 1
+  value: 'once'
+  created_at: 2020-06-01 11:12:21.255550000 Z
+  updated_at: 2020-06-01 11:12:21.255550000 Z
+  footprint:
+
+history_value_65:
+  id: 65
+  setting_id: 65
+  invoicing_profile_id: 1
+  value: 'noreply@fab-manager.com'
+  created_at: 2020-06-01 11:12:21.255550000 Z
+  updated_at: 2020-06-01 11:12:21.255550000 Z
+  footprint:
