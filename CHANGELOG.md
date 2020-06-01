@@ -1,5 +1,9 @@
 # Changelog Fab-manager
 
+## v4.4.6 2020 June 01
+
+- Fix a security issue: updated kaminari from 1.2.0 to 1.2.1 to fix [CVE-2020-11082](https://nvd.nist.gov/vuln/detail/CVE-2020-11082)
+
 ## v4.4.5 2020 May 27
 
 - Fix a security issue: updated rails to 5.2.4.2 to fix [CVE-2020-8162](https://nvd.nist.gov/vuln/detail/CVE-2020-8162), [CVE-2020-8165](https://nvd.nist.gov/vuln/detail/CVE-2020-8165) and [CVE-2020-8166](https://nvd.nist.gov/vuln/detail/CVE-2020-8166)
