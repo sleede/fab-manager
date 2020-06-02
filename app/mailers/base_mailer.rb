@@ -2,7 +2,7 @@
 
 # Mailer configuration
 class BaseMailer < ActionMailer::Base
-  default from: Setting.get('email_from')
+  default from: ->(*) { Setting.get('mail_from') }
   layout 'notifications_mailer'
 
   helper :application

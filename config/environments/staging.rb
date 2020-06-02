@@ -17,8 +17,8 @@ Rails.application.configure do
   config.action_controller.perform_caching = true
 
   config.action_controller.default_url_options = {
-    host: Setting.get('base_url_host'),
-    protocol: Setting.get('base_url_protocol')
+    host: ->(*) { Setting.get('base_url_host') },
+    protocol: ->(*) { Setting.get('base_url_protocol') }
   }
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
@@ -89,8 +89,8 @@ Rails.application.configure do
   # config.serve_static_assets = true
 
   config.action_mailer.default_url_options = {
-    host: Setting.get('base_url_host'),
-    protocol: Setting.get('base_url_protocol')
+    host: ->(*) { Setting.get('base_url_host') },
+    protocol: ->(*) { Setting.get('base_url_protocol') }
   }
   # config.action_mailer.perform_deliveries = true
   # config.action_mailer.raise_delivery_errors = false
