@@ -1,5 +1,7 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
+# CarrierWave uploader for CustomAssets (Admin defined assets).
+# This file defines the parameters for these uploads.
 class CustomAssetsUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
@@ -45,8 +47,8 @@ class CustomAssetsUploader < CarrierWave::Uploader::Base
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
-  def extension_white_list
-    %w(pdf png jpeg jpg ico)
+  def extension_whitelist
+    %w[pdf png jpeg jpg ico]
   end
 
   # Override the filename of the uploaded files:
