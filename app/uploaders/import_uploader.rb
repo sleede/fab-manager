@@ -25,4 +25,9 @@ class ImportUploader < CarrierWave::Uploader::Base
   def extension_whitelist
     %w[csv]
   end
+
+  def content_type_whitelist
+    %w[text/csv]
+  end
+
 end

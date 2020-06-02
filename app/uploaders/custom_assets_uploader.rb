@@ -51,6 +51,10 @@ class CustomAssetsUploader < CarrierWave::Uploader::Base
     %w[pdf png jpeg jpg ico]
   end
 
+  def content_type_whitelist
+    [%r{image/}, 'application/pdf']
+  end
+
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   # def filename

@@ -25,4 +25,8 @@ class ProjectCaoUploader < CarrierWave::Uploader::Base
   def extension_whitelist
     ENV['ALLOWED_EXTENSIONS'].split(' ')
   end
+
+  def content_type_whitelist
+    ENV['ALLOWED_MIME_TYPES'].split(' ')
+  end
 end
