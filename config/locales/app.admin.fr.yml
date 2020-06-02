@@ -1057,9 +1057,6 @@ fr:
         recaptcha_secret_key: "clef secrète reCAPTCHA"
         feature_tour_display: "l'affichage des visites guidées"
         email_from: "l'adresse de l'expéditeur"
-        base_url_protocol: "protocole du site"
-        base_url_host: "l'hôte du site"
-        base_url: "l'url du site"
         disqus_shortname: "nom court Disqus"
         general:
           general: "Général"
@@ -1094,11 +1091,6 @@ fr:
           email: "Courriel"
           email_info: "L'adresse de courriel depuis laquelle les notifications seront envoyées. Vous pouvez utiliser une adresse qui n'existe pas (comme ne-pas-repondre@...) ou une adresse existante si vous voulez que vos membres puisse répondre aux notifications qu'ils reçoivent."
           email_from: "Adresse de l'expéditeur"
-          site_url: "URL du site"
-          auto_fill: "Détecter et remplir"
-          site_url_info_html: "<p>Vos membres recevront les notifications par courriel contenant des liens vers cette instance de Fab-manager. Vous devez configurer correctement l'URL de cette instance, pour éviter les liens cassés.</p><p>Pour éviter toute erreur, veuillez favoriser l'utilisation du bouton <strong>{NAME}</strong> ci-dessous.</p><p>Le nom d'hôte est également utilisé pour les statistiques de visites.</p>"
-          protocol: "Protocole"
-          host: "Hôte"
         privacy:
           title: "Confidentialité"
           privacy_policy: "Politique de confidentialité"

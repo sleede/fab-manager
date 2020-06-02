@@ -30,8 +30,8 @@ Rails.application.configure do
   end
 
   config.action_controller.default_url_options = {
-    host: ->(*) { Setting.get('base_url_host') },
-    protocol: ->(*) { Setting.get('base_url_protocol') }
+    host: Rails.application.secrets.default_host,
+    protocol: Rails.application.secrets.default_protocol
   }
 
   # Store uploaded files on the local file system (see config/storage.yml for options)
@@ -46,8 +46,8 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = { address: 'fabmanager-mailcatcher', port: 1025 }
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default_url_options = {
-    host: ->(*) { Setting.get('base_url_host') },
-    protocol: ->(*) { Setting.get('base_url_protocol') }
+    host: Rails.application.secrets.default_host,
+    protocol: Rails.application.secrets.default_protocol
   }
 
   # Print deprecation notices to the Rails logger.

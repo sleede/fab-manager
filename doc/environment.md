@@ -105,12 +105,20 @@ Set to 'false' if you don't want this behaviour.
 
 Configure the Rails' Action Mailer delivery method.
 See http://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration for more details.
-</a><a name="SMTP_ADDRESS"></a><a name="SMTP_PORT"></a><a name="SMTP_USER_NAME"></a><a name="SMTP_PASSWORD"></a><a name="SMTP_AUTHENTICATION"></a><a name="SMTP_ENABLE_STARTTLS_AUTO"></a><a name="SMTP_OPENSSL_VERIFY_MODE"></a><a name="SMTP_TLS"></a>
+<a name="SMTP_ADDRESS"></a><a name="SMTP_PORT"></a><a name="SMTP_USER_NAME"></a><a name="SMTP_PASSWORD"></a><a name="SMTP_AUTHENTICATION"></a><a name="SMTP_ENABLE_STARTTLS_AUTO"></a><a name="SMTP_OPENSSL_VERIFY_MODE"></a><a name="SMTP_TLS"></a>
 
     SMTP_ADDRESS, SMTP_PORT, SMTP_USER_NAME, SMTP_PASSWORD, SMTP_AUTHENTICATION, SMTP_ENABLE_STARTTLS_AUTO, SMTP_OPENSSL_VERIFY_MODE & SMTP_TLS
 
 When DELIVERY_METHOD is set to **smtp**, configure the SMTP server parameters.
 See https://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration for more details.
+<a name="DEFAULT_HOST"></a><a name="DEFAULT_PROTOCOL"></a>
+
+    DEFAULT_HOST, DEFAULT_PROTOCOL
+
+Your members will receive email notifications containing links to your of Fab-manager.
+You must properly configure these variables to match URL of this instance, to prevent broken links.
+Typically, `DEFAULT_PROTOCOL` will be `https` (`http` if you are in development, or if you set `ALLOW_INSECURE_HTTP`).
+The variable `DEFAULT_HOST` should be your domain name (eg. fabmanager.example.com), and  is also used for visits statistics (configuration of Google Analytics).
 <a name="LOG_LEVEL"></a>
 
     LOG_LEVEL

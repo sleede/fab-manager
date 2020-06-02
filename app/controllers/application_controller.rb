@@ -51,8 +51,8 @@ class ApplicationController < ActionController::Base
 
   def default_url_options
     {
-      host: Setting.get('base_url_host'),
-      protocol: Setting.get('base_url_protocol')
+      host: Rails.application.secrets.default_host,
+      protocol: Rails.application.secrets.default_protocol
     }
   end
 

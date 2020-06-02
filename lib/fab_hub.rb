@@ -4,7 +4,7 @@
 class FabHub
   def self.version_check_payload
     uuid = Setting.get('uuid')
-    origin = Setting.get('origin') || "#{Setting.get('base_url_protocol')}://#{Setting.get('base_url_host')}"
+    origin = Setting.get('origin') || "#{Rails.application.secrets.default_protocol}://#{Rails.application.secrets.default_host}"
     {
       uuid: uuid,
       origin: origin,

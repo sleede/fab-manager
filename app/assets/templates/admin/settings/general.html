@@ -380,34 +380,6 @@
         </text-setting>
       </div>
     </div>
-    <div class="row">
-      <h3 class="m-l" translate>{{ 'app.admin.settings.general.site_url' }}</h3>
-      <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.general.site_url_info_html' | translate:{ NAME:('app.admin.settings.general.auto_fill' | translate) }"></p>
-      <div class="col-md-4">
-        <text-setting name="base_url_protocol"
-                      settings="allSettings"
-                      label="app.admin.settings.general.protocol"
-                      fa-icon="fa-globe"
-                      placeholder="https"
-                      required="true">
-        </text-setting>
-      </div>
-      <div class="col-md-4 col-md-offset-1">
-        <text-setting name="base_url_host"
-                      settings="allSettings"
-                      label="app.admin.settings.general.host"
-                      fa-icon="fa-server"
-                      placeholder="example.com"
-                      required="true">
-        </text-setting>
-      </div>
-      <div class="col-md-1">
-        <button class="btn btn-default m-t-lg" ng-click="detectFillUrl()">
-          <i class="fa fa-search m-r-sm"></i>
-          <span translate>{{ 'app.admin.settings.general.auto_fill' }}</span>
-        </button>
-      </div>
-    </div>
   </div>
 </div>
 

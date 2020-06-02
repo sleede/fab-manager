@@ -859,10 +859,6 @@ Setting.set('feature_tour_display', 'once') unless Setting.find_by(name: 'featur
 
 Setting.set('email_from', 'noreply@fab-manager.com') unless Setting.find_by(name: 'email_from').try(:value)
 
-Setting.set('base_url_host', 'demo.fab-manager.com') unless Setting.find_by(name: 'base_url_host').try(:value)
-
-Setting.set('base_url_protocol', 'https') unless Setting.find_by(name: 'base_url_protocol').try(:value)
-
 if StatisticCustomAggregation.count.zero?
   # available reservations hours for machines
   machine_hours = StatisticType.find_by(key: 'hour', statistic_index_id: 2)

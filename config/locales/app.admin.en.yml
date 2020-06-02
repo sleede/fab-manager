@@ -1057,9 +1057,6 @@ en:
         recaptcha_secret_key: "reCAPTCHA Secret Key"
         feature_tour_display: "feature tour display"
         email_from: "expeditor's address"
-        base_url_protocol: "site protocol"
-        base_url_host: "site host"
-        base_url: "site url"
         disqus_shortname: "Disqus shortname"
         general:
           general: "General"
@@ -1094,11 +1091,6 @@ en:
           email: "Email"
           email_info: "The email address from which notifications will be sent. You can use a non-existing address (like noreply@...) or an existing address if you want to allow your members to reply to the notifications they receive."
           email_from: "Expeditor's address"
-          site_url: "Site url"
-          auto_fill: "Detect and fill"
-          site_url_info_html: "<p>Your members will receive email notifications containing links to this instance of Fab-manager. You must properly configure the URL of this instance, to prevent broken links.</p><p>To prevent any mistake, please favor the use of the button <strong>{NAME}</strong> below.</p><p>The host name is also used for visits statistics.</p>"
-          protocol: "Protocol"
-          host: "Host"
         privacy:
           title: "Privacy"
           privacy_policy: "Privacy policy"
