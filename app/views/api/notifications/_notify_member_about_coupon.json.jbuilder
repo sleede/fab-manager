@@ -8,4 +8,4 @@ else
                      AMOUNT: number_to_currency(notification.attached_object.amount_off / 100.00),
                      CODE: notification.attached_object.code)
 end
-json.url notification_url(notification, format: :json)
+

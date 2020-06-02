@@ -6,4 +6,4 @@ json.description _t('.user_NAME_has_merged_his_account_with_the_one_imported_fro
                         PROVIDER: notification.attached_object&.provider,
                         UID: notification.attached_object&.uid
                     }) # messageFormat
-json.url notification_url(notification, format: :json)
+
