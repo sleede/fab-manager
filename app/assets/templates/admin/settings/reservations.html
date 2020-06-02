@@ -43,37 +43,35 @@
             </div>
             <div class="section-separator"></div>
             <div class="row">
-               <div class="col-md-6">
-                  <div class="row">
-                      <h3 class="m-l m-t-lg" translate>{{ 'app.admin.settings.ability_for_the_users_to_move_their_reservations' }}</h3>
-                      <boolean-setting name="booking_move_enable" settings="allSettings" label="app.admin.settings.reservations_shifting" classes="m-l"></boolean-setting>
-                  </div>
-                  <div class="row" ng-show="allSettings.booking_move_enable === 'true'">
-                      <number-setting name="booking_move_delay"
-                                      settings="allSettings"
-                                      label="app.admin.settings.prior_period_hours"
-                                      classes="col-md-8"
-                                      fa-icon="fa-clock-o"
-                                      min="0"
-                                      required="allSettings.booking_move_enable === 'true'">
-                      </number-setting>
-                  </div>
-               </div>
+                <h3 class="m-l m-t-lg" translate>{{ 'app.admin.settings.ability_for_the_users_to_move_their_reservations' }}</h3>
                 <div class="col-md-6">
-                    <div class="row">
-                        <h3 class="m-l m-t-lg" translate>{{ 'app.admin.settings.ability_for_the_users_to_cancel_their_reservations' }}</h3>
-                        <boolean-setting name="booking_cancel_enable" settings="allSettings" label="app.admin.settings.reservations_cancelling" classes="m-l"></boolean-setting>
-                    </div>
-                    <div class="row" ng-show="allSettings.booking_cancel_enable === 'true'">
-                        <number-setting name="booking_cancel_delay"
-                                        settings="allSettings"
-                                        label="app.admin.settings.prior_period_hours"
-                                        classes="col-md-8"
-                                        fa-icon="fa-clock-o"
-                                        min="0"
-                                        required="allSettings.booking_cancel_enable === 'true'">
-                        </number-setting>
-                    </div>
+                    <boolean-setting name="booking_move_enable" settings="allSettings" label="app.admin.settings.reservations_shifting" classes="m-l"></boolean-setting>
+                </div>
+                <div class="col-md-6" ng-show="allSettings.booking_move_enable === 'true'">
+                    <number-setting name="booking_move_delay"
+                                    settings="allSettings"
+                                    label="app.admin.settings.prior_period_hours"
+                                    classes="col-md-8"
+                                    fa-icon="fa-clock-o"
+                                    min="0"
+                                    required="allSettings.booking_move_enable === 'true'">
+                    </number-setting>
+                </div>
+            </div>
+            <div class="row">
+                <h3 class="m-l m-t-lg" translate>{{ 'app.admin.settings.ability_for_the_users_to_cancel_their_reservations' }}</h3>
+                <div class="col-md-6">
+                    <boolean-setting name="booking_cancel_enable" settings="allSettings" label="app.admin.settings.reservations_cancelling" classes="m-l"></boolean-setting>
+                </div>
+                <div class="col-md-6" ng-show="allSettings.booking_cancel_enable === 'true'">
+                    <number-setting name="booking_cancel_delay"
+                                    settings="allSettings"
+                                    label="app.admin.settings.prior_period_hours"
+                                    classes="col-md-8"
+                                    fa-icon="fa-clock-o"
+                                    min="0"
+                                    required="allSettings.booking_cancel_enable === 'true'">
+                    </number-setting>
                 </div>
             </div>
             <div class="section-separator"></div>
