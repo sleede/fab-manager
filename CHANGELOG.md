@@ -1,6 +1,8 @@
 # Changelog Fab-manager
 
 - Improved display of the icons alerting about an outdated version
+- Improved mime-type checking (back & front)
+- Updated CarrierWave to 2.1.0
 - Fix a bug: managers do not see the name of the user who reserved a slot
 - [TODO DEPLOY] `rails fablab:setup:env_to_db`
 
