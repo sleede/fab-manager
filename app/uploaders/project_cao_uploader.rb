@@ -29,4 +29,26 @@ class ProjectCaoUploader < CarrierWave::Uploader::Base
   def content_type_whitelist
     ENV['ALLOWED_MIME_TYPES'].split(' ')
   end
+
+  private
+
+  def check_content_type_whitelist!(new_file)
+    require 'mimemagic'
+
+    content_type = MimeMagic.by_magic(File.open(new_file.file))
+
+    if content_type_whitelist && !whitelisted_content_type?(content_type)
+      raise CarrierWave::IntegrityError,
+            I18n.translate(:'errors.messages.content_type_whitelist_error',
+                           content_type: content_type,
+                           allowed_types: Array(content_type_whitelist).join(', '))
+    end
+  end
+
+  def whitelisted_content_type?(content_type)
+    Array(content_type_whitelist).any? do |item|
+      item = Regexp.quote(item) if item.class != Regexp
+      content_type =~ /#{item}/
+    end
+  end
 end
