@@ -27,20 +27,21 @@
       <h3 class="m-l" translate>{{ 'app.admin.projects.settings.validation' }}</h3>
       <p class="alert alert-warning m-h-md" translate>{{ 'app.admin.projects.settings.validation_info' }}</p>
       <div class="col-md-5">
-        <text-setting name="allowed_cad_extensions"
-                      settings="allSettings"
-                      label="app.admin.projects.settings.extensions"
-                      fa-icon="fa-tag"
-                      placeholder="pdf svg stl">
-        </text-setting>
+        <select-multiple-setting name="allowed_cad_extensions"
+                                 settings="allSettings"
+                                 label="app.admin.projects.settings.extensions"
+                                 title-new="app.admin.projects.settings.new_extension"
+                                 description-new="app.admin.projects.settings.new_ext_info"
+                                 before-add="removeInitialDot">
+        </select-multiple-setting>
       </div>
       <div class="col-md-5 col-md-offset-2">
-        <text-setting name="allowed_cad_mime_types"
-                      settings="allSettings"
-                      label="app.admin.projects.settings.mime_types"
-                      fa-icon="fa-file-o"
-                      placeholder="application/pdf image/xml+svg model/stl">
-        </text-setting>
+        <select-multiple-setting name="allowed_cad_mime_types"
+                                 settings="allSettings"
+                                 label="app.admin.projects.settings.mime_types"
+                                 title-new="app.admin.projects.settings.new_mime_type"
+                                 description-new="app.admin.projects.settings.new_type_info">
+        </select-multiple-setting>
       </div>
       <form name="mimeTestForm" class="col-md-6 m-t-lg" ng-upload="onTestFileComplete(content)" upload-options-enable-rails-csrf="true" action="/api/files/mime_type">
           <label for="testFile" class="control-label" translate>{{ 'app.admin.projects.settings.test_file' }}</label>

@@ -1,0 +1,35 @@
+<form class="{{classes}}" name="setting-select-multiple-form">
+    <div class="form-group">
+        <label for="setting-{{setting.name}}" class="control-label m-r" translate>{{ label }}</label>
+        <select class="form-control"
+              id="setting-{{setting.name}}"
+              ng-model="selection"
+              ng-required="required"
+              ng-options="opt for opt in options"
+              multiple>
+        </select>
+    </div>
+    <div>
+        <button ng-click="removeItem()" class="btn btn-default"><i class="fa fa-trash"></i></button>
+        <button ng-click="addItem()" class="btn btn-default"><i class="fa fa-plus"></i></button>
+    </div>
+  <button name="button" class="btn btn-warning m-t" ng-click="save(setting)" ng-disabled="setting-select-multiple-form.$invalid" translate>{{ 'app.shared.buttons.save' }}</button>
+</form>
+
+<script type="text/ng-template" id="newSelectOption.html">
+    <div>
+        <div class="modal-header">
+            <h3 class="modal-title" translate>{{ titleNew }}</h3>
+        </div>
+        <div class="modal-body">
+            <p class="alert alert-info" ng-show="descriptionNew" translate>{{ descriptionNew }}</p>
+            <form class="row m-md" name="newSelectOptionForm">
+                <input type="text" class="form-control" ng-model="value" required>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-warning" ng-disabled="newSelectOptionForm.$invalid" ng-click="ok()" translate>{{ 'app.shared.buttons.confirm' }}</button>
+            <button class="btn btn-default" ng-click="dismiss()" translate>{{ 'app.shared.buttons.cancel' }}</button>
+        </div>
+    </div>
+</script>

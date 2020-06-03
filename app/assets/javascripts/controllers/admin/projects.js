@@ -183,6 +183,17 @@ Application.Controllers.controller('AdminProjectsController', ['$scope', '$state
     };
 
     /**
+     * Remove the initial dot from the given extension, if any
+     * @param extension {String}
+     * @returns {String}
+     */
+    $scope.removeInitialDot = function (extension) {
+      if (extension.substr(0, 1) === '.') return extension.substr(1);
+
+      return extension;
+    };
+
+    /**
      * Setup the feature-tour for the admin/projects page.
      * This is intended as a contextual help (when pressing F1)
      */
