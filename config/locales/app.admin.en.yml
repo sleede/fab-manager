@@ -144,6 +144,14 @@ en:
           disqus: "Disqus"
           disqus_info: "If you want to enable your members and visitors to comment on projects, you can enable the Disqus forums by setting the following parameter. Visit <a href='https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname-' target='_blank'>the Disqus website</a> for more information."
           shortname: "Shortname"
+          cad_files: "CAD files"
+          validation: "Validation"
+          validation_info: "Users can upload CAD (Computer Aided Design) files with the documentation of their projects. You can specify which files types are allowed. Use the test input below to determine the MIME type of a file."
+          extensions: "Allowed extensions"
+          mime_types: "Allowed MIME types"
+          test_file: "Test a file"
+          set_a_file: "Select a file"
+          file_is_TYPE: "MIME type of this file is {TYPE}"
       #track and monitor the trainings
       trainings:
         trainings_monitoring: "Trainings monitoring"

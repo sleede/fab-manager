@@ -12,8 +12,8 @@
  */
 'use strict';
 
-Application.Controllers.controller('AdminProjectsController', ['$scope', '$state', 'Component', 'Licence', 'Theme', 'componentsPromise', 'licencesPromise', 'themesPromise', '_t', 'Member', 'uiTourService', 'settingsPromise',
-  function ($scope, $state, Component, Licence, Theme, componentsPromise, licencesPromise, themesPromise, _t, Member, uiTourService, settingsPromise) {
+Application.Controllers.controller('AdminProjectsController', ['$scope', '$state', 'Component', 'Licence', 'Theme', 'componentsPromise', 'licencesPromise', 'themesPromise', '_t', 'Member', 'uiTourService', 'settingsPromise', 'growl',
+  function ($scope, $state, Component, Licence, Theme, componentsPromise, licencesPromise, themesPromise, _t, Member, uiTourService, settingsPromise, growl) {
     // Materials list (plastic, wood ...)
     $scope.components = componentsPromise;
 
@@ -155,6 +155,30 @@ Application.Controllers.controller('AdminProjectsController', ['$scope', '$state
         return rowform.$cancel();
       } else {
         return $scope.licences.splice(index, 1);
+      }
+    };
+
+    /**
+     * When a file is sent to the server to test it against its MIME type,
+     * handle the result of the test.
+     */
+    $scope.onTestFileComplete = function (res) {
+      if (res) {
+        growl.success(_t('app.admin.projects.settings.file_is_TYPE', { TYPE: res.type }));
+      }
+    };
+
+
+    /**
+     * For use with 'ng-class', returns the CSS class name for the uploads previews.
+     * The preview may show a placeholder or the content of the file depending on the upload state.
+     * @param v {*} any attribute, will be tested for truthiness (see JS evaluation rules)
+     */
+    $scope.fileinputClass = function (v) {
+      if (v) {
+        return 'fileinput-exists';
+      } else {
+        return 'fileinput-new';
       }
     };
 

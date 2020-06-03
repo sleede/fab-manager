@@ -120,7 +120,9 @@ namespace :fablab do
         %w[_ RECAPTCHA_SECRET_KEY recaptcha_secret_key],
         %w[_ FEATURE_TOUR_DISPLAY feature_tour_display once],
         %w[_ DEFAULT_MAIL_FROM email_from],
-        %w[_ DISQUS_SHORTNAME disqus_shortname]
+        %w[_ DISQUS_SHORTNAME disqus_shortname],
+        %w[_ ALLOWED_EXTENSIONS allowed_cad_extensions],
+        %w[_ ALLOWED_MIME_TYPES allowed_cad_mime_types]
       ]
 
       mapping.each do |m|

@@ -17,3 +17,45 @@
     </div>
   </div>
 </div>
+
+<div class="panel panel-default m-t-lg">
+  <div class="panel-heading">
+    <span class="font-sbold" translate>{{ 'app.admin.projects.settings.cad_files' }}</span>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <h3 class="m-l" translate>{{ 'app.admin.projects.settings.validation' }}</h3>
+      <p class="alert alert-warning m-h-md" translate>{{ 'app.admin.projects.settings.validation_info' }}</p>
+      <div class="col-md-5">
+        <text-setting name="allowed_cad_extensions"
+                      settings="allSettings"
+                      label="app.admin.projects.settings.extensions"
+                      fa-icon="fa-tag"
+                      placeholder="pdf svg stl">
+        </text-setting>
+      </div>
+      <div class="col-md-5 col-md-offset-2">
+        <text-setting name="allowed_cad_mime_types"
+                      settings="allSettings"
+                      label="app.admin.projects.settings.mime_types"
+                      fa-icon="fa-file-o"
+                      placeholder="application/pdf image/xml+svg model/stl">
+        </text-setting>
+      </div>
+      <form name="mimeTestForm" class="col-md-6 m-t-lg" ng-upload="onTestFileComplete(content)" upload-options-enable-rails-csrf="true" action="/api/files/mime_type">
+          <label for="testFile" class="control-label" translate>{{ 'app.admin.projects.settings.test_file' }}</label>
+        <div class="fileinput input-group" data-provides="fileinput" ng-class="fileinputClass()">
+          <div class="form-control" data-trigger="fileinput">
+            <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename">{{file.attachment}}</span>
+          </div>
+          <span class="input-group-addon btn btn-default btn-file">
+            <span class="fileinput-new" translate>{{ 'app.admin.projects.settings.set_a_file' }}</span>
+            <span class="fileinput-exists" translate>{{ 'app.shared.buttons.change' }}</span>
+            <input type="file" id="testFile" name="attachment" accept="*/*" required>
+          </span>
+        </div>
+        <input type="submit" class="btn btn-warning" ng-disabled="mimeTestForm.$invalid || $isUploading">
+      </form>
+    </div>
+  </div>
+</div>

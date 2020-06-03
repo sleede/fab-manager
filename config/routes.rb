@@ -167,6 +167,9 @@ Rails.application.routes.draw do
 
     # FabAnalytics
     get 'analytics/data' => 'analytics#data'
+
+    # test MIME type
+    post 'files/mime_type' => 'files#mime'
   end
 
   # rss

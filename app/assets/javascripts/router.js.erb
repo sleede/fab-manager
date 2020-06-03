@@ -1032,7 +1032,7 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           settingsPromise: ['Setting', function (Setting) {
             return Setting.query({
-              names: `['twitter_name', 'about_title', 'about_body', 'tracking_id', 'facebook_app_id', \
+              names: `['twitter_name', 'about_title', 'about_body', 'tracking_id', 'facebook_app_id', 'email_from', \
                        'privacy_body', 'privacy_dpo', 'about_contacts', 'book_overlapping_slots', 'invoicing_module', \
                        'home_blogpost', 'machine_explications_alert', 'training_explications_alert', 'slot_duration', \
                        'training_information_message', 'subscription_explications_alert', 'event_explications_alert', \
@@ -1040,8 +1040,8 @@ angular.module('application.router', ['ui.router'])
                        'booking_move_enable', 'booking_move_delay', 'booking_cancel_enable', 'feature_tour_display', \
                        'booking_cancel_delay', 'main_color', 'secondary_color', 'spaces_module', 'twitter_analytics', \
                        'fablab_name', 'name_genre', 'reminder_enable', 'plans_module', \
-                       'reminder_delay', 'visibility_yearly', 'visibility_others', 'email_from', \
-                       'display_name_enable', 'machines_sort_by', 'fab_analytics', \
+                       'reminder_delay', 'visibility_yearly', 'visibility_others', 'allowed_cad_extensions', \
+                       'display_name_enable', 'machines_sort_by', 'fab_analytics', 'allowed_cad_mime_types' \
                        'link_name', 'home_content', 'home_css', 'phone_required']` }).$promise;
           }],
           privacyDraftsPromise: ['Setting', function (Setting) { return Setting.get({ name: 'privacy_draft', history: true }).$promise; }],

@@ -90,7 +90,9 @@ class Setting < ApplicationRecord
                              recaptcha_secret_key
                              feature_tour_display
                              email_from
-                             disqus_shortname] }
+                             disqus_shortname
+                             allowed_cad_extensions
+                             allowed_cad_mime_types] }
   def value
     last_value = history_values.order(HistoryValue.arel_table['created_at'].desc).first
     last_value&.value

@@ -33,11 +33,9 @@ class ProjectCaoUploader < CarrierWave::Uploader::Base
   private
 
   def check_content_type_whitelist!(new_file)
-    require 'mimemagic'
+    content_type = Marcel::MimeType.for Pathname.new(new_file.file)
 
-    content_type = MimeMagic.by_magic(File.open(new_file.file))
-
-    if content_type_whitelist && !whitelisted_content_type?(content_type)
+    if content_type_whitelist && content_type && !whitelisted_content_type?(content_type)
       raise CarrierWave::IntegrityError,
             I18n.translate(:'errors.messages.content_type_whitelist_error',
                            content_type: content_type,

@@ -144,6 +144,14 @@ fr:
           disqus: "Disqus"
           disqus_info: "Si vous voulez permettre à vos membres et visiteurs de commenter les projets, vous pouvez activer les forums Disqus en définissant le paramètre suivant. Rendez-vous sur <a href='https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname-' target='_blank'>le site web de Disqus</a> pour plus d'informations."
           shortname: "Nom court"
+          cad_files: "Fichier CAO"
+          validation: "Validation"
+          validation_info: "Les utilisateurs peuvent téléverser des fichiers de CAO (Conception Assistée par Ordinateur) avec la documentation de leurs projets. Vous pouvez spécifier quels types de fichiers sont autorisés. Utilisez le champ de test ci-dessous pour déterminer le type MIME d'un fichier."
+          extensions: "Extensions autorisées"
+          mime_types: "Types MIME autorisés"
+          test_file: "Tester un fichier"
+          set_a_file: "Sélectionner un fichier"
+          file_is_TYPE: "Le type MIME de ce fichier est {TYPE}"
       #track and monitor the trainings
       trainings:
         trainings_monitoring: "Suivi formations"
