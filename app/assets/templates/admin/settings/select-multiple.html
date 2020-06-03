@@ -22,7 +22,7 @@
             <h3 class="modal-title" translate>{{ titleNew }}</h3>
         </div>
         <div class="modal-body">
-            <p class="alert alert-info" ng-show="descriptionNew" translate>{{ descriptionNew }}</p>
+            <p class="alert alert-info" ng-show="descriptionNew" ng-bind-html="descriptionNew | translate"></p>
             <form class="row m-md" name="newSelectOptionForm">
                 <input type="text" class="form-control" ng-model="value" required>
             </form>

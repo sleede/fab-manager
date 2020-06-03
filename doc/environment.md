@@ -125,22 +125,6 @@ The variable `DEFAULT_HOST` should be your domain name (eg. fabmanager.example.c
 
 This parameter configures the logs verbosity.
 Available log levels can be found [here](http://guides.rubyonrails.org/debugging_rails_applications.html#log-levels).
-<a name="ALLOWED_EXTENSIONS"></a>
-
-    ALLOWED_EXTENSIONS
-
-Exhaustive list of file's extensions available for public upload as project's CAO attachements.
-Each item in the list must be separated from the others by a space char.
-You will probably want to check that this list match the `ALLOWED_MIME_TYPES` values below.
-Please consider that allowing file archives (eg. ZIP) or binary executable (eg. EXE) may result in a **dangerous** security issue and must be avoided in any cases.
-<a name="ALLOWED_MIME_TYPES"></a>
-
-    ALLOWED_MIME_TYPES
-
-Exhaustive list of file's mime-types available for public upload as project's CAO attachements.
-Each item in the list must be separated from the others by a space char.
-You will probably want to check that this list match the `ALLOWED_EXTENSIONS` values above.
-Please consider that allowing file archives (eg. application/zip) or binary executable (eg. application/exe) may result in a **dangerous** security issue and must be avoided in any cases.
 <a name="MAX_IMAGE_SIZE"></a>
 
     MAX_IMAGE_SIZE

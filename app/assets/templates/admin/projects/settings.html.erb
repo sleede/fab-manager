@@ -31,7 +31,7 @@
                                  settings="allSettings"
                                  label="app.admin.projects.settings.extensions"
                                  title-new="app.admin.projects.settings.new_extension"
-                                 description-new="app.admin.projects.settings.new_ext_info"
+                                 description-new="app.admin.projects.settings.new_ext_info_html"
                                  before-add="removeInitialDot">
         </select-multiple-setting>
       </div>
@@ -40,7 +40,8 @@
                                  settings="allSettings"
                                  label="app.admin.projects.settings.mime_types"
                                  title-new="app.admin.projects.settings.new_mime_type"
-                                 description-new="app.admin.projects.settings.new_type_info">
+                                 description-new="app.admin.projects.settings.new_type_info_html"
+                                 before-add="lower">
         </select-multiple-setting>
       </div>
       <form name="mimeTestForm" class="col-md-6 m-t-lg" ng-upload="onTestFileComplete(content)" upload-options-enable-rails-csrf="true" action="/api/files/mime_type">

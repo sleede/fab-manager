@@ -188,9 +188,18 @@ Application.Controllers.controller('AdminProjectsController', ['$scope', '$state
      * @returns {String}
      */
     $scope.removeInitialDot = function (extension) {
-      if (extension.substr(0, 1) === '.') return extension.substr(1);
+      if (extension.substr(0, 1) === '.') return $scope.lower(extension.substr(1));
 
-      return extension;
+      return $scope.lower(extension);
+    };
+
+    /**
+     * Return the lowercase version of the provided string
+     * @param text {String}
+     * @returns {string}
+     */
+    $scope.lower = function (text) {
+      return text.toLowerCase();
     };
 
     /**
