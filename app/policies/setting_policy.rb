@@ -37,7 +37,8 @@ class SettingPolicy < ApplicationPolicy
        booking_window_end booking_slot_duration booking_move_enable booking_move_delay booking_cancel_enable booking_cancel_delay
        fablab_name name_genre event_explications_alert space_explications_alert link_name home_content phone_required
        tracking_id book_overlapping_slots slot_duration events_in_calendar spaces_module plans_module invoicing_module
-       recaptcha_site_key feature_tour_display disqus_shortname allowed_cad_extensions openlab_app_id]
+       recaptcha_site_key feature_tour_display disqus_shortname allowed_cad_extensions openlab_app_id openlab_default
+       online_payment_module]
   end
 
   ##
