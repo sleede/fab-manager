@@ -1,12 +1,15 @@
+# frozen_string_literal: true
+
+# Asynchronously synchronize the projects with OpenLab-Projects
 class OpenlabWorker
   include Sidekiq::Worker
   sidekiq_options queue: 'default', retry: true
 
-  Logger = Sidekiq.logger.level == Logger::DEBUG ? Sidekiq.logger : nil
+  LOGGER = Sidekiq.logger.level == Logger::DEBUG ? Sidekiq.logger : nil
   OPENLAB_CLIENT = Openlab::Projects.new
 
   def perform(action, project_id)
-    logger.debug ["Openlab sync", action, "project ID: #{project_id}"]
+    LOGGER&.debug ['Openlab sync', action, "project ID: #{project_id}"]
 
     case action.to_s
     when /create/
@@ -17,8 +20,10 @@ class OpenlabWorker
       response = OPENLAB_CLIENT.update(project_id, project.openlab_attributes)
     when /destroy/
       response = OPENLAB_CLIENT.destroy(project_id)
+    else
+      raise NotImplementedError
     end
 
-    logger.debug ["Openlab sync", "RESPONSE ERROR", response.inspect] unless response.success?
+    LOGGER&.debug ['Openlab sync', 'RESPONSE ERROR', response.inspect] unless response.success?
   end
 end

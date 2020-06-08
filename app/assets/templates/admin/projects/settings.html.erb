@@ -61,3 +61,29 @@
     </div>
   </div>
 </div>
+
+<div class="panel panel-default m-t-lg">
+  <div class="panel-heading">
+    <span class="font-sbold" translate>{{ 'app.admin.projects.settings.projects_sharing' }}</span>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <h3 class="m-l" translate>{{ 'app.admin.projects.settings.open_lab_projects' }}</h3>
+      <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.projects.settings.open_lab_info_html' | translate"></p>
+      <div class="col-md-4">
+        <text-setting name="openlab_app_id"
+                      settings="allSettings"
+                      label="app.admin.projects.settings.open_lab_app_id"
+                      fa-icon="fa-id-badge">
+        </text-setting>
+      </div>
+      <div class="col-md-4 col-md-offset-2">
+        <text-setting name="openlab_app_secret"
+                      settings="allSettings"
+                      label="app.admin.projects.settings.open_lab_app_secret"
+                      fa-icon="fa-key">
+        </text-setting>
+      </div>
+    </div>
+  </div>
+</div>

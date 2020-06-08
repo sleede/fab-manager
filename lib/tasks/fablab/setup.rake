@@ -122,7 +122,9 @@ namespace :fablab do
         %w[_ DEFAULT_MAIL_FROM email_from],
         %w[_ DISQUS_SHORTNAME disqus_shortname],
         %w[_ ALLOWED_EXTENSIONS allowed_cad_extensions],
-        %w[_ ALLOWED_MIME_TYPES allowed_cad_mime_types]
+        %w[_ ALLOWED_MIME_TYPES allowed_cad_mime_types],
+        %w[_ OPENLAB_APP_ID openlab_app_id],
+        %w[_ OPENLAB_APP_SECRET openlab_app_secret]
       ]
 
       mapping.each do |m|

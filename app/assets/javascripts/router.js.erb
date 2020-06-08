@@ -628,7 +628,8 @@ angular.module('application.router', ['ui.router'])
           licencesPromise: ['Licence', function (Licence) { return Licence.query().$promise; }],
           themesPromise: ['Theme', function (Theme) { return Theme.query().$promise; }],
           settingsPromise: ['Setting', function (Setting) {
-            return Setting.query({ names: "['feature_tour_display', 'disqus_shortname', 'allowed_cad_extensions', 'allowed_cad_mime_types']" }).$promise;
+            return Setting.query({ names: "['feature_tour_display', 'disqus_shortname', 'allowed_cad_extensions', \
+                                            'allowed_cad_mime_types', 'open_lab_app_id', 'open_lab_app_secret']" }).$promise;
           }]
         }
       })

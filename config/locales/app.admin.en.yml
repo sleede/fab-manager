@@ -156,6 +156,11 @@ en:
           test_file: "Test a file"
           set_a_file: "Select a file"
           file_is_TYPE: "MIME type of this file is {TYPE}"
+          projects_sharing: "Projects sharing"
+          open_lab_projects: "OpenLab Projects"
+          open_lab_info_html: "Share your projects with other Fab Labs and display a gallery of shared projects. Please send an email to <a href='mailto:contact@fab-manager.com'>contact@fab-manager.com</a> to get your access credentials for free."
+          open_lab_app_id: "ID"
+          open_lab_app_secret: "Secret"
       #track and monitor the trainings
       trainings:
         trainings_monitoring: "Trainings monitoring"
@@ -1072,6 +1077,8 @@ en:
         disqus_shortname: "Disqus shortname"
         COUNT_items_removed: "{COUNT, plural, =1{One item} other{{COUNT} items}} removed"
         item_added: "One item added"
+        openlab_app_id: "OpenLab-Projects ID"
+        openlab_app_secret: "OpenLab-Projects secret"
         general:
           general: "General"
           title: "Title"

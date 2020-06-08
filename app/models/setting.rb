@@ -92,7 +92,9 @@ class Setting < ApplicationRecord
                              email_from
                              disqus_shortname
                              allowed_cad_extensions
-                             allowed_cad_mime_types] }
+                             allowed_cad_mime_types
+                             openlab_app_id
+                             openlab_app_secret] }
   def value
     last_value = history_values.order(HistoryValue.arel_table['created_at'].desc).first
     last_value&.value
