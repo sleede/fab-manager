@@ -79,8 +79,8 @@ class AccountingExportService
     invoice.payment_means.each do |details|
       rows << row(
         invoice,
-        account(invoice, :client, means: details[:means]),
-        account(invoice, :client, means: details[:means], type: :label),
+        account(invoice, :projets, means: details[:means]),
+        account(invoice, :projets, means: details[:means], type: :label),
         details[:amount] / 100.00,
         line_label: label(invoice),
         debit_method: :debit_client,
@@ -179,7 +179,7 @@ class AccountingExportService
   # Get the account code (or label) for the given invoice and the specified line type (client, vat, subscription or reservation)
   def account(invoice, account, type: :code, means: :other)
     case account
-    when :client
+    when :projets
       Setting.find_by(name: "accounting_#{means}_client_#{type}")&.value
     when :vat
       Setting.find_by(name: "accounting_VAT_#{type}")&.value

@@ -11,35 +11,35 @@ class API::OpenAPIClientsController < API::ApiController
   end
 
   def create
-    @client = OpenAPI::Client.new(client_params)
-    authorize @client
-    if @client.save
+    @projets = OpenAPI::Client.new(client_params)
+    authorize @projets
+    if @projets.save
       render status: :created
     else
-      render json: @client.errors, status: :unprocessable_entity
+      render json: @projets.errors, status: :unprocessable_entity
     end
   end
 
   def update
-    @client = OpenAPI::Client.find(params[:id])
-    authorize @client
-    if @client.update(client_params)
+    @projets = OpenAPI::Client.find(params[:id])
+    authorize @projets
+    if @projets.update(client_params)
       render status: :ok
     else
-      render json: @client.errors, status: :unprocessable_entity
+      render json: @projets.errors, status: :unprocessable_entity
     end
   end
 
   def reset_token
-    @client = OpenAPI::Client.find(params[:id])
-    authorize @client
-    @client.regenerate_token
+    @projets = OpenAPI::Client.find(params[:id])
+    authorize @projets
+    @projets.regenerate_token
   end
 
   def destroy
-    @client = OpenAPI::Client.find(params[:id])
-    authorize @client
-    @client.destroy
+    @projets = OpenAPI::Client.find(params[:id])
+    authorize @projets
+    @projets.destroy
     head 204
   end
 
