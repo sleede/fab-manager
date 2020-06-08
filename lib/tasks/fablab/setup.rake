@@ -124,7 +124,8 @@ namespace :fablab do
         %w[_ ALLOWED_EXTENSIONS allowed_cad_extensions],
         %w[_ ALLOWED_MIME_TYPES allowed_cad_mime_types],
         %w[_ OPENLAB_APP_ID openlab_app_id],
-        %w[_ OPENLAB_APP_SECRET openlab_app_secret]
+        %w[_ OPENLAB_APP_SECRET openlab_app_secret],
+        %w[_ OPENLAB_DEFAULT openlab_default]
       ]
 
       mapping.each do |m|

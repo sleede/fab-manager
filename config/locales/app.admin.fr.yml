@@ -161,6 +161,8 @@ fr:
           open_lab_info_html: "Activez OpenLab pout partager vos projets avec d'autres Fab Labs et afficher une galerie de projets partagés. Veuillez envoyer un courriel à <a href='mailto:contact@fab-manager.com'>contact@fab-manager.com</a> pour obtenir gratuitement vos identifiants d'accès."
           open_lab_app_id: "Identifiant"
           open_lab_app_secret: "Secret"
+          openlab_default_info_html: "Dans la galerie de projets, les visiteurs peuvent choisir entre deux vues: tous les projets de l'ensemble du réseau OpenLab, ou uniquement les projets documentés dans votre Fab Lab.<br/>Ici, vous pouvez choisir quelle vue est affichée par défaut."
+          default_to_openlab: "Afficher OpenLab par défaut"
       #track and monitor the trainings
       trainings:
         trainings_monitoring: "Suivi formations"
@@ -1079,6 +1081,7 @@ fr:
         item_added: "Un élément ajouté"
         openlab_app_id: "l'identifiant OpenLab"
         openlab_app_secret: "secret OpenLab"
+        openlab_default: "l'affichage par défaut de la galerie"
         general:
           general: "Général"
           title: "Titre"

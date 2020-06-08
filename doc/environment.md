@@ -280,12 +280,6 @@ See [Crowdin documentation](https://support.crowdin.com/in-context-localization/
 Accordingly, `RAILS_LOCALE` and `APP_LOCALE` must be configured to `zu`.
 <a name="open-projects-settings"></a>
 ## OpenLab settings
-<a name="OPENLAB_DEFAULT"></a>
-
-    OPENLAB_DEFAULT
-
-When set to false, the default display will be the local projects when browsing the projects gallery.
-If not set or set to true, the projects from the OpenLab repository will be shown first.
 <a name="OPENLAB_BASE_URI"></a>
 
     OPENLAB_BASE_URI

@@ -85,5 +85,14 @@
         </text-setting>
       </div>
     </div>
+    <div class="row m-t" ng-show="allSettings.openlab_app_secret">
+      <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.projects.settings.openlab_default_info_html' | translate"></p>
+      <boolean-setting name="openlab_default"
+                       settings="allSettings"
+                       label="app.admin.projects.settings.default_to_openlab"
+                       classes="m-l"
+                       yes-label="app.shared.buttons.yes"
+                       no-label="app.shared.buttons.no"></boolean-setting>
+    </div>
   </div>
 </div>
