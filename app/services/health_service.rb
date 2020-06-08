@@ -43,7 +43,7 @@ class HealthService
       spaces: Setting.get('spaces_module'),
       online_payment: !Rails.application.secrets.fablab_without_online_payments,
       invoices: Setting.get('invoicing_module'),
-      openlab: Rails.application.secrets.openlab_app_secret.present?
+      openlab: Setting.get('openlab_app_secret').present?
     }
   end
 

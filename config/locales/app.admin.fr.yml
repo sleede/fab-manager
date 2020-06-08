@@ -157,9 +157,9 @@ fr:
           set_a_file: "Sélectionner un fichier"
           file_is_TYPE: "Le type MIME de ce fichier est {TYPE}"
           projects_sharing: "Partage de projets"
-          open_lab_projects: "OpenLab Projects"
-          open_lab_info_html: "Partagez vos projets avec d'autres Fab Labs et affichez une galerie de projets partagés. Veuillez envoyer un courriel à <a href='mailto:contact@fab-manager.com'>contact@fab-manager.com</a> pour obtenir gratuitement vos identifiants d'accès."
-          open_lab_app_id: "ID"
+          open_lab_projects: "Projets OpenLab"
+          open_lab_info_html: "Activez OpenLab pout partager vos projets avec d'autres Fab Labs et afficher une galerie de projets partagés. Veuillez envoyer un courriel à <a href='mailto:contact@fab-manager.com'>contact@fab-manager.com</a> pour obtenir gratuitement vos identifiants d'accès."
+          open_lab_app_id: "Identifiant"
           open_lab_app_secret: "Secret"
       #track and monitor the trainings
       trainings:
@@ -1077,8 +1077,8 @@ fr:
         disqus_shortname: "nom court Disqus"
         COUNT_items_removed: "{COUNT, plural, =1{Un élément retiré} other{{COUNT} éléments retirés}}"
         item_added: "Un élément ajouté"
-        openlab_app_id: "l'ID OpenLab-Projects"
-        openlab_app_secret: "secret OpenLab-Projects"
+        openlab_app_id: "l'identifiant OpenLab"
+        openlab_app_secret: "secret OpenLab"
         general:
           general: "Général"
           title: "Titre"

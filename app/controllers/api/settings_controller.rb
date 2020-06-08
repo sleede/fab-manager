@@ -5,7 +5,7 @@ class API::SettingsController < API::ApiController
   before_action :authenticate_user!, only: %i[update bulk_update reset]
 
   def index
-    @settings = Setting.where(name: names_as_string_to_array)
+    @settings = policy_scope(Setting.where(name: names_as_string_to_array))
   end
 
   def update
@@ -35,8 +35,16 @@ class API::SettingsController < API::ApiController
   end
 
   def show
+    authorize SettingContext.new(params[:name])
+
     @setting = Setting.find_or_create_by(name: params[:name])
     @show_history = params[:history] == 'true' && current_user.admin?
+  end
+
+  def test_present
+    authorize SettingContext.new(params[:name])
+
+    @setting = Setting.get(params[:name])
   end
 
   def reset

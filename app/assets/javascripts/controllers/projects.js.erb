@@ -87,7 +87,7 @@ class ProjectsController {
     $scope.totalSteps = $scope.project.project_steps_attributes.length;
 
     // List of extensions allowed for CAD attachements upload
-    $scope.allowedExtensions = allowedExtensions;
+    $scope.allowedExtensions = allowedExtensions.setting.value.split(' ');
 
     /**
      * For use with ngUpload (https://github.com/twilson63/ngUpload).
@@ -266,8 +266,8 @@ class ProjectsController {
 /**
  *  Controller used on projects listing page
  */
-Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'Project', 'machinesPromise', 'themesPromise', 'componentsPromise', 'paginationService', 'OpenlabProject', '$window', 'growl', '_t', '$location', '$timeout',
-  function ($scope, $state, Project, machinesPromise, themesPromise, componentsPromise, paginationService, OpenlabProject, $window, growl, _t, $location, $timeout) {
+Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'Project', 'machinesPromise', 'themesPromise', 'componentsPromise', 'paginationService', 'OpenlabProject', '$window', 'growl', '_t', '$location', '$timeout', 'settingsPromise', 'openLabActive',
+  function ($scope, $state, Project, machinesPromise, themesPromise, componentsPromise, paginationService, OpenlabProject, $window, growl, _t, $location, $timeout, settingsPromise, openLabActive) {
   /* PRIVATE STATIC CONSTANTS */
 
     // Number of projects added to the page when the user clicks on 'load more projects'
@@ -277,11 +277,11 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
     /* PUBLIC SCOPE */
 
     // Fab-manager's instance ID in the openLab network
-    $scope.openlabAppId = Fablab.openlabAppId;
+    $scope.openlabAppId = settingsPromise.openlab_app_id
 
     // Is openLab enabled on the instance?
     $scope.openlab = {
-      projectsActive: Fablab.openlabProjectsActive,
+      projectsActive: openLabActive.isPresent,
       searchOverWholeNetwork: false
     };
 

@@ -32,7 +32,6 @@ Rails.application.routes.draw do
       collection do
         get :last_published
         get :search
-        get :allowed_extensions
       end
     end
     resources :openlab_projects, only: :index
@@ -44,6 +43,7 @@ Rails.application.routes.draw do
     resources :settings, only: %i[show update index], param: :name do
       patch '/bulk_update', action: 'bulk_update', on: :collection
       put '/reset/:name', action: 'reset', on: :collection
+      get '/is_present/:name', action: 'test_present', on: :collection
     end
     resources :users, only: %i[index create destroy]
     resources :members, only: %i[index show create update destroy] do

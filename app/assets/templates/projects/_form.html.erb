@@ -54,7 +54,7 @@
                 </div>
                 <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new" translate>{{ 'app.shared.buttons.browse' }}</span>
                   <span class="fileinput-exists" translate>{{ 'app.shared.buttons.change' }}</span>
-                  <input type="file" name="project[project_caos_attributes][][attachment]" accept="<%= "."+ENV['ALLOWED_EXTENSIONS'].split(' ').join(',.') %>">
+                  <input type="file" name="project[project_caos_attributes][][attachment]" accept="{{'.'+allowedExtensions.join(',.')}}">
                 </span>
                 <a class="input-group-addon btn btn-danger fileinput-exists" data-dismiss="fileinput" ng-click="deleteFile(file)"><i class="fa fa-trash-o"></i></a>
               </div>

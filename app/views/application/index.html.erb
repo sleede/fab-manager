@@ -48,11 +48,7 @@
       Fablab.weekStartingDay = <%= Date.parse(Rails.application.secrets.week_starting_day).strftime('%w') %>;
       Fablab.d3DateFormat = "<%= Rails.application.secrets.d3_date_format %>";
       Fablab.uibDateFormat = "<%= Rails.application.secrets.uib_date_format %>";
-      Fablab.openlabProjectsActive = <%= Rails.application.secrets.openlab_app_secret.present? %>;
       Fablab.openlabDefault = ('<%= Rails.application.secrets.openlab_default %>' !== 'false');
-      <% if Rails.application.secrets.openlab_app_id.present? %>
-      Fablab.openlabAppId = "<%= Rails.application.secrets.openlab_app_id %>";
-      <% end %>
       Fablab.userConfirmationNeededToSignIn = ('<%= Rails.application.secrets.user_confirmation_needed_to_sign_in %>' === 'true');
 
       // feature tour (used when feature_tour_display = session)
