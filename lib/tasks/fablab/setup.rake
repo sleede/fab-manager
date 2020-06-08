@@ -125,7 +125,8 @@ namespace :fablab do
         %w[_ ALLOWED_MIME_TYPES allowed_cad_mime_types],
         %w[_ OPENLAB_APP_ID openlab_app_id],
         %w[_ OPENLAB_APP_SECRET openlab_app_secret],
-        %w[_ OPENLAB_DEFAULT openlab_default]
+        %w[_ OPENLAB_DEFAULT openlab_default],
+        %w[! FABLAB_WITHOUT_ONLINE_PAYMENT online_payment_module false]
       ]
 
       mapping.each do |m|

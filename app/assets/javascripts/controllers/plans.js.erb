@@ -12,8 +12,8 @@
  */
 'use strict';
 
-Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScope', '$state', '$uibModal', 'Auth', 'AuthService', 'dialogs', 'growl', 'plansPromise', 'groupsPromise', 'Subscription', 'Member', 'subscriptionExplicationsPromise', '_t', 'Wallet', 'helpers',
-  function ($scope, $rootScope, $state, $uibModal, Auth, AuthService, dialogs, growl, plansPromise, groupsPromise, Subscription, Member, subscriptionExplicationsPromise, _t, Wallet, helpers) {
+Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScope', '$state', '$uibModal', 'Auth', 'AuthService', 'dialogs', 'growl', 'plansPromise', 'groupsPromise', 'Subscription', 'Member', 'subscriptionExplicationsPromise', '_t', 'Wallet', 'helpers', 'settingsPromise',
+  function ($scope, $rootScope, $state, $uibModal, Auth, AuthService, dialogs, growl, plansPromise, groupsPromise, Subscription, Member, subscriptionExplicationsPromise, _t, Wallet, helpers, settingsPromise) {
     /* PUBLIC SCOPE */
 
     // list of groups
@@ -92,7 +92,7 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
         const amountToPay = helpers.getAmountToPay($scope.cart.total, wallet.amount);
         if ((AuthService.isAuthorized('member') && amountToPay > 0)
           || (AuthService.isAuthorized('manager') && $scope.ctrl.member.id === $rootScope.currentUser.id && amountToPay > 0)) {
-          if ($rootScope.fablabWithoutOnlinePayment) {
+          if (settingsPromise.online_payment_module !== 'true') {
             growl.error(_t('app.public.plans.online_payment_disabled'));
           } else {
             return payByStripe();

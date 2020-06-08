@@ -41,6 +41,10 @@
         <uib-tab heading="{{ 'app.admin.invoices.accounting_codes' | translate }}" index="2" class="accounting-codes-tab">
           <ng-include src="'<%= asset_path "admin/invoices/codes.html" %>'"></ng-include>
         </uib-tab>
+
+        <uib-tab heading="{{ 'app.admin.invoices.payment.payment_settings' | translate }}" index="3" class="payment-settings">
+          <ng-include src="'<%= asset_path "admin/invoices/payment.html" %>'"></ng-include>
+        </uib-tab>
 	    </uib-tabset>
 	  </div>
 

@@ -629,3 +629,11 @@ history_value_65:
   created_at: 2020-06-01 11:12:21.255550000 Z
   updated_at: 2020-06-01 11:12:21.255550000 Z
   footprint:
+
+history_value_66:
+  id: 66
+  setting_id: 66
+  invoicing_profile_id: 1
+  value: true
+  created_at: 2020-06-08 17:12:16.846525000 Z
+  updated_at: 2020-06-08 17:12:16.846525000 Z

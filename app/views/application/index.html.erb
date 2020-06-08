@@ -25,7 +25,6 @@
 
       Fablab.plansModule = ('<%= Setting.get('plans_module') %>' === 'true');
       Fablab.spacesModule = ('<%= Setting.get('spaces_module') %>' === 'true');
-      Fablab.withoutOnlinePayment = ('<%= Rails.application.secrets.fablab_without_online_payments %>' === 'true');
       Fablab.fablabWithoutWallet = ('<%= Rails.application.secrets.fablab_without_wallet %>' === 'true');
       Fablab.defaultHost = "<%= Rails.application.secrets.default_host %>";
       Fablab.trackingId = "<%= Setting.get('tracking_id') %>";

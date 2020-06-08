@@ -1,0 +1,17 @@
+<div class="panel panel-default m-t-md">
+  <div class="panel-heading">
+    <span class="font-sbold" translate>{{ 'app.admin.invoices.payment.payment_settings' }}</span>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <h3 class="m-l" translate>{{ 'app.admin.invoices.payment.online_payment' }}</h3>
+      <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.invoices.payment.online_payment_info_html' | translate"></p>
+      <boolean-setting name="online_payment_module"
+                       settings="allSettings"
+                       label="app.admin.invoices.payment.enable_online_payment"
+                       classes="m-l"
+                       fa-icon="fa-font">
+      </boolean-setting>
+    </div>
+  </div>
+</div>

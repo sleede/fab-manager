@@ -81,8 +81,6 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
         $state.prevParams = fromParams;
       });
 
-      // Global config: if true, all payments will be disabled in the application for the members (only admins will be able to proceed reservations)
-      $rootScope.fablabWithoutOnlinePayment = Fablab.withoutOnlinePayment;
       // Global config: if true, user must confirm his email to sign in
       $rootScope.userConfirmationNeededToSignIn = Fablab.userConfirmationNeededToSignIn;
       // Global config: if true, wallet will be disabled

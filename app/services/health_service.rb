@@ -41,7 +41,7 @@ class HealthService
       reservations: last_week_new_reservations,
       plans: Setting.get('plans_module'),
       spaces: Setting.get('spaces_module'),
-      online_payment: !Rails.application.secrets.fablab_without_online_payments,
+      online_payment: Setting.get('online_payment_module'),
       invoices: Setting.get('invoicing_module'),
       openlab: Setting.get('openlab_app_secret').present?
     }

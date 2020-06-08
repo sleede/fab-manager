@@ -10,7 +10,7 @@ class API::PaymentsController < API::ApiController
   # was successfully made. After the payment was made, the reservation/subscription will be created
   ##
   def confirm_payment
-    render(json: { error: 'Online payment is disabled' }, status: :unauthorized) and return if Rails.application.secrets.fablab_without_online_payments
+    render(json: { error: 'Online payment is disabled' }, status: :unauthorized) and return unless Setting.get('online_payment_module')
 
     amount = nil # will contains the amount and the details of each invoice lines
     intent = nil # stripe's payment intent

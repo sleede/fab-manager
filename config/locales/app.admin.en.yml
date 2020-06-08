@@ -614,6 +614,11 @@ en:
           debit_euro: "Euro debit"
           credit_euro: "Euro credit"
           lettering: "Lettering"
+        payment:
+          payment_settings: "Payment settings"
+          online_payment: "Online payment"
+          online_payment_info_html: "You can enable your members to book directly online, paying by card. Alternatively, you can restrict the booking and payment processes for administrators and managers."
+          enable_online_payment: "Enable online payment"
       #management of users, labels, groups, and so on
       members:
         users_management: "Users management"

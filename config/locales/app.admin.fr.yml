@@ -614,6 +614,11 @@ fr:
           debit_euro: "Débit euro"
           credit_euro: "Crédit euro"
           lettering: "Lettrage"
+        payment:
+          payment_settings: "Paramètres de paiement"
+          online_payment: "Paiement en ligne"
+          online_payment_info_html: "Vous pouvez permettre à vos membres de réserver directement en ligne, en payment par carte bancaire. De manière alternative, vous pouvez restreindre les processus de réservation et de paiement aux administrateurs et aux gestionnaires."
+          enable_online_payment: "Activer le paiement en ligne"
       #management of users, labels, groups, and so on
       members:
         users_management: "Gestion des utilisateurs"

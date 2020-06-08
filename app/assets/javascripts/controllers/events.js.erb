@@ -13,8 +13,8 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 
-Application.Controllers.controller('EventsController', ['$scope', '$state', 'Event', 'categoriesPromise', 'themesPromise', 'ageRangesPromise',
-  function ($scope, $state, Event, categoriesPromise, themesPromise, ageRangesPromise) {
+Application.Controllers.controller('EventsController', ['$scope', '$state', 'Event', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', 'settingsPromise',
+  function ($scope, $state, Event, categoriesPromise, themesPromise, ageRangesPromise, settingsPromise) {
   /* PUBLIC SCOPE */
 
     // The events displayed on the page
@@ -305,7 +305,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
           const amountToPay = helpers.getAmountToPay($scope.reserve.amountTotal, wallet.amount);
           if ((AuthService.isAuthorized(['member']) && amountToPay > 0)
             || (AuthService.isAuthorized('manager') && $scope.ctrl.member.id === $rootScope.currentUser.id && amountToPay > 0)) {
-            if ($rootScope.fablabWithoutOnlinePayment) {
+            if (settingsPromise.online_payment_module !== 'true') {
               growl.error(_t('app.public.events_show.online_payment_disabled'));
             } else {
               return payByStripe(reservation);

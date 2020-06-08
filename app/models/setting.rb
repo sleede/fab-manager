@@ -95,7 +95,8 @@ class Setting < ApplicationRecord
                              allowed_cad_mime_types
                              openlab_app_id
                              openlab_app_secret
-                             openlab_default] }
+                             openlab_default
+                             online_payment_module] }
   def value
     last_value = history_values.order(HistoryValue.arel_table['created_at'].desc).first
     last_value&.value

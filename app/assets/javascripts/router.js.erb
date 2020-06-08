@@ -348,14 +348,9 @@ angular.module('application.router', ['ui.router'])
           machinePromise: ['Machine', '$stateParams', function (Machine, $stateParams) { return Machine.get({ id: $stateParams.id }).$promise; }],
           settingsPromise: ['Setting', function (Setting) {
             return Setting.query({
-              names: `['machine_explications_alert', \
-                       'booking_window_start', \
-                       'booking_window_end', \
-                       'booking_move_enable', \
-                       'booking_move_delay', \
-                       'booking_cancel_enable', \
-                       'booking_cancel_delay', \
-                       'subscription_explications_alert']`
+              names: `['machine_explications_alert', 'booking_window_start',  'booking_window_end',  'booking_move_enable', \
+                       'booking_move_delay', 'booking_cancel_enable',  'booking_cancel_delay', 'subscription_explications_alert' \
+                       'online_payment_module']`
             }).$promise;
           }]
         }
@@ -440,14 +435,9 @@ angular.module('application.router', ['ui.router'])
           groupsPromise: ['Group', function (Group) { return Group.query().$promise; }],
           settingsPromise: ['Setting', function (Setting) {
             return Setting.query({
-              names: `['booking_window_start', \
-                       'booking_window_end', \
-                       'booking_move_enable', \
-                       'booking_move_delay', \
-                       'booking_cancel_enable', \
-                       'booking_cancel_delay', \
-                       'subscription_explications_alert', \
-                       'space_explications_alert']` }).$promise;
+              names: `['booking_window_start', 'booking_window_end', 'booking_move_enable',  'booking_move_delay', \
+                       'booking_cancel_enable', 'booking_cancel_delay', 'subscription_explications_alert',  \
+                       'space_explications_alert', 'online_payment_module']` }).$promise;
           }]
         }
       })
@@ -495,15 +485,9 @@ angular.module('application.router', ['ui.router'])
           }],
           settingsPromise: ['Setting', function (Setting) {
             return Setting.query({
-              names: `['booking_window_start', \
-                       'booking_window_end', \
-                       'booking_move_enable', \
-                       'booking_move_delay', \
-                       'booking_cancel_enable', \
-                       'booking_cancel_delay', \
-                       'subscription_explications_alert', \
-                       'training_explications_alert', \
-                       'training_information_message']` }).$promise;
+              names: `['booking_window_start', 'booking_window_end', 'booking_move_enable', 'booking_move_delay', \
+                       'booking_cancel_enable', 'booking_cancel_delay', 'subscription_explications_alert', \
+                       'training_explications_alert', 'training_information_message', 'online_payment_module']` }).$promise;
           }]
         }
       })
@@ -531,7 +515,8 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           subscriptionExplicationsPromise: ['Setting', function (Setting) { return Setting.get({ name: 'subscription_explications_alert' }).$promise; }],
           plansPromise: ['Plan', function (Plan) { return Plan.query().$promise; }],
-          groupsPromise: ['Group', function (Group) { return Group.query().$promise; }]
+          groupsPromise: ['Group', function (Group) { return Group.query().$promise; }],
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['online_payment_module']" }).$promise; }]
         }
       })
 
@@ -547,7 +532,8 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           categoriesPromise: ['Category', function (Category) { return Category.query().$promise; }],
           themesPromise: ['EventTheme', function (EventTheme) { return EventTheme.query().$promise; }],
-          ageRangesPromise: ['AgeRange', function (AgeRange) { return AgeRange.query().$promise; }]
+          ageRangesPromise: ['AgeRange', function (AgeRange) { return AgeRange.query().$promise; }],
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['online_payment_module']" }).$promise; }]
         }
       })
       .state('app.public.events_show', {
@@ -853,7 +839,7 @@ angular.module('application.router', ['ui.router'])
                        'accounting_VAT_code', 'accounting_VAT_label', 'accounting_subscription_code', 'accounting_subscription_label', \
                        'accounting_Machine_code', 'accounting_Machine_label', 'accounting_Training_code', 'accounting_Training_label', \
                        'accounting_Event_code', 'accounting_Event_label', 'accounting_Space_code', 'accounting_Space_label', \
-                       'feature_tour_display']` }).$promise;
+                       'feature_tour_display', 'online_payment_module']` }).$promise;
           }],
           invoices: [ 'Invoice', function (Invoice) {
             return Invoice.list({

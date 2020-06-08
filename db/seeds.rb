@@ -859,6 +859,27 @@ Setting.set('feature_tour_display', 'once') unless Setting.find_by(name: 'featur
 
 Setting.set('email_from', 'noreply@fab-manager.com') unless Setting.find_by(name: 'email_from').try(:value)
 
+Setting.set('online_payment_module', false) unless Setting.find_by(name: 'online_payment_module').try(:value)
+
+unless Setting.find_by(name: 'allowed_cad_extensions').try(:value)
+  Setting.set(
+    'allowed_cad_extensions',
+    'pdf ai eps cad math svg stl dxf dwg obj step iges igs 3dm 3dmf doc docx png ino scad fcad skp sldprt sldasm slddrw' \
+    'slddrt tex latex ps fcstd fcstd1'
+  )
+end
+
+unless Setting.find_by(name: 'allowed_cad_mime_types').try(:value)
+  Setting.set(
+    'allowed_cad_mime_types',
+    'application/pdf application/postscript application/illustrator image/x-eps image/svg+xml application/sla application/dxf ' \
+    'application/acad application/dwg application/octet-stream application/step application/iges model/iges x-world/x-3dmf ' \
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document image/png text/x-arduino text/plain application/scad ' \
+    'application/vnd.sketchup.skp application/x-koan application/vnd-koan koan/x-skm application/vnd.koan application/x-tex ' \
+    'application/x-latex application/x-extension-fcstd'
+  )
+end
+
 if StatisticCustomAggregation.count.zero?
   # available reservations hours for machines
   machine_hours = StatisticType.find_by(key: 'hour', statistic_index_id: 2)
