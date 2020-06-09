@@ -28,8 +28,8 @@ Fab-manager is a Ruby on Rails / AngularJS web application that runs on the foll
 
 - Ubuntu LTS 14.04+ / Debian 8+
 - Ruby 2.6
-- Redis 2.8.4+
-- Sidekiq 3.3.4+
+- Redis 6
+- Sidekiq 6
 - Elasticsearch 5.6
 - PostgreSQL 9.6
 

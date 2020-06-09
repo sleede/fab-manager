@@ -1,16 +1,10 @@
 # frozen_string_literal: true
 
-namespace = if Rails.env.staging?
-              'fablab_staging'
-            else
-              'fablab'
-            end
-
 redis_host = ENV['REDIS_HOST'] || 'localhost'
 redis_url = "redis://#{redis_host}:6379"
 
 Sidekiq.configure_server do |config|
-  config.redis = { url: redis_url, namespace: namespace }
+  config.redis = { url: redis_url }
 
   # load sidekiq-cron schedule config
   schedule_file = 'config/schedule.yml'
@@ -22,7 +16,7 @@ Sidekiq.configure_server do |config|
 end
 
 Sidekiq.configure_client do |config|
-  config.redis = { url: redis_url, namespace: namespace }
+  config.redis = { url: redis_url }
 end
 
 Sidekiq::Extensions.enable_delay!

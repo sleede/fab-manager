@@ -3,8 +3,11 @@
 - Improved display of the icons alerting about an outdated version
 - Improved mime-type checking (back & front)
 - Updated CarrierWave to 2.1.0
+- Updated redis to v6, with alpine image
+- Updated Sidekiq to 6.0.7
 - Fix a bug: managers do not see the name of the user who reserved a slot
 - [TODO DEPLOY] `rails fablab:setup:env_to_db`
+- [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/redis-upgrade.sh | bash`
 
 ## v4.4.4 2020 May 25
 
