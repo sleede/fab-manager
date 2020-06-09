@@ -12,9 +12,9 @@ class SyncMembersOnStripeWorker
       logger.debug "#{index} / #{total}"
       begin
         stp_customer = Stripe::Customer.retrieve member.stp_customer_id
-        StripeWorker.perform_async(:create_stripe_customer, member.id) if stp_customer.nil? || stp_customer[:deleted]
+        StripeWorker.perform(:create_stripe_customer, member.id) if stp_customer.nil? || stp_customer[:deleted]
       rescue Stripe::InvalidRequestError
-        StripeWorker.perform_async(:create_stripe_customer, member.id)
+        StripeWorker.perform(:create_stripe_customer, member.id)
       end
     end
     logger.debug 'Sync is done'
