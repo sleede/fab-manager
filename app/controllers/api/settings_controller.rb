@@ -14,7 +14,7 @@ class API::SettingsController < API::ApiController
     render status: :not_modified and return if setting_params[:value] == @setting.value
 
     if @setting.save && @setting.history_values.create(value: setting_params[:value], invoicing_profile: current_user.invoicing_profile)
-      SettingService.new.after_update(@setting)
+      SettingService.after_update(@setting)
       render status: :ok
     else
       render json: @setting.errors.full_messages, status: :unprocessable_entity
@@ -30,6 +30,7 @@ class API::SettingsController < API::ApiController
 
       db_setting = Setting.find_or_initialize_by(name: setting[:name])
       db_setting.save && db_setting.history_values.create(value: setting[:value], invoicing_profile: current_user.invoicing_profile)
+      SettingService.after_update(db_setting)
       @settings.push db_setting
     end
   end

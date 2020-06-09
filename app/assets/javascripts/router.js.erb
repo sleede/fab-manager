@@ -841,7 +841,7 @@ angular.module('application.router', ['ui.router'])
                        'accounting_Event_code', 'accounting_Event_label', 'accounting_Space_code', 'accounting_Space_label', \
                        'feature_tour_display', 'online_payment_module', 'stripe_public_key']` }).$promise;
           }],
-          stripeSecretKey: ['Setting', function (Setting) { return Setting.isPresent({ name: 'stripe_private_key' }).$promise; }],
+          stripeSecretKey: ['Setting', function (Setting) { return Setting.isPresent({ name: 'stripe_secret_key' }).$promise; }],
           invoices: [ 'Invoice', function (Invoice) {
             return Invoice.list({
               query: { number: '', customer: '', date: null, order_by: '-reference', page: 1, size: 20 }

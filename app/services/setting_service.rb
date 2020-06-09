@@ -4,7 +4,7 @@
 # Due to the way the controller updates the settings, we cannot safely use ActiveRecord's callbacks (eg. after_update, after_commit...)
 # so this service provides a wrapper around these operations.
 class SettingService
-  def after_update(setting)
+  def self.after_update(setting)
     # update the stylesheet
     Stylesheet.theme&.rebuild! if %w[main_color secondary_color].include? setting.name
     Stylesheet.home_page&.rebuild! if setting.name == 'home_css'
@@ -13,6 +13,10 @@ class SettingService
     NotifyPrivacyUpdateWorker.perform_async(id) if setting.name == 'privacy_body'
 
     # sync all users on stripe
-    StripeWorker.perform_async(:sync_members) if %w[stripe_public_key stripe_secret_key].include? setting.name
+    return unless %w[stripe_public_key stripe_secret_key].include? setting.name
+
+    SyncMembersOnStripeWorker.perform_async(
+      setting.history_values.last&.invoicing_profile&.user&.id
+    )
   end
 end

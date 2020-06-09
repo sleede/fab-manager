@@ -99,6 +99,7 @@ gem 'aasm'
 gem 'sidekiq', '>= 6.0.7'
 # Recurring jobs for Sidekiq
 gem 'sidekiq-cron'
+gem 'sidekiq-unique-jobs', '~> 6.0.22'
 
 gem 'stripe', '5.1.1'
 

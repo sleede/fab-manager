@@ -24,6 +24,9 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     // number of invoices loaded each time we click on 'load more...'
     const INVOICES_PER_PAGE = 20;
 
+    // fake stripe secret key
+    const STRIPE_SK_HIDDEN = 'sk_test_hidden-hidden-hidden-hid';
+
     /* PUBLIC SCOPE */
 
     // default active tab
@@ -173,7 +176,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     $scope.allSettings = settings;
 
     // is the stripe private set?
-    $scope.stripeSecretKey = stripeSecretKey.isPresent;
+    $scope.stripeSecretKey = (stripeSecretKey.isPresent ? STRIPE_SK_HIDDEN : '');
 
     // Placeholding date for the invoice creation
     $scope.today = moment();
@@ -613,8 +616,8 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           Setting.get({ name: 'stripe_public_key' }, function (res) {
             $scope.allSettings.stripe_public_key = res.setting.value;
           })
-          Setting.isPresent({ name: 'stripe_private_key' }, function (res) {
-            $scope.stripeSecretKey = res.isPresent;
+          Setting.isPresent({ name: 'stripe_secret_key' }, function (res) {
+            $scope.stripeSecretKey = (res.isPresent ? STRIPE_SK_HIDDEN : '');
           })
         }
       })
