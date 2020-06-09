@@ -619,6 +619,14 @@ en:
           online_payment: "Online payment"
           online_payment_info_html: "You can enable your members to book directly online, paying by card. Alternatively, you can restrict the booking and payment processes for administrators and managers."
           enable_online_payment: "Enable online payment"
+          stripe_keys: "Stripe keys"
+          stripe_keys_info_html: "<p>To be able to collect online payments, you must configure the <a href='https://stripe.com' target='_blank'>Stripe</a> API keys.</p><p>Retrieve them from <a href='https://dashboard.stripe.com/account/apikeys' target='_blank'>your dashboard</a>.</p>"
+          public_key: "Public key"
+          secret_key: "Secret key"
+          error_check_keys: "Error: please check your Stripe keys."
+          stripe_keys_saved: "Stripe keys successfully saved."
+          error_saving_stripe_keys: "Unable to save the Stripe keys. Please try again later."
+          edit_keys: "Edit keys"
       #management of users, labels, groups, and so on
       members:
         users_management: "Users management"
@@ -1087,6 +1095,7 @@ en:
         openlab_app_id: "OpenLab ID"
         openlab_app_secret: "OpenLab secret"
         openlab_default: "default gallery view"
+        online_payment_module: "online payment module"
         general:
           general: "General"
           title: "Title"

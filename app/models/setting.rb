@@ -96,7 +96,11 @@ class Setting < ApplicationRecord
                              openlab_app_id
                              openlab_app_secret
                              openlab_default
-                             online_payment_module] }
+                             online_payment_module
+                             stripe_public_key
+                             stripe_secret_key] }
+  # WARNING: when adding a new key, you may also want to add it in app/policies/setting_policy.rb#public_whitelist
+
   def value
     last_value = history_values.order(HistoryValue.arel_table['created_at'].desc).first
     last_value&.value

@@ -10,8 +10,86 @@
                        settings="allSettings"
                        label="app.admin.invoices.payment.enable_online_payment"
                        classes="m-l"
+                       on-before-save="requireStripeKeys"
                        fa-icon="fa-font">
       </boolean-setting>
     </div>
+    <div class="row m-t" ng-show="allSettings.online_payment_module === 'true'">
+      <h3 class="m-l" translate>{{ 'app.admin.invoices.payment.stripe_keys' }}</h3>
+      <div class="col-md-4 m-l">
+        <label for="stripe_public_key" class="control-label">{{ 'app.admin.invoices.payment.public_key' | translate }}</label>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-info"></i></span>
+          <input type="text"
+                 class="form-control"
+                 id="stripe_public_key"
+                 ng-model="allSettings.stripe_public_key"
+                 readonly>
+        </div>
+      </div>
+      <div class="col-md-4 col-md-offset-1">
+        <label for="stripe_secret_key" class="control-label">{{ 'app.admin.invoices.payment.secret_key' | translate }}</label>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-key"></i></span>
+          <input type="password"
+                 class="form-control"
+                 id="stripe_secret_key"
+                 ng-model="stripeSecretKey"
+                 readonly>
+        </div>
+      </div>
+      <div class="col-md-1">
+        <button class="btn btn-default m-t-lg" ng-click="requireStripeKeys(allSettings.online_payment_module)" translate>{{ 'app.admin.invoices.payment.edit_keys' }}</button>
+      </div>
+    </div>
   </div>
 </div>
+
+<script type="text/ng-template" id="stripeKeys.html">
+  <div>
+    <div class="modal-header">
+      <h3 class="modal-title" translate>{{ 'app.admin.invoices.payment.stripe_keys' }}</h3>
+    </div>
+    <div class="modal-body">
+      <div class="alert alert-info" ng-bind-html="'app.admin.invoices.payment.stripe_keys_info_html' | translate"></div>
+      <div class="row m-md">
+        <label for="stripe_public_key" class="control-label">{{ 'app.admin.invoices.payment.public_key' | translate }} *</label>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-info"></i></span>
+          <input type="text"
+                 class="form-control"
+                 id="stripe_public_key"
+                 ng-model="publicKey"
+                 ng-model-options='{ debounce: 200 }'
+                 ng-change='testPublicKey()'
+                 required>
+          <span class="input-group-addon" ng-class="{'label-success': publicKeyStatus, 'label-danger text-white': !publicKeyStatus}" ng-show="publicKeyStatus !== undefined && publicKey">
+            <i class="fa fa-times" ng-show="!publicKeyStatus"></i>
+            <i class="fa fa-check" ng-show="publicKeyStatus"></i>
+          </span>
+        </div>
+      </div>
+      <div class="row m-md">
+        <label for="stripe_secret_key" class="control-label">{{ 'app.admin.invoices.payment.secret_key' | translate }} *</label>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-key"></i></span>
+          <input type="text"
+                 class="form-control"
+                 id="stripe_secret_key"
+                 ng-model="secretKey"
+                 ng-model-options='{ debounce: 200 }'
+                 ng-change='testSecretKey()'
+                 required>
+          <span class="input-group-addon" ng-class="{'label-success': secretKeyStatus, 'label-danger text-white': !secretKeyStatus}" ng-show="secretKeyStatus !== undefined && secretKey">
+            <i class="fa fa-times" ng-show="!secretKeyStatus"></i>
+            <i class="fa fa-check" ng-show="secretKeyStatus"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-warning" ng-click="ok()" translate>{{ 'app.shared.buttons.confirm' }}</button>
+      <button class="btn btn-default" ng-click="cancel()" translate>{{ 'app.shared.buttons.cancel' }}</button>
+    </div>
+  </div>
+</script>

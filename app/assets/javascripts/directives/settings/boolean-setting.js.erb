@@ -8,7 +8,8 @@ Application.Directives.directive('booleanSetting', ['Setting', 'growl', '_t',
         settings: '=',
         yesLabel: '@',
         noLabel: '@',
-        classes: '@'
+        classes: '@',
+        onBeforeSave: '='
       },
       templateUrl: '<%= asset_path "admin/settings/boolean.html" %>',
       link ($scope, element, attributes) {
@@ -27,6 +28,32 @@ Application.Directives.directive('booleanSetting', ['Setting', 'growl', '_t',
          * @param setting {{value:*, name:string}} note that the value will be stringified
          */
         $scope.save = function (setting) {
+          if (typeof $scope.onBeforeSave === 'function') {
+            const res = $scope.onBeforeSave(setting);
+            if (res && _.isFunction(res.then)) {
+              // res is a promise, wait for it before proceed
+              res.then(function (success) {
+                if (success) saveValue(setting);
+                else resetValue();
+              }, function () {
+                resetValue();
+              });
+            } else {
+              if (res) saveValue(setting);
+              else resetValue();
+            }
+          } else {
+            saveValue(setting);
+          }
+        };
+
+        /* PRIVATE SCOPE */
+
+        /**
+         * Save the setting's new value in DB
+         * @param setting
+         */
+        const saveValue = function (setting) {
           const value = setting.value.toString();
 
           Setting.update(
@@ -43,7 +70,14 @@ Application.Directives.directive('booleanSetting', ['Setting', 'growl', '_t',
               console.log(error);
             }
           );
-        };
+        }
+
+        /**
+         * Reset the value of the setting to its original state (when the component loads)
+         */
+        const resetValue = function () {
+          $scope.setting.value = $scope.settings[$scope.name] === 'true';
+        }
       }
     });
   }

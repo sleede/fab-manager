@@ -17,8 +17,8 @@
 /**
  * Controller used in the admin invoices listing page
  */
-Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'Invoice', 'AccountingPeriod', 'AuthService', 'invoices', 'closedPeriods', '$uibModal', 'growl', '$filter', 'Setting', 'settings', '_t', 'Member', 'uiTourService',
-  function ($scope, $state, Invoice, AccountingPeriod, AuthService, invoices, closedPeriods, $uibModal, growl, $filter, Setting, settings, _t, Member, uiTourService) {
+Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'Invoice', 'AccountingPeriod', 'AuthService', 'invoices', 'closedPeriods', '$uibModal', 'growl', '$filter', 'Setting', 'settings', 'stripeSecretKey', '_t', 'Member', 'uiTourService',
+  function ($scope, $state, Invoice, AccountingPeriod, AuthService, invoices, closedPeriods, $uibModal, growl, $filter, Setting, settings, stripeSecretKey, _t, Member, uiTourService) {
   /* PRIVATE STATIC CONSTANTS */
 
     // number of invoices loaded each time we click on 'load more...'
@@ -171,6 +171,9 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
 
     // all settings
     $scope.allSettings = settings;
+
+    // is the stripe private set?
+    $scope.stripeSecretKey = stripeSecretKey.isPresent;
 
     // Placeholding date for the invoice creation
     $scope.today = moment();
@@ -585,6 +588,39 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       if (!invoice.operator) return '';
 
       return `${invoice.operator.first_name} ${invoice.operator.last_name}`;
+    }
+
+    /**
+     * Open a modal dialog which ask for the stripe keys
+     * @param onlinePaymentModule {{name: String, value: String}} setting that defines the next status of the online payment module
+     * @return {boolean} false if the keys were not provided
+     */
+    $scope.requireStripeKeys = function(onlinePaymentModule) {
+      // if the online payment is about to be disabled, accept the change without any further question
+      if (onlinePaymentModule.value === false) return true;
+
+      // otherwise, open a modal to ask for the stripe keys
+      const modalInstance = $uibModal.open({
+        templateUrl: 'stripeKeys.html',
+        controller: 'StripeKeysModalController',
+        resolve: {
+          stripeKeys: ['Setting', function (Setting) { return Setting.query({ names: "['stripe_public_key', 'stripe_secret_key']" }).$promise; }]
+        }
+      });
+
+      modalInstance.result.then(function (success) {
+        if (success) {
+          Setting.get({ name: 'stripe_public_key' }, function (res) {
+            $scope.allSettings.stripe_public_key = res.setting.value;
+          })
+          Setting.isPresent({ name: 'stripe_private_key' }, function (res) {
+            $scope.stripeSecretKey = res.isPresent;
+          })
+        }
+      })
+
+      // return the promise
+      return modalInstance.result;
     }
 
     /**
@@ -1212,3 +1248,131 @@ Application.Controllers.controller('AccountingExportModalController', ['$scope',
   // !!! MUST BE CALLED AT THE END of the controller
   return initialize();
 }]);
+
+
+
+/**
+ * Controller used in the modal window allowing an admin to close an accounting period
+ */
+Application.Controllers.controller('StripeKeysModalController', ['$scope', '$uibModalInstance', '$http', '$httpParamSerializerJQLike', 'stripeKeys', 'Setting', 'growl', '_t',
+  function ($scope, $uibModalInstance, $http, $httpParamSerializerJQLike, stripeKeys, Setting, growl, _t) {
+    /* PUBLIC SCOPE */
+
+    // public key
+    $scope.publicKey = stripeKeys.stripe_public_key;
+
+    // test status of the public key
+    $scope.publicKeyStatus = undefined;
+
+    // secret key
+    $scope.secretKey = stripeKeys.stripe_secret_key;
+
+    // test status of the secret key
+    $scope.secretKeyStatus = undefined;
+
+    /**
+     * Trigger the test of the secret key and set the result in $scope.secretKeyStatus
+     */
+    $scope.testSecretKey = function () {
+      if (!$scope.secretKey.match(/^sk_/)) {
+        $scope.secretKeyStatus = false;
+        return;
+      }
+      $http({
+        method: 'GET',
+        url: 'https://api.stripe.com/v1/charges',
+        headers: {
+          Authorization: `Bearer ${$scope.secretKey}`,
+        }
+      }).then(function () {
+        $scope.secretKeyStatus = true;
+      }, function (err) {
+        if (err.status === 401) $scope.secretKeyStatus = false;
+      });
+    }
+
+
+    /**
+     * Trigger the test of the secret key and set the result in $scope.secretKeyStatus
+     */
+    $scope.testPublicKey = function () {
+      if (!$scope.publicKey.match(/^pk_/)) {
+        $scope.publicKeyStatus = false;
+        return;
+      }
+      const today = new Date();
+      $http({
+        method: 'POST',
+        url: 'https://api.stripe.com/v1/tokens',
+        headers: {
+          Authorization: `Bearer ${$scope.publicKey}`,
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        data: $httpParamSerializerJQLike({
+          'card[number]': 4242424242424242,
+          'card[cvc]': 123,
+          'card[exp_month]': 12,
+          'card[exp_year]': today.getFullYear().toString().substring(2),
+        })
+      }).then(function () {
+        $scope.publicKeyStatus = true;
+      }, function (err) {
+        if (err.status === 401) $scope.publicKeyStatus = false;
+      });
+    }
+
+    /**
+     * Validate the keys
+     */
+    $scope.ok = function () {
+      if ($scope.secretKeyStatus && $scope.publicKeyStatus) {
+        Setting.bulkUpdate(
+          { settings: [
+              {
+                name: 'stripe_public_key',
+                value: $scope.publicKey
+              },
+              {
+                name: 'stripe_secret_key',
+                value: $scope.secretKey
+              }
+            ] },
+          function () {
+            growl.success(_t('app.admin.invoices.payment.stripe_keys_saved'));
+            $uibModalInstance.close(true);
+          },
+          function (error) {
+            growl.error('app.admin.invoices.payment.error_saving_stripe_keys');
+            console.error(error);
+          }
+        );
+      } else {
+        growl.error(_t('app.admin.invoices.payment.error_check_keys'))
+      }
+    };
+
+    /**
+     * Just dismiss the modal window
+     */
+    $scope.cancel = function () {
+      $uibModalInstance.dismiss('cancel');
+    };
+
+    /* PRIVATE SCOPE */
+
+    /**
+     * Kind of constructor: these actions will be realized first when the controller is loaded
+     */
+    const initialize = function () {
+      if (stripeKeys.stripe_public_key) {
+        $scope.testPublicKey();
+      }
+      if (stripeKeys.stripe_secret_key) {
+        $scope.testSecretKey();
+      }
+    };
+
+    // !!! MUST BE CALLED AT THE END of the controller!
+    return initialize();
+  }
+]);

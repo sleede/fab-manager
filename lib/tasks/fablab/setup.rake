@@ -126,7 +126,9 @@ namespace :fablab do
         %w[_ OPENLAB_APP_ID openlab_app_id],
         %w[_ OPENLAB_APP_SECRET openlab_app_secret],
         %w[_ OPENLAB_DEFAULT openlab_default],
-        %w[! FABLAB_WITHOUT_ONLINE_PAYMENT online_payment_module false]
+        %w[! FABLAB_WITHOUT_ONLINE_PAYMENT online_payment_module false],
+        %w[_ STRIPE_PUBLISHABLE_KEY stripe_public_key],
+        %w[_ STRIPE_API_KEY stripe_secret_key]
       ]
 
       mapping.each do |m|
