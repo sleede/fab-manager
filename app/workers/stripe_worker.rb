@@ -5,6 +5,8 @@ class StripeWorker
   include Sidekiq::Worker
   sidekiq_options queue: :stripe
 
+  LOGGER = Sidekiq.logger.level == Logger::DEBUG ? Sidekiq.logger : nil
+
   def perform(action, *params)
     send(action, *params)
   end
@@ -40,5 +42,20 @@ class StripeWorker
   def delete_stripe_coupon(coupon_code)
     cpn = Stripe::Coupon.retrieve(coupon_code)
     cpn.delete
+  end
+
+  def sync_members
+    LOGGER&.debug ['StripeWorker', 'SyncMembers', 'We create all non-existing customers on stripe. This may take a while...']
+    total = User.online_payers.count
+    User.online_payers.each_with_index do |member, index|
+      LOGGER&.debug ['StripeWorker', 'SyncMembers' "#{index} / #{total}"]
+      begin
+        stp_customer = Stripe::Customer.retrieve member.stp_customer_id
+        create_stripe_customer(member.id) if stp_customer.nil? || stp_customer[:deleted]
+      rescue Stripe::InvalidRequestError
+        create_stripe_customer(member.id)
+      end
+    end
+    LOGGER&.debug ['StripeWorker', 'SyncMembers', 'Sync is done']
   end
 end

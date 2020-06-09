@@ -620,7 +620,7 @@ en:
           online_payment_info_html: "You can enable your members to book directly online, paying by card. Alternatively, you can restrict the booking and payment processes for administrators and managers."
           enable_online_payment: "Enable online payment"
           stripe_keys: "Stripe keys"
-          stripe_keys_info_html: "<p>To be able to collect online payments, you must configure the <a href='https://stripe.com' target='_blank'>Stripe</a> API keys.</p><p>Retrieve them from <a href='https://dashboard.stripe.com/account/apikeys' target='_blank'>your dashboard</a>.</p>"
+          stripe_keys_info_html: "<p>To be able to collect online payments, you must configure the <a href='https://stripe.com' target='_blank'>Stripe</a> API keys.</p><p>Retrieve them from <a href='https://dashboard.stripe.com/account/apikeys' target='_blank'>your dashboard</a>.</p><p>Updating these keys will trigger a synchronization of all users on Stripe, this may take some time. You'll receive a notification when it's done.</p>"
           public_key: "Public key"
           secret_key: "Secret key"
           error_check_keys: "Error: please check your Stripe keys."

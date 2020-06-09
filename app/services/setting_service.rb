@@ -11,5 +11,8 @@ class SettingService
 
     # notify about a change in privacy policy
     NotifyPrivacyUpdateWorker.perform_async(id) if setting.name == 'privacy_body'
+
+    # sync all users on stripe
+    StripeWorker.perform_async(:sync_members) if %w[stripe_public_key stripe_secret_key].include? setting.name
   end
 end

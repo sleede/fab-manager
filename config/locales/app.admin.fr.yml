@@ -620,7 +620,7 @@ fr:
           online_payment_info_html: "Vous pouvez permettre à vos membres de réserver directement en ligne, en payment par carte bancaire. De manière alternative, vous pouvez restreindre les processus de réservation et de paiement aux administrateurs et aux gestionnaires."
           enable_online_payment: "Activer le paiement en ligne"
           stripe_keys: "Clefs Stripe"
-          stripe_keys_info_html: "<p>Pour pouvoir encaisser des paiements en ligne, vous devez configurer les clefs d'API <a href='https://stripe.com' target='_blank'>Stripe</a>.</p><p>Retrouvez les dans <a href='https://dashboard.stripe.com/account/apikeys' target='_blank'>votre tableau de bord</a>.</p>"
+          stripe_keys_info_html: "<p>Pour pouvoir encaisser des paiements en ligne, vous devez configurer les clefs d'API <a href='https://stripe.com' target='_blank'>Stripe</a>.</p><p>Retrouvez les dans <a href='https://dashboard.stripe.com/account/apikeys' target='_blank'>votre tableau de bord</a>.</p><p>Mettre à jour ces clefs entrainera une synchronisation de tous les utilisateurs vers Stripe, ceci peut prendre du temps. Vous recevrez une notification lorsque cela sera terminé.</p>"
           public_key: "Clef publique"
           secret_key: "Clef secrète"
           error_check_keys: "Erreur : veuillez vérifier vos clefs Stripe."
