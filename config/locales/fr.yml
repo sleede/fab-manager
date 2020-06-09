@@ -340,6 +340,8 @@ fr:
         your_role_is_ROLE: "Votre rôle a été changé en %{ROLE}."
       notify_admins_role_update:
         user_NAME_changed_ROLE_html: "L'utilisateur <strong><em>%{NAME}</strong></em> est maintenant %{ROLE}."
+      notify_admin_members_stripe_sync:
+        all_members_sync: "Tous les membres ont été synchronisés sur Stripe avec succès."
   #statistics tools for admins
   statistics:
     subscriptions: "Abonnements"

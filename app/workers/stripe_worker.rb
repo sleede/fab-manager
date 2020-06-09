@@ -57,5 +57,10 @@ class StripeWorker
       end
     end
     LOGGER&.debug ['StripeWorker', 'SyncMembers', 'Sync is done']
+    notify_user = Setting.find_by(name: 'stripe_secret_key')&.history_values&.last&.invoicing_profile&.user
+    return unless notify_user
+
+    NotificationCenter.call type: :notify_admin_members_stripe_sync,
+                            receiver: notify_user
   end
 end
