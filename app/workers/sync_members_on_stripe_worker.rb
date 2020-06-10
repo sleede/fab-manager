@@ -21,7 +21,9 @@ class SyncMembersOnStripeWorker
     return unless notify_user_id
 
     logger.debug "Notify user #{notify_user_id}"
+    user = User.find(notify_user_id)
     NotificationCenter.call type: :notify_admin_members_stripe_sync,
-                            receiver: User.find(notify_user_id)
+                            receiver: user,
+                            attached_object: user
   end
 end
