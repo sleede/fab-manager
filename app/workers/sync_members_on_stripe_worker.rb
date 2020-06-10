@@ -12,9 +12,9 @@ class SyncMembersOnStripeWorker
       logger.debug "#{index} / #{total}"
       begin
         stp_customer = Stripe::Customer.retrieve(member.stp_customer_id, api_key: Setting.get('stripe_secret_key'))
-        StripeWorker.perform(:create_stripe_customer, member.id) if stp_customer.nil? || stp_customer[:deleted]
+        StripeWorker.new.create_stripe_customer(member.id) if stp_customer.nil? || stp_customer[:deleted]
       rescue Stripe::InvalidRequestError
-        StripeWorker.perform(:create_stripe_customer, member.id)
+        StripeWorker.new.create_stripe_customer(member.id)
       end
     end
     logger.debug 'Sync is done'

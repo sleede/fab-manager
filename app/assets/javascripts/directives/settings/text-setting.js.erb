@@ -10,7 +10,10 @@ Application.Directives.directive('textSetting', ['Setting', 'growl', '_t',
         faIcon: '@',
         placeholder: '@',
         required: '<',
-        type: '@'
+        type: '@',
+        maxLength: '@',
+        minLength: '@',
+        readOnly: '<'
       },
       templateUrl: '<%= asset_path "admin/settings/text.html" %>',
       link ($scope, element, attributes) {

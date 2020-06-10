@@ -400,3 +400,9 @@ setting_68:
   name: stripe_secret_key
   created_at: 2020-06-08 17:12:16.846525000 Z
   updated_at: 2020-06-08 17:12:16.846525000 Z
+
+setting_69:
+  id: 69
+  name: stripe_currency
+  created_at: 2020-06-08 17:12:16.846525000 Z
+  updated_at: 2020-06-08 17:12:16.846525000 Z

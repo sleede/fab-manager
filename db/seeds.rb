@@ -880,6 +880,8 @@ unless Setting.find_by(name: 'allowed_cad_mime_types').try(:value)
   )
 end
 
+Setting.set('stripe_currency', 'EUR') unless Setting.find_by(name: 'stripe_currency').try(:value)
+
 if StatisticCustomAggregation.count.zero?
   # available reservations hours for machines
   machine_hours = StatisticType.find_by(key: 'hour', statistic_index_id: 2)

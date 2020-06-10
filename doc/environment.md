@@ -51,16 +51,6 @@ When using docker-compose, you should provide the name of the service in your [d
 Used by the authentication system to generate random tokens, eg. for resetting passwords.
 Used by Rails to verify the integrity of signed cookies.
 You can generate such a random key by running `rails secret`.
-<a name="STRIPE_CURRENCY"></a>
-
-    STRIPE_CURRENCY
-
-Currency used by stripe to charge the final customer.
-See https://support.stripe.com/questions/which-currencies-does-stripe-support for a list of available 3-letters ISO code.
-
-**BEWARE**: stripe currency cannot be changed during the application life.
-Changing the currency after the application has already run, may result in several bugs and prevent the users to pay through stripe.
-So set this setting carefully before starting the application for the first time.
 <a name="INVOICE_PREFIX"></a>
 
     INVOICE_PREFIX

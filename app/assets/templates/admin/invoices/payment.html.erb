@@ -42,6 +42,23 @@
         <button class="btn btn-default m-t-lg" ng-click="requireStripeKeys(allSettings.online_payment_module)" translate>{{ 'app.admin.invoices.payment.edit_keys' }}</button>
       </div>
     </div>
+    <div class="row m-t" ng-show="allSettings.online_payment_module === 'true'">
+      <h3 class="m-l" translate>{{ 'app.admin.invoices.payment.currency' }}</h3>
+      <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.invoices.payment.currency_info_html' | translate"></p>
+      <p class="alert alert-danger m-h-md" ng-bind-html="'app.admin.invoices.payment.currency_alert_html' | translate"></p>
+      <div class="col-md-4 m-l">
+        <text-setting name="stripe_currency"
+                      settings="allSettings"
+                      label="app.admin.invoices.payment.stripe_currency"
+                      fa-icon="fa-money"
+                      placeholder="XXX"
+                      required="true"
+                      min-length="3"
+                      max-length="3"
+                      read-only="onlinePaymentStatus">
+        </text-setting>
+      </div>
+    </div>
   </div>
 </div>
 

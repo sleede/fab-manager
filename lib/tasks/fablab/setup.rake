@@ -128,7 +128,8 @@ namespace :fablab do
         %w[_ OPENLAB_DEFAULT openlab_default],
         %w[! FABLAB_WITHOUT_ONLINE_PAYMENT online_payment_module false],
         %w[_ STRIPE_PUBLISHABLE_KEY stripe_public_key],
-        %w[_ STRIPE_API_KEY stripe_secret_key]
+        %w[_ STRIPE_API_KEY stripe_secret_key],
+        %w[_ STRIPE_CURRENCY stripe_currency]
       ]
 
       mapping.each do |m|

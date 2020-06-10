@@ -98,7 +98,8 @@ class Setting < ApplicationRecord
                              openlab_default
                              online_payment_module
                              stripe_public_key
-                             stripe_secret_key] }
+                             stripe_secret_key
+                             stripe_currency] }
   # WARNING: when adding a new key, you may also want to add it in app/policies/setting_policy.rb#public_whitelist
 
   def value

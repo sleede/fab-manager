@@ -27,7 +27,7 @@ class API::PaymentsController < API::ApiController
           {
             payment_method: params[:payment_method_id],
             amount: amount[:amount],
-            currency: Rails.application.secrets.stripe_currency,
+            currency: Setting.get('stripe_currency'),
             confirmation_method: 'manual',
             confirm: true,
             customer: current_user.stp_customer_id
@@ -54,6 +54,16 @@ class API::PaymentsController < API::ApiController
     end
 
     render generate_payment_response(intent, res)
+  end
+
+  def online_payment_status
+    authorize :payment
+
+    key = Setting.get('stripe_secret_key')
+    render json: { status: false } and return unless key
+
+    charges = Stripe::Charge.list({ limit: 1 }, { api_key: key })
+    render json: { status: charges.data.length.positive? }
   end
 
   private

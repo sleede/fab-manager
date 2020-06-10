@@ -627,6 +627,10 @@ fr:
           stripe_keys_saved: "Les clefs Stripe ont bien été enregistrées."
           error_saving_stripe_keys: "Impossible d'enregitrer les clefs Stripe. Veuillez réessayer ultérieurement."
           edit_keys: "Modifier les clefs"
+          currency: "Devise"
+          currency_info_html: "Veuillez indiquer la devise à utiliser lors des paiements en ligne. Vous devez fournir un code ISO à trois lettres, issu de la liste des <a href='https://stripe.com/docs/currencies' target='_blank'>devises supportées par Stripe</a>."
+          currency_alert_html: "<strong>Attention</strong> : la devise ne peut pas être modifiée après que le premier payment en ligne ait été effectué. Veuillez définir attentivement ce paramètre avant d'ouvrir Fab-manager à vos members."
+          stripe_currency: "Devise Stripe"
       #management of users, labels, groups, and so on
       members:
         users_management: "Gestion des utilisateurs"
@@ -1096,6 +1100,7 @@ fr:
         openlab_app_secret: "secret OpenLab"
         openlab_default: "l'affichage par défaut de la galerie"
         online_payment_module: "module de paiement en ligne"
+        stripe_currency: "la devise Stripe"
         general:
           general: "Général"
           title: "Titre"

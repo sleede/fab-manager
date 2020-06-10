@@ -17,8 +17,8 @@
 /**
  * Controller used in the admin invoices listing page
  */
-Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'Invoice', 'AccountingPeriod', 'AuthService', 'invoices', 'closedPeriods', '$uibModal', 'growl', '$filter', 'Setting', 'settings', 'stripeSecretKey', '_t', 'Member', 'uiTourService',
-  function ($scope, $state, Invoice, AccountingPeriod, AuthService, invoices, closedPeriods, $uibModal, growl, $filter, Setting, settings, stripeSecretKey, _t, Member, uiTourService) {
+Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'Invoice', 'AccountingPeriod', 'AuthService', 'invoices', 'closedPeriods', '$uibModal', 'growl', '$filter', 'Setting', 'settings', 'stripeSecretKey', '_t', 'Member', 'uiTourService', 'Payment', 'onlinePaymentStatus',
+  function ($scope, $state, Invoice, AccountingPeriod, AuthService, invoices, closedPeriods, $uibModal, growl, $filter, Setting, settings, stripeSecretKey, _t, Member, uiTourService, Payment, onlinePaymentStatus) {
   /* PRIVATE STATIC CONSTANTS */
 
     // number of invoices loaded each time we click on 'load more...'
@@ -177,6 +177,9 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
 
     // is the stripe private set?
     $scope.stripeSecretKey = (stripeSecretKey.isPresent ? STRIPE_SK_HIDDEN : '');
+
+    // has any online payment been already made?
+    $scope.onlinePaymentStatus = onlinePaymentStatus.status;
 
     // Placeholding date for the invoice creation
     $scope.today = moment();
@@ -619,6 +622,9 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           Setting.isPresent({ name: 'stripe_secret_key' }, function (res) {
             $scope.stripeSecretKey = (res.isPresent ? STRIPE_SK_HIDDEN : '');
           })
+          Payment.onlinePaymentStatus(function (res) {
+            $scope.onlinePaymentStatus = res.status;
+          });
         }
       })
 
