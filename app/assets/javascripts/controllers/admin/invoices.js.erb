@@ -53,6 +53,13 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     // Default invoices ordering/sorting
     $scope.orderInvoice = '-reference';
 
+    // Invoice PDF filename settings (and example)
+    $scope.file = {
+      prefix: 'Fablab_demo-facture',
+      nextId: 40,
+      date: moment().format('DDMMYYYY')
+    }
+
     // Invoices parameters
     $scope.invoice = {
       logo: null,

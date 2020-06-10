@@ -2,6 +2,10 @@
   <i class="fa fa-warning m-r"></i>
   <span translate>{{ 'app.admin.invoices.warning_invoices_disabled' }}</span>
 </div>
+<div class="invoice-file">
+  <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+  <span class="filename"><span class="prefix">{{file.prefix}}</span>-{{file.nextId}}_{{file.date}}.pdf</span>
+</div>
 <form class="invoice-placeholder">
   <div class="invoice-logo">
     <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:FontAwesome/icon" bs-holder ng-if="!invoice.logo" class="img-responsive">
