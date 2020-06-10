@@ -16,7 +16,7 @@ wb.add_worksheet(name: t('export_availabilities.machines')) do |sheet|
 
   # data rows
   @availabilities.where(available_type: 'machines').order(:start_at).each do |a|
-    slot_duration = a.slot_duration || Setting.get('slot_duration')
+    slot_duration = a.slot_duration || Setting.get('slot_duration').to_i
     a.machines.each do |m|
       ((a.end_at - a.start_at) / slot_duration.minutes).to_i.times do |i|
         start_at = a.start_at + (i * slot_duration).minutes
@@ -84,7 +84,7 @@ if Setting.get('spaces_module')
 
     # data rows
     @availabilities.where(available_type: 'space').order(:start_at).each do |a|
-      slot_duration = a.slot_duration || Setting.get('slot_duration')
+      slot_duration = a.slot_duration || Setting.get('slot_duration').to_i
       ((a.end_at - a.start_at) / slot_duration.minutes).to_i.times do |i|
         start_at = a.start_at + (i * slot_duration).minutes
         end_at = a.start_at + (i * slot_duration).minutes + slot_duration.minutes

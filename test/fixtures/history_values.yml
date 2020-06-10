@@ -598,7 +598,7 @@ history_value_62:
   id: 62
   setting_id: 62
   invoicing_profile_id: 1
-  value: 'false'
+  value: 'true'
   created_at: 2020-06-01 11:12:21.255550000 Z
   updated_at: 2020-06-01 11:12:21.255550000 Z
   footprint:
