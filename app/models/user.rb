@@ -178,7 +178,7 @@ class User < ApplicationRecord
   end
 
   def stripe_customer
-    Stripe::Customer.retrieve stp_customer_id
+    Stripe::Customer.retrieve(stp_customer_id, api_key: Setting.get('stripe_secret_key'))
   end
 
   def active_for_authentication?

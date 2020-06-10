@@ -94,7 +94,7 @@ module Events
       assert_invoice_pdf invoice
 
       VCR.use_cassette('reserve_event_with_many_prices_and_payment_means_retrieve_invoice_from_stripe') do
-        stp_intent = Stripe::PaymentIntent.retrieve(invoice.stp_payment_intent_id)
+        stp_intent = Stripe::PaymentIntent.retrieve(invoice.stp_payment_intent_id, api_key: Setting.get('stripe_secret_key'))
         assert_equal stp_intent.amount, (invoice.total - invoice.wallet_amount) # total minus coupon minus wallet = amount really payed by the user
       end
 

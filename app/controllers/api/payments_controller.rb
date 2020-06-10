@@ -24,15 +24,17 @@ class API::PaymentsController < API::ApiController
 
         # Create the PaymentIntent
         intent = Stripe::PaymentIntent.create(
-          payment_method: params[:payment_method_id],
-          amount: amount[:amount],
-          currency: Rails.application.secrets.stripe_currency,
-          confirmation_method: 'manual',
-          confirm: true,
-          customer: current_user.stp_customer_id
+          {
+            payment_method: params[:payment_method_id],
+            amount: amount[:amount],
+            currency: Rails.application.secrets.stripe_currency,
+            confirmation_method: 'manual',
+            confirm: true,
+            customer: current_user.stp_customer_id
+          }, { api_key: Setting.get('stripe_secret_key') }
         )
       elsif params[:payment_intent_id].present?
-        intent = Stripe::PaymentIntent.confirm(params[:payment_intent_id])
+        intent = Stripe::PaymentIntent.confirm(params[:payment_intent_id], api_key: Setting.get('stripe_secret_key'))
       end
     rescue Stripe::CardError => e
       # Display error on client
@@ -62,7 +64,8 @@ class API::PaymentsController < API::ApiController
                                       .pay_and_save(@reservation, payment_details: details, payment_intent_id: intent.id)
     Stripe::PaymentIntent.update(
       intent.id,
-      description: "Invoice reference: #{@reservation.invoice.reference}"
+      { description: "Invoice reference: #{@reservation.invoice.reference}" },
+      { api_key: Setting.get('stripe_secret_key') }
     )
 
     if is_reserve
@@ -81,7 +84,8 @@ class API::PaymentsController < API::ApiController
 
     Stripe::PaymentIntent.update(
       intent.id,
-      description: "Invoice reference: #{@subscription.invoices.first.reference}"
+      { description: "Invoice reference: #{@subscription.invoices.first.reference}" },
+      { api_key: Setting.get('stripe_secret_key') }
     )
 
     if is_subscribe
