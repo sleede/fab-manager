@@ -40,7 +40,7 @@ namespace :fablab do
       Dir['test/vcr_cassettes/*.yml'].each do |cassette_file|
         cassette = File.read(cassette_file)
         cassette = cassette.gsub(Rails.application.secrets.stripe_api_key, 'sk_test_testfaketestfaketestfake')
-        cassette = cassette.gsub(Rails.application.secrets.stripe_publishable_key, 'pk_test_faketestfaketestfaketest')
+        cassette = cassette.gsub(Setting.get('stripe_public_key'), 'pk_test_faketestfaketestfaketest')
         puts cassette
         File.write(cassette_file, cassette)
       end

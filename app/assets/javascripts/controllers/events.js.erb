@@ -698,10 +698,11 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
           },
           cartItems () {
             return mkRequestParams(reservation, $scope.coupon.applied);
-          }
+          },
+          stripeKey: ['Setting', function (Setting) { return Setting.get({ name: 'stripe_public_key' }).$promise; }]
         },
-        controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'cgv', 'Auth', 'Reservation', 'growl', 'wallet', 'helpers', '$filter', 'coupon', 'cartItems',
-          function ($scope, $uibModalInstance, $state, reservation, price, cgv, Auth, Reservation, growl, wallet, helpers, $filter, coupon, cartItems) {
+        controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'cgv', 'Auth', 'Reservation', 'growl', 'wallet', 'helpers', '$filter', 'coupon', 'cartItems', 'stripeKey',
+          function ($scope, $uibModalInstance, $state, reservation, price, cgv, Auth, Reservation, growl, wallet, helpers, $filter, coupon, cartItems, stripeKey) {
             // User's wallet amount
             $scope.walletAmount = wallet.amount;
 
@@ -720,8 +721,11 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
             // Used in wallet info template to interpolate some translations
             $scope.numberFilter = $filter('number');
 
+            // stripe publishable key
+            $scope.stripeKey = stripeKey.setting.value;
+
             // Callback to handle the post-payment and reservation
-            return $scope.onPaymentSuccess = function (reservation) {
+            $scope.onPaymentSuccess = function (reservation) {
               $uibModalInstance.close(reservation);
             };
           }

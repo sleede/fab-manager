@@ -13,10 +13,6 @@ class SettingService
     NotifyPrivacyUpdateWorker.perform_async(id) if setting.name == 'privacy_body'
 
     # sync all users on stripe
-    return unless %w[stripe_public_key stripe_secret_key].include? setting.name
-
-    SyncMembersOnStripeWorker.perform_async(
-      setting.history_values.last&.invoicing_profile&.user&.id
-    )
+    SyncMembersOnStripeWorker.perform_async(setting.history_values.last&.invoicing_profile&.user&.id) if setting.name == 'stripe_secret_key'
   end
 end

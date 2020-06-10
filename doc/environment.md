@@ -51,9 +51,9 @@ When using docker-compose, you should provide the name of the service in your [d
 Used by the authentication system to generate random tokens, eg. for resetting passwords.
 Used by Rails to verify the integrity of signed cookies.
 You can generate such a random key by running `rails secret`.
-<a name="STRIPE_API_KEY"></a><a name="STRIPE_PUBLISHABLE_KEY"></a>
+<a name="STRIPE_API_KEY"></a>
 
-    STRIPE_API_KEY & STRIPE_PUBLISHABLE_KEY
+    STRIPE_API_KEY
 
 Key and secret used to identify you Stripe account through the API.
 Retrieve them from https://dashboard.stripe.com/account/apikeys.
@@ -64,7 +64,6 @@ If you change these keys during the application lifecycle, you must run `rails f
 
 Please note that Stripe have changed the naming of their keys. Here's the matching:
 `STRIPE_API_KEY` = secret key
-`STRIPE_PUBLISHABLE_KEY` = public key
 <a name="STRIPE_CURRENCY"></a>
 
     STRIPE_CURRENCY
