@@ -388,3 +388,15 @@ setting_66:
   name: online_payment_module
   created_at: 2020-06-08 17:12:16.846525000 Z
   updated_at: 2020-06-08 17:12:16.846525000 Z
+
+setting_67:
+  id: 67
+  name: stripe_public_key
+  created_at: 2020-06-08 17:12:16.846525000 Z
+  updated_at: 2020-06-08 17:12:16.846525000 Z
+
+setting_68:
+  id: 68
+  name: stripe_secret_key
+  created_at: 2020-06-08 17:12:16.846525000 Z
+  updated_at: 2020-06-08 17:12:16.846525000 Z
