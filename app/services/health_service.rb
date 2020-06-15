@@ -39,16 +39,16 @@ class HealthService
       admins: User.admins.count,
       availabilities: last_week_availabilities,
       reservations: last_week_new_reservations,
-      plans: !Rails.application.secrets.fablab_without_plans,
-      spaces: !Rails.application.secrets.fablab_without_spaces,
-      online_payment: !Rails.application.secrets.fablab_without_online_payments,
-      invoices: !Rails.application.secrets.fablab_without_invoices,
-      openlab: Rails.application.secrets.openlab_app_secret.present?
+      plans: Setting.get('plans_module'),
+      spaces: Setting.get('spaces_module'),
+      online_payment: Setting.get('online_payment_module'),
+      invoices: Setting.get('invoicing_module'),
+      openlab: Setting.get('openlab_app_secret').present?
     }
   end
 
   def self.stats
-    enable = Setting.find_by(name: 'fab_analytics')&.value
+    enable = Setting.get('fab_analytics')
     return false if enable == 'false'
 
     require 'openssl'
@@ -56,7 +56,7 @@ class HealthService
 
     row_stats.to_json.to_s
 
-    key = Setting.find_by(name: 'hub_public_key')&.value
+    key = Setting.get('hub_public_key')
     return false unless key
 
     public_key = OpenSSL::PKey::RSA.new(key)

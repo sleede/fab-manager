@@ -2,8 +2,6 @@
 
 # API Controller for resources of type Availability
 class API::AvailabilitiesController < API::ApiController
-  include FablabConfiguration
-
   before_action :authenticate_user!, except: [:public]
   before_action :set_availability, only: %i[show update reservations lock]
   before_action :define_max_visibility, only: %i[machine trainings spaces]
@@ -16,9 +14,9 @@ class API::AvailabilitiesController < API::ApiController
     @availabilities = Availability.includes(:machines, :tags, :trainings, :spaces)
                                   .where('start_at >= ? AND end_at <= ?', start_date, end_date)
 
-    @availabilities = @availabilities.where.not(available_type: 'event') unless Rails.application.secrets.events_in_calendar
+    @availabilities = @availabilities.where.not(available_type: 'event') unless Setting.get('events_in_calendar')
 
-    @availabilities = @availabilities.where.not(available_type: 'space') if fablab_spaces_deactivated?
+    @availabilities = @availabilities.where.not(available_type: 'space') unless Setting.get('spaces_module')
   end
 
   def public
@@ -193,7 +191,7 @@ class API::AvailabilitiesController < API::ApiController
   end
 
   def define_max_visibility
-    @visi_max_year = Setting.find_by(name: 'visibility_yearly').value.to_i.months.since
-    @visi_max_other = Setting.find_by(name: 'visibility_others').value.to_i.months.since
+    @visi_max_year = Setting.get('visibility_yearly').to_i.months.since
+    @visi_max_other = Setting.get('visibility_others').to_i.months.since
   end
 end

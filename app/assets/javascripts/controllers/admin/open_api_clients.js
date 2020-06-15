@@ -10,8 +10,8 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-Application.Controllers.controller('OpenAPIClientsController', ['$scope', 'clientsPromise', 'growl', 'OpenAPIClient', 'dialogs', '_t', 'Member', 'uiTourService',
-  function ($scope, clientsPromise, growl, OpenAPIClient, dialogs, _t, Member, uiTourService) {
+Application.Controllers.controller('OpenAPIClientsController', ['$scope', 'clientsPromise', 'settingsPromise', 'growl', 'OpenAPIClient', 'dialogs', '_t', 'Member', 'uiTourService',
+  function ($scope, clientsPromise, settingsPromise, growl, OpenAPIClient, dialogs, _t, Member, uiTourService) {
     /* PUBLIC SCOPE */
 
     // clients list
@@ -149,7 +149,7 @@ Application.Controllers.controller('OpenAPIClientsController', ['$scope', 'clien
         }
       });
       // if the user has never seen the tour, and if the display behavior is not configured to manual triggering only, show the tour now
-      if (Fablab.featureTourDisplay !== 'manual' && $scope.currentUser.profile.tours.indexOf('open-api') < 0) {
+      if (settingsPromise.feature_tour_display !== 'manual' && $scope.currentUser.profile.tours.indexOf('open-api') < 0) {
         uitour.start();
       }
     };

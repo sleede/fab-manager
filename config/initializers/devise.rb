@@ -11,13 +11,8 @@ Devise.setup do |config|
   # config.secret_key = 'f0ad7aadec8086b90c0427e734602262e5d211147f3d93b5b94b5263ffd245e9fd9fcd672dcadea1d9ee2b1bffbf2712cdb013883d66943ef5bed93a263fe11a'
 
   # ==> Mailer Configuration
-  # Configure the e-mail address which will be shown in Devise::Mailer,
-  # note that it will be overwritten if you use your own mailer class
-  # with default "from" parameter.
-  config.mailer_sender = ENV['DEFAULT_MAIL_FROM']
-
   # Configure the class responsible to send e-mails.
-  # config.mailer = 'Devise::Mailer'
+  config.mailer = 'OverwrittenDeviseMailer'
 
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and

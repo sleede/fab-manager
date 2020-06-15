@@ -7,7 +7,7 @@
     <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
 
     <div class="panel panel-default bg-light m-n">
-      <form name="stripeForm" stripe:form cart-items="cartItems" on-payment-success="onPaymentSuccess" class="form-horizontal">
+      <form name="stripeForm" stripe:form cart-items="cartItems" on-payment-success="onPaymentSuccess" stripe-key="{{stripeKey}}" class="form-horizontal">
         <div class="panel-body">
 
           <h3 class="m-t-xs" ng-if="walletAmount" ng-bind-html="'app.shared.wallet.you_have_amount_in_wallet' | translate:{ amount: numberFilter(walletAmount, 2), currency: currencySymbol }"></h3>

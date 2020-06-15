@@ -16,8 +16,9 @@ en:
       carrierwave_processing_error: "failed to be processed"
       carrierwave_integrity_error: "is not of an allowed file type"
       carrierwave_download_error: "could not be downloaded"
-      extension_white_list_error: "You are not allowed to upload %{extension} files, allowed types: %{allowed_types}"
-      extension_black_list_error: "You are not allowed to upload %{extension} files, prohibited types: %{prohibited_types}"
+      extension_whitelist_error: "You are not allowed to upload %{extension} files, allowed types: %{allowed_types}"
+      extension_blacklist_error: "You are not allowed to upload %{extension} files, prohibited types: %{prohibited_types}"
+      content_type_whitelist_error: "You are not allowed to upload %{content_type} files, allowed types: %{allowed_types}"
       rmagick_processing_error: "Failed to manipulate with rmagick, maybe it is not an image? Original Error: %{e}"
       mime_types_processing_error: "Failed to process file with MIME::Types, maybe not valid content-type? Original Error: %{e}"
       mini_magick_processing_error: "Failed to manipulate with MiniMagick, maybe it is not an image? Original Error: %{e}"
@@ -110,6 +111,7 @@ en:
     subscription_of_NAME_for_DURATION_starting_from_DATE: "Subscription of %{NAME} for %{DURATION} starting from %{DATE}"
     subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "Subscription of %{NAME} extended (Free days) starting from %{STARTDATE} until %{ENDDATE}"
     and: 'and'
+    invoice_text_example: "Our association is not subject to VAT"
   # CVS accounting export (columns headers)
   accounting_export:
     journal_code: "Journal code"
@@ -338,6 +340,8 @@ en:
         your_role_is_ROLE: "Your role has been changed to %{ROLE}."
       notify_admins_role_update:
         user_NAME_changed_ROLE_html: "User <strong><em>%{NAME}</strong></em> is now %{ROLE}."
+      notify_admin_members_stripe_sync:
+        all_members_sync: "All members were successfully synchronized on Stripe."
   #statistics tools for admins
   statistics:
     subscriptions: "Subscriptions"

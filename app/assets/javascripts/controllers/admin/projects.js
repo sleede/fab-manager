@@ -12,8 +12,8 @@
  */
 'use strict';
 
-Application.Controllers.controller('ProjectElementsController', ['$scope', '$state', 'Component', 'Licence', 'Theme', 'componentsPromise', 'licencesPromise', 'themesPromise', '_t', 'Member', 'uiTourService',
-  function ($scope, $state, Component, Licence, Theme, componentsPromise, licencesPromise, themesPromise, _t, Member, uiTourService) {
+Application.Controllers.controller('AdminProjectsController', ['$scope', '$state', 'Component', 'Licence', 'Theme', 'componentsPromise', 'licencesPromise', 'themesPromise', '_t', 'Member', 'uiTourService', 'settingsPromise', 'growl',
+  function ($scope, $state, Component, Licence, Theme, componentsPromise, licencesPromise, themesPromise, _t, Member, uiTourService, settingsPromise, growl) {
     // Materials list (plastic, wood ...)
     $scope.components = componentsPromise;
 
@@ -22,6 +22,12 @@ Application.Controllers.controller('ProjectElementsController', ['$scope', '$sta
 
     // Themes list (cooking, sport ...)
     $scope.themes = themesPromise;
+
+    // Application settings
+    $scope.allSettings = settingsPromise;
+
+    // default tab: materials
+    $scope.tabs = { active: 0 };
 
     /**
      * Saves a new component / Update an existing material to the server (form validation callback)
@@ -156,18 +162,61 @@ Application.Controllers.controller('ProjectElementsController', ['$scope', '$sta
     };
 
     /**
-     * Setup the feature-tour for the admin/project_elements page.
+     * When a file is sent to the server to test it against its MIME type,
+     * handle the result of the test.
+     */
+    $scope.onTestFileComplete = function (res) {
+      if (res) {
+        growl.success(_t('app.admin.projects.settings.file_is_TYPE', { TYPE: res.type }));
+      }
+    };
+
+    /**
+     * For use with 'ng-class', returns the CSS class name for the uploads previews.
+     * The preview may show a placeholder or the content of the file depending on the upload state.
+     * @param v {*} any attribute, will be tested for truthiness (see JS evaluation rules)
+     */
+    $scope.fileinputClass = function (v) {
+      if (v) {
+        return 'fileinput-exists';
+      } else {
+        return 'fileinput-new';
+      }
+    };
+
+    /**
+     * Remove the initial dot from the given extension, if any
+     * @param extension {String}
+     * @returns {String}
+     */
+    $scope.removeInitialDot = function (extension) {
+      if (extension.substr(0, 1) === '.') return $scope.lower(extension.substr(1));
+
+      return $scope.lower(extension);
+    };
+
+    /**
+     * Return the lowercase version of the provided string
+     * @param text {String}
+     * @returns {string}
+     */
+    $scope.lower = function (text) {
+      return text.toLowerCase();
+    };
+
+    /**
+     * Setup the feature-tour for the admin/projects page.
      * This is intended as a contextual help (when pressing F1)
      */
     $scope.setupProjectElementsTour = function () {
       // get the tour defined by the ui-tour directive
-      const uitour = uiTourService.getTourByName('project-elements');
+      const uitour = uiTourService.getTourByName('projects');
       uitour.createStep({
         selector: 'body',
         stepId: 'welcome',
         order: 0,
-        title: _t('app.admin.tour.project_elements.welcome.title'),
-        content: _t('app.admin.tour.project_elements.welcome.content'),
+        title: _t('app.admin.tour.projects.welcome.title'),
+        content: _t('app.admin.tour.projects.welcome.content'),
         placement: 'bottom',
         orphan: true
       });
@@ -175,30 +224,43 @@ Application.Controllers.controller('ProjectElementsController', ['$scope', '$sta
         selector: '.heading .abuses-button',
         stepId: 'abuses',
         order: 1,
-        title: _t('app.admin.tour.project_elements.abuses.title'),
-        content: _t('app.admin.tour.project_elements.abuses.content'),
+        title: _t('app.admin.tour.projects.abuses.title'),
+        content: _t('app.admin.tour.projects.abuses.content'),
         placement: 'bottom',
         popupClass: 'shift-left-40'
       });
       uitour.createStep({
+        selector: '.projects .settings-tab',
+        stepId: 'settings',
+        order: 2,
+        title: _t('app.admin.tour.projects.settings.title'),
+        content: _t('app.admin.tour.projects.settings.content'),
+        placement: 'bottom',
+        popupClass: 'shift-left-50'
+      });
+      uitour.createStep({
         selector: 'body',
         stepId: 'conclusion',
-        order: 2,
+        order: 3,
         title: _t('app.admin.tour.conclusion.title'),
         content: _t('app.admin.tour.conclusion.content'),
         placement: 'bottom',
         orphan: true
       });
+      // on step change, change the active tab if needed
+      uitour.on('stepChanged', function (nextStep) {
+        if (nextStep.stepId === 'settings') { $scope.tabs.active = 3; }
+      });
       // on tour end, save the status in database
       uitour.on('ended', function () {
-        if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile.tours.indexOf('project-elements') < 0) {
-          Member.completeTour({ id: $scope.currentUser.id }, { tour: 'project-elements' }, function (res) {
+        if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile.tours.indexOf('projects') < 0) {
+          Member.completeTour({ id: $scope.currentUser.id }, { tour: 'projects' }, function (res) {
             $scope.currentUser.profile.tours = res.tours;
           });
         }
       });
       // if the user has never seen the tour, show him now
-      if (Fablab.featureTourDisplay !== 'manual' && $scope.currentUser.profile.tours.indexOf('project-elements') < 0) {
+      if (settingsPromise.feature_tour_display !== 'manual' && $scope.currentUser.profile.tours.indexOf('projects') < 0) {
         uitour.start();
       }
     };

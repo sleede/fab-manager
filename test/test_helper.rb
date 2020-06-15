@@ -54,13 +54,16 @@ class ActiveSupport::TestCase
     end
 
     Stripe::PaymentMethod.create(
-      type: 'card',
-      card: {
-        number: number,
-        exp_month: exp_month,
-        exp_year: exp_year,
-        cvc: cvc
-      }
+      {
+        type: 'card',
+        card: {
+          number: number,
+          exp_month: exp_month,
+          exp_year: exp_year,
+          cvc: cvc
+        }
+      },
+      { api_key: Setting.get('stripe_secret_key') }
     ).id
   end
 

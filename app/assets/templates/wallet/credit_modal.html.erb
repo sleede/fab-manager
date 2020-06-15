@@ -40,7 +40,7 @@
     </div>
 
     <hr/>
-    <div class="text-right m-t" ng-hide="fablabWithoutInvoices">
+    <div class="text-right m-t" ng-show="modules.invoicing">
       <label for="generate_avoir" translate>{{ 'app.shared.wallet.generate_a_refund_invoice' }}</label>
       <div class="inline m-l">
         <input bs-switch

@@ -1,4 +1,4 @@
-<div class="alert alert-warning p-md m-t" role="alert" ng-show="fablabWithoutInvoices">
+<div class="alert alert-warning p-md m-t" role="alert" ng-hide="modules.invoicing">
   <i class="fa fa-warning m-r"></i>
   <span translate>{{ 'app.admin.invoices.warning_invoices_disabled' }}</span>
 </div>
@@ -87,6 +87,11 @@
        ng-blur="legalsEditEnd($event)">
   </div>
 </form>
+<div class="invoice-file">
+  <h3 class="m-l" translate>{{ 'app.admin.invoices.filename' }}</h3>
+  <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+  <span class="filename"><span class="prefix" ng-click="openEditPrefix()">{{file.prefix}}</span>-{{file.nextId}}_{{file.date}}.pdf</span>
+</div>
 
 
 <script type="text/ng-template" id="editReference.html">
@@ -300,6 +305,30 @@
           </tr>
           </tbody>
         </table>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-warning" ng-click="ok()" translate>{{ 'app.shared.buttons.confirm' }}</button>
+      <button class="btn btn-default" ng-click="cancel()" translate>{{ 'app.shared.buttons.cancel' }}</button>
+    </div>
+  </div>
+</script>
+
+
+<script type="text/ng-template" id="editPrefix.html">
+  <div class="custom-invoice">
+    <div class="modal-header">
+      <h3 class="modal-title" translate>{{ 'app.admin.invoices.filename' }}</h3>
+    </div>
+    <div class="modal-body">
+      <p class="alert alert-info m-h-md" translate>
+        {{ 'app.admin.invoices.prefix_info' }}
+      </p>
+      <div>
+        <div class="model">
+          <label for="prefix" translate>{{ 'app.admin.invoices.prefix' }}</label>
+          <input type="text" id="prefix" class="form-control" ng-model="model">
+        </div>
       </div>
     </div>
     <div class="modal-footer">

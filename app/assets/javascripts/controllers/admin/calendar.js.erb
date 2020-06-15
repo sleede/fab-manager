@@ -18,8 +18,8 @@
  * Controller used in the calendar management page
  */
 
-Application.Controllers.controller('AdminCalendarController', ['$scope', '$state', '$uibModal', 'moment', 'AuthService', 'Availability', 'Slot', 'Setting', 'Export', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', 'machinesPromise', 'plansPromise', 'groupsPromise', '_t', 'uiCalendarConfig', 'CalendarConfig', 'Member', 'uiTourService',
-  function ($scope, $state, $uibModal, moment, AuthService, Availability, Slot, Setting, Export, growl, dialogs, bookingWindowStart, bookingWindowEnd, machinesPromise, plansPromise, groupsPromise, _t, uiCalendarConfig, CalendarConfig, Member, uiTourService) {
+Application.Controllers.controller('AdminCalendarController', ['$scope', '$state', '$uibModal', 'moment', 'AuthService', 'Availability', 'Slot', 'Setting', 'Export', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', 'machinesPromise', 'plansPromise', 'groupsPromise', 'settingsPromise', '_t', 'uiCalendarConfig', 'CalendarConfig', 'Member', 'uiTourService',
+  function ($scope, $state, $uibModal, moment, AuthService, Availability, Slot, Setting, Export, growl, dialogs, bookingWindowStart, bookingWindowEnd, machinesPromise, plansPromise, groupsPromise, settingsPromise, _t, uiCalendarConfig, CalendarConfig, Member, uiTourService) {
     /* PRIVATE STATIC CONSTANTS */
 
     // The calendar is divided in slots of 30 minutes
@@ -29,7 +29,7 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
     const BOOKING_SNAP = '00:30:00';
 
     // We do not allow the creation of slots that are not a multiple of 60 minutes
-    const SLOT_MULTIPLE = Fablab.slotDuration;
+    const SLOT_MULTIPLE = parseInt(settingsPromise.slot_duration, 10);
 
     /* PUBLIC SCOPE */
 
@@ -41,6 +41,9 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
 
     // corresponding fullCalendar item in the DOM
     $scope.availabilityDom = null;
+
+    // Should we show the scheduled events in the calendar?
+    $scope.eventsInCalendar = (settingsPromise.events_in_calendar === 'true');
 
     // bind the availabilities slots with full-Calendar events
     $scope.eventSources = [];
@@ -349,7 +352,7 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
         }
       });
       // if the user has never seen the tour, show him now
-      if (Fablab.featureTourDisplay !== 'manual' && $scope.currentUser.profile.tours.indexOf('calendar') < 0) {
+      if (settingsPromise.feature_tour_display !== 'manual' && $scope.currentUser.profile.tours.indexOf('calendar') < 0) {
         uitour.start();
       }
     }
@@ -429,7 +432,8 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
           spacesPromise: ['Space', function (Space) { return Space.query().$promise; }],
           tagsPromise: ['Tag', function (Tag) { return Tag.query().$promise; }],
           plansPromise: ['Plan', function (Plan) { return Plan.query().$promise; }],
-          groupsPromise: ['Group', function (Group) { return Group.query().$promise; }]
+          groupsPromise: ['Group', function (Group) { return Group.query().$promise; }],
+          slotDurationPromise: ['Setting', function (Setting) { return Setting.get({ name: 'slot_duration' }).$promise; }]
         } });
       // when the modal is closed, we send the slot to the server for saving
       modalInstance.result.then(
@@ -531,8 +535,8 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
 /**
  * Controller used in the slot creation modal window
  */
-Application.Controllers.controller('CreateEventModalController', ['$scope', '$uibModalInstance', '$sce', 'moment', 'start', 'end', 'slots', 'machinesPromise', 'Availability', 'trainingsPromise', 'spacesPromise', 'tagsPromise', 'plansPromise', 'groupsPromise', 'growl', '_t',
-  function ($scope, $uibModalInstance, $sce, moment, start, end, slots, machinesPromise, Availability, trainingsPromise, spacesPromise, tagsPromise, plansPromise, groupsPromise, growl, _t) {
+Application.Controllers.controller('CreateEventModalController', ['$scope', '$uibModalInstance', '$sce', 'moment', 'start', 'end', 'slots', 'machinesPromise', 'Availability', 'trainingsPromise', 'spacesPromise', 'tagsPromise', 'plansPromise', 'groupsPromise', 'slotDurationPromise', 'growl', '_t',
+  function ($scope, $uibModalInstance, $sce, moment, start, end, slots, machinesPromise, Availability, trainingsPromise, spacesPromise, tagsPromise, plansPromise, groupsPromise, slotDurationPromise, growl, _t) {
     // $uibModal parameter
     $scope.start = start;
 
@@ -595,7 +599,7 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
       period: 'week',
       nb_periods: 1,
       end_date: undefined, // recurrence end
-      slot_duration: Fablab.slotDuration
+      slot_duration: parseInt(slotDurationPromise.setting.value, 10)
     };
 
     // recurrent slots

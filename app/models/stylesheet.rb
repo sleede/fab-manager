@@ -34,11 +34,11 @@ class Stylesheet < ApplicationRecord
   end
 
   def self.primary
-    Setting.find_by(name: 'main_color')&.value
+    Setting.get('main_color')
   end
 
   def self.secondary
-    Setting.find_by(name: 'secondary_color')&.value
+    Setting.get('secondary_color')
   end
 
   def self.primary_light
@@ -124,7 +124,7 @@ class Stylesheet < ApplicationRecord
   ## ===== HOME PAGE =====
 
   def self.home_style
-    style = Setting.find_by(name: 'home_css')&.value
+    style = Setting.get('home_css')
     ".home-page { #{style} }"
   end
 

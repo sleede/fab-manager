@@ -1,9 +1,8 @@
 <h2 translate>{{ 'app.admin.pricing.list_of_the_subscription_plans' }}</h2>
 
-<div ng-show="fablabWithoutPlans" class="alert alert-warning m-t">
-  {{ 'app.admin.pricing.beware_the_subscriptions_are_disabled_on_this_application' | translate }}
-  {{ 'app.admin.pricing.you_can_create_some_but_they_wont_be_available_until_the_project_is_redeployed_by_the_server_manager' | translate }}
-  <br>{{ 'app.admin.pricing.for_safety_reasons_please_dont_create_subscriptions_if_you_dont_want_intend_to_use_them_later' | translate }}
+<div ng-hide="modules.plans"
+     class="alert alert-warning m-t"
+     ng-bind-html="'app.admin.pricing.disabled_plans_info_html' | translate">
 </div>
 
 <div class="m-t-lg">

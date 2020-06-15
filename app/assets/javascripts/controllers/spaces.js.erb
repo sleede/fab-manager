@@ -98,8 +98,8 @@ class SpacesController {
 /**
  * Controller used in the public listing page, allowing everyone to see the list of spaces
  */
-Application.Controllers.controller('SpacesController', ['$scope', '$state', 'spacesPromise', 'AuthService', '_t', 'Member', 'uiTourService',
-  function ($scope, $state, spacesPromise, AuthService, _t, Member, uiTourService) {
+Application.Controllers.controller('SpacesController', ['$scope', '$state', 'spacesPromise', 'AuthService', '_t', 'Member', 'uiTourService', 'settingsPromise',
+  function ($scope, $state, spacesPromise, AuthService, _t, Member, uiTourService, settingsPromise) {
     /* PUBLIC SCOPE */
 
     // Retrieve the list of spaces
@@ -193,7 +193,7 @@ Application.Controllers.controller('SpacesController', ['$scope', '$state', 'spa
           }
         });
         // if the user has never seen the tour, show him now
-        if (Fablab.featureTourDisplay !== 'manual' && $scope.currentUser.profile.tours.indexOf('spaces') < 0) {
+        if (settingsPromise.feature_tour_display !== 'manual' && $scope.currentUser.profile.tours.indexOf('spaces') < 0) {
           uitour.start();
         }
       }

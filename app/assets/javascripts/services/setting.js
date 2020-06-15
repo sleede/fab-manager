@@ -20,6 +20,11 @@ Application.Services.factory('Setting', ['$resource', function ($resource) {
         url: '/api/settings/reset/:name',
         params: { name: '@name' },
         method: 'PUT'
+      },
+      isPresent: {
+        url: '/api/settings/is_present/:name',
+        params: { name: '@name' },
+        method: 'GET'
       }
     }
   );

@@ -72,8 +72,8 @@ Application.Controllers.controller('MembersController', ['$scope', 'Member', 'me
 /**
  * Controller used when editing the current user's profile (in dashboard)
  */
-Application.Controllers.controller('EditProfileController', ['$scope', '$rootScope', '$state', '$window', '$sce', '$cookies', '$injector', 'Member', 'Auth', 'Session', 'activeProviderPromise', 'growl', 'dialogs', 'CSRF', 'memberPromise', 'groups', '_t',
-  function ($scope, $rootScope, $state, $window, $sce, $cookies, $injector, Member, Auth, Session, activeProviderPromise, growl, dialogs, CSRF, memberPromise, groups, _t) {
+Application.Controllers.controller('EditProfileController', ['$scope', '$rootScope', '$state', '$window', '$sce', '$cookies', '$injector', 'Member', 'Auth', 'Session', 'activeProviderPromise', 'phoneRequiredPromise', 'growl', 'dialogs', 'CSRF', 'memberPromise', 'groups', '_t',
+  function ($scope, $rootScope, $state, $window, $sce, $cookies, $injector, Member, Auth, Session, activeProviderPromise, phoneRequiredPromise, growl, dialogs, CSRF, memberPromise, groups, _t) {
     /* PUBLIC SCOPE */
 
     // API URL where the form will be posted
@@ -109,6 +109,9 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
 
     // Should the passord be modified?
     $scope.password = { change: false };
+
+    // is the phone number required in _member_form?
+    $scope.phoneRequired = (phoneRequiredPromise.setting.value === 'true');
 
     // Angular-Bootstrap datepicker configuration for birthday
     $scope.datePicker = {

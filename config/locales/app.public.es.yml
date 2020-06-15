@@ -49,7 +49,7 @@ es:
         manage_the_events: "Eventos"
         manage_the_machines: "Máquinas"
         manage_the_spaces: "Espacios"
-        manage_the_projects_elements: "Proyectos"
+        projects: "Proyectos"
         statistics: "Estadísticas"
         customization: "Customización"
         open_api_clients: "Clientes OpenAPI"

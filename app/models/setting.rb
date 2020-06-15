@@ -6,6 +6,8 @@
 # after_update callback is handled by SettingService
 class Setting < ApplicationRecord
   has_many :history_values
+  # The following list contains all the settings that can be customized from the Fab-manager's UI.
+  # A few of them that are system settings, that should not be updated manually (uuid, origin).
   validates :name, inclusion:
                     { in: %w[about_title
                              about_body
@@ -75,7 +77,36 @@ class Setting < ApplicationRecord
                              home_content
                              home_css
                              origin
-                             uuid] }
+                             uuid
+                             phone_required
+                             tracking_id
+                             book_overlapping_slots
+                             slot_duration
+                             events_in_calendar
+                             spaces_module
+                             plans_module
+                             invoicing_module
+                             facebook_app_id
+                             twitter_analytics
+                             recaptcha_site_key
+                             recaptcha_secret_key
+                             feature_tour_display
+                             email_from
+                             disqus_shortname
+                             allowed_cad_extensions
+                             allowed_cad_mime_types
+                             openlab_app_id
+                             openlab_app_secret
+                             openlab_default
+                             online_payment_module
+                             stripe_public_key
+                             stripe_secret_key
+                             stripe_currency
+                             invoice_prefix
+                             confirmation_required
+                             wallet_module] }
+  # WARNING: when adding a new key, you may also want to add it in app/policies/setting_policy.rb#public_whitelist
+
   def value
     last_value = history_values.order(HistoryValue.arel_table['created_at'].desc).first
     last_value&.value
@@ -89,5 +120,31 @@ class Setting < ApplicationRecord
   def value=(val)
     admin = User.admins.first
     save && history_values.create(invoicing_profile: admin.invoicing_profile, value: val)
+  end
+
+  ##
+  # Return the value of the requested setting, if any.
+  # Usage: Setting.get('my_setting')
+  # @return {String}
+  ##
+  def self.get(name)
+    res = find_by(name: name)&.value
+
+    # handle boolean values
+    return true if res == 'true'
+    return false if res == 'false'
+
+    res
+  end
+
+  ##
+  # Create or update the provided setting with the given value
+  # Usage: Setting.set('my_setting', true)
+  # Optionally (but recommended when possible), the user updating the value can be provided as the third parameter
+  # Eg.: Setting.set('my_setting', true, User.find_by(slug: 'admin'))
+  ##
+  def self.set(name, value, user = User.admins.first)
+    setting = find_or_initialize_by(name: name)
+    setting.save && setting.history_values.create(invoicing_profile: user.invoicing_profile, value: value.to_s)
   end
 end

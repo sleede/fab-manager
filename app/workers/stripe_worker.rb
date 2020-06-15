@@ -12,8 +12,11 @@ class StripeWorker
   def create_stripe_customer(user_id)
     user = User.find(user_id)
     customer = Stripe::Customer.create(
-      description: user.profile.full_name,
-      email: user.email
+      {
+        description: user.profile.full_name,
+        email: user.email
+      },
+      { api_key: Setting.get('stripe_secret_key') }
     )
     user.update_columns(stp_customer_id: customer.id)
   end
@@ -34,11 +37,11 @@ class StripeWorker
     stp_coupon[:redeem_by] = coupon.valid_until.to_i unless coupon.valid_until.nil?
     stp_coupon[:max_redemptions] = coupon.max_usages unless coupon.max_usages.nil?
 
-    Stripe::Coupon.create(stp_coupon)
+    Stripe::Coupon.create(stp_coupon, api_key: Setting.get('stripe_secret_key'))
   end
 
   def delete_stripe_coupon(coupon_code)
-    cpn = Stripe::Coupon.retrieve(coupon_code)
+    cpn = Stripe::Coupon.retrieve(coupon_code, api_key: Setting.get('stripe_secret_key'))
     cpn.delete
   end
 end

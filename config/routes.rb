@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'sidekiq/web'
+require 'sidekiq_unique_jobs/web'
 require 'sidekiq/cron/web'
 
 Rails.application.routes.draw do
@@ -32,7 +32,6 @@ Rails.application.routes.draw do
       collection do
         get :last_published
         get :search
-        get :allowed_extensions
       end
     end
     resources :openlab_projects, only: :index
@@ -44,6 +43,7 @@ Rails.application.routes.draw do
     resources :settings, only: %i[show update index], param: :name do
       patch '/bulk_update', action: 'bulk_update', on: :collection
       put '/reset/:name', action: 'reset', on: :collection
+      get '/is_present/:name', action: 'test_present', on: :collection
     end
     resources :users, only: %i[index create destroy]
     resources :members, only: %i[index show create update destroy] do
@@ -164,9 +164,13 @@ Rails.application.routes.draw do
 
     # payments handling
     post 'payments/confirm_payment' => 'payments/confirm_payment'
+    get 'payments/online_payment_status' => 'payments/online_payment_status'
 
     # FabAnalytics
     get 'analytics/data' => 'analytics#data'
+
+    # test MIME type
+    post 'files/mime_type' => 'files#mime'
   end
 
   # rss

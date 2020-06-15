@@ -17,8 +17,8 @@
 
 <p><%= _t('.body.intro',
           {
-            GENDER: Setting.find_by(name: 'name_genre').value,
-            FABLAB: Setting.find_by(name: 'fablab_name').value
+            GENDER: Setting.get('name_genre'),
+            FABLAB: Setting.get('fablab_name')
           })
       # messageFormat
    %> <%= link_to URI(root_url).host, root_url %>.

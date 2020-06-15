@@ -112,7 +112,10 @@ class Reservation < ApplicationRecord
   end
 
   def clean_pending_strip_invoice_items
-    pending_invoice_items = Stripe::InvoiceItem.list(customer: user.stp_customer_id, limit: 100).data.select { |ii| ii.invoice.nil? }
+    pending_invoice_items = Stripe::InvoiceItem.list(
+      { customer: user.stp_customer_id, limit: 100 },
+      { api_key: Setting.get('stripe_secret_key') }
+    ).data.select { |ii| ii.invoice.nil? }
     pending_invoice_items.each(&:delete)
   end
 

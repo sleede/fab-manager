@@ -12,10 +12,11 @@ Application.Directives.directive('stripeForm', ['Payment', 'growl', '_t',
       restrict: 'A',
       scope: {
         cartItems: '=',
-        onPaymentSuccess: '='
+        onPaymentSuccess: '=',
+        stripeKey: '@'
       },
       link: function($scope, element, attributes) {
-        const stripe = Stripe('<%= Rails.application.secrets.stripe_publishable_key %>');
+        const stripe = Stripe($scope.stripeKey);
         const elements = stripe.elements();
 
         const style = {
