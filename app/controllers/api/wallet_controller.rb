@@ -18,7 +18,7 @@ class API::WalletController < API::ApiController
   end
 
   def credit
-    return head 422 if Rails.application.secrets.fablab_without_wallet == 'true'
+    return head 422 unless Setting.get('wallet_module')
 
     @wallet = Wallet.find(credit_params[:id])
     authorize @wallet

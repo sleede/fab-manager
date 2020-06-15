@@ -886,6 +886,8 @@ Setting.set('invoice_prefix', 'FabManager_invoice') unless Setting.find_by(name:
 
 Setting.set('confirmation_required', false) unless Setting.find_by(name: 'confirmation_required').try(:value)
 
+Setting.set('wallet_module', true) unless Setting.find_by(name: 'wallet_module').try(:value)
+
 if StatisticCustomAggregation.count.zero?
   # available reservations hours for machines
   machine_hours = StatisticType.find_by(key: 'hour', statistic_index_id: 2)

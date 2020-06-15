@@ -419,3 +419,9 @@ setting_71:
   created_at: 2020-06-15 10:04:06.216541000 Z
   updated_at: 2020-06-15 10:04:06.216541000 Z
 
+setting_72:
+  id: 72
+  name: wallet_module
+  created_at: 2020-06-15 10:04:06.216541000 Z
+  updated_at: 2020-06-15 10:04:06.216541000 Z
+

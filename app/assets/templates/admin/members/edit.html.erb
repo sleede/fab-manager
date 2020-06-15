@@ -229,7 +229,7 @@
           </div>
         </uib-tab>
 
-        <uib-tab heading="{{ 'app.admin.members_edit.wallet' | translate }}" ng-hide="fablabWithoutWallet">
+        <uib-tab heading="{{ 'app.admin.members_edit.wallet' | translate }}" ng-show="modules.wallet">
           <div class="col-md-12 m m-t-lg">
             <ng-include src="'<%= asset_path "wallet/show.html" %>'"></ng-include>
 

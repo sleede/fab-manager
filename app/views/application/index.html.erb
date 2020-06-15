@@ -25,7 +25,7 @@
 
       Fablab.plansModule = ('<%= Setting.get('plans_module') %>' === 'true');
       Fablab.spacesModule = ('<%= Setting.get('spaces_module') %>' === 'true');
-      Fablab.fablabWithoutWallet = ('<%= Rails.application.secrets.fablab_without_wallet %>' === 'true');
+      Fablab.walletModule = ('<%= Setting.get('wallet_module') %>' === 'true');
       Fablab.defaultHost = "<%= Rails.application.secrets.default_host %>";
       Fablab.trackingId = "<%= Setting.get('tracking_id') %>";
       Fablab.superadminId = parseInt("<%= User.superadmin&.id %>", 10);

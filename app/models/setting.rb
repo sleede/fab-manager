@@ -101,7 +101,8 @@ class Setting < ApplicationRecord
                              stripe_secret_key
                              stripe_currency
                              invoice_prefix
-                             confirmation_required] }
+                             confirmation_required
+                             wallet_module] }
   # WARNING: when adding a new key, you may also want to add it in app/policies/setting_policy.rb#public_whitelist
 
   def value

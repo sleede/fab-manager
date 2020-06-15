@@ -677,3 +677,11 @@ history_value_71:
   name: false
   created_at: 2020-06-15 10:04:06.216541000 Z
   updated_at: 2020-06-15 10:04:06.216541000 Z
+
+history_value_72:
+  id: 72
+  setting_id: 72
+  value: 1
+  name: true
+  created_at: 2020-06-15 10:04:06.216541000 Z
+  updated_at: 2020-06-15 10:04:06.216541000 Z

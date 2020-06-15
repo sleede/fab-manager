@@ -475,5 +475,15 @@
                        yes-label="app.shared.buttons.yes"
                        no-label="app.shared.buttons.no"></boolean-setting>
     </div>
+  <div class="row">
+      <h3 class="m-l" translate>{{ 'app.admin.settings.general.wallet' }}</h3>
+      <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.general.wallet_info_html' | translate"></p>
+      <boolean-setting name="wallet_module"
+                       settings="allSettings"
+                       label="app.admin.settings.general.enable_wallet"
+                       classes="m-l"
+                       yes-label="app.shared.buttons.yes"
+                       no-label="app.shared.buttons.no"></boolean-setting>
+  </div>
   </div>
 </div>

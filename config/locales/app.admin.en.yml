@@ -1109,6 +1109,7 @@ en:
         account_confirmation: "Account confirmation"
         confirmation_required_info: "Optionally, you can force the users to confirm their email address before being able to access Fab-manager."
         confirmation_is_required: "Confirmation required"
+        wallet_module: "wallet module"
         general:
           general: "General"
           title: "Title"
@@ -1142,6 +1143,9 @@ en:
           email: "Email"
           email_info: "The email address from which notifications will be sent. You can use a non-existing address (like noreply@...) or an existing address if you want to allow your members to reply to the notifications they receive."
           email_from: "Expeditor's address"
+          wallet: "Wallet"
+          wallet_info_html: "<p>The virtual wallet allows you to allocate a sum of money to users. Then, can spend this money as they wish, in Fab-manager.</p><p>Members cannot credit their wallet themselves, it's a privilege of managers and administrators.</p>"
+          enable_wallet: "Enable wallet"
         privacy:
           title: "Privacy"
           privacy_policy: "Privacy policy"

@@ -81,9 +81,6 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
         $state.prevParams = fromParams;
       });
 
-      // Global config: if true, wallet will be disabled
-      $rootScope.fablabWithoutWallet = Fablab.fablabWithoutWallet;
-
       // Global function to allow the user to navigate to the previous screen (ie. $state).
       // If no previous $state were recorded, navigate to the home page
       $rootScope.backPrevLocation = function (event) {

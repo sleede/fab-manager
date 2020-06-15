@@ -51,12 +51,6 @@ When using docker-compose, you should provide the name of the service in your [d
 Used by the authentication system to generate random tokens, eg. for resetting passwords.
 Used by Rails to verify the integrity of signed cookies.
 You can generate such a random key by running `rails secret`.
-<a name="FABLAB_WITHOUT_WALLET"></a>
-
-    FABLAB_WITHOUT_WALLET
-
-If set to 'true', the wallet will be disabled.
-This is useful if you won't use wallet system.
 <a name="DELIVERY_METHOD"></a>
 
     DELIVERY_METHOD

@@ -1109,6 +1109,7 @@ fr:
         account_confirmation: "Confirmation de compte"
         confirmation_required_info: "De manière optionnelle, vous pouvez forcer les utilisateurs à confirmer leur adresse électronique avant de pouvoir accéder à Fab-manager."
         confirmation_is_required: "Confirmation requise"
+        wallet_module: "module porte-monnaie"
         general:
           general: "Général"
           title: "Titre"
@@ -1142,6 +1143,9 @@ fr:
           email: "Courriel"
           email_info: "L'adresse de courriel depuis laquelle les notifications seront envoyées. Vous pouvez utiliser une adresse qui n'existe pas (comme ne-pas-repondre@...) ou une adresse existante si vous voulez que vos membres puisse répondre aux notifications qu'ils reçoivent."
           email_from: "Adresse de l'expéditeur"
+          wallet: "Porte-monnaie"
+          wallet_info_html: "<p>Le porte-monnaie virtuel vous permet d'allouer une certaine somme d'argent aux utilisateurs. Ils peuvent ensuite dépenser cet argent comment bon leur semble, dans Fab-manager.</p><p>Les membres ne peuvent pas créditer leur porte-monnaie eux-même, c'est un privilège des gestionnaires et des administrateurs.</p>"
+          enable_wallet: "Activer le porte-monnaie"
         privacy:
           title: "Confidentialité"
           privacy_policy: "Politique de confidentialité"
