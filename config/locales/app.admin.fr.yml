@@ -1384,7 +1384,10 @@ fr:
         settings:
           welcome:
             title: "Personnalisation de l'application"
-            content: "D'ici, vous pourrez configurer les réglages généraux de Fab-manager ainsi que personnaliser différents éléments de l'interface."
+            content: "D'ici, vous pourrez configurer les réglages généraux de Fab-manager, activer ou désactiver les modules optionnels ainsi que personnaliser différents éléments de l'interface."
+          general:
+            title: "Paramètres généraux"
+            content: "Beaucoup de paramètres peuvent être personnalisés d'ici. Prenez le temps de parcourir toute cette page, elle vous permettra de personnaliser des messages, documents, modules optionnels, créations de comptes, l'aspect visuel de Fab-manager et beaucoup d'autre choses."
           home:
             title: "Personnaliser la page d'accueil"
             content: "<p>Cet éditeur WYSIWYG vous permet de personnaliser l'apparence de la page d'accueil tout en utilisant différents composants (dernier tweet, brève, etc.).</p><p><strong>Attention :</strong> Gardez à l'esprit que toute modification non maîtrisée peut casser l'apparence de la page d'accueil.</p>"
@@ -1409,6 +1412,9 @@ fr:
           draft:
             title: "Brouillon"
             content: "Cliquez ici pour afficher un brouillon à trous d'une politique de confidentialité, qu'il ne vous reste plus qu'à relire et à compléter."
+          reservations:
+            title: "Réservations"
+            content: "Horaires d'ouverture, possibilité d'annuler les réservations ... Chaque Fab Lab possède ses propres règles de réservation, que vous pourrez définir sur cette page."
         open_api:
           welcome:
             title: "OpenAPI"

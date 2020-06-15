@@ -1384,7 +1384,10 @@ en:
         settings:
           welcome:
             title: "Application customization"
-            content: "From here, you can configure the general settings of Fab-manager as well as customize various elements of the interface."
+            content: "From here, you can configure the general settings of Fab-manager, enable or disable the optional modules and customize various elements of the interface."
+          general:
+            title: "General settings"
+            content: "A lot a settings can be customized from here. Take time to look all over this page, it will let you customize messages, documents, optional modules, registrations, visual aspect of Fab-manager, and much more."
           home:
             title: "Customize home page"
             content: "<p>This WYSIWYG editor allows you to customize the appearance of the home page while using different components (last tweet, brief, etc.).</p><p><strong>Warning:</strong> Keep in mind that any uncontrolled changes can break the appearance of the home page.</p>"
@@ -1409,6 +1412,9 @@ en:
           draft:
             title: "Draft"
             content: "Click here to view a privacy policy draft with holes, which you just need to read and complete."
+          reservations:
+            title: "Reservations"
+            content: "Opening hours, chance to cancel reservations... Each Fablab has its own reservation rules, which you can define on this page."
         open_api:
           welcome:
             title: "OpenAPI"

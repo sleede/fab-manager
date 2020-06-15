@@ -331,9 +331,17 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
         orphan: true
       });
       uitour.createStep({
+        selector: '.admin-settings .general-page-tab',
+        stepId: 'general',
+        order: 1,
+        title: _t('app.admin.tour.settings.general.title'),
+        content: _t('app.admin.tour.settings.general.content'),
+        placement: 'bottom',
+      });
+      uitour.createStep({
         selector: '.admin-settings .home-page-content h4',
         stepId: 'home',
-        order: 1,
+        order: 2,
         title: _t('app.admin.tour.settings.home.title'),
         content: _t('app.admin.tour.settings.home.content'),
         placement: 'bottom'
@@ -341,7 +349,7 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
       uitour.createStep({
         selector: '.admin-settings .home-page-content .note-toolbar .note-insert div',
         stepId: 'components',
-        order: 2,
+        order: 3,
         title: _t('app.admin.tour.settings.components.title'),
         content: _t('app.admin.tour.settings.components.content'),
         placement: 'bottom'
@@ -349,7 +357,7 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
       uitour.createStep({
         selector: '.admin-settings .home-page-content .note-toolbar .btn-codeview',
         stepId: 'codeview',
-        order: 3,
+        order: 4,
         title: _t('app.admin.tour.settings.codeview.title'),
         content: _t('app.admin.tour.settings.codeview.content'),
         placement: 'bottom'
@@ -357,7 +365,7 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
       uitour.createStep({
         selector: '.admin-settings .reset-button',
         stepId: 'reset',
-        order: 4,
+        order: 5,
         title: _t('app.admin.tour.settings.reset.title'),
         content: _t('app.admin.tour.settings.reset.content'),
         placement: 'left'
@@ -365,7 +373,7 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
       uitour.createStep({
         selector: '.admin-settings .home-page-style',
         stepId: 'css',
-        order: 5,
+        order: 6,
         title: _t('app.admin.tour.settings.css.title'),
         content: _t('app.admin.tour.settings.css.content'),
         placement: 'top'
@@ -373,7 +381,7 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
       uitour.createStep({
         selector: '.admin-settings .about-page-tab',
         stepId: 'about',
-        order: 6,
+        order: 7,
         title: _t('app.admin.tour.settings.about.title'),
         content: _t('app.admin.tour.settings.about.content'),
         placement: 'bottom'
@@ -381,7 +389,7 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
       uitour.createStep({
         selector: '.admin-settings .privacy-page-tab',
         stepId: 'privacy',
-        order: 7,
+        order: 8,
         title: _t('app.admin.tour.settings.privacy.title'),
         content: _t('app.admin.tour.settings.privacy.content'),
         placement: 'bottom'
@@ -389,15 +397,24 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
       uitour.createStep({
         selector: '.admin-settings .history-select',
         stepId: 'draft',
-        order: 8,
+        order: 9,
         title: _t('app.admin.tour.settings.draft.title'),
         content: _t('app.admin.tour.settings.draft.content'),
         placement: 'bottom'
       });
       uitour.createStep({
+        selector: '.admin-settings .reservations-page-tab',
+        stepId: 'reservations',
+        order: 10,
+        title: _t('app.admin.tour.settings.reservations.title'),
+        content: _t('app.admin.tour.settings.reservations.content'),
+        placement: 'bottom',
+        popupClass: 'shift-left-50'
+      });
+      uitour.createStep({
         selector: 'body',
         stepId: 'conclusion',
-        order: 9,
+        order: 11,
         title: _t('app.admin.tour.conclusion.title'),
         content: _t('app.admin.tour.conclusion.content'),
         placement: 'bottom',
@@ -405,9 +422,11 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
       });
       // on step change, change the active tab if needed
       uitour.on('stepChanged', function (nextStep) {
+        if (nextStep.stepId === 'general') { $scope.tabs.active = 0; }
         if (nextStep.stepId === 'home' || nextStep.stepId === 'css') { $scope.tabs.active = 1; }
         if (nextStep.stepId === 'about') { $scope.tabs.active = 2; }
         if (nextStep.stepId === 'privacy' || nextStep.stepId === 'draft') { $scope.tabs.active = 3; }
+        if (nextStep.stepId === 'reservations') { $scope.tabs.active = 4; }
       });
       // on tour end, save the status in database
       uitour.on('ended', function () {
