@@ -42,6 +42,11 @@ Application.Directives.directive('numberSetting', ['Setting', 'growl', '_t',
             function (error) {
               if (error.status === 304) return;
 
+              if (error.status === 423) {
+                growl.error(_t('app.admin.settings.error_SETTING_locked', { SETTING: _t(`app.admin.settings.${setting.name}`) }));
+                return;
+              }
+
               growl.error(_t('app.admin.settings.an_error_occurred_saving_the_setting'));
               console.log(error);
             }

@@ -6,6 +6,8 @@
 # after_update callback is handled by SettingService
 class Setting < ApplicationRecord
   has_many :history_values
+  # The following list contains all the settings that can be customized from the Fab-manager's UI.
+  # A few of them that are system settings, that should not be updated manually (uuid, origin).
   validates :name, inclusion:
                     { in: %w[about_title
                              about_body

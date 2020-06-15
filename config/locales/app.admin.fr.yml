@@ -1067,6 +1067,7 @@ fr:
         advanced: "Paramètres avancés"
         customize_home_page_css: "Personnaliser la feuille de style de la page d'accueil"
         home_css_notice_html: "Vous pouvez personnaliser la feuille de style qui s'appliquera à la page d'accueil en utilisant la syntaxe <a href=\"https://sass-lang.com/documentation\" target=\"_blank\">SASS</a>. Ces styles seront automatiquement subordonnées au sélecteur <code>.home-page</code> pour prévenir tout risque de casse de l'application. Attention toutefois, les modifications de la page d'accueil dans l'éditeur en haut de page peuvent rendre caduque vos styles, référez vous toujours au code HTML."
+        error_SETTING_locked: "Impossible de mettre à jour le paramètre : {SETTING} est verrouillé. Veuillez contacter votre administrateur système."
         an_error_occurred_saving_the_setting: "Une erreur est survenue pendant l'enregistrement du paramètre. Veuillez réessayer plus tard."
         book_overlapping_slots_info: "Autoriser / empêcher la réservation de créneaux qui se chevauchent"
         allow_booking: "Autoriser la réservation"

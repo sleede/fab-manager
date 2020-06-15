@@ -128,6 +128,13 @@ In test and development environments, the version won't be check automatically, 
 In production and staging environments, the session cookie won't be sent to the server unless through the HTTPS protocol.
 If you're using Fab-manager on a non-public network or for testing purposes, you can disable this behavior by setting this variable to `true`.
 Please, ensure you know what you're doing, as this can lead to serious security issues. 
+<a name="LOCKED_SETTINGS"></a>
+
+    LOCKED_SETTINGS
+
+A comma separated list of settings that cannot be changed from the UI.
+Please refer to https://github.com/sleede/fab-manager/blob/master/app/models/setting.rb for a list of possible values.
+Only the system administrator can change them, with the command: `ENV=value rails fablab:setup:env_to_db` 
 
 <a name="internationalization-settings"></a>
 ## Internationalization setting.
