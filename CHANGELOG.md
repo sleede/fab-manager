@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Ability to configure most of the settings from the admin's UI
+- Ability to lock some settings from the environment
 - Improved display of the icons alerting about an outdated version
 - Improved mime-type checking (back & front)
 - Updated CarrierWave to 2.1.0
