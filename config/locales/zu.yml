@@ -16,8 +16,9 @@ zu:
       carrierwave_processing_error: "crwdns3165:0crwdne3165:0"
       carrierwave_integrity_error: "crwdns3167:0crwdne3167:0"
       carrierwave_download_error: "crwdns3169:0crwdne3169:0"
-      extension_white_list_error: "crwdns3171:0%{extension}crwdnd3171:0%{allowed_types}crwdne3171:0"
-      extension_black_list_error: "crwdns3173:0%{extension}crwdnd3173:0%{prohibited_types}crwdne3173:0"
+      extension_whitelist_error: "crwdns20842:0%{extension}crwdnd20842:0%{allowed_types}crwdne20842:0"
+      extension_blacklist_error: "crwdns20844:0%{extension}crwdnd20844:0%{prohibited_types}crwdne20844:0"
+      content_type_whitelist_error: "crwdns20846:0%{content_type}crwdnd20846:0%{allowed_types}crwdne20846:0"
       rmagick_processing_error: "crwdns3175:0%{e}crwdne3175:0"
       mime_types_processing_error: "crwdns3177:0%{e}crwdne3177:0"
       mini_magick_processing_error: "crwdns3179:0%{e}crwdne3179:0"
@@ -110,6 +111,7 @@ zu:
     subscription_of_NAME_for_DURATION_starting_from_DATE: "crwdns3371:0%{NAME}crwdnd3371:0%{DURATION}crwdnd3371:0%{DATE}crwdne3371:0"
     subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "crwdns3373:0%{NAME}crwdnd3373:0%{STARTDATE}crwdnd3373:0%{ENDDATE}crwdne3373:0"
     and: 'crwdns3375:0crwdne3375:0'
+    invoice_text_example: "crwdns20848:0crwdne20848:0"
   #CVS accounting export (columns headers)
   accounting_export:
     journal_code: "crwdns3377:0crwdne3377:0"
@@ -338,6 +340,8 @@ zu:
         your_role_is_ROLE: "crwdns20452:0%{ROLE}crwdne20452:0"
       notify_admins_role_update:
         user_NAME_changed_ROLE_html: "crwdns20454:0%{NAME}crwdnd20454:0%{ROLE}crwdne20454:0"
+      notify_admin_members_stripe_sync:
+        all_members_sync: "crwdns20850:0crwdne20850:0"
   #statistics tools for admins
   statistics:
     subscriptions: "crwdns3689:0crwdne3689:0"
