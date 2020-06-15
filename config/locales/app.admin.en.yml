@@ -1317,6 +1317,9 @@ en:
           export:
             title: "Accounting export"
             content: "Once the codes have been configured, click here to access the interface allowing you to export the entries to a third-party accounting software."
+          payment:
+            title: "Payment settings"
+            content: "If you want to allow your members to book directly online by paying by credit card, you can activate and configure this feature from this page."
           periods:
             title: "Close accounting periods"
             content: "<p>The regulations of your country may require you to close your accounts regularly. The interface accessible from this button allows you to do this.</p> <p><strong>In France,</strong> if you are subject to VAT anti-fraud law <a href='https://bofip.impots.gouv.fr/bofip/10691-PGP.html' target='_blank'>BOI-TVA-DECLA-30-10-30-20160803</a>, this closing is mandatory at least once a year.</p><p>As a reminder,  if you have to use a certified software (<a href='https://www.impots.gouv.fr/portail/suis-je-oblige-davoir-un-logiciel-de-caisse-securise' target='_blank'>take the test here</a>), you are under the legal obligation to provide a certificate of compliance of the software. <a href='mailto:contact@fab-manager.com'>Contact-us<a/> to get it.</p>"

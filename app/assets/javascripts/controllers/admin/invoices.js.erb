@@ -760,9 +760,18 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           placement: 'bottom'
         });
         uitour.createStep({
+          selector: '.invoices-management .payment-settings',
+          stepId: 'payment',
+          order: 8,
+          title: _t('app.admin.tour.invoices.payment.title'),
+          content: _t('app.admin.tour.invoices.payment.content'),
+          placement: 'bottom',
+          popupClass: 'shift-left-50'
+        });
+        uitour.createStep({
           selector: '.heading .close-accounting-periods-button',
           stepId: 'periods',
-          order: 8,
+          order: 9,
           title: _t('app.admin.tour.invoices.periods.title'),
           content: _t('app.admin.tour.invoices.periods.content'),
           placement: 'bottom',
@@ -772,7 +781,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       uitour.createStep({
         selector: 'body',
         stepId: 'conclusion',
-        order: 9,
+        order: 10,
         title: _t('app.admin.tour.conclusion.title'),
         content: _t('app.admin.tour.conclusion.content'),
         placement: 'bottom',
@@ -788,6 +797,9 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         }
         if (nextStep.stepId === 'codes' || nextStep.stepId === 'export') {
           $scope.tabs.active = 2;
+        }
+        if (nextStep.stepId === 'payment') {
+          $scope.tabs.active = 3;
         }
       });
       // on tour end, save the status in database

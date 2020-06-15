@@ -1317,6 +1317,9 @@ fr:
           export:
             title: "Export comptable"
             content: "Une fois les codes configurés, cliquez ici pour accéder à l'interface vous permettant d'exporter les écritures vers un logiciel comptable tiers."
+          payment:
+            title: "Paramètres de paiement"
+            content: "Si vous souhaitez permettre à vos membres de réserver directement en ligne en payant par carte bancaire, vous pouvez activer et paramétrer cette fonctionnalité depuis cette page."
           periods:
             title: "Clôturer les périodes comptables"
             content: "<p>La réglementation de votre pays peut vous imposer de clôturer régulièrement vos comptes. L'interface accessible depuis ce bouton permet de le faire.</p> <p><strong>En France,</strong> si vous êtes soumis à la loi anti-fraude TVA <a href='https://bofip.impots.gouv.fr/bofip/10691-PGP.html' target='_blank'>BOI-TVA-DECLA-30-10-30-20160803</a>, cette clôture est obligatoire au moins une fois par an.</p><p>Pour rappel, en cas d'obligation d'utilisation d'un logiciel certifié (<a href='https://www.impots.gouv.fr/portail/suis-je-oblige-davoir-un-logiciel-de-caisse-securise' target='_blank'>faites le test ici</a>), vous êtes dans l'obligation légale de fournir une attestation de conformité du logiciel. <a href='mailto:contact@fab-manager.com'>Contactez-nous<a/> pour l'obtenir.</p>"
