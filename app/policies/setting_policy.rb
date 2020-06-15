@@ -24,7 +24,7 @@ class SettingPolicy < ApplicationPolicy
   end
 
   def test_present?
-    user&.admin? || SettingPolicy.public_whitelist.push('openlab_app_secret').include?(record.name)
+    user&.admin? || SettingPolicy.public_whitelist.concat(%w[openlab_app_secret stripe_secret_key]).include?(record.name)
   end
 
   ##
