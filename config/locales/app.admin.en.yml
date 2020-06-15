@@ -1106,6 +1106,9 @@ en:
         openlab_default: "default gallery view"
         online_payment_module: "online payment module"
         stripe_currency: "Stripe currency"
+        account_confirmation: "Account confirmation"
+        confirmation_required_info: "Optionally, you can force the users to confirm their email address before being able to access Fab-manager."
+        confirmation_is_required: "Confirmation required"
         general:
           general: "General"
           title: "Title"

@@ -92,7 +92,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
         templateUrl: '<%= asset_path "shared/signupModal.html" %>',
         size: 'md',
         resolve: {
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['phone_required', 'recaptcha_site_key']" }).$promise; }]
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['phone_required', 'recaptcha_site_key', 'confirmation_required']" }).$promise; }]
         },
         controller: ['$scope', '$uibModalInstance', 'Group', 'CustomAsset', 'settingsPromise', 'growl', '_t', function ($scope, $uibModalInstance, Group, CustomAsset, settingsPromise, growl, _t) {
           // default parameters for the date picker in the account creation modal
@@ -153,7 +153,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
             return Auth.register($scope.user).then(function (user) {
               if (user.id) {
                 // creation successful
-                $uibModalInstance.close(user);
+                $uibModalInstance.close({ user, settings: settingsPromise });
               } else {
                 // the user was not saved in database, something wrong occurred
                 growl.error(_t('app.public.common.unexpected_error_occurred'));
@@ -174,13 +174,13 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
             });
           };
         }]
-      }).result['finally'](null).then(function (user) {
+      }).result['finally'](null).then(function (res) {
         // when the account was created successfully, set the session to the newly created account
-        if(Fablab.userConfirmationNeededToSignIn) {
+        if(res.settings.confirmation_required) {
           Auth._currentUser = null;
           growl.info(_t('app.public.common.you_will_receive_confirmation_instructions_by_email_detailed'));
         } else {
-          $scope.setCurrentUser(user);
+          $scope.setCurrentUser(res.user);
         }
       });
       <% end %>
@@ -409,8 +409,15 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
       return $uibModal.open({
         templateUrl: '<%= asset_path "shared/deviseModal.html" %>',
         size: 'sm',
-        controller: ['$scope', '$uibModalInstance', '_t', function ($scope, $uibModalInstance, _t) {
+        resolve: {
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['confirmation_required']" }).$promise; }]
+        },
+        controller: ['$scope', '$uibModalInstance', '_t', 'settingsPromise', function ($scope, $uibModalInstance, _t, settingsPromise) {
           const user = ($scope.user = {});
+
+          // email confirmation required before user sign-in?
+          $scope.confirmationRequired = settingsPromise.confirmation_required;
+
           $scope.login = function () {
             Auth.login(user).then(function (user) {
               // Authentication succeeded ...
@@ -441,7 +448,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
             return $uibModalInstance.dismiss('confirmationNew');
           };
 
-          return $scope.openResetPassword = function (e) {
+          $scope.openResetPassword = function (e) {
             e.preventDefault();
             return $uibModalInstance.dismiss('resetPassword');
           };

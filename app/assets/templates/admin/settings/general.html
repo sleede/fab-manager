@@ -422,6 +422,20 @@
         </text-setting>
       </div>
     </div>
+      <div class="row">
+          <h3 class="m-l" translate>{{ 'app.admin.settings.account_confirmation' }}</h3>
+          <p class="alert alert-warning m-h-md" translate>
+              {{ 'app.admin.settings.confirmation_required_info' }}
+          </p>
+          <div class="col-md-10 col-md-offset-1">
+              <boolean-setting name="confirmation_required"
+                               settings="allSettings"
+                               label="app.admin.settings.confirmation_is_required"
+                               yes-label="app.shared.buttons.yes"
+                               no-label="app.shared.buttons.no">
+              </boolean-setting>
+          </div>
+      </div>
   </div>
 </div>
 

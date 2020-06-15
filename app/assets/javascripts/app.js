@@ -17,7 +17,7 @@ Application.Directives = angular.module('application.directives', []);
 angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.router', 'ui.bootstrap',
   'ngUpload', 'duScroll', 'application.filters', 'application.services', 'application.directives',
   'frapontillo.bootstrap-switch', 'application.constants', 'application.controllers', 'application.router',
-  'ui.select', 'ui.calendar', 'angularMoment', 'Devise', 'DeviseModal', 'angular-growl', 'xeditable',
+  'ui.select', 'ui.calendar', 'angularMoment', 'Devise', 'angular-growl', 'xeditable',
   'checklist-model', 'unsavedChanges', 'angular-loading-bar', 'ngTouch', 'angular-google-analytics',
   'angularUtils.directives.dirDisqus', 'summernote', 'elasticsearch', 'angular-medium-editor', 'naif.base64',
   'minicolors', 'pascalprecht.translate', 'ngFitText', 'ngAside', 'ngCapsLock', 'vcRecaptcha', 'ui.codemirror',
@@ -81,8 +81,6 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
         $state.prevParams = fromParams;
       });
 
-      // Global config: if true, user must confirm his email to sign in
-      $rootScope.userConfirmationNeededToSignIn = Fablab.userConfirmationNeededToSignIn;
       // Global config: if true, wallet will be disabled
       $rootScope.fablabWithoutWallet = Fablab.fablabWithoutWallet;
 

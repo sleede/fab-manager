@@ -341,7 +341,7 @@ class User < ApplicationRecord
   end
 
   def confirmation_required?
-    Rails.application.secrets.user_confirmation_needed_to_sign_in ? super : false
+    Setting.get('confirmation_required') ? super : false
   end
 
   private

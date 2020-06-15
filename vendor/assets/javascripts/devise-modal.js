@@ -1,4 +1,5 @@
 'use strict';
+// TODO remove unused?
 (function (angular) {
   var deviseModal = angular.module('DeviseModal', [
       'Devise',

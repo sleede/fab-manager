@@ -57,12 +57,6 @@ You can generate such a random key by running `rails secret`.
 
 If set to 'true', the wallet will be disabled.
 This is useful if you won't use wallet system.
-<a name="USER_CONFIRMATION_NEEDED_TO_SIGN_IN"></a>
-
-    USER_CONFIRMATION_NEEDED_TO_SIGN_IN
-
-If set to 'true' the users will need to confirm their email address to be able to sign in.
-Set to 'false' if you don't want this behaviour.
 <a name="DELIVERY_METHOD"></a>
 
     DELIVERY_METHOD

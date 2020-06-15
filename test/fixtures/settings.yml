@@ -412,3 +412,10 @@ setting_70:
   name: invoice_prefix
   created_at: 2020-06-15 10:04:06.216541000 Z
   updated_at: 2020-06-15 10:04:06.216541000 Z
+
+setting_71:
+  id: 71
+  name: confirmation_required
+  created_at: 2020-06-15 10:04:06.216541000 Z
+  updated_at: 2020-06-15 10:04:06.216541000 Z
+
