@@ -16,8 +16,9 @@ fr:
       carrierwave_processing_error: "n'a pas pu être traité"
       carrierwave_integrity_error: "n'est pas d'un type de fichier autorisé"
       carrierwave_download_error: "ne peut pas être téléchargé"
-      extension_white_list_error: "Vous n'êtes pas autorisé à envoyer des fichiers %{extension}, les types autorisés sont : %{allowed_types}"
-      extension_black_list_error: "Vous n'êtes pas autorisé à envoyer des fichiers %{extension}, les types interdits sont : %{prohibited_types}"
+      extension_whitelist_error: "You are not allowed to upload %{extension} files, allowed types: %{allowed_types}"
+      extension_blacklist_error: "You are not allowed to upload %{extension} files, prohibited types: %{prohibited_types}"
+      content_type_whitelist_error: "You are not allowed to upload %{content_type} files, allowed types: %{allowed_types}"
       rmagick_processing_error: "La manipulation avec rmagick a échoué, peut-être ne s'agit-il pas d'une image ? Erreur d'origine : %{e}"
       mime_types_processing_error: "Le traitement avec MIME::Types a échoué, le content-type est-il correct ? Erreur d'origine : %{e}"
       mini_magick_processing_error: "La manipulation avec MiniMagick a échoué, peut-être ne s'agit-il pas d'une image ? Erreur d'origine : %{e}"
@@ -110,6 +111,7 @@ fr:
     subscription_of_NAME_for_DURATION_starting_from_DATE: "Abonnement de %{NAME} pour %{DURATION} à compter du %{DATE}"
     subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "Prolongement Abonnement (Jours gratuits) de %{NAME} à compter du %{STARTDATE} jusqu'au %{ENDDATE}"
     and: 'et'
+    invoice_text_example: "Our association is not subject to VAT"
   #CVS accounting export (columns headers)
   accounting_export:
     journal_code: "Code journal"
@@ -338,6 +340,8 @@ fr:
         your_role_is_ROLE: "Votre rôle a été changé en %{ROLE}."
       notify_admins_role_update:
         user_NAME_changed_ROLE_html: "L'utilisateur <strong><em>%{NAME}</strong></em> est maintenant %{ROLE}."
+      notify_admin_members_stripe_sync:
+        all_members_sync: "All members were successfully synchronized on Stripe."
   #statistics tools for admins
   statistics:
     subscriptions: "Abonnements"
