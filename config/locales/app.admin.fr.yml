@@ -1371,6 +1371,9 @@ fr:
           abuses:
             title: "Gérer les signalements"
             content: "<p>Accédez par ici à la gestion des signalements.</p><p>Des visiteurs peuvent effectuer des signalements sur les projets, par exemple pour une atteinte au droit d'auteur ou pour un texte incitant à la haine.</p><p>La RGPD vous impose de supprimer ces données de signalement une fois que les actions requises ont été effectuées.</p>"
+          settings:
+            title: "Paramètres"
+            content: "<p>Commentaires, fichiers CAO... Gérez ici les paramètres des projets</p><p>Vous pourrez également activer les projets OpenLab, afin d'afficher les projets partagés par d'autre Fab Labs dans votre galerie.</p>"
         statistics:
           welcome:
             title: "Statistiques"

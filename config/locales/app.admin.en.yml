@@ -1371,6 +1371,9 @@ en:
           abuses:
             title: "Manage reports"
             content: "<p>Access here the management of reports.</p><p>Visitors can signal projects, for example for copyright infringement or for hate speech.</p><p>GDPR requires you to delete this reporting data once the required actions have been taken.</p>"
+          settings:
+            title: "Settings"
+            content: "<p>Comments, CAD files ... Manage project parameters here</p><p>You can also activate OpenLab projects, in order to display the projects shared by other Fab Labs in your gallery.</p>"
         statistics:
           welcome:
             title: "Statistics"

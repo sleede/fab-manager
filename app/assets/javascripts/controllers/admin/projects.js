@@ -26,6 +26,9 @@ Application.Controllers.controller('AdminProjectsController', ['$scope', '$state
     // Application settings
     $scope.allSettings = settingsPromise;
 
+    // default tab: materials
+    $scope.tabs = { active: 0 };
+
     /**
      * Saves a new component / Update an existing material to the server (form validation callback)
      * @param data {Object} component name
@@ -168,7 +171,6 @@ Application.Controllers.controller('AdminProjectsController', ['$scope', '$state
       }
     };
 
-
     /**
      * For use with 'ng-class', returns the CSS class name for the uploads previews.
      * The preview may show a placeholder or the content of the file depending on the upload state.
@@ -228,13 +230,26 @@ Application.Controllers.controller('AdminProjectsController', ['$scope', '$state
         popupClass: 'shift-left-40'
       });
       uitour.createStep({
+        selector: '.projects .settings-tab',
+        stepId: 'settings',
+        order: 2,
+        title: _t('app.admin.tour.projects.settings.title'),
+        content: _t('app.admin.tour.projects.settings.content'),
+        placement: 'bottom',
+        popupClass: 'shift-left-50'
+      });
+      uitour.createStep({
         selector: 'body',
         stepId: 'conclusion',
-        order: 2,
+        order: 3,
         title: _t('app.admin.tour.conclusion.title'),
         content: _t('app.admin.tour.conclusion.content'),
         placement: 'bottom',
         orphan: true
+      });
+      // on step change, change the active tab if needed
+      uitour.on('stepChanged', function (nextStep) {
+        if (nextStep.stepId === 'settings') { $scope.tabs.active = 3; }
       });
       // on tour end, save the status in database
       uitour.on('ended', function () {
