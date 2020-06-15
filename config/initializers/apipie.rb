@@ -1,11 +1,15 @@
+# frozen_string_literal: true
+
 Apipie.configure do |config|
-  config.app_name                = "Fab-manager"
-  config.api_base_url            = "/open_api"
-  config.doc_base_url            = "/open_api/doc"
+  config.app_name                = 'Fab-manager'
+  config.api_base_url            = '/open_api'
+  config.doc_base_url            = '/open_api/doc'
   # where is your API defined?
   config.api_controllers_matcher = "#{Rails.root}/app/controllers/open_api/v1/*.rb"
   config.validate = false
-  config.app_info['v1'] = <<-EOS
+  config.translate = false
+  config.default_locale = nil
+  config.app_info['v1'] = <<-RDOC
     = Pagination
     ---
     Pagination is done using headers. Following RFC-5988 standard for web linking.
@@ -20,5 +24,5 @@ Apipie.configure do |config|
     ---
     Depending on your client, you may have to set header <tt>Accept: application/json</tt> for every request, 
     otherwise some clients may request *html* by default which will result in error.
-  EOS
+  RDOC
 end
