@@ -40,7 +40,13 @@ class Invoice < ApplicationRecord
   end
 
   def filename
-    "#{ENV['INVOICE_PREFIX']}-#{id}_#{created_at.strftime('%d%m%Y')}.pdf"
+    prefix = Setting.find_by(name: 'invoice_prefix').history_values.order(created_at: :desc).where('created_at <= ?', created_at).limit(1).first
+    prefix ||= if created_at < Setting.find_by(name: 'invoice_prefix').history_values.order(created_at: :asc).limit(1).first.created_at
+                 Setting.find_by(name: 'invoice_prefix').history_values.order(created_at: :asc).limit(1).first
+               else
+                 Setting.find_by(name: 'invoice_prefix')..history_values.order(created_at: :desc).limit(1).first
+               end
+    "#{prefix.value}-#{id}_#{created_at.strftime('%d%m%Y')}.pdf"
   end
 
   def user

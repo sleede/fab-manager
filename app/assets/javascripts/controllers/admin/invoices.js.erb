@@ -55,9 +55,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
 
     // Invoice PDF filename settings (and example)
     $scope.file = {
-      prefix: 'Fablab_demo-facture',
+      prefix: settings.invoice_prefix,
       nextId: 40,
-      date: moment().format('DDMMYYYY')
+      date: moment().format('DDMMYYYY'),
+      templateUrl: 'editPrefix.html'
     }
 
     // Invoices parameters
@@ -481,6 +482,38 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
             growl.error(_t('app.admin.invoices.an_error_occurred_while_activating_the_VAT'));
             console.error(error);
         });
+      });
+    };
+
+    /**
+     * Open a modal dialog allowing the user to edit the prefix of the invoice file name
+     */
+    $scope.openEditPrefix = function () {
+      const modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: $scope.file.templateUrl,
+        size: 'lg',
+        resolve: {
+          model () { return $scope.file.prefix;}
+        },
+        controller: ['$scope', '$uibModalInstance', 'model', function ($scope, $uibModalInstance, model) {
+          $scope.model = model;
+          $scope.ok = function () { $uibModalInstance.close($scope.model); };
+          $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
+        }]
+      });
+
+      return modalInstance.result.then(function (model) {
+        Setting.update({ name: 'invoice_prefix' }, { value: model }, function (data) {
+            $scope.file.prefix = model;
+            return growl.success(_t('app.admin.invoices.prefix_successfully_saved'));
+          }
+          , function (error) {
+            if (error.status === 304) return;
+
+            growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_prefix'));
+            console.error(error);
+          });
       });
     };
 

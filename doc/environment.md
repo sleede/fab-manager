@@ -51,18 +51,6 @@ When using docker-compose, you should provide the name of the service in your [d
 Used by the authentication system to generate random tokens, eg. for resetting passwords.
 Used by Rails to verify the integrity of signed cookies.
 You can generate such a random key by running `rails secret`.
-<a name="INVOICE_PREFIX"></a>
-
-    INVOICE_PREFIX
-
-When payments are done on the platform, an invoice will be generated as a PDF file.
-The PDF file name will be of the form "(INVOICE_PREFIX) - (invoice ID) _ (invoice date) .pdf".
-<a name="FABLAB_WITHOUT_ONLINE_PAYMENT"></a>
-
-    FABLAB_WITHOUT_ONLINE_PAYMENT
-
-If set to 'true', the online payment won't be available and the you'll be only able to process reservations when logged as admin.
-Valid stripe API keys are still required, even if you don't require online payments.
 <a name="FABLAB_WITHOUT_WALLET"></a>
 
     FABLAB_WITHOUT_WALLET
@@ -132,7 +120,7 @@ The check will run every weeks and if the threshold is exceeded, an alert will b
     ADMIN_EMAIL, ADMIN_PASSWORD
 
 Credentials for the first admin user created when seeding the project.
-By default, theses variables are not present in application.yml because they are only used once, when running the database seed with the command `rails db:seed`.
+By default, these variables are not present in the env file, because they are only used once, when running the database seed with the command `rails db:seed`.
 <a name="SUPERADMIN_EMAIL"></a>
 
     SUPERADMIN_EMAIL

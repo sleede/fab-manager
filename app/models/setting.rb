@@ -99,7 +99,8 @@ class Setting < ApplicationRecord
                              online_payment_module
                              stripe_public_key
                              stripe_secret_key
-                             stripe_currency] }
+                             stripe_currency
+                             invoice_prefix] }
   # WARNING: when adding a new key, you may also want to add it in app/policies/setting_policy.rb#public_whitelist
 
   def value

@@ -661,3 +661,11 @@ history_value_69:
   value: usd
   created_at: 2020-06-08 17:12:16.846525000 Z
   updated_at: 2020-06-08 17:12:16.846525000 Z
+
+history_value_70:
+  id: 70
+  setting_id: 70
+  value: 1
+  name: FabManager_invoice
+  created_at: 2020-06-15 10:04:06.216541000 Z
+  updated_at: 2020-06-15 10:04:06.216541000 Z

@@ -129,7 +129,8 @@ namespace :fablab do
         %w[! FABLAB_WITHOUT_ONLINE_PAYMENT online_payment_module false],
         %w[_ STRIPE_PUBLISHABLE_KEY stripe_public_key],
         %w[_ STRIPE_API_KEY stripe_secret_key],
-        %w[_ STRIPE_CURRENCY stripe_currency]
+        %w[_ STRIPE_CURRENCY stripe_currency],
+        %w[_ INVOICE_PREFIX invoice_prefix FabManager_invoice]
       ]
 
       mapping.each do |m|

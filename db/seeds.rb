@@ -882,6 +882,8 @@ end
 
 Setting.set('stripe_currency', 'EUR') unless Setting.find_by(name: 'stripe_currency').try(:value)
 
+Setting.set('invoice_prefix', 'FabManager_invoice') unless Setting.find_by(name: 'invoice_prefix').try(:value)
+
 if StatisticCustomAggregation.count.zero?
   # available reservations hours for machines
   machine_hours = StatisticType.find_by(key: 'hour', statistic_index_id: 2)
