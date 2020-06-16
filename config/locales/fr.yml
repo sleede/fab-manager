@@ -111,7 +111,7 @@ fr:
     subscription_of_NAME_for_DURATION_starting_from_DATE: "Abonnement de %{NAME} pour %{DURATION} à compter du %{DATE}"
     subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "Prolongement Abonnement (Jours gratuits) de %{NAME} à compter du %{STARTDATE} jusqu'au %{ENDDATE}"
     and: 'et'
-    invoice_text_example: "Notre association n'est pas soumise à la TVA"
+    invoice_text_example: "Notre association n'est pas assujettie à la TVA"
   #CVS accounting export (columns headers)
   accounting_export:
     journal_code: "Code journal"
