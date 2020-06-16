@@ -244,3 +244,10 @@ Accordingly, `RAILS_LOCALE` and `APP_LOCALE` must be configured to `zu`.
     OPENLAB_BASE_URI
 
 Set this variable to `https://openprojects.fab-manager.com` if you want to use the common projects repository or set it to your own OpenLab server.
+
+## Other settings
+
+In the previous versions of Fab-manager, much more settings were configurable from environment variables.
+Starting with Fab-manager v4.5.0, these settings can be configured from the graphical interface, when logged as an administrator.
+
+Nevertheless, it is possible to keep the configuration in the `env` file, using a combination of `LOCKED_SETTINGS`, `rails fablab:setup:env_to_db` and the [mapping table of `env_to_db`](../lib/tasks/fablab/setup.rake#L105).
