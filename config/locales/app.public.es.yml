@@ -49,7 +49,7 @@ es:
         manage_the_events: "Eventos"
         manage_the_machines: "Máquinas"
         manage_the_spaces: "Espacios"
-        projects: "Projects"
+        projects: "Proyectos"
         statistics: "Estadísticas"
         customization: "Customización"
         open_api_clients: "Clientes OpenAPI"
@@ -382,7 +382,7 @@ es:
             title: "Agenda"
             content: "Visualize at a glance everything that is scheduled for the next coming weeks (events, training, machines available, etc.)."
           projects:
-            title: "Projects"
+            title: "Proyectos"
             content: "<p>Document and share all your creations with the community.</p><p>If you use OpenLab, you will also be able to consult the projects of the entire Fab-manager network. <a href='mailto:contact@fab-manager.com'>Contact-us</a> to get your access, it's free!</p>"
           plans:
             title: "Subscriptions"
@@ -403,7 +403,7 @@ es:
             title: "News"
             content: "<p>This space allows you to display the latest news from your structure.</p><p>You can easily change its content from « Customization », « Home page ».</p>"
           last_projects:
-            title: "Last projects"
+            title: "Últimos proyectos"
             content: "<p>This carousel scrolls through the latest projects documented by your members.</p>"
           last_tweet:
             title: "Last tweet"
