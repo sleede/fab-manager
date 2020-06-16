@@ -682,7 +682,7 @@ en:
         administrator_successfully_deleted: "Administrator successfully deleted."
         unable_to_delete_the_administrator: "Unable to delete the administrator."
         changes_successfully_saved: "Changes successfully saved."
-        an__occurr_occurred_while_saving_changes: "An error occurred when saving changes."
+        an_error_occurred_while_saving_changes: "An error occurred when saving changes."
         export_is_running_you_ll_be_notified_when_its_ready: "Export is running. You'll be notified when it's ready."
         tag_form:
           tags: "Tags"
