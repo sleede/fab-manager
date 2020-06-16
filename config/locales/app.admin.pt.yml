@@ -682,7 +682,7 @@ pt:
         administrator_successfully_deleted: "Administrator excluído com sucesso."
         unable_to_delete_the_administrator: "Impossível excluir administrador."
         changes_successfully_saved: "Mudanças salvas com sucesso."
-        an__occurr_occurred_while_saving_changes: "An error occurred when saving changes."
+        an_error_occurred_while_saving_changes: "An error occurred when saving changes."
         export_is_running_you_ll_be_notified_when_its_ready: "Export is running. You'll be notified when it's ready."
         tag_form:
           tags: "Tags"
