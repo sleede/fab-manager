@@ -49,7 +49,7 @@ zu:
         manage_the_events: "crwdns19590:0crwdne19590:0"
         manage_the_machines: "crwdns19592:0crwdne19592:0"
         manage_the_spaces: "crwdns19594:0crwdne19594:0"
-        manage_the_projects_elements: "crwdns19596:0crwdne19596:0"
+        projects: "crwdns20852:0crwdne20852:0"
         statistics: "crwdns8879:0crwdne8879:0"
         customization: "crwdns8881:0crwdne8881:0"
         open_api_clients: "crwdns8883:0crwdne8883:0"

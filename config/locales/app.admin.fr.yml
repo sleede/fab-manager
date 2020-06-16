@@ -126,7 +126,7 @@ fr:
         confirmation_required: "Confirmation requise"
         confirm_delete_import: "Êtes-vous sur de vouloir supprimer cet import iCalendar ?"
         delete_success: "L'import iCalendar a bien été supprimé"
-      #management of the projects' components
+      #management of the projects' components & settings
       projects:
         name: "Nom"
         projects_settings: "Paramètres des projets"
@@ -152,16 +152,16 @@ fr:
           new_ext_info_html: "<p>Spécifiez une nouvelle extension de fichier pour autoriser ces fichiers à être téléversés.</p><p>Veuillez noter que l'autorisation d'archives de fichiers (ex: ZIP) ou d'exécutables binaires (ex: EXE) peut entraîner un vrai <strong>problème de sécurité</strong> et doit être évitée dans tous les cas.</p>"
           mime_types: "Types MIME autorisés"
           new_mime_type: "Nouveau type MIME"
-          new_type_info_html: "<p>Spécifiez un nouveau type MIME pour autoriser ces fichiers à être téléversés.</p><p>Veuillez utiliser le champ de test pour déterminer le type MIME d'un fichier. Veuillez noter que l'autorisation d'archives de fichiers (ex: application/zip) ou d'exécutables binaires (ex: application/exe) peut entraîner un vrai <strong>problème de sécurité</strong> et doit être évitée dans tous les cas.</p>"
+          new_type_info_html: "<p>Spécifiez un nouveau type MIME pour permettre le téléversement de ces fichiers.</p><p>Veuillez utiliser le champ de test pour déterminer le type MIME d'un fichier. Veuillez noter que l'autorisation d'archives de fichiers (ex: application/zip) ou d'exécutables binaires (ex: application/exe) peut entraîner un vrai <strong>problème de sécurité</strong> et doit être évitée dans tous les cas.</p>"
           test_file: "Tester un fichier"
           set_a_file: "Sélectionner un fichier"
           file_is_TYPE: "Le type MIME de ce fichier est {TYPE}"
           projects_sharing: "Partage de projets"
           open_lab_projects: "Projets OpenLab"
-          open_lab_info_html: "Activez OpenLab pout partager vos projets avec d'autres Fab Labs et afficher une galerie de projets partagés. Veuillez envoyer un courriel à <a href='mailto:contact@fab-manager.com'>contact@fab-manager.com</a> pour obtenir gratuitement vos identifiants d'accès."
+          open_lab_info_html: "Activez OpenLab pour partager vos projets avec d'autres Fab Labs et afficher une galerie de projets partagés. Veuillez envoyer un courriel à <a href='mailto:contact@fab-manager.com'>contact@fab-manager.com</a> pour obtenir gratuitement vos identifiants d'accès."
           open_lab_app_id: "Identifiant"
           open_lab_app_secret: "Secret"
-          openlab_default_info_html: "Dans la galerie de projets, les visiteurs peuvent choisir entre deux vues: tous les projets de l'ensemble du réseau OpenLab, ou uniquement les projets documentés dans votre Fab Lab.<br/>Ici, vous pouvez choisir quelle vue est affichée par défaut."
+          openlab_default_info_html: "Dans la galerie de projets, les visiteurs peuvent choisir entre deux vues : tous les projets de l'ensemble du réseau OpenLab, ou uniquement les projets documentés dans votre Fab Lab.<br/>Ici, vous pouvez choisir quelle vue est affichée par défaut."
           default_to_openlab: "Afficher OpenLab par défaut"
       #track and monitor the trainings
       trainings:
@@ -592,7 +592,7 @@ fr:
         accounting_Space_label: "Libellé espaces"
         general_space_label: "Libellé du compte pour tous les espaces"
         codes_customization_success: "La personnalisation des codes comptables a bien été enregistrée."
-        unexpected_error_occurred: "Une erreur inattendue est survenue lors de l'enregitrement des codes. Veuillez réessayer plus tard."
+        unexpected_error_occurred: "Une erreur inattendue est survenue lors de l’enregistrement des codes. Veuillez réessayer plus tard."
         export_accounting_data: "Exporter les données comptables"
         export_to: "Exporter vers le logiciel comptable"
         export_is_running: "L'export est en cours. Vous serez notifié lorsqu'il sera prêt."
@@ -622,19 +622,21 @@ fr:
         payment:
           payment_settings: "Paramètres de paiement"
           online_payment: "Paiement en ligne"
-          online_payment_info_html: "Vous pouvez permettre à vos membres de réserver directement en ligne, en payment par carte bancaire. De manière alternative, vous pouvez restreindre les processus de réservation et de paiement aux administrateurs et aux gestionnaires."
-          enable_online_payment: "Activer le paiement en ligne"
+          online_payment_info_html: "Vous pouvez permettre à vos membres de réserver directement en ligne, en payant par carte bancaire. De manière alternative, vous pouvez restreindre les processus de réservation et de paiement aux administrateurs et aux gestionnaires."
+          enable_online_payment: "Activer les paiements en ligne"
           stripe_keys: "Clefs Stripe"
-          stripe_keys_info_html: "<p>Pour pouvoir encaisser des paiements en ligne, vous devez configurer les clefs d'API <a href='https://stripe.com' target='_blank'>Stripe</a>.</p><p>Retrouvez les dans <a href='https://dashboard.stripe.com/account/apikeys' target='_blank'>votre tableau de bord</a>.</p><p>Mettre à jour ces clefs entrainera une synchronisation de tous les utilisateurs vers Stripe, ceci peut prendre du temps. Vous recevrez une notification lorsque cela sera terminé.</p>"
+          stripe_keys_info_html: "<p>Pour pouvoir encaisser des paiements en ligne, vous devez configurer les clefs d'API <a href='https://stripe.com' target='_blank'>Stripe</a>.</p><p>Retrouvez les dans <a href='https://dashboard.stripe.com/account/apikeys' target='_blank'>votre tableau de bord</a>.</p><p>Mettre à jour ces clefs entraînera une synchronisation de tous les utilisateurs vers Stripe, ceci peut prendre du temps. Vous recevrez une notification lorsque cela sera terminé.</p>"
+
           public_key: "Clef publique"
           secret_key: "Clef secrète"
           error_check_keys: "Erreur : veuillez vérifier vos clefs Stripe."
           stripe_keys_saved: "Les clefs Stripe ont bien été enregistrées."
-          error_saving_stripe_keys: "Impossible d'enregitrer les clefs Stripe. Veuillez réessayer ultérieurement."
+          error_saving_stripe_keys: "Impossible d’enregistrer les clefs Stripe. Veuillez réessayer ultérieurement."
           edit_keys: "Modifier les clefs"
           currency: "Devise"
           currency_info_html: "Veuillez indiquer la devise à utiliser lors des paiements en ligne. Vous devez fournir un code ISO à trois lettres, issu de la liste des <a href='https://stripe.com/docs/currencies' target='_blank'>devises supportées par Stripe</a>."
-          currency_alert_html: "<strong>Attention</strong> : la devise ne peut pas être modifiée après que le premier payment en ligne ait été effectué. Veuillez définir attentivement ce paramètre avant d'ouvrir Fab-manager à vos members."
+          currency_alert_html: "<strong>Attention</strong> : la devise ne peut pas être modifiée après que le premier paiement en ligne ait été effectué. Veuillez définir attentivement ce paramètre avant d'ouvrir Fab-manager à vos membres."
+
           stripe_currency: "Devise Stripe"
       #management of users, labels, groups, and so on
       members:
@@ -1052,10 +1054,11 @@ fr:
         display_machine_reservation_user_name: "Afficher le nom de l'utilisateur ayant réservé une machine"
         display_name: "Afficher le nom"
         display_name_enable: "l'affichage du nom"
-        events_in_the_calendar: "Afficher les évènements dans l'agenda"
-        events_in_calendar_info: "Si cette option est activée, l'agenda administrateur affichera les évènements planifiés en lecture seule."
-        show_event: "Afficher les évènements"
-        events_in_calendar: "l'affichage des évènements dans l'agenda"
+        events_in_the_calendar: "Afficher les événements dans l'agenda"
+        events_in_calendar_info: "Si cette option est activée, l'agenda administrateur affichera les événements planifiés en lecture seule."
+        show_event: "Afficher les événements"
+        events_in_calendar: "l'affichage des événements dans l'agenda"
+
         machines_sort_by: "l'ordre d'affichage des machines"
         fab_analytics: "Fab Analytics"
         phone_required: "téléphone requis"
@@ -1134,7 +1137,7 @@ fr:
             updated_at: "Date de mise à jour"
           help: "Aide"
           feature_tour: "Visite guidée des fonctionnalités"
-          feature_tour_info_html: "<p>Lorsque un administrateur ou un gestionnaire est connecté, une visite guidée des fonctionnalités se déclenchera lors de la première visite de chaque section de l'application. Vous pouvez modifier ce comportement pour une des valeur suivantes :</p><ul><li>« Une fois » pour garder le comportment par défaut.</li><li>« Par session » pour afficher les visites guidées chaque fois que l'application est ouverte de nouveau.</li><li>« Lancement manuel » pour éviter l'affichage automatique des visites guidées. Il sera toujours possible de les déclencher en appuyant sur F1 ou en cliquant sur « Aide » dans le menu utilisateur.</li></ul>"
+          feature_tour_info_html: "<p>Lorsque un administrateur ou un gestionnaire est connecté, une visite guidée des fonctionnalités se déclenchera lors de la première visite de chaque section de l'application. Vous pouvez modifier ce comportement pour une des valeur suivantes :</p><ul><li>« Une fois » pour garder le comportement par défaut.</li><li>« Par session » pour afficher les visites guidées chaque fois que l'application est ouverte de nouveau.</li><li>« Lancement manuel » pour éviter l'affichage automatique des visites guidées. Il sera toujours possible de les déclencher en appuyant sur F1 ou en cliquant sur « Aide » dans le menu utilisateur.</li></ul>"
           feature_tour_display_mode: "Mode d'affichage des visites guidées"
           display_mode:
             once: "Une fois"

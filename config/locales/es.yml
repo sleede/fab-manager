@@ -18,6 +18,7 @@ es:
       carrierwave_download_error: "no pudo ser descargado"
       extension_whitelist_error: "No puede subir archivos con extensión %{extension}, tipos permitidos: %{allowed_types}"
       extension_blacklist_error: "No puede subir archivos con extensión %{extension}, tipos prohibidos: %{prohibited_types}"
+      content_type_whitelist_error: "No puede subir archivos con extensión %{content_type}, tipos permitidos: %{allowed_types}"
       rmagick_processing_error: "Error al manipular con rmagick, ¿Está seguro de que el archivo es una imagen? Error original: %{e}"
       mime_types_processing_error: "Error al procesar archivo con MIME::Types, puede ser que el contenido no sea válido. Error original: %{e}"
       mini_magick_processing_error: "Error al editar con MiniMagick, ¿Está seguro de que el archivo es una imagen?  Error original: %{e}"
@@ -110,6 +111,7 @@ es:
     subscription_of_NAME_for_DURATION_starting_from_DATE: "Suscripción %{NAME} por %{DURATION} empezando desde %{DATE}"
     subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "Subscripción de %{NAME} extendida (días gratuitos) empezando desde %{STARTDATE} hasta %{ENDDATE}"
     and: 'y'
+    invoice_text_example: "Our association is not subject to VAT"
   #CVS accounting export (columns headers)
   accounting_export:
     journal_code: "Código de registro"
@@ -338,6 +340,8 @@ es:
         your_role_is_ROLE: "Your role has been changed to %{ROLE}."
       notify_admins_role_update:
         user_NAME_changed_ROLE_html: "User <strong><em>%{NAME}</strong></em> is now %{ROLE}."
+      notify_admin_members_stripe_sync:
+        all_members_sync: "All members were successfully synchronized on Stripe."
   #statistics tools for admins
   statistics:
     subscriptions: "Suscripciones"

@@ -283,5 +283,9 @@ es:
       subject: "Your role has changed"
       body:
         role_changed_html: "Your role at {GENDER, select, male{the} female{the} neutral{} other{the}} {NAME} has changed. You are now <strong>{ROLE}</strong>.<br/>With great power comes great responsibility, use your new privileges fairly and respectfully."
+    notify_admin_members_stripe_sync:
+      subject: "Stripe synchronization"
+      body:
+        members_sync: "All members were successfully synchronized on Stripe."
     shared:
       hello: "¡Hola %{user_name}!"

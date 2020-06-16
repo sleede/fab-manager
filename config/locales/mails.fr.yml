@@ -286,6 +286,6 @@ fr:
     notify_admin_members_stripe_sync:
       subject: "Synchronisation Stripe"
       body:
-        members_sync: "Tous les members ont été synchronisés avec succès sur Stripe."
+        members_sync: "Tous les membres ont été synchronisés avec succès sur Stripe."
     shared:
       hello: "Bonjour %{user_name}"
