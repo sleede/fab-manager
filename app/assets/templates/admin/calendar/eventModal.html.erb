@@ -222,7 +222,7 @@
       <ul>
         <li ng-repeat="slot in occurrences">{{slot.start_at | amDateFormat:'L LT'}} - {{slot.end_at | amDateFormat:'LT'}}</li>
       </ul>
-      <div class="alert alert-info text-xs">
+      <div class="alert alert-info text-xs" ng-show="availability.slot_duration">
         <i class="fa fa-lightbulb-o m-r" aria-hidden="true"></i>
         <span translate translate-values="{DURATION: availability.slot_duration, COUNT: occurrences.length}"> {{ 'app.admin.calendar.divided_in_slots' }}</span>
       </div>

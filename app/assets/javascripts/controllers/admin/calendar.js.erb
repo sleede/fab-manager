@@ -637,7 +637,7 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
       const count = $scope.selectedMachines.length;
       $scope.selectedMachines = [];
       $scope.selectedMachinesBinding = {};
-      if (count == 0) {
+      if (count === 0) {
         $scope.machines.forEach(function (machine) {
           $scope.selectedMachines.push(machine);
           $scope.selectedMachinesBinding[machine.id] = true;
@@ -665,7 +665,7 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
       const count = $scope.selectedPlans.length;
       $scope.selectedPlans = [];
       $scope.selectedPlansBinding = {};
-      if (count == 0) {
+      if (count === 0) {
         plansPromise.forEach(function (plan) {
           $scope.selectedPlans.push(plan);
           $scope.selectedPlansBinding[plan.id] = true;
@@ -705,7 +705,7 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
      * Move the modal UI to the next step
      */
     $scope.next = function () {
-      if ($scope.step === 1) { $scope.setNbTotalPlaces(); }
+      if ($scope.step === 1) { return validateType(); }
       if ($scope.step === 2) { return validateSelection(); }
       if ($scope.step === 5) { return validateRecurrence(); }
       return $scope.step++;
@@ -722,13 +722,14 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
     $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
 
     /**
-     * For training avaiabilities, set the maximum number of people allowed to register on this slot
+     * For training/space availabilities, set the maximum number of people allowed registering on this slot.
+     * Also, set the default slot duration
      */
     $scope.setNbTotalPlaces = function () {
       if ($scope.availability.available_type === 'training') {
-        return $scope.availability.nb_total_places = $scope.selectedTraining.nb_total_places;
+        $scope.availability.nb_total_places = $scope.selectedTraining.nb_total_places;
       } else if ($scope.availability.available_type === 'space') {
-        return $scope.availability.nb_total_places = $scope.selectedSpace.default_places;
+        $scope.availability.nb_total_places = $scope.selectedSpace.default_places;
       }
     };
 
@@ -875,6 +876,19 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
       computeNames();
       $scope.step++;
     };
+
+    /**
+     * Initialize some settings, depending on the availability type, before continuing to step 2 (select a machine/training/space)
+     */
+    const validateType = function () {
+      $scope.setNbTotalPlaces();
+      if ($scope.availability.available_type === 'training') {
+        $scope.availability.slot_duration = undefined;
+      } else {
+        $scope.availability.slot_duration = parseInt(slotDurationPromise.setting.value, 10);
+      }
+      $scope.step++;
+    }
 
     /**
      * Compute the various occurrences of the availability, according to the recurrence settings

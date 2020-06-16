@@ -9,6 +9,7 @@
 - Updated Sidekiq to 6.0.7
 - Fix a bug: managers do not see the name of the user who reserved a slot
 - Fix a bug: OpenAPI documentation is not available
+- Fix a bug: summary of create training availability shows incorrect alert about slot splitting
 - Fix a security issue: updated websocket-extensions to 0.1.5 to fix [CVE-2020-7663](https://nvd.nist.gov/vuln/detail/CVE-2020-7663)
 - [TODO DEPLOY] `rails fablab:setup:env_to_db`
 - [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/redis-upgrade.sh | bash`
