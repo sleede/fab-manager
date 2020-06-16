@@ -774,6 +774,8 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
 
       // When the slot duration changes, we increment the availability to match the value
       $scope.$watch('availability.slot_duration', function (newValue, oldValue, scope) {
+        if (newValue === undefined) return;
+
         start = moment($scope.start);
         start.add(newValue * $scope.slots_nb, 'minutes');
         $scope.end = start.toDate();
