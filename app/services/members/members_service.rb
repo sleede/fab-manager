@@ -41,13 +41,16 @@ class Members::MembersService
     @member.statistic_profile.group_id = params[:group_id]
     @member.statistic_profile.role_id = Role.find_or_create_by!(name: 'member').id
 
-    if @member.save
-      @member.generate_subscription_invoice(current_user.id)
-      @member.send_confirmation_instructions
-      UsersMailer.delay.notify_user_account_created(@member, @member.password)
-      true
-    else
-      false
+    ActiveRecord::Base.transaction do
+      if @member.save
+        @member.update_statistic_profile
+        @member.generate_subscription_invoice(current_user.id)
+        @member.send_confirmation_instructions
+        UsersMailer.delay.notify_user_account_created(@member, @member.password)
+        true
+      else
+        false
+      end
     end
   end
 

@@ -178,7 +178,7 @@ class User < ApplicationRecord
   end
 
   def stripe_customer
-    Stripe::Customer.retrieve stp_customer_id
+    Stripe::Customer.retrieve(stp_customer_id, api_key: Setting.get('stripe_secret_key'))
   end
 
   def active_for_authentication?
@@ -203,7 +203,7 @@ class User < ApplicationRecord
   def need_completion?
     statistic_profile.gender.nil? || profile.first_name.blank? || profile.last_name.blank? || username.blank? ||
       email.blank? || encrypted_password.blank? || group_id.nil? || statistic_profile.birthday.blank? ||
-      (Rails.application.secrets.phone_required && profile.phone.blank?)
+      (Setting.get('phone_required') && profile.phone.blank?)
   end
 
   ## Retrieve the requested data in the User and user's Profile tables
@@ -319,6 +319,16 @@ class User < ApplicationRecord
         .delete_if { |col| blacklist.include?(col[0]) }
   end
 
+  # will update the statistic_profile after a group switch or a role update
+  def update_statistic_profile
+    raise NoProfileError if statistic_profile.nil? || statistic_profile.id.nil?
+
+    statistic_profile.update_attributes(
+      group_id: group_id,
+      role_id: roles.first.id
+    )
+  end
+
   protected
 
   # remove projects drafts that are not linked to another user
@@ -331,7 +341,7 @@ class User < ApplicationRecord
   end
 
   def confirmation_required?
-    Rails.application.secrets.user_confirmation_needed_to_sign_in ? super : false
+    Setting.get('confirmation_required') ? super : false
   end
 
   private
@@ -428,15 +438,6 @@ class User < ApplicationRecord
 
     invoicing_profile.update_attributes(
       email: email
-    )
-  end
-
-  # will update the statistic_profile after a group switch. Updating the role is not supported
-  def update_statistic_profile
-    raise NoProfileError if statistic_profile.nil?
-
-    statistic_profile.update_attributes(
-      group_id: group_id
     )
   end
 end

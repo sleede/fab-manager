@@ -44,7 +44,7 @@ module Availabilities
 
     test 'get calendar availabilities without spaces' do
       # disable spaces in application
-      Rails.application.secrets.fablab_without_spaces = true
+      Setting.set('spaces_module', false)
 
       # this simulates a fullCalendar (v2) call
       start_date = DateTime.current.utc.strftime('%Y-%m-%d')
@@ -63,8 +63,8 @@ module Availabilities
 
       assert_not availabilities.map { |a| a[:available_type] }.include?('space'), 'unexpected space availability instead that it was disabled'
 
-      # re-enable spaces to keep tests ENV-safe
-      Rails.application.secrets.fablab_without_spaces = false
+      # re-enable spaces
+      Setting.set('spaces_module', true)
     end
 
     test 'get calendar availabilities with spaces' do

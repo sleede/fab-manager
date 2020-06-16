@@ -30,7 +30,7 @@
             </div>
             <div>
               <span class="btn btn-default btn-file"><span class="fileinput-new">{{ 'app.shared.event.choose_a_picture' | translate }} <i class="fa fa-upload fa-fw"></i></span><span class="fileinput-exists" translate>{{ 'app.shared.buttons.change' }}</span>
-                <input type="file" name="event[event_image_attributes][attachment]"></span>
+                <input type="file" name="event[event_image_attributes][attachment]" accept="image/jpeg,image/gif,image/png"></span>
               <a class="btn btn-danger fileinput-exists" data-dismiss="fileinput"><i class="fa fa-trash-o"></i></a>
             </div>
           </div>
@@ -66,7 +66,7 @@
                 <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename">{{file.attachment}}</span>
               </div>
               <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new" translate>{{ 'app.shared.buttons.browse' }}</span>
-                <span class="fileinput-exists" translate>{{ 'app.shared.buttons.change' }}</span><input type="file" name="event[event_files_attributes][][attachment]"></span>
+                <span class="fileinput-exists" translate>{{ 'app.shared.buttons.change' }}</span><input type="file" name="event[event_files_attributes][][attachment]" accept="application/pdf"></span>
               <a class="input-group-addon btn btn-danger fileinput-exists" data-dismiss="fileinput" ng-click="deleteFile(file)"><i class="fa fa-trash-o"></i></a>
             </div>
 

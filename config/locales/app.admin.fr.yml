@@ -144,7 +144,7 @@ fr:
           disqus: "Disqus"
           disqus_info: "Si vous voulez permettre à vos membres et visiteurs de commenter les projets, vous pouvez activer les forums Disqus en définissant le paramètre suivant. Rendez-vous sur <a href='https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname-' target='_blank'>le site web de Disqus</a> pour plus d'informations."
           shortname: "Nom court"
-          cad_files: "Fichier CAO"
+          cad_files: "Fichiers CAO"
           validation: "Validation"
           validation_info: "Les utilisateurs peuvent téléverser des fichiers de CAO (Conception Assistée par Ordinateur) avec la documentation de leurs projets. Vous pouvez spécifier quels types de fichiers sont autorisés. Utilisez le champ de test ci-dessous pour déterminer le type MIME d'un fichier."
           extensions: "Extensions autorisées"
@@ -626,6 +626,7 @@ fr:
           enable_online_payment: "Activer les paiements en ligne"
           stripe_keys: "Clefs Stripe"
           stripe_keys_info_html: "<p>Pour pouvoir encaisser des paiements en ligne, vous devez configurer les clefs d'API <a href='https://stripe.com' target='_blank'>Stripe</a>.</p><p>Retrouvez les dans <a href='https://dashboard.stripe.com/account/apikeys' target='_blank'>votre tableau de bord</a>.</p><p>Mettre à jour ces clefs entraînera une synchronisation de tous les utilisateurs vers Stripe, ceci peut prendre du temps. Vous recevrez une notification lorsque cela sera terminé.</p>"
+
           public_key: "Clef publique"
           secret_key: "Clef secrète"
           error_check_keys: "Erreur : veuillez vérifier vos clefs Stripe."
@@ -635,6 +636,7 @@ fr:
           currency: "Devise"
           currency_info_html: "Veuillez indiquer la devise à utiliser lors des paiements en ligne. Vous devez fournir un code ISO à trois lettres, issu de la liste des <a href='https://stripe.com/docs/currencies' target='_blank'>devises supportées par Stripe</a>."
           currency_alert_html: "<strong>Attention</strong> : la devise ne peut pas être modifiée après que le premier paiement en ligne ait été effectué. Veuillez définir attentivement ce paramètre avant d'ouvrir Fab-manager à vos membres."
+
           stripe_currency: "Devise Stripe"
       #management of users, labels, groups, and so on
       members:
@@ -1056,6 +1058,7 @@ fr:
         events_in_calendar_info: "Si cette option est activée, l'agenda administrateur affichera les événements planifiés en lecture seule."
         show_event: "Afficher les événements"
         events_in_calendar: "l'affichage des événements dans l'agenda"
+
         machines_sort_by: "l'ordre d'affichage des machines"
         fab_analytics: "Fab Analytics"
         phone_required: "téléphone requis"

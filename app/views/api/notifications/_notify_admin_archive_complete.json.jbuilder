@@ -4,4 +4,4 @@ json.description t('.archive_complete',
                    END: notification.attached_object.end_at,
                    ID: notification.attached_object.id
                  )
-json.url notification_url(notification, format: :json)
+

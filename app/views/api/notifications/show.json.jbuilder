@@ -3,4 +3,3 @@ json.attached_object @notification.attached_object
 json.message do
   json.partial! "/api/notifications/#{@notification.notification_type}", notification: @notification
 end
-json.url notification_url(@notification, format: :json)

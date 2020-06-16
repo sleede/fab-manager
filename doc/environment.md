@@ -13,8 +13,8 @@
 The following environment variables configure the addresses of the databases, some credentials, some application behaviours and the localization preferences.
 If you are in a development environment, your can keep most of the default values, otherwise, in production, values must be configured carefully.
 
-The settings in [config/application.yml](../config/application.yml.default) configure the environment variables when the application run in development mode.
-If you run the application in production with docker, the settings are localized in [config/env](../docker/env.example).
+The settings in [.env](../env.example) configure the environment variables when the application run in development mode.
+If you run the application in production with docker, the settings are localized in [config/env](../setup/env.example).
 
 <a name="general-settings"></a>
 ## General settings
@@ -51,167 +51,32 @@ When using docker-compose, you should provide the name of the service in your [d
 Used by the authentication system to generate random tokens, eg. for resetting passwords.
 Used by Rails to verify the integrity of signed cookies.
 You can generate such a random key by running `rails secret`.
-<a name="STRIPE_API_KEY"></a><a name="STRIPE_PUBLISHABLE_KEY"></a>
-
-    STRIPE_API_KEY & STRIPE_PUBLISHABLE_KEY
-
-Key and secret used to identify you Stripe account through the API.
-Retrieve them from https://dashboard.stripe.com/account/apikeys.
-
-**MANDATORY**: Even if you don't want to charge your customers, you must fill this settings.
-For this purpose, you can use a stripe account in test mode, which will provide you test keys.
-If you change these keys during the application lifecycle, you must run `rails fablab:stripe:sync_members`, otherwise your users won't be able to do card payments.
-
-Please note that Stripe have changed the naming of their keys. Here's the matching:
-`STRIPE_API_KEY` = secret key
-`STRIPE_PUBLISHABLE_KEY` = public key
-<a name="STRIPE_CURRENCY"></a>
-
-    STRIPE_CURRENCY
-
-Currency used by stripe to charge the final customer.
-See https://support.stripe.com/questions/which-currencies-does-stripe-support for a list of available 3-letters ISO code.
-
-**BEWARE**: stripe currency cannot be changed during the application life.
-Changing the currency after the application has already run, may result in several bugs and prevent the users to pay through stripe.
-So set this setting carefully before starting the application for the first time.
-<a name="INVOICE_PREFIX"></a>
-
-    INVOICE_PREFIX
-
-When payments are done on the platform, an invoice will be generated as a PDF file.
-The PDF file name will be of the form "(INVOICE_PREFIX) - (invoice ID) _ (invoice date) .pdf".
-<a name="FABLAB_WITHOUT_PLANS"></a>
-
-    FABLAB_WITHOUT_PLANS
-
-If set to 'true', the subscription plans will be fully disabled and invisible in the application.
-It is not recommended to disable plans if at least one subscription was took on the platform.
-<a name="FABLAB_WITHOUT_SPACES"></a>
-
-    FABLAB_WITHOUT_SPACES
-
-If set to 'false', enable the spaces management and reservation in the application.
-It is not recommended to disable spaces if at least one space reservation was made on the system.
-<a name="FABLAB_WITHOUT_ONLINE_PAYMENT"></a>
-
-    FABLAB_WITHOUT_ONLINE_PAYMENT
-
-If set to 'true', the online payment won't be available and the you'll be only able to process reservations when logged as admin.
-Valid stripe API keys are still required, even if you don't require online payments.
-<a name="FABLAB_WITHOUT_INVOICES"></a>
-
-    FABLAB_WITHOUT_INVOICES
-
-If set to 'true', the invoices will be disabled.
-This is useful if you have your own invoicing system and you want to prevent Fab-manager from generating and sending invoices to members.
-**Very important**: if you disable invoices, you still have to configure VAT in the interface to prevent errors in accounting and prices.
-<a name="FABLAB_WITHOUT_WALLET"></a>
-
-    FABLAB_WITHOUT_WALLET
-
-If set to 'true', the wallet will be disabled.
-This is useful if you won't use wallet system.
-<a name="PHONE_REQUIRED"></a>
-
-    PHONE_REQUIRED
-
-If set to 'false' the phone number won't be required to register a new user on the software.
-<a name="BOOK_SLOT_AT_SAME_TIME"></a>
-
-    BOOK_SLOT_AT_SAME_TIME
-
-If set to 'true', users will be able to book a machine/formation/event slot, even if they already have a reservation the same day at the same time.
-<a name="USER_CONFIRMATION_NEEDED_TO_SIGN_IN"></a>
-
-    USER_CONFIRMATION_NEEDED_TO_SIGN_IN
-
-If set to 'true' the users will need to confirm their email address to be able to sign in.
-Set to 'false' if you don't want this behaviour.
-<a name="EVENTS_IN_CALENDAR"></a>
-
-    EVENTS_IN_CALENDAR
-
-If set to 'true', the admin calendar will display the scheduled events in the current view, as read-only items.
-<a name="SLOT_DURATION"></a>
-
-    SLOT_DURATION
-
-Machine and space availabilities are divided in multiple slots of the duration set by this variable.
-Default value is 60 minutes (1 hour).
-
-⚠ Changing this value during the application life may cause serious issues.
-Please ensure there's no machine/space availabilities opened to reservation or already reserved **in the future** when you change this value.
-<a name="DEFAULT_MAIL_FROM"></a>
-
-    DEFAULT_MAIL_FROM
-
-When sending notification mails, the platform will use this address to identify the sender.
 <a name="DELIVERY_METHOD"></a>
 
     DELIVERY_METHOD
 
 Configure the Rails' Action Mailer delivery method.
 See http://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration for more details.
-<a name="DEFAULT_HOST"></a><a name="DEFAULT_PROTOCOL"></a><a name="SMTP_ADDRESS"></a><a name="SMTP_PORT"></a><a name="SMTP_USER_NAME"></a><a name="SMTP_PASSWORD"></a><a name="SMTP_AUTHENTICATION"></a><a name="SMTP_ENABLE_STARTTLS_AUTO"></a><a name="SMTP_OPENSSL_VERIFY_MODE"></a><a name="SMTP_TLS"></a>
+<a name="SMTP_ADDRESS"></a><a name="SMTP_PORT"></a><a name="SMTP_USER_NAME"></a><a name="SMTP_PASSWORD"></a><a name="SMTP_AUTHENTICATION"></a><a name="SMTP_ENABLE_STARTTLS_AUTO"></a><a name="SMTP_OPENSSL_VERIFY_MODE"></a><a name="SMTP_TLS"></a>
 
-    DEFAULT_HOST, DEFAULT_PROTOCOL, SMTP_ADDRESS, SMTP_PORT, SMTP_USER_NAME, SMTP_PASSWORD, SMTP_AUTHENTICATION, SMTP_ENABLE_STARTTLS_AUTO, SMTP_OPENSSL_VERIFY_MODE & SMTP_TLS
+    SMTP_ADDRESS, SMTP_PORT, SMTP_USER_NAME, SMTP_PASSWORD, SMTP_AUTHENTICATION, SMTP_ENABLE_STARTTLS_AUTO, SMTP_OPENSSL_VERIFY_MODE & SMTP_TLS
 
 When DELIVERY_METHOD is set to **smtp**, configure the SMTP server parameters.
 See https://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration for more details.
-DEFAULT_HOST is also used to configure Google Analytics.
-<a name="GA_ID"></a>
+<a name="DEFAULT_HOST"></a><a name="DEFAULT_PROTOCOL"></a>
 
-    GA_ID
+    DEFAULT_HOST, DEFAULT_PROTOCOL
 
-Identifier of your Google Analytics account.
-<a name="RECAPTCHA_SITE_KEY"></a><a name="RECAPTCHA_SECRET_KEY"></a>
-
-    RECAPTCHA_SITE_KEY, RECAPTCHA_SECRET_KEY
-
-Configuration keys of Google ReCaptcha V2 (Checkbox).
-This is optional, the captcha will be displayed on the sign-up form, only if these keys are provided.
-<a name="DISQUS_SHORTNAME"></a>
-
-    DISQUS_SHORTNAME
-
-Unique identifier of your [Disqus](http://www.disqus.com) forum.
-Disqus forums are used to allow visitors to comment on projects.
-See https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname- for more information.
-<a name="TWITTER_NAME"></a>
-
-    TWITTER_NAME
-
-Identifier of the Twitter account for Twitter share project, event or training
-It will also be used for [Twitter Card analytics](https://dev.twitter.com/cards/analytics).
-<a name="FACEBOOK_APP_ID"></a>
-
-    FACEBOOK_APP_ID
-
-This is optional. You can follow [this guide to get your personal App ID](https://developers.facebook.com/docs/apps/register).
-If you do so, you'll be able to customize and get statistics about project shares on Facebook.
+Your members will receive email notifications containing links to your of Fab-manager.
+You must properly configure these variables to match URL of this instance, to prevent broken links.
+Typically, `DEFAULT_PROTOCOL` will be `https` (`http` if you are in development, or if you set `ALLOW_INSECURE_HTTP`).
+The variable `DEFAULT_HOST` should be your domain name (eg. fabmanager.example.com), and  is also used for visits statistics (configuration of Google Analytics).
 <a name="LOG_LEVEL"></a>
 
     LOG_LEVEL
 
 This parameter configures the logs verbosity.
 Available log levels can be found [here](http://guides.rubyonrails.org/debugging_rails_applications.html#log-levels).
-<a name="ALLOWED_EXTENSIONS"></a>
-
-    ALLOWED_EXTENSIONS
-
-Exhaustive list of file's extensions available for public upload as project's CAO attachements.
-Each item in the list must be separated from the others by a space char.
-You will probably want to check that this list match the `ALLOWED_MIME_TYPES` values below.
-Please consider that allowing file archives (eg. ZIP) or binary executable (eg. EXE) may result in a **dangerous** security issue and must be avoided in any cases.
-<a name="ALLOWED_MIME_TYPES"></a>
-
-    ALLOWED_MIME_TYPES
-
-Exhaustive list of file's mime-types available for public upload as project's CAO attachements.
-Each item in the list must be separated from the others by a space char.
-You will probably want to check that this list match the `ALLOWED_EXTENSIONS` values above.
-Please consider that allowing file archives (eg. application/zip) or binary executable (eg. application/exe) may result in a **dangerous** security issue and must be avoided in any cases.
 <a name="MAX_IMAGE_SIZE"></a>
 
     MAX_IMAGE_SIZE
@@ -243,7 +108,7 @@ The check will run every weeks and if the threshold is exceeded, an alert will b
     ADMIN_EMAIL, ADMIN_PASSWORD
 
 Credentials for the first admin user created when seeding the project.
-By default, theses variables are not present in application.yml because they are only used once, when running the database seed with the command `rails db:seed`.
+By default, these variables are not present in the env file, because they are only used once, when running the database seed with the command `rails db:seed`.
 <a name="SUPERADMIN_EMAIL"></a>
 
     SUPERADMIN_EMAIL
@@ -256,22 +121,20 @@ If not specified, every admins will receive system administration notifications.
     FORCE_VERSION_CHECK
 
 In test and development environments, the version won't be check automatically, unless this variable is set to "true".
-<a name="FEATURE_TOUR_DISPLAY"></a>
-
-    FEATURE_TOUR_DISPLAY
-
-When logged-in as an administrator, a feature tour will be triggered the first time you visit each section of the application.
-You can change this behavior by setting this variable to one of the following values:
-- "once" to keep the default behavior.
-- "session" to display the tours each time you reopen the application.
-- "manual" to prevent displaying the tours automatically; you'll still be able to trigger them by pressing the F1 key.
 <a name="ALLOW_INSECURE_HTTP"></a>
 
     ALLOW_INSECURE_HTTP
-    
+
 In production and staging environments, the session cookie won't be sent to the server unless through the HTTPS protocol.
 If you're using Fab-manager on a non-public network or for testing purposes, you can disable this behavior by setting this variable to `true`.
 Please, ensure you know what you're doing, as this can lead to serious security issues. 
+<a name="LOCKED_SETTINGS"></a>
+
+    LOCKED_SETTINGS
+
+A comma separated list of settings that cannot be changed from the UI.
+Please refer to https://github.com/sleede/fab-manager/blob/master/app/models/setting.rb for a list of possible values.
+Only the system administrator can change them, with the command: `ENV=value rails fablab:setup:env_to_db` 
 
 <a name="internationalization-settings"></a>
 ## Internationalization setting.
@@ -376,19 +239,6 @@ See [Crowdin documentation](https://support.crowdin.com/in-context-localization/
 Accordingly, `RAILS_LOCALE` and `APP_LOCALE` must be configured to `zu`.
 <a name="open-projects-settings"></a>
 ## OpenLab settings
-<a name="OPENLAB_APP_ID"></a><a name="OPENLAB_APP_SECRET"></a>
-
-    OPENLAB_APP_ID, OPENLAB_APP_SECRET
-
-This configuration is optional and can only work in production mode.
-It allows you to display a shared projects gallery and to share your projects with other fablabs.
-Send an email to **contact@fab-manager.com** to get your OpenLab client's credentials.
-<a name="OPENLAB_DEFAULT"></a>
-
-    OPENLAB_DEFAULT
-
-When set to false, the default display will be the local projects when browsing the projects gallery.
-If not set or set to true, the projects from the OpenLab repository will be shown first.
 <a name="OPENLAB_BASE_URI"></a>
 
     OPENLAB_BASE_URI

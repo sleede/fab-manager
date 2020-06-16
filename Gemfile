@@ -12,14 +12,12 @@ gem 'rails', '~> 5.2.4'
 # Used by rails 5.2 to reduce the app boot time by over 50%
 gem 'bootsnap'
 # Use Puma as web server
-gem 'puma', '3.12.4'
+gem 'puma', '3.12.6'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0', '>= 5.0.6'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 4.1.20'
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-gem 'therubyracer', '= 0.12.0', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -98,11 +96,10 @@ gem 'friendly_id', '~> 5.1.0'
 gem 'aasm'
 
 # Background job processing
-gem 'redis-namespace'
-gem 'sidekiq', '>= 3.4.2'
-gem 'sinatra', require: false
+gem 'sidekiq', '>= 6.0.7'
 # Recurring jobs for Sidekiq
 gem 'sidekiq-cron'
+gem 'sidekiq-unique-jobs', '~> 6.0.22'
 
 gem 'stripe', '5.1.1'
 
@@ -123,7 +120,7 @@ gem 'pundit'
 
 gem 'oj'
 
-gem 'actionpack-page_caching', '1.2.1'
+gem 'actionpack-page_caching', '1.2.2'
 gem 'rails-observers'
 
 gem 'chroma'
@@ -134,7 +131,6 @@ gem 'openlab_ruby'
 
 gem 'api-pagination'
 gem 'apipie-rails'
-gem 'has_secure_token'
 
 # XLS files generation
 gem 'caxlsx'

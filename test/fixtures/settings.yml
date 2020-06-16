@@ -352,3 +352,76 @@ setting_60:
   name: home_content
   created_at: 2020-03-25 09:21:35.200795784 Z
   updated_at: 2020-03-25 09:21:35.200795784 Z
+
+setting_61:
+  id: 61
+  name: slot_duration
+  created_at: 2020-05-22 15:20:25.254250000 Z
+  updated_at: 2020-05-22 15:20:25.254250000 Z
+
+setting_62:
+  id: 62
+  name: spaces_module
+  created_at: 2020-06-01 11:12:21.255550000 Z
+  updated_at: 2020-06-01 11:12:21.255550000 Z
+
+setting_63:
+  id: 63
+  name: plans_module
+  created_at: 2020-06-01 11:12:21.255550000 Z
+  updated_at: 2020-06-01 11:12:21.255550000 Z
+
+setting_64:
+  id: 64
+  name: feature_tour_display
+  created_at: 2020-06-01 11:12:21.255550000 Z
+  updated_at: 2020-06-01 11:12:21.255550000 Z
+
+setting_65:
+  id: 65
+  name: email_from
+  created_at: 2020-06-01 11:12:21.255550000 Z
+  updated_at: 2020-06-01 11:12:21.255550000 Z
+
+setting_66:
+  id: 66
+  name: online_payment_module
+  created_at: 2020-06-08 17:12:16.846525000 Z
+  updated_at: 2020-06-08 17:12:16.846525000 Z
+
+setting_67:
+  id: 67
+  name: stripe_public_key
+  created_at: 2020-06-08 17:12:16.846525000 Z
+  updated_at: 2020-06-08 17:12:16.846525000 Z
+
+setting_68:
+  id: 68
+  name: stripe_secret_key
+  created_at: 2020-06-08 17:12:16.846525000 Z
+  updated_at: 2020-06-08 17:12:16.846525000 Z
+
+setting_69:
+  id: 69
+  name: stripe_currency
+  created_at: 2020-06-08 17:12:16.846525000 Z
+  updated_at: 2020-06-08 17:12:16.846525000 Z
+
+setting_70:
+  id: 70
+  name: invoice_prefix
+  created_at: 2020-06-15 10:04:06.216541000 Z
+  updated_at: 2020-06-15 10:04:06.216541000 Z
+
+setting_71:
+  id: 71
+  name: confirmation_required
+  created_at: 2020-06-15 10:04:06.216541000 Z
+  updated_at: 2020-06-15 10:04:06.216541000 Z
+
+setting_72:
+  id: 72
+  name: wallet_module
+  created_at: 2020-06-15 10:04:06.216541000 Z
+  updated_at: 2020-06-15 10:04:06.216541000 Z
+

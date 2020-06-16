@@ -1,0 +1,15 @@
+<form class="{{classes}}" name="settingNumberForm">
+  <label for="setting-{{setting.name}}" class="control-label m-r" translate>{{ label }}</label>
+  <div class="form-group">
+      <div class="input-group">
+          <div class="input-group-addon">
+              <i class="fa {{faIcon}}"></i>
+          </div>
+          <input type="number" class="form-control" id="setting-{{setting.name}}" ng-model="setting.value" min="{{min}}" ng-required="required">
+      </div>
+      <span class="help-block text-info text-xs" ng-show="helperText">
+          <i class="fa fa-lightbulb-o"></i> {{ helperText | translate }}
+      </span>
+  </div>
+  <button name="button" class="btn btn-warning" ng-click="save(setting)" ng-disabled="settingNumberForm.$invalid" translate>{{ 'app.shared.buttons.save' }}</button>
+</form>

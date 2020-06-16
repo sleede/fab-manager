@@ -20,7 +20,8 @@ class HealthController < ActionController::Base
         version: Version.up_to_date?
       },
       stats: HealthService.stats,
-      tagline: 'The platform to manage your fablab or your coworking space.'
+      tagline: 'The platform to manage your fablab or your coworking space.',
+      url: 'https://www.fab-manager.com'
     }
   end
 end

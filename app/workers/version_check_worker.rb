@@ -3,6 +3,9 @@
 # Will check the application version to ensure it is up-to-date
 class VersionCheckWorker
   include Sidekiq::Worker
+  sidekiq_options lock: :until_executed,
+                  on_conflict: :reject,
+                  queue: :system
 
   def perform
     require 'fab_hub'
@@ -10,7 +13,7 @@ class VersionCheckWorker
       res = FabHub.fab_manager_version_check
     rescue Errno::ECONNREFUSED => e
       if Rails.env.development?
-        puts "Unable to check the version, maybe FabHub is not running: #{e}"
+        logger.warn "Unable to check the version, maybe FabHub is not running: #{e}"
         return
       end
     end

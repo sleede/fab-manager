@@ -2,7 +2,7 @@
 
 # Handle most of the emails sent by the platform. Triggered by notifications
 class NotificationsMailer < NotifyWith::NotificationsMailer
-  default from: ENV['DEFAULT_MAIL_FROM']
+  default from: ->(*) { Setting.get('email_from') }
   layout 'notifications_mailer'
 
   helper :application

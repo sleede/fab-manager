@@ -12,11 +12,6 @@ Application.Services.factory('Project', ['$resource', function ($resource) {
         method: 'GET',
         url: '/api/projects/search',
         isArray: false
-      },
-      allowedExtensions: {
-        method: 'GET',
-        url: '/api/projects/allowed_extensions',
-        isArray: true
       }
     }
   );

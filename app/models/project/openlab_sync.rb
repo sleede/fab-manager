@@ -59,7 +59,7 @@ module Project::OpenlabSync
 
   class_methods do
     def openlab_sync_active?
-      Rails.application.secrets.openlab_app_secret.present?
+      Setting.get('openlab_app_secret').present?
     end
   end
 end

@@ -164,5 +164,28 @@ namespace :fablab do
         end
       end
     end
+
+    desc '[release 4.4.2] add missing role to StatisticProfile'
+    task role_in_statistic_profile: :environment do
+      puts "Fixing #{StatisticProfile.where(role_id: nil).count} bugged profiles...\n"
+      StatisticProfile.where(role_id: nil).each do |sp|
+        role_id = sp&.user&.roles&.first&.id
+        sp.role_id = role_id
+        sp.save!
+      end
+    end
+
+    desc '[release 4.4.3] fix duration of recurring availabilities'
+    task availabilities_duration: :environment do
+      Availability.select(:occurrence_id).where(is_recurrent: true).group(:occurrence_id).each do |a|
+        occurrences = Availability.where(occurrence_id: a.occurrence_id)
+        next unless occurrences.map(&:slot_duration).uniq.size > 1
+
+        duration = occurrences.map(&:slot_duration).uniq.detect { |e| !e.nil? }
+        occurrences.each do |o|
+          o.update_attributes(slot_duration: duration)
+        end
+      end
+    end
   end
 end

@@ -10,7 +10,7 @@ json.profile do
   if member.profile.user_avatar
     json.user_avatar do
       json.id member.profile.user_avatar.id
-      json.attachment_url member.profile.user_avatar.attachment_url
+      json.attachment_url "#{member.profile.user_avatar.attachment_url}?#{member.profile.user_avatar.updated_at.to_i}"
     end
   end
   json.first_name member.profile.first_name

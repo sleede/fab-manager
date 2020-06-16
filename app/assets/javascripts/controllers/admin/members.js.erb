@@ -126,8 +126,8 @@ class MembersController {
 /**
  * Controller used in the members/groups management page
  */
-Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', '$uibModal', 'membersPromise', 'adminsPromise', 'partnersPromise', 'managersPromise', 'growl', 'Admin', 'AuthService', 'dialogs', '_t', 'Member', 'Export', 'User', 'uiTourService',
-  function ($scope, $sce, $uibModal, membersPromise, adminsPromise, partnersPromise, managersPromise, growl, Admin, AuthService, dialogs, _t, Member, Export, User, uiTourService) {
+Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', '$uibModal', 'membersPromise', 'adminsPromise', 'partnersPromise', 'managersPromise', 'growl', 'Admin', 'AuthService', 'dialogs', '_t', 'Member', 'Export', 'User', 'uiTourService', 'settingsPromise',
+  function ($scope, $sce, $uibModal, membersPromise, adminsPromise, partnersPromise, managersPromise, growl, Admin, AuthService, dialogs, _t, Member, Export, User, uiTourService, settingsPromise) {
   /* PRIVATE STATIC CONSTANTS */
 
     // number of users loaded each time we click on 'load more...'
@@ -567,7 +567,7 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
         }
       });
       // if the user has never seen the tour, show him now
-      if (Fablab.featureTourDisplay !== 'manual' && $scope.currentUser.profile.tours.indexOf('members') < 0) {
+      if (settingsPromise.feature_tour_display !== 'manual' && $scope.currentUser.profile.tours.indexOf('members') < 0) {
         uitour.start();
       }
     }
@@ -641,8 +641,8 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
 /**
  * Controller used in the member edition page
  */
-Application.Controllers.controller('EditMemberController', ['$scope', '$state', '$stateParams', 'Member', 'Training', 'dialogs', 'growl', 'Group', 'Subscription', 'CSRF', 'memberPromise', 'tagsPromise', '$uibModal', 'Plan', '$filter', '_t', 'walletPromise', 'transactionsPromise', 'activeProviderPromise', 'Wallet',
-  function ($scope, $state, $stateParams, Member, Training, dialogs, growl, Group, Subscription, CSRF, memberPromise, tagsPromise, $uibModal, Plan, $filter, _t, walletPromise, transactionsPromise, activeProviderPromise, Wallet) {
+Application.Controllers.controller('EditMemberController', ['$scope', '$state', '$stateParams', 'Member', 'Training', 'dialogs', 'growl', 'Group', 'Subscription', 'CSRF', 'memberPromise', 'tagsPromise', '$uibModal', 'Plan', '$filter', '_t', 'walletPromise', 'transactionsPromise', 'activeProviderPromise', 'Wallet', 'phoneRequiredPromise',
+  function ($scope, $state, $stateParams, Member, Training, dialogs, growl, Group, Subscription, CSRF, memberPromise, tagsPromise, $uibModal, Plan, $filter, _t, walletPromise, transactionsPromise, activeProviderPromise, Wallet, phoneRequiredPromise) {
   /* PUBLIC SCOPE */
 
     // API URL where the form will be posted
@@ -659,6 +659,9 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
 
     // Should the password be modified?
     $scope.password = { change: false };
+
+    // is the phone number required in _member_form?
+    $scope.phoneRequired = (phoneRequiredPromise.setting.value === 'true');
 
     // the user subscription
     if (($scope.user.subscribed_plan != null) && ($scope.user.subscription != null)) {
@@ -948,8 +951,8 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
 /**
  * Controller used in the member's creation page (admin view)
  */
-Application.Controllers.controller('NewMemberController', ['$scope', '$state', '$stateParams', 'Member', 'Training', 'Group', 'CSRF',
-  function ($scope, $state, $stateParams, Member, Training, Group, CSRF) {
+Application.Controllers.controller('NewMemberController', ['$scope', '$state', '$stateParams', 'Member', 'Training', 'Group', 'CSRF', 'phoneRequiredPromise',
+  function ($scope, $state, $stateParams, Member, Training, Group, CSRF, phoneRequiredPromise) {
     CSRF.setMetaTags();
 
     /* PUBLIC SCOPE */
@@ -962,6 +965,9 @@ Application.Controllers.controller('NewMemberController', ['$scope', '$state', '
 
     // Should the password be set manually or generated?
     $scope.password = { change: false };
+
+    // is the phone number required in _member_form?
+    $scope.phoneRequired = (phoneRequiredPromise.setting.value === 'true');
 
     // Default member's profile parameters
     $scope.user = {

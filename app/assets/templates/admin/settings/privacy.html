@@ -1,11 +1,11 @@
 <div class="panel panel-default m-t-md">
   <div class="panel-heading">
-    <span class="font-sbold" translate>{{ 'app.admin.settings.privacy.title' }}</span>
+    <span class="font-sbold" translate>{{ 'app.admin.settings.privacy.privacy_policy' }}</span>
   </div>
     <div class="panel-body">
 
         <div class="row">
-            <div class="col-md-4 col-md-offset-1">
+            <div class="col-md-6 col-md-offset-1">
               <select class="form-control m-b history-select" ng-options="d.id as d.name for d in privacyDraftsHistory" ng-model="privacyPolicy.version" ng-change="handlePolicyRevisionChange()">
                 <option value="" translate>{{ 'app.admin.settings.privacy.current_policy' }}</option>
               </select>
@@ -17,7 +17,7 @@
                 <span class="help-block text-info text-xs"><i class="fa fa-lightbulb-o"></i> {{ 'app.admin.settings.drag_and_drop_to_insert_images' | translate }}</span>
                 <button name="button" class="btn btn-warning" ng-click="savePrivacyPolicy()" translate>{{ 'app.shared.buttons.save' }}</button>
             </div>
-            <div class="col-md-4 col-md-offset-2">
+            <div class="col-md-3 col-md-offset-1">
                 <div ng-model="privacyDpoSetting.value" medium-editor options='{"placeholder": "{{ "app.admin.settings.privacy.input_the_dpo" | translate }}",
                   "buttons": ["bold", "italic", "anchor", "header1", "header2" ]
                   }'>
@@ -38,22 +38,62 @@
     <div class="panel-body">
       <div class="row">
         <div class="col-md-10 col-md-offset-1">
-          <label for="is_recurrent" translate>{{ 'app.admin.settings.fab_analytics' }}</label>
-          <input bs-switch
-                 ng-model="fabAnalytics.value"
-                 id="is_recurrent"
-                 type="checkbox"
-                 class="form-control"
-                 switch-on-text="{{ 'app.shared.buttons.yes' | translate }}"
-                 switch-off-text="{{ 'app.shared.buttons.no' | translate }}"
-                 switch-animate="true"/>
+          <boolean-setting
+              name="fab_analytics"
+              settings="allSettings"
+              label="app.admin.settings.fab_analytics">
+          </boolean-setting>
           <p>
             <span translate>{{ 'app.admin.settings.privacy.about_analytics' }}</span>
             <a ng-click="analyticsModal()" class="pointer" translate>{{ 'app.admin.settings.privacy.read_more' }}</a>
           </p>
-          <button name="button" class="btn btn-warning" ng-click="save(fabAnalytics)" translate>{{ 'app.shared.buttons.save' }}</button>
         </div>
       </div>
 
     </div>
+</div>
+
+<div class="panel panel-default m-t-md">
+  <div class="panel-heading">
+    <span class="font-sbold" translate>{{ 'app.admin.settings.privacy.statistics' }}</span>
+  </div>
+  <div class="panel-body">
+    <p class="alert alert-info"><i class="fa fa-info-circle m-r"></i><span translate>{{ 'app.admin.settings.remember_to_refresh_the_page_for_the_changes_to_take_effect' }}</span> </p>
+    <div class="row">
+      <h3 class="m-l" translate>{{ 'app.admin.settings.privacy.google_analytics' }}</h3>
+      <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.privacy.tracking_id_info_html' | translate"></p>
+      <div class="col-md-4 col-md-offset-1">
+        <text-setting name="tracking_id"
+                      settings="allSettings"
+                      label="app.admin.settings.privacy.tracking_id"
+                      placeholder="UA-000000-2">
+        </text-setting>
+      </div>
+    </div>
+
+    <div class="row">
+      <h3 class="m-l" translate>{{ 'app.admin.settings.privacy.facebook' }}</h3>
+      <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.privacy.facebook_info_html' | translate"></p>
+      <div class="col-md-4 col-md-offset-1">
+        <text-setting name="facebook_app_id"
+                      settings="allSettings"
+                      label="app.admin.settings.privacy.app_id"
+                      placeholder="000000000000000">
+        </text-setting>
+      </div>
+    </div>
+
+    <div class="row">
+      <h3 class="m-l" translate>{{ 'app.admin.settings.privacy.twitter' }}</h3>
+      <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.privacy.twitter_info_html' | translate"></p>
+      <div class="col-md-4 col-md-offset-1">
+        <text-setting name="twitter_analytics"
+                      settings="allSettings"
+                      label="app.admin.settings.privacy.twitter_analytics"
+                      placeholder="@username">
+        </text-setting>
+      </div>
+    </div>
+
+  </div>
 </div>

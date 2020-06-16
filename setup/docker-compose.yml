@@ -44,7 +44,7 @@ services:
     restart: always
 
   redis:
-    image: redis:3.0
+    image: redis:6-alpine
     volumes:
       - ${PWD}/redis:/data
     restart: always

@@ -27,9 +27,9 @@ Fab-manager is the Fab Lab management solution. It provides a comprehensive, web
 Fab-manager is a Ruby on Rails / AngularJS web application that runs on the following software:
 
 - Ubuntu LTS 14.04+ / Debian 8+
-- Ruby 2.3
-- Redis 2.8.4+
-- Sidekiq 3.3.4+
+- Ruby 2.6
+- Redis 6
+- Sidekiq 6
 - Elasticsearch 5.6
 - PostgreSQL 9.6
 
@@ -71,9 +71,8 @@ The deal is fair, you share your projects and as reward you benefits from projec
 If you want to try it, you can visit [this Fab-manager](https://fablab.lacasemate.fr/#!/projects) and see projects from different Fab-managers.
 
 To start using this awesome feature, there are a few steps:
-- send a mail to **contact@fab-manager.com** asking for your Open Projects client's credentials and giving them the name of your Fab-manager, they will give you an `OPENLAB_APP_ID` and an `OPENLAB_APP_SECRET`
-- fill in the value of the keys in your environment file
-- start your Fab-manager app
+- send a mail to **contact@fab-manager.com** asking for your Open Projects client's credentials and giving them the name and the URL of your Fab-manager, they will give you an `App ID` and a `secret`
+- fill in the value of the keys in Admin > Projects > Settings > Projects sharing
 - export your projects to open-projects (if you already have projects created on your Fab-manager, unless you can skip that part) executing this command: `bundle exec rake fablab:openlab:bulk_export`
 
 **IMPORTANT: please run your server in production mode.**
@@ -99,9 +98,9 @@ You can see an example on the [repo of navinum gamification plugin](https://gith
 ## Single Sign-On
 
 Fab-manager can be connected to a [Single Sign-On](https://en.wikipedia.org/wiki/Single_sign-on) server which will provide its own authentication for the platform's users.
-Currently OAuth 2 is the only supported protocol for SSO authentication.
+Currently, OAuth 2 is the only supported protocol for SSO authentication.
 
-For an example of how to use configure a SSO in Fab-manager, please read [sso_with_github.md](doc/sso_with_github.md).
+For an example of how to use configure an SSO in Fab-manager, please read [sso_with_github.md](doc/sso_with_github.md).
 
 <a name="known-issues"></a>
 ## Known issues
@@ -111,7 +110,7 @@ Before reporting an issue, please check if your issue is not listed in the [know
 <a name="related-documentation"></a>
 ## Related Documentation
 
-- [Ruby 2.3.0](http://ruby-doc.org/core-2.3.0/)
+- [Ruby 2.6.5](http://ruby-doc.org/core-2.6.5/)
 - [Ruby on Rails](http://api.rubyonrails.org)
 - [AngularJS](https://docs.angularjs.org/api)
 - [Angular-Bootstrap](http://angular-ui.github.io/bootstrap/)

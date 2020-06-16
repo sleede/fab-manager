@@ -1148,8 +1148,8 @@ es:
           wallet_info_html: "<p>The virtual wallet allows you to allocate a sum of money to users. Then, can spend this money as they wish, in Fab-manager.</p><p>Members cannot credit their wallet themselves, it's a privilege of managers and administrators.</p>"
           enable_wallet: "Enable wallet"
         privacy:
-          title: "Privacy"
-          privacy_policy: "Privacy policy"
+          title: "Privacidad"
+          privacy_policy: "Política de privacidad"
           input_the_dpo: "Input the contact of the Data Protection Officer"
           current_policy: "Política de privacidad"
           draft_from_USER_DATE: "Borrador, guardado por {USER}, el {DATE}"

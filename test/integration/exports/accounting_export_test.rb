@@ -51,7 +51,7 @@ class Exports::AccountingExportTest < ActionDispatch::IntegrationTest
 
     # test values
     # first line = client line
-    journal_code = Setting.find_by(name: 'accounting_journal_code').value
+    journal_code = Setting.get('accounting_journal_code')
     assert_equal journal_code, data[0][I18n.t('accounting_export.journal_code')], 'Wrong journal code'
 
     first_invoice = Invoice.first
@@ -59,10 +59,10 @@ class Exports::AccountingExportTest < ActionDispatch::IntegrationTest
     assert_equal entry_date, DateTime.parse(data[0][I18n.t('accounting_export.date')]), 'Wrong date'
 
     if first_invoice.paid_with_stripe?
-      card_client_code = Setting.find_by(name: 'accounting_card_client_code').value
+      card_client_code = Setting.get('accounting_card_client_code')
       assert_equal card_client_code, data[0][I18n.t('accounting_export.account_code')], 'Account code for card client is wrong'
 
-      card_client_label = Setting.find_by(name: 'accounting_card_client_label').value
+      card_client_label = Setting.get('accounting_card_client_label')
       assert_equal card_client_label, data[0][I18n.t('accounting_export.account_label')], 'Account label for card client is wrong'
     else
       STDERR.puts "WARNING: unable to test accurately accounting export: invoice #{first_invoice.id} was not paid by card"
@@ -93,10 +93,10 @@ class Exports::AccountingExportTest < ActionDispatch::IntegrationTest
     assert_equal entry_date, DateTime.parse(data[1][I18n.t('accounting_export.date')]), 'Wrong date'
 
     if first_invoice.subscription_invoice?
-      subscription_code = Setting.find_by(name: 'accounting_subscription_code').value
+      subscription_code = Setting.get('accounting_subscription_code')
       assert_equal subscription_code, data[1][I18n.t('accounting_export.account_code')], 'Account code for subscription is wrong'
 
-      subscription_label = Setting.find_by(name: 'accounting_subscription_label').value
+      subscription_label = Setting.get('accounting_subscription_label')
       assert_equal subscription_label, data[1][I18n.t('accounting_export.account_label')], 'Account label for subscription is wrong'
     end
 
@@ -122,10 +122,10 @@ class Exports::AccountingExportTest < ActionDispatch::IntegrationTest
                    client_row[I18n.t('accounting_export.line_label')],
                    'Line label does not contains the reference to the invoiced item'
 
-      machine_code = Setting.find_by(name: 'accounting_Machine_code').value
+      machine_code = Setting.get('accounting_Machine_code')
       assert_equal machine_code, item_row[I18n.t('accounting_export.account_code')], 'Account code for machine reservation is wrong'
 
-      machine_label = Setting.find_by(name: 'accounting_Machine_label').value
+      machine_label = Setting.get('accounting_Machine_label')
       assert_equal machine_label, item_row[I18n.t('accounting_export.account_label')], 'Account label for machine reservation is wrong'
 
     else

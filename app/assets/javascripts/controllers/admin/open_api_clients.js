@@ -10,8 +10,8 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-Application.Controllers.controller('OpenAPIClientsController', ['$scope', 'clientsPromise', 'growl', 'OpenAPIClient', 'dialogs', '_t', 'Member', 'uiTourService',
-  function ($scope, clientsPromise, growl, OpenAPIClient, dialogs, _t, Member, uiTourService) {
+Application.Controllers.controller('OpenAPIClientsController', ['$scope', 'clientsPromise', 'settingsPromise', 'growl', 'OpenAPIClient', 'dialogs', '_t', 'Member', 'uiTourService',
+  function ($scope, clientsPromise, settingsPromise, growl, OpenAPIClient, dialogs, _t, Member, uiTourService) {
     /* PUBLIC SCOPE */
 
     // clients list
@@ -20,17 +20,32 @@ Application.Controllers.controller('OpenAPIClientsController', ['$scope', 'clien
     $scope.clientFormVisible = false;
     $scope.client = {};
 
-    $scope.toggleForm = () => $scope.clientFormVisible = !$scope.clientFormVisible;
+    /**
+     * Show the name edition form for a new client
+     */
+    $scope.createClient = function () {
+      $scope.clientFormVisible = true;
+      $scope.client = {};
+    };
 
-    // Change the order criterion to the one provided
-    // @param orderBy {string} ordering criterion
-    //
+    /**
+     * Change the order criterion to the one provided
+     * @param orderBy {string} ordering criterion
+     */
     $scope.setOrder = function (orderBy) {
       if ($scope.order === orderBy) {
         return $scope.order = `-${orderBy}`;
       } else {
         return $scope.order = orderBy;
       }
+    };
+
+    /**
+     * Reset the name ot its original value and close the edition form
+     */
+    $scope.cancelEdit = function () {
+      $scope.client.name = $scope.clientOriginalName;
+      $scope.clientFormVisible = false;
     };
 
     $scope.saveClient = function (client) {
@@ -47,13 +62,13 @@ Application.Controllers.controller('OpenAPIClientsController', ['$scope', 'clien
       }
 
       $scope.clientFormVisible = false;
-      $scope.clientForm.$setPristine();
-      return $scope.client = {};
+      $scope.client = {};
     };
 
     $scope.editClient = function (client) {
       $scope.clientFormVisible = true;
-      return $scope.client = client;
+      $scope.client = client;
+      $scope.clientOriginalName = client.name;
     };
 
     $scope.deleteClient = index =>
@@ -134,7 +149,7 @@ Application.Controllers.controller('OpenAPIClientsController', ['$scope', 'clien
         }
       });
       // if the user has never seen the tour, and if the display behavior is not configured to manual triggering only, show the tour now
-      if (Fablab.featureTourDisplay !== 'manual' && $scope.currentUser.profile.tours.indexOf('open-api') < 0) {
+      if (settingsPromise.feature_tour_display !== 'manual' && $scope.currentUser.profile.tours.indexOf('open-api') < 0) {
         uitour.start();
       }
     };

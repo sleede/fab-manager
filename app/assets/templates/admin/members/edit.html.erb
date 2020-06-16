@@ -60,7 +60,7 @@
           </form>
         </uib-tab>
 
-        <uib-tab heading="{{ 'app.admin.members_edit.subscription' | translate }}" ng-if="!fablabWithoutPlans">
+        <uib-tab heading="{{ 'app.admin.members_edit.subscription' | translate }}" ng-if="modules.plans">
 
 
             <section class="panel panel-default bg-light m-lg">
@@ -192,7 +192,7 @@
           </div>
         </uib-tab>
 
-        <uib-tab heading="{{ 'app.admin.members_edit.invoices' | translate }}" ng-hide="fablabWithoutInvoices">
+        <uib-tab heading="{{ 'app.admin.members_edit.invoices' | translate }}" ng-show="modules.invoicing">
           <div class="col-md-12 m m-t-lg">
 
 
@@ -229,7 +229,7 @@
           </div>
         </uib-tab>
 
-        <uib-tab heading="{{ 'app.admin.members_edit.wallet' | translate }}" ng-hide="fablabWithoutWallet">
+        <uib-tab heading="{{ 'app.admin.members_edit.wallet' | translate }}" ng-show="modules.wallet">
           <div class="col-md-12 m m-t-lg">
             <ng-include src="'<%= asset_path "wallet/show.html" %>'"></ng-include>
 

@@ -361,7 +361,8 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
               size: 'md',
               controller: 'ReserveSlotSameTimeController',
               resolve: {
-                sameTimeReservations: function() { return sameTimeReservations; }
+                sameTimeReservations: function() { return sameTimeReservations; },
+                bookOverlappingSlotsPromise: ['Setting', function (Setting) { return Setting.get({ name: 'book_overlapping_slots' }).$promise; }]
               }
             });
             modalInstance.result.then(function(res) {
@@ -631,10 +632,11 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
               },
               cartItems () {
                 return mkRequestParams(reservation, $scope.coupon.applied);
-              }
+              },
+              stripeKey: ['Setting', function (Setting) { return Setting.get({ name: 'stripe_public_key' }).$promise; }]
             },
-            controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'cgv', 'Auth', 'Reservation', 'wallet', 'helpers', '$filter', 'coupon', 'cartItems',
-              function ($scope, $uibModalInstance, $state, reservation, price, cgv, Auth, Reservation, wallet, helpers, $filter, coupon, cartItems) {
+            controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'cgv', 'Auth', 'Reservation', 'wallet', 'helpers', '$filter', 'coupon', 'cartItems', 'stripeKey',
+              function ($scope, $uibModalInstance, $state, reservation, price, cgv, Auth, Reservation, wallet, helpers, $filter, coupon, cartItems, stripeKey) {
                 // user wallet amount
                 $scope.walletAmount = wallet.amount;
 
@@ -652,6 +654,9 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
 
                 // Used in wallet info template to interpolate some translations
                 $scope.numberFilter = $filter('number');
+
+                // stripe publishable key
+                $scope.stripeKey = stripeKey.setting.value;
 
                 /**
                  * Callback to handle the post-payment and reservation
@@ -758,7 +763,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
             const amountToPay = helpers.getAmountToPay($scope.amountTotal, wallet.amount);
             if ((AuthService.isAuthorized(['member']) && amountToPay > 0)
               || (AuthService.isAuthorized('manager') && $scope.user.id === $rootScope.currentUser.id && amountToPay > 0)) {
-              if ($rootScope.fablabWithoutOnlinePayment) {
+              if ($scope.settings.online_payment_module !== 'true') {
                 growl.error(_t('app.shared.cart.online_payment_disabled'));
               } else {
                 return payByStripe(reservation);
@@ -783,10 +788,10 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
 /**
  * Controller of the modal showing the reservations the same date at the same time
  */
-Application.Controllers.controller('ReserveSlotSameTimeController', ['$scope', '$uibModalInstance', 'AuthService', 'sameTimeReservations',
-  function ($scope, $uibModalInstance, AuthService, sameTimeReservations) {
+Application.Controllers.controller('ReserveSlotSameTimeController', ['$scope', '$uibModalInstance', 'AuthService', 'sameTimeReservations', 'bookOverlappingSlotsPromise',
+  function ($scope, $uibModalInstance, AuthService, sameTimeReservations, bookOverlappingSlotsPromise) {
     $scope.sameTimeReservations = sameTimeReservations;
-    $scope.bookSlotAtSameTime = Fablab.bookSlotAtSameTime;
+    $scope.bookSlotAtSameTime = (bookOverlappingSlotsPromise.setting.value === 'true');
     $scope.isAuthorized = AuthService.isAuthorized;
     /**
      * Confirmation callback

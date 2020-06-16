@@ -4,9 +4,6 @@
 module ApplicationHelper
   require 'message_format'
 
-  ## machine/spaces availabilities are divided in multiple slots of 60 minutes
-  SLOT_DURATION ||= Rails.application.secrets.slot_duration || 60
-
   ##
   # Verify if the provided attribute is in the provided attributes array, whatever it exists or not
   # @param attributes {Array|nil}
@@ -16,7 +13,7 @@ module ApplicationHelper
     attributes.try(:include?, attribute)
   end
 
-  def bootstrap_class_for flash_type
+  def bootstrap_class_for(flash_type)
     { flash: 'alert-success', alert: 'alert-danger', notice: 'alert-info' }[flash_type.to_sym] || flash_type.to_s
   end
 
@@ -58,6 +55,10 @@ module ApplicationHelper
 
   def bool_to_sym(bool)
     bool ? :true : :false # rubocop:disable Lint/BooleanSymbol
+  end
+
+  def str_to_bool(str, default = 'true')
+    str.to_s.casecmp(default).zero?
   end
 
   def amount_to_f(amount)

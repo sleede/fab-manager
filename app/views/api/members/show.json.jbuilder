@@ -40,7 +40,7 @@ json.all_projects @member.all_projects do |project|
   if requested_current || project.state == 'published'
     json.extract! project, :id, :name, :description, :licence_id, :slug, :state
     json.author_id project.author.user_id
-    json.url project_url(project, format: :json)
+    
     json.project_image project.project_image.attachment.large.url if project.project_image
     json.machine_ids project.machine_ids
     json.machines project.machines do |m|

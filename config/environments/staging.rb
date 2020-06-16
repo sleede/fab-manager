@@ -89,8 +89,8 @@ Rails.application.configure do
   # config.serve_static_assets = true
 
   config.action_mailer.default_url_options = {
-    host: Rails.application.secrets.default_host,
-    protocol: Rails.application.secrets.default_protocol
+    host: ->(*) { Setting.get('base_url_host') },
+    protocol: ->(*) { Setting.get('base_url_protocol') }
   }
   # config.action_mailer.perform_deliveries = true
   # config.action_mailer.raise_delivery_errors = false

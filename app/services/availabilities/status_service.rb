@@ -4,7 +4,7 @@
 class Availabilities::StatusService
   def initialize(current_user_role)
     @current_user_role = current_user_role
-    @show_name = (@current_user_role == 'admin' || Setting.find_by(name: 'display_name_enable').value == 'true')
+    @show_name = (%w[admin manager].include?(@current_user_role) || Setting.get('display_name_enable'))
   end
 
   # check that the provided machine slot is reserved or not and modify it accordingly
@@ -19,7 +19,7 @@ class Availabilities::StatusService
         slot.id = s.id
         slot.is_reserved = true
         slot.title = "#{slot.machine.name} - #{@show_name ? r.user&.profile&.full_name : I18n.t('availabilities.not_available')}"
-        slot.can_modify = true if @current_user_role == 'admin'
+        slot.can_modify = true if %w[admin manager].include?(@current_user_role)
         slot.reservations.push r
 
         next unless r.statistic_profile_id == statistic_profile_id
@@ -41,7 +41,7 @@ class Availabilities::StatusService
 
         next unless s.start_at == slot.start_at && s.canceled_at.nil?
 
-        slot.can_modify = true if @current_user_role == 'admin'
+        slot.can_modify = true if %w[admin manager].include?(@current_user_role)
         slot.reservations.push r
 
         next unless r.statistic_profile_id == statistic_profile_id

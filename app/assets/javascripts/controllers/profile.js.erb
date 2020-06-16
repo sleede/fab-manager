@@ -13,8 +13,8 @@
 
 'use strict';
 
-Application.Controllers.controller('CompleteProfileController', ['$scope', '$rootScope', '$state', '$window', '_t', 'growl', 'CSRF', 'Auth', 'Member', 'settingsPromise', 'activeProviderPromise', 'groupsPromise', 'cguFile', 'memberPromise', 'Session', 'dialogs', 'AuthProvider',
-  function ($scope, $rootScope, $state, $window, _t, growl, CSRF, Auth, Member, settingsPromise, activeProviderPromise, groupsPromise, cguFile, memberPromise, Session, dialogs, AuthProvider) {
+Application.Controllers.controller('CompleteProfileController', ['$scope', '$rootScope', '$state', '$window', '_t', 'growl', 'CSRF', 'Auth', 'Member', 'settingsPromise', 'activeProviderPromise', 'groupsPromise', 'cguFile', 'memberPromise', 'Session', 'dialogs', 'AuthProvider', 'phoneRequiredPromise',
+  function ($scope, $rootScope, $state, $window, _t, growl, CSRF, Auth, Member, settingsPromise, activeProviderPromise, groupsPromise, cguFile, memberPromise, Session, dialogs, AuthProvider, phoneRequiredPromise) {
   /* PUBLIC SCOPE */
 
     // API URL where the form will be posted
@@ -46,6 +46,9 @@ Application.Controllers.controller('CompleteProfileController', ['$scope', '$roo
 
     // CGU
     $scope.cgu = cguFile.custom_asset;
+
+    // is the phone number required in _member_form?
+    $scope.phoneRequired = (phoneRequiredPromise.setting.value === 'true');
 
     // Angular-Bootstrap datepicker configuration for birthday
     $scope.datePicker = {

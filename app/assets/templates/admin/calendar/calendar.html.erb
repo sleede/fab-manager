@@ -38,7 +38,7 @@
       <div class="legends">
         <span class="calendar-legend text-sm border-formation" translate>{{ 'app.admin.calendar.trainings' }}</span><br>
         <span class="calendar-legend text-sm border-machine" translate>{{ 'app.admin.calendar.machines' }}</span><br>
-        <span class="calendar-legend text-sm border-space" ng-hide="fablabWithoutSpaces" translate>{{ 'app.admin.calendar.spaces' }}</span>
+        <span class="calendar-legend text-sm border-space" ng-show="modules.spaces" translate>{{ 'app.admin.calendar.spaces' }}</span>
         <span class="calendar-legend text-sm border-event" ng-show="eventsInCalendar" translate>{{ 'app.admin.calendar.events' }}</span>
       </div>
     </div>

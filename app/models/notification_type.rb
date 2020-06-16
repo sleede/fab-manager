@@ -53,6 +53,7 @@ class NotificationType
     notify_admin_refund_created
     notify_admins_role_update
     notify_user_role_update
+    notify_admin_members_stripe_sync
   ]
   # deprecated:
   # - notify_member_subscribed_plan_is_changed

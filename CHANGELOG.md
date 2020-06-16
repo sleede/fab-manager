@@ -1,10 +1,50 @@
 # Changelog Fab-manager
 
+- Ability to configure most of the settings from the admin's UI
+- Ability to lock some settings from the environment
+- Improved display of the icons alerting about an outdated version
+- Improved mime-type checking (back & front)
+- Updated CarrierWave to 2.1.0
+- Updated redis to v6, with alpine image
+- Updated Sidekiq to 6.0.7
+- Fix a bug: managers do not see the name of the user who reserved a slot
+- Fix a bug: OpenAPI documentation is not available
+- [TODO DEPLOY] `rails fablab:setup:env_to_db`
+- [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/redis-upgrade.sh | bash`
+
+## v4.4.6 2020 June 01
+
+- Fix a security issue: updated kaminari from 1.2.0 to 1.2.1 to fix [CVE-2020-11082](https://nvd.nist.gov/vuln/detail/CVE-2020-11082)
+
+## v4.4.5 2020 May 27
+
+- Fix a security issue: updated rails to 5.2.4.2 to fix [CVE-2020-8162](https://nvd.nist.gov/vuln/detail/CVE-2020-8162), [CVE-2020-8165](https://nvd.nist.gov/vuln/detail/CVE-2020-8165) and [CVE-2020-8166](https://nvd.nist.gov/vuln/detail/CVE-2020-8166)
+
+## v4.4.4 2020 May 25
+
+- Fix a security issue: updated puma from 3.12.4 to 3.12.6 to fix [CVE-2020-11077](https://nvd.nist.gov/vuln/detail/CVE-2020-11077) and [CVE-2020-11076](https://nvd.nist.gov/vuln/detail/CVE-2020-11076)
+
+## v4.4.3 2020 May 25
+
+- Fix a bug: recurrent availabilities do not keep the custom duration
+- [TODO DEPLOY] `rails fablab:fix:availabilities_duration`
+
+## v4.4.2 2020 May 19
+
+- Upgraded to ruby 2.6.5
 - Prevent admins from leaving their dedicated group
 - Faraday was downgraded from 1.0 to 0.17 for better compatibility with elasticsearch-ruby 5 (#205 #196)
-- Added an option to allow usage in production without HTTPS
+- Added [an option](doc/environment.md#ALLOW_INSECURE_HTTP) to allow usage in production without HTTPS
+- Now using node.js instead of therubyracer for building javascript assets
+- Removed dependency to has_secure_token to fix warnings about already initialized constant
 - Fix a bug: when an admin logs on the subscription page, his view is broken
 - Fix a bug: admin's members list shows the same members multiple times
+- Fix a bug: when a new account is created through the sign-up modal, the role is not reported in the StatisticProfile (#196)
+- Fix a bug: openAPI clients interface has a bugged behavior when creating/editing a client
+- Fix a security issue: updated actionpack-page_caching from 1.1.0 to 1.2.2 to fix [CVE-2020-8159](https://nvd.nist.gov/vuln/detail/CVE-2020-8159)
+- [TODO DEPLOY] `rails fablab:fix:role_in_statistic_profile`
+- [TODO DEPLOY] `rails fablab:es:generate_stats[2019-06-13]` (run after the command above!)
+- [TODO DEPLOY] -> (only dev) `rvm use && bundle install`
 
 ## v4.4.1 2020 May 12
 

@@ -2,9 +2,8 @@
 
 # Check the access policies for API::SubscriptionsController
 class SubscriptionPolicy < ApplicationPolicy
-  include FablabConfiguration
   def create?
-    !fablab_plans_deactivated? && (user.admin? || (user.manager? && record.user_id != user.id) || record.price.zero?)
+    Setting.get('plans_module') && (user.admin? || (user.manager? && record.user_id != user.id) || record.price.zero?)
   end
 
   def show?

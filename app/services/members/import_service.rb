@@ -7,8 +7,7 @@ class Members::ImportService
       require 'csv'
       log = []
       begin
-      CSV.foreach(import.attachment.url, headers: true, col_sep: ';') do |row|
-        begin
+        CSV.foreach(import.attachment.url, headers: true, col_sep: ';') do |row|
           password = hide_password(row)
           log << { row: row.to_hash }
 
@@ -31,7 +30,6 @@ class Members::ImportService
           puts e
           puts e.backtrace
         end
-      end
       rescue ArgumentError => e
         log << e.to_s
         puts e

@@ -34,14 +34,14 @@
     <div class="col-md-12">
       <div class="col-md-12">
 
-        <button type="button" class="btn btn-warning m-t m-b" ng-click="toggleForm()" ng-show="!clientFormVisible" translate>{{ 'app.admin.open_api_clients.add_new_client' | translate }}</button>
+        <button type="button" class="btn btn-warning m-t m-b" ng-click="createClient()" ng-show="!clientFormVisible" translate>{{ 'app.admin.open_api_clients.add_new_client' | translate }}</button>
 
         <form role="form" id="clientForm" ng-show="clientFormVisible" name="clientForm" class="form-inline m-b m-t" novalidate>
           <div class="form-group" ng-class="{'has-error': clientForm['client[name]'].$dirty && clientForm['client[name]'].$invalid}">
             <input class="form-control" type="text" name="client[name]" ng-model="client.name" value="" placeholder="{{ 'app.admin.open_api_clients.client_name' | translate }}" required>
           </div>
 
-          <button class="btn btn-default" ng-click="toggleForm()" name="button">{{ 'app.shared.buttons.cancel' | translate }}</button>
+          <button class="btn btn-default" ng-click="cancelEdit()" name="button">{{ 'app.shared.buttons.cancel' | translate }}</button>
           <input type="submit" class="btn btn-warning" ng-disabled="!client.name || client.name.length == 0" ng-click="saveClient(client)" value="{{ 'app.shared.buttons.save' | translate }}">
         </form>
 

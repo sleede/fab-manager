@@ -23,7 +23,7 @@
                     ng-hide="preventField['profile.avatar'] && user.profile.user_avatar.attachment_url && !userForm['user[profile_attributes][user_avatar_attributes]'].$dirty">
                   <span class="fileinput-new" translate>{{ 'app.shared.user.add_an_avatar' }}</span>
                   <span class="fileinput-exists" translate>{{ 'app.shared.buttons.change' }}</span>
-                  <input type="file" name="user[profile_attributes][user_avatar_attributes][attachment]">
+                  <input type="file" name="user[profile_attributes][user_avatar_attributes][attachment]" accept="image/jpeg,image/gif,image/png">
               </span>
 
               <button class="btn btn-danger fileinput-exists"

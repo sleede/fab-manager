@@ -1,4 +1,4 @@
-FROM ruby:2.3.8-alpine
+FROM ruby:2.6.5-alpine
 MAINTAINER peng@sleede.com
 
 # Install upgrade system packages
@@ -27,6 +27,8 @@ RUN apk update && apk upgrade && \
       linux-headers \
       git \
       patch
+
+RUN gem install bundler
 
 # Throw error if Gemfile has been modified since Gemfile.lock
 RUN bundle config --global frozen 1

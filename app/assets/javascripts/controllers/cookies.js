@@ -32,7 +32,7 @@ Application.Controllers.controller('CookiesController', ['$scope', '$cookies', '
         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-      ga('create', Fablab.gaId, 'auto');
+      ga('create', Fablab.trackingId, 'auto');
       ga('send', 'pageview');
       /* eslint-enable */
     };
@@ -50,8 +50,8 @@ Application.Controllers.controller('CookiesController', ['$scope', '$cookies', '
           $scope.learnMoreUrl = '#!/privacy-policy';
         }
       });
-      // if the GA_ID environment variable was not set, only functional cookies will be set, so user consent is not required
-      if (!Fablab.gaId) $scope.cookiesState = 'ignore';
+      // if the tracking ID was not set in the settings, only functional cookies will be set, so user consent is not required
+      if (!Fablab.trackingId) $scope.cookiesState = 'ignore';
     };
 
     const readCookie = function () {
