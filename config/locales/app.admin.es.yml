@@ -1034,7 +1034,7 @@ es:
         about_body: "Contenido de la página \"Acerca de\""
         about_contacts: "Página contactos\"Acerca de\""
         privacy_draft: "privacy policy draft"
-        privacy_body: "privacy policy"
+        privacy_body: "política de privacidad"
         privacy_dpo: "data protection officer address"
         booking_window_start: "hora de apertura"
         booking_window_end: "hora de cierre"
@@ -1413,7 +1413,7 @@ es:
             title: "About"
             content: "Fully personalize this page to present your activity."
           privacy:
-            title: "Privacy policy"
+            title: "Política de privacidad"
             content: "<p>EExplain here how you use the data you collect about your members.</p><p>GDPR requires that a confidentiality policy is defined, as well as a data protection officer.</p>"
           draft:
             title: "Draft"

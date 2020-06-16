@@ -16,9 +16,9 @@ es:
       carrierwave_processing_error: "no se pudo procesar"
       carrierwave_integrity_error: "es un tipo de archivo no permitido"
       carrierwave_download_error: "no pudo ser descargado"
-      extension_whitelist_error: "No puede subir archivos con extensión %{extension}, tipos permitidos: %{allowed_types}"
-      extension_blacklist_error: "No puede subir archivos con extensión %{extension}, tipos prohibidos: %{prohibited_types}"
-      content_type_whitelist_error: "No puede subir archivos con extensión %{content_type}, tipos permitidos: %{allowed_types}"
+      extension_whitelist_error: "No puede subir archivos de extensión %{extension}, tipos permitidos: %{allowed_types}"
+      extension_blacklist_error: "No puede subir archivos de extensión %{extension}, tipos prohibidos: %{prohibited_types}"
+      content_type_whitelist_error: "No puede subir archivos de tipo %{content_type}, tipos permitidos: %{allowed_types}"
       rmagick_processing_error: "Error al manipular con rmagick, ¿Está seguro de que el archivo es una imagen? Error original: %{e}"
       mime_types_processing_error: "Error al procesar archivo con MIME::Types, puede ser que el contenido no sea válido. Error original: %{e}"
       mini_magick_processing_error: "Error al editar con MiniMagick, ¿Está seguro de que el archivo es una imagen?  Error original: %{e}"
@@ -54,7 +54,7 @@ es:
   #members management
   members:
     unable_to_change_the_group_while_a_subscription_is_running: "No se puede cambiar de grupo mientras haya una suscripción en curso"
-    admins_cant_change_group: "Unable to remove an administrator from his dedicated group"
+    admins_cant_change_group: "No se puede eliminar un administrador de su grupo dedicado"
     please_input_the_authentication_code_sent_to_the_address: "Por favor Ingrese el código de autenticación enviado a la dirección de correo electrónico %{EMAIL}"
     your_authentication_code_is_not_valid: "Su código de autenticación no es válido."
     current_authentication_method_no_code: "El método de autenticación actual no requiere ningún código de migración"
@@ -111,7 +111,7 @@ es:
     subscription_of_NAME_for_DURATION_starting_from_DATE: "Suscripción %{NAME} por %{DURATION} empezando desde %{DATE}"
     subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "Subscripción de %{NAME} extendida (días gratuitos) empezando desde %{STARTDATE} hasta %{ENDDATE}"
     and: 'y'
-    invoice_text_example: "Our association is not subject to VAT"
+    invoice_text_example: "Nuestra asociación no está sujeta al IVA"
   #CVS accounting export (columns headers)
   accounting_export:
     journal_code: "Código de registro"
