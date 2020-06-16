@@ -358,7 +358,7 @@ fr:
       tour:
         conclusion:
           title: "Merci de votre attention"
-          content: "<p>Si vous souhaitez relancer cette aide contextuelle, appuyez sur <strong>F1</strong> à n'importe quel moment ou cliquez sur « ? Aide » depuis le menu utilisateur.</p><p>Si vous avez besoin d'aide supplémentaire, vous pouvez <a href='https://github.com/sleede/fab-manager/raw/master/doc/fr/guide_utilisation_fab_manager_v4.3.pdf' target='_blank'>consulter le guide d'utilisation</a> disponible en Français.</p><p>L'équipe de Fab-manager propose également du support personnalisé (aide à la prise en main, aide à l'installation, personnalisation, etc.), <a href='mailto:contact@fab-manager.com'>contactez-nous</a> pour plus d'informations.</p>"
+          content: "<p>Si vous souhaitez relancer cette aide contextuelle, appuyez sur <strong>F1</strong> à n'importe quel moment ou cliquez sur « ? Aide » depuis le menu utilisateur.</p><p>Si vous avez besoin d'aide supplémentaire, vous pouvez <a href='https://github.com/sleede/fab-manager/raw/master/doc/fr/guide_utilisation_fab_manager_v4.5.pdf' target='_blank'>consulter le guide d'utilisation</a> disponible en Français.</p><p>L'équipe de Fab-manager propose également du support personnalisé (aide à la prise en main, aide à l'installation, personnalisation, etc.), <a href='mailto:contact@fab-manager.com'>contactez-nous</a> pour plus d'informations.</p>"
         welcome:
           welcome:
             title: "Bienvenue dans Fab-manager"

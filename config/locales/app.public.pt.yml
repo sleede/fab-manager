@@ -358,7 +358,7 @@ pt:
       tour:
         conclusion:
           title: "Thank you for your attention"
-          content: "<p>If you want to restart this contextual help, press <strong>F1</strong> at any time or click on « ? Help » from the user's menu.</p><p>If you need additional help, you can <a href='https://github.com/sleede/fab-manager/raw/master/doc/fr/guide_utilisation_fab_manager_v4.3.pdf' target='_blank'>check the user guide</a> (only in French for now).</p><p>The Fab-manager's team also provides personalized support (help with getting started, help with installation, customization, etc.), <a href='mailto:contact@fab-manager.com'>contact-us</a> for more info.</p>"
+          content: "<p>If you want to restart this contextual help, press <strong>F1</strong> at any time or click on « ? Help » from the user's menu.</p><p>If you need additional help, you can <a href='https://github.com/sleede/fab-manager/raw/master/doc/fr/guide_utilisation_fab_manager_v4.5.pdf' target='_blank'>check the user guide</a> (only in French for now).</p><p>The Fab-manager's team also provides personalized support (help with getting started, help with installation, customization, etc.), <a href='mailto:contact@fab-manager.com'>contact-us</a> for more info.</p>"
         welcome:
           welcome:
             title: "Welcome to Fab-manager"
