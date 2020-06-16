@@ -682,7 +682,7 @@ fr:
         administrator_successfully_deleted: "L'administrateur a bien été supprimé."
         unable_to_delete_the_administrator: "L'administrateur n'a pas pu être supprimé."
         changes_successfully_saved: "Les modifications ont bien été enregistrées."
-        an_error_occurred_while_saving_changes: "An error occurred when saving changes."
+        an_error_occurred_while_saving_changes: "Une erreur est survenue lors de l'enregistrement des modifications."
         export_is_running_you_ll_be_notified_when_its_ready: "L'export est en cours. Vous serez notifié lorsqu'il sera prêt."
         tag_form:
           tags: "Étiquettes"
