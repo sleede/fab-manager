@@ -5,6 +5,7 @@
 2. [General settings](#general-settings)
 3. [Internationalization settings](#internationalization-settings)
 4. [Open projects settings](#open-projects-settings)
+5. [Other settings](#other-settings)
 
 
 <a name="introduction"></a>
@@ -245,6 +246,7 @@ Accordingly, `RAILS_LOCALE` and `APP_LOCALE` must be configured to `zu`.
 
 Set this variable to `https://openprojects.fab-manager.com` if you want to use the common projects repository or set it to your own OpenLab server.
 
+<a name="other-settings"></a>
 ## Other settings
 
 In the previous versions of Fab-manager, much more settings were configurable from environment variables.
