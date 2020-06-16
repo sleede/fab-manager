@@ -284,8 +284,8 @@ fr:
       body:
         role_changed_html: "Votre rôle {GENDER, select, male{au} female{à la} neutral{} other{aux}} {NAME} a changé. Vous êtes maintenant <strong>{ROLE}</strong>.<br/>Avec un grand pouvoir vient une grande responsabilité, utilisez vos nouveaux privilèges de manière juste et respectueuse."
     notify_admin_members_stripe_sync:
-      subject: "Stripe synchronization"
+      subject: "Synchronisation Stripe"
       body:
-        members_sync: "All members were successfully synchronized on Stripe."
+        members_sync: "Tous les membres ont été synchronisés avec succès sur Stripe."
     shared:
       hello: "Bonjour %{user_name}"
