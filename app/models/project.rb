@@ -86,6 +86,24 @@ class Project < ApplicationRecord
   end
 
   def self.search(params, current_user)
+    connection = ActiveRecord::Base.connection
+    return unless connection.instance_values['config'][:adapter] == 'postgresql'
+
+    return connection.execute <<~SQL
+      SELECT pid, p_name
+      FROM (SELECT projects.id as pid,
+                   projects.name as p_name,
+                   to_tsvector('#{Rails.application.secrets.postgresql_language_analyzer}', unaccent(projects.tags)) ||
+                   to_tsvector('#{Rails.application.secrets.postgresql_language_analyzer}', unaccent(projects.name)) ||
+                   to_tsvector('#{Rails.application.secrets.postgresql_language_analyzer}', unaccent(projects.description)) ||
+                   to_tsvector('#{Rails.application.secrets.postgresql_language_analyzer}', unaccent(projects.description)) ||
+                   to_tsvector('#{Rails.application.secrets.postgresql_language_analyzer}', unaccent(ps.title)) ||
+                   to_tsvector('#{Rails.application.secrets.postgresql_language_analyzer}', unaccent(ps.description)) as document
+            FROM projects
+            JOIN project_steps ps on projects.id = ps.project_id) p_search
+      WHERE p_search.document @@ to_tsquery('#{Rails.application.secrets.postgresql_language_analyzer}', unaccent('#{params['q']}'));
+    SQL
+
     Project.__elasticsearch__.search(build_search_query_from_context(params, current_user))
   end
 
