@@ -168,22 +168,13 @@ namespace :fablab do
     task :generate_stats, [:period] => :environment do |_task, args|
       raise 'FATAL ERROR: You must pass a number of days (=> past period) OR a date to generate statistics' unless args.period
 
-      days = date_to_days(args.period)
-      puts "\n==> generating statistics for the last #{days} days <==\n"
-      if days.zero?
-        StatisticService.new.generate_statistic(start_date: DateTime.current.beginning_of_day, end_date: DateTime.current.end_of_day)
-      else
-        days.times.each do |i|
-          StatisticService.new.generate_statistic(start_date: i.day.ago.beginning_of_day, end_date: i.day.ago.end_of_day)
-        end
+      unless Setting.get('statistics_module')
+        print 'Statistics are disabled. Do you still want to generate? (y/N) '
+        confirm = STDIN.gets.chomp
+        raise 'Interrupted by user' unless confirm == 'y'
       end
-    end
 
-    def date_to_days(value)
-      date = Date.parse(value.to_s)
-      (DateTime.current.to_date - date).to_i
-    rescue ArgumentError
-      value.to_i
+      PeriodStatisticsWorker.perform(args.period)
     end
   end
 end

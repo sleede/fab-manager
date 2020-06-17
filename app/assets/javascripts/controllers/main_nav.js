@@ -122,12 +122,6 @@ Application.Controllers.controller('MainNavController', ['$scope', function ($sc
       authorizedRoles: ['admin', 'manager']
     },
     {
-      state: 'app.admin.statistics',
-      linkText: 'app.public.common.statistics',
-      linkIcon: 'bar-chart-o',
-      authorizedRoles: ['admin']
-    },
-    {
       class: 'menu-spacer',
       authorizedRoles: ['admin']
     },
@@ -154,10 +148,19 @@ Application.Controllers.controller('MainNavController', ['$scope', function ($sc
   $scope.adminNavLinks = adminNavLinks;
 
   if ($scope.modules.spaces) {
-    return $scope.adminNavLinks.splice(3, 0, {
+    $scope.adminNavLinks.splice(3, 0, {
       state: 'app.public.spaces_list',
       linkText: 'app.public.common.manage_the_spaces',
       linkIcon: 'rocket'
+    });
+  }
+
+  if ($scope.modules.statistics) {
+    $scope.adminNavLinks.splice($scope.modules.spaces ? 9 : 8, 0, {
+      state: 'app.admin.statistics',
+      linkText: 'app.public.common.statistics',
+      linkIcon: 'bar-chart-o',
+      authorizedRoles: ['admin']
     });
   }
 }

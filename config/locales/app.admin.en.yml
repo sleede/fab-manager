@@ -1111,6 +1111,7 @@ en:
         confirmation_required_info: "Optionally, you can force the users to confirm their email address before being able to access Fab-manager."
         confirmation_is_required: "Confirmation required"
         wallet_module: "wallet module"
+        statistics_module: "statistics module"
         general:
           general: "General"
           title: "Title"
@@ -1147,6 +1148,9 @@ en:
           wallet: "Wallet"
           wallet_info_html: "<p>The virtual wallet allows you to allocate a sum of money to users. Then, can spend this money as they wish, in Fab-manager.</p><p>Members cannot credit their wallet themselves, it's a privilege of managers and administrators.</p>"
           enable_wallet: "Enable wallet"
+          statistics: "Statistics"
+          statistics_info_html: "<p>Enable or disable the statistics module.</p><p>If enabled, every nights, the data of the day just passed will be consolidated in the database of a powerful analysis engine. Then, every administrators will be able to browse statistical charts and tables in the corresponding section.</p>"
+          enable_statistics: "Enable statistics"
         privacy:
           title: "Privacy"
           privacy_policy: "Privacy policy"

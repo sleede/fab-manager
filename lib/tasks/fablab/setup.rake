@@ -132,7 +132,8 @@ namespace :fablab do
         %w[_ STRIPE_CURRENCY stripe_currency],
         %w[_ INVOICE_PREFIX invoice_prefix FabManager_invoice],
         %w[_ USER_CONFIRMATION_NEEDED_TO_SIGN_IN confirmation_required false],
-        %w[! FABLAB_WITHOUT_WALLET wallet_module false]
+        %w[! FABLAB_WITHOUT_WALLET wallet_module false],
+        %w[! FABLAB_WITHOUT_STATISTICS statistics_module false]
       ]
 
       mapping.each do |m|

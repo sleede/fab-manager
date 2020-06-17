@@ -16,9 +16,12 @@ class SettingService
     Stylesheet.home_page&.rebuild! if setting.name == 'home_css'
 
     # notify about a change in privacy policy
-    NotifyPrivacyUpdateWorker.perform_async(id) if setting.name == 'privacy_body'
+    NotifyPrivacyUpdateWorker.perform_async(setting.id) if setting.name == 'privacy_body'
 
     # sync all users on stripe
     SyncMembersOnStripeWorker.perform_async(setting.history_values.last&.invoicing_profile&.user&.id) if setting.name == 'stripe_secret_key'
+
+    # generate statistics
+    PeriodStatisticsWorker.perform_async(setting.previous_update) if setting.name == 'statistics_module' && setting.value == 'true'
   end
 end

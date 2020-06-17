@@ -104,7 +104,8 @@ class Setting < ApplicationRecord
                              stripe_currency
                              invoice_prefix
                              confirmation_required
-                             wallet_module] }
+                             wallet_module
+                             statistics_module] }
   # WARNING: when adding a new key, you may also want to add it in app/policies/setting_policy.rb#public_whitelist
 
   def value
@@ -115,6 +116,11 @@ class Setting < ApplicationRecord
   def last_update
     last_value = history_values.order(HistoryValue.arel_table['created_at'].desc).first
     last_value&.created_at
+  end
+
+  def previous_update
+    previous_value = history_values.order(HistoryValue.arel_table['created_at'].desc).limit(2).last
+    previous_value&.created_at
   end
 
   def value=(val)
