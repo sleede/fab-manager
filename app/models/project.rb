@@ -89,6 +89,7 @@ class Project < ApplicationRecord
     connection = ActiveRecord::Base.connection
     return unless connection.instance_values['config'][:adapter] == 'postgresql'
 
+    # see http://rachbelaid.com/postgres-full-text-search-is-good-enough/
     return connection.execute <<~SQL
       SELECT pid, p_name
       FROM (SELECT projects.id as pid,
