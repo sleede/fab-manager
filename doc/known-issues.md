@@ -37,7 +37,7 @@ This document is listing common known issues.
 
   This is due to an ActiveRecord behavior witch disable referential integrity in PostgreSQL to load the fixtures.
   PostgreSQL will prevent any users to disable referential integrity on the fly if they doesn't have the `SUPERUSER` role.
-  To fix that, logon as the `postgres` user and run the PostgreSQL shell (see [the dedicated section](#run-postgresql-cli) for instructions).
+  To fix that, logon as the `postgres` user and run the PostgreSQL shell (see [the postgresql documentation](postgresql_readme.md#run-postgresql-cli) for instructions).
   Then, run the following command (replace `sleede` with your test database user, as specified in your database.yml):
 
         ALTER ROLE sleede WITH SUPERUSER;
