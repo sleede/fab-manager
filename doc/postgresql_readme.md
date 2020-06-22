@@ -75,3 +75,4 @@ This is currently not supported, because of some PostgreSQL specific instruction
  - `db/migrate/20190522115230_migrate_user_to_invoicing_profile.rb` is using `CREATE RULE` and `DROP RULE`;
  - `db/migrate/20200511075933_fix_accounting_periods.rb` is using `CREATE RULE` and `DROP RULE`;
  - `app/models/project.rb` is using the `pg_search` gem.
+ - `db/migrate/20200622135401_add_pg_search_dmetaphone_support_functions.rb` is using [fuzzystrmatch](http://www.postgresql.org/docs/current/static/fuzzystrmatch.html) module and defines a PL/pgSQL function (`pg_search_dmetaphone()`);

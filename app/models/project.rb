@@ -51,6 +51,7 @@ class Project < ApplicationRecord
 
   # scopes
   scope :published, -> { where("state = 'published'") }
+  scope :drafts, ->(author_profile) { where("state = 'draft' AND author_statistic_profile_id = ?", author_profile) }
   pg_search_scope :search,
                   against: {
                     name: 'A',
@@ -60,12 +61,15 @@ class Project < ApplicationRecord
                   associated_against: {
                     project_steps: {
                       title: 'D',
-                      description: 'E'
+                      description: 'D'
                     }
                   },
                   using: {
-                    tsearch: { dictionary: Rails.application.secrets.postgresql_language_analyzer }
-                  }
+                    tsearch: { dictionary: Rails.application.secrets.postgresql_language_analyzer },
+                    trigram: {},
+                    dmetaphone: {}
+                  },
+                  ignoring: :accents
 
   private
 
