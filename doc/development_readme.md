@@ -162,7 +162,7 @@ Some information about PostgreSQL usage in fab-manager is available in the [Post
 
 ElasticSearch is a powerful search engine based on Apache Lucene combined with a NoSQL database used as a cache to index data and quickly process complex requests on it.
 
-In FabManager, it is used for the admin's statistics module and to perform searches in projects.
+In FabManager, it is used for the admin's statistics module.
 
 The organisation if the data in the ElasticSearch database is documented in [elasticsearch.md](elasticsearch.md) 
 
