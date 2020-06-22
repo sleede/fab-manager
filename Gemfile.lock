@@ -287,6 +287,9 @@ GEM
       ruby-rc4
       ttfunk
     pg (1.2.2)
+    pg_search (2.3.2)
+      activerecord (>= 5.2)
+      activesupport (>= 5.2)
     powerpack (0.1.2)
     prawn (2.2.2)
       pdf-core (~> 0.7.0)
@@ -500,6 +503,7 @@ DEPENDENCIES
   openlab_ruby
   pdf-reader
   pg
+  pg_search
   prawn
   prawn-table
   puma (= 3.12.6)

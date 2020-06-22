@@ -6,11 +6,7 @@ class Project < ApplicationRecord
   include AASM
   include NotifyWith::NotificationAttachedObject
   include OpenlabSync
-
-  # elastic initialisations
-  include Elasticsearch::Model
-  index_name 'fablab'
-  document_type 'projects'
+  include PgSearch::Model
 
   # kaminari
   # -- dependency in app/assets/javascripts/controllers/projects.js.erb
@@ -55,109 +51,21 @@ class Project < ApplicationRecord
 
   # scopes
   scope :published, -> { where("state = 'published'") }
-
-  ## elastic
-  # callbacks
-  after_save { ProjectIndexerWorker.perform_async(:index, id) }
-  after_destroy { ProjectIndexerWorker.perform_async(:delete, id) }
-
-  # mapping
-  settings index: { number_of_replicas: 0 } do
-    mappings dynamic: 'true' do
-      indexes 'state', analyzer: 'simple'
-      indexes 'tags', analyzer: Rails.application.secrets.elasticsearch_language_analyzer
-      indexes 'name', analyzer: Rails.application.secrets.elasticsearch_language_analyzer
-      indexes 'description', analyzer: Rails.application.secrets.elasticsearch_language_analyzer
-      indexes 'project_steps' do
-        indexes 'title', analyzer: Rails.application.secrets.elasticsearch_language_analyzer
-        indexes 'description', analyzer: Rails.application.secrets.elasticsearch_language_analyzer
-      end
-    end
-  end
-
-  # the resulting JSON will be indexed in ElasticSearch, as /fablab/projects
-  def as_indexed_json
-    ApplicationController.new.view_context.render(
-      partial: 'api/projects/indexed',
-      locals: { project: self },
-      formats: [:json],
-      handlers: [:jbuilder]
-    )
-  end
-
-  def self.search(params, current_user)
-    connection = ActiveRecord::Base.connection
-    return unless connection.instance_values['config'][:adapter] == 'postgresql'
-
-    # see http://rachbelaid.com/postgres-full-text-search-is-good-enough/
-    return connection.execute <<~SQL
-      SELECT pid, p_name
-      FROM (SELECT projects.id as pid,
-                   projects.name as p_name,
-                   to_tsvector('#{Rails.application.secrets.postgresql_language_analyzer}', unaccent(projects.tags)) ||
-                   to_tsvector('#{Rails.application.secrets.postgresql_language_analyzer}', unaccent(projects.name)) ||
-                   to_tsvector('#{Rails.application.secrets.postgresql_language_analyzer}', unaccent(projects.description)) ||
-                   to_tsvector('#{Rails.application.secrets.postgresql_language_analyzer}', unaccent(projects.description)) ||
-                   to_tsvector('#{Rails.application.secrets.postgresql_language_analyzer}', unaccent(ps.title)) ||
-                   to_tsvector('#{Rails.application.secrets.postgresql_language_analyzer}', unaccent(ps.description)) as document
-            FROM projects
-            JOIN project_steps ps on projects.id = ps.project_id) p_search
-      WHERE p_search.document @@ to_tsquery('#{Rails.application.secrets.postgresql_language_analyzer}', unaccent('#{params['q']}'));
-    SQL
-
-    Project.__elasticsearch__.search(build_search_query_from_context(params, current_user))
-  end
-
-  def self.build_search_query_from_context(params, current_user)
-    search = {
-      query: {
-        bool: {
-          must: [],
-          should: [],
-          filter: []
-        }
-      }
-    }
-
-    # we sort by created_at if there isn't a query
-    if params['q'].blank?
-      search[:sort] = { created_at: { order: :desc } }
-    else
-      # otherwise we search for the word (q) in various fields
-      search[:query][:bool][:must] << {
-        multi_match: {
-          query: params['q'],
-          type: 'most_fields',
-          fields: %w[tags^4 name^5 description^3 project_steps.title^2 project_steps.description]
-        }
-      }
-    end
-
-    # we filter by themes, components, machines
-    params.each do |name, value|
-      if name =~ /(.+_id$)/
-        search[:query][:bool][:filter] << { term: { "#{name}s" => value } } if value
-      end
-    end
-
-    # if use select filter 'my project' or 'my collaborations'
-    if current_user && params.key?('from')
-      search[:query][:bool][:filter] << { term: { author_id: current_user.id } } if params['from'] == 'mine'
-      search[:query][:bool][:filter] << { term: { user_ids: current_user.id } } if params['from'] == 'collaboration'
-    end
-
-    # if user is connected, also display his draft projects
-    if current_user
-      search[:query][:bool][:should] << { term: { state: 'published' } }
-      search[:query][:bool][:should] << { term: { author_id: current_user.id } }
-      search[:query][:bool][:should] << { term: { user_ids: current_user.id } }
-    else
-      # otherwise display only published projects
-      search[:query][:bool][:must] << { term: { state: 'published' } }
-    end
-
-    search
-  end
+  pg_search_scope :search,
+                  against: {
+                    name: 'A',
+                    tags: 'B',
+                    description: 'C'
+                  },
+                  associated_against: {
+                    project_steps: {
+                      title: 'D',
+                      description: 'E'
+                    }
+                  },
+                  using: {
+                    tsearch: { dictionary: Rails.application.secrets.postgresql_language_analyzer }
+                  }
 
   private
 

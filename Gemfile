@@ -70,6 +70,7 @@ end
 gem 'seed_dump'
 
 gem 'pg'
+gem 'pg_search'
 
 gem 'devise', '>= 4.6.0'
 
