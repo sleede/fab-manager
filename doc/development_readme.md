@@ -50,13 +50,17 @@ This procedure is not easy to follow so if you don't need to write some code for
    > ⚠ If you are using MacOS X, you must *first* edit the files located in docker/development to use port binding instead of ip-based binding.
    > This can be achieved by uncommenting the "port" directives and commenting the "networks" directives in the docker-compose.yml file.
    > The hosts file must be modified too, accordingly.
+
+   > ⚠ `ERROR: Pool overlaps with other one on this address space`
+   > In this case, you must modify the /etc/hosts and docker-compose.yml files to change the network from 172.18.y.z to 172.x.y.z, where x is a new unused network.
+
   ```bash
   cd fab-manager
   cat docker/development/hosts | sudo tee -a /etc/hosts
   mkdir -p .docker/elasticsearch/config
   cp docker/development/docker-compose.yml .docker
-  cp docker/elasticsearch.yml .docker/elasticsearch/config
-  cp docker/log4j2.properties .docker/elasticsearch/config
+  cp setup/elasticsearch.yml .docker/elasticsearch/config
+  cp setup/log4j2.properties .docker/elasticsearch/config
   cd .docker
   docker-compose up -d
   cd -
