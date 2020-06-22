@@ -14,12 +14,15 @@ This document is listing common known issues.
 
 - When starting the Ruby on Rails server (eg. `foreman s`) you may receive the following error:
 
-        worker.1 | invalid url: redis::6379
-        web.1    | Exiting
-        worker.1 | ...lib/redis/client.rb...:in `_parse_options'
+        worker.1 | undefined method `dump' for nil:NilClass
+        worker.1 | (erb):19:in `<main>'
+        worker.1 | ...lib/rails/secrets.rb...:in `block in parse'
+        ...
+        web.1    | (erb):19:in `<main>': undefined method `dump' for nil:NilClass (NoMethodError)
+        web.1    | exited with code 1
 
-  This may happen when the `application.yml` file is missing.
-  To solve this issue copy `config/application.yml.default` to `config/application.yml`.
+  This may happen when the `.env` file is missing.
+  To solve this issue copy `env.example` to `.env`.
   This is required before the first start.
 
 - When running the tests suite with `scripts/run-tests.sh`, all tests may fail with errors similar to the following:
@@ -46,14 +49,6 @@ This document is listing common known issues.
 
 - Due to a stripe limitation, you won't be able to create plans longer than one year.
 
-- With Ubuntu 16.04, ElasticSearch may refuse to start even after having configured the service with systemd.
-  To solve this issue, you may have to set `START_DAEMON` to `true` in `/etc/default/elasticsearch`.
-  Then reload ElasticSearch with:
-
-  ```bash
-  sudo systemctl restart elasticsearch.service
-  ```
-  
 - In some cases, the invoices won't be generated. This can be due to the image included in the invoice header not being supported.
   To fix this issue, change the image in the administrator interface (manage the invoices / invoices settings).
   See [this thread](https://forum.fab-manager.com/t/resolu-erreur-generation-facture/428) for more info.
