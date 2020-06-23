@@ -103,41 +103,21 @@ This script will guide you through the installation process by checking the requ
 Below, you'll find a collection of useful commands to control your instance with docker-compose.
 Before using any of these commands, you must first `cd` into the app directory.
 
-- Restart app
+- Read again the environment variables and restart
 ```bash
-docker-compose restart fabmanager
+docker-compose down && docker-compose up -d
 ```
-- Remove app
+- Open a bash prompt in the app context
 ```bash
-docker-compose down fabmanager
-```
-- Restart all containers
-```bash
-docker-compose restart
-```
-- Remove all containers
-```bash
-docker-compose down
-```
-- Start all containers
-```bash
-docker-compose up -d
-```
-- Open a bash in the app context
-```bash
-docker-compose run --rm fabmanager bash
+docker-compose exec fabmanager bash
 ```
 - Show services status
 ```bash
 docker-compose ps
 ```
-- Restart nginx container
-```bash
-docker-compose restart nginx
- ```
 - Example of command passing env variables
 ```bash
-docker-compose run --rm -e ADMIN_EMAIL=xxx -e ADMIN_PASSWORD=xxx fabmanager bundle exec rails db:seed
+docker-compose run --rm -e VAR1=xxx -e VAR2=xxx fabmanager bundle exec rails my:command
 ```
 <a name="update-fabmanager"></a>
 ## Update Fab-manager
