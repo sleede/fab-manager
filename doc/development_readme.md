@@ -151,6 +151,13 @@ This procedure is not easy to follow so if you don't need to write some code for
 18. Email notifications will be caught by MailCatcher.
     To see the emails sent by the platform, open your web browser at `http://fabmanager-mailcatcher:1080` to access the MailCatcher interface.
 
+<a name="tests"></a>
+## Tests
+
+Run the test suite with `./scripts/run-tests.sh`.
+
+Pleas note: If you haven't set the Stripe's API keys in your `.env` file, the script will ask for them.
+You must provide valid Stripe API **test keys** for the test suite to run.
 
 <a name="postgresql"></a>
 ## PostgreSQL
