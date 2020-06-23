@@ -51,7 +51,15 @@ class Project < ApplicationRecord
 
   # scopes
   scope :published, -> { where("state = 'published'") }
-  scope :drafts, ->(author_profile) { where("state = 'draft' AND author_statistic_profile_id = ?", author_profile) }
+  scope :published_or_drafts, lambda { |author_profile|
+    where("state = 'published' OR (state = 'draft' AND author_statistic_profile_id = ?)", author_profile)
+  }
+  scope :user_projects, ->(author_profile) { where('author_statistic_profile_id = ?', author_profile) }
+  scope :collaborations, ->(collaborators_ids) { joins(:projects_users).where(projects_users: { user_id: collaborators_ids }) }
+  scope :with_machine, ->(machines_ids) { joins(:projects_machines).where(projects_machines: { machine_id: machines_ids }) }
+  scope :with_theme, ->(themes_ids) { joins(:projects_themes).where(projects_themes: { theme_id: themes_ids }) }
+  scope :with_component, ->(component_ids) { joins(:projects_components).where(projects_components: { component_id: component_ids }) }
+  scope :with_space, ->(spaces_ids) { joins(:projects_spaces).where(projects_spaces: { space_id: spaces_ids }) }
   pg_search_scope :search,
                   against: {
                     name: 'A',
