@@ -52,20 +52,12 @@ class API::ProjectsController < API::ApiController
   end
 
   def search
-    query_params = JSON.parse(params[:search])
+    service = ProjectService.new
+    res = service.search(params, current_user)
+    render json: res, status: :unprocessable_entity and return if res.error
 
-    records = Project.published_or_drafts(current_user&.statistic_profile&.id)
-    records = Project.user_projects(current_user&.statistic_profile&.id) if query_params['from'] == 'mine'
-    records = Project.collaborations(current_user&.id) if query_params['from'] == 'collaboration'
-
-    records = records.with_machine(query_params['machine_id']) if query_params['machine_id'].present?
-    records = records.with_component(query_params['component_id']) if query_params['component_id'].present?
-    records = records.with_theme(query_params['theme_id']) if query_params['theme_id'].present?
-    records = records.with_space(query_params['space_id']) if query_params['space_id'].present?
-    records = records.search(query_params['q']) if query_params['q'].present?
-
-    @total = records.count
-    @projects = records.includes(:users, :project_image).page(params[:page])
+    @total = res.total
+    @projects = res.projects
     render :index
   end
 
