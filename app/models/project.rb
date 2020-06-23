@@ -61,23 +61,19 @@ class Project < ApplicationRecord
   scope :with_component, ->(component_ids) { joins(:projects_components).where(projects_components: { component_id: component_ids }) }
   scope :with_space, ->(spaces_ids) { joins(:projects_spaces).where(projects_spaces: { space_id: spaces_ids }) }
   pg_search_scope :search,
-                  against: {
-                    name: 'A',
-                    tags: 'B',
-                    description: 'C'
-                  },
-                  associated_against: {
-                    project_steps: {
-                      title: 'D',
-                      description: 'D'
-                    }
-                  },
+                  against: :search_vector,
                   using: {
-                    tsearch: { dictionary: Rails.application.secrets.postgresql_language_analyzer },
-                    trigram: {},
+                    tsearch: {
+                      dictionary: Rails.application.secrets.postgresql_language_analyzer,
+                      tsvector_column: 'search_vector'
+                    },
+                    trigram: {
+                      word_similarity: true
+                    },
                     dmetaphone: {}
                   },
-                  ignoring: :accents
+                  ignoring: :accents,
+                  order_within_rank: 'created_at DESC'
 
   private
 

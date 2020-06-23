@@ -23,7 +23,11 @@ class ProjectService
     records = records.with_component(query_params['component_id']) if query_params['component_id'].present?
     records = records.with_theme(query_params['theme_id']) if query_params['theme_id'].present?
     records = records.with_space(query_params['space_id']) if query_params['space_id'].present?
-    records = records.search(query_params['q']) if query_params['q'].present?
+    records = if query_params['q'].present?
+                records.search(query_params['q'])
+              else
+                records.order(created_at: :desc)
+              end
 
     { total: records.count, projects: records.includes(:users, :project_image).page(params[:page]) }
   end

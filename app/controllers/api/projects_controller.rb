@@ -54,10 +54,10 @@ class API::ProjectsController < API::ApiController
   def search
     service = ProjectService.new
     res = service.search(params, current_user)
-    render json: res, status: :unprocessable_entity and return if res.error
+    render json: res, status: :unprocessable_entity and return if res[:error]
 
-    @total = res.total
-    @projects = res.projects
+    @total = res[:total]
+    @projects = res[:projects]
     render :index
   end
 

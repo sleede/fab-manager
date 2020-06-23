@@ -21,6 +21,9 @@ module Fablab
     # see https://edgeguides.rubyonrails.org/upgrading_ruby_on_rails.html#active-record-belongs-to-required-by-default-option
     config.active_record.belongs_to_required_by_default = false
 
+    # Use the SQL format for the schema to speed up migrations, due to pgSQL specific instructions
+    config.active_record.schema_format = :sql
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
