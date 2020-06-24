@@ -315,7 +315,7 @@ pt:
         you_have_amount_in_wallet: "Você tem {amount} {currency} em sua carteira"
         client_have_amount_in_wallet: "O cliente possui {amount} {currency} em sua carteira"
         wallet_pay_reservation: "You can pay your reservation directly"
-        client_wallet_pay_reservation: "You can make the payment for the customer's reservation directly"
+        client_wallet_pay_reservation: "The member can pay his reservation directly"
         debit_subscription: "Pay for a subscription"
         debit_reservation_training: "Pay for a training reservation"
         debit_reservation_machine: "Pay for a machine reservation"
