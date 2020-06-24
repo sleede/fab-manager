@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'test_helper'
+
 class AccountingPeriodTest < ActionDispatch::IntegrationTest
   def setup
     @admin = User.find_by(username: 'admin')
@@ -91,5 +93,23 @@ class AccountingPeriodTest < ActionDispatch::IntegrationTest
 
     # check the error
     assert_match(/#{I18n.t('errors.messages.must_be_in_the_past')}/, response.body)
+  end
+
+  test 'get the end of the last closed period' do
+    get '/api/accounting_periods/last_closing_end'
+
+    assert_equal 200, response.status
+    assert_equal Mime[:json], response.content_type
+    resp = json_response(response.body)
+
+    period_end = AccountingPeriod.first.end_at
+    assert_equal (period_end + 1.day).to_s, resp[:last_end_date]
+  end
+
+  test 'download the archive' do
+    period_id = AccountingPeriod.first.id
+    get "/api/accounting_periods/#{period_id}/archive"
+
+    assert_match /^attachment; filename=/, response.headers['Content-Disposition']
   end
 end

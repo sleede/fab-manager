@@ -145,7 +145,8 @@ namespace :fablab do
         raise 'Interrupted by user' unless confirm == 'y'
       end
 
-      PeriodStatisticsWorker.perform(args.period)
+      worker = PeriodStatisticsWorker.new
+      worker.perform(args.period)
     end
   end
 end

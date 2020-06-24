@@ -36,6 +36,7 @@ class AccountingPeriod < ApplicationRecord
 
   def archive_folder
     dir = "accounting/#{id}"
+    dir = "test/fixtures/files/accounting/#{id}" if Rails.env.test?
 
     # create directory if it doesn't exists (accounting)
     FileUtils.mkdir_p dir
