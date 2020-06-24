@@ -314,12 +314,12 @@ pt:
         amount_confirm_does_not_match: "A confirmação da quantia não é a mesma da quantia."
         you_have_amount_in_wallet: "Você tem {amount} {currency} em sua carteira"
         client_have_amount_in_wallet: "O cliente possui {amount} {currency} em sua carteira"
-        wallet_pay_reservation: "Você pode pagar diretamente sua reserva"
-        client_wallet_pay_reservation: "O cliente pode pagar diretamente a reserva"
-        debit_subscription: "Débito por inscrição"
-        debit_reservation_training: "Débito por reserva de treinamento"
-        debit_reservation_machine: "Débito por reserva de máquina"
-        debit_reservation_event: "Débito por reserva de evento"
+        wallet_pay_reservation: "You can pay your reservation directly"
+        client_wallet_pay_reservation: "You can make the payment for the customer's reservation directly"
+        debit_subscription: "Pay for a subscription"
+        debit_reservation_training: "Pay for a training reservation"
+        debit_reservation_machine: "Pay for a machine reservation"
+        debit_reservation_event: "Pay for an event reservation"
         warning_uneditable_credit: "Aviso: uma vez validado, o valor creditado não será mais editado."
       #promotional coupon (creation/edition form)
       coupon:
