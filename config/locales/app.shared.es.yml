@@ -314,7 +314,7 @@ es:
         amount_confirm_does_not_match: "La confirmación de la cantidad no coincide."
         you_have_amount_in_wallet: "Tiene {amount} {currency} en su cartera"
         client_have_amount_in_wallet: "El cliente tiene {amount} {currency} en su cartera"
-        wallet_pay_reservation: "Puedes pagar tu reserva directamente"
+        wallet_pay_reservation: "Puede pagar directamente su reserva"
         client_wallet_pay_reservation: "El socio puede pagar su reserva directamente"
         debit_subscription: "Pagar una suscripción"
         debit_reservation_training: "Pagar una reserva de entrenamiento"
