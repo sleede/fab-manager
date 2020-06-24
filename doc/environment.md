@@ -194,18 +194,12 @@ See [code.angularjs.org/i18n/angular-locale_*.js](https://code.angularjs.org/1.6
 Configure the fullCalendar JS agenda library.
 
 See [github.com/fullcalendar/fullcalendar/lang/*.js](https://github.com/fullcalendar/fullcalendar/tree/v2.3.1/lang) for a list of available locales. Default is **en-us**.
-<a name="ELASTICSEARCH_LANGUAGE_ANALYZER"></a>
-
-    ELASTICSEARCH_LANGUAGE_ANALYZER
-
-This configure the language analyzer for indexing and searching in projects with ElasticSearch.
-See [ElasticSearch guide](https://www.elastic.co/guide/en/elasticsearch/reference/5.6/analysis-lang-analyzer.html) for a list of available analyzers.
 <a name="POSTGRESQL_LANGUAGE_ANALYZER"></a>
 
     POSTGRESQL_LANGUAGE_ANALYZER
     
 This variable configures the language analyzer for indexing and searching in projets with PostgreSQL.
-List all available values with `docker-compose exec -T postgres psql -Upostgres -c \\dFd | head -n -2 | tail -n +3 | awk '{ print gensub(/([a-z]+)_stem/,"\\1","g",$3); }'`
+Available values: `danish, dutch, english, finnish, french, german, hungarian, italian, norwegian, portuguese, romanian, russian, simple, spanish, swedish, turkish`
 <a name="TIME_ZONE"></a>
 
     TIME_ZONE
@@ -258,4 +252,4 @@ Set this variable to `https://openprojects.fab-manager.com` if you want to use t
 In the previous versions of Fab-manager, much more settings were configurable from environment variables.
 Starting with Fab-manager v4.5.0, these settings can be configured from the graphical interface, when logged as an administrator.
 
-Nevertheless, it is possible to keep the configuration in the `env` file, using a combination of `LOCKED_SETTINGS`, `rails fablab:setup:env_to_db` and the [mapping table of `env_to_db`](../lib/tasks/fablab/setup.rake#L105).
+Nevertheless, it is possible to keep the configuration in the `env` file, using a combination of [`LOCKED_SETTINGS`](environment.md#LOCKED_SETTINGS), `rails fablab:setup:env_to_db` and the [mapping table of `env_to_db`](../lib/tasks/fablab/setup.rake#L105).

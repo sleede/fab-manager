@@ -65,10 +65,12 @@ class Project < ApplicationRecord
                   using: {
                     tsearch: {
                       dictionary: Rails.application.secrets.postgresql_language_analyzer,
+                      prefix: true,
                       tsvector_column: 'search_vector'
                     },
                     trigram: {
-                      word_similarity: true
+                      word_similarity: true,
+                      threshold: 0.5
                     },
                     dmetaphone: {}
                   },
