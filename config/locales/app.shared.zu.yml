@@ -315,7 +315,7 @@ zu:
         you_have_amount_in_wallet: "crwdns9919:0{amount}crwdnd9919:0{currency}crwdne9919:0"
         client_have_amount_in_wallet: "crwdns9921:0{amount}crwdnd9921:0{currency}crwdne9921:0"
         wallet_pay_reservation: "crwdns20872:0crwdne20872:0"
-        client_wallet_pay_reservation: "crwdns20874:0crwdne20874:0"
+        client_wallet_pay_reservation: "crwdns20884:0crwdne20884:0"
         debit_subscription: "crwdns20876:0crwdne20876:0"
         debit_reservation_training: "crwdns20878:0crwdne20878:0"
         debit_reservation_machine: "crwdns20880:0crwdne20880:0"
