@@ -50,13 +50,17 @@ This procedure is not easy to follow so if you don't need to write some code for
    > ⚠ If you are using MacOS X, you must *first* edit the files located in docker/development to use port binding instead of ip-based binding.
    > This can be achieved by uncommenting the "port" directives and commenting the "networks" directives in the docker-compose.yml file.
    > The hosts file must be modified too, accordingly.
+
+   > ⚠ `ERROR: Pool overlaps with other one on this address space`
+   > In this case, you must modify the /etc/hosts and docker-compose.yml files to change the network from 172.18.y.z to 172.x.y.z, where x is a new unused network.
+
   ```bash
   cd fab-manager
   cat docker/development/hosts | sudo tee -a /etc/hosts
   mkdir -p .docker/elasticsearch/config
   cp docker/development/docker-compose.yml .docker
-  cp docker/elasticsearch.yml .docker/elasticsearch/config
-  cp docker/log4j2.properties .docker/elasticsearch/config
+  cp setup/elasticsearch.yml .docker/elasticsearch/config
+  cp setup/log4j2.properties .docker/elasticsearch/config
   cd .docker
   docker-compose up -d
   cd -
@@ -147,6 +151,13 @@ This procedure is not easy to follow so if you don't need to write some code for
 18. Email notifications will be caught by MailCatcher.
     To see the emails sent by the platform, open your web browser at `http://fabmanager-mailcatcher:1080` to access the MailCatcher interface.
 
+<a name="tests"></a>
+## Tests
+
+Run the test suite with `./scripts/run-tests.sh`.
+
+Pleas note: If you haven't set the Stripe's API keys in your `.env` file, the script will ask for them.
+You must provide valid Stripe API **test keys** for the test suite to run.
 
 <a name="postgresql"></a>
 ## PostgreSQL
@@ -158,7 +169,7 @@ Some information about PostgreSQL usage in fab-manager is available in the [Post
 
 ElasticSearch is a powerful search engine based on Apache Lucene combined with a NoSQL database used as a cache to index data and quickly process complex requests on it.
 
-In FabManager, it is used for the admin's statistics module and to perform searches in projects.
+In FabManager, it is used for the admin's statistics module.
 
 The organisation if the data in the ElasticSearch database is documented in [elasticsearch.md](elasticsearch.md) 
 

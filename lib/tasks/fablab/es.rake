@@ -101,35 +101,6 @@ namespace :fablab do
       }';`
     end
 
-    desc 'sync all/one project in ElasticSearch index'
-    task :build_projects_index, [:id] => :environment do |_task, args|
-      client = Project.__elasticsearch__.client
-
-      # ask if we delete the index
-      print 'Delete all projects in ElasticSearch index? (y/n) '
-      confirm = STDIN.gets.chomp
-      if confirm == 'y'
-        client.delete_by_query(
-          index: Project.index_name,
-          type: Project.document_type,
-          conflicts: 'proceed',
-          body: { query: { match_all: {} } }
-        )
-      end
-
-      # create index if not exists
-      Project.__elasticsearch__.create_index! force: true unless client.indices.exists? index: Project.index_name
-
-      # index requested documents
-      if args.id
-        ProjectIndexerWorker.perform_async(:index, id)
-      else
-        Project.pluck(:id).each do |project_id|
-          ProjectIndexerWorker.perform_async(:index, project_id)
-        end
-      end
-    end
-
     desc 'sync all/one availabilities in ElasticSearch index'
     task :build_availabilities_index, [:id] => :environment do |_task, args|
       client = Availability.__elasticsearch__.client

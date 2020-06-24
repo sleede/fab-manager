@@ -6,16 +6,9 @@
 You may want to access the psql command line tool to check the content of the database, or to run some maintenance routines.
 This can be achieved doing the following:
 
-1. Enter into the PostgreSQL container
    ```bash
-   docker exec -it fabmanager-postgres bash
-   ```
-
-2. Run the PostgreSQL administration command line interface, logged as the postgres user
-   
-   ```bash
-   su postgres
-   psql
+   cd /apps/fabmanager
+   docker-compose exec postgres psql -Upostgres
    ```
    
 ## Dumping the database
@@ -43,7 +36,7 @@ docker-compose down
 docker-compose up -d postgres
 docker-compose exec postgres dropdb -U postgres fabmanager_production
 docker-compose exec postgres createdb -U postgres fabmanager_production
-docker-compose exec postgres psql -U postgres -d fablab_production -f /var/lib/postgresql/data/fabmanager_production_$(date -I).sql
+docker-compose exec postgres psql -U postgres -d fabmanager_production -f /var/lib/postgresql/data/fabmanager_production_$(date -I).sql
 docker-compose up -d
 ```
 
@@ -64,19 +57,22 @@ docker-compose up -d
     Please follow the instructions detailed on the extension website to whitelist `unaccent` and `trigram` for the user configured in `config/database.yml`.
 - If you intend to contribute to the project code, you will need to run the test suite with `scripts/run-tests.sh`.
   This also requires your user to have the _SUPERUSER_ role.
-  Please see the [known issues](../README.md#known-issues) section for more information about this.
+  Please see the [known issues](known-issues.md) documentation for more information about this.
 
 
 <a name="using-another-dbms"></a>
 ## Using another DBMS
 Some users may want to use another DBMS than PostgreSQL.
 This is currently not supported, because of some PostgreSQL specific instructions that cannot be efficiently handled with the ActiveRecord ORM:
- - `app/services/members/list_service.rb@list` is using `ILIKE`, `now()::date` and `OFFSET`.
- - `app/services/invoices_service.rb@list` is using `ILIKE` and `date_trunc()`
- - `db/migrate/20160613093842_create_unaccent_function.rb` is using [unaccent](https://www.postgresql.org/docs/current/static/unaccent.html) and [trigram](https://www.postgresql.org/docs/current/static/pgtrgm.html) modules and defines a PL/pgSQL function (`f_unaccent()`)
- - `app/controllers/api/members_controllers.rb@search` is using `f_unaccent()` (see above) and `regexp_replace()`
- - `db/migrate/20150604131525_add_meta_data_to_notifications.rb` is using [jsonb](https://www.postgresql.org/docs/9.4/static/datatype-json.html), a PostgreSQL 9.4+ datatype.
- - `db/migrate/20160915105234_add_transformation_to_o_auth2_mapping.rb` is using [jsonb](https://www.postgresql.org/docs/9.4/static/datatype-json.html), a PostgreSQL 9.4+ datatype.
- - `db/migrate/20181217103441_migrate_settings_value_to_history_values.rb` is using `SELECT DISTINCT ON`.
- - `db/migrate/20190107111749_protect_accounting_periods.rb` is using `CREATE RULE` and `DROP RULE`.
- - `db/migrate/20190522115230_migrate_user_to_invoicing_profile.rb` is using `CREATE RULE` and `DROP RULE`.
+ - `app/services/members/list_service.rb@list` is using `ILIKE`, `now()::date` and `OFFSET`;
+ - `app/services/invoices_service.rb@list` is using `ILIKE` and `date_trunc()`;
+ - `db/migrate/20160613093842_create_unaccent_function.rb` is using [unaccent](https://www.postgresql.org/docs/current/static/unaccent.html) and [trigram](https://www.postgresql.org/docs/current/static/pgtrgm.html) modules and defines a PL/pgSQL function (`f_unaccent()`);
+ - `app/controllers/api/members_controller.rb@search` is using `f_unaccent()` (see above);
+ - `db/migrate/20150604131525_add_meta_data_to_notifications.rb` is using [jsonb](https://www.postgresql.org/docs/9.4/static/datatype-json.html), a PostgreSQL 9.4+ datatype;
+ - `db/migrate/20160915105234_add_transformation_to_o_auth2_mapping.rb` is using [jsonb](https://www.postgresql.org/docs/9.4/static/datatype-json.html), a PostgreSQL 9.4+ datatype;
+ - `db/migrate/20181217103441_migrate_settings_value_to_history_values.rb` is using `SELECT DISTINCT ON`;
+ - `db/migrate/20190107111749_protect_accounting_periods.rb` is using `CREATE RULE` and `DROP RULE`;
+ - `db/migrate/20190522115230_migrate_user_to_invoicing_profile.rb` is using `CREATE RULE` and `DROP RULE`;
+ - `db/migrate/20200511075933_fix_accounting_periods.rb` is using `CREATE RULE` and `DROP RULE`;
+ - `app/models/project.rb` is using the `pg_search` gem.
+ - `db/migrate/20200622135401_add_pg_search_dmetaphone_support_functions.rb` is using [fuzzystrmatch](http://www.postgresql.org/docs/current/static/fuzzystrmatch.html) module and defines a PL/pgSQL function (`pg_search_dmetaphone()`);

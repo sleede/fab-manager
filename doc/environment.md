@@ -200,6 +200,12 @@ See [github.com/fullcalendar/fullcalendar/lang/*.js](https://github.com/fullcale
 
 This configure the language analyzer for indexing and searching in projects with ElasticSearch.
 See [ElasticSearch guide](https://www.elastic.co/guide/en/elasticsearch/reference/5.6/analysis-lang-analyzer.html) for a list of available analyzers.
+<a name="POSTGRESQL_LANGUAGE_ANALYZER"></a>
+
+    POSTGRESQL_LANGUAGE_ANALYZER
+    
+This variable configures the language analyzer for indexing and searching in projets with PostgreSQL.
+List all available values with `docker-compose exec -T postgres psql -Upostgres -c \\dFd | head -n -2 | tail -n +3 | awk '{ print gensub(/([a-z]+)_stem/,"\\1","g",$3); }'`
 <a name="TIME_ZONE"></a>
 
     TIME_ZONE
