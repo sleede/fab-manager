@@ -1,9 +1,11 @@
 # Changelog Fab-manager
 
+- Search in the projets directly from PostgreSQL
 - Ability to configure most of the settings from the admin's UI
 - Ability to lock some settings from the environment
 - Improved display of the icons alerting about an outdated version
 - Improved mime-type checking (back & front)
+- Dependency to ElasticSearch is now optional, if you disable the statistics
 - Updated CarrierWave to 2.1.0
 - Updated redis to v6, with alpine image
 - Updated Sidekiq to 6.0.7

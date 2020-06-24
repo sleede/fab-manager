@@ -98,6 +98,18 @@ This script will guide you through the installation process by checking the requ
 \curl -sSL setup.fab-manager.com | bash -s "/my/custom/path"
 ```
 
+## Fab-manager for small configurations
+
+If your server machine is not powerful, you can lower the system requirements by uninstalling ElasticSearch.
+In order to remove ElasticSearch, you must **first** disable the statistics module from Customization > General > Modules.
+
+Then, you can remove the `elasticsearch` service from the [docker-compose.yml](../setup/docker-compose.yml) file and restart the whole application:
+```bash
+docker-compose down && docker-compose up -d
+```
+
+Disabling ElasticSearch will save up to 800 Mb of memory. 
+
 <a name="docker-utils"></a>
 ## Docker utils
 Below, you'll find a collection of useful commands to control your instance with docker-compose.
