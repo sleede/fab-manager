@@ -15,7 +15,7 @@ fr:
         trainings: "Formations"
         machines: "Machines"
         spaces: "Espaces"
-        events: "Évènements"
+        events: "Événements"
         availabilities: "Disponibilités"
         availabilities_notice: "Exporter dans un classeur Excel tous les créneaux ouverts à la réservation et leurs taux d'occupation."
         info: "Informations"
@@ -1351,26 +1351,26 @@ fr:
             content: "Créez et gérez des codes promotionnels permettant d'offrir des réductions ponctuelles à leurs détenteurs."
         events:
           welcome:
-            title: "Évènements"
-            content: "Créez des évènements, suivez leurs réservations et organisez-les depuis cette page."
+            title: "Événements"
+            content: "Créez des événements, suivez leurs réservations et organisez-les depuis cette page."
           list:
-            title: "Les évènements"
-            content: "Cette liste affiche l'ensemble des évènements passés ou à venir, ainsi que le nombre de réservations pour chacun d'eux."
+            title: "Les événements"
+            content: "Cette liste affiche l'ensemble des événements passés ou à venir, ainsi que le nombre de réservations pour chacun d'eux."
           filter:
-            title: "Filtrez les évènements"
-            content: "N'affichez que les évènements à venir dans la liste ci-dessous ; ou au contraire, uniquement ceux déjà passés."
+            title: "Filtrez les événements"
+            content: "N'affichez que les événements à venir dans la liste ci-dessous ; ou au contraire, uniquement ceux déjà passés."
           categories:
             title: "Les catégories"
-            content: "Les catégories aident vos utilisateurs à savoir de quel type d'évènement il s'agit. Une catégorie est requise pour chacun des évènements nouvellement créé."
+            content: "Les catégories aident vos utilisateurs à savoir de quel type d’événement il s'agit. Une catégorie est requise pour chacun des événements nouvellement créé."
           themes:
             title: "Les thématique"
-            content: "<p>Les thématiques constituent une catégorisation supplémentaire (et optionnelle) de vos évènements. Elles peuvent regrouper différents évènements de formes très différentes.</p><p>Par exemple, un stage de deux jours sur la marqueterie et un atelier d'une soirée sur la prise en main du rabot à bois, peuvent se retrouver dans la thématique « menuiserie ».</p>"
+            content: "<p>Les thématiques constituent une catégorisation supplémentaire (et optionnelle) de vos événements. Elles peuvent regrouper différents événements de formes très différentes.</p><p>Par exemple, un stage de deux jours sur la marqueterie et un atelier d'une soirée sur la prise en main du rabot à bois, peuvent se retrouver dans la thématique « menuiserie ».</p>"
           ages:
             title: "Les tranches d'âge"
-            content: "Cet autre filtre optionnel aidera vos utilisateurs à trouver des évènements adaptés à leur profil."
+            content: "Cet autre filtre optionnel aidera vos utilisateurs à trouver des événements adaptés à leur profil."
           prices:
             title: "Catégories tarifaires"
-            content: "Le prix des évènements ne dépend pas des groupes ou des abonnements, mais des catégories que vous définissez sur cette page."
+            content: "Le prix des événements ne dépend pas des groupes ou des abonnements, mais des catégories que vous définissez sur cette page."
         projects:
           welcome:
             title: "Projets"
