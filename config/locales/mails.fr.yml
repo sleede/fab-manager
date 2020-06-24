@@ -220,7 +220,7 @@ fr:
         you_asked_for_an_export: "Vous avez demandé un export"
         statistics_global: "de toutes les statistiques"
         statistics_account: "des statistiques d'inscriptions"
-        statistics_event: "des statistiques sur les évènements"
+        statistics_event: "des statistiques sur les événements"
         statistics_machine: "des statistiques de créneaux machines"
         statistics_project: "des statistiques sur les projets"
         statistics_subscription: "des statistiques d'abonnements"
@@ -250,7 +250,7 @@ fr:
         this_coupon_is_valid_USAGE_times_until_DATE_for_all_your_purchases: "Ce code promo est valable {USAGE, plural, =1{une seule fois} other{plusieurs fois}} : pour tous vos achats {TYPE, select, amount_off{dont le montant est au moins égal à celui du code promo} other{}}, dès maintenant {DATE, select, NO-DATE{et sans limitation de durée} other{et jusqu'au {DATE}}}."
     notify_admin_free_disk_space:
       subject: "Espace disque faible"
-      body: "Attention : l'espace disque disponible sur le serveur hébergeant Fab-manager est inférieur à %{THRESHOLD} MiO. Cela peut nuire à son bon fonctionnement et empêcher la sauvegarde de certaines données. Actuellement, il reste %{AVAILABLE} MiO d'espace libre sur le point de montage."
+      body: "Attention : l'espace disque disponible sur le serveur hébergeant Fab-manager est inférieur à %{THRESHOLD} Mo. Cela peut nuire à son bon fonctionnement et empêcher la sauvegarde de certaines données. Actuellement, il reste %{AVAILABLE} Mo d'espace libre sur le point de montage."
     notify_admin_close_period_reminder:
       subject: "Pensez à clôturer vos périodes comptables"
       body:

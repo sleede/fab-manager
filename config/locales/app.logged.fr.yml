@@ -111,10 +111,10 @@ fr:
           no_trainings: "Aucune formation"
         #dashboard: my events
         events:
-          your_next_events: "Vos prochains évènements"
-          no_events_to_come: "Aucun évènement à venir"
-          your_previous_events: "Vos évènements passés"
-          no_passed_events: "Aucun évènement passé"
+          your_next_events: "Vos prochains événements"
+          no_events_to_come: "Aucun événement à venir"
+          your_previous_events: "Vos événements passés"
+          no_passed_events: "Aucun événement passé"
           NUMBER_normal_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{place normale réservée} other{places normales réservées}}"
           NUMBER_of_NAME_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{place {NAME} réservée} other{places {NAME} réservées}}"
         #dashboard: my invoices

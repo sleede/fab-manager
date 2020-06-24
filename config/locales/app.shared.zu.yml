@@ -314,12 +314,12 @@ zu:
         amount_confirm_does_not_match: "crwdns20226:0crwdne20226:0"
         you_have_amount_in_wallet: "crwdns9919:0{amount}crwdnd9919:0{currency}crwdne9919:0"
         client_have_amount_in_wallet: "crwdns9921:0{amount}crwdnd9921:0{currency}crwdne9921:0"
-        wallet_pay_reservation: "crwdns9923:0crwdne9923:0"
-        client_wallet_pay_reservation: "crwdns9925:0crwdne9925:0"
-        debit_subscription: "crwdns9927:0crwdne9927:0"
-        debit_reservation_training: "crwdns9929:0crwdne9929:0"
-        debit_reservation_machine: "crwdns9931:0crwdne9931:0"
-        debit_reservation_event: "crwdns9933:0crwdne9933:0"
+        wallet_pay_reservation: "crwdns20872:0crwdne20872:0"
+        client_wallet_pay_reservation: "crwdns20884:0crwdne20884:0"
+        debit_subscription: "crwdns20876:0crwdne20876:0"
+        debit_reservation_training: "crwdns20878:0crwdne20878:0"
+        debit_reservation_machine: "crwdns20880:0crwdne20880:0"
+        debit_reservation_event: "crwdns20882:0crwdne20882:0"
         warning_uneditable_credit: "crwdns9935:0crwdne9935:0"
       #promotional coupon (creation/edition form)
       coupon:

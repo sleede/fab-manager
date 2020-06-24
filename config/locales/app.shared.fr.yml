@@ -136,7 +136,7 @@ fr:
         description_is_required: "La description est requise."
         attachments: "Pièces jointes"
         add_a_new_file: "Ajouter un nouveau fichier"
-        event_type: "Type d'évènement"
+        event_type: "Type d'événement"
         dates_and_opening_hours: "Dates et horaires"
         all_day: "Toute la journée"
         start_date: "Date de début"
@@ -149,7 +149,7 @@ fr:
         standard_rate: "Tarif standard"
         0_equal_free: "0 = gratuit"
         tickets_available: "Places disponibles"
-        event_theme: "Thème de l'évènement"
+        event_theme: "Thème de l'événement"
         age_range: "Tranche d'âge"
       #subscription plan edition form
       plan:
@@ -314,12 +314,12 @@ fr:
         amount_confirm_does_not_match: "La confirmation du montant ne correspond pas."
         you_have_amount_in_wallet: "Vous avez {amount} {currency} sur votre porte-monnaie"
         client_have_amount_in_wallet: "Le client a {amount} {currency} sur son porte-monnaie"
-        wallet_pay_reservation: "Vous pouvez effectuer directement votre paiement de réservation"
-        client_wallet_pay_reservation: "Vous pouvez effectuer directement le paiement de sa réservation"
+        wallet_pay_reservation: "Vous pouvez payer votre réservation directement"
+        client_wallet_pay_reservation: "Le membre peut directement payer sa réservation"
         debit_subscription: "Payer un abonnement"
-        debit_reservation_training: "Payer un reservation de formation"
-        debit_reservation_machine: "Payer un reservation de machine"
-        debit_reservation_event: "Payer une réservation d’événement"
+        debit_reservation_training: "Payer une réservation de formation"
+        debit_reservation_machine: "Payer une réservation de machine"
+        debit_reservation_event: "Payer une réservation d'événement"
         warning_uneditable_credit: "Attention : une fois validé, le montant crédité ne sera plus modifiable."
       #promotional coupon (creation/edition form)
       coupon:

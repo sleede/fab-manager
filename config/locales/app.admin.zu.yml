@@ -1111,6 +1111,7 @@ zu:
         confirmation_required_info: "crwdns20720:0crwdne20720:0"
         confirmation_is_required: "crwdns20722:0crwdne20722:0"
         wallet_module: "crwdns20724:0crwdne20724:0"
+        statistics_module: "crwdns20864:0crwdne20864:0"
         general:
           general: "crwdns20726:0crwdne20726:0"
           title: "crwdns20728:0crwdne20728:0"
@@ -1147,6 +1148,9 @@ zu:
           wallet: "crwdns20786:0crwdne20786:0"
           wallet_info_html: "crwdns20788:0crwdne20788:0"
           enable_wallet: "crwdns20790:0crwdne20790:0"
+          statistics: "crwdns20866:0crwdne20866:0"
+          statistics_info_html: "crwdns20868:0crwdne20868:0"
+          enable_statistics: "crwdns20870:0crwdne20870:0"
         privacy:
           title: "crwdns20792:0crwdne20792:0"
           privacy_policy: "crwdns20794:0crwdne20794:0"
