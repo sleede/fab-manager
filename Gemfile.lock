@@ -301,7 +301,7 @@ GEM
     pundit (2.1.0)
       activesupport (>= 3.0.0)
     raabro (1.1.6)
-    rack (2.2.2)
+    rack (2.2.3)
     rack-protection (2.0.8.1)
       rack
     rack-test (1.1.0)
