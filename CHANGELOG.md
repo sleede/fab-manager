@@ -19,6 +19,7 @@
 - [TODO DEPLOY] add the `POSTGRESQL_LANGUAGE_ANALYZER` environment variable (see [doc/environment.md](doc/environment.md#POSTGRESQL_LANGUAGE_ANALYZER) for configuration details)
 - [TODO DEPLOY] `rails fablab:setup:env_to_db`
 - [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/redis-upgrade.sh | bash`
+- [TODO DEPLOY] -> (only dev) upgrade redis to v6, you may be able to use the script above, depending on your installation
 
 ## v4.4.6 2020 June 01
 
