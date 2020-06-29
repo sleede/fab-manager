@@ -2,6 +2,7 @@
 
 # Index for full-text search in projects
 class AddSearchVectorToProject < ActiveRecord::Migration[5.2]
+  # PostgreSQL only
   def self.up
     add_column :projects, :search_vector, :tsvector
 

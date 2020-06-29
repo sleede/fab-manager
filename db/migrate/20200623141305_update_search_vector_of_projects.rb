@@ -3,6 +3,7 @@
 # Create a PL/pgSQL function and trigger it on records update.
 # This function will update the Project::search_vector according to the saved project
 class UpdateSearchVectorOfProjects < ActiveRecord::Migration[5.2]
+  # PostgreSQL only
   def up
     execute <<-SQL
       CREATE OR REPLACE FUNCTION fill_search_vector_for_project() RETURNS trigger LANGUAGE plpgsql AS $$

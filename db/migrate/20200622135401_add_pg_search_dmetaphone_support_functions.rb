@@ -2,9 +2,10 @@
 
 # Create a PostgreSQL specific function to make pg_search gem working with fuzzystrmatch
 class AddPgSearchDmetaphoneSupportFunctions < ActiveRecord::Migration[5.2]
+  # PostgreSQL only
   def self.up
     say_with_time('Adding support functions for pg_search :dmetaphone') do
-      execute 'CREATE EXTENSION IF NOT EXISTS fuzzystrmatch;'
+      execute 'CREATE EXTENSION IF NOT EXISTS fuzzystrmatch SCHEMA public;'
       execute <<~'SQL'
         CREATE OR REPLACE FUNCTION pg_search_dmetaphone(text) RETURNS text LANGUAGE SQL IMMUTABLE STRICT AS $function$
           SELECT array_to_string(ARRAY(SELECT dmetaphone(unnest(regexp_split_to_array($1, E'\\s+')))), ' ')
