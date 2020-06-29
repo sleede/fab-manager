@@ -71,7 +71,8 @@ See https://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-confi
 Your members will receive email notifications containing links to your of Fab-manager.
 You must properly configure these variables to match URL of this instance, to prevent broken links.
 Typically, `DEFAULT_PROTOCOL` will be `https` (`http` if you are in development, or if you set `ALLOW_INSECURE_HTTP`).
-The variable `DEFAULT_HOST` should be your domain name (eg. fabmanager.example.com), and  is also used for visits statistics (configuration of Google Analytics).
+The variable `DEFAULT_HOST` should be your domain name (eg. fabmanager.example.com), and is also used for visits statistics (configuration of Google Analytics).
+These two variables are also used for SSO authentication.
 <a name="LOG_LEVEL"></a>
 
     LOG_LEVEL
