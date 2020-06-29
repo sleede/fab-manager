@@ -88,3 +88,8 @@ Rails.application.configure do
 
   config.log_level = Rails.application.secrets.log_level || :debug
 end
+
+Rails.application.routes.default_url_options = {
+  host: Rails.application.secrets.default_host,
+  protocol: Rails.application.secrets.default_protocol
+}

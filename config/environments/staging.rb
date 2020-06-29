@@ -111,3 +111,9 @@ Rails.application.configure do
   config.action_mailer.delivery_method = Rails.application.secrets.delivery_method.to_sym
 
 end
+
+Rails.application.routes.default_url_options = {
+  host: Rails.application.secrets.default_host,
+  protocol: Rails.application.secrets.default_protocol
+}
+

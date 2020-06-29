@@ -55,3 +55,8 @@ Rails.application.configure do
   config.active_support.test_order = :random
   config.log_level = Rails.application.secrets.log_level.blank? ? :debug : Rails.application.secrets.log_level
 end
+
+Rails.application.routes.default_url_options = {
+  host: Rails.application.secrets.default_host,
+  protocol: Rails.application.secrets.default_protocol
+}
