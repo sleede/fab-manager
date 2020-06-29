@@ -17,6 +17,7 @@ RUN apk update && apk upgrade && \
       zlib-dev \
       xz-dev \
       postgresql-dev \
+      postgresql-client \
       libxml2-dev \
       libxslt-dev \
       libidn-dev && \
