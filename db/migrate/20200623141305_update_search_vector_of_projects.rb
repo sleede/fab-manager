@@ -16,11 +16,11 @@ class UpdateSearchVectorOfProjects < ActiveRecord::Migration[5.2]
         select string_agg(description, ' ') as content into step_description from project_steps where project_id = new.id;
 
         new.search_vector :=
-          setweight(to_tsvector('pg_catalog.#{Rails.application.secrets.postgresql_language_analyzer}', coalesce(new.name, '')), 'A') ||
-          setweight(to_tsvector('pg_catalog.#{Rails.application.secrets.postgresql_language_analyzer}', coalesce(new.tags, '')), 'B') ||
-          setweight(to_tsvector('pg_catalog.#{Rails.application.secrets.postgresql_language_analyzer}', coalesce(new.description, '')), 'D') ||
-          setweight(to_tsvector('pg_catalog.#{Rails.application.secrets.postgresql_language_analyzer}', coalesce(step_title.title, '')), 'C') ||
-          setweight(to_tsvector('pg_catalog.#{Rails.application.secrets.postgresql_language_analyzer}', coalesce(step_description.content, '')), 'D');
+          setweight(to_tsvector('pg_catalog.#{Rails.application.secrets.postgresql_language_analyzer}', unaccent(coalesce(new.name, ''))), 'A') ||
+          setweight(to_tsvector('pg_catalog.#{Rails.application.secrets.postgresql_language_analyzer}', unaccent(coalesce(new.tags, ''))), 'B') ||
+          setweight(to_tsvector('pg_catalog.#{Rails.application.secrets.postgresql_language_analyzer}', unaccent(coalesce(new.description, ''))), 'D') ||
+          setweight(to_tsvector('pg_catalog.#{Rails.application.secrets.postgresql_language_analyzer}', unaccent(coalesce(step_title.title, ''))), 'C') ||
+          setweight(to_tsvector('pg_catalog.#{Rails.application.secrets.postgresql_language_analyzer}', unaccent(coalesce(step_description.content, ''))), 'D');
 
         return new;
       end

@@ -78,11 +78,11 @@ CREATE FUNCTION public.fill_search_vector_for_project() RETURNS trigger
         select string_agg(description, ' ') as content into step_description from project_steps where project_id = new.id;
 
         new.search_vector :=
-          setweight(to_tsvector('pg_catalog.french', coalesce(new.name, '')), 'A') ||
-          setweight(to_tsvector('pg_catalog.french', coalesce(new.tags, '')), 'B') ||
-          setweight(to_tsvector('pg_catalog.french', coalesce(new.description, '')), 'D') ||
-          setweight(to_tsvector('pg_catalog.french', coalesce(step_title.title, '')), 'C') ||
-          setweight(to_tsvector('pg_catalog.french', coalesce(step_description.content, '')), 'D');
+          setweight(to_tsvector('pg_catalog.french', unaccent(coalesce(new.name, ''))), 'A') ||
+          setweight(to_tsvector('pg_catalog.french', unaccent(coalesce(new.tags, ''))), 'B') ||
+          setweight(to_tsvector('pg_catalog.french', unaccent(coalesce(new.description, ''))), 'D') ||
+          setweight(to_tsvector('pg_catalog.french', unaccent(coalesce(step_title.title, ''))), 'C') ||
+          setweight(to_tsvector('pg_catalog.french', unaccent(coalesce(step_description.content, ''))), 'D');
 
         return new;
       end
@@ -181,14 +181,14 @@ ALTER SEQUENCE public.accounting_periods_id_seq OWNED BY public.accounting_perio
 
 CREATE TABLE public.addresses (
     id integer NOT NULL,
-    address character varying(255),
-    street_number character varying(255),
-    route character varying(255),
-    locality character varying(255),
-    country character varying(255),
-    postal_code character varying(255),
+    address character varying,
+    street_number character varying,
+    route character varying,
+    locality character varying,
+    country character varying,
+    postal_code character varying,
     placeable_id integer,
-    placeable_type character varying(255),
+    placeable_type character varying,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -264,9 +264,9 @@ CREATE TABLE public.ar_internal_metadata (
 CREATE TABLE public.assets (
     id integer NOT NULL,
     viewable_id integer,
-    viewable_type character varying(255),
-    attachment character varying(255),
-    type character varying(255),
+    viewable_type character varying,
+    attachment character varying,
+    type character varying,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -333,7 +333,7 @@ CREATE TABLE public.availabilities (
     id integer NOT NULL,
     start_at timestamp without time zone,
     end_at timestamp without time zone,
-    available_type character varying(255),
+    available_type character varying,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     nb_total_places integer,
@@ -405,7 +405,7 @@ ALTER SEQUENCE public.availability_tags_id_seq OWNED BY public.availability_tags
 
 CREATE TABLE public.categories (
     id integer NOT NULL,
-    name character varying(255),
+    name character varying,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     slug character varying
@@ -437,7 +437,7 @@ ALTER SEQUENCE public.categories_id_seq OWNED BY public.categories.id;
 
 CREATE TABLE public.components (
     id integer NOT NULL,
-    name character varying(255) NOT NULL
+    name character varying NOT NULL
 );
 
 
@@ -505,7 +505,7 @@ ALTER SEQUENCE public.coupons_id_seq OWNED BY public.coupons.id;
 CREATE TABLE public.credits (
     id integer NOT NULL,
     creditable_id integer,
-    creditable_type character varying(255),
+    creditable_type character varying,
     plan_id integer,
     hours integer,
     created_at timestamp without time zone,
@@ -664,7 +664,7 @@ ALTER SEQUENCE public.event_themes_id_seq OWNED BY public.event_themes.id;
 
 CREATE TABLE public.events (
     id integer NOT NULL,
-    title character varying(255),
+    title character varying,
     description text,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
@@ -769,10 +769,10 @@ ALTER SEQUENCE public.exports_id_seq OWNED BY public.exports.id;
 
 CREATE TABLE public.friendly_id_slugs (
     id integer NOT NULL,
-    slug character varying(255) NOT NULL,
+    slug character varying NOT NULL,
     sluggable_id integer NOT NULL,
     sluggable_type character varying(50),
-    scope character varying(255),
+    scope character varying,
     created_at timestamp without time zone
 );
 
@@ -802,10 +802,10 @@ ALTER SEQUENCE public.friendly_id_slugs_id_seq OWNED BY public.friendly_id_slugs
 
 CREATE TABLE public.groups (
     id integer NOT NULL,
-    name character varying(255),
+    name character varying,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    slug character varying(255),
+    slug character varying,
     disabled boolean
 );
 
@@ -977,7 +977,7 @@ ALTER SEQUENCE public.imports_id_seq OWNED BY public.imports.id;
 CREATE TABLE public.invoice_items (
     id integer NOT NULL,
     invoice_id integer,
-    stp_invoice_item_id character varying(255),
+    stp_invoice_item_id character varying,
     amount integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
@@ -1014,16 +1014,16 @@ ALTER SEQUENCE public.invoice_items_id_seq OWNED BY public.invoice_items.id;
 CREATE TABLE public.invoices (
     id integer NOT NULL,
     invoiced_id integer,
-    invoiced_type character varying(255),
-    stp_invoice_id character varying(255),
+    invoiced_type character varying,
+    stp_invoice_id character varying,
     total integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    reference character varying(255),
-    payment_method character varying(255),
+    reference character varying,
+    payment_method character varying,
     avoir_date timestamp without time zone,
     invoice_id integer,
-    type character varying(255),
+    type character varying,
     subscription_to_expire boolean,
     description text,
     wallet_amount integer,
@@ -1097,7 +1097,7 @@ ALTER SEQUENCE public.invoicing_profiles_id_seq OWNED BY public.invoicing_profil
 
 CREATE TABLE public.licences (
     id integer NOT NULL,
-    name character varying(255) NOT NULL,
+    name character varying NOT NULL,
     description text
 );
 
@@ -1127,12 +1127,12 @@ ALTER SEQUENCE public.licences_id_seq OWNED BY public.licences.id;
 
 CREATE TABLE public.machines (
     id integer NOT NULL,
-    name character varying(255) NOT NULL,
+    name character varying NOT NULL,
     description text,
     spec text,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    slug character varying(255),
+    slug character varying,
     disabled boolean
 );
 
@@ -1194,7 +1194,7 @@ CREATE TABLE public.notifications (
     id integer NOT NULL,
     receiver_id integer,
     attached_object_id integer,
-    attached_object_type character varying(255),
+    attached_object_type character varying,
     notification_type_id integer,
     is_read boolean DEFAULT false,
     created_at timestamp without time zone,
@@ -1434,11 +1434,11 @@ ALTER SEQUENCE public.organizations_id_seq OWNED BY public.organizations.id;
 
 CREATE TABLE public.plans (
     id integer NOT NULL,
-    name character varying(255),
+    name character varying,
     amount integer,
-    "interval" character varying(255),
+    "interval" character varying,
     group_id integer,
-    stp_plan_id character varying(255),
+    stp_plan_id character varying,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     training_credit_nb integer DEFAULT 0,
@@ -1576,9 +1576,9 @@ ALTER SEQUENCE public.prices_id_seq OWNED BY public.prices.id;
 CREATE TABLE public.profiles (
     id integer NOT NULL,
     user_id integer,
-    first_name character varying(255),
-    last_name character varying(255),
-    phone character varying(255),
+    first_name character varying,
+    last_name character varying,
+    phone character varying,
     interest text,
     software_mastered text,
     created_at timestamp without time zone,
@@ -1632,7 +1632,7 @@ CREATE TABLE public.project_steps (
     project_id integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    title character varying(255),
+    title character varying,
     step_nb integer
 );
 
@@ -1667,7 +1667,7 @@ CREATE TABLE public.project_users (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     is_valid boolean DEFAULT false,
-    valid_token character varying(255)
+    valid_token character varying
 );
 
 
@@ -1696,14 +1696,14 @@ ALTER SEQUENCE public.project_users_id_seq OWNED BY public.project_users.id;
 
 CREATE TABLE public.projects (
     id integer NOT NULL,
-    name character varying(255),
+    name character varying,
     description text,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     tags text,
     licence_id integer,
-    state character varying(255),
-    slug character varying(255),
+    state character varying,
+    slug character varying,
     published_at timestamp without time zone,
     author_statistic_profile_id integer,
     search_vector tsvector
@@ -1859,7 +1859,7 @@ CREATE TABLE public.reservations (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     reservable_id integer,
-    reservable_type character varying(255),
+    reservable_type character varying,
     nb_reserve_places integer,
     statistic_profile_id integer
 );
@@ -1890,9 +1890,9 @@ ALTER SEQUENCE public.reservations_id_seq OWNED BY public.reservations.id;
 
 CREATE TABLE public.roles (
     id integer NOT NULL,
-    name character varying(255),
+    name character varying,
     resource_id integer,
-    resource_type character varying(255),
+    resource_type character varying,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -1922,7 +1922,7 @@ ALTER SEQUENCE public.roles_id_seq OWNED BY public.roles.id;
 --
 
 CREATE TABLE public.schema_migrations (
-    version character varying(255) NOT NULL
+    version character varying NOT NULL
 );
 
 
@@ -2135,11 +2135,11 @@ ALTER SEQUENCE public.statistic_custom_aggregations_id_seq OWNED BY public.stati
 CREATE TABLE public.statistic_fields (
     id integer NOT NULL,
     statistic_index_id integer,
-    key character varying(255),
-    label character varying(255),
+    key character varying,
+    label character varying,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    data_type character varying(255)
+    data_type character varying
 );
 
 
@@ -2169,7 +2169,7 @@ ALTER SEQUENCE public.statistic_fields_id_seq OWNED BY public.statistic_fields.i
 CREATE TABLE public.statistic_graphs (
     id integer NOT NULL,
     statistic_index_id integer,
-    chart_type character varying(255),
+    chart_type character varying,
     "limit" integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
@@ -2201,8 +2201,8 @@ ALTER SEQUENCE public.statistic_graphs_id_seq OWNED BY public.statistic_graphs.i
 
 CREATE TABLE public.statistic_indices (
     id integer NOT NULL,
-    es_type_key character varying(255),
-    label character varying(255),
+    es_type_key character varying,
+    label character varying,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     "table" boolean DEFAULT true,
@@ -2302,8 +2302,8 @@ ALTER SEQUENCE public.statistic_profiles_id_seq OWNED BY public.statistic_profil
 
 CREATE TABLE public.statistic_sub_types (
     id integer NOT NULL,
-    key character varying(255),
-    label character varying(255),
+    key character varying,
+    label character varying,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -2367,8 +2367,8 @@ ALTER SEQUENCE public.statistic_type_sub_types_id_seq OWNED BY public.statistic_
 CREATE TABLE public.statistic_types (
     id integer NOT NULL,
     statistic_index_id integer,
-    key character varying(255),
-    label character varying(255),
+    key character varying,
+    label character varying,
     graph boolean,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
@@ -2434,7 +2434,7 @@ ALTER SEQUENCE public.stylesheets_id_seq OWNED BY public.stylesheets.id;
 CREATE TABLE public.subscriptions (
     id integer NOT NULL,
     plan_id integer,
-    stp_subscription_id character varying(255),
+    stp_subscription_id character varying,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     expiration_date timestamp without time zone,
@@ -2499,7 +2499,7 @@ ALTER SEQUENCE public.tags_id_seq OWNED BY public.tags.id;
 
 CREATE TABLE public.themes (
     id integer NOT NULL,
-    name character varying(255) NOT NULL
+    name character varying NOT NULL
 );
 
 
@@ -2561,11 +2561,11 @@ ALTER SEQUENCE public.tickets_id_seq OWNED BY public.tickets.id;
 
 CREATE TABLE public.trainings (
     id integer NOT NULL,
-    name character varying(255),
+    name character varying,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     nb_total_places integer,
-    slug character varying(255),
+    slug character varying,
     description text,
     public_page boolean DEFAULT true,
     disabled boolean
@@ -2724,28 +2724,28 @@ ALTER SEQUENCE public.user_tags_id_seq OWNED BY public.user_tags.id;
 
 CREATE TABLE public.users (
     id integer NOT NULL,
-    email character varying(255) DEFAULT ''::character varying NOT NULL,
-    encrypted_password character varying(255) DEFAULT ''::character varying NOT NULL,
-    reset_password_token character varying(255),
+    email character varying DEFAULT ''::character varying NOT NULL,
+    encrypted_password character varying DEFAULT ''::character varying NOT NULL,
+    reset_password_token character varying,
     reset_password_sent_at timestamp without time zone,
     remember_created_at timestamp without time zone,
     sign_in_count integer DEFAULT 0 NOT NULL,
     current_sign_in_at timestamp without time zone,
     last_sign_in_at timestamp without time zone,
-    confirmation_token character varying(255),
+    confirmation_token character varying,
     confirmed_at timestamp without time zone,
     confirmation_sent_at timestamp without time zone,
-    unconfirmed_email character varying(255),
+    unconfirmed_email character varying,
     failed_attempts integer DEFAULT 0 NOT NULL,
-    unlock_token character varying(255),
+    unlock_token character varying,
     locked_at timestamp without time zone,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     is_allow_contact boolean DEFAULT true,
     group_id integer,
-    stp_customer_id character varying(255),
-    username character varying(255),
-    slug character varying(255),
+    stp_customer_id character varying,
+    username character varying,
+    slug character varying,
     is_active boolean DEFAULT true,
     provider character varying,
     uid character varying,
@@ -4470,7 +4470,7 @@ CREATE INDEX index_projects_machines_on_project_id ON public.projects_machines U
 -- Name: index_projects_on_slug; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_projects_on_slug ON public.projects USING btree (slug);
+CREATE UNIQUE INDEX index_projects_on_slug ON public.projects USING btree (slug);
 
 
 --
@@ -4502,10 +4502,10 @@ CREATE INDEX index_projects_themes_on_theme_id ON public.projects_themes USING b
 
 
 --
--- Name: index_reservations_on_reservable_id_and_reservable_type; Type: INDEX; Schema: public; Owner: -
+-- Name: index_reservations_on_reservable_type_and_reservable_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_reservations_on_reservable_id_and_reservable_type ON public.reservations USING btree (reservable_id, reservable_type);
+CREATE INDEX index_reservations_on_reservable_type_and_reservable_id ON public.reservations USING btree (reservable_type, reservable_id);
 
 
 --
@@ -5617,7 +5617,6 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200622135401'),
 ('20200623134900'),
 ('20200623141305'),
-('20200629114319'),
 ('20200629123011');
 
 

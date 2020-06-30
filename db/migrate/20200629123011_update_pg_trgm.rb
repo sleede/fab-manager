@@ -4,18 +4,18 @@
 # This will enable the function word_similarity(text, text) for the project's full-text searches
 class UpdatePgTrgm < ActiveRecord::Migration[5.2]
   # PostgreSQL only
-  def change
+  def up
     say_with_time('Upgrade extension :pg_trgm') do
       execute <<~SQL
-        DROP INDEX profiles_lower_unaccent_first_name_trgm_idx;
-        DROP INDEX profiles_lower_unaccent_last_name_trgm_idx;
-        DROP EXTENSION pg_trgm;
-        CREATE EXTENSION IF NOT EXISTS pg_trgm;
-        CREATE INDEX profiles_lower_unaccent_first_name_trgm_idx ON profiles
-             USING gin (lower(f_unaccent(first_name)) gin_trgm_ops);
-        CREATE INDEX profiles_lower_unaccent_last_name_trgm_idx ON profiles
-             USING gin (lower(f_unaccent(last_name)) gin_trgm_ops);
+        ALTER EXTENSION pg_trgm UPDATE;
       SQL
     end
+  end
+
+  def down
+    # we cannot downgrade a postgresSQL extension, so we do notinf
+    execute <<~SQL
+      ALTER EXTENSION pg_trgm UPDATE;
+    SQL
   end
 end
