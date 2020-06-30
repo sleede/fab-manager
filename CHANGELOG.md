@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v4.5.0 2020 June 30
+
 - Search in the projets directly from PostgreSQL
 - Ability to configure most of the settings from the admin's UI
 - Ability to lock some settings from the environment
