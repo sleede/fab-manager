@@ -10,7 +10,7 @@ class API::PaymentsController < API::ApiController
   # was successfully made. After the payment was made, the reservation/subscription will be created
   ##
   def confirm_payment
-    render(json: { error: 'Online payment is disabled' }, status: :unauthorized) and return if Rails.application.secrets.fablab_without_online_payments
+    render(json: { error: 'Online payment is disabled' }, status: :unauthorized) and return unless Setting.get('online_payment_module')
 
     amount = nil # will contains the amount and the details of each invoice lines
     intent = nil # stripe's payment intent
@@ -24,15 +24,17 @@ class API::PaymentsController < API::ApiController
 
         # Create the PaymentIntent
         intent = Stripe::PaymentIntent.create(
-          payment_method: params[:payment_method_id],
-          amount: amount[:amount],
-          currency: Rails.application.secrets.stripe_currency,
-          confirmation_method: 'manual',
-          confirm: true,
-          customer: current_user.stp_customer_id
+          {
+            payment_method: params[:payment_method_id],
+            amount: amount[:amount],
+            currency: Setting.get('stripe_currency'),
+            confirmation_method: 'manual',
+            confirm: true,
+            customer: current_user.stp_customer_id
+          }, { api_key: Setting.get('stripe_secret_key') }
         )
       elsif params[:payment_intent_id].present?
-        intent = Stripe::PaymentIntent.confirm(params[:payment_intent_id])
+        intent = Stripe::PaymentIntent.confirm(params[:payment_intent_id], api_key: Setting.get('stripe_secret_key'))
       end
     rescue Stripe::CardError => e
       # Display error on client
@@ -54,6 +56,16 @@ class API::PaymentsController < API::ApiController
     render generate_payment_response(intent, res)
   end
 
+  def online_payment_status
+    authorize :payment
+
+    key = Setting.get('stripe_secret_key')
+    render json: { status: false } and return unless key
+
+    charges = Stripe::Charge.list({ limit: 1 }, { api_key: key })
+    render json: { status: charges.data.length.positive? }
+  end
+
   private
 
   def on_reservation_success(intent, details)
@@ -62,7 +74,8 @@ class API::PaymentsController < API::ApiController
                                       .pay_and_save(@reservation, payment_details: details, payment_intent_id: intent.id)
     Stripe::PaymentIntent.update(
       intent.id,
-      description: "Invoice reference: #{@reservation.invoice.reference}"
+      { description: "Invoice reference: #{@reservation.invoice.reference}" },
+      { api_key: Setting.get('stripe_secret_key') }
     )
 
     if is_reserve
@@ -81,7 +94,8 @@ class API::PaymentsController < API::ApiController
 
     Stripe::PaymentIntent.update(
       intent.id,
-      description: "Invoice reference: #{@subscription.invoices.first.reference}"
+      { description: "Invoice reference: #{@subscription.invoices.first.reference}" },
+      { api_key: Setting.get('stripe_secret_key') }
     )
 
     if is_subscribe

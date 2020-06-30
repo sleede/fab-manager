@@ -39,8 +39,8 @@ namespace :fablab do
     task clean_cassettes_secrets: :environment do
       Dir['test/vcr_cassettes/*.yml'].each do |cassette_file|
         cassette = File.read(cassette_file)
-        cassette = cassette.gsub(Rails.application.secrets.stripe_api_key, 'sk_test_testfaketestfaketestfake')
-        cassette = cassette.gsub(Rails.application.secrets.stripe_publishable_key, 'pk_test_faketestfaketestfaketest')
+        cassette = cassette.gsub(Setting.get('stripe_secret_key'), 'sk_test_testfaketestfaketestfake')
+        cassette = cassette.gsub(Setting.get('stripe_public_key'), 'pk_test_faketestfaketestfaketest')
         puts cassette
         File.write(cassette_file, cassette)
       end
@@ -49,16 +49,7 @@ namespace :fablab do
     desc 'sync users to the stripe database'
     task sync_members: :environment do
       puts 'We create all non-existing customers on stripe. This may take a while, please wait...'
-      total = User.online_payers.count
-      User.online_payers.each_with_index do |member, index|
-        print_on_line "#{index} / #{total}"
-        begin
-          stp_customer = Stripe::Customer.retrieve member.stp_customer_id
-          StripeWorker.perform_async(:create_stripe_customer, member.id) if stp_customer.nil? || stp_customer[:deleted]
-        rescue Stripe::InvalidRequestError
-          StripeWorker.perform_async(:create_stripe_customer, member.id)
-        end
-      end
+      SyncMembersOnStripeWorker.perform
       puts 'Done'
     end
 

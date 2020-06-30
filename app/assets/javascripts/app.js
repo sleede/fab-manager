@@ -17,7 +17,7 @@ Application.Directives = angular.module('application.directives', []);
 angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.router', 'ui.bootstrap',
   'ngUpload', 'duScroll', 'application.filters', 'application.services', 'application.directives',
   'frapontillo.bootstrap-switch', 'application.constants', 'application.controllers', 'application.router',
-  'ui.select', 'ui.calendar', 'angularMoment', 'Devise', 'DeviseModal', 'angular-growl', 'xeditable',
+  'ui.select', 'ui.calendar', 'angularMoment', 'Devise', 'angular-growl', 'xeditable',
   'checklist-model', 'unsavedChanges', 'angular-loading-bar', 'ngTouch', 'angular-google-analytics',
   'angularUtils.directives.dirDisqus', 'summernote', 'elasticsearch', 'angular-medium-editor', 'naif.base64',
   'minicolors', 'pascalprecht.translate', 'ngFitText', 'ngAside', 'ngCapsLock', 'vcRecaptcha', 'ui.codemirror',
@@ -28,10 +28,10 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
       // first we check the user acceptance
       const cookiesConsent = document.cookie.replace(/(?:(?:^|.*;\s*)fab-manager-cookies-consent\s*=\s*([^;]*).*$)|^.*$/, '$1');
       if (cookiesConsent === 'accept') {
-        AnalyticsProvider.setAccount(Fablab.gaId);
+        AnalyticsProvider.setAccount(Fablab.trackingId);
         // track all routes (or not)
         AnalyticsProvider.trackPages(true);
-        AnalyticsProvider.setDomainName(Fablab.defaultHost);
+        AnalyticsProvider.setDomainName(Fablab.baseHostUrl);
         AnalyticsProvider.useAnalytics(true);
         AnalyticsProvider.setPageEvent('$stateChangeSuccess');
       } else {
@@ -80,25 +80,6 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
         $state.prevState = fromState;
         $state.prevParams = fromParams;
       });
-
-      // Global config: if true, the whole 'Plans & Subscriptions' feature will be disabled in the application
-      $rootScope.fablabWithoutPlans = Fablab.withoutPlans;
-      // Global config: it true, the whole 'Spaces' features will be disabled in the application
-      $rootScope.fablabWithoutSpaces = Fablab.withoutSpaces;
-      // Global config: if true, all payments will be disabled in the application for the members (only admins will be able to proceed reservations)
-      $rootScope.fablabWithoutOnlinePayment = Fablab.withoutOnlinePayment;
-      // Global config: if true, no invoices will be generated
-      $rootScope.fablabWithoutInvoices = Fablab.withoutInvoices;
-      // Global config: if true, the phone number is required to create an account
-      $rootScope.phoneRequired = Fablab.phoneRequired;
-      // Global config: if true, the events are shown in the admin calendar
-      $rootScope.eventsInCalendar = Fablab.eventsInCalendar;
-      // Global config: machine/space slot duration
-      $rootScope.slotDuration = Fablab.slotDuration;
-      // Global config: if true, user must confirm his email to sign in
-      $rootScope.userConfirmationNeededToSignIn = Fablab.userConfirmationNeededToSignIn;
-      // Global config: if true, wallet will be disable
-      $rootScope.fablabWithoutWallet = Fablab.fablabWithoutWallet;
 
       // Global function to allow the user to navigate to the previous screen (ie. $state).
       // If no previous $state were recorded, navigate to the home page

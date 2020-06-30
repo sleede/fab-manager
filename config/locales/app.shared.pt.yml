@@ -291,7 +291,7 @@ pt:
         your_wallet_amount: 'Seus créditos disponíveis'
         wallet_amount: 'Crédito disponível'
         no_transactions_for_now: 'Sem transações'
-        date: "Date"
+        date: "Data"
         operation: 'Operação'
         operator: 'Operador'
         amount: 'Montante'
@@ -314,12 +314,12 @@ pt:
         amount_confirm_does_not_match: "A confirmação da quantia não é a mesma da quantia."
         you_have_amount_in_wallet: "Você tem {amount} {currency} em sua carteira"
         client_have_amount_in_wallet: "O cliente possui {amount} {currency} em sua carteira"
-        wallet_pay_reservation: "Você pode pagar diretamente sua reserva"
-        client_wallet_pay_reservation: "O cliente pode pagar diretamente a reserva"
-        debit_subscription: "Débito por inscrição"
-        debit_reservation_training: "Débito por reserva de treinamento"
-        debit_reservation_machine: "Débito por reserva de máquina"
-        debit_reservation_event: "Débito por reserva de evento"
+        wallet_pay_reservation: "Você pode pagar diretamente a sua reserva"
+        client_wallet_pay_reservation: "O membro pode pagar diretamente sua reserva"
+        debit_subscription: "Pagar por uma inscrição"
+        debit_reservation_training: "Pague por uma reserva de treinamento"
+        debit_reservation_machine: "Pague por uma reserva de máquina"
+        debit_reservation_event: "Pague por uma reserva de evento"
         warning_uneditable_credit: "Aviso: uma vez validado, o valor creditado não será mais editado."
       #promotional coupon (creation/edition form)
       coupon:

@@ -41,8 +41,8 @@ class PDF::Invoice < Prawn::Document
       else
         text I18n.t('invoices.invoice_reference', REF: invoice.reference), leading: 3
       end
-      if Setting.find_by(name: 'invoice_code-active').value == 'true'
-        text I18n.t('invoices.code', CODE: Setting.find_by(name: 'invoice_code-value').value), leading: 3
+      if Setting.get('invoice_code-active')
+        text I18n.t('invoices.code', CODE: Setting.get('invoice_code-value')), leading: 3
       end
       if invoice.invoiced_type != WalletTransaction.name
         if invoice.is_a?(Avoir)
@@ -251,7 +251,7 @@ class PDF::Invoice < Prawn::Document
         row(0).font_style = :bold
         column(1).style align: :right
 
-        if Setting.find_by(name: 'invoice_VAT-active').value == 'true'
+        if Setting.get('invoice_VAT-active')
           # Total incl. taxes
           row(-1).style align: :right
           row(-1).background_color = 'E4E4E4'
@@ -332,7 +332,7 @@ class PDF::Invoice < Prawn::Document
 
       # important information
       move_down 40
-      txt = parse_html(Setting.find_by(name: 'invoice_text').value)
+      txt = parse_html(Setting.get('invoice_text'))
       txt.each_line do |line|
         text line, style: :bold, inline_format: true
       end
@@ -340,7 +340,7 @@ class PDF::Invoice < Prawn::Document
 
       # address and legals information
       move_down 40
-      txt = parse_html(Setting.find_by(name: 'invoice_legals').value)
+      txt = parse_html(Setting.get('invoice_legals'))
       txt.each_line do |line|
         text line, align: :right, leading: 4, inline_format: true
       end

@@ -4,4 +4,4 @@ if notification.attached_object.class.name == AccountingPeriod.name
 else
   json.description t('.warning_no_closed_periods', FIRST_DATE: notification.attached_object.created_at.to_date)
 end
-json.url notification_url(notification, format: :json)
+

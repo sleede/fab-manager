@@ -4,7 +4,7 @@
 class Availabilities::PublicAvailabilitiesService
   def initialize(current_user)
     @current_user = current_user
-    @service = Availabilities::StatusService.new('')
+    @service = Availabilities::StatusService.new('public')
   end
 
   # provides a list of slots and availabilities for the machines, between the given dates
@@ -15,7 +15,7 @@ class Availabilities::PublicAvailabilitiesService
                                  .where(lock: false)
     slots = []
     availabilities.each do |a|
-      slot_duration = a.slot_duration || ApplicationHelper::SLOT_DURATION
+      slot_duration = a.slot_duration || Setting.get('slot_duration').to_i
       a.machines.each do |machine|
         next unless machine_ids&.include?(machine.id.to_s)
 
@@ -46,7 +46,7 @@ class Availabilities::PublicAvailabilitiesService
 
     slots = []
     availabilities.each do |a|
-      slot_duration = a.slot_duration || ApplicationHelper::SLOT_DURATION
+      slot_duration = a.slot_duration || Setting.get('slot_duration').to_i
       space = a.spaces.first
       ((a.end_at - a.start_at) / slot_duration.minutes).to_i.times do |i|
         next unless (a.start_at + (i * slot_duration).minutes) > DateTime.current

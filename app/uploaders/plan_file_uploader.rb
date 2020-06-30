@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
+# CarrierWave uploader for the description file of the Plans
 class PlanFileUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
-  #include CarrierWave::MiniMagick
+  # include CarrierWave::MiniMagick
   include UploadHelper
 
   # Choose what kind of storage to use for this uploader:
@@ -37,13 +40,17 @@ class PlanFileUploader < CarrierWave::Uploader::Base
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
-  def extension_white_list
-    %w(pdf png jpeg jpg)
+  def extension_whitelist
+    %w[pdf png jpeg jpg]
+  end
+
+  def content_type_whitelist
+    [%r{image/}, 'application/pdf']
   end
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
-  #def filename
-    #"avatar.#{file.extension}" if original_filename
-  #end
+  # def filename
+  #   "avatar.#{file.extension}" if original_filename
+  # end
 end

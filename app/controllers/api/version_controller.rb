@@ -15,7 +15,7 @@ class API::VersionController < API::ApiController
       origin.save!
     end
     # get the last version
-    update_status = Setting.find_by(name: 'hub_last_version')&.value || '{}'
+    update_status = Setting.get('hub_last_version') || '{}'
 
     json = JSON.parse(update_status)
     json['current'] = Version.current

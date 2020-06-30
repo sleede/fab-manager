@@ -49,7 +49,7 @@ pt:
         manage_the_events: "Eventos"
         manage_the_machines: "Máquinas"
         manage_the_spaces: "Espaços"
-        manage_the_projects_elements: "Projeto"
+        projects: "Projetos"
         statistics: "Estatísticas"
         customization: "Customizações"
         open_api_clients: "OpenAPI clients"
@@ -358,7 +358,7 @@ pt:
       tour:
         conclusion:
           title: "Thank you for your attention"
-          content: "<p>If you want to restart this contextual help, press <strong>F1</strong> at any time or click on « ? Help » from the user's menu.</p><p>If you need additional help, you can <a href='https://github.com/sleede/fab-manager/raw/master/doc/fr/guide_utilisation_fab_manager_v4.3.pdf' target='_blank'>check the user guide</a> (only in French for now).</p><p>The Fab-manager's team also provides personalized support (help with getting started, help with installation, customization, etc.), <a href='mailto:contact@fab-manager.com'>contact-us</a> for more info.</p>"
+          content: "<p>If you want to restart this contextual help, press <strong>F1</strong> at any time or click on « ? Help » from the user's menu.</p><p>If you need additional help, you can <a href='https://github.com/sleede/fab-manager/raw/master/doc/fr/guide_utilisation_fab_manager_v4.5.pdf' target='_blank'>check the user guide</a> (only in French for now).</p><p>The Fab-manager's team also provides personalized support (help with getting started, help with installation, customization, etc.), <a href='mailto:contact@fab-manager.com'>contact-us</a> for more info.</p>"
         welcome:
           welcome:
             title: "Welcome to Fab-manager"
@@ -382,7 +382,7 @@ pt:
             title: "Agenda"
             content: "Visualize at a glance everything that is scheduled for the next coming weeks (events, training, machines available, etc.)."
           projects:
-            title: "Projects"
+            title: "Projetos"
             content: "<p>Document and share all your creations with the community.</p><p>If you use OpenLab, you will also be able to consult the projects of the entire Fab-manager network. <a href='mailto:contact@fab-manager.com'>Contact-us</a> to get your access, it's free!</p>"
           plans:
             title: "Subscriptions"
@@ -403,7 +403,7 @@ pt:
             title: "News"
             content: "<p>This space allows you to display the latest news from your structure.</p><p>You can easily change its content from « Customization », « Home page ».</p>"
           last_projects:
-            title: "Last projects"
+            title: "Últimos projetos"
             content: "<p>This carousel scrolls through the latest projects documented by your members.</p>"
           last_tweet:
             title: "Last tweet"

@@ -6,7 +6,7 @@ class Availabilities::AvailabilitiesService
   def initialize(current_user, maximum_visibility = {})
     @current_user = current_user
     @maximum_visibility = maximum_visibility
-    @service = Availabilities::StatusService.new(current_user.admin? ? 'admin' : 'user')
+    @service = Availabilities::StatusService.new(current_user.role)
   end
 
   # list all slots for the given machine, with reservations info, relatives to the given user
@@ -17,7 +17,7 @@ class Availabilities::AvailabilitiesService
 
     slots = []
     availabilities.each do |a|
-      slot_duration = a.slot_duration || ApplicationHelper::SLOT_DURATION
+      slot_duration = a.slot_duration || Setting.get('slot_duration').to_i
       ((a.end_at - a.start_at) / slot_duration.minutes).to_i.times do |i|
         next unless (a.start_at + (i * slot_duration).minutes) > DateTime.current || user.admin?
 
@@ -44,7 +44,7 @@ class Availabilities::AvailabilitiesService
 
     slots = []
     availabilities.each do |a|
-      slot_duration = a.slot_duration || ApplicationHelper::SLOT_DURATION
+      slot_duration = a.slot_duration || Setting.get('slot_duration').to_i
       ((a.end_at - a.start_at) / slot_duration.minutes).to_i.times do |i|
         next unless (a.start_at + (i * slot_duration).minutes) > DateTime.current || user.admin?
 

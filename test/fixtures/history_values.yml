@@ -584,3 +584,112 @@ value_history_60:
   created_at: 2020-03-25 09:24:09.016676894 Z
   updated_at: 2020-03-25 09:24:09.016676894 Z
   footprint:
+
+history_value_61:
+  id: 61
+  setting_id: 61
+  invoicing_profile_id: 1
+  value: '60'
+  created_at: 2020-05-22 15:22:08.254410000 Z
+  updated_at: 2020-05-22 15:22:08.254410000 Z
+  footprint:
+
+history_value_62:
+  id: 62
+  setting_id: 62
+  invoicing_profile_id: 1
+  value: 'true'
+  created_at: 2020-06-01 11:12:21.255550000 Z
+  updated_at: 2020-06-01 11:12:21.255550000 Z
+  footprint:
+
+history_value_63:
+  id: 63
+  setting_id: 63
+  invoicing_profile_id: 1
+  value: 'true'
+  created_at: 2020-06-01 11:12:21.255550000 Z
+  updated_at: 2020-06-01 11:12:21.255550000 Z
+  footprint:
+
+history_value_64:
+  id: 64
+  setting_id: 64
+  invoicing_profile_id: 1
+  value: 'once'
+  created_at: 2020-06-01 11:12:21.255550000 Z
+  updated_at: 2020-06-01 11:12:21.255550000 Z
+  footprint:
+
+history_value_65:
+  id: 65
+  setting_id: 65
+  invoicing_profile_id: 1
+  value: 'noreply@fab-manager.com'
+  created_at: 2020-06-01 11:12:21.255550000 Z
+  updated_at: 2020-06-01 11:12:21.255550000 Z
+  footprint:
+
+history_value_66:
+  id: 66
+  setting_id: 66
+  invoicing_profile_id: 1
+  value: true
+  created_at: 2020-06-08 17:12:16.846525000 Z
+  updated_at: 2020-06-08 17:12:16.846525000 Z
+
+history_value_67:
+  id: 67
+  setting_id: 67
+  invoicing_profile_id: 1
+  value: <%= ENV["STRIPE_PUBLISHABLE_KEY"] %>
+  created_at: 2020-06-08 17:12:16.846525000 Z
+  updated_at: 2020-06-08 17:12:16.846525000 Z
+
+history_value_68:
+  id: 68
+  setting_id: 68
+  invoicing_profile_id: 1
+  value: <%= ENV["STRIPE_API_KEY"] %>
+  created_at: 2020-06-08 17:12:16.846525000 Z
+  updated_at: 2020-06-08 17:12:16.846525000 Z
+
+history_value_69:
+  id: 69
+  setting_id: 69
+  invoicing_profile_id: 1
+  value: usd
+  created_at: 2020-06-08 17:12:16.846525000 Z
+  updated_at: 2020-06-08 17:12:16.846525000 Z
+
+history_value_70:
+  id: 70
+  setting_id: 70
+  invoicing_profile_id: 1
+  value: FabManager_invoice
+  created_at: 2020-06-15 10:04:06.216541000 Z
+  updated_at: 2020-06-15 10:04:06.216541000 Z
+
+history_value_71:
+  id: 71
+  setting_id: 71
+  invoicing_profile_id: 1
+  value: false
+  created_at: 2020-06-15 10:04:06.216541000 Z
+  updated_at: 2020-06-15 10:04:06.216541000 Z
+
+history_value_72:
+  id: 72
+  setting_id: 72
+  invoicing_profile_id: 1
+  value: true
+  created_at: 2020-06-15 10:04:06.216541000 Z
+  updated_at: 2020-06-15 10:04:06.216541000 Z
+
+history_value_73:
+  id: 73
+  setting_id: 73
+  invoicing_profile_id: 1
+  value: true
+  created_at: 2020-06-17 10:48:19.002417000 Z
+  updated_at: 2020-06-17 10:48:19.002417000 Z

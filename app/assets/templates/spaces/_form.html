@@ -32,7 +32,7 @@
              id="space_image"
              ng-model="space.space_image"
              name="space[space_image_attributes][attachment]"
-             accept="image/*"
+             accept="image/jpeg,image/gif,image/png"
              required
              bs-jasny-fileinput>
     </span>
@@ -98,8 +98,11 @@
                 <div class="form-control" data-trigger="fileinput">
                     <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename">{{file.attachment}}</span>
                 </div>
-                <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new" translate>{{ 'app.shared.space.attach_a_file' }}</span>
-                <span class="fileinput-exists" translate>{{ 'app.shared.buttons.change' }}</span><input type="file" name="space[space_files_attributes][][attachment]" accept=".pdf"></span>
+                <span class="input-group-addon btn btn-default btn-file">
+                    <span class="fileinput-new" translate>{{ 'app.shared.space.attach_a_file' }}</span>
+                    <span class="fileinput-exists" translate>{{ 'app.shared.buttons.change' }}</span>
+                    <input type="file" name="space[space_files_attributes][][attachment]" accept="application/pdf">
+                </span>
                 <a class="input-group-addon btn btn-danger fileinput-exists" data-dismiss="fileinput" ng-click="deleteFile(file)"><i class="fa fa-trash-o"></i></a>
             </div>
 

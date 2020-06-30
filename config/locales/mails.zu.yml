@@ -283,5 +283,9 @@ zu:
       subject: "crwdns20464:0crwdne20464:0"
       body:
         role_changed_html: "crwdns20466:0GENDER={GENDER}crwdnd20466:0NAME={NAME}crwdnd20466:0ROLE={ROLE}crwdne20466:0"
+    notify_admin_members_stripe_sync:
+      subject: "crwdns20854:0crwdne20854:0"
+      body:
+        members_sync: "crwdns20856:0crwdne20856:0"
     shared:
       hello: "crwdns4215:0%{user_name}crwdne4215:0"

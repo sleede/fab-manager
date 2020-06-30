@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title><%=Setting.find_by(name: 'fablab_name').value%></title>
+  <title><%=Setting.get('fablab_name')%></title>
 
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700,800,700italic' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700,300italic' rel='stylesheet' type='text/css'>
@@ -23,20 +23,14 @@
   <script type="text/javascript">
       var Fablab = Fablab || {};
 
-      Fablab.withoutPlans = ('<%= Rails.application.secrets.fablab_without_plans %>' === 'true');
-      Fablab.withoutSpaces = ('<%= Rails.application.secrets.fablab_without_spaces %>' !== 'false');
-      Fablab.withoutOnlinePayment = ('<%= Rails.application.secrets.fablab_without_online_payments %>' === 'true');
-      Fablab.withoutInvoices = ('<%= Rails.application.secrets.fablab_without_invoices %>' === 'true');
-      Fablab.phoneRequired = ('<%= Rails.application.secrets.phone_required %>' === 'true');
-      Fablab.fablabWithoutWallet = ('<%= Rails.application.secrets.fablab_without_wallet %>' === 'true');
-      Fablab.bookSlotAtSameTime = ('<%= Rails.application.secrets.book_slot_at_same_time %>' === 'true');
-      Fablab.eventsInCalendar = ('<%= Rails.application.secrets.events_in_calendar %>' === 'true');
-      Fablab.slotDuration = parseInt("<%= ApplicationHelper::SLOT_DURATION %>", 10);
-      Fablab.featureTourDisplay =  "<%= Rails.application.secrets.feature_tour_display %>";
-      Fablab.disqusShortname = "<%= Rails.application.secrets.disqus_shortname %>";
+      Fablab.plansModule = ('<%= Setting.get('plans_module') %>' === 'true');
+      Fablab.spacesModule = ('<%= Setting.get('spaces_module') %>' === 'true');
+      Fablab.walletModule = ('<%= Setting.get('wallet_module') %>' === 'true');
+      Fablab.statisticsModule = ('<%= Setting.get('statistics_module') %>' === 'true');
       Fablab.defaultHost = "<%= Rails.application.secrets.default_host %>";
-      Fablab.gaId = "<%= Rails.application.secrets.google_analytics_id %>";
+      Fablab.trackingId = "<%= Setting.get('tracking_id') %>";
       Fablab.superadminId = parseInt("<%= User.superadmin&.id %>", 10);
+      Fablab.baseHostUrl = "<%= Rails.application.secrets.default_host %>";
 
       // i18n stuff
       Fablab.locale = "<%= Rails.application.secrets.app_locale %>";
@@ -55,15 +49,6 @@
       Fablab.weekStartingDay = <%= Date.parse(Rails.application.secrets.week_starting_day).strftime('%w') %>;
       Fablab.d3DateFormat = "<%= Rails.application.secrets.d3_date_format %>";
       Fablab.uibDateFormat = "<%= Rails.application.secrets.uib_date_format %>";
-      Fablab.openlabProjectsActive = <%= Rails.application.secrets.openlab_app_secret.present? %>;
-      Fablab.openlabDefault = ('<%= Rails.application.secrets.openlab_default %>' !== 'false');
-      <% if Rails.application.secrets.openlab_app_id.present? %>
-      Fablab.openlabAppId = "<%= Rails.application.secrets.openlab_app_id %>";
-      <% end %>
-      <% if RecaptchaService.recaptcha_enabled? %>
-      Fablab.recaptchaSiteKey = "<%= RecaptchaService.site_key %>";
-      <% end %>
-      Fablab.userConfirmationNeededToSignIn = ('<%= Rails.application.secrets.user_confirmation_needed_to_sign_in %>' === 'true');
 
       // feature tour (used when feature_tour_display = session)
       Fablab.sessionTours = [];
@@ -129,8 +114,8 @@
   <div class="app-generator">
     <span class="app-version" uib-tooltip="{{'app.public.common.version' | translate}} {{version.current}}" ng-if="currentUser && currentUser.role == 'admin'" ng-click="versionModal()">
       <i class="fa fa-question-circle" aria-label="Version ?" ng-show="version.up_to_date"></i>
-      <i class="fa fa-refresh pointer" aria-label="Upgrade required" ng-show="!version.up_to_date && !version.security"></i>
-      <i class="fa fa-warning pointer" aria-label="Security upgrade required" ng-show="!version.up_to_date && version.security"></i>
+      <i class="fa fa-refresh text-info pointer" aria-label="Upgrade required" ng-show="!version.up_to_date && !version.security"></i>
+      <i class="fa fa-warning text-danger pointer" aria-label="Security upgrade required" ng-show="!version.up_to_date && version.security"></i>
     </span>
     <span class="text-sm">Powered by <a href="http://www.fab-manager.com" target="_blank">Fab-manager</a></span>
   </div>

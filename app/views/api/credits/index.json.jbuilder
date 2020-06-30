@@ -4,5 +4,5 @@ json.array!(@credits) do |credit|
     json.id credit.creditable.id
     json.name credit.creditable.name
   end if credit.creditable.present?
-  json.url credit_url(credit, format: :json)
+  
 end

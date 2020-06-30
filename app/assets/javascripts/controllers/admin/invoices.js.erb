@@ -17,18 +17,21 @@
 /**
  * Controller used in the admin invoices listing page
  */
-Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'Invoice', 'AccountingPeriod', 'AuthService', 'invoices', 'closedPeriods', '$uibModal', 'growl', '$filter', 'Setting', 'settings', '_t', 'Member', 'uiTourService',
-  function ($scope, $state, Invoice, AccountingPeriod, AuthService, invoices, closedPeriods, $uibModal, growl, $filter, Setting, settings, _t, Member, uiTourService) {
+Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'Invoice', 'AccountingPeriod', 'AuthService', 'invoices', 'closedPeriods', '$uibModal', 'growl', '$filter', 'Setting', 'settings', 'stripeSecretKey', '_t', 'Member', 'uiTourService', 'Payment', 'onlinePaymentStatus',
+  function ($scope, $state, Invoice, AccountingPeriod, AuthService, invoices, closedPeriods, $uibModal, growl, $filter, Setting, settings, stripeSecretKey, _t, Member, uiTourService, Payment, onlinePaymentStatus) {
   /* PRIVATE STATIC CONSTANTS */
 
     // number of invoices loaded each time we click on 'load more...'
     const INVOICES_PER_PAGE = 20;
 
+    // fake stripe secret key
+    const STRIPE_SK_HIDDEN = 'sk_test_hidden-hidden-hidden-hid';
+
     /* PUBLIC SCOPE */
 
     // default active tab
     $scope.tabs = {
-      active: Fablab.withoutInvoices ? 1 : 0
+      active: settings.invoicing_module === 'true' ? 0 : 1
     };
 
     // List of all invoices
@@ -49,6 +52,14 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
 
     // Default invoices ordering/sorting
     $scope.orderInvoice = '-reference';
+
+    // Invoice PDF filename settings (and example)
+    $scope.file = {
+      prefix: settings.invoice_prefix,
+      nextId: 40,
+      date: moment().format('DDMMYYYY'),
+      templateUrl: 'editPrefix.html'
+    }
 
     // Invoices parameters
     $scope.invoice = {
@@ -168,6 +179,15 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         value: settings['accounting_Space_label']
       }
     };
+
+    // all settings
+    $scope.allSettings = settings;
+
+    // is the stripe private set?
+    $scope.stripeSecretKey = (stripeSecretKey.isPresent ? STRIPE_SK_HIDDEN : '');
+
+    // has any online payment been already made?
+    $scope.onlinePaymentStatus = onlinePaymentStatus.status;
 
     // Placeholding date for the invoice creation
     $scope.today = moment();
@@ -466,6 +486,38 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     };
 
     /**
+     * Open a modal dialog allowing the user to edit the prefix of the invoice file name
+     */
+    $scope.openEditPrefix = function () {
+      const modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: $scope.file.templateUrl,
+        size: 'lg',
+        resolve: {
+          model () { return $scope.file.prefix;}
+        },
+        controller: ['$scope', '$uibModalInstance', 'model', function ($scope, $uibModalInstance, model) {
+          $scope.model = model;
+          $scope.ok = function () { $uibModalInstance.close($scope.model); };
+          $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
+        }]
+      });
+
+      return modalInstance.result.then(function (model) {
+        Setting.update({ name: 'invoice_prefix' }, { value: model }, function (data) {
+            $scope.file.prefix = model;
+            return growl.success(_t('app.admin.invoices.prefix_successfully_saved'));
+          }
+          , function (error) {
+            if (error.status === 304) return;
+
+            growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_prefix'));
+            console.error(error);
+          });
+      });
+    };
+
+    /**
      * Callback to save the value of the text zone when editing is done
      */
     $scope.textEditEnd = function (event) {
@@ -569,7 +621,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         { settings: Object.values($scope.settings) },
         function () { growl.success(_t('app.admin.invoices.codes_customization_success')); },
         function (error) {
-          growl.error('unexpected_error_occurred');
+          growl.error('app.admin.invoices.unexpected_error_occurred');
           console.error(error);
         }
       );
@@ -582,6 +634,42 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       if (!invoice.operator) return '';
 
       return `${invoice.operator.first_name} ${invoice.operator.last_name}`;
+    }
+
+    /**
+     * Open a modal dialog which ask for the stripe keys
+     * @param onlinePaymentModule {{name: String, value: String}} setting that defines the next status of the online payment module
+     * @return {boolean} false if the keys were not provided
+     */
+    $scope.requireStripeKeys = function(onlinePaymentModule) {
+      // if the online payment is about to be disabled, accept the change without any further question
+      if (onlinePaymentModule.value === false) return true;
+
+      // otherwise, open a modal to ask for the stripe keys
+      const modalInstance = $uibModal.open({
+        templateUrl: 'stripeKeys.html',
+        controller: 'StripeKeysModalController',
+        resolve: {
+          stripeKeys: ['Setting', function (Setting) { return Setting.query({ names: "['stripe_public_key', 'stripe_secret_key']" }).$promise; }]
+        }
+      });
+
+      modalInstance.result.then(function (success) {
+        if (success) {
+          Setting.get({ name: 'stripe_public_key' }, function (res) {
+            $scope.allSettings.stripe_public_key = res.setting.value;
+          })
+          Setting.isPresent({ name: 'stripe_secret_key' }, function (res) {
+            $scope.stripeSecretKey = (res.isPresent ? STRIPE_SK_HIDDEN : '');
+          })
+          Payment.onlinePaymentStatus(function (res) {
+            $scope.onlinePaymentStatus = res.status;
+          });
+        }
+      })
+
+      // return the promise
+      return modalInstance.result;
     }
 
     /**
@@ -612,7 +700,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           orphan: true
         });
       }
-      if (!Fablab.withoutInvoices && $scope.invoices.length > 0) {
+      if (settings.invoicing_module === 'true' && $scope.invoices.length > 0) {
         uitour.createStep({
           selector: '.invoices-management .invoices-list',
           stepId: 'list',
@@ -672,9 +760,18 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           placement: 'bottom'
         });
         uitour.createStep({
+          selector: '.invoices-management .payment-settings',
+          stepId: 'payment',
+          order: 8,
+          title: _t('app.admin.tour.invoices.payment.title'),
+          content: _t('app.admin.tour.invoices.payment.content'),
+          placement: 'bottom',
+          popupClass: 'shift-left-50'
+        });
+        uitour.createStep({
           selector: '.heading .close-accounting-periods-button',
           stepId: 'periods',
-          order: 8,
+          order: 9,
           title: _t('app.admin.tour.invoices.periods.title'),
           content: _t('app.admin.tour.invoices.periods.content'),
           placement: 'bottom',
@@ -684,7 +781,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       uitour.createStep({
         selector: 'body',
         stepId: 'conclusion',
-        order: 9,
+        order: 10,
         title: _t('app.admin.tour.conclusion.title'),
         content: _t('app.admin.tour.conclusion.content'),
         placement: 'bottom',
@@ -701,6 +798,9 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         if (nextStep.stepId === 'codes' || nextStep.stepId === 'export') {
           $scope.tabs.active = 2;
         }
+        if (nextStep.stepId === 'payment') {
+          $scope.tabs.active = 3;
+        }
       });
       // on tour end, save the status in database
       uitour.on('ended', function () {
@@ -711,7 +811,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         }
       });
       // if the user has never seen the tour, show him now
-      if (Fablab.featureTourDisplay !== 'manual' && $scope.currentUser.profile.tours.indexOf('invoices') < 0) {
+      if (settings.feature_tour_display !== 'manual' && $scope.currentUser.profile.tours.indexOf('invoices') < 0) {
         uitour.start();
       }
     }
@@ -1209,3 +1309,131 @@ Application.Controllers.controller('AccountingExportModalController', ['$scope',
   // !!! MUST BE CALLED AT THE END of the controller
   return initialize();
 }]);
+
+
+
+/**
+ * Controller used in the modal window allowing an admin to close an accounting period
+ */
+Application.Controllers.controller('StripeKeysModalController', ['$scope', '$uibModalInstance', '$http', '$httpParamSerializerJQLike', 'stripeKeys', 'Setting', 'growl', '_t',
+  function ($scope, $uibModalInstance, $http, $httpParamSerializerJQLike, stripeKeys, Setting, growl, _t) {
+    /* PUBLIC SCOPE */
+
+    // public key
+    $scope.publicKey = stripeKeys.stripe_public_key;
+
+    // test status of the public key
+    $scope.publicKeyStatus = undefined;
+
+    // secret key
+    $scope.secretKey = stripeKeys.stripe_secret_key;
+
+    // test status of the secret key
+    $scope.secretKeyStatus = undefined;
+
+    /**
+     * Trigger the test of the secret key and set the result in $scope.secretKeyStatus
+     */
+    $scope.testSecretKey = function () {
+      if (!$scope.secretKey.match(/^sk_/)) {
+        $scope.secretKeyStatus = false;
+        return;
+      }
+      $http({
+        method: 'GET',
+        url: 'https://api.stripe.com/v1/charges',
+        headers: {
+          Authorization: `Bearer ${$scope.secretKey}`,
+        }
+      }).then(function () {
+        $scope.secretKeyStatus = true;
+      }, function (err) {
+        if (err.status === 401) $scope.secretKeyStatus = false;
+      });
+    }
+
+
+    /**
+     * Trigger the test of the secret key and set the result in $scope.secretKeyStatus
+     */
+    $scope.testPublicKey = function () {
+      if (!$scope.publicKey.match(/^pk_/)) {
+        $scope.publicKeyStatus = false;
+        return;
+      }
+      const today = new Date();
+      $http({
+        method: 'POST',
+        url: 'https://api.stripe.com/v1/tokens',
+        headers: {
+          Authorization: `Bearer ${$scope.publicKey}`,
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        data: $httpParamSerializerJQLike({
+          'card[number]': 4242424242424242,
+          'card[cvc]': 123,
+          'card[exp_month]': 12,
+          'card[exp_year]': today.getFullYear().toString().substring(2),
+        })
+      }).then(function () {
+        $scope.publicKeyStatus = true;
+      }, function (err) {
+        if (err.status === 401) $scope.publicKeyStatus = false;
+      });
+    }
+
+    /**
+     * Validate the keys
+     */
+    $scope.ok = function () {
+      if ($scope.secretKeyStatus && $scope.publicKeyStatus) {
+        Setting.bulkUpdate(
+          { settings: [
+              {
+                name: 'stripe_public_key',
+                value: $scope.publicKey
+              },
+              {
+                name: 'stripe_secret_key',
+                value: $scope.secretKey
+              }
+            ] },
+          function () {
+            growl.success(_t('app.admin.invoices.payment.stripe_keys_saved'));
+            $uibModalInstance.close(true);
+          },
+          function (error) {
+            growl.error('app.admin.invoices.payment.error_saving_stripe_keys');
+            console.error(error);
+          }
+        );
+      } else {
+        growl.error(_t('app.admin.invoices.payment.error_check_keys'))
+      }
+    };
+
+    /**
+     * Just dismiss the modal window
+     */
+    $scope.cancel = function () {
+      $uibModalInstance.dismiss('cancel');
+    };
+
+    /* PRIVATE SCOPE */
+
+    /**
+     * Kind of constructor: these actions will be realized first when the controller is loaded
+     */
+    const initialize = function () {
+      if (stripeKeys.stripe_public_key) {
+        $scope.testPublicKey();
+      }
+      if (stripeKeys.stripe_secret_key) {
+        $scope.testSecretKey();
+      }
+    };
+
+    // !!! MUST BE CALLED AT THE END of the controller!
+    return initialize();
+  }
+]);

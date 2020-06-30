@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# CarrierWave uploader for user's avatar.
+# This file defines the parameters for these uploads.
 class ProfilImageUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
@@ -37,21 +41,25 @@ class ProfilImageUploader < CarrierWave::Uploader::Base
 
   # Create different versions of your uploaded files:
   version :normal do
-    process :resize_to_fit => [140, 140]
+    process resize_to_fit: [140, 140]
   end
 
   version :small do
-    process :resize_to_fit => [80, 80]
+    process resize_to_fit: [80, 80]
   end
 
   version :tiny do
-    process :resize_to_fit => [40, 40]
+    process resize_to_fit: [40, 40]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
-  def extension_white_list
-    %w(jpg jpeg gif png)
+  def extension_whitelist
+    %w[jpg jpeg gif png]
+  end
+
+  def content_type_whitelist
+    [%r{image/}]
   end
 
   # Override the filename of the uploaded files:

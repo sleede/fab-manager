@@ -222,10 +222,10 @@ angular-xeditable@0.10:
   dependencies:
     angular "~1.x"
 
-angular@1.7, angular@>=1.5, angular@^1.0.8, angular@^1.7.9, angular@~1.x:
-  version "1.7.9"
-  resolved "https://registry.yarnpkg.com/angular/-/angular-1.7.9.tgz#e52616e8701c17724c3c238cfe4f9446fd570bc4"
-  integrity sha512-5se7ZpcOtu0MBFlzGv5dsM1quQDoDeUTwZrWjGtTNA7O88cD8TEk5IEKCTDa3uECV9XnvKREVUr7du1ACiWGFQ==
+angular@1.8, angular@>=1.5, angular@^1.0.8, angular@^1.7.9, angular@~1.x:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/angular/-/angular-1.8.0.tgz#b1ec179887869215cab6dfd0df2e42caa65b1b51"
+  integrity sha512-VdaMx+Qk0Skla7B5gw77a8hzlcOakwF8mjlW13DpIWIDlfqwAbSSLfd8N/qZnzEmQF4jC4iofInd3gE7vL8ZZg==
 
 ansi-escapes@^4.2.1:
   version "4.3.1"
@@ -552,6 +552,10 @@ eslint-plugin-import@~2.20.1:
     object.values "^1.1.0"
     read-pkg-up "^2.0.0"
     resolve "^1.12.0"
+
+"eslint-plugin-lint-erb@https://github.com/sleede/eslint-plugin-lint-erb":
+  version "0.2.2"
+  resolved "https://github.com/sleede/eslint-plugin-lint-erb#c163046088f7e988d131b0ca857a47feb925c10f"
 
 eslint-plugin-node@~11.0.0:
   version "11.0.0"

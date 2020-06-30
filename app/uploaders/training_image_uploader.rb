@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# CarrierWave uploader for images illustrating the Trainings.
+# This file defines the parameters for these uploads.
 class TrainingImageUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
@@ -37,17 +41,21 @@ class TrainingImageUploader < CarrierWave::Uploader::Base
 
   # Create different versions of your uploaded files:
   version :large do
-    process :resize_to_fit => [1000, 700]
+    process resize_to_fit: [1000, 700]
   end
 
   version :medium do
-    process :resize_to_fit => [700, 400]
+    process resize_to_fit: [700, 400]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
-  def extension_white_list
-    %w(jpg jpeg gif png)
+  def extension_whitelist
+    %w[jpg jpeg gif png]
+  end
+
+  def content_type_whitelist
+    [%r{image/}]
   end
 
   # Override the filename of the uploaded files:

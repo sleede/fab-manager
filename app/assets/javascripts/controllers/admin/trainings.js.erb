@@ -150,8 +150,8 @@ Application.Controllers.controller('EditTrainingController', [ '$scope', '$state
 /**
  * Controller used in the trainings management page, allowing admins users to see and manage the list of trainings and reservations.
  */
-Application.Controllers.controller('TrainingsAdminController', ['$scope', '$state', '$uibModal', 'Training', 'trainingsPromise', 'machinesPromise', '_t', 'growl', 'dialogs', 'Member', 'uiTourService',
-  function ($scope, $state, $uibModal, Training, trainingsPromise, machinesPromise, _t, growl, dialogs, Member, uiTourService) {
+Application.Controllers.controller('TrainingsAdminController', ['$scope', '$state', '$uibModal', 'Training', 'trainingsPromise', 'machinesPromise', '_t', 'growl', 'dialogs', 'Member', 'uiTourService', 'settingsPromise',
+  function ($scope, $state, $uibModal, Training, trainingsPromise, machinesPromise, _t, growl, dialogs, Member, uiTourService, settingsPromise) {
 
     // list of trainings
     $scope.trainings = trainingsPromise;
@@ -398,7 +398,7 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
         }
       });
       // if the user has never seen the tour, show him now
-      if (Fablab.featureTourDisplay !== 'manual' && $scope.currentUser.profile.tours.indexOf('trainings') < 0) {
+      if (settingsPromise.feature_tour_display !== 'manual' && $scope.currentUser.profile.tours.indexOf('trainings') < 0) {
         uitour.start();
       }
     }

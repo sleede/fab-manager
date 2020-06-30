@@ -1,5 +1,30 @@
 # Changelog Fab-manager
 
+## v4.5.0 2020 June 30
+
+- Search in the projets directly from PostgreSQL
+- Ability to configure most of the settings from the admin's UI
+- Ability to lock some settings from the environment
+- Improved display of the icons alerting about an outdated version
+- Improved mime-type checking (back & front)
+- Dependency to ElasticSearch is now optional, if you disable the statistics
+- Updated CarrierWave to 2.1.0
+- Updated redis to v6, with alpine image
+- Updated Sidekiq to 6.0.7
+- Updated documentation
+- Beta preview of the upgrade script
+- Fix a bug: managers do not see the name of the user who reserved a slot
+- Fix a bug: OpenAPI documentation is not available
+- Fix a bug: summary of create training availability shows incorrect alert about slot splitting
+- Fix a bug: invalid URL redirection for SSO login
+- Fix a security issue: updated websocket-extensions to 0.1.5 to fix [CVE-2020-7663](https://nvd.nist.gov/vuln/detail/CVE-2020-7663)
+- Fix a security issue: updated angular.js to 1.8 to fix [CVE-2020-7676](https://nvd.nist.gov/vuln/detail/CVE-2020-7676)
+- Fix a security issue: updated rack to 2.2.3 to fix [CVE-2020-8184](https://nvd.nist.gov/vuln/detail/CVE-2020-8184)
+- [TODO DEPLOY] add the `POSTGRESQL_LANGUAGE_ANALYZER` environment variable (see [doc/environment.md](doc/environment.md#POSTGRESQL_LANGUAGE_ANALYZER) for configuration details)
+- [TODO DEPLOY] `rails fablab:setup:env_to_db`
+- [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/redis-upgrade.sh | bash`
+- [TODO DEPLOY] -> (only dev) upgrade redis to v6, you may be able to use the script above, depending on your installation
+
 ## v4.4.6 2020 June 01
 
 - Fix a security issue: updated kaminari from 1.2.0 to 1.2.1 to fix [CVE-2020-11082](https://nvd.nist.gov/vuln/detail/CVE-2020-11082)

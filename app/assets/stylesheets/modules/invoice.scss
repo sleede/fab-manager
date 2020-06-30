@@ -8,6 +8,28 @@
   color: red;
 }
 
+.invoice-file {
+  text-align: center;
+  line-height: 4em;
+  margin-top: 2em;
+
+  .fa-file-pdf-o {
+    font-size: 4em;
+    vertical-align: middle;
+  }
+
+  .filename {
+    font-size: 1.1em;
+    vertical-align: middle;
+    margin-left: 1em;
+
+    .prefix:hover {
+      background-color: $yellow;
+      overflow-x: hidden;
+    }
+  }
+}
+
 .invoice-placeholder {
   width: 80%;
   max-width: 800px;

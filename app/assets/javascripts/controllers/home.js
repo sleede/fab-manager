@@ -1,7 +1,7 @@
 'use strict';
 
-Application.Controllers.controller('HomeController', ['$scope', '$stateParams', '$translatePartialLoader', 'AuthService', 'settingsPromise', 'Member', 'uiTourService', '_t', 'Help',
-  function ($scope, $stateParams, $translatePartialLoader, AuthService, settingsPromise, Member, uiTourService, _t, Help) {
+Application.Controllers.controller('HomeController', ['$scope', '$stateParams', '$translatePartialLoader', 'AuthService', 'settingsPromise', 'Member', 'uiTourService', '_t',
+  function ($scope, $stateParams, $translatePartialLoader, AuthService, settingsPromise, Member, uiTourService, _t) {
   /* PUBLIC SCOPE */
 
     // Home page HTML content
@@ -140,7 +140,7 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
         content: _t('app.public.tour.welcome.machines.content'),
         placement: 'right'
       });
-      if (!Fablab.withoutSpaces) {
+      if ($scope.modules.spaces) {
         uitour.createStep({
           selector: '.nav-primary li.reserve-space-link',
           stepId: 'spaces',
@@ -303,7 +303,7 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
         }
       });
       // if the user has never seen the tour, show him now
-      if (Fablab.featureTourDisplay !== 'manual' && $scope.currentUser.profile.tours.indexOf('welcome') < 0) {
+      if (settingsPromise.feature_tour_display !== 'manual' && $scope.currentUser.profile.tours.indexOf('welcome') < 0) {
         uitour.start();
       }
     };

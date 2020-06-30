@@ -21,11 +21,11 @@ class RecaptchaService
     end
 
     def secret_key
-      Rails.application.secrets.recaptcha_secret_key
+      Setting.get('recaptcha_secret_key')
     end
 
     def site_key
-      Rails.application.secrets.recaptcha_site_key
+      Setting.get('recaptcha_site_key')
     end
   end
 end

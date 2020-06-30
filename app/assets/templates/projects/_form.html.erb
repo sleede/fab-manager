@@ -30,7 +30,9 @@
             </div>
             <div>
               <span class="btn btn-default btn-file"><span class="fileinput-new">{{ 'app.shared.project.add_an_illustration' | translate }} <i class="fa fa-upload fa-fw"></i></span><span class="fileinput-exists" translate>{{ 'app.shared.buttons.change' }}</span>
-                <input type="file" name="project[project_image_attributes][attachment]"></span>
+                <input type="file"
+                       name="project[project_image_attributes][attachment]"
+                       accept="image/jpeg,image/gif,image/png"></span>
               <a class="btn btn-danger fileinput-exists" data-dismiss="fileinput" translate>{{ 'app.shared.buttons.delete' }}</a>
             </div>
           </div>
@@ -51,7 +53,9 @@
                   <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename">{{file.attachment}}</span>
                 </div>
                 <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new" translate>{{ 'app.shared.buttons.browse' }}</span>
-                  <span class="fileinput-exists" translate>{{ 'app.shared.buttons.change' }}</span><input type="file" name="project[project_caos_attributes][][attachment]"></span>
+                  <span class="fileinput-exists" translate>{{ 'app.shared.buttons.change' }}</span>
+                  <input type="file" name="project[project_caos_attributes][][attachment]" accept="{{'.'+allowedExtensions.join(',.')}}">
+                </span>
                 <a class="input-group-addon btn btn-danger fileinput-exists" data-dismiss="fileinput" ng-click="deleteFile(file)"><i class="fa fa-trash-o"></i></a>
               </div>
             </div>
@@ -115,7 +119,10 @@
                     </div>
                     <div>
                       <span class="btn btn-default btn-file"><span class="fileinput-new">{{ 'app.shared.buttons.browse' | translate }} <i class="fa fa-upload fa-fw"></i></span><span class="fileinput-exists" translate>{{ 'app.shared.buttons.change' }}</span>
-                        <input type="file" name="project[project_steps_attributes][][project_step_images_attributes][][attachment]"></span>
+                        <input type="file"
+                               name="project[project_steps_attributes][][project_step_images_attributes][][attachment]"
+                               accept="image/jpeg,image/gif,image/png">
+                      </span>
                       <a class="btn btn-danger fileinput-exists" data-dismiss="fileinput" ng-click="deleteProjectStepImage(step, image)" translate>{{ 'app.shared.buttons.delete' }}</a>
                     </div>
                   </div>

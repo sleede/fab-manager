@@ -36,13 +36,15 @@ namespace :fablab do
       end
 
       # ask the user to restart the application
+      next if Rails.env.test?
+
       puts "\nActivation successful"
 
       puts "\n/!\\ WARNING: Please consider the following, otherwise the authentication will be bogus:"
-      puts "\t1) CLEAN the cache with `rake tmp:clear`"
-      puts "\t2) REBUILD the assets with `rake assets:precompile`"
+      puts "\t1) CLEAN the cache with `rails tmp:clear`"
+      puts "\t2) REBUILD the assets with `rails assets:precompile`"
       puts "\t3) RESTART the application"
-      puts "\t4) NOTIFY the current users with `rake fablab:auth:notify_changed`\n\n"
+      puts "\t4) NOTIFY the current users with `rails fablab:auth:notify_changed`\n\n"
 
     end
 

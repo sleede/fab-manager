@@ -7,8 +7,7 @@ class API::ProjectsController < API::ApiController
   respond_to :json
 
   def index
-    # DEPEND per(12) -> projects.coffee
-    @projects = policy_scope(Project).page(params[:page]).per(12)
+    @projects = policy_scope(Project).page(params[:page])
   end
 
   def last_published
@@ -53,15 +52,13 @@ class API::ProjectsController < API::ApiController
   end
 
   def search
-    query_params = JSON.parse(params[:search])
-    records = Project.search(query_params, current_user).page(params[:page]).records
-    @total = records.total
-    @projects = records.includes(:users, :project_image)
-    render :index
-  end
+    service = ProjectService.new
+    res = service.search(params, current_user)
+    render json: res, status: :unprocessable_entity and return if res[:error]
 
-  def allowed_extensions
-    render json: ENV['ALLOWED_EXTENSIONS'].split(' '), status: :ok
+    @total = res[:total]
+    @projects = res[:projects]
+    render :index
   end
 
   private

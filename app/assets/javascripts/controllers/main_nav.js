@@ -58,7 +58,7 @@ Application.Controllers.controller('MainNavController', ['$scope', function ($sc
 
   ];
 
-  if (!Fablab.withoutPlans) {
+  if ($scope.modules.plans) {
     $scope.navLinks.push({
       state: 'app.public.plans',
       linkText: 'app.public.common.subscriptions',
@@ -67,7 +67,7 @@ Application.Controllers.controller('MainNavController', ['$scope', function ($sc
     });
   }
 
-  if (!Fablab.withoutSpaces) {
+  if ($scope.modules.spaces) {
     $scope.navLinks.splice(4, 0, {
       state: 'app.public.spaces_list',
       linkText: 'app.public.common.reserve_a_space',
@@ -122,12 +122,6 @@ Application.Controllers.controller('MainNavController', ['$scope', function ($sc
       authorizedRoles: ['admin', 'manager']
     },
     {
-      state: 'app.admin.statistics',
-      linkText: 'app.public.common.statistics',
-      linkIcon: 'bar-chart-o',
-      authorizedRoles: ['admin']
-    },
-    {
       class: 'menu-spacer',
       authorizedRoles: ['admin']
     },
@@ -138,8 +132,8 @@ Application.Controllers.controller('MainNavController', ['$scope', function ($sc
       authorizedRoles: ['admin']
     },
     {
-      state: 'app.admin.project_elements',
-      linkText: 'app.public.common.manage_the_projects_elements',
+      state: 'app.admin.projects',
+      linkText: 'app.public.common.projects',
       linkIcon: 'tasks',
       authorizedRoles: ['admin']
     },
@@ -153,11 +147,20 @@ Application.Controllers.controller('MainNavController', ['$scope', function ($sc
 
   $scope.adminNavLinks = adminNavLinks;
 
-  if (!Fablab.withoutSpaces) {
-    return $scope.adminNavLinks.splice(3, 0, {
+  if ($scope.modules.spaces) {
+    $scope.adminNavLinks.splice(3, 0, {
       state: 'app.public.spaces_list',
       linkText: 'app.public.common.manage_the_spaces',
       linkIcon: 'rocket'
+    });
+  }
+
+  if ($scope.modules.statistics) {
+    $scope.adminNavLinks.splice($scope.modules.spaces ? 9 : 8, 0, {
+      state: 'app.admin.statistics',
+      linkText: 'app.public.common.statistics',
+      linkIcon: 'bar-chart-o',
+      authorizedRoles: ['admin']
     });
   }
 }

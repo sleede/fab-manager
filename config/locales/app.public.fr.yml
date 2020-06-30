@@ -17,7 +17,7 @@ fr:
         my_settings: "Mes paramètres"
         my_projects: "Mes projets"
         my_trainings: "Mes formations"
-        my_events: "Mes évènements"
+        my_events: "Mes événements"
         my_invoices: "Mes factures"
         my_wallet: "Mon porte-monnaie"
         #contextual help
@@ -35,7 +35,7 @@ fr:
         home: "Accueil"
         reserve_a_machine: "Réserver une machine"
         trainings_registrations: "Inscriptions formations"
-        events_registrations: "Inscriptions aux évènements"
+        events_registrations: "Inscriptions aux événements"
         reserve_a_space: "Réserver un espace"
         projects_gallery: "Galerie de projets"
         subscriptions: "Abonnements"
@@ -46,10 +46,10 @@ fr:
         manage_the_users: "Utilisateurs"
         manage_the_invoices: "Factures"
         subscriptions_and_prices: "Abonnements & Tarifs"
-        manage_the_events: "Évènements"
+        manage_the_events: "Événements"
         manage_the_machines: "Machines"
         manage_the_spaces: "Espaces"
-        manage_the_projects_elements: "Projets"
+        projects: "Projets"
         statistics: "Statistiques"
         customization: "Personnalisation"
         open_api_clients: "Clients OpenAPI"
@@ -142,8 +142,8 @@ fr:
         create_an_account: "Créer un compte"
         discover_members: "Découvrir les membres"
         #next events summary on the home page
-        fablab_s_next_events: "Les prochains évènements du Fab Lab"
-        every_events: "Tous les évènements"
+        fablab_s_next_events: "Les prochains événements du Fab Lab"
+        every_events: "Tous les événements"
         from_date_to_date: "Du {START} au {END}"
         on_the_date: "Le {DATE}"
         from_time_to_time: "De {START} à {END}"
@@ -263,7 +263,7 @@ fr:
         online_payment_disabled: "Le paiement par carte bancaire n'est pas disponible. Merci de contacter directement l'accueil du FabLab."
       #Fablab's events list
       events_list:
-        the_fablab_s_events: "Les évènements du Fab Lab"
+        the_fablab_s_events: "Les événements du Fab Lab"
         all_categories: "Toutes les catégories"
         for_all: "Tout public"
         sold_out: "Complet"
@@ -271,14 +271,14 @@ fr:
         free_admission: "Gratuit"
         still_available: "place(s) disponible(s)"
         without_reservation: "Sans réservation"
-        add_an_event: "Ajouter un évènement"
-        load_the_next_events: "Charger les évènements suivants..."
+        add_an_event: "Ajouter un événement"
+        load_the_next_events: "Charger les événements suivants..."
         full_price_: "Plein tarif :"
         to_date: "au" #eg. from 01/01 to 01/05
         all_themes: "Toutes les thématiques"
       #details and booking of an event
       events_show:
-        event_description: "Description de l'évènement"
+        event_description: "Description de l’événement"
         downloadable_documents: "Documents à télécharger"
         information_and_booking: "Informations et réservation"
         dates: "Dates"
@@ -308,22 +308,22 @@ fr:
         change_the_reservation: "Modifier la réservation"
         you_can_shift_this_reservation_on_the_following_slots: "Vous pouvez déplacer cette réservation sur les créneaux suivants :"
         confirmation_required: "Confirmation requise"
-        do_you_really_want_to_delete_this_event: "Voulez-vous vraiment supprimer cet évènement ?"
-        delete_recurring_event: "Vous êtes sur le point de supprimer un évènement périodique. Que voulez-vous supprimer ?"
-        delete_this_event: "Uniquement cet évènement"
-        delete_this_and_next: "Cet évènement et tous les suivants"
-        delete_all: "Tous les évènements"
+        do_you_really_want_to_delete_this_event: "Voulez-vous vraiment supprimer cet événement ?"
+        delete_recurring_event: "Vous êtes sur le point de supprimer un événement périodique. Que voulez-vous supprimer ?"
+        delete_this_event: "Uniquement cet événement"
+        delete_this_and_next: "Cet événement et tous les suivants"
+        delete_all: "Tous les événements"
         event_successfully_deleted: "L’événement a bien été supprimé."
-        events_deleted: "L'évènement, ainsi {COUNT, plural, =1{qu'un autre} other{que {COUNT} autres}}, ont été supprimés"
-        unable_to_delete_the_event: "L'évènement n'a pu être supprimé, probablement car il est déjà réservé par un membre"
-        events_not_deleted: "Sur {TOTAL} évènements, {COUNT, plural, =1{un n'a pas pu être supprimé} other{{COUNT} n'ont pas pu être supprimés}}. Il est possible que des réservations existent sur {COUNT, plural, =1{celui-ci} other{ceux-ci}}."
+        events_deleted: "L’événement, ainsi {COUNT, plural, =1{qu'un autre} other{que {COUNT} autres}}, ont été supprimés"
+        unable_to_delete_the_event: "L’événement n'a pu être supprimé, probablement car il est déjà réservé par un membre"
+        events_not_deleted: "Sur {TOTAL} événements, {COUNT, plural, =1{un n'a pas pu être supprimé} other{{COUNT} n'ont pas pu être supprimés}}. Il est possible que des réservations existent sur {COUNT, plural, =1{celui-ci} other{ceux-ci}}."
         cancel_the_reservation: "Annuler la réservation"
         do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "Êtes vous sur de vouloir annuler cette réservation? Ceci s'applique à TOUTES les places réservées."
         reservation_was_successfully_cancelled: "La réservation a bien été annulée."
         cancellation_failed: "L'annulation a échoué."
         event_is_over: "L'événement est terminé."
         thanks_for_coming: "Merci d'avoir participé !"
-        view_event_list: "Voir les évènements à venir"
+        view_event_list: "Voir les événements à venir"
         share_on_facebook: "Partager sur Facebook"
         share_on_twitter: "Partager sur Twitter"
       #public calendar
@@ -334,7 +334,7 @@ fr:
         trainings: "Formations"
         machines: "Machines"
         spaces: "Espaces"
-        events: "Évènements"
+        events: "Événements"
         externals: "Autres calendriers"
       #list of spaces
       spaces_list:
@@ -358,7 +358,7 @@ fr:
       tour:
         conclusion:
           title: "Merci de votre attention"
-          content: "<p>Si vous souhaitez relancer cette aide contextuelle, appuyez sur <strong>F1</strong> à n'importe quel moment ou cliquez sur « ? Aide » depuis le menu utilisateur.</p><p>Si vous avez besoin d'aide supplémentaire, vous pouvez <a href='https://github.com/sleede/fab-manager/raw/master/doc/fr/guide_utilisation_fab_manager_v4.3.pdf' target='_blank'>consulter le guide d'utilisation</a> disponible en Français.</p><p>L'équipe de Fab-manager propose également du support personnalisé (aide à la prise en main, aide à l'installation, personnalisation, etc.), <a href='mailto:contact@fab-manager.com'>contactez-nous</a> pour plus d'informations.</p>"
+          content: "<p>Si vous souhaitez relancer cette aide contextuelle, appuyez sur <strong>F1</strong> à n'importe quel moment ou cliquez sur « ? Aide » depuis le menu utilisateur.</p><p>Si vous avez besoin d'aide supplémentaire, vous pouvez <a href='https://github.com/sleede/fab-manager/raw/master/doc/fr/guide_utilisation_fab_manager_v4.5.pdf' target='_blank'>consulter le guide d'utilisation</a> disponible en Français.</p><p>L'équipe de Fab-manager propose également du support personnalisé (aide à la prise en main, aide à l'installation, personnalisation, etc.), <a href='mailto:contact@fab-manager.com'>contactez-nous</a> pour plus d'informations.</p>"
         welcome:
           welcome:
             title: "Bienvenue dans Fab-manager"
@@ -376,8 +376,8 @@ fr:
             title: "Espaces"
             content: "<p>Cette page vous permettra de consulter la liste de tous les espaces disponibles et de réserver une place sur un créneau, pour le compte d'un membre.</p><p>Un espace peut-être, par exemple, un atelier bois ou une salle de réunion.</p><p>Leur particularité est qu'ils peuvent être réservés par plusieurs personnes en même temps.</p><p>Les membres peuvent également accéder à cette page et, si le paiement par carte bancaire est activé, ou que certains prix sont à 0, réserver eux-même une place.</p>"
           events:
-            title: "Évènements"
-            content: "<p>Une soirée porte ouverte ou un stage pour fabriquer sa lampe de bureau ? C'est par ici !</p><p>Les évènements peuvent être gratuits ou payants (avec plusieurs tarifs), avec ou sans réservation.</p><p>Ici encore, les membres peuvent accéder à cette page et réserver eux-mêmes des places pour des évènements gratuits, ou payants si le paiement par carte bancaire est activé.</p>"
+            title: "Événements"
+            content: "<p>Une soirée porte ouverte ou un stage pour fabriquer sa lampe de bureau ? C'est par ici !</p><p>Les événements peuvent être gratuits ou payants (avec plusieurs tarifs), avec ou sans réservation.</p><p>Ici encore, les membres peuvent accéder à cette page et réserver eux-mêmes des places pour des événements gratuits, ou payants si le paiement par carte bancaire est activé.</p>"
           calendar:
             title: "Agenda"
             content: "Visualisez en un clin d’œil tout ce qui est prévu au programme des prochaines semaines (événements, formations, machines disponibles, etc.)."
@@ -412,8 +412,8 @@ fr:
             title: "Derniers membres"
             content: "Les derniers membres inscrits qui ont validé leur adresse et accepté d'être contactés, seront affichés ici."
           next_events:
-            title: "Prochains évènements"
-            content: "Les trois prochains évènements programmés sont affichés dans cette espace."
+            title: "Prochains événements"
+            content: "Les trois prochains événements programmés sont affichés dans cette espace."
           customize:
             title: "Personnalisez la page d'accueil"
             content: "<p>Cette page peut être entièrement personnalisée.</p><p>Vous pouvez <a href='mailto:contact@fab-manager.com'>nous contactez</a> pour réaliser une personnalisation sur mesure de la page d'accueil.</p>"

@@ -98,46 +98,38 @@ This script will guide you through the installation process by checking the requ
 \curl -sSL setup.fab-manager.com | bash -s "/my/custom/path"
 ```
 
+## Fab-manager for small configurations
+
+If your server machine is not powerful, you can lower the system requirements by uninstalling ElasticSearch.
+In order to remove ElasticSearch, you must **first** disable the statistics module from Customization > General > Modules.
+
+Then, you can remove the `elasticsearch` service from the [docker-compose.yml](../setup/docker-compose.yml) file and restart the whole application:
+```bash
+docker-compose down && docker-compose up -d
+```
+
+Disabling ElasticSearch will save up to 800 Mb of memory. 
+
 <a name="docker-utils"></a>
 ## Docker utils
 Below, you'll find a collection of useful commands to control your instance with docker-compose.
 Before using any of these commands, you must first `cd` into the app directory.
 
-- Restart app
+- Read again the environment variables and restart
 ```bash
-docker-compose restart fabmanager
+docker-compose down && docker-compose up -d
 ```
-- Remove app
+- Open a bash prompt in the app context
 ```bash
-docker-compose down fabmanager
-```
-- Restart all containers
-```bash
-docker-compose restart
-```
-- Remove all containers
-```bash
-docker-compose down
-```
-- Start all containers
-```bash
-docker-compose up -d
-```
-- Open a bash in the app context
-```bash
-docker-compose run --rm fabmanager bash
+docker-compose exec fabmanager bash
 ```
 - Show services status
 ```bash
 docker-compose ps
 ```
-- Restart nginx container
-```bash
-docker-compose restart nginx
- ```
 - Example of command passing env variables
 ```bash
-docker-compose run --rm -e ADMIN_EMAIL=xxx -e ADMIN_PASSWORD=xxx fabmanager bundle exec rails db:seed
+docker-compose run --rm -e VAR1=xxx -e VAR2=xxx fabmanager bundle exec rails my:command
 ```
 <a name="update-fabmanager"></a>
 ## Update Fab-manager

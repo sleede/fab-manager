@@ -15,8 +15,8 @@
  */
 'use strict';
 
-Application.Controllers.controller('StatisticsController', ['$scope', '$state', '$rootScope', '$uibModal', 'es', 'Member', '_t', 'membersPromise', 'statisticsPromise', 'uiTourService',
-  function ($scope, $state, $rootScope, $uibModal, es, Member, _t, membersPromise, statisticsPromise, uiTourService) {
+Application.Controllers.controller('StatisticsController', ['$scope', '$state', '$rootScope', '$uibModal', 'es', 'Member', '_t', 'membersPromise', 'statisticsPromise', 'uiTourService', 'settingsPromise',
+  function ($scope, $state, $rootScope, $uibModal, es, Member, _t, membersPromise, statisticsPromise, uiTourService, settingsPromise) {
   /* PRIVATE STATIC CONSTANTS */
 
     // search window size
@@ -179,9 +179,9 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
      */
     $scope.hiddenTab = function (tab) {
       if (tab.table) {
-        if ((tab.es_type_key === 'subscription') && $rootScope.fablabWithoutPlans) {
+        if ((tab.es_type_key === 'subscription') && !$rootScope.modules.plans) {
           return true;
-        } else return (tab.es_type_key === 'space') && $rootScope.fablabWithoutSpaces;
+        } else return (tab.es_type_key === 'space') && !$rootScope.modules.spaces;
       } else {
         return true;
       }
@@ -388,7 +388,7 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
         }
       });
       // if the user has never seen the tour, show him now
-      if (Fablab.featureTourDisplay !== 'manual' && $scope.currentUser.profile.tours.indexOf('statistics') < 0) {
+      if (settingsPromise.feature_tour_display !== 'manual' && $scope.currentUser.profile.tours.indexOf('statistics') < 0) {
         uitour.start();
       }
     }

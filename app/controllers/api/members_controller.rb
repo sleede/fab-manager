@@ -56,7 +56,7 @@ class API::MembersController < API::ApiController
 
     if members_service.update(user_params)
       # Update password without logging out
-      sign_in(@member, bypass: true) unless current_user.id != params[:id].to_i
+      bypass_sign_in(@member) unless current_user.id != params[:id].to_i
       render :show, status: :ok, location: member_path(@member)
     else
       render json: @member.errors, status: :unprocessable_entity
@@ -192,7 +192,7 @@ class API::MembersController < API::ApiController
   def complete_tour
     authorize @member
 
-    if Rails.application.secrets.feature_tour_display == 'session'
+    if Setting.get('feature_tour_display') == 'session'
       render json: { tours: [params[:tour]] }
     else
       tours = "#{@member.profile.tours} #{params[:tour]}"

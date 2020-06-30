@@ -596,7 +596,7 @@ module Reservations
       assert_invoice_pdf invoice
 
       VCR.use_cassette('reservations_machine_and_plan_using_coupon_retrieve_invoice_from_stripe') do
-        stp_intent = Stripe::PaymentIntent.retrieve(invoice.stp_payment_intent_id)
+        stp_intent = Stripe::PaymentIntent.retrieve(invoice.stp_payment_intent_id, api_key: Setting.get('stripe_secret_key'))
         assert_equal stp_intent.amount, invoice.total
       end
 

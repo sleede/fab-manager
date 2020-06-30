@@ -53,8 +53,7 @@
 
 
 <div class="form-group" ng-class="{'has-error': couponForm['coupon[amount_off]'].$dirty && couponForm['coupon[amount_off]'].$invalid}" ng-show="coupon.type == 'amount_off'">
-  <label for="coupon[amount_off]">{{ 'app.shared.coupon.amount_off' | translate }} *</label>
-  <div class="input-group">
+  ²<div class="input-group">
     <span class="input-group-addon">{{currencySymbol}}</span>
     <input type="number" id="coupon[amount_off]"
            name="coupon[amount_off]"

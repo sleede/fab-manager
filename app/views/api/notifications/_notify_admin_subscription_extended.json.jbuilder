@@ -6,4 +6,4 @@ json.description _t('.subscription_PLAN_of_the_member_USER_has_been_extended_FRE
                         FREE: notification.get_meta_data(:free_days).to_s,
                         DATE: I18n.l(notification.attached_object.expired_at.to_date)
                     }) # messageFormat
-json.url notification_url(notification, format: :json)
+

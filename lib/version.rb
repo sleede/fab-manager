@@ -10,7 +10,7 @@ class Version
 
   # currently published
   def self.up_to_date?
-    hub_version = Setting.find_by(name: 'hub_last_version')&.value
+    hub_version = Setting.get('hub_last_version')
     return unless hub_version
 
     json = JSON.parse(hub_version)

@@ -1,39 +1,34 @@
 <div class="panel panel-default m-t-md">
     <div class="panel-heading">
-        <span class="font-sbold" translate>{{ 'app.admin.settings.title' }}</span>
+        <span class="font-sbold" translate>{{ 'app.admin.settings.general.title' }}</span>
     </div>
     <div class="panel-body">
         <div class="row m-t-lg">
             <div class="col-md-4">
-                <form role="form" novalidate>
-                    <label for="fablabName" class="control-label m-r" translate>{{ 'app.admin.settings.fablab_title' }}</label>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-addon"><i class="fa fa-font"></i></div>
-                            <input type="text" id="fablabName" ng-model="fablabName.value" class="form-control" placeholder="{{ 'app.admin.settings.fablab_name' | translate }}"/>
-                        </div>
-                    </div>
-                    <button name="button" class="btn btn-warning" ng-click="save(fablabName)" translate>{{ 'app.shared.buttons.save' }}</button>
-                </form>
+                <text-setting name="fablab_name"
+                              settings="allSettings"
+                              label="app.admin.settings.general.fablab_title"
+                              fa-icon="fa-font">
+                </text-setting>
             </div>
 
             <div class="col-md-4 col-md-offset-1">
                 <form role="form" novalidate>
-                    <h4 class="control-label m-r" translate>{{ 'app.admin.settings.title_concordance' }}</h4>
+                    <h4 class="control-label m-r" translate>{{ 'app.admin.settings.general.title_concordance' }}</h4>
                     <div class="form-group">
                         <label for="nameGenreMale">
                           <input type="radio" name="nameGenre" id="nameGenreMale" ng-model="nameGenre.value" ng-value="'male'" />
-                          {{ 'app.admin.settings.male' | translate }} <span style="font-weight: normal">{{ 'app.admin.settings.eg' | translate }} <cite>{{ 'app.admin.settings.the_team' | translate }} <strong translate>{{ 'app.admin.settings.male_preposition' }}</strong> {{fablabName.value}}</cite></span>
+                          {{ 'app.admin.settings.general.male' | translate }} <span style="font-weight: normal">{{ 'app.admin.settings.general.eg' | translate }} <cite>{{ 'app.admin.settings.general.the_team' | translate }} <strong translate>{{ 'app.admin.settings.general.male_preposition' }}</strong> {{allSettings.fablab_name}}</cite></span>
                         </label>
                         <br/>
                         <label for="nameGenreFemale">
                           <input type="radio" name="nameGenre" id="nameGenreFemale" ng-model="nameGenre.value" ng-value="'female'" />
-                          {{ 'app.admin.settings.female' | translate }} <span style="font-weight: normal">{{ 'app.admin.settings.eg' | translate }} <cite>{{ 'app.admin.settings.the_team' | translate }} <strong translate>{{ 'app.admin.settings.female_preposition' }}</strong> {{fablabName.value}}</cite></span>
+                          {{ 'app.admin.settings.general.female' | translate }} <span style="font-weight: normal">{{ 'app.admin.settings.general.eg' | translate }} <cite>{{ 'app.admin.settings.general.the_team' | translate }} <strong translate>{{ 'app.admin.settings.general.female_preposition' }}</strong> {{allSettings.fablab_name}}</cite></span>
                         </label>
                         <br/>
                         <label for="nameGenreNeutral">
                           <input type="radio" name="nameGenre" id="nameGenreNeutral" ng-model="nameGenre.value" ng-value="'neutral'" />
-                          {{ 'app.admin.settings.neutral' | translate }} <span style="font-weight: normal">{{ 'app.admin.settings.eg' | translate }} <cite>{{ 'app.admin.settings.the_team' | translate }} <strong translate>{{ 'app.admin.settings.neutral_preposition' }}</strong> {{fablabName.value}}</cite></span>
+                          {{ 'app.admin.settings.general.neutral' | translate }} <span style="font-weight: normal">{{ 'app.admin.settings.general.eg' | translate }} <cite>{{ 'app.admin.settings.general.the_team' | translate }} <strong translate>{{ 'app.admin.settings.general.neutral_preposition' }}</strong> {{allSettings.fablab_name}}</cite></span>
                         </label>
                     </div>
                     <button name="button" class="btn btn-warning" ng-click="save(nameGenre)" translate>{{ 'app.shared.buttons.save' }}</button>
@@ -94,7 +89,7 @@
                 </div>
                 <button name="button" class="btn btn-warning" ng-click="save(eventExplicationsAlert)" translate>{{ 'app.shared.buttons.save' }}</button>
             </div>
-            <div class="col-md-3" ng-hide="fablabWithoutSpaces">
+            <div class="col-md-3" ng-show="modules.spaces">
                 <h4 translate>{{ 'app.admin.settings.message_of_the_spaces_page' }}</h4>
                 <div ng-model="spaceExplicationsAlert.value" medium-editor options='{"placeholder": "{{ "app.admin.settings.type_the_message_content" | translate }}",
                       "buttons": ["bold", "italic", "unorderedlist", "header2" ]
@@ -323,27 +318,182 @@
 
 <div class="panel panel-default m-t-lg">
     <div class="panel-heading">
-        <span class="font-sbold" translate>{{ 'app.admin.settings.elements_ordering' }}</span>
+        <span class="font-sbold" translate>{{ 'app.admin.settings.general.elements_ordering' }}</span>
     </div>
     <div class="panel-body">
         <div class="row">
             <div class="col-md-4">
-                <h3 class="m-l" translate>{{ 'app.admin.settings.machines_order' }}</h3>
-                <div class="form-group m-l">
-                    <label for="machinesSortBy" class="control-label m-r" translate>{{ 'app.admin.settings.display_machines_sorted_by' }}</label>
-                    <select id="machinesSortBy"
-                            class="form-control"
-                            ng-model="machinesSortBy.value">
-                      <option value="default" translate>{{ 'app.admin.settings.sort_by.default' }}</option>
-                      <option value="name" translate>{{ 'app.admin.settings.sort_by.name' }}</option>
-                      <option value="created_at" translate>{{ 'app.admin.settings.sort_by.created_at' }}</option>
-                      <option value="updated_at" translate>{{ 'app.admin.settings.sort_by.updated_at' }}</option>
-                    </select>
-                    <button name="button" class="btn btn-warning m-t" ng-click="save(machinesSortBy)" translate>{{ 'app.shared.buttons.save' }}</button>
-                </div>
-                <div class="col-md-4">
-                </div>
+                <h3 class="m-l" translate>{{ 'app.admin.settings.general.machines_order' }}</h3>
+                <select-setting name="machines_sort_by"
+                                settings="allSettings"
+                                classes="m-l"
+                                label="app.admin.settings.general.display_machines_sorted_by"
+                                option-1="['default', 'app.admin.settings.general.sort_by.default']"
+                                option-2="['name', 'app.admin.settings.general.sort_by.name']"
+                                option-3="['created_at', 'app.admin.settings.general.sort_by.created_at']"
+                                option-4="['updated_at', 'app.admin.settings.general.sort_by.updated_at']">
+                </select-setting>
             </div>
         </div>
     </div>
+</div>
+
+<div class="panel panel-default m-t-lg">
+  <div class="panel-heading">
+    <span class="font-sbold" translate>{{ 'app.admin.settings.general.help' }}</span>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <h3 class="m-l" translate>{{ 'app.admin.settings.general.feature_tour' }}</h3>
+      <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.general.feature_tour_info_html' | translate"></p>
+      <div class="col-md-4">
+        <select-setting name="feature_tour_display"
+                        settings="allSettings"
+                        classes="m-l"
+                        required="true"
+                        label="app.admin.settings.general.feature_tour_display_mode"
+                        option-1="['once', 'app.admin.settings.general.display_mode.once']"
+                        option-2="['session', 'app.admin.settings.general.display_mode.session']"
+                        option-3="['manual', 'app.admin.settings.general.display_mode.manual']">
+        </select-setting>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-default m-t-lg">
+  <div class="panel-heading">
+    <span class="font-sbold" translate>{{ 'app.admin.settings.general.notifications' }}</span>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <h3 class="m-l" translate>{{ 'app.admin.settings.general.email' }}</h3>
+      <p class="alert alert-warning m-h-md" translate>{{ 'app.admin.settings.general.email_info' }}</p>
+      <div class="col-md-4">
+        <text-setting name="email_from"
+                      settings="allSettings"
+                      label="app.admin.settings.general.email_from"
+                      fa-icon="fa-paper-plane"
+                      placeholder="noreply@example.com"
+                      type="email"
+                      required="true">
+        </text-setting>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-default m-t-md">
+  <div class="panel-heading">
+    <span class="font-sbold" translate>{{ 'app.admin.settings.account_creation' }}</span>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <h3 class="m-l" translate>{{ 'app.admin.settings.phone' }}</h3>
+      <p class="alert alert-warning m-h-md" translate>
+        {{ 'app.admin.settings.phone_required_info' }}
+      </p>
+      <div class="col-md-10 col-md-offset-1">
+        <boolean-setting name="phone_required"
+                         settings="allSettings"
+                         label="app.admin.settings.phone_is_required"
+                         yes-label="app.shared.buttons.yes"
+                         no-label="app.shared.buttons.no">
+        </boolean-setting>
+      </div>
+    </div>
+    <div class="row">
+      <h3 class="m-l" translate>{{ 'app.admin.settings.captcha' }}</h3>
+      <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.captcha_info_html' | translate"></p>
+      <div class="col-md-6">
+        <text-setting name="recaptcha_site_key"
+                      settings="allSettings"
+                      label="app.admin.settings.site_key"
+                      fa-icon="fa-info"
+                      placeholder="0000000000000000000000000000000000000000">
+        </text-setting>
+      </div>
+      <div class="col-md-6">
+        <text-setting name="recaptcha_secret_key"
+                      settings="allSettings"
+                      label="app.admin.settings.secret_key"
+                      fa-icon="fa-key"
+                      placeholder="0000000000000000000000000000000000000000">
+        </text-setting>
+      </div>
+    </div>
+      <div class="row">
+          <h3 class="m-l" translate>{{ 'app.admin.settings.account_confirmation' }}</h3>
+          <p class="alert alert-warning m-h-md" translate>
+              {{ 'app.admin.settings.confirmation_required_info' }}
+          </p>
+          <div class="col-md-10 col-md-offset-1">
+              <boolean-setting name="confirmation_required"
+                               settings="allSettings"
+                               label="app.admin.settings.confirmation_is_required"
+                               yes-label="app.shared.buttons.yes"
+                               no-label="app.shared.buttons.no">
+              </boolean-setting>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="panel panel-default m-t-lg">
+  <div class="panel-heading">
+    <span class="font-sbold" translate>{{ 'app.admin.settings.modules' }}</span>
+  </div>
+  <div class="panel-body">
+    <p class="alert alert-info"><i class="fa fa-info-circle m-r"></i><span translate>{{ 'app.admin.settings.remember_to_refresh_the_page_for_the_changes_to_take_effect' }}</span> </p>
+    <div class="row">
+      <h3 class="m-l" translate>{{ 'app.admin.settings.spaces' }}</h3>
+      <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.spaces_info_html' | translate"></p>
+      <boolean-setting name="spaces_module"
+                       settings="allSettings"
+                       label="app.admin.settings.enable_spaces"
+                       classes="m-l"
+                       yes-label="app.shared.buttons.yes"
+                       no-label="app.shared.buttons.no"></boolean-setting>
+    </div>
+    <div class="row">
+      <h3 class="m-l" translate>{{ 'app.admin.settings.plans' }}</h3>
+      <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.plans_info_html' | translate"></p>
+      <boolean-setting name="plans_module"
+                       settings="allSettings"
+                       label="app.admin.settings.enable_plans"
+                       classes="m-l"
+                       yes-label="app.shared.buttons.yes"
+                       no-label="app.shared.buttons.no"></boolean-setting>
+    </div>
+    <div class="row">
+      <h3 class="m-l" translate>{{ 'app.admin.settings.invoicing' }}</h3>
+      <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.invoicing_info_html' | translate"></p>
+      <boolean-setting name="invoicing_module"
+                       settings="allSettings"
+                       label="app.admin.settings.enable_invoicing"
+                       classes="m-l"
+                       yes-label="app.shared.buttons.yes"
+                       no-label="app.shared.buttons.no"></boolean-setting>
+    </div>
+    <div class="row">
+        <h3 class="m-l" translate>{{ 'app.admin.settings.general.wallet' }}</h3>
+        <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.general.wallet_info_html' | translate"></p>
+        <boolean-setting name="wallet_module"
+                         settings="allSettings"
+                         label="app.admin.settings.general.enable_wallet"
+                         classes="m-l"
+                         yes-label="app.shared.buttons.yes"
+                         no-label="app.shared.buttons.no"></boolean-setting>
+    </div>
+    <div class="row">
+        <h3 class="m-l" translate>{{ 'app.admin.settings.general.statistics' }}</h3>
+        <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.general.statistics_info_html' | translate"></p>
+        <boolean-setting name="statistics_module"
+                         settings="allSettings"
+                         label="app.admin.settings.general.enable_statistics"
+                         classes="m-l"
+                         yes-label="app.shared.buttons.yes"
+                         no-label="app.shared.buttons.no"></boolean-setting>
+    </div>
+  </div>
 </div>
