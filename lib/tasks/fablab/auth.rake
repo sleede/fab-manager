@@ -36,6 +36,8 @@ namespace :fablab do
       end
 
       # ask the user to restart the application
+      next if Rails.env.test?
+
       puts "\nActivation successful"
 
       puts "\n/!\\ WARNING: Please consider the following, otherwise the authentication will be bogus:"
