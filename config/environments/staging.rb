@@ -112,8 +112,3 @@ Rails.application.configure do
 
 end
 
-Rails.application.routes.default_url_options = {
-  host: Rails.application.secrets.default_host,
-  protocol: Rails.application.secrets.default_protocol
-}
-

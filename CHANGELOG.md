@@ -13,6 +13,7 @@
 - Fix a bug: managers do not see the name of the user who reserved a slot
 - Fix a bug: OpenAPI documentation is not available
 - Fix a bug: summary of create training availability shows incorrect alert about slot splitting
+- Fix a bug: invalid URL redirection for SSO login
 - Fix a security issue: updated websocket-extensions to 0.1.5 to fix [CVE-2020-7663](https://nvd.nist.gov/vuln/detail/CVE-2020-7663)
 - Fix a security issue: updated angular.js to 1.8 to fix [CVE-2020-7676](https://nvd.nist.gov/vuln/detail/CVE-2020-7676)
 - Fix a security issue: updated rack to 2.2.3 to fix [CVE-2020-8184](https://nvd.nist.gov/vuln/detail/CVE-2020-8184)
