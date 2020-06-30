@@ -10,6 +10,7 @@
 - Updated redis to v6, with alpine image
 - Updated Sidekiq to 6.0.7
 - Updated documentation
+- Beta preview of the upgrade script
 - Fix a bug: managers do not see the name of the user who reserved a slot
 - Fix a bug: OpenAPI documentation is not available
 - Fix a bug: summary of create training availability shows incorrect alert about slot splitting
