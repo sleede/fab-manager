@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Ability to run the upgrade without interactions
+- Fix a bug: Unable to access the invoices section if no stripe key was set or incorrect
 
 ## v4.5.0 2020 June 30
 
