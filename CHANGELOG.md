@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v4.5.2 2020 July 1st
+
 - Fix a bug: unable to set stripe public key in production
 - Fix a bug: health API is broken if ElasticSearch is not present
 - Fix a bug: unable to sync members with stripe
