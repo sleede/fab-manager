@@ -106,19 +106,19 @@ namespace :fablab do
       include ApplicationHelper
 
       mapping = [
-        %w[_ PHONE_REQUIRED phone_required true],
+        %w[_ PHONE_REQUIRED phone_required],
         %w[_ GA_ID tracking_id],
-        %w[_ BOOK_SLOT_AT_SAME_TIME book_overlapping_slots true],
-        %w[_ SLOT_DURATION slot_duration 60],
-        %w[_ EVENTS_IN_CALENDAR events_in_calendar false],
-        %w[! FABLAB_WITHOUT_SPACES spaces_module true],
-        %w[! FABLAB_WITHOUT_PLANS plans_module false],
-        %w[! FABLAB_WITHOUT_INVOICES invoicing_module false],
+        %w[_ BOOK_SLOT_AT_SAME_TIME book_overlapping_slots],
+        %w[_ SLOT_DURATION slot_duration],
+        %w[_ EVENTS_IN_CALENDAR events_in_calendar],
+        %w[! FABLAB_WITHOUT_SPACES spaces_module],
+        %w[! FABLAB_WITHOUT_PLANS plans_module],
+        %w[! FABLAB_WITHOUT_INVOICES invoicing_module],
         %w[_ FACEBOOK_APP_ID facebook_app_id],
         %w[_ TWITTER_NAME twitter_analytics],
         %w[_ RECAPTCHA_SITE_KEY recaptcha_site_key],
         %w[_ RECAPTCHA_SECRET_KEY recaptcha_secret_key],
-        %w[_ FEATURE_TOUR_DISPLAY feature_tour_display once],
+        %w[_ FEATURE_TOUR_DISPLAY feature_tour_display],
         %w[_ DEFAULT_MAIL_FROM email_from],
         %w[_ DISQUS_SHORTNAME disqus_shortname],
         %w[_ ALLOWED_EXTENSIONS allowed_cad_extensions],
@@ -126,14 +126,14 @@ namespace :fablab do
         %w[_ OPENLAB_APP_ID openlab_app_id],
         %w[_ OPENLAB_APP_SECRET openlab_app_secret],
         %w[_ OPENLAB_DEFAULT openlab_default],
-        %w[! FABLAB_WITHOUT_ONLINE_PAYMENT online_payment_module false],
+        %w[! FABLAB_WITHOUT_ONLINE_PAYMENT online_payment_module],
         %w[_ STRIPE_PUBLISHABLE_KEY stripe_public_key],
         %w[_ STRIPE_API_KEY stripe_secret_key],
         %w[_ STRIPE_CURRENCY stripe_currency],
         %w[_ INVOICE_PREFIX invoice_prefix FabManager_invoice],
-        %w[_ USER_CONFIRMATION_NEEDED_TO_SIGN_IN confirmation_required false],
-        %w[! FABLAB_WITHOUT_WALLET wallet_module false],
-        %w[! FABLAB_WITHOUT_STATISTICS statistics_module false]
+        %w[_ USER_CONFIRMATION_NEEDED_TO_SIGN_IN confirmation_required],
+        %w[! FABLAB_WITHOUT_WALLET wallet_module],
+        %w[! FABLAB_WITHOUT_STATISTICS statistics_module]
       ]
 
       mapping.each do |m|

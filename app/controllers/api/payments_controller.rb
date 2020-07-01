@@ -60,10 +60,12 @@ class API::PaymentsController < API::ApiController
     authorize :payment
 
     key = Setting.get('stripe_secret_key')
-    render json: { status: false } and return unless key
+    render json: { status: false } and return unless key&.present?
 
     charges = Stripe::Charge.list({ limit: 1 }, { api_key: key })
     render json: { status: charges.data.length.positive? }
+  rescue Stripe::AuthenticationError
+    render json: { status: false }
   end
 
   private
