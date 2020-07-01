@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Ability to run the upgrade without interactions
+
 ## v4.5.0 2020 June 30
 
 - Search in the projets directly from PostgreSQL
