@@ -1,11 +1,27 @@
 #!/usr/bin/env bash
 
+parseparams()
+{
+  while getopts "hy" opt; do
+    case "${opt}" in
+      y)
+        Y=true
+        ;;
+      *)
+        usage
+        ;;
+    esac
+  done
+  shift $((OPTIND-1))
+}
+
 config()
 {
+  YES_ALL=${Y:-false}
   if [ "$(whoami)" = "root" ]
   then
     echo "It is not recommended to run this script as root. As a normal user, elevation will be prompted if needed."
-    read -rp "Continue anyway? (Y/n) " confirm </dev/tty
+    [[ "$YES_ALL" = "true" ]] && confirm="y" || read -rp "Continue anyway? (Y/n) " confirm </dev/tty
     if [[ "$confirm" = "n" ]]; then exit 1; fi
   else
     if ! groups | grep docker; then
@@ -17,7 +33,7 @@ config()
   fi
   FM_PATH=$(pwd)
   TYPE="NOT-FOUND"
-  read -rp "Is Fab-manager installed at \"$FM_PATH\"? (y/N) " confirm </dev/tty
+  [[ "$YES_ALL" = "true" ]] && confirm="y" || read -rp "Is Fab-manager installed at \"$FM_PATH\"? (y/N) " confirm </dev/tty
   if [ "$confirm" = "y" ]; then
     test_docker_compose
     if [[ "$TYPE" = "NOT-FOUND" ]]
@@ -65,6 +81,15 @@ docker_up()
   docker-compose up -d
 }
 
+usage()
+{
+  printf "Usage: %s [OPTIONS]
+Options:
+  -h                 Print this message and quit
+  -y                 Answer yes to all questions\n" "$(basename "$0")" 1>&2
+  exit 1
+}
+
 function trap_ctrlc()
 {
   echo "Ctrl^C, exiting..."
@@ -73,8 +98,9 @@ function trap_ctrlc()
 
 upgrade_redis()
 {
+  parseparams "$@"
   config
-  read -rp "Continue with upgrading? (y/N) " confirm </dev/tty
+  [[ "$YES_ALL" = "true" ]] && confirm="y" || read -rp "Continue with upgrading? (y/N) " confirm </dev/tty
   if [[ "$confirm" = "y" ]]; then
     trap "trap_ctrlc" 2 # SIGINT
     docker_down

@@ -76,7 +76,11 @@ upgrade()
     exit 1
   fi
   for SCRIPT in "${SCRIPTS[@]}"; do
-    \curl -sSL "https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/$SCRIPT.sh" | bash
+    if [[ "$YES_ALL" = "true" ]]; then
+      \curl -sSL "https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/$SCRIPT.sh" | bash -s -- -y
+    else
+      \curl -sSL "https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/$SCRIPT.sh" | bash
+    fi
   done
   docker-compose down
   docker-compose run --rm "$SERVICE" bundle exec rake db:migrate
