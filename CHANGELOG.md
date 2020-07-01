@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
-- Fix a bug: Health API is broken if ElasticSearch is not present
+- Fix a bug: health API is broken if ElasticSearch is not present
+- Fix a bug: unable to sync members with stripe
 
 ## v4.5.1 2020 July 1st
 

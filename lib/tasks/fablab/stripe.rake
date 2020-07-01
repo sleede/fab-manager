@@ -49,7 +49,7 @@ namespace :fablab do
     desc 'sync users to the stripe database'
     task sync_members: :environment do
       puts 'We create all non-existing customers on stripe. This may take a while, please wait...'
-      SyncMembersOnStripeWorker.perform
+      SyncMembersOnStripeWorker.new.perform
       puts 'Done'
     end
 
