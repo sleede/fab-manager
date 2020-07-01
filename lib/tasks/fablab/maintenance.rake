@@ -82,5 +82,14 @@ namespace :fablab do
       require 'version'
       puts Version.current
     end
+
+    desc 'clean the cron workers'
+    task clean_workers: :environment do
+
+      Sidekiq::Cron::Job.destroy_all!
+      Sidekiq::Queue.new('system').clear
+      Sidekiq::Queue.new('default').clear
+      Sidekiq::DeadSet.new.clear
+    end
   end
 end

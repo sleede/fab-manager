@@ -59,7 +59,7 @@ class AuthProvidersTest < ActionDispatch::IntegrationTest
     assert_equal 2, provider[:providable_attributes][:o_auth2_mappings_attributes].length
 
     # now let's activate this new provider
-    Fablab::Application.load_tasks
+    Fablab::Application.load_tasks if Rake::Task.tasks.empty?
     Rake::Task['fablab:auth:switch_provider'].invoke(name)
 
     db_provider.reload

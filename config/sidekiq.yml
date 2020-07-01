@@ -8,3 +8,4 @@
   - [devise_mailer, 3]
   - [mailers, 3]
   - [elasticsearch, 2]
+  - [system, 1]

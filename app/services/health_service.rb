@@ -25,6 +25,8 @@ class HealthService
     !!response.body # rubocop:disable Style/DoubleNegation
   rescue Elasticsearch::Transport::Transport::Error
     false
+  rescue Faraday::ConnectionFailed
+    false
   end
 
   def self.migrations?

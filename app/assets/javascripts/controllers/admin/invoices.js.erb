@@ -1320,13 +1320,13 @@ Application.Controllers.controller('StripeKeysModalController', ['$scope', '$uib
     /* PUBLIC SCOPE */
 
     // public key
-    $scope.publicKey = stripeKeys.stripe_public_key;
+    $scope.publicKey = stripeKeys.stripe_public_key || '';
 
     // test status of the public key
     $scope.publicKeyStatus = undefined;
 
     // secret key
-    $scope.secretKey = stripeKeys.stripe_secret_key;
+    $scope.secretKey = stripeKeys.stripe_secret_key || '';
 
     // test status of the secret key
     $scope.secretKeyStatus = undefined;
@@ -1370,10 +1370,7 @@ Application.Controllers.controller('StripeKeysModalController', ['$scope', '$uib
           'Content-Type': 'application/x-www-form-urlencoded'
         },
         data: $httpParamSerializerJQLike({
-          'card[number]': 4242424242424242,
-          'card[cvc]': 123,
-          'card[exp_month]': 12,
-          'card[exp_year]': today.getFullYear().toString().substring(2),
+          'pii[id_number]': 'test',
         })
       }).then(function () {
         $scope.publicKeyStatus = true;
