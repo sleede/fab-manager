@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v4.5.1 2020 July 1st
+
 - Ability to run the upgrade without interactions
 - Fix a bug: Unable to access the invoices section if no stripe key was set or incorrect
 - Fix a bug: task env_to_db overrides the values set in the UI, even if the corresponding variable was not defined in the env file
