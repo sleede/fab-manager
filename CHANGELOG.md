@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: Health API is broken if ElasticSearch is not present
+
 ## v4.5.1 2020 July 1st
 
 - Ability to run the upgrade without interactions
