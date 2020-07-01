@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- Fix a bug: unable to set stripe public key in production
 - Fix a bug: health API is broken if ElasticSearch is not present
 - Fix a bug: unable to sync members with stripe
 - Fix a bug: version check is not working
