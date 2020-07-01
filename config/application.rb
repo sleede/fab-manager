@@ -74,7 +74,7 @@ module Fablab
       plugins&.each(&:notify_after_initialize)
 
       require 'version'
-      Version.check_and_schedule
+      Version.check
     end
   end
 end

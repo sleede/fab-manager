@@ -2,6 +2,8 @@
 
 - Fix a bug: health API is broken if ElasticSearch is not present
 - Fix a bug: unable to sync members with stripe
+- Fix a bug: version check is not working
+- [TODO DEPLOY] `rails fablab:maintenance:clean_workers`
 
 ## v4.5.1 2020 July 1st
 
