@@ -3,6 +3,21 @@
 - Documentation of the easy upgrade procedure
 - Fix a bug: unable to seed the database
 
+## v4.5.2 2020 July 1st
+
+- Fix a bug: unable to set stripe public key in production
+- Fix a bug: health API is broken if ElasticSearch is not present
+- Fix a bug: unable to sync members with stripe
+- Fix a bug: version check is not working
+- Fix a bug: enabling auth_provider from the tests happens twice in coverall context
+- [TODO DEPLOY] `rails fablab:maintenance:clean_workers`
+
+## v4.5.1 2020 July 1st
+
+- Ability to run the upgrade without interactions
+- Fix a bug: Unable to access the invoices section if no stripe key was set or incorrect
+- Fix a bug: task env_to_db overrides the values set in the UI, even if the corresponding variable was not defined in the env file
+
 ## v4.5.0 2020 June 30
 
 - Search in the projets directly from PostgreSQL
@@ -25,6 +40,7 @@
 - Fix a security issue: updated rack to 2.2.3 to fix [CVE-2020-8184](https://nvd.nist.gov/vuln/detail/CVE-2020-8184)
 - [TODO DEPLOY] add the `POSTGRESQL_LANGUAGE_ANALYZER` environment variable (see [doc/environment.md](doc/environment.md#POSTGRESQL_LANGUAGE_ANALYZER) for configuration details)
 - [TODO DEPLOY] `rails fablab:setup:env_to_db`
+- [TODO DEPLOY] `rails db:seed`
 - [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/redis-upgrade.sh | bash`
 - [TODO DEPLOY] -> (only dev) upgrade redis to v6, you may be able to use the script above, depending on your installation
 
