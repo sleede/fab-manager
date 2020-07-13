@@ -603,7 +603,7 @@ Setting.set('invoice_VAT-active', false) unless Setting.find_by(name: 'invoice_V
 
 Setting.set('invoice_VAT-rate', 20.0) unless Setting.find_by(name: 'invoice_VAT-rate').try(:value)
 
-Setting.set('invoice_text', t('invoices.invoice_text_example')) unless Setting.find_by(name: 'invoice_text').try(:value)
+Setting.set('invoice_text', I18n.t('invoices.invoice_text_example')) unless Setting.find_by(name: 'invoice_text').try(:value)
 
 unless Setting.find_by(name: 'invoice_legals').try(:value)
   setting = Setting.find_or_initialize_by(name: 'invoice_legals')
