@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- Documentation of the easy upgrade procedure
 - Fix a bug: unable to seed the database
 
 ## v4.5.0 2020 June 30

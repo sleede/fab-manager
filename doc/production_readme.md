@@ -132,6 +132,27 @@ docker-compose ps
 docker-compose run --rm -e VAR1=xxx -e VAR2=xxx fabmanager bundle exec rails my:command
 ```
 <a name="update-fabmanager"></a>
+
+## Easy upgrade
+
+Starting with Fab-manager v4.5.0, you can upgrade Fab-manager in one single easy command, that automates the procedure below.
+To upgrade with ease, using this helper, read the GitHub release notes of the version between your current version and the target version.
+
+**You MUST append all the arguments** of easy upgrade commands, for **each versions**, to the command you run.
+
+Eg.
+If you upgrade from 1.2.3 to 1.2.5, with the following release notes:
+```markdown
+## 1.2.4
+\curl -sSL upgrade.fab-manager.com | bash -s -- -e "VAR=value"
+## 1.2.5
+\curl -sSL upgrade.fab-manager.com | bash -s -- -c "rails fablab:setup:command"
+```
+Then, you'll need to perform the upgrade with the following command:
+```bash
+\curl -sSL upgrade.fab-manager.com | bash -s -- -e "VAR=value" -c "rails fablab:setup:command"
+```
+
 ## Update Fab-manager
 
 *This procedure updates Fab-manager to the most recent version by default.*
