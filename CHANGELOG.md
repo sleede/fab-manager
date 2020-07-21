@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Fix a bug: unable to export reservations
+- Fix a bug: unable to receive mails in development
 
 ## v4.5.3 2020 July 21
 
