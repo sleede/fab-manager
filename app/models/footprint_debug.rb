@@ -1,0 +1,2 @@
+class FootprintDebug < ApplicationRecord
+end

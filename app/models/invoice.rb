@@ -174,10 +174,19 @@ class Invoice < ApplicationRecord
   def chain_record
     self.footprint = compute_footprint
     save!
+    FootprintDebug.create!(
+      footprint: footprint,
+      data: FootprintService.footprint_data(Invoice, self),
+      klass: Invoice.name
+    )
   end
 
   def check_footprint
     invoice_items.map(&:check_footprint).all? && footprint == compute_footprint
+  end
+
+  def debug_footprint
+    FootprintService.debug_footprint(Invoice, self)
   end
 
   def set_wallet_transaction(amount, transaction_id)

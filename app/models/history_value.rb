@@ -12,10 +12,19 @@ class HistoryValue < ApplicationRecord
   def chain_record
     self.footprint = compute_footprint
     save!
+    FootprintDebug.create!(
+      footprint: footprint,
+      data: FootprintService.footprint_data(HistoryValue, self, 'created_at'),
+      klass: HistoryValue.name
+    )
   end
 
   def check_footprint
     footprint == compute_footprint
+  end
+
+  def debug_footprint
+    FootprintService.debug_footprint(HistoryValue, self)
   end
 
   def user

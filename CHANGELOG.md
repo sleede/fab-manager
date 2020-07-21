@@ -1,8 +1,10 @@
 # Changelog Fab-manager
 
 - Display an asterisk on the phone input field, in the admin creation form, if the phone is configured as required
+- Keep the history of footprints data for verification purposes
 - Fix a bug: unable to export reservations
 - Fix a bug: unable to receive mails in development
+- [TODO DEPLOY] `rails fablab:maintenance:save_footprint_data`
 
 ## v4.5.3 2020 July 21
 

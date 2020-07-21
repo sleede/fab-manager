@@ -91,5 +91,18 @@ namespace :fablab do
       Sidekiq::Queue.new('default').clear
       Sidekiq::DeadSet.new.clear
     end
+
+    desc 'save the footprint original data'
+    task save_footprint_data: :environment do
+      [Invoice, InvoiceItem, HistoryValue].each do |klass|
+        klass.all.each do |item|
+          FootprintDebug.create!(
+            footprint: item.footprint,
+            data: FootprintService.footprint_data(klass, item, klass == 'HistoryValue' ? 'created_at' : 'id'),
+            klass: klass
+          )
+        end
+      end
+    end
   end
 end
