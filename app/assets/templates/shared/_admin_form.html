@@ -110,12 +110,13 @@
 
     <div class="form-group" ng-class="{'has-error': adminForm['admin[profile_attributes][phone]'].$dirty && adminForm['admin[profile_attributes][phone]'].$invalid}">
       <div class="input-group">
-        <span class="input-group-addon"><i class="fa fa-phone"></i> </span>
+        <span class="input-group-addon"><i class="fa fa-phone"></i> <span class="exponent" ng-show="phoneRequired"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
         <input ng-model="admin.profile_attributes.phone"
                type="text"
                name="admin[profile_attributes][phone]"
                class="form-control" id="user_phone"
-               placeholder="{{ 'app.admin.admins_new.phone_number' | translate }}">
+               placeholder="{{ 'app.admin.admins_new.phone_number' | translate }}"
+               ng-required="phoneRequired">
       </div>
     </div>
   </div>

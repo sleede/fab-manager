@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- Display an asterisk on the phone input field, in the admin creation form, if the phone is configured as required
 - Fix a bug: unable to export reservations
 - Fix a bug: unable to receive mails in development
 

@@ -947,6 +947,9 @@ angular.module('application.router', ['ui.router'])
             templateUrl: '<%= asset_path "admin/admins/new.html" %>',
             controller: 'NewAdminController'
           }
+        },
+        resolve: {
+          phoneRequiredPromise: ['Setting', function (Setting) { return Setting.get({ name: 'phone_required' }).$promise; }]
         }
       })
       .state('app.admin.managers_new', {
