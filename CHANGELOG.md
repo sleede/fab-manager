@@ -1,5 +1,11 @@
 # Changelog Fab-manager
 
+## v4.5.3 2020 July 21
+
+- Documentation of the easy upgrade procedure
+- Fix a bug: unable to seed the database
+- Fix a security issue: updated lodash to 4.17.19 to fix [lodash#4744](https://github.com/lodash/lodash/issues/4744)
+
 ## v4.5.2 2020 July 1st
 
 - Fix a bug: unable to set stripe public key in production
