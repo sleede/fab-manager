@@ -15,14 +15,14 @@ wb.add_worksheet(name: t('export_reservations.reservations')) do |sheet|
   # data rows
   @reservations.each do |resrv|
     data = [
-        resrv.user.id,
-        resrv.user.profile.full_name,
-        resrv.user.email,
+        resrv.user&.id,
+        resrv.user&.profile&.full_name || t('export_reservations.deleted_user'),
+        resrv.user&.email,
         resrv.created_at.to_date,
         resrv.reservable_type,
         (resrv.reservable.nil? ? '' : resrv.reservable.name),
         (resrv.reservable_type == 'Event') ? resrv.total_booked_seats: resrv.slots.count,
-        (resrv.invoice.paid_with_stripe?) ? t('export_reservations.local_payment') : t('export_reservations.online_payment')
+        (resrv.invoice&.paid_with_stripe?) ? t('export_reservations.online_payment') : t('export_reservations.local_payment')
     ]
     styles = [nil, nil, nil, date, nil, nil, nil, nil]
     types = [:integer, :string, :string, :date, :string, :string, :integer, :string]

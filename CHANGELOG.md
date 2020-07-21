@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: unable to export reservations
+
 ## v4.5.3 2020 July 21
 
 - Documentation of the easy upgrade procedure
