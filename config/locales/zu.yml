@@ -188,6 +188,7 @@ zu:
     payment_method: "crwdns3501:0crwdne3501:0"
     local_payment: "crwdns3503:0crwdne3503:0"
     online_payment: "crwdns3505:0crwdne3505:0"
+    deleted_user: "crwdns20886:0crwdne20886:0"
   #subscriptions list export to EXCEL format
   export_subscriptions:
     subscriptions: "crwdns3507:0crwdne3507:0"

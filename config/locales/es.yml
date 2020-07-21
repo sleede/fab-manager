@@ -188,6 +188,7 @@ es:
     payment_method: "Método de pago"
     local_payment: "Pago en recepción"
     online_payment: "Pago online"
+    deleted_user: "Usuario eliminado"
   #subscriptions list export to EXCEL format
   export_subscriptions:
     subscriptions: "Suscripciones"
