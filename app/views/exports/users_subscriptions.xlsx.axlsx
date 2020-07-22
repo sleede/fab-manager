@@ -15,9 +15,9 @@ wb.add_worksheet(name: t('export_subscriptions.subscriptions')) do |sheet|
   # data rows
   @subscriptions.each do |sub|
     data = [
-        sub.user.id,
-        sub.user.profile.full_name,
-        sub.user.email,
+        sub.user&.id,
+        sub.user&.profile&.full_name || t('export_subscriptions.deleted_user'),
+        sub.user&.email,
         sub.plan.human_readable_name(group: true),
         t("duration.#{sub.plan.interval}", count: sub.plan.interval_count),
         sub.created_at.to_date,

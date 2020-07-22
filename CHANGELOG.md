@@ -4,6 +4,7 @@
 - Keep the history of footprints data for verification purposes
 - Enhanced rake task to create fixtures for test cases
 - Fix a bug: unable to export reservations
+- Fix a bug: unable to export subscriptions
 - Fix a bug: unable to receive mails in development
 - [TODO DEPLOY] `rails fablab:maintenance:save_footprint_data`
 
