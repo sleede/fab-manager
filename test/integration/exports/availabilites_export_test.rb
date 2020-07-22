@@ -5,7 +5,7 @@ require 'rubyXL'
 
 module Exports; end
 
-class Exports::AccountingExportTest < ActionDispatch::IntegrationTest
+class Exports::AvailabilitiesExportTest < ActionDispatch::IntegrationTest
   setup do
     admin = User.with_role(:admin).first
     login_as(admin, scope: :user)
