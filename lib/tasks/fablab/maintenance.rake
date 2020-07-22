@@ -35,15 +35,6 @@ namespace :fablab do
       end
     end
 
-    desc 'generate fixtures from db'
-    task generate_fixtures: :environment do
-      Rails.application.eager_load!
-      ActiveRecord::Base.descendants.reject { |c| [ActiveRecord::SchemaMigration, PartnerPlan].include? c }.each do |ar_base|
-        p "========== #{ar_base} =============="
-        ar_base.dump_fixtures
-      end
-    end
-
     desc 'generate current code checksum'
     task checksum: :environment do
       require 'checksum'
