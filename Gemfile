@@ -61,6 +61,7 @@ group :test do
   gem 'pdf-reader'
   gem 'vcr', '3.0.1'
   gem 'webmock'
+  gem 'rubyXL'
 end
 
 group :production, :staging do

@@ -8,7 +8,7 @@ class Exports::AccountingExportTest < ActionDispatch::IntegrationTest
     login_as(admin, scope: :user)
   end
 
-  test 'creation modification reservation and re-modification scenario' do
+  test 'export accounting period to ACD software' do
     # First, we create a new export
     post '/api/accounting/export',
          params: {
