@@ -30,6 +30,7 @@ user_2:
   uid:
   auth_token:
   merged_at:
+  is_allow_newsletter: true
 
 user_4:
   id: 4
@@ -62,6 +63,7 @@ user_4:
   uid:
   auth_token:
   merged_at:
+  is_allow_newsletter: false
 
 user_6:
   id: 6
@@ -94,6 +96,7 @@ user_6:
   uid:
   auth_token:
   merged_at:
+  is_allow_newsletter: true
 
 user_5:
   id: 5
@@ -126,6 +129,7 @@ user_5:
   uid:
   auth_token:
   merged_at:
+  is_allow_newsletter: true
 
 user_3:
   id: 3
@@ -158,6 +162,7 @@ user_3:
   uid:
   auth_token:
   merged_at:
+  is_allow_newsletter: false
 
 user_1:
   id: 1
@@ -190,6 +195,7 @@ user_1:
   uid:
   auth_token:
   merged_at:
+  is_allow_newsletter: true
 
 
 user_7:
@@ -223,3 +229,4 @@ user_7:
   uid:
   auth_token:
   merged_at:
+  is_allow_newsletter: false
