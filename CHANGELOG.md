@@ -7,6 +7,7 @@
 - Fix a bug: unable to export reservations
 - Fix a bug: unable to export subscriptions
 - Fix a bug: unable to receive mails in development
+- Fix a security issue: updated json to 2.3.1 to fix [CVE-2020-10663](https://nvd.nist.gov/vuln/detail/CVE-2020-10663)
 - [TODO DEPLOY] `rails fablab:maintenance:save_footprint_data`
 
 ## v4.5.3 2020 July 21

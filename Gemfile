@@ -24,8 +24,7 @@ gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 gem 'jbuilder_cache_multi'
-# bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0', group: :doc # TODO, remove unused ?
+gem "json", ">= 2.3.0"
 
 gem 'forgery'
 gem 'responders', '~> 2.0'
