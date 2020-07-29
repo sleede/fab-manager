@@ -203,6 +203,7 @@ zu:
     payment_method: "crwdns3525:0crwdne3525:0"
     local_payment: "crwdns3527:0crwdne3527:0"
     online_payment: "crwdns3529:0crwdne3529:0"
+    deleted_user: "crwdns20888:0crwdne20888:0"
   #reservation slots export, by type, to EXCEL format
   export_availabilities:
     machines: "crwdns3531:0crwdne3531:0"

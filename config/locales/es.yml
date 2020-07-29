@@ -203,6 +203,7 @@ es:
     payment_method: "Método de pago"
     local_payment: "Pago en recepción"
     online_payment: "Pago en línea"
+    deleted_user: "Usario eliminado"
   #reservation slots export, by type, to EXCEL format
   export_availabilities:
     machines: "Máquinas"
