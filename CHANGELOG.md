@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v4.5.4 2020 July 29
+
 - Display an asterisk on the phone input field, in the admin creation form, if the phone is configured as required
 - Keep the history of footprints data for verification purposes
 - Enhanced rake task to create fixtures for test cases
@@ -8,6 +10,7 @@
 - Fix a bug: unable to export subscriptions
 - Fix a bug: unable to receive mails in development
 - Fix a security issue: updated json to 2.3.1 to fix [CVE-2020-10663](https://nvd.nist.gov/vuln/detail/CVE-2020-10663)
+- [TODO DEPLOY] `rails db:migrate`
 - [TODO DEPLOY] `rails fablab:maintenance:save_footprint_data`
 
 ## v4.5.3 2020 July 21
