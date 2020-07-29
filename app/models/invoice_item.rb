@@ -15,10 +15,19 @@ class InvoiceItem < ApplicationRecord
   def chain_record
     self.footprint = compute_footprint
     save!
+    FootprintDebug.create!(
+      footprint: footprint,
+      data: FootprintService.footprint_data(InvoiceItem, self),
+      klass: InvoiceItem.name
+    )
   end
 
   def check_footprint
     footprint == compute_footprint
+  end
+
+  def debug_footprint
+    FootprintService.debug_footprint(InvoiceItem, self)
   end
 
   def amount_after_coupon

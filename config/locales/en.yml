@@ -188,6 +188,7 @@ en:
     payment_method: "Payment method"
     local_payment: "Payment at the reception"
     online_payment: "Online payment"
+    deleted_user: "Deleted user"
   #subscriptions list export to EXCEL format
   export_subscriptions:
     subscriptions: "Subscriptions"
@@ -202,6 +203,7 @@ en:
     payment_method: "Payment method"
     local_payment: "Payment at the reception"
     online_payment: "Online payment"
+    deleted_user: "Deleted user"
   #reservation slots export, by type, to EXCEL format
   export_availabilities:
     machines: "Machines"

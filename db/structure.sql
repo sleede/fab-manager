@@ -764,6 +764,39 @@ ALTER SEQUENCE public.exports_id_seq OWNED BY public.exports.id;
 
 
 --
+-- Name: footprint_debugs; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.footprint_debugs (
+    id bigint NOT NULL,
+    footprint character varying,
+    data character varying,
+    klass character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: footprint_debugs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.footprint_debugs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: footprint_debugs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.footprint_debugs_id_seq OWNED BY public.footprint_debugs.id;
+
+
+--
 -- Name: friendly_id_slugs; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3021,6 +3054,13 @@ ALTER TABLE ONLY public.exports ALTER COLUMN id SET DEFAULT nextval('public.expo
 
 
 --
+-- Name: footprint_debugs id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.footprint_debugs ALTER COLUMN id SET DEFAULT nextval('public.footprint_debugs_id_seq'::regclass);
+
+
+--
 -- Name: friendly_id_slugs id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -3605,6 +3645,14 @@ ALTER TABLE ONLY public.events
 
 ALTER TABLE ONLY public.exports
     ADD CONSTRAINT exports_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: footprint_debugs footprint_debugs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.footprint_debugs
+    ADD CONSTRAINT footprint_debugs_pkey PRIMARY KEY (id);
 
 
 --
@@ -5598,6 +5646,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200622135401'),
 ('20200623134900'),
 ('20200623141305'),
-('20200629123011');
+('20200629123011'),
+('20200721162939');
 
 

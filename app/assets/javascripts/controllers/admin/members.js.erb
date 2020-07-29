@@ -1070,7 +1070,8 @@ Application.Controllers.controller('ImportMembersResultController', ['$scope', '
 /**
  * Controller used in the admin's creation page (admin view)
  */
-Application.Controllers.controller('NewAdminController', ['$state', '$scope', 'Admin', 'growl', '_t', function ($state, $scope, Admin, growl, _t) {
+Application.Controllers.controller('NewAdminController', ['$state', '$scope', 'Admin', 'growl', '_t', 'phoneRequiredPromise',
+  function ($state, $scope, Admin, growl, _t, phoneRequiredPromise) {
   // default admin profile
   let getGender;
   $scope.admin = {
@@ -1089,6 +1090,9 @@ Application.Controllers.controller('NewAdminController', ['$state', '$scope', 'A
       startingDay: Fablab.weekStartingDay
     }
   };
+
+  // is the phone number required in _admin_form?
+  $scope.phoneRequired = (phoneRequiredPromise.setting.value === 'true');
 
   /**
    * Shows the birth day datepicker

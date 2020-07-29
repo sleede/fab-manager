@@ -35,15 +35,6 @@ namespace :fablab do
       end
     end
 
-    desc 'generate fixtures from db'
-    task generate_fixtures: :environment do
-      Rails.application.eager_load!
-      ActiveRecord::Base.descendants.reject { |c| [ActiveRecord::SchemaMigration, PartnerPlan].include? c }.each do |ar_base|
-        p "========== #{ar_base} =============="
-        ar_base.dump_fixtures
-      end
-    end
-
     desc 'generate current code checksum'
     task checksum: :environment do
       require 'checksum'
@@ -90,6 +81,19 @@ namespace :fablab do
       Sidekiq::Queue.new('system').clear
       Sidekiq::Queue.new('default').clear
       Sidekiq::DeadSet.new.clear
+    end
+
+    desc 'save the footprint original data'
+    task save_footprint_data: :environment do
+      [Invoice, InvoiceItem, HistoryValue].each do |klass|
+        klass.all.each do |item|
+          FootprintDebug.create!(
+            footprint: item.footprint,
+            data: FootprintService.footprint_data(klass, item, klass == 'HistoryValue' ? 'created_at' : 'id'),
+            klass: klass
+          )
+        end
+      end
     end
   end
 end
