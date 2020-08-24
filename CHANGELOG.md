@@ -2,6 +2,7 @@
 
 - Improved portuguese translations
 - Fix a bug: unable to search for projects on OpenLab
+- Fix a bug: erroneous translations in english (#226)
 
 ## v4.5.4 2020 July 29
 

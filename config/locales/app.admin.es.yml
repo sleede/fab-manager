@@ -1418,7 +1418,7 @@ es:
             content: "Fully personalize this page to present your activity."
           privacy:
             title: "Política de privacidad"
-            content: "<p>EExplain here how you use the data you collect about your members.</p><p>GDPR requires that a confidentiality policy is defined, as well as a data protection officer.</p>"
+            content: "<p>Explain here how you use the data you collect about your members.</p><p>GDPR requires that a confidentiality policy is defined, as well as a data protection officer.</p>"
           draft:
             title: "Draft"
             content: "Click here to view a privacy policy draft with holes, which you just need to read and complete."
