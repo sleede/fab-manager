@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- Improved portuguese translations
 - Fix a bug: unable to search for projects on OpenLab
 
 ## v4.5.4 2020 July 29
