@@ -306,13 +306,16 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
     // list of components / used for filtering
     $scope.components = componentsPromise;
 
+    /**
+     * Callback triggered when the button "search from the whole network" is toggled
+     */
     $scope.searchOverWholeNetworkChanged = function () {
-      setTimeout(
-        function () { $scope.resetFiltersAndTriggerSearch(); },
-        150
-      );
+      $scope.resetFiltersAndTriggerSearch();
     };
 
+    /**
+     * Callback to load the next projects of the result set, for the current search
+     */
     $scope.loadMore = function () {
       if ($scope.openlab.searchOverWholeNetwork === true) {
         return $scope.projectsPagination.loadMore({ q: $scope.search.q });
@@ -321,6 +324,9 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
       }
     };
 
+    /**
+     * Reinitialize the search filters (used by the projects from the instance DB) and trigger a new search query
+     */
     $scope.resetFiltersAndTriggerSearch = function () {
       $scope.search.q = '';
       $scope.search.from = undefined;
@@ -331,13 +337,17 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
       return $scope.triggerSearch();
     };
 
+    /**
+     * Query the list of projects. Depending on $scope.openlab.searchOverWholeNetwork, the resulting list
+     * will be fetched from OpenLab or from the instance DB
+     */
     $scope.triggerSearch = function () {
       const currentPage = parseInt($location.$$search.page) || 1;
       if ($scope.openlab.searchOverWholeNetwork === true) {
         updateUrlParam('whole_network', 't');
         $scope.projectsPagination = new paginationService.Instance(OpenlabProject, currentPage, PROJECTS_PER_PAGE, null, { }, loadMoreOpenlabCallback);
         return OpenlabProject.query({ q: $scope.search.q, page: currentPage, per_page: PROJECTS_PER_PAGE }, function (projectsPromise) {
-          if (projectsPromise.errors != null) {
+          if (projectsPromise.errors) {
             growl.error(_t('app.public.projects_list.openlab_search_not_available_at_the_moment'));
             $scope.openlab.searchOverWholeNetwork = false;
             return $scope.triggerSearch();
@@ -357,7 +367,7 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
     };
 
     /**
-     * Callback to switch the user's view to the detailled project page
+     * Callback to switch the user's view to the detailed project page
      * @param project {{slug:string}} The project to display
      */
     $scope.showProject = function (project) {
@@ -402,17 +412,25 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
     const updateUrlParam = function (name, value) {
       $state.current.reloadOnSearch = false;
       $location.search(name, value);
-      return $timeout(function () { $state.current.reloadOnSearch = undefined; });
+      $timeout(function () { $state.current.reloadOnSearch = undefined; });
     };
 
+    /**
+     * Callback triggered when the next projects were loaded from the result set (from the instance DB)
+     * @param projectsPromise {{projects: []}}
+     */
     const loadMoreCallback = function (projectsPromise) {
       $scope.projects = $scope.projects.concat(projectsPromise.projects);
-      return updateUrlParam('page', $scope.projectsPagination.currentPage);
+      updateUrlParam('page', $scope.projectsPagination.currentPage);
     };
 
+    /**
+     * Callback triggered when the next projects were loaded from the result set (from OpenLab)
+     * @param projectsPromise {{projects: []}}
+     */
     const loadMoreOpenlabCallback = function (projectsPromise) {
       $scope.projects = $scope.projects.concat(normalizeProjectsAttrs(projectsPromise.projects));
-      return updateUrlParam('page', $scope.projectsPagination.currentPage);
+      updateUrlParam('page', $scope.projectsPagination.currentPage);
     };
 
     const normalizeProjectsAttrs = function (projects) {

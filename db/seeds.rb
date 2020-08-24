@@ -861,6 +861,8 @@ Setting.set('email_from', 'noreply@fab-manager.com') unless Setting.find_by(name
 
 Setting.set('online_payment_module', false) unless Setting.find_by(name: 'online_payment_module').try(:value)
 
+Setting.set('openlab_default', true) unless Setting.find_by(name: 'openlab_default').try(:value)
+
 unless Setting.find_by(name: 'allowed_cad_extensions').try(:value)
   Setting.set(
     'allowed_cad_extensions',

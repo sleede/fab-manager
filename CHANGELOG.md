@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: unable to search for projects on OpenLab
+
 ## v4.5.4 2020 July 29
 
 - Display an asterisk on the phone input field, in the admin creation form, if the phone is configured as required
