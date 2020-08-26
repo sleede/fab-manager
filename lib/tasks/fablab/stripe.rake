@@ -25,7 +25,7 @@ namespace :fablab do
         end
       end
       Invoice.where('created_at > ? AND stp_invoice_id IS NOT NULL', date).each do |invoice|
-        stp_invoice = Stripe::Invoice.retrieve(invoice.stp_invoice_id)
+        stp_invoice = Stripe::Invoice.retrieve(invoice.stp_invoice_id, api_key: Setting.get('stripe_secret_key'))
         next if invoice.amount_paid == stp_invoice.total
 
         puts "Id: #{invoice.id}, reference: #{invoice.reference}, stripe id: #{stp_invoice.id}, " \

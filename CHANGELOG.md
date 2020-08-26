@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: unable to run task find_incoherent_invoices
+
 ## v4.5.5 2020 August 26
 
 - Improved portuguese translations
