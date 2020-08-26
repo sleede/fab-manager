@@ -1,5 +1,11 @@
 # Changelog Fab-manager
 
+## v4.5.5 2020 August 26
+
+- Improved portuguese translations
+- Fix a bug: unable to search for projects on OpenLab
+- Fix a bug: erroneous translations in english (#226)
+
 ## v4.5.4 2020 July 29
 
 - Display an asterisk on the phone input field, in the admin creation form, if the phone is configured as required
