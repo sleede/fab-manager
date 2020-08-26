@@ -1418,7 +1418,7 @@ fr:
             content: "Personnalisez entièrement cette page pour présenter votre activité."
           privacy:
             title: "Politique de confidentialité"
-            content: "<p>Explain here how you use the data you collect about your members.</p><p>GDPR requires that a confidentiality policy is defined, as well as a data protection officer.</p>"
+            content: "<p>Expliquez ici la façon dont vous utilisez les données que vous recueillez sur vos membres.</p><p>La RGPD impose qu'une politique de confidentialité soit définie, ainsi qu'un délégué à la protection des données.</p>"
           draft:
             title: "Brouillon"
             content: "Cliquez ici pour afficher un brouillon à trous d'une politique de confidentialité, qu'il ne vous reste plus qu'à relire et à compléter."
