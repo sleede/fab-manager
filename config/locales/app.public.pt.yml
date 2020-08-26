@@ -371,7 +371,7 @@ pt:
             content: "<p>This page will allow you to consult the list of all machines and reserve a slot on behalf of a member.</p><p>A machine can be, for example, a 3D printer.</p><p>Members can also access this page and reserve a machine themselves, if credit card payment is enabled, or if some prices are equal to 0.</p>"
           trainings:
             title: "Trainings"
-            content: "<p>This page will allow you to consult the list of all training sessions and to register a member for a training session.</p><p>Certaines formations peuvent être un préalable à la réservation de certaines machines.</p><p>Members can also access this page and register for a training session themselves, if credit card payment is enabled, or if some prices are equal to 0.</p>"
+            content: "<p>This page will allow you to consult the list of all training sessions and to register a member for a training session.</p><p>Trainings can be set as prerequisites before allowing reservation of certain machines.</p><p>Members can also access this page and register for a training session themselves, if credit card payment is enabled, or if some prices are equal to 0.</p>"
           spaces:
             title: "Spaces"
             content: "<p>This page will allow you to consult the list of all available spaces and to reserve a place on a slot, on behalf of a member.</p><p>A space can be, for example, a woodshop or a meeting room.</p><p>Their particularity is that they can be booked by several people at the same time.</p><p>Members can also access this page and reserve a machine themselves, if credit card payment is enabled, or if some prices are equal to 0.</p>"
