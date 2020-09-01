@@ -550,7 +550,7 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           eventPromise: ['Event', '$stateParams', function (Event, $stateParams) { return Event.get({ id: $stateParams.id }).$promise; }],
           priceCategoriesPromise: ['PriceCategory', function (PriceCategory) { return PriceCategory.query().$promise; }],
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['booking_move_enable', 'booking_move_delay', 'booking_cancel_enable', 'booking_cancel_delay', 'event_explications_alert']" }).$promise; }]
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['booking_move_enable', 'booking_move_delay', 'booking_cancel_enable', 'booking_cancel_delay', 'event_explications_alert', 'online_payment_module']" }).$promise; }]
         }
       })
 
