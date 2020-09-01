@@ -20,3 +20,9 @@ Sidekiq.configure_client do |config|
 end
 
 Sidekiq::Extensions.enable_delay!
+
+# Quieting logging in the test environment
+if Rails.env.test?
+  require 'sidekiq/testing'
+  Sidekiq.logger.level = Logger::ERROR
+end

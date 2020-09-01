@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: unable to run tests suite with run-tests.sh
+
 ## v4.5.6 2020 September 1st
 
 - Fix a bug: unable to pay by card for events reservation
