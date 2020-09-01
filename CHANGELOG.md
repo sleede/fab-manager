@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v4.5.6 2020 September 1st
+
 - Fix a bug: unable to pay by card for events reservation
 - Fix a bug: unable to run task find_incoherent_invoices
 
