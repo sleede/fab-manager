@@ -23,9 +23,11 @@
     "eslint-plugin-lint-erb": "https://github.com/sleede/eslint-plugin-lint-erb",
     "eslint-plugin-node": "~11.0.0",
     "eslint-plugin-promise": "~4.2.1",
-    "eslint-plugin-standard": "~4.0.1"
+    "eslint-plugin-standard": "~4.0.1",
+    "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "@rails/webpacker": "5.2.1",
     "@uirouter/angularjs": "0.4",
     "AngularDevise": "https://github.com/cloudspace/angular_devise.git#1.0.2",
     "angular": "1.8",

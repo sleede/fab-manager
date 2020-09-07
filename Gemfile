@@ -15,6 +15,7 @@ gem 'bootsnap'
 gem 'puma', '3.12.6'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0', '>= 5.0.6'
+gem 'webpacker', '~> 5.x'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 4.1.20'
@@ -24,7 +25,7 @@ gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 gem 'jbuilder_cache_multi'
-gem "json", ">= 2.3.0"
+gem 'json', '>= 2.3.0'
 
 gem 'forgery'
 gem 'responders', '~> 2.0'
