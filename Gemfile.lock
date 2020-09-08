@@ -117,7 +117,7 @@ GEM
       sprockets (< 4.0)
     concurrent-ruby (1.1.6)
     connection_pool (2.2.3)
-    coveralls_reborn (0.17.0)
+    coveralls_reborn (0.18.0)
       simplecov (>= 0.18.1, < 0.20.0)
       term-ansicolor (~> 1.6)
       thor (>= 0.20.3, < 2.0)
@@ -470,7 +470,7 @@ DEPENDENCIES
   chroma
   compass-core!
   compass-rails (= 3.1.0)
-  coveralls_reborn (~> 0.17.0)
+  coveralls_reborn (~> 0.18.0)
   database_cleaner
   devise (>= 4.6.0)
   dotenv-rails
