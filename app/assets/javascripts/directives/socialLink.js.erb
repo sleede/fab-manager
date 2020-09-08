@@ -19,10 +19,10 @@ Application.Directives.directive('socialLink', [ function () {
     templateUrl: '<%= asset_path "shared/_social_link.html" %>',
     link (scope, element, attributes) {
       if (scope.network === 'dailymotion') {
-        scope.image = "<%= asset_path('social/dailymotion.png') %>";
+        scope.image = "<%= asset_pack_path('social/dailymotion.png') %>";
         return scope.altText = 'd';
       } else if (scope.network === 'echosciences') {
-        scope.image = "<%= asset_path('social/echosciences.png') %>";
+        scope.image = "<%= asset_pack_path('social/echosciences.png') %>";
         return scope.altText = 'E)';
       } else {
         if (scope.network === 'website') {
