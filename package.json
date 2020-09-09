@@ -61,7 +61,7 @@
     "angular-ui-tour": "https://github.com/Ross-Byrne/angular-ui-tour.git#master",
     "angular-unsavedchanges": "0.2",
     "angular-xeditable": "0.10",
-    "bootstrap": "3.4.1",
+    "bootstrap-sass": "3.4.1",
     "bootstrap-switch": "3.3.2",
     "checklist-model": "0.2",
     "codemirror": "^4.8.0",

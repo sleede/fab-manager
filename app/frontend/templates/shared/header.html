@@ -3,7 +3,7 @@
     <a ng-click="toggleNavSize($event)" class="btn btn-link visible-xs" data-toggle="class:nav-off-screen" data-target="#nav"><i class="fa fa-bars"></i></a>
     <a ui-sref="app.public.home" class="navbar-brand" ng-click="goabout = false">
       <img ng-src="{{logo.custom_asset_file_attributes.attachment_url}}" alt="{{logo.custom_asset_file_attributes.attachment}}" class="m-r-sm"/>
-      <%= raw "<label class='label-staging label label-warning text-sm hidden-sm hidden-xs'>Staging</label>" if Rails.env.staging? %></a>
+    </a>
   </div>
 
   <ul class="nav navbar-nav hidden-xs">

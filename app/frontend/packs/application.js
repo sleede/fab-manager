@@ -3,7 +3,7 @@ import 'regenerator-runtime/runtime';
 
 import 'jquery';
 import 'jquery_ujs';
-import 'bootstrap';
+import 'bootstrap-sass';
 import 'polyfill';
 import 'angular';
 import 'angular-cookies';
@@ -70,11 +70,12 @@ import 'angular-ui-tour/dist/angular-ui-tour';
 
 import '../src/javascript/app.js';
 import '../src/javascript/router.js.erb';
-import '../src/javascript/controllers/*';
-import '../src/javascript/services/*';
-import '../src/javascript/directives/*';
-import '../src/javascript/filters/*';
 import '../src/javascript/plugins.js.erb';
+
+require.context('../src/javascript/controllers/', true, /.*/);
+require.context('../src/javascript/services/', true, /.*/);
+require.context('../src/javascript/directives/', true, /.*/);
+require.context('../src/javascript/filters/', true, /.*/);
 
 require.context('../images', true);
 require.context('../templates', true);
