@@ -10,7 +10,7 @@
       <div class="form-group m-t-lg">
           <div class="fileinput text-center" data-provides="fileinput" ng-class="fileinputClass(user.profile.user_avatar.attachment_url)">
             <div class="fileinput-new thumbnail rounded thumb-128-wrapper" style="width: 140px; height: 140px;">
-              <img src="<%= image_pack_path("no_avatar.png") %>" class="img-circle">
+              <img src="no_avatar.png" class="img-circle">
             </div>
             <div class="fileinput-preview fileinput-exists thumbnail rounded thumb-128-wrapper" data-trigger="fileinput" style="width: 140px; height: 140px; line-height: 140px;">
               <img ng-src="{{ user.profile.user_avatar.attachment_url }}" />
@@ -453,7 +453,7 @@
 
         <div class="form-group" ng-show="social.dailymotion || user.profile.dailymotion" ng-class="{'has-error': userForm['user[profile_attributes][dailymotion]'].$dirty && userForm['user[profile_attributes][dailymotion]'].$invalid}">
           <div class="input-group">
-            <span class="input-group-addon help-cursor" title="{{ 'app.shared.user.used_for_profile' | translate }}"><img src="<%= asset_pack_path('social/dailymotion.png') %>" alt="d" class="fa-img"/></span>
+            <span class="input-group-addon help-cursor" title="{{ 'app.shared.user.used_for_profile' | translate }}"><img src="social/dailymotion.png" alt="d" class="fa-img"/></span>
             <input type="text"
                    name="user[profile_attributes][dailymotion]"
                    ng-model="user.profile.dailymotion"
@@ -484,7 +484,7 @@
 
         <div class="form-group" ng-show="social.echosciences || user.profile.echosciences" ng-class="{'has-error': userForm['user[profile_attributes][echosciences]'].$dirty && userForm['user[profile_attributes][echosciences]'].$invalid}">
           <div class="input-group">
-            <span class="input-group-addon help-cursor" title="{{ 'app.shared.user.used_for_profile' | translate }}"><img src="<%= asset_pack_path('social/echosciences.png') %>" alt="d" class="fa-img"/></span>
+            <span class="input-group-addon help-cursor" title="{{ 'app.shared.user.used_for_profile' | translate }}"><img src="social/echosciences.png" alt="d" class="fa-img"/></span>
             <input type="text"
                    name="user[profile_attributes][echosciences]"
                    ng-model="user.profile.echosciences"
@@ -551,9 +551,9 @@
           <div ng-click="social.instagram = !social.instagram" ng-hide="social.instagram || user.profile.instagram"><i class="fa fa-instagram fa-2x"></i></div>
           <div ng-click="social.youtube = !social.youtube" ng-hide="social.youtube || user.profile.youtube"><i class="fa fa-youtube fa-2x"></i></div>
           <div ng-click="social.vimeo = !social.vimeo" ng-hide="social.vimeo || user.profile.vimeo"><i class="fa fa-vimeo fa-2x"></i></div>
-          <div ng-click="social.dailymotion = !social.dailymotion" ng-hide="social.dailymotion || user.profile.dailymotion"><img src="<%= asset_pack_path('social/dailymotion.png') %>" alt="d" class="fa-img contrast-250 fa-2x"/></div>
+          <div ng-click="social.dailymotion = !social.dailymotion" ng-hide="social.dailymotion || user.profile.dailymotion"><img src="social/dailymotion.png" alt="d" class="fa-img contrast-250 fa-2x"/></div>
           <div ng-click="social.github = !social.github" ng-hide="social.github || user.profile.github"><i class="fa fa-github fa-2x"></i></div>
-          <div ng-click="social.echosciences = !social.echosciences" ng-hide="social.echosciences || user.profile.echosciences"><img src="<%= asset_pack_path('social/echosciences.png') %>" alt="E" class="fa-img contrast-250 fa-2x"/></div>
+          <div ng-click="social.echosciences = !social.echosciences" ng-hide="social.echosciences || user.profile.echosciences"><img src="social/echosciences.png" alt="E" class="fa-img contrast-250 fa-2x"/></div>
           <div ng-click="social.pinterest = !social.pinterest" ng-hide="social.pinterest || user.profile.pinterest"><i class="fa fa-pinterest fa-2x"></i></div>
           <div ng-click="social.lastfm = !social.lastfm" ng-hide="social.lastfm || user.profile.lastfm"><i class="fa fa-lastfm fa-2x"></i></div>
           <div ng-click="social.flickr = !social.flickr" ng-hide="social.flickr || user.profile.flickr"><i class="fa fa-flickr fa-2x"></i></div>

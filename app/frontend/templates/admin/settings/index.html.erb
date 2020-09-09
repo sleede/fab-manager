@@ -17,7 +17,7 @@
 <section class="m-lg admin-settings"
          ui-tour="settings"
          ui-tour-backdrop="true"
-         ui-tour-template-url="'<%= asset_pack_path "shared/tour-step-template.html" %>'"
+         ui-tour-template-url="'shared/tour-step-template.html'"
          ui-tour-use-hotkeys="true"
          ui-tour-scroll-parent-id="content-main"
          post-render="setupSettingsTour">
@@ -27,23 +27,23 @@
       <uib-tabset justified="true" active="tabs.active">
 
         <uib-tab heading="{{ 'app.admin.settings.general.general' | translate }}" index="0" class="general-page-tab">
-          <ng-include src="'<%= asset_pack_path "admin/settings/general.html" %>'"></ng-include>
+          <ng-include src="'admin/settings/general.html'"></ng-include>
         </uib-tab>
 
         <uib-tab heading="{{ 'app.admin.settings.home_page' | translate }}" index="1">
-          <ng-include src="'<%= asset_pack_path "admin/settings/home_page.html" %>'"></ng-include>
+          <ng-include src="'admin/settings/home_page.html'"></ng-include>
         </uib-tab>
 
         <uib-tab heading="{{ 'app.admin.settings.about' | translate }}" index="2" class="about-page-tab">
-          <ng-include src="'<%= asset_pack_path "admin/settings/about.html" %>'"></ng-include>
+          <ng-include src="'admin/settings/about.html'"></ng-include>
         </uib-tab>
 
         <uib-tab heading="{{ 'app.admin.settings.privacy.title' | translate }}" index="3" class="privacy-page-tab">
-          <ng-include src="'<%= asset_pack_path "admin/settings/privacy.html" %>'"></ng-include>
+          <ng-include src="'admin/settings/privacy.html'"></ng-include>
         </uib-tab>
 
         <uib-tab heading="{{ 'app.admin.settings.reservations' | translate }}" index="4" class="reservations-page-tab">
-          <ng-include src="'<%= asset_pack_path "admin/settings/reservations.html" %>'"></ng-include>
+          <ng-include src="'admin/settings/reservations.html'"></ng-include>
         </uib-tab>
       </uib-tabset>
     </div>

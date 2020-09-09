@@ -23,7 +23,7 @@
 <section class="m-lg invoices-management"
          ui-tour="invoices"
          ui-tour-backdrop="true"
-         ui-tour-template-url="'<%= asset_pack_path "shared/tour-step-template.html" %>'"
+         ui-tour-template-url="'shared/tour-step-template.html'"
          ui-tour-use-hotkeys="true"
          ui-tour-scroll-parent-id="content-main"
          post-render="setupInvoicesTour">
@@ -31,25 +31,25 @@
     <div class="col-md-12" ng-if="isAuthorized('admin')">
       <uib-tabset justified="true" active="tabs.active">
         <uib-tab heading="{{ 'app.admin.invoices.invoices_list' | translate }}" ng-show="modules.invoicing" index="0">
-          <ng-include src="'<%= asset_pack_path "admin/invoices/list.html" %>'"></ng-include>
+          <ng-include src="'admin/invoices/list.html'"></ng-include>
 	      </uib-tab>
 
         <uib-tab heading="{{ 'app.admin.invoices.invoicing_settings' | translate }}" index="1" class="invoices-settings">
-          <ng-include src="'<%= asset_pack_path "admin/invoices/settings.html" %>'"></ng-include>
+          <ng-include src="'admin/invoices/settings.html'"></ng-include>
         </uib-tab>
 
         <uib-tab heading="{{ 'app.admin.invoices.accounting_codes' | translate }}" index="2" class="accounting-codes-tab">
-          <ng-include src="'<%= asset_pack_path "admin/invoices/codes.html" %>'"></ng-include>
+          <ng-include src="'admin/invoices/codes.html'"></ng-include>
         </uib-tab>
 
         <uib-tab heading="{{ 'app.admin.invoices.payment.payment_settings' | translate }}" index="3" class="payment-settings">
-          <ng-include src="'<%= asset_pack_path "admin/invoices/payment.html" %>'"></ng-include>
+          <ng-include src="'admin/invoices/payment.html'"></ng-include>
         </uib-tab>
 	    </uib-tabset>
 	  </div>
 
     <div class="col-md-12" ng-if="isAuthorized('manager')">
-      <ng-include src="'<%= asset_pack_path "admin/invoices/list.html" %>'"></ng-include>
+      <ng-include src="'admin/invoices/list.html'"></ng-include>
     </div>
   </div>
 </section>

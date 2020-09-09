@@ -26,7 +26,7 @@
         <div id="planForm">
             <form name="planForm" novalidate="novalidate" class="col-lg-7 col-lg-offset-2 m-t-lg form-group" action="{{ actionUrl }}" ng-upload="afterSubmit(content)" upload-options-enable-rails-csrf="true">
 
-              <ng-include src="'<%= asset_pack_path "admin/plans/_form.html" %>'"></ng-include>
+              <ng-include src="'admin/plans/_form.html'"></ng-include>
 
               <div class="input-group m-t-md">
                 <label for="plan[disabled]" class="control-label m-r-md">{{ 'app.shared.plan.disabled' | translate }}</label>

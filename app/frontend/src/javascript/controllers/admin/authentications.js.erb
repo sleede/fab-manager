@@ -87,7 +87,7 @@ class AuthenticationController {
      */
     $scope.defineDataMapping = function (mapping) {
       $uibModal.open({
-        templateUrl: '<%= asset_pack_path "admin/authentications/_data_mapping.html" %>',
+        templateUrl: 'admin/authentications/_data_mapping.html',
         size: 'md',
         resolve: {
           field () { return mapping; },

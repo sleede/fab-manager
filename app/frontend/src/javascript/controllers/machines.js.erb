@@ -121,7 +121,7 @@ const _reserveMachine = function (machine, e) {
         // the training before he can book the reservation
         if (machine.current_user_training_reservation) {
           return _this.$uibModal.open({
-            templateUrl: '<%= asset_pack_path "machines/training_reservation_modal.html" %>',
+            templateUrl: 'machines/training_reservation_modal.html',
             controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
               $scope.machine = machine;
               return $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
@@ -136,7 +136,7 @@ const _reserveMachine = function (machine, e) {
           // otherwise open the information modal
           } else {
             return _this.$uibModal.open({
-              templateUrl: '<%= asset_pack_path "machines/request_training_modal.html" %>',
+              templateUrl: 'machines/request_training_modal.html',
               controller: ['$scope', '$uibModalInstance', '$state', function ($scope, $uibModalInstance, $state) {
                 $scope.machine = machine;
                 $scope.member = _this.$scope.currentUser;

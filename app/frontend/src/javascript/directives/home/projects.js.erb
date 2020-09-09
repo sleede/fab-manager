@@ -2,7 +2,7 @@ Application.Directives.directive('projects', [ 'Project',
   function (Project) {
     return ({
       restrict: 'E',
-      templateUrl: '<%= asset_pack_path "home/projects.html" %>',
+      templateUrl: 'home/projects.html',
       link ($scope, element, attributes) {
         // The last projects published/documented on the platform
         $scope.lastProjects = null;

@@ -36,9 +36,9 @@
             </div>
             <div class="row col-md-2 col-md-offset-5 hidden-sm hidden-xs" ng-hide="user.merged_at">
               <p class="font-felt fleche-left text-lg upper text-center">
-                <%= image_pack_tag("arrow-left.png", class: 'fleche-left visible-lg visible-md fleche-left-from-top') %>
+                <img src="arrow-left.png" class="fleche-left visible-lg visible-md fleche-left-from-top" />
                 <span class="or" translate>{{ 'app.logged.profile_completion.or' }}</span>
-                <%= image_pack_tag("arrow-left.png", class: 'fleche-right visible-lg visible-md fleche-right-from-top') %>
+                <img src="arrow-left.png" class="fleche-right visible-lg visible-md fleche-right-from-top" />
               </p>
             </div>
             <div class="row">
@@ -63,7 +63,7 @@
 
                                     <div class="panel-body m-r">
                                         <!-- common fields -->
-                                        <ng-include src="'<%= asset_pack_path "shared/_member_form.html" %>'"></ng-include>
+                                        <ng-include src="'shared/_member_form.html'"></ng-include>
 
                                         <div class="row">
                                             <div class="col-sm-3 col-sm-offset-1"></div>
@@ -151,7 +151,7 @@
                 </p>
               </div>
                 <div class="col-md-6 m-t-3xl-on-md" ng-hide="user.merged_at">
-                    <ng-include src="'<%= asset_pack_path "profile/_token.html" %>'"></ng-include>
+                    <ng-include src="'profile/_token.html'"></ng-include>
                 </div>
             </div>
         </div>

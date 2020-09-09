@@ -65,7 +65,7 @@
           <td>{{period.start_at | amDateFormat:'L'}}</td>
           <td>{{period.end_at | amDateFormat:'L'}}</td>
           <td class="actions">
-            <span class="show-more" uib-popover-template="'<%= asset_pack_path 'admin/invoices/_period.html' %>'"><i class="fa fa-info-circle"></i></span>
+            <span class="show-more" uib-popover-template="'admin/invoices/_period.html'"><i class="fa fa-info-circle"></i></span>
             <span class="download-archive" ng-click="downloadArchive(period)" ng-show="period.archive_ready"><i class="fa fa-archive"></i></span>
             <span class="no-pointer" ng-hide="period.archive_ready"><i class="fa fa-spinner fa-pulse"></i></span>
           </td>

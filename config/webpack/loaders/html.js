@@ -1,13 +1,4 @@
 module.exports = {
-  test: /\.html(\.erb)?$/,
-  use: [{
-    loader: 'html-loader',
-    options: {
-      minimize: true,
-      removeAttributeQuotes: false,
-      caseSensitive: true,
-      customAttrSurround: [[/#/, /(?:)/], [/\*/, /(?:)/], [/\[?\(?/, /(?:)/]],
-      customAttrAssign: [/\)?\]?=/]
-    }
-  }]
+  test: /\.html$/i,
+  loader: 'html-loader'
 };

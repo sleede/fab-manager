@@ -22,7 +22,7 @@
 <section class="m-lg projects"
          ui-tour="projects"
          ui-tour-backdrop="true"
-         ui-tour-template-url="'<%= asset_pack_path "shared/tour-step-template.html" %>'"
+         ui-tour-template-url="'shared/tour-step-template.html'"
          ui-tour-use-hotkeys="true"
          ui-tour-scroll-parent-id="content-main"
          post-render="setupProjectElementsTour">
@@ -31,16 +31,16 @@
     <div class="col-md-12">
       <uib-tabset justified="true" active="tabs.active">
         <uib-tab heading="{{ 'app.admin.projects.materials' | translate }}" index="0">
-          <ng-include src="'<%= asset_pack_path "admin/projects/materials.html" %>'"></ng-include>
+          <ng-include src="'admin/projects/materials.html'"></ng-include>
         </uib-tab>
         <uib-tab heading="{{ 'app.admin.projects.themes' | translate }}" index="1">
-          <ng-include src="'<%= asset_pack_path "admin/projects/themes.html" %>'"></ng-include>
+          <ng-include src="'admin/projects/themes.html'"></ng-include>
         </uib-tab>
         <uib-tab heading="{{ 'app.admin.projects.licences' | translate }}" index="2">
-          <ng-include src="'<%= asset_pack_path "admin/projects/licences.html" %>'"></ng-include>
+          <ng-include src="'admin/projects/licences.html'"></ng-include>
         </uib-tab>
         <uib-tab heading="{{ 'app.admin.projects.settings.title' | translate }}" index="3" class="settings-tab">
-          <ng-include src="'<%= asset_pack_path "admin/projects/settings.html" %>'"></ng-include>
+          <ng-include src="'admin/projects/settings.html'"></ng-include>
         </uib-tab>
       </uib-tabset>
     </div>

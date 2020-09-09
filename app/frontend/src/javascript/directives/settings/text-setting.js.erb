@@ -15,7 +15,7 @@ Application.Directives.directive('textSetting', ['Setting', 'growl', '_t',
         minLength: '@',
         readOnly: '<'
       },
-      templateUrl: '<%= asset_pack_path "admin/settings/text.html" %>',
+      templateUrl: 'admin/settings/text.html',
       link ($scope, element, attributes) {
         // if type is not specified, use text as default
         if (typeof $scope.type === 'undefined') {

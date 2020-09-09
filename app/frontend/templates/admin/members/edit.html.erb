@@ -46,9 +46,9 @@
 
             <section class="panel panel-default bg-light m-lg">
               <div class="panel-body m-r">
-                <ng-include src="'<%= asset_pack_path "shared/_member_form.html" %>'"></ng-include>
+                <ng-include src="'shared/_member_form.html'"></ng-include>
 
-                <ng-include src="'<%= asset_pack_path "admin/members/_form.html" %>'"></ng-include>
+                <ng-include src="'admin/members/_form.html'"></ng-include>
 
               </div>   <!-- ./panel-body  -->
 
@@ -231,7 +231,7 @@
 
         <uib-tab heading="{{ 'app.admin.members_edit.wallet' | translate }}" ng-show="modules.wallet">
           <div class="col-md-12 m m-t-lg">
-            <ng-include src="'<%= asset_pack_path "wallet/show.html" %>'"></ng-include>
+            <ng-include src="'wallet/show.html'"></ng-include>
 
             <div class="clearfix"></div>
             <div class="col-sm-4 text-center" ng-hide="user.id === currentUser.id">
@@ -244,7 +244,7 @@
           </div>
 
           <div class="col-md-12 m m-t-lg">
-            <ng-include src="'<%= asset_pack_path "wallet/transactions.html" %>'"></ng-include>
+            <ng-include src="'wallet/transactions.html'"></ng-include>
           </div>
         </uib-tab>
       </uib-tabset>

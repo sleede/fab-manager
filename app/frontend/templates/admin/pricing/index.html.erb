@@ -18,7 +18,7 @@
 <section class="m-lg plans-pricing"
          ui-tour="pricing"
          ui-tour-backdrop="true"
-         ui-tour-template-url="'<%= asset_pack_path "shared/tour-step-template.html" %>'"
+         ui-tour-template-url="'shared/tour-step-template.html'"
          ui-tour-use-hotkeys="true"
          ui-tour-scroll-parent-id="content-main"
          post-render="setupPricingTour">
@@ -28,27 +28,27 @@
       <uib-tabset justified="true" active="tabs.active">
 
         <uib-tab heading="{{ 'app.admin.pricing.subscriptions' | translate }}" index="0">
-          <ng-include src="'<%= asset_pack_path "admin/pricing/subscriptions.html" %>'"></ng-include>
+          <ng-include src="'admin/pricing/subscriptions.html'"></ng-include>
         </uib-tab>
 
         <uib-tab heading="{{ 'app.admin.pricing.trainings' | translate }}" index="1" class="trainings-tab">
-          <ng-include src="'<%= asset_pack_path "admin/pricing/trainings.html" %>'"></ng-include>
+          <ng-include src="'admin/pricing/trainings.html'"></ng-include>
         </uib-tab>
 
         <uib-tab heading="{{ 'app.admin.pricing.machine_hours' | translate }}" index="2" class="machines-tab">
-          <ng-include src="'<%= asset_pack_path "admin/pricing/machine_hours.html" %>'"></ng-include>
+          <ng-include src="'admin/pricing/machine_hours.html'"></ng-include>
         </uib-tab>
 
         <uib-tab heading="{{ 'app.admin.pricing.spaces' | translate }}" ng-show="modules.spaces" index="3" class="spaces-tab">
-          <ng-include src="'<%= asset_pack_path "admin/pricing/spaces.html" %>'"></ng-include>
+          <ng-include src="'admin/pricing/spaces.html'"></ng-include>
         </uib-tab>
 
         <uib-tab heading="{{ 'app.admin.pricing.credits' | translate }}" index="4" class="credits-tab">
-          <ng-include src="'<%= asset_pack_path "admin/pricing/credits.html" %>'"></ng-include>
+          <ng-include src="'admin/pricing/credits.html'"></ng-include>
         </uib-tab>
 
         <uib-tab heading="{{ 'app.admin.pricing.coupons' | translate }}" index="5" class="coupons-tab">
-          <ng-include src="'<%= asset_pack_path "admin/pricing/coupons.html" %>'"></ng-include>
+          <ng-include src="'admin/pricing/coupons.html'"></ng-include>
         </uib-tab>
       </uib-tabset>
     </div>

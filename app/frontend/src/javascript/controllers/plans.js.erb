@@ -235,7 +235,7 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
      */
     const payByStripe = function () {
       $uibModal.open({
-        templateUrl: '<%= asset_pack_path "stripe/payment_modal.html" %>',
+        templateUrl: 'stripe/payment_modal.html',
         size: 'md',
         resolve: {
           selectedPlan () { return $scope.selectedPlan; },
@@ -299,7 +299,7 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
      */
     const payOnSite = function () {
       $uibModal.open({
-        templateUrl: '<%= asset_pack_path "plans/payment_modal.html" %>',
+        templateUrl: 'plans/payment_modal.html',
         size: 'sm',
         resolve: {
           selectedPlan () { return $scope.selectedPlan; },

@@ -570,7 +570,7 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
      */
     $scope.sendCouponToUser = function (coupon) {
       $uibModal.open({
-        templateUrl: '<%= asset_pack_path "admin/pricing/sendCoupon.html" %>',
+        templateUrl: 'admin/pricing/sendCoupon.html',
         resolve: {
           coupon () { return coupon; }
         },

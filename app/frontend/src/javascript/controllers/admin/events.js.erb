@@ -279,7 +279,7 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
      */
     $scope.newPriceCategory = function () {
       $uibModal.open({
-        templateUrl: '<%= asset_pack_path "admin/events/price_form.html" %>',
+        templateUrl: 'admin/events/price_form.html',
         size: 'md',
         resolve: {
           category () { return {}; }
@@ -307,7 +307,7 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
         return growl.error(_t('app.admin.events.unexpected_error_occurred_please_refresh'));
       } else {
         return $uibModal.open({
-          templateUrl: '<%= asset_pack_path "admin/events/price_form.html" %>',
+          templateUrl: 'admin/events/price_form.html',
           size: 'md',
           resolve: {
             category () { return $scope.priceCategories[index]; }
@@ -645,7 +645,7 @@ Application.Controllers.controller('EditEventController', ['$scope', '$state', '
         // open a choice edit-mode dialog
         const modalInstance = $uibModal.open({
           animation: true,
-          templateUrl: '<%= asset_pack_path "events/editRecurrent.html" %>',
+          templateUrl: 'events/editRecurrent.html',
           size: 'md',
           controller: 'EditRecurrentEventController',
           resolve: {
