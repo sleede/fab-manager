@@ -54,8 +54,8 @@
       Fablab.sessionTours = [];
   </script>
 
-  <%= stylesheet_pack_tag 'application', media: 'all' %>
-  <%= stylesheet_pack_tag 'printer', media: 'print' %>
+  <%= stylesheet_packs_with_chunks_tag 'application', media: 'all' %>
+  <%= stylesheet_packs_with_chunks_tag 'printer', media: 'print' %>
   <% unless Stylesheet.theme.nil? %>
   <link rel="stylesheet" media="all" href="<%= stylesheet_path(Stylesheet.theme.id) %>-<%= Stylesheet.theme.updated_at.to_i.to_s %>.css" />
   <%  end %>
@@ -120,7 +120,7 @@
     <span class="text-sm">Powered by <a href="http://www.fab-manager.com" target="_blank">Fab-manager</a></span>
   </div>
 
-<%= javascript_pack_tag 'application' %>
+<%= javascript_packs_with_chunks_tag 'application' %>
 
 <!-- i18n of external libraries -->
 <script type="text/javascript" src="<%= asset_pack_path "angular-i18n/angular-locale_#{Rails.application.secrets.angular_locale}.js" %>"></script>

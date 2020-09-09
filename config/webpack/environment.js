@@ -5,4 +5,6 @@ environment.plugins.append('Provide', new webpack.ProvidePlugin({
   jQuery: 'jquery'
 }));
 
+environment.splitChunks();
+
 module.exports = environment;
