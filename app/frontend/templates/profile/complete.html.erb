@@ -63,7 +63,7 @@
 
                                     <div class="panel-body m-r">
                                         <!-- common fields -->
-                                        <ng-include src="'<%= asset_path "shared/_member_form.html" %>'"></ng-include>
+                                        <ng-include src="'<%= asset_pack_path "shared/_member_form.html" %>'"></ng-include>
 
                                         <div class="row">
                                             <div class="col-sm-3 col-sm-offset-1"></div>
@@ -151,7 +151,7 @@
                 </p>
               </div>
                 <div class="col-md-6 m-t-3xl-on-md" ng-hide="user.merged_at">
-                    <ng-include src="'<%= asset_path "profile/_token.html" %>'"></ng-include>
+                    <ng-include src="'<%= asset_pack_path "profile/_token.html" %>'"></ng-include>
                 </div>
             </div>
         </div>

@@ -68,14 +68,13 @@ import 'tether/dist/js/tether';
 import 'angular-bind-html-compile/angular-bind-html-compile';
 import 'angular-ui-tour/dist/angular-ui-tour';
 
-import '../src/app.js';
-import '../src/router.js.erb';
-import '../src/controllers/*';
-import '../src/services/*';
-import '../src/directives/*';
-import '../src/filters/*';
+import '../src/javascript/app.js';
+import '../src/javascript/router.js.erb';
+import '../src/javascript/controllers/*';
+import '../src/javascript/services/*';
+import '../src/javascript/directives/*';
+import '../src/javascript/filters/*';
+import '../src/javascript/plugins.js.erb';
 
-import '../stylesheets/application.scss.erb';
-
-const images = require.context('../images', true);
-const imagePath = (name) => images(name, true);
+require.context('../images', true);
+require.context('../templates', true);

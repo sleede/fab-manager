@@ -11,7 +11,7 @@
 Application.Directives.directive('selectMember', [ 'Diacritics', 'Member', function (Diacritics, Member) {
   return ({
     restrict: 'E',
-    templateUrl: '<%= asset_path "shared/_member_select.html" %>',
+    templateUrl: '<%= asset_pack_path "shared/_member_select.html" %>',
     link (scope, element, attributes) {
       return scope.autoCompleteName = function (nameLookup) {
         if (!nameLookup) {

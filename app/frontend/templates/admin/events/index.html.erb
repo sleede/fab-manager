@@ -21,7 +21,7 @@
   <section class="m-lg events-management"
            ui-tour="events"
            ui-tour-backdrop="true"
-           ui-tour-template-url="'<%= asset_path "shared/tour-step-template.html" %>'"
+           ui-tour-template-url="'<%= asset_pack_path "shared/tour-step-template.html" %>'"
            ui-tour-use-hotkeys="true"
            ui-tour-scroll-parent-id="content-main"
            post-render="setupEventsTour">
@@ -29,20 +29,20 @@
       <div class="col-md-12" ng-if="isAuthorized('admin')">
         <uib-tabset justified="true" active="tabs.active">
           <uib-tab heading="{{ 'app.admin.events.events_monitoring' | translate }}" index="0">
-            <ng-include src="'<%= asset_path "admin/events/monitoring.html" %>'"></ng-include>
+            <ng-include src="'<%= asset_pack_path "admin/events/monitoring.html" %>'"></ng-include>
           </uib-tab>
 
           <uib-tab heading="{{ 'app.admin.events.manage_filters' | translate }}" index="1">
-            <ng-include src="'<%= asset_path "admin/events/filters.html" %>'"></ng-include>
+            <ng-include src="'<%= asset_pack_path "admin/events/filters.html" %>'"></ng-include>
           </uib-tab>
 
           <uib-tab heading="{{ 'app.admin.events.manage_prices_categories' | translate }}" index="2" class="prices-tab">
-            <ng-include src="'<%= asset_path "admin/events/prices.html" %>'"></ng-include>
+            <ng-include src="'<%= asset_pack_path "admin/events/prices.html" %>'"></ng-include>
           </uib-tab>
         </uib-tabset>
       </div>
       <div class="col-md-12" ng-if="isAuthorized('manager')">
-        <ng-include src="'<%= asset_path "admin/events/monitoring.html" %>'"></ng-include>
+        <ng-include src="'<%= asset_pack_path "admin/events/monitoring.html" %>'"></ng-include>
       </div>
     </div>
   </section>

@@ -11,7 +11,7 @@ Application.Directives.directive('booleanSetting', ['Setting', 'growl', '_t',
         classes: '@',
         onBeforeSave: '='
       },
-      templateUrl: '<%= asset_path "admin/settings/boolean.html" %>',
+      templateUrl: '<%= asset_pack_path "admin/settings/boolean.html" %>',
       link ($scope, element, attributes) {
         // The setting
         $scope.setting = {

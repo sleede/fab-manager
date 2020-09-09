@@ -89,7 +89,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
       <% else %>
 
       return $uibModal.open({
-        templateUrl: '<%= asset_path "shared/signupModal.html" %>',
+        templateUrl: '<%= asset_pack_path "shared/signupModal.html" %>',
         size: 'md',
         resolve: {
           settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['phone_required', 'recaptcha_site_key', 'confirmation_required']" }).$promise; }]
@@ -192,7 +192,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
      */
     $scope.editPassword = function (token) {
       $uibModal.open({
-        templateUrl: '<%= asset_path "shared/passwordEditModal.html" %>',
+        templateUrl: '<%= asset_pack_path "shared/passwordEditModal.html" %>',
         size: 'md',
         controller: ['$scope', '$uibModalInstance', '$http', function ($scope, $uibModalInstance, $http) {
           $scope.user = { reset_password_token: token };
@@ -282,7 +282,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
       if ($rootScope.currentUser.role !== 'admin') return;
 
       $uibModal.open({
-        templateUrl: '<%= asset_path "admin/versions/upgradeModal.html" %>',
+        templateUrl: '<%= asset_pack_path "admin/versions/upgradeModal.html" %>',
         controller: 'VersionModalController',
         resolve: {
           version() { return $scope.version; }
@@ -407,7 +407,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
       $window.location.href = '/sso-redirect';
       <% else %>
       return $uibModal.open({
-        templateUrl: '<%= asset_path "shared/deviseModal.html" %>',
+        templateUrl: '<%= asset_pack_path "shared/deviseModal.html" %>',
         size: 'sm',
         resolve: {
           settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['confirmation_required']" }).$promise; }]
@@ -470,7 +470,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
         } else if (reason === 'resetPassword') {
           // open the 'reset password' modal
           return $uibModal.open({
-            templateUrl: '<%= asset_path "shared/passwordNewModal.html" %>',
+            templateUrl: '<%= asset_pack_path "shared/passwordNewModal.html" %>',
             size: 'sm',
             controller: ['$scope', '$uibModalInstance', '$http', function ($scope, $uibModalInstance, $http) {
               $scope.user = { email: '' };
@@ -488,7 +488,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
         } else if (reason === 'confirmationNew') {
           // open the 'reset password' modal
           return $uibModal.open({
-            templateUrl: '<%= asset_path "shared/ConfirmationNewModal.html" %>',
+            templateUrl: '<%= asset_pack_path "shared/ConfirmationNewModal.html" %>',
             size: 'sm',
             controller: ['$scope', '$uibModalInstance', '$http', function ($scope, $uibModalInstance, $http) {
               $scope.user = { email: '' };

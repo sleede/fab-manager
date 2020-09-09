@@ -12,7 +12,7 @@ Application.Directives.directive('numberSetting', ['Setting', 'growl', '_t',
         min: '@',
         required: '<'
       },
-      templateUrl: '<%= asset_path "admin/settings/number.html" %>',
+      templateUrl: '<%= asset_pack_path "admin/settings/number.html" %>',
       link ($scope, element, attributes) {
         // The setting
         $scope.setting = {

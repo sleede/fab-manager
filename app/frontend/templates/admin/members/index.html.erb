@@ -24,7 +24,7 @@
 <section class="m-lg members-management"
          ui-tour="members"
          ui-tour-backdrop="true"
-         ui-tour-template-url="'<%= asset_path "shared/tour-step-template.html" %>'"
+         ui-tour-template-url="'<%= asset_pack_path "shared/tour-step-template.html" %>'"
          ui-tour-use-hotkeys="true"
          ui-tour-scroll-parent-id="content-main"
          post-render="setupMembersTour">
@@ -33,7 +33,7 @@
       <uib-tabset justified="true" active="tabs.active" ng-if="isAuthorized('admin')">
 
         <uib-tab heading="{{ 'app.admin.members.users' | translate }}" index="0">
-          <ng-include src="'<%= asset_path "admin/members/users.html" %>'"></ng-include>
+          <ng-include src="'<%= asset_pack_path "admin/members/users.html" %>'"></ng-include>
         </uib-tab>
 
         <uib-tab heading="{{ 'app.admin.members.groups' | translate }}" class="groups-tab" index="1">
@@ -50,7 +50,7 @@
       </uib-tabset>
 
       <div ng-if="isAuthorized('manager')">
-        <ng-include src="'<%= asset_path "admin/members/users.html" %>'"></ng-include>
+        <ng-include src="'<%= asset_pack_path "admin/members/users.html" %>'"></ng-include>
       </div>
     </div>
   </div>
