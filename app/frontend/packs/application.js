@@ -44,7 +44,7 @@ import 'angular-medium-editor/dist/angular-medium-editor';
 import 'bootstrap-switch/dist/js/bootstrap-switch.min';
 import 'angular-bootstrap-switch/dist/angular-bootstrap-switch.min';
 import 'angular-base64-upload/dist/angular-base64-upload.min';
-import 'summernote/dist/summernote';
+import 'summernote/src/js/summernote';
 import 'angular-summernote/dist/angular-summernote';
 import 'summernote-ext-nugget';
 import 'jquery-minicolors/jquery.minicolors.js';

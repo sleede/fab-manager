@@ -3,7 +3,15 @@
 require_relative 'boot'
 
 require 'csv'
-require 'rails/all'
+require 'active_record/railtie'
+require 'active_storage/engine'
+require 'action_controller/railtie'
+require 'action_view/railtie'
+require 'action_mailer/railtie'
+require 'active_job/railtie'
+# require 'action_cable/engine'
+require 'rails/test_unit/railtie' if Rails.env.test?
+# require 'sprockets/railtie'
 require 'elasticsearch/rails/instrumentation'
 require 'elasticsearch/persistence/model'
 
