@@ -10,8 +10,6 @@ gem 'bootsnap'
 gem 'puma', '3.12.6'
 gem 'webpacker', '~> 5.x'
 
-# Use jquery as the JavaScript library
-gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 gem 'jbuilder_cache_multi'

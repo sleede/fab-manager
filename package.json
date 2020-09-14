@@ -73,6 +73,7 @@
     "jasny-bootstrap": "3.1",
     "jquery": ">=3.5.0",
     "jquery-minicolors": "^2.1.10",
+    "jquery-ujs": "^1.2.2",
     "medium-editor": "4.4.0",
     "moment": "2.22",
     "moment-timezone": "0.5",
