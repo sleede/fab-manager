@@ -9,9 +9,10 @@
 @import '~medium-editor/dist/css/medium-editor';
 @import '~medium-editor/dist/css/themes/default';
 @import '~bootstrap-switch/dist/css/bootstrap3/bootstrap-switch';
-@import '~summernote/dist/summernote';
-@import '~jquery-minicolors/jquery.minicolors.css';
+@import '~summernote/src/less/elements';
+@import '~summernote/src/less/summernote';
+@import '~jquery-minicolors/jquery.minicolors';
 @import '~angular-aside/dist/css/angular-aside';
 @import '~codemirror/lib/codemirror';
 
-@import '../src/stylesheets/application.scss.erb';
+@import '../src/stylesheets/application.scss';

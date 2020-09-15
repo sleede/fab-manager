@@ -168,7 +168,7 @@ $headings-color: black !default;
 //## Specify custom location and filename of the included Glyphicons icon font. Useful for those including Bootstrap via Bower.
 
 //** Load fonts from this directory.
-$icon-font-path: "bootstrap/" !default;
+$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/" !default;
 
 //** File name for all font files.
 $icon-font-name: "glyphicons-halflings-regular" !default;
@@ -1032,7 +1032,36 @@ $hr-border: $gray-lighter !default;
 
 // Core variables and mixins
 // @import "bootstrap/variables";  //overrides
-@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins/_alerts";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins/_background-variant";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins/_border-radius";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins/_buttons";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins/_center-block";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins/_clearfix";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins/_forms";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins/_gradients";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins/_grid";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins/_grid-framework";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins/_hide-text";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins/_image";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins/_labels";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins/_list-group";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins/_nav-divider";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins/_nav-vertical-align";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins/_opacity";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins/_pagination";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins/_panels";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins/_progress-bar";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins/_reset-filter";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins/_reset-text";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins/_resize";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins/_responsive-visibility";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins/_size";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins/_tab-focus";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins/_table-row";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins/_text-emphasis";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins/_text-overflow";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins/_vendor-prefixes";
 
 // Reset and dependencies
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/normalize";

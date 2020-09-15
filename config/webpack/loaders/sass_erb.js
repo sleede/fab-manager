@@ -3,7 +3,6 @@ module.exports = {
   enforce: 'pre',
   exclude: /node_modules/,
   loader: [
-    'rails-erb-loader',
-    'sass-loader'
+    'rails-erb-loader'
   ]
 };
