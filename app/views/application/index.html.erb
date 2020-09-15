@@ -122,32 +122,6 @@
   </div>
 
 <%= javascript_packs_with_chunks_tag 'application' %>
-
-<!-- i18n of external libraries -->
-<script type="text/javascript" src="angular-i18n/angular-locale_#{Rails.application.secrets.angular_locale}.js"></script>
-<!-- if required locale does not exist, use the default "en" -->
-<% if asset_available?("moment/locale/#{Rails.application.secrets.moment_locale}.js") %>
-  <script type="text/javascript" src="moment/locale/#{Rails.application.secrets.moment_locale}.js"></script>
-<%
-  elsif Rails.application.secrets.moment_locale != 'en'
-    raise LoadError, "moment/locale/#{Rails.application.secrets.moment_locale}.js does not exists"
-  end
-%>
-<!-- if required locale does not exist, use the default "en-US" -->
-<% if asset_available?("summernote/lang/summernote-#{Rails.application.secrets.summernote_locale}.js") %>
-  <script type="text/javascript" src="summernote/lang/summernote-#{Rails.application.secrets.summernote_locale}.js"></script>
-<%
-  elsif Rails.application.secrets.summernote_locale != 'en-US'
-    raise LoadError, "summernote/lang/summernote-#{Rails.application.secrets.summernote_locale}.js does not exists"
-  end
-%>
-<!-- if required locale does not exist, use the default "en" -->
-<% if asset_available?("fullcalendar/dist/lang/#{Rails.application.secrets.fullcalendar_locale}.js") %>
-  <script type="text/javascript" src="fullcalendar/dist/lang/#{Rails.application.secrets.fullcalendar_locale}.js"></script>
-<%
-  elsif Rails.application.secrets.fullcalendar_locale != 'en'
-    raise LoadError, "fullcalendar/dist/lang/#{Rails.application.secrets.fullcalendar_locale}.js does not exists"
-  end
-%>
+<%= javascript_packs_with_chunks_tag 'locale' %>
 </body>
 </html>

@@ -1,0 +1,10 @@
+import 'angular-i18n/angular-locale_<%= Rails.application.secrets.angular_locale %>.js';
+<% if Rails.application.secrets.moment_locale != 'en' %>
+import 'moment/locale/<%= Rails.application.secrets.moment_locale %>.js';
+<% end %>
+<% if Rails.application.secrets.summernote_locale != 'en-US' %>
+import 'summernote/lang/summernote-<%= Rails.application.secrets.summernote_locale %>.js';
+<% end %>
+<% if Rails.application.secrets.fullcalendar_locale != 'en' %>
+import 'fullcalendar/dist/lang/<%= Rails.application.secrets.fullcalendar_locale %>.js';
+<% end %>
