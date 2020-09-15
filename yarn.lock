@@ -1294,10 +1294,10 @@ angular-scroll@1.0.2:
   resolved "https://registry.yarnpkg.com/angular-scroll/-/angular-scroll-1.0.2.tgz#2768ff35dbe1ce40e0c3fbedd4534888299c3e2d"
   integrity sha1-J2j/NdvhzkDgw/vt1FNIiCmcPi0=
 
-angular-summernote@0.7.1:
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/angular-summernote/-/angular-summernote-0.7.1.tgz#c4bfa83020c4e32f96955b9974c43e5eaeea342e"
-  integrity sha1-xL+oMCDE4y+WlVuZdMQ+Xq7qNC4=
+angular-summernote@0.8.1:
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/angular-summernote/-/angular-summernote-0.8.1.tgz#13886e03a20281bb735d8547cfbc0f8851ab6a2b"
+  integrity sha1-E4huA6ICgbtzXYVHz7wPiFGrais=
 
 angular-touch@1.7:
   version "1.7.9"
@@ -8200,10 +8200,10 @@ stylehacks@^4.0.0:
     postcss "^7.0.0"
     postcss-selector-parser "^3.0.0"
 
-summernote@0.7.3:
-  version "0.7.3"
-  resolved "https://registry.yarnpkg.com/summernote/-/summernote-0.7.3.tgz#8456bdc632fce1c9c049139d65ef0726e8cab7b4"
-  integrity sha1-hFa9xjL84cnASROdZe8HJujKt7Q=
+summernote@0.8.18:
+  version "0.8.18"
+  resolved "https://registry.yarnpkg.com/summernote/-/summernote-0.8.18.tgz#be5c368b1c92de8a05039a9976157bdea7aae386"
+  integrity sha512-VlwBaNm9vSYMYXvO2f3UCUmY0Gm8jxLcBn+D08aX3pKs4x2vAoyQ4DcDQ6D+PchQiLrf86AGQVfVu56F4aP3ug==
 
 supports-color@^2.0.0:
   version "2.0.0"

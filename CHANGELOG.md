@@ -2,6 +2,8 @@
 
 - Fix a bug: unable to run tests suite with run-tests.sh
 - Updated coveralls gem to a supported version
+- Updated summernote to 0.8.18
+- Updated angular-summernote to 0.8.1
 
 ## v4.5.6 2020 September 1st
 

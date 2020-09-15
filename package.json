@@ -52,7 +52,7 @@
     "angular-resource": "1.7",
     "angular-sanitize": "1.7",
     "angular-scroll": "0.6",
-    "angular-summernote": "0.7.1",
+    "angular-summernote": "0.8.1",
     "angular-touch": "1.7",
     "angular-translate": "2.18",
     "angular-translate-interpolation-messageformat": "2.18",
@@ -83,7 +83,7 @@
     "ng-fittext": "https://github.com/patrickmarabeas/ng-FitText.js.git#4.1.1",
     "ngUpload": "0.5",
     "nvd3": "1.8",
-    "summernote": "0.7.3",
+    "summernote": "0.8.18",
     "twitter-fetcher": "^18.0.2",
     "ui-select": "0.19",
     "underscore": "1.7"
