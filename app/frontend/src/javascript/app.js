@@ -6,7 +6,7 @@
 */
 
 // eslint-disable-next-line no-use-before-define
-const Application = Application || {};
+var Application = Application || {};
 
 Application.Constants = angular.module('application.constants', []);
 Application.Services = angular.module('application.services', []);

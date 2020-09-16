@@ -25,7 +25,7 @@ environment.loaders.append('sass', sass);
 environment.loaders.append('fonts', fonts);
 
 environment.loaders.append('expose-app', exposeApp);
-environment.loaders.append('imports', imports);
+// environment.loaders.append('imports', imports);
 
 environment.splitChunks();
 

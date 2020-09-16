@@ -5,7 +5,7 @@ module.exports = {
       loader: 'imports-loader',
       options: {
         imports: [
-          'default app Application'
+          'default Application Application'
         ]
       }
     }
