@@ -66,9 +66,9 @@ import 'tether/dist/js/tether';
 import 'angular-bind-html-compile/angular-bind-html-compile';
 import 'angular-ui-tour/app/angular-ui-tour';
 
-import '../src/javascript/app.js';
-import '../src/javascript/router.js.erb';
-import '../src/javascript/plugins.js.erb';
+require('../src/javascript/app.js');
+require('../src/javascript/router.js.erb');
+require('../src/javascript/plugins.js.erb');
 
 require.context('../src/javascript/controllers/', true, /.*/);
 require.context('../src/javascript/services/', true, /.*/);

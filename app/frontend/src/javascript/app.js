@@ -6,7 +6,7 @@
 */
 
 // eslint-disable-next-line no-use-before-define
-var Application = Application || {};
+const Application = Application || {};
 
 Application.Constants = angular.module('application.constants', []);
 Application.Services = angular.module('application.services', []);
@@ -66,8 +66,8 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
       $translateProvider.preferredLanguage(Fablab.locale);
       // End the tour when the user clicks the forward or back buttons of the browser
       TourConfigProvider.enableNavigationInterceptors();
-    }]).run(['$rootScope', '$log', 'AuthService', 'Auth', 'amMoment', '$state', 'editableOptions', 'Analytics',
-    function ($rootScope, $log, AuthService, Auth, amMoment, $state, editableOptions, Analytics) {
+    }]).run(['$rootScope', '$log', 'Auth', 'amMoment', '$state', 'editableOptions', 'Analytics',
+    function ($rootScope, $log, Auth, amMoment, $state, editableOptions, Analytics) {
       // Angular-moment (date-time manipulations library)
       amMoment.changeLocale(Fablab.moment_locale);
 
@@ -146,3 +146,5 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
 angular.isUndefinedOrNull = function (val) {
   return angular.isUndefined(val) || val === null;
 };
+
+module.exports = { Application };

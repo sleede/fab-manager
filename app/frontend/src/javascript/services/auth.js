@@ -1,7 +1,7 @@
 'use strict';
 
-Application.Services.factory('AuthService', ['Session', 'CSRF', function (Session, CSRF) {
-  let service = {};
+Application.Services.factory('AuthService', ['Session', function (Session) {
+  const service = {};
 
   service.isAuthenticated = function() {
     return (Session.currentUser != null) && (Session.currentUser.id != null);

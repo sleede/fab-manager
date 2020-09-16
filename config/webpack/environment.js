@@ -5,6 +5,8 @@ const sass = require('./loaders/sass');
 const sassErb = require('./loaders/sass_erb');
 const html = require('./loaders/html');
 const fonts = require('./loaders/fonts');
+const exposeApp = require('./loaders/expose_app');
+const imports = require('./loaders/imports');
 const webpack = require('webpack');
 
 environment.plugins.prepend('Provide', new webpack.ProvidePlugin({
@@ -21,6 +23,9 @@ environment.loaders.prepend('sass-erb', sassErb);
 environment.loaders.append('html', html);
 environment.loaders.append('sass', sass);
 environment.loaders.append('fonts', fonts);
+
+environment.loaders.append('expose-app', exposeApp);
+environment.loaders.append('imports', imports);
 
 environment.splitChunks();
 
