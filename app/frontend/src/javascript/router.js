@@ -20,18 +20,18 @@ angular.module('application.router', ['ui.router'])
       .state('app', {
         abstract: true,
         views: {
-          'header': {
+          header: {
             templateUrl: 'shared/header.html'
           },
-          'leftnav': {
+          leftnav: {
             templateUrl: 'shared/leftnav.html',
             controller: 'MainNavController'
           },
-          'cookies': {
+          cookies: {
             templateUrl: 'shared/cookies.html',
             controller: 'CookiesController'
           },
-          'main': {}
+          main: {}
         },
         resolve: {
           logoFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'logo-file' }).$promise; }],
@@ -260,7 +260,7 @@ angular.module('application.router', ['ui.router'])
           componentsPromise: ['Component', function (Component) { return Component.query().$promise; }],
           machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
           settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['openlab_app_id', 'openlab_default']" }).$promise; }],
-          openLabActive:  ['Setting', function (Setting) { return Setting.isPresent({ name: 'openlab_app_secret' }).$promise; }],
+          openLabActive: ['Setting', function (Setting) { return Setting.isPresent({ name: 'openlab_app_secret' }).$promise; }]
         }
       })
       .state('app.logged.projects_new', {
@@ -351,9 +351,9 @@ angular.module('application.router', ['ui.router'])
           machinePromise: ['Machine', '$stateParams', function (Machine, $stateParams) { return Machine.get({ id: $stateParams.id }).$promise; }],
           settingsPromise: ['Setting', function (Setting) {
             return Setting.query({
-              names: `['machine_explications_alert', 'booking_window_start',  'booking_window_end',  'booking_move_enable', \
-                       'booking_move_delay', 'booking_cancel_enable',  'booking_cancel_delay', 'subscription_explications_alert', \
-                       'online_payment_module']`
+              names: "['machine_explications_alert', 'booking_window_start',  'booking_window_end',  'booking_move_enable', " +
+                     "'booking_move_delay', 'booking_cancel_enable',  'booking_cancel_delay', 'subscription_explications_alert', " +
+                     "'online_payment_module']"
             }).$promise;
           }]
         }
@@ -438,9 +438,10 @@ angular.module('application.router', ['ui.router'])
           groupsPromise: ['Group', function (Group) { return Group.query().$promise; }],
           settingsPromise: ['Setting', function (Setting) {
             return Setting.query({
-              names: `['booking_window_start', 'booking_window_end', 'booking_move_enable',  'booking_move_delay', \
-                       'booking_cancel_enable', 'booking_cancel_delay', 'subscription_explications_alert',  \
-                       'space_explications_alert', 'online_payment_module']` }).$promise;
+              names: "['booking_window_start', 'booking_window_end', 'booking_move_enable',  'booking_move_delay', " +
+                     "'booking_cancel_enable', 'booking_cancel_delay', 'subscription_explications_alert',  " +
+                     "'space_explications_alert', 'online_payment_module']"
+            }).$promise;
           }]
         }
       })
@@ -488,9 +489,10 @@ angular.module('application.router', ['ui.router'])
           }],
           settingsPromise: ['Setting', function (Setting) {
             return Setting.query({
-              names: `['booking_window_start', 'booking_window_end', 'booking_move_enable', 'booking_move_delay', \
-                       'booking_cancel_enable', 'booking_cancel_delay', 'subscription_explications_alert', \
-                       'training_explications_alert', 'training_information_message', 'online_payment_module']` }).$promise;
+              names: "['booking_window_start', 'booking_window_end', 'booking_move_enable', 'booking_move_delay', " +
+                     "'booking_cancel_enable', 'booking_cancel_delay', 'subscription_explications_alert', " +
+                     "'training_explications_alert', 'training_information_message', 'online_payment_module']"
+            }).$promise;
           }]
         }
       })
@@ -619,8 +621,10 @@ angular.module('application.router', ['ui.router'])
           licencesPromise: ['Licence', function (Licence) { return Licence.query().$promise; }],
           themesPromise: ['Theme', function (Theme) { return Theme.query().$promise; }],
           settingsPromise: ['Setting', function (Setting) {
-            return Setting.query({ names: "['feature_tour_display', 'disqus_shortname', 'allowed_cad_extensions', \
-                                            'allowed_cad_mime_types', 'openlab_app_id', 'openlab_app_secret', 'openlab_default']" }).$promise;
+            return Setting.query({
+              names: "['feature_tour_display', 'disqus_shortname', 'allowed_cad_extensions', " +
+                     "'allowed_cad_mime_types', 'openlab_app_id', 'openlab_app_secret', 'openlab_default']"
+            }).$promise;
           }]
         }
       })
@@ -633,7 +637,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          abusesPromise: ['Abuse', function(Abuse) { return Abuse.query().$promise; }]
+          abusesPromise: ['Abuse', function (Abuse) { return Abuse.query().$promise; }]
         }
       })
 
@@ -835,23 +839,24 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           settings: ['Setting', function (Setting) {
             return Setting.query({
-              names: `['invoice_legals', 'invoice_text', 'invoice_VAT-rate', 'invoice_VAT-active', 'invoice_order-nb', 'invoice_code-value', \
-                       'invoice_code-active', 'invoice_reference', 'invoice_logo', 'accounting_journal_code', 'accounting_card_client_code', \
-                       'accounting_card_client_label', 'accounting_wallet_client_code', 'accounting_wallet_client_label', 'invoicing_module', \
-                       'accounting_other_client_code', 'accounting_other_client_label', 'accounting_wallet_code', 'accounting_wallet_label', \
-                       'accounting_VAT_code', 'accounting_VAT_label', 'accounting_subscription_code', 'accounting_subscription_label', \
-                       'accounting_Machine_code', 'accounting_Machine_label', 'accounting_Training_code', 'accounting_Training_label', \
-                       'accounting_Event_code', 'accounting_Event_label', 'accounting_Space_code', 'accounting_Space_label', \
-                       'feature_tour_display', 'online_payment_module', 'stripe_public_key', 'stripe_currency', 'invoice_prefix']` }).$promise;
+              names: "['invoice_legals', 'invoice_text', 'invoice_VAT-rate', 'invoice_VAT-active', 'invoice_order-nb', 'invoice_code-value', " +
+                     "'invoice_code-active', 'invoice_reference', 'invoice_logo', 'accounting_journal_code', 'accounting_card_client_code', " +
+                     "'accounting_card_client_label', 'accounting_wallet_client_code', 'accounting_wallet_client_label', 'invoicing_module', " +
+                     "'accounting_other_client_code', 'accounting_other_client_label', 'accounting_wallet_code', 'accounting_wallet_label', " +
+                     "'accounting_VAT_code', 'accounting_VAT_label', 'accounting_subscription_code', 'accounting_subscription_label', " +
+                     "'accounting_Machine_code', 'accounting_Machine_label', 'accounting_Training_code', 'accounting_Training_label', " +
+                     "'accounting_Event_code', 'accounting_Event_label', 'accounting_Space_code', 'accounting_Space_label', " +
+                     "'feature_tour_display', 'online_payment_module', 'stripe_public_key', 'stripe_currency', 'invoice_prefix']"
+            }).$promise;
           }],
           stripeSecretKey: ['Setting', function (Setting) { return Setting.isPresent({ name: 'stripe_secret_key' }).$promise; }],
           onlinePaymentStatus: ['Payment', function (Payment) { return Payment.onlinePaymentStatus().$promise; }],
-          invoices: [ 'Invoice', function (Invoice) {
+          invoices: ['Invoice', function (Invoice) {
             return Invoice.list({
               query: { number: '', customer: '', date: null, order_by: '-reference', page: 1, size: 20 }
             }).$promise;
           }],
-          closedPeriods: [ 'AccountingPeriod', function(AccountingPeriod) { return AccountingPeriod.query().$promise; }]
+          closedPeriods: ['AccountingPeriod', function (AccountingPeriod) { return AccountingPeriod.query().$promise; }]
         }
       })
 
@@ -908,7 +913,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          tags: ['Tag', function(Tag) { return Tag.query().$promise }]
+          tags: ['Tag', function (Tag) { return Tag.query().$promise; }]
         }
       })
       .state('app.admin.members_import_result', {
@@ -920,7 +925,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          importItem: ['Import', '$stateParams', function(Import, $stateParams) { return Import.get({ id: $stateParams.id }).$promise }]
+          importItem: ['Import', '$stateParams', function (Import, $stateParams) { return Import.get({ id: $stateParams.id }).$promise; }]
         }
       })
       .state('app.admin.members_edit', {
@@ -1033,17 +1038,18 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           settingsPromise: ['Setting', function (Setting) {
             return Setting.query({
-              names: `['twitter_name', 'about_title', 'about_body', 'tracking_id', 'facebook_app_id', 'email_from', \
-                       'privacy_body', 'privacy_dpo', 'about_contacts', 'book_overlapping_slots', 'invoicing_module', \
-                       'home_blogpost', 'machine_explications_alert', 'training_explications_alert', 'slot_duration', \
-                       'training_information_message', 'subscription_explications_alert', 'event_explications_alert', \
-                       'space_explications_alert', 'booking_window_start', 'booking_window_end', 'events_in_calendar', \
-                       'booking_move_enable', 'booking_move_delay', 'booking_cancel_enable', 'feature_tour_display', \
-                       'booking_cancel_delay', 'main_color', 'secondary_color', 'spaces_module', 'twitter_analytics', \
-                       'fablab_name', 'name_genre', 'reminder_enable', 'plans_module', 'confirmation_required', \
-                       'reminder_delay', 'visibility_yearly', 'visibility_others', 'wallet_module', \
-                       'display_name_enable', 'machines_sort_by', 'fab_analytics', 'statistics_module', \
-                       'link_name', 'home_content', 'home_css', 'phone_required']` }).$promise;
+              names: "['twitter_name', 'about_title', 'about_body', 'tracking_id', 'facebook_app_id', 'email_from', " +
+                     "'privacy_body', 'privacy_dpo', 'about_contacts', 'book_overlapping_slots', 'invoicing_module', " +
+                     "'home_blogpost', 'machine_explications_alert', 'training_explications_alert', 'slot_duration', " +
+                     "'training_information_message', 'subscription_explications_alert', 'event_explications_alert', " +
+                     "'space_explications_alert', 'booking_window_start', 'booking_window_end', 'events_in_calendar', " +
+                     "'booking_move_enable', 'booking_move_delay', 'booking_cancel_enable', 'feature_tour_display', " +
+                     "'booking_cancel_delay', 'main_color', 'secondary_color', 'spaces_module', 'twitter_analytics', " +
+                     "'fablab_name', 'name_genre', 'reminder_enable', 'plans_module', 'confirmation_required', " +
+                     "'reminder_delay', 'visibility_yearly', 'visibility_others', 'wallet_module', " +
+                     "'display_name_enable', 'machines_sort_by', 'fab_analytics', 'statistics_module', " +
+                     "'link_name', 'home_content', 'home_css', 'phone_required']"
+            }).$promise;
           }],
           privacyDraftsPromise: ['Setting', function (Setting) { return Setting.get({ name: 'privacy_draft', history: true }).$promise; }],
           cguFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'cgu-file' }).$promise; }],
