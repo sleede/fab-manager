@@ -67,7 +67,7 @@ import 'angular-bind-html-compile/angular-bind-html-compile';
 import 'angular-ui-tour/app/angular-ui-tour';
 
 require('../src/javascript/app.js');
-require('../src/javascript/router.js.erb');
+require('../src/javascript/router.js');
 require('../src/javascript/plugins.js.erb');
 
 require.context('../src/javascript/controllers/', true, /.*/);
