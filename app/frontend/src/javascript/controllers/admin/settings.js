@@ -173,7 +173,7 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
     $scope.savePrivacyPolicy = function () {
       // open modal
       const modalInstance = $uibModal.open({
-        templateUrl: 'admin/settings/save_policy.html',
+        template: require('../../../../templates/admin/settings/save_policy.html'),
         controller: 'SavePolicyController',
         resolve: {
           saveCb () { return $scope.save; },
@@ -274,7 +274,7 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
      */
     $scope.analyticsModal = function() {
       $uibModal.open({
-        templateUrl: 'admin/settings/analyticsModal.html',
+        template: require('../../../../templates/admin/settings/analyticsModal.html'),
         controller: 'AnalyticsModalController',
         size: 'lg',
         resolve: {

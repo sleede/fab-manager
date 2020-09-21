@@ -587,7 +587,7 @@ Application.Controllers.controller('ShowProjectController', ['$scope', '$state',
       if (e) { e.preventDefault(); }
 
       $uibModal.open({
-        templateUrl: 'shared/signalAbuseModal.html',
+        template: require('../../../templates/shared/signalAbuseModal.html'),
         size: 'md',
         resolve: {
           project () { return $scope.project; }

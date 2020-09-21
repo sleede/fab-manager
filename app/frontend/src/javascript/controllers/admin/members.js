@@ -236,7 +236,7 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
     $scope.openPartnerNewModal = function () {
       const modalInstance = $uibModal.open({
         animation: true,
-        templateUrl: 'shared/_partner_new_modal.html',
+        template: require('../../../../templates/shared/_partner_new_modal.html'),
         size: 'lg',
         controller: ['$scope', '$uibModalInstance', 'User', function ($scope, $uibModalInstance, User) {
           $scope.partner = {};
@@ -702,7 +702,7 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
     $scope.changeUserRole = function() {
       const modalInstance = $uibModal.open({
         animation: true,
-        templateUrl: 'admin/members/change_role_modal.html',
+        template: require('../../../../templates/admin/members/change_role_modal.html'),
         size: 'lg',
         resolve: {
           user() { return $scope.user; }
@@ -750,7 +750,7 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
     $scope.updateSubscriptionModal = function (subscription, free) {
       const modalInstance = $uibModal.open({
         animation: true,
-        templateUrl: 'admin/subscriptions/expired_at_modal.html',
+        template: require('../../../../templates/admin/subscriptions/expired_at_modal.html'),
         size: 'lg',
         controller: ['$scope', '$uibModalInstance', 'Subscription', function ($scope, $uibModalInstance, Subscription) {
           $scope.new_expired_at = angular.copy(subscription.expired_at);
@@ -797,7 +797,7 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
     $scope.createSubscriptionModal = function (user, plans) {
       const modalInstance = $uibModal.open({
         animation: true,
-        templateUrl: 'admin/subscriptions/create_modal.html',
+        template: require('../../../../templates/admin/subscriptions/create_modal.html'),
         size: 'lg',
         controller: ['$scope', '$uibModalInstance', 'Subscription', 'Group', function ($scope, $uibModalInstance, Subscription, Group) {
         // selected user
@@ -845,7 +845,7 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
     $scope.createWalletCreditModal = function (user, wallet) {
       const modalInstance = $uibModal.open({
         animation: true,
-        templateUrl: 'wallet/credit_modal.html',
+        template: require('../../../../templates/wallet/credit_modal.html'),
         controller: ['$scope', '$uibModalInstance', 'Wallet', function ($scope, $uibModalInstance, Wallet) {
         // default: do not generate a refund invoice
           $scope.generate_avoir = false;

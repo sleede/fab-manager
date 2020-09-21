@@ -4,7 +4,7 @@ Application.Services.factory('dialogs', ['$uibModal', function ($uibModal) {
   return ({
     confirm (options, success, error) {
       const defaultOpts = {
-        templateUrl: 'shared/confirm_modal.html',
+        template: require('../../../templates/shared/confirm_modal.html'),
         size: 'sm',
         resolve: {
           object () {

@@ -221,7 +221,7 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
      */
     $scope.showReservations = function (training, availability) {
       $uibModal.open({
-        templateUrl: 'admin/trainings/validTrainingModal.html',
+        template: require('../../../../templates/admin/trainings/validTrainingModal.html'),
         controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
           $scope.availability = availability;
 

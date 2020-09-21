@@ -279,7 +279,7 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
      */
     $scope.newPriceCategory = function () {
       $uibModal.open({
-        templateUrl: 'admin/events/price_form.html',
+        template: require('../../../../templates/admin/events/price_form.html'),
         size: 'md',
         resolve: {
           category () { return {}; }
@@ -307,7 +307,7 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
         return growl.error(_t('app.admin.events.unexpected_error_occurred_please_refresh'));
       } else {
         return $uibModal.open({
-          templateUrl: 'admin/events/price_form.html',
+          template: require('../../../../templates/admin/events/price_form.html'),
           size: 'md',
           resolve: {
             category () { return $scope.priceCategories[index]; }
@@ -645,7 +645,7 @@ Application.Controllers.controller('EditEventController', ['$scope', '$state', '
         // open a choice edit-mode dialog
         const modalInstance = $uibModal.open({
           animation: true,
-          templateUrl: 'events/editRecurrent.html',
+          template: require('../../../../templates/events/editRecurrent.html'),
           size: 'md',
           controller: 'EditRecurrentEventController',
           resolve: {

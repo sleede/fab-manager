@@ -77,5 +77,5 @@ importAll(require.context('../src/javascript/services/', true, /.*/));
 importAll(require.context('../src/javascript/directives/', true, /.*/));
 importAll(require.context('../src/javascript/filters/', true, /.*/));
 
-require.context('../images', true);
-require.context('../templates', true);
+importAll(require.context('../images', true));
+importAll(require.context('../templates', true));

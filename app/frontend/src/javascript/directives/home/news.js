@@ -2,7 +2,7 @@ Application.Directives.directive('news', [ 'Setting',
   function (Setting) {
     return ({
       restrict: 'E',
-      templateUrl: 'home/news.html',
+      template: require('../../../../templates/home/news.html'),
       link ($scope, element, attributes) {
         // The admin blogpost
         $scope.homeBlogpost = null;

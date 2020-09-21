@@ -18,7 +18,7 @@ Application.Directives.directive('coupon', [ '$rootScope', 'Coupon', '_t', funct
       total: '=',
       userId: '@'
     },
-    templateUrl: 'shared/_coupon.html',
+    template: require('../../../templates/shared/_coupon.html'),
     link ($scope, element, attributes) {
       // Whether code input is shown or not (ie. the link 'I have a coupon' is shown)
       $scope.code =
