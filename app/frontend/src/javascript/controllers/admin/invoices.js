@@ -58,8 +58,8 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       prefix: settings.invoice_prefix,
       nextId: 40,
       date: moment().format('DDMMYYYY'),
-      template: require('../../../../templates/editPrefix.html')
-    }
+      templateUrl: 'editPrefix.html'
+    };
 
     // Invoices parameters
     $scope.invoice = {
@@ -67,22 +67,22 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       reference: {
         model: '',
         help: null,
-        template: require('../../../../templates/editReference.html')
+        templateUrl: 'editReference.html'
       },
       code: {
         model: '',
         active: true,
-        template: require('../../../../templates/editCode.html')
+        templateUrl: 'editCode.html'
       },
       number: {
         model: '',
         help: null,
-        template: require('../../../../templates/editNumber.html')
+        templateUrl: 'editNumber.html'
       },
       VAT: {
         rate: 19.6,
         active: false,
-        template: require('../../../../templates/editVAT.html')
+        templateUrl: 'editVAT.html'
       },
       text: {
         content: ''
@@ -96,87 +96,87 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     $scope.settings = {
       journalCode: {
         name: 'accounting_journal_code',
-        value: settings['accounting_journal_code']
+        value: settings.accounting_journal_code
       },
       cardClientCode: {
         name: 'accounting_card_client_code',
-        value: settings['accounting_card_client_code']
+        value: settings.accounting_card_client_code
       },
       cardClientLabel: {
         name: 'accounting_card_client_label',
-        value: settings['accounting_card_client_label']
+        value: settings.accounting_card_client_label
       },
       walletClientCode: {
         name: 'accounting_wallet_client_code',
-        value: settings['accounting_wallet_client_code']
+        value: settings.accounting_wallet_client_code
       },
       walletClientLabel: {
         name: 'accounting_wallet_client_label',
-        value: settings['accounting_wallet_client_label']
+        value: settings.accounting_wallet_client_label
       },
       otherClientCode: {
         name: 'accounting_other_client_code',
-        value: settings['accounting_other_client_code']
+        value: settings.accounting_other_client_code
       },
       otherClientLabel: {
         name: 'accounting_other_client_label',
-        value: settings['accounting_other_client_label']
+        value: settings.accounting_other_client_label
       },
       walletCode: {
         name: 'accounting_wallet_code',
-        value: settings['accounting_wallet_code']
+        value: settings.accounting_wallet_code
       },
       walletLabel: {
         name: 'accounting_wallet_label',
-        value: settings['accounting_wallet_label']
+        value: settings.accounting_wallet_label
       },
       vatCode: {
         name: 'accounting_VAT_code',
-        value: settings['accounting_VAT_code']
+        value: settings.accounting_VAT_code
       },
       vatLabel: {
         name: 'accounting_VAT_label',
-        value: settings['accounting_VAT_label']
+        value: settings.accounting_VAT_label
       },
       subscriptionCode: {
         name: 'accounting_subscription_code',
-        value: settings['accounting_subscription_code']
+        value: settings.accounting_subscription_code
       },
       subscriptionLabel: {
         name: 'accounting_subscription_label',
-        value: settings['accounting_subscription_label']
+        value: settings.accounting_subscription_label
       },
       machineCode: {
         name: 'accounting_Machine_code',
-        value: settings['accounting_Machine_code']
+        value: settings.accounting_Machine_code
       },
       machineLabel: {
         name: 'accounting_Machine_label',
-        value: settings['accounting_Machine_label']
+        value: settings.accounting_Machine_label
       },
       trainingCode: {
         name: 'accounting_Training_code',
-        value: settings['accounting_Training_code']
+        value: settings.accounting_Training_code
       },
       trainingLabel: {
         name: 'accounting_Training_label',
-        value: settings['accounting_Training_label']
+        value: settings.accounting_Training_label
       },
       eventCode: {
         name: 'accounting_Event_code',
-        value: settings['accounting_Event_code']
+        value: settings.accounting_Event_code
       },
       eventLabel: {
         name: 'accounting_Event_label',
-        value: settings['accounting_Event_label']
+        value: settings.accounting_Event_label
       },
       spaceCode: {
         name: 'accounting_Space_code',
-        value: settings['accounting_Space_code']
+        value: settings.accounting_Space_code
       },
       spaceLabel: {
         name: 'accounting_Space_label',
-        value: settings['accounting_Space_label']
+        value: settings.accounting_Space_label
       }
     };
 
@@ -224,8 +224,8 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         controller: 'AvoirModalController',
         resolve: {
           invoice () { return invoice; },
-          closedPeriods() { return AccountingPeriod.query().$promise; },
-          lastClosingEnd() { return AccountingPeriod.lastClosingEnd().$promise; }
+          closedPeriods () { return AccountingPeriod.query().$promise; },
+          lastClosingEnd () { return AccountingPeriod.lastClosingEnd().$promise; }
         }
       });
 
@@ -311,10 +311,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           growl.success(_t('app.admin.invoices.invoice_reference_successfully_saved'));
         }
         , function (error) {
-            if (error.status === 304) return;
+          if (error.status === 304) return;
 
-            growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_invoice_reference'));
-            console.error(error);
+          growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_invoice_reference'));
+          console.error(error);
         });
       });
     };
@@ -352,10 +352,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           }
         }
         , function (error) {
-            if (error.status === 304) return;
+          if (error.status === 304) return;
 
-            growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_invoicing_code'));
-            console.error(error);
+          growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_invoicing_code'));
+          console.error(error);
         });
 
         return Setting.update({ name: 'invoice_code-active' }, { value: result.active ? 'true' : 'false' }, function (data) {
@@ -367,10 +367,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           }
         }
         , function (error) {
-            if (error.status === 304) return;
+          if (error.status === 304) return;
 
-            growl.error(_t('app.admin.invoices.an_error_occurred_while_activating_the_invoicing_code'));
-            console.error(error);
+          growl.error(_t('app.admin.invoices.an_error_occurred_while_activating_the_invoicing_code'));
+          console.error(error);
         });
       });
     };
@@ -401,10 +401,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           return growl.success(_t('app.admin.invoices.order_number_successfully_saved'));
         }
         , function (error) {
-            if (error.status === 304) return;
+          if (error.status === 304) return;
 
-            growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_order_number'));
-            console.error(error);
+          growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_order_number'));
+          console.error(error);
         });
       });
     };
@@ -440,15 +440,14 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           $scope.ok = function () { $uibModalInstance.close({ rate: $scope.rate, active: $scope.isSelected }); };
           $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
 
-
-          const initialize = function() {
+          const initialize = function () {
             rateHistory.setting.history.forEach(function (rate) {
-              $scope.history.push({ date: rate.created_at, rate: rate.value, user: rate.user })
+              $scope.history.push({ date: rate.created_at, rate: rate.value, user: rate.user });
             });
             activeHistory.setting.history.forEach(function (v) {
-              $scope.history.push({ date: v.created_at, enabled: v.value === 'true', user: v.user })
+              $scope.history.push({ date: v.created_at, enabled: v.value === 'true', user: v.user });
             });
-          }
+          };
 
           initialize();
         }]
@@ -462,10 +461,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           }
         }
         , function (error) {
-            if (error.status === 304) return;
+          if (error.status === 304) return;
 
-            growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_VAT_rate'));
-            console.error(error);
+          growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_VAT_rate'));
+          console.error(error);
         });
 
         return Setting.update({ name: 'invoice_VAT-active' }, { value: result.active ? 'true' : 'false' }, function (data) {
@@ -477,10 +476,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           }
         }
         , function (error) {
-            if (error.status === 304) return;
+          if (error.status === 304) return;
 
-            growl.error(_t('app.admin.invoices.an_error_occurred_while_activating_the_VAT'));
-            console.error(error);
+          growl.error(_t('app.admin.invoices.an_error_occurred_while_activating_the_VAT'));
+          console.error(error);
         });
       });
     };
@@ -494,7 +493,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         templateUrl: $scope.file.templateUrl,
         size: 'lg',
         resolve: {
-          model () { return $scope.file.prefix;}
+          model () { return $scope.file.prefix; }
         },
         controller: ['$scope', '$uibModalInstance', 'model', function ($scope, $uibModalInstance, model) {
           $scope.model = model;
@@ -505,15 +504,15 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
 
       return modalInstance.result.then(function (model) {
         Setting.update({ name: 'invoice_prefix' }, { value: model }, function (data) {
-            $scope.file.prefix = model;
-            return growl.success(_t('app.admin.invoices.prefix_successfully_saved'));
-          }
-          , function (error) {
-            if (error.status === 304) return;
+          $scope.file.prefix = model;
+          return growl.success(_t('app.admin.invoices.prefix_successfully_saved'));
+        }
+        , function (error) {
+          if (error.status === 304) return;
 
-            growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_prefix'));
-            console.error(error);
-          });
+          growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_prefix'));
+          console.error(error);
+        });
       });
     };
 
@@ -527,10 +526,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         return growl.success(_t('app.admin.invoices.text_successfully_saved'));
       }
       , function (error) {
-          if (error.status === 304) return;
+        if (error.status === 304) return;
 
-          growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_text'));
-          console.error(error);
+        growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_text'));
+        console.error(error);
       });
     };
 
@@ -544,10 +543,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         return growl.success(_t('app.admin.invoices.address_and_legal_information_successfully_saved'));
       }
       , function (error) {
-          if (error.status === 304) return;
+        if (error.status === 304) return;
 
-          growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_address_and_the_legal_information'));
-          console.error(error);
+        growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_address_and_the_legal_information'));
+        console.error(error);
       });
     };
 
@@ -557,7 +556,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
      */
     $scope.handleFilterChange = function () {
       if (searchTimeout) clearTimeout(searchTimeout);
-      searchTimeout = setTimeout(function() {
+      searchTimeout = setTimeout(function () {
         resetSearchInvoice();
         invoiceSearch();
       }, 300);
@@ -576,7 +575,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
      * Open a modal allowing the user to close an accounting period and to
      * view all periods already closed.
      */
-    $scope.closeAnAccountingPeriod = function() {
+    $scope.closeAnAccountingPeriod = function () {
       // open modal
       $uibModal.open({
         template: require('../../../../templates/admin/invoices/closePeriodModal.html'),
@@ -585,38 +584,38 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         keyboard: false,
         size: 'lg',
         resolve: {
-          periods() { return AccountingPeriod.query().$promise; },
-          lastClosingEnd() { return AccountingPeriod.lastClosingEnd().$promise; }
+          periods () { return AccountingPeriod.query().$promise; },
+          lastClosingEnd () { return AccountingPeriod.lastClosingEnd().$promise; }
         }
       });
-    }
+    };
 
-    $scope.toggleExportModal = function() {
+    $scope.toggleExportModal = function () {
       $uibModal.open({
         template: require('../../../../templates/admin/invoices/accountingExportModal.html'),
         controller: 'AccountingExportModalController',
         size: 'xl'
       });
-    }
+    };
 
     /**
      * Test if the given date is within a closed accounting period
      * @param date {Date} date to test
      * @returns {boolean} true if closed, false otherwise
      */
-    $scope.isDateClosed = function(date) {
+    $scope.isDateClosed = function (date) {
       for (const period of closedPeriods) {
         if (moment(date).isBetween(moment.utc(period.start_at).startOf('day'), moment.utc(period.end_at).endOf('day'), null, '[]')) {
           return true;
         }
       }
       return false;
-    }
+    };
 
     /**
      * Callback to bulk save all settings in the page to the database with their values
      */
-    $scope.save = function() {
+    $scope.save = function () {
       Setting.bulkUpdate(
         { settings: Object.values($scope.settings) },
         function () { growl.success(_t('app.admin.invoices.codes_customization_success')); },
@@ -625,29 +624,29 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           console.error(error);
         }
       );
-    }
+    };
 
     /**
      * Return the name of the operator that creates the invoice
      */
-    $scope.operatorName = function(invoice) {
+    $scope.operatorName = function (invoice) {
       if (!invoice.operator) return '';
 
       return `${invoice.operator.first_name} ${invoice.operator.last_name}`;
-    }
+    };
 
     /**
      * Open a modal dialog which ask for the stripe keys
      * @param onlinePaymentModule {{name: String, value: String}} setting that defines the next status of the online payment module
      * @return {boolean} false if the keys were not provided
      */
-    $scope.requireStripeKeys = function(onlinePaymentModule) {
+    $scope.requireStripeKeys = function (onlinePaymentModule) {
       // if the online payment is about to be disabled, accept the change without any further question
       if (onlinePaymentModule.value === false) return true;
 
       // otherwise, open a modal to ask for the stripe keys
       const modalInstance = $uibModal.open({
-        template: require('../../../../templates/stripeKeys.html'),
+        templateUrl: 'stripeKeys.html',
         controller: 'StripeKeysModalController',
         resolve: {
           stripeKeys: ['Setting', function (Setting) { return Setting.query({ names: "['stripe_public_key', 'stripe_secret_key']" }).$promise; }]
@@ -658,19 +657,19 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         if (success) {
           Setting.get({ name: 'stripe_public_key' }, function (res) {
             $scope.allSettings.stripe_public_key = res.setting.value;
-          })
+          });
           Setting.isPresent({ name: 'stripe_secret_key' }, function (res) {
             $scope.stripeSecretKey = (res.isPresent ? STRIPE_SK_HIDDEN : '');
-          })
+          });
           Payment.onlinePaymentStatus(function (res) {
             $scope.onlinePaymentStatus = res.status;
           });
         }
-      })
+      });
 
       // return the promise
       return modalInstance.result;
-    }
+    };
 
     /**
      * Setup the feature-tour for the admin/invoices page.
@@ -814,7 +813,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       if (settings.feature_tour_display !== 'manual' && $scope.currentUser.profile.tours.indexOf('invoices') < 0) {
         uitour.start();
       }
-    }
+    };
 
     /* PRIVATE SCOPE */
 
@@ -827,18 +826,18 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       }
 
       // retrieve settings from the DB through the API
-      $scope.invoice.legals.content = settings['invoice_legals'];
-      $scope.invoice.text.content = settings['invoice_text'];
+      $scope.invoice.legals.content = settings.invoice_legals;
+      $scope.invoice.text.content = settings.invoice_text;
       $scope.invoice.VAT.rate = parseFloat(settings['invoice_VAT-rate']);
       $scope.invoice.VAT.active = (settings['invoice_VAT-active'] === 'true');
       $scope.invoice.number.model = settings['invoice_order-nb'];
       $scope.invoice.code.model = settings['invoice_code-value'];
       $scope.invoice.code.active = (settings['invoice_code-active'] === 'true');
-      $scope.invoice.reference.model = settings['invoice_reference'];
+      $scope.invoice.reference.model = settings.invoice_reference;
       $scope.invoice.logo = {
         filetype: 'image/png',
         filename: 'logo.png',
-        base64: settings['invoice_logo']
+        base64: settings.invoice_logo
       };
 
       // Watch the logo, when a change occurs, save it
@@ -990,7 +989,7 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
     $scope.ok = function () {
       // check that at least 1 element of the invoice is refunded
       $scope.avoir.invoice_items_ids = [];
-      for (let itemId in $scope.partial) {
+      for (const itemId in $scope.partial) {
         if (Object.prototype.hasOwnProperty.call($scope.partial, itemId)) {
           const refundItem = $scope.partial[itemId];
           if (refundItem) {
@@ -1024,14 +1023,14 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
      * @param date {Date} date to test
      * @returns {boolean} true if closed, false otherwise
      */
-    $scope.isDateClosed = function(date) {
+    $scope.isDateClosed = function (date) {
       for (const period of closedPeriods) {
         if (moment(date).isBetween(moment.utc(period.start_at).startOf('day'), moment.utc(period.end_at).endOf('day'), null, '[]')) {
           return true;
         }
       }
       return false;
-    }
+    };
 
     /* PRIVATE SCOPE */
 
@@ -1058,11 +1057,10 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
   }
 ]);
 
-
 /**
  * Controller used in the modal window allowing an admin to close an accounting period
  */
-Application.Controllers.controller('ClosePeriodModalController', ['$scope', '$uibModalInstance', '$window', '$sce', 'Invoice', 'AccountingPeriod', 'periods', 'lastClosingEnd','dialogs', 'growl', '_t',
+Application.Controllers.controller('ClosePeriodModalController', ['$scope', '$uibModalInstance', '$window', '$sce', 'Invoice', 'AccountingPeriod', 'periods', 'lastClosingEnd', 'dialogs', 'growl', '_t',
   function ($scope, $uibModalInstance, $window, $sce, Invoice, AccountingPeriod, periods, lastClosingEnd, dialogs, growl, _t) {
     const YESTERDAY = moment.utc({ h: 0, m: 0, s: 0, ms: 0 }).subtract(1, 'day').toDate();
     const LAST_CLOSING = moment.utc(lastClosingEnd.last_end_date).toDate();
@@ -1124,11 +1122,11 @@ Application.Controllers.controller('ClosePeriodModalController', ['$scope', '$ui
                   _t(
                     'app.admin.invoices.confirm_close_START_END',
                     { START: moment.utc($scope.period.start_at).format('LL'), END: moment.utc($scope.period.end_at).format('LL') }
-                  )
-                  + '<br/><br/><strong>'
-                  + _t('app.admin.invoices.period_must_match_fiscal_year')
-                  + '</strong><br/><br/>'
-                  + _t('app.admin.invoices.this_may_take_a_while')
+                  ) +
+                  '<br/><br/><strong>' +
+                  _t('app.admin.invoices.period_must_match_fiscal_year') +
+                  '</strong><br/><br/>' +
+                  _t('app.admin.invoices.this_may_take_a_while')
                 )
               };
             }
@@ -1151,7 +1149,7 @@ Application.Controllers.controller('ClosePeriodModalController', ['$scope', '$ui
               ));
               $uibModalInstance.close(resp);
             },
-            function(error) {
+            function (error) {
               $scope.pendingCreation = false;
               growl.error(_t('app.admin.invoices.failed_to_close_period'));
               $scope.errors = error.data;
@@ -1159,7 +1157,6 @@ Application.Controllers.controller('ClosePeriodModalController', ['$scope', '$ui
           );
         }
       );
-
     };
 
     /**
@@ -1170,147 +1167,145 @@ Application.Controllers.controller('ClosePeriodModalController', ['$scope', '$ui
     /**
      * Trigger the API call to download the JSON archive of the closed accounting period
      */
-    $scope.downloadArchive = function(period) {
+    $scope.downloadArchive = function (period) {
       $window.location.href = `/api/accounting_periods/${period.id}/archive`;
-    }
+    };
   }
 ]);
 
 Application.Controllers.controller('AccountingExportModalController', ['$scope', '$uibModalInstance', 'Invoice', 'Export', 'CSRF', 'growl', '_t',
   function ($scope, $uibModalInstance, Invoice, Export, CSRF, growl, _t) {
   // Retrieve Anti-CSRF tokens from cookies
-  CSRF.setMetaTags();
+    CSRF.setMetaTags();
 
-  const SETTINGS = {
-    acd: {
-      format: 'csv',
-      encoding: 'ISO-8859-1',
-      separator: ';',
-      dateFormat: '%d/%m/%Y',
-      labelMaxLength: 50,
-      decimalSeparator: ',',
-      exportInvoicesAtZero: false,
-      columns: ['journal_code', 'date', 'account_code', 'account_label', 'piece', 'line_label', 'debit_origin', 'credit_origin', 'debit_euro', 'credit_euro', 'lettering']
-    }
-  };
+    const SETTINGS = {
+      acd: {
+        format: 'csv',
+        encoding: 'ISO-8859-1',
+        separator: ';',
+        dateFormat: '%d/%m/%Y',
+        labelMaxLength: 50,
+        decimalSeparator: ',',
+        exportInvoicesAtZero: false,
+        columns: ['journal_code', 'date', 'account_code', 'account_label', 'piece', 'line_label', 'debit_origin', 'credit_origin', 'debit_euro', 'credit_euro', 'lettering']
+      }
+    };
 
-  /* PUBLIC SCOPE */
+    /* PUBLIC SCOPE */
 
-  // API URL where the form will be posted
-  $scope.actionUrl = '/api/accounting/export';
+    // API URL where the form will be posted
+    $scope.actionUrl = '/api/accounting/export';
 
-  // Form action on the above URL
-  $scope.method = 'post';
+    // Form action on the above URL
+    $scope.method = 'post';
 
-  // Anti-CSRF token to inject into the download form
-  $scope.csrfToken = angular.element('meta[name="csrf-token"]')[0].content;
+    // Anti-CSRF token to inject into the download form
+    $scope.csrfToken = angular.element('meta[name="csrf-token"]')[0].content;
 
-  // API request body to generate the export
-  $scope.query = null;
+    // API request body to generate the export
+    $scope.query = null;
 
-  // binding to radio button "export to"
-  $scope.exportTarget = {
-    software: null,
-    startDate: null,
-    endDate: null,
-    settings: null
-  };
+    // binding to radio button "export to"
+    $scope.exportTarget = {
+      software: null,
+      startDate: null,
+      endDate: null,
+      settings: null
+    };
 
-  // AngularUI-Bootstrap datepicker parameters to define export dates range
-  $scope.datePicker = {
-    format: Fablab.uibDateFormat,
-    opened: { // default: datePickers are not shown
-      start: false,
-      end: false
-    },
-    options: {
-      startingDay: Fablab.weekStartingDay
-    }
-  };
+    // AngularUI-Bootstrap datepicker parameters to define export dates range
+    $scope.datePicker = {
+      format: Fablab.uibDateFormat,
+      opened: { // default: datePickers are not shown
+        start: false,
+        end: false
+      },
+      options: {
+        startingDay: Fablab.weekStartingDay
+      }
+    };
 
-  // Date of the first invoice
-  $scope.firstInvoice = null;
+    // Date of the first invoice
+    $scope.firstInvoice = null;
 
-  /**
+    /**
    * Validate the export
    */
-  $scope.ok = function () {
-    const statusQry = mkQuery();
-    $scope.query = statusQry;
+    $scope.ok = function () {
+      const statusQry = mkQuery();
+      $scope.query = statusQry;
 
-    Export.status(statusQry).then(function (res) {
-      if (!res.data.exists) {
-        growl.success(_t('app.admin.invoices.export_is_running'));
-      }
-      $uibModalInstance.close(res);
-    });
-  };
+      Export.status(statusQry).then(function (res) {
+        if (!res.data.exists) {
+          growl.success(_t('app.admin.invoices.export_is_running'));
+        }
+        $uibModalInstance.close(res);
+      });
+    };
 
-  /**
+    /**
    * Callback to open/close one of the datepickers
    * @param event {Object} see https://docs.angularjs.org/guide/expression#-event-
    * @param picker {string} start | end
    */
-  $scope.toggleDatePicker = function(event, picker) {
-    event.preventDefault();
-    $scope.datePicker.opened[picker] = !$scope.datePicker.opened[picker];
-  };
+    $scope.toggleDatePicker = function (event, picker) {
+      event.preventDefault();
+      $scope.datePicker.opened[picker] = !$scope.datePicker.opened[picker];
+    };
 
-  /**
+    /**
    * Will fill the export settings, according to the selected software
    * @param software {String} must be one of SETTINGS.*
    */
-  $scope.fillSettings = function(software) {
-    $scope.exportTarget.settings = SETTINGS[software];
-  };
+    $scope.fillSettings = function (software) {
+      $scope.exportTarget.settings = SETTINGS[software];
+    };
 
-  /**
+    /**
    * Just dismiss the modal window
    */
-  $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
+    $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
 
-  /* PRIVATE SCOPE */
+    /* PRIVATE SCOPE */
 
-  /**
+    /**
    * Kind of constructor: these actions will be realized first when the controller is loaded
    */
-  const initialize = function () {
+    const initialize = function () {
     // if the invoice was payed with stripe, allow to refund through stripe
-    Invoice.first(function (data) {
-      $scope.firstInvoice = data.date;
-      $scope.exportTarget.startDate = data.date;
-      $scope.exportTarget.endDate = moment().toISOString();
-    });
-  };
+      Invoice.first(function (data) {
+        $scope.firstInvoice = data.date;
+        $scope.exportTarget.startDate = data.date;
+        $scope.exportTarget.endDate = moment().toISOString();
+      });
+    };
 
-  /**
+    /**
    * Prepare the query for the export API
    * @returns {{extension: *, query: *, category: string, type: *, key: *}}
    */
-  const mkQuery = function() {
-    return {
-      category: 'accounting',
-      type: $scope.exportTarget.software,
-      extension: $scope.exportTarget.settings.format,
-      key: $scope.exportTarget.settings.separator,
-      query: JSON.stringify({
-        columns: $scope.exportTarget.settings.columns,
-        encoding: $scope.exportTarget.settings.encoding,
-        date_format: $scope.exportTarget.settings.dateFormat,
-        start_date: $scope.exportTarget.startDate,
-        end_date: $scope.exportTarget.endDate,
-        label_max_length: $scope.exportTarget.settings.labelMaxLength,
-        decimal_separator: $scope.exportTarget.settings.decimalSeparator,
-        export_invoices_at_zero: $scope.exportTarget.settings.exportInvoicesAtZero
-      })
+    const mkQuery = function () {
+      return {
+        category: 'accounting',
+        type: $scope.exportTarget.software,
+        extension: $scope.exportTarget.settings.format,
+        key: $scope.exportTarget.settings.separator,
+        query: JSON.stringify({
+          columns: $scope.exportTarget.settings.columns,
+          encoding: $scope.exportTarget.settings.encoding,
+          date_format: $scope.exportTarget.settings.dateFormat,
+          start_date: $scope.exportTarget.startDate,
+          end_date: $scope.exportTarget.endDate,
+          label_max_length: $scope.exportTarget.settings.labelMaxLength,
+          decimal_separator: $scope.exportTarget.settings.decimalSeparator,
+          export_invoices_at_zero: $scope.exportTarget.settings.exportInvoicesAtZero
+        })
+      };
     };
-  }
 
-  // !!! MUST BE CALLED AT THE END of the controller
-  return initialize();
-}]);
-
-
+    // !!! MUST BE CALLED AT THE END of the controller
+    return initialize();
+  }]);
 
 /**
  * Controller used in the modal window allowing an admin to close an accounting period
@@ -1343,15 +1338,14 @@ Application.Controllers.controller('StripeKeysModalController', ['$scope', '$uib
         method: 'GET',
         url: 'https://api.stripe.com/v1/charges',
         headers: {
-          Authorization: `Bearer ${$scope.secretKey}`,
+          Authorization: `Bearer ${$scope.secretKey}`
         }
       }).then(function () {
         $scope.secretKeyStatus = true;
       }, function (err) {
         if (err.status === 401) $scope.secretKeyStatus = false;
       });
-    }
-
+    };
 
     /**
      * Trigger the test of the secret key and set the result in $scope.secretKeyStatus
@@ -1370,14 +1364,14 @@ Application.Controllers.controller('StripeKeysModalController', ['$scope', '$uib
           'Content-Type': 'application/x-www-form-urlencoded'
         },
         data: $httpParamSerializerJQLike({
-          'pii[id_number]': 'test',
+          'pii[id_number]': 'test'
         })
       }).then(function () {
         $scope.publicKeyStatus = true;
       }, function (err) {
         if (err.status === 401) $scope.publicKeyStatus = false;
       });
-    }
+    };
 
     /**
      * Validate the keys
@@ -1385,7 +1379,8 @@ Application.Controllers.controller('StripeKeysModalController', ['$scope', '$uib
     $scope.ok = function () {
       if ($scope.secretKeyStatus && $scope.publicKeyStatus) {
         Setting.bulkUpdate(
-          { settings: [
+          {
+            settings: [
               {
                 name: 'stripe_public_key',
                 value: $scope.publicKey
@@ -1394,7 +1389,8 @@ Application.Controllers.controller('StripeKeysModalController', ['$scope', '$uib
                 name: 'stripe_secret_key',
                 value: $scope.secretKey
               }
-            ] },
+            ]
+          },
           function () {
             growl.success(_t('app.admin.invoices.payment.stripe_keys_saved'));
             $uibModalInstance.close(true);
@@ -1405,7 +1401,7 @@ Application.Controllers.controller('StripeKeysModalController', ['$scope', '$uib
           }
         );
       } else {
-        growl.error(_t('app.admin.invoices.payment.error_check_keys'))
+        growl.error(_t('app.admin.invoices.payment.error_check_keys'));
       }
     };
 

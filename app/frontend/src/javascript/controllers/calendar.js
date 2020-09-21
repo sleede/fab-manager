@@ -84,7 +84,7 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
     $scope.calendarStyle = function (calendar) {
       return {
         'border-color': calendar.color,
-        'color': calendar.text_color
+        color: calendar.text_color
       };
     };
 
@@ -106,7 +106,7 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
 
     $scope.openFilterAside = () =>
       $aside.open({
-        template: require('../../../templates/filterAside.html'),
+        templateUrl: 'filterAside.html',
         placement: 'right',
         size: 'md',
         backdrop: false,
@@ -148,8 +148,8 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
             $uibModalInstance.dismiss();
             return e.stopPropagation();
           };
-        }
-        ] });
+        }]
+      });
 
     /* PRIVATE SCOPE */
 
@@ -175,7 +175,7 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
         viewRender (view, element) {
           return viewRenderCb(view, element);
         },
-        eventRender (event, element, view) {
+        eventRender (event, element) {
           return eventRenderCb(event, element);
         }
       });
@@ -194,7 +194,7 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
     /**
      * Callback triggered when an event object is clicked in the fullCalendar view
      */
-    const calendarEventClickCb = function (event, jsEvent, view) {
+    const calendarEventClickCb = function (event) {
       // current calendar object
       const { calendar } = uiCalendarConfig.calendars;
       if (event.available_type === 'machines') {
@@ -240,7 +240,7 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
      * This function is called when calendar view is rendered or changed
      * @see https://fullcalendar.io/docs/v3/viewRender#v2
      */
-    const viewRenderCb = function (view, element) {
+    const viewRenderCb = function (view) {
       toggleSlotEventOverlap(view);
       if (view.type === 'agendaDay') {
         // get availabilties by 1 day for show machine slots
@@ -255,7 +255,7 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
     const eventRenderCb = function (event, element) {
       if (event.tags && event.tags.length > 0) {
         let html = '';
-        for (let tag of Array.from(event.tags)) {
+        for (const tag of Array.from(event.tags)) {
           html += `<span class='label label-success text-white'>${tag.name}</span> `;
         }
         element.find('.fc-title').append(`<br/>${html}`);
@@ -269,7 +269,7 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
       return { t, m, s, evt: $scope.filter.evt, dispo: $scope.filter.dispo };
     };
 
-    var availabilitySourceUrl = () => `/api/availabilities/public?${$.param(getFilter())}`;
+    const availabilitySourceUrl = () => `/api/availabilities/public?${$.param(getFilter())}`;
 
     // !!! MUST BE CALLED AT THE END of the controller
     return initialize();

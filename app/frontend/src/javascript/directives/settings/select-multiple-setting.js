@@ -29,22 +29,22 @@ Application.Directives.directive('selectMultipleSetting', ['Setting', 'growl', '
         /**
          * Remove the items in the selection from the options and update setting.value
          */
-        $scope.removeItem = function() {
+        $scope.removeItem = function () {
           const options = $scope.options.filter(function (opt) {
             return $scope.selection.indexOf(opt) < 0;
-          })
+          });
           $scope.options = options;
           $scope.setting.value = options.join(' ');
           growl.success(_t('app.admin.settings.COUNT_items_removed', { COUNT: $scope.selection.length }));
           $scope.selection = [];
-        }
+        };
 
         /**
          * Open a modal dialog asking for the value of a new item to add
          */
-        $scope.addItem = function() {
+        $scope.addItem = function () {
           $uibModal.open({
-            template: require('../../../../templates/newSelectOption.html'),
+            templateUrl: 'newSelectOption.html',
             resolve: {
               titleNew: function () { return $scope.titleNew; },
               descriptionNew: function () { return $scope.descriptionNew; }
@@ -60,7 +60,7 @@ Application.Directives.directive('selectMultipleSetting', ['Setting', 'growl', '
                 $uibModalInstance.dismiss('cancel');
               };
             }
-          }).result['finally'](null).then(function(val) {
+          }).result.finally(null).then(function (val) {
             const options = Array.from($scope.options);
             if (typeof $scope.beforeAdd === 'function') { val = $scope.beforeAdd(val); }
             options.push(val);
@@ -68,14 +68,14 @@ Application.Directives.directive('selectMultipleSetting', ['Setting', 'growl', '
             $scope.setting.value = options.join(' ');
             growl.success(_t('app.admin.settings.item_added'));
           });
-        }
+        };
 
         /**
          * Callback to save the setting value to the database
          * @param setting {{value:*, name:string}} note that the value will be stringified
          */
         $scope.save = function (setting) {
-          let { value } = setting;
+          const { value } = setting;
 
           Setting.update(
             { name: setting.name },

@@ -1,10 +1,10 @@
 'use strict';
 // TODO remove unused?
 (function (angular) {
-  var deviseModal = angular.module('DeviseModal', [
-      'Devise',
-      'ui.bootstrap'
-    ]);
+  const deviseModal = angular.module('DeviseModal', [
+    'Devise',
+    'ui.bootstrap'
+  ]);
   deviseModal.run([
     '$uibModal',
     '$http',
@@ -12,25 +12,25 @@
     '$rootScope',
     function ($uibModal, $http, Auth, $rootScope) {
       var promise = null;
-      function reset() {
+      function reset () {
         promise = null;
       }
-      function partial(fn, arg) {
+      function partial (fn, arg) {
         return function () {
           return fn.call(this, arg);
         };
       }
       $rootScope.$on('devise:unauthorized', function (event, response, deferred) {
-        function retryRequestAfterLogin() {
+        function retryRequestAfterLogin () {
           return promise.then(function () {
             return $http(response.config);
           }).then(deferred.resolve, partial(deferred.reject, response));
         }
         if (!promise) {
           promise = $uibModal.open({
-            template: require('../../../templates/deviseModal.html'),
+            templateUrl: 'deviseModal.html',
             controller: function ($scope, $uibModalInstance) {
-              var user = $scope.user = {};
+              const user = $scope.user = {};
               $scope.login = function () {
                 $uibModalInstance.close(user);
               };
@@ -38,7 +38,7 @@
                 $uibModalInstance.dismiss('cancel');
               };
             }
-          }).result['finally'](reset).then(Auth.login);
+          }).result.finally(reset).then(Auth.login);
         }
         retryRequestAfterLogin();
       });
