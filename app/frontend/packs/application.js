@@ -70,10 +70,12 @@ require('../src/javascript/app.js');
 require('../src/javascript/router.js');
 require('../src/javascript/plugins.js.erb');
 
-require.context('../src/javascript/controllers/', true, /.*/);
-require.context('../src/javascript/services/', true, /.*/);
-require.context('../src/javascript/directives/', true, /.*/);
-require.context('../src/javascript/filters/', true, /.*/);
+function importAll (r) { r.keys().forEach(r); }
+
+importAll(require.context('../src/javascript/controllers/', true, /.*/));
+importAll(require.context('../src/javascript/services/', true, /.*/));
+importAll(require.context('../src/javascript/directives/', true, /.*/));
+importAll(require.context('../src/javascript/filters/', true, /.*/));
 
 require.context('../images', true);
 require.context('../templates', true);
