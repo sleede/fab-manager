@@ -4,7 +4,6 @@ const jsErb = require('./loaders/js_erb');
 const sass = require('./loaders/sass');
 const sassErb = require('./loaders/sass_erb');
 const html = require('./loaders/html');
-const fonts = require('./loaders/fonts');
 const webpack = require('webpack');
 const path = require('path');
 
@@ -24,7 +23,6 @@ environment.loaders.prepend('html-erb', htmlErb);
 environment.loaders.prepend('sass-erb', sassErb);
 environment.loaders.append('html', html);
 environment.loaders.append('sass', sass);
-environment.loaders.append('fonts', fonts);
 
 environment.splitChunks();
 

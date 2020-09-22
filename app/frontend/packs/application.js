@@ -65,6 +65,8 @@ import 'hone/dist/hone';
 import 'tether/dist/js/tether';
 import 'angular-bind-html-compile/angular-bind-html-compile';
 import 'angular-ui-tour/app/angular-ui-tour';
+import '@fortawesome/fontawesome-free';
+import '@fortawesome/fontawesome-free/js/v4-shims';
 
 require('../src/javascript/app.js');
 require('../src/javascript/router.js');
