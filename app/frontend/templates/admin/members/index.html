@@ -33,7 +33,7 @@
       <uib-tabset justified="true" active="tabs.active" ng-if="isAuthorized('admin')">
 
         <uib-tab heading="{{ 'app.admin.members.users' | translate }}" index="0">
-          <ng-include src="'admin/members/users.html'"></ng-include>
+          <ng-include src="'/admin/members/users.html'"></ng-include>
         </uib-tab>
 
         <uib-tab heading="{{ 'app.admin.members.groups' | translate }}" class="groups-tab" index="1">
@@ -50,7 +50,7 @@
       </uib-tabset>
 
       <div ng-if="isAuthorized('manager')">
-        <ng-include src="'admin/members/users.html'"></ng-include>
+        <ng-include src="'/admin/members/users.html'"></ng-include>
       </div>
     </div>
   </div>

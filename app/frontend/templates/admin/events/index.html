@@ -29,20 +29,20 @@
       <div class="col-md-12" ng-if="isAuthorized('admin')">
         <uib-tabset justified="true" active="tabs.active">
           <uib-tab heading="{{ 'app.admin.events.events_monitoring' | translate }}" index="0">
-            <ng-include src="'admin/events/monitoring.html'"></ng-include>
+            <ng-include src="'/admin/events/monitoring.html'"></ng-include>
           </uib-tab>
 
           <uib-tab heading="{{ 'app.admin.events.manage_filters' | translate }}" index="1">
-            <ng-include src="'admin/events/filters.html'"></ng-include>
+            <ng-include src="'/admin/events/filters.html'"></ng-include>
           </uib-tab>
 
           <uib-tab heading="{{ 'app.admin.events.manage_prices_categories' | translate }}" index="2" class="prices-tab">
-            <ng-include src="'admin/events/prices.html'"></ng-include>
+            <ng-include src="'/admin/events/prices.html'"></ng-include>
           </uib-tab>
         </uib-tabset>
       </div>
       <div class="col-md-12" ng-if="isAuthorized('manager')">
-        <ng-include src="'admin/events/monitoring.html'"></ng-include>
+        <ng-include src="'/admin/events/monitoring.html'"></ng-include>
       </div>
     </div>
   </section>

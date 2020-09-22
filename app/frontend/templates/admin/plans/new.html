@@ -20,7 +20,7 @@
         <div id="planForm">
             <form name="planForm" novalidate="novalidate" class="col-lg-10 col-lg-offset-2 m-t-lg form-group" action="{{ actionUrl }}" ng-upload="afterSubmit(content)" upload-options-enable-rails-csrf="true">
 
-                <ng-include src="'admin/plans/_form.html'"></ng-include>
+                <ng-include src="'/admin/plans/_form.html'"></ng-include>
 
                 <div class="panel-footer no-padder">
                     <input type="submit" value="{{ 'app.shared.buttons.save' | translate }}" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="planForm.$invalid || !partnerIsValid()"/>

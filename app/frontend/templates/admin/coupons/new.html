@@ -20,7 +20,7 @@
     <div id="couponForm">
       <form name="couponForm" novalidate="novalidate" class="col-lg-10 col-lg-offset-2 m-t-lg form-group">
 
-        <ng-include src="'admin/coupons/_form.html'"></ng-include>
+        <ng-include src="'/admin/coupons/_form.html'"></ng-include>
 
         <div class="panel-footer no-padder">
           <input type="button" value="{{ 'app.shared.buttons.save' | translate }}" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="couponForm.$invalid" ng-click="saveCoupon()"/>

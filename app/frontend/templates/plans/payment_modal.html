@@ -4,7 +4,7 @@
 </div>
 <div class="modal-body">
   <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
-  <ng-include src="'shared/_wallet_amount_info.html'"></ng-include>
+  <ng-include src="'/shared/_wallet_amount_info.html'"></ng-include>
 
   <p>{{ 'app.public.plans.here_is_the_NAME_subscription_summary' | translate:{NAME:member.name} }}</p>
   <p>{{ plan | humanReadablePlanName }}</p>
