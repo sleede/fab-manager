@@ -1,9 +1,22 @@
-module.exports = {
-  test: /\.(scss|sass)\.erb$/,
-  enforce: 'pre',
-  exclude: /node_modules/,
-  loader: [
-    'sass-loader',
-    'rails-erb-loader'
-  ]
-};
+const getStyleRule = require('@rails/webpacker/package/utils/get_style_rule');
+
+module.exports = getStyleRule(/\.(scss|sass)\.erb$/, false, [
+  {
+    loader: 'resolve-url-loader',
+    options: {
+      sourceMap: true
+    }
+  },
+  {
+    loader: 'sass-loader',
+    options: {
+      sourceMap: true,
+      sassOptions: {
+        includePaths: ['app/frontend/src/stylesheets']
+      }
+    }
+  },
+  {
+    loader: 'rails-erb-loader'
+  }
+]);
