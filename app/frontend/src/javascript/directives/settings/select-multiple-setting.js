@@ -44,7 +44,7 @@ Application.Directives.directive('selectMultipleSetting', ['Setting', 'growl', '
          */
         $scope.addItem = function () {
           $uibModal.open({
-            templateUrl: 'newSelectOption.html',
+            templateUrl: '../../../../templates/admin/settings/newSelectOption.html',
             resolve: {
               titleNew: function () { return $scope.titleNew; },
               descriptionNew: function () { return $scope.descriptionNew; }

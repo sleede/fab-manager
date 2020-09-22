@@ -1,5 +1,6 @@
 const { environment } = require('@rails/webpacker');
 const htmlErb = require('./loaders/html_erb');
+const js = require('./loaders/js');
 const jsErb = require('./loaders/js_erb');
 const sass = require('./loaders/sass');
 const sassErb = require('./loaders/sass_erb');
@@ -21,6 +22,7 @@ environment.plugins.prepend('Provide', new webpack.ProvidePlugin({
 environment.loaders.prepend('js-erb', jsErb);
 environment.loaders.prepend('html-erb', htmlErb);
 environment.loaders.prepend('sass-erb', sassErb);
+environment.loaders.prepend('js', js);
 environment.loaders.append('html', html);
 environment.loaders.append('sass', sass);
 

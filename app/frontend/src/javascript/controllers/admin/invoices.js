@@ -58,7 +58,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       prefix: settings.invoice_prefix,
       nextId: 40,
       date: moment().format('DDMMYYYY'),
-      templateUrl: 'editPrefix.html'
+      templateUrl: '../../../../templates/admin/invoices/settings/editPrefix.html'
     };
 
     // Invoices parameters
@@ -67,22 +67,22 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       reference: {
         model: '',
         help: null,
-        templateUrl: 'editReference.html'
+        templateUrl: '../../../../templates/admin/invoices/settings/editReference.html'
       },
       code: {
         model: '',
         active: true,
-        templateUrl: 'editCode.html'
+        templateUrl: '../../../../templates/admin/invoices/settings/editCode.html'
       },
       number: {
         model: '',
         help: null,
-        templateUrl: 'editNumber.html'
+        templateUrl: '../../../../templates/admin/invoices/settings/editNumber.html'
       },
       VAT: {
         rate: 19.6,
         active: false,
-        templateUrl: 'editVAT.html'
+        templateUrl: '../../../../templates/admin/invoices/settings/editVAT.html'
       },
       text: {
         content: ''
@@ -646,7 +646,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
 
       // otherwise, open a modal to ask for the stripe keys
       const modalInstance = $uibModal.open({
-        templateUrl: 'stripeKeys.html',
+        templateUrl: '../../../../templates/admin/invoices/settings/stripeKeys.html',
         controller: 'StripeKeysModalController',
         resolve: {
           stripeKeys: ['Setting', function (Setting) { return Setting.query({ names: "['stripe_public_key', 'stripe_secret_key']" }).$promise; }]

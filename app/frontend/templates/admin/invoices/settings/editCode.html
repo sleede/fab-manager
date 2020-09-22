@@ -1,0 +1,27 @@
+<div class="custom-invoice">
+  <div class="modal-header">
+    <h3 class="modal-title" translate>{{ 'app.admin.invoices.code' }}</h3>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="enableCode" class="control-label" translate>{{ 'app.admin.invoices.enable_the_code' }}</label>
+      <input bs-switch
+             ng-model="isSelected"
+             id="enableCode"
+             type="checkbox"
+             class="form-control m-l-sm"
+             switch-on-text="{{ 'app.admin.invoices.enabled' | translate }}"
+             switch-off-text="{{ 'app.admin.invoices.disabled' | translate }}"
+             switch-animate="true"/>
+    </div>
+
+    <div class="form-group" ng-show="isSelected">
+      <label for="codeModel" class="control-label" translate>{{ 'app.admin.invoices.code' }}</label>
+      <input id="codeModel" type="text" ng-model="codeModel" class="form-control"/>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-warning" ng-click="ok()" translate>{{ 'app.shared.buttons.confirm' }}</button>
+    <button class="btn btn-default" ng-click="cancel()" translate>{{ 'app.shared.buttons.cancel' }}</button>
+  </div>
+</div>
