@@ -2,7 +2,7 @@ Application.Directives.directive('members', [ 'Member',
   function (Member) {
     return ({
       restrict: 'E',
-      template: require('../../../templates/home/members.html'),
+      templateUrl: '../../../templates/home/members.html',
       link ($scope, element, attributes) {
         // The last registered members who confirmed their addresses
         $scope.lastMembers = null;

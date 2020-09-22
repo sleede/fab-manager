@@ -220,7 +220,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     $scope.generateAvoirForInvoice = function (invoice) {
       // open modal
       const modalInstance = $uibModal.open({
-        template: require('../../../../templates/admin/invoices/avoirModal.html'),
+        templateUrl: '../../../../templates/admin/invoices/avoirModal.html',
         controller: 'AvoirModalController',
         resolve: {
           invoice () { return invoice; },
@@ -578,7 +578,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     $scope.closeAnAccountingPeriod = function () {
       // open modal
       $uibModal.open({
-        template: require('../../../../templates/admin/invoices/closePeriodModal.html'),
+        templateUrl: '../../../../templates/admin/invoices/closePeriodModal.html',
         controller: 'ClosePeriodModalController',
         backdrop: 'static',
         keyboard: false,
@@ -592,7 +592,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
 
     $scope.toggleExportModal = function () {
       $uibModal.open({
-        template: require('../../../../templates/admin/invoices/accountingExportModal.html'),
+        templateUrl: '../../../../templates/admin/invoices/accountingExportModal.html',
         controller: 'AccountingExportModalController',
         size: 'xl'
       });

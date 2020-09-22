@@ -186,7 +186,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
       // open a confirmation dialog
       const modalInstance = $uibModal.open({
         animation: true,
-        template: require('../../../templates/events/deleteRecurrent.html'),
+        templateUrl: '../../../templates/events/deleteRecurrent.html',
         size: 'md',
         controller: 'DeleteRecurrentEventController',
         resolve: {
@@ -416,7 +416,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
     $scope.modifyReservation = function (reservation) {
       const index = $scope.reservations.indexOf(reservation);
       return $uibModal.open({
-        template: require('../../../templates/events/modify_event_reservation_modal.html'),
+        templateUrl: '../../../templates/events/modify_event_reservation_modal.html',
         resolve: {
           event () { return $scope.event; },
           reservation () { return reservation; }
@@ -671,7 +671,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
      */
     const payByStripe = function (reservation) {
       $uibModal.open({
-        template: require('../../../templates/stripe/payment_modal.html'),
+        templateUrl: '../../../templates/stripe/payment_modal.html',
         size: 'md',
         resolve: {
           reservation () {
@@ -739,7 +739,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
      */
     const payOnSite = function (reservation) {
       $uibModal.open({
-        template: require('../../../templates/shared/valid_reservation_modal.html'),
+        templateUrl: '../../../templates/shared/valid_reservation_modal.html',
         size: 'sm',
         resolve: {
           reservation () {
@@ -858,7 +858,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
     const showReserveSlotSameTimeModal = function(sameTimeReservations, callback) {
       const modalInstance = $uibModal.open({
         animation: true,
-        template: require('../../../templates/shared/_reserve_slot_same_time.html'),
+        templateUrl: '../../../templates/shared/_reserve_slot_same_time.html',
         size: 'md',
         controller: 'ReserveSlotSameTimeController',
         resolve: {

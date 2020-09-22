@@ -15,6 +15,6 @@ Application.Directives.directive('fabUserAvatar', [ function () {
       userAvatar: '=ngModel',
       avatarClass: '@'
     },
-    template: require('../../../templates/shared/_user_avatar.html')
+    templateUrl: '../../../templates/shared/_user_avatar.html'
   });
 }]);

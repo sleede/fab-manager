@@ -12,7 +12,7 @@ Application.Directives.directive('selectMultipleSetting', ['Setting', 'growl', '
         descriptionNew: '@',
         beforeAdd: '='
       },
-      template: require('../../../../templates/admin/settings/select-multiple.html'),
+      templateUrl: '../../../../templates/admin/settings/select-multiple.html',
       link ($scope, element, attributes) {
         // The setting
         $scope.setting = {

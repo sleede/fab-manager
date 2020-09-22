@@ -5,7 +5,7 @@ module.exports = {
     {
       loader: 'auto-ngtemplate-loader',
       options: {
-        pathResolver: (p) => p.replace(/src\/javascript\/.*$/, 'templates')
+        pathResolver: (p) => p.replace(/src\/javascript\/.*$/, 'templates/')
       }
     }
   ]

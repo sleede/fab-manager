@@ -14,7 +14,7 @@ Application.Directives.directive('selectSetting', ['Setting', 'growl', '_t',
         option4: '<',
         option5: '<'
       },
-      template: require('../../../../templates/admin/settings/select.html'),
+      templateUrl: '../../../../templates/admin/settings/select.html',
       link ($scope, element, attributes) {
         // The setting
         $scope.setting = {

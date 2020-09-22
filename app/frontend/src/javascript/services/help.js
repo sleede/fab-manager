@@ -34,7 +34,7 @@ Application.Services.factory('Help', ['$rootScope', '$uibModal', '$state', 'Auth
 
       $uibModal.open({
         animation: true,
-        template: require('../../../templates/shared/help_modal.html'),
+        templateUrl: '../../../templates/shared/help_modal.html',
         resolve: {
           tourName: function () { return tourName; }
         },

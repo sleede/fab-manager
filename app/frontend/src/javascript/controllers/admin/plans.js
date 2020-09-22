@@ -106,7 +106,7 @@ Application.Controllers.controller('NewPlanController', ['$scope', '$uibModal', 
     $scope.openPartnerNewModal = function (subscription) {
       const modalInstance = $uibModal.open({
         animation: true,
-        template: require('../../../../templates/shared/_partner_new_modal.html'),
+        templateUrl: '../../../../templates/shared/_partner_new_modal.html',
         size: 'lg',
         controller: ['$scope', '$uibModalInstance', 'User', function ($scope, $uibModalInstance, User) {
           $scope.partner = {};

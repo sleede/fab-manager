@@ -2,7 +2,7 @@ Application.Directives.directive('events', [ 'Event',
   function (Event) {
     return ({
       restrict: 'E',
-      template: require('../../../../templates/home/events.html'),
+      templateUrl: '../../../../templates/home/events.html',
       link ($scope, element, attributes) {
         // The closest upcoming events
         $scope.upcomingEvents = null;
