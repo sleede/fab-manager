@@ -162,6 +162,8 @@ fr:
         standard: "Standard"
         type_is_required: "Le type est requis."
         group: "Groupe"
+        groups: "Groupes"
+        all: "Tous"
         transversal_all_groups: "Transversal (tout les groupes)"
         group_is_required: "Le groupe est requis."
         number_of_periods: "Nombre de périodes"

@@ -32,12 +32,19 @@
             class="form-control"
             ng-model="plan.group_id"
             required="required"
-            ng-disabled="method == 'PATCH'">
-        <option value="all" translate>{{ 'app.shared.plan.transversal_all_groups' }}</option>
-        <optgroup label="Groupes">
-            <option ng-repeat="group in groups" ng-value="group.id" ng-selected="plan.group_id == group.id">{{group.name}}</option>
-        </optgroup>
+            ng-if="method !== 'PATCH'"
+            ng-options="item.id as translateLabel(item, 'name') group by translateLabel(item, 'category') for item in groups track by item.id">
     </select>
+    <input type="text"
+           id="plan[group_id]"
+           ng-value="selectedGroup()"
+           ng-if="method == 'PATCH'"
+           class="form-control"
+           disabled />
+    <input type="hidden"
+           name="plan[group_id]"
+           ng-value="plan.group_id"
+           ng-if="method == 'PATCH'"/>
     <span class="help-block" ng-show="planForm['plan[group_id]'].$dirty && planForm['plan[group_id]'].$error.required" translate>{{ 'app.shared.plan.group_is_required' }}</span>
 </div>
 

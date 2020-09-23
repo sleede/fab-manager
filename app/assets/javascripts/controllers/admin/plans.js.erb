@@ -21,12 +21,20 @@
 /* COMMON CODE */
 
 class PlanController {
-  constructor ($scope, groups, prices, partners, CSRF) {
+  constructor ($scope, groups, prices, partners, CSRF, _t) {
     // protection against request forgery
     CSRF.setMetaTags();
 
     // groups list
-    $scope.groups = groups.filter(function (g) { return (g.slug !== 'admins') && !g.disabled; });
+    $scope.groups = groups
+      .filter(function (g) { return (g.slug !== 'admins') && !g.disabled; })
+      .map(e => Object.assign({}, e, { category: 'app.shared.plan.groups', id: `${e.id}` }))
+    $scope.groups.push({ id: 'all', name: 'app.shared.plan.transversal_all_groups', category: 'app.shared.plan.all' });
+
+    // dynamically translate a label if needed
+    $scope.translateLabel = function (group, prop) {
+      return group[prop] && group[prop].match(/^app\./) ? _t(group[prop]) : group[prop];
+    }
 
     // users with role 'partner', notifiables for a partner plan
     $scope.partners = partners.users;
@@ -156,7 +164,7 @@ Application.Controllers.controller('NewPlanController', ['$scope', '$uibModal', 
       }
     };
 
-    return new PlanController($scope, groups, prices, partners, CSRF);
+    return new PlanController($scope, groups, prices, partners, CSRF, _t);
   }
 ]);
 
@@ -177,13 +185,13 @@ Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'p
     $scope.machines = machines;
 
     // List of groups
-    $scope.groups = groups;
+    $scope.allGroups = groups;
 
     // current form is used for edition mode
     $scope.mode = 'edition';
 
     // edited plan data
-    $scope.plan = planPromise;
+    $scope.plan = Object.assign({}, planPromise, { group_id: `${planPromise.group_id}` });
     if ($scope.plan.type === null) { $scope.plan.type = 'Plan'; }
     if ($scope.plan.disabled) { $scope.plan.disabled = 'true'; }
 
@@ -192,6 +200,11 @@ Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'p
 
     // HTTP method for the rest API
     $scope.method = 'PATCH';
+
+    $scope.selectedGroup = function () {
+      const group = $scope.groups.filter(g => g.id === $scope.plan.group_id);
+      return $scope.translateLabel(group[0], 'name');
+    }
 
     /**
      * If a parent plan was set ($scope.plan.parent), the prices will be copied from this parent plan into
@@ -281,6 +294,6 @@ Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'p
     };
 
     // Using the PlansController
-    return new PlanController($scope, groups, prices, partners, CSRF);
+    return new PlanController($scope, groups, prices, partners, CSRF, _t);
   }
 ]);

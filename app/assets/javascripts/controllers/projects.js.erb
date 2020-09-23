@@ -334,7 +334,7 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
       $scope.search.component_id = undefined;
       $scope.search.theme_id = undefined;
       $scope.setUrlQueryParams($scope.search);
-      return $scope.triggerSearch();
+      $scope.triggerSearch();
     };
 
     /**
@@ -346,22 +346,22 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
       if ($scope.openlab.searchOverWholeNetwork === true) {
         updateUrlParam('whole_network', 't');
         $scope.projectsPagination = new paginationService.Instance(OpenlabProject, currentPage, PROJECTS_PER_PAGE, null, { }, loadMoreOpenlabCallback);
-        return OpenlabProject.query({ q: $scope.search.q, page: currentPage, per_page: PROJECTS_PER_PAGE }, function (projectsPromise) {
+        OpenlabProject.query({ q: $scope.search.q, page: currentPage, per_page: PROJECTS_PER_PAGE }, function (projectsPromise) {
           if (projectsPromise.errors) {
             growl.error(_t('app.public.projects_list.openlab_search_not_available_at_the_moment'));
             $scope.openlab.searchOverWholeNetwork = false;
-            return $scope.triggerSearch();
+            $scope.triggerSearch();
           } else {
             $scope.projectsPagination.totalCount = projectsPromise.meta.total;
-            return $scope.projects = normalizeProjectsAttrs(projectsPromise.projects);
+            $scope.projects = normalizeProjectsAttrs(projectsPromise.projects);
           }
         });
       } else {
         updateUrlParam('whole_network', 'f');
         $scope.projectsPagination = new paginationService.Instance(Project, currentPage, PROJECTS_PER_PAGE, null, { }, loadMoreCallback, 'search');
-        return Project.search({ search: $scope.search, page: currentPage, per_page: PROJECTS_PER_PAGE }, function (projectsPromise) {
+        Project.search({ search: $scope.search, page: currentPage, per_page: PROJECTS_PER_PAGE }, function (projectsPromise) {
           $scope.projectsPagination.totalCount = projectsPromise.meta.total;
-          return $scope.projects = projectsPromise.projects;
+          $scope.projects = projectsPromise.projects;
         });
       }
     };
@@ -388,7 +388,8 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
       updateUrlParam('from', search.from);
       updateUrlParam('theme_id', search.theme_id);
       updateUrlParam('component_id', search.component_id);
-      return updateUrlParam('machine_id', search.machine_id);
+      updateUrlParam('machine_id', search.machine_id);
+      return true;
     };
 
     /* PRIVATE SCOPE */

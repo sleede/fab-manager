@@ -162,6 +162,8 @@ pt:
         standard: "Standard"
         type_is_required: "Tipo é obrigatório."
         group: "Grupo"
+        groups: "Grupos"
+        all: "Todos"
         transversal_all_groups: "Transversal (todos os grupos)"
         group_is_required: "Grupo é obrigatório."
         number_of_periods: "Número de períodos"
