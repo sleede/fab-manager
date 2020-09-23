@@ -2,6 +2,7 @@
 
 - Fix a bug: unable to run tests suite with run-tests.sh
 - Fix a bug: unable to search for projects (#230)
+- Fix a bug: wallet tab is not shown in members dashboard
 - Updated coveralls gem to a supported version
 
 ## v4.5.6 2020 September 1st
