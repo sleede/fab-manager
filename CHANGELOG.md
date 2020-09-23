@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Fix a bug: unable to run tests suite with run-tests.sh
+- Fix a bug: unable to search for projects (#230)
 - Updated coveralls gem to a supported version
 
 ## v4.5.6 2020 September 1st
