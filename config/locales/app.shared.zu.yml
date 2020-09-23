@@ -162,6 +162,8 @@ zu:
         standard: "crwdns9649:0crwdne9649:0"
         type_is_required: "crwdns9651:0crwdne9651:0"
         group: "crwdns9653:0crwdne9653:0"
+        groups: "crwdns20894:0crwdne20894:0"
+        all: "crwdns20896:0crwdne20896:0"
         transversal_all_groups: "crwdns9655:0crwdne9655:0"
         group_is_required: "crwdns9657:0crwdne9657:0"
         number_of_periods: "crwdns9659:0crwdne9659:0"
