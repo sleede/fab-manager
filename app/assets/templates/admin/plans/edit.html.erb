@@ -48,7 +48,7 @@
               <div class="form-group col-md-6 col-lg-offset-6">
                   <input type="hidden" ng-model="plan.parent" name="plan[parent_id]" ng-value="plan.parent"/>
                   <label for="parentPlan" translate>{{ 'app.admin.plans.edit.copy_prices_from' }}</label>
-                  <select id="parentPlan" ng-options="plan.id as humanReadablePlanName(plan, groups) for plan in plans" ng-model="plan.parent" ng-change="copyPricesFromPlan()" class="form-control">
+                  <select id="parentPlan" ng-options="plan.id as humanReadablePlanName(plan, allGroups) for plan in plans" ng-model="plan.parent" ng-change="copyPricesFromPlan()" class="form-control">
                       <option value=""></option>
                   </select>
               </div>

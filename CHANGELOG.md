@@ -5,6 +5,7 @@
 - Fix a bug: wallet tab is not shown in members dashboard
 - Fix a bug: slots duration is not shown when looking at a new availability
 - Fix a bug: user's manual URL is not up-to-date
+- Fix a bug: unable to create a subscription plan for only one group
 - Updated coveralls gem to a supported version
 
 ## v4.5.6 2020 September 1st
