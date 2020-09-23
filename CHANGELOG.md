@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v4.5.7 2020 September 23
+
 - Fix a bug: unable to run tests suite with run-tests.sh
 - Fix a bug: unable to search for projects (#230)
 - Fix a bug: wallet tab is not shown in members dashboard
