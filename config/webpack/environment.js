@@ -9,6 +9,7 @@ const sass = require('./loaders/sass');
 const sassErb = require('./loaders/sass_erb');
 const html = require('./loaders/html');
 const uiTour = require('./loaders/ui-tour');
+const nodeModules = require('./loaders/node_modules');
 
 environment.plugins.prepend('Provide', new webpack.ProvidePlugin({
   $: 'jquery',
@@ -31,6 +32,7 @@ environment.loaders.prepend('js', js);
 environment.loaders.append('html', html);
 environment.loaders.append('sass', sass);
 environment.loaders.append('uiTour', uiTour);
+environment.loaders.append('nodeModules', nodeModules);
 
 environment.splitChunks();
 
