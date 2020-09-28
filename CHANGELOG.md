@@ -1,5 +1,10 @@
 # Changelog Fab-manager
 
+## v4.5.8 2020 Septembre 28
+
+- Fix a bug: unable to run the elastic-upgrade script
+- Fix a security issue: updated rails to 5.2.4.4 to fix [CVE-2020-15169](https://nvd.nist.gov/vuln/detail/CVE-2020-15169)
+
 ## v4.5.7 2020 September 23
 
 - Fix a bug: unable to run tests suite with run-tests.sh
