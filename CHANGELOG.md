@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: unable to run the elastic-upgrade script
+
 ## v4.5.7 2020 September 23
 
 - Fix a bug: unable to run tests suite with run-tests.sh
