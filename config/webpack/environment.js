@@ -14,6 +14,7 @@ environment.plugins.prepend('Provide', new webpack.ProvidePlugin({
   $: 'jquery',
   jQuery: 'jquery',
   'window.jQuery': 'jquery',
+  _: 'lodash',
   Hone: 'hone',
   Tether: 'tether',
   Holder: 'holderjs',
