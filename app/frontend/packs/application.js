@@ -45,7 +45,7 @@ import 'angular-base64-upload/dist/angular-base64-upload.min';
 import 'summernote';
 import 'angular-summernote/dist/angular-summernote';
 import '../src/javascript/lib/summernote-ext-nugget';
-import 'jquery-minicolors/jquery.minicolors.js';
+import '@claviska/jquery-minicolors/jquery.minicolors.js';
 import 'angular-minicolors/angular-minicolors.js';
 import 'angular-translate/dist/angular-translate';
 import 'angular-translate-loader-partial/angular-translate-loader-partial';

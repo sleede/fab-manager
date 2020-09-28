@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "5.14.0",
+    "@claviska/jquery-minicolors": "^2.3.5",
     "@rails/webpacker": "5.2.1",
     "@uirouter/angularjs": "0.4",
     "AngularDevise": "https://github.com/cloudspace/angular_devise.git#1.0.2",
@@ -75,7 +76,6 @@
     "holderjs": "2.6",
     "jasny-bootstrap": "3.1",
     "jquery": ">=3.5.0",
-    "jquery-minicolors": "^2.1.10",
     "jquery-ujs": "^1.2.2",
     "medium-editor": "4.4.0",
     "moment": "2.22",

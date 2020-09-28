@@ -5,6 +5,7 @@
 - Updated summernote to 0.8.18
 - Updated angular-summernote to 0.8.1
 - Updated FontAwesome from v4 to v5
+- Updated jquery-minicolors to 2.3.5
 
 ## v4.5.6 2020 September 1st
 
