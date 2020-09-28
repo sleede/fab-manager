@@ -6,6 +6,7 @@
 - Updated angular-summernote to 0.8.1
 - Updated FontAwesome from v4 to v5
 - Updated jquery-minicolors to 2.3.5
+- Updated angular-bootstrap-switch to 0.5.2
 
 ## v4.5.6 2020 September 1st
 

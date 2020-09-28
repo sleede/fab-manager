@@ -1230,10 +1230,15 @@ angular-base64-upload@^0.0.9:
   version "1.4.1"
   resolved "https://github.com/incuna/angular-bind-html-compile.git#7626140a0eb7c724dc5c1eb3f7715bf06adf4c2a"
 
-angular-bootstrap-switch@0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/angular-bootstrap-switch/-/angular-bootstrap-switch-0.4.0.tgz#8f4d45a0de5ff1227bd6ae2c5348e4c821d9303a"
-  integrity sha1-j01FoN5f8SJ71q4sU0jkyCHZMDo=
+angular-bootstrap-switch@0.5.2:
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/angular-bootstrap-switch/-/angular-bootstrap-switch-0.5.2.tgz#9469b7fc23bcb958d280edbf81692dfd1c6a9397"
+  integrity sha1-lGm3/CO8uVjSgO2/gWkt/Rxqk5c=
+  dependencies:
+    angular ">=1.4.0"
+    bootstrap ">=2.3.2"
+    bootstrap-switch "3.3.2"
+    jquery ">=1.9.0"
 
 angular-cookies@1.7:
   version "1.7.9"
@@ -1374,7 +1379,7 @@ angular-xeditable@0.10:
   dependencies:
     angular "~1.x"
 
-angular@1.8, angular@>=1.5, angular@^1.0.8, angular@^1.7.9, angular@~1.x:
+angular@1.8, angular@>=1.4.0, angular@>=1.5, angular@^1.0.8, angular@^1.7.9, angular@~1.x:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/angular/-/angular-1.8.0.tgz#b1ec179887869215cab6dfd0df2e42caa65b1b51"
   integrity sha512-VdaMx+Qk0Skla7B5gw77a8hzlcOakwF8mjlW13DpIWIDlfqwAbSSLfd8N/qZnzEmQF4jC4iofInd3gE7vL8ZZg==
@@ -1804,6 +1809,11 @@ bootstrap-switch@3.3.2:
   integrity sha1-ed20n63DCPtzHiV/lZV69ImW7qc=
   dependencies:
     jquery ">=1.9.0"
+
+bootstrap@>=2.3.2:
+  version "4.5.2"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.5.2.tgz#a85c4eda59155f0d71186b6e6ad9b875813779ab"
+  integrity sha512-vlGn0bcySYl/iV+BGA544JkkZP5LB3jsmkeKLFQakCOwCM3AOk7VkldBz4jrzSe+Z0Ezn99NVXa1o45cQY4R6A==
 
 brace-expansion@^1.1.7:
   version "1.1.11"
