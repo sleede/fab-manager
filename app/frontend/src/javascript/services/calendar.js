@@ -32,7 +32,7 @@ Application.Services.factory('CalendarConfig', [() =>
         agenda: 'H:mm',
         month: 'H(:mm)'
       },
-      axisFormat: 'H:mm',
+      slotLabelFormat: 'H:mm',
 
       allDaySlot: false,
       defaultView: 'agendaWeek',
