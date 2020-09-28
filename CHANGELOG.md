@@ -7,6 +7,7 @@
 - Updated FontAwesome from v4 to v5
 - Updated jquery-minicolors to 2.3.5
 - Updated angular-bootstrap-switch to 0.5.2
+- Updated bootstrap-switch to 3.4.0
 
 ## v4.5.6 2020 September 1st
 

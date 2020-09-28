@@ -33,8 +33,8 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "5.14.0",
     "@claviska/jquery-minicolors": "^2.3.5",
+    "@fortawesome/fontawesome-free": "5.14.0",
     "@rails/webpacker": "5.2.1",
     "@uirouter/angularjs": "0.4",
     "AngularDevise": "https://github.com/cloudspace/angular_devise.git#1.0.2",
@@ -67,7 +67,7 @@
     "angular-unsavedchanges": "0.2",
     "angular-xeditable": "0.10",
     "bootstrap-sass": "3.4.1",
-    "bootstrap-switch": "3.3.2",
+    "bootstrap-switch": "^3.4.0",
     "checklist-model": "0.2",
     "codemirror": "^4.8.0",
     "d3": "3.5",
