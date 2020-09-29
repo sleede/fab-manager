@@ -411,7 +411,7 @@ fr:
         unable_to_select_plan_if_slots_in_the_past: "Impossible de sélectionner un abonnement si l'un des créneaux sélectionné est dans le passé"
         unable_to_change_the_reservation: "Impossible de modifier la réservation"
         confirmation_required: "Confirmation requise"
-        do_you_really_want_to_cancel_this_reservation: "Êtes-vous sur de vouloir annuler cette réservation ?"
+        do_you_really_want_to_cancel_this_reservation_html: "<p>Do you really want to cancel this reservation?</p><p>Warning: if this reservation was made free of charge, as part of a subscription, the credits used will not be re-credited.</p>"
         reservation_was_cancelled_successfully: "La réservation a bien été annulée."
         cancellation_failed: "L'annulation a échouée."
         confirm_payment_of_html: "{ROLE, select, admin{Paiement sur place} other{Payer}} : {AMOUNT}" #eg. confirm my payment of $20.00
