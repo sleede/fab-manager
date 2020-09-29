@@ -1,6 +1,8 @@
 # Changelog Fab-manager
 
+- Ability to configure until when the events are shown on the home page
 - Fix a bug: managers cannot see passed events
+- [TODO DEPLOY] `rails db:seed`
 
 ## v4.5.8 2020 Septembre 28
 

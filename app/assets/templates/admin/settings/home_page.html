@@ -27,6 +27,18 @@
                 </text-setting>
             </div>
         </div>
+      <div class="row m-t-lg">
+        <div class="col-md-6">
+          <select-setting name="upcoming_events_shown"
+                          settings="allSettings"
+                          required="true"
+                          label="app.admin.settings.home.show_upcoming_events"
+                          option-1="['until_start', 'app.admin.settings.home.upcoming_events.until_start']"
+                          option-2="['2h_before_end', 'app.admin.settings.home.upcoming_events.2h_before_end']"
+                          option-3="['until_end', 'app.admin.settings.home.upcoming_events.until_end']">
+          </select-setting>
+        </div>
+      </div>
         <div class="row m-t-lg home-page-style">
           <uib-accordion>
             <uib-accordion-group is-open="advancedSettings.open">

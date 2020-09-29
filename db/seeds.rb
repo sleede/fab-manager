@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 
 if StatisticIndex.count.zero?
   StatisticIndex.create!([
@@ -891,6 +890,8 @@ Setting.set('confirmation_required', false) unless Setting.find_by(name: 'confir
 Setting.set('wallet_module', true) unless Setting.find_by(name: 'wallet_module').try(:value)
 
 Setting.set('statistics_module', true) unless Setting.find_by(name: 'statistics_module').try(:value)
+
+Setting.set('upcoming_events_shown', 'until_start') unless Setting.find_by(name: 'upcoming_events_shown').try(:value)
 
 if StatisticCustomAggregation.count.zero?
   # available reservations hours for machines

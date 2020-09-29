@@ -36,9 +36,17 @@ class API::EventsController < API::ApiController
     limit = params[:limit]
     @events = Event.includes(:event_image, :event_files, :availability, :category)
                    .where('events.nb_total_places != -1 OR events.nb_total_places IS NULL')
-                   .where('availabilities.start_at >= ?', DateTime.current)
                    .order('availabilities.start_at ASC').references(:availabilities)
                    .limit(limit)
+
+    @events = case Setting.get('upcoming_events_shown')
+              when 'until_start'
+                @events.where('availabilities.start_at >= ?', DateTime.current)
+              when '2h_before_end'
+                @events.where('availabilities.end_at >= ?', DateTime.current + 2.hours)
+              else
+                @events.where('availabilities.end_at >= ?', DateTime.current)
+              end
   end
 
   def show; end
