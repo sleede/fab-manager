@@ -411,7 +411,7 @@ es:
         unable_to_select_plan_if_slots_in_the_past: "No se puede seleccionar un plan si alguno de los espacios seleccionados está en el pasado"
         unable_to_change_the_reservation: "Imposible cambiar reserva"
         confirmation_required: "Confirmación requerida"
-        do_you_really_want_to_cancel_this_reservation_html: "<p>Do you really want to cancel this reservation?</p><p>Warning: if this reservation was made free of charge, as part of a subscription, the credits used will not be re-credited.</p>"
+        do_you_really_want_to_cancel_this_reservation_html: "<p>¿Está seguro de querer cancelar la reserva?</p><p>Advertencia: si esta reserva se realizó de forma gratuita, como parte de una suscripción, los créditos utilizados no serán reacreditados.</p>"
         reservation_was_cancelled_successfully: "La reserva se ha cancelado con éxito."
         cancellation_failed: "Cancelación fallida."
         confirm_payment_of_html: "{ROLE, select, admin{Payment on site} other{Pay}}: {AMOUNT}" #eg. confirm my payment of $20.00
