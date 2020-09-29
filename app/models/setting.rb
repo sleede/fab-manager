@@ -105,7 +105,8 @@ class Setting < ApplicationRecord
                              invoice_prefix
                              confirmation_required
                              wallet_module
-                             statistics_module] }
+                             statistics_module
+                             upcoming_events_shown] }
   # WARNING: when adding a new key, you may also want to add it in app/policies/setting_policy.rb#public_whitelist
 
   def value

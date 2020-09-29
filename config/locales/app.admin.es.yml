@@ -1112,6 +1112,7 @@ es:
         confirmation_is_required: "Confirmation required"
         wallet_module: "wallet module"
         statistics_module: "statistics module"
+        upcoming_events_shown: "display limit for upcoming events"
         general:
           general: "General"
           title: "Title"
@@ -1151,6 +1152,12 @@ es:
           statistics: "Statistics"
           statistics_info_html: "<p>Enable or disable the statistics module.</p><p>If enabled, every nights, the data of the day just passed will be consolidated in the database of a powerful analysis engine. Then, every administrators will be able to browse statistical charts and tables in the corresponding section.</p>"
           enable_statistics: "Enable statistics"
+        home:
+          show_upcoming_events: "Show upcoming events"
+          upcoming_events:
+            until_start: "Until they start"
+            2h_before_end: "Until 2 hours before they end"
+            until_end: "Until they end"
         privacy:
           title: "Privacidad"
           privacy_policy: "Política de privacidad"

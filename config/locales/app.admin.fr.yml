@@ -1112,6 +1112,7 @@ fr:
         confirmation_is_required: "Confirmation requise"
         wallet_module: "module porte-monnaie"
         statistics_module: "module de statistiques"
+        upcoming_events_shown: "la limite d'affichage des événements à venir"
         general:
           general: "Général"
           title: "Titre"
@@ -1151,6 +1152,12 @@ fr:
           statistics: "Statistiques"
           statistics_info_html: "<p>Activer ou désactiver le module de statistiques.</p><p>Si activé, chaque nuit, les données de la journée qui vient de s'écouler seront consolidées dans la base de données d'un puissant moteur d'analyse. Ensuite, chaque administrateur pourra parcourir les tableaux et graphiques statistiques dans la section correspondante.</p>"
           enable_statistics: "Activer les statistiques"
+        home:
+          show_upcoming_events: "Afficher les prochains événements"
+          upcoming_events:
+            until_start: "Jusqu'à ce qu'ils commencent"
+            2h_before_end: "Jusqu'à 2 heures avant la fin"
+            until_end: "Jusqu'à ce qu'ils finissent"
         privacy:
           title: "Confidentialité"
           privacy_policy: "Politique de confidentialité"

@@ -8,4 +8,5 @@ class UsersCredit < ApplicationRecord
 
   belongs_to :training_credit, -> { where('credits.creditable_type = ?', 'Training') }, foreign_key: 'credit_id', class_name: 'Credit'
   belongs_to :machine_credit, -> { where('credits.creditable_type = ?', 'Machine') }, foreign_key: 'credit_id', class_name: 'Credit'
+  belongs_to :space_credit, -> { where('credits.creditable_type = ?', 'Space') }, foreign_key: 'credit_id', class_name: 'Credit'
 end

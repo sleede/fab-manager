@@ -3,7 +3,7 @@
 Steps to follow:
 - Dump database of v1
 - Make a gzipped tarball of public/uploads
-- Install Fab-manager v4.3.4+
+- Install Fab-manager v4.3.4 or above
 - Restore the DB dump in the new postgres instance
 - Open a psql shell, then:
   ```sql

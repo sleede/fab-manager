@@ -5,7 +5,7 @@ class EventPolicy < ApplicationPolicy
   # Defines the scope of the events index, depending on the role of the current user
   class Scope < Scope
     def resolve
-      if user.nil? || (user && !user.admin?)
+      if user.nil? || (user && !user.admin? && !user.manager?)
         scope.includes(:event_image, :event_files, :availability, :category)
              .where('availabilities.start_at >= ?', DateTime.current)
              .order('availabilities.start_at ASC')
