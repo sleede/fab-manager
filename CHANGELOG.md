@@ -1,12 +1,14 @@
 # Changelog Fab-manager
 
+## v4.5.9 2020 September 29
+
 - Ability to configure until when the events are shown on the home page
 - Alert before cancelling a reservation that credits will be lost
 - Improved documentation about upgrade process
 - Fix a bug: managers cannot see passed events
 - [TODO DEPLOY] `rails db:seed`
 
-## v4.5.8 2020 Septembre 28
+## v4.5.8 2020 September 28
 
 - Fix a bug: unable to run the elastic-upgrade script
 - Fix a security issue: updated rails to 5.2.4.4 to fix [CVE-2020-15169](https://nvd.nist.gov/vuln/detail/CVE-2020-15169)
