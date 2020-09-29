@@ -1112,6 +1112,7 @@ zu:
         confirmation_is_required: "crwdns20722:0crwdne20722:0"
         wallet_module: "crwdns20724:0crwdne20724:0"
         statistics_module: "crwdns20864:0crwdne20864:0"
+        upcoming_events_shown: "crwdns20898:0crwdne20898:0"
         general:
           general: "crwdns20726:0crwdne20726:0"
           title: "crwdns20728:0crwdne20728:0"
@@ -1151,6 +1152,12 @@ zu:
           statistics: "crwdns20866:0crwdne20866:0"
           statistics_info_html: "crwdns20868:0crwdne20868:0"
           enable_statistics: "crwdns20870:0crwdne20870:0"
+        home:
+          show_upcoming_events: "crwdns20900:0crwdne20900:0"
+          upcoming_events:
+            until_start: "crwdns20902:0crwdne20902:0"
+            2h_before_end: "crwdns20904:0crwdne20904:0"
+            until_end: "crwdns20906:0crwdne20906:0"
         privacy:
           title: "crwdns20792:0crwdne20792:0"
           privacy_policy: "crwdns20794:0crwdne20794:0"
