@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: managers cannot see passed events
+
 ## v4.5.8 2020 Septembre 28
 
 - Fix a bug: unable to run the elastic-upgrade script
