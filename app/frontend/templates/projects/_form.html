@@ -23,7 +23,7 @@
         <div class="col-sm-10">
           <div class="fileinput" data-provides="fileinput" ng-class="fileinputClass(project.project_image)">
             <div class="fileinput-new thumbnail" style="width: 334px; height: 250px;">
-              <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:FontAwesome/icon" bs-holder ng-if="!project.project_image">
+              <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:'Font Awesome 5 Free'/icon" bs-holder ng-if="!project.project_image">
             </div>
             <div class="fileinput-preview fileinput-exists thumbnail" data-trigger="fileinput" style="max-width: 334px;">
               <img ng-src="{{ project.project_image }}" alt="" />
@@ -112,7 +112,7 @@
 
                   <div class="fileinput" data-provides="fileinput" ng-class="fileinputClass(image.attachment)" style="width: 100%;">
                     <div class="fileinput-new thumbnail" style="width: 100%; height: 200px;">
-                      <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:FontAwesome/icon" bs-holder ng-if="!image.attachment">
+                      <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:'Font Awesome 5 Free'/icon" bs-holder ng-if="!image.attachment">
                     </div>
                     <div class="fileinput-preview fileinput-exists thumbnail" data-trigger="fileinput" style="max-width: 334px;">
                       <img ng-src="{{ image.attachment_url }}" alt="{{image.attachment}}" />
