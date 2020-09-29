@@ -411,7 +411,7 @@ zu:
         unable_to_select_plan_if_slots_in_the_past: "crwdns20136:0crwdne20136:0"
         unable_to_change_the_reservation: "crwdns10091:0crwdne10091:0"
         confirmation_required: "crwdns10093:0crwdne10093:0"
-        do_you_really_want_to_cancel_this_reservation: "crwdns10095:0crwdne10095:0"
+        do_you_really_want_to_cancel_this_reservation_html: "crwdns20908:0crwdne20908:0"
         reservation_was_cancelled_successfully: "crwdns10097:0crwdne10097:0"
         cancellation_failed: "crwdns10099:0crwdne10099:0"
         confirm_payment_of_html: "crwdns10101:0ROLE={ROLE}crwdnd10101:0AMOUNT={AMOUNT}crwdne10101:0" #eg. confirm my payment of $20.00
