@@ -11,7 +11,7 @@ Application.Services.factory('CalendarConfig', [() =>
 
     const defaultOptions = {
       timezone: Fablab.timezone,
-      lang: Fablab.fullcalendar_locale,
+      locale: Fablab.fullcalendar_locale,
       header: {
         left: 'month agendaWeek',
         center: 'title',

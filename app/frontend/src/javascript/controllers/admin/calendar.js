@@ -57,7 +57,7 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
       slotDuration: BASE_SLOT,
       snapDuration: BOOKING_SNAP,
       selectable: true,
-      selecHelper: true,
+      selectHelper: true,
       minTime: moment.duration(moment(bookingWindowStart.setting.value).format('HH:mm:ss')),
       maxTime: moment.duration(moment(bookingWindowEnd.setting.value).format('HH:mm:ss')),
       select (start, end, jsEvent, view) {
@@ -69,7 +69,7 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
       eventRender (event, element, view) {
         return eventRenderCb(event, element, view);
       },
-      viewRender(view, element) {
+      viewRender (view, element) {
         return viewRenderCb(view, element);
       },
       loading (isLoading, view) {
