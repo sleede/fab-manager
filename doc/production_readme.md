@@ -157,7 +157,9 @@ Then, you'll need to perform the upgrade with the following command:
 
 *This procedure updates Fab-manager to the most recent version by default.*
 
-> ⚠ If you are upgrading from a very outdated version, you must first upgrade to v2.8.3, then to v3.1.2 and finally to the last version
+> ⚠ If you are upgrading from a very outdated version, you must first upgrade to v2.8.3, then to v3.1.2, then to 4.0.4 and finally to the last version
+
+> ⚠ With versions < 4.3.3, you must replace `bundle exec rails` with `bundle exec rake` in all the commands above
 
 <a name="steps"></a>
 ### Steps
