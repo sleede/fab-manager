@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Ability to configure until when the events are shown on the home page
+- Alert before cancelling a reservation that credits will be lost
 - Improved documentation about upgrade process
 - Fix a bug: managers cannot see passed events
 - [TODO DEPLOY] `rails db:seed`
