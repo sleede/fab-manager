@@ -28,11 +28,15 @@ Application.Services.factory('CalendarConfig', [() =>
         prev: 'left-single-arrow',
         next: 'right-single-arrow'
       },
-      timeFormat: {
-        agenda: 'H:mm',
-        month: 'H(:mm)'
-      },
       slotLabelFormat: 'H:mm',
+      views: {
+        agendaWeek: {
+          timeFormat: 'H:mm'
+        },
+        month: {
+          timeFormat: 'H(:mm)'
+        }
+      },
 
       allDaySlot: false,
       defaultView: 'agendaWeek',

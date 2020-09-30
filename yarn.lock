@@ -1346,11 +1346,10 @@ angular-ui-bootstrap@1.2.5:
   resolved "https://registry.yarnpkg.com/angular-ui-bootstrap/-/angular-ui-bootstrap-1.2.5.tgz#b0c1eff0bf3b7a65668984a1b81820a90dc60995"
   integrity sha1-sMHv8L87emVmiYShuBggqQ3GCZU=
 
-"angular-ui-calendar@https://github.com/sophilabs-forks/ui-calendar.git#master":
+angular-ui-calendar@^1.0.2:
   version "1.0.2"
-  resolved "https://github.com/sophilabs-forks/ui-calendar.git#21c4d834cb82f6f4f4c6417669970ff02e193c27"
-  dependencies:
-    fullcalendar "~3.3.x"
+  resolved "https://registry.yarnpkg.com/angular-ui-calendar/-/angular-ui-calendar-1.0.2.tgz#fa271057425572efaadf6660243cc33cb99f33c1"
+  integrity sha1-+icQV0JVcu+q32ZgJDzDPLmfM8E=
 
 angular-ui-codemirror@^0.3.0:
   version "0.3.0"
@@ -3897,13 +3896,10 @@ fstream@^1.0.0, fstream@^1.0.12:
     mkdirp ">=0.5 0"
     rimraf "2"
 
-fullcalendar@3.3.1, fullcalendar@~3.3.x:
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/fullcalendar/-/fullcalendar-3.3.1.tgz#e8d458d64b7dcb5ba70ce890dda2488b8911539a"
-  integrity sha1-6NRY1kt9y1unDOiQ3aJIi4kRU5o=
-  dependencies:
-    jquery "2 - 3"
-    moment "^2.9.0"
+fullcalendar@3.10.2:
+  version "3.10.2"
+  resolved "https://registry.yarnpkg.com/fullcalendar/-/fullcalendar-3.10.2.tgz#9b1ba84bb02803621b761d1bba91a4f18affafb7"
+  integrity sha512-YWZaHdp8ZLBqhPz615PoXdA49ymsBTUF+MGDM6H3vyz71Pv/ZW9Pm9/Mj3x6n822k6bs2txFO7muRTSvBhsqKg==
 
 function-bind@^1.1.1:
   version "1.1.1"
@@ -4908,7 +4904,7 @@ jquery-ujs@^1.2.2:
   dependencies:
     jquery ">=1.8.0"
 
-"jquery@2 - 3", jquery@>=1.8.0, jquery@>=3.5.0:
+jquery@>=1.8.0, jquery@>=3.5.0:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.5.1.tgz#d7b4d08e1bfdb86ad2f1a3d039ea17304717abb5"
   integrity sha512-XwIBPqcMn57FxfT+Go5pzySnm4KWkT1Tv7gjrpT1srtf8Weynl6R273VJ5GjkRb51IzMp5nbaPjJXMWeju2MKg==
@@ -5572,11 +5568,6 @@ moment@2.22, "moment@>=2.8.0 <3.0.0":
   version "2.24.0"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
   integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
-
-moment@^2.9.0:
-  version "2.29.0"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.0.tgz#fcbef955844d91deb55438613ddcec56e86a3425"
-  integrity sha512-z6IJ5HXYiuxvFTI6eiQ9dm77uE0gyy1yXNApVHqTcnIKfY9tIwEjlzsZ6u1LQXvVgKeTnv9Xm7NDvJ7lso3MtA==
 
 move-concurrently@^1.0.1:
   version "1.0.1"

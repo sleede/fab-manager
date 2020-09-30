@@ -46,11 +46,10 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
     $scope.eventsInCalendar = (settingsPromise.events_in_calendar === 'true');
 
     // bind the availabilities slots with full-Calendar events
-    $scope.eventSources = [];
-    $scope.eventSources.push({
+    $scope.eventSources = [{
       url: '/api/availabilities',
       textColor: 'black'
-    });
+    }];
 
     // fullCalendar (v2) configuration
     $scope.calendarConfig = CalendarConfig({
@@ -101,7 +100,7 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
             { id: slot.slot_id },
             function (data, status) { // success
               // update the canceled_at attribute
-              for (let resa of Array.from($scope.reservations)) {
+              for (const resa of Array.from($scope.reservations)) {
                 if (resa.slot_id === data.id) {
                   resa.canceled_at = data.canceled_at;
                   break;
@@ -185,9 +184,9 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
       },
       function () {
         // the admin has confirmed, remove the plan
-        const plans = _.drop($scope.availability.plan_ids, plan.id);
+        _.drop($scope.availability.plan_ids, plan.id);
 
-        return Availability.update({ id: $scope.availability.id }, { availability: { plans_attributes: [{ id: plan.id, _destroy: true }] } }
+        Availability.update({ id: $scope.availability.id }, { availability: { plans_attributes: [{ id: plan.id, _destroy: true }] } }
           , function (data, status) { // success
             // update the plan_ids attribute
             $scope.availability.plan_ids = data.plan_ids;
@@ -282,7 +281,7 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
       });
       // once the dialog was closed, do things depending on the result
       modalInstance.result.then(function (res) {
-        if (res.status == 'success') {
+        if (res.status === 'success') {
           $scope.availability = null;
         }
         for (const availability of res.availabilities) {
@@ -355,7 +354,7 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
       if (settingsPromise.feature_tour_display !== 'manual' && $scope.currentUser.profile.tours.indexOf('calendar') < 0) {
         uitour.start();
       }
-    }
+    };
 
     /* PRIVATE SCOPE */
 
@@ -380,12 +379,12 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
      *
      * @returns {array}
      */
-    var availabilityPlans = function() {
+    const availabilityPlans = function () {
       const plansClassifiedByGroup = [];
-      const _plans = _.filter(plansPromise, function (p) { return _.include($scope.availability.plan_ids, p.id) });
-      for (let group of Array.from(groupsPromise)) {
+      const _plans = _.filter(plansPromise, function (p) { return _.includes($scope.availability.plan_ids, p.id); });
+      for (const group of Array.from(groupsPromise)) {
         const groupObj = { id: group.id, name: group.name, plans: [] };
-        for (let plan of Array.from(_plans)) {
+        for (const plan of Array.from(_plans)) {
           if (plan.group_id === group.id) { groupObj.plans.push(plan); }
         }
         if (groupObj.plans.length > 0) {
@@ -424,9 +423,9 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
         backdrop: 'static',
         keyboard: false,
         resolve: {
-          start() { return start; },
-          end() { return end; },
-          slots() { return Math.ceil(slots); },
+          start () { return start; },
+          end () { return end; },
+          slots () { return Math.ceil(slots); },
           machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
           trainingsPromise: ['Training', function (Training) { return Training.query().$promise; }],
           spacesPromise: ['Space', function (Space) { return Space.query().$promise; }],
@@ -434,7 +433,8 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
           plansPromise: ['Plan', function (Plan) { return Plan.query().$promise; }],
           groupsPromise: ['Group', function (Group) { return Group.query().$promise; }],
           slotDurationPromise: ['Setting', function (Setting) { return Setting.get({ name: 'slot_duration' }).$promise; }]
-        } });
+        }
+      });
       // when the modal is closed, we send the slot to the server for saving
       modalInstance.result.then(
         function (availability) {
@@ -471,10 +471,10 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
       $scope.availability.plans = availabilityPlans();
 
       if ($scope.availabilityDom) {
-        $scope.availabilityDom.classList.remove("fc-selected")
+        $scope.availabilityDom.classList.remove('fc-selected');
       }
       $scope.availabilityDom = jsEvent.target.closest('.fc-event');
-      $scope.availabilityDom.classList.add("fc-selected")
+      $scope.availabilityDom.classList.add('fc-selected');
 
       // if the user has clicked on the delete event button, delete the event
       if ($(jsEvent.target).hasClass('remove-event')) {
@@ -494,14 +494,13 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
       if (event.available_type !== 'event') {
         element.find('.fc-content').prepend('<span class="remove-event">x&nbsp;</span>');
       }
-      if (event.tags.length > 0) {
+      if (event.tags && event.tags.length > 0) {
         let html = '';
-        for (let tag of Array.from(event.tags)) {
+        for (const tag of Array.from(event.tags)) {
           html += `<span class='label label-success text-white'>${tag.name}</span> `;
         }
         element.find('.fc-title').append(`<br/>${html}`);
       }
-    // force return to prevent coffee-script auto-return to return random value (possiblity falsy)
     };
 
     /**
@@ -509,10 +508,9 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
      * @see https://fullcalendar.io/docs/resource_data/loading/
      */
     const loadingCb = function (isLoading, view) {
-      if (isLoading) {
+      if (isLoading && uiCalendarConfig.calendars.calendar) {
         // we remove existing events when fetching starts to prevent duplicates
         uiCalendarConfig.calendars.calendar.fullCalendar('removeEvents');
-
       }
     };
 
@@ -520,7 +518,7 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
      * Triggered when the view is changed
      * @see https://fullcalendar.io/docs/v3/viewRender#v2
      */
-    const viewRenderCb = function(view, element) {
+    const viewRenderCb = function (view, element) {
       // we unselect the current event to keep consistency
       $scope.availability = null;
       $scope.availabilityDom = null;
@@ -633,7 +631,7 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
     /**
      * Select/unselect all the machines
      */
-    $scope.toggleAll = function() {
+    $scope.toggleAll = function () {
       const count = $scope.selectedMachines.length;
       $scope.selectedMachines = [];
       $scope.selectedMachinesBinding = {};
@@ -641,9 +639,9 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
         $scope.machines.forEach(function (machine) {
           $scope.selectedMachines.push(machine);
           $scope.selectedMachinesBinding[machine.id] = true;
-        })
+        });
       }
-    }
+    };
 
     /**
      * Adds or removes the provided plan from the current slot
@@ -661,7 +659,7 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
     /**
      * Select/unselect all the plans
      */
-    $scope.toggleAllPlans = function() {
+    $scope.toggleAllPlans = function () {
       const count = $scope.selectedPlans.length;
       $scope.selectedPlans = [];
       $scope.selectedPlansBinding = {};
@@ -669,7 +667,7 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
         plansPromise.forEach(function (plan) {
           $scope.selectedPlans.push(plan);
           $scope.selectedPlansBinding[plan.id] = true;
-        })
+        });
       }
     };
 
@@ -738,7 +736,7 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
      */
     $scope.isTypeDivided = function () {
       return isTypeDivided($scope.availability.available_type);
-    }
+    };
 
     /* PRIVATE SCOPE */
 
@@ -754,7 +752,7 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
       }
 
       // when disable is only subscriptions option, reset all selected plans
-      $scope.$watch('isOnlySubscriptions', function(value) {
+      $scope.$watch('isOnlySubscriptions', function (value) {
         if (!value) {
           $scope.selectedPlans = [];
           $scope.selectedPlansBinding = {};
@@ -762,14 +760,14 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
       });
 
       // group plans by Group
-      for (let group of groupsPromise.filter(g => !g.disabled)) {
-          const groupObj = { id: group.id, name: group.name, plans: [] };
-          for (let plan of plansPromise.filter(g => !g.disabled)) {
-              if (plan.group_id === group.id) { groupObj.plans.push(plan); }
-          }
-          if (groupObj.plans.length > 0) {
-              $scope.plansClassifiedByGroup.push(groupObj);
-          }
+      for (const group of groupsPromise.filter(g => !g.disabled)) {
+        const groupObj = { id: group.id, name: group.name, plans: [] };
+        for (const plan of plansPromise.filter(g => !g.disabled)) {
+          if (plan.group_id === group.id) { groupObj.plans.push(plan); }
+        }
+        if (groupObj.plans.length > 0) {
+          $scope.plansClassifiedByGroup.push(groupObj);
+        }
       }
 
       // When the slot duration changes, we increment the availability to match the value
@@ -783,9 +781,9 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
 
       // When the number of slot changes, we increment the availability to match the value
       $scope.$watch('slots_nb', function (newValue, oldValue, scope) {
-          start = moment($scope.start);
-          start.add($scope.availability.slot_duration * newValue, 'minutes');
-          $scope.end = start.toDate();
+        start = moment($scope.start);
+        start.add($scope.availability.slot_duration * newValue, 'minutes');
+        $scope.end = start.toDate();
       });
 
       // When we configure a machine/space availability, do not let the user change the end time, as the total
@@ -802,7 +800,7 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
             $scope.end = moment($scope.start).add(upper, 'minutes').toDate();
             $scope.slots_nb = upperSlots;
           } else {
-             $scope.slots_nb = slotsCurrentRange;
+            $scope.slots_nb = slotsCurrentRange;
           }
           $scope.availability.end_at = $scope.end;
         } else {
@@ -843,8 +841,8 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
      * Test if the provided availability type is divided in slots
      */
     const isTypeDivided = function (type) {
-        return ((type === 'machines') || (type === 'space'));
-    }
+      return ((type === 'machines') || (type === 'space'));
+    };
 
     /**
      * Validates that a machine or more was/were selected before continuing to step 3 (adjust time + tags)
@@ -890,7 +888,7 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
         $scope.availability.slot_duration = parseInt(slotDurationPromise.setting.value, 10);
       }
       $scope.step++;
-    }
+    };
 
     /**
      * Compute the various occurrences of the availability, according to the recurrence settings
@@ -922,7 +920,7 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
       $scope.reservableName = '';
       switch ($scope.availability.available_type) {
         case 'machines':
-          $scope.reservableName = localizedList($scope.selectedMachines)
+          $scope.reservableName = localizedList($scope.selectedMachines);
           break;
         case 'training':
           $scope.reservableName = `<strong>${$scope.selectedTraining.name}</strong>`;
@@ -931,25 +929,25 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
           $scope.reservableName = `<strong>${$scope.selectedSpace.name}</strong>`;
           break;
         default:
-          $scope.reservableName = `<span class="warning">${_t("app.admin.calendar.none")}</span>`;
+          $scope.reservableName = `<span class="warning">${_t('app.admin.calendar.none')}</span>`;
       }
       const tags = $scope.tags.filter(function (t) {
         return $scope.availability.tag_ids.indexOf(t.id) > -1;
-      })
+      });
       $scope.tagsName = localizedList(tags);
       if ($scope.isOnlySubscriptions && $scope.selectedPlans.length > 0) {
         $scope.plansName = localizedList($scope.selectedPlans);
       }
-    }
+    };
 
     const localizedList = function (items) {
-      if (items.length === 0) return `<span class="text-gray text-italic">${_t("app.admin.calendar.none")}</span>`;
+      if (items.length === 0) return `<span class="text-gray text-italic">${_t('app.admin.calendar.none')}</span>`;
 
       const names = items.map(function (i) { return $sce.trustAsHtml(`<strong>${i.name}</strong>`); });
       if (items.length > 1) return names.slice(0, -1).join(', ') + ` ${_t('app.admin.calendar.and')} ` + names[names.length - 1];
 
       return names[0];
-    }
+    };
 
     // !!! MUST BE CALLED AT THE END of the controller
     return initialize();
@@ -961,7 +959,6 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
  */
 Application.Controllers.controller('DeleteRecurrentAvailabilityController', ['$scope', '$uibModalInstance', 'Availability', 'availabilityPromise', 'growl', '_t',
   function ($scope, $uibModalInstance, Availability, availabilityPromise, growl, _t) {
-
     // is the current slot (to be deleted) recurrent?
     $scope.isRecurrent = availabilityPromise.is_recurrent;
 
@@ -981,17 +978,17 @@ Application.Controllers.controller('DeleteRecurrentAvailabilityController', ['$s
           if (res.deleted > 1) {
             growl.success(_t(
               'app.admin.calendar.slots_deleted',
-              {START: moment(start_at).format('LL LT'), COUNT: res.deleted - 1}
+              { START: moment(start_at).format('LL LT'), COUNT: res.deleted - 1 }
             ));
           } else {
             growl.success(_t(
               'app.admin.calendar.slot_successfully_deleted',
-              {START: moment(start_at).format('LL LT'), END: moment(end_at).format('LT')}
+              { START: moment(start_at).format('LL LT'), END: moment(end_at).format('LT') }
             ));
           }
           $uibModalInstance.close({
             status: 'success',
-            availabilities: res.details.map(function (d) { return d.availability.id })
+            availabilities: res.details.map(function (d) { return d.availability.id; })
           });
         },
         function (res) {
@@ -1000,31 +997,29 @@ Application.Controllers.controller('DeleteRecurrentAvailabilityController', ['$s
           if (data.total > 1) {
             growl.warning(_t(
               'app.admin.calendar.slots_not_deleted',
-              {TOTAL: data.total, COUNT: data.total - data.deleted}
+              { TOTAL: data.total, COUNT: data.total - data.deleted }
             ));
           } else {
             growl.error(_t(
               'app.admin.calendar.unable_to_delete_the_slot',
-              {START: moment(start_at).format('LL LT'), END: moment(end_at).format('LT')}
+              { START: moment(start_at).format('LL LT'), END: moment(end_at).format('LT') }
             ));
           }
           $uibModalInstance.close({
             status: 'failed',
-            availabilities: data.details.filter(function (d) { return d.status }).map(function (d) { return d.availability.id })
+            availabilities: data.details.filter(function (d) { return d.status; }).map(function (d) { return d.availability.id; })
           });
         });
-    }
+    };
 
     /**
      * Cancellation callback
      */
     $scope.cancel = function () {
       $uibModalInstance.dismiss('cancel');
-    }
+    };
   }
 ]);
-
-
 
 /**
  * Controller used in the iCalendar (ICS) imports management page
@@ -1060,8 +1055,8 @@ Application.Controllers.controller('AdminICalendarController', ['$scope', 'iCale
         // failed
         growl.error(_t('app.admin.icalendar.create_error'));
         console.error(error);
-      })
-    }
+      });
+    };
 
     /**
      * Return a CSS-like style of the given calendar configuration
@@ -1070,11 +1065,11 @@ Application.Controllers.controller('AdminICalendarController', ['$scope', 'iCale
     $scope.calendarStyle = function (calendar) {
       return {
         'border-color': calendar.color,
-        'color': calendar.text_color,
-        'width': calendar.text_hidden ? '50px' : 'auto',
-        'height': calendar.text_hidden ? '21px' : 'auto'
+        color: calendar.text_color,
+        width: calendar.text_hidden ? '50px' : 'auto',
+        height: calendar.text_hidden ? '21px' : 'auto'
       };
-    }
+    };
 
     /**
      * Delete the given calendar from the database
@@ -1107,8 +1102,8 @@ Application.Controllers.controller('AdminICalendarController', ['$scope', 'iCale
             }
           );
         }
-      )
-    }
+      );
+    };
 
     /**
      * Asynchronously re-fetches the events from the given calendar
@@ -1125,7 +1120,7 @@ Application.Controllers.controller('AdminICalendarController', ['$scope', 'iCale
           growl.error(_t('app.admin.icalendar.sync_failed'));
           console.error(error);
         }
-      )
-    }
+      );
+    };
   }
 ]);
