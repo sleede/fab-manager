@@ -6,5 +6,5 @@ import 'moment/locale/<%= Rails.application.secrets.moment_locale %>.js';
 // import 'summernote/lang/summernote-<%#= Rails.application.secrets.summernote_locale %>.js';
 <% end %>
 <% if Rails.application.secrets.fullcalendar_locale != 'en' %>
-// import 'fullcalendar/dist/lang/<%#= Rails.application.secrets.fullcalendar_locale %>.js';
+import 'fullcalendar/dist/locale/<%= Rails.application.secrets.fullcalendar_locale %>.js';
 <% end %>
