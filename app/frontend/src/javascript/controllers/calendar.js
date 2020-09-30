@@ -55,7 +55,9 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
         evt: filter.evt,
         dispo: filter.dispo
       });
-      $scope.calendarConfig.events = availabilitySourceUrl();
+      $scope.eventSources = [{
+        url: availabilitySourceUrl()
+      }];
       // external iCalendar events sources
       $scope.externals.forEach(e => {
         if (e.checked) {
@@ -159,7 +161,6 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
     const initialize = () => {
       // fullCalendar (v2) configuration
       $scope.calendarConfig = CalendarConfig({
-        events: availabilitySourceUrl(),
         slotEventOverlap: true,
         header: {
           left: 'month agendaWeek agendaDay',
@@ -179,6 +180,9 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
           return eventRenderCb(event, element);
         }
       });
+      $scope.eventSources = [{
+        url: availabilitySourceUrl()
+      }];
       $scope.externals.forEach(e => {
         if (e.checked) {
           $scope.eventSources.push({
