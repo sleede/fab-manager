@@ -55,9 +55,12 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
         evt: filter.evt,
         dispo: filter.dispo
       });
-      $scope.eventSources = [{
+      // remove all
+      $scope.eventSources.splice(0, $scope.eventSources.length);
+      // recreate source for trainings/machines/events with new filters
+      $scope.eventSources.push({
         url: availabilitySourceUrl()
-      }];
+      });
       // external iCalendar events sources
       $scope.externals.forEach(e => {
         if (e.checked) {
@@ -76,7 +79,7 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
           }
         }
       });
-      uiCalendarConfig.calendars.calendar.fullCalendar('refetchEventSources');
+      uiCalendarConfig.calendars.calendar.fullCalendar('refetchEvents');
     };
 
     /**
@@ -103,7 +106,7 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
     // toggle to select all formation/machine
     $scope.toggleFilter = function (type, filter) {
       $scope[type].forEach(t => t.checked = filter[type]);
-      return $scope.filterAvailabilities(filter, $scope);
+      $scope.filterAvailabilities(filter, $scope);
     };
 
     $scope.openFilterAside = () =>
