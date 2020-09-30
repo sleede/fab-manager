@@ -10,7 +10,7 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs', 'growl', 'Auth', 'Price', 'Wallet', 'CustomAsset', 'Slot', 'AuthService', 'helpers', '_t',
+Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 'growl', 'Auth', 'Price', 'Wallet', 'CustomAsset', 'Slot', 'AuthService', 'helpers', '_t',
   function ($rootScope, $uibModal, dialogs, growl, Auth, Price, Wallet, CustomAsset, Slot, AuthService, helpers, _t) {
     return ({
       restrict: 'E',
@@ -78,8 +78,8 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
             validateSameTimeReservations(slot, function () {
               slot.isValid = true;
               updateCartPrice();
-            })
-          })
+            });
+          });
         };
 
         /**
@@ -121,15 +121,15 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
           // first, we ensure that a user was selected (admin/manager) or logged (member)
           const isSelectedUser = Object.keys($scope.user).length > 0;
           // all slots are in future
-          const areFutureSlots = _.every($scope.events.reserved, function(s) {
+          const areFutureSlots = _.every($scope.events.reserved, function (s) {
             return s.start.isAfter();
           });
           if (isSelectedUser && areFutureSlots) {
             return $scope.modePlans = true;
-          } else if (!isSelectedUser){
+          } else if (!isSelectedUser) {
           // otherwise we alert, this error musn't occur when the current user hasn't the admin role
             return growl.error(_t('app.shared.cart.please_select_a_member_first'));
-          } else if (!areFutureSlots){
+          } else if (!areFutureSlots) {
             return growl.error(_t('app.shared.cart.unable_to_select_plan_if_slots_in_the_past'));
           }
         };
@@ -140,7 +140,6 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
         $scope.payCart = function () {
         // first, we check that a user was selected
           if (Object.keys($scope.user).length > 0) {
-
             // check selected user has a subscription, if any slot is restricted for subscriptions
             const slotValidations = [];
             let slotNotValid;
@@ -148,16 +147,16 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
             $scope.events.reserved.forEach(function (slot) {
               if (slot.plan_ids.length > 0) {
                 if (
-                  ($scope.selectedPlan && _.include(slot.plan_ids, $scope.selectedPlan.id)) ||
-                  ($scope.user.subscribed_plan && _.include(slot.plan_ids, $scope.user.subscribed_plan.id))
+                  ($scope.selectedPlan && _.includes(slot.plan_ids, $scope.selectedPlan.id)) ||
+                  ($scope.user.subscribed_plan && _.includes(slot.plan_ids, $scope.user.subscribed_plan.id))
                 ) {
                   slotValidations.push(true);
                 } else {
                   slotNotValid = slot;
-                  if ($scope.selectedPlan && !_.include(slot.plan_ids, $scope.selectedPlan.id)) {
+                  if ($scope.selectedPlan && !_.includes(slot.plan_ids, $scope.selectedPlan.id)) {
                     slotNotValidError = 'selectedPlanError';
                   }
-                  if ($scope.user.subscribed_plan && !_.include(slot.plan_ids, $scope.user.subscribed_plan.id)) {
+                  if ($scope.user.subscribed_plan && !_.includes(slot.plan_ids, $scope.user.subscribed_plan.id)) {
                     slotNotValidError = 'userPlanError';
                   }
                   if (!$scope.selectedPlan || !$scope.user.subscribed_plan) {
@@ -178,11 +177,11 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
                   size: 'md',
                   controller: 'ReserveSlotWithoutPlanController',
                   resolve: {
-                    slot: function() { return slotNotValid; },
-                    slotNotValidError: function() { return slotNotValidError; },
+                    slot: function () { return slotNotValid; },
+                    slotNotValidError: function () { return slotNotValidError; }
                   }
                 });
-                modalInstance.result.then(function(res) {
+                modalInstance.result.then(function (res) {
                   return paySlots();
                 });
               }
@@ -199,7 +198,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
          * When modifying an already booked reservation, confirm the modification.
          */
         $scope.modifySlot = function () {
-          Slot.update({ id: $scope.events.modifiable.id }, {
+          Slot.update({ id: $scope.events.modifiable.slot_id }, {
             slot: {
               start_at: $scope.events.placable.start,
               end_at: $scope.events.placable.end,
@@ -216,23 +215,23 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
             };
             // -> reset the 'moving' status
             $scope.events.placable = null;
-            return $scope.events.modifiable = null;
+            $scope.events.modifiable = null;
           }
           , function (err) { // failure
             growl.error(_t('app.shared.cart.unable_to_change_the_reservation'));
-            return console.error(err);
+            console.error(err);
           });
         };
 
         /**
          * Cancel the current booking modification, reseting the whole process
-         * @param event {Object} see https://docs.angularjs.org/guide/expression#-event-
+         * @param [event] {Object} see https://docs.angularjs.org/guide/expression#-event-
          */
         $scope.cancelModifySlot = function (event) {
           if (event) { event.preventDefault(); }
           if (typeof $scope.onSlotModifyCancel === 'function') { $scope.onSlotModifyCancel(); }
           $scope.events.placable = null;
-          return $scope.events.modifiable = null;
+          $scope.events.modifiable = null;
         };
 
         /**
@@ -242,7 +241,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
         $scope.removeSlotToPlace = function (e) {
           e.preventDefault();
           if (typeof $scope.onSlotModifyUnselect === 'function') { $scope.onSlotModifyUnselect(); }
-          return $scope.events.placable = null;
+          $scope.events.placable = null;
         };
 
         /**
@@ -251,7 +250,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
          */
         $scope.tagMissmatch = function () {
           if ($scope.events.placable.tag_ids.length === 0) { return false; }
-          for (let tag of Array.from($scope.events.modifiable.tags)) {
+          for (const tag of Array.from($scope.events.modifiable.tags)) {
             if (!Array.from($scope.events.placable.tag_ids).includes(tag.id)) {
               return true;
             }
@@ -271,7 +270,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
           }
 
           return false;
-        }
+        };
 
         /* PRIVATE SCOPE */
 
@@ -322,16 +321,16 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
               size: 'md',
               controller: 'ReserveSlotTagsMismatchController',
               resolve: {
-                slotTags: function() { return slot.tags; },
+                slotTags: function () { return slot.tags; },
                 userTags: function () { return $scope.user.tags; },
                 userName: function () { return $scope.user.name; }
               }
             });
-            modalInstance.result.then(function(res) {
+            modalInstance.result.then(function (res) {
               if (typeof callback === 'function') callback(res);
             });
           }
-        }
+        };
 
         /**
          * Validates that no other reservations were made that conflict the current slot and alert the user about the conflict.
@@ -346,12 +345,12 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
             'space_reservations',
             'events_reservations'
           ].map(function (k) {
-            return _.filter($scope.user[k], function(r) {
+            return _.filter($scope.user[k], function (r) {
               return slot.start.isSame(r.start_at) ||
                 (slot.end.isAfter(r.start_at) && slot.end.isBefore(r.end_at)) ||
                 (slot.start.isAfter(r.start_at) && slot.start.isBefore(r.end_at)) ||
                 (slot.start.isBefore(r.start_at) && slot.end.isAfter(r.end_at));
-            })
+            });
           });
           sameTimeReservations = _.union.apply(null, sameTimeReservations);
           if (sameTimeReservations.length > 0) {
@@ -361,17 +360,17 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
               size: 'md',
               controller: 'ReserveSlotSameTimeController',
               resolve: {
-                sameTimeReservations: function() { return sameTimeReservations; },
+                sameTimeReservations: function () { return sameTimeReservations; },
                 bookOverlappingSlotsPromise: ['Setting', function (Setting) { return Setting.get({ name: 'book_overlapping_slots' }).$promise; }]
               }
             });
-            modalInstance.result.then(function(res) {
+            modalInstance.result.then(function (res) {
               if (typeof callback === 'function') callback(res);
             });
           } else {
             if (typeof callback === 'function') callback();
           }
-        }
+        };
 
         /**
          * Callback triggered when the selected slot changed
@@ -381,13 +380,13 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
             // if this slot is restricted for subscribers...
             if ($scope.slot.plan_ids.length > 0) {
               // ... we select all the plans matching these restrictions...
-              const _plans = _.filter($scope.plans, function (p) { return _.include($scope.slot.plan_ids, p.id) });
+              const _plans = _.filter($scope.plans, function (p) { return _.includes($scope.slot.plan_ids, p.id); });
               // ... and we group these plans, by Group...
               $scope.slot.plansGrouped = [];
               $scope.slot.group_ids = [];
-              for (let group of Array.from($scope.groups)) {
+              for (const group of Array.from($scope.groups)) {
                 const groupObj = { id: group.id, name: group.name, plans: [] };
-                for (let plan of Array.from(_plans)) {
+                for (const plan of Array.from(_plans)) {
                   if (plan.group_id === group.id) { groupObj.plans.push(plan); }
                 }
                 if (groupObj.plans.length > 0) {
@@ -400,13 +399,13 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
                   }
                 }
               }
-              $scope.slot.group_ids = $scope.slot.plansGrouped.map(function(g) { return g.id; });
+              $scope.slot.group_ids = $scope.slot.plansGrouped.map(function (g) { return g.id; });
             }
 
             if (!$scope.slot.is_reserved && !$scope.events.modifiable && !$scope.slot.is_completed) {
               // slot is not reserved and we are not currently modifying a slot
               // -> can be added to cart or removed if already present
-              const index = $scope.events.reserved.indexOf($scope.slot);
+              const index = _.findIndex($scope.events.reserved, (e) => e._id === $scope.slot._id);
               if (index === -1) {
                 if (($scope.limitToOneSlot === 'true') && $scope.events.reserved[0]) {
                 // if we limit the number of slots in the cart to 1, and there is already
@@ -437,7 +436,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
             } else if ($scope.slot.is_reserved && $scope.events.modifiable && ($scope.slot.is_reserved._id === $scope.events.modifiable._id)) {
               // slot is reserved and currently modified
               // -> we cancel the modification
-              return $scope.cancelModifySlot();
+              $scope.cancelModifySlot();
             } else if ($scope.slot.is_reserved && (slotCanBeModified($scope.slot) || slotCanBeCanceled($scope.slot)) && !$scope.events.modifiable && ($scope.events.reserved.length === 0)) {
               // slot is reserved and is ok to be modified or cancelled
               // but we are not currently running a modification or having any slots in the cart
@@ -456,9 +455,9 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
               // the user has chosen an action, so we proceed
                 if (type === 'move') {
                   if (typeof $scope.onSlotStartToModify === 'function') { $scope.onSlotStartToModify(); }
-                  return $scope.events.modifiable = $scope.slot;
+                  $scope.events.modifiable = $scope.slot;
                 } else if (type === 'cancel') {
-                  return dialogs.confirm(
+                  dialogs.confirm(
                     {
                       resolve: {
                         object () {
@@ -470,7 +469,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
                       }
                     },
                     function () { // cancel confirmed
-                      Slot.cancel({ id: $scope.slot.id }, function () { // successfully canceled
+                      Slot.cancel({ id: $scope.slot.slot_id }, function () { // successfully canceled
                         growl.success(_t('app.shared.cart.reservation_was_cancelled_successfully'));
                         if (typeof $scope.onSlotCancelSuccess === 'function') { return $scope.onSlotCancelSuccess(); }
                       }
@@ -494,7 +493,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
           $scope.events.moved = null;
           $scope.events.paid = [];
           $scope.events.modifiable = null;
-          return $scope.events.placable = null;
+          $scope.events.placable = null;
         };
 
         /**
@@ -666,7 +665,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
                 };
               }
             ]
-          }).result['finally'](null).then(function (reservation) { afterPayment(reservation); });
+          }).result.finally(null).then(function (reservation) { afterPayment(reservation); });
         };
         /**
          * Open a modal window that allows the user to process a local payment for his current shopping cart (admin only).
@@ -735,7 +734,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
                 $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
               }
             ]
-          }).result['finally'](null).then(function (reservation) { afterPayment(reservation); });
+          }).result.finally(null).then(function (reservation) { afterPayment(reservation); });
         };
         /**
          * Actions to run after the payment was successful
@@ -756,22 +755,22 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
         /**
          * Actions to pay slots
          */
-        const paySlots = function() {
+        const paySlots = function () {
           const reservation = mkReservation($scope.user, $scope.events.reserved, $scope.selectedPlan);
 
           return Wallet.getWalletByUser({ user_id: $scope.user.id }, function (wallet) {
             const amountToPay = helpers.getAmountToPay($scope.amountTotal, wallet.amount);
-            if ((AuthService.isAuthorized(['member']) && amountToPay > 0)
-              || (AuthService.isAuthorized('manager') && $scope.user.id === $rootScope.currentUser.id && amountToPay > 0)) {
+            if ((AuthService.isAuthorized(['member']) && amountToPay > 0) ||
+              (AuthService.isAuthorized('manager') && $scope.user.id === $rootScope.currentUser.id && amountToPay > 0)) {
               if ($scope.settings.online_payment_module !== 'true') {
                 growl.error(_t('app.shared.cart.online_payment_disabled'));
               } else {
                 return payByStripe(reservation);
               }
             } else {
-              if (AuthService.isAuthorized(['admin'])
-                || (AuthService.isAuthorized('manager') && $scope.user.id !== $rootScope.currentUser.id)
-                || amountToPay === 0) {
+              if (AuthService.isAuthorized(['admin']) ||
+                (AuthService.isAuthorized('manager') && $scope.user.id !== $rootScope.currentUser.id) ||
+                amountToPay === 0) {
                 return payOnSite(reservation);
               }
             }
@@ -798,16 +797,15 @@ Application.Controllers.controller('ReserveSlotSameTimeController', ['$scope', '
      */
     $scope.ok = function () {
       $uibModalInstance.close({});
-    }
+    };
     /**
      * Cancellation callback
      */
     $scope.cancel = function () {
       $uibModalInstance.dismiss('cancel');
-    }
+    };
   }
 ]);
-
 
 /**
  * Controller of the modal showing the slot tags
@@ -823,13 +821,13 @@ Application.Controllers.controller('ReserveSlotTagsMismatchController', ['$scope
      */
     $scope.ok = function () {
       $uibModalInstance.close({});
-    }
+    };
     /**
      * Cancellation callback
      */
     $scope.cancel = function () {
       $uibModalInstance.dismiss('cancel');
-    }
+    };
   }
 ]);
 
@@ -845,12 +843,12 @@ Application.Controllers.controller('ReserveSlotWithoutPlanController', ['$scope'
      */
     $scope.ok = function () {
       $uibModalInstance.close({});
-    }
+    };
     /**
      * Cancellation callback
      */
     $scope.cancel = function () {
       $uibModalInstance.dismiss('cancel');
-    }
+    };
   }
 ]);

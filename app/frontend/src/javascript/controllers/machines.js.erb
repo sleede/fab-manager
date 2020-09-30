@@ -495,7 +495,7 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
     $scope.markSlotAsAdded = function () {
       $scope.selectedEvent.backgroundColor = FREE_SLOT_BORDER_COLOR;
       $scope.selectedEvent.title = _t('app.logged.machines_reserve.i_reserve');
-      return updateCalendar();
+      updateEvents($scope.selectedEvent);
     };
 
     /**
@@ -506,11 +506,11 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
       slot.borderColor = FREE_SLOT_BORDER_COLOR;
       slot.title = '';
       slot.isValid = false;
-      slot.id = null;
+      slot.slot_id = null;
       slot.is_reserved = false;
       slot.can_modify = false;
       slot.offered = false;
-      return updateCalendar();
+      updateEvents(slot);
     };
 
     /**
@@ -524,7 +524,7 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
     $scope.markSlotAsModifying = function () {
       $scope.selectedEvent.backgroundColor = '#eee';
       $scope.selectedEvent.title = _t('app.logged.machines_reserve.i_change');
-      return updateCalendar();
+      updateEvents($scope.selectedEvent);
     };
 
     /**
@@ -534,34 +534,44 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
       if ($scope.events.placable) {
         $scope.events.placable.backgroundColor = 'white';
         $scope.events.placable.title = '';
+        updateEvents($scope.events.placable);
       }
       if (!$scope.events.placable || ($scope.events.placable._id !== $scope.selectedEvent._id)) {
         $scope.selectedEvent.backgroundColor = '#bbb';
         $scope.selectedEvent.title = _t('app.logged.machines_reserve.i_shift');
+        updateEvents($scope.selectedEvent);
       }
-      return updateCalendar();
     };
 
     /**
      * When modifying an already booked reservation, callback when the modification was successfully done.
      */
     $scope.modifyMachineSlot = function () {
-      $scope.events.placable.title = $scope.currentUser.id === $scope.events.modifiable.user.id ? _t('app.logged.machines_reserve.i_ve_reserved') : _t('app.logged.machines_reserve.not_available');
-      $scope.events.placable.backgroundColor = 'white';
-      $scope.events.placable.borderColor = $scope.events.modifiable.borderColor;
-      $scope.events.placable.id = $scope.events.modifiable.id;
-      $scope.events.placable.is_reserved = true;
-      $scope.events.placable.can_modify = true;
-      $scope.events.placable.user = angular.copy($scope.events.modifiable.user);
+      const save = {
+        slotId: $scope.events.modifiable.slot_id,
+        borderColor: $scope.events.modifiable.borderColor,
+        user: angular.copy($scope.events.modifiable.user),
+        title: $scope.currentUser.id === $scope.events.modifiable.user.id ? _t('app.logged.machines_reserve.i_ve_reserved') : _t('app.logged.machines_reserve.not_available')
+      };
 
       $scope.events.modifiable.backgroundColor = 'white';
       $scope.events.modifiable.title = '';
       $scope.events.modifiable.borderColor = FREE_SLOT_BORDER_COLOR;
-      $scope.events.modifiable.id = null;
+      $scope.events.modifiable.slot_id = null;
       $scope.events.modifiable.is_reserved = false;
       $scope.events.modifiable.can_modify = false;
+      updateEvents($scope.events.modifiable);
 
-      return updateCalendar();
+      $scope.events.placable.title = save.title;
+      $scope.events.placable.backgroundColor = 'white';
+      $scope.events.placable.borderColor = save.borderColor;
+      $scope.events.placable.slot_id = save.slotId;
+      $scope.events.placable.is_reserved = true;
+      $scope.events.placable.can_modify = true;
+      $scope.events.placable.user = angular.copy(save.user);
+      updateEvents($scope.events.placable);
+
+      refetchCalendar();
     };
 
     /**
@@ -575,7 +585,7 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
       $scope.events.modifiable.title = $scope.currentUser.id === $scope.events.modifiable.user.id ? _t('app.logged.machines_reserve.i_ve_reserved') : _t('app.logged.machines_reserve.not_available');
       $scope.events.modifiable.backgroundColor = 'white';
 
-      return updateCalendar();
+      updateEvents($scope.events.placable, $scope.events.modifiable);
     };
 
     /**
@@ -648,7 +658,7 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
         $scope.selectedPlan = null;
       }
 
-      return refetchCalendar();
+      refetchCalendar();
     };
 
     /**
@@ -662,11 +672,13 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
      * Kind of constructor: these actions will be realized first when the controller is loaded
      */
     const initialize = function () {
-      Availability.machine({ machineId: $stateParams.id }, function (availabilities) {
-        $scope.eventSources.push({
-          events: availabilities,
-          textColor: 'black'
-        });
+      $scope.eventSources.push({
+        events: function (start, end, timezone, callback) {
+          Availability.machine({ machineId: $stateParams.id }, function (availabilities) {
+            callback(availabilities);
+          });
+        },
+        textColor: 'black'
       });
 
       if ($scope.currentUser.role !== 'admin') {
@@ -680,7 +692,7 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
      * the user's subscription (current or about to be took) and the time (the user cannot modify a booked reservation
      * if it's too late).
      */
-    var calendarEventClickCb = function (event, jsEvent, view) {
+    const calendarEventClickCb = function (event, jsEvent, view) {
       $scope.selectedEvent = event;
       return $scope.selectionTime = new Date();
     };
@@ -690,7 +702,7 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
      * Append the event tag into the block, just after the event title.
      * @see http://fullcalendar.io/docs/event_rendering/eventRender/
      */
-    var eventRenderCb = function (event, element) {
+    const eventRenderCb = function (event, element) {
       if (($scope.currentUser.role === 'admin') && (event.tags.length > 0)) {
         let html = '';
         for (let tag of Array.from(event.tags)) {
@@ -708,28 +720,30 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
      * @param reservation {Object}
      * @param user {Object} user associated with the slot
      */
-    var updateMachineSlot = function (slot, reservation, user) {
+    const updateMachineSlot = function (slot, reservation, user) {
       angular.forEach(reservation.slots, function (s) {
         if (slot.start.isSame(s.start_at)) {
-          slot.id = s.id;
-          return slot.user = user;
+          slot.slot_id = s.id;
+          slot.user = user;
         }
       });
+      updateEvents(slot);
     };
 
     /**
      * Update the calendar's display to render the new attributes of the events
+     * @param events Object[] events to update in full-calendar
      */
-    var updateCalendar = function () { uiCalendarConfig.calendars.calendar.fullCalendar('rerenderEvents'); };
+    const updateEvents = function (...events) {
+      const realEvents = events.filter(e => !_.isNil(e));
+      uiCalendarConfig.calendars.calendar.fullCalendar('updateEvents', realEvents);
+    };
 
     /**
      * Asynchronously fetch the events from the API and refresh the calendar's view with these new events
      */
-    var refetchCalendar = function () {
-      $timeout(function () {
-        uiCalendarConfig.calendars.calendar.fullCalendar('refetchEvents');
-        return uiCalendarConfig.calendars.calendar.fullCalendar('rerenderEvents');
-      });
+    const refetchCalendar = function () {
+      uiCalendarConfig.calendars.calendar.fullCalendar('refetchEvents');
     };
 
     // !!! MUST BE CALLED AT THE END of the controller
