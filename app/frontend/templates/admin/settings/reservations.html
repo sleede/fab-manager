@@ -45,7 +45,13 @@
             <div class="row">
                 <h3 class="m-l m-t-lg" translate>{{ 'app.admin.settings.ability_for_the_users_to_move_their_reservations' }}</h3>
                 <div class="col-md-6">
-                    <boolean-setting name="booking_move_enable" settings="allSettings" label="app.admin.settings.reservations_shifting" classes="m-l"></boolean-setting>
+                    <boolean-setting name="booking_move_enable"
+                                     settings="allSettings"
+                                     label="app.admin.settings.reservations_shifting"
+                                     classes="m-l"
+                                     yes-label="app.shared.buttons.yes"
+                                     no-label="app.shared.buttons.no">
+                    </boolean-setting>
                 </div>
                 <div class="col-md-6" ng-show="allSettings.booking_move_enable === 'true'">
                     <number-setting name="booking_move_delay"
@@ -61,7 +67,13 @@
             <div class="row">
                 <h3 class="m-l m-t-lg" translate>{{ 'app.admin.settings.ability_for_the_users_to_cancel_their_reservations' }}</h3>
                 <div class="col-md-6">
-                    <boolean-setting name="booking_cancel_enable" settings="allSettings" label="app.admin.settings.reservations_cancelling" classes="m-l"></boolean-setting>
+                    <boolean-setting name="booking_cancel_enable"
+                                     settings="allSettings"
+                                     label="app.admin.settings.reservations_cancelling"
+                                     classes="m-l"
+                                     yes-label="app.shared.buttons.yes"
+                                     no-label="app.shared.buttons.no">
+                    </boolean-setting>
                 </div>
                 <div class="col-md-6" ng-show="allSettings.booking_cancel_enable === 'true'">
                     <number-setting name="booking_cancel_delay"
@@ -77,7 +89,13 @@
             <div class="section-separator"></div>
             <div class="row">
                 <h3 class="m-l m-t-lg" translate>{{ 'app.admin.settings.book_overlapping_slots_info' }}</h3>
-                <boolean-setting name="book_overlapping_slots" settings="allSettings" label="app.admin.settings.allow_booking" classes="m-l"></boolean-setting>
+                <boolean-setting name="book_overlapping_slots"
+                                 settings="allSettings"
+                                 label="app.admin.settings.allow_booking"
+                                 classes="m-l"
+                                 yes-label="app.shared.buttons.yes"
+                                 no-label="app.shared.buttons.no">
+                </boolean-setting>
             </div>
             <div class="section-separator"></div>
             <div class="row">
@@ -103,7 +121,13 @@
     <div class="panel-body">
         <div class="row">
             <h3 class="m-l" translate>{{ 'app.admin.settings.notification_sending_before_the_reservation_occurs' }}</h3>
-            <boolean-setting name="reminder_enable" settings="allSettings" label="app.admin.settings.reservations_reminders" classes="m-l"></boolean-setting>
+            <boolean-setting name="reminder_enable"
+                             settings="allSettings"
+                             label="app.admin.settings.reservations_reminders"
+                             classes="m-l"
+                             yes-label="app.shared.buttons.yes"
+                             no-label="app.shared.buttons.no">
+            </boolean-setting>
         </div>
         <div class="row" ng-show="allSettings.reminder_enable === 'true'">
             <number-setting name="reminder_delay"
@@ -127,12 +151,23 @@
         <div class="row">
             <h3 class="m-l" translate>{{ 'app.admin.settings.display_machine_reservation_user_name' }}</h3>
             <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.display_name_info_html' | translate"></p>
-            <boolean-setting name="display_name_enable" settings="allSettings" label="app.admin.settings.display_name" classes="m-l"></boolean-setting>
+            <boolean-setting name="display_name_enable"
+                             settings="allSettings"
+                             label="app.admin.settings.display_name"
+                             classes="m-l"
+                             yes-label="app.shared.buttons.yes"
+                             no-label="app.shared.buttons.no">
+            </boolean-setting>
         </div>
       <div class="row">
         <h3 class="m-l" translate>{{ 'app.admin.settings.events_in_the_calendar' }}</h3>
         <p class="alert alert-warning m-h-md" translate>{{ 'app.admin.settings.events_in_calendar_info' }}</p>
-        <boolean-setting name="events_in_calendar" settings="allSettings" label="app.admin.settings.show_event" classes="m-l"></boolean-setting>
+        <boolean-setting name="events_in_calendar"
+                         settings="allSettings"
+                         label="app.admin.settings.show_event"
+                         classes="m-l"
+                         yes-label="app.shared.buttons.yes"
+                         no-label="app.shared.buttons.no"></boolean-setting>
       </div>
     </div>
 </div>

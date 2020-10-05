@@ -20,8 +20,8 @@ Application.Directives.directive('booleanSetting', ['Setting', 'growl', '_t',
         };
 
         // default values for the switch labels
-        $scope.yesLabel =  $scope.yesLabel || 'app.admin.settings.enabled';
-        $scope.noLabel = $scope.noLabel || 'app.admin.settings.disabled';
+        $scope.yesLabel = $scope.yesLabel || 'app.shared.buttons.yes';
+        $scope.noLabel = $scope.noLabel || 'app.shared.buttons.no';
 
         /**
          * Callback to save the setting value to the database

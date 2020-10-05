@@ -1230,15 +1230,14 @@ angular-base64-upload@^0.0.9:
   version "1.4.1"
   resolved "https://github.com/incuna/angular-bind-html-compile.git#7626140a0eb7c724dc5c1eb3f7715bf06adf4c2a"
 
-angular-bootstrap-switch@0.5.2:
+"angular-bootstrap-switch@https://github.com/sleede/angular-bootstrap-switch.git#develop":
   version "0.5.2"
-  resolved "https://registry.yarnpkg.com/angular-bootstrap-switch/-/angular-bootstrap-switch-0.5.2.tgz#9469b7fc23bcb958d280edbf81692dfd1c6a9397"
-  integrity sha1-lGm3/CO8uVjSgO2/gWkt/Rxqk5c=
+  resolved "https://github.com/sleede/angular-bootstrap-switch.git#018296a9462baa6d89bb08c4ddb1d789e827998d"
   dependencies:
-    angular ">=1.4.0"
-    bootstrap ">=2.3.2"
-    bootstrap-switch "3.3.2"
-    jquery ">=1.9.0"
+    angular ">=1.8.0"
+    bootstrap-sass ">=3.4.1"
+    bootstrap-switch "^3.4.0"
+    jquery ">=3.5.0"
 
 angular-cookies@1.7:
   version "1.7.9"
@@ -1385,12 +1384,12 @@ angular-xeditable@0.10:
   dependencies:
     angular "~1.x"
 
-angular@1.8, angular@>=1.4.0, angular@^1.0.8, angular@^1.7.9, angular@~1.x:
+angular@1.8, angular@^1.0.8, angular@^1.7.9, angular@~1.x:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/angular/-/angular-1.8.0.tgz#b1ec179887869215cab6dfd0df2e42caa65b1b51"
   integrity sha512-VdaMx+Qk0Skla7B5gw77a8hzlcOakwF8mjlW13DpIWIDlfqwAbSSLfd8N/qZnzEmQF4jC4iofInd3gE7vL8ZZg==
 
-angular@>=1.5:
+angular@>=1.5, angular@>=1.8.0:
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/angular/-/angular-1.8.1.tgz#5a9cd4a99a0a1c4aeeb913d9f4699e2458daf5c1"
   integrity sha512-eiasF4uFXsmKD8qYpkKEi9rKVxMv0nIDZXsYrwzSbPIbjmTV05bx+18VDbRmMx7p+gL84T9Qw2NCpVe8w1QKHQ==
@@ -1809,27 +1808,15 @@ boolbase@^1.0.0, boolbase@~1.0.0:
   resolved "https://registry.yarnpkg.com/boolbase/-/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e"
   integrity sha1-aN/1++YMUes3cl6p4+0xDcwed24=
 
-bootstrap-sass@3.4.1:
+bootstrap-sass@3.4.1, bootstrap-sass@>=3.4.1:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/bootstrap-sass/-/bootstrap-sass-3.4.1.tgz#6843c73b1c258a0ac5cb2cc6f6f5285b664a8e9a"
   integrity sha512-p5rxsK/IyEDQm2CwiHxxUi0MZZtvVFbhWmyMOt4lLkA4bujDA1TGoKT0i1FKIWiugAdP+kK8T5KMDFIKQCLYIA==
-
-bootstrap-switch@3.3.2:
-  version "3.3.2"
-  resolved "https://registry.yarnpkg.com/bootstrap-switch/-/bootstrap-switch-3.3.2.tgz#79ddb49fadc308fb731e257f95957af48996eea7"
-  integrity sha1-ed20n63DCPtzHiV/lZV69ImW7qc=
-  dependencies:
-    jquery ">=1.9.0"
 
 bootstrap-switch@^3.4.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/bootstrap-switch/-/bootstrap-switch-3.4.0.tgz#6bbb0445ad8b4264883d06366d48aad3c06988f4"
   integrity sha512-P4Qdx7mLjqgilKQeeuDCf8AHWeO7992+NFfh0doAA/ExaJqr02QFHhq18GL8EYd2XRviJ16pUUyMRsfOVaPEVg==
-
-bootstrap@>=2.3.2:
-  version "4.5.2"
-  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.5.2.tgz#a85c4eda59155f0d71186b6e6ad9b875813779ab"
-  integrity sha512-vlGn0bcySYl/iV+BGA544JkkZP5LB3jsmkeKLFQakCOwCM3AOk7VkldBz4jrzSe+Z0Ezn99NVXa1o45cQY4R6A==
 
 brace-expansion@^1.1.7:
   version "1.1.11"
@@ -4918,11 +4905,6 @@ jquery@>=1.8.0, jquery@>=3.5.0:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.5.1.tgz#d7b4d08e1bfdb86ad2f1a3d039ea17304717abb5"
   integrity sha512-XwIBPqcMn57FxfT+Go5pzySnm4KWkT1Tv7gjrpT1srtf8Weynl6R273VJ5GjkRb51IzMp5nbaPjJXMWeju2MKg==
-
-jquery@>=1.9.0:
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.5.0.tgz#9980b97d9e4194611c36530e7dc46a58d7340fc9"
-  integrity sha512-Xb7SVYMvygPxbFMpTFQiHh1J7HClEaThguL15N/Gg37Lri/qKyhRGZYzHRyLH8Stq3Aow0LsHO2O2ci86fCrNQ==
 
 js-base64@^2.1.8:
   version "2.6.4"
