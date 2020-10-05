@@ -1294,10 +1294,15 @@ angular-resource@1.7:
   resolved "https://registry.yarnpkg.com/angular-resource/-/angular-resource-1.7.9.tgz#fa53623fae2c60debe2410d692447dcb0ba02396"
   integrity sha512-rXXhCE2qT31Pn4Sl+2XL+ntv4zxnA2OzY+clCl8/pOp/s/gIzxpQlEtXipo3QK8Qur3glbIkeF/bJw+gjVAdUw==
 
-angular-sanitize@1.7, angular-sanitize@>=1.5:
+angular-sanitize@1.7:
   version "1.7.9"
   resolved "https://registry.yarnpkg.com/angular-sanitize/-/angular-sanitize-1.7.9.tgz#6b4d5e826abdabd352b13a7c65c8c74daf6a7b15"
   integrity sha512-nB/xe7JQWF9nLvhHommAICQ3eWrfRETo0EVGFESi952CDzDa+GAJ/2BFBNw44QqQPxj1Xua/uYKrbLsOGWZdbQ==
+
+angular-sanitize@>=1.5:
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/angular-sanitize/-/angular-sanitize-1.8.1.tgz#80e24614669cf3d252d199e199680f4c9dee5505"
+  integrity sha512-kDtbAQkN+biyvBMJ8mgFIDZureng5yl6qegFCQ+bUw50n3KOx4FCsZ9S5tNAQ/rjYYTC5tP4hREv7+2ha+8M2w==
 
 angular-scroll@0.6:
   version "0.6.5"
@@ -1356,9 +1361,9 @@ angular-ui-codemirror@^0.3.0:
   resolved "https://registry.yarnpkg.com/angular-ui-codemirror/-/angular-ui-codemirror-0.3.0.tgz#e4286fc50f393f2a6e697c1bf3170424e12cbb60"
   integrity sha1-5ChvxQ85PypuaXwb8xcEJOEsu2A=
 
-"angular-ui-tour@https://github.com/Ross-Byrne/angular-ui-tour.git#master":
+"angular-ui-tour@https://github.com/sleede/angular-ui-tour.git#master":
   version "0.9.4"
-  resolved "https://github.com/Ross-Byrne/angular-ui-tour.git#d1ffbcbe8b8e6f4058274c01ba76b4cf86251137"
+  resolved "https://github.com/sleede/angular-ui-tour.git#b53bbdb2149bc62f2f29f7095232618677470869"
   dependencies:
     angular ">=1.5"
     angular-bind-html-compile "https://github.com/incuna/angular-bind-html-compile.git#1.4.1"
@@ -1380,10 +1385,15 @@ angular-xeditable@0.10:
   dependencies:
     angular "~1.x"
 
-angular@1.8, angular@>=1.4.0, angular@>=1.5, angular@^1.0.8, angular@^1.7.9, angular@~1.x:
+angular@1.8, angular@>=1.4.0, angular@^1.0.8, angular@^1.7.9, angular@~1.x:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/angular/-/angular-1.8.0.tgz#b1ec179887869215cab6dfd0df2e42caa65b1b51"
   integrity sha512-VdaMx+Qk0Skla7B5gw77a8hzlcOakwF8mjlW13DpIWIDlfqwAbSSLfd8N/qZnzEmQF4jC4iofInd3gE7vL8ZZg==
+
+angular@>=1.5:
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/angular/-/angular-1.8.1.tgz#5a9cd4a99a0a1c4aeeb913d9f4699e2458daf5c1"
+  integrity sha512-eiasF4uFXsmKD8qYpkKEi9rKVxMv0nIDZXsYrwzSbPIbjmTV05bx+18VDbRmMx7p+gL84T9Qw2NCpVe8w1QKHQ==
 
 ansi-colors@^3.0.0:
   version "3.2.4"

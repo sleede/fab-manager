@@ -63,7 +63,7 @@
     "angular-ui-bootstrap": "1.2.5",
     "angular-ui-calendar": "^1.0.2",
     "angular-ui-codemirror": "^0.3.0",
-    "angular-ui-tour": "https://github.com/Ross-Byrne/angular-ui-tour.git#master",
+    "angular-ui-tour": "https://github.com/sleede/angular-ui-tour.git#master",
     "angular-unsavedchanges": "0.2",
     "angular-xeditable": "0.10",
     "bootstrap-sass": "3.4.1",
