@@ -440,7 +440,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
             } else if ($scope.slot.is_reserved && (slotCanBeModified($scope.slot) || slotCanBeCanceled($scope.slot)) && !$scope.events.modifiable && ($scope.events.reserved.length === 0)) {
               // slot is reserved and is ok to be modified or cancelled
               // but we are not currently running a modification or having any slots in the cart
-              // -> first the affect the modification/cancellation rights attributes to the current slot
+              // -> first affect the modification/cancellation rights attributes to the current slot
               resetCartState();
               $scope.slot.movable = slotCanBeModified($scope.slot);
               $scope.slot.cancelable = slotCanBeCanceled($scope.slot);

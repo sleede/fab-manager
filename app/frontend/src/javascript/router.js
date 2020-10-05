@@ -433,7 +433,6 @@ angular.module('application.router', ['ui.router'])
         },
         resolve: {
           spacePromise: ['Space', '$stateParams', function (Space, $stateParams) { return Space.get({ id: $stateParams.id }).$promise; }],
-          availabilitySpacesPromise: ['Availability', '$stateParams', function (Availability, $stateParams) { return Availability.spaces({ spaceId: $stateParams.id }).$promise; }],
           plansPromise: ['Plan', function (Plan) { return Plan.query().$promise; }],
           groupsPromise: ['Group', function (Group) { return Group.query().$promise; }],
           settingsPromise: ['Setting', function (Setting) {
