@@ -1,0 +1,65 @@
+<div class="panel panel-default m-t-md">
+  <div class="panel-heading">
+    <span class="font-sbold" translate>{{ 'app.admin.invoices.payment.payment_settings' }}</span>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <h3 class="m-l" translate>{{ 'app.admin.invoices.payment.online_payment' }}</h3>
+      <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.invoices.payment.online_payment_info_html' | translate"></p>
+      <boolean-setting name="online_payment_module"
+                       settings="allSettings"
+                       label="app.admin.invoices.payment.enable_online_payment"
+                       classes="m-l"
+                       on-before-save="requireStripeKeys"
+                       fa-icon="fa-font"
+                       yes-label="app.shared.buttons.yes"
+                       no-label="app.shared.buttons.no">
+      </boolean-setting>
+    </div>
+    <div class="row m-t" ng-show="allSettings.online_payment_module === 'true'">
+      <h3 class="m-l" translate>{{ 'app.admin.invoices.payment.stripe_keys' }}</h3>
+      <div class="col-md-4 m-l">
+        <label for="stripe_public_key" class="control-label">{{ 'app.admin.invoices.payment.public_key' | translate }}</label>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-info"></i></span>
+          <input type="text"
+                 class="form-control"
+                 id="stripe_public_key"
+                 ng-model="allSettings.stripe_public_key"
+                 readonly>
+        </div>
+      </div>
+      <div class="col-md-4 col-md-offset-1">
+        <label for="stripe_secret_key" class="control-label">{{ 'app.admin.invoices.payment.secret_key' | translate }}</label>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-key"></i></span>
+          <input type="password"
+                 class="form-control"
+                 id="stripe_secret_key"
+                 ng-model="stripeSecretKey"
+                 readonly>
+        </div>
+      </div>
+      <div class="col-md-1">
+        <button class="btn btn-default m-t-lg" ng-click="requireStripeKeys(allSettings.online_payment_module)" translate>{{ 'app.admin.invoices.payment.edit_keys' }}</button>
+      </div>
+    </div>
+    <div class="row m-t" ng-show="allSettings.online_payment_module === 'true'">
+      <h3 class="m-l" translate>{{ 'app.admin.invoices.payment.currency' }}</h3>
+      <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.invoices.payment.currency_info_html' | translate"></p>
+      <p class="alert alert-danger m-h-md" ng-bind-html="'app.admin.invoices.payment.currency_alert_html' | translate"></p>
+      <div class="col-md-4 m-l">
+        <text-setting name="stripe_currency"
+                      settings="allSettings"
+                      label="app.admin.invoices.payment.stripe_currency"
+                      fa-icon="fa-money"
+                      placeholder="XXX"
+                      required="true"
+                      min-length="3"
+                      max-length="3"
+                      read-only="onlinePaymentStatus">
+        </text-setting>
+      </div>
+    </div>
+  </div>
+</div>

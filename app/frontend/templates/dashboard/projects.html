@@ -1,0 +1,83 @@
+<div>
+
+  <section class="heading">
+    <div class="row no-gutter">
+      <ng-include src="'/dashboard/nav.html'"></ng-include>
+    </div>
+  </section>
+
+
+  <div class="row no-gutter">
+
+      <div class="row m-t-md">
+        <a class="btn btn-lg btn-warning bg-white b-2x rounded m-t-sm upper text-sm col-lg-offset-10" ui-sref="app.logged.projects_new" role="button" translate>{{ 'app.logged.dashboard.projects.add_a_project' }}</a>
+      </div>
+
+      <div class="wrapper" ng-if="user.all_projects.length == 0" translate>{{ 'app.logged.dashboard.projects.you_dont_have_any_projects' }}</div>
+      <div class="widget panel b-a m m-t-lg" ng-repeat="project in user.all_projects">
+        <div class="panel-heading b-b clearfix">
+          <h4 class="text-u-c font-sbold pull-left">{{project.name}}</h4>
+          <span class="m-l-sm label label-success text-white">{{project.author_id == currentUser.id ? 'app.logged.dashboard.projects.author' : 'app.logged.dashboard.projects.collaborator' | translate}}</span>
+          <span class="badge" ng-if="project.state == 'draft'" translate>{{ 'app.logged.dashboard.projects.rough_draft' }}</span>
+          <div class="pull-right">
+            <a class="btn btn-warning bg-white b-2x rounded upper text-sm text-black" ui-sref="app.public.projects_show({id:project.slug})" role="button" translate>{{ 'app.shared.buttons.consult' }}</a>
+          </div>
+        </div>
+        <div class="widget-content bg-light clearfix">
+
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="widget panel b-a r-n m-t-md">
+              <div class="panel-heading b-b small">
+                <h3 translate>{{ 'app.logged.dashboard.projects.description' }}</h3>
+              </div>
+              <div class="widget-content no-bg wrapper text-black-light">
+                <div ng-bind-html="project.description | humanize : 180 | toTrusted"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="widget panel b-a r-n m-t-md">
+              <div class="panel-heading b-b small">
+                <h3 translate>{{ 'app.logged.dashboard.projects.machines_and_materials' }}</h3>
+              </div>
+              <div class="widget-content no-bg wrapper">
+                <h3 class="text-black-light font-sbold"><i class="fa fa-rocket red"></i> {{ 'app.logged.dashboard.projects.machines' | translate }} :</h3>
+                <ul class="list-unstyled m-l-md text-black-light">
+                  <li ng-repeat="m in project.machines">{{m.name}}</li>
+                </ul>
+                <h3 class="text-black-light font-sbold"><i class="fa fa-cog red"></i> {{ 'app.logged.dashboard.projects.materials' | translate }} :</h3>
+                <ul class="list-unstyled m-l-md text-black-light">
+                  <li ng-repeat="c in project.components">{{c.name}}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="widget panel b-a r-n m-t-md">
+              <div class="panel-heading b-b small">
+                <h3 translate>{{ 'app.logged.dashboard.projects.collaborators' }}</h3>
+              </div>
+              <div class="widget-content list-group-lg no-bg auto wrapper">
+                <li class="list-group-item no-b clearfix" ng-repeat="collaborator in project.project_users">
+                  <span class="pull-left thumb-sm avatar m-r-lg">
+                    <fab-user-avatar ng-model="collaborator.user_avatar" avatar-class="thumb-50"></fab-user-avatar>
+
+                    <i class="on b-white bottom" ng-if="collaborator.is_valid"></i>
+                    <i class="off b-white bottom" ng-if="!collaborator.is_valid"></i>
+                  </span>
+                  <span class="clear"><span>{{collaborator.full_name}}</span>
+                    <small class="text-muted clear text-ellipsis text-c">{{collaborator.username}}</small>
+                  </span>
+
+                </li>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+  </div>
+</div>

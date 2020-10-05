@@ -1,0 +1,4 @@
+<% PluginRegistry.stylesheets.each do |stylesheet| %>
+  <% basename = File.basename(stylesheet,'.scss') %>
+  <%= "@import '#{basename}';" %>
+<% end %>

@@ -1,0 +1,9 @@
+<div class="widget">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="close($event)"><span>&times;</span></button>
+    <h1 class="modal-title" translate>{{ 'app.public.calendar.filter_calendar' }}</h1>
+  </div>
+  <div class="modal-body widget-content calendar-filter calendar-filter-aside">
+    <ng-include src="'/calendar/filter.html'"></ng-include>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="custom-invoice">
+  <div class="modal-header">
+    <h3 class="modal-title" translate>{{ 'app.admin.invoices.VAT' }}</h3>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="enableVAT" class="control-label" translate>{{ 'app.admin.invoices.enable_VAT' }}</label>
+      <input bs-switch
+             ng-model="isSelected"
+             id="enableVAT"
+             type="checkbox"
+             class="form-control m-l-sm"
+             switch-on-text="{{ 'app.admin.invoices.enabled' | translate }}"
+             switch-off-text="{{ 'app.admin.invoices.disabled' | translate }}"
+             switch-animate="true"/>
+    </div>
+
+    <div class="form-group" ng-show="isSelected">
+      <label for="vatRate" class="control-label" translate>{{ 'app.admin.invoices.VAT_rate' }}</label>
+      <div class="input-group">
+        <span class="input-group-addon">% </span>
+        <input id="vatRate" type="number" ng-model="rate" class="form-control" min="0" max="100"/>
+      </div>
+    </div>
+
+    <div class="m-t-lg">
+      <h4 translate>{{ 'app.admin.invoices.VAT_history' }}</h4>
+      <table class="table scrollable-3-cols">
+        <thead>
+        <tr>
+          <th translate>{{ 'app.admin.invoices.VAT_rate' }}</th>
+          <th translate>{{ 'app.admin.invoices.changed_at' }}</th>
+          <th translate>{{ 'app.admin.invoices.changed_by' }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="value in history | orderBy:'-date'">
+          <td>
+            <span class="no-user-label" ng-show="value.enabled === false" translate>{{'app.admin.invoices.VAT_disabled'}}</span>
+            <span class="no-user-label" ng-show="value.enabled === true" translate>{{'app.admin.invoices.VAT_enabled'}}</span>
+            <span ng-show="value.rate">{{value.rate}}</span>
+          </td>
+          <td>{{value.date | amDateFormat:'L LT'}}</td>
+          <td>{{value.user.name}}<span class="no-user-label" ng-hide="value.user" translate>{{ 'app.admin.invoices.deleted_user' }}</span></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-warning" ng-click="ok()" translate>{{ 'app.shared.buttons.confirm' }}</button>
+    <button class="btn btn-default" ng-click="cancel()" translate>{{ 'app.shared.buttons.cancel' }}</button>
+  </div>
+</div>

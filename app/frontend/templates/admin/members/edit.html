@@ -1,0 +1,254 @@
+<div>
+
+  <section class="heading b-b">
+    <div class="row no-gutter">
+      <div class="col-md-1 hidden-xs">
+        <section class="heading-btn">
+          <a ng-click="backPrevLocation($event)"><i class="fas fa-long-arrow-alt-left"></i></a>
+        </section>
+      </div>
+      <div class="col-md-8 b-l b-r">
+        <section class="heading-title">
+          <h1 class="inline">{{ 'app.shared.user_admin.user' | translate }} {{ user.name }}</h1>
+          <span class="label label-danger text-white" ng-show="user.need_completion" translate>{{ 'app.shared.user_admin.incomplete_profile' }}</span>
+        </section>
+
+      </div>
+
+      <div class="col-md-3">
+        <section class="heading-actions wrapper">
+         <div class="btn btn-lg btn-block btn-default promote-member m-t-xs" ng-click="changeUserRole()" ng-show="isAuthorized('admin')">
+           <img src="/rank-icon.svg" alt="role icon" /><span class="m-l" translate>{{ 'app.admin.members_edit.change_role' }}</span>
+         </div>
+        </section>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <div class="row no-gutter ">
+    <div class="col-sm-12 col-md-12 b-r">
+
+      <uib-tabset justified="true" class="m-t">
+
+        <uib-tab heading="{{ 'app.shared.user_admin.user_profile' | translate }}">
+
+          <section class="panel panel-danger m-lg" ng-show="user.need_completion && activeProvider.providable_type !== 'DatabaseProvider'">
+            <div class="panel-body m-r" translate>
+              {{ 'app.shared.user_admin.warning_incomplete_user_profile_probably_imported_from_sso' }}
+            </div>
+          </section>
+
+          <form role="form" name="userForm" class="form-horizontal col-md-8" novalidate  action="{{ actionUrl }}" ng-upload="submited(content)" upload-options-enable-rails-csrf="true">
+
+            <section class="panel panel-default bg-light m-lg">
+              <div class="panel-body m-r">
+                <ng-include src="'/shared/_member_form.html'"></ng-include>
+
+                <ng-include src="'/admin/members/_form.html'"></ng-include>
+
+              </div>   <!-- ./panel-body  -->
+
+
+              <div class="panel-footer no-padder">
+                <input type="submit" value="{{ 'app.shared.buttons.confirm_changes' | translate }}" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="userForm.$invalid"/>
+              </div>
+            </section>
+          </form>
+        </uib-tab>
+
+        <uib-tab heading="{{ 'app.admin.members_edit.subscription' | translate }}" ng-if="modules.plans">
+
+
+            <section class="panel panel-default bg-light m-lg">
+              <div class="panel-body m-r">
+                <div class="" ng-show="subscription">
+                  <h3>{{ subscription.plan | humanReadablePlanName }}</h3>
+                  <p>
+                    {{ 'app.admin.members_edit.duration' | translate }} {{ subscription.plan.interval | planIntervalFilter: subscription.plan.interval_count }}
+                  </p>
+                  <p>
+                    {{ 'app.admin.members_edit.expires_at' | translate }} {{ subscription.expired_at | amDateFormat: 'L' }}
+                  </p>
+                  <p>
+                    {{ 'app.admin.members_edit.price_' | translate }} {{ subscription.plan.amount | currency}}
+                  </p>
+                  <div ng-hide="user.id === currentUser.id">
+                    <button class="btn btn-default" ng-click="updateSubscriptionModal(subscription, true)" translate>{{ 'app.admin.members_edit.offer_free_days' }}</button>
+                    <button class="btn btn-default" ng-click="updateSubscriptionModal(subscription, false)" translate>{{ 'app.admin.members_edit.extend_subscription' }}</button>
+                  </div>
+                  <p class="alert alert-info" ng-show="user.id === currentUser.id" translate>
+                    {{ 'app.admin.members_edit.cannot_extend_own_subscription' }}
+                  </p>
+                </div>
+
+
+                <div class="" ng-hide="subscription">
+                  <p translate>
+                    {{ 'app.admin.members_edit.user_has_no_current_subscription' }}
+                  </p>
+                  <button class="btn btn-default" ng-click="createSubscriptionModal(user, plans.filter(filterDisabledPlans))" translate>{{ 'app.admin.members_edit.subscribe_to_a_plan' }}</button>
+                </div>
+
+              </div>
+
+            </section>
+        </uib-tab>
+
+        <uib-tab heading="{{ 'app.admin.members_edit.trainings' | translate }}">
+          <div class="col-md-4">
+            <div class="widget panel b-a m-t-lg">
+              <div class="panel-heading b-b ">
+                <h4 class="text-u-c"><i class="fa fa-tag m-r-xs"></i> {{ 'app.admin.members_edit.next_trainings' | translate }}</h4>
+              </div>
+              <div class="widget-content bg-light wrapper r-b">
+                <ul class="list-unstyled" ng-if="user.training_reservations.length > 0">
+                  <li class="m-b" ng-repeat="r in user.training_reservations | trainingReservationsFilter:'future'">
+                    <span class="font-sbold">{{r.reservable.name}}</span> - <span class="label label-warning wrapper-sm">{{ r.start_at | amDateFormat:'LLL' }} - {{ r.end_at | amDateFormat:'LT' }}</span>
+                  </li>
+                </ul>
+                <div ng-if="user.training_reservations.length == 0" translate>{{ 'app.admin.members_edit.no_trainings' }}</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="widget panel b-a m-t-lg">
+              <div class="panel-heading b-b">
+                <h4 class="text-u-c"><i class="fa fa-tag m-r-xs"></i> {{ 'app.admin.members_edit.passed_trainings' | translate }}</h4>
+              </div>
+              <div class="widget-content bg-light wrapper r-b">
+                <ul class="list-unstyled" ng-if="user.training_reservations.length > 0">
+                  <li class="m-b" ng-repeat="r in user.training_reservations | trainingReservationsFilter:'passed'">
+                    <span class="font-sbold">{{r.reservable.name}}</span> - <span class="label label-info text-white wrapper-sm">{{ r.start_at | amDateFormat:'LLL' }} - {{ r.end_at | amDateFormat:'LT' }}</span>
+                    <!-- TODO  actions validate or refuse the passed training -->
+<!--                     <div class="btn-group">
+                      <button type="button" class="btn btn-success btn-sm">Validate</button>
+                      <button type="button" class="btn btn-warning btn-sm">Refuse</button>
+                    </div> -->
+                  </li>
+                </ul>
+                <div ng-if="user.training_reservations.length == 0" translate>{{ 'app.admin.members_edit.no_trainings' }}</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="widget panel b-a m-t-lg">
+              <div class="panel-heading b-b">
+                <h4 class="text-u-c"><i class="fa fa-tag m-r-xs"></i> {{ 'app.admin.members_edit.validated_trainings' | translate }}</h4>
+              </div>
+              <div class="widget-content bg-light wrapper r-b">
+                <ul class="list-unstyled" ng-if="user.trainings.length > 0">
+                  <li class="m-b" ng-repeat="t in user.trainings">
+                    <span class="font-sbold">{{t.name}}</span>
+                  </li>
+                </ul>
+                <div ng-if="user.trainings.length == 0" translate>{{ 'app.admin.members_edit.no_trainings' }}</div>
+              </div>
+            </div>
+          </div>
+        </uib-tab>
+
+        <uib-tab heading="{{ 'app.admin.members_edit.events' | translate }}">
+          <div class="col-md-6">
+            <div class="widget panel b-a m m-t-lg">
+              <div class="panel-heading b-b">
+                <h4 class="text-u-c"><i class="fa fa-tag m-r-xs"></i> {{ 'app.admin.members_edit.next_events' | translate }}</h4>
+              </div>
+              <div class="widget-content bg-light wrapper r-b">
+                <ul class="list-unstyled" ng-if="user.events_reservations.length > 0">
+                  <li ng-repeat="r in user.events_reservations | eventsReservationsFilter:'future'" class="m-b">
+                    <a class="font-sbold" ui-sref="app.public.events_show({id: r.reservable.id})">{{r.reservable.title}}</a> - <span class="label label-warning wrapper-sm">{{ r.start_at | amDateFormat:'LLL' }} - {{ r.end_at | amDateFormat:'LT' }}</span>
+                    <span ng-if="r.nb_reserve_places > 0">
+                      <br/>
+                      <span translate translate-values="{ NUMBER: r.nb_reserve_places }">{{ 'app.admin.members_edit.NUMBER_full_price_tickets_reserved' }}</span>
+                    </span>
+                    <span ng-repeat="ticket in r.tickets">
+                      <br/>
+                      <span translate translate-values="{ NUMBER: ticket.booked, NAME: ticket.price_category.name }">{{ 'app.admin.members_edit.NUMBER_NAME_tickets_reserved' }}</span>
+                    </span>
+                  </li>
+                </ul>
+                <div ng-if="(user.events_reservations | eventsReservationsFilter:'future').length == 0" translate>{{ 'app.admin.members_edit.no_upcoming_events' }}</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="widget panel b-a m m-t-lg">
+              <div class="panel-heading b-b">
+                <h4 class="text-u-c"><i class="fa fa-tag m-r-xs"></i> {{ 'app.admin.members_edit.passed_events' | translate }}</h4>
+              </div>
+              <div class="widget-content bg-light auto wrapper r-b">
+                <ul class="list-unstyled" ng-if="user.events_reservations.length > 0">
+                  <li ng-repeat="r in user.events_reservations | eventsReservationsFilter:'passed'" class="m-b">
+                    <span class="font-sbold">{{r.reservable.title}}</span> - <span class="label label-info text-white wrapper-sm">{{ r.start_at | amDateFormat:'LLL' }} - {{ r.end_at | amDateFormat:'LT' }}</span>
+                  </li>
+                </ul>
+                <div ng-if="(user.events_reservations | eventsReservationsFilter:'passed').length == 0" translate>{{ 'app.admin.members_edit.no_passed_events' }}</div>
+              </div>
+            </div>
+          </div>
+        </uib-tab>
+
+        <uib-tab heading="{{ 'app.admin.members_edit.invoices' | translate }}" ng-show="modules.invoicing">
+          <div class="col-md-12 m m-t-lg">
+
+
+            <table class="table" ng-if="user.invoices.length > 0">
+              <thead>
+              <tr>
+                <th style="width:25%" translate>{{ 'app.admin.members_edit.invoice_num' }}</th>
+                <th style="width:25%" translate>{{ 'app.admin.members_edit.date' }}</th>
+                <th style="width:25%" translate>{{ 'app.admin.members_edit.price' }}</th>
+                <th style="width:25%"></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="invoice in user.invoices">
+                <td>{{ invoice.reference }}</td>
+                <td ng-if="!invoice.is_avoir">{{ invoice.date | amDateFormat:'L LTS' }}</td>
+                <td ng-if="invoice.is_avoir">{{ invoice.date | amDateFormat:'L' }}</td>
+                <td>{{ invoice.total | currency }}</td>
+                <td>
+                  <div class="buttons">
+                    <a class="btn btn-default" ng-href="api/invoices/{{invoice.id}}/download" target="_blank" ng-if="!invoice.is_avoir">
+                      <i class="fa fa-file-pdf-o"></i> {{ 'app.admin.members_edit.download_the_invoice' | translate }}
+                    </a>
+                    <a class="btn btn-default" ng-href="api/invoices/{{invoice.id}}/download" target="_blank" ng-if="invoice.is_avoir">
+                      <i class="fa fa-file-pdf-o"></i> {{ 'app.admin.members_edit.download_the_refund_invoice' | translate }}
+                    </a>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+            <p ng-if="user.invoices.length == 0" translate>{{ 'app.admin.members_edit.no_invoices_for_now' }}</p>
+
+          </div>
+        </uib-tab>
+
+        <uib-tab heading="{{ 'app.admin.members_edit.wallet' | translate }}" ng-show="modules.wallet">
+          <div class="col-md-12 m m-t-lg">
+            <ng-include src="'/wallet/show.html'"></ng-include>
+
+            <div class="clearfix"></div>
+            <div class="col-sm-4 text-center" ng-hide="user.id === currentUser.id">
+              <button type="button" class="btn btn-warning m-t m-b" ng-click="createWalletCreditModal(user, wallet)" translate>{{ 'app.admin.members_edit.to_credit' }}</button>
+            </div>
+            <p class="col-sm-4 alert alert-info" ng-show="user.id === currentUser.id" translate>
+              {{ 'app.admin.members_edit.cannot_credit_own_wallet' }}
+            </p>
+
+          </div>
+
+          <div class="col-md-12 m m-t-lg">
+            <ng-include src="'/wallet/transactions.html'"></ng-include>
+          </div>
+        </uib-tab>
+      </uib-tabset>
+
+    </div>
+  </div>
+</div>

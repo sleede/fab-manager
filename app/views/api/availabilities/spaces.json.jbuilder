@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 json.array!(@slots) do |slot|
-  json.id slot.id if slot.id
+  json.slot_id slot.id if slot.id
   json.can_modify slot.can_modify
   json.title slot.title
   json.start slot.start_at.iso8601

@@ -1,0 +1,565 @@
+<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+
+<input name="_method" type="hidden" ng-value="method">
+<input name="user[profile_attributes][id]" type="hidden" ng-value="user.profile.id">
+<input name="user[invoicing_profile_attributes][id]" type="hidden" ng-value="user.invoicing_profile.id">
+<input name="user[statistic_profile_attributes][id]" type="hidden" ng-value="user.statistic_profile.id">
+
+<div class="row m-t">
+    <div class="col-sm-3 col-sm-offset-1">
+      <div class="form-group m-t-lg">
+          <div class="fileinput text-center" data-provides="fileinput" ng-class="fileinputClass(user.profile.user_avatar.attachment_url)">
+            <div class="fileinput-new thumbnail rounded thumb-128-wrapper" style="width: 140px; height: 140px;">
+              <img src="../../images/no_avatar.png" class="img-circle">
+            </div>
+            <div class="fileinput-preview fileinput-exists thumbnail rounded thumb-128-wrapper" data-trigger="fileinput" style="width: 140px; height: 140px; line-height: 140px;">
+              <img ng-src="{{ user.profile.user_avatar.attachment_url }}" />
+            </div>
+            <div class="m-t-sm">
+              <input type="hidden" name="user[profile_attributes][user_avatar_attributes][id]" ng-value="user.profile.user_avatar.id">
+              <input type="hidden" name="user[profile_attributes][user_avatar_attributes][_destroy]" ng-value="true" ng-if="user.profile.user_avatar._destory">
+              <span class="btn btn-default btn-file"
+                    ng-click="user.profile.user_avatar._destory = false"
+                    ng-hide="preventField['profile.avatar'] && user.profile.user_avatar.attachment_url && !userForm['user[profile_attributes][user_avatar_attributes]'].$dirty">
+                  <span class="fileinput-new" translate>{{ 'app.shared.user.add_an_avatar' }}</span>
+                  <span class="fileinput-exists" translate>{{ 'app.shared.buttons.change' }}</span>
+                  <input type="file" name="user[profile_attributes][user_avatar_attributes][attachment]" accept="image/jpeg,image/gif,image/png">
+              </span>
+
+              <button class="btn btn-danger fileinput-exists"
+                      data-dismiss="fileinput"
+                      ng-click="user.profile.user_avatar._destory = true"
+                      ng-hide="preventField['profile.avatar'] && user.profile.user_avatar.attachment_url && !userForm['user[profile_attributes][user_avatar_attributes]'].$dirty">
+                  <i class="fa fa-trash-o"></i>
+              </button>
+            </div>
+          </div>
+      </div>
+
+    </div>
+    <div class="col-sm-offset-1 col-sm-6">
+
+      <div class="form-group" ng-class="{'has-error': userForm['user[statistic_profile_attributes][gender]'].$dirty && userForm['user[statistic_profile_attributes][gender]'].$invalid}">
+          <label class="checkbox-inline btn btn-default">
+            <input type="radio"
+                   name="user[statistic_profile_attributes][gender]"
+                   ng-model="user.statistic_profile.gender"
+                   value="true"
+                   ng-disabled="preventField['profile.gender'] && user.statistic_profile.gender && !userForm['user[statistic_profile_attributes][gender]'].$dirty"
+                   required/>
+              <i class="fa fa-male m-l-sm"></i> {{ 'app.shared.user.man' | translate }}
+          </label>
+          <label class="checkbox-inline btn btn-default">
+            <input type="radio"
+                   name="user[statistic_profile_attributes][gender]"
+                   ng-model="user.statistic_profile.gender"
+                   value="false"
+                   ng-disabled="preventField['profile.gender'] && user.statistic_profile.gender && !userForm['user[statistic_profile_attributes][gender]'].$dirty"/>
+              <i class="fa fa-female m-l-sm"></i> {{ 'app.shared.user.woman' | translate }}
+          </label>
+        <span class="exponent m-l-xs help-cursor" title="{{ 'app.shared.user.used_for_statistics' | translate }}"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+
+        <span class="help-block" ng-show="userForm['user[statistic_profile_attributes][gender]'].$dirty && userForm['user[statistic_profile_attributes][gender]'].$error.required" translate>{{ 'app.shared.user.gender_is_required' }}</span>
+      </div>
+
+
+      <div class="form-group" ng-class="{'has-error': userForm['user[username]'].$dirty && userForm['user[username]'].$invalid}">
+        <div class="input-group">
+          <span class="input-group-addon help-cursor" title="{{ 'app.shared.user.used_for_profile' | translate }}"><i class="fa fa-user"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+          </span>
+          <input type="text"
+                 name="user[username]"
+                 ng-model="user.username"
+                 class="form-control"
+                 id="user_username"
+                 placeholder="{{ 'app.shared.user.pseudonym' | translate }}"
+                 ng-disabled="preventField['user.username'] && user.username  && !userForm['user[username]'].$dirty"
+                 required/>
+        </div>
+        <span class="help-block" ng-show="userForm['user[username]'].$dirty && userForm['user[username]'].$error.required" translate>{{ 'app.shared.user.pseudonym_is_required' }}</span>
+      </div>
+
+
+
+      <div class="form-group" ng-class="{'has-error': userForm['user[profile_attributes][last_name]'].$dirty && userForm['user[profile_attributes][last_name]'].$invalid}">
+        <div class="input-group">
+          <span class="input-group-addon help-cursor" title="{{ 'app.shared.user.used_for_invoicing' | translate }}"><i class="fa fa-user"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
+          <input type="text"
+                 name="user[profile_attributes][last_name]"
+                 ng-model="user.profile.last_name"
+                 class="form-control"
+                 id="user_last_name"
+                 placeholder="{{ 'app.shared.user.surname' | translate }}"
+                 ng-disabled="preventField['profile.last_name'] && user.profile.last_name && !userForm['user[profile_attributes][last_name]'].$dirty"
+                 required/>
+        </div>
+        <span class="help-block" ng-show="userForm['user[profile_attributes][last_name]'].$dirty && userForm['user[profile_attributes][last_name]'].$error.required" translate>{{ 'app.shared.user.surname_is_required' }}</span>
+      </div>
+
+      <div class="form-group" ng-class="{'has-error': userForm['user[profile_attributes][first_name]'].$dirty && userForm['user[profile_attributes][first_name]'].$invalid}">
+        <div class="input-group">
+          <span class="input-group-addon help-cursor" title="{{ 'app.shared.user.used_for_invoicing' | translate }}"><i class="fa fa-user"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
+          <input type="text"
+                 name="user[profile_attributes][first_name]"
+                 ng-model="user.profile.first_name"
+                 class="form-control"
+                 id="user_first_name"
+                 placeholder="{{ 'app.shared.user.first_name' | translate }}"
+                 ng-disabled="preventField['profile.first_name'] && user.profile.first_name && !userForm['user[profile_attributes][first_name]'].$dirty"
+                 required/>
+        </div>
+        <span class="help-block" ng-show="userForm['user[profile_attributes][first_name]'].$dirty && userForm['user[profile_attributes][first_name]'].$error.required" translate>{{ 'app.shared.user.first_name_is_required' }}</span>
+      </div>
+
+      <div class="form-group" ng-class="{'has-error': userForm['user[email]'].$dirty && userForm['user[email]'].$invalid}">
+        <div class="input-group">
+          <span class="input-group-addon help-cursor" title="{{ 'app.shared.user.used_for_invoicing' | translate }}"><i class="fa fa-envelope"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
+          <input type="email"
+                 name="user[email]"
+                 ng-model="user.email"
+                 class="form-control"
+                 id="user_email"
+                 placeholder="{{ 'app.shared.user.email_address' | translate }}"
+                 ng-disabled="preventField['user.email'] && user.email && !userForm['user[email]'].$dirty"
+                 required/>
+        </div>
+        <span class="help-block" ng-show="userForm['user[email]'].$dirty && userForm['user[email]'].$error.required" translate>{{ 'app.shared.user.email_address_is_required' }}</span>
+      </div>
+
+      <div class="form-group" ng-hide="preventPassword">
+        <button class="btn btn-warning btn-block"
+                ng-click="password.change = !password.change; $event.stopPropagation(); $event.preventDefault()"
+                translate>{{ 'app.shared.user.change_password' }}</button>
+      </div>
+
+
+      <div class="form-group" ng-class="{'has-error': userForm['user[password]'].$dirty && userForm['user[password]'].$invalid}" ng-if="password.change">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-key"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
+          <input type="password"
+                 name="user[password]"
+                 ng-model="user.password"
+                 class="form-control"
+                 id="user_password"
+                 placeholder="{{ 'app.shared.user.new_password' | translate }}"
+                 ng-minlength="8"
+                 required/>
+        </div>
+        <span class="help-block" ng-show="userForm['user[password]'].$dirty && userForm['user[password]'].$error.required" translate>{{ 'app.shared.user.password_is_required' }}</span>
+        <span class="help-block" ng-show="userForm['user[password]'].$dirty && userForm['user[password]'].$error.minlength" translate>{{ 'app.shared.user.password_is_too_short' }}</span>
+      </div>
+
+      <div class="form-group" ng-class="{'has-error': userForm['user[password_confirmation]'].$dirty && userForm['user[password_confirmation]'].$invalid}" ng-if="password.change">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-key"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
+          <input type="password"
+                 name="user[password_confirmation]"
+                 ng-model="user.password_confirmation"
+                 class="form-control"
+                 id="user_password_confirmation"
+                 placeholder="{{ 'app.shared.user.confirmation_of_new_password' | translate }}"
+                 ng-minlength="8"
+                 required
+                 match="user.password"/>
+        </div>
+        <span class="help-block" ng-show="userForm['user[password_confirmation]'].$dirty && userForm['user[password_confirmation]'].$error.required" translate>{{ 'app.shared.user.confirmation_of_password_is_required' }}</span>
+        <span class="help-block" ng-show="userForm['user[password_confirmation]'].$dirty && userForm['user[password_confirmation]'].$error.minlength" translate>{{ 'app.shared.user.confirmation_of_password_is_too_short' }}</span>
+        <span class="help-block" ng-show="userForm['user[password_confirmation]'].$error.match" translate>{{ 'app.shared.user.confirmation_mismatch_with_password' }}</span>
+      </div>
+
+      <div class="form-group" ng-if="user.invoicing_profile.organization" ng-class="{'has-error': userForm['user[invoicing_profile_attributes][organization_attributes][name]'].$dirty && userForm['user[invoicing_profile_attributes][organization_attributes][name]'].$invalid}">
+        <div class="input-group">
+          <span class="input-group-addon help-cursor" title="{{ 'app.shared.user.used_for_invoicing' | translate }}"><i class="fa fa-building-o"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
+          <input type="hidden"
+                 name="user[invoicing_profile_attributes][organization_attributes][id]"
+                 ng-value="user.invoicing_profile.organization.id" />
+          <input type="text"
+                 name="user[invoicing_profile_attributes][organization_attributes][name]"
+                 ng-model="user.invoicing_profile.organization.name"
+                 class="form-control"
+                 placeholder="{{ 'app.shared.user.organization_name' | translate }}"
+                 ng-required="user.invoicing_profile.organization"
+                 ng-disabled="preventField['profile.organization_name'] && user.invoicing_profile.organization.name && !userForm['user[invoicing_profile_attributes][organization_attributes][name]'].$dirty">
+        </div>
+        <span class="help-block" ng-show="userForm['user[invoicing_][organization_attributes][name]'].$dirty && userForm['user[invoicing_profile_attributes][organization_attributes][name]'].$error.required" translate>{{ 'app.shared.user.organization_name_is_required' }}</span>
+      </div>
+
+      <div class="form-group" ng-if="user.invoicing_profile.organization" ng-class="{'has-error': userForm['user[invoicing_profile_attributes][organization_attributes][address_attributes][address]'].$dirty && userForm['user[invoicing_profile_attributes][organization_attributes][address_attributes][address]'].$invalid}">
+        <div class="input-group">
+          <span class="input-group-addon help-cursor" title="{{ 'app.shared.user.used_for_invoicing' | translate }}"><i class="fa fa-map-marker"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
+          <input type="hidden"
+                 name="user[invoicing_profile_attributes][organization_attributes][address_attributes][id]"
+                 ng-value="user.invoicing_profile.organization.address.id" />
+          <input type="text"
+                 name="user[invoicing_profile_attributes][organization_attributes][address_attributes][address]"
+                 ng-model="user.invoicing_profile.organization.address.address"
+                 class="form-control"
+                 placeholder="{{ 'app.shared.user.organization_address' | translate }}"
+                 ng-required="user.invoicing_profile.organization"
+                 ng-disabled="preventField['profile.organization_address'] && user.invoicing_profile.organization.address.address && !userForm['user[invoicing_profile_attributes][organization_attributes][address_attributes][address]'].$dirty">
+        </div>
+        <span class="help-block" ng-show="userForm['user[invoicing_profile_attributes][organization_attributes][address_attributes][address]'].$dirty && userForm['user[invoicing_profile_attributes][organization_attributes][address_attributes][address]'].$error.required" translate>{{ 'app.shared.user.organization_address_is_required' }}</span>
+      </div>
+
+      <div class="form-group" ng-class="{'has-error': userForm['user[statistic_profile_attributes][birthday]'].$dirty && userForm['user[statistic_profile_attributes][birthday]'].$invalid}">
+        <div class="input-group">
+          <span class="input-group-addon help-cursor" title="{{ 'app.shared.user.used_for_statistics' | translate }}"><i class="fa fa-calendar-o"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
+          <input type="text"
+                 id="user_birthday"
+                 class="form-control"
+                 ng-model="user.statistic_profile.birthday"
+                 uib-datepicker-popup="{{datePicker.format}}"
+                 datepicker-options="datePicker.options"
+                 is-open="datePicker.opened"
+                 placeholder="{{ 'app.shared.user.date_of_birth' | translate }}"
+                 ng-click="openDatePicker($event)"
+                 ng-disabled="preventField['profile.birthday'] && user.statistic_profile.birthday && !userForm['user[statistic_profile_attributes][birthday]'].$dirty"
+                 required/>
+          <input type="hidden"
+                 name="user[statistic_profile_attributes][birthday]"
+                 value="{{user.statistic_profile.birthday | toIsoDate}}" />
+        </div>
+        <span class="help-block" ng-show="userForm['user[statistic_profile_attributes][birthday]'].$dirty && userForm['user[statistic_profile_attributes][birthday]'].$error.required" translate>{{ 'app.shared.user.date_of_birth_is_required' }}</span>
+      </div>
+
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon help-cursor" title="{{ 'app.shared.user.used_for_invoicing' | translate }}"><i class="fa fa-map-marker"></i> </span>
+          <input type="hidden"
+                 name="user[invoicing_profile_attributes][address_attributes][id]"
+                 ng-value="user.invoicing_profile.address.id" />
+          <input type="text"
+                 name="user[invoicing_profile_attributes][address_attributes][address]"
+                 ng-model="user.invoicing_profile.address.address"
+                 class="form-control"
+                 id="user_address"
+                 ng-disabled="preventField['profile.address'] && user.invoicing_profile.address.address && !userForm['user[invoicing_profile_attributes][address_attributes][address]'].$dirty"
+                 placeholder="{{ 'app.shared.user.address' | translate }}"/>
+        </div>
+      </div>
+
+      <div class="form-group" ng-class="{'has-error': userForm['user[profile_attributes][phone]'].$dirty && userForm['user[profile_attributes][phone]'].$invalid}">
+        <div class="input-group">
+          <span class="input-group-addon help-cursor" title="{{ 'app.shared.user.used_for_reservation' | translate }}"><i class="fa fa-phone"></i> <span class="exponent" ng-show="phoneRequired"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
+          <input type="text"
+                 name="user[profile_attributes][phone]"
+                 ng-model="user.profile.phone"
+                 class="form-control"
+                 id="user_phone"
+                 placeholder="{{ 'app.shared.user.phone_number' | translate }}"
+                 ng-disabled="preventField['profile.phone'] && user.profile.phone && !userForm['user[profile_attributes][phone]'].$dirty"
+                 ng-required="phoneRequired"/>
+        </div>
+        <span class="help-block" ng-show="userForm['user[profile_attributes][phone]'].$dirty && userForm['user[profile_attributes][phone]'].$error.required" translate>{{ 'app.shared.user.phone_number_is_required' }}</span>
+      </div>
+
+      <div class="form-group" ng-class="{'has-error': userForm['user[profile_attributes][website]'].$dirty && userForm['user[profile_attributes][website]'].$invalid}">
+        <div class="input-group">
+          <span class="input-group-addon help-cursor" title="{{ 'app.shared.user.used_for_profile' | translate }}"><i class="fa fa-globe"></i> </span>
+          <input type="url"
+                 name="user[profile_attributes][website]"
+                 ng-model="user.profile.website"
+                 class="form-control"
+                 id="user_website"
+                 ng-pattern="/^https?:\/\//"
+                 placeholder="{{ 'app.shared.user.website' | translate }} (http://...)"
+                 ng-disabled="preventField['profile.website'] && user.profile.website && !userForm['user[profile_attributes][website]'].$dirty"/>
+        </div>
+      </div>
+
+      <div class="form-group" ng-class="{'has-error': userForm['user[profile_attributes][job]'].$dirty && userForm['user[profile_attributes][job]'].$invalid}">
+        <div class="input-group">
+          <span class="input-group-addon help-cursor" title="{{ 'app.shared.user.used_for_profile' | translate }}"><i class="fa fa-briefcase"></i> </span>
+          <input type="text"
+                 name="user[profile_attributes][job]"
+                 ng-model="user.profile.job"
+                 class="form-control"
+                 id="user_job"
+                 placeholder="{{ 'app.shared.user.job' | translate }}"
+                 ng-disabled="preventField['profile.job'] && user.profile.job && !userForm['user[profile_attributes][job]'].$dirty"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="user_interest" class="help-cursor" title="{{ 'app.shared.user.used_for_profile' | translate }}" translate>{{ 'app.shared.user.interests' }}</label>
+        <textarea name="user[profile_attributes][interest]"
+                  ng-model="user.profile.interest"
+                  rows="5"
+                  class="form-control"
+                  id="user_interest"
+                  placeholder=""
+                  ng-disabled="preventField['profile.interest'] && user.profile.interest && !userForm['user[profile_attributes][interest]'].$dirty"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="user_software_mastered" class="help-cursor" title="{{ 'app.shared.user.used_for_profile' | translate }}" translate>{{ 'app.shared.user.CAD_softwares_mastered' }}</label>
+        <textarea name="user[profile_attributes][software_mastered]"
+                  ng-model="user.profile.software_mastered"
+                  rows="5"
+                  class="form-control"
+                  id="user_software_mastered"
+                  placeholder=""
+                  ng-disabled="preventField['profile.software_mastered'] && user.profile.software_mastered && !userForm['user[profile_attributes][software_mastered]'].$dirty"></textarea>
+      </div>
+
+      <!-- allow contact-->
+      <div class="form-group">
+        <label for="allowContact" class="help-cursor" title="{{ 'app.shared.user.public_profile' | translate }}" translate>{{ 'app.shared.user.i_authorize_Fablab_users_registered_on_the_site_to_contact_me' }}</label>
+        <input bs-switch
+               ng-model="user.is_allow_contact"
+               id="allowContact"
+               type="checkbox"
+               class="form-control"
+               switch-on-text="{{ 'app.shared.buttons.yes' | translate }}"
+               switch-off-text="{{ 'app.shared.buttons.no' | translate }}"
+               switch-animate="true"/>
+        <input type="hidden" name="user[is_allow_contact]" value="{{user.is_allow_contact}}"/>
+      </div>
+
+      <!-- allow receive newsletter -->
+      <div class="form-group">
+        <label for="allowNewsletter" translate>{{ 'app.shared.user.i_accept_to_receive_information_from_the_fablab' }}</label>
+        <input bs-switch
+               ng-model="user.is_allow_newsletter"
+               id="allowNewsletter"
+               type="checkbox"
+               class="form-control"
+               switch-on-text="{{ 'app.shared.buttons.yes' | translate }}"
+               switch-off-text="{{ 'app.shared.buttons.no' | translate }}"
+               switch-animate="true" />
+        <input type="hidden" name="user[is_allow_newsletter]" value="{{user.is_allow_newsletter}}"/>
+      </div>
+
+      <div id="social" ng-init="social={}">
+        <div class="form-group" ng-show="social.facebook || user.profile.facebook" ng-class="{'has-error': userForm['user[profile_attributes][facebook]'].$dirty && userForm['user[profile_attributes][facebook]'].$invalid}">
+          <div class="input-group">
+            <span class="input-group-addon help-cursor" title="{{ 'app.shared.user.used_for_profile' | translate }}"><i class="fa fa-facebook"></i></span>
+            <input type="text"
+                   name="user[profile_attributes][facebook]"
+                   ng-model="user.profile.facebook"
+                   class="form-control"
+                   id="user_facebook"
+                   ng-pattern="/^https?:\/\/.*?facebook/i"
+                   placeholder="https://www.facebook.com/..."
+                   ng-disabled="preventField['profile.facebook'] && user.profile.first_name && !userForm['user[profile_attributes][facebook]'].$dirty"
+                   />
+          </div>
+        </div>
+
+        <div class="form-group" ng-show="social.twitter || user.profile.twitter" ng-class="{'has-error': userForm['user[profile_attributes][twitter]'].$dirty && userForm['user[profile_attributes][twitter]'].$invalid}">
+          <div class="input-group">
+            <span class="input-group-addon help-cursor" title="{{ 'app.shared.user.used_for_profile' | translate }}"><i class="fa fa-twitter"></i></span>
+            <input type="text"
+                   name="user[profile_attributes][twitter]"
+                   ng-model="user.profile.twitter"
+                   class="form-control"
+                   id="user_twitter"
+                   ng-pattern="/^https?:\/\/.*?twitter/"
+                   placeholder="https://twitter.com/..."
+                   ng-disabled="preventField['profile.twitter'] && user.profile.first_name && !userForm['user[profile_attributes][twitter]'].$dirty"
+            />
+          </div>
+        </div>
+
+        <div class="form-group" ng-show="social.google_plus || user.profile.google_plus" ng-class="{'has-error': userForm['user[profile_attributes][google_plus]'].$dirty && userForm['user[profile_attributes][google_plus]'].$invalid}">
+          <div class="input-group">
+            <span class="input-group-addon help-cursor" title="{{ 'app.shared.user.used_for_profile' | translate }}"><i class="fa fa-google-plus"></i></span>
+            <input type="text"
+                   name="user[profile_attributes][google_plus]"
+                   ng-model="user.profile.google_plus"
+                   class="form-control"
+                   id="user_google_plus"
+                   ng-pattern="/^https?:\/\/.*?google/"
+                   placeholder="https://plus.google.com/+..."
+                   ng-disabled="preventField['profile.google_plus'] && user.profile.first_name && !userForm['user[profile_attributes][google_plus]'].$dirty"
+            />
+          </div>
+        </div>
+
+        <div class="form-group" ng-show="social.viadeo || user.profile.viadeo" ng-class="{'has-error': userForm['user[profile_attributes][viadeo]'].$dirty && userForm['user[profile_attributes][viadeo]'].$invalid}">
+          <div class="input-group">
+            <span class="input-group-addon help-cursor" title="{{ 'app.shared.user.used_for_profile' | translate }}"><i class="fa fa-viadeo"></i></span>
+            <input type="text"
+                   name="user[profile_attributes][viadeo]"
+                   ng-model="user.profile.viadeo"
+                   class="form-control"
+                   id="user_viadeo"
+                   ng-pattern="/^https?:\/\/.*?viadeo/"
+                   placeholder="http://www.viadeo.com/fr/profile/..."
+                   ng-disabled="preventField['profile.viadeo'] && user.profile.first_name && !userForm['user[profile_attributes][viadeo]'].$dirty"
+            />
+          </div>
+        </div>
+
+        <div class="form-group" ng-show="social.linkedin || user.profile.linkedin" ng-class="{'has-error': userForm['user[profile_attributes][linkedin]'].$dirty && userForm['user[profile_attributes][linkedin]'].$invalid}">
+          <div class="input-group">
+            <span class="input-group-addon help-cursor" title="{{ 'app.shared.user.used_for_profile' | translate }}"><i class="fa fa-linkedin"></i></span>
+            <input type="text"
+                   name="user[profile_attributes][linkedin]"
+                   ng-model="user.profile.linkedin"
+                   class="form-control"
+                   id="user_linkedin"
+                   ng-pattern="/^https?:\/\/.*?linkedin/"
+                   placeholder="https://www.linkedin.com/in/..."
+                   ng-disabled="preventField['profile.linkedin'] && user.profile.first_name && !userForm['user[profile_attributes][linkedin]'].$dirty"
+            />
+          </div>
+        </div>
+
+        <div class="form-group" ng-show="social.instagram || user.profile.instragram" ng-class="{'has-error': userForm['user[profile_attributes][instagram]'].$dirty && userForm['user[profile_attributes][instagram]'].$invalid}">
+          <div class="input-group">
+            <span class="input-group-addon help-cursor" title="{{ 'app.shared.user.used_for_profile' | translate }}"><i class="fa fa-instagram"></i></span>
+            <input type="text"
+                   name="user[profile_attributes][instagram]"
+                   ng-model="user.profile.instagram"
+                   class="form-control"
+                   id="user_instagram"
+                   ng-pattern="/^https?:\/\/.*?instagram/"
+                   placeholder="https://www.instagram.com/..."
+                   ng-disabled="preventField['profile.instagram'] && user.profile.first_name && !userForm['user[profile_attributes][instagram]'].$dirty"
+            />
+          </div>
+        </div>
+
+        <div class="form-group" ng-show="social.youtube || user.profile.youtube" ng-class="{'has-error': userForm['user[profile_attributes][youtube]'].$dirty && userForm['user[profile_attributes][youtube]'].$invalid}">
+          <div class="input-group">
+            <span class="input-group-addon help-cursor" title="{{ 'app.shared.user.used_for_profile' | translate }}"><i class="fa fa-youtube"></i></span>
+            <input type="text"
+                   name="user[profile_attributes][youtube]"
+                   ng-model="user.profile.youtube"
+                   class="form-control"
+                   id="user_youtube"
+                   ng-pattern="/^https?:\/\/.*?youtube/"
+                   placeholder="https://www.youtube.com/..."
+                   ng-disabled="preventField['profile.youtube'] && user.profile.first_name && !userForm['user[profile_attributes][youtube]'].$dirty"
+            />
+          </div>
+        </div>
+
+        <div class="form-group" ng-show="social.vimeo || user.profile.vimeo" ng-class="{'has-error': userForm['user[profile_attributes][vimeo]'].$dirty && userForm['user[profile_attributes][vimeo]'].$invalid}">
+          <div class="input-group">
+            <span class="input-group-addon help-cursor" title="{{ 'app.shared.user.used_for_profile' | translate }}"><i class="fa fa-vimeo"></i></span>
+            <input type="text"
+                   name="user[profile_attributes][vimeo]"
+                   ng-model="user.profile.vimeo"
+                   class="form-control"
+                   id="user_vimeo"
+                   ng-pattern="/^https?:\/\/.*?vimeo/"
+                   placeholder="https://vimeo.com/..."
+                   ng-disabled="preventField['profile.vimeo'] && user.profile.first_name && !userForm['user[profile_attributes][vimeo]'].$dirty"
+            />
+          </div>
+        </div>
+
+        <div class="form-group" ng-show="social.dailymotion || user.profile.dailymotion" ng-class="{'has-error': userForm['user[profile_attributes][dailymotion]'].$dirty && userForm['user[profile_attributes][dailymotion]'].$invalid}">
+          <div class="input-group">
+            <span class="input-group-addon help-cursor" title="{{ 'app.shared.user.used_for_profile' | translate }}"><img src="../../images/social/dailymotion.png" alt="d" class="fa-img"/></span>
+            <input type="text"
+                   name="user[profile_attributes][dailymotion]"
+                   ng-model="user.profile.dailymotion"
+                   class="form-control"
+                   id="user_dailymotion"
+                   ng-pattern="/^https?:\/\/.*?dailymotion/"
+                   placeholder="http://www.dailymotion.com/..."
+                   ng-disabled="preventField['profile.dailymotion'] && user.profile.first_name && !userForm['user[profile_attributes][dailymotion]'].$dirty"
+            />
+          </div>
+        </div>
+
+
+        <div class="form-group" ng-show="social.github || user.profile.github" ng-class="{'has-error': userForm['user[profile_attributes][github]'].$dirty && userForm['user[profile_attributes][github]'].$invalid}">
+          <div class="input-group">
+            <span class="input-group-addon help-cursor" title="{{ 'app.shared.user.used_for_profile' | translate }}"><i class="fa fa-github"></i></span>
+            <input type="text"
+                   name="user[profile_attributes][github]"
+                   ng-model="user.profile.github"
+                   class="form-control"
+                   id="user_github"
+                   ng-pattern="/^https?:\/\/.*?github/"
+                   placeholder="https://github.com/..."
+                   ng-disabled="preventField['profile.github'] && user.profile.first_name && !userForm['user[profile_attributes][github]'].$dirty"
+            />
+          </div>
+        </div>
+
+        <div class="form-group" ng-show="social.echosciences || user.profile.echosciences" ng-class="{'has-error': userForm['user[profile_attributes][echosciences]'].$dirty && userForm['user[profile_attributes][echosciences]'].$invalid}">
+          <div class="input-group">
+            <span class="input-group-addon help-cursor" title="{{ 'app.shared.user.used_for_profile' | translate }}"><img src="../../images/social/echosciences.png" alt="d" class="fa-img"/></span>
+            <input type="text"
+                   name="user[profile_attributes][echosciences]"
+                   ng-model="user.profile.echosciences"
+                   class="form-control"
+                   id="user_echosciences"
+                   ng-pattern="/^https?:\/\/.*?echosciences/"
+                   placeholder="http://www.echosciences-local.fr/membres/..."
+                   ng-disabled="preventField['profile.echosciences'] && user.profile.first_name && !userForm['user[profile_attributes][echosciences]'].$dirty"
+            />
+          </div>
+        </div>
+
+        <div class="form-group" ng-show="social.pinterest || user.profile.pinterest" ng-class="{'has-error': userForm['user[profile_attributes][pinterest]'].$dirty && userForm['user[profile_attributes][pinterest]'].$invalid}">
+          <div class="input-group">
+            <span class="input-group-addon help-cursor" title="{{ 'app.shared.user.used_for_profile' | translate }}"><i class="fa fa-pinterest"></i></span>
+            <input type="text"
+                   name="user[profile_attributes][pinterest]"
+                   ng-model="user.profile.pinterest"
+                   class="form-control"
+                   id="user_pinterest"
+                   ng-pattern="/^https?:\/\/.*?pinterest/"
+                   placeholder="https://fr.pinterest.com/..."
+                   ng-disabled="preventField['profile.pinterest'] && user.profile.first_name && !userForm['user[profile_attributes][pinterest]'].$dirty"
+            />
+          </div>
+        </div>
+
+        <div class="form-group" ng-show="social.lastfm || user.profile.lastfm" ng-class="{'has-error': userForm['user[profile_attributes][lastfm]'].$dirty && userForm['user[profile_attributes][lastfm]'].$invalid}">
+          <div class="input-group">
+            <span class="input-group-addon help-cursor" title="{{ 'app.shared.user.used_for_profile' | translate }}"><i class="fa fa-lastfm"></i></span>
+            <input type="text"
+                   name="user[profile_attributes][lastfm]"
+                   ng-model="user.profile.lastfm"
+                   class="form-control"
+                   id="user_lastfm"
+                   ng-pattern="/^https?:\/\/.*?last.fm/"
+                   placeholder="http://www.last.fm/fr/user/..."
+                   ng-disabled="preventField['profile.lastfm'] && user.profile.first_name && !userForm['user[profile_attributes][lastfm]'].$dirty"
+            />
+          </div>
+        </div>
+
+        <div class="form-group" ng-show="social.flickr || user.profile.flickr" ng-class="{'has-error': userForm['user[profile_attributes][flickr]'].$dirty && userForm['user[profile_attributes][flickr]'].$invalid}">
+          <div class="input-group">
+            <span class="input-group-addon help-cursor" title="{{ 'app.shared.user.used_for_profile' | translate }}"><i class="fa fa-flickr"></i></span>
+            <input type="text"
+                   name="user[profile_attributes][flickr]"
+                   ng-model="user.profile.flickr"
+                   class="form-control"
+                   id="user_flickr"
+                   ng-pattern="/^https?:\/\/.*?flickr/"
+                   placeholder="https://www.flickr.com/photos/..."
+                   ng-disabled="preventField['profile.flickr'] && user.profile.flickr && !userForm['user[profile_attributes][flickr]'].$dirty"
+            />
+          </div>
+        </div>
+
+        <div class="social-icons m-b">
+          <div ng-click="social.facebook = !social.facebook" ng-hide="social.facebook || user.profile.facebook"><i class="fa fa-facebook fa-2x"></i></div>
+          <div ng-click="social.twitter = !social.twitter" ng-hide="social.twitter || user.profile.twitter"><i class="fa fa-twitter fa-2x"></i></div>
+          <div ng-click="social.google_plus = !social.google_plus" ng-hide="social.google_plus || user.profile.google_plus"><i class="fa fa-google-plus fa-2x"></i></div>
+          <div ng-click="social.viadeo = !social.viadeo" ng-hide="social.viadeo || user.profile.viadeo"><i class="fa fa-viadeo fa-2x"></i></div>
+          <div ng-click="social.linkedin = !social.linkedin" ng-hide="social.linkedin || user.profile.linkedin"><i class="fa fa-linkedin fa-2x"></i></div>
+          <div ng-click="social.instagram = !social.instagram" ng-hide="social.instagram || user.profile.instagram"><i class="fa fa-instagram fa-2x"></i></div>
+          <div ng-click="social.youtube = !social.youtube" ng-hide="social.youtube || user.profile.youtube"><i class="fa fa-youtube fa-2x"></i></div>
+          <div ng-click="social.vimeo = !social.vimeo" ng-hide="social.vimeo || user.profile.vimeo"><i class="fa fa-vimeo fa-2x"></i></div>
+          <div ng-click="social.dailymotion = !social.dailymotion" ng-hide="social.dailymotion || user.profile.dailymotion"><img src="../../images/social/dailymotion.png" alt="d" class="fa-img contrast-250 fa-2x"/></div>
+          <div ng-click="social.github = !social.github" ng-hide="social.github || user.profile.github"><i class="fa fa-github fa-2x"></i></div>
+          <div ng-click="social.echosciences = !social.echosciences" ng-hide="social.echosciences || user.profile.echosciences"><img src="../../images/social/echosciences.png" alt="E" class="fa-img contrast-250 fa-2x"/></div>
+          <div ng-click="social.pinterest = !social.pinterest" ng-hide="social.pinterest || user.profile.pinterest"><i class="fa fa-pinterest fa-2x"></i></div>
+          <div ng-click="social.lastfm = !social.lastfm" ng-hide="social.lastfm || user.profile.lastfm"><i class="fa fa-lastfm fa-2x"></i></div>
+          <div ng-click="social.flickr = !social.flickr" ng-hide="social.flickr || user.profile.flickr"><i class="fa fa-flickr fa-2x"></i></div>
+        </div>
+      </div>
+
+    </div>
+
+</div>

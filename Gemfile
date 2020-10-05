@@ -2,29 +2,18 @@
 
 source 'https://rubygems.org'
 
-git 'https://github.com/judynjagi/compass.git', branch: 'stable' do
-  gem 'compass-core'
-end
-
-gem 'compass-rails', '3.1.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.4'
 # Used by rails 5.2 to reduce the app boot time by over 50%
 gem 'bootsnap'
 # Use Puma as web server
 gem 'puma', '3.12.6'
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0', '>= 5.0.6'
+gem 'webpacker', '~> 5.x'
 
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 4.1.20'
-
-# Use jquery as the JavaScript library
-gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 gem 'jbuilder_cache_multi'
-gem "json", ">= 2.3.0"
+gem 'json', '>= 2.3.0'
 
 gem 'forgery'
 gem 'responders', '~> 2.0'
@@ -72,6 +61,7 @@ gem 'seed_dump'
 gem 'pg'
 gem 'pg_search'
 
+# authentication
 gem 'devise', '>= 4.6.0'
 
 gem 'omniauth', '~> 1.9.0'
@@ -80,10 +70,8 @@ gem 'omniauth-rails_csrf_protection', '~> 0.1'
 
 gem 'rolify'
 
+# pagination
 gem 'kaminari'
-
-gem 'bootstrap-sass', '>= 3.4.1'
-gem 'font-awesome-rails'
 
 # Image processing ruby wrapper for ImageMagick
 gem 'mini_magick'

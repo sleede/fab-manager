@@ -54,8 +54,9 @@
       Fablab.sessionTours = [];
   </script>
 
-  <%= stylesheet_link_tag 'application', media: 'all' %>
-  <%= stylesheet_link_tag 'app.printer', media: 'print' %>
+  <%= stylesheet_packs_with_chunks_tag 'application', media: 'all' %>
+  <%= stylesheet_packs_with_chunks_tag 'plugins', media: 'all' %>
+  <%= stylesheet_packs_with_chunks_tag 'printer', media: 'print' %>
   <% unless Stylesheet.theme.nil? %>
   <link rel="stylesheet" media="all" href="<%= stylesheet_path(Stylesheet.theme.id) %>-<%= Stylesheet.theme.updated_at.to_i.to_s %>.css" />
   <%  end %>
@@ -120,33 +121,6 @@
     <span class="text-sm">Powered by <a href="http://www.fab-manager.com" target="_blank">Fab-manager</a></span>
   </div>
 
-<%= javascript_include_tag 'application' %>
-
-<!-- i18n of external libraries -->
-<script type="text/javascript" src="<%= asset_path "angular-i18n/angular-locale_#{Rails.application.secrets.angular_locale}.js" %>"></script>
-<!-- if required locale does not exist, use the default "en" -->
-<% if asset_available?("moment/locale/#{Rails.application.secrets.moment_locale}.js") %>
-  <script type="text/javascript" src="<%= asset_path "moment/locale/#{Rails.application.secrets.moment_locale}.js" %>"></script>
-<%
-  elsif Rails.application.secrets.moment_locale != 'en'
-    raise LoadError, "moment/locale/#{Rails.application.secrets.moment_locale}.js does not exists"
-  end
-%>
-<!-- if required locale does not exist, use the default "en-US" -->
-<% if asset_available?("summernote/lang/summernote-#{Rails.application.secrets.summernote_locale}.js") %>
-  <script type="text/javascript" src="<%= asset_path "summernote/lang/summernote-#{Rails.application.secrets.summernote_locale}.js" %>"></script>
-<%
-  elsif Rails.application.secrets.summernote_locale != 'en-US'
-    raise LoadError, "summernote/lang/summernote-#{Rails.application.secrets.summernote_locale}.js does not exists"
-  end
-%>
-<!-- if required locale does not exist, use the default "en" -->
-<% if asset_available?("fullcalendar/dist/lang/#{Rails.application.secrets.fullcalendar_locale}.js") %>
-  <script type="text/javascript" src="<%= asset_path "fullcalendar/dist/lang/#{Rails.application.secrets.fullcalendar_locale}.js" %>"></script>
-<%
-  elsif Rails.application.secrets.fullcalendar_locale != 'en'
-    raise LoadError, "fullcalendar/dist/lang/#{Rails.application.secrets.fullcalendar_locale}.js does not exists"
-  end
-%>
+<%= javascript_packs_with_chunks_tag 'application' %>
 </body>
 </html>
