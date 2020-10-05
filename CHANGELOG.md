@@ -1,5 +1,15 @@
 # Changelog Fab-manager
 
+- Migrated the assets build pipeline from Sprockets to Webpack
+- Fix a bug: changing the date of a training session does not prevent the selection of a different type of training
+- Updated summernote to 0.8.18
+- Updated angular-summernote to 0.8.1
+- Updated FontAwesome from v4 to v5
+- Updated jquery-minicolors to 2.3.5
+- Updated angular-bootstrap-switch to 0.5.2
+- Updated bootstrap-switch to 3.4.0
+- Updated fullCalendar to 3.10.2
+
 ## v4.5.9 2020 September 29
 
 - Ability to configure until when the events are shown on the home page
@@ -23,14 +33,6 @@
 - Fix a bug: unable to create a subscription plan for only one group
 - Fix a bug: removed unexpected character in coupon form
 - Updated coveralls gem to a supported version
-- Fix a bug: changing the date of a training session does not prevent the selection of a different type of training
-- Updated summernote to 0.8.18
-- Updated angular-summernote to 0.8.1
-- Updated FontAwesome from v4 to v5
-- Updated jquery-minicolors to 2.3.5
-- Updated angular-bootstrap-switch to 0.5.2
-- Updated bootstrap-switch to 3.4.0
-- Updated fullCalendar to 3.10.2
 
 ## v4.5.6 2020 September 1st
 
