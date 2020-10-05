@@ -482,7 +482,6 @@ angular.module('application.router', ['ui.router'])
           explicationAlertPromise: ['Setting', function (Setting) { return Setting.get({ name: 'training_explications_alert' }).$promise; }],
           plansPromise: ['Plan', function (Plan) { return Plan.query().$promise; }],
           groupsPromise: ['Group', function (Group) { return Group.query().$promise; }],
-          availabilityTrainingsPromise: ['Availability', '$stateParams', function (Availability, $stateParams) { return Availability.trainings({ trainingId: $stateParams.id }).$promise; }],
           trainingPromise: ['Training', '$stateParams', function (Training, $stateParams) {
             if ($stateParams.id !== 'all') { return Training.get({ id: $stateParams.id }).$promise; }
           }],

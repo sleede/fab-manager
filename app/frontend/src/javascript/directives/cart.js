@@ -426,7 +426,11 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
             } else if (!$scope.slot.is_reserved && !$scope.slot.is_completed && $scope.events.modifiable) {
               // slot is not reserved but we are currently modifying a slot
               // -> we request the calender to change the rendering
-              if (typeof $scope.onSlotModifyUnselect === 'function') { $scope.onSlotModifyUnselect(); }
+              if (typeof $scope.onSlotModifyUnselect === 'function') {
+                // if the callback return false, cancel the selection for the current modification
+                const res = $scope.onSlotModifyUnselect();
+                if (!res) return;
+              }
               // -> then, we re-affect the destination slot
               if (!$scope.events.placable || ($scope.events.placable._id !== $scope.slot._id)) {
                 return $scope.events.placable = $scope.slot;

@@ -450,7 +450,6 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$stateP
       const save = {
         slotId: $scope.events.modifiable.slot_id,
         borderColor: $scope.events.modifiable.borderColor,
-        user: angular.copy($scope.events.modifiable.user),
         title: _t('app.logged.space_reserve.i_ve_reserved')
       };
 
@@ -470,6 +469,8 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$stateP
       $scope.events.placable.is_reserved = true;
       $scope.events.placable.can_modify = true;
       updateEvents($scope.events.placable);
+
+      refetchCalendar();
     };
 
     /**

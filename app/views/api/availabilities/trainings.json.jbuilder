@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 json.array!(@availabilities) do |a|
-  json.id a.slot_id if a.slot_id
+  json.slot_id a.slot_id if a.slot_id
   if a.is_reserved
     json.is_reserved true
     json.title "#{a.trainings[0].name}' - #{t('trainings.i_ve_reserved')}"
