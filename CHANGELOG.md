@@ -2,6 +2,7 @@
 
 - Fix a bug: unable to run tests suite with run-tests.sh
 - Updated coveralls gem to a supported version
+- Fix a bug: changing the date of a training session does not prevent the selection of a different type of training
 - Updated summernote to 0.8.18
 - Updated angular-summernote to 0.8.1
 - Updated FontAwesome from v4 to v5
