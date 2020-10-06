@@ -65,7 +65,7 @@ verlt() {
 
 version_error()
 {
-  printf "You must upgrade to %s first.\n Please read https://github.com/sleede/fab-manager/blob/master/doc/production_readme.md#update-fab-manager" "$1"
+  printf "You must upgrade to %s first.\nPlease refer to https://github.com/sleede/fab-manager/blob/master/doc/production_readme.md#update-fab-manager for instructions\n" "$1"
   exit 3
 }
 
@@ -73,7 +73,7 @@ version_check()
 {
   VERSION=$(docker-compose exec "$SERVICE" cat .fabmanager-version)
   if [[ $? = 1 ]]; then
-    VERSION=$(docker-compose exec fabmanager_staging cat package.json | grep version | awk 'BEGIN { FS = "\"" } ; {print $4}')
+    VERSION=$(docker-compose exec "$SERVICE" cat package.json | grep version | awk 'BEGIN { FS = "\"" } ; {print $4}')
   fi
 
   if verlt "$VERSION" 2.8.3; then
