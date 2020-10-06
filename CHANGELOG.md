@@ -9,6 +9,7 @@
 - Updated angular-bootstrap-switch to 0.5.2
 - Updated bootstrap-switch to 3.4.0
 - Updated fullCalendar to 3.10.2
+- [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/mount-webpack.sh | bash`
 
 ## v4.5.9 2020 September 29
 
