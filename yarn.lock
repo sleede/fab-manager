@@ -3317,9 +3317,9 @@ eslint-plugin-import@~2.20.1:
     read-pkg-up "^2.0.0"
     resolve "^1.12.0"
 
-"eslint-plugin-lint-erb@https://github.com/sleede/eslint-plugin-lint-erb":
+"eslint-plugin-lint-erb@https://github.com/sleede/eslint-plugin-lint-erb.git#master":
   version "0.2.2"
-  resolved "https://github.com/sleede/eslint-plugin-lint-erb#c163046088f7e988d131b0ca857a47feb925c10f"
+  resolved "https://github.com/sleede/eslint-plugin-lint-erb.git#c163046088f7e988d131b0ca857a47feb925c10f"
 
 eslint-plugin-node@~11.0.0:
   version "11.0.0"
