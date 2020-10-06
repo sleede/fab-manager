@@ -44,7 +44,7 @@ RUN bundle install --binstubs --without development test doc
 WORKDIR /usr/src/app
 COPY package.json /usr/src/app/package.json
 COPY yarn.lock /usr/src/app/yarn.lock
-RUN yarn install --production
+RUN yarn install
 
 # Clean up build deps, cached packages and temp files
 RUN apk del .build-deps && \
