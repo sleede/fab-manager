@@ -8,6 +8,7 @@ module.exports = {
       loader: 'ngtemplate-loader',
       options: {
         relativeTo: path.join(__dirname, '../../../app/frontend/templates'),
+        prefix: './app/frontend/templates',
         requireAngular: true
       }
     },
