@@ -54,6 +54,37 @@ config()
   # COMMANDS, SCRIPTS and ENVIRONMENTS are set by parseparams
 }
 
+# compare versions utilities
+# https://stackoverflow.com/a/4024263/1039377
+verlte() {
+    [  "$1" = "$(echo -e "$1\n$2" | sort -V | head -n1)" ]
+}
+verlt() {
+    [ "$1" = "$2" ] && return 1 || verlte "$1" "$2"
+}
+
+version_error()
+{
+  printf "You must upgrade to %s first.\n Please read https://github.com/sleede/fab-manager/blob/master/doc/production_readme.md#update-fab-manager" "$1"
+  exit 3
+}
+
+version_check()
+{
+  VERSION=$(docker-compose exec "$SERVICE" cat .fabmanager-version)
+  if [[ $? = 1 ]]; then
+    VERSION=$(docker-compose exec fabmanager_staging cat package.json | grep version | awk 'BEGIN { FS = "\"" } ; {print $4}')
+  fi
+
+  if verlt "$VERSION" 2.8.3; then
+    version_error "v2.8.3"
+  elif verlt "$VERSION" 3.1.2; then
+    version_error "v3.1.2"
+  elif verlt "$VERSION" 4.0.4; then
+    version_error "v4.0.4"
+  fi
+}
+
 add_environments()
 {
   for ENV in "${ENVIRONMENTS[@]}"; do
@@ -126,6 +157,7 @@ proceed()
   trap "trap_ctrlc" 2 # SIGINT
   parseparams "$@"
   config
+  version_check
   add_environments
   upgrade
   clean

@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Migrated the assets build pipeline from Sprockets to Webpack
+- Version check during the upgrade
 - Fix a bug: changing the date of a training session does not prevent the selection of a different type of training
 - Updated summernote to 0.8.18
 - Updated angular-summernote to 0.8.1
