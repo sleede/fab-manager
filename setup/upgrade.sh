@@ -65,7 +65,7 @@ verlt() {
 
 version_error()
 {
-  printf "You must upgrade to %s first.\nPlease refer to https://github.com/sleede/fab-manager/blob/master/doc/production_readme.md#update-fab-manager for instructions\n" "$1"
+  printf "\n\nYou must upgrade Fab-manager to %s first.\nPlease refer to https://github.com/sleede/fab-manager/blob/master/doc/production_readme.md#update-fab-manager for instructions\n" "$1" 1>&2
   exit 3
 }
 
