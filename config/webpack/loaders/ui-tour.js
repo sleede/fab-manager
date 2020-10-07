@@ -1,14 +1,17 @@
+const path = require('path');
+
 module.exports = {
-  test: /angular-ui-tour\/.*\.js$/i,
+  test: /angular-ui-tour\/.*\.html$/i,
   use: [
     {
-      loader: 'imports-loader',
+      loader: 'ngtemplate-loader',
       options: {
-        imports: [
-          'default hone Hone',
-          'default tether Tether'
-        ]
+        relativeTo: path.join(__dirname, '../../../node_modules/angular-ui-tour/app/templates'),
+        requireAngular: true
       }
+    },
+    {
+      loader: 'html-loader'
     }
   ]
 };
