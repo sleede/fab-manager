@@ -1355,10 +1355,9 @@ angular-ui-calendar@^1.0.2:
   resolved "https://registry.yarnpkg.com/angular-ui-calendar/-/angular-ui-calendar-1.0.2.tgz#fa271057425572efaadf6660243cc33cb99f33c1"
   integrity sha1-+icQV0JVcu+q32ZgJDzDPLmfM8E=
 
-angular-ui-codemirror@^0.3.0:
+"angular-ui-codemirror@https://github.com/swimlane/ui-codemirror.git#master":
   version "0.3.0"
-  resolved "https://registry.yarnpkg.com/angular-ui-codemirror/-/angular-ui-codemirror-0.3.0.tgz#e4286fc50f393f2a6e697c1bf3170424e12cbb60"
-  integrity sha1-5ChvxQ85PypuaXwb8xcEJOEsu2A=
+  resolved "https://github.com/swimlane/ui-codemirror.git#7804a5a0eae3f6cd4d541faeb2d42882e48950dc"
 
 "angular-ui-tour@https://github.com/sleede/angular-ui-tour.git#master":
   version "0.9.4"
