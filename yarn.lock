@@ -1362,7 +1362,7 @@ angular-ui-codemirror@^0.3.0:
 
 "angular-ui-tour@https://github.com/sleede/angular-ui-tour.git#master":
   version "0.9.4"
-  resolved "https://github.com/sleede/angular-ui-tour.git#b53bbdb2149bc62f2f29f7095232618677470869"
+  resolved "https://github.com/sleede/angular-ui-tour.git#e0be65fd3356e859dbde7e83e7ff2b7cfd693d79"
   dependencies:
     angular ">=1.5"
     angular-bind-html-compile "https://github.com/incuna/angular-bind-html-compile.git#1.4.1"

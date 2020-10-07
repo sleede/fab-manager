@@ -8,15 +8,12 @@ const jsErb = require('./loaders/js_erb');
 const sass = require('./loaders/sass');
 const sassErb = require('./loaders/sass_erb');
 const html = require('./loaders/html');
-const uiTour = require('./loaders/ui-tour');
 
 environment.plugins.prepend('Provide', new webpack.ProvidePlugin({
   $: 'jquery',
   jQuery: 'jquery',
   'window.jQuery': 'jquery',
   _: 'lodash',
-  Hone: 'hone',
-  Tether: 'tether',
   Holder: 'holderjs',
   'window.CodeMirror': 'codemirror',
   MediumEditor: 'medium-editor',
@@ -31,7 +28,6 @@ environment.loaders.prepend('sass-erb', sassErb);
 environment.loaders.prepend('js', js);
 environment.loaders.append('html', html);
 environment.loaders.append('sass', sass);
-environment.loaders.append('uiTour', uiTour);
 
 environment.splitChunks();
 
