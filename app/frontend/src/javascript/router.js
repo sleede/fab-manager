@@ -21,14 +21,14 @@ angular.module('application.router', ['ui.router'])
         abstract: true,
         views: {
           header: {
-            templateUrl: '../../templates/shared/header.html.erb'
+            templateUrl: '/shared/header.html.erb'
           },
           leftnav: {
-            templateUrl: '../../templates/shared/leftnav.html',
+            templateUrl: '/shared/leftnav.html',
             controller: 'MainNavController'
           },
           cookies: {
-            templateUrl: '../../templates/shared/cookies.html',
+            templateUrl: '/shared/cookies.html',
             controller: 'CookiesController'
           },
           main: {}
