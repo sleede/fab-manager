@@ -3,6 +3,7 @@
 - Migrated the assets build pipeline from Sprockets to Webpack
 - Version check during the upgrade
 - Fix a bug: changing the date of a training session does not prevent the selection of a different type of training
+- Fix a bug: unable to change the date formats using the setup script
 - Updated summernote to 0.8.18
 - Updated angular-summernote to 0.8.1
 - Updated FontAwesome from v4 to v5
