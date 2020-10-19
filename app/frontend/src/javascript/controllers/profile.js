@@ -167,7 +167,7 @@ Application.Controllers.controller('CompleteProfileController', ['$scope', '$roo
       event.stopPropagation();
       dialogs.confirm(
         {
-          templateUrl: '../../../templates/profile/resend_code_modal.html',
+          templateUrl: '/profile/resend_code_modal.html',
           resolve: {
             object () {
               return { email: memberPromise.email };

@@ -8,7 +8,7 @@ Application.Directives.directive('twitter', ['Setting',
   function (Setting) {
     return ({
       restrict: 'E',
-      templateUrl: '../../../../templates/home/twitter.html',
+      templateUrl: '/home/twitter.html',
       link ($scope, element, attributes) {
         // Twitter username
         $scope.twitterName = null;

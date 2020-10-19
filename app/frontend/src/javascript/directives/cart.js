@@ -39,7 +39,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
         reservableName: '@',
         limitToOneSlot: '@'
       },
-      templateUrl: '../../../templates/shared/_cart.html',
+      templateUrl: '/shared/_cart.html',
       link ($scope, element, attributes) {
       // will store the user's plan if he choosed to buy one
         $scope.selectedPlan = null;
@@ -173,7 +173,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
               } else {
                 const modalInstance = $uibModal.open({
                   animation: true,
-                  templateUrl: '../../../templates/shared/_reserve_slot_without_plan.html',
+                  templateUrl: '/shared/_reserve_slot_without_plan.html',
                   size: 'md',
                   controller: 'ReserveSlotWithoutPlanController',
                   resolve: {
@@ -317,7 +317,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
             // ask confirmation
             const modalInstance = $uibModal.open({
               animation: true,
-              templateUrl: '../../../templates/shared/_reserve_slot_tags_mismatch.html',
+              templateUrl: '/shared/_reserve_slot_tags_mismatch.html',
               size: 'md',
               controller: 'ReserveSlotTagsMismatchController',
               resolve: {
@@ -356,7 +356,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
           if (sameTimeReservations.length > 0) {
             const modalInstance = $uibModal.open({
               animation: true,
-              templateUrl: '../../../templates/shared/_reserve_slot_same_time.html',
+              templateUrl: '/shared/_reserve_slot_same_time.html',
               size: 'md',
               controller: 'ReserveSlotSameTimeController',
               resolve: {
@@ -450,7 +450,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
               $scope.slot.cancelable = slotCanBeCanceled($scope.slot);
               // -> then, we open a dialog to ask to the user to choose an action
               return dialogs.confirm({
-                templateUrl: '../../../templates/shared/confirm_modify_slot_modal.html',
+                templateUrl: '/shared/confirm_modify_slot_modal.html',
                 resolve: {
                   object () { return $scope.slot; }
                 }
@@ -615,7 +615,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
          */
         const payByStripe = function (reservation) {
           $uibModal.open({
-            templateUrl: '../../../templates/stripe/payment_modal.html',
+            templateUrl: '/stripe/payment_modal.html',
             size: 'md',
             resolve: {
               reservation () {
@@ -676,7 +676,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
          */
         const payOnSite = function (reservation) {
           $uibModal.open({
-            templateUrl: '../../../templates/shared/valid_reservation_modal.html',
+            templateUrl: '/shared/valid_reservation_modal.html',
             size: 'sm',
             resolve: {
               reservation () {

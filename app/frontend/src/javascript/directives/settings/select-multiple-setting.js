@@ -12,7 +12,7 @@ Application.Directives.directive('selectMultipleSetting', ['Setting', 'growl', '
         descriptionNew: '@',
         beforeAdd: '='
       },
-      templateUrl: '../../../../templates/admin/settings/select-multiple.html',
+      templateUrl: '/admin/settings/select-multiple.html',
       link ($scope, element, attributes) {
         // The setting
         $scope.setting = {
@@ -44,7 +44,7 @@ Application.Directives.directive('selectMultipleSetting', ['Setting', 'growl', '
          */
         $scope.addItem = function () {
           $uibModal.open({
-            templateUrl: '../../../../templates/admin/settings/newSelectOption.html',
+            templateUrl: '/admin/settings/newSelectOption.html',
             resolve: {
               titleNew: function () { return $scope.titleNew; },
               descriptionNew: function () { return $scope.descriptionNew; }

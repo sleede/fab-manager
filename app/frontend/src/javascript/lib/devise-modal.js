@@ -28,7 +28,7 @@
         }
         if (!promise) {
           promise = $uibModal.open({
-            templateUrl: '../../../templates/shared/deviseModal.html',
+            templateUrl: '/shared/deviseModal.html',
             controller: function ($scope, $uibModalInstance) {
               const user = $scope.user = {};
               $scope.login = function () {

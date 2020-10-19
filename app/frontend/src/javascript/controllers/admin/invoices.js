@@ -58,7 +58,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       prefix: settings.invoice_prefix,
       nextId: 40,
       date: moment().format('DDMMYYYY'),
-      templateUrl: '../../../../templates/admin/invoices/settings/editPrefix.html'
+      templateUrl: '/admin/invoices/settings/editPrefix.html'
     };
 
     // Invoices parameters
@@ -67,22 +67,22 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       reference: {
         model: '',
         help: null,
-        templateUrl: '../../../../templates/admin/invoices/settings/editReference.html'
+        templateUrl: '/admin/invoices/settings/editReference.html'
       },
       code: {
         model: '',
         active: true,
-        templateUrl: '../../../../templates/admin/invoices/settings/editCode.html'
+        templateUrl: '/admin/invoices/settings/editCode.html'
       },
       number: {
         model: '',
         help: null,
-        templateUrl: '../../../../templates/admin/invoices/settings/editNumber.html'
+        templateUrl: '/admin/invoices/settings/editNumber.html'
       },
       VAT: {
         rate: 19.6,
         active: false,
-        templateUrl: '../../../../templates/admin/invoices/settings/editVAT.html'
+        templateUrl: '/admin/invoices/settings/editVAT.html'
       },
       text: {
         content: ''
@@ -220,7 +220,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     $scope.generateAvoirForInvoice = function (invoice) {
       // open modal
       const modalInstance = $uibModal.open({
-        templateUrl: '../../../../templates/admin/invoices/avoirModal.html',
+        templateUrl: '/admin/invoices/avoirModal.html',
         controller: 'AvoirModalController',
         resolve: {
           invoice () { return invoice; },
@@ -578,7 +578,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     $scope.closeAnAccountingPeriod = function () {
       // open modal
       $uibModal.open({
-        templateUrl: '../../../../templates/admin/invoices/closePeriodModal.html',
+        templateUrl: '/admin/invoices/closePeriodModal.html',
         controller: 'ClosePeriodModalController',
         backdrop: 'static',
         keyboard: false,
@@ -592,7 +592,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
 
     $scope.toggleExportModal = function () {
       $uibModal.open({
-        templateUrl: '../../../../templates/admin/invoices/accountingExportModal.html',
+        templateUrl: '/admin/invoices/accountingExportModal.html',
         controller: 'AccountingExportModalController',
         size: 'xl'
       });
@@ -646,7 +646,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
 
       // otherwise, open a modal to ask for the stripe keys
       const modalInstance = $uibModal.open({
-        templateUrl: '../../../../templates/admin/invoices/settings/stripeKeys.html',
+        templateUrl: '/admin/invoices/settings/stripeKeys.html',
         controller: 'StripeKeysModalController',
         resolve: {
           stripeKeys: ['Setting', function (Setting) { return Setting.query({ names: "['stripe_public_key', 'stripe_secret_key']" }).$promise; }]
