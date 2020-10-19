@@ -111,7 +111,7 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
 
     $scope.openFilterAside = () =>
       $aside.open({
-        templateUrl: '../../../templates/calendar/filterAside.html',
+        templateUrl: '/calendar/filterAside.html',
         placement: 'right',
         size: 'md',
         backdrop: false,

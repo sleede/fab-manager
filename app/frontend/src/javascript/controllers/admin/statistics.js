@@ -311,7 +311,7 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
      */
     $scope.exportToExcel = function () {
       const options = {
-        templateUrl: '../../../../templates/admin/statistics/export.html',
+        templateUrl: '/admin/statistics/export.html',
         size: 'sm',
         controller: 'ExportStatisticsController',
         resolve: {

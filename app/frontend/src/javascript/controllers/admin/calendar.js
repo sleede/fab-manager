@@ -272,7 +272,7 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
       // open a confirmation dialog
       const modalInstance = $uibModal.open({
         animation: true,
-        templateUrl: '../../../../templates/admin/calendar/deleteRecurrent.html',
+        templateUrl: '/admin/calendar/deleteRecurrent.html',
         size: 'md',
         controller: 'DeleteRecurrentAvailabilityController',
         resolve: {
@@ -418,7 +418,7 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
 
       // then we open a modal window to let the admin specify the slot type
       const modalInstance = $uibModal.open({
-        templateUrl: '../../../../templates/admin/calendar/eventModal.html',
+        templateUrl: '/admin/calendar/eventModal.html',
         controller: 'CreateEventModalController',
         backdrop: 'static',
         keyboard: false,

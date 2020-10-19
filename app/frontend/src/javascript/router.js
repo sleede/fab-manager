@@ -21,14 +21,14 @@ angular.module('application.router', ['ui.router'])
         abstract: true,
         views: {
           header: {
-            templateUrl: '../../templates/shared/header.html.erb'
+            templateUrl: '/shared/header.html.erb'
           },
           leftnav: {
-            templateUrl: '../../templates/shared/leftnav.html',
+            templateUrl: '/shared/leftnav.html',
             controller: 'MainNavController'
           },
           cookies: {
-            templateUrl: '../../templates/shared/cookies.html',
+            templateUrl: '/shared/cookies.html',
             controller: 'CookiesController'
           },
           main: {}
@@ -92,7 +92,7 @@ angular.module('application.router', ['ui.router'])
         url: '/about',
         views: {
           'content@': {
-            templateUrl: '../../templates/shared/about.html',
+            templateUrl: '/shared/about.html',
             controller: 'AboutController'
           }
         }
@@ -101,7 +101,7 @@ angular.module('application.router', ['ui.router'])
         url: '/?reset_password_token',
         views: {
           'main@': {
-            templateUrl: '../../templates/home.html',
+            templateUrl: '/home.html',
             controller: 'HomeController'
           }
         },
@@ -113,7 +113,7 @@ angular.module('application.router', ['ui.router'])
         url: '/privacy-policy',
         views: {
           'content@': {
-            templateUrl: '../../templates/shared/privacy.html',
+            templateUrl: '/shared/privacy.html',
             controller: 'PrivacyController'
           }
         }
@@ -124,7 +124,7 @@ angular.module('application.router', ['ui.router'])
         url: '/profile_completion',
         views: {
           'main@': {
-            templateUrl: '../../templates/profile/complete.html',
+            templateUrl: '/profile/complete.html',
             controller: 'CompleteProfileController'
           }
         },
@@ -150,7 +150,7 @@ angular.module('application.router', ['ui.router'])
         url: '/profile',
         views: {
           'main@': {
-            templateUrl: '../../templates/dashboard/profile.html',
+            templateUrl: '/dashboard/profile.html',
             controller: 'DashboardController'
           }
         }
@@ -159,7 +159,7 @@ angular.module('application.router', ['ui.router'])
         url: '/settings',
         views: {
           'main@': {
-            templateUrl: '../../templates/dashboard/settings.html',
+            templateUrl: '/dashboard/settings.html',
             controller: 'EditProfileController'
           }
         },
@@ -173,7 +173,7 @@ angular.module('application.router', ['ui.router'])
         url: '/projects',
         views: {
           'main@': {
-            templateUrl: '../../templates/dashboard/projects.html',
+            templateUrl: '/dashboard/projects.html',
             controller: 'DashboardController'
           }
         }
@@ -182,7 +182,7 @@ angular.module('application.router', ['ui.router'])
         url: '/trainings',
         views: {
           'main@': {
-            templateUrl: '../../templates/dashboard/trainings.html',
+            templateUrl: '/dashboard/trainings.html',
             controller: 'DashboardController'
           }
         }
@@ -191,7 +191,7 @@ angular.module('application.router', ['ui.router'])
         url: '/events',
         views: {
           'main@': {
-            templateUrl: '../../templates/dashboard/events.html',
+            templateUrl: '/dashboard/events.html',
             controller: 'DashboardController'
           }
         }
@@ -200,7 +200,7 @@ angular.module('application.router', ['ui.router'])
         url: '/invoices',
         views: {
           'main@': {
-            templateUrl: '../../templates/dashboard/invoices.html',
+            templateUrl: '/dashboard/invoices.html',
             controller: 'DashboardController'
           }
         }
@@ -210,7 +210,7 @@ angular.module('application.router', ['ui.router'])
         abstract: !Fablab.walletModule,
         views: {
           'main@': {
-            templateUrl: '../../templates/dashboard/wallet.html',
+            templateUrl: '/dashboard/wallet.html',
             controller: 'WalletController'
           }
         },
@@ -225,7 +225,7 @@ angular.module('application.router', ['ui.router'])
         url: '/members/:id',
         views: {
           'main@': {
-            templateUrl: '../../templates/members/show.html',
+            templateUrl: '/members/show.html',
             controller: 'ShowProfileController'
           }
         },
@@ -237,7 +237,7 @@ angular.module('application.router', ['ui.router'])
         url: '/members',
         views: {
           'main@': {
-            templateUrl: '../../templates/members/index.html',
+            templateUrl: '/members/index.html',
             controller: 'MembersController'
           }
         },
@@ -251,7 +251,7 @@ angular.module('application.router', ['ui.router'])
         url: '/projects?q&page&theme_id&component_id&machine_id&from&whole_network',
         views: {
           'main@': {
-            templateUrl: '../../templates/projects/index.html',
+            templateUrl: '/projects/index.html',
             controller: 'ProjectsController'
           }
         },
@@ -267,7 +267,7 @@ angular.module('application.router', ['ui.router'])
         url: '/projects/new',
         views: {
           'main@': {
-            templateUrl: '../../templates/projects/new.html',
+            templateUrl: '/projects/new.html',
             controller: 'NewProjectController'
           }
         },
@@ -279,7 +279,7 @@ angular.module('application.router', ['ui.router'])
         url: '/projects/:id',
         views: {
           'main@': {
-            templateUrl: '../../templates/projects/show.html',
+            templateUrl: '/projects/show.html',
             controller: 'ShowProjectController'
           }
         },
@@ -292,7 +292,7 @@ angular.module('application.router', ['ui.router'])
         url: '/projects/:id/edit',
         views: {
           'main@': {
-            templateUrl: '../../templates/projects/edit.html',
+            templateUrl: '/projects/edit.html',
             controller: 'EditProjectController'
           }
         },
@@ -307,7 +307,7 @@ angular.module('application.router', ['ui.router'])
         url: '/machines',
         views: {
           'main@': {
-            templateUrl: '../../templates/machines/index.html',
+            templateUrl: '/machines/index.html',
             controller: 'MachinesController'
           }
         },
@@ -320,7 +320,7 @@ angular.module('application.router', ['ui.router'])
         url: '/machines/new',
         views: {
           'main@': {
-            templateUrl: '../../templates/machines/new.html',
+            templateUrl: '/machines/new.html',
             controller: 'NewMachineController'
           }
         }
@@ -329,7 +329,7 @@ angular.module('application.router', ['ui.router'])
         url: '/machines/:id',
         views: {
           'main@': {
-            templateUrl: '../../templates/machines/show.html',
+            templateUrl: '/machines/show.html',
             controller: 'ShowMachineController'
           }
         },
@@ -341,7 +341,7 @@ angular.module('application.router', ['ui.router'])
         url: '/machines/:id/reserve',
         views: {
           'main@': {
-            templateUrl: '../../templates/machines/reserve.html',
+            templateUrl: '/machines/reserve.html',
             controller: 'ReserveMachineController'
           }
         },
@@ -362,7 +362,7 @@ angular.module('application.router', ['ui.router'])
         url: '/machines/:id/edit',
         views: {
           'main@': {
-            templateUrl: '../../templates/machines/edit.html',
+            templateUrl: '/machines/edit.html',
             controller: 'EditMachineController'
           }
         },
@@ -377,7 +377,7 @@ angular.module('application.router', ['ui.router'])
         abstract: !Fablab.spacesModule,
         views: {
           'main@': {
-            templateUrl: '../../templates/spaces/index.html',
+            templateUrl: '/spaces/index.html',
             controller: 'SpacesController'
           }
         },
@@ -391,7 +391,7 @@ angular.module('application.router', ['ui.router'])
         abstract: !Fablab.spacesModule,
         views: {
           'main@': {
-            templateUrl: '../../templates/spaces/new.html',
+            templateUrl: '/spaces/new.html',
             controller: 'NewSpaceController'
           }
         }
@@ -401,7 +401,7 @@ angular.module('application.router', ['ui.router'])
         abstract: !Fablab.spacesModule,
         views: {
           'main@': {
-            templateUrl: '../../templates/spaces/show.html',
+            templateUrl: '/spaces/show.html',
             controller: 'ShowSpaceController'
           }
         },
@@ -414,7 +414,7 @@ angular.module('application.router', ['ui.router'])
         abstract: !Fablab.spacesModule,
         views: {
           'main@': {
-            templateUrl: '../../templates/spaces/edit.html',
+            templateUrl: '/spaces/edit.html',
             controller: 'EditSpaceController'
           }
         },
@@ -427,7 +427,7 @@ angular.module('application.router', ['ui.router'])
         abstract: !Fablab.spacesModule,
         views: {
           'main@': {
-            templateUrl: '../../templates/spaces/reserve.html',
+            templateUrl: '/spaces/reserve.html',
             controller: 'ReserveSpaceController'
           }
         },
@@ -450,7 +450,7 @@ angular.module('application.router', ['ui.router'])
         url: '/trainings',
         views: {
           'main@': {
-            templateUrl: '../../templates/trainings/index.html',
+            templateUrl: '/trainings/index.html',
             controller: 'TrainingsController'
           }
         },
@@ -462,7 +462,7 @@ angular.module('application.router', ['ui.router'])
         url: '/trainings/:id',
         views: {
           'main@': {
-            templateUrl: '../../templates/trainings/show.html',
+            templateUrl: '/trainings/show.html',
             controller: 'ShowTrainingController'
           }
         },
@@ -474,7 +474,7 @@ angular.module('application.router', ['ui.router'])
         url: '/trainings/:id/reserve',
         views: {
           'main@': {
-            templateUrl: '../../templates/trainings/reserve.html',
+            templateUrl: '/trainings/reserve.html',
             controller: 'ReserveTrainingController'
           }
         },
@@ -499,7 +499,7 @@ angular.module('application.router', ['ui.router'])
         url: '/notifications',
         views: {
           'main@': {
-            templateUrl: '../../templates/notifications/index.html',
+            templateUrl: '/notifications/index.html',
             controller: 'NotificationsController'
           }
         }
@@ -511,7 +511,7 @@ angular.module('application.router', ['ui.router'])
         abstract: !Fablab.plansModule,
         views: {
           'main@': {
-            templateUrl: '../../templates/plans/index.html',
+            templateUrl: '/plans/index.html',
             controller: 'PlansIndexController'
           }
         },
@@ -528,7 +528,7 @@ angular.module('application.router', ['ui.router'])
         url: '/events',
         views: {
           'main@': {
-            templateUrl: '../../templates/events/index.html',
+            templateUrl: '/events/index.html',
             controller: 'EventsController'
           }
         },
@@ -543,7 +543,7 @@ angular.module('application.router', ['ui.router'])
         url: '/events/:id',
         views: {
           'main@': {
-            templateUrl: '../../templates/events/show.html',
+            templateUrl: '/events/show.html',
             controller: 'ShowEventController'
           }
         },
@@ -559,7 +559,7 @@ angular.module('application.router', ['ui.router'])
         url: '/calendar',
         views: {
           'main@': {
-            templateUrl: '../../templates/calendar/calendar.html',
+            templateUrl: '/calendar/calendar.html',
             controller: 'CalendarController'
           }
         },
@@ -579,7 +579,7 @@ angular.module('application.router', ['ui.router'])
         url: '/admin/calendar',
         views: {
           'main@': {
-            templateUrl: '../../templates/admin/calendar/calendar.html',
+            templateUrl: '/admin/calendar/calendar.html',
             controller: 'AdminCalendarController'
           }
         },
@@ -596,7 +596,7 @@ angular.module('application.router', ['ui.router'])
         url: '/admin/calendar/icalendar',
         views: {
           'main@': {
-            templateUrl: '../../templates/admin/calendar/icalendar.html',
+            templateUrl: '/admin/calendar/icalendar.html',
             controller: 'AdminICalendarController'
           }
         },
@@ -610,7 +610,7 @@ angular.module('application.router', ['ui.router'])
         url: '/admin/projects',
         views: {
           'main@': {
-            templateUrl: '../../templates/admin/projects/index.html',
+            templateUrl: '/admin/projects/index.html',
             controller: 'AdminProjectsController'
           }
         },
@@ -630,7 +630,7 @@ angular.module('application.router', ['ui.router'])
         url: '/admin/abuses',
         views: {
           'main@': {
-            templateUrl: '../../templates/admin/abuses/index.html',
+            templateUrl: '/admin/abuses/index.html',
             controller: 'AbusesController'
           }
         },
@@ -644,7 +644,7 @@ angular.module('application.router', ['ui.router'])
         url: '/admin/trainings',
         views: {
           'main@': {
-            templateUrl: '../../templates/admin/trainings/index.html',
+            templateUrl: '/admin/trainings/index.html',
             controller: 'TrainingsAdminController'
           }
         },
@@ -658,7 +658,7 @@ angular.module('application.router', ['ui.router'])
         url: '/admin/trainings/new',
         views: {
           'main@': {
-            templateUrl: '../../templates/admin/trainings/new.html',
+            templateUrl: '/admin/trainings/new.html',
             controller: 'NewTrainingController'
           }
         },
@@ -670,7 +670,7 @@ angular.module('application.router', ['ui.router'])
         url: '/admin/trainings/:id/edit',
         views: {
           'main@': {
-            templateUrl: '../../templates/admin/trainings/edit.html',
+            templateUrl: '/admin/trainings/edit.html',
             controller: 'EditTrainingController'
           }
         },
@@ -684,7 +684,7 @@ angular.module('application.router', ['ui.router'])
         url: '/admin/events',
         views: {
           'main@': {
-            templateUrl: '../../templates/admin/events/index.html',
+            templateUrl: '/admin/events/index.html',
             controller: 'AdminEventsController'
           }
         },
@@ -701,7 +701,7 @@ angular.module('application.router', ['ui.router'])
         url: '/admin/events/new',
         views: {
           'main@': {
-            templateUrl: '../../templates/events/new.html',
+            templateUrl: '/events/new.html',
             controller: 'NewEventController'
           }
         },
@@ -716,7 +716,7 @@ angular.module('application.router', ['ui.router'])
         url: '/admin/events/:id/edit',
         views: {
           'main@': {
-            templateUrl: '../../templates/events/edit.html',
+            templateUrl: '/events/edit.html',
             controller: 'EditEventController'
           }
         },
@@ -732,7 +732,7 @@ angular.module('application.router', ['ui.router'])
         url: '/admin/events/:id/reservations',
         views: {
           'main@': {
-            templateUrl: '../../templates/admin/events/reservations.html',
+            templateUrl: '/admin/events/reservations.html',
             controller: 'ShowEventReservationsController'
           }
         },
@@ -747,7 +747,7 @@ angular.module('application.router', ['ui.router'])
         url: '/admin/pricing',
         views: {
           'main@': {
-            templateUrl: '../../templates/admin/pricing/index.html',
+            templateUrl: '/admin/pricing/index.html',
             controller: 'EditPricingController'
           }
         },
@@ -781,7 +781,7 @@ angular.module('application.router', ['ui.router'])
         url: '/admin/plans/new',
         views: {
           'main@': {
-            templateUrl: '../../templates/admin/plans/new.html',
+            templateUrl: '/admin/plans/new.html',
             controller: 'NewPlanController'
           }
         }
@@ -790,7 +790,7 @@ angular.module('application.router', ['ui.router'])
         url: '/admin/plans/:id/edit',
         views: {
           'main@': {
-            templateUrl: '../../templates/admin/plans/edit.html',
+            templateUrl: '/admin/plans/edit.html',
             controller: 'EditPlanController'
           }
         },
@@ -807,7 +807,7 @@ angular.module('application.router', ['ui.router'])
         url: '/admin/coupons/new',
         views: {
           'main@': {
-            templateUrl: '../../templates/admin/coupons/new.html',
+            templateUrl: '/admin/coupons/new.html',
             controller: 'NewCouponController'
           }
         }
@@ -816,7 +816,7 @@ angular.module('application.router', ['ui.router'])
         url: '/admin/coupons/:id/edit',
         views: {
           'main@': {
-            templateUrl: '../../templates/admin/coupons/edit.html',
+            templateUrl: '/admin/coupons/edit.html',
             controller: 'EditCouponController'
           }
         },
@@ -830,7 +830,7 @@ angular.module('application.router', ['ui.router'])
         url: '/admin/invoices',
         views: {
           'main@': {
-            templateUrl: '../../templates/admin/invoices/index.html',
+            templateUrl: '/admin/invoices/index.html',
             controller: 'InvoicesController'
           }
         },
@@ -863,19 +863,19 @@ angular.module('application.router', ['ui.router'])
         url: '/admin/members',
         views: {
           'main@': {
-            templateUrl: '../../templates/admin/members/index.html',
+            templateUrl: '/admin/members/index.html',
             controller: 'AdminMembersController'
           },
           'groups@app.admin.members': {
-            templateUrl: '../../templates/admin/groups/index.html',
+            templateUrl: '/admin/groups/index.html',
             controller: 'GroupsController'
           },
           'tags@app.admin.members': {
-            templateUrl: '../../templates/admin/tags/index.html',
+            templateUrl: '/admin/tags/index.html',
             controller: 'TagsController'
           },
           'authentification@app.admin.members': {
-            templateUrl: '../../templates/admin/authentications/index.html',
+            templateUrl: '/admin/authentications/index.html',
             controller: 'AuthentificationController'
           }
         },
@@ -894,7 +894,7 @@ angular.module('application.router', ['ui.router'])
         url: '/admin/members/new',
         views: {
           'main@': {
-            templateUrl: '../../templates/admin/members/new.html',
+            templateUrl: '/admin/members/new.html',
             controller: 'NewMemberController'
           }
         },
@@ -906,7 +906,7 @@ angular.module('application.router', ['ui.router'])
         url: '/admin/members/import',
         views: {
           'main@': {
-            templateUrl: '../../templates/admin/members/import.html',
+            templateUrl: '/admin/members/import.html',
             controller: 'ImportMembersController'
           }
         },
@@ -918,7 +918,7 @@ angular.module('application.router', ['ui.router'])
         url: '/admin/members/import/:id/results',
         views: {
           'main@': {
-            templateUrl: '../../templates/admin/members/import_result.html',
+            templateUrl: '/admin/members/import_result.html',
             controller: 'ImportMembersResultController'
           }
         },
@@ -930,7 +930,7 @@ angular.module('application.router', ['ui.router'])
         url: '/admin/members/:id/edit',
         views: {
           'main@': {
-            templateUrl: '../../templates/admin/members/edit.html',
+            templateUrl: '/admin/members/edit.html',
             controller: 'EditMemberController'
           }
         },
@@ -947,7 +947,7 @@ angular.module('application.router', ['ui.router'])
         url: '/admin/admins/new',
         views: {
           'main@': {
-            templateUrl: '../../templates/admin/admins/new.html',
+            templateUrl: '/admin/admins/new.html',
             controller: 'NewAdminController'
           }
         },
@@ -959,7 +959,7 @@ angular.module('application.router', ['ui.router'])
         url: '/admin/managers/new',
         views: {
           'main@': {
-            templateUrl: '../../templates/admin/managers/new.html',
+            templateUrl: '/admin/managers/new.html',
             controller: 'NewManagerController'
           }
         },
@@ -974,7 +974,7 @@ angular.module('application.router', ['ui.router'])
         url: '/admin/authentications/new',
         views: {
           'main@': {
-            templateUrl: '../../templates/admin/authentications/new.html',
+            templateUrl: '/admin/authentications/new.html',
             controller: 'NewAuthenticationController'
           }
         },
@@ -987,7 +987,7 @@ angular.module('application.router', ['ui.router'])
         url: '/admin/authentications/:id/edit',
         views: {
           'main@': {
-            templateUrl: '../../templates/admin/authentications/edit.html',
+            templateUrl: '/admin/authentications/edit.html',
             controller: 'EditAuthenticationController'
           }
         },
@@ -1003,7 +1003,7 @@ angular.module('application.router', ['ui.router'])
         abstract: !Fablab.statisticsModule,
         views: {
           'main@': {
-            templateUrl: '../../templates/admin/statistics/index.html',
+            templateUrl: '/admin/statistics/index.html',
             controller: 'StatisticsController'
           }
         },
@@ -1018,7 +1018,7 @@ angular.module('application.router', ['ui.router'])
         abstract: !Fablab.statisticsModule,
         views: {
           'main@': {
-            templateUrl: '../../templates/admin/statistics/graphs.html',
+            templateUrl: '/admin/statistics/graphs.html',
             controller: 'GraphsController'
           }
         }
@@ -1029,7 +1029,7 @@ angular.module('application.router', ['ui.router'])
         url: '/admin/settings',
         views: {
           'main@': {
-            templateUrl: '../../templates/admin/settings/index.html',
+            templateUrl: '/admin/settings/index.html',
             controller: 'SettingsController'
           }
         },
@@ -1062,7 +1062,7 @@ angular.module('application.router', ['ui.router'])
         url: '/open_api_clients',
         views: {
           'main@': {
-            templateUrl: '../../templates/admin/open_api_clients/index.html.erb',
+            templateUrl: '/admin/open_api_clients/index.html.erb',
             controller: 'OpenAPIClientsController'
           }
         },

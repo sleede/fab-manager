@@ -14,7 +14,7 @@ Application.Directives.directive('selectSetting', ['Setting', 'growl', '_t',
         option4: '<',
         option5: '<'
       },
-      templateUrl: '../../../../templates/admin/settings/select.html',
+      templateUrl: '/admin/settings/select.html',
       link ($scope, element, attributes) {
         // The setting
         $scope.setting = {

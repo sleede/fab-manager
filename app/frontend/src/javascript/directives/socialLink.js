@@ -16,7 +16,7 @@ Application.Directives.directive('socialLink', [ function () {
       network: '@?',
       user: '='
     },
-    templateUrl: '../../../templates/shared/_social_link.html',
+    templateUrl: '/shared/_social_link.html',
     link (scope, element, attributes) {
       if (scope.network === 'dailymotion') {
         scope.image = "social/dailymotion.png";
