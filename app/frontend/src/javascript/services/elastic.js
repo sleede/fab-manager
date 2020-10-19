@@ -1,3 +1,3 @@
-Application.Services.service('es', function (esFactory) {
+Application.Services.service('es', ['esFactory', function (esFactory) {
   return esFactory({ host: window.location.origin });
-});
+}]);
