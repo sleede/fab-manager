@@ -441,6 +441,7 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$stateP
         $scope.selectedEvent.title = _t('app.logged.space_reserve.i_shift');
         updateEvents($scope.selectedEvent);
       }
+      return true;
     };
 
     /**

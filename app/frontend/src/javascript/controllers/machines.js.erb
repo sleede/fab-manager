@@ -541,6 +541,7 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
         $scope.selectedEvent.title = _t('app.logged.machines_reserve.i_shift');
         updateEvents($scope.selectedEvent);
       }
+      return true;
     };
 
     /**
