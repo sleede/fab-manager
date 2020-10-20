@@ -8,7 +8,7 @@ services:
     env_file:
       - ${PWD}/config/env
     volumes:
-      - ${PWD}/public/assets:/usr/src/app/public/assets
+      - ${PWD}/public/packs:/usr/src/app/public/packs
       - ${PWD}/public/uploads:/usr/src/app/public/uploads
       - ${PWD}/invoices:/usr/src/app/invoices
       - ${PWD}/exports:/usr/src/app/exports
