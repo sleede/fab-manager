@@ -1,0 +1,132 @@
+<div class="row no-gutter wrapper">
+
+  <div class="col-lg-12">
+    <section class="profile-top text-white widget panel b-a m row">
+      <div class="col-lg-2 col-md-12 profile-top-pictos">
+        <div class="avatar thumb-140-wrapper img m-b-md">
+          <fab-user-avatar ng-model="user.profile.user_avatar" avatar-class="thumb-140"></fab-user-avatar>
+        </div>
+        <br/>
+        <div class="social-links links-center" ng-if="social.networks.length <= 4">
+          <ng-repeat ng-repeat="network in social.networks" >
+            <social-link network="{{network}}" user="user"></social-link>
+          </ng-repeat>
+        </div>
+        <div class="social-links" ng-if="social.networks.length > 4">
+          <ng-repeat ng-repeat="network in social.networks.slice(0,3)">
+            <social-link network="{{network}}" user="user"></social-link>
+          </ng-repeat>
+          <a href="#" ng-click="social.showAllLinks = !social.showAllLinks">
+            <i class="fa fa-plus" ng-show="!social.showAllLinks"></i>
+            <i class="fa fa-minus" ng-show="social.showAllLinks"></i>
+          </a>
+          <ng-repeat ng-repeat="network in social.networks.slice(3)" ng-show="social.showAllLinks">
+            <social-link network="{{network}}" user="user"></social-link>
+          </ng-repeat>
+        </div>
+      </div>
+      <div class="col-lg-7 profile-top-infos">
+        <div class="text-xl font-ebold upper">{{user.username}}</div>
+        <small class="font-bold">{{user.name}}</small>
+        <small class="text-xs upper font-thin private-profile" ng-show="!user.is_allow_contact"><i class="fa fa-lock" aria-hidden="true"></i> {{ 'app.shared.public_profile.private_profile' | translate }}</small>
+        <div class="m-t">
+          <div ng-show="user.last_sign_in_at">
+            <small translate translate-values="{DATE:(user.last_sign_in_at | amDateFormat: 'LL')}">{{ 'app.shared.public_profile.last_activity_html' }}</small>
+          </div>
+          <small translate>{{ 'app.shared.public_profile.email_address' }}</small>
+          <div class="text-lt font-bold break-word">{{user.email}}</div>
+        </div>
+      </div>
+      <div class="col-lg-3 profile-top-badge">
+        <%= PluginRegistry.insert_code('html.user.profile') %>
+      </div>
+    </section>
+  </div>
+
+  <div class="col-sm-12 col-md-12 col-lg-6">
+
+
+
+    <div class="wrapper">
+      <section class="widget panel no-border bg-black-light text-white lt">
+        <div class="panel-body">
+          <div class="wrapper m-t-xl m-b">
+            <div class="row m-b">
+              <div class="col-xs-5 text-right">
+                <span class="font-bold bio-title" translate>{{ 'app.shared.public_profile.interests' }}</span>
+                <div class="m-b m-t-sm">{{user.profile.interest}}</div>
+              </div>
+              <div class="col-xs-offset-2 col-xs-5">
+                <span class="font-bold bio-title" translate>{{ 'app.shared.public_profile.CAD_softwares_mastered' }}</span>
+                <div class="m-t-sm">{{user.profile.software_mastered}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  </div>
+
+  <div class="col-sm-12 col-md-12 col-lg-6">
+    <div class="widget panel b-a m ">
+      <div class="panel-heading b-b">
+        <h1 class="red text-u-c" translate>{{ 'app.shared.public_profile.trainings' }}</h1>
+        <!-- <h3 class="text-u-c">Formations</h3> -->
+        <ul class="list-unstyled" ng-if="user.training_reservations.length > 0 || user.trainings.length > 0">
+          <li ng-repeat="r in user.training_reservations | trainingReservationsFilter:'future'">
+            {{r.reservable.name}} - <span class="label label-info text-white" translate>{{ 'app.shared.public_profile.to_come' }}</span>
+          </li>
+          <li ng-repeat="t in user.trainings">
+            {{t.name}} - <span class="label label-success text-white" translate>{{ 'app.shared.public_profile.approved' }}</span>
+          </li>
+        </ul>
+        <div ng-if="user.training_reservations.length == 0 && user.trainings.length == 0" translate>{{ 'app.shared.public_profile.no_trainings' }}</div>
+      </div>
+    </div>
+
+    <div class="widget panel b-a m ">
+      <div class="panel-heading b-b">
+        <h1 class="red text-u-c m-b" translate>{{ 'app.shared.public_profile.projects' }}</h1>
+        <div ng-if="user.all_projects.length > 0" class="row m-t">
+          <a class="col-xs-12 col-sm-6 col-md-6 col-lg-6" ng-repeat="project in user.all_projects" ui-sref="app.public.projects_show({id:project.slug})" style="display: block;">
+            <div class="card card-project">
+
+              <div class="card-header">
+                <div class="card-header-bg" style="background-image: url({{project.project_image}});">
+                  <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:'Font Awesome 5 Free'/icon" bs-holder ng-if="!project.project_image">
+                </div>
+
+              </div>
+
+              <div class="card-block">
+                <h1 class="card-title">{{project.name}}</h1>
+              </div>
+
+              <div class="text-center">
+                <span class="m-l-sm label label-success text-white">{{project.author_id == user.id ? 'author' : 'app.shared.public_profile.collaborator' | translate}}</span>
+                <span class="badge" ng-if="project.state == 'draft'" translate>{{ 'app.logged.dashboard.projects.rough_draft' }}</span>
+              </div>
+
+              <div class="card-overlay">
+                <div class="btn-group">
+                  <div class="btn btn-default" ng-click="showProject(project)">
+                    {{ 'app.shared.buttons.consult' | translate }}
+                  </div>
+                  <div class="btn btn-default" ui-sref="app.logged.projects_edit({id:project.id})" ng-if="isAuthorized('admin')">
+                    <i class="fa fa-edit"></i>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </a>
+
+        </div>
+        <div ng-if="user.all_projects.length == 0" translate>{{ 'app.shared.public_profile.no_projects' }}</div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

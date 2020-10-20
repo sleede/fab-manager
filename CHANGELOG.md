@@ -1,5 +1,24 @@
 # Changelog Fab-manager
 
+## v4.6.0 2020 October 20
+
+- Migrated the assets build pipeline from Sprockets to Webpack
+- Version check during the upgrade
+- Fix a bug: changing the date of a training session does not prevent the selection of a different type of training
+- Fix a bug: unable to change the date formats using the setup script
+- Fix a bug: missing translation for projets drafts in public profile
+- Fix a bug: email notification after reservation update have wrong previous date (#234)
+- Fix a bug: unable to rename a group containing users
+- Updated contribution guidelines
+- Updated summernote to 0.8.18
+- Updated angular-summernote to 0.8.1
+- Updated FontAwesome from v4 to v5
+- Updated jquery-minicolors to 2.3.5
+- Updated angular-bootstrap-switch to 0.5.2
+- Updated bootstrap-switch to 3.4.0
+- Updated fullCalendar to 3.10.2
+- [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/mount-webpack.sh | bash`
+
 ## v4.5.9 2020 September 29
 
 - Ability to configure until when the events are shown on the home page

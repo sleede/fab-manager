@@ -1,0 +1,267 @@
+<div class="row no-gutter">
+
+  <div class=" col-sm-12 col-md-12 col-lg-9 nopadding">
+
+    <section class="panel panel-default bg-light m-lg">
+    <div class="panel-body m-r">
+
+      <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+
+      <input name="_method" type="hidden" ng-value="method">
+
+      <div class="form-group" ng-class="{'has-error': projectForm['project[name]'].$dirty && projectForm['project[name]'].$invalid}">
+        <label for="name" class="col-sm-2 control-label">{{ 'app.shared.project.name' | translate }} *</label>
+        <div class="col-sm-8">
+          <input ng-model="project.name" type="text" name="project[name]" class="form-control" id="project_name" placeholder="" required>
+          <span class="help-block" ng-show="projectForm['project[name]'].$dirty && projectForm['project[name]'].$error.required" translate>{{ 'app.shared.project.name_is_required' }}</span>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label for="project_image" class="col-sm-2 control-label" translate>{{ 'app.shared.project.illustration' }}</label>
+        <div class="col-sm-10">
+          <div class="fileinput" data-provides="fileinput" ng-class="fileinputClass(project.project_image)">
+            <div class="fileinput-new thumbnail" style="width: 334px; height: 250px;">
+              <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:'Font Awesome 5 Free'/icon" bs-holder ng-if="!project.project_image">
+            </div>
+            <div class="fileinput-preview fileinput-exists thumbnail" data-trigger="fileinput" style="max-width: 334px;">
+              <img ng-src="{{ project.project_image }}" alt="" />
+            </div>
+            <div>
+              <span class="btn btn-default btn-file"><span class="fileinput-new">{{ 'app.shared.project.add_an_illustration' | translate }} <i class="fa fa-upload fa-fw"></i></span><span class="fileinput-exists" translate>{{ 'app.shared.buttons.change' }}</span>
+                <input type="file"
+                       name="project[project_image_attributes][attachment]"
+                       accept="image/jpeg,image/gif,image/png"></span>
+              <a class="btn btn-danger fileinput-exists" data-dismiss="fileinput" translate>{{ 'app.shared.buttons.delete' }}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label" translate>{{ 'app.shared.project.CAD_file' }}</label>
+        <div class="col-sm-10">
+          <div ng-repeat="file in project.project_caos_attributes" ng-show="!file._destroy">
+            <div class="col-md-11 m-l-n">
+              <input type="hidden" name="project[project_caos_attributes][][id]" ng-value="file.id" />
+              <input type="hidden" name="project[project_caos_attributes][][_destroy]" ng-value="file._destroy" />
+
+              <div class="fileinput input-group" data-provides="fileinput" ng-class="fileinputClass(file.attachment)">
+                <div class="form-control" data-trigger="fileinput">
+                  <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename">{{file.attachment}}</span>
+                </div>
+                <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new" translate>{{ 'app.shared.buttons.browse' }}</span>
+                  <span class="fileinput-exists" translate>{{ 'app.shared.buttons.change' }}</span>
+                  <input type="file" name="project[project_caos_attributes][][attachment]" accept="{{'.'+allowedExtensions.join(',.')}}">
+                </span>
+                <a class="input-group-addon btn btn-danger fileinput-exists" data-dismiss="fileinput" ng-click="deleteFile(file)"><i class="fa fa-trash-o"></i></a>
+              </div>
+            </div>
+            <div class="col-md-1 m-t-xs">
+              <i class="fa fa-info-circle" aria-hidden="true" uib-tooltip="{{ 'app.shared.project.allowed_extensions' | translate }} {{allowedExtensions.join(', ')}}" tooltip-placement="bottom" tooltip-class="media-lg"></i>
+            </div>
+          </div>
+          <a class="btn btn-default" ng-click="addFile()" role="button">{{ 'app.shared.project.add_a_new_file' | translate }} <i class="fa fa-file-o fa-fw"></i></a>
+        </div>
+      </div>
+
+      <div class="form-group" ng-class="{'has-error': projectForm['project[description]'].$dirty && projectForm['project[description]'].$invalid}">
+        <label for="description" class="col-sm-2 control-label">{{ 'app.shared.project.description' | translate }} *</label>
+        <div class="col-sm-10">
+          <input type="hidden" name="project[description]" ng-value="project.description" />
+          <summernote ng-model="project.description" id="project_description" placeholder="" config="summernoteOpts" name="project[description]" required></summernote>
+          <span class="help-block" ng-show="projectForm['project[description]'].$dirty && projectForm['project[description]'].$error.required" translate>{{ 'app.shared.project.description_is_required' }}</span>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label" translate>{{ 'app.shared.project.steps' }}</label>
+        <div class="col-sm-10">
+          <div ng-repeat="step in project.project_steps_attributes | orderBy:'step_nb'" ng-hide="step._destroy">
+            <div class="m-t-xs m-b-lg">
+              <div class="btn-group" uib-dropdown is-open="status.isopen">
+                <button id="single-button" type="button" class="btn btn-warning" uib-dropdown-toggle>
+                  {{ 'app.shared.project.step_N' | translate:{ INDEX:step.step_nb } }}/{{totalSteps}} <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </button>
+                <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                  <li role="menuitem" ng-repeat="step_idx in intArray(1, totalSteps +1)"><a href="#" ng-click="changeStepIndex($event, step, step_idx)">{{ 'app.shared.project.step_N' | translate:{ INDEX:step_idx } }}</a></li>
+                </ul>
+              </div>
+              <span class="label label-warning m-t m-b"></span>
+              <input type="hidden" name="project[project_steps_attributes][][id]" ng-value="step.id" />
+              <input type="hidden" name="project[project_steps_attributes][][_destroy]" ng-value="step._destroy" />
+              <input type="hidden" name="project[project_steps_attributes][][step_nb]" ng-value="step.step_nb"/>
+              <input ng-model="step.title"
+                     type="text"
+                     name="project[project_steps_attributes][][title]"
+                     class="form-control m-b-sm m-t-xs"
+                     placeholder="{{ 'app.shared.project.step_title' | translate }}"
+                     required>
+
+              <input type="hidden" name="project[project_steps_attributes][][description]" ng-value="step.description" />
+              <summernote ng-model="step.description" placeholder="" config="summernoteOpts" name=project[project_steps_attributes][][description]></summernote>
+
+              <div class="row">
+                <div ng-repeat-start="image in step.project_step_images_attributes" class="clearfix" ng-if="$index % 3 == 0"></div>
+                <div class="col-md-4" ng-repeat-end ng-show="!image._destroy">
+                  <input type="hidden" name="project[project_steps_attributes][][project_step_images_attributes][][id]" ng-value="image.id" />
+                  <input type="hidden" name="project[project_steps_attributes][][project_step_images_attributes][][_destroy]" ng-value="image._destroy" />
+
+                  <div class="fileinput" data-provides="fileinput" ng-class="fileinputClass(image.attachment)" style="width: 100%;">
+                    <div class="fileinput-new thumbnail" style="width: 100%; height: 200px;">
+                      <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:'Font Awesome 5 Free'/icon" bs-holder ng-if="!image.attachment">
+                    </div>
+                    <div class="fileinput-preview fileinput-exists thumbnail" data-trigger="fileinput" style="max-width: 334px;">
+                      <img ng-src="{{ image.attachment_url }}" alt="{{image.attachment}}" />
+                    </div>
+                    <div>
+                      <span class="btn btn-default btn-file"><span class="fileinput-new">{{ 'app.shared.buttons.browse' | translate }} <i class="fa fa-upload fa-fw"></i></span><span class="fileinput-exists" translate>{{ 'app.shared.buttons.change' }}</span>
+                        <input type="file"
+                               name="project[project_steps_attributes][][project_step_images_attributes][][attachment]"
+                               accept="image/jpeg,image/gif,image/png">
+                      </span>
+                      <a class="btn btn-danger fileinput-exists" data-dismiss="fileinput" ng-click="deleteProjectStepImage(step, image)" translate>{{ 'app.shared.buttons.delete' }}</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <a class="btn btn-default" ng-click="addProjectStepImage(step)" role="button">{{ 'app.shared.project.add_a_picture' | translate }} <i class="fa fa-file-o fa-fw"></i></a>
+              </div>
+
+              <div class="m-t">
+                <a class="btn btn-sm btn-danger" ng-click="deleteStep(step)" role="button"><i class="fa fa-trash-o m-r-xs"></i> {{ 'app.shared.project.delete_the_step' | translate }}</a>
+              </div>
+            </div>
+          </div>
+          <a class="btn btn-default m-b" ng-click="addStep()" role="button">
+            <i class="fa fa-plus m-r-sm" aria-hidden="true"></i>
+            <span translate>{{ 'app.shared.project.add_a_new_step' }}</span></a>
+        </div>
+      </div>
+
+
+
+    </div>   <!-- ./panel-body  -->
+    <div class="panel-footer no-padder">
+      <div ng-show="project.state != 'published'">
+        <div class="btn btn-lg btn-block btn-valid btn-success text-u-c r-n" publish-project ng-disabled="projectForm.$invalid" translate>{{ 'app.shared.project.publish_your_project' }}</div>
+        <div class="text-center font-bold text-u-c" translate>{{ 'app.shared.project.or' }}</div>
+      </div>
+      <input type="submit"
+             ng-value="saveButtonValue()"
+             class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c"
+             ng-disabled="projectForm.$invalid"/>
+    </div>
+    </section>
+
+  </div>
+
+  <div class="col-sm-12 col-md-12 col-lg-3">
+
+
+    <div class="widget panel b-a m m-t-lg">
+      <div class="panel-heading b-b small">
+        <h3 translate>{{ 'app.shared.project.employed_materials' }}</h3>
+      </div>
+      <div class="widget-content no-bg wrapper">
+        <input type="hidden" name="project[component_ids][]" value="" />
+        <ui-select multiple ng-model="project.component_ids" class="form-control">
+            <ui-select-match>
+                <span ng-bind="$item.name"></span>
+                <input type="hidden" name="project[component_ids][]" value="{{$item.id}}" />
+            </ui-select-match>
+            <ui-select-choices repeat="c.id as c in (components | filter: $select.search)">
+                <span ng-bind-html="c.name | highlight: $select.search"></span>
+            </ui-select-choices>
+        </ui-select>
+      </div>
+    </div>
+
+    <div class="widget panel b-a m m-t-lg">
+      <div class="panel-heading b-b small">
+        <h3 translate>{{ 'app.shared.project.employed_machines' }}</h3>
+      </div>
+      <div class="widget-content no-bg wrapper">
+        <input type="hidden" name="project[machine_ids][]" value="" />
+        <ui-select multiple ng-model="project.machine_ids" class="form-control">
+            <ui-select-match>
+                <span ng-bind="$item.name"></span>
+                <input type="hidden" name="project[machine_ids][]" value="{{$item.id}}" />
+            </ui-select-match>
+            <ui-select-choices repeat="m.id as m in (machines | filter: $select.search)">
+                <span ng-bind-html="m.name | highlight: $select.search"></span>
+            </ui-select-choices>
+        </ui-select>
+      </div>
+    </div>
+
+    <div class="widget panel b-a m m-t-lg">
+      <div class="panel-heading b-b small">
+        <h3 translate>{{ 'app.shared.project.collaborators' }}</h3>
+      </div>
+      <div class="widget-content no-bg wrapper">
+        <input type="hidden" name="project[user_ids][]" value="" />
+        <ui-select multiple ng-model="project.user_ids" class="form-control">
+            <ui-select-match>
+                <span ng-bind="$item.name"></span>
+                <input type="hidden" name="project[user_ids][]" value="{{$item.id}}" />
+            </ui-select-match>
+            <ui-select-choices repeat="m.id as m in matchingMembers" refresh="autoCompleteName($select.search)" refresh-delay="300">
+                <span ng-bind-html="m.name | highlight: $select.search"></span>
+            </ui-select-choices>
+        </ui-select>
+      </div>
+    </div>
+
+    <div class="widget panel b-a m m-t-lg">
+      <div class="panel-heading b-b small">
+        <h3 translate>{{ 'app.shared.project.creative_commons_licences' }}</h3>
+      </div>
+      <div class="widget-content no-bg wrapper">
+        <!-- TODO: be able to remove the selected option -->
+        <ui-select ng-model="project.licence_id">
+            <ui-select-match>
+                <span ng-bind="$select.selected.name"></span>
+                <input type="hidden" name="project[licence_id]" value="{{$select.selected.id}}" />
+            </ui-select-match>
+            <ui-select-choices repeat="l.id as l in (licences | filter: $select.search)">
+                <span ng-bind-html="l.name | highlight: $select.search"></span>
+            </ui-select-choices>
+        </ui-select>
+      </div>
+    </div>
+
+    <div class="widget panel b-a m m-t-lg">
+      <div class="panel-heading b-b small">
+        <h3 translate>{{ 'app.shared.project.themes' }}</h3>
+      </div>
+      <div class="widget-content no-bg wrapper">
+        <input type="hidden" name="project[theme_ids][]" value="" />
+        <ui-select multiple ng-model="project.theme_ids" class="form-control">
+            <ui-select-match>
+                <span ng-bind="$item.name"></span>
+                <input type="hidden" name="project[theme_ids][]" value="{{$item.id}}" />
+            </ui-select-match>
+            <ui-select-choices repeat="t.id as t in (themes | filter: $select.search)">
+                <span ng-bind-html="t.name | highlight: $select.search"></span>
+            </ui-select-choices>
+        </ui-select>
+      </div>
+    </div>
+
+    <div class="widget panel b-a m m-t-lg">
+      <div class="panel-heading b-b small">
+        <h3 translate>{{ 'app.shared.project.tags' }}</h3>
+      </div>
+      <div class="widget-content no-bg wrapper">
+        <textarea ng-model="project.tags" class="form-control" id="project_tags" placeholder="" name="project[tags]"></textarea>
+      </div>
+    </div>
+
+  </div>
+
+</div>

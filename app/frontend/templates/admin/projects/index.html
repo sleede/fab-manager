@@ -1,0 +1,49 @@
+<section class="heading b-b">
+  <div class="row no-gutter">
+    <div class="col-xs-2 col-sm-2 col-md-1">
+      <section class="heading-btn">
+        <a href="#" ng-click="backPrevLocation($event)"><i class="fas fa-long-arrow-alt-left "></i></a>
+      </section>
+    </div>
+    <div class="col-xs-10 col-sm-10 col-md-8 b-l">
+      <section class="heading-title">
+        <h1 translate>{{ 'app.admin.projects.projects_settings' }}</h1>
+      </section>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md">
+      <section class="heading-actions wrapper">
+        <a class="btn btn-ng btn-warning b-2x rounded m-t-sm upper text-sm abuses-button" ui-sref="app.admin.manage_abuses" role="button" translate>{{ 'app.admin.projects.manage_abuses' }}</a>
+      </section>
+    </div>
+  </div>
+</section>
+
+
+<section class="m-lg projects"
+         ui-tour="projects"
+         ui-tour-backdrop="true"
+         ui-tour-template-url="'/shared/tour-step-template.html'"
+         ui-tour-use-hotkeys="true"
+         ui-tour-scroll-parent-id="content-main"
+         post-render="setupProjectElementsTour">
+  <div class="row">
+
+    <div class="col-md-12">
+      <uib-tabset justified="true" active="tabs.active">
+        <uib-tab heading="{{ 'app.admin.projects.materials' | translate }}" index="0">
+          <ng-include src="'/admin/projects/materials.html'"></ng-include>
+        </uib-tab>
+        <uib-tab heading="{{ 'app.admin.projects.themes' | translate }}" index="1">
+          <ng-include src="'/admin/projects/themes.html'"></ng-include>
+        </uib-tab>
+        <uib-tab heading="{{ 'app.admin.projects.licences' | translate }}" index="2">
+          <ng-include src="'/admin/projects/licences.html'"></ng-include>
+        </uib-tab>
+        <uib-tab heading="{{ 'app.admin.projects.settings.title' | translate }}" index="3" class="settings-tab">
+          <ng-include src="'/admin/projects/settings.html'"></ng-include>
+        </uib-tab>
+      </uib-tabset>
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,15 @@
+<div>
+  <div class="modal-header">
+    <h3 class="modal-title" translate>{{ titleNew }}</h3>
+  </div>
+  <div class="modal-body">
+    <p class="alert alert-info" ng-show="descriptionNew" ng-bind-html="descriptionNew | translate"></p>
+    <form class="row m-md" name="newSelectOptionForm">
+      <input type="text" class="form-control" ng-model="value" required>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-warning" ng-disabled="newSelectOptionForm.$invalid" ng-click="ok()" translate>{{ 'app.shared.buttons.confirm' }}</button>
+    <button class="btn btn-default" ng-click="dismiss()" translate>{{ 'app.shared.buttons.cancel' }}</button>
+  </div>
+</div>

@@ -249,7 +249,8 @@ configure_env_file()
     read -rp "  > " value </dev/tty
     echo "======================="
     if [ "$value" != "" ]; then
-      sed -i.bak "s/$current/$variable=$value/g" "$FABMANAGER_PATH/config/env"
+      escaped=$(printf '%s\n' "$value" | sed -e 's/[\/&]/\\&/g')
+      sed -i.bak "s/$current/$variable=$escaped/g" "$FABMANAGER_PATH/config/env"
     fi
   done
   # we automatically generate the SECRET_KEY_BASE

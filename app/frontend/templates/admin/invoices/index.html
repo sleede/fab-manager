@@ -1,0 +1,56 @@
+<section class="heading b-b">
+  <div class="row no-gutter">
+    <div class="col-xs-2 col-sm-2 col-md-1">
+      <section class="heading-btn">
+        <a href="#" ng-click="backPrevLocation($event)"><i class="fas fa-long-arrow-alt-left "></i></a>
+      </section>
+    </div>
+    <div class="col-xs-10 col-sm-10 col-md-8 b-l b-r">
+      <section class="heading-title">
+        <h1 translate>{{ 'app.admin.invoices.invoices' }}</h1>
+      </section>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-3">
+      <section class="heading-actions wrapper" ng-show="isAuthorized('admin')">
+        <a class="btn btn-default rounded m-t-sm export-accounting-button" ng-click="toggleExportModal()"><i class="fa fa-book"></i></a>
+        <iframe name="export-frame" height="0" width="0" class="none" id="accounting-export-frame"></iframe>
+        <a class="btn btn-lg btn-default rounded m-t-sm text-sm close-accounting-periods-button" ng-click="closeAnAccountingPeriod()"><i class="fa fa-calendar-check-o"></i> {{ 'app.admin.invoices.accounting_periods' | translate }}</a>
+      </section>
+    </div>
+  </div>
+</section>
+
+<section class="m-lg invoices-management"
+         ui-tour="invoices"
+         ui-tour-backdrop="true"
+         ui-tour-template-url="'/shared/tour-step-template.html'"
+         ui-tour-use-hotkeys="true"
+         ui-tour-scroll-parent-id="content-main"
+         post-render="setupInvoicesTour">
+  <div class="row">
+    <div class="col-md-12" ng-if="isAuthorized('admin')">
+      <uib-tabset justified="true" active="tabs.active">
+        <uib-tab heading="{{ 'app.admin.invoices.invoices_list' | translate }}" ng-show="modules.invoicing" index="0">
+          <ng-include src="'/admin/invoices/list.html'"></ng-include>
+	      </uib-tab>
+
+        <uib-tab heading="{{ 'app.admin.invoices.invoicing_settings' | translate }}" index="1" class="invoices-settings">
+          <ng-include src="'/admin/invoices/settings.html'"></ng-include>
+        </uib-tab>
+
+        <uib-tab heading="{{ 'app.admin.invoices.accounting_codes' | translate }}" index="2" class="accounting-codes-tab">
+          <ng-include src="'/admin/invoices/codes.html'"></ng-include>
+        </uib-tab>
+
+        <uib-tab heading="{{ 'app.admin.invoices.payment.payment_settings' | translate }}" index="3" class="payment-settings">
+          <ng-include src="'/admin/invoices/payment.html'"></ng-include>
+        </uib-tab>
+	    </uib-tabset>
+	  </div>
+
+    <div class="col-md-12" ng-if="isAuthorized('manager')">
+      <ng-include src="'/admin/invoices/list.html'"></ng-include>
+    </div>
+  </div>
+</section>
+

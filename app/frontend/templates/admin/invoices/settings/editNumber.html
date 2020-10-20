@@ -1,0 +1,31 @@
+<div class="custom-invoice">
+  <div class="modal-header">
+    <h3 class="modal-title" translate>{{ 'app.admin.invoices.order_number' }}</h3>
+  </div>
+  <div class="modal-body row">
+    <div class="elements col-md-4">
+      <h4 translate>{{ 'app.admin.invoices.elements' }}</h4>
+      <ul>
+        <li ng-click="invoice.number.help = 'addYear.html'">{{ 'app.admin.invoices.year' | translate }}</li>
+        <li ng-click="invoice.number.help = 'addMonth.html'">{{ 'app.admin.invoices.month' | translate }}</li>
+        <li ng-click="invoice.number.help = 'addDay.html'">{{ 'app.admin.invoices.day' | translate }}</li>
+        <li ng-click="invoice.number.help = 'addOrderNumber.html'">{{ 'app.admin.invoices.order_num' | translate }}</li>
+      </ul>
+    </div>
+    <div class="col-md-8">
+      <div class="model">
+        <h4 translate>{{ 'app.admin.invoices.model' }}</h4>
+        <input type="text" class="form-control" ng-model="model">
+      </div>
+      <div class="help">
+        <h4 translate>{{ 'app.admin.invoices.documentation' }}</h4>
+        <ng-include src="invoice.number.help" autoscroll="true">
+        </ng-include>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-warning" ng-click="ok()" translate>{{ 'app.shared.buttons.confirm' }}</button>
+    <button class="btn btn-default" ng-click="cancel()" translate>{{ 'app.shared.buttons.cancel' }}</button>
+  </div>
+</div>

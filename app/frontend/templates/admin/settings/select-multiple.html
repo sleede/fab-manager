@@ -1,0 +1,17 @@
+<form class="{{classes}}" name="settingSelectMultipleForm">
+    <div class="form-group">
+        <label for="setting-{{setting.name}}" class="control-label m-r" translate>{{ label }}</label>
+        <select class="form-control"
+              id="setting-{{setting.name}}"
+              ng-model="selection"
+              ng-required="required"
+              ng-options="opt for opt in options"
+              multiple>
+        </select>
+    </div>
+    <div>
+        <button ng-click="removeItem()" class="btn btn-default"><i class="fa fa-trash"></i></button>
+        <button ng-click="addItem()" class="btn btn-default"><i class="fa fa-plus"></i></button>
+    </div>
+  <button name="button" class="btn btn-warning m-t" ng-click="save(setting)" ng-disabled="settingSelectMultipleForm.$invalid" translate>{{ 'app.shared.buttons.save' }}</button>
+</form>

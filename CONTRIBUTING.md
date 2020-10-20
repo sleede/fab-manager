@@ -56,7 +56,7 @@ Example:
 > 2. This is the second step
 > 3. Further steps, etc.
 >
-> `<url>` - a link to the reduced test case
+> `<url>` - a link to your instance, demonstrating the problem
 >
 > Any other information you want to share that is relevant to the issue being reported. This might include the lines of 
 > code that you have identified as causing the bug, and potential solutions (and your opinions on their merits).
@@ -69,8 +69,8 @@ Feature requests are welcome. But take a moment to find out whether your idea fi
 project. It's up to *you* to make a strong case to convince the project's developers of the merits of this feature. 
 Please provide as much detail and context as possible.
 
-Please note also that [the forum](https://forum.fab-manager.com) is probably a better place for discussing about feature 
-requests.
+Please note also that [the feedback tool](https://feedback.fab-manager.com) is probably a better place for discussing 
+about feature requests.
 
 
 <a name="pull-requests"></a>
@@ -132,3 +132,20 @@ Adhering to the following process is the best way to get your work included in t
 
 **IMPORTANT**: By submitting a patch, you agree to allow the project owners to license your work under the terms of 
 the [GNU Affero General Public License](LICENSE.md).
+
+<a name="translations"></a>
+## Translations
+
+Event without any technical skills, you can contribute to translate Fab-manager to your local language.
+This is possible using a [Translation Management System](https://en.wikipedia.org/wiki/Translation_management_system) 
+known as [Crowdin](https://crowdin.com/). This tool helps the community to contribute to the translation of Fab-Manager
+into their favorite local languages.
+
+You can access it at [translate.fab-manager.com](https://translate.fab-manager.com/) and start translating. 
+If you want to translate Fab-Manager to a new unlisted language, just post a comment [on the forum](https://forum.fab-manager.com/)
+or [create an issue on GitHub](https://github.com/sleede/fab-manager/issues) and we'll be happy to add it
+to the list of supported languages.
+
+If you know where an untranslated sentence is located and you can't find it on Crowdin, you can use 
+the "in-context translation": [in-context.translate.fab-manager.com](https://in-context.translate.fab-manager.com/).
+From there, you'll be able to browse the application interface and select in one click the sentences you want to translate.

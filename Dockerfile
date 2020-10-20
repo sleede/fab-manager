@@ -44,7 +44,7 @@ RUN bundle install --binstubs --without development test doc
 WORKDIR /usr/src/app
 COPY package.json /usr/src/app/package.json
 COPY yarn.lock /usr/src/app/yarn.lock
-RUN yarn install --production
+RUN yarn install
 
 # Clean up build deps, cached packages and temp files
 RUN apk del .build-deps && \
@@ -62,7 +62,7 @@ RUN mkdir -p /usr/src/app && \
     mkdir -p /usr/src/app/imports && \
     mkdir -p /usr/src/app/log && \
     mkdir -p /usr/src/app/public/uploads && \
-    mkdir -p /usr/src/app/public/assets && \
+    mkdir -p /usr/src/app/public/packs && \
     mkdir -p /usr/src/app/accounting && \
     mkdir -p /usr/src/app/tmp/sockets && \
     mkdir -p /usr/src/app/tmp/pids
@@ -76,7 +76,7 @@ VOLUME /usr/src/app/exports
 VOLUME /usr/src/app/imports
 VOLUME /usr/src/app/public
 VOLUME /usr/src/app/public/uploads
-VOLUME /usr/src/app/public/assets
+VOLUME /usr/src/app/public/packs
 VOLUME /usr/src/app/accounting
 VOLUME /var/log/supervisor
 

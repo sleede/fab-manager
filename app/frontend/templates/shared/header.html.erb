@@ -1,0 +1,54 @@
+
+  <div class="navbar-header">
+    <a ng-click="toggleNavSize($event)" class="btn btn-link visible-xs" data-toggle="class:nav-off-screen" data-target="#nav"><i class="fa fa-bars"></i></a>
+    <a ui-sref="app.public.home" class="navbar-brand" ng-click="goabout = false">
+      <img ng-src="{{logo.custom_asset_file_attributes.attachment_url}}" alt="{{logo.custom_asset_file_attributes.attachment}}" class="m-r-sm"/>
+      <%= "<label class='label-staging label label-warning text-sm hidden-sm hidden-xs'>Staging</label>".html_safe if Rails.env.staging? %>
+    </a>
+  </div>
+
+  <ul class="nav navbar-nav hidden-xs">
+    <li class="about-page-link">
+      <a href class="about-link font-sbold text-sm" ng-click="goabout = !goabout" ui-sref="app.public.about" ng-show="!goabout">
+        <span class="label label-theme rounded text-lg text-white m-r-sm font-ebold">?</span>
+          {{ linkName }}
+      </a>
+      <a href class="about-link font-sbold text-sm" ng-click="goabout = !goabout" ui-sref="app.public.home" ng-show="goabout">
+        <span class="label label-theme label-icon rounded text-lg text-white m-r-sm font-ebold"><i class="fa fa-caret-up" ng-show="goabout"></i></span>
+          {{ 'app.public.common.return' | translate }}
+      </a>
+    </li>
+  </ul>
+
+  <!-- Top Nav -->
+  <ul class="nav navbar-nav navbar-right m-n hidden-xs nav-user user">
+    <li class="notification-open notification-center-link" ng-if="isAuthenticated()">
+      <a ui-sref="app.logged.notifications"><i class="fa fa-bell fa-2x black"></i> <span class="badge" ng-class="{'bg-red': notifications.unread > 0}">{{notifications.unread}}</span></a>
+    </li>
+    <li class="dropdown user-profile-nav user-menu-dropdown" ng-if="isAuthenticated()" uib-dropdown>
+      <a class="dropdown-toggle pointer" uib-dropdown-toggle>
+        <span class="avatar text-center">
+          <fab-user-avatar ng-model="currentUser.profile.user_avatar" avatar-class="thumb-50"></fab-user-avatar>
+          <span class="user-name m-l-sm text-black-light font-sbold hidden-sm">{{currentUser.name}} </span>
+          <b class="caret"></b>
+        </span>
+      </a>
+      <ul uib-dropdown-menu class="animated fadeInRight">
+        <li><a ui-sref="app.logged.dashboard.profile" translate>{{ 'app.public.common.my_profile' }}</a></li>
+        <li><a ui-sref="app.logged.dashboard.settings" translate>{{ 'app.public.common.my_settings' }}</a></li>
+        <li><a ui-sref="app.logged.dashboard.projects" translate>{{ 'app.public.common.my_projects' }}</a></li>
+        <li><a ui-sref="app.logged.dashboard.trainings" translate>{{ 'app.public.common.my_trainings' }}</a></li>
+        <li><a ui-sref="app.logged.dashboard.events" translate>{{ 'app.public.common.my_events' }}</a></li>
+        <li><a ui-sref="app.logged.dashboard.invoices" ng-show="modules.invoicing" translate>{{ 'app.public.common.my_invoices' }}</a></li>
+        <li ng-show="modules.wallet"><a ui-sref="app.logged.dashboard.wallet" translate>{{ 'app.public.common.my_wallet' }}</a></li>
+        <li class="divider" ng-if="isAuthorized(['admin', 'manager'])"></li>
+        <li><a class="text-black pointer" ng-click="help($event)" ng-if="isAuthorized(['admin', 'manager'])"><i class="fa fa-question-circle"></i> <span translate>{{ 'app.public.common.help' }}</span> </a></li>
+        <li class="divider"></li>
+        <li><a class="text-black pointer" ng-click="logout($event)"><i class="fa fa-power-off"></i> {{ 'app.public.common.sign_out' | translate }}</a></li>
+      </ul>
+    </li>
+    <li ng-if="!isAuthenticated()"><a class="font-sbold label text-md pointer" ng-click="signup($event)"><i class="fa fa-rocket"></i> {{ 'app.public.common.sign_up' | translate }}</a></li>
+    <li ng-if="!isAuthenticated()">
+        <a class="font-sbold label text-md pointer" ng-click="login($event)"><i class="fa fa-sign-in"></i> {{ 'app.public.common.sign_in' | translate }}</a>
+    </li>
+  </ul>

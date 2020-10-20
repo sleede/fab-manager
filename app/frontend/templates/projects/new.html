@@ -1,0 +1,25 @@
+<div>
+
+  <section class="heading b-b">
+    <div class="row no-gutter">
+      <div class="col-xs-2 col-sm-2 col-md-1">
+        <section class="heading-btn">
+          <a ng-click="backPrevLocation($event)"><i class="fas fa-long-arrow-alt-left"></i></a>
+        </section>
+      </div>
+      <div class="col-xs-10 col-sm-10 col-md-8 b-l ">
+        <section class="heading-title">
+          <h1 translate>{{ 'app.logged.projects_new.add_a_new_project' }}</h1>
+        </section>
+      </div>
+    </div>
+  </section>
+
+
+  <form role="form" name="projectForm" class="form-horizontal" novalidate action="{{ actionUrl }}" ng-upload="submited(content)" upload-options-enable-rails-csrf="true" unsaved-warning-form>
+
+    <ng-include src="'/projects/_form.html'"></ng-include>
+
+  </form>
+
+</div>

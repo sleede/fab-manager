@@ -1,0 +1,125 @@
+<section class="heading b-b">
+  <div class="row no-gutter">
+    <div class="col-xs-2 col-sm-2 col-md-1">
+      <section class="heading-btn">
+        <a href="#" ng-click="backPrevLocation($event)"><i class="fas fa-long-arrow-alt-left "></i></a>
+      </section>
+    </div>
+    <div class="col-xs-10 col-sm-10 col-md-8 b-l b-r-md">
+      <section class="heading-title">
+        <h1 translate>{{ 'app.public.projects_list.the_fablab_projects' }}</h1>
+      </section>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md" ng-if="isAuthorized(['admin','member', 'manager'])">
+      <section class="heading-actions wrapper">
+       <a class="btn btn-lg btn-warning bg-white b-2x rounded m-t-sm upper text-sm" ui-sref="app.logged.projects_new" role="button" translate>{{ 'app.public.projects_list.add_a_project' }}</a>
+      </section>
+    </div>
+  </div>
+</section>
+
+
+<section class="m-lg">
+  <div class="row m-b-md">
+    <div class="col-md-12 m-b">
+      <a href="javascript:void(0);" class="text-sm pull-right" name="button" ng-click="resetFiltersAndTriggerSearch()" ng-show="!openlab.searchOverWholeNetwork"><i class="fa fa-refresh"></i> {{ 'app.public.projects_list.reset_all_filters' | translate }}</a>
+
+      <span ng-if="openlab.projectsActive" uib-tooltip="{{ 'app.public.projects_list.tooltip_openlab_projects_switch' | translate }}" tooltip-trigger="mouseenter">
+        <label for="searchOverWholeNetwork" class="control-label m-r text-sm" translate>{{ 'app.public.projects_list.search_over_the_whole_network' }}</label>
+        <input bs-switch
+               ng-model="openlab.searchOverWholeNetwork"
+               type="checkbox"
+               class="form-control"
+               switch-on-text="{{ 'app.shared.buttons.yes' | translate }}"
+               switch-off-text="{{ 'app.shared.buttons.no' | translate }}"
+               switch-animate="true"
+               ng-change="searchOverWholeNetworkChanged()"
+               />
+        {{ searchOverWholeNetwork }}
+      </span>
+      <form class="form-inline m-t text-center" role="form" ng-submit="setUrlQueryParams(search) && triggerSearch()">
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-search"></i></div>
+            <input type="search" class="form-control" placeholder="Mots-clés" ng-model="search.q"/>
+            <div class="input-group-btn">
+              <button type="submit" class="btn btn-warning" translate>{{ 'app.public.projects_list.search' }}</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="inline" ng-if="!openlab.searchOverWholeNetwork">
+      <div class="col-md-3 m-b" ng-show="isAuthenticated()">
+        <select ng-model="search.from" ng-change="setUrlQueryParams(search) && triggerSearch()" class="form-control">
+          <option value="" translate>{{ 'app.public.projects_list.all_projects' }}</option>
+          <option value="mine" translate>{{ 'app.public.projects_list.my_projects' }}</option>
+          <option value="collaboration" translate>{{ 'app.public.projects_list.projects_to_whom_i_take_part_in' }}</option>
+        </select>
+      </div>
+
+      <div class="col-md-3 m-b">
+        <select ng-model="search.machine_id" ng-change="setUrlQueryParams(search) && triggerSearch()" class="form-control" ng-options="m.id as m.name for m in machines">
+          <option value="" translate>{{ 'app.public.projects_list.all_machines' }}</option>
+        </select>
+      </div>
+
+      <div class="col-md-3 m-b">
+        <select ng-model="search.theme_id" ng-change="setUrlQueryParams(search) && triggerSearch()" class="form-control" ng-options="t.id as t.name for t in themes">
+          <option value="" translate>{{ 'app.public.projects_list.all_themes' }}</option>
+        </select>
+      </div>
+
+      <div class="col-md-3 m-b">
+        <select ng-model="search.component_id" ng-change="setUrlQueryParams(search) && triggerSearch()" class="form-control" ng-options="t.id as t.name for t in components">
+          <option value="" translate>{{ 'app.public.projects_list.all_materials' }}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <span class="col-md-12" ng-show="projects && (projects.length == 0)"> {{ 'app.public.projects_list.project_search_result_is_empty' | translate }} </span>
+    <div class="col-xs-12 col-sm-6 col-md-3" ng-repeat="project in projects" ng-click="showProject(project)">
+
+      <div class="card card-project">
+
+        <div class="card-header">
+          <div class="card-header-bg" style="background-image: url({{project.project_image}});">
+            <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:'Font Awesome 5 Free'/icon" bs-holder ng-if="!project.project_image">
+          </div>
+
+        </div>
+
+        <div class="card-block">
+          <h3 class="card-meta" ng-if="openlab.searchOverWholeNetwork"><i class="fa fa-tag"></i> {{ project.app_name }}</h3>
+          <h1 class="card-title">{{project.name}}</h1>
+        </div>
+
+        <div class="text-center">
+          <span class="badge" ng-if="project.state == 'draft'" translate>{{ 'app.public.projects_list.rough_draft' }}</span>
+        </div>
+
+        <div class="card-overlay">
+          <div class="btn-group">
+            <div class="btn btn-default" ng-click="showProject(project)">
+              <i ng-class="{'fa fa-external-link' : (openlab.searchOverWholeNetwork && project.app_id != openlabAppId) }"></i> {{ 'app.shared.buttons.consult' | translate }}
+            </div>
+            <div class="btn btn-default" ui-sref="app.logged.projects_edit({id:project.id})" ng-if="isAuthorized('admin') && !openlab.searchOverWholeNetwork">
+              <i class="fa fa-edit"></i>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12 text-center">
+        <a class="btn btn-warning" ng-click="loadMore()" ng-if="projectsPagination.hasNextPage()" translate>{{ 'app.public.projects_list.load_next_projects' }}</a>
+    </div>
+  </div>
+</section>
