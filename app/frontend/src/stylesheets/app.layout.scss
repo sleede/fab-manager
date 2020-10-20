@@ -671,7 +671,8 @@ body.container {
   background-color: $gray-lighter;
 
   & td:first-child:before {
-    font-family: 'fontawesome' !important;
+    font-family: 'Font Awesome 5 Free' !important;
+    font-weight: 900;
     content: '\f070';
     position: absolute;
     left: -4px;

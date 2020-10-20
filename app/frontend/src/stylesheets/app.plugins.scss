@@ -19,8 +19,8 @@
 
 .note-editor {
   .form-group {
-    margin-left: 0px;
-    margin-right: 0px;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   .modal-header {
@@ -58,8 +58,6 @@
   height: 40px;
   line-height: 18px;
   padding: 10px;
-
-  //&:hover, &:active, &.fc-state-active { background-color: $yellow; }
 }
 
 .fc-toolbar h2 {
@@ -146,7 +144,7 @@
 .carousel-caption {
   left: 0 !important;
   right: 0 !important;
-  bottom: 0px;
+  bottom: 0;
   padding-left: 30px;
   padding-right: 30px;
   text-align: left;
@@ -183,11 +181,12 @@
 
   &:hover, &:focus {
     //color: $yellow;
- 
+
   }
 
   .glyphicon-chevron-left {
-    font-family: 'fontawesome' !important;
+    font-family: 'Font Awesome 5 Free' !important;
+    font-weight: 900;
 
     &:before {
       content: "\f053" !important;
@@ -195,7 +194,8 @@
   }
 
   .glyphicon-chevron-right {
-    font-family: 'fontawesome' !important;
+    font-family: 'Font Awesome 5 Free' !important;
+    font-weight: 900;
 
     &:before {
       content: "\f054" !important;
@@ -207,29 +207,6 @@
   display: none;
 }
 
-// .carousel-control {
-//   // position: absolute;
-//   display: block;
-//   margin-bottom: -20px;
-//   padding: 20px;
-//   color: white;
-//   width: 58px;
-//   height: 58px;
-//   border: 3px solid white;
-//   border-radius: 50%;
-
-//   .glyphicon-chevron-right:before {
-//        // //Reset the icon
-//        // content: " ";
-//        // //Give layout
-//        // display:block;
-//        // //Your image as background
-//        // background:url('http://yourarrow.png') no-repeat;
-//        // //To show full image set the dimensions
-//        // width:30px;
-//        // height:30px;
-//    }
-// }
 
 .banner {}
 
