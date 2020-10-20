@@ -16,6 +16,7 @@ redis
 # Ignore public assets
 public/uploads
 public/assets
+public/packs
 
 # Ignore all logfiles and tempfiles.
 log
@@ -34,6 +35,9 @@ exports
 
 # CSV imports
 imports
+
+# accounting archives
+accounting
 
 .DS_Store
 

@@ -40,7 +40,7 @@
 # CSV imports
 /imports/*
 
-# Archives of cLosed accounting periods
+# Archives of closed accounting periods
 /accounting/*
 
 .DS_Store
