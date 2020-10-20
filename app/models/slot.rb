@@ -62,7 +62,7 @@ class Slot < ApplicationRecord
   end
 
   def set_ex_start_end_dates_attrs
-    update_columns(ex_start_at: start_at_was, ex_end_at: end_at_was)
+    update_columns(ex_start_at: start_at_before_last_save, ex_end_at: end_at_before_last_save)
   end
 
   def update_event_nb_free_places
