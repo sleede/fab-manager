@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v4.6.0 2020 October 20
+
 - Migrated the assets build pipeline from Sprockets to Webpack
 - Version check during the upgrade
 - Fix a bug: changing the date of a training session does not prevent the selection of a different type of training
