@@ -15,7 +15,7 @@ class Group < ApplicationRecord
   friendly_id :name, use: :slugged
 
   validates :name, :slug, presence: true
-  validates :disabled, inclusion: { in: [false] }, if: :group_has_users?
+  validates :disabled, inclusion: { in: [false, nil] }, if: :group_has_users?
 
   after_create :create_prices
   after_create :create_statistic_subtype
