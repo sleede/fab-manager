@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v4.6.1 2020 October 21
+
 - Reduced down time during upgrades
 - Architecture changes to allow including React.js components into the application
 - Allow running upgrade scripts from dev ranch
