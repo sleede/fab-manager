@@ -125,11 +125,13 @@ upgrade()
     printf "An error occured, detected service name: %s\nExiting...", "$SERVICE"
     exit 1
   fi
+  BRANCH='master'
+  if yq r docker-compose.yml 'services.*(.==sleede/fab-manager*)' | grep -q ':dev'; then BRANCH='dev'; fi
   for SCRIPT in "${SCRIPTS[@]}"; do
     if [[ "$YES_ALL" = "true" ]]; then
-      \curl -sSL "https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/$SCRIPT.sh" | bash -s -- -y
+      \curl -sSL "https://raw.githubusercontent.com/sleede/fab-manager/$BRANCH/scripts/$SCRIPT.sh" | bash -s -- -y
     else
-      \curl -sSL "https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/$SCRIPT.sh" | bash
+      \curl -sSL "https://raw.githubusercontent.com/sleede/fab-manager/$BRANCH/scripts/$SCRIPT.sh" | bash
     fi
   done
   compile_assets_and_migrate
