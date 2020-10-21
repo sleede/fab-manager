@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: script mount-webpack.sh was not updating the docker-compose.yml file
+
 ## v4.6.0 2020 October 20
 
 - Migrated the assets build pipeline from Sprockets to Webpack
