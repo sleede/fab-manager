@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- Reduced down time during upgrades
 - Fix a bug: script mount-webpack.sh was not updating the docker-compose.yml file
 - Fix a security issue: updated resolve-url-loader to 3.1.2 to fix [CVE-2020-15256](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-15256)
 - Fix a security issue: updated selfsigned to 1.10.8 to fix [CVE-2020-7720](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-7720)

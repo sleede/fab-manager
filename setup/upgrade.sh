@@ -96,6 +96,16 @@ add_environments()
   done
 }
 
+compile_assets_and_migrate()
+{
+  IMAGE=$(yq r docker-compose.yml 'services.*(.==sleede/fab-manager*)')
+  docker run --rm --env-file ./config/env -v "${PWD}/public/new_packs:/usr/src/app/public/packs" "$IMAGE" bundle exec rake assets:precompile
+  docker-compose down
+  docker-compose run --rm "$SERVICE" bundle exec rake db:migrate
+  rm -rf public/packs
+  mv public/new_packs public/packs
+}
+
 upgrade()
 {
   [[ "$YES_ALL" = "true" ]] && confirm="y" || read -rp "Proceed with the upgrade? (Y/n) " confirm </dev/tty
@@ -113,10 +123,7 @@ upgrade()
       \curl -sSL "https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/$SCRIPT.sh" | bash
     fi
   done
-  docker-compose down
-  docker-compose run --rm "$SERVICE" bundle exec rake db:migrate
-  rm -rf public/assets
-  docker-compose run --rm "$SERVICE" bundle exec rake assets:precompile
+  compile_assets_and_migrate
   for COMMAND in "${COMMANDS[@]}"; do
     docker-compose run --rm "$SERVICE" bundle exec "$COMMAND"
   done
