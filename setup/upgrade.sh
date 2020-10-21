@@ -31,6 +31,10 @@ yq() {
   docker run --rm -i -v "${PWD}:/workdir" mikefarah/yq yq "$@"
 }
 
+jq() {
+  docker run --rm -i -v "${PWD}:/data" imega/jq "$@"
+}
+
 config()
 {
   echo -ne "Checking dependency... "
@@ -96,6 +100,21 @@ add_environments()
   done
 }
 
+compile_assets_and_migrate()
+{
+  IMAGE=$(yq r docker-compose.yml 'services.*(.==sleede/fab-manager*)')
+  mapfile -t COMPOSE_ENVS < <(yq r docker-compose.yml "services.$SERVICE.environment")
+  ENV_ARGS=$(for i in "${COMPOSE_ENVS[@]}"; do sed 's/: /=/g;s/^/-e /g' <<< "$i"; done)
+  PG_ID=$(docker-compose ps -q postgres)
+  PG_NET_ID=$(docker inspect "$PG_ID" -f "{{json .NetworkSettings.Networks }}" | jq -r '.[] .NetworkID')
+  # shellcheck disable=SC2068
+  docker run --rm --env-file ./config/env ${ENV_ARGS[@]} --link "$PG_ID" --net "$PG_NET_ID" -v "${PWD}/public/new_packs:/usr/src/app/public/packs" "$IMAGE" bundle exec rake assets:precompile
+  docker-compose down
+  docker-compose run --rm "$SERVICE" bundle exec rake db:migrate
+  rm -rf public/packs
+  mv public/new_packs public/packs
+}
+
 upgrade()
 {
   [[ "$YES_ALL" = "true" ]] && confirm="y" || read -rp "Proceed with the upgrade? (Y/n) " confirm </dev/tty
@@ -106,17 +125,16 @@ upgrade()
     printf "An error occured, detected service name: %s\nExiting...", "$SERVICE"
     exit 1
   fi
+  BRANCH='master'
+  if yq r docker-compose.yml 'services.*(.==sleede/fab-manager*)' | grep -q ':dev'; then BRANCH='dev'; fi
   for SCRIPT in "${SCRIPTS[@]}"; do
     if [[ "$YES_ALL" = "true" ]]; then
-      \curl -sSL "https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/$SCRIPT.sh" | bash -s -- -y
+      \curl -sSL "https://raw.githubusercontent.com/sleede/fab-manager/$BRANCH/scripts/$SCRIPT.sh" | bash -s -- -y
     else
-      \curl -sSL "https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/$SCRIPT.sh" | bash
+      \curl -sSL "https://raw.githubusercontent.com/sleede/fab-manager/$BRANCH/scripts/$SCRIPT.sh" | bash
     fi
   done
-  docker-compose down
-  docker-compose run --rm "$SERVICE" bundle exec rake db:migrate
-  rm -rf public/assets
-  docker-compose run --rm "$SERVICE" bundle exec rake assets:precompile
+  compile_assets_and_migrate
   for COMMAND in "${COMMANDS[@]}"; do
     docker-compose run --rm "$SERVICE" bundle exec "$COMMAND"
   done

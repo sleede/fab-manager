@@ -29,7 +29,7 @@ change_mount()
   for i in $(seq 0 $maxVol); do
     yq r docker-compose.yml "services.$SERVICE.volumes.[$i]" | grep assets
     if [[ $? = 0 ]]; then
-      yq w docker-compose.yml "services.$SERVICE.volumes.[$i]" "\${PWD}/public/packs:/usr/src/app/public/packs"
+      yq w -i docker-compose.yml "services.$SERVICE.volumes.[$i]" "\${PWD}/public/packs:/usr/src/app/public/packs"
       echo "Volume #$i was replaced for $SERVICE: /assets changed to /packs"
       exit 0
     fi
