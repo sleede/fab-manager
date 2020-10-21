@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Fix a bug: script mount-webpack.sh was not updating the docker-compose.yml file
+- Fix a security issue: updated resolve-url-loader to 3.1.2 to fix [CVE-2020-15256](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-15256)
 
 ## v4.6.0 2020 October 20
 
