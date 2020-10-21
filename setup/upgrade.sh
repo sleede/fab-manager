@@ -31,6 +31,10 @@ yq() {
   docker run --rm -i -v "${PWD}:/workdir" mikefarah/yq yq "$@"
 }
 
+jq() {
+  docker run --rm -i -v "${PWD}:/data" imega/jq "$@"
+}
+
 config()
 {
   echo -ne "Checking dependency... "
@@ -99,7 +103,12 @@ add_environments()
 compile_assets_and_migrate()
 {
   IMAGE=$(yq r docker-compose.yml 'services.*(.==sleede/fab-manager*)')
-  docker run --rm --env-file ./config/env -v "${PWD}/public/new_packs:/usr/src/app/public/packs" "$IMAGE" bundle exec rake assets:precompile
+  mapfile -t COMPOSE_ENVS < <(yq r docker-compose.yml "services.$SERVICE.environment")
+  ENV_ARGS=$(for i in "${COMPOSE_ENVS[@]}"; do sed 's/: /=/g;s/^/-e /g' <<< "$i"; done)
+  PG_ID=$(docker-compose ps -q postgres)
+  PG_NET_ID=$(docker inspect "$PG_ID" -f "{{json .NetworkSettings.Networks }}" | jq -r '.[] .NetworkID')
+  # shellcheck disable=SC2068
+  docker run --rm --env-file ./config/env ${ENV_ARGS[@]} --link "$PG_ID" --net "$PG_NET_ID" -v "${PWD}/public/new_packs:/usr/src/app/public/packs" "$IMAGE" bundle exec rake assets:precompile
   docker-compose down
   docker-compose run --rm "$SERVICE" bundle exec rake db:migrate
   rm -rf public/packs
