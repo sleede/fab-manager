@@ -8,6 +8,7 @@
 // eslint-disable-next-line no-use-before-define
 var Application = Application || {};
 
+Application.Components = angular.module('application.components', []);
 Application.Services = angular.module('application.services', []);
 Application.Controllers = angular.module('application.controllers', []);
 Application.Filters = angular.module('application.filters', []);
@@ -15,7 +16,7 @@ Application.Directives = angular.module('application.directives', []);
 
 angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.router', 'ui.bootstrap',
   'ngUpload', 'duScroll', 'application.filters', 'application.services', 'application.directives',
-  'frapontillo.bootstrap-switch', 'application.controllers', 'application.router',
+  'frapontillo.bootstrap-switch', 'application.controllers', 'application.router', 'application.components',
   'ui.select', 'ui.calendar', 'angularMoment', 'Devise', 'angular-growl', 'xeditable',
   'checklist-model', 'unsavedChanges', 'angular-loading-bar', 'ngTouch', 'angular-google-analytics',
   'angularUtils.directives.dirDisqus', 'summernote', 'elasticsearch', 'angular-medium-editor', 'naif.base64',

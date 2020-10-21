@@ -78,6 +78,7 @@ require('../src/javascript/plugins.js.erb');
 
 function importAll (r) { r.keys().forEach(r); }
 
+importAll(require.context('../src/javascript/components/', true, /.*/));
 importAll(require.context('../src/javascript/controllers/', true, /.*/));
 importAll(require.context('../src/javascript/services/', true, /.*/));
 importAll(require.context('../src/javascript/directives/', true, /.*/));
