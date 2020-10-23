@@ -2,6 +2,7 @@
 
 - Add intermediate step version for upgrades: v4.4.6. This will prevent issues with FootprintDebug if a regeneration is needed
 - Fix a bug: unable to set libraries locales to their default values (en-us)
+- Fix a bug: unable to display details about a closed period
 
 ## v4.6.1 2020 October 21
 
