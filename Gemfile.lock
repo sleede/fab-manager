@@ -386,6 +386,8 @@ GEM
       tzinfo
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
+    tzinfo-data (1.2020.4)
+      tzinfo (>= 1.0.0)
     unicode-display_width (1.4.1)
     vcr (3.0.1)
     virtus (1.0.5)
@@ -483,6 +485,7 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   stripe (= 5.1.1)
   sys-filesystem
+  tzinfo-data
   vcr (= 3.0.1)
   web-console (>= 3.3.0)
   webmock

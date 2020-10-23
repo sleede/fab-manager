@@ -134,3 +134,5 @@ gem 'sha3'
 gem 'repost'
 
 gem 'icalendar'
+
+gem 'tzinfo-data'
