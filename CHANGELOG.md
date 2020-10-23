@@ -1,10 +1,14 @@
 # Changelog Fab-manager
 
+## v4.6.2 2020 October 23
+
 - Add intermediate step version for upgrades: v4.4.6. This will prevent issues with FootprintDebug if a regeneration is needed
 - Check postgreSQL status before compiling assets
+- Improved documentation about the upgrade process
 - Fix a bug: unable to set libraries locales to their default values (en-us)
 - Fix a bug: unable to display details about a closed period
 - Fix a bug: members cannot view available trainings slots
+- Fix a bug: availabilities not created at the same DST than the target date may be shifted in time
 
 ## v4.6.1 2020 October 21
 
