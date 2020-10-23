@@ -194,7 +194,8 @@ You can subscribe to [this atom feed](https://github.com/sleede/fab-manager/rele
    They are also present in the [releases page](https://github.com/sleede/fab-manager/releases).
  
    Those commands execute specific tasks and have to be run by hand.
-   Using docker, you must prefix these commands with `docker-compose run --rm fabmanager bundle exec`. 
+   Using docker, you must prefix the commands starting by `rails...` or `rake...` with: `docker-compose run --rm fabmanager bundle exec`.
+   In any other cases, the other commands (like those invoking curl `\curl -sSL... | bash`) must not be prefixed.
    You can also ignore commands only applicable to development environnement, which are prefixed by `(dev)` in the CHANGELOG.
 
 7. restart all containers
