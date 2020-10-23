@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: unable to set libraries locales to their default values (en-us)
+
 ## v4.6.1 2020 October 21
 
 - Reduced down time during upgrades
