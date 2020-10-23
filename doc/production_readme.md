@@ -157,7 +157,7 @@ Then, you'll need to perform the upgrade with the following command:
 
 *This procedure updates Fab-manager to the most recent version by default.*
 
-> ⚠ If you are upgrading from a very outdated version, you must first upgrade to v2.8.3, then to v3.1.2, then to 4.0.4 and finally to the last version
+> ⚠ If you are upgrading from a very outdated version, you must first upgrade to v2.8.3, then to v3.1.2, then to 4.0.4, then to 4.4.6 and finally to the last version
 
 > ⚠ With versions < 4.3.3, you must replace `bundle exec rails` with `bundle exec rake` in all the commands above
 
@@ -194,7 +194,8 @@ You can subscribe to [this atom feed](https://github.com/sleede/fab-manager/rele
    They are also present in the [releases page](https://github.com/sleede/fab-manager/releases).
  
    Those commands execute specific tasks and have to be run by hand.
-   Using docker, you must prefix these commands with `docker-compose run --rm fabmanager bundle exec`. 
+   Using docker, you must prefix the commands starting by `rails...` or `rake...` with: `docker-compose run --rm fabmanager bundle exec`.
+   In any other cases, the other commands (like those invoking curl `\curl -sSL... | bash`) must not be prefixed.
    You can also ignore commands only applicable to development environnement, which are prefixed by `(dev)` in the CHANGELOG.
 
 7. restart all containers

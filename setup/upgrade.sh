@@ -86,6 +86,8 @@ version_check()
     version_error "v3.1.2"
   elif verlt "$VERSION" 4.0.4; then
     version_error "v4.0.4"
+  elif verlt "$VERSION" 4.4.6; then
+    version_error "v4.4.6"
   fi
 }
 
@@ -100,17 +102,20 @@ add_environments()
   done
 }
 
-compile_assets_and_migrate()
+compile_assets()
 {
   IMAGE=$(yq r docker-compose.yml 'services.*(.==sleede/fab-manager*)')
   mapfile -t COMPOSE_ENVS < <(yq r docker-compose.yml "services.$SERVICE.environment")
   ENV_ARGS=$(for i in "${COMPOSE_ENVS[@]}"; do sed 's/: /=/g;s/^/-e /g' <<< "$i"; done)
   PG_ID=$(docker-compose ps -q postgres)
+  if [[ "$PG_ID" = "" ]]; then
+    printf "PostgreSQL container is not running, unable to compile the assets\nExiting..."
+    exit 1
+  fi
   PG_NET_ID=$(docker inspect "$PG_ID" -f "{{json .NetworkSettings.Networks }}" | jq -r '.[] .NetworkID')
   # shellcheck disable=SC2068
   docker run --rm --env-file ./config/env ${ENV_ARGS[@]} --link "$PG_ID" --net "$PG_NET_ID" -v "${PWD}/public/new_packs:/usr/src/app/public/packs" "$IMAGE" bundle exec rake assets:precompile
   docker-compose down
-  docker-compose run --rm "$SERVICE" bundle exec rake db:migrate
   rm -rf public/packs
   mv public/new_packs public/packs
 }
@@ -134,7 +139,8 @@ upgrade()
       \curl -sSL "https://raw.githubusercontent.com/sleede/fab-manager/$BRANCH/scripts/$SCRIPT.sh" | bash
     fi
   done
-  compile_assets_and_migrate
+  compile_assets
+  docker-compose run --rm "$SERVICE" bundle exec rake db:migrate
   for COMMAND in "${COMMANDS[@]}"; do
     docker-compose run --rm "$SERVICE" bundle exec "$COMMAND"
   done

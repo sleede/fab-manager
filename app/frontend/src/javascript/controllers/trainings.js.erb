@@ -374,7 +374,7 @@ Application.Controllers.controller('ReserveTrainingController', ['$scope', '$sta
      */
     const initialize = function () {
       if ($scope.currentUser.role !== 'admin') {
-        return Member.get({ id: $scope.currentUser.id }, function (member) { $scope.ctrl.member = member; });
+        Member.get({ id: $scope.currentUser.id }, function (member) { $scope.ctrl.member = member; });
       }
       // we load the availabilities from a callback function of the $scope.eventSources, instead of resolving a promise
       // in the router because this allows to refetchEvents from fullCalendar API.

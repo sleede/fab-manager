@@ -6,7 +6,9 @@ import {} from 'jquery-ujs';
 import 'bootstrap-sass';
 import '../src/javascript/lib/polyfill';
 import 'angular';
+<% unless Rails.application.secrets.angular_locale == 'en-us' %>
 import 'angular-i18n/angular-locale_<%= Rails.application.secrets.angular_locale %>.js';
+<% end %>
 import 'angular-cookies';
 import 'angular-resource';
 import 'angular-sanitize';
@@ -15,11 +17,15 @@ import '@uirouter/angularjs';
 import 'angular-ui-bootstrap';
 import 'ui-select';
 import 'moment';
+<% unless Rails.application.secrets.moment_locale == 'en' %>
 import 'moment/locale/<%= Rails.application.secrets.moment_locale %>.js';
+<% end %>
 import 'moment-timezone';
 import 'angular-ui-calendar';
 import 'fullcalendar';
+<% unless Rails.application.secrets.fullcalendar_locale == 'en' %>
 import 'fullcalendar/dist/locale/<%= Rails.application.secrets.fullcalendar_locale %>.js';
+<% end %>
 import 'angular-moment';
 import 'ngUpload';
 import 'jasny-bootstrap/js/fileinput';
@@ -46,7 +52,9 @@ import 'bootstrap-switch/dist/js/bootstrap-switch';
 import 'angular-bootstrap-switch/dist/angular-bootstrap-switch';
 import 'angular-base64-upload/dist/angular-base64-upload.min';
 import 'summernote';
+<% unless Rails.application.secrets.summernote_locale == 'en-US' %>
 import 'summernote/lang/summernote-<%= Rails.application.secrets.summernote_locale %>.js';
+<% end %>
 import 'angular-summernote/dist/angular-summernote';
 import '../src/javascript/lib/summernote-ext-nugget';
 import '@claviska/jquery-minicolors/jquery.minicolors.js';
