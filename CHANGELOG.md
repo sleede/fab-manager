@@ -4,6 +4,7 @@
 - Check postgreSQL status before compiling assets
 - Fix a bug: unable to set libraries locales to their default values (en-us)
 - Fix a bug: unable to display details about a closed period
+- Fix a bug: members cannot view available trainings slots
 
 ## v4.6.1 2020 October 21
 
