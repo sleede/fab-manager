@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Add intermediate step version for upgrades: v4.4.6. This will prevent issues with FootprintDebug if a regeneration is needed
+- Check postgreSQL status before compiling assets
 - Fix a bug: unable to set libraries locales to their default values (en-us)
 - Fix a bug: unable to display details about a closed period
 
