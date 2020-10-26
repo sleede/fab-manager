@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- Removed fab-manager email address from the seeds
 - Fix a bug: in the settings area, boolean switches are always shown as false
 
 ## v4.6.2 2020 October 23
