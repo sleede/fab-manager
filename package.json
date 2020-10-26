@@ -89,6 +89,7 @@
     "prop-types": "^15.7.2",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
+    "react-switch": "^5.0.1",
     "react2angular": "^4.0.6",
     "summernote": "0.8.18",
     "twitter-fetcher": "^18.0.2",

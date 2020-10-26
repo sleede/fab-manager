@@ -10,7 +10,8 @@
     "Application": true,
     "angular": true,
     "Fablab": true,
-    "moment": true
+    "moment": true,
+    "_": true
   },
   "plugins": ["lint-erb"]
 }

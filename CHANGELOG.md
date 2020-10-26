@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: in the settings area, boolean switches are always shown as false
+
 ## v4.6.2 2020 October 23
 
 - Add intermediate step version for upgrades: v4.4.6. This will prevent issues with FootprintDebug if a regeneration is needed
