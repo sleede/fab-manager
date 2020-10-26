@@ -1161,7 +1161,7 @@ es:
         privacy:
           title: "Privacidad"
           privacy_policy: "Política de privacidad"
-          input_the_dpo: "Input the contact of the Data Protection Officer"
+          input_the_dpo: "Data Protection Officer"
           current_policy: "Política de privacidad"
           draft_from_USER_DATE: "Borrador, guardado por {USER}, el {DATE}"
           save_or_publish: "Save or publish?"

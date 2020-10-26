@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- Enlarged privacy policy display and edition zones
 - Removed fab-manager email address from the seeds
 - Fix a bug: in the settings area, boolean switches are always shown as false
 

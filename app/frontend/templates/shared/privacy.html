@@ -8,7 +8,7 @@
   </div>
 
   <div class="row padder">
-    <div class="col-sm-offset-1 col-md-offset-3 col-sm-7 col-md-5 col-lg-4 m-b-lg">
+    <div class="col-md-offset-1 col-md-8 m-b-lg">
       <div class="last-update text-gray">
         <span translate>{{ 'app.public.privacy.last_update' }}</span>
         <span>{{ privacyBody.last_update | amDateFormat:'LL' }}</span>
@@ -16,7 +16,7 @@
       <span ng-bind-html="privacyBody.value"></span>
     </div>
 
-    <div class="col-sm-offset-0 col-md-offset-0 col-lg-offset-1 col-sm-4 col-md-4" ng-show="privacyDpo.value">
+    <div class="col-md-3" ng-show="privacyDpo.value">
       <h2 class="about-title-aside text-u-c" translate>{{ 'app.public.privacy.dpo' }}</h2>
       <span ng-bind-html="privacyDpo.value"></span>
     </div>

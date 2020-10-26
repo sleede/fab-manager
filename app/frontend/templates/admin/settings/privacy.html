@@ -5,7 +5,7 @@
     <div class="panel-body">
 
         <div class="row">
-            <div class="col-md-6 col-md-offset-1">
+            <div class="col-md-8">
               <select class="form-control m-b history-select" ng-options="d.id as d.name for d in privacyDraftsHistory" ng-model="privacyPolicy.version" ng-change="handlePolicyRevisionChange()">
                 <option value="" translate>{{ 'app.admin.settings.privacy.current_policy' }}</option>
               </select>
@@ -17,7 +17,7 @@
                 <span class="help-block text-info text-xs"><i class="fa fa-lightbulb-o"></i> {{ 'app.admin.settings.drag_and_drop_to_insert_images' | translate }}</span>
                 <button name="button" class="btn btn-warning" ng-click="savePrivacyPolicy()" translate>{{ 'app.shared.buttons.save' }}</button>
             </div>
-            <div class="col-md-3 col-md-offset-1">
+            <div class="col-md-3">
                 <div ng-model="privacyDpoSetting.value" medium-editor options='{"placeholder": "{{ "app.admin.settings.privacy.input_the_dpo" | translate }}",
                   "buttons": ["bold", "italic", "anchor", "header1", "header2" ]
                   }'>
