@@ -3,7 +3,7 @@
 class CreateInvoices < ActiveRecord::Migration[4.2]
   def change
     create_table :invoices do |t|
-      t.references :invoiced,  polymorphic: true
+      t.references :invoiced, polymorphic: true
       t.string :stp_invoice_id
       t.integer :total
 

@@ -1482,7 +1482,8 @@ CREATE TABLE public.plans (
     ui_weight integer DEFAULT 0,
     interval_count integer DEFAULT 1,
     slug character varying,
-    disabled boolean
+    disabled boolean,
+    monthly_payment boolean
 );
 
 
@@ -1880,6 +1881,82 @@ CREATE SEQUENCE public.projects_themes_id_seq
 --
 
 ALTER SEQUENCE public.projects_themes_id_seq OWNED BY public.projects_themes.id;
+
+
+--
+-- Name: repayment_schedule_items; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.repayment_schedule_items (
+    id bigint NOT NULL,
+    amount integer,
+    due_date timestamp without time zone,
+    repayment_schedule_id bigint,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: repayment_schedule_items_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.repayment_schedule_items_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: repayment_schedule_items_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.repayment_schedule_items_id_seq OWNED BY public.repayment_schedule_items.id;
+
+
+--
+-- Name: repayment_schedules; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.repayment_schedules (
+    id bigint NOT NULL,
+    scheduled_type character varying,
+    scheduled_id bigint,
+    total integer,
+    stp_subscription_id character varying,
+    reference character varying,
+    payment_method character varying,
+    wallet_amount integer,
+    wallet_transaction_id bigint,
+    coupon_id bigint,
+    footprint character varying,
+    environment character varying,
+    invoicing_profile_id bigint,
+    operator_profile_id_id bigint,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: repayment_schedules_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.repayment_schedules_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: repayment_schedules_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.repayment_schedules_id_seq OWNED BY public.repayment_schedules.id;
 
 
 --
@@ -3278,6 +3355,20 @@ ALTER TABLE ONLY public.projects_themes ALTER COLUMN id SET DEFAULT nextval('pub
 
 
 --
+-- Name: repayment_schedule_items id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.repayment_schedule_items ALTER COLUMN id SET DEFAULT nextval('public.repayment_schedule_items_id_seq'::regclass);
+
+
+--
+-- Name: repayment_schedules id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.repayment_schedules ALTER COLUMN id SET DEFAULT nextval('public.repayment_schedules_id_seq'::regclass);
+
+
+--
 -- Name: reservations id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -3901,6 +3992,22 @@ ALTER TABLE ONLY public.projects_spaces
 
 ALTER TABLE ONLY public.projects_themes
     ADD CONSTRAINT projects_themes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: repayment_schedule_items repayment_schedule_items_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.repayment_schedule_items
+    ADD CONSTRAINT repayment_schedule_items_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: repayment_schedules repayment_schedules_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.repayment_schedules
+    ADD CONSTRAINT repayment_schedules_pkey PRIMARY KEY (id);
 
 
 --
@@ -4547,6 +4654,48 @@ CREATE INDEX index_projects_themes_on_project_id ON public.projects_themes USING
 --
 
 CREATE INDEX index_projects_themes_on_theme_id ON public.projects_themes USING btree (theme_id);
+
+
+--
+-- Name: index_repayment_schedule_items_on_repayment_schedule_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_repayment_schedule_items_on_repayment_schedule_id ON public.repayment_schedule_items USING btree (repayment_schedule_id);
+
+
+--
+-- Name: index_repayment_schedules_on_coupon_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_repayment_schedules_on_coupon_id ON public.repayment_schedules USING btree (coupon_id);
+
+
+--
+-- Name: index_repayment_schedules_on_invoicing_profile_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_repayment_schedules_on_invoicing_profile_id ON public.repayment_schedules USING btree (invoicing_profile_id);
+
+
+--
+-- Name: index_repayment_schedules_on_operator_profile_id_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_repayment_schedules_on_operator_profile_id_id ON public.repayment_schedules USING btree (operator_profile_id_id);
+
+
+--
+-- Name: index_repayment_schedules_on_scheduled_type_and_scheduled_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_repayment_schedules_on_scheduled_type_and_scheduled_id ON public.repayment_schedules USING btree (scheduled_type, scheduled_id);
+
+
+--
+-- Name: index_repayment_schedules_on_wallet_transaction_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_repayment_schedules_on_wallet_transaction_id ON public.repayment_schedules USING btree (wallet_transaction_id);
 
 
 --
@@ -5253,6 +5402,14 @@ ALTER TABLE ONLY public.projects_themes
 
 
 --
+-- Name: repayment_schedules fk_rails_a9e6b045af; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.repayment_schedules
+    ADD CONSTRAINT fk_rails_a9e6b045af FOREIGN KEY (operator_profile_id_id) REFERENCES public.invoicing_profiles(id);
+
+
+--
 -- Name: projects_themes fk_rails_b021a22658; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5285,6 +5442,22 @@ ALTER TABLE ONLY public.projects_machines
 
 
 --
+-- Name: repayment_schedules fk_rails_c1530d5158; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.repayment_schedules
+    ADD CONSTRAINT fk_rails_c1530d5158 FOREIGN KEY (invoicing_profile_id) REFERENCES public.invoicing_profiles(id);
+
+
+--
+-- Name: repayment_schedules fk_rails_c313d6987a; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.repayment_schedules
+    ADD CONSTRAINT fk_rails_c313d6987a FOREIGN KEY (wallet_transaction_id) REFERENCES public.wallet_transactions(id);
+
+
+--
 -- Name: project_steps fk_rails_c6306005c3; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5301,11 +5474,27 @@ ALTER TABLE ONLY public.projects_components
 
 
 --
+-- Name: repayment_schedules fk_rails_c858c7637d; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.repayment_schedules
+    ADD CONSTRAINT fk_rails_c858c7637d FOREIGN KEY (coupon_id) REFERENCES public.coupons(id);
+
+
+--
 -- Name: statistic_profile_trainings fk_rails_cb689a8d3d; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.statistic_profile_trainings
     ADD CONSTRAINT fk_rails_cb689a8d3d FOREIGN KEY (statistic_profile_id) REFERENCES public.statistic_profiles(id);
+
+
+--
+-- Name: repayment_schedule_items fk_rails_cc00414030; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.repayment_schedule_items
+    ADD CONSTRAINT fk_rails_cc00414030 FOREIGN KEY (repayment_schedule_id) REFERENCES public.repayment_schedules(id);
 
 
 --
@@ -5666,6 +5855,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200623134900'),
 ('20200623141305'),
 ('20200629123011'),
-('20200721162939');
+('20200721162939'),
+('20201027092149'),
+('20201027100746'),
+('20201027101809');
 
 
