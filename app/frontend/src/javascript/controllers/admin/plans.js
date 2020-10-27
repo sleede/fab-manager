@@ -28,15 +28,15 @@ class PlanController {
     // groups list
     $scope.groups = groups
       .filter(function (g) { return (g.slug !== 'admins') && !g.disabled; })
-      .map(e => Object.assign({}, e, { category: 'app.shared.plan.groups', id: `${e.id}` }))
+      .map(e => Object.assign({}, e, { category: 'app.shared.plan.groups', id: `${e.id}` }));
     $scope.groups.push({ id: 'all', name: 'app.shared.plan.transversal_all_groups', category: 'app.shared.plan.all' });
 
     // dynamically translate a label if needed
     $scope.translateLabel = function (group, prop) {
       return group[prop] && group[prop].match(/^app\./) ? _t(group[prop]) : group[prop];
-    }
+    };
 
-    // users with role 'partner', notifiables for a partner plan
+    // users with role 'partner', notifiable for a partner plan
     $scope.partners = partners.users;
 
     // Subscriptions prices, machines prices and training prices, per groups
@@ -93,7 +93,8 @@ Application.Controllers.controller('NewPlanController', ['$scope', '$uibModal', 
       is_rolling: false,
       partnerId: null,
       partnerContact: null,
-      ui_weight: 0
+      ui_weight: 0,
+      monthly_payment: false
     };
 
     // API URL where the form will be posted
@@ -145,6 +146,22 @@ Application.Controllers.controller('NewPlanController', ['$scope', '$uibModal', 
     };
 
     /**
+     * This will update the monthly_payment value when the user toggles the switch button
+     * @param checked {Boolean}
+     */
+    $scope.toggleMonthlyPayment = function (checked) {
+      toggle('monthly_payment', checked);
+    };
+
+    /**
+     * This will update the is_rolling value when the user toggles the switch button
+     * @param checked {Boolean}
+     */
+    $scope.toggleIsRolling = function (checked) {
+      toggle('is_rolling', checked);
+    };
+
+    /**
      * Display some messages and redirect the user, once the form was submitted, depending on the result status
      * (failed/succeeded).
      * @param content {Object}
@@ -162,6 +179,19 @@ Application.Controllers.controller('NewPlanController', ['$scope', '$uibModal', 
           }
         }
       }
+    };
+
+    /* PRIVATE SCOPE */
+    /**
+     * Asynchronously updates the given property with the new provided value
+     * @param property {string}
+     * @param value {*}
+     */
+    const toggle = function (property, value) {
+      setTimeout(() => {
+        $scope.plan[property] = value;
+        $scope.$apply();
+      }, 50);
     };
 
     return new PlanController($scope, groups, prices, partners, CSRF, _t);
@@ -204,7 +234,7 @@ Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'p
     $scope.selectedGroup = function () {
       const group = $scope.groups.filter(g => g.id === $scope.plan.group_id);
       return $scope.translateLabel(group[0], 'name');
-    }
+    };
 
     /**
      * If a parent plan was set ($scope.plan.parent), the prices will be copied from this parent plan into
@@ -216,7 +246,7 @@ Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'p
           Array.from(parentPlan.prices).map(function (parentPrice) {
             return (function () {
               const result = [];
-              for (let childKey in $scope.plan.prices) {
+              for (const childKey in $scope.plan.prices) {
                 const childPrice = $scope.plan.prices[childKey];
                 if ((childPrice.priceable_type === parentPrice.priceable_type) && (childPrice.priceable_id === parentPrice.priceable_id)) {
                   $scope.plan.prices[childKey].amount = parentPrice.amount;
@@ -235,7 +265,7 @@ Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'p
       } else {
         return (function () {
           const result = [];
-          for (let key in $scope.plan.prices) {
+          for (const key in $scope.plan.prices) {
             const price = $scope.plan.prices[key];
             result.push($scope.plan.prices[key].amount = 0);
           }
@@ -273,7 +303,7 @@ Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'p
      * @returns {Object} Machine
      */
     $scope.getMachine = function (machine_id) {
-      for (let machine of Array.from($scope.machines)) {
+      for (const machine of Array.from($scope.machines)) {
         if (machine.id === machine_id) {
           return machine;
         }
@@ -286,7 +316,7 @@ Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'p
      * @returns {Object} Space
      */
     $scope.getSpace = function (space_id) {
-      for (let space of Array.from($scope.spaces)) {
+      for (const space of Array.from($scope.spaces)) {
         if (space.id === space_id) {
           return space;
         }

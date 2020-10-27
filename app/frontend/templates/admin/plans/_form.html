@@ -89,6 +89,10 @@
                  ng-model="plan.amount"/>
       </div>
       <span class="help-block" ng-show="planForm['plan[amount]'].$dirty && planForm['plan[amount]'].$error.required" translate>{{ 'app.shared.plan.price_is_required' }}</span>
+      <span class="help-block alert alert-warning" ng-if="method == 'PATCH'">
+        <i class="fa fa-warning"></i>
+        {{ 'app.shared.plan.edit_amount_info' | translate }}
+      </span>
   </div>
 </div>
 
@@ -106,17 +110,7 @@
 
 <div class="input-group m-t-md">
     <label for="plan[is_rolling]" class="control-label m-r-md">{{ 'app.shared.plan.rolling_subscription' | translate }} *</label>
-    <input bs-switch
-           ng-model="plan.is_rolling"
-           id="plan[is_rolling]"
-           ng-if="method != 'PATCH'"
-           type="checkbox"
-           class="form-control"
-           switch-on-text="{{ 'app.shared.buttons.yes' | translate }}"
-           switch-off-text="{{ 'app.shared.buttons.no' | translate }}"
-           switch-animate="true"
-           ng-true-value="'true'"
-           ng-false-value="'false'"/>
+    <switch id="plan[is_rolling]" checked="plan.is_rolling" on-change="toggleIsRolling" class-name="'v-middle'" ng-if="plan && method != 'PATCH'"></switch>
     <span ng-if="method == 'PATCH'">{{ (plan.is_rolling ? 'app.shared.buttons.yes' : 'app.shared.buttons.no') | translate }}</span>
     <input type="hidden" name="plan[is_rolling]" value="{{plan.is_rolling}}"/>
     <span class="help-block">
@@ -125,6 +119,13 @@
     </span>
 </div>
 
+<div class="input-group m-t-md">
+  <label for="plan[monthly_payment]" class="control-label m-r-md">{{ 'app.shared.plan.monthly_payment' | translate }} *</label>
+  <switch id="plan[monthly_payment]" checked="plan.monthly_payment" on-change="toggleMonthlyPayment" class-name="'v-middle'" ng-if="plan && method != 'PATCH'"></switch>
+  <span ng-if="method == 'PATCH'">{{ (plan.monthly_payment ? 'app.shared.buttons.yes' : 'app.shared.buttons.no') | translate }}</span>
+  <input type="hidden" id="plan_monthly_input" name="plan[monthly_payment]" value="{{plan.monthly_payment}}" />
+  <span class="help-block" translate>{{ 'app.shared.plan.monthly_payment_info' }}</span>
+</div>
 
 <!-- PDF description attachement -->
 <input type="hidden" ng-model="plan.plan_file_attributes.id" name="plan[plan_file_attributes][id]" ng-value="plan.plan_file_attributes.id" />
