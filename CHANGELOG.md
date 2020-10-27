@@ -6,6 +6,7 @@
 - Removed fab-manager email address from the seeds
 - Fix a bug: in the settings area, boolean switches are always shown as false
 - Updated stripe gem to 5.21.0
+- [TODO DEPLOY] `rails fablab:stripe:plans_prices`
 
 ## v4.6.2 2020 October 23
 

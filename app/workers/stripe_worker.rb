@@ -44,4 +44,33 @@ class StripeWorker
     cpn = Stripe::Coupon.retrieve(coupon_code, api_key: Setting.get('stripe_secret_key'))
     cpn.delete
   end
+
+  def create_stripe_price(plan)
+    product = if !plan.stp_price_id.nil?
+                p = Stripe::Price.update(
+                  plan.stp_price_id,
+                  { metadata: { archived: true } },
+                  { api_key: Setting.get('stripe_secret_key') }
+                )
+                p.product
+              else
+                p = Stripe::Product.create(
+                  {
+                    name: plan.name,
+                    metadata: { plan_id: plan.id }
+                  }, { api_key: Setting.get('stripe_secret_key') }
+                )
+                p.id
+              end
+
+    price = Stripe::Price.create(
+      {
+        currency: Setting.get('stripe_currency'),
+        unit_amount: plan.amount,
+        product: product
+      },
+      { api_key: Setting.get('stripe_secret_key') }
+    )
+    plan.update_columns(stp_price_id: price.id)
+  end
 end

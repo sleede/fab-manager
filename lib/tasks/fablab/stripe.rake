@@ -53,6 +53,16 @@ namespace :fablab do
       puts 'Done'
     end
 
+    desc 'set stp_price_id to plans'
+    task plans_prices: :environment do
+      puts 'No plans, exiting...' and return  if Plan.count.zero?
+
+      w = StripeWorker.new
+      Plan.all.each do |p|
+        w.perform(:create_stripe_price, p)
+      end
+    end
+
     def print_on_line(str)
       print "#{str}\r"
       $stdout.flush
