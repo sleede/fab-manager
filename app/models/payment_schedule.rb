@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-# RepaymentSchedule is a way for members to pay something (especially a Subscription) with multiple payment,
+# PaymentSchedule is a way for members to pay something (especially a Subscription) with multiple payment,
 # staged on a long period rather than with a single payment
-class RepaymentSchedule < ApplicationRecord
+class PaymentSchedule < ApplicationRecord
   belongs_to :scheduled, polymorphic: true
   belongs_to :wallet_transaction
   belongs_to :coupon

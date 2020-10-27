@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-# Saves RepaymentSchedules in database.
+# Saves PaymentSchedules in database.
 # It allows to pay with multiple payments
-class CreateRepaymentSchedules < ActiveRecord::Migration[5.2]
+class CreatePaymentSchedules < ActiveRecord::Migration[5.2]
   def change
-    create_table :repayment_schedules do |t|
+    create_table :payment_schedules do |t|
       t.references :scheduled, polymorphic: true
       t.integer :total
       t.string :stp_subscription_id
