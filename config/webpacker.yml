@@ -33,6 +33,8 @@ default: &default
     - .woff2
 
   extensions:
+    - .tsx
+    - .ts
     - .erb
     - .html
     - .mjs
@@ -53,6 +55,7 @@ default: &default
 development:
   <<: *default
   compile: true
+  extract_css: false
 
   # Reference: https://webpack.js.org/configuration/dev-server/
   dev_server:
@@ -60,7 +63,7 @@ development:
     host: localhost
     port: 3035
     public: localhost:3035
-    hmr: false
+    hmr: true
     # Inline should be set to true if using HMR
     inline: true
     overlay: true
