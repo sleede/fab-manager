@@ -23,6 +23,7 @@ class Plan < ApplicationRecord
   after_create :create_spaces_prices
   after_create :create_statistic_type
   after_create :set_name
+  after_create :create_stripe_price
 
   validates :amount, :group, :base_name, presence: true
   validates :interval_count, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
@@ -123,5 +124,19 @@ class Plan < ApplicationRecord
 
   def set_name
     update_columns(name: human_readable_name)
+  end
+
+  def create_stripe_price
+    price = Stripe::Price.create(
+      {
+        currency: Setting.get('currency'),
+        unit_amount: amount,
+        metadata: { plan_id: id }
+      },
+      { api_key: Setting.get('stripe_secret_key') }
+    )
+    update_columns(stp_price_id: price.id)
+  rescue Stripe::StripeError => e
+    logger.error e
   end
 end
