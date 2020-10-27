@@ -1161,7 +1161,7 @@ fr:
         privacy:
           title: "Confidentialité"
           privacy_policy: "Politique de confidentialité"
-          input_the_dpo: "Data Protection Officer"
+          input_the_dpo: "Délégué à la protection des données"
           current_policy: "Politique courante"
           draft_from_USER_DATE: "Brouillon, enregistré par {USER}, le {DATE}"
           save_or_publish: "Enregistrer ou publier ?"
