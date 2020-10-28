@@ -240,6 +240,7 @@ zu:
         i_already_subscribed: "crwdns9175:0crwdne9175:0"
         more_information: "crwdns9177:0crwdne9177:0"
         your_subscription_expires_on_the_DATE: "crwdns9179:0{DATE}crwdne9179:0"
+        no_plans: "crwdns20912:0crwdne20912:0"
         my_group: "crwdns9181:0crwdne9181:0"
         his_group: "crwdns9183:0GENDER={GENDER}crwdne9183:0"
         he_wants_to_change_group: "crwdns20396:0ROLE={ROLE}crwdne20396:0"
