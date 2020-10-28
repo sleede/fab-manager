@@ -240,6 +240,7 @@ es:
         i_already_subscribed: "Ya me he suscrito"
         more_information: "Más información"
         your_subscription_expires_on_the_DATE: "Su suscripción termina {DATE}"
+        no_plans: "No plans are available for your group"
         my_group: "My grupo"
         his_group: "{GENDER, select, male{His} female{Her} other{Its}} group"
         he_wants_to_change_group: "{ROLE, select, member{Quiero} other{El usuario quiere}} cambiar el grupo"

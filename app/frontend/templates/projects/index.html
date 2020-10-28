@@ -23,7 +23,7 @@
 <section class="m-lg">
   <div class="row m-b-md">
     <div class="col-md-12 m-b">
-      <a href="javascript:void(0);" class="text-sm pull-right" name="button" ng-click="resetFiltersAndTriggerSearch()" ng-show="!openlab.searchOverWholeNetwork"><i class="fa fa-refresh"></i> {{ 'app.public.projects_list.reset_all_filters' | translate }}</a>
+      <a href="javascript:void(0);" class="text-sm pull-right reinit-filters" name="button" ng-click="resetFiltersAndTriggerSearch()" ng-show="!openlab.searchOverWholeNetwork"><i class="fa fa-refresh"></i> {{ 'app.public.projects_list.reset_all_filters' | translate }}</a>
 
       <span ng-if="openlab.projectsActive" uib-tooltip="{{ 'app.public.projects_list.tooltip_openlab_projects_switch' | translate }}" tooltip-trigger="mouseenter">
         <label for="searchOverWholeNetwork" class="control-label m-r text-sm" translate>{{ 'app.public.projects_list.search_over_the_whole_network' }}</label>

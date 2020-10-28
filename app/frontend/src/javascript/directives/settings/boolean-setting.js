@@ -6,8 +6,6 @@ Application.Directives.directive('booleanSetting', ['Setting', 'growl', '_t',
         name: '@',
         label: '@',
         settings: '=',
-        yesLabel: '@',
-        noLabel: '@',
         classes: '@',
         onBeforeSave: '='
       },
@@ -19,9 +17,28 @@ Application.Directives.directive('booleanSetting', ['Setting', 'growl', '_t',
           value: ($scope.settings[$scope.name] === 'true')
         };
 
-        // default values for the switch labels
-        $scope.yesLabel = $scope.yesLabel || 'app.shared.buttons.yes';
-        $scope.noLabel = $scope.noLabel || 'app.shared.buttons.no';
+        // ID of the html input
+        $scope.id = `setting-${$scope.setting.name}`;
+
+        /**
+         * This will update the value when the user toggles the switch button
+         * @param checked {Boolean}
+         * @param event {string}
+         * @param id {string}
+         */
+        $scope.toggleSetting = (checked, event, id) => {
+          setTimeout(() => {
+            $scope.setting.value = checked;
+            $scope.$apply();
+          }, 50);
+        };
+
+        /**
+         * This will force the component to update, and the child react component to re-render
+         */
+        $scope.refreshComponent = () => {
+          $scope.$apply();
+        };
 
         /**
          * Callback to save the setting value to the database
@@ -75,14 +92,14 @@ Application.Directives.directive('booleanSetting', ['Setting', 'growl', '_t',
               console.log(error);
             }
           );
-        }
+        };
 
         /**
          * Reset the value of the setting to its original state (when the component loads)
          */
         const resetValue = function () {
           $scope.setting.value = $scope.settings[$scope.name] === 'true';
-        }
+        };
       }
     });
   }

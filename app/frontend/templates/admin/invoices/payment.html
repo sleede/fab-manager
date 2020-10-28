@@ -11,9 +11,7 @@
                        label="app.admin.invoices.payment.enable_online_payment"
                        classes="m-l"
                        on-before-save="requireStripeKeys"
-                       fa-icon="fa-font"
-                       yes-label="app.shared.buttons.yes"
-                       no-label="app.shared.buttons.no">
+                       fa-icon="fa-font">
       </boolean-setting>
     </div>
     <div class="row m-t" ng-show="allSettings.online_payment_module === 'true'">

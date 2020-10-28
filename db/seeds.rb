@@ -258,8 +258,6 @@ unless Setting.find_by(name: 'about_contacts').try(:value)
   setting = Setting.find_or_initialize_by(name: 'about_contacts')
   setting.value = <<~HTML
     <dl>
-    <dt>Contact commercial :</dt>
-    <dd>contact@fab-manager.com</dd>
     <dt>Support technique :</dt>
     <dd><a href="https://forum.fab-manager.com">Forum</a></dd>
     <dd><a href="https://feedback.fab-manager.com">Feedback</a></dd>

@@ -77,7 +77,7 @@
         <fab-user-avatar ng-model="project.author.user_avatar" avatar-class="thumb-50"></fab-user-avatar>
       </div>
       <div>
-        <a ng-show="project.author_id" class="text-sm font-sbold" ui-sref="app.logged.members_show({id: project.author.slug})">
+        <a ng-show="project.author_id" class="text-sm font-sbold project-author" ui-sref="app.logged.members_show({id: project.author.slug})">
           <i> {{ 'app.public.projects_show.by_name' | translate:{NAME:project.author.first_name} }}</i>
         </a>
         <span ng-hide="project.author_id" class="text-sm font-sbold text-gray" translate>{{ 'app.public.projects_show.deleted_user' }}</span>

@@ -87,7 +87,7 @@ GEM
     cldr-plurals-runtime-rb (1.0.1)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
-    concurrent-ruby (1.1.6)
+    concurrent-ruby (1.1.7)
     connection_pool (2.2.3)
     coveralls_reborn (0.18.0)
       simplecov (>= 0.18.1, < 0.20.0)

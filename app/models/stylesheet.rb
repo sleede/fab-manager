@@ -93,8 +93,16 @@ class Stylesheet < ApplicationRecord
       .btn-link { color: #{Stylesheet.primary} !important; }
       .btn-link:hover { color: #{Stylesheet.primary_dark} !important; }
       a { color: #{Stylesheet.primary}; }
+      .about-page-link a.about-link, .user-profile-nav b.caret { color: #{Stylesheet.primary}; }
+      .app-generator a, .home-events h4 a, a.reinit-filters, .pricing-panel a, .calendar-url a, .article a, a.project-author, a.dsq-brlink, .alert a, .about-fablab a, a.collected-infos { color: #{Stylesheet.primary}; }
+      .app-generator a:hover, .home-events h4 a:hover, a.reinit-filters:hover, .pricing-panel a:hover, .calendar-url a:hover, .article a:hover, a.project-author:hover, a.dsq-brlink:hover, .widget .widget-content a:hover, .alert a:hover, .about-fablab a:hover, a.collected-infos:hover { color: #{Stylesheet.primary_dark}; }
+      .btn.btn-default.reserve-button, .btn.btn-default.show-button, .btn.btn-default.red { color: #{Stylesheet.primary} !important; }
+      .nav.nav-tabs .uib-tab.nav-item:not(.active) a { color: #{Stylesheet.primary}; }
+      .article h2, .article h3, .article h5 { color: #{Stylesheet.primary} !important; }
+      table.table thead tr th a, table.table tbody tr td a:not(.btn) { color: #{Stylesheet.primary}; }
+      table.table thead tr th a:hover, table.table tbody tr td a:not(.btn):hover { color: #{Stylesheet.primary_dark}; }
       a:hover, a:focus { color: #{Stylesheet.primary_dark}; }
-      h2, h3, h5 { color: #{Stylesheet.primary}; }
+      h2, h3, h3.red, h5 { color: #{Stylesheet.primary} !important; }
       h5:after { background-color: #{Stylesheet.primary}; }
       .bg-yellow { background-color: #{Stylesheet.secondary} !important; color: #{Stylesheet.secondary_text_color}; }
       .event:hover { background-color: #{Stylesheet.primary}; color: #{Stylesheet.secondary_text_color}; }

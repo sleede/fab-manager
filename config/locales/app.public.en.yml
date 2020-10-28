@@ -240,6 +240,7 @@ en:
         i_already_subscribed: "I already subscribed"
         more_information: "More information"
         your_subscription_expires_on_the_DATE: "Your subscription expires on the {DATE}"
+        no_plans: "No plans are available for your group"
         my_group: "My group"
         his_group: "{GENDER, select, male{His} female{Her} other{Its}} group"
         he_wants_to_change_group: "{ROLE, select, member{I want} other{The user wants}} to change group"
