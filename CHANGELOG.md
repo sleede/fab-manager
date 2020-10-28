@@ -8,6 +8,7 @@
 - Display a message when no plans are available
 - Fix a bug: in the settings area, boolean switches are always shown as false
 - Fix a bug: public cards presenting the plans in the public area, have bogus style
+- Fix a bug: theme primary color is ignored on links
 - Updated stripe gem to 5.21.0
 - [TODO DEPLOY] `rails fablab:stripe:plans_prices`
 - [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
