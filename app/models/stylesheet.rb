@@ -94,6 +94,7 @@ class Stylesheet < ApplicationRecord
       .btn-link:hover { color: #{Stylesheet.primary_dark} !important; }
       a { color: #{Stylesheet.primary}; }
       .about-page-link a.about-link { color: #{Stylesheet.primary}; }
+      .user-profile-nav b.caret { color: #{Stylesheet.primary}; }
       a:hover, a:focus { color: #{Stylesheet.primary_dark}; }
       h2, h3, h5 { color: #{Stylesheet.primary}; }
       h5:after { background-color: #{Stylesheet.primary}; }
