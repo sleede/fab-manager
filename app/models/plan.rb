@@ -56,13 +56,15 @@ class Plan < ApplicationRecord
 
   def create_machines_prices
     Machine.all.each do |machine|
-      Price.create(priceable: machine, plan: self, group_id: group_id, amount: 0)
+      default_price = Price.find_by(priceable: machine, plan: nil, group_id: group_id)&.amount || 0
+      Price.create(priceable: machine, plan: self, group_id: group_id, amount: default_price)
     end
   end
 
   def create_spaces_prices
     Space.all.each do |space|
-      Price.create(priceable: space, plan: self, group_id: group_id, amount: 0)
+      default_price = Price.find_by(priceable: space, plan: nil, group_id: group_id)&.amount || 0
+      Price.create(priceable: space, plan: self, group_id: group_id, amount: default_price)
     end
   end
 
