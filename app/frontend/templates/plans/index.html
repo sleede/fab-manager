@@ -31,16 +31,7 @@
                  ng-class="{'col-md-12 col-lg-12 b-r':(plansGroup.plans.filter(filterDisabledPlans).length % 2 == 1 && key == plansGroup.plans.filter(filterDisabledPlans).length-1)}"
                  ng-repeat="(key, plan) in plansGroup.plans.filter(filterDisabledPlans) | orderBy: '-ui_weight'">
 
-                <h3 class="title">{{ plan.base_name }}</h3>
-
-                <div class="content">
-                  <div class="wrap">
-                    <div class="price">
-                      <div class="amount" data-fittext>{{plan.amount | currency}}</div>
-                      <span class="period">{{ plan.interval | planIntervalFilter: plan.interval_count }}</span>
-                    </div>
-                  </div>
-                </div>
+                <plan-card plan="plan"></plan-card>
 
                 <div class="cta-button" ng-if="isAuthorized('member') || (isAuthorized('manager') && ctrl.member.id === currentUser.id)">
                   <button class="btn btn-default rounded" ng-click="selectPlan(plan)" ng-if="ctrl.member.subscribed_plan.id != plan.id" ng-disabled="ctrl.member.subscribed_plan" ng-class="{ 'bg-yellow': selectedPlan==plan }">
