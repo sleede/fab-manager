@@ -17,61 +17,65 @@
 <div class="row no-gutter">
   <div class="col-sm-12 col-md-9 b-r">
 
-    <div class="row m-t m-b padder" ng-repeat="plansGroup in plansClassifiedByGroup | groupFilter:ctrl.member" ng-show="plansGroup.actives > 0">
+    <div class="row m-t m-b padder" ng-repeat="plansGroup in plansClassifiedByGroup | groupFilter:ctrl.member">
 
-      <div class="col-md-12 text-center">
-        <h2 class="text-u-c">{{plansGroup.name}}</h2>
-      </div>
-      <div class="row row-centered padder">
-        <div class="col-xs-12 col-md-12 col-lg-10 col-centered no-gutter">
+      <div ng-show="plansGroup.actives > 0">
+        <div class="col-md-12 text-center">
+          <h2 class="text-u-c">{{plansGroup.name}}</h2>
+        </div>
+        <div class="row row-centered padder">
+          <div class="col-xs-12 col-md-12 col-lg-10 col-centered no-gutter">
 
-          <!-- ng-class directive center the last item if the list length is odd -->
-          <div class="pricing-panel col-xs-12 col-md-6 col-lg-6 text-center"
-               ng-class="{'col-md-12 col-lg-12 b-r':(plansGroup.plans.filter(filterDisabledPlans).length % 2 == 1 && key == plansGroup.plans.filter(filterDisabledPlans).length-1)}"
-               ng-repeat="(key, plan) in plansGroup.plans.filter(filterDisabledPlans) | orderBy: '-ui_weight'">
+            <!-- ng-class directive center the last item if the list length is odd -->
+            <div class="pricing-panel col-xs-12 col-md-6 col-lg-6 text-center"
+                 ng-class="{'col-md-12 col-lg-12 b-r':(plansGroup.plans.filter(filterDisabledPlans).length % 2 == 1 && key == plansGroup.plans.filter(filterDisabledPlans).length-1)}"
+                 ng-repeat="(key, plan) in plansGroup.plans.filter(filterDisabledPlans) | orderBy: '-ui_weight'">
 
-              <h3 class="title">{{ plan.base_name }}</h3>
+                <h3 class="title">{{ plan.base_name }}</h3>
 
-              <div class="content">
-                <div class="wrap">
-                  <div class="price">
-                    <div class="amount" data-fittext>{{plan.amount | currency}}</div>
-                    <span class="period">{{ plan.interval | planIntervalFilter: plan.interval_count }}</span>
+                <div class="content">
+                  <div class="wrap">
+                    <div class="price">
+                      <div class="amount" data-fittext>{{plan.amount | currency}}</div>
+                      <span class="period">{{ plan.interval | planIntervalFilter: plan.interval_count }}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="cta-button" ng-if="isAuthorized('member') || (isAuthorized('manager') && ctrl.member.id === currentUser.id)">
-                <button class="btn btn-default rounded" ng-click="selectPlan(plan)" ng-if="ctrl.member.subscribed_plan.id != plan.id" ng-disabled="ctrl.member.subscribed_plan" ng-class="{ 'bg-yellow': selectedPlan==plan }">
-                  <span ng-if="ctrl.member" translate>{{ 'app.public.plans.i_choose_that_plan' }}</span>
-                  <span ng-if="!ctrl.member" translate>{{ 'app.public.plans.i_subscribe_online' }}</span>
-                </button>
+                <div class="cta-button" ng-if="isAuthorized('member') || (isAuthorized('manager') && ctrl.member.id === currentUser.id)">
+                  <button class="btn btn-default rounded" ng-click="selectPlan(plan)" ng-if="ctrl.member.subscribed_plan.id != plan.id" ng-disabled="ctrl.member.subscribed_plan" ng-class="{ 'bg-yellow': selectedPlan==plan }">
+                    <span ng-if="ctrl.member" translate>{{ 'app.public.plans.i_choose_that_plan' }}</span>
+                    <span ng-if="!ctrl.member" translate>{{ 'app.public.plans.i_subscribe_online' }}</span>
+                  </button>
 
-                <button class="btn btn-warning bg-yellow rounded" ng-if="ctrl.member.subscribed_plan.id == plan.id" ng-disabled="ctrl.member.subscribed_plan.id == plan.id" translate>
-                  {{ 'app.public.plans.i_already_subscribed' }}
-                </button>
+                  <button class="btn btn-warning bg-yellow rounded" ng-if="ctrl.member.subscribed_plan.id == plan.id" ng-disabled="ctrl.member.subscribed_plan.id == plan.id" translate>
+                    {{ 'app.public.plans.i_already_subscribed' }}
+                  </button>
 
-              </div>
+                </div>
 
-              <div class="cta-button" ng-if="isAuthorized('admin') || (isAuthorized('manager') && ctrl.member.id != currentUser.id)">
-                <button class="btn btn-default rounded" ng-click="selectPlan(plan)" ng-class="{ 'bg-yellow': selectedPlan==plan }" ng-disabled="!ctrl.member">
-                  <span translate>{{ 'app.public.plans.i_choose_that_plan' }}</span>
-                </button>
-              </div>
+                <div class="cta-button" ng-if="isAuthorized('admin') || (isAuthorized('manager') && ctrl.member.id != currentUser.id)">
+                  <button class="btn btn-default rounded" ng-click="selectPlan(plan)" ng-class="{ 'bg-yellow': selectedPlan==plan }" ng-disabled="!ctrl.member">
+                    <span translate>{{ 'app.public.plans.i_choose_that_plan' }}</span>
+                  </button>
+                </div>
 
-              <br ng-show="!plan.plan_file_url">  <!-- TODO Refacto with CSS -->
-              <a ng-href="{{ plan.plan_file_url }}" ng-show="plan.plan_file_url" target="_blank" translate>{{ 'app.public.plans.more_information' }}</a>
+                <br ng-show="!plan.plan_file_url">  <!-- TODO Refacto with CSS -->
+                <a ng-href="{{ plan.plan_file_url }}" ng-show="plan.plan_file_url" target="_blank" translate>{{ 'app.public.plans.more_information' }}</a>
+            </div>
+          </div>
+
+
+          <div class="col-xs-12 col-md-12 col-lg-10 col-centered no-gutter" ng-if="ctrl.member.subscription && isInPast(ctrl.member.subscription.expired_at)">
+            <uib-alert type="info">
+              {{ 'app.public.plans.your_subscription_expires_on_the_DATE' | translate:{DATE:(ctrl.member.subscription.expired_at | amDateFormat:'L' )} }}
+            </uib-alert>
           </div>
 
         </div>
-
-
-        <div class="col-xs-12 col-md-12 col-lg-10 col-centered no-gutter" ng-if="ctrl.member.subscription && isInPast(ctrl.member.subscription.expired_at)">
-          <uib-alert type="info">
-            {{ 'app.public.plans.your_subscription_expires_on_the_DATE' | translate:{DATE:(ctrl.member.subscription.expired_at | amDateFormat:'L' )} }}
-          </uib-alert>
-        </div>
-
+      </div>
+      <div ng-show="plansGroup.actives === 0 && ctrl.member" class="m-lg" translate>
+        {{ 'app.public.plans.no_plans' }}
       </div>
 
     </div>
