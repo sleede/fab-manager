@@ -5,6 +5,7 @@
 - Enlarged privacy policy display and edition zones
 - Removed fab-manager email address from the seeds
 - Fix a bug: in the settings area, boolean switches are always shown as false
+- Fix a bug: public cards presenting the plans in the public area, have bogus style
 
 ## v4.6.2 2020 October 23
 

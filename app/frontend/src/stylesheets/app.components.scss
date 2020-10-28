@@ -37,7 +37,7 @@
 
   .fa {
     // color: $red;
- 
+
   }
 
   .widget-content {
@@ -73,7 +73,7 @@
     text-align: center;
 
     //color: $red;
- 
+
   }
 }
 
@@ -297,12 +297,9 @@
       display: inline-block;
       background: white;
 
-      @include border-radius(50%);
+      @include border-radius(50%, 50%, 50%, 50%);
 
       border: 3px solid;
-
-      // $yellow;
-   
     }
 
     .price {
@@ -313,7 +310,7 @@
       width: 84px;
       background-color: black;
 
-      @include border-radius(50%);
+      @include border-radius(50%, 50%, 50%, 50%);
 
       .amount {
         padding-top: 16px;
@@ -343,18 +340,13 @@
       background-color: white;
       padding-left: 30px;
       padding-right: 30px;
-
-      //&:hover { background-color: $yellow; }
-   
     }
   }
 }
 
 .well {
   &.well-warning {
-    //border-color: #ffdc4e;
-    //background-color: #ffdc4e;
-    @include border-radius(3px);
+    @include border-radius(3px, 3px, 3px, 3px);
 
     padding: 5px 10px;
   }
@@ -449,8 +441,6 @@
 
 .block-link {
   cursor: pointer;
-
-  //&:hover { background-color: $yellow; }
 }
 
 .form-control .ui-select-choices, .form-control .ui-select-match {
@@ -460,7 +450,7 @@
 .about-link {
   .label {
     font-size: rem-calc(26);
-    padding: 0px 10px 0px 11px;
+    padding: 0 10px 0 11px;
     vertical-align: bottom;
 
     &.label-icon {
@@ -495,7 +485,7 @@
     font-weight: 900;
 
     //black
- 
+
   }
 
   .about-title-aside {
