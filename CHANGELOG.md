@@ -8,6 +8,8 @@
 - Display a message when no plans are available
 - Fix a bug: in the settings area, boolean switches are always shown as false
 - Fix a bug: public cards presenting the plans in the public area, have bogus style
+- Fix a bug: theme primary color is ignored on links
+- [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
 
 ## v4.6.2 2020 October 23
 

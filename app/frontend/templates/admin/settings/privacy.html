@@ -4,7 +4,7 @@
   </div>
     <div class="panel-body">
 
-        <div class="row">
+        <div class="row about-fablab">
             <div class="col-md-8">
               <select class="form-control m-b history-select" ng-options="d.id as d.name for d in privacyDraftsHistory" ng-model="privacyPolicy.version" ng-change="handlePolicyRevisionChange()">
                 <option value="" translate>{{ 'app.admin.settings.privacy.current_policy' }}</option>
@@ -45,7 +45,7 @@
           </boolean-setting>
           <p>
             <span translate>{{ 'app.admin.settings.privacy.about_analytics' }}</span>
-            <a ng-click="analyticsModal()" class="pointer" translate>{{ 'app.admin.settings.privacy.read_more' }}</a>
+            <a ng-click="analyticsModal()" class="pointer collected-infos" translate>{{ 'app.admin.settings.privacy.read_more' }}</a>
           </p>
         </div>
       </div>
