@@ -10,6 +10,7 @@
 - Fix a bug: public cards presenting the plans in the public area, have bogus style
 - Updated stripe gem to 5.21.0
 - [TODO DEPLOY] `rails fablab:stripe:plans_prices`
+- [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
 
 ## v4.6.2 2020 October 23
 
