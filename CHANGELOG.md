@@ -5,6 +5,7 @@
 - Enlarged privacy policy display and edition zones
 - Removed fab-manager email address from the seeds
 - Fix a bug: in the settings area, boolean switches are always shown as false
+- Fix a bug: public cards presenting the plans in the public area, have bogus style
 - Updated stripe gem to 5.21.0
 - [TODO DEPLOY] `rails fablab:stripe:plans_prices`
 
