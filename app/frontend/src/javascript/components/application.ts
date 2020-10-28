@@ -1,10 +1,13 @@
 import { IModule } from "angular";
 
-export interface IApplication {
+interface IApplication {
     Components: IModule,
     Services: IModule,
     Controllers: IModule,
     Filters: IModule,
     Directives: IModule
 }
+
+declare var Application: IApplication;
+export default Application;
 
