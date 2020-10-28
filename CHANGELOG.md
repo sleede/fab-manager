@@ -4,6 +4,8 @@
 - Enabled Hot module replacement
 - Enlarged privacy policy display and edition zones
 - Removed fab-manager email address from the seeds
+- Initialize new plans with default prices for machines & spaces
+- Display a message when no plans are available
 - Fix a bug: in the settings area, boolean switches are always shown as false
 - Fix a bug: public cards presenting the plans in the public area, have bogus style
 - Updated stripe gem to 5.21.0
