@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: unable to build homepage custom stylesheet
+
 ## v4.6.3 2020 October 28
 
 - Enabled Typescript
