@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# frozen_string_literal: false
 
 # Stylesheet is a cached CSS file that allows to easily customize the interface of Fab-manager with some configurable colors and
 # a picture for the background of the user's profile.
@@ -78,8 +78,14 @@ class Stylesheet < ApplicationRecord
   end
 
   def self.theme_css
-    template = ERB.new(File.read('app/themes/casemate/style.scss.erb')).result
-    engine = SassC::Engine.new(template, style: :compressed)
+    erb_files = Dir['app/themes/casemate/**/*.scss.erb']
+    scss_files = Dir['app/themes/casemate/**/*.scss']
+
+    templates = ''
+    erb_files.each { |erb_file| templates.concat(ERB.new(File.read(erb_file)).result) }
+    scss_files.each { |scss_file| templates.concat(File.read(scss_file)) }
+
+    engine = SassC::Engine.new(templates, style: :compressed)
     engine.render.presence
   end
 
