@@ -1,0 +1,295 @@
+$primary: <%= Stylesheet.primary %> !default;
+$primary-light: <%= Stylesheet.primary_light %> !default;
+$primary-dark: <%= Stylesheet.primary_dark %> !default;
+
+$secondary: <%= Stylesheet.secondary %> !default;
+$secondary-light: <%= Stylesheet.secondary_light %> !default;
+$secondary-dark: <%= Stylesheet.secondary_dark %> !default;
+
+$primary-text-color: <%= Stylesheet.primary_text_color %> !default;
+$secondary-text-color: <%= Stylesheet.secondary_text_color %> !default;
+
+$primary-decoration-color: <%= Stylesheet.primary_decoration_color %> !default;
+
+.bg-red {
+  background-color: $primary;
+}
+
+.bg-red-dark {
+  background-color: $primary;
+}
+
+#nav .nav {
+  background-color: $primary;
+}
+
+#nav .nav > li > a {
+  color: $primary-text-color;
+}
+
+#nav .nav > li > a:hover,
+#nav .nav > li > a:focus {
+  background-color: $primary-light;
+  color: $primary-text-color;
+}
+
+#nav .nav > li > a.active {
+  border-left: 3px solid $primary-dark;
+  background-color: $primary-light;
+  color: $primary-text-color;
+}
+
+.nav-primary ul.nav > li.menu-spacer {
+  background: linear-gradient(45deg, $primary-decoration-color, transparent);
+}
+
+.nav-primary .text-bordeau {
+  color: $primary-decoration-color;
+}
+
+.btn-theme {
+  background-color: $primary;
+  color: $primary-text-color;
+}
+
+.btn-theme:active,
+.btn-theme:hover {
+  background-color: $primary-dark;
+  color: $primary-text-color;
+}
+
+.label-theme {
+  background-color: $primary;
+  color: $primary-text-color;
+}
+
+.btn-link {
+  color: $primary !important;
+}
+
+.btn-link:hover {
+  color: $primary-dark !important;
+}
+
+a {
+  color: $primary;
+}
+
+.about-page-link a.about-link,
+.user-profile-nav b.caret {
+  color: $primary;
+}
+
+.app-generator a,
+.home-events h4 a,
+a.reinit-filters,
+.pricing-panel a,
+.calendar-url a,
+.article a,
+a.project-author,
+a.dsq-brlink,
+.alert a,
+.about-fablab a,
+a.collected-infos {
+  color: $primary;
+}
+
+.app-generator a:hover,
+.home-events h4 a:hover,
+a.reinit-filters:hover,
+.pricing-panel a:hover,
+.calendar-url a:hover,
+.article a:hover,
+a.project-author:hover,
+a.dsq-brlink:hover,
+.widget .widget-content a:hover,
+.alert a:hover,
+.about-fablab a:hover,
+a.collected-infos:hover {
+  color: $primary-dark;
+}
+
+.btn.btn-default.reserve-button,
+.btn.btn-default.show-button,
+.btn.btn-default.red {
+  color: $primary !important;
+}
+
+.nav.nav-tabs .uib-tab.nav-item:not(.active) a {
+  color: $primary;
+}
+
+.article h2,
+.article h3,
+.article h5 {
+  color: $primary !important;
+}
+
+table.table thead tr th a,
+table.table tbody tr td a:not(.btn) {
+  color: $primary;
+}
+
+table.table thead tr th a:hover,
+table.table tbody tr td a:not(.btn):hover {
+  color: $primary-dark;
+}
+
+a:hover,
+a:focus {
+  color: $primary-dark;
+}
+
+h2,
+h3,
+h3.red,
+h5 {
+  color: $primary !important;
+}
+
+h5:after {
+  background-color: $primary;
+}
+
+.bg-yellow {
+  background-color: $secondary !important;
+  color: $secondary-text-color;
+}
+
+.event:hover {
+  background-color: $primary;
+  color: $secondary-text-color;
+}
+
+.widget h3 {
+  color: $primary;
+}
+
+.modal-header h1,
+.custom-invoice .modal-header h1 {
+  color: $primary;
+}
+
+.block-link:hover,
+.fc-toolbar .fc-button:hover,
+.fc-toolbar .fc-button:active,
+.fc-toolbar .fc-button.fc-state-active {
+  background-color: $secondary;
+  color: $secondary-text-color !important;
+}
+
+.block-link:hover .user-name {
+  color: $secondary-text-color !important;
+}
+
+.carousel-control:hover,
+.carousel-control:focus,
+.carousel-caption .title a:hover {
+  color: $secondary;
+}
+
+.well.well-warning {
+  border-color: $secondary;
+  background-color: $secondary;
+  color: $secondary-text-color;
+}
+
+.text-yellow {
+  color: $secondary !important;
+}
+
+.red {
+  color: $primary !important;
+}
+
+.btn-warning,
+.editable-buttons button[type=submit].btn-primary {
+  background-color: $secondary !important;
+  border-color: $secondary !important;
+  color: $secondary-text-color;
+}
+
+.btn-warning:hover,
+.btn-warning:focus,
+.btn-warning.focus,
+.btn-warning:active,
+.btn-warning.active,
+.editable-buttons button[type=submit].btn-primary:hover,
+.editable-buttons button[type=submit].btn-primary:focus,
+.editable-buttons button.focus[type=submit].btn-primary,
+.editable-buttons button[type=submit].btn-primary:active,
+.editable-buttons button.active[type=submit].btn-primary,
+.open > .btn-warning.dropdown-toggle,
+.editable-buttons .open > button.dropdown-toggle[type=submit].btn-primary {
+  background-color: $secondary-dark !important;
+  border-color: $secondary-dark !important;
+  color: $secondary-text-color;
+}
+
+.btn-warning-full {
+  border-color: $secondary;
+  background-color: $secondary;
+  color: $secondary-text-color !important;
+}
+
+.heading .heading-btn a:hover {
+  background-color: $secondary;
+  color: $secondary-text-color;
+}
+
+.pricing-panel .content .wrap {
+  border-color: $secondary;
+}
+
+.pricing-panel .cta-button .btn:hover,
+.pricing-panel .cta-button .custom-invoice .modal-body .elements li:hover,
+.custom-invoice .modal-body .elements .pricing-panel .cta-button li:hover {
+  background-color: $secondary !important;
+  color: $secondary-text-color;
+}
+
+a.label:hover,
+a.label:focus,
+.form-control.form-control-ui-select .select2-choices a.select2-search-choice:hover,
+.form-control.form-control-ui-select .select2-choices a.select2-search-choice:focus {
+  color: $primary;
+}
+
+.about-picture {
+  background: linear-gradient( rgba(255,255,255,0.12), rgba(255,255,255,0.13) ),
+              linear-gradient(<%=Stylesheet.primary_with_alpha(0.78)%>, <%=Stylesheet.primary_with_alpha(0.82)%>),
+              url('/about-fablab.jpg') no-repeat;
+}
+
+.social-icons > div:hover {
+  background-color: $secondary;
+  color: $secondary-text-color;
+}
+
+.profile-top {
+  background: linear-gradient( rgba(255,255,255,0.12), rgba(255,255,255,0.13) ),
+              linear-gradient(<%=Stylesheet.primary_with_alpha(0.78)%>, <%=Stylesheet.primary_with_alpha(0.82)%>),
+              url("<%=CustomAsset.get_url('profile-image-file') || '/about-fablab.jpg'%>") no-repeat;
+}
+
+.profile-top .social-links a:hover {
+  background-color: $secondary !important;
+  border-color: $secondary !important;
+  color: $secondary-text-color;
+}
+
+section#cookies-modal div.cookies-consent .cookies-actions button.accept {
+  background-color: $secondary;
+  color: $secondary-text-color;
+}
+
+.pricing-panel  {
+  .cta-button {
+    button.subscribe-button {
+      border-color: $secondary;
+      &.selected-card {
+        background-color: $secondary;
+      }
+    }
+  }
+}

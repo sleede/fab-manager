@@ -15,7 +15,7 @@ class Stylesheet < ApplicationRecord
 
   def rebuild!
     if Stylesheet.primary && Stylesheet.secondary && name == 'theme'
-      update(contents: Stylesheet.css)
+      update(contents: Stylesheet.theme_css)
     elsif name == 'home_page'
       update(contents: Stylesheet.home_page_css)
     end
@@ -29,7 +29,7 @@ class Stylesheet < ApplicationRecord
     if Stylesheet.theme
       Stylesheet.theme.rebuild!
     else
-      Stylesheet.create!(contents: Stylesheet.css, name: 'theme')
+      Stylesheet.create!(contents: Stylesheet.theme_css, name: 'theme')
     end
   end
 
@@ -77,56 +77,10 @@ class Stylesheet < ApplicationRecord
     Stylesheet.secondary.paint.brightness <= BRIGHTNESS_LOW_LIMIT ? 'white' : 'black'
   end
 
-  def self.css # rubocop:disable Metrics/AbcSize
-    <<~CSS
-      .bg-red { background-color: #{Stylesheet.primary}; }
-      .bg-red-dark { background-color: #{Stylesheet.primary}; }
-      #nav .nav { background-color: #{Stylesheet.primary}; }
-      #nav .nav > li > a { color: #{Stylesheet.primary_text_color}; }
-      #nav .nav > li > a:hover, #nav .nav > li > a:focus { background-color: #{Stylesheet.primary_light}; color: #{Stylesheet.primary_text_color}; }
-      #nav .nav > li > a.active { border-left: 3px solid #{Stylesheet.primary_dark}; background-color: #{Stylesheet.primary_light}; color: #{Stylesheet.primary_text_color}; }
-      .nav-primary ul.nav > li.menu-spacer { background: linear-gradient(45deg, #{Stylesheet.primary_decoration_color}, transparent); }
-      .nav-primary .text-bordeau { color: #{Stylesheet.primary_decoration_color}; }
-      .btn-theme { background-color: #{Stylesheet.primary}; color: #{Stylesheet.primary_text_color}; }
-      .btn-theme:active, .btn-theme:hover { background-color: #{Stylesheet.primary_dark}; color: #{Stylesheet.primary_text_color}; }
-      .label-theme { background-color: #{Stylesheet.primary}; color: #{Stylesheet.primary_text_color}; }
-      .btn-link { color: #{Stylesheet.primary} !important; }
-      .btn-link:hover { color: #{Stylesheet.primary_dark} !important; }
-      a { color: #{Stylesheet.primary}; }
-      .about-page-link a.about-link, .user-profile-nav b.caret { color: #{Stylesheet.primary}; }
-      .app-generator a, .home-events h4 a, a.reinit-filters, .pricing-panel a, .calendar-url a, .article a, a.project-author, a.dsq-brlink, .alert a, .about-fablab a, a.collected-infos { color: #{Stylesheet.primary}; }
-      .app-generator a:hover, .home-events h4 a:hover, a.reinit-filters:hover, .pricing-panel a:hover, .calendar-url a:hover, .article a:hover, a.project-author:hover, a.dsq-brlink:hover, .widget .widget-content a:hover, .alert a:hover, .about-fablab a:hover, a.collected-infos:hover { color: #{Stylesheet.primary_dark}; }
-      .btn.btn-default.reserve-button, .btn.btn-default.show-button, .btn.btn-default.red { color: #{Stylesheet.primary} !important; }
-      .nav.nav-tabs .uib-tab.nav-item:not(.active) a { color: #{Stylesheet.primary}; }
-      .article h2, .article h3, .article h5 { color: #{Stylesheet.primary} !important; }
-      table.table thead tr th a, table.table tbody tr td a:not(.btn) { color: #{Stylesheet.primary}; }
-      table.table thead tr th a:hover, table.table tbody tr td a:not(.btn):hover { color: #{Stylesheet.primary_dark}; }
-      a:hover, a:focus { color: #{Stylesheet.primary_dark}; }
-      h2, h3, h3.red, h5 { color: #{Stylesheet.primary} !important; }
-      h5:after { background-color: #{Stylesheet.primary}; }
-      .bg-yellow { background-color: #{Stylesheet.secondary} !important; color: #{Stylesheet.secondary_text_color}; }
-      .event:hover { background-color: #{Stylesheet.primary}; color: #{Stylesheet.secondary_text_color}; }
-      .widget h3 { color: #{Stylesheet.primary}; }
-      .modal-header h1, .custom-invoice .modal-header h1 { color: #{Stylesheet.primary}; }
-      .block-link:hover, .fc-toolbar .fc-button:hover, .fc-toolbar .fc-button:active, .fc-toolbar .fc-button.fc-state-active { background-color: #{Stylesheet.secondary}; color: #{Stylesheet.secondary_text_color} !important; }
-      .block-link:hover .user-name { color: #{Stylesheet.secondary_text_color} !important; }
-      .carousel-control:hover, .carousel-control:focus, .carousel-caption .title a:hover { color: #{Stylesheet.secondary}; }
-      .well.well-warning { border-color: #{Stylesheet.secondary};  background-color: #{Stylesheet.secondary}; color: #{Stylesheet.secondary_text_color};  }
-      .text-yellow { color: #{Stylesheet.secondary} !important; }
-      .red { color: #{Stylesheet.primary} !important; }
-      .btn-warning, .editable-buttons button[type=submit].btn-primary { background-color: #{Stylesheet.secondary} !important; border-color: #{Stylesheet.secondary} !important; color: #{Stylesheet.secondary_text_color}; }
-      .btn-warning:hover, .editable-buttons button[type=submit].btn-primary:hover, .btn-warning:focus, .editable-buttons button[type=submit].btn-primary:focus, .btn-warning.focus, .editable-buttons button.focus[type=submit].btn-primary, .btn-warning:active, .editable-buttons button[type=submit].btn-primary:active, .btn-warning.active, .editable-buttons button.active[type=submit].btn-primary, .open > .btn-warning.dropdown-toggle, .editable-buttons .open > button.dropdown-toggle[type=submit].btn-primary { background-color: #{Stylesheet.secondary_dark} !important; border-color: #{Stylesheet.secondary_dark} !important; color: #{Stylesheet.secondary_text_color}; }
-      .btn-warning-full { border-color: #{Stylesheet.secondary}; background-color: #{Stylesheet.secondary}; color: #{Stylesheet.secondary_text_color} !important; }
-      .heading .heading-btn a:hover { background-color: #{Stylesheet.secondary}; color: #{Stylesheet.secondary_text_color}; }
-      .pricing-panel .content .wrap { border-color: #{Stylesheet.secondary}; }
-      .pricing-panel .cta-button .btn:hover, .pricing-panel .cta-button .custom-invoice .modal-body .elements li:hover, .custom-invoice .modal-body .elements .pricing-panel .cta-button li:hover { background-color: #{Stylesheet.secondary} !important; color: #{Stylesheet.secondary_text_color}; }
-      a.label:hover, .form-control.form-control-ui-select .select2-choices a.select2-search-choice:hover, a.label:focus, .form-control.form-control-ui-select .select2-choices a.select2-search-choice:focus { color: #{Stylesheet.primary}; }
-      .about-picture { background: linear-gradient( rgba(255,255,255,0.12), rgba(255,255,255,0.13) ), linear-gradient( #{Stylesheet.primary_with_alpha(0.78)}, #{Stylesheet.primary_with_alpha(0.82)} ), url('/about-fablab.jpg') no-repeat; }
-      .social-icons > div:hover { background-color: #{Stylesheet.secondary}; color: #{Stylesheet.secondary_text_color}; }
-      .profile-top { background: linear-gradient( rgba(255,255,255,0.12), rgba(255,255,255,0.13) ), linear-gradient(#{Stylesheet.primary_with_alpha(0.78)}, #{Stylesheet.primary_with_alpha(0.82)} ), url('#{CustomAsset.get_url('profile-image-file') || '/about-fablab.jpg'}') no-repeat; }
-      .profile-top .social-links a:hover { background-color: #{Stylesheet.secondary} !important; border-color: #{Stylesheet.secondary} !important; color: #{Stylesheet.secondary_text_color}; }
-      section#cookies-modal div.cookies-consent .cookies-actions button.accept { background-color: #{Stylesheet.secondary}; color: #{Stylesheet.secondary_text_color}; }
-    CSS
+  def self.theme_css
+    template = ERB.new(File.read('app/themes/casemate/style.scss.erb')).result
+    engine = SassC::Engine.new(template, style: :compressed)
+    engine.render.presence
   end
 
   ## ===== HOME PAGE =====
@@ -149,7 +103,7 @@ class Stylesheet < ApplicationRecord
   end
 
   def self.home_page_css
-    engine = Sass::Engine.new(home_style, syntax: :scss)
+    engine = SassC::Engine.new(home_style, style: :compressed)
     engine.render.presence || '.home-page {}'
   end
 end

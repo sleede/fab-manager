@@ -72,16 +72,27 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
      * @param plan {Object} The plan to subscribe to
      */
     $scope.selectPlan = function (plan) {
-      if ($scope.isAuthenticated()) {
-        if ($scope.selectedPlan !== plan) {
-          $scope.selectedPlan = plan;
-          updateCartPrice();
+      setTimeout(() => {
+        if ($scope.isAuthenticated()) {
+          if ($scope.selectedPlan !== plan) {
+            $scope.selectedPlan = plan;
+            updateCartPrice();
+          } else {
+            $scope.selectedPlan = null;
+          }
         } else {
-          $scope.selectedPlan = null;
+          $scope.login();
         }
-      } else {
-        $scope.login();
-      }
+        $scope.$apply();
+      }, 50);
+    };
+
+    /**
+     * Check if the provided plan is currently selected
+     * @param plan {Object} Resource plan
+     */
+    $scope.isSelected = function (plan) {
+      return $scope.selectedPlan === plan;
     };
 
     /**

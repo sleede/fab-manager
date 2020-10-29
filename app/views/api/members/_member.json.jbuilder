@@ -65,7 +65,7 @@ if member.subscription
     json.expired_at member.subscription.expired_at.iso8601
     json.canceled_at member.subscription.canceled_at.iso8601 if member.subscription.canceled_at
     json.stripe member.subscription.stp_subscription_id.present?
-    json.plan do
+    json.plan do # TODO, refactor: duplicates subscribed_plan
       json.id member.subscription.plan.id
       json.base_name member.subscription.plan.base_name
       json.name member.subscription.plan.name
@@ -82,4 +82,5 @@ json.machine_credits member.machine_credits do |mc|
   json.machine_id mc.creditable_id
   json.hours_used mc.users_credits.find_by(user_id: member.id).hours_used
 end
+# TODO, missing space_credits?
 json.last_sign_in_at member.last_sign_in_at.iso8601 if member.last_sign_in_at
