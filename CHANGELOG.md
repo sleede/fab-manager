@@ -1,6 +1,8 @@
 # Changelog Fab-manager
 
+- Refactored theme builder to use scss files
 - Fix a bug: unable to build homepage custom stylesheet
+- [TODO DEPLOY] `rails fablab:stripe:plans_prices`
 
 ## v4.6.3 2020 October 28
 
@@ -14,7 +16,6 @@
 - Fix a bug: public cards presenting the plans in the public area, have bogus style
 - Fix a bug: theme primary color is ignored on links
 - Updated stripe gem to 5.21.0
-- [TODO DEPLOY] `rails fablab:stripe:plans_prices`
 - [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
 
 ## v4.6.2 2020 October 23
