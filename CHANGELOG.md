@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v4.6.3 2020 October 28
+
 - Enabled Typescript
 - Enabled Hot module replacement
 - Enlarged privacy policy display and edition zones
