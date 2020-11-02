@@ -40,7 +40,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
       },
       templateUrl: '/shared/_cart.html',
       link ($scope, element, attributes) {
-      // will store the user's plan if he choosed to buy one
+      // will store the user's plan if he chose to buy one
         $scope.selectedPlan = null;
 
         // total amount of the bill to pay
