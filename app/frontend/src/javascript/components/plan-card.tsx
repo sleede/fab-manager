@@ -33,6 +33,13 @@ const PlanCard: React.FC<PlanCardProps> = ({ plan, user, operator, onSelectPlan,
     return $filter('currency')(plan.amount);
   }
   /**
+   * Return the formatted localized amount, divided by the number of months (eg. 120 => "10,00 € / month")
+   */
+  const monthlyAmount = (): string => {
+    const monthly = Math.ceil(plan.amount / moment.duration(plan.interval_count, plan.interval).asMonths());
+    return $filter('currency')(monthly);
+  }
+  /**
    * Return the formatted localized duration of te given plan (eg. Month/3 => "3 mois")
    */
   const duration = (): string => {
@@ -63,6 +70,12 @@ const PlanCard: React.FC<PlanCardProps> = ({ plan, user, operator, onSelectPlan,
     return !!plan.plan_file_url;
   }
   /**
+   * Check if the plan is allowing a monthly payment schedule
+   */
+  const canBeScheduled = (): boolean => {
+    return plan.monthly_payment;
+  }
+  /**
    * Callback triggered when the user select the plan
    */
   const handleSelectPlan = (): void => {
@@ -72,12 +85,18 @@ const PlanCard: React.FC<PlanCardProps> = ({ plan, user, operator, onSelectPlan,
     <div>
       <h3 className="title">{plan.base_name}</h3>
       <div className="content">
-        <div className="wrap">
+        {canBeScheduled() && <div className="wrap-monthly">
+          <div className="price">
+            <div className="amount">{t('app.public.plans.AMOUNT_per_month', {AMOUNT: monthlyAmount()})}</div>
+            <span className="period">{duration()}</span>
+          </div>
+        </div>}
+        {!canBeScheduled() && <div className="wrap">
           <div className="price">
             <div className="amount">{amount()}</div>
             <span className="period">{duration()}</span>
           </div>
-        </div>
+        </div>}
       </div>
       {canSubscribeForMe() && <div className="cta-button">
         {!hasSubscribedToThisPlan() && <button className={`subscribe-button ${isSelected ? 'selected-card' : ''}`}

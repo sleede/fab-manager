@@ -300,17 +300,33 @@
       @include border-radius(50%, 50%, 50%, 50%);
 
       border: 3px solid;
+
+      .price {
+        width: 84px;
+
+        @include border-radius(50%, 50%, 50%, 50%);
+      }
     }
 
+    .wrap-monthly {
+      height: 100px;
+      width: 180px;
+      display: inline-block;
+      background: white;
+      border: 3px solid;
+      @include border-radius(25px, 25px, 25px, 25px);
+
+      .price {
+        width: 164px;
+        @include border-radius(20px, 20px, 20px, 20px);
+      }
+    }
     .price {
       position: relative;
       top: 5px;
       left: 5px;
       height: 84px;
-      width: 84px;
       background-color: black;
-
-      @include border-radius(50%, 50%, 50%, 50%);
 
       .amount {
         padding-top: 16px;

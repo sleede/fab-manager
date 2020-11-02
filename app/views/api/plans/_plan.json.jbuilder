@@ -9,7 +9,6 @@ if plan.plan_file
     json.id plan.plan_file.id
     json.attachment_identifier plan.plan_file.attachment_identifier
   end
-  json.plan_file_url plan.plan_file.attachment_url
 end
 
 if plan.respond_to?(:partners)
