@@ -52,7 +52,7 @@
 
     <coupon show="isSlotsValid() && (!modePlans || selectedPlan)" coupon="coupon.applied" total="totalNoCoupon" user-id="{{user.id}}"></coupon>
 
-    <div ng-show="modules.plans">
+    <div ng-show="$root.modules.plans">
       <div ng-if="isSlotsValid() && !user.subscribed_plan" ng-show="!modePlans">
         <p class="font-sbold text-base l-h-2x" translate>{{ 'app.shared.cart.to_benefit_from_attractive_prices' }}</p>
         <div><button class="btn btn-warning-full rounded btn-block text-xs" ng-click="showPlans()" translate>{{ 'app.shared.cart.view_our_subscriptions' }}</button></div>

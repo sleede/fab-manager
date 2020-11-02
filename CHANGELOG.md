@@ -2,6 +2,7 @@
 
 - Refactored theme builder to use scss files
 - Fix a bug: unable to build homepage custom stylesheet
+- Fix a bug: unable to access embedded plan views
 - [TODO DEPLOY] `rails fablab:stripe:plans_prices`
 
 ## v4.6.3 2020 October 28
