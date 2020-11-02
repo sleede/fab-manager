@@ -2,7 +2,8 @@
  * This component is a "card" publicly presenting the details of a plan
  */
 
-import React from 'react';
+import React, { Suspense } from 'react';
+import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
 import { IFilterService } from 'angular';
 import moment from 'moment';
@@ -10,6 +11,7 @@ import _ from 'lodash'
 import { IApplication } from '../models/application';
 import { Plan } from '../models/plan';
 import { User, UserRole } from '../models/user';
+import '../lib/i18n';
 
 declare var Application: IApplication;
 
@@ -19,11 +21,11 @@ interface PlanCardProps {
   operator: User,
   isSelected: boolean,
   onSelectPlan: (plan: Plan) => void,
-  _t: (key: string, interpolation?: object) => Promise<string>,
   $filter: IFilterService
 }
 
-const PlanCard: React.FC<PlanCardProps> = ({ plan, user, operator, onSelectPlan, isSelected, _t, $filter }) => {
+const PlanCard: React.FC<PlanCardProps> = ({ plan, user, operator, onSelectPlan, isSelected, $filter }) => {
+  const { t } = useTranslation('public');
   /**
    * Return the formatted localized amount of the given plan (eg. 20.5 => "20,50 €")
    */
@@ -75,22 +77,35 @@ const PlanCard: React.FC<PlanCardProps> = ({ plan, user, operator, onSelectPlan,
         {!hasSubscribedToThisPlan() && <button className={`subscribe-button ${isSelected ? 'selected-card' : ''}`}
                                                onClick={handleSelectPlan}
                                                disabled={!_.isNil(user.subscription)}>
-          {user && <span>{_t('app.public.plans.i_choose_that_plan')}</span>}
-          {!user && <span>{_t('app.public.plans.i_subscribe_online')}</span>}
+          {user && <span>{t('app.public.plans.i_choose_that_plan')}</span>}
+          {!user && <span>{t('app.public.plans.i_subscribe_online')}</span>}
         </button>}
         {hasSubscribedToThisPlan() && <button className="subscribe-button" disabled>
-          { _t('app.public.plans.i_already_subscribed') }
+          { t('app.public.plans.i_already_subscribed') }
         </button>}
       </div>}
       {canSubscribeForOther() && <div className="cta-button">
         <button className={`subscribe-button ${isSelected ? 'selected-card' : ''}`}
                 onClick={handleSelectPlan}
                 disabled={_.isNil(user)}>
-          <span>{ _t('app.public.plans.i_choose_that_plan') }</span>
+          <span>{ t('app.public.plans.i_choose_that_plan') }</span>
         </button>
       </div>}
     </div>
   );
 }
 
-Application.Components.component('planCard', react2angular(PlanCard, ['plan', 'user', 'operator', 'onSelectPlan', 'isSelected'], ['_t', '$filter']));
+const PlanCardWrapper: React.FC<PlanCardProps> = ({ plan, user, operator, onSelectPlan, isSelected, $filter }) => {
+  const loading = (
+    <div className="fa-3x">
+      <i className="fas fa-circle-notch fa-spin"></i>
+    </div>
+  );
+  return (
+    <Suspense fallback={loading}>
+      <PlanCard plan={plan} user={user} operator={operator} isSelected={isSelected} onSelectPlan={onSelectPlan} $filter={$filter} />
+    </Suspense>
+  );
+}
+
+Application.Components.component('planCard', react2angular(PlanCardWrapper, ['plan', 'user', 'operator', 'onSelectPlan', 'isSelected'], ['$filter']));

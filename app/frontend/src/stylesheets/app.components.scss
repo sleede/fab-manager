@@ -344,6 +344,9 @@
       padding-left: 30px;
       padding-right: 30px;
     }
+    button.subscribe-button:focus, button.subscribe-button:hover {
+      outline: 0;
+    }
   }
 }
 
