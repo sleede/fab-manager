@@ -11,20 +11,12 @@
            ng-class="{'col-md-12 col-lg-12':(plansGroup.plans.filter(filterDisabledPlans).length % 2 == 1 && key == plansGroup.plans.filter(filterDisabledPlans).length-1)}"
            ng-repeat="(key, plan) in plansGroup.plans.filter(filterDisabledPlans) | orderBy:'interval'">
 
-        <h3 class="title">{{ plan.base_name }}</h3>
-
-        <div class="content">
-          <div class="wrap">
-            <div class="price">
-              <div class="amount">{{plan.amount | currency}}</div>
-              <span class="period">{{ plan.interval | planIntervalFilter: plan.interval_count }}</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="cta-button">
-          <button class="btn btn-default rounded" ng-click="selectPlan(plan)" ng-class="{'bg-yellow': selectedPlan.id == plan.id}" translate>{{ 'app.shared.plan_subscribe.subscribe_online' }}</button>
-        </div>
+        <plan-card plan="plan"
+                   user="ctrl.member"
+                   operator="currentUser"
+                   on-select-plan="selectPlan"
+                   is-selected="isSelected(plan)">
+        </plan-card>
 
       </div>
 

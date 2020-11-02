@@ -620,13 +620,24 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
      * @param plan {Object} the plan to subscribe
      */
     $scope.selectPlan = function (plan) {
-    // toggle selected plan
-      if ($scope.selectedPlan !== plan) {
-        $scope.selectedPlan = plan;
-      } else {
-        $scope.selectedPlan = null;
-      }
-      return $scope.planSelectionTime = new Date();
+      setTimeout(() => {
+        // toggle selected plan
+        if ($scope.selectedPlan !== plan) {
+          $scope.selectedPlan = plan;
+        } else {
+          $scope.selectedPlan = null;
+        }
+        $scope.planSelectionTime = new Date();
+        $scope.$apply();
+      }, 50);
+    };
+
+    /**
+     * Check if the provided plan is currently selected
+     * @param plan {Object} Resource plan
+     */
+    $scope.isSelected = function (plan) {
+      return $scope.selectedPlan === plan;
     };
 
     /**
