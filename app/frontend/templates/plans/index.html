@@ -37,9 +37,6 @@
                            on-select-plan="selectPlan"
                            is-selected="isSelected(plan)">
                 </plan-card>
-
-                <br ng-show="!plan.plan_file_url">  <!-- TODO Refacto with CSS -->
-                <a ng-href="{{ plan.plan_file_url }}" ng-show="plan.plan_file_url" target="_blank" translate>{{ 'app.public.plans.more_information' }}</a>
             </div>
           </div>
 

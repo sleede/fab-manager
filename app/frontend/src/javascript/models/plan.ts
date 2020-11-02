@@ -37,5 +37,6 @@ export interface Plan {
         id: number,
         attachment_identifier: string
     },
+    plan_file_url: string,
     partners: Array<Partner>
 }

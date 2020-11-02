@@ -57,6 +57,12 @@ const PlanCard: React.FC<PlanCardProps> = ({ plan, user, operator, onSelectPlan,
     return user?.subscription?.plan?.id === plan.id;
   }
   /**
+   * Check if the plan has an attached file
+   */
+  const hasAttachment = (): boolean => {
+    return !!plan.plan_file_url;
+  }
+  /**
    * Callback triggered when the user select the plan
    */
   const handleSelectPlan = (): void => {
@@ -91,6 +97,7 @@ const PlanCard: React.FC<PlanCardProps> = ({ plan, user, operator, onSelectPlan,
           <span>{ t('app.public.plans.i_choose_that_plan') }</span>
         </button>
       </div>}
+      {hasAttachment() && <a className="info-link" href={ plan.plan_file_url } target="_blank">{ t('app.public.plans.more_information') }</a>}
     </div>
   );
 }
@@ -98,7 +105,7 @@ const PlanCard: React.FC<PlanCardProps> = ({ plan, user, operator, onSelectPlan,
 const PlanCardWrapper: React.FC<PlanCardProps> = ({ plan, user, operator, onSelectPlan, isSelected, $filter }) => {
   const loading = (
     <div className="fa-3x">
-      <i className="fas fa-circle-notch fa-spin"></i>
+      <i className="fas fa-circle-notch fa-spin" />
     </div>
   );
   return (
