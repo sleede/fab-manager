@@ -155,10 +155,10 @@ class API::PaymentsController < API::ApiController
                                   current_user,
                                   reservable,
                                   slots,
-                                  plan_id,
-                                  nb_places,
-                                  tickets,
-                                  coupon_params[:coupon_code])
+                                  plan_id: plan_id,
+                                  nb_places: nb_places,
+                                  tickets: tickets,
+                                  coupon_code: coupon_params[:coupon_code])
 
     # Subtract wallet amount from total
     total = price_details[:total]

@@ -54,10 +54,10 @@ class API::SubscriptionsController < API::ApiController
                                   user,
                                   nil,
                                   [],
-                                  subscription_params[:plan_id],
-                                  nil,
-                                  nil,
-                                  coupon_params[:coupon_code])
+                                  plan_id: subscription_params[:plan_id],
+                                  nb_places: nil,
+                                  tickets: nil,
+                                  coupon_code: coupon_params[:coupon_code])
 
     # Subtract wallet amount from total
     total = price_details[:total]

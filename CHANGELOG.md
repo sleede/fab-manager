@@ -5,6 +5,7 @@
 - Fix a bug: unable to access embedded plan views
 - Fix a bug: warning message overflow in credit wallet modal
 - [TODO DEPLOY] `rails fablab:stripe:plans_prices`
+- [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
 
 ## v4.6.3 2020 October 28
 

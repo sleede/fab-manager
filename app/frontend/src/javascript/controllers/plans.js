@@ -12,8 +12,8 @@
  */
 'use strict';
 
-Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScope', '$state', '$uibModal', 'Auth', 'AuthService', 'dialogs', 'growl', 'plansPromise', 'groupsPromise', 'Subscription', 'Member', 'subscriptionExplicationsPromise', '_t', 'Wallet', 'helpers', 'settingsPromise',
-  function ($scope, $rootScope, $state, $uibModal, Auth, AuthService, dialogs, growl, plansPromise, groupsPromise, Subscription, Member, subscriptionExplicationsPromise, _t, Wallet, helpers, settingsPromise) {
+Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScope', '$state', '$uibModal', 'Auth', 'AuthService', 'dialogs', 'growl', 'plansPromise', 'groupsPromise', 'Subscription', 'Member', 'subscriptionExplicationsPromise', '_t', 'Wallet', 'helpers', 'settingsPromise', 'Price',
+  function ($scope, $rootScope, $state, $uibModal, Auth, AuthService, dialogs, growl, plansPromise, groupsPromise, Subscription, Member, subscriptionExplicationsPromise, _t, Wallet, helpers, settingsPromise, Price) {
     /* PUBLIC SCOPE */
 
     // list of groups
@@ -46,9 +46,12 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
     $scope.coupon =
       { applied: null };
 
-    // Storage for the total price (plan price + coupon, if any)
-    $scope.cart =
-      { total: null };
+    // Storage for the total price (plan price + coupon, if any) and of the payment schedule
+    $scope.cart = {
+      total: null,
+      payment_schedule: false,
+      schedule: null
+    };
 
     // text that appears in the bottom-right box of the page (subscriptions rules details)
     $scope.subscriptionExplicationsAlert = subscriptionExplicationsPromise.setting.value;
@@ -76,6 +79,7 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
         if ($scope.isAuthenticated()) {
           if ($scope.selectedPlan !== plan) {
             $scope.selectedPlan = plan;
+            $scope.cart.payment_schedule = plan.monthly_payment;
             updateCartPrice();
           } else {
             $scope.selectedPlan = null;
@@ -83,6 +87,18 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
         } else {
           $scope.login();
         }
+        $scope.$apply();
+      }, 50);
+    };
+
+    /**
+     * This will update the payment_schedule setting when the user toggles the switch button
+     * @param checked {Boolean}
+     */
+    $scope.togglePaymentSchedule = (checked) => {
+      setTimeout(() => {
+        $scope.cart.payment_schedule = checked;
+        updateCartPrice();
         $scope.$apply();
       }, 50);
     };
@@ -101,17 +117,17 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
     $scope.openSubscribePlanModal = function () {
       Wallet.getWalletByUser({ user_id: $scope.ctrl.member.id }, function (wallet) {
         const amountToPay = helpers.getAmountToPay($scope.cart.total, wallet.amount);
-        if ((AuthService.isAuthorized('member') && amountToPay > 0)
-          || (AuthService.isAuthorized('manager') && $scope.ctrl.member.id === $rootScope.currentUser.id && amountToPay > 0)) {
+        if ((AuthService.isAuthorized('member') && amountToPay > 0) ||
+          (AuthService.isAuthorized('manager') && $scope.ctrl.member.id === $rootScope.currentUser.id && amountToPay > 0)) {
           if (settingsPromise.online_payment_module !== 'true') {
             growl.error(_t('app.public.plans.online_payment_disabled'));
           } else {
             return payByStripe();
           }
         } else {
-          if (AuthService.isAuthorized('admin')
-            || (AuthService.isAuthorized('manager') && $scope.ctrl.member.id !== $rootScope.currentUser.id)
-            || amountToPay === 0) {
+          if (AuthService.isAuthorized('admin') ||
+            (AuthService.isAuthorized('manager') && $scope.ctrl.member.id !== $rootScope.currentUser.id) ||
+            amountToPay === 0) {
             return payOnSite();
           }
         }
@@ -191,7 +207,7 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
       // group all plans by Group
       for (const group of $scope.groups) {
         const groupObj = { id: group.id, name: group.name, plans: [], actives: 0 };
-        for (let plan of plansPromise) {
+        for (const plan of plansPromise) {
           if (plan.group_id === group.id) {
             groupObj.plans.push(plan);
             if (!plan.disabled) { groupObj.actives++; }
@@ -225,20 +241,42 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
     const updateCartPrice = function () {
       // first we check the selection of a user
       if (Object.keys($scope.ctrl.member).length > 0 && $scope.selectedPlan) {
-        $scope.cart.total = $scope.selectedPlan.amount;
-        // apply the coupon if any
-        if ($scope.coupon.applied) {
-          let discount;
-          if ($scope.coupon.applied.type === 'percent_off') {
-            discount = ($scope.cart.total * $scope.coupon.applied.percent_off) / 100;
-          } else if ($scope.coupon.applied.type === 'amount_off') {
-            discount = $scope.coupon.applied.amount_off;
-          }
-          return $scope.cart.total -= discount;
-        }
+        const r = mkReservation($scope.ctrl.member, $scope.selectedPlan);
+        Price.compute(mkRequestParams(r, $scope.coupon.applied), function (res) {
+          $scope.cart.total = res.price;
+          $scope.cart.schedule = res.schedule;
+        });
       } else {
         return $scope.reserve.amountTotal = null;
       }
+    };
+
+    /**
+     * Format the parameters expected by /api/prices/compute or /api/reservations and return the resulting object
+     * @param reservation {Object} as returned by mkReservation()
+     * @param coupon {Object} Coupon as returned from the API
+     * @return {{reservation:Object, coupon_code:string}}
+     */
+    const mkRequestParams = function (reservation, coupon) {
+      return {
+        reservation,
+        coupon_code: ((coupon ? coupon.code : undefined))
+      };
+    };
+
+    /**
+     * Create an hash map implementing the Reservation specs
+     * @param member {Object} User as retrieved from the API: current user / selected user if current is admin
+     * @param [plan] {Object} Plan as retrieved from the API: plan to buy with the current reservation
+     * @return {{user_id:Number, slots_attributes:Array<Object>, plan_id:Number|null}}
+     */
+    const mkReservation = function (member, plan) {
+      return {
+        user_id: member.id,
+        slots_attributes: [],
+        plan_id: ((plan ? plan.id : undefined)),
+        payment_schedule: $scope.cart.payment_schedule
+      };
     };
 
     /**
@@ -296,7 +334,7 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
             };
           }
         ]
-      }).result['finally'](null).then(function (subscription) {
+      }).result.finally(null).then(function (subscription) {
         $scope.ctrl.member.subscribed_plan = angular.copy($scope.selectedPlan);
         Auth._currentUser.subscribed_plan = angular.copy($scope.selectedPlan);
         $scope.paid.plan = angular.copy($scope.selectedPlan);
@@ -383,7 +421,7 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
             $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
           }
         ]
-      }).result['finally'](null).then(function (subscription) {
+      }).result.finally(null).then(function (subscription) {
         $scope.ctrl.member.subscribed_plan = angular.copy($scope.selectedPlan);
         Auth._currentUser.subscribed_plan = angular.copy($scope.selectedPlan);
         $scope.ctrl.member = null;
