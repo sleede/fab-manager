@@ -134,9 +134,10 @@ class StatisticService
 
       next unless sub
 
-      ca = i.amount.to_i / 100.0
+      ca = i.amount.to_i
       cs = CouponService.new
       ca = cs.ventilate(cs.invoice_total_no_coupon(i.invoice), ca, i.invoice.coupon) unless i.invoice.coupon_id.nil?
+      ca /= 100.00
       profile = sub.statistic_profile
       p = sub.plan
       result.push OpenStruct.new({

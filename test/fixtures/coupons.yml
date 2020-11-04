@@ -26,3 +26,12 @@ cash:
   max_usages: 1
   active: true
   validity_per_user: once
+
+cash2:
+  name: Small Cash Code
+  code: GIME3EUR
+  amount_off: 300
+  valid_until: <%= 1.year.from_now.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  max_usages: nil
+  active: true
+  validity_per_user: once

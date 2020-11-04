@@ -4,6 +4,7 @@
 - Fix a bug: unable to build homepage custom stylesheet
 - Fix a bug: unable to access embedded plan views
 - Fix a bug: warning message overflow in credit wallet modal
+- Fix a bug: when a cash coupon was used, an invalid amount is shown in the statistics
 - [TODO DEPLOY] `rails fablab:stripe:plans_prices`
 - [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
 
