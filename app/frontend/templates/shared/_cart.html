@@ -60,7 +60,7 @@
       </div>
 
       <div ng-if="selectedPlan">
-        <div class="m-t-md m-b-sm text-base">{{ 'app.shared.cart.you_ve_just_selected_a_' | translate }} <br> <span class="font-sbold" translate>{{ 'app.shared.cart._subscription' }}</span> :</div>
+        <div class="m-t-md m-b-sm text-base" translate>{{ 'app.shared.cart.you_ve_just_selected_a_subscription_html' }}</div>
         <div class="panel panel-default bg-light m-n">
           <div class="panel-body m-b-md">
             <div class="font-sbold text-u-c">{{selectedPlan | humanReadablePlanName }}</div>
@@ -72,7 +72,32 @@
 
   </div>
 
-  <div class="panel-footer no-padder" ng-if="events.reserved.length > 0">
+  <div class="widget-content no-bg auto wrapper" ng-if="selectedPlan && !events.reserved">
+    <span translate>{{ 'app.shared.cart.you_ve_just_selected_a_subscription_html' }}</span>
+
+    <div class="well well-warning m-t-sm">
+      <i class="font-sbold">{{ selectedPlan | humanReadablePlanName }}</i>
+      <div class="font-sbold">{{ 'app.shared.cart.subscription_price' | translate }} {{selectedPlan.amount | currency}}</div>
+    </div>
+
+    <coupon show="!user.subscribed_plan" coupon="coupon.applied" total="totalNoCoupon" user-id="{{user.id}}"></coupon>
+    <div ng-if="selectedPlan.monthly_payment">
+      <label for="payment_schedule" translate>{{ 'app.shared.cart.monthly_payment' }}</label>
+      <switch checked="schedule.requested_schedule" id="'payment_schedule'" on-change="togglePaymentSchedule" class-name="'v-middle'"></switch>
+    </div>
+  </div>
+
+  <div ng-if="schedule.payment_schedule">
+    <h4 translate>{{ 'app.shared.cart.your_payment_schedule' }}</h4>
+    <ul>
+      <li ng-repeat="item in schedule.payment_schedule.items">
+        <span>{{item.due_date | amDateFormat:'L'}}</span>
+        <span>{{item.price | currency}}</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="widget-footer no-padder" ng-if="events.reserved.length > 0 || (selectedPlan && !events.reserved)">
     <button class="btn btn-valid btn-info btn-block p-l btn-lg text-u-c r-b text-base" ng-click="payCart()" ng-if="isSlotsValid() && (!modePlans || selectedPlan)">{{ 'app.shared.cart.confirm_and_pay' | translate }} {{amountTotal | currency}}</button>
   </div>
 

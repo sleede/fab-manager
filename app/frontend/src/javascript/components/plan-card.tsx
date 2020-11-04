@@ -36,7 +36,7 @@ const PlanCard: React.FC<PlanCardProps> = ({ plan, user, operator, onSelectPlan,
    * Return the formatted localized amount, divided by the number of months (eg. 120 => "10,00 € / month")
    */
   const monthlyAmount = (): string => {
-    const monthly = Math.ceil(plan.amount / moment.duration(plan.interval_count, plan.interval).asMonths());
+    const monthly = plan.amount / moment.duration(plan.interval_count, plan.interval).asMonths();
     return $filter('currency')(monthly);
   }
   /**

@@ -104,40 +104,12 @@
       </div>
     </section>
 
-    <section class="widget panel b-a m m-t-lg" ng-if="selectedPlan && ctrl.member">
-      <div class="panel-heading b-b">
-        <h3 translate>{{ 'app.public.plans.summary' }}</h3>
-      </div>
-
-      <div class="widget-content no-bg auto wrapper">
-        <span translate>{{ 'app.public.plans.you_ve_just_selected_a_subscription_html' }}</span>
-
-        <div class="well well-warning m-t-sm">
-          <i class="font-sbold">{{ selectedPlan | humanReadablePlanName }}</i>
-          <div class="font-sbold">{{ 'app.public.plans.subscription_price' | translate }} {{selectedPlan.amount | currency}}</div>
-        </div>
-
-        <coupon show="!ctrl.member.subscribed_plan" coupon="coupon.applied" total="selectedPlan.amount" user-id="{{ctrl.member.id}}"></coupon>
-
-        <label for="payment_schedule" translate>{{ 'app.public.plans.monthly_payment' }}</label>
-        <switch checked="cart.payment_schedule" id="payment_schedule" on-change="togglePaymentSchedule" class-name="'v-middle'" ng-if="selectedPlan.monthly_payment"></switch>
-      </div>
-
-      <div class="widget-footer">
-        <div ng-if="cart.schedule">
-          <h4 translate>{{ 'app.public.plans.your_payment_schedule' }}</h4>
-          <ul>
-            <li ng-repeat="item in cart.schedule.items">
-              <span>{{item.due_date | amDateFormat:'L'}}</span>
-              <span>{{item.price | currency}}</span>
-            </li>
-          </ul>
-        </div>
-        <button class="btn btn-valid btn-info btn-block p-l text-u-c r-b" ng-click="openSubscribePlanModal()" ng-if="!ctrl.member.subscribed_plan">
-          {{ 'app.public.plans.confirm_and_pay' | translate }} {{cart.total | currency}}
-        </button>
-      </div>
-    </section>
+    <cart events="{}"
+          user="ctrl.member"
+          plan="selectedPlan"
+          plan-selection-time="planSelectionTime"
+          settings="settings"
+          after-payment="afterPayment"></cart>
 
 
     <section class="widget panel b-a m m-t-lg" ng-if="paid.plan">

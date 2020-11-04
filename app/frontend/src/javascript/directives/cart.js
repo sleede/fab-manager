@@ -67,6 +67,12 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
         // Global config: delay in hours before a booking while the cancellation is forbidden
         $scope.cancelBookingDelay = parseInt($scope.settings.booking_cancel_delay);
 
+        // Payment schedule
+        $scope.schedule = {
+          requested_schedule: false, // does the user requests a payment schedule for his subscription
+          payment_schedule: null // the effective computed payment schedule
+        };
+
         /**
          * Add the provided slot to the shopping cart (state transition from free to 'about to be reserved')
          * and increment the total amount of the cart if needed.
@@ -107,9 +113,13 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
          */
         $scope.isSlotsValid = function () {
           let isValid = true;
-          angular.forEach($scope.events.reserved, function (m) {
-            if (!m.isValid) { return isValid = false; }
-          });
+          if ($scope.events) {
+            angular.forEach($scope.events.reserved, function (m) {
+              if (!m.isValid) {
+                return isValid = false;
+              }
+            });
+          }
           return isValid;
         };
 
@@ -143,48 +153,58 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
             const slotValidations = [];
             let slotNotValid;
             let slotNotValidError;
-            $scope.events.reserved.forEach(function (slot) {
-              if (slot.plan_ids.length > 0) {
-                if (
-                  ($scope.selectedPlan && _.includes(slot.plan_ids, $scope.selectedPlan.id)) ||
-                  ($scope.user.subscribed_plan && _.includes(slot.plan_ids, $scope.user.subscribed_plan.id))
-                ) {
-                  slotValidations.push(true);
-                } else {
-                  slotNotValid = slot;
-                  if ($scope.selectedPlan && !_.includes(slot.plan_ids, $scope.selectedPlan.id)) {
-                    slotNotValidError = 'selectedPlanError';
+            if ($scope.events.reserved) {
+              $scope.events.reserved.forEach(function (slot) {
+                if (slot.plan_ids.length > 0) {
+                  if (
+                    ($scope.selectedPlan && _.includes(slot.plan_ids, $scope.selectedPlan.id)) ||
+                    ($scope.user.subscribed_plan && _.includes(slot.plan_ids, $scope.user.subscribed_plan.id))
+                  ) {
+                    slotValidations.push(true);
+                  } else {
+                    slotNotValid = slot;
+                    if ($scope.selectedPlan && !_.includes(slot.plan_ids, $scope.selectedPlan.id)) {
+                      slotNotValidError = 'selectedPlanError';
+                    }
+                    if ($scope.user.subscribed_plan && !_.includes(slot.plan_ids, $scope.user.subscribed_plan.id)) {
+                      slotNotValidError = 'userPlanError';
+                    }
+                    if (!$scope.selectedPlan || !$scope.user.subscribed_plan) {
+                      slotNotValidError = 'noPlanError';
+                    }
+                    slotValidations.push(false);
                   }
-                  if ($scope.user.subscribed_plan && !_.includes(slot.plan_ids, $scope.user.subscribed_plan.id)) {
-                    slotNotValidError = 'userPlanError';
-                  }
-                  if (!$scope.selectedPlan || !$scope.user.subscribed_plan) {
-                    slotNotValidError = 'noPlanError';
-                  }
-                  slotValidations.push(false);
                 }
-              }
-            });
-            const hasPlanForSlot = slotValidations.every(function (a) { return a; });
-            if (!hasPlanForSlot) {
-              if (!AuthService.isAuthorized(['admin', 'manager'])) {
-                return growl.error(_t('app.shared.cart.slot_restrict_subscriptions_must_select_plan'));
+              });
+              const hasPlanForSlot = slotValidations.every(function (a) {
+                return a;
+              });
+              if (!hasPlanForSlot) {
+                if (!AuthService.isAuthorized(['admin', 'manager'])) {
+                  return growl.error(_t('app.shared.cart.slot_restrict_subscriptions_must_select_plan'));
+                } else {
+                  const modalInstance = $uibModal.open({
+                    animation: true,
+                    templateUrl: '/shared/_reserve_slot_without_plan.html',
+                    size: 'md',
+                    controller: 'ReserveSlotWithoutPlanController',
+                    resolve: {
+                      slot: function () {
+                        return slotNotValid;
+                      },
+                      slotNotValidError: function () {
+                        return slotNotValidError;
+                      }
+                    }
+                  });
+                  modalInstance.result.then(function (res) {
+                    return paySlots();
+                  });
+                }
               } else {
-                const modalInstance = $uibModal.open({
-                  animation: true,
-                  templateUrl: '/shared/_reserve_slot_without_plan.html',
-                  size: 'md',
-                  controller: 'ReserveSlotWithoutPlanController',
-                  resolve: {
-                    slot: function () { return slotNotValid; },
-                    slotNotValidError: function () { return slotNotValidError; }
-                  }
-                });
-                modalInstance.result.then(function (res) {
-                  return paySlots();
-                });
+                return paySlots();
               }
-            } else {
+            } else if ($scope.selectedPlan) {
               return paySlots();
             }
           } else {
@@ -269,6 +289,18 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
           }
 
           return false;
+        };
+
+        /**
+         * This will update the payment_schedule setting when the user toggles the switch button
+         * @param checked {Boolean}
+         */
+        $scope.togglePaymentSchedule = (checked) => {
+          setTimeout(() => {
+            $scope.schedule.requested_schedule = checked;
+            updateCartPrice();
+            $scope.$apply();
+          }, 50);
         };
 
         /* PRIVATE SCOPE */
@@ -528,6 +560,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
           if (Auth.isAuthenticated()) {
             if ($scope.selectedPlan !== $scope.plan) {
               $scope.selectedPlan = $scope.plan;
+              $scope.schedule.requested_schedule = $scope.plan.monthly_payment;
             } else {
               $scope.selectedPlan = null;
             }
@@ -548,6 +581,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
             const r = mkReservation($scope.user, $scope.events.reserved, $scope.selectedPlan);
             return Price.compute(mkRequestParams(r, $scope.coupon.applied), function (res) {
               $scope.amountTotal = res.price;
+              $scope.schedule.payment_schedule = res.schedule;
               $scope.totalNoCoupon = res.price_without_coupon;
               setSlotsDetails(res.details);
             });
@@ -595,7 +629,8 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
             reservable_id: $scope.reservableId,
             reservable_type: $scope.reservableType,
             slots_attributes: [],
-            plan_id: ((plan ? plan.id : undefined))
+            plan_id: ((plan ? plan.id : undefined)),
+            payment_schedule: $scope.schedule.requested_schedule
           };
           angular.forEach(slots, function (slot) {
             reservation.slots_attributes.push({

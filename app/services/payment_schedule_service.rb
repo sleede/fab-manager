@@ -17,7 +17,7 @@ class PaymentScheduleService
             end
     ps = PaymentSchedule.new(scheduled: plan, total: price, coupon: coupon)
     deadlines = plan.duration / 1.month
-    per_month = price / deadlines
+    per_month = (price / deadlines).truncate
     adjustment = if per_month * deadlines != price
                    price - (per_month * deadlines)
                  else
