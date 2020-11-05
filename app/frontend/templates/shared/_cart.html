@@ -86,13 +86,7 @@
   </div>
 
   <div ng-if="schedule.payment_schedule">
-    <h4 translate>{{ 'app.shared.cart.your_payment_schedule' }}</h4>
-    <ul>
-      <li ng-repeat="item in schedule.payment_schedule.items">
-        <span>{{item.due_date | amDateFormat:'L'}}</span>
-        <span>{{item.price | currency}}</span>
-      </li>
-    </ul>
+    <payment-schedule-summary schedule="schedule.payment_schedule"></payment-schedule-summary>
   </div>
 
   <div class="widget-footer no-padder" ng-if="events.reserved.length > 0 || (selectedPlan && !events.reserved)">

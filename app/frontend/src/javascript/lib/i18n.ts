@@ -16,6 +16,9 @@ i18n
     defaultNS: 'shared',
     backend: {
       loadPath: '/api/translations/{{lng}}/app.{{ns}}'
+    },
+    interpolation: {
+      escapeValue: false
     }
   });
 

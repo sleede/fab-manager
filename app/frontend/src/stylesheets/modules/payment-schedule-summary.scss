@@ -1,0 +1,6 @@
+.payment-schedule-summary {
+  .full-schedule-modal {
+    @extend .modal;
+    @extend .fade;
+  }
+}
