@@ -82,7 +82,7 @@ const PlanCard: React.FC<PlanCardProps> = ({ plan, user, operator, onSelectPlan,
     onSelectPlan(plan);
   }
   return (
-    <div>
+    <div className="plan-card">
       <h3 className="title">{plan.base_name}</h3>
       <div className="content">
         {canBeScheduled() && <div className="wrap-monthly">

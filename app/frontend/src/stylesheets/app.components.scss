@@ -791,3 +791,11 @@
 input[type=date].form-control {
   line-height: 25px;
 }
+
+.select-schedule {
+  margin-top: 0.5em;
+  .schedule-switch {
+    vertical-align: middle;
+    margin-left: 1em;
+  }
+}
