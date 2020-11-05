@@ -724,11 +724,14 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
               },
               coupon () {
                 return $scope.coupon.applied;
+              },
+              selectedPlan () {
+                return $scope.selectedPlan;
               }
             },
-            controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', 'wallet', 'helpers', '$filter', 'coupon',
-              function ($scope, $uibModalInstance, $state, reservation, price, Auth, Reservation, wallet, helpers, $filter, coupon) {
-              // user wallet amount
+            controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', 'wallet', 'helpers', '$filter', 'coupon', 'selectedPlan',
+              function ($scope, $uibModalInstance, $state, reservation, price, Auth, Reservation, wallet, helpers, $filter, coupon, selectedPlan) {
+                // user wallet amount
                 $scope.walletAmount = wallet.amount;
 
                 // Global price (total of all items)
@@ -739,6 +742,9 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
 
                 // Reservation
                 $scope.reservation = reservation;
+
+                // Subscription
+                $scope.plan = selectedPlan;
 
                 // Used in wallet info template to interpolate some translations
                 $scope.numberFilter = $filter('number');

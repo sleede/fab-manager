@@ -126,6 +126,8 @@ en:
       valid_reservation_modal:
         booking_confirmation: "Booking confirmation"
         here_is_the_summary_of_the_slots_to_book_for_the_current_user: "Here is the summary of the slots to book for the current user:"
+        subscription_confirmation: "Subscription confirmation"
+        here_is_the_subscription_summary: "Here is the subscription summary:"
       #event edition form
       event:
         title: "Title"
@@ -212,7 +214,7 @@ en:
         number_of_tickets: "Number of tickets"
         public_page: "Show in training lists"
         disable_training: "Disable the training"
-      #partial form to edit/create an user (admin view)
+      #partial form to edit/create a user (admin view)
       user_admin:
         user: "User"
         incomplete_profile: "Incomplete profile"
@@ -265,12 +267,12 @@ en:
         do_you_want_to_change_NAME_s_booking_slot_initially_planned_at: "Do you want to change {NAME}'s booking slot, initially planned at:"
         cancel_this_reservation: "Cancel this reservation"
         i_want_to_change_date: "I want to change date"
-      #modal introducing that a training is requested before booking a machine
+      #modal telling users that they need to pass a training before booking a machine
       request_training_modal:
         to_book_the_MACHINE_you_must_have_completed_the_TRAINING: "To book the \"{MACHINE}\" you must have completed the {TRAINING}."
         register_for_the_training: "Enroll in the training"
         i_dont_want_to_register_now: "I don't want to enroll now"
-      #modal introducing that a user must wait for his training being validated before booking a machine
+      #modal telling users that they must wait for their training validation before booking a machine
       training_reservation_modal:
         machine_reservation: "Machine reservation"
         you_must_wait_for_your_training_is_being_validated_by_the_fablab_team_to_book_this_machine: "You must wait for your training is being validated by the FabLab team to book this machine."
@@ -326,7 +328,7 @@ en:
         debit_reservation_machine: "Pay for a machine reservation"
         debit_reservation_event: "Pay for an event reservation"
         warning_uneditable_credit: "Warning: once validated, the credited amount won't be editable anymore."
-      #promotional coupon (creation/edition form)
+      #coupon (promotional) (creation/edition form)
       coupon:
         name: "Name"
         name_is_required: "Name is required."
@@ -383,7 +385,7 @@ en:
         summary: "Summary"
         select_one_or_more_slots_in_the_calendar: "Select one {SINGLE, select, true{slot} other{or more slots}} in the calendar"
         you_ve_just_selected_the_slot: "You've just selected the slot:"
-        datetime_to_time: "{START_DATETIME} to {END_TIME}"  #eg: Thursday, September 4 1986 8:30 PM to 10:00 PM
+        datetime_to_time: "{START_DATETIME} to {END_TIME}" #eg: Thursday, September 4, 1986 8:30 PM to 10:00 PM
         cost_of_TYPE: "Cost of the {TYPE, select, Machine{machine slot} Training{training} Space{space slot} other{element}}"
         offer_this_slot: "Offer this slot"
         confirm_this_slot: "Confirm this slot"
@@ -411,7 +413,7 @@ en:
         tags_of_the_destination_slot: "Tags of the destination slot:"
         confirm_my_modification: "Confirm my modification"
         your_booking_slot_was_successfully_moved_from_: "Your booking slot was successfully moved from"
-        to_date: "to" #eg. from 01/01 to 01/05
+        to_date: "to" #eg. from 01 to 05 january.
         please_select_a_member_first: "Please select a member first"
         unable_to_select_plan_if_slots_in_the_past: "Unable to select a plan if any of the selected slots is in the past"
         unable_to_change_the_reservation: "Unable to change the reservation"
