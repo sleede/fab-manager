@@ -67,6 +67,10 @@
             <div class="text-base">{{ 'app.shared.cart.cost_of_the_subscription' | translate }} <span class="text-blue">{{selectedPlan.amount | currency}}</span></div>
           </div>
         </div>
+        <div ng-if="selectedPlan.monthly_payment">
+          <label for="payment_schedule" translate>{{ 'app.shared.cart.monthly_payment' }}</label>
+          <switch checked="schedule.requested_schedule" id="'payment_schedule'" on-change="togglePaymentSchedule" class-name="'v-middle'"></switch>
+        </div>
       </div>
     </div>
 

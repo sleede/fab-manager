@@ -396,7 +396,7 @@ fr:
         cost_of_the_subscription: "Coût de l'abonnement"
         subscription_price: "Coût de l'abonnement"
         you_ve_just_selected_a_subscription_html: "Vous venez de sélectionner un <strong>abonnement</strong> :"
-        monthly_payment: "Payer par échéancier mensuel"
+        monthly_payment: "Paiement mensuel"
         your_payment_schedule: "Votre échéancier de paiement"
         confirm_and_pay: "Valider et payer"
         you_have_settled_the_following_TYPE: "Vous avez réglé {TYPE, select, Machine{les créneaux machines suivants} Training{la formation suivante} other{les éléments suivants}} :"
