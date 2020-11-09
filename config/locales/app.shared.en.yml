@@ -399,7 +399,7 @@ en:
         monthly_payment: "Monthly payment"
         your_payment_schedule: "Your payment schedule"
         monthly_payment_NUMBER: "{NUMBER}{NUMBER, plural, =1{st} =2{nd} =3{rd} other{th}} monthly payment:"
-        NUMBER_monthly_payment_of_AMOUNT: "{NUMBER} monthly {NUMBER, plural, =1{payment} other{payments}} of {AMOUNT}."
+        NUMBER_monthly_payment_of_AMOUNT: "{NUMBER} monthly {NUMBER, plural, =1{payment} other{payments}} of {AMOUNT}"
         first_debit: "First debit on the day of the order."
         debit: "Debit on the day of the order."
         view_full_schedule: "View the complete payement schedule"

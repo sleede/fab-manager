@@ -54,12 +54,14 @@ const PaymentScheduleSummary: React.FC<PaymentScheduleSummaryProps> = ({ schedul
     <div className="payment-schedule-summary">
       <div>
         <h4>{ t('app.shared.cart.your_payment_schedule') }</h4>
-        {hasEqualDeadlines() && <div>
-          <span className="schedule-item-info">
-            {t('app.shared.cart.NUMBER_monthly_payment_of_AMOUNT', { NUMBER: schedule.items.length, AMOUNT: formatPrice(schedule.items[0].price) })}
-          </span>
-          <span className="schedule-item-date">{t('app.shared.cart.first_debit')}</span>
-        </div>}
+        {hasEqualDeadlines() && <ul>
+          <li>
+            <span className="schedule-item-info">
+              {t('app.shared.cart.NUMBER_monthly_payment_of_AMOUNT', { NUMBER: schedule.items.length, AMOUNT: formatPrice(schedule.items[0].price) })}
+            </span>
+            <span className="schedule-item-date">{t('app.shared.cart.first_debit')}</span>
+          </li>
+        </ul>}
         {!hasEqualDeadlines() && <ul>
           <li>
             <span className="schedule-item-info">{t('app.shared.cart.monthly_payment_NUMBER', { NUMBER: 1 })}</span>

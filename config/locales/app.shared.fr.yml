@@ -399,7 +399,7 @@ fr:
         monthly_payment: "Paiement mensuel"
         your_payment_schedule: "Votre échéancier de paiement"
         monthly_payment_NUMBER: "{NUMBER}{NUMBER, plural, =1{ère} other{ème}} mensualité :"
-        NUMBER_monthly_payment_of_AMOUNT: "{NUMBER} {NUMBER, plural, =1{mensualité} other{mensualités}} de {AMOUNT}."
+        NUMBER_monthly_payment_of_AMOUNT: "{NUMBER} {NUMBER, plural, =1{mensualité} other{mensualités}} de {AMOUNT}"
         first_debit: "Premier prélèvement le jour de la commande."
         debit: "Prélèvement le jour de la commande."
         view_full_schedule: "Voir tout l'échéancier de paiement"
