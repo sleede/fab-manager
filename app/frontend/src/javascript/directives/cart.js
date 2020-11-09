@@ -621,7 +621,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
          * @param member {Object} User as retrieved from the API: current user / selected user if current is admin
          * @param slots {Array<Object>} Array of fullCalendar events: slots selected on the calendar
          * @param [plan] {Object} Plan as retrieved from the API: plan to buy with the current reservation
-         * @return {{user_id:Number, reservable_id:Number, reservable_type:String, slots_attributes:Array<Object>, plan_id:Number|null}}
+         * @return {{reservable_type: string, payment_schedule: boolean, user_id: *, reservable_id: string, slots_attributes: [], plan_id: (*|undefined)}}
          */
         const mkReservation = function (member, slots, plan) {
           const reservation = {
@@ -727,10 +727,13 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
               },
               selectedPlan () {
                 return $scope.selectedPlan;
+              },
+              schedule () {
+                return $scope.schedule.requested_schedule;
               }
             },
-            controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', 'wallet', 'helpers', '$filter', 'coupon', 'selectedPlan',
-              function ($scope, $uibModalInstance, $state, reservation, price, Auth, Reservation, wallet, helpers, $filter, coupon, selectedPlan) {
+            controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', 'Subscription', 'wallet', 'helpers', '$filter', 'coupon', 'selectedPlan', 'schedule',
+              function ($scope, $uibModalInstance, $state, reservation, price, Auth, Reservation, Subscription, wallet, helpers, $filter, coupon, selectedPlan, schedule) {
                 // user wallet amount
                 $scope.walletAmount = wallet.amount;
 
@@ -749,6 +752,9 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                 // Used in wallet info template to interpolate some translations
                 $scope.numberFilter = $filter('number');
 
+                // TODO, show the schedule info in the modal
+                $scope.schedule = schedule;
+
                 // Button label
                 if ($scope.amount > 0) {
                   $scope.validButtonName = _t('app.shared.cart.confirm_payment_of_html', { ROLE: $rootScope.currentUser.role, AMOUNT: $filter('currency')($scope.amount) });
@@ -765,11 +771,24 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                  */
                 $scope.ok = function () {
                   $scope.attempting = true;
-                  return Reservation.save(mkRequestParams($scope.reservation, coupon), function (reservation) {
+                  // save subscription (if there's only a subscription selected)
+                  if (reservation.slots_attributes.length === 0 && selectedPlan) {
+                    return Subscription.save({
+                      coupon_code: ((coupon ? coupon.code : undefined)),
+                      subscription: {
+                        plan_id: selectedPlan.id,
+                        user_id: reservation.user_id,
+                        payment_schedule: schedule // TODO, check it is the best place to pass the param
+                      }
+                    }, function () {
+                      // TODO, then... and error handling
+                    });
+                  }
+                  // otherwise, save the reservation (may include a subscription)
+                  Reservation.save(mkRequestParams($scope.reservation, coupon), function (reservation) {
                     $uibModalInstance.close(reservation);
                     return $scope.attempting = true;
-                  }
-                  , function (response) {
+                  }, function (response) {
                     $scope.alerts = [];
                     $scope.alerts.push({ msg: _t('app.shared.cart.a_problem_occurred_during_the_payment_process_please_try_again_later'), type: 'danger' });
                     return $scope.attempting = false;
@@ -780,6 +799,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
             ]
           }).result.finally(null).then(function (reservation) { afterPayment(reservation); });
         };
+
         /**
          * Actions to run after the payment was successful
          */

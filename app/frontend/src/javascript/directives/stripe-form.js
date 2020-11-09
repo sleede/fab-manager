@@ -15,7 +15,7 @@ Application.Directives.directive('stripeForm', ['Payment', 'growl', '_t',
         onPaymentSuccess: '=',
         stripeKey: '@'
       },
-      link: function($scope, element, attributes) {
+      link: function ($scope, element, attributes) {
         const stripe = Stripe($scope.stripeKey);
         const elements = stripe.elements();
 
@@ -51,11 +51,11 @@ Application.Directives.directive('stripeForm', ['Payment', 'growl', '_t',
         const cardElement = form.find('#card-element');
         card.mount(cardElement[0]);
 
-        form.bind('submit', function() {
+        form.bind('submit', function () {
           const button = form.find('button');
           button.prop('disabled', true);
 
-          stripe.createPaymentMethod('card', card).then(function({ paymentMethod, error }) {
+          stripe.createPaymentMethod('card', card).then(function ({ paymentMethod, error }) {
             if (error) {
               growl.error(error.message);
               button.prop('disabled', false);
@@ -64,12 +64,12 @@ Application.Directives.directive('stripeForm', ['Payment', 'growl', '_t',
               Payment.confirm({ payment_method_id: paymentMethod.id, cart_items: $scope.cartItems }, function (response) {
                 // Handle server response (see Step 3)
                 handleServerResponse(response, button);
-              }, function(error) { handleServerResponse({ error }, button) });
+              }, function (error) { handleServerResponse({ error }, button); });
             }
           });
         });
 
-        function handleServerResponse(response, confirmButton) {
+        function handleServerResponse (response, confirmButton) {
           if (response.error) {
             if (response.error.statusText) {
               growl.error(response.error.statusText);
@@ -81,16 +81,16 @@ Application.Directives.directive('stripeForm', ['Payment', 'growl', '_t',
             // Use Stripe.js to handle required card action
             stripe.handleCardAction(
               response.payment_intent_client_secret
-            ).then(function(result) {
+            ).then(function (result) {
               if (result.error) {
                 growl.error(result.error.message);
                 confirmButton.prop('disabled', false);
               } else {
                 // The card action has been handled
                 // The PaymentIntent can be confirmed again on the server
-                Payment.confirm({ payment_intent_id: result.paymentIntent.id, cart_items: $scope.cartItems }, function(confirmResult) {
+                Payment.confirm({ payment_intent_id: result.paymentIntent.id, cart_items: $scope.cartItems }, function (confirmResult) {
                   handleServerResponse(confirmResult, confirmButton);
-                }, function(error) { handleServerResponse({ error }, confirmButton) });
+                }, function (error) { handleServerResponse({ error }, confirmButton); });
               }
             });
           } else {
