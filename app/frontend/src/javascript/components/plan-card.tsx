@@ -2,7 +2,7 @@
  * This component is a "card" publicly presenting the details of a plan
  */
 
-import React, { Suspense } from 'react';
+import React  from 'react';
 import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
 import { IFilterService } from 'angular';
@@ -11,6 +11,7 @@ import _ from 'lodash'
 import { IApplication } from '../models/application';
 import { Plan } from '../models/plan';
 import { User, UserRole } from '../models/user';
+import { Loader } from './loader';
 import '../lib/i18n';
 
 declare var Application: IApplication;
@@ -122,15 +123,10 @@ const PlanCard: React.FC<PlanCardProps> = ({ plan, user, operator, onSelectPlan,
 }
 
 const PlanCardWrapper: React.FC<PlanCardProps> = ({ plan, user, operator, onSelectPlan, isSelected, $filter }) => {
-  const loading = (
-    <div className="fa-3x">
-      <i className="fas fa-circle-notch fa-spin" />
-    </div>
-  );
   return (
-    <Suspense fallback={loading}>
+    <Loader>
       <PlanCard plan={plan} user={user} operator={operator} isSelected={isSelected} onSelectPlan={onSelectPlan} $filter={$filter} />
-    </Suspense>
+    </Loader>
   );
 }
 

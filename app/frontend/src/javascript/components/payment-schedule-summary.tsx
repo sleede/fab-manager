@@ -2,15 +2,16 @@
  * This component displays a summary of the monthly payment schedule for the current cart, with a subscription
  */
 
-import React, { useState, Suspense } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import Modal from 'react-modal';
 import { react2angular } from 'react2angular';
 import moment from 'moment';
 import { IApplication } from '../models/application';
 import '../lib/i18n';
 import { IFilterService } from 'angular';
 import { PaymentSchedule } from '../models/payment-schedule';
+import { Loader } from './loader';
+import { FabModal } from './fab-modal';
 
 declare var Application: IApplication;
 
@@ -71,33 +72,27 @@ const PaymentScheduleSummary: React.FC<PaymentScheduleSummaryProps> = ({ schedul
             </span>
           </li>
         </ul>}
-        <a className="view-full-schedule" onClick={toggleFullScheduleModal}>{t('app.shared.cart.view_full_schedule')}</a>
-        {/* TODO, create a component FabModal and put this inside */}
-        <Modal isOpen={modal}
-               className="full-schedule-modal"
-               onRequestClose={toggleFullScheduleModal}>
+        <button className="view-full-schedule" onClick={toggleFullScheduleModal}>{t('app.shared.cart.view_full_schedule')}</button>
+        <FabModal title={t('app.shared.cart.your_payment_schedule')} isOpen={modal} toggleModal={toggleFullScheduleModal}>
+          <ul className="full-schedule">
           {schedule.items.map(item => (
-            <li>
+            <li key={String(item.due_date)}>
               <span className="schedule-item-date">{formatDate(item.due_date)}</span>
               <span> </span>
               <span className="schedule-item-price">{formatPrice(item.price)}</span>
             </li>
           ))}
-        </Modal>
+          </ul>
+        </FabModal>
       </div>
     </div>
   );
 }
 const PaymentScheduleSummaryWrapper: React.FC<PaymentScheduleSummaryProps> = ({ schedule, $filter }) => {
-  const loading = (
-    <div className="fa-3x">
-      <i className="fas fa-circle-notch fa-spin" />
-    </div>
-  );
   return (
-    <Suspense fallback={loading}>
+    <Loader>
       <PaymentScheduleSummary schedule={schedule} $filter={$filter} />
-    </Suspense>
+    </Loader>
   );
 }
 

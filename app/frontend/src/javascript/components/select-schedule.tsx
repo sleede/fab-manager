@@ -3,11 +3,12 @@
  * or with a one time payment
  */
 
-import React, { Suspense } from 'react';
+import React  from 'react';
 import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
 import Switch from 'react-switch';
 import { IApplication } from '../models/application';
+import { Loader } from './loader';
 import '../lib/i18n';
 
 declare var Application: IApplication;
@@ -26,22 +27,17 @@ const SelectSchedule: React.FC<SelectScheduleProps> = ({ show, selected, onChang
     <div className="select-schedule">
       {show && <div className={className}>
         <label htmlFor="payment_schedule">{ t('app.shared.cart.monthly_payment') }</label>
-        <Switch checked={selected} id="payment_schedule" onChange={onChange} className="schedule-switch"></Switch>
+        <Switch checked={selected} id="payment_schedule" onChange={onChange} className="schedule-switch" />
       </div>}
     </div>
   );
 }
 
 const SelectScheduleWrapper: React.FC<SelectScheduleProps> = ({ show, selected, onChange, className }) => {
-  const loading = (
-    <div className="fa-3x">
-      <i className="fas fa-circle-notch fa-spin" />
-    </div>
-  );
   return (
-    <Suspense fallback={loading}>
+    <Loader>
       <SelectSchedule show={show} selected={selected} onChange={onChange} className={className} />
-    </Suspense>
+    </Loader>
   );
 }
 
