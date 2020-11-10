@@ -670,10 +670,13 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
               cartItems () {
                 return mkRequestParams(reservation, $scope.coupon.applied);
               },
+              schedule () {
+                return $scope.schedule.payment_schedule;
+              },
               stripeKey: ['Setting', function (Setting) { return Setting.get({ name: 'stripe_public_key' }).$promise; }]
             },
-            controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'cgv', 'Auth', 'Reservation', 'wallet', 'helpers', '$filter', 'coupon', 'cartItems', 'stripeKey',
-              function ($scope, $uibModalInstance, $state, reservation, price, cgv, Auth, Reservation, wallet, helpers, $filter, coupon, cartItems, stripeKey) {
+            controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'cgv', 'Auth', 'Reservation', 'wallet', 'helpers', '$filter', 'coupon', 'cartItems', 'stripeKey', 'schedule',
+              function ($scope, $uibModalInstance, $state, reservation, price, cgv, Auth, Reservation, wallet, helpers, $filter, coupon, cartItems, stripeKey, schedule) {
                 // user wallet amount
                 $scope.walletAmount = wallet.amount;
 
@@ -694,6 +697,9 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
 
                 // stripe publishable key
                 $scope.stripeKey = stripeKey.setting.value;
+
+                // Shows the schedule info in the modal
+                $scope.schedule = schedule;
 
                 /**
                  * Callback to handle the post-payment and reservation
@@ -729,7 +735,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                 return $scope.selectedPlan;
               },
               schedule () {
-                return $scope.schedule.requested_schedule;
+                return $scope.schedule;
               }
             },
             controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', 'Subscription', 'wallet', 'helpers', '$filter', 'coupon', 'selectedPlan', 'schedule',
@@ -752,8 +758,8 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                 // Used in wallet info template to interpolate some translations
                 $scope.numberFilter = $filter('number');
 
-                // TODO, show the schedule info in the modal
-                $scope.schedule = schedule;
+                // Shows the schedule info in the modal
+                $scope.schedule = schedule.payment_schedule;
 
                 // Button label
                 if ($scope.amount > 0) {
@@ -778,7 +784,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                       subscription: {
                         plan_id: selectedPlan.id,
                         user_id: reservation.user_id,
-                        payment_schedule: schedule
+                        payment_schedule: schedule.requested_schedule
                       }
                     }, function (subscription) {
                       $uibModalInstance.close(subscription);
@@ -820,6 +826,8 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
           $scope.coupon.applied = null;
           $scope.slot = null;
           $scope.selectedPlan = null;
+          $scope.schedule.requested_schedule = false;
+          $scope.schedule.payment_schedule = null;
         };
 
         /**

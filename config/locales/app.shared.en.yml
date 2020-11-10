@@ -121,6 +121,7 @@ en:
         _the_general_terms_and_conditions: "the general terms and conditions."
         credit_amount_for_pay_reservation: "{amount} {currency} remains to be paid to confirm your reservation"
         client_credit_amount_for_pay_reservation: "{amount} {currency} remains to be paid to confirm reservation of client"
+        payment_schedule: "You're about to subscribe to a payment schedule of {DEADLINES} months. By paying this bill, you agree to pay all payment deadlines."
         confirm_payment_of_: "Pay: {AMOUNT}"
       #dialog of on site payment for reservations
       valid_reservation_modal:
@@ -128,6 +129,7 @@ en:
         here_is_the_summary_of_the_slots_to_book_for_the_current_user: "Here is the summary of the slots to book for the current user:"
         subscription_confirmation: "Subscription confirmation"
         here_is_the_subscription_summary: "Here is the subscription summary:"
+        payment_schedule: "This subscription is payed with a payment schedule of {DEADLINES} months. By validating, you confirm to collect the first monthly payment."
       #event edition form
       event:
         title: "Title"

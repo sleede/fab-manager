@@ -23,9 +23,12 @@
                 <a href="{{cgv.custom_asset_file_attributes.attachment_url}}" target="_blank" translate>{{ 'app.shared.stripe._the_general_terms_and_conditions' }}</a>
               </label>
             </div>
-              <div ng-if="!cgv">
-                  <input type="hidden" name="acceptCondition" ng-model="acceptCondition" value="true">
-              </div>
+            <div ng-if="!cgv">
+              <input type="hidden" name="acceptCondition" ng-model="acceptCondition" value="true">
+            </div>
+          </div>
+          <div ng-if="schedule">
+            <p translate translate-values="{DEADLINES: schedule.items.length}">{{ 'app.shared.stripe.payment_schedule' }}</p>
           </div>
 
         </div>

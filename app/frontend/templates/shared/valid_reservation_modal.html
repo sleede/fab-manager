@@ -17,6 +17,9 @@
     <p translate>{{ 'app.shared.valid_reservation_modal.here_is_the_subscription_summary' }}</p>
     <p>{{ plan | humanReadablePlanName }}</p>
   </div>
+  <div ng-if="schedule">
+    <p translate translate-values="{DEADLINES: schedule.items.length}">{{ 'app.shared.valid_reservation_modal.payment_schedule' }}</p>
+  </div>
 </div>
 <div class="modal-footer">
   <button class="btn btn-info" ng-click="ok()" ng-disabled="attempting" ng-bind-html="validButtonName"></button>

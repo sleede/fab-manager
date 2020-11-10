@@ -121,6 +121,7 @@ fr:
         _the_general_terms_and_conditions: "les conditions générales de vente."
         credit_amount_for_pay_reservation: "Il vous reste {amount} {currency} à payer pour valider votre réservation"
         client_credit_amount_for_pay_reservation: "Il reste {amount} {currency} à payer pour valider la réservation"
+        payment_schedule: "Vous êtes sur le point de souscrire à un échéancier de paiement de {DEADLINES} mois. En payant cette facture, vous vous engagez à payer l'ensemble des échéances."
         confirm_payment_of_: "Payer : {AMOUNT}"
       #dialog of on site payment for reservations
       valid_reservation_modal:
@@ -128,6 +129,7 @@ fr:
         here_is_the_summary_of_the_slots_to_book_for_the_current_user: "Voici le récapitulatif des créneaux à réserver pour l'utilisateur courant :"
         subscription_confirmation: "Validation de l'abonnement"
         here_is_the_subscription_summary: "Voici le récapitulatif de l'abonnement :"
+        payment_schedule: "Cet abonnement est souscrit par un échéancier de paiement sur {DEADLINES} mois. En validant, vous confirmez encaisser la première mensualité."
       #event edition form
       event:
         title: "Titre"
