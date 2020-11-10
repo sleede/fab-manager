@@ -579,7 +579,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
         const updateCartPrice = function () {
           if (Object.keys($scope.user).length > 0) {
             const r = mkReservation($scope.user, $scope.events.reserved, $scope.selectedPlan);
-            return Price.compute(mkRequestParams(r, $scope.coupon.applied), function (res) {
+            return Price.compute(mkRequestParams({ reservation: r }, $scope.coupon.applied), function (res) {
               $scope.amountTotal = res.price;
               $scope.schedule.payment_schedule = res.schedule;
               $scope.totalNoCoupon = res.price_without_coupon;
@@ -605,19 +605,18 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
 
         /**
          * Format the parameters expected by /api/prices/compute or /api/reservations and return the resulting object
-         * @param reservation {Object} as returned by mkReservation()
+         * @param request {{reservation: object}|{subscription: object}} as returned by mkReservation()
          * @param coupon {Object} Coupon as returned from the API
-         * @return {{reservation:Object, coupon_code:string}}
+         * @return {{reservation:Object, subscription: Object, coupon_code:string}}
          */
-        const mkRequestParams = function (reservation, coupon) {
-          return {
-            reservation,
+        const mkRequestParams = function (request, coupon) {
+          return Object.assign({
             coupon_code: ((coupon ? coupon.code : undefined))
-          };
+          }, request);
         };
 
         /**
-         * Create an hash map implementing the Reservation specs
+         * Create a hash map implementing the Reservation specs
          * @param member {Object} User as retrieved from the API: current user / selected user if current is admin
          * @param slots {Array<Object>} Array of fullCalendar events: slots selected on the calendar
          * @param [plan] {Object} Plan as retrieved from the API: plan to buy with the current reservation
@@ -645,6 +644,23 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
         };
 
         /**
+         * Create a hash map implementing the Subscription specs
+         * @param planId {number}
+         * @param userId {number}
+         * @param schedule {boolean}
+         * @return {{subscription: {payment_schedule: boolean, user_id: number, plan_id: number}}}
+         */
+        const mkSubscription = function (planId, userId, schedule) {
+          return {
+            subscription: {
+              plan_id: planId,
+              user_id: userId,
+              payment_schedule: schedule
+            }
+          };
+        };
+
+        /**
          * Open a modal window that allows the user to process a credit card payment for his current shopping cart.
          */
         const payByStripe = function (reservation) {
@@ -656,7 +672,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                 return reservation;
               },
               price () {
-                return Price.compute(mkRequestParams(reservation, $scope.coupon.applied)).$promise;
+                return Price.compute(mkRequestParams({ reservation }, $scope.coupon.applied)).$promise;
               },
               wallet () {
                 return Wallet.getWalletByUser({ user_id: reservation.user_id }).$promise;
@@ -668,7 +684,11 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                 return $scope.coupon.applied;
               },
               cartItems () {
-                return mkRequestParams(reservation, $scope.coupon.applied);
+                let request = { reservation };
+                if (reservation.slots_attributes.length === 0 && reservation.plan_id) {
+                  request = mkSubscription($scope.selectedPlan.id, reservation.user_id, $scope.schedule.requested_schedule);
+                }
+                return mkRequestParams(request, $scope.coupon.applied);
               },
               schedule () {
                 return $scope.schedule.payment_schedule;
@@ -723,7 +743,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                 return reservation;
               },
               price () {
-                return Price.compute(mkRequestParams(reservation, $scope.coupon.applied)).$promise;
+                return Price.compute(mkRequestParams({ reservation }, $scope.coupon.applied)).$promise;
               },
               wallet () {
                 return Wallet.getWalletByUser({ user_id: reservation.user_id }).$promise;
@@ -779,24 +799,20 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                   $scope.attempting = true;
                   // save subscription (if there's only a subscription selected)
                   if (reservation.slots_attributes.length === 0 && selectedPlan) {
-                    return Subscription.save({
-                      coupon_code: ((coupon ? coupon.code : undefined)),
-                      subscription: {
-                        plan_id: selectedPlan.id,
-                        user_id: reservation.user_id,
-                        payment_schedule: schedule.requested_schedule
-                      }
-                    }, function (subscription) {
-                      $uibModalInstance.close(subscription);
-                      $scope.attempting = true;
-                    }, function (response) {
-                      $scope.alerts = [];
-                      $scope.alerts.push({ msg: _t('app.shared.cart.a_problem_occurred_during_the_payment_process_please_try_again_later'), type: 'danger' });
-                      $scope.attempting = false;
-                    });
+                    const sub = mkSubscription(selectedPlan.id, reservation.user_id, schedule.requested_schedule);
+
+                    return Subscription.save(mkRequestParams(sub, coupon),
+                      function (subscription) {
+                        $uibModalInstance.close(subscription);
+                        $scope.attempting = true;
+                      }, function (response) {
+                        $scope.alerts = [];
+                        $scope.alerts.push({ msg: _t('app.shared.cart.a_problem_occurred_during_the_payment_process_please_try_again_later'), type: 'danger' });
+                        $scope.attempting = false;
+                      });
                   }
                   // otherwise, save the reservation (may include a subscription)
-                  Reservation.save(mkRequestParams($scope.reservation, coupon), function (reservation) {
+                  Reservation.save(mkRequestParams({ reservation: $scope.reservation }, coupon), function (reservation) {
                     $uibModalInstance.close(reservation);
                     $scope.attempting = true;
                   }, function (response) {
