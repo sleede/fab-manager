@@ -162,7 +162,7 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
     $scope.filterDisabledPlans = function (plan) { return !plan.disabled; };
 
     /**
-     * Once the subscription is confirmed (payment process successfully completed), make the plan as subscribed,
+     * Once the subscription has been confirmed (payment process successfully completed), mark the plan as subscribed,
      * and update the user's subscription
      */
     $scope.afterPayment = function () {

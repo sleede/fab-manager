@@ -778,20 +778,25 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                       subscription: {
                         plan_id: selectedPlan.id,
                         user_id: reservation.user_id,
-                        payment_schedule: schedule // TODO, check it is the best place to pass the param
+                        payment_schedule: schedule
                       }
-                    }, function () {
-                      // TODO, then... and error handling
+                    }, function (subscription) {
+                      $uibModalInstance.close(subscription);
+                      $scope.attempting = true;
+                    }, function (response) {
+                      $scope.alerts = [];
+                      $scope.alerts.push({ msg: _t('app.shared.cart.a_problem_occurred_during_the_payment_process_please_try_again_later'), type: 'danger' });
+                      $scope.attempting = false;
                     });
                   }
                   // otherwise, save the reservation (may include a subscription)
                   Reservation.save(mkRequestParams($scope.reservation, coupon), function (reservation) {
                     $uibModalInstance.close(reservation);
-                    return $scope.attempting = true;
+                    $scope.attempting = true;
                   }, function (response) {
                     $scope.alerts = [];
                     $scope.alerts.push({ msg: _t('app.shared.cart.a_problem_occurred_during_the_payment_process_please_try_again_later'), type: 'danger' });
-                    return $scope.attempting = false;
+                    $scope.attempting = false;
                   });
                 };
                 $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
@@ -802,6 +807,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
 
         /**
          * Actions to run after the payment was successful
+         * @param reservation {Object} may be a reservation or a subscription
          */
         const afterPayment = function (reservation) {
           // we set the cart content as 'paid' to display a summary of the transaction
@@ -809,11 +815,11 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
           $scope.amountPaid = $scope.amountTotal;
           // we call the external callback if present
           if (typeof $scope.afterPayment === 'function') { $scope.afterPayment(reservation); }
-          // we reset the coupon and the cart content and we unselect the slot
+          // we reset the coupon, and the cart content, and we unselect the slot
           $scope.events.reserved = [];
           $scope.coupon.applied = null;
           $scope.slot = null;
-          return $scope.selectedPlan = null;
+          $scope.selectedPlan = null;
         };
 
         /**
