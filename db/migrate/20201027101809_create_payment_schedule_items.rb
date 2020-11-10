@@ -7,6 +7,7 @@ class CreatePaymentScheduleItems < ActiveRecord::Migration[5.2]
       t.integer :amount
       t.datetime :due_date
       t.belongs_to :payment_schedule, foreign_key: true
+      t.belongs_to :invoice, foreign_key: true
 
       t.timestamps
     end
