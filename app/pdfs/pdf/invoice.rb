@@ -199,8 +199,8 @@ class PDF::Invoice < Prawn::Document
         elsif cp.type == 'amount_off'
           # refunds of invoices with cash coupons: we need to ventilate coupons on paid items
           if invoice.is_a?(Avoir)
-            paid_items = invoice.invoice.invoice_items.select{ |ii| ii.amount.positive? }.length
-            refund_items = invoice.invoice_items.select{ |ii| ii.amount.positive? }.length
+            paid_items = invoice.invoice.invoice_items.select { |ii| ii.amount.positive? }.length
+            refund_items = invoice.invoice_items.select { |ii| ii.amount.positive? }.length
 
             discount = ((invoice.coupon.amount_off / paid_items) * refund_items) / 100.00
           else

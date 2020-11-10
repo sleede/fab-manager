@@ -1513,7 +1513,7 @@ CREATE TABLE public.payment_schedules (
     footprint character varying,
     environment character varying,
     invoicing_profile_id bigint,
-    operator_profile_id_id bigint,
+    operator_profile_id bigint,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -4554,10 +4554,10 @@ CREATE INDEX index_payment_schedules_on_invoicing_profile_id ON public.payment_s
 
 
 --
--- Name: index_payment_schedules_on_operator_profile_id_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_payment_schedules_on_operator_profile_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_payment_schedules_on_operator_profile_id_id ON public.payment_schedules USING btree (operator_profile_id_id);
+CREATE INDEX index_payment_schedules_on_operator_profile_id ON public.payment_schedules USING btree (operator_profile_id);
 
 
 --
@@ -5379,6 +5379,14 @@ ALTER TABLE ONLY public.projects_machines
 
 
 --
+-- Name: payment_schedules fk_rails_8b73dd8d7d; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payment_schedules
+    ADD CONSTRAINT fk_rails_8b73dd8d7d FOREIGN KEY (operator_profile_id) REFERENCES public.invoicing_profiles(id);
+
+
+--
 -- Name: availability_tags fk_rails_8cb4e921f7; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5440,14 +5448,6 @@ ALTER TABLE ONLY public.projects_themes
 
 ALTER TABLE ONLY public.projects_themes
     ADD CONSTRAINT fk_rails_b021a22658 FOREIGN KEY (theme_id) REFERENCES public.themes(id);
-
-
---
--- Name: payment_schedules fk_rails_b38f5b39f6; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.payment_schedules
-    ADD CONSTRAINT fk_rails_b38f5b39f6 FOREIGN KEY (operator_profile_id_id) REFERENCES public.invoicing_profiles(id);
 
 
 --

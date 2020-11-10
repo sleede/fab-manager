@@ -16,7 +16,7 @@ class CreatePaymentSchedules < ActiveRecord::Migration[5.2]
       t.string :footprint
       t.string :environment
       t.belongs_to :invoicing_profile, foreign_key: true
-      t.references :operator_profile_id, foreign_key: { to_table: 'invoicing_profiles' }
+      t.references :operator_profile, foreign_key: { to_table: 'invoicing_profiles' }
 
       t.timestamps
     end

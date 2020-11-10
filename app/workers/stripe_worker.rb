@@ -73,4 +73,32 @@ class StripeWorker
     )
     plan.update_columns(stp_price_id: price.id)
   end
+
+  def create_stripe_subscription(payment_schedule_id, first_invoice_items)
+    payment_schedule = PaymentSchedule.find(payment_schedule_id)
+
+    items = []
+    first_invoice_items.each do |fii|
+      # TODO, fill  this prices with real data
+      price = Stripe::Price.create({
+                                     unit_amount: 2000,
+                                     currency: 'eur',
+                                     recurring: { interval: 'month' },
+                                     product_data: {
+                                       name: 'lorem ipsum'
+                                     }
+                                   },
+                                   { api_key: Setting.get('stripe_secret_key') })
+      items.push(price: price[:id])
+    end
+    Stripe::Subscription.create({
+                                  customer: payment_schedule.invoicing_profile.user.stp_customer_id,
+                                  cancel_at: payment_schedule.scheduled.expiration_date,
+                                  promotion_code: payment_schedule.coupon&.code,
+                                  add_invoice_items: items,
+                                  items: [
+                                    { price: payment_schedule.scheduled.plan.stp_price_id }
+                                  ]
+                                }, { api_key: Setting.get('stripe_secret_key') })
+  end
 end

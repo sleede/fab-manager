@@ -41,4 +41,17 @@ class PaymentScheduleService
     end
     { payment_schedule: ps, items: items }
   end
+
+  def create(subscription, total, coupon, operator, payment_method)
+    schedule = compute(subscription.plan, total, coupon)
+    ps = schedule[:payment_schedule]
+    items = schedule[:items]
+
+    ps.scheduled = subscription
+    ps.payment_method = payment_method
+    ps.operator_profile_id = operator
+    items.each do |item|
+      item.payment_schedule = ps
+    end
+  end
 end
