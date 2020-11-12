@@ -1,7 +1,12 @@
 export interface PaymentScheduleItem {
   id: number,
-  price: number,
+  amount: number,
   due_date: Date
+  details: {
+    recurring: number,
+    adjustment: number,
+    other_items: number
+  }
 }
 
 export interface PaymentSchedule {

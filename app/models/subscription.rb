@@ -7,6 +7,7 @@ class Subscription < ApplicationRecord
   belongs_to :plan
   belongs_to :statistic_profile
 
+  has_one :payment_schedule, as: :scheduled, dependent: :destroy
   has_many :invoices, as: :invoiced, dependent: :destroy
   has_many :offer_days, dependent: :destroy
 
@@ -53,7 +54,7 @@ class Subscription < ApplicationRecord
     method = operator&.admin? || (operator&.manager? && operator != user) ? nil : 'stripe'
     coupon = Coupon.find_by(code: coupon_code) unless coupon_code.nil?
 
-    schedule = PaymentScheduleService.new.create(self, plan.amount, coupon, operator, method)
+    schedule = PaymentScheduleService.new.create(self, plan.amount, coupon: coupon, operator: operator, payment_method: method)
 
   end
 

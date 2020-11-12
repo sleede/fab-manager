@@ -3,4 +3,5 @@
 # Represents a due date and the associated amount for a PaymentSchedule
 class PaymentScheduleItem < ApplicationRecord
   belongs_to :payment_schedule
+  belongs_to :invoice
 end

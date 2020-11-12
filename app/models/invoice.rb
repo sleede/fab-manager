@@ -22,6 +22,7 @@ class Invoice < ApplicationRecord
   belongs_to :offer_day, foreign_type: 'OfferDay', foreign_key: 'invoiced_id'
 
   has_one :avoir, class_name: 'Invoice', foreign_key: :invoice_id, dependent: :destroy
+  has_one :payment_schedule_item
   belongs_to :operator_profile, foreign_key: :operator_profile_id, class_name: 'InvoicingProfile'
 
   before_create :add_environment

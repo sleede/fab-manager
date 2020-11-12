@@ -1470,6 +1470,7 @@ CREATE TABLE public.payment_schedule_items (
     id bigint NOT NULL,
     amount integer,
     due_date timestamp without time zone,
+    details jsonb DEFAULT '"{}"'::jsonb,
     payment_schedule_id bigint,
     invoice_id bigint,
     created_at timestamp without time zone NOT NULL,

@@ -144,10 +144,9 @@ class Price < ApplicationRecord
       cp = cs.validate(options[:coupon_code], user.id)
       total_amount = cs.apply(total_amount, cp)
 
-      # == generate PaymentSchedule ()if applicable) ===
+      # == generate PaymentSchedule (if applicable) ===
       schedule = if options[:payment_schedule] && plan.monthly_payment
-                   pss = PaymentScheduleService.new
-                   pss.compute(plan, _amount_no_coupon, cp)
+                   PaymentScheduleService.new.compute(plan, _amount_no_coupon, cp)
                  else
                    nil
                  end

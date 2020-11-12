@@ -13,7 +13,7 @@ end
 if @amount[:schedule]
   json.schedule do
     json.items @amount[:schedule][:items] do |item|
-      json.price item.amount / 100.00
+      json.amount item.amount / 100.00
       json.due_date item.due_date
     end
   end

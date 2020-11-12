@@ -28,7 +28,10 @@ class PaymentScheduleService
     items = []
     (0..deadlines - 1).each do |i|
       date = DateTime.current + i.months
+      details = { recurring: per_month }
       amount = if i.zero?
+                 details[:adjustment] = adjustment
+                 details[:other_items] = other_items
                  per_month + adjustment + other_items
                else
                  per_month
@@ -36,13 +39,14 @@ class PaymentScheduleService
       items.push PaymentScheduleItem.new(
         amount: amount,
         due_date: date,
-        payment_schedule: ps
+        payment_schedule: ps,
+        details: details
       )
     end
     { payment_schedule: ps, items: items }
   end
 
-  def create(subscription, total, coupon, operator, payment_method)
+  def create(subscription, total, coupon: nil, operator: nil, payment_method: nil, reservation: nil)
     schedule = compute(subscription.plan, total, coupon)
     ps = schedule[:payment_schedule]
     items = schedule[:items]
@@ -50,11 +54,13 @@ class PaymentScheduleService
     ps.scheduled = subscription
     ps.payment_method = payment_method
     ps.operator_profile_id = operator
+    ps.save!
     # TODO, fields: reference, wallet_amount, wallet_transaction_id, footprint, environment, invoicing_profile
     items.each do |item|
       item.payment_schedule = ps
+      item.save!
     end
 
-    StripeWorker.perform_async(:create_stripe_subscription, ps.id)
+    StripeWorker.perform_async(:create_stripe_subscription, ps.id, reservation&.reservable&.stp_product_id)
   end
 end

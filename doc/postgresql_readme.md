@@ -77,5 +77,6 @@ This is currently not supported, because of some PostgreSQL specific instruction
  - `app/models/project.rb` is using the `pg_search` gem.
  - `db/migrate/20200622135401_add_pg_search_dmetaphone_support_functions.rb` is using [fuzzystrmatch](http://www.postgresql.org/docs/current/static/fuzzystrmatch.html) module and defines a PL/pgSQL function (`pg_search_dmetaphone()`);
  - `db/migrate/20200623134900_add_search_vector_to_project.rb` is using [tsvector](https://www.postgresql.org/docs/10/datatype-textsearch.html), a PostgreSQL datatype and [GIN  (Generalized Inverted Index)](https://www.postgresql.org/docs/9.1/textsearch-indexes.html) a PostgreSQL index type; 
- - `db/migrate/20200623141305_update_search_vector_of_projects.rb` is defines a PL/pgSQL function (`fill_search_vector_for_project()`) and create an SQL trigger for this function;
+ - `db/migrate/20200623141305_update_search_vector_of_projects.rb` defines a PL/pgSQL function (`fill_search_vector_for_project()`) and create an SQL trigger for this function;
  - `db/migrate/20200629123011_update_pg_trgm.rb` is using [ALTER EXTENSION](https://www.postgresql.org/docs/10/sql-alterextension.html);
+ - `db/migrate/20201027101809_create_payment_schedule_items.rb` is using [jsonb](https://www.postgresql.org/docs/9.4/static/datatype-json.html);
