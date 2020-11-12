@@ -45,33 +45,27 @@ class StripeWorker
     cpn.delete
   end
 
-  def create_stripe_price(plan)
-    product = if !plan.stp_price_id.nil?
-                p = Stripe::Price.update(
-                  plan.stp_price_id,
-                  { metadata: { archived: true } },
-                  { api_key: Setting.get('stripe_secret_key') }
-                )
-                p.product
-              else
-                p = Stripe::Product.create(
-                  {
-                    name: plan.name,
-                    metadata: { plan_id: plan.id }
-                  }, { api_key: Setting.get('stripe_secret_key') }
-                )
-                p.id
-              end
-
-    price = Stripe::Price.create(
-      {
-        currency: Setting.get('stripe_currency'),
-        unit_amount: plan.amount,
-        product: product
-      },
-      { api_key: Setting.get('stripe_secret_key') }
-    )
-    plan.update_columns(stp_price_id: price.id)
+  def create_or_update_stp_product(class_name, id)
+    object = class_name.constantize.find(id)
+    if !object.stp_product_id.nil?
+      Stripe::Product.update(
+        object.stp_product_id,
+        { name: object.name },
+        { api_key: Setting.get('stripe_secret_key') }
+      )
+      p.product
+    else
+      product = Stripe::Product.create(
+        {
+          name: object.name,
+          metadata: {
+            id: object.id,
+            type: class_name
+          }
+        }, { api_key: Setting.get('stripe_secret_key') }
+      )
+      object.update_attributes(stp_product_id: product.id)
+    end
   end
 
   def create_stripe_subscription(payment_schedule_id, first_invoice_items)
@@ -79,7 +73,7 @@ class StripeWorker
 
     items = []
     first_invoice_items.each do |fii|
-      # TODO, fill  this prices with real data
+      # TODO, fill this prices with real data
       price = Stripe::Price.create({
                                      unit_amount: 2000,
                                      currency: 'eur',
@@ -91,14 +85,15 @@ class StripeWorker
                                    { api_key: Setting.get('stripe_secret_key') })
       items.push(price: price[:id])
     end
-    Stripe::Subscription.create({
-                                  customer: payment_schedule.invoicing_profile.user.stp_customer_id,
-                                  cancel_at: payment_schedule.scheduled.expiration_date,
-                                  promotion_code: payment_schedule.coupon&.code,
-                                  add_invoice_items: items,
-                                  items: [
-                                    { price: payment_schedule.scheduled.plan.stp_price_id }
-                                  ]
-                                }, { api_key: Setting.get('stripe_secret_key') })
+    stp_subscription = Stripe::Subscription.create({
+                                                     customer: payment_schedule.invoicing_profile.user.stp_customer_id,
+                                                     cancel_at: payment_schedule.scheduled.expiration_date,
+                                                     promotion_code: payment_schedule.coupon&.code,
+                                                     add_invoice_items: items,
+                                                     items: [
+                                                       { price: payment_schedule.scheduled.plan.stp_price_id }
+                                                     ]
+                                                   }, { api_key: Setting.get('stripe_secret_key') })
+    payment_schedule.update_attributes(stp_subscription_id: stp_subscription.id)
   end
 end

@@ -50,8 +50,11 @@ class PaymentScheduleService
     ps.scheduled = subscription
     ps.payment_method = payment_method
     ps.operator_profile_id = operator
+    # TODO, fields: reference, wallet_amount, wallet_transaction_id, footprint, environment, invoicing_profile
     items.each do |item|
       item.payment_schedule = ps
     end
+
+    StripeWorker.perform_async(:create_stripe_subscription, ps.id)
   end
 end

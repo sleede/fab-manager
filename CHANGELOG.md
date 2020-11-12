@@ -7,6 +7,7 @@
 - Fix a bug: when a cash coupon was used, an invalid amount is shown in the statistics
 - [TODO DEPLOY] `rails fablab:stripe:plans_prices`
 - [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
+- [TODO DEPLOY] `rails fabalb:stripe:set_product_id`
 
 ## v4.6.3 2020 October 28
 

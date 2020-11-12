@@ -1166,7 +1166,8 @@ CREATE TABLE public.machines (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     slug character varying,
-    disabled boolean
+    disabled boolean,
+    stp_product_id character varying
 );
 
 
@@ -1561,7 +1562,7 @@ CREATE TABLE public.plans (
     slug character varying,
     disabled boolean,
     monthly_payment boolean,
-    stp_price_id character varying
+    stp_product_id character varying
 );
 
 
@@ -2150,7 +2151,8 @@ CREATE TABLE public.spaces (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     characteristics text,
-    disabled boolean
+    disabled boolean,
+    stp_product_id character varying
 );
 
 
@@ -2680,7 +2682,8 @@ CREATE TABLE public.trainings (
     slug character varying,
     description text,
     public_page boolean DEFAULT true,
-    disabled boolean
+    disabled boolean,
+    stp_product_id character varying
 );
 
 
@@ -5876,6 +5879,6 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20201027092149'),
 ('20201027100746'),
 ('20201027101809'),
-('20201027145651');
+('20201112092002');
 
 
