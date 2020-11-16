@@ -31,7 +31,7 @@ class StripeWorker
       stp_coupon[:percent_off] = coupon.percent_off
     elsif coupon.type == 'amount_off'
       stp_coupon[:amount_off] = coupon.amount_off
-      stp_coupon[:currency] = Rails.application.secrets.stripe_currency
+      stp_coupon[:currency] = Setting.get('stripe_currency')
     end
 
     stp_coupon[:redeem_by] = coupon.valid_until.to_i unless coupon.valid_until.nil?
