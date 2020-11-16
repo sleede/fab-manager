@@ -9,6 +9,7 @@
 - [TODO DEPLOY] `rails fablab:stripe:plans_prices`
 - [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
 - [TODO DEPLOY] `rails fablab:stripe:set_product_id`
+- [TODO DEPLOY] `rails fablab:setup:add_schedule_reference`
 
 ## v4.6.3 2020 October 28
 
