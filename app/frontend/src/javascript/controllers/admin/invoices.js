@@ -260,6 +260,8 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         sample = sample.replace(/W\[([^\]]+)\]/g, '');
         // information about refunds (R[text]) - does not apply here
         sample = sample.replace(/R\[([^\]]+)\]/g, '');
+        // information about payment schedules (S[text]) -does not apply here
+        sample = sample.replace(/S\[([^\]]+)\]/g, '');
       }
       return sample;
     };

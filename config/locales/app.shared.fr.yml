@@ -386,6 +386,7 @@ fr:
       cart:
         summary: "Résumé"
         select_one_or_more_slots_in_the_calendar: "Sélectionnez un {SINGLE, select, true{créneau} other{ou plusieurs créneaux}} dans le calendrier"
+        select_a_plan: "Sélectionnez une formule d'abonnement ici"
         you_ve_just_selected_the_slot: "Vous venez de sélectionner le créneau :"
         datetime_to_time: "{START_DATETIME} à {END_TIME}" #eg: Thursday, September 4, 1986 8:30 PM to 10:00 PM
         cost_of_TYPE: "Coût {TYPE, select, Machine{du créneau machine} Training{de la formation} Space{du créneau espace} other{de l'élément}}"

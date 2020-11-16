@@ -588,7 +588,7 @@ unless Setting.find_by(name: 'invoice_logo').try(:value)
   setting.save
 end
 
-Setting.set('invoice_reference', 'YYMMmmmX[/VL]R[/A]') unless Setting.find_by(name: 'invoice_reference').try(:value)
+Setting.set('invoice_reference', 'YYMMmmmX[/VL]R[/A]S[/E]') unless Setting.find_by(name: 'invoice_reference').try(:value)
 
 Setting.set('invoice_code-active', true) unless Setting.find_by(name: 'invoice_code-active').try(:value)
 

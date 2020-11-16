@@ -440,6 +440,7 @@ fr:
         important_notes: "Informations importantes"
         address_and_legal_information: "Adresse et informations légales"
         invoice_reference: "Référence facture"
+        text: "texte"
         year: "Année"
         month: "Mois"
         day: "Jour"
@@ -447,6 +448,7 @@ fr:
         online_sales: "Vente en ligne"
         wallet: "Porte-monnaie"
         refund: "Remboursement"
+        payment_schedule: "Échéancier"
         model: "Modèle"
         documentation: "Documentation"
         2_digits_year: "Année sur 2 chiffres (ex. 70)"
@@ -470,8 +472,9 @@ fr:
         add_a_notice_regarding_refunds_only_if_the_invoice_is_concerned: "Ajoute une information relative aux remboursements, uniquement si cela concerne la facture."
         this_will_never_be_added_when_an_online_sales_notice_is_present: "Ceci ne sera jamais cumulé avec une information de vente en ligne."
         eg_RA_will_add_A_to_the_refund_invoices: '(ex. R[/A] ajoutera "/A" aux factures de remboursement)'
-        add_a_notice_regarding_the_wallet_only_if_the_invoice_is_concerned: "Ajoute une information relative au paiement par le porte-monnaie, uniquement si cela concerne la facture."
-        eg_WPM_will_add_PM_to_the_invoices_settled_with_wallet: '(ex. W[/PM] ajoutera "/PM" aux factures réglées avec porte-monnaie)'
+        add_a_notice_regarding_payment_schedule: "Ajoute une information relative aux échéanciers de paiement, uniquement pour les documents concernés."
+        this_will_never_be_added_with_other_notices: "Ceci ne sera jamais cumulé avec une autre information (remboursement ou vente en ligne)."
+        eg_SE_to_schedules: '(ex. S[/É] ajoutera "/É" aux échéanciers de paiement)'
         code: "Code"
         enable_the_code: "Activer le code"
         enabled: "Activé"

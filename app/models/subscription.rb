@@ -51,11 +51,10 @@ class Subscription < ApplicationRecord
 
   def generate_schedule(operator_profile_id, coupon_code = nil, payment_intent_id = nil)
     operator = InvoicingProfile.find(operator_profile_id)&.user
-    method = operator&.admin? || (operator&.manager? && operator != user) ? nil : 'stripe'
+    method = operator&.admin? || (operator&.manager? && operator != user) ? nil : 'stripe' # FIXME, paiement à l'accueil
     coupon = Coupon.find_by(code: coupon_code) unless coupon_code.nil?
 
-    schedule = PaymentScheduleService.new.create(self, plan.amount, coupon: coupon, operator: operator, payment_method: method)
-
+    schedule = PaymentScheduleService.new.create(self, plan.amount, coupon: coupon, operator: operator, payment_method: method, user: user)
   end
 
   def generate_invoice(operator_profile_id, coupon_code = nil, payment_intent_id = nil)

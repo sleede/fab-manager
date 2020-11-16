@@ -312,24 +312,24 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
           // What the bound slot
           $scope.$watch('slotSelectionTime', function (newValue, oldValue) {
             if (newValue !== oldValue) {
-              return slotSelectionChanged();
+              slotSelectionChanged();
             }
           });
           $scope.$watch('user', function (newValue, oldValue) {
             if (newValue !== oldValue) {
               resetCartState();
-              return updateCartPrice();
+              updateCartPrice();
             }
           });
           $scope.$watch('planSelectionTime', function (newValue, oldValue) {
             if (newValue !== oldValue) {
-              return planSelectionChanged();
+              planSelectionChanged();
             }
           });
           // watch when a coupon is applied to re-compute the total price
           $scope.$watch('coupon.applied', function (newValue, oldValue) {
             if (newValue !== oldValue) {
-              return updateCartPrice();
+              updateCartPrice();
             }
           });
         };
@@ -524,6 +524,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
          */
         const resetCartState = function () {
           $scope.selectedPlan = null;
+          $scope.paidPlan = null;
           $scope.coupon.applied = null;
           $scope.events.moved = null;
           $scope.events.paid = [];
@@ -838,9 +839,16 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
           // we call the external callback if present
           if (typeof $scope.afterPayment === 'function') { $scope.afterPayment(reservation); }
           // we reset the coupon, and the cart content, and we unselect the slot
-          $scope.events.reserved = [];
           $scope.coupon.applied = null;
-          $scope.slot = null;
+          if ($scope.slot) {
+            // reservation (+ subscription)
+            $scope.slot = null;
+            $scope.events.reserved = [];
+          } else {
+            // subscription only
+            $scope.events = {};
+          }
+          $scope.paidPlan = $scope.selectedPlan;
           $scope.selectedPlan = null;
           $scope.schedule.requested_schedule = false;
           $scope.schedule.payment_schedule = null;

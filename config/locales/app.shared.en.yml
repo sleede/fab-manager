@@ -386,6 +386,7 @@ en:
       cart:
         summary: "Summary"
         select_one_or_more_slots_in_the_calendar: "Select one {SINGLE, select, true{slot} other{or more slots}} in the calendar"
+        select_a_plan: "Select a plan here"
         you_ve_just_selected_the_slot: "You've just selected the slot:"
         datetime_to_time: "{START_DATETIME} to {END_TIME}" #eg: Thursday, September 4, 1986 8:30 PM to 10:00 PM
         cost_of_TYPE: "Cost of the {TYPE, select, Machine{machine slot} Training{training} Space{space slot} other{element}}"

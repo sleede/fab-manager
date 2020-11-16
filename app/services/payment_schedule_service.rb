@@ -46,21 +46,22 @@ class PaymentScheduleService
     { payment_schedule: ps, items: items }
   end
 
-  def create(subscription, total, coupon: nil, operator: nil, payment_method: nil, reservation: nil)
+  def create(subscription, total, coupon: nil, operator: nil, payment_method: nil, reservation: nil, user: nil)
     schedule = compute(subscription.plan, total, coupon)
     ps = schedule[:payment_schedule]
     items = schedule[:items]
 
     ps.scheduled = subscription
     ps.payment_method = payment_method
-    ps.operator_profile_id = operator
+    ps.operator_profile = operator.invoicing_profile
+    ps.invoicing_profile = user.invoicing_profile
     ps.save!
-    # TODO, fields: reference, wallet_amount, wallet_transaction_id, footprint, environment, invoicing_profile
     items.each do |item|
       item.payment_schedule = ps
       item.save!
     end
 
     StripeWorker.perform_async(:create_stripe_subscription, ps.id, reservation&.reservable&.stp_product_id)
+    ps
   end
 end

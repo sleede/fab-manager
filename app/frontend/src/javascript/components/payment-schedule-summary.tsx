@@ -94,7 +94,6 @@ const PaymentScheduleSummaryWrapper: React.FC<PaymentScheduleSummaryProps> = ({ 
   return (
     <Loader>
       <PaymentScheduleSummary schedule={schedule} $filter={$filter} />
-      <div>lorem ipsum</div>
     </Loader>
   );
 }

@@ -440,6 +440,7 @@ en:
         important_notes: "Important notes"
         address_and_legal_information: "Address and legal information"
         invoice_reference: "Invoice reference"
+        text: "text"
         year: "Year"
         month: "Month"
         day: "Day"
@@ -447,6 +448,7 @@ en:
         online_sales: "Online sales"
         wallet: "Wallet"
         refund: "Refund"
+        payment_schedule: "Payment schedule"
         model: "Model"
         documentation: "Documentation"
         2_digits_year: "2 digits year (eg. 70)"
@@ -469,9 +471,10 @@ en:
         eg_XVL_will_add_VL_to_the_invoices_settled_with_stripe: '(eg. X[/VL] will add "/VL" to the invoices settled with stripe)'
         add_a_notice_regarding_refunds_only_if_the_invoice_is_concerned: "Add a notice regarding refunds, only if the invoice is concerned."
         this_will_never_be_added_when_an_online_sales_notice_is_present: "This will never be added when an online sales notice is present."
-        eg_RA_will_add_A_to_the_refund_invoices: '(ed. R[/A] will add "/A" to the refund invoices)'
-        add_a_notice_regarding_the_wallet_only_if_the_invoice_is_concerned: "Add a notice regarding the wallet, only if the invoice is concerned."
-        eg_WPM_will_add_PM_to_the_invoices_settled_with_wallet: '(eg. W[/PM] will add "/PM" to the invoices settled with wallet)'
+        eg_RA_will_add_A_to_the_refund_invoices: '(eg. R[/A] will add "/A" to the refund invoices)'
+        add_a_notice_regarding_payment_schedule: "Add a notice regarding the payment schedules, only for concerned documents."
+        this_will_never_be_added_with_other_notices: "This will never be added when any other notice is present."
+        eg_SE_to_schedules: '(eg. S[/E] will add "/E" to the payment schedules)'
         code: "Code"
         enable_the_code: "Enable the code"
         enabled: "Enabled"

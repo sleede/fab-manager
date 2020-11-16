@@ -1,11 +1,14 @@
-<div class="widget panel b-a m m-t-lg" ng-if="user && !events.modifiable && !events.moved">
+<div class="widget panel b-a m m-t-lg" ng-if="user && !events.modifiable && !events.moved && !paidPlan">
   <div class="panel-heading b-b small">
     <h3 translate>{{ 'app.shared.cart.summary' }}</h3>
   </div>
 
-  <div class="widget-content no-bg auto wrapper" ng-show="events.reserved.length == 0 && (!events.paid || events.paid.length == 0)">
-    <p class="font-felt fleche-left text-lg"><img src="../../images/arrow-left.png" class="fleche-left visible-lg" />
-      {{ 'app.shared.cart.select_one_or_more_slots_in_the_calendar' | translate:{SINGLE:limitToOneSlot} }}</p>
+  <div class="widget-content no-bg auto wrapper" ng-show="(!events.reserved && !selectedPlan) || events.reserved.length == 0 && (!events.paid || events.paid.length == 0)">
+    <p class="font-felt fleche-left text-lg">
+      <img src="../../images/arrow-left.png" class="fleche-left visible-lg" />
+      <span ng-show="events.reserved">{{ 'app.shared.cart.select_one_or_more_slots_in_the_calendar' | translate:{SINGLE:limitToOneSlot} }}</span>
+      <span ng-hide="events.reserved" translate>{{ 'app.shared.cart.select_a_plan' }}</span>
+    </p>
   </div>
 
   <div class="widget-content no-bg auto wrapper" ng-if="events.reserved.length > 0">

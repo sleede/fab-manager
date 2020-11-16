@@ -76,22 +76,22 @@ class StripeWorker
 
     items = []
     if first_item.amount != second_item.amount
-      if first_item.details[:adjustment]
+      unless first_item.details['adjustment']&.zero?
         # adjustment: when dividing the price of the plan / months, sometimes it forces us to round the amount per month.
         # The difference is invoiced here
         p1 = Stripe::Price.create({
-                                    unit_amount: first_item.details[:adjustment],
+                                    unit_amount: first_item.details['adjustment'],
                                     currency: Setting.get('stripe_currency'),
                                     product: payment_schedule.scheduled.plan.stp_product_id,
-                                    nickname: "Price adjustment payment schedule #{payment_schedule_id}"
+                                    nickname: "Price adjustment for payment schedule #{payment_schedule_id}"
                                   }, { api_key: Setting.get('stripe_secret_key') })
         items.push(price: p1[:id])
       end
-      if first_item.details[:other_items]
+      unless first_item.details['other_items']&.zero?
         # when taking a subscription at the same time of a reservation (space, machine or training), the amount of the
         # reservation is invoiced here.
         p2 = Stripe::Price.create({
-                                    unit_amount: first_item.details[:other_items],
+                                    unit_amount: first_item.details['other_items'],
                                     currency: Setting.get('stripe_currency'),
                                     product: reservable_stp_id,
                                     nickname: "Reservations for payment schedule #{payment_schedule_id}"
@@ -102,7 +102,7 @@ class StripeWorker
 
     # subscription (recurring price)
     price = Stripe::Price.create({
-                                   unit_amount: first_item.details[:recurring],
+                                   unit_amount: first_item.details['recurring'],
                                    currency: Setting.get('stripe_currency'),
                                    recurring: { interval: 'month', interval_count: 1 },
                                    product: payment_schedule.scheduled.plan.stp_product_id
