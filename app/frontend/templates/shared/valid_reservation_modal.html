@@ -18,7 +18,19 @@
     <p>{{ plan | humanReadablePlanName }}</p>
   </div>
   <div ng-if="schedule">
-    <p translate translate-values="{DEADLINES: schedule.items.length}">{{ 'app.shared.valid_reservation_modal.payment_schedule' }}</p>
+    <payment-schedule-summary schedule="schedule"></payment-schedule-summary>
+    <label for="method" translate>{{ 'app.shared.valid_reservation_modal.payment_method' }}</label>
+    <select id="method"
+            class="form-control m-b"
+            ng-model="payment_method">
+      <option value="stripe" translate>{{ 'app.shared.valid_reservation_modal.method_stripe' }}</option>
+      <option value="check" translate>{{ 'app.shared.valid_reservation_modal.method_check' }}</option>
+      <!-- TODO, pay 1st deadline with wallet -->
+      <!-- TODO, notify about unable to pay with the wallet -->
+      <!-- TODO, compute 1st deadline with wallet -->
+    </select>
+    <p ng-show="payment_method == 'stripe'" translate>{{ 'app.shared.valid_reservation_modal.stripe_collection_info' }}</p>
+    <p ng-show="payment_method == 'check'" translate translate-values="{DEADLINES: schedule.items.length}">{{ 'app.shared.valid_reservation_modal.check_collection_info' }}</p>
   </div>
 </div>
 <div class="modal-footer">

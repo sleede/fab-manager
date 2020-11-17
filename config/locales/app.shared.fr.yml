@@ -129,7 +129,11 @@ fr:
         here_is_the_summary_of_the_slots_to_book_for_the_current_user: "Voici le récapitulatif des créneaux à réserver pour l'utilisateur courant :"
         subscription_confirmation: "Validation de l'abonnement"
         here_is_the_subscription_summary: "Voici le récapitulatif de l'abonnement :"
-        payment_schedule: "Cet abonnement est souscrit par un échéancier de paiement sur {DEADLINES} mois. En validant, vous confirmez encaisser la première mensualité."
+        payment_method: "Moyen de paiement"
+        method_stripe: "Carte bancaire en ligne"
+        method_check: "Par chèques"
+        stripe_collection_info: "En validant, vous serez invité à saisir les informations de carte bancaire du membre. Cette carte sera prélevée automatiquement aux échéances."
+        check_collection_info: "En validant, vous confirmez être en possession de {DEADLINES} chèques permettant d'encaisser l'ensemble des mensualité."
       #event edition form
       event:
         title: "Titre"

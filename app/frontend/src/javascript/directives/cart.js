@@ -782,6 +782,9 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                 // Shows the schedule info in the modal
                 $scope.schedule = schedule.payment_schedule;
 
+                // how should we collect payments for the payment schedule
+                $scope.payment_method = 'stripe';
+
                 // Button label
                 if ($scope.amount > 0) {
                   $scope.validButtonName = _t('app.shared.cart.confirm_payment_of_html', { ROLE: $rootScope.currentUser.role, AMOUNT: $filter('currency')($scope.amount) });

@@ -111,7 +111,7 @@ class StripeWorker
 
     stp_subscription = Stripe::Subscription.create({
                                                      customer: payment_schedule.invoicing_profile.user.stp_customer_id,
-                                                     cancel_at: payment_schedule.scheduled.expiration_date,
+                                                     cancel_at: payment_schedule.scheduled.expiration_date.to_i,
                                                      promotion_code: payment_schedule.coupon&.code,
                                                      add_invoice_items: items,
                                                      items: [

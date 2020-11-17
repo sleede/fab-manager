@@ -15,6 +15,8 @@ class InvoiceReferenceService
 
         # remove information about online selling (X[text])
         reference.gsub!(/X\[([^\]]+)\]/, ''.to_s)
+        # remove information about payment schedule (S[text])
+        reference.gsub!(/S\[([^\]]+)\]/, ''.to_s)
       elsif payment_schedule
         # information about payment schedule
         reference.gsub!(/S\[([^\]]+)\]/, '\1')
@@ -32,6 +34,8 @@ class InvoiceReferenceService
 
         # remove information about refunds (R[text])
         reference.gsub!(/R\[([^\]]+)\]/, ''.to_s)
+        # remove information about payment schedule (S[text])
+        reference.gsub!(/S\[([^\]]+)\]/, ''.to_s)
       end
 
       reference
@@ -142,7 +146,7 @@ class InvoiceReferenceService
     # @param klass {ActiveRecord::Base}
     ##
     def get_max_id(klass)
-      ActiveRecord::Base.connection.execute("SELECT max(id) FROM #{klass.table_name}").getvalue(0, 0)
+      ActiveRecord::Base.connection.execute("SELECT max(id) FROM #{klass.table_name}").getvalue(0, 0) || 0
     end
   end
 end
