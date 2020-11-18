@@ -325,15 +325,23 @@ fr:
         amount_minimum_1: "Le montant minimum est de 1"
         amount_confirm_is_required: "La confirmation du montant est requise."
         amount_confirm_does_not_match: "La confirmation du montant ne correspond pas."
-        you_have_amount_in_wallet: "Vous avez {amount} {currency} sur votre porte-monnaie"
-        client_have_amount_in_wallet: "Le client a {amount} {currency} sur son porte-monnaie"
-        wallet_pay_reservation: "Vous pouvez payer votre réservation directement"
-        client_wallet_pay_reservation: "Le membre peut directement payer sa réservation"
         debit_subscription: "Payer un abonnement"
         debit_reservation_training: "Payer une réservation de formation"
         debit_reservation_machine: "Payer une réservation de machine"
         debit_reservation_event: "Payer une réservation d'événement"
         warning_uneditable_credit: "Attention : une fois validé, le montant crédité ne sera plus modifiable."
+        wallet_info:
+          you_have_AMOUNT_in_wallet: "Vous avez {AMOUNT} sur votre porte-monnaie"
+          wallet_pay_ITEM: "Vous pouvez payer votre {ITEM} directement."
+          item_reservation: "réservation"
+          item_subscription: "abonnement"
+          item_first_deadline: "première échéance"
+          item_other: "achat"
+          credit_AMOUNT_for_pay_ITEM: "Il vous reste {AMOUNT} à payer pour valider votre {ITEM}."
+          client_have_AMOUNT_in_wallet: "Le membre a {AMOUNT} sur son porte-monnaie"
+          client_wallet_pay_ITEM: "Le membre peut directement payer {ITEM, select, abonnement{son} achat{son} other{sa}} {ITEM}."
+          client_credit_AMOUNT_for_pay_ITEM: "Il reste {AMOUNT} à payer pour valider {ITEM, select, abonnement{l'} achat{l'} other{la }}{ITEM}"
+          other_deadlines_no_wallet: "Attention : le solde du porte-monnaie ne pourra pas être utilisé pour les échéances suivantes."
       #coupon (promotional) (creation/edition form)
       coupon:
         name: "Nom"
@@ -433,7 +441,7 @@ fr:
         do_you_really_want_to_cancel_this_reservation_html: "<p>Êtes-vous sur de vouloir annuler cette réservation ?</p><p>Attention : si cette réservation a été effectuée gratuitement, dans le cadre d'un abonnement, les crédits utilisés ne seront pas re-crédités.</p>"
         reservation_was_cancelled_successfully: "La réservation a bien été annulée."
         cancellation_failed: "L'annulation a échouée."
-        confirm_payment_of_html: "{ROLE, select, admin{Paiement sur place} other{Payer}} : {AMOUNT}" #eg. confirm my payment of $20.00
+        confirm_payment_of_html: "{METHOD, select, stripe{Payer par carte} other{Paiement sur place}} : {AMOUNT}" #eg. confirm my payment of $20.00
         a_problem_occurred_during_the_payment_process_please_try_again_later: "Il y a eu un problème lors de la procédure de paiement. Veuillez réessayer plus tard."
         none: "Aucune"
         online_payment_disabled: "Le paiement par carte bancaire n'est pas disponible. Merci de contacter directement l'accueil du FabLab."

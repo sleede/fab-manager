@@ -738,7 +738,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
         const payOnSite = function (reservation) {
           $uibModal.open({
             templateUrl: '/shared/valid_reservation_modal.html',
-            size: 'sm',
+            size: $scope.schedule.payment_schedule ? 'lg' : 'sm',
             resolve: {
               reservation () {
                 return reservation;
@@ -762,7 +762,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
             controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', 'Subscription', 'wallet', 'helpers', '$filter', 'coupon', 'selectedPlan', 'schedule',
               function ($scope, $uibModalInstance, $state, reservation, price, Auth, Reservation, Subscription, wallet, helpers, $filter, coupon, selectedPlan, schedule) {
                 // user wallet amount
-                $scope.walletAmount = wallet.amount;
+                $scope.wallet = wallet;
 
                 // Global price (total of all items)
                 $scope.price = price.price;
@@ -783,18 +783,12 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                 $scope.schedule = schedule.payment_schedule;
 
                 // how should we collect payments for the payment schedule
-                $scope.payment_method = 'stripe';
+                $scope.method = {
+                  payment_method: 'stripe'
+                };
 
-                // Button label
-                if ($scope.amount > 0) {
-                  $scope.validButtonName = _t('app.shared.cart.confirm_payment_of_html', { ROLE: $rootScope.currentUser.role, AMOUNT: $filter('currency')($scope.amount) });
-                } else {
-                  if ((price.price > 0) && ($scope.walletAmount === 0)) {
-                    $scope.validButtonName = _t('app.shared.cart.confirm_payment_of_html', { ROLE: $rootScope.currentUser.role, AMOUNT: $filter('currency')(price.price) });
-                  } else {
-                    $scope.validButtonName = _t('app.shared.buttons.confirm');
-                  }
-                }
+                // "valid" Button label
+                $scope.validButtonName = '';
 
                 /**
                  * Callback to process the local payment, triggered on button click
@@ -825,7 +819,47 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                     $scope.attempting = false;
                   });
                 };
+                /**
+                 * Callback to close the modal without processing the payment
+                 */
                 $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
+
+                /* PRIVATE SCOPE */
+
+                /**
+                 * Kind of constructor: these actions will be realized first when the directive is loaded
+                 */
+                const initialize = function () {
+                  $scope.$watch('method.payment_method', function (newValue, oldValue) {
+                    console.log(`watch triggered: ${newValue}`);
+                    $scope.validButtonName = computeValidButtonName();
+                  });
+                };
+
+                /**
+                 * Compute the Label of the confirmation button
+                 */
+                const computeValidButtonName = function () {
+                  let method = '';
+                  if (AuthService.isAuthorized(['admin', 'manager']) && $rootScope.currentUser.id !== reservation.user_id) {
+                    method = $scope.method.payment_method;
+                  } else {
+                    method = 'stripe';
+                  }
+                  console.log(method);
+                  if ($scope.amount > 0) {
+                    return _t('app.shared.cart.confirm_payment_of_html', { METHOD: method, AMOUNT: $filter('currency')($scope.amount) });
+                  } else {
+                    if ((price.price > 0) && ($scope.wallet.amount === 0)) {
+                      return _t('app.shared.cart.confirm_payment_of_html', { METHOD: method, AMOUNT: $filter('currency')(price.price) });
+                    } else {
+                      return _t('app.shared.buttons.confirm');
+                    }
+                  }
+                };
+
+                // # !!! MUST BE CALLED AT THE END of the controller
+                initialize();
               }
             ]
           }).result.finally(null).then(function (reservation) { afterPayment(reservation); });
@@ -875,11 +909,21 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
             } else {
               if (AuthService.isAuthorized(['admin']) ||
                 (AuthService.isAuthorized('manager') && $scope.user.id !== $rootScope.currentUser.id) ||
-                amountToPay === 0) {
+                (amountToPay === 0 && !hasOtherDeadlines())) {
                 return payOnSite(reservation);
               }
             }
           });
+        };
+
+        /**
+         * Check if the later deadlines of the payment schedule exists and are not equal to zero
+         * @return {boolean}
+         */
+        const hasOtherDeadlines = function () {
+          if (!$scope.schedule.payment_schedule) return false;
+          if ($scope.schedule.payment_schedule.items.length < 2) return false;
+          return $scope.schedule.payment_schedule.items[1].amount !== 0;
         };
 
         // !!! MUST BE CALLED AT THE END of the directive
