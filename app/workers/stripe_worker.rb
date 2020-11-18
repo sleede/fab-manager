@@ -31,7 +31,7 @@ class StripeWorker
       stp_coupon[:percent_off] = coupon.percent_off
     elsif coupon.type == 'amount_off'
       stp_coupon[:amount_off] = coupon.amount_off
-      stp_coupon[:currency] = Rails.application.secrets.stripe_currency
+      stp_coupon[:currency] = Setting.get('stripe_currency')
     end
 
     stp_coupon[:redeem_by] = coupon.valid_until.to_i unless coupon.valid_until.nil?
@@ -45,32 +45,79 @@ class StripeWorker
     cpn.delete
   end
 
-  def create_stripe_price(plan)
-    product = if !plan.stp_price_id.nil?
-                p = Stripe::Price.update(
-                  plan.stp_price_id,
-                  { metadata: { archived: true } },
-                  { api_key: Setting.get('stripe_secret_key') }
-                )
-                p.product
-              else
-                p = Stripe::Product.create(
-                  {
-                    name: plan.name,
-                    metadata: { plan_id: plan.id }
-                  }, { api_key: Setting.get('stripe_secret_key') }
-                )
-                p.id
-              end
+  def create_or_update_stp_product(class_name, id)
+    object = class_name.constantize.find(id)
+    if !object.stp_product_id.nil?
+      Stripe::Product.update(
+        object.stp_product_id,
+        { name: object.name },
+        { api_key: Setting.get('stripe_secret_key') }
+      )
+      p.product
+    else
+      product = Stripe::Product.create(
+        {
+          name: object.name,
+          metadata: {
+            id: object.id,
+            type: class_name
+          }
+        }, { api_key: Setting.get('stripe_secret_key') }
+      )
+      object.update_attributes(stp_product_id: product.id)
+    end
+  end
 
-    price = Stripe::Price.create(
-      {
-        currency: Setting.get('stripe_currency'),
-        unit_amount: plan.amount,
-        product: product
-      },
-      { api_key: Setting.get('stripe_secret_key') }
-    )
-    plan.update_columns(stp_price_id: price.id)
+  def create_stripe_subscription(payment_schedule_id, reservable_stp_id)
+    payment_schedule = PaymentSchedule.find(payment_schedule_id)
+
+    first_item = payment_schedule.ordered_items.first
+    second_item = payment_schedule.ordered_items[1]
+
+    items = []
+    if first_item.amount != second_item.amount
+      unless first_item.details['adjustment']&.zero?
+        # adjustment: when dividing the price of the plan / months, sometimes it forces us to round the amount per month.
+        # The difference is invoiced here
+        p1 = Stripe::Price.create({
+                                    unit_amount: first_item.details['adjustment'],
+                                    currency: Setting.get('stripe_currency'),
+                                    product: payment_schedule.scheduled.plan.stp_product_id,
+                                    nickname: "Price adjustment for payment schedule #{payment_schedule_id}"
+                                  }, { api_key: Setting.get('stripe_secret_key') })
+        items.push(price: p1[:id])
+      end
+      unless first_item.details['other_items']&.zero?
+        # when taking a subscription at the same time of a reservation (space, machine or training), the amount of the
+        # reservation is invoiced here.
+        p2 = Stripe::Price.create({
+                                    unit_amount: first_item.details['other_items'],
+                                    currency: Setting.get('stripe_currency'),
+                                    product: reservable_stp_id,
+                                    nickname: "Reservations for payment schedule #{payment_schedule_id}"
+                                  }, { api_key: Setting.get('stripe_secret_key') })
+        items.push(price: p2[:id])
+      end
+    end
+
+    # subscription (recurring price)
+    price = Stripe::Price.create({
+                                   unit_amount: first_item.details['recurring'],
+                                   currency: Setting.get('stripe_currency'),
+                                   recurring: { interval: 'month', interval_count: 1 },
+                                   product: payment_schedule.scheduled.plan.stp_product_id
+                                 },
+                                 { api_key: Setting.get('stripe_secret_key') })
+
+    stp_subscription = Stripe::Subscription.create({
+                                                     customer: payment_schedule.invoicing_profile.user.stp_customer_id,
+                                                     cancel_at: payment_schedule.scheduled.expiration_date.to_i,
+                                                     promotion_code: payment_schedule.coupon&.code,
+                                                     add_invoice_items: items,
+                                                     items: [
+                                                       { price: price[:id] }
+                                                     ]
+                                                   }, { api_key: Setting.get('stripe_secret_key') })
+    payment_schedule.update_attributes(stp_subscription_id: stp_subscription.id)
   end
 end

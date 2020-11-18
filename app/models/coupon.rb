@@ -3,6 +3,7 @@
 # Coupon is a textual code associated with a discount rate or an amount of discount
 class Coupon < ApplicationRecord
   has_many :invoices
+  has_many :payment_schedule
 
   after_commit :create_stripe_coupon, on: [:create]
   after_commit :delete_stripe_coupon, on: [:destroy]

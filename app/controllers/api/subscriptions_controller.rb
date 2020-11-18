@@ -20,7 +20,9 @@ class API::SubscriptionsController < API::ApiController
 
     @subscription = Subscription.new(subscription_params)
     is_subscribe = Subscriptions::Subscribe.new(current_user.invoicing_profile.id, user_id)
-                                           .pay_and_save(@subscription, coupon: coupon_params[:coupon_code], invoice: true)
+                                           .pay_and_save(@subscription, coupon: coupon_params[:coupon_code],
+                                                                        invoice: true,
+                                                                        schedule: params[:subscription][:payment_schedule])
 
     if is_subscribe
       render :show, status: :created, location: @subscription

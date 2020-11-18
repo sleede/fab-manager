@@ -18,6 +18,7 @@ class Reservation < ApplicationRecord
   accepts_nested_attributes_for :tickets, allow_destroy: false
 
   has_one :invoice, -> { where(type: nil) }, as: :invoiced, dependent: :destroy
+  has_one :payment_schedule, as: :scheduled, dependent: :destroy
 
   validates_presence_of :reservable_id, :reservable_type
   validate :machine_not_already_reserved, if: -> { reservable.is_a?(Machine) }

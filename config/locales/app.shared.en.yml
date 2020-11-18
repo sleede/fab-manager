@@ -129,7 +129,11 @@ en:
         here_is_the_summary_of_the_slots_to_book_for_the_current_user: "Here is the summary of the slots to book for the current user:"
         subscription_confirmation: "Subscription confirmation"
         here_is_the_subscription_summary: "Here is the subscription summary:"
-        payment_schedule: "This subscription is payed with a payment schedule of {DEADLINES} months. By validating, you confirm to collect the first monthly payment."
+        payment_method: "Payment method"
+        method_stripe: "Online by card"
+        method_check: "By check"
+        stripe_collection_info: "By validating, you'll be prompted for the member's card number. This card will be automatically charged at the deadlines."
+        check_collection_info: "By validating, you confirm that you have {DEADLINES} checks, allowing you to collect all the monthly payments."
       #event edition form
       event:
         title: "Title"
@@ -321,15 +325,23 @@ en:
         amount_minimum_1: "The amount minimum is 1"
         amount_confirm_is_required: "The amount confirmation is required."
         amount_confirm_does_not_match: "The amount confirmation does not match."
-        you_have_amount_in_wallet: "You have {amount} {currency} in your wallet"
-        client_have_amount_in_wallet: "Client has {amount} {currency} in wallet"
-        wallet_pay_reservation: "You can pay your reservation directly"
-        client_wallet_pay_reservation: "The member can pay his reservation directly"
         debit_subscription: "Pay for a subscription"
         debit_reservation_training: "Pay for a training reservation"
         debit_reservation_machine: "Pay for a machine reservation"
         debit_reservation_event: "Pay for an event reservation"
         warning_uneditable_credit: "Warning: once validated, the credited amount won't be editable anymore."
+        wallet_info:
+          you_have_AMOUNT_in_wallet: "You have {AMOUNT} on your wallet"
+          wallet_pay_ITEM: "You pay your {ITEM} directly."
+          item_reservation: "reservation"
+          item_subscription: "subscription"
+          item_first_deadline: "first deadline"
+          item_other: "purchase"
+          credit_AMOUNT_for_pay_ITEM: "You still have {AMOUNT} to pay to validate your {ITEM}."
+          client_have_AMOUNT_in_wallet: "The member has {AMOUNT} on his wallet"
+          client_wallet_pay_ITEM: "The member can directly pay his {ITEM}."
+          client_credit_AMOUNT_for_pay_ITEM: "{AMOUNT} are remaining to pay to validate the {ITEM}"
+          other_deadlines_no_wallet: "Warning: the remaining wallet balance cannot be used for the next deadlines."
       #coupon (promotional) (creation/edition form)
       coupon:
         name: "Name"
@@ -386,6 +398,7 @@ en:
       cart:
         summary: "Summary"
         select_one_or_more_slots_in_the_calendar: "Select one {SINGLE, select, true{slot} other{or more slots}} in the calendar"
+        select_a_plan: "Select a plan here"
         you_ve_just_selected_the_slot: "You've just selected the slot:"
         datetime_to_time: "{START_DATETIME} to {END_TIME}" #eg: Thursday, September 4, 1986 8:30 PM to 10:00 PM
         cost_of_TYPE: "Cost of the {TYPE, select, Machine{machine slot} Training{training} Space{space slot} other{element}}"

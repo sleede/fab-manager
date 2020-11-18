@@ -9,11 +9,18 @@ class Subscriptions::Subscribe
     @operator_profile_id = operator_profile_id
   end
 
-  def pay_and_save(subscription, coupon: nil, invoice: nil, payment_intent_id: nil)
+  ##
+  # @param subscription {Subscription}
+  # @param coupon {String} coupon code
+  # @param invoice {Boolean}
+  # @param payment_intent_id {String} from stripe
+  # @param schedule {Boolean}
+  ##
+  def pay_and_save(subscription, coupon: nil, invoice: false, payment_intent_id: nil, schedule: false)
     return false if user_id.nil?
 
     subscription.statistic_profile_id = StatisticProfile.find_by(user_id: user_id).id
-    subscription.save_with_payment(operator_profile_id, invoice, coupon, payment_intent_id)
+    subscription.save_with_payment(operator_profile_id, invoice, coupon, payment_intent_id, schedule)
   end
 
   def extend_subscription(subscription, new_expiration_date, free_days)

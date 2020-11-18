@@ -29,6 +29,8 @@ class Machine < ApplicationRecord
 
   after_create :create_statistic_subtype
   after_create :create_machine_prices
+  after_create :update_stripe_product
+  after_update :update_stripe_product, if: :saved_change_to_name?
   after_update :update_statistic_subtype, if: :saved_change_to_name?
   after_destroy :remove_statistic_subtype
 
@@ -71,5 +73,11 @@ class Machine < ApplicationRecord
 
   def destroyable?
     reservations.empty?
+  end
+
+  private
+
+  def update_stripe_product
+    StripeWorker.perform_async(:create_or_update_stp_product, Machine.name, id)
   end
 end

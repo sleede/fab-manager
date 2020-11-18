@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-# Provides methods to generate invoice references
+# Provides methods to generate Invoice or PaymentSchedule references
 class InvoiceReferenceService
   class << self
-    def generate_reference(invoice, date: DateTime.current, avoir: false)
+    def generate_reference(invoice, date: DateTime.current, avoir: false, payment_schedule: false)
       pattern = Setting.get('invoice_reference')
 
-      reference = replace_invoice_number_pattern(pattern, invoice)
+      reference = replace_invoice_number_pattern(pattern)
       reference = replace_date_pattern(reference, date)
 
       if avoir
@@ -15,6 +15,15 @@ class InvoiceReferenceService
 
         # remove information about online selling (X[text])
         reference.gsub!(/X\[([^\]]+)\]/, ''.to_s)
+        # remove information about payment schedule (S[text])
+        reference.gsub!(/S\[([^\]]+)\]/, ''.to_s)
+      elsif payment_schedule
+        # information about payment schedule
+        reference.gsub!(/S\[([^\]]+)\]/, '\1')
+        # remove information about online selling (X[text])
+        reference.gsub!(/X\[([^\]]+)\]/, ''.to_s)
+        # remove information about refunds (R[text])
+        reference.gsub!(/R\[([^\]]+)\]/, ''.to_s)
       else
         # information about online selling (X[text])
         if invoice.paid_with_stripe?
@@ -25,6 +34,8 @@ class InvoiceReferenceService
 
         # remove information about refunds (R[text])
         reference.gsub!(/R\[([^\]]+)\]/, ''.to_s)
+        # remove information about payment schedule (S[text])
+        reference.gsub!(/S\[([^\]]+)\]/, ''.to_s)
       end
 
       reference
@@ -35,10 +46,10 @@ class InvoiceReferenceService
 
       # global invoice number (nn..nn)
       reference = pattern.gsub(/n+(?![^\[]*\])/) do |match|
-        pad_and_truncate(number_of_invoices(invoice, 'global'), match.to_s.length)
+        pad_and_truncate(number_of_invoices('global'), match.to_s.length)
       end
 
-      reference = replace_invoice_number_pattern(reference, invoice)
+      reference = replace_invoice_number_pattern(reference)
       replace_date_pattern(reference, invoice.created_at)
     end
 
@@ -57,11 +68,10 @@ class InvoiceReferenceService
     ##
     # Returns the number of current invoices in the given range around the current date.
     # If range is invalid or not specified, the total number of invoices is returned.
-    # @param invoice {Invoice}
     # @param range {String} 'day', 'month', 'year'
     # @return {Integer}
     ##
-    def number_of_invoices(invoice, range)
+    def number_of_invoices(range)
       case range.to_s
       when 'day'
         start = DateTime.current.beginning_of_day
@@ -73,7 +83,7 @@ class InvoiceReferenceService
         start = DateTime.current.beginning_of_year
         ending = DateTime.current.end_of_year
       else
-        return invoice.id
+        return get_max_id(Invoice) + get_max_id(PaymentSchedule)
       end
       return Invoice.count unless defined? start && defined? ending
 
@@ -111,25 +121,32 @@ class InvoiceReferenceService
     ##
     # Replace the invoice number elements in the provided pattern with counts from the database
     # @param reference {string}
-    # @param invoice {Invoice}
     ##
-    def replace_invoice_number_pattern(reference, invoice)
+    def replace_invoice_number_pattern(reference)
       copy = reference.dup
 
       # invoice number per year (yy..yy)
       copy.gsub!(/y+(?![^\[]*\])/) do |match|
-        pad_and_truncate(number_of_invoices(invoice, 'year'), match.to_s.length)
+        pad_and_truncate(number_of_invoices('year'), match.to_s.length)
       end
       # invoice number per month (mm..mm)
       copy.gsub!(/m+(?![^\[]*\])/) do |match|
-        pad_and_truncate(number_of_invoices(invoice, 'month'), match.to_s.length)
+        pad_and_truncate(number_of_invoices('month'), match.to_s.length)
       end
       # invoice number per day (dd..dd)
       copy.gsub!(/d+(?![^\[]*\])/) do |match|
-        pad_and_truncate(number_of_invoices(invoice, 'day'), match.to_s.length)
+        pad_and_truncate(number_of_invoices('day'), match.to_s.length)
       end
 
       copy
+    end
+
+    ##
+    # Return the maximum ID from the database, for the given class
+    # @param klass {ActiveRecord::Base}
+    ##
+    def get_max_id(klass)
+      ActiveRecord::Base.connection.execute("SELECT max(id) FROM #{klass.table_name}").getvalue(0, 0) || 0
     end
   end
 end

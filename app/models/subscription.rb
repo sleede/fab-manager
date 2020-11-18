@@ -7,6 +7,7 @@ class Subscription < ApplicationRecord
   belongs_to :plan
   belongs_to :statistic_profile
 
+  has_one :payment_schedule, as: :scheduled, dependent: :destroy
   has_many :invoices, as: :invoiced, dependent: :destroy
   has_many :offer_days, dependent: :destroy
 
@@ -20,7 +21,7 @@ class Subscription < ApplicationRecord
 
   # @param invoice if true then only the subscription is payed, without reservation
   #                if false then the subscription is payed with reservation
-  def save_with_payment(operator_profile_id, invoice = true, coupon_code = nil, payment_intent_id = nil)
+  def save_with_payment(operator_profile_id, invoice = true, coupon_code = nil, payment_intent_id = nil, schedule = nil)
     return false unless valid?
 
     set_expiration_date
@@ -33,14 +34,27 @@ class Subscription < ApplicationRecord
       # debit wallet
       wallet_transaction = debit_user_wallet
 
-      invoc = generate_invoice(operator_profile_id, coupon_code, payment_intent_id)
+      payment = if schedule
+                  generate_schedule(operator_profile_id, coupon_code, payment_intent_id)
+                else
+                  generate_invoice(operator_profile_id, coupon_code, payment_intent_id)
+                end
+
       if wallet_transaction
-        invoc.wallet_amount = @wallet_amount_debit
-        invoc.wallet_transaction_id = wallet_transaction.id
+        payment.wallet_amount = @wallet_amount_debit
+        payment.wallet_transaction_id = wallet_transaction.id
       end
-      invoc.save
+      payment.save
     end
     true
+  end
+
+  def generate_schedule(operator_profile_id, coupon_code = nil, payment_intent_id = nil)
+    operator = InvoicingProfile.find(operator_profile_id)&.user
+    method = operator&.admin? || (operator&.manager? && operator != user) ? nil : 'stripe' # FIXME, paiement à l'accueil
+    coupon = Coupon.find_by(code: coupon_code) unless coupon_code.nil?
+
+    schedule = PaymentScheduleService.new.create(self, plan.amount, coupon: coupon, operator: operator, payment_method: method, user: user)
   end
 
   def generate_invoice(operator_profile_id, coupon_code = nil, payment_intent_id = nil)

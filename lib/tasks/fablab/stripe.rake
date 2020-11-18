@@ -53,13 +53,20 @@ namespace :fablab do
       puts 'Done'
     end
 
-    desc 'set stp_price_id to plans'
-    task plans_prices: :environment do
-      puts 'No plans, exiting...' and return  if Plan.count.zero?
-
+    desc 'set stp_product_id to all plans/machines/trainings/spaces'
+    task set_product_id: :environment do
       w = StripeWorker.new
       Plan.all.each do |p|
-        w.perform(:create_stripe_price, p)
+        w.perform(:create_or_update_stp_product, Plan.name, p.id)
+      end
+      Machine.all.each do |m|
+        w.perform(:create_or_update_stp_product, Machine.name, m.id)
+      end
+      Training.all.each do |t|
+        w.perform(:create_or_update_stp_product, Training.name, t.id)
+      end
+      Space.all.each do |s|
+        w.perform(:create_or_update_stp_product, Space.name, s.id)
       end
     end
 

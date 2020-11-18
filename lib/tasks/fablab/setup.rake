@@ -101,6 +101,13 @@ namespace :fablab do
       FileUtils.mv 'tmp/invoices', 'invoices'
     end
 
+    desc 'add model for payment-schedules reference'
+    task add_schedule_reference: :environment do
+      setting = Setting.find_by(name: 'invoice_reference')
+      current = setting.value
+      setting.value = "#{current}S[/E]" unless /S\[([^\]]+)\]/.match?(current)
+    end
+
     desc 'migrate environment variables to the database (settings)'
     task env_to_db: :environment do
       include ApplicationHelper

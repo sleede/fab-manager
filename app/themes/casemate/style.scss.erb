@@ -23,6 +23,10 @@ $primary-decoration-color: <%= Stylesheet.primary_decoration_color %> !default;
   background-color: $primary;
 }
 
+.header .nav.navbar-nav a.label:hover {
+  color: $primary;
+}
+
 #nav .nav > li > a {
   color: $primary-text-color;
 }
@@ -164,6 +168,14 @@ h5:after {
 
 .widget h3 {
   color: $primary;
+}
+
+.modal .modal-dialog .modal-content a {
+  color: $primary;
+
+  &:hover {
+    color: $primary-dark;
+  }
 }
 
 .modal-header h1,

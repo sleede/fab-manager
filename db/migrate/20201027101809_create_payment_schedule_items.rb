@@ -6,7 +6,9 @@ class CreatePaymentScheduleItems < ActiveRecord::Migration[5.2]
     create_table :payment_schedule_items do |t|
       t.integer :amount
       t.datetime :due_date
+      t.jsonb :details, default: '{}'
       t.belongs_to :payment_schedule, foreign_key: true
+      t.belongs_to :invoice, foreign_key: true
 
       t.timestamps
     end

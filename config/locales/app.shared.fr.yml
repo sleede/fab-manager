@@ -129,7 +129,11 @@ fr:
         here_is_the_summary_of_the_slots_to_book_for_the_current_user: "Voici le récapitulatif des créneaux à réserver pour l'utilisateur courant :"
         subscription_confirmation: "Validation de l'abonnement"
         here_is_the_subscription_summary: "Voici le récapitulatif de l'abonnement :"
-        payment_schedule: "Cet abonnement est souscrit par un échéancier de paiement sur {DEADLINES} mois. En validant, vous confirmez encaisser la première mensualité."
+        payment_method: "Moyen de paiement"
+        method_stripe: "Carte bancaire en ligne"
+        method_check: "Par chèques"
+        stripe_collection_info: "En validant, vous serez invité à saisir les informations de carte bancaire du membre. Cette carte sera prélevée automatiquement aux échéances."
+        check_collection_info: "En validant, vous confirmez être en possession de {DEADLINES} chèques permettant d'encaisser l'ensemble des mensualité."
       #event edition form
       event:
         title: "Titre"
@@ -321,15 +325,23 @@ fr:
         amount_minimum_1: "Le montant minimum est de 1"
         amount_confirm_is_required: "La confirmation du montant est requise."
         amount_confirm_does_not_match: "La confirmation du montant ne correspond pas."
-        you_have_amount_in_wallet: "Vous avez {amount} {currency} sur votre porte-monnaie"
-        client_have_amount_in_wallet: "Le client a {amount} {currency} sur son porte-monnaie"
-        wallet_pay_reservation: "Vous pouvez payer votre réservation directement"
-        client_wallet_pay_reservation: "Le membre peut directement payer sa réservation"
         debit_subscription: "Payer un abonnement"
         debit_reservation_training: "Payer une réservation de formation"
         debit_reservation_machine: "Payer une réservation de machine"
         debit_reservation_event: "Payer une réservation d'événement"
         warning_uneditable_credit: "Attention : une fois validé, le montant crédité ne sera plus modifiable."
+        wallet_info:
+          you_have_AMOUNT_in_wallet: "Vous avez {AMOUNT} sur votre porte-monnaie"
+          wallet_pay_ITEM: "Vous pouvez payer votre {ITEM} directement."
+          item_reservation: "réservation"
+          item_subscription: "abonnement"
+          item_first_deadline: "première échéance"
+          item_other: "achat"
+          credit_AMOUNT_for_pay_ITEM: "Il vous reste {AMOUNT} à payer pour valider votre {ITEM}."
+          client_have_AMOUNT_in_wallet: "Le membre a {AMOUNT} sur son porte-monnaie"
+          client_wallet_pay_ITEM: "Le membre peut directement payer {ITEM, select, abonnement{son} achat{son} other{sa}} {ITEM}."
+          client_credit_AMOUNT_for_pay_ITEM: "Il reste {AMOUNT} à payer pour valider {ITEM, select, abonnement{l'} achat{l'} other{la }}{ITEM}"
+          other_deadlines_no_wallet: "Attention : le solde du porte-monnaie ne pourra pas être utilisé pour les échéances suivantes."
       #coupon (promotional) (creation/edition form)
       coupon:
         name: "Nom"
@@ -386,6 +398,7 @@ fr:
       cart:
         summary: "Résumé"
         select_one_or_more_slots_in_the_calendar: "Sélectionnez un {SINGLE, select, true{créneau} other{ou plusieurs créneaux}} dans le calendrier"
+        select_a_plan: "Sélectionnez une formule d'abonnement ici"
         you_ve_just_selected_the_slot: "Vous venez de sélectionner le créneau :"
         datetime_to_time: "{START_DATETIME} à {END_TIME}" #eg: Thursday, September 4, 1986 8:30 PM to 10:00 PM
         cost_of_TYPE: "Coût {TYPE, select, Machine{du créneau machine} Training{de la formation} Space{du créneau espace} other{de l'élément}}"
@@ -428,7 +441,7 @@ fr:
         do_you_really_want_to_cancel_this_reservation_html: "<p>Êtes-vous sur de vouloir annuler cette réservation ?</p><p>Attention : si cette réservation a été effectuée gratuitement, dans le cadre d'un abonnement, les crédits utilisés ne seront pas re-crédités.</p>"
         reservation_was_cancelled_successfully: "La réservation a bien été annulée."
         cancellation_failed: "L'annulation a échouée."
-        confirm_payment_of_html: "{ROLE, select, admin{Paiement sur place} other{Payer}} : {AMOUNT}" #eg. confirm my payment of $20.00
+        confirm_payment_of_html: "{METHOD, select, stripe{Payer par carte} other{Paiement sur place}} : {AMOUNT}" #eg. confirm my payment of $20.00
         a_problem_occurred_during_the_payment_process_please_try_again_later: "Il y a eu un problème lors de la procédure de paiement. Veuillez réessayer plus tard."
         none: "Aucune"
         online_payment_disabled: "Le paiement par carte bancaire n'est pas disponible. Merci de contacter directement l'accueil du FabLab."
