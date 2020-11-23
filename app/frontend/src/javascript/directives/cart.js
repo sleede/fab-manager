@@ -705,7 +705,10 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
             controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'cgv', 'Auth', 'Reservation', 'wallet', 'helpers', '$filter', 'coupon', 'cartItems', 'stripeKey', 'schedule',
               function ($scope, $uibModalInstance, $state, reservation, price, cgv, Auth, Reservation, wallet, helpers, $filter, coupon, cartItems, stripeKey, schedule) {
                 // user wallet amount
-                $scope.walletAmount = wallet.amount;
+                $scope.wallet = wallet;
+
+                // Global price (total of all items)
+                $scope.price = price.price;
 
                 // Price
                 $scope.amount = helpers.getAmountToPay(price.price, wallet.amount);
@@ -800,6 +803,9 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                  * Callback to process the local payment, triggered on button click
                  */
                 $scope.ok = function () {
+                  if ($scope.method.payment_method === 'stripe') {
+                    return payByStripe(reservation);
+                  }
                   $scope.attempting = true;
                   // save subscription (if there's only a subscription selected)
                   if ($scope.reservation.slots_attributes.length === 0 && selectedPlan) {

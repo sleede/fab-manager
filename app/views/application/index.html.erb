@@ -88,29 +88,31 @@
 
   <%= flash_messages %>
 
-  <section class="vbox">
+  <stripe-elements>
+    <section class="vbox">
 
-    <header class="header header-md navbar navbar-fixed-top-xs">
-      <div ui-view="header"></div>
-    </header>
+      <header class="header header-md navbar navbar-fixed-top-xs">
+        <div ui-view="header"></div>
+      </header>
 
-    <section ui-view="content">
-      <section class="hbox stretch">
-        <aside id="nav" class="aside-md bg-red hidden-print" ui-view="leftnav"></aside>
+      <section ui-view="content">
+        <section class="hbox stretch">
+          <aside id="nav" class="aside-md bg-red hidden-print" ui-view="leftnav"></aside>
 
-        <section id="content">
-          <section class="vbox">
-            <section id="cookies-modal" ui-view="cookies">
-            </section>
-            <section id="content-main" class="scrollable" ui-view="main">
+          <section id="content">
+            <section class="vbox">
+              <section id="cookies-modal" ui-view="cookies">
+              </section>
+              <section id="content-main" class="scrollable" ui-view="main">
+              </section>
             </section>
           </section>
-        </section>
 
-      </section> <!-- /.hbox -->
-    </section>
+        </section> <!-- /.hbox -->
+      </section>
 
-  </section> <!-- /.vbox -->
+    </section> <!-- /.vbox -->
+  </stripe-elements>
 
   <div class="app-generator">
     <span class="app-version" uib-tooltip="{{'app.public.common.version' | translate}} {{version.current}}" ng-if="currentUser && currentUser.role == 'admin'" ng-click="versionModal()">

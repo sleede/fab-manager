@@ -5,7 +5,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
-import moment from 'moment';
 import { IApplication } from '../models/application';
 import '../lib/i18n';
 import { IFilterService } from 'angular';
