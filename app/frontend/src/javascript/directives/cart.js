@@ -530,6 +530,8 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
           $scope.events.paid = [];
           $scope.events.modifiable = null;
           $scope.events.placable = null;
+          $scope.schedule.requested_schedule = false;
+          $scope.schedule.payment_schedule = null;
         };
 
         /**
@@ -649,14 +651,16 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
          * @param planId {number}
          * @param userId {number}
          * @param schedule {boolean}
+         * @param method {String} 'stripe' | ''
          * @return {{subscription: {payment_schedule: boolean, user_id: number, plan_id: number}}}
          */
-        const mkSubscription = function (planId, userId, schedule) {
+        const mkSubscription = function (planId, userId, schedule, method) {
           return {
             subscription: {
               plan_id: planId,
               user_id: userId,
-              payment_schedule: schedule
+              payment_schedule: schedule,
+              payment_method: method
             }
           };
         };
@@ -687,7 +691,9 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
               cartItems () {
                 let request = { reservation };
                 if (reservation.slots_attributes.length === 0 && reservation.plan_id) {
-                  request = mkSubscription($scope.selectedPlan.id, reservation.user_id, $scope.schedule.requested_schedule);
+                  request = mkSubscription($scope.selectedPlan.id, reservation.user_id, $scope.schedule.requested_schedule, 'stripe');
+                } else {
+                  request.reservation.payment_method = 'stripe';
                 }
                 return mkRequestParams(request, $scope.coupon.applied);
               },
@@ -796,8 +802,8 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                 $scope.ok = function () {
                   $scope.attempting = true;
                   // save subscription (if there's only a subscription selected)
-                  if (reservation.slots_attributes.length === 0 && selectedPlan) {
-                    const sub = mkSubscription(selectedPlan.id, reservation.user_id, schedule.requested_schedule);
+                  if ($scope.reservation.slots_attributes.length === 0 && selectedPlan) {
+                    const sub = mkSubscription(selectedPlan.id, $scope.reservation.user_id, schedule.requested_schedule, $scope.method.payment_method);
 
                     return Subscription.save(mkRequestParams(sub, coupon),
                       function (subscription) {
@@ -810,7 +816,8 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                       });
                   }
                   // otherwise, save the reservation (may include a subscription)
-                  Reservation.save(mkRequestParams({ reservation: $scope.reservation }, coupon), function (reservation) {
+                  const rsrv = Object.assign({}, $scope.reservation, { payment_method: $scope.method.payment_method });
+                  Reservation.save(mkRequestParams({ reservation: rsrv }, coupon), function (reservation) {
                     $uibModalInstance.close(reservation);
                     $scope.attempting = true;
                   }, function (response) {
@@ -830,8 +837,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                  * Kind of constructor: these actions will be realized first when the directive is loaded
                  */
                 const initialize = function () {
-                  $scope.$watch('method.payment_method', function (newValue, oldValue) {
-                    console.log(`watch triggered: ${newValue}`);
+                  $scope.$watch('method.payment_method', function () {
                     $scope.validButtonName = computeValidButtonName();
                   });
                 };
@@ -846,7 +852,6 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                   } else {
                     method = 'stripe';
                   }
-                  console.log(method);
                   if ($scope.amount > 0) {
                     return _t('app.shared.cart.confirm_payment_of_html', { METHOD: method, AMOUNT: $filter('currency')($scope.amount) });
                   } else {

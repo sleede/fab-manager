@@ -92,7 +92,11 @@ class API::PaymentsController < API::ApiController
   def on_subscription_success(intent)
     @subscription = Subscription.new(subscription_params)
     is_subscribe = Subscriptions::Subscribe.new(current_user.invoicing_profile.id, current_user.id)
-                                           .pay_and_save(@subscription, coupon: coupon_params[:coupon_code], invoice: true, payment_intent_id: intent.id)
+                                           .pay_and_save(@subscription,
+                                                         coupon: coupon_params[:coupon_code],
+                                                         invoice: true,
+                                                         payment_intent_id: intent.id,
+                                                         payment_method: 'stripe')
 
     Stripe::PaymentIntent.update(
       intent.id,
