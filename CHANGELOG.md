@@ -1,5 +1,5 @@
 # Changelog Fab-manager
-
+- Add configuration of the postgreSQL username in environment variables
 - Fix a bug: unable to build homepage custom stylesheet
 
 ## v4.6.3 2020 October 28
