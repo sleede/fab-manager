@@ -62,9 +62,7 @@
       text-align: right;
       border-top: 1px solid #e5e5e5;
 
-      .close-modal-btn {
-        color: black;
-        background-color: #fbfbfb;
+      .modal-btn {
         margin-bottom: 0;
         margin-left: 5px;
         display: inline-block;
@@ -75,14 +73,24 @@
         touch-action: manipulation;
         cursor: pointer;
         background-image: none;
-        border: 1px solid #c9c9c9;
         padding: 6px 12px;
         font-size: 16px;
         line-height: 1.5;
         border-radius: 4px;
 
-        &:hover {
-          background-color: #f2f2f2;
+        &--close {
+          @extend .modal-btn;
+          color: black;
+          background-color: #fbfbfb;
+          border: 1px solid #c9c9c9;
+
+          &:hover {
+            background-color: #f2f2f2;
+          }
+        }
+
+        &--confirm {
+          @extend  .modal-btn;
         }
       }
     }

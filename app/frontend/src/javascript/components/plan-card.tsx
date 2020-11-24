@@ -5,7 +5,6 @@
 import React  from 'react';
 import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
-import { IFilterService } from 'angular';
 import moment from 'moment';
 import _ from 'lodash'
 import { IApplication } from '../models/application';
@@ -13,8 +12,10 @@ import { Plan } from '../models/plan';
 import { User, UserRole } from '../models/user';
 import { Loader } from './loader';
 import '../lib/i18n';
+import { IFablab } from '../models/fablab';
 
 declare var Application: IApplication;
+declare var Fablab: IFablab;
 
 interface PlanCardProps {
   plan: Plan,
@@ -22,23 +23,22 @@ interface PlanCardProps {
   operator: User,
   isSelected: boolean,
   onSelectPlan: (plan: Plan) => void,
-  $filter: IFilterService
 }
 
-const PlanCard: React.FC<PlanCardProps> = ({ plan, user, operator, onSelectPlan, isSelected, $filter }) => {
+const PlanCard: React.FC<PlanCardProps> = ({ plan, user, operator, onSelectPlan, isSelected }) => {
   const { t } = useTranslation('public');
   /**
    * Return the formatted localized amount of the given plan (eg. 20.5 => "20,50 €")
    */
   const amount = () : string => {
-    return $filter('currency')(plan.amount);
+    return new Intl.NumberFormat(Fablab.intl_locale, {style: 'currency', currency: Fablab.intl_currency}).format(plan.amount);
   }
   /**
    * Return the formatted localized amount, divided by the number of months (eg. 120 => "10,00 € / month")
    */
   const monthlyAmount = (): string => {
     const monthly = plan.amount / moment.duration(plan.interval_count, plan.interval).asMonths();
-    return $filter('currency')(monthly);
+    return new Intl.NumberFormat(Fablab.intl_locale, {style: 'currency', currency: Fablab.intl_currency}).format(monthly);
   }
   /**
    * Return the formatted localized duration of te given plan (eg. Month/3 => "3 mois")
@@ -122,12 +122,12 @@ const PlanCard: React.FC<PlanCardProps> = ({ plan, user, operator, onSelectPlan,
   );
 }
 
-const PlanCardWrapper: React.FC<PlanCardProps> = ({ plan, user, operator, onSelectPlan, isSelected, $filter }) => {
+const PlanCardWrapper: React.FC<PlanCardProps> = ({ plan, user, operator, onSelectPlan, isSelected }) => {
   return (
     <Loader>
-      <PlanCard plan={plan} user={user} operator={operator} isSelected={isSelected} onSelectPlan={onSelectPlan} $filter={$filter} />
+      <PlanCard plan={plan} user={user} operator={operator} isSelected={isSelected} onSelectPlan={onSelectPlan}/>
     </Loader>
   );
 }
 
-Application.Components.component('planCard', react2angular(PlanCardWrapper, ['plan', 'user', 'operator', 'onSelectPlan', 'isSelected'], ['$filter']));
+Application.Components.component('planCard', react2angular(PlanCardWrapper, ['plan', 'user', 'operator', 'onSelectPlan', 'isSelected']));

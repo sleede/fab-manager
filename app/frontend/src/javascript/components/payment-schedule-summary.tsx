@@ -8,19 +8,19 @@ import { react2angular } from 'react2angular';
 import moment from 'moment';
 import { IApplication } from '../models/application';
 import '../lib/i18n';
-import { IFilterService } from 'angular';
 import { PaymentSchedule } from '../models/payment-schedule';
 import { Loader } from './loader';
 import { FabModal } from './fab-modal';
+import { IFablab } from '../models/fablab';
 
 declare var Application: IApplication;
+declare var Fablab: IFablab;
 
 interface PaymentScheduleSummaryProps {
-  schedule: PaymentSchedule,
-  $filter: IFilterService
+  schedule: PaymentSchedule
 }
 
-const PaymentScheduleSummary: React.FC<PaymentScheduleSummaryProps> = ({ schedule, $filter }) => {
+const PaymentScheduleSummary: React.FC<PaymentScheduleSummaryProps> = ({ schedule }) => {
   const { t } = useTranslation('shared');
   const [modal, setModal] = useState(false);
 
@@ -34,7 +34,7 @@ const PaymentScheduleSummary: React.FC<PaymentScheduleSummaryProps> = ({ schedul
    * Return the formatted localized amount for the given price (eg. 20.5 => "20,50 €")
    */
   const formatPrice = (price: number): string => {
-    return $filter('currency')(price);
+    return new Intl.NumberFormat(Fablab.intl_locale, {style: 'currency', currency: Fablab.intl_currency}).format(price);
   }
   /**
    * Test if all payment deadlines have the same amount
@@ -90,12 +90,12 @@ const PaymentScheduleSummary: React.FC<PaymentScheduleSummaryProps> = ({ schedul
     </div>
   );
 }
-const PaymentScheduleSummaryWrapper: React.FC<PaymentScheduleSummaryProps> = ({ schedule, $filter }) => {
+const PaymentScheduleSummaryWrapper: React.FC<PaymentScheduleSummaryProps> = ({ schedule }) => {
   return (
     <Loader>
-      <PaymentScheduleSummary schedule={schedule} $filter={$filter} />
+      <PaymentScheduleSummary schedule={schedule} />
     </Loader>
   );
 }
 
-Application.Components.component('paymentScheduleSummary', react2angular(PaymentScheduleSummaryWrapper, ['schedule'], ['$filter']));
+Application.Components.component('paymentScheduleSummary', react2angular(PaymentScheduleSummaryWrapper, ['schedule']));

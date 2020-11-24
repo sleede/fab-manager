@@ -37,6 +37,8 @@
       Fablab.moment_locale = "<%= Rails.application.secrets.moment_locale %>";
       Fablab.summernote_locale = "<%= Rails.application.secrets.summernote_locale %>";
       Fablab.fullcalendar_locale = "<%= Rails.application.secrets.fullcalendar_locale %>";
+      Fablab.intl_locale = "<%= Rails.application.secrets.intl_locale %>";
+      Fablab.intl_currency = "<%= Rails.application.secrets.intl_currency %>";
       Fablab.timezone = "<%= Time.zone.tzinfo.name %>";
       Fablab.translations = {
         app: {
@@ -88,31 +90,29 @@
 
   <%= flash_messages %>
 
-  <stripe-elements>
-    <section class="vbox">
+  <section class="vbox">
 
-      <header class="header header-md navbar navbar-fixed-top-xs">
-        <div ui-view="header"></div>
-      </header>
+    <header class="header header-md navbar navbar-fixed-top-xs">
+      <div ui-view="header"></div>
+    </header>
 
-      <section ui-view="content">
-        <section class="hbox stretch">
-          <aside id="nav" class="aside-md bg-red hidden-print" ui-view="leftnav"></aside>
+    <section ui-view="content">
+      <section class="hbox stretch">
+        <aside id="nav" class="aside-md bg-red hidden-print" ui-view="leftnav"></aside>
 
-          <section id="content">
-            <section class="vbox">
-              <section id="cookies-modal" ui-view="cookies">
-              </section>
-              <section id="content-main" class="scrollable" ui-view="main">
-              </section>
+        <section id="content">
+          <section class="vbox">
+            <section id="cookies-modal" ui-view="cookies">
+            </section>
+            <section id="content-main" class="scrollable" ui-view="main">
             </section>
           </section>
+        </section>
 
-        </section> <!-- /.hbox -->
-      </section>
+      </section> <!-- /.hbox -->
+    </section>
 
-    </section> <!-- /.vbox -->
-  </stripe-elements>
+  </section> <!-- /.vbox -->
 
   <div class="app-generator">
     <span class="app-version" uib-tooltip="{{'app.public.common.version' | translate}} {{version.current}}" ng-if="currentUser && currentUser.role == 'admin'" ng-click="versionModal()">
