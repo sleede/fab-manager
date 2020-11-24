@@ -4,11 +4,11 @@
 
 import React from 'react';
 import { Elements } from '@stripe/react-stripe-js';
-import { IApplication } from '../models/application';
-import SettingAPI from '../api/setting';
 import { loadStripe } from "@stripe/stripe-js";
+import SettingAPI from '../api/setting';
+import { SettingName } from '../models/setting';
 
-const stripePublicKey = SettingAPI.get('stripe_public_key');
+const stripePublicKey = SettingAPI.get(SettingName.StripePublicKey);
 
 export const StripeElements: React.FC = ({ children }) => {
   const publicKey = stripePublicKey.read();

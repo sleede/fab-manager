@@ -799,6 +799,10 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                 // "valid" Button label
                 $scope.validButtonName = '';
 
+                // stripe modal state
+                // this is used to collect card data when a payment-schedule was selected, and paid with a card
+                $scope.isOpenStripeModal = false;
+
                 /**
                  * Callback to process the local payment, triggered on button click
                  */
@@ -836,6 +840,20 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                  * Callback to close the modal without processing the payment
                  */
                 $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
+
+                /**
+                 * Asynchronously updates the status of the stripe modal
+                 */
+                $scope.toggleStripeModal = function () {
+                  setTimeout(() => {
+                    $scope.isOpenStripeModal = !$scope.isOpenStripeModal;
+                    $scope.$apply();
+                  }, 50);
+                };
+
+                $scope.afterCreatePaymentMethod = function (a) {
+                  console.log('TODO', a);
+                };
 
                 /* PRIVATE SCOPE */
 

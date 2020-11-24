@@ -1,8 +1,8 @@
 /**
- * This component enables the user to type his card data.
+ * This component enables the user to input his card data.
  */
 
-import React, { FormEvent, ReactNode, useState } from 'react';
+import React, { ChangeEvent, FormEvent, ReactNode, useState } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { react2angular } from 'react2angular';
 import { Loader } from './loader';
@@ -15,8 +15,13 @@ import { WalletInfo } from './wallet-info';
 import { Reservation } from '../models/reservation';
 import { User } from '../models/user';
 import { Wallet } from '../models/wallet';
+import CustomAssetAPI from '../api/custom-asset';
+import { CustomAssetName } from '../models/custom-asset';
+import { PaymentSchedule } from '../models/payment-schedule';
+import { IFablab } from '../models/fablab';
 
 declare var Application: IApplication;
+declare var Fablab: IFablab;
 
 interface StripeModalProps {
   isOpen: boolean,
@@ -27,23 +32,30 @@ interface StripeModalProps {
   wallet: Wallet,
   price: number,
   remainingPrice: number,
+  schedule: PaymentSchedule
 }
 
-const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuccess, reservation, currentUser, wallet, price, remainingPrice }) => {
+const cgvFile = CustomAssetAPI.get(CustomAssetName.CgvFile);
+
+const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuccess, reservation, currentUser, wallet, price, remainingPrice, schedule }) => {
 
   const stripe = useStripe();
   const elements = useElements();
   const { t } = useTranslation('shared');
 
+  const cgv = cgvFile.read();
+
   const [errors, setErrors] = useState(null);
   const [submitState, setSubmitState] = useState(false);
+  const [tos, setTos] = useState(false);
 
   /**
-   * Handle the submission of the form. Depending on the configuration, it will create the payment method on stripe,
+   * Handle the submission of the form. Depending on the configuration, it will create the payment method on Stripe,
    * or it will process a payment with the inputted card.
    */
   const handleSubmit = async (event: FormEvent): Promise<void> => {
     event.preventDefault();
+    setSubmitState(true);
 
     // Stripe.js has not loaded yet
     if (!stripe || !elements) { return; }
@@ -54,6 +66,7 @@ const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuc
       card: cardElement,
     });
 
+    setSubmitState(false);
     if (error) {
       setErrors(error.message);
     } else {
@@ -77,7 +90,32 @@ const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuc
   }
 
   /**
-   * Return the form submission button. This button will be shown into the modal footer
+   * Check if the Terms of Sales document is set
+   */
+  const hasCgv = (): boolean => {
+    return cgv != null;
+  }
+
+  const toggleTos = (event: ChangeEvent): void => {
+    setTos(!tos);
+  }
+
+  /**
+   * Check if we are currently creating a payment schedule
+   */
+  const isPaymentSchedule = (): boolean => {
+    return schedule !== undefined;
+  }
+
+  /**
+   * Return the formatted localized amount for the given price (eg. 20.5 => "20,50 €")
+   */
+  const formatPrice = (amount: number): string => {
+    return new Intl.NumberFormat(Fablab.intl_locale, {style: 'currency', currency: Fablab.intl_currency}).format(amount);
+  }
+
+  /**
+   * Return the form submission button. This button will be shown into the modal footer.
    */
   const submitButton = (): ReactNode => {
     return (
@@ -86,10 +124,28 @@ const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuc
               disabled={submitState}
               form="stripe-form"
               className="validate-btn">
-        {t('app.shared.buttons.confirm')}
+        {t('app.shared.stripe.confirm_payment_of_', { AMOUNT: formatPrice(remainingPrice) })}
       </button>
     );
   }
+
+  /**
+   * Options for the Stripe's card input
+   */
+  const cardOptions = {
+    style: {
+      base: {
+        fontSize: '16px',
+        color: '#424770',
+        '::placeholder': { color: '#aab7c4' }
+      },
+      invalid: {
+        color: '#9e2146',
+        iconColor: '#9e2146'
+      },
+    },
+    hidePostalCode: true
+  };
 
   return (
     <div className="stripe-modal">
@@ -97,38 +153,35 @@ const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuc
         <StripeElements>
           <form onSubmit={handleSubmit} id="stripe-form">
             <WalletInfo reservation={reservation} currentUser={currentUser} wallet={wallet} price={price} remainingPrice={remainingPrice} />
-            <CardElement
-              options={{
-                style: {
-                  base: {
-                    fontSize: '16px',
-                    color: '#424770',
-                    '::placeholder': { color: '#aab7c4' }
-                  },
-                  invalid: {
-                    color: '#9e2146',
-                    iconColor: '#9e2146'
-                  },
-                },
-                hidePostalCode: true
-              }}
-            />
+            <CardElement options={cardOptions} />
           </form>
         </StripeElements>
         {hasErrors() && <div className="stripe-errors">
           {errors}
         </div>}
+        {hasCgv() && <div className="terms-of-sales">
+          <input type="checkbox" id="acceptToS" name="acceptCondition" checked={tos} onChange={toggleTos} required />
+        </div>}
+        {isPaymentSchedule() && <div className="payment-schedule-info">
+          <p>{ t('app.shared.stripe.payment_schedule', { DEADLINES: schedule.items.length }) }</p>
+        </div>}
+        <div className="stripe-modal-icons">
+          <i className="fa fa-lock fa-2x m-r-sm pos-rlt" />
+          <img src="../../../images/powered_by_stripe.png" alt="powered by stripe" />
+          <img src="../../../images/mastercard.png" alt="mastercard" />
+          <img src="../../../images/visa.png" alt="visa" />
+        </div>
       </FabModal>
     </div>
   );
 }
 
-const StripeModalWrapper: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuccess, reservation, currentUser, wallet, price, remainingPrice  }) => {
+const StripeModalWrapper: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuccess, reservation, currentUser, wallet, price, remainingPrice, schedule }) => {
   return (
     <Loader>
-      <StripeModal isOpen={isOpen} toggleModal={toggleModal} afterSuccess={afterSuccess} reservation={reservation} currentUser={currentUser} wallet={wallet} price={price} remainingPrice={remainingPrice} />
+      <StripeModal isOpen={isOpen} toggleModal={toggleModal} afterSuccess={afterSuccess} reservation={reservation} currentUser={currentUser} wallet={wallet} price={price} remainingPrice={remainingPrice} schedule={schedule} />
     </Loader>
   );
 }
 
-Application.Components.component('stripeModal', react2angular(StripeModalWrapper, ['isOpen', 'toggleModal', 'afterSuccess', 'reservation', 'currentUser', 'wallet', 'price', 'remainingPrice']));
+Application.Components.component('stripeModal', react2angular(StripeModalWrapper, ['isOpen', 'toggleModal', 'afterSuccess', 'reservation', 'currentUser', 'wallet', 'price', 'remainingPrice', 'schedule']));

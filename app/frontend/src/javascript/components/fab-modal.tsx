@@ -7,6 +7,7 @@ import Modal from 'react-modal';
 import { useTranslation } from 'react-i18next';
 import { Loader } from './loader';
 import CustomAssetAPI from '../api/custom-asset';
+import { CustomAssetName } from '../models/custom-asset';
 
 Modal.setAppElement('body');
 
@@ -17,7 +18,7 @@ interface FabModalProps {
   confirmButton?: ReactNode
 }
 
-const blackLogoFile = CustomAssetAPI.get('logo-black-file');
+const blackLogoFile = CustomAssetAPI.get(CustomAssetName.LogoBlackFile);
 
 export const FabModal: React.FC<FabModalProps> = ({ title, isOpen, toggleModal, children, confirmButton }) => {
   const { t } = useTranslation('shared');

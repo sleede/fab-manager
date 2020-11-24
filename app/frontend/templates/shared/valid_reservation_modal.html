@@ -50,4 +50,6 @@
 <div class="modal-footer">
   <button class="btn btn-info" ng-click="ok()" ng-disabled="attempting" ng-bind-html="validButtonName"></button>
   <button class="btn btn-default" ng-click="cancel()" translate>{{ 'app.shared.buttons.cancel' }}</button>
+  <!--TODO, continuer l'intégration de la modal -->
+  <stripe-modal is-open="isOpenStripeModal" toggle-modal="toggleStripeModal" after-success="afterCreatePaymentMethod" reservation="reservation" current-user="currentUser" wallet="wallet" price="" />
 </div>
