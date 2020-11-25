@@ -1,6 +1,10 @@
 # Changelog Fab-manager
+
+## Next release
+
 - Add configuration of the postgreSQL username in environment variables
 - Fix a bug: unable to build homepage custom stylesheet
+- [TODO DEPLOY] add `POSTGRES_USERNAME=postgres` to the environment variables (see [doc/environment.md](doc/environment.md#POSTGRES_USERNAME) for configuration details)
 
 ## v4.6.3 2020 October 28
 
