@@ -35,10 +35,10 @@ pt:
         _the_fablab_policy: "a política do FabLab"
         change_my_data: "Alterar meus dados"
         sync_my_profile: "Sincronizar meu perfil"
-        once_your_data_are_up_to_date_: "Once your data are up to date,"
-        _click_on_the_synchronization_button_opposite_: "click on the synchronization button opposite"
-        _disconnect_then_reconnect_: "disconnect then reconnect"
-        _for_your_changes_to_take_effect: "for your changes to take effect."
+        once_your_data_are_up_to_date_: "Assim que seus dados estiverem atualizados,"
+        _click_on_the_synchronization_button_opposite_: "clique no botão de sincronização oposto"
+        _disconnect_then_reconnect_: "disconecte e se conecte novamente"
+        _for_your_changes_to_take_effect: "para que suas alterações tenham efeito."
       dashboard:
         #dashboard: public profile
         profile:
@@ -65,10 +65,10 @@ pt:
           edit_my_profile: "Editar meu perfil"
           your_group_has_been_successfully_changed: "Seu grupo foi modificado com sucesso."
           an_unexpected_error_prevented_your_group_from_being_changed: "Um erro inesperado impediu o seu grupo de ser alterado."
-          confirmation_required: "Confirmation required"
+          confirmation_required: "Confirmação obrigatória"
           confirm_delete_your_account: "Você realmente deseja deletar sua conta?"
-          all_data_will_be_lost: "All your data will be destroyed and won't be recoverable."
-          invoicing_data_kept: "According to regulation, all data related to your invoices will be kept separately for 10 years."
+          all_data_will_be_lost: "Todos os seus dados serão destruídos e não serão recuperáveis."
+          invoicing_data_kept: "De acordo com os regulamentos, todos os dados relacionados às suas faturas serão mantidos separadamente por 10 anos."
           statistic_data_anonymized: "Some data (sex, date of birth, group) will be anonymized and kept for statistical purposes."
           no_further_access_to_projects: "Your published projects will be anonymized and you won't get any further ability to edit them."
           your_user_account_has_been_successfully_deleted_goodbye: "Sua conta de usuário foi excluída com êxito. Até mais."
