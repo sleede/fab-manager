@@ -2,8 +2,10 @@
 
 ## Next release
 
+- Updated ruby version to 2.6.6
 - Add configuration of the postgreSQL username in environment variables
 - Fix a bug: unable to build homepage custom stylesheet
+- Fix some security issues: [CVE-2020-10663](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-10663) and [CVE-2020-10933](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-10933)
 - [TODO DEPLOY] add `POSTGRES_USERNAME=postgres` to the environment variables (see [doc/environment.md](doc/environment.md#POSTGRES_USERNAME) for configuration details)
 
 ## v4.6.3 2020 October 28
