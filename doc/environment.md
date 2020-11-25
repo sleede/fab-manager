@@ -26,11 +26,11 @@ If you run the application in production with docker, the settings are localized
 DNS name or IP address of the server hosting the PostgreSQL database of the application (see [PostgreSQL](../README.md#postgresql)).
 This value is only used when deploying in production, otherwise this is configured in [config/database.yml](../config/database.yml.default).
 When using docker-compose, you should provide the name of the service in your [docker-compose.yml](../docker/docker-compose.yml) file (`postgres` by default).
-<a name="POSTGRES_PASSWORD"></a>
+<a name="POSTGRES_PASSWORD"></a><a name="POSTGRES_USERNAME"></a>
 
-    POSTGRES_PASSWORD
+    POSTGRES_USERNAME, POSTGRES_PASSWORD
 
-Password for the PostgreSQL user, as specified in `database.yml` (default: `postgres`).
+Username and password for the connection to the PostgreSQL database.
 This value is only used when deploying in production, otherwise this is configured in [config/database.yml](../config/database.yml.default).
 When using docker-compose, the default configuration (with `postgres` user) does not uses any password as it is confined in the docker container.
 <a name="REDIS_HOST"></a>

@@ -1,7 +1,9 @@
 # Changelog Fab-manager
 
+## Next release
+
 - Refactored theme builder to use scss files
-- Fix a bug: unable to build homepage custom stylesheet
+- Updated stripe gem to 5.21.0
 - Fix a bug: unable to access embedded plan views
 - Fix a bug: warning message overflow in credit wallet modal
 - Fix a bug: when using a cash coupon, the amount shown in the statistics is invalid
@@ -11,6 +13,12 @@
 - [TODO DEPLOY] `rails fablab:setup:add_schedule_reference`
 - [TODO DEPLOY] add the `INTL_LOCALE` environment variable (see [doc/environment.md](doc/environment.md#INTL_LOCALE) for configuration details)
 - [TODO DEPLOY] add the `INTL_CURRENCY` environment variable (see [doc/environment.md](doc/environment.md#INTL_CURRENCY) for configuration details)
+
+- Updated ruby version to 2.6.6
+- Add configuration of the postgreSQL username in environment variables
+- Fix a bug: unable to build homepage custom stylesheet
+- Fix some security issues: [CVE-2020-10663](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-10663) and [CVE-2020-10933](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-10933)
+- [TODO DEPLOY] add `POSTGRES_USERNAME=postgres` to the environment variables (see [doc/environment.md](doc/environment.md#POSTGRES_USERNAME) for configuration details)
 
 ## v4.6.3 2020 October 28
 
@@ -23,7 +31,6 @@
 - Fix a bug: in the settings area, boolean switches are always shown as false
 - Fix a bug: public cards presenting the plans in the public area, have bogus style
 - Fix a bug: theme primary color is ignored on links
-- Updated stripe gem to 5.21.0
 - [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
 
 ## v4.6.2 2020 October 23
