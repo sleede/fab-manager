@@ -3,7 +3,7 @@ pt:
     public:
       #header and "about" page
       common:
-        about_the_fablab: "Sobre {GENDER, select, male{o} female{a} neutral{} other{do}} {NAME}"
+        about_the_fablab: "Sobre {GENDER, select, male{o} female{a} neutral{} other{}} {NAME}"
         return: "Voltar"
         #cookies
         cookies:
@@ -298,29 +298,29 @@ pt:
         make_a_gift_of_this_reservation: "Doe esta reserva"
         thank_you_your_payment_has_been_successfully_registered: "Obrigado. Seu pagamento foi registrado com sucesso!"
         you_can_find_your_reservation_s_details_on_your_: "Você pode encontrar detalhes da sua reserva em seu"
-        dashboard: "dashboard"
+        dashboard: "painel de controle"
         you_booked_DATE: "Sua reserva ({DATE}):"
-        canceled_reservation_SEATS: "Reservation canceled ({SEATS} seats)"
+        canceled_reservation_SEATS: "Reserva cancelada ({SEATS} lugares)"
         book: "Reservar"
-        confirm_and_pay: "Confirm and pay"
-        confirm_payment_of_html: "{ROLE, select, admin{Cash} other{Pay}}: {AMOUNT}" #(contexte : validate a payment of $20,00)
-        online_payment_disabled: "Payment by credit card is not available. Please contact the FabLab's reception directly."
-        please_select_a_member_first: "Please select a member first"
+        confirm_and_pay: "Confirmar e pagar"
+        confirm_payment_of_html: "{ROLE, select, admin{Pagamento pelo site} other{Pagamento}}: {AMOUNT}" #(contexte : validate a payment of $20,00)
+        online_payment_disabled: "Pagamento por cartão de crédito não está disponível. Por favor, contate a recepção do FabLab diretamente."
+        please_select_a_member_first: "Por favor, selecione um membro primeiro"
         change_the_reservation: "Alterar reserva"
         you_can_shift_this_reservation_on_the_following_slots: "Você pode alterar essa reserva nos campos a seguir:"
         confirmation_required: "Confirmação obrigatória"
         do_you_really_want_to_delete_this_event: "Vocêrealmente deseja remover este evento?"
-        delete_recurring_event: "You're about to delete a periodic event. What do you want to do?"
-        delete_this_event: "Only this event"
-        delete_this_and_next: "This event and the following"
-        delete_all: "All events"
+        delete_recurring_event: "Você está prestes a excluir um evento periódico. O que você deseja fazer?"
+        delete_this_event: "Apenas este evento"
+        delete_this_and_next: "Este evento e os seguintes"
+        delete_all: "Todos eventos"
         event_successfully_deleted: "Evento excluído com sucesso."
-        events_deleted: "The event, and {COUNT, plural, =1{one other} other{{COUNT} others}}, have been deleted"
-        unable_to_delete_the_event: "Unable to delete the event, it may be booked by a member"
-        events_not_deleted: "On {TOTAL} events, {COUNT, plural, =1{one was not deleted} other{{COUNT} were not deleted}}. Some reservations may exists on {COUNT, plural, =1{it} other{them}}."
-        cancel_the_reservation: "Cancel the reservation"
-        do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "Do you really want to cancel this reservation? This apply to ALL booked tickets."
-        reservation_was_successfully_cancelled: "Reservation was successfully cancelled."
+        events_deleted: "O evento e {COUNT, plural, one {} =1{mais um} other{{COUNT} outros}}, foram excluídos"
+        unable_to_delete_the_event: "Não é possível excluir o evento, ele pode ser reservado por um membro"
+        events_not_deleted: "Em {TOTAL} eventos, {COUNT, plural, one {} =1{um não foi deletado. } other{{COUNT} não foram deletados. }}Talvez existam algumas reservas {COUNT, plural, =1{nele} other{neles}}."
+        cancel_the_reservation: "Cancelar a reserva"
+        do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "Você realmente deseja cancelar esta reserva? Isto se aplica a TODOS os pedidos reservados."
+        reservation_was_successfully_cancelled: "A reserva foi cancelada com sucesso."
         cancellation_failed: "Cancellation failed."
         event_is_over: "The event is over."
         thanks_for_coming: "Thanks for coming!"
@@ -424,26 +424,26 @@ pt:
         machines:
           welcome:
             title: "Máquinas"
-            content: "<p>Machines are the tools available for your users. You must create here the machines which can then be reserved by the members.</p><p>You can also create entries for non-bookable or free access machines, then you just need to not associate availability slots with them.</p>"
+            content: "<p>Máquinas são as ferramentas disponíveis para seus usuários. Você deve criar aqui as máquinas que podem ser reservadas pelos membros.</p><p>Você também pode criar entradas para máquinas de acesso não-reservadas ou gratuitas, então você só precisa não associar slots de disponibilidade com elas.</p>"
           welcome_manager:
-            title: "Machines"
-            content: "Machines are the tools available for the users to reserve."
+            title: "Máquinas"
+            content: "Máquinas são as ferramentas disponíveis para reservar aos usuários."
           view:
-            title: "View"
-            content: "To modify or delete a machine, click here first. You will not be able to delete a machine that has already been associated with availability slots, but you can deactivate it."
+            title: "Visualizar"
+            content: "Para modificar ou excluir uma máquina, clique aqui primeiro. Você não poderá excluir uma máquina que já tenha sido associada com slots de disponibilidade, mas você pode desativá-la."
           reserve:
-            title: "Reserve"
-            content: "Click here to access an agenda showing free slots. This will let you book this machine for an user and manage existing reservations."
+            title: "Reservar"
+            content: "Clique aqui para acessar uma agenda mostrando espaços livres. Isso permitirá que você reserve esta máquina para um usuário e gerencie as reservas existentes."
         spaces:
           welcome:
-            title: "Spaces"
-            content: "<p>Spaces are places available for your users. For example, a meeting room or a woodshop. You must create here the spaces which can then be reserved by members.</p><p>The specificity of the spaces is that they can be reserved by several users at the same time.</p>"
+            title: "Espaços"
+            content: "<p>Espaços são lugares disponíveis para seus usuários. Por exemplo, uma sala de reunião ou uma bancada. Você deve criar aqui os espaços que podem ser reservados pelos membros.</p><p>A especificidade dos espaços é que eles podem ser reservados por vários usuários ao mesmo tempo.</p>"
           welcome_manager:
-            title: "Spaces"
-            content: "<p>Spaces are places available to users, by reservation. For example, a meeting room or a woodshop.</p><p>The specificity of the spaces is that they can be reserved by several users at the same time.</p>"
+            title: "Espaços"
+            content: "<p>Espaços são locais disponíveis para os usuários, por reserva. Por exemplo, uma sala de reunião ou uma bancada.</p><p>A especificidade dos espaços é que eles podem ser reservados por vários usuários ao mesmo tempo.</p>"
           view:
-            title: "View"
-            content: "To modify or delete a space, click here first. You will not be able to delete a space that has already been associated with availability slots, but you can deactivate it."
+            title: "Visualizar"
+            content: "Para modificar ou deletar um espaço, clique aqui primeiro. Você não poderá excluir um espaço que já tenha sido associado com slots de disponibilidade, mas você pode desativá-lo."
           reserve:
-            title: "Reserve"
-            content: "Click here to access an agenda showing free slots. This will let you book this space for an user and manage existing reservations."
+            title: "Reservar"
+            content: "Clique aqui para acessar uma agenda mostrando espaços livres. Isso permitirá que você reserve este espaço para um usuário e gerencie as reservas existentes."
