@@ -34,9 +34,9 @@ pt:
         #left menu (public)
         home: "Início"
         reserve_a_machine: "Reservar Máquina"
-        trainings_registrations: "Registro de treinamentos"
-        events_registrations: "Registro de Eventos"
-        reserve_a_space: "Reserva de espaço"
+        trainings_registrations: "Treinamentos"
+        events_registrations: "Eventos"
+        reserve_a_space: "Reservar Espaço"
         projects_gallery: "Galeria de Projetos"
         subscriptions: "Assinaturas"
         public_calendar: "Agenda"
