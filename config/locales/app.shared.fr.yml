@@ -117,7 +117,7 @@ fr:
       #stripe payment modal
       stripe:
         online_payment: "Paiement en ligne"
-        i_have_read_and_accept_: "J'ai bien pris connaissance, et accepte"
+        i_have_read_and_accept_: "J'ai bien pris connaissance, et accepte "
         _the_general_terms_and_conditions: "les conditions générales de vente."
         credit_amount_for_pay_reservation: "Il vous reste {amount} {currency} à payer pour valider votre réservation"
         client_credit_amount_for_pay_reservation: "Il reste {amount} {currency} à payer pour valider la réservation"

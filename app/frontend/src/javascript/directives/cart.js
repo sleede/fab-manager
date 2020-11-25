@@ -808,7 +808,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                  */
                 $scope.ok = function () {
                   if ($scope.method.payment_method === 'stripe') {
-                    return payByStripe(reservation);
+                    return $scope.toggleStripeModal();
                   }
                   $scope.attempting = true;
                   // save subscription (if there's only a subscription selected)

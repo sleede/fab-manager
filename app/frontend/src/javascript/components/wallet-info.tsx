@@ -2,7 +2,7 @@
  * This component displays a summary of the amount paid with the virtual wallet, for the current transaction
  */
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
 import { IApplication } from '../models/application';
@@ -12,6 +12,7 @@ import { Reservation } from '../models/reservation';
 import { User } from '../models/user';
 import { Wallet } from '../models/wallet';
 import { IFablab } from '../models/fablab';
+import WalletLib from '../lib/wallet';
 
 declare var Application: IApplication;
 declare var Fablab: IFablab;
@@ -21,11 +22,19 @@ interface WalletInfoProps {
   currentUser: User,
   wallet: Wallet,
   price: number,
-  remainingPrice: number,
 }
 
-export const WalletInfo: React.FC<WalletInfoProps> = ({reservation, currentUser, wallet, price, remainingPrice}) => {
-  const {t} = useTranslation('shared');
+export const WalletInfo: React.FC<WalletInfoProps> = ({reservation, currentUser, wallet, price}) => {
+  const { t } = useTranslation('shared');
+  const [remainingPrice, setRemainingPrice] = useState(0);
+
+  /**
+   * Refresh the remaining price on each display
+   */
+  useEffect(() => {
+    const wLib = new WalletLib(wallet);
+    setRemainingPrice(wLib.computeRemainingPrice(price));
+  })
 
   /**
    * Return the formatted localized amount for the given price (eg. 20.5 => "20,50 €")
@@ -111,13 +120,12 @@ export const WalletInfo: React.FC<WalletInfoProps> = ({reservation, currentUser,
   );
 }
 
-const WalletInfoWrapper: React.FC<WalletInfoProps> = ({currentUser, reservation, price, remainingPrice, wallet}) => {
+const WalletInfoWrapper: React.FC<WalletInfoProps> = ({currentUser, reservation, price, wallet}) => {
   return (
     <Loader>
-      <WalletInfo currentUser={currentUser} reservation={reservation} price={price}
-                  remainingPrice={remainingPrice} wallet={wallet}/>
+      <WalletInfo currentUser={currentUser} reservation={reservation} price={price} wallet={wallet}/>
     </Loader>
   );
 }
 
-Application.Components.component('walletInfo', react2angular(WalletInfoWrapper, ['currentUser', 'price', 'remainingPrice', 'reservation', 'wallet']));
+Application.Components.component('walletInfo', react2angular(WalletInfoWrapper, ['currentUser', 'price', 'reservation', 'wallet']));
