@@ -844,24 +844,24 @@ pt:
       #add a new manager to the platform
       manager_new:
         add_a_manager: "Adicionar Gestor"
-        manager_successfully_created: "Manager successfully created. {GENDER, select, female{She} other{He}} receive {GENDER, select, female{her} other{his}} connection directives by e-mail."
-        failed_to_create_manager: "Unable to create the manager:"
-        man: "Man"
-        woman: "Woman"
-        pseudonym: "Pseudonym"
-        pseudonym_is_required: "Pseudonym is required."
-        first_name: "First name"
-        first_name_is_required: "First name is required."
-        surname: "Last name"
-        surname_is_required: "Last name is required."
-        email_address: "Email address"
-        email_is_required: "Email address is required."
-        birth_date: "Date of birth"
-        address: "Address"
-        phone_number: "Phone number"
+        manager_successfully_created: "Gerente criado com sucesso. {GENDER, select, female{Ela} other{Ele}} receberá {GENDER, select, female{Suas diretrizes de conexão por e-mail} other{Suas diretrizes de conexão por e-mail}}"
+        failed_to_create_manager: "Não foi possível criar o gerente:"
+        man: "Homem"
+        woman: "Mulher"
+        pseudonym: "Apelido"
+        pseudonym_is_required: "Apelido é obrigatório."
+        first_name: "Primeiro nome"
+        first_name_is_required: "Primeiro nome é obrigatório."
+        surname: "Sobrenome"
+        surname_is_required: "Sobrenome é obrigatório."
+        email_address: "Endereço de e-mail"
+        email_is_required: "Email é obrigatório."
+        birth_date: "Data de nascimento"
+        address: "Endereço"
+        phone_number: "Número de telefone"
       #add a new authentication provider (SSO)
       authentication_new:
-        local_database: "Local Database"
+        local_database: "Database local"
         o_auth2: "OAuth 2.0"
         add_a_new_authentication_provider: "Adicionar novo provedor de autenticação"
         a_local_database_provider_already_exists_unable_to_create_another: "Um provedor \"Local Database\" já existe. Não foi possível criar outro."
@@ -877,11 +877,11 @@ pt:
       authentication_edit:
         provider: "Provedor :"
         it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider: "É necessário definir a correspondência entre User.uid ea API para adicionar este fornecedor."
-        provider_successfully_updated: "Provider successfully updated."
+        provider_successfully_updated: "Provedor modificado com sucesso."
         an_error_occurred_unable_to_update_the_provider: "Um erro ocorreu: não é possível atualizar provedor."
       #statistics tables
       statistics:
-        statistics: "Statistics"
+        statistics: "Estatísticas"
         evolution: "Evolução"
         age_filter: "Filtro de idade"
         from_age: "Dos" #eg. from 8 to 40 years old
@@ -893,8 +893,8 @@ pt:
         criterion: "Critério:"
         value: "Valor:"
         exclude: "Excluir"
-        from_date: "From" #eg: from 01/01 to 01/05
-        to_date: "to" #eg: from 01/01 to 01/05
+        from_date: "De" #eg: from 01/01 to 01/05
+        to_date: "até" #eg: from 01/01 to 01/05
         entries: "Entradas:"
         revenue_: "Receita:"
         average_age: "Idade média:"
@@ -902,8 +902,8 @@ pt:
         total: "Total"
         available_hours: "Horas disponíveis para reserva:"
         available_tickets: "Vagas disponíveis para reserva:"
-        date: "Date"
-        user: "User"
+        date: "Data"
+        user: "Usuário"
         gender: "Gênero"
         age: "Ano"
         type: "Tipo"
