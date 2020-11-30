@@ -19,11 +19,14 @@
   animation: 0.15s linear fadeIn;
 }
 
+.fab-modal-sm { width: 340px; }
+.fab-modal-md { width: 440px; }
+.fab-modal-lg { width: 600px; }
+
 .fab-modal {
   animation: 0.3s ease-out slideInFromTop;
   position: relative;
   top: 90px;
-  width: 340px;
   margin: auto;
   opacity: 1;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
@@ -58,6 +61,7 @@
     }
 
     .fab-modal-footer {
+      position: relative;
       padding: 15px;
       text-align: right;
       border-top: 1px solid #e5e5e5;

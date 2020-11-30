@@ -6,9 +6,14 @@ interface StripeFormProps {
   onSubmit: () => void,
   onSuccess: (paymentMethod: PaymentMethod) => void,
   onError: (message: string) => void,
+  className?: string,
 }
 
-export const StripeForm: React.FC<StripeFormProps> = ({ onSubmit, onSuccess, onError, children }) => {
+/**
+ * A form component to collect the credit card details and to create the payment method on Stripe.
+ * The form validation button must be created elsewhere, using the attribute form="stripe-form".
+ */
+export const StripeForm: React.FC<StripeFormProps> = ({ onSubmit, onSuccess, onError, children, className }) => {
 
   const stripe = useStripe();
   const elements = useElements();
@@ -56,7 +61,7 @@ export const StripeForm: React.FC<StripeFormProps> = ({ onSubmit, onSuccess, onE
   };
 
   return (
-    <form onSubmit={handleSubmit} id="stripe-form">
+    <form onSubmit={handleSubmit} id="stripe-form" className={className}>
       <CardElement options={cardOptions} />
       {children}
     </form>

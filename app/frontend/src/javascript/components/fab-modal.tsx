@@ -11,16 +11,26 @@ import { CustomAssetName } from '../models/custom-asset';
 
 Modal.setAppElement('body');
 
+export enum ModalSize {
+  small = 'sm',
+  medium = 'md',
+  large = 'lg'
+}
+
 interface FabModalProps {
   title: string,
   isOpen: boolean,
   toggleModal: () => void,
-  confirmButton?: ReactNode
+  confirmButton?: ReactNode,
+  closeButton?: boolean,
+  className?: string,
+  width?: ModalSize,
+  customFooter?: ReactNode
 }
 
 const blackLogoFile = CustomAssetAPI.get(CustomAssetName.LogoBlackFile);
 
-export const FabModal: React.FC<FabModalProps> = ({ title, isOpen, toggleModal, children, confirmButton }) => {
+export const FabModal: React.FC<FabModalProps> = ({ title, isOpen, toggleModal, children, confirmButton, className, width = 'sm', closeButton, customFooter }) => {
   const { t } = useTranslation('shared');
   const blackLogo = blackLogoFile.read();
 
@@ -31,9 +41,23 @@ export const FabModal: React.FC<FabModalProps> = ({ title, isOpen, toggleModal, 
     return confirmButton !== undefined;
   }
 
+  /**
+   * Should we display the close button?
+   */
+  const hasCloseButton = (): boolean => {
+    return closeButton;
+  }
+
+  /**
+   * Check if there's a custom footer
+   */
+  const hasCustomFooter = (): boolean => {
+    return customFooter !== undefined;
+  }
+
   return (
     <Modal isOpen={isOpen}
-           className="fab-modal"
+           className={`fab-modal fab-modal-${width} ${className}`}
            overlayClassName="fab-modal-overlay"
            onRequestClose={toggleModal}>
       <div className="fab-modal-header">
@@ -49,8 +73,9 @@ export const FabModal: React.FC<FabModalProps> = ({ title, isOpen, toggleModal, 
       </div>
       <div className="fab-modal-footer">
         <Loader>
-          <button className="modal-btn--close" onClick={toggleModal}>{t('app.shared.buttons.close')}</button>
+          {hasCloseButton() &&<button className="modal-btn--close" onClick={toggleModal}>{t('app.shared.buttons.close')}</button>}
           {hasConfirmButton() && <span className="modal-btn--confirm">{confirmButton}</span>}
+          {hasCustomFooter() && customFooter}
         </Loader>
       </div>
     </Modal>

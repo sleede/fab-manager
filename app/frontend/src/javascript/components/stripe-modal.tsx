@@ -8,7 +8,7 @@ import { Loader } from './loader';
 import { IApplication } from '../models/application';
 import { StripeElements } from './stripe-elements';
 import { useTranslation } from 'react-i18next';
-import { FabModal } from './fab-modal';
+import { FabModal, ModalSize } from './fab-modal';
 import { PaymentMethod } from '@stripe/stripe-js';
 import { WalletInfo } from './wallet-info';
 import { Reservation } from '../models/reservation';
@@ -93,16 +93,16 @@ const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuc
   }
 
   /**
-   * Return the form submission button. This button will be shown into the modal footer.
+   * Return the logos, shown in the modal footer.
    */
-  const submitButton = (): ReactNode => {
+  const logoFooter = (): ReactNode => {
     return (
-      <button type="submit"
-              disabled={submitState}
-              form="stripe-form"
-              className="validate-btn">
-        {t('app.shared.stripe.confirm_payment_of_', { AMOUNT: formatPrice(remainingPrice) })}
-      </button>
+      <div className="stripe-modal-icons">
+        <i className="fa fa-lock fa-2x m-r-sm pos-rlt" />
+        <img src={stripeLogo} alt="powered by stripe" />
+        <img src={mastercardLogo} alt="mastercard" />
+        <img src={visaLogo} alt="visa" />
+      </div>
     );
   }
 
@@ -122,35 +122,40 @@ const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuc
 
 
   return (
-    <div className="stripe-modal">
-      <FabModal title={t('app.shared.stripe.online_payment')} isOpen={isOpen} toggleModal={toggleModal} confirmButton={submitButton()}>
-        <WalletInfo reservation={reservation} currentUser={currentUser} wallet={wallet} price={price} />
-        <StripeElements>
-          <StripeForm onSubmit={handleSubmit} onSuccess={handleFormSuccess} onError={handleFormError}>
-            {hasCgv() && <div className="terms-of-sales">
-              <input type="checkbox" id="acceptToS" name="acceptCondition" checked={tos} onChange={toggleTos} required />
-              <label htmlFor="acceptToS">{ t('app.shared.stripe.i_have_read_and_accept_') }
-                <a href={cgv.custom_asset_file_attributes.attachment_url} target="_blank">
-                  { t('app.shared.stripe._the_general_terms_and_conditions') }
-                </a>
-              </label>
-            </div>}
-          </StripeForm>
-        </StripeElements>
-        {hasErrors() && <div className="stripe-errors">
-          {errors}
-        </div>}
-        {isPaymentSchedule() && <div className="payment-schedule-info">
-          <p>{ t('app.shared.stripe.payment_schedule', { DEADLINES: schedule.items.length }) }</p>
-        </div>}
-        <div className="stripe-modal-icons">
-          <i className="fa fa-lock fa-2x m-r-sm pos-rlt" />
-          <img src={stripeLogo} alt="powered by stripe" />
-          <img src={mastercardLogo} alt="mastercard" />
-          <img src={visaLogo} alt="visa" />
-        </div>
-      </FabModal>
-    </div>
+    <FabModal title={t('app.shared.stripe.online_payment')}
+              isOpen={isOpen}
+              toggleModal={toggleModal}
+              width={ModalSize.medium}
+              closeButton={false}
+              customFooter={logoFooter()}
+              className="stripe-modal">
+      <WalletInfo reservation={reservation} currentUser={currentUser} wallet={wallet} price={price} />
+      <StripeElements>
+        <StripeForm onSubmit={handleSubmit} onSuccess={handleFormSuccess} onError={handleFormError} className="stripe-form">
+          {hasErrors() && <div className="stripe-errors">
+            {errors}
+          </div>}
+          {hasCgv() && <div className="terms-of-sales">
+            <input type="checkbox" id="acceptToS" name="acceptCondition" checked={tos} onChange={toggleTos} required />
+            <label htmlFor="acceptToS">{ t('app.shared.stripe.i_have_read_and_accept_') }
+              <a href={cgv.custom_asset_file_attributes.attachment_url} target="_blank">
+                { t('app.shared.stripe._the_general_terms_and_conditions') }
+              </a>
+            </label>
+          </div>}
+          {isPaymentSchedule() && <div className="payment-schedule-info">
+            <i className="fa fa-warning" />
+            <p>{ t('app.shared.stripe.payment_schedule', { DEADLINES: schedule.items.length }) }</p>
+          </div>}
+        </StripeForm>
+        <button type="submit"
+                disabled={submitState}
+                form="stripe-form"
+                className="validate-btn">
+          {t('app.shared.stripe.confirm_payment_of_', { AMOUNT: formatPrice(remainingPrice) })}
+        </button>
+      </StripeElements>
+    </FabModal>
   );
 }
 
