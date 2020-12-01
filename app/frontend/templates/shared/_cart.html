@@ -199,3 +199,11 @@
   </div>
 
 </div>
+<div ng-if="stripe.showModal">
+  <stripe-modal is-open="stripe.showModal"
+                toggle-modal="toggleStripeModal"
+                after-success="afterStripeSuccess"
+                cartItems="stripe.cartItems"
+                current-user="currentUser"
+                schedule="schedule.payment_schedule"/>
+</div>

@@ -1,19 +1,26 @@
 import React, { FormEvent } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { PaymentMethod } from "@stripe/stripe-js";
+import PaymentAPI from '../api/payment';
+import { CartItems, PaymentConfirmation } from '../models/payment';
+import { useTranslation } from 'react-i18next';
 
 interface StripeFormProps {
   onSubmit: () => void,
   onSuccess: (paymentMethod: PaymentMethod) => void,
   onError: (message: string) => void,
   className?: string,
+  processPayment?: boolean,
+  cartItems?: CartItems
 }
 
 /**
  * A form component to collect the credit card details and to create the payment method on Stripe.
  * The form validation button must be created elsewhere, using the attribute form="stripe-form".
  */
-export const StripeForm: React.FC<StripeFormProps> = ({ onSubmit, onSuccess, onError, children, className }) => {
+export const StripeForm: React.FC<StripeFormProps> = ({ onSubmit, onSuccess, onError, children, className, processPayment , cartItems}) => {
+
+  const { t } = useTranslation('shared');
 
   const stripe = useStripe();
   const elements = useElements();
@@ -38,9 +45,47 @@ export const StripeForm: React.FC<StripeFormProps> = ({ onSubmit, onSuccess, onE
     if (error) {
       onError(error.message);
     } else {
+      if (processPayment) {
+        // process the full payment pipeline, including SCA validation
+        const res = await PaymentAPI.confirm(paymentMethod.id, cartItems);
+        await handleServerConfirmation(res, paymentMethod);
+      } else {
+        // we don't want to process the payment, only return the payment method
+        onSuccess(paymentMethod);
+      }
+    }
+  }
+
+  /**
+   * Process the server response about the Strong-customer authentication (SCA)
+   */
+  const handleServerConfirmation = async (response: PaymentConfirmation, paymentMethod: PaymentMethod) => {
+    if (response.error) {
+      if (response.error.statusText) {
+        onError(response.error.statusText);
+      } else {
+        onError(`${t('app.shared.messages.payment_card_error')} ${response.error}`);
+      }
+    } else if (response.requires_action) {
+      // Use Stripe.js to handle required card action
+      const result = await stripe.handleCardAction(response.payment_intent_client_secret);
+      if (result.error) {
+        onError(result.error.message);
+      } else {
+        // The card action has been handled
+        // The PaymentIntent can be confirmed again on the server
+        try {
+          const confirmation = await PaymentAPI.confirm(result.paymentIntent.id, cartItems);
+          await handleServerConfirmation(confirmation, paymentMethod);
+        } catch (e) {
+          onError(e);
+        }
+      }
+    } else {
       onSuccess(paymentMethod);
     }
   }
+
 
   /**
    * Options for the Stripe's card input

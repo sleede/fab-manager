@@ -73,6 +73,12 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
           payment_schedule: null // the effective computed payment schedule
         };
 
+        // online payments (stripe)
+        $scope.stripe = {
+          showModal: false,
+          cartItems: null
+        };
+
         /**
          * Add the provided slot to the shopping cart (state transition from free to 'about to be reserved')
          * and increment the total amount of the cart if needed.
@@ -301,6 +307,24 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
             updateCartPrice();
             $scope.$apply();
           }, 50);
+        };
+
+        /**
+         * This will open/close the stripe payment modal
+         */
+        $scope.toggleStripeModal = () => {
+          setTimeout(() => {
+            $scope.stripe.showModal = !$scope.stripe.showModal;
+            $scope.$apply();
+          }, 50);
+        };
+
+        /**
+         * Invoked atfer a successful Stripe payment
+         */
+        $scope.afterStripeSuccess = () => {
+          $scope.toggleStripeModal();
+          afterPayment($scope.reservation);
         };
 
         /* PRIVATE SCOPE */
@@ -669,77 +693,8 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
          * Open a modal window that allows the user to process a credit card payment for his current shopping cart.
          */
         const payByStripe = function (reservation) {
-          $uibModal.open({
-            templateUrl: '/stripe/payment_modal.html',
-            size: 'md',
-            resolve: {
-              reservation () {
-                return reservation;
-              },
-              price () {
-                return Price.compute(mkRequestParams({ reservation }, $scope.coupon.applied)).$promise;
-              },
-              wallet () {
-                return Wallet.getWalletByUser({ user_id: reservation.user_id }).$promise;
-              },
-              cgv () {
-                return CustomAsset.get({ name: 'cgv-file' }).$promise;
-              },
-              coupon () {
-                return $scope.coupon.applied;
-              },
-              cartItems () {
-                let request = { reservation };
-                if (reservation.slots_attributes.length === 0 && reservation.plan_id) {
-                  request = mkSubscription($scope.selectedPlan.id, reservation.user_id, $scope.schedule.requested_schedule, 'stripe');
-                } else {
-                  request.reservation.payment_method = 'stripe';
-                }
-                return mkRequestParams(request, $scope.coupon.applied);
-              },
-              schedule () {
-                return $scope.schedule.payment_schedule;
-              },
-              stripeKey: ['Setting', function (Setting) { return Setting.get({ name: 'stripe_public_key' }).$promise; }]
-            },
-            controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'cgv', 'Auth', 'Reservation', 'wallet', 'helpers', '$filter', 'coupon', 'cartItems', 'stripeKey', 'schedule',
-              function ($scope, $uibModalInstance, $state, reservation, price, cgv, Auth, Reservation, wallet, helpers, $filter, coupon, cartItems, stripeKey, schedule) {
-                // user wallet amount
-                $scope.wallet = wallet;
-
-                // Global price (total of all items)
-                $scope.price = price.price;
-
-                // Price
-                $scope.amount = helpers.getAmountToPay(price.price, wallet.amount);
-
-                // Cart items
-                $scope.cartItems = cartItems;
-
-                // CGV
-                $scope.cgv = cgv.custom_asset;
-
-                // Reservation
-                $scope.reservation = reservation;
-
-                // Used in wallet info template to interpolate some translations
-                $scope.numberFilter = $filter('number');
-
-                // stripe publishable key
-                $scope.stripeKey = stripeKey.setting.value;
-
-                // Shows the schedule info in the modal
-                $scope.schedule = schedule;
-
-                /**
-                 * Callback to handle the post-payment and reservation
-                 */
-                $scope.onPaymentSuccess = function (response) {
-                  $uibModalInstance.close(response);
-                };
-              }
-            ]
-          }).result.finally(null).then(function (reservation) { afterPayment(reservation); });
+          $scope.stripe.cartItems = mkRequestParams({ reservation }, $scope.coupon.applied);
+          $scope.toggleStripeModal();
         };
         /**
          * Open a modal window that allows the user to process a local payment for his current shopping cart (admin only).
@@ -755,6 +710,9 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
               price () {
                 return Price.compute(mkRequestParams({ reservation }, $scope.coupon.applied)).$promise;
               },
+              cartItems () {
+                return mkRequestParams({ reservation }, $scope.coupon.applied);
+              },
               wallet () {
                 return Wallet.getWalletByUser({ user_id: reservation.user_id }).$promise;
               },
@@ -768,8 +726,8 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                 return $scope.schedule;
               }
             },
-            controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', 'Subscription', 'wallet', 'helpers', '$filter', 'coupon', 'selectedPlan', 'schedule',
-              function ($scope, $uibModalInstance, $state, reservation, price, Auth, Reservation, Subscription, wallet, helpers, $filter, coupon, selectedPlan, schedule) {
+            controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', 'Subscription', 'wallet', 'helpers', '$filter', 'coupon', 'selectedPlan', 'schedule', 'cartItems',
+              function ($scope, $uibModalInstance, $state, reservation, price, Auth, Reservation, Subscription, wallet, helpers, $filter, coupon, selectedPlan, schedule, cartItems) {
                 // user wallet amount
                 $scope.wallet = wallet;
 
@@ -779,8 +737,9 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                 // Price to pay (wallet deducted)
                 $scope.amount = helpers.getAmountToPay(price.price, wallet.amount);
 
-                // Reservation
+                // Reservation (simple & cartItems format)
                 $scope.reservation = reservation;
+                $scope.cartItems = cartItems;
 
                 // Subscription
                 $scope.plan = selectedPlan;
