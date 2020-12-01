@@ -30,13 +30,13 @@ pt:
       cannot_be_blank_at_same_time: "Não pode ficar em branco quando %{field} estiver em branco também"
       cannot_be_in_the_past: "não pode ser no passado"
       cannot_be_before_previous_value: "não pode ser antes do valor anterior"
-      cannot_overlap: "can't overlap an existing accounting period"
-      cannot_encompass: "can't encompass an existing accounting period"
-      in_closed_period: "can't be within a closed accounting period"
-      invalid_footprint: "invoice's checksum is invalid"
-      end_before_start: "The end date can't be before the start date. Pick a date after %{START}"
-      invalid_duration: "The allowed duration must be between 1 day and 1 year. Your period is %{DAYS} days long."
-      must_be_in_the_past: "The period must be strictly prior to today's date."
+      cannot_overlap: "não é possível sobrepor um período de contabilidade existente"
+      cannot_encompass: "não é possível incluir um período de contabilidade existente"
+      in_closed_period: "não pode ser dentro de um período de contabilidade fechado"
+      invalid_footprint: "a verificação da fatura é inválida"
+      end_before_start: "A data final não pode ser anterior à data de início. Escolha uma data após %{START}"
+      invalid_duration: "A duração permitida deve ter entre 1 dia e 1 ano. Sua menstruação tem %{DAYS} dias."
+      must_be_in_the_past: "O período deve ser estritamente anterior à data de hoje."
   apipie:
     api_documentation: "Documentação da API"
   #error messages when importing an account from a SSO
@@ -54,7 +54,7 @@ pt:
   #members management
   members:
     unable_to_change_the_group_while_a_subscription_is_running: "Não é possível alterar o grupo enquanto uma assinatura está sendo executada"
-    admins_cant_change_group: "Unable to remove an administrator from his dedicated group"
+    admins_cant_change_group: "Não é possível remover o administrador do seu grupo dedicado"
     please_input_the_authentication_code_sent_to_the_address: "Por favor insira o código de autenticação enviado para seu endereço de email %{EMAIL}"
     your_authentication_code_is_not_valid: "Seu código de autentiicação não é válido."
     current_authentication_method_no_code: "O método de autenticação atual não requer nenhum código de migração"
@@ -111,27 +111,27 @@ pt:
     subscription_of_NAME_for_DURATION_starting_from_DATE: "Assinatura de %{NAME} de %{DURATION} começando em %{DATE}"
     subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "Assinatura de %{NAME} estendida (dias livres) a partir de% STARTDATE até %{ENDDATE}"
     and: 'e'
-    invoice_text_example: "Our association is not subject to VAT"
+    invoice_text_example: "Nossa associação não está sujeita a IVA"
   #CVS accounting export (columns headers)
   accounting_export:
-    journal_code: "Journal code"
-    date: "Entry date"
-    account_code: "Account code"
-    account_label: "Account label"
-    piece: "Document"
-    line_label: "Entry label"
-    debit_origin: "Origin debit"
-    credit_origin: "Origin credit"
-    debit_euro: "Euro debit"
-    credit_euro: "Euro credit"
-    lettering: "Lettering"
+    journal_code: "Código do diário"
+    date: "Data de entrada"
+    account_code: "Código da conta"
+    account_label: "Rótulo da conta"
+    piece: "Documento"
+    line_label: "Rótulo da postagem"
+    debit_origin: "Débito de origem"
+    credit_origin: "Crédito de origem"
+    debit_euro: "Débito em euro"
+    credit_euro: "Crédito em euro"
+    lettering: "Letras"
     VAT: 'IVA'
     subscription: "subscr."
-    Machine_reservation: "machine reserv."
-    Training_reservation: "training reserv."
-    Event_reservation: "event reserv."
-    Space_reservation: "space reserv."
-    wallet: "wallet"
+    Machine_reservation: "reserva de máquina."
+    Training_reservation: "reserva de treinamento."
+    Event_reservation: "reserva de evento."
+    Space_reservation: "reserva de espaço."
+    wallet: "carteira"
   #training availabilities
   trainings:
     i_ve_reserved: "Eu reservei"
@@ -156,10 +156,10 @@ pt:
     age: "Idade"
     address: "Endereço"
     phone: "Telefone"
-    website: "Website"
+    website: "Site"
     job: "Emprego"
     interests: "Interesses"
-    cad_software_mastered: "CAD Softwares mastered"
+    cad_software_mastered: "Softwares de CAD dominados"
     group: "Grupo"
     subscription: "Assinatura"
     subscription_end_date: "Assinatura e data"
@@ -212,7 +212,7 @@ pt:
     events: "Eventos"
     day_of_week: "Dia da semana"
     date: "Data"
-    slot: "Slot"
+    slot: "Vaga"
     machine: "Máquina"
     training: "Treinamento"
     space: "Espaço"
@@ -220,9 +220,9 @@ pt:
     reservations: "Reservas"
     available_seats: "Assentos disponíveis"
   roles:
-    member: "Member"
-    manager: "Manager"
-    admin: "Administrator"
+    member: "Membro"
+    manager: "Gestor"
+    admin: "Administrador"
   api:
     #internal app notifications
     notifications:
@@ -320,30 +320,30 @@ pt:
         is_over: "está finalizado."
         download_here: "Baixe aqui"
       notify_admin_import_complete:
-        import_over: "%{CATEGORY} import is over. "
-        members: "Members"
-        view_results: "View results."
+        import_over: "A importação de %{CATEGORY} terminou. "
+        members: "Membros"
+        view_results: "Ver resultados."
       notify_member_about_coupon:
         enjoy_a_discount_of_PERCENT_with_code_CODE: "Desfrute de um desconto de %{PERCENT}% com o código %{CODE}"
         enjoy_a_discount_of_AMOUNT_with_code_CODE: "Desfrute de um desconto de %{AMOUNT} com o código %{CODE}"
       notify_admin_free_disk_space:
-        warning_free_disk_space: "Warning: the server's available disk space is now %{AVAILABLE} MiB"
+        warning_free_disk_space: "Aviso: o espaço em disco do servidor agora é %{AVAILABLE} MiB"
       notify_admin_close_period_reminder:
-        warning_last_closed_period_over_1_year: "Please remind to periodically close your accounting periods. Last closed period ended at %{LAST_END}"
-        warning_no_closed_periods: "Please remind to periodically close your accounting periods. You have to close periods from %{FIRST_DATE}"
+        warning_last_closed_period_over_1_year: "Por favor, lembre-se de encerrar periodicamente seus períodos de contabilidade. O último período de fechamento terminou em %{LAST_END}"
+        warning_no_closed_periods: "Lembre-se de fechar periodicamente os seus períodos de contabilidade. Você tem que fechar períodos de %{FIRST_DATE}"
       notify_admin_archive_complete:
-        archive_complete: "Data archiving from %{START} to %{END} is done. <a href='api/accounting_periods/%{ID}/archive' target='_blank'>click here to download</a>. Remember to save it on an external secured media."
+        archive_complete: "O arquivamento de dados de %{START} para %{END} está pronto. <a href='api/accounting_periods/%{ID}/archive' target='_blank'>clique aqui para baixar</a>. Lembre-se de salvá-lo em uma mídia externa segura."
       notify_privacy_policy_changed:
-        policy_updated: "Privacy policy updated."
-        click_to_show: "Click here to consult"
+        policy_updated: "Política de privacidade atualizada."
+        click_to_show: "Clique aqui para consultar"
       notify_admin_refund_created:
-        refund_created: "A refund of %{AMOUNT} has been created for user %{USER}"
+        refund_created: "Um reembolso de %{AMOUNT} foi criado para o usuário %{USER}"
       notify_user_role_update:
-        your_role_is_ROLE: "Your role has been changed to %{ROLE}."
+        your_role_is_ROLE: "Seu cargo foi alterado para %{ROLE}."
       notify_admins_role_update:
-        user_NAME_changed_ROLE_html: "User <strong><em>%{NAME}</strong></em> is now %{ROLE}."
+        user_NAME_changed_ROLE_html: "O usuário <strong><em>%{NAME}</strong></em> agora é %{ROLE}."
       notify_admin_members_stripe_sync:
-        all_members_sync: "All members were successfully synchronized on Stripe."
+        all_members_sync: "Todos os membros foram sincronizados com sucesso no Stripe."
   #statistics tools for admins
   statistics:
     subscriptions: "Assinaturas"

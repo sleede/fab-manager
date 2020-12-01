@@ -136,3 +136,6 @@ gem 'repost'
 gem 'icalendar'
 
 gem 'tzinfo-data'
+
+# compilation of dynamic stylesheets (home page & theme)
+gem 'sassc'

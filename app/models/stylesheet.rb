@@ -149,7 +149,7 @@ class Stylesheet < ApplicationRecord
   end
 
   def self.home_page_css
-    engine = Sass::Engine.new(home_style, syntax: :scss)
+    engine = SassC::Engine.new(home_style, style: :compressed)
     engine.render.presence || '.home-page {}'
   end
 end

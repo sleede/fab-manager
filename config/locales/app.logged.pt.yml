@@ -35,10 +35,10 @@ pt:
         _the_fablab_policy: "a política do FabLab"
         change_my_data: "Alterar meus dados"
         sync_my_profile: "Sincronizar meu perfil"
-        once_your_data_are_up_to_date_: "Once your data are up to date,"
-        _click_on_the_synchronization_button_opposite_: "click on the synchronization button opposite"
-        _disconnect_then_reconnect_: "disconnect then reconnect"
-        _for_your_changes_to_take_effect: "for your changes to take effect."
+        once_your_data_are_up_to_date_: "Assim que seus dados estiverem atualizados,"
+        _click_on_the_synchronization_button_opposite_: "clique no botão de sincronização oposto"
+        _disconnect_then_reconnect_: "disconecte e se conecte novamente"
+        _for_your_changes_to_take_effect: "para que suas alterações tenham efeito."
       dashboard:
         #dashboard: public profile
         profile:
@@ -65,20 +65,20 @@ pt:
           edit_my_profile: "Editar meu perfil"
           your_group_has_been_successfully_changed: "Seu grupo foi modificado com sucesso."
           an_unexpected_error_prevented_your_group_from_being_changed: "Um erro inesperado impediu o seu grupo de ser alterado."
-          confirmation_required: "Confirmation required"
+          confirmation_required: "Confirmação obrigatória"
           confirm_delete_your_account: "Você realmente deseja deletar sua conta?"
-          all_data_will_be_lost: "All your data will be destroyed and won't be recoverable."
-          invoicing_data_kept: "According to regulation, all data related to your invoices will be kept separately for 10 years."
-          statistic_data_anonymized: "Some data (sex, date of birth, group) will be anonymized and kept for statistical purposes."
-          no_further_access_to_projects: "Your published projects will be anonymized and you won't get any further ability to edit them."
+          all_data_will_be_lost: "Todos os seus dados serão destruídos e não serão recuperáveis."
+          invoicing_data_kept: "De acordo com os regulamentos, todos os dados relacionados às suas faturas serão mantidos separadamente por 10 anos."
+          statistic_data_anonymized: "Alguns dados (sexo, data de nascimento, grupo) serão anonimizados e mantidos para fins estatísticos."
+          no_further_access_to_projects: "Seus projetos publicados ficarão anônimos e você não terá mais a capacidade de editá-los."
           your_user_account_has_been_successfully_deleted_goodbye: "Sua conta de usuário foi excluída com êxito. Até mais."
           an_error_occured_preventing_your_account_from_being_deleted: "Ocorreu um erro, impedindo que sua conta fosse excluída."
-          used_for_statistics: "This data will be used for statistical purposes"
-          used_for_invoicing: "This data will be used for billing purposes"
-          used_for_reservation: "This data will be used in case of change on one of your bookings"
-          used_for_profile: "This data will only be displayed on your profile"
-          used_for_pricing_stats: "This data will be used to determine the prices to which you are entitled, and for statistical purposes"
-          public_profile: "You will have a public profile and other users will be able to associate you in their projects"
+          used_for_statistics: "Estes dados serão utilizados para fins estatísticos"
+          used_for_invoicing: "Esses dados serão usados para fins de faturamento"
+          used_for_reservation: "Estes dados serão utilizados em caso de alteração em uma das suas reservas"
+          used_for_profile: "Estes dados serão exibidos apenas no seu perfil"
+          used_for_pricing_stats: "Estes dados serão usados para determinar os preços a que você tem direito, e para fins estatísticos"
+          public_profile: "Você terá um perfil público e outros usuários poderão associá-lo em seus projetos"
           trainings: "Treinamentos"
           no_trainings: "Sem treinamentos"
           subscription: "Assinatura"
@@ -94,37 +94,37 @@ pt:
         #dashboard: my projects
         projects:
           you_dont_have_any_projects: "Você não tem nenhum projeto."
-          add_a_project: "Add a project"
+          add_a_project: "Adicionar projeto"
           author: "Autor"
           collaborator: "Colaborador"
-          rough_draft: "Draft"
-          description: "Description"
-          machines_and_materials: "Machines and materials"
-          machines: "Machines"
-          materials: "Materials"
-          collaborators: "Collaborators"
+          rough_draft: "Rascunho"
+          description: "Descrição"
+          machines_and_materials: "Máquinas e materiais"
+          machines: "Máquinas"
+          materials: "Materiais"
+          collaborators: "Colaboradores"
         #dashboard: my trainings
         trainings:
           your_next_trainings: "Seus próximos treinamentos"
           your_previous_trainings: "Seus treinamentos anteriores"
           your_approved_trainings: "Seus treinamentos aprovados"
-          no_trainings: "No trainings"
+          no_trainings: "Sem treinamentos"
         #dashboard: my events
         events:
           your_next_events: "Seus próximos eventos"
           no_events_to_come: "Sem eventos futuros"
           your_previous_events: "Seus eventos anteriores"
-          no_passed_events: "No passed events"
+          no_passed_events: "Sem eventos"
           NUMBER_normal_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{lugar normal reservado} other{lugares normais reservados}}"
           NUMBER_of_NAME_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{{NAME} lugar reservado} other{{NAME} lugares reservados}}"
         #dashboard: my invoices
         invoices:
           reference_number: "Número de referência"
-          date: "Date"
-          price: "Price"
-          download_the_invoice: "Download the invoice"
-          download_the_credit_note: "Download the refund invoice"
-          no_invoices_for_now: "No invoices for now."
+          date: "Data"
+          price: "Preço"
+          download_the_invoice: "Baixar a fatura"
+          download_the_credit_note: "Baixar fatura de reembolso"
+          no_invoices_for_now: "Nenhuma fatura."
       #public profil of a member
       members_show:
         members_list: "Lista de membros"
@@ -133,17 +133,17 @@ pt:
         the_fablab_members: "Membros do FabLab"
         display_more_members: "Mostrar mais membros..."
         no_members_for_now: "Sem membros"
-        avatar: "Avatar"
-        user: "User"
-        pseudonym: "Pseudonym"
-        email_address: "Email address"
+        avatar: "Imagem de Perfil"
+        user: "Usuário"
+        pseudonym: "Apelido"
+        email_address: "Email"
       #add a new project
       projects_new:
         add_a_new_project: "Adicionar novo projeto"
       #modify an existing project
       projects_edit:
         edit_the_project: "Editar projeto"
-        rough_draft: "Draft"
+        rough_draft: "Rascunho"
         publish: "Publicar"
       #book a machine
       machines_reserve:
@@ -153,18 +153,18 @@ pt:
         i_reserve: "Eu reservo"
         i_shift: "Eu mudo"
         i_change: "Eu altero"
-        do_you_really_want_to_cancel_this_reservation: "Do you really want to cancel this reservation?"
-        reservation_was_cancelled_successfully: "Reservation was cancelled successfully."
-        cancellation_failed: "Cancellation failed."
-        a_problem_occured_during_the_payment_process_please_try_again_later: "A problem occurred during the payment process. Please try again later."
+        do_you_really_want_to_cancel_this_reservation: "Você realmente quer cancelar essa reserva?"
+        reservation_was_cancelled_successfully: "Reserva a foi cancelada com sucesso."
+        cancellation_failed: "Cancelamento falhou."
+        a_problem_occured_during_the_payment_process_please_try_again_later: "Um problema ocorreu durante o processo de pagamento. Por favor tente novamente mais tarde."
       #book a training
       trainings_reserve:
         trainings_planning: "Planos de treinamento"
         planning_of: "Planejamento de " #eg. Planning of 3d printer training
         all_trainings: "Todos treinamentos"
         cancel_my_selection: "Cancelar minha seleção"
-        i_change: "I change"
-        i_shift: "I shift"
+        i_change: "Eu altero"
+        i_shift: "Eu troco"
         i_ve_reserved: "Eu reservei"
       #book a space
       space_reserve:
@@ -175,7 +175,7 @@ pt:
       notifications:
         notifications_center: "Centro de notificações"
         mark_all_as_read: "Marcar todas como lidas"
-        date: "Date"
+        date: "Data"
         notif_title: "Título"
         no_new_notifications: "Nenhuma nova notificação."
         archives: "Arquivos"

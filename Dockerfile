@@ -1,5 +1,5 @@
-FROM ruby:2.6.5-alpine
-MAINTAINER peng@sleede.com
+FROM ruby:2.6.6-alpine
+MAINTAINER contact@fab-manager.com
 
 # Install upgrade system packages
 RUN apk update && apk upgrade && \

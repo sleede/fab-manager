@@ -3,7 +3,7 @@ pt:
     public:
       #header and "about" page
       common:
-        about_the_fablab: "Sobre {GENDER, select, male{o} female{a} neutral{} other{do}} {NAME}"
+        about_the_fablab: "Sobre {GENDER, select, male{o} female{a} neutral{} other{}} {NAME}"
         return: "Voltar"
         #cookies
         cookies:
@@ -12,7 +12,7 @@ pt:
           accept: "Aceitar cookies"
           decline: "Recusar"
         #dashboard sections
-        dashboard: "Dashboard"
+        dashboard: "Painel de controle"
         my_profile: "Meu Perfil"
         my_settings: "Minhas Configurações"
         my_projects: "Meus Projetos"
@@ -21,22 +21,22 @@ pt:
         my_invoices: "Minhas Contas"
         my_wallet: "Minha Carteira"
         #contextual help
-        help: "Help"
+        help: "Ajuda"
         #login/logout
         sign_out: "Sair"
         sign_up: "Cadastrar"
         sign_in: "Entrar"
         #left menu
         notifications: "Nofificações"
-        admin: "Admin"
-        manager: "Manager"
+        admin: "Administrador"
+        manager: "Gestor"
         reduce_panel: "Reduzir painel"
         #left menu (public)
         home: "Início"
         reserve_a_machine: "Reservar Máquina"
-        trainings_registrations: "Registro de treinamentos"
-        events_registrations: "Registro de Eventos"
-        reserve_a_space: "Reserva de espaço"
+        trainings_registrations: "Treinamentos"
+        events_registrations: "Eventos"
+        reserve_a_space: "Reservar Espaço"
         projects_gallery: "Galeria de Projetos"
         subscriptions: "Assinaturas"
         public_calendar: "Agenda"
@@ -52,7 +52,7 @@ pt:
         projects: "Projetos"
         statistics: "Estatísticas"
         customization: "Customizações"
-        open_api_clients: "OpenAPI clients"
+        open_api_clients: "Clientes OpenAPI"
         #account creation modal
         create_your_account: "Criar sua conta"
         man: "Masculino"
@@ -87,13 +87,13 @@ pt:
         i_accept_to_receive_information_from_the_fablab: "Eu aceito receber informações do FabLab"
         i_ve_read_and_i_accept_: "Eu li e aceito"
         _the_fablab_policy: "a política do FabLab"
-        field_required: "Field required"
-        unexpected_error_occurred: "An unexpected error occurred. Please try again later."
-        used_for_statistics: "This data will be used for statistical purposes"
-        used_for_invoicing: "This data will be used for billing purposes"
-        used_for_reservation: "This data will be used in case of change on one of your bookings"
-        used_for_profile: "This data will only be displayed on your profile"
-        public_profile: "You will have a public profile and other users will be able to associate you in their projects"
+        field_required: "Campo obrigatório"
+        unexpected_error_occurred: "Ocorreu um erro inesperado. Por favor, tenta novamente mais tarde."
+        used_for_statistics: "Estes dados serão utilizados para fins estatísticos"
+        used_for_invoicing: "Esses dados serão usados para fins de faturamento"
+        used_for_reservation: "Estes dados serão utilizados em caso de alteração em uma das suas reservas"
+        used_for_profile: "Estes dados serão exibidos apenas no seu perfil"
+        public_profile: "Você terá um perfil público e outros usuários poderão associá-lo em seus projetos"
         you_will_receive_confirmation_instructions_by_email_detailed: "Você receberá um email com instruções sobre como confirmar sua conta em alguns minutos."
         #password modification modal
         change_your_password: "Mudar sua senha"
@@ -114,14 +114,14 @@ pt:
         you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password: "Você irá receber um e-mail com as instruções para resetar sua senha."
         #Fab-manager's version
         version: "Versão:"
-        upgrade_fabmanager: "Upgrade Fab-manager"
-        current_version: "You are currently using version {VERSION} of Fab-manager."
-        upgrade_to: "A new release is available. You can upgrade up to version {VERSION}."
-        read_more: "View the details of this release"
-        security_version_html: "<strong>Your current version is vulnerable!</strong><br> A later version, currently available, includes security fixes. Upgrade as soon as possible!"
-        how_to: "How to upgrade?"
+        upgrade_fabmanager: "Atualizar Fab-manager"
+        current_version: "Você está usando a versão {VERSION} do Fab-manager."
+        upgrade_to: "Uma nova versão está disponível. Você pode atualizar até a versão {VERSION}."
+        read_more: "Veja os detalhes dessa versão"
+        security_version_html: "<strong>Sua versão atual está vulnerável!</strong><br> Uma versão posterior, atualmente disponível, inclui correções de segurança. Atualize o mais rápido possível!"
+        how_to: "Como fazer a atualização?"
         #Notifications
-        and_NUMBER_other_notifications: "and {NUMBER, plural, =0{no other notifications} =1{one other notification} other{{NUMBER} other notifications}}..."
+        and_NUMBER_other_notifications: "e {NUMBER, plural, =0{sem notificação} =1{uma notificação} other{{NUMBER} notificações}}..."
       #about page
       about:
         read_the_fablab_policy: "Ler a política do FabLab"
@@ -173,19 +173,19 @@ pt:
         rough_draft: "Rascunho"
       #details of a projet
       projects_show:
-        rough_draft: "Draft"
+        rough_draft: "Rascunho"
         project_description: "Descrição do projeto"
         by_name: "Por {NAME}"
-        step_N: "Step {INDEX}"
-        share_on_facebook: "Share on Facebook"
-        share_on_twitter: "Share on Twitter"
-        deleted_user: "Deleted user"
+        step_N: "Passo {INDEX}"
+        share_on_facebook: "Compartilhar no Facebook"
+        share_on_twitter: "Compartilhar no Twitter"
+        deleted_user: "Usuário deletado"
         posted_on_: "Criado em"
-        CAD_file_to_download: "{COUNT, plural, =0{No CAD files} =1{CAD file to download} other{CAD files to download}}"
-        machines_and_materials: "Machines and materials"
-        collaborators: "Collaborators"
+        CAD_file_to_download: "{COUNT, plural, =0{Sem arquivos CAD} =1{Arquivo CAD para download} other{Arquivos CAD para download}}"
+        machines_and_materials: "Máquinas e materiais"
+        collaborators: "Colaboradores"
         licence: "Licença"
-        confirmation_required: "Confirmation required"
+        confirmation_required: "Confirmação obrigatória"
         report_an_abuse: "Denunciar"
         unauthorized_operation: "Operação não autorizada"
         your_report_was_successful_thanks: "Sua denúncia foi enviada com sucesso. Obrigado."
@@ -204,7 +204,7 @@ pt:
       machines_list:
         the_fablab_s_machines: "Lista de máquinas no FabLab"
         add_a_machine: "Adicionar uma máquina"
-        new_availability: "Open reservations"
+        new_availability: "Reservas em aberto"
         book: "Reservar"
         _or_the_: " ou o "
         status_enabled: "Ativo"
@@ -213,24 +213,24 @@ pt:
       #details of a machine
       machines_show:
         book_this_machine: "Reservar essa máquina"
-        technical_specifications: "Technical specifications"
+        technical_specifications: "Especificações técnicas"
         files_to_download: "Arquivos para download"
         projects_using_the_machine: "Projetos usando esta máquina"
         _or_the_: " ou o "
-        confirmation_required: "Confirmation required"
+        confirmation_required: "Confirmação obrigatória"
         do_you_really_want_to_delete_this_machine: "Você realmente quer deletar essa máquina?"
         unauthorized_operation: "Operação não autorizada"
         the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users: "Esta máquina não pode ser deletada, pois já está em reservada por alguns usuários."
       #list of trainings
       trainings_list:
-        book: "Book"
+        book: "Reservar"
         the_trainings: "Os treinamentos"
       #details of a training
       training_show:
         book_this_training: "Reservar este treinamento"
         do_you_really_want_to_delete_this_training: "Você realmente quer deletar esse treinamento?"
         unauthorized_operation: "Operação não autorizada"
-        confirmation_required: "Confirmation required"
+        confirmation_required: "Confirmação obrigatória"
         the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "O treinamento não pode ser deletado pois já foi reservado por alguns usuários."
       #summary of the subscriptions
       plans:
@@ -240,19 +240,19 @@ pt:
         i_already_subscribed: "Eu já estou inscrito"
         more_information: "Mais informação"
         your_subscription_expires_on_the_DATE: "Sua inscrição expira em {DATE}"
-        no_plans: "No plans are available for your group"
+        no_plans: "Não há planos disponíveis para o seu grupo"
         my_group: "Meu grupo"
         his_group: "{GENDER, select, male{Ele} female{Ela} other{Esses}} grupo"
         he_wants_to_change_group: "{ROLE, select, member{Eu quero} other{O usuário quer}} trocar de grupo"
         change_my_group: "Mudar {ROLE, select, member{meu} other{{GENDER, select, other{seu}}}} grupo"
-        summary: "Summary"
+        summary: "Sumário"
         your_subscription_has_expired_on_the_DATE: "Sua inscrição expirou em {DATE}"
-        subscription_price: "Subscription price"
-        you_ve_just_selected_a_subscription_html: "You've just selected a <strong>subscription</strong>:"
-        confirm_and_pay: "Confirm and pay"
+        subscription_price: "Preço da assinatura"
+        you_ve_just_selected_a_subscription_html: "Você acabou de selecionar uma <strong>assinatura</strong>:"
+        confirm_and_pay: "Confirmar e pagar"
         you_ve_just_payed_the_subscription_html: "Você acabou de pagar o <strong>inscrição</strong>:"
         thank_you_your_subscription_is_successful: "Obrigado. Sua inscrição foi feita com sucesso!"
-        your_invoice_will_be_available_soon_from_your_dashboard: "Your invoice will be available soon from your dashboard"
+        your_invoice_will_be_available_soon_from_your_dashboard: "Sua fatura estará disponível em breve a partir do seu painel de controle"
         your_group_was_successfully_changed: "Seu grupo foi alterado com sucesso."
         the_user_s_group_was_successfully_changed: "O grupo de usuários foi alterado com sucesso."
         an_error_prevented_your_group_from_being_changed: "Um erro impediu que seu grupo fosse alterado."
@@ -260,8 +260,8 @@ pt:
         an_error_occured_during_the_payment_process_please_try_again_later: "Um erro ocorreu durante o processo de pagamento. Por favor tente novamente mais tarde."
         subscription_confirmation: "Inscrição confirmada"
         here_is_the_NAME_subscription_summary: "Aqui é o sumário de inscrição do {NAME}:"
-        confirm_payment_of_html: "{ROLE, select, admin{Cash} other{Pay}}: {AMOUNT}" #(contexte : validate a payment of $20,00)
-        online_payment_disabled: "Payment by credit card is not available. Please contact the FabLab's reception directly."
+        confirm_payment_of_html: "{ROLE, select, admin{Pagamento pelo site} other{Pagamento}}: {AMOUNT}" #(contexte : validate a payment of $20,00)
+        online_payment_disabled: "Pagamento por cartão de crédito não está disponível. Por favor, contate a recepção do FabLab diretamente."
       #Fablab's events list
       events_list:
         the_fablab_s_events: "Eventos do Fablab"
@@ -272,61 +272,61 @@ pt:
         free_admission: "Admissão grátis"
         still_available: "lugares disponíveis"
         without_reservation: "Sem reservas"
-        add_an_event: "Add an event"
-        load_the_next_events: "Load the next events..."
+        add_an_event: "Adicionar um evento"
+        load_the_next_events: "Carregar os próximos eventos..."
         full_price_: "Valor inteira:"
-        to_date: "to" #eg. from 01/01 to 01/05
-        all_themes: "All themes"
+        to_date: "até" #eg. from 01/01 to 01/05
+        all_themes: "Todos os temas"
       #details and booking of an event
       events_show:
         event_description: "Descrição do evento"
         downloadable_documents: "Documentos para download"
         information_and_booking: "Informações e reservas"
-        dates: "Dates"
+        dates: "Datas"
         beginning: "Início:"
         ending: "Término:"
         opening_hours: "Abre ás:"
         all_day: "O dia inteiro"
-        from_time: "From" #eg. from 18:00 to 21:00
-        to_time: "to" #eg. from 18:00 to 21:00
+        from_time: "Das" #eg. from 18:00 to 21:00
+        to_time: "ás" #eg. from 18:00 to 21:00
         full_price_: "Valor inteira:"
         tickets_still_availables: "Tickets ainda disponíveis:"
         sold_out: "Esgotado."
         without_reservation: "Sem reservas"
         cancelled: "Cancelado"
-        ticket: "{NUMBER, plural, one{ticket} other{tickets}}"
+        ticket: "{NUMBER, plural, one{ingresso} other{ingressos}}"
         make_a_gift_of_this_reservation: "Doe esta reserva"
-        thank_you_your_payment_has_been_successfully_registered: "Tank you. Your payment has been successfully registered!"
+        thank_you_your_payment_has_been_successfully_registered: "Obrigado. Seu pagamento foi registrado com sucesso!"
         you_can_find_your_reservation_s_details_on_your_: "Você pode encontrar detalhes da sua reserva em seu"
-        dashboard: "dashboard"
+        dashboard: "painel de controle"
         you_booked_DATE: "Sua reserva ({DATE}):"
-        canceled_reservation_SEATS: "Reservation canceled ({SEATS} seats)"
+        canceled_reservation_SEATS: "Reserva cancelada ({SEATS} lugares)"
         book: "Reservar"
-        confirm_and_pay: "Confirm and pay"
-        confirm_payment_of_html: "{ROLE, select, admin{Cash} other{Pay}}: {AMOUNT}" #(contexte : validate a payment of $20,00)
-        online_payment_disabled: "Payment by credit card is not available. Please contact the FabLab's reception directly."
-        please_select_a_member_first: "Please select a member first"
+        confirm_and_pay: "Confirmar e pagar"
+        confirm_payment_of_html: "{ROLE, select, admin{Pagamento pelo site} other{Pagamento}}: {AMOUNT}" #(contexte : validate a payment of $20,00)
+        online_payment_disabled: "Pagamento por cartão de crédito não está disponível. Por favor, contate a recepção do FabLab diretamente."
+        please_select_a_member_first: "Por favor, selecione um membro primeiro"
         change_the_reservation: "Alterar reserva"
         you_can_shift_this_reservation_on_the_following_slots: "Você pode alterar essa reserva nos campos a seguir:"
         confirmation_required: "Confirmação obrigatória"
         do_you_really_want_to_delete_this_event: "Vocêrealmente deseja remover este evento?"
-        delete_recurring_event: "You're about to delete a periodic event. What do you want to do?"
-        delete_this_event: "Only this event"
-        delete_this_and_next: "This event and the following"
-        delete_all: "All events"
+        delete_recurring_event: "Você está prestes a excluir um evento periódico. O que você deseja fazer?"
+        delete_this_event: "Apenas este evento"
+        delete_this_and_next: "Este evento e os seguintes"
+        delete_all: "Todos eventos"
         event_successfully_deleted: "Evento excluído com sucesso."
-        events_deleted: "The event, and {COUNT, plural, =1{one other} other{{COUNT} others}}, have been deleted"
-        unable_to_delete_the_event: "Unable to delete the event, it may be booked by a member"
-        events_not_deleted: "On {TOTAL} events, {COUNT, plural, =1{one was not deleted} other{{COUNT} were not deleted}}. Some reservations may exists on {COUNT, plural, =1{it} other{them}}."
-        cancel_the_reservation: "Cancel the reservation"
-        do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "Do you really want to cancel this reservation? This apply to ALL booked tickets."
-        reservation_was_successfully_cancelled: "Reservation was successfully cancelled."
-        cancellation_failed: "Cancellation failed."
-        event_is_over: "The event is over."
-        thanks_for_coming: "Thanks for coming!"
-        view_event_list: "View events to come"
-        share_on_facebook: "Share on Facebook"
-        share_on_twitter: "Share on Twitter"
+        events_deleted: "O evento e {COUNT, plural, one {} =1{mais um} other{{COUNT} outros}}, foram excluídos"
+        unable_to_delete_the_event: "Não é possível excluir o evento, ele pode ser reservado por um membro"
+        events_not_deleted: "Em {TOTAL} eventos, {COUNT, plural, one {} =1{um não foi deletado. } other{{COUNT} não foram deletados. }}Talvez existam algumas reservas {COUNT, plural, =1{nele} other{neles}}."
+        cancel_the_reservation: "Cancelar a reserva"
+        do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "Você realmente deseja cancelar esta reserva? Isto se aplica a TODOS os pedidos reservados."
+        reservation_was_successfully_cancelled: "A reserva foi cancelada com sucesso."
+        cancellation_failed: "Cancelamento falhou."
+        event_is_over: "O Evento acabou."
+        thanks_for_coming: "Obrigado por ter vindo!"
+        view_event_list: "Visualizar próximos eventos"
+        share_on_facebook: "Compartilhar no Facebook"
+        share_on_twitter: "Compartilhar no Twitter"
       #public calendar
       calendar:
         calendar: "Calendário"
@@ -340,7 +340,7 @@ pt:
       #list of spaces
       spaces_list:
         the_spaces: "Os espaços"
-        new_availability: "Open reservations"
+        new_availability: "Reservas abertas"
         add_a_space: "Adicionar espaço"
         status_enabled: "Ativo"
         status_disabled: "Desabilitado"
@@ -358,92 +358,92 @@ pt:
         projects_using_the_space: "Projetos usando espaço"
       tour:
         conclusion:
-          title: "Thank you for your attention"
-          content: "<p>If you want to restart this contextual help, press <strong>F1</strong> at any time or click on « ? Help » from the user's menu.</p><p>If you need additional help, you can <a href='https://github.com/sleede/fab-manager/raw/master/doc/fr/guide_utilisation_fab_manager_v4.5.pdf' target='_blank'>check the user guide</a> (only in French for now).</p><p>The Fab-manager's team also provides personalized support (help with getting started, help with installation, customization, etc.), <a href='mailto:contact@fab-manager.com'>contact-us</a> for more info.</p>"
+          title: "Obrigado pela sua atenção"
+          content: "<p>Se você deseja reiniciar esta ajuda contextual, pressione <strong>F1</strong> a qualquer momento ou clique em « ? Ajuda » no menu do usuário.</p><p>Se precisar de ajuda adicional, você pode <a href='https://github.com/sleede/fab-manager/raw/master/doc/fr/guide_utilisation_fab_manager_v4.5.pdf' target='_blank'>verificar o guia do usuário</a> (apenas em francês por enquanto).</p><p>A equipe do Fab-Gerente também fornece suporte personalizado (ajuda para começar, ajuda com a instalação, personalização, etc.) , <a href='mailto:contact@fab-manager.com'>contacte-nos</a> para mais informações.</p>"
         welcome:
           welcome:
-            title: "Welcome to Fab-manager"
-            content: "To help you get started with the application, we are going to take a quick tour of the features."
+            title: "Bem-vindo ao Fab-manager"
+            content: "Para ajudar você a começar o aplicativo, vamos fazer um rápido tour pelos recursos."
           home:
-            title: "Home page"
-            content: "Clicking here will take you back to the home page where you are currently."
+            title: "Página inicial"
+            content: "Clicar aqui te levará de volta à página inicial onde você está atualmente."
           machines:
-            title: "Machines"
-            content: "<p>This page will allow you to consult the list of all machines and reserve a slot on behalf of a member.</p><p>A machine can be, for example, a 3D printer.</p><p>Members can also access this page and reserve a machine themselves, if credit card payment is enabled, or if some prices are equal to 0.</p>"
+            title: "Máquinas"
+            content: "<p>Esta página permitirá que você consulte a lista de todas as máquinas e reserve um slot em nome de um membro.</p><p>Uma máquina pode ser, por exemplo, uma impressora 3D.</p><p>Membros também podem acessar esta página e reservar uma máquina eles mesmos, se o pagamento com cartão de crédito estiver ativado, ou se alguns preços são iguais a 0.</p>"
           trainings:
-            title: "Trainings"
-            content: "<p>This page will allow you to consult the list of all training sessions and to register a member for a training session.</p><p>Trainings can be set as prerequisites before allowing reservation of certain machines.</p><p>Members can also access this page and register for a training session themselves, if credit card payment is enabled, or if some prices are equal to 0.</p>"
+            title: "Treinamentos"
+            content: "<p>Esta página permitirá que você consulte a lista de todas as máquinas e reserve um slot em nome de um membro.</p><p>Uma máquina pode ser, por exemplo, uma impressora 3D.</p><p>Membros também podem acessar esta página e reservar uma máquina eles mesmos, se o pagamento com cartão de crédito estiver ativado, ou se alguns preços são iguais a 0.</p>"
           spaces:
-            title: "Spaces"
-            content: "<p>This page will allow you to consult the list of all available spaces and to reserve a place on a slot, on behalf of a member.</p><p>A space can be, for example, a woodshop or a meeting room.</p><p>Their particularity is that they can be booked by several people at the same time.</p><p>Members can also access this page and reserve a machine themselves, if credit card payment is enabled, or if some prices are equal to 0.</p>"
+            title: "Espaços"
+            content: "<p>Esta página permitirá que você consulte a lista de todos os espaços disponíveis e reservar um lugar em um slot, em nome de um membro.</p><p>Um espaço pode ser, por exemplo, uma floresta ou uma sala de reunião.</p><p>A particularidade deles é que podem ser reservados por várias pessoas ao mesmo tempo.</p><p>Membros também podem acessar esta página e reservar uma máquina eles mesmos, se o pagamento com cartão de crédito estiver ativado, ou se alguns preços são iguais a 0.</p>"
           events:
-            title: "Events"
-            content: "<p>An open house evening or an internship to make your desk lamp? It's over here!</p><p>Events can be free or paid (with different prices), with or without reservation.</p><p>Again, members can access this page and book themselves places for free events, or paid events if credit card payment is enabled.</p>"
+            title: "Eventos"
+            content: "<p>Uma noite em casa ou um estágio para fazer a sua lâmpada de mesa? </p><p>Os eventos podem ser gratuitos ou pagos (com preços diferentes), com ou sem reservas.</p><p>Mais uma vez, membros podem acessar esta página e reservar lugares para eventos gratuitos ou eventos pagos se o pagamento por cartão de crédito for ativado.</p>"
           calendar:
             title: "Agenda"
-            content: "Visualize at a glance everything that is scheduled for the next coming weeks (events, training, machines available, etc.)."
+            content: "Visualize de imediato tudo o que estiver agendado para as próximas semanas (eventos, formação, máquinas disponíveis, etc.)."
           projects:
             title: "Projetos"
-            content: "<p>Document and share all your creations with the community.</p><p>If you use OpenLab, you will also be able to consult the projects of the entire Fab-manager network. <a href='mailto:contact@fab-manager.com'>Contact-us</a> to get your access, it's free!</p>"
+            content: "<p>Documentar e compartilhar todas as suas criações com a comunidade.</p><p>Se você usar o OpenLab, você também será capaz de consultar os projetos de toda a rede Fab-Manager. <a href='mailto:contact@fab-manager.com'>Entre em contato conosco</a> para obter seu acesso, é grátis!</p>"
           plans:
-            title: "Subscriptions"
-            content: "Subscriptions provide a way to segment your prices and provide benefits to regular users."
+            title: "Assinaturas"
+            content: "As assinaturas fornecem uma maneira de segmentar seus preços e proporcionar benefícios aos usuários normais."
           admin:
-            title: "{ROLE} section"
-            content: "<p>All of the elements below are only accessible to administrators and managers. They allow you to manage and configure Fab-manager.</p><p>At the end of this visit, click on one of them to find out more.</p>"
+            title: "{ROLE} seção"
+            content: "<p>Todos os elementos abaixo só são acessíveis a administradores e gerentes. Eles permitem que você gerencie e e configure o Fab-manager.</p><p>No final desta visita, clique em um deles para saber mais.</p>"
           about:
-            title: "About"
-            content: "A page that you can fully customize, to present your activity and your structure."
+            title: "Sobre"
+            content: "Uma página que você pode personalizar completamente, para apresentar sua atividade e sua estrutura."
           notifications:
-            title: "Notifications center"
-            content: "<p>Every time something important happens (reservations, creation of accounts, activity of your members, etc.), you will be notified here.</p><p>Your members also receive notifications there.</p>"
+            title: "Centro de notificações"
+            content: "<p>Toda vez que algo importante acontece (reservas, criação de contas, atividade de seus membros, etc., você será notificado aqui.</p><p>Seus membros também recebem notificações lá.</p>"
           profile:
-            title: "User's menu"
-            content: "<p>Find your personal information here as well as all your activity on Fab-manager.</p><p>This space is also available for all your members.</p>"
+            title: "Menu do usuário"
+            content: "<p>Encontre suas informações pessoais aqui bem como todas as suas atividades no Fab-manager.</p><p>Esta comunidade também está disponível para todos os seus membros.</p>"
           news:
-            title: "News"
-            content: "<p>This space allows you to display the latest news from your structure.</p><p>You can easily change its content from « Customization », « Home page ».</p>"
+            title: "Notícias"
+            content: "<p>Este espaço permite exibir as últimas notícias de sua estrutura.</p><p>Você pode facilmente alterar seu conteúdo de « Personalização », « Página inicial».</p>"
           last_projects:
             title: "Últimos projetos"
-            content: "<p>This carousel scrolls through the latest projects documented by your members.</p>"
+            content: "<p>Este carrosel rola os últimos projetos documentados pelos seus membros.</p>"
           last_tweet:
-            title: "Last tweet"
-            content: "<p>The last tweet of your Tweeter feed can be shown here.</p><p>Configure it from « Customization », « Home page ».</p>"
+            title: "Último tweet"
+            content: "<p>O último tweet do seu feed de Tweeter pode ser mostrado aqui.</p><p>Configure-o a partir de « Personalização », « Página inicial ».</p>"
           last_members:
-            title: "Last members"
-            content: "The last registered members who have validated their address and agreed to be contacted will be shown here."
+            title: "Últimos membros"
+            content: "Os últimos membros cadastrados que validaram seu endereço e concordaram em ser contatados serão mostrados aqui."
           next_events:
-            title: "Upcoming events"
-            content: "The next three scheduled events are displayed in this space."
+            title: "Próximos eventos"
+            content: "Os próximos três eventos agendados são exibidos neste espaço."
           customize:
-            title: "Customize the home page"
-            content: "<p>This page can be fully personalized.</p><p>You can <a href='mailto:contact@fab-manager.com'>contact-us</a> to make a tailored customization of the home page.</p>"
+            title: "Personalizar a página inicial"
+            content: "<p>Esta página pode ser totalmente personalizada.</p><p>Você pode <a href='mailto:contact@fab-manager.com'>contacte-nos</a> para fazer uma personalização personalizada da página inicial.</p>"
           version:
-            title: "Application version"
-            content: "Hover your cursor over this icon to find out the version of Fab-manager. If you are not up to date, this will be reported here and you'll be able to get details by clicking on it."
+            title: "Versão da aplicação"
+            content: "Passe o mouse sobre este ícone para descobrir a versão do Fab-manager. Se você não estiver atualizado, este será reportado aqui e você poderá obter detalhes clicando nele."
         machines:
           welcome:
-            title: "Machines"
-            content: "<p>Machines are the tools available for your users. You must create here the machines which can then be reserved by the members.</p><p>You can also create entries for non-bookable or free access machines, then you just need to not associate availability slots with them.</p>"
+            title: "Máquinas"
+            content: "<p>Máquinas são as ferramentas disponíveis para seus usuários. Você deve criar aqui as máquinas que podem ser reservadas pelos membros.</p><p>Você também pode criar entradas para máquinas de acesso não-reservadas ou gratuitas, então você só precisa não associar slots de disponibilidade com elas.</p>"
           welcome_manager:
-            title: "Machines"
-            content: "Machines are the tools available for the users to reserve."
+            title: "Máquinas"
+            content: "Máquinas são as ferramentas disponíveis para reservar aos usuários."
           view:
-            title: "View"
-            content: "To modify or delete a machine, click here first. You will not be able to delete a machine that has already been associated with availability slots, but you can deactivate it."
+            title: "Visualizar"
+            content: "Para modificar ou excluir uma máquina, clique aqui primeiro. Você não poderá excluir uma máquina que já tenha sido associada com slots de disponibilidade, mas você pode desativá-la."
           reserve:
-            title: "Reserve"
-            content: "Click here to access an agenda showing free slots. This will let you book this machine for an user and manage existing reservations."
+            title: "Reservar"
+            content: "Clique aqui para acessar uma agenda mostrando espaços livres. Isso permitirá que você reserve esta máquina para um usuário e gerencie as reservas existentes."
         spaces:
           welcome:
-            title: "Spaces"
-            content: "<p>Spaces are places available for your users. For example, a meeting room or a woodshop. You must create here the spaces which can then be reserved by members.</p><p>The specificity of the spaces is that they can be reserved by several users at the same time.</p>"
+            title: "Espaços"
+            content: "<p>Espaços são lugares disponíveis para seus usuários. Por exemplo, uma sala de reunião ou uma bancada. Você deve criar aqui os espaços que podem ser reservados pelos membros.</p><p>A especificidade dos espaços é que eles podem ser reservados por vários usuários ao mesmo tempo.</p>"
           welcome_manager:
-            title: "Spaces"
-            content: "<p>Spaces are places available to users, by reservation. For example, a meeting room or a woodshop.</p><p>The specificity of the spaces is that they can be reserved by several users at the same time.</p>"
+            title: "Espaços"
+            content: "<p>Espaços são locais disponíveis para os usuários, por reserva. Por exemplo, uma sala de reunião ou uma bancada.</p><p>A especificidade dos espaços é que eles podem ser reservados por vários usuários ao mesmo tempo.</p>"
           view:
-            title: "View"
-            content: "To modify or delete a space, click here first. You will not be able to delete a space that has already been associated with availability slots, but you can deactivate it."
+            title: "Visualizar"
+            content: "Para modificar ou deletar um espaço, clique aqui primeiro. Você não poderá excluir um espaço que já tenha sido associado com slots de disponibilidade, mas você pode desativá-lo."
           reserve:
-            title: "Reserve"
-            content: "Click here to access an agenda showing free slots. This will let you book this space for an user and manage existing reservations."
+            title: "Reservar"
+            content: "Clique aqui para acessar uma agenda mostrando espaços livres. Isso permitirá que você reserve este espaço para um usuário e gerencie as reservas existentes."
