@@ -3,7 +3,7 @@
  * Supports Strong-Customer Authentication (SCA).
  */
 
-import React, { ChangeEvent, ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { react2angular } from 'react2angular';
 import { Loader } from './loader';
 import { IApplication } from '../models/application';
@@ -43,27 +43,43 @@ interface StripeModalProps {
 const cgvFile = CustomAssetAPI.get(CustomAssetName.CgvFile);
 
 const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuccess, cartItems, currentUser, schedule , processPayment = true }) => {
+  // customer's wallet
+  const [wallet, setWallet] = useState(null);
+  // server-computed price with all details
+  const [price, setPrice] = useState(null);
+  // remaining price = total price - wallet amount
   const [remainingPrice, setRemainingPrice] = useState(0);
-  const userWallet = WalletAPI.getByUser(cartItems.reservation?.user_id || cartItems.subscription?.user_id);
-  const priceInfo = PriceAPI.compute(cartItems);
-
-  const { t } = useTranslation('shared');
-
-  const cgv = cgvFile.read();
-  const wallet = userWallet.read();
-  const price = priceInfo.read();
-
+  // is the component ready to display?
+  const [ready, setReady] = useState(false);
+  // errors to display in the UI (stripe errors mainly)
   const [errors, setErrors] = useState(null);
+  // are we currently processing the payment (ie. the form was submit, but the process is still running)?
   const [submitState, setSubmitState] = useState(false);
+  // did the user accepts the terms of services (CGV)?
   const [tos, setTos] = useState(false);
 
+  const { t } = useTranslation('shared');
+  const cgv = cgvFile.read();
+
+
   /**
-   * Refresh the remaining price on each display
+   * On each display:
+   * - Refresh the wallet
+   * - Refresh the price
+   * - Refresh the remaining price
    */
   useEffect(() => {
-    const wLib = new WalletLib(wallet);
-    setRemainingPrice(wLib.computeRemainingPrice(price.price));
-  })
+    if (!cartItems) return;
+    WalletAPI.getByUser(cartItems.reservation?.user_id || cartItems.subscription?.user_id).then((wallet) => {
+      setWallet(wallet);
+      PriceAPI.compute(cartItems).then((res) => {
+        setPrice(res);
+        const wLib = new WalletLib(wallet);
+        setRemainingPrice(wLib.computeRemainingPrice(res.price));
+        setReady(true);
+      })
+    })
+  }, [cartItems]);
 
   /**
    * Check if there is currently an error to display
@@ -82,7 +98,7 @@ const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuc
   /**
    * Triggered when the user accepts or declines the Terms of Sales
    */
-  const toggleTos = (event: ChangeEvent): void => {
+  const toggleTos = (): void => {
     setTos(!tos);
   }
 
@@ -114,6 +130,9 @@ const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuc
     );
   }
 
+  /**
+   * Set the component as 'currently submitting'
+   */
   const handleSubmit = (): void => {
     setSubmitState(true);
   }
@@ -153,8 +172,8 @@ const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuc
               closeButton={false}
               customFooter={logoFooter()}
               className="stripe-modal">
-      <WalletInfo reservation={cartItems.reservation} currentUser={currentUser} wallet={wallet} price={price.price} />
-      <StripeElements>
+      {ready && <StripeElements>
+      <WalletInfo reservation={cartItems?.reservation} currentUser={currentUser} wallet={wallet} price={price?.price} />
         <StripeForm onSubmit={handleSubmit}
                     onSuccess={handleFormSuccess}
                     onError={handleFormError}
@@ -183,7 +202,7 @@ const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuc
                 className="validate-btn">
           {t('app.shared.stripe.confirm_payment_of_', { AMOUNT: formatPrice(remainingPrice) })}
         </button>
-      </StripeElements>
+      </StripeElements>}
     </FabModal>
   );
 }

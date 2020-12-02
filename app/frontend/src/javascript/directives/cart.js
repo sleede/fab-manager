@@ -79,6 +79,9 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
           cartItems: null
         };
 
+        // currently logged-in user
+        $scope.currentUser = $rootScope.currentUser;
+
         /**
          * Add the provided slot to the shopping cart (state transition from free to 'about to be reserved')
          * and increment the total amount of the cart if needed.
@@ -312,9 +315,12 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
         /**
          * This will open/close the stripe payment modal
          */
-        $scope.toggleStripeModal = () => {
+        $scope.toggleStripeModal = (beforeApply) => {
           setTimeout(() => {
             $scope.stripe.showModal = !$scope.stripe.showModal;
+            if (typeof beforeApply === 'function') {
+              beforeApply();
+            }
             $scope.$apply();
           }, 50);
         };
@@ -693,8 +699,15 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
          * Open a modal window that allows the user to process a credit card payment for his current shopping cart.
          */
         const payByStripe = function (reservation) {
-          $scope.stripe.cartItems = mkRequestParams({ reservation }, $scope.coupon.applied);
-          $scope.toggleStripeModal();
+          $scope.toggleStripeModal(() => {
+            let request = { reservation };
+            if (reservation.slots_attributes.length === 0 && reservation.plan_id) {
+              request = mkSubscription($scope.selectedPlan.id, reservation.user_id, $scope.schedule.requested_schedule, 'stripe');
+            } else {
+              request.reservation.payment_method = 'stripe';
+            }
+            $scope.stripe.cartItems = mkRequestParams(request, $scope.coupon.applied);
+          });
         };
         /**
          * Open a modal window that allows the user to process a local payment for his current shopping cart (admin only).
