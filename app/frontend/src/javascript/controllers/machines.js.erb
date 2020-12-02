@@ -735,6 +735,19 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
      * @param user {Object} user associated with the slot
      */
     const updateMachineSlot = function (slot, reservation, user) {
+      /* TODO, FIXME
+       machines.js.erb:741 Uncaught (in promise) TypeError: Cannot read property 'slots' of undefined
+        at updateMachineSlot (machines.js.erb:741)
+        at machines.js.erb:664
+        at Object.forEach (angular.js:386)
+        at Scope.$scope.afterPayment (machines.js.erb:652)
+        at afterPayment (cart.js:884)
+        at $scope.afterStripeSuccess (cart.js:338)
+        at _callee$ (stripe-modal.tsx:145)
+        at tryCatch (runtime.js:63)
+        at Generator.invoke [as _invoke] (runtime.js:293)
+        at Generator.next (runtime.js:118)
+       */
       angular.forEach(reservation.slots, function (s) {
         if (slot.start.isSame(s.start_at)) {
           slot.slot_id = s.id;

@@ -2,7 +2,7 @@
  * This component is a "card" publicly presenting the details of a plan
  */
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
 import moment from 'moment';

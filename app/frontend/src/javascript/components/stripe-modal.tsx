@@ -202,6 +202,7 @@ const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuc
                 className="validate-btn">
           {t('app.shared.stripe.confirm_payment_of_', { AMOUNT: formatPrice(remainingPrice) })}
         </button>
+        {/* TODO, add loader if submitState === true */}
       </StripeElements>}
     </FabModal>
   );
