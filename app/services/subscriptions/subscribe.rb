@@ -15,7 +15,7 @@ class Subscriptions::Subscribe
   # @param invoice {Boolean}
   # @param payment_intent_id {String} from stripe
   # @param schedule {Boolean}
-  # @param payment_method {String}
+  # @param payment_method {String} only for schedules
   ##
   def pay_and_save(subscription, coupon: nil, invoice: false, payment_intent_id: nil, schedule: false, payment_method: nil)
     return false if user_id.nil?

@@ -23,7 +23,7 @@ class API::SubscriptionsController < API::ApiController
                                            .pay_and_save(@subscription, coupon: coupon_params[:coupon_code],
                                                                         invoice: true,
                                                                         schedule: params[:subscription][:payment_schedule],
-                                                                        payment_method: params[:reservation][:payment_method])
+                                                                        payment_method: params[:subscription][:payment_method])
 
     if is_subscribe
       render :show, status: :created, location: @subscription

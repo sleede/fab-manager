@@ -779,7 +779,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                  * Callback to process the local payment, triggered on button click
                  */
                 $scope.ok = function () {
-                  if ($scope.method.payment_method === 'stripe') {
+                  if ($scope.schedule && $scope.method.payment_method === 'stripe') {
                     return $scope.toggleStripeModal();
                   }
                   $scope.attempting = true;
@@ -843,10 +843,12 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                  */
                 const computeValidButtonName = function () {
                   let method = '';
-                  if (AuthService.isAuthorized(['admin', 'manager']) && $rootScope.currentUser.id !== reservation.user_id) {
-                    method = $scope.method.payment_method;
-                  } else {
-                    method = 'stripe';
+                  if ($scope.schedule) {
+                    if (AuthService.isAuthorized(['admin', 'manager']) && $rootScope.currentUser.id !== reservation.user_id) {
+                      method = $scope.method.payment_method;
+                    } else {
+                      method = 'stripe';
+                    }
                   }
                   if ($scope.amount > 0) {
                     return _t('app.shared.cart.confirm_payment_of_html', { METHOD: method, AMOUNT: $filter('currency')($scope.amount) });

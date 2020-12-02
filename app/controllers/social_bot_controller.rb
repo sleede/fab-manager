@@ -17,5 +17,4 @@ class SocialBotController < ActionController::Base
       puts "unknown bot request : #{request.original_url}"
     end
   end
-
 end

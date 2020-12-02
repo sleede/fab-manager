@@ -21,6 +21,7 @@ class Subscription < ApplicationRecord
 
   # @param invoice if true then only the subscription is payed, without reservation
   #                if false then the subscription is payed with reservation
+  # @param payment_method is only used for schedules
   def save_with_payment(operator_profile_id, invoice: true, coupon_code: nil, payment_intent_id: nil, schedule: nil, payment_method: nil)
     return false unless valid?
 

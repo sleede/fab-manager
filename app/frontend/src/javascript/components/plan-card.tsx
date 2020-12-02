@@ -2,7 +2,7 @@
  * This component is a "card" publicly presenting the details of a plan
  */
 
-import React  from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
 import moment from 'moment';
@@ -19,13 +19,14 @@ declare var Fablab: IFablab;
 
 interface PlanCardProps {
   plan: Plan,
-  user: User,
+  userId?: number,
+  subscribedPlanId?: number,
   operator: User,
   isSelected: boolean,
   onSelectPlan: (plan: Plan) => void,
 }
 
-const PlanCard: React.FC<PlanCardProps> = ({ plan, user, operator, onSelectPlan, isSelected }) => {
+const PlanCard: React.FC<PlanCardProps> = ({ plan, userId, subscribedPlanId, operator, onSelectPlan, isSelected }) => {
   const { t } = useTranslation('public');
   /**
    * Return the formatted localized amount of the given plan (eg. 20.5 => "20,50 €")
@@ -50,19 +51,19 @@ const PlanCard: React.FC<PlanCardProps> = ({ plan, user, operator, onSelectPlan,
    * Check if the user can subscribe to the current plan, for himself
    */
   const canSubscribeForMe = (): boolean => {
-    return operator?.role === UserRole.Member || (operator?.role === UserRole.Manager && user?.id === operator?.id)
+    return operator?.role === UserRole.Member || (operator?.role === UserRole.Manager && userId === operator?.id)
   }
   /**
    * Check if the user can subscribe to the current plan, for someone else
    */
   const canSubscribeForOther = (): boolean => {
-    return operator?.role === UserRole.Admin || (operator?.role === UserRole.Manager && user?.id !== operator?.id)
+    return operator?.role === UserRole.Admin || (operator?.role === UserRole.Manager && userId !== operator?.id)
   }
   /**
    * Check it the user has subscribed to this plan or not
    */
   const hasSubscribedToThisPlan = (): boolean => {
-    return user?.subscription?.plan?.id === plan.id;
+    return subscribedPlanId === plan.id;
   }
   /**
    * Check if the plan has an attached file
@@ -102,18 +103,18 @@ const PlanCard: React.FC<PlanCardProps> = ({ plan, user, operator, onSelectPlan,
       {canSubscribeForMe() && <div className="cta-button">
         {!hasSubscribedToThisPlan() && <button className={`subscribe-button ${isSelected ? 'selected-card' : ''}`}
                                                onClick={handleSelectPlan}
-                                               disabled={!_.isNil(user.subscription)}>
-          {user && <span>{t('app.public.plans.i_choose_that_plan')}</span>}
-          {!user && <span>{t('app.public.plans.i_subscribe_online')}</span>}
+                                               disabled={!_.isNil(subscribedPlanId)}>
+          {userId && <span>{t('app.public.plans.i_choose_that_plan')}</span>}
+          {!userId && <span>{t('app.public.plans.i_subscribe_online')}</span>}
         </button>}
-        {hasSubscribedToThisPlan() && <button className="subscribe-button" disabled>
+        {hasSubscribedToThisPlan() && <button className="subscribe-button selected-card" disabled>
           { t('app.public.plans.i_already_subscribed') }
         </button>}
       </div>}
       {canSubscribeForOther() && <div className="cta-button">
         <button className={`subscribe-button ${isSelected ? 'selected-card' : ''}`}
                 onClick={handleSelectPlan}
-                disabled={_.isNil(user)}>
+                disabled={_.isNil(userId)}>
           <span>{ t('app.public.plans.i_choose_that_plan') }</span>
         </button>
       </div>}
@@ -122,12 +123,12 @@ const PlanCard: React.FC<PlanCardProps> = ({ plan, user, operator, onSelectPlan,
   );
 }
 
-const PlanCardWrapper: React.FC<PlanCardProps> = ({ plan, user, operator, onSelectPlan, isSelected }) => {
+const PlanCardWrapper: React.FC<PlanCardProps> = ({ plan, userId, subscribedPlanId, operator, onSelectPlan, isSelected }) => {
   return (
     <Loader>
-      <PlanCard plan={plan} user={user} operator={operator} isSelected={isSelected} onSelectPlan={onSelectPlan}/>
+      <PlanCard plan={plan} userId={userId} subscribedPlanId={subscribedPlanId} operator={operator} isSelected={isSelected} onSelectPlan={onSelectPlan}/>
     </Loader>
   );
 }
 
-Application.Components.component('planCard', react2angular(PlanCardWrapper, ['plan', 'user', 'operator', 'onSelectPlan', 'isSelected']));
+Application.Components.component('planCard', react2angular(PlanCardWrapper, ['plan', 'userId', 'subscribedPlanId', 'operator', 'onSelectPlan', 'isSelected']));
