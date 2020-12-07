@@ -70,13 +70,13 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
         // Payment schedule
         $scope.schedule = {
           requested_schedule: false, // does the user requests a payment schedule for his subscription
-          payment_schedule: null // the effective computed payment schedule
+          payment_schedule: undefined // the effective computed payment schedule
         };
 
         // online payments (stripe)
         $scope.stripe = {
           showModal: false,
-          cartItems: null
+          cartItems: undefined
         };
 
         // currently logged-in user
@@ -327,10 +327,11 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
 
         /**
          * Invoked atfer a successful Stripe payment
+         * @param result {*} may be a reservation or a subscription
          */
-        $scope.afterStripeSuccess = () => {
+        $scope.afterStripeSuccess = (result) => {
           $scope.toggleStripeModal();
-          afterPayment($scope.reservation);
+          afterPayment(result);
         };
 
         /* PRIVATE SCOPE */
@@ -638,9 +639,9 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
 
         /**
          * Format the parameters expected by /api/prices/compute or /api/reservations and return the resulting object
-         * @param request {{reservation: object}|{subscription: object}} as returned by mkReservation()
-         * @param coupon {Object} Coupon as returned from the API
-         * @return {{reservation:Object, subscription: Object, coupon_code:string}}
+         * @param request {{reservation: *}|{subscription: *}} as returned by mkReservation()
+         * @param coupon {{code: string}} Coupon as returned from the API
+         * @return {CartItems}
          */
         const mkRequestParams = function (request, coupon) {
           return Object.assign({
@@ -870,28 +871,28 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
 
         /**
          * Actions to run after the payment was successful
-         * @param reservation {Object} may be a reservation or a subscription
+         * @param paymentResult {*} may be a reservation or a subscription
          */
-        const afterPayment = function (reservation) {
+        const afterPayment = function (paymentResult) {
           // we set the cart content as 'paid' to display a summary of the transaction
           $scope.events.paid = $scope.events.reserved;
           $scope.amountPaid = $scope.amountTotal;
           // we call the external callback if present
-          if (typeof $scope.afterPayment === 'function') { $scope.afterPayment(reservation); }
+          if (typeof $scope.afterPayment === 'function') { $scope.afterPayment(paymentResult); }
           // we reset the coupon, and the cart content, and we unselect the slot
-          $scope.coupon.applied = null;
+          $scope.coupon.applied = undefined;
           if ($scope.slot) {
             // reservation (+ subscription)
-            $scope.slot = null;
+            $scope.slot = undefined;
             $scope.events.reserved = [];
           } else {
             // subscription only
             $scope.events = {};
           }
           $scope.paidPlan = $scope.selectedPlan;
-          $scope.selectedPlan = null;
+          $scope.selectedPlan = undefined;
           $scope.schedule.requested_schedule = false;
-          $scope.schedule.payment_schedule = null;
+          $scope.schedule.payment_schedule = undefined;
         };
 
         /**

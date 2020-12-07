@@ -6,7 +6,7 @@ export interface PaymentConfirmation {
   success?: boolean,
   error?: {
     statusText: string
-  },
+  }
 }
 
 export enum PaymentMethod {
@@ -15,12 +15,12 @@ export enum PaymentMethod {
 }
 
 export interface CartItems {
-  reservation: Reservation,
-  subscription: {
+  reservation?: Reservation,
+  subscription?: {
     plan_id: number,
     user_id: number,
     payment_schedule: boolean,
     payment_method: PaymentMethod
   },
-  coupon_code: string
+  coupon_code?: string
 }

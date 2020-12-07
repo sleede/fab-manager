@@ -4,10 +4,11 @@ import { PaymentMethod } from "@stripe/stripe-js";
 import PaymentAPI from '../api/payment';
 import { CartItems, PaymentConfirmation } from '../models/payment';
 import { useTranslation } from 'react-i18next';
+import { Reservation } from '../models/reservation';
 
 interface StripeFormProps {
   onSubmit: () => void,
-  onSuccess: (paymentMethod: PaymentMethod) => void,
+  onSuccess: (result: PaymentMethod|PaymentConfirmation) => void,
   onError: (message: string) => void,
   className?: string,
   processPayment?: boolean,
@@ -48,7 +49,7 @@ export const StripeForm: React.FC<StripeFormProps> = ({ onSubmit, onSuccess, onE
       if (processPayment) {
         // process the full payment pipeline, including SCA validation
         const res = await PaymentAPI.confirm(paymentMethod.id, cartItems);
-        await handleServerConfirmation(res, paymentMethod);
+        await handleServerConfirmation(res);
       } else {
         // we don't want to process the payment, only return the payment method
         onSuccess(paymentMethod);
@@ -58,8 +59,12 @@ export const StripeForm: React.FC<StripeFormProps> = ({ onSubmit, onSuccess, onE
 
   /**
    * Process the server response about the Strong-customer authentication (SCA)
+   * @param response can be a PaymentConfirmation, or a Reservation (if the reservation succeeded), or a Subscription (if the subscription succeeded)
+   * @see app/controllers/api/payments_controller.rb#on_reservation_success
+   * @see app/controllers/api/payments_controller.rb#on_subscription_success
+   * @see app/controllers/api/payments_controller.rb#generate_payment_response
    */
-  const handleServerConfirmation = async (response: PaymentConfirmation, paymentMethod: PaymentMethod) => {
+  const handleServerConfirmation = async (response: PaymentConfirmation|any) => {
     if (response.error) {
       if (response.error.statusText) {
         onError(response.error.statusText);
@@ -76,13 +81,13 @@ export const StripeForm: React.FC<StripeFormProps> = ({ onSubmit, onSuccess, onE
         // The PaymentIntent can be confirmed again on the server
         try {
           const confirmation = await PaymentAPI.confirm(result.paymentIntent.id, cartItems);
-          await handleServerConfirmation(confirmation, paymentMethod);
+          await handleServerConfirmation(confirmation);
         } catch (e) {
           onError(e);
         }
       }
     } else {
-      onSuccess(paymentMethod);
+      onSuccess(response);
     }
   }
 

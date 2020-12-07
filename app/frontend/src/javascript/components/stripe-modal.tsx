@@ -23,7 +23,7 @@ import { StripeForm } from './stripe-form';
 import stripeLogo from '../../../images/powered_by_stripe.png';
 import mastercardLogo from '../../../images/mastercard.png';
 import visaLogo from '../../../images/visa.png';
-import { CartItems } from '../models/payment';
+import { CartItems, PaymentConfirmation } from '../models/payment';
 import WalletAPI from '../api/wallet';
 import PriceAPI from '../api/price';
 
@@ -33,7 +33,7 @@ declare var Fablab: IFablab;
 interface StripeModalProps {
   isOpen: boolean,
   toggleModal: () => void,
-  afterSuccess: (paymentMethod: PaymentMethod) => void,
+  afterSuccess: (result: PaymentMethod|PaymentConfirmation) => void,
   cartItems: CartItems,
   currentUser: User,
   schedule: PaymentSchedule,
@@ -140,9 +140,9 @@ const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuc
   /**
    * After sending the form with success, process the resulting payment method
    */
-  const handleFormSuccess = async (paymentMethod: PaymentMethod): Promise<void> => {
+  const handleFormSuccess = async (result: PaymentMethod|PaymentConfirmation): Promise<void> => {
     setSubmitState(false);
-    afterSuccess(paymentMethod);
+    afterSuccess(result);
   }
 
   /**
