@@ -1,7 +1,6 @@
 # Changelog Fab-manager
 
 ## Next release
-
 - Refactored theme builder to use scss files
 - Updated stripe gem to 5.21.0
 - Fix a bug: unable to access embedded plan views
@@ -14,8 +13,14 @@
 - [TODO DEPLOY] add the `INTL_LOCALE` environment variable (see [doc/environment.md](doc/environment.md#INTL_LOCALE) for configuration details)
 - [TODO DEPLOY] add the `INTL_CURRENCY` environment variable (see [doc/environment.md](doc/environment.md#INTL_CURRENCY) for configuration details)
 
-- Updated ruby version to 2.6.6
-- Add configuration of the postgreSQL username in environment variables
+## v4.6.5 2020 December 07
+- Fix a bug: unable to run the upgrade script with docker-compose >= v1.19
+
+## v4.6.4 2020 December 1st
+
+- Full Portuguese translation (thanks to [@gusabr](https://crowdin.com/profile/gusabr))
+- Updated the version of ruby to 2.6.6
+- Add the configuration of the postgreSQL username in environment variables
 - Fix a bug: unable to build homepage custom stylesheet
 - Fix some security issues: [CVE-2020-10663](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-10663) and [CVE-2020-10933](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-10933)
 - [TODO DEPLOY] add `POSTGRES_USERNAME=postgres` to the environment variables (see [doc/environment.md](doc/environment.md#POSTGRES_USERNAME) for configuration details)

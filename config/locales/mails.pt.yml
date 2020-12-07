@@ -205,7 +205,7 @@ pt:
         signaled_by: "sinalizado por:"
         signaled_on: "sinalizado em:"
         message: "Menssagem:"
-        visit_management_interface: "Refer to the Reporting Management Interface for more information."
+        visit_management_interface: "Consulte a Interface de Gerenciamento de Relatórios para obter mais informações."
     notify_user_wallet_is_credited:
       subject: "Sua carteira foi creditada"
       body:
@@ -237,11 +237,11 @@ pt:
           xlsx: "Excel"
           csv: "CSV"
     notify_admin_import_complete:
-      subject: "Import completed"
+      subject: "Importação concluída"
       body:
-        you_made_an_import: "You have initiated an import %{CATEGORY}"
-        category_members: "of the members"
-        click_to_view_results: "Click here to view results"
+        you_made_an_import: "Você iniciou uma importação %{CATEGORY}"
+        category_members: "dos membros"
+        click_to_view_results: "Clique aqui para ver os resultados"
     notify_member_about_coupon:
       subject: "Cupom"
       body:
@@ -249,43 +249,43 @@ pt:
         enjoy_a_discount_of_AMOUNT_with_code_CODE: "Desfrute de um desconto de %{AMOUNT} em todo o site com o código %{CODE}."
         this_coupon_is_valid_USAGE_times_until_DATE_for_all_your_purchases: "Esse cupom é válido {USAGE, plural, =1{uma vez} other{vérias vezes}}: para todas as suas compras {TYPE, select, amount_off{pelo menos igual ao montante do cupom} other{}}, from now {DATE, select, NO-DATE{e sem limite de tempo} other{até {DATE}}}."
     notify_admin_free_disk_space:
-      subject: "Low disk space"
-      body: "Warning: available disk space on the server hosting Fab-manager is less than %{THRESHOLD} MiB. This can affect its operation and prevent saving some data. Currently, %{AVAILABLE} MiB of free disk space remains available on the mount point."
+      subject: "Espaço em disco baixo"
+      body: "Atenção: o espaço disponível em disco no servidor de hospedagem Fab-manager é menor que %{THRESHOLD} MiB. Isso pode afetar sua operação e evitar salvar alguns dados. Atualmente, %{AVAILABLE} MiB de espaço livre permanece disponível no ponto de montagem."
     notify_admin_close_period_reminder:
-      subject: "Remind to close your accounting periods"
+      subject: "Lembrar de encerrar seus períodos de contabilidade"
       body:
-        warning_last_closed_period_over_1_year: "Please remind to periodically close your accounting periods. Last closed period ended at %{LAST_END}."
-        warning_no_closed_periods: "Please remind to periodically close your accounting periods. You have to close periods from %{FIRST_DATE}."
+        warning_last_closed_period_over_1_year: "Por favor, lembre-se de encerrar periodicamente seus períodos de contabilidade. O último período de fechamento terminou em %{LAST_END}."
+        warning_no_closed_periods: "Lembre-se de fechar periodicamente os seus períodos de contabilidade. Você tem que fechar períodos de %{FIRST_DATE}."
     notify_admin_archive_complete:
-      subject: "Archiving completed"
+      subject: "Arquivamento concluído"
       body:
-        archive_complete: "You have closed the accounting period from %{START} to %{END}. Archiving of data is now complete."
-        click_to_download: "To download the ZIP archive, click"
-        here: "here."
-        save_on_secured: "Remember that you must save this archive on a secured external support, which may be requested by the tax authorities during a check."
+        archive_complete: "Você fechou o período de contabilidade de %{START} a %{END}. O arquivo de dados está completo."
+        click_to_download: "Para baixar o arquivo ZIP, clique"
+        here: "aqui."
+        save_on_secured: "Lembre-se de que você deve salvar este arquivo num apoio externo seguro, que possa ser solicitado pelas autoridades fiscais durante um controle."
     notify_privacy_policy_changed:
-      subject: "Privacy policy updated"
+      subject: "Política de privacidade atualizada"
       body:
-        content_html: "<p>We wish to inform you that we have just updated our privacy policy.</p><p>We may change our privacy policy regularly. In accordance with the regulations, you will receive a notification for each update.</p><p>By accessing or using our services after the privacy policy update, we will consider that you agree its terms, updates included.</p>"
-        link_to_policy: "Click here to view the privacy policy."
+        content_html: "<p>Gostaríamos de informá-lo que acabamos de atualizar nossa política de privacidade.</p><p>Podemos alterar nossa política de privacidade regularmente. De acordo com as regulamentações, você receberá uma notificação para cada atualização.</p><p>Ao acessar ou utilizar nossos serviços após a atualização da política de privacidade, consideraremos que você concorda com seus termos, incluindo atualizações.</p>"
+        link_to_policy: "Clique aqui para ver a política de privacidade."
     notify_admin_refund_created:
-      subject: "A refund has been generated"
+      subject: "Um reembolso foi gerado"
       body:
-        refund_created: "A refund of %{AMOUNT} has been generated on invoice %{INVOICE} of user %{USER}"
-        download: "Click here to download this refund invoice"
+        refund_created: "Um reembolso de %{AMOUNT} foi gerado na fatura %{INVOICE} do usuário %{USER}"
+        download: "Clique aqui para fazer o download da fatura de reembolso"
     notify_admins_role_update:
-      subject: "The role of a user has changed"
+      subject: "O papel de um usuário foi alterado"
       body:
-        user_role_changed_html: "The role of the user <em><strong>%{NAME}</strong></em> has changed."
-        previous_role: "Previous role:"
-        new_role: "New role:"
+        user_role_changed_html: "A função do usuário <em><strong>%{NAME}</strong></em> foi alterada."
+        previous_role: "Função anterior:"
+        new_role: "Novo cargo:"
     notify_user_role_update:
-      subject: "Your role has changed"
+      subject: "Sua função mudou"
       body:
-        role_changed_html: "Your role at {GENDER, select, male{the} female{the} neutral{} other{the}} {NAME} has changed. You are now <strong>{ROLE}</strong>.<br/>With great power comes great responsibility, use your new privileges fairly and respectfully."
+        role_changed_html: "Seu cargo em {NAME} mudou. Você está agora em <strong>{ROLE}</strong></strong>.<br/>Com grande poder vem grande responsabilidade, use os seus novos privilégios de forma justa e respeitosa."
     notify_admin_members_stripe_sync:
-      subject: "Stripe synchronization"
+      subject: "Sincronização do Stripe"
       body:
-        members_sync: "All members were successfully synchronized on Stripe."
+        members_sync: "Todos os membros foram sincronizados com sucesso no Stripe."
     shared:
       hello: "Olá %{user_name}"
