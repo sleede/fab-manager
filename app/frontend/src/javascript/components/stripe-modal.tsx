@@ -196,13 +196,17 @@ const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuc
             <p>{ t('app.shared.stripe.payment_schedule', { DEADLINES: schedule.items.length }) }</p>
           </div>}
         </StripeForm>
-        <button type="submit"
-                disabled={!canSubmit()}
-                form="stripe-form"
-                className="validate-btn">
+        {!submitState && <button type="submit"
+                                 disabled={!canSubmit()}
+                                 form="stripe-form"
+                                 className="validate-btn">
           {t('app.shared.stripe.confirm_payment_of_', { AMOUNT: formatPrice(remainingPrice) })}
-        </button>
-        {/* TODO, add loader if submitState === true */}
+        </button>}
+        {submitState && <div className="payment-pending">
+          <div className="fa-2x">
+            <i className="fas fa-circle-notch fa-spin" />
+          </div>
+        </div>}
       </StripeElements>}
     </FabModal>
   );

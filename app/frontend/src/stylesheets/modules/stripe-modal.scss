@@ -64,5 +64,17 @@
     padding: 16px;
     color: #fff;
     background-color: #1d98ec;
+    margin-bottom: 15px;
+
+    &[disabled] {
+      background-color: lighten(#1d98ec, 20%);
+    }
+  }
+
+  .payment-pending {
+    @extend .validate-btn;
+    @extend .validate-btn[disabled];
+    text-align: center;
+    padding: 4px;
   }
 }
