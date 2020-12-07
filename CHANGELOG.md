@@ -1,6 +1,8 @@
 # Changelog Fab-manager
 
 ## Next release
+
+## v4.6.5 2020 December 07
 - Fix a bug: unable to run the upgrade script with docker-compose >= v1.19
 
 ## v4.6.4 2020 December 1st
