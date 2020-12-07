@@ -37,12 +37,11 @@ interface StripeModalProps {
   cartItems: CartItems,
   currentUser: User,
   schedule: PaymentSchedule,
-  processPayment?: boolean,
 }
 
 const cgvFile = CustomAssetAPI.get(CustomAssetName.CgvFile);
 
-const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuccess, cartItems, currentUser, schedule , processPayment = true }) => {
+const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuccess, cartItems, currentUser, schedule }) => {
   // customer's wallet
   const [wallet, setWallet] = useState(null);
   // server-computed price with all details
@@ -140,7 +139,7 @@ const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuc
   /**
    * After sending the form with success, process the resulting payment method
    */
-  const handleFormSuccess = async (result: PaymentMethod|PaymentConfirmation): Promise<void> => {
+  const handleFormSuccess = async (result: PaymentMethod|PaymentConfirmation|any): Promise<void> => {
     setSubmitState(false);
     afterSuccess(result);
   }
@@ -179,7 +178,7 @@ const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuc
                     onError={handleFormError}
                     className="stripe-form"
                     cartItems={cartItems}
-                    processPayment={processPayment}>
+                    processPayment={!isPaymentSchedule()}>
           {hasErrors() && <div className="stripe-errors">
             {errors}
           </div>}
@@ -212,12 +211,12 @@ const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuc
   );
 }
 
-const StripeModalWrapper: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuccess, currentUser, schedule , cartItems, processPayment}) => {
+const StripeModalWrapper: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuccess, currentUser, schedule , cartItems}) => {
   return (
     <Loader>
-      <StripeModal isOpen={isOpen} toggleModal={toggleModal} afterSuccess={afterSuccess} currentUser={currentUser} schedule={schedule} processPayment={processPayment} cartItems={cartItems}/>
+      <StripeModal isOpen={isOpen} toggleModal={toggleModal} afterSuccess={afterSuccess} currentUser={currentUser} schedule={schedule} cartItems={cartItems}/>
     </Loader>
   );
 }
 
-Application.Components.component('stripeModal', react2angular(StripeModalWrapper, ['isOpen', 'toggleModal', 'afterSuccess','currentUser', 'schedule', 'cartItems', 'processPayment']));
+Application.Components.component('stripeModal', react2angular(StripeModalWrapper, ['isOpen', 'toggleModal', 'afterSuccess','currentUser', 'schedule', 'cartItems']));

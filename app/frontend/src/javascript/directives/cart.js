@@ -331,7 +331,11 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
          */
         $scope.afterStripeSuccess = (result) => {
           $scope.toggleStripeModal();
-          afterPayment(result);
+          if ($scope.schedule.requested_schedule) {
+            afterPaymentMethodCreation(result);
+          } else {
+            afterPayment(result);
+          }
         };
 
         /* PRIVATE SCOPE */
@@ -893,6 +897,15 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
           $scope.selectedPlan = undefined;
           $scope.schedule.requested_schedule = false;
           $scope.schedule.payment_schedule = undefined;
+        };
+
+        /**
+         * Actions to run after the payment method was created on Stripe. Used for payment schedules.
+         * @param paymentMethod {PaymentMethod}
+         */
+        const afterPaymentMethodCreation = function (paymentMethod) {
+          // TODO, create an API point for payment_schedule validation
+          // or: POST reservation || POST subscription (if admin/manager)
         };
 
         /**
