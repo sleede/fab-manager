@@ -15,5 +15,13 @@ export default class PaymentAPI {
     const res: AxiosResponse = await apiClient.get(`/api/payments/setup_intent/${user_id}`);
     return res?.data;
   }
+
+  static async confirmPaymentSchedule (setup_intent_id: string, cart_items: CartItems): Promise<any> {
+    const res: AxiosResponse = await apiClient.post(`/api/payments/confirm_payment_schedule`, {
+      setup_intent_id,
+      cart_items
+    });
+    return res?.data;
+  }
 }
 

@@ -10,8 +10,8 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 'growl', 'Auth', 'Price', 'Wallet', 'CustomAsset', 'Slot', 'AuthService', 'helpers', '_t',
-  function ($rootScope, $uibModal, dialogs, growl, Auth, Price, Wallet, CustomAsset, Slot, AuthService, helpers, _t) {
+Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 'growl', 'Auth', 'Price', 'Wallet', 'CustomAsset', 'Slot', 'AuthService', 'Payment', 'helpers', '_t',
+  function ($rootScope, $uibModal, dialogs, growl, Auth, Price, Wallet, CustomAsset, Slot, AuthService, Payment, helpers, _t) {
     return ({
       restrict: 'E',
       scope: {
@@ -331,11 +331,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
          */
         $scope.afterStripeSuccess = (result) => {
           $scope.toggleStripeModal();
-          if ($scope.schedule.requested_schedule) {
-            afterPaymentIntentCreation(result);
-          } else {
-            afterPayment(result);
-          }
+          afterPayment(result);
         };
 
         /* PRIVATE SCOPE */
@@ -701,17 +697,27 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
         };
 
         /**
+         * Build the CartItems object, from the current reservation
+         * @param reservation {*}
+         * @param paymentMethod {string}
+         * @return {CartItems}
+         */
+        const mkCartItems = function (reservation, paymentMethod) {
+          let request = { reservation };
+          if (reservation.slots_attributes.length === 0 && reservation.plan_id) {
+            request = mkSubscription($scope.selectedPlan.id, reservation.user_id, $scope.schedule.requested_schedule, paymentMethod);
+          } else {
+            request.reservation.payment_method = paymentMethod;
+          }
+          return mkRequestParams(request, $scope.coupon.applied);
+        };
+
+        /**
          * Open a modal window that allows the user to process a credit card payment for his current shopping cart.
          */
         const payByStripe = function (reservation) {
           $scope.toggleStripeModal(() => {
-            let request = { reservation };
-            if (reservation.slots_attributes.length === 0 && reservation.plan_id) {
-              request = mkSubscription($scope.selectedPlan.id, reservation.user_id, $scope.schedule.requested_schedule, 'stripe');
-            } else {
-              request.reservation.payment_method = 'stripe';
-            }
-            $scope.stripe.cartItems = mkRequestParams(request, $scope.coupon.applied);
+            $scope.stripe.cartItems = mkCartItems(reservation, 'stripe');
           });
         };
         /**
@@ -729,7 +735,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                 return Price.compute(mkRequestParams({ reservation }, $scope.coupon.applied)).$promise;
               },
               cartItems () {
-                return mkRequestParams({ reservation }, $scope.coupon.applied);
+                return mkCartItems(reservation, 'stripe');
               },
               wallet () {
                 return Wallet.getWalletByUser({ user_id: reservation.user_id }).$promise;
@@ -834,8 +840,12 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                   }, 50);
                 };
 
-                $scope.afterCreatePaymentMethod = function (a) {
-                  console.log('TODO', a);
+                /**
+                 * After creating a payment schedule by card, from an administrator.
+                 * @param result {*} Reservation or Subscription
+                 */
+                $scope.afterCreatePaymentSchedule = function (result) {
+                  console.log('TODO', result);
                 };
 
                 /* PRIVATE SCOPE */
@@ -844,8 +854,9 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                  * Kind of constructor: these actions will be realized first when the directive is loaded
                  */
                 const initialize = function () {
-                  $scope.$watch('method.payment_method', function () {
+                  $scope.$watch('method.payment_method', function (newValue) {
                     $scope.validButtonName = computeValidButtonName();
+                    $scope.cartItems = mkCartItems($scope.reservation, newValue);
                   });
                 };
 
@@ -903,17 +914,6 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
           $scope.selectedPlan = undefined;
           $scope.schedule.requested_schedule = false;
           $scope.schedule.payment_schedule = undefined;
-        };
-
-        /**
-         * Actions to run after the payment intent was created on Stripe.
-         * A payment intent associates a payment method with a stripe customer.
-         * This is used for payment schedules.
-         * @param intent {PaymentIntent}
-         */
-        const afterPaymentIntentCreation = function (intent) {
-          // TODO, create an API endpoint for payment_schedule validation
-          // or: POST reservation || POST subscription (if admin/manager)
         };
 
         /**

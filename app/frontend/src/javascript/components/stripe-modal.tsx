@@ -10,7 +10,7 @@ import { IApplication } from '../models/application';
 import { StripeElements } from './stripe-elements';
 import { useTranslation } from 'react-i18next';
 import { FabModal, ModalSize } from './fab-modal';
-import { PaymentIntent } from '@stripe/stripe-js';
+import { SetupIntent } from '@stripe/stripe-js';
 import { WalletInfo } from './wallet-info';
 import { User } from '../models/user';
 import CustomAssetAPI from '../api/custom-asset';
@@ -33,7 +33,7 @@ declare var Fablab: IFablab;
 interface StripeModalProps {
   isOpen: boolean,
   toggleModal: () => void,
-  afterSuccess: (result: PaymentIntent|PaymentConfirmation) => void,
+  afterSuccess: (result: SetupIntent|PaymentConfirmation) => void,
   cartItems: CartItems,
   currentUser: User,
   schedule: PaymentSchedule,
@@ -126,7 +126,6 @@ const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuc
         <img src={stripeLogo} alt="powered by stripe" />
         <img src={mastercardLogo} alt="mastercard" />
         <img src={visaLogo} alt="visa" />
-        {/* compile */}
       </div>
     );
   }
@@ -141,7 +140,7 @@ const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuc
   /**
    * After sending the form with success, process the resulting payment method
    */
-  const handleFormSuccess = async (result: PaymentIntent|PaymentConfirmation|any): Promise<void> => {
+  const handleFormSuccess = async (result: SetupIntent|PaymentConfirmation|any): Promise<void> => {
     setSubmitState(false);
     afterSuccess(result);
   }
@@ -181,7 +180,7 @@ const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuc
                     className="stripe-form"
                     cartItems={cartItems}
                     customer={customer}
-                    processPayment={!isPaymentSchedule()}>
+                    paymentSchedule={isPaymentSchedule()}>
           {hasErrors() && <div className="stripe-errors">
             {errors}
           </div>}

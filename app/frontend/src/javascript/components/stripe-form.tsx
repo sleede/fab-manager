@@ -1,6 +1,6 @@
 import React, { FormEvent } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import { PaymentIntent } from "@stripe/stripe-js";
+import { SetupIntent } from "@stripe/stripe-js";
 import PaymentAPI from '../api/payment';
 import { CartItems, PaymentConfirmation } from '../models/payment';
 import { useTranslation } from 'react-i18next';
@@ -8,11 +8,11 @@ import { User } from '../models/user';
 
 interface StripeFormProps {
   onSubmit: () => void,
-  onSuccess: (result: PaymentIntent|PaymentConfirmation|any) => void,
+  onSuccess: (result: SetupIntent|PaymentConfirmation|any) => void,
   onError: (message: string) => void,
   customer: User,
   className?: string,
-  processPayment?: boolean,
+  paymentSchedule?: boolean,
   cartItems?: CartItems
 }
 
@@ -20,7 +20,7 @@ interface StripeFormProps {
  * A form component to collect the credit card details and to create the payment method on Stripe.
  * The form validation button must be created elsewhere, using the attribute form="stripe-form".
  */
-export const StripeForm: React.FC<StripeFormProps> = ({ onSubmit, onSuccess, onError, children, className, processPayment = true, cartItems, customer }) => {
+export const StripeForm: React.FC<StripeFormProps> = ({ onSubmit, onSuccess, onError, children, className, paymentSchedule = false, cartItems, customer }) => {
 
   const { t } = useTranslation('shared');
 
@@ -47,12 +47,12 @@ export const StripeForm: React.FC<StripeFormProps> = ({ onSubmit, onSuccess, onE
     if (error) {
       onError(error.message);
     } else {
-      if (processPayment) {
-        // process the full payment pipeline, including SCA validation
+      if (!paymentSchedule) {
+        // process the normal payment pipeline, including SCA validation
         const res = await PaymentAPI.confirm(paymentMethod.id, cartItems);
         await handleServerConfirmation(res);
       } else {
-        // we don't want to process the payment, only associate the payment method with the user
+        // we start by associating the payment method with the user
         const { client_secret } = await PaymentAPI.setupIntent(customer.id);
         const { setupIntent, error } = await stripe.confirmCardSetup(client_secret, {
           payment_method: paymentMethod.id
@@ -60,9 +60,9 @@ export const StripeForm: React.FC<StripeFormProps> = ({ onSubmit, onSuccess, onE
         if (error) {
           onError(error.message);
         } else {
-          if (setupIntent.status === 'succeeded') {
-            onSuccess(setupIntent);
-          }
+          // then we confirm the payment schedule
+          const res = await PaymentAPI.confirmPaymentSchedule(setupIntent.id, cartItems);
+          onSuccess(res);
         }
       }
     }
