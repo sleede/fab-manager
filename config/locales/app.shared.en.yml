@@ -413,7 +413,7 @@ en:
         you_ve_just_selected_a_subscription_html: "You've just selected a <strong>subscription</strong>:"
         monthly_payment: "Monthly payment"
         your_payment_schedule: "Your payment schedule"
-        monthly_payment_NUMBER: "{NUMBER}{NUMBER, plural, =1{st} =2{nd} =3{rd} other{th}} monthly payment:"
+        monthly_payment_NUMBER: "{NUMBER}{NUMBER, plural, =1{st} =2{nd} =3{rd} other{th}} monthly payment: "
         NUMBER_monthly_payment_of_AMOUNT: "{NUMBER} monthly {NUMBER, plural, =1{payment} other{payments}} of {AMOUNT}"
         first_debit: "First debit on the day of the order."
         debit: "Debit on the day of the order."

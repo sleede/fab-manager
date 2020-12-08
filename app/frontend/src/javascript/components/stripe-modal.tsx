@@ -10,7 +10,7 @@ import { IApplication } from '../models/application';
 import { StripeElements } from './stripe-elements';
 import { useTranslation } from 'react-i18next';
 import { FabModal, ModalSize } from './fab-modal';
-import { PaymentMethod } from '@stripe/stripe-js';
+import { PaymentIntent } from '@stripe/stripe-js';
 import { WalletInfo } from './wallet-info';
 import { User } from '../models/user';
 import CustomAssetAPI from '../api/custom-asset';
@@ -33,15 +33,16 @@ declare var Fablab: IFablab;
 interface StripeModalProps {
   isOpen: boolean,
   toggleModal: () => void,
-  afterSuccess: (result: PaymentMethod|PaymentConfirmation) => void,
+  afterSuccess: (result: PaymentIntent|PaymentConfirmation) => void,
   cartItems: CartItems,
   currentUser: User,
   schedule: PaymentSchedule,
+  customer: User
 }
 
 const cgvFile = CustomAssetAPI.get(CustomAssetName.CgvFile);
 
-const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuccess, cartItems, currentUser, schedule }) => {
+const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuccess, cartItems, currentUser, schedule, customer }) => {
   // customer's wallet
   const [wallet, setWallet] = useState(null);
   // server-computed price with all details
@@ -125,6 +126,7 @@ const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuc
         <img src={stripeLogo} alt="powered by stripe" />
         <img src={mastercardLogo} alt="mastercard" />
         <img src={visaLogo} alt="visa" />
+        {/* compile */}
       </div>
     );
   }
@@ -139,7 +141,7 @@ const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuc
   /**
    * After sending the form with success, process the resulting payment method
    */
-  const handleFormSuccess = async (result: PaymentMethod|PaymentConfirmation|any): Promise<void> => {
+  const handleFormSuccess = async (result: PaymentIntent|PaymentConfirmation|any): Promise<void> => {
     setSubmitState(false);
     afterSuccess(result);
   }
@@ -178,6 +180,7 @@ const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuc
                     onError={handleFormError}
                     className="stripe-form"
                     cartItems={cartItems}
+                    customer={customer}
                     processPayment={!isPaymentSchedule()}>
           {hasErrors() && <div className="stripe-errors">
             {errors}
@@ -211,12 +214,12 @@ const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuc
   );
 }
 
-const StripeModalWrapper: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuccess, currentUser, schedule , cartItems}) => {
+const StripeModalWrapper: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuccess, currentUser, schedule , cartItems, customer }) => {
   return (
     <Loader>
-      <StripeModal isOpen={isOpen} toggleModal={toggleModal} afterSuccess={afterSuccess} currentUser={currentUser} schedule={schedule} cartItems={cartItems}/>
+      <StripeModal isOpen={isOpen} toggleModal={toggleModal} afterSuccess={afterSuccess} currentUser={currentUser} schedule={schedule} cartItems={cartItems} customer={customer} />
     </Loader>
   );
 }
 
-Application.Components.component('stripeModal', react2angular(StripeModalWrapper, ['isOpen', 'toggleModal', 'afterSuccess','currentUser', 'schedule', 'cartItems']));
+Application.Components.component('stripeModal', react2angular(StripeModalWrapper, ['isOpen', 'toggleModal', 'afterSuccess','currentUser', 'schedule', 'cartItems', 'customer']));

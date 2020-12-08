@@ -332,7 +332,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
         $scope.afterStripeSuccess = (result) => {
           $scope.toggleStripeModal();
           if ($scope.schedule.requested_schedule) {
-            afterPaymentMethodCreation(result);
+            afterPaymentIntentCreation(result);
           } else {
             afterPayment(result);
           }
@@ -742,10 +742,13 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
               },
               schedule () {
                 return $scope.schedule;
+              },
+              user () {
+                return $scope.user;
               }
             },
-            controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', 'Subscription', 'wallet', 'helpers', '$filter', 'coupon', 'selectedPlan', 'schedule', 'cartItems',
-              function ($scope, $uibModalInstance, $state, reservation, price, Auth, Reservation, Subscription, wallet, helpers, $filter, coupon, selectedPlan, schedule, cartItems) {
+            controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', 'Subscription', 'wallet', 'helpers', '$filter', 'coupon', 'selectedPlan', 'schedule', 'cartItems', 'user',
+              function ($scope, $uibModalInstance, $state, reservation, price, Auth, Reservation, Subscription, wallet, helpers, $filter, coupon, selectedPlan, schedule, cartItems, user) {
                 // user wallet amount
                 $scope.wallet = wallet;
 
@@ -779,6 +782,9 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                 // stripe modal state
                 // this is used to collect card data when a payment-schedule was selected, and paid with a card
                 $scope.isOpenStripeModal = false;
+
+                // the customer
+                $scope.user = user;
 
                 /**
                  * Callback to process the local payment, triggered on button click
@@ -900,11 +906,13 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
         };
 
         /**
-         * Actions to run after the payment method was created on Stripe. Used for payment schedules.
-         * @param paymentMethod {PaymentMethod}
+         * Actions to run after the payment intent was created on Stripe.
+         * A payment intent associates a payment method with a stripe customer.
+         * This is used for payment schedules.
+         * @param intent {PaymentIntent}
          */
-        const afterPaymentMethodCreation = function (paymentMethod) {
-          // TODO, create an API point for payment_schedule validation
+        const afterPaymentIntentCreation = function (intent) {
+          // TODO, create an API endpoint for payment_schedule validation
           // or: POST reservation || POST subscription (if admin/manager)
         };
 

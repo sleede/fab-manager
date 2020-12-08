@@ -1,15 +1,16 @@
 import React, { FormEvent } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import { PaymentMethod } from "@stripe/stripe-js";
+import { PaymentIntent } from "@stripe/stripe-js";
 import PaymentAPI from '../api/payment';
 import { CartItems, PaymentConfirmation } from '../models/payment';
 import { useTranslation } from 'react-i18next';
-import { Reservation } from '../models/reservation';
+import { User } from '../models/user';
 
 interface StripeFormProps {
   onSubmit: () => void,
-  onSuccess: (result: PaymentMethod|PaymentConfirmation|any) => void,
+  onSuccess: (result: PaymentIntent|PaymentConfirmation|any) => void,
   onError: (message: string) => void,
+  customer: User,
   className?: string,
   processPayment?: boolean,
   cartItems?: CartItems
@@ -19,7 +20,7 @@ interface StripeFormProps {
  * A form component to collect the credit card details and to create the payment method on Stripe.
  * The form validation button must be created elsewhere, using the attribute form="stripe-form".
  */
-export const StripeForm: React.FC<StripeFormProps> = ({ onSubmit, onSuccess, onError, children, className, processPayment = true, cartItems}) => {
+export const StripeForm: React.FC<StripeFormProps> = ({ onSubmit, onSuccess, onError, children, className, processPayment = true, cartItems, customer }) => {
 
   const { t } = useTranslation('shared');
 
@@ -51,8 +52,18 @@ export const StripeForm: React.FC<StripeFormProps> = ({ onSubmit, onSuccess, onE
         const res = await PaymentAPI.confirm(paymentMethod.id, cartItems);
         await handleServerConfirmation(res);
       } else {
-        // we don't want to process the payment, only return the payment method
-        onSuccess(paymentMethod);
+        // we don't want to process the payment, only associate the payment method with the user
+        const { client_secret } = await PaymentAPI.setupIntent(customer.id);
+        const { setupIntent, error } = await stripe.confirmCardSetup(client_secret, {
+          payment_method: paymentMethod.id
+        })
+        if (error) {
+          onError(error.message);
+        } else {
+          if (setupIntent.status === 'succeeded') {
+            onSuccess(setupIntent);
+          }
+        }
       }
     }
   }

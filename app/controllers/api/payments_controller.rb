@@ -68,6 +68,13 @@ class API::PaymentsController < API::ApiController
     render json: { status: false }
   end
 
+  def setup_intent
+    user = User.find(params[:user_id])
+    key = Setting.get('stripe_secret_key')
+    @intent = Stripe::SetupIntent.create({ customer: user.stp_customer_id }, { api_key: key })
+    render json: { client_secret: @intent.client_secret }
+  end
+
   private
 
   def on_reservation_success(intent, details)

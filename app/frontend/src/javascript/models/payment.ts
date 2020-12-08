@@ -9,6 +9,10 @@ export interface PaymentConfirmation {
   }
 }
 
+export interface IntentConfirmation {
+  client_secret: string
+}
+
 export enum PaymentMethod {
   Stripe = 'stripe',
   Other = ''
