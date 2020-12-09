@@ -97,7 +97,12 @@ class API::PaymentsController < API::ApiController
 
   def on_reservation_success(intent, details)
     @reservation = Reservation.new(reservation_params)
-    is_reserve = Reservations::Reserve.new(current_user.id, current_user.invoicing_profile.id)
+    user_id = if current_user.admin? || current_user.manager?
+                params[:cart_items][:reservation][:user_id]
+              else
+                current_user.id
+              end
+    is_reserve = Reservations::Reserve.new(user_id, current_user.invoicing_profile.id)
                                       .pay_and_save(@reservation, payment_details: details, payment_intent_id: intent.id)
     if intent.class == Stripe::PaymentIntent
       Stripe::PaymentIntent.update(
@@ -118,11 +123,17 @@ class API::PaymentsController < API::ApiController
 
   def on_subscription_success(intent)
     @subscription = Subscription.new(subscription_params)
-    is_subscribe = Subscriptions::Subscribe.new(current_user.invoicing_profile.id, current_user.id)
+    user_id = if current_user.admin? || current_user.manager?
+                params[:cart_items][:subscription][:user_id]
+              else
+                current_user.id
+              end
+    is_subscribe = Subscriptions::Subscribe.new(current_user.invoicing_profile.id, user_id)
                                            .pay_and_save(@subscription,
                                                          coupon: coupon_params[:coupon_code],
                                                          invoice: true,
                                                          payment_intent_id: intent.id,
+                                                         schedule: params[:cart_items][:subscription][:payment_schedule],
                                                          payment_method: 'stripe')
     if intent.class == Stripe::PaymentIntent
       Stripe::PaymentIntent.update(

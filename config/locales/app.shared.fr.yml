@@ -121,7 +121,7 @@ fr:
         _the_general_terms_and_conditions: "les conditions générales de vente."
         credit_amount_for_pay_reservation: "Il vous reste {amount} {currency} à payer pour valider votre réservation"
         client_credit_amount_for_pay_reservation: "Il reste {amount} {currency} à payer pour valider la réservation"
-        payment_schedule: "Vous êtes sur le point de souscrire à un échéancier de paiement de {DEADLINES} mois. En payant cette facture, vous vous engagez à payer l'ensemble des échéances."
+        payment_schedule_html: "<p>Vous êtes sur le point de souscrire à un échéancier de paiement de {DEADLINES} mois.</p><p>En payant cette facture, vous vous engagez à l'envoi d'instructions vers l'institution financière émettrice de votre carte, afin de prélever des paiements sur votre compte, pendant toute la durée de cet abonnement. Cela implique que les données de votre carte soient enregistrées par Stripe et qu'une série de paiements sera initiée en votre nom, conformément à l'échéancier de paiement précédemment affiché.</p>"
         confirm_payment_of_: "Payer : {AMOUNT}"
       #dialog of on site payment for reservations
       valid_reservation_modal:

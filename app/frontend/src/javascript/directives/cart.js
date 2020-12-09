@@ -845,7 +845,8 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                  * @param result {*} Reservation or Subscription
                  */
                 $scope.afterCreatePaymentSchedule = function (result) {
-                  console.log('TODO', result);
+                  $scope.toggleStripeModal();
+                  $uibModalInstance.close(result);
                 };
 
                 /* PRIVATE SCOPE */

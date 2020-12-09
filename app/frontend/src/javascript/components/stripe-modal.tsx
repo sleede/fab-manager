@@ -185,6 +185,9 @@ const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuc
           {hasErrors() && <div className="stripe-errors">
             {errors}
           </div>}
+          {isPaymentSchedule() && <div className="payment-schedule-info">
+            <HtmlTranslate trKey="app.shared.stripe.payment_schedule_html" options={{ DEADLINES: schedule.items.length }} />
+          </div>}
           {hasCgv() && <div className="terms-of-sales">
             <input type="checkbox" id="acceptToS" name="acceptCondition" checked={tos} onChange={toggleTos} required />
             <label htmlFor="acceptToS">{ t('app.shared.stripe.i_have_read_and_accept_') }
@@ -192,9 +195,6 @@ const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuc
                 { t('app.shared.stripe._the_general_terms_and_conditions') }
               </a>
             </label>
-          </div>}
-          {isPaymentSchedule() && <div className="payment-schedule-info">
-            <HtmlTranslate trKey="app.shared.stripe.payment_schedule_html" options={{ DEADLINES: schedule.items.length }} />
           </div>}
         </StripeForm>
         {!submitState && <button type="submit"
