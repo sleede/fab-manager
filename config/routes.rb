@@ -165,6 +165,8 @@ Rails.application.routes.draw do
     # payments handling
     post 'payments/confirm_payment' => 'payments/confirm_payment'
     get 'payments/online_payment_status' => 'payments/online_payment_status'
+    get 'payments/setup_intent/:user_id' => 'payments#setup_intent'
+    post 'payments/confirm_payment_schedule' => 'payments#confirm_payment_schedule'
 
     # FabAnalytics
     get 'analytics/data' => 'analytics#data'

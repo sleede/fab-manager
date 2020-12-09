@@ -26,11 +26,11 @@ If you run the application in production with docker, the settings are localized
 DNS name or IP address of the server hosting the PostgreSQL database of the application (see [PostgreSQL](../README.md#postgresql)).
 This value is only used when deploying in production, otherwise this is configured in [config/database.yml](../config/database.yml.default).
 When using docker-compose, you should provide the name of the service in your [docker-compose.yml](../docker/docker-compose.yml) file (`postgres` by default).
-<a name="POSTGRES_PASSWORD"></a>
+<a name="POSTGRES_PASSWORD"></a><a name="POSTGRES_USERNAME"></a>
 
-    POSTGRES_PASSWORD
+    POSTGRES_USERNAME, POSTGRES_PASSWORD
 
-Password for the PostgreSQL user, as specified in `database.yml` (default: `postgres`).
+Username and password for the connection to the PostgreSQL database.
 This value is only used when deploying in production, otherwise this is configured in [config/database.yml](../config/database.yml.default).
 When using docker-compose, the default configuration (with `postgres` user) does not uses any password as it is confined in the docker container.
 <a name="REDIS_HOST"></a>
@@ -187,14 +187,29 @@ Please, be aware that **the configured locale will imply the CURRENCY displayed 
 
 _Eg.: configuring **fr-fr** will set the currency symbol to **€** but **fr-ca** will set **$** as currency symbol, so setting the `ANGULAR_LOCALE` to simple **fr** (without country indication) will probably not do what you expect._
 
-See [code.angularjs.org/i18n/angular-locale_*.js](https://code.angularjs.org/1.6.10/i18n/) for a list of available locales. Default is **en**.
+See [code.angularjs.org/i18n/angular-locale_*.js](https://code.angularjs.org/1.8.2/i18n/) for a list of available locales. Default is **en**.
 <a name="FULLCALENDAR_LOCALE"></a>
 
     FULLCALENDAR_LOCALE
 
 Configure the fullCalendar JS agenda library.
 
-See [github.com/fullcalendar/fullcalendar/lang/*.js](https://github.com/fullcalendar/fullcalendar/tree/v2.3.1/lang) for a list of available locales. Default is **en-us**.
+See [github.com/fullcalendar/fullcalendar/lang/*.js](https://github.com/fullcalendar/fullcalendar/tree/v3.10.2/locale) for a list of available locales. Default is **en-us**.
+<a name="INTL_LOCALE"></a>
+
+    INTL_LOCALE
+
+Configure the locale for the javascript Intl Object.
+This locale must be a Unicode BCP 47 locale identifier.
+See [Intl - Javascript | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#Locale_identification_and_negotiation) for more info about configuring this setting.
+<a name="INTL_CURRENCY"></a>
+
+    INTL_CURRENCY
+
+Configure the currency for the javascript Intl Object.
+Possible values are the ISO 4217 currency codes, such as "USD" for the US dollar, "EUR" for the euro.
+See [Current currency & funds code list](http://www.currency-iso.org/en/home/tables/table-a1.html) for a list of available values. 
+There is no default value; this setting MUST be provided.
 <a name="POSTGRESQL_LANGUAGE_ANALYZER"></a>
 
     POSTGRESQL_LANGUAGE_ANALYZER

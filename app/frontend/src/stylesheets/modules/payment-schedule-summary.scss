@@ -11,14 +11,12 @@
       position: relative;
       margin-bottom: 0.75em;
       .schedule-item-info {
-        display: block;
+        display: inline;
         border-bottom: 1px solid #ddd;
-        margin-right: 2em;
       }
       .schedule-item-price {
-        position: absolute;
-        top: 0;
-        right: 2em;
+        display: inline;
+        border-bottom: 1px solid #ddd;
       }
       .schedule-item-date {
         display: block;

@@ -61,7 +61,7 @@ class PaymentScheduleService
       item.save!
     end
 
-    StripeWorker.perform_async(:create_stripe_subscription, ps.id, reservation&.reservable&.stp_product_id)
+    StripeWorker.perform_async(:create_stripe_subscription, ps.id, reservation&.reservable&.stp_product_id) if payment_method == 'stripe'
     ps
   end
 end

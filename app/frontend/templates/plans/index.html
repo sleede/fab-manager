@@ -32,7 +32,8 @@
                  ng-repeat="(key, plan) in plansGroup.plans.filter(filterDisabledPlans) | orderBy: '-ui_weight'">
 
                 <plan-card plan="plan"
-                           user="ctrl.member"
+                           user-id="ctrl.member.id"
+                           subscribed-plan-id="ctrl.member.subscribed_plan.id"
                            operator="currentUser"
                            on-select-plan="selectPlan"
                            is-selected="isSelected(plan)">

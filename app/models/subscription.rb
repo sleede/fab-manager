@@ -21,7 +21,8 @@ class Subscription < ApplicationRecord
 
   # @param invoice if true then only the subscription is payed, without reservation
   #                if false then the subscription is payed with reservation
-  def save_with_payment(operator_profile_id, invoice = true, coupon_code = nil, payment_intent_id = nil, schedule = nil)
+  # @param payment_method is only used for schedules
+  def save_with_payment(operator_profile_id, invoice: true, coupon_code: nil, payment_intent_id: nil, schedule: nil, payment_method: nil)
     return false unless valid?
 
     set_expiration_date
@@ -35,7 +36,7 @@ class Subscription < ApplicationRecord
       wallet_transaction = debit_user_wallet
 
       payment = if schedule
-                  generate_schedule(operator_profile_id, coupon_code, payment_intent_id)
+                  generate_schedule(operator_profile_id, payment_method, coupon_code)
                 else
                   generate_invoice(operator_profile_id, coupon_code, payment_intent_id)
                 end
@@ -49,12 +50,18 @@ class Subscription < ApplicationRecord
     true
   end
 
-  def generate_schedule(operator_profile_id, coupon_code = nil, payment_intent_id = nil)
+  def generate_schedule(operator_profile_id, payment_method, coupon_code = nil)
     operator = InvoicingProfile.find(operator_profile_id)&.user
-    method = operator&.admin? || (operator&.manager? && operator != user) ? nil : 'stripe' # FIXME, paiement à l'accueil
     coupon = Coupon.find_by(code: coupon_code) unless coupon_code.nil?
 
-    schedule = PaymentScheduleService.new.create(self, plan.amount, coupon: coupon, operator: operator, payment_method: method, user: user)
+    PaymentScheduleService.new.create(
+      self,
+      plan.amount,
+      coupon: coupon,
+      operator: operator,
+      payment_method: payment_method,
+      user: user
+    )
   end
 
   def generate_invoice(operator_profile_id, coupon_code = nil, payment_intent_id = nil)

@@ -571,14 +571,18 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$stateP
 
       if ($scope.selectedPlan) {
         $scope.ctrl.member.subscribed_plan = angular.copy($scope.selectedPlan);
-        Auth._currentUser.subscribed_plan = angular.copy($scope.selectedPlan);
+        if ($scope.ctrl.member.id === Auth._currentUser.id) {
+          Auth._currentUser.subscribed_plan = angular.copy($scope.selectedPlan);
+        }
         $scope.plansAreShown = false;
         $scope.selectedPlan = null;
       }
       $scope.ctrl.member.training_credits = angular.copy(reservation.user.training_credits);
       $scope.ctrl.member.machine_credits = angular.copy(reservation.user.machine_credits);
-      Auth._currentUser.training_credits = angular.copy(reservation.user.training_credits);
-      Auth._currentUser.machine_credits = angular.copy(reservation.user.machine_credits);
+      if ($scope.ctrl.member.id === Auth._currentUser.id) {
+        Auth._currentUser.training_credits = angular.copy(reservation.user.training_credits);
+        Auth._currentUser.machine_credits = angular.copy(reservation.user.machine_credits);
+      }
 
       refetchCalendar();
     };

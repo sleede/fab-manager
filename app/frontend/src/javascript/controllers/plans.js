@@ -167,7 +167,9 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
      */
     $scope.afterPayment = function () {
       $scope.ctrl.member.subscribed_plan = angular.copy($scope.selectedPlan);
-      Auth._currentUser.subscribed_plan = angular.copy($scope.selectedPlan);
+      if ($scope.ctrl.member.id === Auth._currentUser.id) {
+        Auth._currentUser.subscribed_plan = angular.copy($scope.selectedPlan);
+      }
       $scope.paid.plan = angular.copy($scope.selectedPlan);
       $scope.selectedPlan = null;
       $scope.coupon.applied = null;
