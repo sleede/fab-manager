@@ -45,25 +45,31 @@ export const StripeForm: React.FC<StripeFormProps> = ({ onSubmit, onSuccess, onE
     });
 
     if (error) {
+      // stripe error
       onError(error.message);
     } else {
-      if (!paymentSchedule) {
-        // process the normal payment pipeline, including SCA validation
-        const res = await PaymentAPI.confirm(paymentMethod.id, cartItems);
-        await handleServerConfirmation(res);
-      } else {
-        // we start by associating the payment method with the user
-        const { client_secret } = await PaymentAPI.setupIntent(customer.id);
-        const { setupIntent, error } = await stripe.confirmCardSetup(client_secret, {
-          payment_method: paymentMethod.id
-        })
-        if (error) {
-          onError(error.message);
+      try {
+        if (!paymentSchedule) {
+          // process the normal payment pipeline, including SCA validation
+          const res = await PaymentAPI.confirm(paymentMethod.id, cartItems);
+          await handleServerConfirmation(res);
         } else {
-          // then we confirm the payment schedule
-          const res = await PaymentAPI.confirmPaymentSchedule(setupIntent.id, cartItems);
-          onSuccess(res);
+          // we start by associating the payment method with the user
+          const { client_secret } = await PaymentAPI.setupIntent(customer.id);
+          const { setupIntent, error } = await stripe.confirmCardSetup(client_secret, {
+            payment_method: paymentMethod.id
+          })
+          if (error) {
+            onError(error.message);
+          } else {
+            // then we confirm the payment schedule
+            const res = await PaymentAPI.confirmPaymentSchedule(setupIntent.id, cartItems);
+            onSuccess(res);
+          }
         }
+      } catch (err) {
+        // catch api errors
+        onError(err);
       }
     }
   }
