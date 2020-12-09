@@ -26,6 +26,7 @@ import visaLogo from '../../../images/visa.png';
 import { CartItems, PaymentConfirmation } from '../models/payment';
 import WalletAPI from '../api/wallet';
 import PriceAPI from '../api/price';
+import { HtmlTranslate } from './html-translate';
 
 declare var Application: IApplication;
 declare var Fablab: IFablab;
@@ -193,8 +194,7 @@ const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuc
             </label>
           </div>}
           {isPaymentSchedule() && <div className="payment-schedule-info">
-            <i className="fa fa-warning" />
-            <p>{ t('app.shared.stripe.payment_schedule', { DEADLINES: schedule.items.length }) }</p>
+            <HtmlTranslate trKey="app.shared.stripe.payment_schedule_html" options={{ DEADLINES: schedule.items.length }} />
           </div>}
         </StripeForm>
         {!submitState && <button type="submit"
