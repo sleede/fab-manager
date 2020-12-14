@@ -53,7 +53,6 @@ class StripeWorker
         { name: object.name },
         { api_key: Setting.get('stripe_secret_key') }
       )
-      p.product
     else
       product = Stripe::Product.create(
         {

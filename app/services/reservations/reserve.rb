@@ -10,8 +10,7 @@ class Reservations::Reserve
   end
 
   def pay_and_save(reservation, payment_details: nil, payment_intent_id: nil, schedule: false)
-    # TODO, pass the schedule payment up to subscription.save_with_payment(... schedule: schedule)
     reservation.statistic_profile_id = StatisticProfile.find_by(user_id: user_id).id
-    reservation.save_with_payment(operator_profile_id, payment_details, payment_intent_id)
+    reservation.save_with_payment(operator_profile_id, payment_details, payment_intent_id, schedule: schedule)
   end
 end

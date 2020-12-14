@@ -120,7 +120,7 @@ class Reservation < ApplicationRecord
     pending_invoice_items.each(&:delete)
   end
 
-  def save_with_payment(operator_profile_id, payment_details, payment_intent_id = nil)
+  def save_with_payment(operator_profile_id, payment_details, payment_intent_id = nil, schedule: false)
     operator = InvoicingProfile.find(operator_profile_id)&.user
     method = operator&.admin? || (operator&.manager? && operator != user) ? nil : 'stripe'
 
@@ -138,7 +138,7 @@ class Reservation < ApplicationRecord
     if plan_id
       self.subscription = Subscription.find_or_initialize_by(statistic_profile_id: statistic_profile_id)
       subscription.attributes = { plan_id: plan_id, statistic_profile_id: statistic_profile_id, expiration_date: nil }
-      if subscription.save_with_payment(operator_profile_id, invoice: false)
+      if subscription.save_with_payment(operator_profile_id, invoice: false, schedule: schedule)
         invoice.invoice_items.push InvoiceItem.new(
           amount: payment_details[:elements][:plan],
           description: subscription.plan.name,

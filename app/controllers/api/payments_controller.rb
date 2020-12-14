@@ -103,7 +103,10 @@ class API::PaymentsController < API::ApiController
                 current_user.id
               end
     is_reserve = Reservations::Reserve.new(user_id, current_user.invoicing_profile.id)
-                                      .pay_and_save(@reservation, payment_details: details, payment_intent_id: intent.id)
+                                      .pay_and_save(@reservation,
+                                                    payment_details: details,
+                                                    payment_intent_id: intent.id,
+                                                    schedule: params[:cart_items][:reservation][:payment_schedule])
     if intent.class == Stripe::PaymentIntent
       Stripe::PaymentIntent.update(
         intent.id,
