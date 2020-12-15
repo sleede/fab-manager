@@ -171,6 +171,8 @@ class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
 
   test 'user takes a subscription with payment schedule' do
     plan = Plan.find_by(group_id: @user.group.id, type: 'Plan', base_name: 'Abonnement mensualisable')
+    payment_schedule_count = PaymentSchedule.count
+    payment_schedule_items_count = PaymentScheduleItem.count
 
     VCR.use_cassette('subscriptions_user_create_with_payment_schedule') do
       get "/api/payments/setup_intent/#{@user.id}"
@@ -204,16 +206,17 @@ class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
              cart_items: {
                subscription: {
                  plan_id: plan.id,
-                 payment_schedule: true,
-                 payment_method: 'stripe'
+                 payment_schedule: true
                }
              }
            }.to_json, headers: default_headers
     end
 
-    # Check response format & status
+    # Check generalities
     assert_equal 201, response.status, response.body
     assert_equal Mime[:json], response.content_type
+    assert_equal payment_schedule_count + 1, PaymentSchedule.count, 'missing the payment schedule'
+    assert_equal payment_schedule_items_count + 12, PaymentScheduleItem.count, 'missing some payment schedule items'
 
     # Check the correct plan was subscribed
     subscription = json_response(response.body)
@@ -223,6 +226,5 @@ class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
     assert_not_nil @user.subscription, "user's subscription was not found"
     assert_not_nil @user.subscription.plan, "user's subscribed plan was not found"
     assert_equal plan.id, @user.subscription.plan_id, "user's plan does not match"
-
   end
 end
