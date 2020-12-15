@@ -72,7 +72,7 @@ class API::PaymentsController < API::ApiController
     user = User.find(params[:user_id])
     key = Setting.get('stripe_secret_key')
     @intent = Stripe::SetupIntent.create({ customer: user.stp_customer_id }, { api_key: key })
-    render json: { client_secret: @intent.client_secret }
+    render json: { id: @intent.id, client_secret: @intent.client_secret }
   end
 
   def confirm_payment_schedule

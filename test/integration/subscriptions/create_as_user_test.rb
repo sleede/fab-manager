@@ -172,29 +172,42 @@ class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
   test 'user takes a subscription with payment schedule' do
     plan = Plan.find_by(group_id: @user.group.id, type: 'Plan', base_name: 'Abonnement mensualisable')
 
-    VCR.use_cassette('subscriptions_user_setup_intent') do
-      get "/api/payments/setup_intent/#{@user.id}"
-    end
-
-    # Check response format & status
-    assert_equal 200, response.status, response.body
-    assert_equal Mime[:json], response.content_type
-
-    # Check the correct object was signaled
-    setup_intent = json_response(response.body)
-
     VCR.use_cassette('subscriptions_user_create_with_payment_schedule') do
-      post '/api/payments/confirm_payment',
+      get "/api/payments/setup_intent/#{@user.id}"
+
+      # Check response format & status
+      assert_equal 200, response.status, response.body
+      assert_equal Mime[:json], response.content_type
+
+      # Check the response
+      setup_intent = json_response(response.body)
+      assert_not_nil setup_intent[:client_secret]
+      assert_not_nil setup_intent[:id]
+      assert_match /^#{setup_intent[:id]}_secret_/, setup_intent[:client_secret]
+
+      # Confirm the intent
+      stripe_res = Stripe::SetupIntent.confirm(
+        setup_intent[:id],
+        { payment_method: stripe_payment_method },
+        { api_key: Setting.get('stripe_secret_key') }
+      )
+
+      # check the confirmation
+      assert_equal setup_intent[:id], stripe_res.id
+      assert_equal 'succeeded', stripe_res.status
+      assert_equal 'off_session', stripe_res.usage
+
+
+      post '/api/payments/confirm_payment_schedule',
            params: {
-             payment_method_id: stripe_payment_method,
+             setup_intent_id: setup_intent[:id],
              cart_items: {
                subscription: {
                  plan_id: plan.id,
                  payment_schedule: true,
                  payment_method: 'stripe'
                }
-             },
-             setup_intent_id: setup_intent[:client_secret]
+             }
            }.to_json, headers: default_headers
     end
 

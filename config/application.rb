@@ -10,7 +10,7 @@ require 'action_view/railtie'
 require 'action_mailer/railtie'
 require 'active_job/railtie'
 # require 'action_cable/engine'
-require 'rails/test_unit/railtie' if Rails.env.test?
+require 'rails/test_unit/railtie'
 # require 'sprockets/railtie'
 require 'elasticsearch/rails/instrumentation'
 require 'elasticsearch/persistence/model'
@@ -56,6 +56,7 @@ module Fablab
 
     config.generators do |g|
       g.orm :active_record
+      g.test_framework :mini_test
     end
 
     if Rails.env.development?
