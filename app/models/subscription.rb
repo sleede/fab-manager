@@ -19,6 +19,22 @@ class Subscription < ApplicationRecord
   after_save :notify_admin_subscribed_plan
   after_save :notify_partner_subscribed_plan, if: :of_partner_plan?
 
+  ##
+  # Set the inner properties of the subscription, init the user's credits and save the subscription
+  # into the DB
+  # @return {boolean} true, if the operation succeeded
+  ##
+  def init_save
+    return false unless valid?
+
+    set_expiration_date
+    return false unless save
+
+    UsersCredits::Manager.new(user: user).reset_credits
+    true
+  end
+
+  # TODO, remove this method, refactor like services/Reservations::Reserve
   # @param invoice if true then only the subscription is payed, without reservation
   #                if false then the subscription is payed with reservation
   # @param payment_method is only used for schedules

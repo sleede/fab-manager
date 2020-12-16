@@ -60,6 +60,7 @@ class Subscriptions::CreateAsAdminTest < ActionDispatch::IntegrationTest
   test 'admin takes a subscription with a payment schedule' do
     user = User.find_by(username: 'jdupond')
     plan = Plan.find_by(group_id: user.group.id, type: 'Plan', base_name: 'Abonnement mensualisable')
+    invoice_count = Invoice.count
     payment_schedule_count = PaymentSchedule.count
     payment_schedule_items_count = PaymentScheduleItem.count
 
@@ -106,6 +107,7 @@ class Subscriptions::CreateAsAdminTest < ActionDispatch::IntegrationTest
     # Check generalities
     assert_equal 201, response.status, response.body
     assert_equal Mime[:json], response.content_type
+    assert_equal invoice_count, Invoice.count, "an invoice was generated but it shouldn't"
     assert_equal payment_schedule_count + 1, PaymentSchedule.count, 'missing the payment schedule'
     assert_equal payment_schedule_items_count + 12, PaymentScheduleItem.count, 'missing some payment schedule items'
 
