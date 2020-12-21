@@ -37,7 +37,7 @@
  */
 class MembersController {
   constructor ($scope, $state, Group, Training) {
-    // Retrieve the profiles groups (eg. students ...)
+    // Retrieve the profiles groups (e.g. students ...)
     Group.query(function (groups) { $scope.groups = groups.filter(function (g) { return (g.slug !== 'admins') && !g.disabled; }); });
 
     // Retrieve the list of available trainings
@@ -62,7 +62,7 @@ class MembersController {
     };
 
     /**
-     * Shows the birth day datepicker
+     * Shows the birthday datepicker
      * @param $event {Object} jQuery event object
      */
     $scope.openDatePicker = function ($event) {
@@ -85,7 +85,7 @@ class MembersController {
      * For use with ngUpload (https://github.com/twilson63/ngUpload).
      * Intended to be the callback when an upload is done: any raised error will be stacked in the
      * $scope.alerts array. If everything goes fine, the user is redirected to the members listing page.
-     * @param content {Object} JSON - The upload's result
+     * @param content {Object} JSON - The result of the upload
      */
     $scope.submited = function (content) {
       if ((content.id == null)) {
@@ -110,7 +110,7 @@ class MembersController {
 
     /**
      * For use with 'ng-class', returns the CSS class name for the uploads previews.
-     * The preview may show a placeholder or the content of the file depending on the upload state.
+     * The preview may show a placeholder, or the content of the file depending on the upload state.
      * @param v {*} any attribute, will be tested for truthiness (see JS evaluation rules)
      */
     $scope.fileinputClass = function (v) {
@@ -143,7 +143,7 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
       searchText: '',
       // Members ordering/sorting. Default: not sorted
       order: 'id',
-      // currently displayed page of members
+      // the currently displayed page of members
       page: 1,
       // true when all members where loaded
       noMore: false,
@@ -158,7 +158,7 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
     };
 
     // admins list
-    $scope.admins = adminsPromise.admins.filter(function(m) { return m.id != Fablab.superadminId; });
+    $scope.admins = adminsPromise.admins.filter(function (m) { return m.id !== Fablab.superadminId; });
 
     // Admins ordering/sorting. Default: not sorted
     $scope.orderAdmin = null;
@@ -210,7 +210,7 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
      * @param orderPartner {string} ordering criterion
      */
     $scope.setOrderPartner = function (orderPartner) {
-        if ($scope.orderPartner === orderPartner) {
+      if ($scope.orderPartner === orderPartner) {
         return $scope.orderPartner = `-${orderPartner}`;
       } else {
         return $scope.orderPartner = orderPartner;
@@ -228,7 +228,6 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
         return $scope.orderManager = orderManager;
       }
     };
-
 
     /**
      * Open a modal dialog allowing the admin to create a new partner user
@@ -265,12 +264,11 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
       });
     };
 
-
     /**
      * Ask for confirmation then delete the specified user
      * @param memberId {number} identifier of the user to delete
      */
-    $scope.deleteMember = function(memberId) {
+    $scope.deleteMember = function (memberId) {
       dialogs.confirm(
         {
           resolve: {
@@ -289,11 +287,14 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
               $scope.members.splice(findItemIdxById($scope.members, memberId), 1);
               return growl.success(_t('app.admin.members.member_successfully_deleted'));
             },
-            function (error) { growl.error(_t('app.admin.members.unable_to_delete_the_member')); }
+            function (error) {
+              growl.error(_t('app.admin.members.unable_to_delete_the_member'));
+              console.error(error);
+            }
           );
         }
       );
-    }
+    };
 
     /**
      * Ask for confirmation then delete the specified administrator
@@ -319,7 +320,10 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
               admins.splice(findItemIdxById(admins, admin.id), 1);
               return growl.success(_t('app.admin.members.administrator_successfully_deleted'));
             },
-            function (error) { growl.error(_t('app.admin.members.unable_to_delete_the_administrator')); }
+            function (error) {
+              growl.error(_t('app.admin.members.unable_to_delete_the_administrator'));
+              console.error(error);
+            }
           );
         }
       );
@@ -349,11 +353,14 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
               partners.splice(findItemIdxById(partners, partner.id), 1);
               return growl.success(_t('app.admin.members.partner_successfully_deleted'));
             },
-            function (error) { growl.error(_t('app.admin.members.unable_to_delete_the_partner')); }
+            function (error) {
+              growl.error(_t('app.admin.members.unable_to_delete_the_partner'));
+              console.error(error);
+            }
           );
         }
       );
-    }
+    };
 
     /**
      * Ask for confirmation then delete the specified manager
@@ -379,11 +386,14 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
               managers.splice(findItemIdxById(managers, manager.id), 1);
               return growl.success(_t('app.admin.members.manager_successfully_deleted'));
             },
-            function (error) { growl.error(_t('app.admin.members.unable_to_delete_the_manager')); }
+            function (error) {
+              growl.error(_t('app.admin.members.unable_to_delete_the_manager'));
+              console.error(error);
+            }
           );
         }
       );
-    }
+    };
 
     /**
      * Callback for the 'load more' button.
@@ -399,7 +409,7 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
      */
     $scope.updateTextSearch = function () {
       if (searchTimeout) clearTimeout(searchTimeout);
-      searchTimeout = setTimeout(function() {
+      searchTimeout = setTimeout(function () {
         resetSearchMember();
         memberSearch();
       }, 300);
@@ -425,9 +435,8 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
       });
     };
 
-
     /**
-     * Setup the feature-tour for the admin/members page.
+     * Set up the feature-tour for the admin/members page.
      * This is intended as a contextual help (when pressing F1)
      */
     $scope.setupMembersTour = function () {
@@ -570,7 +579,7 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
       if (settingsPromise.feature_tour_display !== 'manual' && $scope.currentUser.profile.tours.indexOf('members') < 0) {
         uitour.start();
       }
-    }
+    };
 
     /* PRIVATE SCOPE */
 
@@ -586,22 +595,22 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
     /**
      * Will temporize the search query to prevent overloading the API
      */
-    var searchTimeout = null;
+    let searchTimeout = null;
 
     /**
      * Iterate through the provided array and return the index of the requested item
-     * @param items {Array} full list of users with role 'admin'
+     * @param items {Array} full list of users with the 'admin' role
      * @param id {Number} id of the item to retrieve in the list
      * @returns {Number} index of the requested item, in the provided array
      */
-    var findItemIdxById = function (items, id) {
+    const findItemIdxById = function (items, id) {
       return (items.map(function (item) { return item.id; })).indexOf(id);
     };
 
     /**
-     * Reinitialize the context of members's search to display new results set
+     * Reinitialize the context of the search to display new results set
      */
-    var resetSearchMember = function () {
+    const resetSearchMember = function () {
       $scope.member.noMore = false;
       $scope.member.page = 1;
     };
@@ -609,9 +618,9 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
     /**
      * Run a search query with the current parameters set ($scope.member[searchText,order,page])
      * and affect or append the result in $scope.members, depending on the concat parameter
-     * @param [concat] {boolean} if true, the result will be append to $scope.members instead of being affected
+     * @param [concat] {boolean} if true, the result will be appended to $scope.members instead of being replaced
      */
-    var memberSearch = function (concat) {
+    const memberSearch = function (concat) {
       Member.list({
         query: {
           search: $scope.member.searchText,
@@ -666,7 +675,6 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
     // the user subscription
     if (($scope.user.subscribed_plan != null) && ($scope.user.subscription != null)) {
       $scope.subscription = $scope.user.subscription;
-      $scope.subscription.expired_at = $scope.subscription.expired_at;
     } else {
       Plan.query({ group_id: $scope.user.group_id }, function (plans) {
         $scope.plans = plans;
@@ -696,16 +704,15 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
 
     /**
      * Open a modal dialog asking for confirmation to change the role of the given user
-     * @param userId {number} id of the user to "promote"
      * @returns {*}
      */
-    $scope.changeUserRole = function() {
+    $scope.changeUserRole = function () {
       const modalInstance = $uibModal.open({
         animation: true,
         templateUrl: '/admin/members/change_role_modal.html',
         size: 'lg',
         resolve: {
-          user() { return $scope.user; }
+          user () { return $scope.user; }
         },
         controller: ['$scope', '$uibModalInstance', 'Member', 'user', '_t', function ($scope, $uibModalInstance, Member, user, _t) {
           $scope.user = user;
@@ -715,7 +722,7 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
           $scope.roles = [
             { key: 'admin', label: _t('app.admin.members_edit.admin') },
             { key: 'manager', label: _t('app.admin.members_edit.manager'), notAnOption: (user.role === 'admin') },
-            { key: 'member', label: _t('app.admin.members_edit.member'), notAnOption: (user.role === 'admin' || user.role === 'manager') },
+            { key: 'member', label: _t('app.admin.members_edit.member'), notAnOption: (user.role === 'admin' || user.role === 'manager') }
           ];
 
           $scope.ok = function () {
@@ -740,7 +747,7 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
       return modalInstance.result.then(function (user) {
         // remove the user for the old list add to the new
       });
-    }
+    };
 
     /**
      * Open a modal dialog, allowing the admin to extend the current user's subscription (freely or not)
@@ -754,6 +761,7 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
         size: 'lg',
         controller: ['$scope', '$uibModalInstance', 'Subscription', function ($scope, $uibModalInstance, Subscription) {
           $scope.new_expired_at = angular.copy(subscription.expired_at);
+          $scope.scheduled = subscription.scheduled;
           $scope.free = free;
           $scope.datePicker = {
             opened: false,
@@ -778,7 +786,10 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
                 growl.success(_t('app.admin.members_edit.you_successfully_changed_the_expiration_date_of_the_user_s_subscription'));
                 return $uibModalInstance.close(_subscription);
               },
-              function (error) { growl.error(_t('app.admin.members_edit.a_problem_occurred_while_saving_the_date')); }
+              function (error) {
+                growl.error(_t('app.admin.members_edit.a_problem_occurred_while_saving_the_date'));
+                console.error(error);
+              }
             );
           };
 
@@ -792,14 +803,14 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
     /**
      * Open a modal dialog allowing the admin to set a subscription for the given user.
      * @param user {Object} User object, user currently reviewed, as recovered from GET /api/members/:id
-     * @param plans {Array} List of plans, availables for the currently reviewed user, as recovered from GET /api/plans
+     * @param plans {Array} List of plans, available for the currently reviewed user, as recovered from GET /api/plans
      */
     $scope.createSubscriptionModal = function (user, plans) {
       const modalInstance = $uibModal.open({
         animation: true,
         templateUrl: '/admin/subscriptions/create_modal.html',
         size: 'lg',
-        controller: ['$scope', '$uibModalInstance', 'Subscription', 'Group', function ($scope, $uibModalInstance, Subscription, Group) {
+        controller: ['$scope', '$uibModalInstance', 'Subscription', function ($scope, $uibModalInstance, Subscription) {
         // selected user
           $scope.user = user;
 
@@ -810,7 +821,7 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
            * Generate a string identifying the given plan by literal human-readable name
            * @param plan {Object} Plan object, as recovered from GET /api/plan/:id
            * @param groups {Array} List of Groups objects, as recovered from GET /api/groups
-           * @param short {boolean} If true, the generated name will contains the group slug, otherwise the group full name
+           * @param short {boolean} If true, the generated name will contain the group slug, otherwise the group full name
            * will be included.
            * @returns {String}
            */
@@ -902,8 +913,9 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
            */
           $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
         }
-        ] });
-      // once the form was validated succesfully ...
+        ]
+      });
+      // once the form was validated successfully...
       return modalInstance.result.then(function (wallet) {
         $scope.wallet = wallet;
         return Wallet.transactions({ id: wallet.id }, function (transactions) { $scope.transactions = transactions; });
@@ -923,13 +935,12 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
     const initialize = function () {
       CSRF.setMetaTags();
 
-      // init the birth date to JS object
+      // init the birthdate to JS object
       $scope.user.statistic_profile.birthday = moment($scope.user.statistic_profile.birthday).toDate();
 
       // the user subscription
       if (($scope.user.subscribed_plan != null) && ($scope.user.subscription != null)) {
         $scope.subscription = $scope.user.subscription;
-        $scope.subscription.expired_at = $scope.subscription.expired_at;
       } else {
         Plan.query({ group_id: $scope.user.group_id }, function (plans) {
           $scope.plans = plans;
@@ -996,7 +1007,7 @@ Application.Controllers.controller('NewMemberController', ['$scope', '$state', '
  * Controller used in the member's import page: import from CSV (admin view)
  */
 Application.Controllers.controller('ImportMembersController', ['$scope', '$state', 'Group', 'Training', 'CSRF', 'tags', 'growl',
-  function($scope, $state, Group, Training, CSRF, tags, growl) {
+  function ($scope, $state, Group, Training, CSRF, tags, growl) {
     CSRF.setMetaTags();
 
     /* PUBLIC SCOPE */
@@ -1008,19 +1019,19 @@ Application.Controllers.controller('ImportMembersController', ['$scope', '$state
     $scope.method = 'post';
 
     // List of all tags
-    $scope.tags = tags
+    $scope.tags = tags;
 
     /*
      * Callback run after the form was submitted
-     * @param content {*} The result provided by the server, may be an Import object or an error message
+     * @param content {*} The result provided by the server, may be an Import object, or an error message
      */
-    $scope.onImportResult = function(content) {
+    $scope.onImportResult = function (content) {
       if (content.id) {
         $state.go('app.admin.members_import_result', { id: content.id });
       } else {
         growl.error(JSON.stringify(content));
       }
-    }
+    };
 
     // Using the MembersController
     return new MembersController($scope, $state, Group, Training);
@@ -1041,7 +1052,7 @@ Application.Controllers.controller('ImportMembersResultController', ['$scope', '
     $scope.results = null;
 
     /**
-     * Changes the admin's view to the members import page
+     * Changes the view of the admin to the members import page
      */
     $scope.cancel = function () { $state.go('app.admin.members_import'); };
 
@@ -1053,8 +1064,8 @@ Application.Controllers.controller('ImportMembersResultController', ['$scope', '
     const initialize = function () {
       $scope.results = JSON.parse($scope.import.results);
       if (!$scope.results) {
-        setTimeout(function() {
-          Import.get({ id: $scope.import.id }, function(data) {
+        setTimeout(function () {
+          Import.get({ id: $scope.import.id }, function (data) {
             $scope.import = data;
             initialize();
           });
@@ -1068,69 +1079,68 @@ Application.Controllers.controller('ImportMembersResultController', ['$scope', '
 ]);
 
 /**
- * Controller used in the admin's creation page (admin view)
+ * Controller used in the admin creation page (admin view)
  */
 Application.Controllers.controller('NewAdminController', ['$state', '$scope', 'Admin', 'growl', '_t', 'phoneRequiredPromise',
   function ($state, $scope, Admin, growl, _t, phoneRequiredPromise) {
   // default admin profile
-  let getGender;
-  $scope.admin = {
-    statistic_profile_attributes: {
-      gender: true
-    },
-    profile_attributes: {},
-    invoicing_profile_attributes: {}
-  };
+    let getGender;
+    $scope.admin = {
+      statistic_profile_attributes: {
+        gender: true
+      },
+      profile_attributes: {},
+      invoicing_profile_attributes: {}
+    };
 
-  // Default parameters for AngularUI-Bootstrap datepicker
-  $scope.datePicker = {
-    format: Fablab.uibDateFormat,
-    opened: false,
-    options: {
-      startingDay: Fablab.weekStartingDay
-    }
-  };
+    // Default parameters for AngularUI-Bootstrap datepicker
+    $scope.datePicker = {
+      format: Fablab.uibDateFormat,
+      opened: false,
+      options: {
+        startingDay: Fablab.weekStartingDay
+      }
+    };
 
-  // is the phone number required in _admin_form?
-  $scope.phoneRequired = (phoneRequiredPromise.setting.value === 'true');
+    // is the phone number required in _admin_form?
+    $scope.phoneRequired = (phoneRequiredPromise.setting.value === 'true');
 
-  /**
-   * Shows the birth day datepicker
-   * @param $event {Object} jQuery event object
+    /**
+   * Shows the birthday datepicker
    */
-  $scope.openDatePicker = function ($event) { $scope.datePicker.opened = true; };
+    $scope.openDatePicker = function () { $scope.datePicker.opened = true; };
 
-  /**
+    /**
    * Send the new admin, currently stored in $scope.admin, to the server for database saving
    */
-  $scope.saveAdmin = function () {
-    Admin.save(
-      {},
-      { admin: $scope.admin },
-      function () {
-        growl.success(_t('app.admin.admins_new.administrator_successfully_created_he_will_receive_his_connection_directives_by_email', { GENDER: getGender($scope.admin) }));
-        return $state.go('app.admin.members');
-      }
-      , function (error) {
-        growl.error(_t('app.admin.admins_new.failed_to_create_admin') + JSON.stringify(error.data ? error.data : error));
-        console.error(error);
-      }
-    );
-  };
+    $scope.saveAdmin = function () {
+      Admin.save(
+        {},
+        { admin: $scope.admin },
+        function () {
+          growl.success(_t('app.admin.admins_new.administrator_successfully_created_he_will_receive_his_connection_directives_by_email', { GENDER: getGender($scope.admin) }));
+          return $state.go('app.admin.members');
+        }
+        , function (error) {
+          growl.error(_t('app.admin.admins_new.failed_to_create_admin') + JSON.stringify(error.data ? error.data : error));
+          console.error(error);
+        }
+      );
+    };
 
-  /* PRIVATE SCOPE */
+    /* PRIVATE SCOPE */
 
-  /**
+    /**
    * Return an enumerable meaningful string for the gender of the provider user
    * @param user {Object} Database user record
    * @return {string} 'male' or 'female'
    */
-  return getGender = function (user) {
-    if (user.statistic_profile_attributes) {
-      if (user.statistic_profile_attributes.gender) { return 'male'; } else { return 'female'; }
-    } else { return 'other'; }
-  };
-}
+    return getGender = function (user) {
+      if (user.statistic_profile_attributes) {
+        if (user.statistic_profile_attributes.gender) { return 'male'; } else { return 'female'; }
+      } else { return 'other'; }
+    };
+  }
 
 ]);
 
@@ -1140,65 +1150,64 @@ Application.Controllers.controller('NewAdminController', ['$state', '$scope', 'A
 Application.Controllers.controller('NewManagerController', ['$state', '$scope', 'User', 'groupsPromise', 'tagsPromise', 'growl', '_t',
   function ($state, $scope, User, groupsPromise, tagsPromise, growl, _t) {
   // default admin profile
-  $scope.manager = {
-    statistic_profile_attributes: {
-      gender: true
-    },
-    profile_attributes: {},
-    invoicing_profile_attributes: {}
-  };
+    $scope.manager = {
+      statistic_profile_attributes: {
+        gender: true
+      },
+      profile_attributes: {},
+      invoicing_profile_attributes: {}
+    };
 
-  // Default parameters for AngularUI-Bootstrap datepicker
-  $scope.datePicker = {
-    format: Fablab.uibDateFormat,
-    opened: false,
-    options: {
-      startingDay: Fablab.weekStartingDay
-    }
-  };
+    // Default parameters for AngularUI-Bootstrap datepicker
+    $scope.datePicker = {
+      format: Fablab.uibDateFormat,
+      opened: false,
+      options: {
+        startingDay: Fablab.weekStartingDay
+      }
+    };
 
-  // list of all groups
-  $scope.groups = groupsPromise.filter(function (g) { return (g.slug !== 'admins') && !g.disabled; });
+    // list of all groups
+    $scope.groups = groupsPromise.filter(function (g) { return (g.slug !== 'admins') && !g.disabled; });
 
-  // list of all tags
-  $scope.tags = tagsPromise;
+    // list of all tags
+    $scope.tags = tagsPromise;
 
-  /**
-   * Shows the birth day datepicker
-   * @param $event {Object} jQuery event object
+    /**
+   * Shows the birthday datepicker
    */
-  $scope.openDatePicker = function ($event) { $scope.datePicker.opened = true; };
+    $scope.openDatePicker = function () { $scope.datePicker.opened = true; };
 
-  /**
+    /**
    * Send the new manager, currently stored in $scope.manager, to the server for database saving
    */
-  $scope.saveManager = function () {
-    User.save(
-      {},
-      { manager: $scope.manager },
-      function () {
-        growl.success(_t('app.admin.manager_new.manager_successfully_created', { GENDER: getGender($scope.manager) }));
-        return $state.go('app.admin.members');
-      }
-      , function (error) {
-        growl.error(_t('app.admin.admins_new.failed_to_create_manager') + JSON.stringify(error.data ? error.data : error));
-        console.error(error);
-      }
-    );
-  };
+    $scope.saveManager = function () {
+      User.save(
+        {},
+        { manager: $scope.manager },
+        function () {
+          growl.success(_t('app.admin.manager_new.manager_successfully_created', { GENDER: getGender($scope.manager) }));
+          return $state.go('app.admin.members');
+        }
+        , function (error) {
+          growl.error(_t('app.admin.admins_new.failed_to_create_manager') + JSON.stringify(error.data ? error.data : error));
+          console.error(error);
+        }
+      );
+    };
 
-  /* PRIVATE SCOPE */
+    /* PRIVATE SCOPE */
 
-  /**
+    /**
    * Return an enumerable meaningful string for the gender of the provider user
    * @param user {Object} Database user record
    * @return {string} 'male' or 'female'
    */
-  const getGender = function (user) {
-    if (user.statistic_profile_attributes) {
-      if (user.statistic_profile_attributes.gender) { return 'male'; } else { return 'female'; }
-    } else { return 'other'; }
-  };
-}
+    const getGender = function (user) {
+      if (user.statistic_profile_attributes) {
+        if (user.statistic_profile_attributes.gender) { return 'male'; } else { return 'female'; }
+      } else { return 'other'; }
+    };
+  }
 
 ]);
