@@ -761,7 +761,6 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
         size: 'lg',
         controller: ['$scope', '$uibModalInstance', 'Subscription', function ($scope, $uibModalInstance, Subscription) {
           $scope.new_expired_at = angular.copy(subscription.expired_at);
-          $scope.scheduled = subscription.scheduled;
           $scope.free = free;
           $scope.datePicker = {
             opened: false,

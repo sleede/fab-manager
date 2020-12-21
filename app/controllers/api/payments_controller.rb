@@ -49,7 +49,7 @@ class API::PaymentsController < API::ApiController
       if params[:cart_items][:reservation]
         res = on_reservation_success(intent, amount[:details])
       elsif params[:cart_items][:subscription]
-        res = on_subscription_success(intent)
+        res = on_subscription_success(intent, amount[:details])
       end
     end
 
@@ -84,7 +84,7 @@ class API::PaymentsController < API::ApiController
       if params[:cart_items][:reservation]
         res = on_reservation_success(intent, amount[:details])
       elsif params[:cart_items][:subscription]
-        res = on_subscription_success(intent)
+        res = on_subscription_success(intent, amount[:details])
       end
     end
 
@@ -125,7 +125,7 @@ class API::PaymentsController < API::ApiController
     end
   end
 
-  def on_subscription_success(intent)
+  def on_subscription_success(intent, details)
     @subscription = Subscription.new(subscription_params)
     user_id = if current_user.admin? || current_user.manager?
                 params[:cart_items][:subscription][:user_id]
@@ -134,8 +134,7 @@ class API::PaymentsController < API::ApiController
               end
     is_subscribe = Subscriptions::Subscribe.new(current_user.invoicing_profile.id, user_id)
                                            .pay_and_save(@subscription,
-                                                         coupon: coupon_params[:coupon_code],
-                                                         invoice: true,
+                                                         payment_details: details,
                                                          payment_intent_id: intent.id,
                                                          schedule: params[:cart_items][:subscription][:payment_schedule],
                                                          payment_method: 'stripe')

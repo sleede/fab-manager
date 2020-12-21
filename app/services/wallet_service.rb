@@ -72,4 +72,34 @@ class WalletService
     ii.invoice = avoir
     ii.save!
   end
+
+  ##
+  # Compute the amount decreased from the user's wallet, if applicable
+  # @param payment {Invoice|PaymentSchedule}
+  # @param user {User} the customer
+  # @param coupon {Coupon|String} Coupon object or code
+  ##
+  def self.wallet_amount_debit(payment, user, coupon = nil)
+    total = payment.total
+    total = CouponService.new.apply(total, coupon, user.id) if coupon
+
+    wallet_amount = (user.wallet.amount * 100).to_i
+
+    wallet_amount >= total ? total : wallet_amount
+  end
+
+  ##
+  # Subtract the amount of the transactable item (Subscription|Reservation) from the customer's wallet
+  ##
+  def self.debit_user_wallet(payment, user, transactable)
+    wallet_amount = WalletService.wallet_amount_debit(payment, user)
+    return unless wallet_amount.present? && wallet_amount != 0
+
+    amount = wallet_amount / 100.0
+    wallet_transaction = WalletService.new(user: user, wallet: user.wallet).debit(amount, transactable)
+    # wallet debit success
+    raise DebitWalletError unless wallet_transaction
+
+    payment.set_wallet_transaction(wallet_amount, wallet_transaction.id)
+  end
 end
