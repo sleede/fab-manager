@@ -157,10 +157,12 @@ Please, be aware that **the configured locale will imply the CURRENCY symbol use
 
 _Eg.: configuring **es-ES** will set the currency symbol to **€** but **es-MX** will set **$** as currency symbol, so setting the `RAILS_LOCALE` to simple **es** (without country indication) will probably not do what you expect._
 
-See [config/locales/rails.*.yml](../config/locales) for a list of available locales. Default is **en**.
+Available values: `en, en-AU-CA, en-GB, en-IE, en-IN, en-NZ, en-US, en-ZA, fr, fa-CA, fr-CH, fr-CM, fr-FR, es, es-419, es-AR, es-CL, es-CO, es-CR, es-DO, 
+  es-EC, es-ES, es-MX, es-MX, es-PA, es-PE, es-US, es-VE, pt, pt-BR, zu`.
+Default is **en**.
 
 If your locale is not present in that list or any locale doesn't have your exact expectations, please open a pull request to share your modifications with the community and obtain a rebuilt docker image.
-You can find templates of these files at https://github.com/svenfuchs/rails-i18n/tree/rails-4-x/rails/locale.
+You can find templates of these files at https://github.com/svenfuchs/rails-i18n/tree/rails-5-x/rails/locale.
 <a name="MOMENT_LOCALE"></a>
 
     MOMENT_LOCALE
@@ -175,7 +177,7 @@ Default is **en** (even if it's not listed).
 
 Configure the javascript summernote editor for l10n.
 
-See [github.com/summernote/summernote/lang/summernote-*.js](https://github.com/summernote/summernote/tree/v0.7.3/lang) for a list of available locales.
+See [github.com/summernote/summernote/lang/summernote-*.js](https://github.com/summernote/summernote/tree/v0.8.18/lang) for a list of available locales.
 Default is **en-US** (even if it's not listed).
 <a name="ANGULAR_LOCALE"></a>
 
@@ -187,14 +189,14 @@ Please, be aware that **the configured locale will imply the CURRENCY displayed 
 
 _Eg.: configuring **fr-fr** will set the currency symbol to **€** but **fr-ca** will set **$** as currency symbol, so setting the `ANGULAR_LOCALE` to simple **fr** (without country indication) will probably not do what you expect._
 
-See [code.angularjs.org/i18n/angular-locale_*.js](https://code.angularjs.org/1.6.10/i18n/) for a list of available locales. Default is **en**.
+See [code.angularjs.org/i18n/angular-locale_*.js](https://code.angularjs.org/1.8.0/i18n/) for a list of available locales. Default is **en**.
 <a name="FULLCALENDAR_LOCALE"></a>
 
     FULLCALENDAR_LOCALE
 
 Configure the fullCalendar JS agenda library.
 
-See [github.com/fullcalendar/fullcalendar/lang/*.js](https://github.com/fullcalendar/fullcalendar/tree/v2.3.1/lang) for a list of available locales. Default is **en-us**.
+See [github.com/fullcalendar/fullcalendar/locale/*.js](https://github.com/fullcalendar/fullcalendar/tree/v3.10.2/locale) for a list of available locales. Default is **en-us**.
 <a name="POSTGRESQL_LANGUAGE_ANALYZER"></a>
 
     POSTGRESQL_LANGUAGE_ANALYZER
