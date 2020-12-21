@@ -19,83 +19,18 @@ class Subscription < ApplicationRecord
   after_save :notify_admin_subscribed_plan
   after_save :notify_partner_subscribed_plan, if: :of_partner_plan?
 
-  # @param invoice if true then only the subscription is payed, without reservation
-  #                if false then the subscription is payed with reservation
-  # @param payment_method is only used for schedules
-  def save_with_payment(operator_profile_id, invoice: true, coupon_code: nil, payment_intent_id: nil, schedule: nil, payment_method: nil)
+  ##
+  # Set the inner properties of the subscription, init the user's credits and save the subscription into the DB
+  # @return {boolean} true, if the operation succeeded
+  ##
+  def init_save
     return false unless valid?
 
     set_expiration_date
     return false unless save
 
     UsersCredits::Manager.new(user: user).reset_credits
-    if invoice
-      @wallet_amount_debit = get_wallet_amount_debit
-
-      # debit wallet
-      wallet_transaction = debit_user_wallet
-
-      payment = if schedule
-                  generate_schedule(operator_profile_id, payment_method, coupon_code)
-                else
-                  generate_invoice(operator_profile_id, coupon_code, payment_intent_id)
-                end
-
-      if wallet_transaction
-        payment.wallet_amount = @wallet_amount_debit
-        payment.wallet_transaction_id = wallet_transaction.id
-      end
-      payment.save
-    end
     true
-  end
-
-  def generate_schedule(operator_profile_id, payment_method, coupon_code = nil)
-    operator = InvoicingProfile.find(operator_profile_id)&.user
-    coupon = Coupon.find_by(code: coupon_code) unless coupon_code.nil?
-
-    PaymentScheduleService.new.create(
-      self,
-      plan.amount,
-      coupon: coupon,
-      operator: operator,
-      payment_method: payment_method,
-      user: user
-    )
-  end
-
-  def generate_invoice(operator_profile_id, coupon_code = nil, payment_intent_id = nil)
-    coupon_id = nil
-    total = plan.amount
-    operator = InvoicingProfile.find(operator_profile_id)&.user
-    method = operator&.admin? || (operator&.manager? && operator != user) ? nil : 'stripe'
-
-    unless coupon_code.nil?
-      @coupon = Coupon.find_by(code: coupon_code)
-
-      unless @coupon.nil?
-        total = CouponService.new.apply(plan.amount, @coupon, user.id)
-        coupon_id = @coupon.id
-      end
-    end
-
-    invoice = Invoice.new(
-      invoiced_id: id,
-      invoiced_type: 'Subscription',
-      invoicing_profile: user.invoicing_profile,
-      statistic_profile: user.statistic_profile,
-      total: total,
-      coupon_id: coupon_id,
-      operator_profile_id: operator_profile_id,
-      stp_payment_intent_id: payment_intent_id,
-      payment_method: method
-    )
-    invoice.invoice_items.push InvoiceItem.new(
-      amount: plan.amount,
-      description: plan.name,
-      subscription_id: id
-    )
-    invoice
   end
 
   def generate_and_save_invoice(operator_profile_id)

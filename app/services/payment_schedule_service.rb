@@ -47,11 +47,13 @@ class PaymentScheduleService
   end
 
   def create(subscription, total, coupon: nil, operator: nil, payment_method: nil, reservation: nil, user: nil)
+    subscription = reservation.generate_subscription if !subscription && reservation.plan_id
+
     schedule = compute(subscription.plan, total, coupon)
     ps = schedule[:payment_schedule]
     items = schedule[:items]
 
-    ps.scheduled = subscription
+    ps.scheduled = reservation || subscription
     ps.payment_method = payment_method
     ps.operator_profile = operator.invoicing_profile
     ps.invoicing_profile = user.invoicing_profile

@@ -14,14 +14,13 @@ class API::SubscriptionsController < API::ApiController
   # Managers can create subscriptions for other users
   def create
     user_id = current_user.admin? || current_user.manager? ? params[:subscription][:user_id] : current_user.id
-    amount = transaction_amount(current_user.admin? || (current_user.manager? && current_user.id != user_id), user_id)
+    transaction = transaction_amount(current_user.admin? || (current_user.manager? && current_user.id != user_id), user_id)
 
-    authorize SubscriptionContext.new(Subscription, amount, user_id)
+    authorize SubscriptionContext.new(Subscription, transaction[:amount], user_id)
 
     @subscription = Subscription.new(subscription_params)
     is_subscribe = Subscriptions::Subscribe.new(current_user.invoicing_profile.id, user_id)
-                                           .pay_and_save(@subscription, coupon: coupon_params[:coupon_code],
-                                                                        invoice: true,
+                                           .pay_and_save(@subscription, payment_details: transaction[:details],
                                                                         schedule: params[:subscription][:payment_schedule],
                                                                         payment_method: params[:subscription][:payment_method])
 
@@ -65,7 +64,7 @@ class API::SubscriptionsController < API::ApiController
     # Subtract wallet amount from total
     total = price_details[:total]
     wallet_debit = get_wallet_debit(user, total)
-    total - wallet_debit
+    { amount: total - wallet_debit, details: price_details }
   end
 
   def get_wallet_debit(user, total_amount)

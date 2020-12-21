@@ -33,6 +33,13 @@ class PaymentSchedule < ApplicationRecord
     save
   end
 
+  def set_wallet_transaction(amount, transaction_id)
+    raise InvalidFootprintError unless check_footprint
+
+    update_columns(wallet_amount: amount, wallet_transaction_id: transaction_id)
+    chain_record
+  end
+
   def chain_record
     self.footprint = compute_footprint
     save!
@@ -45,5 +52,9 @@ class PaymentSchedule < ApplicationRecord
 
   def compute_footprint
     FootprintService.compute_footprint(PaymentSchedule, self)
+  end
+
+  def check_footprint
+    payment_schedule_items.map(&:check_footprint).all? && footprint == compute_footprint
   end
 end

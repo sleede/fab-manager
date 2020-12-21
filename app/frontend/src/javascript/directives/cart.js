@@ -716,9 +716,14 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
          * Open a modal window that allows the user to process a credit card payment for his current shopping cart.
          */
         const payByStripe = function (reservation) {
-          $scope.toggleStripeModal(() => {
-            $scope.stripe.cartItems = mkCartItems(reservation, 'stripe');
-          });
+          // check that the online payment is enabled
+          if ($scope.settings.online_payment_module !== 'true') {
+            growl.error(_t('app.shared.cart.online_payment_disabled'));
+          } else {
+            $scope.toggleStripeModal(() => {
+              $scope.stripe.cartItems = mkCartItems(reservation, 'stripe');
+            });
+          }
         };
         /**
          * Open a modal window that allows the user to process a local payment for his current shopping cart (admin only).
@@ -751,10 +756,13 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
               },
               user () {
                 return $scope.user;
+              },
+              settings () {
+                return $scope.settings;
               }
             },
-            controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', 'Subscription', 'wallet', 'helpers', '$filter', 'coupon', 'selectedPlan', 'schedule', 'cartItems', 'user',
-              function ($scope, $uibModalInstance, $state, reservation, price, Auth, Reservation, Subscription, wallet, helpers, $filter, coupon, selectedPlan, schedule, cartItems, user) {
+            controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', 'Subscription', 'wallet', 'helpers', '$filter', 'coupon', 'selectedPlan', 'schedule', 'cartItems', 'user', 'settings',
+              function ($scope, $uibModalInstance, $state, reservation, price, Auth, Reservation, Subscription, wallet, helpers, $filter, coupon, selectedPlan, schedule, cartItems, user, settings) {
                 // user wallet amount
                 $scope.wallet = wallet;
 
@@ -797,7 +805,12 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                  */
                 $scope.ok = function () {
                   if ($scope.schedule && $scope.method.payment_method === 'stripe') {
-                    return $scope.toggleStripeModal();
+                    // check that the online payment is enabled
+                    if (settings.online_payment_module !== 'true') {
+                      return growl.error(_t('app.shared.cart.online_payment_disabled'));
+                    } else {
+                      return $scope.toggleStripeModal();
+                    }
                   }
                   $scope.attempting = true;
                   // save subscription (if there's only a subscription selected)
@@ -927,11 +940,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
             const amountToPay = helpers.getAmountToPay($scope.amountTotal, wallet.amount);
             if ((AuthService.isAuthorized(['member']) && amountToPay > 0) ||
               (AuthService.isAuthorized('manager') && $scope.user.id === $rootScope.currentUser.id && amountToPay > 0)) {
-              if ($scope.settings.online_payment_module !== 'true') {
-                growl.error(_t('app.shared.cart.online_payment_disabled'));
-              } else {
-                return payByStripe(reservation);
-              }
+              return payByStripe(reservation);
             } else {
               if (AuthService.isAuthorized(['admin']) ||
                 (AuthService.isAuthorized('manager') && $scope.user.id !== $rootScope.currentUser.id) ||

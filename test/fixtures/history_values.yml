@@ -100,7 +100,7 @@ value_history_10:
   id: 10
   setting_id: 10
   invoicing_profile_id: 1
-  value: YYMMmmmX[/VL]R[/A]S[/E]
+  value: YYMMmmmX[/VL]R[/A]
   created_at: 2018-12-17 11:23:01.603733000 Z
   updated_at: 2018-12-17 11:23:01.603733000 Z
   footprint: ed23a2eb1903befc977621bc3c3b19aad831fe550ebaa99e9299238b3d93c275
@@ -693,3 +693,11 @@ history_value_73:
   value: true
   created_at: 2020-06-17 10:48:19.002417000 Z
   updated_at: 2020-06-17 10:48:19.002417000 Z
+
+value_history_74:
+  id: 74
+  setting_id: 10
+  invoicing_profile_id: 1
+  value: YYMMmmmX[/VL]R[/A]S[/E]
+  created_at: 2020-12-14 14:37:35.615124000 Z
+  updated_at: 2020-12-14 14:37:35.615124000 Z

@@ -19,6 +19,13 @@ client.interceptors.response.use(function (response) {
 });
 
 function extractHumanReadableMessage(error: any): string {
+  if (error.match(/^<!DOCTYPE html>/)) {
+    // parse ruby error pages
+    const parser = new DOMParser();
+    const htmlDoc = parser.parseFromString(error, 'text/html');
+    return htmlDoc.querySelector('h2').textContent;
+  }
+
   if (typeof error === 'string') return error;
 
   let message = '';
