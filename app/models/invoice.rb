@@ -5,6 +5,7 @@ require 'checksum'
 # Invoice correspond to a single purchase made by an user. This purchase may
 # include reservation(s) and/or a subscription
 class Invoice < ApplicationRecord
+  include Footprintable
   include NotifyWith::NotificationAttachedObject
   require 'fileutils'
   scope :only_invoice, -> { where(type: nil) }

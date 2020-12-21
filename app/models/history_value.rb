@@ -4,6 +4,8 @@ require 'checksum'
 
 # Setting values, kept history of modifications
 class HistoryValue < ApplicationRecord
+  include Footprintable
+
   belongs_to :setting
   belongs_to :invoicing_profile
 

@@ -3,6 +3,8 @@
 # PaymentSchedule is a way for members to pay something (especially a Subscription) with multiple payment,
 # staged on a long period rather than with a single payment
 class PaymentSchedule < ApplicationRecord
+  include Footprintable
+
   belongs_to :scheduled, polymorphic: true
   belongs_to :wallet_transaction
   belongs_to :coupon

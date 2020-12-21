@@ -2,6 +2,8 @@
 
 # Represents a due date and the associated amount for a PaymentSchedule
 class PaymentScheduleItem < ApplicationRecord
+  include Footprintable
+
   belongs_to :payment_schedule
   belongs_to :invoice
   after_create :chain_record
@@ -22,5 +24,9 @@ class PaymentScheduleItem < ApplicationRecord
 
   def compute_footprint
     FootprintService.compute_footprint(PaymentScheduleItem, self)
+  end
+
+  def self.columns_out_of_footprint
+    %w[invoice_id]
   end
 end

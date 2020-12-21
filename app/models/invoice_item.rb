@@ -4,6 +4,8 @@ require 'checksum'
 
 # A single line inside an invoice. Can be a subscription or a reservation
 class InvoiceItem < ApplicationRecord
+  include Footprintable
+
   belongs_to :invoice
   belongs_to :subscription
 
