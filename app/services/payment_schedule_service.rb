@@ -47,7 +47,9 @@ class PaymentScheduleService
   end
 
   def create(subscription, total, coupon: nil, operator: nil, payment_method: nil, reservation: nil, user: nil)
-    schedule = compute(reservation ? reservation.subscription.plan : subscription.plan, total, coupon)
+    subscription = reservation.generate_subscription if !subscription && reservation.plan_id
+
+    schedule = compute(subscription.plan, total, coupon)
     ps = schedule[:payment_schedule]
     items = schedule[:items]
 

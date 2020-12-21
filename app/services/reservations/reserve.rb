@@ -31,6 +31,7 @@ class Reservations::Reserve
     payment.save
     debit_user_wallet(payment, user, reservation)
     reservation.post_save
+    true
   end
 
   ##
