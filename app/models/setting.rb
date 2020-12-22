@@ -110,12 +110,27 @@ class Setting < ApplicationRecord
   # WARNING: when adding a new key, you may also want to add it in app/policies/setting_policy.rb#public_whitelist
 
   def value
-    last_value = history_values.order(HistoryValue.arel_table['created_at'].desc).first
+    last_value = history_values.order(HistoryValue.arel_table['created_at'].desc).limit(1).first
     last_value&.value
   end
 
+  def value_at(date)
+    val = history_values.order(HistoryValue.arel_table['created_at'].desc).where('created_at <= ?', date).limit(1).first
+    val&.value
+  end
+
+  def first_update
+    first_value = history_values.order(HistoryValue.arel_table['created_at'].asc).limit(1).first
+    first_value&.created_at
+  end
+
+  def first_value
+    first_value = history_values.order(HistoryValue.arel_table['created_at'].asc).limit(1).first
+    first_value&.value
+  end
+
   def last_update
-    last_value = history_values.order(HistoryValue.arel_table['created_at'].desc).first
+    last_value = history_values.order(HistoryValue.arel_table['created_at'].desc).limit(1).first
     last_value&.created_at
   end
 

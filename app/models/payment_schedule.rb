@@ -2,7 +2,9 @@
 
 # PaymentSchedule is a way for members to pay something (especially a Subscription) with multiple payment,
 # staged on a long period rather than with a single payment
-class PaymentSchedule < Footprintable
+class PaymentSchedule < PaymentDocument
+  require 'fileutils'
+
   belongs_to :scheduled, polymorphic: true
   belongs_to :wallet_transaction
   belongs_to :coupon
@@ -17,27 +19,29 @@ class PaymentSchedule < Footprintable
   before_create :add_environment
   after_create :update_reference, :chain_record
 
+  def file
+    dir = "payment_schedules/#{invoicing_profile.id}"
+
+    # create directories if they doesn't exists (payment_schedules & invoicing_profile_id)
+    FileUtils.mkdir_p dir
+    "#{dir}/#{filename}"
+  end
+
+  def filename
+    prefix = Setting.find_by(name: 'invoice_prefix').value_at(created_at)
+    prefix ||= if created_at < Setting.find_by(name: 'invoice_prefix').history_values.order(created_at: :asc).limit(1).first.created_at
+                 Setting.find_by(name: 'invoice_prefix').history_values.order(created_at: :asc).limit(1).first
+               else
+                 Setting.find_by(name: 'invoice_prefix')..history_values.order(created_at: :desc).limit(1).first
+               end
+    "#{prefix.value}-#{id}_#{created_at.strftime('%d%m%Y')}.pdf"
+  end
+
   ##
   # This is useful to check the first item because its amount may be different from the others
   ##
   def ordered_items
     payment_schedule_items.order(due_date: :asc)
-  end
-
-  def add_environment
-    self.environment = Rails.env
-  end
-
-  def update_reference
-    self.reference = InvoiceReferenceService.generate_reference(self, payment_schedule: true)
-    save
-  end
-
-  def set_wallet_transaction(amount, transaction_id)
-    raise InvalidFootprintError unless check_footprint
-
-    update_columns(wallet_amount: amount, wallet_transaction_id: transaction_id)
-    chain_record
   end
 
   def check_footprint

@@ -28,6 +28,7 @@ function extractHumanReadableMessage(error: any): string {
 
   if (typeof error === 'string') return error;
 
+  // parse Rails errors (as JSON)
   let message = '';
   if (error instanceof Object) {
     // iterate through all the keys to build the message
