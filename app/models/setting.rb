@@ -106,7 +106,8 @@ class Setting < ApplicationRecord
                              confirmation_required
                              wallet_module
                              statistics_module
-                             upcoming_events_shown] }
+                             upcoming_events_shown
+                             payment_schedule_prefix] }
   # WARNING: when adding a new key, you may also want to add it in app/policies/setting_policy.rb#public_whitelist
 
   def value

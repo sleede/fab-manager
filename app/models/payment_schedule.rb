@@ -28,13 +28,13 @@ class PaymentSchedule < PaymentDocument
   end
 
   def filename
-    prefix = Setting.find_by(name: 'invoice_prefix').value_at(created_at)
-    prefix ||= if created_at < Setting.find_by(name: 'invoice_prefix').history_values.order(created_at: :asc).limit(1).first.created_at
-                 Setting.find_by(name: 'invoice_prefix').history_values.order(created_at: :asc).limit(1).first
+    prefix = Setting.find_by(name: 'payment_schedule_prefix').value_at(created_at)
+    prefix ||= if created_at < Setting.find_by(name: 'payment_schedule_prefix').first_update
+                 Setting.find_by(name: 'payment_schedule_prefix').first_value
                else
-                 Setting.find_by(name: 'invoice_prefix')..history_values.order(created_at: :desc).limit(1).first
+                 Setting.get('payment_schedule_prefix')
                end
-    "#{prefix.value}-#{id}_#{created_at.strftime('%d%m%Y')}.pdf"
+    "#{prefix}-#{id}_#{created_at.strftime('%d%m%Y')}.pdf"
   end
 
   ##
