@@ -38,7 +38,7 @@ class FootprintService
   def self.debug_footprint(klass, item)
     columns = FootprintService.footprint_columns(klass)
     current = FootprintService.footprint_data(klass, item)
-    saved = FootprintDebug.find_by(footprint: item.footprint, klass: klass)
+    saved = FootprintDebug.find_by(footprint: item.footprint, klass: klass.name)
     puts "Debug footprint for #{klass} [ id: #{item.id} ]"
     puts '-----------------------------------------'
     puts "columns: [ #{columns.join(', ')} ]"

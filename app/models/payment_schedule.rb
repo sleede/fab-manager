@@ -2,9 +2,7 @@
 
 # PaymentSchedule is a way for members to pay something (especially a Subscription) with multiple payment,
 # staged on a long period rather than with a single payment
-class PaymentSchedule < ApplicationRecord
-  include Footprintable
-
+class PaymentSchedule < Footprintable
   belongs_to :scheduled, polymorphic: true
   belongs_to :wallet_transaction
   belongs_to :coupon
@@ -40,20 +38,6 @@ class PaymentSchedule < ApplicationRecord
 
     update_columns(wallet_amount: amount, wallet_transaction_id: transaction_id)
     chain_record
-  end
-
-  def chain_record
-    self.footprint = compute_footprint
-    save!
-    FootprintDebug.create!(
-      footprint: footprint,
-      data: FootprintService.footprint_data(PaymentSchedule, self),
-      klass: PaymentSchedule.name
-    )
-  end
-
-  def compute_footprint
-    FootprintService.compute_footprint(PaymentSchedule, self)
   end
 
   def check_footprint

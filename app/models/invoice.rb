@@ -4,8 +4,7 @@ require 'checksum'
 
 # Invoice correspond to a single purchase made by an user. This purchase may
 # include reservation(s) and/or a subscription
-class Invoice < ApplicationRecord
-  include Footprintable
+class Invoice < Footprintable
   include NotifyWith::NotificationAttachedObject
   require 'fileutils'
   scope :only_invoice, -> { where(type: nil) }
@@ -173,22 +172,8 @@ class Invoice < ApplicationRecord
     self.environment = Rails.env
   end
 
-  def chain_record
-    self.footprint = compute_footprint
-    save!
-    FootprintDebug.create!(
-      footprint: footprint,
-      data: FootprintService.footprint_data(Invoice, self),
-      klass: Invoice.name
-    )
-  end
-
   def check_footprint
     invoice_items.map(&:check_footprint).all? && footprint == compute_footprint
-  end
-
-  def debug_footprint
-    FootprintService.debug_footprint(Invoice, self)
   end
 
   def set_wallet_transaction(amount, transaction_id)
@@ -212,10 +197,6 @@ class Invoice < ApplicationRecord
            "invoiced_type(#{invoiced_type}), user_id(#{invoicing_profile.user_id})"
     end
     InvoiceWorker.perform_async(id, user&.subscription&.expired_at)
-  end
-
-  def compute_footprint
-    FootprintService.compute_footprint(Invoice, self)
   end
 
   def log_changes
