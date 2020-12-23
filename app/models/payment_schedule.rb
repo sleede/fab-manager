@@ -18,6 +18,7 @@ class PaymentSchedule < PaymentDocument
 
   before_create :add_environment
   after_create :update_reference, :chain_record
+  after_commit :generate_and_send_document, on: [:create], if: :persisted?
 
   def file
     dir = "payment_schedules/#{invoicing_profile.id}"
@@ -46,5 +47,17 @@ class PaymentSchedule < PaymentDocument
 
   def check_footprint
     payment_schedule_items.map(&:check_footprint).all? && footprint == compute_footprint
+  end
+
+  private
+
+  def generate_and_send_document
+    return unless Setting.get('invoicing_module')
+
+    unless Rails.env.test?
+      puts "Creating an InvoiceWorker job to generate the following invoice: id(#{id}), invoiced_id(#{invoiced_id}), " \
+           "invoiced_type(#{invoiced_type}), user_id(#{invoicing_profile.user_id})"
+    end
+    InvoiceWorker.perform_async(id, user&.subscription&.expired_at)
   end
 end
