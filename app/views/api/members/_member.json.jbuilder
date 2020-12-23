@@ -4,6 +4,7 @@ json.extract! member, :id, :username, :email, :group_id
 json.role member.roles.first.name
 json.name member.profile.full_name
 json.need_completion member.need_completion?
+json.ip_address member.current_sign_in_ip.to_s
 
 json.profile do
   json.id member.profile.id

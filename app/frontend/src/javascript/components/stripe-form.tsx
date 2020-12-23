@@ -11,6 +11,7 @@ interface StripeFormProps {
   onSuccess: (result: SetupIntent|PaymentConfirmation|any) => void,
   onError: (message: string) => void,
   customer: User,
+  operator: User,
   className?: string,
   paymentSchedule?: boolean,
   cartItems?: CartItems
@@ -20,7 +21,7 @@ interface StripeFormProps {
  * A form component to collect the credit card details and to create the payment method on Stripe.
  * The form validation button must be created elsewhere, using the attribute form="stripe-form".
  */
-export const StripeForm: React.FC<StripeFormProps> = ({ onSubmit, onSuccess, onError, children, className, paymentSchedule = false, cartItems, customer }) => {
+export const StripeForm: React.FC<StripeFormProps> = ({ onSubmit, onSuccess, onError, children, className, paymentSchedule = false, cartItems, customer, operator }) => {
 
   const { t } = useTranslation('shared');
 
@@ -57,7 +58,16 @@ export const StripeForm: React.FC<StripeFormProps> = ({ onSubmit, onSuccess, onE
           // we start by associating the payment method with the user
           const { client_secret } = await PaymentAPI.setupIntent(customer.id);
           const { setupIntent, error } = await stripe.confirmCardSetup(client_secret, {
-            payment_method: paymentMethod.id
+            payment_method: paymentMethod.id,
+            mandate_data: {
+              customer_acceptance: {
+                type: 'online',
+                online: {
+                  ip_address: operator.ip_address,
+                  user_agent: navigator.userAgent
+                }
+              }
+            }
           })
           if (error) {
             onError(error.message);

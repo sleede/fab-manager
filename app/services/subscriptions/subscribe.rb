@@ -19,22 +19,24 @@ class Subscriptions::Subscribe
   def pay_and_save(subscription, payment_details: nil, payment_intent_id: nil, schedule: false, payment_method: nil)
     return false if user_id.nil?
 
-    subscription.statistic_profile_id = StatisticProfile.find_by(user_id: user_id).id
-    subscription.init_save
     user = User.find(user_id)
+    subscription.statistic_profile_id = StatisticProfile.find_by(user_id: user_id).id
 
-    payment = if schedule
-                generate_schedule(subscription: subscription,
-                                  total: payment_details[:before_coupon],
-                                  operator_profile_id: operator_profile_id,
-                                  user: user,
-                                  payment_method: payment_method,
-                                  coupon_code: payment_details[:coupon])
-              else
-                generate_invoice(subscription, operator_profile_id, payment_details, payment_intent_id)
-              end
-    payment.save
-    WalletService.debit_user_wallet(payment, user, subscription)
+    ActiveRecord::Base.transaction do
+      subscription.init_save
+      payment = if schedule
+                  generate_schedule(subscription: subscription,
+                                    total: payment_details[:before_coupon],
+                                    operator_profile_id: operator_profile_id,
+                                    user: user,
+                                    payment_method: payment_method,
+                                    coupon_code: payment_details[:coupon])
+                else
+                  generate_invoice(subscription, operator_profile_id, payment_details, payment_intent_id)
+                end
+      payment.save
+      WalletService.debit_user_wallet(payment, user, subscription)
+    end
     true
   end
 

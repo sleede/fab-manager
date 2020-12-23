@@ -17,20 +17,22 @@ class Reservations::Reserve
     user = User.find(user_id)
     reservation.statistic_profile_id = StatisticProfile.find_by(user_id: user_id).id
 
-    reservation.pre_check
-    payment = if schedule
-                generate_schedule(reservation: reservation,
-                                  total: payment_details[:before_coupon],
-                                  operator_profile_id: operator_profile_id,
-                                  user: user,
-                                  payment_method: payment_method,
-                                  coupon_code: payment_details[:coupon])
-              else
-                generate_invoice(reservation, operator_profile_id, payment_details, payment_intent_id)
-              end
-    payment.save
-    WalletService.debit_user_wallet(payment, user, reservation)
-    reservation.post_save
+    ActiveRecord::Base.transaction do
+      reservation.pre_check
+      payment = if schedule
+                  generate_schedule(reservation: reservation,
+                                    total: payment_details[:before_coupon],
+                                    operator_profile_id: operator_profile_id,
+                                    user: user,
+                                    payment_method: payment_method,
+                                    coupon_code: payment_details[:coupon])
+                else
+                  generate_invoice(reservation, operator_profile_id, payment_details, payment_intent_id)
+                end
+      payment.save
+      WalletService.debit_user_wallet(payment, user, reservation)
+      reservation.post_save
+    end
     true
   end
 

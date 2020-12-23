@@ -7,7 +7,7 @@ class API::PaymentSchedulesController < API::ApiController
 
   def download
     authorize @payment_schedule
-    # TODO, send_file File.join(Rails.root, @payment_schedule.file), type: 'application/pdf', disposition: 'attachment'
+    send_file File.join(Rails.root, @payment_schedule.file), type: 'application/pdf', disposition: 'attachment'
   end
 
   private

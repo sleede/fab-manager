@@ -89,8 +89,8 @@ class API::PaymentsController < API::ApiController
     end
 
     render generate_payment_response(intent, res)
-  rescue Stripe::InvalidRequestError
-    render json: { error: 'no such setup intent' }, status: :unprocessable_entity
+  rescue Stripe::InvalidRequestError => e
+    render json: e, status: :unprocessable_entity
   end
 
   private
