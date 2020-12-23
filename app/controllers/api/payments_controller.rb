@@ -105,7 +105,7 @@ class API::PaymentsController < API::ApiController
     is_reserve = Reservations::Reserve.new(user_id, current_user.invoicing_profile.id)
                                       .pay_and_save(@reservation,
                                                     payment_details: details,
-                                                    payment_intent_id: intent.id,
+                                                    intent_id: intent.id,
                                                     schedule: params[:cart_items][:reservation][:payment_schedule],
                                                     payment_method: params[:cart_items][:reservation][:payment_method])
     if intent.class == Stripe::PaymentIntent
@@ -135,7 +135,7 @@ class API::PaymentsController < API::ApiController
     is_subscribe = Subscriptions::Subscribe.new(current_user.invoicing_profile.id, user_id)
                                            .pay_and_save(@subscription,
                                                          payment_details: details,
-                                                         payment_intent_id: intent.id,
+                                                         intent_id: intent.id,
                                                          schedule: params[:cart_items][:subscription][:payment_schedule],
                                                          payment_method: 'stripe')
     if intent.class == Stripe::PaymentIntent

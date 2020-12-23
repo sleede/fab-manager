@@ -5,10 +5,13 @@ class StripeService
   class << self
 
     # Create the provided PaymentSchedule on Stripe, using the Subscription API
-    def create_stripe_subscription(payment_schedule_id, reservable_stp_id)
+    def create_stripe_subscription(payment_schedule_id, reservable_stp_id, setup_intent_id)
+      stripe_key = Setting.get('stripe_secret_key')
       payment_schedule = PaymentSchedule.find(payment_schedule_id)
       first_item = payment_schedule.ordered_items.first
 
+      # setup intent (associates the customer and the payment method)
+      intent = Stripe::SetupIntent.retrieve(setup_intent_id, api_key: stripe_key)
       # subscription (recurring price)
       price = create_price(first_item.details['recurring'],
                            payment_schedule.scheduled.plan.stp_product_id,
@@ -23,8 +26,9 @@ class StripeService
                                                        add_invoice_items: items,
                                                        items: [
                                                          { price: price[:id] }
-                                                       ]
-                                                     }, { api_key: Setting.get('stripe_secret_key') })
+                                                       ],
+                                                       default_payment_method: intent[:payment_method]
+                                                     }, { api_key: stripe_key })
       payment_schedule.update_attributes(stp_subscription_id: stp_subscription.id)
     end
 
@@ -65,7 +69,7 @@ class StripeService
       }
       params[:recurring] = { interval: 'month', interval_count: 1 } if monthly
 
-      Stripe::Price.create(params, { api_key: Setting.get('stripe_secret_key') })
+      Stripe::Price.create(params, api_key: Setting.get('stripe_secret_key'))
     end
   end
 end

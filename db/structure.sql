@@ -1509,6 +1509,7 @@ CREATE TABLE public.payment_schedules (
     scheduled_id bigint,
     total integer,
     stp_subscription_id character varying,
+    stp_setup_intent_id character varying,
     reference character varying,
     payment_method character varying,
     wallet_amount integer,

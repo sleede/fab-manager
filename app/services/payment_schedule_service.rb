@@ -46,7 +46,7 @@ class PaymentScheduleService
     { payment_schedule: ps, items: items }
   end
 
-  def create(subscription, total, coupon: nil, operator: nil, payment_method: nil, reservation: nil, user: nil)
+  def create(subscription, total, coupon: nil, operator: nil, payment_method: nil, reservation: nil, user: nil, setup_intent_id: nil)
     subscription = reservation.generate_subscription if !subscription && reservation.plan_id
 
     schedule = compute(subscription.plan, total, coupon)
@@ -55,6 +55,7 @@ class PaymentScheduleService
 
     ps.scheduled = reservation || subscription
     ps.payment_method = payment_method
+    ps.stp_setup_intent_id = setup_intent_id
     ps.operator_profile = operator.invoicing_profile
     ps.invoicing_profile = user.invoicing_profile
     ps.save!
@@ -63,7 +64,7 @@ class PaymentScheduleService
       item.save!
     end
 
-    StripeService.create_stripe_subscription(ps.id, reservation&.reservable&.stp_product_id) if payment_method == 'stripe'
+    StripeService.create_stripe_subscription(ps.id, reservation&.reservable&.stp_product_id, setup_intent_id) if payment_method == 'stripe'
     ps
   end
 end
