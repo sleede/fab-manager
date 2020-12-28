@@ -64,7 +64,7 @@ class PaymentScheduleService
       item.save!
     end
 
-    StripeService.create_stripe_subscription(ps.id, reservation&.reservable&.stp_product_id, setup_intent_id) if payment_method == 'stripe'
+    StripeService.create_stripe_subscription(ps.id, subscription, reservation&.reservable&.stp_product_id, setup_intent_id) if payment_method == 'stripe'
     ps
   end
 end

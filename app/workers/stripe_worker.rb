@@ -64,6 +64,7 @@ class StripeWorker
         }, { api_key: Setting.get('stripe_secret_key') }
       )
       object.update_attributes(stp_product_id: product.id)
+      puts "Stripe product was created for the #{class_name} \##{id}"
     end
   end
 end

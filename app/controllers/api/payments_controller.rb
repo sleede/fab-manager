@@ -187,6 +187,11 @@ class API::PaymentsController < API::ApiController
       slots = cart_items_params[:slots_attributes] || []
       nb_places = cart_items_params[:nb_reserve_places]
       tickets = cart_items_params[:tickets_attributes]
+      user_id = if current_user.admin? || current_user.manager?
+                  params[:cart_items][:reservation][:user_id]
+                else
+                  current_user.id
+                end
     else
       raise NotImplementedError unless params[:cart_items][:subscription]
 
@@ -195,10 +200,15 @@ class API::PaymentsController < API::ApiController
       slots = []
       nb_places = nil
       tickets = nil
+      user_id = if current_user.admin? || current_user.manager?
+                  params[:cart_items][:subscription][:user_id]
+                else
+                  current_user.id
+                end
     end
 
     price_details = Price.compute(false,
-                                  current_user,
+                                  User.find(user_id),
                                   reservable,
                                   slots,
                                   plan_id: plan_id,

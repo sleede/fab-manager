@@ -24,7 +24,11 @@ function extractHumanReadableMessage(error: any): string {
       // parse ruby error pages
       const parser = new DOMParser();
       const htmlDoc = parser.parseFromString(error, 'text/html');
-      return htmlDoc.querySelector('h2').textContent;
+      if (htmlDoc.querySelectorAll('h2').length > 2) {
+        return htmlDoc.querySelector('h2').textContent;
+      } else {
+        return htmlDoc.querySelector('h1').textContent;
+      }
     }
     return error;
   }
