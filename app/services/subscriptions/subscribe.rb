@@ -35,8 +35,9 @@ class Subscriptions::Subscribe
                 else
                   generate_invoice(subscription, operator_profile_id, payment_details, intent_id)
                 end
-      payment.save
       WalletService.debit_user_wallet(payment, user, subscription)
+      payment.save
+      payment.post_save(intent_id)
     end
     true
   end

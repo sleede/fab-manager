@@ -47,7 +47,8 @@ class PaymentScheduleService
   end
 
   def create(subscription, total, coupon: nil, operator: nil, payment_method: nil, reservation: nil, user: nil, setup_intent_id: nil)
-    subscription = reservation.generate_subscription if !subscription && reservation.plan_id
+    subscription = reservation.generate_subscription if !subscription && reservation&.plan_id
+    raise InvalidSubscriptionError unless subscription
 
     schedule = compute(subscription.plan, total, coupon)
     ps = schedule[:payment_schedule]
@@ -58,13 +59,10 @@ class PaymentScheduleService
     ps.stp_setup_intent_id = setup_intent_id
     ps.operator_profile = operator.invoicing_profile
     ps.invoicing_profile = user.invoicing_profile
-    ps.save!
+    ps.payment_schedule_items = items
     items.each do |item|
       item.payment_schedule = ps
-      item.save!
     end
-
-    StripeService.create_stripe_subscription(ps.id, subscription, reservation&.reservable&.stp_product_id, setup_intent_id) if payment_method == 'stripe'
     ps
   end
 end

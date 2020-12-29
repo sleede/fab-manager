@@ -18,9 +18,9 @@ class PaymentDocument < Footprintable
   end
 
   def set_wallet_transaction(amount, transaction_id)
-    raise InvalidFootprintError unless check_footprint
-
-    update_columns(wallet_amount: amount, wallet_transaction_id: transaction_id)
-    chain_record
+    self.wallet_amount = amount
+    self.wallet_transaction_id = transaction_id
   end
+
+  def post_save(arg); end
 end

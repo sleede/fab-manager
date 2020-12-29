@@ -30,9 +30,10 @@ class Reservations::Reserve
                 else
                   generate_invoice(reservation, operator_profile_id, payment_details, intent_id)
                 end
+      WalletService.debit_user_wallet(payment, user, reservation)
       payment.save
       reservation.save
-      WalletService.debit_user_wallet(payment, user, reservation)
+      payment.post_save(intent_id)
       reservation.post_save
     end
     true

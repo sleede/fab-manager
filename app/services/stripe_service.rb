@@ -5,10 +5,23 @@ class StripeService
   class << self
 
     # Create the provided PaymentSchedule on Stripe, using the Subscription API
-    def create_stripe_subscription(payment_schedule_id, subscription, reservable_stp_id, setup_intent_id)
+    def create_stripe_subscription(payment_schedule_id, setup_intent_id)
       stripe_key = Setting.get('stripe_secret_key')
       payment_schedule = PaymentSchedule.find(payment_schedule_id)
       first_item = payment_schedule.ordered_items.first
+
+      case payment_schedule.scheduled_type
+      when Reservation.name
+        subscription = payment_schedule.scheduled.subscription
+        reservable_stp_id = payment_schedule.scheduled.reservable&.stp_product_id
+      when Subscription.name
+        subscription = payment_schedule.scheduled
+        reservable_stp_id = nil
+      else
+        raise InvalidSubscriptionError
+      end
+
+      handle_wallet_transaction(payment_schedule)
 
       # setup intent (associates the customer and the payment method)
       intent = Stripe::SetupIntent.retrieve(setup_intent_id, api_key: stripe_key)
@@ -70,6 +83,13 @@ class StripeService
       params[:recurring] = { interval: 'month', interval_count: 1 } if monthly
 
       Stripe::Price.create(params, api_key: Setting.get('stripe_secret_key'))
+    end
+
+    def handle_wallet_transaction(payment_schedule)
+      return unless payment_schedule.wallet_amount
+
+      customer_id = payment_schedule.invoicing_profile.user.stp_customer_id
+      Stripe::Customer.update(customer_id, { balance: -payment_schedule.wallet_amount }, { api_key: Setting.get('stripe_secret_key') })
     end
   end
 end

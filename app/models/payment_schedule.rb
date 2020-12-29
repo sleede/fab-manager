@@ -49,6 +49,12 @@ class PaymentSchedule < PaymentDocument
     payment_schedule_items.map(&:check_footprint).all? && footprint == compute_footprint
   end
 
+  def post_save(setup_intent_id)
+    return unless payment_method == 'stripe'
+
+    StripeService.create_stripe_subscription(id, setup_intent_id)
+  end
+
   private
 
   def generate_and_send_document
