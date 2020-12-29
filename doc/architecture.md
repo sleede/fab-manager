@@ -69,22 +69,22 @@ It also provides another REST-JSON API, open to the 3rd-party applications, and 
 
 `fab-manager/`<br>
 `╚═╦ app/`<br>
-`  ╠═ controllers/` Controllers (MVC);<br>
-`  ╠═ doc/` Documentation for the OpenAPI;<br>
-`  ╠═ exceptions/` Custom errors;<br>
-`  ╠═ frontend/` **Source code for the frontend application**; <br>
-`  ╠═ helpers/` System-wide libraries and utilities. Prefer using `services/` when it's possible;<br>
-`  ╠═ mailers/` Sending emails;<br>
-`  ╠═ models/` Models (MVC);<br>
-`  ╠═ pdfs/` PDF documents generation;<br>
-`  ╠═ policies/` Access policies for the API and OpenAPI endpoints;<br>
-`  ╠═ services/` Utilities arranged by data models; <br>
-`  ╠═ sweepers/` Build cached version of some data;<br>
-`  ╠═ themes/` SASS files that overrides the frontend styles. We plan to move all styles here to build multiple themes;   <br>
-`  ╠═ uploaders/` Handling of the uploaded files<br>
-`  ╠═ validators/` Custom data validation (before saving);<br>
-`  ╠═ views/` Views (MVC)<br>
-`  ╚═ workers/` Asynchronous tasks run by Sidekiq
+`  ╠═ controllers/` Controllers (MVC);<br>
+`  ╠═ doc/` Documentation for the OpenAPI;<br>
+`  ╠═ exceptions/` Custom errors;<br>
+`  ╠═ frontend/` **Source code for the frontend application**; <br>
+`  ╠═ helpers/` System-wide libraries and utilities. Prefer using `services/` when it's possible;<br>
+`  ╠═ mailers/` Sending emails;<br>
+`  ╠═ models/` Models (MVC);<br>
+`  ╠═ pdfs/` PDF documents generation;<br>
+`  ╠═ policies/` Access policies for the API and OpenAPI endpoints;<br>
+`  ╠═ services/` Utilities arranged by data models; <br>
+`  ╠═ sweepers/` Build cached version of some data;<br>
+`  ╠═ themes/` SASS files that overrides the frontend styles. We plan to move all styles here to build multiple themes;   <br>
+`  ╠═ uploaders/` Handling of the uploaded files<br>
+`  ╠═ validators/` Custom data validation (before saving);<br>
+`  ╠═ views/` Views (MVC)<br>
+`  ╚═ workers/` Asynchronous tasks run by Sidekiq
 
 ## Frontend application
 
@@ -94,22 +94,22 @@ For now, the main application is still using Angular.js but it uses some React.j
 
 `fab-manager/`<br>
 `╚═╦ app/`<br>
-`  ╚═╦ frontend/`<br>
-`    ╠═ images/` Static images used all over the frontend app;<br>
-`    ╠═ packs/` Entry points for webpack (bundler);<br>
-`    ╠═╦ src/`<br>
-`    ║ ╠═╦ javascript/`<br>
-`    ║ ║ ╠═ api/` (TS) New components to access the backend API; <br>
-`    ║ ║ ╠═ components/` (TS) New React.js components;<br>
-`    ║ ║ ╠═ controllers/` (JS) Old Angular.js controllers for the views located in `app/frontend/templates`;<br>
-`    ║ ║ ╠═ directives/` (JS) Old Angular.js directives (interface components);<br>
-`    ║ ║ ╠═ filters/` (JS) Old Angular.js filters (processors transforming data);<br>
-`    ║ ║ ╠═ lib/` (TS) New utilities + (JS) Old external libraries customized; <br>
-`    ║ ║ ╠═ models/` (TS) Typed interfaces reflecting the API data models;<br>
-`    ║ ║ ╠═ services/` (JS) Old Angular.js components to access the backend API; <br>
-`    ║ ║ ╠═ typings/` (TS) Typed modules for non-JS/TS file types;<br>
-`    ║ ║ ╠═ app.js` Entrypoint for the angular.js application;<br>
-`    ║ ║ ╠═ plugins.js.erb` Entrypoint for embedding Fab-manager's plugins in the frontend application;<br>
-`    ║ ║ ╚═ router.js` Configuration for UI-Router (mapping between routes, controllers and templates)<br>
-`    ║ ╚═ stylesheets/` SASS source for the application style<br>
-`    ╚═ templates/` Angular.js views (HTML) 
+`  ╚═╦ frontend/`<br>
+`    ╠═ images/` Static images used all over the frontend app;<br>
+`    ╠═ packs/` Entry points for webpack (bundler);<br>
+`    ╠═╦ src/`<br>
+`    ║ ╠═╦ javascript/`<br>
+`    ║ ║ ╠═ api/` (TS) New components to access the backend API; <br>
+`    ║ ║ ╠═ components/` (TS) New React.js components;<br>
+`    ║ ║ ╠═ controllers/` (JS) Old Angular.js controllers for the views located in `app/frontend/templates`;<br>
+`    ║ ║ ╠═ directives/` (JS) Old Angular.js directives (interface components);<br>
+`    ║ ║ ╠═ filters/` (JS) Old Angular.js filters (processors transforming data);<br>
+`    ║ ║ ╠═ lib/` (TS) New utilities + (JS) Old external libraries customized; <br>
+`    ║ ║ ╠═ models/` (TS) Typed interfaces reflecting the API data models;<br>
+`    ║ ║ ╠═ services/` (JS) Old Angular.js components to access the backend API; <br>
+`    ║ ║ ╠═ typings/` (TS) Typed modules for non-JS/TS file types;<br>
+`    ║ ║ ╠═ app.js` Entrypoint for the angular.js application;<br>
+`    ║ ║ ╠═ plugins.js.erb` Entrypoint for embedding Fab-manager's plugins in the frontend application;<br>
+`    ║ ║ ╚═ router.js` Configuration for UI-Router (mapping between routes, controllers and templates)<br>
+`    ║ ╚═ stylesheets/` SASS source for the application style<br>
+`    ╚═ templates/` Angular.js views (HTML) 
