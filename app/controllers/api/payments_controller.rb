@@ -89,8 +89,8 @@ class API::PaymentsController < API::ApiController
     end
 
     render generate_payment_response(intent, res)
-  rescue Stripe::InvalidRequestError
-    render json: { error: 'no such setup intent' }, status: :unprocessable_entity
+  rescue Stripe::InvalidRequestError => e
+    render json: e, status: :unprocessable_entity
   end
 
   private
@@ -105,7 +105,7 @@ class API::PaymentsController < API::ApiController
     is_reserve = Reservations::Reserve.new(user_id, current_user.invoicing_profile.id)
                                       .pay_and_save(@reservation,
                                                     payment_details: details,
-                                                    payment_intent_id: intent.id,
+                                                    intent_id: intent.id,
                                                     schedule: params[:cart_items][:reservation][:payment_schedule],
                                                     payment_method: params[:cart_items][:reservation][:payment_method])
     if intent.class == Stripe::PaymentIntent
@@ -135,7 +135,7 @@ class API::PaymentsController < API::ApiController
     is_subscribe = Subscriptions::Subscribe.new(current_user.invoicing_profile.id, user_id)
                                            .pay_and_save(@subscription,
                                                          payment_details: details,
-                                                         payment_intent_id: intent.id,
+                                                         intent_id: intent.id,
                                                          schedule: params[:cart_items][:subscription][:payment_schedule],
                                                          payment_method: 'stripe')
     if intent.class == Stripe::PaymentIntent
@@ -187,6 +187,11 @@ class API::PaymentsController < API::ApiController
       slots = cart_items_params[:slots_attributes] || []
       nb_places = cart_items_params[:nb_reserve_places]
       tickets = cart_items_params[:tickets_attributes]
+      user_id = if current_user.admin? || current_user.manager?
+                  params[:cart_items][:reservation][:user_id]
+                else
+                  current_user.id
+                end
     else
       raise NotImplementedError unless params[:cart_items][:subscription]
 
@@ -195,10 +200,15 @@ class API::PaymentsController < API::ApiController
       slots = []
       nb_places = nil
       tickets = nil
+      user_id = if current_user.admin? || current_user.manager?
+                  params[:cart_items][:subscription][:user_id]
+                else
+                  current_user.id
+                end
     end
 
     price_details = Price.compute(false,
-                                  current_user,
+                                  User.find(user_id),
                                   reservable,
                                   slots,
                                   plan_id: plan_id,

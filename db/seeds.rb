@@ -883,6 +883,8 @@ Setting.set('stripe_currency', 'EUR') unless Setting.find_by(name: 'stripe_curre
 
 Setting.set('invoice_prefix', 'FabManager_invoice') unless Setting.find_by(name: 'invoice_prefix').try(:value)
 
+Setting.set('payment_schedule_prefix', 'FabManager_paymentSchedule') unless Setting.find_by(name: 'payment_schedule_prefix').try(:value)
+
 Setting.set('confirmation_required', false) unless Setting.find_by(name: 'confirmation_required').try(:value)
 
 Setting.set('wallet_module', true) unless Setting.find_by(name: 'wallet_module').try(:value)

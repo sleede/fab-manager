@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-# Provides methods to generate Invoice or PaymentSchedule references
-class InvoiceReferenceService
+# Provides methods to generate Invoice, Avoir or PaymentSchedule references
+class PaymentDocumentService
   class << self
-    def generate_reference(invoice, date: DateTime.current, avoir: false, payment_schedule: false)
+    def generate_reference(document, date: DateTime.current)
       pattern = Setting.get('invoice_reference')
 
       reference = replace_invoice_number_pattern(pattern)
       reference = replace_date_pattern(reference, date)
 
-      if avoir
+      if document.class == Avoir
         # information about refund/avoir (R[text])
         reference.gsub!(/R\[([^\]]+)\]/, '\1')
 
@@ -17,16 +17,16 @@ class InvoiceReferenceService
         reference.gsub!(/X\[([^\]]+)\]/, ''.to_s)
         # remove information about payment schedule (S[text])
         reference.gsub!(/S\[([^\]]+)\]/, ''.to_s)
-      elsif payment_schedule
+      elsif document.class == PaymentSchedule
         # information about payment schedule
         reference.gsub!(/S\[([^\]]+)\]/, '\1')
         # remove information about online selling (X[text])
         reference.gsub!(/X\[([^\]]+)\]/, ''.to_s)
         # remove information about refunds (R[text])
         reference.gsub!(/R\[([^\]]+)\]/, ''.to_s)
-      else
+      elsif document.class == Invoice
         # information about online selling (X[text])
-        if invoice.paid_with_stripe?
+        if document.paid_with_stripe?
           reference.gsub!(/X\[([^\]]+)\]/, '\1')
         else
           reference.gsub!(/X\[([^\]]+)\]/, ''.to_s)
@@ -36,6 +36,8 @@ class InvoiceReferenceService
         reference.gsub!(/R\[([^\]]+)\]/, ''.to_s)
         # remove information about payment schedule (S[text])
         reference.gsub!(/S\[([^\]]+)\]/, ''.to_s)
+      else
+        raise TypeError
       end
 
       reference
@@ -44,7 +46,7 @@ class InvoiceReferenceService
     def generate_order_number(invoice)
       pattern = Setting.get('invoice_order-nb')
 
-      # global invoice number (nn..nn)
+      # global document number (nn..nn)
       reference = pattern.gsub(/n+(?![^\[]*\])/) do |match|
         pad_and_truncate(number_of_invoices('global'), match.to_s.length)
       end
@@ -119,21 +121,21 @@ class InvoiceReferenceService
     end
 
     ##
-    # Replace the invoice number elements in the provided pattern with counts from the database
+    # Replace the document number elements in the provided pattern with counts from the database
     # @param reference {string}
     ##
     def replace_invoice_number_pattern(reference)
       copy = reference.dup
 
-      # invoice number per year (yy..yy)
+      # document number per year (yy..yy)
       copy.gsub!(/y+(?![^\[]*\])/) do |match|
         pad_and_truncate(number_of_invoices('year'), match.to_s.length)
       end
-      # invoice number per month (mm..mm)
+      # document number per month (mm..mm)
       copy.gsub!(/m+(?![^\[]*\])/) do |match|
         pad_and_truncate(number_of_invoices('month'), match.to_s.length)
       end
-      # invoice number per day (dd..dd)
+      # document number per day (dd..dd)
       copy.gsub!(/d+(?![^\[]*\])/) do |match|
         pad_and_truncate(number_of_invoices('day'), match.to_s.length)
       end

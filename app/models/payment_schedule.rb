@@ -2,7 +2,9 @@
 
 # PaymentSchedule is a way for members to pay something (especially a Subscription) with multiple payment,
 # staged on a long period rather than with a single payment
-class PaymentSchedule < ApplicationRecord
+class PaymentSchedule < PaymentDocument
+  require 'fileutils'
+
   belongs_to :scheduled, polymorphic: true
   belongs_to :wallet_transaction
   belongs_to :coupon
@@ -16,6 +18,25 @@ class PaymentSchedule < ApplicationRecord
 
   before_create :add_environment
   after_create :update_reference, :chain_record
+  after_commit :generate_and_send_document, on: [:create], if: :persisted?
+
+  def file
+    dir = "payment_schedules/#{invoicing_profile.id}"
+
+    # create directories if they doesn't exists (payment_schedules & invoicing_profile_id)
+    FileUtils.mkdir_p dir
+    "#{dir}/#{filename}"
+  end
+
+  def filename
+    prefix = Setting.find_by(name: 'payment_schedule_prefix').value_at(created_at)
+    prefix ||= if created_at < Setting.find_by(name: 'payment_schedule_prefix').first_update
+                 Setting.find_by(name: 'payment_schedule_prefix').first_value
+               else
+                 Setting.get('payment_schedule_prefix')
+               end
+    "#{prefix}-#{id}_#{created_at.strftime('%d%m%Y')}.pdf"
+  end
 
   ##
   # This is useful to check the first item because its amount may be different from the others
@@ -24,37 +45,19 @@ class PaymentSchedule < ApplicationRecord
     payment_schedule_items.order(due_date: :asc)
   end
 
-  def add_environment
-    self.environment = Rails.env
-  end
-
-  def update_reference
-    self.reference = InvoiceReferenceService.generate_reference(self, payment_schedule: true)
-    save
-  end
-
-  def set_wallet_transaction(amount, transaction_id)
-    raise InvalidFootprintError unless check_footprint
-
-    update_columns(wallet_amount: amount, wallet_transaction_id: transaction_id)
-    chain_record
-  end
-
-  def chain_record
-    self.footprint = compute_footprint
-    save!
-    FootprintDebug.create!(
-      footprint: footprint,
-      data: FootprintService.footprint_data(PaymentSchedule, self),
-      klass: PaymentSchedule.name
-    )
-  end
-
-  def compute_footprint
-    FootprintService.compute_footprint(PaymentSchedule, self)
-  end
-
   def check_footprint
     payment_schedule_items.map(&:check_footprint).all? && footprint == compute_footprint
+  end
+
+  private
+
+  def generate_and_send_document
+    return unless Setting.get('invoicing_module')
+
+    unless Rails.env.test?
+      puts "Creating an PaymentScheduleWorker job to generate the following payment schedule: id(#{id}), scheduled_id(#{scheduled_id}), " \
+           "scheduled_type(#{scheduled_type}), user_id(#{invoicing_profile.user_id})"
+    end
+    PaymentScheduleWorker.perform_async(id)
   end
 end

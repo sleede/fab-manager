@@ -15,6 +15,7 @@ export interface User {
   role: UserRole
   name: string,
   need_completion: boolean,
+  ip_address: string,
   profile: {
     id: number,
     first_name: string,

@@ -178,6 +178,7 @@ const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuc
         <StripeForm onSubmit={handleSubmit}
                     onSuccess={handleFormSuccess}
                     onError={handleFormError}
+                    operator={currentUser}
                     className="stripe-form"
                     cartItems={cartItems}
                     customer={customer}

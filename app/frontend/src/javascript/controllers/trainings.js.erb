@@ -462,6 +462,9 @@ Application.Controllers.controller('ReserveTrainingController', ['$scope', '$sta
      */
     const refetchCalendar = function () {
       uiCalendarConfig.calendars.calendar.fullCalendar('refetchEvents');
+      setTimeout(() => {
+        uiCalendarConfig.calendars.calendar.fullCalendar('rerenderEvents');
+      }, 200);
     };
 
     // !!! MUST BE CALLED AT THE END of the controller

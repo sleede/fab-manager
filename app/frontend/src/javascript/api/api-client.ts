@@ -19,15 +19,21 @@ client.interceptors.response.use(function (response) {
 });
 
 function extractHumanReadableMessage(error: any): string {
-  if (error.match(/^<!DOCTYPE html>/)) {
-    // parse ruby error pages
-    const parser = new DOMParser();
-    const htmlDoc = parser.parseFromString(error, 'text/html');
-    return htmlDoc.querySelector('h2').textContent;
+  if (typeof error === 'string') {
+    if (error.match(/^<!DOCTYPE html>/)) {
+      // parse ruby error pages
+      const parser = new DOMParser();
+      const htmlDoc = parser.parseFromString(error, 'text/html');
+      if (htmlDoc.querySelectorAll('h2').length > 2) {
+        return htmlDoc.querySelector('h2').textContent;
+      } else {
+        return htmlDoc.querySelector('h1').textContent;
+      }
+    }
+    return error;
   }
 
-  if (typeof error === 'string') return error;
-
+  // parse Rails errors (as JSON)
   let message = '';
   if (error instanceof Object) {
     // iterate through all the keys to build the message

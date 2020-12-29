@@ -4,7 +4,7 @@ require 'checksum'
 
 # Invoice correspond to a single purchase made by an user. This purchase may
 # include reservation(s) and/or a subscription
-class Invoice < ApplicationRecord
+class Invoice < PaymentDocument
   include NotifyWith::NotificationAttachedObject
   require 'fileutils'
   scope :only_invoice, -> { where(type: nil) }
@@ -41,30 +41,21 @@ class Invoice < ApplicationRecord
   end
 
   def filename
-    prefix = Setting.find_by(name: 'invoice_prefix').history_values.order(created_at: :desc).where('created_at <= ?', created_at).limit(1).first
-    prefix ||= if created_at < Setting.find_by(name: 'invoice_prefix').history_values.order(created_at: :asc).limit(1).first.created_at
-                 Setting.find_by(name: 'invoice_prefix').history_values.order(created_at: :asc).limit(1).first
+    prefix = Setting.find_by(name: 'invoice_prefix').value_at(created_at)
+    prefix ||= if created_at < Setting.find_by(name: 'invoice_prefix').first_update
+                 Setting.find_by(name: 'invoice_prefix').first_value
                else
-                 Setting.find_by(name: 'invoice_prefix')..history_values.order(created_at: :desc).limit(1).first
+                 Setting.get('invoice_prefix')
                end
-    "#{prefix.value}-#{id}_#{created_at.strftime('%d%m%Y')}.pdf"
+    "#{prefix}-#{id}_#{created_at.strftime('%d%m%Y')}.pdf"
   end
 
   def user
     invoicing_profile.user
   end
 
-  def generate_reference
-    self.reference = InvoiceReferenceService.generate_reference(self)
-  end
-
-  def update_reference
-    generate_reference
-    save
-  end
-
   def order_number
-    InvoiceReferenceService.generate_order_number(self)
+    PaymentDocumentService.generate_order_number(self)
   end
 
   # for debug & used by rake task "fablab:maintenance:regenerate_invoices"
@@ -74,7 +65,7 @@ class Invoice < ApplicationRecord
   end
 
   def build_avoir(attrs = {})
-    raise Exception if refunded? == true || prevent_refund?
+    raise CannotRefundError if refunded? == true || prevent_refund?
 
     avoir = Avoir.new(dup.attributes)
     avoir.type = 'Avoir'
@@ -168,33 +159,8 @@ class Invoice < ApplicationRecord
     res
   end
 
-  def add_environment
-    self.environment = Rails.env
-  end
-
-  def chain_record
-    self.footprint = compute_footprint
-    save!
-    FootprintDebug.create!(
-      footprint: footprint,
-      data: FootprintService.footprint_data(Invoice, self),
-      klass: Invoice.name
-    )
-  end
-
   def check_footprint
     invoice_items.map(&:check_footprint).all? && footprint == compute_footprint
-  end
-
-  def debug_footprint
-    FootprintService.debug_footprint(Invoice, self)
-  end
-
-  def set_wallet_transaction(amount, transaction_id)
-    raise InvalidFootprintError unless check_footprint
-
-    update_columns(wallet_amount: amount, wallet_transaction_id: transaction_id)
-    chain_record
   end
 
   def paid_with_stripe?
@@ -211,10 +177,6 @@ class Invoice < ApplicationRecord
            "invoiced_type(#{invoiced_type}), user_id(#{invoicing_profile.user_id})"
     end
     InvoiceWorker.perform_async(id, user&.subscription&.expired_at)
-  end
-
-  def compute_footprint
-    FootprintService.compute_footprint(Invoice, self)
   end
 
   def log_changes

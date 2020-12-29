@@ -8,6 +8,7 @@ class CreatePaymentSchedules < ActiveRecord::Migration[5.2]
       t.references :scheduled, polymorphic: true
       t.integer :total
       t.string :stp_subscription_id
+      t.string :stp_setup_intent_id
       t.string :reference
       t.string :payment_method
       t.integer :wallet_amount

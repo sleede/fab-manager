@@ -45,7 +45,7 @@ Application.Filters.filter('machineFilter', [function () {
   };
 }]);
 
-Application.Filters.filter('projectMemberFilter', [ 'Auth', function (Auth) {
+Application.Filters.filter('projectMemberFilter', ['Auth', function (Auth) {
   return function (projects, selectedMember) {
     if (!angular.isUndefined(projects) && angular.isDefined(selectedMember) && (projects != null) && (selectedMember != null) && (selectedMember !== '')) {
       const filteredProject = [];
@@ -165,7 +165,7 @@ Application.Filters.filter('simpleText', [function () {
   };
 }]);
 
-Application.Filters.filter('toTrusted', [ '$sce', function ($sce) {
+Application.Filters.filter('toTrusted', ['$sce', function ($sce) {
   return text => $sce.trustAsHtml(text);
 }]);
 
@@ -178,7 +178,7 @@ Application.Filters.filter('humanReadablePlanName', ['$filter', function ($filte
     if (plan != null) {
       let result = plan.base_name;
       if (groups != null) {
-        for (let group of Array.from(groups)) {
+        for (const group of Array.from(groups)) {
           if (group.id === plan.group_id) {
             if (short != null) {
               result += ` - ${group.slug}`;
@@ -318,7 +318,7 @@ Application.Filters.filter('toIsoDate', [function () {
   };
 }]);
 
-Application.Filters.filter('booleanFormat', [ '_t', function (_t) {
+Application.Filters.filter('booleanFormat', ['_t', function (_t) {
   return function (boolean) {
     if (((typeof boolean === 'boolean') && boolean) || ((typeof boolean === 'string') && (boolean === 'true'))) {
       return _t('app.shared.buttons.yes');
@@ -328,7 +328,7 @@ Application.Filters.filter('booleanFormat', [ '_t', function (_t) {
   };
 }]);
 
-Application.Filters.filter('maxCount', [ '_t', function (_t) {
+Application.Filters.filter('maxCount', ['_t', function (_t) {
   return function (max) {
     if ((typeof max === 'undefined') || (max === null) || ((typeof max === 'number') && (max === 0))) {
       return _t('app.admin.pricing.unlimited');

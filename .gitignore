@@ -34,6 +34,9 @@
 # PDF invoices
 /invoices/*
 
+# PDF Payment Schedules
+/payment_schedules/*
+
 # XLSX exports
 /exports/*
 

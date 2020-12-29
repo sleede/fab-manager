@@ -78,11 +78,11 @@ CREATE FUNCTION public.fill_search_vector_for_project() RETURNS trigger
         select string_agg(description, ' ') as content into step_description from project_steps where project_id = new.id;
 
         new.search_vector :=
-          setweight(to_tsvector('pg_catalog.french', unaccent(coalesce(new.name, ''))), 'A') ||
-          setweight(to_tsvector('pg_catalog.french', unaccent(coalesce(new.tags, ''))), 'B') ||
-          setweight(to_tsvector('pg_catalog.french', unaccent(coalesce(new.description, ''))), 'D') ||
-          setweight(to_tsvector('pg_catalog.french', unaccent(coalesce(step_title.title, ''))), 'C') ||
-          setweight(to_tsvector('pg_catalog.french', unaccent(coalesce(step_description.content, ''))), 'D');
+          setweight(to_tsvector('pg_catalog.simple', unaccent(coalesce(new.name, ''))), 'A') ||
+          setweight(to_tsvector('pg_catalog.simple', unaccent(coalesce(new.tags, ''))), 'B') ||
+          setweight(to_tsvector('pg_catalog.simple', unaccent(coalesce(new.description, ''))), 'D') ||
+          setweight(to_tsvector('pg_catalog.simple', unaccent(coalesce(step_title.title, ''))), 'C') ||
+          setweight(to_tsvector('pg_catalog.simple', unaccent(coalesce(step_description.content, ''))), 'D');
 
         return new;
       end
@@ -108,8 +108,8 @@ SET default_tablespace = '';
 
 CREATE TABLE public.abuses (
     id integer NOT NULL,
-    signaled_type character varying,
     signaled_id integer,
+    signaled_type character varying,
     first_name character varying,
     last_name character varying,
     email character varying,
@@ -187,8 +187,8 @@ CREATE TABLE public.addresses (
     locality character varying,
     country character varying,
     postal_code character varying,
-    placeable_type character varying,
     placeable_id integer,
+    placeable_type character varying,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -263,8 +263,8 @@ CREATE TABLE public.ar_internal_metadata (
 
 CREATE TABLE public.assets (
     id integer NOT NULL,
-    viewable_type character varying,
     viewable_id integer,
+    viewable_type character varying,
     attachment character varying,
     type character varying,
     created_at timestamp without time zone,
@@ -504,8 +504,8 @@ ALTER SEQUENCE public.coupons_id_seq OWNED BY public.coupons.id;
 
 CREATE TABLE public.credits (
     id integer NOT NULL,
-    creditable_type character varying,
     creditable_id integer,
+    creditable_type character varying,
     plan_id integer,
     hours integer,
     created_at timestamp without time zone,
@@ -1046,8 +1046,8 @@ ALTER SEQUENCE public.invoice_items_id_seq OWNED BY public.invoice_items.id;
 
 CREATE TABLE public.invoices (
     id integer NOT NULL,
-    invoiced_type character varying,
     invoiced_id integer,
+    invoiced_type character varying,
     stp_invoice_id character varying,
     total integer,
     created_at timestamp without time zone,
@@ -1227,15 +1227,15 @@ ALTER SEQUENCE public.machines_id_seq OWNED BY public.machines.id;
 CREATE TABLE public.notifications (
     id integer NOT NULL,
     receiver_id integer,
-    attached_object_type character varying,
     attached_object_id integer,
+    attached_object_type character varying,
     notification_type_id integer,
     is_read boolean DEFAULT false,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     receiver_type character varying,
     is_send boolean DEFAULT false,
-    meta_data jsonb DEFAULT '"{}"'::jsonb
+    meta_data jsonb DEFAULT '{}'::jsonb
 );
 
 
@@ -1470,6 +1470,7 @@ CREATE TABLE public.payment_schedule_items (
     id bigint NOT NULL,
     amount integer,
     due_date timestamp without time zone,
+    state character varying DEFAULT 'new'::character varying,
     details jsonb DEFAULT '"{}"'::jsonb,
     payment_schedule_id bigint,
     invoice_id bigint,
@@ -1508,6 +1509,7 @@ CREATE TABLE public.payment_schedules (
     scheduled_id bigint,
     total integer,
     stp_subscription_id character varying,
+    stp_setup_intent_id character varying,
     reference character varying,
     payment_method character varying,
     wallet_amount integer,
@@ -1657,8 +1659,8 @@ CREATE TABLE public.prices (
     id integer NOT NULL,
     group_id integer,
     plan_id integer,
-    priceable_type character varying,
     priceable_id integer,
+    priceable_type character varying,
     amount integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
@@ -1973,8 +1975,8 @@ CREATE TABLE public.reservations (
     message text,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    reservable_type character varying,
     reservable_id integer,
+    reservable_type character varying,
     nb_reserve_places integer,
     statistic_profile_id integer
 );
@@ -2006,8 +2008,8 @@ ALTER SEQUENCE public.reservations_id_seq OWNED BY public.reservations.id;
 CREATE TABLE public.roles (
     id integer NOT NULL,
     name character varying,
-    resource_type character varying,
     resource_id integer,
+    resource_type character varying,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -2943,8 +2945,8 @@ CREATE TABLE public.users_roles (
 CREATE TABLE public.wallet_transactions (
     id integer NOT NULL,
     wallet_id integer,
-    transactable_type character varying,
     transactable_id integer,
+    transactable_type character varying,
     transaction_type character varying,
     amount integer,
     created_at timestamp without time zone NOT NULL,
@@ -4034,14 +4036,6 @@ ALTER TABLE ONLY public.roles
 
 
 --
--- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.schema_migrations
-    ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
-
-
---
 -- Name: settings settings_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5106,6 +5100,29 @@ CREATE INDEX projects_search_vector_idx ON public.projects USING gin (search_vec
 
 
 --
+-- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX unique_schema_migrations ON public.schema_migrations USING btree (version);
+
+
+--
+-- Name: accounting_periods accounting_periods_del_protect; Type: RULE; Schema: public; Owner: -
+--
+
+CREATE RULE accounting_periods_del_protect AS
+    ON DELETE TO public.accounting_periods DO INSTEAD NOTHING;
+
+
+--
+-- Name: accounting_periods accounting_periods_upd_protect; Type: RULE; Schema: public; Owner: -
+--
+
+CREATE RULE accounting_periods_upd_protect AS
+    ON UPDATE TO public.accounting_periods DO INSTEAD NOTHING;
+
+
+--
 -- Name: projects projects_search_content_trigger; Type: TRIGGER; Schema: public; Owner: -
 --
 
@@ -5639,6 +5656,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20140605125131'),
 ('20140605142133'),
 ('20140605151442'),
+('20140606133116'),
 ('20140609092700'),
 ('20140609092827'),
 ('20140610153123'),
@@ -5707,12 +5725,14 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20150507075620'),
 ('20150512123546'),
 ('20150520132030'),
+('20150520133409'),
 ('20150526130729'),
 ('20150527153312'),
 ('20150529113555'),
 ('20150601125944'),
 ('20150603104502'),
 ('20150603104658'),
+('20150603133050'),
 ('20150604081757'),
 ('20150604131525'),
 ('20150608142234'),
@@ -5794,6 +5814,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20160905142700'),
 ('20160906094739'),
 ('20160906094847'),
+('20160906145713'),
 ('20160915105234'),
 ('20161123104604'),
 ('20170109085345'),

@@ -3,6 +3,7 @@
 ## Next release
 - Refactored theme builder to use scss files
 - Updated stripe gem to 5.21.0
+- Architecture documentation
 - Fix a bug: unable to access embedded plan views
 - Fix a bug: warning message overflow in credit wallet modal
 - Fix a bug: when using a cash coupon, the amount shown in the statistics is invalid
@@ -10,8 +11,10 @@
 - [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
 - [TODO DEPLOY] `rails fablab:stripe:set_product_id`
 - [TODO DEPLOY] `rails fablab:setup:add_schedule_reference`
+- [TODO DEPLOY] `rails db:seed`
 - [TODO DEPLOY] add the `INTL_LOCALE` environment variable (see [doc/environment.md](doc/environment.md#INTL_LOCALE) for configuration details)
 - [TODO DEPLOY] add the `INTL_CURRENCY` environment variable (see [doc/environment.md](doc/environment.md#INTL_CURRENCY) for configuration details)
+- [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/mount-payment-schedules.sh | bash`
 
 ## v4.6.5 2020 December 07
 - Fix a bug: unable to run the upgrade script with docker-compose >= v1.19

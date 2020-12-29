@@ -724,11 +724,19 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     assert_equal payment_schedule_count + 1, PaymentSchedule.count, 'missing the payment schedule'
     assert_equal payment_schedule_items_count + 12, PaymentScheduleItem.count, 'missing some payment schedule items'
 
+    # get the objects
+    reservation = Reservation.last
+    payment_schedule = PaymentSchedule.last
+
     # subscription assertions
     assert_equal 1, @user_without_subscription.subscriptions.count
     assert_not_nil @user_without_subscription.subscribed_plan, "user's subscribed plan was not found"
     assert_not_nil @user_without_subscription.subscription, "user's subscription was not found"
     assert_equal plan.id, @user_without_subscription.subscribed_plan.id, "user's plan does not match"
+
+    # reservation assertions
+    assert reservation.payment_schedule
+    assert_equal payment_schedule.scheduled, reservation
 
     # Check the answer
     reservation = json_response(response.body)
