@@ -8,23 +8,25 @@ import { react2angular } from 'react2angular';
 import { IApplication } from '../models/application';
 import '../lib/i18n';
 import { Loader } from './loader';
-import { Reservation } from '../models/reservation';
 import { User } from '../models/user';
 import { Wallet } from '../models/wallet';
 import { IFablab } from '../models/fablab';
 import WalletLib from '../lib/wallet';
+import { CartItems } from '../models/payment';
+import { Reservation } from '../models/reservation';
+import { SubscriptionRequest } from '../models/subscription';
 
 declare var Application: IApplication;
 declare var Fablab: IFablab;
 
 interface WalletInfoProps {
-  reservation: Reservation,
+  cartItems: CartItems,
   currentUser: User,
   wallet: Wallet,
   price: number,
 }
 
-export const WalletInfo: React.FC<WalletInfoProps> = ({reservation, currentUser, wallet, price}) => {
+export const WalletInfo: React.FC<WalletInfoProps> = ({ cartItems, currentUser, wallet, price }) => {
   const { t } = useTranslation('shared');
   const [remainingPrice, setRemainingPrice] = useState(0);
 
@@ -34,20 +36,26 @@ export const WalletInfo: React.FC<WalletInfoProps> = ({reservation, currentUser,
   useEffect(() => {
     const wLib = new WalletLib(wallet);
     setRemainingPrice(wLib.computeRemainingPrice(price));
-  })
+  });
 
   /**
-   * Return the formatted localized amount for the given price (eg. 20.5 => "20,50 €")
+   * Return the formatted localized amount for the given price (e.g. 20.5 => "20,50 €")
    */
   const formatPrice = (price: number): string => {
     return new Intl.NumberFormat(Fablab.intl_locale, {style: 'currency', currency: Fablab.intl_currency}).format(price);
   }
   /**
    * Check if the currently connected used is also the person making the reservation.
-   * If the currently connected user (ie. the operator), is an admin or a manager, he may book the reservation for someone else.
+   * If the currently connected user (i.e. the operator), is an admin or a manager, he may book the reservation for someone else.
    */
   const isOperatorAndClient = (): boolean => {
-    return currentUser.id == reservation.user_id;
+    return currentUser.id == buyingItem().user_id;
+  }
+  /**
+   * Return the item currently bought (reservation or subscription)
+   */
+  const buyingItem = (): Reservation|SubscriptionRequest => {
+    return cartItems.reservation || cartItems.subscription;
   }
   /**
    * If the client has some money in his wallet & the price is not zero, then we should display this component.
@@ -66,17 +74,17 @@ export const WalletInfo: React.FC<WalletInfoProps> = ({reservation, currentUser,
    * Does the current cart contains a payment schedule?
    */
   const isPaymentSchedule = (): boolean => {
-    return reservation.plan_id && reservation.payment_schedule;
+    return buyingItem().plan_id && buyingItem().payment_schedule;
   }
   /**
    * Return the human-readable name of the item currently bought with the wallet
    */
   const getPriceItem = (): string => {
     let item = 'other';
-    if (reservation.slots_attributes.length > 0) {
+    if (cartItems.reservation) {
       item = 'reservation';
-    } else if (reservation.plan_id) {
-      if (reservation.payment_schedule) {
+    } else if (cartItems.subscription) {
+      if (cartItems.subscription.payment_schedule) {
         item = 'first_deadline';
       } else item = 'subscription';
     }
@@ -120,12 +128,12 @@ export const WalletInfo: React.FC<WalletInfoProps> = ({reservation, currentUser,
   );
 }
 
-const WalletInfoWrapper: React.FC<WalletInfoProps> = ({currentUser, reservation, price, wallet}) => {
+const WalletInfoWrapper: React.FC<WalletInfoProps> = ({ currentUser, cartItems, price, wallet }) => {
   return (
     <Loader>
-      <WalletInfo currentUser={currentUser} reservation={reservation} price={price} wallet={wallet}/>
+      <WalletInfo currentUser={currentUser} cartItems={cartItems} price={price} wallet={wallet}/>
     </Loader>
   );
 }
 
-Application.Components.component('walletInfo', react2angular(WalletInfoWrapper, ['currentUser', 'price', 'reservation', 'wallet']));
+Application.Components.component('walletInfo', react2angular(WalletInfoWrapper, ['currentUser', 'price', 'cartItems', 'wallet']));
