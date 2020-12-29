@@ -32,6 +32,9 @@ If you intend to translate Fab-manager to a new, or an already supported languag
 
 ### Developer's documentation
 The following guides should help those who want to contribute to the code.
+#### Architecture
+- [Code architecture](architecture.md)
+
 #### How to setup a development environment
 - [With docker-compose](development_readme.md)
 

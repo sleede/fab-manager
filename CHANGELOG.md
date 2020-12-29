@@ -3,6 +3,7 @@
 ## Next release
 - Refactored theme builder to use scss files
 - Updated stripe gem to 5.21.0
+- Architecture documentation
 - Fix a bug: unable to access embedded plan views
 - Fix a bug: warning message overflow in credit wallet modal
 - Fix a bug: when using a cash coupon, the amount shown in the statistics is invalid
