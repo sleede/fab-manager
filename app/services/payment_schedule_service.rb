@@ -10,13 +10,8 @@ class PaymentScheduleService
   ##
   def compute(plan, total, coupon = nil)
     other_items = total - plan.amount
-    price = if coupon
-              cs = CouponService.new
-              other_items = cs.ventilate(total, other_items, coupon)
-              cs.ventilate(total, plan.amount, coupon)
-            else
-              plan.amount
-            end
+    # base monthly price of the plan
+    price = plan.amount
     ps = PaymentSchedule.new(scheduled: plan, total: price + other_items, coupon: coupon)
     deadlines = plan.duration / 1.month
     per_month = (price / deadlines).truncate
@@ -36,6 +31,13 @@ class PaymentScheduleService
                else
                  per_month
                end
+      if coupon
+        cs = CouponService.new
+        if (coupon.validity_per_user == 'once' && i.zero?) || coupon.validity_per_user == 'forever'
+          details[:without_coupon] = amount
+          amount = cs.apply(amount, coupon)
+        end
+      end
       items.push PaymentScheduleItem.new(
         amount: amount,
         due_date: date,

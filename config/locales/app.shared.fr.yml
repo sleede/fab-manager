@@ -371,6 +371,7 @@ fr:
         code_: "Code :"
         the_coupon_has_been_applied_you_get_PERCENT_discount: "Le code promo a bien été appliqué. Vous bénéficiez d'une remise de {PERCENT} %."
         the_coupon_has_been_applied_you_get_AMOUNT_CURRENCY: "Le code promo a bien été appliqué. Vous bénéficiez d'une remise de {AMOUNT} {CURRENCY}."
+        coupon_validity_once: "Ce code promo n'est valide qu'une seule fois. En cas de paiement échelonné, seulement pour la première échéance."
         unable_to_apply_the_coupon_because_disabled: "Impossible d'appliquer la réduction : ce code promo a été désactivé."
         unable_to_apply_the_coupon_because_expired: "Impossible d'appliquer la réduction : ce code promo a expiré."
         unable_to_apply_the_coupon_because_sold_out: "Impossible d'appliquer la réduction : ce code promo a atteint son quota."

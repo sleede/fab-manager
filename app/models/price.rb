@@ -145,15 +145,13 @@ class Price < ApplicationRecord
       total_amount = cs.apply(total_amount, cp)
 
       # == generate PaymentSchedule (if applicable) ===
-      schedule = if options[:payment_schedule] && plan.monthly_payment
+      schedule = if options[:payment_schedule] && plan&.monthly_payment
                    PaymentScheduleService.new.compute(plan, _amount_no_coupon, cp)
                  else
                    nil
                  end
-      if schedule
-        total_amount -= schedule[:payment_schedule].total
-        total_amount += schedule[:items][0].amount
-      end
+
+      total_amount = schedule[:items][0].amount if schedule
 
       # return result
       {

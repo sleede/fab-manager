@@ -371,6 +371,7 @@ en:
         code_: "Code:"
         the_coupon_has_been_applied_you_get_PERCENT_discount: "The coupon has been applied. You get a {PERCENT}% discount."
         the_coupon_has_been_applied_you_get_AMOUNT_CURRENCY: "The coupon has been applied. You get a discount of {AMOUNT} {CURRENCY}."
+        coupon_validity_once: "This coupon is valid only once. In case of payment schedule, only for the first deadline."
         unable_to_apply_the_coupon_because_disabled: "Unable to apply the coupon: this code was disabled."
         unable_to_apply_the_coupon_because_expired: "Unable to apply the coupon: this code has expired."
         unable_to_apply_the_coupon_because_sold_out: "Unable to apply the coupon: this code reached its quota."
