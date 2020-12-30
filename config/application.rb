@@ -42,11 +42,6 @@ module Fablab
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
-    #
-    # /!\ ALL locales SHOULD be configured accordingly with this locale. /!\
-    #
-    config.i18n.default_locale = Rails.application.secrets.rails_locale
-    config.i18n.fallbacks = [Rails.application.secrets.app_locale, :en]
 
     config.to_prepare do
       Devise::Mailer.layout 'notifications_mailer'

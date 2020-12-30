@@ -49,5 +49,19 @@ class StripeWorker
       object.update_attributes(stp_product_id: product.id)
       puts "Stripe product was created for the #{class_name} \##{id}"
     end
+
+  rescue Stripe::InvalidRequestError
+    STDERR.puts "WARNING: saved stp_product_id (#{object.stp_product_id}) does not match on Stripe, recreating..."
+    product = Stripe::Product.create(
+      {
+        name: object.name,
+        metadata: {
+          id: object.id,
+          type: class_name
+        }
+      }, { api_key: Setting.get('stripe_secret_key') }
+    )
+    object.update_attributes(stp_product_id: product.id)
+    puts "Stripe product was created for the #{class_name} \##{id}"
   end
 end

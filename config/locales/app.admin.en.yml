@@ -346,7 +346,7 @@ en:
         confirmation_required: "Confirmation required"
         do_you_really_want_to_delete_this_coupon: "Do you really want to delete this coupon?"
         coupon_was_successfully_deleted: "Coupon was successfully deleted."
-        unable_to_delete_the_specified_coupon_already_in_use: "Unable to delete the specified coupon: it is already used with some invoices."
+        unable_to_delete_the_specified_coupon_already_in_use: "Unable to delete the specified coupon: it is already used with some invoices and/or some payment schedules."
         unable_to_delete_the_specified_coupon_an_unexpected_error_occurred: "Unable to delete the specified coupon: an unexpected error occurred."
         send_a_coupon: "Send a coupon"
         coupon: "Coupon"

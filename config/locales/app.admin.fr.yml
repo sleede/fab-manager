@@ -346,7 +346,7 @@ fr:
         confirmation_required: "Confirmation requise"
         do_you_really_want_to_delete_this_coupon: "Êtes-vous sûr(e) de vouloir supprimer ce code promotionnel ?"
         coupon_was_successfully_deleted: "Le code promotionnel a bien été supprimé."
-        unable_to_delete_the_specified_coupon_already_in_use: "Impossible de supprimer le code promotionnel : il est utilisé dans des factures."
+        unable_to_delete_the_specified_coupon_already_in_use: "Impossible de supprimer le code promotionnel : il est utilisé dans des factures et/ou des échéanciers."
         unable_to_delete_the_specified_coupon_an_unexpected_error_occurred: "Impossible de supprimer le code promotionnel : une erreur inattendue s'est produite."
         send_a_coupon: "Envoyer un code promo"
         coupon: "Code promo"

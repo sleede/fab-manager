@@ -111,6 +111,10 @@ Rails.application.routes.draw do
       get 'first', action: 'first', on: :collection
     end
 
+    resources :payment_schedules, only: %i[index show] do
+      get 'download', on: :member
+    end
+
     resources :i_calendar, only: %i[index create destroy] do
       get 'events', on: :member
       post 'sync', on: :member

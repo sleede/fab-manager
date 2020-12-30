@@ -32,11 +32,15 @@ class Coupon < ApplicationRecord
   }
 
   def safe_destroy
-    if invoices.size.zero?
+    if usages.zero?
       destroy
     else
       false
     end
+  end
+
+  def usages
+    invoices.count + payment_schedule.count
   end
 
   ##

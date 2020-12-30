@@ -742,4 +742,115 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     reservation = json_response(response.body)
     assert_equal plan.id, reservation[:user][:subscribed_plan][:id], 'subscribed plan does not match'
   end
+
+  test 'user reserves a machine and renew a subscription with payment schedule and coupon and wallet' do
+    user = User.find_by(username: 'lseguin')
+    login_as(user, scope: :user)
+
+    reservations_count = Reservation.count
+    invoice_count = Invoice.count
+    invoice_items_count = InvoiceItem.count
+    subscriptions_count = Subscription.count
+    user_subscriptions_count = user.subscriptions.count
+    payment_schedule_count = PaymentSchedule.count
+    payment_schedule_items_count = PaymentScheduleItem.count
+    wallet_transactions_count = WalletTransaction.count
+
+    machine = Machine.find(1)
+    availability = machine.availabilities.last
+    plan = Plan.find_by(group_id: user.group.id, type: 'Plan', base_name: 'Abonnement mensualisable')
+
+    VCR.use_cassette('reservations_machine_subscription_with_payment_schedule_coupon_wallet') do
+      get "/api/payments/setup_intent/#{user.id}"
+
+      # Check response format & status
+      assert_equal 200, response.status, response.body
+      assert_equal Mime[:json], response.content_type
+
+      # Check the response
+      setup_intent = json_response(response.body)
+      assert_not_nil setup_intent[:client_secret]
+      assert_not_nil setup_intent[:id]
+      assert_match /^#{setup_intent[:id]}_secret_/, setup_intent[:client_secret]
+
+      # Confirm the intent (normally, this is done on browser-side)
+      stripe_res = Stripe::SetupIntent.confirm(
+        setup_intent[:id],
+        { payment_method: stripe_payment_method },
+        { api_key: Setting.get('stripe_secret_key') }
+      )
+
+      # check the confirmation
+      assert_equal setup_intent[:id], stripe_res.id
+      assert_equal 'succeeded', stripe_res.status
+      assert_equal 'off_session', stripe_res.usage
+
+
+      post '/api/payments/confirm_payment_schedule',
+           params: {
+             setup_intent_id: setup_intent[:id],
+             cart_items: {
+               coupon_code: 'GIME3EUR',
+               reservation: {
+                 plan_id: plan.id,
+                 payment_schedule: true,
+                 reservable_id: machine.id,
+                 reservable_type: machine.class.name,
+                 slots_attributes: [
+                   {
+                     start_at: availability.start_at.to_s(:iso8601),
+                     end_at: (availability.start_at + 1.hour).to_s(:iso8601),
+                     availability_id: availability.id
+                   }
+                 ]
+               }
+             }
+           }.to_json, headers: default_headers
+    end
+
+    # Check response format & status
+    assert_equal 201, response.status, response.body
+    assert_equal Mime[:json], response.content_type
+    assert_equal reservations_count + 1, Reservation.count, 'missing the reservation'
+    assert_equal invoice_count, Invoice.count, "an invoice was generated but it shouldn't"
+    assert_equal invoice_items_count, InvoiceItem.count, "some invoice items were generated but they shouldn't"
+    assert_equal 0, UsersCredit.count, "user's credits were not reset"
+    assert_equal subscriptions_count + 1, Subscription.count, 'missing the subscription'
+    assert_equal payment_schedule_count + 1, PaymentSchedule.count, 'missing the payment schedule'
+    assert_equal payment_schedule_items_count + 12, PaymentScheduleItem.count, 'missing some payment schedule items'
+    assert_equal wallet_transactions_count + 1, WalletTransaction.count, 'missing the wallet transaction'
+
+    # get the objects
+    reservation = Reservation.last
+    subscription = Subscription.last
+    payment_schedule = PaymentSchedule.last
+
+    # subscription assertions
+    assert_equal user_subscriptions_count + 1, user.subscriptions.count
+    assert_equal user, subscription.user
+    assert_not_nil user.subscribed_plan, "user's subscribed plan was not found"
+    assert_not_nil user.subscription, "user's subscription was not found"
+    assert_equal plan.id, user.subscribed_plan.id, "user's plan does not match"
+
+    # reservation assertions
+    assert reservation.payment_schedule
+    assert_equal payment_schedule.scheduled, reservation
+
+    # payment schedule assertions
+    assert_not_nil payment_schedule.reference
+    assert_equal 'stripe', payment_schedule.payment_method
+    assert_not_nil payment_schedule.stp_subscription_id
+    assert_not_nil payment_schedule.stp_setup_intent_id
+    assert_not_nil payment_schedule.wallet_transaction
+    assert_equal payment_schedule.ordered_items.first.amount, payment_schedule.wallet_amount
+    assert_equal Coupon.find_by(code: 'GIME3EUR').id, payment_schedule.coupon_id
+    assert_equal 'test', payment_schedule.environment
+    assert payment_schedule.check_footprint
+    assert_equal user.invoicing_profile.id, payment_schedule.invoicing_profile_id
+    assert_equal payment_schedule.invoicing_profile_id, payment_schedule.operator_profile_id
+
+    # Check the answer
+    reservation = json_response(response.body)
+    assert_equal plan.id, reservation[:user][:subscribed_plan][:id], 'subscribed plan does not match'
+  end
 end
