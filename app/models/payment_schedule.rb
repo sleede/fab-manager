@@ -52,7 +52,7 @@ class PaymentSchedule < PaymentDocument
   def post_save(setup_intent_id)
     return unless payment_method == 'stripe'
 
-    StripeService.create_stripe_subscription(id, setup_intent_id)
+    StripeService.create_stripe_subscription(self, setup_intent_id)
   end
 
   private

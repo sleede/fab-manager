@@ -45,9 +45,7 @@ class Reservation < ApplicationRecord
   def generate_subscription
     return unless plan_id
 
-    self.subscription = Subscription.find_or_initialize_by(statistic_profile_id: statistic_profile_id)
-    subscription.attributes = { plan_id: plan_id, statistic_profile_id: statistic_profile_id, expiration_date: nil }
-
+    self.subscription = Subscription.new(plan_id: plan_id, statistic_profile_id: statistic_profile_id, expiration_date: nil)
     subscription.init_save
     subscription
   end

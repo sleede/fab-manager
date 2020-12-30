@@ -20,8 +20,8 @@ class PaymentScheduleService
     ps = PaymentSchedule.new(scheduled: plan, total: price + other_items, coupon: coupon)
     deadlines = plan.duration / 1.month
     per_month = (price / deadlines).truncate
-    adjustment = if per_month * deadlines != price
-                   price - (per_month * deadlines)
+    adjustment = if per_month * deadlines + other_items.truncate != ps.total
+                   ps.total - (per_month * deadlines + other_items.truncate)
                  else
                    0
                  end
@@ -30,9 +30,9 @@ class PaymentScheduleService
       date = DateTime.current + i.months
       details = { recurring: per_month }
       amount = if i.zero?
-                 details[:adjustment] = adjustment
-                 details[:other_items] = other_items
-                 per_month + adjustment + other_items
+                 details[:adjustment] = adjustment.truncate
+                 details[:other_items] = other_items.truncate
+                 per_month + adjustment.truncate + other_items.truncate
                else
                  per_month
                end
@@ -48,7 +48,7 @@ class PaymentScheduleService
 
   def create(subscription, total, coupon: nil, operator: nil, payment_method: nil, reservation: nil, user: nil, setup_intent_id: nil)
     subscription = reservation.generate_subscription if !subscription && reservation&.plan_id
-    raise InvalidSubscriptionError unless subscription
+    raise InvalidSubscriptionError unless subscription&.persisted?
 
     schedule = compute(subscription.plan, total, coupon)
     ps = schedule[:payment_schedule]
