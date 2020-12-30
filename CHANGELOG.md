@@ -5,6 +5,7 @@
 - Updated stripe gem to 5.21.0
 - Architecture documentation
 - Improved coupon creation/deletion workflow
+- Default texts for the login modal
 - Fix a bug: unable to access embedded plan views
 - Fix a bug: warning message overflow in credit wallet modal
 - Fix a bug: when using a cash coupon, the amount shown in the statistics is invalid
