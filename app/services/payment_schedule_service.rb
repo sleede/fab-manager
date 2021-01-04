@@ -8,7 +8,7 @@ class PaymentScheduleService
   # @param total {Number} Total amount of the current shopping cart (which includes this plan) - without coupon
   # @param coupon {Coupon} apply this coupon, if any
   ##
-  def compute(plan, total, coupon = nil)
+  def compute(plan, total, coupon: nil, subscription: nil)
     other_items = total - plan.amount
     # base monthly price of the plan
     price = plan.amount
@@ -23,7 +23,7 @@ class PaymentScheduleService
     items = []
     (0..deadlines - 1).each do |i|
       date = DateTime.current + i.months
-      details = { recurring: per_month }
+      details = { recurring: per_month, subscription_id: subscription&.id }
       amount = if i.zero?
                  details[:adjustment] = adjustment.truncate
                  details[:other_items] = other_items.truncate
@@ -52,7 +52,7 @@ class PaymentScheduleService
     subscription = reservation.generate_subscription if !subscription && reservation&.plan_id
     raise InvalidSubscriptionError unless subscription&.persisted?
 
-    schedule = compute(subscription.plan, total, coupon)
+    schedule = compute(subscription.plan, total, coupon: coupon, subscription: subscription)
     ps = schedule[:payment_schedule]
     items = schedule[:items]
 

@@ -40,23 +40,23 @@ class PDF::PaymentSchedule < Prawn::Document
       text I18n.t('payment_schedules.schedule_issued_on_DATE', DATE: I18n.l(payment_schedule.created_at.to_date))
 
       # user/organization's information
-      if invoice&.invoicing_profile&.organization
-        name = invoice.invoicing_profile.organization.name
-        full_name = "#{name} (#{invoice.invoicing_profile.full_name})"
+      if payment_schedule.invoicing_profile&.organization
+        name = payment_schedule.invoicing_profile.organization.name
+        full_name = "#{name} (#{payment_schedule.invoicing_profile.full_name})"
       else
-        name = invoice.invoicing_profile.full_name
+        name = payment_schedule.invoicing_profile.full_name
         full_name = name
       end
 
-      address = if invoice&.invoicing_profile&.organization&.address
-                  invoice.invoicing_profile.organization.address.address
-                elsif invoice&.invoicing_profile&.address
-                  invoice.invoicing_profile.address.address
+      address = if payment_schedule.invoicing_profile&.organization&.address
+                  payment_schedule.invoicing_profile.organization.address.address
+                elsif payment_schedule.invoicing_profile&.address
+                  payment_schedule.invoicing_profile.address.address
                 else
                   ''
                 end
 
-      text_box "<b>#{name}</b>\n#{invoice.invoicing_profile.email}\n#{address}",
+      text_box "<b>#{name}</b>\n#{payment_schedule.invoicing_profile.email}\n#{address}",
                at: [bounds.width - 130, bounds.top - 49],
                width: 130,
                align: :right,
@@ -65,34 +65,24 @@ class PDF::PaymentSchedule < Prawn::Document
 
       # object
       move_down 25
-      if invoice.is_a?(Avoir)
-        object = if invoice.invoiced_type == WalletTransaction.name
-                   I18n.t('invoices.wallet_credit')
-                 else
-                   I18n.t('invoices.cancellation_of_invoice_REF', REF: invoice.invoice.reference)
-                 end
-      else
-        case invoice.invoiced_type
-        when 'Reservation'
-          object = I18n.t('invoices.reservation_of_USER_on_DATE_at_TIME',
-                          USER: name,
-                          DATE: I18n.l(invoice.invoiced.slots[0].start_at.to_date),
-                          TIME: I18n.l(invoice.invoiced.slots[0].start_at, format: :hour_minute))
-          invoice.invoice_items.each do |item|
-            next unless item.subscription_id
+      case payment_schedule.scheduled_type
+      when 'Reservation'
+        object = I18n.t('invoices.reservation_of_USER_on_DATE_at_TIME',
+                        USER: name,
+                        DATE: I18n.l(invoice.invoiced.slots[0].start_at.to_date),
+                        TIME: I18n.l(invoice.invoiced.slots[0].start_at, format: :hour_minute))
+        invoice.invoice_items.each do |item|
+          next unless item.subscription_id
 
-            subscription = Subscription.find item.subscription_id
-            cancellation = invoice.is_a?(Avoir) ? I18n.t('invoices.cancellation') + ' - ' : ''
-            object = "\n- #{object}\n- #{cancellation + subscription_verbose(subscription, name)}"
-            break
-          end
-        when 'Subscription'
-          object = subscription_verbose(invoice.invoiced, name)
-        when 'OfferDay'
-          object = offer_day_verbose(invoice.invoiced, name)
-        else
-          puts "ERROR : specified invoiced type (#{invoice.invoiced_type}) is unknown"
+          subscription = Subscription.find item.subscription_id
+          cancellation = invoice.is_a?(Avoir) ? I18n.t('invoices.cancellation') + ' - ' : ''
+          object = "\n- #{object}\n- #{cancellation + subscription_verbose(subscription, name)}"
+          break
         end
+      when 'Subscription'
+        object = subscription_verbose(payment_schedule.invoiced, name)
+      else
+        puts "ERROR : specified scheduled type (#{payment_schedule.scheduled_type}) is unknown"
       end
       text I18n.t('invoices.object') + ' ' + object
 
@@ -340,21 +330,6 @@ class PDF::PaymentSchedule < Prawn::Document
 
   private
 
-  def reservation_dates_verbose(slot)
-    if slot.start_at.to_date == slot.end_at.to_date
-      '- ' + I18n.t('invoices.on_DATE_from_START_to_END',
-                    DATE: I18n.l(slot.start_at.to_date),
-                    START: I18n.l(slot.start_at, format: :hour_minute),
-                    END: I18n.l(slot.end_at, format: :hour_minute)) + "\n"
-    else
-      '- ' + I18n.t('invoices.from_STARTDATE_to_ENDDATE_from_STARTTIME_to_ENDTIME',
-                    STARTDATE: I18n.l(slot.start_at.to_date),
-                    ENDDATE: I18n.l(slot.start_at.to_date),
-                    STARTTIME: I18n.l(slot.start_at, format: :hour_minute),
-                    ENDTIME: I18n.l(slot.end_at, format: :hour_minute)) + "\n"
-    end
-  end
-
   def subscription_verbose(subscription, username)
     subscription_start_at = subscription.expired_at - subscription.plan.duration
     duration_verbose = I18n.t("duration.#{subscription.plan.interval}", count: subscription.plan.interval_count)
@@ -362,13 +337,6 @@ class PDF::PaymentSchedule < Prawn::Document
            NAME: username,
            DURATION: duration_verbose,
            DATE: I18n.l(subscription_start_at.to_date))
-  end
-
-  def offer_day_verbose(offer_day, username)
-    I18n.t('invoices.subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE',
-           NAME: username,
-           STARTDATE: I18n.l(offer_day.start_at.to_date),
-           ENDDATE: I18n.l(offer_day.end_at.to_date))
   end
 
   ##

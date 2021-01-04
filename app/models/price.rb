@@ -146,7 +146,7 @@ class Price < ApplicationRecord
 
       # == generate PaymentSchedule (if applicable) ===
       schedule = if options[:payment_schedule] && plan&.monthly_payment
-                   PaymentScheduleService.new.compute(plan, _amount_no_coupon, cp)
+                   PaymentScheduleService.new.compute(plan, _amount_no_coupon, coupon: cp)
                  else
                    nil
                  end
