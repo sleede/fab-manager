@@ -46,10 +46,7 @@ class StripeService
 
     def create_stripe_coupon(coupon_id)
       coupon = Coupon.find(coupon_id)
-      stp_coupon = {
-        id: coupon.code,
-        duration: coupon.validity_per_user
-      }
+      stp_coupon = { id: coupon.code }
       if coupon.type == 'percent_off'
         stp_coupon[:percent_off] = coupon.percent_off
       elsif coupon.type == 'amount_off'
@@ -57,6 +54,7 @@ class StripeService
         stp_coupon[:currency] = Setting.get('stripe_currency')
       end
 
+      stp_coupon[:duration] = coupon.validity_per_user == 'always' ? 'forever' : 'once'
       stp_coupon[:redeem_by] = coupon.valid_until.to_i unless coupon.valid_until.nil?
       stp_coupon[:max_redemptions] = coupon.max_usages unless coupon.max_usages.nil?
 

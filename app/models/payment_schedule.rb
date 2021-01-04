@@ -55,6 +55,10 @@ class PaymentSchedule < PaymentDocument
     StripeService.create_stripe_subscription(self, setup_intent_id)
   end
 
+  def self.columns_out_of_footprint
+    %w[stp_subscription_id]
+  end
+
   private
 
   def generate_and_send_document

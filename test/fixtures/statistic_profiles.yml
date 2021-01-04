@@ -46,3 +46,10 @@ lseguin:
   gender: false
   birthday: 1969-02-03
   group_id: 1
+
+atiermoulin:
+  id: 8
+  user_id: 8
+  gender: false
+  birthday: 1985-09-01
+  group_id: 1

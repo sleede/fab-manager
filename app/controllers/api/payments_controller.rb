@@ -97,6 +97,7 @@ class API::PaymentsController < API::ApiController
 
   def on_reservation_success(intent, details)
     @reservation = Reservation.new(reservation_params)
+    payment_method = params[:cart_items][:reservation][:payment_method] || 'stripe'
     user_id = if current_user.admin? || current_user.manager?
                 params[:cart_items][:reservation][:user_id]
               else
@@ -107,7 +108,7 @@ class API::PaymentsController < API::ApiController
                                                     payment_details: details,
                                                     intent_id: intent.id,
                                                     schedule: params[:cart_items][:reservation][:payment_schedule],
-                                                    payment_method: params[:cart_items][:reservation][:payment_method])
+                                                    payment_method: payment_method)
     if intent.class == Stripe::PaymentIntent
       Stripe::PaymentIntent.update(
         intent.id,
