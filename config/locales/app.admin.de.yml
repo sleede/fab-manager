@@ -12,7 +12,7 @@ de:
       #manage the trainings & machines slots
       calendar:
         calendar_management: "Calendar management"
-        trainings: "Trainings"
+        trainings: "Schulungen"
         machines: "Machines"
         spaces: "Spaces"
         events: "Eventos"
@@ -37,7 +37,7 @@ de:
         the_plan_was_successfully_removed_from_the_slot: "The plan was successfully removed from the slot."
         DATE_slot: "{DATE} slot:"
         what_kind_of_slot_do_you_want_to_create: "What kind of slot do you want to create?"
-        training: "Training"
+        training: "Schulung"
         machine: "Machine"
         space: "Space"
         next: "Next >"
@@ -45,9 +45,9 @@ de:
         select_some_machines: "Select some machines"
         select_all: "All"
         select_none: "None"
-        manage_machines: "Click here to add or remove machines."
+        manage_machines: "Klicken Sie hier, um Maschinen hinzuzufügen oder zu entfernen."
         manage_spaces: "Click here to add or remove spaces."
-        manage_trainings: "Click here to add or remove trainings."
+        manage_trainings: "Klicke hier, um Schulungen hinzuzufügen oder zu entfernen."
         number_of_tickets: "Number of tickets: "
         adjust_the_opening_hours: "Adjust the opening hours"
         to_time: "to" #eg. from 18:00 to 21:00
@@ -167,7 +167,7 @@ de:
       trainings:
         trainings_monitoring: "Trainings monitoring"
         plan_session: "Schedule a new session"
-        trainings: "Trainings"
+        trainings: "Schulungen"
         add_a_new_training: "Add a new training"
         name: "Name"
         associated_machines: "Associated machines"
