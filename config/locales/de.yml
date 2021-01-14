@@ -111,15 +111,15 @@ de:
     subscription_of_NAME_for_DURATION_starting_from_DATE: "Abonnement von %{NAME} für %{DURATION} ab %{DATE}"
     subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "Abonnement von %{NAME} verlängert (kostenlose Tage) ab %{STARTDATE} bis %{ENDDATE}"
     and: 'und'
-    invoice_text_example: "Our association is not subject to VAT"
+    invoice_text_example: "Unsere Einrichtung ist nicht mehrwertsteuerpflichtig"
   #CVS accounting export (columns headers)
   accounting_export:
-    journal_code: "Journal code"
-    date: "Entry date"
-    account_code: "Account code"
-    account_label: "Account label"
-    piece: "Document"
-    line_label: "Entry label"
+    journal_code: "Journalcode"
+    date: "Eintragsdatum"
+    account_code: "Code des Kontos"
+    account_label: "Kontobezeichnung"
+    piece: "Dokument"
+    line_label: "Eintragsbezeichnung"
     debit_origin: "Origin debit"
     credit_origin: "Origin credit"
     debit_euro: "Euro debit"
@@ -195,52 +195,52 @@ de:
     id: "ID"
     customer: "Customer"
     email: "E-mail"
-    subscription: "Subscription"
-    period: "Period"
-    start_date: "Start date"
-    expiration_date: "Expiration date"
-    amount: "Amount"
-    payment_method: "Payment method"
-    local_payment: "Payment at the reception"
-    online_payment: "Online payment"
-    deleted_user: "Deleted user"
+    subscription: "Abonnement"
+    period: "Zeitraum"
+    start_date: "Startdatum"
+    expiration_date: "Ablaufdatum"
+    amount: "Betrag"
+    payment_method: "Zahlungsmethode"
+    local_payment: "Zahlung an der Rezeption"
+    online_payment: "Online-Zahlung"
+    deleted_user: "Gelöschter Nutzer"
   #reservation slots export, by type, to EXCEL format
   export_availabilities:
-    machines: "Machines"
-    trainings: "Trainings"
-    spaces: "Spaces"
-    events: "Events"
-    day_of_week: "Day of week"
-    date: "Date"
+    machines: "Maschinen"
+    trainings: "Schulungen"
+    spaces: "Räume"
+    events: "Veranstaltungen"
+    day_of_week: "Wochentag"
+    date: "Datum"
     slot: "Slot"
-    machine: "Machine"
-    training: "Training"
-    space: "Space"
-    event: "Event"
-    reservations: "Reservations"
-    available_seats: "Available seats"
+    machine: "Maschine"
+    training: "Schulung"
+    space: "Raum"
+    event: "Veranstaltung"
+    reservations: "Reservierungen"
+    available_seats: "Verfügbare Plätze"
   roles:
-    member: "Member"
+    member: "Mitglied"
     manager: "Manager"
     admin: "Administrator"
   api:
     #internal app notifications
     notifications:
-      deleted_user: "Deleted user"
+      deleted_user: "Gelöschter Nutzer"
       notify_admin_abuse_reported:
-        an_abuse_was_reported_on_TYPE_ID_NAME_html: "An abuse was reported on <strong>%{TYPE} %{ID}: <em>%{NAME}</em></strong>."
+        an_abuse_was_reported_on_TYPE_ID_NAME_html: "Ein Missbrauchsmeldung auf <strong>%{TYPE} %{ID} ist eingegangen: <em>%{NAME}</em></strong>."
       notify_admin_member_create_reservation:
-        a_RESERVABLE_reservation_was_made_by_USER_html: "A <strong><em>%{RESERVABLE}</em></strong> reservation was made by <strong><em>%{USER}</em></strong>."
+        a_RESERVABLE_reservation_was_made_by_USER_html: "Eine <strong><em>%{RESERVABLE}</em></strong> Reservierung wurde von <strong><em>%{USER}</em></strong> vorgenommen."
       notify_admin_profile_complete:
-        account_imported_from_PROVIDER_UID_has_completed_its_information_html: "Account imported from <strong><em>%{PROVIDER}</strong> (%{UID})</em> has completed its information."
+        account_imported_from_PROVIDER_UID_has_completed_its_information_html: "Konto importiert von <strong><em>%{PROVIDER}</strong> (%{UID})</em> hat seine Informationen vervollständigt."
       notify_admin_slot_is_canceled:
-        USER_s_reservation_on_the_DATE_was_cancelled_remember_to_generate_a_refund_invoice_if_applicable_html: "<strong><em>%{USER}</em></strong>'s reservation, on the %{DATE}, was cancelled. Remember to generate a refund invoice if applicable."
+        USER_s_reservation_on_the_DATE_was_cancelled_remember_to_generate_a_refund_invoice_if_applicable_html: "Die Reservierung von <strong><em>%{USER}</em></strong> am %{DATE} wurde storniert. Erstellen Sie eine Rückerstattung, falls zutreffend."
       notify_admin_slot_is_modified:
-        a_booking_slot_was_modified: "A booking slot was modified."
+        a_booking_slot_was_modified: "Ein Buchungsplatz wurde geändert."
       notify_admin_subscribed_plan:
-        subscription_PLAN_has_been_subscribed_by_USER_html: "Subscription <strong><em>%{PLAN}</em></strong> has been subscribed by <strong><em>%{USER}</strong></em>."
+        subscription_PLAN_has_been_subscribed_by_USER_html: "Das Abonnement <strong><em>%{PLAN}</em></strong> wurde von <strong><em>%{USER}</strong></em> abgeschlossen."
       notify_admin_subscription_canceled:
-        USER_s_subscription_has_been_cancelled: "%{USER}'s subscription has been cancelled."
+        USER_s_subscription_has_been_cancelled: "Das Abonnement von %{USER} wurde gekündigt."
       notify_admin_subscription_extended:
         subscription_PLAN_of_the_member_USER_has_been_extended_FREE_until_DATE_html: "Subscription <strong><em>{PLAN}</em></strong> of the member <strong><em>{USER}</strong></em> has been extended {FREE, select, true{for free} other{}} until {DATE}." #messageFormat interpolation
       notify_admin_subscription_is_expired:
