@@ -13,13 +13,13 @@ de:
   errors:
     #CarrierWave
     messages:
-      carrierwave_processing_error: "failed to be processed"
-      carrierwave_integrity_error: "is not of an allowed file type"
+      carrierwave_processing_error: "konnte nicht verarbeitet werden"
+      carrierwave_integrity_error: "ist kein erlaubter Dateityp"
       carrierwave_download_error: "could not be downloaded"
-      extension_whitelist_error: "You are not allowed to upload %{extension} files, allowed types: %{allowed_types}"
-      extension_blacklist_error: "You are not allowed to upload %{extension} files, prohibited types: %{prohibited_types}"
-      content_type_whitelist_error: "You are not allowed to upload %{content_type} files, allowed types: %{allowed_types}"
-      rmagick_processing_error: "Failed to manipulate with rmagick, maybe it is not an image? Original Error: %{e}"
+      extension_whitelist_error: "Sie sind nicht berechtigt, %{extension} Dateien hochzuladen, erlaubt sind die Typen: %{allowed_types}"
+      extension_blacklist_error: "Sie sind nicht berechtigt, %{extension} Dateien hochzuladen. Unerlaubte Typen: %{prohibited_types}"
+      content_type_whitelist_error: "Sie sind nicht berechtigt, %{content_type} Dateien hochzuladen, erlaubt sind die Typen: %{allowed_types}"
+      rmagick_processing_error: "Fehler beim Bearbeiten mit rmagick, vielleicht ist es kein Bild? Original Fehler: %{e}"
       mime_types_processing_error: "Failed to process file with MIME::Types, maybe not valid content-type? Original Error: %{e}"
       mini_magick_processing_error: "Failed to manipulate with MiniMagick, maybe it is not an image? Original Error: %{e}"
       wrong_size: "is the wrong size (should be %{file_size})"
