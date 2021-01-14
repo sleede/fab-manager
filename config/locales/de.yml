@@ -110,7 +110,7 @@ de:
     from_STARTDATE_to_ENDDATE_from_STARTTIME_to_ENDTIME: "From %{STARTDATE} to %{ENDDATE}, from %{STARTTIME} to %{ENDTIME}" #eg: from feb. 7 to feb. 10, from 6PM to 10PM
     subscription_of_NAME_for_DURATION_starting_from_DATE: "Subscription of %{NAME} for %{DURATION} starting from %{DATE}"
     subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "Subscription of %{NAME} extended (Free days) starting from %{STARTDATE} until %{ENDDATE}"
-    and: 'and'
+    and: 'und'
     invoice_text_example: "Our association is not subject to VAT"
   #CVS accounting export (columns headers)
   accounting_export:
@@ -149,18 +149,18 @@ de:
     id: "ID"
     surname: "Surname"
     first_name: "First name"
-    email: "E-mail"
+    email: "E-Mail"
     newsletter: "Newsletter"
     last_login: "Last login"
-    gender: "Gender"
-    age: "Age"
-    address: "Address"
+    gender: "Geschlecht"
+    age: "Alter"
+    address: "Adresse"
     phone: "Telefon"
-    website: "Website"
+    website: "Webseite"
     job: "Job"
     interests: "Interests"
     cad_software_mastered: "CAD Softwares mastered"
-    group: "Group"
+    group: "Gruppe"
     subscription: "Subscription"
     subscription_end_date: "Subscription end date"
     validated_trainings: "Validated trainings"
@@ -172,15 +172,15 @@ de:
     echo_sciences: "Echosciences"
     organization: "Organization"
     organization_address: "Organization address"
-    man: "Man"
-    woman: "Woman"
+    man: "Mann"
+    woman: "Frau"
     without_subscriptions: "Without subscriptions"
   #machines/trainings/events reservations list to EXCEL format
   export_reservations:
     reservations: "Reservations"
     customer_id: "Customer ID"
     customer: "Customer"
-    email: "E-mail"
+    email: "E-Mail"
     reservation_date: "Reservation date"
     reservation_type: "Reservation type"
     reservation_object: "Reservation object"
