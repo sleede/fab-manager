@@ -205,8 +205,8 @@ de:
         description_is_required: "Description is required."
         add_a_new_training: "Add a new training"
         validate_your_training: "Validate your training"
-        associated_machines: "Associated machines"
-        number_of_tickets: "Number of tickets"
+        associated_machines: "Verknüpfte Maschinen"
+        number_of_tickets: "Anzahl der Tickets"
         public_page: "Show in training lists"
         disable_training: "Disable the training"
       #partial form to edit/create an user (admin view)
