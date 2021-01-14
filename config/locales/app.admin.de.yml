@@ -129,7 +129,7 @@ de:
       #management of the projects' components & settings
       projects:
         name: "Name"
-        projects_settings: "Projects settings"
+        projects_settings: "Projekteinstellungen"
         materials: "Materials"
         add_a_material: "Add a material"
         themes: "Themes"
@@ -139,8 +139,8 @@ de:
         add_a_new_licence: "Add a new licence"
         manage_abuses: "Manage the reports"
         settings:
-          title: "Settings"
-          comments: "Comments"
+          title: "Einstellungen"
+          comments: "Kommentare"
           disqus: "Disqus"
           disqus_info: "If you want to enable your members and visitors to comment on projects, you can enable the Disqus forums by setting the following parameter. Visit <a href='https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname-' target='_blank'>the Disqus website</a> for more information."
           shortname: "Shortname"
@@ -150,14 +150,14 @@ de:
           extensions: "Allowed extensions"
           new_extension: "New extension"
           new_ext_info_html: "<p>Specify a new file extension to allow these files to be uploaded.</p><p>Please consider that allowing file archives (eg. ZIP) or binary executable (eg. EXE) may result in a <strong>dangerous security issue</strong> and must be avoided in any cases.</p>"
-          mime_types: "Allowed MIME types"
-          new_mime_type: "New MIME type"
+          mime_types: "Erlaubte MIME-Typen"
+          new_mime_type: "Neuer MIME-Typ"
           new_type_info_html: "<p>Specify a new MIME type to allow these files to be uploaded.</p><p>Please use the test input to determine the MIME type of a file. Please consider that allowing file archives (eg. application/zip) or binary executable (eg. application/exe) may result in a <strong>dangerous security issue</strong> and must be avoided in any cases.</p>"
           test_file: "Test a file"
           set_a_file: "Select a file"
           file_is_TYPE: "MIME type of this file is {TYPE}"
           projects_sharing: "Projects sharing"
-          open_lab_projects: "OpenLab Projects"
+          open_lab_projects: "OpenLab Projekte"
           open_lab_info_html: "Enable OpenLab to share your projects with other Fab Labs and display a gallery of shared projects. Please send an email to <a href='mailto:contact@fab-manager.com'>contact@fab-manager.com</a> to get your access credentials for free."
           open_lab_app_id: "ID"
           open_lab_app_secret: "Secret"
@@ -1380,13 +1380,13 @@ de:
             content: "The price of events does not depend on groups or subscriptions, but on the categories you define on this page."
         projects:
           welcome:
-            title: "Projects"
+            title: "Projekte"
             content: "Here you can define all the elements that will be available for members to document the projects they carry out. You can also define various parameters related to the projects."
           abuses:
             title: "Manage reports"
             content: "<p>Access here the management of reports.</p><p>Visitors can signal projects, for example for copyright infringement or for hate speech.</p><p>GDPR requires you to delete this reporting data once the required actions have been taken.</p>"
           settings:
-            title: "Settings"
+            title: "Einstellungen"
             content: "<p>Comments, CAD files ... Manage project parameters here</p><p>You can also activate OpenLab projects, in order to display the projects shared by other Fab Labs in your gallery.</p>"
         statistics:
           welcome:
