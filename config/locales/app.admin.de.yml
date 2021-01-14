@@ -199,8 +199,8 @@ de:
       #create a new training
       trainings_new:
         add_a_new_training: "Add a new training"
-        beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero: "Beware, when creating a training, its reservation prices are initialized at zero."
-        dont_forget_to_change_them_before_creating_slots_for_this_training: "Don't forget to change them before creating slots for this training."
+        beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero: "Vorsicht bei der Erstellung eines Trainings, die Reservierungspreise stehen auf Null."
+        dont_forget_to_change_them_before_creating_slots_for_this_training: "Vergesse nicht, sie anzupassen, bevor du das Training aktivierst."
       #events tracking and management
       events:
         events_monitoring: "Events monitoring"
@@ -639,7 +639,7 @@ de:
       #management of users, labels, groups, and so on
       members:
         users_management: "Users management"
-        users: "Users"
+        users: "Benutzer"
         members: "Members"
         subscriptions: "Subscriptions"
         search_for_an_user: "Search for an user"
@@ -670,8 +670,8 @@ de:
         partner_successfully_deleted: "Partner successfully deleted."
         unable_to_delete_the_partner: "Unable to delete the partner."
         associated_plan: "Associated plan"
-        groups: "Groups"
-        tags: "Tags"
+        groups: "Gruppen"
+        tags: "Stichworte"
         authentication: "Authentication"
         confirmation_required: "Confirmation required"
         confirm_delete_member: "Do you really want to delete this member? This cannot be undone."
