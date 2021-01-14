@@ -4,7 +4,7 @@ de:
       #translations of common buttons
       buttons:
         confirm_changes: "Confirm changes"
-        consult: "Consult"
+        consult: "Beschreibung"
         edit: "Edit"
         change: "Change"
         delete: "Delete"
@@ -13,7 +13,7 @@ de:
         close: "Close"
         clear: "Clear"
         today: "Today"
-        confirm: "Confirm"
+        confirm: "Bestätigen"
         save: "Save"
         "yes": "Yes"
         "no": "No"
