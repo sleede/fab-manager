@@ -95,14 +95,14 @@ de:
         projects:
           you_dont_have_any_projects: "You don't have any projects."
           add_a_project: "Add a project"
-          author: "Author"
+          author: "Autor"
           collaborator: "Collaborator"
-          rough_draft: "Draft"
+          rough_draft: "Entwurf"
           description: "Description"
           machines_and_materials: "Machines and materials"
-          machines: "Machines"
-          materials: "Materials"
-          collaborators: "Collaborators"
+          machines: "Maschinen"
+          materials: "Materialien"
+          collaborators: "Mitarbeitende"
         #dashboard: my trainings
         trainings:
           your_next_trainings: "Your next trainings"
@@ -143,7 +143,7 @@ de:
       #modify an existing project
       projects_edit:
         edit_the_project: "Edit the project"
-        rough_draft: "Draft"
+        rough_draft: "Entwurf"
         publish: "Publish"
       #book a machine
       machines_reserve:
