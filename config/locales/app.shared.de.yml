@@ -19,7 +19,7 @@ de:
         "no": "Nein"
         apply: "Apply"
       messages:
-        you_will_lose_any_unsaved_modification_if_you_quit_this_page: "You will lose any unsaved modification if you quit this page"
+        you_will_lose_any_unsaved_modification_if_you_quit_this_page: "Sie verlieren jede ungespeicherte Änderung, wenn Sie diese Seite verlassen"
         you_will_lose_any_unsaved_modification_if_you_reload_this_page: "You will lose any unsaved modification if you reload this page"
         payment_card_error: "A problem has occurred with your credit card:"
       #user edition form
@@ -94,26 +94,26 @@ de:
       #machine edition form
       machine:
         name: "Name"
-        name_is_required: "Name is required."
+        name_is_required: "Name ist erforderlich."
         illustration: "Ansicht"
-        add_an_illustration: "Add a visual"
-        description: "Description"
+        add_an_illustration: "Foto hinzufügen"
+        description: "Beschreibung"
         description_is_required: "Description is required."
-        technical_specifications: "Technical specifications"
+        technical_specifications: "Techische Daten"
         technical_specifications_are_required: "Technical specifications are required."
-        attached_files_pdf: "Attached files (pdf)"
+        attached_files_pdf: "Dateianhänge (pdf)"
         attach_a_file: "Attach a file"
-        add_an_attachment: "Add an attachment"
-        disable_machine: "Disable machine"
-        validate_your_machine: "Validate your machine"
+        add_an_attachment: "Anhang hinzufügen"
+        disable_machine: "Maschine deaktivieren"
+        validate_your_machine: "Bestätigen Sie Ihr Gerät"
       #frame to select a plan to subscribe
       plan_subscribe:
         subscribe_online: "subscribe online"
         do_not_subscribe: "do not subscribe"
       #admin: choose a member to interact with
       member_select:
-        select_a_member: "Select a member"
-        start_typing: "Start typing..."
+        select_a_member: "Ein Mitglied auswählen"
+        start_typing: "Tippe ein..."
       #stripe payment modal
       stripe:
         online_payment: "Online payment"
@@ -274,7 +274,7 @@ de:
         your_training_will_occur_: "Your training will occur"
       #user public profile
       public_profile:
-        last_activity_html: "Last activity <br><strong>on {DATE}</strong>"
+        last_activity_html: "Letzte Aktivität <br><strong>am {DATE}</strong>"
         to_come: "to come"
         approved: "approved"
         projects: "Projects"
@@ -284,7 +284,7 @@ de:
         private_profile: "Private profile"
         interests: "Interests"
         CAD_softwares_mastered: "CAD softwares mastered"
-        email_address: "Email address"
+        email_address: "E‐Mail‐Adresse"
         trainings: "Trainings"
         no_trainings: "No trainings"
       #wallet
@@ -377,8 +377,8 @@ de:
         disable_space: "Disable space"
       #shopping cart module for reservations
       cart:
-        summary: "Summary"
-        select_one_or_more_slots_in_the_calendar: "Select one {SINGLE, select, true{slot} other{or more slots}} in the calendar"
+        summary: "Zusammenfassung"
+        select_one_or_more_slots_in_the_calendar: "Wähle einen {SINGLE, select, true{Slot} other{oder mehrere Slots}} im Kalender"
         you_ve_just_selected_the_slot: "You've just selected the slot:"
         datetime_to_time: "{START_DATETIME} to {END_TIME}" #eg: Thursday, September 4 1986 8:30 PM to 10:00 PM
         cost_of_TYPE: "Cost of the {TYPE, select, Machine{machine slot} Training{training} Space{space slot} other{element}}"
