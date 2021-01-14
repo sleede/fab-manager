@@ -64,9 +64,9 @@ de:
         surname_is_required: "Surname is required."
         your_pseudonym: "Your pseudonym"
         pseudonym_is_required: "Pseudonym is required."
-        your_email_address: "Your e-mail address"
+        your_email_address: "Deine E-Mail-Adresse"
         email_is_required: "E-mail address is required."
-        your_password: "Your password"
+        your_password: "Passwort"
         password_is_required: "Password is required."
         password_is_too_short: "Password is too short (minimum 8 characters)"
         type_your_password_again: "Type your password again"
@@ -100,13 +100,13 @@ de:
         your_new_password: "Your new password"
         your_password_was_successfully_changed: "Your password was successfully changed."
         #connection modal
-        connection: "Connection"
-        password_forgotten: "Forgotten password?"
-        confirm_my_account: "Confirm my e-mail"
-        not_registered_to_the_fablab: "Not registered to the FabLab?"
-        create_an_account: "Create an account"
+        connection: "Anmelden"
+        password_forgotten: "Passwort vergessen?"
+        confirm_my_account: "E-mail bestätigen"
+        not_registered_to_the_fablab: "Nicht bei FabLab registriert?"
+        create_an_account: "Erstelle ein Konto"
         wrong_email_or_password: "Wrong e-mail or password."
-        caps_lock_is_on: "Caps lock key is on."
+        caps_lock_is_on: "Feststelltaste ist aktiviert"
         #confirmation modal
         you_will_receive_confirmation_instructions_by_email: "You will receive confirmation instructions by email."
         #forgotten password modal
@@ -135,14 +135,14 @@ de:
         last_update: "Last update,"
       #home page
       home:
-        latest_documented_projects: "The latest documented projects"
+        latest_documented_projects: "Die neuesten dokumentierten Projekte"
         follow_us: "Folge uns"
         latest_tweets: "Die neuesten Tweets"
         latest_registered_members: "Neueste registrierte Mitglieder"
         create_an_account: "Neues Konto einrichten"
         discover_members: "Discover members"
         #next events summary on the home page
-        fablab_s_next_events: "Fablab's next events"
+        fablab_s_next_events: "Fablab´s nächste Veranstaltungen"
         every_events: "Alle Veranstaltungen"
         from_date_to_date: "Von {START} bis {END}"
         on_the_date: "Am {DATE}"
@@ -234,11 +234,11 @@ de:
         the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "The training can't be deleted because it's already reserved by some users."
       #summary of the subscriptions
       plans:
-        subscriptions: "Subscriptions"
+        subscriptions: "Abonnements"
         i_choose_that_plan: "I choose that plan"
         i_subscribe_online: "I subscribe online"
         i_already_subscribed: "I already subscribed"
-        more_information: "More information"
+        more_information: "Weitere Informationen"
         your_subscription_expires_on_the_DATE: "Your subscription expires on the {DATE}"
         no_plans: "No plans are available for your group"
         my_group: "My group"
@@ -265,23 +265,23 @@ de:
       #Fablab's events list
       events_list:
         the_fablab_s_events: "The Fablab's events"
-        all_categories: "All categories"
+        all_categories: "Alle Kategorien"
         for_all: "For all"
         sold_out: "Sold Out"
         cancelled: "Cancelled"
         free_admission: "Free admission"
-        still_available: "available place(s)"
+        still_available: "verfügbare Plätze"
         without_reservation: "Without reservation"
         add_an_event: "Add an event"
-        load_the_next_events: "Load the next events..."
-        full_price_: "Full price:"
-        to_date: "to" #eg. from 01/01 to 01/05
-        all_themes: "All themes"
+        load_the_next_events: "Die nächsten Events laden..."
+        full_price_: "Voller Preis:"
+        to_date: "bis" #eg. from 01/01 to 01/05
+        all_themes: "Alle Themen"
       #details and booking of an event
       events_show:
-        event_description: "Event description"
-        downloadable_documents: "Downloadable documents"
-        information_and_booking: "Information and booking"
+        event_description: "Beschreibung"
+        downloadable_documents: "Herunterladbare Dokumente"
+        information_and_booking: "Information und Buchung"
         dates: "Datum"
         beginning: "Beginn:"
         ending: "Endet:"
@@ -325,8 +325,8 @@ de:
         event_is_over: "The event is over."
         thanks_for_coming: "Thanks for coming!"
         view_event_list: "View events to come"
-        share_on_facebook: "Share on Facebook"
-        share_on_twitter: "Share on Twitter"
+        share_on_facebook: "Auf Facebook teilen"
+        share_on_twitter: "Auf Twitter teilen"
       #public calendar
       calendar:
         calendar: "Calendar"
@@ -345,7 +345,7 @@ de:
         status_enabled: "Enabled"
         status_disabled: "Disabled"
         status_all: "All"
-        book: "Book"
+        book: "Buchen"
       #display the details of a space
       space_show:
         book_this_space: "Diesen Platz buchen"
