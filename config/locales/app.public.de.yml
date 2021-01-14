@@ -202,7 +202,7 @@ de:
         do_you_really_want_to_delete_this_project: "Do you really want to delete this project?"
       #list of machines
       machines_list:
-        the_fablab_s_machines: "The FabLab's machines"
+        the_fablab_s_machines: "Die Maschinen des FabLabs"
         add_a_machine: "Maschine hinzufügen"
         new_availability: "Open reservations"
         book: "Buchen"
