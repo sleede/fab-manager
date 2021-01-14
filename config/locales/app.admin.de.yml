@@ -4,8 +4,8 @@ de:
       #add a new machine
       machines_new:
         declare_a_new_machine: "Declare a new machine"
-        watch_out_when_creating_a_new_machine_its_prices_are_initialized_at_0_for_all_subscriptions: "Watch out! When creating a new machine, its prices are initialized at 0 for all subscriptions."
-        consider_changing_them_before_creating_any_reservation_slot: "Consider changing them before creating any reservation slot."
+        watch_out_when_creating_a_new_machine_its_prices_are_initialized_at_0_for_all_subscriptions: "Achtung! Beim Erstellen einer neuen Maschine werden die Preise für alle Abonnements auf 0 initialisiert."
+        consider_changing_them_before_creating_any_reservation_slot: "Denken Sie daran, sie zu ändern, bevor Sie einen Reservierungsplatz erstellen."
       #machine edition
       machines_edit:
         machine_edit: "Edit a machine"
