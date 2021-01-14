@@ -15,8 +15,8 @@ de:
         today: "Today"
         confirm: "Bestätigen"
         save: "Save"
-        "yes": "Yes"
-        "no": "No"
+        "yes": "Ja"
+        "no": "Nein"
         apply: "Apply"
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "You will lose any unsaved modification if you quit this page"
@@ -199,16 +199,16 @@ de:
       trainings:
         name: "Name"
         name_is_required: "Name is required."
-        illustration: "Illustration"
-        add_an_illustration: "Add an illustration"
-        description: "Description"
+        illustration: "Abbildung"
+        add_an_illustration: "Bild hinzufügen"
+        description: "Beschreibung"
         description_is_required: "Description is required."
         add_a_new_training: "Add a new training"
         validate_your_training: "Validate your training"
         associated_machines: "Verknüpfte Maschinen"
         number_of_tickets: "Anzahl der Tickets"
-        public_page: "Show in training lists"
-        disable_training: "Disable the training"
+        public_page: "In Schulungslisten anzeigen"
+        disable_training: "Training deaktivieren"
       #partial form to edit/create an user (admin view)
       user_admin:
         user: "User"
