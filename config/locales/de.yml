@@ -2,14 +2,14 @@ de:
   #subscription plan duration
   duration:
     year:
-      one: 'one year'
-      other: '%{count} years'
+      one: 'Ein Jahr'
+      other: '%{count} Jahre'
     month:
-      one: 'one month'
-      other: '%{count} months'
+      one: 'Ein Monat'
+      other: '%{count} Monate'
     week:
-      one: 'one week'
-      other: '%{count} weeks'
+      one: 'Eine Woche'
+      other: '%{count} Wochen'
   errors:
     #CarrierWave
     messages:
@@ -47,7 +47,7 @@ de:
     this_account_is_already_linked_to_an_user_of_the_platform: "This %{NAME} account is already linked to an user of the platform."
   #availability slots in the calendar
   availabilities:
-    not_available: "Not available"
+    not_available: "Nicht verfügbar"
     i_ve_reserved: "I've reserved"
     length_must_be_slot_multiple: "must be at least %{MIN} minutes after the start date"
     must_be_associated_with_at_least_1_machine: "must be associated with at least 1 machine"
@@ -155,7 +155,7 @@ de:
     gender: "Gender"
     age: "Age"
     address: "Address"
-    phone: "Phone"
+    phone: "Telefon"
     website: "Website"
     job: "Job"
     interests: "Interests"
@@ -166,7 +166,7 @@ de:
     validated_trainings: "Validated trainings"
     tags: "Tags"
     number_of_invoices: "Number of invoices"
-    projects: "Projects"
+    projects: "Projekte"
     facebook: "Facebook"
     twitter: "Twitter"
     echo_sciences: "Echosciences"
@@ -352,7 +352,7 @@ de:
     trainings: "Trainings"
     events: "Events"
     registrations: "Registrations"
-    projects: "Projects"
+    projects: "Projekte"
     users: "Users"
     training_id: "Training ID"
     training_date: "Training Date"
@@ -381,7 +381,7 @@ de:
     date: "Date"
     user: "User"
     email: "Email"
-    phone: "Phone"
+    phone: "Telefon"
     gender: "Gender"
     age: "Age"
     type: "Type"
