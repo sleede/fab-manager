@@ -9,7 +9,7 @@ de:
         cookies:
           about_cookies: "This website uses cookies for audience measurement purposes."
           learn_more: "Learn more"
-          accept: "Accept cookies"
+          accept: "Cookies akzeptieren"
           decline: "Refuse"
         #dashboard sections
         dashboard: "Dashboard"
@@ -21,7 +21,7 @@ de:
         my_invoices: "Meine Rechnungen"
         my_wallet: "Mein Guthaben"
         #contextual help
-        help: "Help"
+        help: "Hilfe"
         #login/logout
         sign_out: "Abmelden"
         sign_up: "Registrieren"
@@ -54,16 +54,16 @@ de:
         customization: "Anpassung"
         open_api_clients: "OpenAPI-Clients"
         #account creation modal
-        create_your_account: "Create your account"
+        create_your_account: "Eigenen Account erstellen"
         man: "Man"
         woman: "Woman"
         gender_is_required: "Gender is required."
-        your_first_name: "Your first name"
-        first_name_is_required: "First name is required."
-        your_surname: "Your surname"
-        surname_is_required: "Surname is required."
-        your_pseudonym: "Your pseudonym"
-        pseudonym_is_required: "Pseudonym is required."
+        your_first_name: "Dein Vorname"
+        first_name_is_required: "Der Vorname ist erforderlich."
+        your_surname: "Dein Nachname"
+        surname_is_required: "Nachname ist erforderlich."
+        your_pseudonym: "Dein Pseudonym"
+        pseudonym_is_required: "Pseudonym ist erforderlich."
         your_email_address: "Deine E-Mail-Adresse"
         email_is_required: "E-mail address is required."
         your_password: "Passwort"
