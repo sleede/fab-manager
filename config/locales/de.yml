@@ -15,7 +15,7 @@ de:
     messages:
       carrierwave_processing_error: "konnte nicht verarbeitet werden"
       carrierwave_integrity_error: "ist kein erlaubter Dateityp"
-      carrierwave_download_error: "could not be downloaded"
+      carrierwave_download_error: "konnte nicht heruntergeladen werden"
       extension_whitelist_error: "Sie sind nicht berechtigt, %{extension} Dateien hochzuladen, erlaubt sind die Typen: %{allowed_types}"
       extension_blacklist_error: "Sie sind nicht berechtigt, %{extension} Dateien hochzuladen. Unerlaubte Typen: %{prohibited_types}"
       content_type_whitelist_error: "Sie sind nicht berechtigt, %{content_type} Dateien hochzuladen, erlaubt sind die Typen: %{allowed_types}"
@@ -44,21 +44,21 @@ de:
     email_already_linked_to_another_account_please_input_your_authentication_code: "E-Mail-Adresse \"%{OLD_MAIL}\" ist bereits mit einem Konto verknüpft. Bitte geben Sie Ihren Authentifizierungscode ein."
     your_username_is_already_linked_to_another_account_unable_to_update_it: "Ihr Benutzername (%{USERNAME}) ist bereits einem anderen Konto zugeordnet. Aktualisierung nicht möglich."
     your_email_address_is_already_linked_to_another_account_unable_to_update_it: "Ihre E-Mail-Adresse (%{EMAIL}) ist bereits einem anderen Konto zugeordnet. Aktualisierung nicht möglich."
-    this_account_is_already_linked_to_an_user_of_the_platform: "This %{NAME} account is already linked to an user of the platform."
+    this_account_is_already_linked_to_an_user_of_the_platform: "Das Konto %{NAME} wird bereits von einem Benutzer der Plattform verwendet."
   #availability slots in the calendar
   availabilities:
     not_available: "Nicht verfügbar"
-    i_ve_reserved: "I've reserved"
-    length_must_be_slot_multiple: "must be at least %{MIN} minutes after the start date"
-    must_be_associated_with_at_least_1_machine: "must be associated with at least 1 machine"
+    i_ve_reserved: "Ich reservierte"
+    length_must_be_slot_multiple: "muss mindestens %{MIN} Minuten nach dem Startdatum liegen"
+    must_be_associated_with_at_least_1_machine: "muss mindestens einer Maschine zugeordnet sein"
   #members management
   members:
-    unable_to_change_the_group_while_a_subscription_is_running: "Unable to change the group while a subscription is running"
-    admins_cant_change_group: "Unable to remove an administrator from his dedicated group"
-    please_input_the_authentication_code_sent_to_the_address: "Please input the authentication code sent to the e-mail address %{EMAIL}"
-    your_authentication_code_is_not_valid: "Your authentication code is not valid."
-    current_authentication_method_no_code: "The current authentication method does not require any migration code"
-    requested_account_does_not_exists: "The requested account does not exist"
+    unable_to_change_the_group_while_a_subscription_is_running: "Die Gruppe kann während eines Abonnements nicht geändert werden"
+    admins_cant_change_group: "Ein Administrator kann nicht aus seiner eigenen Gruppe entfernt werden"
+    please_input_the_authentication_code_sent_to_the_address: "Bitte geben Sie den Authentifizierungscode ein, der an die E-Mail-Adresse %{EMAIL} gesendet wurde"
+    your_authentication_code_is_not_valid: "Der Authentifizierungscode ist ungültig."
+    current_authentication_method_no_code: "Die aktuelle Authentifizierungsmethode erfordert keinen Migrationscode"
+    requested_account_does_not_exists: "Das gewünschte Konto ist nicht vorhanden"
   #PDF invoices generation
   invoices:
     refund_invoice_reference: "Refund invoice reference: %{REF}"
