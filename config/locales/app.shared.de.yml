@@ -95,7 +95,7 @@ de:
       machine:
         name: "Name"
         name_is_required: "Name is required."
-        illustration: "Visual"
+        illustration: "Ansicht"
         add_an_illustration: "Add a visual"
         description: "Description"
         description_is_required: "Description is required."
