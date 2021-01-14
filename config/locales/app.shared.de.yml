@@ -282,7 +282,7 @@ de:
         author: "Author"
         collaborator: "Collaborator"
         private_profile: "Private profile"
-        interests: "Interests"
+        interests: "Interessen"
         CAD_softwares_mastered: "CAD softwares mastered"
         email_address: "E‐Mail‐Adresse"
         trainings: "Trainings"
@@ -290,9 +290,9 @@ de:
       #wallet
       wallet:
         wallet: 'Wallet'
-        your_wallet_amount: 'Your amount available'
+        your_wallet_amount: 'verfügbares Guthaben'
         wallet_amount: 'Amount available'
-        no_transactions_for_now: 'No transactions for now'
+        no_transactions_for_now: 'Momentan keine Transaktionen'
         date: "Date"
         operation: 'Operation'
         operator: 'Operator'
