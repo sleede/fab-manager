@@ -30,20 +30,20 @@ de:
       cannot_be_blank_at_same_time: "darf nicht leer sein, wenn %{field} auch leer ist"
       cannot_be_in_the_past: "darf nicht in der Vergangenheit liegen"
       cannot_be_before_previous_value: "darf nicht vor dem vorherigen Wert liegen"
-      cannot_overlap: "can't overlap an existing accounting period"
-      cannot_encompass: "can't encompass an existing accounting period"
-      in_closed_period: "can't be within a closed accounting period"
-      invalid_footprint: "invoice's checksum is invalid"
-      end_before_start: "The end date can't be before the start date. Pick a date after %{START}"
-      invalid_duration: "The allowed duration must be between 1 day and 1 year. Your period is %{DAYS} days long."
-      must_be_in_the_past: "The period must be strictly prior to today's date."
+      cannot_overlap: "darf einen bestehenden Abrechnungszeitraum nicht überlappen"
+      cannot_encompass: "darf einen bestehenden Abrechnungszeitraum nicht umfassen"
+      in_closed_period: "darf nicht innerhalb eines geschlossenen Abrechnungszeitraums sein"
+      invalid_footprint: "die Prüfsumme der Rechnung ist ungültig"
+      end_before_start: "Das Enddatum darf nicht vor dem Startdatum liegen. Wählen Sie ein Datum nach %{START}"
+      invalid_duration: "Der zulässige Zeitraum muss zwischen 1 Tag und 1 Jahr lang sein. Ihr Zeitraum ist %{DAYS} Tage lang."
+      must_be_in_the_past: "Der Zeitraum darf ausschließlich vor dem heutigen Datum liegen."
   apipie:
-    api_documentation: "API Documentation"
+    api_documentation: "API-Dokumentation"
   #error messages when importing an account from a SSO
   omniauth:
-    email_already_linked_to_another_account_please_input_your_authentication_code: "E-mail address \"%{OLD_MAIL}\" is already linked to another account, please input your authentication code."
-    your_username_is_already_linked_to_another_account_unable_to_update_it: "Your username (%{USERNAME}) is already linked to another account, unable to update it."
-    your_email_address_is_already_linked_to_another_account_unable_to_update_it: "Your e-mail address (%{EMAIL}) is already linked to another account, unable to update it."
+    email_already_linked_to_another_account_please_input_your_authentication_code: "E-Mail-Adresse \"%{OLD_MAIL}\" ist bereits mit einem Konto verknüpft. Bitte geben Sie Ihren Authentifizierungscode ein."
+    your_username_is_already_linked_to_another_account_unable_to_update_it: "Ihr Benutzername (%{USERNAME}) ist bereits einem anderen Konto zugeordnet. Aktualisierung nicht möglich."
+    your_email_address_is_already_linked_to_another_account_unable_to_update_it: "Ihre E-Mail-Adresse (%{EMAIL}) ist bereits einem anderen Konto zugeordnet. Aktualisierung nicht möglich."
     this_account_is_already_linked_to_an_user_of_the_platform: "This %{NAME} account is already linked to an user of the platform."
   #availability slots in the calendar
   availabilities:
