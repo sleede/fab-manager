@@ -24,8 +24,8 @@ de:
         help: "Help"
         #login/logout
         sign_out: "Sign Out"
-        sign_up: "Sign Up"
-        sign_in: "Sign In"
+        sign_up: "Registrieren"
+        sign_in: "Anmelden"
         #left menu
         notifications: "Notifications"
         admin: "Admin"
@@ -136,22 +136,22 @@ de:
       #home page
       home:
         latest_documented_projects: "The latest documented projects"
-        follow_us: "Follow Us"
-        latest_tweets: "The latest tweets"
-        latest_registered_members: "Latest registered members"
-        create_an_account: "Create an account"
+        follow_us: "Folge uns"
+        latest_tweets: "Die neuesten Tweets"
+        latest_registered_members: "Neueste registrierte Mitglieder"
+        create_an_account: "Neues Konto einrichten"
         discover_members: "Discover members"
         #next events summary on the home page
         fablab_s_next_events: "Fablab's next events"
-        every_events: "Every events"
-        from_date_to_date: "From {START} to {END}"
-        on_the_date: "On the {DATE}"
-        from_time_to_time: "From {START} to {END}"
+        every_events: "Alle Veranstaltungen"
+        from_date_to_date: "Von {START} bis {END}"
+        on_the_date: "Am {DATE}"
+        from_time_to_time: "Von {START} bis {END}"
         without_reservation: "Without reservation"
         free_admission: "Free admission"
-        full_price: "Full price: "
+        full_price: "Voller Preis: "
         event_full: "Event full"
-        still_available: "Available place(s): "
+        still_available: "Verfügbare Plätze: "
         all_day: "All day"
       #projects gallery
       projects_list:
@@ -282,15 +282,15 @@ de:
         event_description: "Event description"
         downloadable_documents: "Downloadable documents"
         information_and_booking: "Information and booking"
-        dates: "Dates"
-        beginning: "Beginning:"
-        ending: "Ending:"
-        opening_hours: "Opening hours:"
+        dates: "Datum"
+        beginning: "Beginn:"
+        ending: "Endet:"
+        opening_hours: "Öffnungszeiten:"
         all_day: "All day"
-        from_time: "From" #eg. from 18:00 to 21:00
-        to_time: "to" #eg. from 18:00 to 21:00
-        full_price_: "Full price:"
-        tickets_still_availables: "Tickets still available:"
+        from_time: "Von" #eg. from 18:00 to 21:00
+        to_time: "bis" #eg. from 18:00 to 21:00
+        full_price_: "Voller Preis:"
+        tickets_still_availables: "noch verfügbare Tickets:"
         sold_out: "Sold out."
         without_reservation: "Without reservation"
         cancelled: "Cancelled"
@@ -301,7 +301,7 @@ de:
         dashboard: "dashboard"
         you_booked_DATE: "You booked ({DATE}):"
         canceled_reservation_SEATS: "Reservation canceled ({SEATS} seats)"
-        book: "Book"
+        book: "Buchen"
         confirm_and_pay: "Confirm and pay"
         confirm_payment_of_html: "{ROLE, select, admin{Cash} other{Pay}}: {AMOUNT}" #(contexte : validate a payment of $20,00)
         online_payment_disabled: "Payment by credit card is not available. Please contact the FabLab's reception directly."
@@ -353,8 +353,8 @@ de:
         confirmation_required: "Confirmation required"
         do_you_really_want_to_delete_this_space: "Do you really want to delete this space?"
         the_space_cant_be_deleted_because_it_is_already_reserved_by_some_users: "Unable to delete this space, because it is already reserved by some users."
-        characteristics: "Characteristics"
-        files_to_download: "Files to download"
+        characteristics: "Eigenschaften"
+        files_to_download: "Dateien zum Herunterladen"
         projects_using_the_space: "Projects using the space"
       tour:
         conclusion:
