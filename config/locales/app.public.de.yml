@@ -13,30 +13,30 @@ de:
           decline: "Refuse"
         #dashboard sections
         dashboard: "Dashboard"
-        my_profile: "My Profile"
-        my_settings: "My Settings"
+        my_profile: "Mein Profil"
+        my_settings: "Persönliche Einstellungen"
         my_projects: "Meine Projekte"
-        my_trainings: "My Trainings"
-        my_events: "My Events"
-        my_invoices: "My Invoices"
-        my_wallet: "My Wallet"
+        my_trainings: "Meine Trainings"
+        my_events: "Meine Veranstaltungen"
+        my_invoices: "Meine Rechnungen"
+        my_wallet: "Mein Guthaben"
         #contextual help
         help: "Help"
         #login/logout
-        sign_out: "Sign Out"
+        sign_out: "Abmelden"
         sign_up: "Registrieren"
         sign_in: "Anmelden"
         #left menu
-        notifications: "Notifications"
+        notifications: "Mitteilungen"
         admin: "Admin"
         manager: "Manager"
         reduce_panel: "Reduce panel"
         #left menu (public)
-        home: "Home"
+        home: "Start"
         reserve_a_machine: "Maschine reservieren"
         trainings_registrations: "Trainings registrations"
         events_registrations: "Events registrations"
-        reserve_a_space: "Reserve a Space"
+        reserve_a_space: "Platz reservieren"
         projects_gallery: "Projekt-Galerie"
         subscriptions: "Subscriptions"
         public_calendar: "Kalender"
@@ -140,7 +140,7 @@ de:
         latest_tweets: "Die neuesten Tweets"
         latest_registered_members: "Neueste registrierte Mitglieder"
         create_an_account: "Neues Konto einrichten"
-        discover_members: "Discover members"
+        discover_members: "Mitglieder entdecken"
         #next events summary on the home page
         fablab_s_next_events: "Fablab´s nächste Veranstaltungen"
         every_events: "Alle Veranstaltungen"
@@ -235,7 +235,7 @@ de:
       #summary of the subscriptions
       plans:
         subscriptions: "Abonnements"
-        i_choose_that_plan: "I choose that plan"
+        i_choose_that_plan: "Ich wähle dieses Abo"
         i_subscribe_online: "I subscribe online"
         i_already_subscribed: "I already subscribed"
         more_information: "Weitere Informationen"
