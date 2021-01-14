@@ -242,13 +242,13 @@ de:
       notify_admin_subscription_canceled:
         USER_s_subscription_has_been_cancelled: "Das Abonnement von %{USER} wurde gekündigt."
       notify_admin_subscription_extended:
-        subscription_PLAN_of_the_member_USER_has_been_extended_FREE_until_DATE_html: "Subscription <strong><em>{PLAN}</em></strong> of the member <strong><em>{USER}</strong></em> has been extended {FREE, select, true{for free} other{}} until {DATE}." #messageFormat interpolation
+        subscription_PLAN_of_the_member_USER_has_been_extended_FREE_until_DATE_html: "Das Abonnement <strong><em>{PLAN}</em></strong> des Mitglieds <strong><em>{USER}</strong></em> wurde verlängert {FREE, select, true{kostenlos} other{}} bis {DATE}." #messageFormat interpolation
       notify_admin_subscription_is_expired:
-        USER_s_subscription_has_expired: "%{USER}'s subscription has expired."
+        USER_s_subscription_has_expired: "Das Abonnement von %{USER} ist abgelaufen."
       notify_admin_subscription_will_expire_in_7_days:
-        USER_s_subscription_will_expire_in_7_days: "%{USER}'s subscription will expire in 7 days."
+        USER_s_subscription_will_expire_in_7_days: "Das Abonnement von %{USER} wird in 7 Tagen ablaufen."
       notify_admin_user_group_changed:
-        user_NAME_changed_his_group_html: "User <strong><em>{NAME}</strong></em> changed {GENDER, select, true{his} other{her}} group." #messageFormat interpolation
+        user_NAME_changed_his_group_html: "Benutzer <strong><em>{NAME}</strong></em> hat {GENDER, select, true{seine} other{ihre}} Gruppe geändert." #messageFormat interpolation
       notify_admin_user_merged:
         user_NAME_has_merged_his_account_with_the_one_imported_from_PROVIDER_UID_html: "User <strong><em>{NAME}</strong></em> has merged {GENDER, select, true{his} other{her}} account with the one imported from <strong><em>{PROVIDER} </strong> ({UID})</em>." #messageFormat interpolation
       notify_admin_when_project_published:
