@@ -90,7 +90,7 @@ de:
         creative_commons_licences: "Creative Commons licences"
         themes: "Themes"
         tags: "Stichwörter"
-        save_as_draft: "Save as draft"
+        save_as_draft: "Als Entwurf speichern"
       #machine edition form
       machine:
         name: "Name"
