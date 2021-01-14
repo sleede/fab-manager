@@ -46,7 +46,7 @@ de:
         #dashboard: edit my profile
         settings:
           last_activity_on_: "Last activity on {DATE}"
-          i_want_to_change_group: "I want to change group!"
+          i_want_to_change_group: "Ich möchte die Gruppe ändern!"
           your_subscription_expires_on_: "Your subscription expires on"
           no_subscriptions: "No subscriptions"
           i_want_to_subscribe: "I want to subscribe!"
@@ -61,8 +61,8 @@ de:
           cookies_declined: "You have refused cookies"
           cookies_unset: "You have not chosen yet"
           reset_cookies: "Change my choice"
-          delete_my_account: "Delete my account"
-          edit_my_profile: "Edit my profile"
+          delete_my_account: "Mein Konto löschen"
+          edit_my_profile: "Mein Profil bearbeiten"
           your_group_has_been_successfully_changed: "Your group has been successfully changed."
           an_unexpected_error_prevented_your_group_from_being_changed: "An unexpected error prevented your group from being changed."
           confirmation_required: "Confirmation required"
@@ -82,7 +82,7 @@ de:
           trainings: "Trainings"
           no_trainings: "No trainings"
           subscription: "Subscription"
-          group: "Group"
+          group: "Gruppe"
           or: "or"
           confirm_changes: "Confirm changes"
           change_my_data: "Change my data"
@@ -94,7 +94,7 @@ de:
         #dashboard: my projects
         projects:
           you_dont_have_any_projects: "You don't have any projects."
-          add_a_project: "Add a project"
+          add_a_project: "Projekt hinzufügen"
           author: "Autor"
           collaborator: "Collaborator"
           rough_draft: "Entwurf"
@@ -111,10 +111,10 @@ de:
           no_trainings: "No trainings"
         #dashboard: my events
         events:
-          your_next_events: "Your next events"
-          no_events_to_come: "No events to come"
-          your_previous_events: "Your previous events"
-          no_passed_events: "No passed events"
+          your_next_events: "Ihre nächsten Termine"
+          no_events_to_come: "Keine anzuzeigenden Termine"
+          your_previous_events: "Ihre vorherigen Termine"
+          no_passed_events: "Keine vergangenen Termine"
           NUMBER_normal_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{normal place reserved} other{normal places reserved}}"
           NUMBER_of_NAME_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{of {NAME} place reserved} other{of {NAME} places reserved}}"
         #dashboard: my invoices
@@ -124,7 +124,7 @@ de:
           price: "Price"
           download_the_invoice: "Download the invoice"
           download_the_credit_note: "Download the refund invoice"
-          no_invoices_for_now: "No invoices for now."
+          no_invoices_for_now: "Momentan keine Rechnungen."
       #public profil of a member
       members_show:
         members_list: "Members list"
