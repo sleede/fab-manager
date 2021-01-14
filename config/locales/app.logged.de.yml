@@ -147,7 +147,7 @@ de:
         publish: "Publish"
       #book a machine
       machines_reserve:
-        machine_planning: "Machine planning"
+        machine_planning: "Belegungsplan"
         i_ve_reserved: "I've reserved"
         not_available: "Not available"
         i_reserve: "I reserve"
