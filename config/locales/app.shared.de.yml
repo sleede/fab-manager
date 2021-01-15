@@ -435,9 +435,9 @@ de:
         no_tags: "No tags"
       #feature-tour modal
       tour:
-        previous: "Previous"
-        next: "Next"
-        end: "End the tour"
+        previous: "Vorherige"
+        next: "Nächste"
+        end: "Tour beenden"
       #help modal
       help:
         title: "Help"
