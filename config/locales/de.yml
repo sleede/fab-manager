@@ -125,17 +125,17 @@ de:
     debit_euro: "Euro debit"
     credit_euro: "Euro credit"
     lettering: "Lettering"
-    VAT: 'VAT'
-    subscription: "subscr."
-    Machine_reservation: "machine reserv."
-    Training_reservation: "training reserv."
-    Event_reservation: "event reserv."
-    Space_reservation: "space reserv."
-    wallet: "wallet"
+    VAT: 'Mwst.'
+    subscription: "Abonnement"
+    Machine_reservation: "Maschinenreservierung"
+    Training_reservation: "Schulungsreservierung"
+    Event_reservation: "Veranstaltungsreservierung"
+    Space_reservation: "Raumreservierung"
+    wallet: "Guthabenkonto"
   #training availabilities
   trainings:
-    i_ve_reserved: "I've reserved"
-    completed: "Full"
+    i_ve_reserved: "Ich reservierte"
+    completed: "Vollständig"
   #error messages when updating an event
   events:
     error_deleting_reserved_price: "Unable to delete the requested price because it is associated with some reservations"
