@@ -250,35 +250,35 @@ de:
       notify_admin_user_group_changed:
         user_NAME_changed_his_group_html: "Benutzer <strong><em>{NAME}</strong></em> hat {GENDER, select, true{seine} other{ihre}} Gruppe geändert." #messageFormat interpolation
       notify_admin_user_merged:
-        user_NAME_has_merged_his_account_with_the_one_imported_from_PROVIDER_UID_html: "User <strong><em>{NAME}</strong></em> has merged {GENDER, select, true{his} other{her}} account with the one imported from <strong><em>{PROVIDER} </strong> ({UID})</em>." #messageFormat interpolation
+        user_NAME_has_merged_his_account_with_the_one_imported_from_PROVIDER_UID_html: "Nutzer <strong><em>{NAME}</strong></em> hat {GENDER, select, true{seinen} other{ihren}} Account mit dem von <strong><em>{PROVIDER} </strong> ({UID})</em> importierten Account zusammengeführt." #messageFormat interpolation
       notify_admin_when_project_published:
-        project_NAME_has_been_published_html: "Project <a href='/#!/projects/%{ID}'><strong><em>%{NAME}<em></strong></a> has been published."
+        project_NAME_has_been_published_html: "Projekt <a href='/#!/projects/%{ID}'><strong><em>%{NAME}<em></strong></a> wurde veröffentlicht."
       notify_admin_when_user_is_created:
-        a_new_user_account_has_been_created_NAME_EMAIL_html: "A new user account has been created: <strong><em>%{NAME} &lt;%{EMAIL}&gt;</strong></em>."
+        a_new_user_account_has_been_created_NAME_EMAIL_html: "Ein neues Benutzerkonto wurde erstellt: <strong><em>%{NAME} &lt;%{EMAIL}&gt;</strong></em>."
       notify_admin_when_user_is_imported:
-        a_new_user_account_has_been_imported_from_PROVIDER_UID_html: "A new user account has been imported from: <strong><em>%{PROVIDER}</strong> (%{UID})</em>."
+        a_new_user_account_has_been_imported_from_PROVIDER_UID_html: "Ein neues Benutzerkonto wurde von <strong><em>%{PROVIDER}</strong> (%{UID})</em> importiert."
       notify_member_create_reservation:
-        your_reservation_RESERVABLE_was_successfully_saved_html: "Your reservation <strong><em>%{RESERVABLE}</em></strong> was successfully saved."
+        your_reservation_RESERVABLE_was_successfully_saved_html: "Ihre Reservierung <strong><em>%{RESERVABLE}</em></strong> wurde erfolgreich gespeichert."
       notify_member_reservation_reminder:
-        reminder_you_have_a_reservation_RESERVABLE_to_be_held_on_DATE_html: "Reminder: You have a reservation <strong>%{RESERVABLE}</strong> to be held on <em>%{DATE}</em>"
+        reminder_you_have_a_reservation_RESERVABLE_to_be_held_on_DATE_html: "Erinnerung: Sie haben eine Reservierung <strong>%{RESERVABLE}</strong> für <em>%{DATE}</em>"
       notify_member_slot_is_canceled:
-        your_reservation_RESERVABLE_of_DATE_was_successfully_cancelled: "Your reservation %{RESERVABLE} of %{DATE} was successfully cancelled."
+        your_reservation_RESERVABLE_of_DATE_was_successfully_cancelled: "Ihre Reservierung %{RESERVABLE} von %{DATE} wurde erfolgreich storniert."
       notify_member_slot_is_modified:
-        your_reservation_slot_was_successfully_changed: "Your reservation slot was successfully changed."
+        your_reservation_slot_was_successfully_changed: "Ihr Reservierungsslot wurde erfolgreich geändert."
       notify_member_subscribed_plan:
-        you_have_subscribed_to_PLAN_html: "You have subscribed to <strong><em>%{PLAN}</em></strong>."
+        you_have_subscribed_to_PLAN_html: "Sie haben <strong><em>%{PLAN}</em></strong> abonniert."
       notify_member_subscribed_plan_is_changed:
-        you_have_changed_your_subscription_to_PLAN_html: "You have changed your subscription to <strong><em>%{PLAN}</em></strong>."
+        you_have_changed_your_subscription_to_PLAN_html: "Sie haben Ihr Abonnement für <strong><em>%{PLAN}</em></strong> geändert."
       notify_member_subscription_canceled:
-        your_subscription_PLAN_was_successfully_cancelled_html: "Your subscription <strong><em>%{PLAN}</em></strong> was successfully cancelled."
+        your_subscription_PLAN_was_successfully_cancelled_html: "Ihr Abonnement von <strong><em>%{PLAN}</em></strong> wurde erfolgreich storniert."
       notify_member_subscription_extended:
-        your_subscription_PLAN_has_been_extended_FREE_until_DATE_html: "Your subscription <strong><em>{PLAN}</em></strong> has been extended {FREE, select, true{for free} other{}} until {DATE}." #messageFormat interpolation
+        your_subscription_PLAN_has_been_extended_FREE_until_DATE_html: "Ihr Abonnement von <strong><em>{PLAN}</em></strong> wurde {FREE, select, true{kostenlos} other{}} bis {DATE} verlängert." #messageFormat interpolation
       notify_member_subscription_is_expired:
-        your_subscription_has_expired: "Your subscription has expired."
+        your_subscription_has_expired: "Ihr Abonnement ist abgelaufen."
       notify_member_subscription_will_expire_in_7_days:
-        your_subscription_will_expire_in_7_days: "Your subscription will expire in 7 days."
+        your_subscription_will_expire_in_7_days: "Ihr Abonnement läuft in 7 Tagen ab."
       notify_partner_subscribed_plan:
-        subscription_partner_PLAN_has_been_subscribed_by_USER_html: "Partner subscription <strong><em>%{PLAN}</em></strong> has been subscribed by <strong><em>%{USER}</strong></em>."
+        subscription_partner_PLAN_has_been_subscribed_by_USER_html: "Das Partnerabonnement <strong><em>%{PLAN}</em></strong> wurde von <strong><em>%{USER}</strong></em> abonniert."
       notify_project_author_when_collaborator_valid:
         USER_became_collaborator_of_your_project: "%{USER} became collaborator of your project:"
       notify_project_collaborator_to_valid:
