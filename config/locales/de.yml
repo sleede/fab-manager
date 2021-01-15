@@ -2,7 +2,7 @@ de:
   #subscription plan duration
   duration:
     year:
-      one: 'Ein Jahr'
+      one: 'ein Jahr'
       other: '%{count} Jahre'
     month:
       one: 'Ein Monat'
@@ -299,29 +299,29 @@ de:
         unknown_notification: "Unbekannte Benachrichtigung"
         notification_ID_wrong_type_TYPE_unknown: "Benachrichtigung %{ID} falsch (Typ %{TYPE} unbekannt)"
       notify_user_wallet_is_credited:
-        your_wallet_is_credited: "Your wallet has been credited by administrator"
+        your_wallet_is_credited: "Eine Gutschrift wurde ihrem Konto gutgeschrieben von einem Administrator"
       notify_admin_user_wallet_is_credited:
-        wallet_is_credited: "The wallet of member %{USER} has been credited %{AMOUNT}"
+        wallet_is_credited: "Dem Guthaben des Mitglieds %{USER} wurde %{AMOUNT} gutgeschrieben"
       notify_admin_export_complete:
-        export: "The export"
-        statistics_global: "of all the statistics"
-        statistics_account: "of the registration statistics"
-        statistics_event: "of statistics about events"
-        statistics_machine: "of statistics about machine slots"
-        statistics_project: "of statistics about projects"
-        statistics_subscription: "of subscription statistics"
-        statistics_training: "of statistics about trainings"
-        statistics_space: "of statistics about spaces"
-        users_members: "of the members' list"
-        users_subscriptions: "of the subscriptions' list"
-        users_reservations: "of the reservations' list"
-        availabilities_index: "of the reservations availabilities"
-        accounting_acd: "of the accounting data to ACD"
-        is_over: "is over."
-        download_here: "Download here"
+        export: "Der Export"
+        statistics_global: "aller Statistiken"
+        statistics_account: "der Registrierungsstatistiken"
+        statistics_event: "der Veranstaltungsstatistiken"
+        statistics_machine: "der Statistiken der Maschinenslots"
+        statistics_project: "der Projektstatistiken"
+        statistics_subscription: "der Abonnementstatistiken"
+        statistics_training: "der Schulungsstatistiken"
+        statistics_space: "der Raumstatistiken"
+        users_members: "der Mitgliederliste"
+        users_subscriptions: "der Abonnementliste"
+        users_reservations: "der Reservierungsliste"
+        availabilities_index: "der Verfügbarkeit der Reservierungen"
+        accounting_acd: "der Rechnungsdaten für ACD"
+        is_over: "ist beendet."
+        download_here: "Hier herunterladen"
       notify_admin_import_complete:
-        import_over: "%{CATEGORY} import is over. "
-        members: "Members"
+        import_over: "%{CATEGORY} Import ist beendet. "
+        members: "Mitglieder"
         view_results: "Ergebnisse anzeigen."
       notify_member_about_coupon:
         enjoy_a_discount_of_PERCENT_with_code_CODE: "Erhalten Sie %{PERCENT}% Rabatt mit dem Code %{CODE}"
@@ -390,7 +390,7 @@ de:
   #initial price's category for events, created to replace the old "reduced amount" property
   price_category:
     reduced_fare: "Ermäßigter Tarif"
-    reduced_fare_if_you_are_under_25_student_or_unemployed: "Reduced fare if you are under 25, student or unemployed."
+    reduced_fare_if_you_are_under_25_student_or_unemployed: "Ermäßigter Tarif, wenn Sie unter 25, studierend oder arbeitslos sind."
   group:
     #name of the user's group for administrators
-    admins: 'Administrators'
+    admins: 'Administratoren'
