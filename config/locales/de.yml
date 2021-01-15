@@ -280,24 +280,24 @@ de:
       notify_partner_subscribed_plan:
         subscription_partner_PLAN_has_been_subscribed_by_USER_html: "Das Partnerabonnement <strong><em>%{PLAN}</em></strong> wurde von <strong><em>%{USER}</strong></em> abonniert."
       notify_project_author_when_collaborator_valid:
-        USER_became_collaborator_of_your_project: "%{USER} became collaborator of your project:"
+        USER_became_collaborator_of_your_project: "%{USER} nimmt nun teil an Ihrem Projekt:"
       notify_project_collaborator_to_valid:
-        you_are_invited_to_collaborate_on_the_project: "You are invited to collaborate on the project:"
+        you_are_invited_to_collaborate_on_the_project: "Sie wurden zur Teilnahme am Projekt eingeladen:"
       notify_user_auth_migration:
-        your_account_was_migrated: "You account was successfully migrated to the new authentication system."
+        your_account_was_migrated: "Ihr Konto wurde erfolgreich in das neue Authentifizierungssystem migriert."
       notify_user_profile_complete:
-        your_profile_was_completed: "Your profile was successfully completed, you now have access to the entire platform."
+        your_profile_was_completed: "Ihr Profil ist vollständig, Sie haben nun Zugriff auf die gesamte Plattform."
       notify_user_training_valid:
-        your_TRAINING_was_validated_html: "Your training <strong><em>%{TRAINING}</em></strong> was successfully validated."
+        your_TRAINING_was_validated_html: "Ihre Schulung <strong><em>%{TRAINING}</em></strong> wurde erfolgreich überprüft."
       notify_user_user_group_changed:
-        your_group_has_changed: "Your group has changed."
+        your_group_has_changed: "Ihre Gruppe hat sich geändert."
       notify_user_when_avoir_ready:
-        your_avoir_is_ready_html: "Your refund invoice #%{REFERENCE}, of %{AMOUNT}, is ready. <a href='api/invoices/%{INVOICE_ID}/download' target='_blank'>Click here to download</a>."
+        your_avoir_is_ready_html: "Ihre Rückerstattungsrechnung #%{REFERENCE}, über %{AMOUNT} wurde erstellt. <a href='api/invoices/%{INVOICE_ID}/download' target='_blank'>Hier herunterladen</a>."
       notify_user_when_invoice_ready:
-        your_invoice_is_ready_html: "Your invoice #%{REFERENCE}, of %{AMOUNT} is ready. <a href='api/invoices/%{INVOICE_ID}/download' target='_blank'>Click here to download</a>."
+        your_invoice_is_ready_html: "Ihre Rechnung #%{REFERENCE}, über %{AMOUNT} wurde erstellt. <a href='api/invoices/%{INVOICE_ID}/download' target='_blank'>Hier herunterladen</a>."
       undefined_notification:
-        unknown_notification: "Unknown notification"
-        notification_ID_wrong_type_TYPE_unknown: "Notification %{ID} wrong (type %{TYPE} unknown)"
+        unknown_notification: "Unbekannte Benachrichtigung"
+        notification_ID_wrong_type_TYPE_unknown: "Benachrichtigung %{ID} falsch (Typ %{TYPE} unbekannt)"
       notify_user_wallet_is_credited:
         your_wallet_is_credited: "Your wallet has been credited by administrator"
       notify_admin_user_wallet_is_credited:
