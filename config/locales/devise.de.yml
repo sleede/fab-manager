@@ -54,10 +54,10 @@ de:
   errors:
     messages:
       already_confirmed: "Diese E-Mail wurde bereits bestätigt. Bitte melden Sie sich an."
-      confirmation_period_expired: "needs to be confirmed within %{period}, please request a new one"
-      expired: "has expired, please request a new one"
-      not_found: "This email was not found"
-      not_locked: "was not locked"
+      confirmation_period_expired: "muss innerhalb von %{period} bestätigt werden. Bitte neu anfordern"
+      expired: "ist abgelaufen, bitte neu anfordern"
+      not_found: "Die E-Mail wurde nicht gefunden"
+      not_locked: "war nicht gesperrt"
       not_saved:
-        one: "1 error prohibited this %{resource} from being saved:"
-        other: "%{count} errors prohibited this %{resource} from being saved:"
+        one: "Ein Fehler hat verhindert, dass %{resource} gespeichert werden konnte:"
+        other: "%{count} Fehler haben verhindert, dass %{resource} gespeichert werden konnte:"
