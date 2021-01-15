@@ -2,7 +2,7 @@ de:
   layouts:
     notifications_mailer:
       see_you_later: "See you soon on {GENDER, select, neutral{} other{the}}" #messageFormat interpolation
-      sincerely: "Sincerely,"
+      sincerely: "Mit freundlichen Grüßen,"
       signature: "The Fab Lab team."
       do_not_reply: "Please do not reply to this email."
   users_mailer:
