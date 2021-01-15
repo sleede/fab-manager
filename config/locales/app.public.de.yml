@@ -366,13 +366,13 @@ de:
             content: "To help you get started with the application, we are going to take a quick tour of the features."
           home:
             title: "Home page"
-            content: "Clicking here will take you back to the home page where you are currently."
+            content: "Wenn Du hier klickst, kommst du zurück zur Homepage, auf der du dich gerade befindest."
           machines:
             title: "Machines"
-            content: "<p>This page will allow you to consult the list of all machines and reserve a slot on behalf of a member.</p><p>A machine can be, for example, a 3D printer.</p><p>Members can also access this page and reserve a machine themselves, if credit card payment is enabled, or if some prices are equal to 0.</p>"
+            content: "<p>Auf dieser Seite können Sie die Liste aller Maschinen einsehen und einen Slot im Namen eines Mitglieds reservieren.</p><p>Eine Maschine kann zum Beispiel ein 3D-Drucker sein.</p><p>Mitglieder können auch auf diese Seite zugreifen und eine Maschine selbst reservieren wenn Kreditkartenzahlung aktiviert ist, oder wenn einige Preise gleich 0 sind.</p>"
           trainings:
             title: "Trainings"
-            content: "<p>This page will allow you to consult the list of all training sessions and to register a member for a training session.</p><p>Trainings can be set as prerequisites before allowing reservation of certain machines.</p><p>Members can also access this page and register for a training session themselves, if credit card payment is enabled, or if some prices are equal to 0.</p>"
+            content: "<p>Auf dieser Seite können Sie die Liste aller Schulungen einsehen und ein Mitglied für eine Schulung registrieren.</p><p>Trainings können als Voraussetzungen gesetzt werden, bevor die Reservierung bestimmter Maschinen erlaubt wird.</p><p>Mitglieder können auch auf diese Seite zugreifen und sich für eine Schulung registrieren wenn Kreditkartenzahlung aktiviert ist, oder wenn einige Preise gleich 0 sind.</p>"
           spaces:
             title: "Spaces"
             content: "<p>This page will allow you to consult the list of all available spaces and to reserve a place on a slot, on behalf of a member.</p><p>A space can be, for example, a woodshop or a meeting room.</p><p>Their particularity is that they can be booked by several people at the same time.</p><p>Members can also access this page and reserve a machine themselves, if credit card payment is enabled, or if some prices are equal to 0.</p>"
