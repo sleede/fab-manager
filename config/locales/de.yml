@@ -325,36 +325,36 @@ de:
         view_results: "Ergebnisse anzeigen."
       notify_member_about_coupon:
         enjoy_a_discount_of_PERCENT_with_code_CODE: "Erhalten Sie %{PERCENT}% Rabatt mit dem Code %{CODE}"
-        enjoy_a_discount_of_AMOUNT_with_code_CODE: "Enjoy a discount of %{AMOUNT} with code %{CODE}"
+        enjoy_a_discount_of_AMOUNT_with_code_CODE: "Erhalten Sie %{AMOUNT}% Rabatt mit dem Code %{CODE}"
       notify_admin_free_disk_space:
-        warning_free_disk_space: "Warning: the server's available disk space is now %{AVAILABLE} MiB"
+        warning_free_disk_space: "Warnung: Auf dem Server ist noch %{AVAILABLE} MiB Speicherplatz verfügbar"
       notify_admin_close_period_reminder:
-        warning_last_closed_period_over_1_year: "Please remind to periodically close your accounting periods. Last closed period ended at %{LAST_END}"
-        warning_no_closed_periods: "Please remind to periodically close your accounting periods. You have to close periods from %{FIRST_DATE}"
+        warning_last_closed_period_over_1_year: "Bitte schließen Sie Ihre Abrechnungsperioden regelmäßig ab. Der letzte Abschlusszeitraum endete um %{LAST_END}"
+        warning_no_closed_periods: "Bitte schließen Sie Ihre Abrechnungsperioden regelmäßig ab. Sie müssen Abrechnungsperioden ab %{FIRST_DATE} schließen"
       notify_admin_archive_complete:
-        archive_complete: "Data archiving from %{START} to %{END} is done. <a href='api/accounting_periods/%{ID}/archive' target='_blank'>click here to download</a>. Remember to save it on an external secured media."
+        archive_complete: "Die Datenarchivierung von %{START} bis %{END} ist abgeschlossen. <a href='api/accounting_periods/%{ID}/archive' target='_blank'>Datenarchiv herunterladen</a>. Speichern Sie das Archiv auf einem externen, gesicherten Datenträger."
       notify_privacy_policy_changed:
         policy_updated: "Änderung der Datenschutz-Bestimmungen"
-        click_to_show: "Click here to consult"
+        click_to_show: "Zum Anzeigen hier klicken"
       notify_admin_refund_created:
-        refund_created: "A refund of %{AMOUNT} has been created for user %{USER}"
+        refund_created: "Eine Rückerstattung von %{AMOUNT} wurde für Benutzer %{USER} erstellt"
       notify_user_role_update:
-        your_role_is_ROLE: "Your role has been changed to %{ROLE}."
+        your_role_is_ROLE: "Ihre Rolle wurde in %{ROLE} geändert."
       notify_admins_role_update:
-        user_NAME_changed_ROLE_html: "User <strong><em>%{NAME}</strong></em> is now %{ROLE}."
+        user_NAME_changed_ROLE_html: "Benutzer <strong><em>%{NAME}</strong></em> ist jetzt %{ROLE}."
       notify_admin_members_stripe_sync:
-        all_members_sync: "All members were successfully synchronized on Stripe."
+        all_members_sync: "Alle Mitglieder wurden erfolgreich auf Stripe synchronisiert."
   #statistics tools for admins
   statistics:
-    subscriptions: "Subscriptions"
-    machines_hours: "Machines slots"
-    spaces: "Spaces"
-    trainings: "Trainings"
-    events: "Events"
-    registrations: "Registrations"
+    subscriptions: "Abonnements"
+    machines_hours: "Maschinen-Slots"
+    spaces: "Räume"
+    trainings: "Schulungen"
+    events: "Veranstaltungen"
+    registrations: "Anmeldungen"
     projects: "Projekte"
-    users: "Users"
-    training_id: "Training ID"
+    users: "Benutzer"
+    training_id: "Schulungs-ID"
     training_date: "Training Date"
     event_id: "Event ID"
     event_date: "Event Date"
