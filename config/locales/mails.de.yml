@@ -3,13 +3,13 @@ de:
     notifications_mailer:
       see_you_later: "See you soon on {GENDER, select, neutral{} other{the}}" #messageFormat interpolation
       sincerely: "Mit freundlichen Grüßen,"
-      signature: "The Fab Lab team."
-      do_not_reply: "Please do not reply to this email."
+      signature: "Das Fab Lab Team."
+      do_not_reply: "Bitte antworte nicht auf diese E-Mail."
   users_mailer:
     notify_user_account_created:
-      subject: "Your FabLab account has been successfully created"
+      subject: "Dein FabLab Account wurde erfolgreich erstellt"
       body:
-        hello: "Hello %{NAME},"
+        hello: "Hallo %{NAME},"
         intro: "The FabLab team has just created an account for you, on {GENDER, select, neutral{} other{the}} {FABLAB} website:" #messageFormat interpolation
         connection_parameters: "Here are your connection parameters:"
         account_name: "Account name:"
