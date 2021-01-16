@@ -1,7 +1,7 @@
 de:
   layouts:
     notifications_mailer:
-      see_you_later: "See you soon on {GENDER, select, neutral{} other{the}}" #messageFormat interpolation
+      see_you_later: "Bis bald auf {GENDER, select, neutral{} other{das}}" #messageFormat interpolation
       sincerely: "Mit freundlichen Grüßen,"
       signature: "Das Fab Lab Team."
       do_not_reply: "Bitte antworte nicht auf diese E-Mail."
@@ -10,39 +10,39 @@ de:
       subject: "Dein FabLab Account wurde erfolgreich erstellt"
       body:
         hello: "Hallo %{NAME},"
-        intro: "The FabLab team has just created an account for you, on {GENDER, select, neutral{} other{the}} {FABLAB} website:" #messageFormat interpolation
-        connection_parameters: "Here are your connection parameters:"
-        account_name: "Account name:"
-        password: "Password:"
-        temporary_password: "This is a temporary password, you can modify it in your «My account» screen."
-        keep_advantages: "With this account, you keep all the advantages linked to your Fab Lab user profile (trainings, subscriptions plans)."
-        to_use_platform: "To use the website, please"
-        logon_or_login: "create a new account or log in by clicking here."
-        token_if_link_problem: "If you experience issues with the link, you can enter the following code at your first connection attempt:"
+        intro: "Das FabLab-Team hat Ihren Account eingerichtet auf der {FABLAB}-Website:" #messageFormat interpolation
+        connection_parameters: "Hier sind Ihre Verbindungsparameter:"
+        account_name: "Kontoname:"
+        password: "Passwort:"
+        temporary_password: "Dies ist ein temporäres Passwort. Sie können es in Ihrem «Mein Konto»-Bereich ändern."
+        keep_advantages: "Mit diesem Konto behalten Sie alle Vorteile (Schulungen, Abonnementpläne), die mit Ihrem FabLab-Benutzerprofil verbunden sind."
+        to_use_platform: "Um die Website zu nutzen, bitte"
+        logon_or_login: "erstellen Sie ein neues Konto oder melden Sie sich an, indem Sie hier klicken."
+        token_if_link_problem: "Wenn Sie Probleme mit dem Link haben, können Sie den folgenden Code bei Ihrem ersten Verbindungsversuch eingeben:"
   notifications_mailer:
     notify_user_user_group_changed:
-      subject: "Your have changed group"
+      subject: "Ihre Gruppe wurde geändert"
       body:
-        warning: "You have changed group. Inspections can be conducted at the lab to verify the legitimacy of this change."
+        warning: "Sie haben die Gruppe gewechselt. Im FabLab kann geprüft werden, ob diese Änderung zulässig ist."
     notify_admin_user_group_changed:
-      subject: "A member has changed group"
+      subject: "Ein Mitglied hat die Gruppe geändert"
       body:
-        user_changed_group_html: "User <em><strong>%{NAME}</strong></em> has changed group."
-        previous_group: "Previous group:"
-        new_group: "New group:"
+        user_changed_group_html: "Benutzer <em><strong>%{NAME}</strong></em> hat die Gruppe geändert."
+        previous_group: "Vorherige Gruppe:"
+        new_group: "Neue Gruppe:"
     notify_admin_subscription_extended:
-      subject: "A subscription has been extended"
+      subject: "Ein Abonnement wurde verlängert"
       body:
-        subscription_extended_html: "Subscription <strong><em>{PLAN}</em></strong> for user <strong><em>{NAME}</strong></em> has been extended {FREE, select, true{for free} other{}} until {DATE}." #messageFormat interpolation
+        subscription_extended_html: "Das Abonnement <strong><em>{PLAN}</em></strong> des Nutzers <strong><em>{NAME}</strong></em> wurde {FREE, select, true{kostenlos} other{}} verlängert bis {DATE}." #messageFormat interpolation
     notify_member_subscription_extended:
-      subject: "Your subscription plan has been extended"
+      subject: "Ihr Abonnement wurde verlängert"
       body:
-        your_plan: "Your subscription plan"
-        has_been_extended: "has been extended"
-        free: "for free"
-        until: "until"
+        your_plan: "Ihr Abonnement"
+        has_been_extended: "wurde verlängert"
+        free: "kostenlos"
+        until: "bis"
     notify_partner_subscribed_plan:
-      subject: "A subscription plan has been purchased"
+      subject: "Ein Abonnement wurde gekauft"
       body:
         a_plan: "A subscription plan"
         was_purchased_by_member: "has been purchased by user"
