@@ -44,31 +44,31 @@ de:
     notify_partner_subscribed_plan:
       subject: "Ein Abonnement wurde gekauft"
       body:
-        a_plan: "A subscription plan"
-        was_purchased_by_member: "has been purchased by user"
+        a_plan: "Ein Abonnement"
+        was_purchased_by_member: "wurde vom Nutzer gekauft"
     notify_admin_when_project_published:
-      subject: "A project has been published"
+      subject: "Ein Projekt wurde veröffentlicht"
       body:
-        new_project_published: "A new project has been published:"
+        new_project_published: "Ein neues Projekt wurde veröffentlicht:"
     notify_project_collaborator_to_valid:
-      subject: "Invitation to collaborate on a project"
+      subject: "Einladung zur Zusammenarbeit an einem Projekt"
       body:
-        your_are_invited_to_take_part_in_a_project: "You are invited to join this project:"
-        to_accept_the_invitation_click_on_following_link: "To accept this invitation, please click on the following link:"
+        your_are_invited_to_take_part_in_a_project: "Sie wurden eingeladen, an einem Projekt mitzuarbeiten:"
+        to_accept_the_invitation_click_on_following_link: "Um diese Einladung anzunehmen, klicken Sie bitte auf den folgenden Link:"
     notify_project_author_when_collaborator_valid:
-      subject: "New collaborator in your project"
+      subject: "Neuer Mitarbeiter in Ihrem Projekt"
       body:
-        the_member: "the user"
-        accepted_your_invitation_to_take_part_in_the_project: "has accepted your invitation to join your project:"
+        the_member: "der Benutzer"
+        accepted_your_invitation_to_take_part_in_the_project: "hat Ihre Einladung zur Projektmitarbeit angenommen:"
     notify_user_training_valid:
-      subject: "Your training has been validated"
+      subject: "Ihre Schulung wurde validiert"
       body:
-        your_training: "Your training"
-        has_been_validated: "has been validated"
+        your_training: "Ihre Schulung"
+        has_been_validated: "wurde validiert"
     notify_member_subscribed_plan:
-      subject: "Your subscription has been successfully purchased"
+      subject: "Ihr Abonnement wurde erfolgreich gekauft"
       body:
-        plan_subscribed_html: "You have subscribed the plan: <strong><em>%{PLAN}</em></strong>."
+        plan_subscribed_html: "Sie haben <strong><em>%{PLAN}</em></strong> abonniert."
         rolling_subscription_stops_on: "Your subscription will end %{DURATION} after your first training. Otherwise, it will stop on %{DATE}."
         subscription_stops_on: "Your subscription will end on %{DATE}."
     notify_member_create_reservation:
