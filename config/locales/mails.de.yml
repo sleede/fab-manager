@@ -282,10 +282,10 @@ de:
     notify_user_role_update:
       subject: "Ihre Rolle hat sich geändert"
       body:
-        role_changed_html: "Your role at {GENDER, select, male{the} female{the} neutral{} other{the}} {NAME} has changed. You are now <strong>{ROLE}</strong>.<br/>With great power comes great responsibility, use your new privileges fairly and respectfully."
+        role_changed_html: "Deine Rolle bei {GENDER, select, male{dem} female{der} neutral{} other{dem}} {NAME} hat sich geändert. Sie sind jetzt <strong>{ROLE}</strong>.<br/>Mit großer Macht kommt große Verantwortung, nutzen Sie Ihre neuen Privilegien fair und respektvoll."
     notify_admin_members_stripe_sync:
-      subject: "Stripe synchronization"
+      subject: "Stripe-Synchronisation"
       body:
-        members_sync: "All members were successfully synchronized on Stripe."
+        members_sync: "Alle Mitglieder wurden erfolgreich auf Stripe synchronisiert."
     shared:
-      hello: "Hello %{user_name}"
+      hello: "Hallo %{user_name}"
