@@ -187,14 +187,14 @@ de:
         new_user: "Neuer Nutzer..."
         as_part_of_a_partner_subscription_some_notifications_may_be_sent_to_this_user: "Als Teil eines Partnerabonnements können einige Benachrichtigungen an diesen Benutzer gesendet werden."
         new_partner: "Neuer Partner"
-        first_name: "First name"
-        first_name_is_required: "First name is required."
-        surname: "Last name"
-        surname_is_required: "Last name is required."
-        email_address: "Email address"
-        email_address_is_required: "Email address is required."
-        disabled: "Disable subscription"
-        disable_plan_will_not_unsubscribe_users: "Beware: disabling this plan won't unsubscribe users having active subscriptions with it."
+        first_name: "Vorname"
+        first_name_is_required: "Der Vorname ist erforderlich."
+        surname: "Nachname"
+        surname_is_required: "Der Nachname ist erforderlich."
+        email_address: "E‐Mail‐Adresse"
+        email_address_is_required: "Die E-Mail-Adresse ist erforderlich."
+        disabled: "Abonnement deaktivieren"
+        disable_plan_will_not_unsubscribe_users: "Achtung: Das Deaktivieren dieses Pakets wird Benutzer mit aktiven Abonnements nicht abbestellen."
       #training edition form
       trainings:
         name: "Name"
@@ -265,43 +265,43 @@ de:
       #modal introducing that a training is requested before booking a machine
       request_training_modal:
         to_book_the_MACHINE_you_must_have_completed_the_TRAINING: "To book the \"{MACHINE}\" you must have completed the {TRAINING}."
-        register_for_the_training: "Enroll in the training"
-        i_dont_want_to_register_now: "I don't want to enroll now"
+        register_for_the_training: "Zur Schulung anmelden"
+        i_dont_want_to_register_now: "Ich möchte mich jetzt nicht anmelden"
       #modal introducing that a user must wait for his training being validated before booking a machine
       training_reservation_modal:
-        machine_reservation: "Machine reservation"
-        you_must_wait_for_your_training_is_being_validated_by_the_fablab_team_to_book_this_machine: "You must wait for your training is being validated by the FabLab team to book this machine."
-        your_training_will_occur_: "Your training will occur"
+        machine_reservation: "Maschinenreservierung"
+        you_must_wait_for_your_training_is_being_validated_by_the_fablab_team_to_book_this_machine: "Sie müssen bis zur Schulungsbestätigung warten, um diese Maschine buchen zu können."
+        your_training_will_occur_: "Ihre Schulung wird stattfinden"
       #user public profile
       public_profile:
         last_activity_html: "Letzte Aktivität <br><strong>am {DATE}</strong>"
-        to_come: "to come"
-        approved: "approved"
-        projects: "Projects"
-        no_projects: "No projects"
-        author: "Author"
-        collaborator: "Collaborator"
-        private_profile: "Private profile"
+        to_come: "kommend"
+        approved: "bestätigt"
+        projects: "Projekte"
+        no_projects: "Keine Projekte"
+        author: "Autor"
+        collaborator: "Mitarbeitende"
+        private_profile: "Privates Profil"
         interests: "Interessen"
-        CAD_softwares_mastered: "CAD softwares mastered"
+        CAD_softwares_mastered: "Kenntnisse in CAD-Software"
         email_address: "E‐Mail‐Adresse"
-        trainings: "Trainings"
-        no_trainings: "No trainings"
+        trainings: "Schulungen"
+        no_trainings: "Keine Schulungen"
       #wallet
       wallet:
-        wallet: 'Wallet'
+        wallet: 'Guthabenkonto'
         your_wallet_amount: 'verfügbares Guthaben'
-        wallet_amount: 'Amount available'
+        wallet_amount: 'Verfügbares Guthaben'
         no_transactions_for_now: 'Momentan keine Transaktionen'
-        date: "Date"
-        operation: 'Operation'
+        date: "Datum"
+        operation: 'Vorgang'
         operator: 'Operator'
-        amount: 'Amount'
-        credit: 'Credit'
-        debit: 'Debit'
-        credit_title: 'Credit wallet'
-        credit_label: 'Set the amount to be credited'
-        confirm_credit_label: 'Confirm the amount to be credited'
+        amount: 'Betrag'
+        credit: 'Guthaben'
+        debit: 'Lastschrift'
+        credit_title: 'Guthabenkonto'
+        credit_label: 'Legen Sie den Betrag der Gutschrift fest'
+        confirm_credit_label: 'Bestätigen Sie den Betrag der Gutschrift'
         generate_a_refund_invoice: "Generate a refund invoice"
         creation_date_for_the_refund: "Creation date for the refund"
         creation_date_is_required: "Creation date is required."
