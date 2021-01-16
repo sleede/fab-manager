@@ -69,24 +69,24 @@ de:
       subject: "Ihr Abonnement wurde erfolgreich gekauft"
       body:
         plan_subscribed_html: "Sie haben <strong><em>%{PLAN}</em></strong> abonniert."
-        rolling_subscription_stops_on: "Your subscription will end %{DURATION} after your first training. Otherwise, it will stop on %{DATE}."
-        subscription_stops_on: "Your subscription will end on %{DATE}."
+        rolling_subscription_stops_on: "Dein Abonnement endet %{DURATION} nach Ihrer ersten Schulung. Andernfalls wird es am %{DATE} angehalten."
+        subscription_stops_on: "Ihr Abonnement endet am %{DATE}."
     notify_member_create_reservation:
-      subject: "Your reservation has been successfully saved"
+      subject: "Ihre Reservierung wurde erfolgreich gespeichert"
       body:
-        reservation_saved_html: "You reservation <strong><em>%{RESERVATION}</em></strong> has been successfully saved"
-        your_reserved_slots: "Your reserved slots are:"
+        reservation_saved_html: "Ihre Reservierung <strong><em>%{RESERVATION}</em></strong> wurde erfolgreich gespeichert"
+        your_reserved_slots: "Ihre reservierten Slots sind:"
     notify_member_subscribed_plan_is_changed:
-      subject: "Your subscription has been updated"
+      subject: "Ihr Abonnement wurde aktualisiert"
       body:
-        new_plan_html: "You have changed your plan to <strong><em>%{PLAN}</em></strong>."
+        new_plan_html: "Sie haben Ihr Abonnement für <strong><em>%{PLAN}</em></strong> geändert."
     notify_admin_member_create_reservation:
-      subject: "New reservation"
+      subject: "Neue Reservierung"
       body:
-        member_reserved_html: "User %{NAME} has reserved <strong><em>%{RESERVABLE}</em></strong>."
-        reserved_slots: "Reserved slots are:"
+        member_reserved_html: "Nutzer %{NAME} hat <strong><em>%{RESERVABLE}</em></strong> reserviert."
+        reserved_slots: "Reservierte Slots sind:"
     notify_member_slot_is_modified:
-      subject: "Your reservation slot has been successfully changed"
+      subject: "Ihr Reservierungsslot wurde erfolgreich geändert"
       body:
         reservation_changed_to: "Your reservation slot has been changed to:"
         previous_date: "Previous date:"
@@ -168,8 +168,8 @@ de:
       body:
         new_account_imported: "A new user account (ID: %{ID}) has been imported to the website via %{PROVIDER}."
         provider_uid: "its provider ID is: "
-        known_information: "Here is what we know about this provider:"
-        address_already_used: "This address is already associated with another user"
+        known_information: "Folgendes wissen wir über diesen Anbieter:"
+        address_already_used: "Diese Adresse wird schon von einem anderen Nutzer verwendet"
         no_more_info_available: "No other info about this user can be provided before he completes his profile."
     notify_user_profile_complete:
       subject: "You now have access to the whole website"
