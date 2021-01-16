@@ -161,13 +161,13 @@ de:
       subject: "Eine Reservierung wurde storniert"
       body:
         member_cancelled: "Benutzer %{NAME} hat seine Reservierung storniert"
-        item_details: "%{START} - %{END}, concerning %{RESERVABLE}"
-        generate_refund: "Do not forget to generate a credit note or a refund for this cancellation."
+        item_details: "%{START} - %{END}, in Bezug auf %{RESERVABLE}"
+        generate_refund: "Vergessen Sie nicht, eine Gutschrift oder eine Rückerstattung für diese Stornierung zu buchen."
     notify_admin_when_user_is_imported:
-      subject: "A user account has been imported from the SSO"
+      subject: "Ein Benutzerkonto wurde aus der SSO importiert"
       body:
-        new_account_imported: "A new user account (ID: %{ID}) has been imported to the website via %{PROVIDER}."
-        provider_uid: "its provider ID is: "
+        new_account_imported: "Ein neues Benutzerkonto (ID: %{ID}) wurde über %{PROVIDER} auf die Website importiert."
+        provider_uid: "seine Provider-ID ist: "
         known_information: "Folgendes wissen wir über diesen Anbieter:"
         address_already_used: "Diese Adresse wird schon von einem anderen Nutzer verwendet"
         no_more_info_available: "Für diesen Nutzer sind keine weiteren Informationen verfügbar, solange er sein Profil nicht vervollständigt hat."
@@ -237,20 +237,20 @@ de:
           xlsx: "Excel"
           csv: "CSV"
     notify_admin_import_complete:
-      subject: "Import completed"
+      subject: "Import abgeschlossen"
       body:
-        you_made_an_import: "You have initiated an import %{CATEGORY}"
-        category_members: "of the members"
-        click_to_view_results: "Click here to view results"
+        you_made_an_import: "Sie haben einen Import von %{CATEGORY} gestartet"
+        category_members: "der Mitglieder"
+        click_to_view_results: "Klicken Sie hier, um die Ergebnisse anzuzeigen"
     notify_member_about_coupon:
-      subject: "Coupon"
+      subject: "Gutschein"
       body:
-        enjoy_a_discount_of_PERCENT_with_code_CODE: "Enjoy a discount of %{PERCENT}% on the whole site with the code %{CODE}."
-        enjoy_a_discount_of_AMOUNT_with_code_CODE: "Enjoy a discount of %{AMOUNT} on the whole site with the code %{CODE}."
-        this_coupon_is_valid_USAGE_times_until_DATE_for_all_your_purchases: "This coupon is valid {USAGE, plural, =1{just once} other{many times}}: for all your purchases {TYPE, select, amount_off{at least equal to the amount of the coupon} other{}}, from now {DATE, select, NO-DATE{and without time limit} other{and until {DATE}}}."
+        enjoy_a_discount_of_PERCENT_with_code_CODE: "Erhalten Sie %{PERCENT}% Rabatt auf der gesamten Seite mit dem Code %{CODE}."
+        enjoy_a_discount_of_AMOUNT_with_code_CODE: "Erhalten Sie %{AMOUNT}% Rabatt auf der gesamten Seite mit dem Code %{CODE}."
+        this_coupon_is_valid_USAGE_times_until_DATE_for_all_your_purchases: "Dieser Gutschein ist {USAGE, plural, =1{einmalig} other{mehrfach}} gültig für alle Ihre Käufe {TYPE, select, amount_off{mindestens gleich dem Gutscheinbetrag} other{}} ab sofort {DATE, select, NO-DATE{und ohne Ablaufdatum} other{und einlösbar bis {DATE}}}."
     notify_admin_free_disk_space:
-      subject: "Low disk space"
-      body: "Warning: available disk space on the server hosting Fab-manager is less than %{THRESHOLD} MiB. This can affect its operation and prevent saving some data. Currently, %{AVAILABLE} MiB of free disk space remains available on the mount point."
+      subject: "Wenig Speicherplatz auf der Festplatte"
+      body: "Warnung: verfügbarer Festplattenspeicher auf dem Server mit Fab-Manager ist weniger als %{THRESHOLD} MiB. Dies kann den Betrieb beeinflussen und das Speichern von Daten verhindern. Derzeit sind %{AVAILABLE} MiB freier Speicherplatz am Mount-Punkt verfügbar."
     notify_admin_close_period_reminder:
       subject: "Remind to close your accounting periods"
       body:
