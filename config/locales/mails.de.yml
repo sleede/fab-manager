@@ -88,79 +88,79 @@ de:
     notify_member_slot_is_modified:
       subject: "Ihr Reservierungsslot wurde erfolgreich geändert"
       body:
-        reservation_changed_to: "Your reservation slot has been changed to:"
-        previous_date: "Previous date:"
+        reservation_changed_to: "Ihr Reservierungs-Slot wurde geändert zu:"
+        previous_date: "Vorheriges Datum:"
     notify_admin_slot_is_modified:
-      subject: "A reservation slot has been modified"
+      subject: "Ein reservierter Slot wurde geändert"
       body:
-        slot_modified: "User %{NAME} had modified his reservation slot"
-        new_date: "New slot"
-        old_date: "Previous slot"
+        slot_modified: "Benutzer %{NAME} hatte seinen Reservierungs-Slot geändert"
+        new_date: "Neuer Slot"
+        old_date: "Vorheriger Slot"
     notify_admin_when_user_is_created:
-      subject: "A user account has been created"
+      subject: "Ein Benutzerkonto wurde erstellt"
       body:
-        new_account_created: "A new user account has been created on the website:"
-        account_for_organization: "This account manage an organization:"
+        new_account_created: "Ein neues Benutzerkonto wurde auf der Website erstellt:"
+        account_for_organization: "Dieses Konto verwaltet eine Organisation:"
     notify_admin_subscribed_plan:
-      subject: "A subscription has been purchased"
+      subject: "Ein Abonnement wurde gekauft"
       body:
-        plan_subscribed_html: "A plan <strong><em>%{PLAN}</em></strong> has been subscribed by user <strong><em>%{NAME}</strong></em>."
+        plan_subscribed_html: "Das Abonnement <strong><em>%{PLAN}</em></strong> wurde von <strong><em>%{NAME}</strong></em> abgeschlossen."
     notify_member_invoice_ready:
-      subject: "Your FabLab's invoice"
+      subject: "Rechnung Ihres FabLabs"
       body:
-        please_find_attached_html: "Please find as attached file your invoice from {DATE}, with an amount of {AMOUNT} concerning your {TYPE, select, Reservation{reservation} other{subscription}}." #messageFormat interpolation
-        invoice_in_your_dashboard_html: "You can access your invoice in %{DASHBOARD} on the Fab Lab website."
-        your_dashboard: "your dashboard"
+        please_find_attached_html: "Die angehängte Datei enthält Ihre Rechnung von {DATE}, über den Betrag von {AMOUNT} in Bezug auf Ihr/e {TYPE, select, Reservation{Reservierung} other{Abonnement}}." #messageFormat interpolation
+        invoice_in_your_dashboard_html: "Sie können auf Ihre Rechnung in %{DASHBOARD} auf der FabLab-Website zugreifen."
+        your_dashboard: "Ihr Dashboard"
     notify_member_reservation_reminder:
-      subject: "Reservation reminder"
+      subject: "Reservierungserinnerung"
       body:
-        this_is_a_reminder_about_your_reservation_RESERVABLE_to_be_held_on_DATE_html: "This is a reminder about your reservation <strong>%{RESERVABLE}</strong> to be held on <em>%{DATE}</em>"
-        this_reservation_concerns_the_following_slots: "This reservation concerns the following slots:"
+        this_is_a_reminder_about_your_reservation_RESERVABLE_to_be_held_on_DATE_html: "Erinnerung: Sie haben eine Reservierung <strong>%{RESERVABLE}</strong> für <em>%{DATE}</em>"
+        this_reservation_concerns_the_following_slots: "Diese Reservierung betrifft folgende Slots:"
     notify_member_avoir_ready:
-      subject: "Your FabLab's refund invoice"
+      subject: "Die Rückerstattungsrechnung Ihres FabLabs"
       body:
-        please_find_attached_html: "Please find as attached file your refund invoice from {DATE}, with an amount of {AMOUNT} concerning your {TYPE, select, Reservation{reservation} WalletTransaction{wallet credit} other{subscription}}." #messageFormat interpolation
-        invoice_in_your_dashboard_html: "You can access your refund invoice in %{DASHBOARD} on the Fab Lab website."
-        your_dashboard: "your dashboard"
+        please_find_attached_html: "Die angehängte Datei enthält Ihre Rückerstattungsrechnung von {DATE}, über den Betrag von {AMOUNT} in Bezug auf Ihr/e {TYPE, select, Reservation{Reservierung} other{Abonnement}}." #messageFormat interpolation
+        invoice_in_your_dashboard_html: "Sie können auf Ihre Rückerstattungsrechnung in %{DASHBOARD} auf der FabLab-Website zugreifen."
+        your_dashboard: "Ihr Dashboard"
     notify_member_subscription_will_expire_in_7_days:
-      subject: "Your subscription expires in 7 days"
+      subject: "Ihr Abonnement läuft in 7 Tagen ab"
       body:
-        your_plan: "you plan"
-        expires_in_7_days: "will expire in 7 days."
-        to_renew_your_plan_follow_the_link: "Please, follow this link to renew your plan"
+        your_plan: "Ihr Plan"
+        expires_in_7_days: "läuft in 7 Tagen ab."
+        to_renew_your_plan_follow_the_link: "Bitte folgen Sie diesem Link, um Ihren Plan zu erneuern"
     notify_member_subscription_is_expired:
-      subject: "Your subscription has expired"
+      subject: "Ihr Abonnement ist abgelaufen"
       body:
-        your_plan: "You plan"
-        has_expired: "has expired."
-        you_can_go_to: "Please go to"
-        to_renew_your_plan: "to renew you plan"
+        your_plan: "Ihr Plan"
+        has_expired: "ist abgelaufen."
+        you_can_go_to: "Bitte gehen Sie zu"
+        to_renew_your_plan: "um Ihren Plan zu erneuern"
     notify_admin_subscription_will_expire_in_7_days:
-      subject: "A member subscription expires in 7 days"
+      subject: "Ein Mitgliedsabonnement läuft in 7 Tagen ab"
       body:
-        subscription_will_expire_html: "Subscription plan for user %{NAME} <strong><em>%{PLAN}</em></strong> will expire in 7 days."
+        subscription_will_expire_html: "Abonnement für Benutzer %{NAME} <strong><em>%{PLAN}</em></strong> läuft in 7 Tagen ab."
     notify_admin_subscription_is_expired:
-      subject: "A member subscription has expired"
+      subject: "Ein Mitgliedsabonnement ist abgelaufen"
       body:
-        subscription_expired_html: "Subscription plan for user %{NAME} <strong><em>%{PLAN}</em></strong> is now expired."
+        subscription_expired_html: "Abonnementplan für Benutzer %{NAME} <strong><em>%{PLAN}</em></strong> ist jetzt abgelaufen."
     notify_admin_subscription_canceled:
-      subject: "A member subscription has been cancelled"
+      subject: "Ein Mitgliedsabonnement wurde storniert"
       body:
-        subscription_canceled_html: "Subscription <strong><em>%{PLAN}</em></strong> for user %{NAME} has been cancelled."
+        subscription_canceled_html: "Abonnement <strong><em>%{PLAN}</em></strong> für Nutzer %{NAME} wurde storniert."
     notify_member_subscription_canceled:
-      subject: "Your subscription has been cancelled"
+      subject: "Ihr Abonnement wurde storniert"
       body:
-        your_plan_was_canceled: "Your subscription plan has been cancelled."
-        your_plan: "your subscription plan"
-        end_at: "ends on"
+        your_plan_was_canceled: "Ihr Abonnementsplan wurde storniert."
+        your_plan: "ihr Abonnement"
+        end_at: "endet am"
     notify_member_slot_is_canceled:
-      subject: "Your reservation has been canceled"
+      subject: "Ihre Reservierung wurde storniert"
       body:
-        reservation_canceled: "Your reservation for %{RESERVABLE} has been canceled"
+        reservation_canceled: "Ihre Reservierung für %{RESERVABLE} wurde storniert"
     notify_admin_slot_is_canceled:
-      subject: "A reservation has been cancelled"
+      subject: "Eine Reservierung wurde storniert"
       body:
-        member_cancelled: "User %{NAME} has cancelled his reservation"
+        member_cancelled: "Benutzer %{NAME} hat seine Reservierung storniert"
         item_details: "%{START} - %{END}, concerning %{RESERVABLE}"
         generate_refund: "Do not forget to generate a credit note or a refund for this cancellation."
     notify_admin_when_user_is_imported:
