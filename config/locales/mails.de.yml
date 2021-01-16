@@ -170,42 +170,42 @@ de:
         provider_uid: "its provider ID is: "
         known_information: "Folgendes wissen wir über diesen Anbieter:"
         address_already_used: "Diese Adresse wird schon von einem anderen Nutzer verwendet"
-        no_more_info_available: "No other info about this user can be provided before he completes his profile."
+        no_more_info_available: "Für diesen Nutzer sind keine weiteren Informationen verfügbar, solange er sein Profil nicht vervollständigt hat."
     notify_user_profile_complete:
-      subject: "You now have access to the whole website"
+      subject: "Sie haben nun Zugriff auf die gesamte Website"
       body:
-        message: "Your account informations has been correctly updated, you now have access to the whole website."
+        message: "Ihre Kontoinformationen wurden korrekt aktualisiert, Sie haben nun Zugriff auf die gesamte Website."
     notify_user_auth_migration:
-      subject: "Important change to your FabLab account"
+      subject: "Wichtige Änderung Ihres FabLab Accounts"
       body:
-        the_platform: "the website"
-        is_changing_its_auth_system_and_will_now_use: "is actually changing its user identification system and will use"
-        instead_of: "instead of"
-        consequence_of_the_modification: "Because of this change you won't be able to login to the website with your actual usernames"
-        to_use_the_platform_thanks_for: "To keep on using the website, please"
-        create_an_account_on: "create an account on"
-        or_use_an_existing_account_clicking_here: "or use an existing account by clicking here"
-        in_case_of_problem_enter_the_following_code: "In case of problem with this link, you can enter the following code at your first connection attempt in order to migrate your actual account into the new authentification system:"
+        the_platform: "die Website"
+        is_changing_its_auth_system_and_will_now_use: "ändert momentan das Benutzeridentifikationssystem und verwendet zukünftig"
+        instead_of: "anstatt"
+        consequence_of_the_modification: "Aufgrund dieser Änderung können Sie sich nicht mit Ihren momentanen Benutzernamen auf der Website anmelden"
+        to_use_the_platform_thanks_for: "Um die Webseite weiter zu nutzen, bitte"
+        create_an_account_on: "erstellen Sie ein Konto auf"
+        or_use_an_existing_account_clicking_here: "oder verwenden Sie ein bestehendes Konto, indem Sie hier klicken"
+        in_case_of_problem_enter_the_following_code: "Falls beim Aufruf des Links zu Problemen kommt, können Sie den folgenden Code bei Ihrem ersten Verbindungsversuch eingeben, um Ihr aktuelles Konto in das neue Authentifizierungssystem zu migrieren:"
     notify_admin_user_merged:
-      subject: "An imported account has been merged with an existing account"
+      subject: "Ein importiertes Konto wurde mit einem bestehenden Konto zusammengeführt"
       body:
-        imported_account_merged: "A previously imported user account via %{PROVIDER) has been merged with the existing account %{NAME}"
-        provider_uid: "its provider ID is:"
+        imported_account_merged: "Ein zuvor importiertes Benutzerkonto über %{PROVIDER) wurde mit dem bestehenden Konto %{NAME} zusammengeführt"
+        provider_uid: "seine Provider-ID ist:"
     notify_admin_profile_complete:
-      subject: "An imported account has completed its profile"
+      subject: "Ein importiertes Konto hat sein Profil vervollständigt"
       body:
-        account_completed: "An user account has completed its profile:"
-        imported_account_completed: "An user account, previously imported through %{PROVIDER}, has completed its profile:"
-        provider_id: "its provider ID is:"
+        account_completed: "Ein Benutzerkonto hat sein Profil vervollständigt:"
+        imported_account_completed: "Ein Benutzerkonto, das zuvor über %{PROVIDER} importiert wurde, hat sein Profil vervollständigt:"
+        provider_id: "seine Provider-ID ist:"
     notify_admin_abuse_reported:
-      subject: "An abusive content has been reported"
+      subject: "Ein missbräuchlicher Inhalt wurde gemeldet"
       body:
-        intro: "A user has flagged a content as abusive"
-        signaled_content: "flagged content:"
-        signaled_by: "flagged by:"
-        signaled_on: "flagged on:"
-        message: "Message:"
-        visit_management_interface: "Refer to the Reporting Management Interface for more information."
+        intro: "Ein Benutzer wurde als beleidigend markiert"
+        signaled_content: "gemeldeter Inhalt:"
+        signaled_by: "gemeldet von:"
+        signaled_on: "gemeldet auf:"
+        message: "Nachricht:"
+        visit_management_interface: "Weitere Informationen finden Sie im Bereich Reporting Management."
     notify_user_wallet_is_credited:
       subject: "Your wallet has been credited"
       body:
