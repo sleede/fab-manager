@@ -3,30 +3,30 @@ de:
     admin:
       #add a new machine
       machines_new:
-        declare_a_new_machine: "Declare a new machine"
+        declare_a_new_machine: "Neue Maschine angeben"
         watch_out_when_creating_a_new_machine_its_prices_are_initialized_at_0_for_all_subscriptions: "Achtung! Beim Erstellen einer neuen Maschine werden die Preise für alle Abonnements auf 0 initialisiert."
         consider_changing_them_before_creating_any_reservation_slot: "Denken Sie daran, sie zu ändern, bevor Sie einen Reservierungsplatz erstellen."
       #machine edition
       machines_edit:
-        machine_edit: "Edit a machine"
+        machine_edit: "Maschine bearbeiten"
       #manage the trainings & machines slots
       calendar:
         calendar_management: "Kalenderverwaltung"
         trainings: "Schulungen"
         machines: "Maschinen"
         spaces: "Räume"
-        events: "Eventos"
+        events: "Veranstaltungen"
         availabilities: "Verfügbarkeiten"
-        availabilities_notice: "Export to an Excel workbook every slots available for reservation, and their occupancy rate."
+        availabilities_notice: "Export aller für Reservierungen verfügbaren Slots und ihrer Belegung in ein Excel-Arbeitsbuch."
         info: "Info"
         tags: "Tags"
-        slot_duration: "Slot duration: {DURATION} minutes"
-        ongoing_reservations: "Ongoing reservations"
-        without_reservation: "Without reservation"
-        confirmation_required: "Confirmation required"
-        do_you_really_want_to_cancel_the_USER_s_reservation_the_DATE_at_TIME_concerning_RESERVATION: "Do you really {GENDER, select, other {want}} to cancel the {USER}'s reservation, the {DATE} at {TIME}, concerning {RESERVATION}?"
-        reservation_was_successfully_cancelled: "Reservation was successfully cancelled."
-        reservation_cancellation_failed: "Reservation cancellation failed."
+        slot_duration: "Slot-Dauer: {DURATION} Minuten"
+        ongoing_reservations: "Laufende Reservierungen"
+        without_reservation: "Ohne Reservierung"
+        confirmation_required: "Bestätigung erforderlich"
+        do_you_really_want_to_cancel_the_USER_s_reservation_the_DATE_at_TIME_concerning_RESERVATION: "Wollen Sie wirklich die Reservierung {RESERVATION} von {USER} am {DATE} um {TIME} stornieren?"
+        reservation_was_successfully_cancelled: "Reservierung wurde erfolgreich storniert."
+        reservation_cancellation_failed: "Stornierung der Reservierung fehlgeschlagen."
         unable_to_remove_the_last_machine_of_the_slot_delete_the_slot_rather: "Unable to remove the last machine of the slot. Delete the slot rather."
         do_you_really_want_to_remove_MACHINE_from_this_slot: "Do you really want to remove \"{MACHINE}\" from this slot?"
         this_will_prevent_any_new_reservation_on_this_slot_but_wont_cancel_those_existing: "This will prevent any new reservation on this slot but won't cancel those existing."
