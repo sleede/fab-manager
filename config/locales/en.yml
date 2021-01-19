@@ -356,6 +356,8 @@ en:
         user_NAME_changed_ROLE_html: "User <strong><em>%{NAME}</strong></em> is now %{ROLE}."
       notify_admin_members_stripe_sync:
         all_members_sync: "All members were successfully synchronized on Stripe."
+      notify_user_when_payment_schedule_ready:
+        your_schedule_is_ready_html: "Your payment schedule #%{REFERENCE}, of %{AMOUNT}, is ready. <a href='api/payment_schedules/%{SCHEDULE_ID}/download' target='_blank'>Click here to download</a>."
   #statistics tools for admins
   statistics:
     subscriptions: "Subscriptions"

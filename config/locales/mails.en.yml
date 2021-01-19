@@ -287,5 +287,11 @@ en:
       subject: "Stripe synchronization"
       body:
         members_sync: "All members were successfully synchronized on Stripe."
+    notify_member_payment_schedule_ready:
+      subject: "Your payment schedule"
+      body:
+        please_find_attached_html: "Please find attached your payment schedule, issued on {DATE}, with an amount of {AMOUNT} concerning your {TYPE, select, Reservation{reservation} other{subscription}}." #messageFormat interpolation
+        schedule_in_your_dashboard_html: "You can find this payment schedule at any time from %{DASHBOARD} on the Fab Lab's website."
+        your_dashboard: "your dashboard"
     shared:
       hello: "Hello %{user_name}"

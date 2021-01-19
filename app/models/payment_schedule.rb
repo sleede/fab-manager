@@ -45,6 +45,10 @@ class PaymentSchedule < PaymentDocument
     payment_schedule_items.order(due_date: :asc)
   end
 
+  def user
+    invoicing_profile.user
+  end
+
   def check_footprint
     payment_schedule_items.map(&:check_footprint).all? && footprint == compute_footprint
   end

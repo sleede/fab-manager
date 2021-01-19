@@ -79,19 +79,21 @@ class PDF::PaymentSchedule < Prawn::Document
       payment_schedule.payment_schedule_items.each do |item|
 
         price = item.amount.to_i / 100.00
-        date = item.due_date
+        date = I18n.l(item.due_date.to_date)
 
         data += [[date, number_to_currency(price)]]
       end
       data += [[I18n.t('payment_schedules.total_amount'), number_to_currency(payment_schedule.total / 100.0)]]
 
       # display table
-      table(data, header: true, column_widths: [400, 72], cell_style: { inline_format: true }) do
-        row(0).font_style = :bold
-        column(1).style align: :right
-        row(-1).style align: :right
-        row(-1).background_color = 'E4E4E4'
-        row(-1).font_style = :bold
+      font_size(8) do
+        table(data, header: true, column_widths: [400, 72], cell_style: { inline_format: true }) do
+          row(0).font_style = :bold
+          column(1).style align: :right
+          row(-1).style align: :right
+          row(-1).background_color = 'E4E4E4'
+          row(-1).font_style = :bold
+        end
       end
 
       # payment method
@@ -117,7 +119,7 @@ class PDF::PaymentSchedule < Prawn::Document
     end
 
     # factice watermark
-    return unless %w[staging test development].include?(invoice.environment)
+    return unless %w[staging test development].include?(payment_schedule.environment)
 
     transparent(0.1) do
       rotate(45, origin: [0, 0]) do

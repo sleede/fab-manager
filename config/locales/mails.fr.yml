@@ -287,5 +287,11 @@ fr:
       subject: "Synchronisation Stripe"
       body:
         members_sync: "Tous les membres ont été synchronisés avec succès sur Stripe."
+    notify_member_payment_schedule_ready:
+      subject: "Votre échéancier de paiement"
+      body:
+        please_find_attached_html: "Vous trouverez en pièce jointe votre échéancier de paiement du {DATE}, d'un montant de {AMOUNT} concernant votre {TYPE, select, Reservation{réservation} other{abonnement}}." #messageFormat interpolation
+        schedule_in_your_dashboard_html: "Vous pouvez à tout moment retrouver votre échéancier dans %{DASHBOARD} sur le site du Fab Lab."
+        your_dashboard: "votre tableau de bord"
     shared:
       hello: "Bonjour %{user_name}"
