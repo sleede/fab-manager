@@ -45,6 +45,7 @@ class PaymentScheduleService
         details: details
       )
     end
+    ps.total = items.map(&:amount).reduce(:+)
     { payment_schedule: ps, items: items }
   end
 
