@@ -68,4 +68,68 @@ class PaymentScheduleService
     end
     ps
   end
+
+  def generate_invoice(payment_schedule_item, stp_invoice = nil)
+    invoice = Invoice.new(
+      invoiced: payment_schedule_item.payment_schedule.scheduled,
+      invoicing_profile: payment_schedule_item.payment_schedule.invoicing_profile,
+      statistic_profile: payment_schedule_item.payment_schedule.user.statistic_profile,
+      operator_profile_id: payment_schedule_item.payment_schedule.operator_profile_id,
+      stp_payment_intent_id: stp_invoice&.payment_intent,
+      payment_method: stp_invoice ? 'stripe' : nil
+    )
+
+    generate_invoice_items(invoice, payment_schedule_item, reservation: reservation, subscription: subscription)
+    InvoicesService.set_total_and_coupon(invoice, user, payment_details[:coupon])
+    invoice
+  end
+
+  private
+
+  def generate_invoice_items(invoice, payment_details, reservation: nil, subscription: nil)
+    if reservation
+      case reservation.reservable
+        # === Event reservation ===
+      when Event
+        InvoicesService.generate_event_item(invoice, reservation, payment_details)
+        # === Space|Machine|Training reservation ===
+      else
+        InvoicesService.generate_generic_item(invoice, reservation, payment_details)
+      end
+    end
+
+    return unless subscription || reservation&.plan_id
+
+    subscription = reservation.generate_subscription if !subscription && reservation.plan_id
+    InvoicesService.generate_subscription_item(invoice, subscription, payment_details)
+  end
+
+  def generate_reservation_item(invoice, reservation, payment_details)
+    raise TypeError unless [Space, Machine, Training].include? reservation.reservable.class
+
+    reservation.slots.each do |slot|
+      description = reservation.reservable.name +
+        " #{I18n.l slot.start_at, format: :long} - #{I18n.l slot.end_at, format: :hour_minute}"
+
+      price_slot = payment_details[:elements][:slots].detect { |p_slot| p_slot[:start_at].to_time.in_time_zone == slot[:start_at] }
+      invoice.invoice_items.push InvoiceItem.new(
+        amount: price_slot[:price],
+        description: description
+      )
+    end
+  end
+
+  ##
+  # Generate an InvoiceItem for the given subscription and save it in invoice.invoice_items.
+  # This method must be called only with a valid subscription
+  ##
+  def self.generate_subscription_item(invoice, subscription, payment_details)
+    raise TypeError unless subscription
+
+    invoice.invoice_items.push InvoiceItem.new(
+      amount: payment_details[:elements][:plan],
+      description: subscription.plan.name,
+      subscription_id: subscription.id
+    )
+  end
 end
