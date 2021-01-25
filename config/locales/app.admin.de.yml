@@ -1245,30 +1245,30 @@ de:
             title: "Schulungen"
             content: "Hier sehen Sie die Schulungen und ihre jeweiligen Maschinenzuordnungen. Ebenso können Sie hier Schulungen validieren, die von Mitgliedern absolviert wurden."
           trainings:
-            title: "Manage trainings"
-            content: "<p>With each training, a default number of places is associated. However, the number of actual places may be modified for each session.</p><p>The training sessions are scheduled from the administrator tab « Calendar ».</p><p>Furthermore, a training may be associated with one or more machines. This makes it a prerequisite for the reservation of these machines.</p>"
+            title: "Schulungen verwalten"
+            content: "<p>Jeder Schulung ist eine Standardanzahl von Räumen zugeordnet. Die Anzahl der tatsächlichen Räume kann für jede Einzelschulung geändert werden.</p><p>Schulungen werden über den Administrations-Tab « Kalender » geplant.</p><p>Einer Schulung können eine oder mehrere Maschinen zugeordnet werden. Dadurch wird es zur Voraussetzung zur Reservierung dieser Maschinen.</p>"
           filter:
             title: "Filter"
-            content: "By default, only active courses are displayed here. Display the others by choosing another filter here."
+            content: "Standardmäßig werden hier nur aktive Kurse angezeigt. Um andere anzuzeigen, können Sie einen anderen Filter auswählen."
           tracking:
-            title: "Trainings monitoring"
-            content: "Once a training session is finished, you can validate the training for the members present from this screen. This validation is essential to allow them to use the associated machines, if applicable."
+            title: "Schulungs-Überwachung"
+            content: "Sobald eine Schulung abgeschlossen ist, kann sie hier für die anwesenden Mitglieder validiert werden. Die Validierung ist unerlässlich, um mit der Schulung assoziierte Maschinen benutzen zu dürfen."
         calendar:
           welcome:
-            title: "Calendar"
-            content: "From this screen, you can plan the slots during which training, machines and spaces will be bookable by members."
+            title: "Kalender"
+            content: "Hier können die Slots geplant werden, in denen Mitglieder Schulungen, Maschinen und Räume buchen können."
           agenda:
-            title: "The calendar"
-            content: "Click in the calendar to start creating a new availability range. You can directly select the entire time range desired by maintaining your click."
+            title: "Der Kalender"
+            content: "Klicken Sie in den Kalender, um einen neuen Verfügbarkeits-Zeitraum zu erstellen. Sie können den Zeitraum durch Klicken und Halten direkt auswählen."
           export:
             title: "Export"
-            content: "Start generating an Excel file, listing all the availability slots created in the calendar."
+            content: "Erstellen Sie eine Excel-Datei, die alle im Kalender erstellten Verfügbarkeits-Slots auflistet."
           import:
-            title: "Import external calendars"
-            content: "Allows you to import calendars from an external source in iCal format."
+            title: "Externe Kalender importieren"
+            content: "Erlaubt den Import von Kalendern im iCal-Format aus einer externen Quelle."
         members:
           welcome:
-            title: "Users"
+            title: "Nutzer"
             content: "Here you can create, modify and delete members and administrators. You can also manage groups, labels, import / export with spreadsheet files and connect SSO software."
           list:
             title: "Members list"
