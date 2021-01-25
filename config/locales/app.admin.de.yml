@@ -1269,18 +1269,18 @@ de:
         members:
           welcome:
             title: "Nutzer"
-            content: "Here you can create, modify and delete members and administrators. You can also manage groups, labels, import / export with spreadsheet files and connect SSO software."
+            content: "Hier können Sie Mitglieder und Administratoren erstellen, ändern und löschen. Sie verwalten hier auch Gruppen, Labels, Import/Export mit Spreadsheets und können SSO-Software anschließen."
           list:
-            title: "Members list"
-            content: "By default, this table lists all the members of your Fab-manager. You can sort the list in a different order by clicking on the header of each column."
+            title: "Mitgliederliste"
+            content: "Standardmäßig listet diese Tabelle alle Mitglieder des Fab-Managers auf. Sie können die Listensortierung per Klick auf die verschiedenen Spaltenheader ändern."
           search:
-            title: "Find a user"
-            content: "This input field allows you to search for any text on all of the columns in the table below."
+            title: "Benutzer suchen"
+            content: "Über dieses Eingabefeld können Sie eine Freitextsuche über alle Spalten der Tabelle unten starten."
           filter:
-            title: "Filter the list"
-            content: "<p>Filter the list below to display only users who have not confirmed their email address or inactive accounts for more than 3 years.</p><p>Please notice that the GDPR requires that you delete any accounts inactive for more than 3 years.</p>"
+            title: "Liste filtern"
+            content: "<p>Filtern Sie die Liste unten, um nur Benutzer mit unbestätigter E-Mail-Adresse oder mehr als 3 Jahren Inaktivität anzuzeigen.</p><p>Bitte beachten Sie, dass aus Datenschutzgründen Konten gelöscht werden müssen, die länger als 3 Jahre inaktiv sind.</p>"
           actions:
-            title: "Members actions"
+            title: "Mitglieder-Aktionen"
             content: "<p>The buttons in this column allow you to display and modify all of the member's parameters, or to delete them irreversibly.</p><p>In the event of a deletion, the billing information will be kept for 10 years and statistical data will also be kept anonymously.</p>"
           exports:
             title: "Export"
