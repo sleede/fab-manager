@@ -1473,6 +1473,7 @@ CREATE TABLE public.payment_schedule_items (
     state character varying DEFAULT 'new'::character varying,
     details jsonb DEFAULT '"{}"'::jsonb,
     stp_invoice_id character varying,
+    payment_method character varying,
     payment_schedule_id bigint,
     invoice_id bigint,
     footprint character varying,

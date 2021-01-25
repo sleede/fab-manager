@@ -7,7 +7,7 @@ json.array!(@invoices) do |invoice|
   json.extract! invoice, :id, :created_at, :reference, :invoiced_type, :avoir_date
   json.user_id invoice.invoicing_profile.user_id
   json.total invoice.total / 100.00
-  
+
   json.name invoice.invoicing_profile.full_name
   json.has_avoir invoice.refunded?
   json.is_avoir invoice.is_a?(Avoir)

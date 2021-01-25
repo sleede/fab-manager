@@ -98,7 +98,43 @@ class PaymentScheduleService
 
     # save the results
     invoice.save
-    payment_schedule_item.update_attributes(invoice_id: invoice.id, stp_invoice_id: stp_invoice.id)
+    payment_schedule_item.update_attributes(invoice_id: invoice.id, stp_invoice_id: stp_invoice&.id)
+  end
+
+  ##
+  # return a paginated list of PaymentSchedule, optionally filtered, with their associated PaymentScheduleItem
+  # @param page {number} page number, used to paginate results
+  # @param size {number} number of items per page
+  # @param filters {Hash} allowed filters: reference, customer, date.
+  ##
+  def self.list(page, size, filters = {})
+    ps = PaymentSchedule.includes(:invoicing_profile, :payment_schedule_items, :subscription)
+                        .joins(:invoicing_profile)
+                        .page(page)
+                        .per(size)
+
+
+    unless filters[:reference].nil?
+      ps = ps.where(
+        'payment_schedules.reference LIKE :search',
+        search: "#{filters[:reference]}%"
+      )
+    end
+    unless filters[:customer].nil?
+      # ILIKE => PostgreSQL case-insensitive LIKE
+      ps = ps.where(
+        'invoicing_profiles.first_name ILIKE :search OR invoicing_profiles.last_name ILIKE :search',
+        search: "%#{filters[:customer]}%"
+      )
+    end
+    unless filters[:date].nil?
+      ps = ps.where(
+        "date_trunc('day', payment_schedules.created_at) = :search",
+        search: "%#{DateTime.iso8601(filters[:date]).to_time.to_date}%"
+      )
+    end
+
+    ps
   end
 
   private

@@ -16,7 +16,7 @@ class PaymentScheduleItemWorker
         if stp_invoice.status == 'paid'
           ##### Stripe / Successfully paid
           PaymentScheduleService.new.generate_invoice(psi, stp_invoice)
-          psi.update_attributes(state: 'paid')
+          psi.update_attributes(state: 'paid', payment_method: 'stripe')
         else
           ##### Stripe / Payment error
           NotificationCenter.call type: 'notify_admin_payment_schedule_failed',

@@ -9,6 +9,7 @@ class CreatePaymentScheduleItems < ActiveRecord::Migration[5.2]
       t.string :state, default: 'new'
       t.jsonb :details, default: '{}'
       t.string :stp_invoice_id
+      t.string :payment_method
       t.belongs_to :payment_schedule, foreign_key: true
       t.belongs_to :invoice, foreign_key: true
       t.string :footprint

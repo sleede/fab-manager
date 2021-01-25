@@ -414,6 +414,7 @@ fr:
         credit_note: "Avoir"
         display_more_invoices: "Afficher plus de factures..."
         no_invoices_for_now: "Aucune facture pour le moment."
+        payment_schedules_list: "Échéanciers de paiement"
         invoicing_settings: "Paramètres de facturation"
         warning_invoices_disabled: "Attention : les factures ne sont pas activées. Aucune facture ne sera générée par Fab-manager. Vous devez néanmoins remplir correctement les informations ci-dessous, particulièrement la TVA."
         change_logo: "Changer le logo"
