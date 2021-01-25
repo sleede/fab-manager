@@ -1281,32 +1281,32 @@ de:
             content: "<p>Filtern Sie die Liste unten, um nur Benutzer mit unbestätigter E-Mail-Adresse oder mehr als 3 Jahren Inaktivität anzuzeigen.</p><p>Bitte beachten Sie, dass aus Datenschutzgründen Konten gelöscht werden müssen, die länger als 3 Jahre inaktiv sind.</p>"
           actions:
             title: "Mitglieder-Aktionen"
-            content: "<p>The buttons in this column allow you to display and modify all of the member's parameters, or to delete them irreversibly.</p><p>In the event of a deletion, the billing information will be kept for 10 years and statistical data will also be kept anonymously.</p>"
+            content: "<p>Mit den Schaltflächen in dieser Spalte können Sie alle Parameter des Mitglieds anzeigen, ändern oder unwiderruflich löschen.</p><p>Im Falle einer Löschung werden die Abrechnungsinformationen noch für 10 Jahre aufbewahrt. Anonymisierte statistische Daten werden ebenfalls erhalten.</p>"
           exports:
             title: "Export"
-            content: "Each of these buttons starts the generation of an Excel file listing all the members, subscriptions or reservations, current and past."
+            content: "Jeder Button generiert ein Excel-Datei, die jeweils alle Mitglieder, Abonnements oder Reservierungen enthält, mit sowohl aktuellen wie historischen Daten."
           import:
-            title: "Import members"
-            content: "Allows you to import a list of members to create in Fab-manager, from a CSV file."
+            title: "Mitglieder importieren"
+            content: "Importiert eine Liste von Mitgliedern aus einer CSV-Datei, die im Fab-Manager angelegt werden."
           admins:
-            title: "Manage administrators"
-            content: "In the same way as the members, manage the administrators of your Fab-manager here.<br>The administrators can take reservations for any member as well as modify all the parameters of the software."
+            title: "Administratoren verwalten"
+            content: "Administratoren werden hier analog zu den Mitgliedern verwaltet.<br>Administratoren können Reservierungen für jedes Mitglied vornehmen und alle Parameter der Software ändern."
           groups:
-            title: "Manage groups"
-            content: "<p>Groups allow you to better segment your price list.</p><p>When you set up Fab-manager for the first time, it is recommended to start by defining the groups.</p>"
+            title: "Gruppen verwalten"
+            content: "<p>Gruppen ermöglichen die bessere Segmentierung der Preisliste.</p><p>Wenn Sie Fab-Manager zum ersten Mal einrichten, wird der Einstieg mit der Gruppendefinition empfohlen.</p>"
           labels:
-            title: "Manage tags"
-            content: "The labels allow you to reserve certain slots for users associated with these same labels."
+            title: "Tags verwalten"
+            content: "Mit Labeln können Sie bestimmte Slots für Benutzer reservieren, die diesen Labels zugeordnet sind."
           sso:
-            title: "Single Sign-On"
-            content: "Here you can set up and manage a single authentication system (SSO)."
+            title: "Single-Sign-On"
+            content: "Hier können Sie ein Single-Sign-On-Authentifizierungssystem (SSO) einrichten und verwalten."
         invoices:
           welcome:
-            title: "Invoices"
-            content: "<p>Here you will be able to download invoices and credit notes issued, as well as manage everything related to accounting and invoicing.</p><p>If you use third-party software to manage your invoices, it is possible to deactivate the billing module. For this, contact your system administrator.</p>"
+            title: "Rechnungen"
+            content: "<p>Hier können Sie Rechnungen und Gutschriften herunterladen, sowie alles rund um Abrechnung und Rechnungsstellung verwalten.</p><p>Wenn Sie Ihre Rechnungen mit einer anderen Software verwalten, kann das Abrechnungsmodul deaktiviert werden. Kontaktieren Sie dazu Ihren Systemadministrator.</p>"
           welcome_manager:
-            title: "Invoices"
-            content: "Here you will be able to download invoices and create credit notes."
+            title: "Rechnungen"
+            content: "Hier können Sie Rechnungen herunterladen und Gutschriften erstellen."
           list:
             title: "Invoices list"
             content: "Diese Tabelle listet standardmäßig alle Rechnungen und Kreditnoten von Fab-Manager auf. Sie können die Liste in einer anderen Reihenfolge sortieren, indem Sie auf den Header jeder Spalte klicken."
