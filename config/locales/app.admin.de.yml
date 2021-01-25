@@ -1308,14 +1308,14 @@ de:
             title: "Rechnungen"
             content: "Hier können Sie Rechnungen herunterladen und Gutschriften erstellen."
           list:
-            title: "Invoices list"
+            title: "Rechnungsliste"
             content: "Diese Tabelle listet standardmäßig alle Rechnungen und Kreditnoten von Fab-Manager auf. Sie können die Liste in einer anderen Reihenfolge sortieren, indem Sie auf den Header jeder Spalte klicken."
           chained:
-            title: "Chaining indicator"
-            content: "<p>This icon ensures the inalterability of the accounting data of the invoice on this line, in accordance with the French finance law of 2018 against VAT fraud.</p><p>If a red icon appears instead of this one , please contact technical support immediately.</p>"
+            title: "Verkettungs-Anzeiger"
+            content: "<p>Dieses Icon stellt die Unänderbarkeit der Rechnungsdaten der Rechnung in dieser Zeile sicher in Übereinstimmung mit dem französischen Finanzgesetz von 2018 gegen Mehrwertsteuerbetrug.</p><p>Wenn anstelle dieses Symbol ein rotes Symbol erscheint, wenden Sie sich bitte sofort an den technischen Support.</p>"
           download:
-            title: "Download"
-            content: "Click here to download the invoice in PDF format."
+            title: "Herunterladen"
+            content: "Klicken Sie hier, um die Rechnung im PDF-Format herunterzuladen."
           refund:
             title: "Credit note"
             content: "Allows you to generate a credit note for the invoice on this line or some of its sub-elements. <strong>Warning:</strong> This will only generate the accounting document, the actual refund of the user will always be your responsibility."
@@ -1400,7 +1400,7 @@ de:
             content: "Visualize the evolution over time of the main uses of your Fab Lab, thanks to graphs and curves."
         settings:
           welcome:
-            title: "Application customization"
+            title: "Anpassung der Applikation"
             content: "From here, you can configure the general settings of Fab-manager, enable or disable the optional modules and customize various elements of the interface."
           general:
             title: "General settings"
