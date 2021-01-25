@@ -48,7 +48,7 @@ version_check:
   queue: system
 
 payment_schedule_item:
-  cron: "0 5 * * *" # every day at 5:00 AM
+  cron: "0 23 * * *" # every day at 11pm
   class: 'PaymentScheduleItemWorker'
   queue: default
 

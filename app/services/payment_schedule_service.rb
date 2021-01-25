@@ -62,6 +62,7 @@ class PaymentScheduleService
     ps.stp_setup_intent_id = setup_intent_id
     ps.operator_profile = operator.invoicing_profile
     ps.invoicing_profile = user.invoicing_profile
+    ps.statistic_profile = user.statistic_profile
     ps.payment_schedule_items = items
     items.each do |item|
       item.payment_schedule = ps
@@ -78,7 +79,7 @@ class PaymentScheduleService
     invoice = Invoice.new(
       invoiced: payment_schedule_item.payment_schedule.scheduled,
       invoicing_profile: payment_schedule_item.payment_schedule.invoicing_profile,
-      statistic_profile: payment_schedule_item.payment_schedule.user&.statistic_profile,
+      statistic_profile: payment_schedule_item.payment_schedule.statistic_profile,
       operator_profile_id: payment_schedule_item.payment_schedule.operator_profile_id,
       stp_payment_intent_id: stp_invoice&.payment_intent,
       payment_method: stp_invoice ? 'stripe' : nil
@@ -97,7 +98,7 @@ class PaymentScheduleService
 
     # save the results
     invoice.save
-    payment_schedule_item.update_attributes(invoice_id: invoice.id)
+    payment_schedule_item.update_attributes(invoice_id: invoice.id, stp_invoice_id: stp_invoice.id)
   end
 
   private
@@ -108,16 +109,14 @@ class PaymentScheduleService
   ##
   def complete_first_invoice(payment_schedule_item, invoice)
     # sub-prices for the subscription and the reservation
-    details = {}
-    if payment_schedule_item.payment_schedule.scheduled_type == Subscription.name
-      details[:subscription] = payment_schedule_item.details['recurring'] + payment_schedule_item.details['adjustment']
-    else
-      details[:reservation] = payment_schedule_item.details['other_items']
-    end
+    details = {
+      subscription: payment_schedule_item.details['recurring'] + payment_schedule_item.details['adjustment']
+    }
 
     # the subscription and reservation items
     subscription = Subscription.find(payment_schedule_item.details['subscription_id'])
     if payment_schedule_item.payment_schedule.scheduled_type == Reservation.name
+      details[:reservation] = payment_schedule_item.details['other_items']
       reservation = payment_schedule_item.payment_schedule.scheduled
     end
 
@@ -157,7 +156,7 @@ class PaymentScheduleService
   def generate_reservation_item(invoice, reservation, payment_details)
     raise TypeError unless [Space, Machine, Training].include? reservation.reservable.class
 
-    description = reservation.reservable.name
+    description = "#{reservation.reservable.name}\n"
     reservation.slots.each do |slot|
       description += " #{I18n.l slot.start_at, format: :long} - #{I18n.l slot.end_at, format: :hour_minute}\n"
     end

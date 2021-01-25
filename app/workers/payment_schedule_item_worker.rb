@@ -6,7 +6,7 @@ class PaymentScheduleItemWorker
   include Sidekiq::Worker
 
   def perform
-    PaymentScheduleItem.where(due_date: [DateTime.current.at_beginning_of_day, DateTime.current.end_of_day], state: 'new').each do |psi|
+    PaymentScheduleItem.where(state: 'new').where('due_date < ?', DateTime.current.end_of_day).each do |psi|
       # the following depends on the payment method (stripe/check)
       if psi.payment_schedule.payment_method == 'stripe'
         ### Stripe
