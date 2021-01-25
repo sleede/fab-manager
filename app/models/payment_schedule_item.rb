@@ -6,6 +6,10 @@ class PaymentScheduleItem < Footprintable
   belongs_to :invoice
   after_create :chain_record
 
+  def first?
+    payment_schedule.ordered_items.first == self
+  end
+
   def self.columns_out_of_footprint
     %w[invoice_id]
   end

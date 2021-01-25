@@ -359,6 +359,8 @@ en:
         validity_per_user: "Validity per user"
         once: "Just once"
         forever: "Each use"
+        warn_validity_once: "Please note that when this coupon will be used with a payment schedule, the discount will be applied to the first deadline only."
+        warn_validity_forever: "Please note that when this coupon will be used with a payment schedule, the discount will be applied to each deadlines."
         validity_per_user_is_required: "Validity per user is required."
         valid_until: "Valid until (included)"
         leave_empty_for_no_limit: "Do not specify any limit by leaving the field empty."

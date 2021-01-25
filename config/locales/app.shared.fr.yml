@@ -359,6 +359,8 @@ fr:
         validity_per_user: "Validité par utilisateur"
         once: "Une seule fois"
         forever: "À chaque utilisation"
+        warn_validity_once: "Veuillez noter que lors de l'utilisation de ce code promo avec un échéancier de paiement, la réduction sera appliquée uniquement à la première échéance."
+        warn_validity_forever: "Veuillez noter que lors de l'utilisation de ce code promo avec un échéancier de paiement, la réduction sera appliquée à chaque échéance."
         validity_per_user_is_required: "La validité par utilisateur est requise."
         valid_until: "Valable jusqu'au (inclus)"
         leave_empty_for_no_limit: "Laissez vide pour ne pas spécifier de limite."

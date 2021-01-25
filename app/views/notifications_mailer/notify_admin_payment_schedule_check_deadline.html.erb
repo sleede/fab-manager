@@ -1,0 +1,10 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p>
+  <%= t('.body.remember',
+        REFERENCE: @attached_object.payment_schedule.reference,
+        AMOUNT: number_to_currency(@attached_object.amount),
+        DATE: I18n.l @attached_object.due_date, format: :long) %>
+  <%= t('.body.date') %>
+</p>
+<p><%= t('.body.confirm') %></p>

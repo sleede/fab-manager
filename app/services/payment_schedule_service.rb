@@ -69,67 +69,135 @@ class PaymentScheduleService
     ps
   end
 
+  ##
+  # Generate the invoice associated with the given PaymentScheduleItem, with the children elements (InvoiceItems).
+  # @param stp_invoice is used to determine if the invoice was paid using stripe
+  ##
   def generate_invoice(payment_schedule_item, stp_invoice = nil)
+    # build the base invoice
     invoice = Invoice.new(
       invoiced: payment_schedule_item.payment_schedule.scheduled,
       invoicing_profile: payment_schedule_item.payment_schedule.invoicing_profile,
-      statistic_profile: payment_schedule_item.payment_schedule.user.statistic_profile,
+      statistic_profile: payment_schedule_item.payment_schedule.user&.statistic_profile,
       operator_profile_id: payment_schedule_item.payment_schedule.operator_profile_id,
       stp_payment_intent_id: stp_invoice&.payment_intent,
       payment_method: stp_invoice ? 'stripe' : nil
     )
+    # complete the invoice with some InvoiceItem
+    if payment_schedule_item.first?
+      complete_first_invoice(payment_schedule_item, invoice)
+    else
+      complete_next_invoice(payment_schedule_item, invoice)
+    end
 
-    generate_invoice_items(invoice, payment_schedule_item, reservation: reservation, subscription: subscription)
-    InvoicesService.set_total_and_coupon(invoice, user, payment_details[:coupon])
-    invoice
+    # set the total and apply any coupon
+    user = payment_schedule_item.payment_schedule.user
+    coupon = payment_schedule_item.payment_schedule.coupon
+    set_total_and_coupon(payment_schedule_item, invoice, user, coupon)
+
+    # save the results
+    invoice.save
+    payment_schedule_item.update_attributes(invoice_id: invoice.id)
   end
 
   private
 
-  def generate_invoice_items(invoice, payment_details, reservation: nil, subscription: nil)
-    if reservation
-      case reservation.reservable
-        # === Event reservation ===
-      when Event
-        InvoicesService.generate_event_item(invoice, reservation, payment_details)
-        # === Space|Machine|Training reservation ===
-      else
-        InvoicesService.generate_generic_item(invoice, reservation, payment_details)
-      end
+  ##
+  # The first PaymentScheduleItem contains references to the reservation price (if any) and to the adjustement price
+  # for the subscription (if any)
+  ##
+  def complete_first_invoice(payment_schedule_item, invoice)
+    # sub-prices for the subscription and the reservation
+    details = {}
+    if payment_schedule_item.payment_schedule.scheduled_type == Subscription.name
+      details[:subscription] = payment_schedule_item.details['recurring'] + payment_schedule_item.details['adjustment']
+    else
+      details[:reservation] = payment_schedule_item.details['other_items']
     end
 
-    return unless subscription || reservation&.plan_id
+    # the subscription and reservation items
+    subscription = Subscription.find(payment_schedule_item.details['subscription_id'])
+    if payment_schedule_item.payment_schedule.scheduled_type == Reservation.name
+      reservation = payment_schedule_item.payment_schedule.scheduled
+    end
 
-    subscription = reservation.generate_subscription if !subscription && reservation.plan_id
-    InvoicesService.generate_subscription_item(invoice, subscription, payment_details)
+    # build the invoice items
+    generate_invoice_items(invoice, details, subscription: subscription, reservation: reservation)
   end
 
+  ##
+  # The later PaymentScheduleItems only contain references to the subscription (which is recurring)
+  ##
+  def complete_next_invoice(payment_schedule_item, invoice)
+    # the subscription item
+    subscription = Subscription.find(payment_schedule_item.details['subscription_id'])
+
+    # sub-price for the subscription
+    details = { subscription: payment_schedule_item.details['recurring'] }
+
+    # build the invoice item
+    generate_invoice_items(invoice, details, subscription: subscription)
+  end
+
+  ##
+  # Generate an array of InvoiceItem according to the provided parameters and saves them in invoice.invoice_items
+  ##
+  def generate_invoice_items(invoice, payment_details, reservation: nil, subscription: nil)
+    generate_reservation_item(invoice, reservation, payment_details) if reservation
+
+    return unless subscription
+
+    generate_subscription_item(invoice, subscription, payment_details)
+  end
+
+  ##
+  # Generate a single InvoiceItem for the given reservation and save it in invoice.invoice_items.
+  # This method must be called only with a valid reservation
+  ##
   def generate_reservation_item(invoice, reservation, payment_details)
     raise TypeError unless [Space, Machine, Training].include? reservation.reservable.class
 
+    description = reservation.reservable.name
     reservation.slots.each do |slot|
-      description = reservation.reservable.name +
-        " #{I18n.l slot.start_at, format: :long} - #{I18n.l slot.end_at, format: :hour_minute}"
-
-      price_slot = payment_details[:elements][:slots].detect { |p_slot| p_slot[:start_at].to_time.in_time_zone == slot[:start_at] }
-      invoice.invoice_items.push InvoiceItem.new(
-        amount: price_slot[:price],
-        description: description
-      )
+      description += " #{I18n.l slot.start_at, format: :long} - #{I18n.l slot.end_at, format: :hour_minute}\n"
     end
+
+    invoice.invoice_items.push InvoiceItem.new(
+      amount: payment_details[:reservation],
+      description: description
+    )
   end
 
   ##
   # Generate an InvoiceItem for the given subscription and save it in invoice.invoice_items.
   # This method must be called only with a valid subscription
   ##
-  def self.generate_subscription_item(invoice, subscription, payment_details)
+  def generate_subscription_item(invoice, subscription, payment_details)
     raise TypeError unless subscription
 
     invoice.invoice_items.push InvoiceItem.new(
-      amount: payment_details[:elements][:plan],
+      amount: payment_details[:subscription],
       description: subscription.plan.name,
       subscription_id: subscription.id
     )
+  end
+
+  ##
+  # Set the total price to the invoice, summing all sub-items.
+  # Additionally a coupon may be applied to this invoice to make a discount on the total price
+  ##
+  def set_total_and_coupon(payment_schedule_item, invoice, user, coupon = nil)
+    return unless invoice
+
+    total = invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+)
+
+    unless coupon.nil?
+      if (coupon.validity_per_user == 'once' && payment_schedule_item.first?) || coupon.validity_per_user == 'forever'
+        total = CouponService.new.apply(total, coupon, user.id)
+        invoice.coupon_id = coupon.id
+      end
+    end
+
+    invoice.total = total
   end
 end

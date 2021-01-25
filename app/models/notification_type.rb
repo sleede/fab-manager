@@ -55,6 +55,9 @@ class NotificationType
     notify_user_role_update
     notify_admin_members_stripe_sync
     notify_user_when_payment_schedule_ready
+    notify_admin_payment_schedule_failed
+    notify_member_payment_schedule_failed
+    notify_admin_payment_schedule_check_deadline
   ]
   # deprecated:
   # - notify_member_subscribed_plan_is_changed

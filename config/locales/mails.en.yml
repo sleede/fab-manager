@@ -293,5 +293,23 @@ en:
         please_find_attached_html: "Please find attached your payment schedule, issued on {DATE}, with an amount of {AMOUNT} concerning your {TYPE, select, Reservation{reservation} other{subscription}}." #messageFormat interpolation
         schedule_in_your_dashboard_html: "You can find this payment schedule at any time from %{DASHBOARD} on the Fab Lab's website."
         your_dashboard: "your dashboard"
+    notify_admin_payment_schedule_failed:
+      subject: "Card debit failure"
+      body:
+        remember: "In accordance with the %{REFERENCE} payment schedule, a debit by card of %{AMOUNT} was scheduled on %{DATE}."
+        error: "Unfortunately, this card debit was unable to complete successfully."
+        action: "Please go to your payment schedule management interface as soon as possible to resolve the problem."
+    notify_member_payment_schedule_failed:
+      subject: "Card debit failure"
+      body:
+        remember: "In accordance with your %{REFERENCE} payment schedule, a debit by card of %{AMOUNT} was scheduled on %{DATE}."
+        error: "Unfortunately, this card debit was unable to complete successfully."
+        action: "Please contact the manager of your FabLab as soon as possible, otherwise your subscription may be interrupted."
+    notify_admin_payment_schedule_check_deadline:
+      subject: "Payment deadline"
+      body:
+        remember: "In accordance with the %{REFERENCE} payment schedule, %{AMOUNT} was due to be debited on %{DATE}."
+        date: "This is a reminder to cash the scheduled check as soon as possible."
+        confirm: "Do not forget to confirm the receipt in your payment schedule management interface, so that the corresponding invoice will be generated."
     shared:
       hello: "Hello %{user_name}"
