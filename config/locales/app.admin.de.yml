@@ -1337,37 +1337,37 @@ de:
         pricing:
           welcome:
             title: "Abonnements und Preise"
-            content: "Manage subscription plans and prices for the various services you offer to your members."
+            content: "Verwalten Sie Abonnements und Preise für die Dienste, die Sie Ihren Mitgliedern anbieten."
           new_plan:
-            title: "New subscription plan"
-            content: "Create subscription plans to offer preferential prices on machines and spaces to regular users."
+            title: "Neuer Abonnementplan"
+            content: "Erstellen Sie Abonnementpläne, um regulären Benutzern ermäßigte Preise auf Maschinen und Räume anzubieten."
           trainings:
-            title: "Trainings"
-            content: "Define training prices here, by user group."
+            title: "Schulungen"
+            content: "Definieren Sie Preise der Schulungen nach Benutzergruppe."
           machines:
-            title: "Machines"
-            content: "Define here the prices of the machine slots, by user group. These prices will be applied to users who do not have subscriptions."
+            title: "Maschinen"
+            content: "Legen Sie hier die Preise für die Maschinenslots nach Benutzergruppe fest. Diese Preise gelten für Benutzer ohne Abonnements."
           spaces:
-            title: "Spaces"
-            content: "In the same way, define here the prices of the spaces slots, for the users without subscriptions."
+            title: "Räume"
+            content: "Ebenso legen Sie hier die Preise der Raum-Slots für Benutzer ohne Abonnements fest."
           credits:
-            title: "Credits"
-            content: "<p>Credits allow you to give certain services for free to users who subscribe to a plan.</p><p>You can, for example, offer 2 hours of 3D printer for all annual subscriptions; or training of your choice for student subscribers, etc.</p>"
+            title: "Gutschriften"
+            content: "<p>Über Gutschriften können Benutzer mit Abonnements bestimmte Dienste kostenlos nutzen.</p><p>Sie können beispielsweise 2 Stunden 3D-Drucker für alle Jahresabonnementen anbieten oder eine Schulung Ihrer Wahl für Studierende etc.</p>"
           coupons:
-            title: "Coupons"
-            content: "Create and manage promotional coupons allowing to offer punctual discounts to their holders."
+            title: "Gutscheine"
+            content: "Erstellen und verwalten Sie Gutscheine, um ihren Inhabern einzelne Rabatte zu bieten."
         events:
           welcome:
-            title: "Events"
-            content: "Create events, track their reservations and organize them from this page."
+            title: "Veranstaltungen"
+            content: "Hier erstellen und organisieren Sie Veranstaltungen und überwachen den Reservierungsverlauf."
           list:
-            title: "The events"
-            content: "This list displays all past or future events, as well as the number of reservations for each of them."
+            title: "Die Veranstaltungen"
+            content: "Diese Liste zeigt vergangene oder zukünftige Veranstaltungen sowie die jeweilige Anzahl der Reservierungen."
           filter:
-            title: "Filter events"
-            content: "Only display upcoming events in the list below; or on the contrary, only those already passed."
+            title: "Veranstaltungen filtern"
+            content: "Wahlweise nur zukünftige oder nur vergangene Veranstaltungen in der folgenden Liste anzeigen."
           categories:
-            title: "Categories"
+            title: "Kategorien"
             content: "Categories help your users know what type of event it is. A category is required for each of the newly created events."
           themes:
             title: "Themes"
