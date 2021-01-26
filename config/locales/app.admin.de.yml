@@ -1397,45 +1397,45 @@ de:
             content: "Sie können wahlweise alle oder einen Teil der statistischen Daten in eine Excel-Datei exportieren."
           trending:
             title: "Entwicklung"
-            content: "Visualize the evolution over time of the main uses of your Fab Lab, thanks to graphs and curves."
+            content: "Visualisieren Sie mit Grafiken und Kurven die Entwicklung der FabLab-Nutzung über die Zeit."
         settings:
           welcome:
             title: "Anpassung der Applikation"
-            content: "From here, you can configure the general settings of Fab-manager, enable or disable the optional modules and customize various elements of the interface."
+            content: "Von hier aus konfigurieren Sie allgemeine Einstellungen von Fab-Manager, können optionale Module aktiviert und deaktiviert sowie die Benutzeroberfläche angepasst werden."
           general:
-            title: "General settings"
-            content: "A lot a settings can be customized from here. Take time to look all over this page, it will let you customize messages, documents, optional modules, registrations, visual aspect of Fab-manager, and much more."
+            title: "Allgemeine Einstellungen"
+            content: "Viele Einstellungen können von hier aus vorgenommen werden. Nehmen Sie sich für diese Seite Zeit: hier können Nachrichten, Dokumente, optionale Module, Registrierungen, das Erscheinungsbild von Fab-Manager und vieles mehr angepasst werden."
           home:
-            title: "Customize home page"
-            content: "<p>This WYSIWYG editor allows you to customize the appearance of the home page while using different components (last tweet, brief, etc.).</p><p><strong>Warning:</strong> Keep in mind that any uncontrolled changes can break the appearance of the home page.</p>"
+            title: "Startseite anpassen"
+            content: "<p>Mit diesem WYSIWYG-Editor können Sie das Aussehen der Startseite anpassen, indem Sie verschiedene Komponenten verwenden (letzter Tweet, Kurzinformation etc.).</p><p><strong>Warnung:</strong> Beachten Sie, dass unbedachte Änderungen das Aussehen der Startseite beschädigen können.</p>"
           components:
-            title: "Insert a component"
-            content: "Click here to insert a pre-existing component into the home page."
+            title: "Komponente einfügen"
+            content: "Hier klicken, um eine bestehende Komponente in die Startseite einzufügen."
           codeview:
-            title: "Display HTML code"
-            content: "This button allows you to directly view and modify the code of the home page. This is the recommended way to proceed, but it requires prior knowledge of HTML."
+            title: "HTML-Code anzeigen"
+            content: "Über diese Schaltfläche kann der HTML-Code der Startseite direkt angezeigt und bearbeitet werden. Diese Vorgehensweise wird empfohlen, HTML-Kenntnisse sind vorausgesetzt."
           reset:
-            title: "Go back"
-            content: "At any time, you can restore the original home page by clicking here."
+            title: "Rückgängig"
+            content: "Sie können jederzeit die Originalseite wiederherstellen, indem Sie hier klicken."
           css:
-            title: "Customize the style sheet"
-            content: "For advanced users, it is possible to define a custom style sheet (CSS) for the home page."
+            title: "Stylesheet anpassen"
+            content: "Fortgeschrittene Benutzer können ein benutzerdefiniertes Stylesheet (CSS) für die Startseite erstellen."
           about:
-            title: "About"
-            content: "Fully personalize this page to present your activity."
+            title: "Über"
+            content: "Passen Sie diese Seite vollständig an, um Ihre Aktivitäten vorzustellen."
           privacy:
-            title: "Privacy policy"
-            content: "<p>Explain here how you use the data you collect about your members.</p><p>GDPR requires that a confidentiality policy is defined, as well as a data protection officer.</p>"
+            title: "Datenschutzerklärung"
+            content: "<p>Erklären Sie hier, wie die gesammelten Daten der Nutzer verwendet werden.</p><p>Die Datenschutzbestimmungen sehen eine Datenschutzerklärung vor sowie die Bestimmung eines Datenschutzbeauftragten.</p>"
           draft:
-            title: "Draft"
-            content: "Click here to view a privacy policy draft with holes, which you just need to read and complete."
+            title: "Entwurf"
+            content: "Klicken Sie hier für die Vorlage einer Datenschutzerklärung, die Sie nur lesen und vervollständigen müssen."
           reservations:
-            title: "Reservations"
-            content: "Opening hours, chance to cancel reservations... Each Fablab has its own reservation rules, which you can define on this page."
+            title: "Reservierungen"
+            content: "Öffnungszeiten, Reservierungssstornierungen... Jedes Fablab hat seine eigenen Reservierungsregeln, die Sie auf dieser Seite festlegen können."
         open_api:
           welcome:
             title: "OpenAPI"
-            content: "Fab-manager offers an open API allowing third-party software to deal simply with its data. This screen allows you to grant accesses to this API."
+            content: "Fab-Manager bietet eine offene API an, über die externe Programme einfach auf Fab-Manager-Daten zugreifen können. Hier können Sie Zugriffe auf diese API gewähren."
           doc:
-            title: "Documentation"
-            content: "Click here to access the API online documentation."
+            title: "Dokumentation"
+            content: "Klicken Sie hier, um die API Online-Dokumentation aufzurufen."
