@@ -642,6 +642,7 @@ fr:
           stripe_currency: "Devise Stripe"
         payment_schedules:
           filter_schedules: "Filtrer les échéanciers"
+        document_filters:
           reference: "Référence"
           customer: "Client"
           date: "Date"

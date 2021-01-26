@@ -642,6 +642,7 @@ en:
           stripe_currency: "Stripe currency"
         payment_schedules:
           filter_schedules: "Filter schedules"
+        document_filters:
           reference: "Reference"
           customer: "Customer"
           date: "Date"
