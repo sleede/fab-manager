@@ -1394,9 +1394,9 @@ de:
             content: "<p>Zugriff auf Daten und Statistiken über die Mitglieder und deren Verwendungszwecke im FabLab.</p><p>Gemäß der Datenschutzverordnung werden Benutzer, die ihr Konto gelöscht haben, zwar weiter in den Statistiken aufgeführt, die Daten aber anonymisiert.</p>"
           export:
             title: "Daten exportieren"
-            content: "You can choose to export all or part of the statistical data to an Excel file."
+            content: "Sie können wahlweise alle oder einen Teil der statistischen Daten in eine Excel-Datei exportieren."
           trending:
-            title: "Evolution"
+            title: "Entwicklung"
             content: "Visualize the evolution over time of the main uses of your Fab Lab, thanks to graphs and curves."
         settings:
           welcome:
