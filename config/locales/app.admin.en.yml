@@ -642,6 +642,18 @@ en:
           stripe_currency: "Stripe currency"
         payment_schedules:
           filter_schedules: "Filter schedules"
+        schedules_table:
+          schedule_num: "Schedule #"
+          date: "Date"
+          price: "Price"
+          customer: "Customer"
+          deadline: "Deadline"
+          amount: "Amount"
+          state: "State"
+          download: "Download"
+          state_new: "Not yet due"
+          state_pending: "Action required"
+          state_paid: "Paid"
         document_filters:
           reference: "Reference"
           customer: "Customer"
