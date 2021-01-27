@@ -179,7 +179,7 @@ de:
         step_N: "Schritt {INDEX}"
         share_on_facebook: "Auf Facebook teilen"
         share_on_twitter: "Auf Twitter teilen"
-        deleted_user: "Gelöschte Benutzer"
+        deleted_user: "Gelöschter Nutzer"
         posted_on_: "Gepostet am"
         CAD_file_to_download: "{COUNT, plural, one {} =0{Keine CAD-Dateien} =1{CAD-Datei zum Download} other{CAD-Dateien zum Download}}"
         machines_and_materials: "Maschinen und Materialien"
