@@ -110,6 +110,7 @@ class PaymentScheduleService
   def self.list(page, size, filters = {})
     ps = PaymentSchedule.includes(:invoicing_profile, :payment_schedule_items, :subscription)
                         .joins(:invoicing_profile)
+                        .order('payment_schedules.created_at DESC')
                         .page(page)
                         .per(size)
 
@@ -129,7 +130,7 @@ class PaymentScheduleService
     end
     unless filters[:date].nil?
       ps = ps.where(
-        "date_trunc('day', payment_schedules.created_at) = :search",
+        "date_trunc('day', payment_schedules.created_at) = :search OR date_trunc('day', payment_schedule_items.due_date) = :search",
         search: "%#{DateTime.iso8601(filters[:date]).to_time.to_date}%"
       )
     end

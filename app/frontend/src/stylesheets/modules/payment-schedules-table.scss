@@ -1,0 +1,151 @@
+.schedules-table {
+  table-layout: fixed;
+  border: 1px solid #e9e9e9;
+  border-top: 0;
+  margin-bottom: 0;
+  width: 100%;
+  max-width: 100%;
+  background-color: transparent;
+  border-collapse: collapse;
+  border-spacing: 0;
+
+  & > thead {
+    border-top: 1px solid #e9e9e9;
+
+    & > tr > th {
+      font-weight: 600;
+      vertical-align: middle;
+      text-align: center;
+      padding: 2rem 1rem;
+      line-height: 1.5;
+      border: 1px solid #f0f0f0;
+      border-top: 0;
+    }
+  }
+
+  .w-35 { width: 35px; }
+  .w-120 { width: 120px; }
+  .w-200 { width: 200px; }
+
+  .schedules-table-body {
+    table-layout: fixed;
+    background-color: #fff;
+    border: 1px solid #e9e9e9;
+    border-top: 0;
+    margin-bottom: 0;
+    width: 100%;
+    max-width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+
+    & > tbody {
+      background: #f7f7f9;
+      border-collapse: collapse;
+      border-spacing: 0;
+      line-height: 1.5;
+
+      & > tr > td {
+        padding: 12px 10px;
+        border: 1px solid #f0f0f0;
+        border-top: 0;
+        vertical-align: middle;
+        font-size: 1.4rem;
+        line-height: 1.5;
+
+        &.row-header {
+          text-align: center;
+          cursor: pointer;
+        }
+      }
+
+      .schedule-items-table {
+        table-layout: fixed;
+        background-color: #fff;
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 1rem;
+        border-collapse: collapse;
+        border-spacing: 0;
+        border: 1px solid #e9e9e9;
+        border-top: 0;
+
+        & > thead {
+          border-top: 1px solid #e9e9e9;
+          font-size: 1.4rem;
+          line-height: 1.5;
+
+          & > tr > th {
+            border: 1px solid #f0f0f0;
+            border-top: 0;
+            border-bottom: 1px solid #e9e9e9;
+            font-weight: 600;
+            vertical-align: middle;
+            text-align: center;
+            font-size: 1.1rem;
+            padding: 2rem 1rem;
+            text-transform: uppercase;
+          }
+        }
+
+        & > tbody > tr > td {
+          vertical-align: middle;
+          border: 1px solid #f0f0f0;
+          border-top: 0;
+          padding: 12px 10px;
+          font-size: 1.4rem;
+          line-height: 1.5;
+        }
+      }
+    }
+  }
+
+  .download-button {
+    color: black;
+    background-color: #fbfbfb;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid #c9c9c9;
+    padding: 6px 12px;
+    font-size: 16px;
+    line-height: 1.5;
+    border-radius: 4px;
+    user-select: none;
+    text-decoration: none;
+
+    &:hover {
+      background-color: #f2f2f2;
+      color: black;
+      border-color: #aaaaaa;
+      text-decoration: none;
+    }
+
+    &:active {
+      color: black;
+      background-color: #f2f2f2;
+      border-color: #aaaaaa;
+      outline: 0;
+      box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+    }
+
+    & > i {
+      margin-right: 0.5em;
+    }
+  }
+
+  .state-new {
+    color: #3a3a3a;
+  }
+  .state-pending {
+    color: #d43333;
+  }
+  .state-paid {
+    color: black;
+  }
+}

@@ -1,8 +1,13 @@
+export enum PaymentScheduleItemState {
+  New = 'new',
+  Pending = 'pending',
+  Paid = 'paid'
+}
 export interface PaymentScheduleItem {
   id: number,
   amount: number,
   due_date: Date,
-  state: string,
+  state: PaymentScheduleItemState,
   invoice_id: number,
   payment_method: string,
   details: {

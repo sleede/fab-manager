@@ -642,6 +642,18 @@ fr:
           stripe_currency: "Devise Stripe"
         payment_schedules:
           filter_schedules: "Filtrer les échéanciers"
+        schedules_table:
+          schedule_num: "Échéancier n°"
+          date: "Date"
+          price: "Prix"
+          customer: "Client"
+          deadline: "Échéance"
+          amount: "Montant"
+          state: "État"
+          download: "Télécharger"
+          state_new: "Pas encore à l'échéance"
+          state_pending: "Action requise"
+          state_paid: "Payée"
         document_filters:
           reference: "Référence"
           customer: "Client"
