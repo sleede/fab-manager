@@ -375,21 +375,21 @@ de:
             content: "<p>Auf dieser Seite können Sie die Liste aller Schulungen einsehen und ein Mitglied für eine Schulung registrieren.</p><p>Trainings können als Voraussetzungen gesetzt werden, bevor die Reservierung bestimmter Maschinen erlaubt wird.</p><p>Mitglieder können auch auf diese Seite zugreifen und sich für eine Schulung registrieren wenn Kreditkartenzahlung aktiviert ist, oder wenn einige Preise gleich 0 sind.</p>"
           spaces:
             title: "Räume"
-            content: "<p>This page will allow you to consult the list of all available spaces and to reserve a place on a slot, on behalf of a member.</p><p>A space can be, for example, a woodshop or a meeting room.</p><p>Their particularity is that they can be booked by several people at the same time.</p><p>Members can also access this page and reserve a machine themselves, if credit card payment is enabled, or if some prices are equal to 0.</p>"
+            content: "<p>Auf dieser Seite können Sie die Liste aller verfügbaren Räume einsehen und einen Slot im Namen eines Mitglieds reservieren.</p><p>Ein Raum kann beispielsweise ein Meetingraum oder eine Holzwerkstatt sein.</p><p>Die Besonderheit von Räumen ist, dass sie von mehreren Mitgliedern gleichzeitig gebucht werden können. </p><p>Mitglieder können auf diese Seite zugreifen und selbst eine Maschine reservieren, wenn Kreditkartenzahlung aktiviert ist oder wenn einige Preise gleich 0 sind.</p>"
           events:
-            title: "Events"
-            content: "<p>An open house evening or an internship to make your desk lamp? It's over here!</p><p>Events can be free or paid (with different prices), with or without reservation.</p><p>Again, members can access this page and book themselves places for free events, or paid events if credit card payment is enabled.</p>"
+            title: "Veranstaltungen"
+            content: "<p>Ein Tag der offenen Tür oder ein Kurzworkshop zum Schreibtischlampenbau? Hier drüben!</p><p>Veranstaltungen können gratis oder kostenpflichtig (mit Möglichkeit zur Preisstaffelung) sein, frei zugänglich oder reservierungspflichtig.</p><p>Auch hier haben Mitglieder Seitenzugriff und können Plätze für kostenlose Veranstaltungen buchen bzw. auch für eintrittspflichtige, wenn Kreditkartenzahlung aktiviert ist.</p>"
           calendar:
-            title: "Agenda"
-            content: "Visualize at a glance everything that is scheduled for the next coming weeks (events, training, machines available, etc.)."
+            title: "Terminübersicht"
+            content: "Visualisieren Sie auf einen Blick alles, was für die nächsten Wochen geplant ist (Veranstaltungen, Schulungen, Maschinen etc.)."
           projects:
             title: "Projekte"
-            content: "<p>Document and share all your creations with the community.</p><p>If you use OpenLab, you will also be able to consult the projects of the entire Fab-manager network. <a href='mailto:contact@fab-manager.com'>Contact-us</a> to get your access, it's free!</p>"
+            content: "<p>Dokumentieren und teilen Sie Projekte mit der Community.</p><p>Wenn Sie OpenLab nutzen, haben SIe Zugriff auf die Projekte des gesamten Fab-Manager-Netzwerks. <a href='mailto:contact@fab-manager.com'>Kontaktieren Sie uns</a> für den kostenlosen Zugang!</p>"
           plans:
-            title: "Subscriptions"
-            content: "Subscriptions provide a way to segment your prices and provide benefits to regular users."
+            title: "Abonnements"
+            content: "Abonnements bieten eine Möglichkeit, Ihre Preise zu segmentieren und Vorteile für regelmäßige Nutzer zu bieten."
           admin:
-            title: "{ROLE} section"
+            title: "{ROLE} -Abschnitt"
             content: "<p>All of the elements below are only accessible to administrators and managers. They allow you to manage and configure Fab-manager.</p><p>At the end of this visit, click on one of them to find out more.</p>"
           about:
             title: "About"
