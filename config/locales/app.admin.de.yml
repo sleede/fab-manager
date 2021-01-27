@@ -75,7 +75,7 @@ de:
         slot_successfully_deleted: "Der Slot {START} - {END} wurde erfolgreich gelöscht"
         slots_deleted: "Der Slot beginnend mit {START}, und {COUNT, plural, =1{one other} ein weiterer Slot{{COUNT} weitere Slots}}} wurden gelöscht"
         unable_to_delete_the_slot: "Konnte den Slot {START} - {END} nicht löschen, wahrscheinlich weil er bereits von einem Mitglied reserviert ist"
-        slots_not_deleted: "Von {TOTAL} Slots {COUNT, plural, one {} =1{wurde einer wurde nicht gelöscht} other{{COUNT} wurden mehrere nicht gelöscht!}}. Möglicherweise {COUNT, plural, =1{ist er} other{sind sie}} bereits reserviert."
+        slots_not_deleted: "Von {TOTAL} Slots {COUNT, plural, one {} =1{wurde einer wurde nicht gelöscht} other{wurden {COUNT} nicht gelöscht}}. Möglicherweise {COUNT, plural, =1{ist er} other{sind sie}} bereits reserviert."
         you_should_select_at_least_a_machine: "Sie sollten mindestens eine Maschine auf diesem Slot auswählen."
         export_is_running_you_ll_be_notified_when_its_ready: "Export wird ausgeführt. Sie werden nach Fertigstellung benachrichtigt."
         actions: "Aktionen"
