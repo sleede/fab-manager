@@ -233,7 +233,7 @@ de:
         age_ranges: "Altersklassen"
         add_a_range: "Neue Spanne hinzufügen"
         do_you_really_want_to_delete_this_ELEMENT: "Wollen Sie {ELEMENT, select, category{die Kategorie} theme{das Thema} age_range{die Altersklasse} other{Element}} wirklich löschen?"
-        unable_to_delete_ELEMENT_already_in_use_NUMBER_times: "{ELEMENT, select, category{Die Kategorie} theme{Das Thema} age_range{Die Altersklasse} other{Element}} kann nicht gelöscht werden, weil bereits eine Verbindung mit {NUMBER, plural, =0{keinem Ereignis} one{einem Ereignis} other{{NUMBER} Ereignissen}} besteht"
+        unable_to_delete_ELEMENT_already_in_use_NUMBER_times: "{ELEMENT, select, category{Die Kategorie} theme{Das Thema} age_range{Die Altersklasse} other{Element}} kann nicht gelöscht werden, weil bereits eine Verbindung mit {NUMBER, plural, =0{keinem Ereignis} one{einem Ereignis} other{{NUMBER} Ereignissen}} besteht."
         at_least_one_category_is_required: "Mindestens eine Kategorie ist erforderlich."
         unable_to_delete_the_last_one: "Letzte Veranstaltung konnte nicht gelöscht werden."
         unable_to_delete_an_error_occured: "Löschen fehlgeschlagen: Ein Fehler ist aufgetreten."
