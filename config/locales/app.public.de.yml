@@ -312,14 +312,14 @@ de:
         do_you_really_want_to_delete_this_event: "Möchten Sie diese Veranstaltung wirklich löschen?"
         delete_recurring_event: "Sie sind dabei, eine wiederkehrende Veranstaltung zu löschen. Was möchten Sie tun?"
         delete_this_event: "Nur diese Veranstaltung"
-        delete_this_and_next: "Diese und die nächste Veranstaltung"
+        delete_this_and_next: "Diese Veranstaltung sowie die folgenden"
         delete_all: "Alle Veranstaltungen"
-        event_successfully_deleted: "Event successfully deleted."
-        events_deleted: "The event, and {COUNT, plural, =1{one other} other{{COUNT} others}}, have been deleted"
-        unable_to_delete_the_event: "Unable to delete the event, it may be booked by a member"
-        events_not_deleted: "On {TOTAL} events, {COUNT, plural, =1{one was not deleted} other{{COUNT} were not deleted}}. Some reservations may exists on {COUNT, plural, =1{it} other{them}}."
-        cancel_the_reservation: "Cancel the reservation"
-        do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "Do you really want to cancel this reservation? This apply to ALL booked tickets."
+        event_successfully_deleted: "Veranstaltung erfolgreich gelöscht."
+        events_deleted: "Die Veranstaltung sowie {COUNT, plural, one {} =1{eine weitere} other{{COUNT} weitere}} wurden gelöscht"
+        unable_to_delete_the_event: "Das Ereignis kann nicht gelöscht werden, es wurde möglicherweise von einem Mitglied gebucht"
+        events_not_deleted: "Von {TOTAL} Veranstaltungen {COUNT, plural, one {} =1{wurde eine nicht gelöscht} other{wurden {COUNT} nicht gelöscht}}. Möglicherweise {COUNT, plural, =1{ist sie} other{sind sie}} bereits reserviert."
+        cancel_the_reservation: "Reservierung stornieren"
+        do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "Möchten Sie diese Reservierung wirklich stornieren? Dies gilt für alle gebuchten Tickets."
         reservation_was_successfully_cancelled: "Reservation was successfully cancelled."
         cancellation_failed: "Cancellation failed."
         event_is_over: "The event is over."
@@ -404,35 +404,35 @@ de:
             title: "News"
             content: "<p>This space allows you to display the latest news from your structure.</p><p>You can easily change its content from « Customization », « Home page ».</p>"
           last_projects:
-            title: "Last projects"
-            content: "<p>This carousel scrolls through the latest projects documented by your members.</p>"
+            title: "Letzte Projekte"
+            content: "<p>Dieses Karussell scrollt durch die neuesten von Ihren Mitgliedern dokumentierten Projekte.</p>"
           last_tweet:
-            title: "Last tweet"
-            content: "<p>The last tweet of your Tweeter feed can be shown here.</p><p>Configure it from « Customization », « Home page ».</p>"
+            title: "Letzter Tweet"
+            content: "<p>Der letzte Tweet Ihres Tweeter-Feeds kann hier angezeigt werden.</p><p>Konfigurieren Sie ihn unter « Anpassen », « Startseite ».</p>"
           last_members:
-            title: "Last members"
-            content: "The last registered members who have validated their address and agreed to be contacted will be shown here."
+            title: "Neueste Mitglieder"
+            content: "Hier werden die letzten registrierten Mitglieder angezeigt, die ihre Adresse validiert und dem Kontaktieren zugestimmt haben."
           next_events:
-            title: "Upcoming events"
-            content: "The next three scheduled events are displayed in this space."
+            title: "Kommende Veranstaltungen"
+            content: "Die nächsten drei geplanten Veranstaltungen werden in diesem Bereich angezeigt."
           customize:
-            title: "Customize the home page"
-            content: "<p>This page can be fully personalized.</p><p>You can <a href='mailto:contact@fab-manager.com'>contact-us</a> to make a tailored customization of the home page.</p>"
+            title: "Startseite anpassen"
+            content: "<p>Diese Seite kann vollständig personalisiert werden.</p><p>Sie können <a href='mailto:contact@fab-manager.com'>uns kontaktieren</a> um eine maßgeschneiderte Anpassung der Startseite vorzunehmen.</p>"
           version:
-            title: "Application version"
-            content: "Hover your cursor over this icon to find out the version of Fab-manager. If you are not up to date, this will be reported here and you'll be able to get details by clicking on it."
+            title: "Programmversion"
+            content: "Bewegen Sie den Cursor über dieses Symbol, um die Version von Fab-Manager anzuzeigen. Wenn Sie nicht die aktuellste Version verwenden, wird das hier angezeigt. Per Klick erhalten Sie weitere Informationen."
         machines:
           welcome:
-            title: "Machines"
-            content: "<p>Machines are the tools available for your users. You must create here the machines which can then be reserved by the members.</p><p>You can also create entries for non-bookable or free access machines, then you just need to not associate availability slots with them.</p>"
+            title: "Maschinen"
+            content: "<p>Maschinen sind die Werkzeuge, die Ihren Nutzern zur Verfügung stehen. Maschinen, die von den Mitgliedern reserviert werden können, müssen hier erstellt werden.</p><p>Sie können auch nicht buchbare oder frei verfügbare Maschinen anlegen, diesen sollten keine Verfügbarkeits-Slots zugewiesen werden.</p>"
           welcome_manager:
-            title: "Machines"
-            content: "Machines are the tools available for the users to reserve."
+            title: "Maschinen"
+            content: "Maschinen sind die Werkzeuge, die von Nutzern reserviert werden können."
           view:
-            title: "View"
-            content: "To modify or delete a machine, click here first. You will not be able to delete a machine that has already been associated with availability slots, but you can deactivate it."
+            title: "Ansicht"
+            content: "Um eine Maschine zu ändern oder zu löschen, klicken Sie bitte zuerst hier. Maschinen mit verknüpften Verfügbarkeits-Slots können nicht gelöscht, aber deaktiviert werden."
           reserve:
-            title: "Reserve"
+            title: "Reservieren"
             content: "Click here to access an agenda showing free slots. This will let you book this machine for an user and manage existing reservations."
         spaces:
           welcome:
