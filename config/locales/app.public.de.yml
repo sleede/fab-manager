@@ -170,10 +170,10 @@ de:
         all_themes: "Alle Themen"
         all_materials: "Alle Materialien"
         load_next_projects: "Nächste Projekte laden"
-        rough_draft: "Rough draft"
+        rough_draft: "Grober Entwurf"
       #details of a projet
       projects_show:
-        rough_draft: "Draft"
+        rough_draft: "Entwurf"
         project_description: "Projektbeschreibung"
         by_name: "Von {NAME}"
         step_N: "Schritt {INDEX}"
@@ -183,9 +183,9 @@ de:
         posted_on_: "Gepostet am"
         CAD_file_to_download: "{COUNT, plural, one {} =0{Keine CAD-Dateien} =1{CAD-Datei zum Download} other{CAD-Dateien zum Download}}"
         machines_and_materials: "Maschinen und Materialien"
-        collaborators: "Collaborators"
-        licence: "Licence"
-        confirmation_required: "Confirmation required"
+        collaborators: "Mitarbeitende"
+        licence: "Lizenz"
+        confirmation_required: "Bestätigung erforderlich"
         report_an_abuse: "Missbrauch melden"
         unauthorized_operation: "Unauthorized operation"
         your_report_was_successful_thanks: "Your report was successful. Thank you."
@@ -433,17 +433,17 @@ de:
             content: "Um eine Maschine zu ändern oder zu löschen, klicken Sie bitte zuerst hier. Maschinen mit verknüpften Verfügbarkeits-Slots können nicht gelöscht, aber deaktiviert werden."
           reserve:
             title: "Reservieren"
-            content: "Click here to access an agenda showing free slots. This will let you book this machine for an user and manage existing reservations."
+            content: "Klicken Sie hier, um zu einer Übersicht der freien Slots zu gelangen. Dort können Sie diese Maschine für einen Benutzer buchen und bestehende Reservierungen verwalten."
         spaces:
           welcome:
-            title: "Spaces"
-            content: "<p>Spaces are places available for your users. For example, a meeting room or a woodshop. You must create here the spaces which can then be reserved by members.</p><p>The specificity of the spaces is that they can be reserved by several users at the same time.</p>"
+            title: "Räume"
+            content: "<p>Räume sind Orte für deine Nutzer, beispielsweise ein Meetingraum oder eine Holzwerkstatt. Räume, die von Nutzern reserviert werden können, müssen hier angelegt werden.</p><p>Das Besondere an Räumen ist, dass sie von mehreren Benutzern gleichzeitig reserviert werden können.</p>"
           welcome_manager:
-            title: "Spaces"
-            content: "<p>Spaces are places available to users, by reservation. For example, a meeting room or a woodshop.</p><p>The specificity of the spaces is that they can be reserved by several users at the same time.</p>"
+            title: "Räume"
+            content: "<p>Räume sind Orte, die von Nutzern reserviert werden können, beispielsweise ein Meetingraum oder eine Holzwerkstatt. </p><p>Das Besondere an Räumen ist, dass sie von mehreren Benutzern gleichzeitig reserviert werden können.</p>"
           view:
-            title: "View"
-            content: "To modify or delete a space, click here first. You will not be able to delete a space that has already been associated with availability slots, but you can deactivate it."
+            title: "Ansicht"
+            content: "Um einer Raum zu ändern oder zu löschen, klicken Sie bitte zuerst hier. Räume mit verknüpften Verfügbarkeits-Slots können nicht gelöscht, aber deaktiviert werden."
           reserve:
-            title: "Reserve"
-            content: "Click here to access an agenda showing free slots. This will let you book this space for an user and manage existing reservations."
+            title: "Reservieren"
+            content: "Klicken Sie hier, um zu einer Übersicht der freien Slots zu gelangen. Dort können Sie diesen Raum für einen Benutzer buchen und bestehende Reservierungen verwalten."
