@@ -99,7 +99,8 @@
     }
   }
 
-  .download-button {
+  .download-button,
+  .action-button {
     color: black;
     background-color: #fbfbfb;
     display: inline-block;
@@ -139,13 +140,17 @@
     }
   }
 
+  // The color classes above are automatically generated from PaymentScheduleItem.state
   .state-new {
     color: #3a3a3a;
   }
-  .state-pending {
+  .state-pending,
+  .state-requires_payment_method,
+  .state-requires_action {
     color: #d43333;
   }
-  .state-paid {
+  .state-paid,
+  .state-error {
     color: black;
   }
 }

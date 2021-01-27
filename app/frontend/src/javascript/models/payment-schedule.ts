@@ -1,7 +1,15 @@
 export enum PaymentScheduleItemState {
   New = 'new',
   Pending = 'pending',
-  Paid = 'paid'
+  RequirePaymentMethod = 'requires_payment_method',
+  RequireAction = 'requires_action',
+  Paid = 'paid',
+  Error = 'error'
+}
+
+export enum PaymentMethod {
+  Stripe = 'stripe',
+  Check = 'check'
 }
 export interface PaymentScheduleItem {
   id: number,
@@ -9,7 +17,8 @@ export interface PaymentScheduleItem {
   due_date: Date,
   state: PaymentScheduleItemState,
   invoice_id: number,
-  payment_method: string,
+  payment_method: PaymentMethod,
+  client_secret?: string,
   details: {
     recurring: number,
     adjustment: number,

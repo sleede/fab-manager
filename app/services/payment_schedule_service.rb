@@ -98,7 +98,7 @@ class PaymentScheduleService
 
     # save the results
     invoice.save
-    payment_schedule_item.update_attributes(invoice_id: invoice.id, stp_invoice_id: stp_invoice&.id)
+    payment_schedule_item.update_attributes(invoice_id: invoice.id)
   end
 
   ##

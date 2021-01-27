@@ -22,6 +22,9 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
 
   const [showExpanded, setShowExpanded] = useState({});
 
+  /**
+   * Check if the requested payment schedule is displayed with its deadlines (PaymentScheduleItem) or without them
+   */
   const isExpanded = (paymentScheduleId: number): boolean => {
     return showExpanded[paymentScheduleId];
   }
@@ -39,6 +42,9 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
     return new Intl.NumberFormat(Fablab.intl_locale, {style: 'currency', currency: Fablab.intl_currency}).format(price);
   }
 
+  /**
+   * Return the value for the CSS property 'display', for the payment schedule deadlines
+   */
   const statusDisplay = (paymentScheduleId: number): string => {
     if (isExpanded(paymentScheduleId)) {
       return 'table-row'
@@ -47,6 +53,9 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
     }
   }
 
+  /**
+   * Return the action icon for showing/hiding the deadlines
+   */
   const expandCollapseIcon = (paymentScheduleId: number): JSX.Element => {
     if (isExpanded(paymentScheduleId)) {
       return <i className="fas fa-minus-square" />;
@@ -55,6 +64,9 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
     }
   }
 
+  /**
+   * Show or hide the deadlines for the provided payment schedule, inverting their current status
+   */
   const togglePaymentScheduleDetails = (paymentScheduleId: number): ReactEventHandler => {
     return (): void => {
       if (isExpanded(paymentScheduleId)) {
@@ -65,10 +77,17 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
     }
   }
 
+  /**
+   * For use with downloadButton()
+   */
   enum TargetType {
     Invoice = 'invoices',
     PaymentSchedule = 'payment_schedules'
   }
+
+  /**
+   * Return a button to download a PDF file, may be an invoice, or a payment schedule, depending or the provided parameters
+   */
   const downloadButton = (target: TargetType, id: number): JSX.Element => {
     const link = `api/${target}/${id}/download`;
     return (
@@ -79,81 +98,147 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
     );
   }
 
+  /**
+   * Return the human-readable string for the status of the provided deadline.
+   */
   const formatState = (item: PaymentScheduleItem): JSX.Element => {
     let res = t(`app.admin.invoices.schedules_table.state_${item.state}`);
     if (item.state === PaymentScheduleItemState.Paid) {
-      res += ` (${item.payment_method})`;
+      const key = `app.admin.invoices.schedules_table.method_${item.payment_method}`
+      res += ` (${t(key)})`;
     }
     return <span className={`state-${item.state}`}>{res}</span>;
   }
 
+  /**
+   * Return the action button(s) for the given deadline
+   */
   const itemButtons = (item: PaymentScheduleItem): JSX.Element => {
     switch (item.state) {
       case PaymentScheduleItemState.Paid:
         return downloadButton(TargetType.Invoice, item.invoice_id);
       case PaymentScheduleItemState.Pending:
-        return (<span><button>encaisser le chèque</button><button>réessayer (stripe)</button></span>);
+        return (
+          <button className="action-button" onClick={handleConfirmCheckPayment(item)}>
+            <i className="fas fa-money-check" />
+            {t('app.admin.invoices.schedules_table.confirm_payment')}
+          </button>
+        );
+      case PaymentScheduleItemState.RequireAction:
+        return (
+          <button className="action-button" onClick={handleSolveAction(item)}>
+            <i className="fas fa-wrench" />
+            {t('app.admin.invoices.schedules_table.solve')}
+          </button>
+        );
+      case PaymentScheduleItemState.RequirePaymentMethod:
+        return (
+          <button className="action-button" onClick={handleUpdateCard(item)}>
+            <i className="fas fa-credit-card" />
+            {t('app.admin.invoices.schedules_table.update_card')}
+          </button>
+        );
       default:
         return <span />
     }
   }
 
+  const handleConfirmCheckPayment = (item: PaymentScheduleItem): ReactEventHandler => {
+    return (): void => {
+      /*
+       TODO
+         - display confirmation modal
+         - create /api/payment_schedule/item/confirm_check endpoint and post to it
+       */
+    }
+  }
+
+  const handleSolveAction = (item: PaymentScheduleItem): ReactEventHandler => {
+    return (): void => {
+    /*
+     TODO
+       - create component wrapped with <StripeElements>
+       - stripe.confirmCardSetup(item.client_secret).then(function(result) {
+            if (result.error) {
+              // Display error.message in your UI.
+            } else {
+              // The setup has succeeded. Display a success message.
+            }
+          });
+     */
+    }
+  }
+
+  const handleUpdateCard = (item: PaymentScheduleItem): ReactEventHandler => {
+    return (): void => {
+      /*
+      TODO
+       - Notify the customer, collect new payment information, and create a new payment method
+       - Attach the payment method to the customer
+       - Update the default payment method
+       - Pay the invoice using the new payment method
+       */
+    }
+  }
+
   return (
-    <table className="schedules-table">
-      <thead>
-      <tr>
-        <th className="w-35" />
-        <th className="w-200">{t('app.admin.invoices.schedules_table.schedule_num')}</th>
-        <th className="w-200">{t('app.admin.invoices.schedules_table.date')}</th>
-        <th className="w-120">{t('app.admin.invoices.schedules_table.price')}</th>
-        {showCustomer && <th className="w-200">{t('app.admin.invoices.schedules_table.customer')}</th>}
-        <th className="w-200"/>
-      </tr>
-      </thead>
-      <tbody>
-      {paymentSchedules.map(p => <tr key={p.id}>
-        <td colSpan={6}>
-          <table className="schedules-table-body">
-            <tbody>
-            <tr>
-              <td className="w-35 row-header" onClick={togglePaymentScheduleDetails(p.id)}>{expandCollapseIcon(p.id)}</td>
-              <td className="w-200">{p.reference}</td>
-              <td className="w-200">{formatDate(p.created_at)}</td>
-              <td className="w-120">{formatPrice(p.total)}</td>
-              {showCustomer && <td className="w-200">{p.user.name}</td>}
-              <td className="w-200">{downloadButton(TargetType.PaymentSchedule, p.id)}</td>
-            </tr>
-            <tr style={{ display: statusDisplay(p.id) }}>
-              <td className="w-35" />
-              <td colSpan={5}>
-                <div>
-                  <table className="schedule-items-table">
-                    <thead>
-                    <tr>
-                      <th className="w-120">{t('app.admin.invoices.schedules_table.deadline')}</th>
-                      <th className="w-120">{t('app.admin.invoices.schedules_table.amount')}</th>
-                      <th className="w-200">{t('app.admin.invoices.schedules_table.state')}</th>
-                      <th className="w-200" />
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {_.orderBy(p.items, 'due_date').map(item => <tr key={item.id}>
-                      <td>{formatDate(item.due_date)}</td>
-                      <td>{formatPrice(item.amount)}</td>
-                      <td>{formatState(item)}</td>
-                      <td>{itemButtons(item)}</td>
-                    </tr>)}
-                    </tbody>
-                  </table>
-                </div>
-              </td>
-            </tr>
-            </tbody>
-          </table>
-        </td>
-      </tr>)}
-      </tbody>
-    </table>
+    <div>
+      <table className="schedules-table">
+        <thead>
+        <tr>
+          <th className="w-35" />
+          <th className="w-200">{t('app.admin.invoices.schedules_table.schedule_num')}</th>
+          <th className="w-200">{t('app.admin.invoices.schedules_table.date')}</th>
+          <th className="w-120">{t('app.admin.invoices.schedules_table.price')}</th>
+          {showCustomer && <th className="w-200">{t('app.admin.invoices.schedules_table.customer')}</th>}
+          <th className="w-200"/>
+        </tr>
+        </thead>
+        <tbody>
+        {paymentSchedules.map(p => <tr key={p.id}>
+          <td colSpan={6}>
+            <table className="schedules-table-body">
+              <tbody>
+              <tr>
+                <td className="w-35 row-header" onClick={togglePaymentScheduleDetails(p.id)}>{expandCollapseIcon(p.id)}</td>
+                <td className="w-200">{p.reference}</td>
+                <td className="w-200">{formatDate(p.created_at)}</td>
+                <td className="w-120">{formatPrice(p.total)}</td>
+                {showCustomer && <td className="w-200">{p.user.name}</td>}
+                <td className="w-200">{downloadButton(TargetType.PaymentSchedule, p.id)}</td>
+              </tr>
+              <tr style={{ display: statusDisplay(p.id) }}>
+                <td className="w-35" />
+                <td colSpan={5}>
+                  <div>
+                    <table className="schedule-items-table">
+                      <thead>
+                      <tr>
+                        <th className="w-120">{t('app.admin.invoices.schedules_table.deadline')}</th>
+                        <th className="w-120">{t('app.admin.invoices.schedules_table.amount')}</th>
+                        <th className="w-200">{t('app.admin.invoices.schedules_table.state')}</th>
+                        <th className="w-200" />
+                      </tr>
+                      </thead>
+                      <tbody>
+                      {_.orderBy(p.items, 'due_date').map(item => <tr key={item.id}>
+                        <td>{formatDate(item.due_date)}</td>
+                        <td>{formatPrice(item.amount)}</td>
+                        <td>{formatState(item)}</td>
+                        <td>{itemButtons(item)}</td>
+                      </tr>)}
+                      </tbody>
+                    </table>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>)}
+        </tbody>
+      </table>
+    </div>
   );
 };
 PaymentSchedulesTableComponent.defaultProps = { showCustomer: false };

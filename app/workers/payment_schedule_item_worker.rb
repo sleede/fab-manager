@@ -16,8 +16,8 @@ class PaymentScheduleItemWorker
         if stp_invoice.status == 'paid'
           ##### Stripe / Successfully paid
           PaymentScheduleService.new.generate_invoice(psi, stp_invoice)
-          psi.update_attributes(state: 'paid', payment_method: 'stripe')
-        else
+          psi.update_attributes(state: 'paid', payment_method: 'stripe', stp_invoice_id: stp_invoice.id)
+        elsif stp_suscription.status == 'past_due'
           ##### Stripe / Payment error
           NotificationCenter.call type: 'notify_admin_payment_schedule_failed',
                                   receiver: User.admins_and_managers,
@@ -25,7 +25,10 @@ class PaymentScheduleItemWorker
           NotificationCenter.call type: 'notify_member_payment_schedule_failed',
                                   receiver: psi.payment_schedule.user,
                                   attached_object: psi
-          psi.update_attributes(state: 'pending')
+          stp_payment_intent = Stripe::PaymentIntent.retrieve(stp_invoice.payment_intent, api_key: stripe_key)
+          psi.update_attributes(state: stp_payment_intent.status, stp_invoice_id: stp_invoice.id)
+        else
+          psi.update_attributes(state: 'error')
         end
       else
         ### Check
