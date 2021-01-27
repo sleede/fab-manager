@@ -390,19 +390,19 @@ de:
             content: "Abonnements bieten eine Möglichkeit, Ihre Preise zu segmentieren und Vorteile für regelmäßige Nutzer zu bieten."
           admin:
             title: "{ROLE} -Abschnitt"
-            content: "<p>All of the elements below are only accessible to administrators and managers. They allow you to manage and configure Fab-manager.</p><p>At the end of this visit, click on one of them to find out more.</p>"
+            content: "<p>Alle Elemente unterhalb sind nur für Administratoren und Manager zugänglich. Mit ihnen wird Fab-Manager verwaltet und konfiguriert.</p><p>Anklicken, um jeweils mehr zu erfahren.</p>"
           about:
-            title: "About"
-            content: "A page that you can fully customize, to present your activity and your structure."
+            title: "Über"
+            content: "Eine Seite, die Sie vollständig anpassen können, um Aktivitäten und Struktur Ihres Fablabs darzustellen."
           notifications:
-            title: "Notifications center"
-            content: "<p>Every time something important happens (reservations, creation of accounts, activity of your members, etc.), you will be notified here.</p><p>Your members also receive notifications there.</p>"
+            title: "Mitteilungszentrale"
+            content: "<p>Jedes Mal, wenn etwas Wichtiges passiert (Reservierungen, Kontoerstellung, Aktivitäten der Mitglieder usw.), werden Sie hier benachrichtigt.</p><p>Auch Ihre Mitglieder erhalten dort Benachrichtigungen.</p>"
           profile:
-            title: "User's menu"
-            content: "<p>Find your personal information here as well as all your activity on Fab-manager.</p><p>This space is also available for all your members.</p>"
+            title: "Benutzermenü"
+            content: "<p>zugriff auf Ihre persönlichen Informationen sowie Ihre Aktivitäten auf Fab-Manager.</p><p>Dieser Bereich ist auch jeweils für die Mitglieder verfügbar.</p>"
           news:
-            title: "News"
-            content: "<p>This space allows you to display the latest news from your structure.</p><p>You can easily change its content from « Customization », « Home page ».</p>"
+            title: "Neuigkeiten"
+            content: "<p>In diesem Bereich können Sie Neuigkeiten anzeigen lassen.</p><p>Inhalte können Sie leicht unter « Anpassen », « Startseite » ändern.</p>"
           last_projects:
             title: "Letzte Projekte"
             content: "<p>Dieses Karussell scrollt durch die neuesten von Ihren Mitgliedern dokumentierten Projekte.</p>"
