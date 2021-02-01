@@ -83,4 +83,100 @@ class OpenAPI::V1::MachinesDoc < OpenAPI::V1::BaseDoc
       }
     MACHINES
   end
+
+  doc_for :create do
+    api :POST, "/#{API_VERSION}/machines", 'Create a machine'
+    formats %w[json multipart/form-data]
+    description 'Create a new machine.'
+    returns code: 201, desc: 'The machine was successfully created'
+    param :machine, Hash, required: true do
+      param :name, String, desc: 'The name of the machine.', required: true
+      param :description, String, desc: 'A long textual description of the machine. HTML is supported.', required: true
+      param :spec, String, desc: 'A long textual description of the technical specifications of the machine. HTML is supported.'
+      param :disabled, [TrueClass, FalseClass], desc: "Should the machine be disabled? If yes, the machine won't be reservable and will be shown apart."
+      param :machine_image_attributes, Hash do
+        param :attachment, ActionDispatch::Http::UploadedFile, required: true, desc: 'Upload a picture for the machine.'
+      end
+    end
+    example <<-MACHINE
+       curl -X POST
+            -H "Authorization:Token token=xxx"
+            -H "Content-Type:multipart/form-data"
+            -H "Accept: application/json"
+            -F machine[name]="Epilog laser"
+            -F machine[description]="La découpeuse laser vous permet de découper ou graver des matériaux."
+            -F machine[machine_image_attributes[attachment]]=@epilog.jpeg
+            /open_api/v1/machines
+
+       curl -X POST
+            -H "Authorization:Token token=xxx"
+            -H "Content-Type:application/json"
+            -H "Accept: application/json"
+            -d '{"machine": { "name": "DMP Flex 100", "description": "Cette imprimante 3D peut imprimer des métaux." }}'
+            /open_api/v1/machines
+    MACHINE
+  end
+
+  doc_for :update do
+    api :PATCH, "/#{API_VERSION}/machines/:id", 'Update a machine'
+    formats %w[json multipart/form-data]
+    description 'Update an existing machine.'
+    returns code: 200, desc: 'The machine was successfully updated'
+    param :machine, Hash, required: true do
+      param :name, String, desc: 'The name of the machine.', required: true
+      param :description, String, desc: 'A long textual description of the machine. HTML is supported.', required: true
+      param :spec, String, desc: 'A long textual description of the technical specifications of the machine. HTML is supported.'
+      param :disabled, [TrueClass, FalseClass], desc: "Should the machine be disabled? If yes, the machine won't be reservable and will be shown apart."
+      param :machine_image_attributes, Hash do
+        param :attachment, ActionDispatch::Http::UploadedFile, required: true, desc: 'Upload a picture for the machine.'
+      end
+    end
+    example <<-MACHINE
+       curl -X PATCH
+            -H "Authorization:Token token=xxx"
+            -H "Content-Type:multipart/form-data"
+            -H "Accept: application/json"
+            -F machine[spec]="Laser CO2 de 60W<br>Surface de travail de 812 x 508 mm"
+            -F machine[machine_image_attributes[attachment]]=@epilog2.jpg
+            /open_api/v1/machines/10
+
+      curl -X PATCH
+           -H "Authorization:Token token=xxx"
+           -H "Content-Type:application/json"
+           -H "Accept: application/json"
+           -d '{"machine": { "disabled": true }}'
+           /open_api/v1/machines/10
+    MACHINE
+  end
+
+  doc_for :show do
+    api :GET, "/#{API_VERSION}/machines/:id", 'Show a machine'
+    description 'Show all the details of single machine.'
+    example <<-MACHINES
+      # /open_api/v1/machines/1
+        {
+          "id": 1,
+          "name": "Epilog EXT36 Laser",
+          "slug": "decoupeuse-laser",
+          "disabled": false,
+          "updated_at": "2015-02-17T11:06:00.495+01:00",
+          "created_at": "2014-06-30T03:32:31.972+02:00",
+          "description": "La découpeuse Laser, EPILOG Legend 36EXT\r\n\r\nInformations générales :\r\nLa découpeuse laser vous permet de découper ou graver des matériaux. \r\n\r\nPour la découpe, il suffit d'apporter votre fichier vectorisé type illustrator, svg ou dxf avec des \"lignes de coupe\" d'une épaisseur inférieure à 0,01 mm et la machine s'occupera du reste!\r\n\r\nLa gravure est basée sur le spectre noir et blanc. Les nuances sont obtenues par différentes profondeurs de gravure correspondant aux niveaux de gris de votre image. Il suffit pour cela d'apporter une image scannée ou un fichier photo en noir et blanc pour pouvoir reproduire celle-ci sur votre support.\r\n\r\nTypes de matériaux gravables/découpeables ?\r\nDu bois au tissu, du plexiglass au cuir, cette machine permet de découper et graver la plupart des matériaux sauf les métaux. La gravure est néanmoins possible sur les métaux recouverts d'une couche de peinture ou les aluminiums anodisés. \r\nConcernant l'épaisseur des matériaux découpés, il est préférable de ne pas dépasser 5 mm pour le bois et 6 mm pour le plexiglass.\r\n",
+          "spec": "Puissance : 40W\r\nSurface de travail : 914x609 mm \r\nEpaisseur maximale de la matière : 305mm\r\nSource laser : tube laser type CO2\r\nContrôles de vitesse et de puissance : ces deux paramètres sont ajustables en fonction du matériau (de 1% à 100%) .\r\n",
+          "image": "/uploads/machine_image/2514/machine_image.jpg"
+        }
+    MACHINES
+  end
+
+  doc_for :destroy do
+    api :DELETE, "/#{API_VERSION}/machines/:id", 'Delete a machine'
+    description 'Delete an existing machine that does not have any existing reservations.'
+    returns code: 204, desc: 'The machine was successfully deleted'
+    example <<-MACHINE
+       curl -X DELETE
+            -H "Authorization:Token token=xxx"
+            -H "Accept: application/json"
+            /open_api/v1/machines/10
+    MACHINE
+  end
 end
