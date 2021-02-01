@@ -1,0 +1,396 @@
+de:
+  #subscription plan duration
+  duration:
+    year:
+      one: 'ein Jahr'
+      other: '%{count} Jahre'
+    month:
+      one: 'Ein Monat'
+      other: '%{count} Monate'
+    week:
+      one: 'Eine Woche'
+      other: '%{count} Wochen'
+  errors:
+    #CarrierWave
+    messages:
+      carrierwave_processing_error: "konnte nicht verarbeitet werden"
+      carrierwave_integrity_error: "ist kein erlaubter Dateityp"
+      carrierwave_download_error: "konnte nicht heruntergeladen werden"
+      extension_whitelist_error: "Sie sind nicht berechtigt, %{extension} Dateien hochzuladen, erlaubt sind die Typen: %{allowed_types}"
+      extension_blacklist_error: "Sie sind nicht berechtigt, %{extension} Dateien hochzuladen. Unerlaubte Typen: %{prohibited_types}"
+      content_type_whitelist_error: "Sie sind nicht berechtigt, %{content_type} Dateien hochzuladen, erlaubt sind die Typen: %{allowed_types}"
+      rmagick_processing_error: "Fehler beim Bearbeiten mit rmagick, vielleicht ist es kein Bild? Original Fehler: %{e}"
+      mime_types_processing_error: "Fehler beim Verarbeiten der Datei mit MIME::Typen, möglicherweise kein gültiger Inhaltstyp? Original Fehler: %{e}"
+      mini_magick_processing_error: "Fehler beim Bearbeiten mit MiniMagick, vielleicht ist es kein Bild? Original Fehler: %{e}"
+      wrong_size: "hat die falsche Größe (sollte %{file_size} sein)"
+      size_too_small: "ist zu klein (sollte mindestens %{file_size} sein)"
+      size_too_big: "ist zu groß (sollte höchstens %{file_size} sein)"
+      export_not_found: "Der angeforderte Export wurde nicht gefunden. Wahrscheinlich wurde er gelöscht. Bitte erstellen Sie einen neuen Export."
+      percentage_out_of_range: "Prozentwert muss zwischen 0 und 100 liegen"
+      cannot_be_blank_at_same_time: "darf nicht leer sein, wenn %{field} auch leer ist"
+      cannot_be_in_the_past: "darf nicht in der Vergangenheit liegen"
+      cannot_be_before_previous_value: "darf nicht vor dem vorherigen Wert liegen"
+      cannot_overlap: "darf einen bestehenden Abrechnungszeitraum nicht überlappen"
+      cannot_encompass: "darf einen bestehenden Abrechnungszeitraum nicht umfassen"
+      in_closed_period: "darf nicht innerhalb eines geschlossenen Abrechnungszeitraums sein"
+      invalid_footprint: "die Prüfsumme der Rechnung ist ungültig"
+      end_before_start: "Das Enddatum darf nicht vor dem Startdatum liegen. Wählen Sie ein Datum nach %{START}"
+      invalid_duration: "Der zulässige Zeitraum muss zwischen 1 Tag und 1 Jahr lang sein. Ihr Zeitraum ist %{DAYS} Tage lang."
+      must_be_in_the_past: "Der Zeitraum darf ausschließlich vor dem heutigen Datum liegen."
+  apipie:
+    api_documentation: "API-Dokumentation"
+  #error messages when importing an account from a SSO
+  omniauth:
+    email_already_linked_to_another_account_please_input_your_authentication_code: "E-Mail-Adresse \"%{OLD_MAIL}\" ist bereits mit einem Konto verknüpft. Bitte geben Sie Ihren Authentifizierungscode ein."
+    your_username_is_already_linked_to_another_account_unable_to_update_it: "Ihr Benutzername (%{USERNAME}) ist bereits einem anderen Konto zugeordnet. Aktualisierung nicht möglich."
+    your_email_address_is_already_linked_to_another_account_unable_to_update_it: "Ihre E-Mail-Adresse (%{EMAIL}) ist bereits einem anderen Konto zugeordnet. Aktualisierung nicht möglich."
+    this_account_is_already_linked_to_an_user_of_the_platform: "Das Konto %{NAME} wird bereits von einem Benutzer der Plattform verwendet."
+  #availability slots in the calendar
+  availabilities:
+    not_available: "Nicht verfügbar"
+    i_ve_reserved: "Ich reservierte"
+    length_must_be_slot_multiple: "muss mindestens %{MIN} Minuten nach dem Startdatum liegen"
+    must_be_associated_with_at_least_1_machine: "muss mindestens einer Maschine zugeordnet sein"
+  #members management
+  members:
+    unable_to_change_the_group_while_a_subscription_is_running: "Die Gruppe kann während eines Abonnements nicht geändert werden"
+    admins_cant_change_group: "Ein Administrator kann nicht aus seiner eigenen Gruppe entfernt werden"
+    please_input_the_authentication_code_sent_to_the_address: "Bitte geben Sie den Authentifizierungscode ein, der an die E-Mail-Adresse %{EMAIL} gesendet wurde"
+    your_authentication_code_is_not_valid: "Der Authentifizierungscode ist ungültig."
+    current_authentication_method_no_code: "Die aktuelle Authentifizierungsmethode erfordert keinen Migrationscode"
+    requested_account_does_not_exists: "Das gewünschte Konto ist nicht vorhanden"
+  #PDF invoices generation
+  invoices:
+    refund_invoice_reference: "Beleg der Rechnungsrückerstattungung: %{REF}"
+    invoice_reference: "Rechnungsbezug: %{REF}"
+    code: "Code: %{CODE}"
+    order_number: "Bestellnummer: %{NUMBER}"
+    invoice_issued_on_DATE: "Rechnung ausgestellt am %{DATE}"
+    refund_invoice_issued_on_DATE: "Rückerstattungsrechnung ausgestellt am %{DATE}"
+    wallet_credit: "Vorhandenes Guthaben"
+    cancellation_of_invoice_REF: "Stornierung der Rechnung %{REF}"
+    reservation_of_USER_on_DATE_at_TIME: "Reservierung von %{USER} am %{DATE} um %{TIME}"
+    cancellation: "Stornierung"
+    object: "Gegenstand:"
+    order_summary: "Bestellübersicht:"
+    details: "Details"
+    amount: "Betrag"
+    subscription_extended_for_free_from_START_to_END: "Kostenlose Abonnementverlängerung - von %{START} bis %{END}"
+    subscription_NAME_from_START_to_END: "Abonnement %{NAME} - Von %{START} bis %{END}"
+    machine_reservation_DESCRIPTION: "Maschinen-Reservierung - %{DESCRIPTION}"
+    space_reservation_DESCRIPTION: "Raumreservierung - %{DESCRIPTION}"
+    training_reservation_DESCRIPTION: "Trainingsreservierung - %{DESCRIPTION}"
+    event_reservation_DESCRIPTION: "Veranstaltungs-Reservierung - %{DESCRIPTION}"
+    full_price_ticket:
+      one: "Ein Vollpreis-Ticket"
+      other: "%{count} Vollpreis-Tickets"
+    other_rate_ticket:
+      one: "Ein %{NAME}-Ticket"
+      other: "%{count} %{NAME}-Tickets"
+    reservation_other: "Reservierung (andere)"
+    coupon_CODE_discount_of_DISCOUNT: "Gutschein {CODE}: Rabatt von {DISCOUNT}{TYPE, select, percent_off{%} other{}}" #messageFormat interpolation
+    total_including_all_taxes: "Gesamtpreis inkl. Steuern"
+    including_VAT_RATE: "Inklusive MwSt. %{RATE}%"
+    including_total_excluding_taxes: "Gesamtbetrag zzgl. Steuern"
+    including_amount_payed_on_ordering: "Inklusive bei Bestellung bezahlter Betrag"
+    total_amount: "Gesamtbetrag"
+    refund_on_DATE: "Erstattung am %{DATE}"
+    by_stripe_online_payment: "via Stripe (Online-Zahlung)"
+    by_cheque: "per Scheck"
+    by_transfer: "per Banküberweisung"
+    by_cash: "in bar"
+    by_wallet: "durch Guthaben"
+    no_refund: "Keine Rückerstattung"
+    settlement_by_debit_card: "Abrechnung per Debitkarte"
+    settlement_done_at_the_reception: "Abrechnung an der Rezeption durchgeführt"
+    settlement_by_wallet: "Abrechnung per Guthaben"
+    on_DATE_at_TIME: "am %{DATE} um %{TIME},"
+    for_an_amount_of_AMOUNT: "für einen Betrag von %{AMOUNT}"
+    on_DATE_from_START_to_END: "Am %{DATE} von %{START} bis %{END}" #eg: on feb. 7 from 7AM to 9AM
+    from_STARTDATE_to_ENDDATE_from_STARTTIME_to_ENDTIME: "Von %{STARTDATE} bis %{ENDDATE}, von %{STARTTIME} bis %{ENDTIME}" #eg: from feb. 7 to feb. 10, from 6PM to 10PM
+    subscription_of_NAME_for_DURATION_starting_from_DATE: "Abonnement von %{NAME} für %{DURATION} ab %{DATE}"
+    subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "Abonnement von %{NAME} verlängert (kostenlose Tage) ab %{STARTDATE} bis %{ENDDATE}"
+    and: 'und'
+    invoice_text_example: "Unsere Einrichtung ist nicht mehrwertsteuerpflichtig"
+  #CVS accounting export (columns headers)
+  accounting_export:
+    journal_code: "Journalcode"
+    date: "Eintragsdatum"
+    account_code: "Code des Kontos"
+    account_label: "Kontobezeichnung"
+    piece: "Dokument"
+    line_label: "Eintragsbezeichnung"
+    debit_origin: "Ursprungssoll"
+    credit_origin: "Ursprungsguthaben"
+    debit_euro: "Soll in Euro"
+    credit_euro: "Guthaben in Euro"
+    lettering: "Beschriftung"
+    VAT: 'Mwst.'
+    subscription: "Abonnement"
+    Machine_reservation: "Maschinenreservierung"
+    Training_reservation: "Schulungsreservierung"
+    Event_reservation: "Veranstaltungsreservierung"
+    Space_reservation: "Raumreservierung"
+    wallet: "Guthabenkonto"
+  #training availabilities
+  trainings:
+    i_ve_reserved: "Ich reservierte"
+    completed: "Vollständig"
+  #error messages when updating an event
+  events:
+    error_deleting_reserved_price: "Der angeforderte Preis konnte nicht gelöscht werden, da er mit einigen Reservierungen verknüpft ist"
+    other_error: "Unerwarteter Fehler beim Aktualisieren der Veranstaltung"
+    #event duration
+    from_STARTDATE_to_ENDDATE: "Von %{STARTDATE} bis %{ENDDATE},"
+    from_STARTTIME_to_ENDTIME: "von %{STARTTIME} bis %{ENDTIME}"
+  #members list export to EXCEL format
+  export_members:
+    members: "Mitglieder"
+    id: "ID"
+    surname: "Nachname"
+    first_name: "Vorname"
+    email: "E-Mail"
+    newsletter: "Newsletter"
+    last_login: "Letzte Anmeldung"
+    gender: "Geschlecht"
+    age: "Alter"
+    address: "Adresse"
+    phone: "Telefon"
+    website: "Webseite"
+    job: "Aufgabe"
+    interests: "Interessen"
+    cad_software_mastered: "CAD-Software gemeistert"
+    group: "Gruppe"
+    subscription: "Abonnement"
+    subscription_end_date: "Enddatum des Abonnements"
+    validated_trainings: "Validierte Schulungen"
+    tags: "Stichworte"
+    number_of_invoices: "Anzahl der Rechnungen"
+    projects: "Projekte"
+    facebook: "Facebook"
+    twitter: "Twitter"
+    echo_sciences: "Echosciences"
+    organization: "Organisation"
+    organization_address: "Adresse der Organisation"
+    man: "Mann"
+    woman: "Frau"
+    without_subscriptions: "Ohne Abonnement"
+  #machines/trainings/events reservations list to EXCEL format
+  export_reservations:
+    reservations: "Reservierungen"
+    customer_id: "Kunden ID"
+    customer: "Kunde"
+    email: "E-Mail"
+    reservation_date: "Reservierungsdatum"
+    reservation_type: "Reservierungsart"
+    reservation_object: "Gegenstand der Reservierung"
+    slots_number_hours_tickets: "Anzahl Slots (Stunden/Tickets)"
+    payment_method: "Zahlungsmethode"
+    local_payment: "Zahlung an der Rezeption"
+    online_payment: "Online-Zahlung"
+    deleted_user: "Gelöschter Nutzer"
+  #subscriptions list export to EXCEL format
+  export_subscriptions:
+    subscriptions: "Abonnements"
+    id: "ID"
+    customer: "Kunde"
+    email: "E-Mail"
+    subscription: "Abonnement"
+    period: "Zeitraum"
+    start_date: "Startdatum"
+    expiration_date: "Ablaufdatum"
+    amount: "Betrag"
+    payment_method: "Zahlungsmethode"
+    local_payment: "Zahlung an der Rezeption"
+    online_payment: "Online-Zahlung"
+    deleted_user: "Gelöschter Nutzer"
+  #reservation slots export, by type, to EXCEL format
+  export_availabilities:
+    machines: "Maschinen"
+    trainings: "Schulungen"
+    spaces: "Räume"
+    events: "Veranstaltungen"
+    day_of_week: "Wochentag"
+    date: "Datum"
+    slot: "Slot"
+    machine: "Maschine"
+    training: "Schulung"
+    space: "Raum"
+    event: "Veranstaltung"
+    reservations: "Reservierungen"
+    available_seats: "Verfügbare Plätze"
+  roles:
+    member: "Mitglied"
+    manager: "Manager"
+    admin: "Administrator"
+  api:
+    #internal app notifications
+    notifications:
+      deleted_user: "Gelöschter Nutzer"
+      notify_admin_abuse_reported:
+        an_abuse_was_reported_on_TYPE_ID_NAME_html: "Ein Missbrauchsmeldung auf <strong>%{TYPE} %{ID} ist eingegangen: <em>%{NAME}</em></strong>."
+      notify_admin_member_create_reservation:
+        a_RESERVABLE_reservation_was_made_by_USER_html: "Eine <strong><em>%{RESERVABLE}</em></strong> Reservierung wurde von <strong><em>%{USER}</em></strong> vorgenommen."
+      notify_admin_profile_complete:
+        account_imported_from_PROVIDER_UID_has_completed_its_information_html: "Konto importiert von <strong><em>%{PROVIDER}</strong> (%{UID})</em> hat seine Informationen vervollständigt."
+      notify_admin_slot_is_canceled:
+        USER_s_reservation_on_the_DATE_was_cancelled_remember_to_generate_a_refund_invoice_if_applicable_html: "Die Reservierung von <strong><em>%{USER}</em></strong> am %{DATE} wurde storniert. Erstellen Sie eine Rückerstattung, falls zutreffend."
+      notify_admin_slot_is_modified:
+        a_booking_slot_was_modified: "Ein Buchungsplatz wurde geändert."
+      notify_admin_subscribed_plan:
+        subscription_PLAN_has_been_subscribed_by_USER_html: "Das Abonnement <strong><em>%{PLAN}</em></strong> wurde von <strong><em>%{USER}</strong></em> abgeschlossen."
+      notify_admin_subscription_canceled:
+        USER_s_subscription_has_been_cancelled: "Das Abonnement von %{USER} wurde gekündigt."
+      notify_admin_subscription_extended:
+        subscription_PLAN_of_the_member_USER_has_been_extended_FREE_until_DATE_html: "Das Abonnement <strong><em>{PLAN}</em></strong> des Mitglieds <strong><em>{USER}</strong></em> wurde verlängert {FREE, select, true{kostenlos} other{}} bis {DATE}." #messageFormat interpolation
+      notify_admin_subscription_is_expired:
+        USER_s_subscription_has_expired: "Das Abonnement von %{USER} ist abgelaufen."
+      notify_admin_subscription_will_expire_in_7_days:
+        USER_s_subscription_will_expire_in_7_days: "Das Abonnement von %{USER} wird in 7 Tagen ablaufen."
+      notify_admin_user_group_changed:
+        user_NAME_changed_his_group_html: "Benutzer <strong><em>{NAME}</strong></em> hat {GENDER, select, true{seine} other{ihre}} Gruppe geändert." #messageFormat interpolation
+      notify_admin_user_merged:
+        user_NAME_has_merged_his_account_with_the_one_imported_from_PROVIDER_UID_html: "Nutzer <strong><em>{NAME}</strong></em> hat {GENDER, select, true{seinen} other{ihren}} Account mit dem von <strong><em>{PROVIDER} </strong> ({UID})</em> importierten Account zusammengeführt." #messageFormat interpolation
+      notify_admin_when_project_published:
+        project_NAME_has_been_published_html: "Projekt <a href='/#!/projects/%{ID}'><strong><em>%{NAME}<em></strong></a> wurde veröffentlicht."
+      notify_admin_when_user_is_created:
+        a_new_user_account_has_been_created_NAME_EMAIL_html: "Ein neues Benutzerkonto wurde erstellt: <strong><em>%{NAME} &lt;%{EMAIL}&gt;</strong></em>."
+      notify_admin_when_user_is_imported:
+        a_new_user_account_has_been_imported_from_PROVIDER_UID_html: "Ein neues Benutzerkonto wurde von <strong><em>%{PROVIDER}</strong> (%{UID})</em> importiert."
+      notify_member_create_reservation:
+        your_reservation_RESERVABLE_was_successfully_saved_html: "Ihre Reservierung <strong><em>%{RESERVABLE}</em></strong> wurde erfolgreich gespeichert."
+      notify_member_reservation_reminder:
+        reminder_you_have_a_reservation_RESERVABLE_to_be_held_on_DATE_html: "Erinnerung: Sie haben eine Reservierung <strong>%{RESERVABLE}</strong> für <em>%{DATE}</em>"
+      notify_member_slot_is_canceled:
+        your_reservation_RESERVABLE_of_DATE_was_successfully_cancelled: "Ihre Reservierung %{RESERVABLE} von %{DATE} wurde erfolgreich storniert."
+      notify_member_slot_is_modified:
+        your_reservation_slot_was_successfully_changed: "Ihr Reservierungsslot wurde erfolgreich geändert."
+      notify_member_subscribed_plan:
+        you_have_subscribed_to_PLAN_html: "Sie haben <strong><em>%{PLAN}</em></strong> abonniert."
+      notify_member_subscribed_plan_is_changed:
+        you_have_changed_your_subscription_to_PLAN_html: "Sie haben Ihr Abonnement für <strong><em>%{PLAN}</em></strong> geändert."
+      notify_member_subscription_canceled:
+        your_subscription_PLAN_was_successfully_cancelled_html: "Ihr Abonnement von <strong><em>%{PLAN}</em></strong> wurde erfolgreich storniert."
+      notify_member_subscription_extended:
+        your_subscription_PLAN_has_been_extended_FREE_until_DATE_html: "Ihr Abonnement von <strong><em>{PLAN}</em></strong> wurde {FREE, select, true{kostenlos} other{}} bis {DATE} verlängert." #messageFormat interpolation
+      notify_member_subscription_is_expired:
+        your_subscription_has_expired: "Ihr Abonnement ist abgelaufen."
+      notify_member_subscription_will_expire_in_7_days:
+        your_subscription_will_expire_in_7_days: "Ihr Abonnement läuft in 7 Tagen ab."
+      notify_partner_subscribed_plan:
+        subscription_partner_PLAN_has_been_subscribed_by_USER_html: "Das Partnerabonnement <strong><em>%{PLAN}</em></strong> wurde von <strong><em>%{USER}</strong></em> abonniert."
+      notify_project_author_when_collaborator_valid:
+        USER_became_collaborator_of_your_project: "%{USER} nimmt nun teil an Ihrem Projekt:"
+      notify_project_collaborator_to_valid:
+        you_are_invited_to_collaborate_on_the_project: "Sie wurden zur Teilnahme am Projekt eingeladen:"
+      notify_user_auth_migration:
+        your_account_was_migrated: "Ihr Konto wurde erfolgreich in das neue Authentifizierungssystem migriert."
+      notify_user_profile_complete:
+        your_profile_was_completed: "Ihr Profil ist vollständig, Sie haben nun Zugriff auf die gesamte Plattform."
+      notify_user_training_valid:
+        your_TRAINING_was_validated_html: "Ihre Schulung <strong><em>%{TRAINING}</em></strong> wurde erfolgreich überprüft."
+      notify_user_user_group_changed:
+        your_group_has_changed: "Ihre Gruppe hat sich geändert."
+      notify_user_when_avoir_ready:
+        your_avoir_is_ready_html: "Ihre Rückerstattungsrechnung #%{REFERENCE}, über %{AMOUNT} wurde erstellt. <a href='api/invoices/%{INVOICE_ID}/download' target='_blank'>Hier herunterladen</a>."
+      notify_user_when_invoice_ready:
+        your_invoice_is_ready_html: "Ihre Rechnung #%{REFERENCE}, über %{AMOUNT} wurde erstellt. <a href='api/invoices/%{INVOICE_ID}/download' target='_blank'>Hier herunterladen</a>."
+      undefined_notification:
+        unknown_notification: "Unbekannte Benachrichtigung"
+        notification_ID_wrong_type_TYPE_unknown: "Benachrichtigung %{ID} falsch (Typ %{TYPE} unbekannt)"
+      notify_user_wallet_is_credited:
+        your_wallet_is_credited: "Eine Gutschrift wurde ihrem Konto gutgeschrieben von einem Administrator"
+      notify_admin_user_wallet_is_credited:
+        wallet_is_credited: "Dem Guthaben des Mitglieds %{USER} wurde %{AMOUNT} gutgeschrieben"
+      notify_admin_export_complete:
+        export: "Der Export"
+        statistics_global: "aller Statistiken"
+        statistics_account: "der Registrierungsstatistiken"
+        statistics_event: "der Veranstaltungsstatistiken"
+        statistics_machine: "der Statistiken der Maschinenslots"
+        statistics_project: "der Projektstatistiken"
+        statistics_subscription: "der Abonnementstatistiken"
+        statistics_training: "der Schulungsstatistiken"
+        statistics_space: "der Raumstatistiken"
+        users_members: "der Mitgliederliste"
+        users_subscriptions: "der Abonnementliste"
+        users_reservations: "der Reservierungsliste"
+        availabilities_index: "der Verfügbarkeit der Reservierungen"
+        accounting_acd: "der Rechnungsdaten für ACD"
+        is_over: "ist beendet."
+        download_here: "Hier herunterladen"
+      notify_admin_import_complete:
+        import_over: "%{CATEGORY} Import ist beendet. "
+        members: "Mitglieder"
+        view_results: "Ergebnisse anzeigen."
+      notify_member_about_coupon:
+        enjoy_a_discount_of_PERCENT_with_code_CODE: "Erhalten Sie %{PERCENT}% Rabatt mit dem Code %{CODE}"
+        enjoy_a_discount_of_AMOUNT_with_code_CODE: "Erhalten Sie %{AMOUNT}% Rabatt mit dem Code %{CODE}"
+      notify_admin_free_disk_space:
+        warning_free_disk_space: "Warnung: Auf dem Server ist noch %{AVAILABLE} MiB Speicherplatz verfügbar"
+      notify_admin_close_period_reminder:
+        warning_last_closed_period_over_1_year: "Bitte schließen Sie Ihre Abrechnungsperioden regelmäßig ab. Der letzte Abschlusszeitraum endete um %{LAST_END}"
+        warning_no_closed_periods: "Bitte schließen Sie Ihre Abrechnungsperioden regelmäßig ab. Sie müssen Abrechnungsperioden ab %{FIRST_DATE} schließen"
+      notify_admin_archive_complete:
+        archive_complete: "Die Datenarchivierung von %{START} bis %{END} ist abgeschlossen. <a href='api/accounting_periods/%{ID}/archive' target='_blank'>Datenarchiv herunterladen</a>. Speichern Sie das Archiv auf einem externen, gesicherten Datenträger."
+      notify_privacy_policy_changed:
+        policy_updated: "Änderung der Datenschutz-Bestimmungen"
+        click_to_show: "Zum Anzeigen hier klicken"
+      notify_admin_refund_created:
+        refund_created: "Eine Rückerstattung von %{AMOUNT} wurde für Benutzer %{USER} erstellt"
+      notify_user_role_update:
+        your_role_is_ROLE: "Ihre Rolle wurde in %{ROLE} geändert."
+      notify_admins_role_update:
+        user_NAME_changed_ROLE_html: "Benutzer <strong><em>%{NAME}</strong></em> ist jetzt %{ROLE}."
+      notify_admin_members_stripe_sync:
+        all_members_sync: "Alle Mitglieder wurden erfolgreich auf Stripe synchronisiert."
+  #statistics tools for admins
+  statistics:
+    subscriptions: "Abonnements"
+    machines_hours: "Maschinen-Slots"
+    spaces: "Räume"
+    trainings: "Schulungen"
+    events: "Veranstaltungen"
+    registrations: "Anmeldungen"
+    projects: "Projekte"
+    users: "Benutzer"
+    training_id: "Schulungs-ID"
+    training_date: "Schulungstermin"
+    event_id: "Veranstaltungs-ID"
+    event_date: "Veranstaltungsdatum"
+    event_name: "Veranstaltungsname"
+    event_theme: "Thema"
+    age_range: "Altersklasse"
+    themes: "Themen"
+    components: "Komponenten"
+    machines: "Maschinen"
+    user_id: "Nutzer-ID"
+    bookings: "Buchungen"
+    hours_number: "Stundenzahl"
+    tickets_number: "Ticket Nummer"
+    revenue: "Einnahmen"
+    account_creation: "Benutzerkontenerstellung"
+    project_publication: "Projektveröffentlichung"
+    duration: "Dauer"
+  #statistics exports to the excel file format
+  export:
+    entries: "Einträge"
+    revenue: "Einnahmen"
+    average_age: "Durchschnittsalter"
+    total: "Gesamt"
+    date: "Datum"
+    user: "Nutzer"
+    email: "E-Mail"
+    phone: "Telefon"
+    gender: "Geschlecht"
+    age: "Alter"
+    type: "Typ"
+    male: "Männlich"
+    female: "Weiblich"
+  #initial price's category for events, created to replace the old "reduced amount" property
+  price_category:
+    reduced_fare: "Ermäßigter Tarif"
+    reduced_fare_if_you_are_under_25_student_or_unemployed: "Ermäßigter Tarif, wenn Sie unter 25, studierend oder arbeitslos sind."
+  group:
+    #name of the user's group for administrators
+    admins: 'Administratoren'
