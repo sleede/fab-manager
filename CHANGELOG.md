@@ -3,6 +3,7 @@
 ## Next release
 - Updated environment documentation
 - Removed useless locales' configuration files
+- Fix a security issue: updated ini to 1.3.8 to fix [CVE-2020-7788](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-7788)
 
 ## v4.6.5 2020 December 07
 - Fix a bug: unable to run the upgrade script with docker-compose >= v1.19
