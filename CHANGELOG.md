@@ -6,6 +6,7 @@
 - Updated environment documentation
 - Removed useless locales' configuration files
 - OpenAPI's endpoints will now return more detailed error messages when something wrong occurs
+- Fix a bug: when an event is modified, the member's reservations does not reflect the new event date
 - Fix a security issue: updated ini to 1.3.8 to fix [CVE-2020-7788](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-7788)
 − Fix a security issue: updated nokogiri to 1.11.1 to fix [CVE-2020-26247](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-26247)
 - Updated caxlsx to 3.0.4, and the dependencies of caxlsx_rail
