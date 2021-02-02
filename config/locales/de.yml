@@ -39,6 +39,7 @@ de:
       must_be_in_the_past: "Der Zeitraum darf ausschließlich vor dem heutigen Datum liegen."
   apipie:
     api_documentation: "API-Dokumentation"
+    code: "HTTP code"
   #error messages when importing an account from a SSO
   omniauth:
     email_already_linked_to_another_account_please_input_your_authentication_code: "E-Mail-Adresse \"%{OLD_MAIL}\" ist bereits mit einem Konto verknüpft. Bitte geben Sie Ihren Authentifizierungscode ein."
