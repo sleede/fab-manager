@@ -1,0 +1,183 @@
+de:
+  app:
+    logged:
+      #user's profile completion page when logging from an SSO provider
+      profile_completion:
+        confirm_your_new_account: "Bestätigen Sie Ihr neues Konto"
+        you_ve_just_created_a_new_account_on_the_fablab_by_logging_from: "Sie haben ein neues Konto auf {GENDER, select, neutral{} other{dem}} {NAME} erstellt, über Anmeldung von"
+        we_need_some_more_details: "Um die Einrichtung der Plattform abzuschließen, benötigen wir weitere Details"
+        your_email_is_already_used_by_another_account_on_the_platform: "Ihre E-Mail-Adresse scheint bereits von einem anderen Benutzer verwendet zu werden. Prüfen Sie bitte Ihr Postfach und geben Sie den Code ein, der Ihnen geschickt wurde."
+        or: "oder"
+        please_fill_the_following_form: "Bitte füllen Sie das folgende Formular aus"
+        some_data_may_have_already_been_provided_by_provider_and_cannot_be_modified: "Einige Daten wurden möglicherweise bereits von {NAME} bereitgestellt und können nicht geändert werden"
+        then_click_on_: "Dann klicken Sie auf"
+        _to_start_using_the_application: "um die Anwendung zu verwenden"
+        new_on_this_platform: "Neu auf dieser Plattform?"
+        your_email_: "Ihre E-Mail-Adresse"
+        _is_currently_associated_with_another_account_on_this_platform: "ist derzeit mit einem anderen Konto auf dieser Plattform verknüpft."
+        please_click_to_change_email_associated_with_your_PROVIDER_account: "Wenn es nicht Ihre Mailadresse ist, klicken Sie bitte auf den folgenden Button, um die E-Mail zu ändern, die mit Ihrem {PROVIDER} -Konto verknüpft ist."
+        do_you_already_have_an_account: "Haben Sie bereits ein Konto?"
+        do_not_fill_the_form_beside_but_specify_here_the_code_you_ve_received_by_email_to_recover_your_access: "Füllen Sie nicht das Formular aus. Geben Sie stattdessen hier den Code an, den Sie per E-Mail erhalten haben, um Ihren Zugang wiederherzustellen."
+        just_specify_code_here_to_recover_access: "Geben Sie hier den Code an, den Sie per E-Mail erhalten haben, um Ihren Zugriff wiederherzustellen."
+        i_did_not_receive_the_code: "Ich habe den Code nicht erhalten"
+        authentification_code: "Authentifizierungscode"
+        confirm_my_code: "Meinen Authentifizierungscode bestätigen"
+        an_unexpected_error_occurred_check_your_authentication_code: "Ein unerwarteter Fehler ist aufgetreten. Bitte überprüfen Sie Ihren Authentifizierungscode."
+        send_code_again: "Code erneut senden"
+        email_address_associated_with_your_account: "E-Mail-Adresse, die Ihrem Konto zugeordnet ist"
+        email_is_required: "E-Mail-Adresse ist erforderlich"
+        email_format_is_incorrect: "E-Mail-Format ist falsch"
+        code_successfully_sent_again: "Code erfolgreich erneut gesendet"
+        used_for_statistics: "Diese Daten werden für statistische Zwecke verwendet"
+        your_user_s_profile: "Ihr Benutzerprofil"
+        user_s_profile_is_required: "Benutzerprofil ist erforderlich."
+        i_ve_read_and_i_accept_: "Ich habe gelesen und akzeptiere"
+        _the_fablab_policy: "die FabLab Richtlinie"
+        change_my_data: "Meine Daten ändern"
+        sync_my_profile: "Mein Profil synchronisieren"
+        once_your_data_are_up_to_date_: "Sobald Ihre Daten auf dem neuesten Stand sind,"
+        _click_on_the_synchronization_button_opposite_: "klicken Sie auf den Synchronisation-Button gegenüber"
+        _disconnect_then_reconnect_: "trennen und erneut verbinden"
+        _for_your_changes_to_take_effect: "damit Ihre Änderungen wirksam werden."
+      dashboard:
+        #dashboard: public profile
+        profile:
+          empty: ''
+        #dashboard: edit my profile
+        settings:
+          last_activity_on_: "Letzte Aktivität am {DATE}"
+          i_want_to_change_group: "Ich möchte die Gruppe ändern!"
+          your_subscription_expires_on_: "Ihr Abonnement endet am"
+          no_subscriptions: "Keine Abonnements"
+          i_want_to_subscribe: "Ich möchte mich anmelden!"
+          to_come: "demnächst"
+          approved: "bestätigt"
+          projects: "Projekte"
+          no_projects: "Keine Projekte"
+          labels: "Labels"
+          no_labels: "Keine Labels"
+          cookies: "Cookies"
+          cookies_accepted: "Sie haben Cookies akzeptiert"
+          cookies_declined: "Sie haben Cookies abgelehnt"
+          cookies_unset: "Sie haben noch keine Cookie-Auswahl getroffen"
+          reset_cookies: "Meine Wahl ändern"
+          delete_my_account: "Mein Konto löschen"
+          edit_my_profile: "Mein Profil bearbeiten"
+          your_group_has_been_successfully_changed: "Ihre Gruppe wurde erfolgreich geändert."
+          an_unexpected_error_prevented_your_group_from_being_changed: "Ein unerwarteter Fehler verhinderte, dass Ihre Gruppe geändert wurde."
+          confirmation_required: "Bestätigung erforderlich"
+          confirm_delete_your_account: "Wollen Sie wirklich Ihr Konto löschen?"
+          all_data_will_be_lost: "Alle Ihre Daten werden gelöscht und können nicht wiederhergestellt werden."
+          invoicing_data_kept: "Nach geltender Gesetzeslage werden alle rechnungsrelevanten Daten für 10 Jahre separat aufbewahrt."
+          statistic_data_anonymized: "Einige Daten (Geschlecht, Geburtsdatum, Gruppe) werden anonymisiert und zu statistischen Zwecken gespeichert."
+          no_further_access_to_projects: "Ihre veröffentlichten Projekte werden anonymisiert, Sie werden keine Bearbeitungsmöglichkeit mehr haben."
+          your_user_account_has_been_successfully_deleted_goodbye: "Ihr Benutzerkonto wurde erfolgreich gelöscht. Auf Wiedersehen!"
+          an_error_occured_preventing_your_account_from_being_deleted: "Ein Fehler hat das Löschen Ihres Kontos verhindert."
+          used_for_statistics: "Diese Daten werden für statistische Zwecke verwendet"
+          used_for_invoicing: "Diese Daten werden für Abrechnungszwecke verwendet"
+          used_for_reservation: "Diese Daten werden im Fall einer Buchungsänderung verwendet"
+          used_for_profile: "Diese Daten werden nur auf Ihrem Profil angezeigt"
+          used_for_pricing_stats: "Diese Daten werden zur Bestimmung der Ihnen gewährten Preise und zu statistischen Zwecken verwendet"
+          public_profile: "Sie werden über ein öffentliches Profil verfügen, andere Nutzer können Sie in ihren Projekten einbinden"
+          trainings: "Schulungen"
+          no_trainings: "Keine Schulungen"
+          subscription: "Abonnement"
+          group: "Gruppe"
+          or: "oder"
+          confirm_changes: "Änderungen bestätigen"
+          change_my_data: "Meine Daten ändern"
+          sync_my_profile: "Mein Profil synchronisieren"
+          once_your_data_are_up_to_date_: "Sobald Ihre Daten auf dem neuesten Stand sind,"
+          _click_on_the_synchronization_button_opposite_: "klicken Sie auf den Synchronisation-Button gegenüber"
+          _disconnect_then_reconnect_: "trennen und erneut verbinden"
+          _for_your_changes_to_take_effect: "damit Ihre Änderungen wirksam werden."
+        #dashboard: my projects
+        projects:
+          you_dont_have_any_projects: "Sie haben keine Projekte."
+          add_a_project: "Projekt hinzufügen"
+          author: "Autor"
+          collaborator: "Mitarbeitende"
+          rough_draft: "Entwurf"
+          description: "Beschreibung"
+          machines_and_materials: "Maschinen und Materialien"
+          machines: "Maschinen"
+          materials: "Materialien"
+          collaborators: "Mitarbeitende"
+        #dashboard: my trainings
+        trainings:
+          your_next_trainings: "Ihre nächsten Schulungen"
+          your_previous_trainings: "Ihre vorigen Schulungen"
+          your_approved_trainings: "Ihre bestätigten Trainings"
+          no_trainings: "Keine Schulungen"
+        #dashboard: my events
+        events:
+          your_next_events: "Ihre nächsten Termine"
+          no_events_to_come: "Keine anzuzeigenden Termine"
+          your_previous_events: "Ihre vorherigen Termine"
+          no_passed_events: "Keine vergangenen Termine"
+          NUMBER_normal_places_reserved: "{NUMBER} {NUMBER, plural, one {} =0{} =1{normaler Platz reserviert} other{normale Plätze reserviert}}"
+          NUMBER_of_NAME_places_reserved: "{NUMBER} {NUMBER, plural, one {} =0{} =1{{NAME}-Platz reserviert} other{{NAME}-Plätze reserviert}}"
+        #dashboard: my invoices
+        invoices:
+          reference_number: "Referenznummer"
+          date: "Datum"
+          price: "Preis"
+          download_the_invoice: "Rechnung herunterladen"
+          download_the_credit_note: "Rückerstattungsrechnung herunterladen"
+          no_invoices_for_now: "Momentan keine Rechnungen."
+      #public profil of a member
+      members_show:
+        members_list: "Mitgliederliste"
+      #list of members accepting to be contacted
+      members:
+        the_fablab_members: "Die FabLab-Mitglieder"
+        display_more_members: "Weitere Mitglieder anzeigen..."
+        no_members_for_now: "Keine Mitglieder im Moment"
+        avatar: "Benutzerbild"
+        user: "Nutzer"
+        pseudonym: "Pseudonym"
+        email_address: "E‐Mail‐Adresse"
+      #add a new project
+      projects_new:
+        add_a_new_project: "Neues Projekt hinzufügen"
+      #modify an existing project
+      projects_edit:
+        edit_the_project: "Projekt bearbeiten"
+        rough_draft: "Entwurf"
+        publish: "Veröffentlichen"
+      #book a machine
+      machines_reserve:
+        machine_planning: "Belegungsplan"
+        i_ve_reserved: "Ich habe reserviert"
+        not_available: "Nicht verfügbar"
+        i_reserve: "Ich reserviere"
+        i_shift: "Ich verschiebe"
+        i_change: "Ich ändere"
+        do_you_really_want_to_cancel_this_reservation: "Diese Reservierung stornieren?"
+        reservation_was_cancelled_successfully: "Die Reservierung wurde erfolgreich storniert."
+        cancellation_failed: "Stornierung fehlgeschlagen."
+        a_problem_occured_during_the_payment_process_please_try_again_later: "Während des Zahlungsvorgangs ist ein Problem aufgetreten. Bitte versuchen Sie es später erneut."
+      #book a training
+      trainings_reserve:
+        trainings_planning: "Schulungsplanung"
+        planning_of: "Planung von " #eg. Planning of 3d printer training
+        all_trainings: "Alle Schulungen"
+        cancel_my_selection: "Auswahl aufheben"
+        i_change: "Ich ändere"
+        i_shift: "Ich verschiebe"
+        i_ve_reserved: "Ich reservierte"
+      #book a space
+      space_reserve:
+        planning_of_space_NAME: "Planung des {NAME} Raumes"
+        i_ve_reserved: "Ich reservierte"
+        i_shift: "Ich verschiebe"
+        i_change: "Ich ändere"
+      notifications:
+        notifications_center: "Mitteilungszentrale"
+        mark_all_as_read: "Alle als gelesen markieren"
+        date: "Datum"
+        notif_title: "Titel"
+        no_new_notifications: "Keine neuen Benachrichtigungen."
+        archives: "Archiv"
+        no_archived_notifications: "Keine archivierten Benachrichtigungen."
+        load_the_next_notifications: "Lade die nächsten Benachrichtigungen..."

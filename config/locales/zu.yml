@@ -39,6 +39,7 @@ zu:
       must_be_in_the_past: "crwdns3209:0crwdne3209:0"
   apipie:
     api_documentation: "crwdns3257:0crwdne3257:0"
+    code: "crwdns20914:0crwdne20914:0"
   #error messages when importing an account from a SSO
   omniauth:
     email_already_linked_to_another_account_please_input_your_authentication_code: "crwdns3259:0%{OLD_MAIL}crwdne3259:0"
