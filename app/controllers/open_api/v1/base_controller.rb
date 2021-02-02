@@ -20,15 +20,15 @@ class OpenAPI::V1::BaseController < ActionController::Base
   protected
 
   def not_found(exception)
-    render json: { errors: exception }, status: :not_found
+    render json: { errors: ['Not found', exception] }, status: :not_found
   end
 
   def bad_request(exception)
-    render json: { errors: exception }, status: :bad_request
+    render json: { errors: ['Bad request', exception] }, status: :bad_request
   end
 
   def server_error(exception)
-    render json: { error: exception }, status: :internal_server_error
+    render json: { error: ['Server error', exception] }, status: :internal_server_error
   end
 
   def authenticate
