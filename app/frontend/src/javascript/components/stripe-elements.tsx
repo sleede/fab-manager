@@ -7,7 +7,6 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from "@stripe/stripe-js";
 import SettingAPI from '../api/setting';
 import { SettingName } from '../models/setting';
-import { Loader } from './loader';
 
 const stripePublicKey = SettingAPI.get(SettingName.StripePublicKey);
 

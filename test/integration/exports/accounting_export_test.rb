@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'test_helper'
 module Exports; end
 
 class Exports::AccountingExportTest < ActionDispatch::IntegrationTest
@@ -113,11 +114,11 @@ class Exports::AccountingExportTest < ActionDispatch::IntegrationTest
     assert_equal 0, data[1][I18n.t('accounting_export.debit_euro')].to_f, 'Debit euro amount does not match'
 
     # test with another invoice
-    last_invoice = Invoice.last
-    client_row = data[data.length - 2]
-    item_row = data[data.length - 1]
+    machine_invoice = Invoice.find(5)
+    client_row = data[data.length - 4]
+    item_row = data[data.length - 3]
 
-    if last_invoice.invoiced_type == 'Reservation' && last_invoice.invoiced.reservable_type == 'Machine'
+    if machine_invoice.invoiced_type == 'Reservation' && machine_invoice.invoiced.reservable_type == 'Machine'
       assert_match I18n.t('accounting_export.Machine_reservation'),
                    client_row[I18n.t('accounting_export.line_label')],
                    'Line label does not contains the reference to the invoiced item'
@@ -129,7 +130,7 @@ class Exports::AccountingExportTest < ActionDispatch::IntegrationTest
       assert_equal machine_label, item_row[I18n.t('accounting_export.account_label')], 'Account label for machine reservation is wrong'
 
     else
-      STDERR.puts "WARNING: unable to test accurately accounting export: invoice #{last_invoice.id} is not a Machine reservation"
+      STDERR.puts "WARNING: unable to test accurately accounting export: invoice #{machine_invoice.id} is not a Machine reservation"
     end
 
     # Clean CSV file

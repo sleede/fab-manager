@@ -78,11 +78,11 @@ CREATE FUNCTION public.fill_search_vector_for_project() RETURNS trigger
         select string_agg(description, ' ') as content into step_description from project_steps where project_id = new.id;
 
         new.search_vector :=
-          setweight(to_tsvector('pg_catalog.simple', unaccent(coalesce(new.name, ''))), 'A') ||
-          setweight(to_tsvector('pg_catalog.simple', unaccent(coalesce(new.tags, ''))), 'B') ||
-          setweight(to_tsvector('pg_catalog.simple', unaccent(coalesce(new.description, ''))), 'D') ||
-          setweight(to_tsvector('pg_catalog.simple', unaccent(coalesce(step_title.title, ''))), 'C') ||
-          setweight(to_tsvector('pg_catalog.simple', unaccent(coalesce(step_description.content, ''))), 'D');
+          setweight(to_tsvector('pg_catalog.french', unaccent(coalesce(new.name, ''))), 'A') ||
+          setweight(to_tsvector('pg_catalog.french', unaccent(coalesce(new.tags, ''))), 'B') ||
+          setweight(to_tsvector('pg_catalog.french', unaccent(coalesce(new.description, ''))), 'D') ||
+          setweight(to_tsvector('pg_catalog.french', unaccent(coalesce(step_title.title, ''))), 'C') ||
+          setweight(to_tsvector('pg_catalog.french', unaccent(coalesce(step_description.content, ''))), 'D');
 
         return new;
       end
@@ -1472,6 +1472,8 @@ CREATE TABLE public.payment_schedule_items (
     due_date timestamp without time zone,
     state character varying DEFAULT 'new'::character varying,
     details jsonb DEFAULT '"{}"'::jsonb,
+    stp_invoice_id character varying,
+    payment_method character varying,
     payment_schedule_id bigint,
     invoice_id bigint,
     footprint character varying,
@@ -1518,6 +1520,7 @@ CREATE TABLE public.payment_schedules (
     footprint character varying,
     environment character varying,
     invoicing_profile_id bigint,
+    statistic_profile_id bigint,
     operator_profile_id bigint,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
@@ -4575,6 +4578,13 @@ CREATE INDEX index_payment_schedules_on_scheduled_type_and_scheduled_id ON publi
 
 
 --
+-- Name: index_payment_schedules_on_statistic_profile_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_payment_schedules_on_statistic_profile_id ON public.payment_schedules USING btree (statistic_profile_id);
+
+
+--
 -- Name: index_payment_schedules_on_wallet_transaction_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5231,6 +5241,14 @@ ALTER TABLE ONLY public.i_calendar_events
 
 ALTER TABLE ONLY public.exports
     ADD CONSTRAINT fk_rails_26b155474a FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
+-- Name: payment_schedules fk_rails_27cdd051f7; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payment_schedules
+    ADD CONSTRAINT fk_rails_27cdd051f7 FOREIGN KEY (statistic_profile_id) REFERENCES public.statistic_profiles(id);
 
 
 --

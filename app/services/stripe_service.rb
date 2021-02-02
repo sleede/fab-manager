@@ -5,10 +5,22 @@ class StripeService
   class << self
 
     # Create the provided PaymentSchedule on Stripe, using the Subscription API
-    def create_stripe_subscription(payment_schedule_id, subscription, reservable_stp_id, setup_intent_id)
+    def create_stripe_subscription(payment_schedule, setup_intent_id)
       stripe_key = Setting.get('stripe_secret_key')
-      payment_schedule = PaymentSchedule.find(payment_schedule_id)
       first_item = payment_schedule.ordered_items.first
+
+      case payment_schedule.scheduled_type
+      when Reservation.name
+        subscription = payment_schedule.scheduled.subscription
+        reservable_stp_id = payment_schedule.scheduled.reservable&.stp_product_id
+      when Subscription.name
+        subscription = payment_schedule.scheduled
+        reservable_stp_id = nil
+      else
+        raise InvalidSubscriptionError
+      end
+
+      handle_wallet_transaction(payment_schedule)
 
       # setup intent (associates the customer and the payment method)
       intent = Stripe::SetupIntent.retrieve(setup_intent_id, api_key: stripe_key)
@@ -22,14 +34,31 @@ class StripeService
       stp_subscription = Stripe::Subscription.create({
                                                        customer: payment_schedule.invoicing_profile.user.stp_customer_id,
                                                        cancel_at: subscription.expiration_date.to_i,
-                                                       promotion_code: payment_schedule.coupon&.code,
                                                        add_invoice_items: items,
+                                                       coupon: payment_schedule.coupon&.code,
                                                        items: [
                                                          { price: price[:id] }
                                                        ],
                                                        default_payment_method: intent[:payment_method]
                                                      }, { api_key: stripe_key })
       payment_schedule.update_attributes(stp_subscription_id: stp_subscription.id)
+    end
+
+    def create_stripe_coupon(coupon_id)
+      coupon = Coupon.find(coupon_id)
+      stp_coupon = { id: coupon.code }
+      if coupon.type == 'percent_off'
+        stp_coupon[:percent_off] = coupon.percent_off
+      elsif coupon.type == 'amount_off'
+        stp_coupon[:amount_off] = coupon.amount_off
+        stp_coupon[:currency] = Setting.get('stripe_currency')
+      end
+
+      stp_coupon[:duration] = coupon.validity_per_user == 'always' ? 'forever' : 'once'
+      stp_coupon[:redeem_by] = coupon.valid_until.to_i unless coupon.valid_until.nil?
+      stp_coupon[:max_redemptions] = coupon.max_usages unless coupon.max_usages.nil?
+
+      Stripe::Coupon.create(stp_coupon, api_key: Setting.get('stripe_secret_key'))
     end
 
     private
@@ -70,6 +99,13 @@ class StripeService
       params[:recurring] = { interval: 'month', interval_count: 1 } if monthly
 
       Stripe::Price.create(params, api_key: Setting.get('stripe_secret_key'))
+    end
+
+    def handle_wallet_transaction(payment_schedule)
+      return unless payment_schedule.wallet_amount
+
+      customer_id = payment_schedule.invoicing_profile.user.stp_customer_id
+      Stripe::Customer.update(customer_id, { balance: -payment_schedule.wallet_amount }, { api_key: Setting.get('stripe_secret_key') })
     end
   end
 end

@@ -1,4 +1,5 @@
 import { Reservation } from './reservation';
+import { SubscriptionRequest } from './subscription';
 
 export interface PaymentConfirmation {
   requires_action?: boolean,
@@ -20,11 +21,6 @@ export enum PaymentMethod {
 
 export interface CartItems {
   reservation?: Reservation,
-  subscription?: {
-    plan_id: number,
-    user_id: number,
-    payment_schedule: boolean,
-    payment_method: PaymentMethod
-  },
+  subscription?: SubscriptionRequest,
   coupon_code?: string
 }

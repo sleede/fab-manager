@@ -34,6 +34,10 @@
           <ng-include src="'/admin/invoices/list.html'"></ng-include>
 	      </uib-tab>
 
+        <uib-tab heading="{{ 'app.admin.invoices.payment_schedules_list' | translate }}" ng-show="$root.modules.invoicing" index="4">
+          <payment-schedules-list />
+        </uib-tab>
+
         <uib-tab heading="{{ 'app.admin.invoices.invoicing_settings' | translate }}" index="1" class="invoices-settings">
           <ng-include src="'/admin/invoices/settings.html'"></ng-include>
         </uib-tab>

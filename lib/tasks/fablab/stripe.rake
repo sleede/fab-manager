@@ -4,15 +4,6 @@
 namespace :fablab do
   namespace :stripe do
 
-    desc 'Cancel stripe subscriptions'
-    task cancel_subscriptions: :environment do
-      Subscription.where('expiration_date >= ?', DateTime.current.at_beginning_of_day).each do |s|
-        puts "-> Start cancel subscription of #{s.user.email}"
-        s.cancel
-        puts '-> Done'
-      end
-    end
-
     desc 'find any invoices with incoherent total between stripe and DB'
     task :find_incoherent_invoices, [:start_date] => :environment do |_task, args|
       puts 'DEPRECATION WARNING: Will not work for invoices created from version 4.1.0 and above'

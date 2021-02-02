@@ -181,7 +181,7 @@ You can subscribe to [this atom feed](https://github.com/sleede/fab-manager/rele
 
 4. remove old assets
 
-   `rm -Rf public/assets/`
+   `rm -Rf public/packs/`
 
 5. compile new assets
 

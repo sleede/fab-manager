@@ -4,6 +4,8 @@
 - Refactored theme builder to use scss files
 - Updated stripe gem to 5.21.0
 - Architecture documentation
+- Improved coupon creation/deletion workflow
+- Default texts for the login modal
 - Fix a bug: unable to access embedded plan views
 - Fix a bug: warning message overflow in credit wallet modal
 - Fix a bug: when using a cash coupon, the amount shown in the statistics is invalid
@@ -15,6 +17,18 @@
 - [TODO DEPLOY] add the `INTL_LOCALE` environment variable (see [doc/environment.md](doc/environment.md#INTL_LOCALE) for configuration details)
 - [TODO DEPLOY] add the `INTL_CURRENCY` environment variable (see [doc/environment.md](doc/environment.md#INTL_CURRENCY) for configuration details)
 - [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/mount-payment-schedules.sh | bash`
+
+## v4.6.6 2021 February 02
+- Full German translation (thanks to [@korrupt](https://crowdin.com/profile/korrupt))
+- OpenAPI endpoints to create/update/show/delete machines
+- Updated environment documentation
+- Removed useless locales' configuration files
+- OpenAPI's endpoints will now return more detailed error messages when something wrong occurs
+- Fix a bug: when an event is modified, the member's reservations does not reflect the new event date
+- Fix a security issue: updated ini to 1.3.8 to fix [CVE-2020-7788](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-7788)
+- Fix a security issue: updated nokogiri to 1.11.1 to fix [CVE-2020-26247](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-26247)
+- Updated caxlsx to 3.0.4, and the dependencies of caxlsx_rail
+- [TODO DEPLOY] -> (only dev) `bundle install`
 
 ## v4.6.5 2020 December 07
 - Fix a bug: unable to run the upgrade script with docker-compose >= v1.19
@@ -36,7 +50,7 @@
 - Removed fab-manager email address from the seeds
 - Initialize new plans with default prices for machines & spaces
 - Display a message when no plans are available
-- Fix a bug: in the settings area, boolean switches are always shown as false
+- Fix a bug: in the settings' area, boolean switches are always shown as false
 - Fix a bug: public cards presenting the plans in the public area, have bogus style
 - Fix a bug: theme primary color is ignored on links
 - [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
@@ -45,7 +59,7 @@
 
 - Add intermediate step version for upgrades: v4.4.6. This will prevent issues with FootprintDebug if a regeneration is needed
 - Check postgreSQL status before compiling assets
-- Improved documentation about the upgrade process
+- Improved the documentation about the upgrade process
 - Fix a bug: unable to set libraries locales to their default values (en-us)
 - Fix a bug: unable to display details about a closed period
 - Fix a bug: members cannot view available trainings slots
@@ -53,7 +67,7 @@
 
 ## v4.6.1 2020 October 21
 
-- Reduced down time during upgrades
+- Reduced downtime during upgrades
 - Architecture changes to allow including React.js components into the application
 - Allow running upgrade scripts from dev ranch
 - Fix a bug: script mount-webpack.sh was not updating the docker-compose.yml file

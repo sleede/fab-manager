@@ -38,6 +38,7 @@ class Subscription < ApplicationRecord
   end
 
   def cancel
+    # TODO, currently unused, refactor to use with PaymentSchedule
     update_columns(canceled_at: DateTime.current)
   end
 
@@ -142,19 +143,5 @@ class Subscription < ApplicationRecord
 
   def of_partner_plan?
     plan.is_a?(PartnerPlan)
-  end
-
-  def get_wallet_amount_debit
-    total = plan.amount
-    total = CouponService.new.apply(total, @coupon, user.id) if @coupon
-    wallet_amount = (user.wallet.amount * 100).to_i
-    wallet_amount >= total ? total : wallet_amount
-  end
-
-  def debit_user_wallet
-    return if !@wallet_amount_debit.present? || @wallet_amount_debit.zero?
-
-    amount = @wallet_amount_debit / 100.0
-    WalletService.new(user: user, wallet: user.wallet).debit(amount, self)
   end
 end

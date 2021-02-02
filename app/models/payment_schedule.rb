@@ -9,6 +9,7 @@ class PaymentSchedule < PaymentDocument
   belongs_to :wallet_transaction
   belongs_to :coupon
   belongs_to :invoicing_profile
+  belongs_to :statistic_profile
   belongs_to :operator_profile, foreign_key: :operator_profile_id, class_name: 'InvoicingProfile'
 
   belongs_to :subscription, foreign_type: 'Subscription', foreign_key: 'scheduled_id'
@@ -19,6 +20,7 @@ class PaymentSchedule < PaymentDocument
   before_create :add_environment
   after_create :update_reference, :chain_record
   after_commit :generate_and_send_document, on: [:create], if: :persisted?
+  after_commit :generate_initial_invoice, on: [:create], if: :persisted?
 
   def file
     dir = "payment_schedules/#{invoicing_profile.id}"
@@ -45,8 +47,22 @@ class PaymentSchedule < PaymentDocument
     payment_schedule_items.order(due_date: :asc)
   end
 
+  def user
+    invoicing_profile.user
+  end
+
   def check_footprint
     payment_schedule_items.map(&:check_footprint).all? && footprint == compute_footprint
+  end
+
+  def post_save(setup_intent_id)
+    return unless payment_method == 'stripe'
+
+    StripeService.create_stripe_subscription(self, setup_intent_id)
+  end
+
+  def self.columns_out_of_footprint
+    %w[stp_subscription_id]
   end
 
   private
@@ -59,5 +75,9 @@ class PaymentSchedule < PaymentDocument
            "scheduled_type(#{scheduled_type}), user_id(#{invoicing_profile.user_id})"
     end
     PaymentScheduleWorker.perform_async(id)
+  end
+
+  def generate_initial_invoice
+    PaymentScheduleItemWorker.perform_async
   end
 end

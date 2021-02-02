@@ -8,13 +8,13 @@ class PaymentScheduleWorker
   def perform(payment_schedule_id)
     # generate a payment schedule document
     ps = PaymentSchedule.find(payment_schedule_id)
-    pdf = ::PDF::PaymentSchedule.new(ps).render # TODO, create ::PDF::PaymentSchedule
+    pdf = ::PDF::PaymentSchedule.new(ps).render
 
     # save the file on the disk
     File.binwrite(ps.file, pdf)
 
     # notify user, send schedule document by email
-    NotificationCenter.call type: 'notify_user_when_invoice_ready', # TODO, create a more appropriate notification type
+    NotificationCenter.call type: 'notify_user_when_payment_schedule_ready',
                             receiver: ps.user,
                             attached_object: ps
   end

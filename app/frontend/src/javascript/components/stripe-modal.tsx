@@ -174,7 +174,7 @@ const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuc
               customFooter={logoFooter()}
               className="stripe-modal">
       {ready && <StripeElements>
-      <WalletInfo reservation={cartItems?.reservation} currentUser={currentUser} wallet={wallet} price={price?.price} />
+        <WalletInfo cartItems={cartItems} currentUser={currentUser} wallet={wallet} price={price?.price} />
         <StripeForm onSubmit={handleSubmit}
                     onSuccess={handleFormSuccess}
                     onError={handleFormError}

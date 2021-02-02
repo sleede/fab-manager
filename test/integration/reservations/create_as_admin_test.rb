@@ -465,7 +465,7 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     VCR.use_cassette('reservations_admin_training_subscription_with_payment_schedule') do
       post reservations_path, params: { reservation: {
         user_id: @user_without_subscription.id,
-        payment_method: '', # pay by check
+        payment_method: 'check',
         reservable_id: training.id,
         reservable_type: training.class.name,
         slots_attributes: [
@@ -479,6 +479,10 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
         payment_schedule: true
       } }.to_json, headers: default_headers
     end
+
+    # get the objects
+    reservation = Reservation.last
+    payment_schedule = PaymentSchedule.last
 
     # Check response format & status
     assert_equal 201, response.status, response.body
@@ -498,7 +502,25 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     assert_equal plan.id, @user_without_subscription.subscribed_plan.id, "user's plan does not match"
 
     # Check the answer
-    reservation = json_response(response.body)
-    assert_equal plan.id, reservation[:user][:subscribed_plan][:id], 'subscribed plan does not match'
+    reservation_res = json_response(response.body)
+    assert_equal plan.id, reservation_res[:user][:subscribed_plan][:id], 'subscribed plan does not match'
+
+    # reservation assertions
+    assert_equal reservation_res[:id], reservation.id
+    assert reservation.payment_schedule
+    assert_equal payment_schedule.scheduled, reservation
+
+    # payment schedule assertions
+    assert_not_nil payment_schedule.reference
+    assert_equal 'check', payment_schedule.payment_method
+    assert_nil payment_schedule.stp_subscription_id
+    assert_nil payment_schedule.stp_setup_intent_id
+    assert_nil payment_schedule.wallet_transaction
+    assert_nil payment_schedule.wallet_amount
+    assert_nil payment_schedule.coupon_id
+    assert_equal 'test', payment_schedule.environment
+    assert payment_schedule.check_footprint
+    assert_equal @user_without_subscription.invoicing_profile.id, payment_schedule.invoicing_profile_id
+    assert_equal @admin.invoicing_profile.id, payment_schedule.operator_profile_id
   end
 end

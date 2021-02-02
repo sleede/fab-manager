@@ -1,7 +1,7 @@
   <div class="" id="loginModal">
     <div class="modal-header">
       <img ng-src="{{logoBlack.custom_asset_file_attributes.attachment_url}}" alt="{{logo.custom_asset_file_attributes.attachment}}" class="modal-logo"/>
-      <h1 translate>
+      <h1 translate translate-default="Login">
         {{ 'app.public.common.connection' }}
       </h1>
     </div>
@@ -24,7 +24,7 @@
                          required="required"
                          ng-blur="emailError = !!loginForm.email.$error.email"
                          ng-focus="emailError = false"
-                         placeholder="{{ 'app.public.common.your_email_address' | translate }}" />
+                         translate-attr="{ placeholder: 'app.public.common.your_email_address' }" />
                 </div>
               </div>
             </div>
@@ -38,12 +38,12 @@
                          class="form-control"
                          ng-model="user.password"
                          required="required"
-                         placeholder="{{ 'app.public.common.your_password' | translate }}"
+                         translate-attr="{ placeholder: 'app.public.common.your_password' }"
                          ng-minlength="8"/>
                 </div>
-                <a href="#" ng-click="openResetPassword($event)" class="text-xs">{{ 'app.public.common.password_forgotten' | translate }}</a>
+                <a href="#" ng-click="openResetPassword($event)" class="text-xs" translate translate-default="Forgotten password">{{ 'app.public.common.password_forgotten' }}</a>
                 <span ng-if="confirmationRequired">
-                  <br><a href="#" ng-click="openConfirmationNewModal($event)" class="text-xs">{{ 'app.public.common.confirm_my_account' | translate }}</a>
+                  <br><a href="#" ng-click="openConfirmationNewModal($event)" class="text-xs" translate translate-default="Confirm account">{{ 'app.public.common.confirm_my_account' }}</a>
                 </span>
                 <div class="alert alert-warning m-t-sm m-b-none text-xs p-sm" ng-show='isCapsLockOn' role="alert">
                   <i class="fa fa-warning"></i>
@@ -56,13 +56,13 @@
 
         </div>
         <div class="panel-footer no-padder">
-          <button class="btn btn-valid btn-warning btn-block p-l btn-lg text-u-c r-b" ng-click="login()" ng-disabled="loginForm.$invalid" translate>{{ 'app.shared.buttons.confirm' }}</button>
+          <button class="btn btn-valid btn-warning btn-block p-l btn-lg text-u-c r-b" ng-click="login()" ng-disabled="loginForm.$invalid" translate translate-default="OK">{{ 'app.shared.buttons.confirm' }}</button>
         </div>
       </div>
       <p class="text-center font-sbold">
-        <span translate>{{ 'app.public.common.not_registered_to_the_fablab' }}</span>
+        <span translate translate-default="Not registered?">{{ 'app.public.common.not_registered_to_the_fablab' }}</span>
         <br/>
-        <a href="#" ng-click="openSignup($event)" class="text-u-l" translate>{{ 'app.public.common.create_an_account' }}</a></br>
+        <a href="#" ng-click="openSignup($event)" class="text-u-l" translate translate-default="Create an account">{{ 'app.public.common.create_an_account' }}</a></br>
       </p>
     </div>
 

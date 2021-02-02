@@ -25,15 +25,16 @@ class Reservations::Reserve
                                     operator_profile_id: operator_profile_id,
                                     user: user,
                                     payment_method: payment_method,
-                                    coupon_code: payment_details[:coupon],
+                                    coupon: payment_details[:coupon],
                                     setup_intent_id: intent_id)
                 else
                   generate_invoice(reservation, operator_profile_id, payment_details, intent_id)
                 end
-      payment.save
-      reservation.save
       WalletService.debit_user_wallet(payment, user, reservation)
+      reservation.save
       reservation.post_save
+      payment.save
+      payment.post_save(intent_id)
     end
     true
   end
@@ -43,10 +44,9 @@ class Reservations::Reserve
   ##
   # Generate the invoice for the given reservation+subscription
   ##
-  def generate_schedule(reservation: nil, total: nil, operator_profile_id: nil, user: nil, payment_method: nil, coupon_code: nil,
+  def generate_schedule(reservation: nil, total: nil, operator_profile_id: nil, user: nil, payment_method: nil, coupon: nil,
                         setup_intent_id: nil)
     operator = InvoicingProfile.find(operator_profile_id)&.user
-    coupon = Coupon.find_by(code: coupon_code) unless coupon_code.nil?
 
     PaymentScheduleService.new.create(
       nil,

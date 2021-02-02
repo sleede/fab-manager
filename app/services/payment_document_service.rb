@@ -87,9 +87,10 @@ class PaymentDocumentService
       else
         return get_max_id(Invoice) + get_max_id(PaymentSchedule)
       end
-      return Invoice.count unless defined? start && defined? ending
+      return Invoice.count + PaymentSchedule.count unless defined? start && defined? ending
 
-      Invoice.where('created_at >= :start_date AND created_at < :end_date', start_date: start, end_date: ending).length
+      Invoice.where('created_at >= :start_date AND created_at < :end_date', start_date: start, end_date: ending).length +
+        PaymentSchedule.where('created_at >= :start_date AND created_at < :end_date', start_date: start, end_date: ending).length
     end
 
     ##

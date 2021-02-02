@@ -111,6 +111,11 @@ Rails.application.routes.draw do
       get 'first', action: 'first', on: :collection
     end
 
+    resources :payment_schedules, only: %i[show] do
+      post 'list', action: 'list', on: :collection
+      get 'download', on: :member
+    end
+
     resources :i_calendar, only: %i[index create destroy] do
       get 'events', on: :member
       post 'sync', on: :member
@@ -191,7 +196,7 @@ Rails.application.routes.draw do
         resources :trainings
         resources :user_trainings
         resources :reservations
-        resources :machines
+        resources :machines, only: %i[index create update show destroy]
         resources :bookable_machines
         resources :invoices do
           get :download, on: :member

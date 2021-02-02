@@ -39,6 +39,7 @@ fr:
       must_be_in_the_past: "La période doit être strictement antérieure à la date du jour."
   apipie:
     api_documentation: "Documentation de l'API"
+    code: "Code HTTP "
   #error messages when importing an account from a SSO
   omniauth:
     email_already_linked_to_another_account_please_input_your_authentication_code: "L'adresse de courriel \"%{OLD_MAIL}\" est déjà associée à un compte utilisateur, merci de saisir votre code d'authentification."
@@ -112,6 +113,18 @@ fr:
     subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "Prolongement Abonnement (Jours gratuits) de %{NAME} à compter du %{STARTDATE} jusqu'au %{ENDDATE}"
     and: 'et'
     invoice_text_example: "Notre association n'est pas assujettie à la TVA"
+  #PDF payment schedule generation
+  payment_schedules:
+    schedule_reference: "Référence de l'échéancier : %{REF}"
+    schedule_issued_on_DATE: "Échéancier édité le %{DATE}"
+    object: "Objet : Échéancier de paiement de %{ITEM}"
+    subscription_of_NAME_for_DURATION_starting_from_DATE: "l'abonnement de %{NAME} pour %{DURATION} à compter du %{DATE}"
+    deadlines: "Tableau de vos mensualités"
+    deadline_date: "Date du prélèvement"
+    deadline_amount: "Montant TTC"
+    total_amount: "Montant total"
+    settlement_by_METHOD: "Les prélèvements seront effectués par {METHOD, select, stripe{carte bancaire} other{chèque}} à l'échéance."
+    settlement_by_wallet: "%{AMOUNT} seront prélevés de votre porte-monnaie pour régler la première échéance."
   #CVS accounting export (columns headers)
   accounting_export:
     journal_code: "Code journal"
@@ -344,6 +357,14 @@ fr:
         user_NAME_changed_ROLE_html: "L'utilisateur <strong><em>%{NAME}</strong></em> est maintenant %{ROLE}."
       notify_admin_members_stripe_sync:
         all_members_sync: "Tous les membres ont été synchronisés avec succès sur Stripe."
+      notify_user_when_payment_schedule_ready:
+        your_schedule_is_ready_html: "Votre échéancier n°%{REFERENCE}, d'un montant de %{AMOUNT}, est prêt. <a href='api/payment_schedules/%{SCHEDULE_ID}/download' target='_blank'>Cliquez ici pour le télécharger</a>."
+      notify_admin_payment_schedule_failed:
+        schedule_failed: "Échec du prélèvement par carte de l'échéance du %{DATE}, pour l'échéancier %{REFERENCE}"
+      notify_member_payment_schedule_failed:
+        schedule_failed: "Échec du prélèvement par carte de l'échéance du %{DATE}, pour votre échéancier %{REFERENCE}"
+      notify_admin_payment_schedule_check_deadline:
+        schedule_deadline: "Vous devez encaisser le chèque de l'échéance du %{DATE}, pour l'échéancier %{REFERENCE}"
   #statistics tools for admins
   statistics:
     subscriptions: "Abonnements"
