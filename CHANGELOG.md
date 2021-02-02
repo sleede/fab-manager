@@ -1,6 +1,8 @@
 # Changelog Fab-manager
 
 ## Next release
+
+## v4.6.6 2021 February 02
 - Full German translation (thanks to [@korrupt](https://crowdin.com/profile/korrupt))
 - OpenAPI endpoints to create/update/show/delete machines
 - Updated environment documentation
@@ -10,6 +12,7 @@
 - Fix a security issue: updated ini to 1.3.8 to fix [CVE-2020-7788](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-7788)
 − Fix a security issue: updated nokogiri to 1.11.1 to fix [CVE-2020-26247](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-26247)
 - Updated caxlsx to 3.0.4, and the dependencies of caxlsx_rail
+- [TODO DEPLOY] -> (only dev) `bundle install`
 
 ## v4.6.5 2020 December 07
 - Fix a bug: unable to run the upgrade script with docker-compose >= v1.19
