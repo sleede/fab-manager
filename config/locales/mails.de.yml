@@ -1,0 +1,291 @@
+de:
+  layouts:
+    notifications_mailer:
+      see_you_later: "Bis bald auf {GENDER, select, neutral{} other{das}}" #messageFormat interpolation
+      sincerely: "Mit freundlichen Grüßen,"
+      signature: "Das Fab Lab Team."
+      do_not_reply: "Bitte antworte nicht auf diese E-Mail."
+  users_mailer:
+    notify_user_account_created:
+      subject: "Dein FabLab Account wurde erfolgreich erstellt"
+      body:
+        hello: "Hallo %{NAME},"
+        intro: "Das FabLab-Team hat Ihren Account eingerichtet auf der {FABLAB}-Website:" #messageFormat interpolation
+        connection_parameters: "Hier sind Ihre Verbindungsparameter:"
+        account_name: "Kontoname:"
+        password: "Passwort:"
+        temporary_password: "Dies ist ein temporäres Passwort. Sie können es in Ihrem «Mein Konto»-Bereich ändern."
+        keep_advantages: "Mit diesem Konto behalten Sie alle Vorteile (Schulungen, Abonnementpläne), die mit Ihrem FabLab-Benutzerprofil verbunden sind."
+        to_use_platform: "Um die Website zu nutzen, bitte"
+        logon_or_login: "erstellen Sie ein neues Konto oder melden Sie sich an, indem Sie hier klicken."
+        token_if_link_problem: "Wenn Sie Probleme mit dem Link haben, können Sie den folgenden Code bei Ihrem ersten Verbindungsversuch eingeben:"
+  notifications_mailer:
+    notify_user_user_group_changed:
+      subject: "Ihre Gruppe wurde geändert"
+      body:
+        warning: "Sie haben die Gruppe gewechselt. Im FabLab kann geprüft werden, ob diese Änderung zulässig ist."
+    notify_admin_user_group_changed:
+      subject: "Ein Mitglied hat die Gruppe geändert"
+      body:
+        user_changed_group_html: "Benutzer <em><strong>%{NAME}</strong></em> hat die Gruppe geändert."
+        previous_group: "Vorherige Gruppe:"
+        new_group: "Neue Gruppe:"
+    notify_admin_subscription_extended:
+      subject: "Ein Abonnement wurde verlängert"
+      body:
+        subscription_extended_html: "Das Abonnement <strong><em>{PLAN}</em></strong> des Nutzers <strong><em>{NAME}</strong></em> wurde {FREE, select, true{kostenlos} other{}} verlängert bis {DATE}." #messageFormat interpolation
+    notify_member_subscription_extended:
+      subject: "Ihr Abonnement wurde verlängert"
+      body:
+        your_plan: "Ihr Abonnement"
+        has_been_extended: "wurde verlängert"
+        free: "kostenlos"
+        until: "bis"
+    notify_partner_subscribed_plan:
+      subject: "Ein Abonnement wurde gekauft"
+      body:
+        a_plan: "Ein Abonnement"
+        was_purchased_by_member: "wurde vom Nutzer gekauft"
+    notify_admin_when_project_published:
+      subject: "Ein Projekt wurde veröffentlicht"
+      body:
+        new_project_published: "Ein neues Projekt wurde veröffentlicht:"
+    notify_project_collaborator_to_valid:
+      subject: "Einladung zur Zusammenarbeit an einem Projekt"
+      body:
+        your_are_invited_to_take_part_in_a_project: "Sie wurden eingeladen, an einem Projekt mitzuarbeiten:"
+        to_accept_the_invitation_click_on_following_link: "Um diese Einladung anzunehmen, klicken Sie bitte auf den folgenden Link:"
+    notify_project_author_when_collaborator_valid:
+      subject: "Neuer Mitarbeiter in Ihrem Projekt"
+      body:
+        the_member: "der Benutzer"
+        accepted_your_invitation_to_take_part_in_the_project: "hat Ihre Einladung zur Projektmitarbeit angenommen:"
+    notify_user_training_valid:
+      subject: "Ihre Schulung wurde validiert"
+      body:
+        your_training: "Ihre Schulung"
+        has_been_validated: "wurde validiert"
+    notify_member_subscribed_plan:
+      subject: "Ihr Abonnement wurde erfolgreich gekauft"
+      body:
+        plan_subscribed_html: "Sie haben <strong><em>%{PLAN}</em></strong> abonniert."
+        rolling_subscription_stops_on: "Dein Abonnement endet %{DURATION} nach Ihrer ersten Schulung. Andernfalls wird es am %{DATE} angehalten."
+        subscription_stops_on: "Ihr Abonnement endet am %{DATE}."
+    notify_member_create_reservation:
+      subject: "Ihre Reservierung wurde erfolgreich gespeichert"
+      body:
+        reservation_saved_html: "Ihre Reservierung <strong><em>%{RESERVATION}</em></strong> wurde erfolgreich gespeichert"
+        your_reserved_slots: "Ihre reservierten Slots sind:"
+    notify_member_subscribed_plan_is_changed:
+      subject: "Ihr Abonnement wurde aktualisiert"
+      body:
+        new_plan_html: "Sie haben Ihr Abonnement für <strong><em>%{PLAN}</em></strong> geändert."
+    notify_admin_member_create_reservation:
+      subject: "Neue Reservierung"
+      body:
+        member_reserved_html: "Nutzer %{NAME} hat <strong><em>%{RESERVABLE}</em></strong> reserviert."
+        reserved_slots: "Reservierte Slots sind:"
+    notify_member_slot_is_modified:
+      subject: "Ihr Reservierungsslot wurde erfolgreich geändert"
+      body:
+        reservation_changed_to: "Ihr Reservierungs-Slot wurde geändert zu:"
+        previous_date: "Vorheriges Datum:"
+    notify_admin_slot_is_modified:
+      subject: "Ein reservierter Slot wurde geändert"
+      body:
+        slot_modified: "Benutzer %{NAME} hatte seinen Reservierungs-Slot geändert"
+        new_date: "Neuer Slot"
+        old_date: "Vorheriger Slot"
+    notify_admin_when_user_is_created:
+      subject: "Ein Benutzerkonto wurde erstellt"
+      body:
+        new_account_created: "Ein neues Benutzerkonto wurde auf der Website erstellt:"
+        account_for_organization: "Dieses Konto verwaltet eine Organisation:"
+    notify_admin_subscribed_plan:
+      subject: "Ein Abonnement wurde gekauft"
+      body:
+        plan_subscribed_html: "Das Abonnement <strong><em>%{PLAN}</em></strong> wurde von <strong><em>%{NAME}</strong></em> abgeschlossen."
+    notify_member_invoice_ready:
+      subject: "Rechnung Ihres FabLabs"
+      body:
+        please_find_attached_html: "Die angehängte Datei enthält Ihre Rechnung von {DATE}, über den Betrag von {AMOUNT} in Bezug auf Ihr/e {TYPE, select, Reservation{Reservierung} other{Abonnement}}." #messageFormat interpolation
+        invoice_in_your_dashboard_html: "Sie können auf Ihre Rechnung in %{DASHBOARD} auf der FabLab-Website zugreifen."
+        your_dashboard: "Ihr Dashboard"
+    notify_member_reservation_reminder:
+      subject: "Reservierungserinnerung"
+      body:
+        this_is_a_reminder_about_your_reservation_RESERVABLE_to_be_held_on_DATE_html: "Erinnerung: Sie haben eine Reservierung <strong>%{RESERVABLE}</strong> für <em>%{DATE}</em>"
+        this_reservation_concerns_the_following_slots: "Diese Reservierung betrifft folgende Slots:"
+    notify_member_avoir_ready:
+      subject: "Die Rückerstattungsrechnung Ihres FabLabs"
+      body:
+        please_find_attached_html: "Die angehängte Datei enthält Ihre Rückerstattungsrechnung von {DATE}, über den Betrag von {AMOUNT} in Bezug auf Ihr/e {TYPE, select, Reservation{Reservierung} other{Abonnement}}." #messageFormat interpolation
+        invoice_in_your_dashboard_html: "Sie können auf Ihre Rückerstattungsrechnung in %{DASHBOARD} auf der FabLab-Website zugreifen."
+        your_dashboard: "Ihr Dashboard"
+    notify_member_subscription_will_expire_in_7_days:
+      subject: "Ihr Abonnement läuft in 7 Tagen ab"
+      body:
+        your_plan: "Ihr Plan"
+        expires_in_7_days: "läuft in 7 Tagen ab."
+        to_renew_your_plan_follow_the_link: "Bitte folgen Sie diesem Link, um Ihren Plan zu erneuern"
+    notify_member_subscription_is_expired:
+      subject: "Ihr Abonnement ist abgelaufen"
+      body:
+        your_plan: "Ihr Plan"
+        has_expired: "ist abgelaufen."
+        you_can_go_to: "Bitte gehen Sie zu"
+        to_renew_your_plan: "um Ihren Plan zu erneuern"
+    notify_admin_subscription_will_expire_in_7_days:
+      subject: "Ein Mitgliedsabonnement läuft in 7 Tagen ab"
+      body:
+        subscription_will_expire_html: "Abonnement für Benutzer %{NAME} <strong><em>%{PLAN}</em></strong> läuft in 7 Tagen ab."
+    notify_admin_subscription_is_expired:
+      subject: "Ein Mitgliedsabonnement ist abgelaufen"
+      body:
+        subscription_expired_html: "Abonnementplan für Benutzer %{NAME} <strong><em>%{PLAN}</em></strong> ist jetzt abgelaufen."
+    notify_admin_subscription_canceled:
+      subject: "Ein Mitgliedsabonnement wurde storniert"
+      body:
+        subscription_canceled_html: "Abonnement <strong><em>%{PLAN}</em></strong> für Nutzer %{NAME} wurde storniert."
+    notify_member_subscription_canceled:
+      subject: "Ihr Abonnement wurde storniert"
+      body:
+        your_plan_was_canceled: "Ihr Abonnementsplan wurde storniert."
+        your_plan: "ihr Abonnement"
+        end_at: "endet am"
+    notify_member_slot_is_canceled:
+      subject: "Ihre Reservierung wurde storniert"
+      body:
+        reservation_canceled: "Ihre Reservierung für %{RESERVABLE} wurde storniert"
+    notify_admin_slot_is_canceled:
+      subject: "Eine Reservierung wurde storniert"
+      body:
+        member_cancelled: "Benutzer %{NAME} hat seine Reservierung storniert"
+        item_details: "%{START} - %{END}, in Bezug auf %{RESERVABLE}"
+        generate_refund: "Vergessen Sie nicht, eine Gutschrift oder eine Rückerstattung für diese Stornierung zu buchen."
+    notify_admin_when_user_is_imported:
+      subject: "Ein Benutzerkonto wurde aus der SSO importiert"
+      body:
+        new_account_imported: "Ein neues Benutzerkonto (ID: %{ID}) wurde über %{PROVIDER} auf die Website importiert."
+        provider_uid: "seine Provider-ID ist: "
+        known_information: "Folgendes wissen wir über diesen Anbieter:"
+        address_already_used: "Diese Adresse wird schon von einem anderen Nutzer verwendet"
+        no_more_info_available: "Für diesen Nutzer sind keine weiteren Informationen verfügbar, solange er sein Profil nicht vervollständigt hat."
+    notify_user_profile_complete:
+      subject: "Sie haben nun Zugriff auf die gesamte Website"
+      body:
+        message: "Ihre Kontoinformationen wurden korrekt aktualisiert, Sie haben nun Zugriff auf die gesamte Website."
+    notify_user_auth_migration:
+      subject: "Wichtige Änderung Ihres FabLab Accounts"
+      body:
+        the_platform: "die Website"
+        is_changing_its_auth_system_and_will_now_use: "ändert momentan das Benutzeridentifikationssystem und verwendet zukünftig"
+        instead_of: "anstatt"
+        consequence_of_the_modification: "Aufgrund dieser Änderung können Sie sich nicht mit Ihren momentanen Benutzernamen auf der Website anmelden"
+        to_use_the_platform_thanks_for: "Um die Webseite weiter zu nutzen, bitte"
+        create_an_account_on: "erstellen Sie ein Konto auf"
+        or_use_an_existing_account_clicking_here: "oder verwenden Sie ein bestehendes Konto, indem Sie hier klicken"
+        in_case_of_problem_enter_the_following_code: "Falls beim Aufruf des Links zu Problemen kommt, können Sie den folgenden Code bei Ihrem ersten Verbindungsversuch eingeben, um Ihr aktuelles Konto in das neue Authentifizierungssystem zu migrieren:"
+    notify_admin_user_merged:
+      subject: "Ein importiertes Konto wurde mit einem bestehenden Konto zusammengeführt"
+      body:
+        imported_account_merged: "Ein zuvor importiertes Benutzerkonto über %{PROVIDER) wurde mit dem bestehenden Konto %{NAME} zusammengeführt"
+        provider_uid: "seine Provider-ID ist:"
+    notify_admin_profile_complete:
+      subject: "Ein importiertes Konto hat sein Profil vervollständigt"
+      body:
+        account_completed: "Ein Benutzerkonto hat sein Profil vervollständigt:"
+        imported_account_completed: "Ein Benutzerkonto, das zuvor über %{PROVIDER} importiert wurde, hat sein Profil vervollständigt:"
+        provider_id: "seine Provider-ID ist:"
+    notify_admin_abuse_reported:
+      subject: "Ein missbräuchlicher Inhalt wurde gemeldet"
+      body:
+        intro: "Ein Benutzer wurde als beleidigend markiert"
+        signaled_content: "gemeldeter Inhalt:"
+        signaled_by: "gemeldet von:"
+        signaled_on: "gemeldet auf:"
+        message: "Nachricht:"
+        visit_management_interface: "Weitere Informationen finden Sie im Bereich Reporting Management."
+    notify_user_wallet_is_credited:
+      subject: "Eine Gutschrift ist auf Ihrem Konto eingegangen"
+      body:
+        wallet_credit_html: "Ihrem Guthaben wurde %{AMOUNT} vom Administrator gutgeschrieben."
+    notify_admin_user_wallet_is_credited:
+      subject: "Dem Guthaben des Mitglieds wurde gutgeschrieben"
+      body:
+        wallet_credit_html: "Dem Guthaben von %{USER} wurde %{AMOUNT} vom Administrator %{ADMIN} gutgeschrieben."
+    notify_admin_export_complete:
+      subject: "Export abgeschlossen"
+      body:
+        you_asked_for_an_export: "Sie haben einen Export angefordert"
+        statistics_global: "aller Statistiken"
+        statistics_account: "der Registrierungsstatistiken"
+        statistics_event: "der Veranstaltungsstatistiken"
+        statistics_machine: "der Statistiken der Maschinenslots"
+        statistics_project: "der Projektstatistiken"
+        statistics_subscription: "der Abonnementstatistiken"
+        statistics_training: "der Schulungsstatistiken"
+        statistics_space: "der Raumstatistiken"
+        users_members: "der Mitgliederliste"
+        users_subscriptions: "der Abonnementliste"
+        users_reservations: "der Reservierungsliste"
+        availabilities_index: "der Verfügbarkeit der Reservierungen"
+        accounting_accounting-software: "der Buchhaltungsdaten"
+        click_to_download: "Excel-Datei erfolgreich erstellt. Zum Herunterladen klicken Sie"
+        here: "hier"
+        file_type:
+          xlsx: "Excel"
+          csv: "CSV"
+    notify_admin_import_complete:
+      subject: "Import abgeschlossen"
+      body:
+        you_made_an_import: "Sie haben einen Import von %{CATEGORY} gestartet"
+        category_members: "der Mitglieder"
+        click_to_view_results: "Klicken Sie hier, um die Ergebnisse anzuzeigen"
+    notify_member_about_coupon:
+      subject: "Gutschein"
+      body:
+        enjoy_a_discount_of_PERCENT_with_code_CODE: "Erhalten Sie %{PERCENT}% Rabatt auf der gesamten Seite mit dem Code %{CODE}."
+        enjoy_a_discount_of_AMOUNT_with_code_CODE: "Erhalten Sie %{AMOUNT}% Rabatt auf der gesamten Seite mit dem Code %{CODE}."
+        this_coupon_is_valid_USAGE_times_until_DATE_for_all_your_purchases: "Dieser Gutschein ist {USAGE, plural, =1{einmalig} other{mehrfach}} gültig für alle Ihre Käufe {TYPE, select, amount_off{mindestens gleich dem Gutscheinbetrag} other{}} ab sofort {DATE, select, NO-DATE{und ohne Ablaufdatum} other{und einlösbar bis {DATE}}}."
+    notify_admin_free_disk_space:
+      subject: "Wenig Speicherplatz auf der Festplatte"
+      body: "Warnung: verfügbarer Festplattenspeicher auf dem Server mit Fab-Manager ist weniger als %{THRESHOLD} MiB. Dies kann den Betrieb beeinflussen und das Speichern von Daten verhindern. Derzeit sind %{AVAILABLE} MiB freier Speicherplatz am Mount-Punkt verfügbar."
+    notify_admin_close_period_reminder:
+      subject: "Bitte schließen Sie Ihre Abrechnungsperioden regelmäßig ab"
+      body:
+        warning_last_closed_period_over_1_year: "Bitte schließen Sie Ihre Abrechnungsperioden regelmäßig ab. Der letzte Abschlusszeitraum endete um %{LAST_END}."
+        warning_no_closed_periods: "Bitte schließen Sie Ihre Abrechnungsperioden regelmäßig ab. Sie müssen Abrechnungsperioden ab %{FIRST_DATE} schließen."
+    notify_admin_archive_complete:
+      subject: "Archivierung abgeschlossen"
+      body:
+        archive_complete: "Sie haben den Abrechnungszeitraum von %{START} bis %{END} abgeschlossen. Die Archivierung der Daten ist nun abgeschlossen."
+        click_to_download: "Um das ZIP-Archiv herunterzuladen, klicken Sie"
+        here: "hier."
+        save_on_secured: "Speichern Sie dieses Archiv auf einem gesicherten externen Speichermedium und bedenken Sie, dass es bei einer Überprüfung durch die Steuerbehörde angefordert werden kann."
+    notify_privacy_policy_changed:
+      subject: "Datenschutzerklärung aktualisiert"
+      body:
+        content_html: "<p>Wir möchten Sie darüber informieren, dass wir unsere Datenschutzrichtlinie gerade aktualisiert haben.</p><p>Wir können unsere Datenschutzrichtlinien jederzeit ändern. Gesetzesgemäß erhalten Sie eine Benachrichtigung für jedes Update.</p><p>Durch den Zugriff auf oder die Nutzung unserer Dienste nach dem Update der Datenschutzrichtlinien gehen wir davon aus, dass Sie den Bedingungen einschließlich der Aktualisierungen zugestimmt haben.</p>"
+        link_to_policy: "Klicken Sie hier, um sich die Datenschutzerklärung anzusehen."
+    notify_admin_refund_created:
+      subject: "Eine Rückerstattung wurde durchgeführt"
+      body:
+        refund_created: "Eine Rückerstattung von %{AMOUNT} wurde auf die Rechnung %{INVOICE} des Benutzers %{USER} generiert"
+        download: "Hier klicken, um diese Erstattungsrechnung herunterzuladen"
+    notify_admins_role_update:
+      subject: "Die Rolle eines Benutzers hat sich geändert"
+      body:
+        user_role_changed_html: "Die Rolle des Benutzers <em><strong>%{NAME}</strong></em> hat sich geändert."
+        previous_role: "Vorherige Rolle:"
+        new_role: "Neue Rolle:"
+    notify_user_role_update:
+      subject: "Ihre Rolle hat sich geändert"
+      body:
+        role_changed_html: "Deine Rolle bei {GENDER, select, male{dem} female{der} neutral{} other{dem}} {NAME} hat sich geändert. Sie sind jetzt <strong>{ROLE}</strong>.<br/>Mit großer Macht kommt große Verantwortung, nutzen Sie Ihre neuen Privilegien fair und respektvoll."
+    notify_admin_members_stripe_sync:
+      subject: "Stripe-Synchronisation"
+      body:
+        members_sync: "Alle Mitglieder wurden erfolgreich auf Stripe synchronisiert."
+    shared:
+      hello: "Hallo %{user_name}"

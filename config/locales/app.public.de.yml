@@ -1,0 +1,449 @@
+de:
+  app:
+    public:
+      #header and "about" page
+      common:
+        about_the_fablab: "Über {GENDER, select, male{den} female{die} neutral{} other{das}} {NAME}"
+        return: "Zurück"
+        #cookies
+        cookies:
+          about_cookies: "Diese Website verwendet Cookies zur Reichweitenmessung."
+          learn_more: "Mehr erfahren"
+          accept: "Cookies akzeptieren"
+          decline: "Ablehnen"
+        #dashboard sections
+        dashboard: "Dashboard"
+        my_profile: "Mein Profil"
+        my_settings: "Persönliche Einstellungen"
+        my_projects: "Meine Projekte"
+        my_trainings: "Meine Trainings"
+        my_events: "Meine Veranstaltungen"
+        my_invoices: "Meine Rechnungen"
+        my_wallet: "Mein Guthaben"
+        #contextual help
+        help: "Hilfe"
+        #login/logout
+        sign_out: "Abmelden"
+        sign_up: "Registrieren"
+        sign_in: "Anmelden"
+        #left menu
+        notifications: "Mitteilungen"
+        admin: "Admin"
+        manager: "Manager"
+        reduce_panel: "Navigatiion reduzieren"
+        #left menu (public)
+        home: "Start"
+        reserve_a_machine: "Maschine reservieren"
+        trainings_registrations: "Schulungen - Anmeldung"
+        events_registrations: "Veranstaltungen - Anmeldung"
+        reserve_a_space: "Platz reservieren"
+        projects_gallery: "Projekt-Galerie"
+        subscriptions: "Abonnements"
+        public_calendar: "Kalender"
+        #left menu (admin)
+        trainings_monitoring: "Schulungen"
+        manage_the_calendar: "Kalender"
+        manage_the_users: "Benutzer"
+        manage_the_invoices: "Rechnungen"
+        subscriptions_and_prices: "Abonnements und Preise"
+        manage_the_events: "Veranstaltungen"
+        manage_the_machines: "Maschinen"
+        manage_the_spaces: "Räume"
+        projects: "Projekte"
+        statistics: "Statistiken"
+        customization: "Anpassung"
+        open_api_clients: "OpenAPI-Clients"
+        #account creation modal
+        create_your_account: "Eigenen Account erstellen"
+        man: "Männlich"
+        woman: "Weiblich"
+        gender_is_required: "Die Angabe des Geschlechts ist erforderlich."
+        your_first_name: "Dein Vorname"
+        first_name_is_required: "Der Vorname ist erforderlich."
+        your_surname: "Dein Nachname"
+        surname_is_required: "Nachname ist erforderlich."
+        your_pseudonym: "Dein Pseudonym"
+        pseudonym_is_required: "Pseudonym ist erforderlich."
+        your_email_address: "Deine E-Mail-Adresse"
+        email_is_required: "E-Mail-Adresse ist erforderlich."
+        your_password: "Passwort"
+        password_is_required: "Passwort ist erforderlich."
+        password_is_too_short: "Paßwort ist zu kurz (mindestens 8 Zeichen)"
+        type_your_password_again: "Passwort erneut eingeben"
+        password_confirmation_is_required: "Passwortbestätigung ist erforderlich."
+        password_does_not_match_with_confirmation: "Die beiden Passworteingaben sind nicht identisch."
+        i_am_an_organization: "Ich bin eine Organisation"
+        name_of_your_organization: "Geben Sie den Namen ihrer Organisation ein"
+        organization_name_is_required: "Name der Organisation ist erforderlich."
+        address_of_your_organization: "Adresse Ihrer Organisation"
+        organization_address_is_required: "Adresse der Organisation ist erforderlich."
+        your_user_s_profile: "Dein Benutzerprofil"
+        user_s_profile_is_required: "Benutzerprofil ist erforderlich."
+        birth_date: "Geburtsdatum"
+        birth_date_is_required: "Geburtsdatum ist erforderlich."
+        phone_number: "Telefonnummer"
+        phone_number_is_required: "Die Angabe der Telefonnummer ist erforderlich."
+        i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "Angemeldete Benutzer dürfen mich kontaktieren"
+        i_accept_to_receive_information_from_the_fablab: "Das Fablab darf mir Informationen schicken"
+        i_ve_read_and_i_accept_: "Ich habe gelesen und akzeptiere"
+        _the_fablab_policy: "die FabLab Richtlinie"
+        field_required: "Erforderliche Felder"
+        unexpected_error_occurred: "Ein unerwarteter Fehler ist aufgetreten. Bitte versuche es später erneut."
+        used_for_statistics: "Diese Daten werden für statistische Zwecke verwendet"
+        used_for_invoicing: "Diese Daten werden für Abrechnungszwecke verwendet"
+        used_for_reservation: "Diese Daten werden im Fall einer Buchungsänderung verwendet"
+        used_for_profile: "Diese Daten werden nur auf deinem Profil angezeigt"
+        public_profile: "Sie werden über ein öffentliches Profil verfügen, andere Nutzer können Sie in ihren Projekten einbinden"
+        you_will_receive_confirmation_instructions_by_email_detailed: "In wenigen Minuten wirst Du eine Email erhalten mit der du deine Anmeldung bestätigen kannst."
+        #password modification modal
+        change_your_password: "Passwort ändern"
+        your_new_password: "Ihr neues Passwort"
+        your_password_was_successfully_changed: "Ihr Passwort wurde erfolgreich geändert."
+        #connection modal
+        connection: "Anmelden"
+        password_forgotten: "Passwort vergessen?"
+        confirm_my_account: "E-mail bestätigen"
+        not_registered_to_the_fablab: "Nicht bei FabLab registriert?"
+        create_an_account: "Erstelle ein Konto"
+        wrong_email_or_password: "Falsche E-Mail Adresse oder Passwort."
+        caps_lock_is_on: "Feststelltaste ist aktiviert"
+        #confirmation modal
+        you_will_receive_confirmation_instructions_by_email: "Sie erhalten eine Bestätigungsanleitung per E-Mail."
+        #forgotten password modal
+        your_email_address_is_unknown: "Ihre E-Mail-Adresse ist unbekannt."
+        you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password: "Sie erhalten in Kürze eine E-Mail mit Anweisungen zum Zurücksetzen Ihres Passworts."
+        #Fab-manager's version
+        version: "Version:"
+        upgrade_fabmanager: "Fab-Manager aktualisieren"
+        current_version: "Sie verwenden derzeit Version {VERSION} von Fab-Manager."
+        upgrade_to: "Eine neue Version ist verfügbar. Sie können bis zu Version {VERSION} upgraden."
+        read_more: "Details dieser Version ansehen"
+        security_version_html: "<strong>Ihre aktuelle Version ist unsicher!</strong><br> Eine neue Version mit Sicherheitsupdates ist verfügbar. Aktualisieren Sie so bald wie möglich!"
+        how_to: "So können Sie upgraden"
+        #Notifications
+        and_NUMBER_other_notifications: "und {NUMBER, plural, one {} =0{keine weiteren Benachrichtigungen} =1{eine weitere Benachrichtigung} other{{NUMBER} weitere Benachrichtigungen}}..."
+      #about page
+      about:
+        read_the_fablab_policy: "Lesen Sie die FabLab-Richtlinie"
+        read_the_fablab_s_general_terms_and_conditions: "Lesen Sie die allgemeinen Geschäftsbedingungen des FabLabs"
+        your_fablab_s_contacts: "Ihre FabLab-Kontakte"
+        privacy_policy: "Datenschutzerklärung"
+      #'privacy policy' page
+      privacy:
+        title: "Datenschutzerklärung"
+        dpo: "Datenschutzbeauftragter"
+        last_update: "Letztes Update,"
+      #home page
+      home:
+        latest_documented_projects: "Die neuesten dokumentierten Projekte"
+        follow_us: "Folge uns"
+        latest_tweets: "Die neuesten Tweets"
+        latest_registered_members: "Neueste registrierte Mitglieder"
+        create_an_account: "Neues Konto einrichten"
+        discover_members: "Mitglieder entdecken"
+        #next events summary on the home page
+        fablab_s_next_events: "Fablab´s nächste Veranstaltungen"
+        every_events: "Alle Veranstaltungen"
+        from_date_to_date: "Von {START} bis {END}"
+        on_the_date: "Am {DATE}"
+        from_time_to_time: "Von {START} bis {END}"
+        without_reservation: "Ohne Reservierung"
+        free_admission: "Freier Zugang"
+        full_price: "Voller Preis: "
+        event_full: "Event ausgebucht"
+        still_available: "Verfügbare Plätze: "
+        all_day: "Ganztägig"
+      #projects gallery
+      projects_list:
+        the_fablab_projects: "Die Fab Lab-Projekte"
+        add_a_project: "Projekt hinzufügen"
+        search_over_the_whole_network: "Suche über das gesamte Fab-Manager-Netzwerk"
+        tooltip_openlab_projects_switch: "Mit der Suche über das gesamte Netzwerk können Sie die Projekte aller Fab-Manager durchsuchen, die diese Funktion nutzen!"
+        openlab_search_not_available_at_the_moment: "Suche über das gesamte Netzwerk ist derzeit nicht verfügbar. Sie können nach Projekten auf dieser Plattform suchen."
+        project_search_result_is_empty: "Leider haben wir keine Ergebnisse gefunden, die Ihren Suchkriterien entsprechen."
+        reset_all_filters: "Alle Filter zurücksetzen"
+        search: "Suche"
+        all_projects: "Alle Projekte"
+        my_projects: "Meine Projekte"
+        projects_to_whom_i_take_part_in: "Projekte, an denen ich beteiligt bin"
+        all_machines: "Alle Maschinen"
+        all_themes: "Alle Themen"
+        all_materials: "Alle Materialien"
+        load_next_projects: "Nächste Projekte laden"
+        rough_draft: "Grober Entwurf"
+      #details of a projet
+      projects_show:
+        rough_draft: "Entwurf"
+        project_description: "Projektbeschreibung"
+        by_name: "Von {NAME}"
+        step_N: "Schritt {INDEX}"
+        share_on_facebook: "Auf Facebook teilen"
+        share_on_twitter: "Auf Twitter teilen"
+        deleted_user: "Gelöschter Nutzer"
+        posted_on_: "Gepostet am"
+        CAD_file_to_download: "{COUNT, plural, one {} =0{Keine CAD-Dateien} =1{CAD-Datei zum Download} other{CAD-Dateien zum Download}}"
+        machines_and_materials: "Maschinen und Materialien"
+        collaborators: "Mitarbeitende"
+        licence: "Lizenz"
+        confirmation_required: "Bestätigung erforderlich"
+        report_an_abuse: "Missbrauch melden"
+        unauthorized_operation: "Unerlaubter Vorgang"
+        your_report_was_successful_thanks: "Deine Meldung wurde verschickt - vielen Dank."
+        an_error_occured_while_sending_your_report: "Beim Senden Ihrer Meldung trat ein Fehler auf."
+        your_first_name: "Ihr Vorname"
+        your_first_name_is_required: "Der Vorname ist erforderlich."
+        your_surname: "Ihr Nachname"
+        your_surname_is_required: "Der Nachname ist erforderlich."
+        your_email_address: "Ihre E-Mail-Adresse"
+        your_email_address_is_required: "Die E-Mail-Adresse ist erforderlich."
+        tell_us_why_this_looks_abusive: "Erklären Sie, warum das beleidigend wirkt"
+        message_is_required: "Nachricht erforderlich."
+        report: "Melden"
+        do_you_really_want_to_delete_this_project: "Wollen Sie dieses Projekt wirklich löschen?"
+      #list of machines
+      machines_list:
+        the_fablab_s_machines: "Die Maschinen des FabLabs"
+        add_a_machine: "Maschine hinzufügen"
+        new_availability: "Verfügbare Reservierungen"
+        book: "Buchen"
+        _or_the_: " oder die "
+        status_enabled: "Aktiviert"
+        status_disabled: "Deaktiviert"
+        status_all: "Alle"
+      #details of a machine
+      machines_show:
+        book_this_machine: "Diese Maschine buchen"
+        technical_specifications: "Technische Spezifikationen"
+        files_to_download: "Dateien zum Herunterladen"
+        projects_using_the_machine: "Projekte mit der Maschine"
+        _or_the_: " oder die "
+        confirmation_required: "Bestätigung erforderlich"
+        do_you_really_want_to_delete_this_machine: "Möchten Sie diese Maschine wirklich löschen?"
+        unauthorized_operation: "Unerlaubter Vorgang"
+        the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users: "Die Maschine kann nicht gelöscht werden, da sie bereits von einigen Benutzern reserviert ist."
+      #list of trainings
+      trainings_list:
+        book: "Buchen"
+        the_trainings: "Schulungen"
+      #details of a training
+      training_show:
+        book_this_training: "Diese Schulung buchen"
+        do_you_really_want_to_delete_this_training: "Möchten Sie diese Schulung wirklich löschen?"
+        unauthorized_operation: "Unerlaubter Vorgang"
+        confirmation_required: "Bestätigung erforderlich"
+        the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "Die Schulung kann nicht gelöscht werden, da sie bereits von einigen Benutzern gebucht ist."
+      #summary of the subscriptions
+      plans:
+        subscriptions: "Abonnements"
+        i_choose_that_plan: "Ich wähle dieses Abo"
+        i_subscribe_online: "Ich abonniere online"
+        i_already_subscribed: "Ich habe bereits abonniert"
+        more_information: "Weitere Informationen"
+        your_subscription_expires_on_the_DATE: "Ihr Abonnement läuft ab am {DATE}"
+        no_plans: "Für Ihre Gruppe sind keine Pläne verfügbar"
+        my_group: "Meine Gruppe"
+        his_group: "{GENDER, select, male{Seine} female{Ihre} other{Seine}} Gruppe"
+        he_wants_to_change_group: "{ROLE, select, member{Ich möchte} other{Der Benutzer möchte}} die Gruppe wechseln"
+        change_my_group: "Ändere {ROLE, select, member{meine} other{{GENDER, select, male{seine} female{ihre} other{seine}}}} Gruppe"
+        summary: "Zusammenfassung"
+        your_subscription_has_expired_on_the_DATE: "Ihr Abonnement ist am {DATE} abgelaufen"
+        subscription_price: "Abonnementspreis"
+        you_ve_just_selected_a_subscription_html: "Sie haben ein <strong>Abonnement</strong> ausgewählt:"
+        confirm_and_pay: "Bestätigen und bezahlen"
+        you_ve_just_payed_the_subscription_html: "Sie bezahlten das <strong>Abonnement</strong>:"
+        thank_you_your_subscription_is_successful: "Vielen Dank. Ihr Abonnement ist erfolgt!"
+        your_invoice_will_be_available_soon_from_your_dashboard: "Ihre Rechnung wird bald in Ihrem Dashboard verfügbar sein"
+        your_group_was_successfully_changed: "Ihre Gruppe wurde erfolgreich geändert."
+        the_user_s_group_was_successfully_changed: "Die Gruppe des Nutzers wurde erfolgreich geändert."
+        an_error_prevented_your_group_from_being_changed: "Ein Fehler verhinderte das Ändern Ihrer Gruppe."
+        an_error_prevented_to_change_the_user_s_group: "Fehler beim Ändern der Benutzergruppe."
+        an_error_occured_during_the_payment_process_please_try_again_later: "Beim Zahlungsvorgang ist ein Problem aufgetreten. Bitte versuchen Sie es später erneut."
+        subscription_confirmation: "Abonnementbestätigung"
+        here_is_the_NAME_subscription_summary: "Hier ist die Zusammenfassung des {NAME}-Abonnements:"
+        confirm_payment_of_html: "{ROLE, select, admin{Bezahlung vor Ort} other{Bezahlen}}: {AMOUNT}" #(contexte : validate a payment of $20,00)
+        online_payment_disabled: "Zahlung per Kreditkarte ist nicht möglich. Bitte kontaktieren Sie die FabLab Rezeption direkt."
+      #Fablab's events list
+      events_list:
+        the_fablab_s_events: "Veranstaltungen des Fablabs"
+        all_categories: "Alle Kategorien"
+        for_all: "Für alle"
+        sold_out: "Ausverkauft"
+        cancelled: "Storniert"
+        free_admission: "Freier Zugang"
+        still_available: "verfügbare Plätze"
+        without_reservation: "Ohne Reservierung"
+        add_an_event: "Veranstaltung hinzufügen"
+        load_the_next_events: "Die nächsten Events laden..."
+        full_price_: "Voller Preis:"
+        to_date: "bis" #eg. from 01/01 to 01/05
+        all_themes: "Alle Themen"
+      #details and booking of an event
+      events_show:
+        event_description: "Beschreibung"
+        downloadable_documents: "Herunterladbare Dokumente"
+        information_and_booking: "Information und Buchung"
+        dates: "Datum"
+        beginning: "Beginn:"
+        ending: "Endet:"
+        opening_hours: "Öffnungszeiten:"
+        all_day: "Ganztägig"
+        from_time: "Von" #eg. from 18:00 to 21:00
+        to_time: "bis" #eg. from 18:00 to 21:00
+        full_price_: "Voller Preis:"
+        tickets_still_availables: "noch verfügbare Tickets:"
+        sold_out: "Ausverkauft."
+        without_reservation: "Ohne Reservierung"
+        cancelled: "Storniert"
+        ticket: "{NUMBER, plural, one{Ticket} other{Tickets}}"
+        make_a_gift_of_this_reservation: "Diese Reservierung verschenken"
+        thank_you_your_payment_has_been_successfully_registered: "Vielen Dank. Ihre Zahlung wurde erfolgreich gebucht!"
+        you_can_find_your_reservation_s_details_on_your_: "Sie finden die Reservierungsdetails in Ihrem"
+        dashboard: "Dashboard"
+        you_booked_DATE: "Sie haben gebucht ({DATE}):"
+        canceled_reservation_SEATS: "Reservierung storniert ({SEATS} Plätze)"
+        book: "Buchen"
+        confirm_and_pay: "Bestätigen und bezahlen"
+        confirm_payment_of_html: "{ROLE, select, admin{Bezahlung vor Ort} other{Bezahlen}}: {AMOUNT}" #(contexte : validate a payment of $20,00)
+        online_payment_disabled: "Zahlung per Kreditkarte ist nicht möglich. Bitte kontaktieren Sie die FabLab Rezeption direkt."
+        please_select_a_member_first: "Bitte wählen Sie zuerst ein Mitglied"
+        change_the_reservation: "Reservierung ändern"
+        you_can_shift_this_reservation_on_the_following_slots: "Sie können diese Reservierung auf die folgenden Slots verschieben:"
+        confirmation_required: "Bestätigung erforderlich"
+        do_you_really_want_to_delete_this_event: "Möchten Sie diese Veranstaltung wirklich löschen?"
+        delete_recurring_event: "Sie sind dabei, eine wiederkehrende Veranstaltung zu löschen. Was möchten Sie tun?"
+        delete_this_event: "Nur diese Veranstaltung"
+        delete_this_and_next: "Diese Veranstaltung sowie die folgenden"
+        delete_all: "Alle Veranstaltungen"
+        event_successfully_deleted: "Veranstaltung erfolgreich gelöscht."
+        events_deleted: "Die Veranstaltung sowie {COUNT, plural, one {} =1{eine weitere} other{{COUNT} weitere}} wurden gelöscht"
+        unable_to_delete_the_event: "Das Ereignis kann nicht gelöscht werden, es wurde möglicherweise von einem Mitglied gebucht"
+        events_not_deleted: "Von {TOTAL} Veranstaltungen {COUNT, plural, one {} =1{wurde eine nicht gelöscht} other{wurden {COUNT} nicht gelöscht}}. Möglicherweise {COUNT, plural, =1{ist sie} other{sind sie}} bereits reserviert."
+        cancel_the_reservation: "Reservierung stornieren"
+        do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "Möchten Sie diese Reservierung wirklich stornieren? Dies gilt für alle gebuchten Tickets."
+        reservation_was_successfully_cancelled: "Reservierung wurde erfolgreich storniert."
+        cancellation_failed: "Stornierung fehlgeschlagen."
+        event_is_over: "Die Veranstaltung ist vorbei."
+        thanks_for_coming: "Vielen Dank für Ihr Kommen!"
+        view_event_list: "Kommende Veranstaltungen anzeigen"
+        share_on_facebook: "Auf Facebook teilen"
+        share_on_twitter: "Auf Twitter teilen"
+      #public calendar
+      calendar:
+        calendar: "Kalender"
+        show_unavailables: "Nicht verfügbare Slots anzeigen"
+        filter_calendar: "Kalender filtern"
+        trainings: "Schulungen"
+        machines: "Maschinen"
+        spaces: "Räume"
+        events: "Veranstaltungen"
+        externals: "Andere Kalender"
+      #list of spaces
+      spaces_list:
+        the_spaces: "Die Räume"
+        new_availability: "Verfügbare Reservierungen"
+        add_a_space: "Raum hinzufügen"
+        status_enabled: "Aktiviert"
+        status_disabled: "Deaktiviert"
+        status_all: "Alle"
+        book: "Buchen"
+      #display the details of a space
+      space_show:
+        book_this_space: "Diesen Platz buchen"
+        unauthorized_operation: "Unerlaubter Vorgang"
+        confirmation_required: "Bestätigung erforderlich"
+        do_you_really_want_to_delete_this_space: "Wollen Sie diesen Raum wirklich löschen?"
+        the_space_cant_be_deleted_because_it_is_already_reserved_by_some_users: "Der Raum konnte nicht gelöscht werden, da er bereits von Nutzern reserviert wurde."
+        characteristics: "Eigenschaften"
+        files_to_download: "Dateien zum Herunterladen"
+        projects_using_the_space: "Projekte, die den Raum nutzen"
+      tour:
+        conclusion:
+          title: "Vielen Dank für Ihre Aufmerksamkeit"
+          content: "<p>Um diese kontextabhängige Hilfe neu zu starten, können Sie jederzeit <strong>F1</strong> drücken oder klicken Sie im Benutzermenu auf [? Hilfe].</p><p>Zusätzliche Hilfe finden Sie in der <a href='https://github.com/sleede/fab-manager/raw/master/doc/fr/guide_utilisation_fab_manager_v4.5.pdf' target='_blank'>Benutzeranleitung</a> (nur auf Französisch).</p><p>Das Fab-Manager-Team bietet auch personalisierten Support (Hilfe beim Einstieg, Hilfe bei der Installation, Anpassung etc.), <a href='mailto:contact@fab-manager.com'>kontaktieren Sie uns</a> für weitere Informationen.</p>"
+        welcome:
+          welcome:
+            title: "Willkommen bei Fab-Manager"
+            content: "Zum leichteren Einstieg in die Anwendung bieten wir eine schnelle Tour über die Funktionen."
+          home:
+            title: "Startseite"
+            content: "Wenn Du hier klickst, kommst du zurück zur Homepage, auf der du dich gerade befindest."
+          machines:
+            title: "Maschinen"
+            content: "<p>Auf dieser Seite können Sie die Liste aller Maschinen einsehen und einen Slot im Namen eines Mitglieds reservieren.</p><p>Eine Maschine kann zum Beispiel ein 3D-Drucker sein.</p><p>Mitglieder können auch auf diese Seite zugreifen und eine Maschine selbst reservieren wenn Kreditkartenzahlung aktiviert ist, oder wenn einige Preise gleich 0 sind.</p>"
+          trainings:
+            title: "Schulungen"
+            content: "<p>Auf dieser Seite können Sie die Liste aller Schulungen einsehen und ein Mitglied für eine Schulung registrieren.</p><p>Trainings können als Voraussetzungen gesetzt werden, bevor die Reservierung bestimmter Maschinen erlaubt wird.</p><p>Mitglieder können auch auf diese Seite zugreifen und sich für eine Schulung registrieren wenn Kreditkartenzahlung aktiviert ist, oder wenn einige Preise gleich 0 sind.</p>"
+          spaces:
+            title: "Räume"
+            content: "<p>Auf dieser Seite können Sie die Liste aller verfügbaren Räume einsehen und einen Slot im Namen eines Mitglieds reservieren.</p><p>Ein Raum kann beispielsweise ein Meetingraum oder eine Holzwerkstatt sein.</p><p>Die Besonderheit von Räumen ist, dass sie von mehreren Mitgliedern gleichzeitig gebucht werden können. </p><p>Mitglieder können auf diese Seite zugreifen und selbst eine Maschine reservieren, wenn Kreditkartenzahlung aktiviert ist oder wenn einige Preise gleich 0 sind.</p>"
+          events:
+            title: "Veranstaltungen"
+            content: "<p>Ein Tag der offenen Tür oder ein Kurzworkshop zum Schreibtischlampenbau? Hier drüben!</p><p>Veranstaltungen können gratis oder kostenpflichtig (mit Möglichkeit zur Preisstaffelung) sein, frei zugänglich oder reservierungspflichtig.</p><p>Auch hier haben Mitglieder Seitenzugriff und können Plätze für kostenlose Veranstaltungen buchen bzw. auch für eintrittspflichtige, wenn Kreditkartenzahlung aktiviert ist.</p>"
+          calendar:
+            title: "Terminübersicht"
+            content: "Visualisieren Sie auf einen Blick alles, was für die nächsten Wochen geplant ist (Veranstaltungen, Schulungen, Maschinen etc.)."
+          projects:
+            title: "Projekte"
+            content: "<p>Dokumentieren und teilen Sie Projekte mit der Community.</p><p>Wenn Sie OpenLab nutzen, haben SIe Zugriff auf die Projekte des gesamten Fab-Manager-Netzwerks. <a href='mailto:contact@fab-manager.com'>Kontaktieren Sie uns</a> für den kostenlosen Zugang!</p>"
+          plans:
+            title: "Abonnements"
+            content: "Abonnements bieten eine Möglichkeit, Ihre Preise zu segmentieren und Vorteile für regelmäßige Nutzer zu bieten."
+          admin:
+            title: "{ROLE} -Abschnitt"
+            content: "<p>Alle Elemente unterhalb sind nur für Administratoren und Manager zugänglich. Mit ihnen wird Fab-Manager verwaltet und konfiguriert.</p><p>Anklicken, um jeweils mehr zu erfahren.</p>"
+          about:
+            title: "Über"
+            content: "Eine Seite, die Sie vollständig anpassen können, um Aktivitäten und Struktur Ihres Fablabs darzustellen."
+          notifications:
+            title: "Mitteilungszentrale"
+            content: "<p>Jedes Mal, wenn etwas Wichtiges passiert (Reservierungen, Kontoerstellung, Aktivitäten der Mitglieder usw.), werden Sie hier benachrichtigt.</p><p>Auch Ihre Mitglieder erhalten dort Benachrichtigungen.</p>"
+          profile:
+            title: "Benutzermenü"
+            content: "<p>zugriff auf Ihre persönlichen Informationen sowie Ihre Aktivitäten auf Fab-Manager.</p><p>Dieser Bereich ist auch jeweils für die Mitglieder verfügbar.</p>"
+          news:
+            title: "Neuigkeiten"
+            content: "<p>In diesem Bereich können Sie Neuigkeiten anzeigen lassen.</p><p>Inhalte können Sie leicht unter « Anpassen », « Startseite » ändern.</p>"
+          last_projects:
+            title: "Letzte Projekte"
+            content: "<p>Dieses Karussell scrollt durch die neuesten von Ihren Mitgliedern dokumentierten Projekte.</p>"
+          last_tweet:
+            title: "Letzter Tweet"
+            content: "<p>Der letzte Tweet Ihres Tweeter-Feeds kann hier angezeigt werden.</p><p>Konfigurieren Sie ihn unter « Anpassen », « Startseite ».</p>"
+          last_members:
+            title: "Neueste Mitglieder"
+            content: "Hier werden die letzten registrierten Mitglieder angezeigt, die ihre Adresse validiert und dem Kontaktieren zugestimmt haben."
+          next_events:
+            title: "Kommende Veranstaltungen"
+            content: "Die nächsten drei geplanten Veranstaltungen werden in diesem Bereich angezeigt."
+          customize:
+            title: "Startseite anpassen"
+            content: "<p>Diese Seite kann vollständig personalisiert werden.</p><p>Sie können <a href='mailto:contact@fab-manager.com'>uns kontaktieren</a> um eine maßgeschneiderte Anpassung der Startseite vorzunehmen.</p>"
+          version:
+            title: "Programmversion"
+            content: "Bewegen Sie den Cursor über dieses Symbol, um die Version von Fab-Manager anzuzeigen. Wenn Sie nicht die aktuellste Version verwenden, wird das hier angezeigt. Per Klick erhalten Sie weitere Informationen."
+        machines:
+          welcome:
+            title: "Maschinen"
+            content: "<p>Maschinen sind die Werkzeuge, die Ihren Nutzern zur Verfügung stehen. Maschinen, die von den Mitgliedern reserviert werden können, müssen hier erstellt werden.</p><p>Sie können auch nicht buchbare oder frei verfügbare Maschinen anlegen, diesen sollten keine Verfügbarkeits-Slots zugewiesen werden.</p>"
+          welcome_manager:
+            title: "Maschinen"
+            content: "Maschinen sind die Werkzeuge, die von Nutzern reserviert werden können."
+          view:
+            title: "Ansicht"
+            content: "Um eine Maschine zu ändern oder zu löschen, klicken Sie bitte zuerst hier. Maschinen mit verknüpften Verfügbarkeits-Slots können nicht gelöscht, aber deaktiviert werden."
+          reserve:
+            title: "Reservieren"
+            content: "Klicken Sie hier, um zu einer Übersicht der freien Slots zu gelangen. Dort können Sie diese Maschine für einen Benutzer buchen und bestehende Reservierungen verwalten."
+        spaces:
+          welcome:
+            title: "Räume"
+            content: "<p>Räume sind Orte für deine Nutzer, beispielsweise ein Meetingraum oder eine Holzwerkstatt. Räume, die von Nutzern reserviert werden können, müssen hier angelegt werden.</p><p>Das Besondere an Räumen ist, dass sie von mehreren Benutzern gleichzeitig reserviert werden können.</p>"
+          welcome_manager:
+            title: "Räume"
+            content: "<p>Räume sind Orte, die von Nutzern reserviert werden können, beispielsweise ein Meetingraum oder eine Holzwerkstatt. </p><p>Das Besondere an Räumen ist, dass sie von mehreren Benutzern gleichzeitig reserviert werden können.</p>"
+          view:
+            title: "Ansicht"
+            content: "Um einer Raum zu ändern oder zu löschen, klicken Sie bitte zuerst hier. Räume mit verknüpften Verfügbarkeits-Slots können nicht gelöscht, aber deaktiviert werden."
+          reserve:
+            title: "Reservieren"
+            content: "Klicken Sie hier, um zu einer Übersicht der freien Slots zu gelangen. Dort können Sie diesen Raum für einen Benutzer buchen und bestehende Reservierungen verwalten."

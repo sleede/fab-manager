@@ -189,7 +189,7 @@ Rails.application.routes.draw do
         resources :trainings
         resources :user_trainings
         resources :reservations
-        resources :machines
+        resources :machines, only: %i[index create update show destroy]
         resources :bookable_machines
         resources :invoices do
           get :download, on: :member
