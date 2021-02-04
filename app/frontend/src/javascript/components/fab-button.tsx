@@ -29,7 +29,7 @@ export const FabButton: React.FC<FabButtonProps> = ({ onClick, icon, className, 
   }
 
   return (
-    <button onClick={handleClick} className={`fab-button ${className}`}>
+    <button onClick={handleClick} className={`fab-button ${className ? className : ''}`}>
       {hasIcon() && <span className="fab-button--icon">{icon}</span>}
       {children}
     </button>

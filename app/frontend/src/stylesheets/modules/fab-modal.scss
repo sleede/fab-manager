@@ -69,23 +69,7 @@
       border-top: 1px solid #e5e5e5;
 
       .modal-btn {
-        margin-bottom: 0;
-        margin-left: 5px;
-        display: inline-block;
-        font-weight: normal;
-        text-align: center;
-        white-space: nowrap;
-        vertical-align: middle;
-        touch-action: manipulation;
-        cursor: pointer;
-        background-image: none;
-        padding: 6px 12px;
-        font-size: 16px;
-        line-height: 1.5;
-        border-radius: 4px;
-
         &--close {
-          @extend .modal-btn;
           color: black;
           background-color: #fbfbfb;
           border: 1px solid #c9c9c9;
@@ -96,7 +80,7 @@
         }
 
         &--confirm {
-          @extend  .modal-btn;
+          margin-left: 0.5em;
         }
       }
     }

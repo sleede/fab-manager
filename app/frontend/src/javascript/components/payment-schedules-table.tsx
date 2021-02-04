@@ -2,7 +2,7 @@
  * This component shows a list of all payment schedules with their associated deadlines (aka. PaymentScheduleItem) and invoices
  */
 
-import React, { ReactEventHandler, useState } from 'react';
+import React, { ReactEventHandler, ReactNode, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Loader } from './loader';
 import moment from 'moment';
@@ -10,6 +10,8 @@ import { IFablab } from '../models/fablab';
 import _ from 'lodash';
 import { PaymentSchedule, PaymentScheduleItem, PaymentScheduleItemState } from '../models/payment-schedule';
 import { FabButton } from './fab-button';
+import { FabModal } from './fab-modal';
+import PaymentScheduleAPI from '../api/payment-schedule';
 
 declare var Fablab: IFablab;
 
@@ -21,13 +23,15 @@ interface PaymentSchedulesTableProps {
 const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ paymentSchedules, showCustomer }) => {
   const { t } = useTranslation('admin');
 
-  const [showExpanded, setShowExpanded] = useState({});
+  const [showExpanded, setShowExpanded] = useState<Map<number, boolean>>(new Map());
+  const [showConfirmCashing, setShowConfirmCashing] = useState<boolean>(false);
+  const [tempDeadline, setTempDeadline] = useState<PaymentScheduleItem>(null);
 
   /**
    * Check if the requested payment schedule is displayed with its deadlines (PaymentScheduleItem) or without them
    */
   const isExpanded = (paymentScheduleId: number): boolean => {
-    return showExpanded[paymentScheduleId];
+    return showExpanded.get(paymentScheduleId);
   }
 
   /**
@@ -71,9 +75,9 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
   const togglePaymentScheduleDetails = (paymentScheduleId: number): ReactEventHandler => {
     return (): void => {
       if (isExpanded(paymentScheduleId)) {
-        setShowExpanded(Object.assign({}, showExpanded, { [paymentScheduleId]: false }));
+        setShowExpanded((prev) => new Map(prev).set(paymentScheduleId, false));
       } else {
-        setShowExpanded(Object.assign({}, showExpanded, { [paymentScheduleId]: true }));
+        setShowExpanded((prev) => new Map(prev).set(paymentScheduleId, true));
       }
     }
   }
@@ -146,12 +150,40 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
 
   const handleConfirmCheckPayment = (item: PaymentScheduleItem): ReactEventHandler => {
     return (): void => {
-      /*
-       TODO
-         - display confirmation modal
-         - create /api/payment_schedule/item/confirm_check endpoint and post to it
-       */
+      setTempDeadline(item);
+      toggleConfirmCashingModal();
     }
+  }
+
+  const onCheckCashingConfirmed = (): void => {
+    const api = new PaymentScheduleAPI();
+    api.cashCheck(tempDeadline.id).then(res => {
+      // TODO refresh display
+    });
+    // TODO create /api/payment_schedule/item/confirm_check endpoint and post to it
+  }
+
+  /**
+   * Show/hide the modal dialog that enable to confirm the cashing of the check for a given deadline.
+   */
+  const toggleConfirmCashingModal = (): void => {
+    setShowConfirmCashing(!showConfirmCashing);
+  }
+
+  /**
+   * Dynamically build the content of the modal depending on the currently selected deadline
+   */
+  const cashingModalContent = (): ReactNode => {
+    if (tempDeadline) {
+      return (
+        <span>{t('app.admin.invoices.schedules_table.confirm_check_cashing_body', {
+          AMOUNT: formatPrice(tempDeadline.amount),
+          DATE: formatDate(tempDeadline.due_date)
+        })}</span>
+      );
+    }
+
+    return <span />;
   }
 
   const handleSolveAction = (item: PaymentScheduleItem): ReactEventHandler => {
@@ -239,6 +271,16 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
         </tr>)}
         </tbody>
       </table>
+      <div className="modals">
+        <FabModal title={t('app.admin.invoices.schedules_table.confirm_check_cashing')}
+                  isOpen={showConfirmCashing}
+                  toggleModal={toggleConfirmCashingModal}
+                  onConfirm={onCheckCashingConfirmed}
+                  closeButton={true}
+                  confirmButton={t('app.admin.invoices.schedules_table.confirm_button')}>
+          {cashingModalContent()}
+        </FabModal>
+      </div>
     </div>
   );
 };
