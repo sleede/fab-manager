@@ -9,6 +9,7 @@ import moment from 'moment';
 import { IFablab } from '../models/fablab';
 import _ from 'lodash';
 import { PaymentSchedule, PaymentScheduleItem, PaymentScheduleItemState } from '../models/payment-schedule';
+import { FabButton } from './fab-button';
 
 declare var Fablab: IFablab;
 
@@ -119,24 +120,24 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
         return downloadButton(TargetType.Invoice, item.invoice_id);
       case PaymentScheduleItemState.Pending:
         return (
-          <button className="action-button" onClick={handleConfirmCheckPayment(item)}>
-            <i className="fas fa-money-check" />
+          <FabButton onClick={handleConfirmCheckPayment(item)}
+                     icon={<i className="fas fa-money-check" />}>
             {t('app.admin.invoices.schedules_table.confirm_payment')}
-          </button>
+          </FabButton>
         );
       case PaymentScheduleItemState.RequireAction:
         return (
-          <button className="action-button" onClick={handleSolveAction(item)}>
-            <i className="fas fa-wrench" />
+          <FabButton onClick={handleSolveAction(item)}
+                     icon={<i className="fas fa-wrench" />}>
             {t('app.admin.invoices.schedules_table.solve')}
-          </button>
+          </FabButton>
         );
       case PaymentScheduleItemState.RequirePaymentMethod:
         return (
-          <button className="action-button" onClick={handleUpdateCard(item)}>
-            <i className="fas fa-credit-card" />
+          <FabButton onClick={handleUpdateCard(item)}
+                     icon={<i className="fas fa-credit-card" />}>
             {t('app.admin.invoices.schedules_table.update_card')}
-          </button>
+          </FabButton>
         );
       default:
         return <span />

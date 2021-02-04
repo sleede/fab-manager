@@ -642,6 +642,8 @@ fr:
           stripe_currency: "Devise Stripe"
         payment_schedules:
           filter_schedules: "Filtrer les échéanciers"
+          no_payment_schedules: "Pas d'échéancier à afficher"
+          load_more: "Voir plus"
         schedules_table:
           schedule_num: "Échéancier n°"
           date: "Date"
