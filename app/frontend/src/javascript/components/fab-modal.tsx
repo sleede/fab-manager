@@ -2,12 +2,13 @@
  * This component is a template for a modal dialog that wraps the application style
  */
 
-import React, { ReactNode } from 'react';
+import React, { ReactNode, SyntheticEvent } from 'react';
 import Modal from 'react-modal';
 import { useTranslation } from 'react-i18next';
 import { Loader } from './loader';
 import CustomAssetAPI from '../api/custom-asset';
 import { CustomAssetName } from '../models/custom-asset';
+import { FabButton } from './fab-button';
 
 Modal.setAppElement('body');
 
@@ -25,12 +26,13 @@ interface FabModalProps {
   closeButton?: boolean,
   className?: string,
   width?: ModalSize,
-  customFooter?: ReactNode
+  customFooter?: ReactNode,
+  onConfirm?: (event: SyntheticEvent) => void
 }
 
 const blackLogoFile = CustomAssetAPI.get(CustomAssetName.LogoBlackFile);
 
-export const FabModal: React.FC<FabModalProps> = ({ title, isOpen, toggleModal, children, confirmButton, className, width = 'sm', closeButton, customFooter }) => {
+export const FabModal: React.FC<FabModalProps> = ({ title, isOpen, toggleModal, children, confirmButton, className, width = 'sm', closeButton, customFooter, onConfirm }) => {
   const { t } = useTranslation('shared');
   const blackLogo = blackLogoFile.read();
 
@@ -56,7 +58,7 @@ export const FabModal: React.FC<FabModalProps> = ({ title, isOpen, toggleModal, 
   }
 
   return (
-    <Modal isOpen={isOpen}
+    <Modal isOpen={isOpen}onConfirm
            className={`fab-modal fab-modal-${width} ${className}`}
            overlayClassName="fab-modal-overlay"
            onRequestClose={toggleModal}>
@@ -73,8 +75,8 @@ export const FabModal: React.FC<FabModalProps> = ({ title, isOpen, toggleModal, 
       </div>
       <div className="fab-modal-footer">
         <Loader>
-          {hasCloseButton() &&<button className="modal-btn--close" onClick={toggleModal}>{t('app.shared.buttons.close')}</button>}
-          {hasConfirmButton() && <span className="modal-btn--confirm">{confirmButton}</span>}
+          {hasCloseButton() &&<FabButton className="modal-btn--close" onClick={toggleModal}>{t('app.shared.buttons.close')}</FabButton>}
+          {hasConfirmButton() && <FabButton className="modal-btn--confirm" onClick={onConfirm}>{confirmButton}</FabButton>}
           {hasCustomFooter() && customFooter}
         </Loader>
       </div>

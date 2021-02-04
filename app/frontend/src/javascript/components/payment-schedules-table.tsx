@@ -2,31 +2,37 @@
  * This component shows a list of all payment schedules with their associated deadlines (aka. PaymentScheduleItem) and invoices
  */
 
-import React, { ReactEventHandler, useState } from 'react';
+import React, { ReactEventHandler, ReactNode, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Loader } from './loader';
 import moment from 'moment';
 import { IFablab } from '../models/fablab';
 import _ from 'lodash';
 import { PaymentSchedule, PaymentScheduleItem, PaymentScheduleItemState } from '../models/payment-schedule';
+import { FabButton } from './fab-button';
+import { FabModal } from './fab-modal';
+import PaymentScheduleAPI from '../api/payment-schedule';
 
 declare var Fablab: IFablab;
 
 interface PaymentSchedulesTableProps {
   paymentSchedules: Array<PaymentSchedule>,
-  showCustomer?: boolean
+  showCustomer?: boolean,
+  refreshList: () => void
 }
 
-const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ paymentSchedules, showCustomer }) => {
+const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ paymentSchedules, showCustomer, refreshList }) => {
   const { t } = useTranslation('admin');
 
-  const [showExpanded, setShowExpanded] = useState({});
+  const [showExpanded, setShowExpanded] = useState<Map<number, boolean>>(new Map());
+  const [showConfirmCashing, setShowConfirmCashing] = useState<boolean>(false);
+  const [tempDeadline, setTempDeadline] = useState<PaymentScheduleItem>(null);
 
   /**
    * Check if the requested payment schedule is displayed with its deadlines (PaymentScheduleItem) or without them
    */
   const isExpanded = (paymentScheduleId: number): boolean => {
-    return showExpanded[paymentScheduleId];
+    return showExpanded.get(paymentScheduleId);
   }
 
   /**
@@ -70,9 +76,9 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
   const togglePaymentScheduleDetails = (paymentScheduleId: number): ReactEventHandler => {
     return (): void => {
       if (isExpanded(paymentScheduleId)) {
-        setShowExpanded(Object.assign({}, showExpanded, { [paymentScheduleId]: false }));
+        setShowExpanded((prev) => new Map(prev).set(paymentScheduleId, false));
       } else {
-        setShowExpanded(Object.assign({}, showExpanded, { [paymentScheduleId]: true }));
+        setShowExpanded((prev) => new Map(prev).set(paymentScheduleId, true));
       }
     }
   }
@@ -119,24 +125,24 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
         return downloadButton(TargetType.Invoice, item.invoice_id);
       case PaymentScheduleItemState.Pending:
         return (
-          <button className="action-button" onClick={handleConfirmCheckPayment(item)}>
-            <i className="fas fa-money-check" />
+          <FabButton onClick={handleConfirmCheckPayment(item)}
+                     icon={<i className="fas fa-money-check" />}>
             {t('app.admin.invoices.schedules_table.confirm_payment')}
-          </button>
+          </FabButton>
         );
       case PaymentScheduleItemState.RequireAction:
         return (
-          <button className="action-button" onClick={handleSolveAction(item)}>
-            <i className="fas fa-wrench" />
+          <FabButton onClick={handleSolveAction(item)}
+                     icon={<i className="fas fa-wrench" />}>
             {t('app.admin.invoices.schedules_table.solve')}
-          </button>
+          </FabButton>
         );
       case PaymentScheduleItemState.RequirePaymentMethod:
         return (
-          <button className="action-button" onClick={handleUpdateCard(item)}>
-            <i className="fas fa-credit-card" />
+          <FabButton onClick={handleUpdateCard(item)}
+                     icon={<i className="fas fa-credit-card" />}>
             {t('app.admin.invoices.schedules_table.update_card')}
-          </button>
+          </FabButton>
         );
       default:
         return <span />
@@ -145,12 +151,40 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
 
   const handleConfirmCheckPayment = (item: PaymentScheduleItem): ReactEventHandler => {
     return (): void => {
-      /*
-       TODO
-         - display confirmation modal
-         - create /api/payment_schedule/item/confirm_check endpoint and post to it
-       */
+      setTempDeadline(item);
+      toggleConfirmCashingModal();
     }
+  }
+
+  const onCheckCashingConfirmed = (): void => {
+    const api = new PaymentScheduleAPI();
+    api.cashCheck(tempDeadline.id).then(() => {
+      refreshList();
+      toggleConfirmCashingModal();
+    });
+  }
+
+  /**
+   * Show/hide the modal dialog that enable to confirm the cashing of the check for a given deadline.
+   */
+  const toggleConfirmCashingModal = (): void => {
+    setShowConfirmCashing(!showConfirmCashing);
+  }
+
+  /**
+   * Dynamically build the content of the modal depending on the currently selected deadline
+   */
+  const cashingModalContent = (): ReactNode => {
+    if (tempDeadline) {
+      return (
+        <span>{t('app.admin.invoices.schedules_table.confirm_check_cashing_body', {
+          AMOUNT: formatPrice(tempDeadline.amount),
+          DATE: formatDate(tempDeadline.due_date)
+        })}</span>
+      );
+    }
+
+    return <span />;
   }
 
   const handleSolveAction = (item: PaymentScheduleItem): ReactEventHandler => {
@@ -238,16 +272,26 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
         </tr>)}
         </tbody>
       </table>
+      <div className="modals">
+        <FabModal title={t('app.admin.invoices.schedules_table.confirm_check_cashing')}
+                  isOpen={showConfirmCashing}
+                  toggleModal={toggleConfirmCashingModal}
+                  onConfirm={onCheckCashingConfirmed}
+                  closeButton={true}
+                  confirmButton={t('app.admin.invoices.schedules_table.confirm_button')}>
+          {cashingModalContent()}
+        </FabModal>
+      </div>
     </div>
   );
 };
 PaymentSchedulesTableComponent.defaultProps = { showCustomer: false };
 
 
-export const PaymentSchedulesTable: React.FC<PaymentSchedulesTableProps> = ({ paymentSchedules, showCustomer }) => {
+export const PaymentSchedulesTable: React.FC<PaymentSchedulesTableProps> = ({ paymentSchedules, showCustomer, refreshList }) => {
   return (
     <Loader>
-      <PaymentSchedulesTableComponent paymentSchedules={paymentSchedules} showCustomer={showCustomer} />
+      <PaymentSchedulesTableComponent paymentSchedules={paymentSchedules} showCustomer={showCustomer} refreshList={refreshList} />
     </Loader>
   );
 }

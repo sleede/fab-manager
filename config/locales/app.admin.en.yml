@@ -642,6 +642,8 @@ en:
           stripe_currency: "Stripe currency"
         payment_schedules:
           filter_schedules: "Filter schedules"
+          no_payment_schedules: "No payment schedules to display"
+          load_more: "Load more"
         schedules_table:
           schedule_num: "Schedule #"
           date: "Date"
@@ -662,6 +664,9 @@ en:
           confirm_payment: "Confirm payment"
           solve: "Solve"
           update_card: "Update the card"
+          confirm_check_cashing: "Confirm the cashing of the check"
+          confirm_check_cashing_body: "You must cash a check of {AMOUNT} for the deadline of {DATE}. By confirming the cashing of the check, an invoice will be generated for this due date."
+          confirm_button: "Confirm"
         document_filters:
           reference: "Reference"
           customer: "Customer"

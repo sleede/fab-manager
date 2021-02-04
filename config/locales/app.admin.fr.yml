@@ -642,6 +642,8 @@ fr:
           stripe_currency: "Devise Stripe"
         payment_schedules:
           filter_schedules: "Filtrer les échéanciers"
+          no_payment_schedules: "Pas d'échéancier à afficher"
+          load_more: "Voir plus"
         schedules_table:
           schedule_num: "Échéancier n°"
           date: "Date"
@@ -662,6 +664,9 @@ fr:
           confirm_payment: "Confirmer l'encaissement"
           solve: "Résoudre"
           update_card: "Mettre à jour la carte"
+          confirm_check_cashing: "Confirmer l'encaissement du chèque"
+          confirm_check_cashing_body: "Vous devez encaisser un chèque de {AMOUNT} pour l'échéance du {DATE}. En confirmant l'encaissement du chèque, une facture sera générée pour cette échéance."
+          confirm_button: "Confirmer"
         document_filters:
           reference: "Référence"
           customer: "Client"
