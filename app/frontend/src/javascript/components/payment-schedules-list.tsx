@@ -54,6 +54,16 @@ const PaymentSchedulesList: React.FC = () => {
   }
 
   /**
+   * Reload from te API all the currently displayed payment schedules
+   */
+  const handleRefreshList = (): void => {
+    const api = new PaymentScheduleAPI();
+    api.list({ query: { reference: referenceFilter, customer: customerFilter, date: dateFilter, page: 1, size: PAGE_SIZE * pageNumber }}).then((res) => {
+      setPaymentSchedules(res);
+    });
+  }
+
+  /**
    * Check if the current collection of payment schedules is empty or not.
    */
   const hasSchedules = (): boolean => {
@@ -78,7 +88,7 @@ const PaymentSchedulesList: React.FC = () => {
       </div>
       {!hasSchedules() && <div>{t('app.admin.invoices.payment_schedules.no_payment_schedules')}</div>}
       {hasSchedules() && <div className="schedules-list">
-        <PaymentSchedulesTable paymentSchedules={paymentSchedules} showCustomer={true} />
+        <PaymentSchedulesTable paymentSchedules={paymentSchedules} showCustomer={true} refreshList={handleRefreshList} />
         {hasMoreSchedules() && <FabButton className="load-more" onClick={handleLoadMore}>{t('app.admin.invoices.payment_schedules.load_more')}</FabButton>}
       </div>}
     </div>

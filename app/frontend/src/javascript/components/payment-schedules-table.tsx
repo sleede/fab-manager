@@ -17,10 +17,11 @@ declare var Fablab: IFablab;
 
 interface PaymentSchedulesTableProps {
   paymentSchedules: Array<PaymentSchedule>,
-  showCustomer?: boolean
+  showCustomer?: boolean,
+  refreshList: () => void
 }
 
-const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ paymentSchedules, showCustomer }) => {
+const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ paymentSchedules, showCustomer, refreshList }) => {
   const { t } = useTranslation('admin');
 
   const [showExpanded, setShowExpanded] = useState<Map<number, boolean>>(new Map());
@@ -157,10 +158,10 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
 
   const onCheckCashingConfirmed = (): void => {
     const api = new PaymentScheduleAPI();
-    api.cashCheck(tempDeadline.id).then(res => {
-      // TODO refresh display
+    api.cashCheck(tempDeadline.id).then(() => {
+      refreshList();
+      toggleConfirmCashingModal();
     });
-    // TODO create /api/payment_schedule/item/confirm_check endpoint and post to it
   }
 
   /**
@@ -287,10 +288,10 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
 PaymentSchedulesTableComponent.defaultProps = { showCustomer: false };
 
 
-export const PaymentSchedulesTable: React.FC<PaymentSchedulesTableProps> = ({ paymentSchedules, showCustomer }) => {
+export const PaymentSchedulesTable: React.FC<PaymentSchedulesTableProps> = ({ paymentSchedules, showCustomer, refreshList }) => {
   return (
     <Loader>
-      <PaymentSchedulesTableComponent paymentSchedules={paymentSchedules} showCustomer={showCustomer} />
+      <PaymentSchedulesTableComponent paymentSchedules={paymentSchedules} showCustomer={showCustomer} refreshList={refreshList} />
     </Loader>
   );
 }

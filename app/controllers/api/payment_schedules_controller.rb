@@ -4,6 +4,7 @@
 class API::PaymentSchedulesController < API::ApiController
   before_action :authenticate_user!
   before_action :set_payment_schedule, only: %i[download]
+  before_action :set_payment_schedule_item, only: %i[cash_check]
 
   def list
     authorize PaymentSchedule
@@ -25,9 +26,22 @@ class API::PaymentSchedulesController < API::ApiController
     send_file File.join(Rails.root, @payment_schedule.file), type: 'application/pdf', disposition: 'attachment'
   end
 
+  def cash_check
+    schedule = @payment_schedule_item.payment_schedule
+    authorize schedule
+    PaymentScheduleService.new.generate_invoice(@payment_schedule_item)
+    @payment_schedule_item.update_attributes(state: 'paid', payment_method: 'check')
+
+    render :show, status: :ok, location: schedule
+  end
+
   private
 
   def set_payment_schedule
     @payment_schedule = PaymentSchedule.find(params[:id])
+  end
+
+  def set_payment_schedule_item
+    @payment_schedule_item = PaymentScheduleItem.find(params[:id])
   end
 end

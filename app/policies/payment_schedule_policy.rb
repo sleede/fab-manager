@@ -6,6 +6,10 @@ class PaymentSchedulePolicy < ApplicationPolicy
     user.admin? || user.manager?
   end
 
+  def cash_check?
+    user.admin? || user.manager?
+  end
+
   def download?
     user.admin? || user.manager? || (record.invoicing_profile.user_id == user.id)
   end
