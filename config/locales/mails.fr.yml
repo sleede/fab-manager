@@ -294,17 +294,17 @@ fr:
         schedule_in_your_dashboard_html: "Vous pouvez à tout moment retrouver votre échéancier dans %{DASHBOARD} sur le site du Fab Lab."
         your_dashboard: "votre tableau de bord"
     notify_admin_payment_schedule_failed:
-      subject: "Échec du prélèvement par carte"
+      subject: "[URGENT] Échec du prélèvement par carte"
       body:
         remember: "Conformément à l'échéancier de paiement %{REFERENCE}, un prélèvement par carte de %{AMOUNT} était prévu le %{DATE}."
         error: "Malheureusement, ce prélèvement n'a pas pu être effectué correctement."
-        action: "Veuillez vous rendre au plus tôt dans votre interface de gestion des échéanciers pour régler le problème."
+        action: "Veuillez vous mettre en relation avec le membre au plus tôt, ainsi que vous rendre dans votre interface de gestion des échéanciers pour régler le problème. Au delà d'environ 24 heures, l'abonnement par carte bancaire sera annulé."
     notify_member_payment_schedule_failed:
-      subject: "Échec du prélèvement par carte"
+      subject: "[URGENT] Échec du prélèvement par carte"
       body:
         remember: "Conformément à votre échéancier de paiement %{REFERENCE}, un prélèvement par carte de %{AMOUNT} était prévu le %{DATE}."
         error: "Malheureusement, ce prélèvement n'a pas pu être effectué correctement."
-        action: "Veuillez prendre contact avec le gestionnaire de votre FabLab au plus tôt, faute de quoi votre abonnement risque d'être interrompu."
+        action: "Veuillez prendre contact avec le gestionnaire de votre FabLab sous 24 heures, faute de quoi votre abonnement risque d'être interrompu."
     notify_admin_payment_schedule_check_deadline:
       subject: "Échéance d'encaissement"
       body:
