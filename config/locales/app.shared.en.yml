@@ -474,3 +474,7 @@ en:
         what_to_do: "What do you want to do?"
         tour: "Start the feature tour"
         guide: "Open the user's manual"
+      # 2nd factor authentication for card payments
+      stripe_confirm:
+        pending: "Pending for action..."
+        success: "Thank you, your card setup is complete. The payment will be proceeded shortly."

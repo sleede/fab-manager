@@ -474,3 +474,7 @@ fr:
         what_to_do: "Que voulez-vous faire ?"
         tour: "Lancer la visite guidée"
         guide: "Ouvrir le manuel de l'utilisateur"
+      # 2nd factor authentication for card payments
+      stripe_confirm:
+        pending: "En attente de l'action ..."
+        success: "Merci, la configuration de votre carte est terminée. Le paiement sera effectué sous peu."

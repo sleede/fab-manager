@@ -4,7 +4,7 @@
 class API::PaymentSchedulesController < API::ApiController
   before_action :authenticate_user!
   before_action :set_payment_schedule, only: %i[download]
-  before_action :set_payment_schedule_item, only: %i[cash_check]
+  before_action :set_payment_schedule_item, only: %i[cash_check refresh_item]
 
   def list
     authorize PaymentSchedule
@@ -27,12 +27,19 @@ class API::PaymentSchedulesController < API::ApiController
   end
 
   def cash_check
-    schedule = @payment_schedule_item.payment_schedule
-    authorize schedule
+    authorize @payment_schedule_item.payment_schedule
     PaymentScheduleService.new.generate_invoice(@payment_schedule_item)
-    @payment_schedule_item.update_attributes(state: 'paid', payment_method: 'check')
+    attrs = { state: 'paid', payment_method: 'check' }
+    @payment_schedule_item.update_attributes(attrs)
 
-    render :show, status: :ok, location: schedule
+    render json: attrs, status: :ok
+  end
+
+  def refresh_item
+    authorize @payment_schedule_item.payment_schedule
+    PaymentScheduleItemWorker.new.perform(params[:id])
+
+    render json: { state: 'refreshed' }, status: :ok
   end
 
   private

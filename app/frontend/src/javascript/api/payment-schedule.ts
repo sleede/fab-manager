@@ -1,6 +1,10 @@
 import apiClient from './api-client';
 import { AxiosResponse } from 'axios';
-import { PaymentSchedule, PaymentScheduleIndexRequest, PaymentScheduleItem } from '../models/payment-schedule';
+import {
+  CashCheckResponse,
+  PaymentSchedule,
+  PaymentScheduleIndexRequest,
+} from '../models/payment-schedule';
 import wrapPromise, { IWrapPromise } from '../lib/wrap-promise';
 
 export default class PaymentScheduleAPI {
@@ -9,8 +13,13 @@ export default class PaymentScheduleAPI {
     return res?.data;
   }
 
-  async cashCheck(paymentScheduleItemId: number) {
+  async cashCheck(paymentScheduleItemId: number): Promise<CashCheckResponse> {
     const res: AxiosResponse = await apiClient.post(`/api/payment_schedules/items/${paymentScheduleItemId}/cash_check`);
+    return res?.data;
+  }
+
+  async refreshItem(paymentScheduleItemId: number): Promise<void> {
+    const res: AxiosResponse = await apiClient.post(`/api/payment_schedules/items/${paymentScheduleItemId}/refresh_item`);
     return res?.data;
   }
 

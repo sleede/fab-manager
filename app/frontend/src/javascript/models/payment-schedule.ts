@@ -21,8 +21,10 @@ export interface PaymentScheduleItem {
   client_secret?: string,
   details: {
     recurring: number,
-    adjustment: number,
-    other_items: number
+    adjustment?: number,
+    other_items?: number,
+    without_coupon?: number,
+    subscription_id: number
   }
 }
 
@@ -57,4 +59,9 @@ export interface PaymentScheduleIndexRequest {
     page: number,
     size: number
   }
+}
+
+export interface CashCheckResponse {
+  state: PaymentScheduleItemState,
+  payment_method: PaymentMethod
 }

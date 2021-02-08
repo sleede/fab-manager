@@ -8,10 +8,11 @@ interface FabButtonProps {
   onClick?: (event: SyntheticEvent) => void,
   icon?: ReactNode,
   className?: string,
+  disabled?: boolean,
 }
 
 
-export const FabButton: React.FC<FabButtonProps> = ({ onClick, icon, className, children }) => {
+export const FabButton: React.FC<FabButtonProps> = ({ onClick, icon, className, disabled, children }) => {
   /**
    * Check if the current component was provided an icon to display
    */
@@ -29,7 +30,7 @@ export const FabButton: React.FC<FabButtonProps> = ({ onClick, icon, className, 
   }
 
   return (
-    <button onClick={handleClick} className={`fab-button ${className ? className : ''}`}>
+    <button onClick={handleClick} disabled={disabled} className={`fab-button ${className ? className : ''}`}>
       {hasIcon() && <span className="fab-button--icon">{icon}</span>}
       {children}
     </button>

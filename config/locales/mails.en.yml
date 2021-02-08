@@ -272,6 +272,7 @@ en:
       subject: "A refund has been generated"
       body:
         refund_created: "A refund of %{AMOUNT} has been generated on invoice %{INVOICE} of user %{USER}"
+        wallet_refund_created: "A refund of %{AMOUNT} has been generated for the credit of the wallet of user %{USER}"
         download: "Click here to download this refund invoice"
     notify_admins_role_update:
       subject: "The role of a user has changed"
@@ -294,17 +295,18 @@ en:
         schedule_in_your_dashboard_html: "You can find this payment schedule at any time from %{DASHBOARD} on the Fab Lab's website."
         your_dashboard: "your dashboard"
     notify_admin_payment_schedule_failed:
-      subject: "Card debit failure"
+      subject: "[URGENT] Card debit failure"
       body:
         remember: "In accordance with the %{REFERENCE} payment schedule, a debit by card of %{AMOUNT} was scheduled on %{DATE}."
         error: "Unfortunately, this card debit was unable to complete successfully."
-        action: "Please go to your payment schedule management interface as soon as possible to resolve the problem."
+        action: "Please contact the member as soon as possible, then go to the payment schedule management interface to resolve the problem. After about 24 hours, the card subscription will be cancelled."
     notify_member_payment_schedule_failed:
-      subject: "Card debit failure"
+      subject: "[URGENT] Card debit failure"
       body:
         remember: "In accordance with your %{REFERENCE} payment schedule, a debit by card of %{AMOUNT} was scheduled on %{DATE}."
         error: "Unfortunately, this card debit was unable to complete successfully."
-        action: "Please contact the manager of your FabLab as soon as possible, otherwise your subscription may be interrupted."
+        action: "Please check %{DASHBOARD} or contact a manager before 24 hours, otherwise your subscription may be interrupted."
+        your_dashboard: "your dashboard"
     notify_admin_payment_schedule_check_deadline:
       subject: "Payment deadline"
       body:

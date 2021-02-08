@@ -667,6 +667,8 @@ fr:
           confirm_check_cashing: "Confirmer l'encaissement du chèque"
           confirm_check_cashing_body: "Vous devez encaisser un chèque de {AMOUNT} pour l'échéance du {DATE}. En confirmant l'encaissement du chèque, une facture sera générée pour cette échéance."
           confirm_button: "Confirmer"
+          resolve_action: "Résoudre l'action"
+          ok_button: "OK"
         document_filters:
           reference: "Référence"
           customer: "Client"

@@ -142,7 +142,7 @@ class PaymentScheduleService
 
   ##
   # The first PaymentScheduleItem contains references to the reservation price (if any) and to the adjustement price
-  # for the subscription (if any)
+  # for the subscription (if any) and the wallet transaction (if any)
   ##
   def complete_first_invoice(payment_schedule_item, invoice)
     # sub-prices for the subscription and the reservation
@@ -156,6 +156,10 @@ class PaymentScheduleService
       details[:reservation] = payment_schedule_item.details['other_items']
       reservation = payment_schedule_item.payment_schedule.scheduled
     end
+
+    # the wallet transaction
+    invoice[:wallet_amount] = payment_schedule_item.payment_schedule.wallet_amount
+    invoice[:wallet_transaction_id] = payment_schedule_item.payment_schedule.wallet_transaction_id
 
     # build the invoice items
     generate_invoice_items(invoice, details, subscription: subscription, reservation: reservation)

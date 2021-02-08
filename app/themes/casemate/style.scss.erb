@@ -4,6 +4,7 @@ $primary-dark: <%= Stylesheet.primary_dark %> !default;
 
 $secondary: <%= Stylesheet.secondary %> !default;
 $secondary-light: <%= Stylesheet.secondary_light %> !default;
+$secondary-lighter: lighten(<%= Stylesheet.secondary_light %>, 20%) !default;
 $secondary-dark: <%= Stylesheet.secondary_dark %> !default;
 
 $primary-text-color: <%= Stylesheet.primary_text_color %> !default;
@@ -320,9 +321,21 @@ section#cookies-modal div.cookies-consent .cookies-actions button.accept {
       }
 
       &:hover {
-        background-color: $secondary-dark !important;
-        border-color: $secondary-dark !important;
+        background-color: $secondary-dark;
+        border-color: $secondary-dark;
         color: $secondary-text-color;
+      }
+
+      &[disabled] {
+        background-color: $secondary-light;
+        color: $secondary-lighter;
+        border-color: $secondary-lighter;
+      }
+
+      &[disabled]:hover {
+        background-color: $secondary-light;
+        color: $secondary-lighter;
+        border-color: $secondary-lighter;
       }
     }
   }
