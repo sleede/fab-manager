@@ -2,6 +2,8 @@
 
 ## Next release
 
+- Fix a bug: unable to configure the app to use a german locale
+
 ## v4.6.6 2021 February 02
 - Full German translation (thanks to [@korrupt](https://crowdin.com/profile/korrupt))
 - OpenAPI endpoints to create/update/show/delete machines
