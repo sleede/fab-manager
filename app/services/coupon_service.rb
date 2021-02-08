@@ -25,7 +25,7 @@ class CouponService
     unless coupon_object.nil?
       if coupon_object.status(user_id, total) == 'active'
         if coupon_object.type == 'percent_off'
-          price -= price * coupon_object.percent_off / 100.00
+          price -= (price * coupon_object.percent_off / 100.00).truncate
         elsif coupon_object.type == 'amount_off'
           # do not apply cash coupon unless it has a lower amount that the total price
           price -= coupon_object.amount_off if coupon_object.amount_off <= price
