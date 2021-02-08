@@ -27,12 +27,12 @@ class API::PaymentSchedulesController < API::ApiController
   end
 
   def cash_check
-    schedule = @payment_schedule_item.payment_schedule
-    authorize schedule
+    authorize @payment_schedule_item.payment_schedule
     PaymentScheduleService.new.generate_invoice(@payment_schedule_item)
-    @payment_schedule_item.update_attributes(state: 'paid', payment_method: 'check')
+    attrs = { state: 'paid', payment_method: 'check' }
+    @payment_schedule_item.update_attributes(attrs)
 
-    render :show, status: :ok, location: schedule
+    render json: attrs, status: :ok
   end
 
   private

@@ -158,9 +158,11 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
 
   const onCheckCashingConfirmed = (): void => {
     const api = new PaymentScheduleAPI();
-    api.cashCheck(tempDeadline.id).then(() => {
-      refreshList();
-      toggleConfirmCashingModal();
+    api.cashCheck(tempDeadline.id).then((res) => {
+      if (res.state === PaymentScheduleItemState.Paid) {
+        refreshList();
+        toggleConfirmCashingModal();
+      }
     });
   }
 

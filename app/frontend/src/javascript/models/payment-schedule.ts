@@ -58,3 +58,8 @@ export interface PaymentScheduleIndexRequest {
     size: number
   }
 }
+
+export interface CashCheckResponse {
+  state: PaymentScheduleItemState,
+  payment_method: PaymentMethod
+}
