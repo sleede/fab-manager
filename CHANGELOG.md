@@ -10,6 +10,7 @@
 - Fix a bug: warning message overflow in credit wallet modal
 - Fix a bug: when using a cash coupon, the amount shown in the statistics is invalid
 - Fix a bug: unable to create a coupon on stripe
+- Fix a bug: no notifications for refunds generated on wallet credit 
 - [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
 - [TODO DEPLOY] `rails fablab:stripe:set_product_id`
 - [TODO DEPLOY] `rails fablab:setup:add_schedule_reference`

@@ -272,6 +272,7 @@ fr:
       subject: "Un avoir a été généré"
       body:
         refund_created: "Un avoir de %{AMOUNT} a été généré sur la facture %{INVOICE} de l'utilisateur %{USER}"
+        wallet_refund_created: "Un avoir de %{AMOUNT} a été généré pour le crédit du porte-monnaie de l'utilisateur %{USER}"
         download: "Cliquez ici pour télécharger cet avoir"
     notify_admins_role_update:
       subject: "Le rôle d'un utilisateur a changé"
