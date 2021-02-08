@@ -40,7 +40,7 @@ class Coupon < ApplicationRecord
   end
 
   def usages
-    invoices.count + payment_schedule.count
+    invoices.count
   end
 
   ##

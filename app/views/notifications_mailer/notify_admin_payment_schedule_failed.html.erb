@@ -3,8 +3,8 @@
 <p>
   <%= t('.body.remember',
         REFERENCE: @attached_object.payment_schedule.reference,
-        AMOUNT: number_to_currency(@attached_object.amount),
-        DATE: I18n.l @attached_object.due_date, format: :long) %>
+        AMOUNT: number_to_currency(@attached_object.amount / 100.00),
+        DATE: I18n.l(@attached_object.due_date, format: :long)) %>
   <%= t('.body.error') %>
 </p>
 <p><%= t('.body.action') %></p>

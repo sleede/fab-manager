@@ -18,6 +18,11 @@ export default class PaymentScheduleAPI {
     return res?.data;
   }
 
+  async refreshItem(paymentScheduleItemId: number): Promise<void> {
+    const res: AxiosResponse = await apiClient.post(`/api/payment_schedules/items/${paymentScheduleItemId}/refresh_item`);
+    return res?.data;
+  }
+
   static list (query: PaymentScheduleIndexRequest): IWrapPromise<Array<PaymentSchedule>> {
     const api = new PaymentScheduleAPI();
     return wrapPromise(api.list(query));

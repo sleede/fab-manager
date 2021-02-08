@@ -27,12 +27,13 @@ interface FabModalProps {
   className?: string,
   width?: ModalSize,
   customFooter?: ReactNode,
-  onConfirm?: (event: SyntheticEvent) => void
+  onConfirm?: (event: SyntheticEvent) => void,
+  preventConfirm?: boolean
 }
 
 const blackLogoFile = CustomAssetAPI.get(CustomAssetName.LogoBlackFile);
 
-export const FabModal: React.FC<FabModalProps> = ({ title, isOpen, toggleModal, children, confirmButton, className, width = 'sm', closeButton, customFooter, onConfirm }) => {
+export const FabModal: React.FC<FabModalProps> = ({ title, isOpen, toggleModal, children, confirmButton, className, width = 'sm', closeButton, customFooter, onConfirm, preventConfirm }) => {
   const { t } = useTranslation('shared');
   const blackLogo = blackLogoFile.read();
 
@@ -58,7 +59,7 @@ export const FabModal: React.FC<FabModalProps> = ({ title, isOpen, toggleModal, 
   }
 
   return (
-    <Modal isOpen={isOpen}onConfirm
+    <Modal isOpen={isOpen}
            className={`fab-modal fab-modal-${width} ${className}`}
            overlayClassName="fab-modal-overlay"
            onRequestClose={toggleModal}>
@@ -76,7 +77,7 @@ export const FabModal: React.FC<FabModalProps> = ({ title, isOpen, toggleModal, 
       <div className="fab-modal-footer">
         <Loader>
           {hasCloseButton() &&<FabButton className="modal-btn--close" onClick={toggleModal}>{t('app.shared.buttons.close')}</FabButton>}
-          {hasConfirmButton() && <FabButton className="modal-btn--confirm" onClick={onConfirm}>{confirmButton}</FabButton>}
+          {hasConfirmButton() && <FabButton className="modal-btn--confirm" disabled={preventConfirm} onClick={onConfirm}>{confirmButton}</FabButton>}
           {hasCustomFooter() && customFooter}
         </Loader>
       </div>

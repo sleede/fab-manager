@@ -10,6 +10,10 @@ class PaymentSchedulePolicy < ApplicationPolicy
     user.admin? || user.manager?
   end
 
+  def refresh_item?
+    user.admin? || user.manager? || (record.invoicing_profile.user_id == user.id)
+  end
+
   def download?
     user.admin? || user.manager? || (record.invoicing_profile.user_id == user.id)
   end

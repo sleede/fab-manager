@@ -299,13 +299,14 @@ fr:
       body:
         remember: "Conformément à l'échéancier de paiement %{REFERENCE}, un prélèvement par carte de %{AMOUNT} était prévu le %{DATE}."
         error: "Malheureusement, ce prélèvement n'a pas pu être effectué correctement."
-        action: "Veuillez vous mettre en relation avec le membre au plus tôt, ainsi que vous rendre dans votre interface de gestion des échéanciers pour régler le problème. Au delà d'environ 24 heures, l'abonnement par carte bancaire sera annulé."
+        action: "Veuillez vous mettre en relation avec le membre au plus tôt, puis vous rendre dans l'interface de gestion des échéanciers afin de régler le problème. Au delà d'environ 24 heures, l'abonnement par carte bancaire sera annulé."
     notify_member_payment_schedule_failed:
       subject: "[URGENT] Échec du prélèvement par carte"
       body:
         remember: "Conformément à votre échéancier de paiement %{REFERENCE}, un prélèvement par carte de %{AMOUNT} était prévu le %{DATE}."
         error: "Malheureusement, ce prélèvement n'a pas pu être effectué correctement."
-        action: "Veuillez prendre contact avec le gestionnaire de votre FabLab sous 24 heures, faute de quoi votre abonnement risque d'être interrompu."
+        action: "Veuillez vous rendre dans votre %{DASHBOARD} ou prendre contact avec un gestionnaire sous 24 heures, faute de quoi votre abonnement risque d'être interrompu."
+        your_dashboard: "votre tableau de bord"
     notify_admin_payment_schedule_check_deadline:
       subject: "Échéance d'encaissement"
       body:

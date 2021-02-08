@@ -667,6 +667,8 @@ en:
           confirm_check_cashing: "Confirm the cashing of the check"
           confirm_check_cashing_body: "You must cash a check of {AMOUNT} for the deadline of {DATE}. By confirming the cashing of the check, an invoice will be generated for this due date."
           confirm_button: "Confirm"
+          resolve_action: "Resolve the action"
+          ok_button: "OK"
         document_filters:
           reference: "Reference"
           customer: "Customer"

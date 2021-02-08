@@ -19,6 +19,6 @@ class PaymentScheduleItem < Footprintable
   end
 
   def self.columns_out_of_footprint
-    %w[invoice_id stp_invoice_id state payment_method]
+    %w[invoice_id stp_invoice_id state payment_method client_secret]
   end
 end

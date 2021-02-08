@@ -12,6 +12,8 @@ import { PaymentSchedule, PaymentScheduleItem, PaymentScheduleItemState } from '
 import { FabButton } from './fab-button';
 import { FabModal } from './fab-modal';
 import PaymentScheduleAPI from '../api/payment-schedule';
+import { StripeElements } from './stripe-elements';
+import { StripeConfirm } from './stripe-confirm';
 
 declare var Fablab: IFablab;
 
@@ -26,6 +28,8 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
 
   const [showExpanded, setShowExpanded] = useState<Map<number, boolean>>(new Map());
   const [showConfirmCashing, setShowConfirmCashing] = useState<boolean>(false);
+  const [showResolveAction, setShowResolveAction] = useState<boolean>(false);
+  const [isConfirmActionDisabled, setConfirmActionDisabled] = useState<boolean>(true);
   const [tempDeadline, setTempDeadline] = useState<PaymentScheduleItem>(null);
 
   /**
@@ -149,6 +153,9 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
     }
   }
 
+  /**
+   * Callback triggered when the user's clicks on the "cash check" button: show a confirmation modal
+   */
   const handleConfirmCheckPayment = (item: PaymentScheduleItem): ReactEventHandler => {
     return (): void => {
       setTempDeadline(item);
@@ -156,6 +163,9 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
     }
   }
 
+  /**
+   * After the user has confirmed that he wants to cash the check, update the API, refresh the list and close the modal.
+   */
   const onCheckCashingConfirmed = (): void => {
     const api = new PaymentScheduleAPI();
     api.cashCheck(tempDeadline.id).then((res) => {
@@ -174,37 +184,44 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
   }
 
   /**
-   * Dynamically build the content of the modal depending on the currently selected deadline
+   * Show/hide the modal dialog that trigger the card "action".
    */
-  const cashingModalContent = (): ReactNode => {
-    if (tempDeadline) {
-      return (
-        <span>{t('app.admin.invoices.schedules_table.confirm_check_cashing_body', {
-          AMOUNT: formatPrice(tempDeadline.amount),
-          DATE: formatDate(tempDeadline.due_date)
-        })}</span>
-      );
-    }
-
-    return <span />;
+  const toggleResolveActionModal = (): void => {
+    setShowResolveAction(!showResolveAction);
   }
 
+  /**
+   * Callback triggered when the user's clicks on the "resolve" button: show a modal that will trigger the action
+   */
   const handleSolveAction = (item: PaymentScheduleItem): ReactEventHandler => {
     return (): void => {
-    /*
-     TODO
-       - create component wrapped with <StripeElements>
-       - stripe.confirmCardSetup(item.client_secret).then(function(result) {
-            if (result.error) {
-              // Display error.message in your UI.
-            } else {
-              // The setup has succeeded. Display a success message.
-            }
-          });
-     */
+      setTempDeadline(item);
+      toggleResolveActionModal();
     }
   }
 
+  /**
+   * After the action was done (successfully or not), ask the API to refresh the item status, then refresh the list and close the modal
+   */
+  const afterAction = (): void => {
+    toggleConfirmActionButton();
+    const api = new PaymentScheduleAPI();
+    api.refreshItem(tempDeadline.id).then(() => {
+      refreshList();
+      toggleResolveActionModal();
+    });
+  }
+
+  /**
+   * Enable/disable the confirm button of the "action" modal
+   */
+  const toggleConfirmActionButton = (): void => {
+    setConfirmActionDisabled(!isConfirmActionDisabled);
+  }
+
+  /**
+   * Callback triggered when the user's clicks on the "update card" button: show a modal to input a new card
+   */
   const handleUpdateCard = (item: PaymentScheduleItem): ReactEventHandler => {
     return (): void => {
       /*
@@ -281,8 +298,23 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
                   onConfirm={onCheckCashingConfirmed}
                   closeButton={true}
                   confirmButton={t('app.admin.invoices.schedules_table.confirm_button')}>
-          {cashingModalContent()}
+          {tempDeadline && <span>
+            {t('app.admin.invoices.schedules_table.confirm_check_cashing_body', {
+              AMOUNT: formatPrice(tempDeadline.amount),
+              DATE: formatDate(tempDeadline.due_date)
+            })}
+          </span>}
         </FabModal>
+        <StripeElements>
+          <FabModal title={t('app.admin.invoices.schedules_table.resolve_action')}
+                    isOpen={showResolveAction}
+                    toggleModal={toggleResolveActionModal}
+                    onConfirm={afterAction}
+                    confirmButton={t('app.admin.invoices.schedules_table.ok_button')}
+                    preventConfirm={isConfirmActionDisabled}>
+            {tempDeadline && <StripeConfirm clientSecret={tempDeadline.client_secret} onResponse={toggleConfirmActionButton} />}
+          </FabModal>
+        </StripeElements>
       </div>
     </div>
   );

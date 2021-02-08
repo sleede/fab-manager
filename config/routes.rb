@@ -115,6 +115,7 @@ Rails.application.routes.draw do
       post 'list', action: 'list', on: :collection
       get 'download', on: :member
       post 'items/:id/cash_check', action: 'cash_check', on: :collection
+      post 'items/:id/refresh_item', action: 'refresh_item', on: :collection
     end
 
     resources :i_calendar, only: %i[index create destroy] do
