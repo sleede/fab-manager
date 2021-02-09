@@ -291,9 +291,9 @@
     padding: 15px 0;
     background-color: $bg-gray;
 
-    .wrap {
-      width: 100px;
-      height: 100px;
+    .wrap, .wrap-monthly {
+      width: 120px;
+      height: 120px;
       display: inline-block;
       background: white;
 
@@ -302,34 +302,35 @@
       border: 3px solid;
 
       .price {
-        width: 84px;
+        width: 104px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
 
         @include border-radius(50%, 50%, 50%, 50%);
       }
     }
 
     .wrap-monthly {
-      height: 100px;
-      width: 180px;
-      display: inline-block;
-      background: white;
-      border: 3px solid;
-      @include border-radius(25px, 25px, 25px, 25px);
+      & > .price {
+        & > .amount {
+          padding-top: 4px;
+          line-height: 1.2em;
+        }
 
-      .price {
-        width: 164px;
-        @include border-radius(20px, 20px, 20px, 20px);
+        & > .period {
+          padding-top: 4px;
+        }
       }
     }
     .price {
       position: relative;
       top: 5px;
       left: 5px;
-      height: 84px;
+      height: 104px;
       background-color: black;
 
       .amount {
-        padding-top: 16px;
         padding-left: 4px;
         padding-right: 4px;
         font-weight: bold;
