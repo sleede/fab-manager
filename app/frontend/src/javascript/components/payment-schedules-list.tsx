@@ -11,13 +11,18 @@ import PaymentScheduleAPI from '../api/payment-schedule';
 import { DocumentFilters } from './document-filters';
 import { PaymentSchedulesTable } from './payment-schedules-table';
 import { FabButton } from './fab-button';
+import { User } from '../models/user';
 
 declare var Application: IApplication;
+
+interface PaymentSchedulesListProps {
+  currentUser: User
+}
 
 const PAGE_SIZE = 20;
 const paymentSchedulesList = PaymentScheduleAPI.list({ query: { page: 1, size: 20 } });
 
-const PaymentSchedulesList: React.FC = () => {
+const PaymentSchedulesList: React.FC<PaymentSchedulesListProps> = ({ currentUser }) => {
   const { t } = useTranslation('admin');
 
   const [paymentSchedules, setPaymentSchedules] = useState(paymentSchedulesList.read());
@@ -88,7 +93,7 @@ const PaymentSchedulesList: React.FC = () => {
       </div>
       {!hasSchedules() && <div>{t('app.admin.invoices.payment_schedules.no_payment_schedules')}</div>}
       {hasSchedules() && <div className="schedules-list">
-        <PaymentSchedulesTable paymentSchedules={paymentSchedules} showCustomer={true} refreshList={handleRefreshList} />
+        <PaymentSchedulesTable paymentSchedules={paymentSchedules} showCustomer={true} refreshList={handleRefreshList} operator={currentUser} />
         {hasMoreSchedules() && <FabButton className="load-more" onClick={handleLoadMore}>{t('app.admin.invoices.payment_schedules.load_more')}</FabButton>}
       </div>}
     </div>
@@ -96,12 +101,12 @@ const PaymentSchedulesList: React.FC = () => {
 }
 
 
-const PaymentSchedulesListWrapper: React.FC = () => {
+const PaymentSchedulesListWrapper: React.FC<PaymentSchedulesListProps> = ({ currentUser }) => {
   return (
     <Loader>
-      <PaymentSchedulesList />
+      <PaymentSchedulesList currentUser={currentUser} />
     </Loader>
   );
 }
 
-Application.Components.component('paymentSchedulesList', react2angular(PaymentSchedulesListWrapper));
+Application.Components.component('paymentSchedulesList', react2angular(PaymentSchedulesListWrapper, ['currentUser']));

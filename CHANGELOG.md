@@ -2,7 +2,7 @@
 
 ## Next release
 - Refactored theme builder to use scss files
-- Updated stripe gem to 5.21.0
+- Updated stripe gem to 5.29.0
 - Architecture documentation
 - Improved coupon creation/deletion workflow
 - Default texts for the login modal

@@ -9,10 +9,12 @@ interface FabButtonProps {
   icon?: ReactNode,
   className?: string,
   disabled?: boolean,
+  type?: 'submit' | 'reset' | 'button',
+  form?: string,
 }
 
 
-export const FabButton: React.FC<FabButtonProps> = ({ onClick, icon, className, disabled, children }) => {
+export const FabButton: React.FC<FabButtonProps> = ({ onClick, icon, className, disabled, type, form, children }) => {
   /**
    * Check if the current component was provided an icon to display
    */
@@ -30,10 +32,12 @@ export const FabButton: React.FC<FabButtonProps> = ({ onClick, icon, className, 
   }
 
   return (
-    <button onClick={handleClick} disabled={disabled} className={`fab-button ${className ? className : ''}`}>
+    <button type={type} form={form} onClick={handleClick} disabled={disabled} className={`fab-button ${className ? className : ''}`}>
       {hasIcon() && <span className="fab-button--icon">{icon}</span>}
       {children}
     </button>
   );
 }
+
+FabButton.defaultProps = { type: 'button' };
 

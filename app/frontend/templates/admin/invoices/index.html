@@ -35,7 +35,7 @@
 	      </uib-tab>
 
         <uib-tab heading="{{ 'app.admin.invoices.payment_schedules_list' | translate }}" ng-show="$root.modules.invoicing" index="4">
-          <payment-schedules-list />
+          <payment-schedules-list current-user="currentUser" />
         </uib-tab>
 
         <uib-tab heading="{{ 'app.admin.invoices.invoicing_settings' | translate }}" index="1" class="invoices-settings">

@@ -4,7 +4,7 @@
 class API::PaymentSchedulesController < API::ApiController
   before_action :authenticate_user!
   before_action :set_payment_schedule, only: %i[download]
-  before_action :set_payment_schedule_item, only: %i[cash_check refresh_item]
+  before_action :set_payment_schedule_item, only: %i[cash_check refresh_item pay_item]
 
   def list
     authorize PaymentSchedule
@@ -40,6 +40,20 @@ class API::PaymentSchedulesController < API::ApiController
     PaymentScheduleItemWorker.new.perform(params[:id])
 
     render json: { state: 'refreshed' }, status: :ok
+  end
+
+  def pay_item
+    authorize @payment_schedule_item.payment_schedule
+
+    stripe_key = Setting.get('stripe_secret_key')
+    stp_invoice = Stripe::Invoice.pay(@payment_schedule_item.stp_invoice_id, {}, { api_key: stripe_key })
+
+    render json: { status: stp_invoice.status }, status: :ok
+  rescue Stripe::StripeError => e
+    stripe_key = Setting.get('stripe_secret_key')
+    stp_invoice = Stripe::Invoice.retrieve(@payment_schedule_item.stp_invoice_id, api_key: stripe_key)
+
+    render json: { status: stp_invoice.status, error: e }, status: :unprocessable_entity
   end
 
   private

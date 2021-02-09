@@ -14,23 +14,33 @@ import { FabModal } from './fab-modal';
 import PaymentScheduleAPI from '../api/payment-schedule';
 import { StripeElements } from './stripe-elements';
 import { StripeConfirm } from './stripe-confirm';
+import stripeLogo from '../../../images/powered_by_stripe.png';
+import mastercardLogo from '../../../images/mastercard.png';
+import visaLogo from '../../../images/visa.png';
+import { StripeCardUpdate } from './stripe-card-update';
+import { User } from '../models/user';
 
 declare var Fablab: IFablab;
 
 interface PaymentSchedulesTableProps {
   paymentSchedules: Array<PaymentSchedule>,
   showCustomer?: boolean,
-  refreshList: () => void
+  refreshList: () => void,
+  operator: User,
 }
 
-const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ paymentSchedules, showCustomer, refreshList }) => {
+const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ paymentSchedules, showCustomer, refreshList, operator }) => {
   const { t } = useTranslation('admin');
 
   const [showExpanded, setShowExpanded] = useState<Map<number, boolean>>(new Map());
   const [showConfirmCashing, setShowConfirmCashing] = useState<boolean>(false);
   const [showResolveAction, setShowResolveAction] = useState<boolean>(false);
   const [isConfirmActionDisabled, setConfirmActionDisabled] = useState<boolean>(true);
+  const [showUpdateCard, setShowUpdateCard] = useState<boolean>(false);
   const [tempDeadline, setTempDeadline] = useState<PaymentScheduleItem>(null);
+  const [tempSchedule, setTempSchedule] = useState<PaymentSchedule>(null);
+  const [canSubmitUpdateCard, setCanSubmitUpdateCard] = useState<boolean>(true);
+  const [errors, setErrors] = useState<string>(null);
 
   /**
    * Check if the requested payment schedule is displayed with its deadlines (PaymentScheduleItem) or without them
@@ -123,7 +133,7 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
   /**
    * Return the action button(s) for the given deadline
    */
-  const itemButtons = (item: PaymentScheduleItem): JSX.Element => {
+  const itemButtons = (item: PaymentScheduleItem, schedule: PaymentSchedule): JSX.Element => {
     switch (item.state) {
       case PaymentScheduleItemState.Paid:
         return downloadButton(TargetType.Invoice, item.invoice_id);
@@ -143,7 +153,7 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
         );
       case PaymentScheduleItemState.RequirePaymentMethod:
         return (
-          <FabButton onClick={handleUpdateCard(item)}
+          <FabButton onClick={handleUpdateCard(item, schedule)}
                      icon={<i className="fas fa-credit-card" />}>
             {t('app.admin.invoices.schedules_table.update_card')}
           </FabButton>
@@ -222,16 +232,61 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
   /**
    * Callback triggered when the user's clicks on the "update card" button: show a modal to input a new card
    */
-  const handleUpdateCard = (item: PaymentScheduleItem): ReactEventHandler => {
+  const handleUpdateCard = (item: PaymentScheduleItem, paymentSchedule: PaymentSchedule): ReactEventHandler => {
     return (): void => {
-      /*
-      TODO
-       - Notify the customer, collect new payment information, and create a new payment method
-       - Attach the payment method to the customer
-       - Update the default payment method
-       - Pay the invoice using the new payment method
-       */
+      setTempDeadline(item);
+      setTempSchedule(paymentSchedule);
+      toggleUpdateCardModal();
     }
+  }
+
+  /**
+   * Show/hide the modal dialog to update the bank card details
+   */
+  const toggleUpdateCardModal = (): void => {
+    setShowUpdateCard(!showUpdateCard);
+  }
+
+  /**
+   * Return the logos, shown in the modal footer.
+   */
+  const logoFooter = (): ReactNode => {
+    return (
+      <div className="stripe-modal-icons">
+        <i className="fa fa-lock fa-2x m-r-sm pos-rlt" />
+        <img src={stripeLogo} alt="powered by stripe" />
+        <img src={mastercardLogo} alt="mastercard" />
+        <img src={visaLogo} alt="visa" />
+      </div>
+    );
+  }
+
+  /**
+   * When the submit button is pushed, disable it to prevent double form submission
+   */
+  const handleCardUpdateSubmit = (): void => {
+    setCanSubmitUpdateCard(false);
+  }
+
+  /**
+   * When the card was successfully updated, pay the invoice (using the new payment method) and close the modal
+   */
+  const handleCardUpdateSuccess = (): void => {
+    const api = new PaymentScheduleAPI();
+    api.payItem(tempDeadline.id).then(() => {
+      refreshList();
+      toggleUpdateCardModal();
+    }).catch((err) => {
+      handleCardUpdateError(err.error);
+    });
+  }
+
+  /**
+   * When the card was not updated, show the error
+   */
+  const handleCardUpdateError = (error): void => {
+    setErrors(error);
+    setCanSubmitUpdateCard(true);
   }
 
   return (
@@ -278,7 +333,7 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
                         <td>{formatDate(item.due_date)}</td>
                         <td>{formatPrice(item.amount)}</td>
                         <td>{formatState(item)}</td>
-                        <td>{itemButtons(item)}</td>
+                        <td>{itemButtons(item, p)}</td>
                       </tr>)}
                       </tbody>
                     </table>
@@ -314,6 +369,31 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
                     preventConfirm={isConfirmActionDisabled}>
             {tempDeadline && <StripeConfirm clientSecret={tempDeadline.client_secret} onResponse={toggleConfirmActionButton} />}
           </FabModal>
+          <FabModal title={t('app.admin.invoices.schedules_table.update_card')}
+                    isOpen={showUpdateCard}
+                    toggleModal={toggleUpdateCardModal}
+                    closeButton={false}
+                    customFooter={logoFooter()}
+                    className="update-card-modal">
+            {tempDeadline && tempSchedule && <StripeCardUpdate onSubmit={handleCardUpdateSubmit}
+                                                               onSuccess={handleCardUpdateSuccess}
+                                                               onError={handleCardUpdateError}
+                                                               customerId={tempSchedule.user.id}
+                                                               operator={operator}
+                                                               className="card-form" >
+              {errors && <div className="stripe-errors">
+                {errors}
+              </div>}
+            </StripeCardUpdate>}
+            <div className="submit-card">
+              {canSubmitUpdateCard && <button type="submit" disabled={!canSubmitUpdateCard} form="stripe-card" className="submit-card-btn">{t('app.admin.invoices.schedules_table.validate_button')}</button>}
+              {!canSubmitUpdateCard && <div className="payment-pending">
+                <div className="fa-2x">
+                  <i className="fas fa-circle-notch fa-spin" />
+                </div>
+              </div>}
+            </div>
+          </FabModal>
         </StripeElements>
       </div>
     </div>
@@ -322,10 +402,10 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
 PaymentSchedulesTableComponent.defaultProps = { showCustomer: false };
 
 
-export const PaymentSchedulesTable: React.FC<PaymentSchedulesTableProps> = ({ paymentSchedules, showCustomer, refreshList }) => {
+export const PaymentSchedulesTable: React.FC<PaymentSchedulesTableProps> = ({ paymentSchedules, showCustomer, refreshList, operator }) => {
   return (
     <Loader>
-      <PaymentSchedulesTableComponent paymentSchedules={paymentSchedules} showCustomer={showCustomer} refreshList={refreshList} />
+      <PaymentSchedulesTableComponent paymentSchedules={paymentSchedules} showCustomer={showCustomer} refreshList={refreshList} operator={operator} />
     </Loader>
   );
 }

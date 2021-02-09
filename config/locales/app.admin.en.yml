@@ -669,6 +669,7 @@ en:
           confirm_button: "Confirm"
           resolve_action: "Resolve the action"
           ok_button: "OK"
+          validate_button: "Validate the new card"
         document_filters:
           reference: "Reference"
           customer: "Customer"
