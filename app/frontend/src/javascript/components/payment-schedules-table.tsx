@@ -18,7 +18,7 @@ import stripeLogo from '../../../images/powered_by_stripe.png';
 import mastercardLogo from '../../../images/mastercard.png';
 import visaLogo from '../../../images/visa.png';
 import { StripeCardUpdate } from './stripe-card-update';
-import { User } from '../models/user';
+import { User, UserRole } from '../models/user';
 
 declare var Fablab: IFablab;
 
@@ -132,6 +132,13 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
   }
 
   /**
+   * Check if the current operator has administrative rights or is a normal member
+   */
+  const isPrivileged = (): boolean => {
+    return (operator.role === UserRole.Admin || operator.role == UserRole.Manager);
+  }
+
+  /**
    * Return the action button(s) for the given deadline
    */
   const itemButtons = (item: PaymentScheduleItem, schedule: PaymentSchedule): JSX.Element => {
@@ -139,12 +146,16 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
       case PaymentScheduleItemState.Paid:
         return downloadButton(TargetType.Invoice, item.invoice_id);
       case PaymentScheduleItemState.Pending:
-        return (
-          <FabButton onClick={handleConfirmCheckPayment(item)}
-                     icon={<i className="fas fa-money-check" />}>
-            {t('app.admin.invoices.schedules_table.confirm_payment')}
-          </FabButton>
-        );
+        if (isPrivileged()) {
+          return (
+            <FabButton onClick={handleConfirmCheckPayment(item)}
+                       icon={<i className="fas fa-money-check" />}>
+              {t('app.admin.invoices.schedules_table.confirm_payment')}
+            </FabButton>
+          );
+        } else {
+          return <span>{t('app.admin.invoices.schedules_table.please_ask_reception')}</span>
+        }
       case PaymentScheduleItemState.RequireAction:
         return (
           <FabButton onClick={handleSolveAction(item)}
@@ -160,12 +171,16 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
           </FabButton>
         );
       case PaymentScheduleItemState.Error:
-        return (
-          <FabButton onClick={handleCancelSubscription(schedule)}
-                     icon={<i className="fas fa-times" />}>
-            {t('app.admin.invoices.schedules_table.cancel_subscription')}
-          </FabButton>
-        )
+        if (isPrivileged()) {
+          return (
+            <FabButton onClick={handleCancelSubscription(schedule)}
+                       icon={<i className="fas fa-times" />}>
+              {t('app.admin.invoices.schedules_table.cancel_subscription')}
+            </FabButton>
+          )
+        } else {
+          return <span>{t('app.admin.invoices.schedules_table.please_ask_reception')}</span>
+        }
       default:
         return <span />
     }

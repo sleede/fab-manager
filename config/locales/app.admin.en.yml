@@ -673,6 +673,7 @@ en:
           validate_button: "Validate the new card"
           cancel_subscription: "Cancel the subscription"
           confirm_cancel_subscription: "You're about to cancel this payment schedule and the related subscription. Are you sure?"
+          please_ask_reception: "For any questions, please contact the FabLab's reception."
         document_filters:
           reference: "Reference"
           customer: "Customer"
