@@ -147,7 +147,7 @@ class PaymentScheduleService
     end
     # cancel subscription
     subscription = Subscription.find(payment_schedule.payment_schedule_items.first.details['subscription_id'])
-    subscription.cancel
+    subscription.expire(DateTime.current)
 
     subscription.canceled_at
   end

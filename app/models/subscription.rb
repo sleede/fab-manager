@@ -37,10 +37,6 @@ class Subscription < ApplicationRecord
     generate_invoice(operator_profile_id).save
   end
 
-  def cancel
-    update_columns(canceled_at: DateTime.current)
-  end
-
   def expire(time)
     if !expired?
       update_columns(expiration_date: time, canceled_at: time)
