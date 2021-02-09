@@ -138,6 +138,20 @@ class PaymentScheduleService
     ps
   end
 
+  def self.cancel(payment_schedule)
+    # cancel all item where state != paid
+    payment_schedule.ordered_items.each do |item|
+      next if item.state == 'paid'
+
+      item.update_attributes(state: 'canceled')
+    end
+    # cancel subscription
+    subscription = Subscription.find(payment_schedule.payment_schedule_items.first.details['subscription_id'])
+    subscription.cancel
+
+    subscription.canceled_at
+  end
+
   private
 
   ##

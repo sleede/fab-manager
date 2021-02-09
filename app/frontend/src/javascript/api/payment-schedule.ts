@@ -1,6 +1,7 @@
 import apiClient from './api-client';
 import { AxiosResponse } from 'axios';
 import {
+  CancelScheduleResponse,
   CashCheckResponse, PayItemResponse,
   PaymentSchedule,
   PaymentScheduleIndexRequest, RefreshItemResponse
@@ -25,6 +26,11 @@ export default class PaymentScheduleAPI {
 
   async payItem(paymentScheduleItemId: number): Promise<PayItemResponse> {
     const res: AxiosResponse = await apiClient.post(`/api/payment_schedules/items/${paymentScheduleItemId}/pay_item`);
+    return res?.data;
+  }
+
+  async cancel (paymentScheduleId: number): Promise<CancelScheduleResponse> {
+    const res: AxiosResponse = await apiClient.put(`/api/payment_schedules/${paymentScheduleId}/cancel`);
     return res?.data;
   }
 

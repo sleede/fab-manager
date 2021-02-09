@@ -2,7 +2,7 @@
 
 # Check the access policies for API::PaymentSchedulesController
 class PaymentSchedulePolicy < ApplicationPolicy
-  %w[list? cash_check?].each do |action|
+  %w[list? cash_check? cancel?].each do |action|
     define_method action do
       user.admin? || user.manager?
     end

@@ -38,7 +38,6 @@ class Subscription < ApplicationRecord
   end
 
   def cancel
-    # TODO, currently unused, refactor to use with PaymentSchedule
     update_columns(canceled_at: DateTime.current)
   end
 

@@ -659,6 +659,7 @@ en:
           state_requires_action: "Action required"
           state_paid: "Paid"
           state_error: "Error"
+          state_canceled: "Canceled"
           method_stripe: "by card"
           method_check: "by check"
           confirm_payment: "Confirm payment"
@@ -670,6 +671,8 @@ en:
           resolve_action: "Resolve the action"
           ok_button: "OK"
           validate_button: "Validate the new card"
+          cancel_subscription: "Cancel the subscription"
+          confirm_cancel_subscription: "You're about to cancel this payment schedule and the related subscription. Are you sure?"
         document_filters:
           reference: "Reference"
           customer: "Customer"

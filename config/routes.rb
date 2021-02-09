@@ -113,6 +113,7 @@ Rails.application.routes.draw do
 
     resources :payment_schedules, only: %i[show] do
       post 'list', action: 'list', on: :collection
+      put 'cancel', on: :member
       get 'download', on: :member
       post 'items/:id/cash_check', action: 'cash_check', on: :collection
       post 'items/:id/refresh_item', action: 'refresh_item', on: :collection

@@ -99,7 +99,10 @@ class PDF::PaymentSchedule < Prawn::Document
       # payment method
       move_down 20
       payment_verbose = _t('payment_schedules.settlement_by_METHOD', METHOD: payment_schedule.payment_method)
-      payment_verbose = I18n.t('payment_schedules.settlement_by_wallet', AMOUNT: payment_schedule.wallet_amount / 100.00) if payment_schedule.wallet_amount
+      if payment_schedule.wallet_amount
+        payment_verbose += I18n.t('payment_schedules.settlement_by_wallet',
+                                  AMOUNT: number_to_currency(payment_schedule.wallet_amount / 100.00))
+      end
       text payment_verbose
 
       # important information

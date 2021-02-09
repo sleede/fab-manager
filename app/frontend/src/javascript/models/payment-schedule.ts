@@ -77,3 +77,7 @@ export interface PayItemResponse {
   status: 'draft' | 'open' | 'paid' | 'uncollectible' | 'void',
   error?: string
 }
+
+export interface CancelScheduleResponse {
+  canceled_at: Date
+}

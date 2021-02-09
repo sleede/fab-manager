@@ -41,6 +41,7 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
   const [tempSchedule, setTempSchedule] = useState<PaymentSchedule>(null);
   const [canSubmitUpdateCard, setCanSubmitUpdateCard] = useState<boolean>(true);
   const [errors, setErrors] = useState<string>(null);
+  const [showCancelSubscription, setShowCancelSubscription] = useState<boolean>(false);
 
   /**
    * Check if the requested payment schedule is displayed with its deadlines (PaymentScheduleItem) or without them
@@ -158,6 +159,13 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
             {t('app.admin.invoices.schedules_table.update_card')}
           </FabButton>
         );
+      case PaymentScheduleItemState.Error:
+        return (
+          <FabButton onClick={handleCancelSubscription(schedule)}
+                     icon={<i className="fas fa-times" />}>
+            {t('app.admin.invoices.schedules_table.cancel_subscription')}
+          </FabButton>
+        )
       default:
         return <span />
     }
@@ -289,6 +297,34 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
     setCanSubmitUpdateCard(true);
   }
 
+  /**
+   * Callback triggered when the user clicks on the "cancel subscription" button
+   */
+  const handleCancelSubscription = (schedule: PaymentSchedule): ReactEventHandler => {
+    return (): void => {
+      setTempSchedule(schedule);
+      toggleCancelSubscriptionModal();
+    }
+  }
+
+  /**
+   * Show/hide the modal dialog to cancel the current subscription
+   */
+  const toggleCancelSubscriptionModal = (): void => {
+    setShowCancelSubscription(!showCancelSubscription);
+  }
+
+  /**
+   * When the user has confirmed the cancellation, we transfer the request to the API
+   */
+  const onCancelSubscriptionConfirmed = (): void => {
+    const api = new PaymentScheduleAPI();
+    api.cancel(tempSchedule.id).then(() => {
+      refreshList();
+      toggleCancelSubscriptionModal();
+    });
+  }
+
   return (
     <div>
       <table className="schedules-table">
@@ -359,6 +395,14 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
               DATE: formatDate(tempDeadline.due_date)
             })}
           </span>}
+        </FabModal>
+        <FabModal title={t('app.admin.invoices.schedules_table.cancel_subscription')}
+                  isOpen={showCancelSubscription}
+                  toggleModal={toggleCancelSubscriptionModal}
+                  onConfirm={onCancelSubscriptionConfirmed}
+                  closeButton={true}
+                  confirmButton={t('app.admin.invoices.schedules_table.confirm_button')}>
+          {t('app.admin.invoices.schedules_table.confirm_cancel_subscription')}
         </FabModal>
         <StripeElements>
           <FabModal title={t('app.admin.invoices.schedules_table.resolve_action')}
