@@ -19,6 +19,7 @@ en:
         my_trainings: "My Trainings"
         my_events: "My Events"
         my_invoices: "My Invoices"
+        my_payment_schedules: "My payment schedules"
         my_wallet: "My Wallet"
         #contextual help
         help: "Help"

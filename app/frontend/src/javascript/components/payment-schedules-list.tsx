@@ -20,7 +20,7 @@ interface PaymentSchedulesListProps {
 }
 
 const PAGE_SIZE = 20;
-const paymentSchedulesList = PaymentScheduleAPI.list({ query: { page: 1, size: 20 } });
+const paymentSchedulesList = PaymentScheduleAPI.list({ query: { page: 1, size: PAGE_SIZE } });
 
 const PaymentSchedulesList: React.FC<PaymentSchedulesListProps> = ({ currentUser }) => {
   const { t } = useTranslation('admin');

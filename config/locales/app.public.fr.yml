@@ -19,6 +19,7 @@ fr:
         my_trainings: "Mes formations"
         my_events: "Mes événements"
         my_invoices: "Mes factures"
+        my_payment_schedules: "Mes échéanciers de paiement"
         my_wallet: "Mon porte-monnaie"
         #contextual help
         help: "Aide"

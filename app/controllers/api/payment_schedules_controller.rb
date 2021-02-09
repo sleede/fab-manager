@@ -6,6 +6,15 @@ class API::PaymentSchedulesController < API::ApiController
   before_action :set_payment_schedule, only: %i[download cancel]
   before_action :set_payment_schedule_item, only: %i[cash_check refresh_item pay_item]
 
+  def index
+    @payment_schedules = PaymentSchedule.where('invoicing_profile_id = ?', current_user.invoicing_profile.id)
+                                        .includes(:invoicing_profile, :payment_schedule_items, :subscription)
+                                        .joins(:invoicing_profile)
+                                        .order('payment_schedules.created_at DESC')
+                                        .page(params[:page])
+                                        .per(params[:size])
+  end
+
   def list
     authorize PaymentSchedule
 
