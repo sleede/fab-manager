@@ -113,9 +113,11 @@ Rails.application.routes.draw do
 
     resources :payment_schedules, only: %i[show] do
       post 'list', action: 'list', on: :collection
+      put 'cancel', on: :member
       get 'download', on: :member
       post 'items/:id/cash_check', action: 'cash_check', on: :collection
       post 'items/:id/refresh_item', action: 'refresh_item', on: :collection
+      post 'items/:id/pay_item', action: 'pay_item', on: :collection
     end
 
     resources :i_calendar, only: %i[index create destroy] do
@@ -174,6 +176,7 @@ Rails.application.routes.draw do
     get 'payments/online_payment_status' => 'payments/online_payment_status'
     get 'payments/setup_intent/:user_id' => 'payments#setup_intent'
     post 'payments/confirm_payment_schedule' => 'payments#confirm_payment_schedule'
+    post 'payments/update_card' => 'payments#update_card'
 
     # FabAnalytics
     get 'analytics/data' => 'analytics#data'

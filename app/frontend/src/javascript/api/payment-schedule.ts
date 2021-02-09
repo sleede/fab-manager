@@ -1,9 +1,10 @@
 import apiClient from './api-client';
 import { AxiosResponse } from 'axios';
 import {
-  CashCheckResponse,
+  CancelScheduleResponse,
+  CashCheckResponse, PayItemResponse,
   PaymentSchedule,
-  PaymentScheduleIndexRequest,
+  PaymentScheduleIndexRequest, RefreshItemResponse
 } from '../models/payment-schedule';
 import wrapPromise, { IWrapPromise } from '../lib/wrap-promise';
 
@@ -18,8 +19,18 @@ export default class PaymentScheduleAPI {
     return res?.data;
   }
 
-  async refreshItem(paymentScheduleItemId: number): Promise<void> {
+  async refreshItem(paymentScheduleItemId: number): Promise<RefreshItemResponse> {
     const res: AxiosResponse = await apiClient.post(`/api/payment_schedules/items/${paymentScheduleItemId}/refresh_item`);
+    return res?.data;
+  }
+
+  async payItem(paymentScheduleItemId: number): Promise<PayItemResponse> {
+    const res: AxiosResponse = await apiClient.post(`/api/payment_schedules/items/${paymentScheduleItemId}/pay_item`);
+    return res?.data;
+  }
+
+  async cancel (paymentScheduleId: number): Promise<CancelScheduleResponse> {
+    const res: AxiosResponse = await apiClient.put(`/api/payment_schedules/${paymentScheduleId}/cancel`);
     return res?.data;
   }
 

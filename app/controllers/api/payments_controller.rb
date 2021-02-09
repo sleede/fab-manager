@@ -93,6 +93,17 @@ class API::PaymentsController < API::ApiController
     render json: e, status: :unprocessable_entity
   end
 
+  def update_card
+    user = User.find(params[:user_id])
+    key = Setting.get('stripe_secret_key')
+    Stripe::Customer.update(user.stp_customer_id,
+                            { invoice_settings: { default_payment_method: params[:payment_method_id] } },
+                            { api_key: key })
+    render json: { updated: true }, status: :ok
+  rescue Stripe::StripeError => e
+    render json: { updated: false, error: e }, status: :unprocessable_entity
+  end
+
   private
 
   def on_reservation_success(intent, details)

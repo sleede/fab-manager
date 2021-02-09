@@ -659,6 +659,7 @@ fr:
           state_requires_action: "Action requise"
           state_paid: "Payée"
           state_error: "Erreur"
+          state_canceled: "Annulée"
           method_stripe: "par carte"
           method_check: "par chèque"
           confirm_payment: "Confirmer l'encaissement"
@@ -669,6 +670,9 @@ fr:
           confirm_button: "Confirmer"
           resolve_action: "Résoudre l'action"
           ok_button: "OK"
+          validate_button: "Valider la nouvelle carte"
+          cancel_subscription: "Annuler l'abonnement"
+          confirm_cancel_subscription: "Vous êtes sur le point d'annuler cet échéancier de paiement ainsi que l'abonnement lié. Êtes-vous sur ?"
         document_filters:
           reference: "Référence"
           customer: "Client"

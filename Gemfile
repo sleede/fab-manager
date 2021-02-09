@@ -90,7 +90,7 @@ gem 'sidekiq', '>= 6.0.7'
 gem 'sidekiq-cron'
 gem 'sidekiq-unique-jobs', '~> 6.0.22'
 
-gem 'stripe', '5.21.0'
+gem 'stripe', '5.29.0'
 
 gem 'recurrence'
 

@@ -315,7 +315,9 @@ class PDF::Invoice < Prawn::Document
         # if the invoice was 100% payed with the wallet ...
         payment_verbose = I18n.t('invoices.settlement_by_wallet') if total.zero? && wallet_amount
 
-        payment_verbose += ' ' + I18n.t('invoices.on_DATE_at_TIME', DATE: I18n.l(invoice.created_at.to_date), TIME:I18n.l(invoice.created_at, format: :hour_minute))
+        payment_verbose += ' ' + I18n.t('invoices.on_DATE_at_TIME',
+                                        DATE: I18n.l(invoice.created_at.to_date),
+                                        TIME: I18n.l(invoice.created_at, format: :hour_minute))
         if total.positive? || !invoice.wallet_amount
           payment_verbose += ' ' + I18n.t('invoices.for_an_amount_of_AMOUNT', AMOUNT: number_to_currency(total))
         end

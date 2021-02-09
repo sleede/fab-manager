@@ -1,3 +1,5 @@
+import { StripeIbanElement } from '@stripe/stripe-js';
+
 export enum PaymentScheduleItemState {
   New = 'new',
   Pending = 'pending',
@@ -42,6 +44,7 @@ export interface PaymentSchedule {
   created_at: Date,
   chained_footprint: boolean,
   user: {
+    id: number,
     name: string
   },
   operator: {
@@ -64,4 +67,17 @@ export interface PaymentScheduleIndexRequest {
 export interface CashCheckResponse {
   state: PaymentScheduleItemState,
   payment_method: PaymentMethod
+}
+
+export interface RefreshItemResponse {
+  state: 'refreshed'
+}
+
+export interface PayItemResponse {
+  status: 'draft' | 'open' | 'paid' | 'uncollectible' | 'void',
+  error?: string
+}
+
+export interface CancelScheduleResponse {
+  canceled_at: Date
 }

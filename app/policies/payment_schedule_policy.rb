@@ -2,19 +2,15 @@
 
 # Check the access policies for API::PaymentSchedulesController
 class PaymentSchedulePolicy < ApplicationPolicy
-  def list?
-    user.admin? || user.manager?
+  %w[list? cash_check? cancel?].each do |action|
+    define_method action do
+      user.admin? || user.manager?
+    end
   end
 
-  def cash_check?
-    user.admin? || user.manager?
-  end
-
-  def refresh_item?
-    user.admin? || user.manager? || (record.invoicing_profile.user_id == user.id)
-  end
-
-  def download?
-    user.admin? || user.manager? || (record.invoicing_profile.user_id == user.id)
+  %w[refresh_item? download? pay_item?].each do |action|
+    define_method action do
+      user.admin? || user.manager? || (record.invoicing_profile.user_id == user.id)
+    end
   end
 end

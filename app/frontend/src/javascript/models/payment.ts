@@ -24,3 +24,8 @@ export interface CartItems {
   subscription?: SubscriptionRequest,
   coupon_code?: string
 }
+
+export interface UpdateCardResponse {
+  updated: boolean,
+  error?: string
+}

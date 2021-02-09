@@ -4,6 +4,7 @@ json.extract! payment_schedule, :id, :reference, :created_at, :payment_method
 json.total payment_schedule.total / 100.00
 json.chained_footprint payment_schedule.check_footprint
 json.user do
+  json.id payment_schedule.invoicing_profile&.user&.id
   json.name payment_schedule.invoicing_profile.full_name
 end
 if payment_schedule.operator_profile
