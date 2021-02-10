@@ -2,7 +2,7 @@
  * This component shows a list of all payment schedules with their associated deadlines (aka. PaymentScheduleItem) and invoices
  */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IApplication } from '../models/application';
 import { useTranslation } from 'react-i18next';
 import { Loader } from './loader';
@@ -12,6 +12,7 @@ import { DocumentFilters } from './document-filters';
 import { PaymentSchedulesTable } from './payment-schedules-table';
 import { FabButton } from './fab-button';
 import { User } from '../models/user';
+import { PaymentSchedule } from '../models/payment-schedule';
 
 declare var Application: IApplication;
 
@@ -20,16 +21,19 @@ interface PaymentSchedulesListProps {
 }
 
 const PAGE_SIZE = 20;
-const paymentSchedulesList = PaymentScheduleAPI.list({ query: { page: 1, size: 20 } });
 
 const PaymentSchedulesList: React.FC<PaymentSchedulesListProps> = ({ currentUser }) => {
   const { t } = useTranslation('admin');
 
-  const [paymentSchedules, setPaymentSchedules] = useState(paymentSchedulesList.read());
-  const [pageNumber, setPageNumber] = useState(1);
-  const [referenceFilter, setReferenceFilter] = useState(null);
-  const [customerFilter, setCustomerFilter] = useState(null);
-  const [dateFilter, setDateFilter] = useState(null);
+  const [paymentSchedules, setPaymentSchedules] = useState<Array<PaymentSchedule>>([]);
+  const [pageNumber, setPageNumber] = useState<number>(1);
+  const [referenceFilter, setReferenceFilter] = useState<string>(null);
+  const [customerFilter, setCustomerFilter] = useState<string>(null);
+  const [dateFilter, setDateFilter] = useState<Date>(null);
+
+  useEffect(() => {
+    handleRefreshList();
+  }, []);
 
   /**
    * Fetch from the API the payments schedules matching the given filters and reset the results table with the new schedules.
@@ -61,10 +65,12 @@ const PaymentSchedulesList: React.FC<PaymentSchedulesListProps> = ({ currentUser
   /**
    * Reload from te API all the currently displayed payment schedules
    */
-  const handleRefreshList = (): void => {
+  const handleRefreshList = (onError?: (msg: any) => void): void => {
     const api = new PaymentScheduleAPI();
     api.list({ query: { reference: referenceFilter, customer: customerFilter, date: dateFilter, page: 1, size: PAGE_SIZE * pageNumber }}).then((res) => {
       setPaymentSchedules(res);
+    }).catch((err) => {
+      if (typeof onError === 'function') { onError(err.message); }
     });
   }
 

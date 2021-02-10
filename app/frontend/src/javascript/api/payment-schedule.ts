@@ -14,6 +14,11 @@ export default class PaymentScheduleAPI {
     return res?.data;
   }
 
+  async index (query: PaymentScheduleIndexRequest): Promise<Array<PaymentSchedule>> {
+    const res: AxiosResponse = await apiClient.get(`/api/payment_schedules?page=${query.query.page}&size=${query.query.size}`);
+    return res?.data;
+  }
+
   async cashCheck(paymentScheduleItemId: number): Promise<CashCheckResponse> {
     const res: AxiosResponse = await apiClient.post(`/api/payment_schedules/items/${paymentScheduleItemId}/cash_check`);
     return res?.data;
@@ -32,11 +37,6 @@ export default class PaymentScheduleAPI {
   async cancel (paymentScheduleId: number): Promise<CancelScheduleResponse> {
     const res: AxiosResponse = await apiClient.put(`/api/payment_schedules/${paymentScheduleId}/cancel`);
     return res?.data;
-  }
-
-  static list (query: PaymentScheduleIndexRequest): IWrapPromise<Array<PaymentSchedule>> {
-    const api = new PaymentScheduleAPI();
-    return wrapPromise(api.list(query));
   }
 }
 

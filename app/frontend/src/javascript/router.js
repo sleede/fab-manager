@@ -205,6 +205,15 @@ angular.module('application.router', ['ui.router'])
           }
         }
       })
+      .state('app.logged.dashboard.payment_schedules', {
+        url: '/payment_schedules',
+        views: {
+          'main@': {
+            templateUrl: '/dashboard/payment_schedules.html',
+            controller: 'DashboardController'
+          }
+        }
+      })
       .state('app.logged.dashboard.wallet', {
         url: '/wallet',
         abstract: !Fablab.walletModule,

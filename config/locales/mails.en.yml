@@ -305,7 +305,7 @@ en:
       body:
         remember: "In accordance with your %{REFERENCE} payment schedule, a debit by card of %{AMOUNT} was scheduled on %{DATE}."
         error: "Unfortunately, this card debit was unable to complete successfully."
-        action: "Please check %{DASHBOARD} or contact a manager before 24 hours, otherwise your subscription may be interrupted."
+        action_html: "Please check %{DASHBOARD} or contact a manager before 24 hours, otherwise your subscription may be interrupted."
         your_dashboard: "your dashboard"
     notify_admin_payment_schedule_check_deadline:
       subject: "Payment deadline"

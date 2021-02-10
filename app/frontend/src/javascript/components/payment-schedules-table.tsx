@@ -25,12 +25,12 @@ declare var Fablab: IFablab;
 interface PaymentSchedulesTableProps {
   paymentSchedules: Array<PaymentSchedule>,
   showCustomer?: boolean,
-  refreshList: () => void,
+  refreshList: (onError: (msg: any) => void) => void,
   operator: User,
 }
 
 const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ paymentSchedules, showCustomer, refreshList, operator }) => {
-  const { t } = useTranslation('admin');
+  const { t } = useTranslation('shared');
 
   const [showExpanded, setShowExpanded] = useState<Map<number, boolean>>(new Map());
   const [showConfirmCashing, setShowConfirmCashing] = useState<boolean>(false);
@@ -114,7 +114,7 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
     return (
       <a href={link} target="_blank" className="download-button">
         <i className="fas fa-download" />
-        {t('app.admin.invoices.schedules_table.download')}
+        {t('app.shared.schedules_table.download')}
       </a>
     );
   }
@@ -123,9 +123,9 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
    * Return the human-readable string for the status of the provided deadline.
    */
   const formatState = (item: PaymentScheduleItem): JSX.Element => {
-    let res = t(`app.admin.invoices.schedules_table.state_${item.state}`);
+    let res = t(`app.shared.schedules_table.state_${item.state}`);
     if (item.state === PaymentScheduleItemState.Paid) {
-      const key = `app.admin.invoices.schedules_table.method_${item.payment_method}`
+      const key = `app.shared.schedules_table.method_${item.payment_method}`
       res += ` (${t(key)})`;
     }
     return <span className={`state-${item.state}`}>{res}</span>;
@@ -150,24 +150,24 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
           return (
             <FabButton onClick={handleConfirmCheckPayment(item)}
                        icon={<i className="fas fa-money-check" />}>
-              {t('app.admin.invoices.schedules_table.confirm_payment')}
+              {t('app.shared.schedules_table.confirm_payment')}
             </FabButton>
           );
         } else {
-          return <span>{t('app.admin.invoices.schedules_table.please_ask_reception')}</span>
+          return <span>{t('app.shared.schedules_table.please_ask_reception')}</span>
         }
       case PaymentScheduleItemState.RequireAction:
         return (
           <FabButton onClick={handleSolveAction(item)}
                      icon={<i className="fas fa-wrench" />}>
-            {t('app.admin.invoices.schedules_table.solve')}
+            {t('app.shared.schedules_table.solve')}
           </FabButton>
         );
       case PaymentScheduleItemState.RequirePaymentMethod:
         return (
           <FabButton onClick={handleUpdateCard(item, schedule)}
                      icon={<i className="fas fa-credit-card" />}>
-            {t('app.admin.invoices.schedules_table.update_card')}
+            {t('app.shared.schedules_table.update_card')}
           </FabButton>
         );
       case PaymentScheduleItemState.Error:
@@ -175,11 +175,11 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
           return (
             <FabButton onClick={handleCancelSubscription(schedule)}
                        icon={<i className="fas fa-times" />}>
-              {t('app.admin.invoices.schedules_table.cancel_subscription')}
+              {t('app.shared.schedules_table.cancel_subscription')}
             </FabButton>
           )
         } else {
-          return <span>{t('app.admin.invoices.schedules_table.please_ask_reception')}</span>
+          return <span>{t('app.shared.schedules_table.please_ask_reception')}</span>
         }
       default:
         return <span />
@@ -203,10 +203,17 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
     const api = new PaymentScheduleAPI();
     api.cashCheck(tempDeadline.id).then((res) => {
       if (res.state === PaymentScheduleItemState.Paid) {
-        refreshList();
+        refreshSchedulesTable();
         toggleConfirmCashingModal();
       }
     });
+  }
+
+  /**
+   * Refresh all payment schedules in the table
+   */
+  const refreshSchedulesTable = (): void => {
+    refreshList(setErrors);
   }
 
   /**
@@ -240,7 +247,7 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
     toggleConfirmActionButton();
     const api = new PaymentScheduleAPI();
     api.refreshItem(tempDeadline.id).then(() => {
-      refreshList();
+      refreshSchedulesTable();
       toggleResolveActionModal();
     });
   }
@@ -297,10 +304,10 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
   const handleCardUpdateSuccess = (): void => {
     const api = new PaymentScheduleAPI();
     api.payItem(tempDeadline.id).then(() => {
-      refreshList();
+      refreshSchedulesTable();
       toggleUpdateCardModal();
     }).catch((err) => {
-      handleCardUpdateError(err.error);
+      handleCardUpdateError(err);
     });
   }
 
@@ -335,7 +342,7 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
   const onCancelSubscriptionConfirmed = (): void => {
     const api = new PaymentScheduleAPI();
     api.cancel(tempSchedule.id).then(() => {
-      refreshList();
+      refreshSchedulesTable();
       toggleCancelSubscriptionModal();
     });
   }
@@ -346,16 +353,16 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
         <thead>
         <tr>
           <th className="w-35" />
-          <th className="w-200">{t('app.admin.invoices.schedules_table.schedule_num')}</th>
-          <th className="w-200">{t('app.admin.invoices.schedules_table.date')}</th>
-          <th className="w-120">{t('app.admin.invoices.schedules_table.price')}</th>
-          {showCustomer && <th className="w-200">{t('app.admin.invoices.schedules_table.customer')}</th>}
+          <th className="w-200">{t('app.shared.schedules_table.schedule_num')}</th>
+          <th className="w-200">{t('app.shared.schedules_table.date')}</th>
+          <th className="w-120">{t('app.shared.schedules_table.price')}</th>
+          {showCustomer && <th className="w-200">{t('app.shared.schedules_table.customer')}</th>}
           <th className="w-200"/>
         </tr>
         </thead>
         <tbody>
         {paymentSchedules.map(p => <tr key={p.id}>
-          <td colSpan={6}>
+          <td colSpan={showCustomer ? 6 : 5}>
             <table className="schedules-table-body">
               <tbody>
               <tr>
@@ -368,14 +375,14 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
               </tr>
               <tr style={{ display: statusDisplay(p.id) }}>
                 <td className="w-35" />
-                <td colSpan={5}>
+                <td colSpan={showCustomer ? 5 : 4}>
                   <div>
                     <table className="schedule-items-table">
                       <thead>
                       <tr>
-                        <th className="w-120">{t('app.admin.invoices.schedules_table.deadline')}</th>
-                        <th className="w-120">{t('app.admin.invoices.schedules_table.amount')}</th>
-                        <th className="w-200">{t('app.admin.invoices.schedules_table.state')}</th>
+                        <th className="w-120">{t('app.shared.schedules_table.deadline')}</th>
+                        <th className="w-120">{t('app.shared.schedules_table.amount')}</th>
+                        <th className="w-200">{t('app.shared.schedules_table.state')}</th>
                         <th className="w-200" />
                       </tr>
                       </thead>
@@ -398,37 +405,37 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
         </tbody>
       </table>
       <div className="modals">
-        <FabModal title={t('app.admin.invoices.schedules_table.confirm_check_cashing')}
+        <FabModal title={t('app.shared.schedules_table.confirm_check_cashing')}
                   isOpen={showConfirmCashing}
                   toggleModal={toggleConfirmCashingModal}
                   onConfirm={onCheckCashingConfirmed}
                   closeButton={true}
-                  confirmButton={t('app.admin.invoices.schedules_table.confirm_button')}>
+                  confirmButton={t('app.shared.schedules_table.confirm_button')}>
           {tempDeadline && <span>
-            {t('app.admin.invoices.schedules_table.confirm_check_cashing_body', {
+            {t('app.shared.schedules_table.confirm_check_cashing_body', {
               AMOUNT: formatPrice(tempDeadline.amount),
               DATE: formatDate(tempDeadline.due_date)
             })}
           </span>}
         </FabModal>
-        <FabModal title={t('app.admin.invoices.schedules_table.cancel_subscription')}
+        <FabModal title={t('app.shared.schedules_table.cancel_subscription')}
                   isOpen={showCancelSubscription}
                   toggleModal={toggleCancelSubscriptionModal}
                   onConfirm={onCancelSubscriptionConfirmed}
                   closeButton={true}
-                  confirmButton={t('app.admin.invoices.schedules_table.confirm_button')}>
-          {t('app.admin.invoices.schedules_table.confirm_cancel_subscription')}
+                  confirmButton={t('app.shared.schedules_table.confirm_button')}>
+          {t('app.shared.schedules_table.confirm_cancel_subscription')}
         </FabModal>
         <StripeElements>
-          <FabModal title={t('app.admin.invoices.schedules_table.resolve_action')}
+          <FabModal title={t('app.shared.schedules_table.resolve_action')}
                     isOpen={showResolveAction}
                     toggleModal={toggleResolveActionModal}
                     onConfirm={afterAction}
-                    confirmButton={t('app.admin.invoices.schedules_table.ok_button')}
+                    confirmButton={t('app.shared.schedules_table.ok_button')}
                     preventConfirm={isConfirmActionDisabled}>
             {tempDeadline && <StripeConfirm clientSecret={tempDeadline.client_secret} onResponse={toggleConfirmActionButton} />}
           </FabModal>
-          <FabModal title={t('app.admin.invoices.schedules_table.update_card')}
+          <FabModal title={t('app.shared.schedules_table.update_card')}
                     isOpen={showUpdateCard}
                     toggleModal={toggleUpdateCardModal}
                     closeButton={false}
@@ -445,7 +452,7 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
               </div>}
             </StripeCardUpdate>}
             <div className="submit-card">
-              {canSubmitUpdateCard && <button type="submit" disabled={!canSubmitUpdateCard} form="stripe-card" className="submit-card-btn">{t('app.admin.invoices.schedules_table.validate_button')}</button>}
+              {canSubmitUpdateCard && <button type="submit" disabled={!canSubmitUpdateCard} form="stripe-card" className="submit-card-btn">{t('app.shared.schedules_table.validate_button')}</button>}
               {!canSubmitUpdateCard && <div className="payment-pending">
                 <div className="fa-2x">
                   <i className="fas fa-circle-notch fa-spin" />
