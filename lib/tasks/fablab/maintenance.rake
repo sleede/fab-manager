@@ -17,7 +17,7 @@ namespace :fablab do
       puts '-> Done'
     end
 
-    task :regenerate_schedules, %i[year, month] => :environment do |_task, args|
+    task :regenerate_schedules, %i[year month] => :environment do |_task, args|
       year = args.year || Time.current.year
       month = args.month || Time.current.month
       start_date = Time.zone.local(year.to_i, month.to_i, 1)
