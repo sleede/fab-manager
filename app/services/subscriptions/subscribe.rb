@@ -53,7 +53,7 @@ class Subscriptions::Subscribe
       expiration_date: new_expiration_date
     )
     if new_sub.save
-      schedule = subscription.payment_schedule
+      schedule = subscription.original_payment_schedule
       details = Price.compute(true, new_sub.user, nil, [], plan_id: subscription.plan_id)
       payment = if schedule
                   generate_schedule(subscription: new_sub,

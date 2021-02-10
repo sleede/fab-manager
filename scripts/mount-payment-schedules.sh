@@ -26,7 +26,7 @@ add_mount()
 {
   # shellcheck disable=SC2016
   # we don't want to expand ${PWD}
-  yq w docker-compose.yml "services.$SERVICE.volumes[+]" '- ${PWD}/payment_schedules:/usr/src/app/payment_schedules'
+  yq w -i docker-compose.yml "services.$SERVICE.volumes[+]" '${PWD}/payment_schedules:/usr/src/app/payment_schedules'
 }
 
 proceed()

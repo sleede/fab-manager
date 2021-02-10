@@ -80,3 +80,4 @@ This is currently not supported, because of some PostgreSQL specific instruction
  - `db/migrate/20200623141305_update_search_vector_of_projects.rb` defines a PL/pgSQL function (`fill_search_vector_for_project()`) and create an SQL trigger for this function;
  - `db/migrate/20200629123011_update_pg_trgm.rb` is using [ALTER EXTENSION](https://www.postgresql.org/docs/10/sql-alterextension.html);
  - `db/migrate/20201027101809_create_payment_schedule_items.rb` is using [jsonb](https://www.postgresql.org/docs/9.4/static/datatype-json.html);
+- `app/models/subscription.rb@original_payment_schedule` is using `->>` and `cast(... AS int)` for querying a with jsonb column.

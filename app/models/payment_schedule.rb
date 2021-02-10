@@ -51,6 +51,12 @@ class PaymentSchedule < PaymentDocument
     invoicing_profile.user
   end
 
+  # for debug & used by rake task "fablab:maintenance:regenerate_schedules"
+  def regenerate_pdf
+    pdf = ::PDF::PaymentSchedule.new(self).render
+    File.binwrite(file, pdf)
+  end
+
   def check_footprint
     payment_schedule_items.map(&:check_footprint).all? && footprint == compute_footprint
   end

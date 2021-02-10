@@ -85,6 +85,12 @@ class Subscription < ApplicationRecord
     statistic_profile.user
   end
 
+  def original_payment_schedule
+    return payment_schedule if payment_schedule
+
+    PaymentScheduleItem.where("cast(details->>'subscription_id' AS int) = ?", id).first&.payment_schedule
+  end
+
   private
 
   def notify_member_subscribed_plan
