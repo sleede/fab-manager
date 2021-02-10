@@ -830,6 +830,7 @@ en:
         a_problem_occurred_while_saving_the_date: "A problem occurred while saving the date."
         new_subscription: "New subscription"
         you_are_about_to_purchase_a_subscription_to_NAME: "You are about to purchase a subscription to {NAME}."
+        with_schedule: "Subscribe with a monthly payment schedule"
         subscription_successfully_purchased: "Subscription successfully purchased."
         a_problem_occurred_while_taking_the_subscription: "A problem occurred while taking the subscription"
         wallet: "Wallet"

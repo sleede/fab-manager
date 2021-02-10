@@ -66,6 +66,7 @@ class Subscriptions::Subscribe
                   generate_invoice(subscription, operator_profile_id, details)
                 end
       payment.save
+      payment.post_save(schedule&.stp_setup_intent_id)
       UsersCredits::Manager.new(user: new_sub.user).reset_credits
       return new_sub
     end

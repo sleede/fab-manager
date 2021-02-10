@@ -810,11 +810,17 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
         templateUrl: '/admin/subscriptions/create_modal.html',
         size: 'lg',
         controller: ['$scope', '$uibModalInstance', 'Subscription', function ($scope, $uibModalInstance, Subscription) {
-        // selected user
+          // selected user
           $scope.user = user;
 
           // available plans for the selected user
           $scope.plans = plans;
+
+          // default parameters for the new subscription
+          $scope.subscription = {
+            payment_schedule: false,
+            payment_method: 'check'
+          };
 
           /**
            * Generate a string identifying the given plan by literal human-readable name
@@ -825,6 +831,29 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
            * @returns {String}
            */
           $scope.humanReadablePlanName = function (plan, groups, short) { return `${$filter('humanReadablePlanName')(plan, groups, short)}`; };
+
+          /**
+           * Check if the currently selected plan can be paid with a payment schedule or not
+           * @return {boolean}
+           */
+          $scope.allowMonthlySchedule = function () {
+            if (!$scope.subscription) return false;
+
+            const plan = plans.find(p => p.id === $scope.subscription.plan_id);
+            return plan && plan.monthly_payment;
+          };
+
+          /**
+           * Triggered by the <switch> component.
+           * We must use a setTimeout to workaround the react integration.
+           * @param checked {Boolean}
+           */
+          $scope.toggleSchedule = function (checked) {
+            setTimeout(() => {
+              $scope.subscription.payment_schedule = checked;
+              $scope.$apply();
+            }, 50);
+          };
 
           /**
            * Modal dialog validation callback
