@@ -292,8 +292,8 @@
     background-color: $bg-gray;
 
     .wrap, .wrap-monthly {
-      width: 120px;
-      height: 120px;
+      width: 130px;
+      height: 130px;
       display: inline-block;
       background: white;
 
@@ -302,7 +302,7 @@
       border: 3px solid;
 
       .price {
-        width: 104px;
+        width: 114px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -327,14 +327,14 @@
       position: relative;
       top: 5px;
       left: 5px;
-      height: 104px;
+      height: 114px;
       background-color: black;
 
       .amount {
         padding-left: 4px;
         padding-right: 4px;
         font-weight: bold;
-        font-size: rem-calc(18);
+        font-size: rem-calc(17);
         color: white;
       }
 

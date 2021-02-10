@@ -38,15 +38,5 @@ export default class PaymentScheduleAPI {
     const res: AxiosResponse = await apiClient.put(`/api/payment_schedules/${paymentScheduleId}/cancel`);
     return res?.data;
   }
-
-  static list (query: PaymentScheduleIndexRequest): IWrapPromise<Array<PaymentSchedule>> {
-    const api = new PaymentScheduleAPI();
-    return wrapPromise(api.list(query));
-  }
-
-  static index(query: PaymentScheduleIndexRequest): IWrapPromise<Array<PaymentSchedule>> {
-    const api = new PaymentScheduleAPI();
-    return wrapPromise(api.index(query));
-  }
 }
 

@@ -3,7 +3,7 @@
  * for the currentUser
  */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IApplication } from '../models/application';
 import { useTranslation } from 'react-i18next';
 import { Loader } from './loader';
@@ -12,6 +12,7 @@ import PaymentScheduleAPI from '../api/payment-schedule';
 import { PaymentSchedulesTable } from './payment-schedules-table';
 import { FabButton } from './fab-button';
 import { User } from '../models/user';
+import { PaymentSchedule } from '../models/payment-schedule';
 
 declare var Application: IApplication;
 
@@ -20,13 +21,16 @@ interface PaymentSchedulesDashboardProps {
 }
 
 const PAGE_SIZE = 20;
-const paymentSchedulesIndex = PaymentScheduleAPI.index({ query: { page: 1, size: PAGE_SIZE } });
 
 const PaymentSchedulesDashboard: React.FC<PaymentSchedulesDashboardProps> = ({ currentUser }) => {
   const { t } = useTranslation('logged');
 
-  const [paymentSchedules, setPaymentSchedules] = useState(paymentSchedulesIndex.read());
-  const [pageNumber, setPageNumber] = useState(1);
+  const [paymentSchedules, setPaymentSchedules] = useState<Array<PaymentSchedule>>([]);
+  const [pageNumber, setPageNumber] = useState<number>(1);
+
+  useEffect(() => {
+    handleRefreshList();
+  }, []);
 
   /**
    * Fetch from the API the next payment schedules to display, for the current filters, and append them to the current results table.
@@ -44,10 +48,12 @@ const PaymentSchedulesDashboard: React.FC<PaymentSchedulesDashboardProps> = ({ c
   /**
    * Reload from te API all the currently displayed payment schedules
    */
-  const handleRefreshList = (): void => {
+  const handleRefreshList = (onError?: (msg: any) => void): void => {
     const api = new PaymentScheduleAPI();
     api.index({ query: { page: 1, size: PAGE_SIZE * pageNumber }}).then((res) => {
       setPaymentSchedules(res);
+    }).catch((err) => {
+      if (typeof onError === 'function') { onError(err.message); }
     });
   }
 
@@ -67,10 +73,10 @@ const PaymentSchedulesDashboard: React.FC<PaymentSchedulesDashboardProps> = ({ c
 
   return (
     <div className="payment-schedules-dashboard">
-      {!hasSchedules() && <div>{t('app.admin.invoices.payment_schedules.no_payment_schedules')}</div>}
+      {!hasSchedules() && <div>{t('app.logged.dashboard.payment_schedules.no_payment_schedules')}</div>}
       {hasSchedules() && <div className="schedules-list">
         <PaymentSchedulesTable paymentSchedules={paymentSchedules} showCustomer={false} refreshList={handleRefreshList} operator={currentUser} />
-        {hasMoreSchedules() && <FabButton className="load-more" onClick={handleLoadMore}>{t('app.admin.invoices.payment_schedules.load_more')}</FabButton>}
+        {hasMoreSchedules() && <FabButton className="load-more" onClick={handleLoadMore}>{t('app.logged.dashboard.payment_schedules.load_more')}</FabButton>}
       </div>}
     </div>
   );

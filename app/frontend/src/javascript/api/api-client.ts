@@ -33,9 +33,13 @@ function extractHumanReadableMessage(error: any): string {
     return error;
   }
 
-  // parse Rails errors (as JSON)
+  // parse Rails errors (as JSON) or API errors
   let message = '';
   if (error instanceof Object) {
+    // API errors
+    if (error.hasOwnProperty('error') && typeof error.error === 'string') {
+      return error.error;
+    }
     // iterate through all the keys to build the message
     for (const key in error) {
       if (Object.prototype.hasOwnProperty.call(error, key)) {
