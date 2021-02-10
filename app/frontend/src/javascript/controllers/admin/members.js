@@ -818,7 +818,8 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
 
           // default parameters for the new subscription
           $scope.subscription = {
-            payment_schedule: false
+            payment_schedule: false,
+            payment_method: 'check'
           };
 
           /**
