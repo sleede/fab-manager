@@ -121,7 +121,7 @@
 
 <div class="input-group m-t-md">
   <label for="plan[monthly_payment]" class="control-label m-r-md">{{ 'app.shared.plan.monthly_payment' | translate }} *</label>
-  <switch id="plan[monthly_payment]" checked="plan.monthly_payment" on-change="toggleMonthlyPayment" class-name="'v-middle'" ng-if="plan && method != 'PATCH'"></switch>
+  <switch id="plan[monthly_payment]" disabled="plan.interval === 'week'" checked="plan.monthly_payment" on-change="toggleMonthlyPayment" class-name="'v-middle'" ng-if="plan && method != 'PATCH'"></switch>
   <span ng-if="method == 'PATCH'">{{ (plan.monthly_payment ? 'app.shared.buttons.yes' : 'app.shared.buttons.no') | translate }}</span>
   <input type="hidden" id="plan_monthly_input" name="plan[monthly_payment]" value="{{plan.monthly_payment}}" />
   <span class="help-block" translate>{{ 'app.shared.plan.monthly_payment_info' }}</span>

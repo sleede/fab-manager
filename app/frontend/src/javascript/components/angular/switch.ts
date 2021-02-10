@@ -7,4 +7,4 @@ import { IApplication } from '../../models/application';
 
 declare var Application: IApplication;
 
-Application.Components.component('switch', react2angular(Switch, ['checked', 'onChange', 'id', 'className']));
+Application.Components.component('switch', react2angular(Switch, ['checked', 'onChange', 'id', 'className', 'disabled']));

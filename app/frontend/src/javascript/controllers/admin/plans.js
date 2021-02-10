@@ -182,6 +182,14 @@ Application.Controllers.controller('NewPlanController', ['$scope', '$uibModal', 
     };
 
     /* PRIVATE SCOPE */
+    const initialize = function () {
+      $scope.$watch(scope => scope.plan.interval,
+        (newValue, oldValue) => {
+          if (newValue === 'week') { $scope.plan.monthly_payment = false; }
+        }
+      );
+    };
+
     /**
      * Asynchronously updates the given property with the new provided value
      * @param property {string}
@@ -194,6 +202,7 @@ Application.Controllers.controller('NewPlanController', ['$scope', '$uibModal', 
       }, 50);
     };
 
+    initialize();
     return new PlanController($scope, groups, prices, partners, CSRF, _t);
   }
 ]);
