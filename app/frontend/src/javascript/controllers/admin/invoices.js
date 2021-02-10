@@ -735,11 +735,21 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           placement: 'left'
         });
       }
+      if (settings.invoicing_module === 'true') {
+        uitour.createStep({
+          selector: '.invoices-management .payment-schedules-list',
+          stepId: 'payment-schedules',
+          order: 5,
+          title: _t('app.admin.tour.invoices.payment-schedules.title'),
+          content: _t('app.admin.tour.invoices.payment-schedules.content'),
+          placement: 'bottom'
+        });
+      }
       if (AuthService.isAuthorized('admin')) {
         uitour.createStep({
           selector: '.invoices-management .invoices-settings',
           stepId: 'settings',
-          order: 5,
+          order: 6,
           title: _t('app.admin.tour.invoices.settings.title'),
           content: _t('app.admin.tour.invoices.settings.content'),
           placement: 'bottom'
@@ -747,7 +757,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         uitour.createStep({
           selector: '.invoices-management .accounting-codes-tab',
           stepId: 'codes',
-          order: 6,
+          order: 7,
           title: _t('app.admin.tour.invoices.codes.title'),
           content: _t('app.admin.tour.invoices.codes.content'),
           placement: 'bottom'
@@ -755,7 +765,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         uitour.createStep({
           selector: '.heading .export-accounting-button',
           stepId: 'export',
-          order: 7,
+          order: 8,
           title: _t('app.admin.tour.invoices.export.title'),
           content: _t('app.admin.tour.invoices.export.content'),
           placement: 'bottom'
@@ -763,7 +773,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         uitour.createStep({
           selector: '.invoices-management .payment-settings',
           stepId: 'payment',
-          order: 8,
+          order: 9,
           title: _t('app.admin.tour.invoices.payment.title'),
           content: _t('app.admin.tour.invoices.payment.content'),
           placement: 'bottom',
@@ -772,7 +782,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         uitour.createStep({
           selector: '.heading .close-accounting-periods-button',
           stepId: 'periods',
-          order: 9,
+          order: 10,
           title: _t('app.admin.tour.invoices.periods.title'),
           content: _t('app.admin.tour.invoices.periods.content'),
           placement: 'bottom',
@@ -782,7 +792,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       uitour.createStep({
         selector: 'body',
         stepId: 'conclusion',
-        order: 10,
+        order: 11,
         title: _t('app.admin.tour.conclusion.title'),
         content: _t('app.admin.tour.conclusion.content'),
         placement: 'bottom',
@@ -790,7 +800,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       });
       // on step change, change the active tab if needed
       uitour.on('stepChanged', function (nextStep) {
-        if (nextStep.stepId === 'list' || nextStep.stepId === 'settings') {
+        if (nextStep.stepId === 'list' || nextStep.stepId === 'refund') {
           $scope.tabs.active = 0;
         }
         if (nextStep.stepId === 'settings') {
@@ -801,6 +811,9 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         }
         if (nextStep.stepId === 'payment') {
           $scope.tabs.active = 3;
+        }
+        if (nextStep.stepId === 'payment-schedules') {
+          $scope.tabs.active = 4;
         }
       });
       // on tour end, save the status in database

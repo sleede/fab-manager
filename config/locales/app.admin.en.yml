@@ -1332,6 +1332,9 @@ en:
           refund:
             title: "Credit note"
             content: "Allows you to generate a credit note for the invoice on this line or some of its sub-elements. <strong>Warning:</strong> This will only generate the accounting document, the actual refund of the user will always be your responsibility."
+          payment-schedules:
+            title: "Payment schedules"
+            content: "<p>Some subscription plans may be configured to allow the members to pay them with a monthly payment schedule.</p><p>Here you can view all existing payment schedules and manage their deadlines.</p><p>Click on [+] at the beginning of a row to display all deadlines associated with a payment schedule, and run some actions on them.</p>"
           settings:
             title: "Settings"
             content: "<p>Here you can modify the parameters for invoices generation. Click on the item you are interested in to start editing.</p><p>In particular, this is where you can set if you are subject to VAT and the applicable rate.</p>"

@@ -1332,6 +1332,9 @@ fr:
           refund:
             title: "Avoir"
             content: "Permet de générer un avoir sur la facture de cette ligne ou certains de ses sous-éléments. <strong>Attention :</strong> Cela générera uniquement le document comptable, le remboursement effectif de l'utilisateur restera toujours à votre charge."
+          payment-schedules:
+            title: "Échéanciers de paiement"
+            content: "<p>Des formules d'abonnement peuvent être configurées pour permettre aux membres de les payer grâce à un échéancier de paiement mensuel.</p><p>Ici, vous pouvez voir tous les échéanciers de paiement existants et gérer leurs échéances.</p><p>Cliquez sur [+] au début d'une ligne pour afficher toutes les échéances associées à un échéancier, et effectuer des actions sur celles-ci.</p>"
           settings:
             title: "Paramètres"
             content: "<p>Ici vous pourrez modifier les paramètres de génération des factures. Cliquez sur l'élément qui vous intéresse pour commencer l'édition.</p><p>C'est notamment ici que vous pourrez définir si vous êtes assujettis à la TVA et à quel taux.</p>"
