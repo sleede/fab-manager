@@ -33,7 +33,7 @@ class StripeService
 
       stp_subscription = Stripe::Subscription.create({
                                                        customer: payment_schedule.invoicing_profile.user.stp_customer_id,
-                                                       cancel_at: subscription.expiration_date.to_i,
+                                                       cancel_at: (payment_schedule.ordered_items.last.due_date + 3.day).to_i,
                                                        add_invoice_items: items,
                                                        coupon: payment_schedule.coupon&.code,
                                                        items: [
