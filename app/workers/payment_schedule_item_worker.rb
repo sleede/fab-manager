@@ -49,5 +49,7 @@ class PaymentScheduleItemWorker
                               attached_object: psi
       psi.update_attributes(state: 'pending')
     end
+  rescue StandardError
+    psi.update_attributes(state: 'error')
   end
 end
