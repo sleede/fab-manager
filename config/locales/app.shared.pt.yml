@@ -127,7 +127,7 @@ pt:
       valid_reservation_modal:
         booking_confirmation: "Confirmação de reserva"
         here_is_the_summary_of_the_slots_to_book_for_the_current_user: "Aqui está um resumo das reservas para o usuário atual:"
-        subscription_confirmation: "Subscription confirmation"
+        subscription_confirmation: "Inscrição confirmada"
         here_is_the_subscription_summary: "Here is the subscription summary:"
         payment_method: "Payment method"
         method_stripe: "Online by card"
@@ -413,7 +413,7 @@ pt:
         or: "ou"
         cost_of_the_subscription: "Custo da inscrição"
         subscription_price: "Subscription price"
-        you_ve_just_selected_a_subscription_html: "You've just selected a <strong>subscription</strong>:"
+        you_ve_just_selected_a_subscription_html: "Você acabou de selecionar uma <strong>assinatura</strong>:"
         monthly_payment: "Monthly payment"
         your_payment_schedule: "Your payment schedule"
         monthly_payment_NUMBER: "{NUMBER}{NUMBER, plural, =1{st} =2{nd} =3{rd} other{th}} monthly payment: "
