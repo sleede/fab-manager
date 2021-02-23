@@ -117,7 +117,7 @@ de:
       #stripe payment modal
       stripe:
         online_payment: "Online-Bezahlung"
-        i_have_read_and_accept_: "I have read, and accept "
+        i_have_read_and_accept_: "Ich habe gelesen und akzeptiere "
         _the_general_terms_and_conditions: "die allgemeinen Nutzungs- und Geschäftsbedingungen."
         credit_amount_for_pay_reservation: "{amount} {currency} muss noch bezahlt werden, um Ihre Reservierung zu bestätigen"
         client_credit_amount_for_pay_reservation: "{amount} {currency} muss noch bezahlt werden, um die Reservierung des Kunden zu bestätigen"
@@ -331,7 +331,7 @@ de:
         debit_reservation_event: "Für eine Veranstaltungsreservierung bezahlen"
         warning_uneditable_credit: "Warnung: Nach der Bestätigung kann der gutgeschriebene Betrag nicht mehr bearbeitet werden."
         wallet_info:
-          you_have_AMOUNT_in_wallet: "You have {AMOUNT} on your wallet"
+          you_have_AMOUNT_in_wallet: "Ihr Gutgaben beträgt {AMOUNT}"
           wallet_pay_ITEM: "You pay your {ITEM} directly."
           item_reservation: "reservation"
           item_subscription: "subscription"
