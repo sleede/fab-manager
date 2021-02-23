@@ -125,6 +125,9 @@ es:
           download_the_invoice: "Download the invoice"
           download_the_credit_note: "Download the refund invoice"
           no_invoices_for_now: "No invoices for now."
+        payment_schedules:
+          no_payment_schedules: "No payment schedules to display"
+          load_more: "Load more"
       #public profil of a member
       members_show:
         members_list: "Lista de miembros"
