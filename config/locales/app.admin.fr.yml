@@ -346,7 +346,7 @@ fr:
         confirmation_required: "Confirmation requise"
         do_you_really_want_to_delete_this_coupon: "Êtes-vous sûr(e) de vouloir supprimer ce code promotionnel ?"
         coupon_was_successfully_deleted: "Le code promotionnel a bien été supprimé."
-        unable_to_delete_the_specified_coupon_already_in_use: "Impossible de supprimer le code promotionnel : il est utilisé dans des factures."
+        unable_to_delete_the_specified_coupon_already_in_use: "Impossible de supprimer le code promotionnel : il est utilisé dans des factures et/ou des échéanciers."
         unable_to_delete_the_specified_coupon_an_unexpected_error_occurred: "Impossible de supprimer le code promotionnel : une erreur inattendue s'est produite."
         send_a_coupon: "Envoyer un code promo"
         coupon: "Code promo"
@@ -414,6 +414,7 @@ fr:
         credit_note: "Avoir"
         display_more_invoices: "Afficher plus de factures..."
         no_invoices_for_now: "Aucune facture pour le moment."
+        payment_schedules_list: "Échéanciers de paiement"
         invoicing_settings: "Paramètres de facturation"
         warning_invoices_disabled: "Attention : les factures ne sont pas activées. Aucune facture ne sera générée par Fab-manager. Vous devez néanmoins remplir correctement les informations ci-dessous, particulièrement la TVA."
         change_logo: "Changer le logo"
@@ -440,6 +441,7 @@ fr:
         important_notes: "Informations importantes"
         address_and_legal_information: "Adresse et informations légales"
         invoice_reference: "Référence facture"
+        text: "texte"
         year: "Année"
         month: "Mois"
         day: "Jour"
@@ -447,6 +449,7 @@ fr:
         online_sales: "Vente en ligne"
         wallet: "Porte-monnaie"
         refund: "Remboursement"
+        payment_schedule: "Échéancier"
         model: "Modèle"
         documentation: "Documentation"
         2_digits_year: "Année sur 2 chiffres (ex. 70)"
@@ -470,8 +473,9 @@ fr:
         add_a_notice_regarding_refunds_only_if_the_invoice_is_concerned: "Ajoute une information relative aux remboursements, uniquement si cela concerne la facture."
         this_will_never_be_added_when_an_online_sales_notice_is_present: "Ceci ne sera jamais cumulé avec une information de vente en ligne."
         eg_RA_will_add_A_to_the_refund_invoices: '(ex. R[/A] ajoutera "/A" aux factures de remboursement)'
-        add_a_notice_regarding_the_wallet_only_if_the_invoice_is_concerned: "Ajoute une information relative au paiement par le porte-monnaie, uniquement si cela concerne la facture."
-        eg_WPM_will_add_PM_to_the_invoices_settled_with_wallet: '(ex. W[/PM] ajoutera "/PM" aux factures réglées avec porte-monnaie)'
+        add_a_notice_regarding_payment_schedule: "Ajoute une information relative aux échéanciers de paiement, uniquement pour les documents concernés."
+        this_will_never_be_added_with_other_notices: "Ceci ne sera jamais cumulé avec une autre information (remboursement ou vente en ligne)."
+        eg_SE_to_schedules: '(ex. S[/É] ajoutera "/É" aux échéanciers de paiement)'
         code: "Code"
         enable_the_code: "Activer le code"
         enabled: "Activé"
@@ -636,6 +640,14 @@ fr:
           currency_info_html: "Veuillez indiquer la devise à utiliser lors des paiements en ligne. Vous devez fournir un code ISO à trois lettres, issu de la liste des <a href='https://stripe.com/docs/currencies' target='_blank'>devises supportées par Stripe</a>."
           currency_alert_html: "<strong>Attention</strong> : la devise ne peut pas être modifiée après que le premier paiement en ligne ait été effectué. Veuillez définir attentivement ce paramètre avant d'ouvrir Fab-manager à vos membres."
           stripe_currency: "Devise Stripe"
+        payment_schedules:
+          filter_schedules: "Filtrer les échéanciers"
+          no_payment_schedules: "Pas d'échéancier à afficher"
+          load_more: "Voir plus"
+        document_filters:
+          reference: "Référence"
+          customer: "Client"
+          date: "Date"
       #management of users, labels, groups, and so on
       members:
         users_management: "Gestion des utilisateurs"
@@ -812,11 +824,13 @@ fr:
         credits_will_remain_unchanged: "Le solde de crédits gratuits (formations/machines/espaces) de l'utilisateur restera inchangé."
         you_intentionally_decide_to_extend_the_user_s_subscription_by_charging_him_again_for_his_current_subscription: "Vous décidez délibérément d'étendre l'abonnement de l'utilisateur en lui faisant repayer le prix de l'abonnement qu'il possède actuellement."
         credits_will_be_reset: "Le solde de crédits gratuits (formations/machines/espaces) de l'utilisateur sera remis à zéro, ses crédits non utilisés seront perdu."
+        payment_scheduled: "Si l'abonnement précédent a été facturé via un échéancier de paiement mensualisé, celui-ci sera facturé de la même façon, la première échéance étant facturée immédiatement, puis chaque mois suivant."
         until_expiration_date: "Jusqu'à (date d'expiration) :"
         you_successfully_changed_the_expiration_date_of_the_user_s_subscription: "Vous avez bien modifié la date d'expiration de l'abonnement de l'utilisateur"
         a_problem_occurred_while_saving_the_date: "Il y a eu un problème lors de l'enregistrement de la date."
         new_subscription: "Nouvelle souscription"
-        you_are_about_to_purchase_a_subscription_to_NAME: "Vous êtes sur le point de souscrire à un abonnement l'utilisateur {NAME}."
+        you_are_about_to_purchase_a_subscription_to_NAME: "Vous êtes sur le point de souscrire un abonnement à l'utilisateur {NAME}."
+        with_schedule: "Souscrire via un échéancier mensuel"
         subscription_successfully_purchased: "La souscription à l'abonnement a été réalisée avec succès."
         a_problem_occurred_while_taking_the_subscription: "Il y a eu un problème lors de la souscription à l'abonnement"
         wallet: "Porte-monnaie"
@@ -1236,7 +1250,7 @@ fr:
       tour:
         conclusion:
           title: "Merci de votre attention"
-          content: "<p>Si vous souhaitez relancer cette aide contextuelle, appuyez sur <strong>F1</strong> à n'importe quel moment ou cliquez sur [? Aide] depuis le menu utilisateur.</p><p>Si vous avez besoin d'aide supplémentaire, vous pouvez <a href='https://github.com/sleede/fab-manager/raw/master/doc/fr/guide_utilisation_fab_manager_v4.5.pdf' target='_blank'>consulter le guide d'utilisation</a> disponible en Français.</p><p>L'équipe de Fab-manager propose également du support personnalisé (aide à la prise en main, aide à l'installation, personnalisation, etc.), <a href='mailto:contact@fab-manager.com'>contactez-nous</a> pour plus d'informations.</p>"
+          content: "<p>Si vous souhaitez relancer cette aide contextuelle, appuyez sur <strong>F1</strong> à n'importe quel moment ou cliquez sur [? Aide] depuis le menu utilisateur.</p><p>Si vous avez besoin d'aide supplémentaire, vous pouvez <a href='https://github.com/sleede/fab-manager/raw/master/doc/fr/guide_utilisation_fab_manager_v4.7.pdf' target='_blank'>consulter le guide d'utilisation</a> disponible en Français.</p><p>L'équipe de Fab-manager propose également du support personnalisé (aide à la prise en main, aide à l'installation, personnalisation, etc.), <a href='mailto:contact@fab-manager.com'>contactez-nous</a> pour plus d'informations.</p>"
         trainings:
           welcome:
             title: "Formations"
@@ -1319,6 +1333,9 @@ fr:
           refund:
             title: "Avoir"
             content: "Permet de générer un avoir sur la facture de cette ligne ou certains de ses sous-éléments. <strong>Attention :</strong> Cela générera uniquement le document comptable, le remboursement effectif de l'utilisateur restera toujours à votre charge."
+          payment-schedules:
+            title: "Échéanciers de paiement"
+            content: "<p>Des formules d'abonnement peuvent être configurées pour permettre aux membres de les payer grâce à un échéancier de paiement mensuel.</p><p>Ici, vous pouvez voir tous les échéanciers de paiement existants et gérer leurs échéances.</p><p>Cliquez sur [+] au début d'une ligne pour afficher toutes les échéances associées à un échéancier, et effectuer des actions sur celles-ci.</p>"
           settings:
             title: "Paramètres"
             content: "<p>Ici vous pourrez modifier les paramètres de génération des factures. Cliquez sur l'élément qui vous intéresse pour commencer l'édition.</p><p>C'est notamment ici que vous pourrez définir si vous êtes assujettis à la TVA et à quel taux.</p>"

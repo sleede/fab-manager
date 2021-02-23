@@ -79,6 +79,8 @@
   </select>
   <span class="help-block error" ng-show="couponForm['coupon[validity_per_user]'].$dirty && couponForm['coupon[validity_per_user]'].$error.required" translate>{{ 'app.shared.coupon.validity_per_user_is_required' }}</span>
 </div>
+<p class="alert alert-warning" ng-show="coupon.validity_per_user == 'once'" translate>{{ 'app.shared.coupon.warn_validity_once' }}</p>
+<p class="alert alert-warning" ng-show="coupon.validity_per_user == 'forever'" translate>{{ 'app.shared.coupon.warn_validity_forever' }}</p>
 
 <div class="form-group" ng-class="{'has-error': errors['valid_until']}">
   <label for="coupon[valid_until]" translate>{{ 'app.shared.coupon.valid_until' }}</label>

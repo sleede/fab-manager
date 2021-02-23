@@ -17,6 +17,19 @@ namespace :fablab do
       puts '-> Done'
     end
 
+    task :regenerate_schedules, %i[year month] => :environment do |_task, args|
+      year = args.year || Time.current.year
+      month = args.month || Time.current.month
+      start_date = Time.zone.local(year.to_i, month.to_i, 1)
+      end_date = start_date.next_month
+      puts "-> Start regenerate the payment schedules PDF between #{I18n.l start_date, format: :long} and " \
+         "#{I18n.l end_date - 1.minute, format: :long}"
+      schedules = PaymentSchedule.where('created_at >= :start_date AND created_at < :end_date', start_date: start_date, end_date: end_date)
+                                 .order(created_at: :asc)
+      schedules.each(&:regenerate_pdf)
+      puts '-> Done'
+    end
+
     desc 'recreate every versions of images'
     task build_images_versions: :environment do
       Project.find_each do |project|
@@ -85,7 +98,7 @@ namespace :fablab do
 
     desc 'save the footprint original data'
     task save_footprint_data: :environment do
-      [Invoice, InvoiceItem, HistoryValue].each do |klass|
+      [Invoice, InvoiceItem, HistoryValue, PaymentSchedule, PaymentScheduleItem].each do |klass|
         klass.all.each do |item|
           FootprintDebug.create!(
             footprint: item.footprint,

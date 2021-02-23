@@ -15,8 +15,9 @@
           <li ui-sref-active="active"><a class="text-black" href="#" ui-sref="app.logged.dashboard.projects" translate>{{ 'app.public.common.my_projects' }}</a></li>
           <li ui-sref-active="active"><a class="text-black" href="#" ui-sref="app.logged.dashboard.trainings" translate>{{ 'app.public.common.my_trainings' }}</a></li>
           <li ui-sref-active="active"><a class="text-black" href="#" ui-sref="app.logged.dashboard.events" translate>{{ 'app.public.common.my_events' }}</a></li>
-          <li ui-sref-active="active" ng-show="modules.invoicing"><a class="text-black" href="#" ui-sref="app.logged.dashboard.invoices" translate>{{ 'app.public.common.my_invoices' }}</a></li>
-          <li ng-show="modules.wallet" ui-sref-active="active"><a class="text-black" href="#" ui-sref="app.logged.dashboard.wallet" translate>{{ 'app.public.common.my_wallet' }}</a></li>
+          <li ui-sref-active="active" ng-show="$root.modules.invoicing"><a class="text-black" href="#" ui-sref="app.logged.dashboard.invoices" translate>{{ 'app.public.common.my_invoices' }}</a></li>
+          <li ui-sref-active="active" ng-show="$root.modules.invoicing"><a class="text-black" href="#" ui-sref="app.logged.dashboard.payment_schedules" translate>{{ 'app.public.common.my_payment_schedules' }}</a></li>
+          <li ng-show="$root.modules.wallet" ui-sref-active="active"><a class="text-black" href="#" ui-sref="app.logged.dashboard.wallet" translate>{{ 'app.public.common.my_wallet' }}</a></li>
         </ul>
       </section>
     </div>

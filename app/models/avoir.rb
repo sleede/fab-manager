@@ -12,7 +12,7 @@ class Avoir < Invoice
   attr_accessor :invoice_items_ids
 
   def generate_reference
-    self.reference = InvoiceReferenceService.generate_reference(self, date: created_at, avoir: true)
+    super(created_at)
   end
 
   def expire_subscription

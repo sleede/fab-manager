@@ -47,4 +47,9 @@ version_check:
   class: 'VersionCheckWorker'
   queue: system
 
+payment_schedule_item:
+  cron: "0 * * * *" # every day, every hour
+  class: 'PaymentScheduleItemWorker'
+  queue: default
+
 <%= PluginRegistry.insert_code('yml.schedule') %>

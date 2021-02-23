@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'test_helper'
+
 class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
   setup do
     @user = User.find_by(username: 'jdupond')
@@ -165,5 +167,64 @@ class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
     assert_equal 10, transaction.amount
     assert_equal invoice.wallet_amount / 100.0, transaction.amount
     assert_equal invoice.wallet_transaction_id, transaction.id
+  end
+
+  test 'user takes a subscription with payment schedule' do
+    plan = Plan.find_by(group_id: @user.group.id, type: 'Plan', base_name: 'Abonnement mensualisable')
+    payment_schedule_count = PaymentSchedule.count
+    payment_schedule_items_count = PaymentScheduleItem.count
+
+    VCR.use_cassette('subscriptions_user_create_with_payment_schedule') do
+      get "/api/payments/setup_intent/#{@user.id}"
+
+      # Check response format & status
+      assert_equal 200, response.status, response.body
+      assert_equal Mime[:json], response.content_type
+
+      # Check the response
+      setup_intent = json_response(response.body)
+      assert_not_nil setup_intent[:client_secret]
+      assert_not_nil setup_intent[:id]
+      assert_match /^#{setup_intent[:id]}_secret_/, setup_intent[:client_secret]
+
+      # Confirm the intent
+      stripe_res = Stripe::SetupIntent.confirm(
+        setup_intent[:id],
+        { payment_method: stripe_payment_method },
+        { api_key: Setting.get('stripe_secret_key') }
+      )
+
+      # check the confirmation
+      assert_equal setup_intent[:id], stripe_res.id
+      assert_equal 'succeeded', stripe_res.status
+      assert_equal 'off_session', stripe_res.usage
+
+
+      post '/api/payments/confirm_payment_schedule',
+           params: {
+             setup_intent_id: setup_intent[:id],
+             cart_items: {
+               subscription: {
+                 plan_id: plan.id,
+                 payment_schedule: true
+               }
+             }
+           }.to_json, headers: default_headers
+    end
+
+    # Check generalities
+    assert_equal 201, response.status, response.body
+    assert_equal Mime[:json], response.content_type
+    assert_equal payment_schedule_count + 1, PaymentSchedule.count, 'missing the payment schedule'
+    assert_equal payment_schedule_items_count + 12, PaymentScheduleItem.count, 'missing some payment schedule items'
+
+    # Check the correct plan was subscribed
+    subscription = json_response(response.body)
+    assert_equal plan.id, subscription[:plan_id], 'subscribed plan does not match'
+
+    # Check that the user has the correct subscription
+    assert_not_nil @user.subscription, "user's subscription was not found"
+    assert_not_nil @user.subscription.plan, "user's subscribed plan was not found"
+    assert_equal plan.id, @user.subscription.plan_id, "user's plan does not match"
   end
 end

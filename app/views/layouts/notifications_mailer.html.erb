@@ -23,9 +23,17 @@
             <tr>
               <td align="center">
                 <% if CustomAsset.get_url('logo-file') %>
-                  <a href="<%= root_url %>"><img src="<%= root_url + CustomAsset.get_url('logo-file') %>" alt="<%=fablab_name%>" width="140px;"></a>
+                  <a href="<%= root_url %>">
+                    <img src="<%= File.join(root_url, CustomAsset.get_url('logo-file')) %>"
+                         alt="<%=fablab_name%>"
+                         width="140px;" />
+                  </a>
                 <% else %>
-                  <a href="<%= root_url %>"><img src="<%= root_url + asset_pack_path('media/images/fabmanager-logo.png') %>" alt="<%=fablab_name%>" width="140px;"></a>
+                  <a href="<%= root_url %>">
+                    <img src="<%= File.join(root_url, asset_pack_path('media/images/fabmanager-logo.png')) %>"
+                         alt="<%=fablab_name%>"
+                         width="140px;" />
+                  </a>
                 <% end %>
               </td>
             </tr>

@@ -23,7 +23,6 @@ class API::InvoicesController < API::ApiController
     p = params.require(:query).permit(:number, :customer, :date, :order_by, :page, :size)
 
     render json: { error: 'page must be an integer' }, status: :unprocessable_entity and return unless p[:page].is_a? Integer
-
     render json: { error: 'size must be an integer' }, status: :unprocessable_entity and return unless p[:size].is_a? Integer
 
     order = InvoicesService.parse_order(p[:order_by])

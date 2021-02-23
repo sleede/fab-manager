@@ -272,6 +272,7 @@ fr:
       subject: "Un avoir a été généré"
       body:
         refund_created: "Un avoir de %{AMOUNT} a été généré sur la facture %{INVOICE} de l'utilisateur %{USER}"
+        wallet_refund_created: "Un avoir de %{AMOUNT} a été généré pour le crédit du porte-monnaie de l'utilisateur %{USER}"
         download: "Cliquez ici pour télécharger cet avoir"
     notify_admins_role_update:
       subject: "Le rôle d'un utilisateur a changé"
@@ -287,5 +288,30 @@ fr:
       subject: "Synchronisation Stripe"
       body:
         members_sync: "Tous les membres ont été synchronisés avec succès sur Stripe."
+    notify_member_payment_schedule_ready:
+      subject: "Votre échéancier de paiement"
+      body:
+        please_find_attached_html: "Vous trouverez en pièce jointe votre échéancier de paiement du {DATE}, d'un montant de {AMOUNT} concernant votre {TYPE, select, Reservation{réservation} other{abonnement}}." #messageFormat interpolation
+        schedule_in_your_dashboard_html: "Vous pouvez à tout moment retrouver votre échéancier dans %{DASHBOARD} sur le site du Fab Lab."
+        your_dashboard: "votre tableau de bord"
+    notify_admin_payment_schedule_failed:
+      subject: "[URGENT] Échec du prélèvement par carte"
+      body:
+        remember: "Conformément à l'échéancier de paiement %{REFERENCE}, un prélèvement par carte de %{AMOUNT} était prévu le %{DATE}."
+        error: "Malheureusement, ce prélèvement n'a pas pu être effectué correctement."
+        action: "Veuillez vous mettre en relation avec le membre au plus tôt, puis vous rendre dans l'interface de gestion des échéanciers afin de régler le problème. Au delà d'environ 24 heures, l'abonnement par carte bancaire sera annulé."
+    notify_member_payment_schedule_failed:
+      subject: "[URGENT] Échec du prélèvement par carte"
+      body:
+        remember: "Conformément à votre échéancier de paiement %{REFERENCE}, un prélèvement par carte de %{AMOUNT} était prévu le %{DATE}."
+        error: "Malheureusement, ce prélèvement n'a pas pu être effectué correctement."
+        action_html: "Veuillez vous rendre dans %{DASHBOARD} ou prendre contact avec un gestionnaire sous 24 heures, faute de quoi votre abonnement risque d'être interrompu."
+        your_dashboard: "votre tableau de bord"
+    notify_admin_payment_schedule_check_deadline:
+      subject: "Échéance d'encaissement"
+      body:
+        remember: "Conformément à l'échéancier de paiement %{REFERENCE}, une échéance de %{AMOUNT} était prévu pour être prélevée le %{DATE}."
+        date: "Ceci est un rappel d'encaisser le chèque prévu dès que possible."
+        confirm: "N'oubliez pas de confirmer l'encaissement dans votre interface de gestion des échéanciers, afin que la facture correspondante soit générée."
     shared:
       hello: "Bonjour %{user_name}"

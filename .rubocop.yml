@@ -16,6 +16,7 @@ Metrics/BlockLength:
     - 'lib/tasks/**/*.rake'
     - 'config/routes.rb'
     - 'app/pdfs/pdf/*.rb'
+    - 'test/**/*.rb'
 Metrics/ParameterLists:
   CountKeywordArgs: false
 Style/BracesAroundHashParameters:

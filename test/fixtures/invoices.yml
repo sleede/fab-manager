@@ -104,3 +104,26 @@ invoice_5:
   footprint: 9aead7f5eb9411778d072279a058be0fe2da76eb12f6a22100cbec1f2b3f6e9d
   environment: test
   operator_profile_id: 1
+
+invoice_6:
+  id: 6
+  invoiced_id: 4
+  invoiced_type: Subscription
+  stp_invoice_id:
+  total: 3000
+  created_at: 2021-01-04 14:51:21.616153182 Z
+  updated_at: 2021-01-04 14:51:21.616153182 Z
+  invoicing_profile_id: 8
+  statistic_profile_id: 8
+  reference: '2101041'
+  payment_method:
+  avoir_date:
+  invoice_id:
+  type:
+  subscription_to_expire:
+  description:
+  footprint: e637ccf79157d973e87be46b09d5f90ac08f41b69bc53c3c60b6fc39d07450d9
+  environment: test
+  operator_profile_id: 1
+
+

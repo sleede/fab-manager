@@ -1,0 +1,56 @@
+.payment-schedule-summary {
+  h4 {
+    margin-left: 2em;
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 2em;
+
+    li {
+      position: relative;
+      margin-bottom: 0.75em;
+      .schedule-item-info {
+        display: inline;
+        border-bottom: 1px solid #ddd;
+      }
+      .schedule-item-price {
+        display: inline;
+        border-bottom: 1px solid #ddd;
+      }
+      .schedule-item-date {
+        display: block;
+        font-size: 0.8em;
+      }
+    }
+  }
+
+  .view-full-schedule {
+    margin-left: 1em;
+    font-size: 0.8em;
+    border: 0;
+    background: transparent;
+    margin-bottom: 2em;
+
+    &:before {
+      content: '\f06e';
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+      margin-right: 1em;
+    }
+  }
+}
+
+.full-schedule {
+  list-style: none;
+
+  li {
+    border-bottom: 1px solid #ddd;
+    margin-right: 3em;
+  }
+
+  .schedule-item-price {
+    color: #5a5a5a;
+    float: right;
+  }
+}

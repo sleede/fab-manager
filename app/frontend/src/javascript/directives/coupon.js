@@ -47,15 +47,18 @@ Application.Directives.directive('coupon', [ '$rootScope', 'Coupon', '_t', funct
         $scope.messages = [];
         if ($scope.couponCode === '') {
           $scope.status = 'pending';
-          return $scope.coupon = null;
+          $scope.coupon = null;
         } else {
-          return Coupon.validate({ code: $scope.couponCode, user_id: $scope.userId, amount: $scope.total }, function (res) {
+          Coupon.validate({ code: $scope.couponCode, user_id: $scope.userId, amount: $scope.total }, function (res) {
             $scope.status = 'valid';
             $scope.coupon = res;
             if (res.type === 'percent_off') {
-              return $scope.messages.push({ type: 'success', message: _t('app.shared.coupon_input.the_coupon_has_been_applied_you_get_PERCENT_discount', { PERCENT: res.percent_off }) });
+              $scope.messages.push({ type: 'success', message: _t('app.shared.coupon_input.the_coupon_has_been_applied_you_get_PERCENT_discount', { PERCENT: res.percent_off }) });
             } else {
-              return $scope.messages.push({ type: 'success', message: _t('app.shared.coupon_input.the_coupon_has_been_applied_you_get_AMOUNT_CURRENCY', { AMOUNT: res.amount_off, CURRENCY: $rootScope.currencySymbol }) });
+              $scope.messages.push({ type: 'success', message: _t('app.shared.coupon_input.the_coupon_has_been_applied_you_get_AMOUNT_CURRENCY', { AMOUNT: res.amount_off, CURRENCY: $rootScope.currencySymbol }) });
+            }
+            if (res.validity_per_user === 'once') {
+              $scope.messages.push({ type: 'warning', message: _t('app.shared.coupon_input.coupon_validity_once') });
             }
           }
           , function (err) {

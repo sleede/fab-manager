@@ -5,8 +5,8 @@
 <div class="modal-body">
 
   <div class="alert alert-warning m-b-md m-b-sm">
-    <i class="fa fa-warning m-sm inline" aria-hidden="true"></i>
-    <div class="inline pull-right width-90 m-t-n-xs" translate>{{ 'app.shared.wallet.warning_uneditable_credit' }}</div>
+    <i class="fa fa-warning" aria-hidden="true"></i>
+    <span translate>{{ 'app.shared.wallet.warning_uneditable_credit' }}</span>
   </div>
 
   <form name="walletForm" ng-class="{'has-error': walletForm.amount.$dirty && walletForm.amount.$invalid}">
@@ -40,7 +40,7 @@
     </div>
 
     <hr/>
-    <div class="text-right m-t" ng-show="modules.invoicing">
+    <div class="text-right m-t" ng-show="$root.modules.invoicing">
       <label for="generate_avoir" translate>{{ 'app.shared.wallet.generate_a_refund_invoice' }}</label>
       <div class="inline m-l">
         <input bs-switch

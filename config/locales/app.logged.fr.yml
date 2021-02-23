@@ -125,6 +125,9 @@ fr:
           download_the_invoice: "Télécharger la facture"
           download_the_credit_note: "Télécharger l'avoir"
           no_invoices_for_now: "Aucune facture pour le moment."
+        payment_schedules:
+          no_payment_schedules: "Pas d'échéancier à afficher"
+          load_more: "Voir plus"
       #public profil of a member
       members_show:
         members_list: "Liste des membres"

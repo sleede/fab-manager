@@ -34,7 +34,7 @@
                 <button class="btn btn-success m-t" ng-click="selectGroup()">Changer mon groupe</button>
             </div>
           </div>
-          <div ng-show="modules.plans">
+          <div ng-show="$root.modules.plans">
             <h3 class="text-u-c" translate>{{ 'app.logged.dashboard.settings.subscription' }}</h3>
             <div ng-show="user.subscribed_plan">
               <uib-alert type="warning">

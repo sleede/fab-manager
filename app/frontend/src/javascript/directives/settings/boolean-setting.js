@@ -23,10 +23,8 @@ Application.Directives.directive('booleanSetting', ['Setting', 'growl', '_t',
         /**
          * This will update the value when the user toggles the switch button
          * @param checked {Boolean}
-         * @param event {string}
-         * @param id {string}
          */
-        $scope.toggleSetting = (checked, event, id) => {
+        $scope.toggleSetting = (checked) => {
           setTimeout(() => {
             $scope.setting.value = checked;
             $scope.$apply();

@@ -1166,7 +1166,8 @@ CREATE TABLE public.machines (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     slug character varying,
-    disabled boolean
+    disabled boolean,
+    stp_product_id character varying
 );
 
 
@@ -1462,6 +1463,91 @@ ALTER SEQUENCE public.organizations_id_seq OWNED BY public.organizations.id;
 
 
 --
+-- Name: payment_schedule_items; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.payment_schedule_items (
+    id bigint NOT NULL,
+    amount integer,
+    due_date timestamp without time zone,
+    state character varying DEFAULT 'new'::character varying,
+    details jsonb DEFAULT '"{}"'::jsonb,
+    stp_invoice_id character varying,
+    payment_method character varying,
+    client_secret character varying,
+    payment_schedule_id bigint,
+    invoice_id bigint,
+    footprint character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: payment_schedule_items_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.payment_schedule_items_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: payment_schedule_items_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.payment_schedule_items_id_seq OWNED BY public.payment_schedule_items.id;
+
+
+--
+-- Name: payment_schedules; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.payment_schedules (
+    id bigint NOT NULL,
+    scheduled_type character varying,
+    scheduled_id bigint,
+    total integer,
+    stp_subscription_id character varying,
+    stp_setup_intent_id character varying,
+    reference character varying,
+    payment_method character varying,
+    wallet_amount integer,
+    wallet_transaction_id bigint,
+    coupon_id bigint,
+    footprint character varying,
+    environment character varying,
+    invoicing_profile_id bigint,
+    statistic_profile_id bigint,
+    operator_profile_id bigint,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: payment_schedules_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.payment_schedules_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: payment_schedules_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.payment_schedules_id_seq OWNED BY public.payment_schedules.id;
+
+
+--
 -- Name: plans; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1482,7 +1568,9 @@ CREATE TABLE public.plans (
     ui_weight integer DEFAULT 0,
     interval_count integer DEFAULT 1,
     slug character varying,
-    disabled boolean
+    disabled boolean,
+    monthly_payment boolean,
+    stp_product_id character varying
 );
 
 
@@ -2071,7 +2159,8 @@ CREATE TABLE public.spaces (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     characteristics text,
-    disabled boolean
+    disabled boolean,
+    stp_product_id character varying
 );
 
 
@@ -2601,7 +2690,8 @@ CREATE TABLE public.trainings (
     slug character varying,
     description text,
     public_page boolean DEFAULT true,
-    disabled boolean
+    disabled boolean,
+    stp_product_id character varying
 );
 
 
@@ -3191,6 +3281,20 @@ ALTER TABLE ONLY public.open_api_clients ALTER COLUMN id SET DEFAULT nextval('pu
 --
 
 ALTER TABLE ONLY public.organizations ALTER COLUMN id SET DEFAULT nextval('public.organizations_id_seq'::regclass);
+
+
+--
+-- Name: payment_schedule_items id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payment_schedule_items ALTER COLUMN id SET DEFAULT nextval('public.payment_schedule_items_id_seq'::regclass);
+
+
+--
+-- Name: payment_schedules id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payment_schedules ALTER COLUMN id SET DEFAULT nextval('public.payment_schedules_id_seq'::regclass);
 
 
 --
@@ -3808,6 +3912,22 @@ ALTER TABLE ONLY public.organizations
 
 
 --
+-- Name: payment_schedule_items payment_schedule_items_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payment_schedule_items
+    ADD CONSTRAINT payment_schedule_items_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: payment_schedules payment_schedules_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payment_schedules
+    ADD CONSTRAINT payment_schedules_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: plans_availabilities plans_availabilities_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4417,6 +4537,62 @@ CREATE INDEX index_organizations_on_invoicing_profile_id ON public.organizations
 
 
 --
+-- Name: index_payment_schedule_items_on_invoice_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_payment_schedule_items_on_invoice_id ON public.payment_schedule_items USING btree (invoice_id);
+
+
+--
+-- Name: index_payment_schedule_items_on_payment_schedule_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_payment_schedule_items_on_payment_schedule_id ON public.payment_schedule_items USING btree (payment_schedule_id);
+
+
+--
+-- Name: index_payment_schedules_on_coupon_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_payment_schedules_on_coupon_id ON public.payment_schedules USING btree (coupon_id);
+
+
+--
+-- Name: index_payment_schedules_on_invoicing_profile_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_payment_schedules_on_invoicing_profile_id ON public.payment_schedules USING btree (invoicing_profile_id);
+
+
+--
+-- Name: index_payment_schedules_on_operator_profile_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_payment_schedules_on_operator_profile_id ON public.payment_schedules USING btree (operator_profile_id);
+
+
+--
+-- Name: index_payment_schedules_on_scheduled_type_and_scheduled_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_payment_schedules_on_scheduled_type_and_scheduled_id ON public.payment_schedules USING btree (scheduled_type, scheduled_id);
+
+
+--
+-- Name: index_payment_schedules_on_statistic_profile_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_payment_schedules_on_statistic_profile_id ON public.payment_schedules USING btree (statistic_profile_id);
+
+
+--
+-- Name: index_payment_schedules_on_wallet_transaction_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_payment_schedules_on_wallet_transaction_id ON public.payment_schedules USING btree (wallet_transaction_id);
+
+
+--
 -- Name: index_plans_availabilities_on_availability_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4965,6 +5141,14 @@ CREATE TRIGGER projects_search_content_trigger BEFORE INSERT OR UPDATE ON public
 
 
 --
+-- Name: payment_schedules fk_rails_00308dc223; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payment_schedules
+    ADD CONSTRAINT fk_rails_00308dc223 FOREIGN KEY (wallet_transaction_id) REFERENCES public.wallet_transactions(id);
+
+
+--
 -- Name: o_auth2_mappings fk_rails_0b25d932a6; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5061,6 +5245,14 @@ ALTER TABLE ONLY public.exports
 
 
 --
+-- Name: payment_schedules fk_rails_27cdd051f7; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payment_schedules
+    ADD CONSTRAINT fk_rails_27cdd051f7 FOREIGN KEY (statistic_profile_id) REFERENCES public.statistic_profiles(id);
+
+
+--
 -- Name: statistic_profiles fk_rails_2c8874d1a1; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5133,6 +5325,22 @@ ALTER TABLE ONLY public.event_price_categories
 
 
 --
+-- Name: payment_schedule_items fk_rails_4e9d79c566; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payment_schedule_items
+    ADD CONSTRAINT fk_rails_4e9d79c566 FOREIGN KEY (invoice_id) REFERENCES public.invoices(id);
+
+
+--
+-- Name: payment_schedules fk_rails_552bc65163; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payment_schedules
+    ADD CONSTRAINT fk_rails_552bc65163 FOREIGN KEY (coupon_id) REFERENCES public.coupons(id);
+
+
+--
 -- Name: tickets fk_rails_65422fe751; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5194,6 +5402,14 @@ ALTER TABLE ONLY public.history_values
 
 ALTER TABLE ONLY public.projects_machines
     ADD CONSTRAINT fk_rails_88b280c24c FOREIGN KEY (machine_id) REFERENCES public.machines(id);
+
+
+--
+-- Name: payment_schedules fk_rails_8b73dd8d7d; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payment_schedules
+    ADD CONSTRAINT fk_rails_8b73dd8d7d FOREIGN KEY (operator_profile_id) REFERENCES public.invoicing_profiles(id);
 
 
 --
@@ -5333,11 +5549,27 @@ ALTER TABLE ONLY public.availability_tags
 
 
 --
+-- Name: payment_schedules fk_rails_d345f9b22a; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payment_schedules
+    ADD CONSTRAINT fk_rails_d345f9b22a FOREIGN KEY (invoicing_profile_id) REFERENCES public.invoicing_profiles(id);
+
+
+--
 -- Name: slots_reservations fk_rails_d4ced1b26d; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.slots_reservations
     ADD CONSTRAINT fk_rails_d4ced1b26d FOREIGN KEY (slot_id) REFERENCES public.slots(id);
+
+
+--
+-- Name: payment_schedule_items fk_rails_d6030dd0e7; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payment_schedule_items
+    ADD CONSTRAINT fk_rails_d6030dd0e7 FOREIGN KEY (payment_schedule_id) REFERENCES public.payment_schedules(id);
 
 
 --
@@ -5666,6 +5898,10 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200623134900'),
 ('20200623141305'),
 ('20200629123011'),
-('20200721162939');
+('20200721162939'),
+('20201027092149'),
+('20201027100746'),
+('20201027101809'),
+('20201112092002');
 
 

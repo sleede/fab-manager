@@ -620,13 +620,24 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
      * @param plan {Object} the plan to subscribe
      */
     $scope.selectPlan = function (plan) {
-    // toggle selected plan
-      if ($scope.selectedPlan !== plan) {
-        $scope.selectedPlan = plan;
-      } else {
-        $scope.selectedPlan = null;
-      }
-      return $scope.planSelectionTime = new Date();
+      setTimeout(() => {
+        // toggle selected plan
+        if ($scope.selectedPlan !== plan) {
+          $scope.selectedPlan = plan;
+        } else {
+          $scope.selectedPlan = null;
+        }
+        $scope.planSelectionTime = new Date();
+        $scope.$apply();
+      }, 50);
+    };
+
+    /**
+     * Check if the provided plan is currently selected
+     * @param plan {Object} Resource plan
+     */
+    $scope.isSelected = function (plan) {
+      return $scope.selectedPlan === plan;
     };
 
     /**
@@ -654,7 +665,9 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
 
       if ($scope.selectedPlan) {
         $scope.ctrl.member.subscribed_plan = angular.copy($scope.selectedPlan);
-        Auth._currentUser.subscribed_plan = angular.copy($scope.selectedPlan);
+        if ($scope.ctrl.member.id === Auth._currentUser.id) {
+          Auth._currentUser.subscribed_plan = angular.copy($scope.selectedPlan);
+        }
         $scope.plansAreShown = false;
         $scope.selectedPlan = null;
       }
@@ -745,6 +758,9 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
      */
     const refetchCalendar = function () {
       uiCalendarConfig.calendars.calendar.fullCalendar('refetchEvents');
+      setTimeout(() => {
+        uiCalendarConfig.calendars.calendar.fullCalendar('rerenderEvents');
+      }, 200);
     };
 
     // !!! MUST BE CALLED AT THE END of the controller

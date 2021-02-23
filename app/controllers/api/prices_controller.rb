@@ -14,7 +14,7 @@ class API::PricesController < API::ApiController
       @prices = @prices.where(priceable_id: params[:priceable_id]) if params[:priceable_id]
     end
     if params[:plan_id]
-      plan_id = if params[:plan_id] =~ /no|nil|null|undefined/i
+      plan_id = if /no|nil|null|undefined/i.match?(params[:plan_id])
                   nil
                 else
                   params[:plan_id]
@@ -37,22 +37,31 @@ class API::PricesController < API::ApiController
   end
 
   def compute
-    price_parameters = compute_price_params
+    price_parameters = if params[:reservation]
+                         compute_reservation_price_params
+                       elsif params[:subscription]
+                         compute_subscription_price_params
+                       end
     # user
     user = User.find(price_parameters[:user_id])
     # reservable
-    if [nil, ''].include? price_parameters[:reservable_id]
+    if [nil, ''].include?(price_parameters[:reservable_id]) && ['', nil].include?(price_parameters[:plan_id])
       @amount = { elements: nil, total: 0, before_coupon: 0 }
     else
-      reservable = price_parameters[:reservable_type].constantize.find(price_parameters[:reservable_id])
+      reservable = if [nil, ''].include?(price_parameters[:reservable_id])
+                     nil
+                   else
+                     price_parameters[:reservable_type].constantize.find(price_parameters[:reservable_id])
+                   end
       @amount = Price.compute(current_user.admin? || (current_user.manager? && current_user.id != user.id),
                               user,
                               reservable,
                               price_parameters[:slots_attributes] || [],
-                              price_parameters[:plan_id],
-                              price_parameters[:nb_reserve_places],
-                              price_parameters[:tickets_attributes],
-                              coupon_params[:coupon_code])
+                              plan_id: price_parameters[:plan_id],
+                              nb_places: price_parameters[:nb_reserve_places],
+                              tickets: price_parameters[:tickets_attributes],
+                              coupon_code: coupon_params[:coupon_code],
+                              payment_schedule: price_parameters[:payment_schedule])
     end
 
 
@@ -69,10 +78,14 @@ class API::PricesController < API::ApiController
     params.require(:price).permit(:amount)
   end
 
-  def compute_price_params
-    params.require(:reservation).permit(:reservable_id, :reservable_type, :plan_id, :user_id, :nb_reserve_places,
+  def compute_reservation_price_params
+    params.require(:reservation).permit(:reservable_id, :reservable_type, :plan_id, :user_id, :nb_reserve_places, :payment_schedule,
                                         tickets_attributes: %i[event_price_category_id booked],
                                         slots_attributes: %i[id start_at end_at availability_id offered])
+  end
+
+  def compute_subscription_price_params
+    params.require(:subscription).permit(:plan_id, :user_id, :payment_schedule)
   end
 
   def coupon_params

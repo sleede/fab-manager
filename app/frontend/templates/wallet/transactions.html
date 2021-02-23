@@ -17,6 +17,9 @@
         <a ng-href="api/invoices/{{t.invoice.id}}/download" target="_blank" ng-if="t.invoice.id">
           {{::t.invoice.reference}}
         </a>
+        <a ng-href="api/payment_schedules/{{t.payment_schedule.id}}/download" target="_blank" ng-if="t.payment_schedule.id">
+          {{::t.payment_schedule.reference}}
+        </a>
       </td>
       <td>{{ ::t.user.full_name }}</td>
       <td ng-class="{'green':t.transaction_type == 'credit', 'red':t.transaction_type == 'debit'}">
