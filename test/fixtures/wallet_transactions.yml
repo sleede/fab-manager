@@ -1,7 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 transaction1:
-  invoicing_profile_id: 5
+  invoicing_profile_id: 1
   wallet: wallet_5
   transaction_type: credit
   amount: 1000
+
+transaction2:
+  invoicing_profile_id: 1
+  wallet: wallet_7
+  transaction_type: credit
+  amount: 25500

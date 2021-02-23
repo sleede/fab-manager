@@ -1,0 +1,10 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p>
+  <%= t('.body.remember',
+        REFERENCE: @attached_object.payment_schedule.reference,
+        AMOUNT: number_to_currency(@attached_object.amount / 100.00),
+        DATE: I18n.l(@attached_object.due_date, format: :long)) %>
+  <%= t('.body.error') %>
+</p>
+<p><%= t('.body.action_html', DASHBOARD: link_to(t('.body.your_dashboard'), "#{root_url}#!/dashboard/payment_schedules")) %></p>

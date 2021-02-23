@@ -189,7 +189,7 @@ Please, be aware that **the configured locale will imply the CURRENCY displayed 
 
 _Eg.: configuring **fr-fr** will set the currency symbol to **€** but **fr-ca** will set **$** as currency symbol, so setting the `ANGULAR_LOCALE` to simple **fr** (without country indication) will probably not do what you expect._
 
-See [code.angularjs.org/i18n/angular-locale_*.js](https://code.angularjs.org/1.8.0/i18n/) for a list of available locales. Default is **en**.
+See [code.angularjs.org/i18n/angular-locale_*.js](https://code.angularjs.org/1.8.2/i18n/) for a list of available locales. Default is **en**.
 <a name="FULLCALENDAR_LOCALE"></a>
 
     FULLCALENDAR_LOCALE
@@ -197,6 +197,21 @@ See [code.angularjs.org/i18n/angular-locale_*.js](https://code.angularjs.org/1.8
 Configure the fullCalendar JS agenda library.
 
 See [github.com/fullcalendar/fullcalendar/locale/*.js](https://github.com/fullcalendar/fullcalendar/tree/v3.10.2/locale) for a list of available locales. Default is **en-us**.
+<a name="INTL_LOCALE"></a>
+
+    INTL_LOCALE
+
+Configure the locale for the javascript Intl Object.
+This locale must be a Unicode BCP 47 locale identifier.
+See [Intl - Javascript | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#Locale_identification_and_negotiation) for more info about configuring this setting.
+<a name="INTL_CURRENCY"></a>
+
+    INTL_CURRENCY
+
+Configure the currency for the javascript Intl Object.
+Possible values are the ISO 4217 currency codes, such as "USD" for the US dollar, "EUR" for the euro.
+See [Current currency & funds code list](http://www.currency-iso.org/en/home/tables/table-a1.html) for a list of available values. 
+There is no default value; this setting MUST be provided.
 <a name="POSTGRESQL_LANGUAGE_ANALYZER"></a>
 
     POSTGRESQL_LANGUAGE_ANALYZER

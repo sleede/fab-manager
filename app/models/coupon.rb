@@ -3,8 +3,9 @@
 # Coupon is a textual code associated with a discount rate or an amount of discount
 class Coupon < ApplicationRecord
   has_many :invoices
+  has_many :payment_schedule
 
-  after_commit :create_stripe_coupon, on: [:create]
+  after_save :create_stripe_coupon, on: [:create]
   after_commit :delete_stripe_coupon, on: [:destroy]
 
   validates :name, presence: true
@@ -31,11 +32,15 @@ class Coupon < ApplicationRecord
   }
 
   def safe_destroy
-    if invoices.size.zero?
+    if usages.zero?
       destroy
     else
       false
     end
+  end
+
+  def usages
+    invoices.count
   end
 
   ##
@@ -93,7 +98,7 @@ class Coupon < ApplicationRecord
   private
 
   def create_stripe_coupon
-    StripeWorker.perform_async(:create_stripe_coupon, id)
+    StripeService.create_stripe_coupon(id)
   end
 
   def delete_stripe_coupon

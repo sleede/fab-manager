@@ -125,6 +125,9 @@ pt:
           download_the_invoice: "Baixar a fatura"
           download_the_credit_note: "Baixar fatura de reembolso"
           no_invoices_for_now: "Nenhuma fatura."
+        payment_schedules:
+          no_payment_schedules: "No payment schedules to display"
+          load_more: "Load more"
       #public profil of a member
       members_show:
         members_list: "Lista de membros"

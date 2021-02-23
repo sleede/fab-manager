@@ -46,3 +46,10 @@ lseguin:
   first_name: Lucile
   last_name: Seguin
   email: lucile.seguin@live.fr
+
+atiermoulin:
+  id: 8
+  user_id: 8
+  first_name: Amandine
+  last_name: Tiermoulin
+  email: a.tiermoulin@mail.fr

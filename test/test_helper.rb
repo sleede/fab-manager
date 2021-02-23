@@ -4,7 +4,7 @@ require 'coveralls'
 Coveralls.wear!('rails')
 
 ENV['RAILS_ENV'] ||= 'test'
-require File.expand_path('../config/environment', __dir__)
+require_relative '../config/environment'
 require 'action_dispatch'
 require 'rails/test_help'
 require 'vcr'
@@ -23,7 +23,7 @@ Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(color: true)]
 
 class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
-
+  ActiveRecord::Migration.check_pending!
   fixtures :all
 
   def json_response(body)

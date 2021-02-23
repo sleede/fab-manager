@@ -49,7 +49,7 @@ class API::PaymentsController < API::ApiController
       if params[:cart_items][:reservation]
         res = on_reservation_success(intent, amount[:details])
       elsif params[:cart_items][:subscription]
-        res = on_subscription_success(intent)
+        res = on_subscription_success(intent, amount[:details])
       end
     end
 
@@ -68,17 +68,65 @@ class API::PaymentsController < API::ApiController
     render json: { status: false }
   end
 
+  def setup_intent
+    user = User.find(params[:user_id])
+    key = Setting.get('stripe_secret_key')
+    @intent = Stripe::SetupIntent.create({ customer: user.stp_customer_id }, { api_key: key })
+    render json: { id: @intent.id, client_secret: @intent.client_secret }
+  end
+
+  def confirm_payment_schedule
+    key = Setting.get('stripe_secret_key')
+    intent = Stripe::SetupIntent.retrieve(params[:setup_intent_id], api_key: key)
+
+    amount = card_amount
+    if intent&.status == 'succeeded'
+      if params[:cart_items][:reservation]
+        res = on_reservation_success(intent, amount[:details])
+      elsif params[:cart_items][:subscription]
+        res = on_subscription_success(intent, amount[:details])
+      end
+    end
+
+    render generate_payment_response(intent, res)
+  rescue Stripe::InvalidRequestError => e
+    render json: e, status: :unprocessable_entity
+  end
+
+  def update_card
+    user = User.find(params[:user_id])
+    key = Setting.get('stripe_secret_key')
+    Stripe::Customer.update(user.stp_customer_id,
+                            { invoice_settings: { default_payment_method: params[:payment_method_id] } },
+                            { api_key: key })
+    render json: { updated: true }, status: :ok
+  rescue Stripe::StripeError => e
+    render json: { updated: false, error: e }, status: :unprocessable_entity
+  end
+
   private
 
   def on_reservation_success(intent, details)
     @reservation = Reservation.new(reservation_params)
-    is_reserve = Reservations::Reserve.new(current_user.id, current_user.invoicing_profile.id)
-                                      .pay_and_save(@reservation, payment_details: details, payment_intent_id: intent.id)
-    Stripe::PaymentIntent.update(
-      intent.id,
-      { description: "Invoice reference: #{@reservation.invoice.reference}" },
-      { api_key: Setting.get('stripe_secret_key') }
-    )
+    payment_method = params[:cart_items][:reservation][:payment_method] || 'stripe'
+    user_id = if current_user.admin? || current_user.manager?
+                params[:cart_items][:reservation][:user_id]
+              else
+                current_user.id
+              end
+    is_reserve = Reservations::Reserve.new(user_id, current_user.invoicing_profile.id)
+                                      .pay_and_save(@reservation,
+                                                    payment_details: details,
+                                                    intent_id: intent.id,
+                                                    schedule: params[:cart_items][:reservation][:payment_schedule],
+                                                    payment_method: payment_method)
+    if intent.class == Stripe::PaymentIntent
+      Stripe::PaymentIntent.update(
+        intent.id,
+        { description: "Invoice reference: #{@reservation.invoice.reference}" },
+        { api_key: Setting.get('stripe_secret_key') }
+      )
+    end
 
     if is_reserve
       SubscriptionExtensionAfterReservation.new(@reservation).extend_subscription_if_eligible
@@ -89,16 +137,26 @@ class API::PaymentsController < API::ApiController
     end
   end
 
-  def on_subscription_success(intent)
+  def on_subscription_success(intent, details)
     @subscription = Subscription.new(subscription_params)
-    is_subscribe = Subscriptions::Subscribe.new(current_user.invoicing_profile.id, current_user.id)
-                                           .pay_and_save(@subscription, coupon: coupon_params[:coupon_code], invoice: true, payment_intent_id: intent.id)
-
-    Stripe::PaymentIntent.update(
-      intent.id,
-      { description: "Invoice reference: #{@subscription.invoices.first.reference}" },
-      { api_key: Setting.get('stripe_secret_key') }
-    )
+    user_id = if current_user.admin? || current_user.manager?
+                params[:cart_items][:subscription][:user_id]
+              else
+                current_user.id
+              end
+    is_subscribe = Subscriptions::Subscribe.new(current_user.invoicing_profile.id, user_id)
+                                           .pay_and_save(@subscription,
+                                                         payment_details: details,
+                                                         intent_id: intent.id,
+                                                         schedule: params[:cart_items][:subscription][:payment_schedule],
+                                                         payment_method: 'stripe')
+    if intent.class == Stripe::PaymentIntent
+      Stripe::PaymentIntent.update(
+        intent.id,
+        { description: "Invoice reference: #{@subscription.invoices.first.reference}" },
+        { api_key: Setting.get('stripe_secret_key') }
+      )
+    end
 
     if is_subscribe
       { template: 'api/subscriptions/show', status: :created, location: @subscription }
@@ -141,6 +199,11 @@ class API::PaymentsController < API::ApiController
       slots = cart_items_params[:slots_attributes] || []
       nb_places = cart_items_params[:nb_reserve_places]
       tickets = cart_items_params[:tickets_attributes]
+      user_id = if current_user.admin? || current_user.manager?
+                  params[:cart_items][:reservation][:user_id]
+                else
+                  current_user.id
+                end
     else
       raise NotImplementedError unless params[:cart_items][:subscription]
 
@@ -149,16 +212,21 @@ class API::PaymentsController < API::ApiController
       slots = []
       nb_places = nil
       tickets = nil
+      user_id = if current_user.admin? || current_user.manager?
+                  params[:cart_items][:subscription][:user_id]
+                else
+                  current_user.id
+                end
     end
 
     price_details = Price.compute(false,
-                                  current_user,
+                                  User.find(user_id),
                                   reservable,
                                   slots,
-                                  plan_id,
-                                  nb_places,
-                                  tickets,
-                                  coupon_params[:coupon_code])
+                                  plan_id: plan_id,
+                                  nb_places: nb_places,
+                                  tickets: tickets,
+                                  coupon_code: coupon_params[:coupon_code])
 
     # Subtract wallet amount from total
     total = price_details[:total]

@@ -27,7 +27,7 @@
 <div class="row no-gutter training-reserve">
   <div class="col-sm-12 col-md-12 col-lg-9">
     <div ui-calendar="calendarConfig" ng-model="eventSources" calendar="calendar" class="wrapper-lg" ng-show="!plansAreShown"></div>
-    <ng-include ng-if="modules.plans" src="'/plans/_plan.html'"></ng-include>
+    <ng-include ng-if="$root.modules.plans" src="'/plans/_plan.html'"></ng-include>
   </div>
 
 

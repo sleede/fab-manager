@@ -75,3 +75,14 @@ profile_7:
   software_mastered:
   created_at: 2012-03-12 11:00:21.411067000 Z
   updated_at: 2016-04-07 11:00:37.643112000 Z
+
+profile_8:
+  id: 8
+  user_id: 8
+  first_name: Amandine
+  last_name: Tiermoulin
+  phone: '0476456845'
+  interest: menuiserie
+  software_mastered: freecad
+  created_at: 2018-05-10 09:22:42.427521000 Z
+  updated_at: 2021-01-04 14:36:39.729052932 Z

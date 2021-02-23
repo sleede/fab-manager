@@ -10,9 +10,12 @@
       <form name="stripeForm" stripe:form cart-items="cartItems" on-payment-success="onPaymentSuccess" stripe-key="{{stripeKey}}" class="form-horizontal">
         <div class="panel-body">
 
-          <h3 class="m-t-xs" ng-if="walletAmount" ng-bind-html="'app.shared.wallet.you_have_amount_in_wallet' | translate:{ amount: numberFilter(walletAmount, 2), currency: currencySymbol }"></h3>
-          <p ng-if="walletAmount > 0 && amount !== 0" class="text-italic" ng-bind-html="'app.shared.stripe.credit_amount_for_pay_reservation' | translate:{ amount: numberFilter(amount, 2), currency: currencySymbol }"></p>
-
+          <div class="row">
+            <wallet-info current-user="currentUser"
+                         cart-items="cartItems"
+                         price="price"
+                         wallet="wallet"/>
+          </div>
           <div id="card-element"></div>
           <div id="card-errors" role="alert"></div>
 
@@ -23,9 +26,12 @@
                 <a href="{{cgv.custom_asset_file_attributes.attachment_url}}" target="_blank" translate>{{ 'app.shared.stripe._the_general_terms_and_conditions' }}</a>
               </label>
             </div>
-              <div ng-if="!cgv">
-                  <input type="hidden" name="acceptCondition" ng-model="acceptCondition" value="true">
-              </div>
+            <div ng-if="!cgv">
+              <input type="hidden" name="acceptCondition" ng-model="acceptCondition" value="true">
+            </div>
+          </div>
+          <div ng-if="schedule">
+            <p translate translate-values="{DEADLINES: schedule.items.length}">{{ 'app.shared.stripe.payment_schedule' }}</p>
           </div>
 
         </div>

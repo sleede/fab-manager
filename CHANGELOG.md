@@ -1,6 +1,28 @@
 # Changelog Fab-manager
 
 ## Next release
+- Payment schedules on subscriptions
+- Refactored theme builder to use scss files
+- Updated stripe gem to 5.29.0
+- Architecture documentation
+- Improved coupon creation/deletion workflow
+- Default texts for the login modal
+- Updated caniuse to 1.0.30001191
+- Fix a bug: unable to access embedded plan views
+- Fix a bug: warning message overflow in credit wallet modal
+- Fix a bug: when using a cash coupon, the amount shown in the statistics is invalid
+- Fix a bug: unable to create a coupon on stripe
+- Fix a bug: no notifications for refunds generated on wallet credit
+- Fix a bug: in staging environments, emails are not sent
+- [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
+- [TODO DEPLOY] `rails fablab:stripe:set_product_id`
+- [TODO DEPLOY] `rails fablab:setup:add_schedule_reference`
+- [TODO DEPLOY] `rails db:seed`
+- [TODO DEPLOY] add the `INTL_LOCALE` environment variable (see [doc/environment.md](doc/environment.md#INTL_LOCALE) for configuration details)
+- [TODO DEPLOY] add the `INTL_CURRENCY` environment variable (see [doc/environment.md](doc/environment.md#INTL_CURRENCY) for configuration details)
+- [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/mount-payment-schedules.sh | bash`
+
+- Fix a bug: unable to configure the app to use a german locale
 
 ## v4.6.6 2021 February 02
 - Full German translation (thanks to [@korrupt](https://crowdin.com/profile/korrupt))
@@ -10,7 +32,7 @@
 - OpenAPI's endpoints will now return more detailed error messages when something wrong occurs
 - Fix a bug: when an event is modified, the member's reservations does not reflect the new event date
 - Fix a security issue: updated ini to 1.3.8 to fix [CVE-2020-7788](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-7788)
-− Fix a security issue: updated nokogiri to 1.11.1 to fix [CVE-2020-26247](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-26247)
+- Fix a security issue: updated nokogiri to 1.11.1 to fix [CVE-2020-26247](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-26247)
 - Updated caxlsx to 3.0.4, and the dependencies of caxlsx_rail
 - [TODO DEPLOY] -> (only dev) `bundle install`
 
