@@ -346,7 +346,7 @@ de:
         confirmation_required: "Bestätigung erforderlich"
         do_you_really_want_to_delete_this_coupon: "Möchten Sie diesen Gutschein wirklich löschen?"
         coupon_was_successfully_deleted: "Gutschein wurde erfolgreich gelöscht."
-        unable_to_delete_the_specified_coupon_already_in_use: "Der angegebene Gutschein konnte nicht gelöscht werden: Er wird bereits bei einigen Rechnungen verwendet."
+        unable_to_delete_the_specified_coupon_already_in_use: "Unable to delete the specified coupon: it is already used with some invoices and/or some payment schedules."
         unable_to_delete_the_specified_coupon_an_unexpected_error_occurred: "Der angegebene Gutschein konnte nicht gelöscht werden: Ein unerwarteter Fehler ist aufgetreten."
         send_a_coupon: "Gutschein senden"
         coupon: "Gutschein"
@@ -414,6 +414,7 @@ de:
         credit_note: "Gutschrift"
         display_more_invoices: "Weitere Rechnungen anzeigen..."
         no_invoices_for_now: "Momentan keine Rechnungen."
+        payment_schedules_list: "Payment schedules"
         invoicing_settings: "Rechnungs-Einstellungen"
         warning_invoices_disabled: "Warnung: Rechnungen sind nicht aktiviert. Es werden keine Rechnungen von Fab-Manager generiert. Trotzdem müssen Sie die unten angegebenen Informationen korrekt ausfüllen, insbesondere die Mehrwertsteuer."
         change_logo: "Logo ändern"
@@ -440,6 +441,7 @@ de:
         important_notes: "Wichtige Hinweise"
         address_and_legal_information: "Adresse und rechtliche Informationen"
         invoice_reference: "Rechnungsbezug"
+        text: "text"
         year: "Jahr"
         month: "Monat"
         day: "Tag"
@@ -447,6 +449,7 @@ de:
         online_sales: "Online-Verkäufe"
         wallet: "Guthabenkonto"
         refund: "Erstattung"
+        payment_schedule: "Payment schedule"
         model: "Modell"
         documentation: "Dokumentation"
         2_digits_year: "Jahr (zwei Ziffern, z.B. 75)"
@@ -470,8 +473,9 @@ de:
         add_a_notice_regarding_refunds_only_if_the_invoice_is_concerned: "Fügen Sie nur dann eine Mitteilung zu Erstattungen hinzu, wenn die Rechnung betroffen ist."
         this_will_never_be_added_when_an_online_sales_notice_is_present: "Dies wird nie hinzugefügt, wenn eine Online-Verkaufsmitteilung vorhanden ist."
         eg_RA_will_add_A_to_the_refund_invoices: '(z.B. fügt R[/A] den Rückerstattungsrechnungen "/A" hinzu)'
-        add_a_notice_regarding_the_wallet_only_if_the_invoice_is_concerned: "Fügen Sie eine Mitteilung zum Guthaben nur dann hinzu, wenn die Rechnung betroffen ist."
-        eg_WPM_will_add_PM_to_the_invoices_settled_with_wallet: '(z.B. fügt W[/PM] jenen Rechnungen "/PM" hinzu, die mit Guthaben bezahlt werden)'
+        add_a_notice_regarding_payment_schedule: "Add a notice regarding the payment schedules, only for concerned documents."
+        this_will_never_be_added_with_other_notices: "This will never be added when any other notice is present."
+        eg_SE_to_schedules: '(eg. S[/E] will add "/E" to the payment schedules)'
         code: "Code"
         enable_the_code: "Code aktivieren"
         enabled: "Aktiviert"
@@ -636,6 +640,14 @@ de:
           currency_info_html: "Bitte geben Sie unten die Währung an, die für Online-Bezahlung verwendet wird. Sie sollten einen ISO-Code mit drei Buchstaben aus der Liste <a href='https://stripe.com/docs/currencies' target='_blank'>Stripe unterstützter Währungen eingeben</a>."
           currency_alert_html: "<strong>Warnung</strong>: Die Währung kann nicht mehr geändert werden, nachdem die erste Online-Zahlung eingegangen ist. Bitte nehmen Sie diese Einstellung sorgfältig vor, bevor Sie Fab-Manager für Mitglieder öffnen."
           stripe_currency: "Stripe-Währung"
+        payment_schedules:
+          filter_schedules: "Filter schedules"
+          no_payment_schedules: "No payment schedules to display"
+          load_more: "Load more"
+        document_filters:
+          reference: "Reference"
+          customer: "Customer"
+          date: "Date"
       #management of users, labels, groups, and so on
       members:
         users_management: "Benutzer-Verwaltung"
@@ -812,11 +824,13 @@ de:
         credits_will_remain_unchanged: "Der Saldo der freien Gutschriften (Schulungen / Maschinen / Räume) des Nutzers bleibt unverändert."
         you_intentionally_decide_to_extend_the_user_s_subscription_by_charging_him_again_for_his_current_subscription: "Sie entscheiden sich absichtlich dafür, das Abonnement des Benutzers zu verlängern, indem Sie ihn für sein aktuelles Abonnement erneut belasten."
         credits_will_be_reset: "Das Inklusiv-Guthaben (für Schulungen / Maschinen / Räume) des Benutzers wird zurückgesetzt, nicht genutztes Guthaben geht verloren."
+        payment_scheduled: "If the previous subscription was charged through a payment schedule, this one will be charged the same way, the first deadline being charged right now, then each following month."
         until_expiration_date: "Bis (Ablaufdatum):"
         you_successfully_changed_the_expiration_date_of_the_user_s_subscription: "Sie haben das Ablaufdatum des Abonnements erfolgreich geändert"
         a_problem_occurred_while_saving_the_date: "Beim Speichern des Datums ist ein Problem aufgetreten."
         new_subscription: "Neues Abonnement"
         you_are_about_to_purchase_a_subscription_to_NAME: "Sie sind dabei, ein Abonnement für {NAME} zu kaufen."
+        with_schedule: "Subscribe with a monthly payment schedule"
         subscription_successfully_purchased: "Abonnement erfolgreich gekauft."
         a_problem_occurred_while_taking_the_subscription: "Bei der Übernahme des Abonnements ist ein Problem aufgetreten"
         wallet: "Guthabenkonto"
@@ -1236,7 +1250,7 @@ de:
       tour:
         conclusion:
           title: "Vielen Dank für Ihre Aufmerksamkeit"
-          content: "<p>Um diese kontextabhängige Hilfe neu zu starten, können Sie jederzeit <strong>F1</strong> drücken oder klicken Sie im Benutzermenu auf [? Hilfe].</p><p>Zusätzliche Hilfe finden Sie in der <a href='https://github.com/sleede/fab-manager/raw/master/doc/fr/guide_utilisation_fab_manager_v4.5.pdf' target='_blank'>Benutzeranleitung</a> (nur auf Französisch).</p><p>Das Fab-Manager-Team bietet auch personalisierten Support (Hilfe beim Einstieg, Hilfe bei der Installation, Anpassung etc.), <a href='mailto:contact@fab-manager.com'>kontaktieren Sie uns</a> für weitere Informationen.</p>"
+          content: "<p>Um diese kontextabhängige Hilfe neu zu starten, können Sie jederzeit <strong>F1</strong> drücken oder klicken Sie im Benutzermenu auf [? Hilfe].</p><p>Zusätzliche Hilfe finden Sie in der <a href='https://github.com/sleede/fab-manager/raw/master/doc/fr/guide_utilisation_fab_manager_v4.7.pdf' target='_blank'>Benutzeranleitung</a> (nur auf Französisch).</p><p>Das Fab-Manager-Team bietet auch personalisierten Support (Hilfe beim Einstieg, Hilfe bei der Installation, Anpassung etc.), <a href='mailto:contact@fab-manager.com'>kontaktieren Sie uns</a> für weitere Informationen.</p>"
         trainings:
           welcome:
             title: "Schulungen"
@@ -1319,6 +1333,9 @@ de:
           refund:
             title: "Gutschrift"
             content: "Ermöglicht die Erstellung einer Gutschrift für die Rechnung in dieser Zeile oder für ihre Unterelemente. <strong>Warnung:</strong> Nur das Rechnungsdokument wird generiert, die tatsächliche Gutschrift für den Benutzer wird immer in Ihrer Verantwortung liegen."
+          payment-schedules:
+            title: "Payment schedules"
+            content: "<p>Some subscription plans may be configured to allow the members to pay them with a monthly payment schedule.</p><p>Here you can view all existing payment schedules and manage their deadlines.</p><p>Click on [+] at the beginning of a row to display all deadlines associated with a payment schedule, and run some actions on them.</p>"
           settings:
             title: "Einstellungen"
             content: "<p>Hier können Sie die Parameter für die Rechnungserstellung ändern. Klicken Sie auf das Element, das Sie bearbeiten wollen.</p><p>Insbesondere legen Sie hier fest, ob Sie der Mehrwertsteuer unterliegen und zu welchem Satz.</p>"

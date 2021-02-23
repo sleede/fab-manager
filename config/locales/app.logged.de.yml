@@ -125,6 +125,9 @@ de:
           download_the_invoice: "Rechnung herunterladen"
           download_the_credit_note: "Rückerstattungsrechnung herunterladen"
           no_invoices_for_now: "Momentan keine Rechnungen."
+        payment_schedules:
+          no_payment_schedules: "No payment schedules to display"
+          load_more: "Load more"
       #public profil of a member
       members_show:
         members_list: "Mitgliederliste"

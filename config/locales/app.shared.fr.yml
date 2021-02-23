@@ -444,7 +444,7 @@ fr:
         do_you_really_want_to_cancel_this_reservation_html: "<p>Êtes-vous sur de vouloir annuler cette réservation ?</p><p>Attention : si cette réservation a été effectuée gratuitement, dans le cadre d'un abonnement, les crédits utilisés ne seront pas re-crédités.</p>"
         reservation_was_cancelled_successfully: "La réservation a bien été annulée."
         cancellation_failed: "L'annulation a échouée."
-        confirm_payment_of_html: "{METHOD, select, stripe{Payer par carte} other{Paiement sur place}} : {AMOUNT}" #eg. confirm my payment of $20.00
+        confirm_payment_of_html: "{METHOD, select, stripe{Payer par carte} other{Paiement sur place}} : {AMOUNT}"
         a_problem_occurred_during_the_payment_process_please_try_again_later: "Il y a eu un problème lors de la procédure de paiement. Veuillez réessayer plus tard."
         none: "Aucune"
         online_payment_disabled: "Le paiement par carte bancaire n'est pas disponible. Merci de contacter directement l'accueil du FabLab."
@@ -474,11 +474,11 @@ fr:
         what_to_do: "Que voulez-vous faire ?"
         tour: "Lancer la visite guidée"
         guide: "Ouvrir le manuel de l'utilisateur"
-      # 2nd factor authentication for card payments
+      #2nd factor authentication for card payments
       stripe_confirm:
         pending: "En attente de l'action ..."
         success: "Merci, la configuration de votre carte est terminée. Le paiement sera effectué sous peu."
-      # the summary table of all payment schedules
+      #the summary table of all payment schedules
       schedules_table:
         schedule_num: "Échéancier n°"
         date: "Date"
