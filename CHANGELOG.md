@@ -1,6 +1,6 @@
 # Changelog Fab-manager
 
-## Next release
+## v4.7.0 2021 February 23
 - Payment schedules on subscriptions
 - Refactored theme builder to use scss files
 - Updated stripe gem to 5.29.0
@@ -18,6 +18,7 @@
 - Fix a security issue: updated carrierwave to 2.1.1 to fix [CVE-2021-21305](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-21305)
 - [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
 - [TODO DEPLOY] `rails fablab:stripe:set_product_id`
+- [TODO DEPLOY] `rails fablab:stripe:sync_coupons`
 - [TODO DEPLOY] `rails fablab:setup:add_schedule_reference`
 - [TODO DEPLOY] `rails db:seed`
 - [TODO DEPLOY] add the `INTL_LOCALE` environment variable (see [doc/environment.md](doc/environment.md#INTL_LOCALE) for configuration details)
