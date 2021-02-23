@@ -444,7 +444,7 @@ zu:
         do_you_really_want_to_cancel_this_reservation_html: "crwdns20908:0crwdne20908:0"
         reservation_was_cancelled_successfully: "crwdns10097:0crwdne10097:0"
         cancellation_failed: "crwdns10099:0crwdne10099:0"
-        confirm_payment_of_html: "crwdns10101:0ROLE={ROLE}crwdnd10101:0AMOUNT={AMOUNT}crwdne10101:0" #eg. confirm my payment of $20.00
+        confirm_payment_of_html: "crwdns21420:0METHOD={METHOD}crwdnd21420:0AMOUNT={AMOUNT}crwdne21420:0"
         a_problem_occurred_during_the_payment_process_please_try_again_later: "crwdns10103:0crwdne10103:0"
         none: "crwdns10105:0crwdne10105:0"
         online_payment_disabled: "crwdns20228:0crwdne20228:0"
