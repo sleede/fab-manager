@@ -8,12 +8,14 @@
 - Improved coupon creation/deletion workflow
 - Default texts for the login modal
 - Updated caniuse to 1.0.30001191
+- Fix a bug: updated ffi to 1.14.2 to fix a segmentation fault with ruby 2.6.6
 - Fix a bug: unable to access embedded plan views
 - Fix a bug: warning message overflow in credit wallet modal
 - Fix a bug: when using a cash coupon, the amount shown in the statistics is invalid
 - Fix a bug: unable to create a coupon on stripe
 - Fix a bug: no notifications for refunds generated on wallet credit
 - Fix a bug: in staging environments, emails are not sent
+- Fix a security issue: updated carrierwave to 2.1.1 to fix [CVE-2021-21305](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-21305)
 - [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
 - [TODO DEPLOY] `rails fablab:stripe:set_product_id`
 - [TODO DEPLOY] `rails fablab:setup:add_schedule_reference`
@@ -21,6 +23,7 @@
 - [TODO DEPLOY] add the `INTL_LOCALE` environment variable (see [doc/environment.md](doc/environment.md#INTL_LOCALE) for configuration details)
 - [TODO DEPLOY] add the `INTL_CURRENCY` environment variable (see [doc/environment.md](doc/environment.md#INTL_CURRENCY) for configuration details)
 - [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/mount-payment-schedules.sh | bash`
+- [TODO DEPLOY] -> (only dev) `bundle install`
 
 - Fix a bug: unable to configure the app to use a german locale
 
