@@ -75,7 +75,7 @@
     "angular-ui-tour": "https://github.com/sleede/angular-ui-tour.git#master",
     "angular-unsavedchanges": "0.2",
     "angular-xeditable": "0.10",
-    "axios": "^0.21.0",
+    "axios": "^0.21.1",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "bootstrap-sass": "3.4.1",
     "checklist-model": "0.2",
