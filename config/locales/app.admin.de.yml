@@ -472,7 +472,7 @@ de:
         eg_XVL_will_add_VL_to_the_invoices_settled_with_stripe: '(z.B. fügt W[/VL] jenen Rechnungen "/VL" hinzu, die mit Stripe bezahlt werden)'
         add_a_notice_regarding_refunds_only_if_the_invoice_is_concerned: "Fügen Sie nur dann eine Mitteilung zu Erstattungen hinzu, wenn die Rechnung betroffen ist."
         this_will_never_be_added_when_an_online_sales_notice_is_present: "Dies wird nie hinzugefügt, wenn eine Online-Verkaufsmitteilung vorhanden ist."
-        eg_RA_will_add_A_to_the_refund_invoices: '(eg. R[/A] will add "/A" to the refund invoices)'
+        eg_RA_will_add_A_to_the_refund_invoices: '(z.B. fügt R[/A] den Rückerstattungsrechnungen "/A" hinzu)'
         add_a_notice_regarding_payment_schedule: "Add a notice regarding the payment schedules, only for concerned documents."
         this_will_never_be_added_with_other_notices: "This will never be added when any other notice is present."
         eg_SE_to_schedules: '(eg. S[/E] will add "/E" to the payment schedules)'
