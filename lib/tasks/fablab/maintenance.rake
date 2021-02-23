@@ -98,7 +98,7 @@ namespace :fablab do
 
     desc 'save the footprint original data'
     task save_footprint_data: :environment do
-      [Invoice, InvoiceItem, HistoryValue].each do |klass|
+      [Invoice, InvoiceItem, HistoryValue, PaymentSchedule, PaymentScheduleItem].each do |klass|
         klass.all.each do |item|
           FootprintDebug.create!(
             footprint: item.footprint,
