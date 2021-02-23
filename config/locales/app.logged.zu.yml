@@ -125,6 +125,9 @@ zu:
           download_the_invoice: "crwdns8717:0crwdne8717:0"
           download_the_credit_note: "crwdns8719:0crwdne8719:0"
           no_invoices_for_now: "crwdns8721:0crwdne8721:0"
+        payment_schedules:
+          no_payment_schedules: "crwdns21158:0crwdne21158:0"
+          load_more: "crwdns21160:0crwdne21160:0"
       #public profil of a member
       members_show:
         members_list: "crwdns8723:0crwdne8723:0"
