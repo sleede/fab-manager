@@ -62,3 +62,15 @@ address_5:
   placeable_type: Organization
   created_at: 2016-08-02 11:16:24.412236000 Z
   updated_at: 2016-08-02 11:16:24.412236000 Z
+
+address_6:
+  id: 6
+  address: 14 rue du Général Choucroute, 44000 NANTES
+  street_number:
+  route:
+  locality:
+  postal_code:
+  placeable_id: 8
+  placeable_type: InvoicingProfile
+  created_at: 2016-08-02 11:16:24.412236000 Z
+  updated_at: 2016-08-02 11:16:24.412236000 Z

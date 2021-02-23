@@ -1,11 +1,14 @@
-<div class="widget panel b-a m m-t-lg" ng-if="user && !events.modifiable && !events.moved">
+<div class="widget panel b-a m m-t-lg" ng-if="user && !events.modifiable && !events.moved && !paidPlan">
   <div class="panel-heading b-b small">
     <h3 translate>{{ 'app.shared.cart.summary' }}</h3>
   </div>
 
-  <div class="widget-content no-bg auto wrapper" ng-show="events.reserved.length == 0 && (!events.paid || events.paid.length == 0)">
-    <p class="font-felt fleche-left text-lg"><img src="../../images/arrow-left.png" class="fleche-left visible-lg" />
-      {{ 'app.shared.cart.select_one_or_more_slots_in_the_calendar' | translate:{SINGLE:limitToOneSlot} }}</p>
+  <div class="widget-content no-bg auto wrapper" ng-show="(!events.reserved && !selectedPlan) || events.reserved.length == 0 && (!events.paid || events.paid.length == 0)">
+    <p class="font-felt fleche-left text-lg">
+      <img src="../../images/arrow-left.png" class="fleche-left visible-lg" />
+      <span ng-show="events.reserved">{{ 'app.shared.cart.select_one_or_more_slots_in_the_calendar' | translate:{SINGLE:limitToOneSlot} }}</span>
+      <span ng-hide="events.reserved" translate>{{ 'app.shared.cart.select_a_plan' }}</span>
+    </p>
   </div>
 
   <div class="widget-content no-bg auto wrapper" ng-if="events.reserved.length > 0">
@@ -52,7 +55,7 @@
 
     <coupon show="isSlotsValid() && (!modePlans || selectedPlan)" coupon="coupon.applied" total="totalNoCoupon" user-id="{{user.id}}"></coupon>
 
-    <div ng-show="modules.plans">
+    <div ng-show="$root.modules.plans">
       <div ng-if="isSlotsValid() && !user.subscribed_plan" ng-show="!modePlans">
         <p class="font-sbold text-base l-h-2x" translate>{{ 'app.shared.cart.to_benefit_from_attractive_prices' }}</p>
         <div><button class="btn btn-warning-full rounded btn-block text-xs" ng-click="showPlans()" translate>{{ 'app.shared.cart.view_our_subscriptions' }}</button></div>
@@ -60,19 +63,36 @@
       </div>
 
       <div ng-if="selectedPlan">
-        <div class="m-t-md m-b-sm text-base">{{ 'app.shared.cart.you_ve_just_selected_a_' | translate }} <br> <span class="font-sbold" translate>{{ 'app.shared.cart._subscription' }}</span> :</div>
+        <div class="m-t-md m-b-sm text-base" translate>{{ 'app.shared.cart.you_ve_just_selected_a_subscription_html' }}</div>
         <div class="panel panel-default bg-light m-n">
           <div class="panel-body m-b-md">
             <div class="font-sbold text-u-c">{{selectedPlan | humanReadablePlanName }}</div>
             <div class="text-base">{{ 'app.shared.cart.cost_of_the_subscription' | translate }} <span class="text-blue">{{selectedPlan.amount | currency}}</span></div>
           </div>
         </div>
+        <select-schedule show="selectedPlan.monthly_payment" selected="schedule.requested_schedule" on-change="togglePaymentSchedule" />
       </div>
     </div>
 
   </div>
 
-  <div class="panel-footer no-padder" ng-if="events.reserved.length > 0">
+  <div class="widget-content no-bg auto wrapper" ng-if="selectedPlan && !events.reserved">
+    <span translate>{{ 'app.shared.cart.you_ve_just_selected_a_subscription_html' }}</span>
+
+    <div class="well well-warning m-t-sm">
+      <i class="font-sbold">{{ selectedPlan | humanReadablePlanName }}</i>
+      <div class="font-sbold">{{ 'app.shared.cart.subscription_price' | translate }} {{selectedPlan.amount | currency}}</div>
+    </div>
+
+    <coupon show="!user.subscribed_plan" coupon="coupon.applied" total="totalNoCoupon" user-id="{{user.id}}"></coupon>
+    <select-schedule show="selectedPlan.monthly_payment" selected="schedule.requested_schedule" on-change="togglePaymentSchedule" />
+  </div>
+
+  <div ng-if="schedule.payment_schedule">
+    <payment-schedule-summary schedule="schedule.payment_schedule"></payment-schedule-summary>
+  </div>
+
+  <div class="widget-footer no-padder" ng-if="events.reserved.length > 0 || (selectedPlan && !events.reserved)">
     <button class="btn btn-valid btn-info btn-block p-l btn-lg text-u-c r-b text-base" ng-click="payCart()" ng-if="isSlotsValid() && (!modePlans || selectedPlan)">{{ 'app.shared.cart.confirm_and_pay' | translate }} {{amountTotal | currency}}</button>
   </div>
 
@@ -178,4 +198,13 @@
     </div>
   </div>
 
+</div>
+<div ng-if="stripe.showModal">
+  <stripe-modal is-open="stripe.showModal"
+                toggle-modal="toggleStripeModal"
+                after-success="afterStripeSuccess"
+                cart-items="stripe.cartItems"
+                current-user="currentUser"
+                customer="user"
+                schedule="schedule.payment_schedule"/>
 </div>

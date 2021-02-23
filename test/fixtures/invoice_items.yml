@@ -60,3 +60,16 @@ invoice_item_5:
   invoice_item_id:
   footprint: d4d856ee04f27b5e35f43056b46f139df73ffdfaad1716636f569164c52c5e5b
 
+invoice_item_6:
+  id: 6
+  invoice_id: 6
+  stp_invoice_item_id:
+  amount: 3000
+  created_at: 2016-04-05 08:36:46.856021000 Z
+  updated_at: 2016-04-05 08:36:46.856021000 Z
+  description: Mensuel - standard, association - month
+  subscription_id: 3
+  invoice_item_id:
+  footprint: 79e42a65be85a40978c19c493af436ea893d15b7e054e9991bb4d3bb3d80913d
+
+

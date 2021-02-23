@@ -1,0 +1,181 @@
+.schedules-table {
+  table-layout: fixed;
+  border: 1px solid #e9e9e9;
+  border-top: 0;
+  margin-bottom: 0;
+  width: 100%;
+  max-width: 100%;
+  background-color: transparent;
+  border-collapse: collapse;
+  border-spacing: 0;
+
+  & > thead {
+    border-top: 1px solid #e9e9e9;
+
+    & > tr > th {
+      font-weight: 600;
+      vertical-align: middle;
+      text-align: center;
+      padding: 2rem 1rem;
+      line-height: 1.5;
+      border: 1px solid #f0f0f0;
+      border-top: 0;
+    }
+  }
+
+  .w-35 { width: 35px; }
+  .w-120 { width: 120px; }
+  .w-200 { width: 200px; }
+
+  .schedules-table-body {
+    table-layout: fixed;
+    background-color: #fff;
+    border: 1px solid #e9e9e9;
+    border-top: 0;
+    margin-bottom: 0;
+    width: 100%;
+    max-width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+
+    & > tbody {
+      background: #f7f7f9;
+      border-collapse: collapse;
+      border-spacing: 0;
+      line-height: 1.5;
+
+      & > tr > td {
+        padding: 12px 10px;
+        border: 1px solid #f0f0f0;
+        border-top: 0;
+        vertical-align: middle;
+        font-size: 1.4rem;
+        line-height: 1.5;
+
+        &.row-header {
+          text-align: center;
+          cursor: pointer;
+        }
+      }
+
+      .schedule-items-table {
+        table-layout: fixed;
+        background-color: #fff;
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 1rem;
+        border-collapse: collapse;
+        border-spacing: 0;
+        border: 1px solid #e9e9e9;
+        border-top: 0;
+
+        & > thead {
+          border-top: 1px solid #e9e9e9;
+          font-size: 1.4rem;
+          line-height: 1.5;
+
+          & > tr > th {
+            border: 1px solid #f0f0f0;
+            border-top: 0;
+            border-bottom: 1px solid #e9e9e9;
+            font-weight: 600;
+            vertical-align: middle;
+            text-align: center;
+            font-size: 1.1rem;
+            padding: 2rem 1rem;
+            text-transform: uppercase;
+          }
+        }
+
+        & > tbody > tr > td {
+          vertical-align: middle;
+          border: 1px solid #f0f0f0;
+          border-top: 0;
+          padding: 12px 10px;
+          font-size: 1.4rem;
+          line-height: 1.5;
+        }
+      }
+    }
+  }
+
+  .download-button {
+    @extend .fab-button;
+
+    & > i {
+      margin-right: 0.5em;
+    }
+  }
+
+  // The color classes above are automatically generated from PaymentScheduleItem.state
+  .state-new {
+    color: #3a3a3a;
+  }
+  .state-pending,
+  .state-requires_payment_method,
+  .state-requires_action {
+    color: #d43333;
+  }
+  .state-paid,
+  .state-error {
+    color: black;
+  }
+}
+
+.fab-modal.update-card-modal {
+  .fab-modal-content {
+    .card-form {
+      background-color: #f4f3f3;
+      border: 1px solid #ddd;
+      border-radius: 6px 6px 0 0;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+      padding: 15px;
+
+      .stripe-errors {
+        padding: 4px 0;
+        color: #9e2146;
+        overflow: auto;
+      }
+    }
+    .submit-card {
+      .submit-card-btn {
+        width: 100%;
+        border: 1px solid #ddd;
+        border-radius: 0 0 6px 6px;
+        border-top: 0;
+        padding: 16px;
+        color: #fff;
+        background-color: #1d98ec;
+        margin-bottom: 15px;
+
+        &[disabled] {
+          background-color: lighten(#1d98ec, 20%);
+        }
+      }
+
+
+      .payment-pending {
+        @extend .submit-card-btn;
+        @extend .submit-card-btn[disabled];
+        text-align: center;
+        padding: 4px;
+      }
+    }
+  }
+  .fab-modal-footer {
+    .stripe-modal-icons {
+      & {
+        text-align: center;
+      }
+
+      .fa.fa-lock {
+        top: 7px;
+        color: #9edd78;
+      }
+
+      img {
+        margin-right: 10px;
+      }
+    }
+  }
+}

@@ -9,3 +9,10 @@ I18n.config.available_locales += %i[de de-AT de-CH de-DE
                                     zu]
 # we allow the Zulu locale (zu) as it is used for In-Context translation
 # @see https://support.crowdin.com/in-context-localization/
+
+
+#
+# /!\ ALL locales SHOULD be configured accordingly with the default_locale. /!\
+#
+I18n.config.default_locale = Rails.application.secrets.rails_locale
+I18n.config.locale = Rails.application.secrets.rails_locale

@@ -3,7 +3,7 @@
 require 'checksum'
 
 # A single line inside an invoice. Can be a subscription or a reservation
-class InvoiceItem < ApplicationRecord
+class InvoiceItem < Footprintable
   belongs_to :invoice
   belongs_to :subscription
 
@@ -11,24 +11,6 @@ class InvoiceItem < ApplicationRecord
 
   after_create :chain_record
   after_update :log_changes
-
-  def chain_record
-    self.footprint = compute_footprint
-    save!
-    FootprintDebug.create!(
-      footprint: footprint,
-      data: FootprintService.footprint_data(InvoiceItem, self),
-      klass: InvoiceItem.name
-    )
-  end
-
-  def check_footprint
-    footprint == compute_footprint
-  end
-
-  def debug_footprint
-    FootprintService.debug_footprint(InvoiceItem, self)
-  end
 
   def amount_after_coupon
     # deduct coupon discount
@@ -50,10 +32,6 @@ class InvoiceItem < ApplicationRecord
   end
 
   private
-
-  def compute_footprint
-    FootprintService.compute_footprint(InvoiceItem, self)
-  end
 
   def log_changes
     return if Rails.env.test?

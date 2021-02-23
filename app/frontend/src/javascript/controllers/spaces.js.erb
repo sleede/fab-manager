@@ -353,13 +353,13 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$stateP
     // the moment when the slot selection changed for the last time, used to trigger changes in the cart
     $scope.selectionTime = null;
 
-    // the last clicked event in the calender
+    // the last clicked event in the calendar
     $scope.selectedEvent = null;
 
     // indicates the state of the current view : calendar or plans information
     $scope.plansAreShown = false;
 
-    // will store the user's plan if he choosed to buy one
+    // will store the user's plan if he chose to buy one
     $scope.selectedPlan = null;
 
     // the moment when the plan selection changed for the last time, used to trigger changes in the cart
@@ -390,7 +390,7 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$stateP
     $scope.spaceExplicationsAlert = settingsPromise.space_explications_alert;
 
     /**
-     * Change the last selected slot's appearence to looks like 'added to cart'
+     * Change the last selected slot's appearance to looks like 'added to cart'
      */
     $scope.markSlotAsAdded = function () {
       $scope.selectedEvent.backgroundColor = SELECTED_EVENT_BG_COLOR;
@@ -398,7 +398,7 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$stateP
     };
 
     /**
-     * Change the last selected slot's appearence to looks like 'never added to cart'
+     * Change the last selected slot's appearance to looks like 'never added to cart'
      */
     $scope.markSlotAsRemoved = function (slot) {
       slot.backgroundColor = 'white';
@@ -419,7 +419,7 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$stateP
     $scope.slotCancelled = function () { $scope.markSlotAsRemoved($scope.selectedEvent); };
 
     /**
-     * Change the last selected slot's appearence to looks like 'currently looking for a new destination to exchange'
+     * Change the last selected slot's appearance to looks like 'currently looking for a new destination to exchange'
      */
     $scope.markSlotAsModifying = function () {
       $scope.selectedEvent.backgroundColor = '#eee';
@@ -428,7 +428,7 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$stateP
     };
 
     /**
-     * Change the last selected slot's appearence to looks like 'the slot being exchanged will take this place'
+     * Change the last selected slot's appearance to looks like 'the slot being exchanged will take this place'
      */
     $scope.changeModifySpaceSlot = function () {
       if ($scope.events.placable) {
@@ -517,17 +517,28 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$stateP
      * @param plan {Object} the plan to subscribe
      */
     $scope.selectPlan = function (plan) {
-      // toggle selected plan
-      if ($scope.selectedPlan !== plan) {
-        $scope.selectedPlan = plan;
-      } else {
-        $scope.selectedPlan = null;
-      }
-      return $scope.planSelectionTime = new Date();
+      setTimeout(() => {
+        // toggle selected plan
+        if ($scope.selectedPlan !== plan) {
+          $scope.selectedPlan = plan;
+        } else {
+          $scope.selectedPlan = null;
+        }
+        $scope.planSelectionTime = new Date();
+        $scope.$apply();
+      }, 50);
     };
 
     /**
-     * Changes the user current view from the plan subsription screen to the machine reservation agenda
+     * Check if the provided plan is currently selected
+     * @param plan {Object} Resource plan
+     */
+    $scope.isSelected = function (plan) {
+      return $scope.selectedPlan === plan;
+    };
+
+    /**
+     * Changes the user current view from the plan subscription screen to the machine reservation agenda
      * @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
      */
     $scope.doNotSubscribePlan = function (e) {
@@ -560,14 +571,18 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$stateP
 
       if ($scope.selectedPlan) {
         $scope.ctrl.member.subscribed_plan = angular.copy($scope.selectedPlan);
-        Auth._currentUser.subscribed_plan = angular.copy($scope.selectedPlan);
+        if ($scope.ctrl.member.id === Auth._currentUser.id) {
+          Auth._currentUser.subscribed_plan = angular.copy($scope.selectedPlan);
+        }
         $scope.plansAreShown = false;
         $scope.selectedPlan = null;
       }
       $scope.ctrl.member.training_credits = angular.copy(reservation.user.training_credits);
       $scope.ctrl.member.machine_credits = angular.copy(reservation.user.machine_credits);
-      Auth._currentUser.training_credits = angular.copy(reservation.user.training_credits);
-      Auth._currentUser.machine_credits = angular.copy(reservation.user.machine_credits);
+      if ($scope.ctrl.member.id === Auth._currentUser.id) {
+        Auth._currentUser.training_credits = angular.copy(reservation.user.training_credits);
+        Auth._currentUser.machine_credits = angular.copy(reservation.user.machine_credits);
+      }
 
       refetchCalendar();
     };
@@ -601,7 +616,7 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$stateP
     /**
      * Triggered when the user clicks on a reservation slot in the agenda.
      * Defines the behavior to adopt depending on the slot status (already booked, free, ready to be reserved ...),
-     * the user's subscription (current or about to be took) and the time (the user cannot modify a booked reservation
+     * the user's subscription (current or about to be took), and the time (the user cannot modify a booked reservation
      * if it's too late).
      * @see http://fullcalendar.io/docs/mouse/eventClick/
      */
@@ -611,7 +626,7 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$stateP
     };
 
     /**
-     * Triggered when fullCalendar tries to graphicaly render an event block.
+     * Triggered when fullCalendar tries to graphically render an event block.
      * Append the event tag into the block, just after the event title.
      * @see http://fullcalendar.io/docs/event_rendering/eventRender/
      */
@@ -654,6 +669,9 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$stateP
      */
     const refetchCalendar = function () {
       uiCalendarConfig.calendars.calendar.fullCalendar('refetchEvents');
+      setTimeout(() => {
+        uiCalendarConfig.calendars.calendar.fullCalendar('rerenderEvents');
+      }, 200);
     };
 
     // !!! MUST BE CALLED AT THE END of the controller

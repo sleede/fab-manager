@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'test_helper'
+
 class InvoicesTest < ActionDispatch::IntegrationTest
   # Called before every test method runs. Can be used
   # to set up fixture information.
@@ -27,8 +29,10 @@ class InvoicesTest < ActionDispatch::IntegrationTest
     assert_equal Invoice.count, invoices.size, 'some invoices are missing'
 
     # Check that invoices are ordered by reference
-    assert_equal '1604002', invoices.first[:reference]
-    assert_equal '1203001', invoices.last[:reference]
+    first_invoice = Invoice.order(:reference).limit(1).first
+    last_invoice = Invoice.order(reference: :desc).limit(1).first
+    assert_equal last_invoice.reference, invoices.first[:reference]
+    assert_equal first_invoice.reference, invoices.last[:reference]
   end
 
   test 'admin generates a refund' do

@@ -20,13 +20,15 @@ class Price < ApplicationRecord
     # @param user {User} The user who's reserving (or selected if an admin is reserving)
     # @param reservable {Machine|Training|Event} what the reservation is targeting
     # @param slots {Array<Slot>} when did the reservation will occur
-    # @param [plan_id] {Number} if the user is subscribing to a plan at the same time of his reservation, specify the plan's ID here
-    # @param [nb_places] {Number} for _reservable_ of type Event, pass here the number of booked places
-    # @param [tickets] {Array<Ticket>} for _reservable_ of type Event, mapping of the number of seats booked per price's category
-    # @param [coupon_code] {String} Code of the coupon to apply to the total price
+    # @param options {plan_id:Number, nb_places:Number, tickets:Array<Ticket>, coupon_code:String, payment_schedule:Boolean}
+    #        - plan_id {Number} if the user is subscribing to a plan at the same time of his reservation, specify the plan's ID here
+    #        - nb_places {Number} for _reservable_ of type Event, pass here the number of booked places
+    #        - tickets {Array<Ticket>} for _reservable_ of type Event, mapping of the number of seats booked per price's category
+    #        - coupon_code {String} Code of the coupon to apply to the total price
+    #        - payment_schedule {Boolean} if the user is requesting a payment schedule for his subscription
     # @return {Hash} total and price detail
     ##
-    def compute(admin, user, reservable, slots, plan_id = nil, nb_places = nil, tickets = nil, coupon_code = nil)
+    def compute(admin, user, reservable, slots, options = {})
       total_amount = 0
       all_elements = {}
       all_elements[:slots] = []
@@ -35,9 +37,9 @@ class Price < ApplicationRecord
       plan = if user.subscribed_plan
                new_plan_being_bought = false
                user.subscribed_plan
-             elsif plan_id
+             elsif options[:plan_id]
                new_plan_being_bought = true
-               Plan.find(plan_id)
+               Plan.find(options[:plan_id])
              else
                new_plan_being_bought = false
                nil
@@ -91,8 +93,8 @@ class Price < ApplicationRecord
 
       # Event reservation
       when Event
-        amount = reservable.amount * nb_places
-        tickets&.each do |ticket|
+        amount = reservable.amount * options[:nb_places]
+        options[:tickets]&.each do |ticket|
           amount += ticket[:booked] * EventPriceCategory.find(ticket[:event_price_category_id]).amount
         end
         slots.each do |slot|
@@ -130,8 +132,8 @@ class Price < ApplicationRecord
         raise NotImplementedError
       end
 
-      # === compute Plan price if any ===
-      unless plan_id.nil?
+      # === compute Plan price (if any) ===
+      unless options[:plan_id].nil?
         all_elements[:plan] = plan.amount
         total_amount += plan.amount
       end
@@ -139,11 +141,26 @@ class Price < ApplicationRecord
       # === apply Coupon if any ===
       _amount_no_coupon = total_amount
       cs = CouponService.new
-      cp = cs.validate(coupon_code, user.id)
+      cp = cs.validate(options[:coupon_code], user.id)
       total_amount = cs.apply(total_amount, cp)
 
+      # == generate PaymentSchedule (if applicable) ===
+      schedule = if options[:payment_schedule] && plan&.monthly_payment
+                   PaymentScheduleService.new.compute(plan, _amount_no_coupon, coupon: cp)
+                 else
+                   nil
+                 end
+
+      total_amount = schedule[:items][0].amount if schedule
+
       # return result
-      { elements: all_elements, total: total_amount.to_i, before_coupon: _amount_no_coupon.to_i, coupon: cp }
+      {
+        elements: all_elements,
+        total: total_amount.to_i,
+        before_coupon: _amount_no_coupon.to_i,
+        coupon: cp,
+        schedule: schedule
+      }
     end
 
 

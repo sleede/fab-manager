@@ -43,4 +43,11 @@ class NotificationsMailer < NotifyWith::NotificationsMailer
          subject: t('notifications_mailer.notify_member_avoir_ready.subject'),
          template_name: 'notify_member_avoir_ready')
   end
+
+  def notify_user_when_payment_schedule_ready
+    attachments[@attached_object.filename] = File.read(@attached_object.file)
+    mail(to: @recipient.email,
+         subject: t('notifications_mailer.notify_member_payment_schedule_ready.subject'),
+         template_name: 'notify_member_payment_schedule_ready')
+  end
 end

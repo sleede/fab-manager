@@ -29,7 +29,7 @@ class FootprintService
   # Return an ordered array of the columns used in the footprint computation
   # @param klass Invoice|InvoiceItem|HistoryValue
   def self.footprint_columns(klass)
-    klass.columns.map(&:name).delete_if { |c| %w[footprint updated_at].include? c }
+    klass.columns.map(&:name).delete_if { |c| %w[footprint updated_at].concat(klass.columns_out_of_footprint).include? c }
   end
 
   # Logs a debugging message to help finding why a footprint is invalid
@@ -38,7 +38,7 @@ class FootprintService
   def self.debug_footprint(klass, item)
     columns = FootprintService.footprint_columns(klass)
     current = FootprintService.footprint_data(klass, item)
-    saved = FootprintDebug.find_by(footprint: item.footprint, klass: klass)
+    saved = FootprintDebug.find_by(footprint: item.footprint, klass: klass.name)
     puts "Debug footprint for #{klass} [ id: #{item.id} ]"
     puts '-----------------------------------------'
     puts "columns: [ #{columns.join(', ')} ]"

@@ -18,7 +18,7 @@
     <input class="col-md-1 col-sm-1 col-xs-1" type="checkbox" ng-model="m.checked" ng-change="filterAvailabilities(filter)">
   </div>
 </div>
-<div class="m-t" ng-show="modules.spaces">
+<div class="m-t" ng-show="$root.modules.spaces">
   <div class="row">
     <h3 class="col-md-11 col-sm-11 col-xs-11 text-cyan" translate>{{ 'app.public.calendar.spaces' }}</h3>
     <input class="col-md-1 col-sm-1 col-xs-1" type="checkbox" ng-model="filter.spaces" ng-change="toggleFilter('spaces', filter)">

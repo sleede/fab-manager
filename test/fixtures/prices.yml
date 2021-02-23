@@ -2,7 +2,7 @@
 price_1:
   id: 1
   group_id: 1
-  plan_id: 
+  plan_id:
   priceable_id: 1
   priceable_type: Machine
   amount: 2400
@@ -12,7 +12,7 @@ price_1:
 price_2:
   id: 2
   group_id: 2
-  plan_id: 
+  plan_id:
   priceable_id: 1
   priceable_type: Machine
   amount: 5300
@@ -22,7 +22,7 @@ price_2:
 price_5:
   id: 5
   group_id: 1
-  plan_id: 
+  plan_id:
   priceable_id: 2
   priceable_type: Machine
   amount: 4200
@@ -32,7 +32,7 @@ price_5:
 price_6:
   id: 6
   group_id: 2
-  plan_id: 
+  plan_id:
   priceable_id: 2
   priceable_type: Machine
   amount: 1100
@@ -42,7 +42,7 @@ price_6:
 price_9:
   id: 9
   group_id: 1
-  plan_id: 
+  plan_id:
   priceable_id: 3
   priceable_type: Machine
   amount: 4100
@@ -52,7 +52,7 @@ price_9:
 price_10:
   id: 10
   group_id: 2
-  plan_id: 
+  plan_id:
   priceable_id: 3
   priceable_type: Machine
   amount: 5300
@@ -62,7 +62,7 @@ price_10:
 price_13:
   id: 13
   group_id: 1
-  plan_id: 
+  plan_id:
   priceable_id: 4
   priceable_type: Machine
   amount: 900
@@ -72,7 +72,7 @@ price_13:
 price_14:
   id: 14
   group_id: 2
-  plan_id: 
+  plan_id:
   priceable_id: 4
   priceable_type: Machine
   amount: 5100
@@ -82,7 +82,7 @@ price_14:
 price_17:
   id: 17
   group_id: 1
-  plan_id: 
+  plan_id:
   priceable_id: 5
   priceable_type: Machine
   amount: 1600
@@ -92,7 +92,7 @@ price_17:
 price_18:
   id: 18
   group_id: 2
-  plan_id: 
+  plan_id:
   priceable_id: 5
   priceable_type: Machine
   amount: 2000
@@ -102,7 +102,7 @@ price_18:
 price_21:
   id: 21
   group_id: 1
-  plan_id: 
+  plan_id:
   priceable_id: 6
   priceable_type: Machine
   amount: 3200
@@ -112,7 +112,7 @@ price_21:
 price_22:
   id: 22
   group_id: 2
-  plan_id: 
+  plan_id:
   priceable_id: 6
   priceable_type: Machine
   amount: 3400
@@ -293,6 +293,66 @@ price_42:
   id: 42
   group_id: 2
   plan_id: 3
+  priceable_id: 6
+  priceable_type: Machine
+  amount: 1000
+  created_at: 2016-04-04 15:18:28.860220000 Z
+  updated_at: 2016-04-04 15:18:50.517702000 Z
+
+price_43:
+  id: 43
+  group_id: 1
+  plan_id: 4
+  priceable_id: 1
+  priceable_type: Machine
+  amount: 1000
+  created_at: 2016-04-04 15:18:28.836899000 Z
+  updated_at: 2016-04-04 15:18:50.507019000 Z
+
+price_44:
+  id: 44
+  group_id: 1
+  plan_id: 4
+  priceable_id: 2
+  priceable_type: Machine
+  amount: 1000
+  created_at: 2016-04-04 15:18:28.842674000 Z
+  updated_at: 2016-04-04 15:18:50.508799000 Z
+
+price_45:
+  id: 45
+  group_id: 1
+  plan_id: 4
+  priceable_id: 3
+  priceable_type: Machine
+  amount: 1500
+  created_at: 2016-04-04 15:18:28.847736000 Z
+  updated_at: 2016-04-04 15:18:50.510437000 Z
+
+price_46:
+  id: 46
+  group_id: 1
+  plan_id: 4
+  priceable_id: 4
+  priceable_type: Machine
+  amount: 1000
+  created_at: 2016-04-04 15:18:28.852783000 Z
+  updated_at: 2016-04-04 15:18:50.512239000 Z
+
+price_47:
+  id: 47
+  group_id: 1
+  plan_id: 4
+  priceable_id: 5
+  priceable_type: Machine
+  amount: 800
+  created_at: 2016-04-04 15:18:28.856602000 Z
+  updated_at: 2016-04-04 15:18:50.514062000 Z
+
+price_48:
+  id: 48
+  group_id: 1
+  plan_id: 4
   priceable_id: 6
   priceable_type: Machine
   amount: 1000
