@@ -444,7 +444,7 @@ pt:
         do_you_really_want_to_cancel_this_reservation_html: "<p>Você realmente quer cancelar essa reserva?</p><p>Warning: if this reservation was made free of charge, as part of a subscription, the credits used will not be re-credited.</p>"
         reservation_was_cancelled_successfully: "Reserva a foi cancelada com sucesso."
         cancellation_failed: "Cancelamento falhou."
-        confirm_payment_of_html: "{ROLE, select, admin{Pagamento pelo site} other{Pagar}}: {AMOUNT}" #eg. confirm my payment of $20.00
+        confirm_payment_of_html: "{METHOD, select, stripe{Pay by card} other{Pay on site}}: {AMOUNT}"
         a_problem_occurred_during_the_payment_process_please_try_again_later: "Um problema ocorreu durante o processo de pagamento. Por favor tente novamente mais tarde."
         none: "Vazio"
         online_payment_disabled: "O pagamento online não está disponível. Entre em contato diretamente com a recepção do FabLab."
