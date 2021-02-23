@@ -10,4 +10,10 @@ json.array!(@wallet_transactions) do |t|
       json.reference t.invoice.reference
     end
   end
+  if t.payment_schedule
+    json.payment_schedule do
+      json.id t.payment_schedule.id
+      json.reference t.payment_schedule.reference
+    end
+  end
 end

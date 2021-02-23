@@ -39,8 +39,9 @@
         <li><a ui-sref="app.logged.dashboard.projects" translate>{{ 'app.public.common.my_projects' }}</a></li>
         <li><a ui-sref="app.logged.dashboard.trainings" translate>{{ 'app.public.common.my_trainings' }}</a></li>
         <li><a ui-sref="app.logged.dashboard.events" translate>{{ 'app.public.common.my_events' }}</a></li>
-        <li><a ui-sref="app.logged.dashboard.invoices" ng-show="modules.invoicing" translate>{{ 'app.public.common.my_invoices' }}</a></li>
-        <li ng-show="modules.wallet"><a ui-sref="app.logged.dashboard.wallet" translate>{{ 'app.public.common.my_wallet' }}</a></li>
+        <li><a ui-sref="app.logged.dashboard.invoices" ng-show="$root.modules.invoicing" translate>{{ 'app.public.common.my_invoices' }}</a></li>
+        <li><a ui-sref="app.logged.dashboard.payment_schedules" ng-show="$root.modules.invoicing" translate>{{ 'app.public.common.my_payment_schedules' }}</a></li>
+        <li ng-show="$root.modules.wallet"><a ui-sref="app.logged.dashboard.wallet" translate>{{ 'app.public.common.my_wallet' }}</a></li>
         <li class="divider" ng-if="isAuthorized(['admin', 'manager'])"></li>
         <li><a class="text-black pointer" ng-click="help($event)" ng-if="isAuthorized(['admin', 'manager'])"><i class="fa fa-question-circle"></i> <span translate>{{ 'app.public.common.help' }}</span> </a></li>
         <li class="divider"></li>

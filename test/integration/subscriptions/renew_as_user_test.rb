@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
+require 'test_helper'
+
 class Subscriptions::RenewAsUserTest < ActionDispatch::IntegrationTest
   setup do
-    @user = User.find_by(username: 'lseguin')
+    @user = User.find_by(username: 'atiermoulin')
     login_as(@user, scope: :user)
   end
 

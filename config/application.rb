@@ -10,7 +10,7 @@ require 'action_view/railtie'
 require 'action_mailer/railtie'
 require 'active_job/railtie'
 # require 'action_cable/engine'
-require 'rails/test_unit/railtie' if Rails.env.test?
+require 'rails/test_unit/railtie'
 # require 'sprockets/railtie'
 require 'elasticsearch/rails/instrumentation'
 require 'elasticsearch/persistence/model'
@@ -42,11 +42,6 @@ module Fablab
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
-    #
-    # /!\ ALL locales SHOULD be configured accordingly with this locale. /!\
-    #
-    config.i18n.default_locale = Rails.application.secrets.rails_locale
-    config.i18n.fallbacks = [Rails.application.secrets.app_locale, :en]
 
     config.to_prepare do
       Devise::Mailer.layout 'notifications_mailer'
@@ -56,6 +51,7 @@ module Fablab
 
     config.generators do |g|
       g.orm :active_record
+      g.test_framework :mini_test
     end
 
     if Rails.env.development?

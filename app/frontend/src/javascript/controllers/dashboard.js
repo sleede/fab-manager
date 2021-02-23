@@ -30,13 +30,13 @@ Application.Controllers.controller('DashboardController', ['$scope', 'memberProm
   const initialize = () => $scope.social.networks = filterNetworks();
 
   /**
-   * Filter social network or website that are associated with the profile of the user provided in promise
+   * Filter the social networks or websites that are associated with the profile of the user provided in promise
    * and return the filtered networks
    * @return {Array}
    */
-  var filterNetworks = function () {
+  const filterNetworks = function () {
     const networks = [];
-    for (let network of Array.from(SocialNetworks)) {
+    for (const network of Array.from(SocialNetworks)) {
       if ($scope.user.profile[network] && ($scope.user.profile[network].length > 0)) {
         networks.push(network);
       }

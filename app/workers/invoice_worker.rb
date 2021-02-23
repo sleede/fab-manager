@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Generates the PDF Document associated with the provided invoice, and send it to the customer
 class InvoiceWorker
   include Sidekiq::Worker
 

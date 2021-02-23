@@ -58,6 +58,7 @@ RUN apk del .build-deps && \
 RUN mkdir -p /usr/src/app && \
     mkdir -p /usr/src/app/config && \
     mkdir -p /usr/src/app/invoices && \
+    mkdir -p /usr/src/app/payment_schedules && \
     mkdir -p /usr/src/app/exports && \
     mkdir -p /usr/src/app/imports && \
     mkdir -p /usr/src/app/log && \
@@ -72,6 +73,7 @@ COPY . /usr/src/app
 
 # Volumes
 VOLUME /usr/src/app/invoices
+VOLUME /usr/src/app/payment_schedules
 VOLUME /usr/src/app/exports
 VOLUME /usr/src/app/imports
 VOLUME /usr/src/app/public

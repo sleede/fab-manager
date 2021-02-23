@@ -136,9 +136,9 @@ docker-compose run --rm -e VAR1=xxx -e VAR2=xxx fabmanager bundle exec rails my:
 ## Easy upgrade
 
 Starting with Fab-manager v4.5.0, you can upgrade Fab-manager in one single easy command, that automates the procedure below.
-To upgrade with ease, using this helper, read the GitHub release notes of the version between your current version and the target version.
+To upgrade with ease, using this command, read the GitHub release notes of all versions between your current version and the target version.
 
-**You MUST append all the arguments** of easy upgrade commands, for **each versions**, to the command you run.
+**You MUST append all the arguments** of the easy upgrade commands, for **each version**, to the command you run.
 
 Eg.
 If you upgrade from 1.2.3 to 1.2.5, with the following release notes:
@@ -181,7 +181,7 @@ You can subscribe to [this atom feed](https://github.com/sleede/fab-manager/rele
 
 4. remove old assets
 
-   `rm -Rf public/assets/`
+   `rm -Rf public/packs/`
 
 5. compile new assets
 

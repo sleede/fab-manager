@@ -32,7 +32,6 @@ environment.loaders.prepend('js', js);
 environment.loaders.append('html', html);
 environment.loaders.append('sass', sass);
 environment.loaders.append('uiTour', uiTour);
-environment.loaders.insert('foo', jsErb, { alter: 'bar' });
 
 environment.splitChunks();
 

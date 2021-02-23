@@ -4,15 +4,6 @@
 namespace :fablab do
   namespace :stripe do
 
-    desc 'Cancel stripe subscriptions'
-    task cancel_subscriptions: :environment do
-      Subscription.where('expiration_date >= ?', DateTime.current.at_beginning_of_day).each do |s|
-        puts "-> Start cancel subscription of #{s.user.email}"
-        s.cancel
-        puts '-> Done'
-      end
-    end
-
     desc 'find any invoices with incoherent total between stripe and DB'
     task :find_incoherent_invoices, [:start_date] => :environment do |_task, args|
       puts 'DEPRECATION WARNING: Will not work for invoices created from version 4.1.0 and above'
@@ -51,6 +42,23 @@ namespace :fablab do
       puts 'We create all non-existing customers on stripe. This may take a while, please wait...'
       SyncMembersOnStripeWorker.new.perform
       puts 'Done'
+    end
+
+    desc 'set stp_product_id to all plans/machines/trainings/spaces'
+    task set_product_id: :environment do
+      w = StripeWorker.new
+      Plan.all.each do |p|
+        w.perform(:create_or_update_stp_product, Plan.name, p.id)
+      end
+      Machine.all.each do |m|
+        w.perform(:create_or_update_stp_product, Machine.name, m.id)
+      end
+      Training.all.each do |t|
+        w.perform(:create_or_update_stp_product, Training.name, t.id)
+      end
+      Space.all.each do |s|
+        w.perform(:create_or_update_stp_product, Space.name, s.id)
+      end
     end
 
     def print_on_line(str)

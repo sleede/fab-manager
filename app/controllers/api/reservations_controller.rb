@@ -35,7 +35,10 @@ class API::ReservationsController < API::ApiController
 
     @reservation = Reservation.new(reservation_params)
     is_reserve = Reservations::Reserve.new(user_id, current_user.invoicing_profile.id)
-                                      .pay_and_save(@reservation, payment_details: price[:price_details])
+                                      .pay_and_save(@reservation,
+                                                    payment_details: price[:price_details],
+                                                    schedule: params[:reservation][:payment_schedule],
+                                                    payment_method: params[:reservation][:payment_method])
 
     if is_reserve
       SubscriptionExtensionAfterReservation.new(@reservation).extend_subscription_if_eligible
@@ -65,10 +68,10 @@ class API::ReservationsController < API::ApiController
                                   user,
                                   reservation_params[:reservable_type].constantize.find(reservation_params[:reservable_id]),
                                   reservation_params[:slots_attributes] || [],
-                                  reservation_params[:plan_id],
-                                  reservation_params[:nb_reserve_places],
-                                  reservation_params[:tickets_attributes],
-                                  coupon_params[:coupon_code])
+                                  plan_id: reservation_params[:plan_id],
+                                  nb_places: reservation_params[:nb_reserve_places],
+                                  tickets: reservation_params[:tickets_attributes],
+                                  coupon_code: coupon_params[:coupon_code])
 
     # Subtract wallet amount from total
     total = price_details[:total]

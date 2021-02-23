@@ -9,6 +9,7 @@ class WalletTransaction < ApplicationRecord
   belongs_to :reservation
   belongs_to :transactable, polymorphic: true
   has_one :invoice
+  has_one :payment_schedule
 
   validates_inclusion_of :transaction_type, in: %w[credit debit]
   validates :invoicing_profile, :wallet, presence: true

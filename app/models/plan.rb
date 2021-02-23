@@ -23,6 +23,8 @@ class Plan < ApplicationRecord
   after_create :create_spaces_prices
   after_create :create_statistic_type
   after_create :set_name
+  after_create :update_stripe_product
+  after_update :update_stripe_product, if: :saved_change_to_base_name?
 
   validates :amount, :group, :base_name, presence: true
   validates :interval_count, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
@@ -125,5 +127,9 @@ class Plan < ApplicationRecord
 
   def set_name
     update_columns(name: human_readable_name)
+  end
+
+  def update_stripe_product
+    StripeWorker.perform_async(:create_or_update_stp_product, Plan.name, id)
   end
 end

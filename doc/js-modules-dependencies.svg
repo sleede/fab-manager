@@ -599,7 +599,7 @@
     </g>
     <g fill="rgb(169,183,198)" font-family="'DejaVu Sans Mono'" transform="matrix(1,0,0,1,20,20) translate(1,583)" stroke="rgb(169,183,198)">
       <image x="2" y="5" clip-path="url(#clipPath13)" width="16" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAxElEQVR4XmNgoBWY&#10;uWJ9GoietWLDGXSMrhYDgDTDFKJrJmgATDNZBiBrJssAbABdM14D0BXiwuj64ABd&#10;IS6Mro9y8GW97WZyMYYBIQ5qL0D01HyD85Eu6s9gfFwYpwEgzRemW+5F14COcRow&#10;v9jwTKKnxuOaGJ0bT5dYb0fXiGHAuSnme+8tsNoZ7qT+HCb5brXNlsoo7ZsLSg1P&#10;o2tEMeD1SuutBaHadyKAzgb5HSRRHa1zI8xJ7UVWgOZ9fF7B8AKpGABwUpNw04DP&#10;4wAAAABJRU5ErkJggg==" height="16" preserveAspectRatio="none"/>
-      <text x="24" xml:space="preserve" y="17" clip-path="url(#clipPath13)" stroke="none">angular-bootstrap-switch/.../angular-bootstrap-switch.js</text>
+      <text x="24" xml:space="preserve" y="17" clip-path="url(#clipPath13)" stroke="none">angular-bootstrap-switch/.../angular-bootstrap-switch.ts</text>
     </g>
     <g fill="rgb(190,190,190)" transform="matrix(1,0,0,1,20,20) translate(807,464)" stroke="rgb(190,190,190)">
       <rect x="0" width="1" height="55" y="0" clip-path="url(#clipPath18)" stroke="none"/>

@@ -25,7 +25,7 @@ class CouponService
     unless coupon_object.nil?
       if coupon_object.status(user_id, total) == 'active'
         if coupon_object.type == 'percent_off'
-          price -= price * coupon_object.percent_off / 100.00
+          price -= (price * coupon_object.percent_off / 100.00).truncate
         elsif coupon_object.type == 'amount_off'
           # do not apply cash coupon unless it has a lower amount that the total price
           price -= coupon_object.amount_off if coupon_object.amount_off <= price
@@ -53,8 +53,8 @@ class CouponService
 
   ##
   # Ventilate the discount of the provided coupon over the given amount proportionately to the invoice's total
-  # @param total {Number} total amount of the invoice expressed in monetary units
-  # @param amount {Number} price of the invoice's sub-item expressed in monetary units
+  # @param total {Number} total amount of the invoice expressed in centimes
+  # @param amount {Number} price of the invoice's sub-item expressed in centimes
   # @param coupon {Coupon} coupon applied to the invoice, amount_off expressed in centimes if applicable
   ##
   def ventilate(total, amount, coupon)
@@ -64,7 +64,7 @@ class CouponService
         price = amount - (amount * coupon.percent_off / 100.00)
       elsif coupon.type == 'amount_off'
         ratio = (coupon.amount_off / 100.00) / total
-        discount = amount * ratio.abs
+        discount = (amount * ratio.abs) * 100
         price = amount - discount
       else
         raise InvalidCouponError
@@ -77,9 +77,9 @@ class CouponService
   # Compute the total amount of the given invoice, without the applied coupon
   # Invoice.total stores the amount payed by the customer, coupon deducted
   # @param invoice {Invoice} invoice object, its total before discount will be computed
+  # @return {Number} total in centimes
   ##
   def invoice_total_no_coupon(invoice)
-    total = (invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+) or 0)
-    total / 100.0
+    invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+) or 0
   end
 end
