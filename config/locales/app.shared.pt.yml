@@ -331,7 +331,7 @@ pt:
         debit_reservation_event: "Pague por uma reserva de evento"
         warning_uneditable_credit: "Aviso: uma vez validado, o valor creditado não será mais editado."
         wallet_info:
-          you_have_AMOUNT_in_wallet: "You have {AMOUNT} on your wallet"
+          you_have_AMOUNT_in_wallet: "Você tem {AMOUNT} em sua carteira"
           wallet_pay_ITEM: "You pay your {ITEM} directly."
           item_reservation: "reservation"
           item_subscription: "subscription"
