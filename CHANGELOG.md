@@ -1,5 +1,8 @@
 # Changelog Fab-manager
 
+## Next release
+- Fix a security issue: possible SQL injection when dropping the database
+
 ## v4.7.1 2021 February 24
 - Fix a security issue: updated axios to 0.21.1 to fix [CVE-2020-28168](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-28168)
 
