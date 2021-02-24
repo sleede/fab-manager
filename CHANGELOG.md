@@ -1,5 +1,8 @@
 # Changelog Fab-manager
 
+## v4.7.1 2021 February 24
+- Fix a security issue: updated axios to 0.21.1 to fix [CVE-2020-28168](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-28168)
+
 ## v4.7.0 2021 February 23
 - Payment schedules on subscriptions
 - Refactored theme builder to use scss files
