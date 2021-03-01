@@ -37,14 +37,6 @@ jq() {
 
 config()
 {
-  echo -ne "Checking dependency... "
-  if ! command -v awk || ! [[ $(awk -W version) =~ ^GNU ]]
-  then
-    echo "Please install GNU Awk before running this script."
-    echo "gawk was not found, exiting..."
-    exit 1
-  fi
-
   echo -ne "Checking user... "
   if [[ "$(whoami)" != "root" ]] && ! groups | grep docker
   then
@@ -77,7 +69,7 @@ version_check()
 {
   VERSION=$(docker-compose exec -T "$SERVICE" cat .fabmanager-version)
   if [[ $? = 1 ]]; then
-    VERSION=$(docker-compose exec -T "$SERVICE" cat package.json | grep version | awk 'BEGIN { FS = "\"" } ; {print $4}')
+    VERSION=$(docker-compose exec -T "$SERVICE" cat package.json | jq -r '.version')
   fi
 
   if verlt "$VERSION" 2.8.3; then
