@@ -1,6 +1,6 @@
 # Changelog Fab-manager
 
-## Next release
+## v4.7.2 2021 March 1st
 - Updated yq to v4
 - Fix a bug: unable to upgrade using the easy upgrade command
 - Fix a security issue: possible SQL injection when dropping the database
