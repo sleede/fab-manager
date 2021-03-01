@@ -28,7 +28,7 @@ parseparams()
 }
 
 yq() {
-  docker run --rm -i -v "${PWD}:/workdir" mikefarah/yq:3 "$@"
+  docker run --rm -i -v "${PWD}:/workdir" mikefarah/yq:4 "$@"
 }
 
 jq() {
@@ -53,7 +53,7 @@ config()
       exit 1
   fi
 
-  SERVICE="$(yq r docker-compose.yml --printMode p 'services.*(.==sleede/fab-manager*)' | awk 'BEGIN { FS = "." } ; {print $2}')"
+  SERVICE="$(yq eval '.services.*.image | select(. == "sleede/fab-manager*") | path | .[-2]' docker-compose.yml)"
   YES_ALL=${Y:-false}
   # COMMANDS, SCRIPTS and ENVIRONMENTS are set by parseparams
 }
@@ -104,8 +104,8 @@ add_environments()
 
 compile_assets()
 {
-  IMAGE=$(yq r docker-compose.yml 'services.*(.==sleede/fab-manager*)')
-  mapfile -t COMPOSE_ENVS < <(yq r docker-compose.yml "services.$SERVICE.environment")
+  IMAGE=$(yq eval '.services.*.image | select(. == "sleede/fab-manager*")' docker-compose.yml)
+  mapfile -t COMPOSE_ENVS < <(yq eval ".services.$SERVICE.environment" docker-compose.yml)
   ENV_ARGS=$(for i in "${COMPOSE_ENVS[@]}"; do sed 's/: /=/g;s/^/-e /g' <<< "$i"; done)
   PG_ID=$(docker-compose ps -q postgres)
   if [[ "$PG_ID" = "" ]]; then
@@ -131,7 +131,7 @@ upgrade()
     exit 1
   fi
   BRANCH='master'
-  if yq r docker-compose.yml 'services.*(.==sleede/fab-manager*)' | grep -q ':dev'; then BRANCH='dev'; fi
+  if yq eval '.services.*.image | select(. == "sleede/fab-manager*")' docker-compose.yml | grep -q ':dev'; then BRANCH='dev'; fi
   for SCRIPT in "${SCRIPTS[@]}"; do
     if [[ "$YES_ALL" = "true" ]]; then
       \curl -sSL "https://raw.githubusercontent.com/sleede/fab-manager/$BRANCH/scripts/$SCRIPT.sh" | bash -s -- -y
