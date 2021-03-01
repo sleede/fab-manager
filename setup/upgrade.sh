@@ -28,7 +28,7 @@ parseparams()
 }
 
 yq() {
-  docker run --rm -i -v "${PWD}:/workdir" mikefarah/yq yq "$@"
+  docker run --rm -i -v "${PWD}:/workdir" mikefarah/yq:4 "$@"
 }
 
 jq() {
@@ -37,14 +37,6 @@ jq() {
 
 config()
 {
-  echo -ne "Checking dependency... "
-  if ! command -v awk || ! [[ $(awk -W version) =~ ^GNU ]]
-  then
-    echo "Please install GNU Awk before running this script."
-    echo "gawk was not found, exiting..."
-    exit 1
-  fi
-
   echo -ne "Checking user... "
   if [[ "$(whoami)" != "root" ]] && ! groups | grep docker
   then
@@ -53,7 +45,7 @@ config()
       exit 1
   fi
 
-  SERVICE="$(yq r docker-compose.yml --printMode p 'services.*(.==sleede/fab-manager*)' | awk 'BEGIN { FS = "." } ; {print $2}')"
+  SERVICE="$(yq eval '.services.*.image | select(. == "sleede/fab-manager*") | path | .[-2]' docker-compose.yml)"
   YES_ALL=${Y:-false}
   # COMMANDS, SCRIPTS and ENVIRONMENTS are set by parseparams
 }
@@ -77,7 +69,7 @@ version_check()
 {
   VERSION=$(docker-compose exec -T "$SERVICE" cat .fabmanager-version)
   if [[ $? = 1 ]]; then
-    VERSION=$(docker-compose exec -T "$SERVICE" cat package.json | grep version | awk 'BEGIN { FS = "\"" } ; {print $4}')
+    VERSION=$(docker-compose exec -T "$SERVICE" cat package.json | jq -r '.version')
   fi
 
   if verlt "$VERSION" 2.8.3; then
@@ -104,8 +96,8 @@ add_environments()
 
 compile_assets()
 {
-  IMAGE=$(yq r docker-compose.yml 'services.*(.==sleede/fab-manager*)')
-  mapfile -t COMPOSE_ENVS < <(yq r docker-compose.yml "services.$SERVICE.environment")
+  IMAGE=$(yq eval '.services.*.image | select(. == "sleede/fab-manager*")' docker-compose.yml)
+  mapfile -t COMPOSE_ENVS < <(yq eval ".services.$SERVICE.environment" docker-compose.yml)
   ENV_ARGS=$(for i in "${COMPOSE_ENVS[@]}"; do sed 's/: /=/g;s/^/-e /g' <<< "$i"; done)
   PG_ID=$(docker-compose ps -q postgres)
   if [[ "$PG_ID" = "" ]]; then
@@ -131,7 +123,7 @@ upgrade()
     exit 1
   fi
   BRANCH='master'
-  if yq r docker-compose.yml 'services.*(.==sleede/fab-manager*)' | grep -q ':dev'; then BRANCH='dev'; fi
+  if yq eval '.services.*.image | select(. == "sleede/fab-manager*")' docker-compose.yml | grep -q ':dev'; then BRANCH='dev'; fi
   for SCRIPT in "${SCRIPTS[@]}"; do
     if [[ "$YES_ALL" = "true" ]]; then
       \curl -sSL "https://raw.githubusercontent.com/sleede/fab-manager/$BRANCH/scripts/$SCRIPT.sh" | bash -s -- -y

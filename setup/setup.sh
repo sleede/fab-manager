@@ -147,7 +147,7 @@ prepare_files()
 }
 
 yq() {
-  docker run --rm -i -v "${FABMANAGER_PATH}:/workdir" mikefarah/yq yq "$@"
+  docker run --rm -i -v "${FABMANAGER_PATH}:/workdir" mikefarah/yq:4 "$@"
 }
 
 prepare_nginx()
@@ -160,16 +160,16 @@ prepare_nginx()
   else
     # if nginx is not installed, remove its associated block from docker-compose.yml
     echo "Removing nginx..."
-    yq d -i docker-compose.yml services.nginx
+    yq -i eval 'del(.services.nginx)' docker-compose.yml
     read -rp "Do you want to map the Fab-manager's service to an external network? (Y/n) " confirm </dev/tty
     if [ "$confirm" != "n" ]; then
       echo "Adding a network configuration to the docker-compose.yml file..."
-      yq w -i docker-compose.yml networks.web.external true
-      yq w -i docker-compose.yml networks.db ''
-      yq w -i docker-compose.yml services.fabmanager.networks[+] web
-      yq w -i docker-compose.yml services.fabmanager.networks[+] db
-      yq w -i docker-compose.yml services.postgres.networks[+] db
-      yq w -i docker-compose.yml services.redis.networks[+] db
+      yq -i eval '.networks.web.external = "true"' docker-compose.yml
+      yq -i eval '.networks.db = ""' docker-compose.yml
+      yq -i eval '.services.fabmanager.networks += ["web"]' docker-compose.yml
+      yq -i eval '.services.fabmanager.networks += ["db"]' docker-compose.yml
+      yq -i eval '.services.postgres.networks += ["db"]' docker-compose.yml
+      yq -i eval '.services.redis.networks += ["db"]' docker-compose.yml
     fi
   fi
 }
