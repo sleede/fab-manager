@@ -13,7 +13,7 @@ config()
       echo "current user is not allowed to use docker, exiting..."
       exit 1
   fi
-  SERVICE="$(yq r docker-compose.yml --printMode p 'services.*(.==sleede/fab-manager*)' | awk 'BEGIN { FS = "." } ; {print $2}')"
+  SERVICE="$(yq eval '.services.*.image | select(. == "sleede/fab-manager*") | path | .[-2]' docker-compose.yml)"
 }
 
 change_mount()
