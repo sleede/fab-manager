@@ -2,6 +2,7 @@
 
 - Improved the setup script
 - Fix a bug: unable to install a new instance with an external reverse proxy
+- Fix a bug: do not display "powered by disqus" if Disqus is disabled
 
 ## v4.7.2 2021 March 1st
 - Updated yq to v4
