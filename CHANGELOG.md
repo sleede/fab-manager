@@ -1,5 +1,8 @@
 # Changelog Fab-manager
 
+- Improved the setup script
+- Fix a bug: unable to install a new instance with an external reverse proxy
+
 ## v4.7.2 2021 March 1st
 - Updated yq to v4
 - Fix a bug: unable to upgrade using the easy upgrade command
