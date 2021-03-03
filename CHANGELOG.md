@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+## v4.7.3 2021 March 03
 - Improved the setup script
 - Fix a bug: unable to install a new instance with an external reverse proxy
 - Fix a bug: do not display "powered by disqus" if Disqus is disabled
