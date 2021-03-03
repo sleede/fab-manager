@@ -1,5 +1,13 @@
 # Changelog Fab-manager
 
+## v4.7.3 2021 March 03
+- Improved the setup script
+- Fix a bug: unable to install a new instance with an external reverse proxy
+- Fix a bug: do not display "powered by disqus" if Disqus is disabled
+- Fix a bug: do not send notifications each hour for payment schedules deadlines
+- Fix a security issue: updated rails to 5.2.4.5 to fix [CVE-2021-22880](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22880)
+- [TODO DEPLOY] -> (only dev) `bundle install`
+
 ## v4.7.2 2021 March 1st
 - Updated yq to v4
 - Fix a bug: unable to upgrade using the easy upgrade command

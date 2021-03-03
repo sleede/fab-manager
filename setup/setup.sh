@@ -165,11 +165,22 @@ prepare_nginx()
     if [ "$confirm" != "n" ]; then
       echo "Adding a network configuration to the docker-compose.yml file..."
       yq -i eval '.networks.web.external = "true"' docker-compose.yml
-      yq -i eval '.networks.db = ""' docker-compose.yml
+      yq -i eval '.networks.db = null' docker-compose.yml
       yq -i eval '.services.fabmanager.networks += ["web"]' docker-compose.yml
       yq -i eval '.services.fabmanager.networks += ["db"]' docker-compose.yml
       yq -i eval '.services.postgres.networks += ["db"]' docker-compose.yml
       yq -i eval '.services.redis.networks += ["db"]' docker-compose.yml
+    fi
+    read -rp "Do you want to rename the Fab-manager's service? (Y/n) " confirm </dev/tty
+    if [ "$confirm" != "n" ]; then
+      current="$(yq eval '.services.*.image | select(. == "sleede/fab-manager*") | path | .[-2]' docker-compose.yml)"
+      printf "=======================\n- \e[1mCurrent value: %s\e[21m\n- New value? (leave empty to keep the current value)\n" "$current"
+      read -rp "  > " value </dev/tty
+      echo "======================="
+      if [ "$value" != "" ]; then
+        escaped=$(printf '%s\n' "$value" | iconv -f utf8 -t ascii//TRANSLIT//IGNORE | sed -e 's/[^a-zA-Z0-9-]/_/g')
+        yq -i eval ".services.$escaped = .services.$current | del(.services.$current)" docker-compose.yml
+      fi
     fi
   fi
 }
@@ -245,7 +256,7 @@ configure_env_file()
     printf "\n\n\n==== \e[4m%s\e[24m ====\n" "$variable"
     printf "**** \e[1mDocumentation:\e[21m ****\n"
     echo "$var_doc"
-    printf "=======================\n- \e[1mCurrent value: %s\e[21m\n- New value? (leave empty to keep current value)\n" "$current"
+    printf "=======================\n- \e[1mCurrent value: %s\e[21m\n- New value? (leave empty to keep the current value)\n" "$current"
     read -rp "  > " value </dev/tty
     echo "======================="
     if [ "$value" != "" ]; then

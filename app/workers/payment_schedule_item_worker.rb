@@ -29,12 +29,15 @@ class PaymentScheduleItemWorker
         psi.update_attributes(state: 'paid', payment_method: 'stripe', stp_invoice_id: stp_invoice.id)
       elsif stp_subscription.status == 'past_due' || stp_invoice.status == 'open'
         ##### Stripe / Payment error
-        NotificationCenter.call type: 'notify_admin_payment_schedule_failed',
-                                receiver: User.admins_and_managers,
-                                attached_object: psi
-        NotificationCenter.call type: 'notify_member_payment_schedule_failed',
-                                receiver: psi.payment_schedule.user,
-                                attached_object: psi
+        if psi.state == 'new'
+          # notify only for new deadlines, to prevent spamming
+          NotificationCenter.call type: 'notify_admin_payment_schedule_failed',
+                                  receiver: User.admins_and_managers,
+                                  attached_object: psi
+          NotificationCenter.call type: 'notify_member_payment_schedule_failed',
+                                  receiver: psi.payment_schedule.user,
+                                  attached_object: psi
+        end
         stp_payment_intent = Stripe::PaymentIntent.retrieve(stp_invoice.payment_intent, api_key: stripe_key)
         psi.update_attributes(state: stp_payment_intent.status,
                               stp_invoice_id: stp_invoice.id,
@@ -42,8 +45,8 @@ class PaymentScheduleItemWorker
       else
         psi.update_attributes(state: 'error')
       end
-    else
-      ### Check
+    elsif psi.state == 'new'
+      ### Check (only new deadlines, to prevent spamming)
       NotificationCenter.call type: 'notify_admin_payment_schedule_check_deadline',
                               receiver: User.admins_and_managers,
                               attached_object: psi
