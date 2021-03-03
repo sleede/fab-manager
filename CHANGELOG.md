@@ -1,5 +1,8 @@
 # Changelog Fab-manager
 
+## Next release
+- Allow inserting hyperlinks in customized info messages
+
 ## v4.7.3 2021 March 03
 - Improved the setup script
 - Fix a bug: unable to install a new instance with an external reverse proxy
