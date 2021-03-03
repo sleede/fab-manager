@@ -1,5 +1,8 @@
 # Changelog Fab-manager
 
+## Next release
+- [TODO DEPLOY] `rails fablab:stripe:set_gateway`
+
 ## v4.7.3 2021 March 03
 - Improved the setup script
 - Fix a bug: unable to install a new instance with an external reverse proxy
@@ -13,7 +16,7 @@
 - Fix a bug: unable to upgrade using the easy upgrade command
 - Fix a security issue: possible SQL injection when dropping the database
 - Fix a security issue: restrict allowed keys when creating/updating credits
-- [TODO DEPLOY] `bundle exec rails fablab:openlab:bulk_export` if you have enabled OpenLab (projects sharing)
+- [TODO DEPLOY] `rails fablab:openlab:bulk_export` if you have enabled OpenLab (projects sharing)
 
 ## v4.7.1 2021 February 24
 - Fix a security issue: updated axios to 0.21.1 to fix [CVE-2020-28168](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-28168)

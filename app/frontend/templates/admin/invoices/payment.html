@@ -10,7 +10,7 @@
                        settings="allSettings"
                        label="app.admin.invoices.payment.enable_online_payment"
                        classes="m-l"
-                       on-before-save="requireStripeKeys"
+                       on-before-save="selectPaymentGateway"
                        fa-icon="fa-font">
       </boolean-setting>
     </div>

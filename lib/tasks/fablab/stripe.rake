@@ -71,6 +71,13 @@ namespace :fablab do
       end
     end
 
+    desc 'set stripe as the default payment gateway'
+    task set_gateway: :environment do
+      if Setting.find_by(name: 'stripe_public_key').try(:value) && Setting.find_by(name: 'stripe_secret_key').try(:value)
+        Setting.set('payment_gateway', 'stripe') unless Setting.find_by(name: 'payment_gateway').try(:value)
+      end
+    end
+
     def print_on_line(str)
       print "#{str}\r"
       $stdout.flush

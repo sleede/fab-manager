@@ -638,6 +638,15 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     };
 
     /**
+     * Open a modal dialog which ask the user to select the payment gateway to use
+     * @param onlinePaymentModule {{name: String, value: String}} setting that defines the next status of the online payment module
+     */
+    $scope.selectPaymentGateway = function (onlinePaymentModule) {
+      // if the online payment is about to be disabled, accept the change without any further question
+      if (onlinePaymentModule.value === false) return true;
+    };
+
+    /**
      * Open a modal dialog which ask for the stripe keys
      * @param onlinePaymentModule {{name: String, value: String}} setting that defines the next status of the online payment module
      * @return {boolean} false if the keys were not provided
@@ -1370,7 +1379,6 @@ Application.Controllers.controller('StripeKeysModalController', ['$scope', '$uib
         $scope.publicKeyStatus = false;
         return;
       }
-      const today = new Date();
       $http({
         method: 'POST',
         url: 'https://api.stripe.com/v1/tokens',
