@@ -269,6 +269,7 @@
 
 .pricing-panel {
   border: 1px solid $border-color;
+  height: 391px;
 
   &:first-child {
     border-right: none;
@@ -345,6 +346,11 @@
         color: white;
       }
     }
+  }
+
+  .plan-description {
+    max-height: 5.2em;
+    overflow: hidden;
   }
 
   .cta-button {
@@ -798,5 +804,17 @@ input[type=date].form-control {
   .schedule-switch {
     vertical-align: middle;
     margin-left: 1em;
+  }
+}
+
+.medium-editor-input {
+  display: table-cell;
+  border: 1px solid #c0c0c0;
+  border-radius: 0.2em;
+  padding: 0.5em;
+  width: 100%;
+
+  p {
+    margin-bottom: 0;
   }
 }

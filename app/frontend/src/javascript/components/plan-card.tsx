@@ -72,6 +72,12 @@ const PlanCard: React.FC<PlanCardProps> = ({ plan, userId, subscribedPlanId, ope
     return !!plan.plan_file_url;
   }
   /**
+   * Check if the plan has a description
+   */
+  const hasDescription = (): boolean => {
+    return !!plan.description;
+  }
+  /**
    * Check if the plan is allowing a monthly payment schedule
    */
   const canBeScheduled = (): boolean => {
@@ -100,6 +106,8 @@ const PlanCard: React.FC<PlanCardProps> = ({ plan, userId, subscribedPlanId, ope
           </div>
         </div>}
       </div>
+      {hasDescription() && <div className="plan-description" dangerouslySetInnerHTML={{__html: plan.description}}/>}
+      {hasAttachment() && <a className="info-link" href={ plan.plan_file_url } target="_blank">{ t('app.public.plans.more_information') }</a>}
       {canSubscribeForMe() && <div className="cta-button">
         {!hasSubscribedToThisPlan() && <button className={`subscribe-button ${isSelected ? 'selected-card' : ''}`}
                                                onClick={handleSelectPlan}
@@ -118,7 +126,6 @@ const PlanCard: React.FC<PlanCardProps> = ({ plan, userId, subscribedPlanId, ope
           <span>{ t('app.public.plans.i_choose_that_plan') }</span>
         </button>
       </div>}
-      {hasAttachment() && <a className="info-link" href={ plan.plan_file_url } target="_blank">{ t('app.public.plans.more_information') }</a>}
     </div>
   );
 }

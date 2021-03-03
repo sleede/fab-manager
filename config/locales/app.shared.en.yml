@@ -192,6 +192,8 @@ en:
         otherwise_it_will_begin_as_soon_as_it_is_bought: "Otherwise, it will begin as soon as it is bought."
         monthly_payment: "Monthly payment?"
         monthly_payment_info: "If monthly payment is enabled, the members will be able to choose between a one-time payment or a payment schedule staged each months."
+        description: "Description"
+        type_a_short_description: "Type a short description"
         information_sheet: "Information sheet"
         attach_an_information_sheet: "Attach an information sheet"
         notified_partner: "Notified partner"
