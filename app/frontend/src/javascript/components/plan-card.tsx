@@ -106,26 +106,28 @@ const PlanCard: React.FC<PlanCardProps> = ({ plan, userId, subscribedPlanId, ope
           </div>
         </div>}
       </div>
-      {hasDescription() && <div className="plan-description" dangerouslySetInnerHTML={{__html: plan.description}}/>}
-      {hasAttachment() && <a className="info-link" href={ plan.plan_file_url } target="_blank">{ t('app.public.plans.more_information') }</a>}
-      {canSubscribeForMe() && <div className="cta-button">
-        {!hasSubscribedToThisPlan() && <button className={`subscribe-button ${isSelected ? 'selected-card' : ''}`}
-                                               onClick={handleSelectPlan}
-                                               disabled={!_.isNil(subscribedPlanId)}>
-          {userId && <span>{t('app.public.plans.i_choose_that_plan')}</span>}
-          {!userId && <span>{t('app.public.plans.i_subscribe_online')}</span>}
-        </button>}
-        {hasSubscribedToThisPlan() && <button className="subscribe-button selected-card" disabled>
-          { t('app.public.plans.i_already_subscribed') }
-        </button>}
-      </div>}
-      {canSubscribeForOther() && <div className="cta-button">
-        <button className={`subscribe-button ${isSelected ? 'selected-card' : ''}`}
-                onClick={handleSelectPlan}
-                disabled={_.isNil(userId)}>
-          <span>{ t('app.public.plans.i_choose_that_plan') }</span>
-        </button>
-      </div>}
+      <div className="card-footer">
+        {hasDescription() && <div className="plan-description" dangerouslySetInnerHTML={{__html: plan.description}}/>}
+        {hasAttachment() && <a className="info-link" href={ plan.plan_file_url } target="_blank">{ t('app.public.plans.more_information') }</a>}
+        {canSubscribeForMe() && <div className="cta-button">
+          {!hasSubscribedToThisPlan() && <button className={`subscribe-button ${isSelected ? 'selected-card' : ''}`}
+                                                 onClick={handleSelectPlan}
+                                                 disabled={!_.isNil(subscribedPlanId)}>
+            {userId && <span>{t('app.public.plans.i_choose_that_plan')}</span>}
+            {!userId && <span>{t('app.public.plans.i_subscribe_online')}</span>}
+          </button>}
+          {hasSubscribedToThisPlan() && <button className="subscribe-button selected-card" disabled>
+            { t('app.public.plans.i_already_subscribed') }
+          </button>}
+        </div>}
+        {canSubscribeForOther() && <div className="cta-button">
+          <button className={`subscribe-button ${isSelected ? 'selected-card' : ''}`}
+                  onClick={handleSelectPlan}
+                  disabled={_.isNil(userId)}>
+            <span>{ t('app.public.plans.i_choose_that_plan') }</span>
+          </button>
+        </div>}
+      </div>
     </div>
   );
 }

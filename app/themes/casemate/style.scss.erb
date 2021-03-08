@@ -259,9 +259,9 @@ h5:after {
   border-color: $secondary;
 }
 
-.pricing-panel .cta-button .btn:hover,
-.pricing-panel .cta-button .custom-invoice .modal-body .elements li:hover,
-.custom-invoice .modal-body .elements .pricing-panel .cta-button li:hover {
+.pricing-panel .card-footer .cta-button .btn:hover,
+.pricing-panel .card-footer .cta-button .custom-invoice .modal-body .elements li:hover,
+.custom-invoice .modal-body .elements .pricing-panel .card-footer .cta-button li:hover {
   background-color: $secondary !important;
   color: $secondary-text-color;
 }
@@ -302,11 +302,14 @@ section#cookies-modal div.cookies-consent .cookies-actions button.accept {
 }
 
 .pricing-panel  {
-  .cta-button {
-    button.subscribe-button {
-      border-color: $secondary;
-      &.selected-card {
-        background-color: $secondary;
+  .card-footer {
+    .cta-button {
+      button.subscribe-button {
+        border-color: $secondary;
+
+        &.selected-card {
+          background-color: $secondary;
+        }
       }
     }
   }

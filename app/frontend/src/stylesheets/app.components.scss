@@ -281,6 +281,13 @@
     @include border-radius(0 3px 3px 0);
   }
 
+  .plan-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
   .title {
     margin: 10px 0;
     font-size: rem-calc(16);
@@ -348,31 +355,38 @@
     }
   }
 
-  .plan-description {
-    max-height: 5.2em;
-    overflow: hidden;
-  }
+  .card-footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
 
-  .cta-button {
-    margin: 20px 0;
-
-    .subscribe-button {
-      @extend .btn;
-      @extend .rounded;
-
-      outline: 0;
-      font-weight: 600;
-      font-size: rem-calc(16);
-      background-color: white;
-      padding-left: 30px;
-      padding-right: 30px;
+    .plan-description {
+      max-height: 5.2em;
+      overflow: hidden;
     }
-    button.subscribe-button:focus, button.subscribe-button:hover {
-      outline: 0;
+
+    .cta-button {
+      margin: 20px 0;
+
+      .subscribe-button {
+        @extend .btn;
+        @extend .rounded;
+
+        outline: 0;
+        font-weight: 600;
+        font-size: rem-calc(16);
+        background-color: white;
+        padding-left: 30px;
+        padding-right: 30px;
+      }
+      button.subscribe-button:focus, button.subscribe-button:hover {
+        outline: 0;
+      }
     }
-  }
-  .info-link {
-    margin-top: 1em;
+    .info-link {
+      margin-top: 1em;
+    }
   }
 }
 

@@ -1,10 +1,12 @@
 # Changelog Fab-manager
 
 ## Next release
+- Allow writing short rich descriptions for each subscription plan
 - Allow inserting hyperlinks in customized info messages
 - Improved scripts for mounting volumes
 - Increased verbosity of upgrade script
 - Fix a bug: mounting the payment-schedules volume in the docker-compose file results in an invalid file
+- [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
 
 ## v4.7.3 2021 March 03
 - Improved the setup script
@@ -19,7 +21,7 @@
 - Fix a bug: unable to upgrade using the easy upgrade command
 - Fix a security issue: possible SQL injection when dropping the database
 - Fix a security issue: restrict allowed keys when creating/updating credits
-- [TODO DEPLOY] `bundle exec rails fablab:openlab:bulk_export` if you have enabled OpenLab (projects sharing)
+- [TODO DEPLOY] `rails fablab:openlab:bulk_export` if you have enabled OpenLab (projects sharing)
 
 ## v4.7.1 2021 February 24
 - Fix a security issue: updated axios to 0.21.1 to fix [CVE-2020-28168](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-28168)
