@@ -3,6 +3,7 @@
 ## Next release
 - Allow writing short rich descriptions for each subscription plan
 - Allow inserting hyperlinks in customized info messages
+- Use the primary color to display plans' price in the public view
 - Improved scripts for mounting volumes
 - Increased verbosity of upgrade script
 - Fix a bug: mounting the payment-schedules volume in the docker-compose file results in an invalid file
