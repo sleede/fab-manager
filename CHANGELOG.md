@@ -1,6 +1,6 @@
 # Changelog Fab-manager
 
-## Next release
+## v4.7.4 2021 March 08
 - Show remaining training credits in the dashboard
 - Allow writing short rich descriptions for each subscription plan
 - Allow inserting hyperlinks in customized info messages
