@@ -192,6 +192,8 @@ fr:
         otherwise_it_will_begin_as_soon_as_it_is_bought: "Dans le cas contraire, il prendra effet dès sa date d'achat."
         monthly_payment: "Paiement mensuel ?"
         monthly_payment_info: "Si le paiement mensuel est activé, les membres pourront choisir entre un paiement unique ou un échéancier de paiement échelonné chaque mois."
+        description: "Description"
+        type_a_short_description: "Saisir une courte description"
         information_sheet: "Fiche descriptive"
         attach_an_information_sheet: "Joindre une fiche descriptive"
         notified_partner: "Partenaire notifié"

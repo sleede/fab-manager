@@ -66,6 +66,7 @@ read_email()
 
 config()
 {
+  SERVICE="fabmanager"
   echo 'We recommend nginx to serve the application over the network (internet). You can use your own solution or let this script install and configure nginx for Fab-manager.'
   read -rp 'Do you want install nginx? (Y/n) ' NGINX </dev/tty
   if [ "$NGINX" != "n" ]; then
@@ -180,6 +181,7 @@ prepare_nginx()
       if [ "$value" != "" ]; then
         escaped=$(printf '%s\n' "$value" | iconv -f utf8 -t ascii//TRANSLIT//IGNORE | sed -e 's/[^a-zA-Z0-9-]/_/g')
         yq -i eval ".services.$escaped = .services.$current | del(.services.$current)" docker-compose.yml
+        SERVICE="$escaped"
       fi
     fi
   fi
@@ -265,7 +267,7 @@ configure_env_file()
     fi
   done
   # we automatically generate the SECRET_KEY_BASE
-  secret=$(cd "$FABMANAGER_PATH" && docker-compose run --rm fabmanager bundle exec rake secret)
+  secret=$(cd "$FABMANAGER_PATH" && docker-compose run --rm "$SERVICE" bundle exec rake secret)
   sed -i.bak "s/SECRET_KEY_BASE=/SECRET_KEY_BASE=$secret/g" "$FABMANAGER_PATH/config/env"
 }
 
@@ -295,20 +297,20 @@ setup_assets_and_databases()
   read -rp "Continue? (Y/n) " confirm </dev/tty
   if [ "$confirm" = "n" ]; then return; fi
 
-  cd "$FABMANAGER_PATH" && docker-compose run --rm fabmanager bundle exec rake db:create # create the database
-  cd "$FABMANAGER_PATH" && docker-compose run --rm fabmanager bundle exec rake db:migrate # run all the migrations
+  cd "$FABMANAGER_PATH" && docker-compose run --rm "$SERVICE" bundle exec rake db:create # create the database
+  cd "$FABMANAGER_PATH" && docker-compose run --rm "$SERVICE" bundle exec rake db:migrate # run all the migrations
   # prompt default admin email/password
   printf "\n\nWe will now create the default administrator of Fab-manager.\n"
   read_email
   PASSWORD=$(read_password)
   printf "\nOK. We will fulfill the database now...\n"
-  cd "$FABMANAGER_PATH" && docker-compose run --rm -e ADMIN_EMAIL="$EMAIL" -e ADMIN_PASSWORD="$PASSWORD" fabmanager bundle exec rake db:seed # seed the database
+  cd "$FABMANAGER_PATH" && docker-compose run --rm -e ADMIN_EMAIL="$EMAIL" -e ADMIN_PASSWORD="$PASSWORD" "$SERVICE" bundle exec rake db:seed # seed the database
 
   # now build the assets
-  cd "$FABMANAGER_PATH" && docker-compose run --rm fabmanager bundle exec rake assets:precompile
+  cd "$FABMANAGER_PATH" && docker-compose run --rm "$SERVICE" bundle exec rake assets:precompile
 
   # and prepare elasticsearch
-  cd "$FABMANAGER_PATH" && docker-compose run --rm fabmanager bundle exec rake fablab:es:build_stats
+  cd "$FABMANAGER_PATH" && docker-compose run --rm "$SERVICE" bundle exec rake fablab:es:build_stats
 }
 
 stop()

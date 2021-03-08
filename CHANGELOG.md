@@ -3,6 +3,17 @@
 ## Next release
 - [TODO DEPLOY] `rails fablab:stripe:set_gateway`
 
+## v4.7.4 2021 March 08
+- Show remaining training credits in the dashboard
+- Allow writing short rich descriptions for each subscription plan
+- Allow inserting hyperlinks in customized info messages
+- Use the primary color to display plans' price in the public view
+- Do not close login modal when clicking on the backdrop
+- Improved scripts for mounting volumes
+- Increased verbosity of upgrade script
+- Fix a bug: mounting the payment-schedules volume in the docker-compose file results in an invalid file
+- [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
+
 ## v4.7.3 2021 March 03
 - Improved the setup script
 - Fix a bug: unable to install a new instance with an external reverse proxy
