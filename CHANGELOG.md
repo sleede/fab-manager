@@ -1,5 +1,8 @@
 # Changelog Fab-manager
 
+## v4.7.5 2021 March 08
+- Fix a bug: unable to compile the assets during the upgrade, if the env file has some whitespaces around the equal sign
+
 ## v4.7.4 2021 March 08
 - Show remaining training credits in the dashboard
 - Allow writing short rich descriptions for each subscription plan
