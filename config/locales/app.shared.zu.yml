@@ -192,6 +192,8 @@ zu:
         otherwise_it_will_begin_as_soon_as_it_is_bought: "crwdns9687:0crwdne9687:0"
         monthly_payment: "crwdns20936:0crwdne20936:0"
         monthly_payment_info: "crwdns20938:0crwdne20938:0"
+        description: "crwdns21422:0crwdne21422:0"
+        type_a_short_description: "crwdns21424:0crwdne21424:0"
         information_sheet: "crwdns9689:0crwdne9689:0"
         attach_an_information_sheet: "crwdns9691:0crwdne9691:0"
         notified_partner: "crwdns9693:0crwdne9693:0"
