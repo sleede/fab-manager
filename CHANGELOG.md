@@ -2,6 +2,9 @@
 
 ## Next release
 - Allow inserting hyperlinks in customized info messages
+- Improved scripts for mounting volumes
+- Increased verbosity of upgrade script
+- Fix a bug: mounting the payment-schedules volume in the docker-compose file results in an invalid file
 
 ## v4.7.3 2021 March 03
 - Improved the setup script

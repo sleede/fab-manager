@@ -87,6 +87,7 @@ add_environments()
 {
   for ENV in "${ENVIRONMENTS[@]}"; do
     if [[ "$ENV" =~ ^[A-Z0-9_]+=.*$ ]]; then
+      printf "Inserting variable %s...\n" "$ENV"
       printf "# added on %s\n%s\n" "$(date +%Y-%m-%d\ %R)" "$ENV" >> "config/env"
     else
       echo "Ignoring invalid option: -e $ENV. Given value is not valid environment variable, please see https://huit.re/environment-doc"
@@ -125,6 +126,7 @@ upgrade()
   BRANCH='master'
   if yq eval '.services.*.image | select(. == "sleede/fab-manager*")' docker-compose.yml | grep -q ':dev'; then BRANCH='dev'; fi
   for SCRIPT in "${SCRIPTS[@]}"; do
+    printf "Running script %s from branch %s...\n" "$SCRIPT" "$BRANCH"
     if [[ "$YES_ALL" = "true" ]]; then
       \curl -sSL "https://raw.githubusercontent.com/sleede/fab-manager/$BRANCH/scripts/$SCRIPT.sh" | bash -s -- -y
     else
@@ -134,6 +136,7 @@ upgrade()
   compile_assets
   docker-compose run --rm "$SERVICE" bundle exec rake db:migrate
   for COMMAND in "${COMMANDS[@]}"; do
+    printf "Running command %s...\n" "$COMMAND"
     docker-compose run --rm "$SERVICE" bundle exec "$COMMAND"
   done
   docker-compose up -d
