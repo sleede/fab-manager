@@ -18,9 +18,11 @@ config()
 
 add_mount()
 {
-  # shellcheck disable=SC2016
-  # we don't want to expand ${PWD}
-  yq -i eval ".services.$SERVICE.volumes += [\"\${PWD}/payment_schedules:/usr/src/app/payment_schedules\"]" docker-compose.yml
+  if [[ ! $(yq eval ".services.$SERVICE.volumes.[] | select (. == \"*payment_schedules\")" docker-compose.yml) ]]; then
+    # shellcheck disable=SC2016
+    # we don't want to expand ${PWD}
+    yq -i eval ".services.$SERVICE.volumes += [\"\${PWD}/payment_schedules:/usr/src/app/payment_schedules\"]" docker-compose.yml
+  fi
 }
 
 proceed()

@@ -408,6 +408,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
       <% else %>
       return $uibModal.open({
         templateUrl: '/shared/deviseModal.html',
+        backdrop: 'static',
         size: 'sm',
         resolve: {
           settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['confirmation_required']" }).$promise; }]
