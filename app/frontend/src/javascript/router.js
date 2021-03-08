@@ -143,7 +143,8 @@ angular.module('application.router', ['ui.router'])
         abstract: true,
         url: '/dashboard',
         resolve: {
-          memberPromise: ['Member', 'currentUser', function (Member, currentUser) { return Member.get({ id: currentUser.id }).$promise; }]
+          memberPromise: ['Member', 'currentUser', function (Member, currentUser) { return Member.get({ id: currentUser.id }).$promise; }],
+          trainingsPromise: ['Training', function (Training) { return Training.query().$promise; }]
         }
       })
       .state('app.logged.dashboard.profile', {

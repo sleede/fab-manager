@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 ## Next release
+- Show remaining training credits in the dashboard
 - Allow writing short rich descriptions for each subscription plan
 - Allow inserting hyperlinks in customized info messages
 - Use the primary color to display plans' price in the public view
