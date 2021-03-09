@@ -135,7 +135,7 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
      */
     $scope.customFieldName = function (field) {
       return _t(`app.admin.statistics.${field}`);
-    }
+    };
 
     /**
      * Callback to open the datepicker (interval start)
@@ -292,8 +292,8 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
         return refreshStats();
       } else {
         return es.scroll({
-          'scroll': ES_SCROLL_TIME + 'm',
-          'body': { scrollId: $scope.scrollId }
+          scroll: ES_SCROLL_TIME + 'm',
+          body: { scrollId: $scope.scrollId }
         }
         , function (error, response) {
           if (error) {
@@ -335,7 +335,7 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
       };
 
       return $uibModal.open(options)
-        .result['finally'](null).then(function (info) { console.log(info); });
+        .result.finally(null).then(function (info) { console.log(info); });
     };
 
     /**
@@ -391,7 +391,7 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
       if (settingsPromise.feature_tour_display !== 'manual' && $scope.currentUser.profile.tours.indexOf('statistics') < 0) {
         uitour.start();
       }
-    }
+    };
 
     /* PRIVATE SCOPE */
 
@@ -471,15 +471,15 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
 
       // run query
       return es.search({
-        'index': 'stats',
-        'type': index,
-        'size': RESULTS_PER_PAGE,
-        'scroll': ES_SCROLL_TIME + 'm',
+        index: 'stats',
+        type: index,
+        size: RESULTS_PER_PAGE,
+        scroll: ES_SCROLL_TIME + 'm',
         'stat-type': type,
         'custom-query': custom ? JSON.stringify(Object.assign({ exclude: custom.exclude }, buildElasticCustomCriterion(custom))) : '',
         'start-date': moment($scope.datePickerStart.selected).format(),
         'end-date': moment($scope.datePickerEnd.selected).format(),
-        'body': buildElasticDataQuery(type, custom, $scope.agePicker.start, $scope.agePicker.end, moment($scope.datePickerStart.selected), moment($scope.datePickerEnd.selected), $scope.sorting)
+        body: buildElasticDataQuery(type, custom, $scope.agePicker.start, $scope.agePicker.end, moment($scope.datePickerStart.selected), moment($scope.datePickerEnd.selected), $scope.sorting)
       }
       , function (error, response) {
         if (error) {
@@ -503,19 +503,19 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
      */
     const buildElasticDataQuery = function (type, custom, ageMin, ageMax, intervalBegin, intervalEnd, sortings) {
       const q = {
-        'query': {
-          'bool': {
-            'must': [
+        query: {
+          bool: {
+            must: [
               {
-                'term': {
-                  'type': type
+                term: {
+                  type: type
                 }
               },
               {
-                'range': {
-                  'date': {
-                    'gte': intervalBegin.format(),
-                    'lte': intervalEnd.format()
+                range: {
+                  date: {
+                    gte: intervalBegin.format(),
+                    lte: intervalEnd.format()
                   }
                 }
               }
@@ -526,10 +526,10 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
       // optional date range
       if ((typeof ageMin === 'number') && (typeof ageMax === 'number')) {
         q.query.bool.must.push({
-          'range': {
-            'age': {
-              'gte': ageMin,
-              'lte': ageMax
+          range: {
+            age: {
+              gte: ageMin,
+              lte: ageMax
             }
           }
         });
@@ -539,7 +539,7 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
         const criterion = buildElasticCustomCriterion(custom);
         if (custom.exclude) {
           q.query.bool.must_not = [
-            { 'term': criterion.match }
+            { term: criterion.match }
           ];
         } else {
           q.query.bool.must.push(criterion);
@@ -547,24 +547,24 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
       }
 
       if (sortings) {
-        q['sort'] = buildElasticSortCriteria(sortings);
+        q.sort = buildElasticSortCriteria(sortings);
       }
 
       // aggregations (avg age & CA sum)
-      q['aggs'] = {
-        'total_ca': {
-          'sum': {
-            'field': 'ca'
+      q.aggs = {
+        total_ca: {
+          sum: {
+            field: 'ca'
           }
         },
-        'average_age': {
-          'avg': {
-            'field': 'age'
+        average_age: {
+          avg: {
+            field: 'age'
           }
         },
-        'total_stat': {
-          'sum': {
-            'field': 'stat'
+        total_stat: {
+          sum: {
+            field: 'stat'
           }
         }
       };
@@ -579,7 +579,7 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
     const buildElasticCustomCriterion = function (custom) {
       if (custom) {
         const criterion = {
-          'match': {}
+          match: {}
         };
         switch ($scope.getCustomValueInputType($scope.customFilter.criterion)) {
           case 'input_date': criterion.match[custom.key] = moment(custom.value).format('YYYY-MM-DD'); break;
@@ -602,7 +602,7 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
       angular.forEach(criteria, function (value, key) {
         if ((typeof value !== 'undefined') && (value !== null) && (value !== 'none')) {
           const c = {};
-          c[key] = { 'order': value };
+          c[key] = { order: value };
           return crits.push(c);
         }
       });
@@ -624,8 +624,7 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
 
       // if no plans were created, there's no types for statisticIndex=subscriptions
       if ($scope.type.active) {
-        $scope.filters.splice(4, 0, { key: 'subType', label: _t('app.admin.statistics.type'), values: $scope.type.active.subtypes })
-
+        $scope.filters.splice(4, 0, { key: 'subType', label: _t('app.admin.statistics.type'), values: $scope.type.active.subtypes });
 
         if (!$scope.type.active.simple) {
           const f = { key: 'stat', label: $scope.type.active.label, values: ['input_number'] };
@@ -670,7 +669,7 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
 
 ]);
 
-Application.Controllers.controller('ExportStatisticsController', [ '$scope', '$uibModalInstance', 'Export', 'dates', 'query', 'index', 'type', 'CSRF', 'growl', '_t',
+Application.Controllers.controller('ExportStatisticsController', ['$scope', '$uibModalInstance', 'Export', 'dates', 'query', 'index', 'type', 'CSRF', 'growl', '_t',
   function ($scope, $uibModalInstance, Export, dates, query, index, type, CSRF, growl, _t) {
   // Retrieve Anti-CSRF tokens from cookies
     CSRF.setMetaTags();
@@ -739,14 +738,14 @@ Application.Controllers.controller('ExportStatisticsController', [ '$scope', '$u
       if ($scope.export.type === 'global') {
         $scope.actionUrl = '/stats/global/export';
         return $scope.query = JSON.stringify({
-          'query': {
-            'bool': {
-              'must': [
+          query: {
+            bool: {
+              must: [
                 {
-                  'range': {
-                    'date': {
-                      'gte': moment($scope.dates.start).format(),
-                      'lte': moment($scope.dates.end).format()
+                  range: {
+                    date: {
+                      gte: moment($scope.dates.start).format(),
+                      lte: moment($scope.dates.end).format()
                     }
                   }
                 }
@@ -766,8 +765,8 @@ Application.Controllers.controller('ExportStatisticsController', [ '$scope', '$u
     $scope.exportData = function () {
       const statusQry = { category: 'statistics', type: $scope.export.type, query: $scope.query };
       if ($scope.export.type !== 'global') {
-        statusQry['type'] = index.key;
-        statusQry['key'] = type.key;
+        statusQry.type = index.key;
+        statusQry.key = type.key;
       }
 
       Export.status(statusQry).then(function (res) {
