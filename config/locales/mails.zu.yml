@@ -100,6 +100,7 @@ zu:
       subject: "crwdns3983:0crwdne3983:0"
       body:
         new_account_created: "crwdns3985:0crwdne3985:0"
+        user_of_group_html: "crwdns21434:0%{GROUP}crwdne21434:0"
         account_for_organization: "crwdns3987:0crwdne3987:0"
     notify_admin_subscribed_plan:
       subject: "crwdns3989:0crwdne3989:0"
