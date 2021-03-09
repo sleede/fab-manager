@@ -67,7 +67,7 @@ version_error()
 
 version_check()
 {
-  VERSION=$(docker-compose exec -T "$SERVICE" cat .fabmanager-version)
+  VERSION=$(docker-compose exec -T "$SERVICE" cat .fabmanager-version 2>/dev/null)
   if [[ $? = 1 ]]; then
     VERSION=$(docker-compose exec -T "$SERVICE" cat package.json | jq -r '.version')
   fi

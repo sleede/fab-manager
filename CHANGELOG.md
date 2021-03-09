@@ -1,5 +1,8 @@
 # Changelog Fab-manager
 
+## Next release
+- Prevent showing error message when testing for old versions during upgrade
+
 ## v4.7.5 2021 March 08
 - Fix a bug: unable to compile the assets during the upgrade, if the env file has some whitespaces around the equal sign
 
