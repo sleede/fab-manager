@@ -76,6 +76,9 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
     // active tab will be set here
     $scope.selectedIndex = null;
 
+    // ui-bootstrap active tab index
+    $scope.selectedTab = 0;
+
     // type filter binding
     $scope.type = {
       selected: null,
@@ -159,9 +162,11 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
      * Callback called when the active tab is changed.
      * recover the current tab and store its value in $scope.selectedIndex
      * @param tab {Object} elasticsearch statistic structure (from statistic_indices table)
+     * @param index {number} index of the tab in the $scope.statistics array
      */
-    $scope.setActiveTab = function (tab) {
+    $scope.setActiveTab = function (tab, index) {
       $scope.selectedIndex = tab;
+      $scope.selectedTab = index;
       $scope.type.selected = tab.types[0];
       $scope.type.active = $scope.type.selected;
       $scope.customFilter.criterion = {};
@@ -406,6 +411,15 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
           return $scope.preventRefresh = true;
         }
       });
+
+      // set the default tab to "machines" if "subscriptions" are disabled
+      if (!$rootScope.modules.plans) {
+        const idx = $scope.statistics.findIndex(s => s.es_type_key === 'machine');
+        $scope.setActiveTab($scope.statistics[idx], idx);
+      } else {
+        const idx = $scope.statistics.findIndex(s => s.es_type_key === 'subscription');
+        $scope.setActiveTab($scope.statistics[idx], idx);
+      }
     };
 
     /**

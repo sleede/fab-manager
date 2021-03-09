@@ -3,6 +3,7 @@
 ## Next release
 - Prevent showing error message when testing for old versions during upgrade
 - In the email notification, sent to admins on account creation, show the group of the user
+- Fix a bug: subscriptions tab is selected by default in statistics, even if the module is disabled
 
 ## v4.7.5 2021 March 08
 - Fix a bug: unable to compile the assets during the upgrade, if the env file has some whitespaces around the equal sign
