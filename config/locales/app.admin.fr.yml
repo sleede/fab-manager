@@ -1098,7 +1098,7 @@ fr:
         enable_plans: "Activer les abonnements"
         plans_module: "module abonnements"
         trainings: "Formations"
-        trainings_info_html: "<p>Les formations sont pleinement intégrées dans l'agenda de Fab-manger. Si elles sont activées, vos membres pourrons réserver et payer des formations.</p><p>Les formations fournissent une solution pour éviter que des membres réservent des machines, sans avoir suivi la formation préalable.</p>"
+        trainings_info_html: "<p>Les formations sont entièrement intégrées dans l'agenda de Fab-manger. Si elles sont activées, vos membres pourrons réserver et payer des formations.</p><p>Les formations fournissent une solution pour éviter que des membres ne réservent des machines, sans avoir suivi la formation préalable.</p>"
         enable_trainings: "Activer les formations"
         trainings_module: "module formations"
         invoicing: "Facturation"
