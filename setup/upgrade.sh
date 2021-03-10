@@ -67,7 +67,7 @@ version_error()
 
 version_check()
 {
-  VERSION=$(docker-compose exec -T "$SERVICE" cat .fabmanager-version)
+  VERSION=$(docker-compose exec -T "$SERVICE" cat .fabmanager-version 2>/dev/null)
   if [[ $? = 1 ]]; then
     VERSION=$(docker-compose exec -T "$SERVICE" cat package.json | jq -r '.version')
   fi
@@ -95,6 +95,12 @@ add_environments()
   done
 }
 
+clean_env_file()
+{
+  # docker run --env-file does not support whitespaces in the environment variables so we must clean the file
+  sed -ri 's/^([A-Z0-9_]+)\s*=\s*(.*)$/\1=\2/g' ./config/env
+}
+
 compile_assets()
 {
   IMAGE=$(yq eval '.services.*.image | select(. == "sleede/fab-manager*")' docker-compose.yml)
@@ -106,6 +112,7 @@ compile_assets()
     exit 1
   fi
   PG_NET_ID=$(docker inspect "$PG_ID" -f "{{json .NetworkSettings.Networks }}" | jq -r '.[] .NetworkID')
+  clean_env_file
   # shellcheck disable=SC2068
   docker run --rm --env-file ./config/env ${ENV_ARGS[@]} --link "$PG_ID" --net "$PG_NET_ID" -v "${PWD}/public/new_packs:/usr/src/app/public/packs" "$IMAGE" bundle exec rake assets:precompile
   docker-compose down

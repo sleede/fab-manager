@@ -458,6 +458,14 @@
                        classes="m-l"></boolean-setting>
     </div>
     <div class="row">
+      <h3 class="m-l" translate>{{ 'app.admin.settings.trainings' }}</h3>
+      <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.trainings_info_html' | translate"></p>
+      <boolean-setting name="trainings_module"
+                       settings="allSettings"
+                       label="app.admin.settings.enable_trainings"
+                       classes="m-l"></boolean-setting>
+    </div>
+    <div class="row">
       <h3 class="m-l" translate>{{ 'app.admin.settings.invoicing' }}</h3>
       <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.invoicing_info_html' | translate"></p>
       <boolean-setting name="invoicing_module"

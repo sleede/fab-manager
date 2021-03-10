@@ -108,6 +108,7 @@ class Setting < ApplicationRecord
                              statistics_module
                              upcoming_events_shown
                              payment_schedule_prefix
+                             trainings_module
                              payment_gateway] }
   # WARNING: when adding a new key, you may also want to add it in app/policies/setting_policy.rb#public_whitelist
 

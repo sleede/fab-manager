@@ -68,16 +68,18 @@ config()
 {
   SERVICE="fabmanager"
   echo 'We recommend nginx to serve the application over the network (internet). You can use your own solution or let this script install and configure nginx for Fab-manager.'
+  printf 'If you want to setup install Fab-manager behind a reverse proxy, you may not need to install the integrated nginx.\n'
   read -rp 'Do you want install nginx? (Y/n) ' NGINX </dev/tty
   if [ "$NGINX" != "n" ]; then
     # if the user doesn't want nginx, let him use its own solution for HTTPS
-    printf "\n\nWe recommend let's encrypt to secure the application with HTTPS. You can use your own certificate or let this script install and configure let's encrypt for Fab-manager.\n"
+    printf "\n\nWe highly recommend to secure the application with HTTPS. You can use your own certificate or let this script install and configure let's encrypt for Fab-manager."
+    printf "\nIf this server is publicly available on the internet, you can use Let's encrypt to automatically generate and renew a valid SSL certificate for free.\n"
     read -rp "Do you want install let's encrypt? (Y/n) " LETSENCRYPT </dev/tty
     if [ "$LETSENCRYPT" != "n" ]; then
       printf "\n\nLet's encrypt requires an email address to receive notifications about certificate expiration.\n"
       read_email
     fi
-    # if the user doesn't want nginx, let him configure his own solution
+    # if the user wants to install nginx, configure the domains
     printf "\n\nWhat's the domain name where the instance will be active (eg. fab-manager.com)?\n"
     read_domain
     MAIN_DOMAIN=("${DOMAINS[0]}")
@@ -162,6 +164,7 @@ prepare_nginx()
     # if nginx is not installed, remove its associated block from docker-compose.yml
     echo "Removing nginx..."
     yq -i eval 'del(.services.nginx)' docker-compose.yml
+    printf "The two following configurations are useful if you want to install Fab-manager behind a reverse proxy...\n"
     read -rp "Do you want to map the Fab-manager's service to an external network? (Y/n) " confirm </dev/tty
     if [ "$confirm" != "n" ]; then
       echo "Adding a network configuration to the docker-compose.yml file..."

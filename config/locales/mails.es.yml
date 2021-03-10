@@ -100,6 +100,7 @@ es:
       subject: "Se ha creado una nueva cuenta"
       body:
         new_account_created: "Se ha creado un nuevo usuario en la web:"
+        user_of_group_html: "The user has registered in the group <strong>%{GROUP}</strong>"
         account_for_organization: "Esta cuenta gestiona una organización :"
     notify_admin_subscribed_plan:
       subject: "Se ha adquirido un plan de suscripción"
