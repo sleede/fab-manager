@@ -640,6 +640,14 @@ fr:
           currency_info_html: "Veuillez indiquer la devise à utiliser lors des paiements en ligne. Vous devez fournir un code ISO à trois lettres, issu de la liste des <a href='https://stripe.com/docs/currencies' target='_blank'>devises supportées par Stripe</a>."
           currency_alert_html: "<strong>Attention</strong> : la devise ne peut pas être modifiée après que le premier paiement en ligne ait été effectué. Veuillez définir attentivement ce paramètre avant d'ouvrir Fab-manager à vos membres."
           stripe_currency: "Devise Stripe"
+          # select a payment gateway
+          gateway_modal:
+            select_gateway_title: "Sélectionnez une passerelle de paiement"
+            gateway_info: "Pour collecter et traiter les paiements en ligne en toute sécurité, Fab-manager a besoin d'utiliser un service tiers autorisé par les institutions financières, appelé une passerelle de paiement."
+            select_gateway: "Veuillez choisir une des passerelles disponibles"
+            stripe: "Stripe"
+            payzen: "PayZen"
+            confirm_button: "Valider la passerelle"
         payment_schedules:
           filter_schedules: "Filtrer les échéanciers"
           no_payment_schedules: "Pas d'échéancier à afficher"

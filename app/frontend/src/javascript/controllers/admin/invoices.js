@@ -198,6 +198,9 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     // Placeholding date for the reservation end
     $scope.inOneWeekAndOneHour = moment().add(1, 'week').add(1, 'hour').startOf('hour');
 
+    // Is shown the modal dialog to select a payment gateway
+    $scope.openSelectGatewayModal = false;
+
     /**
      * Change the invoices ordering criterion to the one provided
      * @param orderBy {string} ordering criterion
@@ -644,6 +647,9 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     $scope.selectPaymentGateway = function (onlinePaymentModule) {
       // if the online payment is about to be disabled, accept the change without any further question
       if (onlinePaymentModule.value === false) return true;
+
+      // otherwise, open a modal to ask for the selection of a payment gateway
+      $scope.openSelectGatewayModal = true;
     };
 
     /**
@@ -680,6 +686,16 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
 
       // return the promise
       return modalInstance.result;
+    };
+
+    /**
+     * This will open/close the gateway selection modal
+     */
+    $scope.toggleSelectGatewayModal = function () {
+      setTimeout(() => {
+        $scope.openSelectGatewayModal = !$scope.openSelectGatewayModal;
+        $scope.$apply();
+      }, 50);
     };
 
     /**
