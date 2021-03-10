@@ -1,8 +1,9 @@
 /**
- * This component ...
+ * This component allows an administrator to select and configure a payment gateway.
+ * The configuration of a payment gateway is required to enable the online payments.
  */
 
-import React, { BaseSyntheticEvent, SyntheticEvent, useState } from 'react';
+import React, { BaseSyntheticEvent, useState } from 'react';
 import { react2angular } from 'react2angular';
 import { Loader } from './loader';
 import { IApplication } from '../models/application';
