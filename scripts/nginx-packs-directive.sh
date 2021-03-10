@@ -53,7 +53,17 @@ test_docker_compose()
 
 proceed_upgrade()
 {
-  find "$NGINX_PATH" -name "*.conf" -exec sed -i -e 's:location ^~ /assets/ {:location ^~ /packs/ {:g' {} \; 2>/dev/null
+  files=()
+  while IFS=  read -r -d $'\0'; do
+      files+=("$REPLY")
+  done < <(find "$NGINX_PATH" -name "*.conf" -print0 2>/dev/null)
+  for file in "${files[@]}"; do
+    read -rp "Process \"$file\" (y/N)? " confirm </dev/tty
+    if [[ "$confirm" = "y" ]]; then
+      sed -i.bak -e 's:location ^~ /assets/ {:location ^~ /packs/ {:g' "$file"
+      echo "$file was successfully upgraded"
+    fi
+  done
 }
 
 
