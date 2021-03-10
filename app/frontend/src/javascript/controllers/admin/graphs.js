@@ -124,7 +124,8 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
      */
     $scope.hiddenTab = function (tab) {
       if (tab.graph) {
-        return !((tab.es_type_key === 'subscription') && !$rootScope.modules.plans);
+        return !((tab.es_type_key === 'subscription' && !$rootScope.modules.plans) ||
+          (tab.es_type_key === 'training' && !$rootScope.modules.trainings));
       }
       return false;
     };

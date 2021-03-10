@@ -184,9 +184,10 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
      */
     $scope.hiddenTab = function (tab) {
       if (tab.table) {
-        if ((tab.es_type_key === 'subscription') && !$rootScope.modules.plans) {
-          return true;
-        } else return (tab.es_type_key === 'space') && !$rootScope.modules.spaces;
+        return ((tab.es_type_key === 'subscription' && !$rootScope.modules.plans) ||
+          (tab.es_type_key === 'training' && !$rootScope.modules.trainings) ||
+          (tab.es_type_key === 'space' && !$rootScope.modules.spaces)
+        );
       } else {
         return true;
       }
