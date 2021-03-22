@@ -7,12 +7,14 @@
 - More explanations in the setup script
 - Send pre-compressed assets to the browsers instead of the regular ones
 - Links created using "medium editor" opens in new tabs
+- Improved style of public plans page
 - Fix a bug: subscriptions tab is selected by default in statistics, even if the module is disabled
 - Fix a bug: select all plans for slot restriction (through the dedicated button) also selects the disabled plans
 - Fix a bug: recurring availabilities are not restricted to subscribers
 - Fix a security issue: updated elliptic to 6.5.4 to fix [CVE-2020-28498](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-28498)
 - [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/nginx-packs-directive.sh | bash`
 - [TODO DEPLOY] `rails db:seed`
+- [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
 
 ## v4.7.5 2021 March 08
 - Fix a bug: unable to compile the assets during the upgrade, if the env file has some whitespaces around the equal sign
