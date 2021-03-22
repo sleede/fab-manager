@@ -425,6 +425,18 @@
       </div>
     </div>
     <div class="row">
+      <h3 class="m-l" translate>{{ 'app.admin.settings.address' }}</h3>
+      <p class="alert alert-warning m-h-md" translate>
+        {{ 'app.admin.settings.address_required_info' }}
+      </p>
+      <div class="col-md-10 col-md-offset-1">
+        <boolean-setting name="address_required"
+                         settings="allSettings"
+                         label="app.admin.settings.address_is_required">
+        </boolean-setting>
+      </div>
+    </div>
+    <div class="row">
       <h3 class="m-l" translate>{{ 'app.admin.settings.captcha' }}</h3>
       <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.captcha_info_html' | translate"></p>
       <div class="col-md-6">

@@ -130,12 +130,11 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['fablab_name', 'name_genre']" }).$promise; }],
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['fablab_name', 'name_genre', 'phone_required', 'address_required']" }).$promise; }],
           activeProviderPromise: ['AuthProvider', function (AuthProvider) { return AuthProvider.active().$promise; }],
           groupsPromise: ['Group', function (Group) { return Group.query().$promise; }],
           cguFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'cgu-file' }).$promise; }],
-          memberPromise: ['Member', 'currentUser', function (Member, currentUser) { return Member.get({ id: currentUser.id }).$promise; }],
-          phoneRequiredPromise: ['Setting', function (Setting) { return Setting.get({ name: 'phone_required' }).$promise; }]
+          memberPromise: ['Member', 'currentUser', function (Member, currentUser) { return Member.get({ id: currentUser.id }).$promise; }]
         }
       })
 
