@@ -48,52 +48,76 @@
         <div class="row">
             <div class="col-md-3">
                 <h4 translate>{{ 'app.admin.settings.message_of_the_machine_booking_page' }}</h4>
-                <div ng-model="machineExplicationsAlert.value" medium-editor options='{"placeholder": "{{ "app.admin.settings.type_the_message_content" | translate }}",
-                      "buttons": ["bold", "italic", "anchor", "unorderedlist", "header2" ]
-                      }'>
+                <div ng-model="machineExplicationsAlert.value"
+                     medium-editor
+                     options='{
+                       "placeholder": "{{ "app.admin.settings.type_the_message_content" | translate }}",
+                       "buttons": ["bold", "italic", "anchor", "unorderedlist", "header2" ],
+                       "targetBlank": true
+                     }'>
 
                 </div>
                 <button name="button" class="btn btn-warning" ng-click="save(machineExplicationsAlert)" translate>{{ 'app.shared.buttons.save' }}</button>
             </div>
             <div class="col-md-3">
                 <h4 translate>{{ 'app.admin.settings.warning_message_of_the_training_booking_page'}}</h4>
-                <div ng-model="trainingExplicationsAlert.value" medium-editor options='{"placeholder": "{{ "app.admin.settings.type_the_message_content" | translate }}",
-                      "buttons": ["bold", "italic", "anchor", "unorderedlist", "header2" ]
-                      }'>
+                <div ng-model="trainingExplicationsAlert.value"
+                     medium-editor
+                     options='{
+                       "placeholder": "{{ "app.admin.settings.type_the_message_content" | translate }}",
+                       "buttons": ["bold", "italic", "anchor", "unorderedlist", "header2" ],
+                       "targetBlank": true
+                     }'>
 
                 </div>
                 <button name="button" class="btn btn-warning" ng-click="save(trainingExplicationsAlert)" translate>{{ 'app.shared.buttons.save' }}</button>
             </div>
             <div class="col-md-3">
                 <h4 translate>{{ 'app.admin.settings.information_message_of_the_training_reservation_page'}}</h4>
-                <div ng-model="trainingInformationMessage.value" medium-editor options='{"placeholder": "{{ "app.admin.settings.type_the_message_content" | translate }}",
-                        "buttons": ["bold", "italic", "anchor", "unorderedlist", "header2" ]
-                      }'>
+                <div ng-model="trainingInformationMessage.value"
+                     medium-editor
+                     options='{
+                       "placeholder": "{{ "app.admin.settings.type_the_message_content" | translate }}",
+                       "buttons": ["bold", "italic", "anchor", "unorderedlist", "header2" ],
+                       "targetBlank": true
+                     }'>
 
                 </div>
                 <button name="button" class="btn btn-warning" ng-click="save(trainingInformationMessage)" translate>{{ 'app.shared.buttons.save' }}</button>
             </div>
             <div class="col-md-3">
                 <h4 translate>{{ 'app.admin.settings.message_of_the_subscriptions_page' }}</h4>
-                <div ng-model="subscriptionExplicationsAlert.value" medium-editor options='{"placeholder": "{{ "app.admin.settings.type_the_message_content" | translate }}",
-                      "buttons": ["bold", "italic", "anchor", "unorderedlist", "header2" ]
-                      }'>
+                <div ng-model="subscriptionExplicationsAlert.value"
+                     medium-editor
+                     options='{
+                       "placeholder": "{{ "app.admin.settings.type_the_message_content" | translate }}",
+                       "buttons": ["bold", "italic", "anchor", "unorderedlist", "header2" ],
+                       "targetBlank": true
+                     }'>
                 </div>
                 <button name="button" class="btn btn-warning" ng-click="save(subscriptionExplicationsAlert)" translate>{{ 'app.shared.buttons.save' }}</button>
             </div>
             <div class="col-md-3">
                 <h4 translate>{{ 'app.admin.settings.message_of_the_events_page' }}</h4>
-                <div ng-model="eventExplicationsAlert.value" medium-editor options='{"placeholder": "{{ "app.admin.settings.type_the_message_content" | translate }}",
-                      "buttons": ["bold", "italic", "anchor", "unorderedlist", "header2" ]
-                      }'>
+                <div ng-model="eventExplicationsAlert.value"
+                     medium-editor
+                     options='{
+                       "placeholder": "{{ "app.admin.settings.type_the_message_content" | translate }}",
+                       "buttons": ["bold", "italic", "anchor", "unorderedlist", "header2" ],
+                       "targetBlank": true
+                     }'>
                 </div>
                 <button name="button" class="btn btn-warning" ng-click="save(eventExplicationsAlert)" translate>{{ 'app.shared.buttons.save' }}</button>
             </div>
             <div class="col-md-3" ng-show="$root.modules.spaces">
                 <h4 translate>{{ 'app.admin.settings.message_of_the_spaces_page' }}</h4>
-                <div ng-model="spaceExplicationsAlert.value" medium-editor options='{"placeholder": "{{ "app.admin.settings.type_the_message_content" | translate }}",
-                      "buttons": ["bold", "italic", "anchor", "unorderedlist", "header2" ]
-                      }'>
+                <div ng-model="spaceExplicationsAlert.value"
+                     medium-editor
+                     options='{
+                       "placeholder": "{{ "app.admin.settings.type_the_message_content" | translate }}",
+                       "buttons": ["bold", "italic", "anchor", "unorderedlist", "header2" ],
+                       "targetBlank": true
+                     }'>
                 </div>
                 <button name="button" class="btn btn-warning" ng-click="save(spaceExplicationsAlert)" translate>{{ 'app.shared.buttons.save' }}</button>
             </div>

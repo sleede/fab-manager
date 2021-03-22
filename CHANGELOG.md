@@ -6,6 +6,7 @@
 - In the email notification, sent to admins on account creation, show the group of the user
 - More explanations in the setup script
 - Send pre-compressed assets to the browsers instead of the regular ones
+- Links created using "medium editor" opens in new tabs
 - Fix a bug: subscriptions tab is selected by default in statistics, even if the module is disabled
 - Fix a bug: select all plans for slot restriction (through the dedicated button) also selects the disabled plans
 - Fix a bug: recurring availabilities are not restricted to subscribers
