@@ -7,6 +7,7 @@
 - More explanations in the setup script
 - Send pre-compressed assets to the browsers instead of the regular ones
 - Fix a bug: subscriptions tab is selected by default in statistics, even if the module is disabled
+- Fix a bug: select all plans for slot restriction (through the dedicated button) also selects the disabled plans
 - Fix a security issue: updated elliptic to 6.5.4 to fix [CVE-2020-28498](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-28498)
 - [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/nginx-packs-directive.sh | bash`
 - [TODO DEPLOY] `rails db:seed`

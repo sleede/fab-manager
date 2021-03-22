@@ -665,7 +665,7 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
       $scope.selectedPlans = [];
       $scope.selectedPlansBinding = {};
       if (count === 0) {
-        plansPromise.forEach(function (plan) {
+        plansPromise.filter(p => !p.disabled).forEach(function (plan) {
           $scope.selectedPlans.push(plan);
           $scope.selectedPlansBinding[plan.id] = true;
         });
