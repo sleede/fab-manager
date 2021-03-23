@@ -1111,7 +1111,7 @@ en:
         phone_is_required: "Phone required"
         phone_required_info: "You can define if the phone number should be required to register a new user on Fab-manager."
         address: "Address"
-        address_required_info: "You can define if the address should be required to register a new user on Fab-manager. Please note that, depending on your country, the regulations may requires addresses for the invoices to be valid."
+        address_required_info_html: "You can define if the address should be required to register a new user on Fab-manager.<br/><strong>Please note</strong> that, depending on your country, the regulations may requires addresses for the invoices to be valid."
         address_is_required: "Address is required"
         captcha: "Captcha"
         captcha_info_html: "You can setup a protection against robots, to prevent them creating members accounts. This protection is using Google reCAPTCHA. Sign up for <a href='http://www.google.com/recaptcha/admin' target='_blank'>an API key pair</a> to start using the captcha."

@@ -2,6 +2,9 @@
 
 ## Next release
 - Ability to disable the trainings module
+- Ability to set the address as a mandatory field
+- The address is new requested when creating an account
+- The profile completion page is less fuzzy for people landing on it without enabled SSO
 - Prevent showing error message when testing for old versions during upgrade
 - In the email notification, sent to admins on account creation, show the group of the user
 - More explanations in the setup script

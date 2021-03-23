@@ -203,6 +203,14 @@ Application.Controllers.controller('CompleteProfileController', ['$scope', '$roo
       });
     };
 
+    /**
+     * Hide the new account messages.
+     * If hidden, the page will be used only to complete the current user's profile.
+     */
+    $scope.hideNewAccountConfirmation = function () {
+      return !$scope.activeProvider.previous_provider || $scope.activeProvider.previous_provider.id === $scope.activeProvider.id;
+    };
+
     /* PRIVATE SCOPE */
 
     /**
