@@ -1,6 +1,6 @@
 # Changelog Fab-manager
 
-## Next release
+## v4.7.6 2021 March 24
 - Ability to disable the trainings module
 - Ability to set the address as a mandatory field
 - The address is new requested when creating an account
@@ -11,6 +11,7 @@
 - Send pre-compressed assets to the browsers instead of the regular ones
 - Links created using "medium editor" opens in new tabs
 - Improved style of public plans page
+- Improved the upgrade script
 - Fix a bug: subscriptions tab is selected by default in statistics, even if the module is disabled
 - Fix a bug: select all plans for slot restriction (through the dedicated button) also selects the disabled plans
 - Fix a bug: recurring availabilities are not restricted to subscribers
