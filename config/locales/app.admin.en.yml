@@ -73,7 +73,7 @@ en:
         labels: "Label(s):"
         none: "None"
         slot_successfully_deleted: "The slot {START} - {END} has been successfully deleted"
-        slots_deleted: "The slot of {START}, and {COUNT, plural, =1{one other} other{{COUNT} others}}}, have been deleted"
+        slots_deleted: "The slot of {START}, and {COUNT, plural, =1{one other} other{{COUNT} others}}, have been deleted"
         unable_to_delete_the_slot: "Unable to delete the slot {START} - {END}, probably because it's already reserved by a member"
         slots_not_deleted: "On {TOTAL} slots, {COUNT, plural, =1{one was not deleted} other{{COUNT} were not deleted}}. Some reservations may exist on {COUNT, plural, =1{it} other{them}}."
         you_should_select_at_least_a_machine: "You should select at least one machine on this slot."
