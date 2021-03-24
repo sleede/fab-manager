@@ -130,12 +130,11 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['fablab_name', 'name_genre']" }).$promise; }],
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['fablab_name', 'name_genre', 'phone_required', 'address_required']" }).$promise; }],
           activeProviderPromise: ['AuthProvider', function (AuthProvider) { return AuthProvider.active().$promise; }],
           groupsPromise: ['Group', function (Group) { return Group.query().$promise; }],
           cguFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'cgu-file' }).$promise; }],
-          memberPromise: ['Member', 'currentUser', function (Member, currentUser) { return Member.get({ id: currentUser.id }).$promise; }],
-          phoneRequiredPromise: ['Setting', function (Setting) { return Setting.get({ name: 'phone_required' }).$promise; }]
+          memberPromise: ['Member', 'currentUser', function (Member, currentUser) { return Member.get({ id: currentUser.id }).$promise; }]
         }
       })
 
@@ -168,7 +167,7 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           groups: ['Group', function (Group) { return Group.query().$promise; }],
           activeProviderPromise: ['AuthProvider', function (AuthProvider) { return AuthProvider.active().$promise; }],
-          phoneRequiredPromise: ['Setting', function (Setting) { return Setting.get({ name: 'phone_required' }).$promise; }]
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['phone_required', 'address_required']" }).$promise; }]
         }
       })
       .state('app.logged.dashboard.projects', {
@@ -916,7 +915,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          phoneRequiredPromise: ['Setting', function (Setting) { return Setting.get({ name: 'phone_required' }).$promise; }]
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['phone_required', 'address_required']" }).$promise; }]
         }
       })
       .state('app.admin.members_import', {
@@ -957,7 +956,7 @@ angular.module('application.router', ['ui.router'])
           walletPromise: ['Wallet', '$stateParams', function (Wallet, $stateParams) { return Wallet.getWalletByUser({ user_id: $stateParams.id }).$promise; }],
           transactionsPromise: ['Wallet', 'walletPromise', function (Wallet, walletPromise) { return Wallet.transactions({ id: walletPromise.id }).$promise; }],
           tagsPromise: ['Tag', function (Tag) { return Tag.query().$promise; }],
-          phoneRequiredPromise: ['Setting', function (Setting) { return Setting.get({ name: 'phone_required' }).$promise; }]
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['phone_required', 'address_required']" }).$promise; }]
         }
       })
       .state('app.admin.admins_new', {
@@ -969,7 +968,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          phoneRequiredPromise: ['Setting', function (Setting) { return Setting.get({ name: 'phone_required' }).$promise; }]
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['phone_required', 'address_required']" }).$promise; }]
         }
       })
       .state('app.admin.managers_new', {
@@ -1062,7 +1061,7 @@ angular.module('application.router', ['ui.router'])
                      "'booking_cancel_delay', 'main_color', 'secondary_color', 'spaces_module', 'twitter_analytics', " +
                      "'fablab_name', 'name_genre', 'reminder_enable', 'plans_module', 'confirmation_required', " +
                      "'reminder_delay', 'visibility_yearly', 'visibility_others', 'wallet_module', 'trainings_module', " +
-                     "'display_name_enable', 'machines_sort_by', 'fab_analytics', 'statistics_module', " +
+                     "'display_name_enable', 'machines_sort_by', 'fab_analytics', 'statistics_module', 'address_required', " +
                      "'link_name', 'home_content', 'home_css', 'phone_required', 'upcoming_events_shown']"
             }).$promise;
           }],

@@ -98,7 +98,10 @@ export enum SettingName {
   ConfirmationRequired = 'confirmation_required',
   WalletModule = 'wallet_module',
   StatisticsModule = 'statistics_module',
-  UpcomingEventsShown = 'upcoming_events_shown'
+  UpcomingEventsShown = 'upcoming_events_shown',
+  PaymentSchedulePrefix = 'payment_schedule_prefix',
+  TrainingsModule = 'trainings_module',
+  AddressRequired = 'address_required'
 }
 
 export interface Setting {
