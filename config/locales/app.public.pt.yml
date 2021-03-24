@@ -84,6 +84,8 @@ pt:
         birth_date_is_required: "Data de nascimento é obrigatório."
         phone_number: "Número de telefone"
         phone_number_is_required: "Número de telefone é obrigatório."
+        address: "Address"
+        address_is_required: "Address is required"
         i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "Eu autorizo usuários do FabLab, registrados no site, a entrarem em contato comigo"
         i_accept_to_receive_information_from_the_fablab: "Eu aceito receber informações do FabLab"
         i_ve_read_and_i_accept_: "Eu li e aceito"
