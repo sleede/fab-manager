@@ -31,8 +31,8 @@
   <div class="row">
 
     <div class="col-md-12">
-      <uib-tabset justified="true">
-        <uib-tab ng-repeat="stat in statistics" heading="{{stat.label}}" select="setActiveTab(stat)" ng-hide="hiddenTab(stat)">
+      <uib-tabset justified="true" active="selectedTab">
+        <uib-tab ng-repeat="(index, stat) in statistics" heading="{{stat.label}}" select="setActiveTab(stat, index)" index="index" ng-hide="hiddenTab(stat)">
           <form id="filters_form" name="filters_form" class="form-inline m-t-md m-b-lg" novalidate="novalidate">
             <div id="agePickerPane" class="form-group datepicker-container" style="z-index:102;">
               <button id="agePickerExpand" class="btn btn-default" type="button" ng-click="agePicker.show = !agePicker.show">

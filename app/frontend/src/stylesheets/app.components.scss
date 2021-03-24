@@ -267,125 +267,31 @@
   }
 }
 
-.pricing-panel {
-  border: 1px solid $border-color;
-  height: 391px;
-
-  &:first-child {
-    border-right: none;
-
-    @include border-radius(3px 0 0 3px);
+.list-of-plans {
+  .group-title {
+    width: 83.33%;
+    border-bottom: 1px solid;
+    padding-bottom: 2em;
+    margin: auto auto 1em;
   }
 
-  &:last-child {
-    @include border-radius(0 3px 3px 0);
-  }
-
-  .plan-card {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-  }
-
-  .title {
-    margin: 10px 0;
-    font-size: rem-calc(16);
-    text-transform: uppercase;
-    color: black;
-  }
-
-  .content {
-    padding: 15px 0;
-    background-color: $bg-gray;
-
-    .wrap, .wrap-monthly {
-      width: 130px;
-      height: 130px;
-      display: inline-block;
-      background: white;
-
-      @include border-radius(50%, 50%, 50%, 50%);
-
-      border: 3px solid;
-
-      .price {
-        width: 114px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-
-        @include border-radius(50%, 50%, 50%, 50%);
-      }
+  .plans-per-group {
+    & {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      border: 1px solid transparent;
     }
 
-    .wrap-monthly {
-      & > .price {
-        & > .amount {
-          padding-top: 4px;
-          line-height: 1.2em;
-        }
-
-        & > .period {
-          padding-top: 4px;
-        }
-      }
-    }
-    .price {
-      position: relative;
-      top: 5px;
-      left: 5px;
-      height: 114px;
-      background-color: black;
-
-      .amount {
-        padding-left: 4px;
-        padding-right: 4px;
-        font-weight: bold;
-        font-size: rem-calc(17);
-        color: white;
-      }
-
-      .period {
-        position: relative;
-        top: -6px;
-        font-size: rem-calc(14);
-        color: white;
-      }
-    }
-  }
-
-  .card-footer {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    height: 100%;
-
-    .plan-description {
-      max-height: 5.2em;
-      overflow: hidden;
+    & > * {
+      width: 50%;
     }
 
-    .cta-button {
-      margin: 20px 0;
-
-      .subscribe-button {
-        @extend .btn;
-        @extend .rounded;
-
-        outline: 0;
-        font-weight: 600;
-        font-size: rem-calc(16);
-        background-color: white;
-        padding-left: 30px;
-        padding-right: 30px;
+    @media screen and (max-width: 992px) {
+      & > * {
+        width: 100%;
       }
-      button.subscribe-button:focus, button.subscribe-button:hover {
-        outline: 0;
-      }
-    }
-    .info-link {
-      margin-top: 1em;
     }
   }
 }

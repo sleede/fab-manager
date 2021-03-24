@@ -67,7 +67,7 @@ version_error()
 
 version_check()
 {
-  VERSION=$(docker-compose exec -T "$SERVICE" cat .fabmanager-version)
+  VERSION=$(docker-compose exec -T "$SERVICE" cat .fabmanager-version 2>/dev/null)
   if [[ $? = 1 ]]; then
     VERSION=$(docker-compose exec -T "$SERVICE" cat package.json | jq -r '.version')
   fi
@@ -87,7 +87,7 @@ add_environments()
 {
   for ENV in "${ENVIRONMENTS[@]}"; do
     if [[ "$ENV" =~ ^[A-Z0-9_]+=.*$ ]]; then
-      printf "Inserting variable %s...\n" "$ENV"
+      printf "\e[91m::\e[0m \e[1mInserting variable %s..\e[0m.\n" "$ENV"
       printf "# added on %s\n%s\n" "$(date +%Y-%m-%d\ %R)" "$ENV" >> "config/env"
     else
       echo "Ignoring invalid option: -e $ENV. Given value is not valid environment variable, please see https://huit.re/environment-doc"
@@ -133,7 +133,7 @@ upgrade()
   BRANCH='master'
   if yq eval '.services.*.image | select(. == "sleede/fab-manager*")' docker-compose.yml | grep -q ':dev'; then BRANCH='dev'; fi
   for SCRIPT in "${SCRIPTS[@]}"; do
-    printf "Running script %s from branch %s...\n" "$SCRIPT" "$BRANCH"
+    printf "\e[91m::\e[0m \e[1mRunning script %s from branch %s...\e[0m\n" "$SCRIPT" "$BRANCH"
     if [[ "$YES_ALL" = "true" ]]; then
       \curl -sSL "https://raw.githubusercontent.com/sleede/fab-manager/$BRANCH/scripts/$SCRIPT.sh" | bash -s -- -y
     else
@@ -143,7 +143,7 @@ upgrade()
   compile_assets
   docker-compose run --rm "$SERVICE" bundle exec rake db:migrate
   for COMMAND in "${COMMANDS[@]}"; do
-    printf "Running command %s...\n" "$COMMAND"
+    printf "\e[91m::\e[0m \e[1mRunning command %s...\e[0m\n" "$COMMAND"
     docker-compose run --rm "$SERVICE" bundle exec "$COMMAND"
   done
   docker-compose up -d
@@ -152,7 +152,7 @@ upgrade()
 
 clean()
 {
-  echo "Current disk usage:"
+  echo -e "\e[91m::\e[0m \e[1mCurrent disk usage:\e[0m"
   df -h /
   [[ "$YES_ALL" = "true" ]] && confirm="y" || read -rp "Clean previous docker images? (y/N) " confirm </dev/tty
   if [[ "$confirm" == "y" ]]; then

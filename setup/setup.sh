@@ -26,12 +26,16 @@ welcome_message()
 
 system_requirements()
 {
-  if [ "$(whoami)" = "root" ]; then
+  if is_root; then
     echo "It is not recommended to run this script as root. As a normal user, elevation will be prompted if needed."
     read -rp "Continue anyway? (Y/n) " confirm </dev/tty
     if [[ "$confirm" = "n" ]]; then exit 1; fi
   else
-    local _groups=("sudo" "docker")
+    if [ "$(has_sudo)" = 'no_sudo' ]; then
+      echo "You are not allowed to sudo. Please add $(whoami) to the sudoers before continuing."
+      exit 1
+    fi
+    local _groups=("docker")
     for _group in "${_groups[@]}"; do
       echo -e "detecting group $_group for current user..."
       if ! groups | grep "$_group"; then
@@ -53,6 +57,46 @@ system_requirements()
   printf "\e[92m[ ✔ ] All requirements successfully checked.\e[39m \n\n"
 }
 
+is_root()
+{
+  return $(id -u)
+}
+
+has_sudo()
+{
+  local prompt
+
+  prompt=$(sudo -nv 2>&1)
+  if [ $? -eq 0 ]; then
+    echo "has_sudo__pass_set"
+  elif echo $prompt | grep -q '^sudo:'; then
+    echo "has_sudo__needs_pass"
+  else
+    echo "no_sudo"
+  fi
+}
+
+elevate_cmd()
+{
+  local cmd=$@
+
+  HAS_SUDO=$(has_sudo)
+
+  case "$HAS_SUDO" in
+  has_sudo__pass_set)
+    sudo $cmd
+    ;;
+  has_sudo__needs_pass)
+    echo "Please supply sudo password for the following command: sudo $cmd"
+    sudo $cmd
+    ;;
+  *)
+    echo "Please supply root password for the following command: su -c \"$cmd\""
+    su -c "$cmd"
+    ;;
+  esac
+}
+
 read_email()
 {
   local email
@@ -68,16 +112,18 @@ config()
 {
   SERVICE="fabmanager"
   echo 'We recommend nginx to serve the application over the network (internet). You can use your own solution or let this script install and configure nginx for Fab-manager.'
+  printf 'If you want to setup install Fab-manager behind a reverse proxy, you may not need to install the integrated nginx.\n'
   read -rp 'Do you want install nginx? (Y/n) ' NGINX </dev/tty
   if [ "$NGINX" != "n" ]; then
     # if the user doesn't want nginx, let him use its own solution for HTTPS
-    printf "\n\nWe recommend let's encrypt to secure the application with HTTPS. You can use your own certificate or let this script install and configure let's encrypt for Fab-manager.\n"
+    printf "\n\nWe highly recommend to secure the application with HTTPS. You can use your own certificate or let this script install and configure let's encrypt for Fab-manager."
+    printf "\nIf this server is publicly available on the internet, you can use Let's encrypt to automatically generate and renew a valid SSL certificate for free.\n"
     read -rp "Do you want install let's encrypt? (Y/n) " LETSENCRYPT </dev/tty
     if [ "$LETSENCRYPT" != "n" ]; then
       printf "\n\nLet's encrypt requires an email address to receive notifications about certificate expiration.\n"
       read_email
     fi
-    # if the user doesn't want nginx, let him configure his own solution
+    # if the user wants to install nginx, configure the domains
     printf "\n\nWhat's the domain name where the instance will be active (eg. fab-manager.com)?\n"
     read_domain
     MAIN_DOMAIN=("${DOMAINS[0]}")
@@ -111,8 +157,8 @@ prepare_files()
   read -rp "Continue? (Y/n) " confirm </dev/tty
   if [[ "$confirm" = "n" ]]; then exit 1; fi
 
-  sudo mkdir -p "$FABMANAGER_PATH/config"
-  sudo chown -R "$(whoami)" "$FABMANAGER_PATH"
+  elevate_cmd mkdir -p "$FABMANAGER_PATH/config"
+  elevate_cmd chown -R "$(whoami)" "$FABMANAGER_PATH"
 
   mkdir -p "$FABMANAGER_PATH/elasticsearch/config"
 
@@ -162,7 +208,8 @@ prepare_nginx()
     # if nginx is not installed, remove its associated block from docker-compose.yml
     echo "Removing nginx..."
     yq -i eval 'del(.services.nginx)' docker-compose.yml
-    read -rp "Do you want to map the Fab-manager's service to an external network? (Y/n) " confirm </dev/tty
+    printf "The two following configurations are useful if you want to install Fab-manager behind a reverse proxy...\n"
+    read -rp "- Do you want to map the Fab-manager's service to an external network? (Y/n) " confirm </dev/tty
     if [ "$confirm" != "n" ]; then
       echo "Adding a network configuration to the docker-compose.yml file..."
       yq -i eval '.networks.web.external = "true"' docker-compose.yml
@@ -172,7 +219,7 @@ prepare_nginx()
       yq -i eval '.services.postgres.networks += ["db"]' docker-compose.yml
       yq -i eval '.services.redis.networks += ["db"]' docker-compose.yml
     fi
-    read -rp "Do you want to rename the Fab-manager's service? (Y/n) " confirm </dev/tty
+    read -rp "- Do you want to rename the Fab-manager's service? (Y/n) " confirm </dev/tty
     if [ "$confirm" != "n" ]; then
       current="$(yq eval '.services.*.image | select(. == "sleede/fab-manager*") | path | .[-2]' docker-compose.yml)"
       printf "=======================\n- \e[1mCurrent value: %s\e[21m\n- New value? (leave empty to keep the current value)\n" "$current"
@@ -202,9 +249,9 @@ prepare_letsencrypt()
     echo "Now downloading and configuring the certificate signing bot..."
     docker pull certbot/certbot:latest
     sed -i.bak "s:/apps/fabmanager:$FABMANAGER_PATH:g" "$FABMANAGER_PATH/letsencrypt/systemd/letsencrypt.service"
-    sudo cp "$FABMANAGER_PATH/letsencrypt/systemd/letsencrypt.service" /etc/systemd/system/letsencrypt.service
-    sudo cp "$FABMANAGER_PATH/letsencrypt/systemd/letsencrypt.timer" /etc/systemd/system/letsencrypt.timer
-    sudo systemctl daemon-reload
+    elevate_cmd cp "$FABMANAGER_PATH/letsencrypt/systemd/letsencrypt.service" /etc/systemd/system/letsencrypt.service
+    elevate_cmd cp "$FABMANAGER_PATH/letsencrypt/systemd/letsencrypt.timer" /etc/systemd/system/letsencrypt.timer
+    elevate_cmd systemctl daemon-reload
   fi
 }
 
@@ -327,14 +374,14 @@ enable_ssl()
 {
   if [ "$LETSENCRYPT" != "n" ]; then
     # generate certificate
-    sudo systemctl start letsencrypt.service
+    elevate_cmd systemctl start letsencrypt.service
     # serve http content over ssl
     mv "$FABMANAGER_PATH/config/nginx/fabmanager.conf" "$FABMANAGER_PATH/config/nginx/fabmanager.conf.nossl"
     mv "$FABMANAGER_PATH/config/nginx/fabmanager.conf.ssl" "$FABMANAGER_PATH/config/nginx/fabmanager.conf"
     stop
     start
-    sudo systemctl enable letsencrypt.timer
-    sudo systemctl start letsencrypt.timer
+    elevate_cmd systemctl enable letsencrypt.timer
+    elevate_cmd systemctl start letsencrypt.timer
   fi
 }
 
