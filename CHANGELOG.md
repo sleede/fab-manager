@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- Enforced validation on required input fields
 - Fix a bug: the view is not refreshed when deleting a recurring slot
 - Fix a bug: unable to add a new authorized file type for project's CAD files
 
