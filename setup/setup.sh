@@ -209,7 +209,7 @@ prepare_nginx()
     echo "Removing nginx..."
     yq -i eval 'del(.services.nginx)' docker-compose.yml
     printf "The two following configurations are useful if you want to install Fab-manager behind a reverse proxy...\n"
-    read -rp "Do you want to map the Fab-manager's service to an external network? (Y/n) " confirm </dev/tty
+    read -rp "- Do you want to map the Fab-manager's service to an external network? (Y/n) " confirm </dev/tty
     if [ "$confirm" != "n" ]; then
       echo "Adding a network configuration to the docker-compose.yml file..."
       yq -i eval '.networks.web.external = "true"' docker-compose.yml
@@ -219,7 +219,7 @@ prepare_nginx()
       yq -i eval '.services.postgres.networks += ["db"]' docker-compose.yml
       yq -i eval '.services.redis.networks += ["db"]' docker-compose.yml
     fi
-    read -rp "Do you want to rename the Fab-manager's service? (Y/n) " confirm </dev/tty
+    read -rp "- Do you want to rename the Fab-manager's service? (Y/n) " confirm </dev/tty
     if [ "$confirm" != "n" ]; then
       current="$(yq eval '.services.*.image | select(. == "sleede/fab-manager*") | path | .[-2]' docker-compose.yml)"
       printf "=======================\n- \e[1mCurrent value: %s\e[21m\n- New value? (leave empty to keep the current value)\n" "$current"
