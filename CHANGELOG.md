@@ -16,6 +16,7 @@
 - Fix a bug: recurring availabilities are not restricted to subscribers
 - Fix a bug: accounting exports may ignore some invoices for the first and last days
 - Fix a bug: accounting export caching is not working
+- Fix a bug: unable to run the setup script if sudoers belong to another group than sudo
 - Fix a security issue: updated elliptic to 6.5.4 to fix [CVE-2020-28498](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-28498)
 - [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/nginx-packs-directive.sh | bash`
 - [TODO DEPLOY] `rails db:seed`

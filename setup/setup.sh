@@ -26,12 +26,16 @@ welcome_message()
 
 system_requirements()
 {
-  if [ "$(whoami)" = "root" ]; then
+  if is_root; then
     echo "It is not recommended to run this script as root. As a normal user, elevation will be prompted if needed."
     read -rp "Continue anyway? (Y/n) " confirm </dev/tty
     if [[ "$confirm" = "n" ]]; then exit 1; fi
   else
-    local _groups=("sudo" "docker")
+    if [ "$(has_sudo)" = 'no_sudo' ]; then
+      echo "You are not allowed to sudo. Please add $(whoami) to the sudoers before continuing."
+      exit 1
+    fi
+    local _groups=("docker")
     for _group in "${_groups[@]}"; do
       echo -e "detecting group $_group for current user..."
       if ! groups | grep "$_group"; then
@@ -51,6 +55,46 @@ system_requirements()
     fi
   done
   printf "\e[92m[ ✔ ] All requirements successfully checked.\e[39m \n\n"
+}
+
+is_root()
+{
+  return $(id -u)
+}
+
+has_sudo()
+{
+  local prompt
+
+  prompt=$(sudo -nv 2>&1)
+  if [ $? -eq 0 ]; then
+    echo "has_sudo__pass_set"
+  elif echo $prompt | grep -q '^sudo:'; then
+    echo "has_sudo__needs_pass"
+  else
+    echo "no_sudo"
+  fi
+}
+
+elevate_cmd()
+{
+  local cmd=$@
+
+  HAS_SUDO=$(has_sudo)
+
+  case "$HAS_SUDO" in
+  has_sudo__pass_set)
+    sudo $cmd
+    ;;
+  has_sudo__needs_pass)
+    echo "Please supply sudo password for the following command: sudo $cmd"
+    sudo $cmd
+    ;;
+  *)
+    echo "Please supply root password for the following command: su -c \"$cmd\""
+    su -c "$cmd"
+    ;;
+  esac
 }
 
 read_email()
@@ -113,8 +157,8 @@ prepare_files()
   read -rp "Continue? (Y/n) " confirm </dev/tty
   if [[ "$confirm" = "n" ]]; then exit 1; fi
 
-  sudo mkdir -p "$FABMANAGER_PATH/config"
-  sudo chown -R "$(whoami)" "$FABMANAGER_PATH"
+  elevate_cmd mkdir -p "$FABMANAGER_PATH/config"
+  elevate_cmd chown -R "$(whoami)" "$FABMANAGER_PATH"
 
   mkdir -p "$FABMANAGER_PATH/elasticsearch/config"
 
@@ -205,9 +249,9 @@ prepare_letsencrypt()
     echo "Now downloading and configuring the certificate signing bot..."
     docker pull certbot/certbot:latest
     sed -i.bak "s:/apps/fabmanager:$FABMANAGER_PATH:g" "$FABMANAGER_PATH/letsencrypt/systemd/letsencrypt.service"
-    sudo cp "$FABMANAGER_PATH/letsencrypt/systemd/letsencrypt.service" /etc/systemd/system/letsencrypt.service
-    sudo cp "$FABMANAGER_PATH/letsencrypt/systemd/letsencrypt.timer" /etc/systemd/system/letsencrypt.timer
-    sudo systemctl daemon-reload
+    elevate_cmd cp "$FABMANAGER_PATH/letsencrypt/systemd/letsencrypt.service" /etc/systemd/system/letsencrypt.service
+    elevate_cmd cp "$FABMANAGER_PATH/letsencrypt/systemd/letsencrypt.timer" /etc/systemd/system/letsencrypt.timer
+    elevate_cmd systemctl daemon-reload
   fi
 }
 
@@ -330,14 +374,14 @@ enable_ssl()
 {
   if [ "$LETSENCRYPT" != "n" ]; then
     # generate certificate
-    sudo systemctl start letsencrypt.service
+    elevate_cmd systemctl start letsencrypt.service
     # serve http content over ssl
     mv "$FABMANAGER_PATH/config/nginx/fabmanager.conf" "$FABMANAGER_PATH/config/nginx/fabmanager.conf.nossl"
     mv "$FABMANAGER_PATH/config/nginx/fabmanager.conf.ssl" "$FABMANAGER_PATH/config/nginx/fabmanager.conf"
     stop
     start
-    sudo systemctl enable letsencrypt.timer
-    sudo systemctl start letsencrypt.timer
+    elevate_cmd systemctl enable letsencrypt.timer
+    elevate_cmd systemctl start letsencrypt.timer
   fi
 }
 
