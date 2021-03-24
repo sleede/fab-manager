@@ -2,11 +2,12 @@
  * Form to set the stripe's public and private keys
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { Loader } from './loader';
 import { useTranslation } from 'react-i18next';
 import SettingAPI from '../api/setting';
 import { SettingName } from '../models/setting';
+import { FabInput } from './fab-input';
 
 
 interface StripeKeysFormProps {
@@ -19,7 +20,11 @@ const StripeKeysFormComponent: React.FC<StripeKeysFormProps> = ({ param }) => {
   const { t } = useTranslation('admin');
 
   const [publicKey, setPublicKey] = useState<string>('');
+  const [publicKeyAddOn, setPublicKeyAddOn] = useState<ReactNode>(null);
+  const [publicKeyAddOnClassName, setPublicKeyAddOnClassName] = useState<string>('');
   const [secretKey, setSecretKey] = useState<string>('');
+  const [secretKeyAddOn, setSecretKeyAddOn] = useState<ReactNode>(null);
+  const [secretKeyAddOnClassName, setSecretKeyAddOnClassName] = useState<string>('');
 
   useEffect(() => {
     const keys = stripeKeys.read();
@@ -31,17 +36,27 @@ const StripeKeysFormComponent: React.FC<StripeKeysFormProps> = ({ param }) => {
   // see StripeKeysModalController
   // from app/frontend/src/javascript/controllers/admin/invoices.js
 
+  const testPublicKey = () => {
+    setPublicKeyAddOnClassName('key-valid');
+    setPublicKeyAddOn(<i className="fa fa-check" />);
+  }
+
   return (
-    <div>
+    <div className="stripe-keys-form">
       <div className="stripe-keys-info" dangerouslySetInnerHTML={{__html: t('app.admin.invoices.payment.stripe_keys_info_html')}} />
       <form name="stripeKeysForm">
-        <div className="row m-md">
-          <label htmlFor="stripe_public_key"
-                 className="control-label">{ t('app.admin.invoices.payment.public_key') } *</label>
-          <div className="input-group">
-            <span className="input-group-addon"><i className="fa fa-info" /></span>
+        <div className="stripe-public-input">
+          <label htmlFor="stripe_public_key">{ t('app.admin.invoices.payment.public_key') } *</label>
+          <FabInput id="stripe_public_key"
+                    icon={<i className="fa fa-info" />}
+                    value={publicKey}
+                    onChange={testPublicKey}
+                    addOn={publicKeyAddOn}
+                    addOnClassName={publicKeyAddOnClassName}
+                    required />
+          <div className="key-input">
+            <span className="key-input__icon"><i className="fa fa-info" /></span>
             <input type="text"
-                   className="form-control"
                    id="stripe_public_key"
                    value={publicKey}
                    ng-model-options='{ debounce: 200 }'
@@ -55,13 +70,11 @@ const StripeKeysFormComponent: React.FC<StripeKeysFormProps> = ({ param }) => {
             </span>
           </div>
         </div>
-        <div className="row m-md">
-          <label htmlFor="stripe_secret_key"
-                 className="control-label">{ t('app.admin.invoices.payment.secret_key') } *</label>
-          <div className="input-group">
-            <span className="input-group-addon"><i className="fa fa-key" /></span>
+        <div className="stripe-secret-input">
+          <label htmlFor="stripe_secret_key">{ t('app.admin.invoices.payment.secret_key') } *</label>
+          <div className="key-input">
+            <span className="key-input__icon"><i className="fa fa-key" /></span>
             <input type="text"
-                   className="form-control"
                    id="stripe_secret_key"
                    value={secretKey}
                    ng-model-options='{ debounce: 200 }'

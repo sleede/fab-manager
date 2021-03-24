@@ -10,6 +10,8 @@ import { IApplication } from '../models/application';
 import { useTranslation } from 'react-i18next';
 import { FabModal, ModalSize } from './fab-modal';
 import { User } from '../models/user';
+import { Gateway } from '../models/gateway';
+import { StripeKeysForm } from './stripe-keys-form';
 
 
 declare var Application: IApplication;
@@ -35,10 +37,20 @@ const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isOpen, to
     toggleModal();
   }
 
+  /**
+   * Save the gateway provided by the target input into the component state
+   */
   const setGateway = (event: BaseSyntheticEvent) => {
     const gateway = event.target.value;
     setSelectedGateway(gateway);
     setPreventConfirmGateway(!gateway);
+  }
+
+  /**
+   * Check if any payment gateway was selected
+   */
+  const hasSelectedGateway = (): boolean => {
+    return selectedGateway !== '';
   }
 
   return (
@@ -51,18 +63,19 @@ const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isOpen, to
               confirmButton={t('app.admin.invoices.payment.gateway_modal.confirm_button')}
               onConfirm={onGatewayConfirmed}
               preventConfirm={preventConfirmGateway}>
-      <p className="info-gateway">
+      {!hasSelectedGateway() && <p className="info-gateway">
         {t('app.admin.invoices.payment.gateway_modal.gateway_info')}
-      </p>
+      </p>}
       <label htmlFor="gateway">{t('app.admin.invoices.payment.gateway_modal.select_gateway')}</label>
       <select id="gateway" className="select-gateway" onChange={setGateway} value={selectedGateway}>
         <option />
-        <option value="stripe">{t('app.admin.invoices.payment.gateway_modal.stripe')}</option>
-        <option value="payzen">{t('app.admin.invoices.payment.gateway_modal.payzen')}</option>
+        <option value={Gateway.Stripe}>{t('app.admin.invoices.payment.gateway_modal.stripe')}</option>
+        <option value={Gateway.PayZen}>{t('app.admin.invoices.payment.gateway_modal.payzen')}</option>
       </select>
+      {selectedGateway === Gateway.Stripe && <StripeKeysForm param={'lorem ipsum'} />}
     </FabModal>
   );
-}
+};
 
 const SelectGatewayModalWrapper: React.FC<SelectGatewayModalModalProps> = ({ isOpen, toggleModal, currentUser }) => {
   return (

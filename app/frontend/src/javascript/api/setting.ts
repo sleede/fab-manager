@@ -11,7 +11,7 @@ export default class SettingAPI {
 
   async query (names: Array<SettingName>): Promise<Map<SettingName, any>> {
     const res: AxiosResponse = await apiClient.get(`/api/settings/?names=[${names.join(',')}]`);
-    return res?.data;
+    return SettingAPI.toSettingsMap(res?.data);
   }
 
   static get (name: SettingName): IWrapPromise<Setting> {
@@ -22,6 +22,17 @@ export default class SettingAPI {
   static query(names: Array<SettingName>): IWrapPromise<Map<SettingName, any>> {
     const api = new SettingAPI();
     return wrapPromise(api.query(names));
+  }
+
+  private
+
+  static toSettingsMap(data: Object): Map<SettingName, any> {
+    const dataArray: Array<Array<string | any>> = Object.entries(data);
+    const map = new Map();
+    dataArray.forEach(item => {
+      map.set(SettingName[item[0]], item[1]);
+    });
+    return map;
   }
 }
 
