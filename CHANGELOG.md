@@ -4,6 +4,7 @@
 - Fix a bug: the view is not refreshed when deleting a recurring slot
 - Fix a bug: unable to add a new authorized file type for project's CAD files
 - Fix a bug: unable to update a coupon
+- Fix a bug: create a training availability with calendar in month view result in wrong dates
 
 ## v4.7.6 2021 March 24
 - Ability to disable the trainings module
