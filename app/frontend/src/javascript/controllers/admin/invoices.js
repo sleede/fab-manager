@@ -1082,7 +1082,7 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
      * Kind of constructor: these actions will be realized first when the controller is loaded
      */
     const initialize = function () {
-    // if the invoice was payed with stripe, allow to refund through stripe
+    // if the invoice was paid with stripe, allow refunding through stripe
       Invoice.get({ id: invoice.id }, function (data) {
         $scope.invoice = data;
         // default : all elements of the invoice are refund
@@ -1316,7 +1316,7 @@ Application.Controllers.controller('AccountingExportModalController', ['$scope',
    * Kind of constructor: these actions will be realized first when the controller is loaded
    */
     const initialize = function () {
-    // if the invoice was payed with stripe, allow to refund through stripe
+      // Get info about the very first invoice on the system
       Invoice.first(function (data) {
         $scope.firstInvoice = data.date;
         $scope.exportTarget.startDate = data.date;
