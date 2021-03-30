@@ -44,8 +44,7 @@ const StripeKeysFormComponent: React.FC<StripeKeysFormProps> = ({ onValidKeys })
   /**
    * Send a test call to the Stripe API to check if the inputted public key is valid
    */
-  const testPublicKey = (e: BaseSyntheticEvent) => {
-    const key = e.target.value;
+  const testPublicKey = (key: string) => {
     if (!key.match(/^pk_/)) {
       setPublicKeyAddOn(<i className="fa fa-times" />);
       setPublicKeyAddOnClassName('key-invalid');
@@ -66,8 +65,7 @@ const StripeKeysFormComponent: React.FC<StripeKeysFormProps> = ({ onValidKeys })
   /**
    * Send a test call to the Stripe API to check if the inputted secret key is valid
    */
-  const testSecretKey = (e: BaseSyntheticEvent) => {
-    const key = e.target.value;
+  const testSecretKey = (key: string) => {
     if (!key.match(/^sk_/)) {
       setSecretKeyAddOn(<i className="fa fa-times" />);
       setSecretKeyAddOnClassName('key-invalid');

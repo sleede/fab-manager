@@ -101,7 +101,8 @@ export enum SettingName {
   UpcomingEventsShown = 'upcoming_events_shown',
   PaymentSchedulePrefix = 'payment_schedule_prefix',
   TrainingsModule = 'trainings_module',
-  AddressRequired = 'address_required'
+  AddressRequired = 'address_required',
+  PaymentGateway = 'payment_gateway'
 }
 
 export interface Setting {
@@ -109,4 +110,16 @@ export interface Setting {
   value: string,
   last_update: Date,
   history: Array<HistoryValue>
+}
+
+export interface SettingError {
+  error: string,
+  id: number,
+  name: string
+}
+
+export interface SettingBulkResult {
+  status: boolean,
+  value?: any,
+  error?: string
 }

@@ -1,6 +1,6 @@
 import apiClient from './api-client';
 import { AxiosResponse } from 'axios';
-import { Setting, SettingName } from '../models/setting';
+import { Setting, SettingBulkResult, SettingError, SettingName } from '../models/setting';
 import wrapPromise, { IWrapPromise } from '../lib/wrap-promise';
 
 export default class SettingAPI {
@@ -10,8 +10,16 @@ export default class SettingAPI {
   }
 
   async query (names: Array<SettingName>): Promise<Map<SettingName, any>> {
-    const res: AxiosResponse = await apiClient.get(`/api/settings/?names=[${names.join(',')}]`);
+    const params = new URLSearchParams();
+    params.append('names', `['${names.join("','")}']`);
+
+    const res: AxiosResponse = await apiClient.get(`/api/settings?${params.toString()}`);
     return SettingAPI.toSettingsMap(res?.data);
+  }
+
+  async bulkUpdate (settings: Map<SettingName, any>): Promise<Map<SettingName, SettingBulkResult>> {
+    const res: AxiosResponse = await apiClient.patch('/api/settings/bulk_update', { settings: SettingAPI.toObjectArray(settings) });
+    return SettingAPI.toBulkMap(res?.data?.settings);
   }
 
   static get (name: SettingName): IWrapPromise<Setting> {
@@ -24,15 +32,41 @@ export default class SettingAPI {
     return wrapPromise(api.query(names));
   }
 
-  private
-
-  static toSettingsMap(data: Object): Map<SettingName, any> {
+  private static toSettingsMap(data: Object): Map<SettingName, any> {
     const dataArray: Array<Array<string | any>> = Object.entries(data);
     const map = new Map();
     dataArray.forEach(item => {
-      map.set(SettingName[item[0]], item[1]);
+      map.set(item[0] as SettingName, item[1]);
     });
     return map;
+  }
+
+  private static toBulkMap(data: Array<Setting|SettingError>): Map<SettingName, SettingBulkResult> {
+    const map = new Map();
+    data.forEach(item => {
+      const itemData: SettingBulkResult = { status: true };
+      if ('error' in item) {
+        itemData.error = item.error;
+        itemData.status = false;
+      }
+      if ('value' in item) {
+        itemData.value = item.value;
+      }
+
+      map.set(item.name as SettingName, itemData)
+    });
+    return map;
+  }
+
+  private static toObjectArray(data: Map<SettingName, any>): Array<Object> {
+    const array = [];
+    data.forEach((value, key) => {
+      array.push({
+        name: key,
+        value
+      })
+    });
+    return array;
   }
 }
 

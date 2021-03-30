@@ -643,6 +643,7 @@ fr:
           currency_info_html: "Veuillez indiquer la devise à utiliser lors des paiements en ligne. Vous devez fournir un code ISO à trois lettres, issu de la liste des <a href='https://stripe.com/docs/currencies' target='_blank'>devises supportées par Stripe</a>."
           currency_alert_html: "<strong>Attention</strong> : la devise ne peut pas être modifiée après que le premier paiement en ligne ait été effectué. Veuillez définir attentivement ce paramètre avant d'ouvrir Fab-manager à vos membres."
           stripe_currency: "Devise Stripe"
+          gateway_configuration_error: "Une erreur est survenue lors de la configuration de la passerelle de paiement."
           # select a payment gateway
           gateway_modal:
             select_gateway_title: "Sélectionnez une passerelle de paiement"

@@ -699,6 +699,21 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     };
 
     /**
+     * Callback triggered after the gateway was successfully configured in the dedicated modal
+     */
+    $scope.onGatewayModalSuccess = function (settings) {
+      $scope.toggleSelectGatewayModal();
+    };
+
+    /**
+     * Callback triggered after the gateway failed to be configured
+     */
+    $scope.onGatewayModalError = function (errors) {
+      growl.error(_t('app.admin.invoices.payment.gateway_configuration_error'));
+      console.error(errors);
+    };
+
+    /**
      * Setup the feature-tour for the admin/invoices page.
      * This is intended as a contextual help (when pressing F1)
      */

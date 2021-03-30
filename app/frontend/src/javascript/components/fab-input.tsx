@@ -2,12 +2,15 @@
  * This component is a template for an input component that wraps the application style
  */
 
-import React, { BaseSyntheticEvent, ReactNode, useCallback, useState } from 'react';
+import React, { BaseSyntheticEvent, ReactNode, useCallback, useEffect, useState } from 'react';
 import { debounce as _debounce } from 'lodash';
+import SettingAPI from '../api/setting';
+import { SettingName } from '../models/setting';
+import { loadStripe } from '@stripe/stripe-js';
 
 interface FabInputProps {
   id: string,
-  onChange?: (event: BaseSyntheticEvent) => void,
+  onChange?: (value: any) => void,
   value: any,
   icon?: ReactNode,
   addOn?: ReactNode,
@@ -19,9 +22,13 @@ interface FabInputProps {
   type?: 'text' | 'date' | 'password' | 'url' | 'time' | 'tel' | 'search' | 'number' | 'month' | 'email' | 'datetime-local' | 'week',
 }
 
-
 export const FabInput: React.FC<FabInputProps> = ({ id, onChange, value, icon, className, disabled, type, required, debounce, addOn, addOnClassName }) => {
   const [inputValue, setInputValue] = useState<any>(value);
+
+  useEffect(() => {
+    setInputValue(value);
+    onChange(value);
+  }, [value]);
 
   /**
    * Check if the current component was provided an icon to display
@@ -46,12 +53,13 @@ export const FabInput: React.FC<FabInputProps> = ({ id, onChange, value, icon, c
    * Handle the action of the button
    */
   const handleChange = (e: BaseSyntheticEvent): void => {
-    setInputValue(e.target.value);
+    const newValue = e.target.value;
+    setInputValue(newValue);
     if (typeof onChange === 'function') {
       if (debounce) {
-        handler(e);
+        handler(newValue);
       } else {
-        onChange(e);
+        onChange(newValue);
       }
     }
   }

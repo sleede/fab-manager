@@ -13,7 +13,11 @@
                        on-before-save="selectPaymentGateway"
                        fa-icon="fa-font">
       </boolean-setting>
-      <select-gateway-modal is-open="openSelectGatewayModal" toggle-modal="toggleSelectGatewayModal" current-user="currentUser" />
+      <select-gateway-modal is-open="openSelectGatewayModal"
+                            toggle-modal="toggleSelectGatewayModal"
+                            current-user="currentUser"
+                            on-success="onGatewayModalSuccess"
+                            on-error="onGatewayModalError" />
     </div>
     <div class="row m-t" ng-show="allSettings.online_payment_module === 'true'">
       <h3 class="m-l" translate>{{ 'app.admin.invoices.payment.stripe_keys' }}</h3>

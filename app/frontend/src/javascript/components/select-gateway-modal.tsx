@@ -3,7 +3,7 @@
  * The configuration of a payment gateway is required to enable the online payments.
  */
 
-import React, { BaseSyntheticEvent, useState } from 'react';
+import React, { BaseSyntheticEvent, useEffect, useState } from 'react';
 import { react2angular } from 'react2angular';
 import { Loader } from './loader';
 import { IApplication } from '../models/application';
@@ -12,7 +12,8 @@ import { FabModal, ModalSize } from './fab-modal';
 import { User } from '../models/user';
 import { Gateway } from '../models/gateway';
 import { StripeKeysForm } from './stripe-keys-form';
-import { SettingName } from '../models/setting';
+import { SettingBulkResult, SettingName } from '../models/setting';
+import SettingAPI from '../api/setting';
 
 
 declare var Application: IApplication;
@@ -21,22 +22,31 @@ interface SelectGatewayModalModalProps {
   isOpen: boolean,
   toggleModal: () => void,
   currentUser: User,
+  onError: (errors: Map<SettingName, SettingBulkResult>|any) => void,
+  onSuccess: (results: Map<SettingName, SettingBulkResult>) => void,
 }
 
-const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isOpen, toggleModal }) => {
+const paymentGateway = SettingAPI.get(SettingName.PaymentGateway);
+
+const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isOpen, toggleModal, onError, onSuccess }) => {
   const { t } = useTranslation('admin');
 
   const [preventConfirmGateway, setPreventConfirmGateway] = useState<boolean>(true);
   const [selectedGateway, setSelectedGateway] = useState<string>('');
   const [gatewayConfig, setGatewayConfig] = useState<Map<SettingName, string>>(new Map());
 
+  useEffect(() => {
+    const gateway = paymentGateway.read();
+    setSelectedGateway(gateway.value);
+  }, []);
 
   /**
    * Callback triggered when the user has filled and confirmed the settings of his gateway
    */
   const onGatewayConfirmed = () => {
     setPreventConfirmGateway(true);
-    toggleModal();
+    updateSettings();
+    setPreventConfirmGateway(false);
   }
 
   /**
@@ -67,6 +77,25 @@ const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isOpen, to
     setPreventConfirmGateway(false);
   }
 
+  /**
+   * Send the new gateway settings to the API to save them
+   */
+  const updateSettings = (): void => {
+    const settings = new Map<SettingName, string>(gatewayConfig);
+    settings.set(SettingName.PaymentGateway, selectedGateway);
+
+    const api = new SettingAPI();
+    api.bulkUpdate(settings).then(result => {
+      if (Array.from(result.values()).filter(item => !item.status).length > 0) {
+        onError(result);
+      } else {
+        onSuccess(result);
+      }
+    }, reason => {
+      onError(reason);
+    });
+  }
+
   return (
     <FabModal title={t('app.admin.invoices.payment.gateway_modal.select_gateway_title')}
               isOpen={isOpen}
@@ -91,12 +120,12 @@ const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isOpen, to
   );
 };
 
-const SelectGatewayModalWrapper: React.FC<SelectGatewayModalModalProps> = ({ isOpen, toggleModal, currentUser }) => {
+const SelectGatewayModalWrapper: React.FC<SelectGatewayModalModalProps> = ({ isOpen, toggleModal, currentUser, onSuccess, onError }) => {
   return (
     <Loader>
-      <SelectGatewayModal isOpen={isOpen} toggleModal={toggleModal} currentUser={currentUser} />
+      <SelectGatewayModal isOpen={isOpen} toggleModal={toggleModal} currentUser={currentUser} onSuccess={onSuccess} onError={onError} />
     </Loader>
   );
 }
 
-Application.Components.component('selectGatewayModal', react2angular(SelectGatewayModalWrapper, ['isOpen', 'toggleModal', 'currentUser']));
+Application.Components.component('selectGatewayModal', react2angular(SelectGatewayModalWrapper, ['isOpen', 'toggleModal', 'currentUser', 'onSuccess', 'onError']));

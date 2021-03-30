@@ -6,7 +6,6 @@ import {
   PaymentSchedule,
   PaymentScheduleIndexRequest, RefreshItemResponse
 } from '../models/payment-schedule';
-import wrapPromise, { IWrapPromise } from '../lib/wrap-promise';
 
 export default class PaymentScheduleAPI {
   async list (query: PaymentScheduleIndexRequest): Promise<Array<PaymentSchedule>> {
