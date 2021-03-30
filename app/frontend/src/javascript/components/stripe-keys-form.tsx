@@ -2,21 +2,22 @@
  * Form to set the stripe's public and private keys
  */
 
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { BaseSyntheticEvent, ReactNode, useEffect, useState } from 'react';
 import { Loader } from './loader';
 import { useTranslation } from 'react-i18next';
 import SettingAPI from '../api/setting';
 import { SettingName } from '../models/setting';
 import { FabInput } from './fab-input';
+import StripeAPI from '../api/stripe';
 
 
 interface StripeKeysFormProps {
-  param: string
+  onValidKeys: (stripePublic: string, stripeSecret:string) => void
 }
 
 const stripeKeys = SettingAPI.query([SettingName.StripePublicKey, SettingName.StripeSecretKey]);
 
-const StripeKeysFormComponent: React.FC<StripeKeysFormProps> = ({ param }) => {
+const StripeKeysFormComponent: React.FC<StripeKeysFormProps> = ({ onValidKeys }) => {
   const { t } = useTranslation('admin');
 
   const [publicKey, setPublicKey] = useState<string>('');
@@ -32,13 +33,56 @@ const StripeKeysFormComponent: React.FC<StripeKeysFormProps> = ({ param }) => {
     setSecretKey(keys.get(SettingName.StripeSecretKey));
   }, []);
 
+  useEffect(() => {
+    const validClassName = 'key-valid';
+    if (publicKeyAddOnClassName === validClassName && secretKeyAddOnClassName === validClassName) {
+      onValidKeys(publicKey, secretKey);
+    }
+  }, [publicKeyAddOnClassName, secretKeyAddOnClassName]);
 
-  // see StripeKeysModalController
-  // from app/frontend/src/javascript/controllers/admin/invoices.js
 
-  const testPublicKey = () => {
-    setPublicKeyAddOnClassName('key-valid');
-    setPublicKeyAddOn(<i className="fa fa-check" />);
+  /**
+   * Send a test call to the Stripe API to check if the inputted public key is valid
+   */
+  const testPublicKey = (e: BaseSyntheticEvent) => {
+    const key = e.target.value;
+    if (!key.match(/^pk_/)) {
+      setPublicKeyAddOn(<i className="fa fa-times" />);
+      setPublicKeyAddOnClassName('key-invalid');
+      return;
+    }
+    StripeAPI.createPIIToken(key, 'test').then(() => {
+      setPublicKey(key);
+      setPublicKeyAddOn(<i className="fa fa-check" />);
+      setPublicKeyAddOnClassName('key-valid');
+    }, reason => {
+      if (reason.response.status === 401) {
+        setPublicKeyAddOn(<i className="fa fa-times" />);
+        setPublicKeyAddOnClassName('key-invalid');
+      }
+    });
+  }
+
+  /**
+   * Send a test call to the Stripe API to check if the inputted secret key is valid
+   */
+  const testSecretKey = (e: BaseSyntheticEvent) => {
+    const key = e.target.value;
+    if (!key.match(/^sk_/)) {
+      setSecretKeyAddOn(<i className="fa fa-times" />);
+      setSecretKeyAddOnClassName('key-invalid');
+      return;
+    }
+    StripeAPI.listAllCharges(key).then(() => {
+      setSecretKey(key);
+      setSecretKeyAddOn(<i className="fa fa-check" />);
+      setSecretKeyAddOnClassName('key-valid');
+    }, reason => {
+      if (reason.response.status === 401) {
+        setSecretKeyAddOn(<i className="fa fa-times" />);
+        setSecretKeyAddOnClassName('key-invalid');
+      }
+    });
   }
 
   return (
@@ -53,50 +97,29 @@ const StripeKeysFormComponent: React.FC<StripeKeysFormProps> = ({ param }) => {
                     onChange={testPublicKey}
                     addOn={publicKeyAddOn}
                     addOnClassName={publicKeyAddOnClassName}
+                    debounce={200}
                     required />
-          <div className="key-input">
-            <span className="key-input__icon"><i className="fa fa-info" /></span>
-            <input type="text"
-                   id="stripe_public_key"
-                   value={publicKey}
-                   ng-model-options='{ debounce: 200 }'
-                   ng-change='testPublicKey()'
-                   required />
-          <span className="input-group-addon"
-                ng-class="{'label-success': publicKeyStatus, 'label-danger text-white': !publicKeyStatus}"
-                ng-show="publicKeyStatus !== undefined && publicKey">
-              <i className="fa fa-times" ng-show="!publicKeyStatus" />
-              <i className="fa fa-check" ng-show="publicKeyStatus" />
-            </span>
-          </div>
         </div>
         <div className="stripe-secret-input">
           <label htmlFor="stripe_secret_key">{ t('app.admin.invoices.payment.secret_key') } *</label>
-          <div className="key-input">
-            <span className="key-input__icon"><i className="fa fa-key" /></span>
-            <input type="text"
-                   id="stripe_secret_key"
-                   value={secretKey}
-                   ng-model-options='{ debounce: 200 }'
-                   ng-change='testSecretKey()'
-                   required />
-          <span className="input-group-addon"
-                ng-class="{'label-success': secretKeyStatus, 'label-danger text-white': !secretKeyStatus}"
-                ng-show="secretKeyStatus !== undefined && secretKey">
-              <i className="fa fa-times" ng-show="!secretKeyStatus" />
-              <i className="fa fa-check" ng-show="secretKeyStatus" />
-            </span>
-          </div>
+          <FabInput id="stripe_secret_key"
+                    icon={<i className="fa fa-key" />}
+                    value={secretKey}
+                    onChange={testSecretKey}
+                    addOn={secretKeyAddOn}
+                    addOnClassName={secretKeyAddOnClassName}
+                    debounce={200}
+                    required/>
         </div>
       </form>
     </div>
   );
 }
 
-export const StripeKeysForm: React.FC<StripeKeysFormProps> = ({ param }) => {
+export const StripeKeysForm: React.FC<StripeKeysFormProps> = ({ onValidKeys }) => {
   return (
     <Loader>
-      <StripeKeysFormComponent param={param} />
+      <StripeKeysFormComponent onValidKeys={onValidKeys} />
     </Loader>
   );
 }

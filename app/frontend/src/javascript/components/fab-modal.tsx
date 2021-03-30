@@ -2,7 +2,7 @@
  * This component is a template for a modal dialog that wraps the application style
  */
 
-import React, { ReactNode, SyntheticEvent } from 'react';
+import React, { ReactNode, BaseSyntheticEvent } from 'react';
 import Modal from 'react-modal';
 import { useTranslation } from 'react-i18next';
 import { Loader } from './loader';
@@ -27,7 +27,7 @@ interface FabModalProps {
   className?: string,
   width?: ModalSize,
   customFooter?: ReactNode,
-  onConfirm?: (event: SyntheticEvent) => void,
+  onConfirm?: (event: BaseSyntheticEvent) => void,
   preventConfirm?: boolean
 }
 

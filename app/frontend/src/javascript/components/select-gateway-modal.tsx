@@ -12,6 +12,7 @@ import { FabModal, ModalSize } from './fab-modal';
 import { User } from '../models/user';
 import { Gateway } from '../models/gateway';
 import { StripeKeysForm } from './stripe-keys-form';
+import { SettingName } from '../models/setting';
 
 
 declare var Application: IApplication;
@@ -27,6 +28,7 @@ const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isOpen, to
 
   const [preventConfirmGateway, setPreventConfirmGateway] = useState<boolean>(true);
   const [selectedGateway, setSelectedGateway] = useState<string>('');
+  const [gatewayConfig, setGatewayConfig] = useState<Map<SettingName, string>>(new Map());
 
 
   /**
@@ -43,7 +45,6 @@ const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isOpen, to
   const setGateway = (event: BaseSyntheticEvent) => {
     const gateway = event.target.value;
     setSelectedGateway(gateway);
-    setPreventConfirmGateway(!gateway);
   }
 
   /**
@@ -51,6 +52,19 @@ const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isOpen, to
    */
   const hasSelectedGateway = (): boolean => {
     return selectedGateway !== '';
+  }
+
+  /**
+   * Callback triggered when the embedded form has validated all the stripe keys
+   */
+  const handleValidStripeKeys = (publicKey: string, secretKey: string): void => {
+    setGatewayConfig((prev) => {
+      const newMap = new Map(prev);
+      newMap.set(SettingName.StripeSecretKey, secretKey);
+      newMap.set(SettingName.StripePublicKey, publicKey);
+      return newMap;
+    });
+    setPreventConfirmGateway(false);
   }
 
   return (
@@ -72,7 +86,7 @@ const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isOpen, to
         <option value={Gateway.Stripe}>{t('app.admin.invoices.payment.gateway_modal.stripe')}</option>
         <option value={Gateway.PayZen}>{t('app.admin.invoices.payment.gateway_modal.payzen')}</option>
       </select>
-      {selectedGateway === Gateway.Stripe && <StripeKeysForm param={'lorem ipsum'} />}
+      {selectedGateway === Gateway.Stripe && <StripeKeysForm onValidKeys={handleValidStripeKeys} />}
     </FabModal>
   );
 };
