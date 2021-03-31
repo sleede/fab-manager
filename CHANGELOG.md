@@ -2,6 +2,7 @@
 
 ## Next release
 - [TODO DEPLOY] `rails fablab:stripe:set_gateway`
+- [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
 
 ## v4.7.7 (pending)
 - Enforced validation on required input fields

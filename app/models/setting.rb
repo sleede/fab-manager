@@ -110,7 +110,12 @@ class Setting < ApplicationRecord
                              payment_schedule_prefix
                              trainings_module
                              address_required
-                             payment_gateway] }
+                             payment_gateway
+                             payzen_username
+                             payzen_password
+                             payzen_endpoint
+                             payzen_public_key
+                             payzen_hmac] }
   # WARNING: when adding a new key, you may also want to add it in app/policies/setting_policy.rb#public_whitelist
 
   def value

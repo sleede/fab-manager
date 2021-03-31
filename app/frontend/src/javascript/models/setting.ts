@@ -102,7 +102,12 @@ export enum SettingName {
   PaymentSchedulePrefix = 'payment_schedule_prefix',
   TrainingsModule = 'trainings_module',
   AddressRequired = 'address_required',
-  PaymentGateway = 'payment_gateway'
+  PaymentGateway = 'payment_gateway',
+  PayZenUsername = 'payzen_username',
+  PayZenPassword = 'payzen_password',
+  PayZenEndpoint = 'payzen_endpoint',
+  PayZenPublicKey = 'payzen_public_key',
+  PayZenHmacKey = 'payzen_hmac'
 }
 
 export interface Setting {

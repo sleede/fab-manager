@@ -2,7 +2,7 @@
  * Form to set the stripe's public and private keys
  */
 
-import React, { BaseSyntheticEvent, ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { Loader } from './loader';
 import { useTranslation } from 'react-i18next';
 import SettingAPI from '../api/setting';

@@ -27,7 +27,9 @@ export const FabInput: React.FC<FabInputProps> = ({ id, onChange, value, icon, c
 
   useEffect(() => {
     setInputValue(value);
-    onChange(value);
+    if (value) {
+      onChange(value);
+    }
   }, [value]);
 
   /**

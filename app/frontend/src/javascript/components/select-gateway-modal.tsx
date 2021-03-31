@@ -14,6 +14,7 @@ import { Gateway } from '../models/gateway';
 import { StripeKeysForm } from './stripe-keys-form';
 import { SettingBulkResult, SettingName } from '../models/setting';
 import SettingAPI from '../api/setting';
+import { PayZenKeysForm } from './payzen-keys-form';
 
 
 declare var Application: IApplication;
@@ -116,6 +117,7 @@ const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isOpen, to
         <option value={Gateway.PayZen}>{t('app.admin.invoices.payment.gateway_modal.payzen')}</option>
       </select>
       {selectedGateway === Gateway.Stripe && <StripeKeysForm onValidKeys={handleValidStripeKeys} />}
+      {selectedGateway === Gateway.PayZen && <PayZenKeysForm onValidKeys={handleValidStripeKeys} />}
     </FabModal>
   );
 };
