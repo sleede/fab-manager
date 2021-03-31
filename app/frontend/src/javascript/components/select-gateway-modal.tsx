@@ -79,6 +79,14 @@ const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isOpen, to
   }
 
   /**
+   * Callback triggered when the embedded for has validated all the PayZen keys
+   */
+  const handleValidPayZenKeys = (payZenKeys: Map<SettingName, string>): void => {
+    setGatewayConfig(payZenKeys);
+    setPreventConfirmGateway(false);
+  }
+
+  /**
    * Send the new gateway settings to the API to save them
    */
   const updateSettings = (): void => {
@@ -117,7 +125,7 @@ const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isOpen, to
         <option value={Gateway.PayZen}>{t('app.admin.invoices.payment.gateway_modal.payzen')}</option>
       </select>
       {selectedGateway === Gateway.Stripe && <StripeKeysForm onValidKeys={handleValidStripeKeys} />}
-      {selectedGateway === Gateway.PayZen && <PayZenKeysForm onValidKeys={handleValidStripeKeys} />}
+      {selectedGateway === Gateway.PayZen && <PayZenKeysForm onValidKeys={handleValidPayZenKeys} />}
     </FabModal>
   );
 };

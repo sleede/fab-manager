@@ -2,7 +2,7 @@
  * Form to set the stripe's public and private keys
  */
 
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import { Loader } from './loader';
 import { useTranslation } from 'react-i18next';
 import SettingAPI from '../api/setting';
@@ -19,6 +19,8 @@ const stripeKeys = SettingAPI.query([SettingName.StripePublicKey, SettingName.St
 
 const StripeKeysFormComponent: React.FC<StripeKeysFormProps> = ({ onValidKeys }) => {
   const { t } = useTranslation('admin');
+
+  const mounted = useRef(null);
 
   const [publicKey, setPublicKey] = useState<string>('');
   const [publicKeyAddOn, setPublicKeyAddOn] = useState<ReactNode>(null);
@@ -51,10 +53,14 @@ const StripeKeysFormComponent: React.FC<StripeKeysFormProps> = ({ onValidKeys })
       return;
     }
     StripeAPI.createPIIToken(key, 'test').then(() => {
+      if (!mounted.current) return;
+
       setPublicKey(key);
       setPublicKeyAddOn(<i className="fa fa-check" />);
       setPublicKeyAddOnClassName('key-valid');
     }, reason => {
+      if (!mounted.current) return;
+
       if (reason.response.status === 401) {
         setPublicKeyAddOn(<i className="fa fa-times" />);
         setPublicKeyAddOnClassName('key-invalid');
@@ -72,10 +78,14 @@ const StripeKeysFormComponent: React.FC<StripeKeysFormProps> = ({ onValidKeys })
       return;
     }
     StripeAPI.listAllCharges(key).then(() => {
+      if (!mounted.current) return;
+
       setSecretKey(key);
       setSecretKeyAddOn(<i className="fa fa-check" />);
       setSecretKeyAddOnClassName('key-valid');
     }, reason => {
+      if (!mounted.current) return;
+
       if (reason.response.status === 401) {
         setSecretKeyAddOn(<i className="fa fa-times" />);
         setSecretKeyAddOnClassName('key-invalid');

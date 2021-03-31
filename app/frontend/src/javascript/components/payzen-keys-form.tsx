@@ -8,27 +8,29 @@ import { useTranslation } from 'react-i18next';
 import SettingAPI from '../api/setting';
 import { SettingName } from '../models/setting';
 import { FabInput } from './fab-input';
+import { enableMapSet } from 'immer';
+import { useImmer } from 'use-immer';
 
+enableMapSet();
 
 interface PayZenKeysFormProps {
   onValidKeys: (payZenSettings: Map<SettingName, string>) => void
 }
 
-const payZenSettings = [SettingName.PayZenUsername, SettingName.PayZenPassword, SettingName.PayZenEndpoint, SettingName.PayZenHmacKey, SettingName.PayZenPublicKey];
+const payZenSettings: Array<SettingName> = [SettingName.PayZenUsername, SettingName.PayZenPassword, SettingName.PayZenEndpoint, SettingName.PayZenHmacKey, SettingName.PayZenPublicKey];
 const payZenKeys = SettingAPI.query(payZenSettings);
 
 const PayZenKeysFormComponent: React.FC<PayZenKeysFormProps> = ({ onValidKeys }) => {
   const { t } = useTranslation('admin');
 
-  const defaultSettings: [SettingName, string][] = payZenSettings.map(name => [name, '']);
-  const [settings, setSettings] = useState<Map<SettingName, string>>(new Map(defaultSettings));
+  const [settings, updateSettings] = useImmer<Map<SettingName, string>>(new Map(payZenSettings.map(name => [name, ''])));
   const [restApiAddOn, setRestApiAddOn] = useState<ReactNode>(null);
   const [restApiAddOnClassName, setRestApiAddOnClassName] = useState<string>('');
   const [publicKeyAddOn, setPublicKeyAddOn] = useState<ReactNode>(null);
   const [publicKeyAddOnClassName, setPublicKeyAddOnClassName] = useState<string>('');
 
   useEffect(() => {
-    setSettings(payZenKeys.read());
+    updateSettings(payZenKeys.read());
   }, []);
 
   useEffect(() => {
@@ -37,7 +39,6 @@ const PayZenKeysFormComponent: React.FC<PayZenKeysFormProps> = ({ onValidKeys })
       onValidKeys(settings);
     }
   }, [publicKeyAddOnClassName, restApiAddOnClassName]);
-
 
   /**
    * Check if the inputted public key is valid and assign it to the settings if the key is valid
@@ -48,7 +49,7 @@ const PayZenKeysFormComponent: React.FC<PayZenKeysFormProps> = ({ onValidKeys })
       setPublicKeyAddOnClassName('key-invalid');
       return;
     }
-    setSettings(new Map(settings).set(SettingName.PayZenPublicKey, key));
+    updateSettings(draft => draft.set(SettingName.PayZenPublicKey, key));
     setPublicKeyAddOn(<i className="fa fa-check" />);
     setPublicKeyAddOnClassName('key-valid');
   }
@@ -58,10 +59,22 @@ const PayZenKeysFormComponent: React.FC<PayZenKeysFormProps> = ({ onValidKeys })
    */
   const testRestApi = (setting: SettingName.PayZenUsername | SettingName.PayZenPassword | SettingName.PayZenEndpoint | SettingName.PayZenHmacKey) => {
     return (key: string) => {
+      updateSettings(draft => draft.set(setting, key));
+      let valid = true;
+      for (const settingKey of [SettingName.PayZenUsername, SettingName.PayZenPassword, SettingName.PayZenEndpoint, SettingName.PayZenHmacKey]) {
+        if (!settings.get(settingKey)) {
+          valid = false;
+          break;
+        }
+      }
+      if (valid) {
+        setRestApiAddOn(<i className="fa fa-check" />);
+        setRestApiAddOnClassName('key-valid');
+      }
       // if (!key.match(/^sk_/)) {
-      setRestApiAddOn(<i className="fa fa-times" />);
-      setRestApiAddOnClassName('key-invalid');
-      return;
+      // setRestApiAddOn(<i className="fa fa-times" />);
+      // setRestApiAddOnClassName('key-invalid');
+      // return;
       // }
       // StripeAPI.listAllCharges(key).then(() => {
       //   setSecretKey(key);
