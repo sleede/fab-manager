@@ -10,6 +10,7 @@ import { SettingName } from '../models/setting';
 import { FabInput } from './fab-input';
 import { enableMapSet } from 'immer';
 import { useImmer } from 'use-immer';
+import PayzenAPI from '../api/payzen';
 
 enableMapSet();
 
@@ -38,7 +39,7 @@ const PayZenKeysFormComponent: React.FC<PayZenKeysFormProps> = ({ onValidKeys })
     if (publicKeyAddOnClassName === validClassName && restApiAddOnClassName === validClassName) {
       onValidKeys(settings);
     }
-  }, [publicKeyAddOnClassName, restApiAddOnClassName]);
+  }, [publicKeyAddOnClassName, restApiAddOnClassName, settings]);
 
   /**
    * Check if the inputted public key is valid and assign it to the settings if the key is valid
@@ -68,24 +69,23 @@ const PayZenKeysFormComponent: React.FC<PayZenKeysFormProps> = ({ onValidKeys })
         }
       }
       if (valid) {
-        setRestApiAddOn(<i className="fa fa-check" />);
-        setRestApiAddOnClassName('key-valid');
+        PayzenAPI.chargeSDKTest(
+          settings.get(SettingName.PayZenEndpoint),
+          settings.get(SettingName.PayZenUsername),
+          settings.get(SettingName.PayZenPassword)
+        ).then(result => {
+          if (result.success) {
+            setRestApiAddOn(<i className="fa fa-check" />);
+            setRestApiAddOnClassName('key-valid');
+          } else {
+            setRestApiAddOn(<i className="fa fa-times" />);
+            setRestApiAddOnClassName('key-invalid');
+          }
+        }, () => {
+          setRestApiAddOn(<i className="fa fa-times" />);
+          setRestApiAddOnClassName('key-invalid');
+        });
       }
-      // if (!key.match(/^sk_/)) {
-      // setRestApiAddOn(<i className="fa fa-times" />);
-      // setRestApiAddOnClassName('key-invalid');
-      // return;
-      // }
-      // StripeAPI.listAllCharges(key).then(() => {
-      //   setSecretKey(key);
-      //   setSecretKeyAddOn(<i className="fa fa-check" />);
-      //   setSecretKeyAddOnClassName('key-valid');
-      // }, reason => {
-      //   if (reason.response.status === 401) {
-      //     setSecretKeyAddOn(<i className="fa fa-times" />);
-      //     setSecretKeyAddOnClassName('key-invalid');
-      //   }
-      // });
     };
   }
 
@@ -142,7 +142,7 @@ const PayZenKeysFormComponent: React.FC<PayZenKeysFormProps> = ({ onValidKeys })
             <label htmlFor="payzen_endpoint">{ t('app.admin.invoices.payment.endpoint') } *</label>
             <FabInput id="payzen_endpoint"
                       type="url"
-                      icon={<i className="fas fa-anchor" />}
+                      icon={<i className="fas fa-link" />}
                       value={settings.get(SettingName.PayZenEndpoint)}
                       onChange={testRestApi(SettingName.PayZenEndpoint)}
                       debounce={200}

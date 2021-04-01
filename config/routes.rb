@@ -183,6 +183,9 @@ Rails.application.routes.draw do
 
     # test MIME type
     post 'files/mime_type' => 'files#mime'
+
+    # PayZen special endpoint
+    post 'payzen/sdk_test' => 'payzen#sdk_test'
   end
 
   # rss
