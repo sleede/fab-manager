@@ -8,7 +8,7 @@ import { debounce as _debounce } from 'lodash';
 interface FabInputProps {
   id: string,
   onChange?: (value: any) => void,
-  value: any,
+  defaultValue: any,
   icon?: ReactNode,
   addOn?: ReactNode,
   addOnClassName?: string,
@@ -19,15 +19,15 @@ interface FabInputProps {
   type?: 'text' | 'date' | 'password' | 'url' | 'time' | 'tel' | 'search' | 'number' | 'month' | 'email' | 'datetime-local' | 'week',
 }
 
-export const FabInput: React.FC<FabInputProps> = ({ id, onChange, value, icon, className, disabled, type, required, debounce, addOn, addOnClassName }) => {
-  const [inputValue, setInputValue] = useState<any>(value);
+export const FabInput: React.FC<FabInputProps> = ({ id, onChange, defaultValue, icon, className, disabled, type, required, debounce, addOn, addOnClassName }) => {
+  const [inputValue, setInputValue] = useState<any>(defaultValue);
 
   useEffect(() => {
-    if (value !== inputValue) {
-      setInputValue(value);
-      onChange(value);
+    if (!inputValue) {
+      setInputValue(defaultValue);
+      onChange(defaultValue);
     }
-  }, [value]);
+  }, [defaultValue]);
 
   /**
    * Check if the current component was provided an icon to display

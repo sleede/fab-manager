@@ -11,7 +11,8 @@ class API::PayzenController < API::ApiController
     client = PayZen::Charge.new(base_url: params[:base_url], username: params[:username], password: params[:password])
     res = client.sdk_test(str)
 
-    puts res
-    @status = res&.answer&.value == str
+    @status = (res['answer']['value'] == str)
+  rescue SocketError
+    @status = false
   end
 end

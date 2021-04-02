@@ -1,3 +1,3 @@
 # frozen_string_literal: true
 
-json.success @status
+json.success !!@status # rubocop:disable Style/DoubleNegation

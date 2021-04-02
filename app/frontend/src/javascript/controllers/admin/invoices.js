@@ -27,6 +27,9 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     // fake stripe secret key
     const STRIPE_SK_HIDDEN = 'sk_test_hidden-hidden-hidden-hid';
 
+    // fake payzen password
+    const PAYZEN_PASSWD_HIDDEN = 'testpassword_HiDdEnHIddEnHIdDEnHiDdEnHIddEnHIdDEn';
+
     /* PUBLIC SCOPE */
 
     // default active tab
@@ -676,14 +679,27 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       resolveGatewaySaving(true);
 
       $scope.toggleSelectGatewayModal();
-
-      $scope.allSettings.stripe_public_key = updatedSettings.get('stripe_public_key').value;
-      Setting.isPresent({ name: 'stripe_secret_key' }, function (res) {
-        $scope.stripeSecretKey = (res.isPresent ? STRIPE_SK_HIDDEN : '');
-      });
-      Payment.onlinePaymentStatus(function (res) {
-        $scope.onlinePaymentStatus = res.status;
-      });
+      $scope.allSettings.payment_gateway = updatedSettings.get('payment_gateway').value;
+      if ($scope.allSettings.payment_gateway === 'stripe') {
+        $scope.allSettings.stripe_public_key = updatedSettings.get('stripe_public_key').value;
+        Setting.isPresent({ name: 'stripe_secret_key' }, function (res) {
+          $scope.stripeSecretKey = (res.isPresent ? STRIPE_SK_HIDDEN : '');
+        });
+        Payment.onlinePaymentStatus(function (res) {
+          $scope.onlinePaymentStatus = res.status;
+        });
+      }
+      if ($scope.allSettings.payment_gateway === 'stripe') {
+        $scope.allSettings.payzen_username = updatedSettings.get('payzen_username').value;
+        $scope.allSettings.payzen_endpoint = updatedSettings.get('payzen_endpoint').value;
+        $scope.allSettings.payzen_public_key = updatedSettings.get('payzen_public_key').value;
+        Setting.isPresent({ name: 'payzen_password' }, function (res) {
+          $scope.allSettings.payzen_password = (res.isPresent ? PAYZEN_PASSWD_HIDDEN : '');
+        });
+        Setting.isPresent({ name: 'payzen_hmac' }, function (res) {
+          $scope.allSettings.payzen_hmac = (res.isPresent ? PAYZEN_PASSWD_HIDDEN : '');
+        });
+      }
     };
 
     /**

@@ -15,14 +15,14 @@ class PayZen::Client
 
   protected
 
-  def post(rel_url, payload, tmp_base_url: nil, tmp_username: nil, tmp_password: nil)
+  def post(rel_url, payload)
     require 'uri'
     require 'net/http'
     require 'json'
 
-    uri = URI.join(tmp_base_url || base_url, API_PATH, rel_url)
+    uri = URI(File.join(base_url, API_PATH, rel_url))
     headers = {
-      'Authorization' => authorization_header(tmp_username, tmp_password),
+      'Authorization' => authorization_header,
       'Content-Type' => 'application/json'
     }
 
@@ -31,12 +31,12 @@ class PayZen::Client
   end
 
   def base_url
-    Setting.get('payzen_endpoint')
+    @base_url || Setting.get('payzen_endpoint')
   end
 
-  def authorization_header(user, passwd)
-    username = user || Setting.get('payzen_username')
-    password = passwd || Setting.get('payzen_password')
+  def authorization_header
+    username = @username || Setting.get('payzen_username')
+    password = @password || Setting.get('payzen_password')
 
     credentials = Base64.strict_encode64("#{username}:#{password}")
     "Basic #{credentials}"

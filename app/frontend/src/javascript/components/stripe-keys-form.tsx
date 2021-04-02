@@ -106,7 +106,7 @@ const StripeKeysFormComponent: React.FC<StripeKeysFormProps> = ({ onValidKeys })
           <label htmlFor="stripe_public_key">{ t('app.admin.invoices.payment.public_key') } *</label>
           <FabInput id="stripe_public_key"
                     icon={<i className="fa fa-info" />}
-                    value={publicKey}
+                    defaultValue={publicKey}
                     onChange={testPublicKey}
                     addOn={publicKeyAddOn}
                     addOnClassName={publicKeyAddOnClassName}
@@ -117,7 +117,7 @@ const StripeKeysFormComponent: React.FC<StripeKeysFormProps> = ({ onValidKeys })
           <label htmlFor="stripe_secret_key">{ t('app.admin.invoices.payment.secret_key') } *</label>
           <FabInput id="stripe_secret_key"
                     icon={<i className="fa fa-key" />}
-                    value={secretKey}
+                    defaultValue={secretKey}
                     onChange={testSecretKey}
                     addOn={secretKeyAddOn}
                     addOnClassName={secretKeyAddOnClassName}

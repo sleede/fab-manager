@@ -96,6 +96,10 @@ const PayZenKeysFormComponent: React.FC<PayZenKeysFormProps> = ({ onValidKeys })
         setRestApiAddOnClassName('key-invalid');
       });
     }
+    if (!valid) {
+      setRestApiAddOn(<i className="fa fa-times" />);
+      setRestApiAddOnClassName('key-invalid');
+    }
   }
 
   /**
@@ -124,7 +128,7 @@ const PayZenKeysFormComponent: React.FC<PayZenKeysFormProps> = ({ onValidKeys })
             <label htmlFor="payzen_public_key">{ t('app.admin.invoices.payment.public_key') } *</label>
             <FabInput id="payzen_public_key"
                       icon={<i className="fas fa-info" />}
-                      value={settings.get(SettingName.PayZenPublicKey)}
+                      defaultValue={settings.get(SettingName.PayZenPublicKey)}
                       onChange={testPublicKey}
                       addOn={publicKeyAddOn}
                       addOnClassName={publicKeyAddOnClassName}
@@ -142,7 +146,7 @@ const PayZenKeysFormComponent: React.FC<PayZenKeysFormProps> = ({ onValidKeys })
             <FabInput id="payzen_username"
                       type="number"
                       icon={<i className="fas fa-user-alt" />}
-                      value={settings.get(SettingName.PayZenUsername)}
+                      defaultValue={settings.get(SettingName.PayZenUsername)}
                       onChange={setApiKey(SettingName.PayZenUsername)}
                       debounce={200}
                       required />
@@ -151,7 +155,7 @@ const PayZenKeysFormComponent: React.FC<PayZenKeysFormProps> = ({ onValidKeys })
             <label htmlFor="payzen_password">{ t('app.admin.invoices.payment.password') } *</label>
             <FabInput id="payzen_password"
                       icon={<i className="fas fa-key" />}
-                      value={settings.get(SettingName.PayZenPassword)}
+                      defaultValue={settings.get(SettingName.PayZenPassword)}
                       onChange={setApiKey(SettingName.PayZenPassword)}
                       debounce={200}
                       required />
@@ -161,7 +165,7 @@ const PayZenKeysFormComponent: React.FC<PayZenKeysFormProps> = ({ onValidKeys })
             <FabInput id="payzen_endpoint"
                       type="url"
                       icon={<i className="fas fa-link" />}
-                      value={settings.get(SettingName.PayZenEndpoint)}
+                      defaultValue={settings.get(SettingName.PayZenEndpoint)}
                       onChange={setApiKey(SettingName.PayZenEndpoint)}
                       debounce={200}
                       required />
@@ -170,7 +174,7 @@ const PayZenKeysFormComponent: React.FC<PayZenKeysFormProps> = ({ onValidKeys })
             <label htmlFor="payzen_hmac">{ t('app.admin.invoices.payment.hmac') } *</label>
             <FabInput id="payzen_hmac"
                       icon={<i className="fas fa-subscript" />}
-                      value={settings.get(SettingName.PayZenHmacKey)}
+                      defaultValue={settings.get(SettingName.PayZenHmacKey)}
                       onChange={setApiKey(SettingName.PayZenHmacKey)}
                       debounce={200}
                       required />
