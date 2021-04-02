@@ -1,5 +1,8 @@
 # Changelog Fab-manager
 
+## v4.7.8 2021 April 02
+- Updated mimemagic to 0.3.10 to fix [a build issue](https://github.com/mimemagicrb/mimemagic/issues/139)
+
 ## v4.7.7 2021 April 02
 - Enforced validation on required input fields
 - Updated babeljs and its dependencies
