@@ -22,7 +22,7 @@
                          name="email"
                          class="form-control"
                          ng-model="user.email"
-                         required="required"
+                         required="true"
                          ng-blur="emailError = !!loginForm.email.$error.email"
                          ng-focus="emailError = false"
                          translate-attr="{ placeholder: 'app.public.common.your_email_address' }" />
@@ -38,7 +38,7 @@
                          name="password"
                          class="form-control"
                          ng-model="user.password"
-                         required="required"
+                         required="true"
                          translate-attr="{ placeholder: 'app.public.common.your_password' }"
                          ng-minlength="8"/>
                 </div>

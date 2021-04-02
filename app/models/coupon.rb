@@ -5,7 +5,7 @@ class Coupon < ApplicationRecord
   has_many :invoices
   has_many :payment_schedule
 
-  after_save :create_stripe_coupon, on: [:create]
+  after_create :create_stripe_coupon
   after_commit :delete_stripe_coupon, on: [:destroy]
 
   validates :name, presence: true

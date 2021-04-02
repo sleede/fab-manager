@@ -1,9 +1,19 @@
 # Changelog Fab-manager
 
+## v4.7.7 2021 April 02
+- Enforced validation on required input fields
+- Updated babeljs and its dependencies
+- Updated german translations (thanks to [@Piapat](https://crowdin.com/profile/piapat))
+- Fix a bug: the view is not refreshed when deleting a recurring slot
+- Fix a bug: unable to add a new authorized file type for project's CAD files
+- Fix a bug: unable to update a coupon
+- Fix a bug: create a training availability with calendar in month view result in wrong dates
+- Fix a security issue: updated y18n to 4.0.1 to fix [CVE-2020-7774](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-7774)
+
 ## v4.7.6 2021 March 24
 - Ability to disable the trainings module
 - Ability to set the address as a mandatory field
-- The address is new requested when creating an account
+- The address is now requested when creating an account
 - The profile completion page is less fuzzy for people landing on it without enabled SSO
 - Prevent showing error message when testing for old versions during upgrade
 - In the email notification, sent to admins on account creation, show the group of the user

@@ -84,6 +84,8 @@ zu:
         birth_date_is_required: "crwdns8937:0crwdne8937:0"
         phone_number: "crwdns8939:0crwdne8939:0"
         phone_number_is_required: "crwdns8941:0crwdne8941:0"
+        address: "crwdns21452:0crwdne21452:0"
+        address_is_required: "crwdns21454:0crwdne21454:0"
         i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "crwdns8943:0crwdne8943:0"
         i_accept_to_receive_information_from_the_fablab: "crwdns8945:0crwdne8945:0"
         i_ve_read_and_i_accept_: "crwdns8947:0crwdne8947:0"
