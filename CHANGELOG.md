@@ -2,10 +2,12 @@
 
 - Enforced validation on required input fields
 - Updated babeljs and its dependencies
+- Updated german translations (thanks to [@Piapat](https://crowdin.com/profile/piapat))
 - Fix a bug: the view is not refreshed when deleting a recurring slot
 - Fix a bug: unable to add a new authorized file type for project's CAD files
 - Fix a bug: unable to update a coupon
 - Fix a bug: create a training availability with calendar in month view result in wrong dates
+- Fix a security issue: updated y18n to 4.0.1 to fix [CVE-2020-7774](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-7774)
 
 ## v4.7.6 2021 March 24
 - Ability to disable the trainings module
