@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+## v4.7.7 2021 April 02
 - Enforced validation on required input fields
 - Updated babeljs and its dependencies
 - Updated german translations (thanks to [@Piapat](https://crowdin.com/profile/piapat))
