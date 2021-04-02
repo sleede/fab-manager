@@ -19,7 +19,12 @@ interface PayZenKeysFormProps {
 }
 
 const payZenSettings: Array<SettingName> = [SettingName.PayZenUsername, SettingName.PayZenPassword, SettingName.PayZenEndpoint, SettingName.PayZenHmacKey, SettingName.PayZenPublicKey];
+const restApiSettings: Array<SettingName> = [SettingName.PayZenUsername, SettingName.PayZenPassword, SettingName.PayZenEndpoint, SettingName.PayZenHmacKey];
 const payZenKeys = SettingAPI.query(payZenSettings);
+
+// Prevent multiples call to the payzen keys validation endpoint.
+// this cannot be handled by a React state because of their asynchronous nature
+let pendingKeysValidation = false;
 
 const PayZenKeysFormComponent: React.FC<PayZenKeysFormProps> = ({ onValidKeys }) => {
   const { t } = useTranslation('admin');
@@ -41,8 +46,13 @@ const PayZenKeysFormComponent: React.FC<PayZenKeysFormProps> = ({ onValidKeys })
     }
   }, [publicKeyAddOnClassName, restApiAddOnClassName, settings]);
 
+  useEffect(() => {
+    testRestApi();
+  }, [settings])
+
   /**
-   * Check if the inputted public key is valid and assign it to the settings if the key is valid
+   * Assign the inputted key to the settings and check if it is valid.
+   * Depending on the test result, assign an add-on icon and a style to notify the user.
    */
   const testPublicKey = (key: string) => {
     if (!key.match(/^[0-9]+:/)) {
@@ -56,37 +66,45 @@ const PayZenKeysFormComponent: React.FC<PayZenKeysFormProps> = ({ onValidKeys })
   }
 
   /**
-   * Send a test call to the payZen REST API to check if the inputted settings key are valid
+   * Send a test call to the payZen REST API to check if the inputted settings key are valid.
+   * Depending on the test result, assign an add-on icon and a style to notify the user.
    */
-  const testRestApi = (setting: SettingName.PayZenUsername | SettingName.PayZenPassword | SettingName.PayZenEndpoint | SettingName.PayZenHmacKey) => {
-    return (key: string) => {
-      updateSettings(draft => draft.set(setting, key));
-      let valid = true;
-      for (const settingKey of [SettingName.PayZenUsername, SettingName.PayZenPassword, SettingName.PayZenEndpoint, SettingName.PayZenHmacKey]) {
-        if (!settings.get(settingKey)) {
-          valid = false;
-          break;
-        }
-      }
-      if (valid) {
-        PayzenAPI.chargeSDKTest(
-          settings.get(SettingName.PayZenEndpoint),
-          settings.get(SettingName.PayZenUsername),
-          settings.get(SettingName.PayZenPassword)
-        ).then(result => {
-          if (result.success) {
-            setRestApiAddOn(<i className="fa fa-check" />);
-            setRestApiAddOnClassName('key-valid');
-          } else {
-            setRestApiAddOn(<i className="fa fa-times" />);
-            setRestApiAddOnClassName('key-invalid');
-          }
-        }, () => {
+  const testRestApi = () => {
+    let valid: boolean = restApiSettings.map(s => !!settings.get(s))
+      .reduce((acc, val) => acc && val, true);
+
+    if (valid && !pendingKeysValidation) {
+      pendingKeysValidation = true;
+      PayzenAPI.chargeSDKTest(
+        settings.get(SettingName.PayZenEndpoint),
+        settings.get(SettingName.PayZenUsername),
+        settings.get(SettingName.PayZenPassword)
+      ).then(result => {
+        pendingKeysValidation = false;
+
+        if (result.success) {
+          setRestApiAddOn(<i className="fa fa-check" />);
+          setRestApiAddOnClassName('key-valid');
+        } else {
           setRestApiAddOn(<i className="fa fa-times" />);
           setRestApiAddOnClassName('key-invalid');
-        });
-      }
-    };
+        }
+      }, () => {
+        pendingKeysValidation = false;
+
+        setRestApiAddOn(<i className="fa fa-times" />);
+        setRestApiAddOnClassName('key-invalid');
+      });
+    }
+  }
+
+  /**
+   * Assign the inputted key to the given settings
+   */
+  const setApiKey = (setting: SettingName.PayZenUsername | SettingName.PayZenPassword | SettingName.PayZenEndpoint | SettingName.PayZenHmacKey) => {
+    return (key: string) => {
+      updateSettings(draft => draft.set(setting, key));
+    }
   }
 
   /**
@@ -125,7 +143,7 @@ const PayZenKeysFormComponent: React.FC<PayZenKeysFormProps> = ({ onValidKeys })
                       type="number"
                       icon={<i className="fas fa-user-alt" />}
                       value={settings.get(SettingName.PayZenUsername)}
-                      onChange={testRestApi(SettingName.PayZenUsername)}
+                      onChange={setApiKey(SettingName.PayZenUsername)}
                       debounce={200}
                       required />
           </div>
@@ -134,7 +152,7 @@ const PayZenKeysFormComponent: React.FC<PayZenKeysFormProps> = ({ onValidKeys })
             <FabInput id="payzen_password"
                       icon={<i className="fas fa-key" />}
                       value={settings.get(SettingName.PayZenPassword)}
-                      onChange={testRestApi(SettingName.PayZenPassword)}
+                      onChange={setApiKey(SettingName.PayZenPassword)}
                       debounce={200}
                       required />
           </div>
@@ -144,7 +162,7 @@ const PayZenKeysFormComponent: React.FC<PayZenKeysFormProps> = ({ onValidKeys })
                       type="url"
                       icon={<i className="fas fa-link" />}
                       value={settings.get(SettingName.PayZenEndpoint)}
-                      onChange={testRestApi(SettingName.PayZenEndpoint)}
+                      onChange={setApiKey(SettingName.PayZenEndpoint)}
                       debounce={200}
                       required />
           </div>
@@ -153,7 +171,7 @@ const PayZenKeysFormComponent: React.FC<PayZenKeysFormProps> = ({ onValidKeys })
             <FabInput id="payzen_hmac"
                       icon={<i className="fas fa-subscript" />}
                       value={settings.get(SettingName.PayZenHmacKey)}
-                      onChange={testRestApi(SettingName.PayZenHmacKey)}
+                      onChange={setApiKey(SettingName.PayZenHmacKey)}
                       debounce={200}
                       required />
           </div>

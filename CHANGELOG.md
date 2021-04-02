@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 ## Next release
+- Updated React and its dependencies to 17.0.3 and matching
 - [TODO DEPLOY] `rails fablab:stripe:set_gateway`
 - [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
 

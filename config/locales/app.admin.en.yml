@@ -639,7 +639,7 @@ en:
           stripe_keys_saved: "Stripe keys successfully saved."
           error_saving_stripe_keys: "Unable to save the Stripe keys. Please try again later."
           payzen_keys_info_html: "<p>To be able to collect online payments, you must configure the <a href='https://payzen.eu' target='_blank'>PayZen</a> identifiers and keys.</p><p>Retrieve them from <a href='https://secure.payzen.eu/vads-merchant/' target='_blank'>your merchant back office</a>.</p>"
-          client_keys: "Client keys"
+          client_keys: "Client key"
           api_keys: "API keys"
           username: "User"
           password: "Password"

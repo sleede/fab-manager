@@ -20,7 +20,7 @@ const stripeKeys = SettingAPI.query([SettingName.StripePublicKey, SettingName.St
 const StripeKeysFormComponent: React.FC<StripeKeysFormProps> = ({ onValidKeys }) => {
   const { t } = useTranslation('admin');
 
-  const mounted = useRef(null);
+  const mounted = useRef(false);
 
   const [publicKey, setPublicKey] = useState<string>('');
   const [publicKeyAddOn, setPublicKeyAddOn] = useState<ReactNode>(null);
@@ -30,9 +30,14 @@ const StripeKeysFormComponent: React.FC<StripeKeysFormProps> = ({ onValidKeys })
   const [secretKeyAddOnClassName, setSecretKeyAddOnClassName] = useState<string>('');
 
   useEffect(() => {
+    mounted.current = true;
     const keys = stripeKeys.read();
     setPublicKey(keys.get(SettingName.StripePublicKey));
     setSecretKey(keys.get(SettingName.StripeSecretKey));
+
+    return () => {
+      mounted.current = false;
+    };
   }, []);
 
   useEffect(() => {

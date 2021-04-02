@@ -34,13 +34,19 @@
       display: block;
       position: absolute;
       top: 0;
-      right: -40px;
       font-size: 1em;
       padding: 3px 12px;
       font-weight: 400;
       text-align: center;
       border-radius: 0 4px 4px 0;
       vertical-align: middle;
+
+      &.key-invalid {
+        right: -35px;
+      }
+      &.key-valid {
+        right: -40px;
+      }
     }
   }
 

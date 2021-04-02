@@ -36,16 +36,17 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "@babel/core": "^7.0.0-0",
     "@babel/preset-react": "^7.12.1",
     "@babel/preset-typescript": "^7.12.1",
     "@claviska/jquery-minicolors": "^2.3.5",
     "@fortawesome/fontawesome-free": "5.14.0",
     "@lyracom/embedded-form-glue": "^0.3.3",
     "@rails/webpacker": "5.2.1",
-    "@stripe/react-stripe-js": "^1.1.2",
-    "@stripe/stripe-js": "^1.11.0",
-    "@types/react": "^16.9.53",
-    "@types/react-dom": "^16.9.8",
+    "@stripe/react-stripe-js": "^1.4.0",
+    "@stripe/stripe-js": "^1.13.2",
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.3",
     "@uirouter/angularjs": "0.4",
     "AngularDevise": "https://github.com/cloudspace/angular_devise.git#1.0.2",
     "angular": "1.8",
@@ -100,11 +101,11 @@
     "ngUpload": "0.5",
     "nvd3": "1.8",
     "prop-types": "^15.7.2",
-    "react": "^17.0.0",
-    "react-dom": "^17.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-i18next": "^11.7.3",
     "react-modal": "^3.11.2",
-    "react-switch": "^5.0.1",
+    "react-switch": "^6.0.0",
     "react2angular": "^4.0.6",
     "summernote": "0.8.18",
     "twitter-fetcher": "^18.0.2",
@@ -114,7 +115,6 @@
     "use-immer": "^0.5.1"
   },
   "peerDependencies": {
-    "@babel/core": "^7.0.0-0",
     "@types/angular": "^1.7.3",
     "@types/prop-types": "^15.7.2"
   }

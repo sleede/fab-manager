@@ -639,7 +639,7 @@ fr:
           stripe_keys_saved: "Les clefs Stripe ont bien été enregistrées."
           error_saving_stripe_keys: "Impossible d’enregistrer les clefs Stripe. Veuillez réessayer ultérieurement."
           payzen_keys_info_html: "<p>Pour pouvoir encaisser des paiements en ligne, vous devez configurer les identifiants et les clefs <a href='https://payzen.eu' target='_blank'>PayZen</a>.</p><p>Retrouvez les dans <a href='https://secure.payzen.eu/vads-merchant/' target='_blank'>votre back office marchant</a>.</p>"
-          client_keys: "Clefs client"
+          client_keys: "Clef client"
           api_keys: "Clefs d'API"
           username: "Utilisateur"
           password: "Mot de passe"

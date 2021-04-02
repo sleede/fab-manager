@@ -4,9 +4,6 @@
 
 import React, { BaseSyntheticEvent, ReactNode, useCallback, useEffect, useState } from 'react';
 import { debounce as _debounce } from 'lodash';
-import SettingAPI from '../api/setting';
-import { SettingName } from '../models/setting';
-import { loadStripe } from '@stripe/stripe-js';
 
 interface FabInputProps {
   id: string,
@@ -26,7 +23,7 @@ export const FabInput: React.FC<FabInputProps> = ({ id, onChange, value, icon, c
   const [inputValue, setInputValue] = useState<any>(value);
 
   useEffect(() => {
-    if (value) {
+    if (value !== inputValue) {
       setInputValue(value);
       onChange(value);
     }
@@ -49,17 +46,17 @@ export const FabInput: React.FC<FabInputProps> = ({ id, onChange, value, icon, c
   /**
    * Debounced (ie. temporised) version of the 'on change' callback.
    */
-  const handler = useCallback(_debounce(onChange, debounce), []);
+  const debouncedOnChange = useCallback(_debounce(onChange, debounce), [onChange, debounce]);
 
   /**
-   * Handle the action of the button
+   * Handle the change of content in the input field, and trigger the parent callback, if any
    */
   const handleChange = (e: BaseSyntheticEvent): void => {
     const newValue = e.target.value;
     setInputValue(newValue);
     if (typeof onChange === 'function') {
       if (debounce) {
-        handler(newValue);
+        debouncedOnChange(newValue);
       } else {
         onChange(newValue);
       }
