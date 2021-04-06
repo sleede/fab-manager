@@ -65,7 +65,7 @@ export const PayzenSettings: React.FC<PayzenSettingsProps> = ({}) => {
 
   const handleUpdateKeys = () => {
     const api = new SettingAPI();
-    api.bulkUpdate(settings).then(result => {
+    api.bulkUpdate(config).then(result => {
       if (Array.from(result.values()).filter(item => !item.status).length > 0) {
         setErrors(JSON.stringify(result));
       } else {
@@ -99,19 +99,21 @@ export const PayzenSettings: React.FC<PayzenSettingsProps> = ({}) => {
              </div>
            );
          })}
+         <div className="edit-keys">
+           <FabButton className="edit-keys-btn" onClick={toggleEditKeysModal}>{t('app.admin.invoices.payment.edit_keys')}</FabButton>
+           <FabModal title={t('app.admin.invoices.payment.payzen.payzen_keys')}
+                     isOpen={openEditModal}
+                     toggleModal={toggleEditKeysModal}
+                     width={ModalSize.medium}
+                     confirmButton={t('app.admin.invoices.payment.payzen.update_button')}
+                     onConfirm={handleUpdateKeys}
+                     preventConfirm={preventConfirm}
+                     closeButton>
+             {errors && <span>{errors}</span>}
+             <PayZenKeysForm onValidKeys={handleValidPayZenKeys} />
+           </FabModal>
+         </div>
        </div>
-      <FabButton className="edit-keys-btn" onClick={toggleEditKeysModal}>{t('app.admin.invoices.payment.edit_keys')}</FabButton>
-      <FabModal title={t('app.admin.invoices.payment.payzen.payzen_keys')}
-                isOpen={openEditModal}
-                toggleModal={toggleEditKeysModal}
-                width={ModalSize.medium}
-                confirmButton={t('app.admin.invoices.payment.payzen.update_button')}
-                onConfirm={handleUpdateKeys}
-                preventConfirm={preventConfirm}
-                closeButton>
-        {errors && <span>{errors}</span>}
-        <PayZenKeysForm onValidKeys={handleValidPayZenKeys} />
-      </FabModal>
     </div>
   );
 }

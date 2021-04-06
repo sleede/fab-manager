@@ -3,14 +3,15 @@
   .payzen-keys {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: start;
     flex-wrap: wrap;
 
     .key-wrapper {
-      padding: 5px;
+      padding: 5px 15px;
     }
   }
-  .edit-keys-btn {
-    margin-top: 20px;
+  .edit-keys {
+    margin: 5px 15px;
+    padding-top: 1.8rem;
   }
 }
