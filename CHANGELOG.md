@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: the notification sent to the project author when a collaborator has confirmed his participation is not sent
+
 ## v4.7.8 2021 April 02
 - Updated mimemagic to 0.3.10 to fix [a build issue](https://github.com/mimemagicrb/mimemagic/issues/139)
 
