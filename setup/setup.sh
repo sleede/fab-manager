@@ -350,7 +350,7 @@ setup_assets_and_databases()
   printf "\n\nWe will now create the default administrator of Fab-manager.\n"
   read_email
   PASSWORD=$(read_password)
-  printf "\nOK. We will fulfill the database now...\n"
+  printf "\nOK. We will fill the database now...\n"
   cd "$FABMANAGER_PATH" && docker-compose run --rm -e ADMIN_EMAIL="$EMAIL" -e ADMIN_PASSWORD="$PASSWORD" "$SERVICE" bundle exec rake db:seed # seed the database
 
   # now build the assets

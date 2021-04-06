@@ -5,13 +5,23 @@
 - [TODO DEPLOY] `rails fablab:stripe:set_gateway`
 - [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
 
-## v4.7.7 (pending)
+## v4.7.9
+- Updated dependency to OpenLab
+- Prevent the worker from crashing if OpenLab is not reachable in dev
+- Fix a bug: the notification sent to the project author when a collaborator has confirmed his participation is not sent
+
+## v4.7.8 2021 April 02
+- Updated mimemagic to 0.3.10 to fix [a build issue](https://github.com/mimemagicrb/mimemagic/issues/139)
+
+## v4.7.7 2021 April 02
 - Enforced validation on required input fields
 - Updated babeljs and its dependencies
+- Updated german translations (thanks to [@Piapat](https://crowdin.com/profile/piapat))
 - Fix a bug: the view is not refreshed when deleting a recurring slot
 - Fix a bug: unable to add a new authorized file type for project's CAD files
 - Fix a bug: unable to update a coupon
 - Fix a bug: create a training availability with calendar in month view result in wrong dates
+- Fix a security issue: updated y18n to 4.0.1 to fix [CVE-2020-7774](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-7774)
 
 ## v4.7.6 2021 March 24
 - Ability to disable the trainings module
