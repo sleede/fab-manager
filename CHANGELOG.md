@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Updated dependency to OpenLab
+- Prevent the worker from crashing if OpenLab is not reachable in dev
 - Fix a bug: the notification sent to the project author when a collaborator has confirmed his participation is not sent
 
 ## v4.7.8 2021 April 02
