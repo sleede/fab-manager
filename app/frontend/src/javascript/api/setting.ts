@@ -22,14 +22,24 @@ export default class SettingAPI {
     return SettingAPI.toBulkMap(res?.data?.settings);
   }
 
+  async isPresent (name: SettingName): Promise<boolean> {
+    const res: AxiosResponse = await apiClient.get(`/api/settings/is_present/${name}`);
+    return res?.data?.isPresent;
+  }
+
   static get (name: SettingName): IWrapPromise<Setting> {
     const api = new SettingAPI();
     return wrapPromise(api.get(name));
   }
 
-  static query(names: Array<SettingName>): IWrapPromise<Map<SettingName, any>> {
+  static query (names: Array<SettingName>): IWrapPromise<Map<SettingName, any>> {
     const api = new SettingAPI();
     return wrapPromise(api.query(names));
+  }
+
+  static isPresent (name: SettingName): IWrapPromise<boolean> {
+    const api = new SettingAPI();
+    return wrapPromise(api.isPresent(name));
   }
 
   private static toSettingsMap(data: Object): Map<SettingName, any> {

@@ -16,16 +16,19 @@ interface FabInputProps {
   disabled?: boolean,
   required?: boolean,
   debounce?: number,
+  readOnly?: boolean,
   type?: 'text' | 'date' | 'password' | 'url' | 'time' | 'tel' | 'search' | 'number' | 'month' | 'email' | 'datetime-local' | 'week',
 }
 
-export const FabInput: React.FC<FabInputProps> = ({ id, onChange, defaultValue, icon, className, disabled, type, required, debounce, addOn, addOnClassName }) => {
+export const FabInput: React.FC<FabInputProps> = ({ id, onChange, defaultValue, icon, className, disabled, type, required, debounce, addOn, addOnClassName, readOnly }) => {
   const [inputValue, setInputValue] = useState<any>(defaultValue);
 
   useEffect(() => {
     if (!inputValue) {
       setInputValue(defaultValue);
-      onChange(defaultValue);
+      if (typeof onChange === 'function') {
+        onChange(defaultValue);
+      }
     }
   }, [defaultValue]);
 
@@ -46,7 +49,7 @@ export const FabInput: React.FC<FabInputProps> = ({ id, onChange, defaultValue, 
   /**
    * Debounced (ie. temporised) version of the 'on change' callback.
    */
-  const debouncedOnChange = useCallback(_debounce(onChange, debounce), [onChange, debounce]);
+  const debouncedOnChange = debounce ? useCallback(_debounce(onChange, debounce), [onChange, debounce]) : null;
 
   /**
    * Handle the change of content in the input field, and trigger the parent callback, if any
@@ -66,11 +69,10 @@ export const FabInput: React.FC<FabInputProps> = ({ id, onChange, defaultValue, 
   return (
     <div className={`fab-input ${className ? className : ''}`}>
       {hasIcon() && <span className="fab-input--icon">{icon}</span>}
-      <input id={id} type={type} className="fab-input--input" value={inputValue} onChange={handleChange} disabled={disabled} required={required} />
+      <input id={id} type={type} className="fab-input--input" value={inputValue} onChange={handleChange} disabled={disabled} required={required} readOnly={readOnly} />
       {hasAddOn() && <span className={`fab-input--addon ${addOnClassName ?  addOnClassName : ''}`}>{addOn}</span>}
     </div>
   );
 }
 
 FabInput.defaultProps = { type: 'text', debounce: 0 };
-

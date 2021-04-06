@@ -689,17 +689,6 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           $scope.onlinePaymentStatus = res.status;
         });
       }
-      if ($scope.allSettings.payment_gateway === 'stripe') {
-        $scope.allSettings.payzen_username = updatedSettings.get('payzen_username').value;
-        $scope.allSettings.payzen_endpoint = updatedSettings.get('payzen_endpoint').value;
-        $scope.allSettings.payzen_public_key = updatedSettings.get('payzen_public_key').value;
-        Setting.isPresent({ name: 'payzen_password' }, function (res) {
-          $scope.allSettings.payzen_password = (res.isPresent ? PAYZEN_PASSWD_HIDDEN : '');
-        });
-        Setting.isPresent({ name: 'payzen_hmac' }, function (res) {
-          $scope.allSettings.payzen_hmac = (res.isPresent ? PAYZEN_PASSWD_HIDDEN : '');
-        });
-      }
     };
 
     /**

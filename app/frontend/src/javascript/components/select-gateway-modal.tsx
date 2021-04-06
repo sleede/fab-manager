@@ -110,7 +110,6 @@ const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isOpen, to
               isOpen={isOpen}
               toggleModal={toggleModal}
               width={ModalSize.medium}
-              closeButton={false}
               className="gateway-modal"
               confirmButton={t('app.admin.invoices.payment.gateway_modal.confirm_button')}
               onConfirm={onGatewayConfirmed}

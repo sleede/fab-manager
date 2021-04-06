@@ -1,0 +1,16 @@
+.payzen-settings {
+  margin: 15px;
+  .payzen-keys {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+    .key-wrapper {
+      padding: 5px;
+    }
+  }
+  .edit-keys-btn {
+    margin-top: 20px;
+  }
+}
