@@ -27,9 +27,6 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     // fake stripe secret key
     const STRIPE_SK_HIDDEN = 'sk_test_hidden-hidden-hidden-hid';
 
-    // fake payzen password
-    const PAYZEN_PASSWD_HIDDEN = 'testpassword_HiDdEnHIddEnHIdDEnHiDdEnHIddEnHIdDEn';
-
     /* PUBLIC SCOPE */
 
     // default active tab
@@ -657,9 +654,9 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         $scope.$apply();
       }, 50);
       return new Promise(function (resolve, reject) {
-        resolveGatewaySaving = resolve;
-        rejectGatewaySaving = reject;
-      });
+        gatewayHandlers.resolve = resolve;
+        gatewayHandlers.reject = reject;
+      }).catch(() => { /* WORKAROUND: it seems we can't catch the rejection from the boolean-setting directive */ });
     };
 
     /**
@@ -669,11 +666,9 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       setTimeout(() => {
         $scope.openSelectGatewayModal = !$scope.openSelectGatewayModal;
         $scope.$apply();
-        if (!$scope.openSelectGatewayModal) {
-          if (rejectGatewaySaving) {
-            rejectGatewaySaving();
-            resetPromiseHandlers();
-          }
+        if (!$scope.openSelectGatewayModal && gatewayHandlers.reject) {
+          gatewayHandlers.reject();
+          resetPromiseHandlers();
         }
       }, 50);
     };
@@ -682,8 +677,8 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
      * Callback triggered after the gateway was successfully configured in the dedicated modal
      */
     $scope.onGatewayModalSuccess = function (updatedSettings) {
-      if (resolveGatewaySaving) {
-        resolveGatewaySaving(true);
+      if (gatewayHandlers.resolve) {
+        gatewayHandlers.resolve(true);
         resetPromiseHandlers();
       }
 
@@ -916,8 +911,8 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
 
       // Clean before the controller is destroyed
       $scope.$on('$destroy', function () {
-        if (rejectGatewaySaving) {
-          rejectGatewaySaving();
+        if (gatewayHandlers.reject) {
+          gatewayHandlers.reject();
           resetPromiseHandlers();
         }
       });
@@ -933,8 +928,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
      * To do so, we use a promise, with the resolve/reject callback stored here
      * @see https://stackoverflow.com/q/26150232
      */
-    let resolveGatewaySaving = null;
-    let rejectGatewaySaving = null;
+    const gatewayHandlers = {
+      resolve: null,
+      reject: null
+    };
 
     /**
      * Output the given integer with leading zeros. If the given value is longer than the given
@@ -949,8 +946,8 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
      * This will prevent an already resolved promise to be triggered again.
      */
     const resetPromiseHandlers = function () {
-      resolveGatewaySaving = null;
-      rejectGatewaySaving = null;
+      gatewayHandlers.resolve = null;
+      gatewayHandlers.reject = null;
     };
 
     /**
