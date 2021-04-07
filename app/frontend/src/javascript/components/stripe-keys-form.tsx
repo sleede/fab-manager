@@ -5,6 +5,7 @@ import SettingAPI from '../api/setting';
 import { SettingName } from '../models/setting';
 import { FabInput } from './fab-input';
 import StripeAPI from '../api/stripe';
+import { HtmlTranslate } from './html-translate';
 
 
 interface StripeKeysFormProps {
@@ -117,7 +118,9 @@ const StripeKeysFormComponent: React.FC<StripeKeysFormProps> = ({ onValidKeys })
 
   return (
     <div className="stripe-keys-form">
-      <div className="stripe-keys-info" dangerouslySetInnerHTML={{__html: t('app.admin.invoices.payment.stripe_keys_info_html')}} />
+      <div className="stripe-keys-info">
+        <HtmlTranslate trKey="app.admin.invoices.payment.stripe_keys_info_html" />
+      </div>
       <form name="stripeKeysForm">
         <div className="stripe-public-input">
           <label htmlFor="stripe_public_key">{ t('app.admin.invoices.payment.public_key') } *</label>

@@ -11,6 +11,7 @@ import { FabInput } from './fab-input';
 import { enableMapSet } from 'immer';
 import { useImmer } from 'use-immer';
 import PayzenAPI from '../api/payzen';
+import { HtmlTranslate } from './html-translate';
 
 enableMapSet();
 
@@ -124,7 +125,9 @@ const PayZenKeysFormComponent: React.FC<PayZenKeysFormProps> = ({ onValidKeys })
 
   return (
     <div className="payzen-keys-form">
-      <div className="payzen-keys-info" dangerouslySetInnerHTML={{__html: t('app.admin.invoices.payment.payzen_keys_info_html')}} />
+      <div className="payzen-keys-info">
+        <HtmlTranslate trKey="app.admin.invoices.payment.payzen_keys_info_html" />
+      </div>
       <form name="payzenKeysForm">
         <fieldset>
           <legend>{t('app.admin.invoices.payment.client_keys')}</legend>

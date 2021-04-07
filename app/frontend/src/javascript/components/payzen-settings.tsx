@@ -8,6 +8,7 @@ import { SettingName } from '../models/setting';
 import { useImmer } from 'use-immer';
 import { FabInput } from './fab-input';
 import { FabButton } from './fab-button';
+import { HtmlTranslate } from './html-translate';
 
 declare var Application: IApplication;
 
@@ -126,7 +127,9 @@ export const PayzenSettings: React.FC<PayzenSettingsProps> = ({ onEditKeys, onCu
       </div>
       <div className="payzen-currency">
         <h3 className="title">{t('app.admin.invoices.payment.payzen.currency')}</h3>
-        <p className="currency-info" dangerouslySetInnerHTML={{__html: t('app.admin.invoices.payment.payzen.currency_info_html')}} />
+        <p className="currency-info">
+          <HtmlTranslate trKey="app.admin.invoices.payment.payzen.currency_info_html" />
+        </p>
         {error && <p className="currency-error">{error}</p>}
         <div className="payzen-currency-form">
           <div className="currency-wrapper">
