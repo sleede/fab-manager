@@ -115,7 +115,8 @@ class Setting < ApplicationRecord
                              payzen_password
                              payzen_endpoint
                              payzen_public_key
-                             payzen_hmac] }
+                             payzen_hmac
+                             payzen_currency] }
   # WARNING: when adding a new key, you may also want to add it in app/policies/setting_policy.rb#public_whitelist
 
   def value

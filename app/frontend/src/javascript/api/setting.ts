@@ -17,6 +17,12 @@ export default class SettingAPI {
     return SettingAPI.toSettingsMap(res?.data);
   }
 
+  async update (name: SettingName, value: any): Promise<Setting> {
+    const res: AxiosResponse = await apiClient.patch(`/api/settings/${name}`, { setting: { value } });
+    if (res.status === 304) { return { name, value }; }
+    return  res?.data?.setting;
+  }
+
   async bulkUpdate (settings: Map<SettingName, any>): Promise<Map<SettingName, SettingBulkResult>> {
     const res: AxiosResponse = await apiClient.patch('/api/settings/bulk_update', { settings: SettingAPI.toObjectArray(settings) });
     return SettingAPI.toBulkMap(res?.data?.settings);
@@ -46,7 +52,7 @@ export default class SettingAPI {
     const dataArray: Array<Array<string | any>> = Object.entries(data);
     const map = new Map();
     dataArray.forEach(item => {
-      map.set(item[0] as SettingName, item[1]);
+      map.set(item[0] as SettingName, item[1] || '');
     });
     return map;
   }

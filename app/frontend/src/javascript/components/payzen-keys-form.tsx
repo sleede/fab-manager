@@ -18,8 +18,12 @@ interface PayZenKeysFormProps {
   onValidKeys: (payZenSettings: Map<SettingName, string>) => void
 }
 
+// all settings related to PayZen that are requested by this form
 const payZenSettings: Array<SettingName> = [SettingName.PayZenUsername, SettingName.PayZenPassword, SettingName.PayZenEndpoint, SettingName.PayZenHmacKey, SettingName.PayZenPublicKey];
+// settings related the to PayZen REST API (server side)
 const restApiSettings: Array<SettingName> = [SettingName.PayZenUsername, SettingName.PayZenPassword, SettingName.PayZenEndpoint, SettingName.PayZenHmacKey];
+
+// initial request to the API
 const payZenKeys = SettingAPI.query(payZenSettings);
 
 // Prevent multiples call to the payzen keys validation endpoint.

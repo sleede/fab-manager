@@ -1,7 +1,3 @@
-/**
- * This component is a template for a clickable button that wraps the application style
- */
-
 import React, { ReactNode, BaseSyntheticEvent } from 'react';
 
 interface FabButtonProps {
@@ -13,7 +9,9 @@ interface FabButtonProps {
   form?: string,
 }
 
-
+/**
+ * This component is a template for a clickable button that wraps the application style
+ */
 export const FabButton: React.FC<FabButtonProps> = ({ onClick, icon, className, disabled, type, form, children }) => {
   /**
    * Check if the current component was provided an icon to display

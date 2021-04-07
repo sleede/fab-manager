@@ -1,7 +1,3 @@
-/**
- * Form to set the stripe's public and private keys
- */
-
 import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import { Loader } from './loader';
 import { useTranslation } from 'react-i18next';
@@ -15,31 +11,52 @@ interface StripeKeysFormProps {
   onValidKeys: (stripePublic: string, stripeSecret:string) => void
 }
 
+// initial request to the API
 const stripeKeys = SettingAPI.query([SettingName.StripePublicKey, SettingName.StripeSecretKey]);
 
+/**
+ * Form to set the stripe's public and private keys
+ */
 const StripeKeysFormComponent: React.FC<StripeKeysFormProps> = ({ onValidKeys }) => {
   const { t } = useTranslation('admin');
 
+  // used to prevent promises from resolving if the component was unmounted
   const mounted = useRef(false);
 
+  // Stripe's public key
   const [publicKey, setPublicKey] = useState<string>('');
+  // Icon of the input field for the Stripe's public key. Used to display if the key is valid.
   const [publicKeyAddOn, setPublicKeyAddOn] = useState<ReactNode>(null);
-  const [publicKeyAddOnClassName, setPublicKeyAddOnClassName] = useState<string>('');
+  // Style class for the add-on icon, for the public key
+  const [publicKeyAddOnClassName, setPublicKeyAddOnClassName] = useState<'key-invalid' | 'key-valid' | ''>('');
+  // Stripe's secret key
   const [secretKey, setSecretKey] = useState<string>('');
+  // Icon of the input field for the Stripe's secret key. Used to display if the key is valid.
   const [secretKeyAddOn, setSecretKeyAddOn] = useState<ReactNode>(null);
-  const [secretKeyAddOnClassName, setSecretKeyAddOnClassName] = useState<string>('');
+  // Style class for the add-on icon, for the public key
+  const [secretKeyAddOnClassName, setSecretKeyAddOnClassName] = useState<'key-invalid' | 'key-valid' | ''>('');
 
+  /**
+   * When the component loads for the first time:
+   * - mark it as mounted
+   * - initialize the keys with the values fetched from the API (if any)
+   */
   useEffect(() => {
     mounted.current = true;
     const keys = stripeKeys.read();
     setPublicKey(keys.get(SettingName.StripePublicKey));
     setSecretKey(keys.get(SettingName.StripeSecretKey));
 
+    // when the component unmounts, mark it as unmounted
     return () => {
       mounted.current = false;
     };
   }, []);
 
+  /**
+   * When the style class for the public and private key are updated, check if they indicate valid keys.
+   * If both are valid, run the 'onValidKeys' callback
+   */
   useEffect(() => {
     const validClassName = 'key-valid';
     if (publicKeyAddOnClassName === validClassName && secretKeyAddOnClassName === validClassName) {

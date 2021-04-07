@@ -1,7 +1,3 @@
-/**
- * This component is a template for a modal dialog that wraps the application style
- */
-
 import React, { ReactNode, BaseSyntheticEvent } from 'react';
 import Modal from 'react-modal';
 import { useTranslation } from 'react-i18next';
@@ -31,10 +27,16 @@ interface FabModalProps {
   preventConfirm?: boolean
 }
 
+// initial request to the API
 const blackLogoFile = CustomAssetAPI.get(CustomAssetName.LogoBlackFile);
 
+/**
+ * This component is a template for a modal dialog that wraps the application style
+ */
 export const FabModal: React.FC<FabModalProps> = ({ title, isOpen, toggleModal, children, confirmButton, className, width = 'sm', closeButton, customFooter, onConfirm, preventConfirm }) => {
   const { t } = useTranslation('shared');
+
+  // the theme's logo, for back backgrounds
   const blackLogo = blackLogoFile.read();
 
   /**

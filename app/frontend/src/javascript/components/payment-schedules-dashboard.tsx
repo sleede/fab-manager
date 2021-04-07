@@ -1,8 +1,3 @@
-/**
- * This component shows a list of all payment schedules with their associated deadlines (aka. PaymentScheduleItem) and invoices
- * for the currentUser
- */
-
 import React, { useEffect, useState } from 'react';
 import { IApplication } from '../models/application';
 import { useTranslation } from 'react-i18next';
@@ -20,14 +15,24 @@ interface PaymentSchedulesDashboardProps {
   currentUser: User
 }
 
+// how many payment schedules should we display for each page?
 const PAGE_SIZE = 20;
 
+/**
+ * This component shows a list of all payment schedules with their associated deadlines (aka. PaymentScheduleItem) and invoices
+ * for the currentUser
+ */
 const PaymentSchedulesDashboard: React.FC<PaymentSchedulesDashboardProps> = ({ currentUser }) => {
   const { t } = useTranslation('logged');
 
+  // list of displayed payment schedules
   const [paymentSchedules, setPaymentSchedules] = useState<Array<PaymentSchedule>>([]);
+  // current page
   const [pageNumber, setPageNumber] = useState<number>(1);
 
+  /**
+   * When the component is loaded first, refresh the list of schedules to fill the first page.
+   */
   useEffect(() => {
     handleRefreshList();
   }, []);

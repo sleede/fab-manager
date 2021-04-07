@@ -1,7 +1,3 @@
-/**
- * This component displays a summary of the amount paid with the virtual wallet, for the current transaction
- */
-
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
@@ -26,6 +22,9 @@ interface WalletInfoProps {
   price: number,
 }
 
+/**
+ * This component displays a summary of the amount paid with the virtual wallet, for the current transaction
+ */
 export const WalletInfo: React.FC<WalletInfoProps> = ({ cartItems, currentUser, wallet, price }) => {
   const { t } = useTranslation('shared');
   const [remainingPrice, setRemainingPrice] = useState(0);

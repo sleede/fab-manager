@@ -654,6 +654,13 @@ fr:
             payzen_endpoint: "Nom du serveur de l'API REST"
             payzen_hmac: "Clef HMAC-SHA-256"
             payzen_public_key: "Clef publique client"
+            currency: "Devise"
+            payzen_currency: "Devise PayZen"
+            currency_info_html: "Veuillez indiquer la devise à utiliser lors des paiements en ligne. Vous devez fournir un code ISO à trois lettres, issu de la liste des <a href='https://payzen.io/fr-FR/back-office/reporting/liste-des-devises-supportees.html' target='_blank'>devises supportées par PayZen</a>."
+            save: "Enregistrer"
+            currency_error: "La valeur saisie n'est pas une devise valide"
+            error_while_saving: "Une erreur est survenue lors de l'enregistrement de la devise : "
+            currency_updated: "La devise PayZen a bien été mise à jour à {CURRENCY}."
           # select a payment gateway
           gateway_modal:
             select_gateway_title: "Sélectionnez une passerelle de paiement"

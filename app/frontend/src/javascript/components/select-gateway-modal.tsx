@@ -27,6 +27,7 @@ interface SelectGatewayModalModalProps {
   onSuccess: (results: Map<SettingName, SettingBulkResult>) => void,
 }
 
+// initial request to the API
 const paymentGateway = SettingAPI.get(SettingName.PaymentGateway);
 
 const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isOpen, toggleModal, onError, onSuccess }) => {

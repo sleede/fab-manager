@@ -654,6 +654,13 @@ en:
             payzen_endpoint: "REST API server name"
             payzen_hmac: "HMAC-SHA-256 key"
             payzen_public_key: "Client public key"
+            currency: "Currency"
+            payzen_currency: "PayZen currency"
+            currency_info_html: "Please specify below the currency used for online payment. You should provide a three-letter ISO code, from the list of <a href='https://payzen.io/en-EN/payment-file/ips/list-of-supported-currencies.html' target='_blank'> PayZen supported currencies</a>."
+            save: "Save"
+            currency_error: "The inputted value is not a valid currency"
+            error_while_saving: "An error occurred while saving the currency: "
+            currency_updated: "The PayZen currency was successfully updated to {CURRENCY}."
           # select a payment gateway
           gateway_modal:
             select_gateway_title: "Select a payment gateway"

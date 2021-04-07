@@ -107,14 +107,15 @@ export enum SettingName {
   PayZenPassword = 'payzen_password',
   PayZenEndpoint = 'payzen_endpoint',
   PayZenPublicKey = 'payzen_public_key',
-  PayZenHmacKey = 'payzen_hmac'
+  PayZenHmacKey = 'payzen_hmac',
+  PayZenCurrency = 'payzen_currency'
 }
 
 export interface Setting {
   name: SettingName,
   value: string,
-  last_update: Date,
-  history: Array<HistoryValue>
+  last_update?: Date,
+  history?: Array<HistoryValue>
 }
 
 export interface SettingError {

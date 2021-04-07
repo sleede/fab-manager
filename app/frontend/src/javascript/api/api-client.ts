@@ -13,6 +13,9 @@ client.interceptors.response.use(function (response) {
   // Any status code that lie within the range of 2xx cause this function to trigger
   return response;
 }, function (error) {
+  // 304 Not Modified should be considered as a success
+  if (error.response?.status === 304) { return Promise.resolve(error.response); }
+
   // Any status codes that falls outside the range of 2xx cause this function to trigger
   const message = error.response?.data || error.message || error;
   return Promise.reject(extractHumanReadableMessage(message));

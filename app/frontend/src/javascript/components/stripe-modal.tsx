@@ -1,8 +1,3 @@
-/**
- * This component enables the user to input his card data or process payments.
- * Supports Strong-Customer Authentication (SCA).
- */
-
 import React, { ReactNode, useEffect, useState } from 'react';
 import { react2angular } from 'react2angular';
 import { Loader } from './loader';
@@ -41,8 +36,13 @@ interface StripeModalProps {
   customer: User
 }
 
+// initial request to the API
 const cgvFile = CustomAssetAPI.get(CustomAssetName.CgvFile);
 
+/**
+ * This component enables the user to input his card data or process payments.
+ * Supports Strong-Customer Authentication (SCA).
+ */
 const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuccess, cartItems, currentUser, schedule, customer }) => {
   // customer's wallet
   const [wallet, setWallet] = useState(null);

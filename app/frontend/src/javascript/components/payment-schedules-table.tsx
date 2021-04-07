@@ -1,7 +1,3 @@
-/**
- * This component shows a list of all payment schedules with their associated deadlines (aka. PaymentScheduleItem) and invoices
- */
-
 import React, { ReactEventHandler, ReactNode, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Loader } from './loader';
@@ -29,18 +25,31 @@ interface PaymentSchedulesTableProps {
   operator: User,
 }
 
+/**
+ * This component shows a list of all payment schedules with their associated deadlines (aka. PaymentScheduleItem) and invoices
+ */
 const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ paymentSchedules, showCustomer, refreshList, operator }) => {
   const { t } = useTranslation('shared');
 
+  // for each payment schedule: are the details (all deadlines) shown or hidden?
   const [showExpanded, setShowExpanded] = useState<Map<number, boolean>>(new Map());
+  // is open, the modal dialog to confirm the cashing of a check?
   const [showConfirmCashing, setShowConfirmCashing] = useState<boolean>(false);
+  // is open, the modal dialog the resolve a pending card payment?
   const [showResolveAction, setShowResolveAction] = useState<boolean>(false);
+  // the user cannot confirm the action modal (3D secure), unless he has resolved the pending action
   const [isConfirmActionDisabled, setConfirmActionDisabled] = useState<boolean>(true);
+  // is open, the modal dialog to update the card details
   const [showUpdateCard, setShowUpdateCard] = useState<boolean>(false);
+  // when an action is triggered on a deadline, the deadline is saved here until the action is done or cancelled.
   const [tempDeadline, setTempDeadline] = useState<PaymentScheduleItem>(null);
+  // when an action is triggered on a deadline, the parent schedule is saved here until the action is done or cancelled.
   const [tempSchedule, setTempSchedule] = useState<PaymentSchedule>(null);
+  // prevent submitting the form to update the card details, until all required fields are filled correctly
   const [canSubmitUpdateCard, setCanSubmitUpdateCard] = useState<boolean>(true);
+  // errors are saved here, if any, for display purposes.
   const [errors, setErrors] = useState<string>(null);
+  // is open, the modal dialog to cancel the associated subscription?
   const [showCancelSubscription, setShowCancelSubscription] = useState<boolean>(false);
 
   /**

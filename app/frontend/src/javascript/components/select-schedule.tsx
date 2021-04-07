@@ -1,8 +1,3 @@
-/**
- * This component is a switch enabling the users to choose if they want to pay by monthly schedule
- * or with a one time payment
- */
-
 import React  from 'react';
 import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
@@ -20,6 +15,10 @@ interface SelectScheduleProps {
   className: string,
 }
 
+/**
+ * This component is a switch enabling the users to choose if they want to pay by monthly schedule
+ * or with a one time payment
+ */
 const SelectSchedule: React.FC<SelectScheduleProps> = ({ show, selected, onChange, className }) => {
   const { t } = useTranslation('shared');
 

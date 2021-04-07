@@ -1,7 +1,3 @@
-/**
- * This component shows input field with its label, styled
- */
-
 import React from 'react';
 
 interface LabelledInputProps {
@@ -12,6 +8,9 @@ interface LabelledInputProps {
   onChange: (value: any) => void
 }
 
+/**
+ * This component shows input field with its label, styled
+ */
 export const LabelledInput: React.FC<LabelledInputProps> = ({ id, type, label, value, onChange }) => {
   return (
     <div className="input-with-label">

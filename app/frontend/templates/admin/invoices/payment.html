@@ -65,7 +65,7 @@
       </div>
     </div>
     <div class="row m-t" ng-show="allSettings.online_payment_module === 'true' && allSettings.payment_gateway === 'payzen'">
-      <payzen-settings on-edit-keys="selectPaymentGateway" />
+      <payzen-settings on-edit-keys="selectPaymentGateway" on-currency-update-success="alertPayZenCurrencyUpdated" />
     </div>
   </div>
 </div>
