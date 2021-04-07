@@ -654,7 +654,6 @@ fr:
             payzen_endpoint: "Nom du serveur de l'API REST"
             payzen_hmac: "Clef HMAC-SHA-256"
             payzen_public_key: "Clef publique client"
-            update_button: "Mettre à jour"
           # select a payment gateway
           gateway_modal:
             select_gateway_title: "Sélectionnez une passerelle de paiement"

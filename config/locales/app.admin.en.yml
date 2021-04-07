@@ -654,7 +654,6 @@ en:
             payzen_endpoint: "REST API server name"
             payzen_hmac: "HMAC-SHA-256 key"
             payzen_public_key: "Client public key"
-            update_button: "Update"
           # select a payment gateway
           gateway_modal:
             select_gateway_title: "Select a payment gateway"

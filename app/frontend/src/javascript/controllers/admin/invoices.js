@@ -652,7 +652,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       if (onlinePaymentModule.value === false) return true;
 
       // otherwise, open a modal to ask for the selection of a payment gateway
-      $scope.openSelectGatewayModal = true;
+      setTimeout(() => {
+        $scope.openSelectGatewayModal = true;
+        $scope.$apply();
+      }, 50);
       return new Promise(function (resolve, reject) {
         resolveGatewaySaving = resolve;
         rejectGatewaySaving = reject;
@@ -667,7 +670,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         $scope.openSelectGatewayModal = !$scope.openSelectGatewayModal;
         $scope.$apply();
         if (!$scope.openSelectGatewayModal) {
-          rejectGatewaySaving();
+          if (rejectGatewaySaving) {
+            rejectGatewaySaving();
+            resetPromiseHandlers();
+          }
         }
       }, 50);
     };
@@ -676,7 +682,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
      * Callback triggered after the gateway was successfully configured in the dedicated modal
      */
     $scope.onGatewayModalSuccess = function (updatedSettings) {
-      resolveGatewaySaving(true);
+      if (resolveGatewaySaving) {
+        resolveGatewaySaving(true);
+        resetPromiseHandlers();
+      }
 
       $scope.toggleSelectGatewayModal();
       $scope.allSettings.payment_gateway = updatedSettings.get('payment_gateway').value;
@@ -897,6 +906,14 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           );
         }
       });
+
+      // Clean before the controller is destroyed
+      $scope.$on('$destroy', function () {
+        if (rejectGatewaySaving) {
+          rejectGatewaySaving();
+          resetPromiseHandlers();
+        }
+      });
     };
 
     /**
@@ -919,6 +936,15 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
      * @param length {number} the length of the resulting string.
      */
     const padWithZeros = function (value, length) { return (1e15 + value + '').slice(-length); };
+
+    /**
+     * Reset the promise handlers (reject/resolve) to their initial value.
+     * This will prevent an already resolved promise to be triggered again.
+     */
+    const resetPromiseHandlers = function () {
+      resolveGatewaySaving = null;
+      rejectGatewaySaving = null;
+    };
 
     /**
      * Remove every unsupported html tag from the given html text (like <p>, <span>, ...).

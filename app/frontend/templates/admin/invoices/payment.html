@@ -44,7 +44,7 @@
         </div>
       </div>
       <div class="col-md-1">
-        <button class="btn btn-default m-t-lg" ng-click="requireStripeKeys(allSettings.online_payment_module)" translate>{{ 'app.admin.invoices.payment.edit_keys' }}</button>
+        <button class="btn btn-default m-t-lg" ng-click="selectPaymentGateway(allSettings.online_payment_module)" translate>{{ 'app.admin.invoices.payment.edit_keys' }}</button>
       </div>
     </div>
     <div class="row m-t" ng-show="allSettings.online_payment_module === 'true' && allSettings.payment_gateway === 'stripe'">
@@ -65,7 +65,7 @@
       </div>
     </div>
     <div class="row m-t" ng-show="allSettings.online_payment_module === 'true' && allSettings.payment_gateway === 'payzen'">
-      <payzen-settings />
+      <payzen-settings on-edit-keys="selectPaymentGateway" />
     </div>
   </div>
 </div>
