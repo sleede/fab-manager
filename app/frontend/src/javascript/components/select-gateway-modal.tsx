@@ -11,10 +11,10 @@ import { useTranslation } from 'react-i18next';
 import { FabModal, ModalSize } from './base/fab-modal';
 import { User } from '../models/user';
 import { Gateway } from '../models/gateway';
-import { StripeKeysForm } from './stripe-keys-form';
+import { StripeKeysForm } from './stripe/stripe-keys-form';
 import { SettingBulkResult, SettingName } from '../models/setting';
 import SettingAPI from '../api/setting';
-import { PayZenKeysForm } from './payzen-keys-form';
+import { PayZenKeysForm } from './payzen/payzen-keys-form';
 
 
 declare var Application: IApplication;

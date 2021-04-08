@@ -1,20 +1,21 @@
 import React, { ReactEventHandler, ReactNode, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Loader } from './base/loader';
+import { Loader } from '../base/loader';
 import moment from 'moment';
-import { IFablab } from '../models/fablab';
 import _ from 'lodash';
-import { PaymentSchedule, PaymentScheduleItem, PaymentScheduleItemState } from '../models/payment-schedule';
-import { FabButton } from './base/fab-button';
-import { FabModal } from './base/fab-modal';
-import PaymentScheduleAPI from '../api/payment-schedule';
-import { StripeElements } from './stripe-elements';
-import { StripeConfirm } from './stripe-confirm';
-import stripeLogo from '../../../images/powered_by_stripe.png';
-import mastercardLogo from '../../../images/mastercard.png';
-import visaLogo from '../../../images/visa.png';
-import { StripeCardUpdate } from './stripe-card-update';
-import { User, UserRole } from '../models/user';
+import { FabButton } from '../base/fab-button';
+import { FabModal } from '../base/fab-modal';
+import { StripeElements } from '../stripe/stripe-elements';
+import { StripeConfirm } from '../stripe/stripe-confirm';
+import { StripeCardUpdate } from '../stripe/stripe-card-update';
+import { User, UserRole } from '../../models/user';
+import { IFablab } from '../../models/fablab';
+import { PaymentSchedule, PaymentScheduleItem, PaymentScheduleItemState } from '../../models/payment-schedule';
+import PaymentScheduleAPI from '../../api/payment-schedule';
+
+import stripeLogo from '../../../../images/powered_by_stripe.png';
+import mastercardLogo from '../../../../images/mastercard.png';
+import visaLogo from '../../../../images/visa.png';
 
 declare var Fablab: IFablab;
 

@@ -2,9 +2,9 @@ import React  from 'react';
 import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
 import Switch from 'react-switch';
-import { IApplication } from '../models/application';
-import { Loader } from './base/loader';
-import '../lib/i18n';
+import '../../lib/i18n';
+import { Loader } from '../base/loader';
+import { IApplication } from '../../models/application';
 
 declare var Application: IApplication;
 

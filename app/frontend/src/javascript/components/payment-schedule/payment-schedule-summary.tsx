@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
 import moment from 'moment';
-import { IApplication } from '../models/application';
-import '../lib/i18n';
-import { PaymentSchedule } from '../models/payment-schedule';
-import { Loader } from './base/loader';
-import { FabModal } from './base/fab-modal';
-import { IFablab } from '../models/fablab';
+import '../../lib/i18n';
+import { Loader } from '../base/loader';
+import { FabModal } from '../base/fab-modal';
+import { IFablab } from '../../models/fablab';
+import { PaymentSchedule } from '../../models/payment-schedule';
+import { IApplication } from '../../models/application';
 
 declare var Application: IApplication;
 declare var Fablab: IFablab;

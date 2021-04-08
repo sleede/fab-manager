@@ -1,8 +1,8 @@
 import React, { memo, useEffect, useState } from 'react';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from "@stripe/stripe-js";
-import SettingAPI from '../api/setting';
-import { SettingName } from '../models/setting';
+import { SettingName } from '../../models/setting';
+import SettingAPI from '../../api/setting';
 
 // initial request to the API
 const stripePublicKey = SettingAPI.get(SettingName.StripePublicKey);

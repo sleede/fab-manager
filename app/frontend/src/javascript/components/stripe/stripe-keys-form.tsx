@@ -1,11 +1,11 @@
 import React, { ReactNode, useEffect, useRef, useState } from 'react';
-import { Loader } from './base/loader';
 import { useTranslation } from 'react-i18next';
-import SettingAPI from '../api/setting';
-import { SettingName } from '../models/setting';
-import { FabInput } from './base/fab-input';
-import StripeAPI from '../api/stripe';
-import { HtmlTranslate } from './base/html-translate';
+import { HtmlTranslate } from '../base/html-translate';
+import { FabInput } from '../base/fab-input';
+import { Loader } from '../base/loader';
+import { SettingName } from '../../models/setting';
+import StripeAPI from '../../api/stripe';
+import SettingAPI from '../../api/setting';
 
 
 interface StripeKeysFormProps {

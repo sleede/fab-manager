@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Loader } from './base/loader';
 import { react2angular } from 'react2angular';
-import { IApplication } from '../models/application';
 import { useTranslation } from 'react-i18next';
-import SettingAPI from '../api/setting';
-import { SettingName } from '../models/setting';
 import { useImmer } from 'use-immer';
-import { FabInput } from './base/fab-input';
-import { FabButton } from './base/fab-button';
-import { HtmlTranslate } from './base/html-translate';
+import { FabInput } from '../base/fab-input';
+import { FabButton } from '../base/fab-button';
+import { Loader } from '../base/loader';
+import { HtmlTranslate } from '../base/html-translate';
+import { SettingName } from '../../models/setting';
+import { IApplication } from '../../models/application';
+import SettingAPI from '../../api/setting';
 
 declare var Application: IApplication;
 

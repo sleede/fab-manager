@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { IApplication } from '../models/application';
 import { useTranslation } from 'react-i18next';
-import { Loader } from './base/loader';
 import { react2angular } from 'react2angular';
-import PaymentScheduleAPI from '../api/payment-schedule';
-import { DocumentFilters } from './document-filters';
+import { DocumentFilters } from '../document-filters';
 import { PaymentSchedulesTable } from './payment-schedules-table';
-import { FabButton } from './base/fab-button';
-import { User } from '../models/user';
-import { PaymentSchedule } from '../models/payment-schedule';
+import { FabButton } from '../base/fab-button';
+import { Loader } from '../base/loader';
+import { User } from '../../models/user';
+import { PaymentSchedule } from '../../models/payment-schedule';
+import { IApplication } from '../../models/application';
+import PaymentScheduleAPI from '../../api/payment-schedule';
 
 declare var Application: IApplication;
 
