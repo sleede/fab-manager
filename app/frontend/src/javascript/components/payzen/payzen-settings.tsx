@@ -61,7 +61,7 @@ export const PayzenSettings: React.FC<PayzenSettingsProps> = ({ onEditKeys, onCu
    * For the private settings, we initialize them with the placeholder value, if the setting is set.
    */
   useEffect(() => {
-    const map = payZenKeys.read();
+    const map = new Map(payZenKeys.read());
     for (const setting of payZenPrivateSettings) {
       map.set(setting, isPresent[setting].read() ? PAYZEN_HIDDEN : '');
     }

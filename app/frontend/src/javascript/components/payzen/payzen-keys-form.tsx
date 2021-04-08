@@ -48,7 +48,7 @@ const PayZenKeysFormComponent: React.FC<PayZenKeysFormProps> = ({ onValidKeys })
    * When the component loads for the first time, initialize the keys with the values fetched from the API (if any)
    */
   useEffect(() => {
-    updateSettings(payZenKeys.read());
+    updateSettings(new Map(payZenKeys.read()));
   }, []);
 
   /**
