@@ -14,14 +14,15 @@ interface StripeFormProps {
   operator: User,
   className?: string,
   paymentSchedule?: boolean,
-  cartItems?: CartItems
+  cartItems?: CartItems,
+  formId: string,
 }
 
 /**
  * A form component to collect the credit card details and to create the payment method on Stripe.
- * The form validation button must be created elsewhere, using the attribute form="stripe-form".
+ * The form validation button must be created elsewhere, using the attribute form={formId}.
  */
-export const StripeForm: React.FC<StripeFormProps> = ({ onSubmit, onSuccess, onError, children, className, paymentSchedule = false, cartItems, customer, operator }) => {
+export const StripeForm: React.FC<StripeFormProps> = ({ onSubmit, onSuccess, onError, children, className, paymentSchedule = false, cartItems, customer, operator, formId }) => {
 
   const { t } = useTranslation('shared');
 
@@ -138,7 +139,7 @@ export const StripeForm: React.FC<StripeFormProps> = ({ onSubmit, onSuccess, onE
   };
 
   return (
-    <form onSubmit={handleSubmit} id="stripe-form" className={className}>
+    <form onSubmit={handleSubmit} id={formId} className={className}>
       <CardElement options={cardOptions} />
       {children}
     </form>

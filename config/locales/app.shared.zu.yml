@@ -114,13 +114,11 @@ zu:
       member_select:
         select_a_member: "crwdns9571:0crwdne9571:0"
         start_typing: "crwdns9573:0crwdne9573:0"
-      #stripe payment modal
-      stripe:
+      #payment modal
+      payment:
         online_payment: "crwdns9575:0crwdne9575:0"
         i_have_read_and_accept_: "crwdns20916:0crwdne20916:0"
         _the_general_terms_and_conditions: "crwdns9579:0crwdne9579:0"
-        credit_amount_for_pay_reservation: "crwdns9581:0{amount}crwdnd9581:0{currency}crwdne9581:0"
-        client_credit_amount_for_pay_reservation: "crwdns9583:0{amount}crwdnd9583:0{currency}crwdne9583:0"
         payment_schedule_html: "crwdns20918:0{DEADLINES}crwdne20918:0"
         confirm_payment_of_: "crwdns9585:0{AMOUNT}crwdne9585:0"
       #dialog of on site payment for reservations
