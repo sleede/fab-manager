@@ -1,12 +1,12 @@
 import React, { ReactEventHandler, ReactNode, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Loader } from './loader';
+import { Loader } from './base/loader';
 import moment from 'moment';
 import { IFablab } from '../models/fablab';
 import _ from 'lodash';
 import { PaymentSchedule, PaymentScheduleItem, PaymentScheduleItemState } from '../models/payment-schedule';
-import { FabButton } from './fab-button';
-import { FabModal } from './fab-modal';
+import { FabButton } from './base/fab-button';
+import { FabModal } from './base/fab-modal';
 import PaymentScheduleAPI from '../api/payment-schedule';
 import { StripeElements } from './stripe-elements';
 import { StripeConfirm } from './stripe-confirm';

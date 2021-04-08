@@ -6,7 +6,7 @@ import _ from 'lodash'
 import { IApplication } from '../models/application';
 import { Plan } from '../models/plan';
 import { User, UserRole } from '../models/user';
-import { Loader } from './loader';
+import { Loader } from './base/loader';
 import '../lib/i18n';
 import { IFablab } from '../models/fablab';
 

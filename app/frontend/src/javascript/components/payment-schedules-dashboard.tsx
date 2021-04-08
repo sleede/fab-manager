@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { IApplication } from '../models/application';
 import { useTranslation } from 'react-i18next';
-import { Loader } from './loader';
+import { Loader } from './base/loader';
 import { react2angular } from 'react2angular';
 import PaymentScheduleAPI from '../api/payment-schedule';
 import { PaymentSchedulesTable } from './payment-schedules-table';
-import { FabButton } from './fab-button';
+import { FabButton } from './base/fab-button';
 import { User } from '../models/user';
 import { PaymentSchedule } from '../models/payment-schedule';
 

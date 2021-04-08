@@ -2,8 +2,8 @@ import React, { ReactNode, BaseSyntheticEvent } from 'react';
 import Modal from 'react-modal';
 import { useTranslation } from 'react-i18next';
 import { Loader } from './loader';
-import CustomAssetAPI from '../api/custom-asset';
-import { CustomAssetName } from '../models/custom-asset';
+import CustomAssetAPI from '../../api/custom-asset';
+import { CustomAssetName } from '../../models/custom-asset';
 import { FabButton } from './fab-button';
 
 Modal.setAppElement('body');

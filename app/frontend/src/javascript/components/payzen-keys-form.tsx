@@ -1,17 +1,13 @@
-/**
- * Form to set the PayZen's username, password and public key
- */
-
 import React, { ReactNode, useEffect, useState } from 'react';
-import { Loader } from './loader';
+import { Loader } from './base/loader';
 import { useTranslation } from 'react-i18next';
 import SettingAPI from '../api/setting';
 import { SettingName } from '../models/setting';
-import { FabInput } from './fab-input';
+import { FabInput } from './base/fab-input';
 import { enableMapSet } from 'immer';
 import { useImmer } from 'use-immer';
 import PayzenAPI from '../api/payzen';
-import { HtmlTranslate } from './html-translate';
+import { HtmlTranslate } from './base/html-translate';
 
 enableMapSet();
 
@@ -31,19 +27,34 @@ const payZenKeys = SettingAPI.query(payZenSettings);
 // this cannot be handled by a React state because of their asynchronous nature
 let pendingKeysValidation = false;
 
+/**
+ * Form to set the PayZen's username, password and public key
+ */
 const PayZenKeysFormComponent: React.FC<PayZenKeysFormProps> = ({ onValidKeys }) => {
   const { t } = useTranslation('admin');
 
+  // values of the PayZen settings
   const [settings, updateSettings] = useImmer<Map<SettingName, string>>(new Map(payZenSettings.map(name => [name, ''])));
+  // Icon of the fieldset for the PayZen's keys concerning the REST API. Used to display if the key is valid.
   const [restApiAddOn, setRestApiAddOn] = useState<ReactNode>(null);
-  const [restApiAddOnClassName, setRestApiAddOnClassName] = useState<string>('');
+  // Style class for the add-on icon, for the REST API
+  const [restApiAddOnClassName, setRestApiAddOnClassName] = useState<'key-invalid' | 'key-valid' | ''>('');
+  // Icon of the input field for the PayZen's public key. Used to display if the key is valid.
   const [publicKeyAddOn, setPublicKeyAddOn] = useState<ReactNode>(null);
-  const [publicKeyAddOnClassName, setPublicKeyAddOnClassName] = useState<string>('');
+  // Style class for the add-on icon, for the public key
+  const [publicKeyAddOnClassName, setPublicKeyAddOnClassName] = useState<'key-invalid' | 'key-valid' | ''>('');
 
+  /**
+   * When the component loads for the first time, initialize the keys with the values fetched from the API (if any)
+   */
   useEffect(() => {
     updateSettings(payZenKeys.read());
   }, []);
 
+  /**
+   * When the style class for the public key, and the REST API are updated, check if they indicate valid keys.
+   * If both are valid, run the 'onValidKeys' callback
+   */
   useEffect(() => {
     const validClassName = 'key-valid';
     if (publicKeyAddOnClassName === validClassName && restApiAddOnClassName === validClassName) {

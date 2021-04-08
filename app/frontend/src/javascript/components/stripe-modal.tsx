@@ -1,10 +1,10 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import { react2angular } from 'react2angular';
-import { Loader } from './loader';
+import { Loader } from './base/loader';
 import { IApplication } from '../models/application';
 import { StripeElements } from './stripe-elements';
 import { useTranslation } from 'react-i18next';
-import { FabModal, ModalSize } from './fab-modal';
+import { FabModal, ModalSize } from './base/fab-modal';
 import { SetupIntent } from '@stripe/stripe-js';
 import { WalletInfo } from './wallet-info';
 import { User } from '../models/user';
@@ -14,14 +14,14 @@ import { PaymentSchedule } from '../models/payment-schedule';
 import { IFablab } from '../models/fablab';
 import WalletLib from '../lib/wallet';
 import { StripeForm } from './stripe-form';
+import { CartItems, PaymentConfirmation } from '../models/payment';
+import WalletAPI from '../api/wallet';
+import PriceAPI from '../api/price';
+import { HtmlTranslate } from './base/html-translate';
 
 import stripeLogo from '../../../images/powered_by_stripe.png';
 import mastercardLogo from '../../../images/mastercard.png';
 import visaLogo from '../../../images/visa.png';
-import { CartItems, PaymentConfirmation } from '../models/payment';
-import WalletAPI from '../api/wallet';
-import PriceAPI from '../api/price';
-import { HtmlTranslate } from './html-translate';
 
 declare var Application: IApplication;
 declare var Fablab: IFablab;

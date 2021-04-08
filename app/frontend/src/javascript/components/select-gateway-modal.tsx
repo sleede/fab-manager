@@ -5,10 +5,10 @@
 
 import React, { BaseSyntheticEvent, useEffect, useState } from 'react';
 import { react2angular } from 'react2angular';
-import { Loader } from './loader';
+import { Loader } from './base/loader';
 import { IApplication } from '../models/application';
 import { useTranslation } from 'react-i18next';
-import { FabModal, ModalSize } from './fab-modal';
+import { FabModal, ModalSize } from './base/fab-modal';
 import { User } from '../models/user';
 import { Gateway } from '../models/gateway';
 import { StripeKeysForm } from './stripe-keys-form';

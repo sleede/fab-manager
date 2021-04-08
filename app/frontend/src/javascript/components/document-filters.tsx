@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { LabelledInput } from './labelled-input';
+import { LabelledInput } from './base/labelled-input';
 import { useTranslation } from 'react-i18next';
 
 interface DocumentFiltersProps {
