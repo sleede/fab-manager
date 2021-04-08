@@ -7,6 +7,7 @@ module PayZen; end
 class PayZen::Helper
   class << self
     def enabled?
+      return false unless Setting.get('online_payment_module')
       return false unless Setting.get('payment_gateway') == 'payzen'
 
       res = true

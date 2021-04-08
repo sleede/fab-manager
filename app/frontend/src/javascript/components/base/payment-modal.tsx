@@ -165,14 +165,14 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, toggleModal,
               width={ModalSize.medium}
               closeButton={false}
               customFooter={logoFooter}
-              className={`payment-modal ${className}`}>
+              className={`payment-modal ${className ? className : ''}`}>
       {ready && <div>
         <WalletInfo cartItems={cartItems} currentUser={currentUser} wallet={wallet} price={price?.price} />
         <GatewayForm onSubmit={handleSubmit}
                      onSuccess={handleFormSuccess}
                      onError={handleFormError}
                      operator={currentUser}
-                     className={`gateway-form ${formClassName}`}
+                     className={`gateway-form ${formClassName ? formClassName : ''}`}
                      formId={formId}
                      cartItems={cartItems}
                      customer={customer}

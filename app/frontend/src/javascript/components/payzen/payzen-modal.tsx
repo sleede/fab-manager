@@ -1,6 +1,5 @@
 import React, { FunctionComponent, ReactNode } from 'react';
 import { react2angular } from 'react2angular';
-import { useTranslation } from 'react-i18next';
 import { Loader } from '../base/loader';
 import { IApplication } from '../../models/application';
 import { CartItems, PaymentConfirmation } from '../../models/payment';
@@ -35,7 +34,6 @@ const PayZenModal: React.FC<PayZenModalProps> = ({ isOpen, toggleModal, afterSuc
   const logoFooter = (): ReactNode => {
     return (
       <div className="payzen-modal-icons">
-        <i className="fa fa-lock fa-2x m-r-sm pos-rlt" />
         <img src={payzenLogo} alt="powered by PayZen" />
         <img src={mastercardLogo} alt="mastercard" />
         <img src={visaLogo} alt="visa" />
@@ -62,7 +60,9 @@ const PayZenModal: React.FC<PayZenModalProps> = ({ isOpen, toggleModal, afterSuc
     <PaymentModal isOpen={isOpen}
                   toggleModal={toggleModal}
                   logoFooter={logoFooter()}
-                  formId="payzen-modal"
+                  formId="payzen-form"
+                  formClassName="payzen-form"
+                  className="payzen-modal"
                   currentUser={currentUser}
                   cartItems={cartItems}
                   customer={customer}
@@ -80,4 +80,4 @@ const PayZenModalWrapper: React.FC<PayZenModalProps> = ({ isOpen, toggleModal, a
   );
 }
 
-Application.Components.component('payZenModal', react2angular(PayZenModalWrapper, ['isOpen', 'toggleModal', 'afterSuccess','currentUser', 'schedule', 'cartItems', 'customer']));
+Application.Components.component('payzenModal', react2angular(PayZenModalWrapper, ['isOpen', 'toggleModal', 'afterSuccess','currentUser', 'schedule', 'cartItems', 'customer']));
