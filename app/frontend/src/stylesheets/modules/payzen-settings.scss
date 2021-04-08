@@ -24,24 +24,17 @@
       color: #8a6d3b;
       background-color: #fcf8e3;
     }
-    .currency-error {
-      padding: 15px;
-      margin-bottom: 24px;
-      border: 1px solid #ebccd1;
-      color: #a94442;
-      background-color: #f2dede;
-    }
     .payzen-currency-form {
       display: flex;
       flex-direction: row;
       justify-content: flex-start;
-      align-items: flex-end;
+      align-items: flex-start;
 
       .currency-wrapper {
         padding: 5px 15px;
       }
       .save-currency {
-        margin: 5px 15px;
+        margin: 34px 15px 5px;
       }
     }
   }

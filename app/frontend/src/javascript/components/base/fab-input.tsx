@@ -16,13 +16,14 @@ interface FabInputProps {
   maxLength?: number,
   pattern?: string,
   placeholder?: string,
+  error?: string,
   type?: 'text' | 'date' | 'password' | 'url' | 'time' | 'tel' | 'search' | 'number' | 'month' | 'email' | 'datetime-local' | 'week',
 }
 
 /**
  * This component is a template for an input component that wraps the application style
  */
-export const FabInput: React.FC<FabInputProps> = ({ id, onChange, defaultValue, icon, className, disabled, type, required, debounce, addOn, addOnClassName, readOnly, maxLength, pattern, placeholder }) => {
+export const FabInput: React.FC<FabInputProps> = ({ id, onChange, defaultValue, icon, className, disabled, type, required, debounce, addOn, addOnClassName, readOnly, maxLength, pattern, placeholder, error }) => {
   const [inputValue, setInputValue] = useState<any>(defaultValue);
 
   /**
@@ -53,6 +54,13 @@ export const FabInput: React.FC<FabInputProps> = ({ id, onChange, defaultValue, 
   }
 
   /**
+   * Check if the current component was provided an error string to display, on the input
+   */
+  const hasError = (): boolean => {
+    return !!error;
+  }
+
+  /**
    * Debounced (ie. temporised) version of the 'on change' callback.
    */
   const debouncedOnChange = debounce ? useCallback(_debounce(onChange, debounce), [onChange, debounce]) : null;
@@ -74,19 +82,22 @@ export const FabInput: React.FC<FabInputProps> = ({ id, onChange, defaultValue, 
 
   return (
     <div className={`fab-input ${className ? className : ''}`}>
-      {hasIcon() && <span className="fab-input--icon">{icon}</span>}
-      <input id={id}
-             type={type}
-             className="fab-input--input"
-             value={inputValue}
-             onChange={handleChange}
-             disabled={disabled}
-             required={required}
-             readOnly={readOnly}
-             maxLength={maxLength}
-             pattern={pattern}
-             placeholder={placeholder} />
-      {hasAddOn() && <span className={`fab-input--addon ${addOnClassName ?  addOnClassName : ''}`}>{addOn}</span>}
+      <div className={`input-wrapper ${hasError() ? 'input-error' : ''}`}>
+        {hasIcon() && <span className="fab-input--icon">{icon}</span>}
+        <input id={id}
+               type={type}
+               className="fab-input--input"
+               value={inputValue}
+               onChange={handleChange}
+               disabled={disabled}
+               required={required}
+               readOnly={readOnly}
+               maxLength={maxLength}
+               pattern={pattern}
+               placeholder={placeholder} />
+        {hasAddOn() && <span className={`fab-input--addon ${addOnClassName ?  addOnClassName : ''}`}>{addOn}</span>}
+      </div>
+      {hasError() && <span className="fab-input--error">{error}</span> }
     </div>
   );
 }

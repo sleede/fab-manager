@@ -1,7 +1,9 @@
 .fab-input {
-  position: relative;
-  display: table;
-  border-collapse: separate;
+  .input-wrapper {
+    position: relative;
+    display: table;
+    border-collapse: separate;
+  }
 
   &--icon {
     min-width: 40px;
@@ -64,5 +66,23 @@
       border-left: 0;
     }
 
+  }
+
+  .input-error {
+    .fab-input--icon {
+      color: #a94442;
+      background-color: #f2dede;
+      border-color: #a94442;
+    }
+    .fab-input--input {
+      border-color: #a94442;
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.08);
+    }
+  }
+  &--error {
+    display: block;
+    color: #a94442;
+    margin-top: 5px;
+    margin-bottom: 10px;
   }
 }

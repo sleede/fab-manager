@@ -130,7 +130,6 @@ export const PayzenSettings: React.FC<PayzenSettingsProps> = ({ onEditKeys, onCu
         <p className="currency-info">
           <HtmlTranslate trKey="app.admin.invoices.payment.payzen.currency_info_html" />
         </p>
-        {error && <p className="currency-error">{error}</p>}
         <div className="payzen-currency-form">
           <div className="currency-wrapper">
             <label htmlFor="payzen_currency">{t('app.admin.invoices.payment.payzen.payzen_currency')}</label>
@@ -139,7 +138,8 @@ export const PayzenSettings: React.FC<PayzenSettingsProps> = ({ onEditKeys, onCu
                       icon={<i className="fas fa-money-bill" />}
                       onChange={handleCurrencyUpdate}
                       maxLength={3}
-                      pattern="[A-Z]{3}" />
+                      pattern="[A-Z]{3}"
+                      error={error} />
           </div>
           <FabButton className="save-currency" onClick={saveCurrency}>{t('app.admin.invoices.payment.payzen.save')}</FabButton>
         </div>
