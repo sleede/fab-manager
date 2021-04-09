@@ -200,11 +200,11 @@
 
 </div>
 <div ng-if="stripe.showModal">
-  <payzen-modal is-open="stripe.showModal"
-                toggle-modal="toggleStripeModal"
-                after-success="afterStripeSuccess"
-                cart-items="stripe.cartItems"
-                current-user="currentUser"
-                customer="user"
-                schedule="schedule.payment_schedule"/>
+  <payment-modal is-open="stripe.showModal"
+                 toggle-modal="toggleStripeModal"
+                 after-success="afterStripeSuccess"
+                 cart-items="stripe.cartItems"
+                 current-user="currentUser"
+                 customer="user"
+                 schedule="schedule.payment_schedule"/>
 </div>

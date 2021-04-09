@@ -27,7 +27,7 @@ interface PayZenModalProps {
  * This component enables the user to input his card data or process payments, using the PayZen gateway.
  * Supports Strong-Customer Authentication (SCA).
  */
-const PayZenModal: React.FC<PayZenModalProps> = ({ isOpen, toggleModal, afterSuccess, cartItems, currentUser, schedule, customer }) => {
+export const PayZenModal: React.FC<PayZenModalProps> = ({ isOpen, toggleModal, afterSuccess, cartItems, currentUser, schedule, customer }) => {
   /**
    * Return the logos, shown in the modal footer.
    */
@@ -71,13 +71,3 @@ const PayZenModal: React.FC<PayZenModalProps> = ({ isOpen, toggleModal, afterSuc
                           GatewayForm={renderForm} />
   );
 }
-
-const PayZenModalWrapper: React.FC<PayZenModalProps> = ({ isOpen, toggleModal, afterSuccess, currentUser, schedule , cartItems, customer }) => {
-  return (
-    <Loader>
-      <PayZenModal isOpen={isOpen} toggleModal={toggleModal} afterSuccess={afterSuccess} currentUser={currentUser} schedule={schedule} cartItems={cartItems} customer={customer} />
-    </Loader>
-  );
-}
-
-Application.Components.component('payzenModal', react2angular(PayZenModalWrapper, ['isOpen', 'toggleModal', 'afterSuccess','currentUser', 'schedule', 'cartItems', 'customer']));

@@ -30,7 +30,7 @@ interface StripeModalProps {
  * This component enables the user to input his card data or process payments, using the Stripe gateway.
  * Supports Strong-Customer Authentication (SCA).
  */
-const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuccess, cartItems, currentUser, schedule, customer }) => {
+export const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuccess, cartItems, currentUser, schedule, customer }) => {
   /**
    * Return the logos, shown in the modal footer.
    */
@@ -81,13 +81,3 @@ const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuc
                           GatewayForm={renderForm} />
   );
 }
-
-const StripeModalWrapper: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuccess, currentUser, schedule , cartItems, customer }) => {
-  return (
-    <Loader>
-      <StripeModal isOpen={isOpen} toggleModal={toggleModal} afterSuccess={afterSuccess} currentUser={currentUser} schedule={schedule} cartItems={cartItems} customer={customer} />
-    </Loader>
-  );
-}
-
-Application.Components.component('stripeModal', react2angular(StripeModalWrapper, ['isOpen', 'toggleModal', 'afterSuccess','currentUser', 'schedule', 'cartItems', 'customer']));

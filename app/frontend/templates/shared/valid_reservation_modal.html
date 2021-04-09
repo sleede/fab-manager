@@ -49,12 +49,12 @@
 <div class="modal-footer">
   <button class="btn btn-info" ng-click="ok()" ng-disabled="attempting" ng-bind-html="validButtonName"></button>
   <button class="btn btn-default" ng-click="cancel()" translate>{{ 'app.shared.buttons.cancel' }}</button>
-  <stripe-modal is-open="isOpenStripeModal"
-                toggle-modal="toggleStripeModal"
-                after-success="afterCreatePaymentSchedule"
-                cart-items="cartItems"
-                current-user="currentUser"
-                schedule="schedule"
-                customer="user"
-                processPayment="false"/>
+  <payment-modal is-open="isOpenStripeModal"
+                 toggle-modal="toggleStripeModal"
+                 after-success="afterCreatePaymentSchedule"
+                 cart-items="cartItems"
+                 current-user="currentUser"
+                 schedule="schedule"
+                 customer="user"
+                 processPayment="false"/>
 </div>
