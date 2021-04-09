@@ -2,8 +2,8 @@ import React, { FunctionComponent, ReactNode, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next';
 import WalletLib from '../../lib/wallet';
 import { WalletInfo } from '../wallet-info';
-import { FabModal, ModalSize } from './fab-modal';
-import { HtmlTranslate } from './html-translate';
+import { FabModal, ModalSize } from '../base/fab-modal';
+import { HtmlTranslate } from '../base/html-translate';
 import { CustomAssetName } from '../../models/custom-asset';
 import { IFablab } from '../../models/fablab';
 import { CartItems } from '../../models/payment';

@@ -12,7 +12,7 @@ import { User } from '../../models/user';
 import stripeLogo from '../../../../images/powered_by_stripe.png';
 import mastercardLogo from '../../../../images/mastercard.png';
 import visaLogo from '../../../../images/visa.png';
-import { GatewayFormProps, PaymentModal } from '../base/payment-modal';
+import { GatewayFormProps, PaymentModal } from '../payment/payment-modal';
 
 declare var Application: IApplication;
 
