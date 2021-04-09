@@ -1,15 +1,15 @@
 import React, { FunctionComponent, ReactNode } from 'react';
 import { react2angular } from 'react2angular';
-import { Loader } from '../base/loader';
-import { IApplication } from '../../models/application';
-import { CartItems, PaymentConfirmation } from '../../models/payment';
-import { PaymentSchedule } from '../../models/payment-schedule';
-import { User } from '../../models/user';
+import { GatewayFormProps, AbstractPaymentModal } from '../abstract-payment-modal';
+import { Loader } from '../../base/loader';
+import { IApplication } from '../../../models/application';
+import { CartItems, PaymentConfirmation } from '../../../models/payment';
+import { PaymentSchedule } from '../../../models/payment-schedule';
+import { User } from '../../../models/user';
 
-import payzenLogo from '../../../../images/payzen-secure.png';
-import mastercardLogo from '../../../../images/mastercard.png';
-import visaLogo from '../../../../images/visa.png';
-import { GatewayFormProps, AbstractPaymentModal } from '../payment/abstract-payment-modal';
+import payzenLogo from '../../../../../images/payzen-secure.png';
+import mastercardLogo from '../../../../../images/mastercard.png';
+import visaLogo from '../../../../../images/visa.png';
 
 declare var Application: IApplication;
 

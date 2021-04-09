@@ -5,16 +5,16 @@
 
 import React, { BaseSyntheticEvent, useEffect, useState } from 'react';
 import { react2angular } from 'react2angular';
-import { Loader } from './base/loader';
-import { IApplication } from '../models/application';
 import { useTranslation } from 'react-i18next';
+import { StripeKeysForm } from './payment/stripe/stripe-keys-form';
+import { PayZenKeysForm } from './payment/payzen/payzen-keys-form';
 import { FabModal, ModalSize } from './base/fab-modal';
+import { Loader } from './base/loader';
 import { User } from '../models/user';
 import { Gateway } from '../models/gateway';
-import { StripeKeysForm } from './stripe/stripe-keys-form';
 import { SettingBulkResult, SettingName } from '../models/setting';
+import { IApplication } from '../models/application';
 import SettingAPI from '../api/setting';
-import { PayZenKeysForm } from './payzen/payzen-keys-form';
 
 
 declare var Application: IApplication;

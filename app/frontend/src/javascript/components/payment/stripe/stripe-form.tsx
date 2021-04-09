@@ -2,9 +2,9 @@ import React, { FormEvent } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { SetupIntent } from "@stripe/stripe-js";
 import { useTranslation } from 'react-i18next';
-import { CartItems, PaymentConfirmation } from '../../models/payment';
-import { User } from '../../models/user';
-import PaymentAPI from '../../api/payment';
+import { CartItems, PaymentConfirmation } from '../../../models/payment';
+import { User } from '../../../models/user';
+import PaymentAPI from '../../../api/payment';
 
 interface StripeFormProps {
   onSubmit: () => void,

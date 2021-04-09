@@ -2,12 +2,12 @@ import React, { ReactNode, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { enableMapSet } from 'immer';
 import { useImmer } from 'use-immer';
-import { HtmlTranslate } from '../base/html-translate';
-import { FabInput } from '../base/fab-input';
-import { Loader } from '../base/loader';
-import { SettingName } from '../../models/setting';
-import SettingAPI from '../../api/setting';
-import PayzenAPI from '../../api/payzen';
+import { HtmlTranslate } from '../../base/html-translate';
+import { FabInput } from '../../base/fab-input';
+import { Loader } from '../../base/loader';
+import { SettingName } from '../../../models/setting';
+import SettingAPI from '../../../api/setting';
+import PayzenAPI from '../../../api/payzen';
 
 enableMapSet();
 
