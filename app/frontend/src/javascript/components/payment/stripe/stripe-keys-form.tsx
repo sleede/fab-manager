@@ -12,9 +12,6 @@ interface StripeKeysFormProps {
   onValidKeys: (stripePublic: string, stripeSecret:string) => void
 }
 
-// initial request to the API
-const stripeKeys = SettingAPI.query([SettingName.StripePublicKey, SettingName.StripeSecretKey]);
-
 /**
  * Form to set the stripe's public and private keys
  */
@@ -44,9 +41,12 @@ const StripeKeysFormComponent: React.FC<StripeKeysFormProps> = ({ onValidKeys })
    */
   useEffect(() => {
     mounted.current = true;
-    const keys = stripeKeys.read();
-    setPublicKey(keys.get(SettingName.StripePublicKey));
-    setSecretKey(keys.get(SettingName.StripeSecretKey));
+
+    const api = new SettingAPI();
+    api.query([SettingName.StripePublicKey, SettingName.StripeSecretKey]).then(stripeKeys => {
+      setPublicKey(stripeKeys.get(SettingName.StripePublicKey));
+      setSecretKey(stripeKeys.get(SettingName.StripeSecretKey));
+    }).catch(error => console.error(error));
 
     // when the component unmounts, mark it as unmounted
     return () => {

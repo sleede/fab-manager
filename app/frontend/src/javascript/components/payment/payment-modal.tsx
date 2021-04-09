@@ -25,6 +25,10 @@ interface PaymentModalProps {
 // initial request to the API
 const paymentGateway = SettingAPI.get(SettingName.PaymentGateway);
 
+/**
+ * This component open a modal dialog for the configured payment gateway, allowing the user to input his card data
+ * to process an online payment.
+ */
 const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, currentUser, schedule , cartItems, customer }) => {
   const gateway = paymentGateway.read();
 

@@ -1,8 +1,5 @@
 import React, { FunctionComponent, ReactNode } from 'react';
-import { react2angular } from 'react2angular';
 import { GatewayFormProps, AbstractPaymentModal } from '../abstract-payment-modal';
-import { Loader } from '../../base/loader';
-import { IApplication } from '../../../models/application';
 import { CartItems, PaymentConfirmation } from '../../../models/payment';
 import { PaymentSchedule } from '../../../models/payment-schedule';
 import { User } from '../../../models/user';
@@ -10,8 +7,8 @@ import { User } from '../../../models/user';
 import payzenLogo from '../../../../../images/payzen-secure.png';
 import mastercardLogo from '../../../../../images/mastercard.png';
 import visaLogo from '../../../../../images/visa.png';
+import { PayzenForm } from './payzen-form';
 
-declare var Application: IApplication;
 
 interface PayZenModalProps {
   isOpen: boolean,
@@ -26,6 +23,9 @@ interface PayZenModalProps {
 /**
  * This component enables the user to input his card data or process payments, using the PayZen gateway.
  * Supports Strong-Customer Authentication (SCA).
+ *
+ * This component should not be called directly. Prefer using <PaymentModal> which can handle the configuration
+ *  of a different payment gateway.
  */
 export const PayZenModal: React.FC<PayZenModalProps> = ({ isOpen, toggleModal, afterSuccess, cartItems, currentUser, schedule, customer }) => {
   /**
@@ -46,13 +46,16 @@ export const PayZenModal: React.FC<PayZenModalProps> = ({ isOpen, toggleModal, a
    */
   const renderForm: FunctionComponent<GatewayFormProps> = ({ onSubmit, onSuccess, onError, operator, className, formId, cartItems, customer, paymentSchedule, children}) => {
     return (
-      <form onSubmit={onSubmit} className={className} id={formId}>
-        <h3>PayZen</h3>
-        <input type="text" placeholder="card #"/>
-        <span>Operated by {operator.name}</span>
-        <span>User: {customer.name}</span>
+      <PayzenForm onSubmit={onSubmit}
+                  onSuccess={onSuccess}
+                  onError={onError}
+                  customer={customer}
+                  operator={operator}
+                  formId={formId}
+                  className={className}
+                  paymentSchedule={paymentSchedule}>
         {children}
-      </form>
+      </PayzenForm>
     );
   }
 

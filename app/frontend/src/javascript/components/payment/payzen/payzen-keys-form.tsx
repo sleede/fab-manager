@@ -20,9 +20,6 @@ const payZenSettings: Array<SettingName> = [SettingName.PayZenUsername, SettingN
 // settings related the to PayZen REST API (server side)
 const restApiSettings: Array<SettingName> = [SettingName.PayZenUsername, SettingName.PayZenPassword, SettingName.PayZenEndpoint, SettingName.PayZenHmacKey];
 
-// initial request to the API
-const payZenKeys = SettingAPI.query(payZenSettings);
-
 // Prevent multiples call to the payzen keys validation endpoint.
 // this cannot be handled by a React state because of their asynchronous nature
 let pendingKeysValidation = false;
@@ -48,7 +45,10 @@ const PayZenKeysFormComponent: React.FC<PayZenKeysFormProps> = ({ onValidKeys })
    * When the component loads for the first time, initialize the keys with the values fetched from the API (if any)
    */
   useEffect(() => {
-    updateSettings(new Map(payZenKeys.read()));
+    const api = new SettingAPI();
+    api.query(payZenSettings).then(payZenKeys => {
+      updateSettings(new Map(payZenKeys));
+    }).catch(error => console.error(error));
   }, []);
 
   /**

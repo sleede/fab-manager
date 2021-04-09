@@ -1,11 +1,8 @@
 import React, { FunctionComponent, ReactNode } from 'react';
-import { react2angular } from 'react2angular';
 import { SetupIntent } from '@stripe/stripe-js';
 import { StripeElements } from './stripe-elements';
 import { StripeForm } from './stripe-form';
 import { GatewayFormProps, AbstractPaymentModal } from '../abstract-payment-modal';
-import { Loader } from '../../base/loader';
-import { IApplication } from '../../../models/application';
 import { CartItems, PaymentConfirmation } from '../../../models/payment';
 import { PaymentSchedule } from '../../../models/payment-schedule';
 import { User } from '../../../models/user';
@@ -14,7 +11,6 @@ import stripeLogo from '../../../../../images/powered_by_stripe.png';
 import mastercardLogo from '../../../../../images/mastercard.png';
 import visaLogo from '../../../../../images/visa.png';
 
-declare var Application: IApplication;
 
 interface StripeModalProps {
   isOpen: boolean,
@@ -29,6 +25,9 @@ interface StripeModalProps {
 /**
  * This component enables the user to input his card data or process payments, using the Stripe gateway.
  * Supports Strong-Customer Authentication (SCA).
+ *
+ * This component should not be called directly. Prefer using <PaymentModal> which can handle the configuration
+ *  of a different payment gateway.
  */
 export const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuccess, cartItems, currentUser, schedule, customer }) => {
   /**

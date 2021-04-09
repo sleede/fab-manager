@@ -38,13 +38,6 @@ const icons:Map<SettingName, string> = new Map([
   [SettingName.PayZenPublicKey, 'info']
 ])
 
-// initial requests to the API
-const payZenKeys = SettingAPI.query(payZenPublicSettings.concat(payZenOtherSettings));
-const isPresent = {
-  [SettingName.PayZenPassword]: SettingAPI.isPresent(SettingName.PayZenPassword),
-  [SettingName.PayZenHmacKey]: SettingAPI.isPresent(SettingName.PayZenHmacKey)
-};
-
 /**
  * This component displays a summary of the PayZen account keys, with a button triggering the modal to edit them
  */
@@ -61,11 +54,18 @@ export const PayzenSettings: React.FC<PayzenSettingsProps> = ({ onEditKeys, onCu
    * For the private settings, we initialize them with the placeholder value, if the setting is set.
    */
   useEffect(() => {
-    const map = new Map(payZenKeys.read());
-    for (const setting of payZenPrivateSettings) {
-      map.set(setting, isPresent[setting].read() ? PAYZEN_HIDDEN : '');
-    }
-    updateSettings(map);
+    const api = new SettingAPI();
+    api.query(payZenPublicSettings.concat(payZenOtherSettings)).then(payZenKeys => {
+      api.isPresent(SettingName.PayZenPassword).then(pzPassword => {
+        api.isPresent(SettingName.PayZenHmacKey).then(pzHmac => {
+          const map = new Map(payZenKeys);
+          map.set(SettingName.PayZenPassword, pzPassword ? PAYZEN_HIDDEN :  '');
+          map.set(SettingName.PayZenHmacKey, pzHmac ? PAYZEN_HIDDEN :  '');
+
+          updateSettings(map);
+        }).catch(error => { console.error(error); })
+      }).catch(error => { console.error(error); });
+    }).catch(error => { console.error(error); });
   }, []);
 
 

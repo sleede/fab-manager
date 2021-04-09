@@ -1,4 +1,9 @@
 .payzen-modal {
+  .payzen-form {
+    .container {
+      display: flex; justify-content: center;
+    }
+  }
   .payzen-modal-icons {
     text-align: center;
 

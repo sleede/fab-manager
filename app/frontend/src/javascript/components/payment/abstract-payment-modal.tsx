@@ -49,6 +49,9 @@ const cgvFile = CustomAssetAPI.get(CustomAssetName.CgvFile);
 
 /**
  * This component is an abstract modal that must be extended by each payment gateway to include its payment form.
+ *
+ * This component must not be called directly but must be extended for each implemented payment gateway
+ * @see https://reactjs.org/docs/composition-vs-inheritance.html
  */
 export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, cartItems, currentUser, schedule, customer, logoFooter, GatewayForm, formId, className, formClassName }) => {
   // customer's wallet
