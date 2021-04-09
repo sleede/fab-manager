@@ -12,7 +12,7 @@ import { User } from '../../models/user';
 import stripeLogo from '../../../../images/powered_by_stripe.png';
 import mastercardLogo from '../../../../images/mastercard.png';
 import visaLogo from '../../../../images/visa.png';
-import { GatewayFormProps, PaymentModal } from '../payment/payment-modal';
+import { GatewayFormProps, AbstractPaymentModal } from '../payment/abstract-payment-modal';
 
 declare var Application: IApplication;
 
@@ -67,18 +67,18 @@ const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuc
   }
 
   return (
-    <PaymentModal className="stripe-modal"
-                  isOpen={isOpen}
-                  toggleModal={toggleModal}
-                  logoFooter={logoFooter()}
-                  formId="stripe-form"
-                  formClassName="stripe-form"
-                  currentUser={currentUser}
-                  cartItems={cartItems}
-                  customer={customer}
-                  afterSuccess={afterSuccess}
-                  schedule={schedule}
-                  GatewayForm={renderForm} />
+    <AbstractPaymentModal className="stripe-modal"
+                          isOpen={isOpen}
+                          toggleModal={toggleModal}
+                          logoFooter={logoFooter()}
+                          formId="stripe-form"
+                          formClassName="stripe-form"
+                          currentUser={currentUser}
+                          cartItems={cartItems}
+                          customer={customer}
+                          afterSuccess={afterSuccess}
+                          schedule={schedule}
+                          GatewayForm={renderForm} />
   );
 }
 

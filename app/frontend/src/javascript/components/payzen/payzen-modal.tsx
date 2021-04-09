@@ -9,7 +9,7 @@ import { User } from '../../models/user';
 import payzenLogo from '../../../../images/payzen-secure.png';
 import mastercardLogo from '../../../../images/mastercard.png';
 import visaLogo from '../../../../images/visa.png';
-import { GatewayFormProps, PaymentModal } from '../payment/payment-modal';
+import { GatewayFormProps, AbstractPaymentModal } from '../payment/abstract-payment-modal';
 
 declare var Application: IApplication;
 
@@ -57,18 +57,18 @@ const PayZenModal: React.FC<PayZenModalProps> = ({ isOpen, toggleModal, afterSuc
   }
 
   return (
-    <PaymentModal isOpen={isOpen}
-                  toggleModal={toggleModal}
-                  logoFooter={logoFooter()}
-                  formId="payzen-form"
-                  formClassName="payzen-form"
-                  className="payzen-modal"
-                  currentUser={currentUser}
-                  cartItems={cartItems}
-                  customer={customer}
-                  afterSuccess={afterSuccess}
-                  schedule={schedule}
-                  GatewayForm={renderForm} />
+    <AbstractPaymentModal isOpen={isOpen}
+                          toggleModal={toggleModal}
+                          logoFooter={logoFooter()}
+                          formId="payzen-form"
+                          formClassName="payzen-form"
+                          className="payzen-modal"
+                          currentUser={currentUser}
+                          cartItems={cartItems}
+                          customer={customer}
+                          afterSuccess={afterSuccess}
+                          schedule={schedule}
+                          GatewayForm={renderForm} />
   );
 }
 

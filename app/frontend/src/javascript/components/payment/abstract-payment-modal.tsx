@@ -28,7 +28,7 @@ export interface GatewayFormProps {
   formId: string,
 }
 
-interface PaymentModalProps {
+interface AbstractPaymentModalProps {
   isOpen: boolean,
   toggleModal: () => void,
   afterSuccess: (result: any) => void,
@@ -50,7 +50,7 @@ const cgvFile = CustomAssetAPI.get(CustomAssetName.CgvFile);
 /**
  * This component is an abstract modal that must be extended by each payment gateway to include its payment form.
  */
-export const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, cartItems, currentUser, schedule, customer, logoFooter, GatewayForm, formId, className, formClassName }) => {
+export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, cartItems, currentUser, schedule, customer, logoFooter, GatewayForm, formId, className, formClassName }) => {
   // customer's wallet
   const [wallet, setWallet] = useState(null);
   // server-computed price with all details
