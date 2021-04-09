@@ -186,6 +186,7 @@ Rails.application.routes.draw do
 
     # PayZen special endpoint
     post 'payzen/sdk_test' => 'payzen#sdk_test'
+    post 'payzen/create_payment' => 'payzen#create_payment'
   end
 
   # rss

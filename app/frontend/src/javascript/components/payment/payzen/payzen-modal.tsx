@@ -52,6 +52,7 @@ export const PayZenModal: React.FC<PayZenModalProps> = ({ isOpen, toggleModal, a
                   customer={customer}
                   operator={operator}
                   formId={formId}
+                  cartItems={cartItems}
                   className={className}
                   paymentSchedule={paymentSchedule}>
         {children}

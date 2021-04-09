@@ -1,7 +1,17 @@
 .payzen-modal {
   .payzen-form {
     .container {
-      display: flex; justify-content: center;
+      display: flex;
+      justify-content: center;
+      width: inherit;
+
+      //.kr-payment-button {
+      //  display: none;
+      //}
+
+      .kr-form-error {
+        display: none;
+      }
     }
   }
   .payzen-modal-icons {

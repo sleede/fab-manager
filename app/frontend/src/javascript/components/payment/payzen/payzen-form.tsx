@@ -5,6 +5,7 @@ import { CartItems } from '../../../models/payment';
 import { User } from '../../../models/user';
 import SettingAPI from '../../../api/setting';
 import { SettingName } from '../../../models/setting';
+import PayzenAPI from '../../../api/payzen';
 
 interface PayzenFormProps {
   onSubmit: () => void,
@@ -29,24 +30,30 @@ export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onE
   useEffect(() => {
     const api = new SettingAPI();
     api.query([SettingName.PayZenEndpoint, SettingName.PayZenPublicKey]).then(settings => {
-      const formToken = "DEMO-TOKEN-TO-BE-REPLACED";
-
-      KRGlue.loadLibrary(settings.get(SettingName.PayZenEndpoint), settings.get(SettingName.PayZenPublicKey)) /* Load the remote library */
-        .then(({ KR }) =>
-          KR.setFormConfig({
-            /* set the minimal configuration */
-            formToken: formToken,
-            "kr-language": "en-US" /* to update initialization parameter */
-          })
-        )
-        .then(({ KR }) =>
-          KR.addForm("#payzenPaymentForm")
-        ) /* add a payment form  to myPaymentForm div*/
-        .then(({ KR, result }) =>
-          KR.showForm(result.formId)
-        ); /* show the payment form */
-    }).catch(error => console.error(error));
+      PayzenAPI.chargeCreatePayment(cartItems, customer).then(formToken => {
+        KRGlue.loadLibrary(settings.get(SettingName.PayZenEndpoint), settings.get(SettingName.PayZenPublicKey)) /* Load the remote library */
+          .then(({ KR }) =>
+            KR.setFormConfig({
+              /* set the minimal configuration */
+              formToken: formToken.formToken,
+              "kr-language": "en-US" /* to update initialization parameter */
+            })
+          )
+          .then(({ KR }) =>
+            KR.addForm("#payzenPaymentForm")
+          ) /* add a payment form  to myPaymentForm div*/
+          .then(({ KR, result }) =>
+            KR.showForm(result.formId)
+          ); /* show the payment form */
+      }).catch(error => console.error(error));
+      })
   });
+
+  const submitEmbeddedPayzenForm = (): void => {
+    // FIXME: not working...
+    const button: HTMLButtonElement = document.querySelector('button.kr-payment-button');
+    button.click()
+  }
 
   /**
    * Handle the submission of the form.
@@ -57,6 +64,7 @@ export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onE
 
 
     try {
+      submitEmbeddedPayzenForm();
       onSuccess(null);
     } catch (err) {
       // catch api errors

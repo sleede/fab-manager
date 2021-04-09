@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 # API Controller for accessing PayZen API endpoints through the front-end app
-class API::PayzenController < API::ApiController
-  before_action :authenticate_user!
+class API::PayzenController < API::PaymentsController
   require 'pay_zen/charge'
 
   def sdk_test
@@ -14,5 +13,12 @@ class API::PayzenController < API::ApiController
     @status = (res['answer']['value'] == str)
   rescue SocketError
     @status = false
+  end
+
+  def create_payment
+    amount = card_amount
+
+    client = PayZen::Charge.new
+    @result = client.create_payment(amount: amount, customer: { reference: params[:customer][:id], email: params[:customer][:email] })
   end
 end
