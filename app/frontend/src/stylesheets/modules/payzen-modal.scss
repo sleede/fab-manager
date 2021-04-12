@@ -1,13 +1,16 @@
 .payzen-modal {
   .payzen-form {
+    .loader {
+      text-align: center;
+    }
     .container {
       display: flex;
       justify-content: center;
       width: inherit;
 
-      //.kr-payment-button {
-      //  display: none;
-      //}
+      .kr-payment-button {
+        display: none;
+      }
 
       .kr-form-error {
         display: none;

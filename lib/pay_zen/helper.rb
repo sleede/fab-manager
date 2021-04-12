@@ -21,7 +21,7 @@ class PayZen::Helper
       require 'sha3'
 
       content = { cart_items: cart_items, customer: customer }.to_json + DateTime.current.to_s
-      SHA3::Digest.hexdigest(:sha256, content)
+      SHA3::Digest.hexdigest(:sha256, content)[0...9]
     end
   end
 end

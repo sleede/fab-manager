@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect } from 'react';
+import React, { FormEvent, FunctionComponent, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import KRGlue from "@lyracom/embedded-form-glue";
 import { CartItems } from '../../../models/payment';
@@ -6,6 +6,7 @@ import { User } from '../../../models/user';
 import SettingAPI from '../../../api/setting';
 import { SettingName } from '../../../models/setting';
 import PayzenAPI from '../../../api/payzen';
+import { Loader } from '../../base/loader';
 
 interface PayzenFormProps {
   onSubmit: () => void,
@@ -26,6 +27,8 @@ interface PayzenFormProps {
 export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onError, children, className, paymentSchedule = false, cartItems, customer, operator, formId }) => {
 
   const { t } = useTranslation('shared');
+  const PayZenKR = useRef(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const api = new SettingAPI();
@@ -34,25 +37,39 @@ export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onE
         KRGlue.loadLibrary(settings.get(SettingName.PayZenEndpoint), settings.get(SettingName.PayZenPublicKey)) /* Load the remote library */
           .then(({ KR }) =>
             KR.setFormConfig({
-              /* set the minimal configuration */
               formToken: formToken.formToken,
-              "kr-language": "en-US" /* to update initialization parameter */
             })
           )
-          .then(({ KR }) =>
-            KR.addForm("#payzenPaymentForm")
-          ) /* add a payment form  to myPaymentForm div*/
-          .then(({ KR, result }) =>
-            KR.showForm(result.formId)
-          ); /* show the payment form */
-      }).catch(error => console.error(error));
-      })
-  });
+          .then(({ KR }) => KR.addForm("#payzenPaymentForm"))
+          .then(({ KR, result }) => KR.showForm(result.formId))
+          .then(({ KR }) => KR.onFormReady(handleFormReady))
+          .then(({ KR }) => PayZenKR.current = KR);
+      }).catch(error => onError(error));
+    });
+  }, [cartItems, paymentSchedule, customer]);
 
-  const submitEmbeddedPayzenForm = (): void => {
-    const button: HTMLButtonElement = document.querySelector('button.kr-payment-button');
-    button.setAttribute('type', 'button');
-    button.click()
+  /**
+   * Callback triggered on PayZen successful payments
+   */
+  const onPaid = (event) => {
+    if (event.clientAnswer.orderStatus === 'PAID') {
+      PayZenKR.current.removeForms();
+      onSuccess(event.clientAnswer);
+    } else {
+      onError(event.clientAnswer);
+    }
+  };
+
+  const handleFormReady = () => {
+    setLoading(false);
+  };
+
+  /**
+   * Callback triggered when the PayZen payment was refused
+   */
+  const handleError = (answer) => {
+    const message = `${answer.errorMessage}. ${answer.detailedErrorMessage ? answer.detailedErrorMessage : ''}`;
+    onError(message);
   }
 
   /**
@@ -62,20 +79,30 @@ export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onE
     event.preventDefault();
     onSubmit();
 
-
     try {
-      submitEmbeddedPayzenForm();
-      onSuccess(null);
+      const { result } = await PayZenKR.current.validateForm();
+      if (result === null) {
+        PayZenKR.current.onSubmit(onPaid);
+        PayZenKR.current.onError(handleError);
+        await PayZenKR.current.submit();
+      }
     } catch (err) {
       // catch api errors
       onError(err);
     }
-
   }
 
+  const Loader: FunctionComponent = () => {
+    return (
+      <div className="fa-3x loader">
+        <i className="fas fa-circle-notch fa-spin" />
+      </div>
+    );
+  };
 
   return (
     <form onSubmit={handleSubmit} id={formId} className={className ? className : ''}>
+      {loading && <Loader />}
       <div className="container">
         <div id="payzenPaymentForm" />
       </div>
