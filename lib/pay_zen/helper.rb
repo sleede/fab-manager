@@ -16,5 +16,12 @@ class PayZen::Helper
       end
       res
     end
+
+    def generate_ref(cart_items, customer)
+      require 'sha3'
+
+      content = { cart_items: cart_items, customer: customer }.to_json + DateTime.current.to_s
+      SHA3::Digest.hexdigest(:sha256, content)
+    end
   end
 end

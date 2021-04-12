@@ -3,6 +3,7 @@
 # API Controller for accessing PayZen API endpoints through the front-end app
 class API::PayzenController < API::PaymentsController
   require 'pay_zen/charge'
+  require 'pay_zen/helper'
 
   def sdk_test
     str = 'fab-manager'
@@ -17,8 +18,12 @@ class API::PayzenController < API::PaymentsController
 
   def create_payment
     amount = card_amount
+    @id = PayZen::Helper.generate_ref(cart_items_params, params[:customer])
 
     client = PayZen::Charge.new
-    @result = client.create_payment(amount: amount, customer: { reference: params[:customer][:id], email: params[:customer][:email] })
+    @result = client.create_payment(amount: amount[:amount],
+                                    order_id: @id,
+                                    customer: { reference: params[:customer][:id], email: params[:customer][:email] })
+    @result
   end
 end

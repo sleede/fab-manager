@@ -4,4 +4,5 @@ export interface SdkTestResponse {
 
 export interface CreatePaymentResponse {
   formToken: string
+  orderId: string
 }

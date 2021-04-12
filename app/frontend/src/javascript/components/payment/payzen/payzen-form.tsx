@@ -50,8 +50,8 @@ export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onE
   });
 
   const submitEmbeddedPayzenForm = (): void => {
-    // FIXME: not working...
     const button: HTMLButtonElement = document.querySelector('button.kr-payment-button');
+    button.setAttribute('type', 'button');
     button.click()
   }
 
