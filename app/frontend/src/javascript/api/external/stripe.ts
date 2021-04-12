@@ -1,4 +1,4 @@
-import stripeClient from './stripe-client';
+import stripeClient from '../clients/stripe-client';
 import { AxiosResponse } from 'axios';
 
 export default class StripeAPI {

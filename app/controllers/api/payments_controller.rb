@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# API Controller for handling payments process in the front-end
+# Abstract API Controller to be extended by each gateway, for handling the payments processes in the front-end
 class API::PaymentsController < API::ApiController
   before_action :authenticate_user!
 

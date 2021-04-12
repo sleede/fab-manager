@@ -26,7 +26,7 @@ module Events
 
       # Reserve the 'radio' event
       VCR.use_cassette('reserve_event_with_many_prices_and_payment_means') do
-        post '/api/payments/confirm_payment',
+        post '/api/stripe/confirm_payment',
              params: {
                payment_method_id: stripe_payment_method,
                cart_items: {

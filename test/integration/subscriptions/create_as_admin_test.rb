@@ -65,7 +65,7 @@ class Subscriptions::CreateAsAdminTest < ActionDispatch::IntegrationTest
     payment_schedule_items_count = PaymentScheduleItem.count
 
     VCR.use_cassette('subscriptions_admin_create_with_payment_schedule') do
-      get "/api/payments/setup_intent/#{user.id}"
+      get "/api/stripe/setup_intent/#{user.id}"
 
       # Check response format & status
       assert_equal 200, response.status, response.body
@@ -90,7 +90,7 @@ class Subscriptions::CreateAsAdminTest < ActionDispatch::IntegrationTest
       assert_equal 'off_session', stripe_res.usage
 
 
-      post '/api/payments/confirm_payment_schedule',
+      post '/api/stripe/confirm_payment_schedule',
            params: {
              setup_intent_id: setup_intent[:id],
              cart_items: {

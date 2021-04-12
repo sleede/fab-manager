@@ -4,7 +4,7 @@ import { HtmlTranslate } from '../../base/html-translate';
 import { FabInput } from '../../base/fab-input';
 import { Loader } from '../../base/loader';
 import { SettingName } from '../../../models/setting';
-import StripeAPI from '../../../api/stripe';
+import StripeAPI from '../../../api/external/stripe';
 import SettingAPI from '../../../api/setting';
 
 

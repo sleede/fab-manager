@@ -1,4 +1,4 @@
-import apiClient from './api-client';
+import apiClient from './clients/api-client';
 import { AxiosResponse } from 'axios';
 import { Setting, SettingBulkResult, SettingError, SettingName } from '../models/setting';
 import wrapPromise, { IWrapPromise } from '../lib/wrap-promise';

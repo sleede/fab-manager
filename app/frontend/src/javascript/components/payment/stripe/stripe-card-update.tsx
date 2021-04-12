@@ -3,7 +3,7 @@ import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { SetupIntent } from "@stripe/stripe-js";
 import { PaymentConfirmation } from '../../../models/payment';
 import { User } from '../../../models/user';
-import PaymentAPI from '../../../api/payment';
+import StripeAPI from '../../../api/stripe';
 
 interface StripeCardUpdateProps {
   onSubmit: () => void,
@@ -47,7 +47,7 @@ export const StripeCardUpdate: React.FC<StripeCardUpdateProps> = ({ onSubmit, on
     } else {
       try {
         // we start by associating the payment method with the user
-        const { client_secret } = await PaymentAPI.setupIntent(customerId);
+        const { client_secret } = await StripeAPI.setupIntent(customerId);
         const { error } = await stripe.confirmCardSetup(client_secret, {
           payment_method: paymentMethod.id,
           mandate_data: {
@@ -64,7 +64,7 @@ export const StripeCardUpdate: React.FC<StripeCardUpdateProps> = ({ onSubmit, on
           onError(error.message);
         } else {
           // then we update the default payment method
-          const res = await PaymentAPI.updateCard(customerId, paymentMethod.id);
+          const res = await StripeAPI.updateCard(customerId, paymentMethod.id);
           onSuccess(res);
         }
       } catch (err) {

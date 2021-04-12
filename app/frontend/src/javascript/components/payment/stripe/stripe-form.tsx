@@ -4,7 +4,7 @@ import { SetupIntent } from "@stripe/stripe-js";
 import { useTranslation } from 'react-i18next';
 import { CartItems, PaymentConfirmation } from '../../../models/payment';
 import { User } from '../../../models/user';
-import PaymentAPI from '../../../api/payment';
+import StripeAPI from '../../../api/stripe';
 
 interface StripeFormProps {
   onSubmit: () => void,
@@ -53,11 +53,11 @@ export const StripeForm: React.FC<StripeFormProps> = ({ onSubmit, onSuccess, onE
       try {
         if (!paymentSchedule) {
           // process the normal payment pipeline, including SCA validation
-          const res = await PaymentAPI.confirm(paymentMethod.id, cartItems);
+          const res = await StripeAPI.confirm(paymentMethod.id, cartItems);
           await handleServerConfirmation(res);
         } else {
           // we start by associating the payment method with the user
-          const { client_secret } = await PaymentAPI.setupIntent(customer.id);
+          const { client_secret } = await StripeAPI.setupIntent(customer.id);
           const { setupIntent, error } = await stripe.confirmCardSetup(client_secret, {
             payment_method: paymentMethod.id,
             mandate_data: {
@@ -74,7 +74,7 @@ export const StripeForm: React.FC<StripeFormProps> = ({ onSubmit, onSuccess, onE
             onError(error.message);
           } else {
             // then we confirm the payment schedule
-            const res = await PaymentAPI.confirmPaymentSchedule(setupIntent.id, cartItems);
+            const res = await StripeAPI.confirmPaymentSchedule(setupIntent.id, cartItems);
             onSuccess(res);
           }
         }
@@ -108,7 +108,7 @@ export const StripeForm: React.FC<StripeFormProps> = ({ onSubmit, onSuccess, onE
         // The card action has been handled
         // The PaymentIntent can be confirmed again on the server
         try {
-          const confirmation = await PaymentAPI.confirm(result.paymentIntent.id, cartItems);
+          const confirmation = await StripeAPI.confirm(result.paymentIntent.id, cartItems);
           await handleServerConfirmation(confirmation);
         } catch (e) {
           onError(e);

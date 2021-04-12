@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# API Controller for handling payments process in the front-end
+# API Controller for handling the payments process in the front-end, using the Stripe gateway
 class API::StripeController < API::PaymentsController
 
   ##
