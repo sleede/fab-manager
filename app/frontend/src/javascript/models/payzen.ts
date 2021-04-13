@@ -160,15 +160,16 @@ export interface KryptonFocus {
 }
 
 export interface KryptonConfig {
-  'kr-public-key': string,
-  'kr-language': string,
-  'kr-post-url-success': string,
-  'kr-get-url-success': string,
-  'kr-post-url-refused': string,
-  'kr-get-url-refused': string,
-  'kr-clear-on-error': boolean,
-  'kr-hide-debug-toolbar': boolean,
-  'kr-spa-mode': boolean
+  formToken?: string,
+  'kr-public-key'?: string,
+  'kr-language'?: string,
+  'kr-post-url-success'?: string,
+  'kr-get-url-success'?: string,
+  'kr-post-url-refused'?: string,
+  'kr-get-url-refused'?: string,
+  'kr-clear-on-error'?: boolean,
+  'kr-hide-debug-toolbar'?: boolean,
+  'kr-spa-mode'?: boolean
 }
 
 type DefaultCallback = () => void
