@@ -7,6 +7,7 @@ import SettingAPI from '../../../api/setting';
 import { SettingName } from '../../../models/setting';
 import PayzenAPI from '../../../api/payzen';
 import { Loader } from '../../base/loader';
+import { KryptonClient, KryptonError, ProcessPaymentAnswer } from '../../../models/payzen';
 
 interface PayzenFormProps {
   onSubmit: () => void,
@@ -27,8 +28,8 @@ interface PayzenFormProps {
 export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onError, children, className, paymentSchedule = false, cartItems, customer, operator, formId }) => {
 
   const { t } = useTranslation('shared');
-  const PayZenKR = useRef(null);
-  const [loading, setLoading] = useState(true);
+  const PayZenKR = useRef<KryptonClient>(null);
+  const [loadingClass, setLoadingClass] = useState<'hidden' | 'loader' | 'loader-overlay'>('loader');
 
   useEffect(() => {
     const api = new SettingAPI();
@@ -43,6 +44,7 @@ export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onE
           .then(({ KR }) => KR.addForm("#payzenPaymentForm"))
           .then(({ KR, result }) => KR.showForm(result.formId))
           .then(({ KR }) => KR.onFormReady(handleFormReady))
+          .then(({ KR }) => KR.onFormCreated(handleFormCreated))
           .then(({ KR }) => PayZenKR.current = KR);
       }).catch(error => onError(error));
     });
@@ -51,23 +53,36 @@ export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onE
   /**
    * Callback triggered on PayZen successful payments
    */
-  const onPaid = (event) => {
+  const onPaid = (event: ProcessPaymentAnswer): boolean => {
     if (event.clientAnswer.orderStatus === 'PAID') {
       PayZenKR.current.removeForms();
       onSuccess(event.clientAnswer);
     } else {
-      onError(event.clientAnswer);
+      const transaction = event.clientAnswer.transactions[0];
+      const error = `${transaction?.errorMessage}. ${transaction?.detailedErrorMessage || ''}`;
+      onError(error || event.clientAnswer.orderStatus);
     }
+    return true;
   };
 
+  /**
+   * Callback triggered when the PayZen form was entirely loaded and displayed
+   */
   const handleFormReady = () => {
-    setLoading(false);
+    setLoadingClass('hidden');
   };
+
+  /**
+   * Callback triggered when the PayZen form has started to show up but is not entirely loaded
+   */
+  const handleFormCreated = () => {
+    setLoadingClass('loader-overlay');
+  }
 
   /**
    * Callback triggered when the PayZen payment was refused
    */
-  const handleError = (answer) => {
+  const handleError = (answer: KryptonError) => {
     const message = `${answer.errorMessage}. ${answer.detailedErrorMessage ? answer.detailedErrorMessage : ''}`;
     onError(message);
   }
@@ -82,8 +97,8 @@ export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onE
     try {
       const { result } = await PayZenKR.current.validateForm();
       if (result === null) {
-        PayZenKR.current.onSubmit(onPaid);
-        PayZenKR.current.onError(handleError);
+        await PayZenKR.current.onSubmit(onPaid);
+        await PayZenKR.current.onError(handleError);
         await PayZenKR.current.submit();
       }
     } catch (err) {
@@ -94,7 +109,7 @@ export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onE
 
   const Loader: FunctionComponent = () => {
     return (
-      <div className="fa-3x loader">
+      <div className={`fa-3x ${loadingClass}`}>
         <i className="fas fa-circle-notch fa-spin" />
       </div>
     );
@@ -102,7 +117,7 @@ export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onE
 
   return (
     <form onSubmit={handleSubmit} id={formId} className={className ? className : ''}>
-      {loading && <Loader />}
+      <Loader />
       <div className="container">
         <div id="payzenPaymentForm" />
       </div>

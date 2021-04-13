@@ -1,7 +1,16 @@
 .payzen-modal {
   .payzen-form {
+    .hidden {
+      display: none;
+    }
     .loader {
       text-align: center;
+    }
+    .loader-overlay {
+      position: absolute;
+      top: 65px;
+      left: 190px;
+      z-index: 1;
     }
     .container {
       display: flex;
