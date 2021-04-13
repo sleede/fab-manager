@@ -7,6 +7,10 @@ export interface CreatePaymentResponse {
   orderId: string
 }
 
+export interface ConfirmPaymentResponse {
+  todo?: any
+}
+
 export interface OrderDetails {
   mode?: 'TEST' | 'PRODUCTION',
   orderCurrency?: string,

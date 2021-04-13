@@ -182,6 +182,7 @@ Rails.application.routes.draw do
     ## PayZen gateway
     post 'payzen/sdk_test' => 'payzen#sdk_test'
     post 'payzen/create_payment' => 'payzen#create_payment'
+    post 'payzen/confirm_payment' => 'payzen#confirm_payment'
 
     # FabAnalytics
     get 'analytics/data' => 'analytics#data'

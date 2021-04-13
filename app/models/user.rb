@@ -330,6 +330,10 @@ class User < ApplicationRecord
     )
   end
 
+  def organization?
+    !invoicing_profile.organization.nil?
+  end
+
   protected
 
   # remove projects drafts that are not linked to another user

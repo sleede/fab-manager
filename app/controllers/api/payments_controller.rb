@@ -4,6 +4,12 @@
 class API::PaymentsController < API::ApiController
   before_action :authenticate_user!
 
+
+  # This method must be overridden by the the gateways controllers that inherits API::PaymentsControllers
+  def confirm_payment
+    raise NoMethodError
+  end
+
   protected
 
   def get_wallet_debit(user, total_amount)
