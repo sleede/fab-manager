@@ -28,32 +28,36 @@ class API::PayzenController < API::PaymentsController
     @result
   end
 
+  def check_hash
+    @result = PayZen::Helper.check_hash(params[:algorithm], params[:hash_key], params[:hash], params[:data])
+  end
+
   def confirm_payment
     render(json: { error: 'Bad gateway or online payment is disabled' }, status: :bad_gateway) and return unless PayZen::Helper.enabled?
 
     client = PayZen::Order.new
-    order = client.get(params[:order_id])
+    order = client.get(params[:order_id], operation_type: 'DEBIT')
 
     amount = card_amount
 
-    if order[:transactions].first.status == 'PAID'
+    if order['answer']['transactions'].first['status'] == 'PAID'
       if params[:cart_items][:reservation]
-        res = on_reservation_success(intent, amount[:details])
+        res = on_reservation_success(params[:order_id], amount[:details])
       elsif params[:cart_items][:subscription]
-        res = on_subscription_success(intent, amount[:details])
+        res = on_subscription_success(params[:order_id], amount[:details])
       end
     end
 
-    render generate_payment_response(intent, res)
+    render res
   rescue StandardError => e
     render json: e, status: :unprocessable_entity
   end
 
   private
 
-  def on_reservation_success(intent, details)
+  def on_reservation_success(order_id, details)
     @reservation = Reservation.new(reservation_params)
-    payment_method = params[:cart_items][:reservation][:payment_method] || 'stripe'
+    payment_method = params[:cart_items][:reservation][:payment_method] || 'payzen'
     user_id = if current_user.admin? || current_user.manager?
                 params[:cart_items][:reservation][:user_id]
               else
@@ -62,17 +66,9 @@ class API::PayzenController < API::PaymentsController
     is_reserve = Reservations::Reserve.new(user_id, current_user.invoicing_profile.id)
                                       .pay_and_save(@reservation,
                                                     payment_details: details,
-                                                    intent_id: intent.id,
+                                                    intent_id: order_id, # TODO: change to gateway_id
                                                     schedule: params[:cart_items][:reservation][:payment_schedule],
                                                     payment_method: payment_method)
-    if intent.class == Stripe::PaymentIntent
-      Stripe::PaymentIntent.update(
-        intent.id,
-        { description: "Invoice reference: #{@reservation.invoice.reference}" },
-        { api_key: Setting.get('stripe_secret_key') }
-      )
-    end
-
     if is_reserve
       SubscriptionExtensionAfterReservation.new(@reservation).extend_subscription_if_eligible
 
@@ -82,7 +78,7 @@ class API::PayzenController < API::PaymentsController
     end
   end
 
-  def on_subscription_success(intent, details)
+  def on_subscription_success(order_id, details)
     @subscription = Subscription.new(subscription_params)
     user_id = if current_user.admin? || current_user.manager?
                 params[:cart_items][:subscription][:user_id]
@@ -92,16 +88,9 @@ class API::PayzenController < API::PaymentsController
     is_subscribe = Subscriptions::Subscribe.new(current_user.invoicing_profile.id, user_id)
                                            .pay_and_save(@subscription,
                                                          payment_details: details,
-                                                         intent_id: intent.id,
+                                                         intent_id: order_id, # TODO: change to gateway_id
                                                          schedule: params[:cart_items][:subscription][:payment_schedule],
-                                                         payment_method: 'stripe')
-    if intent.class == Stripe::PaymentIntent
-      Stripe::PaymentIntent.update(
-        intent.id,
-        { description: "Invoice reference: #{@subscription.invoices.first.reference}" },
-        { api_key: Setting.get('stripe_secret_key') }
-      )
-    end
+                                                         payment_method: 'payzen')
 
     if is_subscribe
       { template: 'api/subscriptions/show', status: :created, location: @subscription }

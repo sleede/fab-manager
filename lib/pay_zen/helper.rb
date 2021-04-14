@@ -23,7 +23,8 @@ class PayZen::Helper
       require 'sha3'
 
       content = { cart_items: cart_items, customer: customer }.to_json + DateTime.current.to_s
-      SHA3::Digest.hexdigest(:sha256, content)[0...12]
+      # It's safe to truncate a hash. See https://crypto.stackexchange.com/questions/74646/sha3-255-one-bit-less
+      SHA3::Digest.hexdigest(:sha224, content)[0...24]
     end
 
     ## Generate a hash map compatible with PayZen 'V4/Customer/Customer'
@@ -49,6 +50,30 @@ class PayZen::Helper
           shippingMethod: 'ETICKET'
         }
       }
+    end
+
+    ## Check the PayZen signature for integrity
+    def check_hash(algorithm, hash_key, hash_proof, data, key = nil)
+      supported_hash_algorithm = ['sha256_hmac']
+
+      # check if the hash algorithm is supported
+      raise PayzenError("hash algorithm not supported: #{algorithm}. Update your SDK") unless supported_hash_algorithm.include? algorithm
+
+      # if key is not defined, we use kr-hash-key parameter to choose it
+      if key.nil?
+        if hash_key == 'sha256_hmac'
+          key = Setting.get('payzen_hmac')
+        elsif hash_key == 'password'
+          key = Setting.get('payzen_password')
+        else
+          raise PayzenError('invalid hash-key parameter')
+        end
+      end
+
+      hash = OpenSSL::HMAC.hexdigest('SHA256', key, data)
+
+      # return true if calculated hash and sent hash are the same
+      hash == hash_proof
     end
   end
 end

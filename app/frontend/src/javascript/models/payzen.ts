@@ -11,6 +11,10 @@ export interface ConfirmPaymentResponse {
   todo?: any
 }
 
+export interface CheckHashResponse {
+  validity: boolean
+}
+
 export interface OrderDetails {
   mode?: 'TEST' | 'PRODUCTION',
   orderCurrency?: string,

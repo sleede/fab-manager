@@ -12,7 +12,7 @@ class PayZen::Order < PayZen::Client
   # @see https://payzen.io/en-EN/rest/V4.0/api/playground/Order/Get/
   ##
   def get(order_id, operation_type: nil)
-    post('/Transaction/Get/', orderId: order_id, operationType: operation_type)
+    post('/Order/Get/', orderId: order_id, operationType: operation_type)
   end
 
 end
