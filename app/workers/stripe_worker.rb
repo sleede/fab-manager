@@ -2,10 +2,13 @@
 
 # This worker perform various requests to the Stripe API (payment service)
 class StripeWorker
+  require 'stripe/helper'
   include Sidekiq::Worker
   sidekiq_options queue: :stripe
 
   def perform(action, *params)
+    return false unless Stripe::Helper.enabled?
+
     send(action, *params)
   end
 

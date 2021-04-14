@@ -2,6 +2,7 @@
 
 # API Controller for handling the payments process in the front-end, using the Stripe gateway
 class API::StripeController < API::PaymentsController
+  require 'stripe/helper'
 
   ##
   # Client requests to confirm a card payment will ask this endpoint.
@@ -9,7 +10,7 @@ class API::StripeController < API::PaymentsController
   # was successfully made. After the payment was made, the reservation/subscription will be created
   ##
   def confirm_payment
-    render(json: { error: 'Online payment is disabled' }, status: :unauthorized) and return unless Setting.get('online_payment_module')
+    render(json: { error: 'Bad gateway or online payment is disabled' }, status: :bad_gateway) and return unless Stripe::Helper.enabled?
 
     amount = nil # will contains the amount and the details of each invoice lines
     intent = nil # stripe's payment intent
