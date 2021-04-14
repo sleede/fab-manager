@@ -40,7 +40,7 @@
       Fablab.statisticsModule = ('<%= Setting.get('statistics_module') %>' === 'true');
       Fablab.defaultHost = "<%= Rails.application.secrets.default_host %>";
       Fablab.trackingId = "<%= Setting.get('tracking_id') %>";
-      Fablab.superadminId = parseInt("<%= User.superadmin&.id %>", 10);
+      Fablab.adminSysId = parseInt("<%= User.adminsys&.id %>", 10);
       Fablab.baseHostUrl = "<%= Rails.application.secrets.default_host %>";
 
       // i18n stuff

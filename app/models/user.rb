@@ -113,10 +113,10 @@ class User < ApplicationRecord
     User.with_any_role(:manager, :member)
   end
 
-  def self.superadmin
-    return unless Rails.application.secrets.superadmin_email.present?
+  def self.adminsys
+    return unless Rails.application.secrets.adminsys_email.present?
 
-    User.find_by(email: Rails.application.secrets.superadmin_email)
+    User.find_by(email: Rails.application.secrets.adminsys_email)
   end
 
   def training_machine?(machine)
