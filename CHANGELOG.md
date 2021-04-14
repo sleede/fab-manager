@@ -3,8 +3,11 @@
 ## Next release
 - Updated React and its dependencies to 17.0.3 and matching
 - Fix a bug: unable to set date formats during installation
+- Fix a bug: unable to cancel the upgrade before it begins
+- `SUPERADMIN_EMAIL` renamed to `ADMINSYS_EMAIL`
 - [TODO DEPLOY] `rails fablab:stripe:set_gateway`
 - [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
+- [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/rename-adminsys.sh | bash`
 
 ## v4.7.9
 - Updated dependency to OpenLab

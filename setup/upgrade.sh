@@ -123,8 +123,9 @@ compile_assets()
 upgrade()
 {
   [[ "$YES_ALL" = "true" ]] && confirm="y" || read -rp "Proceed with the upgrade? (Y/n) " confirm </dev/tty
-  if [[ "$confirm" == "n" ]]; then exit 2; fi
+  if [[ "$confirm" = "n" ]]; then exit 2; fi
 
+  add_environments
   docker-compose pull "$SERVICE"
   if [[ $? = 1 ]]; then
     printf "An error occured, detected service name: %s\nExiting...", "$SERVICE"
@@ -184,7 +185,6 @@ proceed()
   parseparams "$@"
   config
   version_check
-  add_environments
   upgrade
   clean
 }
