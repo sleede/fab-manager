@@ -66,7 +66,7 @@ class API::PayzenController < API::PaymentsController
     is_reserve = Reservations::Reserve.new(user_id, current_user.invoicing_profile.id)
                                       .pay_and_save(@reservation,
                                                     payment_details: details,
-                                                    intent_id: order_id, # TODO: change to gateway_id
+                                                    payment_id: order_id,
                                                     schedule: params[:cart_items][:reservation][:payment_schedule],
                                                     payment_method: payment_method)
     if is_reserve

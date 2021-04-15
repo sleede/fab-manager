@@ -363,7 +363,7 @@ angular.module('application.router', ['ui.router'])
             return Setting.query({
               names: "['machine_explications_alert', 'booking_window_start',  'booking_window_end',  'booking_move_enable', " +
                      "'booking_move_delay', 'booking_cancel_enable',  'booking_cancel_delay', 'subscription_explications_alert', " +
-                     "'online_payment_module']"
+                     "'online_payment_module', 'payment_gateway']"
             }).$promise;
           }]
         }
@@ -449,7 +449,7 @@ angular.module('application.router', ['ui.router'])
             return Setting.query({
               names: "['booking_window_start', 'booking_window_end', 'booking_move_enable',  'booking_move_delay', " +
                      "'booking_cancel_enable', 'booking_cancel_delay', 'subscription_explications_alert',  " +
-                     "'space_explications_alert', 'online_payment_module']"
+                     "'space_explications_alert', 'online_payment_module', 'payment_gateway']"
             }).$promise;
           }]
         }
@@ -502,7 +502,8 @@ angular.module('application.router', ['ui.router'])
             return Setting.query({
               names: "['booking_window_start', 'booking_window_end', 'booking_move_enable', 'booking_move_delay', " +
                      "'booking_cancel_enable', 'booking_cancel_delay', 'subscription_explications_alert', " +
-                     "'training_explications_alert', 'training_information_message', 'online_payment_module']"
+                     "'training_explications_alert', 'training_information_message', 'online_payment_module', " +
+                     "'payment_gateway']"
             }).$promise;
           }]
         }
@@ -532,7 +533,7 @@ angular.module('application.router', ['ui.router'])
           subscriptionExplicationsPromise: ['Setting', function (Setting) { return Setting.get({ name: 'subscription_explications_alert' }).$promise; }],
           plansPromise: ['Plan', function (Plan) { return Plan.query().$promise; }],
           groupsPromise: ['Group', function (Group) { return Group.query().$promise; }],
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['online_payment_module']" }).$promise; }]
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['online_payment_module', 'payment_gateway']" }).$promise; }]
         }
       })
 

@@ -696,6 +696,94 @@ history_value_73:
 
 value_history_74:
   id: 74
+  setting_id: 74
+  invoicing_profile_id: 1
+  value: until_start
+  created_at: 2020-04-15 14:38:40.000421500 Z
+  updated_at: 2020-04-15 14:38:40.000421500 Z
+
+value_history_75:
+  id: 75
+  setting_id: 75
+  invoicing_profile_id: 1
+  value: FabManager_paymentSchedule
+  created_at: 2020-04-15 14:38:40.000421500 Z
+  updated_at: 2020-04-15 14:38:40.000421500 Z
+
+value_history_76:
+  id: 76
+  setting_id: 76
+  invoicing_profile_id: 1
+  value: true
+  created_at: 2020-04-15 14:38:40.000421500 Z
+  updated_at: 2020-04-15 14:38:40.000421500 Z
+
+value_history_77:
+  id: 77
+  setting_id: 77
+  invoicing_profile_id: 1
+  value: false
+  created_at: 2020-04-15 14:38:40.000421500 Z
+  updated_at: 2020-04-15 14:38:40.000421500 Z
+
+value_history_78:
+  id: 78
+  setting_id: 78
+  invoicing_profile_id: 1
+  value: stripe
+  created_at: 2020-04-15 14:38:40.000421500 Z
+  updated_at: 2020-04-15 14:38:40.000421500 Z
+
+value_history_79:
+  id: 79
+  setting_id: 79
+  invoicing_profile_id: 1
+  value:
+  created_at: 2020-04-15 14:38:40.000421500 Z
+  updated_at: 2020-04-15 14:38:40.000421500 Z
+
+value_history_80:
+  id: 80
+  setting_id: 80
+  invoicing_profile_id: 1
+  value:
+  created_at: 2020-04-15 14:38:40.000421500 Z
+  updated_at: 2020-04-15 14:38:40.000421500 Z
+
+value_history_81:
+  id: 81
+  setting_id: 81
+  invoicing_profile_id: 1
+  value:
+  created_at: 2020-04-15 14:38:40.000421500 Z
+  updated_at: 2020-04-15 14:38:40.000421500 Z
+
+value_history_82:
+  id: 82
+  setting_id: 82
+  invoicing_profile_id: 1
+  value:
+  created_at: 2020-04-15 14:38:40.000421500 Z
+  updated_at: 2020-04-15 14:38:40.000421500 Z
+
+value_history_83:
+  id: 83
+  setting_id: 83
+  invoicing_profile_id: 1
+  value:
+  created_at: 2020-04-15 14:38:40.000421500 Z
+  updated_at: 2020-04-15 14:38:40.000421500 Z
+
+value_history_84:
+  id: 84
+  setting_id: 84
+  invoicing_profile_id: 1
+  value:
+  created_at: 2020-04-15 14:38:40.000421500 Z
+  updated_at: 2020-04-15 14:38:40.000421500 Z
+
+value_history_85:
+  id: 85
   setting_id: 10
   invoicing_profile_id: 1
   value: YYMMmmmX[/VL]R[/A]S[/E]

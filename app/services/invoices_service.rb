@@ -66,19 +66,24 @@ class InvoicesService
   # @param operator_profile_id {Number} ID of the user that operates the invoice generation (may be an admin, a manager or the customer himself)
   # @param reservation {Reservation} the booking reservation, if any
   # @param subscription {Subscription} the booking subscription, if any
-  # @param payment_intent_id {String} ID of the Stripe::PaymentIntend, if the current invoice is paid by stripe
+  # @param payment_id {String} ID of the payment, a returned by the gateway, if the current invoice is paid by card
+  # @param payment_method {String} the payment method used
   ##
-  def self.create(payment_details, operator_profile_id, reservation: nil, subscription: nil, payment_intent_id: nil)
+  def self.create(payment_details, operator_profile_id, reservation: nil, subscription: nil, payment_id: nil, payment_method: nil)
     user = reservation&.user || subscription&.user
     operator = InvoicingProfile.find(operator_profile_id)&.user
-    method = operator&.admin? || (operator&.manager? && operator != user) ? nil : 'stripe'
+    method = if payment_method
+               payment_method
+             else
+               operator&.admin? || (operator&.manager? && operator != user) ? nil : Setting.get('payment_gateway')
+             end
 
     invoice = Invoice.new(
       invoiced: subscription || reservation,
       invoicing_profile: user.invoicing_profile,
       statistic_profile: user.statistic_profile,
       operator_profile_id: operator_profile_id,
-      stp_payment_intent_id: payment_intent_id,
+      stp_payment_intent_id: payment_id,
       payment_method: method
     )
 

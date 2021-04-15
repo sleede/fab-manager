@@ -199,11 +199,11 @@
   </div>
 
 </div>
-<div ng-if="stripe.showModal">
-  <payment-modal is-open="stripe.showModal"
-                 toggle-modal="toggleStripeModal"
-                 after-success="afterStripeSuccess"
-                 cart-items="stripe.cartItems"
+<div ng-if="onlinePayment.showModal">
+  <payment-modal is-open="onlinePayment.showModal"
+                 toggle-modal="toggleOnlinePaymentModal"
+                 after-success="afterOnlinePaymentSuccess"
+                 cart-items="onlinePayment.cartItems"
                  current-user="currentUser"
                  customer="user"
                  schedule="schedule.payment_schedule"/>

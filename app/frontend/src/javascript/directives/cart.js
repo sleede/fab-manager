@@ -73,8 +73,8 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
           payment_schedule: undefined // the effective computed payment schedule
         };
 
-        // online payments (stripe)
-        $scope.stripe = {
+        // online payments (by card)
+        $scope.onlinePayment = {
           showModal: false,
           cartItems: undefined
         };
@@ -313,11 +313,11 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
         };
 
         /**
-         * This will open/close the stripe payment modal
+         * This will open/close the online payment modal
          */
-        $scope.toggleStripeModal = (beforeApply) => {
+        $scope.toggleOnlinePaymentModal = (beforeApply) => {
           setTimeout(() => {
-            $scope.stripe.showModal = !$scope.stripe.showModal;
+            $scope.onlinePayment.showModal = !$scope.onlinePayment.showModal;
             if (typeof beforeApply === 'function') {
               beforeApply();
             }
@@ -326,11 +326,11 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
         };
 
         /**
-         * Invoked atfer a successful Stripe payment
+         * Invoked atfer a successful card payment
          * @param result {*} may be a reservation or a subscription
          */
-        $scope.afterStripeSuccess = (result) => {
-          $scope.toggleStripeModal();
+        $scope.afterOnlinePaymentSuccess = (result) => {
+          $scope.toggleOnlinePaymentModal();
           afterPayment(result);
         };
 
@@ -682,7 +682,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
          * @param planId {number}
          * @param userId {number}
          * @param schedule {boolean}
-         * @param method {String} 'stripe' | ''
+         * @param method {String} 'stripe' | 'payzen' | ''
          * @return {{subscription: {payment_schedule: boolean, user_id: number, plan_id: number}}}
          */
         const mkSubscription = function (planId, userId, schedule, method) {
@@ -715,13 +715,13 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
         /**
          * Open a modal window that allows the user to process a credit card payment for his current shopping cart.
          */
-        const payByStripe = function (reservation) {
+        const payOnline = function (reservation) {
           // check that the online payment is enabled
           if ($scope.settings.online_payment_module !== 'true') {
             growl.error(_t('app.shared.cart.online_payment_disabled'));
           } else {
-            $scope.toggleStripeModal(() => {
-              $scope.stripe.cartItems = mkCartItems(reservation, 'stripe');
+            $scope.toggleOnlinePaymentModal(() => {
+              $scope.onlinePayment.cartItems = mkCartItems(reservation, $scope.settings.payment_gateway);
             });
           }
         };
@@ -740,7 +740,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                 return Price.compute(mkRequestParams({ reservation }, $scope.coupon.applied)).$promise;
               },
               cartItems () {
-                return mkCartItems(reservation, 'stripe');
+                return mkCartItems(reservation, $scope.settings.payment_gateway);
               },
               wallet () {
                 return Wallet.getWalletByUser({ user_id: reservation.user_id }).$promise;
@@ -787,15 +787,15 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
 
                 // how should we collect payments for the payment schedule
                 $scope.method = {
-                  payment_method: 'stripe'
+                  payment_method: settings.payment_gateway
                 };
 
                 // "valid" Button label
                 $scope.validButtonName = '';
 
-                // stripe modal state
+                // online payment modal state
                 // this is used to collect card data when a payment-schedule was selected, and paid with a card
-                $scope.isOpenStripeModal = false;
+                $scope.isOpenOnlinePaymentModal = false;
 
                 // the customer
                 $scope.user = user;
@@ -804,12 +804,12 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                  * Callback to process the local payment, triggered on button click
                  */
                 $scope.ok = function () {
-                  if ($scope.schedule && $scope.method.payment_method === 'stripe') {
+                  if ($scope.schedule && $scope.method.payment_method === settings.payment_gateway) {
                     // check that the online payment is enabled
                     if (settings.online_payment_module !== 'true') {
                       return growl.error(_t('app.shared.cart.online_payment_disabled'));
                     } else {
-                      return $scope.toggleStripeModal();
+                      return $scope.toggleOnlinePaymentModal();
                     }
                   }
                   $scope.attempting = true;
@@ -844,11 +844,11 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                 $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
 
                 /**
-                 * Asynchronously updates the status of the stripe modal
+                 * Asynchronously updates the status of the online payment modal
                  */
-                $scope.toggleStripeModal = function () {
+                $scope.toggleOnlinePaymentModal = function () {
                   setTimeout(() => {
-                    $scope.isOpenStripeModal = !$scope.isOpenStripeModal;
+                    $scope.isOpenOnlinePaymentModal = !$scope.isOpenOnlinePaymentModal;
                     $scope.$apply();
                   }, 50);
                 };
@@ -858,7 +858,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                  * @param result {*} Reservation or Subscription
                  */
                 $scope.afterCreatePaymentSchedule = function (result) {
-                  $scope.toggleStripeModal();
+                  $scope.toggleOnlinePaymentModal();
                   $uibModalInstance.close(result);
                 };
 
@@ -883,7 +883,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                     if (AuthService.isAuthorized(['admin', 'manager']) && $rootScope.currentUser.id !== reservation.user_id) {
                       method = $scope.method.payment_method;
                     } else {
-                      method = 'stripe';
+                      method = settings.payment_gateway;
                     }
                   }
                   if ($scope.amount > 0) {
@@ -931,7 +931,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
         };
 
         /**
-         * Actions to pay slots
+         * Actions to pay slots (or subscription)
          */
         const paySlots = function () {
           const reservation = mkReservation($scope.user, $scope.events.reserved, $scope.selectedPlan);
@@ -940,7 +940,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
             const amountToPay = helpers.getAmountToPay($scope.amountTotal, wallet.amount);
             if ((AuthService.isAuthorized(['member']) && (amountToPay > 0 || (amountToPay === 0 && hasOtherDeadlines()))) ||
               (AuthService.isAuthorized('manager') && $scope.user.id === $rootScope.currentUser.id && amountToPay > 0)) {
-              return payByStripe(reservation);
+              return payOnline(reservation);
             } else {
               if (AuthService.isAuthorized(['admin']) ||
                 (AuthService.isAuthorized('manager') && $scope.user.id !== $rootScope.currentUser.id) ||

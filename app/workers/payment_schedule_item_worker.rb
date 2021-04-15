@@ -25,7 +25,7 @@ class PaymentScheduleItemWorker
       stp_invoice = Stripe::Invoice.retrieve(stp_subscription.latest_invoice, api_key: stripe_key)
       if stp_invoice.status == 'paid'
         ##### Stripe / Successfully paid
-        PaymentScheduleService.new.generate_invoice(psi, stp_invoice)
+        PaymentScheduleService.new.generate_invoice(psi, payment_method: 'stripe', payment_id: stp_invoice.payment_intent)
         psi.update_attributes(state: 'paid', payment_method: 'stripe', stp_invoice_id: stp_invoice.id)
       elsif stp_subscription.status == 'past_due' || stp_invoice.status == 'open'
         ##### Stripe / Payment error
