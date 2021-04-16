@@ -8,6 +8,7 @@ class Subscription < ApplicationRecord
   belongs_to :statistic_profile
 
   has_one :payment_schedule, as: :scheduled, dependent: :destroy
+  has_one :payment_gateway_object
   has_many :invoices, as: :invoiced, dependent: :destroy
   has_many :offer_days, dependent: :destroy
 

@@ -14,7 +14,7 @@ class PaymentScheduleItem < Footprintable
 
   def payment_intent
     return unless payment_gateway_object
-
+    # FIXME
     key = Setting.get('stripe_secret_key')
     stp_invoice = Stripe::Invoice.retrieve(stp_invoice_id, api_key: key)
     Stripe::PaymentIntent.retrieve(stp_invoice.payment_intent, api_key: key)

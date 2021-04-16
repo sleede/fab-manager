@@ -16,6 +16,7 @@ class PaymentSchedule < PaymentDocument
   belongs_to :reservation, foreign_type: 'Reservation', foreign_key: 'scheduled_id'
 
   has_many :payment_schedule_items
+  has_many :payment_gateway_object
 
   before_create :add_environment
   after_create :update_reference, :chain_record
@@ -57,8 +58,8 @@ class PaymentSchedule < PaymentDocument
     File.binwrite(file, pdf)
   end
 
-  def check_footprint
-    payment_schedule_items.map(&:check_footprint).all? && footprint == compute_footprint
+  def footprint_children
+    payment_schedule_items
   end
 
   def post_save(setup_intent_id)

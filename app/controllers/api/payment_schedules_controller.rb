@@ -53,7 +53,7 @@ class API::PaymentSchedulesController < API::ApiController
 
   def pay_item
     authorize @payment_schedule_item.payment_schedule
-
+    # FIXME
     stripe_key = Setting.get('stripe_secret_key')
     stp_invoice = Stripe::Invoice.pay(@payment_schedule_item.stp_invoice_id, {}, { api_key: stripe_key })
     PaymentScheduleItemWorker.new.perform(@payment_schedule_item.id)

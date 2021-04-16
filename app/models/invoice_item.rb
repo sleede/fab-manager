@@ -6,6 +6,7 @@ class InvoiceItem < Footprintable
   belongs_to :subscription
 
   has_one :invoice_item # associates invoice_items of an invoice to invoice_items of an Avoir
+  has_one :payment_gateway_object
 
   after_create :chain_record
   after_update :log_changes

@@ -102,7 +102,7 @@ namespace :fablab do
         klass.all.each do |item|
           FootprintDebug.create!(
             footprint: item.footprint,
-            data: FootprintService.footprint_data(klass, item, klass == 'HistoryValue' ? 'created_at' : 'id'),
+            data: FootprintService.footprint_data(klass, item),
             klass: klass
           )
         end

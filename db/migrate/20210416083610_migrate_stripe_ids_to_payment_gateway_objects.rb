@@ -114,6 +114,19 @@ class MigrateStripeIdsToPaymentGatewayObjects < ActiveRecord::Migration[5.2]
       end
     end
 
+    ## USERS
+    puts 'Migrating users. This may take a while...'
+    User.order(:id).all.each do |u|
+      next unless u.stp_customer_id
+
+      PaymentGatewayObject.create!(
+        item: u,
+        gateway_object_id: u.stp_customer_id,
+        gateway_object_type: 'Stripe::Customer'
+      )
+    end
+    remove_column :users, :stp_customer_id
+
     # chain all records
     InvoiceItem.order(:id).all.each(&:chain_record)
     Invoice.order(:id).all.each(&:chain_record)
@@ -138,6 +151,7 @@ class MigrateStripeIdsToPaymentGatewayObjects < ActiveRecord::Migration[5.2]
     add_column :payment_schedules, :stp_subscription_id, :string
     add_column :payment_schedules, :stp_setup_intent_id, :string
     add_column :payment_schedule_items, :stp_invoice_id, :string
+    add_column :users, :stp_customer_id, :string
     [Plan, Machine, Space, Training].each do |klass|
       add_column klass.arel_table.name, :stp_product_id, :string
     end
@@ -155,6 +169,8 @@ class MigrateStripeIdsToPaymentGatewayObjects < ActiveRecord::Migration[5.2]
                'stp_invoice_item_id'
              when 'Stripe::PaymentIntent'
                'stp_payment_intent_id'
+             when 'Stripe::Customer'
+               'stp_customer_id'
              else
                raise "Unknown gateway_object_type #{pgo.gateway_object_type}"
              end

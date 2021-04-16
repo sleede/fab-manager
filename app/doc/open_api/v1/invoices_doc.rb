@@ -16,6 +16,7 @@ class OpenAPI::V1::InvoicesDoc < OpenAPI::V1::BaseDoc
     description "Index of users' invoices, with optional pagination. Order by *created_at* descendant."
     param_group :pagination
     param :user_id, [Integer, Array], optional: true, desc: 'Scope the request to one or various users.'
+    # FIXME
     example <<-INVOICES
       # /open_api/v1/invoices?user_id=211&page=1&per_page=3
       {

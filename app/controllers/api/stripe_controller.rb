@@ -30,7 +30,7 @@ class API::StripeController < API::PaymentsController
             currency: Setting.get('stripe_currency'),
             confirmation_method: 'manual',
             confirm: true,
-            customer: current_user.stp_customer_id
+            customer: current_user.stp_customer_id # FIXME
           }, { api_key: Setting.get('stripe_secret_key') }
         )
       elsif params[:payment_intent_id].present?

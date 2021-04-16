@@ -178,6 +178,7 @@ class User < ApplicationRecord
   end
 
   def stripe_customer
+    # FIXME
     Stripe::Customer.retrieve(stp_customer_id, api_key: Setting.get('stripe_secret_key'))
   end
 

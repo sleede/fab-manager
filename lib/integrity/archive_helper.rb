@@ -13,12 +13,18 @@ class Integrity::ArchiveHelper
         last_period = AccountingPeriod.order(start_at: :desc).first
         puts "Checking invoices footprints from #{last_period.end_at}. This may take a while..."
         Invoice.where('created_at > ?', last_period.end_at).order(:id).each do |i|
-          raise "Invalid footprint for invoice #{i.id}" unless i.check_footprint
+          next if i.check_footprint
+
+          puts i.debug_footprint
+          raise "Invalid footprint for invoice #{i.id}"
         end
       else
         puts 'Checking all invoices footprints. This may take a while...'
         Invoice.order(:id).all.each do |i|
-          raise "Invalid footprint for invoice #{i.id}" unless i.check_footprint
+          next if i.check_footprint
+
+          puts i.debug_footprint
+          raise "Invalid footprint for invoice #{i.id}"
         end
       end
     end

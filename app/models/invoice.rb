@@ -21,6 +21,7 @@ class Invoice < PaymentDocument
 
   has_one :avoir, class_name: 'Invoice', foreign_key: :invoice_id, dependent: :destroy
   has_one :payment_schedule_item
+  has_one :payment_gateway_object
   belongs_to :operator_profile, foreign_key: :operator_profile_id, class_name: 'InvoicingProfile'
 
   before_create :add_environment
@@ -157,11 +158,12 @@ class Invoice < PaymentDocument
     res
   end
 
-  def check_footprint
-    invoice_items.map(&:check_footprint).all? && footprint == compute_footprint
+  def footprint_children
+    invoice_items
   end
 
   def paid_with_stripe?
+    # FIXME
     stp_payment_intent_id? || stp_invoice_id? || payment_method == 'stripe'
   end
 

@@ -83,7 +83,7 @@ class InvoicesService
       invoicing_profile: user.invoicing_profile,
       statistic_profile: user.statistic_profile,
       operator_profile_id: operator_profile_id,
-      stp_payment_intent_id: payment_id,
+      stp_payment_intent_id: payment_id, # FIXME
       payment_method: method
     )
 
