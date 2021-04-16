@@ -634,7 +634,7 @@ history_value_66:
   id: 66
   setting_id: 66
   invoicing_profile_id: 1
-  value: true
+  value: 'true'
   created_at: 2020-06-08 17:12:16.846525000 Z
   updated_at: 2020-06-08 17:12:16.846525000 Z
 
@@ -658,7 +658,7 @@ history_value_69:
   id: 69
   setting_id: 69
   invoicing_profile_id: 1
-  value: usd
+  value: 'usd'
   created_at: 2020-06-08 17:12:16.846525000 Z
   updated_at: 2020-06-08 17:12:16.846525000 Z
 
@@ -666,7 +666,7 @@ history_value_70:
   id: 70
   setting_id: 70
   invoicing_profile_id: 1
-  value: FabManager_invoice
+  value: 'FabManager_invoice'
   created_at: 2020-06-15 10:04:06.216541000 Z
   updated_at: 2020-06-15 10:04:06.216541000 Z
 
@@ -674,7 +674,7 @@ history_value_71:
   id: 71
   setting_id: 71
   invoicing_profile_id: 1
-  value: false
+  value: 'false'
   created_at: 2020-06-15 10:04:06.216541000 Z
   updated_at: 2020-06-15 10:04:06.216541000 Z
 
@@ -682,7 +682,7 @@ history_value_72:
   id: 72
   setting_id: 72
   invoicing_profile_id: 1
-  value: true
+  value: 'true'
   created_at: 2020-06-15 10:04:06.216541000 Z
   updated_at: 2020-06-15 10:04:06.216541000 Z
 
@@ -690,7 +690,7 @@ history_value_73:
   id: 73
   setting_id: 73
   invoicing_profile_id: 1
-  value: true
+  value: 'true'
   created_at: 2020-06-17 10:48:19.002417000 Z
   updated_at: 2020-06-17 10:48:19.002417000 Z
 
@@ -698,7 +698,7 @@ value_history_74:
   id: 74
   setting_id: 74
   invoicing_profile_id: 1
-  value: until_start
+  value: 'until_start'
   created_at: 2020-04-15 14:38:40.000421500 Z
   updated_at: 2020-04-15 14:38:40.000421500 Z
 
@@ -706,7 +706,7 @@ value_history_75:
   id: 75
   setting_id: 75
   invoicing_profile_id: 1
-  value: FabManager_paymentSchedule
+  value: 'FabManager_paymentSchedule'
   created_at: 2020-04-15 14:38:40.000421500 Z
   updated_at: 2020-04-15 14:38:40.000421500 Z
 
@@ -714,7 +714,7 @@ value_history_76:
   id: 76
   setting_id: 76
   invoicing_profile_id: 1
-  value: true
+  value: 'true'
   created_at: 2020-04-15 14:38:40.000421500 Z
   updated_at: 2020-04-15 14:38:40.000421500 Z
 
@@ -722,7 +722,7 @@ value_history_77:
   id: 77
   setting_id: 77
   invoicing_profile_id: 1
-  value: false
+  value: 'false'
   created_at: 2020-04-15 14:38:40.000421500 Z
   updated_at: 2020-04-15 14:38:40.000421500 Z
 
@@ -730,7 +730,7 @@ value_history_78:
   id: 78
   setting_id: 78
   invoicing_profile_id: 1
-  value: stripe
+  value: 'stripe'
   created_at: 2020-04-15 14:38:40.000421500 Z
   updated_at: 2020-04-15 14:38:40.000421500 Z
 
@@ -738,7 +738,7 @@ value_history_79:
   id: 79
   setting_id: 79
   invoicing_profile_id: 1
-  value:
+  value: ''
   created_at: 2020-04-15 14:38:40.000421500 Z
   updated_at: 2020-04-15 14:38:40.000421500 Z
 
@@ -746,7 +746,7 @@ value_history_80:
   id: 80
   setting_id: 80
   invoicing_profile_id: 1
-  value:
+  value: ''
   created_at: 2020-04-15 14:38:40.000421500 Z
   updated_at: 2020-04-15 14:38:40.000421500 Z
 
@@ -754,7 +754,7 @@ value_history_81:
   id: 81
   setting_id: 81
   invoicing_profile_id: 1
-  value:
+  value: ''
   created_at: 2020-04-15 14:38:40.000421500 Z
   updated_at: 2020-04-15 14:38:40.000421500 Z
 
@@ -762,7 +762,7 @@ value_history_82:
   id: 82
   setting_id: 82
   invoicing_profile_id: 1
-  value:
+  value: ''
   created_at: 2020-04-15 14:38:40.000421500 Z
   updated_at: 2020-04-15 14:38:40.000421500 Z
 
@@ -770,7 +770,7 @@ value_history_83:
   id: 83
   setting_id: 83
   invoicing_profile_id: 1
-  value:
+  value: ''
   created_at: 2020-04-15 14:38:40.000421500 Z
   updated_at: 2020-04-15 14:38:40.000421500 Z
 
@@ -778,7 +778,7 @@ value_history_84:
   id: 84
   setting_id: 84
   invoicing_profile_id: 1
-  value:
+  value: ''
   created_at: 2020-04-15 14:38:40.000421500 Z
   updated_at: 2020-04-15 14:38:40.000421500 Z
 
@@ -786,6 +786,6 @@ value_history_85:
   id: 85
   setting_id: 10
   invoicing_profile_id: 1
-  value: YYMMmmmX[/VL]R[/A]S[/E]
+  value: 'YYMMmmmX[/VL]R[/A]S[/E]'
   created_at: 2020-12-14 14:37:35.615124000 Z
   updated_at: 2020-12-14 14:37:35.615124000 Z
