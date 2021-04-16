@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
-# provide checksums for archiving control
-class Checksum
+# Accounting integrity verifications
+module Integrity; end
+
+# Provides checksums for archiving control
+class Integrity::Checksum
   class << self
     def code
       dir = Dir.pwd

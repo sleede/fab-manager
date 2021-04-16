@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'checksum'
+require 'integrity/checksum'
 
 # Provides helper methods to compute footprints
 class FootprintService
@@ -10,7 +10,7 @@ class FootprintService
     # @param item an instance of the provided class
     # @param sort_on the items in database by the provided criterion, to find the previous one
     def compute_footprint(klass, item, sort_on = 'id')
-      Checksum.text(FootprintService.footprint_data(klass, item, sort_on))
+      Integrity::Checksum.text(FootprintService.footprint_data(klass, item, sort_on))
     end
 
     # Return the original data string used to compute the footprint
@@ -42,11 +42,13 @@ class FootprintService
       columns = FootprintService.footprint_columns(klass)
       current = FootprintService.footprint_data(klass, item)
       saved = FootprintDebug.find_by(footprint: item.footprint, klass: klass.name)
+      others = FootprintDebug.where('klass = ? AND data LIKE ?', klass, "#{item.id}%")
       puts "Debug footprint for #{klass} [ id: #{item.id} ]"
       puts '-----------------------------------------'
       puts "columns: [ #{columns.join(', ')} ]"
       puts "current: #{current}"
       puts "  saved: #{saved&.data}"
+      puts "others possible matches: #{others.map(&:id)}"
       puts '-----------------------------------------'
     end
 

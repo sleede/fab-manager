@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'checksum'
-
 # A single line inside an invoice. Can be a subscription or a reservation
 class InvoiceItem < Footprintable
   belongs_to :invoice

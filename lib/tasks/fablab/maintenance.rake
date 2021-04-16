@@ -50,8 +50,8 @@ namespace :fablab do
 
     desc 'generate current code checksum'
     task checksum: :environment do
-      require 'checksum'
-      puts Checksum.code
+      require 'integrity/checksum'
+      puts Integrity::Checksum.code
     end
 
     desc 'delete users with accounts marked with is_active=false'

@@ -10,7 +10,6 @@ class Subscriptions::RenewAsUserTest < ActionDispatch::IntegrationTest
 
   test 'user successfully renew a subscription after it has ended' do
     plan = Plan.find_by(group_id: @user.group.id, type: 'Plan', base_name: 'Mensuel')
-    stripe_subscription = nil
 
     VCR.use_cassette('subscriptions_user_renew_success', erb: true) do
       post '/api/stripe/confirm_payment',

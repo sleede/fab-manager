@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'checksum'
-
 # Setting values, kept history of modifications
 class HistoryValue < Footprintable
   belongs_to :setting
