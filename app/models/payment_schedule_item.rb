@@ -4,6 +4,8 @@
 class PaymentScheduleItem < Footprintable
   belongs_to :payment_schedule
   belongs_to :invoice
+  has_one :payment_gateway_object
+
   after_create :chain_record
 
   def first?
@@ -11,7 +13,7 @@ class PaymentScheduleItem < Footprintable
   end
 
   def payment_intent
-    return unless stp_invoice_id
+    return unless payment_gateway_object
 
     key = Setting.get('stripe_secret_key')
     stp_invoice = Stripe::Invoice.retrieve(stp_invoice_id, api_key: key)
@@ -19,6 +21,6 @@ class PaymentScheduleItem < Footprintable
   end
 
   def self.columns_out_of_footprint
-    %w[invoice_id stp_invoice_id state payment_method client_secret]
+    %w[invoice_id state payment_method client_secret]
   end
 end
