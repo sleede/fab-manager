@@ -44,10 +44,20 @@ config()
       echo "current user is not allowed to use docker, exiting..."
       exit 1
   fi
+  echo -e "Checking installation..."
+  if [ ! -f "docker-compose.yml" ]; then
+    echo -e "\e[91m[ ❌ ] docker-compose.yml was not found in ${PWD}. Please run this script from the Fab-manager's installation folder. Exiting... \e[39m"
+    exit 1
+  fi
 
   SERVICE="$(yq eval '.services.*.image | select(. == "sleede/fab-manager*") | path | .[-2]' docker-compose.yml)"
   YES_ALL=${Y:-false}
   # COMMANDS, SCRIPTS and ENVIRONMENTS are set by parseparams
+
+  if [ -z "${SERVICE}" ]; then
+    echo -e "\e[91m[ ❌ ] The service name was not determined. Please check your docker-compose.yml file. Exiting... \e[39m"
+    exit 1
+  fi
 }
 
 # compare versions utilities
@@ -61,7 +71,8 @@ verlt() {
 
 version_error()
 {
-  printf "\n\nYou must upgrade Fab-manager to %s first.\nPlease refer to https://github.com/sleede/fab-manager/blob/master/doc/production_readme.md#update-fab-manager for instructions\n" "$1" 1>&2
+  printf "\n\n\e[91m[ ❌ ] You are running Fab-manager version %s\n\e[39m" "${VERSION:-undetermined}"
+  printf "You must upgrade Fab-manager to %s first.\nPlease refer to https://github.com/sleede/fab-manager/blob/master/doc/production_readme.md#update-fab-manager for instructions\n" "$1" 1>&2
   exit 3
 }
 
@@ -90,7 +101,7 @@ add_environments()
       printf "\e[91m::\e[0m \e[1mInserting variable %s..\e[0m.\n" "$ENV"
       printf "# added on %s\n%s\n" "$(date +%Y-%m-%d\ %R)" "$ENV" >> "config/env"
     else
-      echo "Ignoring invalid option: -e $ENV. Given value is not valid environment variable, please see https://huit.re/environment-doc"
+      printf "\e[93m[ ⚠ ] Ignoring invalid option: -e %s.\e[39m\n Given value is not valid environment variable, please see https://huit.re/environment-doc\n" "$ENV"
     fi
   done
 }
@@ -108,7 +119,7 @@ compile_assets()
   ENV_ARGS=$(for i in "${COMPOSE_ENVS[@]}"; do sed 's/: /=/g;s/^/-e /g' <<< "$i"; done)
   PG_ID=$(docker-compose ps -q postgres)
   if [[ "$PG_ID" = "" ]]; then
-    printf "PostgreSQL container is not running, unable to compile the assets\nExiting..."
+    printf "\e[91m[ ❌ ] PostgreSQL container is not running, unable to compile the assets\e[39m\nExiting..."
     exit 1
   fi
   PG_NET_ID=$(docker inspect "$PG_ID" -f "{{json .NetworkSettings.Networks }}" | jq -r '.[] .NetworkID')
@@ -122,13 +133,12 @@ compile_assets()
 
 upgrade()
 {
-  [[ "$YES_ALL" = "true" ]] && confirm="y" || read -rp "Proceed with the upgrade? (Y/n) " confirm </dev/tty
+  [[ "$YES_ALL" = "true" ]] && confirm="y" || read -rp "[91m::[0m [1mProceed with the upgrade?[0m (Y/n) " confirm </dev/tty
   if [[ "$confirm" = "n" ]]; then exit 2; fi
 
   add_environments
-  docker-compose pull "$SERVICE"
-  if [[ $? = 1 ]]; then
-    printf "An error occured, detected service name: %s\nExiting...", "$SERVICE"
+  if ! docker-compose pull "$SERVICE"; then
+    printf "\e[91m[ ❌ ] An error occurred, detected service name: %s\e[39m\nExiting..." "$SERVICE"
     exit 1
   fi
   BRANCH='master'
@@ -140,12 +150,24 @@ upgrade()
     else
       \curl -sSL "https://raw.githubusercontent.com/sleede/fab-manager/$BRANCH/scripts/$SCRIPT.sh" | bash
     fi
+    # shellcheck disable=SC2181
+    if [[ $? != 0 ]]; then
+      printf "\e[93m[ ⚠ ] Something may have went wrong while running \"%s\", please check the logs above...\e[39m\n" "$SCRIPT"
+      [[ "$YES_ALL" = "true" ]] && confirm="y" || read -rp "[91m::[0m [1mIgnore and continue?[0m (Y/n) " confirm </dev/tty
+      if [[ "$confirm" = "n" ]]; then exit 4; fi
+    fi
   done
   compile_assets
-  docker-compose run --rm "$SERVICE" bundle exec rake db:migrate
+  if ! docker-compose run --rm "$SERVICE" bundle exec rake db:migrate; then
+    printf "\e[91m[ ❌ ] Something went wrong while migrating the database, please check the logs above.\e[39m\nExiting...\n"
+    exit 4
+  fi
   for COMMAND in "${COMMANDS[@]}"; do
     printf "\e[91m::\e[0m \e[1mRunning command %s...\e[0m\n" "$COMMAND"
-    docker-compose run --rm "$SERVICE" bundle exec "$COMMAND"
+    if ! docker-compose run --rm "$SERVICE" bundle exec "$COMMAND"; then
+      printf "\e[91m[ ❌ ] Something went wrong while running \"%s\", please check the logs above.\e[39m\nExiting...\n" "$COMMAND"
+      exit 4
+    fi
   done
   docker-compose up -d
   docker ps
@@ -155,7 +177,7 @@ clean()
 {
   echo -e "\e[91m::\e[0m \e[1mCurrent disk usage:\e[0m"
   df -h /
-  [[ "$YES_ALL" = "true" ]] && confirm="y" || read -rp "Clean previous docker images? (y/N) " confirm </dev/tty
+  [[ "$YES_ALL" = "true" ]] && confirm="y" || read -rp "[91m::[0m [1mClean previous docker images?[0m (y/N) " confirm </dev/tty
   if [[ "$confirm" == "y" ]]; then
     /usr/bin/docker image prune -f
   fi

@@ -2,6 +2,7 @@
 
 ## Next release
 - Updated React and its dependencies to 17.0.3 and matching
+- Improved error handling in upgrade script
 - Fix a bug: unable to set date formats during installation
 - Fix a bug: unable to cancel the upgrade before it begins
 - `SUPERADMIN_EMAIL` renamed to `ADMINSYS_EMAIL`
