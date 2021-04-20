@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# PayZen payement gateway
+# PayZen payments gateway
 module PayZen; end
 
 API_PATH = '/api-payment/V4'

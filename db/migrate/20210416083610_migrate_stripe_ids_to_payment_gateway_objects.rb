@@ -14,7 +14,7 @@ class MigrateStripeIdsToPaymentGatewayObjects < ActiveRecord::Migration[5.2]
     periods = Integrity::ArchiveHelper.backup_and_remove_periods
 
     ## INVOICES
-    puts 'Migrating invoices. This may take a while...'
+    puts 'Migrating invoices...'
     Invoice.order(:id).all.each do |i|
       if i.stp_invoice_id
         PaymentGatewayObject.create!(
@@ -34,7 +34,7 @@ class MigrateStripeIdsToPaymentGatewayObjects < ActiveRecord::Migration[5.2]
     remove_column :invoices, :stp_payment_intent_id
 
     ## INVOICE ITEMS
-    puts 'Migrating invoices items. This may take a while...'
+    puts 'Migrating invoices items...'
     InvoiceItem.order(:id).all.each do |ii|
       next unless ii.stp_invoice_item_id
 
@@ -53,7 +53,7 @@ class MigrateStripeIdsToPaymentGatewayObjects < ActiveRecord::Migration[5.2]
     # To fix it, we made a workaround to automatically cancel the subscription, just after it was took.
     # This workaround was kept in the code until v4.1.0 (SCA release), when we removed this whole pointless feature.
     # We keep this data for accounting integrity but we don't know it is gonna be useful again in the future
-    puts 'Migrating subscriptions. This may take a while...'
+    puts 'Migrating subscriptions...'
     Subscription.order(:id).all.each do |sub|
       next unless sub.stp_subscription_id
 
@@ -66,7 +66,7 @@ class MigrateStripeIdsToPaymentGatewayObjects < ActiveRecord::Migration[5.2]
     remove_column :subscriptions, :stp_subscription_id
 
     ## PAYMENT SCHEDULES
-    puts 'Migrating payment schedules. This may take a while...'
+    puts 'Migrating payment schedules...'
     PaymentSchedule.order(:id).all.each do |ps|
       if ps.stp_subscription_id
         PaymentGatewayObject.create!(
@@ -87,7 +87,7 @@ class MigrateStripeIdsToPaymentGatewayObjects < ActiveRecord::Migration[5.2]
     remove_column :payment_schedules, :stp_setup_intent_id
 
     ## PAYMENT SCHEDULE ITEMS
-    puts 'Migrating payment schedule items. This may take a while...'
+    puts 'Migrating payment schedule items...'
     PaymentScheduleItem.order(:id).all.each do |psi|
       next unless psi.stp_invoice_id
 
@@ -100,7 +100,7 @@ class MigrateStripeIdsToPaymentGatewayObjects < ActiveRecord::Migration[5.2]
     remove_column :payment_schedule_items, :stp_invoice_id
 
     ## PLANS, MACHINES, SPACES, TRAININGS
-    puts 'Migration stp_product_ids. This may take a while...'
+    puts 'Migrating stp_product_ids...'
     [Plan, Machine, Space, Training].each do |klass|
       klass.order(:id).all.each do |item|
         next unless item.stp_product_id
@@ -110,12 +110,12 @@ class MigrateStripeIdsToPaymentGatewayObjects < ActiveRecord::Migration[5.2]
           gateway_object_id: item.stp_product_id,
           gateway_object_type: 'Stripe::Product'
         )
-        remove_column klass.arel_table.name, :stp_product_id
       end
+      remove_column klass.arel_table.name, :stp_product_id
     end
 
     ## USERS
-    puts 'Migrating users. This may take a while...'
+    puts 'Migrating users...'
     User.order(:id).all.each do |u|
       next unless u.stp_customer_id
 
@@ -128,6 +128,7 @@ class MigrateStripeIdsToPaymentGatewayObjects < ActiveRecord::Migration[5.2]
     remove_column :users, :stp_customer_id
 
     # chain all records
+    puts 'Chaining all record. This may take a while...'
     InvoiceItem.order(:id).all.each(&:chain_record)
     Invoice.order(:id).all.each(&:chain_record)
     PaymentScheduleItem.order(:id).all.each(&:chain_record)

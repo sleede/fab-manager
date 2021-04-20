@@ -25,8 +25,13 @@ class FootprintService
                    .limit(1)
 
       columns  = FootprintService.footprint_columns(klass)
+      columns = columns.map do |c|
+        comparable(item[c])
+      rescue ActiveModel::MissingAttributeError
+        nil
+      end
 
-      res = columns.map { |c| comparable(item[c]) }.push(previous.first ? previous.first.footprint : '')
+      res = columns.push(previous.first ? previous.first.footprint : '')
       array ? res.map(&:to_s) : res.join.to_s
     end
 

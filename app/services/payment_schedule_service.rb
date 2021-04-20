@@ -49,7 +49,8 @@ class PaymentScheduleService
     { payment_schedule: ps, items: items }
   end
 
-  def create(subscription, total, coupon: nil, operator: nil, payment_method: nil, reservation: nil, user: nil, payment_id: nil)
+  def create(subscription, total, coupon: nil, operator: nil, payment_method: nil, reservation: nil, user: nil,
+             payment_id: nil, payment_type: nil)
     subscription = reservation.generate_subscription if !subscription && reservation&.plan_id
     raise InvalidSubscriptionError unless subscription&.persisted?
 
@@ -59,7 +60,10 @@ class PaymentScheduleService
 
     ps.scheduled = reservation || subscription
     ps.payment_method = payment_method
-    ps.stp_setup_intent_id = payment_id
+    ps.payment_gateway_object = {
+      gateway_object_id: payment_id,
+      gateway_object_type: payment_type
+    }
     ps.operator_profile = operator.invoicing_profile
     ps.invoicing_profile = user.invoicing_profile
     ps.statistic_profile = user.statistic_profile

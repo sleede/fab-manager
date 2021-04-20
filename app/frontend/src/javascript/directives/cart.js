@@ -721,7 +721,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
             growl.error(_t('app.shared.cart.online_payment_disabled'));
           } else {
             $scope.toggleOnlinePaymentModal(() => {
-              $scope.onlinePayment.cartItems = mkCartItems(reservation, $scope.settings.payment_gateway);
+              $scope.onlinePayment.cartItems = mkCartItems(reservation, 'card');
             });
           }
         };
@@ -740,7 +740,8 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                 return Price.compute(mkRequestParams({ reservation }, $scope.coupon.applied)).$promise;
               },
               cartItems () {
-                return mkCartItems(reservation, $scope.settings.payment_gateway);
+                // TODO: why 'card' despite we pay on site?
+                return mkCartItems(reservation, 'card');
               },
               wallet () {
                 return Wallet.getWalletByUser({ user_id: reservation.user_id }).$promise;

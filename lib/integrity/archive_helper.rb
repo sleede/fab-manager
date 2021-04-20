@@ -84,5 +84,9 @@ class Integrity::ArchiveHelper
         AccountingPeriod.all
       end
     end
+
+    def execute(query)
+      ActiveRecord::Base.connection.execute(query)
+    end
   end
 end

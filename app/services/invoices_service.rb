@@ -69,7 +69,7 @@ class InvoicesService
   # @param payment_id {String} ID of the payment, a returned by the gateway, if the current invoice is paid by card
   # @param payment_method {String} the payment method used
   ##
-  def self.create(payment_details, operator_profile_id, reservation: nil, subscription: nil, payment_id: nil, payment_method: nil)
+  def self.create(payment_details, operator_profile_id, reservation: nil, subscription: nil, payment_id: nil, payment_type: nil, payment_method: nil)
     user = reservation&.user || subscription&.user
     operator = InvoicingProfile.find(operator_profile_id)&.user
     method = if payment_method
@@ -83,7 +83,10 @@ class InvoicesService
       invoicing_profile: user.invoicing_profile,
       statistic_profile: user.statistic_profile,
       operator_profile_id: operator_profile_id,
-      stp_payment_intent_id: payment_id, # FIXME
+      payment_gateway_object_attributes: {
+        gateway_object_id: payment_id,
+        gateway_object_type: payment_type
+      },
       payment_method: method
     )
 

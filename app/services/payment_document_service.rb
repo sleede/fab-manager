@@ -26,7 +26,7 @@ class PaymentDocumentService
         reference.gsub!(/R\[([^\]]+)\]/, ''.to_s)
       elsif document.class == Invoice
         # information about online selling (X[text])
-        if document.paid_with_stripe?
+        if document.paid_by_card?
           reference.gsub!(/X\[([^\]]+)\]/, '\1')
         else
           reference.gsub!(/X\[([^\]]+)\]/, ''.to_s)
