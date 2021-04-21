@@ -213,7 +213,6 @@ de:
     start_date: "Startdatum"
     expiration_date: "Ablaufdatum"
     amount: "Betrag"
-    payment_method: "Zahlungsmethode"
     local_payment: "Zahlung an der Rezeption"
     online_payment: "Online-Zahlung"
     deleted_user: "Gelöschter Nutzer"

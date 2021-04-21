@@ -68,9 +68,14 @@ class Subscriptions::Subscribe
                                     operator_profile_id: operator_profile_id,
                                     user: new_sub.user,
                                     payment_method: schedule.payment_method,
-                                    payment_id: schedule.stp_setup_intent_id)
+                                    payment_id: schedule.gateway_object('Stripe::SetupIntent').id)
                 else
-                  generate_invoice(subscription, operator_profile_id, details)
+                  generate_invoice(subscription,
+                                   operator_profile_id,
+                                   details,
+                                   payment_id: schedule.gateway_object('Stripe::SetupIntent').id,
+                                   payment_type: 'Stripe::SetupIntent',
+                                   payment_method: schedule.payment_method)
                 end
       payment.save
       payment.post_save(schedule&.stp_setup_intent_id)

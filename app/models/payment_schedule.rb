@@ -16,7 +16,7 @@ class PaymentSchedule < PaymentDocument
   belongs_to :reservation, foreign_type: 'Reservation', foreign_key: 'scheduled_id'
 
   has_many :payment_schedule_items
-  has_many :payment_gateway_object
+  has_many :payment_gateway_objects, as: :item
 
   before_create :add_environment
   after_create :update_reference, :chain_record
@@ -48,6 +48,10 @@ class PaymentSchedule < PaymentDocument
     payment_schedule_items.order(due_date: :asc)
   end
 
+  def gateway_object(klass)
+    payment_gateway_objects.find_by(gateway_object_type: klass)
+  end
+
   def user
     invoicing_profile.user
   end
@@ -63,7 +67,7 @@ class PaymentSchedule < PaymentDocument
   end
 
   def post_save(setup_intent_id)
-    return unless payment_method == 'stripe'
+    return unless payment_method == 'card'
 
     StripeService.create_stripe_subscription(self, setup_intent_id)
   end

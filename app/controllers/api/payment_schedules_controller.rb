@@ -37,7 +37,7 @@ class API::PaymentSchedulesController < API::ApiController
 
   def cash_check
     authorize @payment_schedule_item.payment_schedule
-    PaymentScheduleService.new.generate_invoice(@payment_schedule_item)
+    PaymentScheduleService.new.generate_invoice(@payment_schedule_item, payment_method: 'check')
     attrs = { state: 'paid', payment_method: 'check' }
     @payment_schedule_item.update_attributes(attrs)
 

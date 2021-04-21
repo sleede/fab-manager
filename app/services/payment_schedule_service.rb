@@ -78,15 +78,19 @@ class PaymentScheduleService
   # Generate the invoice associated with the given PaymentScheduleItem, with the children elements (InvoiceItems).
   # @param payment_method {String} the payment method or gateway in use
   # @param payment_id {String} the identifier of the payment as provided by the payment gateway, in case of card payment
+  # @param payment_type {String} the object type of payment_id
   ##
-  def generate_invoice(payment_schedule_item, payment_method: nil, payment_id: nil)
+  def generate_invoice(payment_schedule_item, payment_method: nil, payment_id: nil, payment_type: nil)
     # build the base invoice
     invoice = Invoice.new(
       invoiced: payment_schedule_item.payment_schedule.scheduled,
       invoicing_profile: payment_schedule_item.payment_schedule.invoicing_profile,
       statistic_profile: payment_schedule_item.payment_schedule.statistic_profile,
       operator_profile_id: payment_schedule_item.payment_schedule.operator_profile_id,
-      stp_payment_intent_id: payment_id,
+      payment_gateway_object_attributes: {
+        gateway_object_id: payment_id,
+        gateway_object_type: payment_type
+      },
       payment_method: payment_method
     )
     # complete the invoice with some InvoiceItem

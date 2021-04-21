@@ -4,7 +4,7 @@
 class PaymentScheduleItem < Footprintable
   belongs_to :payment_schedule
   belongs_to :invoice
-  has_one :payment_gateway_object
+  has_one :payment_gateway_object, as: :item
 
   after_create :chain_record
 

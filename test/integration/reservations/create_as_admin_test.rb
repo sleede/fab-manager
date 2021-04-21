@@ -514,7 +514,7 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     assert_not_nil payment_schedule.reference
     assert_equal 'check', payment_schedule.payment_method
     assert_nil payment_schedule.stp_subscription_id
-    assert_nil payment_schedule.stp_setup_intent_id
+    assert_nil payment_schedule.stp_setup_intent_id # FIXME
     assert_nil payment_schedule.wallet_transaction
     assert_nil payment_schedule.wallet_amount
     assert_nil payment_schedule.coupon_id

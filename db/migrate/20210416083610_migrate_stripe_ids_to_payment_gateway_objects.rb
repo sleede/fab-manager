@@ -22,12 +22,14 @@ class MigrateStripeIdsToPaymentGatewayObjects < ActiveRecord::Migration[5.2]
           gateway_object_id: i.stp_invoice_id,
           gateway_object_type: 'Stripe::Invoice'
         )
+        i.update(payment_method: 'card')
       elsif i.stp_payment_intent_id
         PaymentGatewayObject.create!(
           item: i,
           gateway_object_id: i.stp_payment_intent_id,
           gateway_object_type: 'Stripe::PaymentIntent'
         )
+        i.update(payment_method: 'card')
       end
     end
     remove_column :invoices, :stp_invoice_id
@@ -38,10 +40,11 @@ class MigrateStripeIdsToPaymentGatewayObjects < ActiveRecord::Migration[5.2]
     InvoiceItem.order(:id).all.each do |ii|
       next unless ii.stp_invoice_item_id
 
+      is_subscription = /^sub_/.match? ii.stp_invoice_item_id
       PaymentGatewayObject.create!(
         item: ii,
         gateway_object_id: ii.stp_invoice_item_id,
-        gateway_object_type: 'Stripe::InvoiceItem'
+        gateway_object_type: is_subscription ? 'Stripe::Subscription' : 'Stripe::InvoiceItem'
       )
     end
     remove_column :invoice_items, :stp_invoice_item_id
@@ -82,6 +85,7 @@ class MigrateStripeIdsToPaymentGatewayObjects < ActiveRecord::Migration[5.2]
         gateway_object_id: ps.stp_setup_intent_id,
         gateway_object_type: 'Stripe::SetupIntent'
       )
+      ps.update(payment_method: 'card')
     end
     remove_column :payment_schedules, :stp_subscription_id
     remove_column :payment_schedules, :stp_setup_intent_id
@@ -165,7 +169,7 @@ class MigrateStripeIdsToPaymentGatewayObjects < ActiveRecord::Migration[5.2]
              when 'Stripe::SetupIntent'
                'stp_setup_intent_id'
              when 'Stripe::Subscription'
-               'stp_subscription_id'
+               pgo.item_type == InvoiceItem.name ? 'stp_invoice_item_id' : 'stp_subscription_id'
              when 'Stripe::InvoiceItem'
                'stp_invoice_item_id'
              when 'Stripe::PaymentIntent'

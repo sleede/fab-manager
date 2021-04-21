@@ -1126,8 +1126,8 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
         });
       });
 
-      if (invoice.stripe) {
-        return $scope.avoirModes.push({ name: _t('app.admin.invoices.online_payment'), value: 'stripe' });
+      if (invoice.online_payment) {
+        return $scope.avoirModes.push({ name: _t('app.admin.invoices.online_payment'), value: 'card' });
       }
     };
 

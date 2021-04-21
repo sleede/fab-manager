@@ -840,7 +840,7 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     assert_not_nil payment_schedule.reference
     assert_equal 'stripe', payment_schedule.payment_method
     assert_not_nil payment_schedule.stp_subscription_id
-    assert_not_nil payment_schedule.stp_setup_intent_id
+    assert_not_nil payment_schedule.stp_setup_intent_id # FIXME
     assert_not_nil payment_schedule.wallet_transaction
     assert_equal payment_schedule.ordered_items.first.amount, payment_schedule.wallet_amount
     assert_equal Coupon.find_by(code: 'GIME3EUR').id, payment_schedule.coupon_id

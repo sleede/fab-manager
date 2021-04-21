@@ -1,0 +1,11 @@
+pgo_1:
+  item_type: 'InvoiceItem'
+  item_id: 1
+  gateway_object_type: 'Stripe::Subscription'
+  gateway_object_id: 'sub_8DGB4ErIc2asOv'
+
+pgo2:
+  item_type: 'Subscription'
+    item_id: 1
+    gateway_object_type: 'Stripe::Subscription'
+    gateway_object_id: 'sub_8DGB4ErIc2asOv'
