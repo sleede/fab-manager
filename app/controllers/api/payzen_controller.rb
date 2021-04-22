@@ -19,13 +19,19 @@ class API::PayzenController < API::PaymentsController
 
   def create_payment
     amount = card_amount
-    @id = PayZen::Helper.generate_ref(cart_items_params, params[:customer])
+    @id = PayZen::Helper.generate_ref(cart_items_params, params[:customer_id])
 
     client = PayZen::Charge.new
     @result = client.create_payment(amount: amount[:amount],
                                     order_id: @id,
                                     customer: PayZen::Helper.generate_customer(params[:customer_id]))
-    @result
+  end
+
+  def create_token
+    @id = PayZen::Helper.generate_ref(cart_items_params, params[:customer_id])
+    client = PayZen::Charge.new
+    @result = client.create_token(order_id: @id,
+                                  customer: PayZen::Helper.generate_customer(params[:customer_id]))
   end
 
   def check_hash

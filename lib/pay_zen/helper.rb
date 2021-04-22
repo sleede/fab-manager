@@ -52,6 +52,17 @@ class PayZen::Helper
       }
     end
 
+    ## Generate a hash map compatible with PayZen 'V4/Customer/ShoppingCart'
+    def generate_shopping_cart(cart_items, customer)
+      {
+        cartItemInfo: cart_items.map do |type, value|
+          {
+            productAmount: item.
+            productType: customer.organization? ? 'SERVICE_FOR_BUSINESS' : 'SERVICE_FOR_INDIVIDUAL',
+          }
+      }
+    end
+
     ## Check the PayZen signature for integrity
     def check_hash(algorithm, hash_key, hash_proof, data, key = nil)
       supported_hash_algorithm = ['sha256_hmac']

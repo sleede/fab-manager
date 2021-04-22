@@ -32,5 +32,19 @@ class PayZen::Charge < PayZen::Client
          contrib: contrib,
          customer: customer)
   end
+
+  ##
+  # @see https://payzen.io/en-EN/rest/V4.0/api/playground/Charge/CreateToken/
+  ##
+  def create_token(currency: Setting.get('payzen_currency'),
+                   order_id: nil,
+                   contrib: "fab-manager #{Version.current}",
+                   customer: nil)
+    post('/Charge/CreateToken',
+         currency: currency,
+         orderId: order_id,
+         contrib: contrib,
+         customer: customer)
+  end
 end
 
