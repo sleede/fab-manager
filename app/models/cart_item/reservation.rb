@@ -75,6 +75,8 @@ class CartItem::Reservation < CartItem::BaseItem
   # Compute the number of remaining hours in the users current credits (for machine or space)
   ##
   def credits_hours(credits, new_plan_being_bought = false)
+    return 0 unless credits
+
     hours_available = credits.hours
     unless new_plan_being_bought
       user_credit = @customer.users_credits.find_by(credit_id: credits.id)

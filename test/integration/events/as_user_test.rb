@@ -29,9 +29,9 @@ module Events
         post '/api/stripe/confirm_payment',
              params: {
                payment_method_id: stripe_payment_method,
+               customer_id: User.find_by(username: 'vlonchamp').id,
                cart_items: {
                  reservation: {
-                   user_id: User.find_by(username: 'vlonchamp').id,
                    reservable_id: radio.id,
                    reservable_type: 'Event',
                    nb_reserve_places: 2,
@@ -78,7 +78,7 @@ module Events
       # invoice assertions
       invoice = reservation.invoice
 
-      refute invoice.stp_payment_intent_id.blank?
+      refute invoice.payment_gateway_object.blank?
       refute invoice.total.blank?
       assert_equal 43_350, invoice.total # total minus coupon
 
@@ -94,7 +94,7 @@ module Events
       assert_invoice_pdf invoice
 
       VCR.use_cassette('reserve_event_with_many_prices_and_payment_means_retrieve_invoice_from_stripe') do
-        stp_intent = Stripe::PaymentIntent.retrieve(invoice.stp_payment_intent_id, api_key: Setting.get('stripe_secret_key'))
+        stp_intent = invoice.payment_gateway_object.gateway_object.retrieve
         assert_equal stp_intent.amount, (invoice.total - invoice.wallet_amount) # total minus coupon minus wallet = amount really payed by the user
       end
 

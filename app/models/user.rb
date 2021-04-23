@@ -45,6 +45,8 @@ class User < ApplicationRecord
   has_many :exports, dependent: :destroy
   has_many :imports, dependent: :nullify
 
+  has_one :payment_gateway_object, as: :item
+
   # fix for create admin user
   before_save do
     email&.downcase!
@@ -175,11 +177,6 @@ class User < ApplicationRecord
     return unless subscription
 
     subscription.generate_and_save_invoice(operator_profile_id)
-  end
-
-  def stripe_customer
-    # FIXME
-    Stripe::Customer.retrieve(stp_customer_id, api_key: Setting.get('stripe_secret_key'))
   end
 
   def active_for_authentication?
@@ -315,7 +312,7 @@ class User < ApplicationRecord
     blacklist = %w[id encrypted_password reset_password_token reset_password_sent_at remember_created_at
                    sign_in_count current_sign_in_at last_sign_in_at current_sign_in_ip last_sign_in_ip confirmation_token
                    confirmed_at confirmation_sent_at unconfirmed_email failed_attempts unlock_token locked_at created_at
-                   updated_at stp_customer_id slug provider auth_token merged_at]
+                   updated_at slug provider auth_token merged_at]
     User.columns_hash
         .map { |k, v| [k, v.type.to_s] }
         .delete_if { |col| blacklist.include?(col[0]) }

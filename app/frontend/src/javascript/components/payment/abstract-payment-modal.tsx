@@ -81,7 +81,7 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
    */
   useEffect(() => {
     if (!cartItems) return;
-    WalletAPI.getByUser(cartItems.reservation?.user_id || cartItems.subscription?.user_id).then((wallet) => {
+    WalletAPI.getByUser(cartItems.customer_id).then((wallet) => {
       setWallet(wallet);
       PriceAPI.compute(cartItems).then((res) => {
         setPrice(res);

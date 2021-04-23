@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'test_helper'
+
 class Subscriptions::RenewAsAdminTest < ActionDispatch::IntegrationTest
   setup do
     @admin = User.find_by(username: 'admin')

@@ -28,8 +28,8 @@ class API::ReservationsController < API::ApiController
   # otherwise, they must use payments_controller#confirm_payment.
   # Managers can create reservations for other users
   def create
-    user_id = current_user.admin? || current_user.manager? ? params[:reservation][:user_id] : current_user.id
-    price = transaction_amount(current_user.admin? || (current_user.manager? && current_user.id != user_id), user_id)
+    user_id = current_user.admin? || current_user.manager? ? params[:customer_id] : current_user.id
+    price = transaction_amount(user_id)
 
     authorize ReservationContext.new(Reservation, price[:amount], user_id)
 
@@ -62,7 +62,7 @@ class API::ReservationsController < API::ApiController
 
   private
 
-  def transaction_amount(is_admin, user_id)
+  def transaction_amount(user_id)
     user = User.find(user_id)
     cs = CartService.new(current_user)
     cart = cs.from_hash(customer_id: user_id,
@@ -71,7 +71,7 @@ class API::ReservationsController < API::ApiController
                         },
                         reservation: reservation_params,
                         coupon_code: coupon_params[:coupon_code],
-                        payment_schedule: !schedule.nil?)
+                        payment_schedule: reservation_params[:payment_schedule])
     price_details = cart.total
 
     # Subtract wallet amount from total

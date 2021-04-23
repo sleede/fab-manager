@@ -52,6 +52,10 @@ class PaymentSchedule < PaymentDocument
     payment_gateway_objects.map(&:gateway_object).find(&:payment_mean?)
   end
 
+  def gateway_subscription
+    payment_gateway_objects.map(&:gateway_object).find { |item| !item.payment_mean? }
+  end
+
   def user
     invoicing_profile.user
   end

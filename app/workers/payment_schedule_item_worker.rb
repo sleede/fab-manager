@@ -21,7 +21,7 @@ class PaymentScheduleItemWorker
     if psi.payment_schedule.payment_method == 'card'
       ### Stripe
       stripe_key = Setting.get('stripe_secret_key')
-      stp_subscription = Stripe::Subscription.retrieve(psi.payment_schedule.stp_subscription_id, api_key: stripe_key)
+      stp_subscription = psi.payment_schedule.gateway_subscription.retrieve
       stp_invoice = Stripe::Invoice.retrieve(stp_subscription.latest_invoice, api_key: stripe_key)
       if stp_invoice.status == 'paid'
         ##### Stripe / Successfully paid

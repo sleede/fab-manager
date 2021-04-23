@@ -30,7 +30,7 @@ class API::StripeController < API::PaymentsController
             currency: Setting.get('stripe_currency'),
             confirmation_method: 'manual',
             confirm: true,
-            customer: current_user.stp_customer_id # FIXME
+            customer: current_user.payment_gateway_object.gateway_object_id
           }, { api_key: Setting.get('stripe_secret_key') }
         )
       elsif params[:payment_intent_id].present?
@@ -71,7 +71,7 @@ class API::StripeController < API::PaymentsController
   def setup_intent
     user = User.find(params[:user_id])
     key = Setting.get('stripe_secret_key')
-    @intent = Stripe::SetupIntent.create({ customer: user.stp_customer_id }, { api_key: key })
+    @intent = Stripe::SetupIntent.create({ customer: user.payment_gateway_object.gateway_object_id }, { api_key: key })
     render json: { id: @intent.id, client_secret: @intent.client_secret }
   end
 
@@ -96,7 +96,7 @@ class API::StripeController < API::PaymentsController
   def update_card
     user = User.find(params[:user_id])
     key = Setting.get('stripe_secret_key')
-    Stripe::Customer.update(user.stp_customer_id,
+    Stripe::Customer.update(user.payment_gateway_object.gateway_object_id,
                             { invoice_settings: { default_payment_method: params[:payment_method_id] } },
                             { api_key: key })
     render json: { updated: true }, status: :ok

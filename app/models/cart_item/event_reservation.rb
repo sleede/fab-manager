@@ -9,7 +9,7 @@ class CartItem::EventReservation < CartItem::Reservation
 
     super(customer, operator, event, slots)
     @normal_tickets = normal_tickets
-    @other_tickets = other_tickets
+    @other_tickets = other_tickets || []
   end
 
   def price

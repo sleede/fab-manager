@@ -13,7 +13,7 @@ class CartItem::TrainingReservation < CartItem::Reservation
   end
 
   def price
-    base_amount = @reservable.amount_by_group(@customer.group_id, plan_id: @plan.try(:id)).amount
+    base_amount = @reservable.amount_by_group(@customer.group_id).amount
     is_privileged = @operator.admin? || (@operator.manager? && @operator.id != @customer.id)
 
     elements = { slots: [] }
@@ -25,7 +25,7 @@ class CartItem::TrainingReservation < CartItem::Reservation
                                slot,
                                is_privileged,
                                elements: elements,
-                               has_credits: (@user.training_credits.size < hours_available),
+                               has_credits: (@customer.training_credits.size < hours_available),
                                is_division: false)
     end
 

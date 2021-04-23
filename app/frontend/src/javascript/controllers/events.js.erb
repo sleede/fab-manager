@@ -632,12 +632,11 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
      * @return {{reservation:Object, coupon_code:string}}
      */
     const mkRequestParams = function (reservation, coupon) {
-      const params = {
+      return {
+        customer_id: reservation.user_id,
         reservation,
         coupon_code: ((coupon ? coupon.code : undefined))
       };
-
-      return params;
     };
 
     /**

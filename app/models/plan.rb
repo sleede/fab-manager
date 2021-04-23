@@ -12,6 +12,7 @@ class Plan < ApplicationRecord
   has_many :subscriptions
   has_one :plan_file, as: :viewable, dependent: :destroy
   has_many :prices, dependent: :destroy
+  has_one :payment_gateway_object, as: :item
 
   extend FriendlyId
   friendly_id :base_name, use: :slugged

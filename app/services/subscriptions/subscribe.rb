@@ -62,8 +62,9 @@ class Subscriptions::Subscribe
     if new_sub.save
       schedule = subscription.original_payment_schedule
 
-      cs = CartService.new(current_user)
-      cart = cs.from_hash(customer_id: @user_id,
+      operator = InvoicingProfile.find(@operator_profile_id).user
+      cs = CartService.new(operator)
+      cart = cs.from_hash(customer_id: subscription.user.id,
                           subscription: {
                             plan_id: subscription.plan_id
                           },
@@ -84,7 +85,7 @@ class Subscriptions::Subscribe
                                    details)
                 end
       payment.save
-      payment.post_save(schedule&.stp_setup_intent_id)
+      payment.post_save(schedule&.gateway_payment_mean&.id)
       UsersCredits::Manager.new(user: new_sub.user).reset_credits
       return new_sub
     end

@@ -78,12 +78,7 @@ class InvoicesService
                operator&.admin? || (operator&.manager? && operator != user) ? nil : Setting.get('payment_gateway')
              end
 
-    pgo = unless payment_id.nil?
-            {
-              gateway_object_id: payment_id,
-              gateway_object_type: payment_type
-            }
-          end
+    pgo = payment_id.nil? ? {} : { gateway_object_id: payment_id, gateway_object_type: payment_type }
     invoice = Invoice.new(
       invoiced: subscription || reservation,
       invoicing_profile: user.invoicing_profile,

@@ -12,7 +12,7 @@ class StripeService
       case payment_schedule.scheduled_type
       when Reservation.name
         subscription = payment_schedule.scheduled.subscription
-        reservable_stp_id = payment_schedule.scheduled.reservable&.stp_product_id
+        reservable_stp_id = payment_schedule.scheduled.reservable&.payment_gateway_object&.gateway_object_id
       when Subscription.name
         subscription = payment_schedule.scheduled
         reservable_stp_id = nil
@@ -26,13 +26,13 @@ class StripeService
       intent = Stripe::SetupIntent.retrieve(setup_intent_id, api_key: stripe_key)
       # subscription (recurring price)
       price = create_price(first_item.details['recurring'],
-                           subscription.plan.stp_product_id,
+                           subscription.plan.payment_gateway_object.gateway_object_id,
                            nil, monthly: true)
       # other items (not recurring)
       items = subscription_invoice_items(payment_schedule, subscription, first_item, reservable_stp_id)
 
       stp_subscription = Stripe::Subscription.create({
-                                                       customer: payment_schedule.invoicing_profile.user.stp_customer_id,
+                                                       customer: payment_schedule.invoicing_profile.user.payment_gateway_object.gateway_object_id,
                                                        cancel_at: (payment_schedule.ordered_items.last.due_date + 3.day).to_i,
                                                        add_invoice_items: items,
                                                        coupon: payment_schedule.coupon&.code,
@@ -41,7 +41,9 @@ class StripeService
                                                        ],
                                                        default_payment_method: intent[:payment_method]
                                                      }, { api_key: stripe_key })
-      payment_schedule.update_attributes(stp_subscription_id: stp_subscription.id)
+      pgo = PaymentGatewayObject.new(item: payment_schedule)
+      pgo.gateway_object = stp_subscription
+      pgo.save!
     end
 
     def create_stripe_coupon(coupon_id)
@@ -72,7 +74,7 @@ class StripeService
           # adjustment: when dividing the price of the plan / months, sometimes it forces us to round the amount per month.
           # The difference is invoiced here
           p1 = create_price(first_item.details['adjustment'],
-                            subscription.plan.stp_product_id,
+                            subscription.plan.payment_gateway_object.gateway_object_id,
                             "Price adjustment for payment schedule #{payment_schedule.id}")
           items.push(price: p1[:id])
         end
@@ -104,7 +106,7 @@ class StripeService
     def handle_wallet_transaction(payment_schedule)
       return unless payment_schedule.wallet_amount
 
-      customer_id = payment_schedule.invoicing_profile.user.stp_customer_id
+      customer_id = payment_schedule.invoicing_profile.user.payment_gateway_object.gateway_object_id
       Stripe::Customer.update(customer_id, { balance: -payment_schedule.wallet_amount }, { api_key: Setting.get('stripe_secret_key') })
     end
   end

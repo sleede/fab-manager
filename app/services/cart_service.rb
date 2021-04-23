@@ -11,12 +11,11 @@ class CartService
   # @see app/frontend/src/javascript/models/payment.ts > interface CartItems
   ##
   def from_hash(cart_items)
-    items = []
+    @customer = customer(cart_items)
     plan_info = plan(cart_items)
 
-    @customer = User.find(cart_items[:customer_id])
-
-    items.push(CartItem::Subscription.new(plan_info[:plan])) if cart_items[:subscription]
+    items = []
+    items.push(CartItem::Subscription.new(plan_info[:plan])) if plan_info[:new_subscription]
     items.push(reservable_from_hash(cart_items[:reservation], plan_info)) if cart_items[:reservation]
 
     coupon = CartItem::Coupon.new(@customer, @operator, cart_items[:coupon_code])
@@ -37,7 +36,7 @@ class CartService
     plan = if @customer.subscribed_plan
              new_plan_being_bought = false
              @customer.subscribed_plan
-           elsif cart_items[:subscription]
+           elsif cart_items[:subscription] && cart_items[:subscription][:plan_id]
              new_plan_being_bought = true
              Plan.find(cart_items[:subscription][:plan_id])
            else
@@ -45,6 +44,14 @@ class CartService
              nil
            end
     { plan: plan, new_subscription: new_plan_being_bought }
+  end
+
+  def customer(cart_items)
+    if @operator.admin? || (@operator.manager? && @operator.id != cart_items[:customer_id])
+      User.find(cart_items[:customer_id])
+    else
+      @operator
+    end
   end
 
   def reservable_from_hash(cart_item, plan_info)

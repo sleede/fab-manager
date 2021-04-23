@@ -10,6 +10,11 @@ class PaymentGatewayObject < ApplicationRecord
   belongs_to :subscription, foreign_type: 'Subscription', foreign_key: 'item_id'
   belongs_to :payment_schedule, foreign_type: 'PaymentSchedule', foreign_key: 'item_id'
   belongs_to :payment_schedule_item, foreign_type: 'PaymentScheduleItem', foreign_key: 'item_id'
+  belongs_to :user, foreign_type: 'User', foreign_key: 'item_id'
+  belongs_to :plan, foreign_type: 'Plan', foreign_key: 'item_id'
+  belongs_to :machine, foreign_type: 'Machine', foreign_key: 'item_id'
+  belongs_to :space, foreign_type: 'Space', foreign_key: 'item_id'
+  belongs_to :training, foreign_type: 'Training', foreign_key: 'item_id'
 
   def gateway_object
     Payment::ItemBuilder.build(gateway_object_type, gateway_object_id)

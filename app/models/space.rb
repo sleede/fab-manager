@@ -24,6 +24,8 @@ class Space < ApplicationRecord
   has_many :prices, as: :priceable, dependent: :destroy
   has_many :credits, as: :creditable, dependent: :destroy
 
+  has_one :payment_gateway_object, as: :item
+
   after_create :create_statistic_subtype
   after_create :create_space_prices
   after_create :update_stripe_product

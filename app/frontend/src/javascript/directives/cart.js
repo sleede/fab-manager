@@ -680,18 +680,12 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
         /**
          * Create a hash map implementing the Subscription specs
          * @param planId {number}
-         * @param userId {number}
-         * @param schedule {boolean}
-         * @param method {String} 'stripe' | 'payzen' | ''
-         * @return {{subscription: {payment_schedule: boolean, user_id: number, plan_id: number}}}
+         * @return {{subscription: {plan_id: number}}}
          */
-        const mkSubscription = function (planId, userId, schedule, method) {
+        const mkSubscription = function (planId) {
           return {
             subscription: {
-              plan_id: planId,
-              user_id: userId,
-              payment_schedule: schedule,
-              payment_method: method
+              plan_id: planId
             }
           };
         };
@@ -703,11 +697,15 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
          * @return {CartItems}
          */
         const mkCartItems = function (reservation, paymentMethod) {
-          let request = { reservation };
+          const request = {
+            customer_id: reservation.user_id,
+            payment_schedule: $scope.schedule.requested_schedule,
+            payment_method: paymentMethod
+          };
           if (reservation.slots_attributes.length === 0 && reservation.plan_id) {
-            request = mkSubscription($scope.selectedPlan.id, reservation.user_id, $scope.schedule.requested_schedule, paymentMethod);
+            Object.assign(request, mkSubscription($scope.selectedPlan.id));
           } else {
-            request.reservation.payment_method = paymentMethod;
+            Object.assign(request, { reservation });
           }
           return mkRequestParams(request, $scope.coupon.applied);
         };

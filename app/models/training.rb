@@ -26,6 +26,8 @@ class Training < ApplicationRecord
   has_many :credits, as: :creditable, dependent: :destroy
   has_many :plans, through: :credits
 
+  has_one :payment_gateway_object, as: :item
+
   after_create :create_statistic_subtype
   after_create :create_trainings_pricings
   after_create :update_stripe_product

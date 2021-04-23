@@ -57,7 +57,7 @@ class API::SubscriptionsController < API::ApiController
                           plan_id: subscription_params[:plan_id]
                         },
                         coupon_code: coupon_params[:coupon_code],
-                        payment_schedule: !schedule.nil?)
+                        payment_schedule: subscription_params[:payment_schedule])
     price_details = cart.total
     user = User.find(user_id)
 

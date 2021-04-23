@@ -94,10 +94,10 @@ class Subscriptions::CreateAsAdminTest < ActionDispatch::IntegrationTest
            params: {
              setup_intent_id: setup_intent[:id],
              cart_items: {
+               customer_id: user.id,
                subscription: {
                  plan_id: plan.id,
                  payment_schedule: true,
-                 user_id: user.id,
                  payment_method: 'stripe'
                }
              }
