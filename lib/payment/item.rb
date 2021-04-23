@@ -7,13 +7,18 @@ module Payment; end
 class Payment::Item
   attr_reader :klass
 
-  def initialize(klass)
+  def initialize(klass, id = nil)
     @klass = klass
+    @id = id
   end
 
   def class
     klass
   end
 
-  def retrieve(_id); end
+  def payment_mean?
+    false
+  end
+
+  def retrieve(_id = nil); end
 end

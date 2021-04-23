@@ -29,6 +29,10 @@ class CartItem::Reservation < CartItem::BaseItem
     { elements: elements, amount: amount }
   end
 
+  def name
+    @reservable.name
+  end
+
   protected
 
   def credits

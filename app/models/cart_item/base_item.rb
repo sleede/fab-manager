@@ -10,4 +10,8 @@ class CartItem::BaseItem
   def price
     { elements: {}, amount: 0 }
   end
+
+  def name
+    ''
+  end
 end

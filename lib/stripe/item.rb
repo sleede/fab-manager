@@ -9,8 +9,12 @@ module Stripe; end
 class Stripe::Item < Payment::Item
   attr_accessor :id
 
-  def retrieve(id)
+  def retrieve(id = nil)
     @id ||= id
     klass.constantize.retrieve(@id, api_key: Setting.get('stripe_secret_key'))
+  end
+
+  def payment_mean?
+    klass == 'Stripe::SetupIntent'
   end
 end

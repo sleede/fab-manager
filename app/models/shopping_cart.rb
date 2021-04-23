@@ -8,7 +8,7 @@ class ShoppingCart
   # @param coupon {CartItem::Coupon}
   # @param payment_schedule {CartItem::PaymentSchedule}
   # @param customer {User}
-  def initialize(customer, coupon, payment_method = '', items: [], payment_schedule: nil)
+  def initialize(customer, coupon, payment_schedule, payment_method = '', items: [])
     raise TypeError unless customer.class == User
 
     @customer = customer
@@ -18,6 +18,7 @@ class ShoppingCart
     @payment_schedule = payment_schedule
   end
 
+  # compute the price details of the current shopping cart
   def total
     total_amount = 0
     all_elements = { slots: [] }

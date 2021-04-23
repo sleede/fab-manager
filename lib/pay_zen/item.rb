@@ -9,9 +9,13 @@ module PayZen; end
 class PayZen::Item < Payment::Item
   attr_accessor :id
 
-  def retrieve(id)
+  def retrieve(id = nil)
     @id ||= id
     client = klass.constantize
     client.get(@id)
+  end
+
+  def payment_mean?
+    klass == 'PayZen::Token'
   end
 end

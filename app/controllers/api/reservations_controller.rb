@@ -64,14 +64,15 @@ class API::ReservationsController < API::ApiController
 
   def transaction_amount(is_admin, user_id)
     user = User.find(user_id)
-    price_details = Price.compute(is_admin,
-                                  user,
-                                  reservation_params[:reservable_type].constantize.find(reservation_params[:reservable_id]),
-                                  reservation_params[:slots_attributes] || [],
-                                  plan_id: reservation_params[:plan_id],
-                                  nb_places: reservation_params[:nb_reserve_places],
-                                  tickets: reservation_params[:tickets_attributes],
-                                  coupon_code: coupon_params[:coupon_code])
+    cs = CartService.new(current_user)
+    cart = cs.from_hash(customer_id: user_id,
+                        subscription: {
+                          plan_id: reservation_params[:plan_id]
+                        },
+                        reservation: reservation_params,
+                        coupon_code: coupon_params[:coupon_code],
+                        payment_schedule: !schedule.nil?)
+    price_details = cart.total
 
     # Subtract wallet amount from total
     total = price_details[:total]

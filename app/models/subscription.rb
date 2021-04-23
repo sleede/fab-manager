@@ -87,8 +87,10 @@ class Subscription < ApplicationRecord
   end
 
   def original_payment_schedule
+    # if the payment schedule was associated with this subscription, return it directly
     return payment_schedule if payment_schedule
 
+    # if it was associated with a reservation, query payment schedule from one of its items
     PaymentScheduleItem.where("cast(details->>'subscription_id' AS int) = ?", id).first&.payment_schedule
   end
 

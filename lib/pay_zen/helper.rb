@@ -28,7 +28,7 @@ class PayZen::Helper
     end
 
     ## Generate a hash map compatible with PayZen 'V4/Customer/Customer'
-    def generate_customer(customer_id)
+    def generate_customer(customer_id, cart_items)
       customer = User.find(customer_id)
       address = if customer.organization?
                   customer.invoicing_profile.organization.address&.address
@@ -48,18 +48,24 @@ class PayZen::Helper
         shippingDetails: {
           category: customer.organization? ? 'COMPANY' : 'PRIVATE',
           shippingMethod: 'ETICKET'
-        }
+        },
+        shoppingCart: generate_shopping_cart(cart_items, customer)
       }
     end
 
     ## Generate a hash map compatible with PayZen 'V4/Customer/ShoppingCart'
     def generate_shopping_cart(cart_items, customer)
+      cs = CartService.new(current_user)
+      cart = cs.from_hash(cart_items)
       {
-        cartItemInfo: cart_items.map do |type, value|
+        cartItemInfo: cart.items.map do |item|
           {
-            productAmount: item.
-            productType: customer.organization? ? 'SERVICE_FOR_BUSINESS' : 'SERVICE_FOR_INDIVIDUAL',
+            productAmount: item.price,
+            productLabel: item.name,
+            productQty: 1,
+            productType: customer.organization? ? 'SERVICE_FOR_BUSINESS' : 'SERVICE_FOR_INDIVIDUAL'
           }
+        end
       }
     end
 

@@ -18,40 +18,9 @@ class API::PaymentsController < API::ApiController
   end
 
   def card_amount
-    if params[:cart_items][:reservation]
-      reservable = cart_items_params[:reservable_type].constantize.find(cart_items_params[:reservable_id])
-      plan_id = cart_items_params[:plan_id]
-      slots = cart_items_params[:slots_attributes] || []
-      nb_places = cart_items_params[:nb_reserve_places]
-      tickets = cart_items_params[:tickets_attributes]
-      user_id = if current_user.admin? || current_user.manager?
-                  params[:cart_items][:reservation][:user_id]
-                else
-                  current_user.id
-                end
-    else
-      raise NotImplementedError unless params[:cart_items][:subscription]
-
-      reservable = nil
-      plan_id = subscription_params[:plan_id]
-      slots = []
-      nb_places = nil
-      tickets = nil
-      user_id = if current_user.admin? || current_user.manager?
-                  params[:cart_items][:subscription][:user_id]
-                else
-                  current_user.id
-                end
-    end
-
-    price_details = Price.compute(false,
-                                  User.find(user_id),
-                                  reservable,
-                                  slots,
-                                  plan_id: plan_id,
-                                  nb_places: nb_places,
-                                  tickets: tickets,
-                                  coupon_code: coupon_params[:coupon_code])
+    cs = CartService.new(current_user)
+    cart = cs.from_hash(params[:cart_items])
+    price_details = cart.total
 
     # Subtract wallet amount from total
     total = price_details[:total]

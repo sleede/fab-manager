@@ -12,8 +12,7 @@ class PaymentGatewayObject < ApplicationRecord
   belongs_to :payment_schedule_item, foreign_type: 'PaymentScheduleItem', foreign_key: 'item_id'
 
   def gateway_object
-    item = Payment::ItemBuilder.build(gateway_object_type)
-    item.retrieve(gateway_object_id)
+    Payment::ItemBuilder.build(gateway_object_type, gateway_object_id)
   end
 
   def gateway_object=(object)

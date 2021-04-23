@@ -6,6 +6,10 @@ class CartService
     @operator = operator
   end
 
+  ##
+  # For details about the expected hash format
+  # @see app/frontend/src/javascript/models/payment.ts > interface CartItems
+  ##
   def from_hash(cart_items)
     items = []
     plan_info = plan(cart_items)
@@ -21,9 +25,9 @@ class CartService
     ShoppingCart.new(
       @customer,
       coupon,
+      schedule,
       cart_items[:payment_method],
-      items: items,
-      payment_schedule: schedule
+      items: items
     )
   end
 

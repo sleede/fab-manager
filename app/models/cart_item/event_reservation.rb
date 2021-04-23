@@ -33,4 +33,7 @@ class CartItem::EventReservation < CartItem::Reservation
     { elements: elements, amount: amount }
   end
 
+  def name
+    @reservable.title
+  end
 end

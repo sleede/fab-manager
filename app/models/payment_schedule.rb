@@ -48,8 +48,8 @@ class PaymentSchedule < PaymentDocument
     payment_schedule_items.order(due_date: :asc)
   end
 
-  def gateway_object(klass)
-    payment_gateway_objects.find_by(gateway_object_type: klass)
+  def gateway_payment_mean
+    payment_gateway_objects.map(&:gateway_object).find(&:payment_mean?)
   end
 
   def user

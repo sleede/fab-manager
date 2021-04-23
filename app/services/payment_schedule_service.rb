@@ -60,10 +60,12 @@ class PaymentScheduleService
 
     ps.scheduled = reservation || subscription
     ps.payment_method = payment_method
-    ps.payment_gateway_object = {
-      gateway_object_id: payment_id,
-      gateway_object_type: payment_type
-    }
+    if !payment_id.nil? && !payment_type.nil?
+      ps.payment_gateway_object = {
+        gateway_object_id: payment_id,
+        gateway_object_type: payment_type
+      }
+    end
     ps.operator_profile = operator.invoicing_profile
     ps.invoicing_profile = user.invoicing_profile
     ps.statistic_profile = user.statistic_profile

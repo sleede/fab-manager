@@ -14,4 +14,8 @@ class CartItem::Subscription < CartItem::BaseItem
 
     { elements: elements, amount: amount }
   end
+
+  def name
+    @plan.name
+  end
 end
