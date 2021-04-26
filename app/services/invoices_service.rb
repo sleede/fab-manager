@@ -79,7 +79,7 @@ class InvoicesService
              end
 
     invoice = Invoice.new(
-      invoiced: subscription || reservation,
+      invoiced: reservation || subscription,
       invoicing_profile: user.invoicing_profile,
       statistic_profile: user.statistic_profile,
       operator_profile_id: operator_profile_id,

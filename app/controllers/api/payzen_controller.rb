@@ -62,48 +62,10 @@ class API::PayzenController < API::PaymentsController
   private
 
   def on_reservation_success(order_id, details)
-    @reservation = Reservation.new(reservation_params)
-    payment_method = params[:cart_items][:reservation][:payment_method] || 'card'
-    user_id = if current_user.admin? || current_user.manager?
-                params[:cart_items][:reservation][:user_id]
-              else
-                current_user.id
-              end
-    is_reserve = Reservations::Reserve.new(user_id, current_user.invoicing_profile.id)
-                                      .pay_and_save(@reservation,
-                                                    payment_details: details,
-                                                    payment_id: order_id,
-                                                    payment_type: 'PayZen::Order',
-                                                    schedule: params[:cart_items][:reservation][:payment_schedule],
-                                                    payment_method: payment_method)
-    if is_reserve
-      SubscriptionExtensionAfterReservation.new(@reservation).extend_subscription_if_eligible
-
-      { template: 'api/reservations/show', status: :created, location: @reservation }
-    else
-      { json: @reservation.errors, status: :unprocessable_entity }
-    end
+    super(order_id, 'PayZen::Order', details)
   end
 
   def on_subscription_success(order_id, details)
-    @subscription = Subscription.new(subscription_params)
-    user_id = if current_user.admin? || current_user.manager?
-                params[:cart_items][:subscription][:user_id]
-              else
-                current_user.id
-              end
-    is_subscribe = Subscriptions::Subscribe.new(current_user.invoicing_profile.id, user_id)
-                                           .pay_and_save(@subscription,
-                                                         payment_details: details,
-                                                         payment_id: order_id,
-                                                         payment_type: 'PayZen::Order',
-                                                         schedule: params[:cart_items][:subscription][:payment_schedule],
-                                                         payment_method: 'card')
-
-    if is_subscribe
-      { template: 'api/subscriptions/show', status: :created, location: @subscription }
-    else
-      { json: @subscription.errors, status: :unprocessable_entity }
-    end
+    super(order_id, 'PayZen::Order', details)
   end
 end

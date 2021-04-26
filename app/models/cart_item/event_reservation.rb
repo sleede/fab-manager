@@ -25,10 +25,10 @@ class CartItem::EventReservation < CartItem::Reservation
 
     @slots.each do |slot|
       total += get_slot_price(amount,
-                               slot,
-                               is_privileged,
-                               elements: elements,
-                               is_division: false)
+                              slot,
+                              is_privileged,
+                              elements: elements,
+                              is_division: false)
     end
 
     { elements: elements, amount: total }

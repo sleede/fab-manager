@@ -106,65 +106,32 @@ class API::StripeController < API::PaymentsController
 
   private
 
+  def post_reservation_save(intent_id, intent_type)
+    return unless intent_type == 'Stripe::PaymentIntent'
+
+    Stripe::PaymentIntent.update(
+      intent_id,
+      { description: "Invoice reference: #{@reservation.invoice.reference}" },
+      { api_key: Setting.get('stripe_secret_key') }
+    )
+  end
+
+  def post_subscription_save(intent_id, intent_type)
+    return unless intent_type == 'Stripe::PaymentIntent'
+
+    Stripe::PaymentIntent.update(
+      intent_id,
+      { description: "Invoice reference: #{@subscription.invoices.first.reference}" },
+      { api_key: Setting.get('stripe_secret_key') }
+    )
+  end
+
   def on_reservation_success(intent, details)
-    @reservation = Reservation.new(reservation_params)
-    payment_method = params[:cart_items][:reservation][:payment_method] || 'card'
-    user_id = if current_user.admin? || current_user.manager?
-                params[:cart_items][:reservation][:user_id]
-              else
-                current_user.id
-              end
-    is_reserve = Reservations::Reserve.new(user_id, current_user.invoicing_profile.id)
-                                      .pay_and_save(@reservation,
-                                                    payment_details: details,
-                                                    payment_id: intent.id,
-                                                    payment_type: intent.class.name,
-                                                    schedule: params[:cart_items][:reservation][:payment_schedule],
-                                                    payment_method: payment_method)
-    if intent.class == Stripe::PaymentIntent
-      Stripe::PaymentIntent.update(
-        intent.id,
-        { description: "Invoice reference: #{@reservation.invoice.reference}" },
-        { api_key: Setting.get('stripe_secret_key') }
-      )
-    end
-
-    if is_reserve
-      SubscriptionExtensionAfterReservation.new(@reservation).extend_subscription_if_eligible
-
-      { template: 'api/reservations/show', status: :created, location: @reservation }
-    else
-      { json: @reservation.errors, status: :unprocessable_entity }
-    end
+    super(intent.id, intent.class.name, details)
   end
 
   def on_subscription_success(intent, details)
-    @subscription = Subscription.new(subscription_params)
-    user_id = if current_user.admin? || current_user.manager?
-                params[:cart_items][:subscription][:user_id]
-              else
-                current_user.id
-              end
-    is_subscribe = Subscriptions::Subscribe.new(current_user.invoicing_profile.id, user_id)
-                                           .pay_and_save(@subscription,
-                                                         payment_details: details,
-                                                         payment_id: intent.id,
-                                                         payment_type: intent.class.name,
-                                                         schedule: params[:cart_items][:subscription][:payment_schedule],
-                                                         payment_method: 'card')
-    if intent.class == Stripe::PaymentIntent
-      Stripe::PaymentIntent.update(
-        intent.id,
-        { description: "Invoice reference: #{@subscription.invoices.first.reference}" },
-        { api_key: Setting.get('stripe_secret_key') }
-      )
-    end
-
-    if is_subscribe
-      { template: 'api/subscriptions/show', status: :created, location: @subscription }
-    else
-      { json: @subscription.errors, status: :unprocessable_entity }
-    end
+    super(intent.id, intent.class.name, details)
   end
 
   def generate_payment_response(intent, res = nil)
