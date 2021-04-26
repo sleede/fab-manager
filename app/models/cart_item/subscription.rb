@@ -3,7 +3,7 @@
 # A subscription added to the shopping cart
 class CartItem::Subscription < CartItem::BaseItem
   def initialize(plan)
-    raise TypeError unless plan.class == Plan
+    raise TypeError unless plan.is_a? Plan
 
     @plan = plan
   end

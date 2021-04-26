@@ -5,7 +5,7 @@ class CartItem::SpaceReservation < CartItem::Reservation
   # @param plan {Plan} a subscription bought at the same time of the reservation OR an already running subscription
   # @param new_subscription {Boolean} true is new subscription is being bought at the same time of the reservation
   def initialize(customer, operator, space, slots, plan: nil, new_subscription: false)
-    raise TypeError unless space.class == Space
+    raise TypeError unless space.is_a? Space
 
     super(customer, operator, space, slots)
     @plan = plan

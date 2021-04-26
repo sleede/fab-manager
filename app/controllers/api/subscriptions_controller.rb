@@ -13,7 +13,7 @@ class API::SubscriptionsController < API::ApiController
   # otherwise, they must use payments_controller#confirm_payment.
   # Managers can create subscriptions for other users
   def create
-    user_id = current_user.admin? || current_user.manager? ? params[:subscription][:user_id] : current_user.id
+    user_id = current_user.admin? || current_user.manager? ? params[:customer_id] : current_user.id
     transaction = transaction_amount(user_id)
 
     authorize SubscriptionContext.new(Subscription, transaction[:amount], user_id)
@@ -57,7 +57,7 @@ class API::SubscriptionsController < API::ApiController
                           plan_id: subscription_params[:plan_id]
                         },
                         coupon_code: coupon_params[:coupon_code],
-                        payment_schedule: subscription_params[:payment_schedule])
+                        payment_schedule: params[:payment_schedule])
     price_details = cart.total
     user = User.find(user_id)
 

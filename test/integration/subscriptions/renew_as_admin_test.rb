@@ -15,9 +15,9 @@ class Subscriptions::RenewAsAdminTest < ActionDispatch::IntegrationTest
     VCR.use_cassette('subscriptions_admin_renew_success') do
       post '/api/subscriptions',
            params: {
+             customer_id: user.id,
              subscription: {
-               plan_id: plan.id,
-               user_id: user.id
+               plan_id: plan.id
              }
            }.to_json, headers: default_headers
     end

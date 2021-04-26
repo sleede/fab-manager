@@ -64,7 +64,7 @@ class FootprintService
 
     # Return a comparable value for jsonb fields (with keys ordered alphabetically)
     def comparable(value)
-      return value unless value.class == Hash
+      return value unless value.is_a? Hash
 
       value.sort.to_h
     end

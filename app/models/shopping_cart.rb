@@ -9,7 +9,7 @@ class ShoppingCart
   # @param payment_schedule {CartItem::PaymentSchedule}
   # @param customer {User}
   def initialize(customer, coupon, payment_schedule, payment_method = '', items: [])
-    raise TypeError unless customer.class == User
+    raise TypeError unless customer.is_a? User
 
     @customer = customer
     @payment_method = payment_method

@@ -5,7 +5,7 @@ class CartItem::TrainingReservation < CartItem::Reservation
   # @param plan {Plan} a subscription bought at the same time of the reservation OR an already running subscription
   # @param new_subscription {Boolean} true is new subscription is being bought at the same time of the reservation
   def initialize(customer, operator, training, slots, plan: nil, new_subscription: false)
-    raise TypeError unless training.class == Training
+    raise TypeError unless training.is_a? Training
 
     super(customer, operator, training, slots)
     @plan = plan

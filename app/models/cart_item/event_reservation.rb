@@ -5,7 +5,7 @@ class CartItem::EventReservation < CartItem::Reservation
   # @param normal_tickets {Number} number of tickets at the normal price
   # @param other_tickets {Array<{booked: Number, event_price_category_id: Number}>}
   def initialize(customer, operator, event, slots, normal_tickets: 0, other_tickets: [])
-    raise TypeError unless event.class == Event
+    raise TypeError unless event.is_a? Event
 
     super(customer, operator, event, slots)
     @normal_tickets = normal_tickets

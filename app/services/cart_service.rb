@@ -33,12 +33,12 @@ class CartService
   private
 
   def plan(cart_items)
-    plan = if @customer.subscribed_plan
-             new_plan_being_bought = false
-             @customer.subscribed_plan
-           elsif cart_items[:subscription] && cart_items[:subscription][:plan_id]
+    plan = if cart_items[:subscription] && cart_items[:subscription][:plan_id]
              new_plan_being_bought = true
              Plan.find(cart_items[:subscription][:plan_id])
+           elsif @customer.subscribed_plan
+             new_plan_being_bought = false
+             @customer.subscribed_plan
            else
              new_plan_being_bought = false
              nil

@@ -121,7 +121,7 @@ class InvoicesService
   # This method must be called if reservation.reservable is an Event
   ##
   def self.generate_event_item(invoice, reservation, payment_details)
-    raise TypeError unless reservation.reservable.class == Event
+    raise TypeError unless reservation.reservable.is_a? Event
 
     reservation.slots.each do |slot|
       description = "#{reservation.reservable.name}\n"
