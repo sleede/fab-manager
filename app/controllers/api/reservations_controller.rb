@@ -34,11 +34,13 @@ class API::ReservationsController < API::ApiController
     authorize ReservationContext.new(Reservation, price[:amount], user_id)
 
     @reservation = Reservation.new(reservation_params)
+    @reservation.plan_id = params[:subscription][:plan_id] if params[:subscription] && params[:subscription][:plan_id]
+
     is_reserve = Reservations::Reserve.new(user_id, current_user.invoicing_profile.id)
                                       .pay_and_save(@reservation,
                                                     payment_details: price[:price_details],
-                                                    schedule: params[:reservation][:payment_schedule],
-                                                    payment_method: params[:reservation][:payment_method])
+                                                    schedule: params[:payment_schedule],
+                                                    payment_method: params[:payment_method])
 
     if is_reserve
       SubscriptionExtensionAfterReservation.new(@reservation).extend_subscription_if_eligible
@@ -67,11 +69,11 @@ class API::ReservationsController < API::ApiController
     cs = CartService.new(current_user)
     cart = cs.from_hash(customer_id: user_id,
                         subscription: {
-                          plan_id: reservation_params[:plan_id]
+                          plan_id: params[:subscription] ? params[:subscription][:plan_id] : nil
                         },
                         reservation: reservation_params,
                         coupon_code: coupon_params[:coupon_code],
-                        payment_schedule: reservation_params[:payment_schedule])
+                        payment_schedule: params[:payment_schedule])
     price_details = cart.total
 
     # Subtract wallet amount from total
@@ -91,7 +93,7 @@ class API::ReservationsController < API::ApiController
   end
 
   def reservation_params
-    params.require(:reservation).permit(:message, :reservable_id, :reservable_type, :plan_id, :nb_reserve_places,
+    params.require(:reservation).permit(:message, :reservable_id, :reservable_type, :nb_reserve_places,
                                         tickets_attributes: %i[event_price_category_id booked],
                                         slots_attributes: %i[id start_at end_at availability_id offered])
   end

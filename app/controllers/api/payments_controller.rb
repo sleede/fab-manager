@@ -68,7 +68,7 @@ class API::PaymentsController < API::ApiController
                                                     payment_details: details,
                                                     payment_id: gateway_item_id,
                                                     payment_type: gateway_item_type,
-                                                    schedule: params[:cart_items][:reservation][:payment_schedule],
+                                                    schedule: params[:cart_items][:payment_schedule],
                                                     payment_method: payment_method)
     post_reservation_save(gateway_item_id, gateway_item_type)
 
