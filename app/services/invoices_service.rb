@@ -75,18 +75,19 @@ class InvoicesService
     method = if payment_method
                payment_method
              else
-               operator&.admin? || (operator&.manager? && operator != user) ? nil : Setting.get('payment_gateway')
+               operator&.admin? || (operator&.manager? && operator != user) ? nil : 'card'
              end
 
-    pgo = payment_id.nil? ? {} : { gateway_object_id: payment_id, gateway_object_type: payment_type }
     invoice = Invoice.new(
       invoiced: subscription || reservation,
       invoicing_profile: user.invoicing_profile,
       statistic_profile: user.statistic_profile,
       operator_profile_id: operator_profile_id,
-      payment_gateway_object_attributes: pgo,
       payment_method: method
     )
+    unless payment_id.nil?
+      invoice.payment_gateway_object = PaymentGatewayObject.new(gateway_object_id: payment_id, gateway_object_type: payment_type)
+    end
 
     InvoicesService.generate_invoice_items(invoice, payment_details, reservation: reservation, subscription: subscription)
     InvoicesService.set_total_and_coupon(invoice, user, payment_details[:coupon])

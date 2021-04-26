@@ -22,7 +22,6 @@ class Invoice < PaymentDocument
   has_one :avoir, class_name: 'Invoice', foreign_key: :invoice_id, dependent: :destroy
   has_one :payment_schedule_item
   has_one :payment_gateway_object, as: :item
-  accepts_nested_attributes_for :payment_gateway_object
   belongs_to :operator_profile, foreign_key: :operator_profile_id, class_name: 'InvoicingProfile'
 
   before_create :add_environment

@@ -91,12 +91,11 @@ class PaymentScheduleService
       invoicing_profile: payment_schedule_item.payment_schedule.invoicing_profile,
       statistic_profile: payment_schedule_item.payment_schedule.statistic_profile,
       operator_profile_id: payment_schedule_item.payment_schedule.operator_profile_id,
-      payment_gateway_object_attributes: {
-        gateway_object_id: payment_id,
-        gateway_object_type: payment_type
-      },
       payment_method: payment_method
     )
+    unless payment_id.nil?
+      invoice.payment_gateway_object = PaymentGatewayObject.new(gateway_object_id: payment_id, gateway_object_type: payment_type)
+    end
     # complete the invoice with some InvoiceItem
     if payment_schedule_item.first?
       complete_first_invoice(payment_schedule_item, invoice)
