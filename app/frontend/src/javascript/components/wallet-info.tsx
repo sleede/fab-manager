@@ -48,13 +48,7 @@ export const WalletInfo: React.FC<WalletInfoProps> = ({ cartItems, currentUser, 
    * If the currently connected user (i.e. the operator), is an admin or a manager, he may book the reservation for someone else.
    */
   const isOperatorAndClient = (): boolean => {
-    return currentUser.id == buyingItem().user_id;
-  }
-  /**
-   * Return the item currently bought (reservation or subscription)
-   */
-  const buyingItem = (): Reservation|SubscriptionRequest => {
-    return cartItems.reservation || cartItems.subscription;
+    return currentUser.id == cartItems.customer_id;
   }
   /**
    * If the client has some money in his wallet & the price is not zero, then we should display this component.
@@ -73,7 +67,7 @@ export const WalletInfo: React.FC<WalletInfoProps> = ({ cartItems, currentUser, 
    * Does the current cart contains a payment schedule?
    */
   const isPaymentSchedule = (): boolean => {
-    return buyingItem().plan_id && buyingItem().payment_schedule;
+    return cartItems.subscription && cartItems.payment_schedule;
   }
   /**
    * Return the human-readable name of the item currently bought with the wallet
@@ -83,7 +77,7 @@ export const WalletInfo: React.FC<WalletInfoProps> = ({ cartItems, currentUser, 
     if (cartItems.reservation) {
       item = 'reservation';
     } else if (cartItems.subscription) {
-      if (cartItems.subscription.payment_schedule) {
+      if (cartItems.payment_schedule) {
         item = 'first_deadline';
       } else item = 'subscription';
     }
