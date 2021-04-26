@@ -299,7 +299,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
     $scope.payEvent = function () {
     // first, we check that a user was selected
       if (Object.keys($scope.ctrl.member).length > 0) {
-        const reservation = mkReservation($scope.ctrl.member, $scope.reserve, $scope.event);
+        const reservation = mkReservation($scope.reserve, $scope.event);
 
         return Wallet.getWalletByUser({ user_id: $scope.ctrl.member.id }, function (wallet) {
           const amountToPay = helpers.getAmountToPay($scope.reserve.amountTotal, wallet.amount);
@@ -328,32 +328,36 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
      * Callback to validate the booking of a free event
      */
     $scope.validReserveEvent = function () {
-      const reservation = {
-        user_id: $scope.ctrl.member.id,
-        reservable_id: $scope.event.id,
-        reservable_type: 'Event',
-        slots_attributes: [],
-        nb_reserve_places: $scope.reserve.nbReservePlaces,
-        tickets_attributes: []
-      };
+      const cartItems = {
+        customer_id: $scope.ctrl.member.id,
+        reservation: {
+          reservable_id: $scope.event.id,
+          reservable_type: 'Event',
+          slots_attributes: [],
+          nb_reserve_places: $scope.reserve.nbReservePlaces,
+          tickets_attributes: []
+        }
+      }
       // a single slot is used for events
-      reservation.slots_attributes.push({
+      cartItems.reservation.slots_attributes.push({
         start_at: $scope.event.start_date,
         end_at: $scope.event.end_date,
         availability_id: $scope.event.availability.id
       });
       // iterate over reservations per prices
       for (let price_id in $scope.reserve.tickets) {
-        const seats = $scope.reserve.tickets[price_id];
-        reservation.tickets_attributes.push({
-          event_price_category_id: price_id,
-          booked: seats
-        });
+        if (Object.prototype.hasOwnProperty.call($scope.reserve.tickets, price_id)) {
+          const seats = $scope.reserve.tickets[price_id];
+          cartItems.reservation.tickets_attributes.push({
+            event_price_category_id: price_id,
+            booked: seats
+          });
+        }
       }
       // set the attempting marker
       $scope.attempting = true;
       // save the reservation to the API
-      return Reservation.save({ reservation }, function (reservation) {
+      return Reservation.save(cartItems, function (reservation) {
       // reservation successfull
         afterPayment(reservation);
         return $scope.attempting = false;
@@ -513,8 +517,8 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
     $scope.computeEventAmount = function () {
     // first we check that a user was selected
       if (Object.keys($scope.ctrl.member).length > 0) {
-        const r = mkReservation($scope.ctrl.member, $scope.reserve, $scope.event);
-        return Price.compute(mkRequestParams(r, $scope.coupon.applied), function (res) {
+        const r = mkReservation($scope.reserve, $scope.event);
+        return Price.compute(mkCartItems(r, $scope.coupon.applied), function (res) {
           $scope.reserve.amountTotal = res.price;
           return $scope.reserve.totalNoCoupon = res.price_without_coupon;
         });
@@ -589,15 +593,13 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
     };
 
     /**
-     * Create an hash map implementing the Reservation specs
-     * @param member {Object} User as retreived from the API: current user / selected user if current is admin
+     * Create a hash map implementing the Reservation specs
      * @param reserve {Object} Reservation parameters (places...)
      * @param event {Object} Current event
-     * @return {{user_id:number, reservable_id:number, reservable_type:string, slots_attributes:Array<Object>, nb_reserve_places:number}}
+     * @return {{reservable_id:number, reservable_type:string, slots_attributes:Array<Object>, nb_reserve_places:number}}
      */
-    const mkReservation = function (member, reserve, event) {
+    const mkReservation = function (reserve, event) {
       const reservation = {
-        user_id: member.id,
         reservable_id: event.id,
         reservable_type: 'Event',
         slots_attributes: [],
@@ -629,13 +631,15 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
      * Format the parameters expected by /api/prices/compute or /api/reservations and return the resulting object
      * @param reservation {Object} as returned by mkReservation()
      * @param coupon {Object} Coupon as returned from the API
+     * @param paymentMethod {string} 'card' | ''
      * @return {{reservation:Object, coupon_code:string}}
      */
-    const mkRequestParams = function (reservation, coupon) {
+    const mkCartItems = function (reservation, coupon, paymentMethod = '') {
       return {
         customer_id: reservation.user_id,
         reservation,
-        coupon_code: ((coupon ? coupon.code : undefined))
+        coupon_code: ((coupon ? coupon.code : undefined)),
+        payment_method: paymentMethod,
       };
     };
 
@@ -677,7 +681,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
             return reservation;
           },
           price () {
-            return Price.compute(mkRequestParams(reservation, $scope.coupon.applied)).$promise;
+            return Price.compute(mkCartItems(reservation, $scope.coupon.applied, 'card')).$promise;
           },
           wallet () {
             return Wallet.getWalletByUser({ user_id: reservation.user_id }).$promise;
@@ -696,7 +700,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
             return $scope.coupon.applied;
           },
           cartItems () {
-            return mkRequestParams(reservation, $scope.coupon.applied);
+            return mkCartItems(reservation, $scope.coupon.applied, 'card');
           },
           stripeKey: ['Setting', function (Setting) { return Setting.get({ name: 'stripe_public_key' }).$promise; }]
         },
@@ -748,7 +752,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
             return reservation;
           },
           price () {
-            return Price.compute(mkRequestParams(reservation, $scope.coupon.applied)).$promise;
+            return Price.compute(mkCartItems(reservation, $scope.coupon.applied)).$promise;
           },
           wallet () {
             return Wallet.getWalletByUser({ user_id: reservation.user_id }).$promise;
@@ -757,7 +761,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
             return $scope.coupon.applied;
           },
           cartItems () {
-            return mkRequestParams(reservation, $scope.coupon.applied);
+            return mkCartItems(reservation, $scope.coupon.applied);
           },
         },
         controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', 'wallet', 'helpers', '$filter', 'coupon', 'cartItems',
@@ -794,7 +798,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
             // Callback to validate the payment
             $scope.ok = function () {
               $scope.attempting = true;
-              return Reservation.save(mkRequestParams($scope.reservation, coupon), function (reservation) {
+              return Reservation.save(mkCartItems($scope.reservation, coupon), function (reservation) {
                 $uibModalInstance.close(reservation);
                 return $scope.attempting = true;
               }

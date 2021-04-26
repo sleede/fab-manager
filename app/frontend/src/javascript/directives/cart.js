@@ -612,8 +612,8 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
          */
         const updateCartPrice = function () {
           if (Object.keys($scope.user).length > 0) {
-            const r = mkReservation($scope.user, $scope.events.reserved, $scope.selectedPlan);
-            return Price.compute(mkRequestParams({ reservation: r }, $scope.coupon.applied), function (res) {
+            const r = mkReservation($scope.events.reserved);
+            return Price.compute(mkCartItems([r], ''), function (res) {
               $scope.amountTotal = res.price;
               $scope.schedule.payment_schedule = res.schedule;
               $scope.totalNoCoupon = res.price_without_coupon;
@@ -638,32 +638,15 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
         };
 
         /**
-         * Format the parameters expected by /api/prices/compute or /api/reservations and return the resulting object
-         * @param request {{reservation: *}|{subscription: *}} as returned by mkReservation()
-         * @param coupon {{code: string}} Coupon as returned from the API
-         * @return {CartItems}
-         */
-        const mkRequestParams = function (request, coupon) {
-          return Object.assign({
-            coupon_code: ((coupon ? coupon.code : undefined))
-          }, request);
-        };
-
-        /**
          * Create a hash map implementing the Reservation specs
-         * @param member {Object} User as retrieved from the API: current user / selected user if current is admin
          * @param slots {Array<Object>} Array of fullCalendar events: slots selected on the calendar
-         * @param [plan] {Object} Plan as retrieved from the API: plan to buy with the current reservation
-         * @return {{reservable_type: string, payment_schedule: boolean, user_id: *, reservable_id: string, slots_attributes: [], plan_id: (*|undefined)}}
+         * @return {{reservation: {reservable_type: string, reservable_id: string, slots_attributes: []}}}
          */
-        const mkReservation = function (member, slots, plan) {
+        const mkReservation = function (slots) {
           const reservation = {
-            user_id: member.id,
             reservable_id: $scope.reservableId,
             reservable_type: $scope.reservableType,
-            slots_attributes: [],
-            plan_id: ((plan ? plan.id : undefined)),
-            payment_schedule: $scope.schedule.requested_schedule
+            slots_attributes: []
           };
           angular.forEach(slots, function (slot) {
             reservation.slots_attributes.push({
@@ -674,7 +657,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
             });
           });
 
-          return reservation;
+          return { reservation };
         };
 
         /**
@@ -692,22 +675,21 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
 
         /**
          * Build the CartItems object, from the current reservation
-         * @param reservation {*}
+         * @param items {Array<{reservation:{reservable_type: string, reservable_id: string, slots_attributes: []}}|{subscription: {plan_id: number}}>}
          * @param paymentMethod {string}
          * @return {CartItems}
          */
-        const mkCartItems = function (reservation, paymentMethod) {
-          const request = {
-            customer_id: reservation.user_id,
+        const mkCartItems = function (items, paymentMethod) {
+          const cartItems = {
+            customer_id: $scope.user.id,
             payment_schedule: $scope.schedule.requested_schedule,
-            payment_method: paymentMethod
+            payment_method: paymentMethod,
+            coupon_code: (($scope.coupon.applied ? $scope.coupon.applied.code : undefined))
           };
-          if (reservation.slots_attributes.length === 0 && reservation.plan_id) {
-            Object.assign(request, mkSubscription($scope.selectedPlan.id));
-          } else {
-            Object.assign(request, { reservation });
+          for (const item of items) {
+            Object.assign(cartItems, item);
           }
-          return mkRequestParams(request, $scope.coupon.applied);
+          return cartItems;
         };
 
         /**
@@ -719,7 +701,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
             growl.error(_t('app.shared.cart.online_payment_disabled'));
           } else {
             $scope.toggleOnlinePaymentModal(() => {
-              $scope.onlinePayment.cartItems = mkCartItems(reservation, 'card');
+              $scope.onlinePayment.cartItems = mkCartItems([reservation], 'card');
             });
           }
         };
@@ -735,11 +717,10 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                 return reservation;
               },
               price () {
-                return Price.compute(mkRequestParams({ reservation }, $scope.coupon.applied)).$promise;
+                return Price.compute(mkCartItems([reservation], '')).$promise;
               },
               cartItems () {
-                // TODO: why 'card' despite we pay on site?
-                return mkCartItems(reservation, 'card');
+                return mkCartItems([reservation], $scope.method.payment_method);
               },
               wallet () {
                 return Wallet.getWalletByUser({ user_id: reservation.user_id }).$promise;
@@ -814,9 +795,9 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                   $scope.attempting = true;
                   // save subscription (if there's only a subscription selected)
                   if ($scope.reservation.slots_attributes.length === 0 && selectedPlan) {
-                    const sub = mkSubscription(selectedPlan.id, $scope.reservation.user_id, schedule.requested_schedule, $scope.method.payment_method);
+                    const sub = mkSubscription(selectedPlan.id);
 
-                    return Subscription.save(mkRequestParams(sub, coupon),
+                    return Subscription.save(mkCartItems([sub], $scope.method.payment_method),
                       function (subscription) {
                         $uibModalInstance.close(subscription);
                         $scope.attempting = true;
@@ -827,8 +808,8 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                       });
                   }
                   // otherwise, save the reservation (may include a subscription)
-                  const rsrv = Object.assign({}, $scope.reservation, { payment_method: $scope.method.payment_method });
-                  Reservation.save(mkRequestParams({ reservation: rsrv }, coupon), function (reservation) {
+                  const sub = selectedPlan ? mkSubscription(selectedPlan.id) : undefined;
+                  Reservation.save(mkCartItems([$scope.reservation, sub], coupon), function (reservation) {
                     $uibModalInstance.close(reservation);
                     $scope.attempting = true;
                   }, function (response) {
@@ -869,7 +850,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                 const initialize = function () {
                   $scope.$watch('method.payment_method', function (newValue) {
                     $scope.validButtonName = computeValidButtonName();
-                    $scope.cartItems = mkCartItems($scope.reservation, newValue);
+                    $scope.cartItems = mkCartItems([$scope.reservation], newValue);
                   });
                 };
 
@@ -933,7 +914,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
          * Actions to pay slots (or subscription)
          */
         const paySlots = function () {
-          const reservation = mkReservation($scope.user, $scope.events.reserved, $scope.selectedPlan);
+          const reservation = mkReservation($scope.events.reserved);
 
           return Wallet.getWalletByUser({ user_id: $scope.user.id }, function (wallet) {
             const amountToPay = helpers.getAmountToPay($scope.amountTotal, wallet.amount);
