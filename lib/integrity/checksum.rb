@@ -26,7 +26,7 @@ class Integrity::Checksum
 
       content = files.map { |f| File.read(f) }.join
 
-      Checksum.text(content)
+      Integrity::Checksum.text(content)
     end
 
     def file(path)
@@ -34,7 +34,7 @@ class Integrity::Checksum
 
       content = File.read(path)
 
-      Checksum.text(content)
+      Integrity::Checksum.text(content)
     end
 
     def text(data)
