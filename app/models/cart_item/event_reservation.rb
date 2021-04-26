@@ -21,16 +21,17 @@ class CartItem::EventReservation < CartItem::Reservation
     end
 
     elements = { slots: [] }
+    total = 0
 
     @slots.each do |slot|
-      amount += get_slot_price(amount,
+      total += get_slot_price(amount,
                                slot,
                                is_privileged,
                                elements: elements,
                                is_division: false)
     end
 
-    { elements: elements, amount: amount }
+    { elements: elements, amount: total }
   end
 
   def name
