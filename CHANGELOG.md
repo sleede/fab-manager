@@ -4,7 +4,7 @@
 - Updated React and its dependencies to 17.0.3 and matching
 - Updated the dependencies of: webpack, lodash, eslint, webpack-dev-server, react2angular, auto-ngtemplate-loader, angular-bootstrap-switch, react-refresh-webpack-plugin and eslint-plugin-react
 - Improved error handling in upgrade script
-- Improved the development documentation
+- Improved the development and production documentations
 - Fix a bug: unable to set date formats during installation
 - Fix a bug: unable to cancel the upgrade before it begins
 - `SUPERADMIN_EMAIL` renamed to `ADMINSYS_EMAIL`
