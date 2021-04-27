@@ -24,14 +24,16 @@ class API::PayzenController < API::PaymentsController
     client = PayZen::Charge.new
     @result = client.create_payment(amount: amount[:amount],
                                     order_id: @id,
-                                    customer: PayZen::Helper.generate_customer(params[:customer_id], params[:cart_items]))
+                                    customer: PayZen::Helper.generate_customer(params[:customer_id], current_user.id, params[:cart_items]))
+    error_handling
   end
 
   def create_token
     @id = PayZen::Helper.generate_ref(cart_items_params, params[:customer_id])
     client = PayZen::Charge.new
     @result = client.create_token(order_id: @id,
-                                  customer: PayZen::Helper.generate_customer(params[:customer_id], params[:cart_items]))
+                                  customer: PayZen::Helper.generate_customer(params[:customer_id], current_user.id, params[:cart_items]))
+    error_handling
   end
 
   def check_hash
@@ -67,5 +69,11 @@ class API::PayzenController < API::PaymentsController
 
   def on_subscription_success(order_id, details)
     super(order_id, 'PayZen::Order', details)
+  end
+
+  def error_handling
+    return unless @result['status'] == 'ERROR'
+
+    render json: { error: @result['answer']['detailedErrorMessage'] || @result['answer']['errorMessage'] }, status: :unprocessable_entity
   end
 end

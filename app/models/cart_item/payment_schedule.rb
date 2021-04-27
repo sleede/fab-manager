@@ -11,7 +11,7 @@ class CartItem::PaymentSchedule
   end
 
   def schedule(total, total_without_coupon)
-    schedule = if @requested && @plan.monthly_payment
+    schedule = if @requested && @plan&.monthly_payment
                  PaymentScheduleService.new.compute(@plan, total_without_coupon, coupon: @coupon.coupon)
                else
                  nil

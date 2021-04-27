@@ -195,7 +195,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
       });
       // once the dialog was closed, do things depending on the result
       modalInstance.result.then(function (res) {
-        if (res.status == 'success') {
+        if (res.status === 'success') {
           $state.go('app.public.events_list');
         }
       });
@@ -636,7 +636,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
      */
     const mkCartItems = function (reservation, coupon, paymentMethod = '') {
       return {
-        customer_id: reservation.user_id,
+        customer_id: $scope.ctrl.member.id,
         reservation,
         coupon_code: ((coupon ? coupon.code : undefined)),
         payment_method: paymentMethod,
@@ -684,7 +684,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
             return Price.compute(mkCartItems(reservation, $scope.coupon.applied, 'card')).$promise;
           },
           wallet () {
-            return Wallet.getWalletByUser({ user_id: reservation.user_id }).$promise;
+            return Wallet.getWalletByUser({ user_id: $scope.ctrl.member.id }).$promise;
           },
           cgv () {
             return CustomAsset.get({ name: 'cgv-file' }).$promise;
@@ -744,6 +744,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
      * @param reservation {Object} to book
      */
     const payOnSite = function (reservation) {
+      // FIXME, this may be broken, see cart.js#payOnSite
       $uibModal.open({
         templateUrl: '/shared/valid_reservation_modal.html',
         size: 'sm',
@@ -755,7 +756,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
             return Price.compute(mkCartItems(reservation, $scope.coupon.applied)).$promise;
           },
           wallet () {
-            return Wallet.getWalletByUser({ user_id: reservation.user_id }).$promise;
+            return Wallet.getWalletByUser({ user_id: $scope.ctrl.member.id }).$promise;
           },
           coupon () {
             return $scope.coupon.applied;

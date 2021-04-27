@@ -695,35 +695,34 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
         /**
          * Open a modal window that allows the user to process a credit card payment for his current shopping cart.
          */
-        const payOnline = function (reservation) {
+        const payOnline = function (items) {
           // check that the online payment is enabled
           if ($scope.settings.online_payment_module !== 'true') {
             growl.error(_t('app.shared.cart.online_payment_disabled'));
           } else {
             $scope.toggleOnlinePaymentModal(() => {
-              $scope.onlinePayment.cartItems = mkCartItems([reservation], 'card');
+              $scope.onlinePayment.cartItems = mkCartItems(items, 'card');
             });
           }
         };
         /**
          * Open a modal window that allows the user to process a local payment for his current shopping cart (admin only).
          */
-        const payOnSite = function (reservation) {
+        const payOnSite = function (items) {
+          // TODO, refactor to use cartItems: we had to remove the reservation object.
           $uibModal.open({
             templateUrl: '/shared/valid_reservation_modal.html',
             size: $scope.schedule.payment_schedule ? 'lg' : 'sm',
             resolve: {
-              reservation () {
-                return reservation;
-              },
               price () {
-                return Price.compute(mkCartItems([reservation], '')).$promise;
+                return Price.compute(mkCartItems(items, '')).$promise;
               },
               cartItems () {
-                return mkCartItems([reservation], $scope.method.payment_method);
+                // these items are used in case of payment schedule. By default, the schedule is meant to be paid by card
+                return mkCartItems(items, 'card');
               },
               wallet () {
-                return Wallet.getWalletByUser({ user_id: reservation.user_id }).$promise;
+                return Wallet.getWalletByUser({ user_id: $scope.user.id }).$promise;
               },
               coupon () {
                 return $scope.coupon.applied;
@@ -741,8 +740,8 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                 return $scope.settings;
               }
             },
-            controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', 'Subscription', 'wallet', 'helpers', '$filter', 'coupon', 'selectedPlan', 'schedule', 'cartItems', 'user', 'settings',
-              function ($scope, $uibModalInstance, $state, reservation, price, Auth, Reservation, Subscription, wallet, helpers, $filter, coupon, selectedPlan, schedule, cartItems, user, settings) {
+            controller: ['$scope', '$uibModalInstance', '$state', 'price', 'Auth', 'Reservation', 'Subscription', 'wallet', 'helpers', '$filter', 'coupon', 'selectedPlan', 'schedule', 'cartItems', 'user', 'settings',
+              function ($scope, $uibModalInstance, $state, price, Auth, Reservation, Subscription, wallet, helpers, $filter, coupon, selectedPlan, schedule, cartItems, user, settings) {
                 // user wallet amount
                 $scope.wallet = wallet;
 
@@ -752,8 +751,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                 // Price to pay (wallet deducted)
                 $scope.amount = helpers.getAmountToPay(price.price, wallet.amount);
 
-                // Reservation (simple & cartItems format)
-                $scope.reservation = reservation;
+                // Reservation &| subscription
                 $scope.cartItems = cartItems;
 
                 // Subscription
@@ -914,18 +912,24 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
          * Actions to pay slots (or subscription)
          */
         const paySlots = function () {
-          const reservation = mkReservation($scope.events.reserved);
+          const items = [];
+          if ($scope.selectedPlan) {
+            items.push(mkSubscription($scope.selectedPlan.id));
+          }
+          if ($scope.reservation.slots_attributes.length > 0) {
+            items.push(mkReservation($scope.events.reserved));
+          }
 
           return Wallet.getWalletByUser({ user_id: $scope.user.id }, function (wallet) {
             const amountToPay = helpers.getAmountToPay($scope.amountTotal, wallet.amount);
             if ((AuthService.isAuthorized(['member']) && (amountToPay > 0 || (amountToPay === 0 && hasOtherDeadlines()))) ||
               (AuthService.isAuthorized('manager') && $scope.user.id === $rootScope.currentUser.id && amountToPay > 0)) {
-              return payOnline(reservation);
+              return payOnline(items);
             } else {
               if (AuthService.isAuthorized(['admin']) ||
                 (AuthService.isAuthorized('manager') && $scope.user.id !== $rootScope.currentUser.id) ||
                 (amountToPay === 0 && !hasOtherDeadlines())) {
-                return payOnSite(reservation);
+                return payOnSite(items);
               }
             }
           });
