@@ -84,7 +84,7 @@ class API::PaymentsController < API::ApiController
   def on_subscription_success(gateway_item_id, gateway_item_type, details)
     @subscription = Subscription.new(subscription_params)
     user_id = if current_user.admin? || current_user.manager?
-                params[:cart_items][:subscription][:user_id]
+                params[:cart_items][:customer_id]
               else
                 current_user.id
               end
