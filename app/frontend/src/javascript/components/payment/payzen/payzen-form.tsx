@@ -1,31 +1,18 @@
 import React, { FormEvent, FunctionComponent, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import KRGlue from "@lyracom/embedded-form-glue";
-import { CartItems } from '../../../models/payment';
-import { User } from '../../../models/user';
+import { GatewayFormProps } from '../abstract-payment-modal';
 import SettingAPI from '../../../api/setting';
 import { SettingName } from '../../../models/setting';
 import PayzenAPI from '../../../api/payzen';
 import { Loader } from '../../base/loader';
 import { KryptonClient, KryptonError, ProcessPaymentAnswer } from '../../../models/payzen';
 
-interface PayzenFormProps {
-  onSubmit: () => void,
-  onSuccess: (result: any) => void,
-  onError: (message: string) => void,
-  customer: User,
-  operator: User,
-  className?: string,
-  paymentSchedule?: boolean,
-  cartItems?: CartItems,
-  formId: string,
-}
-
 /**
  * A form component to collect the credit card details and to create the payment method on Stripe.
  * The form validation button must be created elsewhere, using the attribute form={formId}.
  */
-export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onError, children, className, paymentSchedule = false, cartItems, customer, operator, formId }) => {
+export const PayzenForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, onError, children, className, paymentSchedule = false, cartItems, customer, operator, formId }) => {
 
   const { t } = useTranslation('shared');
   const PayZenKR = useRef<KryptonClient>(null);

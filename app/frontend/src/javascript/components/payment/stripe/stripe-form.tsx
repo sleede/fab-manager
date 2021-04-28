@@ -2,20 +2,12 @@ import React, { FormEvent } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { SetupIntent } from "@stripe/stripe-js";
 import { useTranslation } from 'react-i18next';
-import { CartItems, PaymentConfirmation } from '../../../models/payment';
-import { User } from '../../../models/user';
+import { GatewayFormProps } from '../abstract-payment-modal';
+import { PaymentConfirmation } from '../../../models/payment';
 import StripeAPI from '../../../api/stripe';
 
-interface StripeFormProps {
-  onSubmit: () => void,
+interface StripeFormProps extends GatewayFormProps {
   onSuccess: (result: SetupIntent|PaymentConfirmation|any) => void,
-  onError: (message: string) => void,
-  customer: User,
-  operator: User,
-  className?: string,
-  paymentSchedule?: boolean,
-  cartItems?: CartItems,
-  formId: string,
 }
 
 /**

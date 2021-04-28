@@ -724,7 +724,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                 return Price.compute(mkCartItems(items, '')).$promise;
               },
               cartItems () {
-                return mkCartItems(items, '');
+                return mkCartItems(items, 'card');
               },
               wallet () {
                 return Wallet.getWalletByUser({ user_id: $scope.user.id }).$promise;
