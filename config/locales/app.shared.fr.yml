@@ -128,9 +128,9 @@ fr:
         subscription_confirmation: "Validation de l'abonnement"
         here_is_the_subscription_summary: "Voici le récapitulatif de l'abonnement :"
         payment_method: "Moyen de paiement"
-        method_stripe: "Carte bancaire en ligne"
+        method_card: "Carte bancaire en ligne"
         method_check: "Par chèques"
-        stripe_collection_info: "En validant, vous serez invité à saisir les informations de carte bancaire du membre. Cette carte sera prélevée automatiquement aux échéances."
+        card_collection_info: "En validant, vous serez invité à saisir les informations de carte bancaire du membre. Cette carte sera prélevée automatiquement aux échéances."
         check_collection_info: "En validant, vous confirmez être en possession de {DEADLINES} chèques permettant d'encaisser l'ensemble des mensualité."
       #event edition form
       event:

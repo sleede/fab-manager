@@ -724,7 +724,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                 return Price.compute(mkCartItems(items, '')).$promise;
               },
               cartItems () {
-                return mkCartItems(items, 'card');
+                return mkCartItems(items, '');
               },
               wallet () {
                 return Wallet.getWalletByUser({ user_id: $scope.user.id }).$promise;
@@ -770,7 +770,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
 
                 // how should we collect payments for the payment schedule
                 $scope.method = {
-                  payment_method: settings.payment_gateway
+                  payment_method: 'card'
                 };
 
                 // "valid" Button label
@@ -787,7 +787,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                  * Callback to process the local payment, triggered on button click
                  */
                 $scope.ok = function () {
-                  if ($scope.schedule && $scope.method.payment_method === settings.payment_gateway) {
+                  if ($scope.schedule && $scope.method.payment_method === 'card') {
                     // check that the online payment is enabled
                     if (settings.online_payment_module !== 'true') {
                       return growl.error(_t('app.shared.cart.online_payment_disabled'));
@@ -865,7 +865,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                     if (AuthService.isAuthorized(['admin', 'manager']) && $rootScope.currentUser.id !== cartItems.customer_id) {
                       method = $scope.method.payment_method;
                     } else {
-                      method = settings.payment_gateway;
+                      method = 'card';
                     }
                   }
                   if ($scope.amount > 0) {

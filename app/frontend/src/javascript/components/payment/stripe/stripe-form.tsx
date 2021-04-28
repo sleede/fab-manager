@@ -7,7 +7,7 @@ import { PaymentConfirmation } from '../../../models/payment';
 import StripeAPI from '../../../api/stripe';
 
 interface StripeFormProps extends GatewayFormProps {
-  onSuccess: (result: SetupIntent|PaymentConfirmation|any) => void,
+  onSuccess: (result: SetupIntent|PaymentConfirmation) => void,
 }
 
 /**

@@ -128,9 +128,9 @@ de:
         subscription_confirmation: "Abonnementbestätigung"
         here_is_the_subscription_summary: "Here is the subscription summary:"
         payment_method: "Payment method"
-        method_stripe: "Online by card"
+        method_card: "Online by card"
         method_check: "By check"
-        stripe_collection_info: "By validating, you'll be prompted for the member's card number. This card will be automatically charged at the deadlines."
+        card_collection_info: "By validating, you'll be prompted for the member's card number. This card will be automatically charged at the deadlines."
         check_collection_info: "By validating, you confirm that you have {DEADLINES} checks, allowing you to collect all the monthly payments."
       #event edition form
       event:

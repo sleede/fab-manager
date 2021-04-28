@@ -128,9 +128,9 @@ zu:
         subscription_confirmation: "crwdns20920:0crwdne20920:0"
         here_is_the_subscription_summary: "crwdns20922:0crwdne20922:0"
         payment_method: "crwdns20924:0crwdne20924:0"
-        method_stripe: "crwdns20926:0crwdne20926:0"
+        method_card: "crwdns20926:0crwdne20926:0"
         method_check: "crwdns20928:0crwdne20928:0"
-        stripe_collection_info: "crwdns20930:0crwdne20930:0"
+        card_collection_info: "crwdns20930:0crwdne20930:0"
         check_collection_info: "crwdns20932:0{DEADLINES}crwdne20932:0"
       #event edition form
       event:

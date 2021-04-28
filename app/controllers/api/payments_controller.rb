@@ -40,11 +40,7 @@ class API::PaymentsController < API::ApiController
   end
 
   def check_plan
-    plan_id = if params[:cart_items][:subscription]
-                subscription_params[:plan_id]
-              elsif params[:cart_items][:reservation]
-                reservation_params[:plan_id]
-              end
+    plan_id = (cart_items_params[:subscription][:plan_id] if cart_items_params[:subscription])
 
     return unless plan_id
 
@@ -106,7 +102,7 @@ class API::PaymentsController < API::ApiController
   end
 
   def reservation_params
-    params[:cart_items].require(:reservation).permit(:reservable_id, :reservable_type, :plan_id, :nb_reserve_places,
+    params[:cart_items].require(:reservation).permit(:reservable_id, :reservable_type, :nb_reserve_places,
                                                      tickets_attributes: %i[event_price_category_id booked],
                                                      slots_attributes: %i[id start_at end_at availability_id offered])
   end
@@ -116,9 +112,12 @@ class API::PaymentsController < API::ApiController
   end
 
   def cart_items_params
-    params[:cart_items].require(:reservation).permit(:reservable_id, :reservable_type, :plan_id, :user_id, :nb_reserve_places,
-                                                     tickets_attributes: %i[event_price_category_id booked],
-                                                     slots_attributes: %i[id start_at end_at availability_id offered])
+    params.require(:cart_items).permit(subscription: :plan_id,
+                                       reservation: [
+                                         :reservable_id, :reservable_type, :nb_reserve_places,
+                                         tickets_attributes: %i[event_price_category_id booked],
+                                         slots_attributes: %i[id start_at end_at availability_id offered]
+                                       ])
   end
 
   def coupon_params
