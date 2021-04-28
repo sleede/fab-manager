@@ -268,6 +268,10 @@
 }
 
 .list-of-plans {
+  .active-group ~ .active-group .group-title {
+    /* select all active groups but the first (the first have no margin at the top) */
+    margin: 3em auto 1em;
+  }
   .group-title {
     display: flex;
     align-items: center;
@@ -276,7 +280,7 @@
     padding: 2em;
     width: 83.33%;
     box-sizing: border-box;
-    margin: 3em auto 1em;
+    margin: 0 auto 1em;
     $border: 5px;
     background: #FFF;
     background-clip: padding-box;
