@@ -269,10 +269,27 @@
 
 .list-of-plans {
   .group-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 2em;
     width: 83.33%;
-    border-bottom: 1px solid;
-    padding-bottom: 2em;
-    margin: auto auto 1em;
+    box-sizing: border-box;
+    margin: 3em auto 1em;
+    $border: 5px;
+    background: #FFF;
+    background-clip: padding-box;
+    border: solid $border transparent;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; bottom: 0; left: 0;
+      z-index: -1;
+      margin: -$border;
+      border-radius: inherit;
+    }
   }
 
   .plans-per-group {

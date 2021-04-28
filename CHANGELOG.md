@@ -5,6 +5,7 @@
 - Updated the dependencies of: webpack, lodash, eslint, webpack-dev-server, react2angular, auto-ngtemplate-loader, angular-bootstrap-switch, react-refresh-webpack-plugin and eslint-plugin-react
 - Improved error handling in upgrade script
 - Improved the development and production documentations
+- Improved the style of the titles of the subscription page
 - Fix a bug: build status badge is not working
 - Fix a bug: unable to set date formats during installation
 - Fix a bug: unable to cancel the upgrade before it begins
