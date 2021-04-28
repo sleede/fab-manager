@@ -13,8 +13,8 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 
-Application.Controllers.controller('EventsController', ['$scope', '$state', 'Event', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', 'settingsPromise',
-  function ($scope, $state, Event, categoriesPromise, themesPromise, ageRangesPromise, settingsPromise) {
+Application.Controllers.controller('EventsController', ['$scope', '$state', 'Event', 'categoriesPromise', 'themesPromise', 'ageRangesPromise',
+  function ($scope, $state, Event, categoriesPromise, themesPromise, ageRangesPromise) {
   /* PUBLIC SCOPE */
 
     // The events displayed on the page
@@ -178,11 +178,16 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
     // Message displayed to the end user about rules that applies to events reservations
     $scope.eventExplicationsAlert = settingsPromise.event_explications_alert;
 
+    // the application global settings, required in <cart>
+    $scope.settings = settingsPromise
+
+    // the moment when the slot selection changed for the last time, used to trigger changes in the cart
+    $scope.selectionTime = null;
+
     /**
      * Callback to delete the provided event (admins only)
-     * @param event {$resource} angular's Event $resource
      */
-    $scope.deleteEvent = function (event) {
+    $scope.deleteEvent = function () {
       // open a confirmation dialog
       const modalInstance = $uibModal.open({
         animation: true,
@@ -205,7 +210,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
      * Callback to call when the number of tickets to book changes in the current booking
      */
     $scope.changeNbPlaces = function () {
-      // compute the total remaning places
+      // compute the total remaining places
       let remain = $scope.event.nb_free_places - $scope.reserve.nbReservePlaces;
       for (let ticket in $scope.reserve.tickets) {
         remain -= $scope.reserve.tickets[ticket];

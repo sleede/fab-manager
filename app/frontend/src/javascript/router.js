@@ -550,7 +550,6 @@ angular.module('application.router', ['ui.router'])
           categoriesPromise: ['Category', function (Category) { return Category.query().$promise; }],
           themesPromise: ['EventTheme', function (EventTheme) { return EventTheme.query().$promise; }],
           ageRangesPromise: ['AgeRange', function (AgeRange) { return AgeRange.query().$promise; }],
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['online_payment_module']" }).$promise; }]
         }
       })
       .state('app.public.events_show', {
