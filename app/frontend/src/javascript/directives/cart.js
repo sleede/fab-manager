@@ -612,8 +612,15 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
          */
         const updateCartPrice = function () {
           if (Object.keys($scope.user).length > 0) {
-            const r = mkReservation($scope.events.reserved);
-            return Price.compute(mkCartItems([r], ''), function (res) {
+            const items = [];
+            if ($scope.selectedPlan) {
+              items.push(mkSubscription($scope.selectedPlan.id));
+            }
+            if ($scope.events.reserved && $scope.events.reserved.length > 0) {
+              items.push(mkReservation($scope.events.reserved));
+            }
+
+            return Price.compute(mkCartItems(items), function (res) {
               $scope.amountTotal = res.price;
               $scope.schedule.payment_schedule = res.schedule;
               $scope.totalNoCoupon = res.price_without_coupon;
@@ -679,7 +686,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
          * @param paymentMethod {string}
          * @return {CartItems}
          */
-        const mkCartItems = function (items, paymentMethod) {
+        const mkCartItems = function (items, paymentMethod = '') {
           const cartItems = {
             customer_id: $scope.user.id,
             payment_schedule: $scope.schedule.requested_schedule,
@@ -709,7 +716,6 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
          * Open a modal window that allows the user to process a local payment for his current shopping cart (admin only).
          */
         const payOnSite = function (items) {
-          // TODO, refactor to use cartItems: we had to remove the reservation object.
           $uibModal.open({
             templateUrl: '/shared/valid_reservation_modal.html',
             size: $scope.schedule.payment_schedule ? 'lg' : 'sm',
@@ -718,8 +724,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                 return Price.compute(mkCartItems(items, '')).$promise;
               },
               cartItems () {
-                // these items are used in case of payment schedule. By default, the schedule is meant to be paid by card
-                return mkCartItems(items, 'card');
+                return mkCartItems(items, '');
               },
               wallet () {
                 return Wallet.getWalletByUser({ user_id: $scope.user.id }).$promise;
@@ -792,7 +797,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                   }
                   $scope.attempting = true;
                   // save subscription (if there's only a subscription selected)
-                  if ($scope.reservation.slots_attributes.length === 0 && selectedPlan) {
+                  if ((!$scope.cartItems.reservation || $scope.cartItems.reservation.slots_attributes.length === 0) && selectedPlan) {
                     const sub = mkSubscription(selectedPlan.id);
 
                     return Subscription.save(mkCartItems([sub], $scope.method.payment_method),
@@ -806,8 +811,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                       });
                   }
                   // otherwise, save the reservation (may include a subscription)
-                  const sub = selectedPlan ? mkSubscription(selectedPlan.id) : undefined;
-                  Reservation.save(mkCartItems([$scope.reservation, sub], coupon), function (reservation) {
+                  Reservation.save(cartItems, function (reservation) {
                     $uibModalInstance.close(reservation);
                     $scope.attempting = true;
                   }, function (response) {
@@ -848,7 +852,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                 const initialize = function () {
                   $scope.$watch('method.payment_method', function (newValue) {
                     $scope.validButtonName = computeValidButtonName();
-                    $scope.cartItems = mkCartItems([$scope.reservation], newValue);
+                    $scope.cartItems.payment_method = newValue;
                   });
                 };
 
@@ -858,7 +862,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                 const computeValidButtonName = function () {
                   let method = '';
                   if ($scope.schedule) {
-                    if (AuthService.isAuthorized(['admin', 'manager']) && $rootScope.currentUser.id !== reservation.user_id) {
+                    if (AuthService.isAuthorized(['admin', 'manager']) && $rootScope.currentUser.id !== cartItems.customer_id) {
                       method = $scope.method.payment_method;
                     } else {
                       method = settings.payment_gateway;
@@ -916,7 +920,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
           if ($scope.selectedPlan) {
             items.push(mkSubscription($scope.selectedPlan.id));
           }
-          if ($scope.reservation.slots_attributes.length > 0) {
+          if ($scope.events.reserved && $scope.events.reserved.length > 0) {
             items.push(mkReservation($scope.events.reserved));
           }
 

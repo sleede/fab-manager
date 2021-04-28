@@ -55,9 +55,7 @@ class CartService
   end
 
   def reservable_from_hash(cart_item, plan_info)
-    return nil if cart_item[:reservable_id].blank?
-
-    reservable = cart_item[:reservable_type].constantize.find(cart_item[:reservable_id])
+    reservable = cart_item[:reservable_type]&.constantize&.find(cart_item[:reservable_id])
     case reservable
     when Machine
       CartItem::MachineReservation.new(@customer,
@@ -88,6 +86,7 @@ class CartService
                                      plan: plan_info[:plan],
                                      new_subscription: plan_info[:new_subscription])
     else
+      STDERR.puts "WARNING: the reservable #{reservable} is not implemented"
       raise NotImplementedError
     end
   end
