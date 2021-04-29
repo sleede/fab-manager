@@ -1,12 +1,16 @@
 import React, { FormEvent, FunctionComponent, useEffect, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import KRGlue from "@lyracom/embedded-form-glue";
 import { GatewayFormProps } from '../abstract-payment-modal';
 import SettingAPI from '../../../api/setting';
 import { SettingName } from '../../../models/setting';
 import PayzenAPI from '../../../api/payzen';
 import { Loader } from '../../base/loader';
-import { KryptonClient, KryptonError, ProcessPaymentAnswer } from '../../../models/payzen';
+import {
+  CreateTokenResponse,
+  KryptonClient,
+  KryptonError,
+  ProcessPaymentAnswer
+} from '../../../models/payzen';
 
 /**
  * A form component to collect the credit card details and to create the payment method on Stripe.
@@ -14,14 +18,13 @@ import { KryptonClient, KryptonError, ProcessPaymentAnswer } from '../../../mode
  */
 export const PayzenForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, onError, children, className, paymentSchedule = false, cartItems, customer, operator, formId }) => {
 
-  const { t } = useTranslation('shared');
   const PayZenKR = useRef<KryptonClient>(null);
   const [loadingClass, setLoadingClass] = useState<'hidden' | 'loader' | 'loader-overlay'>('loader');
 
   useEffect(() => {
     const api = new SettingAPI();
     api.query([SettingName.PayZenEndpoint, SettingName.PayZenPublicKey]).then(settings => {
-      PayzenAPI.chargeCreatePayment(cartItems, customer).then(formToken => {
+      createToken().then(formToken => {
         // Load the remote library
         KRGlue.loadLibrary(settings.get(SettingName.PayZenEndpoint), settings.get(SettingName.PayZenPublicKey))
           .then(({ KR }) =>
@@ -39,6 +42,18 @@ export const PayzenForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, on
   }, [cartItems, paymentSchedule, customer]);
 
   /**
+   * Ask the API to create the form token.
+   * Depending on the current transaction (schedule or not), a PayZen Token or Payment may be created.
+   */
+  const createToken = async (): Promise<CreateTokenResponse> => {
+    if (paymentSchedule) {
+      return await PayzenAPI.chargeCreateToken(cartItems, customer);
+    } else {
+      return await PayzenAPI.chargeCreatePayment(cartItems, customer);
+    }
+  }
+
+  /**
    * Callback triggered on PayZen successful payments
    * @see https://docs.lyra.com/fr/rest/V4.0/javascript/features/reference.html#kronsubmit
    */
@@ -48,7 +63,7 @@ export const PayzenForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, on
         const transaction = event.clientAnswer.transactions[0];
 
         if (event.clientAnswer.orderStatus === 'PAID') {
-          PayzenAPI.confirm(event.clientAnswer.orderDetails.orderId, cartItems).then((confirmation) =>  {
+          confirm(event).then((confirmation) =>  {
             PayZenKR.current.removeForms().then(() => {
               onSuccess(confirmation);
             });
@@ -58,9 +73,20 @@ export const PayzenForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, on
           onError(error || event.clientAnswer.orderStatus);
         }
       }
-    })
+    });
     return true;
   };
+
+  /**
+   * Ask the API to confirm the processed transaction, depending on the current transaction (schedule or not).
+   */
+  const confirm = async (paymentAnswer: ProcessPaymentAnswer): Promise<any> => {
+    if (paymentSchedule) {
+      return await PayzenAPI.confirm(paymentAnswer.clientAnswer.orderDetails.orderId, cartItems);
+    } else {
+      return await PayzenAPI.confirmSchedule(paymentAnswer.clientAnswer.orderDetails.orderId, cartItems);
+    }
+  }
 
   /**
    * Callback triggered when the PayZen form was entirely loaded and displayed

@@ -185,6 +185,7 @@ Rails.application.routes.draw do
     post 'payzen/confirm_payment' => 'payzen#confirm_payment'
     post 'payzen/check_hash' => 'payzen#check_hash'
     post 'payzen/create_token' => 'payzen#create_token'
+    post 'payzen/confirm_payment_schedule' => 'payzen#confirm_payment_schedule'
 
     # FabAnalytics
     get 'analytics/data' => 'analytics#data'

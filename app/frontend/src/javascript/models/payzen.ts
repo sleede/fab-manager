@@ -2,10 +2,12 @@ export interface SdkTestResponse {
   success: boolean
 }
 
-export interface CreatePaymentResponse {
+export interface CreateTokenResponse {
   formToken: string
   orderId: string
 }
+
+export interface CreatePaymentResponse extends CreateTokenResponse {}
 
 export interface ConfirmPaymentResponse {
   todo?: any

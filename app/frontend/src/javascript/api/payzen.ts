@@ -2,7 +2,13 @@ import apiClient from './clients/api-client';
 import { AxiosResponse } from 'axios';
 import { CartItems } from '../models/payment';
 import { User } from '../models/user';
-import { CheckHashResponse, ConfirmPaymentResponse, CreatePaymentResponse, SdkTestResponse } from '../models/payzen';
+import {
+  CheckHashResponse,
+  ConfirmPaymentResponse,
+  CreatePaymentResponse,
+  CreateTokenResponse,
+  SdkTestResponse
+} from '../models/payzen';
 
 export default class PayzenAPI {
 
@@ -16,7 +22,7 @@ export default class PayzenAPI {
     return res?.data;
   }
 
-  static async chargeCreateToken(cartItems: CartItems, customer: User): Promise<any> {
+  static async chargeCreateToken(cartItems: CartItems, customer: User): Promise<CreateTokenResponse> {
     const res: AxiosResponse = await  apiClient.post('/api/payzen/create_token', { cart_items: cartItems, customer_id: customer.id });
     return res?.data;
   }
@@ -28,6 +34,11 @@ export default class PayzenAPI {
 
   static async confirm(orderId: string, cartItems: CartItems): Promise<ConfirmPaymentResponse> {
     const res: AxiosResponse<ConfirmPaymentResponse> = await apiClient.post('/api/payzen/confirm_payment', { cart_items: cartItems, order_id: orderId });
+    return res?.data;
+  }
+
+  static async confirmSchedule(orderId: string, cartItems: CartItems): Promise<any> {
+    const res: AxiosResponse<any> = await apiClient.post('/api/payzen/confirm_payment_schedule', { cart_items: cartItems, order_id: orderId });
     return res?.data;
   }
 }

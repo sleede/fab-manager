@@ -61,6 +61,11 @@ class API::PayzenController < API::PaymentsController
     render json: e, status: :unprocessable_entity
   end
 
+  def confirm_payment_schedule
+    # TODO
+    raise NotImplementedError
+  end
+
   private
 
   def on_reservation_success(order_id, details)
