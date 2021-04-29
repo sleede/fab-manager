@@ -66,18 +66,6 @@
       <select-member></select-member>
     </div>
 
-    <cart slot="reserve"
-          slot-selection-time="selectionTime"
-          events="events"
-          user="ctrl.member"
-          settings="settings"
-          after-payment="afterPayment"
-          reservable-id="{{event.id}}"
-          reservable-type="Event"
-          reservable-name="{{event.title}}"
-          limit-to-one-slot="true"></cart>
-
-
     <section class="widget panel b-a m m-t-lg">
       <div class="panel-heading b-b small">
         <h3 translate>{{ 'app.public.events_show.information_and_booking' }}</h3>
@@ -215,5 +203,13 @@
 
 </div>
 
+  <div ng-if="onlinePayment.showModal">
+    <payment-modal is-open="onlinePayment.showModal"
+                   toggle-modal="toggleOnlinePaymentModal"
+                   after-success="afterOnlinePaymentSuccess"
+                   cart-items="onlinePayment.cartItems"
+                   current-user="currentUser"
+                   customer="ctrl.member"/>
+  </div>
 
 </div>

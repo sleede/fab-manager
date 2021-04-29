@@ -8,7 +8,7 @@ class CartItem::EventReservation < CartItem::Reservation
     raise TypeError unless event.is_a? Event
 
     super(customer, operator, event, slots)
-    @normal_tickets = normal_tickets
+    @normal_tickets = normal_tickets || 0
     @other_tickets = other_tickets || []
   end
 

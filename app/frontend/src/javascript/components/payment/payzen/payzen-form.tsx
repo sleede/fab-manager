@@ -48,9 +48,9 @@ export const PayzenForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, on
         const transaction = event.clientAnswer.transactions[0];
 
         if (event.clientAnswer.orderStatus === 'PAID') {
-          PayzenAPI.confirm(event.clientAnswer.orderDetails.orderId, cartItems).then(() =>  {
+          PayzenAPI.confirm(event.clientAnswer.orderDetails.orderId, cartItems).then((confirmation) =>  {
             PayZenKR.current.removeForms().then(() => {
-              onSuccess(event.clientAnswer);
+              onSuccess(confirmation);
             });
           })
         } else {
