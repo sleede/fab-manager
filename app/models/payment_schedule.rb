@@ -70,10 +70,10 @@ class PaymentSchedule < PaymentDocument
     payment_schedule_items
   end
 
-  def post_save(setup_intent_id)
+  def post_save(gateway_method_id)
     return unless payment_method == 'card'
 
-    StripeService.create_stripe_subscription(self, setup_intent_id)
+    PaymentGatewayService.new.create_subscription(self, gateway_method_id)
   end
 
   private

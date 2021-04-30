@@ -36,9 +36,4 @@ export default class PayzenAPI {
     const res: AxiosResponse<ConfirmPaymentResponse> = await apiClient.post('/api/payzen/confirm_payment', { cart_items: cartItems, order_id: orderId });
     return res?.data;
   }
-
-  static async confirmSchedule(orderId: string, cartItems: CartItems): Promise<any> {
-    const res: AxiosResponse<any> = await apiClient.post('/api/payzen/confirm_payment_schedule', { cart_items: cartItems, order_id: orderId });
-    return res?.data;
-  }
 }

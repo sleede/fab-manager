@@ -46,5 +46,27 @@ class PayZen::Charge < PayZen::Client
          contrib: contrib,
          customer: customer)
   end
+
+  ##
+  # @see https://payzen.io/fr-FR/rest/V4.0/api/playground/Charge/CreateSubscription
+  ##
+  def create_subscription(amount: 0,
+                          currency: Setting.get('payzen_currency'),
+                          effect_date: DateTime.current.to_s,
+                          payment_method_token: nil,
+                          rrule: nil,
+                          order_id: nil,
+                          initial_amount: nil,
+                          initial_amount_number: nil)
+    post('Charge/CreateSubscription,',
+         amount: amount,
+         currency: currency,
+         effectDate: effect_date,
+         paymentMethodToken: payment_method_token,
+         rrule: rrule,
+         orderId: order_id,
+         initialAmount: initial_amount,
+         initialAmountNumber: initial_amount_number)
+  end
 end
 

@@ -63,7 +63,7 @@ export const PayzenForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, on
         const transaction = event.clientAnswer.transactions[0];
 
         if (event.clientAnswer.orderStatus === 'PAID') {
-          confirm(event).then((confirmation) =>  {
+          PayzenAPI.confirm(event.clientAnswer.orderDetails.orderId, cartItems).then((confirmation) =>  {
             PayZenKR.current.removeForms().then(() => {
               onSuccess(confirmation);
             });
@@ -76,17 +76,6 @@ export const PayzenForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, on
     });
     return true;
   };
-
-  /**
-   * Ask the API to confirm the processed transaction, depending on the current transaction (schedule or not).
-   */
-  const confirm = async (paymentAnswer: ProcessPaymentAnswer): Promise<any> => {
-    if (paymentSchedule) {
-      return await PayzenAPI.confirm(paymentAnswer.clientAnswer.orderDetails.orderId, cartItems);
-    } else {
-      return await PayzenAPI.confirmSchedule(paymentAnswer.clientAnswer.orderDetails.orderId, cartItems);
-    }
-  }
 
   /**
    * Callback triggered when the PayZen form was entirely loaded and displayed

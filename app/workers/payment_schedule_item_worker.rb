@@ -18,6 +18,7 @@ class PaymentScheduleItemWorker
 
   def check_item(psi)
     # the following depends on the payment method (stripe/check)
+    # FIXME
     if psi.payment_schedule.payment_method == 'card'
       ### Stripe
       stripe_key = Setting.get('stripe_secret_key')

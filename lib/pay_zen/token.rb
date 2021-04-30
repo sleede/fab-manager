@@ -14,6 +14,4 @@ class PayZen::Token < PayZen::Client
   def get(payment_method_token)
     post('/Token/Get/', paymentMethodToken: payment_method_token)
   end
-
 end
-

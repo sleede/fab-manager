@@ -163,7 +163,7 @@ class Invoice < PaymentDocument
   end
 
   def paid_by_card?
-    !payment_gateway_object.nil? || %w[stripe payzen].include?(payment_method)
+    !payment_gateway_object.nil? && payment_method == 'card'
   end
 
   private

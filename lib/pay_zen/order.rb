@@ -14,6 +14,4 @@ class PayZen::Order < PayZen::Client
   def get(order_id, operation_type: nil)
     post('/Order/Get/', orderId: order_id, operationType: operation_type)
   end
-
 end
-

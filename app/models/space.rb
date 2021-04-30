@@ -28,8 +28,8 @@ class Space < ApplicationRecord
 
   after_create :create_statistic_subtype
   after_create :create_space_prices
-  after_create :update_stripe_product
-  after_update :update_stripe_product, if: :saved_change_to_name?
+  after_create :update_gateway_product
+  after_update :update_gateway_product, if: :saved_change_to_name?
   after_update :update_statistic_subtype, if: :saved_change_to_name?
   after_destroy :remove_statistic_subtype
 
@@ -67,7 +67,7 @@ class Space < ApplicationRecord
 
   private
 
-  def update_stripe_product
-    StripeWorker.perform_async(:create_or_update_stp_product, Space.name, id)
+  def update_gateway_product
+    PaymentGatewayService.create_or_update_product(Space.name, id)
   end
 end

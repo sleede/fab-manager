@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
 # Raised when an an error occurred with the PayZen payment gateway
-class PayzenError < StandardError
+class PayzenError < PaymentGatewayError
 end
 
