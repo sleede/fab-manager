@@ -108,7 +108,7 @@
     "twitter-fetcher": "^18.0.2",
     "typescript": "^4.0.5",
     "ui-select": "0.19",
-    "underscore": "1.7"
+    "underscore": "1.12"
   },
   "peerDependencies": {
     "@babel/core": "^7.0.0-0",
