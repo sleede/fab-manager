@@ -111,6 +111,7 @@
 
     <event-themes event="event" on-change="handleEventChange"></event-themes>
     <input type="hidden" name="event[event_theme_ids][]" ng-repeat="id in event_themes" value="{{id}}" />
+    <input type="hidden" name="event[event_theme_ids][]" value="" ng-if="event_themes.length === 0" />
 
     <div class="widget panel b-a m m-t-lg" ng-show="ageRanges.length > 0">
       <div class="panel-heading b-b small">
