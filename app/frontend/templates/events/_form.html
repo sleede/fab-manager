@@ -109,23 +109,8 @@
       </div>
     </div>
 
-    <div class="widget panel b-a m m-t-lg" ng-show="themes.length > 0">
-      <div class="panel-heading b-b small">
-        <h3 translate>{{ 'app.shared.event.event_theme' }}</h3>
-      </div>
-      <div class="widget-content no-bg wrapper">
-        <input type="hidden" name="event[event_theme_ids][]" value="" />
-        <ui-select ng-model="event.event_theme_ids" name="event[event_theme_ids][]">
-          <ui-select-match>
-            <span ng-bind="$select.selected.name"></span>
-            <input type="hidden" name="event[event_theme_ids][]" value="{{$select.selected.id}}" />
-          </ui-select-match>
-          <ui-select-choices repeat="t.id as t in (themes | filter: $select.search)">
-            <span ng-bind-html="t.name | highlight: $select.search"></span>
-          </ui-select-choices>
-        </ui-select>
-      </div>
-    </div>
+    <event-themes event="event" on-change="handleEventChange"></event-themes>
+    <input type="hidden" name="event[event_theme_ids][]" ng-repeat="id in event_themes" value="{{id}}" />
 
     <div class="widget panel b-a m m-t-lg" ng-show="ageRanges.length > 0">
       <div class="panel-heading b-b small">

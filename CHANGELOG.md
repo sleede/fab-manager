@@ -4,6 +4,7 @@
 - Updated i18next to 19.9.3
 - Prevent the worker from crashing if OpenLab is not reachable in dev
 - Fix a bug: the notification sent to the project author when a collaborator has confirmed his participation is not sent
+- Fix a bug: the event themes are not kept when editing the event again
 - Fix a security issue: updated underscore to 1.12.1 to fix [CVE-2021-23358](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23358)
 - Fix a security issue: updated lodash to 4.17.21 to fix [CVE-2021-23337](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23337)
 - Fix a security issue: updated url-parse to 1.5.1 to fix [CVE-2021-27515](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-27515)
