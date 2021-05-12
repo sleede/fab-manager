@@ -3,6 +3,11 @@
 - Updated dependency to OpenLab
 - Prevent the worker from crashing if OpenLab is not reachable in dev
 - Fix a bug: the notification sent to the project author when a collaborator has confirmed his participation is not sent
+- Fix a security issue: updated underscore to 1.12.1 to fix [CVE-2021-23358](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23358)
+- Fix a security issue: updated lodash to 4.17.21 to fix [CVE-2021-23337](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23337)
+- Fix a security issue: updated url-parse to 1.5.1 to fix [CVE-2021-27515](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-27515)
+- Fix a security issue: updated hosted-git-info to 2.8.9 to fix [CVE-2021-23362](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23362)
+- Fix a security issue: updated codemirror to 5.58.2 to fix [CVE-2020-7760](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-7760)
 
 ## v4.7.8 2021 April 02
 - Updated mimemagic to 0.3.10 to fix [a build issue](https://github.com/mimemagicrb/mimemagic/issues/139)
