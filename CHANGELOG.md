@@ -8,6 +8,7 @@
 - Fix a security issue: updated url-parse to 1.5.1 to fix [CVE-2021-27515](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-27515)
 - Fix a security issue: updated hosted-git-info to 2.8.9 to fix [CVE-2021-23362](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23362)
 - Fix a security issue: updated codemirror to 5.58.2 to fix [CVE-2020-7760](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-7760)
+- Fix a security issue: updated rails to 5.2.6 to fix [CVE-2021-22904](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22904)
 
 ## v4.7.8 2021 April 02
 - Updated mimemagic to 0.3.10 to fix [a build issue](https://github.com/mimemagicrb/mimemagic/issues/139)
