@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Updated dependency to OpenLab
+- Updated i18next to 19.9.3
 - Prevent the worker from crashing if OpenLab is not reachable in dev
 - Fix a bug: the notification sent to the project author when a collaborator has confirmed his participation is not sent
 - Fix a security issue: updated underscore to 1.12.1 to fix [CVE-2021-23358](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23358)
@@ -9,6 +10,7 @@
 - Fix a security issue: updated hosted-git-info to 2.8.9 to fix [CVE-2021-23362](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23362)
 - Fix a security issue: updated codemirror to 5.58.2 to fix [CVE-2020-7760](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-7760)
 - Fix a security issue: updated rails to 5.2.6 to fix [CVE-2021-22904](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22904)
+- Fix a security issue: updated react-i18next to 11.8.15 to fix [CVE-2021-23346](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23346)
 
 ## v4.7.8 2021 April 02
 - Updated mimemagic to 0.3.10 to fix [a build issue](https://github.com/mimemagicrb/mimemagic/issues/139)
