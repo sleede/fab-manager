@@ -160,6 +160,7 @@ en:
         event_themes: "Event themes"
         select_theme: "Pick up a theme..."
         age_range: "Age range"
+        add_price: "Add a price"
       #subscription plan edition form
       plan:
         general_information: "General information"

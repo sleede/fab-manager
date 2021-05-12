@@ -63,7 +63,6 @@ const EventThemes: React.FC<EventThemesProps> = ({ event, onChange }) => {
       res.push(themes.find(t => t.id === opt.value));
     })
     onChange(res);
-    // compile
   }
 
   /**

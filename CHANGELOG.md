@@ -4,6 +4,7 @@
 - Updated i18next to 19.9.3
 - Prevent the worker from crashing if OpenLab is not reachable in dev
 - Allow setting multiple themes for a single event
+- Increased the width of the input field for the prices of the events
 - Fix a bug: the notification sent to the project author when a collaborator has confirmed his participation is not sent
 - Fix a bug: the event themes are not kept when editing the event again
 - Fix a security issue: updated underscore to 1.12.1 to fix [CVE-2021-23358](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23358)
