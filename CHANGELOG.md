@@ -16,6 +16,7 @@
 - Fix a bug: "about" page shows a non-functional menu icon
 - Fix a bug: responsiveness of the "about" page title
 − Fix a bug: unable to change the slots durations for a new availability
+- Fix a bug: some invoices does not have the name of the user
 - Fix a security issue: updated underscore to 1.12.1 to fix [CVE-2021-23358](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23358)
 - Fix a security issue: updated lodash to 4.17.21 to fix [CVE-2021-23337](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23337)
 - Fix a security issue: updated url-parse to 1.5.1 to fix [CVE-2021-27515](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-27515)
@@ -23,6 +24,7 @@
 - Fix a security issue: updated codemirror to 5.58.2 to fix [CVE-2020-7760](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-7760)
 - Fix a security issue: updated rails to 5.2.6 to fix [CVE-2021-22904](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22904)
 - Fix a security issue: updated react-i18next to 11.8.15 to fix [CVE-2021-23346](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23346)
+- [TODO DEPLOY] `rails fablab:fix:invoices_without_names`
 
 ## v4.7.8 2021 April 02
 - Updated mimemagic to 0.3.10 to fix [a build issue](https://github.com/mimemagicrb/mimemagic/issues/139)
