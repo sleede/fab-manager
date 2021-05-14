@@ -5,6 +5,7 @@
 - Prevent the worker from crashing if OpenLab is not reachable in dev
 - Allow setting multiple themes for a single event
 - Increased the width of the input field for the prices of the events
+- Script to run a rails command with ease in production (`run.fab.mn`)
 - Fix a bug: invalid currency in notifications for locales with region (eg. fr-CM)
 - Fix a bug: the notification sent to the project author when a collaborator has confirmed his participation is not sent
 - Fix a bug: the event themes are not kept when editing the event again
