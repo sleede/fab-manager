@@ -11,7 +11,7 @@ config() {
 run()
 {
   config
-  docker-compose exec "$SERVICE" bundle exec rails "${@:-c}"
+  docker-compose exec "$SERVICE" bundle exec rails "${@:-c}" </dev/tty
 }
 
 run "$@"
