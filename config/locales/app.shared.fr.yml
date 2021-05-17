@@ -157,10 +157,10 @@ fr:
         standard_rate: "Tarif standard"
         0_equal_free: "0 = gratuit"
         tickets_available: "Places disponibles"
-        event_themes: "Event themes"
-        select_theme: "Pick up a theme..."
+        event_themes: "Thèmes de l'événement"
+        select_theme: "Choisissez un thème ..."
         age_range: "Tranche d'âge"
-        add_price: "Add a price"
+        add_price: "Ajouter un tarif"
       #subscription plan edition form
       plan:
         general_information: "Informations générales"
