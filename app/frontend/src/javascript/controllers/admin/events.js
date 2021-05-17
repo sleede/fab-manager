@@ -21,6 +21,7 @@
  *
  * Provides :
  *  - $scope.datePicker = {}
+ *  - $scope.event_themes = []
  *  - $scope.submited(content)
  *  - $scope.cancel()
  *  - $scope.addFile()
@@ -31,9 +32,11 @@
  *  - $scope.toggleRecurrenceEnd(e)
  *  - $scope.addPrice()
  *  - $scope.removePrice(price, $event)
+ *  - $scope.handleEventChange(?)
  *
  * Requires :
  *  - $scope.event.event_files_attributes = []
+ *  - $scope.event.
  *  - $state (Ui-Router) [ 'app.public.events_list' ]
  */
 class EventsController {
@@ -48,6 +51,9 @@ class EventsController {
         startingDay: Fablab.weekStartingDay
       }
     };
+
+    // themes of the current event
+    $scope.event_themes = $scope.event.event_theme_ids;
 
     /**
      * For use with ngUpload (https://github.com/twilson63/ngUpload).
@@ -146,6 +152,14 @@ class EventsController {
         const index = $scope.event.prices.indexOf(price);
         $scope.event.prices.splice(index, 1);
       }
+    };
+
+    /**
+     * When the theme selection has changes, extract the IDs to populate the form
+     * @param themes {Array<EventTheme>}
+     */
+    $scope.handleEventChange = function (themes) {
+      $scope.event_themes = themes.map(t => t.id);
     };
   }
 }
@@ -284,7 +298,8 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
         resolve: {
           category () { return {}; }
         },
-        controller: 'PriceCategoryController' }).result['finally'](null).then(function (p_cat) {
+        controller: 'PriceCategoryController'
+      }).result.finally(null).then(function (p_cat) {
         // save the price category to the API
         PriceCategory.save(p_cat, function (cat) {
           $scope.priceCategories.push(cat);
@@ -312,7 +327,8 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
           resolve: {
             category () { return $scope.priceCategories[index]; }
           },
-          controller: 'PriceCategoryController' }).result['finally'](null).then(function (p_cat) {
+          controller: 'PriceCategoryController'
+        }).result.finally(null).then(function (p_cat) {
           // update the price category to the API
           PriceCategory.update({ id }, { price_category: p_cat }, function (cat) {
             $scope.priceCategories[index] = cat;
@@ -373,7 +389,6 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
       });
       return $scope.page = 1;
     };
-
 
     /**
      * Setup the feature-tour for the admin/events page.
@@ -468,7 +483,7 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
       if (settingsPromise.feature_tour_display !== 'manual' && $scope.currentUser.profile.tours.indexOf('events') < 0) {
         uitour.start();
       }
-    }
+    };
 
     /* PRIVATE SCOPE */
 
@@ -532,9 +547,9 @@ Application.Controllers.controller('ShowEventReservationsController', ['$scope',
    * @param reservation {Reservation}
    * @returns {boolean}
    */
-  $scope.isCancelled = function(reservation) {
+  $scope.isCancelled = function (reservation) {
     return !!(reservation.slots[0].canceled_at);
-  }
+  };
 }]);
 
 /**
@@ -585,7 +600,7 @@ Application.Controllers.controller('NewEventController', ['$scope', '$state', 'C
     ];
 
     // triggered when the new event form was submitted to the API and have received an answer
-    $scope.onSubmited = function(content) {
+    $scope.onSubmited = function (content) {
       if ((content.id == null)) {
         $scope.alerts = [];
         angular.forEach(content, function (v, k) {
@@ -655,7 +670,7 @@ Application.Controllers.controller('EditEventController', ['$scope', '$state', '
           }
         });
         // submit form event by edit-mode
-        modalInstance.result.then(function(res) {
+        modalInstance.result.then(function (res) {
           $scope.isShowEditModeModal = false;
           $scope.editMode = res.editMode;
           e.target.click();
@@ -664,12 +679,12 @@ Application.Controllers.controller('EditEventController', ['$scope', '$state', '
     };
 
     // triggered when the edit event form was submitted to the API and have received an answer
-    $scope.onSubmited = function(data) {
+    $scope.onSubmited = function (data) {
       if (data.total === data.updated) {
         if (data.updated > 1) {
           growl.success(_t(
             'app.admin.events_edit.events_updated',
-            {COUNT: data.updated - 1}
+            { COUNT: data.updated - 1 }
           ));
         } else {
           growl.success(_t(
@@ -680,7 +695,7 @@ Application.Controllers.controller('EditEventController', ['$scope', '$state', '
         if (data.total > 1) {
           growl.warning(_t(
             'app.admin.events_edit.events_not_updated',
-            {TOTAL: data.total, COUNT: data.total - data.updated}
+            { TOTAL: data.total, COUNT: data.total - data.updated }
           ));
           if (_.find(data.details, { error: 'EventPriceCategory' })) {
             growl.error(_t(
@@ -750,20 +765,20 @@ Application.Controllers.controller('EditRecurrentEventController', ['$scope', '$
       $uibModalInstance.close({
         editMode: $scope.editMode
       });
-    }
+    };
 
     /**
      * Test if any of the dates of the event has changed
      */
-    $scope.hasDateChanged = function() {
+    $scope.hasDateChanged = function () {
       return (!moment(initialDates.start).isSame(currentEvent.start_date, 'day') || !moment(initialDates.end).isSame(currentEvent.end_date, 'day'));
-    }
+    };
 
     /**
      * Cancellation callback
      */
     $scope.cancel = function () {
       $uibModalInstance.dismiss('cancel');
-    }
+    };
   }
 ]);
