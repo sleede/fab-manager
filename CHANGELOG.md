@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v4.7.9 2021 May 17
+
 - Updated dependency to OpenLab
 - Updated i18next to 19.9.3
 - Prevent the worker from crashing if OpenLab is not reachable in dev
