@@ -39,7 +39,7 @@ const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isOpen, to
 
   useEffect(() => {
     const gateway = paymentGateway.read();
-    setSelectedGateway(gateway.value);
+    setSelectedGateway(gateway.value ? gateway.value  : '');
   }, []);
 
   /**
