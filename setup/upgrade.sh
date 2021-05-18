@@ -58,6 +58,7 @@ config()
     echo -e "\e[91m[ ❌ ] The service name was not determined. Please check your docker-compose.yml file. Exiting... \e[39m"
     exit 1
   fi
+  echo -e "\n"
 }
 
 # compare versions utilities

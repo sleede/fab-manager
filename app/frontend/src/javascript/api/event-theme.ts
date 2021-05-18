@@ -8,4 +8,3 @@ export default class EventThemeAPI {
     return res?.data;
   }
 }
-
