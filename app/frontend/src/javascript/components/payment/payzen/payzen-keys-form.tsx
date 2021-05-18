@@ -68,7 +68,7 @@ const PayZenKeysFormComponent: React.FC<PayZenKeysFormProps> = ({ onValidKeys })
 
   /**
    * Assign the inputted key to the settings and check if it is valid.
-   * Depending on the test result, assign an add-on icon and a style to notify the user.
+   * Depending on the test result, assign an add-on icon plus a style to notify the user.
    */
   const testPublicKey = (key: string) => {
     if (!key) return;
