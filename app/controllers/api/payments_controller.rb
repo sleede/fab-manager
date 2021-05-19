@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Abstract API Controller to be extended by each gateway, for handling the payments processes in the front-end
+# Abstract API Controller to be extended by each payment gateway/mean, for handling the payments processes in the front-end
 class API::PaymentsController < API::ApiController
   before_action :authenticate_user!
 
@@ -21,9 +21,7 @@ class API::PaymentsController < API::ApiController
     wallet_amount >= total_amount ? total_amount : wallet_amount
   end
 
-  def card_amount
-    cs = CartService.new(current_user)
-    cart = cs.from_hash(params[:cart_items])
+  def debit_amount(cart)
     price_details = cart.total
 
     # Subtract wallet amount from total
@@ -32,30 +30,33 @@ class API::PaymentsController < API::ApiController
     { amount: total - wallet_debit, details: price_details }
   end
 
-  def check_coupon
-    return if coupon_params[:coupon_code].nil?
-
-    coupon = Coupon.find_by(code: coupon_params[:coupon_code])
-    raise InvalidCouponError if coupon.nil? || coupon.status(current_user.id) != 'active'
+  def shopping_cart
+    cs = CartService.new(current_user)
+    cs.from_hash(params[:cart_items])
   end
 
-  def check_plan
-    plan_id = (cart_items_params[:subscription][:plan_id] if cart_items_params[:subscription])
+  # @param cart {ShoppingCart}
+  def check_coupon(cart)
+    return if cart.coupon.nil?
 
-    return unless plan_id
+    cart.coupon.coupon
+  end
 
-    plan = Plan.find(plan_id)
+  # @param cart {ShoppingCart}
+  def check_plan(cart)
+    return unless cart.subscription
+
+    plan = cart.subscription.plan
     raise InvalidGroupError if plan.group_id != current_user.group_id
   end
 
-  def on_reservation_success(gateway_item_id, gateway_item_type, details)
-    @reservation = Reservation.new(reservation_params)
-    if params[:cart_items][:subscription] && params[:cart_items][:subscription][:plan_id]
-      @reservation.plan_id = params[:cart_items][:subscription][:plan_id]
-    end
-    payment_method = params[:cart_items][:reservation][:payment_method] || 'card'
+  def on_reservation_success(gateway_item_id, gateway_item_type, details, cart)
+    @reservation = cart.reservation.to_reservation
+    @reservation.plan_id = cart.subscription.plan.id if cart.subscription
+
+    payment_method = cart.payment_method || 'card'
     user_id = if current_user.admin? || current_user.manager?
-                params[:cart_items][:reservation][:user_id]
+                cart.customer.id
               else
                 current_user.id
               end
@@ -64,7 +65,7 @@ class API::PaymentsController < API::ApiController
                                                     payment_details: details,
                                                     payment_id: gateway_item_id,
                                                     payment_type: gateway_item_type,
-                                                    schedule: params[:cart_items][:payment_schedule],
+                                                    schedule: cart.payment_schedule.requested,
                                                     payment_method: payment_method)
     post_reservation_save(gateway_item_id, gateway_item_type)
 
@@ -77,10 +78,10 @@ class API::PaymentsController < API::ApiController
     end
   end
 
-  def on_subscription_success(gateway_item_id, gateway_item_type, details)
-    @subscription = Subscription.new(subscription_params)
+  def on_subscription_success(gateway_item_id, gateway_item_type, details, cart)
+    @subscription = cart.subscription.to_subscription
     user_id = if current_user.admin? || current_user.manager?
-                params[:cart_items][:customer_id]
+                cart.customer.id
               else
                 current_user.id
               end
@@ -89,8 +90,8 @@ class API::PaymentsController < API::ApiController
                                                          payment_details: details,
                                                          payment_id: gateway_item_id,
                                                          payment_type: gateway_item_type,
-                                                         schedule: params[:cart_items][:subscription][:payment_schedule],
-                                                         payment_method: 'card')
+                                                         schedule: cart.payment_schedule.requested,
+                                                         payment_method: cart.payment_method || 'card')
 
     post_subscription_save(gateway_item_id, gateway_item_type)
 
@@ -99,28 +100,5 @@ class API::PaymentsController < API::ApiController
     else
       { json: @subscription.errors, status: :unprocessable_entity }
     end
-  end
-
-  def reservation_params
-    params[:cart_items].require(:reservation).permit(:reservable_id, :reservable_type, :nb_reserve_places,
-                                                     tickets_attributes: %i[event_price_category_id booked],
-                                                     slots_attributes: %i[id start_at end_at availability_id offered])
-  end
-
-  def subscription_params
-    params[:cart_items].require(:subscription).permit(:plan_id)
-  end
-
-  def cart_items_params
-    params.require(:cart_items).permit(subscription: :plan_id,
-                                       reservation: [
-                                         :reservable_id, :reservable_type, :nb_reserve_places,
-                                         tickets_attributes: %i[event_price_category_id booked],
-                                         slots_attributes: %i[id start_at end_at availability_id offered]
-                                       ])
-  end
-
-  def coupon_params
-    params.require(:cart_items).permit(:coupon_code)
   end
 end

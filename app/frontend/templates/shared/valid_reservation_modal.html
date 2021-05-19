@@ -1,19 +1,19 @@
 <div class="modal-header">
   <img ng-src="{{logoBlack.custom_asset_file_attributes.attachment_url}}" alt="{{logo.custom_asset_file_attributes.attachment}}" class="modal-logo"/>
-  <h1 translate ng-show="cartItems.reservation">{{ 'app.shared.valid_reservation_modal.booking_confirmation' }}</h1>
-  <h1 translate ng-show="!cartItems.reservation && cartItems.subscription">{{ 'app.shared.valid_reservation_modal.subscription_confirmation' }}</h1>
+  <h1 translate ng-show="reservation">{{ 'app.shared.valid_reservation_modal.booking_confirmation' }}</h1>
+  <h1 translate ng-show="!reservation && subscription">{{ 'app.shared.valid_reservation_modal.subscription_confirmation' }}</h1>
 </div>
 <div class="modal-body">
   <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
   <div class="row">
     <div ng-class="{'col-md-6': schedule, 'm-h-sm': !schedule}">
-      <div ng-if="cartItems.reservation.slots_attributes.length > 0">
+      <div ng-if="reservation">
         <p translate>{{ 'app.shared.valid_reservation_modal.here_is_the_summary_of_the_slots_to_book_for_the_current_user' }}</p>
-        <ul ng-repeat="slot in cartItems.reservation.slots_attributes">
+        <ul ng-repeat="slot in reservation.slots_attributes">
           <li><strong>{{slot.start_at | amDateFormat: 'LL'}} : {{slot.start_at | amDateFormat:'LT'}} - {{slot.end_at | amDateFormat:'LT'}}</strong></li>
         </ul>
       </div>
-      <div ng-if="cartItems.subscription">
+      <div ng-if="subscription">
         <p translate>{{ 'app.shared.valid_reservation_modal.here_is_the_subscription_summary' }}</p>
         <p>{{ plan | humanReadablePlanName }}</p>
       </div>

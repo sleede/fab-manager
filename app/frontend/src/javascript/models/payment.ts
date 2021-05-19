@@ -21,8 +21,7 @@ export enum PaymentMethod {
 
 export interface CartItems {
   customer_id: number,
-  reservation?: Reservation,
-  subscription?: SubscriptionRequest,
+  items: Array<Reservation|SubscriptionRequest>,
   coupon_code?: string,
   payment_schedule?: boolean,
   payment_method: PaymentMethod

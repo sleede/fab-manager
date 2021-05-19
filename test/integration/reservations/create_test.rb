@@ -25,17 +25,21 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
            params: {
              payment_method_id: stripe_payment_method,
              cart_items: {
-               reservation: {
-                 reservable_id: machine.id,
-                 reservable_type: machine.class.name,
-                 slots_attributes: [
-                   {
-                     start_at: availability.start_at.to_s(:iso8601),
-                     end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-                     availability_id: availability.id
+               items: [
+                 {
+                   reservation: {
+                     reservable_id: machine.id,
+                     reservable_type: machine.class.name,
+                     slots_attributes: [
+                       {
+                         start_at: availability.start_at.to_s(:iso8601),
+                         end_at: (availability.start_at + 1.hour).to_s(:iso8601),
+                         availability_id: availability.id
+                       }
+                     ]
                    }
-                 ]
-               }
+                 }
+               ]
              }
            }.to_json, headers: default_headers
     end
@@ -95,17 +99,21 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
            params: {
              payment_method_id: stripe_payment_method(error: :card_declined),
              cart_items: {
-               reservation: {
-                 reservable_id: machine.id,
-                 reservable_type: machine.class.name,
-                 slots_attributes: [
-                   {
-                     start_at: availability.start_at.to_s(:iso8601),
-                     end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-                     availability_id: availability.id
+               items: [
+                 {
+                   reservation: {
+                     reservable_id: machine.id,
+                     reservable_type: machine.class.name,
+                     slots_attributes: [
+                       {
+                         start_at: availability.start_at.to_s(:iso8601),
+                         end_at: (availability.start_at + 1.hour).to_s(:iso8601),
+                         availability_id: availability.id
+                       }
+                     ]
                    }
-                 ]
-               }
+                 }
+               ]
              }
            }.to_json, headers: default_headers
     end
@@ -143,17 +151,21 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
            params: {
              payment_method_id: stripe_payment_method,
              cart_items: {
-               reservation: {
-                 reservable_id: training.id,
-                 reservable_type: training.class.name,
-                 slots_attributes: [
-                   {
-                     start_at: availability.start_at.to_s(:iso8601),
-                     end_at: availability.end_at.to_s(:iso8601),
-                     availability_id: availability.id
+               items: [
+                 {
+                   reservation: {
+                     reservable_id: training.id,
+                     reservable_type: training.class.name,
+                     slots_attributes: [
+                       {
+                         start_at: availability.start_at.to_s(:iso8601),
+                         end_at: availability.end_at.to_s(:iso8601),
+                         availability_id: availability.id
+                       }
+                     ]
                    }
-                 ]
-               }
+                 }
+               ]
              }
            }.to_json, headers: default_headers
     end
@@ -212,22 +224,26 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
            params: {
              payment_method_id: stripe_payment_method,
              cart_items: {
-               reservation: {
-                 reservable_id: machine.id,
-                 reservable_type: machine.class.name,
-                 slots_attributes: [
-                   {
-                     start_at: availability.start_at.to_s(:iso8601),
-                     end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-                     availability_id: availability.id
-                   },
-                   {
-                     start_at: (availability.start_at + 1.hour).to_s(:iso8601),
-                     end_at: (availability.start_at + 2.hours).to_s(:iso8601),
-                     availability_id: availability.id
+               items: [
+                 {
+                   reservation: {
+                     reservable_id: machine.id,
+                     reservable_type: machine.class.name,
+                     slots_attributes: [
+                       {
+                         start_at: availability.start_at.to_s(:iso8601),
+                         end_at: (availability.start_at + 1.hour).to_s(:iso8601),
+                         availability_id: availability.id
+                       },
+                       {
+                         start_at: (availability.start_at + 1.hour).to_s(:iso8601),
+                         end_at: (availability.start_at + 2.hours).to_s(:iso8601),
+                         availability_id: availability.id
+                       }
+                     ]
                    }
-                 ]
-               }
+                 }
+               ]
              }
            }.to_json, headers: default_headers
     end
@@ -292,19 +308,23 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     invoice_items_count = InvoiceItem.count
 
     VCR.use_cassette('reservations_create_for_training_with_subscription_success') do
-      post '/api/reservations',
+      post '/api/local_payment/confirm_payment',
            params: {
-             reservation: {
-               reservable_id: training.id,
-               reservable_type: training.class.name,
-               slots_attributes: [
-                 {
-                   start_at: availability.start_at.to_s(:iso8601),
-                   end_at: availability.end_at.to_s(:iso8601),
-                   availability_id: availability.id
+             items: [
+               {
+                 reservation: {
+                   reservable_id: training.id,
+                   reservable_type: training.class.name,
+                   slots_attributes: [
+                     {
+                       start_at: availability.start_at.to_s(:iso8601),
+                       end_at: availability.end_at.to_s(:iso8601),
+                       availability_id: availability.id
+                     }
+                   ]
                  }
-               ]
-             }
+               }
+             ]
            }.to_json, headers: default_headers
     end
 
@@ -368,17 +388,21 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
              payment_method_id: stripe_payment_method,
              cart_items: {
                customer_id: @vlonchamp.id,
-               reservation: {
-                 reservable_id: machine.id,
-                 reservable_type: machine.class.name,
-                 slots_attributes: [
-                   {
-                     start_at: availability.start_at.to_s(:iso8601),
-                     end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-                     availability_id: availability.id
+               items: [
+                 {
+                   reservation: {
+                     reservable_id: machine.id,
+                     reservable_type: machine.class.name,
+                     slots_attributes: [
+                       {
+                         start_at: availability.start_at.to_s(:iso8601),
+                         end_at: (availability.start_at + 1.hour).to_s(:iso8601),
+                         availability_id: availability.id
+                       }
+                     ]
                    }
-                 ]
-               }
+                 }
+               ]
              }
            }.to_json, headers: default_headers
     end
@@ -450,20 +474,26 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
            params: {
              payment_method_id: stripe_payment_method,
              cart_items: {
-               reservation: {
-                 reservable_id: training.id,
-                 reservable_type: training.class.name,
-                 slots_attributes: [
-                   {
-                     start_at: availability.start_at.to_s(:iso8601),
-                     end_at: availability.end_at.to_s(:iso8601),
-                     availability_id: availability.id
+               items: [
+                 {
+                   reservation: {
+                     reservable_id: training.id,
+                     reservable_type: training.class.name,
+                     slots_attributes: [
+                       {
+                         start_at: availability.start_at.to_s(:iso8601),
+                         end_at: availability.end_at.to_s(:iso8601),
+                         availability_id: availability.id
+                       }
+                     ]
                    }
-                 ]
-               },
-               subscription: {
-                 plan_id: plan.id
-               }
+                 },
+                 {
+                   subscription: {
+                     plan_id: plan.id
+                   }
+                 }
+               ]
              }
            }.to_json, headers: default_headers
     end
@@ -530,20 +560,26 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
            params: {
              payment_method_id: stripe_payment_method,
              cart_items: {
-               reservation: {
-                 reservable_id: machine.id,
-                 reservable_type: machine.class.name,
-                 slots_attributes: [
-                   {
-                     start_at: availability.start_at.to_s(:iso8601),
-                     end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-                     availability_id: availability.id
+               items: [
+                 {
+                   reservation: {
+                     reservable_id: machine.id,
+                     reservable_type: machine.class.name,
+                     slots_attributes: [
+                       {
+                         start_at: availability.start_at.to_s(:iso8601),
+                         end_at: (availability.start_at + 1.hour).to_s(:iso8601),
+                         availability_id: availability.id
+                       }
+                     ]
                    }
-                 ]
-               },
-               subscription: {
-                 plan_id: plan.id
-               },
+                 },
+                 {
+                   subscription: {
+                     plan_id: plan.id
+                   }
+                 }
+               ],
                coupon_code: 'SUNNYFABLAB'
              }
            }.to_json, headers: default_headers
@@ -624,18 +660,22 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
              payment_method_id: stripe_payment_method,
              cart_items: {
                customer_id: @user_without_subscription.id,
-               reservation: {
-                 reservable_id: training.id,
-                 reservable_type: training.class.name,
-                 card_token: stripe_payment_method,
-                 slots_attributes: [
-                   {
-                     start_at: availability.start_at.to_s(:iso8601),
-                     end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-                     availability_id: availability.id
+               items: [
+                 {
+                   reservation: {
+                     reservable_id: training.id,
+                     reservable_type: training.class.name,
+                     card_token: stripe_payment_method,
+                     slots_attributes: [
+                       {
+                         start_at: availability.start_at.to_s(:iso8601),
+                         end_at: (availability.start_at + 1.hour).to_s(:iso8601),
+                         availability_id: availability.id
+                       }
+                     ]
                    }
-                 ]
-               },
+                 }
+               ],
                coupon_code: 'XMAS10'
              }
            }.to_json, headers: default_headers
@@ -700,20 +740,26 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
              setup_intent_id: setup_intent[:id],
              cart_items: {
                payment_schedule: true,
-               reservation: {
-                 reservable_id: training.id,
-                 reservable_type: training.class.name,
-                 slots_attributes: [
-                   {
-                     start_at: availability.start_at.to_s(:iso8601),
-                     end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-                     availability_id: availability.id
+               items: [
+                 {
+                   reservation: {
+                     reservable_id: training.id,
+                     reservable_type: training.class.name,
+                     slots_attributes: [
+                       {
+                         start_at: availability.start_at.to_s(:iso8601),
+                         end_at: (availability.start_at + 1.hour).to_s(:iso8601),
+                         availability_id: availability.id
+                       }
+                     ]
                    }
-                 ],
-               },
-               subscription: {
-                 plan_id: plan.id,
-               }
+                 },
+                 {
+                   subscription: {
+                     plan_id: plan.id
+                   }
+                 }
+               ]
              }
            }.to_json, headers: default_headers
     end
@@ -797,20 +843,26 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
              cart_items: {
                coupon_code: 'GIME3EUR',
                payment_schedule: true,
-               subscription: {
-                 plan_id: plan.id,
-               },
-               reservation: {
-                 reservable_id: machine.id,
-                 reservable_type: machine.class.name,
-                 slots_attributes: [
-                   {
-                     start_at: availability.start_at.to_s(:iso8601),
-                     end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-                     availability_id: availability.id
+               items: [
+                 {
+                   subscription: {
+                     plan_id: plan.id
                    }
-                 ]
-               }
+                 },
+                 {
+                   reservation: {
+                     reservable_id: machine.id,
+                     reservable_type: machine.class.name,
+                     slots_attributes: [
+                       {
+                         start_at: availability.start_at.to_s(:iso8601),
+                         end_at: (availability.start_at + 1.hour).to_s(:iso8601),
+                         availability_id: availability.id
+                       }
+                     ]
+                   }
+                 }
+               ]
              }
            }.to_json, headers: default_headers
     end

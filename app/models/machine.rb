@@ -80,6 +80,6 @@ class Machine < ApplicationRecord
   private
 
   def update_gateway_product
-    PaymentGatewayService.create_or_update_product(Machine.name, id)
+    PaymentGatewayService.new.create_or_update_product(Machine.name, id)
   end
 end

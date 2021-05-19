@@ -16,9 +16,13 @@ class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
            params: {
              payment_method_id: stripe_payment_method,
              cart_items: {
-               subscription: {
-                 plan_id: plan.id
-               }
+               items: [
+                 {
+                   subscription: {
+                     plan_id: plan.id
+                   }
+                 }
+               ]
              }
            }.to_json, headers: default_headers
     end
@@ -76,9 +80,13 @@ class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
            params: {
              payment_method_id: stripe_payment_method,
              cart_items: {
-               subscription: {
-                 plan_id: plan.id
-               }
+               items: [
+                 {
+                   subscription: {
+                     plan_id: plan.id
+                   }
+                 }
+               ]
              }
            }.to_json, headers: default_headers
     end
@@ -104,9 +112,13 @@ class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
            params: {
              payment_method_id: stripe_payment_method,
              cart_items: {
-               subscription: {
-                 plan_id: plan.id
-               }
+               items: [
+                 {
+                   subscription: {
+                     plan_id: plan.id
+                   }
+                 }
+               ]
              }
            }.to_json, headers: default_headers
     end
@@ -204,10 +216,14 @@ class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
            params: {
              setup_intent_id: setup_intent[:id],
              cart_items: {
-               subscription: {
-                 plan_id: plan.id,
-                 payment_schedule: true
-               }
+               payment_schedule: true,
+               items: [
+                 {
+                   subscription: {
+                     plan_id: plan.id
+                   }
+                 }
+               ]
              }
            }.to_json, headers: default_headers
     end

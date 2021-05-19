@@ -3,16 +3,17 @@
 # create remote items on currently active payment gateway
 class PaymentGatewayService
   def initialize
-    @gateway = if Stripe::Helper.enabled?
-                 require 'stripe/service'
-                 Stripe::Service
-               elsif PayZen::Helper.enabled?
-                 require 'pay_zen/service'
-                 PayZen::Service
-               else
-                 require 'payment/service'
-                 Payment::Service
-               end
+    service = if Stripe::Helper.enabled?
+                require 'stripe/service'
+                Stripe::Service
+              elsif PayZen::Helper.enabled?
+                require 'pay_zen/service'
+                PayZen::Service
+              else
+                require 'payment/service'
+                Payment::Service
+              end
+    @gateway = service.new
   end
 
   def create_subscription(payment_schedule, gateway_object_id)

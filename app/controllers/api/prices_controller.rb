@@ -47,18 +47,4 @@ class API::PricesController < API::ApiController
   def price_params
     params.require(:price).permit(:amount)
   end
-
-  def compute_reservation_price_params
-    params.require(:reservation).permit(:reservable_id, :reservable_type, :plan_id, :user_id, :nb_reserve_places, :payment_schedule,
-                                        tickets_attributes: %i[event_price_category_id booked],
-                                        slots_attributes: %i[id start_at end_at availability_id offered])
-  end
-
-  def compute_subscription_price_params
-    params.require(:subscription).permit(:plan_id, :user_id, :payment_schedule)
-  end
-
-  def coupon_params
-    params.permit(:coupon_code)
-  end
 end

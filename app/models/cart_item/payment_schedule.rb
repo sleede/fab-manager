@@ -2,6 +2,8 @@
 
 # A payment schedule applied to plan in the shopping cart
 class CartItem::PaymentSchedule
+  attr_reader :requested
+
   def initialize(plan, coupon, requested)
     raise TypeError unless coupon.is_a? CartItem::Coupon
 

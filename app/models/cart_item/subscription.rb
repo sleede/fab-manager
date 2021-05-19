@@ -2,6 +2,8 @@
 
 # A subscription added to the shopping cart
 class CartItem::Subscription < CartItem::BaseItem
+  attr_reader :plan
+
   def initialize(plan)
     raise TypeError unless plan.is_a? Plan
 
@@ -17,5 +19,11 @@ class CartItem::Subscription < CartItem::BaseItem
 
   def name
     @plan.name
+  end
+
+  def to_subscription
+    Subscription.new(
+      plan_id: @plan.id
+    )
   end
 end

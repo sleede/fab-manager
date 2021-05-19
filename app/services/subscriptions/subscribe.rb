@@ -65,9 +65,13 @@ class Subscriptions::Subscribe
       operator = InvoicingProfile.find(@operator_profile_id).user
       cs = CartService.new(operator)
       cart = cs.from_hash(customer_id: subscription.user.id,
-                          subscription: {
-                            plan_id: subscription.plan_id
-                          },
+                          items: [
+                            {
+                              subscription: {
+                                plan_id: subscription.plan_id
+                              }
+                            }
+                          ],
                           payment_schedule: !schedule.nil?)
       details = cart.total
 

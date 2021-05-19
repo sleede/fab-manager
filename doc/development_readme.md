@@ -155,7 +155,7 @@ This procedure is not easy to follow so if you don't need to write some code for
 <a name="tests"></a>
 ## Tests
 
-Run the test suite with `./scripts/run-tests.sh`.
+Run the test suite with `./scripts/tests.sh`.
 
 Pleas note: If you haven't set the Stripe's API keys in your `.env` file, the script will ask for them.
 You must provide valid Stripe API **test keys** for the test suite to run.

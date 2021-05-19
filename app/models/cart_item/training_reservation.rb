@@ -32,6 +32,14 @@ class CartItem::TrainingReservation < CartItem::Reservation
     { elements: elements, amount: amount }
   end
 
+  def to_reservation
+    ::Reservation.new(
+      reservable_id: @reservable.id,
+      reservable_type: Training.name,
+      slots_attributes: slots_params
+    )
+  end
+
   protected
 
   def credits

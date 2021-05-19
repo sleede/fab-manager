@@ -33,6 +33,10 @@ class CartItem::Reservation < CartItem::BaseItem
     @reservable.name
   end
 
+  def to_reservation
+    nil
+  end
+
   protected
 
   def credits
@@ -83,5 +87,9 @@ class CartItem::Reservation < CartItem::BaseItem
       hours_available = credits.hours - user_credit.hours_used if user_credit
     end
     hours_available
+  end
+
+  def slots_params
+    @slots.map { |slot| slot.permit(:id, :start_at, :end_at, :availability_id, :offered) }
   end
 end

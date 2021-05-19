@@ -16,11 +16,12 @@ class API::StripeController < API::PaymentsController
     intent = nil # stripe's payment intent
     res = nil # json of the API answer
 
+    cart = shopping_cart
     begin
-      amount = card_amount
+      amount = debit_amount(cart)
       if params[:payment_method_id].present?
-        check_coupon
-        check_plan
+        check_coupon(cart)
+        check_plan(cart)
 
         # Create the PaymentIntent
         intent = Stripe::PaymentIntent.create(
@@ -46,10 +47,10 @@ class API::StripeController < API::PaymentsController
     end
 
     if intent&.status == 'succeeded'
-      if params[:cart_items][:reservation]
-        res = on_reservation_success(intent, amount[:details])
-      elsif params[:cart_items][:subscription]
-        res = on_subscription_success(intent, amount[:details])
+      if cart.reservation
+        res = on_reservation_success(intent, amount[:details], cart)
+      elsif cart.subscription
+        res = on_subscription_success(intent, amount[:details], cart)
       end
     end
 
@@ -79,12 +80,13 @@ class API::StripeController < API::PaymentsController
     key = Setting.get('stripe_secret_key')
     intent = Stripe::SetupIntent.retrieve(params[:setup_intent_id], api_key: key)
 
-    amount = card_amount
+    cart = shopping_cart
+    amount = debit_amount(cart)
     if intent&.status == 'succeeded'
-      if params[:cart_items][:reservation]
-        res = on_reservation_success(intent, amount[:details])
-      elsif params[:cart_items][:subscription]
-        res = on_subscription_success(intent, amount[:details])
+      if cart.reservation
+        res = on_reservation_success(intent, amount[:details], cart)
+      elsif cart.subscription
+        res = on_subscription_success(intent, amount[:details], cart)
       end
     end
 
@@ -126,12 +128,12 @@ class API::StripeController < API::PaymentsController
     )
   end
 
-  def on_reservation_success(intent, details)
-    super(intent.id, intent.class.name, details)
+  def on_reservation_success(intent, details, cart)
+    super(intent.id, intent.class.name, details, cart)
   end
 
-  def on_subscription_success(intent, details)
-    super(intent.id, intent.class.name, details)
+  def on_subscription_success(intent, details, cart)
+    super(intent.id, intent.class.name, details, cart)
   end
 
   def generate_payment_response(intent, res = nil)

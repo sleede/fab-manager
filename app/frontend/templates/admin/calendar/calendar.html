@@ -58,12 +58,12 @@
       <iframe name="export-frame" height="0" width="0" class="none"></iframe>
     </div>
 
-    <div class="widget panel b-a m m-t-lg" ng-if="availability" ng-hide="availability.available_type == 'event'">
+    <div class="widget panel b-a m m-t-lg" ng-if="availability" ng-show="(availability.slot_duration || availability.tags.length > 0) && availability.available_type !== 'event'">
       <div class="panel-heading b-b small">
         <h3><i class="fa fa-info-circle m-r" aria-hidden="true"></i><span translate>{{ 'app.admin.calendar.info' }}</span></h3>
       </div>
       <div class="widget-content no-bg auto wrapper">
-        <div translate translate-values="{DURATION: availability.slot_duration}">{{ 'app.admin.calendar.slot_duration' }}</div>
+        <div translate translate-values="{DURATION: availability.slot_duration}" ng-show="availability.slot_duration">{{ 'app.admin.calendar.slot_duration' }}</div>
         <div class="m-t-sm" ng-show="availability.tags.length > 0">
           <span translate>{{ 'app.admin.calendar.tags' }}</span>
           <ul>

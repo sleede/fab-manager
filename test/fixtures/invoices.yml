@@ -9,7 +9,7 @@ invoice_1:
   invoicing_profile_id: 3
   statistic_profile_id: 3
   reference: 1604001/VL
-  payment_method:
+  payment_method: card
   avoir_date:
   invoice_id:
   type:

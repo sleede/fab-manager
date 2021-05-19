@@ -18,6 +18,14 @@ class ShoppingCart
     @payment_schedule = payment_schedule
   end
 
+  def subscription
+    @items.find { |item| item.is_a? CartItem::Subscription }
+  end
+
+  def reservation
+    @items.find { |item| item.is_a? CartItem::Reservation }
+  end
+
   # compute the price details of the current shopping cart
   def total
     total_amount = 0

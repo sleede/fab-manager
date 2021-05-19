@@ -13,12 +13,16 @@ class Subscriptions::RenewAsAdminTest < ActionDispatch::IntegrationTest
     plan = Plan.find_by(base_name: 'Mensuel tarif réduit')
 
     VCR.use_cassette('subscriptions_admin_renew_success') do
-      post '/api/subscriptions',
+      post '/api/local_payment/confirm_payment',
            params: {
              customer_id: user.id,
-             subscription: {
-               plan_id: plan.id
-             }
+             items: [
+               {
+                 subscription: {
+                   plan_id: plan.id
+                 }
+               }
+             ]
            }.to_json, headers: default_headers
     end
 

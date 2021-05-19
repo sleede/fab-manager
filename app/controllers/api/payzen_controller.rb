@@ -18,8 +18,9 @@ class API::PayzenController < API::PaymentsController
   end
 
   def create_payment
-    amount = card_amount
-    @id = PayZen::Helper.generate_ref(cart_items_params, params[:customer_id])
+    cart = shopping_cart
+    amount = debit_amount(cart)
+    @id = PayZen::Helper.generate_ref(params[:cart_items], params[:customer_id])
 
     client = PayZen::Charge.new
     @result = client.create_payment(amount: amount[:amount],
@@ -29,7 +30,7 @@ class API::PayzenController < API::PaymentsController
   end
 
   def create_token
-    @id = PayZen::Helper.generate_ref(cart_items_params, params[:customer_id])
+    @id = PayZen::Helper.generate_ref(params[:cart_items], params[:customer_id])
     client = PayZen::Charge.new
     @result = client.create_token(order_id: @id,
                                   customer: PayZen::Helper.generate_customer(params[:customer_id], current_user.id, params[:cart_items]))
@@ -46,13 +47,14 @@ class API::PayzenController < API::PaymentsController
     client = PayZen::Order.new
     order = client.get(params[:order_id], operation_type: 'DEBIT')
 
-    amount = card_amount
+    cart = shopping_cart
+    amount = debit_amount(cart)
 
     if order['answer']['transactions'].first['status'] == 'PAID'
-      if params[:cart_items][:reservation]
-        res = on_reservation_success(params[:order_id], amount[:details])
-      elsif params[:cart_items][:subscription]
-        res = on_subscription_success(params[:order_id], amount[:details])
+      if cart.reservation
+        res = on_reservation_success(params[:order_id], amount[:details], cart)
+      elsif cart.subscription
+        res = on_subscription_success(params[:order_id], amount[:details], cart)
       end
     end
 
@@ -63,12 +65,12 @@ class API::PayzenController < API::PaymentsController
 
   private
 
-  def on_reservation_success(order_id, details)
-    super(order_id, 'PayZen::Order', details)
+  def on_reservation_success(order_id, details, cart)
+    super(order_id, 'PayZen::Order', details, cart)
   end
 
-  def on_subscription_success(order_id, details)
-    super(order_id, 'PayZen::Order', details)
+  def on_subscription_success(order_id, details, cart)
+    super(order_id, 'PayZen::Order', details, cart)
   end
 
   def error_handling

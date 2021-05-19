@@ -70,6 +70,6 @@ class Training < ApplicationRecord
   end
 
   def update_gateway_product
-    PaymentGatewayService.create_or_update_product(Training.name, id)
+    PaymentGatewayService.new.create_or_update_product(Training.name, id)
   end
 end

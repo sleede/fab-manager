@@ -55,7 +55,7 @@ docker-compose up -d
 
   - Install and configure the PostgreSQL extension [pgextwlist](https://github.com/dimitri/pgextwlist).
     Please follow the instructions detailed on the extension website to whitelist `unaccent` and `trigram` for the user configured in `config/database.yml`.
-- If you intend to contribute to the project code, you will need to run the test suite with `scripts/run-tests.sh`.
+- If you intend to contribute to the project code, you will need to run the test suite with `scripts/tests.sh`.
   This also requires your user to have the _SUPERUSER_ role.
   Please see the [known issues](known-issues.md) documentation for more information about this.
 

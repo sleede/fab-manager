@@ -34,7 +34,23 @@ class CartItem::EventReservation < CartItem::Reservation
     { elements: elements, amount: total }
   end
 
+  def to_reservation
+    ::Reservation.new(
+      reservable_id: @reservable.id,
+      reservable_type: Event.name,
+      slots_attributes: slots_params,
+      tickets_attributes: tickets_params,
+      nb_reserve_places: @normal_tickets
+    )
+  end
+
   def name
     @reservable.title
+  end
+
+  protected
+
+  def tickets_params
+    @other_tickets.map { |ticket| ticket.permit(:event_price_category_id, :booked) }
   end
 end

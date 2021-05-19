@@ -12,6 +12,14 @@ class CartItem::MachineReservation < CartItem::Reservation
     @new_subscription = new_subscription
   end
 
+  def to_reservation
+    ::Reservation.new(
+      reservable_id: @reservable.id,
+      reservable_type: Machine.name,
+      slots_attributes: slots_params
+    )
+  end
+
   protected
 
   def credits

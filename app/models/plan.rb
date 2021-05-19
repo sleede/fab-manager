@@ -131,6 +131,6 @@ class Plan < ApplicationRecord
   end
 
   def update_gateway_product
-    PaymentGatewayService.create_or_update_product(Plan.name, id)
+    PaymentGatewayService.new.create_or_update_product(Plan.name, id)
   end
 end

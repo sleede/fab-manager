@@ -657,12 +657,12 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
      * @param reservation {Object} as returned by mkReservation()
      * @param coupon {Object} Coupon as returned from the API
      * @param paymentMethod {string} 'card' | ''
-     * @return {{reservation:Object, coupon_code:string}}
+     * @return {CartItems}
      */
     const mkCartItems = function (reservation, coupon, paymentMethod = '') {
       return {
         customer_id: $scope.ctrl.member.id,
-        reservation,
+        items: [reservation],
         coupon_code: ((coupon ? coupon.code : undefined)),
         payment_method: paymentMethod,
       };
@@ -733,8 +733,8 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
             return mkCartItems(reservation, $scope.coupon.applied);
           },
         },
-        controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', 'wallet', 'helpers', '$filter', 'coupon', 'cartItems',
-          function ($scope, $uibModalInstance, $state, reservation, price, Auth, Reservation, wallet, helpers, $filter, coupon, cartItems) {
+        controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'LocalPayment', 'wallet', 'helpers', '$filter', 'coupon', 'cartItems',
+          function ($scope, $uibModalInstance, $state, reservation, price, Auth, LocalPayment, wallet, helpers, $filter, coupon, cartItems) {
             // User's wallet amount
             $scope.wallet = wallet;
 
@@ -767,7 +767,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
             // Callback to validate the payment
             $scope.ok = function () {
               $scope.attempting = true;
-              return Reservation.save(mkCartItems($scope.reservation, coupon), function (reservation) {
+              return LocalPayment.confirm(cartItems, function (reservation) {
                 $uibModalInstance.close(reservation);
                 return $scope.attempting = true;
               }

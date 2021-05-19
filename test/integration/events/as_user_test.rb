@@ -34,29 +34,33 @@ class Events::AsUserTest < ActionDispatch::IntegrationTest
              payment_method_id: stripe_payment_method,
              cart_items: {
                customer_id: User.find_by(username: 'vlonchamp').id,
-               reservation: {
-                 reservable_id: radio.id,
-                 reservable_type: 'Event',
-                 nb_reserve_places: 2,
-                 slots_attributes: [
-                   {
-                     start_at: availability.start_at,
-                     end_at: availability.end_at,
-                     availability_id: availability.id,
-                     offered: false
+               items: [
+                 {
+                   reservation: {
+                     reservable_id: radio.id,
+                     reservable_type: 'Event',
+                     nb_reserve_places: 2,
+                     slots_attributes: [
+                       {
+                         start_at: availability.start_at,
+                         end_at: availability.end_at,
+                         availability_id: availability.id,
+                         offered: false
+                       }
+                     ],
+                     tickets_attributes: [
+                       {
+                         event_price_category_id: radio.event_price_categories[0].id,
+                         booked: 2
+                       },
+                       {
+                         event_price_category_id: radio.event_price_categories[1].id,
+                         booked: 2
+                       }
+                     ]
                    }
-                 ],
-                 tickets_attributes: [
-                   {
-                     event_price_category_id: radio.event_price_categories[0].id,
-                     booked: 2
-                   },
-                   {
-                     event_price_category_id: radio.event_price_categories[1].id,
-                     booked: 2
-                   }
-                 ]
-               },
+                 }
+               ],
                coupon_code: 'SUNNYFABLAB'
              }
            }.to_json, headers: default_headers

@@ -13,12 +13,16 @@ class Subscriptions::CreateAsAdminTest < ActionDispatch::IntegrationTest
     plan = Plan.find_by(group_id: user.group.id, type: 'Plan', base_name: 'Mensuel')
 
     VCR.use_cassette('subscriptions_admin_create_success') do
-      post '/api/subscriptions',
+      post '/api/local_payment/confirm_payment',
            params: {
              customer_id: user.id,
-             subscription: {
-               plan_id: plan.id
-             }
+             items: [
+               {
+                 subscription: {
+                   plan_id: plan.id
+                 }
+               }
+             ]
            }.to_json, headers: default_headers
     end
 
@@ -95,11 +99,15 @@ class Subscriptions::CreateAsAdminTest < ActionDispatch::IntegrationTest
              setup_intent_id: setup_intent[:id],
              cart_items: {
                customer_id: user.id,
-               subscription: {
-                 plan_id: plan.id,
-                 payment_schedule: true,
-                 payment_method: 'stripe'
-               }
+               payment_schedule: true,
+               payment_method: 'card',
+               items: [
+                 {
+                   subscription: {
+                     plan_id: plan.id
+                   }
+                 }
+               ]
              }
            }.to_json, headers: default_headers
     end

@@ -687,16 +687,13 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
          * @return {CartItems}
          */
         const mkCartItems = function (items, paymentMethod = '') {
-          const cartItems = {
+          return {
             customer_id: $scope.user.id,
+            items,
             payment_schedule: $scope.schedule.requested_schedule,
             payment_method: paymentMethod,
             coupon_code: (($scope.coupon.applied ? $scope.coupon.applied.code : undefined))
           };
-          for (const item of items) {
-            Object.assign(cartItems, item);
-          }
-          return cartItems;
         };
 
         /**
@@ -745,8 +742,8 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                 return $scope.settings;
               }
             },
-            controller: ['$scope', '$uibModalInstance', '$state', 'price', 'Auth', 'Reservation', 'Subscription', 'wallet', 'helpers', '$filter', 'coupon', 'selectedPlan', 'schedule', 'cartItems', 'user', 'settings',
-              function ($scope, $uibModalInstance, $state, price, Auth, Reservation, Subscription, wallet, helpers, $filter, coupon, selectedPlan, schedule, cartItems, user, settings) {
+            controller: ['$scope', '$uibModalInstance', '$state', 'price', 'Auth', 'LocalPayment', 'wallet', 'helpers', '$filter', 'coupon', 'selectedPlan', 'schedule', 'cartItems', 'user', 'settings',
+              function ($scope, $uibModalInstance, $state, price, Auth, LocalPayment, wallet, helpers, $filter, coupon, selectedPlan, schedule, cartItems, user, settings) {
                 // user wallet amount
                 $scope.wallet = wallet;
 
@@ -784,6 +781,30 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                 $scope.user = user;
 
                 /**
+                 * Check if the shopping cart contains a reservation
+                 * @return {Reservation|boolean}
+                 */
+                $scope.reservation = (function () {
+                  const item = cartItems.items.find(i => i.reservation);
+                  if (item && item.reservation.slots_attributes.length > 0) {
+                    return item.reservation;
+                  }
+                  return false;
+                })();
+
+                /**
+                 * Check if the shopping cart contains a subscription
+                 * @return {Subscription|boolean}
+                 */
+                $scope.subscription = (function () {
+                  const item = cartItems.items.find(i => i.subscription);
+                  if (item && item.subscription.plan_id) {
+                    return item.subscription;
+                  }
+                  return false;
+                })();
+
+                /**
                  * Callback to process the local payment, triggered on button click
                  */
                 $scope.ok = function () {
@@ -796,22 +817,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                     }
                   }
                   $scope.attempting = true;
-                  // save subscription (if there's only a subscription selected)
-                  if ((!$scope.cartItems.reservation || $scope.cartItems.reservation.slots_attributes.length === 0) && selectedPlan) {
-                    const sub = mkSubscription(selectedPlan.id);
-
-                    return Subscription.save(mkCartItems([sub], $scope.method.payment_method),
-                      function (subscription) {
-                        $uibModalInstance.close(subscription);
-                        $scope.attempting = true;
-                      }, function (response) {
-                        $scope.alerts = [];
-                        $scope.alerts.push({ msg: _t('app.shared.cart.a_problem_occurred_during_the_payment_process_please_try_again_later'), type: 'danger' });
-                        $scope.attempting = false;
-                      });
-                  }
-                  // otherwise, save the reservation (may include a subscription)
-                  Reservation.save(cartItems, function (reservation) {
+                  LocalPayment.confirm(cartItems, function (reservation) {
                     $uibModalInstance.close(reservation);
                     $scope.attempting = true;
                   }, function (response) {

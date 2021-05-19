@@ -62,22 +62,26 @@ module Events
       assert_equal 10, e.nb_free_places, 'Number of free places was not updated'
 
       # Now, let's make a reservation on this event
-      post '/api/reservations',
+      post '/api/local_payment/confirm_payment',
            params: {
              customer_id: User.find_by(username: 'pdurand').id,
-             reservation: {
-               reservable_id: e.id,
-               reservable_type: 'Event',
-               nb_reserve_places: 2,
-               slots_attributes: [
-                 {
-                   start_at: e.availability.start_at,
-                   end_at: e.availability.end_at,
-                   availability_id: e.availability.id,
-                   offered: false
+             items: [
+               {
+                 reservation: {
+                   reservable_id: e.id,
+                   reservable_type: 'Event',
+                   nb_reserve_places: 2,
+                   slots_attributes: [
+                     {
+                       start_at: e.availability.start_at,
+                       end_at: e.availability.end_at,
+                       availability_id: e.availability.id,
+                       offered: false
+                     }
+                   ]
                  }
-               ]
-             }
+               }
+             ]
            }.to_json,
            headers: default_headers
 
@@ -156,28 +160,32 @@ module Events
       assert_equal 10, e.nb_free_places, 'Number of free places was not updated'
 
       # Now, let's make a reservation on this event
-      post '/api/reservations',
+      post '/api/local_payment/confirm_payment',
            params: {
              customer_id: User.find_by(username: 'lseguin').id,
-             reservation: {
-               reservable_id: e.id,
-               reservable_type: 'Event',
-               nb_reserve_places: 4,
-               slots_attributes: [
-                 {
-                   start_at: e.availability.start_at,
-                   end_at: e.availability.end_at,
-                   availability_id: e.availability.id,
-                   offered: false
+             items: [
+               {
+                 reservation: {
+                   reservable_id: e.id,
+                   reservable_type: 'Event',
+                   nb_reserve_places: 4,
+                   slots_attributes: [
+                     {
+                       start_at: e.availability.start_at,
+                       end_at: e.availability.end_at,
+                       availability_id: e.availability.id,
+                       offered: false
+                     }
+                   ],
+                   tickets_attributes: [
+                     {
+                       event_price_category_id: e.event_price_categories.first.id,
+                       booked: 4
+                     }
+                   ]
                  }
-               ],
-               tickets_attributes: [
-                 {
-                   event_price_category_id: e.event_price_categories.first.id,
-                   booked: 4
-                 }
-               ]
-             }
+               }
+             ]
            }.to_json,
            headers: default_headers
 

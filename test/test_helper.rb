@@ -19,7 +19,7 @@ VCR.configure do |config|
 end
 
 Sidekiq::Testing.fake!
-Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(color: true)]
+Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(color: true)] unless ENV['RM_INFO']
 
 class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...

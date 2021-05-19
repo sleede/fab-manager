@@ -16,9 +16,13 @@ class Subscriptions::RenewAsUserTest < ActionDispatch::IntegrationTest
            params: {
              payment_method_id: stripe_payment_method,
              cart_items: {
-               subscription: {
-                 plan_id: plan.id
-               }
+               items: [
+                 {
+                   subscription: {
+                     plan_id: plan.id
+                   }
+                 }
+               ]
              }
            }.to_json, headers: default_headers
     end
@@ -80,9 +84,13 @@ class Subscriptions::RenewAsUserTest < ActionDispatch::IntegrationTest
            params: {
              payment_method_id: stripe_payment_method(error: :card_declined),
              cart_items: {
-               subscription: {
-                 plan_id: plan.id
-               }
+               items: [
+                 {
+                   subscription: {
+                     plan_id: plan.id
+                   }
+                 }
+               ]
              }
            }.to_json, headers: default_headers
     end

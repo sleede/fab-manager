@@ -15,8 +15,13 @@ class CartService
     plan_info = plan(cart_items)
 
     items = []
-    items.push(CartItem::Subscription.new(plan_info[:plan])) if plan_info[:new_subscription]
-    items.push(reservable_from_hash(cart_items[:reservation], plan_info)) if cart_items[:reservation]
+    cart_items[:items].each do |item|
+      if item.keys.first == 'subscription'
+        items.push(CartItem::Subscription.new(plan_info[:plan])) if plan_info[:new_subscription]
+      elsif item.keys.first == 'reservation'
+        items.push(reservable_from_hash(item[:reservation], plan_info))
+      end
+    end
 
     coupon = CartItem::Coupon.new(@customer, @operator, cart_items[:coupon_code])
     schedule = CartItem::PaymentSchedule.new(plan_info[:plan], coupon, cart_items[:payment_schedule])
@@ -33,14 +38,16 @@ class CartService
   private
 
   def plan(cart_items)
-    plan = if cart_items[:subscription] && cart_items[:subscription][:plan_id]
-             new_plan_being_bought = true
-             Plan.find(cart_items[:subscription][:plan_id])
+    new_plan_being_bought = false
+    plan = if cart_items[:items].any? { |item| item.keys.first == 'subscription' }
+             index = cart_items[:items].index { |item| item.keys.first == 'subscription' }
+             if cart_items[:items][index][:subscription][:plan_id]
+               new_plan_being_bought = true
+               Plan.find(cart_items[:items][index][:subscription][:plan_id])
+             end
            elsif @customer.subscribed_plan
-             new_plan_being_bought = false
              @customer.subscribed_plan
            else
-             new_plan_being_bought = false
              nil
            end
     { plan: plan, new_subscription: new_plan_being_bought }

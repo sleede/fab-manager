@@ -15,18 +15,22 @@ module Prices
       post '/api/prices/compute',
            params: {
              customer_id: user.id,
-             reservation: {
-               reservable_id: printer_training.id,
-               reservable_type: printer_training.class.name,
-               slots_attributes: [
-                 {
-                   availability_id: availability.id,
-                   end_at: availability.end_at,
-                   offered: false,
-                   start_at: availability.start_at
+             items: [
+               {
+                 reservation: {
+                   reservable_id: printer_training.id,
+                   reservable_type: printer_training.class.name,
+                   slots_attributes: [
+                     {
+                       availability_id: availability.id,
+                       end_at: availability.end_at,
+                       offered: false,
+                       start_at: availability.start_at
+                     }
+                   ]
                  }
-               ]
-             }
+               }
+             ]
            }.to_json,
            headers: default_headers
 
@@ -50,27 +54,33 @@ module Prices
       post '/api/prices/compute',
            params: {
              customer_id: user.id,
-             reservation: {
-               reservable_id: laser.id,
-               reservable_type: laser.class.name,
-               slots_attributes: [
-                 {
-                   availability_id: availability.id,
-                   end_at: (availability.start_at + 1.hour).strftime('%Y-%m-%d %H:%M:%S.%9N Z'),
-                   offered: true,
-                   start_at: availability.start_at.strftime('%Y-%m-%d %H:%M:%S.%9N Z')
-                 },
-                 {
-                   availability_id: availability.id,
-                   end_at: (availability.start_at + 2.hour).strftime('%Y-%m-%d %H:%M:%S.%9N Z'),
-                   offered: false,
-                   start_at: (availability.start_at + 1.hour).strftime('%Y-%m-%d %H:%M:%S.%9N Z')
+             items: [
+               {
+                 reservation: {
+                   reservable_id: laser.id,
+                   reservable_type: laser.class.name,
+                   slots_attributes: [
+                     {
+                       availability_id: availability.id,
+                       end_at: (availability.start_at + 1.hour).strftime('%Y-%m-%d %H:%M:%S.%9N Z'),
+                       offered: true,
+                       start_at: availability.start_at.strftime('%Y-%m-%d %H:%M:%S.%9N Z')
+                     },
+                     {
+                       availability_id: availability.id,
+                       end_at: (availability.start_at + 2.hour).strftime('%Y-%m-%d %H:%M:%S.%9N Z'),
+                       offered: false,
+                       start_at: (availability.start_at + 1.hour).strftime('%Y-%m-%d %H:%M:%S.%9N Z')
+                     }
+                   ]
                  }
-               ]
-             },
-             subscription: {
-               plan_id: plan.id
-             }
+               },
+               {
+                 subscription: {
+                   plan_id: plan.id
+                 }
+               }
+             ]
            }.to_json,
            headers: default_headers
 
