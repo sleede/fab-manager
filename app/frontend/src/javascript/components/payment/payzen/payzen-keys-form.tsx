@@ -74,9 +74,7 @@ const PayZenKeysFormComponent: React.FC<PayZenKeysFormProps> = ({ onValidKeys, o
    * Depending on the test result, assign an add-on icon plus a style to notify the user.
    */
   const testPublicKey = (key: string) => {
-    if (!key) return;
-
-    if (!key.match(/^[0-9]+:/)) {
+    if (!key || !key.match(/^[0-9]+:/)) {
       setPublicKeyAddOn(<i className="fa fa-times" />);
       setPublicKeyAddOnClassName('key-invalid');
       return;
