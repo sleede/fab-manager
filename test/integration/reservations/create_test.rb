@@ -2,6 +2,8 @@
 
 require 'test_helper'
 
+module Reservations; end
+
 class Reservations::CreateTest < ActionDispatch::IntegrationTest
   setup do
     @user_without_subscription = User.members.without_subscription.first

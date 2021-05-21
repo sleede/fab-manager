@@ -33,10 +33,6 @@ class CartItem::Reservation < CartItem::BaseItem
     @reservable.name
   end
 
-  def to_reservation
-    nil
-  end
-
   protected
 
   def credits

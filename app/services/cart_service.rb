@@ -8,7 +8,7 @@ class CartService
 
   ##
   # For details about the expected hash format
-  # @see app/frontend/src/javascript/models/payment.ts > interface CartItems
+  # @see app/frontend/src/javascript/models/payment.ts > interface ShoppingCart
   ##
   def from_hash(cart_items)
     @customer = customer(cart_items)
@@ -17,7 +17,7 @@ class CartService
     items = []
     cart_items[:items].each do |item|
       if item.keys.first == 'subscription'
-        items.push(CartItem::Subscription.new(plan_info[:plan])) if plan_info[:new_subscription]
+        items.push(CartItem::Subscription.new(plan_info[:plan], @customer)) if plan_info[:new_subscription]
       elsif item.keys.first == 'reservation'
         items.push(reservable_from_hash(item[:reservation], plan_info))
       end
@@ -28,6 +28,7 @@ class CartService
 
     ShoppingCart.new(
       @customer,
+      @operator,
       coupon,
       schedule,
       cart_items[:payment_method],

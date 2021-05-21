@@ -335,16 +335,20 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
     $scope.validReserveEvent = function () {
       const cartItems = {
         customer_id: $scope.ctrl.member.id,
-        reservation: {
-          reservable_id: $scope.event.id,
-          reservable_type: 'Event',
-          slots_attributes: [],
-          nb_reserve_places: $scope.reserve.nbReservePlaces,
-          tickets_attributes: []
-        }
+        items: [
+          {
+            reservation: {
+              reservable_id: $scope.event.id,
+              reservable_type: 'Event',
+              slots_attributes: [],
+              nb_reserve_places: $scope.reserve.nbReservePlaces,
+              tickets_attributes: []
+            }
+          }
+        ]
       }
       // a single slot is used for events
-      cartItems.reservation.slots_attributes.push({
+      cartItems.items[0].reservation.slots_attributes.push({
         start_at: $scope.event.start_date,
         end_at: $scope.event.end_date,
         availability_id: $scope.event.availability.id
@@ -353,7 +357,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
       for (let price_id in $scope.reserve.tickets) {
         if (Object.prototype.hasOwnProperty.call($scope.reserve.tickets, price_id)) {
           const seats = $scope.reserve.tickets[price_id];
-          cartItems.reservation.tickets_attributes.push({
+          cartItems.items[0].reservation.tickets_attributes.push({
             event_price_category_id: price_id,
             booked: seats
           });
@@ -363,7 +367,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
       $scope.attempting = true;
       // save the reservation to the API
       return Reservation.save(cartItems, function (reservation) {
-      // reservation successfull
+      // reservation successful
         afterPayment(reservation);
         return $scope.attempting = false;
       }
@@ -657,7 +661,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
      * @param reservation {Object} as returned by mkReservation()
      * @param coupon {Object} Coupon as returned from the API
      * @param paymentMethod {string} 'card' | ''
-     * @return {CartItems}
+     * @return {ShoppingCart}
      */
     const mkCartItems = function (reservation, coupon, paymentMethod = '') {
       return {

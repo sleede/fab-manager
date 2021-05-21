@@ -1,9 +1,9 @@
 import apiClient from './clients/api-client';
 import { AxiosResponse } from 'axios';
-import { CartItems, IntentConfirmation, PaymentConfirmation, UpdateCardResponse } from '../models/payment';
+import { ShoppingCart, IntentConfirmation, PaymentConfirmation, UpdateCardResponse } from '../models/payment';
 
 export default class StripeAPI {
-  static async confirm (stp_payment_method_id: string, cart_items: CartItems): Promise<PaymentConfirmation> {
+  static async confirm (stp_payment_method_id: string, cart_items: ShoppingCart): Promise<PaymentConfirmation> {
     const res: AxiosResponse = await apiClient.post(`/api/stripe/confirm_payment`, {
       payment_method_id: stp_payment_method_id,
       cart_items
@@ -17,7 +17,7 @@ export default class StripeAPI {
   }
 
   // TODO, type the response
-  static async confirmPaymentSchedule (setup_intent_id: string, cart_items: CartItems): Promise<any> {
+  static async confirmPaymentSchedule (setup_intent_id: string, cart_items: ShoppingCart): Promise<any> {
     const res: AxiosResponse = await apiClient.post(`/api/stripe/confirm_payment_schedule`, {
       setup_intent_id,
       cart_items

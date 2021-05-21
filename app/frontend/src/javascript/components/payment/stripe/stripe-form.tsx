@@ -14,7 +14,7 @@ interface StripeFormProps extends GatewayFormProps {
  * A form component to collect the credit card details and to create the payment method on Stripe.
  * The form validation button must be created elsewhere, using the attribute form={formId}.
  */
-export const StripeForm: React.FC<StripeFormProps> = ({ onSubmit, onSuccess, onError, children, className, paymentSchedule = false, cartItems, customer, operator, formId }) => {
+export const StripeForm: React.FC<StripeFormProps> = ({ onSubmit, onSuccess, onError, children, className, paymentSchedule = false, cart, customer, operator, formId }) => {
 
   const { t } = useTranslation('shared');
 
@@ -45,7 +45,7 @@ export const StripeForm: React.FC<StripeFormProps> = ({ onSubmit, onSuccess, onE
       try {
         if (!paymentSchedule) {
           // process the normal payment pipeline, including SCA validation
-          const res = await StripeAPI.confirm(paymentMethod.id, cartItems);
+          const res = await StripeAPI.confirm(paymentMethod.id, cart);
           await handleServerConfirmation(res);
         } else {
           // we start by associating the payment method with the user
@@ -66,7 +66,7 @@ export const StripeForm: React.FC<StripeFormProps> = ({ onSubmit, onSuccess, onE
             onError(error.message);
           } else {
             // then we confirm the payment schedule
-            const res = await StripeAPI.confirmPaymentSchedule(setupIntent.id, cartItems);
+            const res = await StripeAPI.confirmPaymentSchedule(setupIntent.id, cart);
             onSuccess(res);
           }
         }
@@ -100,7 +100,7 @@ export const StripeForm: React.FC<StripeFormProps> = ({ onSubmit, onSuccess, onE
         // The card action has been handled
         // The PaymentIntent can be confirmed again on the server
         try {
-          const confirmation = await StripeAPI.confirm(result.paymentIntent.id, cartItems);
+          const confirmation = await StripeAPI.confirm(result.paymentIntent.id, cart);
           await handleServerConfirmation(confirmation);
         } catch (e) {
           onError(e);

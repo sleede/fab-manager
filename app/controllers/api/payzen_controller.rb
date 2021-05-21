@@ -48,13 +48,12 @@ class API::PayzenController < API::PaymentsController
     order = client.get(params[:order_id], operation_type: 'DEBIT')
 
     cart = shopping_cart
-    amount = debit_amount(cart)
 
     if order['answer']['transactions'].first['status'] == 'PAID'
       if cart.reservation
-        res = on_reservation_success(params[:order_id], amount[:details], cart)
+        res = on_reservation_success(params[:order_id], cart)
       elsif cart.subscription
-        res = on_subscription_success(params[:order_id], amount[:details], cart)
+        res = on_subscription_success(params[:order_id], cart)
       end
     end
 
@@ -65,12 +64,12 @@ class API::PayzenController < API::PaymentsController
 
   private
 
-  def on_reservation_success(order_id, details, cart)
-    super(order_id, 'PayZen::Order', details, cart)
+  def on_reservation_success(order_id, cart)
+    super(order_id, 'PayZen::Order', cart)
   end
 
-  def on_subscription_success(order_id, details, cart)
-    super(order_id, 'PayZen::Order', details, cart)
+  def on_subscription_success(order_id, cart)
+    super(order_id, 'PayZen::Order', cart)
   end
 
   def error_handling

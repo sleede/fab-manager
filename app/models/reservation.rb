@@ -23,23 +23,16 @@ class Reservation < ApplicationRecord
   validates_presence_of :reservable_id, :reservable_type
   validate :machine_not_already_reserved, if: -> { reservable.is_a?(Machine) }
   validate :training_not_fully_reserved, if: -> { reservable.is_a?(Training) }
+  validate :slots_not_locked
   validates_with ReservationSlotSubscriptionValidator
 
   attr_accessor :plan_id, :subscription
 
   after_commit :notify_member_create_reservation, on: :create
   after_commit :notify_admin_member_create_reservation, on: :create
+  after_commit :update_credits, on: :create
+  after_commit :extend_subscription, on: :create
   after_save :update_event_nb_free_places, if: proc { |reservation| reservation.reservable_type == 'Event' }
-
-  ##
-  # These checks will run before the invoice/payment-schedule is generated
-  ##
-  def pre_check
-    # check that none of the reserved availabilities was locked
-    slots.each do |slot|
-      raise LockedError if slot.availability.lock
-    end
-  end
 
   ## Generate the subscription associated with for the current reservation
   def generate_subscription
@@ -48,13 +41,6 @@ class Reservation < ApplicationRecord
     self.subscription = Subscription.new(plan_id: plan_id, statistic_profile_id: statistic_profile_id, expiration_date: nil)
     subscription.init_save
     subscription
-  end
-
-  ##
-  # These actions will be realized after the reservation is initially saved (on creation)
-  ##
-  def post_save
-    UsersCredits::Manager.new(reservation: self).update_credits
   end
 
   # @param canceled    if true, count the number of seats for this reservation, including canceled seats
@@ -104,6 +90,21 @@ class Reservation < ApplicationRecord
   def training_not_fully_reserved
     slot = slots.first
     errors.add(:training, 'already fully reserved') if Availability.find(slot.availability_id).completed?
+  end
+
+  def slots_not_locked
+    # check that none of the reserved availabilities was locked
+    slots.each do |slot|
+      errors.add(:slots, 'locked') if slot.availability.lock
+    end
+  end
+
+  def update_credits
+    UsersCredits::Manager.new(reservation: self).update_credits
+  end
+
+  def extend_subscription
+    SubscriptionExtensionAfterReservation.new(self).extend_subscription_if_eligible
   end
 
   def notify_member_create_reservation

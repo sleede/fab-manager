@@ -6,7 +6,7 @@ import { FabModal, ModalSize } from '../base/fab-modal';
 import { HtmlTranslate } from '../base/html-translate';
 import { CustomAssetName } from '../../models/custom-asset';
 import { IFablab } from '../../models/fablab';
-import { CartItems } from '../../models/payment';
+import { ShoppingCart } from '../../models/payment';
 import { PaymentSchedule } from '../../models/payment-schedule';
 import { User } from '../../models/user';
 import CustomAssetAPI from '../../api/custom-asset';
@@ -24,7 +24,7 @@ export interface GatewayFormProps {
   operator: User,
   className?: string,
   paymentSchedule?: boolean,
-  cartItems?: CartItems,
+  cart?: ShoppingCart,
   formId: string,
 }
 
@@ -32,7 +32,7 @@ interface AbstractPaymentModalProps {
   isOpen: boolean,
   toggleModal: () => void,
   afterSuccess: (result: any) => void,
-  cartItems: CartItems,
+  cart: ShoppingCart,
   currentUser: User,
   schedule: PaymentSchedule,
   customer: User,
@@ -53,7 +53,7 @@ const cgvFile = CustomAssetAPI.get(CustomAssetName.CgvFile);
  * This component must not be called directly but must be extended for each implemented payment gateway
  * @see https://reactjs.org/docs/composition-vs-inheritance.html
  */
-export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, cartItems, currentUser, schedule, customer, logoFooter, GatewayForm, formId, className, formClassName }) => {
+export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, cart, currentUser, schedule, customer, logoFooter, GatewayForm, formId, className, formClassName }) => {
   // customer's wallet
   const [wallet, setWallet] = useState(null);
   // server-computed price with all details
@@ -80,17 +80,17 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
    * - Refresh the remaining price
    */
   useEffect(() => {
-    if (!cartItems) return;
-    WalletAPI.getByUser(cartItems.customer_id).then((wallet) => {
+    if (!cart) return;
+    WalletAPI.getByUser(cart.customer_id).then((wallet) => {
       setWallet(wallet);
-      PriceAPI.compute(cartItems).then((res) => {
+      PriceAPI.compute(cart).then((res) => {
         setPrice(res);
         const wLib = new WalletLib(wallet);
         setRemainingPrice(wLib.computeRemainingPrice(res.price));
         setReady(true);
       })
     })
-  }, [cartItems]);
+  }, [cart]);
 
   /**
    * Check if there is currently an error to display
@@ -170,14 +170,14 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
               customFooter={logoFooter}
               className={`payment-modal ${className ? className : ''}`}>
       {ready && <div>
-        <WalletInfo cartItems={cartItems} currentUser={currentUser} wallet={wallet} price={price?.price} />
+        <WalletInfo cart={cart} currentUser={currentUser} wallet={wallet} price={price?.price} />
         <GatewayForm onSubmit={handleSubmit}
                      onSuccess={handleFormSuccess}
                      onError={handleFormError}
                      operator={currentUser}
                      className={`gateway-form ${formClassName ? formClassName : ''}`}
                      formId={formId}
-                     cartItems={cartItems}
+                     cart={cart}
                      customer={customer}
                      paymentSchedule={isPaymentSchedule()}>
           {hasErrors() && <div className="payment-errors">

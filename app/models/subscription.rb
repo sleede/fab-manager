@@ -16,23 +16,11 @@ class Subscription < ApplicationRecord
   validates_with SubscriptionGroupValidator
 
   # creation
+  before_create :set_expiration_date
   after_save :notify_member_subscribed_plan
   after_save :notify_admin_subscribed_plan
   after_save :notify_partner_subscribed_plan, if: :of_partner_plan?
-
-  ##
-  # Set the inner properties of the subscription, init the user's credits and save the subscription into the DB
-  # @return {boolean} true, if the operation succeeded
-  ##
-  def init_save
-    return false unless valid?
-
-    set_expiration_date
-    return false unless save
-
-    UsersCredits::Manager.new(user: user).reset_credits
-    true
-  end
+  after_commit :update_credits, on: :create
 
   def generate_and_save_invoice(operator_profile_id)
     generate_invoice(operator_profile_id).save
@@ -147,5 +135,10 @@ class Subscription < ApplicationRecord
 
   def of_partner_plan?
     plan.is_a?(PartnerPlan)
+  end
+
+  # init the user's credits
+  def update_credits
+    UsersCredits::Manager.new(user: user).reset_credits
   end
 end

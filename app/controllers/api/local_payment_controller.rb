@@ -9,9 +9,9 @@ class API::LocalPaymentController < API::PaymentsController
     authorize LocalPaymentContext.new(cart, price[:amount])
 
     if cart.reservation
-      res = on_reservation_success(nil, nil, price[:details], cart)
+      res = on_reservation_success(nil, nil, cart)
     elsif cart.subscription
-      res = on_subscription_success(nil, nil, price[:details], cart)
+      res = on_subscription_success(nil, nil, cart)
     end
 
     render res

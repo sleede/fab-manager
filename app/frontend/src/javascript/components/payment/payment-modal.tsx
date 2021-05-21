@@ -1,6 +1,6 @@
 import React, { ReactElement, ReactNode } from 'react';
 import { IApplication } from '../../models/application';
-import { CartItems } from '../../models/payment';
+import { ShoppingCart } from '../../models/payment';
 import { User } from '../../models/user';
 import { PaymentSchedule } from '../../models/payment-schedule';
 import { Loader } from '../base/loader';
@@ -16,7 +16,7 @@ interface PaymentModalProps {
   isOpen: boolean,
   toggleModal: () => void,
   afterSuccess: (result: any) => void,
-  cartItems: CartItems,
+  cart: ShoppingCart,
   currentUser: User,
   schedule: PaymentSchedule,
   customer: User
@@ -29,7 +29,7 @@ const paymentGateway = SettingAPI.get(SettingName.PaymentGateway);
  * This component open a modal dialog for the configured payment gateway, allowing the user to input his card data
  * to process an online payment.
  */
-const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, currentUser, schedule , cartItems, customer }) => {
+const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, currentUser, schedule , cart, customer }) => {
   const gateway = paymentGateway.read();
 
   /**
@@ -39,7 +39,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, toggleModal, afterS
     return <StripeModal isOpen={isOpen}
                         toggleModal={toggleModal}
                         afterSuccess={afterSuccess}
-                        cartItems={cartItems}
+                        cart={cart}
                         currentUser={currentUser}
                         schedule={schedule}
                         customer={customer} />
@@ -52,7 +52,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, toggleModal, afterS
     return <PayZenModal isOpen={isOpen}
                         toggleModal={toggleModal}
                         afterSuccess={afterSuccess}
-                        cartItems={cartItems}
+                        cart={cart}
                         currentUser={currentUser}
                         schedule={schedule}
                         customer={customer} />
@@ -73,12 +73,12 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, toggleModal, afterS
 }
 
 
-const PaymentModalWrapper: React.FC<PaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, currentUser, schedule , cartItems, customer }) => {
+const PaymentModalWrapper: React.FC<PaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, currentUser, schedule , cart, customer }) => {
   return (
     <Loader>
-      <PaymentModal isOpen={isOpen} toggleModal={toggleModal} afterSuccess={afterSuccess} currentUser={currentUser} schedule={schedule} cartItems={cartItems} customer={customer} />
+      <PaymentModal isOpen={isOpen} toggleModal={toggleModal} afterSuccess={afterSuccess} currentUser={currentUser} schedule={schedule} cart={cart} customer={customer} />
     </Loader>
   );
 }
 
-Application.Components.component('paymentModal', react2angular(PaymentModalWrapper, ['isOpen', 'toggleModal', 'afterSuccess','currentUser', 'schedule', 'cartItems', 'customer']));
+Application.Components.component('paymentModal', react2angular(PaymentModalWrapper, ['isOpen', 'toggleModal', 'afterSuccess','currentUser', 'schedule', 'cart', 'customer']));

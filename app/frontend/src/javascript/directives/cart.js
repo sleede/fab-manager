@@ -681,10 +681,10 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
         };
 
         /**
-         * Build the CartItems object, from the current reservation
+         * Build the ShoppingCart object, from the current reservation
          * @param items {Array<{reservation:{reservable_type: string, reservable_id: string, slots_attributes: []}}|{subscription: {plan_id: number}}>}
          * @param paymentMethod {string}
-         * @return {CartItems}
+         * @return {ShoppingCart}
          */
         const mkCartItems = function (items, paymentMethod = '') {
           return {

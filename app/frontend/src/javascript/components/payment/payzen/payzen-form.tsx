@@ -16,7 +16,7 @@ import {
  * A form component to collect the credit card details and to create the payment method on Stripe.
  * The form validation button must be created elsewhere, using the attribute form={formId}.
  */
-export const PayzenForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, onError, children, className, paymentSchedule = false, cartItems, customer, operator, formId }) => {
+export const PayzenForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, onError, children, className, paymentSchedule = false, cart, customer, operator, formId }) => {
 
   const PayZenKR = useRef<KryptonClient>(null);
   const [loadingClass, setLoadingClass] = useState<'hidden' | 'loader' | 'loader-overlay'>('loader');
@@ -39,7 +39,7 @@ export const PayzenForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, on
           .then(({ KR }) => PayZenKR.current = KR);
       }).catch(error => onError(error));
     });
-  }, [cartItems, paymentSchedule, customer]);
+  }, [cart, paymentSchedule, customer]);
 
   /**
    * Ask the API to create the form token.
@@ -47,9 +47,9 @@ export const PayzenForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, on
    */
   const createToken = async (): Promise<CreateTokenResponse> => {
     if (paymentSchedule) {
-      return await PayzenAPI.chargeCreateToken(cartItems, customer);
+      return await PayzenAPI.chargeCreateToken(cart, customer);
     } else {
-      return await PayzenAPI.chargeCreatePayment(cartItems, customer);
+      return await PayzenAPI.chargeCreatePayment(cart, customer);
     }
   }
 
@@ -63,7 +63,7 @@ export const PayzenForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, on
         const transaction = event.clientAnswer.transactions[0];
 
         if (event.clientAnswer.orderStatus === 'PAID') {
-          PayzenAPI.confirm(event.clientAnswer.orderDetails.orderId, cartItems).then((confirmation) =>  {
+          PayzenAPI.confirm(event.clientAnswer.orderDetails.orderId, cart).then((confirmation) =>  {
             PayZenKR.current.removeForms().then(() => {
               onSuccess(confirmation);
             });

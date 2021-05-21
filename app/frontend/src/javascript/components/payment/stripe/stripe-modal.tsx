@@ -3,7 +3,7 @@ import { SetupIntent } from '@stripe/stripe-js';
 import { StripeElements } from './stripe-elements';
 import { StripeForm } from './stripe-form';
 import { GatewayFormProps, AbstractPaymentModal } from '../abstract-payment-modal';
-import { CartItems, PaymentConfirmation } from '../../../models/payment';
+import { ShoppingCart, PaymentConfirmation } from '../../../models/payment';
 import { PaymentSchedule } from '../../../models/payment-schedule';
 import { User } from '../../../models/user';
 
@@ -16,7 +16,7 @@ interface StripeModalProps {
   isOpen: boolean,
   toggleModal: () => void,
   afterSuccess: (result: SetupIntent|PaymentConfirmation) => void,
-  cartItems: CartItems,
+  cart: ShoppingCart,
   currentUser: User,
   schedule: PaymentSchedule,
   customer: User
@@ -29,7 +29,7 @@ interface StripeModalProps {
  * This component should not be called directly. Prefer using <PaymentModal> which can handle the configuration
  *  of a different payment gateway.
  */
-export const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuccess, cartItems, currentUser, schedule, customer }) => {
+export const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuccess, cart, currentUser, schedule, customer }) => {
   /**
    * Return the logos, shown in the modal footer.
    */
@@ -47,7 +47,7 @@ export const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, a
   /**
    * Integrates the StripeForm into the parent PaymentModal
    */
-  const renderForm: FunctionComponent<GatewayFormProps> = ({ onSubmit, onSuccess, onError, operator, className, formId, cartItems, customer, paymentSchedule, children}) => {
+  const renderForm: FunctionComponent<GatewayFormProps> = ({ onSubmit, onSuccess, onError, operator, className, formId, cart, customer, paymentSchedule, children}) => {
     return (
       <StripeElements>
         <StripeForm onSubmit={onSubmit}
@@ -56,7 +56,7 @@ export const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, a
                     operator={operator}
                     className={className}
                     formId={formId}
-                    cartItems={cartItems}
+                    cart={cart}
                     customer={customer}
                     paymentSchedule={paymentSchedule}>
           {children}
@@ -73,7 +73,7 @@ export const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, a
                           formId="stripe-form"
                           formClassName="stripe-form"
                           currentUser={currentUser}
-                          cartItems={cartItems}
+                          cart={cart}
                           customer={customer}
                           afterSuccess={afterSuccess}
                           schedule={schedule}

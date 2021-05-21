@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactNode } from 'react';
 import { GatewayFormProps, AbstractPaymentModal } from '../abstract-payment-modal';
-import { CartItems, PaymentConfirmation } from '../../../models/payment';
+import { ShoppingCart, PaymentConfirmation } from '../../../models/payment';
 import { PaymentSchedule } from '../../../models/payment-schedule';
 import { User } from '../../../models/user';
 
@@ -14,7 +14,7 @@ interface PayZenModalProps {
   isOpen: boolean,
   toggleModal: () => void,
   afterSuccess: (result: PaymentConfirmation) => void,
-  cartItems: CartItems,
+  cart: ShoppingCart,
   currentUser: User,
   schedule: PaymentSchedule,
   customer: User
@@ -27,7 +27,7 @@ interface PayZenModalProps {
  * This component should not be called directly. Prefer using <PaymentModal> which can handle the configuration
  *  of a different payment gateway.
  */
-export const PayZenModal: React.FC<PayZenModalProps> = ({ isOpen, toggleModal, afterSuccess, cartItems, currentUser, schedule, customer }) => {
+export const PayZenModal: React.FC<PayZenModalProps> = ({ isOpen, toggleModal, afterSuccess, cart, currentUser, schedule, customer }) => {
   /**
    * Return the logos, shown in the modal footer.
    */
@@ -44,7 +44,7 @@ export const PayZenModal: React.FC<PayZenModalProps> = ({ isOpen, toggleModal, a
   /**
    * Integrates the PayzenForm into the parent PaymentModal
    */
-  const renderForm: FunctionComponent<GatewayFormProps> = ({ onSubmit, onSuccess, onError, operator, className, formId, cartItems, customer, paymentSchedule, children}) => {
+  const renderForm: FunctionComponent<GatewayFormProps> = ({ onSubmit, onSuccess, onError, operator, className, formId, cart, customer, paymentSchedule, children}) => {
     return (
       <PayzenForm onSubmit={onSubmit}
                   onSuccess={onSuccess}
@@ -52,7 +52,7 @@ export const PayZenModal: React.FC<PayZenModalProps> = ({ isOpen, toggleModal, a
                   customer={customer}
                   operator={operator}
                   formId={formId}
-                  cartItems={cartItems}
+                  cart={cart}
                   className={className}
                   paymentSchedule={paymentSchedule}>
         {children}
@@ -68,7 +68,7 @@ export const PayZenModal: React.FC<PayZenModalProps> = ({ isOpen, toggleModal, a
                           formClassName="payzen-form"
                           className="payzen-modal"
                           currentUser={currentUser}
-                          cartItems={cartItems}
+                          cart={cart}
                           customer={customer}
                           afterSuccess={afterSuccess}
                           schedule={schedule}

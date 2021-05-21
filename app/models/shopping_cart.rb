@@ -2,16 +2,18 @@
 
 # Stores data about a shopping data
 class ShoppingCart
-  attr_accessor :customer, :payment_method, :items, :coupon, :payment_schedule
+  attr_accessor :customer, :operator, :payment_method, :items, :coupon, :payment_schedule
 
   # @param items {Array<CartItem::BaseItem>}
   # @param coupon {CartItem::Coupon}
   # @param payment_schedule {CartItem::PaymentSchedule}
   # @param customer {User}
-  def initialize(customer, coupon, payment_schedule, payment_method = '', items: [])
+  # @param operator {User}
+  def initialize(customer, operator, coupon, payment_schedule, payment_method = '', items: [])
     raise TypeError unless customer.is_a? User
 
     @customer = customer
+    @operator = operator
     @payment_method = payment_method
     @items = items
     @coupon = coupon
@@ -49,5 +51,45 @@ class ShoppingCart
       coupon: @coupon.coupon,
       schedule: schedule_info[:schedule]
     }
+  end
+
+  def pay_and_save(payment_id, payment_type)
+    price = total
+    objects = []
+    ActiveRecord::Base.transaction do
+      items.each do |item|
+        object = item.to_object
+        object.save
+        objects.push(object)
+        raise ActiveRecord::Rollback unless object.errors.count.zero?
+      end
+
+      payment = if price[:schedule]
+                  PaymentScheduleService.new.create(
+                    subscription&.to_object,
+                    price[:before_coupon],
+                    coupon: @coupon,
+                    operator: @operator,
+                    payment_method: @payment_method,
+                    user: @customer,
+                    reservation: reservation&.to_object,
+                    payment_id: payment_id,
+                    payment_type: payment_type
+                  )
+                else
+                  InvoicesService.create(
+                    price,
+                    @operator.invoicing_profile.id,
+                    reservation: reservation&.to_object,
+                    payment_id: payment_id,
+                    payment_type: payment_type,
+                    payment_method: @payment_method
+                  )
+                end
+      payment.save
+      payment.post_save(payment_id)
+    end
+
+    objects.map(&:errors).flatten.count.zero?
   end
 end

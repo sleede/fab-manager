@@ -12,6 +12,8 @@ class API::PaymentsController < API::ApiController
 
   protected
 
+  def post_save(_gateway_item_id, _gateway_item_type); end
+
   def post_reservation_save(_gateway_item_id, _gateway_item_type); end
 
   def post_subscription_save(_gateway_item_id, _gateway_item_type); end
@@ -50,49 +52,23 @@ class API::PaymentsController < API::ApiController
     raise InvalidGroupError if plan.group_id != current_user.group_id
   end
 
-  def on_reservation_success(gateway_item_id, gateway_item_type, details, cart)
-    @reservation = cart.reservation.to_reservation
-    @reservation.plan_id = cart.subscription.plan.id if cart.subscription
+  def on_success(gateway_item_id, gateway_item_type, cart)
+    cart.pay_and_save(gateway_item_id, gateway_item_type)
+  end
 
-    payment_method = cart.payment_method || 'card'
-    user_id = if current_user.admin? || current_user.manager?
-                cart.customer.id
-              else
-                current_user.id
-              end
-    is_reserve = Reservations::Reserve.new(user_id, current_user.invoicing_profile.id)
-                                      .pay_and_save(@reservation,
-                                                    payment_details: details,
-                                                    payment_id: gateway_item_id,
-                                                    payment_type: gateway_item_type,
-                                                    schedule: cart.payment_schedule.requested,
-                                                    payment_method: payment_method)
+  def on_reservation_success(gateway_item_id, gateway_item_type, cart)
+    is_reserve = on_success(gateway_item_id, gateway_item_type, cart)
     post_reservation_save(gateway_item_id, gateway_item_type)
 
     if is_reserve
-      SubscriptionExtensionAfterReservation.new(@reservation).extend_subscription_if_eligible
-
       { template: 'api/reservations/show', status: :created, location: @reservation }
     else
       { json: @reservation.errors, status: :unprocessable_entity }
     end
   end
 
-  def on_subscription_success(gateway_item_id, gateway_item_type, details, cart)
-    @subscription = cart.subscription.to_subscription
-    user_id = if current_user.admin? || current_user.manager?
-                cart.customer.id
-              else
-                current_user.id
-              end
-    is_subscribe = Subscriptions::Subscribe.new(current_user.invoicing_profile.id, user_id)
-                                           .pay_and_save(@subscription,
-                                                         payment_details: details,
-                                                         payment_id: gateway_item_id,
-                                                         payment_type: gateway_item_type,
-                                                         schedule: cart.payment_schedule.requested,
-                                                         payment_method: cart.payment_method || 'card')
-
+  def on_subscription_success(gateway_item_id, gateway_item_type, cart)
+    is_subscribe = on_success(gateway_item_id, gateway_item_type, cart)
     post_subscription_save(gateway_item_id, gateway_item_type)
 
     if is_subscribe

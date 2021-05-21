@@ -19,9 +19,11 @@ export enum PaymentMethod {
   Other = ''
 }
 
-export interface CartItems {
+export type CartItem = { reservation: Reservation }|{ subscription: SubscriptionRequest };
+
+export interface ShoppingCart {
   customer_id: number,
-  items: Array<Reservation|SubscriptionRequest>,
+  items: Array<CartItem>,
   coupon_code?: string,
   payment_schedule?: boolean,
   payment_method: PaymentMethod

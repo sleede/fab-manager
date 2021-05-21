@@ -34,13 +34,14 @@ class CartItem::EventReservation < CartItem::Reservation
     { elements: elements, amount: total }
   end
 
-  def to_reservation
+  def to_object
     ::Reservation.new(
       reservable_id: @reservable.id,
       reservable_type: Event.name,
       slots_attributes: slots_params,
       tickets_attributes: tickets_params,
-      nb_reserve_places: @normal_tickets
+      nb_reserve_places: @normal_tickets,
+      statistic_profile_id: StatisticProfile.find_by(user: @customer).id
     )
   end
 

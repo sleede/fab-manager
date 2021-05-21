@@ -1,6 +1,6 @@
 import apiClient from './clients/api-client';
 import { AxiosResponse } from 'axios';
-import { CartItems } from '../models/payment';
+import { ShoppingCart } from '../models/payment';
 import { User } from '../models/user';
 import {
   CheckHashResponse,
@@ -17,13 +17,13 @@ export default class PayzenAPI {
     return res?.data;
   }
 
-  static async chargeCreatePayment(cartItems: CartItems, customer: User): Promise<CreatePaymentResponse> {
-    const res: AxiosResponse<CreatePaymentResponse> = await apiClient.post('/api/payzen/create_payment', { cart_items: cartItems, customer_id: customer.id });
+  static async chargeCreatePayment(cart: ShoppingCart, customer: User): Promise<CreatePaymentResponse> {
+    const res: AxiosResponse<CreatePaymentResponse> = await apiClient.post('/api/payzen/create_payment', { cart_items: cart, customer_id: customer.id });
     return res?.data;
   }
 
-  static async chargeCreateToken(cartItems: CartItems, customer: User): Promise<CreateTokenResponse> {
-    const res: AxiosResponse = await  apiClient.post('/api/payzen/create_token', { cart_items: cartItems, customer_id: customer.id });
+  static async chargeCreateToken(cart: ShoppingCart, customer: User): Promise<CreateTokenResponse> {
+    const res: AxiosResponse = await  apiClient.post('/api/payzen/create_token', { cart_items: cart, customer_id: customer.id });
     return res?.data;
   }
 
@@ -32,8 +32,8 @@ export default class PayzenAPI {
     return res?.data;
   }
 
-  static async confirm(orderId: string, cartItems: CartItems): Promise<ConfirmPaymentResponse> {
-    const res: AxiosResponse<ConfirmPaymentResponse> = await apiClient.post('/api/payzen/confirm_payment', { cart_items: cartItems, order_id: orderId });
+  static async confirm(orderId: string, cart: ShoppingCart): Promise<ConfirmPaymentResponse> {
+    const res: AxiosResponse<ConfirmPaymentResponse> = await apiClient.post('/api/payzen/confirm_payment', { cart_items: cart, order_id: orderId });
     return res?.data;
   }
 }

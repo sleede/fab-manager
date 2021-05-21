@@ -12,11 +12,12 @@ class CartItem::SpaceReservation < CartItem::Reservation
     @new_subscription = new_subscription
   end
 
-  def to_reservation
+  def to_object
     ::Reservation.new(
       reservable_id: @reservable.id,
       reservable_type: Space.name,
-      slots_attributes: slots_params
+      slots_attributes: slots_params,
+      statistic_profile_id: StatisticProfile.find_by(user: @customer).id
     )
   end
 
