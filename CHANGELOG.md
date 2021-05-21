@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Fix a bug: reservation of slots restricted to subscribers leads to invoices without invoiced_id
+- Fix a bug: new installation with mapping to an external network does not connect fab-manager to elasticsearch
 
 ## v4.7.9 2021 May 17
 
