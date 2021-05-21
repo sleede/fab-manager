@@ -13,6 +13,7 @@
 - Fix a bug: unable to use run.fab.mn
 - Fix a bug: typo in allow/prevent booking overlapping slots
 - Fix a bug: in the admin calendar, the trainings' info panel shows "duration: null minutes"
+- Fix a bug: new installation with mapping to an external network does not connect fab-manager to elasticsearch
 - `SUPERADMIN_EMAIL` renamed to `ADMINSYS_EMAIL`
 - `scripts/run-tests.sh` renamed to `scripts/tests.sh`
 - [BREAKING CHANGE] GET `open_api/v1/invoices` won't return `stp_invoice_id` OR `stp_payment_intent_id` anymore. The new field `payment_gateway_object` will contain some similar data if the invoice was paid online by card.
