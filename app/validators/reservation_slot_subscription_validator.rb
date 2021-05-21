@@ -9,7 +9,7 @@ class ReservationSlotSubscriptionValidator < ActiveModel::Validator
         else
           # TODO, this validation requires to check if the operator is privileged.
           # Meanwhile we can't check this, we disable the validation
-          # record.errors[:slots] << 'slot is restrict for subscriptions'
+          record.errors[:slots] << 'slot is restrict for subscriptions'
         end
       end
     end
