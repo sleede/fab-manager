@@ -7,7 +7,9 @@ class ReservationSlotSubscriptionValidator < ActiveModel::Validator
         if record.user.subscribed_plan && s.availability.plan_ids.include?(record.user.subscribed_plan.id)
         elsif s.availability.plan_ids.include?(record.plan_id)
         else
-          record.errors[:slots] << 'slot is restrict for subscriptions'
+          # TODO, this validation requires to check if the operator is privileged.
+          # Meanwhile we can't check this, we disable the validation
+          # record.errors[:slots] << 'slot is restrict for subscriptions'
         end
       end
     end

@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: reservation of slots restricted to subscribers leads to invoices without invoiced_id
+
 ## v4.7.9 2021 May 17
 
 - Updated dependency to OpenLab
