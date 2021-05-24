@@ -4,6 +4,7 @@
 - Fix a bug: new installation with mapping to an external network does not connect fab-manager to elasticsearch
 - Fix a bug: typo in allow/prevent booking overlapping slots
 - Fix a bug: unable to use run.fab.mn
+- Fix a bug: parse error while compiling the assets
 - Fix a security issue: updated puma to 4.3.8 to fix [CVE-2019-16770](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16770)
 - Fix a security issue: updated nokogiri to 1.11.4 to fix [GHSA-7rrm-v45f-jp64](https://github.com/advisories/GHSA-7rrm-v45f-jp64)
 - [TODO DEPLOY] `rails fablab:fix_invoices`
