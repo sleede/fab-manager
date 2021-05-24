@@ -8,7 +8,7 @@ require 'integrity/archive_helper'
 namespace :fablab do
   desc 'Remove the invoices w/o reservation or regenerate the reservation'
   task fix_invoices: :environment do |_task, _args|
-    return unless Invoice.where(invoiced_id: nil).count.positive?
+    next unless Invoice.where(invoiced_id: nil).count.positive?
 
     include ActionView::Helpers::NumberHelper
 
@@ -19,17 +19,6 @@ namespace :fablab do
 
       # fix invoices data
       Invoice.where(invoiced_id: nil).each do |invoice|
-        if invoice.total.zero?
-          puts "Invoice #{invoice.id} has total = 0, destroying..."
-          invoice.destroy
-          next
-        end
-        if invoice.invoiced_type != 'Reservation'
-          STDERR.puts "WARNING: Invoice #{invoice.id} is about #{invoice.invoiced_type}. Please handle manually."
-          STDERR.puts 'Ignoring...'
-          next
-        end
-
         ii = invoice.invoice_items.where(subscription_id: nil).first
         puts '=============================================='
         puts "Invoice #{invoice.id} (# #{invoice.reference})"
@@ -39,12 +28,18 @@ namespace :fablab do
         puts "Operator: #{invoice.operator_profile&.user&.profile&.full_name} (#{invoice.operator_profile&.user&.email})"
         puts "Date: #{invoice.created_at}"
 
-        print 'Delete [d] OR create the missing reservation [c]? > '
+        print 'Delete [d], create the missing reservation [c] OR keep as error[e] ? > '
         confirm = STDIN.gets.chomp
         if confirm == 'd'
           puts "Destroying #{invoice.id}..."
           invoice.destroy
         elsif confirm == 'c'
+          if invoice.invoiced_type != 'Reservation'
+            STDERR.puts "WARNING: Invoice #{invoice.id} is about #{invoice.invoiced_type}. Please handle manually."
+            STDERR.puts 'Ignoring...'
+            next
+          end
+
           reservable = find_reservable(ii)
           if reservable
             if reservable.is_a? Event
@@ -63,6 +58,8 @@ namespace :fablab do
             STDERR.puts "WARNING: Unable to guess the reservable for invoice #{invoice.id}, please handle manually."
             STDERR.puts 'Ignoring...'
           end
+        elsif confirm == 'e'
+          invoice.update_attributes(invoiced_type: 'Error')
         else
           puts "Operation #{confirm} unknown. Ignoring invoice #{invoice.id}..."
         end

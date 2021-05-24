@@ -7,6 +7,7 @@
 - Fix a security issue: updated puma to 4.3.8 to fix [CVE-2019-16770](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16770)
 - Fix a security issue: updated nokogiri to 1.11.4 to fix [GHSA-7rrm-v45f-jp64](https://github.com/advisories/GHSA-7rrm-v45f-jp64)
 - [TODO DEPLOY] `rails fablab:fix_invoices`
+- [TODO DEPLOY] `rails fablab:maintenance:regenerate_invoices[year,month]` Depending on the status of the above command, you'll need to run that one for the months with erroneous invoices
 
 ## v4.7.9 2021 May 17
 
