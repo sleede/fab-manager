@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- CAD lists of types and extensions are now ordered alphabetically
 - Fix a bug: reservation of slots restricted to subscribers leads to invoices without invoiced_id
 - Fix a bug: new installation with mapping to an external network does not connect fab-manager to elasticsearch
 - Fix a bug: typo in allow/prevent booking overlapping slots
