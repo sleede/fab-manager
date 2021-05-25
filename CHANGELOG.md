@@ -1,5 +1,20 @@
 # Changelog Fab-manager
 
+## v4.7.10 2021 May 25
+
+- CAD lists of types and extensions are now ordered alphabetically
+- Fix a bug: reservation of slots restricted to subscribers leads to invoices without invoiced_id
+- Fix a bug: new installation with mapping to an external network does not connect fab-manager to elasticsearch
+- Fix a bug: typo in allow/prevent booking overlapping slots
+- Fix a bug: unable to use run.fab.mn
+- Fix a bug: parse error while compiling the assets
+- Fix a security issue: updated @rails/webpacker to 5.4.0 to fix [CVE-2021-28092](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-28092) and [CVE-2021-23368](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23368)
+- Fix a security issue: updated ruby to 2.6.7 to fix [CVE-2020-25613](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-25613) and [CVE-2021-28965](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-28965)
+- Fix a security issue: updated puma to 4.3.8 to fix [CVE-2019-16770](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16770)
+- Fix a security issue: updated nokogiri to 1.11.4 to fix [GHSA-7rrm-v45f-jp64](https://github.com/advisories/GHSA-7rrm-v45f-jp64)
+- [TODO DEPLOY] `rails fablab:fix_invoices`
+- [TODO DEPLOY] `rails fablab:maintenance:regenerate_invoices[year,month]` Depending on the status of the above command, you'll need to run that one for the months with erroneous invoices
+
 ## v4.7.9 2021 May 17
 
 - Updated dependency to OpenLab
