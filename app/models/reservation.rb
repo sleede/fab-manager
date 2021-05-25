@@ -24,7 +24,7 @@ class Reservation < ApplicationRecord
   validate :machine_not_already_reserved, if: -> { reservable.is_a?(Machine) }
   validate :training_not_fully_reserved, if: -> { reservable.is_a?(Training) }
   validate :slots_not_locked
-  validates_with ReservationSlotSubscriptionValidator
+  # validates_with ReservationSlotSubscriptionValidator
 
   attr_accessor :plan_id, :subscription
 
