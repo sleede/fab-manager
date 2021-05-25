@@ -7,9 +7,11 @@ class WalletTransaction < ApplicationRecord
   belongs_to :invoicing_profile
   belongs_to :wallet
   belongs_to :reservation
-  belongs_to :transactable, polymorphic: true
+  # what was paid with the wallet
   has_one :invoice
   has_one :payment_schedule
+  # how the wallet was credited
+  has_one :invoice_item, as: :object, dependent: :destroy
 
   validates_inclusion_of :transaction_type, in: %w[credit debit]
   validates :invoicing_profile, :wallet, presence: true

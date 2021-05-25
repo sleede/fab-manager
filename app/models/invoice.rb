@@ -6,7 +6,6 @@ class Invoice < PaymentDocument
   include NotifyWith::NotificationAttachedObject
   require 'fileutils'
   scope :only_invoice, -> { where(type: nil) }
-  belongs_to :invoiced, polymorphic: true
 
   has_many :invoice_items, dependent: :destroy
   accepts_nested_attributes_for :invoice_items
@@ -14,10 +13,6 @@ class Invoice < PaymentDocument
   belongs_to :statistic_profile
   belongs_to :wallet_transaction
   belongs_to :coupon
-
-  belongs_to :subscription, foreign_type: 'Subscription', foreign_key: 'invoiced_id'
-  belongs_to :reservation, foreign_type: 'Reservation', foreign_key: 'invoiced_id'
-  belongs_to :offer_day, foreign_type: 'OfferDay', foreign_key: 'invoiced_id'
 
   has_one :avoir, class_name: 'Invoice', foreign_key: :invoice_id, dependent: :destroy
   has_one :payment_schedule_item

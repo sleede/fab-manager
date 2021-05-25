@@ -9,7 +9,7 @@ class Subscription < ApplicationRecord
 
   has_one :payment_schedule, as: :scheduled, dependent: :destroy
   has_one :payment_gateway_object, as: :item
-  has_many :invoices, as: :invoiced, dependent: :destroy
+  has_many :invoice_items, as: :object, dependent: :destroy
   has_many :offer_days, dependent: :destroy
 
   validates_presence_of :plan_id

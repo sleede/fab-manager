@@ -5,18 +5,16 @@
 class PaymentSchedule < PaymentDocument
   require 'fileutils'
 
-  belongs_to :scheduled, polymorphic: true
   belongs_to :wallet_transaction
   belongs_to :coupon
   belongs_to :invoicing_profile
   belongs_to :statistic_profile
   belongs_to :operator_profile, foreign_key: :operator_profile_id, class_name: 'InvoicingProfile'
 
-  belongs_to :subscription, foreign_type: 'Subscription', foreign_key: 'scheduled_id'
-  belongs_to :reservation, foreign_type: 'Reservation', foreign_key: 'scheduled_id'
-
   has_many :payment_schedule_items
   has_many :payment_gateway_objects, as: :item
+
+  has_one :wallet_transaction, as: :transactable
 
   before_create :add_environment
   after_create :update_reference, :chain_record

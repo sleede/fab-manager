@@ -4,6 +4,6 @@
 class OfferDay < ApplicationRecord
   include NotifyWith::NotificationAttachedObject
 
-  has_many :invoices, as: :invoiced, dependent: :destroy
+  has_many :invoice_items, as: :object, dependent: :destroy
   belongs_to :subscription
 end
