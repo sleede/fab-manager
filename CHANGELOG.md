@@ -2,6 +2,7 @@
 
 - Updated ffi to 1.15.1
 - Updated GitHub issue templates
+- Fix a bug: zero-decimal currencies were charged multiplied by 100
 - Fix a bug: fablab:fix_invoices task fails to recreate the data if the date is in english
 
 ## v4.7.10 2021 May 25
