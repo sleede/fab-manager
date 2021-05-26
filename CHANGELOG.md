@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v4.7.11 2021 May 26
+
 - Updated ffi to 1.15.1
 - Updated GitHub issue templates
 - Fix a bug: zero-decimal currencies were charged multiplied by 100
