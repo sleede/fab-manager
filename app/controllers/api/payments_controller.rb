@@ -26,7 +26,7 @@ class API::PaymentsController < API::ApiController
         intent = Stripe::PaymentIntent.create(
           {
             payment_method: params[:payment_method_id],
-            amount: amount[:amount],
+            amount: StripeService.stripe_amount(amount[:amount]),
             currency: Setting.get('stripe_currency'),
             confirmation_method: 'manual',
             confirm: true,

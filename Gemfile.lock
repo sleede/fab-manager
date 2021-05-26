@@ -140,7 +140,7 @@ GEM
       i18n (>= 1.6, < 2)
     faraday (0.17.3)
       multipart-post (>= 1.2, < 3)
-    ffi (1.14.2)
+    ffi (1.15.1)
     foreman (0.87.0)
     forgery (0.7.0)
     friendly_id (5.1.0)
