@@ -1,6 +1,8 @@
 # Changelog Fab-manager
 
 - Updated ffi to 1.15.1
+- Updated GitHub issue templates
+- Fix a bug: fablab:fix_invoices task fails to recreate the data if the date is in english
 
 ## v4.7.10 2021 May 25
 
