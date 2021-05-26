@@ -11,13 +11,19 @@
 - Fix a bug: unable to set date formats during installation
 - Fix a bug: unable to cancel the upgrade before it begins
 - Fix a bug: in the admin calendar, the trainings' info panel shows "duration: null minutes"
-- Fix a bug: new installation with mapping to an external network does not connect fab-manager to elasticsearch
 - `SUPERADMIN_EMAIL` renamed to `ADMINSYS_EMAIL`
 - `scripts/run-tests.sh` renamed to `scripts/tests.sh`
 - [BREAKING CHANGE] GET `open_api/v1/invoices` won't return `stp_invoice_id` OR `stp_payment_intent_id` anymore. The new field `payment_gateway_object` will contain some similar data if the invoice was paid online by card.
 - [TODO DEPLOY] `rails fablab:stripe:set_gateway`
 - [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
 - [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/rename-adminsys.sh | bash`
+
+## v4.7.11 2021 May 26
+
+- Updated ffi to 1.15.1
+- Updated GitHub issue templates
+- Fix a bug: zero-decimal currencies were charged multiplied by 100
+- Fix a bug: fablab:fix_invoices task fails to recreate the data if the date is in english
 
 ## v4.7.10 2021 May 25
 

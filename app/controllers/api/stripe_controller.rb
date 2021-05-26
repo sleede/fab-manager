@@ -3,6 +3,7 @@
 # API Controller for handling the payments process in the front-end, using the Stripe gateway
 class API::StripeController < API::PaymentsController
   require 'stripe/helper'
+  require 'stripe/service'
 
   ##
   # Client requests to confirm a card payment will ask this endpoint.
@@ -26,7 +27,7 @@ class API::StripeController < API::PaymentsController
         intent = Stripe::PaymentIntent.create(
           {
             payment_method: params[:payment_method_id],
-            amount: amount[:amount],
+            amount: Stripe::Service.stripe_amount(amount[:amount]),
             currency: Setting.get('stripe_currency'),
             confirmation_method: 'manual',
             confirm: true,

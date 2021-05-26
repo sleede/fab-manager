@@ -54,7 +54,7 @@ class Stripe::Service < Payment::Service
     stp_coupon = { id: coupon.code }
     if coupon.type == 'percent_off'
       stp_coupon[:percent_off] = coupon.percent_off
-    elsif coupon.type == 'amount_off'
+    elsif coupon.type == stripe_amount('amount_off')
       stp_coupon[:amount_off] = coupon.amount_off
       stp_coupon[:currency] = Setting.get('stripe_currency')
     end
@@ -75,6 +75,13 @@ class Stripe::Service < Payment::Service
     StripeWorker.perform_async(:create_or_update_stp_product, klass, id)
   rescue Stripe::InvalidRequestError => e
     raise PaymentGatewayError(e)
+  end
+
+  def stripe_amount(amount)
+    currency = Setting.get('stripe_currency')
+    return amount / 100 if zero_decimal_currencies.any? { |s| s.casecmp(currency).zero? }
+
+    amount
   end
 
   private
@@ -107,7 +114,7 @@ class Stripe::Service < Payment::Service
 
   def create_price(amount, stp_product_id, name, monthly: false)
     params = {
-      unit_amount: amount,
+      unit_amount: stripe_amount(amount),
       currency: Setting.get('stripe_currency'),
       product: stp_product_id,
       nickname: name
@@ -122,5 +129,10 @@ class Stripe::Service < Payment::Service
 
     customer_id = payment_schedule.invoicing_profile.user.payment_gateway_object.gateway_object_id
     Stripe::Customer.update(customer_id, { balance: -payment_schedule.wallet_amount }, { api_key: Setting.get('stripe_secret_key') })
+  end
+
+  # @see https://stripe.com/docs/currencies#zero-decimal
+  def zero_decimal_currencies
+    %w[BIF CLP DJF GNF JPY KMF KRW MGA PYG RWF UGX VND VUV XAF XOF XPF]
   end
 end
