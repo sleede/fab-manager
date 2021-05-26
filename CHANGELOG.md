@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Updated ffi to 1.15.1
+
 ## v4.7.10 2021 May 25
 
 - CAD lists of types and extensions are now ordered alphabetically
