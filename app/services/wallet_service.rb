@@ -33,15 +33,14 @@ class WalletService
   end
 
   ## debit an amount to wallet, if debit success then return a wallet transaction
-  def debit(amount, transactable)
+  def debit(amount)
     ActiveRecord::Base.transaction do
       if @wallet.debit(amount)
         transaction = WalletTransaction.new(
           invoicing_profile: @user&.invoicing_profile,
           wallet: @wallet,
           transaction_type: 'debit',
-          amount: amount,
-          transactable: transactable
+          amount: amount
         )
 
         return transaction if transaction.save
@@ -90,20 +89,5 @@ class WalletService
     wallet_amount = (user.wallet.amount * 100).to_i
 
     wallet_amount >= total ? total : wallet_amount
-  end
-
-  ##
-  # Subtract the amount of the transactable item (Subscription|Reservation) from the customer's wallet
-  ##
-  def self.debit_user_wallet(payment, user, transactable)
-    wallet_amount = WalletService.wallet_amount_debit(payment, user)
-    return unless wallet_amount.present? && wallet_amount != 0
-
-    amount = wallet_amount / 100.0
-    wallet_transaction = WalletService.new(user: user, wallet: user.wallet).debit(amount, transactable)
-    # wallet debit success
-    raise DebitWalletError unless wallet_transaction
-
-    payment.set_wallet_transaction(wallet_amount, wallet_transaction.id)
   end
 end

@@ -14,8 +14,6 @@ class PaymentSchedule < PaymentDocument
   has_many :payment_schedule_items
   has_many :payment_gateway_objects, as: :item
 
-  has_one :wallet_transaction, as: :transactable
-
   before_create :add_environment
   after_create :update_reference, :chain_record
   after_commit :generate_and_send_document, on: [:create], if: :persisted?
