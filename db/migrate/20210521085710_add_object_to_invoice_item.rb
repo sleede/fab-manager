@@ -24,30 +24,38 @@ class AddObjectToInvoiceItem < ActiveRecord::Migration[5.2]
     add_column :invoice_items, :main, :boolean
     # migrate data
     Invoice.where.not(invoiced_type: 'Reservation').each do |invoice|
-      invoice.invoice_items.first.update_attributes(
-        object_id: invoice.invoiced_id,
-        object_type: invoice.invoiced_type,
-        main: true
+      execute %(
+        UPDATE invoice_items
+        SET object_id = #{invoice.invoiced_id},
+            object_type = '#{invoice.invoiced_type}',
+            main = true
+        WHERE id = #{invoice.invoice_items.first.id}
       )
     end
     Invoice.where(invoiced_type: 'Reservation').each do |invoice|
-      invoice.invoice_items.where(subscription_id: nil).first.update_attributes(
-        object_id: invoice.invoiced_id,
-        object_type: invoice.invoiced_type,
-        main: true
+      execute %(
+        UPDATE invoice_items
+        SET object_id = #{invoice.invoiced_id},
+            object_type = '#{invoice.invoiced_type}',
+            main = true
+        WHERE id = #{invoice.invoice_items.where(subscription_id: nil).first.id}
       )
       invoice.invoice_items.where(subscription_id: nil)[1..-1].each do |ii|
-        ii.update_attributes(
-          object_id: invoice.invoiced_id,
-          object_type: invoice.invoiced_type
+        execute %(
+          UPDATE invoice_items
+          SET object_id = #{invoice.invoiced_id},
+              object_type = '#{invoice.invoiced_type}'
+          WHERE id = #{ii.id}
         )
       end
       subscription_item = invoice.invoice_items.where.not(subscription_id: nil).first
       next unless subscription_item
 
-      subscription_item.update_attributes(
-        object_id: subscription_item.subscription_id,
-        object_type: 'Subscription'
+      execute %(
+        UPDATE invoice_items
+        SET object_id = #{subscription_item.subscription_id},
+            object_type = 'Subscription'
+        WHERE id = #{subscription_item.id}
       )
     end
     remove_column :invoice_items, :subscription_id
@@ -73,14 +81,18 @@ class AddObjectToInvoiceItem < ActiveRecord::Migration[5.2]
     add_reference :invoices, :invoiced, polymorphic: true
     # migrate data
     InvoiceItem.where(main: true).each do |ii|
-      ii.invoice.update_attributes(
-        invoiced_id: ii.object_id,
-        invoiced_type: ii.object_type
+      execute %(
+        UPDATE invoices
+        SET invoiced_id = #{ii.object_id},
+            invoiced_type = '#{ii.object_type}'
+        WHERE id = #{ii.invoice.id}
       )
     end
     InvoiceItem.where(object_type: 'Subscription').each do |ii|
-      ii.update_attributes(
-        subscription_id: ii.object_id
+      execute %(
+        UPDATE invoice_items
+        SET subscription_id = #{ii.object_id}
+        WHERE id = #{ii.id}
       )
     end
     remove_column :invoice_items, :main

@@ -6,7 +6,12 @@
 # This was limiting to one item only, was redundant with (Invoice|PaymentSchedule).wallet_transaction_id, and anyway
 # this data was not used anywhere in the application so we remove it.
 class RemoveTransactableFromWalletTransaction < ActiveRecord::Migration[5.2]
-  def change
+  def up
     remove_reference :wallet_transactions, :transactable, polymorphic: true
+  end
+
+  def down
+    index_opts = { name: 'index_wallet_transactions_on_transactable'}
+    add_reference :wallet_transactions, :transactable, polymorphic: true, index: index_opts
   end
 end

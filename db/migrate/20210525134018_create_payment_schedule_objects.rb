@@ -46,15 +46,17 @@ class CreatePaymentScheduleObjects < ActiveRecord::Migration[5.2]
 
     # migrate data
     PaymentScheduleObject.where(main: true).each do |pso|
-      pso.payment_schedule.update_attributes(
-        scheduled_id: pso.object_id,
-        scheduled_type: pso.object_type
+      execute %(
+        UPDATE payment_schedules
+        SET scheduled_id = #{pso.object_id},
+            scheduled_type = '#{pso.object_type}'
+        WHERE id = #{pso.payment_schedule.id}
       )
     end
     PaymentScheduleObject.where(object_type: 'Subscription').each do |pso|
       pso.payment_schedule.payment_schedule_items.each do |psi|
         psi.details['subscription_id'] = pso.object_id
-        pdi.save!
+        psi.save(validate: false)
       end
     end
 
