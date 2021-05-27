@@ -69,7 +69,8 @@ class Subscriptions::RenewAsUserTest < ActionDispatch::IntegrationTest
     end
 
     # Check generated invoice
-    invoice = Invoice.find_by(invoiced_type: 'Subscription', invoiced_id: subscription[:id])
+    item = InvoiceItem.find_by(object_type: 'Subscription', object_id: subscription[:id])
+    invoice = item.invoice
     assert_invoice_pdf invoice
     assert_equal plan.amount, invoice.total, 'Invoice total price does not match the bought subscription'
   end

@@ -22,9 +22,7 @@ class OpenAPI::V1::InvoicesDoc < OpenAPI::V1::BaseDoc
         "invoices": [
           {
             "id": 2809,
-            "invoiced_id": 3257,
             "user_id": 211,
-            "invoiced_type": "Reservation",
             "payment_gateway_object": {
               id: "in_187DLE4zBvgjueAZ6L7SyQlU",
               type: "Stripe::Invoice"
@@ -34,15 +32,15 @@ class OpenAPI::V1::InvoicesDoc < OpenAPI::V1::BaseDoc
             "type": null,
             "description": null,
             "invoice_url": "/open_api/v1/invoices/2809/download",
-            "invoiced": {
+            "main_object": {
+              "type": "Reservation",
+              "id": 3257,
               "created_at": "2016-05-04T01:54:16.686+02:00"
             }
           },
           {
             "id": 2783,
-            "invoiced_id": 3229,
             "user_id": 211,
-            "invoiced_type": "Reservation",
             "payment_gateway_object": {
               id: "pi_2Dat4P2eYbKYlo2C3MxszwQp",
               type: "Stripe::PaymentIntent"
@@ -52,15 +50,15 @@ class OpenAPI::V1::InvoicesDoc < OpenAPI::V1::BaseDoc
             "type": null,
             "description": null,
             "invoice_url": "/open_api/v1/invoices/2783/download",
-            "invoiced": {
+            "main_object": {
+              "type": "Reservation",
+              "id": 3229,
               "created_at": "2016-04-28T18:14:52.524+02:00"
             }
           },
           {
             "id": 2773,
-            "invoiced_id": 3218,
             "user_id": 211,
-            "invoiced_type": "Reservation",
             "payment_gateway_object": {
               id: "ba15dc9d8f3e0fa17bf527466",
               type: "PayZen::Order"
@@ -70,7 +68,9 @@ class OpenAPI::V1::InvoicesDoc < OpenAPI::V1::BaseDoc
             "type": null,
             "description": null,
             "invoice_url": "/open_api/v1/invoices/2773/download",
-            "invoiced": {
+            "main_object": {
+              "type": "Reservation",
+              "id": 3218,
               "created_at": "2016-04-27T10:50:30.806+02:00"
             }
           }

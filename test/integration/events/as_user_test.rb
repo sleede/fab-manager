@@ -97,7 +97,8 @@ class Events::AsUserTest < ActionDispatch::IntegrationTest
     assert_equal 51_000, reservation_item.amount # full total
 
     # invoice assertions
-    invoice = Invoice.find_by(invoiced: reservation)
+    item = InvoiceItem.find_by(object: reservation)
+    invoice = item.invoice
     assert_invoice_pdf invoice
 
     VCR.use_cassette('reserve_event_with_many_prices_and_payment_means_retrieve_invoice_from_stripe') do

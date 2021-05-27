@@ -79,7 +79,6 @@ class InvoicesService
              end
 
     invoice = Invoice.new(
-      invoiced: reservation || subscription,
       invoicing_profile: user.invoicing_profile,
       statistic_profile: user.statistic_profile,
       operator_profile_id: operator_profile_id,
@@ -114,7 +113,7 @@ class InvoicesService
     return unless subscription || reservation&.plan_id
 
     subscription = reservation.generate_subscription if !subscription && reservation.plan_id
-    InvoicesService.generate_subscription_item(invoice, subscription, payment_details)
+    InvoicesService.generate_subscription_item(invoice, subscription, payment_details, reservation.nil?)
   end
 
   ##
@@ -141,7 +140,9 @@ class InvoicesService
       price_slot = payment_details[:elements][:slots].detect { |p_slot| p_slot[:start_at].to_time.in_time_zone == slot[:start_at] }
       invoice.invoice_items.push InvoiceItem.new(
         amount: price_slot[:price],
-        description: description
+        description: description,
+        object: reservation,
+        main: true
       )
     end
   end
@@ -160,7 +161,9 @@ class InvoicesService
       price_slot = payment_details[:elements][:slots].detect { |p_slot| p_slot[:start_at].to_time.in_time_zone == slot[:start_at] }
       invoice.invoice_items.push InvoiceItem.new(
         amount: price_slot[:price],
-        description: description
+        description: description,
+        object: reservation,
+        main: true
       )
     end
   end
@@ -169,13 +172,15 @@ class InvoicesService
   # Generate an InvoiceItem for the given subscription and save it in invoice.invoice_items.
   # This method must be called only with a valid subscription
   ##
-  def self.generate_subscription_item(invoice, subscription, payment_details)
+  def self.generate_subscription_item(invoice, subscription, payment_details, main = true)
     raise TypeError unless subscription
 
     invoice.invoice_items.push InvoiceItem.new(
       amount: payment_details[:elements][:plan],
       description: subscription.plan.name,
-      subscription_id: subscription.id
+      subscription_id: subscription.id,
+      object: subscription,
+      main: main
     )
   end
 

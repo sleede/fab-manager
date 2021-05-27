@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-json.extract! @invoice, :id, :created_at, :reference, :invoiced_type, :avoir_date, :description
+json.extract! @invoice, :id, :created_at, :reference, :avoir_date, :description
 json.user_id @invoice.invoicing_profile&.user_id
 json.total @invoice.total / 100.00
 json.name @invoice.user.profile.full_name
@@ -10,6 +10,9 @@ json.is_subscription_invoice @invoice.subscription_invoice?
 json.stripe @invoice.paid_by_card?
 json.date @invoice.is_a?(Avoir) ? @invoice.avoir_date : @invoice.created_at
 json.chained_footprint @invoice.check_footprint
+json.main_object do
+  json.type @invoice.main_item.object_type
+end
 json.items @invoice.invoice_items do |item|
   json.id item.id
   json.amount item.amount / 100.0

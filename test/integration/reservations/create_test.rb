@@ -64,13 +64,6 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     assert reservation.invoice
     assert_equal 1, reservation.invoice.invoice_items.count
 
-    # invoice assertions
-    invoice = reservation.invoice
-
-    refute invoice.payment_gateway_object.blank?
-    refute invoice.total.blank?
-    assert invoice.check_footprint
-
     # invoice_items assertions
     invoice_item = InvoiceItem.last
 
@@ -78,8 +71,13 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     assert invoice_item.check_footprint
 
     # invoice assertions
-    invoice = Invoice.find_by(invoiced: reservation)
+    item = InvoiceItem.find_by(object: reservation)
+    invoice = item.invoice
     assert_invoice_pdf invoice
+
+    refute invoice.payment_gateway_object.blank?
+    refute invoice.total.blank?
+    assert invoice.check_footprint
 
     # notification
     assert_not_empty Notification.where(attached_object: reservation)
@@ -188,13 +186,6 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     assert reservation.invoice
     assert_equal 1, reservation.invoice.invoice_items.count
 
-    # invoice assertions
-    invoice = reservation.invoice
-
-    refute invoice.payment_gateway_object.blank?
-    refute invoice.total.blank?
-    assert invoice.check_footprint
-
     # invoice_items
     invoice_item = InvoiceItem.last
 
@@ -202,8 +193,13 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     assert invoice_item.check_footprint
 
     # invoice assertions
-    invoice = Invoice.find_by(invoiced: reservation)
+    item = InvoiceItem.find_by(object: reservation)
+    invoice = item.invoice
     assert_invoice_pdf invoice
+
+    refute invoice.payment_gateway_object.blank?
+    refute invoice.total.blank?
+    assert invoice.check_footprint
 
     # notification
     assert_not_empty Notification.where(attached_object: reservation)
@@ -268,13 +264,6 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     assert reservation.invoice
     assert_equal 2, reservation.invoice.invoice_items.count
 
-    # invoice assertions
-    invoice = reservation.invoice
-
-    refute invoice.payment_gateway_object.blank?
-    refute invoice.total.blank?
-    assert invoice.check_footprint
-
     # invoice_items assertions
     invoice_items = InvoiceItem.last(2)
     machine_price = machine.prices.find_by(group_id: @user_with_subscription.group_id, plan_id: plan.id).amount
@@ -290,8 +279,13 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     assert_equal [reservation.slots.count, plan.machine_credits.find_by(creditable_id: machine.id).hours].min, users_credit.hours_used
 
     # invoice assertions
-    invoice = Invoice.find_by(invoiced: reservation)
+    item = InvoiceItem.find_by(object: reservation)
+    invoice = item.invoice
     assert_invoice_pdf invoice
+
+    refute invoice.payment_gateway_object.blank?
+    refute invoice.total.blank?
+    assert invoice.check_footprint
 
     # notification
     assert_not_empty Notification.where(attached_object: reservation)
@@ -347,13 +341,6 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     assert reservation.invoice
     assert_equal 1, reservation.invoice.invoice_items.count
 
-    # invoice assertions
-    invoice = reservation.invoice
-
-    assert invoice.payment_gateway_object.blank?
-    refute invoice.total.blank?
-    assert invoice.check_footprint
-
     # invoice_items
     invoice_item = InvoiceItem.last
 
@@ -361,8 +348,13 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     assert invoice_item.check_footprint
 
     # invoice assertions
-    invoice = Invoice.find_by(invoiced: reservation)
+    item = InvoiceItem.find_by(object: reservation)
+    invoice = item.invoice
     assert_invoice_pdf invoice
+
+    assert invoice.payment_gateway_object.blank?
+    refute invoice.total.blank?
+    assert invoice.check_footprint
 
     # notification
     assert_not_empty Notification.where(attached_object: reservation)
@@ -429,13 +421,6 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     assert reservation.invoice
     assert_equal 1, reservation.invoice.invoice_items.count
 
-    # invoice assertions
-    invoice = reservation.invoice
-
-    refute invoice.payment_gateway_object.blank?
-    refute invoice.total.blank?
-    assert invoice.check_footprint
-
     # invoice_items assertions
     invoice_item = InvoiceItem.last
 
@@ -443,8 +428,13 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     assert invoice_item.check_footprint
 
     # invoice assertions
-    invoice = Invoice.find_by(invoiced: reservation)
+    item = InvoiceItem.find_by(object: reservation)
+    invoice = item.invoice
     assert_invoice_pdf invoice
+
+    refute invoice.payment_gateway_object.blank?
+    refute invoice.total.blank?
+    assert invoice.check_footprint
 
     # notification
     assert_not_empty Notification.where(attached_object: reservation)
@@ -521,16 +511,14 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     assert_equal 2, reservation.invoice.invoice_items.count
 
     # invoice assertions
-    invoice = reservation.invoice
+    item = InvoiceItem.find_by(object: reservation)
+    invoice = item.invoice
+    assert_invoice_pdf invoice
 
     refute invoice.payment_gateway_object.blank?
     refute invoice.total.blank?
     assert_equal invoice.total, 2000
     assert invoice.check_footprint
-
-    # invoice assertions
-    invoice = Invoice.find_by(invoiced: reservation)
-    assert_invoice_pdf invoice
 
     # notification
     assert_not_empty Notification.where(attached_object: reservation)
@@ -603,11 +591,13 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     # reservation assertions
     reservation = Reservation.last
 
-    assert reservation.invoice
+    assert reservation.invoice_items.count == 1
     assert_equal 2, reservation.invoice.invoice_items.count
 
     # invoice assertions
-    invoice = reservation.invoice
+    item = InvoiceItem.find_by(object: reservation)
+    invoice = item.invoice
+    assert_invoice_pdf invoice
 
     refute invoice.payment_gateway_object.blank?
     refute invoice.total.blank?
@@ -630,10 +620,6 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     assert_equal subscription_item.amount, plan.amount
     assert_equal subscription.plan_id, plan.id
     assert subscription_item.check_footprint
-
-    # invoice assertions
-    invoice = Invoice.find_by(invoiced: reservation)
-    assert_invoice_pdf invoice
 
     VCR.use_cassette('reservations_machine_and_plan_using_coupon_retrieve_invoice_from_stripe') do
       stp_intent = invoice.payment_gateway_object.gateway_object.retrieve

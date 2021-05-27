@@ -10,15 +10,6 @@ json.invoices do
       end
     end
     json.total number_to_currency(invoice[:invoice].total / 100.0)
-    json.invoiced do
-      json.type invoice[:invoice].invoiced_type
-      json.id invoice[:invoice].invoiced_id
-      if invoice[:invoice].invoiced_type == Subscription.name
-        json.partial! 'archive/subscription', invoiced: invoice[:invoice].invoiced
-      elsif invoice[:invoice].invoiced_type == Reservation.name
-        json.partial! 'archive/reservation', invoiced: invoice[:invoice].invoiced, vat_rate: invoice[:vat_rate]
-      end
-    end
     json.user do
       json.extract! invoice[:invoice].invoicing_profile, :user_id, :email, :first_name, :last_name
       json.address invoice[:invoice].invoicing_profile&.address&.address
@@ -31,12 +22,16 @@ json.invoices do
       end
     end
     json.invoice_items invoice[:invoice].invoice_items do |item|
-      json.extract! item, :id, :created_at, :description, :footprint
+      json.extract! item, :id, :main, :created_at, :description, :footprint
       if item.payment_gateway_object
         json.payment_gateway_object do
           json.id item.payment_gateway_object.gateway_object_id
           json.type item.payment_gateway_object.gateway_object_type
         end
+      end
+      json.object do
+        json.type item.object_type
+        json.id item.object_id
       end
       json.partial! 'archive/vat', price: item.amount, vat_rate: invoice[:vat_rate]
     end

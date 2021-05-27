@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 json.array!(@invoices) do |invoice|
-  json.extract! invoice, :id, :created_at, :reference, :invoiced_type, :user_id, :avoir_date
-  json.total (invoice.total / 100.00)
+  json.extract! invoice, :id, :created_at, :reference, :user_id, :avoir_date
+  json.total invoice.total / 100.00
 
   json.name invoice.user.profile.full_name
   json.has_avoir invoice.refunded?

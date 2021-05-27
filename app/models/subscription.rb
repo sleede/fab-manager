@@ -53,14 +53,12 @@ class Subscription < ApplicationRecord
 
     od = offer_days.create(start_at: expired_at, end_at: expiration)
     invoice = Invoice.new(
-      invoiced_id: od.id,
-      invoiced_type: 'OfferDay',
       invoicing_profile: user.invoicing_profile,
       statistic_profile: user.statistic_profile,
       operator_profile_id: operator_profile_id,
       total: 0
     )
-    invoice.invoice_items.push InvoiceItem.new(amount: 0, description: plan.name, subscription_id: id)
+    invoice.invoice_items.push InvoiceItem.new(amount: 0, description: plan.name, subscription_id: id, object: od)
     invoice.save
 
     if save

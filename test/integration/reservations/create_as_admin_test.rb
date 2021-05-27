@@ -69,7 +69,8 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     assert_equal machine.prices.find_by(group_id: @user_without_subscription.group_id, plan_id: nil).amount, invoice_item.amount
 
     # invoice assertions
-    invoice = Invoice.find_by(invoiced: reservation)
+    item = InvoiceItem.find_by(object: reservation)
+    invoice = item.invoice
     assert_invoice_pdf invoice
 
     # notification
@@ -128,7 +129,8 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     assert_equal invoice_item.amount, training.amount_by_group(@user_without_subscription.group_id).amount
 
     # invoice assertions
-    invoice = Invoice.find_by(invoiced: reservation)
+    item = InvoiceItem.find_by(object: reservation)
+    invoice = item.invoice
     assert_invoice_pdf invoice
 
     # notification
@@ -207,7 +209,8 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     assert_equal [reservation.slots.count, plan.machine_credits.find_by(creditable_id: machine.id).hours].min, users_credit.hours_used
 
     # invoice assertions
-    invoice = Invoice.find_by(invoiced: reservation)
+    item = InvoiceItem.find_by(object: reservation)
+    invoice = item.invoice
     assert_invoice_pdf invoice
 
     # notification
@@ -272,7 +275,8 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     assert_equal machine.prices.find_by(group_id: @vlonchamp.group_id, plan_id: nil).amount, invoice_item.amount
 
     # invoice assertions
-    invoice = Invoice.find_by(invoiced: reservation)
+    item = InvoiceItem.find_by(object: reservation)
+    invoice = item.invoice
     assert_invoice_pdf invoice
 
     # notification
@@ -351,7 +355,8 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     assert_equal invoice.total, 2000
 
     # invoice assertions
-    invoice = Invoice.find_by(invoiced: reservation)
+    item = InvoiceItem.find_by(object: reservation)
+    invoice = item.invoice
     assert_invoice_pdf invoice
 
     # notification
@@ -492,7 +497,8 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     assert(invoice_items.any? { |ii| ii.amount.zero? })
 
     # invoice assertions
-    invoice = Invoice.find_by(invoiced: reservation)
+    item = InvoiceItem.find_by(object: reservation)
+    invoice = item.invoice
     assert_invoice_pdf invoice
 
     # notification

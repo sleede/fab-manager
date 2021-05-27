@@ -54,7 +54,6 @@ class WalletService
   def create_avoir(wallet_transaction, avoir_date, description)
     avoir = Avoir.new
     avoir.type = 'Avoir'
-    avoir.invoiced = wallet_transaction
     avoir.avoir_date = avoir_date
     avoir.created_at = avoir_date
     avoir.description = description
@@ -68,6 +67,7 @@ class WalletService
     ii = InvoiceItem.new
     ii.amount = wallet_transaction.amount * 100.0
     ii.description = I18n.t('invoices.wallet_credit')
+    ii.object = wallet_transaction
     ii.invoice = avoir
     ii.save!
   end

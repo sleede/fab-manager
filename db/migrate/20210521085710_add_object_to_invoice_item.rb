@@ -26,7 +26,7 @@ class AddObjectToInvoiceItem < ActiveRecord::Migration[5.2]
     Invoice.where.not(invoiced_type: 'Reservation').each do |invoice|
       execute %(
         UPDATE invoice_items
-        SET object_id = #{invoice.invoiced_id},
+        SET object_id = #{invoice.invoiced_id || 'NULL'},
             object_type = '#{invoice.invoiced_type}',
             main = true
         WHERE id = #{invoice.invoice_items.first.id}
@@ -35,7 +35,7 @@ class AddObjectToInvoiceItem < ActiveRecord::Migration[5.2]
     Invoice.where(invoiced_type: 'Reservation').each do |invoice|
       execute %(
         UPDATE invoice_items
-        SET object_id = #{invoice.invoiced_id},
+        SET object_id = #{invoice.invoiced_id || 'NULL'},
             object_type = '#{invoice.invoiced_type}',
             main = true
         WHERE id = #{invoice.invoice_items.where(subscription_id: nil).first.id}
@@ -43,7 +43,7 @@ class AddObjectToInvoiceItem < ActiveRecord::Migration[5.2]
       invoice.invoice_items.where(subscription_id: nil)[1..-1].each do |ii|
         execute %(
           UPDATE invoice_items
-          SET object_id = #{invoice.invoiced_id},
+          SET object_id = #{invoice.invoiced_id || 'NULL'},
               object_type = '#{invoice.invoiced_type}'
           WHERE id = #{ii.id}
         )
@@ -53,7 +53,7 @@ class AddObjectToInvoiceItem < ActiveRecord::Migration[5.2]
 
       execute %(
         UPDATE invoice_items
-        SET object_id = #{subscription_item.subscription_id},
+        SET object_id = #{subscription_item.subscription_id || 'NULL'},
             object_type = 'Subscription'
         WHERE id = #{subscription_item.id}
       )
@@ -83,7 +83,7 @@ class AddObjectToInvoiceItem < ActiveRecord::Migration[5.2]
     InvoiceItem.where(main: true).each do |ii|
       execute %(
         UPDATE invoices
-        SET invoiced_id = #{ii.object_id},
+        SET invoiced_id = #{ii.object_id || 'NULL'},
             invoiced_type = '#{ii.object_type}'
         WHERE id = #{ii.invoice.id}
       )
@@ -91,7 +91,7 @@ class AddObjectToInvoiceItem < ActiveRecord::Migration[5.2]
     InvoiceItem.where(object_type: 'Subscription').each do |ii|
       execute %(
         UPDATE invoice_items
-        SET subscription_id = #{ii.object_id}
+        SET subscription_id = #{ii.object_id || 'NULL'}
         WHERE id = #{ii.id}
       )
     end

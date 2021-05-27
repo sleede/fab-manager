@@ -118,7 +118,7 @@ class Exports::AccountingExportTest < ActionDispatch::IntegrationTest
     client_row = data[data.length - 4]
     item_row = data[data.length - 3]
 
-    if machine_invoice.invoiced_type == 'Reservation' && machine_invoice.invoiced.reservable_type == 'Machine'
+    if machine_invoice.main_item.object_type == 'Reservation' && machine_invoice.main_item.object.reservable_type == 'Machine'
       assert_match I18n.t('accounting_export.Machine_reservation'),
                    client_row[I18n.t('accounting_export.line_label')],
                    'Line label does not contains the reference to the invoiced item'

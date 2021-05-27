@@ -13,6 +13,7 @@ class PaymentSchedule < PaymentDocument
 
   has_many :payment_schedule_items
   has_many :payment_gateway_objects, as: :item
+  has_many :payment_schedule_objects
 
   before_create :add_environment
   after_create :update_reference, :chain_record
@@ -50,6 +51,10 @@ class PaymentSchedule < PaymentDocument
 
   def gateway_subscription
     payment_gateway_objects.map(&:gateway_object).find { |item| !item.payment_mean? }
+  end
+
+  def main_object
+    payment_schedule_objects.where(main: true).first
   end
 
   def user

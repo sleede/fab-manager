@@ -5214,6 +5214,22 @@ CREATE INDEX projects_search_vector_idx ON public.projects USING gin (search_vec
 
 
 --
+-- Name: accounting_periods accounting_periods_del_protect; Type: RULE; Schema: public; Owner: -
+--
+
+CREATE RULE accounting_periods_del_protect AS
+    ON DELETE TO public.accounting_periods DO INSTEAD NOTHING;
+
+
+--
+-- Name: accounting_periods accounting_periods_upd_protect; Type: RULE; Schema: public; Owner: -
+--
+
+CREATE RULE accounting_periods_upd_protect AS
+    ON UPDATE TO public.accounting_periods DO INSTEAD NOTHING;
+
+
+--
 -- Name: projects projects_search_content_trigger; Type: TRIGGER; Schema: public; Owner: -
 --
 
