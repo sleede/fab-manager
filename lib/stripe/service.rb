@@ -12,12 +12,12 @@ class Stripe::Service < Payment::Service
     stripe_key = Setting.get('stripe_secret_key')
     first_item = payment_schedule.ordered_items.first
 
-    case payment_schedule.scheduled_type
+    case payment_schedule.main_object.object_type
     when Reservation.name
-      subscription = payment_schedule.scheduled.subscription
-      reservable_stp_id = payment_schedule.scheduled.reservable&.payment_gateway_object&.gateway_object_id
+      subscription = payment_schedule.payment_schedule_objects.find(&:subscription)
+      reservable_stp_id = payment_schedule.main_object.object.reservable&.payment_gateway_object&.gateway_object_id
     when Subscription.name
-      subscription = payment_schedule.scheduled
+      subscription = payment_schedule.main_object
       reservable_stp_id = nil
     else
       raise InvalidSubscriptionError

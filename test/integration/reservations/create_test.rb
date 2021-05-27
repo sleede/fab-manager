@@ -775,7 +775,7 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
 
     # reservation assertions
     assert reservation.payment_schedule
-    assert_equal payment_schedule.scheduled, reservation
+    assert_equal payment_schedule.main_object.object, reservation
 
     # Check the answer
     reservation = json_response(response.body)
@@ -881,7 +881,7 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
 
     # reservation assertions
     assert reservation.payment_schedule
-    assert_equal payment_schedule.scheduled, reservation
+    assert_equal payment_schedule.main_object.object, reservation
 
     # payment schedule assertions
     assert_not_nil payment_schedule.reference

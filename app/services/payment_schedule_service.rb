@@ -12,7 +12,7 @@ class PaymentScheduleService
     other_items = total - plan.amount
     # base monthly price of the plan
     price = plan.amount
-    ps = PaymentSchedule.new(scheduled: plan, total: price + other_items, coupon: coupon)
+    ps = PaymentSchedule.new(total: price + other_items, coupon: coupon)
     deadlines = plan.duration / 1.month
     per_month = (price / deadlines).truncate
     adjustment = if per_month * deadlines + other_items.truncate != ps.total
@@ -58,7 +58,12 @@ class PaymentScheduleService
     ps = schedule[:payment_schedule]
     items = schedule[:items]
 
-    ps.scheduled = reservation || subscription
+    if reservation
+      ps.payment_schedule_objects.push(PaymentScheduleObject.new(object: reservation, main: true))
+      ps.payment_schedule_objects.push(PaymentScheduleObject.new(object: subscription, main: false)) if subscription
+    else
+      ps.payment_schedule_objects.push(PaymentScheduleObject.new(object: subscription, main: true))
+    end
     ps.payment_method = payment_method
     if !payment_id.nil? && !payment_type.nil?
       pgo = PaymentGatewayObject.new(

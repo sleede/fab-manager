@@ -574,7 +574,7 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     # reservation assertions
     assert_equal reservation_res[:id], reservation.id
     assert reservation.payment_schedule
-    assert_equal payment_schedule.scheduled, reservation
+    assert_equal payment_schedule.main_object.object, reservation
 
     # payment schedule assertions
     assert_not_nil payment_schedule.reference
