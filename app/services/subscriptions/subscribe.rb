@@ -37,7 +37,7 @@ class Subscriptions::Subscribe
                   operator = InvoicingProfile.find(operator_profile_id)&.user
 
                   PaymentScheduleService.new.create(
-                    new_sub,
+                    [new_sub],
                     details[:before_coupon],
                     operator: operator,
                     payment_method: schedule.payment_method,
@@ -49,7 +49,8 @@ class Subscriptions::Subscribe
                   InvoicesService.create(
                     details,
                     operator_profile_id,
-                    subscription: new_sub
+                    [new_sub],
+                    new_sub.user
                   )
                 end
       payment.save

@@ -17,7 +17,7 @@ class Stripe::Service < Payment::Service
       subscription = payment_schedule.payment_schedule_objects.find(&:subscription)
       reservable_stp_id = payment_schedule.main_object.object.reservable&.payment_gateway_object&.gateway_object_id
     when Subscription.name
-      subscription = payment_schedule.main_object
+      subscription = payment_schedule.main_object.object
       reservable_stp_id = nil
     else
       raise InvalidSubscriptionError

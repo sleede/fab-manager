@@ -69,6 +69,7 @@ class WalletService
     ii.description = I18n.t('invoices.wallet_credit')
     ii.object = wallet_transaction
     ii.invoice = avoir
+    ii.main = true
     ii.save!
   end
 

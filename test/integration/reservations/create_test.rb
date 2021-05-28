@@ -61,8 +61,8 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     # reservation assertions
     reservation = Reservation.last
 
-    assert reservation.invoice
-    assert_equal 1, reservation.invoice.invoice_items.count
+    assert reservation.original_invoice
+    assert_equal 1, reservation.original_invoice.invoice_items.count
 
     # invoice_items assertions
     invoice_item = InvoiceItem.last
@@ -183,8 +183,8 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     # reservation assertions
     reservation = Reservation.last
 
-    assert reservation.invoice
-    assert_equal 1, reservation.invoice.invoice_items.count
+    assert reservation.original_invoice
+    assert_equal 1, reservation.original_invoice.invoice_items.count
 
     # invoice_items
     invoice_item = InvoiceItem.last
@@ -261,8 +261,8 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     # reservation assertions
     reservation = Reservation.last
 
-    assert reservation.invoice
-    assert_equal 2, reservation.invoice.invoice_items.count
+    assert reservation.original_invoice
+    assert_equal 2, reservation.original_invoice.invoice_items.count
 
     # invoice_items assertions
     invoice_items = InvoiceItem.last(2)
@@ -338,8 +338,8 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     # reservation assertions
     reservation = Reservation.last
 
-    assert reservation.invoice
-    assert_equal 1, reservation.invoice.invoice_items.count
+    assert reservation.original_invoice
+    assert_equal 1, reservation.original_invoice.invoice_items.count
 
     # invoice_items
     invoice_item = InvoiceItem.last
@@ -418,8 +418,8 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     # reservation assertions
     reservation = Reservation.last
 
-    assert reservation.invoice
-    assert_equal 1, reservation.invoice.invoice_items.count
+    assert reservation.original_invoice
+    assert_equal 1, reservation.original_invoice.invoice_items.count
 
     # invoice_items assertions
     invoice_item = InvoiceItem.last
@@ -507,8 +507,8 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     # reservation assertions
     reservation = Reservation.last
 
-    assert reservation.invoice
-    assert_equal 2, reservation.invoice.invoice_items.count
+    assert reservation.original_invoice
+    assert_equal 2, reservation.original_invoice.invoice_items.count
 
     # invoice assertions
     item = InvoiceItem.find_by(object: reservation)
@@ -591,8 +591,8 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     # reservation assertions
     reservation = Reservation.last
 
-    assert reservation.invoice_items.count == 1
-    assert_equal 2, reservation.invoice.invoice_items.count
+    assert reservation.original_invoice
+    assert_equal 2, reservation.original_invoice.invoice_items.count
 
     # invoice assertions
     item = InvoiceItem.find_by(object: reservation)
@@ -605,17 +605,17 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
 
     # invoice_items assertions
     ## reservation
-    reservation_item = invoice.invoice_items.where(subscription_id: nil).first
+    reservation_item = invoice.invoice_items.find_by(object: reservation)
 
     assert_not_nil reservation_item
     assert_equal reservation_item.amount, machine.prices.find_by(group_id: @user_without_subscription.group_id, plan_id: plan.id).amount
     assert reservation_item.check_footprint
     ## subscription
-    subscription_item = invoice.invoice_items.where.not(subscription_id: nil).first
+    subscription_item = invoice.invoice_items.find_by(object_type: Subscription.name)
 
     assert_not_nil subscription_item
 
-    subscription = Subscription.find(subscription_item.subscription_id)
+    subscription = subscription_item.subscription
 
     assert_equal subscription_item.amount, plan.amount
     assert_equal subscription.plan_id, plan.id
@@ -833,11 +833,6 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
                payment_schedule: true,
                items: [
                  {
-                   subscription: {
-                     plan_id: plan.id
-                   }
-                 },
-                 {
                    reservation: {
                      reservable_id: machine.id,
                      reservable_type: machine.class.name,
@@ -848,6 +843,11 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
                          availability_id: availability.id
                        }
                      ]
+                   }
+                 },
+                 {
+                   subscription: {
+                     plan_id: plan.id
                    }
                  }
                ]

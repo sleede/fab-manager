@@ -13,6 +13,10 @@ if payment_schedule.operator_profile
     json.extract! payment_schedule.operator_profile, :first_name, :last_name
   end
 end
+json.main_object do
+  json.type payment_schedule.main_object.object_type
+  json.id payment_schedule.main_object.object_id
+end
 json.items payment_schedule.payment_schedule_items do |item|
   json.extract! item, :id, :due_date, :state, :invoice_id, :payment_method
   json.amount item.amount / 100.00

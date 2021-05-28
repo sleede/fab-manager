@@ -31,7 +31,7 @@ class UsersExportService
 
   # export reservations
   def export_reservations(export)
-    @reservations = Reservation.all.includes(:slots, :reservable, :invoice, statistic_profile: [user: [:profile]])
+    @reservations = Reservation.all.includes(:slots, :reservable, statistic_profile: [user: [:profile]])
 
     ActionController::Base.prepend_view_path './app/views/'
     # place data in view_assigns

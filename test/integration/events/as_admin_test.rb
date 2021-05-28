@@ -194,19 +194,19 @@ module Events
       assert_equal Mime[:json], response.content_type
 
       # Check the reservation match the required event
-      reservation = json_response(response.body)
-      r = Reservation.find(reservation[:id])
+      result = json_response(response.body)
+      i = Invoice.find(result[:id])
 
-      assert_equal e.id, r.reservable_id
-      assert_equal 'Event', r.reservable_type
+      assert_equal e.id, i.main_item.object_id
+      assert_equal 'Event', i.main_item.object_type
 
       # Check the remaining places were updated successfully
       e = Event.where(id: event[:id]).first
       assert_equal 2, e.nb_free_places, 'Number of free places was not updated'
 
       # Check the resulting invoice generation and it has right price
-      assert_invoice_pdf r.invoice
-      assert_equal (4 * 20) + (4 * 16), r.invoice.total / 100.0
+      assert_invoice_pdf i
+      assert_equal (4 * 20) + (4 * 16), i.total / 100.0
     end
   end
 end

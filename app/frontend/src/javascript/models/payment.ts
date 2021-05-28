@@ -23,6 +23,7 @@ export type CartItem = { reservation: Reservation }|{ subscription: Subscription
 
 export interface ShoppingCart {
   customer_id: number,
+  // WARNING: items ordering matters! The first item in the array will be considered as the main item
   items: Array<CartItem>,
   coupon_code?: string,
   payment_schedule?: boolean,

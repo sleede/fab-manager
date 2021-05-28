@@ -12,11 +12,7 @@ class API::PaymentsController < API::ApiController
 
   protected
 
-  def post_save(_gateway_item_id, _gateway_item_type); end
-
-  def post_reservation_save(_gateway_item_id, _gateway_item_type); end
-
-  def post_subscription_save(_gateway_item_id, _gateway_item_type); end
+  def post_save(_gateway_item_id, _gateway_item_type, _payment_document); end
 
   def get_wallet_debit(user, total_amount)
     wallet_amount = (user.wallet.amount * 100).to_i
@@ -37,44 +33,13 @@ class API::PaymentsController < API::ApiController
     cs.from_hash(params[:cart_items])
   end
 
-  # @param cart {ShoppingCart}
-  def check_coupon(cart)
-    return if cart.coupon.nil?
-
-    cart.coupon.coupon
-  end
-
-  # @param cart {ShoppingCart}
-  def check_plan(cart)
-    return unless cart.subscription
-
-    plan = cart.subscription.plan
-    raise InvalidGroupError if plan.group_id != current_user.group_id
-  end
-
-  def on_success(gateway_item_id, gateway_item_type, cart)
-    cart.pay_and_save(gateway_item_id, gateway_item_type)
-  end
-
-  def on_reservation_success(gateway_item_id, gateway_item_type, cart)
-    is_reserve = on_success(gateway_item_id, gateway_item_type, cart)
-    post_reservation_save(gateway_item_id, gateway_item_type)
-
-    if is_reserve
-      { template: 'api/reservations/show', status: :created, location: @reservation }
+  def on_payment_success(gateway_item_id, gateway_item_type, cart)
+    res = cart.build_and_save(gateway_item_id, gateway_item_type)
+    if res[:success]
+      post_save(gateway_item_id, gateway_item_type, res[:payment])
+      res[:payment].render_resource.merge(status: :created)
     else
-      { json: @reservation.errors, status: :unprocessable_entity }
-    end
-  end
-
-  def on_subscription_success(gateway_item_id, gateway_item_type, cart)
-    is_subscribe = on_success(gateway_item_id, gateway_item_type, cart)
-    post_subscription_save(gateway_item_id, gateway_item_type)
-
-    if is_subscribe
-      { template: 'api/subscriptions/show', status: :created, location: @subscription }
-    else
-      { json: @subscription.errors, status: :unprocessable_entity }
+      { json: res[:errors], status: :unprocessable_entity }
     end
   end
 end

@@ -165,6 +165,10 @@ class Invoice < PaymentDocument
     !payment_gateway_object.nil? && payment_method == 'card'
   end
 
+  def render_resource
+    { partial: 'api/invoices/invoice', locals: { invoice: self } }
+  end
+
   private
 
   def generate_and_send_invoice
@@ -186,5 +190,4 @@ class Invoice < PaymentDocument
     puts changes
     puts '---------------------------------'
   end
-
 end

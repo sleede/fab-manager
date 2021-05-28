@@ -67,6 +67,18 @@ class Reservation < ApplicationRecord
     reservable.save!
   end
 
+  def original_payment_schedule
+    payment_schedule_object&.payment_schedule
+  end
+
+  def original_invoice
+    invoice_items.select(:invoice_id)
+                 .group(:invoice_id)
+                 .map(&:invoice_id)
+                 .map { |id| Invoice.find_by(id: id, type: nil) }
+                 .first
+  end
+
   private
 
   def machine_not_already_reserved

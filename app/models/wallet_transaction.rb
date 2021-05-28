@@ -19,4 +19,8 @@ class WalletTransaction < ApplicationRecord
   def user
     invoicing_profile.user
   end
+
+  def original_invoice
+    invoice_item.invoice
+  end
 end

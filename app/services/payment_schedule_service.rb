@@ -8,7 +8,7 @@ class PaymentScheduleService
   # @param total {Number} Total amount of the current shopping cart (which includes this plan) - without coupon
   # @param coupon {Coupon} apply this coupon, if any
   ##
-  def compute(plan, total, coupon: nil, subscription: nil)
+  def compute(plan, total, coupon: nil)
     other_items = total - plan.amount
     # base monthly price of the plan
     price = plan.amount
@@ -23,7 +23,7 @@ class PaymentScheduleService
     items = []
     (0..deadlines - 1).each do |i|
       date = DateTime.current + i.months
-      details = { recurring: per_month, subscription_id: subscription&.id }
+      details = { recurring: per_month }
       amount = if i.zero?
                  details[:adjustment] = adjustment.truncate
                  details[:other_items] = other_items.truncate
@@ -49,21 +49,15 @@ class PaymentScheduleService
     { payment_schedule: ps, items: items }
   end
 
-  def create(subscription, total, coupon: nil, operator: nil, payment_method: nil, reservation: nil, user: nil,
+  def create(objects, total, coupon: nil, operator: nil, payment_method: nil, user: nil,
              payment_id: nil, payment_type: nil)
-    subscription = reservation.generate_subscription if !subscription && reservation&.plan_id
-    raise InvalidSubscriptionError unless subscription&.persisted?
+    subscription = objects.find { |item| item.class == Subscription }
 
-    schedule = compute(subscription.plan, total, coupon: coupon, subscription: subscription)
+    schedule = compute(subscription.plan, total, coupon: coupon)
     ps = schedule[:payment_schedule]
     items = schedule[:items]
 
-    if reservation
-      ps.payment_schedule_objects.push(PaymentScheduleObject.new(object: reservation, main: true))
-      ps.payment_schedule_objects.push(PaymentScheduleObject.new(object: subscription, main: false)) if subscription
-    else
-      ps.payment_schedule_objects.push(PaymentScheduleObject.new(object: subscription, main: true))
-    end
+    ps.payment_schedule_objects = build_objects(objects)
     ps.payment_method = payment_method
     if !payment_id.nil? && !payment_type.nil?
       pgo = PaymentGatewayObject.new(
@@ -77,10 +71,16 @@ class PaymentScheduleService
     ps.invoicing_profile = user.invoicing_profile
     ps.statistic_profile = user.statistic_profile
     ps.payment_schedule_items = items
-    items.each do |item|
-      item.payment_schedule = ps
-    end
     ps
+  end
+
+  def build_objects(objects)
+    res = []
+    res.push(PaymentScheduleObject.new(object: objects[0], main: true))
+    objects[1..-1].each do |object|
+      res.push(PaymentScheduleObject.new(object: object))
+    end
+    res
   end
 
   ##

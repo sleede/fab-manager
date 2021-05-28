@@ -613,11 +613,11 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
         const updateCartPrice = function () {
           if (Object.keys($scope.user).length > 0) {
             const items = [];
-            if ($scope.selectedPlan) {
-              items.push(mkSubscription($scope.selectedPlan.id));
-            }
             if ($scope.events.reserved && $scope.events.reserved.length > 0) {
               items.push(mkReservation($scope.events.reserved));
+            }
+            if ($scope.selectedPlan) {
+              items.push(mkSubscription($scope.selectedPlan.id));
             }
 
             return Price.compute(mkCartItems(items), function (res) {
@@ -923,11 +923,11 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
          */
         const paySlots = function () {
           const items = [];
-          if ($scope.selectedPlan) {
-            items.push(mkSubscription($scope.selectedPlan.id));
-          }
           if ($scope.events.reserved && $scope.events.reserved.length > 0) {
             items.push(mkReservation($scope.events.reserved));
+          }
+          if ($scope.selectedPlan) {
+            items.push(mkSubscription($scope.selectedPlan.id));
           }
 
           return Wallet.getWalletByUser({ user_id: $scope.user.id }, function (wallet) {

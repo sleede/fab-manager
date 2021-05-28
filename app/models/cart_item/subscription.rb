@@ -2,8 +2,6 @@
 
 # A subscription added to the shopping cart
 class CartItem::Subscription < CartItem::BaseItem
-  attr_reader :plan
-
   def initialize(plan, customer)
     raise TypeError unless plan.is_a? Plan
 
@@ -11,8 +9,14 @@ class CartItem::Subscription < CartItem::BaseItem
     @customer = customer
   end
 
+  def plan
+    raise InvalidGroupError if @plan.group_id != @customer.group_id
+
+    @plan
+  end
+
   def price
-    amount = @plan.amount
+    amount = plan.amount
     elements = { plan: amount }
 
     { elements: elements, amount: amount }

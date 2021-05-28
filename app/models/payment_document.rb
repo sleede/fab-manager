@@ -23,4 +23,6 @@ class PaymentDocument < Footprintable
   end
 
   def post_save(arg); end
+
+  def render_resource; end
 end

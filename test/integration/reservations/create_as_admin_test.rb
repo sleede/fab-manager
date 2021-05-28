@@ -54,11 +54,11 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     # reservation assertions
     reservation = Reservation.last
 
-    assert reservation.invoice
-    assert_equal 1, reservation.invoice.invoice_items.count
+    assert reservation.original_invoice
+    assert_equal 1, reservation.original_invoice.invoice_items.count
 
     # invoice assertions
-    invoice = reservation.invoice
+    invoice = reservation.original_invoice
 
     assert invoice.payment_gateway_object.blank?
     refute invoice.total.blank?
@@ -115,11 +115,11 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     # reservation assertions
     reservation = Reservation.last
 
-    assert reservation.invoice
-    assert_equal 1, reservation.invoice.invoice_items.count
+    assert reservation.original_invoice
+    assert_equal 1, reservation.original_invoice.invoice_items.count
 
     # invoice assertions
-    invoice = reservation.invoice
+    invoice = reservation.original_invoice
 
     assert invoice.payment_gateway_object.blank?
     refute invoice.total.blank?
@@ -186,11 +186,11 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     # reservation assertions
     reservation = Reservation.last
 
-    assert reservation.invoice
-    assert_equal 2, reservation.invoice.invoice_items.count
+    assert reservation.original_invoice
+    assert_equal 2, reservation.original_invoice.invoice_items.count
 
     # invoice assertions
-    invoice = reservation.invoice
+    invoice = reservation.original_invoice
 
     assert invoice.payment_gateway_object.blank?
     refute invoice.total.blank?
@@ -260,11 +260,11 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     # reservation assertions
     reservation = Reservation.last
 
-    assert reservation.invoice
-    assert_equal 1, reservation.invoice.invoice_items.count
+    assert reservation.original_invoice
+    assert_equal 1, reservation.original_invoice.invoice_items.count
 
     # invoice assertions
-    invoice = reservation.invoice
+    invoice = reservation.original_invoice
 
     assert invoice.payment_gateway_object.blank?
     refute invoice.total.blank?
@@ -308,11 +308,6 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
       customer_id: @vlonchamp.id,
       items: [
         {
-          subscription: {
-            plan_id: plan.id,
-          }
-        },
-        {
           reservation: {
             reservable_id: machine.id,
             reservable_type: machine.class.name,
@@ -323,6 +318,11 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
                 availability_id: availability.id
               }
             ]
+          }
+        },
+        {
+          subscription: {
+            plan_id: plan.id
           }
         }
       ]
@@ -344,11 +344,11 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     # reservation assertions
     reservation = Reservation.last
 
-    assert reservation.invoice
-    assert_equal 2, reservation.invoice.invoice_items.count
+    assert reservation.original_invoice
+    assert_equal 2, reservation.original_invoice.invoice_items.count
 
     # invoice assertions
-    invoice = reservation.invoice
+    invoice = reservation.original_invoice
 
     assert invoice.payment_gateway_object.blank?
     refute invoice.total.blank?
@@ -415,7 +415,7 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     # reservation assertions
     reservation = Reservation.last
 
-    assert_not_nil reservation.invoice
+    assert_not_nil reservation.original_invoice
 
     # notification
     assert_not_empty Notification.where(attached_object: reservation)
@@ -450,7 +450,7 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
         },
         {
           subscription: {
-            plan_id: plan.id,
+            plan_id: plan.id
           }
         }
       ]
@@ -475,8 +475,8 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     # reservation assertions
     reservation = Reservation.find(result[:id])
 
-    assert reservation.invoice
-    assert_equal 2, reservation.invoice.invoice_items.count
+    assert reservation.original_invoice
+    assert_equal 2, reservation.original_invoice.invoice_items.count
 
     # credits assertions
     assert_equal 1, @user_without_subscription.credits.count
@@ -484,7 +484,7 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     assert_equal training.id, @user_without_subscription.credits.last.creditable_id
 
     # invoice assertions
-    invoice = reservation.invoice
+    invoice = reservation.original_invoice
 
     assert invoice.payment_gateway_object.blank?
     refute invoice.total.blank?
@@ -567,16 +567,9 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     assert_not_nil @user_without_subscription.subscription, "user's subscription was not found"
     assert_equal plan.id, @user_without_subscription.subscribed_plan.id, "user's plan does not match"
 
-    # Check the answer
-    reservation_res = json_response(response.body)
-    assert_equal plan.id, reservation_res[:user][:subscribed_plan][:id], 'subscribed plan does not match'
-
-    # reservation assertions
-    assert_equal reservation_res[:id], reservation.id
-    assert reservation.payment_schedule
-    assert_equal payment_schedule.main_object.object, reservation
-
     # payment schedule assertions
+    assert reservation.original_payment_schedule
+    assert_equal payment_schedule.id, reservation.original_payment_schedule.id
     assert_not_nil payment_schedule.reference
     assert_equal 'check', payment_schedule.payment_method
     assert_empty payment_schedule.payment_gateway_objects
@@ -587,5 +580,13 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     assert payment_schedule.check_footprint
     assert_equal @user_without_subscription.invoicing_profile.id, payment_schedule.invoicing_profile_id
     assert_equal @admin.invoicing_profile.id, payment_schedule.operator_profile_id
+
+    # Check the answer
+    result = json_response(response.body)
+    assert_equal reservation.original_payment_schedule.id, result[:id], 'payment schedule id does not match'
+
+    # reservation assertions
+    assert_equal result[:main_object][:id], reservation.id
+    assert_equal payment_schedule.main_object.object, reservation
   end
 end

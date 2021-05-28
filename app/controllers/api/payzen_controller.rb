@@ -50,25 +50,17 @@ class API::PayzenController < API::PaymentsController
     cart = shopping_cart
 
     if order['answer']['transactions'].first['status'] == 'PAID'
-      if cart.reservation
-        res = on_reservation_success(params[:order_id], cart)
-      elsif cart.subscription
-        res = on_subscription_success(params[:order_id], cart)
-      end
+      render on_payment_success(params[:order_id], cart)
+    else
+      render json: order['answer'], status: :unprocessable_entity
     end
-
-    render res
   rescue StandardError => e
     render json: e, status: :unprocessable_entity
   end
 
   private
 
-  def on_reservation_success(order_id, cart)
-    super(order_id, 'PayZen::Order', cart)
-  end
-
-  def on_subscription_success(order_id, cart)
+  def on_payment_success(order_id, cart)
     super(order_id, 'PayZen::Order', cart)
   end
 

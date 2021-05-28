@@ -20,14 +20,11 @@ class API::StripeController < API::PaymentsController
     begin
       amount = debit_amount(cart) # will contains the amount and the details of each invoice lines
       if params[:payment_method_id].present?
-        check_coupon(cart)
-        check_plan(cart)
-
         # Create the PaymentIntent
         intent = Stripe::PaymentIntent.create(
           {
             payment_method: params[:payment_method_id],
-            amount: Stripe::Service.stripe_amount(amount[:amount]),
+            amount: Stripe::Service.new.stripe_amount(amount[:amount]),
             currency: Setting.get('stripe_currency'),
             confirmation_method: 'manual',
             confirm: true,
@@ -46,13 +43,7 @@ class API::StripeController < API::PaymentsController
       res = { json: { plan_id: 'this plan is not compatible with your current group' }, status: :unprocessable_entity }
     end
 
-    if intent&.status == 'succeeded'
-      if cart.reservation
-        res = on_reservation_success(intent, cart)
-      elsif cart.subscription
-        res = on_subscription_success(intent, cart)
-      end
-    end
+    res = on_payment_success(intent, cart) if intent&.status == 'succeeded'
 
     render generate_payment_response(intent, res)
   end
@@ -82,14 +73,9 @@ class API::StripeController < API::PaymentsController
 
     cart = shopping_cart
     if intent&.status == 'succeeded'
-      if cart.reservation
-        res = on_reservation_success(intent, cart)
-      elsif cart.subscription
-        res = on_subscription_success(intent, cart)
-      end
+      res = on_payment_success(intent, cart)
+      render generate_payment_response(intent, res)
     end
-
-    render generate_payment_response(intent, res)
   rescue Stripe::InvalidRequestError => e
     render json: e, status: :unprocessable_entity
   end
@@ -107,31 +93,17 @@ class API::StripeController < API::PaymentsController
 
   private
 
-  def post_reservation_save(intent_id, intent_type)
+  def post_save(intent_id, intent_type, payment_document)
     return unless intent_type == 'Stripe::PaymentIntent'
 
     Stripe::PaymentIntent.update(
       intent_id,
-      { description: "Invoice reference: #{@reservation.invoice.reference}" },
+      { description: "#{payment_document.class.name} reference: #{payment_document.reference}" },
       { api_key: Setting.get('stripe_secret_key') }
     )
   end
 
-  def post_subscription_save(intent_id, intent_type)
-    return unless intent_type == 'Stripe::PaymentIntent'
-
-    Stripe::PaymentIntent.update(
-      intent_id,
-      { description: "Invoice reference: #{@subscription.invoices.first.reference}" },
-      { api_key: Setting.get('stripe_secret_key') }
-    )
-  end
-
-  def on_reservation_success(intent, cart)
-    super(intent.id, intent.class.name, cart)
-  end
-
-  def on_subscription_success(intent, cart)
+  def on_payment_success(intent, cart)
     super(intent.id, intent.class.name, cart)
   end
 

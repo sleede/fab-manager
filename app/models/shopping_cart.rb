@@ -20,14 +20,6 @@ class ShoppingCart
     @payment_schedule = payment_schedule
   end
 
-  def subscription
-    @items.find { |item| item.is_a? CartItem::Subscription }
-  end
-
-  def reservation
-    @items.find { |item| item.is_a? CartItem::Reservation }
-  end
-
   # compute the price details of the current shopping cart
   def total
     total_amount = 0
@@ -53,26 +45,26 @@ class ShoppingCart
     }
   end
 
-  def pay_and_save(payment_id, payment_type)
+  def build_and_save(payment_id, payment_type)
     price = total
     objects = []
+    payment = nil
     ActiveRecord::Base.transaction do
       items.each do |item|
         object = item.to_object
         object.save
         objects.push(object)
-        raise ActiveRecord::Rollback unless object.errors.count.zero?
+        raise ActiveRecord::Rollback unless object.errors.empty?
       end
 
       payment = if price[:schedule]
                   PaymentScheduleService.new.create(
-                    subscription&.to_object,
+                    objects,
                     price[:before_coupon],
-                    coupon: @coupon,
+                    coupon: @coupon.coupon,
                     operator: @operator,
                     payment_method: @payment_method,
                     user: @customer,
-                    reservation: reservation&.to_object,
                     payment_id: payment_id,
                     payment_type: payment_type
                   )
@@ -80,7 +72,8 @@ class ShoppingCart
                   InvoicesService.create(
                     price,
                     @operator.invoicing_profile.id,
-                    reservation: reservation&.to_object,
+                    objects,
+                    @customer,
                     payment_id: payment_id,
                     payment_type: payment_type,
                     payment_method: @payment_method
@@ -90,6 +83,6 @@ class ShoppingCart
       payment.post_save(payment_id)
     end
 
-    objects.map(&:errors).flatten.count.zero?
+    { success: objects.map(&:errors).flatten.map(&:empty?).all?, payment: payment, errors: objects.map(&:errors).flatten }
   end
 end

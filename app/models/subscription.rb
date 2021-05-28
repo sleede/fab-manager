@@ -58,7 +58,7 @@ class Subscription < ApplicationRecord
       operator_profile_id: operator_profile_id,
       total: 0
     )
-    invoice.invoice_items.push InvoiceItem.new(amount: 0, description: plan.name, subscription_id: id, object: od)
+    invoice.invoice_items.push InvoiceItem.new(amount: 0, description: plan.name, object: od)
     invoice.save
 
     if save
@@ -73,11 +73,16 @@ class Subscription < ApplicationRecord
   end
 
   def original_payment_schedule
-    # if the payment schedule was associated with this subscription, return it directly
-    return payment_schedule if payment_schedule
+    payment_schedule_object&.payment_schedule
+  end
 
-    # if it was associated with a reservation, query payment schedule from one of its items
-    PaymentScheduleItem.where("cast(details->>'subscription_id' AS int) = ?", id).first&.payment_schedule
+  # buying invoice
+  def original_invoice
+    invoice_items.select(:invoice_id)
+                 .group(:invoice_id)
+                 .map(&:invoice_id)
+                 .map { |id| Invoice.find_by(id: id, type: nil) }
+                 .first
   end
 
   private
