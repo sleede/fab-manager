@@ -7,7 +7,7 @@ invoice_item_1:
   updated_at: '2021-05-27 09:26:26.450083'
   description: Sleede - standard, association - month
   invoice_item_id:
-  footprint: 45c215f761aa7a3dae48f52ab5c5e34e1d33f309779ed91a0008040b9bce7eec
+  footprint: d2b756f158d6332c32b7b262118f5bdcfd68221ab089c355e6776c1298d937b8
   object_type: Subscription
   object_id: 1
   main: true
@@ -20,7 +20,7 @@ invoice_item_2:
   description: Mensuel tarif réduit - étudiant, - de 25 ans, enseignant, demandeur
     d'emploi - month
   invoice_item_id:
-  footprint: 3e3666de0195426b73164a1d2593ae6986fb6add76c04d2ede798620f9c7b445
+  footprint: f02559738cb3674e74021ac1894e512e1864eb9fc177e885283a214fa5e0dd74
   object_type: Subscription
   object_id: 2
   main: true
@@ -32,7 +32,7 @@ invoice_item_3:
   updated_at: '2021-05-27 09:26:26.465302'
   description: Mensuel - standard, association - month
   invoice_item_id:
-  footprint: 036d18dd5a1d6340155d52a85d46074a7119e5e379430e4f1a26c9e7f0f05a97
+  footprint: e6141fbc1db017356f855ebc784cb2e084fbf82ed56a0dc295c8a39dcc2a0f92
   object_type: Subscription
   object_id: 3
   main: true
@@ -44,7 +44,7 @@ invoice_item_4:
   updated_at: '2021-05-27 09:26:26.468890'
   description: Formation Laser / Vinyle April 11, 2012 08:00 - 12:00 PM
   invoice_item_id:
-  footprint: 7d9cad2ae8bcd239ed85def9bb6df3bef6600e6821d2fbf5c897ce4a562c26a5
+  footprint: b66ade050a2ef9ebb18067ac1af2828fec2077037100d7068481e00097af4bc0
   object_type: Reservation
   object_id: 1
   main: true
@@ -56,7 +56,7 @@ invoice_item_5:
   updated_at: '2021-05-27 09:26:26.472232'
   description: Imprimante 3D June 15, 2015 12:00 - 01:00 PM
   invoice_item_id:
-  footprint: e3c924b00bb7c24f7082fb15683660e371b940abe2c8f983b5a60f958652241b
+  footprint: a0f096de802df8d5708d4dcc23d7384ab95f246fb80e59564b2c3363db103b02
   object_type: Reservation
   object_id: 2
   main: true
@@ -68,7 +68,7 @@ invoice_item_6:
   updated_at: '2021-05-27 09:26:26.475460'
   description: Mensuel - standard, association - month
   invoice_item_id:
-  footprint: ab4277c9ccb4cbe7281646f4043adfe40064f58f5e9a34cf0d822143c02e0d56
+  footprint: 88e73e7d2f29fe8f029a646a54e5e8884ddf9cd9b207544e9f3d18c70d181749
   object_type: Subscription
   object_id: 4
   main: true

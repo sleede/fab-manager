@@ -14,7 +14,7 @@ invoice_1:
   wallet_amount:
   wallet_transaction_id:
   coupon_id:
-  footprint: cce0e9ca7696065ac4a6ed98b4a98e057bfc4ec936db171f3e64cbe2d2db8dce
+  footprint: e4edca90b74e7d1a6f59cd62a9434027ab8cec8f3f71737938123686afaa53f6
   environment: test
   invoicing_profile_id: 3
   operator_profile_id: 3
@@ -34,7 +34,7 @@ invoice_2:
   wallet_amount:
   wallet_transaction_id:
   coupon_id:
-  footprint: a52f746c7010b30be4affbfb155efe2c601ee9f6264c2f47fbf6397db9bf77c3
+  footprint: 52f5c2cb9e58d0ad421c93437f57fe2dd364ca412c85775cd59e7510031f1091
   environment: test
   invoicing_profile_id: 4
   operator_profile_id: 1
@@ -54,7 +54,7 @@ invoice_3:
   wallet_amount:
   wallet_transaction_id:
   coupon_id:
-  footprint: 55a339b3e10e0d5f1a1047898fa11b64a05088c9c1f0a2fd3108af4a03ac9330
+  footprint: 2396b77776092cf80e3b2c1effef36e655af63a52a781eb73f27d9f44e546bae
   environment: test
   invoicing_profile_id: 7
   operator_profile_id: 1
@@ -74,7 +74,7 @@ invoice_4:
   wallet_amount:
   wallet_transaction_id:
   coupon_id:
-  footprint: db3e6d35ff48c8b86a81fe40fc62547839d91e6d7b80c56a69e3c4bcc9a8aabf
+  footprint: c0809383b304668ac5226fb502f92eb26c51701380ea9ba9526b80b0295b603d
   environment: test
   invoicing_profile_id: 7
   operator_profile_id: 1
@@ -94,7 +94,7 @@ invoice_5:
   wallet_amount:
   wallet_transaction_id:
   coupon_id:
-  footprint: e9afb3ba8863ab640d704996e2c6667c43815a38400fd31be58b764e106f9949
+  footprint: f5d538feef1e83fd8f2b1431e7797e1d267f034e3612bdd9725a58e7ba947b27
   environment: test
   invoicing_profile_id: 3
   operator_profile_id: 1
@@ -114,7 +114,7 @@ invoice_6:
   wallet_amount:
   wallet_transaction_id:
   coupon_id:
-  footprint: 80a06501ce96d2743aa917d17793fd31267122c11e01639b0e0fc7799e6526c0
+  footprint: eb22a99b5fec426dda0214bbaca3ea938fabe42c73bbf1f86712f67a5f61d236
   environment: test
   invoicing_profile_id: 8
   operator_profile_id: 1
