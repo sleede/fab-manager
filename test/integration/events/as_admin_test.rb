@@ -209,6 +209,7 @@ class Events::AsAdminTest < ActionDispatch::IntegrationTest
 
     # Check the resulting invoice generation and it has right price
     assert_invoice_pdf i
+    assert_not_nil i.debug_footprint
     assert_equal (4 * 20) + (4 * 16), i.total / 100.0
   end
 end

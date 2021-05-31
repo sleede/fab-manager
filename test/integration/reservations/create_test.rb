@@ -74,6 +74,7 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     item = InvoiceItem.find_by(object: reservation)
     invoice = item.invoice
     assert_invoice_pdf invoice
+    assert_not_nil invoice.debug_footprint
 
     refute invoice.payment_gateway_object.blank?
     refute invoice.total.blank?
@@ -196,6 +197,7 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     item = InvoiceItem.find_by(object: reservation)
     invoice = item.invoice
     assert_invoice_pdf invoice
+    assert_not_nil invoice.debug_footprint
 
     refute invoice.payment_gateway_object.blank?
     refute invoice.total.blank?
@@ -282,6 +284,7 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     item = InvoiceItem.find_by(object: reservation)
     invoice = item.invoice
     assert_invoice_pdf invoice
+    assert_not_nil invoice.debug_footprint
 
     refute invoice.payment_gateway_object.blank?
     refute invoice.total.blank?
@@ -351,6 +354,7 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     item = InvoiceItem.find_by(object: reservation)
     invoice = item.invoice
     assert_invoice_pdf invoice
+    assert_not_nil invoice.debug_footprint
 
     assert invoice.payment_gateway_object.blank?
     refute invoice.total.blank?
@@ -431,6 +435,7 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     item = InvoiceItem.find_by(object: reservation)
     invoice = item.invoice
     assert_invoice_pdf invoice
+    assert_not_nil invoice.debug_footprint
 
     refute invoice.payment_gateway_object.blank?
     refute invoice.total.blank?
@@ -514,6 +519,7 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     item = InvoiceItem.find_by(object: reservation)
     invoice = item.invoice
     assert_invoice_pdf invoice
+    assert_not_nil invoice.debug_footprint
 
     refute invoice.payment_gateway_object.blank?
     refute invoice.total.blank?
@@ -598,6 +604,7 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     item = InvoiceItem.find_by(object: reservation)
     invoice = item.invoice
     assert_invoice_pdf invoice
+    assert_not_nil invoice.debug_footprint
 
     refute invoice.payment_gateway_object.blank?
     refute invoice.total.blank?

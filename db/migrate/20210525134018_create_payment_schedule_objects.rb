@@ -13,6 +13,8 @@ class CreatePaymentScheduleObjects < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
+    # PaymentSchedules were not in archives until now, so there's no need to regenerate the archives
+
     # migrate data
     PaymentSchedule.all.each do |payment_schedule|
       PaymentScheduleObject.create!(

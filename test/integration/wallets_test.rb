@@ -108,5 +108,6 @@ class WalletsTest < ActionDispatch::IntegrationTest
     assert_equal amount, (invoice.total / 100.0), 'Avoir total does not match the amount credited to the wallet'
     assert_equal amount, (invoice.invoice_items.first.amount / 100.0), 'Invoice item amount does not match'
     assert_invoice_pdf invoice
+    assert_not_nil invoice.debug_footprint
   end
 end

@@ -73,6 +73,7 @@ class Subscriptions::RenewAsAdminTest < ActionDispatch::IntegrationTest
     item = InvoiceItem.find_by(object_type: 'Subscription', object_id: subscription[:id])
     invoice = item.invoice
     assert_invoice_pdf invoice
+    assert_not_nil invoice.debug_footprint
     assert_equal plan.amount, invoice.total, 'Invoice total price does not match the bought subscription'
   end
 
