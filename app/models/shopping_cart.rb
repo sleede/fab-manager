@@ -63,13 +63,17 @@ class ShoppingCart
       payment.post_save(payment_id)
     end
 
-    { success: objects.map(&:errors).flatten.map(&:empty?).all?, payment: payment, errors: objects.map(&:errors).flatten }
+    success = objects.map(&:errors).flatten.map(&:empty?).all? && items.map(&:errors).map(&:empty?).all?
+    errors = objects.map(&:errors).flatten.concat(items.map(&:errors))
+    { success: success, payment: payment, errors: errors }
   end
 
   private
 
   # Save the object associated with the provided item or raise and Rollback if something wrong append.
   def save_item(item)
+    raise ActiveRecord::Rollback unless item.valid?(@items)
+
     object = item.to_object
     object.save
     raise ActiveRecord::Rollback unless object.errors.empty?

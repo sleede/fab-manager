@@ -7,6 +7,7 @@ class CartItem::Subscription < CartItem::BaseItem
 
     @plan = plan
     @customer = customer
+    super
   end
 
   def plan

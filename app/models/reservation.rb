@@ -24,23 +24,12 @@ class Reservation < ApplicationRecord
   validate :machine_not_already_reserved, if: -> { reservable.is_a?(Machine) }
   validate :training_not_fully_reserved, if: -> { reservable.is_a?(Training) }
   validate :slots_not_locked
-  # validates_with ReservationSlotSubscriptionValidator
-
-  attr_accessor :plan_id, :subscription
 
   after_commit :notify_member_create_reservation, on: :create
   after_commit :notify_admin_member_create_reservation, on: :create
   after_commit :extend_subscription, on: :create
   after_save :update_event_nb_free_places, if: proc { |reservation| reservation.reservable_type == 'Event' }
 
-  ## Generate the subscription associated with for the current reservation
-  def generate_subscription
-    return unless plan_id
-
-    self.subscription = Subscription.new(plan_id: plan_id, statistic_profile_id: statistic_profile_id, expiration_date: nil)
-    subscription.init_save
-    subscription
-  end
 
   # @param canceled    if true, count the number of seats for this reservation, including canceled seats
   def total_booked_seats(canceled: false)

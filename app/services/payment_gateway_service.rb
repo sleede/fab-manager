@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require 'stripe/helper'
+require 'pay_zen/helper'
+
 # create remote items on currently active payment gateway
 class PaymentGatewayService
   def initialize

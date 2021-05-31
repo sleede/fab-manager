@@ -12,6 +12,7 @@ class CartItem::Reservation < CartItem::BaseItem
     @operator = operator
     @reservable = reservable
     @slots = slots
+    super
   end
 
   def price
@@ -31,6 +32,23 @@ class CartItem::Reservation < CartItem::BaseItem
 
   def name
     @reservable.name
+  end
+
+  def valid?(all_items)
+    pending_subscription = all_items.find { |i| i.is_a?(CartItem::Subscription) }
+    @slots.each do |slot|
+      availability = Availability.find(slot[:availability_id])
+      next if availability.plan_ids.empty?
+      next if (@customer.subscribed_plan && availability.plan_ids.include?(@customer.subscribed_plan.id)) ||
+              (pending_subscription && availability.plan_ids.include?(pending_subscription.plan.id)) ||
+              (@operator.manager? && @customer.id != @operator.id) ||
+              @operator.admin?
+
+      @errors[:slot] = 'slot is restricted for subscribers'
+      return false
+    end
+
+    true
   end
 
   protected
