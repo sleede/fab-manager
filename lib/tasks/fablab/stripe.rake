@@ -78,6 +78,25 @@ namespace :fablab do
       end
     end
 
+    # in test, we may reach a point when the maximum number of payment methods attachable to a customer is reached.
+    # Use this task to reset them all and be able to run the test suite again.
+    desc 'remove cards payment methods from all customers'
+    task reset_cards: :environment do
+      unless Rails.env.test?
+        print "You're about to detach all payment cards from all customers. This was only made for test mode. Are you sure? (y/n) "
+        confirm = STDIN.gets.chomp
+        next unless confirm == 'y'
+      end
+      User.all.each do |user|
+        stp_customer = user.payment_gateway_object.gateway_object.retrieve
+        cards = Stripe::PaymentMethod.list({ customer: stp_customer, type: 'card' }, { api_key: Setting.get('stripe_secret_key') })
+        cards.each do |card|
+          pm = Stripe::PaymentMethod.retrieve(card.id, api_key: Setting.get('stripe_secret_key'))
+          pm.detach
+        end
+      end
+    end
+
     def print_on_line(str)
       print "#{str}\r"
       $stdout.flush
