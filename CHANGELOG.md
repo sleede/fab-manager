@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 ## Next release
+- Redesigned the data structure to allow buying multiple and various objects
 - Updated React and its dependencies to 17.0.3 and matching
 - Updated the dependencies of: webpack, lodash, eslint, webpack-dev-server, react2angular, auto-ngtemplate-loader, angular-bootstrap-switch, react-refresh-webpack-plugin and eslint-plugin-react
 - Improved error handling in upgrade script
@@ -20,7 +21,6 @@
 - [BREAKING CHANGE] GET `open_api/v1/invoices` won't return `invoiced_id`, `invoiced_type` OR `invoiced.created_at` anymore. The new field `main_object` will contain the equivalent data.
 - [TODO DEPLOY] `rails fablab:stripe:set_gateway`
 - [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
-- [TODO DEPLOY] `rails fablab:chain:all`
 - [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/rename-adminsys.sh | bash`
 
 ## v4.7.11 2021 May 26
