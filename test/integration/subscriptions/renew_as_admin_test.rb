@@ -31,8 +31,10 @@ class Subscriptions::RenewAsAdminTest < ActionDispatch::IntegrationTest
     assert_equal Mime[:json], response.content_type
 
     # Check the correct plan was subscribed
-    subscription = json_response(response.body)
-    assert_equal plan.id, subscription[:plan_id], 'subscribed plan does not match'
+    result = json_response(response.body)
+    assert_equal Invoice.last.id, result[:id], 'invoice id does not match'
+    subscription = Invoice.find(result[:id]).invoice_items.first.object
+    assert_equal plan.id, subscription.plan_id, 'subscribed plan does not match'
 
     # Check that the user has the correct subscription
     assert_not_nil user.subscription, "user's subscription was not found"
@@ -41,8 +43,8 @@ class Subscriptions::RenewAsAdminTest < ActionDispatch::IntegrationTest
     assert_equal plan.id, user.subscription.plan_id, "user's plan does not match"
 
     # Check the expiration date
-    assert_equal (user.subscription.created_at + plan.interval_count.send(plan.interval)).iso8601,
-                 subscription[:expired_at],
+    assert_equal (user.subscription.created_at + plan.interval_count.send(plan.interval)).to_i,
+                 subscription.expiration_date.to_i,
                  'subscription expiration date does not match'
 
     # Check the subscription was correctly saved

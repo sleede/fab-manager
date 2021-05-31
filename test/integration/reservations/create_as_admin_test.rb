@@ -473,7 +473,8 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     assert_equal plan.id, @user_without_subscription.subscribed_plan.id
 
     # reservation assertions
-    reservation = Reservation.find(result[:id])
+    invoice = Invoice.find(result[:id])
+    reservation = invoice.main_item.object
 
     assert reservation.original_invoice
     assert_equal 2, reservation.original_invoice.invoice_items.count
@@ -493,7 +494,7 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     # invoice_items
     invoice_items = InvoiceItem.last(2)
 
-    assert(invoice_items.any? { |ii| ii.amount == plan.amount && !ii.subscription_id.nil? })
+    assert(invoice_items.any? { |ii| ii.amount == plan.amount && !ii.subscription.nil? })
     assert(invoice_items.any? { |ii| ii.amount.zero? })
 
     # invoice assertions

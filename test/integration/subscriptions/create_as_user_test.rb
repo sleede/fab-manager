@@ -32,8 +32,10 @@ class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
     assert_equal Mime[:json], response.content_type
 
     # Check the correct plan was subscribed
-    subscription = json_response(response.body)
-    assert_equal plan.id, subscription[:plan_id], 'subscribed plan does not match'
+    result = json_response(response.body)
+    assert_equal Invoice.last.id, result[:id], 'invoice id does not match'
+    subscription = Invoice.find(result[:id]).invoice_items.first.object
+    assert_equal plan.id, subscription.plan_id, 'subscribed plan does not match'
 
     # Check that the user has only one subscription
     assert_equal 1, @user.subscriptions.count
@@ -131,8 +133,10 @@ class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
     assert_equal Mime[:json], response.content_type
 
     # Check the correct plan was subscribed
-    subscription = json_response(response.body)
-    assert_equal plan.id, subscription[:plan_id], 'subscribed plan does not match'
+    result = json_response(response.body)
+    assert_equal Invoice.last.id, result[:id], 'invoice id does not match'
+    subscription = Invoice.find(result[:id]).invoice_items.first.object
+    assert_equal plan.id, subscription.plan_id, 'subscribed plan does not match'
 
     # Check that the user has the correct subscription
     assert_not_nil @vlonchamp.subscription, "user's subscription was not found"
@@ -237,8 +241,10 @@ class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
     assert_equal payment_schedule_items_count + 12, PaymentScheduleItem.count, 'missing some payment schedule items'
 
     # Check the correct plan was subscribed
-    subscription = json_response(response.body)
-    assert_equal plan.id, subscription[:plan_id], 'subscribed plan does not match'
+    result = json_response(response.body)
+    assert_equal PaymentSchedule.last.id, result[:id], 'payment schedule id does not match'
+    subscription = PaymentSchedule.find(result[:id]).payment_schedule_objects.first.object
+    assert_equal plan.id, subscription.plan_id, 'subscribed plan does not match'
 
     # Check that the user has the correct subscription
     assert_not_nil @user.subscription, "user's subscription was not found"

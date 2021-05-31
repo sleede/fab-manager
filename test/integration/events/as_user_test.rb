@@ -79,11 +79,11 @@ class Events::AsUserTest < ActionDispatch::IntegrationTest
     # reservation assertions
     reservation = Reservation.last
 
-    assert reservation.invoice
-    assert_equal 1, reservation.invoice.invoice_items.count
+    assert reservation.original_invoice
+    assert_equal 1, reservation.original_invoice.invoice_items.count
 
     # invoice assertions
-    invoice = reservation.invoice
+    invoice = reservation.original_invoice
 
     refute invoice.payment_gateway_object.blank?
     refute invoice.total.blank?

@@ -45,44 +45,74 @@ class ShoppingCart
     }
   end
 
+  # Build the dataset for the current ShoppingCart and save it into the database.
+  # Data integrity is guaranteed: all goes right or nothing is saved.
   def build_and_save(payment_id, payment_type)
     price = total
     objects = []
     payment = nil
     ActiveRecord::Base.transaction do
       items.each do |item|
-        object = item.to_object
-        object.save
-        objects.push(object)
-        raise ActiveRecord::Rollback unless object.errors.empty?
+        objects.push(save_item(item))
       end
+      update_credits(objects)
 
-      payment = if price[:schedule]
-                  PaymentScheduleService.new.create(
-                    objects,
-                    price[:before_coupon],
-                    coupon: @coupon.coupon,
-                    operator: @operator,
-                    payment_method: @payment_method,
-                    user: @customer,
-                    payment_id: payment_id,
-                    payment_type: payment_type
-                  )
-                else
-                  InvoicesService.create(
-                    price,
-                    @operator.invoicing_profile.id,
-                    objects,
-                    @customer,
-                    payment_id: payment_id,
-                    payment_type: payment_type,
-                    payment_method: @payment_method
-                  )
-                end
+      payment = create_payment_document(price, objects, payment_id, payment_type)
+      WalletService.debit_user_wallet(payment, @customer)
       payment.save
       payment.post_save(payment_id)
     end
 
     { success: objects.map(&:errors).flatten.map(&:empty?).all?, payment: payment, errors: objects.map(&:errors).flatten }
+  end
+
+  private
+
+  # Save the object associated with the provided item or raise and Rollback if something wrong append.
+  def save_item(item)
+    object = item.to_object
+    object.save
+    raise ActiveRecord::Rollback unless object.errors.empty?
+
+    object
+  end
+
+  # Create the PaymentDocument associated with this ShoppingCart and return it
+  def create_payment_document(price, objects, payment_id, payment_type)
+    if price[:schedule]
+      PaymentScheduleService.new.create(
+        objects,
+        price[:before_coupon],
+        coupon: @coupon.coupon,
+        operator: @operator,
+        payment_method: @payment_method,
+        user: @customer,
+        payment_id: payment_id,
+        payment_type: payment_type
+      )
+    else
+      InvoicesService.create(
+        price,
+        @operator.invoicing_profile.id,
+        objects,
+        @customer,
+        payment_id: payment_id,
+        payment_type: payment_type,
+        payment_method: @payment_method
+      )
+    end
+  end
+
+  # Handle the update of the user's credits
+  # If a subscription has been bought, the credits must be reset first.
+  # Then, the credits related to reservation(s) can be deducted.
+  def update_credits(objects)
+    subscription = objects.find { |o| o.is_a? Subscription }
+    UsersCredits::Manager.new(user: @customer).reset_credits if subscription
+
+    reservations = objects.filter { |o| o.is_a? Reservation }
+    reservations.each do |r|
+      UsersCredits::Manager.new(reservation: r).update_credits
+    end
   end
 end

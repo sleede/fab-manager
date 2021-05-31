@@ -774,12 +774,14 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     assert_equal plan.id, @user_without_subscription.subscribed_plan.id, "user's plan does not match"
 
     # reservation assertions
-    assert reservation.payment_schedule
+    assert reservation.original_payment_schedule
     assert_equal payment_schedule.main_object.object, reservation
 
     # Check the answer
-    reservation = json_response(response.body)
-    assert_equal plan.id, reservation[:user][:subscribed_plan][:id], 'subscribed plan does not match'
+    result = json_response(response.body)
+    assert_equal payment_schedule.id, result[:id], 'payment schedule id does not match'
+    subscription = payment_schedule.payment_schedule_objects.find(&:subscription).object
+    assert_equal plan.id, subscription.plan_id, 'subscribed plan does not match'
   end
 
   test 'user reserves a machine and renew a subscription with payment schedule and coupon and wallet' do
@@ -831,6 +833,7 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
              cart_items: {
                coupon_code: 'GIME3EUR',
                payment_schedule: true,
+               payment_method: 'card',
                items: [
                  {
                    reservation: {
@@ -880,7 +883,7 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     assert_equal plan.id, user.subscribed_plan.id, "user's plan does not match"
 
     # reservation assertions
-    assert reservation.payment_schedule
+    assert reservation.original_payment_schedule
     assert_equal payment_schedule.main_object.object, reservation
 
     # payment schedule assertions
@@ -897,7 +900,9 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     assert_equal payment_schedule.invoicing_profile_id, payment_schedule.operator_profile_id
 
     # Check the answer
-    reservation = json_response(response.body)
-    assert_equal plan.id, reservation[:user][:subscribed_plan][:id], 'subscribed plan does not match'
+    result = json_response(response.body)
+    assert_equal payment_schedule.id, result[:id], 'payment schedule id does not match'
+    subscription = payment_schedule.payment_schedule_objects.find(&:subscription).object
+    assert_equal plan.id, subscription.plan_id, 'subscribed plan does not match'
   end
 end

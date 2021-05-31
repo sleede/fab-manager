@@ -15,8 +15,8 @@ class Subscriptions::Subscribe
     new_sub = Subscription.create(
       plan_id: subscription.plan_id,
       statistic_profile_id: subscription.statistic_profile_id,
-      expiration_date: new_expiration_date
     )
+    new_sub.expiration_date = new_expiration_date
     if new_sub.save
       schedule = subscription.original_payment_schedule
 

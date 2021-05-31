@@ -30,7 +30,6 @@ class Reservation < ApplicationRecord
 
   after_commit :notify_member_create_reservation, on: :create
   after_commit :notify_admin_member_create_reservation, on: :create
-  after_commit :update_credits, on: :create
   after_commit :extend_subscription, on: :create
   after_save :update_event_nb_free_places, if: proc { |reservation| reservation.reservable_type == 'Event' }
 
@@ -109,10 +108,6 @@ class Reservation < ApplicationRecord
     slots.each do |slot|
       errors.add(:slots, 'locked') if slot.availability.lock
     end
-  end
-
-  def update_credits
-    UsersCredits::Manager.new(reservation: self).update_credits
   end
 
   def extend_subscription

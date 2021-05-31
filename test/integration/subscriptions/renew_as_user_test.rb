@@ -32,8 +32,10 @@ class Subscriptions::RenewAsUserTest < ActionDispatch::IntegrationTest
     assert_equal Mime[:json], response.content_type
 
     # Check the correct plan was subscribed
-    subscription = json_response(response.body)
-    assert_equal plan.id, subscription[:plan_id], 'subscribed plan does not match'
+    result = json_response(response.body)
+    assert_equal Invoice.last.id, result[:id], 'invoice id does not match'
+    subscription = Invoice.find(result[:id]).invoice_items.first.object
+    assert_equal plan.id, subscription.plan_id, 'subscribed plan does not match'
 
     # Check the subscription was correctly saved
     assert_equal 2, @user.subscriptions.count
