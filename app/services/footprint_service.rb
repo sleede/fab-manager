@@ -38,7 +38,7 @@ class FootprintService
     # Return an ordered array of the columns used in the footprint computation
     # @param klass {Class} a class inheriting from Footprintable
     def footprint_columns(klass)
-      klass.columns.map(&:name).delete_if { |c| %w[footprint updated_at].concat(klass.columns_out_of_footprint).include? c }
+      klass.columns.map(&:name).delete_if { |c| %w[footprint updated_at].concat(klass.columns_out_of_footprint).include? c }.sort
     end
 
     # Logs a debugging message to help finding why a footprint is invalid

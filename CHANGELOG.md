@@ -7,6 +7,7 @@
 - Improved the development and production documentations
 - Improved the style of the titles of the subscription page
 - Check the status of the assets' compilation during the upgrade
+- Footprints are now generated in a more reproductible way
 - Fix a bug: build status badge is not working
 - Fix a bug: unable to set date formats during installation
 - Fix a bug: unable to cancel the upgrade before it begins
@@ -17,6 +18,7 @@
 - [BREAKING CHANGE] GET `open_api/v1/invoices` won't return `invoiced_id`, `invoiced_type` OR `invoiced.created_at` anymore. The new field `main_object` will contain the equivalent data.
 - [TODO DEPLOY] `rails fablab:stripe:set_gateway`
 - [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
+- [TODO DEPLOY] `rails fablab:chain:all`
 - [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/rename-adminsys.sh | bash`
 
 ## v4.7.11 2021 May 26
