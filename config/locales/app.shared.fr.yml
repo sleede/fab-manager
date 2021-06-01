@@ -119,7 +119,7 @@ fr:
         online_payment: "Paiement en ligne"
         i_have_read_and_accept_: "J'ai bien pris connaissance, et accepte "
         _the_general_terms_and_conditions: "les conditions générales de vente."
-        payment_schedule_html: "<p>Vous êtes sur le point de souscrire à un échéancier de paiement de {DEADLINES} mois.</p><p>En payant cette facture, vous vous engagez à l'envoi d'instructions vers l'institution financière émettrice de votre carte, afin de prélever des paiements sur votre compte, pendant toute la durée de cet abonnement. Cela implique que les données de votre carte soient enregistrées par Stripe et qu'une série de paiements sera initiée en votre nom, conformément à l'échéancier de paiement précédemment affiché.</p>"
+        payment_schedule_html: "<p>Vous êtes sur le point de souscrire à un échéancier de paiement de {DEADLINES} mois.</p><p>En payant cette facture, vous vous engagez à l'envoi d'instructions vers l'institution financière émettrice de votre carte, afin de prélever des paiements sur votre compte, pendant toute la durée de cet abonnement. Cela implique que les données de votre carte soient enregistrées par {GATEWAY} et qu'une série de paiements sera initiée en votre nom, conformément à l'échéancier de paiement précédemment affiché.</p>"
         confirm_payment_of_: "Payer : {AMOUNT}"
       #dialog of on site payment for reservations
       valid_reservation_modal:

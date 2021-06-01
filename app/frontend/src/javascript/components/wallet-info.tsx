@@ -9,8 +9,6 @@ import { Wallet } from '../models/wallet';
 import { IFablab } from '../models/fablab';
 import WalletLib from '../lib/wallet';
 import { ShoppingCart } from '../models/payment';
-import { Reservation } from '../models/reservation';
-import { SubscriptionRequest } from '../models/subscription';
 
 declare var Application: IApplication;
 declare var Fablab: IFablab;

@@ -5,7 +5,7 @@ import wrapPromise, { IWrapPromise } from '../lib/wrap-promise';
 
 export default class SettingAPI {
   async get (name: SettingName): Promise<Setting> {
-    const res: AxiosResponse = await apiClient.get(`/api/settings/${name}`);
+    const res: AxiosResponse<{setting: Setting}> = await apiClient.get(`/api/settings/${name}`);
     return res?.data?.setting;
   }
 

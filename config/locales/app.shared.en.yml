@@ -119,7 +119,7 @@ en:
         online_payment: "Online payment"
         i_have_read_and_accept_: "I have read, and accept "
         _the_general_terms_and_conditions: "the general terms and conditions."
-        payment_schedule_html: "<p>You're about to subscribe to a payment schedule of {DEADLINES} months.</p><p>By paying this bill, you agree to send instructions to the financial institution that issue your card, to take payments from your card account, for the whole duration of this subscription. This imply that your card data are saved by Stripe and a series of payments will be initiated on your behalf, conforming to the payment schedule previously shown.</p>"
+        payment_schedule_html: "<p>You're about to subscribe to a payment schedule of {DEADLINES} months.</p><p>By paying this bill, you agree to send instructions to the financial institution that issue your card, to take payments from your card account, for the whole duration of this subscription. This imply that your card data are saved by {GATEWAY} and a series of payments will be initiated on your behalf, conforming to the payment schedule previously shown.</p>"
         confirm_payment_of_: "Pay: {AMOUNT}"
       #dialog of on site payment for reservations
       valid_reservation_modal:

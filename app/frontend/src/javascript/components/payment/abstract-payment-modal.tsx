@@ -13,6 +13,10 @@ import CustomAssetAPI from '../../api/custom-asset';
 import PriceAPI from '../../api/price';
 import WalletAPI from '../../api/wallet';
 import { Invoice } from '../../models/invoice';
+import SettingAPI from '../../api/setting';
+import { SettingName } from '../../models/setting';
+import { ComputePriceResult } from '../../models/price';
+import { Wallet } from '../../models/wallet';
 
 declare var Fablab: IFablab;
 
@@ -56,23 +60,36 @@ const cgvFile = CustomAssetAPI.get(CustomAssetName.CgvFile);
  */
 export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, cart, currentUser, schedule, customer, logoFooter, GatewayForm, formId, className, formClassName }) => {
   // customer's wallet
-  const [wallet, setWallet] = useState(null);
+  const [wallet, setWallet] = useState<Wallet>(null);
   // server-computed price with all details
-  const [price, setPrice] = useState(null);
+  const [price, setPrice] = useState<ComputePriceResult>(null);
   // remaining price = total price - wallet amount
-  const [remainingPrice, setRemainingPrice] = useState(0);
+  const [remainingPrice, setRemainingPrice] = useState<number>(0);
   // is the component ready to display?
-  const [ready, setReady] = useState(false);
+  const [ready, setReady] = useState<boolean>(false);
   // errors to display in the UI (gateway errors mainly)
-  const [errors, setErrors] = useState(null);
+  const [errors, setErrors] = useState<string>(null);
   // are we currently processing the payment (ie. the form was submit, but the process is still running)?
-  const [submitState, setSubmitState] = useState(false);
+  const [submitState, setSubmitState] = useState<boolean>(false);
   // did the user accepts the terms of services (CGV)?
-  const [tos, setTos] = useState(false);
+  const [tos, setTos] = useState<boolean>(false);
+  // currently active payment gateway
+  const [gateway, setGateway] = useState<string>(null);
 
   const { t } = useTranslation('shared');
   const cgv = cgvFile.read();
 
+
+  /**
+   * When the component is loaded first, get the name of the currently active payment modal
+   */
+  useEffect(() => {
+    const api = new SettingAPI();
+    api.get(SettingName.PaymentGateway).then((setting) => {
+      // we capitalize the first letter of the name
+      setGateway(setting.value.replace(/^\w/, (c) => c.toUpperCase()));
+    })
+  }, []);
 
   /**
    * On each display:
@@ -185,7 +202,7 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
             {errors}
           </div>}
           {isPaymentSchedule() && <div className="payment-schedule-info">
-            <HtmlTranslate trKey="app.shared.payment.payment_schedule_html" options={{ DEADLINES: schedule.items.length }} />
+            <HtmlTranslate trKey="app.shared.payment.payment_schedule_html" options={{ DEADLINES: schedule.items.length, GATEWAY: gateway }} />
           </div>}
           {hasCgv() && <div className="terms-of-sales">
             <input type="checkbox" id="acceptToS" name="acceptCondition" checked={tos} onChange={toggleTos} required />
