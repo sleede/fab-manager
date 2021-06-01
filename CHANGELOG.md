@@ -19,6 +19,7 @@
 - `scripts/run-tests.sh` renamed to `scripts/tests.sh`
 - [BREAKING CHANGE] GET `open_api/v1/invoices` won't return `stp_invoice_id` OR `stp_payment_intent_id` anymore. The new field `payment_gateway_object` will contain some similar data if the invoice was paid online by card.
 - [BREAKING CHANGE] GET `open_api/v1/invoices` won't return `invoiced_id`, `invoiced_type` OR `invoiced.created_at` anymore. The new field `main_object` will contain the equivalent data.
+- [TODO DEPLOY] before running the database migration (db:migrate), run: `rails fablab:chain:all`
 - [TODO DEPLOY] `rails fablab:stripe:set_gateway`
 - [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
 - [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/rename-adminsys.sh | bash`

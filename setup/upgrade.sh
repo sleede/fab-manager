@@ -5,13 +5,17 @@ parseparams()
   COMMANDS=()
   SCRIPTS=()
   ENVIRONMENTS=()
-  while getopts "hys:c:e:" opt; do
+  PREPROCESSING=()
+  while getopts "hys:p:c:e:" opt; do
     case "${opt}" in
       y)
         Y=true
         ;;
       s)
         SCRIPTS+=("$OPTARG")
+        ;;
+      p)
+        PREPROCESSING+=("$OPTARG")
         ;;
       c)
         COMMANDS+=("$OPTARG")
@@ -161,6 +165,13 @@ upgrade()
       if [[ "$confirm" = "n" ]]; then exit 4; fi
     fi
   done
+  for PRE in "${PREPROCESSING[@]}"; do
+    printf "\e[91m::\e[0m \e[1mRunning preprocessing command %s...\e[0m\n" "$PRE"
+    if ! docker-compose run --rm "$SERVICE" bundle exec "$PRE"; then
+      printf "\e[91m[ ❌ ] Something went wrong while running \"%s\", please check the logs above.\e[39m\nExiting...\n" "$PRE"
+      exit 4
+    fi
+  done
   compile_assets
   if ! docker-compose run --rm "$SERVICE" bundle exec rake db:migrate; then
     printf "\e[91m[ ❌ ] Something went wrong while migrating the database, please check the logs above.\e[39m\nExiting...\n"
@@ -193,6 +204,7 @@ usage()
 Options:
   -h                 Print this message and quit
   -y                 Answer yes to all questions
+  -p <string>        Run the preprocessing command (TODO DEPLOY)
   -c <string>        Provides additional upgrade command, run in the context of the app (TODO DEPLOY)
   -s <string>        Executes a remote script (TODO DEPOY)
   -e <string>        Adds the environment variable to config/env\n" "$(basename "$0")" 1>&2
