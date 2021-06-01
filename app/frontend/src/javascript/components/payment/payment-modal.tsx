@@ -1,21 +1,24 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactElement } from 'react';
+import { react2angular } from 'react2angular';
+import { Loader } from '../base/loader';
+import { StripeModal } from './stripe/stripe-modal';
+import { PayZenModal } from './payzen/payzen-modal';
 import { IApplication } from '../../models/application';
 import { ShoppingCart } from '../../models/payment';
 import { User } from '../../models/user';
 import { PaymentSchedule } from '../../models/payment-schedule';
-import { Loader } from '../base/loader';
-import { react2angular } from 'react2angular';
-import SettingAPI from '../../api/setting';
 import { SettingName } from '../../models/setting';
-import { StripeModal } from './stripe/stripe-modal';
-import { PayZenModal } from './payzen/payzen-modal';
+import { Invoice } from '../../models/invoice';
+import SettingAPI from '../../api/setting';
+import { useTranslation } from 'react-i18next';
 
 declare var Application: IApplication;
 
 interface PaymentModalProps {
   isOpen: boolean,
   toggleModal: () => void,
-  afterSuccess: (result: any) => void,
+  afterSuccess: (result: Invoice|PaymentSchedule) => void,
+  onError: (message: string) => void,
   cart: ShoppingCart,
   currentUser: User,
   schedule: PaymentSchedule,
@@ -29,7 +32,8 @@ const paymentGateway = SettingAPI.get(SettingName.PaymentGateway);
  * This component open a modal dialog for the configured payment gateway, allowing the user to input his card data
  * to process an online payment.
  */
-const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, currentUser, schedule , cart, customer }) => {
+const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, currentUser, schedule , cart, customer }) => {
+  const { t } = useTranslation('shared');
   const gateway = paymentGateway.read();
 
   /**
@@ -66,19 +70,24 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, toggleModal, afterS
       return renderStripeModal();
     case 'payzen':
       return renderPayZenModal();
+    case null:
+    case undefined:
+      onError(t('app.shared.payment_modal.online_payment_disabled'));
+      return <div />;
     default:
+      onError(t('app.shared.payment_modal.unexpected_error'));
       console.error(`[PaymentModal] Unimplemented gateway: ${gateway.value}`);
-      return <div />
+      return <div />;
   }
 }
 
 
-const PaymentModalWrapper: React.FC<PaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, currentUser, schedule , cart, customer }) => {
+const PaymentModalWrapper: React.FC<PaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, currentUser, schedule , cart, customer }) => {
   return (
     <Loader>
-      <PaymentModal isOpen={isOpen} toggleModal={toggleModal} afterSuccess={afterSuccess} currentUser={currentUser} schedule={schedule} cart={cart} customer={customer} />
+      <PaymentModal isOpen={isOpen} toggleModal={toggleModal} afterSuccess={afterSuccess} onError={onError} currentUser={currentUser} schedule={schedule} cart={cart} customer={customer} />
     </Loader>
   );
 }
 
-Application.Components.component('paymentModal', react2angular(PaymentModalWrapper, ['isOpen', 'toggleModal', 'afterSuccess','currentUser', 'schedule', 'cart', 'customer']));
+Application.Components.component('paymentModal', react2angular(PaymentModalWrapper, ['isOpen', 'toggleModal', 'afterSuccess', 'onError', 'currentUser', 'schedule', 'cart', 'customer']));

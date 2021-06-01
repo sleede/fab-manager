@@ -511,3 +511,6 @@ fr:
         cancel_subscription: "Annuler l'abonnement"
         confirm_cancel_subscription: "Vous êtes sur le point d'annuler cet échéancier de paiement ainsi que l'abonnement lié. Êtes-vous sur ?"
         please_ask_reception: "Pour toute question, merci de contacter l'accueil du FabLab."
+      payment_modal:
+        online_payment_disabled: "Le paiement par carte bancaire n'est pas disponible. Merci de contacter directement l'accueil du FabLab."
+        unexpected_error: "Une erreur est survenue. Merci de rapporter cet incident à l'équipe de Fab-Manager."

@@ -25,8 +25,7 @@ export interface PaymentScheduleItem {
     recurring: number,
     adjustment?: number,
     other_items?: number,
-    without_coupon?: number,
-    subscription_id: number
+    without_coupon?: number
   }
 }
 
@@ -43,6 +42,10 @@ export interface PaymentSchedule {
   items: Array<PaymentScheduleItem>,
   created_at: Date,
   chained_footprint: boolean,
+  main_object: {
+    type: string,
+    id: number
+  },
   user: {
     id: number,
     name: string

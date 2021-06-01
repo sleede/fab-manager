@@ -4,11 +4,12 @@ import { ShoppingCart } from '../models/payment';
 import { User } from '../models/user';
 import {
   CheckHashResponse,
-  ConfirmPaymentResponse,
   CreatePaymentResponse,
   CreateTokenResponse,
   SdkTestResponse
 } from '../models/payzen';
+import { Invoice } from '../models/invoice';
+import { PaymentSchedule } from '../models/payment-schedule';
 
 export default class PayzenAPI {
 
@@ -32,8 +33,8 @@ export default class PayzenAPI {
     return res?.data;
   }
 
-  static async confirm(orderId: string, cart: ShoppingCart): Promise<ConfirmPaymentResponse> {
-    const res: AxiosResponse<ConfirmPaymentResponse> = await apiClient.post('/api/payzen/confirm_payment', { cart_items: cart, order_id: orderId });
+  static async confirm(orderId: string, cart: ShoppingCart): Promise<Invoice|PaymentSchedule> {
+    const res: AxiosResponse<Invoice|PaymentSchedule> = await apiClient.post('/api/payzen/confirm_payment', { cart_items: cart, order_id: orderId });
     return res?.data;
   }
 }

@@ -571,11 +571,19 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
 
     /**
      * Invoked atfer a successful card payment
-     * @param reservation {*} reservation
+     * @param invoice {*} the invoice
      */
-    $scope.afterOnlinePaymentSuccess = (reservation) => {
+    $scope.afterOnlinePaymentSuccess = (invoice) => {
       $scope.toggleOnlinePaymentModal();
-      afterPayment(reservation);
+      afterPayment(invoice);
+    };
+
+    /**
+     * Invoked when something wrong occurred during the payment dialog initialization
+     * @param message {string}
+     */
+    $scope.onOnlinePaymentError = (message) => {
+      growl.error(message);
     };
 
     /* PRIVATE SCOPE */
@@ -798,14 +806,16 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
 
     /**
      * What to do after the payment was successful
-     * @param reservation {Object} booked reservation
+     * @param invoice {Object} the invoice for the booked reservation
      */
-    const afterPayment = function (reservation) {
-      $scope.event.nb_free_places = $scope.event.nb_free_places - reservation.total_booked_seats;
+    const afterPayment = function (invoice) {
+      Reservation.get({ id: invoice.main_object.id }, function (reservation) {
+        $scope.event.nb_free_places = $scope.event.nb_free_places - reservation.total_booked_seats;
+        $scope.reservations.push(reservation);
+      });
       resetEventReserve();
       $scope.reserveSuccess = true;
       $scope.coupon.applied = null;
-      $scope.reservations.push(reservation);
       if ($scope.currentUser.role === 'admin') {
         return $scope.ctrl.member = null;
       }

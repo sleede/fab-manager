@@ -1,8 +1,9 @@
 import React, { FunctionComponent, ReactNode } from 'react';
 import { GatewayFormProps, AbstractPaymentModal } from '../abstract-payment-modal';
-import { ShoppingCart, PaymentConfirmation } from '../../../models/payment';
+import { ShoppingCart } from '../../../models/payment';
 import { PaymentSchedule } from '../../../models/payment-schedule';
 import { User } from '../../../models/user';
+import { Invoice } from '../../../models/invoice';
 
 import payzenLogo from '../../../../../images/payzen-secure.png';
 import mastercardLogo from '../../../../../images/mastercard.png';
@@ -13,7 +14,7 @@ import { PayzenForm } from './payzen-form';
 interface PayZenModalProps {
   isOpen: boolean,
   toggleModal: () => void,
-  afterSuccess: (result: PaymentConfirmation) => void,
+  afterSuccess: (result: Invoice|PaymentSchedule) => void,
   cart: ShoppingCart,
   currentUser: User,
   schedule: PaymentSchedule,

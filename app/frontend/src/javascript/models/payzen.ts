@@ -9,10 +9,6 @@ export interface CreateTokenResponse {
 
 export interface CreatePaymentResponse extends CreateTokenResponse {}
 
-export interface ConfirmPaymentResponse {
-  todo?: any
-}
-
 export interface CheckHashResponse {
   validity: boolean
 }

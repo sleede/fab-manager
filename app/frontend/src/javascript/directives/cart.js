@@ -327,11 +327,19 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
 
         /**
          * Invoked atfer a successful card payment
-         * @param result {*} may be a reservation or a subscription
+         * @param invoice {*} may be an Invoice or a paymentSchedule
          */
-        $scope.afterOnlinePaymentSuccess = (result) => {
+        $scope.afterOnlinePaymentSuccess = (invoice) => {
           $scope.toggleOnlinePaymentModal();
-          afterPayment(result);
+          afterPayment(invoice);
+        };
+
+        /**
+         * Invoked when something wrong occurred during the payment dialog initialization
+         * @param message {string}
+         */
+        $scope.onOnlinePaymentError = (message) => {
+          growl.error(message);
         };
 
         /* PRIVATE SCOPE */
@@ -843,11 +851,19 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
 
                 /**
                  * After creating a payment schedule by card, from an administrator.
-                 * @param result {*} Reservation or Subscription
+                 * @param result {*} PaymentSchedule
                  */
                 $scope.afterCreatePaymentSchedule = function (result) {
                   $scope.toggleOnlinePaymentModal();
                   $uibModalInstance.close(result);
+                };
+
+                /**
+                 * Invoked when something wrong occurred during the payment dialog initialization
+                 * @param message {string}
+                 */
+                $scope.onCreatePaymentScheduleError = (message) => {
+                  growl.error(message);
                 };
 
                 /* PRIVATE SCOPE */
@@ -889,19 +905,19 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                 initialize();
               }
             ]
-          }).result.finally(null).then(function (reservation) { afterPayment(reservation); });
+          }).result.finally(null).then(function (paymentSchedule) { afterPayment(paymentSchedule); });
         };
 
         /**
          * Actions to run after the payment was successful
-         * @param paymentResult {*} may be a reservation or a subscription
+         * @param paymentDocument {*} may be an Invoice or a PaymentSchedule
          */
-        const afterPayment = function (paymentResult) {
+        const afterPayment = function (paymentDocument) {
           // we set the cart content as 'paid' to display a summary of the transaction
           $scope.events.paid = $scope.events.reserved;
           $scope.amountPaid = $scope.amountTotal;
           // we call the external callback if present
-          if (typeof $scope.afterPayment === 'function') { $scope.afterPayment(paymentResult); }
+          if (typeof $scope.afterPayment === 'function') { $scope.afterPayment(paymentDocument); }
           // we reset the coupon, and the cart content, and we unselect the slot
           $scope.coupon.applied = undefined;
           if ($scope.slot) {

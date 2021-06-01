@@ -91,8 +91,8 @@ Application.Controllers.controller('ShowTrainingController', ['$scope', '$state'
  * training can be reserved during the reservation process (the shopping cart may contains only one training and a subscription).
  */
 
-Application.Controllers.controller('ReserveTrainingController', ['$scope', '$stateParams', 'Auth', 'AuthService', '$timeout', 'Availability', 'Member', 'plansPromise', 'groupsPromise', 'settingsPromise', 'trainingPromise', '_t', 'uiCalendarConfig', 'CalendarConfig',
-  function ($scope, $stateParams, Auth, AuthService, $timeout, Availability, Member, plansPromise, groupsPromise, settingsPromise, trainingPromise, _t, uiCalendarConfig, CalendarConfig) {
+Application.Controllers.controller('ReserveTrainingController', ['$scope', '$stateParams', 'Auth', 'AuthService', '$timeout', 'Availability', 'Member', 'plansPromise', 'groupsPromise', 'settingsPromise', 'trainingPromise', '_t', 'uiCalendarConfig', 'CalendarConfig', 'Reservation',
+  function ($scope, $stateParams, Auth, AuthService, $timeout, Availability, Member, plansPromise, groupsPromise, settingsPromise, trainingPromise, _t, uiCalendarConfig, CalendarConfig, Reservation) {
   /* PRIVATE STATIC CONSTANTS */
 
     // Color of the selected event backgound
@@ -346,35 +346,37 @@ Application.Controllers.controller('ReserveTrainingController', ['$scope', '$sta
     /**
      * Once the reservation is booked (payment process successfully completed), change the event style
      * in fullCalendar, update the user's subscription and free-credits if needed
-     * @param reservation {Object}
+     * @param paymentDocument {Invoice|PaymentSchedule}
      */
-    $scope.afterPayment = function (reservation) {
-      angular.forEach($scope.events.paid, function (trainingSlot, key) {
-        trainingSlot.backgroundColor = 'white';
-        trainingSlot.is_reserved = true;
-        trainingSlot.can_modify = true;
-        updateTrainingSlotId(trainingSlot, reservation);
-        trainingSlot.borderColor = '#b2e774';
-        trainingSlot.title = trainingSlot.training.name + ' - ' + _t('app.logged.trainings_reserve.i_ve_reserved');
-        updateEvents(trainingSlot);
-      });
+    $scope.afterPayment = function (paymentDocument) {
+      Reservation.get({ id: paymentDocument.main_object.id }, function (reservation) {
+        angular.forEach($scope.events.paid, function (trainingSlot, key) {
+          trainingSlot.backgroundColor = 'white';
+          trainingSlot.is_reserved = true;
+          trainingSlot.can_modify = true;
+          updateTrainingSlotId(trainingSlot, reservation);
+          trainingSlot.borderColor = '#b2e774';
+          trainingSlot.title = trainingSlot.training.name + ' - ' + _t('app.logged.trainings_reserve.i_ve_reserved');
+          updateEvents(trainingSlot);
+        });
 
-      if ($scope.selectedPlan) {
-        $scope.ctrl.member.subscribed_plan = angular.copy($scope.selectedPlan);
-        if ($scope.ctrl.member.id === Auth._currentUser.id) {
-          Auth._currentUser.subscribed_plan = angular.copy($scope.selectedPlan);
+        if ($scope.selectedPlan) {
+          $scope.ctrl.member.subscribed_plan = angular.copy($scope.selectedPlan);
+          if ($scope.ctrl.member.id === Auth._currentUser.id) {
+            Auth._currentUser.subscribed_plan = angular.copy($scope.selectedPlan);
+          }
+          $scope.plansAreShown = false;
+          $scope.selectedPlan = null;
         }
-        $scope.plansAreShown = false;
-        $scope.selectedPlan = null;
-      }
-      $scope.ctrl.member.training_credits = angular.copy(reservation.user.training_credits);
-      $scope.ctrl.member.machine_credits = angular.copy(reservation.user.machine_credits);
-      if ($scope.ctrl.member.id === Auth._currentUser.id) {
-        Auth._currentUser.training_credits = angular.copy(reservation.user.training_credits);
-        Auth._currentUser.machine_credits = angular.copy(reservation.user.machine_credits);
-      }
+        $scope.ctrl.member.training_credits = angular.copy(reservation.user.training_credits);
+        $scope.ctrl.member.machine_credits = angular.copy(reservation.user.machine_credits);
+        if ($scope.ctrl.member.id === Auth._currentUser.id) {
+          Auth._currentUser.training_credits = angular.copy(reservation.user.training_credits);
+          Auth._currentUser.machine_credits = angular.copy(reservation.user.machine_credits);
+        }
 
-      refetchCalendar();
+        refetchCalendar();
+      });
     };
 
     /**

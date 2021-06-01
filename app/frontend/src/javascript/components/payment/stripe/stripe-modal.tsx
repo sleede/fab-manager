@@ -1,21 +1,21 @@
 import React, { FunctionComponent, ReactNode } from 'react';
-import { SetupIntent } from '@stripe/stripe-js';
 import { StripeElements } from './stripe-elements';
 import { StripeForm } from './stripe-form';
 import { GatewayFormProps, AbstractPaymentModal } from '../abstract-payment-modal';
-import { ShoppingCart, PaymentConfirmation } from '../../../models/payment';
+import { ShoppingCart } from '../../../models/payment';
 import { PaymentSchedule } from '../../../models/payment-schedule';
 import { User } from '../../../models/user';
 
 import stripeLogo from '../../../../../images/powered_by_stripe.png';
 import mastercardLogo from '../../../../../images/mastercard.png';
 import visaLogo from '../../../../../images/visa.png';
+import { Invoice } from '../../../models/invoice';
 
 
 interface StripeModalProps {
   isOpen: boolean,
   toggleModal: () => void,
-  afterSuccess: (result: SetupIntent|PaymentConfirmation) => void,
+  afterSuccess: (result: Invoice|PaymentSchedule) => void,
   cart: ShoppingCart,
   currentUser: User,
   schedule: PaymentSchedule,

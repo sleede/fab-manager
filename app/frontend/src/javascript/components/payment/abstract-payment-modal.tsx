@@ -12,13 +12,14 @@ import { User } from '../../models/user';
 import CustomAssetAPI from '../../api/custom-asset';
 import PriceAPI from '../../api/price';
 import WalletAPI from '../../api/wallet';
+import { Invoice } from '../../models/invoice';
 
 declare var Fablab: IFablab;
 
 
 export interface GatewayFormProps {
   onSubmit: () => void,
-  onSuccess: (result: any) => void,
+  onSuccess: (result: Invoice|PaymentSchedule) => void,
   onError: (message: string) => void,
   customer: User,
   operator: User,
@@ -31,7 +32,7 @@ export interface GatewayFormProps {
 interface AbstractPaymentModalProps {
   isOpen: boolean,
   toggleModal: () => void,
-  afterSuccess: (result: any) => void,
+  afterSuccess: (result: Invoice|PaymentSchedule) => void,
   cart: ShoppingCart,
   currentUser: User,
   schedule: PaymentSchedule,
@@ -137,7 +138,7 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
   /**
    * After sending the form with success, process the resulting payment method
    */
-  const handleFormSuccess = async (result: any): Promise<void> => {
+  const handleFormSuccess = async (result: Invoice|PaymentSchedule): Promise<void> => {
     setSubmitState(false);
     afterSuccess(result);
   }

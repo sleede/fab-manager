@@ -1,20 +1,16 @@
 import React, { FormEvent } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import { SetupIntent } from "@stripe/stripe-js";
 import { useTranslation } from 'react-i18next';
 import { GatewayFormProps } from '../abstract-payment-modal';
 import { PaymentConfirmation } from '../../../models/payment';
 import StripeAPI from '../../../api/stripe';
-
-interface StripeFormProps extends GatewayFormProps {
-  onSuccess: (result: SetupIntent|PaymentConfirmation) => void,
-}
+import { Invoice } from '../../../models/invoice';
 
 /**
  * A form component to collect the credit card details and to create the payment method on Stripe.
  * The form validation button must be created elsewhere, using the attribute form={formId}.
  */
-export const StripeForm: React.FC<StripeFormProps> = ({ onSubmit, onSuccess, onError, children, className, paymentSchedule = false, cart, customer, operator, formId }) => {
+export const StripeForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, onError, children, className, paymentSchedule = false, cart, customer, operator, formId }) => {
 
   const { t } = useTranslation('shared');
 
@@ -79,19 +75,17 @@ export const StripeForm: React.FC<StripeFormProps> = ({ onSubmit, onSuccess, onE
 
   /**
    * Process the server response about the Strong-customer authentication (SCA)
-   * @param response can be a PaymentConfirmation, or a Reservation (if the reservation succeeded), or a Subscription (if the subscription succeeded)
-   * @see app/controllers/api/payments_controller.rb#on_reservation_success
-   * @see app/controllers/api/payments_controller.rb#on_subscription_success
-   * @see app/controllers/api/payments_controller.rb#generate_payment_response
+   * @param response can be a PaymentConfirmation, or an Invoice (if the payment succeeded)
+   * @see app/controllers/api/stripe_controller.rb#confirm_payment
    */
-  const handleServerConfirmation = async (response: PaymentConfirmation|any) => {
-    if (response.error) {
+  const handleServerConfirmation = async (response: PaymentConfirmation|Invoice) => {
+    if ('error' in response) {
       if (response.error.statusText) {
         onError(response.error.statusText);
       } else {
         onError(`${t('app.shared.messages.payment_card_error')} ${response.error}`);
       }
-    } else if (response.requires_action) {
+    } else if ('requires_action' in response) {
       // Use Stripe.js to handle required card action
       const result = await stripe.handleCardAction(response.payment_intent_client_secret);
       if (result.error) {
@@ -106,8 +100,10 @@ export const StripeForm: React.FC<StripeFormProps> = ({ onSubmit, onSuccess, onE
           onError(e);
         }
       }
-    } else {
+    } else if ('id' in response) {
       onSuccess(response);
+    } else {
+      console.error(`[StripeForm] unknown response received: ${response}`);
     }
   }
 
