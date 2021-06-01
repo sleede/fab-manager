@@ -8,9 +8,11 @@ import { Loader } from '../../base/loader';
 import {
   CreateTokenResponse,
   KryptonClient,
-  KryptonError,
+  KryptonError, PaymentTransaction,
   ProcessPaymentAnswer
 } from '../../../models/payzen';
+import { PaymentSchedule } from '../../../models/payment-schedule';
+import { Invoice } from '../../../models/invoice';
 
 /**
  * A form component to collect the credit card details and to create the payment method on Stripe.
@@ -63,7 +65,7 @@ export const PayzenForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, on
         const transaction = event.clientAnswer.transactions[0];
 
         if (event.clientAnswer.orderStatus === 'PAID') {
-          PayzenAPI.confirm(event.clientAnswer.orderDetails.orderId, cart).then((confirmation) =>  {
+          confirmPayment(event, transaction).then((confirmation) =>  {
             PayZenKR.current.removeForms().then(() => {
               onSuccess(confirmation);
             });
@@ -76,6 +78,18 @@ export const PayzenForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, on
     });
     return true;
   };
+
+  /**
+   * Confirm the payment, depending on the current type of payment (single shot or recurring)
+   * @param event
+   */
+  const confirmPayment = async (event: ProcessPaymentAnswer, transaction: PaymentTransaction): Promise<Invoice|PaymentSchedule> => {
+    if (!paymentSchedule) {
+      return await PayzenAPI.confirm(event.clientAnswer.orderDetails.orderId, cart);
+    } else {
+      return await PayzenAPI.confirmPaymentSchedule(event.clientAnswer.orderDetails.orderId, transaction.uuid, cart);
+    }
+  }
 
   /**
    * Callback triggered when the PayZen form was entirely loaded and displayed

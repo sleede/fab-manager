@@ -183,6 +183,7 @@ Rails.application.routes.draw do
     post 'payzen/sdk_test' => 'payzen#sdk_test'
     post 'payzen/create_payment' => 'payzen#create_payment'
     post 'payzen/confirm_payment' => 'payzen#confirm_payment'
+    post 'payzen/confirm_payment_schedule' => 'payzen#confirm_payment_schedule'
     post 'payzen/check_hash' => 'payzen#check_hash'
     post 'payzen/create_token' => 'payzen#create_token'
 

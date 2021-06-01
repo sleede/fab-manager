@@ -4,6 +4,7 @@
 class API::PayzenController < API::PaymentsController
   require 'pay_zen/charge'
   require 'pay_zen/order'
+  require 'pay_zen/transaction'
   require 'pay_zen/helper'
 
   def sdk_test
@@ -53,6 +54,23 @@ class API::PayzenController < API::PaymentsController
       render on_payment_success(params[:order_id], cart)
     else
       render json: order['answer'], status: :unprocessable_entity
+    end
+  rescue StandardError => e
+    render json: e, status: :unprocessable_entity
+  end
+
+  def confirm_payment_schedule
+    render(json: { error: 'Bad gateway or online payment is disabled' }, status: :bad_gateway) and return unless PayZen::Helper.enabled?
+
+    client = PayZen::Transaction.new
+    transaction = client.get(params[:transaction_uuid])
+
+    cart = shopping_cart
+
+    if transaction['answer']['status'] == 'PAID'
+      render on_payment_success(params[:order_id], cart)
+    else
+      render json: transaction['answer'], status: :unprocessable_entity
     end
   rescue StandardError => e
     render json: e, status: :unprocessable_entity

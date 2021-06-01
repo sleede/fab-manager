@@ -33,8 +33,13 @@ export default class PayzenAPI {
     return res?.data;
   }
 
-  static async confirm(orderId: string, cart: ShoppingCart): Promise<Invoice|PaymentSchedule> {
-    const res: AxiosResponse<Invoice|PaymentSchedule> = await apiClient.post('/api/payzen/confirm_payment', { cart_items: cart, order_id: orderId });
+  static async confirm(orderId: string, cart: ShoppingCart): Promise<Invoice> {
+    const res: AxiosResponse<Invoice> = await apiClient.post('/api/payzen/confirm_payment', { cart_items: cart, order_id: orderId });
+    return res?.data;
+  }
+
+  static async confirmPaymentSchedule(orderId: string, transactionUuid: string, cart: ShoppingCart): Promise<PaymentSchedule> {
+    const res: AxiosResponse<PaymentSchedule> = await apiClient.post('/api/payzen/confirm_payment_schedule', { cart_items: cart, order_id: orderId, transaction_uuid: transactionUuid });
     return res?.data;
   }
 }

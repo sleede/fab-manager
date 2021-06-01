@@ -28,7 +28,7 @@ class CartItem::Subscription < CartItem::BaseItem
   end
 
   def to_object
-    Subscription.new(
+    ::Subscription.new(
       plan_id: @plan.id,
       statistic_profile_id: StatisticProfile.find_by(user: @customer).id
     )

@@ -12,7 +12,7 @@ class PayZen::Service < Payment::Service
   def create_subscription(payment_schedule, order_id)
     first_item = payment_schedule.ordered_items.first
 
-    order = PayZen::Order.new.get(order_id: order_id, operation_type: 'VERIFICATION')
+    order = PayZen::Order.new.get(order_id, operation_type: 'VERIFICATION')
     client = PayZen::Charge.new
 
     params = {
