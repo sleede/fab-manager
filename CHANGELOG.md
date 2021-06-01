@@ -11,6 +11,7 @@
 - Footprints are now generated in a more reproductible way
 - Task to reset the stripe payment methods in test mode
 - Validate on server side the reservation of slots restricted to subscribers
+− Unified and documented upgrade exit codes
 - Fix a bug: build status badge is not working
 - Fix a bug: unable to set date formats during installation
 - Fix a bug: unable to cancel the upgrade before it begins

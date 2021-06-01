@@ -125,7 +125,7 @@ compile_assets()
   PG_ID=$(docker-compose ps -q postgres)
   if [[ "$PG_ID" = "" ]]; then
     printf "\e[91m[ ❌ ] PostgreSQL container is not running, unable to compile the assets\e[39m\nExiting..."
-    exit 1
+    exit 4
   fi
   PG_NET_ID=$(docker inspect "$PG_ID" -f "{{json .NetworkSettings.Networks }}" | jq -r '.[] .NetworkID')
   clean_env_file
@@ -147,7 +147,7 @@ upgrade()
   add_environments
   if ! docker-compose pull "$SERVICE"; then
     printf "\e[91m[ ❌ ] An error occurred, detected service name: %s\e[39m\nExiting..." "$SERVICE"
-    exit 1
+    exit 4
   fi
   BRANCH='master'
   if yq eval '.services.*.image | select(. == "sleede/fab-manager*")' docker-compose.yml | grep -q ':dev'; then BRANCH='dev'; fi
@@ -207,7 +207,13 @@ Options:
   -p <string>        Run the preprocessing command (TODO DEPLOY)
   -c <string>        Provides additional upgrade command, run in the context of the app (TODO DEPLOY)
   -s <string>        Executes a remote script (TODO DEPOY)
-  -e <string>        Adds the environment variable to config/env\n" "$(basename "$0")" 1>&2
+  -e <string>        Adds the environment variable to config/env\n" "$(basename "$0")
+Return codes:
+  0                  Upgrade terminated successfully
+  1                  Configuration required
+  2                  Aborted by user
+  3                  Version not supported
+  4                  Unexpected error" 1>&2
   exit 1
 }
 
