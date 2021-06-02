@@ -7,9 +7,10 @@ module Payment; end
 class Payment::Item
   attr_reader :klass
 
-  def initialize(klass, id = nil)
+  def initialize(klass, id = nil, *args)
     @klass = klass
     @id = id
+    @args = args
   end
 
   def class
@@ -20,5 +21,5 @@ class Payment::Item
     false
   end
 
-  def retrieve(_id = nil); end
+  def retrieve(_id = nil, *_args); end
 end

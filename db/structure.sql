@@ -1467,7 +1467,8 @@ CREATE TABLE public.payment_gateway_objects (
     gateway_object_id character varying,
     gateway_object_type character varying,
     item_type character varying,
-    item_id bigint
+    item_id bigint,
+    payment_gateway_object_id bigint
 );
 
 
@@ -4640,6 +4641,13 @@ CREATE INDEX index_payment_gateway_objects_on_item_type_and_item_id ON public.pa
 
 
 --
+-- Name: index_payment_gateway_objects_on_payment_gateway_object_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_payment_gateway_objects_on_payment_gateway_object_id ON public.payment_gateway_objects USING btree (payment_gateway_object_id);
+
+
+--
 -- Name: index_payment_schedule_items_on_invoice_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5214,6 +5222,22 @@ CREATE INDEX projects_search_vector_idx ON public.projects USING gin (search_vec
 
 
 --
+-- Name: accounting_periods accounting_periods_del_protect; Type: RULE; Schema: public; Owner: -
+--
+
+CREATE RULE accounting_periods_del_protect AS
+    ON DELETE TO public.accounting_periods DO INSTEAD NOTHING;
+
+
+--
+-- Name: accounting_periods accounting_periods_upd_protect; Type: RULE; Schema: public; Owner: -
+--
+
+CREATE RULE accounting_periods_upd_protect AS
+    ON UPDATE TO public.accounting_periods DO INSTEAD NOTHING;
+
+
+--
 -- Name: projects projects_search_content_trigger; Type: TRIGGER; Schema: public; Owner: -
 --
 
@@ -5330,6 +5354,14 @@ ALTER TABLE ONLY public.exports
 
 ALTER TABLE ONLY public.payment_schedules
     ADD CONSTRAINT fk_rails_27cdd051f7 FOREIGN KEY (statistic_profile_id) REFERENCES public.statistic_profiles(id);
+
+
+--
+-- Name: payment_gateway_objects fk_rails_2a54622221; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payment_gateway_objects
+    ADD CONSTRAINT fk_rails_2a54622221 FOREIGN KEY (payment_gateway_object_id) REFERENCES public.payment_gateway_objects(id);
 
 
 --

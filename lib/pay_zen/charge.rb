@@ -52,13 +52,13 @@ class PayZen::Charge < PayZen::Client
   ##
   def create_subscription(amount: 0,
                           currency: Setting.get('payzen_currency'),
-                          effect_date: DateTime.current.to_s,
+                          effect_date: DateTime.current.iso8601,
                           payment_method_token: nil,
                           rrule: nil,
                           order_id: nil,
                           initial_amount: nil,
                           initial_amount_number: nil)
-    post('Charge/CreateSubscription,',
+    post('Charge/CreateSubscription',
          amount: amount,
          currency: currency,
          effectDate: effect_date,

@@ -123,7 +123,7 @@ fr:
     deadline_date: "Date du prélèvement"
     deadline_amount: "Montant TTC"
     total_amount: "Montant total"
-    settlement_by_METHOD: "Les prélèvements seront effectués par {METHOD, select, stripe{carte bancaire} other{chèque}} à l'échéance."
+    settlement_by_METHOD: "Les prélèvements seront effectués par {METHOD, select, card{carte bancaire} other{chèque}} à l'échéance."
     settlement_by_wallet: "%{AMOUNT} seront prélevés de votre porte-monnaie pour régler la première échéance."
   #CVS accounting export (columns headers)
   accounting_export:

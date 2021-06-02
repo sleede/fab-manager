@@ -123,7 +123,7 @@ en:
     deadline_date: "Payment date"
     deadline_amount: "Amount including tax"
     total_amount: "Total amount"
-    settlement_by_METHOD: "Debits will be made by {METHOD, select, stripe{card} other{check}} for each deadlines."
+    settlement_by_METHOD: "Debits will be made by {METHOD, select, card{card} other{check}} for each deadlines."
     settlement_by_wallet: "%{AMOUNT} will be debited from your wallet to settle the first deadline."
   # CVS accounting export (columns headers)
   accounting_export:

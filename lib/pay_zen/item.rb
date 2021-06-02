@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 require 'payment/item'
+require 'pay_zen/order'
+require 'pay_zen/subscription'
+require 'pay_zen/token'
+require 'pay_zen/transaction'
 
 # PayZen payement gateway
 module PayZen; end
@@ -9,10 +13,11 @@ module PayZen; end
 class PayZen::Item < Payment::Item
   attr_accessor :id
 
-  def retrieve(id = nil)
+  def retrieve(id = nil, *args)
     @id ||= id
-    client = klass.constantize
-    client.get(@id)
+    @args ||= args
+    client = klass.constantize.new
+    client.get(@id, *@args)
   end
 
   def payment_mean?

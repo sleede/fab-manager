@@ -10,19 +10,19 @@ module Payment; end
 class Payment::ItemBuilder
   attr_reader :instance
 
-  def self.build(klass, id = nil)
-    builder = new(klass, id)
+  def self.build(klass, *ids)
+    builder = new(klass, *ids)
     builder.instance
   end
 
   private
 
-  def initialize(klass, id = nil)
+  def initialize(klass, *ids)
     @instance = case klass
                 when /^PayZen::/
-                  PayZen::Item.new(klass, id)
+                  PayZen::Item.new(klass, *ids)
                 when /^Stripe::/
-                  Stripe::Item.new(klass, id)
+                  Stripe::Item.new(klass, *ids)
                 else
                   raise TypeError
                 end

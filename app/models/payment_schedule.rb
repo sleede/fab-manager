@@ -87,8 +87,8 @@ class PaymentSchedule < PaymentDocument
     return unless Setting.get('invoicing_module')
 
     unless Rails.env.test?
-      puts "Creating an PaymentScheduleWorker job to generate the following payment schedule: id(#{id}), scheduled_id(#{scheduled_id}), " \
-           "scheduled_type(#{scheduled_type}), user_id(#{invoicing_profile.user_id})"
+      puts "Creating an PaymentScheduleWorker job to generate the following payment schedule: id(#{id}), main_object.object_id(#{main_object.object_id}), " \
+           "main_object.object_type(#{main_object.object_type}), user_id(#{invoicing_profile.user_id})"
     end
     PaymentScheduleWorker.perform_async(id)
   end

@@ -32,8 +32,6 @@ export interface PaymentScheduleItem {
 export interface PaymentSchedule {
   max_length: number;
   id: number,
-  scheduled_type: string,
-  scheduled_id: number,
   total: number,
   stp_subscription_id: string,
   reference: string,

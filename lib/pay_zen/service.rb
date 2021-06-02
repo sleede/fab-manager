@@ -14,11 +14,12 @@ class PayZen::Service < Payment::Service
 
     order = PayZen::Order.new.get(order_id, operation_type: 'VERIFICATION')
     client = PayZen::Charge.new
+    token_id = order['answer']['transactions'].first['paymentMethodToken']
 
     params = {
       amount: first_item.details['recurring'].to_i,
-      effect_date: first_item.due_date.to_s,
-      payment_method_token: order['answer']['transactions'].first['paymentMethodToken'],
+      effect_date: first_item.due_date.iso8601,
+      payment_method_token: token_id,
       rrule: rrule(payment_schedule),
       order_id: order_id
     }
@@ -26,14 +27,30 @@ class PayZen::Service < Payment::Service
       params[:initial_amount] = first_item.amount
       params[:initial_amount_number] = 1
     end
-    client.create_subscription(params)
+    pz_subscription = client.create_subscription(params)
+
+    # save payment token
+    pgo_tok = PaymentGatewayObject.new(
+      gateway_object_id: token_id,
+      gateway_object_type: 'PayZen::Token',
+      item: payment_schedule
+    )
+    pgo_tok.save!
+
+    # save payzen subscription
+    pgo_sub = PaymentGatewayObject.new(
+      gateway_object_id: pz_subscription['answer']['subscriptionId'],
+      gateway_object_type: 'PayZen::Subscription',
+      item: payment_schedule,
+      payment_gateway_object_id: pgo_tok.id
+    )
+    pgo_sub.save!
   end
 
   private
 
   def rrule(payment_schedule)
     count = payment_schedule.payment_schedule_items.count
-    last = payment_schedule.ordered_items.last.due_date.strftime('%Y%m%d')
-    "RRULE:FREQ=MONTHLY;COUNT=#{count};UNTIL=#{last}"
+    "RRULE:FREQ=MONTHLY;COUNT=#{count}"
   end
 end
