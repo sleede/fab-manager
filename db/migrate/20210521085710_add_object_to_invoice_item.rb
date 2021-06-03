@@ -58,6 +58,12 @@ class AddObjectToInvoiceItem < ActiveRecord::Migration[5.2]
         WHERE id = #{subscription_item.id}
       )
     end
+
+    execute %(
+        UPDATE invoices
+        SET payment_method = 'card'
+        WHERE payment_method ='stripe'
+    )
     remove_column :invoice_items, :subscription_id
     remove_reference :invoices, :invoiced, polymorphic: true
 
@@ -95,6 +101,12 @@ class AddObjectToInvoiceItem < ActiveRecord::Migration[5.2]
         WHERE id = #{ii.id}
       )
     end
+
+    execute %(
+        UPDATE invoices
+        SET payment_method = 'stripe'
+        WHERE payment_method ='card'
+    )
     remove_column :invoice_items, :main
     remove_reference :invoice_items, :object, polymorphic: true
 
