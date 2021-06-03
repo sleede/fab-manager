@@ -472,7 +472,7 @@ pt:
         n_digits_annual_amount_of_orders: "(n) dígitos, contagem anual de pedidos (ex. aaaaaa => 000008: oitava ordem deste ano)"
         add_a_notice_regarding_the_online_sales_only_if_the_invoice_is_concerned: "Adicionar um aviso sobre as vendas on-line, somente se a fatura estiver envolvida."
         this_will_never_be_added_when_a_refund_notice_is_present: "Isso nunca será adicionado quando uma notificação de reembolso estiver presente."
-        eg_XVL_will_add_VL_to_the_invoices_settled_with_stripe: '(ex. X[/VL] irá adicionar "/VL" às faturas liquidadas com lista)'
+        eg_XVL_will_add_VL_to_the_invoices_settled_by_card: '(ex. X[/VL] irá adicionar "/VL" às faturas liquidadas com cartão de crédito)'
         add_a_notice_regarding_refunds_only_if_the_invoice_is_concerned: "Adicionar um aviso sobre reembolsos, apenas se a fatura estiver envolvida."
         this_will_never_be_added_when_an_online_sales_notice_is_present: "Isto nunca será adicionado quando uma notificação de vendas online estiver presente."
         eg_RA_will_add_A_to_the_refund_invoices: '(ed. R[/A] irá adicionar "/A" nas faturas reembolsadas)'

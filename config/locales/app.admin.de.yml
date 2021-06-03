@@ -472,7 +472,7 @@ de:
         n_digits_annual_amount_of_orders: "(n) Ziffern, jährliche Anzahl von Bestellungen (z.B. yyyyy => 00012 : 12. Bestellung des Jahres"
         add_a_notice_regarding_the_online_sales_only_if_the_invoice_is_concerned: "Fügen Sie nur dann eine Mitteilung zu den Online-Verkäufen hinzu, wenn die Rechnung betroffen ist."
         this_will_never_be_added_when_a_refund_notice_is_present: "Dies wird nie hinzugefügt, wenn eine Rückerstattung vorhanden ist."
-        eg_XVL_will_add_VL_to_the_invoices_settled_with_stripe: '(z.B. fügt W[/VL] jenen Rechnungen "/VL" hinzu, die mit Stripe bezahlt werden)'
+        eg_XVL_will_add_VL_to_the_invoices_settled_by_card: '(z.B. fügt W[/VL] jenen Rechnungen "/VL" hinzu, die mit karte bezahlt werden)'
         add_a_notice_regarding_refunds_only_if_the_invoice_is_concerned: "Fügen Sie nur dann eine Mitteilung zu Erstattungen hinzu, wenn die Rechnung betroffen ist."
         this_will_never_be_added_when_an_online_sales_notice_is_present: "Dies wird nie hinzugefügt, wenn eine Online-Verkaufsmitteilung vorhanden ist."
         eg_RA_will_add_A_to_the_refund_invoices: '(z.B. fügt R[/A] den Rückerstattungsrechnungen "/A" hinzu)'

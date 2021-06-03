@@ -84,6 +84,42 @@ class Stripe::Service < Payment::Service
     amount
   end
 
+  def process_payment_schedule_item(payment_schedule_item)
+    stripe_key = Setting.get('stripe_secret_key')
+    stp_subscription = payment_schedule_item.payment_schedule.gateway_subscription.retrieve
+    stp_invoice = Stripe::Invoice.retrieve(stp_subscription.latest_invoice, api_key: stripe_key)
+    if stp_invoice.status == 'paid'
+      ##### Successfully paid
+      PaymentScheduleService.new.generate_invoice(payment_schedule_item,
+                                                  payment_method: 'card',
+                                                  payment_id: stp_invoice.payment_intent,
+                                                  payment_type: 'Stripe::PaymentIntent')
+      payment_schedule_item.update_attributes(state: 'paid', payment_method: 'card')
+      pgo = PaymentGatewayObject.find_or_initialize_by(item: payment_schedule_item)
+      pgo.gateway_object = stp_invoice
+      pgo.save!
+    elsif stp_subscription.status == 'past_due' || stp_invoice.status == 'open'
+      ##### Payment error
+      if payment_schedule_item.state == 'new'
+        # notify only for new deadlines, to prevent spamming
+        NotificationCenter.call type: 'notify_admin_payment_schedule_failed',
+                                receiver: User.admins_and_managers,
+                                attached_object: payment_schedule_item
+        NotificationCenter.call type: 'notify_member_payment_schedule_failed',
+                                receiver: payment_schedule_item.payment_schedule.user,
+                                attached_object: payment_schedule_item
+      end
+      stp_payment_intent = Stripe::PaymentIntent.retrieve(stp_invoice.payment_intent, api_key: stripe_key)
+      payment_schedule_item.update_attributes(state: stp_payment_intent.status,
+                                              client_secret: stp_payment_intent.client_secret)
+      pgo = PaymentGatewayObject.find_or_initialize_by(item: payment_schedule_item)
+      pgo.gateway_object = stp_invoice
+      pgo.save!
+    else
+      payment_schedule_item.update_attributes(state: 'error')
+    end
+  end
+
   private
 
   def subscription_invoice_items(payment_schedule, subscription, first_item, reservable_stp_id)

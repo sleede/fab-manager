@@ -34,4 +34,20 @@ class PaymentGatewayService
   def create_or_update_product(klass, id)
     @gateway.create_or_update_product(klass, id)
   end
+
+  def process_payment_schedule_item(payment_schedule_item)
+    service = case payment_schedule_item.payment_schedule.gateway_subscription.klass
+              when /^PayZen::/
+                require 'pay_zen/service'
+                PayZen::Service
+              when /^Stripe::/
+                require 'stripe/service'
+                Stripe::Service
+              else
+                require 'payment/service'
+                Payment::Service
+              end
+    gateway = service.new
+    gateway.process_payment_schedule_item(payment_schedule_item)
+  end
 end

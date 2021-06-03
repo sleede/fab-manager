@@ -472,7 +472,7 @@ en:
         n_digits_annual_amount_of_orders: "(n) digits, annual count of orders (ex. yyyyyy => 000008 : 8th order of this year)"
         add_a_notice_regarding_the_online_sales_only_if_the_invoice_is_concerned: "Add a notice regarding the online sales, only if the invoice is concerned."
         this_will_never_be_added_when_a_refund_notice_is_present: "This will never be added when a refund notice is present."
-        eg_XVL_will_add_VL_to_the_invoices_settled_with_stripe: '(eg. X[/VL] will add "/VL" to the invoices settled with stripe)'
+        eg_XVL_will_add_VL_to_the_invoices_settled_by_card: '(eg. X[/VL] will add "/VL" to the invoices settled by online card)'
         add_a_notice_regarding_refunds_only_if_the_invoice_is_concerned: "Add a notice regarding refunds, only if the invoice is concerned."
         this_will_never_be_added_when_an_online_sales_notice_is_present: "This will never be added when an online sales notice is present."
         eg_RA_will_add_A_to_the_refund_invoices: '(eg. R[/A] will add "/A" to the refund invoices)'

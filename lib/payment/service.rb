@@ -13,4 +13,6 @@ class Payment::Service
   def delete_coupon(_coupon_id); end
 
   def create_or_update_product(_klass, _id); end
+
+  def process_payment_schedule_item(_payment_schedule_item); end
 end

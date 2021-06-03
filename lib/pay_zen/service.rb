@@ -3,6 +3,7 @@
 require 'payment/service'
 require 'pay_zen/charge'
 require 'pay_zen/order'
+require 'pay_zen/item'
 
 # PayZen payement gateway
 module PayZen; end
@@ -45,6 +46,37 @@ class PayZen::Service < Payment::Service
       payment_gateway_object_id: pgo_tok.id
     )
     pgo_sub.save!
+  end
+
+  def process_payment_schedule_item(payment_schedule_item)
+    pz_order = payment_schedule_item.payment_schedule.payment_gateway_objects.find { |pgo| pgo.gateway_object_type == 'PayZen::Order' }.gateway_object.retrieve
+    transaction = pz_order['answer']['transactions'].last
+    if transaction['status'] == 'PAID'
+      PaymentScheduleService.new.generate_invoice(payment_schedule_item,
+                                                  payment_method: 'card',
+                                                  payment_id: transaction['uuid'],
+                                                  payment_type: 'PayZen::Transaction')
+      payment_schedule_item.update_attributes(state: 'paid', payment_method: 'card')
+      pgo = PaymentGatewayObject.find_or_initialize_by(item: payment_schedule_item)
+      pgo.gateway_object = PayZen::Item.new('PayZen::Transaction', transaction['uuid'])
+      pgo.save!
+    elsif transaction['status'] == 'RUNNING'
+      if payment_schedule_item.state == 'new'
+        # notify only for new deadlines, to prevent spamming
+        NotificationCenter.call type: 'notify_admin_payment_schedule_failed',
+                                receiver: User.admins_and_managers,
+                                attached_object: payment_schedule_item
+        NotificationCenter.call type: 'notify_member_payment_schedule_failed',
+                                receiver: payment_schedule_item.payment_schedule.user,
+                                attached_object: payment_schedule_item
+      end
+      payment_schedule_item.update_attributes(state: transaction['detailedStatus'])
+      pgo = PaymentGatewayObject.find_or_initialize_by(item: payment_schedule_item)
+      pgo.gateway_object = PayZen::Item.new('PayZen::Transaction', transaction['uuid'])
+      pgo.save!
+    else
+      payment_schedule_item.update_attributes(state: 'error')
+    end
   end
 
   private

@@ -98,11 +98,11 @@ class Coupon < ApplicationRecord
   private
 
   def create_gateway_coupon
-    PaymentGatewayService.create_coupon(id)
+    PaymentGatewayService.new.create_coupon(id)
   end
 
   def delete_gateway_coupon
-    PaymentGatewayService.delete_coupon(id)
+    PaymentGatewayService.new.delete_coupon(id)
   end
 
 end

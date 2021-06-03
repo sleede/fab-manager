@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# create PaymentSchedules for various items
+# perform various operations on PaymentSchedules
 class PaymentScheduleService
   ##
   # Compute a payment schedule for a new subscription to the provided plan
@@ -184,7 +184,7 @@ class PaymentScheduleService
     subscription = payment_schedule_item.payment_schedule.payment_schedule_objects.find(&:subscription).subscription
     if payment_schedule_item.payment_schedule.main_object.object_type == Reservation.name
       details[:reservation] = payment_schedule_item.details['other_items']
-      reservation = payment_schedule_item.payment_schedule.main_object
+      reservation = payment_schedule_item.payment_schedule.main_object.reservation
     end
 
     # the wallet transaction
