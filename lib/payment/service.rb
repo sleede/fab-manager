@@ -15,4 +15,6 @@ class Payment::Service
   def create_or_update_product(_klass, _id); end
 
   def process_payment_schedule_item(_payment_schedule_item); end
+
+  def pay_payment_schedule_item(_payment_schedule_item); end
 end

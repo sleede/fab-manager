@@ -36,6 +36,18 @@ class PaymentGatewayService
   end
 
   def process_payment_schedule_item(payment_schedule_item)
+    gateway = service_for_payment_schedule(payment_schedule_item.payment_schedule)
+    gateway.process_payment_schedule_item(payment_schedule_item)
+  end
+
+  def pay_payment_schedule_item(payment_schedule_item)
+    gateway = service_for_payment_schedule(payment_schedule_item.payment_schedule)
+    gateway.pay_payment_schedule_item(payment_schedule_item)
+  end
+
+  private
+
+  def service_for_payment_schedule(payment_schedule)
     service = case payment_schedule_item.payment_schedule.gateway_subscription.klass
               when /^PayZen::/
                 require 'pay_zen/service'
@@ -47,7 +59,6 @@ class PaymentGatewayService
                 require 'payment/service'
                 Payment::Service
               end
-    gateway = service.new
-    gateway.process_payment_schedule_item(payment_schedule_item)
+    service.new
   end
 end

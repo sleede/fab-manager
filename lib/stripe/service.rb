@@ -120,6 +120,20 @@ class Stripe::Service < Payment::Service
     end
   end
 
+  def pay_payment_schedule_item(payment_schedule_item)
+    stripe_key = Setting.get('stripe_secret_key')
+    stp_invoice = Stripe::Invoice.pay(@payment_schedule_item.payment_gateway_object.gateway_object_id, {}, { api_key: stripe_key })
+    PaymentScheduleItemWorker.new.perform(@payment_schedule_item.id)
+
+    { status: stp_invoice.status }
+  rescue Stripe::StripeError => e
+    stripe_key = Setting.get('stripe_secret_key')
+    stp_invoice = Stripe::Invoice.retrieve(@payment_schedule_item.payment_gateway_object.gateway_object_id, api_key: stripe_key)
+    PaymentScheduleItemWorker.new.perform(@payment_schedule_item.id)
+
+    { status: stp_invoice.status, error: e }
+  end
+
   private
 
   def subscription_invoice_items(payment_schedule, subscription, first_item, reservable_stp_id)
