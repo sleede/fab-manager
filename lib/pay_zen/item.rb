@@ -16,8 +16,11 @@ class PayZen::Item < Payment::Item
   def retrieve(id = nil, *args)
     @id ||= id
     @args ||= args
+    params = [@id].concat(@args)
+    params.compact!
+
     client = klass.constantize.new
-    client.get(@id, *@args)
+    client.get(*params)
   end
 
   def payment_mean?

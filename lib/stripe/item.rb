@@ -9,7 +9,7 @@ module Stripe; end
 class Stripe::Item < Payment::Item
   attr_accessor :id
 
-  def retrieve(id = nil)
+  def retrieve(id = nil, *_args)
     @id ||= id
     klass.constantize.retrieve(@id, api_key: Setting.get('stripe_secret_key'))
   end

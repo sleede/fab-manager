@@ -16,10 +16,10 @@ class PaymentGatewayObject < ApplicationRecord
   belongs_to :space, foreign_type: 'Space', foreign_key: 'item_id'
   belongs_to :training, foreign_type: 'Training', foreign_key: 'item_id'
 
-  has_one :payment_gateway_object # some objects may require a reference to another object for remote recovery
+  belongs_to :payment_gateway_object # some objects may require a reference to another object for remote recovery
 
   def gateway_object
-    related_item = !payment_gateway_object_id.nil? ? payment_gateway_object&.gateway_object_id : nil
+    related_item = payment_gateway_object&.gateway_object_id
     Payment::ItemBuilder.build(gateway_object_type, gateway_object_id, related_item)
   end
 

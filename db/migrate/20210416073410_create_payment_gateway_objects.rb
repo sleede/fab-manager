@@ -7,7 +7,7 @@ class CreatePaymentGatewayObjects < ActiveRecord::Migration[5.2]
       t.string :gateway_object_id
       t.string :gateway_object_type
       t.references :item, polymorphic: true
-      t.number :payment_gateway_object_id
+      t.references :payment_gateway_object, index: true, foreign_key: true
     end
   end
 end
