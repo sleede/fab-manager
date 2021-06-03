@@ -32,6 +32,12 @@ class CreatePaymentScheduleObjects < ActiveRecord::Migration[5.2]
       )
     end
 
+    execute %(
+        UPDATE payment_schedules_items
+        SET payment_method = 'card'
+        WHERE payment_method = 'stripe'
+    )
+
     remove_column :payment_schedules, :scheduled_id
     remove_column :payment_schedules, :scheduled_type
     PaymentScheduleItem.update_all("details = details - 'subscription_id'")
@@ -61,6 +67,12 @@ class CreatePaymentScheduleObjects < ActiveRecord::Migration[5.2]
         psi.save(validate: false)
       end
     end
+
+    execute %(
+        UPDATE payment_schedules_items
+        SET payment_method = 'stripe'
+        WHERE payment_method = 'card'
+    )
 
     drop_table :payment_schedule_objects
 
