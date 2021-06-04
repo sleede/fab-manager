@@ -21,6 +21,7 @@
 - Fix a bug: in the admin calendar, the trainings' info panel shows "duration: null minutes"
 - Fix a bug: on the subscriptions page, not logged-in users do not see the action button
 - Fix a bug: unable to map a new setup to the db network
+- Fix a security issue: updated dns-packet to 1.3.4 to fix [CVE-2021-23386](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23386)
 - `SUPERADMIN_EMAIL` renamed to `ADMINSYS_EMAIL`
 - `scripts/run-tests.sh` renamed to `scripts/tests.sh`
 - [BREAKING CHANGE] GET `open_api/v1/invoices` won't return `stp_invoice_id` OR `stp_payment_intent_id` anymore. The new field `payment_gateway_object` will contain some similar data if the invoice was paid online by card.
