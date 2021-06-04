@@ -123,7 +123,7 @@ de:
     deadline_date: "Payment date"
     deadline_amount: "Amount including tax"
     total_amount: "Total amount"
-    settlement_by_METHOD: "Debits will be made by {METHOD, select, stripe{card} other{check}} for each deadlines."
+    settlement_by_METHOD: "Debits will be made by {METHOD, select, card{card} other{check}} for each deadlines."
     settlement_by_wallet: "%{AMOUNT} will be debited from your wallet to settle the first deadline."
   #CVS accounting export (columns headers)
   accounting_export:
@@ -213,7 +213,6 @@ de:
     start_date: "Startdatum"
     expiration_date: "Ablaufdatum"
     amount: "Betrag"
-    payment_method: "Zahlungsmethode"
     local_payment: "Zahlung an der Rezeption"
     online_payment: "Online-Zahlung"
     deleted_user: "Gelöschter Nutzer"
@@ -355,8 +354,8 @@ de:
         your_role_is_ROLE: "Ihre Rolle wurde in %{ROLE} geändert."
       notify_admins_role_update:
         user_NAME_changed_ROLE_html: "Benutzer <strong><em>%{NAME}</strong></em> ist jetzt %{ROLE}."
-      notify_admin_members_stripe_sync:
-        all_members_sync: "Alle Mitglieder wurden erfolgreich auf Stripe synchronisiert."
+      notify_admin_objects_stripe_sync:
+        all_objects_sync: "All data were successfully synchronized on Stripe."
       notify_user_when_payment_schedule_ready:
         your_schedule_is_ready_html: "Your payment schedule #%{REFERENCE}, of %{AMOUNT}, is ready. <a href='api/payment_schedules/%{SCHEDULE_ID}/download' target='_blank'>Click here to download</a>."
       notify_admin_payment_schedule_failed:
