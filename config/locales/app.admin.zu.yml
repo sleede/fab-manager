@@ -472,7 +472,7 @@ zu:
         n_digits_annual_amount_of_orders: "crwdns7437:0crwdne7437:0"
         add_a_notice_regarding_the_online_sales_only_if_the_invoice_is_concerned: "crwdns7439:0crwdne7439:0"
         this_will_never_be_added_when_a_refund_notice_is_present: "crwdns7441:0crwdne7441:0"
-        eg_XVL_will_add_VL_to_the_invoices_settled_by_card: 'crwdns7443:0[/VL]crwdne7443:0'
+        eg_XVL_will_add_VL_to_the_invoices_settled_by_card: 'crwdns21516:0[/VL]crwdne21516:0'
         add_a_notice_regarding_refunds_only_if_the_invoice_is_concerned: "crwdns7445:0crwdne7445:0"
         this_will_never_be_added_when_an_online_sales_notice_is_present: "crwdns7447:0crwdne7447:0"
         eg_RA_will_add_A_to_the_refund_invoices: 'crwdns21064:0[/A]crwdne21064:0'
@@ -642,15 +642,42 @@ zu:
           error_check_keys: "crwdns20596:0crwdne20596:0"
           stripe_keys_saved: "crwdns20598:0crwdne20598:0"
           error_saving_stripe_keys: "crwdns20600:0crwdne20600:0"
+          payzen_keys_info_html: "crwdns21518:0crwdne21518:0"
+          client_keys: "crwdns21520:0crwdne21520:0"
+          api_keys: "crwdns21522:0crwdne21522:0"
           edit_keys: "crwdns20602:0crwdne20602:0"
           currency: "crwdns20604:0crwdne20604:0"
           currency_info_html: "crwdns20606:0crwdne20606:0"
           currency_alert_html: "crwdns20608:0crwdne20608:0"
           stripe_currency: "crwdns20610:0crwdne20610:0"
+          gateway_configuration_error: "crwdns21524:0crwdne21524:0"
+          payzen:
+            payzen_keys: "crwdns21526:0crwdne21526:0"
+            payzen_username: "crwdns21528:0crwdne21528:0"
+            payzen_password: "crwdns21530:0crwdne21530:0"
+            payzen_endpoint: "crwdns21532:0crwdne21532:0"
+            payzen_hmac: "crwdns21534:0crwdne21534:0"
+            payzen_public_key: "crwdns21536:0crwdne21536:0"
+            currency: "crwdns21538:0crwdne21538:0"
+            payzen_currency: "crwdns21540:0crwdne21540:0"
+            currency_info_html: "crwdns21542:0crwdne21542:0"
+            save: "crwdns21544:0crwdne21544:0"
+            currency_error: "crwdns21546:0crwdne21546:0"
+            error_while_saving: "crwdns21548:0crwdne21548:0"
+            currency_updated: "crwdns21550:0{CURRENCY}crwdne21550:0"
+          #select a payment gateway
+          gateway_modal:
+            select_gateway_title: "crwdns21552:0crwdne21552:0"
+            gateway_info: "crwdns21554:0crwdne21554:0"
+            select_gateway: "crwdns21556:0crwdne21556:0"
+            stripe: "crwdns21558:0crwdne21558:0"
+            payzen: "crwdns21560:0crwdne21560:0"
+            confirm_button: "crwdns21562:0crwdne21562:0"
         payment_schedules:
           filter_schedules: "crwdns21072:0crwdne21072:0"
           no_payment_schedules: "crwdns21074:0crwdne21074:0"
           load_more: "crwdns21076:0crwdne21076:0"
+          card_updated_success: "crwdns21564:0crwdne21564:0"
         document_filters:
           reference: "crwdns21078:0crwdne21078:0"
           customer: "crwdns21080:0crwdne21080:0"

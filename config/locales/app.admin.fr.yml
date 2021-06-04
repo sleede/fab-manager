@@ -472,7 +472,7 @@ fr:
         n_digits_annual_amount_of_orders: "Nombre de commandes dans l'année, sur (n) chiffres (ex. yyyyyy => 000008 : 8ème commande cette année)"
         add_a_notice_regarding_the_online_sales_only_if_the_invoice_is_concerned: "Ajoute une information relative à la vente en ligne, uniquement si cela concerne la facture."
         this_will_never_be_added_when_a_refund_notice_is_present: "Ceci ne sera jamais cumulé avec une information de remboursement."
-        eg_XVL_will_add_VL_to_the_invoices_settled_by_card: '(ex. X[/VL] ajoutera "/VL" aux factures réglées en ligne par carte bancaire)'
+        eg_XVL_will_add_VL_to_the_invoices_settled_by_card: '(ex. X[/VL] ajoutera "/VL" aux factures réglées par carte bancaire en ligne)'
         add_a_notice_regarding_refunds_only_if_the_invoice_is_concerned: "Ajoute une information relative aux remboursements, uniquement si cela concerne la facture."
         this_will_never_be_added_when_an_online_sales_notice_is_present: "Ceci ne sera jamais cumulé avec une information de vente en ligne."
         eg_RA_will_add_A_to_the_refund_invoices: '(ex. R[/A] ajoutera "/A" aux factures de remboursement)'
@@ -665,7 +665,7 @@ fr:
             currency_error: "La valeur saisie n'est pas une devise valide"
             error_while_saving: "Une erreur est survenue lors de l'enregistrement de la devise : "
             currency_updated: "La devise PayZen a bien été mise à jour à {CURRENCY}."
-          # select a payment gateway
+          #select a payment gateway
           gateway_modal:
             select_gateway_title: "Sélectionnez une passerelle de paiement"
             gateway_info: "Pour collecter et traiter les paiements en ligne en toute sécurité, Fab-manager a besoin d'utiliser un service tiers autorisé par les institutions financières, appelé une passerelle de paiement."
@@ -677,6 +677,7 @@ fr:
           filter_schedules: "Filtrer les échéanciers"
           no_payment_schedules: "Pas d'échéancier à afficher"
           load_more: "Voir plus"
+          card_updated_success: "La carte bancaire de l'utilisateur a bien été mise à jour"
         document_filters:
           reference: "Référence"
           customer: "Client"

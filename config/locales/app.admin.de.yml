@@ -472,7 +472,7 @@ de:
         n_digits_annual_amount_of_orders: "(n) Ziffern, jährliche Anzahl von Bestellungen (z.B. yyyyy => 00012 : 12. Bestellung des Jahres"
         add_a_notice_regarding_the_online_sales_only_if_the_invoice_is_concerned: "Fügen Sie nur dann eine Mitteilung zu den Online-Verkäufen hinzu, wenn die Rechnung betroffen ist."
         this_will_never_be_added_when_a_refund_notice_is_present: "Dies wird nie hinzugefügt, wenn eine Rückerstattung vorhanden ist."
-        eg_XVL_will_add_VL_to_the_invoices_settled_by_card: '(z.B. fügt W[/VL] jenen Rechnungen "/VL" hinzu, die mit karte bezahlt werden)'
+        eg_XVL_will_add_VL_to_the_invoices_settled_by_card: '(z. B. fügt W[/VL] jenen Rechnungen "/VL" hinzu, die mit Online-Karte bezahlt werden)'
         add_a_notice_regarding_refunds_only_if_the_invoice_is_concerned: "Fügen Sie nur dann eine Mitteilung zu Erstattungen hinzu, wenn die Rechnung betroffen ist."
         this_will_never_be_added_when_an_online_sales_notice_is_present: "Dies wird nie hinzugefügt, wenn eine Online-Verkaufsmitteilung vorhanden ist."
         eg_RA_will_add_A_to_the_refund_invoices: '(z.B. fügt R[/A] den Rückerstattungsrechnungen "/A" hinzu)'
@@ -642,15 +642,42 @@ de:
           error_check_keys: "Fehler: Bitte überprüfen Sie Ihre Stripe-Schlüssel."
           stripe_keys_saved: "Stripe-Schlüssel erfolgreich gespeichert."
           error_saving_stripe_keys: "Die Stripe-Schlüssel konnten nicht gespeichert werden. Bitte versuchen Sie es später erneut."
+          payzen_keys_info_html: "<p>To be able to collect online payments, you must configure the <a href='https://payzen.eu' target='_blank'>PayZen</a> identifiers and keys.</p><p>Retrieve them from <a href='https://secure.payzen.eu/vads-merchant/' target='_blank'>your merchant back office</a>.</p>"
+          client_keys: "Client key"
+          api_keys: "API keys"
           edit_keys: "Schlüssel bearbeiten"
           currency: "Währung"
           currency_info_html: "Bitte geben Sie unten die Währung an, die für Online-Bezahlung verwendet wird. Sie sollten einen ISO-Code mit drei Buchstaben aus der Liste <a href='https://stripe.com/docs/currencies' target='_blank'>Stripe unterstützter Währungen eingeben</a>."
           currency_alert_html: "<strong>Warnung</strong>: Die Währung kann nicht mehr geändert werden, nachdem die erste Online-Zahlung eingegangen ist. Bitte nehmen Sie diese Einstellung sorgfältig vor, bevor Sie Fab-Manager für Mitglieder öffnen."
           stripe_currency: "Stripe-Währung"
+          gateway_configuration_error: "An error occurred while configuring the payment gateway."
+          payzen:
+            payzen_keys: "PayZen keys"
+            payzen_username: "Benutzername"
+            payzen_password: "Passwort"
+            payzen_endpoint: "REST API server name"
+            payzen_hmac: "HMAC-SHA-256 key"
+            payzen_public_key: "Client public key"
+            currency: "Währung"
+            payzen_currency: "PayZen Währung"
+            currency_info_html: "Bitte geben Sie unten die Währung an, die für Online-Bezahlung verwendet wird. Sie sollten einen ISO-Code mit drei Buchstaben aus der Liste <a href='https://payzen.io/de-DE/payment-file/ips/list-of-supported-currencies.html' target='_blank'>PayZen unterstützter Währungen eingeben</a>."
+            save: "Speichern"
+            currency_error: "The inputted value is not a valid currency"
+            error_while_saving: "An error occurred while saving the currency: "
+            currency_updated: "The PayZen currency was successfully updated to {CURRENCY}."
+          #select a payment gateway
+          gateway_modal:
+            select_gateway_title: "Select a payment gateway"
+            gateway_info: "To securely collect and process payments online, Fab-manager needs to use an third-party service authorized by the financial institutions, called a payment gateway."
+            select_gateway: "Please select an available gateway"
+            stripe: "Stripe"
+            payzen: "PayZen"
+            confirm_button: "Validate the gateway"
         payment_schedules:
           filter_schedules: "Pläne filtern"
           no_payment_schedules: "Keine Zahlungspläne zum Anzeigen"
           load_more: "Mehr laden"
+          card_updated_success: "The user's card was successfully updated"
         document_filters:
           reference: "Referenz"
           customer: "Kunde"

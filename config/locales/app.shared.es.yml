@@ -118,8 +118,8 @@ es:
       payment:
         online_payment: "Online payment"
         i_have_read_and_accept_: "He leido y acepto "
-        _the_general_terms_and_conditions: "Los términos y condiciones."
-        payment_schedule_html: "<p>You're about to subscribe to a payment schedule of {DEADLINES} months.</p><p>By paying this bill, you agree to send instructions to the financial institution that issue your card, to take payments from your card account, for the whole duration of this subscription. This imply that your card data are saved by Stripe and a series of payments will be initiated on your behalf, conforming to the payment schedule previously shown.</p>"
+        _the_general_terms_and_conditions: "los términos y condiciones."
+        payment_schedule_html: "<p>You're about to subscribe to a payment schedule of {DEADLINES} months.</p><p>By paying this bill, you agree to send instructions to the financial institution that issue your card, to take payments from your card account, for the whole duration of this subscription. This imply that your card data are saved by {GATEWAY} and a series of payments will be initiated on your behalf, conforming to the payment schedule previously shown.</p>"
         confirm_payment_of_: "Pay: {AMOUNT}"
       #dialog of on site payment for reservations
       valid_reservation_modal:
@@ -446,7 +446,7 @@ es:
         do_you_really_want_to_cancel_this_reservation_html: "<p>¿Está seguro de querer cancelar la reserva?</p><p>Advertencia: si esta reserva se realizó de forma gratuita, como parte de una suscripción, los créditos utilizados no serán reacreditados.</p>"
         reservation_was_cancelled_successfully: "La reserva se ha cancelado con éxito."
         cancellation_failed: "Cancelación fallida."
-        confirm_payment_of_html: "{METHOD, select, stripe{Pay by card} other{Pay on site}}: {AMOUNT}"
+        confirm_payment_of_html: "{METHOD, select, card{Pay by card} other{Pay on site}}: {AMOUNT}"
         a_problem_occurred_during_the_payment_process_please_try_again_later: "A problem occurred during the payment process. Please try again later."
         none: "Ninguno"
         online_payment_disabled: "El pago en línea no está disponible. Póngase en contacto directamente con la recepción de FabLab."
@@ -497,7 +497,7 @@ es:
         state_paid: "Paid"
         state_error: "Error"
         state_canceled: "Canceled"
-        method_stripe: "by card"
+        method_card: "by card"
         method_check: "by check"
         confirm_payment: "Confirm payment"
         solve: "Solve"
@@ -507,7 +507,17 @@ es:
         confirm_button: "Confirm"
         resolve_action: "Resolve the action"
         ok_button: "OK"
-        validate_button: "Validate the new card"
         cancel_subscription: "Cancel the subscription"
         confirm_cancel_subscription: "You're about to cancel this payment schedule and the related subscription. Are you sure?"
         please_ask_reception: "For any questions, please contact the FabLab's reception."
+      payment_modal:
+        online_payment_disabled: "Online payment is not available. Please contact the FabLab's reception directly."
+        unexpected_error: "An error occurred. Please report this issue to the Fab-Manager's team."
+      update_card_modal:
+        unexpected_error: "An error occurred. Please report this issue to the Fab-Manager's team."
+      stripe_card_update_modal:
+        update_card: "Update the card"
+        validate_button: "Validate the new card"
+      payzen_card_update_modal:
+        update_card: "Update the card"
+        validate_button: "Validate the new card"
