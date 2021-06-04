@@ -123,7 +123,7 @@ fr:
     deadline_date: "Date du prélèvement"
     deadline_amount: "Montant TTC"
     total_amount: "Montant total"
-    settlement_by_METHOD: "Les prélèvements seront effectués par {METHOD, select, stripe{carte bancaire} other{chèque}} à l'échéance."
+    settlement_by_METHOD: "Les prélèvements seront effectués par {METHOD, select, card{carte bancaire} other{chèque}} à l'échéance."
     settlement_by_wallet: "%{AMOUNT} seront prélevés de votre porte-monnaie pour régler la première échéance."
   #CVS accounting export (columns headers)
   accounting_export:
@@ -213,7 +213,6 @@ fr:
     start_date: "Date de début"
     expiration_date: "Date d'expiration"
     amount: "Montant"
-    payment_method: "Méthode de paiement"
     local_payment: "Paiement à l'accueil"
     online_payment: "Paiement en ligne"
     deleted_user: "Utilisateur supprimé"
@@ -355,8 +354,8 @@ fr:
         your_role_is_ROLE: "Votre rôle a été changé en %{ROLE}."
       notify_admins_role_update:
         user_NAME_changed_ROLE_html: "L'utilisateur <strong><em>%{NAME}</strong></em> est maintenant %{ROLE}."
-      notify_admin_members_stripe_sync:
-        all_members_sync: "Tous les membres ont été synchronisés avec succès sur Stripe."
+      notify_admin_objects_stripe_sync:
+        all_objects_sync: "Toutes les données ont été synchronisés avec succès sur Stripe."
       notify_user_when_payment_schedule_ready:
         your_schedule_is_ready_html: "Votre échéancier n°%{REFERENCE}, d'un montant de %{AMOUNT}, est prêt. <a href='api/payment_schedules/%{SCHEDULE_ID}/download' target='_blank'>Cliquez ici pour le télécharger</a>."
       notify_admin_payment_schedule_failed:
