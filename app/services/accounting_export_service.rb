@@ -63,15 +63,15 @@ class AccountingExportService
   # Generate the "subscription" and "reservation" rows associated with the provided invoice
   def items_rows(invoice)
     rows = invoice.subscription_invoice? ? "#{subscription_row(invoice)}\n" : ''
-    if invoice.invoiced_type == 'Reservation'
-      items = invoice.invoice_items.select { |ii| ii.subscription.nil? }
+    if invoice.main_item.object_type == 'Reservation'
+      items = invoice.invoice_items.reject { |ii| ii.object_type == 'Subscription' }
       items.each do |item|
         rows << "#{reservation_row(invoice, item)}\n"
       end
-    elsif invoice.invoiced_type == 'WalletTransaction'
+    elsif invoice.main_item.object_type == 'WalletTransaction'
       rows << "#{wallet_row(invoice)}\n"
-    elsif invoice.invoiced_type == 'Error'
-      items = invoice.invoice_items.select { |ii| ii.subscription.nil? }
+    elsif invoice.main_item.object_type == 'Error'
+      items = invoice.invoice_items.reject { |ii| ii.object_type == 'Subscription' }
       items.each do |item|
         rows << "#{error_row(invoice, item)}\n"
       end
@@ -110,7 +110,7 @@ class AccountingExportService
 
   # Generate the "subscription" row, which contains the credit to the subscription account, all taxes excluded
   def subscription_row(invoice)
-    subscription_item = invoice.invoice_items.select(&:subscription).first
+    subscription_item = invoice.invoice_items.select { |ii| ii.object_type == 'Subscription' }.first
     row(
       invoice,
       account(invoice, :subscription),
@@ -206,13 +206,13 @@ class AccountingExportService
         puts "WARN: Invoice #{invoice.id} has no subscription"
       end
     when :reservation
-      if invoice.invoiced_type == 'Reservation'
-        Setting.find_by(name: "accounting_#{invoice.invoiced.reservable_type}_#{type}")&.value
+      if invoice.main_item.object_type == 'Reservation'
+        Setting.find_by(name: "accounting_#{invoice.main_item.object.reservable_type}_#{type}")&.value
       else
         puts "WARN: Invoice #{invoice.id} has no reservation"
       end
     when :wallet
-      if invoice.invoiced_type == 'WalletTransaction'
+      if invoice.main_item.object_type == 'WalletTransaction'
         Setting.find_by(name: "accounting_wallet_#{type}")&.value
       else
         puts "WARN: Invoice #{invoice.id} is not a wallet credit"
@@ -257,8 +257,8 @@ class AccountingExportService
     reference = invoice.reference
 
     items = invoice.subscription_invoice? ? [I18n.t('accounting_export.subscription')] : []
-    items.push I18n.t("accounting_export.#{invoice.reservation.reservable_type}_reservation") if invoice.invoiced_type == 'Reservation'
-    items.push I18n.t('accounting_export.wallet') if invoice.invoiced_type == 'WalletTransaction'
+    items.push I18n.t("accounting_export.#{invoice.main_item.object.reservable_type}_reservation") if invoice.main_item.object_type == 'Reservation'
+    items.push I18n.t('accounting_export.wallet') if invoice.main_item.object_type == 'WalletTransaction'
 
     summary = items.join(' + ')
     res = "#{reference}, #{summary}"

@@ -548,7 +548,7 @@ Application.Controllers.controller('ShowEventReservationsController', ['$scope',
    * @returns {boolean}
    */
   $scope.isCancelled = function (reservation) {
-    return !!(reservation.slots[0].canceled_at);
+    return !!(reservation.slots_attributes[0].canceled_at);
   };
 }]);
 

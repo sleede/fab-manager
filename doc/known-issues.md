@@ -25,7 +25,7 @@ This document is listing common known issues.
   To solve this issue copy `env.example` to `.env`.
   This is required before the first start.
 
-- When running the tests suite with `scripts/run-tests.sh`, all tests may fail with errors similar to the following:
+- When running the tests suite with `scripts/tests.sh`, all tests may fail with errors similar to the following:
 
         Error:
         ...

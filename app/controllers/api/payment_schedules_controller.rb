@@ -37,7 +37,7 @@ class API::PaymentSchedulesController < API::ApiController
 
   def cash_check
     authorize @payment_schedule_item.payment_schedule
-    PaymentScheduleService.new.generate_invoice(@payment_schedule_item)
+    PaymentScheduleService.new.generate_invoice(@payment_schedule_item, payment_method: 'check')
     attrs = { state: 'paid', payment_method: 'check' }
     @payment_schedule_item.update_attributes(attrs)
 
@@ -54,17 +54,12 @@ class API::PaymentSchedulesController < API::ApiController
   def pay_item
     authorize @payment_schedule_item.payment_schedule
 
-    stripe_key = Setting.get('stripe_secret_key')
-    stp_invoice = Stripe::Invoice.pay(@payment_schedule_item.stp_invoice_id, {}, { api_key: stripe_key })
-    PaymentScheduleItemWorker.new.perform(@payment_schedule_item.id)
-
-    render json: { status: stp_invoice.status }, status: :ok
-  rescue Stripe::StripeError => e
-    stripe_key = Setting.get('stripe_secret_key')
-    stp_invoice = Stripe::Invoice.retrieve(@payment_schedule_item.stp_invoice_id, api_key: stripe_key)
-    PaymentScheduleItemWorker.new.perform(@payment_schedule_item.id)
-
-    render json: { status: stp_invoice.status, error: e }, status: :unprocessable_entity
+    res = PaymentGatewayService.new.pay_payment_schedule_item(@payment_schedule_item)
+    if res.error
+      render json: res, status: :unprocessable_entity
+    else
+      render json: res, status: :ok
+    end
   end
 
   def cancel

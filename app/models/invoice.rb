@@ -1,14 +1,10 @@
 # frozen_string_literal: true
 
-require 'checksum'
-
-# Invoice correspond to a single purchase made by an user. This purchase may
-# include reservation(s) and/or a subscription
+# Invoice correspond to a single purchase made by an user. This purchase is linked to one or many invoice_items
 class Invoice < PaymentDocument
   include NotifyWith::NotificationAttachedObject
   require 'fileutils'
   scope :only_invoice, -> { where(type: nil) }
-  belongs_to :invoiced, polymorphic: true
 
   has_many :invoice_items, dependent: :destroy
   accepts_nested_attributes_for :invoice_items
@@ -17,12 +13,9 @@ class Invoice < PaymentDocument
   belongs_to :wallet_transaction
   belongs_to :coupon
 
-  belongs_to :subscription, foreign_type: 'Subscription', foreign_key: 'invoiced_id'
-  belongs_to :reservation, foreign_type: 'Reservation', foreign_key: 'invoiced_id'
-  belongs_to :offer_day, foreign_type: 'OfferDay', foreign_key: 'invoiced_id'
-
   has_one :avoir, class_name: 'Invoice', foreign_key: :invoice_id, dependent: :destroy
   has_one :payment_schedule_item
+  has_one :payment_gateway_object, as: :item
   belongs_to :operator_profile, foreign_key: :operator_profile_id, class_name: 'InvoicingProfile'
 
   before_create :add_environment
@@ -60,7 +53,7 @@ class Invoice < PaymentDocument
 
   # for debug & used by rake task "fablab:maintenance:regenerate_invoices"
   def regenerate_invoice_pdf
-    pdf = ::PDF::Invoice.new(self, subscription&.expiration_date).render
+    pdf = ::PDF::Invoice.new(self, invoice_items.find(&:subscription)&.expiration_date).render
     File.binwrite(file, pdf)
   end
 
@@ -106,7 +99,7 @@ class Invoice < PaymentDocument
 
   def subscription_invoice?
     invoice_items.each do |ii|
-      return true if ii.subscription
+      return true if ii.object_type == 'Subscription'
     end
     false
   end
@@ -136,11 +129,15 @@ class Invoice < PaymentDocument
     return true if user.nil?
 
     # workaround for reservation saved after invoice
-    if invoiced_type == 'Reservation' && invoiced&.reservable_type == 'Training'
-      user.trainings.include?(invoiced.reservable_id)
+    if main_item.object_type == 'Reservation' && main_item.object&.reservable_type == 'Training'
+      user.trainings.include?(main_item.object.reservable_id)
     else
       false
     end
+  end
+
+  def main_item
+    invoice_items.where(main: true).first
   end
 
   # get amount total paid
@@ -152,7 +149,7 @@ class Invoice < PaymentDocument
   def payment_means
     res = []
     res.push(means: :wallet, amount: wallet_amount) if wallet_transaction && wallet_amount.positive?
-    if paid_with_stripe?
+    if paid_by_card?
       res.push(means: :card, amount: amount_paid)
     else
       res.push(means: :other, amount: amount_paid)
@@ -160,12 +157,16 @@ class Invoice < PaymentDocument
     res
   end
 
-  def check_footprint
-    invoice_items.map(&:check_footprint).all? && footprint == compute_footprint
+  def footprint_children
+    invoice_items
   end
 
-  def paid_with_stripe?
-    stp_payment_intent_id? || stp_invoice_id? || payment_method == 'stripe'
+  def paid_by_card?
+    !payment_gateway_object.nil? && payment_method == 'card'
+  end
+
+  def render_resource
+    { partial: 'api/invoices/invoice', locals: { invoice: self } }
   end
 
   private
@@ -174,8 +175,8 @@ class Invoice < PaymentDocument
     return unless Setting.get('invoicing_module')
 
     unless Rails.env.test?
-      puts "Creating an InvoiceWorker job to generate the following invoice: id(#{id}), invoiced_id(#{invoiced_id}), " \
-           "invoiced_type(#{invoiced_type}), user_id(#{invoicing_profile.user_id})"
+      puts "Creating an InvoiceWorker job to generate the following invoice: id(#{id}), main_item.object_id(#{main_item.object_id}), " \
+           "main_item.object_type(#{main_item.object_type}), user_id(#{invoicing_profile.user_id})"
     end
     InvoiceWorker.perform_async(id, user&.subscription&.expired_at)
   end
@@ -189,5 +190,4 @@ class Invoice < PaymentDocument
     puts changes
     puts '---------------------------------'
   end
-
 end

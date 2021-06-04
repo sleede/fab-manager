@@ -1,32 +1,29 @@
-/**
- * This component displays a summary of the amount paid with the virtual wallet, for the current transaction
- */
-
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
 import { IApplication } from '../models/application';
 import '../lib/i18n';
-import { Loader } from './loader';
+import { Loader } from './base/loader';
 import { User } from '../models/user';
 import { Wallet } from '../models/wallet';
 import { IFablab } from '../models/fablab';
 import WalletLib from '../lib/wallet';
-import { CartItems } from '../models/payment';
-import { Reservation } from '../models/reservation';
-import { SubscriptionRequest } from '../models/subscription';
+import { ShoppingCart } from '../models/payment';
 
 declare var Application: IApplication;
 declare var Fablab: IFablab;
 
 interface WalletInfoProps {
-  cartItems: CartItems,
+  cart: ShoppingCart,
   currentUser: User,
   wallet: Wallet,
   price: number,
 }
 
-export const WalletInfo: React.FC<WalletInfoProps> = ({ cartItems, currentUser, wallet, price }) => {
+/**
+ * This component displays a summary of the amount paid with the virtual wallet, for the current transaction
+ */
+export const WalletInfo: React.FC<WalletInfoProps> = ({ cart, currentUser, wallet, price }) => {
   const { t } = useTranslation('shared');
   const [remainingPrice, setRemainingPrice] = useState(0);
 
@@ -49,13 +46,7 @@ export const WalletInfo: React.FC<WalletInfoProps> = ({ cartItems, currentUser, 
    * If the currently connected user (i.e. the operator), is an admin or a manager, he may book the reservation for someone else.
    */
   const isOperatorAndClient = (): boolean => {
-    return currentUser.id == buyingItem().user_id;
-  }
-  /**
-   * Return the item currently bought (reservation or subscription)
-   */
-  const buyingItem = (): Reservation|SubscriptionRequest => {
-    return cartItems.reservation || cartItems.subscription;
+    return currentUser.id == cart.customer_id;
   }
   /**
    * If the client has some money in his wallet & the price is not zero, then we should display this component.
@@ -74,17 +65,17 @@ export const WalletInfo: React.FC<WalletInfoProps> = ({ cartItems, currentUser, 
    * Does the current cart contains a payment schedule?
    */
   const isPaymentSchedule = (): boolean => {
-    return buyingItem().plan_id && buyingItem().payment_schedule;
+    return cart.items.find(i => 'subscription' in i) && cart.payment_schedule;
   }
   /**
    * Return the human-readable name of the item currently bought with the wallet
    */
   const getPriceItem = (): string => {
     let item = 'other';
-    if (cartItems.reservation) {
+    if (cart.items.find(i => 'reservation' in i)) {
       item = 'reservation';
-    } else if (cartItems.subscription) {
-      if (cartItems.subscription.payment_schedule) {
+    } else if (cart.items.find(i => 'subscription' in i)) {
+      if (cart.payment_schedule) {
         item = 'first_deadline';
       } else item = 'subscription';
     }
@@ -128,12 +119,12 @@ export const WalletInfo: React.FC<WalletInfoProps> = ({ cartItems, currentUser, 
   );
 }
 
-const WalletInfoWrapper: React.FC<WalletInfoProps> = ({ currentUser, cartItems, price, wallet }) => {
+const WalletInfoWrapper: React.FC<WalletInfoProps> = ({ currentUser, cart, price, wallet }) => {
   return (
     <Loader>
-      <WalletInfo currentUser={currentUser} cartItems={cartItems} price={price} wallet={wallet}/>
+      <WalletInfo currentUser={currentUser} cart={cart} price={price} wallet={wallet}/>
     </Loader>
   );
 }
 
-Application.Components.component('walletInfo', react2angular(WalletInfoWrapper, ['currentUser', 'price', 'cartItems', 'wallet']));
+Application.Components.component('walletInfo', react2angular(WalletInfoWrapper, ['currentUser', 'price', 'cart', 'wallet']));

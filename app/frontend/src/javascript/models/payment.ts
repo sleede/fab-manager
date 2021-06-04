@@ -15,14 +15,19 @@ export interface IntentConfirmation {
 }
 
 export enum PaymentMethod {
-  Stripe = 'stripe',
+  Card = 'card',
   Other = ''
 }
 
-export interface CartItems {
-  reservation?: Reservation,
-  subscription?: SubscriptionRequest,
-  coupon_code?: string
+export type CartItem = { reservation: Reservation }|{ subscription: SubscriptionRequest }|{ card_update: { date: Date } };
+
+export interface ShoppingCart {
+  customer_id: number,
+  // WARNING: items ordering matters! The first item in the array will be considered as the main item
+  items: Array<CartItem>,
+  coupon_code?: string,
+  payment_schedule?: boolean,
+  payment_method: PaymentMethod
 }
 
 export interface UpdateCardResponse {

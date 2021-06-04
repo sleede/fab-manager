@@ -90,6 +90,20 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
     };
 
     /**
+     * Open the modal dialog allowing the user to log into the system
+     */
+    $scope.userLogin = function () {
+      console.log('userLogin');
+      setTimeout(() => {
+        console.log('going throught timeout');
+        if (!$scope.isAuthenticated()) {
+          console.log('! authenticated');
+          $scope.login();
+        }
+      }, 50);
+    };
+
+    /**
      * Check if the provided plan is currently selected
      * @param plan {Object} Resource plan
      */

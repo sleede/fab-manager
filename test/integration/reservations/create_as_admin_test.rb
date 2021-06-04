@@ -2,6 +2,8 @@
 
 require 'test_helper'
 
+module Reservations; end
+
 class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
   setup do
     @user_without_subscription = User.members.without_subscription.first
@@ -19,18 +21,24 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     invoice_items_count = InvoiceItem.count
     users_credit_count = UsersCredit.count
 
-    post reservations_path, params: { reservation: {
-      user_id: @user_without_subscription.id,
-      reservable_id: machine.id,
-      reservable_type: machine.class.name,
-      slots_attributes: [
+    post '/api/local_payment/confirm_payment', params: {
+      customer_id: @user_without_subscription.id,
+      items: [
         {
-          start_at: availability.start_at.to_s(:iso8601),
-          end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-          availability_id: availability.id
+          reservation: {
+            reservable_id: machine.id,
+            reservable_type: machine.class.name,
+            slots_attributes: [
+              {
+                start_at: availability.start_at.to_s(:iso8601),
+                end_at: (availability.start_at + 1.hour).to_s(:iso8601),
+                availability_id: availability.id
+              }
+            ]
+          }
         }
       ]
-    } }.to_json, headers: default_headers
+    }.to_json, headers: default_headers
 
     # general assertions
     assert_equal 201, response.status
@@ -46,13 +54,13 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     # reservation assertions
     reservation = Reservation.last
 
-    assert reservation.invoice
-    assert_equal 1, reservation.invoice.invoice_items.count
+    assert reservation.original_invoice
+    assert_equal 1, reservation.original_invoice.invoice_items.count
 
     # invoice assertions
-    invoice = reservation.invoice
+    invoice = reservation.original_invoice
 
-    assert invoice.stp_payment_intent_id.blank?
+    assert invoice.payment_gateway_object.blank?
     refute invoice.total.blank?
 
     # invoice_items assertions
@@ -61,8 +69,10 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     assert_equal machine.prices.find_by(group_id: @user_without_subscription.group_id, plan_id: nil).amount, invoice_item.amount
 
     # invoice assertions
-    invoice = Invoice.find_by(invoiced: reservation)
+    item = InvoiceItem.find_by(object: reservation)
+    invoice = item.invoice
     assert_invoice_pdf invoice
+    assert_not_nil invoice.debug_footprint
 
     # notification
     assert_not_empty Notification.where(attached_object: reservation)
@@ -76,18 +86,22 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     invoice_count = Invoice.count
     invoice_items_count = InvoiceItem.count
 
-    post reservations_path, params: { reservation: {
-      user_id: @user_without_subscription.id,
-      reservable_id: training.id,
-      reservable_type: training.class.name,
-      slots_attributes: [
-        {
-          start_at: availability.start_at.to_s(:iso8601),
-          end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-          availability_id: availability.id
+    post '/api/local_payment/confirm_payment', params: {
+      customer_id: @user_without_subscription.id,
+      items: [
+        reservation: {
+          reservable_id: training.id,
+          reservable_type: training.class.name,
+          slots_attributes: [
+            {
+              start_at: availability.start_at.to_s(:iso8601),
+              end_at: (availability.start_at + 1.hour).to_s(:iso8601),
+              availability_id: availability.id
+            }
+          ]
         }
       ]
-    } }.to_json, headers: default_headers
+    }.to_json, headers: default_headers
 
     # general assertions
     assert_equal 201, response.status
@@ -102,13 +116,13 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     # reservation assertions
     reservation = Reservation.last
 
-    assert reservation.invoice
-    assert_equal 1, reservation.invoice.invoice_items.count
+    assert reservation.original_invoice
+    assert_equal 1, reservation.original_invoice.invoice_items.count
 
     # invoice assertions
-    invoice = reservation.invoice
+    invoice = reservation.original_invoice
 
-    assert invoice.stp_payment_intent_id.blank?
+    assert invoice.payment_gateway_object.blank?
     refute invoice.total.blank?
     # invoice_items
     invoice_item = InvoiceItem.last
@@ -116,8 +130,10 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     assert_equal invoice_item.amount, training.amount_by_group(@user_without_subscription.group_id).amount
 
     # invoice assertions
-    invoice = Invoice.find_by(invoiced: reservation)
+    item = InvoiceItem.find_by(object: reservation)
+    invoice = item.invoice
     assert_invoice_pdf invoice
+    assert_not_nil invoice.debug_footprint
 
     # notification
     assert_not_empty Notification.where(attached_object: reservation)
@@ -133,23 +149,29 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     invoice_items_count = InvoiceItem.count
     users_credit_count = UsersCredit.count
 
-    post reservations_path, params: { reservation: {
-      user_id: @user_with_subscription.id,
-      reservable_id: machine.id,
-      reservable_type: machine.class.name,
-      slots_attributes: [
+    post '/api/local_payment/confirm_payment', params: {
+      customer_id: @user_with_subscription.id,
+      items: [
         {
-          start_at: availability.start_at.to_s(:iso8601),
-          end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-          availability_id: availability.id
-        },
-        {
-          start_at: (availability.start_at + 1.hour).to_s(:iso8601),
-          end_at: (availability.start_at + 2.hours).to_s(:iso8601),
-          availability_id: availability.id
+          reservation: {
+            reservable_id: machine.id,
+            reservable_type: machine.class.name,
+            slots_attributes: [
+              {
+                start_at: availability.start_at.to_s(:iso8601),
+                end_at: (availability.start_at + 1.hour).to_s(:iso8601),
+                availability_id: availability.id
+              },
+              {
+                start_at: (availability.start_at + 1.hour).to_s(:iso8601),
+                end_at: (availability.start_at + 2.hours).to_s(:iso8601),
+                availability_id: availability.id
+              }
+            ]
+          }
         }
       ]
-    } }.to_json, headers: default_headers
+    }.to_json, headers: default_headers
 
     # general assertions
     assert_equal 201, response.status
@@ -166,13 +188,13 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     # reservation assertions
     reservation = Reservation.last
 
-    assert reservation.invoice
-    assert_equal 2, reservation.invoice.invoice_items.count
+    assert reservation.original_invoice
+    assert_equal 2, reservation.original_invoice.invoice_items.count
 
     # invoice assertions
-    invoice = reservation.invoice
+    invoice = reservation.original_invoice
 
-    assert invoice.stp_payment_intent_id.blank?
+    assert invoice.payment_gateway_object.blank?
     refute invoice.total.blank?
 
     # invoice_items assertions
@@ -189,8 +211,10 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     assert_equal [reservation.slots.count, plan.machine_credits.find_by(creditable_id: machine.id).hours].min, users_credit.hours_used
 
     # invoice assertions
-    invoice = Invoice.find_by(invoiced: reservation)
+    item = InvoiceItem.find_by(object: reservation)
+    invoice = item.invoice
     assert_invoice_pdf invoice
+    assert_not_nil invoice.debug_footprint
 
     # notification
     assert_not_empty Notification.where(attached_object: reservation)
@@ -206,18 +230,24 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     invoice_items_count = InvoiceItem.count
     users_credit_count = UsersCredit.count
 
-    post reservations_path, params: { reservation: {
-      user_id: @vlonchamp.id,
-      reservable_id: machine.id,
-      reservable_type: machine.class.name,
-      slots_attributes: [
+    post '/api/local_payment/confirm_payment', params: {
+      customer_id: @vlonchamp.id,
+      items: [
         {
-          start_at: availability.start_at.to_s(:iso8601),
-          end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-          availability_id: availability.id
+          reservation: {
+            reservable_id: machine.id,
+            reservable_type: machine.class.name,
+            slots_attributes: [
+              {
+                start_at: availability.start_at.to_s(:iso8601),
+                end_at: (availability.start_at + 1.hour).to_s(:iso8601),
+                availability_id: availability.id
+              }
+            ]
+          }
         }
       ]
-    } }.to_json, headers: default_headers
+    }.to_json, headers: default_headers
 
     # general assertions
     assert_equal 201, response.status
@@ -233,13 +263,13 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     # reservation assertions
     reservation = Reservation.last
 
-    assert reservation.invoice
-    assert_equal 1, reservation.invoice.invoice_items.count
+    assert reservation.original_invoice
+    assert_equal 1, reservation.original_invoice.invoice_items.count
 
     # invoice assertions
-    invoice = reservation.invoice
+    invoice = reservation.original_invoice
 
-    assert invoice.stp_payment_intent_id.blank?
+    assert invoice.payment_gateway_object.blank?
     refute invoice.total.blank?
 
     # invoice_items assertions
@@ -248,8 +278,10 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     assert_equal machine.prices.find_by(group_id: @vlonchamp.group_id, plan_id: nil).amount, invoice_item.amount
 
     # invoice assertions
-    invoice = Invoice.find_by(invoiced: reservation)
+    item = InvoiceItem.find_by(object: reservation)
+    invoice = item.invoice
     assert_invoice_pdf invoice
+    assert_not_nil invoice.debug_footprint
 
     # notification
     assert_not_empty Notification.where(attached_object: reservation)
@@ -276,19 +308,29 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     users_credit_count = UsersCredit.count
     wallet_transactions_count = WalletTransaction.count
 
-    post reservations_path, params: { reservation: {
-      user_id: @vlonchamp.id,
-      reservable_id: machine.id,
-      reservable_type: machine.class.name,
-      plan_id: plan.id,
-      slots_attributes: [
+    post '/api/local_payment/confirm_payment', params: {
+      customer_id: @vlonchamp.id,
+      items: [
         {
-          start_at: availability.start_at.to_s(:iso8601),
-          end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-          availability_id: availability.id
+          reservation: {
+            reservable_id: machine.id,
+            reservable_type: machine.class.name,
+            slots_attributes: [
+              {
+                start_at: availability.start_at.to_s(:iso8601),
+                end_at: (availability.start_at + 1.hour).to_s(:iso8601),
+                availability_id: availability.id
+              }
+            ]
+          }
+        },
+        {
+          subscription: {
+            plan_id: plan.id
+          }
         }
       ]
-    } }.to_json, headers: default_headers
+    }.to_json, headers: default_headers
 
     # general assertions
     assert_equal 201, response.status
@@ -306,19 +348,21 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     # reservation assertions
     reservation = Reservation.last
 
-    assert reservation.invoice
-    assert_equal 2, reservation.invoice.invoice_items.count
+    assert reservation.original_invoice
+    assert_equal 2, reservation.original_invoice.invoice_items.count
 
     # invoice assertions
-    invoice = reservation.invoice
+    invoice = reservation.original_invoice
 
-    assert invoice.stp_payment_intent_id.blank?
+    assert invoice.payment_gateway_object.blank?
     refute invoice.total.blank?
     assert_equal invoice.total, 2000
 
     # invoice assertions
-    invoice = Invoice.find_by(invoiced: reservation)
+    item = InvoiceItem.find_by(object: reservation)
+    invoice = item.invoice
     assert_invoice_pdf invoice
+    assert_not_nil invoice.debug_footprint
 
     # notification
     assert_not_empty Notification.where(attached_object: reservation)
@@ -343,18 +387,24 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     invoice_items_count = InvoiceItem.count
     users_credit_count = UsersCredit.count
 
-    post reservations_path, params: { reservation: {
-      user_id: @vlonchamp.id,
-      reservable_id: machine.id,
-      reservable_type: machine.class.name,
-      slots_attributes: [
+    post '/api/local_payment/confirm_payment', params: {
+      customer_id: @vlonchamp.id,
+      items: [
         {
-          start_at: availability.start_at.to_s(:iso8601),
-          end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-          availability_id: availability.id
+          reservation: {
+            reservable_id: machine.id,
+            reservable_type: machine.class.name,
+            slots_attributes: [
+              {
+                start_at: availability.start_at.to_s(:iso8601),
+                end_at: (availability.start_at + 1.hour).to_s(:iso8601),
+                availability_id: availability.id
+              }
+            ]
+          }
         }
       ]
-    } }.to_json, headers: default_headers
+    }.to_json, headers: default_headers
 
     # general assertions
     assert_equal 201, response.status
@@ -370,7 +420,7 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     # reservation assertions
     reservation = Reservation.last
 
-    assert_not_nil reservation.invoice
+    assert_not_nil reservation.original_invoice
 
     # notification
     assert_not_empty Notification.where(attached_object: reservation)
@@ -386,20 +436,30 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     invoice_items_count = InvoiceItem.count
     users_credit_count = UsersCredit.count
 
-    post reservations_path, params: { reservation: {
-      user_id: @user_without_subscription.id,
-      plan_id: plan.id,
-      reservable_id: training.id,
-      reservable_type: training.class.name,
-      slots_attributes: [
+    post '/api/local_payment/confirm_payment', params: {
+      customer_id: @user_without_subscription.id,
+      items: [
         {
-          start_at: availability.start_at.to_s(:iso8601),
-          end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-          offered: false,
-          availability_id: availability.id
+          reservation: {
+            reservable_id: training.id,
+            reservable_type: training.class.name,
+            slots_attributes: [
+              {
+                start_at: availability.start_at.to_s(:iso8601),
+                end_at: (availability.start_at + 1.hour).to_s(:iso8601),
+                offered: false,
+                availability_id: availability.id
+              }
+            ]
+          }
+        },
+        {
+          subscription: {
+            plan_id: plan.id
+          }
         }
       ]
-    } }.to_json, headers: default_headers
+    }.to_json, headers: default_headers
 
     # general assertions
     assert_equal 201, response.status
@@ -418,10 +478,11 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     assert_equal plan.id, @user_without_subscription.subscribed_plan.id
 
     # reservation assertions
-    reservation = Reservation.find(result[:id])
+    invoice = Invoice.find(result[:id])
+    reservation = invoice.main_item.object
 
-    assert reservation.invoice
-    assert_equal 2, reservation.invoice.invoice_items.count
+    assert reservation.original_invoice
+    assert_equal 2, reservation.original_invoice.invoice_items.count
 
     # credits assertions
     assert_equal 1, @user_without_subscription.credits.count
@@ -429,21 +490,23 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     assert_equal training.id, @user_without_subscription.credits.last.creditable_id
 
     # invoice assertions
-    invoice = reservation.invoice
+    invoice = reservation.original_invoice
 
-    assert invoice.stp_payment_intent_id.blank?
+    assert invoice.payment_gateway_object.blank?
     refute invoice.total.blank?
     assert_equal plan.amount, invoice.total
 
     # invoice_items
     invoice_items = InvoiceItem.last(2)
 
-    assert(invoice_items.any? { |ii| ii.amount == plan.amount && !ii.subscription_id.nil? })
+    assert(invoice_items.any? { |ii| ii.amount == plan.amount && !ii.subscription.nil? })
     assert(invoice_items.any? { |ii| ii.amount.zero? })
 
     # invoice assertions
-    invoice = Invoice.find_by(invoiced: reservation)
+    item = InvoiceItem.find_by(object: reservation)
+    invoice = item.invoice
     assert_invoice_pdf invoice
+    assert_not_nil invoice.debug_footprint
 
     # notification
     assert_not_empty Notification.where(attached_object: reservation)
@@ -463,21 +526,31 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     plan = Plan.find_by(group_id: @user_without_subscription.group.id, type: 'Plan', base_name: 'Abonnement mensualisable')
 
     VCR.use_cassette('reservations_admin_training_subscription_with_payment_schedule') do
-      post reservations_path, params: { reservation: {
-        user_id: @user_without_subscription.id,
+      post '/api/local_payment/confirm_payment', params: {
         payment_method: 'check',
-        reservable_id: training.id,
-        reservable_type: training.class.name,
-        slots_attributes: [
+        payment_schedule: true,
+        customer_id: @user_without_subscription.id,
+        items: [
           {
-            start_at: availability.start_at.to_s(:iso8601),
-            end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-            availability_id: availability.id
+            reservation: {
+              reservable_id: training.id,
+              reservable_type: training.class.name,
+              slots_attributes: [
+                {
+                  start_at: availability.start_at.to_s(:iso8601),
+                  end_at: (availability.start_at + 1.hour).to_s(:iso8601),
+                  availability_id: availability.id
+                }
+              ]
+            }
+          },
+          {
+            subscription: {
+              plan_id: plan.id
+            }
           }
-        ],
-        plan_id: plan.id,
-        payment_schedule: true
-      } }.to_json, headers: default_headers
+        ]
+      }.to_json, headers: default_headers
     end
 
     # get the objects
@@ -501,20 +574,12 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     assert_not_nil @user_without_subscription.subscription, "user's subscription was not found"
     assert_equal plan.id, @user_without_subscription.subscribed_plan.id, "user's plan does not match"
 
-    # Check the answer
-    reservation_res = json_response(response.body)
-    assert_equal plan.id, reservation_res[:user][:subscribed_plan][:id], 'subscribed plan does not match'
-
-    # reservation assertions
-    assert_equal reservation_res[:id], reservation.id
-    assert reservation.payment_schedule
-    assert_equal payment_schedule.scheduled, reservation
-
     # payment schedule assertions
+    assert reservation.original_payment_schedule
+    assert_equal payment_schedule.id, reservation.original_payment_schedule.id
     assert_not_nil payment_schedule.reference
     assert_equal 'check', payment_schedule.payment_method
-    assert_nil payment_schedule.stp_subscription_id
-    assert_nil payment_schedule.stp_setup_intent_id
+    assert_empty payment_schedule.payment_gateway_objects
     assert_nil payment_schedule.wallet_transaction
     assert_nil payment_schedule.wallet_amount
     assert_nil payment_schedule.coupon_id
@@ -522,5 +587,13 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     assert payment_schedule.check_footprint
     assert_equal @user_without_subscription.invoicing_profile.id, payment_schedule.invoicing_profile_id
     assert_equal @admin.invoicing_profile.id, payment_schedule.operator_profile_id
+
+    # Check the answer
+    result = json_response(response.body)
+    assert_equal reservation.original_payment_schedule.id, result[:id], 'payment schedule id does not match'
+
+    # reservation assertions
+    assert_equal result[:main_object][:id], reservation.id
+    assert_equal payment_schedule.main_object.object, reservation
   end
 end

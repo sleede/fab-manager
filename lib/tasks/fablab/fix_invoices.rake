@@ -98,8 +98,9 @@ namespace :fablab do
       description = ii.description
       # DateTime.parse only works with english dates, so translate the month name
       month_idx = I18n.t('date.month_names').find_index { |month| month && description.include?(month) }
-      description.gsub!(/#{I18n.t('date.month_names')[month_idx]}/, I18n.t('date.month_names', locale: :en)[month_idx])
-
+      unless month_idx.nil?
+        description.gsub!(/#{I18n.t('date.month_names')[month_idx]}/, I18n.t('date.month_names', locale: :en)[month_idx])
+      end
       start = DateTime.parse(description)
       end_time = DateTime.parse(/- (.+)$/.match(description)[1])
       [start, DateTime.new(start.year, start.month, start.day, end_time.hour, end_time.min, end_time.sec, DateTime.current.zone)]

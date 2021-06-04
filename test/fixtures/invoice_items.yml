@@ -2,74 +2,73 @@
 invoice_item_1:
   id: 1
   invoice_id: 1
-  stp_invoice_item_id: sub_8DGB4ErIc2asOv
   amount: 10000
-  created_at: 2012-03-12 11:03:31.651441000 Z
-  updated_at: 2012-03-12 11:03:31.651441000 Z
+  created_at: '2012-03-12 11:03:31.651441'
+  updated_at: '2021-05-27 09:26:26.450083'
   description: Sleede - standard, association - month
-  subscription_id: 1
   invoice_item_id:
-  footprint: 931e8b6f5579f2e7eda625bdf5962da89892957abb25480603ae985e6e108059
-
+  footprint: d2b756f158d6332c32b7b262118f5bdcfd68221ab089c355e6776c1298d937b8
+  object_type: Subscription
+  object_id: 1
+  main: true
 invoice_item_2:
   id: 2
   invoice_id: 2
-  stp_invoice_item_id:
   amount: 2000
-  created_at: 2012-03-12 13:40:22.342717000 Z
-  updated_at: 2012-03-12 13:40:22.342717000 Z
+  created_at: '2012-03-12 13:40:22.342717'
+  updated_at: '2021-05-27 09:26:26.461737'
   description: Mensuel tarif réduit - étudiant, - de 25 ans, enseignant, demandeur
     d'emploi - month
-  subscription_id: 2
   invoice_item_id:
-  footprint: abbf95b8d506ed6207343edbf8ee63893cd02508de6d25347999d7dbc755c6fb
-
+  footprint: f02559738cb3674e74021ac1894e512e1864eb9fc177e885283a214fa5e0dd74
+  object_type: Subscription
+  object_id: 2
+  main: true
 invoice_item_3:
   id: 3
   invoice_id: 3
-  stp_invoice_item_id:
   amount: 3000
-  created_at: 2015-06-10 11:20:01.341130000 Z
-  updated_at: 2015-06-10 11:20:01.341130000 Z
+  created_at: '2015-06-10 11:20:01.341130'
+  updated_at: '2021-05-27 09:26:26.465302'
   description: Mensuel - standard, association - month
-  subscription_id: 3
   invoice_item_id:
-  footprint: caf3b7e54e0191d8f262e01acc4e66f29f9d27abe52e595fb3b71724a32cfe90
-
+  footprint: e6141fbc1db017356f855ebc784cb2e084fbf82ed56a0dc295c8a39dcc2a0f92
+  object_type: Subscription
+  object_id: 3
+  main: true
 invoice_item_4:
   id: 4
   invoice_id: 4
-  stp_invoice_item_id:
   amount: 0
-  created_at: 2016-04-05 08:35:52.934725000 Z
-  updated_at: 2016-04-05 08:35:52.934725000 Z
+  created_at: '2016-04-05 08:35:52.934725'
+  updated_at: '2021-05-27 09:26:26.468890'
   description: Formation Laser / Vinyle April 11, 2012 08:00 - 12:00 PM
-  subscription_id:
   invoice_item_id:
-  footprint: 71d095aa4d49ebac39f7efdc5c9de2354ea8efeec7c35a6708143fb66dd66b0b
-
+  footprint: b66ade050a2ef9ebb18067ac1af2828fec2077037100d7068481e00097af4bc0
+  object_type: Reservation
+  object_id: 1
+  main: true
 invoice_item_5:
   id: 5
   invoice_id: 5
-  stp_invoice_item_id:
   amount: 1500
-  created_at: 2016-04-05 08:36:46.856021000 Z
-  updated_at: 2016-04-05 08:36:46.856021000 Z
+  created_at: '2016-04-05 08:36:46.856021'
+  updated_at: '2021-05-27 09:26:26.472232'
   description: Imprimante 3D June 15, 2015 12:00 - 01:00 PM
-  subscription_id:
   invoice_item_id:
-  footprint: d4d856ee04f27b5e35f43056b46f139df73ffdfaad1716636f569164c52c5e5b
-
+  footprint: a0f096de802df8d5708d4dcc23d7384ab95f246fb80e59564b2c3363db103b02
+  object_type: Reservation
+  object_id: 2
+  main: true
 invoice_item_6:
   id: 6
   invoice_id: 6
-  stp_invoice_item_id:
   amount: 3000
-  created_at: 2016-04-05 08:36:46.856021000 Z
-  updated_at: 2016-04-05 08:36:46.856021000 Z
+  created_at: '2016-04-05 08:36:46.856021'
+  updated_at: '2021-05-27 09:26:26.475460'
   description: Mensuel - standard, association - month
-  subscription_id: 3
   invoice_item_id:
-  footprint: 79e42a65be85a40978c19c493af436ea893d15b7e054e9991bb4d3bb3d80913d
-
-
+  footprint: 88e73e7d2f29fe8f029a646a54e5e8884ddf9cd9b207544e9f3d18c70d181749
+  object_type: Subscription
+  object_id: 4
+  main: true

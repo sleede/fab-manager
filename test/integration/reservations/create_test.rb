@@ -2,6 +2,8 @@
 
 require 'test_helper'
 
+module Reservations; end
+
 class Reservations::CreateTest < ActionDispatch::IntegrationTest
   setup do
     @user_without_subscription = User.members.without_subscription.first
@@ -21,21 +23,25 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     subscriptions_count = Subscription.count
 
     VCR.use_cassette('reservations_create_for_machine_without_subscription_success') do
-      post '/api/payments/confirm_payment',
+      post '/api/stripe/confirm_payment',
            params: {
              payment_method_id: stripe_payment_method,
              cart_items: {
-               reservation: {
-                 reservable_id: machine.id,
-                 reservable_type: machine.class.name,
-                 slots_attributes: [
-                   {
-                     start_at: availability.start_at.to_s(:iso8601),
-                     end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-                     availability_id: availability.id
+               items: [
+                 {
+                   reservation: {
+                     reservable_id: machine.id,
+                     reservable_type: machine.class.name,
+                     slots_attributes: [
+                       {
+                         start_at: availability.start_at.to_s(:iso8601),
+                         end_at: (availability.start_at + 1.hour).to_s(:iso8601),
+                         availability_id: availability.id
+                       }
+                     ]
                    }
-                 ]
-               }
+                 }
+               ]
              }
            }.to_json, headers: default_headers
     end
@@ -55,15 +61,8 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     # reservation assertions
     reservation = Reservation.last
 
-    assert reservation.invoice
-    assert_equal 1, reservation.invoice.invoice_items.count
-
-    # invoice assertions
-    invoice = reservation.invoice
-
-    refute invoice.stp_payment_intent_id.blank?
-    refute invoice.total.blank?
-    assert invoice.check_footprint
+    assert reservation.original_invoice
+    assert_equal 1, reservation.original_invoice.invoice_items.count
 
     # invoice_items assertions
     invoice_item = InvoiceItem.last
@@ -72,8 +71,14 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     assert invoice_item.check_footprint
 
     # invoice assertions
-    invoice = Invoice.find_by(invoiced: reservation)
+    item = InvoiceItem.find_by(object: reservation)
+    invoice = item.invoice
     assert_invoice_pdf invoice
+    assert_not_nil invoice.debug_footprint
+
+    refute invoice.payment_gateway_object.blank?
+    refute invoice.total.blank?
+    assert invoice.check_footprint
 
     # notification
     assert_not_empty Notification.where(attached_object: reservation)
@@ -91,21 +96,25 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     notifications_count = Notification.count
 
     VCR.use_cassette('reservations_create_for_machine_without_subscription_error') do
-      post '/api/payments/confirm_payment',
+      post '/api/stripe/confirm_payment',
            params: {
              payment_method_id: stripe_payment_method(error: :card_declined),
              cart_items: {
-               reservation: {
-                 reservable_id: machine.id,
-                 reservable_type: machine.class.name,
-                 slots_attributes: [
-                   {
-                     start_at: availability.start_at.to_s(:iso8601),
-                     end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-                     availability_id: availability.id
+               items: [
+                 {
+                   reservation: {
+                     reservable_id: machine.id,
+                     reservable_type: machine.class.name,
+                     slots_attributes: [
+                       {
+                         start_at: availability.start_at.to_s(:iso8601),
+                         end_at: (availability.start_at + 1.hour).to_s(:iso8601),
+                         availability_id: availability.id
+                       }
+                     ]
                    }
-                 ]
-               }
+                 }
+               ]
              }
            }.to_json, headers: default_headers
     end
@@ -139,21 +148,25 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     invoice_items_count = InvoiceItem.count
 
     VCR.use_cassette('reservations_create_for_training_without_subscription_success') do
-      post '/api/payments/confirm_payment',
+      post '/api/stripe/confirm_payment',
            params: {
              payment_method_id: stripe_payment_method,
              cart_items: {
-               reservation: {
-                 reservable_id: training.id,
-                 reservable_type: training.class.name,
-                 slots_attributes: [
-                   {
-                     start_at: availability.start_at.to_s(:iso8601),
-                     end_at: availability.end_at.to_s(:iso8601),
-                     availability_id: availability.id
+               items: [
+                 {
+                   reservation: {
+                     reservable_id: training.id,
+                     reservable_type: training.class.name,
+                     slots_attributes: [
+                       {
+                         start_at: availability.start_at.to_s(:iso8601),
+                         end_at: availability.end_at.to_s(:iso8601),
+                         availability_id: availability.id
+                       }
+                     ]
                    }
-                 ]
-               }
+                 }
+               ]
              }
            }.to_json, headers: default_headers
     end
@@ -171,15 +184,8 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     # reservation assertions
     reservation = Reservation.last
 
-    assert reservation.invoice
-    assert_equal 1, reservation.invoice.invoice_items.count
-
-    # invoice assertions
-    invoice = reservation.invoice
-
-    refute invoice.stp_payment_intent_id.blank?
-    refute invoice.total.blank?
-    assert invoice.check_footprint
+    assert reservation.original_invoice
+    assert_equal 1, reservation.original_invoice.invoice_items.count
 
     # invoice_items
     invoice_item = InvoiceItem.last
@@ -188,8 +194,14 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     assert invoice_item.check_footprint
 
     # invoice assertions
-    invoice = Invoice.find_by(invoiced: reservation)
+    item = InvoiceItem.find_by(object: reservation)
+    invoice = item.invoice
     assert_invoice_pdf invoice
+    assert_not_nil invoice.debug_footprint
+
+    refute invoice.payment_gateway_object.blank?
+    refute invoice.total.blank?
+    assert invoice.check_footprint
 
     # notification
     assert_not_empty Notification.where(attached_object: reservation)
@@ -208,26 +220,30 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     users_credit_count = UsersCredit.count
 
     VCR.use_cassette('reservations_create_for_machine_with_subscription_success') do
-      post '/api/payments/confirm_payment',
+      post '/api/stripe/confirm_payment',
            params: {
              payment_method_id: stripe_payment_method,
              cart_items: {
-               reservation: {
-                 reservable_id: machine.id,
-                 reservable_type: machine.class.name,
-                 slots_attributes: [
-                   {
-                     start_at: availability.start_at.to_s(:iso8601),
-                     end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-                     availability_id: availability.id
-                   },
-                   {
-                     start_at: (availability.start_at + 1.hour).to_s(:iso8601),
-                     end_at: (availability.start_at + 2.hours).to_s(:iso8601),
-                     availability_id: availability.id
+               items: [
+                 {
+                   reservation: {
+                     reservable_id: machine.id,
+                     reservable_type: machine.class.name,
+                     slots_attributes: [
+                       {
+                         start_at: availability.start_at.to_s(:iso8601),
+                         end_at: (availability.start_at + 1.hour).to_s(:iso8601),
+                         availability_id: availability.id
+                       },
+                       {
+                         start_at: (availability.start_at + 1.hour).to_s(:iso8601),
+                         end_at: (availability.start_at + 2.hours).to_s(:iso8601),
+                         availability_id: availability.id
+                       }
+                     ]
                    }
-                 ]
-               }
+                 }
+               ]
              }
            }.to_json, headers: default_headers
     end
@@ -247,15 +263,8 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     # reservation assertions
     reservation = Reservation.last
 
-    assert reservation.invoice
-    assert_equal 2, reservation.invoice.invoice_items.count
-
-    # invoice assertions
-    invoice = reservation.invoice
-
-    refute invoice.stp_payment_intent_id.blank?
-    refute invoice.total.blank?
-    assert invoice.check_footprint
+    assert reservation.original_invoice
+    assert_equal 2, reservation.original_invoice.invoice_items.count
 
     # invoice_items assertions
     invoice_items = InvoiceItem.last(2)
@@ -272,8 +281,14 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     assert_equal [reservation.slots.count, plan.machine_credits.find_by(creditable_id: machine.id).hours].min, users_credit.hours_used
 
     # invoice assertions
-    invoice = Invoice.find_by(invoiced: reservation)
+    item = InvoiceItem.find_by(object: reservation)
+    invoice = item.invoice
     assert_invoice_pdf invoice
+    assert_not_nil invoice.debug_footprint
+
+    refute invoice.payment_gateway_object.blank?
+    refute invoice.total.blank?
+    assert invoice.check_footprint
 
     # notification
     assert_not_empty Notification.where(attached_object: reservation)
@@ -292,19 +307,23 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     invoice_items_count = InvoiceItem.count
 
     VCR.use_cassette('reservations_create_for_training_with_subscription_success') do
-      post '/api/reservations',
+      post '/api/local_payment/confirm_payment',
            params: {
-             reservation: {
-               reservable_id: training.id,
-               reservable_type: training.class.name,
-               slots_attributes: [
-                 {
-                   start_at: availability.start_at.to_s(:iso8601),
-                   end_at: availability.end_at.to_s(:iso8601),
-                   availability_id: availability.id
+             items: [
+               {
+                 reservation: {
+                   reservable_id: training.id,
+                   reservable_type: training.class.name,
+                   slots_attributes: [
+                     {
+                       start_at: availability.start_at.to_s(:iso8601),
+                       end_at: availability.end_at.to_s(:iso8601),
+                       availability_id: availability.id
+                     }
+                   ]
                  }
-               ]
-             }
+               }
+             ]
            }.to_json, headers: default_headers
     end
 
@@ -322,15 +341,8 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     # reservation assertions
     reservation = Reservation.last
 
-    assert reservation.invoice
-    assert_equal 1, reservation.invoice.invoice_items.count
-
-    # invoice assertions
-    invoice = reservation.invoice
-
-    assert invoice.stp_payment_intent_id.blank?
-    refute invoice.total.blank?
-    assert invoice.check_footprint
+    assert reservation.original_invoice
+    assert_equal 1, reservation.original_invoice.invoice_items.count
 
     # invoice_items
     invoice_item = InvoiceItem.last
@@ -339,8 +351,14 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     assert invoice_item.check_footprint
 
     # invoice assertions
-    invoice = Invoice.find_by(invoiced: reservation)
+    item = InvoiceItem.find_by(object: reservation)
+    invoice = item.invoice
     assert_invoice_pdf invoice
+    assert_not_nil invoice.debug_footprint
+
+    assert invoice.payment_gateway_object.blank?
+    refute invoice.total.blank?
+    assert invoice.check_footprint
 
     # notification
     assert_not_empty Notification.where(attached_object: reservation)
@@ -363,23 +381,26 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     wallet_transactions_count = WalletTransaction.count
 
     VCR.use_cassette('reservations_create_for_machine_and_pay_wallet_success') do
-      post '/api/payments/confirm_payment',
+      post '/api/stripe/confirm_payment',
            params: {
              payment_method_id: stripe_payment_method,
              cart_items: {
-               reservation: {
-                 user_id: @vlonchamp.id,
-                 reservable_id: machine.id,
-                 reservable_type: machine.class.name,
-                 card_token: stripe_payment_method,
-                 slots_attributes: [
-                   {
-                     start_at: availability.start_at.to_s(:iso8601),
-                     end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-                     availability_id: availability.id
+               customer_id: @vlonchamp.id,
+               items: [
+                 {
+                   reservation: {
+                     reservable_id: machine.id,
+                     reservable_type: machine.class.name,
+                     slots_attributes: [
+                       {
+                         start_at: availability.start_at.to_s(:iso8601),
+                         end_at: (availability.start_at + 1.hour).to_s(:iso8601),
+                         availability_id: availability.id
+                       }
+                     ]
                    }
-                 ]
-               }
+                 }
+               ]
              }
            }.to_json, headers: default_headers
     end
@@ -401,15 +422,8 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     # reservation assertions
     reservation = Reservation.last
 
-    assert reservation.invoice
-    assert_equal 1, reservation.invoice.invoice_items.count
-
-    # invoice assertions
-    invoice = reservation.invoice
-
-    refute invoice.stp_payment_intent_id.blank?
-    refute invoice.total.blank?
-    assert invoice.check_footprint
+    assert reservation.original_invoice
+    assert_equal 1, reservation.original_invoice.invoice_items.count
 
     # invoice_items assertions
     invoice_item = InvoiceItem.last
@@ -418,8 +432,14 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     assert invoice_item.check_footprint
 
     # invoice assertions
-    invoice = Invoice.find_by(invoiced: reservation)
+    item = InvoiceItem.find_by(object: reservation)
+    invoice = item.invoice
     assert_invoice_pdf invoice
+    assert_not_nil invoice.debug_footprint
+
+    refute invoice.payment_gateway_object.blank?
+    refute invoice.total.blank?
+    assert invoice.check_footprint
 
     # notification
     assert_not_empty Notification.where(attached_object: reservation)
@@ -447,22 +467,30 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     wallet_transactions_count = WalletTransaction.count
 
     VCR.use_cassette('reservations_create_for_training_and_plan_by_pay_wallet_success') do
-      post '/api/payments/confirm_payment',
+      post '/api/stripe/confirm_payment',
            params: {
              payment_method_id: stripe_payment_method,
              cart_items: {
-               reservation: {
-                 reservable_id: training.id,
-                 reservable_type: training.class.name,
-                 plan_id: plan.id,
-                 slots_attributes: [
-                   {
-                     start_at: availability.start_at.to_s(:iso8601),
-                     end_at: availability.end_at.to_s(:iso8601),
-                     availability_id: availability.id
+               items: [
+                 {
+                   reservation: {
+                     reservable_id: training.id,
+                     reservable_type: training.class.name,
+                     slots_attributes: [
+                       {
+                         start_at: availability.start_at.to_s(:iso8601),
+                         end_at: availability.end_at.to_s(:iso8601),
+                         availability_id: availability.id
+                       }
+                     ]
                    }
-                 ]
-               }
+                 },
+                 {
+                   subscription: {
+                     plan_id: plan.id
+                   }
+                 }
+               ]
              }
            }.to_json, headers: default_headers
     end
@@ -484,20 +512,19 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     # reservation assertions
     reservation = Reservation.last
 
-    assert reservation.invoice
-    assert_equal 2, reservation.invoice.invoice_items.count
+    assert reservation.original_invoice
+    assert_equal 2, reservation.original_invoice.invoice_items.count
 
     # invoice assertions
-    invoice = reservation.invoice
+    item = InvoiceItem.find_by(object: reservation)
+    invoice = item.invoice
+    assert_invoice_pdf invoice
+    assert_not_nil invoice.debug_footprint
 
-    refute invoice.stp_payment_intent_id.blank?
+    refute invoice.payment_gateway_object.blank?
     refute invoice.total.blank?
     assert_equal invoice.total, 2000
     assert invoice.check_footprint
-
-    # invoice assertions
-    invoice = Invoice.find_by(invoiced: reservation)
-    assert_invoice_pdf invoice
 
     # notification
     assert_not_empty Notification.where(attached_object: reservation)
@@ -525,22 +552,30 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     users_credit_count = UsersCredit.count
 
     VCR.use_cassette('reservations_machine_and_plan_using_coupon_success') do
-      post '/api/payments/confirm_payment',
+      post '/api/stripe/confirm_payment',
            params: {
              payment_method_id: stripe_payment_method,
              cart_items: {
-               reservation: {
-                 reservable_id: machine.id,
-                 reservable_type: machine.class.name,
-                 slots_attributes: [
-                   {
-                     start_at: availability.start_at.to_s(:iso8601),
-                     end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-                     availability_id: availability.id
+               items: [
+                 {
+                   reservation: {
+                     reservable_id: machine.id,
+                     reservable_type: machine.class.name,
+                     slots_attributes: [
+                       {
+                         start_at: availability.start_at.to_s(:iso8601),
+                         end_at: (availability.start_at + 1.hour).to_s(:iso8601),
+                         availability_id: availability.id
+                       }
+                     ]
                    }
-                 ],
-                 plan_id: plan.id
-               },
+                 },
+                 {
+                   subscription: {
+                     plan_id: plan.id
+                   }
+                 }
+               ],
                coupon_code: 'SUNNYFABLAB'
              }
            }.to_json, headers: default_headers
@@ -562,40 +597,39 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     # reservation assertions
     reservation = Reservation.last
 
-    assert reservation.invoice
-    assert_equal 2, reservation.invoice.invoice_items.count
+    assert reservation.original_invoice
+    assert_equal 2, reservation.original_invoice.invoice_items.count
 
     # invoice assertions
-    invoice = reservation.invoice
+    item = InvoiceItem.find_by(object: reservation)
+    invoice = item.invoice
+    assert_invoice_pdf invoice
+    assert_not_nil invoice.debug_footprint
 
-    refute invoice.stp_payment_intent_id.blank?
+    refute invoice.payment_gateway_object.blank?
     refute invoice.total.blank?
     assert invoice.check_footprint
 
     # invoice_items assertions
     ## reservation
-    reservation_item = invoice.invoice_items.where(subscription_id: nil).first
+    reservation_item = invoice.invoice_items.find_by(object: reservation)
 
     assert_not_nil reservation_item
     assert_equal reservation_item.amount, machine.prices.find_by(group_id: @user_without_subscription.group_id, plan_id: plan.id).amount
     assert reservation_item.check_footprint
     ## subscription
-    subscription_item = invoice.invoice_items.where.not(subscription_id: nil).first
+    subscription_item = invoice.invoice_items.find_by(object_type: Subscription.name)
 
     assert_not_nil subscription_item
 
-    subscription = Subscription.find(subscription_item.subscription_id)
+    subscription = subscription_item.subscription
 
     assert_equal subscription_item.amount, plan.amount
     assert_equal subscription.plan_id, plan.id
     assert subscription_item.check_footprint
 
-    # invoice assertions
-    invoice = Invoice.find_by(invoiced: reservation)
-    assert_invoice_pdf invoice
-
     VCR.use_cassette('reservations_machine_and_plan_using_coupon_retrieve_invoice_from_stripe') do
-      stp_intent = Stripe::PaymentIntent.retrieve(invoice.stp_payment_intent_id, api_key: Setting.get('stripe_secret_key'))
+      stp_intent = invoice.payment_gateway_object.gateway_object.retrieve
       assert_equal stp_intent.amount, invoice.total
     end
 
@@ -616,23 +650,27 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     notifications_count = Notification.count
 
     VCR.use_cassette('reservations_training_with_expired_coupon_error') do
-      post '/api/payments/confirm_payment',
+      post '/api/stripe/confirm_payment',
            params: {
              payment_method_id: stripe_payment_method,
              cart_items: {
-               reservation: {
-                 user_id: @user_without_subscription.id,
-                 reservable_id: training.id,
-                 reservable_type: training.class.name,
-                 card_token: stripe_payment_method,
-                 slots_attributes: [
-                   {
-                     start_at: availability.start_at.to_s(:iso8601),
-                     end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-                     availability_id: availability.id
+               customer_id: @user_without_subscription.id,
+               items: [
+                 {
+                   reservation: {
+                     reservable_id: training.id,
+                     reservable_type: training.class.name,
+                     card_token: stripe_payment_method,
+                     slots_attributes: [
+                       {
+                         start_at: availability.start_at.to_s(:iso8601),
+                         end_at: (availability.start_at + 1.hour).to_s(:iso8601),
+                         availability_id: availability.id
+                       }
+                     ]
                    }
-                 ]
-               },
+                 }
+               ],
                coupon_code: 'XMAS10'
              }
            }.to_json, headers: default_headers
@@ -667,7 +705,7 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     plan = Plan.find_by(group_id: @user_without_subscription.group.id, type: 'Plan', base_name: 'Abonnement mensualisable')
 
     VCR.use_cassette('reservations_training_subscription_with_payment_schedule') do
-      get "/api/payments/setup_intent/#{@user_without_subscription.id}"
+      get "/api/stripe/setup_intent/#{@user_without_subscription.id}"
 
       # Check response format & status
       assert_equal 200, response.status, response.body
@@ -692,23 +730,31 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
       assert_equal 'off_session', stripe_res.usage
 
 
-      post '/api/payments/confirm_payment_schedule',
+      post '/api/stripe/confirm_payment_schedule',
            params: {
              setup_intent_id: setup_intent[:id],
              cart_items: {
-               reservation: {
-                 reservable_id: training.id,
-                 reservable_type: training.class.name,
-                 slots_attributes: [
-                   {
-                     start_at: availability.start_at.to_s(:iso8601),
-                     end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-                     availability_id: availability.id
+               payment_schedule: true,
+               items: [
+                 {
+                   reservation: {
+                     reservable_id: training.id,
+                     reservable_type: training.class.name,
+                     slots_attributes: [
+                       {
+                         start_at: availability.start_at.to_s(:iso8601),
+                         end_at: (availability.start_at + 1.hour).to_s(:iso8601),
+                         availability_id: availability.id
+                       }
+                     ]
                    }
-                 ],
-                 plan_id: plan.id,
-                 payment_schedule: true
-               }
+                 },
+                 {
+                   subscription: {
+                     plan_id: plan.id
+                   }
+                 }
+               ]
              }
            }.to_json, headers: default_headers
     end
@@ -735,12 +781,14 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     assert_equal plan.id, @user_without_subscription.subscribed_plan.id, "user's plan does not match"
 
     # reservation assertions
-    assert reservation.payment_schedule
-    assert_equal payment_schedule.scheduled, reservation
+    assert reservation.original_payment_schedule
+    assert_equal payment_schedule.main_object.object, reservation
 
     # Check the answer
-    reservation = json_response(response.body)
-    assert_equal plan.id, reservation[:user][:subscribed_plan][:id], 'subscribed plan does not match'
+    result = json_response(response.body)
+    assert_equal payment_schedule.id, result[:id], 'payment schedule id does not match'
+    subscription = payment_schedule.payment_schedule_objects.find(&:subscription).object
+    assert_equal plan.id, subscription.plan_id, 'subscribed plan does not match'
   end
 
   test 'user reserves a machine and renew a subscription with payment schedule and coupon and wallet' do
@@ -761,7 +809,7 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     plan = Plan.find_by(group_id: user.group.id, type: 'Plan', base_name: 'Abonnement mensualisable')
 
     VCR.use_cassette('reservations_machine_subscription_with_payment_schedule_coupon_wallet') do
-      get "/api/payments/setup_intent/#{user.id}"
+      get "/api/stripe/setup_intent/#{user.id}"
 
       # Check response format & status
       assert_equal 200, response.status, response.body
@@ -786,24 +834,33 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
       assert_equal 'off_session', stripe_res.usage
 
 
-      post '/api/payments/confirm_payment_schedule',
+      post '/api/stripe/confirm_payment_schedule',
            params: {
              setup_intent_id: setup_intent[:id],
              cart_items: {
                coupon_code: 'GIME3EUR',
-               reservation: {
-                 plan_id: plan.id,
-                 payment_schedule: true,
-                 reservable_id: machine.id,
-                 reservable_type: machine.class.name,
-                 slots_attributes: [
-                   {
-                     start_at: availability.start_at.to_s(:iso8601),
-                     end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-                     availability_id: availability.id
+               payment_schedule: true,
+               payment_method: 'card',
+               items: [
+                 {
+                   reservation: {
+                     reservable_id: machine.id,
+                     reservable_type: machine.class.name,
+                     slots_attributes: [
+                       {
+                         start_at: availability.start_at.to_s(:iso8601),
+                         end_at: (availability.start_at + 1.hour).to_s(:iso8601),
+                         availability_id: availability.id
+                       }
+                     ]
                    }
-                 ]
-               }
+                 },
+                 {
+                   subscription: {
+                     plan_id: plan.id
+                   }
+                 }
+               ]
              }
            }.to_json, headers: default_headers
     end
@@ -833,14 +890,14 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     assert_equal plan.id, user.subscribed_plan.id, "user's plan does not match"
 
     # reservation assertions
-    assert reservation.payment_schedule
-    assert_equal payment_schedule.scheduled, reservation
+    assert reservation.original_payment_schedule
+    assert_equal payment_schedule.main_object.object, reservation
 
     # payment schedule assertions
     assert_not_nil payment_schedule.reference
-    assert_equal 'stripe', payment_schedule.payment_method
-    assert_not_nil payment_schedule.stp_subscription_id
-    assert_not_nil payment_schedule.stp_setup_intent_id
+    assert_equal 'card', payment_schedule.payment_method
+    assert_equal 2, payment_schedule.payment_gateway_objects.count
+    assert_not_nil payment_schedule.gateway_payment_mean
     assert_not_nil payment_schedule.wallet_transaction
     assert_equal payment_schedule.ordered_items.first.amount, payment_schedule.wallet_amount
     assert_equal Coupon.find_by(code: 'GIME3EUR').id, payment_schedule.coupon_id
@@ -850,7 +907,9 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     assert_equal payment_schedule.invoicing_profile_id, payment_schedule.operator_profile_id
 
     # Check the answer
-    reservation = json_response(response.body)
-    assert_equal plan.id, reservation[:user][:subscribed_plan][:id], 'subscribed plan does not match'
+    result = json_response(response.body)
+    assert_equal payment_schedule.id, result[:id], 'payment schedule id does not match'
+    subscription = payment_schedule.payment_schedule_objects.find(&:subscription).object
+    assert_equal plan.id, subscription.plan_id, 'subscribed plan does not match'
   end
 end

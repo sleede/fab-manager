@@ -37,10 +37,10 @@ namespace :fablab do
       end
     end
 
-    desc 'sync users to the stripe database'
-    task sync_members: :environment do
-      puts 'We create all non-existing customers on stripe. This may take a while, please wait...'
-      SyncMembersOnStripeWorker.new.perform
+    desc 'sync all objects to the stripe API'
+    task sync_objects: :environment do
+      puts 'We create all non-existing objects on stripe. This may take a while, please wait...'
+      SyncObjectsOnStripeWorker.new.perform
       puts 'Done'
     end
     desc 'sync coupons to the stripe database'
@@ -49,7 +49,7 @@ namespace :fablab do
       Coupon.all.each do |c|
         Stripe::Coupon.retrieve(c.code, api_key: Setting.get('stripe_secret_key'))
       rescue Stripe::InvalidRequestError
-        StripeService.create_stripe_coupon(c.id)
+        Stripe::Service.create_coupon(c.id)
       end
       puts 'Done'
     end
@@ -68,6 +68,32 @@ namespace :fablab do
       end
       Space.all.each do |s|
         w.perform(:create_or_update_stp_product, Space.name, s.id)
+      end
+    end
+
+    desc 'set stripe as the default payment gateway'
+    task set_gateway: :environment do
+      if Setting.find_by(name: 'stripe_public_key').try(:value) && Setting.find_by(name: 'stripe_secret_key').try(:value)
+        Setting.set('payment_gateway', 'stripe') unless Setting.find_by(name: 'payment_gateway').try(:value)
+      end
+    end
+
+    # in test, we may reach a point when the maximum number of payment methods attachable to a customer is reached.
+    # Use this task to reset them all and be able to run the test suite again.
+    desc 'remove cards payment methods from all customers'
+    task reset_cards: :environment do
+      unless Rails.env.test?
+        print "You're about to detach all payment cards from all customers. This was only made for test mode. Are you sure? (y/n) "
+        confirm = STDIN.gets.chomp
+        next unless confirm == 'y'
+      end
+      User.all.each do |user|
+        stp_customer = user.payment_gateway_object.gateway_object.retrieve
+        cards = Stripe::PaymentMethod.list({ customer: stp_customer, type: 'card' }, { api_key: Setting.get('stripe_secret_key') })
+        cards.each do |card|
+          pm = Stripe::PaymentMethod.retrieve(card.id, api_key: Setting.get('stripe_secret_key'))
+          pm.detach
+        end
       end
     end
 

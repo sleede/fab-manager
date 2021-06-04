@@ -17,34 +17,10 @@ class PaymentScheduleItemWorker
   end
 
   def check_item(psi)
-    # the following depends on the payment method (stripe/check)
-    if psi.payment_schedule.payment_method == 'stripe'
-      ### Stripe
-      stripe_key = Setting.get('stripe_secret_key')
-      stp_subscription = Stripe::Subscription.retrieve(psi.payment_schedule.stp_subscription_id, api_key: stripe_key)
-      stp_invoice = Stripe::Invoice.retrieve(stp_subscription.latest_invoice, api_key: stripe_key)
-      if stp_invoice.status == 'paid'
-        ##### Stripe / Successfully paid
-        PaymentScheduleService.new.generate_invoice(psi, stp_invoice)
-        psi.update_attributes(state: 'paid', payment_method: 'stripe', stp_invoice_id: stp_invoice.id)
-      elsif stp_subscription.status == 'past_due' || stp_invoice.status == 'open'
-        ##### Stripe / Payment error
-        if psi.state == 'new'
-          # notify only for new deadlines, to prevent spamming
-          NotificationCenter.call type: 'notify_admin_payment_schedule_failed',
-                                  receiver: User.admins_and_managers,
-                                  attached_object: psi
-          NotificationCenter.call type: 'notify_member_payment_schedule_failed',
-                                  receiver: psi.payment_schedule.user,
-                                  attached_object: psi
-        end
-        stp_payment_intent = Stripe::PaymentIntent.retrieve(stp_invoice.payment_intent, api_key: stripe_key)
-        psi.update_attributes(state: stp_payment_intent.status,
-                              stp_invoice_id: stp_invoice.id,
-                              client_secret: stp_payment_intent.client_secret)
-      else
-        psi.update_attributes(state: 'error')
-      end
+    # the following depends on the payment method (card/check)
+    if psi.payment_schedule.payment_method == 'card'
+      ### Cards
+      PaymentGatewayService.new.process_payment_schedule_item(psi)
     elsif psi.state == 'new'
       ### Check (only new deadlines, to prevent spamming)
       NotificationCenter.call type: 'notify_admin_payment_schedule_check_deadline',

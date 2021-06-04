@@ -87,8 +87,6 @@ end
 json.invoices @member.invoices.order('reference DESC') do |i|
   json.id i.id
   json.reference i.reference
-  json.type i.invoiced_type
-  json.invoiced_id i.invoiced_id
   json.total i.total / 100.00
   json.is_avoir i.is_a?(Avoir)
   json.date i.is_a?(Avoir) ? i.avoir_date : i.created_at

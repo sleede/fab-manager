@@ -407,8 +407,8 @@ Application.Controllers.controller('ShowMachineController', ['$scope', '$state',
  * This controller workflow is pretty similar to the trainings reservation controller.
  */
 
-Application.Controllers.controller('ReserveMachineController', ['$scope', '$stateParams', '_t', 'moment', 'Auth', '$timeout', 'Member', 'Availability', 'plansPromise', 'groupsPromise', 'machinePromise', 'settingsPromise', 'uiCalendarConfig', 'CalendarConfig',
-  function ($scope, $stateParams, _t, moment, Auth, $timeout, Member, Availability, plansPromise, groupsPromise, machinePromise, settingsPromise, uiCalendarConfig, CalendarConfig) {
+Application.Controllers.controller('ReserveMachineController', ['$scope', '$stateParams', '_t', 'moment', 'Auth', '$timeout', 'Member', 'Availability', 'plansPromise', 'groupsPromise', 'machinePromise', 'settingsPromise', 'uiCalendarConfig', 'CalendarConfig', 'Reservation',
+  function ($scope, $stateParams, _t, moment, Auth, $timeout, Member, Availability, plansPromise, groupsPromise, machinePromise, settingsPromise, uiCalendarConfig, CalendarConfig, Reservation) {
   /* PRIVATE STATIC CONSTANTS */
 
     // Slot free to be booked
@@ -643,36 +643,38 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
     /**
      * Once the reservation is booked (payment process successfully completed), change the event style
      * in fullCalendar, update the user's subscription and free-credits if needed
-     * @param reservation {Object}
+     * @param paymentDocument {Invoice|PaymentSchedule}
      */
-    $scope.afterPayment = function (reservation) {
-      angular.forEach($scope.events.reserved, function (machineSlot, key) {
-        machineSlot.is_reserved = true;
-        machineSlot.can_modify = true;
-        if ($scope.currentUser.role === 'admin' || ($scope.currentUser.role === 'manager' && reservation.user_id !== $scope.currentUser.id)) {
-          // an admin or a manager booked for someone else
-          machineSlot.title = _t('app.logged.machines_reserve.not_available');
-          machineSlot.borderColor = UNAVAILABLE_SLOT_BORDER_COLOR;
-          updateMachineSlot(machineSlot, reservation, $scope.ctrl.member);
-        } else {
-          // booked for "myself"
-          machineSlot.title = _t('app.logged.machines_reserve.i_ve_reserved');
-          machineSlot.borderColor = BOOKED_SLOT_BORDER_COLOR;
-          updateMachineSlot(machineSlot, reservation, $scope.currentUser);
+    $scope.afterPayment = function (paymentDocument) {
+      Reservation.get({ id: paymentDocument.main_object.id }, function (reservation) {
+        angular.forEach($scope.events.reserved, function (machineSlot, key) {
+          machineSlot.is_reserved = true;
+          machineSlot.can_modify = true;
+          if ($scope.currentUser.role === 'admin' || ($scope.currentUser.role === 'manager' && reservation.user_id !== $scope.currentUser.id)) {
+            // an admin or a manager booked for someone else
+            machineSlot.title = _t('app.logged.machines_reserve.not_available');
+            machineSlot.borderColor = UNAVAILABLE_SLOT_BORDER_COLOR;
+            updateMachineSlot(machineSlot, reservation, $scope.ctrl.member);
+          } else {
+            // booked for "myself"
+            machineSlot.title = _t('app.logged.machines_reserve.i_ve_reserved');
+            machineSlot.borderColor = BOOKED_SLOT_BORDER_COLOR;
+            updateMachineSlot(machineSlot, reservation, $scope.currentUser);
+          }
+          machineSlot.backgroundColor = 'white';
+        });
+
+        if ($scope.selectedPlan) {
+          $scope.ctrl.member.subscribed_plan = angular.copy($scope.selectedPlan);
+          if ($scope.ctrl.member.id === Auth._currentUser.id) {
+            Auth._currentUser.subscribed_plan = angular.copy($scope.selectedPlan);
+          }
+          $scope.plansAreShown = false;
+          $scope.selectedPlan = null;
         }
-        machineSlot.backgroundColor = 'white';
+
+        refetchCalendar();
       });
-
-      if ($scope.selectedPlan) {
-        $scope.ctrl.member.subscribed_plan = angular.copy($scope.selectedPlan);
-        if ($scope.ctrl.member.id === Auth._currentUser.id) {
-          Auth._currentUser.subscribed_plan = angular.copy($scope.selectedPlan);
-        }
-        $scope.plansAreShown = false;
-        $scope.selectedPlan = null;
-      }
-
-      refetchCalendar();
     };
 
     /**

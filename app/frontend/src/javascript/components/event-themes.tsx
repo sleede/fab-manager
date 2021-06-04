@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Select from 'react-select';
 import { react2angular } from 'react2angular';
-import { Loader } from './loader';
+import { Loader } from './base/loader';
 import { Event } from '../models/event';
 import { EventTheme } from '../models/event-theme';
 import { IApplication } from '../models/application';
