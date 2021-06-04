@@ -114,15 +114,13 @@ zu:
       member_select:
         select_a_member: "crwdns9571:0crwdne9571:0"
         start_typing: "crwdns9573:0crwdne9573:0"
-      #stripe payment modal
-      stripe:
-        online_payment: "crwdns9575:0crwdne9575:0"
-        i_have_read_and_accept_: "crwdns20916:0crwdne20916:0"
-        _the_general_terms_and_conditions: "crwdns9579:0crwdne9579:0"
-        credit_amount_for_pay_reservation: "crwdns9581:0{amount}crwdnd9581:0{currency}crwdne9581:0"
-        client_credit_amount_for_pay_reservation: "crwdns9583:0{amount}crwdnd9583:0{currency}crwdne9583:0"
-        payment_schedule_html: "crwdns20918:0{DEADLINES}crwdne20918:0"
-        confirm_payment_of_: "crwdns9585:0{AMOUNT}crwdne9585:0"
+      #payment modal
+      payment:
+        online_payment: "crwdns21484:0crwdne21484:0"
+        i_have_read_and_accept_: "crwdns21486:0crwdne21486:0"
+        _the_general_terms_and_conditions: "crwdns21488:0crwdne21488:0"
+        payment_schedule_html: "crwdns21490:0{DEADLINES}crwdnd21490:0{GATEWAY}crwdne21490:0"
+        confirm_payment_of_: "crwdns21492:0{AMOUNT}crwdne21492:0"
       #dialog of on site payment for reservations
       valid_reservation_modal:
         booking_confirmation: "crwdns9587:0crwdne9587:0"
@@ -130,9 +128,9 @@ zu:
         subscription_confirmation: "crwdns20920:0crwdne20920:0"
         here_is_the_subscription_summary: "crwdns20922:0crwdne20922:0"
         payment_method: "crwdns20924:0crwdne20924:0"
-        method_stripe: "crwdns20926:0crwdne20926:0"
+        method_card: "crwdns21494:0crwdne21494:0"
         method_check: "crwdns20928:0crwdne20928:0"
-        stripe_collection_info: "crwdns20930:0crwdne20930:0"
+        card_collection_info: "crwdns21496:0crwdne21496:0"
         check_collection_info: "crwdns20932:0{DEADLINES}crwdne20932:0"
       #event edition form
       event:
@@ -448,7 +446,7 @@ zu:
         do_you_really_want_to_cancel_this_reservation_html: "crwdns20908:0crwdne20908:0"
         reservation_was_cancelled_successfully: "crwdns10097:0crwdne10097:0"
         cancellation_failed: "crwdns10099:0crwdne10099:0"
-        confirm_payment_of_html: "crwdns21420:0METHOD={METHOD}crwdnd21420:0AMOUNT={AMOUNT}crwdne21420:0"
+        confirm_payment_of_html: "crwdns21498:0METHOD={METHOD}crwdnd21498:0AMOUNT={AMOUNT}crwdne21498:0"
         a_problem_occurred_during_the_payment_process_please_try_again_later: "crwdns10103:0crwdne10103:0"
         none: "crwdns10105:0crwdne10105:0"
         online_payment_disabled: "crwdns20228:0crwdne20228:0"
@@ -499,7 +497,7 @@ zu:
         state_paid: "crwdns21016:0crwdne21016:0"
         state_error: "crwdns21018:0crwdne21018:0"
         state_canceled: "crwdns21020:0crwdne21020:0"
-        method_stripe: "crwdns21022:0crwdne21022:0"
+        method_card: "crwdns21500:0crwdne21500:0"
         method_check: "crwdns21024:0crwdne21024:0"
         confirm_payment: "crwdns21026:0crwdne21026:0"
         solve: "crwdns21028:0crwdne21028:0"
@@ -509,7 +507,17 @@ zu:
         confirm_button: "crwdns21036:0crwdne21036:0"
         resolve_action: "crwdns21038:0crwdne21038:0"
         ok_button: "crwdns21040:0crwdne21040:0"
-        validate_button: "crwdns21042:0crwdne21042:0"
         cancel_subscription: "crwdns21044:0crwdne21044:0"
         confirm_cancel_subscription: "crwdns21046:0crwdne21046:0"
         please_ask_reception: "crwdns21048:0crwdne21048:0"
+      payment_modal:
+        online_payment_disabled: "crwdns21502:0crwdne21502:0"
+        unexpected_error: "crwdns21504:0crwdne21504:0"
+      update_card_modal:
+        unexpected_error: "crwdns21506:0crwdne21506:0"
+      stripe_card_update_modal:
+        update_card: "crwdns21508:0crwdne21508:0"
+        validate_button: "crwdns21510:0crwdne21510:0"
+      payzen_card_update_modal:
+        update_card: "crwdns21512:0crwdne21512:0"
+        validate_button: "crwdns21514:0crwdne21514:0"
