@@ -286,9 +286,9 @@ de:
       body:
         role_changed_html: "Deine Rolle bei {GENDER, select, male{dem} female{der} neutral{} other{dem}} {NAME} hat sich geändert. Sie sind jetzt <strong>{ROLE}</strong>.<br/>Mit großer Macht kommt große Verantwortung, nutzen Sie Ihre neuen Privilegien fair und respektvoll."
     notify_admin_objects_stripe_sync:
-      subject: "Stripe synchronization"
+      subject: "Stripe-Synchronisation"
       body:
-        objects_sync: "All members, coupons, machines, trainings, spaces and plans were successfully synchronized on Stripe."
+        objects_sync: "Alle Mitglieder, Coupons, Maschinen, Schulungen, Räume und Pläne wurden erfolgreich auf Stripe synchronisiert."
     notify_member_payment_schedule_ready:
       subject: "Your payment schedule"
       body:
