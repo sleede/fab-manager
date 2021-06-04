@@ -285,10 +285,10 @@ de:
       subject: "Ihre Rolle hat sich geändert"
       body:
         role_changed_html: "Deine Rolle bei {GENDER, select, male{dem} female{der} neutral{} other{dem}} {NAME} hat sich geändert. Sie sind jetzt <strong>{ROLE}</strong>.<br/>Mit großer Macht kommt große Verantwortung, nutzen Sie Ihre neuen Privilegien fair und respektvoll."
-    notify_admin_members_stripe_sync:
-      subject: "Stripe-Synchronisation"
+    notify_admin_objects_stripe_sync:
+      subject: "Stripe synchronization"
       body:
-        members_sync: "Alle Mitglieder wurden erfolgreich auf Stripe synchronisiert."
+        objects_sync: "All members, coupons, machines, trainings, spaces and plans were successfully synchronized on Stripe."
     notify_member_payment_schedule_ready:
       subject: "Your payment schedule"
       body:
