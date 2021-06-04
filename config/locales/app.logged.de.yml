@@ -132,6 +132,7 @@ de:
         payment_schedules:
           no_payment_schedules: "No payment schedules to display"
           load_more: "Load more"
+          card_updated_success: "Your card was successfully updated"
       #public profil of a member
       members_show:
         members_list: "Mitgliederliste"
