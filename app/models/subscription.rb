@@ -7,31 +7,19 @@ class Subscription < ApplicationRecord
   belongs_to :plan
   belongs_to :statistic_profile
 
-  has_one :payment_schedule, as: :scheduled, dependent: :destroy
-  has_many :invoices, as: :invoiced, dependent: :destroy
+  has_one :payment_schedule_object, as: :object, dependent: :destroy
+  has_one :payment_gateway_object, as: :item
+  has_many :invoice_items, as: :object, dependent: :destroy
   has_many :offer_days, dependent: :destroy
 
   validates_presence_of :plan_id
   validates_with SubscriptionGroupValidator
 
   # creation
+  before_create :set_expiration_date
   after_save :notify_member_subscribed_plan
   after_save :notify_admin_subscribed_plan
   after_save :notify_partner_subscribed_plan, if: :of_partner_plan?
-
-  ##
-  # Set the inner properties of the subscription, init the user's credits and save the subscription into the DB
-  # @return {boolean} true, if the operation succeeded
-  ##
-  def init_save
-    return false unless valid?
-
-    set_expiration_date
-    return false unless save
-
-    UsersCredits::Manager.new(user: user).reset_credits
-    true
-  end
 
   def generate_and_save_invoice(operator_profile_id)
     generate_invoice(operator_profile_id).save
@@ -64,14 +52,12 @@ class Subscription < ApplicationRecord
 
     od = offer_days.create(start_at: expired_at, end_at: expiration)
     invoice = Invoice.new(
-      invoiced_id: od.id,
-      invoiced_type: 'OfferDay',
       invoicing_profile: user.invoicing_profile,
       statistic_profile: user.statistic_profile,
       operator_profile_id: operator_profile_id,
       total: 0
     )
-    invoice.invoice_items.push InvoiceItem.new(amount: 0, description: plan.name, subscription_id: id)
+    invoice.invoice_items.push InvoiceItem.new(amount: 0, description: plan.name, object: od)
     invoice.save
 
     if save
@@ -86,9 +72,16 @@ class Subscription < ApplicationRecord
   end
 
   def original_payment_schedule
-    return payment_schedule if payment_schedule
+    payment_schedule_object&.payment_schedule
+  end
 
-    PaymentScheduleItem.where("cast(details->>'subscription_id' AS int) = ?", id).first&.payment_schedule
+  # buying invoice
+  def original_invoice
+    invoice_items.select(:invoice_id)
+                 .group(:invoice_id)
+                 .map(&:invoice_id)
+                 .map { |id| Invoice.find_by(id: id, type: nil) }
+                 .first
   end
 
   private

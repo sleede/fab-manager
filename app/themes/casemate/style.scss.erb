@@ -306,6 +306,12 @@ section#cookies-modal div.cookies-consent .cookies-actions button.accept {
   color: $secondary-text-color;
 }
 
+.list-of-plans {
+  .group-title:before {
+    background: linear-gradient(to left, white, $primary, white);
+  }
+}
+
 .plan-card  {
   .card-footer {
     .cta-button {
@@ -345,6 +351,25 @@ section#cookies-modal div.cookies-consent .cookies-actions button.accept {
         background-color: $secondary-light;
         color: $secondary-lighter;
         border-color: $secondary-lighter;
+      }
+    }
+  }
+}
+
+.payzen-keys-form {
+  fieldset > legend {
+    background-color: $secondary;
+    color: $secondary-text-color;
+  }
+}
+
+.payzen-settings {
+  .payzen-currency {
+    .payzen-currency-form {
+      .save-currency {
+        background-color: $secondary;
+        border-color: $secondary;
+        color: $secondary-text-color;
       }
     }
   }

@@ -5,17 +5,15 @@
 class PaymentSchedule < PaymentDocument
   require 'fileutils'
 
-  belongs_to :scheduled, polymorphic: true
   belongs_to :wallet_transaction
   belongs_to :coupon
   belongs_to :invoicing_profile
   belongs_to :statistic_profile
   belongs_to :operator_profile, foreign_key: :operator_profile_id, class_name: 'InvoicingProfile'
 
-  belongs_to :subscription, foreign_type: 'Subscription', foreign_key: 'scheduled_id'
-  belongs_to :reservation, foreign_type: 'Reservation', foreign_key: 'scheduled_id'
-
   has_many :payment_schedule_items
+  has_many :payment_gateway_objects, as: :item
+  has_many :payment_schedule_objects
 
   before_create :add_environment
   after_create :update_reference, :chain_record
@@ -47,6 +45,22 @@ class PaymentSchedule < PaymentDocument
     payment_schedule_items.order(due_date: :asc)
   end
 
+  def gateway_payment_mean
+    payment_gateway_objects.map(&:gateway_object).find(&:payment_mean?)
+  end
+
+  def gateway_subscription
+    payment_gateway_objects.map(&:gateway_object).find(&:subscription?)
+  end
+
+  def gateway_order
+    payment_gateway_objects.map(&:gateway_object).find(&:order?)
+  end
+
+  def main_object
+    payment_schedule_objects.find_by(main: true)
+  end
+
   def user
     invoicing_profile.user
   end
@@ -57,18 +71,23 @@ class PaymentSchedule < PaymentDocument
     File.binwrite(file, pdf)
   end
 
-  def check_footprint
-    payment_schedule_items.map(&:check_footprint).all? && footprint == compute_footprint
+  def footprint_children
+    payment_schedule_items
   end
 
-  def post_save(setup_intent_id)
-    return unless payment_method == 'stripe'
+  def post_save(gateway_method_id)
+    return unless payment_method == 'card'
 
-    StripeService.create_stripe_subscription(self, setup_intent_id)
+    PaymentGatewayService.new.create_subscription(self, gateway_method_id)
   end
 
-  def self.columns_out_of_footprint
-    %w[stp_subscription_id]
+  def render_resource
+    { partial: 'api/payment_schedules/payment_schedule', locals: { payment_schedule: self } }
+  end
+
+  def to_cart
+    service = CartService.new(operator_profile.user)
+    service.from_payment_schedule(self)
   end
 
   private
@@ -77,8 +96,8 @@ class PaymentSchedule < PaymentDocument
     return unless Setting.get('invoicing_module')
 
     unless Rails.env.test?
-      puts "Creating an PaymentScheduleWorker job to generate the following payment schedule: id(#{id}), scheduled_id(#{scheduled_id}), " \
-           "scheduled_type(#{scheduled_type}), user_id(#{invoicing_profile.user_id})"
+      puts "Creating an PaymentScheduleWorker job to generate the following payment schedule: id(#{id}), main_object.object_id(#{main_object.object_id}), " \
+           "main_object.object_type(#{main_object.object_type}), user_id(#{invoicing_profile.user_id})"
     end
     PaymentScheduleWorker.perform_async(id)
   end

@@ -108,8 +108,8 @@ SET default_tablespace = '';
 
 CREATE TABLE public.abuses (
     id integer NOT NULL,
-    signaled_id integer,
     signaled_type character varying,
+    signaled_id integer,
     first_name character varying,
     last_name character varying,
     email character varying,
@@ -187,8 +187,8 @@ CREATE TABLE public.addresses (
     locality character varying,
     country character varying,
     postal_code character varying,
-    placeable_id integer,
     placeable_type character varying,
+    placeable_id integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -263,8 +263,8 @@ CREATE TABLE public.ar_internal_metadata (
 
 CREATE TABLE public.assets (
     id integer NOT NULL,
-    viewable_id integer,
     viewable_type character varying,
+    viewable_id integer,
     attachment character varying,
     type character varying,
     created_at timestamp without time zone,
@@ -504,8 +504,8 @@ ALTER SEQUENCE public.coupons_id_seq OWNED BY public.coupons.id;
 
 CREATE TABLE public.credits (
     id integer NOT NULL,
-    creditable_id integer,
     creditable_type character varying,
+    creditable_id integer,
     plan_id integer,
     hours integer,
     created_at timestamp without time zone,
@@ -1010,14 +1010,15 @@ ALTER SEQUENCE public.imports_id_seq OWNED BY public.imports.id;
 CREATE TABLE public.invoice_items (
     id integer NOT NULL,
     invoice_id integer,
-    stp_invoice_item_id character varying,
     amount integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     description text,
-    subscription_id integer,
     invoice_item_id integer,
-    footprint character varying
+    footprint character varying,
+    object_type character varying,
+    object_id bigint,
+    main boolean
 );
 
 
@@ -1046,9 +1047,6 @@ ALTER SEQUENCE public.invoice_items_id_seq OWNED BY public.invoice_items.id;
 
 CREATE TABLE public.invoices (
     id integer NOT NULL,
-    invoiced_id integer,
-    invoiced_type character varying,
-    stp_invoice_id character varying,
     total integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
@@ -1066,8 +1064,7 @@ CREATE TABLE public.invoices (
     environment character varying,
     invoicing_profile_id integer,
     operator_profile_id integer,
-    statistic_profile_id integer,
-    stp_payment_intent_id character varying
+    statistic_profile_id integer
 );
 
 
@@ -1166,8 +1163,7 @@ CREATE TABLE public.machines (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     slug character varying,
-    disabled boolean,
-    stp_product_id character varying
+    disabled boolean
 );
 
 
@@ -1227,15 +1223,15 @@ ALTER SEQUENCE public.machines_id_seq OWNED BY public.machines.id;
 CREATE TABLE public.notifications (
     id integer NOT NULL,
     receiver_id integer,
-    attached_object_id integer,
     attached_object_type character varying,
+    attached_object_id integer,
     notification_type_id integer,
     is_read boolean DEFAULT false,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     receiver_type character varying,
     is_send boolean DEFAULT false,
-    meta_data jsonb DEFAULT '{}'::jsonb
+    meta_data jsonb DEFAULT '"{}"'::jsonb
 );
 
 
@@ -1463,6 +1459,39 @@ ALTER SEQUENCE public.organizations_id_seq OWNED BY public.organizations.id;
 
 
 --
+-- Name: payment_gateway_objects; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.payment_gateway_objects (
+    id bigint NOT NULL,
+    gateway_object_id character varying,
+    gateway_object_type character varying,
+    item_type character varying,
+    item_id bigint,
+    payment_gateway_object_id bigint
+);
+
+
+--
+-- Name: payment_gateway_objects_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.payment_gateway_objects_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: payment_gateway_objects_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.payment_gateway_objects_id_seq OWNED BY public.payment_gateway_objects.id;
+
+
+--
 -- Name: payment_schedule_items; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1472,7 +1501,6 @@ CREATE TABLE public.payment_schedule_items (
     due_date timestamp without time zone,
     state character varying DEFAULT 'new'::character varying,
     details jsonb DEFAULT '"{}"'::jsonb,
-    stp_invoice_id character varying,
     payment_method character varying,
     client_secret character varying,
     payment_schedule_id bigint,
@@ -1503,16 +1531,47 @@ ALTER SEQUENCE public.payment_schedule_items_id_seq OWNED BY public.payment_sche
 
 
 --
+-- Name: payment_schedule_objects; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.payment_schedule_objects (
+    id bigint NOT NULL,
+    object_type character varying,
+    object_id bigint,
+    payment_schedule_id bigint,
+    main boolean,
+    footprint character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: payment_schedule_objects_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.payment_schedule_objects_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: payment_schedule_objects_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.payment_schedule_objects_id_seq OWNED BY public.payment_schedule_objects.id;
+
+
+--
 -- Name: payment_schedules; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.payment_schedules (
     id bigint NOT NULL,
-    scheduled_type character varying,
-    scheduled_id bigint,
     total integer,
-    stp_subscription_id character varying,
-    stp_setup_intent_id character varying,
     reference character varying,
     payment_method character varying,
     wallet_amount integer,
@@ -1569,8 +1628,7 @@ CREATE TABLE public.plans (
     interval_count integer DEFAULT 1,
     slug character varying,
     disabled boolean,
-    monthly_payment boolean,
-    stp_product_id character varying
+    monthly_payment boolean
 );
 
 
@@ -1663,8 +1721,8 @@ CREATE TABLE public.prices (
     id integer NOT NULL,
     group_id integer,
     plan_id integer,
-    priceable_id integer,
     priceable_type character varying,
+    priceable_id integer,
     amount integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
@@ -1979,8 +2037,8 @@ CREATE TABLE public.reservations (
     message text,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    reservable_id integer,
     reservable_type character varying,
+    reservable_id integer,
     nb_reserve_places integer,
     statistic_profile_id integer
 );
@@ -2012,8 +2070,8 @@ ALTER SEQUENCE public.reservations_id_seq OWNED BY public.reservations.id;
 CREATE TABLE public.roles (
     id integer NOT NULL,
     name character varying,
-    resource_id integer,
     resource_type character varying,
+    resource_id integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -2159,8 +2217,7 @@ CREATE TABLE public.spaces (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     characteristics text,
-    disabled boolean,
-    stp_product_id character varying
+    disabled boolean
 );
 
 
@@ -2556,7 +2613,6 @@ ALTER SEQUENCE public.stylesheets_id_seq OWNED BY public.stylesheets.id;
 CREATE TABLE public.subscriptions (
     id integer NOT NULL,
     plan_id integer,
-    stp_subscription_id character varying,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     expiration_date timestamp without time zone,
@@ -2690,8 +2746,7 @@ CREATE TABLE public.trainings (
     slug character varying,
     description text,
     public_page boolean DEFAULT true,
-    disabled boolean,
-    stp_product_id character varying
+    disabled boolean
 );
 
 
@@ -2866,7 +2921,6 @@ CREATE TABLE public.users (
     updated_at timestamp without time zone,
     is_allow_contact boolean DEFAULT true,
     group_id integer,
-    stp_customer_id character varying,
     username character varying,
     slug character varying,
     is_active boolean DEFAULT true,
@@ -2949,8 +3003,6 @@ CREATE TABLE public.users_roles (
 CREATE TABLE public.wallet_transactions (
     id integer NOT NULL,
     wallet_id integer,
-    transactable_id integer,
-    transactable_type character varying,
     transaction_type character varying,
     amount integer,
     created_at timestamp without time zone NOT NULL,
@@ -3284,10 +3336,24 @@ ALTER TABLE ONLY public.organizations ALTER COLUMN id SET DEFAULT nextval('publi
 
 
 --
+-- Name: payment_gateway_objects id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payment_gateway_objects ALTER COLUMN id SET DEFAULT nextval('public.payment_gateway_objects_id_seq'::regclass);
+
+
+--
 -- Name: payment_schedule_items id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.payment_schedule_items ALTER COLUMN id SET DEFAULT nextval('public.payment_schedule_items_id_seq'::regclass);
+
+
+--
+-- Name: payment_schedule_objects id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payment_schedule_objects ALTER COLUMN id SET DEFAULT nextval('public.payment_schedule_objects_id_seq'::regclass);
 
 
 --
@@ -3912,11 +3978,27 @@ ALTER TABLE ONLY public.organizations
 
 
 --
+-- Name: payment_gateway_objects payment_gateway_objects_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payment_gateway_objects
+    ADD CONSTRAINT payment_gateway_objects_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: payment_schedule_items payment_schedule_items_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.payment_schedule_items
     ADD CONSTRAINT payment_schedule_items_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: payment_schedule_objects payment_schedule_objects_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payment_schedule_objects
+    ADD CONSTRAINT payment_schedule_objects_pkey PRIMARY KEY (id);
 
 
 --
@@ -4037,6 +4119,14 @@ ALTER TABLE ONLY public.reservations
 
 ALTER TABLE ONLY public.roles
     ADD CONSTRAINT roles_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.schema_migrations
+    ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
 
 
 --
@@ -4432,6 +4522,13 @@ CREATE INDEX index_invoice_items_on_invoice_id ON public.invoice_items USING btr
 
 
 --
+-- Name: index_invoice_items_on_object_type_and_object_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_invoice_items_on_object_type_and_object_id ON public.invoice_items USING btree (object_type, object_id);
+
+
+--
 -- Name: index_invoices_on_coupon_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4537,6 +4634,20 @@ CREATE INDEX index_organizations_on_invoicing_profile_id ON public.organizations
 
 
 --
+-- Name: index_payment_gateway_objects_on_item_type_and_item_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_payment_gateway_objects_on_item_type_and_item_id ON public.payment_gateway_objects USING btree (item_type, item_id);
+
+
+--
+-- Name: index_payment_gateway_objects_on_payment_gateway_object_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_payment_gateway_objects_on_payment_gateway_object_id ON public.payment_gateway_objects USING btree (payment_gateway_object_id);
+
+
+--
 -- Name: index_payment_schedule_items_on_invoice_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4548,6 +4659,20 @@ CREATE INDEX index_payment_schedule_items_on_invoice_id ON public.payment_schedu
 --
 
 CREATE INDEX index_payment_schedule_items_on_payment_schedule_id ON public.payment_schedule_items USING btree (payment_schedule_id);
+
+
+--
+-- Name: index_payment_schedule_objects_on_object_type_and_object_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_payment_schedule_objects_on_object_type_and_object_id ON public.payment_schedule_objects USING btree (object_type, object_id);
+
+
+--
+-- Name: index_payment_schedule_objects_on_payment_schedule_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_payment_schedule_objects_on_payment_schedule_id ON public.payment_schedule_objects USING btree (payment_schedule_id);
 
 
 --
@@ -4569,13 +4694,6 @@ CREATE INDEX index_payment_schedules_on_invoicing_profile_id ON public.payment_s
 --
 
 CREATE INDEX index_payment_schedules_on_operator_profile_id ON public.payment_schedules USING btree (operator_profile_id);
-
-
---
--- Name: index_payment_schedules_on_scheduled_type_and_scheduled_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_payment_schedules_on_scheduled_type_and_scheduled_id ON public.payment_schedules USING btree (scheduled_type, scheduled_id);
 
 
 --
@@ -5069,13 +5187,6 @@ CREATE INDEX index_wallet_transactions_on_invoicing_profile_id ON public.wallet_
 
 
 --
--- Name: index_wallet_transactions_on_transactable; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_wallet_transactions_on_transactable ON public.wallet_transactions USING btree (transactable_type, transactable_id);
-
-
---
 -- Name: index_wallet_transactions_on_wallet_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5108,13 +5219,6 @@ CREATE INDEX profiles_lower_unaccent_last_name_trgm_idx ON public.profiles USING
 --
 
 CREATE INDEX projects_search_vector_idx ON public.projects USING gin (search_vector);
-
-
---
--- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX unique_schema_migrations ON public.schema_migrations USING btree (version);
 
 
 --
@@ -5253,6 +5357,14 @@ ALTER TABLE ONLY public.payment_schedules
 
 
 --
+-- Name: payment_gateway_objects fk_rails_2a54622221; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payment_gateway_objects
+    ADD CONSTRAINT fk_rails_2a54622221 FOREIGN KEY (payment_gateway_object_id) REFERENCES public.payment_gateway_objects(id);
+
+
+--
 -- Name: statistic_profiles fk_rails_2c8874d1a1; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5338,6 +5450,14 @@ ALTER TABLE ONLY public.payment_schedule_items
 
 ALTER TABLE ONLY public.payment_schedules
     ADD CONSTRAINT fk_rails_552bc65163 FOREIGN KEY (coupon_id) REFERENCES public.coupons(id);
+
+
+--
+-- Name: payment_schedule_objects fk_rails_56f6b6d2d2; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payment_schedule_objects
+    ADD CONSTRAINT fk_rails_56f6b6d2d2 FOREIGN KEY (payment_schedule_id) REFERENCES public.payment_schedules(id);
 
 
 --
@@ -5675,7 +5795,6 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20140605125131'),
 ('20140605142133'),
 ('20140605151442'),
-('20140606133116'),
 ('20140609092700'),
 ('20140609092827'),
 ('20140610153123'),
@@ -5744,14 +5863,12 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20150507075620'),
 ('20150512123546'),
 ('20150520132030'),
-('20150520133409'),
 ('20150526130729'),
 ('20150527153312'),
 ('20150529113555'),
 ('20150601125944'),
 ('20150603104502'),
 ('20150603104658'),
-('20150603133050'),
 ('20150604081757'),
 ('20150604131525'),
 ('20150608142234'),
@@ -5833,7 +5950,6 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20160905142700'),
 ('20160906094739'),
 ('20160906094847'),
-('20160906145713'),
 ('20160915105234'),
 ('20161123104604'),
 ('20170109085345'),
@@ -5902,6 +6018,11 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20201027092149'),
 ('20201027100746'),
 ('20201027101809'),
-('20201112092002');
+('20201112092002'),
+('20210416073410'),
+('20210416083610'),
+('20210521085710'),
+('20210525134018'),
+('20210525150942');
 
 

@@ -33,7 +33,7 @@ class WalletServiceTest < ActiveSupport::TestCase
   test 'create a debit transaction after debit amount to wallet' do
     service = WalletService.new(user: @vlonchamp, wallet: @vlonchamp_wallet)
     expected_amount = @vlonchamp_wallet.amount - 5
-    transaction = service.debit(5, nil)
+    transaction = service.debit(5)
     @vlonchamp_wallet.reload
     assert transaction
     assert_equal @vlonchamp_wallet.amount, expected_amount
@@ -46,7 +46,7 @@ class WalletServiceTest < ActiveSupport::TestCase
   test 'dont debit amount > wallet amount' do
     service = WalletService.new(user: @vlonchamp, wallet: @vlonchamp_wallet)
     expected_amount = @vlonchamp_wallet.amount
-    service.debit(100, nil)
+    service.debit(100)
     @vlonchamp_wallet.reload
     assert_equal @vlonchamp_wallet.amount, expected_amount
   end
@@ -54,7 +54,7 @@ class WalletServiceTest < ActiveSupport::TestCase
   test 'rollback debited amount if has an error when create wallet transaction' do
     service = WalletService.new(wallet: @vlonchamp_wallet)
     expected_amount = @vlonchamp_wallet.amount
-    transaction = service.debit(5, nil)
+    transaction = service.debit(5)
     @vlonchamp_wallet.reload
     assert_equal @vlonchamp_wallet.amount, expected_amount
     assert_not transaction

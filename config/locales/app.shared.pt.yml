@@ -114,13 +114,11 @@ pt:
       member_select:
         select_a_member: "Selecionar um membro"
         start_typing: "Escrevendo..."
-      #stripe payment modal
-      stripe:
+      #payment modal
+      payment:
         online_payment: "Pagamento Online"
         i_have_read_and_accept_: "Eu li e aceito "
         _the_general_terms_and_conditions: "os termos e condições."
-        credit_amount_for_pay_reservation: "{amount} {currency} a ser pago para confirmar sua inscrição"
-        client_credit_amount_for_pay_reservation: "{amount} {currency}  a ser pago para confirmar a inscrição do cliente"
         payment_schedule_html: "<p>You're about to subscribe to a payment schedule of {DEADLINES} months.</p><p>By paying this bill, you agree to send instructions to the financial institution that issue your card, to take payments from your card account, for the whole duration of this subscription. This imply that your card data are saved by Stripe and a series of payments will be initiated on your behalf, conforming to the payment schedule previously shown.</p>"
         confirm_payment_of_: "Pagamento: {AMOUNT}"
       #dialog of on site payment for reservations
@@ -130,9 +128,9 @@ pt:
         subscription_confirmation: "Inscrição confirmada"
         here_is_the_subscription_summary: "Here is the subscription summary:"
         payment_method: "Payment method"
-        method_stripe: "Online by card"
+        method_card: "Online by card"
         method_check: "By check"
-        stripe_collection_info: "By validating, you'll be prompted for the member's card number. This card will be automatically charged at the deadlines."
+        card_collection_info: "By validating, you'll be prompted for the member's card number. This card will be automatically charged at the deadlines."
         check_collection_info: "By validating, you confirm that you have {DEADLINES} checks, allowing you to collect all the monthly payments."
       #event edition form
       event:

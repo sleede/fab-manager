@@ -18,8 +18,8 @@ class SettingService
     # notify about a change in privacy policy
     NotifyPrivacyUpdateWorker.perform_async(setting.id) if setting.name == 'privacy_body'
 
-    # sync all users on stripe
-    SyncMembersOnStripeWorker.perform_async(setting.history_values.last&.invoicing_profile&.user&.id) if setting.name == 'stripe_secret_key'
+    # sync all objects on stripe
+    SyncObjectsOnStripeWorker.perform_async(setting.history_values.last&.invoicing_profile&.user&.id) if setting.name == 'stripe_secret_key'
 
     # generate statistics
     PeriodStatisticsWorker.perform_async(setting.previous_update) if setting.name == 'statistics_module' && setting.value == 'true'

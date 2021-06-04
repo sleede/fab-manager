@@ -6,6 +6,6 @@
          USER: @attached_object.invoicing_profile&.full_name) if @attached_object.invoice %>
   <%= t('.body.wallet_refund_created',
         AMOUNT: number_to_currency(@attached_object.total / 100.00),
-        USER: @attached_object.invoicing_profile&.full_name) if @attached_object.invoiced_type === WalletTransaction.name %>
+        USER: @attached_object.invoicing_profile&.full_name) if @attached_object.main_item.object_type === WalletTransaction.name %>
 </p>
 <p><a href="<%= "#{root_url}api/invoices/#{@attached_object.id}/download" %>" target="_blank"><%= t('.body.download') %></a></p>

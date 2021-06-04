@@ -125,8 +125,8 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
       }
     };
 
-    // This boolean value will tell if the current user is the super-admin
-    $scope.isSuperAdmin = memberPromise.id === Fablab.superadminId;
+    // This boolean value will tell if the current user is the system admin
+    $scope.isAdminSys = memberPromise.id === Fablab.adminSysId;
 
     /**
      * Return the group object, identified by the ID set in $scope.userGroup

@@ -59,7 +59,7 @@ class Exports::AccountingExportTest < ActionDispatch::IntegrationTest
     entry_date = first_invoice.created_at.to_date
     assert_equal entry_date, DateTime.parse(data[0][I18n.t('accounting_export.date')]), 'Wrong date'
 
-    if first_invoice.paid_with_stripe?
+    if first_invoice.paid_by_card?
       card_client_code = Setting.get('accounting_card_client_code')
       assert_equal card_client_code, data[0][I18n.t('accounting_export.account_code')], 'Account code for card client is wrong'
 
@@ -118,7 +118,7 @@ class Exports::AccountingExportTest < ActionDispatch::IntegrationTest
     client_row = data[data.length - 4]
     item_row = data[data.length - 3]
 
-    if machine_invoice.invoiced_type == 'Reservation' && machine_invoice.invoiced.reservable_type == 'Machine'
+    if machine_invoice.main_item.object_type == 'Reservation' && machine_invoice.main_item.object.reservable_type == 'Machine'
       assert_match I18n.t('accounting_export.Machine_reservation'),
                    client_row[I18n.t('accounting_export.line_label')],
                    'Line label does not contains the reference to the invoiced item'

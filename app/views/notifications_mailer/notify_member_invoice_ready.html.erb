@@ -5,7 +5,7 @@
          {
              DATE: I18n.l(@attached_object.created_at.to_date),
              AMOUNT: number_to_currency(@attached_object.total / 100.0),
-             TYPE: @attached_object.invoiced_type
+             TYPE: @attached_object.main_item.object_type
          })
       # messageFormat
   %>

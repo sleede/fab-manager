@@ -472,7 +472,7 @@ fr:
         n_digits_annual_amount_of_orders: "Nombre de commandes dans l'année, sur (n) chiffres (ex. yyyyyy => 000008 : 8ème commande cette année)"
         add_a_notice_regarding_the_online_sales_only_if_the_invoice_is_concerned: "Ajoute une information relative à la vente en ligne, uniquement si cela concerne la facture."
         this_will_never_be_added_when_a_refund_notice_is_present: "Ceci ne sera jamais cumulé avec une information de remboursement."
-        eg_XVL_will_add_VL_to_the_invoices_settled_with_stripe: '(ex. X[/VL] ajoutera "/VL" aux factures réglées avec stripe)'
+        eg_XVL_will_add_VL_to_the_invoices_settled_by_card: '(ex. X[/VL] ajoutera "/VL" aux factures réglées en ligne par carte bancaire)'
         add_a_notice_regarding_refunds_only_if_the_invoice_is_concerned: "Ajoute une information relative aux remboursements, uniquement si cela concerne la facture."
         this_will_never_be_added_when_an_online_sales_notice_is_present: "Ceci ne sera jamais cumulé avec une information de vente en ligne."
         eg_RA_will_add_A_to_the_refund_invoices: '(ex. R[/A] ajoutera "/A" aux factures de remboursement)'
@@ -642,11 +642,37 @@ fr:
           error_check_keys: "Erreur : veuillez vérifier vos clefs Stripe."
           stripe_keys_saved: "Les clefs Stripe ont bien été enregistrées."
           error_saving_stripe_keys: "Impossible d’enregistrer les clefs Stripe. Veuillez réessayer ultérieurement."
+          payzen_keys_info_html: "<p>Pour pouvoir encaisser des paiements en ligne, vous devez configurer les identifiants et les clefs <a href='https://payzen.eu' target='_blank'>PayZen</a>.</p><p>Retrouvez les dans <a href='https://secure.payzen.eu/vads-merchant/' target='_blank'>votre back office marchant</a>.</p>"
+          client_keys: "Clef client"
+          api_keys: "Clefs d'API"
           edit_keys: "Modifier les clefs"
           currency: "Devise"
           currency_info_html: "Veuillez indiquer la devise à utiliser lors des paiements en ligne. Vous devez fournir un code ISO à trois lettres, issu de la liste des <a href='https://stripe.com/docs/currencies' target='_blank'>devises supportées par Stripe</a>."
           currency_alert_html: "<strong>Attention</strong> : la devise ne peut pas être modifiée après que le premier paiement en ligne ait été effectué. Veuillez définir attentivement ce paramètre avant d'ouvrir Fab-manager à vos membres."
           stripe_currency: "Devise Stripe"
+          gateway_configuration_error: "Une erreur est survenue lors de la configuration de la passerelle de paiement."
+          payzen:
+            payzen_keys: "Clefs PayZen"
+            payzen_username: "Utilisateur"
+            payzen_password: "Mot de passe"
+            payzen_endpoint: "Nom du serveur de l'API REST"
+            payzen_hmac: "Clef HMAC-SHA-256"
+            payzen_public_key: "Clef publique client"
+            currency: "Devise"
+            payzen_currency: "Devise PayZen"
+            currency_info_html: "Veuillez indiquer la devise à utiliser lors des paiements en ligne. Vous devez fournir un code ISO à trois lettres, issu de la liste des <a href='https://payzen.io/fr-FR/back-office/reporting/liste-des-devises-supportees.html' target='_blank'>devises supportées par PayZen</a>."
+            save: "Enregistrer"
+            currency_error: "La valeur saisie n'est pas une devise valide"
+            error_while_saving: "Une erreur est survenue lors de l'enregistrement de la devise : "
+            currency_updated: "La devise PayZen a bien été mise à jour à {CURRENCY}."
+          # select a payment gateway
+          gateway_modal:
+            select_gateway_title: "Sélectionnez une passerelle de paiement"
+            gateway_info: "Pour collecter et traiter les paiements en ligne en toute sécurité, Fab-manager a besoin d'utiliser un service tiers autorisé par les institutions financières, appelé une passerelle de paiement."
+            select_gateway: "Veuillez choisir une des passerelles disponibles"
+            stripe: "Stripe"
+            payzen: "PayZen"
+            confirm_button: "Valider la passerelle"
         payment_schedules:
           filter_schedules: "Filtrer les échéanciers"
           no_payment_schedules: "Pas d'échéancier à afficher"

@@ -44,7 +44,7 @@ class PDF::Invoice < Prawn::Document
       if Setting.get('invoice_code-active')
         text I18n.t('invoices.code', CODE: Setting.get('invoice_code-value')), leading: 3
       end
-      if invoice.invoiced_type != WalletTransaction.name
+      if invoice.main_item.object_type != WalletTransaction.name
         if invoice.is_a?(Avoir)
           text I18n.t('invoices.order_number', NUMBER: invoice.invoice.order_number), leading: 3
         else
@@ -84,34 +84,34 @@ class PDF::Invoice < Prawn::Document
       # object
       move_down 25
       if invoice.is_a?(Avoir)
-        object = if invoice.invoiced_type == WalletTransaction.name
+        object = if invoice.main_item.object_type == WalletTransaction.name
                    I18n.t('invoices.wallet_credit')
                  else
                    I18n.t('invoices.cancellation_of_invoice_REF', REF: invoice.invoice.reference)
                  end
       else
-        case invoice.invoiced_type
+        case invoice.main_item.object_type
         when 'Reservation'
           object = I18n.t('invoices.reservation_of_USER_on_DATE_at_TIME',
                           USER: name,
-                          DATE: I18n.l(invoice.invoiced.slots[0].start_at.to_date),
-                          TIME: I18n.l(invoice.invoiced.slots[0].start_at, format: :hour_minute))
+                          DATE: I18n.l(invoice.main_item.object.slots[0].start_at.to_date),
+                          TIME: I18n.l(invoice.main_item.object.slots[0].start_at, format: :hour_minute))
           invoice.invoice_items.each do |item|
-            next unless item.subscription_id
+            next unless item.subscription
 
-            subscription = Subscription.find item.subscription_id
+            subscription = item.subscription
             cancellation = invoice.is_a?(Avoir) ? I18n.t('invoices.cancellation') + ' - ' : ''
             object = "\n- #{object}\n- #{cancellation + subscription_verbose(subscription, name)}"
             break
           end
         when 'Subscription'
-          object = subscription_verbose(invoice.invoiced, name)
+          object = subscription_verbose(invoice.main_item.object, name)
         when 'OfferDay'
-          object = offer_day_verbose(invoice.invoiced, name)
+          object = offer_day_verbose(invoice.main_item.object, name)
         when 'Error'
           object = I18n.t('invoices.error_invoice')
         else
-          puts "ERROR : specified invoiced type (#{invoice.invoiced_type}) is unknown"
+          puts "ERROR : specified main_item.object_type type (#{invoice.main_item.object_type}) is unknown"
         end
       end
       text I18n.t('invoices.object') + ' ' + object
@@ -132,12 +132,12 @@ class PDF::Invoice < Prawn::Document
 
         details = invoice.is_a?(Avoir) ? I18n.t('invoices.cancellation') + ' - ' : ''
 
-        if item.subscription_id ### Subscription
-          subscription = Subscription.find item.subscription_id
-          if invoice.invoiced_type == 'OfferDay'
+        if item.subscription ### Subscription
+          subscription = item.subscription
+          if invoice.main_item.object_type == 'OfferDay'
             details += I18n.t('invoices.subscription_extended_for_free_from_START_to_END',
-                              START: I18n.l(invoice.invoiced.start_at.to_date),
-                              END: I18n.l(invoice.invoiced.end_at.to_date))
+                              START: I18n.l(invoice.main_item.object.start_at.to_date),
+                              END: I18n.l(invoice.main_item.object.end_at.to_date))
           else
             subscription_end_at = if subscription_expiration_date.is_a?(Time)
                                     subscription_expiration_date
@@ -155,7 +155,7 @@ class PDF::Invoice < Prawn::Document
 
 
         else ### Reservation
-          case invoice.invoiced.try(:reservable_type)
+          case invoice.main_item.object.try(:reservable_type)
             ### Machine reservation
           when 'Machine'
             details += I18n.t('invoices.machine_reservation_DESCRIPTION', DESCRIPTION: item.description)
@@ -168,10 +168,10 @@ class PDF::Invoice < Prawn::Document
           when 'Event'
             details += I18n.t('invoices.event_reservation_DESCRIPTION', DESCRIPTION: item.description)
             # details of the number of tickets
-            if invoice.invoiced.nb_reserve_places.positive?
-              details += "\n  " + I18n.t('invoices.full_price_ticket', count: invoice.invoiced.nb_reserve_places)
+            if invoice.main_item.object.nb_reserve_places.positive?
+              details += "\n  " + I18n.t('invoices.full_price_ticket', count: invoice.main_item.object.nb_reserve_places)
             end
-            invoice.invoiced.tickets.each do |t|
+            invoice.main_item.object.tickets.each do |t|
               details += "\n  " + I18n.t('invoices.other_rate_ticket',
                                          count: t.booked,
                                          NAME: t.event_price_category.price_category.name)
@@ -303,7 +303,7 @@ class PDF::Invoice < Prawn::Document
         end
 
         # payment method
-        payment_verbose = if invoice.paid_with_stripe?
+        payment_verbose = if invoice.paid_by_card?
                             I18n.t('invoices.settlement_by_debit_card')
                           else
                             I18n.t('invoices.settlement_done_at_the_reception')

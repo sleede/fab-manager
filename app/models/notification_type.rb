@@ -53,7 +53,7 @@ class NotificationType
     notify_admin_refund_created
     notify_admins_role_update
     notify_user_role_update
-    notify_admin_members_stripe_sync
+    notify_admin_objects_stripe_sync
     notify_user_when_payment_schedule_ready
     notify_admin_payment_schedule_failed
     notify_member_payment_schedule_failed

@@ -1,5 +1,35 @@
 # Changelog Fab-manager
 
+## Next release
+- Ability to use PayZen a the payment gateway
+- For payment schedules, ability to update the related payment card before the deadline
+- Refactored data architecture to a more generic shopping cart model
+- Redesigned the data structure to allow buying multiple and various objects
+- Updated React and its dependencies to 17.0.3 and matching
+- Updated the dependencies of: webpack, lodash, eslint, webpack-dev-server, react2angular, auto-ngtemplate-loader, angular-bootstrap-switch, react-refresh-webpack-plugin and eslint-plugin-react
+- Improved error handling in upgrade script
+- Improved the development and production documentations
+- Improved the style of the titles of the subscription page
+- Check the status of the assets' compilation during the upgrade
+- Footprints are now generated in a more reproductible way
+- Task to reset the stripe payment methods in test mode
+- Validate on server side the reservation of slots restricted to subscribers
+− Unified and documented upgrade exit codes
+- Fix a bug: build status badge is not working
+- Fix a bug: unable to set date formats during installation
+- Fix a bug: unable to cancel the upgrade before it begins
+- Fix a bug: in the admin calendar, the trainings' info panel shows "duration: null minutes"
+- Fix a bug: on the subscriptions page, not logged-in users do not see the action button
+- Fix a bug: unable to map a new setup to the db network
+- `SUPERADMIN_EMAIL` renamed to `ADMINSYS_EMAIL`
+- `scripts/run-tests.sh` renamed to `scripts/tests.sh`
+- [BREAKING CHANGE] GET `open_api/v1/invoices` won't return `stp_invoice_id` OR `stp_payment_intent_id` anymore. The new field `payment_gateway_object` will contain some similar data if the invoice was paid online by card.
+- [BREAKING CHANGE] GET `open_api/v1/invoices` won't return `invoiced_id`, `invoiced_type` OR `invoiced.created_at` anymore. The new field `main_object` will contain the equivalent data.
+- [TODO DEPLOY] before running the database migration (db:migrate), run: `rails fablab:chain:all`
+- [TODO DEPLOY] `rails fablab:stripe:set_gateway`
+- [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
+- [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/rename-adminsys.sh | bash`
+
 ## v4.7.11 2021 May 26
 
 - Updated ffi to 1.15.1
