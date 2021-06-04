@@ -472,7 +472,7 @@ de:
         n_digits_annual_amount_of_orders: "(n) Ziffern, jährliche Anzahl von Bestellungen (z.B. yyyyy => 00012 : 12. Bestellung des Jahres"
         add_a_notice_regarding_the_online_sales_only_if_the_invoice_is_concerned: "Fügen Sie nur dann eine Mitteilung zu den Online-Verkäufen hinzu, wenn die Rechnung betroffen ist."
         this_will_never_be_added_when_a_refund_notice_is_present: "Dies wird nie hinzugefügt, wenn eine Rückerstattung vorhanden ist."
-        eg_XVL_will_add_VL_to_the_invoices_settled_by_card: '(eg. X[/VL] will add "/VL" to the invoices settled by online card)'
+        eg_XVL_will_add_VL_to_the_invoices_settled_by_card: '(z. B. fügt W[/VL] jenen Rechnungen "/VL" hinzu, die mit Online-Karte bezahlt werden)'
         add_a_notice_regarding_refunds_only_if_the_invoice_is_concerned: "Fügen Sie nur dann eine Mitteilung zu Erstattungen hinzu, wenn die Rechnung betroffen ist."
         this_will_never_be_added_when_an_online_sales_notice_is_present: "Dies wird nie hinzugefügt, wenn eine Online-Verkaufsmitteilung vorhanden ist."
         eg_RA_will_add_A_to_the_refund_invoices: '(z.B. fügt R[/A] den Rückerstattungsrechnungen "/A" hinzu)'
@@ -653,14 +653,14 @@ de:
           gateway_configuration_error: "An error occurred while configuring the payment gateway."
           payzen:
             payzen_keys: "PayZen keys"
-            payzen_username: "Username"
-            payzen_password: "Password"
+            payzen_username: "Benutzername"
+            payzen_password: "Passwort"
             payzen_endpoint: "REST API server name"
             payzen_hmac: "HMAC-SHA-256 key"
             payzen_public_key: "Client public key"
-            currency: "Currency"
-            payzen_currency: "PayZen currency"
-            currency_info_html: "Please specify below the currency used for online payment. You should provide a three-letter ISO code, from the list of <a href='https://payzen.io/en-EN/payment-file/ips/list-of-supported-currencies.html' target='_blank'> PayZen supported currencies</a>."
+            currency: "Währung"
+            payzen_currency: "PayZen Währung"
+            currency_info_html: "Bitte geben Sie unten die Währung an, die für Online-Bezahlung verwendet wird. Sie sollten einen ISO-Code mit drei Buchstaben aus der Liste <a href='https://payzen.io/de-DE/payment-file/ips/list-of-supported-currencies.html' target='_blank'>PayZen unterstützter Währungen eingeben</a>."
             save: "Save"
             currency_error: "The inputted value is not a valid currency"
             error_while_saving: "An error occurred while saving the currency: "
