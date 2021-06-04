@@ -661,7 +661,7 @@ de:
             currency: "Währung"
             payzen_currency: "PayZen Währung"
             currency_info_html: "Bitte geben Sie unten die Währung an, die für Online-Bezahlung verwendet wird. Sie sollten einen ISO-Code mit drei Buchstaben aus der Liste <a href='https://payzen.io/de-DE/payment-file/ips/list-of-supported-currencies.html' target='_blank'>PayZen unterstützter Währungen eingeben</a>."
-            save: "Save"
+            save: "Speichern"
             currency_error: "The inputted value is not a valid currency"
             error_while_saving: "An error occurred while saving the currency: "
             currency_updated: "The PayZen currency was successfully updated to {CURRENCY}."
