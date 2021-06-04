@@ -472,7 +472,7 @@ pt:
         n_digits_annual_amount_of_orders: "(n) dígitos, contagem anual de pedidos (ex. aaaaaa => 000008: oitava ordem deste ano)"
         add_a_notice_regarding_the_online_sales_only_if_the_invoice_is_concerned: "Adicionar um aviso sobre as vendas on-line, somente se a fatura estiver envolvida."
         this_will_never_be_added_when_a_refund_notice_is_present: "Isso nunca será adicionado quando uma notificação de reembolso estiver presente."
-        eg_XVL_will_add_VL_to_the_invoices_settled_with_stripe: '(ex. X[/VL] irá adicionar "/VL" às faturas liquidadas com lista)'
+        eg_XVL_will_add_VL_to_the_invoices_settled_by_card: '(eg. X[/VL] will add "/VL" to the invoices settled by online card)'
         add_a_notice_regarding_refunds_only_if_the_invoice_is_concerned: "Adicionar um aviso sobre reembolsos, apenas se a fatura estiver envolvida."
         this_will_never_be_added_when_an_online_sales_notice_is_present: "Isto nunca será adicionado quando uma notificação de vendas online estiver presente."
         eg_RA_will_add_A_to_the_refund_invoices: '(ed. R[/A] irá adicionar "/A" nas faturas reembolsadas)'
@@ -642,15 +642,42 @@ pt:
           error_check_keys: "Erro: por favor, verifique as suas chaves da Stripe."
           stripe_keys_saved: "Chaves Stripe salvas com sucesso."
           error_saving_stripe_keys: "Não foi possível salvar as chaves do Stripe. Por favor, tente novamente mais tarde."
+          payzen_keys_info_html: "<p>To be able to collect online payments, you must configure the <a href='https://payzen.eu' target='_blank'>PayZen</a> identifiers and keys.</p><p>Retrieve them from <a href='https://secure.payzen.eu/vads-merchant/' target='_blank'>your merchant back office</a>.</p>"
+          client_keys: "Client key"
+          api_keys: "API keys"
           edit_keys: "Editar chaves"
           currency: "Moeda"
           currency_info_html: "Por favor, especifique abaixo da moeda usada para pagamento online. Você deve fornecer um código ISO de três letras, da lista de <a href='https://stripe.com/docs/currencies' target='_blank'>moedas com suporte a Stripe</a>."
           currency_alert_html: "<strong>Aviso</strong>: a moeda não pode ser alterada após o primeiro pagamento online ter sido feito. Defina essa configuração cuidadosamente antes de abrir o Fab-manager para seus membros."
           stripe_currency: "Moeda do Stripe"
+          gateway_configuration_error: "An error occurred while configuring the payment gateway."
+          payzen:
+            payzen_keys: "PayZen keys"
+            payzen_username: "Username"
+            payzen_password: "Password"
+            payzen_endpoint: "REST API server name"
+            payzen_hmac: "HMAC-SHA-256 key"
+            payzen_public_key: "Client public key"
+            currency: "Currency"
+            payzen_currency: "PayZen currency"
+            currency_info_html: "Please specify below the currency used for online payment. You should provide a three-letter ISO code, from the list of <a href='https://payzen.io/en-EN/payment-file/ips/list-of-supported-currencies.html' target='_blank'> PayZen supported currencies</a>."
+            save: "Save"
+            currency_error: "The inputted value is not a valid currency"
+            error_while_saving: "An error occurred while saving the currency: "
+            currency_updated: "The PayZen currency was successfully updated to {CURRENCY}."
+          #select a payment gateway
+          gateway_modal:
+            select_gateway_title: "Select a payment gateway"
+            gateway_info: "To securely collect and process payments online, Fab-manager needs to use an third-party service authorized by the financial institutions, called a payment gateway."
+            select_gateway: "Please select an available gateway"
+            stripe: "Stripe"
+            payzen: "PayZen"
+            confirm_button: "Validate the gateway"
         payment_schedules:
           filter_schedules: "Filter schedules"
           no_payment_schedules: "No payment schedules to display"
           load_more: "Load more"
+          card_updated_success: "The user's card was successfully updated"
         document_filters:
           reference: "Reference"
           customer: "Customer"
