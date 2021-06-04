@@ -20,8 +20,7 @@
     <script type="text/javascript" src="//cdn.crowdin.com/jipt/jipt.js"></script>
   <% end %>
 
-  <% require 'pay_zen/helper' %>
-  <% if PayZen::Helper.enabled? %>
+  <% if Setting.get('payzen_endpoint') %>
     <% endpoint = Setting.get('payzen_endpoint') %>
     <%=stylesheet_link_tag "#{endpoint}/static/js/krypton-client/V4.0/ext/classic-reset.css" %>
     <%=javascript_include_tag "#{endpoint}/static/js/krypton-client/V4.0/ext/classic.js" %>

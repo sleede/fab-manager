@@ -21,5 +21,13 @@ class Payment::Item
     false
   end
 
+  def subscription?
+    false
+  end
+
+  def order?
+    false
+  end
+
   def retrieve(_id = nil, *_args); end
 end

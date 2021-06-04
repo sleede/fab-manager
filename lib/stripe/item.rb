@@ -17,4 +17,8 @@ class Stripe::Item < Payment::Item
   def payment_mean?
     klass == 'Stripe::SetupIntent'
   end
+
+  def subscription?
+    klass == 'Stripe::Subscription'
+  end
 end

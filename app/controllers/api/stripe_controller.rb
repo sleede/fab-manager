@@ -5,6 +5,8 @@ class API::StripeController < API::PaymentsController
   require 'stripe/helper'
   require 'stripe/service'
 
+  before_action :check_keys
+
   ##
   # Client requests to confirm a card payment will ask this endpoint.
   # It will check for the need of a strong customer authentication (SCA) to confirm the payment or confirm that the payment
@@ -86,6 +88,11 @@ class API::StripeController < API::PaymentsController
     Stripe::Customer.update(user.payment_gateway_object.gateway_object_id,
                             { invoice_settings: { default_payment_method: params[:payment_method_id] } },
                             { api_key: key })
+    if params[:payment_schedule_id]
+      schedule = PaymentSchedule.find(params[:payment_schedule_id])
+      subscription = schedule.gateway_subscription.retrieve
+      Stripe::Subscription.update(subscription.id, { default_payment_method: params[:payment_method_id] }, { api_key: key })
+    end
     render json: { updated: true }, status: :ok
   rescue Stripe::StripeError => e
     render json: { updated: false, error: e }, status: :unprocessable_entity
@@ -127,5 +134,10 @@ class API::StripeController < API::PaymentsController
       # Invalid status
       { status: 500, json: { error: 'Invalid PaymentIntent status' } }
     end
+  end
+
+  def check_keys
+    key = Setting.get('stripe_secret_key')
+    raise Stripe::StripeError, 'Using live keys in development mode' if key&.match(/^sk_live_/) && Rails.env.development?
   end
 end

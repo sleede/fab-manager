@@ -12,7 +12,9 @@ import PaymentScheduleAPI from '../../api/payment-schedule';
 declare var Application: IApplication;
 
 interface PaymentSchedulesDashboardProps {
-  currentUser: User
+  currentUser: User,
+  onError: (message: string) => void,
+  onCardUpdateSuccess: (message: string) => void,
 }
 
 // how many payment schedules should we display for each page?
@@ -22,7 +24,7 @@ const PAGE_SIZE = 20;
  * This component shows a list of all payment schedules with their associated deadlines (aka. PaymentScheduleItem) and invoices
  * for the currentUser
  */
-const PaymentSchedulesDashboard: React.FC<PaymentSchedulesDashboardProps> = ({ currentUser }) => {
+const PaymentSchedulesDashboard: React.FC<PaymentSchedulesDashboardProps> = ({ currentUser, onError, onCardUpdateSuccess }) => {
   const { t } = useTranslation('logged');
 
   // list of displayed payment schedules
@@ -47,19 +49,26 @@ const PaymentSchedulesDashboard: React.FC<PaymentSchedulesDashboardProps> = ({ c
     api.index({ query: { page: pageNumber + 1, size: PAGE_SIZE }}).then((res) => {
       const list = paymentSchedules.concat(res);
       setPaymentSchedules(list);
-    });
+    }).catch((error) => onError(error.message));
   }
 
   /**
    * Reload from te API all the currently displayed payment schedules
    */
-  const handleRefreshList = (onError?: (msg: any) => void): void => {
+  const handleRefreshList = (): void => {
     const api = new PaymentScheduleAPI();
     api.index({ query: { page: 1, size: PAGE_SIZE * pageNumber }}).then((res) => {
       setPaymentSchedules(res);
     }).catch((err) => {
-      if (typeof onError === 'function') { onError(err.message); }
+      onError(err.message);
     });
+  }
+
+  /**
+   * after a successful card update, provide a success message to the end-user
+   */
+  const handleCardUpdateSuccess = (): void => {
+    onCardUpdateSuccess(t('app.logged.dashboard.payment_schedules.card_updated_success'));
   }
 
   /**
@@ -80,7 +89,12 @@ const PaymentSchedulesDashboard: React.FC<PaymentSchedulesDashboardProps> = ({ c
     <div className="payment-schedules-dashboard">
       {!hasSchedules() && <div>{t('app.logged.dashboard.payment_schedules.no_payment_schedules')}</div>}
       {hasSchedules() && <div className="schedules-list">
-        <PaymentSchedulesTable paymentSchedules={paymentSchedules} showCustomer={false} refreshList={handleRefreshList} operator={currentUser} />
+        <PaymentSchedulesTable paymentSchedules={paymentSchedules}
+                               showCustomer={false}
+                               refreshList={handleRefreshList}
+                               operator={currentUser}
+                               onError={onError}
+                               onCardUpdateSuccess={handleCardUpdateSuccess} />
         {hasMoreSchedules() && <FabButton className="load-more" onClick={handleLoadMore}>{t('app.logged.dashboard.payment_schedules.load_more')}</FabButton>}
       </div>}
     </div>
@@ -88,12 +102,12 @@ const PaymentSchedulesDashboard: React.FC<PaymentSchedulesDashboardProps> = ({ c
 }
 
 
-const PaymentSchedulesDashboardWrapper: React.FC<PaymentSchedulesDashboardProps> = ({ currentUser }) => {
+const PaymentSchedulesDashboardWrapper: React.FC<PaymentSchedulesDashboardProps> = ({ currentUser, onError, onCardUpdateSuccess }) => {
   return (
     <Loader>
-      <PaymentSchedulesDashboard currentUser={currentUser} />
+      <PaymentSchedulesDashboard currentUser={currentUser} onError={onError} onCardUpdateSuccess={onCardUpdateSuccess} />
     </Loader>
   );
 }
 
-Application.Components.component('paymentSchedulesDashboard', react2angular(PaymentSchedulesDashboardWrapper, ['currentUser']));
+Application.Components.component('paymentSchedulesDashboard', react2angular(PaymentSchedulesDashboardWrapper, ['currentUser', 'onError', 'onCardUpdateSuccess']));

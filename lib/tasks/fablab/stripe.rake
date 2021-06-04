@@ -37,10 +37,10 @@ namespace :fablab do
       end
     end
 
-    desc 'sync users to the stripe database'
-    task sync_members: :environment do
-      puts 'We create all non-existing customers on stripe. This may take a while, please wait...'
-      SyncMembersOnStripeWorker.new.perform
+    desc 'sync all objects to the stripe API'
+    task sync_objects: :environment do
+      puts 'We create all non-existing objects on stripe. This may take a while, please wait...'
+      SyncObjectsOnStripeWorker.new.perform
       puts 'Done'
     end
     desc 'sync coupons to the stripe database'
@@ -49,7 +49,7 @@ namespace :fablab do
       Coupon.all.each do |c|
         Stripe::Coupon.retrieve(c.code, api_key: Setting.get('stripe_secret_key'))
       rescue Stripe::InvalidRequestError
-        StripeService.create_stripe_coupon(c.id)
+        Stripe::Service.create_coupon(c.id)
       end
       puts 'Done'
     end

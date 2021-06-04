@@ -48,7 +48,7 @@ class PaymentGatewayService
   private
 
   def service_for_payment_schedule(payment_schedule)
-    service = case payment_schedule_item.payment_schedule.gateway_subscription.klass
+    service = case payment_schedule.gateway_subscription.klass
               when /^PayZen::/
                 require 'pay_zen/service'
                 PayZen::Service

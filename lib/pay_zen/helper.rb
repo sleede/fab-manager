@@ -57,8 +57,12 @@ class PayZen::Helper
 
     ## Generate a hash map compatible with PayZen 'V4/Customer/ShoppingCart'
     def generate_shopping_cart(cart_items, customer, operator)
-      cs = CartService.new(operator)
-      cart = cs.from_hash(cart_items)
+      cart = if cart_items.is_a? ShoppingCart
+               cart_items
+             else
+               cs = CartService.new(operator)
+               cs.from_hash(cart_items)
+             end
       {
         cartItemInfo: cart.items.map do |item|
           {

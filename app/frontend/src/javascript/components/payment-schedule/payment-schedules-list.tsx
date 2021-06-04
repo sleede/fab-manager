@@ -13,7 +13,9 @@ import PaymentScheduleAPI from '../../api/payment-schedule';
 declare var Application: IApplication;
 
 interface PaymentSchedulesListProps {
-  currentUser: User
+  currentUser: User,
+  onError: (message: string) => void,
+  onCardUpdateSuccess: (message: string) => void,
 }
 
 // how many payment schedules should we display for each page?
@@ -22,7 +24,7 @@ const PAGE_SIZE = 20;
 /**
  * This component shows a list of all payment schedules with their associated deadlines (aka. PaymentScheduleItem) and invoices
  */
-const PaymentSchedulesList: React.FC<PaymentSchedulesListProps> = ({ currentUser }) => {
+const PaymentSchedulesList: React.FC<PaymentSchedulesListProps> = ({ currentUser, onError, onCardUpdateSuccess }) => {
   const { t } = useTranslation('admin');
 
   // list of displayed payment schedules
@@ -54,7 +56,7 @@ const PaymentSchedulesList: React.FC<PaymentSchedulesListProps> = ({ currentUser
     const api = new PaymentScheduleAPI();
     api.list({ query: { reference, customer, date, page: 1, size: PAGE_SIZE }}).then((res) => {
       setPaymentSchedules(res);
-    });
+    }).catch((error) => onError(error.message));
   };
 
   /**
@@ -67,18 +69,18 @@ const PaymentSchedulesList: React.FC<PaymentSchedulesListProps> = ({ currentUser
     api.list({ query: { reference: referenceFilter, customer: customerFilter, date: dateFilter, page: pageNumber + 1, size: PAGE_SIZE }}).then((res) => {
       const list = paymentSchedules.concat(res);
       setPaymentSchedules(list);
-    });
+    }).catch((error) => onError(error.message));
   }
 
   /**
    * Reload from te API all the currently displayed payment schedules
    */
-  const handleRefreshList = (onError?: (msg: any) => void): void => {
+  const handleRefreshList = (): void => {
     const api = new PaymentScheduleAPI();
     api.list({ query: { reference: referenceFilter, customer: customerFilter, date: dateFilter, page: 1, size: PAGE_SIZE * pageNumber }}).then((res) => {
       setPaymentSchedules(res);
     }).catch((err) => {
-      if (typeof onError === 'function') { onError(err.message); }
+      onError(err.message);
     });
   }
 
@@ -96,6 +98,13 @@ const PaymentSchedulesList: React.FC<PaymentSchedulesListProps> = ({ currentUser
     return hasSchedules() && paymentSchedules.length < paymentSchedules[0].max_length;
   }
 
+  /**
+   * after a successful card update, provide a success message to the operator
+   */
+  const handleCardUpdateSuccess = (): void => {
+    onCardUpdateSuccess(t('app.admin.invoices.payment_schedules.card_updated_success'));
+  }
+
   return (
     <div className="payment-schedules-list">
       <h3>
@@ -107,7 +116,12 @@ const PaymentSchedulesList: React.FC<PaymentSchedulesListProps> = ({ currentUser
       </div>
       {!hasSchedules() && <div>{t('app.admin.invoices.payment_schedules.no_payment_schedules')}</div>}
       {hasSchedules() && <div className="schedules-list">
-        <PaymentSchedulesTable paymentSchedules={paymentSchedules} showCustomer={true} refreshList={handleRefreshList} operator={currentUser} />
+        <PaymentSchedulesTable paymentSchedules={paymentSchedules}
+                               showCustomer={true}
+                               refreshList={handleRefreshList}
+                               operator={currentUser}
+                               onError={onError}
+                               onCardUpdateSuccess={handleCardUpdateSuccess}  />
         {hasMoreSchedules() && <FabButton className="load-more" onClick={handleLoadMore}>{t('app.admin.invoices.payment_schedules.load_more')}</FabButton>}
       </div>}
     </div>
@@ -115,12 +129,12 @@ const PaymentSchedulesList: React.FC<PaymentSchedulesListProps> = ({ currentUser
 }
 
 
-const PaymentSchedulesListWrapper: React.FC<PaymentSchedulesListProps> = ({ currentUser }) => {
+const PaymentSchedulesListWrapper: React.FC<PaymentSchedulesListProps> = ({ currentUser, onError, onCardUpdateSuccess }) => {
   return (
     <Loader>
-      <PaymentSchedulesList currentUser={currentUser} />
+      <PaymentSchedulesList currentUser={currentUser} onError={onError} onCardUpdateSuccess={onCardUpdateSuccess} />
     </Loader>
   );
 }
 
-Application.Components.component('paymentSchedulesList', react2angular(PaymentSchedulesListWrapper, ['currentUser']));
+Application.Components.component('paymentSchedulesList', react2angular(PaymentSchedulesListWrapper, ['currentUser', 'onError', 'onCardUpdateSuccess']));

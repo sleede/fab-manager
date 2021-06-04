@@ -1,15 +1,14 @@
 import React, { FormEvent } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import { SetupIntent } from "@stripe/stripe-js";
-import { PaymentConfirmation } from '../../../models/payment';
 import { User } from '../../../models/user';
 import StripeAPI from '../../../api/stripe';
+import { PaymentSchedule } from '../../../models/payment-schedule';
 
 interface StripeCardUpdateProps {
   onSubmit: () => void,
-  onSuccess: (result: SetupIntent|PaymentConfirmation|any) => void,
+  onSuccess: () => void,
   onError: (message: string) => void,
-  customerId: number,
+  schedule: PaymentSchedule
   operator: User,
   className?: string,
 }
@@ -19,7 +18,7 @@ interface StripeCardUpdateProps {
  *
  * The form validation button must be created elsewhere, using the attribute form="stripe-card".
  */
-export const StripeCardUpdate: React.FC<StripeCardUpdateProps> = ({ onSubmit, onSuccess, onError, className, customerId, operator, children }) => {
+export const StripeCardUpdate: React.FC<StripeCardUpdateProps> = ({ onSubmit, onSuccess, onError, className, schedule, operator, children }) => {
 
   const stripe = useStripe();
   const elements = useElements();
@@ -47,7 +46,7 @@ export const StripeCardUpdate: React.FC<StripeCardUpdateProps> = ({ onSubmit, on
     } else {
       try {
         // we start by associating the payment method with the user
-        const { client_secret } = await StripeAPI.setupIntent(customerId);
+        const { client_secret } = await StripeAPI.setupIntent(schedule.user.id);
         const { error } = await stripe.confirmCardSetup(client_secret, {
           payment_method: paymentMethod.id,
           mandate_data: {
@@ -64,8 +63,12 @@ export const StripeCardUpdate: React.FC<StripeCardUpdateProps> = ({ onSubmit, on
           onError(error.message);
         } else {
           // then we update the default payment method
-          const res = await StripeAPI.updateCard(customerId, paymentMethod.id);
-          onSuccess(res);
+          const res = await StripeAPI.updateCard(schedule.user.id, paymentMethod.id, schedule.id);
+          if (res.updated) {
+            onSuccess();
+          } else {
+            onError(res.error);
+          }
         }
       } catch (err) {
         // catch api errors

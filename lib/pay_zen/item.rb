@@ -26,4 +26,12 @@ class PayZen::Item < Payment::Item
   def payment_mean?
     klass == 'PayZen::Token'
   end
+
+  def subscription?
+    klass == 'PayZen::Subscription'
+  end
+
+  def order?
+    klass == 'PayZen::Order'
+  end
 end

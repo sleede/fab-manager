@@ -5,31 +5,31 @@ import moment from 'moment';
 import _ from 'lodash';
 import { FabButton } from '../base/fab-button';
 import { FabModal } from '../base/fab-modal';
+import { UpdateCardModal } from '../payment/update-card-modal';
 import { StripeElements } from '../payment/stripe/stripe-elements';
 import { StripeConfirm } from '../payment/stripe/stripe-confirm';
-import { StripeCardUpdate } from '../payment/stripe/stripe-card-update';
 import { User, UserRole } from '../../models/user';
 import { IFablab } from '../../models/fablab';
 import { PaymentSchedule, PaymentScheduleItem, PaymentScheduleItemState } from '../../models/payment-schedule';
 import PaymentScheduleAPI from '../../api/payment-schedule';
-
-import stripeLogo from '../../../../images/powered_by_stripe.png';
-import mastercardLogo from '../../../../images/mastercard.png';
-import visaLogo from '../../../../images/visa.png';
+import { useImmer } from 'use-immer';
+import { SettingName } from '../../models/setting';
 
 declare var Fablab: IFablab;
 
 interface PaymentSchedulesTableProps {
   paymentSchedules: Array<PaymentSchedule>,
   showCustomer?: boolean,
-  refreshList: (onError: (msg: any) => void) => void,
+  refreshList: () => void,
   operator: User,
+  onError: (message: string) => void,
+  onCardUpdateSuccess: () => void
 }
 
 /**
  * This component shows a list of all payment schedules with their associated deadlines (aka. PaymentScheduleItem) and invoices
  */
-const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ paymentSchedules, showCustomer, refreshList, operator }) => {
+const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ paymentSchedules, showCustomer, refreshList, operator, onError, onCardUpdateSuccess }) => {
   const { t } = useTranslation('shared');
 
   // for each payment schedule: are the details (all deadlines) shown or hidden?
@@ -46,12 +46,11 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
   const [tempDeadline, setTempDeadline] = useState<PaymentScheduleItem>(null);
   // when an action is triggered on a deadline, the parent schedule is saved here until the action is done or cancelled.
   const [tempSchedule, setTempSchedule] = useState<PaymentSchedule>(null);
-  // prevent submitting the form to update the card details, until all required fields are filled correctly
-  const [canSubmitUpdateCard, setCanSubmitUpdateCard] = useState<boolean>(true);
-  // errors are saved here, if any, for display purposes.
-  const [errors, setErrors] = useState<string>(null);
   // is open, the modal dialog to cancel the associated subscription?
   const [showCancelSubscription, setShowCancelSubscription] = useState<boolean>(false);
+
+  // we want to display the card update button, only once. This is an association table keeping when we already shown one
+  const cardUpdateButton = new Map<number, boolean>();
 
   /**
    * Check if the requested payment schedule is displayed with its deadlines (PaymentScheduleItem) or without them
@@ -175,12 +174,14 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
         );
       case PaymentScheduleItemState.RequirePaymentMethod:
         return (
-          <FabButton onClick={handleUpdateCard(item, schedule)}
+          <FabButton onClick={handleUpdateCard(schedule, item)}
                      icon={<i className="fas fa-credit-card" />}>
             {t('app.shared.schedules_table.update_card')}
           </FabButton>
         );
       case PaymentScheduleItemState.Error:
+        // if the payment is in error, the schedule is over, and we can't update the card
+        cardUpdateButton.set(schedule.id, true);
         if (isPrivileged()) {
           return (
             <FabButton onClick={handleCancelSubscription(schedule)}
@@ -191,6 +192,17 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
         } else {
           return <span>{t('app.shared.schedules_table.please_ask_reception')}</span>
         }
+      case PaymentScheduleItemState.New:
+        if (!cardUpdateButton.get(schedule.id)) {
+          cardUpdateButton.set(schedule.id, true);
+          return (
+            <FabButton onClick={handleUpdateCard(schedule)}
+                       icon={<i className="fas fa-credit-card" />}>
+              {t('app.shared.schedules_table.update_card')}
+            </FabButton>
+          )
+        }
+        return <span />
       default:
         return <span />
     }
@@ -223,7 +235,7 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
    * Refresh all payment schedules in the table
    */
   const refreshSchedulesTable = (): void => {
-    refreshList(setErrors);
+    refreshList();
   }
 
   /**
@@ -272,7 +284,7 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
   /**
    * Callback triggered when the user's clicks on the "update card" button: show a modal to input a new card
    */
-  const handleUpdateCard = (item: PaymentScheduleItem, paymentSchedule: PaymentSchedule): ReactEventHandler => {
+  const handleUpdateCard = (paymentSchedule: PaymentSchedule, item?: PaymentScheduleItem): ReactEventHandler => {
     return (): void => {
       setTempDeadline(item);
       setTempSchedule(paymentSchedule);
@@ -288,45 +300,30 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
   }
 
   /**
-   * Return the logos, shown in the modal footer.
-   */
-  const logoFooter = (): ReactNode => {
-    return (
-      <div className="stripe-modal-icons">
-        <i className="fa fa-lock fa-2x m-r-sm pos-rlt" />
-        <img src={stripeLogo} alt="powered by stripe" />
-        <img src={mastercardLogo} alt="mastercard" />
-        <img src={visaLogo} alt="visa" />
-      </div>
-    );
-  }
-
-  /**
-   * When the submit button is pushed, disable it to prevent double form submission
-   */
-  const handleCardUpdateSubmit = (): void => {
-    setCanSubmitUpdateCard(false);
-  }
-
-  /**
    * When the card was successfully updated, pay the invoice (using the new payment method) and close the modal
    */
   const handleCardUpdateSuccess = (): void => {
-    const api = new PaymentScheduleAPI();
-    api.payItem(tempDeadline.id).then(() => {
-      refreshSchedulesTable();
+    if (tempDeadline) {
+      const api = new PaymentScheduleAPI();
+      api.payItem(tempDeadline.id).then(() => {
+        refreshSchedulesTable();
+        onCardUpdateSuccess();
+        toggleUpdateCardModal();
+      }).catch((err) => {
+        handleCardUpdateError(err);
+      });
+    } else {
+      // if no tempDeadline (i.e. PaymentScheduleItem), then the user is updating his card number in a pro-active way, we don't need to trigger the payment
+      onCardUpdateSuccess();
       toggleUpdateCardModal();
-    }).catch((err) => {
-      handleCardUpdateError(err);
-    });
+    }
   }
 
   /**
-   * When the card was not updated, show the error
+   * When the card was not updated, raise the error
    */
   const handleCardUpdateError = (error): void => {
-    setErrors(error);
-    setCanSubmitUpdateCard(true);
+    onError(error);
   }
 
   /**
@@ -445,31 +442,13 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
                     preventConfirm={isConfirmActionDisabled}>
             {tempDeadline && <StripeConfirm clientSecret={tempDeadline.client_secret} onResponse={toggleConfirmActionButton} />}
           </FabModal>
-          <FabModal title={t('app.shared.schedules_table.update_card')}
-                    isOpen={showUpdateCard}
-                    toggleModal={toggleUpdateCardModal}
-                    closeButton={false}
-                    customFooter={logoFooter()}
-                    className="update-card-modal">
-            {tempDeadline && tempSchedule && <StripeCardUpdate onSubmit={handleCardUpdateSubmit}
-                                                               onSuccess={handleCardUpdateSuccess}
-                                                               onError={handleCardUpdateError}
-                                                               customerId={tempSchedule.user.id}
-                                                               operator={operator}
-                                                               className="card-form" >
-              {errors && <div className="stripe-errors">
-                {errors}
-              </div>}
-            </StripeCardUpdate>}
-            <div className="submit-card">
-              {canSubmitUpdateCard && <button type="submit" disabled={!canSubmitUpdateCard} form="stripe-card" className="submit-card-btn">{t('app.shared.schedules_table.validate_button')}</button>}
-              {!canSubmitUpdateCard && <div className="payment-pending">
-                <div className="fa-2x">
-                  <i className="fas fa-circle-notch fa-spin" />
-                </div>
-              </div>}
-            </div>
-          </FabModal>
+          {tempSchedule && <UpdateCardModal isOpen={showUpdateCard}
+                           toggleModal={toggleUpdateCardModal}
+                           operator={operator}
+                           afterSuccess={handleCardUpdateSuccess}
+                           onError={handleCardUpdateError}
+                           schedule={tempSchedule}>
+          </UpdateCardModal>}
         </StripeElements>
       </div>
     </div>
@@ -478,10 +457,10 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
 PaymentSchedulesTableComponent.defaultProps = { showCustomer: false };
 
 
-export const PaymentSchedulesTable: React.FC<PaymentSchedulesTableProps> = ({ paymentSchedules, showCustomer, refreshList, operator }) => {
+export const PaymentSchedulesTable: React.FC<PaymentSchedulesTableProps> = ({ paymentSchedules, showCustomer, refreshList, operator, onError, onCardUpdateSuccess }) => {
   return (
     <Loader>
-      <PaymentSchedulesTableComponent paymentSchedules={paymentSchedules} showCustomer={showCustomer} refreshList={refreshList} operator={operator} />
+      <PaymentSchedulesTableComponent paymentSchedules={paymentSchedules} showCustomer={showCustomer} refreshList={refreshList} operator={operator} onError={onError} onCardUpdateSuccess={onCardUpdateSuccess} />
     </Loader>
   );
 }

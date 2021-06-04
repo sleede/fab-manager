@@ -1,6 +1,6 @@
 import apiClient from './clients/api-client';
 import { AxiosResponse } from 'axios';
-import { ShoppingCart } from '../models/payment';
+import { ShoppingCart, UpdateCardResponse } from '../models/payment';
 import { User } from '../models/user';
 import {
   CheckHashResponse,
@@ -40,6 +40,11 @@ export default class PayzenAPI {
 
   static async confirmPaymentSchedule(orderId: string, transactionUuid: string, cart: ShoppingCart): Promise<PaymentSchedule> {
     const res: AxiosResponse<PaymentSchedule> = await apiClient.post('/api/payzen/confirm_payment_schedule', { cart_items: cart, order_id: orderId, transaction_uuid: transactionUuid });
+    return res?.data;
+  }
+
+  static async updateToken(payment_schedule_id: number): Promise<CreateTokenResponse> {
+    const res: AxiosResponse<CreateTokenResponse> = await apiClient.post(`/api/payzen/update_token`, { payment_schedule_id });
     return res?.data;
   }
 }

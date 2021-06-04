@@ -26,10 +26,11 @@ export default class StripeAPI {
     return res?.data;
   }
 
-  static async updateCard (user_id: number, stp_payment_method_id: string): Promise<UpdateCardResponse> {
+  static async updateCard (user_id: number, stp_payment_method_id: string, payment_schedule_id?: number): Promise<UpdateCardResponse> {
     const res: AxiosResponse<UpdateCardResponse> = await apiClient.post(`/api/stripe/update_card`, {
       user_id,
       payment_method_id: stp_payment_method_id,
+      payment_schedule_id
     });
     return res?.data;
   }

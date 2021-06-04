@@ -49,39 +49,35 @@ class PayZen::Service < Payment::Service
   end
 
   def process_payment_schedule_item(payment_schedule_item)
-    pz_order = payment_schedule_item.payment_schedule.payment_gateway_objects.find { |pgo| pgo.gateway_object_type == 'PayZen::Order' }.gateway_object.retrieve
+    pz_order = payment_schedule_item.payment_schedule.gateway_order.retrieve
     transaction = pz_order['answer']['transactions'].last
-    transaction_date = DateTime.parse(transaction['creationDate']).to_date
-    # check that the transaction matches the current PaymentScheduleItem
-    if transaction['amount'] == payment_schedule_item.amount &&
-       transaction_date >= payment_schedule_item.due_date.to_date &&
-       transaction_date <= payment_schedule_item.due_date.to_date + 7.days
-      if transaction['status'] == 'PAID'
-        PaymentScheduleService.new.generate_invoice(payment_schedule_item,
-                                                    payment_method: 'card',
-                                                    payment_id: transaction['uuid'],
-                                                    payment_type: 'PayZen::Transaction')
-        payment_schedule_item.update_attributes(state: 'paid', payment_method: 'card')
-        pgo = PaymentGatewayObject.find_or_initialize_by(item: payment_schedule_item)
-        pgo.gateway_object = PayZen::Item.new('PayZen::Transaction', transaction['uuid'])
-        pgo.save!
-      elsif transaction['status'] == 'RUNNING'
-        if payment_schedule_item.state == 'new'
-          # notify only for new deadlines, to prevent spamming
-          NotificationCenter.call type: 'notify_admin_payment_schedule_failed',
-                                  receiver: User.admins_and_managers,
-                                  attached_object: payment_schedule_item
-          NotificationCenter.call type: 'notify_member_payment_schedule_failed',
-                                  receiver: payment_schedule_item.payment_schedule.user,
-                                  attached_object: payment_schedule_item
-        end
-        payment_schedule_item.update_attributes(state: transaction['detailedStatus'])
-        pgo = PaymentGatewayObject.find_or_initialize_by(item: payment_schedule_item)
-        pgo.gateway_object = PayZen::Item.new('PayZen::Transaction', transaction['uuid'])
-        pgo.save!
-      else
-        payment_schedule_item.update_attributes(state: 'error')
+    return unless transaction_matches?(transaction, payment_schedule_item)
+
+    if transaction['status'] == 'PAID'
+      PaymentScheduleService.new.generate_invoice(payment_schedule_item,
+                                                  payment_method: 'card',
+                                                  payment_id: transaction['uuid'],
+                                                  payment_type: 'PayZen::Transaction')
+      payment_schedule_item.update_attributes(state: 'paid', payment_method: 'card')
+      pgo = PaymentGatewayObject.find_or_initialize_by(item: payment_schedule_item)
+      pgo.gateway_object = PayZen::Item.new('PayZen::Transaction', transaction['uuid'])
+      pgo.save!
+    elsif transaction['status'] == 'RUNNING'
+      if payment_schedule_item.state == 'new'
+        # notify only for new deadlines, to prevent spamming
+        NotificationCenter.call type: 'notify_admin_payment_schedule_failed',
+                                receiver: User.admins_and_managers,
+                                attached_object: payment_schedule_item
+        NotificationCenter.call type: 'notify_member_payment_schedule_failed',
+                                receiver: payment_schedule_item.payment_schedule.user,
+                                attached_object: payment_schedule_item
       end
+      payment_schedule_item.update_attributes(state: transaction['detailedStatus'])
+      pgo = PaymentGatewayObject.find_or_initialize_by(item: payment_schedule_item)
+      pgo.gateway_object = PayZen::Item.new('PayZen::Transaction', transaction['uuid'])
+      pgo.save!
+    else
+      payment_schedule_item.update_attributes(state: 'error')
     end
   end
 
@@ -90,5 +86,14 @@ class PayZen::Service < Payment::Service
   def rrule(payment_schedule)
     count = payment_schedule.payment_schedule_items.count
     "RRULE:FREQ=MONTHLY;COUNT=#{count}"
+  end
+
+  # check if the given transaction matches the given PaymentScheduleItem
+  def transaction_matches?(transaction, payment_schedule_item)
+    transaction_date = DateTime.parse(transaction['creationDate']).to_date
+
+    transaction['amount'] == payment_schedule_item.amount &&
+      transaction_date >= payment_schedule_item.due_date.to_date &&
+      transaction_date <= payment_schedule_item.due_date.to_date + 7.days
   end
 end

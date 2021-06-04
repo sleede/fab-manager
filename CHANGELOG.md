@@ -1,6 +1,9 @@
 # Changelog Fab-manager
 
 ## Next release
+- Ability to use PayZen a the payment gateway
+- For payment schedules, ability to update the related payment card before the deadline
+- Refactored data architecture to a more generic shopping cart model
 - Redesigned the data structure to allow buying multiple and various objects
 - Updated React and its dependencies to 17.0.3 and matching
 - Updated the dependencies of: webpack, lodash, eslint, webpack-dev-server, react2angular, auto-ngtemplate-loader, angular-bootstrap-switch, react-refresh-webpack-plugin and eslint-plugin-react

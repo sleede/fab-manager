@@ -50,11 +50,15 @@ class PaymentSchedule < PaymentDocument
   end
 
   def gateway_subscription
-    payment_gateway_objects.map(&:gateway_object).find { |item| !item.payment_mean? }
+    payment_gateway_objects.map(&:gateway_object).find(&:subscription?)
+  end
+
+  def gateway_order
+    payment_gateway_objects.map(&:gateway_object).find(&:order?)
   end
 
   def main_object
-    payment_schedule_objects.where(main: true).first
+    payment_schedule_objects.find_by(main: true)
   end
 
   def user
@@ -79,6 +83,11 @@ class PaymentSchedule < PaymentDocument
 
   def render_resource
     { partial: 'api/payment_schedules/payment_schedule', locals: { payment_schedule: self } }
+  end
+
+  def to_cart
+    service = CartService.new(operator_profile.user)
+    service.from_payment_schedule(self)
   end
 
   private

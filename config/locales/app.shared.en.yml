@@ -507,10 +507,17 @@ en:
         confirm_button: "Confirm"
         resolve_action: "Resolve the action"
         ok_button: "OK"
-        validate_button: "Validate the new card"
         cancel_subscription: "Cancel the subscription"
         confirm_cancel_subscription: "You're about to cancel this payment schedule and the related subscription. Are you sure?"
         please_ask_reception: "For any questions, please contact the FabLab's reception."
       payment_modal:
         online_payment_disabled: "Online payment is not available. Please contact the FabLab's reception directly."
         unexpected_error: "An error occurred. Please report this issue to the Fab-Manager's team."
+      update_card_modal:
+        unexpected_error: "An error occurred. Please report this issue to the Fab-Manager's team."
+      stripe_card_update_modal:
+        update_card: "Update the card"
+        validate_button: "Validate the new card"
+      payzen_card_update_modal:
+        update_card: "Update the card"
+        validate_button: "Validate the new card"

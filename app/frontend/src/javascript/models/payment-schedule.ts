@@ -20,23 +20,15 @@ export interface PaymentScheduleItem {
   state: PaymentScheduleItemState,
   invoice_id: number,
   payment_method: PaymentMethod,
-  client_secret?: string,
-  details: {
-    recurring: number,
-    adjustment?: number,
-    other_items?: number,
-    without_coupon?: number
-  }
+  client_secret?: string
 }
 
 export interface PaymentSchedule {
   max_length: number;
   id: number,
   total: number,
-  stp_subscription_id: string,
   reference: string,
   payment_method: string,
-  wallet_amount: number,
   items: Array<PaymentScheduleItem>,
   created_at: Date,
   chained_footprint: boolean,
@@ -52,6 +44,9 @@ export interface PaymentSchedule {
     id: number,
     first_name: string,
     last_name: string,
+  },
+  gateway_subscription: {
+    classname: string
   }
 }
 

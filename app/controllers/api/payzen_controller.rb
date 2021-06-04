@@ -4,6 +4,7 @@
 class API::PayzenController < API::PaymentsController
   require 'pay_zen/charge'
   require 'pay_zen/order'
+  require 'pay_zen/token'
   require 'pay_zen/transaction'
   require 'pay_zen/helper'
 
@@ -27,7 +28,8 @@ class API::PayzenController < API::PaymentsController
     @result = client.create_payment(amount: amount[:amount],
                                     order_id: @id,
                                     customer: PayZen::Helper.generate_customer(params[:customer_id], current_user.id, params[:cart_items]))
-    error_handling
+  rescue PayzenError => e
+    render json: e, status: :unprocessable_entity
   end
 
   def create_token
@@ -35,7 +37,19 @@ class API::PayzenController < API::PaymentsController
     client = PayZen::Charge.new
     @result = client.create_token(order_id: @id,
                                   customer: PayZen::Helper.generate_customer(params[:customer_id], current_user.id, params[:cart_items]))
-    error_handling
+  rescue PayzenError => e
+    render json: e, status: :unprocessable_entity
+  end
+
+  def update_token
+    schedule = PaymentSchedule.find(params[:payment_schedule_id])
+    token = schedule.gateway_payment_mean
+    @id = schedule.gateway_order.id
+    @result = PayZen::Token.new.update(token.id,
+                                       PayZen::Helper.generate_customer(schedule.user.id, current_user.id, schedule.to_cart),
+                                       order_id: @id)
+  rescue PayzenError => e
+    render json: e, status: :unprocessable_entity
   end
 
   def check_hash
@@ -80,11 +94,5 @@ class API::PayzenController < API::PaymentsController
 
   def on_payment_success(order_id, cart)
     super(order_id, 'PayZen::Order', cart)
-  end
-
-  def error_handling
-    return unless @result['status'] == 'ERROR'
-
-    render json: { error: @result['answer']['detailedErrorMessage'] || @result['answer']['errorMessage'] }, status: :unprocessable_entity
   end
 end

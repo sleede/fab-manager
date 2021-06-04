@@ -14,4 +14,15 @@ class PayZen::Token < PayZen::Client
   def get(payment_method_token)
     post('/Token/Get/', paymentMethodToken: payment_method_token)
   end
+
+  ##
+  # @see https://payzen.io/en-EN/rest/V4.0/api/playground/Token/Update/
+  ##
+  def update(payment_method_token, customer, order_id: nil, currency: Setting.get('payzen_currency'))
+    post('/Token/Update/',
+         paymentMethodToken: payment_method_token,
+         currency: currency,
+         orderId: order_id,
+         customer: customer)
+  end
 end

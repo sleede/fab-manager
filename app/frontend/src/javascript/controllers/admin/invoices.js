@@ -704,6 +704,20 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     };
 
     /**
+     * Callback used in PaymentScheduleList, in case of error
+     */
+    $scope.onError = function (message) {
+      growl.error(message);
+    };
+
+    /**
+     * Callback triggered when the user has successfully updated his card
+     */
+    $scope.onCardUpdateSuccess = function (message) {
+      growl.success(message);
+    };
+
+    /**
      * Callback triggered after the gateway failed to be configured
      */
     $scope.onGatewayModalError = function (errors) {

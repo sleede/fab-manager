@@ -21,7 +21,9 @@ class StripeWorker
       },
       { api_key: Setting.get('stripe_secret_key') }
     )
-    user.update_columns(stp_customer_id: customer.id)
+    pgo = PaymentGatewayObject.find_or_initialize_by(item: user)
+    pgo.gateway_object = customer
+    pgo.save!
   end
 
   def delete_stripe_coupon(coupon_code)

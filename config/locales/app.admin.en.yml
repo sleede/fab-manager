@@ -677,6 +677,7 @@ en:
           filter_schedules: "Filter schedules"
           no_payment_schedules: "No payment schedules to display"
           load_more: "Load more"
+          card_updated_success: "The user's card was successfully updated"
         document_filters:
           reference: "Reference"
           customer: "Customer"
