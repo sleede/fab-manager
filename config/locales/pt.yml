@@ -355,7 +355,7 @@ pt:
       notify_admins_role_update:
         user_NAME_changed_ROLE_html: "O usuário <strong><em>%{NAME}</strong></em> agora é %{ROLE}."
       notify_admin_objects_stripe_sync:
-        all_objects_sync: "All data were successfully synchronized on Stripe."
+        all_objects_sync: "Todos os dados foram sincronizados com sucesso no Stripe."
       notify_user_when_payment_schedule_ready:
         your_schedule_is_ready_html: "Your payment schedule #%{REFERENCE}, of %{AMOUNT}, is ready. <a href='api/payment_schedules/%{SCHEDULE_ID}/download' target='_blank'>Click here to download</a>."
       notify_admin_payment_schedule_failed:
