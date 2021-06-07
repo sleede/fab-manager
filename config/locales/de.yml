@@ -95,7 +95,7 @@ de:
     including_amount_payed_on_ordering: "Inklusive bei Bestellung bezahlter Betrag"
     total_amount: "Gesamtbetrag"
     refund_on_DATE: "Erstattung am %{DATE}"
-    by_stripe_online_payment: "via Stripe (Online-Zahlung)"
+    by_card_online_payment: "per kreditkarte (Online-Zahlung)"
     by_cheque: "per Scheck"
     by_transfer: "per Banküberweisung"
     by_cash: "in bar"
