@@ -67,6 +67,11 @@ class AddObjectToInvoiceItem < ActiveRecord::Migration[5.2]
     remove_column :invoice_items, :subscription_id
     remove_reference :invoices, :invoiced, polymorphic: true
 
+    InvoiceItem.connection.schema_cache.clear!
+    InvoiceItem.reset_column_information
+    Invoice.connection.schema_cache.clear!
+    Invoice.reset_column_information
+
     # chain records
     puts 'Chaining all record. This may take a while...'
     InvoiceItem.order(:id).all.each(&:chain_record)
@@ -109,6 +114,11 @@ class AddObjectToInvoiceItem < ActiveRecord::Migration[5.2]
     )
     remove_column :invoice_items, :main
     remove_reference :invoice_items, :object, polymorphic: true
+
+    InvoiceItem.connection.schema_cache.clear!
+    InvoiceItem.reset_column_information
+    Invoice.connection.schema_cache.clear!
+    Invoice.reset_column_information
 
     # chain records
     puts 'Chaining all record. This may take a while...'

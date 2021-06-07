@@ -190,6 +190,11 @@ class MigrateStripeIdsToPaymentGatewayObjects < ActiveRecord::Migration[5.2]
       end
     end
 
+    InvoiceItem.connection.schema_cache.clear!
+    InvoiceItem.reset_column_information
+    Invoice.connection.schema_cache.clear!
+    Invoice.reset_column_information
+
     # chain all records
     InvoiceItem.order(:id).all.each(&:chain_record)
     Invoice.order(:id).all.each(&:chain_record)

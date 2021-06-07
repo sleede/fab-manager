@@ -42,6 +42,11 @@ class CreatePaymentScheduleObjects < ActiveRecord::Migration[5.2]
     remove_column :payment_schedules, :scheduled_type
     PaymentScheduleItem.update_all("details = details - 'subscription_id'")
 
+    PaymentScheduleItem.connection.schema_cache.clear!
+    PaymentScheduleItem.reset_column_information
+    PaymentSchedule.connection.schema_cache.clear!
+    PaymentSchedule.reset_column_information
+
     # chain records
     puts 'Chaining all record. This may take a while...'
     PaymentScheduleItem.order(:id).all.each(&:chain_record)
@@ -75,6 +80,11 @@ class CreatePaymentScheduleObjects < ActiveRecord::Migration[5.2]
     )
 
     drop_table :payment_schedule_objects
+
+    PaymentScheduleItem.connection.schema_cache.clear!
+    PaymentScheduleItem.reset_column_information
+    PaymentSchedule.connection.schema_cache.clear!
+    PaymentSchedule.reset_column_information
 
     # chain records
     puts 'Chaining all record. This may take a while...'
