@@ -34,6 +34,8 @@ class MigrateStripeIdsToPaymentGatewayObjects < ActiveRecord::Migration[5.2]
     end
     remove_column :invoices, :stp_invoice_id
     remove_column :invoices, :stp_payment_intent_id
+    Invoice.connection.schema_cache.clear!
+    Invoice.reset_column_information
 
     ## INVOICE ITEMS
     puts 'Migrating invoices items...'
@@ -48,6 +50,8 @@ class MigrateStripeIdsToPaymentGatewayObjects < ActiveRecord::Migration[5.2]
       )
     end
     remove_column :invoice_items, :stp_invoice_item_id
+    InvoiceItem.connection.schema_cache.clear!
+    InvoiceItem.reset_column_information
 
     ## SUBSCRIPTIONS
     # stp_subscription_id is not used anymore.
