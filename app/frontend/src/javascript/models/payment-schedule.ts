@@ -1,5 +1,3 @@
-import { StripeIbanElement } from '@stripe/stripe-js';
-
 export enum PaymentScheduleItemState {
   New = 'new',
   Pending = 'pending',
