@@ -33,7 +33,7 @@ class CreatePaymentScheduleObjects < ActiveRecord::Migration[5.2]
     end
 
     execute %(
-        UPDATE payment_schedules_items
+        UPDATE payment_schedule_items
         SET payment_method = 'card'
         WHERE payment_method = 'stripe'
     )
@@ -69,7 +69,7 @@ class CreatePaymentScheduleObjects < ActiveRecord::Migration[5.2]
     end
 
     execute %(
-        UPDATE payment_schedules_items
+        UPDATE payment_schedule_items
         SET payment_method = 'stripe'
         WHERE payment_method = 'card'
     )
