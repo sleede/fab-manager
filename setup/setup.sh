@@ -112,7 +112,7 @@ config()
 {
   SERVICE="fabmanager"
   echo 'We recommend nginx to serve the application over the network (internet). You can use your own solution or let this script install and configure nginx for Fab-manager.'
-  printf 'If you want to setup install Fab-manager behind a reverse proxy, you may not need to install the integrated nginx.\n'
+  printf 'If you want to install Fab-manager behind a reverse proxy, you may not need to install the integrated nginx.\n'
   read -rp 'Do you want install nginx? (Y/n) ' NGINX </dev/tty
   if [ "$NGINX" != "n" ]; then
     # if the user doesn't want nginx, let him use its own solution for HTTPS
@@ -211,14 +211,21 @@ prepare_nginx()
     printf "The two following configurations are useful if you want to install Fab-manager behind a reverse proxy...\n"
     read -rp "- Do you want to map the Fab-manager's service to an external network? (Y/n) " confirm </dev/tty
     if [ "$confirm" != "n" ]; then
+      read -rp "Please input the name of the external network (default: web) " network </dev/tty
+      if [ "$network" = "" ]; then network="web"; fi
+
       echo "Adding a network configuration to the docker-compose.yml file..."
-      yq -i eval '.networks.web.external = "true"' docker-compose.yml
+      yq -i eval ".networks.$network.external = \"true\"" docker-compose.yml
       yq -i eval '.networks.db = "" | .networks.db tag="!!null"' docker-compose.yml
       yq -i eval '.services.fabmanager.networks += ["web"]' docker-compose.yml
       yq -i eval '.services.fabmanager.networks += ["db"]' docker-compose.yml
       yq -i eval '.services.postgres.networks += ["db"]' docker-compose.yml
       yq -i eval '.services.elasticsearch.networks += ["db"]' docker-compose.yml
       yq -i eval '.services.redis.networks += ["db"]' docker-compose.yml
+      if ! docker network inspect "$network" 1>/dev/null; then
+        echo "Creating the external network $network..."
+        docker network create "$network"
+      fi
     fi
     read -rp "- Do you want to rename the Fab-manager's service? (Y/n) " confirm </dev/tty
     if [ "$confirm" != "n" ]; then
