@@ -95,7 +95,7 @@ zu:
     including_amount_payed_on_ordering: "crwdns3339:0crwdne3339:0"
     total_amount: "crwdns3341:0crwdne3341:0"
     refund_on_DATE: "crwdns3343:0%{DATE}crwdne3343:0"
-    by_stripe_online_payment: "crwdns3345:0crwdne3345:0"
+    by_card_online_payment: "crwdns21574:0crwdne21574:0"
     by_cheque: "crwdns3347:0crwdne3347:0"
     by_transfer: "crwdns3349:0crwdne3349:0"
     by_cash: "crwdns3351:0crwdne3351:0"
