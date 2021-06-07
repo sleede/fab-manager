@@ -95,7 +95,7 @@ fr:
     including_amount_payed_on_ordering: "Dont montant payé à la commande"
     total_amount: "Montant total"
     refund_on_DATE: "Remboursement le %{DATE}"
-    by_card_online_payment: "by card (online payment)"
+    by_card_online_payment: "par carte bancaire (paiement en ligne)"
     by_cheque: "par chèque"
     by_transfer: "par virement"
     by_cash: "en espèces"
