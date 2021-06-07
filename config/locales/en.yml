@@ -95,7 +95,7 @@ en:
     including_amount_payed_on_ordering: "Including amount payed on ordering"
     total_amount: "Total amount"
     refund_on_DATE: "Refund on %{DATE}"
-    by_stripe_online_payment: "by Stripe (online payment)"
+    by_card_online_payment: "by card (online payment)"
     by_cheque: "by cheque"
     by_transfer: "by transfer"
     by_cash: "by cash"

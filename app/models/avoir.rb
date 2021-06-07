@@ -7,7 +7,7 @@ class Avoir < Invoice
 
   after_create :notify_admins_refund_created
 
-  validates :payment_method, inclusion: { in: %w[stripe cheque transfer none cash wallet] }
+  validates :payment_method, inclusion: { in: %w[card cheque transfer none cash wallet] }
 
   attr_accessor :invoice_items_ids
 

@@ -278,7 +278,7 @@ class PDF::Invoice < Prawn::Document
         payment_verbose = I18n.t('invoices.refund_on_DATE', DATE:I18n.l(invoice.avoir_date.to_date)) + ' '
         case invoice.payment_method
         when 'stripe'
-          payment_verbose += I18n.t('invoices.by_stripe_online_payment')
+          payment_verbose += I18n.t('invoices.by_card_online_payment')
         when 'cheque'
           payment_verbose += I18n.t('invoices.by_cheque')
         when 'transfer'
