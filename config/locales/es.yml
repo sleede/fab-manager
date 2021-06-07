@@ -95,7 +95,7 @@ es:
     including_amount_payed_on_ordering: "Incluyendo cantidad pagada en el pedido"
     total_amount: "Precio total"
     refund_on_DATE: "Reembolso en %{DATE}"
-    by_card_online_payment: "by card (online payment)"
+    by_card_online_payment: "por tarjeta (pago online)"
     by_cheque: "por cheque"
     by_transfer: "por transferencia"
     by_cash: "en efectivo"
