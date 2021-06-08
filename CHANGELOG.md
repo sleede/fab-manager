@@ -8,7 +8,7 @@
 - Updated React and its dependencies to 17.0.3 and matching
 - Updated the dependencies of: webpack, lodash, eslint, webpack-dev-server, react2angular, auto-ngtemplate-loader, angular-bootstrap-switch, react-refresh-webpack-plugin and eslint-plugin-react
 - Improved error handling in upgrade script
-- Improved the development and production documentations
+- Improved documentations
 - Improved the style of the titles of the subscription page
 - Check the status of the assets' compilation during the upgrade
 - Footprints are now generated in a more reproductible way

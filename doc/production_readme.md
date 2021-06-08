@@ -41,7 +41,10 @@ Choose one, depending on your budget, on the server's location, on the uptime gu
 You will need at least 2GB of addressable memory (RAM + swap) to install and use Fab-manager.
 We recommend 4 GB RAM for larger communities.
 
-Choose a [supported operating system](../README.md#software-stack) and install docker on it:
+Supported operating systems are Ubuntu LTS 16.04+ and Debian 8+ with an x86 64-bits architecture.
+This might work on other linux systems, and CPU architectures but this is untested for now, and we do not recommend for production purposes.
+
+Choose one and install docker on it:
 - Install [Docker on Debian](https://docs.docker.com/engine/installation/linux/docker-ce/debian/)
 - Install [Docker on Ubuntu](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)
 

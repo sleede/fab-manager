@@ -9,7 +9,8 @@ This document will guide you through all the steps needed to set up a developmen
 3. [ElasticSearch](#elasticsearch)<br/>
 3.1. [Rebuild statistics](#rebuild-stats)<br/>
 3.2. [Backup and Restore](#backup-and-restore-elasticsearch)
-3.3. [Debugging](debugging-elasticsearch)
+3.3. [Debugging](#debugging-elasticsearch)
+4. [Related documentation](#related-documentation)
 
 This procedure is not easy to follow so if you don't need to write some code for Fab-manager, please prefer the [production installation method](doc/production_readme.md).
 
@@ -92,7 +93,7 @@ This procedure is not easy to follow so if you don't need to write some code for
    node --version | grep -q `cat .nvmrc` && echo "ok"
    # Must print ok
    ```
-   
+
    If one of these commands does not print "ok", then try to input `rvm use` or `nvm use`
 
 10. Install bundler in the current RVM gemset
@@ -199,3 +200,13 @@ Restore it with: `elasticdump --input=fablab_stats.json --output=http://localhos
 ### Debugging
 
 In development, visit http://fabmanager-kibana:5601 to use Kibana, the web UI for ElasticSearch
+
+
+<a name="related-documentation"></a>
+## Related Documentation
+
+- [Ruby 2.6.5](http://ruby-doc.org/core-2.6.5/)
+- [Ruby on Rails](http://api.rubyonrails.org)
+- [AngularJS](https://docs.angularjs.org/api)
+- [Angular-Bootstrap](http://angular-ui.github.io/bootstrap/)
+- [ElasticSearch 5.6](https://www.elastic.co/guide/en/elasticsearch/reference/5.6/index.html)

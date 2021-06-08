@@ -7,27 +7,14 @@ Fab-manager is the Fab Lab management solution. It provides a comprehensive, web
 [![Docker Build Status](https://img.shields.io/docker/cloud/build/sleede/fab-manager.svg)](https://hub.docker.com/r/sleede/fab-manager/builds)
 [![Crowdin](https://badges.crowdin.net/fab-manager/localized.svg)](https://crowdin.com/project/fab-manager)
 
+Please visit [fab-manager.com](https://www.fab-manager.com/) for more information about this software and its features.
+
 ##### Table of Contents
-1. [Software stack](#software-stack)
-2. [Contributing](#contributing)
-3. [Documentation](#documentation)
-4. [Open Projects](#open-projects)
-5. [Plugins](#plugins)
-6. [Single Sign-On](#sso)
-7. [Related Documentation](#related-documentation)
-
-
-<a name="software-stack"></a>
-## Software stack
-
-Fab-manager is a Ruby on Rails / AngularJS web application that runs on the following software:
-
-- Ubuntu LTS 14.04+ / Debian 8+
-- Ruby 2.6
-- Redis 6
-- Sidekiq 6
-- Elasticsearch 5.6
-- PostgreSQL 9.6
+1. [Contributing](#contributing)
+2. [Documentation](#documentation)
+3. [Open Projects](#open-projects)
+4. [Plugins](#plugins)
+5. [Single Sign-On](#sso)
 
 <a name="contributing"></a>
 ## Contributing
@@ -81,12 +68,3 @@ Fab-manager can be connected to a [Single Sign-On](https://en.wikipedia.org/wiki
 Currently, OAuth 2 is the only supported protocol for SSO authentication.
 
 For an example of how to use configure an SSO in Fab-manager, please read [sso_with_github.md](doc/sso_with_github.md).
-
-<a name="related-documentation"></a>
-## Related Documentation
-
-- [Ruby 2.6.5](http://ruby-doc.org/core-2.6.5/)
-- [Ruby on Rails](http://api.rubyonrails.org)
-- [AngularJS](https://docs.angularjs.org/api)
-- [Angular-Bootstrap](http://angular-ui.github.io/bootstrap/)
-- [ElasticSearch 5.6](https://www.elastic.co/guide/en/elasticsearch/reference/5.6/index.html)
