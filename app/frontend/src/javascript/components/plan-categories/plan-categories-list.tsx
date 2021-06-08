@@ -129,10 +129,18 @@ export const PlanCategoriesList: React.FC<PlanCategoriesListProps> = ({ onSucces
 
   /**
    * Callback triggered when the user is changing the name of the category in the modal dialog.
-   * We update the name of the temporary set plan-category accordingly.
+   * We update the name of the temporary-set plan-category, accordingly.
    */
   const onCategoryNameChange = (event: BaseSyntheticEvent) => {
     setTempCategory({...tempCategory, name: event.target.value });
+  };
+
+  /**
+   * Callback triggered when the user is changing the weight of the category in the modal dialog.
+   * We update the weight of the temporary-set plan-category, accordingly.
+   */
+  const onCategoryWeightChange = (event: BaseSyntheticEvent) => {
+    setTempCategory({...tempCategory, weight: event.target.value });
   };
 
   /**
@@ -168,14 +176,16 @@ export const PlanCategoriesList: React.FC<PlanCategoriesListProps> = ({ onSucces
       </FabButton>
       <h3>{t('app.admin.plan_categories_list.categories_list')}</h3>
       <table className="categories-table">
-        {categories && categories.map(c =>
-          <tr key={c.id}>
-            <td className="category-name">{c.name}</td>
-            <td className="category-actions">
-              <FabButton type='button' className="edit-button" icon={<i className="fa fa-edit" />} onClick={handleEditCategory(c)} />
-              <FabButton type='button' className="delete-button" icon={<i className="fa fa-trash" />} onClick={handleDeleteCategory(c)} />
-            </td>
-          </tr>)}
+        <tbody>
+          {categories && categories.map(c =>
+            <tr key={c.id}>
+              <td className="category-name">{c.name}</td>
+              <td className="category-actions">
+                <FabButton type='button' className="edit-button" icon={<i className="fa fa-edit" />} onClick={handleEditCategory(c)} />
+                <FabButton type='button' className="delete-button" icon={<i className="fa fa-trash" />} onClick={handleDeleteCategory(c)} />
+              </td>
+            </tr>)}
+        </tbody>
       </table>
       <FabModal title={t('app.admin.plan_categories_list.new_category')}
                  isOpen={creationModal}
@@ -184,11 +194,18 @@ export const PlanCategoriesList: React.FC<PlanCategoriesListProps> = ({ onSucces
                  confirmButton={t('app.admin.plan_categories_list.confirm_create')}
                  onConfirm={onCreateConfirmed}
                  onCreation={initCategoryCreation}>
-        {tempCategory && <LabelledInput id="name"
+        {tempCategory && <div>
+          <LabelledInput id="name"
                          label={t('app.admin.plan_categories_list.name')}
                          type="text"
                          value={tempCategory.name}
-                         onChange={onCategoryNameChange} />}
+                         onChange={onCategoryNameChange} />
+          <LabelledInput id="weight"
+                         type="number"
+                         label={t('app.admin.plan_categories_list.significance')}
+                         value={tempCategory.weight}
+                         onChange={onCategoryWeightChange} />
+        </div>}
       </FabModal>
       <FabModal title={t('app.admin.plan_categories_list.delete_category')}
                 isOpen={deletionModal}
@@ -210,11 +227,16 @@ export const PlanCategoriesList: React.FC<PlanCategoriesListProps> = ({ onSucces
                          label={t('app.admin.plan_categories_list.name')}
                          value={tempCategory.name}
                          onChange={onCategoryNameChange} />
+          <LabelledInput id="category-weight"
+                         type="number"
+                         label={t('app.admin.plan_categories_list.significance')}
+                         value={tempCategory.weight}
+                         onChange={onCategoryWeightChange} />
         </div>}
       </FabModal>
     </div>
   )
-}
+};
 
 
 const PlanCategoriesListWrapper: React.FC<PlanCategoriesListProps> = ({ onSuccess, onError }) => {

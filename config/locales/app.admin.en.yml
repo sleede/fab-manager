@@ -1294,6 +1294,7 @@ en:
         categories_list: "List of the plan's categories"
         new_category: "New category"
         name: "Name"
+        significance: "Significance"
         confirm_create: "Create the category"
         category_created: "The new category was successfully created"
         unable_to_create: "Unable to create the category: "

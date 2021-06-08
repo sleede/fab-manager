@@ -9,7 +9,7 @@ class API::PlanCategoriesController < API::ApiController
   def index
     authorize PlanCategory
 
-    @categories = PlanCategory.all
+    @categories = PlanCategory.order(weight: :desc)
   end
 
   def show; end
