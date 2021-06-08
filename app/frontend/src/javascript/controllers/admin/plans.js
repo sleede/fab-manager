@@ -78,12 +78,15 @@ class PlanController {
 /**
  * Controller used in the plan creation form
  */
-Application.Controllers.controller('NewPlanController', ['$scope', '$uibModal', 'groups', 'prices', 'partners', 'CSRF', '$state', 'growl', '_t',
-  function ($scope, $uibModal, groups, prices, partners, CSRF, $state, growl, _t) {
+Application.Controllers.controller('NewPlanController', ['$scope', '$uibModal', 'groups', 'prices', 'partners', 'CSRF', '$state', 'growl', '_t', 'planCategories',
+  function ($scope, $uibModal, groups, prices, partners, CSRF, $state, growl, _t, planCategories) {
     /* PUBLIC SCOPE */
 
     // current form is used to create a new plan
     $scope.mode = 'creation';
+
+    // list of all plan categories
+    $scope.planCategories = planCategories;
 
     // prices bindings
     $scope.prices = {
@@ -218,8 +221,8 @@ Application.Controllers.controller('NewPlanController', ['$scope', '$uibModal', 
 /**
  * Controller used in the plan edition form
  */
-Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'plans', 'planPromise', 'machines', 'spaces', 'prices', 'partners', 'CSRF', '$state', '$stateParams', 'growl', '$filter', '_t', 'Plan',
-  function ($scope, groups, plans, planPromise, machines, spaces, prices, partners, CSRF, $state, $stateParams, growl, $filter, _t, Plan) {
+Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'plans', 'planPromise', 'machines', 'spaces', 'prices', 'partners', 'CSRF', '$state', '$stateParams', 'growl', '$filter', '_t', 'Plan', 'planCategories',
+  function ($scope, groups, plans, planPromise, machines, spaces, prices, partners, CSRF, $state, $stateParams, growl, $filter, _t, Plan, planCategories) {
   /* PUBLIC SCOPE */
 
     // List of spaces
@@ -233,6 +236,9 @@ Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'p
 
     // List of groups
     $scope.allGroups = groups;
+
+    // list of all plan categories
+    $scope.planCategories = planCategories;
 
     // current form is used for edition mode
     $scope.mode = 'edition';

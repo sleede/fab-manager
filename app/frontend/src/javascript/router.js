@@ -550,7 +550,7 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           categoriesPromise: ['Category', function (Category) { return Category.query().$promise; }],
           themesPromise: ['EventTheme', function (EventTheme) { return EventTheme.query().$promise; }],
-          ageRangesPromise: ['AgeRange', function (AgeRange) { return AgeRange.query().$promise; }],
+          ageRangesPromise: ['AgeRange', function (AgeRange) { return AgeRange.query().$promise; }]
         }
       })
       .state('app.public.events_show', {
@@ -801,6 +801,9 @@ angular.module('application.router', ['ui.router'])
             templateUrl: '/admin/plans/new.html',
             controller: 'NewPlanController'
           }
+        },
+        resolve: {
+          planCategories: ['PlanCategory', function (PlanCategory) { return PlanCategory.query().$promise; }]
         }
       })
       .state('app.admin.plans.edit', {
@@ -815,7 +818,8 @@ angular.module('application.router', ['ui.router'])
           spaces: ['Space', function (Space) { return Space.query().$promise; }],
           machines: ['Machine', function (Machine) { return Machine.query().$promise; }],
           plans: ['Plan', function (Plan) { return Plan.query().$promise; }],
-          planPromise: ['Plan', '$stateParams', function (Plan, $stateParams) { return Plan.get({ id: $stateParams.id }).$promise; }]
+          planPromise: ['Plan', '$stateParams', function (Plan, $stateParams) { return Plan.get({ id: $stateParams.id }).$promise; }],
+          planCategories: ['PlanCategory', function (PlanCategory) { return PlanCategory.query().$promise; }]
         }
       })
       // plan categories
