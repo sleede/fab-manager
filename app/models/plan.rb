@@ -4,6 +4,7 @@
 # Subscribers can also get some Credits for some reservable items
 class Plan < ApplicationRecord
   belongs_to :group
+  belongs_to :plan_category
 
   has_many :credits, dependent: :destroy
   has_many :training_credits, -> { where(creditable_type: 'Training') }, class_name: 'Credit'

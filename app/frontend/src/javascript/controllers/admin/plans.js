@@ -344,3 +344,20 @@ Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'p
     return new PlanController($scope, groups, prices, partners, CSRF, _t);
   }
 ]);
+
+/**
+ * Controller used the plan-categories administration page.
+ * This is just a wrapper to integrate the React component in the angular app
+ */
+Application.Controllers.controller('PlanCategoriesController', ['$scope', 'growl',
+  function ($scope, growl) {
+    /* PUBLIC SCOPE */
+    $scope.onSuccess = function (message) {
+      growl.success(message);
+    };
+
+    $scope.onError = function (message) {
+      growl.error(message);
+    };
+  }
+]);

@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { BaseSyntheticEvent } from 'react';
 
 interface LabelledInputProps {
   id: string,
-  type: string,
+  type?: 'text' | 'date' | 'password' | 'url' | 'time' | 'tel' | 'search' | 'number' | 'month' | 'email' | 'datetime-local' | 'week',
   label: string,
   value: any,
-  onChange: (value: any) => void
+  onChange: (event: BaseSyntheticEvent) => void
 }
 
 /**

@@ -818,6 +818,16 @@ angular.module('application.router', ['ui.router'])
           planPromise: ['Plan', '$stateParams', function (Plan, $stateParams) { return Plan.get({ id: $stateParams.id }).$promise; }]
         }
       })
+      // plan categories
+      .state('app.admin.plan_categories', {
+        url: '/admin/plan_categories',
+        views: {
+          'main@': {
+            templateUrl: '/admin/plans/categories.html',
+            controller: 'PlanCategoriesController'
+          }
+        }
+      })
 
       // coupons
       .state('app.admin.coupons_new', {

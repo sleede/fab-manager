@@ -1,4 +1,4 @@
-import React, { ReactNode, BaseSyntheticEvent } from 'react';
+import React, { ReactNode, BaseSyntheticEvent, useEffect } from 'react';
 import Modal from 'react-modal';
 import { useTranslation } from 'react-i18next';
 import { Loader } from './loader';
@@ -24,7 +24,8 @@ interface FabModalProps {
   width?: ModalSize,
   customFooter?: ReactNode,
   onConfirm?: (event: BaseSyntheticEvent) => void,
-  preventConfirm?: boolean
+  preventConfirm?: boolean,
+  onCreation?: () => void,
 }
 
 // initial request to the API
@@ -33,8 +34,14 @@ const blackLogoFile = CustomAssetAPI.get(CustomAssetName.LogoBlackFile);
 /**
  * This component is a template for a modal dialog that wraps the application style
  */
-export const FabModal: React.FC<FabModalProps> = ({ title, isOpen, toggleModal, children, confirmButton, className, width = 'sm', closeButton, customFooter, onConfirm, preventConfirm }) => {
+export const FabModal: React.FC<FabModalProps> = ({ title, isOpen, toggleModal, children, confirmButton, className, width = 'sm', closeButton, customFooter, onConfirm, preventConfirm, onCreation }) => {
   const { t } = useTranslation('shared');
+
+  useEffect(() => {
+    if (typeof onCreation === 'function' && isOpen) {
+      onCreation();
+    }
+  }, [isOpen]);
 
   // the theme's logo, for back backgrounds
   const blackLogo = blackLogoFile.read();
