@@ -34,6 +34,10 @@
 - [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
 - [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/rename-adminsys.sh | bash`
 
+## v4.7.12 2021 June 09
+
+- Fix a bug: unable to process stripe payments
+
 ## v4.7.11 2021 May 26
 
 - Updated ffi to 1.15.1

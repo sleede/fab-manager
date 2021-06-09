@@ -5,9 +5,17 @@ import { PaymentSchedule } from '../models/payment-schedule';
 import { Invoice } from '../models/invoice';
 
 export default class StripeAPI {
-  static async confirm (stp_payment_method_id: string, cart_items: ShoppingCart): Promise<PaymentConfirmation|Invoice> {
+  static async confirmMethod (stp_payment_method_id: string, cart_items: ShoppingCart): Promise<PaymentConfirmation|Invoice> {
     const res: AxiosResponse<PaymentConfirmation|Invoice> = await apiClient.post(`/api/stripe/confirm_payment`, {
       payment_method_id: stp_payment_method_id,
+      cart_items
+    });
+    return res?.data;
+  }
+
+  static async confirmIntent (stp_payment_intent_id: string, cart_items: ShoppingCart): Promise<PaymentConfirmation|Invoice> {
+    const res: AxiosResponse = await apiClient.post(`/api/payments/confirm_payment`, {
+      payment_intent_id: stp_payment_intent_id,
       cart_items
     });
     return res?.data;
