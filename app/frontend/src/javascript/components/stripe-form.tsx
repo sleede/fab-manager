@@ -52,7 +52,7 @@ export const StripeForm: React.FC<StripeFormProps> = ({ onSubmit, onSuccess, onE
       try {
         if (!paymentSchedule) {
           // process the normal payment pipeline, including SCA validation
-          const res = await PaymentAPI.confirm(paymentMethod.id, cartItems);
+          const res = await PaymentAPI.confirmMethod(paymentMethod.id, cartItems);
           await handleServerConfirmation(res);
         } else {
           // we start by associating the payment method with the user
@@ -107,7 +107,7 @@ export const StripeForm: React.FC<StripeFormProps> = ({ onSubmit, onSuccess, onE
         // The card action has been handled
         // The PaymentIntent can be confirmed again on the server
         try {
-          const confirmation = await PaymentAPI.confirm(result.paymentIntent.id, cartItems);
+          const confirmation = await PaymentAPI.confirmIntent(result.paymentIntent.id, cartItems);
           await handleServerConfirmation(confirmation);
         } catch (e) {
           onError(e);
