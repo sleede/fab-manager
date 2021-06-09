@@ -1,6 +1,6 @@
 # Changelog Fab-manager
 
-## next release
+## v4.7.12 2021 June 09
 
 - Fix a bug: unable to process stripe payments
 
