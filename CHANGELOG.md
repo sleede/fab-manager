@@ -1,5 +1,9 @@
 # Changelog Fab-manager
 
+## next release
+
+- Fix a bug: unable to process stripe payments
+
 ## v4.7.11 2021 May 26
 
 - Updated ffi to 1.15.1
