@@ -5,7 +5,7 @@ class API::StripeController < API::PaymentsController
   require 'stripe/helper'
   require 'stripe/service'
 
-  before_action :check_keys
+  before_action :check_keys, except: :online_payment_status
 
   ##
   # Client requests to confirm a card payment will ask this endpoint.
