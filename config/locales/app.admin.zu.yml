@@ -1288,6 +1288,34 @@ zu:
         report_will_be_destroyed: "crwdns8499:0crwdne8499:0"
         report_removed: "crwdns8501:0crwdne8501:0"
         failed_to_remove: "crwdns8503:0crwdne8503:0"
+      plans_categories:
+        manage_plans_categories: "crwdns21576:0crwdne21576:0"
+      plan_categories_list:
+        categories_list: "crwdns21578:0crwdne21578:0"
+        name: "crwdns21580:0crwdne21580:0"
+        significance: "crwdns21582:0crwdne21582:0"
+      create_plan_category:
+        new_category: "crwdns21584:0crwdne21584:0"
+        name: "crwdns21586:0crwdne21586:0"
+        significance: "crwdns21588:0crwdne21588:0"
+        significance_info: "crwdns21590:0crwdne21590:0"
+        confirm_create: "crwdns21592:0crwdne21592:0"
+        category_created: "crwdns21594:0crwdne21594:0"
+        unable_to_create: "crwdns21596:0crwdne21596:0"
+      edit_plan_category:
+        edit_category: "crwdns21598:0crwdne21598:0"
+        name: "crwdns21600:0crwdne21600:0"
+        significance: "crwdns21602:0crwdne21602:0"
+        confirm_edition: "crwdns21604:0crwdne21604:0"
+        category_updated: "crwdns21606:0crwdne21606:0"
+        unable_to_update: "crwdns21608:0crwdne21608:0"
+        significance_info: "crwdns21610:0crwdne21610:0"
+      delete_plan_category:
+        delete_category: "crwdns21612:0crwdne21612:0"
+        confirm_delete: "crwdns21614:0crwdne21614:0"
+        delete_confirmation: "crwdns21616:0crwdne21616:0"
+        category_deleted: "crwdns21618:0crwdne21618:0"
+        unable_to_delete: "crwdns21620:0crwdne21620:0"
       #feature tour
       tour:
         conclusion:
