@@ -1,16 +1,13 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { react2angular } from 'react2angular';
 import moment from 'moment';
 import _ from 'lodash'
-import { IApplication } from '../models/application';
-import { Plan } from '../models/plan';
-import { User, UserRole } from '../models/user';
-import { Loader } from './base/loader';
-import '../lib/i18n';
-import { IFablab } from '../models/fablab';
+import { IFablab } from '../../models/fablab';
+import { Plan } from '../../models/plan';
+import { User, UserRole } from '../../models/user';
+import { Loader } from '../base/loader';
+import '../../lib/i18n';
 
-declare var Application: IApplication;
 declare var Fablab: IFablab;
 
 interface PlanCardProps {
@@ -26,7 +23,7 @@ interface PlanCardProps {
 /**
  * This component is a "card" (visually), publicly presenting the details of a plan and allowing a user to subscribe.
  */
-const PlanCard: React.FC<PlanCardProps> = ({ plan, userId, subscribedPlanId, operator, onSelectPlan, isSelected, onLoginRequested }) => {
+const PlanCardComponent: React.FC<PlanCardProps> = ({ plan, userId, subscribedPlanId, operator, onSelectPlan, isSelected, onLoginRequested }) => {
   const { t } = useTranslation('public');
   /**
    * Return the formatted localized amount of the given plan (eg. 20.5 => "20,50 €")
@@ -146,12 +143,10 @@ const PlanCard: React.FC<PlanCardProps> = ({ plan, userId, subscribedPlanId, ope
   );
 }
 
-const PlanCardWrapper: React.FC<PlanCardProps> = ({ plan, userId, subscribedPlanId, operator, onSelectPlan, isSelected, onLoginRequested }) => {
+export const PlanCard: React.FC<PlanCardProps> = ({ plan, userId, subscribedPlanId, operator, onSelectPlan, isSelected, onLoginRequested }) => {
   return (
     <Loader>
-      <PlanCard plan={plan} userId={userId} subscribedPlanId={subscribedPlanId} operator={operator} isSelected={isSelected} onSelectPlan={onSelectPlan} onLoginRequested={onLoginRequested}/>
+      <PlanCardComponent plan={plan} userId={userId} subscribedPlanId={subscribedPlanId} operator={operator} isSelected={isSelected} onSelectPlan={onSelectPlan} onLoginRequested={onLoginRequested}/>
     </Loader>
   );
 }
-
-Application.Components.component('planCard', react2angular(PlanCardWrapper, ['plan', 'userId', 'subscribedPlanId', 'operator', 'onSelectPlan', 'isSelected', 'onLoginRequested']));

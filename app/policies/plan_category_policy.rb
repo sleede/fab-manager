@@ -2,7 +2,7 @@
 
 # Check the access policies for API::PlanCategoriesController
 class PlanCategoryPolicy < ApplicationPolicy
-  %w[index show create update destroy].each do |action|
+  %w[show create update destroy].each do |action|
     define_method "#{action}?" do
       user.admin?
     end

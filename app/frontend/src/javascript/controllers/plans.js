@@ -12,8 +12,8 @@
  */
 'use strict';
 
-Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScope', '$state', '$uibModal', 'Auth', 'AuthService', 'dialogs', 'growl', 'plansPromise', 'groupsPromise', 'Subscription', 'Member', 'subscriptionExplicationsPromise', '_t', 'Wallet', 'helpers', 'settingsPromise', 'Price',
-  function ($scope, $rootScope, $state, $uibModal, Auth, AuthService, dialogs, growl, plansPromise, groupsPromise, Subscription, Member, subscriptionExplicationsPromise, _t, Wallet, helpers, settingsPromise, Price) {
+Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScope', '$state', '$uibModal', 'Auth', 'AuthService', 'dialogs', 'growl', 'groupsPromise', 'Subscription', 'Member', 'subscriptionExplicationsPromise', '_t', 'Wallet', 'helpers', 'settingsPromise', 'Price',
+  function ($scope, $rootScope, $state, $uibModal, Auth, AuthService, dialogs, growl, groupsPromise, Subscription, Member, subscriptionExplicationsPromise, _t, Wallet, helpers, settingsPromise, Price) {
     /* PUBLIC SCOPE */
 
     // list of groups
@@ -25,9 +25,6 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
       change: false,
       id: null
     };
-
-    // list of plans, classified by group
-    $scope.plansClassifiedByGroup = [];
 
     // user to deal with
     $scope.ctrl = {
@@ -93,22 +90,19 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
      * Open the modal dialog allowing the user to log into the system
      */
     $scope.userLogin = function () {
-      console.log('userLogin');
       setTimeout(() => {
-        console.log('going throught timeout');
         if (!$scope.isAuthenticated()) {
-          console.log('! authenticated');
           $scope.login();
         }
       }, 50);
     };
 
     /**
-     * Check if the provided plan is currently selected
-     * @param plan {Object} Resource plan
+     * Callback triggered when an error is raised on a lower-level component
+     * @param message {string}
      */
-    $scope.isSelected = function (plan) {
-      return $scope.selectedPlan === plan;
+    $scope.onError = function (message) {
+      growl.error(message);
     };
 
     /**
@@ -195,18 +189,6 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
      * Kind of constructor: these actions will be realized first when the controller is loaded
      */
     const initialize = function () {
-      // group all plans by Group
-      for (const group of $scope.groups) {
-        const groupObj = { id: group.id, name: group.name, plans: [], actives: 0 };
-        for (const plan of plansPromise) {
-          if (plan.group_id === group.id) {
-            groupObj.plans.push(plan);
-            if (!plan.disabled) { groupObj.actives++; }
-          }
-        }
-        $scope.plansClassifiedByGroup.push(groupObj);
-      }
-
       if ($scope.currentUser) {
         if (!AuthService.isAuthorized('admin')) {
           $scope.ctrl.member = $scope.currentUser;

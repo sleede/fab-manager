@@ -3,12 +3,10 @@
 # API Controller for resources of type PlanCategory
 # PlanCategory are used to sort plans
 class API::PlanCategoriesController < API::ApiController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: :index
   before_action :set_category, only: %i[show update destroy]
 
   def index
-    authorize PlanCategory
-
     @categories = PlanCategory.order(weight: :desc)
   end
 
