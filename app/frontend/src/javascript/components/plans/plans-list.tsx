@@ -99,7 +99,7 @@ const PlansList: React.FC<PlansListProps> = ({ onError, onPlanSelection, onLogin
    * Filter the plans to display, depending on the connected/selected user
    */
   const filteredPlans = (): PlansTree => {
-    if (!customer) return plans;
+    if (_.isEmpty(customer)) return plans;
 
     return new Map([[customer.group_id, plans.get(customer.group_id)]]);
   }

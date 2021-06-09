@@ -452,17 +452,11 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
     // the application global settings
     $scope.settings = settingsPromise;
 
-    // list of plans, classified by group
-    $scope.groups = groupsPromise;
+    // all plans, used in <cart>
     $scope.plans = plansPromise;
-    $scope.plansClassifiedByGroup = [];
-    for (let group of Array.from(groupsPromise)) {
-      const groupObj = { id: group.id, name: group.name, plans: [] };
-      for (let plan of Array.from(plansPromise)) {
-        if (plan.group_id === group.id) { groupObj.plans.push(plan); }
-      }
-      $scope.plansClassifiedByGroup.push(groupObj);
-    }
+
+    // all groups, used in <cart>
+    $scope.groups = groupsPromise;
 
     // the user to deal with, ie. the current user for non-admins
     $scope.ctrl =

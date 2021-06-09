@@ -110,17 +110,11 @@ Application.Controllers.controller('ReserveTrainingController', ['$scope', '$sta
     $scope.ctrl =
     { member: {} };
 
-    // list of plans, classified by group
-    $scope.groups = groupsPromise;
+    // all plans, used in <cart>
     $scope.plans = plansPromise;
-    $scope.plansClassifiedByGroup = [];
-    for (let group of Array.from(groupsPromise)) {
-      const groupObj = { id: group.id, name: group.name, plans: [] };
-      for (let plan of Array.from(plansPromise)) {
-        if (plan.group_id === group.id) { groupObj.plans.push(plan); }
-      }
-      $scope.plansClassifiedByGroup.push(groupObj);
-    }
+
+    // all groups, used in <cart>
+    $scope.groups = groupsPromise;
 
     // mapping of fullCalendar events.
     $scope.events = {
