@@ -1288,6 +1288,34 @@ pt:
         report_will_be_destroyed: "Depois que o relatório for processado, ele será excluído. Isso não pode ser desfeito, continuar?"
         report_removed: "O relatório foi eliminado"
         failed_to_remove: "Ocorreu um erro, não é possível excluir o relatório"
+      plans_categories:
+        manage_plans_categories: "Manage plans' categories"
+      plan_categories_list:
+        categories_list: "List of the plan's categories"
+        name: "Name"
+        significance: "Significance"
+      create_plan_category:
+        new_category: "New category"
+        name: "Name"
+        significance: "Significance"
+        significance_info: "Categories will be shown ordered by signifiance. The higher you set the significance, the first the category will be shown."
+        confirm_create: "Create the category"
+        category_created: "The new category was successfully created"
+        unable_to_create: "Unable to create the category: "
+      edit_plan_category:
+        edit_category: "Edit the category"
+        name: "Name"
+        significance: "Significance"
+        confirm_edition: "Validate"
+        category_updated: "The category was successfully updated"
+        unable_to_update: "Unable to update the category: "
+        significance_info: "Categories will be shown ordered by signifiance. The higher you set the significance, the first the category will be shown."
+      delete_plan_category:
+        delete_category: "Delete a category"
+        confirm_delete: "Delete"
+        delete_confirmation: "Are you sure you want to delete this category? If you do, the plans associated with this category won't be sorted anymore."
+        category_deleted: "The category was successfully deleted"
+        unable_to_delete: "Unable to delete the category: "
       #feature tour
       tour:
         conclusion:
