@@ -1607,6 +1607,38 @@ ALTER SEQUENCE public.payment_schedules_id_seq OWNED BY public.payment_schedules
 
 
 --
+-- Name: plan_categories; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.plan_categories (
+    id bigint NOT NULL,
+    name character varying,
+    weight integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: plan_categories_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.plan_categories_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: plan_categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.plan_categories_id_seq OWNED BY public.plan_categories.id;
+
+
+--
 -- Name: plans; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1628,7 +1660,8 @@ CREATE TABLE public.plans (
     interval_count integer DEFAULT 1,
     slug character varying,
     disabled boolean,
-    monthly_payment boolean
+    monthly_payment boolean,
+    plan_category_id bigint
 );
 
 
@@ -3364,6 +3397,13 @@ ALTER TABLE ONLY public.payment_schedules ALTER COLUMN id SET DEFAULT nextval('p
 
 
 --
+-- Name: plan_categories id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.plan_categories ALTER COLUMN id SET DEFAULT nextval('public.plan_categories_id_seq'::regclass);
+
+
+--
 -- Name: plans id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -4007,6 +4047,14 @@ ALTER TABLE ONLY public.payment_schedule_objects
 
 ALTER TABLE ONLY public.payment_schedules
     ADD CONSTRAINT payment_schedules_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: plan_categories plan_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.plan_categories
+    ADD CONSTRAINT plan_categories_pkey PRIMARY KEY (id);
 
 
 --
@@ -4732,6 +4780,13 @@ CREATE INDEX index_plans_on_group_id ON public.plans USING btree (group_id);
 
 
 --
+-- Name: index_plans_on_plan_category_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_plans_on_plan_category_id ON public.plans USING btree (plan_category_id);
+
+
+--
 -- Name: index_prices_on_group_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5230,6 +5285,14 @@ CREATE RULE accounting_periods_del_protect AS
 
 
 --
+-- Name: accounting_periods accounting_periods_upd_protect; Type: RULE; Schema: public; Owner: -
+--
+
+CREATE RULE accounting_periods_upd_protect AS
+    ON UPDATE TO public.accounting_periods DO INSTEAD NOTHING;
+
+
+--
 -- Name: projects projects_search_content_trigger; Type: TRIGGER; Schema: public; Owner: -
 --
 
@@ -5610,6 +5673,14 @@ ALTER TABLE ONLY public.events_event_themes
 
 ALTER TABLE ONLY public.projects_machines
     ADD CONSTRAINT fk_rails_c1427daf48 FOREIGN KEY (project_id) REFERENCES public.projects(id);
+
+
+--
+-- Name: plans fk_rails_c503ed4a8c; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.plans
+    ADD CONSTRAINT fk_rails_c503ed4a8c FOREIGN KEY (plan_category_id) REFERENCES public.plan_categories(id);
 
 
 --
@@ -6015,6 +6086,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210416083610'),
 ('20210521085710'),
 ('20210525134018'),
-('20210525150942');
+('20210525150942'),
+('20210608082748');
 
 
