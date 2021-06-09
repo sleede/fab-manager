@@ -34,7 +34,7 @@ class Footprintable < ApplicationRecord
     FootprintService.debug_footprint(self.class, self)
   end
 
-  protected
+  #protected
 
   def compute_footprint
     FootprintService.compute_footprint(self.class, self)
