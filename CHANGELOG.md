@@ -23,6 +23,7 @@
 - Fix a bug: in the admin calendar, the trainings' info panel shows "duration: null minutes"
 - Fix a bug: on the subscriptions page, not logged-in users do not see the action button
 - Fix a bug: unable to map a new setup to the db network
+- Fix a bug: do not allow users to register with an invalid email address
 - Fix a security issue: updated dns-packet to 1.3.4 to fix [CVE-2021-23386](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23386)
 - `SUPERADMIN_EMAIL` renamed to `ADMINSYS_EMAIL`
 - `scripts/run-tests.sh` renamed to `scripts/tests.sh`
