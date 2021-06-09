@@ -24,6 +24,7 @@
 @import "modules/fab-modal";
 @import "modules/fab-input";
 @import "modules/fab-button";
+@import "modules/fab-alert";
 @import "modules/payment-schedule-summary";
 @import "modules/wallet-info";
 @import "modules/stripe-modal";
@@ -44,5 +45,8 @@
 @import "modules/stripe-update-card-modal";
 @import "modules/payzen-update-card-modal";
 @import "modules/plan-categories-list";
+@import "modules/create-plan-category";
+@import "modules/edit-plan-category";
+@import "modules/delete-plan-category";
 
 @import "app.responsive";

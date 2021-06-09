@@ -1,9 +1,9 @@
-import React, { BaseSyntheticEvent } from 'react';
+import React, { BaseSyntheticEvent, ReactNode } from 'react';
 
 interface LabelledInputProps {
   id: string,
   type?: 'text' | 'date' | 'password' | 'url' | 'time' | 'tel' | 'search' | 'number' | 'month' | 'email' | 'datetime-local' | 'week',
-  label: string,
+  label: string | ReactNode,
   value: any,
   onChange: (event: BaseSyntheticEvent) => void
 }
