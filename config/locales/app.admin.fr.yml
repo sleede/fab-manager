@@ -1314,8 +1314,8 @@ fr:
         delete_category: "Supprimer une catégorie"
         confirm_delete: "Supprimer"
         delete_confirmation: "Êtes-vous sûr de vouloir supprimer cette catégorie ? Si vous le faites, les formules associés à cette catégorie ne seront plus triés."
-        category_deleted: "The category was successfully deleted"
-        unable_to_delete: "Unable to delete the category: "
+        category_deleted: "La catégorie a bien été supprimée"
+        unable_to_delete: "Impossible de supprimer la catégorie : "
       #feature tour
       tour:
         conclusion:
