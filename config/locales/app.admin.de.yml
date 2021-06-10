@@ -530,7 +530,9 @@ de:
         logo_successfully_saved: "Logo erfolgreich gespeichert."
         an_error_occurred_while_saving_the_logo: "Beim Speichern des Logos ist ein Fehler aufgetreten."
         filename: "Dateiname"
+        schedule_filename: "Schedule file name"
         prefix_info: "Die Rechnungen werden als PDF-Dateien generiert, die mit dem folgenden Präfix benannt sind."
+        schedule_prefix_info: "The payment schedules will be generated as PDF files, named with the following prefix."
         prefix: "Präfix"
         prefix_successfully_saved: "Dateipräfix erfolgreich gespeichert"
         an_error_occurred_while_saving_the_prefix: "Beim Speichern des Dateipräfix ist ein Fehler aufgetreten"
@@ -650,7 +652,7 @@ de:
           currency_info_html: "Bitte geben Sie unten die Währung an, die für Online-Bezahlung verwendet wird. Sie sollten einen ISO-Code mit drei Buchstaben aus der Liste <a href='https://stripe.com/docs/currencies' target='_blank'>Stripe unterstützter Währungen eingeben</a>."
           currency_alert_html: "<strong>Warnung</strong>: Die Währung kann nicht mehr geändert werden, nachdem die erste Online-Zahlung eingegangen ist. Bitte nehmen Sie diese Einstellung sorgfältig vor, bevor Sie Fab-Manager für Mitglieder öffnen."
           stripe_currency: "Stripe-Währung"
-          gateway_configuration_error: "An error occurred while configuring the payment gateway."
+          gateway_configuration_error: "An error occurred while configuring the payment gateway: "
           payzen:
             payzen_keys: "PayZen keys"
             payzen_username: "Benutzername"
@@ -673,6 +675,7 @@ de:
             stripe: "Stripe"
             payzen: "PayZen"
             confirm_button: "Validate the gateway"
+            successfully_updated: " successfully updated"
         payment_schedules:
           filter_schedules: "Pläne filtern"
           no_payment_schedules: "Keine Zahlungspläne zum Anzeigen"
