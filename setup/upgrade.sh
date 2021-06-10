@@ -96,6 +96,8 @@ version_check()
     version_error "v4.0.4"
   elif verlt "$VERSION" 4.4.6; then
     version_error "v4.4.6"
+  elif verlt "$VERSION" 4.7.12; then
+    version_error "v4.7.12"
   fi
 }
 
