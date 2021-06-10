@@ -2,6 +2,9 @@
 
 ## Next release
 - Ability to use PayZen a the payment gateway
+- Ability to organize plans in categories
+- Ability to configure the prefix of the payment-schedules' files
+- Filter plans by group and by duration
 - For payment schedules, ability to update the related payment card before the deadline
 - Refactored data architecture to a more generic shopping cart model
 - Redesigned the data structure to allow buying multiple and various objects
@@ -16,8 +19,6 @@
 - Validate on server side the reservation of slots restricted to subscribers
 − Unified and documented upgrade exit codes
 - During setup, ask for the name of the external network and create it, if it does not already exists
-- Ability to configure the prefix of the payment-schedules' files
-- Filter plans by group and by duration
 - Fix a bug: cannot select the recurrence end date on Safari or Internet Explorer
 - Fix a bug: build status badge is not working
 - Fix a bug: unable to set date formats during installation
