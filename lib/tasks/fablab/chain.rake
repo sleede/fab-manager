@@ -71,7 +71,7 @@ namespace :fablab do
     end
 
     def chain_history_values
-      HistoryValue.order(:id).all.each(&:chain_record)
+      HistoryValue.order(:created_at).all.each(&:chain_record)
     end
 
     desc 'assign all footprints to existing PaymentSchedule records'

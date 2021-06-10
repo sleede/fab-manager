@@ -74,6 +74,7 @@
               <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
               <input type="email"
                      name="email"
+                     ng-pattern="/^[^@]+@[^\.]+\..{2,}$/"
                      ng-model="user.email"
                      class="form-control"
                      placeholder="{{ 'app.public.common.your_email_address' | translate }}"

@@ -24,7 +24,6 @@ export enum SettingName {
   InvoiceLegals = 'invoice_legals',
   BookingWindowStart = 'booking_window_start',
   BookingWindowEnd = 'booking_window_end',
-  BookingSlotDuration = 'booking_slot_duration',
   BookingMoveEnable = 'booking_move_enable',
   BookingMoveDelay = 'booking_move_delay',
   BookingCancelEnable = 'booking_cancel_enable',
@@ -113,6 +112,7 @@ export enum SettingName {
 
 export interface Setting {
   name: SettingName,
+  localized?: string,
   value: string,
   last_update?: Date,
   history?: Array<HistoryValue>
@@ -127,5 +127,6 @@ export interface SettingError {
 export interface SettingBulkResult {
   status: boolean,
   value?: any,
-  error?: string
+  error?: string,
+  localized?: string,
 }

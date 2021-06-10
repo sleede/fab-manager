@@ -23,8 +23,8 @@ export default class SettingAPI {
     return  res?.data?.setting;
   }
 
-  async bulkUpdate (settings: Map<SettingName, any>): Promise<Map<SettingName, SettingBulkResult>> {
-    const res: AxiosResponse = await apiClient.patch('/api/settings/bulk_update', { settings: SettingAPI.toObjectArray(settings) });
+  async bulkUpdate (settings: Map<SettingName, any>, transactional: boolean = false): Promise<Map<SettingName, SettingBulkResult>> {
+    const res: AxiosResponse = await apiClient.patch(`/api/settings/bulk_update?transactional=${transactional}`, { settings: SettingAPI.toObjectArray(settings) });
     return SettingAPI.toBulkMap(res?.data?.settings);
   }
 
@@ -66,6 +66,9 @@ export default class SettingAPI {
       }
       if ('value' in item) {
         itemData.value = item.value;
+      }
+      if ('localized' in item) {
+        itemData.localized = item.localized;
       }
 
       map.set(item.name as SettingName, itemData)

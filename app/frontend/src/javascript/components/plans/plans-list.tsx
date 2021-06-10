@@ -12,6 +12,7 @@ import { Loader } from '../base/loader';
 import { react2angular } from 'react2angular';
 import { IApplication } from '../../models/application';
 import { useTranslation } from 'react-i18next';
+import { PlansFilter } from './plans-filter';
 
 declare var Application: IApplication;
 
@@ -41,6 +42,10 @@ const PlansList: React.FC<PlansListProps> = ({ onError, onPlanSelection, onLogin
   const [groups, setGroups] = useState<Array<Group>>(null);
   // currently selected plan
   const [selectedPlan, setSelectedPlan] = useState<Plan>(null);
+  // filtering shown plans by only one group
+  const [groupFilter, setGroupFilter] = useState<number>(null);
+  // filtering shown plans by ids
+  const [plansFilter, setPlansFilter] = useState<Array<number>>(null);
 
   // fetch data on component mounted
   useEffect(() => {
@@ -60,6 +65,7 @@ const PlansList: React.FC<PlansListProps> = ({ onError, onPlanSelection, onLogin
   // reset the selected plan when the user changes
   useEffect(() => {
     setSelectedPlan(null);
+    setGroupFilter(null);
   }, [customer, operator]);
 
   /**
@@ -96,10 +102,11 @@ const PlansList: React.FC<PlansListProps> = ({ onError, onPlanSelection, onLogin
   }
 
   /**
-   * Filter the plans to display, depending on the connected/selected user
+   * Filter the plans to display, depending on the connected/selected user and on the selected group filter (if any)
    */
   const filteredPlans = (): PlansTree => {
-    if (_.isEmpty(customer)) return plans;
+    if (_.isEmpty(customer) && !groupFilter) return plans;
+    if (groupFilter) return new Map([[groupFilter, plans.get(groupFilter)]]);
 
     return new Map([[customer.group_id, plans.get(customer.group_id)]]);
   }
@@ -155,6 +162,30 @@ const PlansList: React.FC<PlansListProps> = ({ onError, onPlanSelection, onLogin
   }
 
   /**
+   * Callback triggered when the user selects a group to filter the current list
+   */
+  const handleFilterByGroup = (groupId: number): void => {
+    setGroupFilter(groupId);
+  }
+
+  /**
+   * Callback triggered when the user selects a duration to filter the current list
+   */
+  const handleFilterByDuration = (plansIds: Array<number>): void => {
+    setPlansFilter(plansIds);
+  }
+
+  /**
+   * Callback for filtering plans to display, depending on the filter-by-plans-ids selection
+   * @see https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
+   */
+  const filterPlan = (plan: Plan): boolean => {
+    if (!plansFilter) return true;
+
+    return plansFilter.includes(plan.id);
+  }
+
+  /**
    * Render the provided list of categories, with each associated plans
    */
   const renderPlansByCategory = (plans: Map<number, Array<Plan>>): ReactNode => {
@@ -181,7 +212,7 @@ const PlansList: React.FC<PlansListProps> = ({ onError, onPlanSelection, onLogin
         {categoryPlans.length === 0 && <span className="no-plans">
           {t('app.public.plans.no_plans')}
         </span>}
-        {categoryPlans.sort(comparePlans).map(plan => (
+        {categoryPlans.filter(filterPlan).sort(comparePlans).map(plan => (
           <PlanCard key={plan.id}
                     userId={customer?.id}
                     subscribedPlanId={subscribedPlanId}
@@ -197,6 +228,7 @@ const PlansList: React.FC<PlansListProps> = ({ onError, onPlanSelection, onLogin
 
   return (
     <div className="plans-list">
+      {groups && <PlansFilter user={customer} groups={groups} onGroupSelected={handleFilterByGroup} onError={onError} onDurationSelected={handleFilterByDuration} />}
       {plans && Array.from(filteredPlans()).map(([groupId, plansByGroup]) => {
         return (
           <div key={groupId} className="plans-per-group">

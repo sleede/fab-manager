@@ -61,6 +61,14 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       templateUrl: '/admin/invoices/settings/editPrefix.html'
     };
 
+    // Payment Schedule PDF filename settings (and example)
+    $scope.scheduleFile = {
+      prefix: settings.payment_schedule_prefix,
+      nextId: 11,
+      date: moment().format('DDMMYYYY'),
+      templateUrl: '/admin/invoices/settings/editSchedulePrefix.html'
+    };
+
     // Invoices parameters
     $scope.invoice = {
       logo: null,
@@ -530,6 +538,38 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     };
 
     /**
+     * Open a modal dialog allowing the user to edit the prefix of the payment schedules file names
+     */
+    $scope.openEditSchedulePrefix = function () {
+      const modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: $scope.scheduleFile.templateUrl,
+        size: 'lg',
+        resolve: {
+          model () { return $scope.scheduleFile.prefix; }
+        },
+        controller: ['$scope', '$uibModalInstance', 'model', function ($scope, $uibModalInstance, model) {
+          $scope.model = model;
+          $scope.ok = function () { $uibModalInstance.close($scope.model); };
+          $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
+        }]
+      });
+
+      modalInstance.result.then(function (model) {
+        Setting.update({ name: 'payment_schedule_prefix' }, { value: model }, function (data) {
+          $scope.scheduleFile.prefix = model;
+          return growl.success(_t('app.admin.invoices.prefix_successfully_saved'));
+        }
+        , function (error) {
+          if (error.status === 304) return;
+
+          growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_prefix'));
+          console.error(error);
+        });
+      });
+    };
+
+    /**
      * Callback to save the value of the text zone when editing is done
      */
     $scope.textEditEnd = function (event) {
@@ -720,9 +760,8 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     /**
      * Callback triggered after the gateway failed to be configured
      */
-    $scope.onGatewayModalError = function (errors) {
-      growl.error(_t('app.admin.invoices.payment.gateway_configuration_error'));
-      console.error(errors);
+    $scope.onGatewayModalError = function (message) {
+      growl.error(_t('app.admin.invoices.payment.gateway_configuration_error') + message);
     };
 
     /**

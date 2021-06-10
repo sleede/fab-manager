@@ -756,55 +756,55 @@ history_value_78:
 history_value_79:
   id: 79
   setting_id: 79
-  value: ''
+  value: 69876357
   created_at: '2020-04-15 14:38:40.000421'
   updated_at: '2021-05-31 15:00:37.503801'
-  footprint: 6bce8d94ae14b39a89f220d8c73f4daf44a795888ca011bf1a11da3a35eaf171
+  footprint: 55d2a2354a3a12ed7bba0a3854f9f4559aed546c81040fbe35cd94d80b8bb811
   invoicing_profile_id: 1
 
 history_value_80:
   id: 80
   setting_id: 80
-  value: ''
+  value: testpassword_DEMOPRIVATEKEY23G4475zXZQ2UA5x7M
   created_at: '2020-04-15 14:38:40.000421'
   updated_at: '2021-05-31 15:00:37.518625'
-  footprint: b1b314da439b81e95281909992e79f4d118e08633607010f777d6ef40ad28d8e
+  footprint: a0f076a64824b3473c60dacd18892da21d14830dedd7bb959c442faa59d1313d
   invoicing_profile_id: 1
 
 history_value_81:
   id: 81
   setting_id: 81
-  value: ''
+  value: https://api.payzen.eu
   created_at: '2020-04-15 14:38:40.000421'
   updated_at: '2021-05-31 15:00:37.535175'
-  footprint: 57dac418c605a111ab2a9c253704f9d9b182dfbb74068fc6596f3d20c611fb42
+  footprint: 2d0d3090a7976a5b41fb4ccaa1e87e8ee61116813691280f3a2f19c574f0bea5
   invoicing_profile_id: 1
 
 history_value_82:
   id: 82
   setting_id: 82
-  value: ''
+  value: 69876357:testpublickey_DEMOPUBLICKEY95me92597fd28tGD4r5
   created_at: '2020-04-15 14:38:40.000421'
   updated_at: '2021-05-31 15:00:37.551956'
-  footprint: 68a9d660f03f0e1408ee406ccf7df781147f3a7a2e5ac158a8d3ee4aaaca655a
+  footprint: 9fbe6418520003f7dc9e37c5a9a3256adc4963d7a5d2402ded929d4154d17a81
   invoicing_profile_id: 1
 
 history_value_83:
   id: 83
   setting_id: 83
-  value: ''
+  value: 83daf5e7b80d990f037407bab78dff9904aaf3c19
   created_at: '2020-04-15 14:38:40.000421'
   updated_at: '2021-05-31 15:00:37.568426'
-  footprint: 5a984dc2686c93d0380e04c017ce8ec05d18cb3c4c0fec8d4154605986078903
+  footprint: b0d7f03eff084c39cb87dbf01e3d05f217203d776b0e01ce002a55b426abfe23
   invoicing_profile_id: 1
 
 history_value_84:
   id: 84
   setting_id: 84
-  value: ''
+  value: EUR
   created_at: '2020-04-15 14:38:40.000421'
   updated_at: '2021-05-31 15:00:37.593645'
-  footprint: bdf31d00b03e511c0a2a1bf18f628462655f32834b6ee6822d1a883055a191f4
+  footprint: 3545edef1b4367afd0d36742e30e35832e56c32882f3876dba76fc69211950db
   invoicing_profile_id: 1
 
 history_value_85:

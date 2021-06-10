@@ -525,3 +525,4 @@ fr:
     payzen_public_key: "Clé publique du client PayZen"
     payzen_hmac: "Clef HMAC-SHA-256 PayZen"
     payzen_currency: "Devise PayZen"
+

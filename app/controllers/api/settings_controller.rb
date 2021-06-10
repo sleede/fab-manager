@@ -12,7 +12,7 @@ class API::SettingsController < API::ApiController
     authorize Setting
     @setting = Setting.find_or_initialize_by(name: params[:name])
     render status: :not_modified and return if setting_params[:value] == @setting.value
-    render status: :locked, json: { error: 'locked setting' } and return unless SettingService.before_update(@setting)
+    render status: :locked, json: { error: I18n.t('settings.locked_setting') } and return unless SettingService.before_update(@setting)
 
     if @setting.save && @setting.history_values.create(value: setting_params[:value], invoicing_profile: current_user.invoicing_profile)
       SettingService.after_update(@setting)
@@ -26,18 +26,21 @@ class API::SettingsController < API::ApiController
     authorize Setting
 
     @settings = []
-    params[:settings].each do |setting|
-      next if !setting[:name] || !setting[:value]
+    may_transaction(params[:transactional]) do
+      params[:settings].each do |setting|
+        next if !setting[:name] || !setting[:value]
 
-      db_setting = Setting.find_or_initialize_by(name: setting[:name])
-      next unless SettingService.before_update(db_setting)
+        db_setting = Setting.find_or_initialize_by(name: setting[:name])
+        if !SettingService.before_update(db_setting)
+          db_setting.errors[:-] << I18n.t("settings.#{setting[:name]}") + ': ' + I18n.t('settings.locked_setting')
+        elsif db_setting.save
+          db_setting.history_values.create(value: setting[:value], invoicing_profile: current_user.invoicing_profile)
+          SettingService.after_update(db_setting)
+        end
 
-      if db_setting.save
-        db_setting.history_values.create(value: setting[:value], invoicing_profile: current_user.invoicing_profile)
-        SettingService.after_update(db_setting)
+        @settings.push db_setting
+        may_rollback(params[:transactional]) if db_setting.errors.keys.count.positive?
       end
-
-      @settings.push db_setting
     end
   end
 
@@ -78,5 +81,21 @@ class API::SettingsController < API::ApiController
 
   def names_as_string_to_array
     params[:names][1..-2].split(',').map(&:strip).map { |param| param[1..-2] }.map(&:strip)
+  end
+
+  # run the given block in a transaction if `should` is true. Just run it normally otherwise
+  def may_transaction(should)
+    if should == 'true'
+      ActiveRecord::Base.transaction do
+        yield
+      end
+    else
+      yield
+    end
+  end
+
+  # rollback the current DB transaction if `should` is true
+  def may_rollback(should)
+    raise ActiveRecord::Rollback if should == 'true'
   end
 end

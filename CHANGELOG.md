@@ -11,11 +11,13 @@
 - Improved documentations
 - Improved the style of the titles of the subscription page
 - Check the status of the assets' compilation during the upgrade
-- Footprints are now generated in a more reproductible way
+- Generate footprints in a more reproductible way
 - Task to reset the stripe payment methods in test mode
 - Validate on server side the reservation of slots restricted to subscribers
 − Unified and documented upgrade exit codes
 - During setup, ask for the name of the external network and create it, if it does not already exists
+- Ability to configure the prefix of the payment-schedules' files
+- Filter plans by group and by duration
 - Fix a bug: cannot select the recurrence end date on Safari or Internet Explorer
 - Fix a bug: build status badge is not working
 - Fix a bug: unable to set date formats during installation
@@ -23,6 +25,7 @@
 - Fix a bug: in the admin calendar, the trainings' info panel shows "duration: null minutes"
 - Fix a bug: on the subscriptions page, not logged-in users do not see the action button
 - Fix a bug: unable to map a new setup to the db network
+- Fix a bug: do not allow users to register with an invalid email address
 - Fix a security issue: updated dns-packet to 1.3.4 to fix [CVE-2021-23386](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23386)
 - `SUPERADMIN_EMAIL` renamed to `ADMINSYS_EMAIL`
 - `scripts/run-tests.sh` renamed to `scripts/tests.sh`
@@ -32,6 +35,10 @@
 - [TODO DEPLOY] `rails fablab:stripe:set_gateway`
 - [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
 - [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/rename-adminsys.sh | bash`
+
+## v4.7.12 2021 June 09
+
+- Fix a bug: unable to process stripe payments
 
 ## v4.7.11 2021 May 26
 
