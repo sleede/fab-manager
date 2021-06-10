@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
-## Next release
+## v5.0.0 2021 June 10
+
 - Ability to use PayZen a the payment gateway
 - Ability to organize plans in categories
 - Ability to configure the prefix of the payment-schedules' files
