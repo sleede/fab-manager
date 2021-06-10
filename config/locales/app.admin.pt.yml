@@ -530,7 +530,9 @@ pt:
         logo_successfully_saved: "Logo salvo com sucesso."
         an_error_occurred_while_saving_the_logo: "Um erro ocorreu ao salvar o logo."
         filename: "Nome do arquivo"
+        schedule_filename: "Schedule file name"
         prefix_info: "As faturas serão geradas como arquivos PDF, com o seguinte prefixo."
+        schedule_prefix_info: "The payment schedules will be generated as PDF files, named with the following prefix."
         prefix: "Prefixo"
         prefix_successfully_saved: "Prefixo de arquivo salvo com sucesso"
         an_error_occurred_while_saving_the_prefix: "Ocorreu um erro ao salvar o prefixo do arquivo"
@@ -650,7 +652,7 @@ pt:
           currency_info_html: "Por favor, especifique abaixo da moeda usada para pagamento online. Você deve fornecer um código ISO de três letras, da lista de <a href='https://stripe.com/docs/currencies' target='_blank'>moedas com suporte a Stripe</a>."
           currency_alert_html: "<strong>Aviso</strong>: a moeda não pode ser alterada após o primeiro pagamento online ter sido feito. Defina essa configuração cuidadosamente antes de abrir o Fab-manager para seus membros."
           stripe_currency: "Moeda do Stripe"
-          gateway_configuration_error: "An error occurred while configuring the payment gateway."
+          gateway_configuration_error: "An error occurred while configuring the payment gateway: "
           payzen:
             payzen_keys: "PayZen keys"
             payzen_username: "Username"
@@ -673,6 +675,7 @@ pt:
             stripe: "Stripe"
             payzen: "PayZen"
             confirm_button: "Validate the gateway"
+            successfully_updated: " successfully updated"
         payment_schedules:
           filter_schedules: "Filter schedules"
           no_payment_schedules: "No payment schedules to display"
