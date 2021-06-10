@@ -9,11 +9,11 @@ class ArchiveWorker
 
   def perform(accounting_period_id)
     period = AccountingPeriod.find(accounting_period_id)
-
-    data = period.invoices.includes(:invoice_items).order(id: :asc)
+    invoices = period.invoices.includes(:invoice_items).order(created_at: :asc)
+    schedules = period.payment_schedules.includes(:payment_schedule_items, :payment_schedule_objects).order(created_at: :asc)
     previous_file = period.previous_period&.archive_file
     last_archive_checksum = previous_file ? Integrity::Checksum.file(previous_file) : nil
-    json_data = to_json_archive(period, data, previous_file, last_archive_checksum)
+    json_data = to_json_archive(period, invoices, schedules, previous_file, last_archive_checksum)
     current_archive_checksum = Integrity::Checksum.text(json_data)
     date = DateTime.iso8601
     chained = Integrity::Checksum.text("#{current_archive_checksum}#{last_archive_checksum}#{date}")
@@ -34,12 +34,13 @@ class ArchiveWorker
 
   private
 
-  def to_json_archive(period, invoices, previous_file, last_checksum)
+  def to_json_archive(period, invoices, schedules, previous_file, last_checksum)
     code_checksum = Integrity::Checksum.code
     ApplicationController.new.view_context.render(
       partial: 'archive/accounting',
       locals: {
         invoices: period.invoices_with_vat(invoices),
+        schedules: schedules,
         period_total: period.period_total,
         perpetual_total: period.perpetual_total,
         period_footprint: period.footprint,

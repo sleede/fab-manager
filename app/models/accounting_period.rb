@@ -27,6 +27,10 @@ class AccountingPeriod < ApplicationRecord
     Invoice.where('created_at >= :start_date AND CAST(created_at AS DATE) <= :end_date', start_date: start_at, end_date: end_at)
   end
 
+  def payment_schedules
+    PaymentSchedule.where('created_at >= :start_date AND CAST(created_at AS DATE) <= :end_date', start_date: start_at, end_date: end_at)
+  end
+
   def invoices_with_vat(invoices)
     vat_service = VatHistoryService.new
     invoices.map do |i|
