@@ -530,7 +530,9 @@ zu:
         logo_successfully_saved: "crwdns7551:0crwdne7551:0"
         an_error_occurred_while_saving_the_logo: "crwdns7553:0crwdne7553:0"
         filename: "crwdns20568:0crwdne20568:0"
+        schedule_filename: "crwdns21624:0crwdne21624:0"
         prefix_info: "crwdns20570:0crwdne20570:0"
+        schedule_prefix_info: "crwdns21626:0crwdne21626:0"
         prefix: "crwdns20572:0crwdne20572:0"
         prefix_successfully_saved: "crwdns20574:0crwdne20574:0"
         an_error_occurred_while_saving_the_prefix: "crwdns20576:0crwdne20576:0"
@@ -650,7 +652,7 @@ zu:
           currency_info_html: "crwdns20606:0crwdne20606:0"
           currency_alert_html: "crwdns20608:0crwdne20608:0"
           stripe_currency: "crwdns20610:0crwdne20610:0"
-          gateway_configuration_error: "crwdns21524:0crwdne21524:0"
+          gateway_configuration_error: "crwdns21628:0crwdne21628:0"
           payzen:
             payzen_keys: "crwdns21526:0crwdne21526:0"
             payzen_username: "crwdns21528:0crwdne21528:0"
@@ -673,6 +675,7 @@ zu:
             stripe: "crwdns21558:0crwdne21558:0"
             payzen: "crwdns21560:0crwdne21560:0"
             confirm_button: "crwdns21562:0crwdne21562:0"
+            successfully_updated: "crwdns21630:0crwdne21630:0"
         payment_schedules:
           filter_schedules: "crwdns21072:0crwdne21072:0"
           no_payment_schedules: "crwdns21074:0crwdne21074:0"
