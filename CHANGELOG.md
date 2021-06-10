@@ -27,6 +27,7 @@
 - Fix a bug: unable to map a new setup to the db network
 - Fix a bug: do not allow users to register with an invalid email address
 - Fix a security issue: updated dns-packet to 1.3.4 to fix [CVE-2021-23386](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23386)
+- Fix a security issue: updated ws to 6.2.2 to fix [CVE-2021-32640](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-32640)
 - `SUPERADMIN_EMAIL` renamed to `ADMINSYS_EMAIL`
 - `scripts/run-tests.sh` renamed to `scripts/tests.sh`
 - [BREAKING CHANGE] GET `open_api/v1/invoices` won't return `stp_invoice_id` OR `stp_payment_intent_id` anymore. The new field `payment_gateway_object` will contain some similar data if the invoice was paid online by card.
