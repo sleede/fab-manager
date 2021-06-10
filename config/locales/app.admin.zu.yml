@@ -675,7 +675,6 @@ zu:
             stripe: "crwdns21558:0crwdne21558:0"
             payzen: "crwdns21560:0crwdne21560:0"
             confirm_button: "crwdns21562:0crwdne21562:0"
-            successfully_updated: "crwdns21630:0crwdne21630:0"
         payment_schedules:
           filter_schedules: "crwdns21072:0crwdne21072:0"
           no_payment_schedules: "crwdns21074:0crwdne21074:0"
