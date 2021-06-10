@@ -675,7 +675,6 @@ de:
             stripe: "Stripe"
             payzen: "PayZen"
             confirm_button: "Validate the gateway"
-            successfully_updated: " successfully updated"
         payment_schedules:
           filter_schedules: "Pläne filtern"
           no_payment_schedules: "Keine Zahlungspläne zum Anzeigen"
