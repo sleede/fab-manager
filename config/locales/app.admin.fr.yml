@@ -1292,6 +1292,32 @@ fr:
         failed_to_remove: "Une erreur est survenue, impossible de supprimer le rapport"
       plans_categories:
         manage_plans_categories: "Gérer les catégories des formules d'abonnement"
+      plan_categories_list:
+        categories_list: "Liste des catégories des formules d'abonnement"
+        name: "Nom"
+        significance: "Importance"
+      create_plan_category:
+        new_category: "Nouvelle catégorie"
+        name: "Nom"
+        significance: "Importance"
+        significance_info: "Les catégories seront affichées par ordre d'importance. Plus vous définissez une importance élevée, plus la catégorie sera affichée en premier."
+        confirm_create: "Créer la catégorie"
+        category_created: "La nouvelle catégorie a bien été créée"
+        unable_to_create: "Impossible de créer la catégorie : "
+      edit_plan_category:
+        edit_category: "Modifier la catégorie"
+        name: "Nom"
+        significance: "Importance"
+        confirm_edition: "Valider"
+        category_updated: "La catégorie a bien été mise à jour"
+        unable_to_update: "Impossible de mettre à jour la catégorie : "
+        significance_info: "Les catégories seront affichées par ordre d'importance. Plus vous définissez une importance élevée, plus la catégorie sera affichée en premier."
+      delete_plan_category:
+        delete_category: "Supprimer une catégorie"
+        confirm_delete: "Supprimer"
+        delete_confirmation: "Êtes-vous sûr de vouloir supprimer cette catégorie ? Si vous le faites, les formules associés à cette catégorie ne seront plus triés."
+        category_deleted: "La catégorie a bien été supprimée"
+        unable_to_delete: "Impossible de supprimer la catégorie : "
       #feature tour
       tour:
         conclusion:

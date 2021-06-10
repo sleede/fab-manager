@@ -530,7 +530,9 @@ zu:
         logo_successfully_saved: "crwdns7551:0crwdne7551:0"
         an_error_occurred_while_saving_the_logo: "crwdns7553:0crwdne7553:0"
         filename: "crwdns20568:0crwdne20568:0"
+        schedule_filename: "crwdns21624:0crwdne21624:0"
         prefix_info: "crwdns20570:0crwdne20570:0"
+        schedule_prefix_info: "crwdns21626:0crwdne21626:0"
         prefix: "crwdns20572:0crwdne20572:0"
         prefix_successfully_saved: "crwdns20574:0crwdne20574:0"
         an_error_occurred_while_saving_the_prefix: "crwdns20576:0crwdne20576:0"
@@ -650,7 +652,7 @@ zu:
           currency_info_html: "crwdns20606:0crwdne20606:0"
           currency_alert_html: "crwdns20608:0crwdne20608:0"
           stripe_currency: "crwdns20610:0crwdne20610:0"
-          gateway_configuration_error: "crwdns21524:0crwdne21524:0"
+          gateway_configuration_error: "crwdns21628:0crwdne21628:0"
           payzen:
             payzen_keys: "crwdns21526:0crwdne21526:0"
             payzen_username: "crwdns21528:0crwdne21528:0"
@@ -1288,6 +1290,34 @@ zu:
         report_will_be_destroyed: "crwdns8499:0crwdne8499:0"
         report_removed: "crwdns8501:0crwdne8501:0"
         failed_to_remove: "crwdns8503:0crwdne8503:0"
+      plans_categories:
+        manage_plans_categories: "crwdns21576:0crwdne21576:0"
+      plan_categories_list:
+        categories_list: "crwdns21578:0crwdne21578:0"
+        name: "crwdns21580:0crwdne21580:0"
+        significance: "crwdns21582:0crwdne21582:0"
+      create_plan_category:
+        new_category: "crwdns21584:0crwdne21584:0"
+        name: "crwdns21586:0crwdne21586:0"
+        significance: "crwdns21588:0crwdne21588:0"
+        significance_info: "crwdns21590:0crwdne21590:0"
+        confirm_create: "crwdns21592:0crwdne21592:0"
+        category_created: "crwdns21594:0crwdne21594:0"
+        unable_to_create: "crwdns21596:0crwdne21596:0"
+      edit_plan_category:
+        edit_category: "crwdns21598:0crwdne21598:0"
+        name: "crwdns21600:0crwdne21600:0"
+        significance: "crwdns21602:0crwdne21602:0"
+        confirm_edition: "crwdns21604:0crwdne21604:0"
+        category_updated: "crwdns21606:0crwdne21606:0"
+        unable_to_update: "crwdns21608:0crwdne21608:0"
+        significance_info: "crwdns21610:0crwdne21610:0"
+      delete_plan_category:
+        delete_category: "crwdns21612:0crwdne21612:0"
+        confirm_delete: "crwdns21614:0crwdne21614:0"
+        delete_confirmation: "crwdns21616:0crwdne21616:0"
+        category_deleted: "crwdns21618:0crwdne21618:0"
+        unable_to_delete: "crwdns21620:0crwdne21620:0"
       #feature tour
       tour:
         conclusion:

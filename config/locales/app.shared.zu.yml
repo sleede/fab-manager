@@ -174,6 +174,7 @@ zu:
         all: "crwdns20896:0crwdne20896:0"
         transversal_all_groups: "crwdns9655:0crwdne9655:0"
         group_is_required: "crwdns9657:0crwdne9657:0"
+        category: "crwdns21622:0crwdne21622:0"
         number_of_periods: "crwdns9659:0crwdne9659:0"
         number_of_periods_is_required: "crwdns9661:0crwdne9661:0"
         period: "crwdns9663:0crwdne9663:0"

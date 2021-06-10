@@ -259,6 +259,12 @@ zu:
         the_user_s_group_was_successfully_changed: "crwdns9207:0crwdne9207:0"
         an_error_prevented_your_group_from_being_changed: "crwdns9209:0crwdne9209:0"
         an_error_prevented_to_change_the_user_s_group: "crwdns9211:0crwdne9211:0"
+      plans_filter:
+        i_am: "crwdns21852:0crwdne21852:0"
+        select_group: "crwdns21854:0crwdne21854:0"
+        i_want_duration: "crwdns21856:0crwdne21856:0"
+        all_durations: "crwdns21858:0crwdne21858:0"
+        select_duration: "crwdns21860:0crwdne21860:0"
       #Fablab's events list
       events_list:
         the_fablab_s_events: "crwdns9223:0crwdne9223:0"
