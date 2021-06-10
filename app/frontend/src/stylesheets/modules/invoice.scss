@@ -30,6 +30,38 @@
   }
 }
 
+.schedule-file {
+  text-align: center;
+  line-height: 4em;
+  margin-top: 2em;
+
+  .fa-stack {
+    position: relative;
+    width: 60px;
+    height: 75px;
+
+    .fa-file-pdf {
+      font-size: 4em;
+      vertical-align: middle;
+      position: absolute;
+      background-color: white;
+      text-shadow: 0 0 2px white;
+    }
+  }
+
+
+  .filename {
+    font-size: 1.1em;
+    vertical-align: middle;
+    margin-left: 1em;
+
+    .prefix:hover {
+      background-color: $yellow;
+      overflow-x: hidden;
+    }
+  }
+}
+
 .invoice-placeholder {
   width: 80%;
   max-width: 800px;

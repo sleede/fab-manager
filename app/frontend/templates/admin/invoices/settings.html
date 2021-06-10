@@ -92,6 +92,14 @@
   <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
   <span class="filename"><span class="prefix" ng-click="openEditPrefix()">{{file.prefix}}</span>-{{file.nextId}}_{{file.date}}.pdf</span>
 </div>
+<div class="schedule-file">
+  <h3 class="m-l" translate>{{ 'app.admin.invoices.schedule_filename' }}</h3>
+  <span class="fa-stack">
+    <i class="fa fa-file-pdf" style="top: 0; left: 0" aria-hidden="true"></i>
+    <i class="fa fa-file-pdf" style="top: 10px; left: 10px" aria-hidden="true"></i>
+  </span>
+  <span class="filename"><span class="prefix" ng-click="openEditSchedulePrefix()">{{scheduleFile.prefix}}</span>-{{scheduleFile.nextId}}_{{scheduleFile.date}}.pdf</span>
+</div>
 
 
 <script type="text/ng-template" id="addYear.html">

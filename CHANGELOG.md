@@ -16,6 +16,7 @@
 - Validate on server side the reservation of slots restricted to subscribers
 − Unified and documented upgrade exit codes
 - During setup, ask for the name of the external network and create it, if it does not already exists
+- Ability to configure the prefix of the payment-schedules' files
 - Fix a bug: cannot select the recurrence end date on Safari or Internet Explorer
 - Fix a bug: build status badge is not working
 - Fix a bug: unable to set date formats during installation
