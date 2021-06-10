@@ -414,3 +414,12 @@ fr:
   group:
     #name of the user's group for administrators
     admins: 'Administrateurs'
+  settings:
+    locked_setting: "le paramètre est verrouillé."
+    payment_gateway: "Passerelle de paiement"
+    payzen_username: "Nom d'utilisateur PayZen"
+    payzen_password: "Mot de passe PayZen"
+    payzen_endpoint: "Point d'accès à l'API PayZen"
+    payzen_public_key: "Clef publique du client PayZen"
+    payzen_hmac: "Clef HMAC-SHA-256 PayZen"
+    payzen_currency:  "Devise PayZen"

@@ -720,9 +720,8 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     /**
      * Callback triggered after the gateway failed to be configured
      */
-    $scope.onGatewayModalError = function (errors) {
-      growl.error(_t('app.admin.invoices.payment.gateway_configuration_error'));
-      console.error(errors);
+    $scope.onGatewayModalError = function (message) {
+      growl.error(_t('app.admin.invoices.payment.gateway_configuration_error') + message);
     };
 
     /**

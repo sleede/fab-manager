@@ -23,7 +23,7 @@ interface SelectGatewayModalModalProps {
   isOpen: boolean,
   toggleModal: () => void,
   currentUser: User,
-  onError: (errors: Map<SettingName, SettingBulkResult>|any) => void,
+  onError: (errors: string) => void,
   onSuccess: (results: Map<SettingName, SettingBulkResult>) => void,
 }
 
@@ -102,10 +102,12 @@ const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isOpen, to
     settings.set(SettingName.PaymentGateway, selectedGateway);
 
     const api = new SettingAPI();
-    api.bulkUpdate(settings).then(result => {
-      if (Array.from(result.values()).filter(item => !item.status).length > 0) {
-        onError(result);
+    api.bulkUpdate(settings, true).then(result => {
+      const errorResults = Array.from(result.values()).filter(item => !item.status);
+      if (errorResults.length > 0) {
+        onError(errorResults.map(item => item.error[0]).join(' '));
       } else {
+        // we call the success callback only in case of full success (transactional bulk update)
         onSuccess(result);
       }
     }, reason => {

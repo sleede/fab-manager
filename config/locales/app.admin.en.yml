@@ -650,7 +650,7 @@ en:
           currency_info_html: "Please specify below the currency used for online payment. You should provide a three-letter ISO code, from the list of <a href='https://stripe.com/docs/currencies' target='_blank'>Stripe supported currencies</a>."
           currency_alert_html: "<strong>Warning</strong>: the currency cannot be changed after the first online payment was made. Please define this setting carefully before opening Fab-manager to your members."
           stripe_currency: "Stripe currency"
-          gateway_configuration_error: "An error occurred while configuring the payment gateway."
+          gateway_configuration_error: "An error occurred while configuring the payment gateway: "
           payzen:
             payzen_keys: "PayZen keys"
             payzen_username: "Username"
@@ -673,6 +673,7 @@ en:
             stripe: "Stripe"
             payzen: "PayZen"
             confirm_button: "Validate the gateway"
+            successfully_updated: " successfully updated"
         payment_schedules:
           filter_schedules: "Filter schedules"
           no_payment_schedules: "No payment schedules to display"
