@@ -97,7 +97,9 @@ Rails.application.routes.draw do
     resources :groups, only: %i[index create update destroy]
     resources :subscriptions, only: %i[show update]
     resources :plan_categories
-    resources :plans
+    resources :plans do
+      get 'durations', on: :collection
+    end
     resources :slots, only: [:update] do
       put 'cancel', on: :member
     end

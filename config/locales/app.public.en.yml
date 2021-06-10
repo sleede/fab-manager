@@ -262,6 +262,9 @@ en:
       plans_filter:
         i_am: "I am"
         select_group: "select a group"
+        i_want_duration: "I want to subscribe for"
+        all_durations: "All durations"
+        select_duration: "select a duration"
       #Fablab's events list
       events_list:
         the_fablab_s_events: "The Fablab's events"

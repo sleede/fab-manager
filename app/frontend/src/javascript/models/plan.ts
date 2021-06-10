@@ -41,3 +41,8 @@ export interface Plan {
     plan_file_url: string,
     partners: Array<Partner>
 }
+
+export interface PlansDuration {
+    name: string,
+    plans_ids: Array<number>
+}

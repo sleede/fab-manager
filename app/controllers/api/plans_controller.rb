@@ -4,7 +4,7 @@
 # Plan are used to define subscription's characteristics.
 # PartnerPlan is a special kind of plan which send notifications to an external user
 class API::PlansController < API::ApiController
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!, except: [:index, :durations]
 
   def index
     @plans = Plan.includes(:plan_file)
@@ -49,6 +49,17 @@ class API::PlansController < API::ApiController
     authorize @plan
     @plan.destroy
     head :no_content
+  end
+
+  def durations
+    grouped = Plan.all.map { |p| [p.human_readable_duration, p.id] }.group_by { |i| i[0] }
+    @durations = []
+    grouped.each_pair do |duration, plans|
+      @durations.push(
+        name: duration,
+        plans: plans.map { |p| p[1] }
+      )
+    end
   end
 
   private
