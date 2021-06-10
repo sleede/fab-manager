@@ -61,6 +61,14 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       templateUrl: '/admin/invoices/settings/editPrefix.html'
     };
 
+    // Payment Schedule PDF filename settings (and example)
+    $scope.scheduleFile = {
+      prefix: settings.payment_schedule_prefix,
+      nextId: 11,
+      date: moment().format('DDMMYYYY'),
+      templateUrl: '/admin/invoices/settings/editSchedulePrefix.html'
+    };
+
     // Invoices parameters
     $scope.invoice = {
       logo: null,
@@ -205,6 +213,9 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
 
     // Placeholding date for the reservation end
     $scope.inOneWeekAndOneHour = moment().add(1, 'week').add(1, 'hour').startOf('hour');
+
+    // Is shown the modal dialog to select a payment gateway
+    $scope.openSelectGatewayModal = false;
 
     /**
      * Change the invoices ordering criterion to the one provided
@@ -527,6 +538,38 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     };
 
     /**
+     * Open a modal dialog allowing the user to edit the prefix of the payment schedules file names
+     */
+    $scope.openEditSchedulePrefix = function () {
+      const modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: $scope.scheduleFile.templateUrl,
+        size: 'lg',
+        resolve: {
+          model () { return $scope.scheduleFile.prefix; }
+        },
+        controller: ['$scope', '$uibModalInstance', 'model', function ($scope, $uibModalInstance, model) {
+          $scope.model = model;
+          $scope.ok = function () { $uibModalInstance.close($scope.model); };
+          $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
+        }]
+      });
+
+      modalInstance.result.then(function (model) {
+        Setting.update({ name: 'payment_schedule_prefix' }, { value: model }, function (data) {
+          $scope.scheduleFile.prefix = model;
+          return growl.success(_t('app.admin.invoices.prefix_successfully_saved'));
+        }
+        , function (error) {
+          if (error.status === 304) return;
+
+          growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_prefix'));
+          console.error(error);
+        });
+      });
+    };
+
+    /**
      * Callback to save the value of the text zone when editing is done
      */
     $scope.textEditEnd = function (event) {
@@ -646,39 +689,86 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     };
 
     /**
-     * Open a modal dialog which ask for the stripe keys
+     * Open a modal dialog which ask the user to select the payment gateway to use
      * @param onlinePaymentModule {{name: String, value: String}} setting that defines the next status of the online payment module
-     * @return {boolean} false if the keys were not provided
      */
-    $scope.requireStripeKeys = function (onlinePaymentModule) {
+    $scope.selectPaymentGateway = function (onlinePaymentModule) {
       // if the online payment is about to be disabled, accept the change without any further question
       if (onlinePaymentModule.value === false) return true;
 
-      // otherwise, open a modal to ask for the stripe keys
-      const modalInstance = $uibModal.open({
-        templateUrl: '/admin/invoices/settings/stripeKeys.html',
-        controller: 'StripeKeysModalController',
-        resolve: {
-          stripeKeys: ['Setting', function (Setting) { return Setting.query({ names: "['stripe_public_key', 'stripe_secret_key']" }).$promise; }]
-        }
-      });
+      // otherwise, open a modal to ask for the selection of a payment gateway
+      setTimeout(() => {
+        $scope.openSelectGatewayModal = true;
+        $scope.$apply();
+      }, 50);
+      return new Promise(function (resolve, reject) {
+        gatewayHandlers.resolve = resolve;
+        gatewayHandlers.reject = reject;
+      }).catch(() => { /* WORKAROUND: it seems we can't catch the rejection from the boolean-setting directive */ });
+    };
 
-      modalInstance.result.then(function (success) {
-        if (success) {
-          Setting.get({ name: 'stripe_public_key' }, function (res) {
-            $scope.allSettings.stripe_public_key = res.setting.value;
-          });
-          Setting.isPresent({ name: 'stripe_secret_key' }, function (res) {
-            $scope.stripeSecretKey = (res.isPresent ? STRIPE_SK_HIDDEN : '');
-          });
-          Payment.onlinePaymentStatus(function (res) {
-            $scope.onlinePaymentStatus = res.status;
-          });
+    /**
+     * This will open/close the gateway selection modal
+     */
+    $scope.toggleSelectGatewayModal = function () {
+      setTimeout(() => {
+        $scope.openSelectGatewayModal = !$scope.openSelectGatewayModal;
+        $scope.$apply();
+        if (!$scope.openSelectGatewayModal && gatewayHandlers.reject) {
+          gatewayHandlers.reject();
+          resetPromiseHandlers();
         }
-      });
+      }, 50);
+    };
 
-      // return the promise
-      return modalInstance.result;
+    /**
+     * Callback triggered after the gateway was successfully configured in the dedicated modal
+     */
+    $scope.onGatewayModalSuccess = function (updatedSettings) {
+      if (gatewayHandlers.resolve) {
+        gatewayHandlers.resolve(true);
+        resetPromiseHandlers();
+      }
+
+      $scope.toggleSelectGatewayModal();
+      $scope.allSettings.payment_gateway = updatedSettings.get('payment_gateway').value;
+      if ($scope.allSettings.payment_gateway === 'stripe') {
+        $scope.allSettings.stripe_public_key = updatedSettings.get('stripe_public_key').value;
+        Setting.isPresent({ name: 'stripe_secret_key' }, function (res) {
+          $scope.stripeSecretKey = (res.isPresent ? STRIPE_SK_HIDDEN : '');
+        });
+        Payment.onlinePaymentStatus(function (res) {
+          $scope.onlinePaymentStatus = res.status;
+        });
+      }
+    };
+
+    /**
+     * Callback used in PaymentScheduleList, in case of error
+     */
+    $scope.onError = function (message) {
+      growl.error(message);
+    };
+
+    /**
+     * Callback triggered when the user has successfully updated his card
+     */
+    $scope.onCardUpdateSuccess = function (message) {
+      growl.success(message);
+    };
+
+    /**
+     * Callback triggered after the gateway failed to be configured
+     */
+    $scope.onGatewayModalError = function (message) {
+      growl.error(_t('app.admin.invoices.payment.gateway_configuration_error') + message);
+    };
+
+    /**
+     * Callback triggered when the PayZen currency was successfully updated
+     */
+    $scope.alertPayZenCurrencyUpdated = function (currency) {
+      growl.success(_t('app.admin.invoices.payment.payzen.currency_updated', { CURRENCY: currency }));
     };
 
     /**
@@ -879,12 +969,30 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           );
         }
       });
+
+      // Clean before the controller is destroyed
+      $scope.$on('$destroy', function () {
+        if (gatewayHandlers.reject) {
+          gatewayHandlers.reject();
+          resetPromiseHandlers();
+        }
+      });
     };
 
     /**
      * Will temporize the search query to prevent overloading the API
      */
-    var searchTimeout = null;
+    let searchTimeout = null;
+
+    /**
+     * We must delay the save of the 'payment gateway' parameter, until the gateway is configured.
+     * To do so, we use a promise, with the resolve/reject callback stored here
+     * @see https://stackoverflow.com/q/26150232
+     */
+    const gatewayHandlers = {
+      resolve: null,
+      reject: null
+    };
 
     /**
      * Output the given integer with leading zeros. If the given value is longer than the given
@@ -892,7 +1000,16 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
      * @param value {number} the integer to pad
      * @param length {number} the length of the resulting string.
      */
-    var padWithZeros = function (value, length) { return (1e15 + value + '').slice(-length); };
+    const padWithZeros = function (value, length) { return (1e15 + value + '').slice(-length); };
+
+    /**
+     * Reset the promise handlers (reject/resolve) to their initial value.
+     * This will prevent an already resolved promise to be triggered again.
+     */
+    const resetPromiseHandlers = function () {
+      gatewayHandlers.resolve = null;
+      gatewayHandlers.reject = null;
+    };
 
     /**
      * Remove every unsupported html tag from the given html text (like <p>, <span>, ...).
@@ -900,7 +1017,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
      * @param html {string} single line html text
      * @return {string} multi line simplified html text
      */
-    var parseHtml = function (html) {
+    const parseHtml = function (html) {
       return html.replace(/<\/?(\w+)((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[^'">\s]+))?)+\s*|\s*)\/?>/g, function (match, p1, offset, string) {
         if (['b', 'u', 'i', 'br'].includes(p1)) {
           return match;
@@ -913,7 +1030,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     /**
      * Reinitialize the context of invoices' search to display new results set
      */
-    var resetSearchInvoice = function () {
+    const resetSearchInvoice = function () {
       $scope.page = 1;
       return $scope.noMoreResults = false;
     };
@@ -923,7 +1040,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
      * to $scope.invoices
      * @param [concat] {boolean} if true, the result will be append to $scope.invoices instead of being affected
      */
-    var invoiceSearch = function (concat) {
+    const invoiceSearch = function (concat) {
       Invoice.list({
         query: {
           number: $scope.searchInvoice.reference,
@@ -1061,7 +1178,7 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
      * Kind of constructor: these actions will be realized first when the controller is loaded
      */
     const initialize = function () {
-    // if the invoice was payed with stripe, allow to refund through stripe
+    // if the invoice was paid with stripe, allow refunding through stripe
       Invoice.get({ id: invoice.id }, function (data) {
         $scope.invoice = data;
         // default : all elements of the invoice are refund
@@ -1070,8 +1187,8 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
         });
       });
 
-      if (invoice.stripe) {
-        return $scope.avoirModes.push({ name: _t('app.admin.invoices.online_payment'), value: 'stripe' });
+      if (invoice.online_payment) {
+        return $scope.avoirModes.push({ name: _t('app.admin.invoices.online_payment'), value: 'card' });
       }
     };
 
@@ -1295,7 +1412,7 @@ Application.Controllers.controller('AccountingExportModalController', ['$scope',
    * Kind of constructor: these actions will be realized first when the controller is loaded
    */
     const initialize = function () {
-    // if the invoice was payed with stripe, allow to refund through stripe
+      // Get info about the very first invoice on the system
       Invoice.first(function (data) {
         $scope.firstInvoice = data.date;
         $scope.exportTarget.startDate = data.date;
@@ -1329,126 +1446,3 @@ Application.Controllers.controller('AccountingExportModalController', ['$scope',
     // !!! MUST BE CALLED AT THE END of the controller
     return initialize();
   }]);
-
-/**
- * Controller used in the modal window allowing an admin to close an accounting period
- */
-Application.Controllers.controller('StripeKeysModalController', ['$scope', '$uibModalInstance', '$http', '$httpParamSerializerJQLike', 'stripeKeys', 'Setting', 'growl', '_t',
-  function ($scope, $uibModalInstance, $http, $httpParamSerializerJQLike, stripeKeys, Setting, growl, _t) {
-    /* PUBLIC SCOPE */
-
-    // public key
-    $scope.publicKey = stripeKeys.stripe_public_key || '';
-
-    // test status of the public key
-    $scope.publicKeyStatus = undefined;
-
-    // secret key
-    $scope.secretKey = stripeKeys.stripe_secret_key || '';
-
-    // test status of the secret key
-    $scope.secretKeyStatus = undefined;
-
-    /**
-     * Trigger the test of the secret key and set the result in $scope.secretKeyStatus
-     */
-    $scope.testSecretKey = function () {
-      if (!$scope.secretKey.match(/^sk_/)) {
-        $scope.secretKeyStatus = false;
-        return;
-      }
-      $http({
-        method: 'GET',
-        url: 'https://api.stripe.com/v1/charges',
-        headers: {
-          Authorization: `Bearer ${$scope.secretKey}`
-        }
-      }).then(function () {
-        $scope.secretKeyStatus = true;
-      }, function (err) {
-        if (err.status === 401) $scope.secretKeyStatus = false;
-      });
-    };
-
-    /**
-     * Trigger the test of the secret key and set the result in $scope.secretKeyStatus
-     */
-    $scope.testPublicKey = function () {
-      if (!$scope.publicKey.match(/^pk_/)) {
-        $scope.publicKeyStatus = false;
-        return;
-      }
-      $http({
-        method: 'POST',
-        url: 'https://api.stripe.com/v1/tokens',
-        headers: {
-          Authorization: `Bearer ${$scope.publicKey}`,
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        data: $httpParamSerializerJQLike({
-          'pii[id_number]': 'test'
-        })
-      }).then(function () {
-        $scope.publicKeyStatus = true;
-      }, function (err) {
-        if (err.status === 401) $scope.publicKeyStatus = false;
-      });
-    };
-
-    /**
-     * Validate the keys
-     */
-    $scope.ok = function () {
-      if ($scope.secretKeyStatus && $scope.publicKeyStatus) {
-        Setting.bulkUpdate(
-          {
-            settings: [
-              {
-                name: 'stripe_public_key',
-                value: $scope.publicKey
-              },
-              {
-                name: 'stripe_secret_key',
-                value: $scope.secretKey
-              }
-            ]
-          },
-          function () {
-            growl.success(_t('app.admin.invoices.payment.stripe_keys_saved'));
-            $uibModalInstance.close(true);
-          },
-          function (error) {
-            growl.error('app.admin.invoices.payment.error_saving_stripe_keys');
-            console.error(error);
-          }
-        );
-      } else {
-        growl.error(_t('app.admin.invoices.payment.error_check_keys'));
-      }
-    };
-
-    /**
-     * Just dismiss the modal window
-     */
-    $scope.cancel = function () {
-      $uibModalInstance.dismiss('cancel');
-    };
-
-    /* PRIVATE SCOPE */
-
-    /**
-     * Kind of constructor: these actions will be realized first when the controller is loaded
-     */
-    const initialize = function () {
-      if (stripeKeys.stripe_public_key) {
-        $scope.testPublicKey();
-      }
-      if (stripeKeys.stripe_secret_key) {
-        $scope.testSecretKey();
-      }
-    };
-
-    // !!! MUST BE CALLED AT THE END of the controller!
-    return initialize();
-  }
-]);

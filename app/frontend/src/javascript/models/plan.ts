@@ -24,6 +24,7 @@ export interface Plan {
     interval: Interval,
     interval_count: number,
     group_id: number,
+    plan_category_id: number,
     training_credit_nb: number,
     is_rolling: boolean,
     description: string,
@@ -39,4 +40,9 @@ export interface Plan {
     },
     plan_file_url: string,
     partners: Array<Partner>
+}
+
+export interface PlansDuration {
+    name: string,
+    plans_ids: Array<number>
 }

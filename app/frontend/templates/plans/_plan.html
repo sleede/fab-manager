@@ -1,35 +1,20 @@
-<div class="row m-t m-b padder  list-of-plans" ng-repeat="plansGroup in plansClassifiedByGroup" ng-if="ctrl.member.group_id == plansGroup.id || !ctrl.member" ng-show="plansAreShown">
-  <div class="col-md-12 text-center">
-    <h2 class="text-u-c  group-title">{{ plansGroup.name }}</h2>
-  </div>
+<div ng-show="plansAreShown">
 
-  <div class="row row-centered padder">
+  <plans-list customer="ctrl.member"
+              subscribed-plan-id="ctrl.member.subscribed_plan.id"
+              on-error="onError"
+              on-plan-selection="selectPlan"
+              operator="currentUser">
+  </plans-list>
 
-    <div class="plans-per-group">
+  <a class="m-t-lg btn btn-small btn-default pull-right" href="#" ng-click="doNotSubscribePlan($event)">{{ 'app.shared.plan_subscribe.do_not_subscribe' | translate }}  <i class="fa fa-long-arrow-right"></i></a>
 
-      <plan-card ng-repeat="(key, plan) in plansGroup.plans.filter(filterDisabledPlans) | orderBy:'-ui_weight'"
-                 plan="plan"
-                 user-id="ctrl.member.id"
-                 subscribed-plan-id="ctrl.member.subscribed_plan.id"
-                 operator="currentUser"
-                 on-select-plan="selectPlan"
-                 is-selected="isSelected(plan)">
-      </plan-card>
-
+  <div class="row row-centered m-t-lg">
+    <div class="col-xs-12 col-md-12 col-lg-10 col-centered no-gutter">
+      <uib-alert type="warning m">
+        <i class="fa fa-lightbulb-o"></i>
+        <span ng-bind-html="subscriptionExplicationsAlert"></span>
+      </uib-alert>
     </div>
-
-    <a class="m-t-lg btn btn-small btn-default pull-right" href="#" ng-click="doNotSubscribePlan($event)">{{ 'app.shared.plan_subscribe.do_not_subscribe' | translate }}  <i class="fa fa-long-arrow-right"></i></a>
-
-    <div class="row row-centered m-t-lg">
-      <div class="col-xs-12 col-md-12 col-lg-10 col-centered no-gutter">
-        <uib-alert type="warning m">
-          <i class="fa fa-lightbulb-o"></i>
-          <span ng-bind-html="subscriptionExplicationsAlert"></span>
-        </uib-alert>
-      </div>
-    </div>
-
   </div>
-
-
 </div>

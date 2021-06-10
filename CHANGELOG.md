@@ -1,5 +1,44 @@
 # Changelog Fab-manager
 
+## v5.0.0 2021 June 10
+
+- Ability to use PayZen a the payment gateway
+- Ability to organize plans in categories
+- Ability to configure the prefix of the payment-schedules' files
+- Filter plans by group and by duration
+- For payment schedules, ability to update the related payment card before the deadline
+- Refactored data architecture to a more generic shopping cart model
+- Redesigned the data structure to allow buying multiple and various objects
+- Updated React and its dependencies to 17.0.3 and matching
+- Updated the dependencies of: webpack, lodash, eslint, webpack-dev-server, react2angular, auto-ngtemplate-loader, angular-bootstrap-switch, react-refresh-webpack-plugin and eslint-plugin-react
+- Improved error handling in upgrade script
+- Improved documentations
+- Improved the style of the titles of the subscription page
+- Check the status of the assets' compilation during the upgrade
+- Generate footprints in a more reproductible way
+- Task to reset the stripe payment methods in test mode
+- Validate on server side the reservation of slots restricted to subscribers
+− Unified and documented upgrade exit codes
+- During setup, ask for the name of the external network and create it, if it does not already exists
+- Fix a bug: cannot select the recurrence end date on Safari or Internet Explorer
+- Fix a bug: build status badge is not working
+- Fix a bug: unable to set date formats during installation
+- Fix a bug: unable to cancel the upgrade before it begins
+- Fix a bug: in the admin calendar, the trainings' info panel shows "duration: null minutes"
+- Fix a bug: on the subscriptions page, not logged-in users do not see the action button
+- Fix a bug: unable to map a new setup to the db network
+- Fix a bug: do not allow users to register with an invalid email address
+- Fix a security issue: updated dns-packet to 1.3.4 to fix [CVE-2021-23386](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23386)
+- Fix a security issue: updated ws to 6.2.2 to fix [CVE-2021-32640](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-32640)
+- `SUPERADMIN_EMAIL` renamed to `ADMINSYS_EMAIL`
+- `scripts/run-tests.sh` renamed to `scripts/tests.sh`
+- [BREAKING CHANGE] GET `open_api/v1/invoices` won't return `stp_invoice_id` OR `stp_payment_intent_id` anymore. The new field `payment_gateway_object` will contain some similar data if the invoice was paid online by card.
+- [BREAKING CHANGE] GET `open_api/v1/invoices` won't return `invoiced_id`, `invoiced_type` OR `invoiced.created_at` anymore. The new field `main_object` will contain the equivalent data.
+- [TODO DEPLOY] before running the database migration (db:migrate), run: `rails fablab:chain:all`
+- [TODO DEPLOY] `rails fablab:stripe:set_gateway`
+- [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
+- [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/rename-adminsys.sh | bash`
+
 ## v4.7.12 2021 June 09
 
 - Fix a bug: unable to process stripe payments

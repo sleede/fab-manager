@@ -1,35 +1,29 @@
 
 invoice_1:
   id: 1
-  invoiced_id: 1
-  invoiced_type: Subscription
-  stp_invoice_id: in_17wpf92sOmf47Nz9itj6vmJw
   total: 10000
-  created_at: 2012-03-12 11:03:31.651441000 Z
-  updated_at: 2012-03-12 11:03:31.651441000 Z
-  invoicing_profile_id: 3
-  statistic_profile_id: 3
+  created_at: '2012-03-12 11:03:31.651441'
+  updated_at: '2021-05-27 09:26:26.481266'
   reference: 1604001/VL
-  payment_method:
+  payment_method: card
   avoir_date:
   invoice_id:
   type:
   subscription_to_expire:
   description:
-  footprint: 8291cfc4cc4cf57eb63cb079ac952cd0ad8ca7b3e7f663f04d4c18a3c5c4ca68
+  wallet_amount:
+  wallet_transaction_id:
+  coupon_id:
+  footprint: e4edca90b74e7d1a6f59cd62a9434027ab8cec8f3f71737938123686afaa53f6
   environment: test
+  invoicing_profile_id: 3
   operator_profile_id: 3
-
+  statistic_profile_id: 3
 invoice_2:
   id: 2
-  invoiced_id: 2
-  invoiced_type: Subscription
-  stp_invoice_id:
   total: 2000
-  created_at: 2012-03-12 13:40:22.342717000 Z
-  updated_at: 2012-03-12 13:40:22.342717000 Z
-  invoicing_profile_id: 4
-  statistic_profile_id: 4
+  created_at: '2012-03-12 13:40:22.342717'
+  updated_at: '2021-05-27 09:26:26.485839'
   reference: '1604002'
   payment_method:
   avoir_date:
@@ -37,20 +31,19 @@ invoice_2:
   type:
   subscription_to_expire:
   description:
-  footprint: 1d8d62a39bd6e230043e60ffd0429c14414f5703a60b9cba71a81f6a9dcaf894
+  wallet_amount:
+  wallet_transaction_id:
+  coupon_id:
+  footprint: 52f5c2cb9e58d0ad421c93437f57fe2dd364ca412c85775cd59e7510031f1091
   environment: test
+  invoicing_profile_id: 4
   operator_profile_id: 1
-
+  statistic_profile_id: 4
 invoice_3:
   id: 3
-  invoiced_id: 3
-  invoiced_type: Subscription
-  stp_invoice_id:
   total: 3000
-  created_at: 2015-06-10 11:20:01.341130000 Z
-  updated_at: 2015-06-10 11:20:01.341130000 Z
-  invoicing_profile_id: 7
-  statistic_profile_id: 7
+  created_at: '2015-06-10 11:20:01.341130'
+  updated_at: '2021-05-27 09:26:26.489945'
   reference: '1203001'
   payment_method:
   avoir_date:
@@ -58,21 +51,19 @@ invoice_3:
   type:
   subscription_to_expire:
   description:
-  footprint: 8fb2c1105d24ac19096d5673b02ddea11c0c8578d818fad320c85c6005dda69b
+  wallet_amount:
+  wallet_transaction_id:
+  coupon_id:
+  footprint: 2396b77776092cf80e3b2c1effef36e655af63a52a781eb73f27d9f44e546bae
   environment: test
+  invoicing_profile_id: 7
   operator_profile_id: 1
-
-
+  statistic_profile_id: 7
 invoice_4:
   id: 4
-  invoiced_id: 1
-  invoiced_type: Reservation
-  stp_invoice_id:
   total: 0
-  created_at: 2016-04-05 08:35:52.931187000 Z
-  updated_at: 2016-04-05 08:35:52.931187000 Z
-  invoicing_profile_id: 7
-  statistic_profile_id: 7
+  created_at: '2016-04-05 08:35:52.931187'
+  updated_at: '2021-05-27 09:26:26.494005'
   reference: '1203002'
   payment_method:
   avoir_date:
@@ -80,20 +71,19 @@ invoice_4:
   type:
   subscription_to_expire:
   description:
-  footprint: 4ed7cf862affb0b6e0be53cfd97da3373b51c555ef2f06c7fe2b354940f10b53
+  wallet_amount:
+  wallet_transaction_id:
+  coupon_id:
+  footprint: c0809383b304668ac5226fb502f92eb26c51701380ea9ba9526b80b0295b603d
   environment: test
+  invoicing_profile_id: 7
   operator_profile_id: 1
-
+  statistic_profile_id: 7
 invoice_5:
   id: 5
-  invoiced_id: 2
-  invoiced_type: Reservation
-  stp_invoice_id:
   total: 1500
-  created_at: 2016-04-05 08:36:46.853368000 Z
-  updated_at: 2016-04-05 08:36:46.853368000 Z
-  invoicing_profile_id: 3
-  statistic_profile_id: 3
+  created_at: '2016-04-05 08:36:46.853368'
+  updated_at: '2021-05-27 09:26:26.498207'
   reference: '1506031'
   payment_method:
   avoir_date:
@@ -101,20 +91,19 @@ invoice_5:
   type:
   subscription_to_expire:
   description:
-  footprint: 9aead7f5eb9411778d072279a058be0fe2da76eb12f6a22100cbec1f2b3f6e9d
+  wallet_amount:
+  wallet_transaction_id:
+  coupon_id:
+  footprint: f5d538feef1e83fd8f2b1431e7797e1d267f034e3612bdd9725a58e7ba947b27
   environment: test
+  invoicing_profile_id: 3
   operator_profile_id: 1
-
+  statistic_profile_id: 3
 invoice_6:
   id: 6
-  invoiced_id: 4
-  invoiced_type: Subscription
-  stp_invoice_id:
   total: 3000
-  created_at: 2021-01-04 14:51:21.616153182 Z
-  updated_at: 2021-01-04 14:51:21.616153182 Z
-  invoicing_profile_id: 8
-  statistic_profile_id: 8
+  created_at: '2021-01-04 14:51:21.616153'
+  updated_at: '2021-05-27 09:26:26.502330'
   reference: '2101041'
   payment_method:
   avoir_date:
@@ -122,8 +111,11 @@ invoice_6:
   type:
   subscription_to_expire:
   description:
-  footprint: e637ccf79157d973e87be46b09d5f90ac08f41b69bc53c3c60b6fc39d07450d9
+  wallet_amount:
+  wallet_transaction_id:
+  coupon_id:
+  footprint: eb22a99b5fec426dda0214bbaca3ea938fabe42c73bbf1f86712f67a5f61d236
   environment: test
+  invoicing_profile_id: 8
   operator_profile_id: 1
-
-
+  statistic_profile_id: 8

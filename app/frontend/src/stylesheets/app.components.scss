@@ -267,35 +267,6 @@
   }
 }
 
-.list-of-plans {
-  .group-title {
-    width: 83.33%;
-    border-bottom: 1px solid;
-    padding-bottom: 2em;
-    margin: auto auto 1em;
-  }
-
-  .plans-per-group {
-    & {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: center;
-      border: 1px solid transparent;
-    }
-
-    & > * {
-      width: 50%;
-    }
-
-    @media screen and (max-width: 992px) {
-      & > * {
-        width: 100%;
-      }
-    }
-  }
-}
-
 .well {
   &.well-warning {
     @include border-radius(3px, 3px, 3px, 3px);

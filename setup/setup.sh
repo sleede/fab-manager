@@ -112,7 +112,7 @@ config()
 {
   SERVICE="fabmanager"
   echo 'We recommend nginx to serve the application over the network (internet). You can use your own solution or let this script install and configure nginx for Fab-manager.'
-  printf 'If you want to setup install Fab-manager behind a reverse proxy, you may not need to install the integrated nginx.\n'
+  printf 'If you want to install Fab-manager behind a reverse proxy, you may not need to install the integrated nginx.\n'
   read -rp 'Do you want install nginx? (Y/n) ' NGINX </dev/tty
   if [ "$NGINX" != "n" ]; then
     # if the user doesn't want nginx, let him use its own solution for HTTPS
@@ -211,14 +211,21 @@ prepare_nginx()
     printf "The two following configurations are useful if you want to install Fab-manager behind a reverse proxy...\n"
     read -rp "- Do you want to map the Fab-manager's service to an external network? (Y/n) " confirm </dev/tty
     if [ "$confirm" != "n" ]; then
+      read -rp "Please input the name of the external network (default: web) " network </dev/tty
+      if [ "$network" = "" ]; then network="web"; fi
+
       echo "Adding a network configuration to the docker-compose.yml file..."
-      yq -i eval '.networks.web.external = "true"' docker-compose.yml
-      yq -i eval -n '.networks.db = "" | .networks.db="!!null"' docker-compose.yml
+      yq -i eval ".networks.$network.external = \"true\"" docker-compose.yml
+      yq -i eval '.networks.db = "" | .networks.db tag="!!null"' docker-compose.yml
       yq -i eval '.services.fabmanager.networks += ["web"]' docker-compose.yml
       yq -i eval '.services.fabmanager.networks += ["db"]' docker-compose.yml
       yq -i eval '.services.postgres.networks += ["db"]' docker-compose.yml
       yq -i eval '.services.elasticsearch.networks += ["db"]' docker-compose.yml
       yq -i eval '.services.redis.networks += ["db"]' docker-compose.yml
+      if ! docker network inspect "$network" 1>/dev/null; then
+        echo "Creating the external network $network..."
+        docker network create "$network"
+      fi
     fi
     read -rp "- Do you want to rename the Fab-manager's service? (Y/n) " confirm </dev/tty
     if [ "$confirm" != "n" ]; then
@@ -297,7 +304,7 @@ configure_env_file()
   doc=$(\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/doc/environment.md)
   variables=(DEFAULT_HOST DEFAULT_PROTOCOL DELIVERY_METHOD SMTP_ADDRESS SMTP_PORT SMTP_USER_NAME SMTP_PASSWORD SMTP_AUTHENTICATION \
    SMTP_ENABLE_STARTTLS_AUTO SMTP_OPENSSL_VERIFY_MODE SMTP_TLS LOG_LEVEL MAX_IMAGE_SIZE MAX_CAO_SIZE MAX_IMPORT_SIZE DISK_SPACE_MB_ALERT \
-   SUPERADMIN_EMAIL APP_LOCALE RAILS_LOCALE MOMENT_LOCALE SUMMERNOTE_LOCALE ANGULAR_LOCALE FULLCALENDAR_LOCALE INTL_LOCALE INTL_CURRENCY\
+   ADMINSYS_EMAIL APP_LOCALE RAILS_LOCALE MOMENT_LOCALE SUMMERNOTE_LOCALE ANGULAR_LOCALE FULLCALENDAR_LOCALE INTL_LOCALE INTL_CURRENCY\
    POSTGRESQL_LANGUAGE_ANALYZER TIME_ZONE WEEK_STARTING_DAY D3_DATE_FORMAT UIB_DATE_FORMAT EXCEL_DATE_FORMAT)
   for variable in "${variables[@]}"; do
     local var_doc current
@@ -310,8 +317,9 @@ configure_env_file()
     read -rp "  > " value </dev/tty
     echo "======================="
     if [ "$value" != "" ]; then
-      escaped=$(printf '%s\n' "$value" | sed -e 's/[\/&]/\\&/g')
-      sed -i.bak "s/$current/$variable=$escaped/g" "$FABMANAGER_PATH/config/env"
+      esc_val=$(printf '%s\n' "$value" | sed -e 's/\//\\\//g')
+      esc_curr=$(printf '%s\n' "$current" | sed -e 's/\//\\\//g')
+      sed -i.bak "s/$esc_curr/$variable=$esc_val/g" "$FABMANAGER_PATH/config/env"
     fi
   done
   # we automatically generate the SECRET_KEY_BASE

@@ -132,6 +132,7 @@ fr:
         payment_schedules:
           no_payment_schedules: "Pas d'échéancier à afficher"
           load_more: "Voir plus"
+          card_updated_success: "Votre carte bancaire a bien été mise à jour"
       #public profil of a member
       members_show:
         members_list: "Liste des membres"

@@ -307,8 +307,8 @@ Application.Controllers.controller('ShowSpaceController', ['$scope', '$state', '
  * per slots.
  */
 
-Application.Controllers.controller('ReserveSpaceController', ['$scope', '$stateParams', 'Auth', '$timeout', 'Availability', 'Member', 'plansPromise', 'groupsPromise', 'settingsPromise', 'spacePromise', '_t', 'uiCalendarConfig', 'CalendarConfig',
-  function ($scope, $stateParams, Auth, $timeout, Availability, Member, plansPromise, groupsPromise, settingsPromise, spacePromise, _t, uiCalendarConfig, CalendarConfig) {
+Application.Controllers.controller('ReserveSpaceController', ['$scope', '$stateParams', 'Auth', '$timeout', 'Availability', 'Member', 'plansPromise', 'groupsPromise', 'settingsPromise', 'spacePromise', '_t', 'uiCalendarConfig', 'CalendarConfig', 'Reservation',
+  function ($scope, $stateParams, Auth, $timeout, Availability, Member, plansPromise, groupsPromise, settingsPromise, spacePromise, _t, uiCalendarConfig, CalendarConfig, Reservation) {
     /* PRIVATE STATIC CONSTANTS */
 
     // Color of the selected event backgound
@@ -329,17 +329,11 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$stateP
     $scope.ctrl =
       { member: {} };
 
-    // list of plans, classified by group
-    $scope.plansClassifiedByGroup = [];
-    $scope.groups = groupsPromise;
+    // all plans, used in <cart>
     $scope.plans = plansPromise;
-    for (let group of Array.from(groupsPromise)) {
-      const groupObj = { id: group.id, name: group.name, plans: [] };
-      for (let plan of Array.from(plansPromise)) {
-        if (plan.group_id === group.id) { groupObj.plans.push(plan); }
-      }
-      $scope.plansClassifiedByGroup.push(groupObj);
-    }
+
+    // all groups, used in <cart>
+    $scope.groups = groupsPromise;
 
     // mapping of fullCalendar events.
     $scope.events = {
@@ -556,35 +550,37 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$stateP
     /**
      * Once the reservation is booked (payment process successfully completed), change the event style
      * in fullCalendar, update the user's subscription and free-credits if needed
-     * @param reservation {Object}
+     * @param paymentDocument {Invoice|PaymentSchedule}
      */
-    $scope.afterPayment = function (reservation) {
-      angular.forEach($scope.events.paid, function (spaceSlot, key) {
-        spaceSlot.is_reserved = true;
-        spaceSlot.can_modify = true;
-        spaceSlot.title = _t('app.logged.space_reserve.i_ve_reserved');
-        spaceSlot.backgroundColor = 'white';
-        spaceSlot.borderColor = RESERVED_SLOT_BORDER_COLOR;
-        updateSpaceSlotId(spaceSlot, reservation);
-        updateEvents(spaceSlot);
-      });
+    $scope.afterPayment = function (paymentDocument) {
+      Reservation.get({ id: paymentDocument.main_object.id }, function (reservation) {
+        angular.forEach($scope.events.paid, function (spaceSlot, key) {
+          spaceSlot.is_reserved = true;
+          spaceSlot.can_modify = true;
+          spaceSlot.title = _t('app.logged.space_reserve.i_ve_reserved');
+          spaceSlot.backgroundColor = 'white';
+          spaceSlot.borderColor = RESERVED_SLOT_BORDER_COLOR;
+          updateSpaceSlotId(spaceSlot, reservation);
+          updateEvents(spaceSlot);
+        });
 
-      if ($scope.selectedPlan) {
-        $scope.ctrl.member.subscribed_plan = angular.copy($scope.selectedPlan);
-        if ($scope.ctrl.member.id === Auth._currentUser.id) {
-          Auth._currentUser.subscribed_plan = angular.copy($scope.selectedPlan);
+        if ($scope.selectedPlan) {
+          $scope.ctrl.member.subscribed_plan = angular.copy($scope.selectedPlan);
+          if ($scope.ctrl.member.id === Auth._currentUser.id) {
+            Auth._currentUser.subscribed_plan = angular.copy($scope.selectedPlan);
+          }
+          $scope.plansAreShown = false;
+          $scope.selectedPlan = null;
         }
-        $scope.plansAreShown = false;
-        $scope.selectedPlan = null;
-      }
-      $scope.ctrl.member.training_credits = angular.copy(reservation.user.training_credits);
-      $scope.ctrl.member.machine_credits = angular.copy(reservation.user.machine_credits);
-      if ($scope.ctrl.member.id === Auth._currentUser.id) {
-        Auth._currentUser.training_credits = angular.copy(reservation.user.training_credits);
-        Auth._currentUser.machine_credits = angular.copy(reservation.user.machine_credits);
-      }
+        $scope.ctrl.member.training_credits = angular.copy(reservation.user.training_credits);
+        $scope.ctrl.member.machine_credits = angular.copy(reservation.user.machine_credits);
+        if ($scope.ctrl.member.id === Auth._currentUser.id) {
+          Auth._currentUser.training_credits = angular.copy(reservation.user.training_credits);
+          Auth._currentUser.machine_credits = angular.copy(reservation.user.machine_credits);
+        }
 
-      refetchCalendar();
+        refetchCalendar();
+      });
     };
 
     /**

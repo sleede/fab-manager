@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SubscriptionExtensionAfterReservation
   attr_accessor :user, :reservation
 

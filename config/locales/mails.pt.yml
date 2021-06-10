@@ -285,10 +285,10 @@ pt:
       subject: "Sua função mudou"
       body:
         role_changed_html: "Seu cargo em {NAME} mudou. Você está agora em <strong>{ROLE}</strong></strong>.<br/>Com grande poder vem grande responsabilidade, use os seus novos privilégios de forma justa e respeitosa."
-    notify_admin_members_stripe_sync:
+    notify_admin_objects_stripe_sync:
       subject: "Sincronização do Stripe"
       body:
-        members_sync: "Todos os membros foram sincronizados com sucesso no Stripe."
+        objects_sync: "Todos os membros, cupons, máquinas, treinamentos, espaços e planos foram sincronizados com sucesso no Stripe."
     notify_member_payment_schedule_ready:
       subject: "Your payment schedule"
       body:

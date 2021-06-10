@@ -24,7 +24,6 @@ export enum SettingName {
   InvoiceLegals = 'invoice_legals',
   BookingWindowStart = 'booking_window_start',
   BookingWindowEnd = 'booking_window_end',
-  BookingSlotDuration = 'booking_slot_duration',
   BookingMoveEnable = 'booking_move_enable',
   BookingMoveDelay = 'booking_move_delay',
   BookingCancelEnable = 'booking_cancel_enable',
@@ -101,12 +100,33 @@ export enum SettingName {
   UpcomingEventsShown = 'upcoming_events_shown',
   PaymentSchedulePrefix = 'payment_schedule_prefix',
   TrainingsModule = 'trainings_module',
-  AddressRequired = 'address_required'
+  AddressRequired = 'address_required',
+  PaymentGateway = 'payment_gateway',
+  PayZenUsername = 'payzen_username',
+  PayZenPassword = 'payzen_password',
+  PayZenEndpoint = 'payzen_endpoint',
+  PayZenPublicKey = 'payzen_public_key',
+  PayZenHmacKey = 'payzen_hmac',
+  PayZenCurrency = 'payzen_currency'
 }
 
 export interface Setting {
   name: SettingName,
+  localized?: string,
   value: string,
-  last_update: Date,
-  history: Array<HistoryValue>
+  last_update?: Date,
+  history?: Array<HistoryValue>
+}
+
+export interface SettingError {
+  error: string,
+  id: number,
+  name: string
+}
+
+export interface SettingBulkResult {
+  status: boolean,
+  value?: any,
+  error?: string,
+  localized?: string,
 }

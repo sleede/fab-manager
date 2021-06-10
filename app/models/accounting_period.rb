@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'checksum'
+require 'integrity/checksum'
 require 'version'
 require 'zip'
 
@@ -25,6 +25,10 @@ class AccountingPeriod < ApplicationRecord
 
   def invoices
     Invoice.where('created_at >= :start_date AND CAST(created_at AS DATE) <= :end_date', start_date: start_at, end_date: end_at)
+  end
+
+  def payment_schedules
+    PaymentSchedule.where('created_at >= :start_date AND CAST(created_at AS DATE) <= :end_date', start_date: start_at, end_date: end_at)
   end
 
   def invoices_with_vat(invoices)
@@ -86,6 +90,6 @@ class AccountingPeriod < ApplicationRecord
     columns = AccountingPeriod.columns.map(&:name)
                               .delete_if { |c| %w[id footprint created_at updated_at].include? c }
 
-    Checksum.text("#{columns.map { |c| self[c] }.join}#{previous_period ? previous_period.footprint : ''}")
+    Integrity::Checksum.text("#{columns.map { |c| self[c] }.join}#{previous_period ? previous_period.footprint : ''}")
   end
 end

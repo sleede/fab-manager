@@ -9,7 +9,8 @@ This document will guide you through all the steps needed to set up a developmen
 3. [ElasticSearch](#elasticsearch)<br/>
 3.1. [Rebuild statistics](#rebuild-stats)<br/>
 3.2. [Backup and Restore](#backup-and-restore-elasticsearch)
-3.3. [Debugging](debugging-elasticsearch)
+3.3. [Debugging](#debugging-elasticsearch)
+4. [Related documentation](#related-documentation)
 
 This procedure is not easy to follow so if you don't need to write some code for Fab-manager, please prefer the [production installation method](doc/production_readme.md).
 
@@ -28,7 +29,7 @@ This procedure is not easy to follow so if you don't need to write some code for
 
 4. Install docker.
    Your system may provide a pre-packaged version of docker in its repositories, but this version may be outdated.
-   Please refer to [ubuntu](https://docs.docker.com/install/linux/docker-ce/ubuntu/), [debian](https://docs.docker.com/install/linux/docker-ce/debian/) or [MacOS](https://docs.docker.com/docker-for-mac/install/) documentation to setup a recent version of docker.
+   Please refer to the [official docker documentation](https://docs.docker.com/engine/install/) to set up a recent version of docker.
 
 5. Add your current user to the docker group, to allow using docker without `sudo`.
    ```bash
@@ -80,6 +81,8 @@ This procedure is not easy to follow so if you don't need to write some code for
    ```bash
    brew install imagemagick
    ```
+   
+   - For other systems, please refer to your system specific documentation to install the appropriate packages: ImageMagick and the PostgreSQL development library
 
 9. Init the RVM and NVM instances and check they were correctly configured
 
@@ -90,9 +93,8 @@ This procedure is not easy to follow so if you don't need to write some code for
    node --version | grep -q `cat .nvmrc` && echo "ok"
    # Must print ok
    ```
-   
+
    If one of these commands does not print "ok", then try to input `rvm use` or `nvm use`
-```
 
 10. Install bundler in the current RVM gemset
 
@@ -132,7 +134,7 @@ This procedure is not easy to follow so if you don't need to write some code for
    RAILS_ENV=test rails db:migrate
    ```
 
-14. Create the pids folder used by Sidekiq. If you want to use a different location, you can configure it in `config/sidekiq.yml`
+14. Create the pids folder used by Sidekiq. If you want to use a different location, you can configure it in [config/sidekiq.yml](config/sidekiq.yml)
 
    ```bash
    mkdir -p tmp/pids
@@ -144,9 +146,9 @@ This procedure is not easy to follow so if you don't need to write some code for
    foreman s -p 5000
    ```
 
-16. You should now be able to access your local development Fab-manager instance by accessing `http://localhost:3000` in your web browser.
+16. You should now be able to access your local development Fab-manager instance by accessing `http://localhost:5000` in your web browser.
 
-17. You can login as the default administrator using the credentials defined previously.
+17. You can log in as the default administrator using the credentials defined previously.
 
 18. Email notifications will be caught by MailCatcher.
     To see the emails sent by the platform, open your web browser at `http://fabmanager-mailcatcher:1080` to access the MailCatcher interface.
@@ -154,7 +156,7 @@ This procedure is not easy to follow so if you don't need to write some code for
 <a name="tests"></a>
 ## Tests
 
-Run the test suite with `./scripts/run-tests.sh`.
+Run the test suite with `./scripts/tests.sh`.
 
 Pleas note: If you haven't set the Stripe's API keys in your `.env` file, the script will ask for them.
 You must provide valid Stripe API **test keys** for the test suite to run.
@@ -169,16 +171,16 @@ Some information about PostgreSQL usage in fab-manager is available in the [Post
 
 ElasticSearch is a powerful search engine based on Apache Lucene combined with a NoSQL database used as a cache to index data and quickly process complex requests on it.
 
-In FabManager, it is used for the admin's statistics module.
+In FabManager, it is used for the administrator's statistics module.
 
 The organisation if the data in the ElasticSearch database is documented in [elasticsearch.md](elasticsearch.md) 
 
 <a name="rebuild-stats"></a>
 ### Rebuild statistics
 
-Every nights, the statistics for the day that just ended are built automatically at 01:00 (AM) and stored in ElasticSearch.
+Every night, the statistics for the day that just ended are built automatically at 01:00 (AM) and stored in ElasticSearch.
 See [schedule.yml](config/schedule.yml) to modify this behavior.
-If the scheduled task wasn't executed for any reason (eg. you are in a dev environment and your computer was turned off at 1 AM), you can force the statistics data generation in ElasticSearch, running the following command.
+If the scheduled task wasn't executed for any reason (e.g. you are in a dev environment, and your computer was turned off at 1 AM), you can force the statistics data generation in ElasticSearch, running the following command.
 
 ```bash
 # Here for the 50 last days
@@ -188,7 +190,7 @@ rails fablab:es:generate_stats[50]
 <a name="backup-and-restore-elasticsearch"></a>
 ### Backup and Restore
 
-To backup and restore the ElasticSearch database, use the [elasticsearch-dump](https://github.com/taskrabbit/elasticsearch-dump) tool.
+To back up and restore the ElasticSearch database, use the [elasticsearch-dump](https://github.com/taskrabbit/elasticsearch-dump) tool.
 
 Dump the database with: `elasticdump --input=http://localhost:9200/stats --output=fablab_stats.json`.
 Restore it with: `elasticdump --input=fablab_stats.json --output=http://localhost:9200/stats`.
@@ -198,3 +200,13 @@ Restore it with: `elasticdump --input=fablab_stats.json --output=http://localhos
 ### Debugging
 
 In development, visit http://fabmanager-kibana:5601 to use Kibana, the web UI for ElasticSearch
+
+
+<a name="related-documentation"></a>
+## Related Documentation
+
+- [Ruby 2.6.5](http://ruby-doc.org/core-2.6.5/)
+- [Ruby on Rails](http://api.rubyonrails.org)
+- [AngularJS](https://docs.angularjs.org/api)
+- [Angular-Bootstrap](http://angular-ui.github.io/bootstrap/)
+- [ElasticSearch 5.6](https://www.elastic.co/guide/en/elasticsearch/reference/5.6/index.html)

@@ -1,0 +1,39 @@
+.plans-filter {
+  margin: 1.5em;
+
+  .group-filter {
+    padding-right: 1.5em;
+  }
+
+  .duration-filter,
+  .group-filter {
+    & {
+      display: inline-flex;
+      width: 50%;
+    }
+    & > label {
+      white-space: nowrap;
+      line-height: 2em;
+    }
+    & > * {
+      display: inline-block;
+    }
+    .duration-select,
+    .group-select {
+      width: 100%;
+      margin-left: 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 720px){
+  .plans-filter {
+    .group-filter {
+      padding-right: 0;
+    }
+    .group-filter, .duration-filter {
+      display: inline-block;
+      width: 100%;
+    }
+  }
+}

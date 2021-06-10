@@ -7,7 +7,8 @@ class Avoir < Invoice
 
   after_create :notify_admins_refund_created
 
-  validates :payment_method, inclusion: { in: %w[stripe cheque transfer none cash wallet] }
+  # TODO, remove stripe from this list in a future release. For now, we leave it here to allow data migration to v5.0
+  validates :payment_method, inclusion: { in: %w[stripe card cheque transfer none cash wallet] }
 
   attr_accessor :invoice_items_ids
 

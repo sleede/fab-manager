@@ -259,6 +259,12 @@ pt:
         the_user_s_group_was_successfully_changed: "O grupo de usuários foi alterado com sucesso."
         an_error_prevented_your_group_from_being_changed: "Um erro impediu que seu grupo fosse alterado."
         an_error_prevented_to_change_the_user_s_group: "Um erro impediu que o grupo de usuários fosse alterado com sucesso."
+      plans_filter:
+        i_am: "I am"
+        select_group: "select a group"
+        i_want_duration: "I want to subscribe for"
+        all_durations: "All durations"
+        select_duration: "select a duration"
       #Fablab's events list
       events_list:
         the_fablab_s_events: "Eventos do Fablab"

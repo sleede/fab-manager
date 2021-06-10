@@ -1,4 +1,4 @@
-import apiClient from './api-client';
+import apiClient from './clients/api-client';
 import { AxiosResponse } from 'axios';
 import { EventTheme } from '../models/event-theme';
 
@@ -8,4 +8,3 @@ export default class EventThemeAPI {
     return res?.data;
   }
 }
-

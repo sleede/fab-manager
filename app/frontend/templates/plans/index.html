@@ -17,39 +17,19 @@
 <div class="row no-gutter list-of-plans">
   <div class="col-sm-12 col-md-9 b-r">
 
-    <div class="row m-t m-b padder" ng-repeat="plansGroup in plansClassifiedByGroup | groupFilter:ctrl.member">
-
-      <div ng-show="plansGroup.actives > 0">
-        <div class="col-md-12 text-center">
-          <h2 class="text-u-c group-title">{{plansGroup.name}}</h2>
-        </div>
-        <div class="row row-centered padder">
-          <div class="plans-per-group">
-
-                <plan-card ng-repeat="(key, plan) in plansGroup.plans.filter(filterDisabledPlans) | orderBy: '-ui_weight'"
-                           plan="plan"
-                           user-id="ctrl.member.id"
-                           subscribed-plan-id="ctrl.member.subscribed_plan.id"
-                           operator="currentUser"
-                           on-select-plan="selectPlan"
-                           is-selected="isSelected(plan)">
-                </plan-card>
-          </div>
-
-
-          <div class="col-xs-12 col-md-12 col-lg-10 col-centered no-gutter" ng-if="ctrl.member.subscription && isInPast(ctrl.member.subscription.expired_at)">
-            <uib-alert type="info">
-              {{ 'app.public.plans.your_subscription_expires_on_the_DATE' | translate:{DATE:(ctrl.member.subscription.expired_at | amDateFormat:'L' )} }}
-            </uib-alert>
-          </div>
-
-        </div>
-      </div>
-      <div ng-show="plansGroup.actives === 0 && ctrl.member" class="m-lg" translate>
-        {{ 'app.public.plans.no_plans' }}
-      </div>
-
+    <div class="col-xs-12 col-md-12 col-lg-10 col-centered no-gutter" ng-if="ctrl.member.subscription && isInPast(ctrl.member.subscription.expired_at)">
+      <uib-alert type="info">
+        {{ 'app.public.plans.your_subscription_expires_on_the_DATE' | translate:{DATE:(ctrl.member.subscription.expired_at | amDateFormat:'L' )} }}
+      </uib-alert>
     </div>
+
+    <plans-list customer="ctrl.member"
+                subscribed-plan-id="ctrl.member.subscribed_plan.id"
+                on-error="onError"
+                on-plan-selection="selectPlan"
+                on-login-request="userLogin"
+                operator="currentUser" >
+    </plans-list>
 
   </div>
 

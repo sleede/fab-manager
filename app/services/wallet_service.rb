@@ -33,15 +33,14 @@ class WalletService
   end
 
   ## debit an amount to wallet, if debit success then return a wallet transaction
-  def debit(amount, transactable)
+  def debit(amount)
     ActiveRecord::Base.transaction do
       if @wallet.debit(amount)
         transaction = WalletTransaction.new(
           invoicing_profile: @user&.invoicing_profile,
           wallet: @wallet,
           transaction_type: 'debit',
-          amount: amount,
-          transactable: transactable
+          amount: amount
         )
 
         return transaction if transaction.save
@@ -55,7 +54,6 @@ class WalletService
   def create_avoir(wallet_transaction, avoir_date, description)
     avoir = Avoir.new
     avoir.type = 'Avoir'
-    avoir.invoiced = wallet_transaction
     avoir.avoir_date = avoir_date
     avoir.created_at = avoir_date
     avoir.description = description
@@ -69,7 +67,9 @@ class WalletService
     ii = InvoiceItem.new
     ii.amount = wallet_transaction.amount * 100.0
     ii.description = I18n.t('invoices.wallet_credit')
+    ii.object = wallet_transaction
     ii.invoice = avoir
+    ii.main = true
     ii.save!
   end
 
@@ -80,7 +80,7 @@ class WalletService
   # @param coupon {Coupon|String} Coupon object or code
   ##
   def self.wallet_amount_debit(payment, user, coupon = nil)
-    total = if payment.class == PaymentSchedule
+    total = if payment.is_a? PaymentSchedule
               payment.payment_schedule_items.first.amount
             else
               payment.total
@@ -93,17 +93,18 @@ class WalletService
   end
 
   ##
-  # Subtract the amount of the transactable item (Subscription|Reservation) from the customer's wallet
+  # Subtract the amount of the payment document (Invoice|PaymentSchedule) from the customer's wallet
   ##
-  def self.debit_user_wallet(payment, user, transactable)
+  def self.debit_user_wallet(payment, user)
     wallet_amount = WalletService.wallet_amount_debit(payment, user)
     return unless wallet_amount.present? && wallet_amount != 0
 
     amount = wallet_amount / 100.0
-    wallet_transaction = WalletService.new(user: user, wallet: user.wallet).debit(amount, transactable)
+    wallet_transaction = WalletService.new(user: user, wallet: user.wallet).debit(amount)
     # wallet debit success
     raise DebitWalletError unless wallet_transaction
 
     payment.set_wallet_transaction(wallet_amount, wallet_transaction.id)
   end
+
 end

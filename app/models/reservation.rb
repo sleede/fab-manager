@@ -17,45 +17,19 @@ class Reservation < ApplicationRecord
   has_many :tickets
   accepts_nested_attributes_for :tickets, allow_destroy: false
 
-  has_one :invoice, -> { where(type: nil) }, as: :invoiced, dependent: :destroy
-  has_one :payment_schedule, as: :scheduled, dependent: :destroy
+  has_many :invoice_items, as: :object, dependent: :destroy
+  has_one :payment_schedule_object, as: :object, dependent: :destroy
 
   validates_presence_of :reservable_id, :reservable_type
   validate :machine_not_already_reserved, if: -> { reservable.is_a?(Machine) }
   validate :training_not_fully_reserved, if: -> { reservable.is_a?(Training) }
-  # validates_with ReservationSlotSubscriptionValidator
-
-  attr_accessor :plan_id, :subscription
+  validate :slots_not_locked
 
   after_commit :notify_member_create_reservation, on: :create
   after_commit :notify_admin_member_create_reservation, on: :create
+  after_commit :extend_subscription, on: :create
   after_save :update_event_nb_free_places, if: proc { |reservation| reservation.reservable_type == 'Event' }
 
-  ##
-  # These checks will run before the invoice/payment-schedule is generated
-  ##
-  def pre_check
-    # check that none of the reserved availabilities was locked
-    slots.each do |slot|
-      raise LockedError if slot.availability.lock
-    end
-  end
-
-  ## Generate the subscription associated with for the current reservation
-  def generate_subscription
-    return unless plan_id
-
-    self.subscription = Subscription.new(plan_id: plan_id, statistic_profile_id: statistic_profile_id, expiration_date: nil)
-    subscription.init_save
-    subscription
-  end
-
-  ##
-  # These actions will be realized after the reservation is initially saved (on creation)
-  ##
-  def post_save
-    UsersCredits::Manager.new(reservation: self).update_credits
-  end
 
   # @param canceled    if true, count the number of seats for this reservation, including canceled seats
   def total_booked_seats(canceled: false)
@@ -81,6 +55,18 @@ class Reservation < ApplicationRecord
     reservable.save!
   end
 
+  def original_payment_schedule
+    payment_schedule_object&.payment_schedule
+  end
+
+  def original_invoice
+    invoice_items.select(:invoice_id)
+                 .group(:invoice_id)
+                 .map(&:invoice_id)
+                 .map { |id| Invoice.find_by(id: id, type: nil) }
+                 .first
+  end
+
   private
 
   def machine_not_already_reserved
@@ -104,6 +90,17 @@ class Reservation < ApplicationRecord
   def training_not_fully_reserved
     slot = slots.first
     errors.add(:training, 'already fully reserved') if Availability.find(slot.availability_id).completed?
+  end
+
+  def slots_not_locked
+    # check that none of the reserved availabilities was locked
+    slots.each do |slot|
+      errors.add(:slots, 'locked') if slot.availability.lock
+    end
+  end
+
+  def extend_subscription
+    SubscriptionExtensionAfterReservation.new(self).extend_subscription_if_eligible
   end
 
   def notify_member_create_reservation

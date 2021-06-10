@@ -364,7 +364,7 @@ angular.module('application.router', ['ui.router'])
             return Setting.query({
               names: "['machine_explications_alert', 'booking_window_start',  'booking_window_end',  'booking_move_enable', " +
                      "'booking_move_delay', 'booking_cancel_enable',  'booking_cancel_delay', 'subscription_explications_alert', " +
-                     "'online_payment_module']"
+                     "'online_payment_module', 'payment_gateway']"
             }).$promise;
           }]
         }
@@ -450,7 +450,7 @@ angular.module('application.router', ['ui.router'])
             return Setting.query({
               names: "['booking_window_start', 'booking_window_end', 'booking_move_enable',  'booking_move_delay', " +
                      "'booking_cancel_enable', 'booking_cancel_delay', 'subscription_explications_alert',  " +
-                     "'space_explications_alert', 'online_payment_module']"
+                     "'space_explications_alert', 'online_payment_module', 'payment_gateway']"
             }).$promise;
           }]
         }
@@ -503,7 +503,8 @@ angular.module('application.router', ['ui.router'])
             return Setting.query({
               names: "['booking_window_start', 'booking_window_end', 'booking_move_enable', 'booking_move_delay', " +
                      "'booking_cancel_enable', 'booking_cancel_delay', 'subscription_explications_alert', " +
-                     "'training_explications_alert', 'training_information_message', 'online_payment_module']"
+                     "'training_explications_alert', 'training_information_message', 'online_payment_module', " +
+                     "'payment_gateway']"
             }).$promise;
           }]
         }
@@ -531,9 +532,8 @@ angular.module('application.router', ['ui.router'])
         },
         resolve: {
           subscriptionExplicationsPromise: ['Setting', function (Setting) { return Setting.get({ name: 'subscription_explications_alert' }).$promise; }],
-          plansPromise: ['Plan', function (Plan) { return Plan.query().$promise; }],
           groupsPromise: ['Group', function (Group) { return Group.query().$promise; }],
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['online_payment_module']" }).$promise; }]
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['online_payment_module', 'payment_gateway']" }).$promise; }]
         }
       })
 
@@ -549,8 +549,7 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           categoriesPromise: ['Category', function (Category) { return Category.query().$promise; }],
           themesPromise: ['EventTheme', function (EventTheme) { return EventTheme.query().$promise; }],
-          ageRangesPromise: ['AgeRange', function (AgeRange) { return AgeRange.query().$promise; }],
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['online_payment_module']" }).$promise; }]
+          ageRangesPromise: ['AgeRange', function (AgeRange) { return AgeRange.query().$promise; }]
         }
       })
       .state('app.public.events_show', {
@@ -801,6 +800,9 @@ angular.module('application.router', ['ui.router'])
             templateUrl: '/admin/plans/new.html',
             controller: 'NewPlanController'
           }
+        },
+        resolve: {
+          planCategories: ['PlanCategory', function (PlanCategory) { return PlanCategory.query().$promise; }]
         }
       })
       .state('app.admin.plans.edit', {
@@ -815,7 +817,18 @@ angular.module('application.router', ['ui.router'])
           spaces: ['Space', function (Space) { return Space.query().$promise; }],
           machines: ['Machine', function (Machine) { return Machine.query().$promise; }],
           plans: ['Plan', function (Plan) { return Plan.query().$promise; }],
-          planPromise: ['Plan', '$stateParams', function (Plan, $stateParams) { return Plan.get({ id: $stateParams.id }).$promise; }]
+          planPromise: ['Plan', '$stateParams', function (Plan, $stateParams) { return Plan.get({ id: $stateParams.id }).$promise; }],
+          planCategories: ['PlanCategory', function (PlanCategory) { return PlanCategory.query().$promise; }]
+        }
+      })
+      // plan categories
+      .state('app.admin.plan_categories', {
+        url: '/admin/plan_categories',
+        views: {
+          'main@': {
+            templateUrl: '/admin/plans/categories.html',
+            controller: 'PlanCategoriesController'
+          }
         }
       })
 
@@ -861,7 +874,7 @@ angular.module('application.router', ['ui.router'])
                      "'accounting_VAT_code', 'accounting_VAT_label', 'accounting_subscription_code', 'accounting_subscription_label', " +
                      "'accounting_Machine_code', 'accounting_Machine_label', 'accounting_Training_code', 'accounting_Training_label', " +
                      "'accounting_Event_code', 'accounting_Event_label', 'accounting_Space_code', 'accounting_Space_label', " +
-                     "'accounting_Error_code', 'accounting_Error_label', " +
+                     "'payment_gateway', 'accounting_Error_code', 'accounting_Error_label', 'payment_schedule_prefix', " +
                      "'feature_tour_display', 'online_payment_module', 'stripe_public_key', 'stripe_currency', 'invoice_prefix']"
             }).$promise;
           }],

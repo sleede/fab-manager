@@ -7,7 +7,7 @@
 class Setting < ApplicationRecord
   has_many :history_values
   # The following list contains all the settings that can be customized from the Fab-manager's UI.
-  # A few of them that are system settings, that should not be updated manually (uuid, origin).
+  # A few of them that are system settings, that should not be updated manually (uuid, origin...).
   validates :name, inclusion:
                     { in: %w[about_title
                              about_body
@@ -32,7 +32,6 @@ class Setting < ApplicationRecord
                              invoice_legals
                              booking_window_start
                              booking_window_end
-                             booking_slot_duration
                              booking_move_enable
                              booking_move_delay
                              booking_cancel_enable
@@ -111,7 +110,14 @@ class Setting < ApplicationRecord
                              trainings_module
                              address_required
                              accounting_Error_code
-                             accounting_Error_label] }
+                             accounting_Error_label
+                             payment_gateway
+                             payzen_username
+                             payzen_password
+                             payzen_endpoint
+                             payzen_public_key
+                             payzen_hmac
+                             payzen_currency] }
   # WARNING: when adding a new key, you may also want to add it in app/policies/setting_policy.rb#public_whitelist
 
   def value

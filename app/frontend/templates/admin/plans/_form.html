@@ -48,6 +48,17 @@
     <span class="help-block" ng-show="planForm['plan[group_id]'].$dirty && planForm['plan[group_id]'].$error.required" translate>{{ 'app.shared.plan.group_is_required' }}</span>
 </div>
 
+<div class="form-group" ng-class="{'has-error': planForm['plan[plan_category_id]'].$dirty && planForm['plan[group_id]'].$invalid}">
+    <label for="plan[plan_category_id]">{{ 'app.shared.plan.category' | translate }}</label>
+    <select id="plan[plan_category_id]"
+            class="form-control"
+            ng-model="plan.plan_category_id"
+            ng-options="cat.id as cat.name for cat in planCategories">
+    </select>
+    <input type="hidden"
+           name="plan[plan_category_id]"
+           ng-value="plan.plan_category_id"/>
+</div>
 <div class="form-group" ng-class="{'has-error': planForm['plan[interval]'].$dirty && planForm['plan[interval]'].$invalid}">
     <label for="plan[interval]">{{ 'app.shared.plan.period' | translate }} *</label>
     <select id="plan[interval]"

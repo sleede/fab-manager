@@ -472,7 +472,7 @@ es:
         n_digits_annual_amount_of_orders: "(n) dígitos, recuento anual de órdenes (ej: aaaaa => 000008: octava orden de este año)"
         add_a_notice_regarding_the_online_sales_only_if_the_invoice_is_concerned: "Añadir un aviso con respecto a las ventas en línea, sólo si la factura es de interés."
         this_will_never_be_added_when_a_refund_notice_is_present: "Esto nunca se agregará cuando se presente un aviso de reembolso."
-        eg_XVL_will_add_VL_to_the_invoices_settled_with_stripe: '(por ejemplo, X [/ VL] agregará "/ VL" a las facturas liquidadas con la raya)'
+        eg_XVL_will_add_VL_to_the_invoices_settled_by_card: '(por ejemplo, X[/VL] agregará "/VL" a las facturas liquidadas con tarjeta online)'
         add_a_notice_regarding_refunds_only_if_the_invoice_is_concerned: "Añada un aviso con respecto a los reembolsos, sólo si la factura es de interés."
         this_will_never_be_added_when_an_online_sales_notice_is_present: "Esto nunca se agregará cuando un aviso de venta en línea está presente."
         eg_RA_will_add_A_to_the_refund_invoices: '(ed. R[/A] añadirá "/A" a las facturas de reembolso)'
@@ -530,7 +530,9 @@ es:
         logo_successfully_saved: "Logo guardado correctamente."
         an_error_occurred_while_saving_the_logo: "Se ha producido un error al guardar el logotipo.."
         filename: "File name"
+        schedule_filename: "Schedule file name"
         prefix_info: "The invoices will be generated as PDF files, named with the following prefix."
+        schedule_prefix_info: "The payment schedules will be generated as PDF files, named with the following prefix."
         prefix: "Prefix"
         prefix_successfully_saved: "File prefix successfully saved"
         an_error_occurred_while_saving_the_prefix: "An error occurred while saving the file prefix"
@@ -642,15 +644,42 @@ es:
           error_check_keys: "Error: please check your Stripe keys."
           stripe_keys_saved: "Stripe keys successfully saved."
           error_saving_stripe_keys: "Unable to save the Stripe keys. Please try again later."
+          payzen_keys_info_html: "<p>To be able to collect online payments, you must configure the <a href='https://payzen.eu' target='_blank'>PayZen</a> identifiers and keys.</p><p>Retrieve them from <a href='https://secure.payzen.eu/vads-merchant/' target='_blank'>your merchant back office</a>.</p>"
+          client_keys: "Client key"
+          api_keys: "API keys"
           edit_keys: "Edit keys"
           currency: "Currency"
           currency_info_html: "Please specify below the currency used for online payment. You should provide a three-letter ISO code, from the list of <a href='https://stripe.com/docs/currencies' target='_blank'>Stripe supported currencies</a>."
           currency_alert_html: "<strong>Warning</strong>: the currency cannot be changed after the first online payment was made. Please define this setting carefully before opening Fab-manager to your members."
           stripe_currency: "Stripe currency"
+          gateway_configuration_error: "An error occurred while configuring the payment gateway: "
+          payzen:
+            payzen_keys: "PayZen keys"
+            payzen_username: "Username"
+            payzen_password: "Password"
+            payzen_endpoint: "REST API server name"
+            payzen_hmac: "HMAC-SHA-256 key"
+            payzen_public_key: "Client public key"
+            currency: "Currency"
+            payzen_currency: "PayZen currency"
+            currency_info_html: "Please specify below the currency used for online payment. You should provide a three-letter ISO code, from the list of <a href='https://payzen.io/en-EN/payment-file/ips/list-of-supported-currencies.html' target='_blank'> PayZen supported currencies</a>."
+            save: "Save"
+            currency_error: "The inputted value is not a valid currency"
+            error_while_saving: "An error occurred while saving the currency: "
+            currency_updated: "The PayZen currency was successfully updated to {CURRENCY}."
+          #select a payment gateway
+          gateway_modal:
+            select_gateway_title: "Select a payment gateway"
+            gateway_info: "To securely collect and process payments online, Fab-manager needs to use an third-party service authorized by the financial institutions, called a payment gateway."
+            select_gateway: "Please select an available gateway"
+            stripe: "Stripe"
+            payzen: "PayZen"
+            confirm_button: "Validate the gateway"
         payment_schedules:
           filter_schedules: "Filter schedules"
           no_payment_schedules: "No payment schedules to display"
           load_more: "Load more"
+          card_updated_success: "The user's card was successfully updated"
         document_filters:
           reference: "Reference"
           customer: "Customer"
@@ -1261,6 +1290,34 @@ es:
         report_will_be_destroyed: "Once the report has been processed, it will be deleted. This can't be undone, continue?"
         report_removed: "The report has been deleted"
         failed_to_remove: "An error occurred, unable to delete the report"
+      plans_categories:
+        manage_plans_categories: "Manage plans' categories"
+      plan_categories_list:
+        categories_list: "List of the plan's categories"
+        name: "Name"
+        significance: "Significance"
+      create_plan_category:
+        new_category: "New category"
+        name: "Name"
+        significance: "Significance"
+        significance_info: "Categories will be shown ordered by signifiance. The higher you set the significance, the first the category will be shown."
+        confirm_create: "Create the category"
+        category_created: "The new category was successfully created"
+        unable_to_create: "Unable to create the category: "
+      edit_plan_category:
+        edit_category: "Edit the category"
+        name: "Name"
+        significance: "Significance"
+        confirm_edition: "Validate"
+        category_updated: "The category was successfully updated"
+        unable_to_update: "Unable to update the category: "
+        significance_info: "Categories will be shown ordered by signifiance. The higher you set the significance, the first the category will be shown."
+      delete_plan_category:
+        delete_category: "Delete a category"
+        confirm_delete: "Delete"
+        delete_confirmation: "Are you sure you want to delete this category? If you do, the plans associated with this category won't be sorted anymore."
+        category_deleted: "The category was successfully deleted"
+        unable_to_delete: "Unable to delete the category: "
       #feature tour
       tour:
         conclusion:

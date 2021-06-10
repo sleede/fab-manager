@@ -1,6 +1,20 @@
 # Architecture
 
-## Root
+Fab-manager was built on top of Ruby on Rails. Ruby on rails provides a REST API used by a single-page web application.
+Historically, the front-end was using Angular.js but as this framework won't be supported anymore in a near future, we're progressively moving to React.
+
+## Software dependencies
+- Ruby 2.6
+- Rails 5.2
+- Sidekiq 6
+- Docker
+
+## Databases
+- Redis 6
+- Elasticsearch 5.6
+- PostgreSQL 9.6
+
+## Source-code architecture
 
 `fab-manager/`<br>
 `╠═ .docker/` In development, data of the databases are stored in this untracked folder;<br>

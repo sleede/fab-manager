@@ -19,7 +19,7 @@ VCR.configure do |config|
 end
 
 Sidekiq::Testing.fake!
-Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(color: true)]
+Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(color: true)] unless ENV['RM_INFO']
 
 class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
@@ -159,9 +159,9 @@ class ActiveSupport::TestCase
     end
 
     # Check archive matches
-    require 'checksum'
+    require 'integrity/checksum'
     sumfile = File.read("#{dest}/checksum.sha256").split("\t")
-    assert_equal sumfile[0], Checksum.file("#{dest}/#{sumfile[1]}"), 'archive checksum does not match'
+    assert_equal sumfile[0], Integrity::Checksum.file("#{dest}/#{sumfile[1]}"), 'archive checksum does not match'
 
     archive = File.read("#{dest}/#{sumfile[1]}")
     archive_json = JSON.parse(archive)

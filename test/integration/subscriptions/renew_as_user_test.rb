@@ -10,16 +10,19 @@ class Subscriptions::RenewAsUserTest < ActionDispatch::IntegrationTest
 
   test 'user successfully renew a subscription after it has ended' do
     plan = Plan.find_by(group_id: @user.group.id, type: 'Plan', base_name: 'Mensuel')
-    stripe_subscription = nil
 
     VCR.use_cassette('subscriptions_user_renew_success', erb: true) do
-      post '/api/payments/confirm_payment',
+      post '/api/stripe/confirm_payment',
            params: {
              payment_method_id: stripe_payment_method,
              cart_items: {
-               subscription: {
-                 plan_id: plan.id
-               }
+               items: [
+                 {
+                   subscription: {
+                     plan_id: plan.id
+                   }
+                 }
+               ]
              }
            }.to_json, headers: default_headers
     end
@@ -29,8 +32,10 @@ class Subscriptions::RenewAsUserTest < ActionDispatch::IntegrationTest
     assert_equal Mime[:json], response.content_type
 
     # Check the correct plan was subscribed
-    subscription = json_response(response.body)
-    assert_equal plan.id, subscription[:plan_id], 'subscribed plan does not match'
+    result = json_response(response.body)
+    assert_equal Invoice.last.id, result[:id], 'invoice id does not match'
+    subscription = Invoice.find(result[:id]).invoice_items.first.object
+    assert_equal plan.id, subscription.plan_id, 'subscribed plan does not match'
 
     # Check the subscription was correctly saved
     assert_equal 2, @user.subscriptions.count
@@ -66,8 +71,10 @@ class Subscriptions::RenewAsUserTest < ActionDispatch::IntegrationTest
     end
 
     # Check generated invoice
-    invoice = Invoice.find_by(invoiced_type: 'Subscription', invoiced_id: subscription[:id])
+    item = InvoiceItem.find_by(object_type: 'Subscription', object_id: subscription[:id])
+    invoice = item.invoice
     assert_invoice_pdf invoice
+    assert_not_nil invoice.debug_footprint
     assert_equal plan.amount, invoice.total, 'Invoice total price does not match the bought subscription'
   end
 
@@ -77,13 +84,17 @@ class Subscriptions::RenewAsUserTest < ActionDispatch::IntegrationTest
     previous_expiration = @user.subscription.expired_at.to_i
 
     VCR.use_cassette('subscriptions_user_renew_failed') do
-      post '/api/payments/confirm_payment',
+      post '/api/stripe/confirm_payment',
            params: {
              payment_method_id: stripe_payment_method(error: :card_declined),
              cart_items: {
-               subscription: {
-                 plan_id: plan.id
-               }
+               items: [
+                 {
+                   subscription: {
+                     plan_id: plan.id
+                   }
+                 }
+               ]
              }
            }.to_json, headers: default_headers
     end

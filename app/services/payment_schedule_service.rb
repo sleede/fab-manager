@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# create PaymentSchedules for various items
+# perform various operations on PaymentSchedules
 class PaymentScheduleService
   ##
   # Compute a payment schedule for a new subscription to the provided plan
@@ -8,11 +8,11 @@ class PaymentScheduleService
   # @param total {Number} Total amount of the current shopping cart (which includes this plan) - without coupon
   # @param coupon {Coupon} apply this coupon, if any
   ##
-  def compute(plan, total, coupon: nil, subscription: nil)
+  def compute(plan, total, coupon: nil)
     other_items = total - plan.amount
     # base monthly price of the plan
     price = plan.amount
-    ps = PaymentSchedule.new(scheduled: plan, total: price + other_items, coupon: coupon)
+    ps = PaymentSchedule.new(total: price + other_items, coupon: coupon)
     deadlines = plan.duration / 1.month
     per_month = (price / deadlines).truncate
     adjustment = if per_month * deadlines + other_items.truncate != ps.total
@@ -23,7 +23,7 @@ class PaymentScheduleService
     items = []
     (0..deadlines - 1).each do |i|
       date = DateTime.current + i.months
-      details = { recurring: per_month, subscription_id: subscription&.id }
+      details = { recurring: per_month }
       amount = if i.zero?
                  details[:adjustment] = adjustment.truncate
                  details[:other_items] = other_items.truncate
@@ -49,41 +49,57 @@ class PaymentScheduleService
     { payment_schedule: ps, items: items }
   end
 
-  def create(subscription, total, coupon: nil, operator: nil, payment_method: nil, reservation: nil, user: nil, setup_intent_id: nil)
-    subscription = reservation.generate_subscription if !subscription && reservation&.plan_id
-    raise InvalidSubscriptionError unless subscription&.persisted?
+  def create(objects, total, coupon: nil, operator: nil, payment_method: nil, user: nil,
+             payment_id: nil, payment_type: nil)
+    subscription = objects.find { |item| item.class == Subscription }
 
-    schedule = compute(subscription.plan, total, coupon: coupon, subscription: subscription)
+    schedule = compute(subscription.plan, total, coupon: coupon)
     ps = schedule[:payment_schedule]
     items = schedule[:items]
 
-    ps.scheduled = reservation || subscription
+    ps.payment_schedule_objects = build_objects(objects)
     ps.payment_method = payment_method
-    ps.stp_setup_intent_id = setup_intent_id
+    if !payment_id.nil? && !payment_type.nil?
+      pgo = PaymentGatewayObject.new(
+        gateway_object_id: payment_id,
+        gateway_object_type: payment_type,
+        item: ps
+      )
+      ps.payment_gateway_objects.push(pgo)
+    end
     ps.operator_profile = operator.invoicing_profile
     ps.invoicing_profile = user.invoicing_profile
     ps.statistic_profile = user.statistic_profile
     ps.payment_schedule_items = items
-    items.each do |item|
-      item.payment_schedule = ps
-    end
     ps
+  end
+
+  def build_objects(objects)
+    res = []
+    res.push(PaymentScheduleObject.new(object: objects[0], main: true))
+    objects[1..-1].each do |object|
+      res.push(PaymentScheduleObject.new(object: object))
+    end
+    res
   end
 
   ##
   # Generate the invoice associated with the given PaymentScheduleItem, with the children elements (InvoiceItems).
-  # @param stp_invoice is used to determine if the invoice was paid using stripe
+  # @param payment_method {String} the payment method or gateway in use
+  # @param payment_id {String} the identifier of the payment as provided by the payment gateway, in case of card payment
+  # @param payment_type {String} the object type of payment_id
   ##
-  def generate_invoice(payment_schedule_item, stp_invoice = nil)
+  def generate_invoice(payment_schedule_item, payment_method: nil, payment_id: nil, payment_type: nil)
     # build the base invoice
     invoice = Invoice.new(
-      invoiced: payment_schedule_item.payment_schedule.scheduled,
       invoicing_profile: payment_schedule_item.payment_schedule.invoicing_profile,
       statistic_profile: payment_schedule_item.payment_schedule.statistic_profile,
       operator_profile_id: payment_schedule_item.payment_schedule.operator_profile_id,
-      stp_payment_intent_id: stp_invoice&.payment_intent,
-      payment_method: stp_invoice ? 'stripe' : nil
+      payment_method: payment_method
     )
+    unless payment_id.nil?
+      invoice.payment_gateway_object = PaymentGatewayObject.new(gateway_object_id: payment_id, gateway_object_type: payment_type)
+    end
     # complete the invoice with some InvoiceItem
     if payment_schedule_item.first?
       complete_first_invoice(payment_schedule_item, invoice)
@@ -108,7 +124,7 @@ class PaymentScheduleService
   # @param filters {Hash} allowed filters: reference, customer, date.
   ##
   def self.list(page, size, filters = {})
-    ps = PaymentSchedule.includes(:invoicing_profile, :payment_schedule_items, :subscription)
+    ps = PaymentSchedule.includes(:invoicing_profile, :payment_schedule_items)
                         .joins(:invoicing_profile)
                         .order('payment_schedules.created_at DESC')
                         .page(page)
@@ -146,7 +162,7 @@ class PaymentScheduleService
       item.update_attributes(state: 'canceled')
     end
     # cancel subscription
-    subscription = Subscription.find(payment_schedule.payment_schedule_items.first.details['subscription_id'])
+    subscription = payment_schedule.payment_schedule_objects.find(&:subscription).subscription
     subscription.expire(DateTime.current)
 
     subscription.canceled_at
@@ -155,7 +171,7 @@ class PaymentScheduleService
   private
 
   ##
-  # The first PaymentScheduleItem contains references to the reservation price (if any) and to the adjustement price
+  # The first PaymentScheduleItem contains references to the reservation price (if any) and to the adjustment price
   # for the subscription (if any) and the wallet transaction (if any)
   ##
   def complete_first_invoice(payment_schedule_item, invoice)
@@ -165,10 +181,10 @@ class PaymentScheduleService
     }
 
     # the subscription and reservation items
-    subscription = Subscription.find(payment_schedule_item.details['subscription_id'])
-    if payment_schedule_item.payment_schedule.scheduled_type == Reservation.name
+    subscription = payment_schedule_item.payment_schedule.payment_schedule_objects.find(&:subscription).subscription
+    if payment_schedule_item.payment_schedule.main_object.object_type == Reservation.name
       details[:reservation] = payment_schedule_item.details['other_items']
-      reservation = payment_schedule_item.payment_schedule.scheduled
+      reservation = payment_schedule_item.payment_schedule.main_object.reservation
     end
 
     # the wallet transaction
@@ -184,7 +200,7 @@ class PaymentScheduleService
   ##
   def complete_next_invoice(payment_schedule_item, invoice)
     # the subscription item
-    subscription = Subscription.find(payment_schedule_item.details['subscription_id'])
+    subscription = payment_schedule_item.payment_schedule.payment_schedule_objects.find(&:subscription).subscription
 
     # sub-price for the subscription
     details = { subscription: payment_schedule_item.details['recurring'] }
@@ -201,7 +217,7 @@ class PaymentScheduleService
 
     return unless subscription
 
-    generate_subscription_item(invoice, subscription, payment_details)
+    generate_subscription_item(invoice, subscription, payment_details, reservation.nil?)
   end
 
   ##
@@ -218,7 +234,9 @@ class PaymentScheduleService
 
     invoice.invoice_items.push InvoiceItem.new(
       amount: payment_details[:reservation],
-      description: description
+      description: description,
+      object: reservation,
+      main: true
     )
   end
 
@@ -226,13 +244,14 @@ class PaymentScheduleService
   # Generate an InvoiceItem for the given subscription and save it in invoice.invoice_items.
   # This method must be called only with a valid subscription
   ##
-  def generate_subscription_item(invoice, subscription, payment_details)
+  def generate_subscription_item(invoice, subscription, payment_details, main = true)
     raise TypeError unless subscription
 
     invoice.invoice_items.push InvoiceItem.new(
       amount: payment_details[:subscription],
       description: subscription.plan.name,
-      subscription_id: subscription.id
+      object: subscription,
+      main: main
     )
   end
 

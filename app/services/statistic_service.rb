@@ -130,7 +130,7 @@ class StatisticService
                .eager_load(invoice: [:coupon], subscription: [:plan, statistic_profile: [:group]]).each do |i|
       next if i.invoice.is_a?(Avoir)
 
-      sub = i.subscription
+      sub = i.invoice_items.find(&:subscription)
 
       next unless sub
 
@@ -275,7 +275,7 @@ class StatisticService
          .eager_load(:invoice_items, statistic_profile: [:group])
          .each do |i|
       # the following line is a workaround for issue #196
-      profile = i.statistic_profile || i.invoiced&.wallet&.user&.statistic_profile
+      profile = i.statistic_profile || i.main_item.object&.wallet&.user&.statistic_profile
       avoirs_ca_list.push OpenStruct.new({
         date: options[:start_date].to_date,
         ca: calcul_avoir_ca(i)
@@ -394,7 +394,7 @@ class StatisticService
     ca = 0
     # sum each items in the invoice (+ for invoices/- for refunds)
     invoice.invoice_items.each do |ii|
-      next if ii.subscription_id
+      next if ii.object_type == 'Subscription'
 
       ca = if invoice.is_a?(Avoir)
              ca - ii.amount.to_i
