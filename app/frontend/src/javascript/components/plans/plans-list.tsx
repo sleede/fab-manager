@@ -192,10 +192,11 @@ const PlansList: React.FC<PlansListProps> = ({ onError, onPlanSelection, onLogin
     return (
       <div className="list-of-categories">
         {Array.from(plans).sort(compareCategories).map(([categoryId, plansByCategory]) => {
+          const categoryPlans = plansByCategory.filter(filterPlan);
           return (
             <div key={categoryId} className={`plans-per-category ${categoryId ? 'with-category' : 'no-category' }`}>
-              {!!categoryId && <h3 className="category-title">{ categoryName(categoryId) }</h3>}
-              {renderPlans(plansByCategory)}
+              {!!categoryId && categoryPlans.length > 0 && <h3 className="category-title">{ categoryName(categoryId) }</h3>}
+              {renderPlans(categoryPlans)}
             </div>
           )
         })}
@@ -209,10 +210,7 @@ const PlansList: React.FC<PlansListProps> = ({ onError, onPlanSelection, onLogin
   const renderPlans = (categoryPlans: Array<Plan>): ReactNode => {
     return (
       <div className="list-of-plans">
-        {categoryPlans.length === 0 && <span className="no-plans">
-          {t('app.public.plans.no_plans')}
-        </span>}
-        {categoryPlans.filter(filterPlan).sort(comparePlans).map(plan => (
+        {categoryPlans.length > 0 && categoryPlans.sort(comparePlans).map(plan => (
           <PlanCard key={plan.id}
                     userId={customer?.id}
                     subscribedPlanId={subscribedPlanId}
