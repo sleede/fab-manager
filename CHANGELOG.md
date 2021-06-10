@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Updated upgrade instructions
+- Fix a bug: unable to run interactive rails commands during the upgrade
 
 ## v5.0.0 2021 June 10
 
