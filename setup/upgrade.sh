@@ -96,6 +96,8 @@ version_check()
     version_error "v4.0.4"
   elif verlt "$VERSION" 4.4.6; then
     version_error "v4.4.6"
+  elif verlt "$VERSION" 4.7.12; then
+    version_error "v4.7.12"
   fi
 }
 
@@ -167,7 +169,7 @@ upgrade()
   done
   for PRE in "${PREPROCESSING[@]}"; do
     printf "\e[91m::\e[0m \e[1mRunning preprocessing command %s...\e[0m\n" "$PRE"
-    if ! docker-compose run --rm "$SERVICE" bundle exec "$PRE"; then
+    if ! docker-compose run --rm "$SERVICE" bundle exec "$PRE" </dev/tty; then
       printf "\e[91m[ ❌ ] Something went wrong while running \"%s\", please check the logs above.\e[39m\nExiting...\n" "$PRE"
       exit 4
     fi
@@ -179,7 +181,7 @@ upgrade()
   fi
   for COMMAND in "${COMMANDS[@]}"; do
     printf "\e[91m::\e[0m \e[1mRunning command %s...\e[0m\n" "$COMMAND"
-    if ! docker-compose run --rm "$SERVICE" bundle exec "$COMMAND"; then
+    if ! docker-compose run --rm "$SERVICE" bundle exec "$COMMAND" </dev/tty; then
       printf "\e[91m[ ❌ ] Something went wrong while running \"%s\", please check the logs above.\e[39m\nExiting...\n" "$COMMAND"
       exit 4
     fi
