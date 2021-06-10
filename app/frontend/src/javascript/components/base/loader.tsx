@@ -8,7 +8,7 @@ export const Loader: React.FC = ({children }) => {
     <div className="fa-3x">
       <i className="fas fa-circle-notch fa-spin" />
     </div>
-  );// compile
+  );
   return (
     <Suspense fallback={loading}>
         {children}

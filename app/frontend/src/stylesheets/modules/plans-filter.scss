@@ -1,0 +1,14 @@
+.plans-filter {
+  margin: 1.5em;
+
+  .group-filter {
+    & > * {
+      display: inline-block;
+    }
+
+    .group-select {
+      min-width: 40%;
+      margin-left: 10px;
+    }
+  }
+}
