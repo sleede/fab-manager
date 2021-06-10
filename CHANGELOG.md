@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Updated upgrade instructions
+
 ## v5.0.0 2021 June 10
 
 - Ability to use PayZen as the payment gateway

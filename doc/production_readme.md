@@ -14,10 +14,12 @@ You will need to be root through the rest of the setup.
 1.4. [Prepare the server](#prepare-the-server)<br/>
 2. [Install Fab-manager](#install-fab-manager)<br/>
 3. [Docker utils](#docker-utils)
-4. [Update Fab-manager](#update-fabmanager)<br/>
-4.1. [Steps](#steps)<br/>
-4.2. [Upgrade to the last version](#upgrade-to-the-last-version)<br/>
-4.3. [Upgrade to a specific version](#upgrade-to-a-specific-version)
+4. [Update Fab-manager](#update-fab-manager)<br/>
+4.1. [Scripted update](#scripted-update)<br/>
+4.2. [Update manually](#update-manually)<br/>
+4.2.2. [Manual update steps](#manual-update-steps)<br/>
+4.3. [Upgrade to the last version](#upgrade-to-the-last-version)<br/>
+4.4. [Upgrade to a specific version](#upgrade-to-a-specific-version)
 
 <a name="preliminary-steps"></a>
 ## Preliminary steps
@@ -130,75 +132,87 @@ docker-compose ps
 ```bash
 docker-compose run --rm -e VAR1=xxx -e VAR2=xxx fabmanager bundle exec rails my:command
 ```
-<a name="update-fabmanager"></a>
+<a name="update-fab-manager"></a>
+## Update Fab-manager
 
-## Easy upgrade
+When a new version is available, follow this procedure to update Fab-manager in a production environment.
+You can subscribe to [this atom feed](https://github.com/sleede/fab-manager/releases.atom) to get notified when a new release comes out.
 
-Starting with Fab-manager v4.5.0, you can upgrade Fab-manager in one single easy command, that automates the procedure below.
-To upgrade with ease, using this command, read the GitHub release notes of all versions between your current version, and the target version.
+<a name="scripted-update"></a>
+### Scripted update 
 
-**You MUST append all the arguments** of the easy upgrade commands, for **each version**, to the command you run.
+Starting with Fab-manager v4.5.0, you can upgrade Fab-manager in one single easy command, specified in the GitHub releases notes.
+To upgrade multiple versions at once, read the GitHub release notes of all versions between your current version, and the target version.
+
+**You MUST append all the arguments** of the upgrade commands, for **each version**, to the command you run.
 
 E.g.
-If you upgrade from 1.2.3 to 1.2.5, with the following release notes:
+If you upgrade from 1.2.3 to 1.2.6, with the following release notes:
 ```markdown
 ## 1.2.4
 \curl -sSL upgrade.fab.mn | bash -s -- -e "VAR=value"
 ## 1.2.5
 \curl -sSL upgrade.fab.mn | bash -s -- -c "rails fablab:setup:command"
+## 1.2.6
+\curl -sSL upgrade.fab.mn | bash -s -- -p "rails fablab:do:things"
 ```
 Then, you'll need to perform the upgrade with the following command:
 ```bash
-\curl -sSL upgrade.fab.mn | bash -s -- -e "VAR=value" -c "rails fablab:setup:command"
+\curl -sSL upgrade.fab.mn | bash -s -- -e "VAR=value" -p "rails fablab:do:things" -c "rails fablab:setup:command"
 ```
+> ⚠ Do not confuse commands prefixed with `-p` and with `-c` because they are not intended to run at the same moment of the upgrade process. 
 
-## Update Fab-manager
+<a name="update-manually"></a>
+### Update manually
 
-*This procedure updates Fab-manager to the most recent version by default.*
-**If you upgrade Fab-manager from a version >= 4.5.0, we recommend using the easy upgrade script above instead.**
+**If you upgrade Fab-manager from a version >= 4.5.0, we recommend using the upgrade script above.**
 
-> ⚠ If you are upgrading from a very outdated version, you must first upgrade to v2.8.3, then to v3.1.2, then to 4.0.4, then to 4.4.6 and finally to the last version
+> ⚠ If you are upgrading from a very outdated version, you must first upgrade to these versions in order:
+> - v2.8.3
+> - v3.1.2
+> - v4.0.4
+> - v4.4.6
+> - v4.7.12
+> After that, you can finally update to the last version
 
 > ⚠ With versions < 4.3.3, you must replace `bundle exec rails` with `bundle exec rake` in all the commands above
 
-<a name="steps"></a>
-### Steps
+<a name="manual-update-steps"></a>
+#### Manual update steps
 
-When a new version is available, follow this procedure to update Fab-manager app in a production environment, using docker-compose.
-You can subscribe to [this atom feed](https://github.com/sleede/fab-manager/releases.atom) to get notified when a new release comes out.
+0. Read carefully the changelog of the last version you are upgrading to. It will contain important instructions about the upgrade process.
 
-1. go to your app folder
+1. Go to your app folder
 
    `cd /apps/fabmanager`
 
-2. pull last docker images 
+2. Pull last docker images 
 
    `docker-compose pull`
 
-3. stop the app
+3. Stop the app
 
    `docker-compose stop fabmanager`
 
-4. remove old assets
+4. Remove old assets
 
    `rm -Rf public/packs/ public/assets/`
 
-5. compile new assets
+5. Compile new assets
 
    `docker-compose run --rm fabmanager bundle exec rails assets:precompile`
 
-6. run specific commands
+6. Run specific commands
 
    **Do not forget** to check if there are commands to run for your upgrade. Those commands 
-   are always specified in the [CHANGELOG](https://github.com/sleede/fab-manager/blob/master/CHANGELOG.md) and prefixed by **[TODO DEPLOY]**. 
-   They are also present in the [releases page](https://github.com/sleede/fab-manager/releases).
+   are always specified in the [CHANGELOG](https://github.com/sleede/fab-manager/blob/master/CHANGELOG.md) and prefixed by **[TODO DEPLOY]**.
  
    Those commands execute specific tasks and have to be run manually.
    You must prefix the commands starting by `rails...` or `rake...` with: `docker-compose run --rm fabmanager bundle exec`.
    In any other cases, the other commands (like those invoking curl `\curl -sSL... | bash`) must not be prefixed.
    You can also ignore commands only applicable to development environnement, which are prefixed by `(dev)` in the CHANGELOG.
 
-7. restart all containers
+7. Restart all containers
 
    ```bash
      docker-compose down
@@ -212,7 +226,7 @@ You can check that all containers are running with `docker-compose ps`.
 
 It's the default behaviour as `docker-compose pull` command will fetch the latest versions of the docker images. 
 Be sure to run all the specific commands listed in the [CHANGELOG](https://github.com/sleede/fab-manager/blob/master/CHANGELOG.md) between your actual, and the new version in sequential order. 
-__Example:__ to update from 2.4.0 to 2.4.3, you will run the specific commands for the 2.4.1, then for the 2.4.2 and then for the 2.4.3.
+__Example:__ to update from v2.4.0 to v2.4.3, you will run the specific commands for the v2.4.1, v2.4.2 and v2.4.3.
 
 <a name="upgrade-to-a-specific-version"></a>
 ### Upgrade to a specific version
