@@ -530,7 +530,9 @@ fr:
         logo_successfully_saved: "Le logo bien été enregistré."
         an_error_occurred_while_saving_the_logo: "Une erreur est survenue lors de l'enregistrement du logo."
         filename: "Nom de fichier"
+        schedule_filename: "Schedule file name"
         prefix_info: "Les factures seront générées sous la forme de fichiers PDF, nommés avec le préfixe suivant."
+        schedule_prefix_info: "The payment schedules will be generated as PDF files, named with the following prefix."
         prefix: "Préfixe"
         prefix_successfully_saved: "Le préfixe de fichier a bien été enregistré"
         an_error_occurred_while_saving_the_prefix: "Une erreur est survenue lors de l'enregistrement du préfixe de fichier"
@@ -650,7 +652,7 @@ fr:
           currency_info_html: "Veuillez indiquer la devise à utiliser lors des paiements en ligne. Vous devez fournir un code ISO à trois lettres, issu de la liste des <a href='https://stripe.com/docs/currencies' target='_blank'>devises supportées par Stripe</a>."
           currency_alert_html: "<strong>Attention</strong> : la devise ne peut pas être modifiée après que le premier paiement en ligne ait été effectué. Veuillez définir attentivement ce paramètre avant d'ouvrir Fab-manager à vos membres."
           stripe_currency: "Devise Stripe"
-          gateway_configuration_error: "Une erreur est survenue lors de la configuration de la passerelle de paiement."
+          gateway_configuration_error: "An error occurred while configuring the payment gateway: "
           payzen:
             payzen_keys: "Clefs PayZen"
             payzen_username: "Utilisateur"
@@ -673,6 +675,7 @@ fr:
             stripe: "Stripe"
             payzen: "PayZen"
             confirm_button: "Valider la passerelle"
+            successfully_updated: " successfully updated"
         payment_schedules:
           filter_schedules: "Filtrer les échéanciers"
           no_payment_schedules: "Pas d'échéancier à afficher"
