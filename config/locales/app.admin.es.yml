@@ -1294,6 +1294,7 @@ es:
         manage_plans_categories: "Manage plans' categories"
       plan_categories_list:
         categories_list: "List of the plan's categories"
+        no_categories: "Sin categoría"
         name: "Name"
         significance: "Significance"
       create_plan_category:
