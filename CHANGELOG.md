@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v5.0.2 2021 June 11
+
 - Ability to upgrade to a specific version with the script
 - Improved display when no plan-categories exists
 - Updated VCR to 6.0.0
