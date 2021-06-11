@@ -1294,7 +1294,7 @@ fr:
         manage_plans_categories: "Gérer les catégories des formules d'abonnement"
       plan_categories_list:
         categories_list: "Liste des catégories des formules d'abonnement"
-        no_categories: "No categories"
+        no_categories: "Pas de catégories"
         name: "Nom"
         significance: "Importance"
       create_plan_category:
