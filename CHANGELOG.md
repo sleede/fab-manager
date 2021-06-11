@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: unable to process stripe payments with 3DS authentication
+
 ## v5.0.2 2021 June 11
 
 - Ability to upgrade to a specific version with the script
@@ -52,6 +54,10 @@
 - [TODO DEPLOY] `rails fablab:stripe:set_gateway`
 - [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
 - [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/rename-adminsys.sh | bash`
+
+## v4.7.13 2020 June 11
+
+- Fix a bug: unable to process stripe payments with 3DS authentication
 
 ## v4.7.12 2021 June 09
 

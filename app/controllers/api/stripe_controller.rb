@@ -34,7 +34,7 @@ class API::StripeController < API::PaymentsController
           }, { api_key: Setting.get('stripe_secret_key') }
         )
       elsif params[:payment_intent_id].present?
-        intent = Stripe::PaymentIntent.confirm(params[:payment_intent_id], api_key: Setting.get('stripe_secret_key'))
+        intent = Stripe::PaymentIntent.confirm(params[:payment_intent_id], {}, { api_key: Setting.get('stripe_secret_key') })
       end
     rescue Stripe::CardError => e
       # Display error on client
