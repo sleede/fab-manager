@@ -182,7 +182,7 @@ class Reservations::RestrictedTest < ActionDispatch::IntegrationTest
     assert_equal availabilities_count + 1, Availability.count
 
     # book a reservation
-    VCR.use_cassette('reservations_create_for_restricted_slot_fails') do
+    VCR.use_cassette('reservations_create_for_restricted_slot_forced') do
       post '/api/local_payment/confirm_payment',
            params: {
              customer_id: @jdupont.id,
@@ -254,7 +254,7 @@ class Reservations::RestrictedTest < ActionDispatch::IntegrationTest
     login_as(@jdupont, scope: :user)
 
     # book a reservation
-    VCR.use_cassette('reservations_create_for_restricted_slot_fails') do
+    VCR.use_cassette('reservations_and_subscription_create_for_restricted_slot_success') do
       post '/api/stripe/confirm_payment',
            params: {
              payment_method_id: stripe_payment_method,

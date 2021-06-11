@@ -1,0 +1,2479 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/setup_intents
+    body:
+      encoding: UTF-8
+      string: customer=cus_8E2ys9zDZgetWX
+    headers:
+      User-Agent:
+      - Stripe/v1 RubyBindings/5.29.0
+      Authorization:
+      - Bearer sk_test_testfaketestfaketestfake
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-Telemetry:
+      - '{"last_request_metrics":{"request_id":"req_I9Ty57VyxHpuf5","request_duration_ms":483}}'
+      Stripe-Version:
+      - '2019-08-14'
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"5.29.0","lang":"ruby","lang_version":"2.6.7 p197 (2021-04-05)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 5.12.9-arch1-1 (linux@archlinux) (gcc (GCC) 11.1.0, GNU ld (GNU Binutils)
+        2.36.1) #1 SMP PREEMPT Thu, 03 Jun 2021 11:36:13 +0000","hostname":"Sylvain-desktop"}'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 11 Jun 2021 12:10:26 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '727'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_AVWfxtFFTUBE0g
+      Stripe-Version:
+      - '2019-08-14'
+      X-Stripe-C-Cost:
+      - '0'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "seti_1J19Bu2sOmf47Nz9BfLWQchb",
+          "object": "setup_intent",
+          "application": null,
+          "cancellation_reason": null,
+          "client_secret": "seti_1J19Bu2sOmf47Nz9BfLWQchb_secret_JeS6YolgTbPvCcjRt7PKEjGx4QnU2YR",
+          "created": 1623413426,
+          "customer": "cus_8E2ys9zDZgetWX",
+          "description": null,
+          "last_setup_error": null,
+          "latest_attempt": null,
+          "livemode": false,
+          "mandate": null,
+          "metadata": {
+          },
+          "next_action": null,
+          "on_behalf_of": null,
+          "payment_method": null,
+          "payment_method_options": {
+            "card": {
+              "request_three_d_secure": "automatic"
+            }
+          },
+          "payment_method_types": [
+            "card"
+          ],
+          "single_use_mandate": null,
+          "status": "requires_payment_method",
+          "usage": "off_session"
+        }
+  recorded_at: Fri, 11 Jun 2021 12:10:26 GMT
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/payment_methods
+    body:
+      encoding: UTF-8
+      string: type=card&card[number]=4242424242424242&card[exp_month]=4&card[exp_year]=2022&card[cvc]=314
+    headers:
+      User-Agent:
+      - Stripe/v1 RubyBindings/5.29.0
+      Authorization:
+      - Bearer sk_test_testfaketestfaketestfake
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-Telemetry:
+      - '{"last_request_metrics":{"request_id":"req_AVWfxtFFTUBE0g","request_duration_ms":394}}'
+      Stripe-Version:
+      - '2019-08-14'
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"5.29.0","lang":"ruby","lang_version":"2.6.7 p197 (2021-04-05)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 5.12.9-arch1-1 (linux@archlinux) (gcc (GCC) 11.1.0, GNU ld (GNU Binutils)
+        2.36.1) #1 SMP PREEMPT Thu, 03 Jun 2021 11:36:13 +0000","hostname":"Sylvain-desktop"}'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 11 Jun 2021 12:10:27 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '934'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_zSnKYmxRfRN2HA
+      Stripe-Version:
+      - '2019-08-14'
+      X-Stripe-C-Cost:
+      - '4'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "pm_1J19Bv2sOmf47Nz95pa9Kosw",
+          "object": "payment_method",
+          "billing_details": {
+            "address": {
+              "city": null,
+              "country": null,
+              "line1": null,
+              "line2": null,
+              "postal_code": null,
+              "state": null
+            },
+            "email": null,
+            "name": null,
+            "phone": null
+          },
+          "card": {
+            "brand": "visa",
+            "checks": {
+              "address_line1_check": null,
+              "address_postal_code_check": null,
+              "cvc_check": "unchecked"
+            },
+            "country": "US",
+            "exp_month": 4,
+            "exp_year": 2022,
+            "fingerprint": "o52jybR7bnmNn6AT",
+            "funding": "credit",
+            "generated_from": null,
+            "last4": "4242",
+            "networks": {
+              "available": [
+                "visa"
+              ],
+              "preferred": null
+            },
+            "three_d_secure_usage": {
+              "supported": true
+            },
+            "wallet": null
+          },
+          "created": 1623413427,
+          "customer": null,
+          "livemode": false,
+          "metadata": {
+          },
+          "type": "card"
+        }
+  recorded_at: Fri, 11 Jun 2021 12:10:27 GMT
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/setup_intents/seti_1J19Bu2sOmf47Nz9BfLWQchb/confirm
+    body:
+      encoding: UTF-8
+      string: payment_method=pm_1J19Bv2sOmf47Nz95pa9Kosw
+    headers:
+      User-Agent:
+      - Stripe/v1 RubyBindings/5.29.0
+      Authorization:
+      - Bearer sk_test_testfaketestfaketestfake
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-Telemetry:
+      - '{"last_request_metrics":{"request_id":"req_zSnKYmxRfRN2HA","request_duration_ms":589}}'
+      Stripe-Version:
+      - '2019-08-14'
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"5.29.0","lang":"ruby","lang_version":"2.6.7 p197 (2021-04-05)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 5.12.9-arch1-1 (linux@archlinux) (gcc (GCC) 11.1.0, GNU ld (GNU Binutils)
+        2.36.1) #1 SMP PREEMPT Thu, 03 Jun 2021 11:36:13 +0000","hostname":"Sylvain-desktop"}'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 11 Jun 2021 12:10:28 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '767'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_hKqEhBmsO90NDt
+      Stripe-Version:
+      - '2019-08-14'
+      X-Stripe-C-Cost:
+      - '4'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "seti_1J19Bu2sOmf47Nz9BfLWQchb",
+          "object": "setup_intent",
+          "application": null,
+          "cancellation_reason": null,
+          "client_secret": "seti_1J19Bu2sOmf47Nz9BfLWQchb_secret_JeS6YolgTbPvCcjRt7PKEjGx4QnU2YR",
+          "created": 1623413426,
+          "customer": "cus_8E2ys9zDZgetWX",
+          "description": null,
+          "last_setup_error": null,
+          "latest_attempt": "setatt_1J19Bv2sOmf47Nz9BNjAtrI4",
+          "livemode": false,
+          "mandate": null,
+          "metadata": {
+          },
+          "next_action": null,
+          "on_behalf_of": null,
+          "payment_method": "pm_1J19Bv2sOmf47Nz95pa9Kosw",
+          "payment_method_options": {
+            "card": {
+              "request_three_d_secure": "automatic"
+            }
+          },
+          "payment_method_types": [
+            "card"
+          ],
+          "single_use_mandate": null,
+          "status": "succeeded",
+          "usage": "off_session"
+        }
+  recorded_at: Fri, 11 Jun 2021 12:10:28 GMT
+- request:
+    method: get
+    uri: https://api.stripe.com/v1/setup_intents/seti_1J19Bu2sOmf47Nz9BfLWQchb
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Stripe/v1 RubyBindings/5.29.0
+      Authorization:
+      - Bearer sk_test_testfaketestfaketestfake
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-Telemetry:
+      - '{"last_request_metrics":{"request_id":"req_hKqEhBmsO90NDt","request_duration_ms":1066}}'
+      Stripe-Version:
+      - '2019-08-14'
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"5.29.0","lang":"ruby","lang_version":"2.6.7 p197 (2021-04-05)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 5.12.9-arch1-1 (linux@archlinux) (gcc (GCC) 11.1.0, GNU ld (GNU Binutils)
+        2.36.1) #1 SMP PREEMPT Thu, 03 Jun 2021 11:36:13 +0000","hostname":"Sylvain-desktop"}'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 11 Jun 2021 12:10:28 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '767'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_q2VTcWUyEb6aw7
+      Stripe-Version:
+      - '2019-08-14'
+      X-Stripe-C-Cost:
+      - '0'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "seti_1J19Bu2sOmf47Nz9BfLWQchb",
+          "object": "setup_intent",
+          "application": null,
+          "cancellation_reason": null,
+          "client_secret": "seti_1J19Bu2sOmf47Nz9BfLWQchb_secret_JeS6YolgTbPvCcjRt7PKEjGx4QnU2YR",
+          "created": 1623413426,
+          "customer": "cus_8E2ys9zDZgetWX",
+          "description": null,
+          "last_setup_error": null,
+          "latest_attempt": "setatt_1J19Bv2sOmf47Nz9BNjAtrI4",
+          "livemode": false,
+          "mandate": null,
+          "metadata": {
+          },
+          "next_action": null,
+          "on_behalf_of": null,
+          "payment_method": "pm_1J19Bv2sOmf47Nz95pa9Kosw",
+          "payment_method_options": {
+            "card": {
+              "request_three_d_secure": "automatic"
+            }
+          },
+          "payment_method_types": [
+            "card"
+          ],
+          "single_use_mandate": null,
+          "status": "succeeded",
+          "usage": "off_session"
+        }
+  recorded_at: Fri, 11 Jun 2021 12:10:28 GMT
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/customers/cus_8E2ys9zDZgetWX
+    body:
+      encoding: UTF-8
+      string: balance=-10174
+    headers:
+      User-Agent:
+      - Stripe/v1 RubyBindings/5.29.0
+      Authorization:
+      - Bearer sk_test_testfaketestfaketestfake
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-Telemetry:
+      - '{"last_request_metrics":{"request_id":"req_q2VTcWUyEb6aw7","request_duration_ms":382}}'
+      Stripe-Version:
+      - '2019-08-14'
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"5.29.0","lang":"ruby","lang_version":"2.6.7 p197 (2021-04-05)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 5.12.9-arch1-1 (linux@archlinux) (gcc (GCC) 11.1.0, GNU ld (GNU Binutils)
+        2.36.1) #1 SMP PREEMPT Thu, 03 Jun 2021 11:36:13 +0000","hostname":"Sylvain-desktop"}'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 11 Jun 2021 12:10:30 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '47074'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_2QIKcvMiGhgH9X
+      Stripe-Version:
+      - '2019-08-14'
+      X-Stripe-C-Cost:
+      - '0'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "cus_8E2ys9zDZgetWX",
+          "object": "customer",
+          "account_balance": -10174,
+          "address": null,
+          "balance": -10174,
+          "created": 1460026822,
+          "currency": "usd",
+          "default_source": "card_1Euc902sOmf47Nz9eZvNNyyQ",
+          "delinquent": false,
+          "description": "Lucile Seguin",
+          "discount": null,
+          "email": "lucile.seguin@live.fr",
+          "invoice_prefix": "BCC32B8",
+          "invoice_settings": {
+            "custom_fields": null,
+            "default_payment_method": null,
+            "footer": null
+          },
+          "livemode": false,
+          "metadata": {
+          },
+          "name": null,
+          "next_invoice_sequence": 245,
+          "phone": null,
+          "preferred_locales": [
+
+          ],
+          "shipping": null,
+          "sources": {
+            "object": "list",
+            "data": [
+              {
+                "id": "card_1Euc902sOmf47Nz9eZvNNyyQ",
+                "object": "card",
+                "address_city": null,
+                "address_country": null,
+                "address_line1": null,
+                "address_line1_check": null,
+                "address_line2": null,
+                "address_state": null,
+                "address_zip": null,
+                "address_zip_check": null,
+                "brand": "Visa",
+                "country": "US",
+                "customer": "cus_8E2ys9zDZgetWX",
+                "cvc_check": "unchecked",
+                "dynamic_last4": null,
+                "exp_month": 4,
+                "exp_year": 2020,
+                "fingerprint": "o52jybR7bnmNn6AT",
+                "funding": "credit",
+                "last4": "4242",
+                "metadata": {
+                },
+                "name": null,
+                "tokenization_method": null
+              }
+            ],
+            "has_more": false,
+            "total_count": 1,
+            "url": "/v1/customers/cus_8E2ys9zDZgetWX/sources"
+          },
+          "subscriptions": {
+            "object": "list",
+            "data": [
+              {
+                "id": "sub_JeMwMVnUvrHh9x",
+                "object": "subscription",
+                "application_fee_percent": null,
+                "billing": "charge_automatically",
+                "billing_cycle_anchor": 1623394222,
+                "billing_thresholds": null,
+                "cancel_at": 1652511019,
+                "cancel_at_period_end": false,
+                "canceled_at": 1623394222,
+                "collection_method": "charge_automatically",
+                "created": 1623394222,
+                "current_period_end": 1625986222,
+                "current_period_start": 1623394222,
+                "customer": "cus_8E2ys9zDZgetWX",
+                "days_until_due": null,
+                "default_payment_method": null,
+                "default_source": null,
+                "default_tax_rates": [
+
+                ],
+                "discount": null,
+                "ended_at": null,
+                "invoice_customer_balance_settings": {
+                  "consume_applied_balance_on_void": true
+                },
+                "items": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "id": "si_JeMwV8QZ09xs28",
+                      "object": "subscription_item",
+                      "billing_thresholds": null,
+                      "created": 1623394223,
+                      "metadata": {
+                      },
+                      "plan": {
+                        "id": "price_1J14C92sOmf47Nz9IITWw9Y0",
+                        "object": "plan",
+                        "active": true,
+                        "aggregate_usage": null,
+                        "amount": 9466,
+                        "amount_decimal": "9466",
+                        "billing_scheme": "per_unit",
+                        "created": 1623394221,
+                        "currency": "usd",
+                        "interval": "month",
+                        "interval_count": 1,
+                        "livemode": false,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "tiers": null,
+                        "tiers_mode": null,
+                        "transform_usage": null,
+                        "trial_period_days": null,
+                        "usage_type": "licensed"
+                      },
+                      "price": {
+                        "id": "price_1J14C92sOmf47Nz9IITWw9Y0",
+                        "object": "price",
+                        "active": true,
+                        "billing_scheme": "per_unit",
+                        "created": 1623394221,
+                        "currency": "usd",
+                        "livemode": false,
+                        "lookup_key": null,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "recurring": {
+                          "aggregate_usage": null,
+                          "interval": "month",
+                          "interval_count": 1,
+                          "trial_period_days": null,
+                          "usage_type": "licensed"
+                        },
+                        "tiers_mode": null,
+                        "transform_quantity": null,
+                        "type": "recurring",
+                        "unit_amount": 9466,
+                        "unit_amount_decimal": "9466"
+                      },
+                      "quantity": 1,
+                      "subscription": "sub_JeMwMVnUvrHh9x",
+                      "tax_rates": [
+
+                      ]
+                    }
+                  ],
+                  "has_more": false,
+                  "total_count": 1,
+                  "url": "/v1/subscription_items?subscription=sub_JeMwMVnUvrHh9x"
+                },
+                "latest_invoice": "in_1J14CB2sOmf47Nz9rlPidRvD",
+                "livemode": false,
+                "metadata": {
+                },
+                "next_pending_invoice_item_invoice": null,
+                "pause_collection": null,
+                "pending_invoice_item_interval": null,
+                "pending_setup_intent": null,
+                "pending_update": null,
+                "plan": {
+                  "id": "price_1J14C92sOmf47Nz9IITWw9Y0",
+                  "object": "plan",
+                  "active": true,
+                  "aggregate_usage": null,
+                  "amount": 9466,
+                  "amount_decimal": "9466",
+                  "billing_scheme": "per_unit",
+                  "created": 1623394221,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {
+                  },
+                  "nickname": null,
+                  "product": "prod_IZQAhb9nLu4jfN",
+                  "tiers": null,
+                  "tiers_mode": null,
+                  "transform_usage": null,
+                  "trial_period_days": null,
+                  "usage_type": "licensed"
+                },
+                "quantity": 1,
+                "schedule": null,
+                "start": 1623394222,
+                "start_date": 1623394222,
+                "status": "active",
+                "tax_percent": null,
+                "transfer_data": null,
+                "trial_end": null,
+                "trial_start": null
+              },
+              {
+                "id": "sub_Je86gbipqnlh5j",
+                "object": "subscription",
+                "application_fee_percent": null,
+                "billing": "charge_automatically",
+                "billing_cycle_anchor": 1623339060,
+                "billing_thresholds": null,
+                "cancel_at": 1652455857,
+                "cancel_at_period_end": false,
+                "canceled_at": 1623339060,
+                "collection_method": "charge_automatically",
+                "created": 1623339060,
+                "current_period_end": 1625931060,
+                "current_period_start": 1623339060,
+                "customer": "cus_8E2ys9zDZgetWX",
+                "days_until_due": null,
+                "default_payment_method": null,
+                "default_source": null,
+                "default_tax_rates": [
+
+                ],
+                "discount": null,
+                "ended_at": null,
+                "invoice_customer_balance_settings": {
+                  "consume_applied_balance_on_void": true
+                },
+                "items": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "id": "si_Je86FyovrSAZ03",
+                      "object": "subscription_item",
+                      "billing_thresholds": null,
+                      "created": 1623339061,
+                      "metadata": {
+                      },
+                      "plan": {
+                        "id": "price_1J0pqR2sOmf47Nz9grlZCF6j",
+                        "object": "plan",
+                        "active": true,
+                        "aggregate_usage": null,
+                        "amount": 9466,
+                        "amount_decimal": "9466",
+                        "billing_scheme": "per_unit",
+                        "created": 1623339059,
+                        "currency": "usd",
+                        "interval": "month",
+                        "interval_count": 1,
+                        "livemode": false,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "tiers": null,
+                        "tiers_mode": null,
+                        "transform_usage": null,
+                        "trial_period_days": null,
+                        "usage_type": "licensed"
+                      },
+                      "price": {
+                        "id": "price_1J0pqR2sOmf47Nz9grlZCF6j",
+                        "object": "price",
+                        "active": true,
+                        "billing_scheme": "per_unit",
+                        "created": 1623339059,
+                        "currency": "usd",
+                        "livemode": false,
+                        "lookup_key": null,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "recurring": {
+                          "aggregate_usage": null,
+                          "interval": "month",
+                          "interval_count": 1,
+                          "trial_period_days": null,
+                          "usage_type": "licensed"
+                        },
+                        "tiers_mode": null,
+                        "transform_quantity": null,
+                        "type": "recurring",
+                        "unit_amount": 9466,
+                        "unit_amount_decimal": "9466"
+                      },
+                      "quantity": 1,
+                      "subscription": "sub_Je86gbipqnlh5j",
+                      "tax_rates": [
+
+                      ]
+                    }
+                  ],
+                  "has_more": false,
+                  "total_count": 1,
+                  "url": "/v1/subscription_items?subscription=sub_Je86gbipqnlh5j"
+                },
+                "latest_invoice": "in_1J0pqS2sOmf47Nz9NALEVY74",
+                "livemode": false,
+                "metadata": {
+                },
+                "next_pending_invoice_item_invoice": null,
+                "pause_collection": null,
+                "pending_invoice_item_interval": null,
+                "pending_setup_intent": null,
+                "pending_update": null,
+                "plan": {
+                  "id": "price_1J0pqR2sOmf47Nz9grlZCF6j",
+                  "object": "plan",
+                  "active": true,
+                  "aggregate_usage": null,
+                  "amount": 9466,
+                  "amount_decimal": "9466",
+                  "billing_scheme": "per_unit",
+                  "created": 1623339059,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {
+                  },
+                  "nickname": null,
+                  "product": "prod_IZQAhb9nLu4jfN",
+                  "tiers": null,
+                  "tiers_mode": null,
+                  "transform_usage": null,
+                  "trial_period_days": null,
+                  "usage_type": "licensed"
+                },
+                "quantity": 1,
+                "schedule": null,
+                "start": 1623339060,
+                "start_date": 1623339060,
+                "status": "active",
+                "tax_percent": null,
+                "transfer_data": null,
+                "trial_end": null,
+                "trial_start": null
+              },
+              {
+                "id": "sub_Je83HN1Lyvo4sH",
+                "object": "subscription",
+                "application_fee_percent": null,
+                "billing": "charge_automatically",
+                "billing_cycle_anchor": 1623338866,
+                "billing_thresholds": null,
+                "cancel_at": 1652455663,
+                "cancel_at_period_end": false,
+                "canceled_at": 1623338866,
+                "collection_method": "charge_automatically",
+                "created": 1623338866,
+                "current_period_end": 1625930866,
+                "current_period_start": 1623338866,
+                "customer": "cus_8E2ys9zDZgetWX",
+                "days_until_due": null,
+                "default_payment_method": null,
+                "default_source": null,
+                "default_tax_rates": [
+
+                ],
+                "discount": null,
+                "ended_at": null,
+                "invoice_customer_balance_settings": {
+                  "consume_applied_balance_on_void": true
+                },
+                "items": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "id": "si_Je83aULDQfy2gv",
+                      "object": "subscription_item",
+                      "billing_thresholds": null,
+                      "created": 1623338866,
+                      "metadata": {
+                      },
+                      "plan": {
+                        "id": "price_1J0pnJ2sOmf47Nz9wr2pqXxo",
+                        "object": "plan",
+                        "active": true,
+                        "aggregate_usage": null,
+                        "amount": 9466,
+                        "amount_decimal": "9466",
+                        "billing_scheme": "per_unit",
+                        "created": 1623338865,
+                        "currency": "usd",
+                        "interval": "month",
+                        "interval_count": 1,
+                        "livemode": false,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "tiers": null,
+                        "tiers_mode": null,
+                        "transform_usage": null,
+                        "trial_period_days": null,
+                        "usage_type": "licensed"
+                      },
+                      "price": {
+                        "id": "price_1J0pnJ2sOmf47Nz9wr2pqXxo",
+                        "object": "price",
+                        "active": true,
+                        "billing_scheme": "per_unit",
+                        "created": 1623338865,
+                        "currency": "usd",
+                        "livemode": false,
+                        "lookup_key": null,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "recurring": {
+                          "aggregate_usage": null,
+                          "interval": "month",
+                          "interval_count": 1,
+                          "trial_period_days": null,
+                          "usage_type": "licensed"
+                        },
+                        "tiers_mode": null,
+                        "transform_quantity": null,
+                        "type": "recurring",
+                        "unit_amount": 9466,
+                        "unit_amount_decimal": "9466"
+                      },
+                      "quantity": 1,
+                      "subscription": "sub_Je83HN1Lyvo4sH",
+                      "tax_rates": [
+
+                      ]
+                    }
+                  ],
+                  "has_more": false,
+                  "total_count": 1,
+                  "url": "/v1/subscription_items?subscription=sub_Je83HN1Lyvo4sH"
+                },
+                "latest_invoice": "in_1J0pnK2sOmf47Nz93Pt8CxJL",
+                "livemode": false,
+                "metadata": {
+                },
+                "next_pending_invoice_item_invoice": null,
+                "pause_collection": null,
+                "pending_invoice_item_interval": null,
+                "pending_setup_intent": null,
+                "pending_update": null,
+                "plan": {
+                  "id": "price_1J0pnJ2sOmf47Nz9wr2pqXxo",
+                  "object": "plan",
+                  "active": true,
+                  "aggregate_usage": null,
+                  "amount": 9466,
+                  "amount_decimal": "9466",
+                  "billing_scheme": "per_unit",
+                  "created": 1623338865,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {
+                  },
+                  "nickname": null,
+                  "product": "prod_IZQAhb9nLu4jfN",
+                  "tiers": null,
+                  "tiers_mode": null,
+                  "transform_usage": null,
+                  "trial_period_days": null,
+                  "usage_type": "licensed"
+                },
+                "quantity": 1,
+                "schedule": null,
+                "start": 1623338866,
+                "start_date": 1623338866,
+                "status": "active",
+                "tax_percent": null,
+                "transfer_data": null,
+                "trial_end": null,
+                "trial_start": null
+              },
+              {
+                "id": "sub_Je719VCAEg8rar",
+                "object": "subscription",
+                "application_fee_percent": null,
+                "billing": "charge_automatically",
+                "billing_cycle_anchor": 1623335025,
+                "billing_thresholds": null,
+                "cancel_at": 1652451823,
+                "cancel_at_period_end": false,
+                "canceled_at": 1623335025,
+                "collection_method": "charge_automatically",
+                "created": 1623335025,
+                "current_period_end": 1625927025,
+                "current_period_start": 1623335025,
+                "customer": "cus_8E2ys9zDZgetWX",
+                "days_until_due": null,
+                "default_payment_method": null,
+                "default_source": null,
+                "default_tax_rates": [
+
+                ],
+                "discount": null,
+                "ended_at": null,
+                "invoice_customer_balance_settings": {
+                  "consume_applied_balance_on_void": true
+                },
+                "items": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "id": "si_Je711BHnVjaUdJ",
+                      "object": "subscription_item",
+                      "billing_thresholds": null,
+                      "created": 1623335026,
+                      "metadata": {
+                      },
+                      "plan": {
+                        "id": "price_1J0onM2sOmf47Nz9pU5dEOiP",
+                        "object": "plan",
+                        "active": true,
+                        "aggregate_usage": null,
+                        "amount": 9466,
+                        "amount_decimal": "9466",
+                        "billing_scheme": "per_unit",
+                        "created": 1623335024,
+                        "currency": "usd",
+                        "interval": "month",
+                        "interval_count": 1,
+                        "livemode": false,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "tiers": null,
+                        "tiers_mode": null,
+                        "transform_usage": null,
+                        "trial_period_days": null,
+                        "usage_type": "licensed"
+                      },
+                      "price": {
+                        "id": "price_1J0onM2sOmf47Nz9pU5dEOiP",
+                        "object": "price",
+                        "active": true,
+                        "billing_scheme": "per_unit",
+                        "created": 1623335024,
+                        "currency": "usd",
+                        "livemode": false,
+                        "lookup_key": null,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "recurring": {
+                          "aggregate_usage": null,
+                          "interval": "month",
+                          "interval_count": 1,
+                          "trial_period_days": null,
+                          "usage_type": "licensed"
+                        },
+                        "tiers_mode": null,
+                        "transform_quantity": null,
+                        "type": "recurring",
+                        "unit_amount": 9466,
+                        "unit_amount_decimal": "9466"
+                      },
+                      "quantity": 1,
+                      "subscription": "sub_Je719VCAEg8rar",
+                      "tax_rates": [
+
+                      ]
+                    }
+                  ],
+                  "has_more": false,
+                  "total_count": 1,
+                  "url": "/v1/subscription_items?subscription=sub_Je719VCAEg8rar"
+                },
+                "latest_invoice": "in_1J0onO2sOmf47Nz9WSepb1cl",
+                "livemode": false,
+                "metadata": {
+                },
+                "next_pending_invoice_item_invoice": null,
+                "pause_collection": null,
+                "pending_invoice_item_interval": null,
+                "pending_setup_intent": null,
+                "pending_update": null,
+                "plan": {
+                  "id": "price_1J0onM2sOmf47Nz9pU5dEOiP",
+                  "object": "plan",
+                  "active": true,
+                  "aggregate_usage": null,
+                  "amount": 9466,
+                  "amount_decimal": "9466",
+                  "billing_scheme": "per_unit",
+                  "created": 1623335024,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {
+                  },
+                  "nickname": null,
+                  "product": "prod_IZQAhb9nLu4jfN",
+                  "tiers": null,
+                  "tiers_mode": null,
+                  "transform_usage": null,
+                  "trial_period_days": null,
+                  "usage_type": "licensed"
+                },
+                "quantity": 1,
+                "schedule": null,
+                "start": 1623335025,
+                "start_date": 1623335025,
+                "status": "active",
+                "tax_percent": null,
+                "transfer_data": null,
+                "trial_end": null,
+                "trial_start": null
+              },
+              {
+                "id": "sub_Je5z35IURtkPCd",
+                "object": "subscription",
+                "application_fee_percent": null,
+                "billing": "charge_automatically",
+                "billing_cycle_anchor": 1623331204,
+                "billing_thresholds": null,
+                "cancel_at": 1652448002,
+                "cancel_at_period_end": false,
+                "canceled_at": 1623331204,
+                "collection_method": "charge_automatically",
+                "created": 1623331204,
+                "current_period_end": 1625923204,
+                "current_period_start": 1623331204,
+                "customer": "cus_8E2ys9zDZgetWX",
+                "days_until_due": null,
+                "default_payment_method": null,
+                "default_source": null,
+                "default_tax_rates": [
+
+                ],
+                "discount": null,
+                "ended_at": null,
+                "invoice_customer_balance_settings": {
+                  "consume_applied_balance_on_void": true
+                },
+                "items": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "id": "si_Je5zxIGFpX2JQy",
+                      "object": "subscription_item",
+                      "billing_thresholds": null,
+                      "created": 1623331205,
+                      "metadata": {
+                      },
+                      "plan": {
+                        "id": "price_1J0nnj2sOmf47Nz91KqEI8mo",
+                        "object": "plan",
+                        "active": true,
+                        "aggregate_usage": null,
+                        "amount": 9466,
+                        "amount_decimal": "9466",
+                        "billing_scheme": "per_unit",
+                        "created": 1623331203,
+                        "currency": "usd",
+                        "interval": "month",
+                        "interval_count": 1,
+                        "livemode": false,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "tiers": null,
+                        "tiers_mode": null,
+                        "transform_usage": null,
+                        "trial_period_days": null,
+                        "usage_type": "licensed"
+                      },
+                      "price": {
+                        "id": "price_1J0nnj2sOmf47Nz91KqEI8mo",
+                        "object": "price",
+                        "active": true,
+                        "billing_scheme": "per_unit",
+                        "created": 1623331203,
+                        "currency": "usd",
+                        "livemode": false,
+                        "lookup_key": null,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "recurring": {
+                          "aggregate_usage": null,
+                          "interval": "month",
+                          "interval_count": 1,
+                          "trial_period_days": null,
+                          "usage_type": "licensed"
+                        },
+                        "tiers_mode": null,
+                        "transform_quantity": null,
+                        "type": "recurring",
+                        "unit_amount": 9466,
+                        "unit_amount_decimal": "9466"
+                      },
+                      "quantity": 1,
+                      "subscription": "sub_Je5z35IURtkPCd",
+                      "tax_rates": [
+
+                      ]
+                    }
+                  ],
+                  "has_more": false,
+                  "total_count": 1,
+                  "url": "/v1/subscription_items?subscription=sub_Je5z35IURtkPCd"
+                },
+                "latest_invoice": "in_1J0nnk2sOmf47Nz9xy1V7Sxu",
+                "livemode": false,
+                "metadata": {
+                },
+                "next_pending_invoice_item_invoice": null,
+                "pause_collection": null,
+                "pending_invoice_item_interval": null,
+                "pending_setup_intent": null,
+                "pending_update": null,
+                "plan": {
+                  "id": "price_1J0nnj2sOmf47Nz91KqEI8mo",
+                  "object": "plan",
+                  "active": true,
+                  "aggregate_usage": null,
+                  "amount": 9466,
+                  "amount_decimal": "9466",
+                  "billing_scheme": "per_unit",
+                  "created": 1623331203,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {
+                  },
+                  "nickname": null,
+                  "product": "prod_IZQAhb9nLu4jfN",
+                  "tiers": null,
+                  "tiers_mode": null,
+                  "transform_usage": null,
+                  "trial_period_days": null,
+                  "usage_type": "licensed"
+                },
+                "quantity": 1,
+                "schedule": null,
+                "start": 1623331204,
+                "start_date": 1623331204,
+                "status": "active",
+                "tax_percent": null,
+                "transfer_data": null,
+                "trial_end": null,
+                "trial_start": null
+              },
+              {
+                "id": "sub_Je1sV6kgVwUrvk",
+                "object": "subscription",
+                "application_fee_percent": null,
+                "billing": "charge_automatically",
+                "billing_cycle_anchor": 1623315893,
+                "billing_thresholds": null,
+                "cancel_at": 1652432690,
+                "cancel_at_period_end": false,
+                "canceled_at": 1623315893,
+                "collection_method": "charge_automatically",
+                "created": 1623315893,
+                "current_period_end": 1625907893,
+                "current_period_start": 1623315893,
+                "customer": "cus_8E2ys9zDZgetWX",
+                "days_until_due": null,
+                "default_payment_method": null,
+                "default_source": null,
+                "default_tax_rates": [
+
+                ],
+                "discount": null,
+                "ended_at": null,
+                "invoice_customer_balance_settings": {
+                  "consume_applied_balance_on_void": true
+                },
+                "items": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "id": "si_Je1srnODiAjFFB",
+                      "object": "subscription_item",
+                      "billing_thresholds": null,
+                      "created": 1623315893,
+                      "metadata": {
+                      },
+                      "plan": {
+                        "id": "price_1J0jom2sOmf47Nz9vOd89w4d",
+                        "object": "plan",
+                        "active": true,
+                        "aggregate_usage": null,
+                        "amount": 9466,
+                        "amount_decimal": "9466",
+                        "billing_scheme": "per_unit",
+                        "created": 1623315892,
+                        "currency": "usd",
+                        "interval": "month",
+                        "interval_count": 1,
+                        "livemode": false,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "tiers": null,
+                        "tiers_mode": null,
+                        "transform_usage": null,
+                        "trial_period_days": null,
+                        "usage_type": "licensed"
+                      },
+                      "price": {
+                        "id": "price_1J0jom2sOmf47Nz9vOd89w4d",
+                        "object": "price",
+                        "active": true,
+                        "billing_scheme": "per_unit",
+                        "created": 1623315892,
+                        "currency": "usd",
+                        "livemode": false,
+                        "lookup_key": null,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "recurring": {
+                          "aggregate_usage": null,
+                          "interval": "month",
+                          "interval_count": 1,
+                          "trial_period_days": null,
+                          "usage_type": "licensed"
+                        },
+                        "tiers_mode": null,
+                        "transform_quantity": null,
+                        "type": "recurring",
+                        "unit_amount": 9466,
+                        "unit_amount_decimal": "9466"
+                      },
+                      "quantity": 1,
+                      "subscription": "sub_Je1sV6kgVwUrvk",
+                      "tax_rates": [
+
+                      ]
+                    }
+                  ],
+                  "has_more": false,
+                  "total_count": 1,
+                  "url": "/v1/subscription_items?subscription=sub_Je1sV6kgVwUrvk"
+                },
+                "latest_invoice": "in_1J0jon2sOmf47Nz9bYTcnRDE",
+                "livemode": false,
+                "metadata": {
+                },
+                "next_pending_invoice_item_invoice": null,
+                "pause_collection": null,
+                "pending_invoice_item_interval": null,
+                "pending_setup_intent": null,
+                "pending_update": null,
+                "plan": {
+                  "id": "price_1J0jom2sOmf47Nz9vOd89w4d",
+                  "object": "plan",
+                  "active": true,
+                  "aggregate_usage": null,
+                  "amount": 9466,
+                  "amount_decimal": "9466",
+                  "billing_scheme": "per_unit",
+                  "created": 1623315892,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {
+                  },
+                  "nickname": null,
+                  "product": "prod_IZQAhb9nLu4jfN",
+                  "tiers": null,
+                  "tiers_mode": null,
+                  "transform_usage": null,
+                  "trial_period_days": null,
+                  "usage_type": "licensed"
+                },
+                "quantity": 1,
+                "schedule": null,
+                "start": 1623315893,
+                "start_date": 1623315893,
+                "status": "active",
+                "tax_percent": null,
+                "transfer_data": null,
+                "trial_end": null,
+                "trial_start": null
+              },
+              {
+                "id": "sub_Jdmkqa8igz2TCX",
+                "object": "subscription",
+                "application_fee_percent": null,
+                "billing": "charge_automatically",
+                "billing_cycle_anchor": 1623259583,
+                "billing_thresholds": null,
+                "cancel_at": 1652376381,
+                "cancel_at_period_end": false,
+                "canceled_at": 1623259583,
+                "collection_method": "charge_automatically",
+                "created": 1623259583,
+                "current_period_end": 1625851583,
+                "current_period_start": 1623259583,
+                "customer": "cus_8E2ys9zDZgetWX",
+                "days_until_due": null,
+                "default_payment_method": null,
+                "default_source": null,
+                "default_tax_rates": [
+
+                ],
+                "discount": null,
+                "ended_at": null,
+                "invoice_customer_balance_settings": {
+                  "consume_applied_balance_on_void": true
+                },
+                "items": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "id": "si_Jdmkjklfs7PnAW",
+                      "object": "subscription_item",
+                      "billing_thresholds": null,
+                      "created": 1623259584,
+                      "metadata": {
+                      },
+                      "plan": {
+                        "id": "price_1J0VAY2sOmf47Nz9j4YQVst6",
+                        "object": "plan",
+                        "active": true,
+                        "aggregate_usage": null,
+                        "amount": 9466,
+                        "amount_decimal": "9466",
+                        "billing_scheme": "per_unit",
+                        "created": 1623259582,
+                        "currency": "usd",
+                        "interval": "month",
+                        "interval_count": 1,
+                        "livemode": false,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "tiers": null,
+                        "tiers_mode": null,
+                        "transform_usage": null,
+                        "trial_period_days": null,
+                        "usage_type": "licensed"
+                      },
+                      "price": {
+                        "id": "price_1J0VAY2sOmf47Nz9j4YQVst6",
+                        "object": "price",
+                        "active": true,
+                        "billing_scheme": "per_unit",
+                        "created": 1623259582,
+                        "currency": "usd",
+                        "livemode": false,
+                        "lookup_key": null,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "recurring": {
+                          "aggregate_usage": null,
+                          "interval": "month",
+                          "interval_count": 1,
+                          "trial_period_days": null,
+                          "usage_type": "licensed"
+                        },
+                        "tiers_mode": null,
+                        "transform_quantity": null,
+                        "type": "recurring",
+                        "unit_amount": 9466,
+                        "unit_amount_decimal": "9466"
+                      },
+                      "quantity": 1,
+                      "subscription": "sub_Jdmkqa8igz2TCX",
+                      "tax_rates": [
+
+                      ]
+                    }
+                  ],
+                  "has_more": false,
+                  "total_count": 1,
+                  "url": "/v1/subscription_items?subscription=sub_Jdmkqa8igz2TCX"
+                },
+                "latest_invoice": "in_1J0VAa2sOmf47Nz91OlagP56",
+                "livemode": false,
+                "metadata": {
+                },
+                "next_pending_invoice_item_invoice": null,
+                "pause_collection": null,
+                "pending_invoice_item_interval": null,
+                "pending_setup_intent": null,
+                "pending_update": null,
+                "plan": {
+                  "id": "price_1J0VAY2sOmf47Nz9j4YQVst6",
+                  "object": "plan",
+                  "active": true,
+                  "aggregate_usage": null,
+                  "amount": 9466,
+                  "amount_decimal": "9466",
+                  "billing_scheme": "per_unit",
+                  "created": 1623259582,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {
+                  },
+                  "nickname": null,
+                  "product": "prod_IZQAhb9nLu4jfN",
+                  "tiers": null,
+                  "tiers_mode": null,
+                  "transform_usage": null,
+                  "trial_period_days": null,
+                  "usage_type": "licensed"
+                },
+                "quantity": 1,
+                "schedule": null,
+                "start": 1623259583,
+                "start_date": 1623259583,
+                "status": "active",
+                "tax_percent": null,
+                "transfer_data": null,
+                "trial_end": null,
+                "trial_start": null
+              },
+              {
+                "id": "sub_Jdlr0opdwWOKe3",
+                "object": "subscription",
+                "application_fee_percent": null,
+                "billing": "charge_automatically",
+                "billing_cycle_anchor": 1623256314,
+                "billing_thresholds": null,
+                "cancel_at": 1652373112,
+                "cancel_at_period_end": false,
+                "canceled_at": 1623256314,
+                "collection_method": "charge_automatically",
+                "created": 1623256314,
+                "current_period_end": 1625848314,
+                "current_period_start": 1623256314,
+                "customer": "cus_8E2ys9zDZgetWX",
+                "days_until_due": null,
+                "default_payment_method": null,
+                "default_source": null,
+                "default_tax_rates": [
+
+                ],
+                "discount": null,
+                "ended_at": null,
+                "invoice_customer_balance_settings": {
+                  "consume_applied_balance_on_void": true
+                },
+                "items": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "id": "si_JdlrPvF329bOo4",
+                      "object": "subscription_item",
+                      "billing_thresholds": null,
+                      "created": 1623256315,
+                      "metadata": {
+                      },
+                      "plan": {
+                        "id": "price_1J0UJp2sOmf47Nz9L3lV9Vpj",
+                        "object": "plan",
+                        "active": true,
+                        "aggregate_usage": null,
+                        "amount": 9466,
+                        "amount_decimal": "9466",
+                        "billing_scheme": "per_unit",
+                        "created": 1623256313,
+                        "currency": "usd",
+                        "interval": "month",
+                        "interval_count": 1,
+                        "livemode": false,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "tiers": null,
+                        "tiers_mode": null,
+                        "transform_usage": null,
+                        "trial_period_days": null,
+                        "usage_type": "licensed"
+                      },
+                      "price": {
+                        "id": "price_1J0UJp2sOmf47Nz9L3lV9Vpj",
+                        "object": "price",
+                        "active": true,
+                        "billing_scheme": "per_unit",
+                        "created": 1623256313,
+                        "currency": "usd",
+                        "livemode": false,
+                        "lookup_key": null,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "recurring": {
+                          "aggregate_usage": null,
+                          "interval": "month",
+                          "interval_count": 1,
+                          "trial_period_days": null,
+                          "usage_type": "licensed"
+                        },
+                        "tiers_mode": null,
+                        "transform_quantity": null,
+                        "type": "recurring",
+                        "unit_amount": 9466,
+                        "unit_amount_decimal": "9466"
+                      },
+                      "quantity": 1,
+                      "subscription": "sub_Jdlr0opdwWOKe3",
+                      "tax_rates": [
+
+                      ]
+                    }
+                  ],
+                  "has_more": false,
+                  "total_count": 1,
+                  "url": "/v1/subscription_items?subscription=sub_Jdlr0opdwWOKe3"
+                },
+                "latest_invoice": "in_1J0UJr2sOmf47Nz9JwYQxL7T",
+                "livemode": false,
+                "metadata": {
+                },
+                "next_pending_invoice_item_invoice": null,
+                "pause_collection": null,
+                "pending_invoice_item_interval": null,
+                "pending_setup_intent": null,
+                "pending_update": null,
+                "plan": {
+                  "id": "price_1J0UJp2sOmf47Nz9L3lV9Vpj",
+                  "object": "plan",
+                  "active": true,
+                  "aggregate_usage": null,
+                  "amount": 9466,
+                  "amount_decimal": "9466",
+                  "billing_scheme": "per_unit",
+                  "created": 1623256313,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {
+                  },
+                  "nickname": null,
+                  "product": "prod_IZQAhb9nLu4jfN",
+                  "tiers": null,
+                  "tiers_mode": null,
+                  "transform_usage": null,
+                  "trial_period_days": null,
+                  "usage_type": "licensed"
+                },
+                "quantity": 1,
+                "schedule": null,
+                "start": 1623256314,
+                "start_date": 1623256314,
+                "status": "active",
+                "tax_percent": null,
+                "transfer_data": null,
+                "trial_end": null,
+                "trial_start": null
+              },
+              {
+                "id": "sub_JdlYOIWmLbUDTg",
+                "object": "subscription",
+                "application_fee_percent": null,
+                "billing": "charge_automatically",
+                "billing_cycle_anchor": 1623255182,
+                "billing_thresholds": null,
+                "cancel_at": 1652371979,
+                "cancel_at_period_end": false,
+                "canceled_at": 1623255182,
+                "collection_method": "charge_automatically",
+                "created": 1623255182,
+                "current_period_end": 1625847182,
+                "current_period_start": 1623255182,
+                "customer": "cus_8E2ys9zDZgetWX",
+                "days_until_due": null,
+                "default_payment_method": null,
+                "default_source": null,
+                "default_tax_rates": [
+
+                ],
+                "discount": null,
+                "ended_at": null,
+                "invoice_customer_balance_settings": {
+                  "consume_applied_balance_on_void": true
+                },
+                "items": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "id": "si_JdlY8CvNxkO4RE",
+                      "object": "subscription_item",
+                      "billing_thresholds": null,
+                      "created": 1623255183,
+                      "metadata": {
+                      },
+                      "plan": {
+                        "id": "price_1J0U1Z2sOmf47Nz9ZaPLOQ9J",
+                        "object": "plan",
+                        "active": true,
+                        "aggregate_usage": null,
+                        "amount": 9466,
+                        "amount_decimal": "9466",
+                        "billing_scheme": "per_unit",
+                        "created": 1623255181,
+                        "currency": "usd",
+                        "interval": "month",
+                        "interval_count": 1,
+                        "livemode": false,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "tiers": null,
+                        "tiers_mode": null,
+                        "transform_usage": null,
+                        "trial_period_days": null,
+                        "usage_type": "licensed"
+                      },
+                      "price": {
+                        "id": "price_1J0U1Z2sOmf47Nz9ZaPLOQ9J",
+                        "object": "price",
+                        "active": true,
+                        "billing_scheme": "per_unit",
+                        "created": 1623255181,
+                        "currency": "usd",
+                        "livemode": false,
+                        "lookup_key": null,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "recurring": {
+                          "aggregate_usage": null,
+                          "interval": "month",
+                          "interval_count": 1,
+                          "trial_period_days": null,
+                          "usage_type": "licensed"
+                        },
+                        "tiers_mode": null,
+                        "transform_quantity": null,
+                        "type": "recurring",
+                        "unit_amount": 9466,
+                        "unit_amount_decimal": "9466"
+                      },
+                      "quantity": 1,
+                      "subscription": "sub_JdlYOIWmLbUDTg",
+                      "tax_rates": [
+
+                      ]
+                    }
+                  ],
+                  "has_more": false,
+                  "total_count": 1,
+                  "url": "/v1/subscription_items?subscription=sub_JdlYOIWmLbUDTg"
+                },
+                "latest_invoice": "in_1J0U1a2sOmf47Nz9FDdAARrf",
+                "livemode": false,
+                "metadata": {
+                },
+                "next_pending_invoice_item_invoice": null,
+                "pause_collection": null,
+                "pending_invoice_item_interval": null,
+                "pending_setup_intent": null,
+                "pending_update": null,
+                "plan": {
+                  "id": "price_1J0U1Z2sOmf47Nz9ZaPLOQ9J",
+                  "object": "plan",
+                  "active": true,
+                  "aggregate_usage": null,
+                  "amount": 9466,
+                  "amount_decimal": "9466",
+                  "billing_scheme": "per_unit",
+                  "created": 1623255181,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {
+                  },
+                  "nickname": null,
+                  "product": "prod_IZQAhb9nLu4jfN",
+                  "tiers": null,
+                  "tiers_mode": null,
+                  "transform_usage": null,
+                  "trial_period_days": null,
+                  "usage_type": "licensed"
+                },
+                "quantity": 1,
+                "schedule": null,
+                "start": 1623255182,
+                "start_date": 1623255182,
+                "status": "active",
+                "tax_percent": null,
+                "transfer_data": null,
+                "trial_end": null,
+                "trial_start": null
+              },
+              {
+                "id": "sub_JdkdoCnvBpd4Ak",
+                "object": "subscription",
+                "application_fee_percent": null,
+                "billing": "charge_automatically",
+                "billing_cycle_anchor": 1623251750,
+                "billing_thresholds": null,
+                "cancel_at": 1652368547,
+                "cancel_at_period_end": false,
+                "canceled_at": 1623251750,
+                "collection_method": "charge_automatically",
+                "created": 1623251750,
+                "current_period_end": 1625843750,
+                "current_period_start": 1623251750,
+                "customer": "cus_8E2ys9zDZgetWX",
+                "days_until_due": null,
+                "default_payment_method": null,
+                "default_source": null,
+                "default_tax_rates": [
+
+                ],
+                "discount": null,
+                "ended_at": null,
+                "invoice_customer_balance_settings": {
+                  "consume_applied_balance_on_void": true
+                },
+                "items": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "id": "si_Jdkd69PWGuIvEb",
+                      "object": "subscription_item",
+                      "billing_thresholds": null,
+                      "created": 1623251750,
+                      "metadata": {
+                      },
+                      "plan": {
+                        "id": "price_1J0T8D2sOmf47Nz96Ohhxb3c",
+                        "object": "plan",
+                        "active": true,
+                        "aggregate_usage": null,
+                        "amount": 9466,
+                        "amount_decimal": "9466",
+                        "billing_scheme": "per_unit",
+                        "created": 1623251749,
+                        "currency": "usd",
+                        "interval": "month",
+                        "interval_count": 1,
+                        "livemode": false,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "tiers": null,
+                        "tiers_mode": null,
+                        "transform_usage": null,
+                        "trial_period_days": null,
+                        "usage_type": "licensed"
+                      },
+                      "price": {
+                        "id": "price_1J0T8D2sOmf47Nz96Ohhxb3c",
+                        "object": "price",
+                        "active": true,
+                        "billing_scheme": "per_unit",
+                        "created": 1623251749,
+                        "currency": "usd",
+                        "livemode": false,
+                        "lookup_key": null,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "recurring": {
+                          "aggregate_usage": null,
+                          "interval": "month",
+                          "interval_count": 1,
+                          "trial_period_days": null,
+                          "usage_type": "licensed"
+                        },
+                        "tiers_mode": null,
+                        "transform_quantity": null,
+                        "type": "recurring",
+                        "unit_amount": 9466,
+                        "unit_amount_decimal": "9466"
+                      },
+                      "quantity": 1,
+                      "subscription": "sub_JdkdoCnvBpd4Ak",
+                      "tax_rates": [
+
+                      ]
+                    }
+                  ],
+                  "has_more": false,
+                  "total_count": 1,
+                  "url": "/v1/subscription_items?subscription=sub_JdkdoCnvBpd4Ak"
+                },
+                "latest_invoice": "in_1J0T8E2sOmf47Nz9tuVIRxj6",
+                "livemode": false,
+                "metadata": {
+                },
+                "next_pending_invoice_item_invoice": null,
+                "pause_collection": null,
+                "pending_invoice_item_interval": null,
+                "pending_setup_intent": null,
+                "pending_update": null,
+                "plan": {
+                  "id": "price_1J0T8D2sOmf47Nz96Ohhxb3c",
+                  "object": "plan",
+                  "active": true,
+                  "aggregate_usage": null,
+                  "amount": 9466,
+                  "amount_decimal": "9466",
+                  "billing_scheme": "per_unit",
+                  "created": 1623251749,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {
+                  },
+                  "nickname": null,
+                  "product": "prod_IZQAhb9nLu4jfN",
+                  "tiers": null,
+                  "tiers_mode": null,
+                  "transform_usage": null,
+                  "trial_period_days": null,
+                  "usage_type": "licensed"
+                },
+                "quantity": 1,
+                "schedule": null,
+                "start": 1623251750,
+                "start_date": 1623251750,
+                "status": "active",
+                "tax_percent": null,
+                "transfer_data": null,
+                "trial_end": null,
+                "trial_start": null
+              }
+            ],
+            "has_more": true,
+            "total_count": 77,
+            "url": "/v1/customers/cus_8E2ys9zDZgetWX/subscriptions"
+          },
+          "tax_exempt": "none",
+          "tax_ids": {
+            "object": "list",
+            "data": [
+
+            ],
+            "has_more": false,
+            "total_count": 0,
+            "url": "/v1/customers/cus_8E2ys9zDZgetWX/tax_ids"
+          },
+          "tax_info": null,
+          "tax_info_verification": null
+        }
+  recorded_at: Fri, 11 Jun 2021 12:10:30 GMT
+- request:
+    method: get
+    uri: https://api.stripe.com/v1/setup_intents/seti_1J19Bu2sOmf47Nz9BfLWQchb
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Stripe/v1 RubyBindings/5.29.0
+      Authorization:
+      - Bearer sk_test_testfaketestfaketestfake
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-Telemetry:
+      - '{"last_request_metrics":{"request_id":"req_2QIKcvMiGhgH9X","request_duration_ms":1042}}'
+      Stripe-Version:
+      - '2019-08-14'
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"5.29.0","lang":"ruby","lang_version":"2.6.7 p197 (2021-04-05)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 5.12.9-arch1-1 (linux@archlinux) (gcc (GCC) 11.1.0, GNU ld (GNU Binutils)
+        2.36.1) #1 SMP PREEMPT Thu, 03 Jun 2021 11:36:13 +0000","hostname":"Sylvain-desktop"}'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 11 Jun 2021 12:10:30 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '767'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_KUlaNTa9jhgxnL
+      Stripe-Version:
+      - '2019-08-14'
+      X-Stripe-C-Cost:
+      - '0'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "seti_1J19Bu2sOmf47Nz9BfLWQchb",
+          "object": "setup_intent",
+          "application": null,
+          "cancellation_reason": null,
+          "client_secret": "seti_1J19Bu2sOmf47Nz9BfLWQchb_secret_JeS6YolgTbPvCcjRt7PKEjGx4QnU2YR",
+          "created": 1623413426,
+          "customer": "cus_8E2ys9zDZgetWX",
+          "description": null,
+          "last_setup_error": null,
+          "latest_attempt": "setatt_1J19Bv2sOmf47Nz9BNjAtrI4",
+          "livemode": false,
+          "mandate": null,
+          "metadata": {
+          },
+          "next_action": null,
+          "on_behalf_of": null,
+          "payment_method": "pm_1J19Bv2sOmf47Nz95pa9Kosw",
+          "payment_method_options": {
+            "card": {
+              "request_three_d_secure": "automatic"
+            }
+          },
+          "payment_method_types": [
+            "card"
+          ],
+          "single_use_mandate": null,
+          "status": "succeeded",
+          "usage": "off_session"
+        }
+  recorded_at: Fri, 11 Jun 2021 12:10:30 GMT
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/prices
+    body:
+      encoding: UTF-8
+      string: unit_amount=9466&currency=usd&product=prod_IZQAhb9nLu4jfN&recurring[interval]=month&recurring[interval_count]=1
+    headers:
+      User-Agent:
+      - Stripe/v1 RubyBindings/5.29.0
+      Authorization:
+      - Bearer sk_test_testfaketestfaketestfake
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-Telemetry:
+      - '{"last_request_metrics":{"request_id":"req_KUlaNTa9jhgxnL","request_duration_ms":387}}'
+      Stripe-Version:
+      - '2019-08-14'
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"5.29.0","lang":"ruby","lang_version":"2.6.7 p197 (2021-04-05)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 5.12.9-arch1-1 (linux@archlinux) (gcc (GCC) 11.1.0, GNU ld (GNU Binutils)
+        2.36.1) #1 SMP PREEMPT Thu, 03 Jun 2021 11:36:13 +0000","hostname":"Sylvain-desktop"}'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 11 Jun 2021 12:10:30 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '574'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_D0fQxTCk4FelfE
+      Stripe-Version:
+      - '2019-08-14'
+      X-Stripe-C-Cost:
+      - '0'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "price_1J19By2sOmf47Nz9KVhsAQuQ",
+          "object": "price",
+          "active": true,
+          "billing_scheme": "per_unit",
+          "created": 1623413430,
+          "currency": "usd",
+          "livemode": false,
+          "lookup_key": null,
+          "metadata": {
+          },
+          "nickname": null,
+          "product": "prod_IZQAhb9nLu4jfN",
+          "recurring": {
+            "aggregate_usage": null,
+            "interval": "month",
+            "interval_count": 1,
+            "trial_period_days": null,
+            "usage_type": "licensed"
+          },
+          "tiers_mode": null,
+          "transform_quantity": null,
+          "type": "recurring",
+          "unit_amount": 9466,
+          "unit_amount_decimal": "9466"
+        }
+  recorded_at: Fri, 11 Jun 2021 12:10:30 GMT
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/prices
+    body:
+      encoding: UTF-8
+      string: unit_amount=8&currency=usd&product=prod_IZQAhb9nLu4jfN&nickname=Price+adjustment+for+payment+schedule+5
+    headers:
+      User-Agent:
+      - Stripe/v1 RubyBindings/5.29.0
+      Authorization:
+      - Bearer sk_test_testfaketestfaketestfake
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-Telemetry:
+      - '{"last_request_metrics":{"request_id":"req_D0fQxTCk4FelfE","request_duration_ms":405}}'
+      Stripe-Version:
+      - '2019-08-14'
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"5.29.0","lang":"ruby","lang_version":"2.6.7 p197 (2021-04-05)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 5.12.9-arch1-1 (linux@archlinux) (gcc (GCC) 11.1.0, GNU ld (GNU Binutils)
+        2.36.1) #1 SMP PREEMPT Thu, 03 Jun 2021 11:36:13 +0000","hostname":"Sylvain-desktop"}'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 11 Jun 2021 12:10:31 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '464'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_zKIsh8lrMFOIBv
+      Stripe-Version:
+      - '2019-08-14'
+      X-Stripe-C-Cost:
+      - '0'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "price_1J19Bz2sOmf47Nz9tj2Y133y",
+          "object": "price",
+          "active": true,
+          "billing_scheme": "per_unit",
+          "created": 1623413431,
+          "currency": "usd",
+          "livemode": false,
+          "lookup_key": null,
+          "metadata": {
+          },
+          "nickname": "Price adjustment for payment schedule 5",
+          "product": "prod_IZQAhb9nLu4jfN",
+          "recurring": null,
+          "tiers_mode": null,
+          "transform_quantity": null,
+          "type": "one_time",
+          "unit_amount": 8,
+          "unit_amount_decimal": "8"
+        }
+  recorded_at: Fri, 11 Jun 2021 12:10:31 GMT
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/prices
+    body:
+      encoding: UTF-8
+      string: unit_amount=1000&currency=usd&product=prod_IZPyHpMCl38iQl&nickname=Reservations+for+payment+schedule+5
+    headers:
+      User-Agent:
+      - Stripe/v1 RubyBindings/5.29.0
+      Authorization:
+      - Bearer sk_test_testfaketestfaketestfake
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-Telemetry:
+      - '{"last_request_metrics":{"request_id":"req_zKIsh8lrMFOIBv","request_duration_ms":370}}'
+      Stripe-Version:
+      - '2019-08-14'
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"5.29.0","lang":"ruby","lang_version":"2.6.7 p197 (2021-04-05)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 5.12.9-arch1-1 (linux@archlinux) (gcc (GCC) 11.1.0, GNU ld (GNU Binutils)
+        2.36.1) #1 SMP PREEMPT Thu, 03 Jun 2021 11:36:13 +0000","hostname":"Sylvain-desktop"}'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 11 Jun 2021 12:10:31 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '466'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_CgvKpyLNeMIrZx
+      Stripe-Version:
+      - '2019-08-14'
+      X-Stripe-C-Cost:
+      - '0'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "price_1J19Bz2sOmf47Nz9dLBSXfqB",
+          "object": "price",
+          "active": true,
+          "billing_scheme": "per_unit",
+          "created": 1623413431,
+          "currency": "usd",
+          "livemode": false,
+          "lookup_key": null,
+          "metadata": {
+          },
+          "nickname": "Reservations for payment schedule 5",
+          "product": "prod_IZPyHpMCl38iQl",
+          "recurring": null,
+          "tiers_mode": null,
+          "transform_quantity": null,
+          "type": "one_time",
+          "unit_amount": 1000,
+          "unit_amount_decimal": "1000"
+        }
+  recorded_at: Fri, 11 Jun 2021 12:10:31 GMT
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/subscriptions
+    body:
+      encoding: UTF-8
+      string: customer=cus_8E2ys9zDZgetWX&cancel_at=1652530228&add_invoice_items[0][price]=price_1J19Bz2sOmf47Nz9tj2Y133y&add_invoice_items[1][price]=price_1J19Bz2sOmf47Nz9dLBSXfqB&coupon=GIME3EUR&items[0][price]=price_1J19By2sOmf47Nz9KVhsAQuQ&default_payment_method=pm_1J19Bv2sOmf47Nz95pa9Kosw
+    headers:
+      User-Agent:
+      - Stripe/v1 RubyBindings/5.29.0
+      Authorization:
+      - Bearer sk_test_testfaketestfaketestfake
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-Telemetry:
+      - '{"last_request_metrics":{"request_id":"req_CgvKpyLNeMIrZx","request_duration_ms":379}}'
+      Stripe-Version:
+      - '2019-08-14'
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"5.29.0","lang":"ruby","lang_version":"2.6.7 p197 (2021-04-05)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 5.12.9-arch1-1 (linux@archlinux) (gcc (GCC) 11.1.0, GNU ld (GNU Binutils)
+        2.36.1) #1 SMP PREEMPT Thu, 03 Jun 2021 11:36:13 +0000","hostname":"Sylvain-desktop"}'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 11 Jun 2021 12:10:33 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '3720'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_gqkPH6CSd618Au
+      Stripe-Version:
+      - '2019-08-14'
+      X-Stripe-C-Cost:
+      - '2'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "sub_JeS63F3gpNRyDK",
+          "object": "subscription",
+          "application_fee_percent": null,
+          "billing": "charge_automatically",
+          "billing_cycle_anchor": 1623413431,
+          "billing_thresholds": null,
+          "cancel_at": 1652530228,
+          "cancel_at_period_end": false,
+          "canceled_at": 1623413431,
+          "collection_method": "charge_automatically",
+          "created": 1623413431,
+          "current_period_end": 1626005431,
+          "current_period_start": 1623413431,
+          "customer": "cus_8E2ys9zDZgetWX",
+          "days_until_due": null,
+          "default_payment_method": "pm_1J19Bv2sOmf47Nz95pa9Kosw",
+          "default_source": null,
+          "default_tax_rates": [
+
+          ],
+          "discount": null,
+          "ended_at": null,
+          "invoice_customer_balance_settings": {
+            "consume_applied_balance_on_void": true
+          },
+          "items": {
+            "object": "list",
+            "data": [
+              {
+                "id": "si_JeS6YPrUZsMh08",
+                "object": "subscription_item",
+                "billing_thresholds": null,
+                "created": 1623413432,
+                "metadata": {
+                },
+                "plan": {
+                  "id": "price_1J19By2sOmf47Nz9KVhsAQuQ",
+                  "object": "plan",
+                  "active": true,
+                  "aggregate_usage": null,
+                  "amount": 9466,
+                  "amount_decimal": "9466",
+                  "billing_scheme": "per_unit",
+                  "created": 1623413430,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {
+                  },
+                  "nickname": null,
+                  "product": "prod_IZQAhb9nLu4jfN",
+                  "tiers": null,
+                  "tiers_mode": null,
+                  "transform_usage": null,
+                  "trial_period_days": null,
+                  "usage_type": "licensed"
+                },
+                "price": {
+                  "id": "price_1J19By2sOmf47Nz9KVhsAQuQ",
+                  "object": "price",
+                  "active": true,
+                  "billing_scheme": "per_unit",
+                  "created": 1623413430,
+                  "currency": "usd",
+                  "livemode": false,
+                  "lookup_key": null,
+                  "metadata": {
+                  },
+                  "nickname": null,
+                  "product": "prod_IZQAhb9nLu4jfN",
+                  "recurring": {
+                    "aggregate_usage": null,
+                    "interval": "month",
+                    "interval_count": 1,
+                    "trial_period_days": null,
+                    "usage_type": "licensed"
+                  },
+                  "tiers_mode": null,
+                  "transform_quantity": null,
+                  "type": "recurring",
+                  "unit_amount": 9466,
+                  "unit_amount_decimal": "9466"
+                },
+                "quantity": 1,
+                "subscription": "sub_JeS63F3gpNRyDK",
+                "tax_rates": [
+
+                ]
+              }
+            ],
+            "has_more": false,
+            "total_count": 1,
+            "url": "/v1/subscription_items?subscription=sub_JeS63F3gpNRyDK"
+          },
+          "latest_invoice": "in_1J19C02sOmf47Nz9FTsNKlC1",
+          "livemode": false,
+          "metadata": {
+          },
+          "next_pending_invoice_item_invoice": null,
+          "pause_collection": null,
+          "pending_invoice_item_interval": null,
+          "pending_setup_intent": null,
+          "pending_update": null,
+          "plan": {
+            "id": "price_1J19By2sOmf47Nz9KVhsAQuQ",
+            "object": "plan",
+            "active": true,
+            "aggregate_usage": null,
+            "amount": 9466,
+            "amount_decimal": "9466",
+            "billing_scheme": "per_unit",
+            "created": 1623413430,
+            "currency": "usd",
+            "interval": "month",
+            "interval_count": 1,
+            "livemode": false,
+            "metadata": {
+            },
+            "nickname": null,
+            "product": "prod_IZQAhb9nLu4jfN",
+            "tiers": null,
+            "tiers_mode": null,
+            "transform_usage": null,
+            "trial_period_days": null,
+            "usage_type": "licensed"
+          },
+          "quantity": 1,
+          "schedule": null,
+          "start": 1623413431,
+          "start_date": 1623413431,
+          "status": "active",
+          "tax_percent": null,
+          "transfer_data": null,
+          "trial_end": null,
+          "trial_start": null
+        }
+  recorded_at: Fri, 11 Jun 2021 12:10:33 GMT
+recorded_with: VCR 6.0.0

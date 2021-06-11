@@ -1,0 +1,52 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.payzen.eu/api-payment/V4/Charge/CreatePayment
+    body:
+      encoding: UTF-8
+      string: '{"amount":3000,"currency":"EUR","orderId":"925eca9143ee9bb6fc4f3ae9","formAction":"PAYMENT","contrib":"fab-manager
+        5.0.1","customer":{"reference":2,"email":"jean.dupond@gmail.com","billingDetails":{"firstName":"Jean","lastName":"Dupont","legalName":null,"address":"14
+        rue Brecourt, Annecy"},"shippingDetails":{"category":"PRIVATE","shippingMethod":"ETICKET"},"shoppingCart":{"cartItemInfo":[{"productAmount":"0","productLabel":"Formation
+        Imprimante 3D","productQty":"1","productType":"SERVICE_FOR_INDIVIDUAL"},{"productAmount":"3000","productLabel":"Mensuel
+        - standard, association - month","productQty":"1","productType":"SERVICE_FOR_INDIVIDUAL"}]}}}'
+    headers:
+      Authorization:
+      - Basic Njk4NzYzNTc6dGVzdHBhc3N3b3JkX0RFTU9QUklWQVRFS0VZMjNHNDQ3NXpYWlEyVUE1eDdN
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.payzen.eu
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 11 Jun 2021 12:09:00 GMT
+      Server:
+      - Apache
+      X-Powered-By:
+      - Undertow/1
+      Set-Cookie:
+      - JSESSIONID=12rIBEfg8UKK81oO7VEz5i7s3A7y34Y30BhZNj51.vadapi01-tls-prod-fr-lyra;
+        path=/api-payment
+      Vary:
+      - Accept-Encoding,User-Agent
+      Timing-Allow-Origin:
+      - "*"
+      Content-Length:
+      - '1317'
+      Content-Type:
+      - application/json;charset=utf-8
+    body:
+      encoding: ASCII-8BIT
+      string: '{"webService":"Charge/CreatePayment","version":"V4","applicationVersion":"5.24.0","status":"SUCCESS","answer":{"formToken":"01m_0CuvM3TOiDeaLrsAv88g216eyJhbW91bnQiOjMwMDAsImN1cnJlbmN5IjoiRVVSIiwibW9kZSI6IlRFU1QiLCJ2ZXJzaW9uIjozLCJvcmRlcklkIjoiOTI1ZWNhOTE0M2VlOWJiNmZjNGYzYWU5Iiwic2hvcE5hbWUiOiJEZW1vIHNob3AiLCJicmFuZFByaW9yaXR5IjpbIkJBTkNPTlRBQ1QiLCJNQVNURVJDQVJEIiwiTUFTVEVSQ0FSRF9ERUJJVCIsIlZJU0EiLCJWSVNBX0RFQklUIiwiQ0IiLCJFLUNBUlRFQkxFVUUiLCJNQUVTVFJPIiwiVklTQV9FTEVDVFJPTiJdLCJjYXRlZ29yaWVzIjp7ImRlYml0Q3JlZGl0Q2FyZHMiOnsiYXBwSWQiOiJjYXJkcyIsInBhcmFtIjpbIkVERU5SRUQiLCJBTUVYIiwiQ09ORUNTIiwiTUFTVEVSQ0FSRF9ERUJJVCIsIkRJU0NPVkVSIiwiVklTQSIsIlZJU0FfREVCSVQiLCJTT0RFWE8iLCJESU5FUlMiLCJNQUVTVFJPIiwiRS1DQVJURUJMRVVFIiwiQ0hRX0RFSiIsIk1BU1RFUkNBUkQiLCJCQU5DT05UQUNUIiwiVklTQV9FTEVDVFJPTiIsIkFQRVRJWiIsIkNCIl19fSwiY2FyZHMiOnsiQ09ORUNTIjp7ImZpZWxkcyI6eyJzZWN1cml0eUNvZGUiOnsicmVxdWlyZWQiOmZhbHNlfX0sImNvcHlGcm9tIjoiY2FyZHMuREVGQVVMVCJ9LCJBTUVYIjp7ImZpZWxkcyI6eyJzZWN1cml0eUNvZGUiOnsibWF4TGVuZ3RoIjo0fX0sImNvcHlGcm9tIjoiY2FyZHMuREVGQVVMVCJ9LCJFREVOUkVEIjp7ImZpZWxkcyI6eyJzZWN1cml0eUNvZGUiOnsicmVxdWlyZWQiOmZhbHNlfX0sImNvcHlGcm9tIjoiY2FyZHMuREVGQVVMVCJ9LCJNQVNURVJDQVJEX0RFQklUIjp7ImNvcHlGcm9tIjoiY2FyZHMuREVGQVVMVCJ9LCJESVNDT1ZFUiI6eyJjb3B5RnJvbSI6ImNhcmRzLkRFRkFVTFQifSwiVklTQSI6eyJjb3B5RnJvbSI6ImNhcmRzLkRFRkFVTFQifSwiRElORVJTIjp7ImZpZWxkcyI6eyJzZWN1cml0eUNvZGUiOnsicmVxdWlyZWQiOmZhbHNlfX0sImNvcHlGcm9tIjoiY2FyZHMuREVGQVVMVCJ9LCJTT0RFWE8iOnsiZmllbGRzIjp7InNlY3VyaXR5Q29kZSI6eyJyZXF1aXJlZCI6ZmFsc2V9fSwiY29weUZyb20iOiJjYXJkcy5ERUZBVUxUIn0sIlZJU0FfREVCSVQiOnsiY29weUZyb20iOiJjYXJkcy5ERUZBVUxUIn0sIk1BRVNUUk8iOnsiZmllbGRzIjp7InNlY3VyaXR5Q29kZSI6eyJyZXF1aXJlZCI6ZmFsc2V9fSwiY29weUZyb20iOiJjYXJkcy5ERUZBVUxUIn0sIkUtQ0FSVEVCTEVVRSI6eyJjb3B5RnJvbSI6ImNhcmRzLkRFRkFVTFQifSwiQ0hRX0RFSiI6eyJmaWVsZHMiOnsic2VjdXJpdHlDb2RlIjp7InJlcXVpcmVkIjpmYWxzZX19LCJjb3B5RnJvbSI6ImNhcmRzLkRFRkFVTFQifSwiTUFTVEVSQ0FSRCI6eyJjb3B5RnJvbSI6ImNhcmRzLkRFRkFVTFQifSwiQkFOQ09OVEFDVCI6eyJmaWVsZHMiOnsic2VjdXJpdHlDb2RlIjp7InJlcXVpcmVkIjpmYWxzZSwiaGlkZGVuIjp0cnVlfX0sImNvcHlGcm9tIjoiY2FyZHMuREVGQVVMVCJ9LCJBUEVUSVoiOnsiZmllbGRzIjp7InNlY3VyaXR5Q29kZSI6eyJyZXF1aXJlZCI6ZmFsc2V9fSwiY29weUZyb20iOiJjYXJkcy5ERUZBVUxUIn0sIlZJU0FfRUxFQ1RST04iOnsiZmllbGRzIjp7InNlY3VyaXR5Q29kZSI6eyJyZXF1aXJlZCI6ZmFsc2V9fSwiY29weUZyb20iOiJjYXJkcy5ERUZBVUxUIn0sIkRFRkFVTFQiOnsiZmllbGRzIjp7InBhbiI6eyJtaW5MZW5ndGgiOjEwLCJtYXhMZW5ndGgiOjE5LCJ2YWxpZGF0b3JzIjpbIk5VTUVSSUMiLCJMVUhOIl0sInJlcXVpcmVkIjp0cnVlLCJzZW5zaXRpdmUiOnRydWUsImhpZGRlbiI6ZmFsc2UsImNsZWFyT25FcnJvciI6ZmFsc2V9LCJleHBpcnlEYXRlIjp7InJlcXVpcmVkIjp0cnVlLCJzZW5zaXRpdmUiOnRydWUsImhpZGRlbiI6ZmFsc2UsImNsZWFyT25FcnJvciI6ZmFsc2V9LCJzZWN1cml0eUNvZGUiOnsibWluTGVuZ3RoIjozLCJtYXhMZW5ndGgiOjQsInZhbGlkYXRvcnMiOlsiTlVNRVJJQyJdLCJyZXF1aXJlZCI6dHJ1ZSwic2Vuc2l0aXZlIjp0cnVlLCJoaWRkZW4iOmZhbHNlLCJjbGVhck9uRXJyb3IiOnRydWV9fX0sIkNCIjp7ImNvcHlGcm9tIjoiY2FyZHMuREVGQVVMVCJ9fSwicGFzc0FjdGl2YXRlZCI6dHJ1ZSwiYXBpUmVzdFZlcnNpb24iOiI0LjAifQ5e02","_type":"V4/Charge/PaymentForm"},"ticket":"3353df25092f48499efaafc21f6aed8d","serverDate":"2021-06-11T12:09:01+00:00","applicationProvider":"PAYZEN","metadata":null,"mode":"TEST","serverUrl":"https://api.payzen.eu","_type":"V4/WebService/Response"}'
+  recorded_at: Fri, 11 Jun 2021 12:09:01 GMT
+recorded_with: VCR 6.0.0

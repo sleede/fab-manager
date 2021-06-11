@@ -93,7 +93,7 @@ class PayzenTest < ActionDispatch::IntegrationTest
     cs = CartService.new(@user)
     cart = cs.from_hash(cart_items)
     amount = cart.total[:total]
-    id = PayZen::Helper.generate_ref(cart_items, @user.id)
+    id = PayZen::Helper.generate_ref(cart_items, @user.id, DateTime.new(1970, 1, 1, 0, 0, 0))
 
     VCR.use_cassette('confirm_payzen_payment_success') do
       client = PayZen::PCI::Charge.new

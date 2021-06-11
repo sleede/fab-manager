@@ -47,7 +47,7 @@ group :test do
   gem 'faker'
   gem 'minitest-reporters'
   gem 'pdf-reader'
-  gem 'vcr', '3.0.1'
+  gem 'vcr', '6.0.0'
   gem 'webmock'
   gem 'rubyXL'
 end

@@ -1294,6 +1294,7 @@ zu:
         manage_plans_categories: "crwdns21576:0crwdne21576:0"
       plan_categories_list:
         categories_list: "crwdns21578:0crwdne21578:0"
+        no_categories: "crwdns21862:0crwdne21862:0"
         name: "crwdns21580:0crwdne21580:0"
         significance: "crwdns21582:0crwdne21582:0"
       create_plan_category:

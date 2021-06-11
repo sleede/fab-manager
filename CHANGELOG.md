@@ -1,5 +1,14 @@
 # Changelog Fab-manager
 
+## v5.0.2 2021 June 11
+
+- Ability to upgrade to a specific version with the script
+- Improved display when no plan-categories exists
+- Updated VCR to 6.0.0
+- Updated cassettes
+- Automated stripe secrets filtering in cassettes
+- Updated documentation diagrams
+
 ## v5.0.1 2021 June 10
 
 - Updated upgrade instructions
@@ -23,7 +32,7 @@
 - Generate footprints in a more reproductible way
 - Task to reset the stripe payment methods in test mode
 - Validate on server side the reservation of slots restricted to subscribers
-− Unified and documented upgrade exit codes
+- Unified and documented upgrade exit codes
 - During setup, ask for the name of the external network and create it, if it does not already exists
 - Fix a bug: cannot select the recurrence end date on Safari or Internet Explorer
 - Fix a bug: build status badge is not working
