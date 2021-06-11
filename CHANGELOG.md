@@ -5,6 +5,7 @@
 - Updated VCR to 6.0.0
 - Updated cassettes
 - Automated stripe secrets filtering in cassettes
+- Updated documentation diagrams
 
 ## v5.0.1 2021 June 10
 
