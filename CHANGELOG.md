@@ -1,6 +1,10 @@
 # Changelog Fab-manager
 
 - Ability to upgrade to a specific version with the script
+- Improved display when no plan-categories exists
+- Updated VCR to 6.0.0
+- Updated cassettes
+- Automated stripe secrets filtering in cassettes
 
 ## v5.0.1 2021 June 10
 

@@ -54,7 +54,8 @@ export const PlanCategoriesList: React.FC<PlanCategoriesListProps> = ({ onSucces
       <CreatePlanCategory onSuccess={handleSuccess}
                           onError={onError} />
       <h3>{t('app.admin.plan_categories_list.categories_list')}</h3>
-      <table className="categories-table">
+      {categories && categories.length == 0 && <span>{t('app.admin.plan_categories_list.no_categories')}</span>}
+      {categories && categories.length > 0 && <table className="categories-table">
         <thead>
           <tr>
             <th style={{ width: '66%' }}>{t('app.admin.plan_categories_list.name')}</th>
@@ -62,7 +63,7 @@ export const PlanCategoriesList: React.FC<PlanCategoriesListProps> = ({ onSucces
           </tr>
         </thead>
         <tbody>
-          {categories && categories.map(c =>
+          {categories.map(c =>
             <tr key={c.id}>
               <td className="category-name">{c.name}</td>
               <td className="category-weight">{c.weight}</td>
@@ -72,7 +73,7 @@ export const PlanCategoriesList: React.FC<PlanCategoriesListProps> = ({ onSucces
               </td>
             </tr>)}
         </tbody>
-      </table>
+      </table>}
     </div>
   )
 };

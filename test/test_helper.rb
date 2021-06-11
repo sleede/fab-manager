@@ -16,6 +16,8 @@ include ActionDispatch::TestProcess
 VCR.configure do |config|
   config.cassette_library_dir = 'test/vcr_cassettes'
   config.hook_into :webmock
+  config.filter_sensitive_data('sk_test_testfaketestfaketestfake') { Setting.get('stripe_secret_key') }
+  config.filter_sensitive_data('pk_test_faketestfaketestfaketest') { Setting.get('stripe_public_key') }
 end
 
 Sidekiq::Testing.fake!

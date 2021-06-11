@@ -397,7 +397,7 @@ GEM
     tzinfo-data (1.2020.4)
       tzinfo (>= 1.0.0)
     unicode-display_width (1.4.1)
-    vcr (3.0.1)
+    vcr (6.0.0)
     virtus (1.0.5)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
@@ -495,7 +495,7 @@ DEPENDENCIES
   stripe (= 5.29.0)
   sys-filesystem
   tzinfo-data
-  vcr (= 3.0.1)
+  vcr (= 6.0.0)
   web-console (>= 3.3.0)
   webmock
   webpacker (~> 5.x)
