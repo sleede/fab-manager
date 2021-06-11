@@ -19,7 +19,9 @@ You will need to be root through the rest of the setup.
 4.2. [Update manually](#update-manually)<br/>
 4.2.2. [Manual update steps](#manual-update-steps)<br/>
 4.3. [Upgrade to the last version](#upgrade-to-the-last-version)<br/>
-4.4. [Upgrade to a specific version](#upgrade-to-a-specific-version)
+4.4. [Upgrade to a specific version](#upgrade-to-a-specific-version)<br/>
+4.4.1. [With scripted update](#with-scripted-update)<br/>
+4.4.2. [With manual update](#with-manual-update)<br/>
 
 <a name="preliminary-steps"></a>
 ## Preliminary steps
@@ -172,7 +174,7 @@ Then, you'll need to perform the upgrade with the following command:
 > - v3.1.2
 > - v4.0.4
 > - v4.4.6
-> - v4.7.12
+> - v4.7.13
 > After that, you can finally update to the last version
 
 > ⚠ With versions < 4.3.3, you must replace `bundle exec rails` with `bundle exec rake` in all the commands above
@@ -231,7 +233,16 @@ __Example:__ to update from v2.4.0 to v2.4.3, you will run the specific commands
 <a name="upgrade-to-a-specific-version"></a>
 ### Upgrade to a specific version
 
-Edit your [/apps/fabmanager/docker-compose.yml](../setup/docker-compose.yml#L4) file and change the following line:
+<a name="with-scripted-update"></a>
+#### With scripted update
+The easiest way to proceed is to provide the target version to the upgrade script, with the `-t` parameter, like this:
+```bash
+\curl -sSL upgrade.fab.mn | bash -s -- -t 4.7.13
+```
+
+<a name="with-manual-update"></a>
+#### With manual update
+If you are upgrading manually, edit your [/apps/fabmanager/docker-compose.yml](../setup/docker-compose.yml#L4) file and change the following line:
 ```yaml
 image: sleede/fab-manager
 ```
