@@ -1,5 +1,9 @@
 # Changelog Fab-manager
 
+## v4.7.13 2020 June 11
+
+- Fix a bug: unable to process stripe payments with 3DS authentication
+
 ## v4.7.12 2021 June 09
 
 - Fix a bug: unable to process stripe payments
