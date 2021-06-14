@@ -19,10 +19,10 @@ class PayZen::Helper
     end
 
     ## generate an unique string reference for the content of a cart
-    def generate_ref(cart_items, customer, date = DateTime.current)
+    def generate_ref(cart_items, customer)
       require 'sha3'
 
-      content = { cart_items: cart_items, customer: customer }.to_json + date.to_s
+      content = { cart_items: cart_items, customer: customer }.to_json + DateTime.current.to_s
       # It's safe to truncate a hash. See https://crypto.stackexchange.com/questions/74646/sha3-255-one-bit-less
       SHA3::Digest.hexdigest(:sha224, content)[0...24]
     end
