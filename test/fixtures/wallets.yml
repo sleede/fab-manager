@@ -29,3 +29,7 @@ wallet_7:
 wallet_8:
   invoicing_profile_id: 8
   amount: 0
+
+wallet_9:
+  invoicing_profile_id: 9
+  amount: 0

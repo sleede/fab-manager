@@ -8,7 +8,7 @@ class API::PaymentSchedulesController < API::ApiController
 
   def index
     @payment_schedules = PaymentSchedule.where('invoicing_profile_id = ?', current_user.invoicing_profile.id)
-                                        .includes(:invoicing_profile, :payment_schedule_items, :subscription)
+                                        .includes(:invoicing_profile, :payment_schedule_items, :payment_schedule_objects)
                                         .joins(:invoicing_profile)
                                         .order('payment_schedules.created_at DESC')
                                         .page(params[:page])

@@ -1,5 +1,13 @@
 # Changelog Fab-manager
 
+## v5.0.3 2021 June 14
+
+- Updated user's manual for v5
+- Improved test coverage on payment schedules
+- Fix a bug: unable to process stripe payments with 3DS authentication
+- Fix a bug: unable to book an event
+- Fix a bug: unable to list user's payment schedules in the dashboard
+
 ## v5.0.2 2021 June 11
 
 - Ability to upgrade to a specific version with the script
@@ -52,6 +60,10 @@
 - [TODO DEPLOY] `rails fablab:stripe:set_gateway`
 - [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
 - [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/rename-adminsys.sh | bash`
+
+## v4.7.13 2020 June 11
+
+- Fix a bug: unable to process stripe payments with 3DS authentication
 
 ## v4.7.12 2021 June 09
 

@@ -53,3 +53,10 @@ atiermoulin:
   first_name: Amandine
   last_name: Tiermoulin
   email: a.tiermoulin@mail.fr
+
+proudhon:
+  id: 9
+  user_id: 9
+  first_name: Pierre-Joseph
+  last_name: Proudhon
+  email: pj.proudhon@la-propriete.org
