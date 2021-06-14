@@ -1,6 +1,9 @@
 # Changelog Fab-manager
 
+## v5.0.3 2021 June 14
+
 - Updated user's manual for v5
+- Improved test coverage on payment schedules
 - Fix a bug: unable to process stripe payments with 3DS authentication
 - Fix a bug: unable to book an event
 - Fix a bug: unable to list user's payment schedules in the dashboard
