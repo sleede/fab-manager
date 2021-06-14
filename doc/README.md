@@ -1,12 +1,20 @@
 # Fab-Manager's documentations
 
+##### Table of contents
+
+1. [User's manual](#users-manual)<br/>
+2. [System administrator](#system-administrator)<br/>
+2.1. [Upgrades procedures](#upgrades-procedures)<br/>
+3. [Translator's documentation](#translators-documentation)<br/>
+4. [Developer's documentation](#developers-documentation)<br/>
+4.1. [Architecture](#architecture)<br/>
+4.2. [How to setup a development environment](#how-to-setup-a-development-environment)<br/>
+4.3. [Externals](#externals)<br/>
+4.4. [Diagrams](#diagrams)<br/>
+
 ### User's manual
 The following guide describes what you can do and how to use Fab-manager.
- - [Français](fr/guide_utilisation_fab_manager_v4.7.pdf)
-
-### General documentation
-Translators, contributors, developers and system administrators should start by reading this document.
-- [Read first](../README.md)
+ - [Français](fr/guide_utilisation_fab_manager_v5.0.pdf)
 
 ### System administrator
 The following guides are designed for the people that perform software maintenance.
