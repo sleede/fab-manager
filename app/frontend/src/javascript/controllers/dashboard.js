@@ -12,72 +12,73 @@
  */
 'use strict';
 
-Application.Controllers.controller('DashboardController', ['$scope', 'memberPromise', 'trainingsPromise', 'SocialNetworks', function ($scope, memberPromise, trainingsPromise, SocialNetworks) {
-  // Current user's profile
-  $scope.user = memberPromise;
+Application.Controllers.controller('DashboardController', ['$scope', 'memberPromise', 'trainingsPromise', 'SocialNetworks', 'growl',
+  function ($scope, memberPromise, trainingsPromise, SocialNetworks, growl) {
+    // Current user's profile
+    $scope.user = memberPromise;
 
-  // List of social networks associated with this user and toggle 'show all' state
-  $scope.social = {
-    showAllLinks: false,
-    networks: SocialNetworks
-  };
+    // List of social networks associated with this user and toggle 'show all' state
+    $scope.social = {
+      showAllLinks: false,
+      networks: SocialNetworks
+    };
 
-  /**
-   * Check if the member has used his training credits for the given credit
-   * @param trainingCredits array of credits used by the member
-   * @param trainingId id of the training to find
-   */
-  $scope.hasUsedTrainingCredit = function (trainingCredits, trainingId) {
-    return trainingCredits.find(tc => tc.training_id === trainingId);
-  };
+    /**
+     * Check if the member has used his training credits for the given credit
+     * @param trainingCredits array of credits used by the member
+     * @param trainingId id of the training to find
+     */
+    $scope.hasUsedTrainingCredit = function (trainingCredits, trainingId) {
+      return trainingCredits.find(tc => tc.training_id === trainingId);
+    };
 
-  /**
-   * Return the name associated with the provided training ID
-   * @param trainingId training identifier
-   * @return {string}
-   */
-  $scope.getTrainingName = function (trainingId) {
-    return trainingsPromise.find(t => t.id === trainingId).name;
-  };
+    /**
+     * Return the name associated with the provided training ID
+     * @param trainingId training identifier
+     * @return {string}
+     */
+    $scope.getTrainingName = function (trainingId) {
+      return trainingsPromise.find(t => t.id === trainingId).name;
+    };
 
-  /* PRIVATE SCOPE */
+    /* PRIVATE SCOPE */
 
-  /**
-   * Kind of constructor: these actions will be realized first when the controller is loaded
-   */
-  const initialize = () => $scope.social.networks = filterNetworks();
+    /**
+     * Kind of constructor: these actions will be realized first when the controller is loaded
+     */
+    const initialize = () => $scope.social.networks = filterNetworks();
 
-  /**
-   * Filter the social networks or websites that are associated with the profile of the user provided in promise
-   * and return the filtered networks
-   * @return {Array}
-   */
-  const filterNetworks = function () {
-    const networks = [];
-    for (const network of Array.from(SocialNetworks)) {
-      if ($scope.user.profile[network] && ($scope.user.profile[network].length > 0)) {
-        networks.push(network);
+    /**
+     * Filter the social networks or websites that are associated with the profile of the user provided in promise
+     * and return the filtered networks
+     * @return {Array}
+     */
+    const filterNetworks = function () {
+      const networks = [];
+      for (const network of Array.from(SocialNetworks)) {
+        if ($scope.user.profile[network] && ($scope.user.profile[network].length > 0)) {
+          networks.push(network);
+        }
       }
-    }
-    return networks;
-  };
+      return networks;
+    };
 
-  /**
-   * Callback used in PaymentScheduleDashboard, in case of error
-   */
-  $scope.onError = function (message) {
-    growl.error(message);
-  };
+    /**
+     * Callback used in PaymentScheduleDashboard, in case of error
+     */
+    $scope.onError = function (message) {
+      growl.error(message);
+    };
 
-  /**
-   * Callback triggered when the user has successfully updated his card
-   */
-  $scope.onCardUpdateSuccess = function (message) {
-    growl.success(message);
-  };
+    /**
+     * Callback triggered when the user has successfully updated his card
+     */
+    $scope.onCardUpdateSuccess = function (message) {
+      growl.success(message);
+    };
 
-  // !!! MUST BE CALLED AT THE END of the controller
-  return initialize();
-}
+    // !!! MUST BE CALLED AT THE END of the controller
+    return initialize();
+  }
 
 ]);
