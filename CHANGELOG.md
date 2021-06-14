@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: a message tells that creating a new plan fails, but it worked
+
 ## v5.0.3 2021 June 14
 
 - Updated user's manual for v5
