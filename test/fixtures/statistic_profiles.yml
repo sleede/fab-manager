@@ -53,3 +53,10 @@ atiermoulin:
   gender: false
   birthday: 1985-09-01
   group_id: 1
+
+proudhon:
+  id: 9
+  user_id: 9
+  gender: true
+  birthday: 1809-01-15
+  group_id: 1

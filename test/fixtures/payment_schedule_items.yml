@@ -1,0 +1,168 @@
+payment_schedule_item_105:
+  id: 105
+  amount: 9474
+  due_date: '2021-06-14 12:24:45.836045'
+  state: paid
+  details: '{"recurring": 9466, "adjustment": 8, "other_items": 0}'
+  payment_method: card
+  client_secret:
+  payment_schedule_id: 12
+  invoice_id:
+  footprint: 6168dcf85b00be2b45a36bbb3217e8b965a179c37922962978960062eac4bec6
+  created_at: '2021-06-14 12:24:45.847551'
+  updated_at: '2021-06-14 13:00:41.302605'
+
+payment_schedule_item_106:
+  id: 106
+  amount: 9466
+  due_date: '2021-07-14 12:24:45.836332'
+  state: new
+  details: '{"recurring": 9466}'
+  payment_method:
+  client_secret:
+  payment_schedule_id: 12
+  invoice_id:
+  footprint: ada6f6afe6489919d193ff6030923c0d524294529f13374f9a57d5691e9669fd
+  created_at: '2021-06-14 12:24:45.855717'
+  updated_at: '2021-06-14 12:24:45.858475'
+
+
+payment_schedule_item_107:
+  id: 107
+  amount: 9466
+  due_date: '2021-08-14 12:24:45.836606'
+  state: new
+  details: '{"recurring": 9466}'
+  payment_method:
+  client_secret:
+  payment_schedule_id: 12
+  invoice_id:
+  footprint: 7ca8bf5648235c8a706a01c5e788939ad5cfcc66c26782127ed1ed766379b005
+  created_at: '2021-06-14 12:24:45.863237'
+  updated_at: '2021-06-14 12:24:45.865874'
+
+payment_schedule_item_108:
+  id: 108
+  amount: 9466
+  due_date: '2021-09-14 12:24:45.836767'
+  state: new
+  details: '{"recurring": 9466}'
+  payment_method:
+  client_secret:
+  payment_schedule_id: 12
+  invoice_id:
+  footprint: 9d4925443f1537e07258140930489565542e48c39e3f9e48dd982bfae64cb759
+  created_at: '2021-06-14 12:24:45.869357'
+  updated_at: '2021-06-14 12:24:45.872088'
+
+payment_schedule_item_109:
+  id: 109
+  amount: 9466
+  due_date: '2021-10-14 12:24:45.836900'
+  state: new
+  details: '{"recurring": 9466}'
+  payment_method:
+  client_secret:
+  payment_schedule_id: 12
+  invoice_id:
+  footprint: 157ff90f880ebc5532be14898da65dcfc227fa54aaadc37a1f123dbeefa32640
+  created_at: '2021-06-14 12:24:45.875500'
+  updated_at: '2021-06-14 12:24:45.879057'
+
+payment_schedule_item_110:
+  id: 110
+  amount: 9466
+  due_date: '2021-11-14 12:24:45.837025'
+  state: new
+  details: '{"recurring": 9466}'
+  payment_method:
+  client_secret:
+  payment_schedule_id: 12
+  invoice_id:
+  footprint: 9b162c2b342d8c82e9163202a22a405b879d4b2ad2409a61ad10942f743bc576
+  created_at: '2021-06-14 12:24:45.882343'
+  updated_at: '2021-06-14 12:24:45.884709'
+
+payment_schedule_item_111:
+  id: 111
+  amount: 9466
+  due_date: '2021-12-14 12:24:45.837025'
+  state: new
+  details: '{"recurring": 9466}'
+  payment_method:
+  client_secret:
+  payment_schedule_id: 12
+  invoice_id:
+  footprint: 9b162c2b342d8c82e9163202a22a405b879d4b2ad2409a61ad10942f743bc576
+  created_at: '2021-06-14 12:24:45.882343'
+  updated_at: '2021-06-14 12:24:45.884709'
+
+payment_schedule_item_112:
+  id: 112
+  amount: 9466
+  due_date: '2022-01-14 12:24:45.837025'
+  state: new
+  details: '{"recurring": 9466}'
+  payment_method:
+  client_secret:
+  payment_schedule_id: 12
+  invoice_id:
+  footprint: 9b162c2b342d8c82e9163202a22a405b879d4b2ad2409a61ad10942f743bc576
+  created_at: '2021-06-14 12:24:45.882343'
+  updated_at: '2021-06-14 12:24:45.884709'
+
+payment_schedule_item_113:
+  id: 113
+  amount: 9466
+  due_date: '2022-02-14 12:24:45.837025'
+  state: new
+  details: '{"recurring": 9466}'
+  payment_method:
+  client_secret:
+  payment_schedule_id: 12
+  invoice_id:
+  footprint: 9b162c2b342d8c82e9163202a22a405b879d4b2ad2409a61ad10942f743bc576
+  created_at: '2021-06-14 12:24:45.882343'
+  updated_at: '2021-06-14 12:24:45.884709'
+
+payment_schedule_item_114:
+  id: 114
+  amount: 9466
+  due_date: '2022-03-14 12:24:45.837025'
+  state: new
+  details: '{"recurring": 9466}'
+  payment_method:
+  client_secret:
+  payment_schedule_id: 12
+  invoice_id:
+  footprint: 9b162c2b342d8c82e9163202a22a405b879d4b2ad2409a61ad10942f743bc576
+  created_at: '2021-06-14 12:24:45.882343'
+  updated_at: '2021-06-14 12:24:45.884709'
+
+payment_schedule_item_115:
+  id: 115
+  amount: 9466
+  due_date: '2022-04-14 12:24:45.837025'
+  state: new
+  details: '{"recurring": 9466}'
+  payment_method:
+  client_secret:
+  payment_schedule_id: 12
+  invoice_id:
+  footprint: 9b162c2b342d8c82e9163202a22a405b879d4b2ad2409a61ad10942f743bc576
+  created_at: '2021-06-14 12:24:45.882343'
+  updated_at: '2021-06-14 12:24:45.884709'
+
+payment_schedule_item_116:
+  id: 116
+  amount: 9466
+  due_date: '2022-05-14 12:24:45.837025'
+  state: new
+  details: '{"recurring": 9466}'
+  payment_method:
+  client_secret:
+  payment_schedule_id: 12
+  invoice_id:
+  footprint: 9b162c2b342d8c82e9163202a22a405b879d4b2ad2409a61ad10942f743bc576
+  created_at: '2021-06-14 12:24:45.882343'
+  updated_at: '2021-06-14 12:24:45.884709'
