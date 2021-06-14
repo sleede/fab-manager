@@ -23,6 +23,10 @@ class PaymentGatewayService
     @gateway.create_subscription(payment_schedule, gateway_object_id)
   end
 
+  def create_user(user_id)
+    @gateway.create_user(user_id)
+  end
+
   def create_coupon(coupon_id)
     @gateway.create_coupon(coupon_id)
   end

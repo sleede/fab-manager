@@ -53,7 +53,7 @@ class User < ApplicationRecord
   end
 
   before_create :assign_default_role
-  after_commit :create_stripe_customer, on: [:create]
+  after_commit :create_gateway_customer, on: [:create]
   after_commit :notify_admin_when_user_is_created, on: :create
   after_create :init_dependencies
   after_update :notify_group_changed, if: :saved_change_to_group_id?
@@ -366,8 +366,8 @@ class User < ApplicationRecord
     errors.add(:cgu, I18n.t('activerecord.errors.messages.empty')) if cgu == '0'
   end
 
-  def create_stripe_customer
-    StripeWorker.perform_async(:create_stripe_customer, id)
+  def create_gateway_customer
+    PaymentGatewayService.new.create_user(id)
   end
 
   def send_devise_notification(notification, *args)

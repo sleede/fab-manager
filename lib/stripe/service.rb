@@ -49,6 +49,10 @@ class Stripe::Service < Payment::Service
     pgo.save!
   end
 
+  def create_user(user_id)
+    StripeWorker.perform_async(:create_stripe_customer, user_id)
+  end
+
   def create_coupon(coupon_id)
     coupon = Coupon.find(coupon_id)
     stp_coupon = { id: coupon.code }
