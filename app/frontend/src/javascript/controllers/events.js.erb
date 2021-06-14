@@ -633,7 +633,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
      * Create a hash map implementing the Reservation specs
      * @param reserve {Object} Reservation parameters (places...)
      * @param event {Object} Current event
-     * @return {{reservable_id:number, reservable_type:string, slots_attributes:Array<Object>, nb_reserve_places:number}}
+     * @return {{reservation: {reservable_id:number, reservable_type:string, slots_attributes:Array<Object>, nb_reserve_places:number}}}
      */
     const mkReservation = function (reserve, event) {
       const reservation = {
@@ -661,7 +661,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
         }
       }
 
-      return reservation;
+      return { reservation };
     };
 
     /**

@@ -2,6 +2,7 @@
 
 - Updated user's manual for v5
 - Fix a bug: unable to process stripe payments with 3DS authentication
+- Fix a bug: unable to book an event
 
 ## v5.0.2 2021 June 11
 
