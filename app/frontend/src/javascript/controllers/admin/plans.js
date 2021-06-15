@@ -87,6 +87,8 @@ Application.Controllers.controller('NewPlanController', ['$scope', '$uibModal', 
 
     // list of all plan categories
     $scope.planCategories = planCategories;
+    // we add an empty element to let the user select 'no category'
+    $scope.planCategories.unshift({ id: null, name: '' });
 
     // prices bindings
     $scope.prices = {
@@ -239,6 +241,8 @@ Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'p
 
     // list of all plan categories
     $scope.planCategories = planCategories;
+    // we add an empty element to let the user select 'no category'
+    $scope.planCategories.unshift({ id: null, name: '' });
 
     // current form is used for edition mode
     $scope.mode = 'edition';

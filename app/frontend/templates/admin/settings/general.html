@@ -518,6 +518,14 @@
                          classes="m-l"></boolean-setting>
     </div>
     <div class="row">
+      <h3 class="m-l" translate>{{ 'app.admin.settings.general.public_agenda' }}</h3>
+      <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.general.public_agenda_info_html' | translate"></p>
+      <boolean-setting name="public_agenda_module"
+                       settings="allSettings"
+                       label="app.admin.settings.general.enable_public_agenda"
+                       classes="m-l"></boolean-setting>
+    </div>
+    <div class="row">
         <h3 class="m-l" translate>{{ 'app.admin.settings.general.statistics' }}</h3>
         <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.general.statistics_info_html' | translate"></p>
         <boolean-setting name="statistics_module"

@@ -38,7 +38,7 @@ angular.module('application.router', ['ui.router'])
           logoFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'logo-file' }).$promise; }],
           logoBlackFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'logo-black-file' }).$promise; }],
           sharedTranslations: ['Translations', function (Translations) { return Translations.query(['app.shared', 'app.public.common']).$promise; }],
-          modulesPromise: ['Setting', function (Setting) { return Setting.query({ names: "['spaces_module', 'plans_module', 'invoicing_module', 'wallet_module', 'statistics_module', 'trainings_module']" }).$promise; }]
+          modulesPromise: ['Setting', function (Setting) { return Setting.query({ names: "['spaces_module', 'plans_module', 'invoicing_module', 'wallet_module', 'statistics_module', 'trainings_module', 'public_agenda_module']" }).$promise; }]
         },
         onEnter: ['$rootScope', 'logoFile', 'logoBlackFile', 'modulesPromise', 'CSRF', function ($rootScope, logoFile, logoBlackFile, modulesPromise, CSRF) {
           // Retrieve Anti-CSRF tokens from cookies
@@ -52,6 +52,7 @@ angular.module('application.router', ['ui.router'])
             trainings: (modulesPromise.trainings_module === 'true'),
             invoicing: (modulesPromise.invoicing_module === 'true'),
             wallet: (modulesPromise.wallet_module === 'true'),
+            publicAgenda: (modulesPromise.public_agenda_module === 'true'),
             statistics: (modulesPromise.statistics_module === 'true')
           };
         }]
@@ -570,6 +571,7 @@ angular.module('application.router', ['ui.router'])
       // global calendar (trainings, machines and events)
       .state('app.public.calendar', {
         url: '/calendar',
+        abstract: !Fablab.publicAgendaModule,
         views: {
           'main@': {
             templateUrl: '/calendar/calendar.html',
@@ -780,7 +782,8 @@ angular.module('application.router', ['ui.router'])
           spacesPromise: ['Space', function (Space) { return Space.query().$promise; }],
           spacesPricesPromise: ['Price', function (Price) { return Price.query({ priceable_type: 'Space', plan_id: 'null' }).$promise; }],
           spacesCreditsPromise: ['Credit', function (Credit) { return Credit.query({ creditable_type: 'Space' }).$promise; }],
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['feature_tour_display', 'slot_duration']" }).$promise; }]
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['feature_tour_display', 'slot_duration']" }).$promise; }],
+          planCategories: ['PlanCategory', function (PlanCategory) { return PlanCategory.query().$promise; }]
         }
       })
 
@@ -1077,7 +1080,7 @@ angular.module('application.router', ['ui.router'])
                      "'fablab_name', 'name_genre', 'reminder_enable', 'plans_module', 'confirmation_required', " +
                      "'reminder_delay', 'visibility_yearly', 'visibility_others', 'wallet_module', 'trainings_module', " +
                      "'display_name_enable', 'machines_sort_by', 'fab_analytics', 'statistics_module', 'address_required', " +
-                     "'link_name', 'home_content', 'home_css', 'phone_required', 'upcoming_events_shown']"
+                     "'link_name', 'home_content', 'home_css', 'phone_required', 'upcoming_events_shown', 'public_agenda_module']"
             }).$promise;
           }],
           privacyDraftsPromise: ['Setting', function (Setting) { return Setting.get({ name: 'privacy_draft', history: true }).$promise; }],

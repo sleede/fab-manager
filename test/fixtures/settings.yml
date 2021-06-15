@@ -497,3 +497,8 @@ setting_84:
   created_at: 2020-04-15 14:38:40.000421500 Z
   updated_at: 2020-04-15 14:38:40.000421500 Z
 
+setting_85:
+  id: 85
+  name: public_agenda_module
+  created_at: 2020-04-15 14:38:40.000421500 Z
+  updated_at: 2020-04-15 14:38:40.000421500 Z

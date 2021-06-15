@@ -1,5 +1,16 @@
 # Changelog Fab-manager
 
+## v5.0.4 2021 June 15
+
+- Ability to disable the public agenda
+- Display the category in the plans list
+- Do not display the type in the plans list
+- Updated medium-editor to v5 and angular-medium-editor accordingly
+- Fix a bug: a message tells that creating a new plan fails, but it worked
+- Fix a bug: unable to select no category in plan creation/edition after a category selection 
+- Fix a bug: the training validation modal shows cancelled trainings 
+- [TODO DEPLOY] `rails db:seed`
+
 ## v5.0.3 2021 June 14
 
 - Updated user's manual for v5
