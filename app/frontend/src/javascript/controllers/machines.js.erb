@@ -112,14 +112,14 @@ const _reserveMachine = function (machine, e) {
   return machine = _this.Machine.get({ id: machine.id }, function () {
     // if the currently logged'in user has completed the training for this machine, or this machine does not require
     // a prior training, just redirect him to the machine's booking page
-    if (machine.current_user_is_training || (machine.trainings.length === 0)) {
+    if (machine.current_user_is_trained || (machine.trainings.length === 0)) {
       return _this.$state.go('app.logged.machines_reserve', { id: machine.slug });
     } else {
       // otherwise, if a user is authenticated ...
       if (_this.$scope.isAuthenticated()) {
         // ... and have booked a training for this machine, tell him that he must wait for an admin to validate
         // the training before he can book the reservation
-        if (machine.current_user_training_reservation) {
+        if (machine.current_user_next_training_reservation) {
           return _this.$uibModal.open({
             templateUrl: '/machines/training_reservation_modal.html',
             controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {

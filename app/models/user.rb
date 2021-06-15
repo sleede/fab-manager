@@ -127,8 +127,14 @@ class User < ApplicationRecord
     trainings.map(&:machines).flatten.uniq.include?(machine)
   end
 
-  def training_reservation_by_machine(machine)
-    reservations.where(reservable_type: 'Training', reservable_id: machine.trainings.map(&:id)).first
+  def next_training_reservation_by_machine(machine)
+    reservations.where(reservable_type: 'Training', reservable_id: machine.trainings.map(&:id))
+                .includes(:slots)
+                .where('slots.start_at>= ?', DateTime.current)
+                .order('slots.start_at': :asc)
+                .references(:slots)
+                .limit(1)
+                .first
   end
 
   def subscribed_plan
