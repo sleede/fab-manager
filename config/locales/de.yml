@@ -525,3 +525,4 @@ de:
     payzen_public_key: "PayZen client public key"
     payzen_hmac: "PayZen HMAC-SHA-256 key"
     payzen_currency: "PayZen currency"
+    public_agenda_module: "Public agenda module"
