@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: during the upgrade, unable to detect the target when not explicitly specified
+
 ## v5.0.4 2021 June 15
 
 - Ability to disable the public agenda
