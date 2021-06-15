@@ -303,7 +303,7 @@ de:
         name: "Name"
         duration: "Dauer"
         group: "Gruppe"
-        category: "Category"
+        category: "Kategorie"
         prominence: "Hervorhebung"
         price: "Preis"
         machine_hours: "Maschinen-Slots"
