@@ -107,7 +107,8 @@ export enum SettingName {
   PayZenEndpoint = 'payzen_endpoint',
   PayZenPublicKey = 'payzen_public_key',
   PayZenHmacKey = 'payzen_hmac',
-  PayZenCurrency = 'payzen_currency'
+  PayZenCurrency = 'payzen_currency',
+  PublicAgendaModule = 'public_agenda_module'
 }
 
 export interface Setting {

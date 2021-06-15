@@ -24,12 +24,6 @@ Application.Controllers.controller('MainNavController', ['$scope', function ($sc
     },
     { class: 'menu-spacer' },
     {
-      state: 'app.public.calendar',
-      linkText: 'app.public.common.public_calendar',
-      linkIcon: 'calendar',
-      class: 'public-calendar-link'
-    },
-    {
       state: 'app.public.machines_list',
       linkText: 'app.public.common.reserve_a_machine',
       linkIcon: 'cogs',
@@ -76,6 +70,15 @@ Application.Controllers.controller('MainNavController', ['$scope', function ($sc
       linkText: 'app.public.common.reserve_a_space',
       linkIcon: 'rocket',
       class: 'reserve-space-link'
+    });
+  }
+
+  if ($scope.$root.modules.publicAgenda) {
+    $scope.navLinks.splice(2, 0, {
+      state: 'app.public.calendar',
+      linkText: 'app.public.common.public_calendar',
+      linkIcon: 'calendar',
+      class: 'public-calendar-link'
     });
   }
 
