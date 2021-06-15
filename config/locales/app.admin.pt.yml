@@ -303,7 +303,7 @@ pt:
         name: "Nome"
         duration: "Duração"
         group: "Grupo"
-        category: "Category"
+        category: "Categoria"
         prominence: "Relevância"
         price: "Preço"
         machine_hours: "Slots de máquina"
