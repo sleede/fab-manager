@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v5.0.4 2021 June 15
+
 - Ability to disable the public agenda
 - Display the category in the plans list
 - Do not display the type in the plans list
