@@ -1488,9 +1488,10 @@ angular-loading-bar@^0.9.0:
   resolved "https://registry.yarnpkg.com/angular-loading-bar/-/angular-loading-bar-0.9.0.tgz#37ef52c25f102c216e7b3cdfd2fc5a5df9628e45"
   integrity sha1-N+9Swl8QLCFuezzf0vxaXflijkU=
 
-"angular-medium-editor@https://github.com/thijsw/angular-medium-editor.git#0.1.1":
-  version "0.1.1"
-  resolved "https://github.com/thijsw/angular-medium-editor.git#1683d0f4ada6e4e0011c4372335c702df9680fde"
+angular-medium-editor@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/angular-medium-editor/-/angular-medium-editor-1.2.1.tgz#3f336d0fffb26f0948e49b6cf50682f8b90d68fa"
+  integrity sha1-PzNtD/+ybwlI5Jts9QaC+LkNaPo=
 
 "angular-minicolors@https://github.com/kaihenzler/angular-minicolors.git#0.0.5":
   version "0.0.0"
@@ -5240,10 +5241,10 @@ media-typer@0.3.0:
   resolved "https://registry.yarnpkg.com/media-typer/-/media-typer-0.3.0.tgz#8710d7af0aa626f8fffa1ce00168545263255748"
   integrity sha1-hxDXrwqmJvj/+hzgAWhUUmMlV0g=
 
-medium-editor@4.4.0:
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/medium-editor/-/medium-editor-4.4.0.tgz#ef188cc9cc5cba87177da8cb657a885dfbbe5760"
-  integrity sha1-7xiMycxcuocXfajLZXqIXfu+V2A=
+medium-editor@^5.23.3:
+  version "5.23.3"
+  resolved "https://registry.yarnpkg.com/medium-editor/-/medium-editor-5.23.3.tgz#6fb638759ae2fc76c423feb056f346d9c518d3b7"
+  integrity sha512-he9/TdjX8f8MGdXGfCs8AllrYnqXJJvjNkDKmPg3aPW/uoIrlRqtkFthrwvmd+u4QyzEiadhCCM0EwTiRdUCJw==
 
 memoize-one@^5.0.0:
   version "5.2.1"
