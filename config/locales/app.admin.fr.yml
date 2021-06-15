@@ -303,7 +303,7 @@ fr:
         name: "Nom"
         duration: "Durée"
         group: "Groupe"
-        category: "Category"
+        category: "Catégorie"
         prominence: "Importance"
         price: "Prix"
         machine_hours: "Créneaux machines"
