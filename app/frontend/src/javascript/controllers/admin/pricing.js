@@ -18,8 +18,8 @@
 /**
  * Controller used in the prices edition page
  */
-Application.Controllers.controller('EditPricingController', ['$scope', '$state', '$uibModal', '$filter', 'TrainingsPricing', 'Credit', 'Pricing', 'Plan', 'Coupon', 'plans', 'groups', 'growl', 'machinesPricesPromise', 'Price', 'dialogs', 'trainingsPricingsPromise', 'trainingsPromise', 'machineCreditsPromise', 'machinesPromise', 'trainingCreditsPromise', 'couponsPromise', 'spacesPromise', 'spacesPricesPromise', 'spacesCreditsPromise', 'settingsPromise', '_t', 'Member', 'uiTourService',
-  function ($scope, $state, $uibModal, $filter, TrainingsPricing, Credit, Pricing, Plan, Coupon, plans, groups, growl, machinesPricesPromise, Price, dialogs, trainingsPricingsPromise, trainingsPromise, machineCreditsPromise, machinesPromise, trainingCreditsPromise, couponsPromise, spacesPromise, spacesPricesPromise, spacesCreditsPromise, settingsPromise, _t, Member, uiTourService) {
+Application.Controllers.controller('EditPricingController', ['$scope', '$state', '$uibModal', '$filter', 'TrainingsPricing', 'Credit', 'Pricing', 'Plan', 'Coupon', 'plans', 'groups', 'growl', 'machinesPricesPromise', 'Price', 'dialogs', 'trainingsPricingsPromise', 'trainingsPromise', 'machineCreditsPromise', 'machinesPromise', 'trainingCreditsPromise', 'couponsPromise', 'spacesPromise', 'spacesPricesPromise', 'spacesCreditsPromise', 'settingsPromise', '_t', 'Member', 'uiTourService', 'planCategories',
+  function ($scope, $state, $uibModal, $filter, TrainingsPricing, Credit, Pricing, Plan, Coupon, plans, groups, growl, machinesPricesPromise, Price, dialogs, trainingsPricingsPromise, trainingsPromise, machineCreditsPromise, machinesPromise, trainingCreditsPromise, couponsPromise, spacesPromise, spacesPricesPromise, spacesCreditsPromise, settingsPromise, _t, Member, uiTourService, planCategories) {
     /* PUBLIC SCOPE */
 
     // List of machines prices (not considering any plan)
@@ -35,6 +35,9 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
     // List of groups (eg. normal, student ...)
     $scope.groups = groups.filter(function (g) { return g.slug !== 'admins'; });
     $scope.enabledGroups = groups.filter(function (g) { return (g.slug !== 'admins') && !g.disabled; });
+
+    // List of all plan-categories
+    $scope.planCategories = planCategories;
 
     // Associate free machine hours with subscriptions
     $scope.machineCredits = machineCreditsPromise;
@@ -433,14 +436,15 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
     };
 
     /**
-     * If the plan does not have a type, return a default value for display purposes
-     * @param type {string|undefined|null} plan's type (eg. 'partner')
-     * @returns {string}
+     * Return the name of the plan-category, from its ID
+     * @param id {number|undefined} plan-category's id
+     * @returns {string} the name
      */
-    $scope.getPlanType = function (type) {
-      if (type === 'PartnerPlan') {
-        return _t('app.admin.pricing.partner');
-      } else { return _t('app.admin.pricing.standard'); }
+    $scope.getPlanCategory = function (id) {
+      const cat = $scope.planCategories.find(c => c.id === id);
+      if (cat) {
+        return cat.name;
+      }
     };
 
     /**

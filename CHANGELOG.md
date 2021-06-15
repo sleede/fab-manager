@@ -1,6 +1,9 @@
 # Changelog Fab-manager
 
+- Display the category in the plans list
+- Do not display the type in the plans list
 - Fix a bug: a message tells that creating a new plan fails, but it worked
+- Fix a bug: unable to select no category in plan creation/edition after a category selection 
 
 ## v5.0.3 2021 June 14
 

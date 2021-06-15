@@ -780,7 +780,8 @@ angular.module('application.router', ['ui.router'])
           spacesPromise: ['Space', function (Space) { return Space.query().$promise; }],
           spacesPricesPromise: ['Price', function (Price) { return Price.query({ priceable_type: 'Space', plan_id: 'null' }).$promise; }],
           spacesCreditsPromise: ['Credit', function (Credit) { return Credit.query({ creditable_type: 'Space' }).$promise; }],
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['feature_tour_display', 'slot_duration']" }).$promise; }]
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['feature_tour_display', 'slot_duration']" }).$promise; }],
+          planCategories: ['PlanCategory', function (PlanCategory) { return PlanCategory.query().$promise; }]
         }
       })
 
