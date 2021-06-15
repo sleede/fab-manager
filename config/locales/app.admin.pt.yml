@@ -1167,6 +1167,7 @@ pt:
         confirmation_required_info: "Opcionalmente, você pode forçar os usuários a confirmar o endereço de e-mail deles antes de poder acessar o Fab-manager."
         confirmation_is_required: "Confirmação obrigatória"
         wallet_module: "módulo de carteira"
+        public_agenda_module: "public agenda module"
         statistics_module: "módulo de estatísticas"
         upcoming_events_shown: "exibir limite para eventos futuros"
         general:
@@ -1205,6 +1206,9 @@ pt:
           wallet: "Carteira"
           wallet_info_html: "<p>A carteira virtual permite alocar uma soma de dinheiro aos usuários. Em seguida, pode gastar esse dinheiro como quiserem, no Fab-manager.</p><p>Membros não podem creditar suas carteiras, é um privilégio de gerentes e administradores.</p>"
           enable_wallet: "Habilitar Carteira"
+          public_agenda: "Public agenda"
+          public_agenda_info_html: "<p>The public agenda offers to members and visitors a general overview of the Fablab's planning.</p><p>Please note that, even logged, users won't be able to book a reservation or modify anything from this agenda: this is a read-only page.</p>"
+          enable_public_agenda: "Enable public agenda"
           statistics: "Estatísticas"
           statistics_info_html: "<p>Ativar ou desativar módulo de estatísticas.</p><p>Se ativado, todas as noites, os dados do dia que acabou de ser passado serão consolidados na base de dados de um poderoso motor de análise. Então, todos os administradores poderão navegar em gráficos estatísticos e tabelas na seção correspondente.</p>"
           enable_statistics: "Habilitar estatísticas"
