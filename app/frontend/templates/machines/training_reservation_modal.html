@@ -3,7 +3,7 @@
 </div>
 <div class="modal-body">
   <p translate> {{ 'app.shared.training_reservation_modal.you_must_wait_for_your_training_is_being_validated_by_the_fablab_team_to_book_this_machine' }}</p>
-  <p>{{ 'app.shared.training_reservation_modal.your_training_will_occur_' | translate }} <span class="sbold">{{machine.current_user_training_reservation.slots[0].start_at | amDateFormat: 'LL'}} : {{machine.current_user_training_reservation.slots[0].start_at | amDateFormat:'LT'}} - {{machine.current_user_training_reservation.slots[0].end_at | amDateFormat:'LT'}}</span></p>
+  <p>{{ 'app.shared.training_reservation_modal.your_training_will_occur_' | translate }} <span class="sbold">{{machine.current_user_training_reservation.slots_attributes[0].start_at | amDateFormat: 'LL'}} : {{machine.current_user_training_reservation.slots_attributes[0].start_at | amDateFormat:'LT'}} - {{machine.current_user_training_reservation.slots_attributes[0].end_at | amDateFormat:'LT'}}</span></p>
 </div>
 <div class="modal-footer">
   <button class="btn btn-warning" ng-click="cancel()" translate>{{ 'app.shared.buttons.close' }}</button>
