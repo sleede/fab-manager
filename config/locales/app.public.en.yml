@@ -213,6 +213,9 @@ en:
         status_enabled: "Enabled"
         status_disabled: "Disabled"
         status_all: "All"
+      machine_card:
+        book: "Book"
+        consult: "Consult"
       #details of a machine
       machines_show:
         book_this_machine: "Book this machine"
