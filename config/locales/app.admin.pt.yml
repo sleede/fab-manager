@@ -1325,7 +1325,7 @@ pt:
       tour:
         conclusion:
           title: "Obrigado pela sua atenção"
-          content: "<p>If you want to restart this contextual help, press <strong>F1</strong> at any time or click on [? Help] from the user's menu.</p><p>If you need additional help, you can <a href='http://guide-fr.fab.mn' target='_blank'>check the user guide</a> (only in French for now).</p><p>The Fab-manager's team also provides personalized support (help with getting started, help with installation, customization, etc.), <a href='mailto:contact@fab-manager.com'>contact-us</a> for more info.</p>"
+          content: "<p>Se você deseja reiniciar esta ajuda contextual, pressione <strong>F1</strong> a qualquer momento ou clique em [? Ajuda] do menu do usuário.</p><p>Se precisar de ajuda adicional, você pode <a href='http://guide-fr.fab.mn' target='_blank'>verificar o guia do usuário</a> (apenas em francês por enquanto).</p><p>A equipe do Fab-Gerente também fornece suporte personalizado (ajuda para começar, ajuda com a instalação, personalização, etc.), <a href='mailto:contact@fab-manager.com'>contacte-nos</a> para mais informações.</p>"
         trainings:
           welcome:
             title: "Treinamentos"
