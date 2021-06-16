@@ -3,6 +3,7 @@
 - Fix a bug: during the upgrade, unable to detect the target when not explicitly specified
 - Fix a bug: unable to sync users on stripe if one of them have an invalid email address
 - Fix a bug: unable to book a free event
+- Fix a bug: can't see the dates for the next booked training session, when the user is reserving a machine without the appropriate training
 
 ## v5.0.4 2021 June 15
 
