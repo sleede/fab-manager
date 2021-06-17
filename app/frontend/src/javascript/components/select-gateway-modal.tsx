@@ -27,9 +27,6 @@ interface SelectGatewayModalModalProps {
   onSuccess: (results: Map<SettingName, SettingBulkResult>) => void,
 }
 
-// initial request to the API
-const paymentGateway = SettingAPI.get(SettingName.PaymentGateway);
-
 const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isOpen, toggleModal, onError, onSuccess }) => {
   const { t } = useTranslation('admin');
 
@@ -37,9 +34,11 @@ const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isOpen, to
   const [selectedGateway, setSelectedGateway] = useState<string>('');
   const [gatewayConfig, setGatewayConfig] = useState<Map<SettingName, string>>(new Map());
 
+  // request the configured gateway to the API
   useEffect(() => {
-    const gateway = paymentGateway.read();
-    setSelectedGateway(gateway.value ? gateway.value  : '');
+    SettingAPI.get(SettingName.PaymentGateway).then(gateway => {
+      setSelectedGateway(gateway.value ? gateway.value  : '');
+    })
   }, []);
 
   /**
@@ -101,8 +100,7 @@ const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isOpen, to
     const settings = new Map<SettingName, string>(gatewayConfig);
     settings.set(SettingName.PaymentGateway, selectedGateway);
 
-    const api = new SettingAPI();
-    api.bulkUpdate(settings, true).then(result => {
+    SettingAPI.bulkUpdate(settings, true).then(result => {
       const errorResults = Array.from(result.values()).filter(item => !item.status);
       if (errorResults.length > 0) {
         onError(errorResults.map(item => item.error[0]).join(' '));

@@ -43,8 +43,7 @@ const StripeKeysFormComponent: React.FC<StripeKeysFormProps> = ({ onValidKeys, o
   useEffect(() => {
     mounted.current = true;
 
-    const api = new SettingAPI();
-    api.query([SettingName.StripePublicKey, SettingName.StripeSecretKey]).then(stripeKeys => {
+    SettingAPI.query([SettingName.StripePublicKey, SettingName.StripeSecretKey]).then(stripeKeys => {
       setPublicKey(stripeKeys.get(SettingName.StripePublicKey));
       setSecretKey(stripeKeys.get(SettingName.StripeSecretKey));
     }).catch(error => console.error(error));

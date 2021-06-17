@@ -41,8 +41,11 @@
          ui-tour-scroll-parent-id="content-main"
          post-render="setupMachinesTour">
 
-  <machines-list on-show-machine="showMachine"
-                 on-reserve-machine="reserveMachine">
+  <machines-list user="currentUser"
+                 on-error="onError"
+                 on-show-machine="showMachine"
+                 on-reserve-machine="reserveMachine"
+                 on-login-requested="onLoginRequest">
   </machines-list>
 
 </section>

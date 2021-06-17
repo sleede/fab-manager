@@ -5,6 +5,36 @@
   margin: 0 15px 30px;
   width: 30%;
   min-width: 263px;
+  position: relative;
+
+  &.loading::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(29, 29, 29, 0.5);
+    border-radius: 6px;
+    margin: -1px;
+  }
+
+  &.loading::after {
+    content: '\f1ce';
+    font-family: 'Font Awesome 5 Free';
+    text-align: center;
+    font-weight: 900;
+    position: absolute;
+    left: 41%;
+    font-size: 4em;
+    top: 35%;
+    color: white;
+    animation: spin 2s linear infinite;
+  }
+
+  @keyframes spin {
+    100% { transform: rotate(360deg);}
+  }
 
   @media screen and (max-width: 1219px) {
     width: 45%;

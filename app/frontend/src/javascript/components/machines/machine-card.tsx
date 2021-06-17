@@ -1,29 +1,35 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { Machine } from '../../models/machine';
 import { useTranslation } from 'react-i18next';
 import { Loader } from '../base/loader';
+import { ReserveButton } from './reserve-button';
+import { User } from '../../models/user';
 
 interface MachineCardProps {
+  user?: User,
   machine: Machine,
   onShowMachine: (machine: Machine) => void,
   onReserveMachine: (machine: Machine) => void,
+  onLoginRequested: () => Promise<User>,
+  onError: (message: string) => void,
 }
 
 /**
  * This component is a box showing the picture of the given machine and two buttons: one to start the reservation process
  * and another to redirect the user to the machine description page.
  */
-const MachineCardComponent: React.FC<MachineCardProps> = ({ machine, onShowMachine, onReserveMachine }) => {
+const MachineCardComponent: React.FC<MachineCardProps> = ({ user, machine, onShowMachine, onReserveMachine, onError, onLoginRequested }) => {
   const { t } = useTranslation('public');
 
+  // shall we display a loader to prevent double-clicking, while the machine details are loading?
+  const [loading, setLoading] = useState<boolean>(false);
+
   /**
-   * Callback triggered when the user clicks on the 'reserve' button.
-   * We handle the training verification process here, before redirecting the user to the reservation calendar.
+   * Callback triggered when the user clicks on the 'reserve' button and has passed all the verifications
    */
   const handleReserveMachine = (): void => {
     onReserveMachine(machine);
   }
-
   /**
    * Callback triggered when the user clicks on the 'view' button
    */
@@ -49,16 +55,23 @@ const MachineCardComponent: React.FC<MachineCardProps> = ({ machine, onShowMachi
   }
 
   return (
-    <div className="machine-card">
+    <div className={`machine-card ${loading ? 'loading' : ''}`}>
       {machinePicture()}
       <div className="machine-name">
         {machine.name}
       </div>
       <div className="machine-actions">
-        {!machine.disabled && <button onClick={handleReserveMachine} className="reserve-button">
+        {!machine.disabled && <ReserveButton currentUser={user}
+                                             machineId={machine.id}
+                                             onLoadingStart={() => setLoading(true)}
+                                             onLoadingEnd={() => setLoading(false)}
+                                             onError={onError}
+                                             onReserveMachine={handleReserveMachine}
+                                             onLoginRequested={onLoginRequested}
+                                             className="reserve-button">
           <i className="fas fa-bookmark" />
           {t('app.public.machine_card.book')}
-        </button>}
+        </ReserveButton>}
         <button onClick={handleShowMachine} className={`show-button ${machine.disabled ? 'single-button': ''}`}>
           <i className="fas fa-eye" />
           {t('app.public.machine_card.consult')}
@@ -69,10 +82,10 @@ const MachineCardComponent: React.FC<MachineCardProps> = ({ machine, onShowMachi
 }
 
 
-export const MachineCard: React.FC<MachineCardProps> = ({ machine, onShowMachine, onReserveMachine }) => {
+export const MachineCard: React.FC<MachineCardProps> = ({ user, machine, onShowMachine, onReserveMachine, onError, onLoginRequested }) => {
   return (
     <Loader>
-      <MachineCardComponent machine={machine} onShowMachine={onShowMachine} onReserveMachine={onReserveMachine} />
+      <MachineCardComponent user={user} machine={machine} onShowMachine={onShowMachine} onReserveMachine={onReserveMachine} onError={onError} onLoginRequested={onLoginRequested} />
     </Loader>
   );
 }

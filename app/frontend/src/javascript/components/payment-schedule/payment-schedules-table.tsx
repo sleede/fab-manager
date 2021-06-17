@@ -222,8 +222,7 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
    * After the user has confirmed that he wants to cash the check, update the API, refresh the list and close the modal.
    */
   const onCheckCashingConfirmed = (): void => {
-    const api = new PaymentScheduleAPI();
-    api.cashCheck(tempDeadline.id).then((res) => {
+    PaymentScheduleAPI.cashCheck(tempDeadline.id).then((res) => {
       if (res.state === PaymentScheduleItemState.Paid) {
         refreshSchedulesTable();
         toggleConfirmCashingModal();
@@ -267,8 +266,7 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
    */
   const afterAction = (): void => {
     toggleConfirmActionButton();
-    const api = new PaymentScheduleAPI();
-    api.refreshItem(tempDeadline.id).then(() => {
+    PaymentScheduleAPI.refreshItem(tempDeadline.id).then(() => {
       refreshSchedulesTable();
       toggleResolveActionModal();
     });
@@ -304,8 +302,7 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
    */
   const handleCardUpdateSuccess = (): void => {
     if (tempDeadline) {
-      const api = new PaymentScheduleAPI();
-      api.payItem(tempDeadline.id).then(() => {
+      PaymentScheduleAPI.payItem(tempDeadline.id).then(() => {
         refreshSchedulesTable();
         onCardUpdateSuccess();
         toggleUpdateCardModal();
@@ -347,8 +344,7 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
    * When the user has confirmed the cancellation, we transfer the request to the API
    */
   const onCancelSubscriptionConfirmed = (): void => {
-    const api = new PaymentScheduleAPI();
-    api.cancel(tempSchedule.id).then(() => {
+    PaymentScheduleAPI.cancel(tempSchedule.id).then(() => {
       refreshSchedulesTable();
       toggleCancelSubscriptionModal();
     });

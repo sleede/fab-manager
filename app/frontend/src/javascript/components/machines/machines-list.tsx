@@ -6,19 +6,22 @@ import { Loader } from '../base/loader';
 import MachineAPI from '../../api/machine';
 import { MachineCard } from './machine-card';
 import { MachinesFilters } from './machines-filters';
+import { User } from '../../models/user';
 
 declare var Application: IApplication;
 
 interface MachinesListProps {
+  user?: User,
   onError: (message: string) => void,
   onShowMachine: (machine: Machine) => void,
   onReserveMachine: (machine: Machine) => void,
+  onLoginRequested: () => Promise<User>,
 }
 
 /**
  * This component shows a list of all machines and allows filtering on that list.
  */
-const MachinesList: React.FC<MachinesListProps> = ({ onError, onShowMachine, onReserveMachine }) => {
+const MachinesList: React.FC<MachinesListProps> = ({ onError, onShowMachine, onReserveMachine, onLoginRequested, user }) => {
   // shown machines
   const [machines, setMachines] = useState<Array<Machine>>(null);
   // we keep the full list of machines, for filtering
@@ -52,7 +55,13 @@ const MachinesList: React.FC<MachinesListProps> = ({ onError, onShowMachine, onR
       <MachinesFilters onStatusSelected={handleFilterByStatus} />
       <div className="all-machines">
         {machines && machines.map(machine => {
-          return <MachineCard key={machine.id} machine={machine} onShowMachine={onShowMachine} onReserveMachine={onReserveMachine} />
+          return <MachineCard key={machine.id}
+                              user={user}
+                              machine={machine}
+                              onShowMachine={onShowMachine}
+                              onReserveMachine={onReserveMachine}
+                              onError={onError}
+                              onLoginRequested={onLoginRequested} />
         })}
       </div>
     </div>
@@ -60,12 +69,12 @@ const MachinesList: React.FC<MachinesListProps> = ({ onError, onShowMachine, onR
 }
 
 
-const MachinesListWrapper: React.FC<MachinesListProps> = ({ onError, onShowMachine, onReserveMachine }) => {
+const MachinesListWrapper: React.FC<MachinesListProps> = ({ user, onError, onShowMachine, onReserveMachine, onLoginRequested }) => {
   return (
     <Loader>
-      <MachinesList onError={onError} onShowMachine={onShowMachine} onReserveMachine={onReserveMachine} />
+      <MachinesList user={user} onError={onError} onShowMachine={onShowMachine} onReserveMachine={onReserveMachine} onLoginRequested={onLoginRequested} />
     </Loader>
   );
 }
 
-Application.Components.component('machinesList', react2angular(MachinesListWrapper, ['onError', 'onShowMachine', 'onReserveMachine']));
+Application.Components.component('machinesList', react2angular(MachinesListWrapper, ['user', 'onError', 'onShowMachine', 'onReserveMachine', 'onLoginRequested']));

@@ -7,5 +7,10 @@ export default class MachineAPI {
     const res: AxiosResponse<Array<Machine>> = await apiClient.get(`/api/machines`);
     return res?.data;
   }
+
+  static async get (id: number): Promise<Machine> {
+    const res: AxiosResponse<Machine> = await apiClient.get(`/api/machines/${id}`);
+    return res?.data;
+  }
 }
 

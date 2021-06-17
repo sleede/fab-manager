@@ -53,8 +53,7 @@ const PaymentSchedulesList: React.FC<PaymentSchedulesListProps> = ({ currentUser
     setCustomerFilter(customer);
     setDateFilter(date);
 
-    const api = new PaymentScheduleAPI();
-    api.list({ query: { reference, customer, date, page: 1, size: PAGE_SIZE }}).then((res) => {
+    PaymentScheduleAPI.list({ query: { reference, customer, date, page: 1, size: PAGE_SIZE }}).then((res) => {
       setPaymentSchedules(res);
     }).catch((error) => onError(error.message));
   };
@@ -65,8 +64,7 @@ const PaymentSchedulesList: React.FC<PaymentSchedulesListProps> = ({ currentUser
   const handleLoadMore = (): void => {
     setPageNumber(pageNumber + 1);
 
-    const api = new PaymentScheduleAPI();
-    api.list({ query: { reference: referenceFilter, customer: customerFilter, date: dateFilter, page: pageNumber + 1, size: PAGE_SIZE }}).then((res) => {
+    PaymentScheduleAPI.list({ query: { reference: referenceFilter, customer: customerFilter, date: dateFilter, page: pageNumber + 1, size: PAGE_SIZE }}).then((res) => {
       const list = paymentSchedules.concat(res);
       setPaymentSchedules(list);
     }).catch((error) => onError(error.message));
@@ -76,8 +74,7 @@ const PaymentSchedulesList: React.FC<PaymentSchedulesListProps> = ({ currentUser
    * Reload from te API all the currently displayed payment schedules
    */
   const handleRefreshList = (): void => {
-    const api = new PaymentScheduleAPI();
-    api.list({ query: { reference: referenceFilter, customer: customerFilter, date: dateFilter, page: 1, size: PAGE_SIZE * pageNumber }}).then((res) => {
+    PaymentScheduleAPI.list({ query: { reference: referenceFilter, customer: customerFilter, date: dateFilter, page: 1, size: PAGE_SIZE * pageNumber }}).then((res) => {
       setPaymentSchedules(res);
     }).catch((err) => {
       onError(err.message);

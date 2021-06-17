@@ -30,8 +30,7 @@ export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onE
   const [loadingClass, setLoadingClass] = useState<'hidden' | 'loader' | 'loader-overlay'>('loader');
 
   useEffect(() => {
-    const api = new SettingAPI();
-    api.query([SettingName.PayZenEndpoint, SettingName.PayZenPublicKey]).then(settings => {
+    SettingAPI.query([SettingName.PayZenEndpoint, SettingName.PayZenPublicKey]).then(settings => {
       createToken().then(formToken => {
         // Load the remote library
         KRGlue.loadLibrary(settings.get(SettingName.PayZenEndpoint), settings.get(SettingName.PayZenPublicKey))

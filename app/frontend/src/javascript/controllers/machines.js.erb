@@ -180,21 +180,38 @@ const _reserveMachine = function (machine, e) {
 /**
  * Controller used in the public listing page, allowing everyone to see the list of machines
  */
-Application.Controllers.controller('MachinesController', ['$scope', '$state', '_t', 'AuthService', 'Machine', '$uibModal', 'machinesPromise', 'settingsPromise', 'Member', 'uiTourService',
-  function ($scope, $state, _t, AuthService, Machine, $uibModal, machinesPromise, settingsPromise, Member, uiTourService) {
+Application.Controllers.controller('MachinesController', ['$scope', '$state', '_t', 'AuthService', 'Machine', '$uibModal', 'machinesPromise', 'settingsPromise', 'Member', 'uiTourService', 'growl',
+  function ($scope, $state, _t, AuthService, Machine, $uibModal, machinesPromise, settingsPromise, Member, uiTourService, growl) {
     /* PUBLIC SCOPE */
 
     // Retrieve the list of machines
     $scope.machines = machinesPromise;
 
     /**
-   * Redirect the user to the machine details page
-   */
+     * Redirect the user to the machine details page
+     */
     $scope.showMachine = function (machine) { $state.go('app.public.machines_show', { id: machine.slug }); };
 
     /**
-   * Callback to book a reservation for the current machine
-   */
+     * Shows an error message forwarded from a child component
+     */
+    $scope.onError = function (message) {
+      growl.error(message);
+    }
+
+    /**
+     * Open the modal dialog to log the user and resolves the returned promise when the logging process
+     * was successfully completed.
+     */
+    $scope.onLoginRequest = function (e) {
+      return new Promise((resolve, _reject) => {
+        $scope.login(e, resolve);
+      });
+    }
+
+    /**
+     * Callback to book a reservation for the current machine
+     */
     $scope.reserveMachine = _reserveMachine.bind({
       $scope,
       $state,

@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import { react2angular } from 'react2angular';
 import { Loader } from '../base/loader';
 import { StripeModal } from './stripe/stripe-modal';
@@ -7,7 +7,7 @@ import { IApplication } from '../../models/application';
 import { ShoppingCart } from '../../models/payment';
 import { User } from '../../models/user';
 import { PaymentSchedule } from '../../models/payment-schedule';
-import { SettingName } from '../../models/setting';
+import { Setting, SettingName } from '../../models/setting';
 import { Invoice } from '../../models/invoice';
 import SettingAPI from '../../api/setting';
 import { useTranslation } from 'react-i18next';
@@ -25,16 +25,20 @@ interface PaymentModalProps {
   customer: User
 }
 
-// initial request to the API
-const paymentGateway = SettingAPI.get(SettingName.PaymentGateway);
-
 /**
  * This component open a modal dialog for the configured payment gateway, allowing the user to input his card data
  * to process an online payment.
  */
 const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, currentUser, schedule , cart, customer }) => {
   const { t } = useTranslation('shared');
-  const gateway = paymentGateway.read();
+
+  const [gateway, setGateway] = useState<Setting>(null);
+
+  useEffect(() => {
+    SettingAPI.get(SettingName.PaymentGateway)
+      .then(setting => setGateway(setting))
+      .catch(error => onError(error));
+  }, []);
 
   /**
    * Render the Stripe payment modal
@@ -65,6 +69,8 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, toggleModal, afterS
   /**
    * Determine which gateway is enabled and return the appropriate payment modal
    */
+  if (gateway === null || !isOpen) return <div/>;
+
   switch (gateway.value) {
     case 'stripe':
       return renderStripeModal();

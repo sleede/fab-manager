@@ -4,7 +4,7 @@ import WalletLib from '../../lib/wallet';
 import { WalletInfo } from '../wallet-info';
 import { FabModal, ModalSize } from '../base/fab-modal';
 import { HtmlTranslate } from '../base/html-translate';
-import { CustomAssetName } from '../../models/custom-asset';
+import { CustomAsset, CustomAssetName } from '../../models/custom-asset';
 import { IFablab } from '../../models/fablab';
 import { ShoppingCart } from '../../models/payment';
 import { PaymentSchedule } from '../../models/payment-schedule';
@@ -48,10 +48,6 @@ interface AbstractPaymentModalProps {
   formClassName?: string,
 }
 
-
-// initial request to the API
-const cgvFile = CustomAssetAPI.get(CustomAssetName.CgvFile);
-
 /**
  * This component is an abstract modal that must be extended by each payment gateway to include its payment form.
  *
@@ -75,17 +71,18 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
   const [tos, setTos] = useState<boolean>(false);
   // currently active payment gateway
   const [gateway, setGateway] = useState<string>(null);
+  // the sales conditions
+  const [cgv, setCgv] = useState<CustomAsset>(null);
 
   const { t } = useTranslation('shared');
-  const cgv = cgvFile.read();
 
 
   /**
    * When the component is loaded first, get the name of the currently active payment modal
    */
   useEffect(() => {
-    const api = new SettingAPI();
-    api.get(SettingName.PaymentGateway).then((setting) => {
+    CustomAssetAPI.get(CustomAssetName.CgvFile).then(asset => setCgv(asset));
+    SettingAPI.get(SettingName.PaymentGateway).then((setting) => {
       // we capitalize the first letter of the name
       setGateway(setting.value.replace(/^\w/, (c) => c.toUpperCase()));
     })
