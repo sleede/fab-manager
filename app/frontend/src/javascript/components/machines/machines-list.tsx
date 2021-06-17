@@ -29,7 +29,7 @@ const MachinesList: React.FC<MachinesListProps> = ({ onError, onShowMachine, onR
   return (
     <div className="machines-list">
       {machines && machines.map(machine => {
-        return <MachineCard machine={machine} onShowMachine={onShowMachine} onReserveMachine={onReserveMachine} />
+        return <MachineCard key={machine.id} machine={machine} onShowMachine={onShowMachine} onReserveMachine={onReserveMachine} />
       })}
     </div>
   );

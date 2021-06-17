@@ -4,7 +4,19 @@
   border-radius: 6px;
   margin: 0 15px 30px;
   width: 30%;
-  min-width: 300px;
+  min-width: 263px;
+
+  @media screen and (max-width: 1219px) {
+    width: 45%;
+    min-width: 195px;
+    margin: 0 auto 30px;
+  }
+
+  @media screen and (max-width: 674px) {
+    width: 95%;
+    max-width: 400px;
+    margin: 0 auto 30px;
+  }
 
   .machine-picture {
     height: 250px;
