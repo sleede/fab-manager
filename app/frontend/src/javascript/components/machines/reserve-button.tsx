@@ -65,10 +65,8 @@ export const ReserveButton: React.FC<ReserveButtonProps> = ({ currentUser, machi
   }
 
   return (
-    <span>
-      <button onClick={() => handleClick(currentUser)} className={className}>
-        {children}
-      </button>
-    </span>
+    <button onClick={() => handleClick(currentUser)} className={className}>
+      {children}
+    </button>
   );
 }
