@@ -281,11 +281,6 @@ en:
         to_book_the_MACHINE_you_must_have_completed_the_TRAINING: "To book the \"{MACHINE}\" you must have completed the {TRAINING}."
         register_for_the_training: "Enroll in the training"
         i_dont_want_to_register_now: "I don't want to enroll now"
-      #modal telling users that they must wait for their training validation before booking a machine
-      training_reservation_modal:
-        machine_reservation: "Machine reservation"
-        you_must_wait_for_your_training_is_being_validated_by_the_fablab_team_to_book_this_machine: "You must wait for your training is being validated by the FabLab team to book this machine."
-        your_training_will_occur_: "Your training will occur"
       #user public profile
       public_profile:
         last_activity_html: "Last activity <br><strong>on {DATE}</strong>"

@@ -165,6 +165,11 @@ en:
         reservation_was_cancelled_successfully: "Reservation was cancelled successfully."
         cancellation_failed: "Cancellation failed."
         a_problem_occured_during_the_payment_process_please_try_again_later: "A problem occurred during the payment process. Please try again later."
+      #modal telling users that they must wait for their training validation before booking a machine
+      pending_training_modal:
+        machine_reservation: "Machine reservation"
+        wait_for_validated: "You must wait for your training is being validated by the FabLab team to book this machine."
+        training_will_occur_DATE_html: "Your training will occur at <strong>{DATE}</strong>"
       #book a training
       trainings_reserve:
         trainings_planning: "Trainings planning"

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { PendingTrainingModal } from './pending-training-modal';
 import MachineAPI from '../../api/machine';
 import { Machine } from '../../models/machine';
 import { User } from '../../models/user';
@@ -67,6 +68,7 @@ export const ReserveButton: React.FC<ReserveButtonProps> = ({ currentUser, machi
   return (
     <button onClick={() => handleClick(currentUser)} className={className}>
       {children}
+      <PendingTrainingModal isOpen={pendingTraining}  />
     </button>
   );
 }
