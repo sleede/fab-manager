@@ -16,6 +16,21 @@ interface MachineCardProps {
 const MachineCardComponent: React.FC<MachineCardProps> = ({ machine, onShowMachine, onReserveMachine }) => {
   const { t } = useTranslation('public');
 
+  /**
+   * Callback triggered when the user clicks on the 'reserve' button.
+   * We handle the training verification process here, before redirecting the user to the reservation calendar.
+   */
+  const handleReserveMachine = (): void => {
+    onReserveMachine(machine);
+  }
+
+  /**
+   * Callback triggered when the user clicks on the 'view' button
+   */
+  const handleShowMachine = (): void => {
+    onShowMachine(machine);
+  }
+
   const machinePicture = (): ReactNode => {
     if (!machine.machine_image) {
       return (
@@ -33,13 +48,6 @@ const MachineCardComponent: React.FC<MachineCardProps> = ({ machine, onShowMachi
     )
   }
 
-  const handleReserveMachine = (): void => {
-    onReserveMachine(machine);
-  }
-
-  const handleShowMachine = (): void => {
-    onShowMachine(machine);
-  }
   return (
     <div className="machine-card">
       {machinePicture()}

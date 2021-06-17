@@ -1,4 +1,6 @@
 .machines-list {
-  display: flex;
-  flex-wrap: wrap;
+  .all-machines {
+    display: flex;
+    flex-wrap: wrap;
+  }
 }
