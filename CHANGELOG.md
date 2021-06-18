@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v5.0.5 2021 June 18
+
 - Fix a bug: during the upgrade, unable to detect the target when not explicitly specified
 - Fix a bug: unable to sync users on stripe if one of them have an invalid email address
 - Fix a bug: unable to book a free event
