@@ -6,6 +6,7 @@
 - Fix a bug: can't see the dates for the next booked training session, when the user is reserving a machine without the appropriate training
 - Fix a bug: invalid link to the user's manual
 - Fix a bug: unable to sync coupons on stripe
+- Fix a bug: ignored coupon when booking an event with card payment
 
 ## v5.0.4 2021 June 15
 
