@@ -10,7 +10,7 @@ import { FabButton } from '../base/fab-button';
 interface RequiredTrainingModalProps {
   isOpen: boolean,
   toggleModal: () => void,
-  user: User,
+  user?: User,
   machine?: Machine,
   onEnrollRequested: (trainingId: number) => void,
 }
@@ -43,7 +43,7 @@ export const RequiredTrainingModal: React.FC<RequiredTrainingModalProps> = ({ is
     return (
       <div className="user-info">
         <Avatar user={user} />
-        <span className="user-name">{user.name}</span>
+        <span className="user-name">{user?.name}</span>
       </div>
     );
   }
