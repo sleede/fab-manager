@@ -11,10 +11,14 @@ class SyncObjectsOnStripeWorker
     User.online_payers.each_with_index do |member, index|
       logger.debug "#{index} / #{total}"
       begin
-        stp_customer = member.payment_gateway_object.gateway_object.retrieve
+        stp_customer = member.payment_gateway_object&.gateway_object&.retrieve
         StripeWorker.new.create_stripe_customer(member.id) if stp_customer.nil? || stp_customer[:deleted]
       rescue Stripe::InvalidRequestError
-        StripeWorker.new.create_stripe_customer(member.id)
+        begin
+          StripeWorker.new.create_stripe_customer(member.id)
+        rescue Stripe::InvalidRequestError => e
+          puts "Unable to create the customer #{member.id} do to a Stripe error: #{e}"
+        end
       end
     end
 
@@ -22,9 +26,9 @@ class SyncObjectsOnStripeWorker
     total = Coupon.all.count
     Coupon.all.each_with_index do |coupon, index|
       logger.debug "#{index} / #{total}"
-      Stripe::Coupon.retrieve(c.code, api_key: Setting.get('stripe_secret_key'))
+      Stripe::Coupon.retrieve(coupon.code, api_key: Setting.get('stripe_secret_key'))
     rescue Stripe::InvalidRequestError
-      Stripe::Service.create_coupon(c.id)
+      Stripe::Service.create_coupon(coupon.id)
     end
 
     w = StripeWorker.new

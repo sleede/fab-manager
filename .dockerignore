@@ -1,13 +1,7 @@
 # Ignore bundler config.
-.bundle
-vendor/cache
-
 config/database.yml
-config/application.yml
 
 # Ignore database files.
-db/*.sqlite3
-db/*.sqlite3-journal
 postgresql
 elasticsearch
 redis
@@ -15,7 +9,6 @@ redis
 
 # Ignore public assets
 public/uploads
-public/assets
 public/packs
 
 # Ignore all logfiles and tempfiles.
@@ -23,8 +16,7 @@ log
 *.log
 tmp
 
-# Ignore platform dependent files
-*.DS_Store
+# Ignore IDE configuration files
 .idea
 
 # PDF invoices
@@ -39,10 +31,7 @@ imports
 # accounting archives
 accounting
 
-.DS_Store
-
 # Development files
-.vagrant
 Vagrantfile
 provision
 .git*

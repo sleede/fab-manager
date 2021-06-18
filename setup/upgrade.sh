@@ -88,7 +88,7 @@ target_version()
 
   if [[ "$TAG" =~ ^:release-v[\.0-9]+$ ]]; then
     TARGET=$(echo "$TAG" | grep -Eo '[\.0-9]{5}')
-  elif [ "$TAG" = ":latest" ]; then
+  elif [ "$TAG" = ":latest" ] || [ "$TAG" = "" ]; then
     TARGET=$(\curl -sSL "https://hub.fab-manager.com/api/versions/latest" | jq -r '.semver')
   else
     TARGET='custom'

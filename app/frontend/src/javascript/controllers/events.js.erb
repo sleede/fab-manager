@@ -126,8 +126,8 @@ Application.Controllers.controller('EventsController', ['$scope', '$state', 'Eve
   }
 ]);
 
-Application.Controllers.controller('ShowEventController', ['$scope', '$state', '$stateParams', '$rootScope', 'Event', '$uibModal', 'Member', 'Reservation', 'Price', 'CustomAsset', 'Slot', 'eventPromise', 'growl', '_t', 'Wallet', 'AuthService', 'helpers', 'dialogs', 'priceCategoriesPromise', 'settingsPromise',
-  function ($scope, $state, $stateParams, $rootScope, Event, $uibModal, Member, Reservation, Price, CustomAsset, Slot, eventPromise, growl, _t, Wallet, AuthService, helpers, dialogs, priceCategoriesPromise, settingsPromise) {
+Application.Controllers.controller('ShowEventController', ['$scope', '$state', '$stateParams', '$rootScope', 'Event', '$uibModal', 'Member', 'Reservation', 'Price', 'CustomAsset', 'Slot', 'eventPromise', 'growl', '_t', 'Wallet', 'AuthService', 'helpers', 'dialogs', 'priceCategoriesPromise', 'settingsPromise', 'LocalPayment',
+  function ($scope, $state, $stateParams, $rootScope, Event, $uibModal, Member, Reservation, Price, CustomAsset, Slot, eventPromise, growl, _t, Wallet, AuthService, helpers, dialogs, priceCategoriesPromise, settingsPromise, LocalPayment) {
     /* PUBLIC SCOPE */
 
     // reservations for the currently shown event
@@ -366,7 +366,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
       // set the attempting marker
       $scope.attempting = true;
       // save the reservation to the API
-      return Reservation.save(cartItems, function (reservation) {
+      return LocalPayment.confirm(cartItems, function (reservation) {
       // reservation successful
         afterPayment(reservation);
         return $scope.attempting = false;
@@ -715,7 +715,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
         growl.error(_t('app.shared.cart.online_payment_disabled'));
       } else {
         $scope.toggleOnlinePaymentModal(() => {
-          $scope.onlinePayment.cartItems = mkCartItems(reservation, 'card');
+          $scope.onlinePayment.cartItems = mkCartItems(reservation, $scope.coupon.applied, 'card');
         });
       }
     };
