@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { BaseSyntheticEvent, useState } from 'react';
 import { PendingTrainingModal } from './pending-training-modal';
 import MachineAPI from '../../api/machine';
 import { Machine } from '../../models/machine';
@@ -20,17 +20,27 @@ interface ReserveButtonProps {
  */
 export const ReserveButton: React.FC<ReserveButtonProps> = ({ currentUser, machineId, onLoginRequested, onLoadingStart, onLoadingEnd, onError, onReserveMachine, className, children }) => {
 
+  const [machine, setMachine] = useState<Machine>(null);
   const [pendingTraining, setPendingTraining] = useState<boolean>(false);
 
   /**
    * Callback triggered when the user clicks on the 'reserve' button.
-   * We load the full machine data, then we check if the user has passed the training for it (if it's needed)
    */
-  const handleClick = (user?: User): void => {
+  const handleClick = (event: BaseSyntheticEvent): void => {
+    event.preventDefault();
+    getMachine(currentUser);
+  };
+
+  /**
+   * We load the full machine data, including data on the current user status for this machine.
+   * Then we check if the user has passed the training for it (if it's needed)
+   */
+  const getMachine = (user: User): void => {
     if (onLoadingStart) onLoadingStart();
 
     MachineAPI.get(machineId)
       .then(data => {
+        setMachine(data);
         checkTraining(data, user);
         if (onLoadingEnd) onLoadingEnd();
       })
@@ -38,7 +48,14 @@ export const ReserveButton: React.FC<ReserveButtonProps> = ({ currentUser, machi
         onError(error);
         if (onLoadingEnd) onLoadingEnd();
       });
-  }
+  };
+
+  /**
+   * Open/closes the alert modal informing the user about his pending training
+   */
+  const togglePendingTrainingModal = (): void => {
+    setPendingTraining(!pendingTraining);
+  };
 
   /**
    * Check that the current user has passed the required training before allowing him to book
@@ -47,7 +64,7 @@ export const ReserveButton: React.FC<ReserveButtonProps> = ({ currentUser, machi
     // if there's no user currently logged, trigger the logging process
     if (!user) {
       onLoginRequested()
-        .then(user => handleClick(user))
+        .then(user => getMachine(user))
         .catch(error => onError(error));
       return;
     }
@@ -58,17 +75,22 @@ export const ReserveButton: React.FC<ReserveButtonProps> = ({ currentUser, machi
       return onReserveMachine(machineId);
     }
 
-    // if a user is authenticated and have booked a training for this machine, tell him that he must wait
+    // if there's an authenticated user, and he booked a training for this machine, tell him that he must wait
     // for an admin to validate the training before he can book the reservation
     if (machine.current_user_next_training_reservation) {
       return setPendingTraining(true);
     }
-  }
+  };
 
   return (
-    <button onClick={() => handleClick(currentUser)} className={className}>
-      {children}
-      <PendingTrainingModal isOpen={pendingTraining}  />
-    </button>
+    <span>
+      <button onClick={handleClick} className={className}>
+        {children}
+      </button>
+      <PendingTrainingModal isOpen={pendingTraining}
+                            toggleModal={togglePendingTrainingModal}
+                            nextReservation={machine?.current_user_next_training_reservation?.slots_attributes[0]?.start_at}  />
+    </span>
+
   );
 }

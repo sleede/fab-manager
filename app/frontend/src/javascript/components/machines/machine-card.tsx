@@ -65,10 +65,12 @@ const MachineCardComponent: React.FC<MachineCardProps> = ({ user, machine, onSho
           <i className="fas fa-bookmark" />
           {t('app.public.machine_card.book')}
         </ReserveButton>}
-        <button onClick={handleShowMachine} className="show-button">
-          <i className="fas fa-eye" />
-          {t('app.public.machine_card.consult')}
-        </button>
+        <span>
+          <button onClick={handleShowMachine} className="show-button">
+            <i className="fas fa-eye" />
+            {t('app.public.machine_card.consult')}
+          </button>
+        </span>
       </div>
     </div>
   );

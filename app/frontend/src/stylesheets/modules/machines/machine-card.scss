@@ -17,6 +17,7 @@
     background: rgba(29, 29, 29, 0.5);
     border-radius: 6px;
     margin: -1px;
+    z-index: 1;
   }
 
   &.loading::after {
@@ -25,9 +26,9 @@
     text-align: center;
     font-weight: 900;
     position: absolute;
-    left: 41%;
+    width: 100%;
     font-size: 4em;
-    top: 35%;
+    top: 110px;
     color: white;
     animation: spin 2s linear infinite;
   }
@@ -83,7 +84,10 @@
     font-weight: 600;
     color: #000;
     margin: 0;
-    line-height: 1.8rem;
+    height: 4em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .machine-actions {
@@ -95,31 +99,36 @@
     text-align: center;
     display: flex;
 
-    & > button {
-      border: none !important;
-      padding: 15px 12px;
-      display: block;
+    & > span {
       width: 50%;
-      background-color: #fbfbfb;
-      margin-bottom: 0;
-      font-weight: normal;
-      text-align: center;
-      white-space: nowrap;
-      vertical-align: middle;
-      touch-action: manipulation;
-      cursor: pointer;
-      background-image: none;
-      font-size: 16px;
-      line-height: 1.5;
-      border-radius: 4px;
 
-      & > i {
-        margin-right: 5px;
+      & > button {
+        border: none !important;
+        padding: 15px 12px;
+        display: block;
+        width: 100%;
+        background-color: #fbfbfb;
+        margin-bottom: 0;
+        font-weight: normal;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        touch-action: manipulation;
+        cursor: pointer;
+        background-image: none;
+        font-size: 16px;
+        line-height: 1.5;
+        border-radius: 4px;
+
+        & > i {
+          margin-right: 5px;
+        }
+
+        &.reserve-button {
+          border-right: 1px solid #dddddd !important;
+        }
       }
 
-      &.reserve-button {
-        border-right: 1px solid #dddddd !important;
-      }
     }
   }
 

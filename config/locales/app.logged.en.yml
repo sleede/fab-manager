@@ -170,6 +170,7 @@ en:
         machine_reservation: "Machine reservation"
         wait_for_validated: "You must wait for your training is being validated by the FabLab team to book this machine."
         training_will_occur_DATE_html: "Your training will occur at <strong>{DATE}</strong>"
+        DATE_TIME: "{DATE} {TIME}"
       #book a training
       trainings_reserve:
         trainings_planning: "Trainings planning"
