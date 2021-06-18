@@ -7,6 +7,7 @@
 - Fix a bug: invalid link to the user's manual
 - Fix a bug: unable to sync coupons on stripe
 - Fix a bug: ignored coupon when booking an event with card payment
+- Fix a bug: deleting a coupon displays an error message
 
 ## v5.0.4 2021 June 15
 
