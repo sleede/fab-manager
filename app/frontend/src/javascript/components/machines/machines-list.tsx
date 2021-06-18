@@ -42,12 +42,15 @@ const MachinesList: React.FC<MachinesListProps> = ({ onError, onShowMachine, onR
   /**
    * Callback triggered when the user changes the status filter.
    * Set the 'machines' state to a filtered list, depending on the provided parameter.
+   * @param status, true = enabled machines, false = disabled machines, null = all machines
    */
   const handleFilterByStatus = (status: boolean): void => {
     if (!allMachines) return;
     if (status === null) return setMachines(allMachines);
 
-    setMachines(allMachines.filter(m => m.disabled === !status));
+    // enabled machines may have the m.disabled property null (for never disabled machines)
+    // or false (for re-enabled machines)
+    setMachines(allMachines.filter(m => !!m.disabled === !status));
   }
 
   return (

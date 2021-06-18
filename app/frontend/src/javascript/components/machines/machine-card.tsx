@@ -39,14 +39,7 @@ const MachineCardComponent: React.FC<MachineCardProps> = ({ user, machine, onSho
 
   const machinePicture = (): ReactNode => {
     if (!machine.machine_image) {
-      return (
-        <div className="machine-picture">
-          <img src="data:image/png;base64,"
-               data-src="holder.js/100%x100%/text:&#xf03e;/font:'Font Awesome 5 Free'/icon"
-               className="img-responsive"
-               alt={machine.name} />
-        </div>
-      );
+      return <div className="machine-picture no-picture" />;
     }
 
     return (
@@ -55,7 +48,7 @@ const MachineCardComponent: React.FC<MachineCardProps> = ({ user, machine, onSho
   }
 
   return (
-    <div className={`machine-card ${loading ? 'loading' : ''}`}>
+    <div className={`machine-card ${loading ? 'loading' : ''} ${machine.disabled ? 'disabled': ''}`}>
       {machinePicture()}
       <div className="machine-name">
         {machine.name}
@@ -72,7 +65,7 @@ const MachineCardComponent: React.FC<MachineCardProps> = ({ user, machine, onSho
           <i className="fas fa-bookmark" />
           {t('app.public.machine_card.book')}
         </ReserveButton>}
-        <button onClick={handleShowMachine} className={`show-button ${machine.disabled ? 'single-button': ''}`}>
+        <button onClick={handleShowMachine} className="show-button">
           <i className="fas fa-eye" />
           {t('app.public.machine_card.consult')}
         </button>

@@ -25,7 +25,7 @@ export const PendingTrainingModal: React.FC<PendingTrainingModalProps> = ({ isOp
               toggleModal={toggleModal}
               closeButton={true}>
       <p>{t('app.logged.pending_training_modal.wait_for_validated')}</p>
-      <p><HtmlTranslate trKey="training_will_occur_DATE_html" options={{DATE: formatDate(nextReservation)}} /></p>
+      <p><HtmlTranslate trKey="app.logged.pending_training_modal.training_will_occur_DATE_html" options={{DATE: formatDate(nextReservation)}} /></p>
     </FabModal>
   )
 }

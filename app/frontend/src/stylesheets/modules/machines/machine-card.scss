@@ -61,6 +61,18 @@
     border-bottom: 1px solid transparent;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+    position: relative;
+
+    &.no-picture::before {
+      position: absolute;
+      content: '\f03e';
+      font-family: 'Font Awesome 5 Free' !important;
+      font-weight: 900;
+      font-size: 4em;
+      width: 100%;
+      text-align: center;
+      padding-top: 84px;
+    }
   }
 
   .machine-name {
@@ -108,10 +120,14 @@
       &.reserve-button {
         border-right: 1px solid #dddddd !important;
       }
+    }
+  }
 
-      &.single-button {
-        width: 100%;
-      }
+  &.disabled {
+    opacity: 0.5;
+
+    .machine-actions > button.show-button {
+      width: 100%;
     }
   }
 }
