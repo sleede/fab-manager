@@ -11,6 +11,7 @@ interface MachineCardProps {
   onShowMachine: (machine: Machine) => void,
   onReserveMachine: (machine: Machine) => void,
   onLoginRequested: () => Promise<User>,
+  onEnrollRequested: (trainingId: number) => void,
   onError: (message: string) => void,
 }
 
@@ -18,7 +19,7 @@ interface MachineCardProps {
  * This component is a box showing the picture of the given machine and two buttons: one to start the reservation process
  * and another to redirect the user to the machine description page.
  */
-const MachineCardComponent: React.FC<MachineCardProps> = ({ user, machine, onShowMachine, onReserveMachine, onError, onLoginRequested }) => {
+const MachineCardComponent: React.FC<MachineCardProps> = ({ user, machine, onShowMachine, onReserveMachine, onError, onLoginRequested, onEnrollRequested }) => {
   const { t } = useTranslation('public');
 
   // shall we display a loader to prevent double-clicking, while the machine details are loading?
@@ -61,6 +62,7 @@ const MachineCardComponent: React.FC<MachineCardProps> = ({ user, machine, onSho
                                              onError={onError}
                                              onReserveMachine={handleReserveMachine}
                                              onLoginRequested={onLoginRequested}
+                                             onEnrollRequested={onEnrollRequested}
                                              className="reserve-button">
           <i className="fas fa-bookmark" />
           {t('app.public.machine_card.book')}
@@ -77,10 +79,10 @@ const MachineCardComponent: React.FC<MachineCardProps> = ({ user, machine, onSho
 }
 
 
-export const MachineCard: React.FC<MachineCardProps> = ({ user, machine, onShowMachine, onReserveMachine, onError, onLoginRequested }) => {
+export const MachineCard: React.FC<MachineCardProps> = ({ user, machine, onShowMachine, onReserveMachine, onError, onLoginRequested, onEnrollRequested }) => {
   return (
     <Loader>
-      <MachineCardComponent user={user} machine={machine} onShowMachine={onShowMachine} onReserveMachine={onReserveMachine} onError={onError} onLoginRequested={onLoginRequested} />
+      <MachineCardComponent user={user} machine={machine} onShowMachine={onShowMachine} onReserveMachine={onReserveMachine} onError={onError} onLoginRequested={onLoginRequested} onEnrollRequested={onEnrollRequested} />
     </Loader>
   );
 }

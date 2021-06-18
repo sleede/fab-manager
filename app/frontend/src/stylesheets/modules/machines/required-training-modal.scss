@@ -1,0 +1,20 @@
+.required-training-modal {
+  .user-info {
+    text-align: center;
+    padding: 15px 0;
+    .avatar img { width: 50px; }
+    .user-name { margin-left: 10px; }
+  }
+
+  .training-info {
+    text-align: center;
+  }
+
+  .not-now {
+    text-align: center;
+
+    & > a {
+      cursor: pointer;
+    }
+  }
+}

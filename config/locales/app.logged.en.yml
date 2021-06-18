@@ -171,6 +171,13 @@ en:
         wait_for_validated: "You must wait for your training is being validated by the FabLab team to book this machine."
         training_will_occur_DATE_html: "Your training will occur at <strong>{DATE}</strong>"
         DATE_TIME: "{DATE} {TIME}"
+      #modal telling users that they need to pass a training before booking a machine
+      required_training_modal:
+        to_book_MACHINE_requires_TRAINING_html: "To book the \"{MACHINE}\" you must have completed the training <strong>{TRAINING}</strong>."
+        training_or_training_html: "</strong> or the training <strong>"
+        enroll_now: "Enroll to the training"
+        no_enroll_for_now: "I don't want to enroll now"
+        close: "Close"
       #book a training
       trainings_reserve:
         trainings_planning: "Trainings planning"

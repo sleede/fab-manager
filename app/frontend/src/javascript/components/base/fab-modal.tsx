@@ -15,13 +15,14 @@ export enum ModalSize {
 }
 
 interface FabModalProps {
-  title: string,
+  title?: string,
   isOpen: boolean,
   toggleModal: () => void,
   confirmButton?: ReactNode,
   closeButton?: boolean,
   className?: string,
   width?: ModalSize,
+  customHeader?: ReactNode,
   customFooter?: ReactNode,
   onConfirm?: (event: BaseSyntheticEvent) => void,
   preventConfirm?: boolean,
@@ -31,7 +32,7 @@ interface FabModalProps {
 /**
  * This component is a template for a modal dialog that wraps the application style
  */
-export const FabModal: React.FC<FabModalProps> = ({ title, isOpen, toggleModal, children, confirmButton, className, width = 'sm', closeButton, customFooter, onConfirm, preventConfirm, onCreation }) => {
+export const FabModal: React.FC<FabModalProps> = ({ title, isOpen, toggleModal, children, confirmButton, className, width = 'sm', closeButton, customHeader, customFooter, onConfirm, preventConfirm, onCreation }) => {
   const { t } = useTranslation('shared');
 
   const [blackLogo, setBlackLogo] = useState<CustomAsset>(null);
@@ -68,6 +69,13 @@ export const FabModal: React.FC<FabModalProps> = ({ title, isOpen, toggleModal, 
     return customFooter !== undefined;
   }
 
+  /**
+   * Check if there's a custom header
+   */
+  const hasCustomHeader = (): boolean => {
+    return customHeader !== undefined;
+  }
+
   return (
     <Modal isOpen={isOpen}
            className={`fab-modal fab-modal-${width} ${className}`}
@@ -79,7 +87,8 @@ export const FabModal: React.FC<FabModalProps> = ({ title, isOpen, toggleModal, 
                              alt={blackLogo.custom_asset_file_attributes.attachment}
                              className="modal-logo" />}
         </Loader>
-        <h1>{ title }</h1>
+        {!hasCustomHeader() && <h1>{ title }</h1>}
+        {hasCustomHeader() && customHeader}
       </div>
       <div className="fab-modal-content">
         {children}

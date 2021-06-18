@@ -184,9 +184,6 @@ Application.Controllers.controller('MachinesController', ['$scope', '$state', '_
   function ($scope, $state, _t, AuthService, Machine, $uibModal, machinesPromise, settingsPromise, Member, uiTourService, growl) {
     /* PUBLIC SCOPE */
 
-    // Retrieve the list of machines
-    $scope.machines = machinesPromise;
-
     /**
      * Redirect the user to the machine details page
      */
@@ -210,25 +207,18 @@ Application.Controllers.controller('MachinesController', ['$scope', '$state', '_
     }
 
     /**
+     * Redirect the user to the training reservation page
+     */
+    $scope.onEnrollRequest = function (trainingId) {
+      $state.go('app.logged.trainings_reserve', { id: trainingId });
+    }
+
+    /**
      * Callback to book a reservation for the current machine
      */
-    $scope.reserveMachine = _reserveMachine.bind({
-      $scope,
-      $state,
-      _t,
-      $uibModal,
-      Machine
-    });
-
-    // Default: we show only enabled machines
-    $scope.machineFiltering = 'enabled';
-
-    // Available options for filtering machines by status
-    $scope.filterDisabled = [
-      'enabled',
-      'disabled',
-      'all'
-    ];
+    $scope.reserveMachine = function (machine) {
+      $state.go('app.logged.machines_reserve', { id: machine.slug });
+    }
 
     /**
      * Setup the feature-tour for the machines page. (admins only)
@@ -303,16 +293,6 @@ Application.Controllers.controller('MachinesController', ['$scope', '$state', '_
         }
       }
     }
-
-    /* PRIVATE SCOPE */
-
-    /**
-     * Kind of constructor: these actions will be realized first when the controller is loaded
-     */
-    const initialize = function () {}
-
-    // !!! MUST BE CALLED AT THE END of the controller
-    return initialize();
   }
 ]);
 

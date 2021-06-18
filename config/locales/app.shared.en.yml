@@ -276,11 +276,6 @@ en:
         do_you_want_to_change_NAME_s_booking_slot_initially_planned_at: "Do you want to change {NAME}'s booking slot, initially planned at:"
         cancel_this_reservation: "Cancel this reservation"
         i_want_to_change_date: "I want to change date"
-      #modal telling users that they need to pass a training before booking a machine
-      request_training_modal:
-        to_book_the_MACHINE_you_must_have_completed_the_TRAINING: "To book the \"{MACHINE}\" you must have completed the {TRAINING}."
-        register_for_the_training: "Enroll in the training"
-        i_dont_want_to_register_now: "I don't want to enroll now"
       #user public profile
       public_profile:
         last_activity_html: "Last activity <br><strong>on {DATE}</strong>"

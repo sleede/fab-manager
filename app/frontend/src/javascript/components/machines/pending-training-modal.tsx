@@ -13,6 +13,10 @@ interface PendingTrainingModalProps {
   nextReservation: Date,
 }
 
+/**
+ * Modal dialog shown if the current user has registered for a training but this training isn't validated
+ * when the user tries to book a machine.
+ */
 export const PendingTrainingModal: React.FC<PendingTrainingModalProps> = ({ isOpen, toggleModal, nextReservation }) => {
   const { t } = useTranslation('logged');
 

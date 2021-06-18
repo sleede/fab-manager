@@ -324,7 +324,6 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
           settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['feature_tour_display']" }).$promise; }]
         }
       })
