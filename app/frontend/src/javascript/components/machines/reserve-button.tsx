@@ -1,9 +1,15 @@
-import React, { BaseSyntheticEvent, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PendingTrainingModal } from './pending-training-modal';
 import MachineAPI from '../../api/machine';
 import { Machine } from '../../models/machine';
 import { User } from '../../models/user';
 import { RequiredTrainingModal } from './required-training-modal';
+import { react2angular } from 'react2angular';
+import { IApplication } from '../../models/application';
+import { useTranslation } from 'react-i18next';
+import { Loader } from '../base/loader';
+
+declare var Application: IApplication;
 
 interface ReserveButtonProps {
   currentUser?: User,
@@ -11,7 +17,7 @@ interface ReserveButtonProps {
   onLoadingStart?: () => void,
   onLoadingEnd?: () => void,
   onError: (message: string) => void,
-  onReserveMachine: (machineId: number) => void,
+  onReserveMachine: (machine: Machine) => void,
   onLoginRequested: () => Promise<User>,
   onEnrollRequested: (trainingId: number) => void,
   className?: string
@@ -20,7 +26,8 @@ interface ReserveButtonProps {
 /**
  * Button component that makes the training verification before redirecting the user to the reservation calendar
  */
-export const ReserveButton: React.FC<ReserveButtonProps> = ({ currentUser, machineId, onLoginRequested, onLoadingStart, onLoadingEnd, onError, onReserveMachine, onEnrollRequested, className, children }) => {
+const ReserveButtonComponent: React.FC<ReserveButtonProps> = ({ currentUser, machineId, onLoginRequested, onLoadingStart, onLoadingEnd, onError, onReserveMachine, onEnrollRequested, className, children }) => {
+  const { t } = useTranslation('shared');
 
   const [machine, setMachine] = useState<Machine>(null);
   const [user, setUser] = useState<User>(currentUser);
@@ -93,7 +100,7 @@ export const ReserveButton: React.FC<ReserveButtonProps> = ({ currentUser, machi
     // Moreover, if all associated trainings are disabled, let the user reserve too.
     if (machine.current_user_is_trained || machine.trainings.length === 0 ||
         machine.trainings.map(t => t.disabled).reduce((acc, val) => acc && val, true)) {
-      return onReserveMachine(machineId);
+      return onReserveMachine(machine);
     }
 
     // if the currently logged user booked a training for this machine, tell him that he must wait
@@ -109,8 +116,9 @@ export const ReserveButton: React.FC<ReserveButtonProps> = ({ currentUser, machi
 
   return (
     <span>
-      <button onClick={handleClick} className={className}>
-        {children}
+      <button onClick={handleClick} className={className ? className : ''}>
+        {children && children}
+        {!children && <span>{t('app.shared.reserve_button.book_this_machine')}</span>}
       </button>
       <PendingTrainingModal isOpen={pendingTraining}
                             toggleModal={togglePendingTrainingModal}
@@ -124,3 +132,15 @@ export const ReserveButton: React.FC<ReserveButtonProps> = ({ currentUser, machi
 
   );
 }
+
+export const ReserveButton: React.FC<ReserveButtonProps> = ({ currentUser, machineId, onLoginRequested, onLoadingStart, onLoadingEnd, onError, onReserveMachine, onEnrollRequested, className, children }) => {
+  return (
+    <Loader>
+      <ReserveButtonComponent currentUser={currentUser} machineId={machineId} onError={onError} onLoadingStart={onLoadingStart} onLoadingEnd={onLoadingEnd} onReserveMachine={onReserveMachine} onLoginRequested={onLoginRequested} onEnrollRequested={onEnrollRequested} className={className}>
+        {children}
+      </ReserveButtonComponent>
+    </Loader>
+  );
+}
+
+Application.Components.component('reserveButton', react2angular(ReserveButton, ['currentUser', 'machineId', 'onLoadingStart', 'onLoadingEnd', 'onError', 'onReserveMachine', 'onLoginRequested', 'onEnrollRequested', 'className']));

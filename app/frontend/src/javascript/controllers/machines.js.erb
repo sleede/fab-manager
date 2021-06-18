@@ -96,92 +96,10 @@ class MachinesController {
 }
 
 /**
- * Manages the transition when a user clicks on the reservation button.
- * According to the status of user currently logged into the system, redirect him to the reservation page,
- * or display a modal window asking him to complete a training before he can book a machine reservation.
- * @param machine {{id:number}} An object containg the id of the machine to book,
- *   the object will be completed before the fonction returns.
- * @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
- */
-const _reserveMachine = function (machine, e) {
-  const _this = this;
-  e.preventDefault();
-  e.stopPropagation();
-
-  // retrieve the full machine object
-  return machine = _this.Machine.get({ id: machine.id }, function () {
-    // if the currently logged'in user has completed the training for this machine, or this machine does not require
-    // a prior training, just redirect him to the machine's booking page
-    if (machine.current_user_is_trained || (machine.trainings.length === 0)) {
-      return _this.$state.go('app.logged.machines_reserve', { id: machine.slug });
-    } else {
-      // otherwise, if a user is authenticated ...
-      if (_this.$scope.isAuthenticated()) {
-        // ... and have booked a training for this machine, tell him that he must wait for an admin to validate
-        // the training before he can book the reservation
-        if (machine.current_user_next_training_reservation) {
-          return _this.$uibModal.open({
-            templateUrl: '/machines/training_reservation_modal.html',
-            controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
-              $scope.machine = machine;
-              return $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
-            }]
-          });
-        // ... but does not have booked the training, tell him to register for a training session first
-        // unless all associated trainings are disabled
-        } else {
-          // if all trainings are disabled, just redirect the user to the reservation calendar
-          if (machine.trainings.map(function (t) { return t.disabled; }).reduce(function (acc, val) { return acc && val; }, true)) {
-            return _this.$state.go('app.logged.machines_reserve', { id: machine.slug });
-          // otherwise open the information modal
-          } else {
-            return _this.$uibModal.open({
-              templateUrl: '/machines/request_training_modal.html',
-              controller: ['$scope', '$uibModalInstance', '$state', function ($scope, $uibModalInstance, $state) {
-                $scope.machine = machine;
-                $scope.member = _this.$scope.currentUser;
-
-                // transform the name of the trainings associated with the machine to integrate them in a sentence
-                $scope.humanizeTrainings = function () {
-                  let text = '';
-                  angular.forEach($scope.machine.trainings, function (training) {
-                    if (text.length > 0) {
-                      text += _this._t('app.public.machines_list._or_the_');
-                    }
-                    return text += training.name.substr(0, 1).toLowerCase() + training.name.substr(1);
-                  });
-                  return text;
-                };
-
-                // modal is closed with validation
-                $scope.ok = function () {
-                  $state.go('app.logged.trainings_reserve', { id: $scope.machine.trainings[0].id });
-                  return $uibModalInstance.close(machine);
-                };
-
-                // modal is closed with escaping
-                return $scope.cancel = function (e) {
-                  e.preventDefault();
-                  return $uibModalInstance.dismiss('cancel');
-                };
-              }
-              ] });
-          }
-        }
-
-      // if the user is not logged, open the login modal window
-      } else {
-        return _this.$scope.login();
-      }
-    }
-  });
-};
-
-/**
  * Controller used in the public listing page, allowing everyone to see the list of machines
  */
-Application.Controllers.controller('MachinesController', ['$scope', '$state', '_t', 'AuthService', 'Machine', '$uibModal', 'machinesPromise', 'settingsPromise', 'Member', 'uiTourService', 'growl',
-  function ($scope, $state, _t, AuthService, Machine, $uibModal, machinesPromise, settingsPromise, Member, uiTourService, growl) {
+Application.Controllers.controller('MachinesController', ['$scope', '$state', '_t', 'AuthService', 'Machine', '$uibModal', 'settingsPromise', 'Member', 'uiTourService', 'growl',
+  function ($scope, $state, _t, AuthService, Machine, $uibModal, settingsPromise, Member, uiTourService, growl) {
     /* PUBLIC SCOPE */
 
     /**
@@ -387,15 +305,35 @@ Application.Controllers.controller('ShowMachineController', ['$scope', '$state',
     };
 
     /**
+     * Shows an error message forwarded from a child component
+     */
+    $scope.onError = function (message) {
+      growl.error(message);
+    }
+
+    /**
+     * Open the modal dialog to log the user and resolves the returned promise when the logging process
+     * was successfully completed.
+     */
+    $scope.onLoginRequest = function (e) {
+      return new Promise((resolve, _reject) => {
+        $scope.login(e, resolve);
+      });
+    }
+
+    /**
+     * Redirect the user to the training reservation page
+     */
+    $scope.onEnrollRequest = function (trainingId) {
+      $state.go('app.logged.trainings_reserve', { id: trainingId });
+    }
+
+    /**
      * Callback to book a reservation for the current machine
      */
-    return $scope.reserveMachine = _reserveMachine.bind({
-      $scope,
-      $state,
-      _t,
-      $uibModal,
-      Machine
-    });
+    $scope.reserveMachine = function (machine) {
+      $state.go('app.logged.machines_reserve', { id: machine.slug });
+    }
   }
 ]);
 

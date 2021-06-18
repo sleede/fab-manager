@@ -106,6 +106,9 @@ en:
         add_an_attachment: "Add an attachment"
         disable_machine: "Disable machine"
         validate_your_machine: "Validate your machine"
+      #button to book a machine reservation
+      reserve_button:
+        book_this_machine: "Book this machine"
       #frame to select a plan to subscribe
       plan_subscribe:
         subscribe_online: "subscribe online"
