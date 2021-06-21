@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v5.0.6 2021 June 21
+
 - Updated babel and its dependencies to 7.14.5 / 7.14.6
 - Updated @stripe/stripe-js to 1.15.1
 - Updated @types/node to 15.12.2
