@@ -2,6 +2,7 @@
 
 # This worker perform various requests to the Stripe API (payment service)
 class SyncObjectsOnStripeWorker
+  require 'stripe/service'
   include Sidekiq::Worker
   sidekiq_options lock: :until_executed, on_conflict: :reject, queue: :stripe
 
@@ -26,9 +27,13 @@ class SyncObjectsOnStripeWorker
     total = Coupon.all.count
     Coupon.all.each_with_index do |coupon, index|
       logger.debug "#{index} / #{total}"
-      Stripe::Coupon.retrieve(c.code, api_key: Setting.get('stripe_secret_key'))
+      Stripe::Coupon.retrieve(coupon.code, api_key: Setting.get('stripe_secret_key'))
     rescue Stripe::InvalidRequestError
-      Stripe::Service.create_coupon(c.id)
+      begin
+        Stripe::Service.new.create_coupon(coupon.id)
+      rescue Stripe::InvalidRequestError => e
+        logger.warn "Unable to create coupon #{coupon.code} on stripe: #{e}"
+      end
     end
 
     w = StripeWorker.new

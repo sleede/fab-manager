@@ -6,7 +6,7 @@ class Coupon < ApplicationRecord
   has_many :payment_schedule
 
   after_create :create_gateway_coupon
-  after_commit :delete_gateway_coupon, on: [:destroy]
+  before_destroy :delete_gateway_coupon
 
   validates :name, presence: true
   validates :code, presence: true

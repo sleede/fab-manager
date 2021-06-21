@@ -28,7 +28,7 @@ Application.Services.factory('Help', ['$rootScope', '$uibModal', '$state', 'Auth
 
         // if no tour, just open the guide
         if (tourName === undefined) {
-          return window.open('https://github.com/sleede/fab-manager/raw/master/doc/fr/guide_utilisation_fab_manager_v4.7.pdf', '_blank');
+          return window.open('http://guide-fr.fab.mn', '_blank');
         }
 
         $uibModal.open({

@@ -715,7 +715,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
         growl.error(_t('app.shared.cart.online_payment_disabled'));
       } else {
         $scope.toggleOnlinePaymentModal(() => {
-          $scope.onlinePayment.cartItems = mkCartItems(reservation, 'card');
+          $scope.onlinePayment.cartItems = mkCartItems(reservation, $scope.coupon.applied, 'card');
         });
       }
     };

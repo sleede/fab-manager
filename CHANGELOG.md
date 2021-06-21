@@ -1,10 +1,39 @@
 # Changelog Fab-manager
 
-- Fix a bug: during the upgrade, unable to detect the target when not explicitly specified
+## v5.0.6 2021 June 21
+
+- Updated babel and its dependencies to 7.14.5 / 7.14.6
+- Updated @stripe/stripe-js to 1.15.1
+- Updated @types/node to 15.12.2
+- Updated @types/react-dom to 17.0.6
+- Updated @types/react to 17.0.11
+- Updated chokidar to 3.5.2
+- Updated codemirror to 5.62.0
+- Updated convert-source-map to 1.8.0
+- Updated core-js-compat to 3.15.0 
+- Updated electron-to-chromium to 1.3.752
+- Updated immer to 9.0.3
+- Updated jquery-ujs to 1.2.3
+- Updated react-i18next to 11.11.0
+- Updated react-modal to 3.14.3
+- Updated readdirp to 3.6.0
+− Updated regexpp to 3.2.0
+- Updated resolve-url-loader to 4.0.0
+- Updated sass to 1.35.1
+- Updated tslib to 2.3.0
+- Updated typescript to 4.3.4
+- Fix a bug: unable to sync coupons on stripe
+- Fix a security issue: updated postcss to 7.0.36 to fix [CVE-2021-23368](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23368)
+
+## v5.0.5 2021 June 18
+
 - Fix a bug: unable to sync users on stripe if one of them have an invalid email address
 - Fix a bug: unable to book a free event
 - Fix a bug: can't see the dates for the next booked training session, when the user is reserving a machine without the appropriate training
-
+- Fix a bug: invalid link to the user's manual
+- Fix a bug: unable to sync coupons on stripe
+- Fix a bug: ignored coupon when booking an event with card payment
+- Fix a bug: deleting a coupon displays an error message
 ## v5.0.4 2021 June 15
 
 - Ability to disable the public agenda
