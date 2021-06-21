@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- Updated resolve-url-loader to 4.0.0
 - Fix a bug: unable to sync coupons on stripe
 
 ## v5.0.5 2021 June 18
