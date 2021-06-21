@@ -29,7 +29,11 @@ class SyncObjectsOnStripeWorker
       logger.debug "#{index} / #{total}"
       Stripe::Coupon.retrieve(coupon.code, api_key: Setting.get('stripe_secret_key'))
     rescue Stripe::InvalidRequestError
-      Stripe::Service.new.create_coupon(coupon.id)
+      begin
+        Stripe::Service.new.create_coupon(coupon.id)
+      rescue Stripe::InvalidRequestError => e
+        logger.warn "Unable to create coupon #{coupon.code} on stripe: #{e}"
+      end
     end
 
     w = StripeWorker.new
