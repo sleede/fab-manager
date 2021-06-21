@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: unable to export members list if no subscriptions was taken
+
 ## v5.0.6 2021 June 21
 
 - Updated babel and its dependencies to 7.14.5 / 7.14.6
