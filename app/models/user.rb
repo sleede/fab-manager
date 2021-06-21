@@ -38,6 +38,9 @@ class User < ApplicationRecord
   has_many :training_credits, through: :users_credits, source: :training_credit
   has_many :machine_credits, through: :users_credits, source: :machine_credit
 
+  has_many :user_prepaid_packs, dependent: :destroy
+  has_many :prepaid_packs, through: :user_prepaid_packs
+
   has_many :user_tags, dependent: :destroy
   has_many :tags, through: :user_tags
   accepts_nested_attributes_for :tags, allow_destroy: true
