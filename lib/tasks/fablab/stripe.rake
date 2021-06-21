@@ -37,7 +37,7 @@ namespace :fablab do
       Coupon.all.each do |c|
         Stripe::Coupon.retrieve(c.code, api_key: Setting.get('stripe_secret_key'))
       rescue Stripe::InvalidRequestError
-        Stripe::Service.create_coupon(c.id)
+        Stripe::Service.new.create_coupon(c.id)
       end
       puts 'Done'
     end
