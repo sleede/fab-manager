@@ -8,6 +8,8 @@ class CreatePrepaidPacks < ActiveRecord::Migration[5.2]
       t.references :group, foreign_key: true
       t.integer :amount
       t.integer :minutes
+      t.string :validity_interval
+      t.integer :validity_count
 
       t.timestamps
     end

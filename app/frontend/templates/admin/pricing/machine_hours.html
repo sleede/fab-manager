@@ -23,7 +23,8 @@
                         onbeforesave="updatePrice($data, findPriceBy(machinesPrices, machine.id, group.id))">
                       {{ findPriceBy(machinesPrices, machine.id, group.id).amount | currency}}
                   </span>
-    </td>
+                  <configure-packs-button group-id="group.id" priceable-id="machine.id" priceable-type="'Machine'" />
+    </td> <!-- FIXME: too much API calls -->
   </tr>
   </tbody>
 </table>

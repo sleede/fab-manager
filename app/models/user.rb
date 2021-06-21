@@ -38,9 +38,6 @@ class User < ApplicationRecord
   has_many :training_credits, through: :users_credits, source: :training_credit
   has_many :machine_credits, through: :users_credits, source: :machine_credit
 
-  has_many :user_prepaid_packs, dependent: :destroy
-  has_many :prepaid_packs, through: :user_prepaid_packs
-
   has_many :user_tags, dependent: :destroy
   has_many :tags, through: :user_tags
   accepts_nested_attributes_for :tags, allow_destroy: true
@@ -71,6 +68,7 @@ class User < ApplicationRecord
   delegate :reservations, to: :statistic_profile
   delegate :trainings, to: :statistic_profile
   delegate :my_projects, to: :statistic_profile
+  delegate :prepaid_packs, to: :statistic_profile
   delegate :wallet, to: :invoicing_profile
   delegate :wallet_transactions, to: :invoicing_profile
   delegate :invoices, to: :invoicing_profile

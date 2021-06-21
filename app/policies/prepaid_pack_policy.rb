@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# Check the access policies for API::GroupsController
-class GroupPolicy < ApplicationPolicy
+# Check the access policies for API::PrepaidPacksController
+class PrepaidPackPolicy < ApplicationPolicy
   def create?
     user.admin?
   end
