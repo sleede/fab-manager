@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: unable to sync coupons on stripe
+
 ## v5.0.5 2021 June 18
 
 - Fix a bug: during the upgrade, unable to detect the target when not explicitly specified
