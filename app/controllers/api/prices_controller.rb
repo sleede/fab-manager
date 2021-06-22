@@ -7,21 +7,8 @@ class API::PricesController < API::ApiController
 
   def index
     authorize Price
-    @prices = Price.all
-    if params[:priceable_type]
-      @prices = @prices.where(priceable_type: params[:priceable_type])
 
-      @prices = @prices.where(priceable_id: params[:priceable_id]) if params[:priceable_id]
-    end
-    if params[:plan_id]
-      plan_id = if /no|nil|null|undefined/i.match?(params[:plan_id])
-                  nil
-                else
-                  params[:plan_id]
-                end
-      @prices = @prices.where(plan_id: plan_id)
-    end
-    @prices = @prices.where(group_id: params[:group_id]) if params[:group_id]
+    @prices = PriceService.list(params)
   end
 
   def update

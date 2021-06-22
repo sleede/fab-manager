@@ -1,5 +1,5 @@
 
-export interface IndexFilter {
+export interface PackIndexFilter {
   key: 'group_id' | 'priceable_id' | 'priceable_type',
   value: number|string,
 }

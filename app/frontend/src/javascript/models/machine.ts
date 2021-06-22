@@ -1,5 +1,10 @@
 import { Reservation } from './reservation';
 
+export interface MachineIndexFilter {
+  key: 'disabled',
+  value: boolean,
+}
+
 export interface Machine {
   id: number,
   name: string,

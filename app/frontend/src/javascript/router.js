@@ -771,7 +771,6 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           plans: ['Plan', function (Plan) { return Plan.query().$promise; }],
           groups: ['Group', function (Group) { return Group.query().$promise; }],
-          machinesPricesPromise: ['Price', function (Price) { return Price.query({ priceable_type: 'Machine', plan_id: 'null' }).$promise; }],
           trainingsPricingsPromise: ['TrainingsPricing', function (TrainingsPricing) { return TrainingsPricing.query().$promise; }],
           trainingsPromise: ['Training', function (Training) { return Training.query().$promise; }],
           machineCreditsPromise: ['Credit', function (Credit) { return Credit.query({ creditable_type: 'Machine' }).$promise; }],

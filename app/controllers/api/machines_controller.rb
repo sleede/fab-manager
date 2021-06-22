@@ -7,12 +7,7 @@ class API::MachinesController < API::ApiController
   respond_to :json
 
   def index
-    sort_by = Setting.get('machines_sort_by') || 'default'
-    @machines = if sort_by == 'default'
-                  Machine.includes(:machine_image, :plans)
-                else
-                  Machine.includes(:machine_image, :plans).order(sort_by)
-                end
+    @machines = MachineService.list(params)
   end
 
   def show
