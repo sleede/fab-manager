@@ -15,7 +15,7 @@ export default class PriceAPI {
   }
 
   static async update (price: Price): Promise<Price> {
-    const res: AxiosResponse<Price> = await apiClient.patch(`/api/price/${price.id}`, { price });
+    const res: AxiosResponse<Price> = await apiClient.patch(`/api/prices/${price.id}`, { price });
     return  res?.data;
   }
 

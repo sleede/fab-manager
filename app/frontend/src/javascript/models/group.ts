@@ -1,6 +1,6 @@
 export interface GroupIndexFilter {
-  key: 'disabled',
-  value: boolean,
+  disabled?: boolean,
+  admins?: boolean,
 }
 
 export interface Group {

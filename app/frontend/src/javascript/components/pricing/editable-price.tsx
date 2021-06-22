@@ -17,7 +17,7 @@ interface EditablePriceProps {
  */
 export const EditablePrice: React.FC<EditablePriceProps> = ({ price, onSave }) => {
   const [edit, setEdit] = useState<boolean>(false);
-  const [tempPrice, setTempPrice] = useState<number>(price.amount);
+  const [tempPrice, setTempPrice] = useState<string>(`${price.amount}`);
 
   /**
    * Return the formatted localized amount for the price (eg. 20.5 => "20,50 €")
@@ -31,14 +31,15 @@ export const EditablePrice: React.FC<EditablePriceProps> = ({ price, onSave }) =
    */
   const handleValidateEdit = (): void => {
     const newPrice: Price = Object.assign({}, price);
-    newPrice.amount = tempPrice;
+    newPrice.amount = parseFloat(tempPrice);
     onSave(newPrice);
+    toggleEdit();
   }
 
   /**
    * Enable or disable the edit mode
    */
-  const toggleEdit= (): void => {
+  const toggleEdit = (): void => {
     setEdit(!edit);
   }
 
@@ -46,7 +47,7 @@ export const EditablePrice: React.FC<EditablePriceProps> = ({ price, onSave }) =
     <span className="editable-price">
       {!edit && <span className="display-price" onClick={toggleEdit}>{formatPrice()}</span>}
       {edit && <span>
-        <FabInput id="price" defaultValue={price.amount} addOn={Fablab.intl_currency} onChange={setTempPrice} required/>
+        <FabInput id="price" type="number" step={0.01} defaultValue={price.amount} addOn={Fablab.intl_currency} onChange={setTempPrice} required/>
         <FabButton icon={<i className="fas fa-check" />} className="approve-button" onClick={handleValidateEdit} />
         <FabButton icon={<i className="fas fa-times" />} className="cancel-button" onClick={toggleEdit} />
       </span>}

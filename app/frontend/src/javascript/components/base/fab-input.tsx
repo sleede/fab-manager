@@ -18,12 +18,13 @@ interface FabInputProps {
   placeholder?: string,
   error?: string,
   type?: 'text' | 'date' | 'password' | 'url' | 'time' | 'tel' | 'search' | 'number' | 'month' | 'email' | 'datetime-local' | 'week',
+  step?: number | 'any',
 }
 
 /**
  * This component is a template for an input component that wraps the application style
  */
-export const FabInput: React.FC<FabInputProps> = ({ id, onChange, defaultValue, icon, className, disabled, type, required, debounce, addOn, addOnClassName, readOnly, maxLength, pattern, placeholder, error }) => {
+export const FabInput: React.FC<FabInputProps> = ({ id, onChange, defaultValue, icon, className, disabled, type, required, debounce, addOn, addOnClassName, readOnly, maxLength, pattern, placeholder, error, step }) => {
   const [inputValue, setInputValue] = useState<any>(defaultValue);
 
   /**
@@ -86,6 +87,7 @@ export const FabInput: React.FC<FabInputProps> = ({ id, onChange, defaultValue, 
         {hasIcon() && <span className="fab-input--icon">{icon}</span>}
         <input id={id}
                type={type}
+               step={step}
                className="fab-input--input"
                value={inputValue}
                onChange={handleChange}

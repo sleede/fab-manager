@@ -12,8 +12,6 @@ import { User, UserRole } from '../../models/user';
 import { IFablab } from '../../models/fablab';
 import { PaymentSchedule, PaymentScheduleItem, PaymentScheduleItemState } from '../../models/payment-schedule';
 import PaymentScheduleAPI from '../../api/payment-schedule';
-import { useImmer } from 'use-immer';
-import { SettingName } from '../../models/setting';
 
 declare var Fablab: IFablab;
 

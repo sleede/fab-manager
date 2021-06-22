@@ -14,6 +14,8 @@ class GroupService
       groups = groups.where(disabled: state)
     end
 
+    groups = groups.where.not(slug: 'admins') if filters[:admins] == 'false'
+
     groups
   end
 end

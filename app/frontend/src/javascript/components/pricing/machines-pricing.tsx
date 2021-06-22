@@ -16,6 +16,7 @@ import PriceAPI from '../../api/price';
 import { Price } from '../../models/price';
 import PrepaidPackAPI from '../../api/prepaid-pack';
 import { PrepaidPack } from '../../models/prepaid-pack';
+import { useImmer } from 'use-immer';
 
 declare var Fablab: IFablab;
 declare var Application: IApplication;
@@ -33,7 +34,7 @@ const MachinesPricing: React.FC<MachinesPricingProps> = ({ onError, onSuccess })
 
   const [machines, setMachines] = useState<Array<Machine>>(null);
   const [groups, setGroups] = useState<Array<Group>>(null);
-  const [prices, setPrices] = useState<Array<Price>>(null);
+  const [prices, updatePrices] = useImmer<Array<Price>>(null);
   const [packs, setPacks] = useState<Array<PrepaidPack>>(null);
 
   // retrieve the initial data
@@ -41,11 +42,11 @@ const MachinesPricing: React.FC<MachinesPricingProps> = ({ onError, onSuccess })
     MachineAPI.index([{ key: 'disabled', value: false }])
       .then(data => setMachines(data))
       .catch(error => onError(error));
-    GroupAPI.index([{ key: 'disabled', value: false }])
+    GroupAPI.index({ disabled: false , admins: false })
       .then(data => setGroups(data))
       .catch(error => onError(error));
     PriceAPI.index([{ key: 'priceable_type', value: 'Machine'}, { key: 'plan_id', value: null }])
-      .then(data => setPrices(data))
+      .then(data => updatePrices(data))
       .catch(error => onError(error));
     PrepaidPackAPI.index()
       .then(data => setPacks(data))
@@ -81,16 +82,30 @@ const MachinesPricing: React.FC<MachinesPricingProps> = ({ onError, onSuccess })
   };
 
   /**
+   * Update the given price in the internal state
+   */
+  const updatePrice = (price: Price): void => {
+    updatePrices(draft => {
+      const index = draft.findIndex(p => p.id === price.id);
+      draft[index] = price;
+      return draft;
+    });
+  }
+
+  /**
    * Callback triggered when the user has confirmed to update a price
    */
   const handleUpdatePrice = (price: Price): void => {
     PriceAPI.update(price)
-      .then(() => onSuccess(t('app.admin.machines_pricing.price_updated')))
+      .then(() => {
+        onSuccess(t('app.admin.machines_pricing.price_updated'));
+        updatePrice(price);
+      })
       .catch(error => onError(error))
   }
 
   return (
-    <div className="machine-pricing">
+    <div className="machines-pricing">
       <FabAlert level="warning">
         <p><HtmlTranslate trKey="app.admin.machines_pricing.prices_match_machine_hours_rates_html"/></p>
         <p><HtmlTranslate trKey="app.admin.machines_pricing.prices_calculated_on_hourly_rate_html" options={{ DURATION: EXEMPLE_DURATION, RATE: examplePrice('hourly_rate'), PRICE: examplePrice('final_price') }} /></p>
