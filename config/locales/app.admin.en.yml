@@ -374,6 +374,9 @@ en:
         you_can_override: "You can override this duration for each availability you create in the agenda. The price will then be adjusted accordingly."
         machines: "Machines"
         price_updated: "Price successfully updated"
+      configure_packs_button:
+        packs: "Prepaid packs"
+        no_packs: "No packs for now"
       #ajouter un code promotionnel
       coupons_new:
         add_a_coupon: "Add a coupon"

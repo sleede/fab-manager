@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { PrepaidPack } from '../../models/prepaid-pack';
 import { FabModal } from '../base/fab-modal';
+import { useTranslation } from 'react-i18next';
 
 interface ConfigurePacksButtonProps {
   packs: Array<PrepaidPack>,
@@ -12,6 +13,7 @@ interface ConfigurePacksButtonProps {
  * When clicked, it opens a modal dialog to configure (add/delete/edit/remove) prepaid-packs.
  */
 export const ConfigurePacksButton: React.FC<ConfigurePacksButtonProps> = ({ packs, onError }) => {
+  const { t } = useTranslation('admin');
   const [showList, setShowList] = useState<boolean>(false);
   const [addPackModal, setAddPackModal] = useState<boolean>(false);
 
@@ -28,12 +30,23 @@ export const ConfigurePacksButton: React.FC<ConfigurePacksButtonProps> = ({ pack
   }
 
   return (
-    <div className="configure-packs-button" onMouseOver={toggleShowList} onClick={handleAddPack}>
-      <i className="fas fa-box-open" />
-      {packs && showList && <div className="packs-overview">
-        {packs.map(p => <div>{p.minutes / 60}h - {p.amount}</div>)}
+    <div className="configure-packs-button" onClick={toggleShowList}>
+      <button className="packs-button">
+        <i className="fas fa-box" />
+      </button>
+      {showList && <div className="packs-popover">
+        <div className="popover-title">
+          <h3>{t('app.admin.configure_packs_button.packs')}</h3>
+          <button className="add-pack-button" onClick={handleAddPack}><i className="fas fa-plus"/></button>
+        </div>
+        <div className="popover-content">
+          <ul>
+            {packs?.map(p => <li key={p.id}>{p.minutes / 60}h - {p.amount}</li>)}
+          </ul>
+          {packs?.length === 0 && <span>{t('app.admin.configure_packs_button.no_packs')}</span>}
+        </div>
       </div>}
-      <FabModal isOpen={addPackModal} toggleModal={toggleAddPackModal}>NEW PACK</FabModal>
+    <FabModal isOpen={addPackModal} toggleModal={toggleAddPackModal}>NEW PACK</FabModal>
     </div>
   );
 }
