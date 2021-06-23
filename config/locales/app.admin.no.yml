@@ -3,27 +3,27 @@
     admin:
       #add a new machine
       machines_new:
-        declare_a_new_machine: "Declare a new machine"
-        watch_out_when_creating_a_new_machine_its_prices_are_initialized_at_0_for_all_subscriptions: "Watch out! When creating a new machine, its prices are initialized at 0 for all subscriptions."
-        consider_changing_them_before_creating_any_reservation_slot: "Consider changing them before creating any reservation slot."
+        declare_a_new_machine: "Sette opp en ny maskin"
+        watch_out_when_creating_a_new_machine_its_prices_are_initialized_at_0_for_all_subscriptions: "Pass på: når ny maskin settes opp blir plir alle priser satt til 0."
+        consider_changing_them_before_creating_any_reservation_slot: "Vurder å endre dem før nye reserveringer gjøres."
       #machine edition
       machines_edit:
-        machine_edit: "Edit a machine"
+        machine_edit: "Rediger maskin"
       #manage the trainings & machines slots
       calendar:
-        calendar_management: "Calendar management"
-        trainings: "Trainings"
-        machines: "Machines"
-        spaces: "Spaces"
-        events: "Eventos"
-        availabilities: "Availabilities"
-        availabilities_notice: "Export to an Excel workbook every slots available for reservation, and their occupancy rate."
+        calendar_management: "Kalenderbehandling"
+        trainings: "Opplæringer"
+        machines: "Maskiner"
+        spaces: "Rom"
+        events: "Eventer"
+        availabilities: "Tilgjengelig"
+        availabilities_notice: "Eksporter alle ledige plasser for reservasjon og beleggstall til en Excel-arbeidsbok."
         info: "Info"
-        tags: "Tags"
-        slot_duration: "Slot duration: {DURATION} minutes"
-        ongoing_reservations: "Ongoing reservations"
-        without_reservation: "Without reservation"
-        confirmation_required: "Confirmation required"
+        tags: "Merkelapper"
+        slot_duration: "Reservasjon, varighet: {DURATION} minutter"
+        ongoing_reservations: "Pågående reservasjoner"
+        without_reservation: "Ikke reservert"
+        confirmation_required: "Bekreftelse nødvendig"
         do_you_really_want_to_cancel_the_USER_s_reservation_the_DATE_at_TIME_concerning_RESERVATION: "Do you really {GENDER, select, other {want}} to cancel the {USER}'s reservation, the {DATE} at {TIME}, concerning {RESERVATION}?"
         reservation_was_successfully_cancelled: "Reservation was successfully cancelled."
         reservation_cancellation_failed: "Reservation cancellation failed."
