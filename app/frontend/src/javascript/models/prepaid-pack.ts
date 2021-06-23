@@ -1,12 +1,13 @@
 
 export interface PackIndexFilter {
-  key: 'group_id' | 'priceable_id' | 'priceable_type',
-  value: number|string,
+  group_id: number,
+  priceable_id: number,
+  priceable_type: string
 }
 
 export interface PrepaidPack {
   id?: number,
-  priceable_id: string,
+  priceable_id: number,
   priceable_type: string,
   group_id: number,
   validity_interval?: 'day' | 'week' | 'month' | 'year',

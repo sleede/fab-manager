@@ -3,8 +3,8 @@ import { AxiosResponse } from 'axios';
 import { Machine, MachineIndexFilter } from '../models/machine';
 
 export default class MachineAPI {
-  static async index (filters?: Array<MachineIndexFilter>): Promise<Array<Machine>> {
-    const res: AxiosResponse<Array<Machine>> = await apiClient.get(`/api/machines${MachineAPI.filtersToQuery(filters)}`);
+  static async index (filters?: MachineIndexFilter): Promise<Array<Machine>> {
+    const res: AxiosResponse<Array<Machine>> = await apiClient.get(`/api/machines${this.filtersToQuery(filters)}`);
     return res?.data;
   }
 
@@ -13,10 +13,10 @@ export default class MachineAPI {
     return res?.data;
   }
 
-  private static filtersToQuery(filters?: Array<MachineIndexFilter>): string {
+  private static filtersToQuery(filters?: MachineIndexFilter): string {
     if (!filters) return '';
 
-    return '?' + filters.map(f => `${f.key}=${f.value}`).join('&');
+    return '?' + Object.entries(filters).map(f => `${f[0]}=${f[1]}`).join('&');
   }
 }
 

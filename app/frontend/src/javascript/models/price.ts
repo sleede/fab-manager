@@ -1,6 +1,8 @@
 export interface PriceIndexFilter {
-  key: 'priceable_type' | 'priceable_id' | 'group_id' | 'plan_id',
-  value?: number|string,
+  priceable_type?: string,
+  priceable_id?: number,
+  group_id?: number,
+  plan_id?: number|null,
 }
 
 export interface Price {

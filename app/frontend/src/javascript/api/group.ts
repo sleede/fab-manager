@@ -4,7 +4,7 @@ import { Group, GroupIndexFilter } from '../models/group';
 
 export default class GroupAPI {
   static async index (filters?: GroupIndexFilter): Promise<Array<Group>> {
-    const res: AxiosResponse<Array<Group>> = await apiClient.get(`/api/groups${GroupAPI.filtersToQuery(filters)}`);
+    const res: AxiosResponse<Array<Group>> = await apiClient.get(`/api/groups${this.filtersToQuery(filters)}`);
     return res?.data;
   }
 

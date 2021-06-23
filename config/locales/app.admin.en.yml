@@ -377,6 +377,22 @@ en:
       configure_packs_button:
         packs: "Prepaid packs"
         no_packs: "No packs for now"
+        pack_DURATION: "{DURATION} hours"
+      pack_form:
+        hours: "Hours"
+        amount: "Price"
+        validity_count: "Maximum validity"
+        select_interval: "Interval..."
+        intervals:
+          day: "{COUNT, plural, one{Day} other{Days}}"
+          week: "{COUNT, plural, one{Week} other{Weeks}}"
+          month: "{COUNT, plural, one{Month} other{Months}}"
+          year: "{COUNT, plural, one{Year} other{Years}}"
+      new_pack_modal:
+        new_pack: "New prepaid pack"
+        new_pack_info: "A prepaid pack allows users to buy {TYPE, select, Machine{machine} Space{space} other{}} hours before booking any slots. These packs can provide discounts on volumes purchases."
+        create_pack: "Create this pack"
+        pack_successfully_created: "The new prepaid pack was successfully created."
       #ajouter un code promotionnel
       coupons_new:
         add_a_coupon: "Add a coupon"

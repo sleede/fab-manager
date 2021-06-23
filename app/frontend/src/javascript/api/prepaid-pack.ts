@@ -3,8 +3,8 @@ import { AxiosResponse } from 'axios';
 import { PackIndexFilter, PrepaidPack } from '../models/prepaid-pack';
 
 export default class PrepaidPackAPI {
-  static async index (filters?: Array<PackIndexFilter>): Promise<Array<PrepaidPack>> {
-    const res: AxiosResponse<Array<PrepaidPack>> = await apiClient.get(`/api/prepaid_packs${PrepaidPackAPI.filtersToQuery(filters)}`);
+  static async index (filters?: PackIndexFilter): Promise<Array<PrepaidPack>> {
+    const res: AxiosResponse<Array<PrepaidPack>> = await apiClient.get(`/api/prepaid_packs${this.filtersToQuery(filters)}`);
     return res?.data;
   }
 
@@ -28,10 +28,10 @@ export default class PrepaidPackAPI {
     return res?.data;
   }
 
-  private static filtersToQuery(filters?: Array<PackIndexFilter>): string {
+  private static filtersToQuery(filters?: PackIndexFilter): string {
     if (!filters) return '';
 
-    return '?' + filters.map(f => `${f.key}=${f.value}`).join('&');
+    return '?' + Object.entries(filters).map(f => `${f[0]}=${f[1]}`).join('&');
   }
 
 }

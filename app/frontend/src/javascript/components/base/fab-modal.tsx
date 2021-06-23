@@ -27,12 +27,13 @@ interface FabModalProps {
   onConfirm?: (event: BaseSyntheticEvent) => void,
   preventConfirm?: boolean,
   onCreation?: () => void,
+  onConfirmSendFormId?: string,
 }
 
 /**
  * This component is a template for a modal dialog that wraps the application style
  */
-export const FabModal: React.FC<FabModalProps> = ({ title, isOpen, toggleModal, children, confirmButton, className, width = 'sm', closeButton, customHeader, customFooter, onConfirm, preventConfirm, onCreation }) => {
+export const FabModal: React.FC<FabModalProps> = ({ title, isOpen, toggleModal, children, confirmButton, className, width = 'sm', closeButton, customHeader, customFooter, onConfirm, preventConfirm, onCreation, onConfirmSendFormId }) => {
   const { t } = useTranslation('shared');
 
   const [blackLogo, setBlackLogo] = useState<CustomAsset>(null);
@@ -53,6 +54,13 @@ export const FabModal: React.FC<FabModalProps> = ({ title, isOpen, toggleModal, 
    */
   const hasConfirmButton = (): boolean => {
     return confirmButton !== undefined;
+  }
+
+  /**
+   * Check if the behavior of the confirm button is to send a form, using the provided ID
+   */
+  const confirmationSendForm = (): boolean => {
+    return onConfirmSendFormId !== undefined;
   }
 
   /**
@@ -96,7 +104,8 @@ export const FabModal: React.FC<FabModalProps> = ({ title, isOpen, toggleModal, 
       <div className="fab-modal-footer">
         <Loader>
           {hasCloseButton() &&<FabButton className="modal-btn--close" onClick={toggleModal}>{t('app.shared.buttons.close')}</FabButton>}
-          {hasConfirmButton() && <FabButton className="modal-btn--confirm" disabled={preventConfirm} onClick={onConfirm}>{confirmButton}</FabButton>}
+          {hasConfirmButton() && !confirmationSendForm() && <FabButton className="modal-btn--confirm" disabled={preventConfirm} onClick={onConfirm}>{confirmButton}</FabButton>}
+          {hasConfirmButton() && confirmationSendForm() && <FabButton className="modal-btn--confirm" disabled={preventConfirm} type="submit" form={onConfirmSendFormId}>{confirmButton}</FabButton>}
           {hasCustomFooter() && customFooter}
         </Loader>
       </div>

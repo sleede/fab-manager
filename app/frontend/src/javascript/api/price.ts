@@ -9,7 +9,7 @@ export default class PriceAPI {
     return res?.data;
   }
 
-  static async index (filters?: Array<PriceIndexFilter>): Promise<Array<Price>> {
+  static async index (filters?: PriceIndexFilter): Promise<Array<Price>> {
     const res: AxiosResponse = await apiClient.get(`/api/prices${this.filtersToQuery(filters)}`);
     return res?.data;
   }
@@ -19,10 +19,10 @@ export default class PriceAPI {
     return  res?.data;
   }
 
-  private static filtersToQuery(filters?: Array<PriceIndexFilter>): string {
+  private static filtersToQuery(filters?: PriceIndexFilter): string {
     if (!filters) return '';
 
-    return '?' + filters.map(f => `${f.key}=${f.value}`).join('&');
+    return '?' + Object.entries(filters).map(f => `${f[0]}=${f[1]}`).join('&');
   }
 }
 

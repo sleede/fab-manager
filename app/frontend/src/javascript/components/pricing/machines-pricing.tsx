@@ -39,13 +39,13 @@ const MachinesPricing: React.FC<MachinesPricingProps> = ({ onError, onSuccess })
 
   // retrieve the initial data
   useEffect(() => {
-    MachineAPI.index([{ key: 'disabled', value: false }])
+    MachineAPI.index({ disabled: false })
       .then(data => setMachines(data))
       .catch(error => onError(error));
     GroupAPI.index({ disabled: false , admins: false })
       .then(data => setGroups(data))
       .catch(error => onError(error));
-    PriceAPI.index([{ key: 'priceable_type', value: 'Machine'}, { key: 'plan_id', value: null }])
+    PriceAPI.index({ priceable_type: 'Machine', plan_id: null })
       .then(data => updatePrices(data))
       .catch(error => onError(error));
     PrepaidPackAPI.index()
@@ -74,11 +74,14 @@ const MachinesPricing: React.FC<MachinesPricingProps> = ({ onError, onSuccess })
    * Find the price matching the given criterion
    */
   const findPriceBy = (machineId, groupId): Price => {
-    for (const price of prices) {
-      if ((price.priceable_id === machineId) && (price.group_id === groupId)) {
-        return price;
-      }
-    }
+    return prices.find(price => price.priceable_id === machineId && price.group_id === groupId);
+  };
+
+  /**
+   * Filter the packs matching the given criterion
+   */
+  const filterPacksBy = (machineId, groupId): Array<PrepaidPack> => {
+    return packs.filter(pack => pack.priceable_id === machineId && pack.group_id === groupId);
   };
 
   /**
@@ -123,7 +126,12 @@ const MachinesPricing: React.FC<MachinesPricingProps> = ({ onError, onSuccess })
           <td>{machine.name}</td>
           {groups?.map(group => <td key={group.id}>
             {prices && <EditablePrice price={findPriceBy(machine.id, group.id)} onSave={handleUpdatePrice} />}
-            {packs && <ConfigurePacksButton packs={packs} onError={onError} />}
+            {packs && <ConfigurePacksButton packsData={filterPacksBy(machine.id, group.id)}
+                                            onError={onError}
+                                            onSuccess={onSuccess}
+                                            groupId={group.id}
+                                            priceableId={machine.id}
+                                            priceableType="Machine" />}
           </td>)}
         </tr>)}
         </tbody>

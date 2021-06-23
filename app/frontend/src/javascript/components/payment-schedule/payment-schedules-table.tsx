@@ -1,4 +1,4 @@
-import React, { ReactEventHandler, ReactNode, useState } from 'react';
+import React, { ReactEventHandler, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Loader } from '../base/loader';
 import moment from 'moment';

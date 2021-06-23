@@ -25,6 +25,7 @@
 @import "modules/base/fab-input";
 @import "modules/base/fab-button";
 @import "modules/base/fab-alert";
+@import "modules/base/fab-popover";
 @import "modules/base/labelled-input";
 @import "modules/payment-schedule/payment-schedule-summary";
 @import "modules/wallet-info";
@@ -58,5 +59,6 @@
 @import "modules/pricing/machines-pricing";
 @import "modules/pricing/editable-price";
 @import "modules/pricing/configure-packs-button";
+@import "modules/pricing/pack-form";
 
 @import "app.responsive";

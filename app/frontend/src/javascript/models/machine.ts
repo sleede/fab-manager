@@ -1,8 +1,7 @@
 import { Reservation } from './reservation';
 
 export interface MachineIndexFilter {
-  key: 'disabled',
-  value: boolean,
+  disabled: boolean,
 }
 
 export interface Machine {
