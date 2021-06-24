@@ -74,8 +74,8 @@ export const FabModal: React.FC<FabModalProps> = ({ title, isOpen, toggleModal, 
            onRequestClose={toggleModal}>
       <div className="fab-modal-header">
         <Loader>
-          <img src={blackLogo.custom_asset_file_attributes.attachment_url}
-               alt={blackLogo.custom_asset_file_attributes.attachment}
+          <img src={blackLogo?.custom_asset_file_attributes?.attachment_url}
+               alt={blackLogo?.custom_asset_file_attributes?.attachment}
                className="modal-logo" />
         </Loader>
         <h1>{ title }</h1>
