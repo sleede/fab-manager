@@ -381,6 +381,7 @@ en:
       pack_form:
         hours: "Hours"
         amount: "Price"
+        disabled: "Disabled"
         validity_count: "Maximum validity"
         select_interval: "Interval..."
         intervals:
@@ -393,6 +394,12 @@ en:
         new_pack_info: "A prepaid pack allows users to buy {TYPE, select, Machine{machine} Space{space} other{}} hours before booking any slots. These packs can provide discounts on volumes purchases."
         create_pack: "Create this pack"
         pack_successfully_created: "The new prepaid pack was successfully created."
+      delete_pack:
+        pack_deleted: "The prepaid pack was successfully deleted."
+        unable_to_delete: "Unable to delete the prepaid pack: "
+        delete_pack: "Delete the prepaid pack"
+        confirm_delete: "Delete"
+        delete_confirmation: "Are you sure you want to delete this prepaid pack? This won't be possible if the pack was already bought by users."
       #ajouter un code promotionnel
       coupons_new:
         add_a_coupon: "Add a coupon"

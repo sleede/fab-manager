@@ -44,16 +44,16 @@
           line-height: 24px;
         }
 
-        .pack-actions > button {
+        .pack-actions button {
           font-size: 10px;
           vertical-align: middle;
           line-height: 10px;
           height: auto;
+        }
 
-          &.remove-pack-button {
-            background-color: #cb1117;
-            color: white;
-          }
+        &.disabled {
+          background-color: #eeeeee;
+          color: #999999;
         }
       }
     }

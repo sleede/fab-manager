@@ -10,6 +10,7 @@ class CreatePrepaidPacks < ActiveRecord::Migration[5.2]
       t.integer :minutes
       t.string :validity_interval
       t.integer :validity_count
+      t.boolean :disabled
 
       t.timestamps
     end

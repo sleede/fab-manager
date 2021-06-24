@@ -1,5 +1,6 @@
 import React, { BaseSyntheticEvent } from 'react';
 import Select from 'react-select';
+import Switch from 'react-switch';
 import { PrepaidPack } from '../../models/prepaid-pack';
 import { useTranslation } from 'react-i18next';
 import { useImmer } from 'use-immer';
@@ -85,6 +86,15 @@ export const PackForm: React.FC<PackFormProps> = ({ formId, onSubmit, packData }
     });
   }
 
+  /**
+   * Callback triggered when the user disables the pack.
+   */
+  const handleUpdateDisabled = (checked: boolean) => {
+    updatePack(draft => {
+      draft.disabled = checked;
+    })
+  }
+
   return (
     <form id={formId} onSubmit={handleSubmit} className="pack-form">
       <label htmlFor="hours">{t('app.admin.pack_form.hours')} *</label>
@@ -118,6 +128,10 @@ export const PackForm: React.FC<PackFormProps> = ({ formId, onSubmit, packData }
                 defaultValue={pack?.validity_interval}
                 onChange={handleUpdateValidityInterval}
                 options={buildOptions()} />
+      </div>
+      <label htmlFor="disabled">{t('app.admin.pack_form.disabled')}</label>
+      <div>
+        <Switch checked={pack?.disabled || false} onChange={handleUpdateDisabled} id="disabled" />
       </div>
     </form>
   );

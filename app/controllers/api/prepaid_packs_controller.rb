@@ -47,6 +47,6 @@ class API::PrepaidPacksController < API::ApiController
   def pack_params
     pack_params = params
     pack_params[:pack][:amount] = pack_params[:pack][:amount].to_f * 100.0 if pack_params[:pack][:amount]
-    params.require(:pack).permit(:priceable_id, :priceable_type, :group_id, :amount, :minutes)
+    params.require(:pack).permit(:priceable_id, :priceable_type, :group_id, :amount, :minutes, :disabled)
   end
 end

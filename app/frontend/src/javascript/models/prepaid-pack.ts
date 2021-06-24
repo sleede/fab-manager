@@ -15,4 +15,5 @@ export interface PrepaidPack {
   minutes: number,
   amount: number,
   usages?: number,
+  disabled?: boolean,
 }

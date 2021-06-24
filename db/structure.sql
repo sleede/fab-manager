@@ -1727,6 +1727,7 @@ CREATE TABLE public.prepaid_packs (
     minutes integer,
     validity_interval character varying,
     validity_count integer,
+    disabled boolean,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );

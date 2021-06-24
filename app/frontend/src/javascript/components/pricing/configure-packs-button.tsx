@@ -7,6 +7,7 @@ import PrepaidPackAPI from '../../api/prepaid-pack';
 import { IFablab } from '../../models/fablab';
 import { duration } from 'moment';
 import { FabButton } from '../base/fab-button';
+import { DeletePack } from './delete-pack';
 
 declare var Fablab: IFablab;
 
@@ -30,7 +31,6 @@ export const ConfigurePacksButton: React.FC<ConfigurePacksButtonProps> = ({ pack
   const [showList, setShowList] = useState<boolean>(false);
   const [addPackModal, setAddPackModal] = useState<boolean>(false);
   const [editPackModal, setEditPackModal] = useState<boolean>(false);
-  const [deletePackModal, setDeletePackModal] = useState<boolean>(false);
 
   /**
    * Return the formatted localized amount for the given price (e.g. 20.5 => "20,50 €")
@@ -68,17 +68,10 @@ export const ConfigurePacksButton: React.FC<ConfigurePacksButtonProps> = ({ pack
   }
 
   /**
-   * Open/closes the "confirm delete pack" modal
+   * Callback triggered when the PrepaidPack was successfully created/deleted/updated.
+   * We refresh the list of packs for the current tooltip to display the new data.
    */
-  const toggleRemovePackModal = (): void => {
-    setDeletePackModal(!deletePackModal);
-  }
-
-  /**
-   * Callback triggered when the PrepaidPack was successfully created.
-   * We refresh the list of packs for the current button to get the new one.
-   */
-  const handlePackCreated = (message: string) => {
+  const handleSuccess = (message: string) => {
     onSuccess(message);
     PrepaidPackAPI.index({ group_id: groupId, priceable_id: priceableId, priceable_type: priceableType })
       .then(data => setPacks(data))
@@ -100,11 +93,11 @@ export const ConfigurePacksButton: React.FC<ConfigurePacksButtonProps> = ({ pack
       {showList && <FabPopover title={t('app.admin.configure_packs_button.packs')} headerButton={renderAddButton()}>
         <ul>
           {packs?.map(p =>
-            <li key={p.id}>
+            <li key={p.id} className={p.disabled ? 'disabled' : ''}>
               {formatDuration(p.minutes)} - {formatPrice(p.amount)}
               <span className="pack-actions">
                 <FabButton className="edit-pack-button" onClick={toggleEditPackModal}><i className="fas fa-edit"/></FabButton>
-                <FabButton className="remove-pack-button" onClick={toggleRemovePackModal}><i className="fas fa-trash"/></FabButton>
+                <DeletePack onSuccess={handleSuccess} onError={onError} pack={p} />
               </span>
             </li>)}
         </ul>
@@ -112,7 +105,7 @@ export const ConfigurePacksButton: React.FC<ConfigurePacksButtonProps> = ({ pack
       </FabPopover>}
     <NewPackModal isOpen={addPackModal}
                   toggleModal={toggleAddPackModal}
-                  onSuccess={handlePackCreated}
+                  onSuccess={handleSuccess}
                   onError={onError}
                   groupId={groupId}
                   priceableId={priceableId}
