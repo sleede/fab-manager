@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v5.0.7 2021 June 24
+
 - Fix a bug: unable to export members list if no subscriptions was taken
 - Fix a bug: most OpenAPI endpoints were dysfunctional
 - Fix a bug: unable to open some modals when the logo was undefined
