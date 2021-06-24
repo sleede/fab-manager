@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Fix a bug: unable to export members list if no subscriptions was taken
+- Fix a bug: most OpenAPI endpoints were dysfunctional
 
 ## v5.0.6 2021 June 21
 

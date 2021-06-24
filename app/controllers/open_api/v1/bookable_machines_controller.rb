@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# authorized 3rd party softwares can list the bookable machines through the OpenAPI
 class OpenAPI::V1::BookableMachinesController < OpenAPI::V1::BaseController
   extend OpenAPI::ApiDoc
   expose_doc
@@ -22,19 +25,15 @@ class OpenAPI::V1::BookableMachinesController < OpenAPI::V1::BaseController
 
 
 
-    if user.subscription
-      plan_id = user.subscription.plan_id
+    return unless user.subscription
 
-      @machines.each do |machine|
-        credit = Credit.find_by(plan_id: plan_id, creditable: machine)
-        users_credit = user.users_credits.find_by(credit: credit) if credit
+    plan_id = user.subscription.plan_id
 
-        if credit
-          @hours_remaining[machine.id] = credit.hours - (users_credit.try(:hours_used) || 0)
-        else
-          @hours_remaining[machine.id] = 0
-        end
-      end
+    @machines.each do |machine|
+      credit = Credit.find_by(plan_id: plan_id, creditable: machine)
+      users_credit = user.users_credits.find_by(credit: credit) if credit
+
+      @hours_remaining[machine.id] = credit ? credit.hours - (users_credit.try(:hours_used) || 0) : 0
     end
   end
 end

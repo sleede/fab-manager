@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 json.invoices @invoices do |invoice|
-  json.extract! invoice, :id, :user_id, :reference, :total, :type, :description
+  json.extract! invoice, :id, :reference, :total, :type, :description
+  json.user_id invoice.statistic_profile.user_id
   if invoice.payment_gateway_object
     json.payment_gateway_object do
       json.id invoice.payment_gateway_object.gateway_object_id

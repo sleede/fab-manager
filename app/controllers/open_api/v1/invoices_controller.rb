@@ -1,12 +1,16 @@
+# frozen_string_literal: true
+
 # OpenAPI controller for the invoices
 class OpenAPI::V1::InvoicesController < OpenAPI::V1::BaseController
   extend OpenAPI::ApiDoc
+  include Rails::Pagination
   expose_doc
 
   def index
     @invoices = Invoice.order(created_at: :desc)
+                       .references(:invoicing_profiles)
 
-    @invoices = @invoices.where(user_id: params[:user_id]) if params[:user_id].present?
+    @invoices = @invoices.where('invoicing_profiles.user_id = ?', params[:user_id]) if params[:user_id].present?
 
     return unless params[:page].present?
 
