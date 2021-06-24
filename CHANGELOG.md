@@ -3,6 +3,7 @@
 - Fix a bug: unable to export members list if no subscriptions was taken
 - Fix a bug: most OpenAPI endpoints were dysfunctional
 - Fix a bug: unable to open some modals when the logo was undefined
+- Fix a bug: stripe subscription generation fails if the user already has a subscription
 
 ## v5.0.6 2021 June 21
 
