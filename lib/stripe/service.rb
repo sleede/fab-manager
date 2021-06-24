@@ -14,7 +14,7 @@ class Stripe::Service < Payment::Service
 
     case payment_schedule.main_object.object_type
     when Reservation.name
-      subscription = payment_schedule.payment_schedule_objects.find(&:subscription).object
+      subscription = payment_schedule.payment_schedule_objects.find { |pso| pso.object_type == Subscription.name }.object
       reservable_stp_id = payment_schedule.main_object.object.reservable&.payment_gateway_object&.gateway_object_id
     when Subscription.name
       subscription = payment_schedule.main_object.object

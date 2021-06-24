@@ -63,7 +63,7 @@ class PDF::PaymentSchedule < Prawn::Document
                align: :right,
                inline_format: true
       name = full_name
-      subscription = payment_schedule.payment_schedule_objects.find(&:subscription).subscription
+      subscription = payment_schedule.payment_schedule_objects.find { |pso| pso.object_type == Subscription.name }.subscription
 
       # object
       move_down 25

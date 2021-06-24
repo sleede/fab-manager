@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+# module definition
+module OpenAPI::V1; end
+
 # Parameters for OpenAPI endpoints
 class OpenAPI::V1::BaseController < ActionController::Base
   protect_from_forgery with: :null_session

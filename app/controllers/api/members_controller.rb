@@ -120,7 +120,7 @@ class API::MembersController < API::ApiController
       Profile.where(user_id: User.members).maximum('updated_at'),
       InvoicingProfile.where(user_id: User.members).maximum('updated_at'),
       StatisticProfile.where(user_id: User.members).maximum('updated_at'),
-      Subscription.maximum('updated_at')
+      Subscription.maximum('updated_at') || DateTime.current
     ].max
 
     export = Export.where(category: 'users', export_type: 'members')
