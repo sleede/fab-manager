@@ -162,7 +162,7 @@ class PaymentScheduleService
       item.update_attributes(state: 'canceled')
     end
     # cancel subscription
-    subscription = payment_schedule.payment_schedule_objects.find(&:subscription).subscription
+    subscription = payment_schedule.payment_schedule_objects.find { |pso| pso.object_type == Subscription.name }.subscription
     subscription.expire(DateTime.current)
 
     subscription.canceled_at
@@ -181,7 +181,7 @@ class PaymentScheduleService
     }
 
     # the subscription and reservation items
-    subscription = payment_schedule_item.payment_schedule.payment_schedule_objects.find(&:subscription).subscription
+    subscription = payment_schedule_item.payment_schedule.payment_schedule_objects.find { |pso| pso.object_type == Subscription.name }.subscription
     if payment_schedule_item.payment_schedule.main_object.object_type == Reservation.name
       details[:reservation] = payment_schedule_item.details['other_items']
       reservation = payment_schedule_item.payment_schedule.main_object.reservation
@@ -200,7 +200,7 @@ class PaymentScheduleService
   ##
   def complete_next_invoice(payment_schedule_item, invoice)
     # the subscription item
-    subscription = payment_schedule_item.payment_schedule.payment_schedule_objects.find(&:subscription).subscription
+    subscription = payment_schedule_item.payment_schedule.payment_schedule_objects.find { |pso| pso.object_type == Subscription.name }.subscription
 
     # sub-price for the subscription
     details = { subscription: payment_schedule_item.details['recurring'] }

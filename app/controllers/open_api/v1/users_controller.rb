@@ -1,5 +1,9 @@
+# frozen_string_literal: true
+
+# public API controller for users
 class OpenAPI::V1::UsersController < OpenAPI::V1::BaseController
   extend OpenAPI::ApiDoc
+  include Rails::Pagination
   expose_doc
 
   def index
@@ -9,19 +13,17 @@ class OpenAPI::V1::UsersController < OpenAPI::V1::BaseController
       email_param = params[:email].is_a?(String) ? params[:email].downcase : params[:email].map(&:downcase)
       @users = @users.where(email: email_param)
     end
+    @users = @users.where(id: params[:user_id]) if params[:user_id].present?
 
-    if params[:user_id].present?
-      @users = @users.where(id: params[:user_id])
-    end
+    return unless params[:page].present?
 
-    if params[:page].present?
-      @users = @users.page(params[:page]).per(per_page)
-      paginate @users, per_page: per_page
-    end
+    @users = @users.page(params[:page]).per(per_page)
+    paginate @users, per_page: per_page
   end
 
   private
-    def per_page
-      params[:per_page] || 20
-    end
+
+  def per_page
+    params[:per_page] || 20
+  end
 end

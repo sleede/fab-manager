@@ -38,7 +38,7 @@ class CartService
 
   def from_payment_schedule(payment_schedule)
     @customer = payment_schedule.user
-    plan = payment_schedule.payment_schedule_objects.find(&:subscription)&.subscription&.plan
+    plan = payment_schedule.payment_schedule_objects.find { |pso| pso.object_type == Subscription.name }&.subscription&.plan
 
     coupon = CartItem::Coupon.new(@customer, @operator, payment_schedule.coupon&.code)
     schedule = CartItem::PaymentSchedule.new(plan, coupon, true)
