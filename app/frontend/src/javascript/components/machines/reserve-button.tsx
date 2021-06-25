@@ -36,10 +36,6 @@ const ReserveButtonComponent: React.FC<ReserveButtonProps> = ({ currentUser, mac
 
   // handle login from an external process
   useEffect(() => setUser(currentUser), [currentUser]);
-  // refresh the machine after the user has logged
-  useEffect(() => {
-    if (user !== currentUser) getMachine();
-  }, [user]);
   // check the trainings after we retrieved the machine data
   useEffect(() => checkTraining(), [machine]);
 
@@ -92,7 +88,7 @@ const ReserveButtonComponent: React.FC<ReserveButtonProps> = ({ currentUser, mac
     // if there's no user currently logged, trigger the logging process
     if (!user) {
       onLoginRequested()
-        .then(user => setUser(user))
+        .then(() => getMachine())
         .catch(error => onError(error));
       return;
     }
