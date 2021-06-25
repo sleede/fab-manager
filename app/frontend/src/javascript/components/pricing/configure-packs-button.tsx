@@ -2,10 +2,9 @@ import React, { ReactNode, useState } from 'react';
 import { PrepaidPack } from '../../models/prepaid-pack';
 import { useTranslation } from 'react-i18next';
 import { FabPopover } from '../base/fab-popover';
-import { NewPackModal } from './new-pack-modal';
+import { CreatePack } from './create-pack';
 import PrepaidPackAPI from '../../api/prepaid-pack';
 import { IFablab } from '../../models/fablab';
-import { duration } from 'moment';
 import { FabButton } from '../base/fab-button';
 import { DeletePack } from './delete-pack';
 
@@ -29,7 +28,6 @@ export const ConfigurePacksButton: React.FC<ConfigurePacksButtonProps> = ({ pack
 
   const [packs, setPacks] = useState<Array<PrepaidPack>>(packsData);
   const [showList, setShowList] = useState<boolean>(false);
-  const [addPackModal, setAddPackModal] = useState<boolean>(false);
   const [editPackModal, setEditPackModal] = useState<boolean>(false);
 
   /**
@@ -54,13 +52,6 @@ export const ConfigurePacksButton: React.FC<ConfigurePacksButtonProps> = ({ pack
   }
 
   /**
-   * Open/closes the "new pack" modal
-   */
-  const toggleAddPackModal = (): void => {
-    setAddPackModal(!addPackModal);
-  }
-
-  /**
    * Open/closes the "edit pack" modal
    */
   const toggleEditPackModal = (): void => {
@@ -82,7 +73,11 @@ export const ConfigurePacksButton: React.FC<ConfigurePacksButtonProps> = ({ pack
    * Render the button used to trigger the "new pack" modal
    */
   const renderAddButton = (): ReactNode => {
-    return <button className="add-pack-button" onClick={toggleAddPackModal}><i className="fas fa-plus"/></button>;
+    return <CreatePack onSuccess={handleSuccess}
+                       onError={onError}
+                       groupId={groupId}
+                       priceableId={priceableId}
+                       priceableType={priceableType} />;
   }
 
   return (
@@ -103,13 +98,6 @@ export const ConfigurePacksButton: React.FC<ConfigurePacksButtonProps> = ({ pack
         </ul>
         {packs?.length === 0 && <span>{t('app.admin.configure_packs_button.no_packs')}</span>}
       </FabPopover>}
-    <NewPackModal isOpen={addPackModal}
-                  toggleModal={toggleAddPackModal}
-                  onSuccess={handleSuccess}
-                  onError={onError}
-                  groupId={groupId}
-                  priceableId={priceableId}
-                  priceableType={priceableType} />
     </div>
   );
 }

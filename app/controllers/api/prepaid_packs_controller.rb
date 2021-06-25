@@ -7,7 +7,7 @@ class API::PrepaidPacksController < API::ApiController
   before_action :set_pack, only: %i[show update destroy]
 
   def index
-    @packs = PrepaidPackService.list(params)
+    @packs = PrepaidPackService.list(params).order(minutes: :asc)
   end
 
   def show; end
