@@ -93,6 +93,7 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
       setTimeout(() => {
         if (!$scope.isAuthenticated()) {
           $scope.login();
+          $scope.$apply();
         }
       }, 50);
     };
