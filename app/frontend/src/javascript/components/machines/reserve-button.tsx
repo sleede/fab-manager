@@ -8,6 +8,7 @@ import { react2angular } from 'react2angular';
 import { IApplication } from '../../models/application';
 import { useTranslation } from 'react-i18next';
 import { Loader } from '../base/loader';
+import { ProposePacksModal } from './propose-packs-modal';
 
 declare var Application: IApplication;
 
@@ -33,6 +34,7 @@ const ReserveButtonComponent: React.FC<ReserveButtonProps> = ({ currentUser, mac
   const [user, setUser] = useState<User>(currentUser);
   const [pendingTraining, setPendingTraining] = useState<boolean>(false);
   const [trainingRequired, setTrainingRequired] = useState<boolean>(false);
+  const [proposePacks, setProposePacks] = useState<boolean>(false);
 
   // handle login from an external process
   useEffect(() => setUser(currentUser), [currentUser]);
@@ -79,6 +81,13 @@ const ReserveButtonComponent: React.FC<ReserveButtonProps> = ({ currentUser, mac
   };
 
   /**
+   * Open/closes the modal dialog inviting the user to buy a prepaid-pack
+   */
+  const toggleProposePacksModal = (): void => {
+    setProposePacks(!proposePacks);
+  }
+
+  /**
    * Check that the current user has passed the required training before allowing him to book
    */
   const checkTraining = (): void => {
@@ -94,11 +103,11 @@ const ReserveButtonComponent: React.FC<ReserveButtonProps> = ({ currentUser, mac
     }
 
     // if the currently logged user has completed the training for this machine, or this machine does not require
-    // a prior training, just let him reserve.
-    // Moreover, if all associated trainings are disabled, let the user reserve too.
+    // a prior training, move forward to the prepaid-packs verification.
+    // Moreover, if there's no enabled associated trainings, also move to the next step.
     if (machine.current_user_is_trained || machine.trainings.length === 0 ||
         machine.trainings.map(t => t.disabled).reduce((acc, val) => acc && val, true)) {
-      return onReserveMachine(machine);
+      return checkPrepaidPack();
     }
 
     // if the currently logged user booked a training for this machine, tell him that he must wait
@@ -111,6 +120,20 @@ const ReserveButtonComponent: React.FC<ReserveButtonProps> = ({ currentUser, mac
     // for a training session first
     setTrainingRequired(true);
   };
+
+  /**
+   * Once the training condition has been verified, we check if there are prepaid-packs to propose to the customer.
+   */
+  const checkPrepaidPack = (): void => {
+    // if the customer has already bought a pack or if there's no active packs for this machine,
+    // let the customer reserve
+    if (machine.current_user_has_packs || !machine.has_prepaid_packs_for_current_user) {
+      return onReserveMachine(machine);
+    }
+
+    // otherwise, we show a dialog modal to propose the customer to buy an available pack
+    setProposePacks(true);
+  }
 
   return (
     <span>
@@ -126,6 +149,12 @@ const ReserveButtonComponent: React.FC<ReserveButtonProps> = ({ currentUser, mac
                              user={user}
                              machine={machine}
                              onEnrollRequested={onEnrollRequested} />
+      {machine && <ProposePacksModal isOpen={proposePacks}
+                                     toggleModal={toggleProposePacksModal}
+                                     machine={machine}
+                                     onError={onError}
+                                     customer={currentUser}
+                                     onDecline={onReserveMachine} />}
     </span>
 
   );

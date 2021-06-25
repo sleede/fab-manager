@@ -128,6 +128,12 @@ class User < ApplicationRecord
     trainings.map(&:machines).flatten.uniq.include?(machine)
   end
 
+  def packs?(item, threshold = Setting.get('renew_pack_threshold'))
+    return true if admin?
+
+    PrepaidPackService.user_packs(self, item, threshold).count.positive?
+  end
+
   def next_training_reservation_by_machine(machine)
     reservations.where(reservable_type: 'Training', reservable_id: machine.trainings.map(&:id))
                 .includes(:slots)

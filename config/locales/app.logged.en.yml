@@ -178,6 +178,12 @@ en:
         enroll_now: "Enroll to the training"
         no_enroll_for_now: "I don't want to enroll now"
         close: "Close"
+      propose_packs_modal:
+        available_packs: "Prepaid packs available"
+        packs_proposed: "You can buy a prepaid pack of hours for this machine. These packs allows you to benefit from volume discounts."
+        no_thanks: "No, thanks"
+        pack_DURATION: "{DURATION} hours"
+        buy_this_pack: "Buy this pack"
       #book a training
       trainings_reserve:
         trainings_planning: "Trainings planning"

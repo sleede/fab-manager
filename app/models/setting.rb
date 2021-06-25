@@ -118,7 +118,8 @@ class Setting < ApplicationRecord
                              payzen_public_key
                              payzen_hmac
                              payzen_currency
-                             public_agenda_module] }
+                             public_agenda_module
+                             renew_pack_threshold] }
   # WARNING: when adding a new key, you may also want to add it in app/policies/setting_policy.rb#public_whitelist
 
   def value

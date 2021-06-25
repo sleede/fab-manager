@@ -6,8 +6,6 @@ class API::PricesController < API::ApiController
   before_action :authenticate_user!
 
   def index
-    authorize Price
-
     @prices = PriceService.list(params)
   end
 

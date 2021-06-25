@@ -1,0 +1,24 @@
+.propose-packs-modal {
+  .list-of-packs {
+    display: flex;
+    .pack {
+      &::before {
+        content: '\f466';
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 800;
+        font-size: 12px;
+        vertical-align: middle;
+        line-height: 38px;
+      }
+
+      .crossed-out-price {
+        text-decoration: line-through;
+      }
+
+      .buy-button {
+        margin-left: 10px;
+        margin-bottom: 5px;
+      }
+    }
+  }
+}

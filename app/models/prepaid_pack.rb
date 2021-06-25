@@ -8,6 +8,9 @@
 # The number of hours in a pack is stored in minutes.
 class PrepaidPack < ApplicationRecord
   belongs_to :priceable, polymorphic: true
+  belongs_to :machine, foreign_type: 'Machine', foreign_key: 'priceable_id'
+  belongs_to :space, foreign_type: 'Space', foreign_key: 'priceable_id'
+
   belongs_to :group
 
   has_many :statistic_profile_prepaid_packs

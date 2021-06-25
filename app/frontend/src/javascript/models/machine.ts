@@ -24,6 +24,9 @@ export interface Machine {
   }>,
   current_user_is_trained?: boolean,
   current_user_next_training_reservation?: Reservation,
+  current_user_has_packs?: boolean,
+  current_user_available_for_packs_renewal?: boolean,
+  has_prepaid_packs_for_current_user?: boolean,
   machine_projects?: Array<{
     id: number,
     name: string,

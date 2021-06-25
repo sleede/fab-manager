@@ -5,7 +5,6 @@ import { FabPopover } from '../base/fab-popover';
 import { CreatePack } from './create-pack';
 import PrepaidPackAPI from '../../api/prepaid-pack';
 import { IFablab } from '../../models/fablab';
-import { FabButton } from '../base/fab-button';
 import { DeletePack } from './delete-pack';
 import { EditPack } from './edit-pack';
 
