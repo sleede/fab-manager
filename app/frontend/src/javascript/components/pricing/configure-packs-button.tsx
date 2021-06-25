@@ -7,6 +7,7 @@ import PrepaidPackAPI from '../../api/prepaid-pack';
 import { IFablab } from '../../models/fablab';
 import { FabButton } from '../base/fab-button';
 import { DeletePack } from './delete-pack';
+import { EditPack } from './edit-pack';
 
 declare var Fablab: IFablab;
 
@@ -91,7 +92,7 @@ export const ConfigurePacksButton: React.FC<ConfigurePacksButtonProps> = ({ pack
             <li key={p.id} className={p.disabled ? 'disabled' : ''}>
               {formatDuration(p.minutes)} - {formatPrice(p.amount)}
               <span className="pack-actions">
-                <FabButton className="edit-pack-button" onClick={toggleEditPackModal}><i className="fas fa-edit"/></FabButton>
+                <EditPack onSuccess={handleSuccess} onError={onError} pack={p} />
                 <DeletePack onSuccess={handleSuccess} onError={onError} pack={p} />
               </span>
             </li>)}

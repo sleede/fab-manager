@@ -24,7 +24,7 @@ export const CreatePack: React.FC<CreatePackProps> = ({ onSuccess, onError, grou
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   /**
-   * Open/closes the "new pack" isOpen
+   * Open/closes the "new pack" modal dialog
    */
   const toggleModal = (): void => {
     setIsOpen(!isOpen);
@@ -43,7 +43,7 @@ export const CreatePack: React.FC<CreatePackProps> = ({ onSuccess, onError, grou
     // create it on the API
     PrepaidPackAPI.create(newPack)
       .then(() => {
-        onSuccess(t('app.admin.new_pack_modal.pack_successfully_created'));
+        onSuccess(t('app.admin.create_pack.pack_successfully_created'));
         toggleModal();
       })
       .catch(error => onError(error));
@@ -54,13 +54,13 @@ export const CreatePack: React.FC<CreatePackProps> = ({ onSuccess, onError, grou
       <button className="add-pack-button" onClick={toggleModal}><i className="fas fa-plus"/></button>
       <FabModal isOpen={isOpen}
                 toggleModal={toggleModal}
-                title={t('app.admin.new_pack_modal.new_pack')}
+                title={t('app.admin.create_pack.new_pack')}
                 className="new-pack-modal"
                 closeButton
-                confirmButton={t('app.admin.new_pack_modal.create_pack')}
+                confirmButton={t('app.admin.create_pack.create_pack')}
                 onConfirmSendFormId="new-pack">
         <FabAlert level="info">
-          {t('app.admin.new_pack_modal.new_pack_info', { TYPE: priceableType })}
+          {t('app.admin.create_pack.new_pack_info', { TYPE: priceableType })}
         </FabAlert>
         <PackForm formId="new-pack" onSubmit={handleSubmit} />
       </FabModal>
