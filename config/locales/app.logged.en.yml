@@ -184,6 +184,7 @@ en:
         no_thanks: "No, thanks"
         pack_DURATION: "{DURATION} hours"
         buy_this_pack: "Buy this pack"
+        pack_bought_success: "You have successfully bought this pack of prepaid-hours. Your invoice will ba available soon from your dashboard."
         validity: "Usable for {COUNT} {PERIODS}"
         period:
           day: "{COUNT, plural, one{day} other{days}}"

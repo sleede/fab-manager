@@ -39,7 +39,7 @@ interface AbstractPaymentModalProps {
   afterSuccess: (result: Invoice|PaymentSchedule) => void,
   cart: ShoppingCart,
   currentUser: User,
-  schedule: PaymentSchedule,
+  schedule?: PaymentSchedule,
   customer: User,
   logoFooter: ReactNode,
   GatewayForm: FunctionComponent<GatewayFormProps>,

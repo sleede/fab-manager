@@ -18,6 +18,7 @@ interface ReserveButtonProps {
   onLoadingStart?: () => void,
   onLoadingEnd?: () => void,
   onError: (message: string) => void,
+  onSuccess: (message: string) => void,
   onReserveMachine: (machine: Machine) => void,
   onLoginRequested: () => Promise<User>,
   onEnrollRequested: (trainingId: number) => void,
@@ -27,7 +28,7 @@ interface ReserveButtonProps {
 /**
  * Button component that makes the training verification before redirecting the user to the reservation calendar
  */
-const ReserveButtonComponent: React.FC<ReserveButtonProps> = ({ currentUser, machineId, onLoginRequested, onLoadingStart, onLoadingEnd, onError, onReserveMachine, onEnrollRequested, className, children }) => {
+const ReserveButtonComponent: React.FC<ReserveButtonProps> = ({ currentUser, machineId, onLoginRequested, onLoadingStart, onLoadingEnd, onError, onSuccess, onReserveMachine, onEnrollRequested, className, children }) => {
   const { t } = useTranslation('shared');
 
   const [machine, setMachine] = useState<Machine>(null);
@@ -85,6 +86,15 @@ const ReserveButtonComponent: React.FC<ReserveButtonProps> = ({ currentUser, mac
    */
   const toggleProposePacksModal = (): void => {
     setProposePacks(!proposePacks);
+  }
+
+  /**
+   * Callback triggered when the user has successfully bought a pre-paid pack.
+   * Display the success message and redirect him to the booking page.
+   */
+  const handlePackBought = (message: string, machine: Machine): void => {
+    onSuccess(message);
+    onReserveMachine(machine);
   }
 
   /**
@@ -154,20 +164,22 @@ const ReserveButtonComponent: React.FC<ReserveButtonProps> = ({ currentUser, mac
                                                     machine={machine}
                                                     onError={onError}
                                                     customer={currentUser}
-                                                    onDecline={onReserveMachine} />}
+                                                    onDecline={onReserveMachine}
+                                                    operator={currentUser}
+                                                    onSuccess={handlePackBought} />}
     </span>
 
   );
 }
 
-export const ReserveButton: React.FC<ReserveButtonProps> = ({ currentUser, machineId, onLoginRequested, onLoadingStart, onLoadingEnd, onError, onReserveMachine, onEnrollRequested, className, children }) => {
+export const ReserveButton: React.FC<ReserveButtonProps> = ({ currentUser, machineId, onLoginRequested, onLoadingStart, onLoadingEnd, onError, onSuccess, onReserveMachine, onEnrollRequested, className, children }) => {
   return (
     <Loader>
-      <ReserveButtonComponent currentUser={currentUser} machineId={machineId} onError={onError} onLoadingStart={onLoadingStart} onLoadingEnd={onLoadingEnd} onReserveMachine={onReserveMachine} onLoginRequested={onLoginRequested} onEnrollRequested={onEnrollRequested} className={className}>
+      <ReserveButtonComponent currentUser={currentUser} machineId={machineId} onError={onError} onSuccess={onSuccess} onLoadingStart={onLoadingStart} onLoadingEnd={onLoadingEnd} onReserveMachine={onReserveMachine} onLoginRequested={onLoginRequested} onEnrollRequested={onEnrollRequested} className={className}>
         {children}
       </ReserveButtonComponent>
     </Loader>
   );
 }
 
-Application.Components.component('reserveButton', react2angular(ReserveButton, ['currentUser', 'machineId', 'onLoadingStart', 'onLoadingEnd', 'onError', 'onReserveMachine', 'onLoginRequested', 'onEnrollRequested', 'className']));
+Application.Components.component('reserveButton', react2angular(ReserveButton, ['currentUser', 'machineId', 'onLoadingStart', 'onLoadingEnd', 'onError', 'onSuccess', 'onReserveMachine', 'onLoginRequested', 'onEnrollRequested', 'className']));

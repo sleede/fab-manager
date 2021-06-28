@@ -21,7 +21,7 @@ interface PaymentModalProps {
   onError: (message: string) => void,
   cart: ShoppingCart,
   currentUser: User,
-  schedule: PaymentSchedule,
+  schedule?: PaymentSchedule,
   customer: User
 }
 
@@ -29,7 +29,7 @@ interface PaymentModalProps {
  * This component open a modal dialog for the configured payment gateway, allowing the user to input his card data
  * to process an online payment.
  */
-const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, currentUser, schedule , cart, customer }) => {
+const PaymentModalComponent: React.FC<PaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, currentUser, schedule , cart, customer }) => {
   const { t } = useTranslation('shared');
 
   const [gateway, setGateway] = useState<Setting>(null);
@@ -88,12 +88,12 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, toggleModal, afterS
 }
 
 
-const PaymentModalWrapper: React.FC<PaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, currentUser, schedule , cart, customer }) => {
+export const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, currentUser, schedule , cart, customer }) => {
   return (
     <Loader>
-      <PaymentModal isOpen={isOpen} toggleModal={toggleModal} afterSuccess={afterSuccess} onError={onError} currentUser={currentUser} schedule={schedule} cart={cart} customer={customer} />
+      <PaymentModalComponent isOpen={isOpen} toggleModal={toggleModal} afterSuccess={afterSuccess} onError={onError} currentUser={currentUser} schedule={schedule} cart={cart} customer={customer} />
     </Loader>
   );
 }
 
-Application.Components.component('paymentModal', react2angular(PaymentModalWrapper, ['isOpen', 'toggleModal', 'afterSuccess', 'onError', 'currentUser', 'schedule', 'cart', 'customer']));
+Application.Components.component('paymentModal', react2angular(PaymentModal, ['isOpen', 'toggleModal', 'afterSuccess', 'onError', 'currentUser', 'schedule', 'cart', 'customer']));

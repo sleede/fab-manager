@@ -17,7 +17,7 @@ import { Invoice } from '../../../models/invoice';
 // we use these two additional parameters to update the card, if provided
 interface PayzenFormProps extends GatewayFormProps {
   updateCard?: boolean,
-  paymentScheduleId: number,
+  paymentScheduleId?: number,
 }
 
 /**

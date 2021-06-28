@@ -13,6 +13,7 @@ declare var Application: IApplication;
 interface MachinesListProps {
   user?: User,
   onError: (message: string) => void,
+  onSuccess: (message: string) => void,
   onShowMachine: (machine: Machine) => void,
   onReserveMachine: (machine: Machine) => void,
   onLoginRequested: () => Promise<User>,
@@ -22,7 +23,7 @@ interface MachinesListProps {
 /**
  * This component shows a list of all machines and allows filtering on that list.
  */
-const MachinesList: React.FC<MachinesListProps> = ({ onError, onShowMachine, onReserveMachine, onLoginRequested, onEnrollRequested, user }) => {
+const MachinesList: React.FC<MachinesListProps> = ({ onError, onSuccess, onShowMachine, onReserveMachine, onLoginRequested, onEnrollRequested, user }) => {
   // shown machines
   const [machines, setMachines] = useState<Array<Machine>>(null);
   // we keep the full list of machines, for filtering
@@ -65,6 +66,7 @@ const MachinesList: React.FC<MachinesListProps> = ({ onError, onShowMachine, onR
                               onShowMachine={onShowMachine}
                               onReserveMachine={onReserveMachine}
                               onError={onError}
+                              onSuccess={onSuccess}
                               onLoginRequested={onLoginRequested}
                               onEnrollRequested={onEnrollRequested} />
         })}
@@ -74,12 +76,12 @@ const MachinesList: React.FC<MachinesListProps> = ({ onError, onShowMachine, onR
 }
 
 
-const MachinesListWrapper: React.FC<MachinesListProps> = ({ user, onError, onShowMachine, onReserveMachine, onLoginRequested, onEnrollRequested }) => {
+const MachinesListWrapper: React.FC<MachinesListProps> = ({ user, onError, onSuccess, onShowMachine, onReserveMachine, onLoginRequested, onEnrollRequested }) => {
   return (
     <Loader>
-      <MachinesList user={user} onError={onError} onShowMachine={onShowMachine} onReserveMachine={onReserveMachine} onLoginRequested={onLoginRequested} onEnrollRequested={onEnrollRequested} />
+      <MachinesList user={user} onError={onError} onSuccess={onSuccess} onShowMachine={onShowMachine} onReserveMachine={onReserveMachine} onLoginRequested={onLoginRequested} onEnrollRequested={onEnrollRequested} />
     </Loader>
   );
 }
 
-Application.Components.component('machinesList', react2angular(MachinesListWrapper, ['user', 'onError', 'onShowMachine', 'onReserveMachine', 'onLoginRequested', 'onEnrollRequested']));
+Application.Components.component('machinesList', react2angular(MachinesListWrapper, ['user', 'onError', 'onSuccess', 'onShowMachine', 'onReserveMachine', 'onLoginRequested', 'onEnrollRequested']));

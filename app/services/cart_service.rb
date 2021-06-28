@@ -20,6 +20,8 @@ class CartService
         items.push(CartItem::Subscription.new(plan_info[:plan], @customer)) if plan_info[:new_subscription]
       elsif ['reservation', :reservation].include?(item.keys.first)
         items.push(reservable_from_hash(item[:reservation], plan_info))
+      elsif ['prepaid_pack', :prepaid_pack].include?(item.keys.first)
+        items.push(CartItem::PrepaidPack.new(PrepaidPack.find(item[:prepaid_pack][:id]), @customer))
       end
     end
 
@@ -45,10 +47,12 @@ class CartService
 
     items = []
     payment_schedule.payment_schedule_objects.each do |object|
-      if object.subscription
+      if object.object_type == Subscription.name
         items.push(CartItem::Subscription.new(object.subscription.plan, @customer))
-      elsif object.reservation
+      elsif object.object_type == Reservation.name
         items.push(reservable_from_payment_schedule_object(object, plan))
+      elsif object.object_type == PrepaidPack.name
+        items.push(CartItem::PrepaidPack.new(object.statistic_profile_prepaid_pack.prepaid_pack_id, @customer))
       end
     end
 

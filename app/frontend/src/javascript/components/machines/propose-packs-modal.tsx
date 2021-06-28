@@ -9,6 +9,8 @@ import { IFablab } from '../../models/fablab';
 import { FabButton } from '../base/fab-button';
 import PriceAPI from '../../api/price';
 import { Price } from '../../models/price';
+import { PaymentMethod, ShoppingCart } from '../../models/payment';
+import { PaymentModal } from '../payment/payment-modal';
 
 declare var Fablab: IFablab;
 
@@ -17,18 +19,22 @@ interface ProposePacksModalProps {
   toggleModal: () => void,
   machine: Machine,
   customer: User,
+  operator: User,
   onError: (message: string) => void,
   onDecline: (machine: Machine) => void,
+  onSuccess: (message:string, machine: Machine) => void,
 }
 
 /**
  * Modal dialog shown to offer prepaid-packs for purchase, to the current user.
  */
-export const ProposePacksModal: React.FC<ProposePacksModalProps> = ({ isOpen, toggleModal, machine, customer, onError, onDecline }) => {
+export const ProposePacksModal: React.FC<ProposePacksModalProps> = ({ isOpen, toggleModal, machine, customer, operator, onError, onDecline, onSuccess }) => {
   const { t } = useTranslation('logged');
 
   const [price, setPrice] = useState<Price>(null);
   const [packs, setPacks] = useState<Array<PrepaidPack>>(null);
+  const [cart, setCart] = useState<ShoppingCart>(null);
+  const [paymentModal, setPaymentModal] = useState<boolean>(false);
 
   useEffect(() => {
     PrepaidPackAPI.index({ priceable_id: machine.id, priceable_type: 'Machine', group_id: customer.group_id, disabled: false })
@@ -39,6 +45,13 @@ export const ProposePacksModal: React.FC<ProposePacksModalProps> = ({ isOpen, to
       .catch(error => onError(error));
   }, [machine]);
 
+
+  /**
+   * Open/closes the payment modal
+   */
+  const togglePaymentModal = (): void => {
+    setPaymentModal(!paymentModal);
+  }
 
   /**
    * Return the formatted localized amount for the given price (e.g. 20.5 => "20,50 €")
@@ -78,12 +91,26 @@ export const ProposePacksModal: React.FC<ProposePacksModalProps> = ({ isOpen, to
   }
 
   /**
-   * The user has accepted to buy the provided pack, process with teh payment
+   * The user has accepted to buy the provided pack, process with the payment
    */
   const handleBuyPack = (pack: PrepaidPack) => {
-    return (event: BaseSyntheticEvent): void => {
-      console.log(pack);
+    return (): void => {
+      setCart({
+        customer_id: customer.id,
+        payment_method: PaymentMethod.Card,
+        items: [
+          { prepaid_pack: { id: pack.id }}
+        ]
+      });
+      togglePaymentModal();
     }
+  }
+
+  /**
+   * Callback triggered when the user has bought the pack with a successful payment
+   */
+  const handlePackBought = (): void => {
+    onSuccess(t('app.logged.propose_packs_modal.pack_bought_success'), machine);
   }
 
   /**
@@ -118,6 +145,13 @@ export const ProposePacksModal: React.FC<ProposePacksModalProps> = ({ isOpen, to
       <div className="list-of-packs">
         {packs?.map(p => renderPack(p))}
       </div>
+      {cart && <PaymentModal isOpen={paymentModal}
+                             toggleModal={togglePaymentModal}
+                             afterSuccess={handlePackBought}
+                             onError={onError}
+                             cart={cart}
+                             currentUser={operator}
+                             customer={customer} />}
     </FabModal>
   );
 }

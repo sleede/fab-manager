@@ -115,6 +115,13 @@ Application.Controllers.controller('MachinesController', ['$scope', '$state', '_
     }
 
     /**
+     * Shows a success message forwarded from a child react components
+     */
+    $scope.onSuccess = function (message) {
+      growl.success(message)
+    }
+
+    /**
      * Open the modal dialog to log the user and resolves the returned promise when the logging process
      * was successfully completed.
      */
@@ -310,6 +317,14 @@ Application.Controllers.controller('ShowMachineController', ['$scope', '$state',
     $scope.onError = function (message) {
       growl.error(message);
     }
+
+    /**
+     * Shows a success message forwarded from a child react components
+     */
+    $scope.onSuccess = function (message) {
+      growl.success(message)
+    }
+
 
     /**
      * Open the modal dialog to log the user and resolves the returned promise when the logging process
