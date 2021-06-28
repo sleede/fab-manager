@@ -149,12 +149,12 @@ const ReserveButtonComponent: React.FC<ReserveButtonProps> = ({ currentUser, mac
                              user={user}
                              machine={machine}
                              onEnrollRequested={onEnrollRequested} />
-      {machine && <ProposePacksModal isOpen={proposePacks}
-                                     toggleModal={toggleProposePacksModal}
-                                     machine={machine}
-                                     onError={onError}
-                                     customer={currentUser}
-                                     onDecline={onReserveMachine} />}
+      {machine && currentUser && <ProposePacksModal isOpen={proposePacks}
+                                                    toggleModal={toggleProposePacksModal}
+                                                    machine={machine}
+                                                    onError={onError}
+                                                    customer={currentUser}
+                                                    onDecline={onReserveMachine} />}
     </span>
 
   );

@@ -1,8 +1,9 @@
 # Changelog Fab-manager
 
-- [TODO DEPLOY] `rails db:seed`
 - Fix a bug: unable to filter by multiple user IDs in OpenAPI
 - Tests for OpenAPI user trainings
+- [TODO DEPLOY] `rails db:seed`
+- [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
 
 ## v5.0.8 2021 June 28
 
