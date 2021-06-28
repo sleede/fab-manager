@@ -16,7 +16,7 @@ class OpenAPI::V1::ReservationsDoc < OpenAPI::V1::BaseDoc
     description 'Index of reservations made by users, with optional pagination. Order by *created_at* descendant.'
     param_group :pagination
     param :user_id, [Integer, Array], optional: true, desc: 'Scope the request to one or various users.'
-    param :reservable_type, %w[Event Machine Training], optional: true, desc: 'Scope the request to a specific type of reservable.'
+    param :reservable_type, %w[Event Machine Space Training], optional: true, desc: 'Scope the request to a specific type of reservable.'
     param :reservable_id, [Integer, Array], optional: true, desc: 'Scope the request to one or various reservables.'
 
     example <<-RESERVATIONS

@@ -1,5 +1,13 @@
 # Changelog Fab-manager
 
+## v5.0.8 2021 June 28
+
+- Ability to run `fablab:chain:all` non interactively
+- Full test coverage of the OpenAPI
+- Fix a bug: unable to get the Events without images from the OpenAPI
+- Fix a bug: unable to get the Space reservations from the OpenAPI
+- Fix a bug: unable to get invoices from the OpenAPI
+
 ## v5.0.7 2021 June 24
 
 - Fix a bug: unable to export members list if no subscriptions was taken
