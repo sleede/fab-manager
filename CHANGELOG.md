@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v5.0.8 2021 June 28
+
 - Ability to run `fablab:chain:all` non interactively
 - Full test coverage of the OpenAPI
 - Fix a bug: unable to get the Events without images from the OpenAPI
