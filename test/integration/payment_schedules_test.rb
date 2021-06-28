@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class PaymentSchedulesControllerTest < ActionDispatch::IntegrationTest
+class PaymentSchedulesTest < ActionDispatch::IntegrationTest
   def setup
     @user = User.friendly.find('pjproudhon')
     login_as(@user, scope: :user)

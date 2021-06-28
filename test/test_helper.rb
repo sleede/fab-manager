@@ -36,6 +36,10 @@ class ActiveSupport::TestCase
     { 'Accept' => Mime[:json], 'Content-Type' => Mime[:json].to_s }
   end
 
+  def open_api_headers(token)
+    { 'Accept' => Mime[:json], 'Content-Type' => Mime[:json].to_s, 'Authorization' => "Token token=#{token}" }
+  end
+
   def stripe_payment_method(error: nil)
     number = '4242424242424242'
     exp_month = 4

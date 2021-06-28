@@ -2,6 +2,14 @@
 
 - [TODO DEPLOY] `rails db:seed`
 
+## v5.0.8 2021 June 28
+
+- Ability to run `fablab:chain:all` non interactively
+- Full test coverage of the OpenAPI
+- Fix a bug: unable to get the Events without images from the OpenAPI
+- Fix a bug: unable to get the Space reservations from the OpenAPI
+- Fix a bug: unable to get invoices from the OpenAPI
+
 ## v5.0.7 2021 June 24
 
 - Fix a bug: unable to export members list if no subscriptions was taken
@@ -36,6 +44,7 @@
 
 ## v5.0.5 2021 June 18
 
+- Fix a bug: during the upgrade, unable to detect the target when not explicitly specified
 - Fix a bug: unable to sync users on stripe if one of them have an invalid email address
 - Fix a bug: unable to book a free event
 - Fix a bug: can't see the dates for the next booked training session, when the user is reserving a machine without the appropriate training
@@ -43,6 +52,7 @@
 - Fix a bug: unable to sync coupons on stripe
 - Fix a bug: ignored coupon when booking an event with card payment
 - Fix a bug: deleting a coupon displays an error message
+
 ## v5.0.4 2021 June 15
 
 - Ability to disable the public agenda
