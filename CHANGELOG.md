@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Fix a bug: unable to filter by multiple user IDs in OpenAPI
+- Fix a bug: do not display two empty categories in the plan creation form
 - Tests for OpenAPI user trainings
 - [TODO DEPLOY] `rails db:seed`
 - [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
