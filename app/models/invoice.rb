@@ -27,6 +27,7 @@ class Invoice < PaymentDocument
 
   def file
     dir = "invoices/#{invoicing_profile.id}"
+    dir = "test/fixtures/files/invoices/#{invoicing_profile.id}" if Rails.env.test?
 
     # create directories if they doesn't exists (invoice & invoicing_profile_id)
     FileUtils.mkdir_p dir

@@ -8,6 +8,7 @@ class OpenAPI::V1::InvoicesController < OpenAPI::V1::BaseController
 
   def index
     @invoices = Invoice.order(created_at: :desc)
+                       .includes(invoicing_profile: :user)
                        .references(:invoicing_profiles)
 
     @invoices = @invoices.where('invoicing_profiles.user_id = ?', params[:user_id]) if params[:user_id].present?
