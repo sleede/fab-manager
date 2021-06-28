@@ -15,6 +15,5 @@ export interface PrepaidPack {
   validity_count?: number,
   minutes: number,
   amount: number,
-  usages?: number,
   disabled?: boolean,
 }

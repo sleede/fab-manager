@@ -184,6 +184,12 @@ en:
         no_thanks: "No, thanks"
         pack_DURATION: "{DURATION} hours"
         buy_this_pack: "Buy this pack"
+        validity: "Usable for {COUNT} {PERIODS}"
+        period:
+          day: "{COUNT, plural, one{day} other{days}}"
+          week: "{COUNT, plural, one{week} other{weeks}}"
+          month: "{COUNT, plural, one{month} other{months}}"
+          year: "{COUNT, plural, one{year} other{years}}"
       #book a training
       trainings_reserve:
         trainings_planning: "Trainings planning"

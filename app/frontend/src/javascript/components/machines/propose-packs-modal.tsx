@@ -61,6 +61,15 @@ export const ProposePacksModal: React.FC<ProposePacksModalProps> = ({ isOpen, to
   const formatDuration = (minutes: number): string => {
     return t('app.logged.propose_packs_modal.pack_DURATION', { DURATION: minutes / 60 });
   }
+
+  /**
+   * Return a user-friendly string for the validity of the provided pack
+   */
+  const formatValidity = (pack: PrepaidPack): string => {
+    const period = t(`app.logged.propose_packs_modal.period.${pack.validity_interval}`, { COUNT: pack.validity_count });
+    return t('app.logged.propose_packs_modal.validity', { COUNT: pack.validity_count, PERIODS: period });
+  }
+
   /**
    * The user has declined to buy a pack
    */
@@ -89,6 +98,7 @@ export const ProposePacksModal: React.FC<ProposePacksModalProps> = ({ isOpen, to
         <span className="duration">{formatDuration(pack.minutes)}</span>
         <span className="amount">{formatPrice(pack.amount)}</span>
         {pack.amount < normalPrice && <span className="crossed-out-price">{formatPrice(normalPrice)}</span>}
+        <span className="validity">{formatValidity(pack)}</span>
         <FabButton className="buy-button" onClick={handleBuyPack(pack)} icon={<i className="fas fa-shopping-cart" />}>
           {t('app.logged.propose_packs_modal.buy_this_pack')}
         </FabButton>

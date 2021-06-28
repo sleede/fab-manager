@@ -2,6 +2,8 @@
   .list-of-packs {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+
     .pack {
       border-width: 3px;
       border-style: solid;
@@ -31,6 +33,11 @@
       .crossed-out-price {
         display: block;
         text-decoration: line-through;
+      }
+
+      .validity {
+        display: block;
+        font-style: italic;
       }
 
       .buy-button {
