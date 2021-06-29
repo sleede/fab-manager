@@ -23,7 +23,7 @@ class PrepaidPackService
               .includes(:prepaid_pack)
               .references(:prepaid_packs)
               .where('statistic_profile_id = ?', user.statistic_profile.id)
-              .where('expires_at < ?', DateTime.current)
+              .where('expires_at > ?', DateTime.current)
               .where('prepaid_packs.priceable_id = ?', priceable.id)
               .where('prepaid_packs.priceable_type = ?', priceable.class.name)
 
