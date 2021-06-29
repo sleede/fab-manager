@@ -14,7 +14,7 @@ class CartItem::EventReservation < CartItem::Reservation
 
   def price
     amount = @reservable.amount * @normal_tickets
-    is_privileged = @operator.admin? || (@operator.manager? && @operator.id != @customer.id)
+    is_privileged = @operator.privileged? && @operator.id != @customer.id
 
     @other_tickets.each do |ticket|
       amount += ticket[:booked] * EventPriceCategory.find(ticket[:event_price_category_id]).amount

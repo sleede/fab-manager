@@ -76,7 +76,6 @@ const PacksSummaryComponent: React.FC<PacksSummaryProps> = ({ item, itemType, cu
    * Do we need to display the "buy new pack" button?
    */
   const shouldDisplayButton = (): boolean => {
-    console.log(threshold);
     if (threshold < 1) {
       return totalAvailable() - totalUsed() <= totalAvailable() * threshold;
     }

@@ -3,7 +3,7 @@
 MINUTES_PER_HOUR = 60.0
 SECONDS_PER_MINUTE = 60.0
 
-GET_SLOT_PRICE_DEFAULT_OPTS = { has_credits: false, elements: nil, is_division: true }.freeze
+GET_SLOT_PRICE_DEFAULT_OPTS = { has_credits: false, elements: nil, is_division: true, prepaid_minutes: 0 }.freeze
 
 # A generic reservation added to the shopping cart
 class CartItem::Reservation < CartItem::BaseItem
@@ -17,14 +17,18 @@ class CartItem::Reservation < CartItem::BaseItem
 
   def price
     base_amount = @reservable.prices.find_by(group_id: @customer.group_id, plan_id: @plan.try(:id)).amount
-    is_privileged = @operator.admin? || (@operator.manager? && @operator.id != @customer.id)
+    is_privileged = @operator.privileged? && @operator.id != @customer.id
+    prepaid_minutes = get_prepaid_minutes(@customer, @reservable)
 
     elements = { slots: [] }
     amount = 0
 
     hours_available = credits
     @slots.each_with_index do |slot, index|
-      amount += get_slot_price(base_amount, slot, is_privileged, elements: elements, has_credits: (index < hours_available))
+      amount += get_slot_price(base_amount, slot, is_privileged,
+                               elements: elements,
+                               has_credits: (index < hours_available),
+                               prepaid_minutes: prepaid_minutes)
     end
 
     { elements: elements, amount: amount }
@@ -67,6 +71,7 @@ class CartItem::Reservation < CartItem::BaseItem
   #  - elements {Array} if provided the resulting price will be append into elements.slots
   #  - has_credits {Boolean} true if the user still has credits for the given slot, false if not provided
   #  - is_division {boolean} false if the slot covers a full availability, true if it is a subdivision (default)
+  #  - prepaid_minutes {Number} number of remaining prepaid minutes for the customer
   # @return {Number} price of the slot
   ##
   def get_slot_price(hourly_rate, slot, is_privileged, options = {})
@@ -78,6 +83,9 @@ class CartItem::Reservation < CartItem::BaseItem
                  else
                    slot_rate
                  end
+    if real_price.positive? && options[:prepaid_minutes].positive?
+      # TODO, remove prepaid minutes
+    end
 
     unless options[:elements].nil?
       options[:elements][:slots].push(
@@ -87,6 +95,14 @@ class CartItem::Reservation < CartItem::BaseItem
       )
     end
     real_price
+  end
+
+  def get_prepaid_minutes(user, priceable)
+    user_packs = PrepaidPackService.user_packs(user, priceable)
+    total_available = user_packs.map { |up| up.prepaid_pack.minutes }.reduce(:+) || 0
+    total_used = user_packs.map(&:minutes_used).reduce(:+) || 0
+
+    total_available - total_used
   end
 
   ##
