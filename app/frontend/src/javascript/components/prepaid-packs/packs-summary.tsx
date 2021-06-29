@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import _ from 'lodash';
 import { Machine } from '../../models/machine';
 import { User } from '../../models/user';
 import { UserPack } from '../../models/user-pack';
@@ -19,7 +20,7 @@ type PackableItem = Machine;
 interface PacksSummaryProps {
   item: PackableItem,
   itemType: 'Machine',
-  customer: User,
+  customer?: User,
   operator: User,
   onError: (message: string) => void,
   onSuccess: (message: string) => void,
@@ -33,13 +34,18 @@ const PacksSummaryComponent: React.FC<PacksSummaryProps> = ({ item, itemType, cu
   const [packsModal, setPacksModal] = useState<boolean>(false);
 
   useEffect(() => {
-    UserPackAPI.index({ user_id: customer.id, priceable_type: itemType, priceable_id: item.id })
-      .then(data => setUserPacks(data))
-      .catch(error => onError(error));
     SettingAPI.get(SettingName.RenewPackThreshold)
       .then(data => setThreshold(parseFloat(data.value)))
       .catch(error => onError(error));
-  }, [item, itemType, customer])
+  }, []);
+
+  useEffect(() => {
+    if (_.isEmpty(customer)) return;
+
+    UserPackAPI.index({ user_id: customer.id, priceable_type: itemType, priceable_id: item.id })
+      .then(data => setUserPacks(data))
+      .catch(error => onError(error));
+  }, [item, itemType, customer]);
 
   /**
    * Total of minutes used by the customer
@@ -47,7 +53,7 @@ const PacksSummaryComponent: React.FC<PacksSummaryProps> = ({ item, itemType, cu
   const totalUsed = (): number => {
     if (!userPacks) return 0;
 
-    return userPacks.map(up => up.minutes_used).reduce((acc, curr) => acc + curr);
+    return userPacks.map(up => up.minutes_used).reduce((acc, curr) => acc + curr, 0);
   }
 
   /**
@@ -56,25 +62,26 @@ const PacksSummaryComponent: React.FC<PacksSummaryProps> = ({ item, itemType, cu
   const totalAvailable = (): number => {
     if (!userPacks) return 0;
 
-    return userPacks.map(up => up.prepaid_pack.minutes).reduce((acc, curr) => acc + curr);
+    return userPacks.map(up => up.prepaid_pack.minutes).reduce((acc, curr) => acc + curr, 0);
   }
 
   /**
    * Total prepaid hours remaining for the current customer
    */
   const totalHours = (): number => {
-    return totalAvailable() - totalUsed() / 60;
+    return (totalAvailable() - totalUsed()) / 60;
   }
 
   /**
-   * Do we need to display the "renew pack" button?
+   * Do we need to display the "buy new pack" button?
    */
-  const shouldDisplayRenew = (): boolean => {
+  const shouldDisplayButton = (): boolean => {
+    console.log(threshold);
     if (threshold < 1) {
-      return totalAvailable() - totalUsed() >= totalAvailable() * threshold;
+      return totalAvailable() - totalUsed() <= totalAvailable() * threshold;
     }
 
-    return totalAvailable() - totalUsed() >= threshold;
+    return totalAvailable() - totalUsed() <= threshold * 60;
   }
 
   /**
@@ -95,23 +102,29 @@ const PacksSummaryComponent: React.FC<PacksSummaryProps> = ({ item, itemType, cu
       .catch(error => onError(error));
   }
 
+  // prevent component rendering if no customer selected
+  if (_.isEmpty(customer)) return <div />;
+
   return (
     <div className="packs-summary">
-      <span className="remaining-hours">{t('app.logged.packs_summary.remaining_HOURS', { HOURS: totalHours(), ITEM: itemType })}</span>
-      {shouldDisplayRenew() && <div>
-        <FabButton className="renew-button" onClick={togglePacksModal} icon={<i className="fa fa-shopping-cart"/>}>
-          {t('app.logged.packs_summary.buy_a_new_pack')}
-        </FabButton>
-        <ProposePacksModal isOpen={packsModal}
-                           toggleModal={togglePacksModal}
-                           item={item}
-                           itemType={itemType}
-                           customer={customer}
-                           operator={operator}
-                           onError={onError}
-                           onDecline={togglePacksModal}
-                           onSuccess={handlePackBoughtSuccess} />
-      </div>}
+      <h3>{t('app.logged.packs_summary.prepaid_hours')}</h3>
+      <div className="content">
+        <span className="remaining-hours">{t('app.logged.packs_summary.remaining_HOURS', { HOURS: totalHours(), ITEM: itemType })}</span>
+        {shouldDisplayButton() && <div className="button-wrapper">
+          <FabButton className="buy-button" onClick={togglePacksModal} icon={<i className="fa fa-shopping-cart"/>}>
+            {t('app.logged.packs_summary.buy_a_new_pack')}
+          </FabButton>
+          <ProposePacksModal isOpen={packsModal}
+                             toggleModal={togglePacksModal}
+                             item={item}
+                             itemType={itemType}
+                             customer={customer}
+                             operator={operator}
+                             onError={onError}
+                             onDecline={togglePacksModal}
+                             onSuccess={handlePackBoughtSuccess} />
+        </div>}
+      </div>
     </div>
   );
 }

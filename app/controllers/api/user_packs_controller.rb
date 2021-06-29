@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # API Controller for resources of type StatisticProfilePrepaidPack
-class UserPacksController < API::ApiController
+class API::UserPacksController < API::ApiController
   before_action :authenticate_user!
 
   def index

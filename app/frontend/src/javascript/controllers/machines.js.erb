@@ -98,8 +98,8 @@ class MachinesController {
 /**
  * Controller used in the public listing page, allowing everyone to see the list of machines
  */
-Application.Controllers.controller('MachinesController', ['$scope', '$state', '_t', 'AuthService', 'Machine', '$uibModal', 'settingsPromise', 'Member', 'uiTourService', 'growl',
-  function ($scope, $state, _t, AuthService, Machine, $uibModal, settingsPromise, Member, uiTourService, growl) {
+Application.Controllers.controller('MachinesController', ['$scope', '$state', '_t', 'AuthService', 'Machine', '$uibModal', 'settingsPromise', 'Member', 'uiTourService', 'machinesPromise', 'growl',
+  function ($scope, $state, _t, AuthService, Machine, $uibModal, settingsPromise, Member, uiTourService, machinesPromise, growl) {
     /* PUBLIC SCOPE */
 
     /**
@@ -164,7 +164,7 @@ Application.Controllers.controller('MachinesController', ['$scope', '$state', '_
             placement: 'bottom',
             orphan: true
           });
-          if ($scope.machines.length > 0) {
+          if (machinesPromise.length > 0) {
             uitour.createStep({
               selector: '.machines-list .show-button',
               stepId: 'view',
@@ -185,7 +185,7 @@ Application.Controllers.controller('MachinesController', ['$scope', '$state', '_
             orphan: true
           });
         }
-        if ($scope.machines.length > 0) {
+        if (machinesPromise.length > 0) {
           uitour.createStep({
             selector: '.machines-list .reserve-button',
             stepId: 'reserve',
@@ -357,8 +357,8 @@ Application.Controllers.controller('ShowMachineController', ['$scope', '$state',
  * This controller workflow is pretty similar to the trainings reservation controller.
  */
 
-Application.Controllers.controller('ReserveMachineController', ['$scope', '$stateParams', '_t', 'moment', 'Auth', '$timeout', 'Member', 'Availability', 'plansPromise', 'groupsPromise', 'machinePromise', 'settingsPromise', 'uiCalendarConfig', 'CalendarConfig', 'Reservation',
-  function ($scope, $stateParams, _t, moment, Auth, $timeout, Member, Availability, plansPromise, groupsPromise, machinePromise, settingsPromise, uiCalendarConfig, CalendarConfig, Reservation) {
+Application.Controllers.controller('ReserveMachineController', ['$scope', '$stateParams', '_t', 'moment', 'Auth', '$timeout', 'Member', 'Availability', 'plansPromise', 'groupsPromise', 'machinePromise', 'settingsPromise', 'uiCalendarConfig', 'CalendarConfig', 'Reservation', 'growl',
+  function ($scope, $stateParams, _t, moment, Auth, $timeout, Member, Availability, plansPromise, groupsPromise, machinePromise, settingsPromise, uiCalendarConfig, CalendarConfig, Reservation, growl) {
   /* PRIVATE STATIC CONSTANTS */
 
     // Slot free to be booked
@@ -625,6 +625,20 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
      * To use as callback in Array.prototype.filter to get only enabled plans
      */
     $scope.filterDisabledPlans = function (plan) { return !plan.disabled; };
+
+    /**
+     * Callback triggered by react components
+     */
+    $scope.onSuccess = function (message) {
+      growl.success(message);
+    };
+
+    /**
+     * Callback triggered by react components
+     */
+    $scope.onError = function (message) {
+      growl.error(message);
+    };
 
     /* PRIVATE SCOPE */
 

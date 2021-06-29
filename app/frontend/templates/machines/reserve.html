@@ -29,6 +29,14 @@
       <select-member></select-member>
     </div>
 
+    <packs-summary item="machine"
+                   item-type="'Machine'"
+                   customer="ctrl.member"
+                   operator="currentUser"
+                   on-error="onError"
+                   on-success="onSuccess">
+    </packs-summary>
+
     <cart slot="selectedEvent"
           slot-selection-time="selectionTime"
           events="events"

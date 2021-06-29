@@ -55,7 +55,6 @@
 @import "modules/machines/machines-list";
 @import "modules/machines/machines-filters";
 @import "modules/machines/required-training-modal";
-@import "modules/machines/propose-packs-modal";
 @import "modules/user/avatar";
 @import "modules/pricing/machines-pricing";
 @import "modules/pricing/editable-price";
@@ -63,5 +62,7 @@
 @import "modules/pricing/pack-form";
 @import "modules/pricing/delete-pack";
 @import "modules/pricing/edit-pack";
+@import "modules/prepaid-packs/propose-packs-modal";
+@import "modules/prepaid-packs/packs-summary";
 
 @import "app.responsive";

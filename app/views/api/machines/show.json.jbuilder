@@ -15,8 +15,7 @@ if current_user
       json.partial! 'api/reservations/reservation', reservation: current_user.next_training_reservation_by_machine(@machine)
     end
   end
-  json.current_user_has_packs current_user.packs?(@machine, nil)
-  json.current_user_available_for_packs_renewal current_user.packs?(@machine)
+  json.current_user_has_packs current_user.packs?(@machine)
   json.has_prepaid_packs_for_current_user @machine.packs?(current_user)
 end
 
