@@ -1,4 +1,4 @@
-import React, { BaseSyntheticEvent, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Machine } from '../../models/machine';
 import { FabModal, ModalSize } from '../base/fab-modal';
 import PrepaidPackAPI from '../../api/prepaid-pack';
@@ -14,21 +14,24 @@ import { PaymentModal } from '../payment/payment-modal';
 
 declare var Fablab: IFablab;
 
+type PackableItem = Machine;
+
 interface ProposePacksModalProps {
   isOpen: boolean,
   toggleModal: () => void,
-  machine: Machine,
+  item: PackableItem,
+  itemType: 'Machine',
   customer: User,
   operator: User,
   onError: (message: string) => void,
-  onDecline: (machine: Machine) => void,
-  onSuccess: (message:string, machine: Machine) => void,
+  onDecline: (item: PackableItem) => void,
+  onSuccess: (message:string, item: PackableItem) => void,
 }
 
 /**
  * Modal dialog shown to offer prepaid-packs for purchase, to the current user.
  */
-export const ProposePacksModal: React.FC<ProposePacksModalProps> = ({ isOpen, toggleModal, machine, customer, operator, onError, onDecline, onSuccess }) => {
+export const ProposePacksModal: React.FC<ProposePacksModalProps> = ({ isOpen, toggleModal, item, itemType, customer, operator, onError, onDecline, onSuccess }) => {
   const { t } = useTranslation('logged');
 
   const [price, setPrice] = useState<Price>(null);
@@ -37,13 +40,13 @@ export const ProposePacksModal: React.FC<ProposePacksModalProps> = ({ isOpen, to
   const [paymentModal, setPaymentModal] = useState<boolean>(false);
 
   useEffect(() => {
-    PrepaidPackAPI.index({ priceable_id: machine.id, priceable_type: 'Machine', group_id: customer.group_id, disabled: false })
+    PrepaidPackAPI.index({ priceable_id: item.id, priceable_type: itemType, group_id: customer.group_id, disabled: false })
       .then(data => setPacks(data))
       .catch(error => onError(error));
-    PriceAPI.index({ priceable_id: machine.id, priceable_type: 'Machine', group_id: customer.group_id, plan_id: null })
+    PriceAPI.index({ priceable_id: item.id, priceable_type: itemType, group_id: customer.group_id, plan_id: null })
       .then(data => setPrice(data[0]))
       .catch(error => onError(error));
-  }, [machine]);
+  }, [item]);
 
 
   /**
@@ -87,7 +90,7 @@ export const ProposePacksModal: React.FC<ProposePacksModalProps> = ({ isOpen, to
    * The user has declined to buy a pack
    */
   const handlePacksRefused = (): void => {
-    onDecline(machine);
+    onDecline(item);
   }
 
   /**
@@ -110,7 +113,7 @@ export const ProposePacksModal: React.FC<ProposePacksModalProps> = ({ isOpen, to
    * Callback triggered when the user has bought the pack with a successful payment
    */
   const handlePackBought = (): void => {
-    onSuccess(t('app.logged.propose_packs_modal.pack_bought_success'), machine);
+    onSuccess(t('app.logged.propose_packs_modal.pack_bought_success'), item);
   }
 
   /**

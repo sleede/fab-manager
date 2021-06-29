@@ -128,10 +128,10 @@ class User < ApplicationRecord
     trainings.map(&:machines).flatten.uniq.include?(machine)
   end
 
-  def packs?(item, threshold = Setting.get('renew_pack_threshold'))
+  def packs?(item)
     return true if admin?
 
-    PrepaidPackService.user_packs(self, item, threshold).count.positive?
+    PrepaidPackService.user_packs(self, item).count.positive?
   end
 
   def next_training_reservation_by_machine(machine)
@@ -168,6 +168,10 @@ class User < ApplicationRecord
 
   def partner?
     has_role? :partner
+  end
+
+  def privileged?
+    admin? || manager?
   end
 
   def role

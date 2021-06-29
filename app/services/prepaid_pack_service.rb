@@ -18,22 +18,15 @@ class PrepaidPackService
       packs
     end
 
-    def user_packs(user, priceable, threshold)
-      query = StatisticProfilePrepaidPack
-              .includes(:prepaid_pack)
-              .references(:prepaid_packs)
-              .where('statistic_profile_id = ?', user.statistic_profile.id)
-              .where('expires_at > ?', DateTime.current)
-              .where('prepaid_packs.priceable_id = ?', priceable.id)
-              .where('prepaid_packs.priceable_type = ?', priceable.class.name)
-
-      if threshold.class == Float
-        query = query.where('prepaid_packs.minutes - minutes_used >= prepaid_packs.minutes * ?', threshold)
-      elsif threshold.class == Integer
-        query = query.where('prepaid_packs.minutes - minutes_used >= ?', threshold)
-      end
-
-      query
+    # return the not expired packs for the given item bought by the given user
+    def user_packs(user, priceable)
+      StatisticProfilePrepaidPack
+        .includes(:prepaid_pack)
+        .references(:prepaid_packs)
+        .where('statistic_profile_id = ?', user.statistic_profile.id)
+        .where('expires_at > ?', DateTime.current)
+        .where('prepaid_packs.priceable_id = ?', priceable.id)
+        .where('prepaid_packs.priceable_type = ?', priceable.class.name)
     end
   end
 end

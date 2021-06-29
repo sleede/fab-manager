@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { react2angular } from 'react2angular';
 import { PendingTrainingModal } from './pending-training-modal';
+import { RequiredTrainingModal } from './required-training-modal';
+import { Loader } from '../base/loader';
+import { ProposePacksModal } from '../prepaid-packs/propose-packs-modal';
 import MachineAPI from '../../api/machine';
 import { Machine } from '../../models/machine';
 import { User } from '../../models/user';
-import { RequiredTrainingModal } from './required-training-modal';
-import { react2angular } from 'react2angular';
 import { IApplication } from '../../models/application';
-import { useTranslation } from 'react-i18next';
-import { Loader } from '../base/loader';
-import { ProposePacksModal } from './propose-packs-modal';
 
 declare var Application: IApplication;
 
@@ -161,7 +161,8 @@ const ReserveButtonComponent: React.FC<ReserveButtonProps> = ({ currentUser, mac
                              onEnrollRequested={onEnrollRequested} />
       {machine && currentUser && <ProposePacksModal isOpen={proposePacks}
                                                     toggleModal={toggleProposePacksModal}
-                                                    machine={machine}
+                                                    item={machine}
+                                                    itemType="Machine"
                                                     onError={onError}
                                                     customer={currentUser}
                                                     onDecline={onReserveMachine}

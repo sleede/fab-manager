@@ -191,6 +191,9 @@ en:
           week: "{COUNT, plural, one{week} other{weeks}}"
           month: "{COUNT, plural, one{month} other{months}}"
           year: "{COUNT, plural, one{year} other{years}}"
+      packs_summary:
+        remaining_HOURS: "You have {HOURS} prepaid hours remaining for this {ITEM, select, Machine{machine} Space{space} other{}}."
+        buy_a_new_pack: "Buy a new pack"
       #book a training
       trainings_reserve:
         trainings_planning: "Trainings planning"
