@@ -12,6 +12,8 @@ import { ProposePacksModal } from './propose-packs-modal';
 import { Loader } from '../base/loader';
 import { react2angular } from 'react2angular';
 import { IApplication } from '../../models/application';
+import { PrepaidPack } from '../../models/prepaid-pack';
+import PrepaidPackAPI from '../../api/prepaid-pack';
 
 declare var Application: IApplication;
 
@@ -30,6 +32,7 @@ interface PacksSummaryProps {
 const PacksSummaryComponent: React.FC<PacksSummaryProps> = ({ item, itemType, customer, operator, onError, onSuccess, refresh }) => {
   const { t } = useTranslation('logged');
 
+  const [packs, setPacks] = useState<Array<PrepaidPack>>(null);
   const [userPacks, setUserPacks] = useState<Array<UserPack>>(null);
   const [threshold, setThreshold] = useState<number>(null);
   const [packsModal, setPacksModal] = useState<boolean>(false);
@@ -41,10 +44,8 @@ const PacksSummaryComponent: React.FC<PacksSummaryProps> = ({ item, itemType, cu
   }, []);
 
   useEffect(() => {
-    if (_.isEmpty(customer)) return;
-
     getUserPacksData();
-  }, [item, itemType, customer]);
+  }, [customer, item, itemType]);
 
   useEffect(() => {
     if (refresh instanceof Promise) {
@@ -56,8 +57,13 @@ const PacksSummaryComponent: React.FC<PacksSummaryProps> = ({ item, itemType, cu
    * Fetch the user packs data from the API
    */
   const getUserPacksData = (): void => {
+    if (_.isEmpty(customer)) return;
+
     UserPackAPI.index({ user_id: customer.id, priceable_type: itemType, priceable_id: item.id })
       .then(data => setUserPacks(data))
+      .catch(error => onError(error));
+    PrepaidPackAPI.index({ priceable_id: item.id, priceable_type: itemType, group_id: customer.group_id, disabled: false })
+      .then(data => setPacks(data))
       .catch(error => onError(error));
   }
 
@@ -90,6 +96,8 @@ const PacksSummaryComponent: React.FC<PacksSummaryProps> = ({ item, itemType, cu
    * Do we need to display the "buy new pack" button?
    */
   const shouldDisplayButton = (): boolean => {
+    if (!packs?.length) return  false;
+
     if (threshold < 1) {
       return totalAvailable() - totalUsed() <= totalAvailable() * threshold;
     }
@@ -117,6 +125,8 @@ const PacksSummaryComponent: React.FC<PacksSummaryProps> = ({ item, itemType, cu
 
   // prevent component rendering if no customer selected
   if (_.isEmpty(customer)) return <div />;
+  // prevent component rendering if ths customer have no packs and there are no packs available
+  if (totalHours() === 0 && packs?.length === 0) return <div/>;
 
   return (
     <div className="packs-summary">
