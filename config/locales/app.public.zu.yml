@@ -210,9 +210,14 @@ zu:
         new_availability: "crwdns19618:0crwdne19618:0"
         book: "crwdns9127:0crwdne9127:0"
         _or_the_: "crwdns9129:0crwdne9129:0"
-        status_enabled: "crwdns9131:0crwdne9131:0"
-        status_disabled: "crwdns9133:0crwdne9133:0"
-        status_all: "crwdns9135:0crwdne9135:0"
+      machines_filters:
+        show_machines: "crwdns21880:0crwdne21880:0"
+        status_enabled: "crwdns21882:0crwdne21882:0"
+        status_disabled: "crwdns21884:0crwdne21884:0"
+        status_all: "crwdns21886:0crwdne21886:0"
+      machine_card:
+        book: "crwdns21888:0crwdne21888:0"
+        consult: "crwdns21890:0crwdne21890:0"
       #details of a machine
       machines_show:
         book_this_machine: "crwdns9137:0crwdne9137:0"
