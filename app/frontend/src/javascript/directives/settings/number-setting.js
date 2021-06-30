@@ -10,6 +10,7 @@ Application.Directives.directive('numberSetting', ['Setting', 'growl', '_t',
         faIcon: '@',
         helperText: '@',
         min: '@',
+        step: '@',
         required: '<'
       },
       templateUrl: '/admin/settings/number.html',
@@ -17,7 +18,7 @@ Application.Directives.directive('numberSetting', ['Setting', 'growl', '_t',
         // The setting
         $scope.setting = {
           name: $scope.name,
-          value: parseInt($scope.settings[$scope.name], 10)
+          value: parseFloat($scope.settings[$scope.name])
         };
 
         /**

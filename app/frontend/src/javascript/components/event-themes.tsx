@@ -30,7 +30,7 @@ const EventThemes: React.FC<EventThemesProps> = ({ event, onChange }) => {
   const [themes, setThemes] = useState<Array<EventTheme>>([]);
 
   useEffect(() => {
-    new EventThemeAPI().index().then(data => setThemes(data));
+    EventThemeAPI.index().then(data => setThemes(data));
   }, []);
 
   /**

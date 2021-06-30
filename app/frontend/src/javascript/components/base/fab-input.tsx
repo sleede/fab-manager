@@ -3,7 +3,7 @@ import { debounce as _debounce } from 'lodash';
 
 interface FabInputProps {
   id: string,
-  onChange?: (value: any, validity?: ValidityState) => void,
+  onChange?: (value: string, validity?: ValidityState) => void,
   defaultValue: any,
   icon?: ReactNode,
   addOn?: ReactNode,
@@ -18,12 +18,15 @@ interface FabInputProps {
   placeholder?: string,
   error?: string,
   type?: 'text' | 'date' | 'password' | 'url' | 'time' | 'tel' | 'search' | 'number' | 'month' | 'email' | 'datetime-local' | 'week',
+  step?: number | 'any',
+  min?: number,
+  max?: number,
 }
 
 /**
  * This component is a template for an input component that wraps the application style
  */
-export const FabInput: React.FC<FabInputProps> = ({ id, onChange, defaultValue, icon, className, disabled, type, required, debounce, addOn, addOnClassName, readOnly, maxLength, pattern, placeholder, error }) => {
+export const FabInput: React.FC<FabInputProps> = ({ id, onChange, defaultValue, icon, className, disabled, type, required, debounce, addOn, addOnClassName, readOnly, maxLength, pattern, placeholder, error, step, min, max }) => {
   const [inputValue, setInputValue] = useState<any>(defaultValue);
 
   /**
@@ -86,6 +89,9 @@ export const FabInput: React.FC<FabInputProps> = ({ id, onChange, defaultValue, 
         {hasIcon() && <span className="fab-input--icon">{icon}</span>}
         <input id={id}
                type={type}
+               step={step}
+               min={min}
+               max={max}
                className="fab-input--input"
                value={inputValue}
                onChange={handleChange}

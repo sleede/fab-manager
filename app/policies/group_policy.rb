@@ -11,6 +11,6 @@ class GroupPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.admin? and record.destroyable?
+    user.admin? && record.destroyable?
   end
 end

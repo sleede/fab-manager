@@ -11,7 +11,7 @@ class OpenAPI::V1::InvoicesController < OpenAPI::V1::BaseController
                        .includes(invoicing_profile: :user)
                        .references(:invoicing_profiles)
 
-    @invoices = @invoices.where('invoicing_profiles.user_id = ?', params[:user_id]) if params[:user_id].present?
+    @invoices = @invoices.where(invoicing_profiles: { user_id: params[:user_id] }) if params[:user_id].present?
 
     return unless params[:page].present?
 

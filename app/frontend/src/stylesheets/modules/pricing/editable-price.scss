@@ -1,0 +1,13 @@
+.editable-price  {
+  .display-price {
+    text-decoration: none;
+    color: #428bca;
+    border-bottom: dashed 1px #428bca;
+
+    &:hover {
+      text-decoration: none;
+      color: #2a6496;
+      border-bottom-color: #2a6496;
+    }
+  }
+}

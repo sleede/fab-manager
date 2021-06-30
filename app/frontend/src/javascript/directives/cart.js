@@ -79,6 +79,12 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
           cartItems: undefined
         };
 
+        // offline payments (at the fablab's reception)
+        $scope.localPayment = {
+          showModal: false,
+          cartItems: undefined
+        };
+
         // currently logged-in user
         $scope.currentUser = $rootScope.currentUser;
 
@@ -326,11 +332,33 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
         };
 
         /**
+         * This will open/close the local payment modal
+         */
+        $scope.toggleLocalPaymentModal = (beforeApply) => {
+          setTimeout(() => {
+            $scope.localPayment.showModal = !$scope.localPayment.showModal;
+            if (typeof beforeApply === 'function') {
+              beforeApply();
+            }
+            $scope.$apply();
+          }, 50);
+        };
+
+        /**
          * Invoked atfer a successful card payment
          * @param invoice {*} may be an Invoice or a paymentSchedule
          */
         $scope.afterOnlinePaymentSuccess = (invoice) => {
           $scope.toggleOnlinePaymentModal();
+          afterPayment(invoice);
+        };
+
+        /**
+         * Invoked atfer a successful offline payment
+         * @param invoice {*} may be an Invoice or a paymentSchedule
+         */
+        $scope.afterLocalPaymentSuccess = (invoice) => {
+          $scope.toggleLocalPaymentModal();
           afterPayment(invoice);
         };
 
@@ -717,195 +745,14 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
             });
           }
         };
+
         /**
          * Open a modal window that allows the user to process a local payment for his current shopping cart (admin only).
          */
         const payOnSite = function (items) {
-          $uibModal.open({
-            templateUrl: '/shared/valid_reservation_modal.html',
-            size: $scope.schedule.payment_schedule ? 'lg' : 'sm',
-            resolve: {
-              price () {
-                return Price.compute(mkCartItems(items, '')).$promise;
-              },
-              cartItems () {
-                return mkCartItems(items, '');
-              },
-              wallet () {
-                return Wallet.getWalletByUser({ user_id: $scope.user.id }).$promise;
-              },
-              coupon () {
-                return $scope.coupon.applied;
-              },
-              selectedPlan () {
-                return $scope.selectedPlan;
-              },
-              schedule () {
-                return $scope.schedule;
-              },
-              user () {
-                return $scope.user;
-              },
-              settings () {
-                return $scope.settings;
-              }
-            },
-            controller: ['$scope', '$uibModalInstance', '$state', 'price', 'Auth', 'LocalPayment', 'wallet', 'helpers', '$filter', 'coupon', 'selectedPlan', 'schedule', 'cartItems', 'user', 'settings',
-              function ($scope, $uibModalInstance, $state, price, Auth, LocalPayment, wallet, helpers, $filter, coupon, selectedPlan, schedule, cartItems, user, settings) {
-                // user wallet amount
-                $scope.wallet = wallet;
-
-                // Global price (total of all items)
-                $scope.price = price.price;
-
-                // Price to pay (wallet deducted)
-                $scope.amount = helpers.getAmountToPay(price.price, wallet.amount);
-
-                // Reservation &| subscription
-                $scope.cartItems = cartItems;
-
-                // Subscription
-                $scope.plan = selectedPlan;
-
-                // Used in wallet info template to interpolate some translations
-                $scope.numberFilter = $filter('number');
-
-                // Shows the schedule info in the modal
-                $scope.schedule = schedule.payment_schedule;
-
-                // how should we collect payments for the payment schedule
-                $scope.method = {
-                  payment_method: 'card'
-                };
-
-                // "valid" Button label
-                $scope.validButtonName = '';
-
-                // online payment modal state
-                // this is used to collect card data when a payment-schedule was selected, and paid with a card
-                $scope.isOpenOnlinePaymentModal = false;
-
-                // the customer
-                $scope.user = user;
-
-                /**
-                 * Check if the shopping cart contains a reservation
-                 * @return {Reservation|boolean}
-                 */
-                $scope.reservation = (function () {
-                  const item = cartItems.items.find(i => i.reservation);
-                  if (item && item.reservation.slots_attributes.length > 0) {
-                    return item.reservation;
-                  }
-                  return false;
-                })();
-
-                /**
-                 * Check if the shopping cart contains a subscription
-                 * @return {Subscription|boolean}
-                 */
-                $scope.subscription = (function () {
-                  const item = cartItems.items.find(i => i.subscription);
-                  if (item && item.subscription.plan_id) {
-                    return item.subscription;
-                  }
-                  return false;
-                })();
-
-                /**
-                 * Callback to process the local payment, triggered on button click
-                 */
-                $scope.ok = function () {
-                  if ($scope.schedule && $scope.method.payment_method === 'card') {
-                    // check that the online payment is enabled
-                    if (settings.online_payment_module !== 'true') {
-                      return growl.error(_t('app.shared.cart.online_payment_disabled'));
-                    } else {
-                      return $scope.toggleOnlinePaymentModal();
-                    }
-                  }
-                  $scope.attempting = true;
-                  LocalPayment.confirm(cartItems, function (reservation) {
-                    $uibModalInstance.close(reservation);
-                    $scope.attempting = true;
-                  }, function (response) {
-                    $scope.alerts = [];
-                    $scope.alerts.push({ msg: _t('app.shared.cart.a_problem_occurred_during_the_payment_process_please_try_again_later'), type: 'danger' });
-                    $scope.attempting = false;
-                  });
-                };
-                /**
-                 * Callback to close the modal without processing the payment
-                 */
-                $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
-
-                /**
-                 * Asynchronously updates the status of the online payment modal
-                 */
-                $scope.toggleOnlinePaymentModal = function () {
-                  setTimeout(() => {
-                    $scope.isOpenOnlinePaymentModal = !$scope.isOpenOnlinePaymentModal;
-                    $scope.$apply();
-                  }, 50);
-                };
-
-                /**
-                 * After creating a payment schedule by card, from an administrator.
-                 * @param result {*} PaymentSchedule
-                 */
-                $scope.afterCreatePaymentSchedule = function (result) {
-                  $scope.toggleOnlinePaymentModal();
-                  $uibModalInstance.close(result);
-                };
-
-                /**
-                 * Invoked when something wrong occurred during the payment dialog initialization
-                 * @param message {string}
-                 */
-                $scope.onCreatePaymentScheduleError = (message) => {
-                  growl.error(message);
-                };
-
-                /* PRIVATE SCOPE */
-
-                /**
-                 * Kind of constructor: these actions will be realized first when the directive is loaded
-                 */
-                const initialize = function () {
-                  $scope.$watch('method.payment_method', function (newValue) {
-                    $scope.validButtonName = computeValidButtonName();
-                    $scope.cartItems.payment_method = newValue;
-                  });
-                };
-
-                /**
-                 * Compute the Label of the confirmation button
-                 */
-                const computeValidButtonName = function () {
-                  let method = '';
-                  if ($scope.schedule) {
-                    if (AuthService.isAuthorized(['admin', 'manager']) && $rootScope.currentUser.id !== cartItems.customer_id) {
-                      method = $scope.method.payment_method;
-                    } else {
-                      method = 'card';
-                    }
-                  }
-                  if ($scope.amount > 0) {
-                    return _t('app.shared.cart.confirm_payment_of_html', { METHOD: method, AMOUNT: $filter('currency')($scope.amount) });
-                  } else {
-                    if ((price.price > 0) && ($scope.wallet.amount === 0)) {
-                      return _t('app.shared.cart.confirm_payment_of_html', { METHOD: method, AMOUNT: $filter('currency')(price.price) });
-                    } else {
-                      return _t('app.shared.buttons.confirm');
-                    }
-                  }
-                };
-
-                // # !!! MUST BE CALLED AT THE END of the controller
-                initialize();
-              }
-            ]
-          }).result.finally(null).then(function (paymentSchedule) { afterPayment(paymentSchedule); });
+          $scope.toggleLocalPaymentModal(() => {
+            $scope.localPayment.cartItems = mkCartItems(items);
+          });
         };
 
         /**

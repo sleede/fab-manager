@@ -19,7 +19,7 @@ export enum PaymentMethod {
   Other = ''
 }
 
-export type CartItem = { reservation: Reservation }|{ subscription: SubscriptionRequest }|{ card_update: { date: Date } };
+export type CartItem = { reservation: Reservation }|{ subscription: SubscriptionRequest }|{ prepaid_pack: { id: number } };
 
 export interface ShoppingCart {
   customer_id: number,

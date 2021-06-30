@@ -15,11 +15,16 @@
 
       <div class="col-xs-12 col-sm-12 col-md-4 b-t hide-b-md">
         <section class="heading-actions wrapper">
-		<a ng-click="reserveMachine(machine, $event)"
-                   class="btn btn-lg btn-warning bg-white b-2x rounded m-t-xs"
-		   ng-if="!isAuthorized('admin')"
-                   ng-hide="machine.disabled"
-                   translate>{{ 'app.public.machines_show.book_this_machine' }}</a>
+          <reserve-button ng-hide="machine.disabled"
+                          class-name="'btn btn-lg btn-warning bg-white b-2x rounded m-t-xs'"
+                          current-user="currentUser"
+                          machine-id="machine.id"
+                          on-error="onError"
+                          on-success="onSuccess"
+                          on-reserve-machine="reserveMachine"
+                          on-login-requested="onLoginRequest"
+                          on-enroll-requested="onEnrollRequest">
+          </reserve-button>
 
           <a ui-sref="app.admin.machines_edit({id: machine.id})" ng-if="isAuthorized('admin')" class="btn btn-lg btn-warning bg-white b-2x rounded m-t-xs"><i class="fa fa-edit"></i> {{ 'app.shared.buttons.edit' | translate }}</a>
           <a ng-click="delete(machine)" ng-if="isAuthorized('admin')" class="btn btn-lg btn-danger b-2x rounded no-b m-t-xs"><i class="fa fa-trash-o"></i></a>

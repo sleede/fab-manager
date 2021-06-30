@@ -107,7 +107,8 @@ Application.Controllers.controller('NewPlanController', ['$scope', '$uibModal', 
       partnerId: null,
       partnerContact: null,
       ui_weight: 0,
-      monthly_payment: false
+      monthly_payment: false,
+      plan_category_id: null
     };
 
     // API URL where the form will be posted

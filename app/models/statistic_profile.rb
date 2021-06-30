@@ -17,6 +17,10 @@ class StatisticProfile < ApplicationRecord
   has_many :reservations, dependent: :destroy
   accepts_nested_attributes_for :reservations, allow_destroy: false
 
+  # bought packs
+  has_many :statistic_profile_prepaid_packs, dependent: :destroy
+  has_many :prepaid_packs, through: :statistic_profile_prepaid_packs
+
   # Trainings that were validated by an admin
   has_many :statistic_profile_trainings, dependent: :destroy
   has_many :trainings, through: :statistic_profile_trainings

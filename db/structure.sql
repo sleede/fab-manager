@@ -1715,6 +1715,44 @@ ALTER SEQUENCE public.plans_id_seq OWNED BY public.plans.id;
 
 
 --
+-- Name: prepaid_packs; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.prepaid_packs (
+    id bigint NOT NULL,
+    priceable_type character varying,
+    priceable_id bigint,
+    group_id bigint,
+    amount integer,
+    minutes integer,
+    validity_interval character varying,
+    validity_count integer,
+    disabled boolean,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: prepaid_packs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.prepaid_packs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: prepaid_packs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.prepaid_packs_id_seq OWNED BY public.prepaid_packs.id;
+
+
+--
 -- Name: price_categories; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2439,6 +2477,40 @@ CREATE SEQUENCE public.statistic_indices_id_seq
 --
 
 ALTER SEQUENCE public.statistic_indices_id_seq OWNED BY public.statistic_indices.id;
+
+
+--
+-- Name: statistic_profile_prepaid_packs; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.statistic_profile_prepaid_packs (
+    id bigint NOT NULL,
+    prepaid_pack_id bigint,
+    statistic_profile_id bigint,
+    minutes_used integer DEFAULT 0,
+    expires_at timestamp without time zone,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: statistic_profile_prepaid_packs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.statistic_profile_prepaid_packs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: statistic_profile_prepaid_packs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.statistic_profile_prepaid_packs_id_seq OWNED BY public.statistic_profile_prepaid_packs.id;
 
 
 --
@@ -3418,6 +3490,13 @@ ALTER TABLE ONLY public.plans_availabilities ALTER COLUMN id SET DEFAULT nextval
 
 
 --
+-- Name: prepaid_packs id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.prepaid_packs ALTER COLUMN id SET DEFAULT nextval('public.prepaid_packs_id_seq'::regclass);
+
+
+--
 -- Name: price_categories id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -3562,6 +3641,13 @@ ALTER TABLE ONLY public.statistic_graphs ALTER COLUMN id SET DEFAULT nextval('pu
 --
 
 ALTER TABLE ONLY public.statistic_indices ALTER COLUMN id SET DEFAULT nextval('public.statistic_indices_id_seq'::regclass);
+
+
+--
+-- Name: statistic_profile_prepaid_packs id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.statistic_profile_prepaid_packs ALTER COLUMN id SET DEFAULT nextval('public.statistic_profile_prepaid_packs_id_seq'::regclass);
 
 
 --
@@ -4074,6 +4160,14 @@ ALTER TABLE ONLY public.plans
 
 
 --
+-- Name: prepaid_packs prepaid_packs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.prepaid_packs
+    ADD CONSTRAINT prepaid_packs_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: price_categories price_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4247,6 +4341,14 @@ ALTER TABLE ONLY public.statistic_graphs
 
 ALTER TABLE ONLY public.statistic_indices
     ADD CONSTRAINT statistic_indices_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: statistic_profile_prepaid_packs statistic_profile_prepaid_packs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.statistic_profile_prepaid_packs
+    ADD CONSTRAINT statistic_profile_prepaid_packs_pkey PRIMARY KEY (id);
 
 
 --
@@ -4787,6 +4889,20 @@ CREATE INDEX index_plans_on_plan_category_id ON public.plans USING btree (plan_c
 
 
 --
+-- Name: index_prepaid_packs_on_group_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_prepaid_packs_on_group_id ON public.prepaid_packs USING btree (group_id);
+
+
+--
+-- Name: index_prepaid_packs_on_priceable_type_and_priceable_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_prepaid_packs_on_priceable_type_and_priceable_id ON public.prepaid_packs USING btree (priceable_type, priceable_id);
+
+
+--
 -- Name: index_prices_on_group_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4987,6 +5103,20 @@ CREATE INDEX index_statistic_fields_on_statistic_index_id ON public.statistic_fi
 --
 
 CREATE INDEX index_statistic_graphs_on_statistic_index_id ON public.statistic_graphs USING btree (statistic_index_id);
+
+
+--
+-- Name: index_statistic_profile_prepaid_packs_on_prepaid_pack_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_statistic_profile_prepaid_packs_on_prepaid_pack_id ON public.statistic_profile_prepaid_packs USING btree (prepaid_pack_id);
+
+
+--
+-- Name: index_statistic_profile_prepaid_packs_on_statistic_profile_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_statistic_profile_prepaid_packs_on_statistic_profile_id ON public.statistic_profile_prepaid_packs USING btree (statistic_profile_id);
 
 
 --
@@ -5500,11 +5630,27 @@ ALTER TABLE ONLY public.payment_schedule_objects
 
 
 --
+-- Name: statistic_profile_prepaid_packs fk_rails_5af0f4258a; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.statistic_profile_prepaid_packs
+    ADD CONSTRAINT fk_rails_5af0f4258a FOREIGN KEY (statistic_profile_id) REFERENCES public.statistic_profiles(id);
+
+
+--
 -- Name: tickets fk_rails_65422fe751; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.tickets
     ADD CONSTRAINT fk_rails_65422fe751 FOREIGN KEY (reservation_id) REFERENCES public.reservations(id);
+
+
+--
+-- Name: prepaid_packs fk_rails_6ea2aaae74; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.prepaid_packs
+    ADD CONSTRAINT fk_rails_6ea2aaae74 FOREIGN KEY (group_id) REFERENCES public.groups(id);
 
 
 --
@@ -5633,6 +5779,14 @@ ALTER TABLE ONLY public.projects_themes
 
 ALTER TABLE ONLY public.projects_themes
     ADD CONSTRAINT fk_rails_b021a22658 FOREIGN KEY (theme_id) REFERENCES public.themes(id);
+
+
+--
+-- Name: statistic_profile_prepaid_packs fk_rails_b0251cdfcf; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.statistic_profile_prepaid_packs
+    ADD CONSTRAINT fk_rails_b0251cdfcf FOREIGN KEY (prepaid_pack_id) REFERENCES public.prepaid_packs(id);
 
 
 --
@@ -6071,6 +6225,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210521085710'),
 ('20210525134018'),
 ('20210525150942'),
-('20210608082748');
+('20210608082748'),
+('20210621122103'),
+('20210621123954');
 
 

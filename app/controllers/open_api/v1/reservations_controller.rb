@@ -11,7 +11,7 @@ class OpenAPI::V1::ReservationsController < OpenAPI::V1::BaseController
                                .includes(statistic_profile: :user)
                                .references(:statistic_profiles)
 
-    @reservations = @reservations.where('statistic_profiles.user_id = ?', params[:user_id]) if params[:user_id].present?
+    @reservations = @reservations.where(statistic_profiles: { user_id: params[:user_id] }) if params[:user_id].present?
     @reservations = @reservations.where(reservable_type: format_type(params[:reservable_type])) if params[:reservable_type].present?
     @reservations = @reservations.where(reservable_id: params[:reservable_id]) if params[:reservable_id].present?
 

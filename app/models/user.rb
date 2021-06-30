@@ -68,6 +68,7 @@ class User < ApplicationRecord
   delegate :reservations, to: :statistic_profile
   delegate :trainings, to: :statistic_profile
   delegate :my_projects, to: :statistic_profile
+  delegate :prepaid_packs, to: :statistic_profile
   delegate :wallet, to: :invoicing_profile
   delegate :wallet_transactions, to: :invoicing_profile
   delegate :invoices, to: :invoicing_profile
@@ -127,8 +128,20 @@ class User < ApplicationRecord
     trainings.map(&:machines).flatten.uniq.include?(machine)
   end
 
-  def training_reservation_by_machine(machine)
-    reservations.where(reservable_type: 'Training', reservable_id: machine.trainings.map(&:id)).first
+  def packs?(item)
+    return true if admin?
+
+    PrepaidPackService.user_packs(self, item).count.positive?
+  end
+
+  def next_training_reservation_by_machine(machine)
+    reservations.where(reservable_type: 'Training', reservable_id: machine.trainings.map(&:id))
+                .includes(:slots)
+                .where('slots.start_at>= ?', DateTime.current)
+                .order('slots.start_at': :asc)
+                .references(:slots)
+                .limit(1)
+                .first
   end
 
   def subscribed_plan
@@ -155,6 +168,10 @@ class User < ApplicationRecord
 
   def partner?
     has_role? :partner
+  end
+
+  def privileged?
+    admin? || manager?
   end
 
   def role

@@ -39,7 +39,7 @@ class SettingPolicy < ApplicationPolicy
        tracking_id book_overlapping_slots slot_duration events_in_calendar spaces_module plans_module invoicing_module
        recaptcha_site_key feature_tour_display disqus_shortname allowed_cad_extensions openlab_app_id openlab_default
        online_payment_module stripe_public_key confirmation_required wallet_module trainings_module address_required
-       payment_gateway payzen_endpoint payzen_public_key public_agenda_module]
+       payment_gateway payzen_endpoint payzen_public_key public_agenda_module renew_pack_threshold]
   end
 
   ##

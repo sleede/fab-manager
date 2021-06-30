@@ -106,6 +106,9 @@ en:
         add_an_attachment: "Add an attachment"
         disable_machine: "Disable machine"
         validate_your_machine: "Validate your machine"
+      #button to book a machine reservation
+      reserve_button:
+        book_this_machine: "Book this machine"
       #frame to select a plan to subscribe
       plan_subscribe:
         subscribe_online: "subscribe online"
@@ -276,16 +279,6 @@ en:
         do_you_want_to_change_NAME_s_booking_slot_initially_planned_at: "Do you want to change {NAME}'s booking slot, initially planned at:"
         cancel_this_reservation: "Cancel this reservation"
         i_want_to_change_date: "I want to change date"
-      #modal telling users that they need to pass a training before booking a machine
-      request_training_modal:
-        to_book_the_MACHINE_you_must_have_completed_the_TRAINING: "To book the \"{MACHINE}\" you must have completed the {TRAINING}."
-        register_for_the_training: "Enroll in the training"
-        i_dont_want_to_register_now: "I don't want to enroll now"
-      #modal telling users that they must wait for their training validation before booking a machine
-      training_reservation_modal:
-        machine_reservation: "Machine reservation"
-        you_must_wait_for_your_training_is_being_validated_by_the_fablab_team_to_book_this_machine: "You must wait for your training is being validated by the FabLab team to book this machine."
-        your_training_will_occur_: "Your training will occur"
       #user public profile
       public_profile:
         last_activity_html: "Last activity <br><strong>on {DATE}</strong>"

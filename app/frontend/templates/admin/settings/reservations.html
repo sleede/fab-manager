@@ -157,5 +157,17 @@
                          label="app.admin.settings.show_event"
                          classes="m-l"></boolean-setting>
       </div>
+      <div class="row">
+          <h3 class="m-l" translate>{{ 'app.admin.settings.display_invite_to_renew_pack' }}</h3>
+          <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.packs_threshold_info_html' | translate"></p>
+        <number-setting name="renew_pack_threshold"
+                        settings="allSettings"
+                        label="app.admin.settings.renew_pack_threshold"
+                        classes="col-md-4"
+                        fa-icon="fa-sliders-h"
+                        min="0"
+                        step="0.01">
+        </number-setting>
+      </div>
     </div>
 </div>

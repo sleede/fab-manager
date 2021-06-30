@@ -21,6 +21,7 @@ class Machine < ApplicationRecord
   validates :description, presence: true
 
   has_many :prices, as: :priceable, dependent: :destroy
+  has_many :prepaid_packs, as: :priceable, dependent: :destroy
 
   has_many :reservations, as: :reservable, dependent: :destroy
   has_many :credits, as: :creditable, dependent: :destroy
@@ -75,6 +76,13 @@ class Machine < ApplicationRecord
 
   def destroyable?
     reservations.empty?
+  end
+
+  def packs?(user)
+    prepaid_packs.where(group_id: user.group_id)
+                 .where(disabled: [false, nil])
+                 .count
+                 .positive?
   end
 
   private

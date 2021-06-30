@@ -1,0 +1,31 @@
+.machines-filters {
+  margin: 1.5em;
+
+  .status-filter {
+    & {
+      display: inline-flex;
+      width: 50%;
+    }
+    & > label {
+      white-space: nowrap;
+      line-height: 2em;
+    }
+    & > * {
+      display: inline-block;
+    }
+    .status-select {
+      width: 100%;
+      margin-left: 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 720px){
+  .machines-filters {
+    .status-filter {
+      padding-right: 0;
+      display: inline-block;
+      width: 100%;
+    }
+  }
+}
