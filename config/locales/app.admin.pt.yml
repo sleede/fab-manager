@@ -307,7 +307,6 @@ pt:
         prominence: "Relevância"
         price: "Preço"
         machine_hours: "Slots de máquina"
-        these_prices_match_machine_hours_rates_html: "Os preços abaixo correspondem a uma hora de uso de máquina, <strong>sem assinatura</strong>."
         prices_calculated_on_hourly_rate_html: "Todos os preços serão calculados automaticamente com base na taxa horária definida aqui.<br/><em>Por exemplo</em>, se você definir uma taxa horária em {RATE}: um slot de {DURATION} minutos (padrão), será cobrada a tarifa <strong>{PRICE}</strong>."
         you_can_override: "Você pode substituir essa duração por cada disponibilidade que você criar na agenda. O preço será então ajustado em conformidade."
         machines: "Máquinas"
@@ -369,6 +368,42 @@ pt:
         status_enabled: "Ativos"
         status_disabled: "Desabilitados"
         status_all: "Todos"
+      machines_pricing:
+        prices_match_machine_hours_rates_html: "The prices below match one hour of machine usage, <strong>without subscription</strong>."
+        prices_calculated_on_hourly_rate_html: "All the prices will be automatically calculated based on the hourly rate defined here.<br/><em>For example</em>, if you define an hourly rate at {RATE}: a slot of {DURATION} minutes (default), will be charged <strong>{PRICE}</strong>."
+        you_can_override: "You can override this duration for each availability you create in the agenda. The price will then be adjusted accordingly."
+        machines: "Machines"
+        price_updated: "Price successfully updated"
+      configure_packs_button:
+        packs: "Prepaid packs"
+        no_packs: "No packs for now"
+        pack_DURATION: "{DURATION} hours"
+      pack_form:
+        hours: "Hours"
+        amount: "Price"
+        disabled: "Disabled"
+        validity_count: "Maximum validity"
+        select_interval: "Interval..."
+        intervals:
+          day: "{COUNT, plural, one{Day} other{Days}}"
+          week: "{COUNT, plural, one{Week} other{Weeks}}"
+          month: "{COUNT, plural, one{Month} other{Months}}"
+          year: "{COUNT, plural, one{Year} other{Years}}"
+      create_pack:
+        new_pack: "New prepaid pack"
+        new_pack_info: "A prepaid pack allows users to buy {TYPE, select, Machine{machine} Space{space} other{}} hours before booking any slots. These packs can provide discounts on volumes purchases."
+        create_pack: "Create this pack"
+        pack_successfully_created: "The new prepaid pack was successfully created."
+      delete_pack:
+        pack_deleted: "The prepaid pack was successfully deleted."
+        unable_to_delete: "Unable to delete the prepaid pack: "
+        delete_pack: "Delete the prepaid pack"
+        confirm_delete: "Delete"
+        delete_confirmation: "Are you sure you want to delete this prepaid pack? This won't be possible if the pack was already bought by users."
+      edit_pack:
+        edit_pack: "Edit the pack"
+        confirm_changes: "Confirm changes"
+        pack_successfully_updated: "The prepaid pack was successfully updated."
       #ajouter un code promotionnel
       coupons_new:
         add_a_coupon: "Adicionar cupom"
@@ -1170,6 +1205,9 @@ pt:
         public_agenda_module: "public agenda module"
         statistics_module: "módulo de estatísticas"
         upcoming_events_shown: "exibir limite para eventos futuros"
+        display_invite_to_renew_pack: "Display the invite to renew prepaid-packs"
+        packs_threshold_info_html: "You can define under how many hours the user will be invited to buy a prepaid-pack, if his stock of prepaid hours in under this threshold.<br/>You can set a <strong>number of hours</strong> (<em>eg. 5</em>) or a <strong>percentage</strong> of his current pack pack (<em>eg. 0.05 means 5%</em>)."
+        renew_pack_threshold: "threshold for packs renewal"
         general:
           general: "Geral"
           title: "Título"
@@ -1321,6 +1359,15 @@ pt:
         delete_confirmation: "Are you sure you want to delete this category? If you do, the plans associated with this category won't be sorted anymore."
         category_deleted: "The category was successfully deleted"
         unable_to_delete: "Unable to delete the category: "
+      local_payment:
+        offline_payment: "Payment on site"
+        about_to_cash: "You're about to confirm the cashing by an external payment mean. Please do not click on the button below until you have fully cashed the requested payment."
+        payment_method: "Payment method"
+        method_card: "Online by card"
+        method_check: "By check"
+        card_collection_info: "By validating, you'll be prompted for the member's card number. This card will be automatically charged at the deadlines."
+        check_collection_info: "By validating, you confirm that you have {DEADLINES} checks, allowing you to collect all the monthly payments."
+        online_payment_disabled: "Online payment is not available. You cannot collect this payment schedule by online card."
       #feature tour
       tour:
         conclusion:
