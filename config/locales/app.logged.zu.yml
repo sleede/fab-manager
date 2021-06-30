@@ -165,6 +165,37 @@ zu:
         reservation_was_cancelled_successfully: "crwdns8761:0crwdne8761:0"
         cancellation_failed: "crwdns8763:0crwdne8763:0"
         a_problem_occured_during_the_payment_process_please_try_again_later: "crwdns8765:0crwdne8765:0"
+      #modal telling users that they must wait for their training validation before booking a machine
+      pending_training_modal:
+        machine_reservation: "crwdns21892:0crwdne21892:0"
+        wait_for_validated: "crwdns21894:0crwdne21894:0"
+        training_will_occur_DATE_html: "crwdns21896:0{DATE}crwdne21896:0"
+        DATE_TIME: "crwdns21898:0{DATE}crwdnd21898:0{TIME}crwdne21898:0"
+      #modal telling users that they need to pass a training before booking a machine
+      required_training_modal:
+        to_book_MACHINE_requires_TRAINING_html: "crwdns21900:0{MACHINE}crwdnd21900:0{TRAINING}crwdne21900:0"
+        training_or_training_html: "crwdns21902:0crwdne21902:0"
+        enroll_now: "crwdns21904:0crwdne21904:0"
+        no_enroll_for_now: "crwdns21906:0crwdne21906:0"
+        close: "crwdns21908:0crwdne21908:0"
+      propose_packs_modal:
+        available_packs: "crwdns21910:0crwdne21910:0"
+        packs_proposed: "crwdns21912:0crwdne21912:0"
+        no_thanks: "crwdns21914:0crwdne21914:0"
+        pack_DURATION: "crwdns21916:0{DURATION}crwdne21916:0"
+        buy_this_pack: "crwdns21918:0crwdne21918:0"
+        pack_bought_success: "crwdns21920:0crwdne21920:0"
+        validity: "crwdns21922:0{COUNT}crwdnd21922:0{PERIODS}crwdne21922:0"
+        period:
+          day: "crwdns21924:0COUNT={COUNT}crwdne21924:0"
+          week: "crwdns21926:0COUNT={COUNT}crwdne21926:0"
+          month: "crwdns21928:0COUNT={COUNT}crwdne21928:0"
+          year: "crwdns21930:0COUNT={COUNT}crwdne21930:0"
+      packs_summary:
+        prepaid_hours: "crwdns21932:0crwdne21932:0"
+        remaining_HOURS: "crwdns21934:0HOURS={HOURS}crwdnd21934:0ITEM={ITEM}crwdne21934:0"
+        no_hours: "crwdns21936:0ITEM={ITEM}crwdne21936:0"
+        buy_a_new_pack: "crwdns21938:0crwdne21938:0"
       #book a training
       trainings_reserve:
         trainings_planning: "crwdns8767:0crwdne8767:0"
