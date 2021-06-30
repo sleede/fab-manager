@@ -190,7 +190,7 @@ class InvoicesService
 
     invoice.invoice_items.push InvoiceItem.new(
       amount: payment_details[:elements][:pack],
-      description: I18n.t('invoices.pack_item', COUNT: pack.prepaid_pack.minutes / 60),
+      description: I18n.t('invoices.pack_item', COUNT: pack.prepaid_pack.minutes / 60, ITEM: pack.prepaid_pack.priceable.name),
       object: pack,
       main: main
     )

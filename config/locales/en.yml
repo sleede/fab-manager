@@ -114,7 +114,7 @@ en:
     invoice_text_example: "Our association is not subject to VAT"
     error_invoice: "Erroneous invoice. The items below ware not booked. Please contact the FabLab for a refund."
     prepaid_pack: "Prepaid pack of hours"
-    pack_item: "Pack of %{COUNT} hours"
+    pack_item: "Pack of %{COUNT} hours for the %{ITEM}"
   #PDF payment schedule generation
   payment_schedules:
     schedule_reference: "Payment schedule reference: %{REF}"

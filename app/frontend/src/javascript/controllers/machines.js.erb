@@ -415,6 +415,9 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
     // current machine to reserve
     $scope.machine = machinePromise;
 
+    // will be set to a Promise and resolved after the payment is sone
+    $scope.afterPaymentPromise = null;
+
     // fullCalendar (v2) configuration
     $scope.calendarConfig = CalendarConfig({
       minTime: moment.duration(moment(settingsPromise.booking_window_start).format('HH:mm:ss')),
@@ -618,6 +621,14 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
         }
 
         refetchCalendar();
+
+        // trigger the refresh of react components
+        setTimeout(() => {
+          $scope.afterPaymentPromise = new Promise(resolve => {
+            resolve();
+          });
+          $scope.$apply();
+        }, 50);
       });
     };
 

@@ -24,9 +24,10 @@ interface PacksSummaryProps {
   operator: User,
   onError: (message: string) => void,
   onSuccess: (message: string) => void,
+  refresh?: Promise<void>
 }
 
-const PacksSummaryComponent: React.FC<PacksSummaryProps> = ({ item, itemType, customer, operator, onError, onSuccess }) => {
+const PacksSummaryComponent: React.FC<PacksSummaryProps> = ({ item, itemType, customer, operator, onError, onSuccess, refresh }) => {
   const { t } = useTranslation('logged');
 
   const [userPacks, setUserPacks] = useState<Array<UserPack>>(null);
@@ -42,10 +43,23 @@ const PacksSummaryComponent: React.FC<PacksSummaryProps> = ({ item, itemType, cu
   useEffect(() => {
     if (_.isEmpty(customer)) return;
 
+    getUserPacksData();
+  }, [item, itemType, customer]);
+
+  useEffect(() => {
+    if (refresh instanceof Promise) {
+      refresh.then(getUserPacksData);
+    }
+  }, [refresh]);
+
+  /**
+   * Fetch the user packs data from the API
+   */
+  const getUserPacksData = (): void => {
     UserPackAPI.index({ user_id: customer.id, priceable_type: itemType, priceable_id: item.id })
       .then(data => setUserPacks(data))
       .catch(error => onError(error));
-  }, [item, itemType, customer]);
+  }
 
   /**
    * Total of minutes used by the customer
@@ -108,7 +122,10 @@ const PacksSummaryComponent: React.FC<PacksSummaryProps> = ({ item, itemType, cu
     <div className="packs-summary">
       <h3>{t('app.logged.packs_summary.prepaid_hours')}</h3>
       <div className="content">
-        <span className="remaining-hours">{t('app.logged.packs_summary.remaining_HOURS', { HOURS: totalHours(), ITEM: itemType })}</span>
+        <span className="remaining-hours">
+          {totalHours() > 0 && t('app.logged.packs_summary.remaining_HOURS', { HOURS: totalHours(), ITEM: itemType })}
+          {totalHours() === 0 && t('app.logged.packs_summary.no_hours', { ITEM: itemType })}
+        </span>
         {shouldDisplayButton() && <div className="button-wrapper">
           <FabButton className="buy-button" onClick={togglePacksModal} icon={<i className="fa fa-shopping-cart"/>}>
             {t('app.logged.packs_summary.buy_a_new_pack')}
@@ -128,12 +145,12 @@ const PacksSummaryComponent: React.FC<PacksSummaryProps> = ({ item, itemType, cu
   );
 }
 
-export const PacksSummary: React.FC<PacksSummaryProps> = ({ item, itemType, customer, operator, onError, onSuccess }) => {
+export const PacksSummary: React.FC<PacksSummaryProps> = ({ item, itemType, customer, operator, onError, onSuccess, refresh }) => {
   return (
     <Loader>
-      <PacksSummaryComponent item={item} itemType={itemType} customer={customer} operator={operator} onError={onError} onSuccess={onSuccess} />
+      <PacksSummaryComponent item={item} itemType={itemType} customer={customer} operator={operator} onError={onError} onSuccess={onSuccess} refresh={refresh} />
     </Loader>
   );
 }
 
-Application.Components.component('packsSummary', react2angular(PacksSummary, ['item', 'itemType', 'customer', 'operator', 'onError', 'onSuccess']));
+Application.Components.component('packsSummary', react2angular(PacksSummary, ['item', 'itemType', 'customer', 'operator', 'onError', 'onSuccess', 'refresh']));

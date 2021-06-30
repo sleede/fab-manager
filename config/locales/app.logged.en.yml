@@ -194,6 +194,7 @@ en:
       packs_summary:
         prepaid_hours: "Prepaid hours"
         remaining_HOURS: "You have {HOURS} prepaid hours remaining for this {ITEM, select, Machine{machine} Space{space} other{}}."
+        no_hours: "You don't have any prepaid hours for this {ITEM, select, Machine{machine} Space{space} other{}}."
         buy_a_new_pack: "Buy a new pack"
       #book a training
       trainings_reserve:
