@@ -7,7 +7,11 @@ import { User } from '../../../models/user';
 import { Invoice } from '../../../models/invoice';
 import { useTranslation } from 'react-i18next';
 import { ModalSize } from '../../base/fab-modal';
+import { Loader } from '../../base/loader';
+import { react2angular } from 'react2angular';
+import { IApplication } from '../../../models/application';
 
+declare var Application: IApplication;
 
 interface LocalPaymentModalProps {
   isOpen: boolean,
@@ -22,7 +26,7 @@ interface LocalPaymentModalProps {
 /**
  * This component enables a privileged user to confirm a local payments.
  */
-export const LocalPaymentModal: React.FC<LocalPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, cart, currentUser, schedule, customer }) => {
+const LocalPaymentModalComponent: React.FC<LocalPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, cart, currentUser, schedule, customer }) => {
 
   const { t } = useTranslation('admin');
 
@@ -71,6 +75,17 @@ export const LocalPaymentModal: React.FC<LocalPaymentModalProps> = ({ isOpen, to
                           schedule={schedule}
                           GatewayForm={renderForm}
                           modalSize={schedule ? ModalSize.large : ModalSize.medium}
-                          preventCgv />
+                          preventCgv
+                          preventScheduleInfo />
   );
 }
+
+export const LocalPaymentModal: React.FC<LocalPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, currentUser, schedule , cart, customer }) => {
+  return (
+    <Loader>
+      <LocalPaymentModalComponent isOpen={isOpen} toggleModal={toggleModal} afterSuccess={afterSuccess} currentUser={currentUser} schedule={schedule} cart={cart} customer={customer} />
+    </Loader>
+  );
+}
+
+Application.Components.component('localPaymentModal', react2angular(LocalPaymentModal, ['isOpen', 'toggleModal', 'afterSuccess', 'currentUser', 'schedule', 'cart', 'customer']));

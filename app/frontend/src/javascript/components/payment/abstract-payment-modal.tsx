@@ -46,6 +46,7 @@ interface AbstractPaymentModalProps {
   formClassName?: string,
   title?: string,
   preventCgv?: boolean,
+  preventScheduleInfo?: boolean,
   modalSize?: ModalSize,
 }
 
@@ -55,7 +56,7 @@ interface AbstractPaymentModalProps {
  * This component must not be called directly but must be extended for each implemented payment gateway
  * @see https://reactjs.org/docs/composition-vs-inheritance.html
  */
-export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, cart, currentUser, schedule, customer, logoFooter, GatewayForm, formId, className, formClassName, title, preventCgv, modalSize }) => {
+export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, cart, currentUser, schedule, customer, logoFooter, GatewayForm, formId, className, formClassName, title, preventCgv, preventScheduleInfo, modalSize }) => {
   // customer's wallet
   const [wallet, setWallet] = useState<Wallet>(null);
   // server-computed price with all details
@@ -129,10 +130,10 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
   }
 
   /**
-   * Check if we are currently creating a payment schedule
+   * Check if we must display the info box about the payment schedule
    */
-  const isPaymentSchedule = (): boolean => {
-    return schedule !== undefined;
+  const hasPaymentScheduleInfo = (): boolean => {
+    return schedule !== undefined && !preventScheduleInfo;
   }
 
   /**
@@ -202,7 +203,7 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
           {hasErrors() && <div className="payment-errors">
             {errors}
           </div>}
-          {isPaymentSchedule() && <div className="payment-schedule-info">
+          {hasPaymentScheduleInfo() && <div className="payment-schedule-info">
             <HtmlTranslate trKey="app.shared.payment.payment_schedule_html" options={{ DEADLINES: schedule.items.length, GATEWAY: gateway }} />
           </div>}
           {hasCgv() && <div className="terms-of-sales">
@@ -233,5 +234,6 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
 AbstractPaymentModal.defaultProps = {
   title: 'app.shared.payment.online_payment',
   preventCgv: false,
+  preventScheduleInfo: false,
   modalSize: ModalSize.medium
 };

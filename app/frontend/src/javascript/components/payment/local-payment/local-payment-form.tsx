@@ -103,10 +103,12 @@ export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSucce
       {!paymentSchedule && <p className="payment">{t('app.admin.local_payment.about_to_cash')}</p>}
       {paymentSchedule && <div className="payment-schedule">
         <div className="schedule-method">
+          <label htmlFor="payment-method">{t('app.admin.local_payment.payment_method')}</label>
           <Select placeholder={ t('app.admin.local_payment.payment_method') }
+                  id="payment-method"
                   className="method-select"
                   onChange={handleUpdateMethod}
-                  options={buildMethodOptions}
+                  options={buildMethodOptions()}
                   defaultValue={methodToOption(method)} />
           {method === 'card' && <p>{t('app.admin.local_payment.card_collection_info')}</p>}
           {method === 'check' && <p>{t('app.admin.local_payment.check_collection_info', { DEADLINES: paymentSchedule.items.length })}</p>}
@@ -115,7 +117,7 @@ export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSucce
           <ul>
             {paymentSchedule.items.map(item => {
               return (
-                <li key={item.id}>
+                <li key={`${item.due_date}`}>
                   <span className="schedule-item-date">{FormatLib.date(item.due_date)}</span>
                   <span> </span>
                   <span className="schedule-item-price">{FormatLib.price(item.amount)}</span>
