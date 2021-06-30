@@ -307,7 +307,7 @@ zu:
         prominence: "crwdns7143:0crwdne7143:0"
         price: "crwdns7145:0crwdne7145:0"
         machine_hours: "crwdns7147:0crwdne7147:0"
-        prices_calculated_on_hourly_rate_html: "crwdns20476:0{RATE}crwdnd20476:0{DURATION}crwdnd20476:0{PRICE}crwdne20476:0"
+        prices_calculated_on_hourly_rate_html: "crwdns22026:0{RATE}crwdnd22026:0{DURATION}crwdnd22026:0{PRICE}crwdne22026:0"
         you_can_override: "crwdns20478:0crwdne20478:0"
         machines: "crwdns7153:0crwdne7153:0"
         credits: "crwdns7155:0crwdne7155:0"
