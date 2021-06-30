@@ -307,7 +307,7 @@ pt:
         prominence: "Relevância"
         price: "Preço"
         machine_hours: "Slots de máquina"
-        prices_calculated_on_hourly_rate_html: "Todos os preços serão calculados automaticamente com base na taxa horária definida aqui.<br/><em>Por exemplo</em>, se você definir uma taxa horária em {RATE}: um slot de {DURATION} minutos (padrão), será cobrada a tarifa <strong>{PRICE}</strong>."
+        prices_calculated_on_hourly_rate_html: "All the prices will be automatically calculated based on the hourly rate defined here.<br/><em>For example</em>, if you define an hourly rate at {RATE}: a slot of {DURATION} minutes, will be charged <strong>{PRICE}</strong>."
         you_can_override: "Você pode substituir essa duração por cada disponibilidade que você criar na agenda. O preço será então ajustado em conformidade."
         machines: "Máquinas"
         credits: "Créditos"
