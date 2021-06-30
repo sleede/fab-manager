@@ -113,6 +113,8 @@ fr:
     and: 'et'
     invoice_text_example: "Notre association n'est pas assujettie à la TVA"
     error_invoice: "Facture en erreur. Les éléments ci-dessous n'ont pas été réservés. Veuillez contacter le Fablab pour un remboursement."
+    prepaid_pack: "Prepaid pack of hours"
+    pack_item: "Pack of %{COUNT} hours for the %{ITEM}"
   #PDF payment schedule generation
   payment_schedules:
     schedule_reference: "Référence de l'échéancier : %{REF}"
