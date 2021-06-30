@@ -307,7 +307,7 @@ fr:
         prominence: "Importance"
         price: "Prix"
         machine_hours: "Créneaux machines"
-        prices_calculated_on_hourly_rate_html: "Tous les prix seront automatiquement calculés par rapport au tarif horaire défini ici.<br/><em>Par exemple</em>, si vous définissez un tarif horaire à {RATE} : un créneau de {DURATION} minutes (par défaut), sera facturé <strong>{PRICE}</strong>."
+        prices_calculated_on_hourly_rate_html: "All the prices will be automatically calculated based on the hourly rate defined here.<br/><em>For example</em>, if you define an hourly rate at {RATE}: a slot of {DURATION} minutes, will be charged <strong>{PRICE}</strong>."
         you_can_override: "Vous pouvez surcharger cette durée pour chaque disponibilité que vous créez dans l'agenda. Le prix sera alors ajusté en conséquence."
         machines: "Machines"
         credits: "Crédits"
