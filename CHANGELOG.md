@@ -3,6 +3,7 @@
 - Fix a bug: unable to filter by multiple user IDs in OpenAPI
 - Fix a bug: do not display two empty categories in the plan creation form
 - Fix a bug: do not return to the home page when clicking on previous in the machine description page
+- Fix a bug: public list of plans fails to render if a group has no plans
 - Tests for OpenAPI user trainings
 - [TODO DEPLOY] `rails db:seed`
 - [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
