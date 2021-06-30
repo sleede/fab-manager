@@ -210,9 +210,14 @@ es:
         new_availability: "Open reservations"
         book: "Reservar"
         _or_the_: " o el "
-        status_enabled: "Activas"
-        status_disabled: "No activas"
-        status_all: "Todas"
+      machines_filters:
+        show_machines: "Show machines"
+        status_enabled: "Enabled"
+        status_disabled: "Disabled"
+        status_all: "All"
+      machine_card:
+        book: "Book"
+        consult: "Consult"
       #details of a machine
       machines_show:
         book_this_machine: "Alquilar máquina"
