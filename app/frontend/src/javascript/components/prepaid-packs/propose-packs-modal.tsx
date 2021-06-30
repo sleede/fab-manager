@@ -5,14 +5,15 @@ import PrepaidPackAPI from '../../api/prepaid-pack';
 import { User } from '../../models/user';
 import { PrepaidPack } from '../../models/prepaid-pack';
 import { useTranslation } from 'react-i18next';
-import { IFablab } from '../../models/fablab';
 import { FabButton } from '../base/fab-button';
 import PriceAPI from '../../api/price';
 import { Price } from '../../models/price';
 import { PaymentMethod, ShoppingCart } from '../../models/payment';
 import { PaymentModal } from '../payment/payment-modal';
+import UserLib from '../../lib/user';
+import { LocalPaymentModal } from '../payment/local-payment/local-payment-modal';
+import FormatLib from '../../lib/format';
 
-declare var Fablab: IFablab;
 
 type PackableItem = Machine;
 
@@ -38,6 +39,7 @@ export const ProposePacksModal: React.FC<ProposePacksModalProps> = ({ isOpen, to
   const [packs, setPacks] = useState<Array<PrepaidPack>>(null);
   const [cart, setCart] = useState<ShoppingCart>(null);
   const [paymentModal, setPaymentModal] = useState<boolean>(false);
+  const [localPaymentModal, setLocalPaymentModal] = useState<boolean>(false);
 
   useEffect(() => {
     PrepaidPackAPI.index({ priceable_id: item.id, priceable_type: itemType, group_id: customer.group_id, disabled: false })
@@ -57,10 +59,10 @@ export const ProposePacksModal: React.FC<ProposePacksModalProps> = ({ isOpen, to
   }
 
   /**
-   * Return the formatted localized amount for the given price (e.g. 20.5 => "20,50 €")
+   * Open/closes the local payment modal (for admins and managers)
    */
-  const formatPrice = (price: number): string => {
-    return new Intl.NumberFormat(Fablab.intl_locale, { style: 'currency', currency: Fablab.intl_currency }).format(price);
+  const toggleLocalPaymentModal = (): void => {
+    setLocalPaymentModal(!localPaymentModal);
   }
 
   /**
@@ -105,6 +107,9 @@ export const ProposePacksModal: React.FC<ProposePacksModalProps> = ({ isOpen, to
           { prepaid_pack: { id: pack.id }}
         ]
       });
+      if (new UserLib(operator).isPrivileged(customer)) {
+        return toggleLocalPaymentModal();
+      }
       togglePaymentModal();
     }
   }
@@ -126,8 +131,8 @@ export const ProposePacksModal: React.FC<ProposePacksModalProps> = ({ isOpen, to
     return (
       <div key={pack.id} className="pack">
         <span className="duration">{formatDuration(pack.minutes)}</span>
-        <span className="amount">{formatPrice(pack.amount)}</span>
-        {pack.amount < normalPrice && <span className="crossed-out-price">{formatPrice(normalPrice)}</span>}
+        <span className="amount">{FormatLib.price(pack.amount)}</span>
+        {pack.amount < normalPrice && <span className="crossed-out-price">{FormatLib.price(normalPrice)}</span>}
         <span className="validity">{formatValidity(pack)}</span>
         <FabButton className="buy-button" onClick={handleBuyPack(pack)} icon={<i className="fas fa-shopping-cart" />}>
           {t('app.logged.propose_packs_modal.buy_this_pack')}
@@ -148,13 +153,21 @@ export const ProposePacksModal: React.FC<ProposePacksModalProps> = ({ isOpen, to
       <div className="list-of-packs">
         {packs?.map(p => renderPack(p))}
       </div>
-      {cart && <PaymentModal isOpen={paymentModal}
+      {cart && <div>
+        <PaymentModal isOpen={paymentModal}
                              toggleModal={togglePaymentModal}
                              afterSuccess={handlePackBought}
                              onError={onError}
                              cart={cart}
                              currentUser={operator}
-                             customer={customer} />}
+                             customer={customer} />
+        <LocalPaymentModal isOpen={localPaymentModal}
+                           toggleModal={toggleLocalPaymentModal}
+                           afterSuccess={handlePackBought}
+                           cart={cart}
+                           currentUser={operator}
+                           customer={customer} />
+      </div>}
     </FabModal>
   );
 }

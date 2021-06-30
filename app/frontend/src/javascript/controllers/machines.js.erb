@@ -638,9 +638,10 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
     $scope.filterDisabledPlans = function (plan) { return !plan.disabled; };
 
     /**
-     * Callback triggered by react components
+     * Callback triggered after a successful prepaid-pack purchase
      */
     $scope.onSuccess = function (message) {
+
       growl.success(message);
     };
 

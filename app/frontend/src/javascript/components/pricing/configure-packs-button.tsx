@@ -4,11 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { FabPopover } from '../base/fab-popover';
 import { CreatePack } from './create-pack';
 import PrepaidPackAPI from '../../api/prepaid-pack';
-import { IFablab } from '../../models/fablab';
 import { DeletePack } from './delete-pack';
 import { EditPack } from './edit-pack';
-
-declare var Fablab: IFablab;
+import FormatLib from '../../lib/format';
 
 interface ConfigurePacksButtonProps {
   packsData: Array<PrepaidPack>,
@@ -29,13 +27,6 @@ export const ConfigurePacksButton: React.FC<ConfigurePacksButtonProps> = ({ pack
   const [packs, setPacks] = useState<Array<PrepaidPack>>(packsData);
   const [showList, setShowList] = useState<boolean>(false);
   const [editPackModal, setEditPackModal] = useState<boolean>(false);
-
-  /**
-   * Return the formatted localized amount for the given price (e.g. 20.5 => "20,50 €")
-   */
-  const formatPrice = (price: number): string => {
-    return new Intl.NumberFormat(Fablab.intl_locale, { style: 'currency', currency: Fablab.intl_currency }).format(price);
-  }
 
   /**
    * Return the number of hours, user-friendly formatted
@@ -89,7 +80,7 @@ export const ConfigurePacksButton: React.FC<ConfigurePacksButtonProps> = ({ pack
         <ul>
           {packs?.map(p =>
             <li key={p.id} className={p.disabled ? 'disabled' : ''}>
-              {formatDuration(p.minutes)} - {formatPrice(p.amount)}
+              {formatDuration(p.minutes)} - {FormatLib.price(p.amount)}
               <span className="pack-actions">
                 <EditPack onSuccess={handleSuccess} onError={onError} pack={p} />
                 <DeletePack onSuccess={handleSuccess} onError={onError} pack={p} />

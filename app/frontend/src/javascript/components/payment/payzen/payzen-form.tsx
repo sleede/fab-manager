@@ -17,14 +17,13 @@ import { Invoice } from '../../../models/invoice';
 // we use these two additional parameters to update the card, if provided
 interface PayzenFormProps extends GatewayFormProps {
   updateCard?: boolean,
-  paymentScheduleId?: number,
 }
 
 /**
  * A form component to collect the credit card details and to create the payment method on Stripe.
  * The form validation button must be created elsewhere, using the attribute form={formId}.
  */
-export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onError, children, className, paymentSchedule = false, updateCard = false, cart, customer, formId, paymentScheduleId }) => {
+export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onError, children, className, paymentSchedule, updateCard = false, cart, customer, formId }) => {
 
   const PayZenKR = useRef<KryptonClient>(null);
   const [loadingClass, setLoadingClass] = useState<'hidden' | 'loader' | 'loader-overlay'>('loader');
@@ -54,7 +53,7 @@ export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onE
    */
   const createToken = async (): Promise<CreateTokenResponse> => {
     if (updateCard) {
-      return await PayzenAPI.updateToken(paymentScheduleId);
+      return await PayzenAPI.updateToken(paymentSchedule?.id);
     } else if (paymentSchedule) {
       return await PayzenAPI.chargeCreateToken(cart, customer);
     } else {

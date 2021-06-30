@@ -6,12 +6,11 @@ import '../lib/i18n';
 import { Loader } from './base/loader';
 import { User } from '../models/user';
 import { Wallet } from '../models/wallet';
-import { IFablab } from '../models/fablab';
 import WalletLib from '../lib/wallet';
 import { ShoppingCart } from '../models/payment';
+import FormatLib from '../lib/format';
 
 declare var Application: IApplication;
-declare var Fablab: IFablab;
 
 interface WalletInfoProps {
   cart: ShoppingCart,
@@ -35,12 +34,6 @@ export const WalletInfo: React.FC<WalletInfoProps> = ({ cart, currentUser, walle
     setRemainingPrice(wLib.computeRemainingPrice(price));
   });
 
-  /**
-   * Return the formatted localized amount for the given price (e.g. 20.5 => "20,50 €")
-   */
-  const formatPrice = (price: number): string => {
-    return new Intl.NumberFormat(Fablab.intl_locale, {style: 'currency', currency: Fablab.intl_currency}).format(price);
-  }
   /**
    * Check if the currently connected used is also the person making the reservation.
    * If the currently connected user (i.e. the operator), is an admin or a manager, he may book the reservation for someone else.
@@ -87,25 +80,25 @@ export const WalletInfo: React.FC<WalletInfoProps> = ({ cart, currentUser, walle
     <div className="wallet-info">
       {shouldBeShown() && <div>
         {isOperatorAndClient() && <div>
-          <h3>{t('app.shared.wallet.wallet_info.you_have_AMOUNT_in_wallet', {AMOUNT: formatPrice(wallet.amount)})}</h3>
+          <h3>{t('app.shared.wallet.wallet_info.you_have_AMOUNT_in_wallet', {AMOUNT: FormatLib.price(wallet.amount)})}</h3>
           {!hasRemainingPrice() && <p>
             {t('app.shared.wallet.wallet_info.wallet_pay_ITEM', {ITEM: getPriceItem()})}
           </p>}
           {hasRemainingPrice() && <p>
             {t('app.shared.wallet.wallet_info.credit_AMOUNT_for_pay_ITEM', {
-              AMOUNT: formatPrice(remainingPrice),
+              AMOUNT: FormatLib.price(remainingPrice),
               ITEM: getPriceItem()
             })}
           </p>}
         </div>}
         {!isOperatorAndClient() && <div>
-          <h3>{t('app.shared.wallet.wallet_info.client_have_AMOUNT_in_wallet', {AMOUNT: formatPrice(wallet.amount)})}</h3>
+          <h3>{t('app.shared.wallet.wallet_info.client_have_AMOUNT_in_wallet', {AMOUNT: FormatLib.price(wallet.amount)})}</h3>
           {!hasRemainingPrice() && <p>
             {t('app.shared.wallet.wallet_info.client_wallet_pay_ITEM', {ITEM: getPriceItem()})}
           </p>}
           {hasRemainingPrice() && <p>
             {t('app.shared.wallet.wallet_info.client_credit_AMOUNT_for_pay_ITEM', {
-              AMOUNT: formatPrice(remainingPrice),
+              AMOUNT: FormatLib.price(remainingPrice),
               ITEM: getPriceItem()
             })}
           </p>}

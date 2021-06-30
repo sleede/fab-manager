@@ -1359,6 +1359,15 @@ en:
         delete_confirmation: "Are you sure you want to delete this category? If you do, the plans associated with this category won't be sorted anymore."
         category_deleted: "The category was successfully deleted"
         unable_to_delete: "Unable to delete the category: "
+      local_payment:
+        offline_payment: "Offline payment"
+        about_to_cash: "You're about to confirm the cashing by an external payment mean. Please do not click on the button below until you have fully cashed the requested payment."
+        payment_method: "Payment method"
+        method_card: "Online by card"
+        method_check: "By check"
+        card_collection_info: "By validating, you'll be prompted for the member's card number. This card will be automatically charged at the deadlines."
+        check_collection_info: "By validating, you confirm that you have {DEADLINES} checks, allowing you to collect all the monthly payments."
+        online_payment_disabled: "Online payment is not available. You cannot collect this payment schedule by online card."
       #feature tour
       tour:
         conclusion:

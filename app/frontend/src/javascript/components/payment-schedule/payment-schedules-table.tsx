@@ -1,7 +1,6 @@
 import React, { ReactEventHandler, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Loader } from '../base/loader';
-import moment from 'moment';
 import _ from 'lodash';
 import { FabButton } from '../base/fab-button';
 import { FabModal } from '../base/fab-modal';
@@ -9,11 +8,9 @@ import { UpdateCardModal } from '../payment/update-card-modal';
 import { StripeElements } from '../payment/stripe/stripe-elements';
 import { StripeConfirm } from '../payment/stripe/stripe-confirm';
 import { User, UserRole } from '../../models/user';
-import { IFablab } from '../../models/fablab';
 import { PaymentSchedule, PaymentScheduleItem, PaymentScheduleItemState } from '../../models/payment-schedule';
 import PaymentScheduleAPI from '../../api/payment-schedule';
-
-declare var Fablab: IFablab;
+import FormatLib from '../../lib/format';
 
 interface PaymentSchedulesTableProps {
   paymentSchedules: Array<PaymentSchedule>,
@@ -55,19 +52,6 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
    */
   const isExpanded = (paymentScheduleId: number): boolean => {
     return showExpanded.get(paymentScheduleId);
-  }
-
-  /**
-   * Return the formatted localized date for the given date
-   */
-  const formatDate = (date: Date): string => {
-    return Intl.DateTimeFormat().format(moment(date).toDate());
-  }
-  /**
-   * Return the formatted localized amount for the given price (eg. 20.5 => "20,50 €")
-   */
-  const formatPrice = (price: number): string => {
-    return new Intl.NumberFormat(Fablab.intl_locale, {style: 'currency', currency: Fablab.intl_currency}).format(price);
   }
 
   /**
@@ -369,8 +353,8 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
               <tr>
                 <td className="w-35 row-header" onClick={togglePaymentScheduleDetails(p.id)}>{expandCollapseIcon(p.id)}</td>
                 <td className="w-200">{p.reference}</td>
-                <td className="w-200">{formatDate(p.created_at)}</td>
-                <td className="w-120">{formatPrice(p.total)}</td>
+                <td className="w-200">{FormatLib.date(p.created_at)}</td>
+                <td className="w-120">{FormatLib.price(p.total)}</td>
                 {showCustomer && <td className="w-200">{p.user.name}</td>}
                 <td className="w-200">{downloadButton(TargetType.PaymentSchedule, p.id)}</td>
               </tr>
@@ -389,8 +373,8 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
                       </thead>
                       <tbody>
                       {_.orderBy(p.items, 'due_date').map(item => <tr key={item.id}>
-                        <td>{formatDate(item.due_date)}</td>
-                        <td>{formatPrice(item.amount)}</td>
+                        <td>{FormatLib.date(item.due_date)}</td>
+                        <td>{FormatLib.price(item.amount)}</td>
                         <td>{formatState(item)}</td>
                         <td>{itemButtons(item, p)}</td>
                       </tr>)}
@@ -414,8 +398,8 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
                   confirmButton={t('app.shared.schedules_table.confirm_button')}>
           {tempDeadline && <span>
             {t('app.shared.schedules_table.confirm_check_cashing_body', {
-              AMOUNT: formatPrice(tempDeadline.amount),
-              DATE: formatDate(tempDeadline.due_date)
+              AMOUNT: FormatLib.price(tempDeadline.amount),
+              DATE: FormatLib.date(tempDeadline.due_date)
             })}
           </span>}
         </FabModal>

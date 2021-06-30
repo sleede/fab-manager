@@ -3,6 +3,7 @@ import { IFablab } from '../../models/fablab';
 import { FabInput } from '../base/fab-input';
 import { FabButton } from '../base/fab-button';
 import { Price } from '../../models/price';
+import FormatLib from '../../lib/format';
 
 declare var Fablab: IFablab;
 
@@ -18,13 +19,6 @@ interface EditablePriceProps {
 export const EditablePrice: React.FC<EditablePriceProps> = ({ price, onSave }) => {
   const [edit, setEdit] = useState<boolean>(false);
   const [tempPrice, setTempPrice] = useState<string>(`${price.amount}`);
-
-  /**
-   * Return the formatted localized amount for the price (eg. 20.5 => "20,50 €")
-   */
-  const formatPrice = (): string => {
-    return new Intl.NumberFormat(Fablab.intl_locale, { style: 'currency', currency: Fablab.intl_currency }).format(price.amount);
-  }
 
   /**
    * Saves the new price
@@ -45,7 +39,7 @@ export const EditablePrice: React.FC<EditablePriceProps> = ({ price, onSave }) =
 
   return (
     <span className="editable-price">
-      {!edit && <span className="display-price" onClick={toggleEdit}>{formatPrice()}</span>}
+      {!edit && <span className="display-price" onClick={toggleEdit}>{FormatLib.price(price.amount)}</span>}
       {edit && <span>
         <FabInput id="price" type="number" step={0.01} defaultValue={price.amount} addOn={Fablab.intl_currency} onChange={setTempPrice} required/>
         <FabButton icon={<i className="fas fa-check" />} className="approve-button" onClick={handleValidateEdit} />
