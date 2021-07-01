@@ -108,7 +108,7 @@ de:
         validate_your_machine: "Bestätigen Sie Ihr Gerät"
       #button to book a machine reservation
       reserve_button:
-        book_this_machine: "Book this machine"
+        book_this_machine: "Diese Maschine buchen"
       #frame to select a plan to subscribe
       plan_subscribe:
         subscribe_online: "online abonnieren"
@@ -129,8 +129,8 @@ de:
         booking_confirmation: "Buchungsbestätigung"
         here_is_the_summary_of_the_slots_to_book_for_the_current_user: "Hier ist die Zusammenfassung der zu buchenden Slots für den aktuellen Benutzer:"
         subscription_confirmation: "Abonnementbestätigung"
-        here_is_the_subscription_summary: "Here is the subscription summary:"
-        payment_method: "Payment method"
+        here_is_the_subscription_summary: "Hier ist die Zusammenfassung des -Abonnements:"
+        payment_method: "Zahlungsmethode"
         method_card: "Online by card"
         method_check: "By check"
         card_collection_info: "By validating, you'll be prompted for the member's card number. This card will be automatically charged at the deadlines."
