@@ -370,7 +370,7 @@ zu:
         status_all: "crwdns7269:0crwdne7269:0"
       machines_pricing:
         prices_match_machine_hours_rates_html: "crwdns21942:0crwdne21942:0"
-        prices_calculated_on_hourly_rate_html: "crwdns21944:0{RATE}crwdnd21944:0{DURATION}crwdnd21944:0{PRICE}crwdne21944:0"
+        prices_calculated_on_hourly_rate_html: "crwdns22028:0{RATE}crwdnd22028:0{DURATION}crwdnd22028:0{PRICE}crwdne22028:0"
         you_can_override: "crwdns21946:0crwdne21946:0"
         machines: "crwdns21948:0crwdne21948:0"
         price_updated: "crwdns21950:0crwdne21950:0"
