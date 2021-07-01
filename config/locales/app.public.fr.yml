@@ -211,13 +211,13 @@ fr:
         book: "Réserver"
         _or_the_: " ou la "
       machines_filters:
-        show_machines: "Show machines"
-        status_enabled: "Enabled"
-        status_disabled: "Disabled"
-        status_all: "All"
+        show_machines: "Afficher les machines"
+        status_enabled: "Actives"
+        status_disabled: "Désactivées"
+        status_all: "Toutes"
       machine_card:
-        book: "Book"
-        consult: "Consult"
+        book: "Réserver"
+        consult: "Consulter"
       #details of a machine
       machines_show:
         book_this_machine: "Réserver cette machine"
