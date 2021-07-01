@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-SECONDS_PER_MINUTE = 60.0
-
 # Provides methods for PrepaidPack
 class PrepaidPackService
   class << self
