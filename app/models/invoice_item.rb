@@ -12,6 +12,7 @@ class InvoiceItem < Footprintable
   belongs_to :subscription, foreign_type: 'Subscription', foreign_key: 'object_id'
   belongs_to :wallet_transaction, foreign_type: 'WalletTransaction', foreign_key: 'object_id'
   belongs_to :offer_day, foreign_type: 'OfferDay', foreign_key: 'object_id'
+  belongs_to :statistic_profile_prepaid_pack, foreign_type: 'StatisticProfilePrepaidPack', foreign_key: 'object_id'
 
   after_create :chain_record
   after_update :log_changes

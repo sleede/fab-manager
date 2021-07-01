@@ -6,12 +6,7 @@ class API::GroupsController < API::ApiController
   before_action :authenticate_user!, except: :index
 
   def index
-    @groups = if current_user&.admin?
-                Group.all
-              else
-                Group.where.not(slug: 'admins')
-              end
-
+    @groups = GroupService.list(current_user, params)
   end
 
   def create

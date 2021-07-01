@@ -165,6 +165,37 @@ es:
         reservation_was_cancelled_successfully: "Reservation was cancelled successfully."
         cancellation_failed: "Cancellation failed."
         a_problem_occured_during_the_payment_process_please_try_again_later: "A problem occurred during the payment process. Please try again later."
+      #modal telling users that they must wait for their training validation before booking a machine
+      pending_training_modal:
+        machine_reservation: "Machine reservation"
+        wait_for_validated: "You must wait for your training is being validated by the FabLab team to book this machine."
+        training_will_occur_DATE_html: "Your training will occur at <strong>{DATE}</strong>"
+        DATE_TIME: "{DATE} {TIME}"
+      #modal telling users that they need to pass a training before booking a machine
+      required_training_modal:
+        to_book_MACHINE_requires_TRAINING_html: "To book the \"{MACHINE}\" you must have completed the training <strong>{TRAINING}</strong>."
+        training_or_training_html: "</strong> or the training <strong>"
+        enroll_now: "Enroll to the training"
+        no_enroll_for_now: "I don't want to enroll now"
+        close: "Close"
+      propose_packs_modal:
+        available_packs: "Prepaid packs available"
+        packs_proposed: "You can buy a prepaid pack of hours for this machine. These packs allows you to benefit from volume discounts."
+        no_thanks: "No, thanks"
+        pack_DURATION: "{DURATION} hours"
+        buy_this_pack: "Buy this pack"
+        pack_bought_success: "You have successfully bought this pack of prepaid-hours. Your invoice will ba available soon from your dashboard."
+        validity: "Usable for {COUNT} {PERIODS}"
+        period:
+          day: "{COUNT, plural, one{day} other{days}}"
+          week: "{COUNT, plural, one{week} other{weeks}}"
+          month: "{COUNT, plural, one{month} other{months}}"
+          year: "{COUNT, plural, one{year} other{years}}"
+      packs_summary:
+        prepaid_hours: "Prepaid hours"
+        remaining_HOURS: "You have {HOURS} prepaid hours remaining for this {ITEM, select, Machine{machine} Space{space} other{}}."
+        no_hours: "You don't have any prepaid hours for this {ITEM, select, Machine{machine} Space{space} other{}}."
+        buy_a_new_pack: "Buy a new pack"
       #book a training
       trainings_reserve:
         trainings_planning: "Plan de curso"

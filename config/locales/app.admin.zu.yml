@@ -307,8 +307,7 @@ zu:
         prominence: "crwdns7143:0crwdne7143:0"
         price: "crwdns7145:0crwdne7145:0"
         machine_hours: "crwdns7147:0crwdne7147:0"
-        these_prices_match_machine_hours_rates_html: "crwdns20474:0crwdne20474:0"
-        prices_calculated_on_hourly_rate_html: "crwdns20476:0{RATE}crwdnd20476:0{DURATION}crwdnd20476:0{PRICE}crwdne20476:0"
+        prices_calculated_on_hourly_rate_html: "crwdns22026:0{RATE}crwdnd22026:0{DURATION}crwdnd22026:0{PRICE}crwdne22026:0"
         you_can_override: "crwdns20478:0crwdne20478:0"
         machines: "crwdns7153:0crwdne7153:0"
         credits: "crwdns7155:0crwdne7155:0"
@@ -369,6 +368,42 @@ zu:
         status_enabled: "crwdns7265:0crwdne7265:0"
         status_disabled: "crwdns7267:0crwdne7267:0"
         status_all: "crwdns7269:0crwdne7269:0"
+      machines_pricing:
+        prices_match_machine_hours_rates_html: "crwdns21942:0crwdne21942:0"
+        prices_calculated_on_hourly_rate_html: "crwdns22028:0{RATE}crwdnd22028:0{DURATION}crwdnd22028:0{PRICE}crwdne22028:0"
+        you_can_override: "crwdns21946:0crwdne21946:0"
+        machines: "crwdns21948:0crwdne21948:0"
+        price_updated: "crwdns21950:0crwdne21950:0"
+      configure_packs_button:
+        packs: "crwdns21952:0crwdne21952:0"
+        no_packs: "crwdns21954:0crwdne21954:0"
+        pack_DURATION: "crwdns21956:0{DURATION}crwdne21956:0"
+      pack_form:
+        hours: "crwdns21958:0crwdne21958:0"
+        amount: "crwdns21960:0crwdne21960:0"
+        disabled: "crwdns21962:0crwdne21962:0"
+        validity_count: "crwdns21964:0crwdne21964:0"
+        select_interval: "crwdns21966:0crwdne21966:0"
+        intervals:
+          day: "crwdns21968:0COUNT={COUNT}crwdne21968:0"
+          week: "crwdns21970:0COUNT={COUNT}crwdne21970:0"
+          month: "crwdns21972:0COUNT={COUNT}crwdne21972:0"
+          year: "crwdns21974:0COUNT={COUNT}crwdne21974:0"
+      create_pack:
+        new_pack: "crwdns21976:0crwdne21976:0"
+        new_pack_info: "crwdns21978:0TYPE={TYPE}crwdne21978:0"
+        create_pack: "crwdns21980:0crwdne21980:0"
+        pack_successfully_created: "crwdns21982:0crwdne21982:0"
+      delete_pack:
+        pack_deleted: "crwdns21984:0crwdne21984:0"
+        unable_to_delete: "crwdns21986:0crwdne21986:0"
+        delete_pack: "crwdns21988:0crwdne21988:0"
+        confirm_delete: "crwdns21990:0crwdne21990:0"
+        delete_confirmation: "crwdns21992:0crwdne21992:0"
+      edit_pack:
+        edit_pack: "crwdns21994:0crwdne21994:0"
+        confirm_changes: "crwdns21996:0crwdne21996:0"
+        pack_successfully_updated: "crwdns21998:0crwdne21998:0"
       #ajouter un code promotionnel
       coupons_new:
         add_a_coupon: "crwdns7271:0crwdne7271:0"
@@ -1170,6 +1205,9 @@ zu:
         public_agenda_module: "crwdns21866:0crwdne21866:0"
         statistics_module: "crwdns20864:0crwdne20864:0"
         upcoming_events_shown: "crwdns20898:0crwdne20898:0"
+        display_invite_to_renew_pack: "crwdns22000:0crwdne22000:0"
+        packs_threshold_info_html: "crwdns22030:0crwdne22030:0"
+        renew_pack_threshold: "crwdns22004:0crwdne22004:0"
         general:
           general: "crwdns20726:0crwdne20726:0"
           title: "crwdns20728:0crwdne20728:0"
@@ -1321,6 +1359,15 @@ zu:
         delete_confirmation: "crwdns21616:0crwdne21616:0"
         category_deleted: "crwdns21618:0crwdne21618:0"
         unable_to_delete: "crwdns21620:0crwdne21620:0"
+      local_payment:
+        offline_payment: "crwdns22006:0crwdne22006:0"
+        about_to_cash: "crwdns22008:0crwdne22008:0"
+        payment_method: "crwdns22010:0crwdne22010:0"
+        method_card: "crwdns22012:0crwdne22012:0"
+        method_check: "crwdns22014:0crwdne22014:0"
+        card_collection_info: "crwdns22016:0crwdne22016:0"
+        check_collection_info: "crwdns22018:0{DEADLINES}crwdne22018:0"
+        online_payment_disabled: "crwdns22020:0crwdne22020:0"
       #feature tour
       tour:
         conclusion:

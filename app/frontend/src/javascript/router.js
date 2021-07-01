@@ -772,7 +772,6 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           plans: ['Plan', function (Plan) { return Plan.query().$promise; }],
           groups: ['Group', function (Group) { return Group.query().$promise; }],
-          machinesPricesPromise: ['Price', function (Price) { return Price.query({ priceable_type: 'Machine', plan_id: 'null' }).$promise; }],
           trainingsPricingsPromise: ['TrainingsPricing', function (TrainingsPricing) { return TrainingsPricing.query().$promise; }],
           trainingsPromise: ['Training', function (Training) { return Training.query().$promise; }],
           machineCreditsPromise: ['Credit', function (Credit) { return Credit.query({ creditable_type: 'Machine' }).$promise; }],
@@ -1080,7 +1079,8 @@ angular.module('application.router', ['ui.router'])
                      "'fablab_name', 'name_genre', 'reminder_enable', 'plans_module', 'confirmation_required', " +
                      "'reminder_delay', 'visibility_yearly', 'visibility_others', 'wallet_module', 'trainings_module', " +
                      "'display_name_enable', 'machines_sort_by', 'fab_analytics', 'statistics_module', 'address_required', " +
-                     "'link_name', 'home_content', 'home_css', 'phone_required', 'upcoming_events_shown', 'public_agenda_module']"
+                     "'link_name', 'home_content', 'home_css', 'phone_required', 'upcoming_events_shown', 'public_agenda_module'," +
+                     "'renew_pack_threshold']"
             }).$promise;
           }],
           privacyDraftsPromise: ['Setting', function (Setting) { return Setting.get({ name: 'privacy_draft', history: true }).$promise; }],

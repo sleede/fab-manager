@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
-import moment from 'moment';
 import '../../lib/i18n';
 import { Loader } from '../base/loader';
 import { FabModal } from '../base/fab-modal';
-import { IFablab } from '../../models/fablab';
 import { PaymentSchedule } from '../../models/payment-schedule';
 import { IApplication } from '../../models/application';
+import FormatLib from '../../lib/format';
 
 declare var Application: IApplication;
-declare var Fablab: IFablab;
 
 interface PaymentScheduleSummaryProps {
   schedule: PaymentSchedule
@@ -25,18 +23,6 @@ const PaymentScheduleSummary: React.FC<PaymentScheduleSummaryProps> = ({ schedul
   // is open, the modal dialog showing the full details of the payment schedule?
   const [modal, setModal] = useState(false);
 
-  /**
-   * Return the formatted localized date for the given date
-   */
-  const formatDate = (date: Date): string => {
-    return Intl.DateTimeFormat().format(moment(date).toDate());
-  }
-  /**
-   * Return the formatted localized amount for the given price (eg. 20.5 => "20,50 €")
-   */
-  const formatPrice = (price: number): string => {
-    return new Intl.NumberFormat(Fablab.intl_locale, {style: 'currency', currency: Fablab.intl_currency}).format(price);
-  }
   /**
    * Test if all payment deadlines have the same amount
    */
@@ -58,7 +44,7 @@ const PaymentScheduleSummary: React.FC<PaymentScheduleSummaryProps> = ({ schedul
         {hasEqualDeadlines() && <ul>
           <li>
             <span className="schedule-item-info">
-              {t('app.shared.cart.NUMBER_monthly_payment_of_AMOUNT', { NUMBER: schedule.items.length, AMOUNT: formatPrice(schedule.items[0].amount) })}
+              {t('app.shared.cart.NUMBER_monthly_payment_of_AMOUNT', { NUMBER: schedule.items.length, AMOUNT: FormatLib.price(schedule.items[0].amount) })}
             </span>
             <span className="schedule-item-date">{t('app.shared.cart.first_debit')}</span>
           </li>
@@ -66,12 +52,12 @@ const PaymentScheduleSummary: React.FC<PaymentScheduleSummaryProps> = ({ schedul
         {!hasEqualDeadlines() && <ul>
           <li>
             <span className="schedule-item-info">{t('app.shared.cart.monthly_payment_NUMBER', { NUMBER: 1 })}</span>
-            <span className="schedule-item-price">{formatPrice(schedule.items[0].amount)}</span>
+            <span className="schedule-item-price">{FormatLib.price(schedule.items[0].amount)}</span>
             <span className="schedule-item-date">{t('app.shared.cart.debit')}</span>
           </li>
           <li>
             <span className="schedule-item-info">
-              {t('app.shared.cart.NUMBER_monthly_payment_of_AMOUNT', { NUMBER: schedule.items.length - 1, AMOUNT: formatPrice(schedule.items[1].amount) })}
+              {t('app.shared.cart.NUMBER_monthly_payment_of_AMOUNT', { NUMBER: schedule.items.length - 1, AMOUNT: FormatLib.price(schedule.items[1].amount) })}
             </span>
           </li>
         </ul>}
@@ -80,9 +66,9 @@ const PaymentScheduleSummary: React.FC<PaymentScheduleSummaryProps> = ({ schedul
           <ul className="full-schedule">
           {schedule.items.map(item => (
             <li key={String(item.due_date)}>
-              <span className="schedule-item-date">{formatDate(item.due_date)}</span>
+              <span className="schedule-item-date">{FormatLib.date(item.due_date)}</span>
               <span> </span>
-              <span className="schedule-item-price">{formatPrice(item.amount)}</span>
+              <span className="schedule-item-price">{FormatLib.price(item.amount)}</span>
             </li>
           ))}
           </ul>

@@ -54,7 +54,7 @@ class Invoice < PaymentDocument
 
   # for debug & used by rake task "fablab:maintenance:regenerate_invoices"
   def regenerate_invoice_pdf
-    pdf = ::PDF::Invoice.new(self, invoice_items.find(&:subscription)&.expiration_date).render
+    pdf = ::PDF::Invoice.new(self, invoice_items.find_by(object_type: Subscription.name)&.expiration_date).render
     File.binwrite(file, pdf)
   end
 

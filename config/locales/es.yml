@@ -113,6 +113,8 @@ es:
     and: 'y'
     invoice_text_example: "Nuestra asociación no está sujeta al IVA"
     error_invoice: "Erroneous invoice. The items below ware not booked. Please contact the FabLab for a refund."
+    prepaid_pack: "Prepaid pack of hours"
+    pack_item: "Pack of %{COUNT} hours for the %{ITEM}"
   #PDF payment schedule generation
   payment_schedules:
     schedule_reference: "Payment schedule reference: %{REF}"
@@ -526,3 +528,4 @@ es:
     payzen_hmac: "PayZen HMAC-SHA-256 key"
     payzen_currency: "PayZen currency"
     public_agenda_module: "Public agenda module"
+    renew_pack_threshold: "Threshold for packs renewal"

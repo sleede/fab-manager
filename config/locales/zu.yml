@@ -113,6 +113,8 @@ zu:
     and: 'crwdns3375:0crwdne3375:0'
     invoice_text_example: "crwdns20848:0crwdne20848:0"
     error_invoice: "crwdns21480:0crwdne21480:0"
+    prepaid_pack: "crwdns22022:0crwdne22022:0"
+    pack_item: "crwdns22024:0%{COUNT}crwdnd22024:0%{ITEM}crwdne22024:0"
   #PDF payment schedule generation
   payment_schedules:
     schedule_reference: "crwdns21094:0%{REF}crwdne21094:0"
@@ -526,3 +528,4 @@ zu:
     payzen_hmac: "crwdns21848:0crwdne21848:0"
     payzen_currency: "crwdns21850:0crwdne21850:0"
     public_agenda_module: "crwdns21874:0crwdne21874:0"
+    renew_pack_threshold: "crwdns22032:0crwdne22032:0"

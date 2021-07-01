@@ -209,3 +209,13 @@
                  customer="user"
                  schedule="schedule.payment_schedule"/>
 </div>
+
+<div ng-if="localPayment.showModal">
+  <local-payment-modal is-open="localPayment.showModal"
+                       toggle-modal="toggleLocalPaymentModal"
+                       after-success="afterLocalPaymentSuccess"
+                       cart="localPayment.cartItems"
+                       current-user="currentUser"
+                       customer="user"
+                       schedule="schedule.payment_schedule"/>
+</div>

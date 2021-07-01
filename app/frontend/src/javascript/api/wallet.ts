@@ -1,6 +1,5 @@
 import apiClient from './clients/api-client';
 import { AxiosResponse } from 'axios';
-import wrapPromise, { IWrapPromise } from '../lib/wrap-promise';
 import { Wallet } from '../models/wallet';
 
 export default class WalletAPI {

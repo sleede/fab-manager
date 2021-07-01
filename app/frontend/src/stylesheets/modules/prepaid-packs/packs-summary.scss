@@ -1,0 +1,27 @@
+.packs-summary {
+  border: 1px solid #ddd;
+  margin: 15px;
+  padding: 0;
+  border-radius: 6px;
+
+  h3 {
+    border-bottom: 1px solid #ddd;
+    padding: 15px;
+    margin: 0;
+    line-height: 1.8rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+
+  .content {
+    padding: 15px;
+
+    .button-wrapper {
+      text-align: center;
+
+      .buy-button {
+        margin-top: 5px;
+      }
+    }
+  }
+}

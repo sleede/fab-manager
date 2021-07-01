@@ -1,3 +1,10 @@
+export interface PriceIndexFilter {
+  priceable_type?: string,
+  priceable_id?: number,
+  group_id?: number,
+  plan_id?: number|null,
+}
+
 export interface Price {
   id: number,
   group_id: number,

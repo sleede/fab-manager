@@ -307,8 +307,7 @@ fr:
         prominence: "Importance"
         price: "Prix"
         machine_hours: "Créneaux machines"
-        these_prices_match_machine_hours_rates_html: "Les tarifs ci-dessous correspondent à une heure d'utilisation machine, <strong>sans abonnement</strong>."
-        prices_calculated_on_hourly_rate_html: "Tous les prix seront automatiquement calculés par rapport au tarif horaire défini ici.<br/><em>Par exemple</em>, si vous définissez un tarif horaire à {RATE} : un créneau de {DURATION} minutes (par défaut), sera facturé <strong>{PRICE}</strong>."
+        prices_calculated_on_hourly_rate_html: "Tous les prix seront automatiquement calculés par rapport au tarif horaire défini ici.<br/><em>Par exemple</em>, si vous définissez un tarif horaire à {RATE} : un créneau de {DURATION} minutes, sera facturé <strong>{PRICE}</strong>."
         you_can_override: "Vous pouvez surcharger cette durée pour chaque disponibilité que vous créez dans l'agenda. Le prix sera alors ajusté en conséquence."
         machines: "Machines"
         credits: "Crédits"
@@ -369,6 +368,42 @@ fr:
         status_enabled: "Actifs"
         status_disabled: "Désactivés"
         status_all: "Tous"
+      machines_pricing:
+        prices_match_machine_hours_rates_html: "Les tarifs ci-dessous correspondent à une heure d'utilisation machine, <strong>sans abonnement</strong>."
+        prices_calculated_on_hourly_rate_html: "Tous les prix seront automatiquement calculés par rapport au tarif horaire défini ici.<br/><em>Par exemple</em>, si vous définissez un tarif horaire à {RATE} : un créneau de {DURATION} minutes, sera facturé <strong>{PRICE}</strong>."
+        you_can_override: "Vous pouvez surcharger cette durée pour chaque disponibilité que vous créez dans l'agenda. Le prix sera alors ajusté en conséquence."
+        machines: "Machines"
+        price_updated: "Le prix a bien été mis à jour"
+      configure_packs_button:
+        packs: "Packs prépayés"
+        no_packs: "Aucun pack pour le moment"
+        pack_DURATION: "{DURATION} heures"
+      pack_form:
+        hours: "Heures"
+        amount: "Prix"
+        disabled: "Désactivé"
+        validity_count: "Validité maximale"
+        select_interval: "Intervalle..."
+        intervals:
+          day: "{COUNT, plural, one{Jour} other{Jours}}"
+          week: "{COUNT, plural, one{Semaine} other{Semaines}}"
+          month: "{COUNT, plural, one{Mois} other{Mois}}"
+          year: "{COUNT, plural, one{Année} other{Années}}"
+      create_pack:
+        new_pack: "Nouveau pack prépayé"
+        new_pack_info: "Un pack prépayé permet aux utilisateurs d'acheter des heures {TYPE, select, Machine{machine} Space{espace} other{}} avant de réserver des créneaux. Ces packs peuvent offrir des remises sur les achats en volumes."
+        create_pack: "Créer ce pack"
+        pack_successfully_created: "Le nouveau pack prépayé a bien été créé."
+      delete_pack:
+        pack_deleted: "Le pack prépayé a été bien supprimé."
+        unable_to_delete: "Impossible de supprimer le pack prépayé : "
+        delete_pack: "Supprimer le pack prépayé"
+        confirm_delete: "Supprimer"
+        delete_confirmation: "Êtes-vous sûr de vouloir supprimer ce pack prépayé ? Cela ne sera pas possible si le pack a déjà été acheté par les utilisateurs."
+      edit_pack:
+        edit_pack: "Modifier le pack"
+        confirm_changes: "Valider les modifications"
+        pack_successfully_updated: "Le pack prépayé a bien été mis à jour."
       #ajouter un code promotionnel
       coupons_new:
         add_a_coupon: "Ajouter un code promotionnel"
@@ -1170,6 +1205,9 @@ fr:
         public_agenda_module: "module d'agenda public"
         statistics_module: "module de statistiques"
         upcoming_events_shown: "la limite d'affichage des événements à venir"
+        display_invite_to_renew_pack: "Afficher l'invitation à renouveler les packs prépayés"
+        packs_threshold_info_html: "Vous pouvez définir le nombre d'heures en dessous duquel l'utilisateur sera invité à acheter un nouveau pack prépayé, si son stock d'heures prépayées est inférieur à ce seuil.<br/>Vous pouvez définir un <strong>nombre d'heures</strong> (<em>par exemple. 5</em>) ou un <strong>pourcentage</strong> de son pack actuel (<em>par exemple 0,05 signifie 5%</em>)."
+        renew_pack_threshold: "seuil de renouvellement des packs"
         general:
           general: "Général"
           title: "Titre"
@@ -1321,6 +1359,15 @@ fr:
         delete_confirmation: "Êtes-vous sûr de vouloir supprimer cette catégorie ? Si vous le faites, les formules associés à cette catégorie ne seront plus triés."
         category_deleted: "La catégorie a bien été supprimée"
         unable_to_delete: "Impossible de supprimer la catégorie : "
+      local_payment:
+        offline_payment: "Paiement sur place"
+        about_to_cash: "Vous êtes sur le point de confirmer l'encaissement par un moyen de paiement externe. Veuillez ne pas cliquer sur le bouton ci-dessous tant que vous n'avez pas encaissé le paiement demandé."
+        payment_method: "Moyen de paiement"
+        method_card: "Carte bancaire en ligne"
+        method_check: "Par chèques"
+        card_collection_info: "En validant, vous serez invité à saisir les informations de carte bancaire du membre. Cette carte sera prélevée automatiquement aux échéances."
+        check_collection_info: "En validant, vous confirmez être en possession de {DEADLINES} chèques permettant d'encaisser l'ensemble des mensualité."
+        online_payment_disabled: "Le paiement en ligne n'est pas disponible. Vous ne pouvez pas encaisser cet échéancier de paiement en utilisant la carte bancaire en ligne."
       #feature tour
       tour:
         conclusion:

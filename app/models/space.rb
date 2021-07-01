@@ -22,6 +22,7 @@ class Space < ApplicationRecord
   has_many :reservations, as: :reservable, dependent: :destroy
 
   has_many :prices, as: :priceable, dependent: :destroy
+  has_many :prepaid_packs, as: :priceable, dependent: :destroy
   has_many :credits, as: :creditable, dependent: :destroy
 
   has_one :payment_gateway_object, as: :item

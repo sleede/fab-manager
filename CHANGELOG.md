@@ -1,5 +1,17 @@
 # Changelog Fab-manager
 
+## v5.1.0 2021 July 1st
+
+- Prepaid packs of hours for the machines
+- Tests for OpenAPI user trainings
+- Norwegian language
+- Fix a bug: unable to filter by multiple user IDs in OpenAPI
+- Fix a bug: do not display two empty categories in the plan creation form
+- Fix a bug: do not return to the home page when clicking on previous in the machine description page
+- Fix a bug: public list of plans fails to render if a group has no plans
+- [TODO DEPLOY] `rails db:seed`
+- [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
+
 ## v5.0.8 2021 June 28
 
 - Ability to run `fablab:chain:all` non interactively
@@ -265,6 +277,7 @@
 - Fix a bug: unable to create a coupon on stripe
 - Fix a bug: no notifications for refunds generated on wallet credit
 - Fix a bug: in staging environments, emails are not sent
+- Fix a bug: unable to configure the app to use a german locale
 - Fix a security issue: updated carrierwave to 2.1.1 to fix [CVE-2021-21305](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-21305)
 - [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
 - [TODO DEPLOY] `rails fablab:stripe:set_product_id`
@@ -275,8 +288,6 @@
 - [TODO DEPLOY] add the `INTL_CURRENCY` environment variable (see [doc/environment.md](doc/environment.md#INTL_CURRENCY) for configuration details)
 - [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/mount-payment-schedules.sh | bash`
 - [TODO DEPLOY] -> (only dev) `bundle install`
-
-- Fix a bug: unable to configure the app to use a german locale
 
 ## v4.6.6 2021 February 02
 - Full German translation (thanks to [@korrupt](https://crowdin.com/profile/korrupt))

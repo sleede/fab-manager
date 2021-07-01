@@ -2,8 +2,9 @@ import i18n from 'i18next';
 import ICU from 'i18next-icu';
 import HttpApi from 'i18next-http-backend';
 import { initReactI18next } from 'react-i18next';
+import { IFablab } from '../models/fablab';
 
-declare var Fablab: any;
+declare var Fablab: IFablab;
 
 i18n
   .use(ICU)

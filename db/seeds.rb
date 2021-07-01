@@ -897,6 +897,8 @@ Setting.set('trainings_module', true) unless Setting.find_by(name: 'trainings_mo
 
 Setting.set('public_agenda_module', true) unless Setting.find_by(name: 'public_agenda_module').try(:value)
 
+Setting.set('renew_pack_threshold', 0.2) unless Setting.find_by(name: 'renew_pack_threshold').try(:value)
+
 if StatisticCustomAggregation.count.zero?
   # available reservations hours for machines
   machine_hours = StatisticType.find_by(key: 'hour', statistic_index_id: 2)

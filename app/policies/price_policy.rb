@@ -1,8 +1,7 @@
-class PricePolicy < ApplicationPolicy
-  def index?
-    user.admin?
-  end
+# frozen_string_literal: true
 
+# Check the access policies for API::PricesController
+class PricePolicy < ApplicationPolicy
   def update?
     user.admin?
   end
