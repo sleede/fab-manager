@@ -108,7 +108,7 @@ pt:
         validate_your_machine: "Validar sua máquina"
       #button to book a machine reservation
       reserve_button:
-        book_this_machine: "Book this machine"
+        book_this_machine: "Reservar essa máquina"
       #frame to select a plan to subscribe
       plan_subscribe:
         subscribe_online: "Inscrição online"
@@ -477,13 +477,13 @@ pt:
       #the summary table of all payment schedules
       schedules_table:
         schedule_num: "Schedule #"
-        date: "Date"
-        price: "Price"
-        customer: "Customer"
+        date: "Data"
+        price: "Preço"
+        customer: "Cliente"
         deadline: "Deadline"
-        amount: "Amount"
+        amount: "Montante"
         state: "State"
-        download: "Download"
+        download: "Baixar"
         state_new: "Not yet due"
         state_pending: "Waiting for the cashing of the check"
         state_requires_payment_method: "The credit card must be updated"
@@ -493,8 +493,8 @@ pt:
         state_canceled: "Canceled"
         method_card: "by card"
         method_check: "by check"
-        confirm_payment: "Confirm payment"
-        solve: "Solve"
+        confirm_payment: "Confirmar pagamento"
+        solve: "Resolver"
         update_card: "Update the card"
         confirm_check_cashing: "Confirm the cashing of the check"
         confirm_check_cashing_body: "You must cash a check of {AMOUNT} for the deadline of {DATE}. By confirming the cashing of the check, an invoice will be generated for this due date."
