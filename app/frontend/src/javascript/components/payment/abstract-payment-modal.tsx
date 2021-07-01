@@ -18,7 +18,6 @@ import { ComputePriceResult } from '../../models/price';
 import { Wallet } from '../../models/wallet';
 import FormatLib from '../../lib/format';
 
-
 export interface GatewayFormProps {
   onSubmit: () => void,
   onSuccess: (result: Invoice|PaymentSchedule) => void,
@@ -78,7 +77,6 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
 
   const { t } = useTranslation('shared');
 
-
   /**
    * When the component loads first, get the name of the currently active payment modal
    */
@@ -87,7 +85,7 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
     SettingAPI.get(SettingName.PaymentGateway).then((setting) => {
       // we capitalize the first letter of the name
       setGateway(setting.value.replace(/^\w/, (c) => c.toUpperCase()));
-    })
+    });
   }, []);
 
   /**
@@ -104,8 +102,8 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
         setPrice(res);
         setRemainingPrice(new WalletLib(wallet).computeRemainingPrice(res.price));
         setReady(true);
-      })
-    })
+      });
+    });
   }, [cart]);
 
   /**
@@ -113,35 +111,35 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
    */
   const hasErrors = (): boolean => {
     return errors !== null;
-  }
+  };
 
   /**
    * Check if the user accepts the Terms of Sales document
    */
   const hasCgv = (): boolean => {
     return cgv != null && !preventCgv;
-  }
+  };
 
   /**
    * Triggered when the user accepts or declines the Terms of Sales
    */
   const toggleTos = (): void => {
     setTos(!tos);
-  }
+  };
 
   /**
    * Check if we must display the info box about the payment schedule
    */
   const hasPaymentScheduleInfo = (): boolean => {
     return schedule !== undefined && !preventScheduleInfo;
-  }
+  };
 
   /**
    * Set the component as 'currently submitting'
    */
   const handleSubmit = (): void => {
     setSubmitState(true);
-  }
+  };
 
   /**
    * After sending the form with success, process the resulting payment method
@@ -149,7 +147,7 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
   const handleFormSuccess = async (result: Invoice|PaymentSchedule): Promise<void> => {
     setSubmitState(false);
     afterSuccess(result);
-  }
+  };
 
   /**
    * When the payment form raises an error, it is handled by this callback which display it in the modal.
@@ -157,7 +155,7 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
   const handleFormError = (message: string): void => {
     setSubmitState(false);
     setErrors(message);
-  }
+  };
 
   /**
    * Check the form can be submitted.
@@ -167,7 +165,7 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
     let terms = true;
     if (hasCgv()) { terms = tos; }
     return !submitState && terms;
-  }
+  };
 
   /**
    * Build the modal title. If the provided title is a shared translation key, interpolate it through the
@@ -178,28 +176,27 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
       return t(title);
     }
     return title;
-  }
-
+  };
 
   return (
     <FabModal title={getTitle()}
-              isOpen={isOpen}
-              toggleModal={toggleModal}
-              width={modalSize}
-              closeButton={false}
-              customFooter={logoFooter}
-              className={`payment-modal ${className ? className : ''}`}>
+      isOpen={isOpen}
+      toggleModal={toggleModal}
+      width={modalSize}
+      closeButton={false}
+      customFooter={logoFooter}
+      className={`payment-modal ${className || ''}`}>
       {ready && <div>
         <WalletInfo cart={cart} currentUser={currentUser} wallet={wallet} price={price?.price} />
         <GatewayForm onSubmit={handleSubmit}
-                     onSuccess={handleFormSuccess}
-                     onError={handleFormError}
-                     operator={currentUser}
-                     className={`gateway-form ${formClassName ? formClassName : ''}`}
-                     formId={formId}
-                     cart={cart}
-                     customer={customer}
-                     paymentSchedule={schedule}>
+          onSuccess={handleFormSuccess}
+          onError={handleFormError}
+          operator={currentUser}
+          className={`gateway-form ${formClassName || ''}`}
+          formId={formId}
+          cart={cart}
+          customer={customer}
+          paymentSchedule={schedule}>
           {hasErrors() && <div className="payment-errors">
             {errors}
           </div>}
@@ -209,16 +206,16 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
           {hasCgv() && <div className="terms-of-sales">
             <input type="checkbox" id="acceptToS" name="acceptCondition" checked={tos} onChange={toggleTos} required />
             <label htmlFor="acceptToS">{ t('app.shared.payment.i_have_read_and_accept_') }
-              <a href={cgv.custom_asset_file_attributes.attachment_url} target="_blank">
+              <a href={cgv.custom_asset_file_attributes.attachment_url} target="_blank" rel="noreferrer">
                 { t('app.shared.payment._the_general_terms_and_conditions') }
               </a>
             </label>
           </div>}
         </GatewayForm>
         {!submitState && <button type="submit"
-                                 disabled={!canSubmit()}
-                                 form={formId}
-                                 className="validate-btn">
+          disabled={!canSubmit()}
+          form={formId}
+          className="validate-btn">
           {t('app.shared.payment.confirm_payment_of_', { AMOUNT: FormatLib.price(remainingPrice) })}
         </button>}
         {submitState && <div className="payment-pending">
@@ -229,7 +226,7 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
       </div>}
     </FabModal>
   );
-}
+};
 
 AbstractPaymentModal.defaultProps = {
   title: 'app.shared.payment.online_payment',

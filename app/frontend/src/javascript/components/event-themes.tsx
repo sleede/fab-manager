@@ -8,7 +8,7 @@ import { EventTheme } from '../models/event-theme';
 import { IApplication } from '../models/application';
 import EventThemeAPI from '../api/event-theme';
 
-declare var Application: IApplication;
+declare const Application: IApplication;
 
 interface EventThemesProps {
   event: Event,
@@ -51,7 +51,7 @@ const EventThemes: React.FC<EventThemesProps> = ({ event, onChange }) => {
       }
     });
     return res;
-  }
+  };
 
   /**
    * Callback triggered when the selection has changed.
@@ -61,18 +61,18 @@ const EventThemes: React.FC<EventThemesProps> = ({ event, onChange }) => {
     const res = [];
     selectedOptions.forEach(opt => {
       res.push(themes.find(t => t.id === opt.value));
-    })
+    });
     onChange(res);
-  }
+  };
 
   /**
    * Convert all themes to the react-select format
    */
   const buildOptions = (): Array<selectOption> => {
     return themes.map(t => {
-      return { value: t.id, label: t.name }
+      return { value: t.id, label: t.name };
     });
-  }
+  };
 
   return (
     <div className="event-themes">
@@ -80,15 +80,15 @@ const EventThemes: React.FC<EventThemesProps> = ({ event, onChange }) => {
         <h3>{ t('app.shared.event.event_themes') }</h3>
         <div className="content">
           <Select defaultValue={defaultValues()}
-                  placeholder={t('app.shared.event.select_theme')}
-                  onChange={handleChange}
-                  options={buildOptions()}
-                  isMulti />
+            placeholder={t('app.shared.event.select_theme')}
+            onChange={handleChange}
+            options={buildOptions()}
+            isMulti />
         </div>
       </div>}
     </div>
   );
-}
+};
 
 const EventThemesWrapper: React.FC<EventThemesProps> = ({ event, onChange }) => {
   return (
@@ -96,7 +96,6 @@ const EventThemesWrapper: React.FC<EventThemesProps> = ({ event, onChange }) => 
       <EventThemes event={event} onChange={onChange}/>
     </Loader>
   );
-}
-
+};
 
 Application.Components.component('eventThemes', react2angular(EventThemesWrapper, ['event', 'onChange']));

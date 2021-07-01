@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
 import Switch from 'react-switch';
@@ -6,7 +6,7 @@ import '../../lib/i18n';
 import { Loader } from '../base/loader';
 import { IApplication } from '../../models/application';
 
-declare var Application: IApplication;
+declare const Application: IApplication;
 
 interface SelectScheduleProps {
   show: boolean,
@@ -30,7 +30,7 @@ const SelectSchedule: React.FC<SelectScheduleProps> = ({ show, selected, onChang
       </div>}
     </div>
   );
-}
+};
 
 const SelectScheduleWrapper: React.FC<SelectScheduleProps> = ({ show, selected, onChange, className }) => {
   return (
@@ -38,6 +38,6 @@ const SelectScheduleWrapper: React.FC<SelectScheduleProps> = ({ show, selected, 
       <SelectSchedule show={show} selected={selected} onChange={onChange} className={className} />
     </Loader>
   );
-}
+};
 
 Application.Components.component('selectSchedule', react2angular(SelectScheduleWrapper, ['show', 'selected', 'onChange', 'className']));

@@ -7,7 +7,6 @@ import { SettingName } from '../../../models/setting';
 import StripeAPI from '../../../api/external/stripe';
 import SettingAPI from '../../../api/setting';
 
-
 interface StripeKeysFormProps {
   onValidKeys: (stripePublic: string, stripeSecret:string) => void,
   onInvalidKeys: () => void,
@@ -67,7 +66,6 @@ const StripeKeysFormComponent: React.FC<StripeKeysFormProps> = ({ onValidKeys, o
     }
   }, [publicKeyAddOnClassName, secretKeyAddOnClassName]);
 
-
   /**
    * Send a test call to the Stripe API to check if the inputted public key is valid
    */
@@ -93,7 +91,7 @@ const StripeKeysFormComponent: React.FC<StripeKeysFormProps> = ({ onValidKeys, o
         setPublicKeyAddOnClassName('key-invalid');
       }
     });
-  }
+  };
 
   /**
    * Send a test call to the Stripe API to check if the inputted secret key is valid
@@ -120,7 +118,7 @@ const StripeKeysFormComponent: React.FC<StripeKeysFormProps> = ({ onValidKeys, o
         setSecretKeyAddOnClassName('key-invalid');
       }
     });
-  }
+  };
 
   return (
     <div className="stripe-keys-form">
@@ -131,29 +129,29 @@ const StripeKeysFormComponent: React.FC<StripeKeysFormProps> = ({ onValidKeys, o
         <div className="stripe-public-input">
           <label htmlFor="stripe_public_key">{ t('app.admin.invoices.payment.public_key') } *</label>
           <FabInput id="stripe_public_key"
-                    icon={<i className="fa fa-info" />}
-                    defaultValue={publicKey}
-                    onChange={testPublicKey}
-                    addOn={publicKeyAddOn}
-                    addOnClassName={publicKeyAddOnClassName}
-                    debounce={200}
-                    required />
+            icon={<i className="fa fa-info" />}
+            defaultValue={publicKey}
+            onChange={testPublicKey}
+            addOn={publicKeyAddOn}
+            addOnClassName={publicKeyAddOnClassName}
+            debounce={200}
+            required />
         </div>
         <div className="stripe-secret-input">
           <label htmlFor="stripe_secret_key">{ t('app.admin.invoices.payment.secret_key') } *</label>
           <FabInput id="stripe_secret_key"
-                    icon={<i className="fa fa-key" />}
-                    defaultValue={secretKey}
-                    onChange={testSecretKey}
-                    addOn={secretKeyAddOn}
-                    addOnClassName={secretKeyAddOnClassName}
-                    debounce={200}
-                    required/>
+            icon={<i className="fa fa-key" />}
+            defaultValue={secretKey}
+            onChange={testSecretKey}
+            addOn={secretKeyAddOn}
+            addOnClassName={secretKeyAddOnClassName}
+            debounce={200}
+            required/>
         </div>
       </form>
     </div>
   );
-}
+};
 
 export const StripeKeysForm: React.FC<StripeKeysFormProps> = ({ onValidKeys, onInvalidKeys }) => {
   return (
@@ -161,4 +159,4 @@ export const StripeKeysForm: React.FC<StripeKeysFormProps> = ({ onValidKeys, onI
       <StripeKeysFormComponent onValidKeys={onValidKeys} onInvalidKeys={onInvalidKeys} />
     </Loader>
   );
-}
+};

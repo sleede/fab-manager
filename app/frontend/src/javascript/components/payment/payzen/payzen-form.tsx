@@ -1,10 +1,9 @@
 import React, { FormEvent, FunctionComponent, useEffect, useRef, useState } from 'react';
-import KRGlue from "@lyracom/embedded-form-glue";
+import KRGlue from '@lyracom/embedded-form-glue';
 import { GatewayFormProps } from '../abstract-payment-modal';
 import SettingAPI from '../../../api/setting';
 import { SettingName } from '../../../models/setting';
 import PayzenAPI from '../../../api/payzen';
-import { Loader } from '../../base/loader';
 import {
   CreateTokenResponse,
   KryptonClient,
@@ -24,7 +23,6 @@ interface PayzenFormProps extends GatewayFormProps {
  * The form validation button must be created elsewhere, using the attribute form={formId}.
  */
 export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onError, children, className, paymentSchedule, updateCard = false, cart, customer, formId }) => {
-
   const PayZenKR = useRef<KryptonClient>(null);
   const [loadingClass, setLoadingClass] = useState<'hidden' | 'loader' | 'loader-overlay'>('loader');
 
@@ -35,14 +33,14 @@ export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onE
         KRGlue.loadLibrary(settings.get(SettingName.PayZenEndpoint), settings.get(SettingName.PayZenPublicKey))
           .then(({ KR }) =>
             KR.setFormConfig({
-              formToken: formToken.formToken,
+              formToken: formToken.formToken
             })
           )
-          .then(({ KR }) => KR.addForm("#payzenPaymentForm"))
+          .then(({ KR }) => KR.addForm('#payzenPaymentForm'))
           .then(({ KR, result }) => KR.showForm(result.formId))
           .then(({ KR }) => KR.onFormReady(handleFormReady))
           .then(({ KR }) => KR.onFormCreated(handleFormCreated))
-          .then(({ KR }) => PayZenKR.current = KR);
+          .then(({ KR }) => { PayZenKR.current = KR; });
       }).catch(error => onError(error));
     });
   }, [cart, paymentSchedule, customer]);
@@ -59,7 +57,7 @@ export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onE
     } else {
       return await PayzenAPI.chargeCreatePayment(cart, customer);
     }
-  }
+  };
 
   /**
    * Callback triggered on PayZen successful payments
@@ -72,11 +70,11 @@ export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onE
 
         const transaction = event.clientAnswer.transactions[0];
         if (event.clientAnswer.orderStatus === 'PAID') {
-          confirmPayment(event, transaction).then((confirmation) =>  {
+          confirmPayment(event, transaction).then((confirmation) => {
             PayZenKR.current.removeForms().then(() => {
               onSuccess(confirmation);
             });
-          }).catch(e => onError(e))
+          }).catch(e => onError(e));
         } else {
           const error = `${transaction?.errorMessage}. ${transaction?.detailedErrorMessage || ''}`;
           onError(error || event.clientAnswer.orderStatus);
@@ -95,7 +93,7 @@ export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onE
     } else {
       return await PayzenAPI.confirm(event.clientAnswer.orderDetails.orderId, cart);
     }
-  }
+  };
 
   /**
    * Callback triggered when the PayZen form was entirely loaded and displayed
@@ -111,7 +109,7 @@ export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onE
    */
   const handleFormCreated = () => {
     setLoadingClass('loader-overlay');
-  }
+  };
 
   /**
    * Callback triggered when the PayZen payment was refused
@@ -120,7 +118,7 @@ export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onE
   const handleError = (answer: KryptonError) => {
     const message = `${answer.errorMessage}. ${answer.detailedErrorMessage ? answer.detailedErrorMessage : ''}`;
     onError(message);
-  }
+  };
 
   /**
    * Handle the submission of the form.
@@ -140,7 +138,7 @@ export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onE
       // catch api errors
       onError(err);
     }
-  }
+  };
 
   const Loader: FunctionComponent = () => {
     return (
@@ -151,7 +149,7 @@ export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onE
   };
 
   return (
-    <form onSubmit={handleSubmit} id={formId} className={className ? className : ''}>
+    <form onSubmit={handleSubmit} id={formId} className={className || ''}>
       <Loader />
       <div className="container">
         <div id="payzenPaymentForm" />
@@ -159,4 +157,4 @@ export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onE
       {children}
     </form>
   );
-}
+};

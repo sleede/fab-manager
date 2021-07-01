@@ -10,16 +10,15 @@ interface FabPopoverProps {
  * This component is a template for a popovers (bottom) that wraps the application style
  */
 export const FabPopover: React.FC<FabPopoverProps> = ({ title, className, headerButton, children }) => {
-
   /**
    * Check if the header button should be present
    */
   const hasHeaderButton = (): boolean => {
     return !!headerButton;
-  }
+  };
 
   return (
-    <div className={`fab-popover ${className ? className : ''}`}>
+    <div className={`fab-popover ${className || ''}`}>
       <div className="popover-title">
         <h3>{title}</h3>
         {hasHeaderButton() && headerButton}
@@ -29,4 +28,4 @@ export const FabPopover: React.FC<FabPopoverProps> = ({ title, className, header
       </div>
     </div>
   );
-}
+};

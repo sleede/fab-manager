@@ -26,28 +26,20 @@ export const ConfigurePacksButton: React.FC<ConfigurePacksButtonProps> = ({ pack
 
   const [packs, setPacks] = useState<Array<PrepaidPack>>(packsData);
   const [showList, setShowList] = useState<boolean>(false);
-  const [editPackModal, setEditPackModal] = useState<boolean>(false);
 
   /**
    * Return the number of hours, user-friendly formatted
    */
   const formatDuration = (minutes: number): string => {
     return t('app.admin.configure_packs_button.pack_DURATION', { DURATION: minutes / 60 });
-  }
+  };
 
   /**
    * Open/closes the popover listing the existing packs
    */
   const toggleShowList = (): void => {
     setShowList(!showList);
-  }
-
-  /**
-   * Open/closes the "edit pack" modal
-   */
-  const toggleEditPackModal = (): void => {
-    setEditPackModal(!editPackModal);
-  }
+  };
 
   /**
    * Callback triggered when the PrepaidPack was successfully created/deleted/updated.
@@ -58,18 +50,18 @@ export const ConfigurePacksButton: React.FC<ConfigurePacksButtonProps> = ({ pack
     PrepaidPackAPI.index({ group_id: groupId, priceable_id: priceableId, priceable_type: priceableType })
       .then(data => setPacks(data))
       .catch(error => onError(error));
-  }
+  };
 
   /**
    * Render the button used to trigger the "new pack" modal
    */
   const renderAddButton = (): ReactNode => {
     return <CreatePack onSuccess={handleSuccess}
-                       onError={onError}
-                       groupId={groupId}
-                       priceableId={priceableId}
-                       priceableType={priceableType} />;
-  }
+      onError={onError}
+      groupId={groupId}
+      priceableId={priceableId}
+      priceableType={priceableType} />;
+  };
 
   return (
     <div className="configure-packs-button">
@@ -91,4 +83,4 @@ export const ConfigurePacksButton: React.FC<ConfigurePacksButtonProps> = ({ pack
       </FabPopover>}
     </div>
   );
-}
+};

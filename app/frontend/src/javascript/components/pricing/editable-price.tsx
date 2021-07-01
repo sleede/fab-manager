@@ -5,7 +5,7 @@ import { FabButton } from '../base/fab-button';
 import { Price } from '../../models/price';
 import FormatLib from '../../lib/format';
 
-declare var Fablab: IFablab;
+declare let Fablab: IFablab;
 
 interface EditablePriceProps {
   price: Price,
@@ -28,14 +28,14 @@ export const EditablePrice: React.FC<EditablePriceProps> = ({ price, onSave }) =
     newPrice.amount = parseFloat(tempPrice);
     onSave(newPrice);
     toggleEdit();
-  }
+  };
 
   /**
    * Enable or disable the edit mode
    */
   const toggleEdit = (): void => {
     setEdit(!edit);
-  }
+  };
 
   return (
     <span className="editable-price">
@@ -47,4 +47,4 @@ export const EditablePrice: React.FC<EditablePriceProps> = ({ price, onSave }) =
       </span>}
     </span>
   );
-}
+};

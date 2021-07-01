@@ -24,21 +24,21 @@ export const DocumentFilters: React.FC<DocumentFiltersProps> = ({ onFilterChange
    */
   useEffect(() => {
     onFilterChange({ reference: referenceFilter, customer: customerFilter, date: dateFilter });
-  }, [referenceFilter, customerFilter, dateFilter])
+  }, [referenceFilter, customerFilter, dateFilter]);
 
   /**
    * Callback triggered when the input 'reference' is updated.
    */
   const handleReferenceUpdate = (e) => {
     setReferenceFilter(e.target.value);
-  }
+  };
 
   /**
    * Callback triggered when the input 'customer' is updated.
    */
   const handleCustomerUpdate = (e) => {
     setCustomerFilter(e.target.value);
-  }
+  };
 
   /**
    * Callback triggered when the input 'date' is updated.
@@ -47,25 +47,25 @@ export const DocumentFilters: React.FC<DocumentFiltersProps> = ({ onFilterChange
     let date = e.target.value;
     if (e.target.value === '') date = null;
     setDateFilter(date);
-  }
+  };
 
   return (
     <div className="document-filters">
       <LabelledInput id="reference"
-                     label={t('app.admin.invoices.document_filters.reference')}
-                     type="text"
-                     onChange={handleReferenceUpdate}
-                     value={referenceFilter} />
+        label={t('app.admin.invoices.document_filters.reference')}
+        type="text"
+        onChange={handleReferenceUpdate}
+        value={referenceFilter} />
       <LabelledInput id="customer"
-                     label={t('app.admin.invoices.document_filters.customer')}
-                     type="text"
-                     onChange={handleCustomerUpdate}
-                     value={customerFilter} />
+        label={t('app.admin.invoices.document_filters.customer')}
+        type="text"
+        onChange={handleCustomerUpdate}
+        value={customerFilter} />
       <LabelledInput id="reference"
-                     label={t('app.admin.invoices.document_filters.date')}
-                     type="date"
-                     onChange={handleDateUpdate}
-                     value={dateFilter ? dateFilter : ''} />
+        label={t('app.admin.invoices.document_filters.date')}
+        type="date"
+        onChange={handleDateUpdate}
+        value={dateFilter || ''} />
     </div>
   );
-}
+};

@@ -19,7 +19,6 @@ interface StripeCardUpdateProps {
  * The form validation button must be created elsewhere, using the attribute form="stripe-card".
  */
 export const StripeCardUpdate: React.FC<StripeCardUpdateProps> = ({ onSubmit, onSuccess, onError, className, schedule, operator, children }) => {
-
   const stripe = useStripe();
   const elements = useElements();
 
@@ -37,7 +36,7 @@ export const StripeCardUpdate: React.FC<StripeCardUpdateProps> = ({ onSubmit, on
     const cardElement = elements.getElement(CardElement);
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: 'card',
-      card: cardElement,
+      card: cardElement
     });
 
     if (error) {
@@ -46,8 +45,8 @@ export const StripeCardUpdate: React.FC<StripeCardUpdateProps> = ({ onSubmit, on
     } else {
       try {
         // we start by associating the payment method with the user
-        const { client_secret } = await StripeAPI.setupIntent(schedule.user.id);
-        const { error } = await stripe.confirmCardSetup(client_secret, {
+        const intent = await StripeAPI.setupIntent(schedule.user.id);
+        const { error } = await stripe.confirmCardSetup(intent.client_secret, {
           payment_method: paymentMethod.id,
           mandate_data: {
             customer_acceptance: {
@@ -58,7 +57,7 @@ export const StripeCardUpdate: React.FC<StripeCardUpdateProps> = ({ onSubmit, on
               }
             }
           }
-        })
+        });
         if (error) {
           onError(error.message);
         } else {
@@ -75,7 +74,7 @@ export const StripeCardUpdate: React.FC<StripeCardUpdateProps> = ({ onSubmit, on
         onError(err);
       }
     }
-  }
+  };
 
   /**
    * Options for the Stripe's card input
@@ -90,7 +89,7 @@ export const StripeCardUpdate: React.FC<StripeCardUpdateProps> = ({ onSubmit, on
       invalid: {
         color: '#9e2146',
         iconColor: '#9e2146'
-      },
+      }
     },
     hidePostalCode: true
   };
@@ -101,4 +100,4 @@ export const StripeCardUpdate: React.FC<StripeCardUpdateProps> = ({ onSubmit, on
       {children}
     </form>
   );
-}
+};

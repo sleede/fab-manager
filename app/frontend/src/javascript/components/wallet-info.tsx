@@ -10,7 +10,7 @@ import WalletLib from '../lib/wallet';
 import { ShoppingCart } from '../models/payment';
 import FormatLib from '../lib/format';
 
-declare var Application: IApplication;
+declare const Application: IApplication;
 
 interface WalletInfoProps {
   cart: ShoppingCart,
@@ -39,27 +39,27 @@ export const WalletInfo: React.FC<WalletInfoProps> = ({ cart, currentUser, walle
    * If the currently connected user (i.e. the operator), is an admin or a manager, he may book the reservation for someone else.
    */
   const isOperatorAndClient = (): boolean => {
-    return currentUser.id == cart.customer_id;
-  }
+    return currentUser.id === cart.customer_id;
+  };
   /**
    * If the client has some money in his wallet & the price is not zero, then we should display this component.
    */
   const shouldBeShown = (): boolean => {
     return wallet.amount > 0 && price > 0;
-  }
+  };
   /**
    * If the amount in the wallet is not enough to cover the whole price, then the user must pay the remaining price
    * using another payment mean.
    */
   const hasRemainingPrice = (): boolean => {
     return remainingPrice > 0;
-  }
+  };
   /**
    * Does the current cart contains a payment schedule?
    */
   const isPaymentSchedule = (): boolean => {
     return cart.items.find(i => 'subscription' in i) && cart.payment_schedule;
-  }
+  };
   /**
    * Return the human-readable name of the item currently bought with the wallet
    */
@@ -74,15 +74,15 @@ export const WalletInfo: React.FC<WalletInfoProps> = ({ cart, currentUser, walle
     }
 
     return t(`app.shared.wallet.wallet_info.item_${item}`);
-  }
+  };
 
   return (
     <div className="wallet-info">
       {shouldBeShown() && <div>
         {isOperatorAndClient() && <div>
-          <h3>{t('app.shared.wallet.wallet_info.you_have_AMOUNT_in_wallet', {AMOUNT: FormatLib.price(wallet.amount)})}</h3>
+          <h3>{t('app.shared.wallet.wallet_info.you_have_AMOUNT_in_wallet', { AMOUNT: FormatLib.price(wallet.amount) })}</h3>
           {!hasRemainingPrice() && <p>
-            {t('app.shared.wallet.wallet_info.wallet_pay_ITEM', {ITEM: getPriceItem()})}
+            {t('app.shared.wallet.wallet_info.wallet_pay_ITEM', { ITEM: getPriceItem() })}
           </p>}
           {hasRemainingPrice() && <p>
             {t('app.shared.wallet.wallet_info.credit_AMOUNT_for_pay_ITEM', {
@@ -92,9 +92,9 @@ export const WalletInfo: React.FC<WalletInfoProps> = ({ cart, currentUser, walle
           </p>}
         </div>}
         {!isOperatorAndClient() && <div>
-          <h3>{t('app.shared.wallet.wallet_info.client_have_AMOUNT_in_wallet', {AMOUNT: FormatLib.price(wallet.amount)})}</h3>
+          <h3>{t('app.shared.wallet.wallet_info.client_have_AMOUNT_in_wallet', { AMOUNT: FormatLib.price(wallet.amount) })}</h3>
           {!hasRemainingPrice() && <p>
-            {t('app.shared.wallet.wallet_info.client_wallet_pay_ITEM', {ITEM: getPriceItem()})}
+            {t('app.shared.wallet.wallet_info.client_wallet_pay_ITEM', { ITEM: getPriceItem() })}
           </p>}
           {hasRemainingPrice() && <p>
             {t('app.shared.wallet.wallet_info.client_credit_AMOUNT_for_pay_ITEM', {
@@ -110,7 +110,7 @@ export const WalletInfo: React.FC<WalletInfoProps> = ({ cart, currentUser, walle
       </div>}
     </div>
   );
-}
+};
 
 const WalletInfoWrapper: React.FC<WalletInfoProps> = ({ currentUser, cart, price, wallet }) => {
   return (
@@ -118,6 +118,6 @@ const WalletInfoWrapper: React.FC<WalletInfoProps> = ({ currentUser, cart, price
       <WalletInfo currentUser={currentUser} cart={cart} price={price} wallet={wallet}/>
     </Loader>
   );
-}
+};
 
 Application.Components.component('walletInfo', react2angular(WalletInfoWrapper, ['currentUser', 'price', 'cart', 'wallet']));

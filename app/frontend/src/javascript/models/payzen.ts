@@ -179,11 +179,9 @@ export interface KryptonConfig {
 }
 
 type DefaultCallback = () => void
-// eslint-disable-next-line no-use-before-define
 type BrandChangedCallback = (event: { KR: KryptonClient, cardInfo: { brand: string } }) => void
 type ErrorCallback = (event: KryptonError) => void
 type FocusCallback = (event: KryptonFocus) => void
-// eslint-disable-next-line no-use-before-define
 type InstallmentChangedCallback = (event: { KR: KryptonClient, installmentInfo: { brand: string, hasInterests: boolean, installmentCount: number, totalAmount: number } }) => void
 type SubmitCallback = (event: ProcessPaymentAnswer) => boolean
 type ClickCallback = (event: unknown) => boolean

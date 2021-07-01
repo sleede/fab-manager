@@ -1,10 +1,12 @@
 import React, { BaseSyntheticEvent, ReactNode } from 'react';
 
+type inputType = string|number|readonly string [];
+
 interface LabelledInputProps {
   id: string,
   type?: 'text' | 'date' | 'password' | 'url' | 'time' | 'tel' | 'search' | 'number' | 'month' | 'email' | 'datetime-local' | 'week',
   label: string | ReactNode,
-  value: any,
+  value: inputType,
   onChange: (event: BaseSyntheticEvent) => void
 }
 
@@ -18,4 +20,4 @@ export const LabelledInput: React.FC<LabelledInputProps> = ({ id, type, label, v
       <input className="input" id={id} type={type} value={value} onChange={onChange} />
     </div>
   );
-}
+};

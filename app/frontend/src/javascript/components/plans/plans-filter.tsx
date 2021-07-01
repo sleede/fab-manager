@@ -37,9 +37,9 @@ export const PlansFilter: React.FC<PlansFilterProps> = ({ user, groups, onGroupS
    */
   const buildGroupOptions = (): Array<selectOption> => {
     return groups.filter(g => !g.disabled && g.slug !== 'admins').map(g => {
-      return { value: g.id, label: g.name }
+      return { value: g.id, label: g.name };
     });
-  }
+  };
 
   /**
    * Convert all durations to the react-select format
@@ -50,40 +50,40 @@ export const PlansFilter: React.FC<PlansFilterProps> = ({ user, groups, onGroupS
     });
     options.unshift({ value: null, label: t('app.public.plans_filter.all_durations') });
     return options;
-  }
+  };
 
   /**
    * Callback triggered when the user selects a group in the dropdown list
    */
   const handleGroupSelected = (option: selectOption): void => {
     onGroupSelected(option.value);
-  }
+  };
 
   /**
    * Callback triggered when the user selects a duration in the dropdown list
    */
   const handleDurationSelected = (option: selectOption): void => {
     onDurationSelected(durations[option.value]?.plans_ids);
-  }
+  };
 
   return (
     <div className="plans-filter">
       {!user && <div className="group-filter">
         <label htmlFor="group">{t('app.public.plans_filter.i_am')}</label>
         <Select placeholder={t('app.public.plans_filter.select_group')}
-                id="group"
-                className="group-select"
-                onChange={handleGroupSelected}
-                options={buildGroupOptions()}/>
+          id="group"
+          className="group-select"
+          onChange={handleGroupSelected}
+          options={buildGroupOptions()}/>
       </div>}
       {durations && <div className="duration-filter">
         <label htmlFor="duration">{t('app.public.plans_filter.i_want_duration')}</label>
         <Select placeholder={t('app.public.plans_filter.select_duration')}
-                id="duration"
-                className="duration-select"
-                onChange={handleDurationSelected}
-                options={buildDurationOptions()}/>
+          id="duration"
+          className="duration-select"
+          onChange={handleDurationSelected}
+          options={buildDurationOptions()}/>
       </div>}
     </div>
-  )
-}
+  );
+};

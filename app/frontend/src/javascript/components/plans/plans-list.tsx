@@ -11,10 +11,9 @@ import { PlanCard } from './plan-card';
 import { Loader } from '../base/loader';
 import { react2angular } from 'react2angular';
 import { IApplication } from '../../models/application';
-import { useTranslation } from 'react-i18next';
 import { PlansFilter } from './plans-filter';
 
-declare var Application: IApplication;
+declare const Application: IApplication;
 
 interface PlansListProps {
   onError: (message: string) => void,
@@ -32,8 +31,6 @@ type PlansTree = Map<number, Map<number, Array<Plan>>>;
  * This component display an organized list of plans to allow the end-user to select one and subscribe online
  */
 const PlansList: React.FC<PlansListProps> = ({ onError, onPlanSelection, onLoginRequest, operator, customer, subscribedPlanId }) => {
-  const { t } = useTranslation('public');
-
   // all plans
   const [plans, setPlans] = useState<PlansTree>(null);
   // all plan-categories, ordered by weight
@@ -59,7 +56,7 @@ const PlansList: React.FC<PlansListProps> = ({ onError, onPlanSelection, onLogin
           .then(data => setPlans(sortPlans(data, groupsData)))
           .catch(error => onError(error));
       })
-      .catch(error => onError(error))
+      .catch(error => onError(error));
   }, []);
 
   // reset the selected plan when the user changes
@@ -99,7 +96,7 @@ const PlansList: React.FC<PlansListProps> = ({ onError, onPlanSelection, onLogin
       }
     }
     return res;
-  }
+  };
 
   /**
    * Filter the plans to display, depending on the connected/selected user and on the selected group filter (if any)
@@ -109,28 +106,28 @@ const PlansList: React.FC<PlansListProps> = ({ onError, onPlanSelection, onLogin
     if (groupFilter) return new Map([[groupFilter, plans.get(groupFilter)]]);
 
     return new Map([[customer.group_id, plans.get(customer.group_id)]]);
-  }
+  };
 
   /**
    * When called with a group ID, returns the name of the requested group
    */
   const groupName = (groupId: number): string => {
     return groups.find(g => g.id === groupId)?.name;
-  }
+  };
 
   /**
    * When called with a category ID, returns the name of the requested plan-category
    */
   const categoryName = (categoryId: number): string => {
     return planCategories.find(c => c.id === categoryId)?.name;
-  }
+  };
 
   /**
    * Check if the currently selected plan matched the provided one
    */
   const isSelectedPlan = (plan: Plan): boolean => {
     return (plan === selectedPlan);
-  }
+  };
 
   /**
    * Callback for sorting plans by weight
@@ -138,7 +135,7 @@ const PlansList: React.FC<PlansListProps> = ({ onError, onPlanSelection, onLogin
    */
   const comparePlans = (plan1: Plan, plan2: Plan): number => {
     return (plan2.ui_weight - plan1.ui_weight);
-  }
+  };
 
   /**
    * Callback for sorting categories by weight
@@ -151,7 +148,7 @@ const PlansList: React.FC<PlansListProps> = ({ onError, onPlanSelection, onLogin
     const categoryObject1 = planCategories.find(c => c.id === category1[0]);
     const categoryObject2 = planCategories.find(c => c.id === category2[0]);
     return (categoryObject2.weight - categoryObject1.weight);
-  }
+  };
 
   /**
    * Callback triggered when the user chooses a plan to subscribe
@@ -159,21 +156,21 @@ const PlansList: React.FC<PlansListProps> = ({ onError, onPlanSelection, onLogin
   const handlePlanSelection = (plan: Plan): void => {
     setSelectedPlan(plan);
     onPlanSelection(plan);
-  }
+  };
 
   /**
    * Callback triggered when the user selects a group to filter the current list
    */
   const handleFilterByGroup = (groupId: number): void => {
     setGroupFilter(groupId);
-  }
+  };
 
   /**
    * Callback triggered when the user selects a duration to filter the current list
    */
   const handleFilterByDuration = (plansIds: Array<number>): void => {
     setPlansFilter(plansIds);
-  }
+  };
 
   /**
    * Callback for filtering plans to display, depending on the filter-by-plans-ids selection
@@ -183,7 +180,7 @@ const PlansList: React.FC<PlansListProps> = ({ onError, onPlanSelection, onLogin
     if (!plansFilter) return true;
 
     return plansFilter.includes(plan.id);
-  }
+  };
 
   /**
    * Render the provided list of categories, with each associated plans
@@ -194,15 +191,15 @@ const PlansList: React.FC<PlansListProps> = ({ onError, onPlanSelection, onLogin
         {Array.from(plans).sort(compareCategories).map(([categoryId, plansByCategory]) => {
           const categoryPlans = plansByCategory.filter(filterPlan);
           return (
-            <div key={categoryId} className={`plans-per-category ${categoryId ? 'with-category' : 'no-category' }`}>
+            <div key={categoryId} className={`plans-per-category ${categoryId ? 'with-category' : 'no-category'}`}>
               {!!categoryId && categoryPlans.length > 0 && <h3 className="category-title">{ categoryName(categoryId) }</h3>}
               {renderPlans(categoryPlans)}
             </div>
-          )
+          );
         })}
       </div>
     );
-  }
+  };
 
   /**
    * Render the provided list of plans, ordered by ui_weight.
@@ -212,17 +209,17 @@ const PlansList: React.FC<PlansListProps> = ({ onError, onPlanSelection, onLogin
       <div className="list-of-plans">
         {categoryPlans.length > 0 && categoryPlans.sort(comparePlans).map(plan => (
           <PlanCard key={plan.id}
-                    userId={customer?.id}
-                    subscribedPlanId={subscribedPlanId}
-                    plan={plan}
-                    operator={operator}
-                    isSelected={isSelectedPlan(plan)}
-                    onSelectPlan={handlePlanSelection}
-                    onLoginRequested={onLoginRequest} />
+            userId={customer?.id}
+            subscribedPlanId={subscribedPlanId}
+            plan={plan}
+            operator={operator}
+            isSelected={isSelectedPlan(plan)}
+            onSelectPlan={handlePlanSelection}
+            onLoginRequested={onLoginRequest} />
         ))}
       </div>
     );
-  }
+  };
 
   return (
     <div className="plans-list">
@@ -233,12 +230,11 @@ const PlansList: React.FC<PlansListProps> = ({ onError, onPlanSelection, onLogin
             <h2 className="group-title">{ groupName(groupId) }</h2>
             {plansByGroup && renderPlansByCategory(plansByGroup)}
           </div>
-        )
+        );
       })}
     </div>
   );
-}
-
+};
 
 const PlansListWrapper: React.FC<PlansListProps> = ({ customer, onError, onPlanSelection, onLoginRequest, operator, subscribedPlanId }) => {
   return (
@@ -246,6 +242,6 @@ const PlansListWrapper: React.FC<PlansListProps> = ({ customer, onError, onPlanS
       <PlansList customer={customer} onError={onError} onPlanSelection={onPlanSelection} onLoginRequest={onLoginRequest} operator={operator} subscribedPlanId={subscribedPlanId} />
     </Loader>
   );
-}
+};
 
 Application.Components.component('plansList', react2angular(PlansListWrapper, ['customer', 'onError', 'onPlanSelection', 'onLoginRequest', 'operator', 'subscribedPlanId']));

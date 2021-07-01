@@ -6,7 +6,6 @@ import { FabButton } from '../base/fab-button';
 import { FabModal } from '../base/fab-modal';
 import { Loader } from '../base/loader';
 
-
 interface DeletePlanCategoryProps {
   onSuccess: (message: string) => void,
   onError: (message: string) => void,
@@ -46,17 +45,16 @@ const DeletePlanCategoryComponent: React.FC<DeletePlanCategoryProps> = ({ onSucc
     <div className="delete-plan-category">
       <FabButton type='button' className="delete-button" icon={<i className="fa fa-trash" />} onClick={toggleDeletionModal} />
       <FabModal title={t('app.admin.delete_plan_category.delete_category')}
-                isOpen={deletionModal}
-                toggleModal={toggleDeletionModal}
-                closeButton={true}
-                confirmButton={t('app.admin.delete_plan_category.confirm_delete')}
-                onConfirm={onDeleteConfirmed}>
+        isOpen={deletionModal}
+        toggleModal={toggleDeletionModal}
+        closeButton={true}
+        confirmButton={t('app.admin.delete_plan_category.confirm_delete')}
+        onConfirm={onDeleteConfirmed}>
         <span>{t('app.admin.delete_plan_category.delete_confirmation')}</span>
       </FabModal>
     </div>
-  )
+  );
 };
-
 
 export const DeletePlanCategory: React.FC<DeletePlanCategoryProps> = ({ onSuccess, onError, category }) => {
   return (
@@ -64,4 +62,4 @@ export const DeletePlanCategory: React.FC<DeletePlanCategoryProps> = ({ onSucces
       <DeletePlanCategoryComponent onSuccess={onSuccess} onError={onError} category={category} />
     </Loader>
   );
-}
+};

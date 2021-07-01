@@ -15,7 +15,7 @@ import { IApplication } from '../../models/application';
 import { PrepaidPack } from '../../models/prepaid-pack';
 import PrepaidPackAPI from '../../api/prepaid-pack';
 
-declare var Application: IApplication;
+declare const Application: IApplication;
 
 type PackableItem = Machine;
 
@@ -65,7 +65,7 @@ const PacksSummaryComponent: React.FC<PacksSummaryProps> = ({ item, itemType, cu
     PrepaidPackAPI.index({ priceable_id: item.id, priceable_type: itemType, group_id: customer.group_id, disabled: false })
       .then(data => setPacks(data))
       .catch(error => onError(error));
-  }
+  };
 
   /**
    * Total of minutes used by the customer
@@ -74,7 +74,7 @@ const PacksSummaryComponent: React.FC<PacksSummaryProps> = ({ item, itemType, cu
     if (!userPacks) return 0;
 
     return userPacks.map(up => up.minutes_used).reduce((acc, curr) => acc + curr, 0);
-  }
+  };
 
   /**
    * Total of minutes available is the packs bought by the customer
@@ -83,34 +83,34 @@ const PacksSummaryComponent: React.FC<PacksSummaryProps> = ({ item, itemType, cu
     if (!userPacks) return 0;
 
     return userPacks.map(up => up.prepaid_pack.minutes).reduce((acc, curr) => acc + curr, 0);
-  }
+  };
 
   /**
    * Total prepaid hours remaining for the current customer
    */
   const totalHours = (): number => {
     return (totalAvailable() - totalUsed()) / 60;
-  }
+  };
 
   /**
    * Do we need to display the "buy new pack" button?
    */
   const shouldDisplayButton = (): boolean => {
-    if (!packs?.length) return  false;
+    if (!packs?.length) return false;
 
     if (threshold < 1) {
       return totalAvailable() - totalUsed() <= totalAvailable() * threshold;
     }
 
     return totalAvailable() - totalUsed() <= threshold * 60;
-  }
+  };
 
   /**
    * Open/closes the prepaid-pack buying modal
    */
   const togglePacksModal = (): void => {
     setPacksModal(!packsModal);
-  }
+  };
 
   /**
    * Callback triggered when the customer has successfully bought a prepaid-pack
@@ -121,7 +121,7 @@ const PacksSummaryComponent: React.FC<PacksSummaryProps> = ({ item, itemType, cu
     UserPackAPI.index({ user_id: customer.id, priceable_type: itemType, priceable_id: item.id })
       .then(data => setUserPacks(data))
       .catch(error => onError(error));
-  }
+  };
 
   // prevent component rendering if no customer selected
   if (_.isEmpty(customer)) return <div />;
@@ -141,19 +141,19 @@ const PacksSummaryComponent: React.FC<PacksSummaryProps> = ({ item, itemType, cu
             {t('app.logged.packs_summary.buy_a_new_pack')}
           </FabButton>
           <ProposePacksModal isOpen={packsModal}
-                             toggleModal={togglePacksModal}
-                             item={item}
-                             itemType={itemType}
-                             customer={customer}
-                             operator={operator}
-                             onError={onError}
-                             onDecline={togglePacksModal}
-                             onSuccess={handlePackBoughtSuccess} />
+            toggleModal={togglePacksModal}
+            item={item}
+            itemType={itemType}
+            customer={customer}
+            operator={operator}
+            onError={onError}
+            onDecline={togglePacksModal}
+            onSuccess={handlePackBoughtSuccess} />
         </div>}
       </div>
     </div>
   );
-}
+};
 
 export const PacksSummary: React.FC<PacksSummaryProps> = ({ item, itemType, customer, operator, onError, onSuccess, refresh }) => {
   return (
@@ -161,6 +161,6 @@ export const PacksSummary: React.FC<PacksSummaryProps> = ({ item, itemType, cust
       <PacksSummaryComponent item={item} itemType={itemType} customer={customer} operator={operator} onError={onError} onSuccess={onSuccess} refresh={refresh} />
     </Loader>
   );
-}
+};
 
 Application.Components.component('packsSummary', react2angular(PacksSummary, ['item', 'itemType', 'customer', 'operator', 'onError', 'onSuccess', 'refresh']));

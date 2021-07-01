@@ -24,27 +24,27 @@ export const MachinesFilters: React.FC<MachinesFiltersProps> = ({ onStatusSelect
     return [
       defaultValue,
       { value: false, label: t('app.public.machines_filters.status_disabled') },
-      { value: null, label: t('app.public.machines_filters.status_all') },
-    ]
-  }
+      { value: null, label: t('app.public.machines_filters.status_all') }
+    ];
+  };
 
   /**
    * Callback triggered when the user selects a machine status in the dropdown list
    */
   const handleStatusSelected = (option: selectOption): void => {
     onStatusSelected(option.value);
-  }
+  };
 
   return (
     <div className="machines-filters">
       <div className="status-filter">
         <label htmlFor="status">{t('app.public.machines_filters.show_machines')}</label>
         <Select defaultValue={defaultValue}
-                id="status"
-                className="status-select"
-                onChange={handleStatusSelected}
-                options={buildBooleanOptions()}/>
+          id="status"
+          className="status-select"
+          onChange={handleStatusSelected}
+          options={buildBooleanOptions()}/>
       </div>
     </div>
-  )
-}
+  );
+};

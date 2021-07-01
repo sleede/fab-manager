@@ -36,15 +36,14 @@ export const StripeCardUpdateModal: React.FC<StripeCardUpdateModalProps> = ({ is
         <img src={visaLogo} alt="visa" />
       </div>
     );
-  }
-
+  };
 
   /**
    * When the user clicks the submit button, we disable it to prevent double form submission
    */
   const handleCardUpdateSubmit = (): void => {
     setCanSubmitUpdateCard(false);
-  }
+  };
 
   /**
    * When the card was not updated, show the error
@@ -52,21 +51,21 @@ export const StripeCardUpdateModal: React.FC<StripeCardUpdateModalProps> = ({ is
   const handleCardUpdateError = (error): void => {
     setErrors(error);
     setCanSubmitUpdateCard(true);
-  }
+  };
 
   return (
     <FabModal title={t('app.shared.stripe_card_update_modal.update_card')}
-              isOpen={isOpen}
-              toggleModal={toggleModal}
-              closeButton={false}
-              customFooter={logoFooter()}
-              className="stripe-update-card-modal">
+      isOpen={isOpen}
+      toggleModal={toggleModal}
+      closeButton={false}
+      customFooter={logoFooter()}
+      className="stripe-update-card-modal">
       {schedule && <StripeCardUpdate onSubmit={handleCardUpdateSubmit}
-                                     onSuccess={onSuccess}
-                                     onError={handleCardUpdateError}
-                                     schedule={schedule}
-                                     operator={operator}
-                                     className="card-form" >
+        onSuccess={onSuccess}
+        onError={handleCardUpdateError}
+        schedule={schedule}
+        operator={operator}
+        className="card-form" >
         {errors && <div className="stripe-errors">
           {errors}
         </div>}
@@ -81,4 +80,4 @@ export const StripeCardUpdateModal: React.FC<StripeCardUpdateModalProps> = ({ is
       </div>
     </FabModal>
   );
-}
+};

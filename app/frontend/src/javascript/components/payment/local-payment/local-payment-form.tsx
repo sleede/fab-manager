@@ -9,7 +9,6 @@ import { SettingName } from '../../../models/setting';
 import { PaymentModal } from '../payment-modal';
 import { PaymentSchedule } from '../../../models/payment-schedule';
 
-
 const ALL_SCHEDULE_METHODS = ['card', 'check'] as const;
 type scheduleMethod = typeof ALL_SCHEDULE_METHODS[number];
 
@@ -25,7 +24,6 @@ type selectOption = { value: scheduleMethod, label: string };
  * The form validation button must be created elsewhere, using the attribute form={formId}.
  */
 export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, onError, children, className, paymentSchedule, cart, customer, operator, formId }) => {
-
   const { t } = useTranslation('admin');
 
   const [method, setMethod] = useState<scheduleMethod>('check');
@@ -36,14 +34,14 @@ export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSucce
    */
   const toggleOnlinePaymentModal = (): void => {
     setOnlinePaymentModal(!onlinePaymentModal);
-  }
+  };
 
   /**
    * Convert all payement methods for schedules to the react-select format
    */
   const buildMethodOptions = (): Array<selectOption> => {
     return ALL_SCHEDULE_METHODS.map(i => methodToOption(i));
-  }
+  };
 
   /**
    * Convert the given payment-method to the react-select format
@@ -52,15 +50,14 @@ export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSucce
     if (!value) return { value, label: '' };
 
     return { value, label: t(`app.admin.local_payment.method_${value}`) };
-  }
-
+  };
 
   /**
    * Callback triggered when the user selects a payment method for the current payment schedule.
    */
   const handleUpdateMethod = (option: selectOption) => {
     setMethod(option.value);
-  }
+  };
 
   /**
    * Handle the submission of the form. It will process the local payment.
@@ -74,7 +71,7 @@ export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSucce
       try {
         const online = await SettingAPI.get(SettingName.OnlinePaymentModule);
         if (online.value !== 'true') {
-          return onError(t('app.admin.local_payment.online_payment_disabled'))
+          return onError(t('app.admin.local_payment.online_payment_disabled'));
         }
         return toggleOnlinePaymentModal();
       } catch (e) {
@@ -88,7 +85,7 @@ export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSucce
     } catch (e) {
       onError(e);
     }
-  }
+  };
 
   /**
    * Callback triggered after a successful payment by online card for a schedule.
@@ -96,20 +93,20 @@ export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSucce
   const afterCreatePaymentSchedule = (document: PaymentSchedule) => {
     toggleOnlinePaymentModal();
     onSuccess(document);
-  }
+  };
 
   return (
-    <form onSubmit={handleSubmit} id={formId} className={className ? className : ''}>
+    <form onSubmit={handleSubmit} id={formId} className={className || ''}>
       {!paymentSchedule && <p className="payment">{t('app.admin.local_payment.about_to_cash')}</p>}
       {paymentSchedule && <div className="payment-schedule">
         <div className="schedule-method">
           <label htmlFor="payment-method">{t('app.admin.local_payment.payment_method')}</label>
           <Select placeholder={ t('app.admin.local_payment.payment_method') }
-                  id="payment-method"
-                  className="method-select"
-                  onChange={handleUpdateMethod}
-                  options={buildMethodOptions()}
-                  defaultValue={methodToOption(method)} />
+            id="payment-method"
+            className="method-select"
+            onChange={handleUpdateMethod}
+            options={buildMethodOptions()}
+            defaultValue={methodToOption(method)} />
           {method === 'card' && <p>{t('app.admin.local_payment.card_collection_info')}</p>}
           {method === 'check' && <p>{t('app.admin.local_payment.check_collection_info', { DEADLINES: paymentSchedule.items.length })}</p>}
         </div>
@@ -122,19 +119,19 @@ export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSucce
                   <span> </span>
                   <span className="schedule-item-price">{FormatLib.price(item.amount)}</span>
                 </li>
-              )
+              );
             })}
           </ul>
         </div>
         <PaymentModal isOpen={onlinePaymentModal}
-                      toggleModal={toggleOnlinePaymentModal}
-                      afterSuccess={afterCreatePaymentSchedule}
-                      onError={onError}
-                      cart={cart}
-                      currentUser={operator}
-                      customer={customer} />
+          toggleModal={toggleOnlinePaymentModal}
+          afterSuccess={afterCreatePaymentSchedule}
+          onError={onError}
+          cart={cart}
+          currentUser={operator}
+          customer={customer} />
       </div>}
       {children}
     </form>
   );
-}
+};
