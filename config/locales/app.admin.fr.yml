@@ -1206,7 +1206,7 @@ fr:
         statistics_module: "module de statistiques"
         upcoming_events_shown: "la limite d'affichage des événements à venir"
         display_invite_to_renew_pack: "Afficher l'invitation à renouveler les packs prépayés"
-        packs_threshold_info_html: "You can define under how many hours the user will be invited to buy a prepaid-pack, if his stock of prepaid hours in under this threshold.<br/>You can set a <strong>number of hours</strong> (<em>eg. 5</em>) or a <strong>percentage</strong> of his current pack pack (<em>eg. 0.05 means 5%</em>)."
+        packs_threshold_info_html: "You can define under how many hours the user will be invited to buy a new prepaid-pack, if his stock of prepaid hours is under this threshold.<br/>You can set a <strong>number of hours</strong> (<em>eg. 5</em>) or a <strong>percentage</strong> of his current pack pack (<em>eg. 0.05 means 5%</em>)."
         renew_pack_threshold: "threshold for packs renewal"
         general:
           general: "Général"
