@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Set up the linter for Typescript files
+- Fix a bug: config norwegian locale
 
 ## v5.1.0 2021 July 1st
 
@@ -39,7 +40,7 @@
 - Updated chokidar to 3.5.2
 - Updated codemirror to 5.62.0
 - Updated convert-source-map to 1.8.0
-- Updated core-js-compat to 3.15.0 
+- Updated core-js-compat to 3.15.0
 - Updated electron-to-chromium to 1.3.752
 - Updated immer to 9.0.3
 - Updated jquery-ujs to 1.2.3
@@ -72,8 +73,8 @@
 - Do not display the type in the plans list
 - Updated medium-editor to v5 and angular-medium-editor accordingly
 - Fix a bug: a message tells that creating a new plan fails, but it worked
-- Fix a bug: unable to select no category in plan creation/edition after a category selection 
-- Fix a bug: the training validation modal shows cancelled trainings 
+- Fix a bug: unable to select no category in plan creation/edition after a category selection
+- Fix a bug: the training validation modal shows cancelled trainings
 - [TODO DEPLOY] `rails db:seed`
 
 ## v5.0.3 2021 June 14
@@ -762,7 +763,7 @@
 ## v4.0.4 2019 August 14
 
 - Fix a bug: #140 VAT rate is erroneous in invoices.
-  Note: this bug was introduced in v4.0.3 and requires (if you are on v4.0.3) to regenerate the invoices since August 1st 
+  Note: this bug was introduced in v4.0.3 and requires (if you are on v4.0.3) to regenerate the invoices since August 1st
 - [TODO DEPLOY] `rake fablab:maintenance:regenerate_invoices[2019,8]`
 
 ## v4.0.3 2019 August 01
