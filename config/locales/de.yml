@@ -528,3 +528,4 @@ de:
     payzen_hmac: "PayZen HMAC-SHA-256 key"
     payzen_currency: "PayZen currency"
     public_agenda_module: "Public agenda module"
+    renew_pack_threshold: "Threshold for packs renewal"
