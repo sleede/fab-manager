@@ -212,9 +212,9 @@ es:
         _or_the_: " o el "
       machines_filters:
         show_machines: "Show machines"
-        status_enabled: "Enabled"
-        status_disabled: "Disabled"
-        status_all: "All"
+        status_enabled: "Activadas"
+        status_disabled: "Discapacitadas"
+        status_all: "Todas"
       machine_card:
         book: "Book"
         consult: "Consult"
