@@ -112,6 +112,8 @@ export enum SettingName {
   RenewPackThreshold = 'renew_pack_threshold',
 }
 
+export type SettingValue = string|boolean|number;
+
 export interface Setting {
   name: SettingName,
   localized?: string,
@@ -128,7 +130,7 @@ export interface SettingError {
 
 export interface SettingBulkResult {
   status: boolean,
-  value?: any,
+  value?: string,
   error?: string,
   localized?: string,
 }

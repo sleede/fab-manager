@@ -3,9 +3,8 @@ import { AxiosResponse } from 'axios';
 import { Wallet } from '../models/wallet';
 
 export default class WalletAPI {
-  static async getByUser (user_id: number): Promise<Wallet> {
-    const res: AxiosResponse = await apiClient.get(`/api/wallet/by_user/${user_id}`);
+  static async getByUser (userId: number): Promise<Wallet> {
+    const res: AxiosResponse = await apiClient.get(`/api/wallet/by_user/${userId}`);
     return res?.data;
   }
 }
-

@@ -8,10 +8,9 @@ export default class GroupAPI {
     return res?.data;
   }
 
-  private static filtersToQuery(filters?: GroupIndexFilter): string {
+  private static filtersToQuery (filters?: GroupIndexFilter): string {
     if (!filters) return '';
 
     return '?' + Object.entries(filters).map(f => `${f[0]}=${f[1]}`).join('&');
   }
 }
-

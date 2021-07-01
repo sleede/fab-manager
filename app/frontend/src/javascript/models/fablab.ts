@@ -21,8 +21,8 @@ export interface IFablab {
   translations: {
     app: {
       shared: {
-        buttons: Object,
-        messages: Object,
+        buttons: Record<string, string>,
+        messages: Record<string, string>,
       }
     }
   }

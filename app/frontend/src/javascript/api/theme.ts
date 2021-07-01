@@ -4,8 +4,7 @@ import { Theme } from '../models/theme';
 
 export default class ThemeAPI {
   static async index (): Promise<Array<Theme>> {
-    const res: AxiosResponse<Array<Theme>> = await apiClient.get(`/api/themes`);
+    const res: AxiosResponse<Array<Theme>> = await apiClient.get('/api/themes');
     return res?.data;
   }
 }
-

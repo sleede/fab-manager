@@ -1,4 +1,6 @@
-import axios, { AxiosInstance } from 'axios'
+import axios, { AxiosInstance } from 'axios';
+
+type Error = { error: string };
 
 const token: HTMLMetaElement = document.querySelector('[name="csrf-token"]');
 const client: AxiosInstance = axios.create({
@@ -21,7 +23,7 @@ client.interceptors.response.use(function (response) {
   return Promise.reject(extractHumanReadableMessage(message));
 });
 
-function extractHumanReadableMessage(error: any): string {
+function extractHumanReadableMessage (error: string|Error): string {
   if (typeof error === 'string') {
     if (error.match(/^<!DOCTYPE html>/)) {
       // parse ruby error pages
@@ -40,7 +42,7 @@ function extractHumanReadableMessage(error: any): string {
   let message = '';
   if (error instanceof Object) {
     // API errors
-    if (error.hasOwnProperty('error') && typeof error.error === 'string') {
+    if (Object.prototype.hasOwnProperty.call(error, 'error') && typeof error.error === 'string') {
       return error.error;
     }
     // iterate through all the keys to build the message
