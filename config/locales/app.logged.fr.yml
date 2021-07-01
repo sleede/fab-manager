@@ -185,7 +185,7 @@ fr:
         pack_DURATION: "{DURATION} heures"
         buy_this_pack: "Acheter ce pack"
         pack_bought_success: "Vous avez bien acheté ce pack d'heures prépayées. Votre facture sera bientôt disponible sur votre tableau de bord."
-        validity: "Utilisable pour {COUNT} {PERIODS}"
+        validity: "Valable {COUNT} {PERIODS}"
         period:
           day: "{COUNT, plural, one{jour} other{jours}}"
           week: "{COUNT, plural, one{semaine} other{semaines}}"
