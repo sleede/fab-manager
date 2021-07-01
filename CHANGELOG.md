@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Set up the linter for Typescript files
+
 ## v5.1.0 2021 July 1st
 
 - Prepaid packs of hours for the machines

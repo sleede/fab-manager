@@ -15,9 +15,15 @@
   "bugs": {
     "url": "https://github.com/sleede/fab-manager/issues"
   },
+  "scripts": {
+    "lint": "eslint ./app/frontend/src",
+    "lint-ts": "eslint ./app/frontend/src --ext .ts --ext .tsx"
+  },
   "license": "AGPL-3.0-only",
   "devDependencies": {
     "@pmmmwh/react-refresh-webpack-plugin": "^0.4.2",
+    "@typescript-eslint/eslint-plugin": "^4.28.1",
+    "@typescript-eslint/parser": "^4.28.1",
     "auto-ngtemplate-loader": "^3.1.0",
     "eslint": "~6.8.0",
     "eslint-config-standard": "~14.1.1",
