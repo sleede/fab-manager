@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Set up the linter for Typescript files
+- Disable SQL format for the schema
 - Fix a bug: config norwegian locale
 
 ## v5.1.0 2021 July 1st
