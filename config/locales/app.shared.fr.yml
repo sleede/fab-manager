@@ -108,7 +108,7 @@ fr:
         validate_your_machine: "Valider votre machine"
       #button to book a machine reservation
       reserve_button:
-        book_this_machine: "Book this machine"
+        book_this_machine: "Réserver cette machine"
       #frame to select a plan to subscribe
       plan_subscribe:
         subscribe_online: "je m'abonne en ligne"
