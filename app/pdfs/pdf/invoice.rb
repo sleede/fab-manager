@@ -110,6 +110,8 @@ class PDF::Invoice < Prawn::Document
           object = offer_day_verbose(invoice.main_item.object, name)
         when 'Error'
           object = I18n.t('invoices.error_invoice')
+        when 'StatisticProfilePrepaidPack'
+          object = I18n.t('invoices.prepaid_pack')
         else
           puts "ERROR : specified main_item.object_type type (#{invoice.main_item.object_type}) is unknown"
         end
@@ -132,7 +134,7 @@ class PDF::Invoice < Prawn::Document
 
         details = invoice.is_a?(Avoir) ? I18n.t('invoices.cancellation') + ' - ' : ''
 
-        if item.subscription ### Subscription
+        if item.object_type == Subscription.name
           subscription = item.subscription
           if invoice.main_item.object_type == 'OfferDay'
             details += I18n.t('invoices.subscription_extended_for_free_from_START_to_END',
@@ -154,7 +156,7 @@ class PDF::Invoice < Prawn::Document
           end
 
 
-        else ### Reservation
+        elsif item.object_type == Reservation.name
           case invoice.main_item.object.try(:reservable_type)
             ### Machine reservation
           when 'Machine'
@@ -179,6 +181,8 @@ class PDF::Invoice < Prawn::Document
           else
             details += item.description
           end
+        else
+          details += item.description
         end
 
         data += [[details, number_to_currency(price)]]

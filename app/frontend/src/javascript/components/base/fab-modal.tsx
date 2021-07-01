@@ -1,9 +1,9 @@
-import React, { ReactNode, BaseSyntheticEvent, useEffect } from 'react';
+import React, { ReactNode, BaseSyntheticEvent, useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import { useTranslation } from 'react-i18next';
 import { Loader } from './loader';
 import CustomAssetAPI from '../../api/custom-asset';
-import { CustomAssetName } from '../../models/custom-asset';
+import { CustomAsset, CustomAssetName } from '../../models/custom-asset';
 import { FabButton } from './fab-button';
 
 Modal.setAppElement('body');
@@ -15,27 +15,33 @@ export enum ModalSize {
 }
 
 interface FabModalProps {
-  title: string,
+  title?: string,
   isOpen: boolean,
   toggleModal: () => void,
   confirmButton?: ReactNode,
   closeButton?: boolean,
   className?: string,
   width?: ModalSize,
+  customHeader?: ReactNode,
   customFooter?: ReactNode,
   onConfirm?: (event: BaseSyntheticEvent) => void,
   preventConfirm?: boolean,
   onCreation?: () => void,
+  onConfirmSendFormId?: string,
 }
-
-// initial request to the API
-const blackLogoFile = CustomAssetAPI.get(CustomAssetName.LogoBlackFile);
 
 /**
  * This component is a template for a modal dialog that wraps the application style
  */
-export const FabModal: React.FC<FabModalProps> = ({ title, isOpen, toggleModal, children, confirmButton, className, width = 'sm', closeButton, customFooter, onConfirm, preventConfirm, onCreation }) => {
+export const FabModal: React.FC<FabModalProps> = ({ title, isOpen, toggleModal, children, confirmButton, className, width = 'sm', closeButton, customHeader, customFooter, onConfirm, preventConfirm, onCreation, onConfirmSendFormId }) => {
   const { t } = useTranslation('shared');
+
+  const [blackLogo, setBlackLogo] = useState<CustomAsset>(null);
+
+  // initial request to the API to get the theme's logo, for back backgrounds
+  useEffect(() => {
+    CustomAssetAPI.get(CustomAssetName.LogoBlackFile).then(data => setBlackLogo(data));
+  }, []);
 
   useEffect(() => {
     if (typeof onCreation === 'function' && isOpen) {
@@ -43,14 +49,18 @@ export const FabModal: React.FC<FabModalProps> = ({ title, isOpen, toggleModal, 
     }
   }, [isOpen]);
 
-  // the theme's logo, for back backgrounds
-  const blackLogo = blackLogoFile.read();
-
   /**
    * Check if the confirm button should be present
    */
   const hasConfirmButton = (): boolean => {
     return confirmButton !== undefined;
+  }
+
+  /**
+   * Check if the behavior of the confirm button is to send a form, using the provided ID
+   */
+  const confirmationSendForm = (): boolean => {
+    return onConfirmSendFormId !== undefined;
   }
 
   /**
@@ -67,6 +77,13 @@ export const FabModal: React.FC<FabModalProps> = ({ title, isOpen, toggleModal, 
     return customFooter !== undefined;
   }
 
+  /**
+   * Check if there's a custom header
+   */
+  const hasCustomHeader = (): boolean => {
+    return customHeader !== undefined;
+  }
+
   return (
     <Modal isOpen={isOpen}
            className={`fab-modal fab-modal-${width} ${className}`}
@@ -74,11 +91,12 @@ export const FabModal: React.FC<FabModalProps> = ({ title, isOpen, toggleModal, 
            onRequestClose={toggleModal}>
       <div className="fab-modal-header">
         <Loader>
-          <img src={blackLogo.custom_asset_file_attributes.attachment_url}
-               alt={blackLogo.custom_asset_file_attributes.attachment}
-               className="modal-logo" />
+          {blackLogo && <img src={blackLogo.custom_asset_file_attributes.attachment_url}
+                             alt={blackLogo.custom_asset_file_attributes.attachment}
+                             className="modal-logo" />}
         </Loader>
-        <h1>{ title }</h1>
+        {!hasCustomHeader() && <h1>{ title }</h1>}
+        {hasCustomHeader() && customHeader}
       </div>
       <div className="fab-modal-content">
         {children}
@@ -86,7 +104,8 @@ export const FabModal: React.FC<FabModalProps> = ({ title, isOpen, toggleModal, 
       <div className="fab-modal-footer">
         <Loader>
           {hasCloseButton() &&<FabButton className="modal-btn--close" onClick={toggleModal}>{t('app.shared.buttons.close')}</FabButton>}
-          {hasConfirmButton() && <FabButton className="modal-btn--confirm" disabled={preventConfirm} onClick={onConfirm}>{confirmButton}</FabButton>}
+          {hasConfirmButton() && !confirmationSendForm() && <FabButton className="modal-btn--confirm" disabled={preventConfirm} onClick={onConfirm}>{confirmButton}</FabButton>}
+          {hasConfirmButton() && confirmationSendForm() && <FabButton className="modal-btn--confirm" disabled={preventConfirm} type="submit" form={onConfirmSendFormId}>{confirmButton}</FabButton>}
           {hasCustomFooter() && customFooter}
         </Loader>
       </div>

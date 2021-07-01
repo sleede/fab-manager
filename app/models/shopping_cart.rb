@@ -56,6 +56,7 @@ class ShoppingCart
         objects.push(save_item(item))
       end
       update_credits(objects)
+      update_packs(objects)
 
       payment = create_payment_document(price, objects, payment_id, payment_type)
       WalletService.debit_user_wallet(payment, @customer)
@@ -117,6 +118,14 @@ class ShoppingCart
     reservations = objects.filter { |o| o.is_a? Reservation }
     reservations.each do |r|
       UsersCredits::Manager.new(reservation: r).update_credits
+    end
+  end
+
+  # Handle the update of the user's prepaid-packs
+  # The total booked minutes are subtracted from the user's prepaid minutes
+  def update_packs(objects)
+    objects.filter { |o| o.is_a? Reservation }.each do |reservation|
+      PrepaidPackService.update_user_minutes(@customer, reservation)
     end
   end
 end

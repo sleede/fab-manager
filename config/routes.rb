@@ -78,10 +78,12 @@ Rails.application.routes.draw do
     resources :prices, only: %i[index update] do
       post 'compute', on: :collection
     end
+    resources :prepaid_packs
     resources :coupons do
       post 'validate', action: 'validate', on: :collection
       post 'send', action: 'send_to', on: :collection
     end
+    resources :user_packs, only: %i[index]
 
     resources :trainings_pricings, only: %i[index update]
 

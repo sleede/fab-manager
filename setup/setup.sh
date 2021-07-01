@@ -19,7 +19,7 @@ welcome_message()
   echo -e "For \e[1mbug reports\e[21m, please open a new issue on https://github.com/sleede/fab-manager/issues"
   echo -e "You can call for \e[1mcommunity assistance\e[21m on https://forum.fab-manager.com/"
   printf "\nYou can interrupt this installation at any time by pressing Ctrl+C\n"
-  printf "If you do not feel confortable with this installation, you can \e[4msubscribe to one of our hosting offers\e[24m: https://www.fab-manager.com/saas-offer\n\n"
+  printf "If you do not feel confortable with this installation, you can \e[4msubscribe to our hosting offers\e[24m:\nhttps://www.fab-manager.com/saas-offer\n\n"
   read -rp "Continue? (Y/n) " confirm </dev/tty
   if [[ "$confirm" = "n" ]]; then exit 1; fi
 }
@@ -143,7 +143,7 @@ read_domain()
     read_domain
     return
   fi
-  read -rp 'Do you have any other domain (eg. www.fab-manager.com)? (y/N) ' confirm </dev/tty
+  read -rp 'Do you have any other domain (eg. a www. alias)? (y/N) ' confirm </dev/tty
   if [ "$confirm" == "y" ]; then
     read_domain
   fi

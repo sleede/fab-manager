@@ -67,11 +67,10 @@ export const PayzenCardUpdateModal: React.FC<PayzenCardUpdateModalProps> = ({ is
                                onSuccess={onSuccess}
                                onError={handleCardUpdateError}
                                className="card-form"
-                               paymentSchedule={true}
+                               paymentSchedule={schedule}
                                operator={operator}
                                customer={schedule.user as User}
                                updateCard={true}
-                               paymentScheduleId={schedule.id}
                                formId={formId} >
         {errors && <div className="payzen-errors">
           {errors}

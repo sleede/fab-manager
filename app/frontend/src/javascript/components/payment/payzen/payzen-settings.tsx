@@ -54,10 +54,9 @@ export const PayzenSettings: React.FC<PayzenSettingsProps> = ({ onEditKeys, onCu
    * For the private settings, we initialize them with the placeholder value, if the setting is set.
    */
   useEffect(() => {
-    const api = new SettingAPI();
-    api.query(payZenPublicSettings.concat(payZenOtherSettings)).then(payZenKeys => {
-      api.isPresent(SettingName.PayZenPassword).then(pzPassword => {
-        api.isPresent(SettingName.PayZenHmacKey).then(pzHmac => {
+    SettingAPI.query(payZenPublicSettings.concat(payZenOtherSettings)).then(payZenKeys => {
+      SettingAPI.isPresent(SettingName.PayZenPassword).then(pzPassword => {
+        SettingAPI.isPresent(SettingName.PayZenHmacKey).then(pzHmac => {
           const map = new Map(payZenKeys);
           map.set(SettingName.PayZenPassword, pzPassword ? PAYZEN_HIDDEN :  '');
           map.set(SettingName.PayZenHmacKey, pzHmac ? PAYZEN_HIDDEN :  '');
@@ -94,8 +93,7 @@ export const PayzenSettings: React.FC<PayzenSettingsProps> = ({ onEditKeys, onCu
    * This will update the setting on the server.
    */
   const saveCurrency = (): void => {
-    const api = new SettingAPI();
-    api.update(SettingName.PayZenCurrency, settings.get(SettingName.PayZenCurrency)).then(result => {
+    SettingAPI.update(SettingName.PayZenCurrency, settings.get(SettingName.PayZenCurrency)).then(result => {
       setError('');
       updateSettings(draft => draft.set(SettingName.PayZenCurrency, result.value));
       onCurrencyUpdateSuccess(result.value);

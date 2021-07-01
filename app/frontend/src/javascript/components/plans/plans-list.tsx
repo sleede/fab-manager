@@ -231,7 +231,7 @@ const PlansList: React.FC<PlansListProps> = ({ onError, onPlanSelection, onLogin
         return (
           <div key={groupId} className="plans-per-group">
             <h2 className="group-title">{ groupName(groupId) }</h2>
-            {renderPlansByCategory(plansByGroup)}
+            {plansByGroup && renderPlansByCategory(plansByGroup)}
           </div>
         )
       })}

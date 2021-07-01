@@ -45,8 +45,7 @@ const PaymentSchedulesDashboard: React.FC<PaymentSchedulesDashboardProps> = ({ c
   const handleLoadMore = (): void => {
     setPageNumber(pageNumber + 1);
 
-    const api = new PaymentScheduleAPI();
-    api.index({ query: { page: pageNumber + 1, size: PAGE_SIZE }}).then((res) => {
+    PaymentScheduleAPI.index({ query: { page: pageNumber + 1, size: PAGE_SIZE }}).then((res) => {
       const list = paymentSchedules.concat(res);
       setPaymentSchedules(list);
     }).catch((error) => onError(error.message));
@@ -56,8 +55,7 @@ const PaymentSchedulesDashboard: React.FC<PaymentSchedulesDashboardProps> = ({ c
    * Reload from te API all the currently displayed payment schedules
    */
   const handleRefreshList = (): void => {
-    const api = new PaymentScheduleAPI();
-    api.index({ query: { page: 1, size: PAGE_SIZE * pageNumber }}).then((res) => {
+    PaymentScheduleAPI.index({ query: { page: 1, size: PAGE_SIZE * pageNumber }}).then((res) => {
       setPaymentSchedules(res);
     }).catch((err) => {
       onError(err.message);

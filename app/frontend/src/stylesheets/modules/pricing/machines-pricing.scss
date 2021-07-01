@@ -1,0 +1,31 @@
+.machines-pricing {
+  .fab-alert {
+    margin: 15px 0;
+  }
+  table {
+    overflow-y: scroll;
+    thead > tr > th:first-child {
+      width: 20%;
+    }
+
+    thead > tr > th.group-name {
+      width: 20%;
+      text-transform: uppercase;
+      font-size: 1.4rem;
+    }
+
+    thead > tr > th {
+      vertical-align: bottom;
+      border-bottom: 2px solid #ddd;
+      padding: 8px;
+      line-height: 1.5;
+    }
+
+    tbody > tr > td {
+      padding: 8px;
+      line-height: 1.5;
+      vertical-align: top;
+      border-top: 1px solid #ddd;
+    }
+  }
+}

@@ -1,9 +1,14 @@
-json.user_trainings @user_trainings do |user_training|
-  json.extract! user_training, :id, :user_id, :training_id, :updated_at, :created_at
+# frozen_string_literal: true
 
-  if user_training.association(:user).loaded?
-    json.user do
-      json.partial! 'open_api/v1/users/user', user: user_training.user
+json.user_trainings @user_trainings do |user_training|
+  json.extract! user_training, :id, :training_id, :updated_at, :created_at
+
+  if user_training.association(:statistic_profile).loaded?
+    json.user_id user_training.statistic_profile.user_id
+    unless user_training.statistic_profile.user.nil?
+      json.user do
+        json.partial! 'open_api/v1/users/user', user: user_training.statistic_profile.user
+      end
     end
   end
 

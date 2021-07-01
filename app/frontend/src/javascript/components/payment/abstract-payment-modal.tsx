@@ -4,8 +4,7 @@ import WalletLib from '../../lib/wallet';
 import { WalletInfo } from '../wallet-info';
 import { FabModal, ModalSize } from '../base/fab-modal';
 import { HtmlTranslate } from '../base/html-translate';
-import { CustomAssetName } from '../../models/custom-asset';
-import { IFablab } from '../../models/fablab';
+import { CustomAsset, CustomAssetName } from '../../models/custom-asset';
 import { ShoppingCart } from '../../models/payment';
 import { PaymentSchedule } from '../../models/payment-schedule';
 import { User } from '../../models/user';
@@ -17,8 +16,7 @@ import SettingAPI from '../../api/setting';
 import { SettingName } from '../../models/setting';
 import { ComputePriceResult } from '../../models/price';
 import { Wallet } from '../../models/wallet';
-
-declare var Fablab: IFablab;
+import FormatLib from '../../lib/format';
 
 
 export interface GatewayFormProps {
@@ -28,7 +26,7 @@ export interface GatewayFormProps {
   customer: User,
   operator: User,
   className?: string,
-  paymentSchedule?: boolean,
+  paymentSchedule?: PaymentSchedule,
   cart?: ShoppingCart,
   formId: string,
 }
@@ -39,18 +37,18 @@ interface AbstractPaymentModalProps {
   afterSuccess: (result: Invoice|PaymentSchedule) => void,
   cart: ShoppingCart,
   currentUser: User,
-  schedule: PaymentSchedule,
+  schedule?: PaymentSchedule,
   customer: User,
   logoFooter: ReactNode,
   GatewayForm: FunctionComponent<GatewayFormProps>,
   formId: string,
   className?: string,
   formClassName?: string,
+  title?: string,
+  preventCgv?: boolean,
+  preventScheduleInfo?: boolean,
+  modalSize?: ModalSize,
 }
-
-
-// initial request to the API
-const cgvFile = CustomAssetAPI.get(CustomAssetName.CgvFile);
 
 /**
  * This component is an abstract modal that must be extended by each payment gateway to include its payment form.
@@ -58,7 +56,7 @@ const cgvFile = CustomAssetAPI.get(CustomAssetName.CgvFile);
  * This component must not be called directly but must be extended for each implemented payment gateway
  * @see https://reactjs.org/docs/composition-vs-inheritance.html
  */
-export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, cart, currentUser, schedule, customer, logoFooter, GatewayForm, formId, className, formClassName }) => {
+export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, cart, currentUser, schedule, customer, logoFooter, GatewayForm, formId, className, formClassName, title, preventCgv, preventScheduleInfo, modalSize }) => {
   // customer's wallet
   const [wallet, setWallet] = useState<Wallet>(null);
   // server-computed price with all details
@@ -75,17 +73,18 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
   const [tos, setTos] = useState<boolean>(false);
   // currently active payment gateway
   const [gateway, setGateway] = useState<string>(null);
+  // the sales conditions
+  const [cgv, setCgv] = useState<CustomAsset>(null);
 
   const { t } = useTranslation('shared');
-  const cgv = cgvFile.read();
 
 
   /**
-   * When the component is loaded first, get the name of the currently active payment modal
+   * When the component loads first, get the name of the currently active payment modal
    */
   useEffect(() => {
-    const api = new SettingAPI();
-    api.get(SettingName.PaymentGateway).then((setting) => {
+    CustomAssetAPI.get(CustomAssetName.CgvFile).then(asset => setCgv(asset));
+    SettingAPI.get(SettingName.PaymentGateway).then((setting) => {
       // we capitalize the first letter of the name
       setGateway(setting.value.replace(/^\w/, (c) => c.toUpperCase()));
     })
@@ -103,8 +102,7 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
       setWallet(wallet);
       PriceAPI.compute(cart).then((res) => {
         setPrice(res);
-        const wLib = new WalletLib(wallet);
-        setRemainingPrice(wLib.computeRemainingPrice(res.price));
+        setRemainingPrice(new WalletLib(wallet).computeRemainingPrice(res.price));
         setReady(true);
       })
     })
@@ -121,7 +119,7 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
    * Check if the user accepts the Terms of Sales document
    */
   const hasCgv = (): boolean => {
-    return cgv != null;
+    return cgv != null && !preventCgv;
   }
 
   /**
@@ -132,17 +130,10 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
   }
 
   /**
-   * Check if we are currently creating a payment schedule
+   * Check if we must display the info box about the payment schedule
    */
-  const isPaymentSchedule = (): boolean => {
-    return schedule !== undefined;
-  }
-
-  /**
-   * Return the formatted localized amount for the given price (eg. 20.5 => "20,50 €")
-   */
-  const formatPrice = (amount: number): string => {
-    return new Intl.NumberFormat(Fablab.intl_locale, {style: 'currency', currency: Fablab.intl_currency}).format(amount);
+  const hasPaymentScheduleInfo = (): boolean => {
+    return schedule !== undefined && !preventScheduleInfo;
   }
 
   /**
@@ -178,12 +169,23 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
     return !submitState && terms;
   }
 
+  /**
+   * Build the modal title. If the provided title is a shared translation key, interpolate it through the
+   * translation service. Otherwise, just display the provided string.
+   */
+  const getTitle = (): string => {
+    if (title.match(/^app\.shared\./)) {
+      return t(title);
+    }
+    return title;
+  }
+
 
   return (
-    <FabModal title={t('app.shared.payment.online_payment') }
+    <FabModal title={getTitle()}
               isOpen={isOpen}
               toggleModal={toggleModal}
-              width={ModalSize.medium}
+              width={modalSize}
               closeButton={false}
               customFooter={logoFooter}
               className={`payment-modal ${className ? className : ''}`}>
@@ -197,11 +199,11 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
                      formId={formId}
                      cart={cart}
                      customer={customer}
-                     paymentSchedule={isPaymentSchedule()}>
+                     paymentSchedule={schedule}>
           {hasErrors() && <div className="payment-errors">
             {errors}
           </div>}
-          {isPaymentSchedule() && <div className="payment-schedule-info">
+          {hasPaymentScheduleInfo() && <div className="payment-schedule-info">
             <HtmlTranslate trKey="app.shared.payment.payment_schedule_html" options={{ DEADLINES: schedule.items.length, GATEWAY: gateway }} />
           </div>}
           {hasCgv() && <div className="terms-of-sales">
@@ -217,7 +219,7 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
                                  disabled={!canSubmit()}
                                  form={formId}
                                  className="validate-btn">
-          {t('app.shared.payment.confirm_payment_of_', { AMOUNT: formatPrice(remainingPrice) })}
+          {t('app.shared.payment.confirm_payment_of_', { AMOUNT: FormatLib.price(remainingPrice) })}
         </button>}
         {submitState && <div className="payment-pending">
           <div className="fa-2x">
@@ -228,3 +230,10 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
     </FabModal>
   );
 }
+
+AbstractPaymentModal.defaultProps = {
+  title: 'app.shared.payment.online_payment',
+  preventCgv: false,
+  preventScheduleInfo: false,
+  modalSize: ModalSize.medium
+};

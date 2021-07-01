@@ -1,30 +1,30 @@
+# frozen_string_literal: true
+
+# public API controller for user's trainings
 class OpenAPI::V1::UserTrainingsController < OpenAPI::V1::BaseController
   extend OpenAPI::ApiDoc
+  include Rails::Pagination
   expose_doc
-  
+
   def index
-    @user_trainings = UserTraining.order(created_at: :desc)
+    @user_trainings = StatisticProfileTraining.includes(statistic_profile: :user)
+                                              .includes(:training)
+                                              .references(:statistic_profiles)
+                                              .order(created_at: :desc)
 
-    if params[:user_id].present?
-      @user_trainings = @user_trainings.where(user_id: params[:user_id])
-    else
-      @user_trainings = @user_trainings.includes(user: :profile)
-    end
 
-    if params[:training_id].present?
-      @user_trainings = @user_trainings.where(training_id: params[:training_id])
-    else
-      @user_trainings = @user_trainings.includes(:training)
-    end
+    @user_trainings = @user_trainings.where(statistic_profiles: { user_id: params[:user_id] }) if params[:user_id].present?
+    @user_trainings = @user_trainings.where(training_id: params[:training_id]) if params[:training_id].present?
 
-    if params[:page].present?
-      @user_trainings = @user_trainings.page(params[:page]).per(per_page)
-      paginate @user_trainings, per_page: per_page
-    end
+    return unless params[:page].present?
+
+    @user_trainings = @user_trainings.page(params[:page]).per(per_page)
+    paginate @user_trainings, per_page: per_page
   end
 
   private
-    def per_page
-      params[:per_page] || 20
-    end
+
+  def per_page
+    params[:per_page] || 20
+  end
 end

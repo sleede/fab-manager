@@ -3,8 +3,8 @@
 namespace :fablab do
   namespace :chain do
     desc 'assign all footprints to existing records'
-    task all: :environment do
-      if Invoice.where.not(footprint: nil).count.positive?
+    task :all, [:force] => :environment do |_task, args|
+      if Invoice.where.not(footprint: nil).count.positive? && args.force != 'force'
         print 'All footprints will be regenerated. Are you sure? (y/n) '
         confirm = STDIN.gets.chomp
         next unless confirm == 'y'

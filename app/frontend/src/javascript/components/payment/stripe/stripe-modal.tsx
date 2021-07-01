@@ -18,7 +18,7 @@ interface StripeModalProps {
   afterSuccess: (result: Invoice|PaymentSchedule) => void,
   cart: ShoppingCart,
   currentUser: User,
-  schedule: PaymentSchedule,
+  schedule?: PaymentSchedule,
   customer: User
 }
 

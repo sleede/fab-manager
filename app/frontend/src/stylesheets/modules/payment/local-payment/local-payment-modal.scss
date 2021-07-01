@@ -1,0 +1,33 @@
+.local-payment-modal {
+
+  .local-payment-form {
+    .payment-schedule {
+      display: flex;
+
+      .schedule-method,
+      .full-schedule {
+        width: 50%;
+      }
+
+      .schedule-method {
+        p {
+          margin-top: 12px;
+        }
+      }
+
+      .full-schedule {
+        ul {
+          list-style: none;
+        }
+      }
+    }
+  }
+
+  .local-modal-icons {
+    text-align: center;
+
+    .fas.fa-lock {
+      color: #9edd78;
+    }
+  }
+}
