@@ -180,7 +180,7 @@ fr:
         close: "Fermer"
       propose_packs_modal:
         available_packs: "Packs prépayés disponibles"
-        packs_proposed: "Vous pouvez acheter un pack d'heures prépayé pour cette machine. Ces packs vous permettent de bénéficier de remises en fonction du volume d'heures."
+        packs_proposed: "Vous pouvez acheter un pack d'heures prépayées pour cette machine. Ces packs vous permettent de bénéficier de remises en fonction du volume d'heures."
         no_thanks: "Non, merci"
         pack_DURATION: "{DURATION} heures"
         buy_this_pack: "Acheter ce pack"
