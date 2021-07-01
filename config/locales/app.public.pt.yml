@@ -211,7 +211,7 @@ pt:
         book: "Reservar"
         _or_the_: " ou o "
       machines_filters:
-        show_machines: "Show machines"
+        show_machines: "Mostrar máquinas"
         status_enabled: "Enabled"
         status_disabled: "Disabled"
         status_all: "All"
