@@ -11,7 +11,6 @@ import { Invoice } from '../../../models/invoice';
  * The form validation button must be created elsewhere, using the attribute form={formId}.
  */
 export const StripeForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, onError, children, className, paymentSchedule = false, cart, customer, operator, formId }) => {
-
   const { t } = useTranslation('shared');
 
   const stripe = useStripe();
@@ -31,7 +30,7 @@ export const StripeForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, on
     const cardElement = elements.getElement(CardElement);
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: 'card',
-      card: cardElement,
+      card: cardElement
     });
 
     if (error) {
@@ -45,8 +44,8 @@ export const StripeForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, on
           await handleServerConfirmation(res);
         } else {
           // we start by associating the payment method with the user
-          const { client_secret } = await StripeAPI.setupIntent(customer.id);
-          const { setupIntent, error } = await stripe.confirmCardSetup(client_secret, {
+          const intent = await StripeAPI.setupIntent(customer.id);
+          const { setupIntent, error } = await stripe.confirmCardSetup(intent.client_secret, {
             payment_method: paymentMethod.id,
             mandate_data: {
               customer_acceptance: {
@@ -57,7 +56,7 @@ export const StripeForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, on
                 }
               }
             }
-          })
+          });
           if (error) {
             onError(error.message);
           } else {
@@ -71,7 +70,7 @@ export const StripeForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, on
         onError(err);
       }
     }
-  }
+  };
 
   /**
    * Process the server response about the Strong-customer authentication (SCA)
@@ -105,8 +104,7 @@ export const StripeForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, on
     } else {
       console.error(`[StripeForm] unknown response received: ${response}`);
     }
-  }
-
+  };
 
   /**
    * Options for the Stripe's card input
@@ -121,15 +119,15 @@ export const StripeForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, on
       invalid: {
         color: '#9e2146',
         iconColor: '#9e2146'
-      },
+      }
     },
     hidePostalCode: true
   };
 
   return (
-    <form onSubmit={handleSubmit} id={formId} className={className ? className : ''}>
+    <form onSubmit={handleSubmit} id={formId} className={className || ''}>
       <CardElement options={cardOptions} />
       {children}
     </form>
   );
-}
+};

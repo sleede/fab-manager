@@ -6,7 +6,6 @@ import { User } from '../../models/user';
 import { PaymentSchedule } from '../../models/payment-schedule';
 import { useTranslation } from 'react-i18next';
 
-
 interface UpdateCardModalProps {
   isOpen: boolean,
   toggleModal: () => void,
@@ -15,7 +14,6 @@ interface UpdateCardModalProps {
   schedule: PaymentSchedule,
   operator: User
 }
-
 
 /**
  * This component open a modal dialog for the configured payment gateway, allowing the user to input his card data
@@ -38,22 +36,22 @@ const UpdateCardModalComponent: React.FC<UpdateCardModalProps> = ({ isOpen, togg
    */
   const renderStripeModal = (): ReactElement => {
     return <StripeCardUpdateModal isOpen={isOpen}
-                                  toggleModal={toggleModal}
-                                  onSuccess={afterSuccess}
-                                  operator={operator}
-                                  schedule={schedule} />
-  }
+      toggleModal={toggleModal}
+      onSuccess={afterSuccess}
+      operator={operator}
+      schedule={schedule} />;
+  };
 
   /**
    * Render the PayZen update-card modal
    */ // 1
   const renderPayZenModal = (): ReactElement => {
     return <PayzenCardUpdateModal isOpen={isOpen}
-                                  toggleModal={toggleModal}
-                                  onSuccess={afterSuccess}
-                                  operator={operator}
-                                  schedule={schedule} />
-  }
+      toggleModal={toggleModal}
+      onSuccess={afterSuccess}
+      operator={operator}
+      schedule={schedule} />;
+  };
 
   /**
    * Determine which gateway is in use with the current schedule and return the appropriate modal
@@ -71,8 +69,7 @@ const UpdateCardModalComponent: React.FC<UpdateCardModalProps> = ({ isOpen, togg
       console.error(`[UpdateCardModal] unexpected gateway: ${schedule.gateway_subscription?.classname}`);
       return <div />;
   }
-}
-
+};
 
 export const UpdateCardModal: React.FC<UpdateCardModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, operator, schedule }) => {
   return (
@@ -80,4 +77,4 @@ export const UpdateCardModal: React.FC<UpdateCardModalProps> = ({ isOpen, toggle
       <UpdateCardModalComponent isOpen={isOpen} toggleModal={toggleModal} afterSuccess={afterSuccess} onError={onError} operator={operator} schedule={schedule} />
     </Loader>
   );
-}
+};

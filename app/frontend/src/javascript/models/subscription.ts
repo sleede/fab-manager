@@ -1,5 +1,4 @@
 import { Plan } from './plan';
-import { PaymentMethod } from './payment';
 
 export interface Subscription {
   id: number,

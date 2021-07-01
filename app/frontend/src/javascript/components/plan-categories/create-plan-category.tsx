@@ -8,7 +8,6 @@ import { LabelledInput } from '../base/labelled-input';
 import { Loader } from '../base/loader';
 import { FabAlert } from '../base/fab-alert';
 
-
 interface CreatePlanCategoryProps {
   onSuccess: (message: string) => void,
   onError: (message: string) => void,
@@ -51,7 +50,7 @@ const CreatePlanCategoryComponent: React.FC<CreatePlanCategoryProps> = ({ onSucc
    * We update the name of the temporary-set plan-category, accordingly.
    */
   const onCategoryNameChange = (event: BaseSyntheticEvent) => {
-    setCategory({...category, name: event.target.value });
+    setCategory({ ...category, name: event.target.value });
   };
 
   /**
@@ -59,7 +58,7 @@ const CreatePlanCategoryComponent: React.FC<CreatePlanCategoryProps> = ({ onSucc
    * We update the weight of the temporary-set plan-category, accordingly.
    */
   const onCategoryWeightChange = (event: BaseSyntheticEvent) => {
-    setCategory({...category, weight: event.target.value });
+    setCategory({ ...category, weight: event.target.value });
   };
 
   /**
@@ -74,44 +73,44 @@ const CreatePlanCategoryComponent: React.FC<CreatePlanCategoryProps> = ({ onSucc
    */
   const resetCategory = () => {
     setCategory(null);
-  }
+  };
 
   return (
     <div className="create-plan-category">
       <FabButton type='button'
-                 icon={<i className='fa fa-plus' />}
-                 className="add-category"
-                 onClick={toggleModal}>
+        icon={<i className='fa fa-plus' />}
+        className="add-category"
+        onClick={toggleModal}>
         {t('app.admin.create_plan_category.new_category')}
       </FabButton>
       <FabModal title={t('app.admin.create_plan_category.new_category')}
-                className="create-plan-category-modal"
-                isOpen={isOpen}
-                toggleModal={toggleModal}
-                closeButton={true}
-                confirmButton={t('app.admin.create_plan_category.confirm_create')}
-                onConfirm={onCreateConfirmed}
-                onCreation={initCategoryCreation}>
+        className="create-plan-category-modal"
+        isOpen={isOpen}
+        toggleModal={toggleModal}
+        closeButton={true}
+        confirmButton={t('app.admin.create_plan_category.confirm_create')}
+        onConfirm={onCreateConfirmed}
+        onCreation={initCategoryCreation}>
         {category && <div>
           <label htmlFor="name">{t('app.admin.create_plan_category.name')}</label>
           <LabelledInput id="name"
-                         label={<i className="fa fa-tag" />}
-                         type="text"
-                         value={category.name}
-                         onChange={onCategoryNameChange} />
+            label={<i className="fa fa-tag" />}
+            type="text"
+            value={category.name}
+            onChange={onCategoryNameChange} />
           <label htmlFor="weight">{t('app.admin.create_plan_category.significance')}</label>
           <LabelledInput id="weight"
-                         type="number"
-                         label={<i className="fa fa-sort-numeric-desc" />}
-                         value={category.weight}
-                         onChange={onCategoryWeightChange} />
+            type="number"
+            label={<i className="fa fa-sort-numeric-desc" />}
+            value={category.weight}
+            onChange={onCategoryWeightChange} />
         </div>}
         <FabAlert level="info" className="significance-info">
           {t('app.admin.create_plan_category.significance_info')}
         </FabAlert>
       </FabModal>
     </div>
-  )
+  );
 };
 
 export const CreatePlanCategory: React.FC<CreatePlanCategoryProps> = ({ onSuccess, onError }) => {
@@ -120,4 +119,4 @@ export const CreatePlanCategory: React.FC<CreatePlanCategoryProps> = ({ onSucces
       <CreatePlanCategoryComponent onSuccess={onSuccess} onError={onError} />
     </Loader>
   );
-}
+};

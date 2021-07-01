@@ -8,7 +8,7 @@ import { MachineCard } from './machine-card';
 import { MachinesFilters } from './machines-filters';
 import { User } from '../../models/user';
 
-declare var Application: IApplication;
+declare const Application: IApplication;
 
 interface MachinesListProps {
   user?: User,
@@ -39,7 +39,7 @@ const MachinesList: React.FC<MachinesListProps> = ({ onError, onSuccess, onShowM
   // filter the machines shown when the full list was retrieved
   useEffect(() => {
     handleFilterByStatus(true);
-  }, [allMachines])
+  }, [allMachines]);
 
   /**
    * Callback triggered when the user changes the status filter.
@@ -53,7 +53,7 @@ const MachinesList: React.FC<MachinesListProps> = ({ onError, onSuccess, onShowM
     // enabled machines may have the m.disabled property null (for never disabled machines)
     // or false (for re-enabled machines)
     setMachines(allMachines.filter(m => !!m.disabled === !status));
-  }
+  };
 
   return (
     <div className="machines-list">
@@ -61,20 +61,19 @@ const MachinesList: React.FC<MachinesListProps> = ({ onError, onSuccess, onShowM
       <div className="all-machines">
         {machines && machines.map(machine => {
           return <MachineCard key={machine.id}
-                              user={user}
-                              machine={machine}
-                              onShowMachine={onShowMachine}
-                              onReserveMachine={onReserveMachine}
-                              onError={onError}
-                              onSuccess={onSuccess}
-                              onLoginRequested={onLoginRequested}
-                              onEnrollRequested={onEnrollRequested} />
+            user={user}
+            machine={machine}
+            onShowMachine={onShowMachine}
+            onReserveMachine={onReserveMachine}
+            onError={onError}
+            onSuccess={onSuccess}
+            onLoginRequested={onLoginRequested}
+            onEnrollRequested={onEnrollRequested} />;
         })}
       </div>
     </div>
   );
-}
-
+};
 
 const MachinesListWrapper: React.FC<MachinesListProps> = ({ user, onError, onSuccess, onShowMachine, onReserveMachine, onLoginRequested, onEnrollRequested }) => {
   return (
@@ -82,6 +81,6 @@ const MachinesListWrapper: React.FC<MachinesListProps> = ({ user, onError, onSuc
       <MachinesList user={user} onError={onError} onSuccess={onSuccess} onShowMachine={onShowMachine} onReserveMachine={onReserveMachine} onLoginRequested={onLoginRequested} onEnrollRequested={onEnrollRequested} />
     </Loader>
   );
-}
+};
 
 Application.Components.component('machinesList', react2angular(MachinesListWrapper, ['user', 'onError', 'onSuccess', 'onShowMachine', 'onReserveMachine', 'onLoginRequested', 'onEnrollRequested']));

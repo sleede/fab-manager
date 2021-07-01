@@ -25,7 +25,7 @@ export const StripeConfirm: React.FC<StripeConfirmProps> = ({ clientSecret, onRe
    * When the component is mounted, run the 3DS confirmation.
    */
   useEffect(() => {
-    stripe.confirmCardPayment(clientSecret).then(function(result) {
+    stripe.confirmCardPayment(clientSecret).then(function (result) {
       onResponse();
       if (result.error) {
         // Display error.message in your UI.
@@ -42,4 +42,4 @@ export const StripeConfirm: React.FC<StripeConfirmProps> = ({ clientSecret, onRe
   return <div className="stripe-confirm">
     <div className={`message--${type}`}><span className="message-text">{message}</span></div>
   </div>;
-}
+};

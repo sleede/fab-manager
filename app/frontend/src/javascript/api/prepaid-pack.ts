@@ -28,11 +28,9 @@ export default class PrepaidPackAPI {
     return res?.data;
   }
 
-  private static filtersToQuery(filters?: PackIndexFilter): string {
+  private static filtersToQuery (filters?: PackIndexFilter): string {
     if (!filters) return '';
 
     return '?' + Object.entries(filters).map(f => `${f[0]}=${f[1]}`).join('&');
   }
-
 }
-

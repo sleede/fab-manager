@@ -27,14 +27,14 @@ export const RequiredTrainingModal: React.FC<RequiredTrainingModalProps> = ({ is
     if (!machine) return '';
 
     return machine.trainings.map(t => t.name).join(t('app.logged.required_training_modal.training_or_training_html'));
-  }
+  };
 
   /**
    * Callback triggered when the user has clicked on the "enroll" button
    */
   const handleEnroll = (): void => {
     onEnrollRequested(machine.trainings[0].id);
-  }
+  };
 
   /**
    * Custom header of the dialog: we display the username and avatar
@@ -46,7 +46,7 @@ export const RequiredTrainingModal: React.FC<RequiredTrainingModalProps> = ({ is
         <span className="user-name">{user?.name}</span>
       </div>
     );
-  }
+  };
 
   /**
    * Custom footer of the dialog: we display a user-friendly message to close the dialog
@@ -58,24 +58,24 @@ export const RequiredTrainingModal: React.FC<RequiredTrainingModalProps> = ({ is
         <a onClick={toggleModal}>{t('app.logged.required_training_modal.close')}</a>
       </div>
     );
-  }
+  };
 
   return (
     <FabModal isOpen={isOpen}
-              toggleModal={toggleModal}
-              className="required-training-modal"
-              closeButton={false}
-              customHeader={header()}
-              customFooter={footer()}>
+      toggleModal={toggleModal}
+      className="required-training-modal"
+      closeButton={false}
+      customHeader={header()}
+      customFooter={footer()}>
       <div className="training-info">
         <p>
           <HtmlTranslate trKey={'app.logged.required_training_modal.to_book_MACHINE_requires_TRAINING_html'}
-                         options={{ MACHINE: machine?.name, TRAINING: formatTrainings() }} />
+            options={{ MACHINE: machine?.name, TRAINING: formatTrainings() }} />
         </p>
         <div className="enroll-container">
           <FabButton onClick={handleEnroll}>{t('app.logged.required_training_modal.enroll_now')}</FabButton>
         </div>
       </div>
     </FabModal>
-  )
-}
+  );
+};

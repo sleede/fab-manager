@@ -4,7 +4,7 @@ import HttpApi from 'i18next-http-backend';
 import { initReactI18next } from 'react-i18next';
 import { IFablab } from '../models/fablab';
 
-declare var Fablab: IFablab;
+declare let Fablab: IFablab;
 
 i18n
   .use(ICU)

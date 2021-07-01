@@ -18,14 +18,14 @@ export const FabButton: React.FC<FabButtonProps> = ({ onClick, icon, className, 
    */
   const hasIcon = (): boolean => {
     return !!icon;
-  }
+  };
 
   /**
    * Check if the current button has children properties (like some text)
    */
   const hasChildren = (): boolean => {
     return !!children;
-  }
+  };
 
   /**
    * Handle the action of the button
@@ -34,15 +34,14 @@ export const FabButton: React.FC<FabButtonProps> = ({ onClick, icon, className, 
     if (typeof onClick === 'function') {
       onClick(e);
     }
-  }
+  };
 
   return (
-    <button type={type} form={form} onClick={handleClick} disabled={disabled} className={`fab-button ${className ? className : ''}`}>
+    <button type={type} form={form} onClick={handleClick} disabled={disabled} className={`fab-button ${className || ''}`}>
       {hasIcon() && <span className={hasChildren() ? 'fab-button--icon' : 'fab-button--icon-only'}>{icon}</span>}
       {children}
     </button>
   );
-}
+};
 
 FabButton.defaultProps = { type: 'button' };
-

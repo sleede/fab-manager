@@ -1,10 +1,12 @@
 {
+  "root": true,
   "extends": [
     "standard",
     "plugin:react/recommended"
   ],
   "rules": {
-    "semi": ["error", "always"]
+    "semi": ["error", "always"],
+    "no-use-before-define": "off"
   },
   "globals": {
     "Application": true,
@@ -13,6 +15,39 @@
     "moment": true,
     "_": true
   },
-  "plugins": ["lint-erb"]
+  "plugins": ["lint-erb"],
+  "overrides": [
+    {
+      "files": ["**/*.ts", "**/*.tsx"],
+      "env": { "browser": true, "es6": true },
+      "extends": [
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
+      ],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "ecmaFeatures": { "jsx": true },
+        "ecmaVersion": 2018,
+        "sourceType": "module",
+        "project": "./tsconfig.json"
+      },
+      "settings": {
+        "react": {
+          "version": "detect"
+        }
+      },
+      "plugins": ["@typescript-eslint", "react"],
+      "rules": {
+        "react/prop-types": "off"
+      }
+    },
+    {
+      "files": ["app/frontend/src/javascript/models/**/*.ts"],
+      "rules": {
+        "camelcase": "off"
+      }
+    }
+  ]
 }
 

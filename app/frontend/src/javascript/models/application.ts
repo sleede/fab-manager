@@ -1,4 +1,4 @@
-import { IModule } from "angular";
+import { IModule } from 'angular';
 
 export interface IApplication {
     Components: IModule,

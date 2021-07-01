@@ -38,7 +38,7 @@ Application.Directives.directive('textSetting', ['Setting', 'growl', '_t',
          * @param setting {{value:*, name:string}} note that the value will be stringified
          */
         $scope.save = function (setting) {
-          let { value } = setting;
+          const { value } = setting;
 
           Setting.update(
             { name: setting.name },

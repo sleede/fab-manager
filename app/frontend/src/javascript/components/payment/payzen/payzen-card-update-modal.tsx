@@ -25,7 +25,7 @@ export const PayzenCardUpdateModal: React.FC<PayzenCardUpdateModalProps> = ({ is
   const [errors, setErrors] = useState<string>(null);
 
   // the unique identifier of the html form
-  const formId = "payzen-card";
+  const formId = 'payzen-card';
 
   /**
    * Return the logos, shown in the modal footer.
@@ -38,15 +38,14 @@ export const PayzenCardUpdateModal: React.FC<PayzenCardUpdateModalProps> = ({ is
         <img src={visaLogo} alt="visa" />
       </div>
     );
-  }
-
+  };
 
   /**
    * When the user clicks the submit button, we disable it to prevent double form submission
    */
   const handleCardUpdateSubmit = (): void => {
     setCanSubmitUpdateCard(false);
-  }
+  };
 
   /**
    * When the card was not updated, show the error
@@ -54,24 +53,24 @@ export const PayzenCardUpdateModal: React.FC<PayzenCardUpdateModalProps> = ({ is
   const handleCardUpdateError = (error): void => {
     setErrors(error);
     setCanSubmitUpdateCard(true);
-  }
+  };
 
   return (
     <FabModal title={t('app.shared.payzen_card_update_modal.update_card')}
-              isOpen={isOpen}
-              toggleModal={toggleModal}
-              closeButton={false}
-              customFooter={logoFooter()}
-              className="payzen-update-card-modal">
+      isOpen={isOpen}
+      toggleModal={toggleModal}
+      closeButton={false}
+      customFooter={logoFooter()}
+      className="payzen-update-card-modal">
       {schedule && <PayzenForm onSubmit={handleCardUpdateSubmit}
-                               onSuccess={onSuccess}
-                               onError={handleCardUpdateError}
-                               className="card-form"
-                               paymentSchedule={schedule}
-                               operator={operator}
-                               customer={schedule.user as User}
-                               updateCard={true}
-                               formId={formId} >
+        onSuccess={onSuccess}
+        onError={handleCardUpdateError}
+        className="card-form"
+        paymentSchedule={schedule}
+        operator={operator}
+        customer={schedule.user as User}
+        updateCard={true}
+        formId={formId} >
         {errors && <div className="payzen-errors">
           {errors}
         </div>}
@@ -86,4 +85,4 @@ export const PayzenCardUpdateModal: React.FC<PayzenCardUpdateModalProps> = ({ is
       </div>
     </FabModal>
   );
-}
+};

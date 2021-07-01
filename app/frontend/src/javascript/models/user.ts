@@ -1,6 +1,5 @@
 import { Plan } from './plan';
 
-
 export enum UserRole {
   Member = 'member',
   Manager = 'manager',

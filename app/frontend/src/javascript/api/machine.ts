@@ -13,10 +13,9 @@ export default class MachineAPI {
     return res?.data;
   }
 
-  private static filtersToQuery(filters?: MachineIndexFilter): string {
+  private static filtersToQuery (filters?: MachineIndexFilter): string {
     if (!filters) return '';
 
     return '?' + Object.entries(filters).map(f => `${f[0]}=${f[1]}`).join('&');
   }
 }
-

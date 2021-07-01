@@ -22,7 +22,7 @@ Application.Services.factory('dialogs', ['$uibModal', function ($uibModal) {
       };
       if (angular.isObject(options)) { angular.extend(defaultOpts, options); }
       return $uibModal.open(defaultOpts)
-        .result['finally'](null).then(function (info) {
+        .result.finally(null).then(function (info) {
           if (angular.isFunction(success)) {
             return success(info);
           }

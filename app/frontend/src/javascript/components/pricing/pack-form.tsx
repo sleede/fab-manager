@@ -7,7 +7,7 @@ import { useImmer } from 'use-immer';
 import { FabInput } from '../base/fab-input';
 import { IFablab } from '../../models/fablab';
 
-declare var Fablab: IFablab;
+declare let Fablab: IFablab;
 
 interface PackFormProps {
   formId: string,
@@ -38,7 +38,7 @@ export const PackForm: React.FC<PackFormProps> = ({ formId, onSubmit, pack }) =>
    */
   const buildOptions = (): Array<selectOption> => {
     return ALL_INTERVALS.map(i => intervalToOption(i));
-  }
+  };
 
   /**
    * Convert the given validity-interval to the react-select format
@@ -47,7 +47,7 @@ export const PackForm: React.FC<PackFormProps> = ({ formId, onSubmit, pack }) =>
     if (!value) return { value, label: '' };
 
     return { value, label: t(`app.admin.pack_form.intervals.${value}`, { COUNT: packData.validity_count || 0 }) };
-  }
+  };
 
   /**
    * Callback triggered when the user sends the form.
@@ -55,7 +55,7 @@ export const PackForm: React.FC<PackFormProps> = ({ formId, onSubmit, pack }) =>
   const handleSubmit = (event: BaseSyntheticEvent): void => {
     event.preventDefault();
     onSubmit(packData);
-  }
+  };
 
   /**
    * Callback triggered when the user inputs an amount for the current pack.
@@ -64,7 +64,7 @@ export const PackForm: React.FC<PackFormProps> = ({ formId, onSubmit, pack }) =>
     updatePackData(draft => {
       draft.amount = parseFloat(amount);
     });
-  }
+  };
 
   /**
    * Callback triggered when the user inputs a number of hours for the current pack.
@@ -73,7 +73,7 @@ export const PackForm: React.FC<PackFormProps> = ({ formId, onSubmit, pack }) =>
     updatePackData(draft => {
       draft.minutes = parseInt(hours, 10) * 60;
     });
-  }
+  };
 
   /**
    * Callback triggered when the user inputs a number of periods for the current pack.
@@ -82,7 +82,7 @@ export const PackForm: React.FC<PackFormProps> = ({ formId, onSubmit, pack }) =>
     updatePackData(draft => {
       draft.validity_count = parseInt(count, 10);
     });
-  }
+  };
 
   /**
    * Callback triggered when the user selects a type of interval for the current pack.
@@ -91,7 +91,7 @@ export const PackForm: React.FC<PackFormProps> = ({ formId, onSubmit, pack }) =>
     updatePackData(draft => {
       draft.validity_interval = option.value as interval;
     });
-  }
+  };
 
   /**
    * Callback triggered when the user disables the pack.
@@ -99,42 +99,42 @@ export const PackForm: React.FC<PackFormProps> = ({ formId, onSubmit, pack }) =>
   const handleUpdateDisabled = (checked: boolean) => {
     updatePackData(draft => {
       draft.disabled = checked;
-    })
-  }
+    });
+  };
 
   return (
     <form id={formId} onSubmit={handleSubmit} className="pack-form">
       <label htmlFor="hours">{t('app.admin.pack_form.hours')} *</label>
       <FabInput id="hours"
-                type="number"
-                defaultValue={packData?.minutes / 60 || ''}
-                onChange={handleUpdateHours}
-                min={1}
-                icon={<i className="fas fa-clock" />}
-                required />
+        type="number"
+        defaultValue={packData?.minutes / 60 || ''}
+        onChange={handleUpdateHours}
+        min={1}
+        icon={<i className="fas fa-clock" />}
+        required />
       <label htmlFor="amount">{t('app.admin.pack_form.amount')} *</label>
       <FabInput id="amount"
-                type="number"
-                step={0.01}
-                min={0}
-                defaultValue={packData?.amount || ''}
-                onChange={handleUpdateAmount}
-                icon={<i className="fas fa-money-bill" />}
-                addOn={Fablab.intl_currency}
-                required />
+        type="number"
+        step={0.01}
+        min={0}
+        defaultValue={packData?.amount || ''}
+        onChange={handleUpdateAmount}
+        icon={<i className="fas fa-money-bill" />}
+        addOn={Fablab.intl_currency}
+        required />
       <label htmlFor="validity_count">{t('app.admin.pack_form.validity_count')}</label>
       <div className="interval-inputs">
         <FabInput id="validity_count"
-                  type="number"
-                  min={0}
-                  defaultValue={packData?.validity_count || ''}
-                  onChange={handleUpdateValidityCount}
-                  icon={<i className="fas fa-calendar-week" />} />
+          type="number"
+          min={0}
+          defaultValue={packData?.validity_count || ''}
+          onChange={handleUpdateValidityCount}
+          icon={<i className="fas fa-calendar-week" />} />
         <Select placeholder={t('app.admin.pack_form.select_interval')}
-                className="select-interval"
-                defaultValue={intervalToOption(packData?.validity_interval)}
-                onChange={handleUpdateValidityInterval}
-                options={buildOptions()} />
+          className="select-interval"
+          defaultValue={intervalToOption(packData?.validity_interval)}
+          onChange={handleUpdateValidityInterval}
+          options={buildOptions()} />
       </div>
       <label htmlFor="disabled">{t('app.admin.pack_form.disabled')}</label>
       <div>
@@ -142,4 +142,4 @@ export const PackForm: React.FC<PackFormProps> = ({ formId, onSubmit, pack }) =>
       </div>
     </form>
   );
-}
+};

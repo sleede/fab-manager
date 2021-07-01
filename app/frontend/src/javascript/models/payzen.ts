@@ -7,7 +7,7 @@ export interface CreateTokenResponse {
   orderId: string
 }
 
-export interface CreatePaymentResponse extends CreateTokenResponse {}
+export type CreatePaymentResponse = CreateTokenResponse
 
 export interface CheckHashResponse {
   validity: boolean
@@ -88,10 +88,10 @@ export interface PaymentTransaction {
   detailedErrorCode? : string,
   detailedErrorMessage?: string,
   detailedStatus?: 'ACCEPTED' | 'AUTHORISED' | 'AUTHORISED_TO_VALIDATE' | 'CANCELLED' | 'CAPTURED' | 'EXPIRED' | 'PARTIALLY_AUTHORISED' | 'REFUSED' | 'UNDER_VERIFICATION' | 'WAITING_AUTHORISATION' | 'WAITING_AUTHORISATION_TO_VALIDATE' | 'ERROR',
-  effectiveStrongAuthentication?: 'ENABLED' | 'DISABLED' ,
+  effectiveStrongAuthentication?: 'ENABLED' | 'DISABLED',
   errorCode?: string,
   errorMessage?: string,
-  metadata?: any,
+  metadata?: unknown,
   operationType?: 'DEBIT' | 'CREDIT' | 'VERIFICATION',
   orderDetails?: OrderDetails,
   paymentMethodToken?: string,
@@ -106,13 +106,13 @@ export interface PaymentTransaction {
     mid?: string,
     parentTransactionUuid?: string,
     sequenceNumber?: string,
-    cardDetails?: any,
-    fraudManagement?: any,
+    cardDetails?: unknown,
+    fraudManagement?: unknown,
     taxAmount?: number,
     taxRate?: number,
     preTaxAmount?: number,
     externalTransactionId?: number,
-    dcc?: any,
+    dcc?: unknown,
     nsu?: string,
     tid?: string,
     acquirerNetwork?: string,
@@ -149,7 +149,7 @@ export interface KryptonError {
   detailedErrorMessage: string,
   errorCode: string,
   errorMessage: string,
-  field: any,
+  field: unknown,
   formId: string,
   metadata: {
     answer: ProcessPaymentAnswer,
@@ -179,12 +179,12 @@ export interface KryptonConfig {
 }
 
 type DefaultCallback = () => void
-type BrandChangedCallback = (event: {KR: KryptonClient, cardInfo: {brand: string}}) => void
+type BrandChangedCallback = (event: { KR: KryptonClient, cardInfo: { brand: string } }) => void
 type ErrorCallback = (event: KryptonError) => void
 type FocusCallback = (event: KryptonFocus) => void
-type InstallmentChangedCallback = (event: {KR: KryptonClient, installmentInfo: {brand: string, hasInterests: boolean, installmentCount: number, totalAmount: number}}) => void
+type InstallmentChangedCallback = (event: { KR: KryptonClient, installmentInfo: { brand: string, hasInterests: boolean, installmentCount: number, totalAmount: number } }) => void
 type SubmitCallback = (event: ProcessPaymentAnswer) => boolean
-type ClickCallback = (event: any) => boolean
+type ClickCallback = (event: unknown) => boolean
 
 export interface KryptonClient {
   addForm: (selector: string) => Promise<{KR: KryptonClient, result: {formId: string}}>,

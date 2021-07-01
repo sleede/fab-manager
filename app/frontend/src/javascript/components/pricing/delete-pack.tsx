@@ -6,7 +6,6 @@ import { Loader } from '../base/loader';
 import { PrepaidPack } from '../../models/prepaid-pack';
 import PrepaidPackAPI from '../../api/prepaid-pack';
 
-
 interface DeletePackProps {
   onSuccess: (message: string) => void,
   onError: (message: string) => void,
@@ -46,17 +45,16 @@ const DeletePackComponent: React.FC<DeletePackProps> = ({ onSuccess, onError, pa
     <div className="delete-pack">
       <FabButton type='button' className="remove-pack-button" icon={<i className="fa fa-trash" />} onClick={toggleDeletionModal} />
       <FabModal title={t('app.admin.delete_pack.delete_pack')}
-                isOpen={deletionModal}
-                toggleModal={toggleDeletionModal}
-                closeButton={true}
-                confirmButton={t('app.admin.delete_pack.confirm_delete')}
-                onConfirm={onDeleteConfirmed}>
+        isOpen={deletionModal}
+        toggleModal={toggleDeletionModal}
+        closeButton={true}
+        confirmButton={t('app.admin.delete_pack.confirm_delete')}
+        onConfirm={onDeleteConfirmed}>
         <span>{t('app.admin.delete_pack.delete_confirmation')}</span>
       </FabModal>
     </div>
-  )
+  );
 };
-
 
 export const DeletePack: React.FC<DeletePackProps> = ({ onSuccess, onError, pack }) => {
   return (
@@ -64,4 +62,4 @@ export const DeletePack: React.FC<DeletePackProps> = ({ onSuccess, onError, pack
       <DeletePackComponent onSuccess={onSuccess} onError={onError} pack={pack} />
     </Loader>
   );
-}
+};

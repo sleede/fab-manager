@@ -8,7 +8,7 @@ import { PaymentSchedule } from '../../models/payment-schedule';
 import { IApplication } from '../../models/application';
 import FormatLib from '../../lib/format';
 
-declare var Application: IApplication;
+declare const Application: IApplication;
 
 interface PaymentScheduleSummaryProps {
   schedule: PaymentSchedule
@@ -29,13 +29,13 @@ const PaymentScheduleSummary: React.FC<PaymentScheduleSummaryProps> = ({ schedul
   const hasEqualDeadlines = (): boolean => {
     const prices = schedule.items.map(i => i.amount);
     return prices.every(p => p === prices[0]);
-  }
+  };
   /**
    * Open or closes the modal dialog showing the full payment schedule
    */
   const toggleFullScheduleModal = (): void => {
     setModal(!modal);
-  }
+  };
 
   return (
     <div className="payment-schedule-summary">
@@ -64,25 +64,25 @@ const PaymentScheduleSummary: React.FC<PaymentScheduleSummaryProps> = ({ schedul
         <button className="view-full-schedule" onClick={toggleFullScheduleModal}>{t('app.shared.cart.view_full_schedule')}</button>
         <FabModal title={t('app.shared.cart.your_payment_schedule')} isOpen={modal} toggleModal={toggleFullScheduleModal}>
           <ul className="full-schedule">
-          {schedule.items.map(item => (
-            <li key={String(item.due_date)}>
-              <span className="schedule-item-date">{FormatLib.date(item.due_date)}</span>
-              <span> </span>
-              <span className="schedule-item-price">{FormatLib.price(item.amount)}</span>
-            </li>
-          ))}
+            {schedule.items.map(item => (
+              <li key={String(item.due_date)}>
+                <span className="schedule-item-date">{FormatLib.date(item.due_date)}</span>
+                <span> </span>
+                <span className="schedule-item-price">{FormatLib.price(item.amount)}</span>
+              </li>
+            ))}
           </ul>
         </FabModal>
       </div>
     </div>
   );
-}
+};
 const PaymentScheduleSummaryWrapper: React.FC<PaymentScheduleSummaryProps> = ({ schedule }) => {
   return (
     <Loader>
       <PaymentScheduleSummary schedule={schedule} />
     </Loader>
   );
-}
+};
 
 Application.Components.component('paymentScheduleSummary', react2angular(PaymentScheduleSummaryWrapper, ['schedule']));

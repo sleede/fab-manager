@@ -17,8 +17,8 @@
 
 // list of supported authentication methods
 const METHODS = {
-  'DatabaseProvider': 'local_database',
-  'OAuth2Provider': 'o_auth2'
+  DatabaseProvider: 'local_database',
+  OAuth2Provider: 'o_auth2'
 };
 
 /**
@@ -38,7 +38,7 @@ const findIdxById = function (elements, id) {
  * @returns {Boolean} true if the mapping is declared
  */
 const check_oauth2_id_is_mapped = function (mappings) {
-  for (let mapping of Array.from(mappings)) {
+  for (const mapping of Array.from(mappings)) {
     if ((mapping.local_model === 'user') && (mapping.local_field === 'uid') && !mapping._destroy) {
       return true;
     }
@@ -78,9 +78,9 @@ class AuthenticationController {
     /**
      * Return a localized string for the provided method
      */
-    $scope.methodName = function(method) {
+    $scope.methodName = function (method) {
       return _t('app.shared.authentication.' + METHODS[method]);
-    }
+    };
 
     /**
      * Open a modal allowing to specify the data mapping for the given field
@@ -92,7 +92,7 @@ class AuthenticationController {
         resolve: {
           field () { return mapping; },
           datatype () {
-            for (let field of Array.from($scope.mappingFields[mapping.local_model])) {
+            for (const field of Array.from($scope.mappingFields[mapping.local_model])) {
               if (field[0] === mapping.local_field) {
                 return field[1];
               }
@@ -149,7 +149,7 @@ class AuthenticationController {
           $scope.cancel = function () { $uibModalInstance.dismiss(); };
         }]
       })
-      .result['finally'](null).then(function (transfo_rules) { mapping.transformation = transfo_rules; });
+        .result.finally(null).then(function (transfo_rules) { mapping.transformation = transfo_rules; });
     };
   }
 }
@@ -247,7 +247,7 @@ Application.Controllers.controller('NewAuthenticationController', ['$scope', '$s
     // === OAuth2Provider ===
       if ($scope.provider.providable_type === 'OAuth2Provider') {
         if (typeof $scope.provider.providable_attributes.o_auth2_mappings_attributes === 'undefined') {
-          return $scope.provider.providable_attributes['o_auth2_mappings_attributes'] = [];
+          return $scope.provider.providable_attributes.o_auth2_mappings_attributes = [];
         }
       }
     };

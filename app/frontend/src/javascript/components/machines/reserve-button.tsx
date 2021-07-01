@@ -10,7 +10,7 @@ import { Machine } from '../../models/machine';
 import { User } from '../../models/user';
 import { IApplication } from '../../models/application';
 
-declare var Application: IApplication;
+declare const Application: IApplication;
 
 interface ReserveButtonProps {
   currentUser?: User,
@@ -86,7 +86,7 @@ const ReserveButtonComponent: React.FC<ReserveButtonProps> = ({ currentUser, mac
    */
   const toggleProposePacksModal = (): void => {
     setProposePacks(!proposePacks);
-  }
+  };
 
   /**
    * Callback triggered when the user has successfully bought a pre-paid pack.
@@ -95,7 +95,7 @@ const ReserveButtonComponent: React.FC<ReserveButtonProps> = ({ currentUser, mac
   const handlePackBought = (message: string, machine: Machine): void => {
     onSuccess(message);
     onReserveMachine(machine);
-  }
+  };
 
   /**
    * Check that the current user has passed the required training before allowing him to book
@@ -143,35 +143,35 @@ const ReserveButtonComponent: React.FC<ReserveButtonProps> = ({ currentUser, mac
 
     // otherwise, we show a dialog modal to propose the customer to buy an available pack
     setProposePacks(true);
-  }
+  };
 
   return (
     <span>
-      <button onClick={handleClick} className={className ? className : ''}>
+      <button onClick={handleClick} className={className || ''}>
         {children && children}
         {!children && <span>{t('app.shared.reserve_button.book_this_machine')}</span>}
       </button>
       <PendingTrainingModal isOpen={pendingTraining}
-                            toggleModal={togglePendingTrainingModal}
-                            nextReservation={machine?.current_user_next_training_reservation?.slots_attributes[0]?.start_at}  />
+        toggleModal={togglePendingTrainingModal}
+        nextReservation={machine?.current_user_next_training_reservation?.slots_attributes[0]?.start_at} />
       <RequiredTrainingModal isOpen={trainingRequired}
-                             toggleModal={toggleRequiredTrainingModal}
-                             user={user}
-                             machine={machine}
-                             onEnrollRequested={onEnrollRequested} />
+        toggleModal={toggleRequiredTrainingModal}
+        user={user}
+        machine={machine}
+        onEnrollRequested={onEnrollRequested} />
       {machine && currentUser && <ProposePacksModal isOpen={proposePacks}
-                                                    toggleModal={toggleProposePacksModal}
-                                                    item={machine}
-                                                    itemType="Machine"
-                                                    onError={onError}
-                                                    customer={currentUser}
-                                                    onDecline={onReserveMachine}
-                                                    operator={currentUser}
-                                                    onSuccess={handlePackBought} />}
+        toggleModal={toggleProposePacksModal}
+        item={machine}
+        itemType="Machine"
+        onError={onError}
+        customer={currentUser}
+        onDecline={onReserveMachine}
+        operator={currentUser}
+        onSuccess={handlePackBought} />}
     </span>
 
   );
-}
+};
 
 export const ReserveButton: React.FC<ReserveButtonProps> = ({ currentUser, machineId, onLoginRequested, onLoadingStart, onLoadingEnd, onError, onSuccess, onReserveMachine, onEnrollRequested, className, children }) => {
   return (
@@ -181,6 +181,6 @@ export const ReserveButton: React.FC<ReserveButtonProps> = ({ currentUser, machi
       </ReserveButtonComponent>
     </Loader>
   );
-}
+};
 
 Application.Components.component('reserveButton', react2angular(ReserveButton, ['currentUser', 'machineId', 'onLoadingStart', 'onLoadingEnd', 'onError', 'onSuccess', 'onReserveMachine', 'onLoginRequested', 'onEnrollRequested', 'className']));

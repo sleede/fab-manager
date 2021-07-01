@@ -10,7 +10,6 @@ import mastercardLogo from '../../../../../images/mastercard.png';
 import visaLogo from '../../../../../images/visa.png';
 import { PayzenForm } from './payzen-form';
 
-
 interface PayZenModalProps {
   isOpen: boolean,
   toggleModal: () => void,
@@ -40,39 +39,39 @@ export const PayZenModal: React.FC<PayZenModalProps> = ({ isOpen, toggleModal, a
         <img src={visaLogo} alt="visa" />
       </div>
     );
-  }
+  };
 
   /**
    * Integrates the PayzenForm into the parent PaymentModal
    */
-  const renderForm: FunctionComponent<GatewayFormProps> = ({ onSubmit, onSuccess, onError, operator, className, formId, cart, customer, paymentSchedule, children}) => {
+  const renderForm: FunctionComponent<GatewayFormProps> = ({ onSubmit, onSuccess, onError, operator, className, formId, cart, customer, paymentSchedule, children }) => {
     return (
       <PayzenForm onSubmit={onSubmit}
-                  onSuccess={onSuccess}
-                  onError={onError}
-                  customer={customer}
-                  operator={operator}
-                  formId={formId}
-                  cart={cart}
-                  className={className}
-                  paymentSchedule={paymentSchedule}>
+        onSuccess={onSuccess}
+        onError={onError}
+        customer={customer}
+        operator={operator}
+        formId={formId}
+        cart={cart}
+        className={className}
+        paymentSchedule={paymentSchedule}>
         {children}
       </PayzenForm>
     );
-  }
+  };
 
   return (
     <AbstractPaymentModal isOpen={isOpen}
-                          toggleModal={toggleModal}
-                          logoFooter={logoFooter()}
-                          formId="payzen-form"
-                          formClassName="payzen-form"
-                          className="payzen-modal"
-                          currentUser={currentUser}
-                          cart={cart}
-                          customer={customer}
-                          afterSuccess={afterSuccess}
-                          schedule={schedule}
-                          GatewayForm={renderForm} />
+      toggleModal={toggleModal}
+      logoFooter={logoFooter()}
+      formId="payzen-form"
+      formClassName="payzen-form"
+      className="payzen-modal"
+      currentUser={currentUser}
+      cart={cart}
+      customer={customer}
+      afterSuccess={afterSuccess}
+      schedule={schedule}
+      GatewayForm={renderForm} />
   );
-}
+};

@@ -8,4 +8,3 @@ export default class CustomAssetAPI {
     return res?.data?.custom_asset;
   }
 }
-

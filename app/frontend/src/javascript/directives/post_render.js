@@ -1,4 +1,4 @@
-Application.Directives.directive('postRender', [ '$timeout',
+Application.Directives.directive('postRender', ['$timeout',
   function ($timeout) {
     return ({
       restrict: 'A',

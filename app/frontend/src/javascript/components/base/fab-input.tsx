@@ -1,10 +1,12 @@
 import React, { BaseSyntheticEvent, ReactNode, useCallback, useEffect, useState } from 'react';
 import { debounce as _debounce } from 'lodash';
 
+type inputType = string|number|readonly string [];
+
 interface FabInputProps {
   id: string,
-  onChange?: (value: string, validity?: ValidityState) => void,
-  defaultValue: any,
+  onChange?: (value: inputType, validity?: ValidityState) => void,
+  defaultValue: inputType,
   icon?: ReactNode,
   addOn?: ReactNode,
   addOnClassName?: string,
@@ -27,7 +29,7 @@ interface FabInputProps {
  * This component is a template for an input component that wraps the application style
  */
 export const FabInput: React.FC<FabInputProps> = ({ id, onChange, defaultValue, icon, className, disabled, type, required, debounce, addOn, addOnClassName, readOnly, maxLength, pattern, placeholder, error, step, min, max }) => {
-  const [inputValue, setInputValue] = useState<any>(defaultValue);
+  const [inputValue, setInputValue] = useState<inputType>(defaultValue);
 
   /**
    * When the component is mounted, initialize the default value for the input.
@@ -47,21 +49,21 @@ export const FabInput: React.FC<FabInputProps> = ({ id, onChange, defaultValue, 
    */
   const hasIcon = (): boolean => {
     return !!icon;
-  }
+  };
 
   /**
    * Check if the current component was provided an add-on element to display, at the end of the input
    */
   const hasAddOn = (): boolean => {
     return !!addOn;
-  }
+  };
 
   /**
    * Check if the current component was provided an error string to display, on the input
    */
   const hasError = (): boolean => {
     return !!error;
-  }
+  };
 
   /**
    * Debounced (ie. temporised) version of the 'on change' callback.
@@ -81,31 +83,31 @@ export const FabInput: React.FC<FabInputProps> = ({ id, onChange, defaultValue, 
         onChange(value, validity);
       }
     }
-  }
+  };
 
   return (
-    <div className={`fab-input ${className ? className : ''}`}>
+    <div className={`fab-input ${className || ''}`}>
       <div className={`input-wrapper ${hasError() ? 'input-error' : ''}`}>
         {hasIcon() && <span className="fab-input--icon">{icon}</span>}
         <input id={id}
-               type={type}
-               step={step}
-               min={min}
-               max={max}
-               className="fab-input--input"
-               value={inputValue}
-               onChange={handleChange}
-               disabled={disabled}
-               required={required}
-               readOnly={readOnly}
-               maxLength={maxLength}
-               pattern={pattern}
-               placeholder={placeholder} />
-        {hasAddOn() && <span className={`fab-input--addon ${addOnClassName ?  addOnClassName : ''}`}>{addOn}</span>}
+          type={type}
+          step={step}
+          min={min}
+          max={max}
+          className="fab-input--input"
+          value={inputValue}
+          onChange={handleChange}
+          disabled={disabled}
+          required={required}
+          readOnly={readOnly}
+          maxLength={maxLength}
+          pattern={pattern}
+          placeholder={placeholder} />
+        {hasAddOn() && <span className={`fab-input--addon ${addOnClassName || ''}`}>{addOn}</span>}
       </div>
       {hasError() && <span className="fab-input--error">{error}</span> }
     </div>
   );
-}
+};
 
 FabInput.defaultProps = { type: 'text', debounce: 0 };

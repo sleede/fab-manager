@@ -9,7 +9,7 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-Application.Directives.directive('coupon', [ '$rootScope', 'Coupon', '_t', function ($rootScope, Coupon, _t) {
+Application.Directives.directive('coupon', ['$rootScope', 'Coupon', '_t', function ($rootScope, Coupon, _t) {
   return ({
     restrict: 'E',
     scope: {

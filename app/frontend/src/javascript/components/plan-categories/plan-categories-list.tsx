@@ -9,7 +9,7 @@ import { CreatePlanCategory } from './create-plan-category';
 import { EditPlanCategory } from './edit-plan-category';
 import { DeletePlanCategory } from './delete-plan-category';
 
-declare var Application: IApplication;
+declare const Application: IApplication;
 
 interface PlanCategoriesListProps {
   onSuccess: (message: string) => void,
@@ -52,9 +52,9 @@ export const PlanCategoriesList: React.FC<PlanCategoriesListProps> = ({ onSucces
   return (
     <div className="plan-categories-list">
       <CreatePlanCategory onSuccess={handleSuccess}
-                          onError={onError} />
+        onError={onError} />
       <h3>{t('app.admin.plan_categories_list.categories_list')}</h3>
-      {categories && categories.length == 0 && <span>{t('app.admin.plan_categories_list.no_categories')}</span>}
+      {categories && categories.length === 0 && <span>{t('app.admin.plan_categories_list.no_categories')}</span>}
       {categories && categories.length > 0 && <table className="categories-table">
         <thead>
           <tr>
@@ -75,9 +75,8 @@ export const PlanCategoriesList: React.FC<PlanCategoriesListProps> = ({ onSucces
         </tbody>
       </table>}
     </div>
-  )
+  );
 };
-
 
 const PlanCategoriesListWrapper: React.FC<PlanCategoriesListProps> = ({ onSuccess, onError }) => {
   return (
@@ -85,6 +84,6 @@ const PlanCategoriesListWrapper: React.FC<PlanCategoriesListProps> = ({ onSucces
       <PlanCategoriesList onSuccess={onSuccess} onError={onError} />
     </Loader>
   );
-}
+};
 
 Application.Components.component('planCategoriesList', react2angular(PlanCategoriesListWrapper, ['onSuccess', 'onError']));

@@ -14,7 +14,6 @@ import UserLib from '../../lib/user';
 import { LocalPaymentModal } from '../payment/local-payment/local-payment-modal';
 import FormatLib from '../../lib/format';
 
-
 type PackableItem = Machine;
 
 interface ProposePacksModalProps {
@@ -50,20 +49,19 @@ export const ProposePacksModal: React.FC<ProposePacksModalProps> = ({ isOpen, to
       .catch(error => onError(error));
   }, [item]);
 
-
   /**
    * Open/closes the payment modal
    */
   const togglePaymentModal = (): void => {
     setPaymentModal(!paymentModal);
-  }
+  };
 
   /**
    * Open/closes the local payment modal (for admins and managers)
    */
   const toggleLocalPaymentModal = (): void => {
     setLocalPaymentModal(!localPaymentModal);
-  }
+  };
 
   /**
    * Convert the hourly-based price of the given prive, to a total price, based on the duration of the given pack
@@ -71,14 +69,14 @@ export const ProposePacksModal: React.FC<ProposePacksModalProps> = ({ isOpen, to
   const hourlyPriceToTotal = (price: Price, pack: PrepaidPack): number => {
     const hours = pack.minutes / 60;
     return price.amount * hours;
-  }
+  };
 
   /**
    * Return the number of hours, user-friendly formatted
    */
   const formatDuration = (minutes: number): string => {
     return t('app.logged.propose_packs_modal.pack_DURATION', { DURATION: minutes / 60 });
-  }
+  };
 
   /**
    * Return a user-friendly string for the validity of the provided pack
@@ -86,14 +84,14 @@ export const ProposePacksModal: React.FC<ProposePacksModalProps> = ({ isOpen, to
   const formatValidity = (pack: PrepaidPack): string => {
     const period = t(`app.logged.propose_packs_modal.period.${pack.validity_interval}`, { COUNT: pack.validity_count });
     return t('app.logged.propose_packs_modal.validity', { COUNT: pack.validity_count, PERIODS: period });
-  }
+  };
 
   /**
    * The user has declined to buy a pack
    */
   const handlePacksRefused = (): void => {
     onDecline(item);
-  }
+  };
 
   /**
    * The user has accepted to buy the provided pack, process with the payment
@@ -104,22 +102,22 @@ export const ProposePacksModal: React.FC<ProposePacksModalProps> = ({ isOpen, to
         customer_id: customer.id,
         payment_method: PaymentMethod.Card,
         items: [
-          { prepaid_pack: { id: pack.id }}
+          { prepaid_pack: { id: pack.id } }
         ]
       });
       if (new UserLib(operator).isPrivileged(customer)) {
         return toggleLocalPaymentModal();
       }
       togglePaymentModal();
-    }
-  }
+    };
+  };
 
   /**
    * Callback triggered when the user has bought the pack with a successful payment
    */
   const handlePackBought = (): void => {
     onSuccess(t('app.logged.propose_packs_modal.pack_bought_success'), item);
-  }
+  };
 
   /**
    * Render the given prepaid-pack
@@ -127,7 +125,7 @@ export const ProposePacksModal: React.FC<ProposePacksModalProps> = ({ isOpen, to
   const renderPack = (pack: PrepaidPack) => {
     if (!price) return;
 
-    const normalPrice = hourlyPriceToTotal(price, pack)
+    const normalPrice = hourlyPriceToTotal(price, pack);
     return (
       <div key={pack.id} className="pack">
         <span className="duration">{formatDuration(pack.minutes)}</span>
@@ -138,36 +136,36 @@ export const ProposePacksModal: React.FC<ProposePacksModalProps> = ({ isOpen, to
           {t('app.logged.propose_packs_modal.buy_this_pack')}
         </FabButton>
       </div>
-    )
-  }
+    );
+  };
 
   return (
     <FabModal isOpen={isOpen}
-              toggleModal={toggleModal}
-              width={ModalSize.large}
-              confirmButton={t('app.logged.propose_packs_modal.no_thanks')}
-              onConfirm={handlePacksRefused}
-              className="propose-packs-modal"
-              title={t('app.logged.propose_packs_modal.available_packs')}>
+      toggleModal={toggleModal}
+      width={ModalSize.large}
+      confirmButton={t('app.logged.propose_packs_modal.no_thanks')}
+      onConfirm={handlePacksRefused}
+      className="propose-packs-modal"
+      title={t('app.logged.propose_packs_modal.available_packs')}>
       <p>{t('app.logged.propose_packs_modal.packs_proposed')}</p>
       <div className="list-of-packs">
         {packs?.map(p => renderPack(p))}
       </div>
       {cart && <div>
         <PaymentModal isOpen={paymentModal}
-                             toggleModal={togglePaymentModal}
-                             afterSuccess={handlePackBought}
-                             onError={onError}
-                             cart={cart}
-                             currentUser={operator}
-                             customer={customer} />
+          toggleModal={togglePaymentModal}
+          afterSuccess={handlePackBought}
+          onError={onError}
+          cart={cart}
+          currentUser={operator}
+          customer={customer} />
         <LocalPaymentModal isOpen={localPaymentModal}
-                           toggleModal={toggleLocalPaymentModal}
-                           afterSuccess={handlePackBought}
-                           cart={cart}
-                           currentUser={operator}
-                           customer={customer} />
+          toggleModal={toggleLocalPaymentModal}
+          afterSuccess={handlePackBought}
+          cart={cart}
+          currentUser={operator}
+          customer={customer} />
       </div>}
     </FabModal>
   );
-}
+};

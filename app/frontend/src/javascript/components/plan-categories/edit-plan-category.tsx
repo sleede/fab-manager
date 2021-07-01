@@ -8,7 +8,6 @@ import { LabelledInput } from '../base/labelled-input';
 import { Loader } from '../base/loader';
 import { FabAlert } from '../base/fab-alert';
 
-
 interface EditPlanCategoryProps {
   onSuccess: (message: string) => void,
   onError: (message: string) => void,
@@ -53,7 +52,7 @@ const EditPlanCategoryComponent: React.FC<EditPlanCategoryProps> = ({ onSuccess,
    * We update the name of the temporary-set plan-category, accordingly.
    */
   const onCategoryNameChange = (event: BaseSyntheticEvent) => {
-    setTempCategory({...tempCategory, name: event.target.value });
+    setTempCategory({ ...tempCategory, name: event.target.value });
   };
 
   /**
@@ -61,42 +60,40 @@ const EditPlanCategoryComponent: React.FC<EditPlanCategoryProps> = ({ onSuccess,
    * We update the weight of the temporary-set plan-category, accordingly.
    */
   const onCategoryWeightChange = (event: BaseSyntheticEvent) => {
-    setTempCategory({...tempCategory, weight: event.target.value });
+    setTempCategory({ ...tempCategory, weight: event.target.value });
   };
-
 
   return (
     <div className="edit-plan-category">
       <FabButton type='button' className="edit-button" icon={<i className="fa fa-edit" />} onClick={toggleEditionModal} />
       <FabModal title={t('app.admin.edit_plan_category.edit_category')}
-                isOpen={editionModal}
-                toggleModal={toggleEditionModal}
-                className="edit-plan-category-modal"
-                closeButton={true}
-                confirmButton={t('app.admin.edit_plan_category.confirm_edition')}
-                onConfirm={onEditConfirmed}>
+        isOpen={editionModal}
+        toggleModal={toggleEditionModal}
+        className="edit-plan-category-modal"
+        closeButton={true}
+        confirmButton={t('app.admin.edit_plan_category.confirm_edition')}
+        onConfirm={onEditConfirmed}>
         {tempCategory && <div>
           <label htmlFor="category-name">{t('app.admin.edit_plan_category.name')}</label>
           <LabelledInput id="category-name"
-                         type="text"
-                         label={<i className="fa fa-tag" />}
-                         value={tempCategory.name}
-                         onChange={onCategoryNameChange} />
+            type="text"
+            label={<i className="fa fa-tag" />}
+            value={tempCategory.name}
+            onChange={onCategoryNameChange} />
           <label htmlFor="category-weight">{t('app.admin.edit_plan_category.significance')}</label>
           <LabelledInput id="category-weight"
-                         type="number"
-                         label={<i className="fa fa-sort-numeric-desc" />}
-                         value={tempCategory.weight}
-                         onChange={onCategoryWeightChange} />
+            type="number"
+            label={<i className="fa fa-sort-numeric-desc" />}
+            value={tempCategory.weight}
+            onChange={onCategoryWeightChange} />
         </div>}
         <FabAlert level="info" className="significance-info">
           {t('app.admin.edit_plan_category.significance_info')}
         </FabAlert>
       </FabModal>
     </div>
-  )
+  );
 };
-
 
 export const EditPlanCategory: React.FC<EditPlanCategoryProps> = ({ onSuccess, onError, category }) => {
   return (
@@ -104,5 +101,4 @@ export const EditPlanCategory: React.FC<EditPlanCategoryProps> = ({ onSuccess, o
       <EditPlanCategoryComponent onSuccess={onSuccess} onError={onError} category={category} />
     </Loader>
   );
-}
-
+};

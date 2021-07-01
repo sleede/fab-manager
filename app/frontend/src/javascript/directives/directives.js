@@ -11,7 +11,7 @@
  */
 'use strict';
 
-Application.Directives.directive('fileread', [ () =>
+Application.Directives.directive('fileread', [() =>
   ({
     scope: {
       fileread: '='
@@ -31,7 +31,7 @@ Application.Directives.directive('fileread', [ () =>
 // image placeholder library.
 //
 // To use, simply define `bs-holder` on any element
-Application.Directives.directive('bsHolder', [ () =>
+Application.Directives.directive('bsHolder', [() =>
   ({
     link (scope, element, attrs) {
       Holder.addTheme('icon', { background: 'white', foreground: '#e9e9e9', size: 80, font: 'FontAwesome' })
@@ -44,7 +44,7 @@ Application.Directives.directive('bsHolder', [ () =>
 
 ]);
 
-Application.Directives.directive('match', [ () =>
+Application.Directives.directive('match', [() =>
   ({
     require: 'ngModel',
     restrict: 'A',
@@ -59,7 +59,7 @@ Application.Directives.directive('match', [ () =>
 
 ]);
 
-Application.Directives.directive('publishProject', [ () =>
+Application.Directives.directive('publishProject', [() =>
   ({
     restrict: 'A',
     link (scope, elem, attrs, ctrl) {
@@ -94,7 +94,7 @@ Application.Directives.directive('disableAnimation', ['$animate', ($animate) =>
  * Isolate a form's scope from its parent : no nested validation
  * @see https://stackoverflow.com/a/37481846/1039377
  */
-Application.Directives.directive('isolateForm', [ () =>
+Application.Directives.directive('isolateForm', [() =>
   ({
     restrict: 'A',
     require: '?form',

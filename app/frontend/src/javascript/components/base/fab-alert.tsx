@@ -10,8 +10,8 @@ interface FabAlertProps {
  */
 export const FabAlert: React.FC<FabAlertProps> = ({ level, className, children }) => {
   return (
-    <div className={`fab-alert fab-alert--${level} ${className ? className : ''}`}>
+    <div className={`fab-alert fab-alert--${level} ${className || ''}`}>
       {children}
     </div>
-  )
+  );
 };

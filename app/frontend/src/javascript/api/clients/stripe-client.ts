@@ -1,6 +1,6 @@
-import axios, { AxiosInstance } from 'axios'
+import axios, { AxiosInstance } from 'axios';
 
-function client(key: string): AxiosInstance {
+function client (key: string): AxiosInstance {
   return axios.create({
     baseURL: 'https://api.stripe.com/v1/',
     headers: {
@@ -12,4 +12,3 @@ function client(key: string): AxiosInstance {
 }
 
 export default client;
-

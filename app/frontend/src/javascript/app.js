@@ -5,7 +5,6 @@
 * creating namespaces and moduled for controllers, filters, services, and directives.
 */
 
-// eslint-disable-next-line no-use-before-define
 var Application = Application || {};
 
 Application.Components = angular.module('application.components', []);

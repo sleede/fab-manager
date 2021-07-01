@@ -1,6 +1,6 @@
 import React, { memo, useEffect, useState } from 'react';
 import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from "@stripe/stripe-js";
+import { loadStripe } from '@stripe/stripe-js';
 import { SettingName } from '../../../models/setting';
 import SettingAPI from '../../../api/setting';
 
@@ -18,7 +18,7 @@ export const StripeElements: React.FC = memo(({ children }) => {
       const promise = loadStripe(key.value);
       setStripe(promise);
     });
-  }, [])
+  }, []);
 
   return (
     <div>
@@ -27,4 +27,6 @@ export const StripeElements: React.FC = memo(({ children }) => {
       </Elements>}
     </div>
   );
-})
+});
+
+StripeElements.displayName = 'StripeElements';

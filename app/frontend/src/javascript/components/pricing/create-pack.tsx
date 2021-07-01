@@ -28,7 +28,7 @@ export const CreatePack: React.FC<CreatePackProps> = ({ onSuccess, onError, grou
    */
   const toggleModal = (): void => {
     setIsOpen(!isOpen);
-  }
+  };
 
   /**
    * Callback triggered when the user has validated the creation of the new PrepaidPack
@@ -47,18 +47,18 @@ export const CreatePack: React.FC<CreatePackProps> = ({ onSuccess, onError, grou
         toggleModal();
       })
       .catch(error => onError(error));
-  }
+  };
 
   return (
     <div className="create-pack">
       <button className="add-pack-button" onClick={toggleModal}><i className="fas fa-plus"/></button>
       <FabModal isOpen={isOpen}
-                toggleModal={toggleModal}
-                title={t('app.admin.create_pack.new_pack')}
-                className="new-pack-modal"
-                closeButton
-                confirmButton={t('app.admin.create_pack.create_pack')}
-                onConfirmSendFormId="new-pack">
+        toggleModal={toggleModal}
+        title={t('app.admin.create_pack.new_pack')}
+        className="new-pack-modal"
+        closeButton
+        confirmButton={t('app.admin.create_pack.create_pack')}
+        onConfirmSendFormId="new-pack">
         <FabAlert level="info">
           {t('app.admin.create_pack.new_pack_info', { TYPE: priceableType })}
         </FabAlert>
@@ -66,4 +66,4 @@ export const CreatePack: React.FC<CreatePackProps> = ({ onSuccess, onError, grou
       </FabModal>
     </div>
   );
-}
+};

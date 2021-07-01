@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 interface HtmlTranslateProps {
   trKey: string,
-  options?: any
+  options?: Record<string, string>
 }
 
 /**
@@ -13,6 +13,6 @@ export const HtmlTranslate: React.FC<HtmlTranslateProps> = ({ trKey, options }) 
   const { t } = useTranslation(trKey?.split('.')[1]);
 
   return (
-    <span dangerouslySetInnerHTML={{__html: t(trKey, options)}} />
+    <span dangerouslySetInnerHTML={{ __html: t(trKey, options) }} />
   );
-}
+};

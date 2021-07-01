@@ -9,7 +9,7 @@ import { PaymentSchedule } from '../../models/payment-schedule';
 import { IApplication } from '../../models/application';
 import PaymentScheduleAPI from '../../api/payment-schedule';
 
-declare var Application: IApplication;
+declare const Application: IApplication;
 
 interface PaymentSchedulesDashboardProps {
   currentUser: User,
@@ -45,60 +45,59 @@ const PaymentSchedulesDashboard: React.FC<PaymentSchedulesDashboardProps> = ({ c
   const handleLoadMore = (): void => {
     setPageNumber(pageNumber + 1);
 
-    PaymentScheduleAPI.index({ query: { page: pageNumber + 1, size: PAGE_SIZE }}).then((res) => {
+    PaymentScheduleAPI.index({ query: { page: pageNumber + 1, size: PAGE_SIZE } }).then((res) => {
       const list = paymentSchedules.concat(res);
       setPaymentSchedules(list);
     }).catch((error) => onError(error.message));
-  }
+  };
 
   /**
    * Reload from te API all the currently displayed payment schedules
    */
   const handleRefreshList = (): void => {
-    PaymentScheduleAPI.index({ query: { page: 1, size: PAGE_SIZE * pageNumber }}).then((res) => {
+    PaymentScheduleAPI.index({ query: { page: 1, size: PAGE_SIZE * pageNumber } }).then((res) => {
       setPaymentSchedules(res);
     }).catch((err) => {
       onError(err.message);
     });
-  }
+  };
 
   /**
    * after a successful card update, provide a success message to the end-user
    */
   const handleCardUpdateSuccess = (): void => {
     onCardUpdateSuccess(t('app.logged.dashboard.payment_schedules.card_updated_success'));
-  }
+  };
 
   /**
    * Check if the current collection of payment schedules is empty or not.
    */
   const hasSchedules = (): boolean => {
     return paymentSchedules.length > 0;
-  }
+  };
 
   /**
    * Check if there are some results for the current filters that aren't currently shown.
    */
   const hasMoreSchedules = (): boolean => {
     return hasSchedules() && paymentSchedules.length < paymentSchedules[0].max_length;
-  }
+  };
 
   return (
     <div className="payment-schedules-dashboard">
       {!hasSchedules() && <div>{t('app.logged.dashboard.payment_schedules.no_payment_schedules')}</div>}
       {hasSchedules() && <div className="schedules-list">
         <PaymentSchedulesTable paymentSchedules={paymentSchedules}
-                               showCustomer={false}
-                               refreshList={handleRefreshList}
-                               operator={currentUser}
-                               onError={onError}
-                               onCardUpdateSuccess={handleCardUpdateSuccess} />
+          showCustomer={false}
+          refreshList={handleRefreshList}
+          operator={currentUser}
+          onError={onError}
+          onCardUpdateSuccess={handleCardUpdateSuccess} />
         {hasMoreSchedules() && <FabButton className="load-more" onClick={handleLoadMore}>{t('app.logged.dashboard.payment_schedules.load_more')}</FabButton>}
       </div>}
     </div>
   );
-}
-
+};
 
 const PaymentSchedulesDashboardWrapper: React.FC<PaymentSchedulesDashboardProps> = ({ currentUser, onError, onCardUpdateSuccess }) => {
   return (
@@ -106,6 +105,6 @@ const PaymentSchedulesDashboardWrapper: React.FC<PaymentSchedulesDashboardProps>
       <PaymentSchedulesDashboard currentUser={currentUser} onError={onError} onCardUpdateSuccess={onCardUpdateSuccess} />
     </Loader>
   );
-}
+};
 
 Application.Components.component('paymentSchedulesDashboard', react2angular(PaymentSchedulesDashboardWrapper, ['currentUser', 'onError', 'onCardUpdateSuccess']));

@@ -10,7 +10,7 @@ import { SettingName } from '../../../models/setting';
 import { IApplication } from '../../../models/application';
 import SettingAPI from '../../../api/setting';
 
-declare var Application: IApplication;
+declare const Application: IApplication;
 
 interface PayzenSettingsProps {
   onEditKeys: (onlinePaymentModule: { value: boolean }) => void,
@@ -36,7 +36,7 @@ const icons:Map<SettingName, string> = new Map([
   [SettingName.PayZenUsername, 'user'],
   [SettingName.PayZenEndpoint, 'link'],
   [SettingName.PayZenPublicKey, 'info']
-])
+]);
 
 /**
  * This component displays a summary of the PayZen account keys, with a button triggering the modal to edit them
@@ -58,15 +58,14 @@ export const PayzenSettings: React.FC<PayzenSettingsProps> = ({ onEditKeys, onCu
       SettingAPI.isPresent(SettingName.PayZenPassword).then(pzPassword => {
         SettingAPI.isPresent(SettingName.PayZenHmacKey).then(pzHmac => {
           const map = new Map(payZenKeys);
-          map.set(SettingName.PayZenPassword, pzPassword ? PAYZEN_HIDDEN :  '');
-          map.set(SettingName.PayZenHmacKey, pzHmac ? PAYZEN_HIDDEN :  '');
+          map.set(SettingName.PayZenPassword, pzPassword ? PAYZEN_HIDDEN : '');
+          map.set(SettingName.PayZenHmacKey, pzHmac ? PAYZEN_HIDDEN : '');
 
           updateSettings(map);
-        }).catch(error => { console.error(error); })
+        }).catch(error => { console.error(error); });
       }).catch(error => { console.error(error); });
     }).catch(error => { console.error(error); });
   }, []);
-
 
   /**
    * Callback triggered when the user clicks on the "update keys" button.
@@ -74,7 +73,7 @@ export const PayzenSettings: React.FC<PayzenSettingsProps> = ({ onEditKeys, onCu
    */
   const handleKeysUpdate = (): void => {
     onEditKeys({ value: true });
-  }
+  };
 
   /**
    * Callback triggered when the user changes the content of the currency input field.
@@ -86,7 +85,7 @@ export const PayzenSettings: React.FC<PayzenSettingsProps> = ({ onEditKeys, onCu
     } else {
       setError(t('app.admin.invoices.payment.payzen.currency_error'));
     }
-  }
+  };
 
   /**
    * Callback triggered when the user clicks on the "save currency" button.
@@ -98,9 +97,9 @@ export const PayzenSettings: React.FC<PayzenSettingsProps> = ({ onEditKeys, onCu
       updateSettings(draft => draft.set(SettingName.PayZenCurrency, result.value));
       onCurrencyUpdateSuccess(result.value);
     }, reason => {
-      setError(t('app.admin.invoices.payment.payzen.error_while_saving')+reason);
-    })
-  }
+      setError(t('app.admin.invoices.payment.payzen.error_while_saving') + reason);
+    });
+  };
 
   return (
     <div className="payzen-settings">
@@ -111,11 +110,11 @@ export const PayzenSettings: React.FC<PayzenSettingsProps> = ({ onEditKeys, onCu
             <div className="key-wrapper" key={setting}>
               <label htmlFor={setting}>{t(`app.admin.invoices.payment.payzen.${setting}`)}</label>
               <FabInput defaultValue={settings.get(setting)}
-                        id={setting}
-                        type={payZenPrivateSettings.indexOf(setting) > -1 ? 'password' : 'text'}
-                        icon={<i className={`fas fa-${icons.get(setting)}`} />}
-                        readOnly
-                        disabled />
+                id={setting}
+                type={payZenPrivateSettings.indexOf(setting) > -1 ? 'password' : 'text'}
+                icon={<i className={`fas fa-${icons.get(setting)}`} />}
+                readOnly
+                disabled />
             </div>
           );
         })}
@@ -132,20 +131,19 @@ export const PayzenSettings: React.FC<PayzenSettingsProps> = ({ onEditKeys, onCu
           <div className="currency-wrapper">
             <label htmlFor="payzen_currency">{t('app.admin.invoices.payment.payzen.payzen_currency')}</label>
             <FabInput defaultValue={settings.get(SettingName.PayZenCurrency)}
-                      id="payzen_currency"
-                      icon={<i className="fas fa-money-bill" />}
-                      onChange={handleCurrencyUpdate}
-                      maxLength={3}
-                      pattern="[A-Z]{3}"
-                      error={error} />
+              id="payzen_currency"
+              icon={<i className="fas fa-money-bill" />}
+              onChange={handleCurrencyUpdate}
+              maxLength={3}
+              pattern="[A-Z]{3}"
+              error={error} />
           </div>
           <FabButton className="save-currency" onClick={saveCurrency}>{t('app.admin.invoices.payment.payzen.save')}</FabButton>
         </div>
       </div>
     </div>
   );
-}
-
+};
 
 const PayzenSettingsWrapper: React.FC<PayzenSettingsProps> = ({ onEditKeys, onCurrencyUpdateSuccess }) => {
   return (
@@ -153,6 +151,6 @@ const PayzenSettingsWrapper: React.FC<PayzenSettingsProps> = ({ onEditKeys, onCu
       <PayzenSettings onEditKeys={onEditKeys} onCurrencyUpdateSuccess={onCurrencyUpdateSuccess} />
     </Loader>
   );
-}
+};
 
 Application.Components.component('payzenSettings', react2angular(PayzenSettingsWrapper, ['onEditKeys', 'onCurrencyUpdateSuccess']));

@@ -18,8 +18,8 @@ import PrepaidPackAPI from '../../api/prepaid-pack';
 import { PrepaidPack } from '../../models/prepaid-pack';
 import { useImmer } from 'use-immer';
 
-declare var Fablab: IFablab;
-declare var Application: IApplication;
+declare let Fablab: IFablab;
+declare const Application: IApplication;
 
 interface MachinesPricingProps {
   onError: (message: string) => void,
@@ -42,7 +42,7 @@ const MachinesPricing: React.FC<MachinesPricingProps> = ({ onError, onSuccess })
     MachineAPI.index({ disabled: false })
       .then(data => setMachines(data))
       .catch(error => onError(error));
-    GroupAPI.index({ disabled: false , admins: false })
+    GroupAPI.index({ disabled: false, admins: false })
       .then(data => setGroups(data))
       .catch(error => onError(error));
     PriceAPI.index({ priceable_type: 'Machine', plan_id: null })
@@ -50,7 +50,7 @@ const MachinesPricing: React.FC<MachinesPricingProps> = ({ onError, onSuccess })
       .catch(error => onError(error));
     PrepaidPackAPI.index()
       .then(data => setPacks(data))
-      .catch(error => onError(error))
+      .catch(error => onError(error));
   }, []);
 
   // duration of the example slot
@@ -93,7 +93,7 @@ const MachinesPricing: React.FC<MachinesPricingProps> = ({ onError, onSuccess })
       draft[index] = price;
       return draft;
     });
-  }
+  };
 
   /**
    * Callback triggered when the user has confirmed to update a price
@@ -104,8 +104,8 @@ const MachinesPricing: React.FC<MachinesPricingProps> = ({ onError, onSuccess })
         onSuccess(t('app.admin.machines_pricing.price_updated'));
         updatePrice(price);
       })
-      .catch(error => onError(error))
-  }
+      .catch(error => onError(error));
+  };
 
   return (
     <div className="machines-pricing">
@@ -122,23 +122,23 @@ const MachinesPricing: React.FC<MachinesPricingProps> = ({ onError, onSuccess })
           </tr>
         </thead>
         <tbody>
-        {machines?.map(machine => <tr key={machine.id}>
-          <td>{machine.name}</td>
-          {groups?.map(group => <td key={group.id}>
-            {prices && <EditablePrice price={findPriceBy(machine.id, group.id)} onSave={handleUpdatePrice} />}
-            {packs && <ConfigurePacksButton packsData={filterPacksBy(machine.id, group.id)}
-                                            onError={onError}
-                                            onSuccess={onSuccess}
-                                            groupId={group.id}
-                                            priceableId={machine.id}
-                                            priceableType="Machine" />}
-          </td>)}
-        </tr>)}
+          {machines?.map(machine => <tr key={machine.id}>
+            <td>{machine.name}</td>
+            {groups?.map(group => <td key={group.id}>
+              {prices && <EditablePrice price={findPriceBy(machine.id, group.id)} onSave={handleUpdatePrice} />}
+              {packs && <ConfigurePacksButton packsData={filterPacksBy(machine.id, group.id)}
+                onError={onError}
+                onSuccess={onSuccess}
+                groupId={group.id}
+                priceableId={machine.id}
+                priceableType="Machine" />}
+            </td>)}
+          </tr>)}
         </tbody>
       </table>
     </div>
   );
-}
+};
 
 const MachinesPricingWrapper: React.FC<MachinesPricingProps> = ({ onError, onSuccess }) => {
   return (
@@ -146,8 +146,6 @@ const MachinesPricingWrapper: React.FC<MachinesPricingProps> = ({ onError, onSuc
       <MachinesPricing onError={onError} onSuccess={onSuccess} />
     </Loader>
   );
-}
+};
 
 Application.Components.component('machinesPricing', react2angular(MachinesPricingWrapper, ['onError', 'onSuccess']));
-
-

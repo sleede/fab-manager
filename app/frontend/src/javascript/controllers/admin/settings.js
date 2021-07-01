@@ -102,7 +102,7 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
         `<div id="members">${_t('app.admin.settings.item_members')}</div>`,
         `<div id="events">${_t('app.admin.settings.item_events')}</div>`
       ]
-    }
+    };
     $scope.summernoteOptsHomePage.height = 400;
 
     // codemirror editor
@@ -110,15 +110,15 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
 
     // Options for codemirror editor, used for custom css
     $scope.codemirrorOpts = {
-      matchBrackets : true,
+      matchBrackets: true,
       lineNumbers: true,
       mode: 'sass'
-    }
+    };
 
     // Show or hide advanced settings
     $scope.advancedSettings = {
       open: false
-    }
+    };
 
     /**
      * For use with 'ng-class', returns the CSS class name for the uploads previews.
@@ -198,7 +198,7 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
           } else {
             $scope.privacyPolicy.version = null;
           }
-        })
+        });
       });
     };
 
@@ -212,7 +212,7 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
       if ((content.custom_asset == null)) {
         $scope.alerts = [];
         return angular.forEach(content, function (v) {
-          angular.forEach(v, function(err) { growl.error(err); })
+          angular.forEach(v, function (err) { growl.error(err); });
         });
       } else {
         growl.success(_t('app.admin.settings.file_successfully_updated'));
@@ -251,7 +251,7 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
      */
     $scope.addLoader = function (target) {
       $scope.loader[target] = true;
-    }
+    };
 
     /**
      * Change the revision of the displayed privacy policy, from drafts history
@@ -262,7 +262,7 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
         return;
       }
       for (const draft of $scope.privacyDraftsHistory) {
-        if (draft.id == $scope.privacyPolicy.version) {
+        if (draft.id === $scope.privacyPolicy.version) {
           $scope.privacyPolicy.bodyTemp = draft.content;
           break;
         }
@@ -272,7 +272,7 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
     /**
      * Open a modal showing a sample of the collected data if FabAnalytics is enabled
      */
-    $scope.analyticsModal = function() {
+    $scope.analyticsModal = function () {
       $uibModal.open({
         templateUrl: '/admin/settings/analyticsModal.html',
         controller: 'AnalyticsModalController',
@@ -281,30 +281,30 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
           analyticsData: ['FabAnalytics', function (FabAnalytics) { return FabAnalytics.data().$promise; }]
         }
       });
-    }
+    };
 
     /**
      * Reset the home page to its initial state (factory value)
      */
     $scope.resetHomePage = function () {
       dialogs.confirm({
-          resolve: {
-            object () {
-              return {
-                title: _t('app.admin.settings.confirmation_required'),
-                msg: _t('app.admin.settings.confirm_reset_home_page')
-              };
-            }
+        resolve: {
+          object () {
+            return {
+              title: _t('app.admin.settings.confirmation_required'),
+              msg: _t('app.admin.settings.confirm_reset_home_page')
+            };
           }
         }
-        , function () { // confirmed
-          Setting.reset({ name: 'home_content' }, function (data) {
-            $scope.homeContent.value = data.value;
-            growl.success(_t('app.admin.settings.home_content_reset'));
-          })
-        }
-      )
-    }
+      }
+      , function () { // confirmed
+        Setting.reset({ name: 'home_content' }, function (data) {
+          $scope.homeContent.value = data.value;
+          growl.success(_t('app.admin.settings.home_content_reset'));
+        });
+      }
+      );
+    };
 
     /**
      * Callback triggered when the codemirror editor is loaded into the DOM
@@ -312,7 +312,7 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
      */
     $scope.codemirrorLoaded = function (editor) {
       $scope.codeMirrorEditor = editor;
-    }
+    };
 
     /**
      * Setup the feature-tour for the admin/settings page.
@@ -336,7 +336,7 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
         order: 1,
         title: _t('app.admin.tour.settings.general.title'),
         content: _t('app.admin.tour.settings.general.content'),
-        placement: 'bottom',
+        placement: 'bottom'
       });
       uitour.createStep({
         selector: '.admin-settings .home-page-content h4',
@@ -440,7 +440,7 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
       if ($scope.allSettings.feature_tour_display !== 'manual' && $scope.currentUser.profile.tours.indexOf('settings') < 0) {
         uitour.start();
       }
-    }
+    };
 
     /* PRIVATE SCOPE */
 
@@ -491,7 +491,7 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
       // refresh codemirror to display the fetched setting
       $scope.$watch('advancedSettings.open', function (newValue) {
         if (newValue) $scope.codeMirrorEditor.refresh();
-      })
+      });
 
       // use the tours list, based on the selected value
       $scope.$watch('allSettings.feature_tour_display', function (newValue, oldValue, scope) {
@@ -512,7 +512,6 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
   }
 
 ]);
-
 
 /**
  * Controller used in the invoice refunding modal window
@@ -550,13 +549,13 @@ Application.Controllers.controller('SavePolicyController', ['$scope', '$uibModal
  * Controller used in the "what do we collect?" modal, about FabAnalytics
  */
 Application.Controllers.controller('AnalyticsModalController', ['$scope', '$uibModalInstance', 'analyticsData',
-  function ($scope,$uibModalInstance, analyticsData) {
+  function ($scope, $uibModalInstance, analyticsData) {
     // analytics data sample
     $scope.data = analyticsData;
 
     // callback to close the modal
     $scope.close = function () {
       $uibModalInstance.dismiss();
-    }
+    };
   }
-])
+]);

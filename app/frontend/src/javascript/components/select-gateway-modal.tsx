@@ -16,8 +16,7 @@ import { SettingBulkResult, SettingName } from '../models/setting';
 import { IApplication } from '../models/application';
 import SettingAPI from '../api/setting';
 
-
-declare var Application: IApplication;
+declare const Application: IApplication;
 
 interface SelectGatewayModalModalProps {
   isOpen: boolean,
@@ -37,8 +36,8 @@ const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isOpen, to
   // request the configured gateway to the API
   useEffect(() => {
     SettingAPI.get(SettingName.PaymentGateway).then(gateway => {
-      setSelectedGateway(gateway.value ? gateway.value  : '');
-    })
+      setSelectedGateway(gateway.value ? gateway.value : '');
+    });
   }, []);
 
   /**
@@ -48,7 +47,7 @@ const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isOpen, to
     setPreventConfirmGateway(true);
     updateSettings();
     setPreventConfirmGateway(false);
-  }
+  };
 
   /**
    * Save the gateway provided by the target input into the component state
@@ -56,14 +55,14 @@ const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isOpen, to
   const setGateway = (event: BaseSyntheticEvent) => {
     const gateway = event.target.value;
     setSelectedGateway(gateway);
-  }
+  };
 
   /**
    * Check if any payment gateway was selected
    */
   const hasSelectedGateway = (): boolean => {
     return selectedGateway !== '';
-  }
+  };
 
   /**
    * Callback triggered when the embedded form has validated all the stripe keys
@@ -76,7 +75,7 @@ const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isOpen, to
       return newMap;
     });
     setPreventConfirmGateway(false);
-  }
+  };
 
   /**
    * Callback triggered when the embedded form has validated all the PayZen keys
@@ -84,14 +83,14 @@ const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isOpen, to
   const handleValidPayZenKeys = (payZenKeys: Map<SettingName, string>): void => {
     setGatewayConfig(payZenKeys);
     setPreventConfirmGateway(false);
-  }
+  };
 
   /**
    * Callback triggered when the embedded form has not validated all keys
    */
   const handleInvalidKeys = (): void => {
     setPreventConfirmGateway(true);
-  }
+  };
 
   /**
    * Send the new gateway settings to the API to save them
@@ -111,17 +110,17 @@ const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isOpen, to
     }, reason => {
       onError(reason);
     });
-  }
+  };
 
   return (
     <FabModal title={t('app.admin.invoices.payment.gateway_modal.select_gateway_title')}
-              isOpen={isOpen}
-              toggleModal={toggleModal}
-              width={ModalSize.medium}
-              className="gateway-modal"
-              confirmButton={t('app.admin.invoices.payment.gateway_modal.confirm_button')}
-              onConfirm={onGatewayConfirmed}
-              preventConfirm={preventConfirmGateway}>
+      isOpen={isOpen}
+      toggleModal={toggleModal}
+      width={ModalSize.medium}
+      className="gateway-modal"
+      confirmButton={t('app.admin.invoices.payment.gateway_modal.confirm_button')}
+      onConfirm={onGatewayConfirmed}
+      preventConfirm={preventConfirmGateway}>
       {!hasSelectedGateway() && <p className="info-gateway">
         {t('app.admin.invoices.payment.gateway_modal.gateway_info')}
       </p>}
@@ -143,6 +142,6 @@ const SelectGatewayModalWrapper: React.FC<SelectGatewayModalModalProps> = ({ isO
       <SelectGatewayModal isOpen={isOpen} toggleModal={toggleModal} currentUser={currentUser} onSuccess={onSuccess} onError={onError} />
     </Loader>
   );
-}
+};
 
 Application.Components.component('selectGatewayModal', react2angular(SelectGatewayModalWrapper, ['isOpen', 'toggleModal', 'currentUser', 'onSuccess', 'onError']));

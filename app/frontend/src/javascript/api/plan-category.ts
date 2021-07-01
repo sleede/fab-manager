@@ -23,4 +23,3 @@ export default class PlanCategoryAPI {
     return res?.data;
   }
 }
-

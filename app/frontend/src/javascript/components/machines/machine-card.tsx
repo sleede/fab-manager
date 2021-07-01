@@ -31,13 +31,13 @@ const MachineCardComponent: React.FC<MachineCardProps> = ({ user, machine, onSho
    */
   const handleReserveMachine = (): void => {
     onReserveMachine(machine);
-  }
+  };
   /**
    * Callback triggered when the user clicks on the 'view' button
    */
   const handleShowMachine = (): void => {
     onShowMachine(machine);
-  }
+  };
 
   const machinePicture = (): ReactNode => {
     if (!machine.machine_image) {
@@ -46,26 +46,26 @@ const MachineCardComponent: React.FC<MachineCardProps> = ({ user, machine, onSho
 
     return (
       <div className="machine-picture" style={{ backgroundImage: `url(${machine.machine_image})` }} onClick={handleShowMachine} />
-    )
-  }
+    );
+  };
 
   return (
-    <div className={`machine-card ${loading ? 'loading' : ''} ${machine.disabled ? 'disabled': ''}`}>
+    <div className={`machine-card ${loading ? 'loading' : ''} ${machine.disabled ? 'disabled' : ''}`}>
       {machinePicture()}
       <div className="machine-name">
         {machine.name}
       </div>
       <div className="machine-actions">
         {!machine.disabled && <ReserveButton currentUser={user}
-                                             machineId={machine.id}
-                                             onLoadingStart={() => setLoading(true)}
-                                             onLoadingEnd={() => setLoading(false)}
-                                             onError={onError}
-                                             onSuccess={onSuccess}
-                                             onReserveMachine={handleReserveMachine}
-                                             onLoginRequested={onLoginRequested}
-                                             onEnrollRequested={onEnrollRequested}
-                                             className="reserve-button">
+          machineId={machine.id}
+          onLoadingStart={() => setLoading(true)}
+          onLoadingEnd={() => setLoading(false)}
+          onError={onError}
+          onSuccess={onSuccess}
+          onReserveMachine={handleReserveMachine}
+          onLoginRequested={onLoginRequested}
+          onEnrollRequested={onEnrollRequested}
+          className="reserve-button">
           <i className="fas fa-bookmark" />
           {t('app.public.machine_card.book')}
         </ReserveButton>}
@@ -78,8 +78,7 @@ const MachineCardComponent: React.FC<MachineCardProps> = ({ user, machine, onSho
       </div>
     </div>
   );
-}
-
+};
 
 export const MachineCard: React.FC<MachineCardProps> = ({ user, machine, onShowMachine, onReserveMachine, onError, onSuccess, onLoginRequested, onEnrollRequested }) => {
   return (
@@ -87,4 +86,4 @@ export const MachineCard: React.FC<MachineCardProps> = ({ user, machine, onShowM
       <MachineCardComponent user={user} machine={machine} onShowMachine={onShowMachine} onReserveMachine={onReserveMachine} onError={onError} onSuccess={onSuccess} onLoginRequested={onLoginRequested} onEnrollRequested={onEnrollRequested} />
     </Loader>
   );
-}
+};

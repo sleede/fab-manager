@@ -11,7 +11,6 @@ import mastercardLogo from '../../../../../images/mastercard.png';
 import visaLogo from '../../../../../images/visa.png';
 import { Invoice } from '../../../models/invoice';
 
-
 interface StripeModalProps {
   isOpen: boolean,
   toggleModal: () => void,
@@ -42,41 +41,41 @@ export const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, a
         <img src={visaLogo} alt="visa" />
       </div>
     );
-  }
+  };
 
   /**
    * Integrates the StripeForm into the parent PaymentModal
    */
-  const renderForm: FunctionComponent<GatewayFormProps> = ({ onSubmit, onSuccess, onError, operator, className, formId, cart, customer, paymentSchedule, children}) => {
+  const renderForm: FunctionComponent<GatewayFormProps> = ({ onSubmit, onSuccess, onError, operator, className, formId, cart, customer, paymentSchedule, children }) => {
     return (
       <StripeElements>
         <StripeForm onSubmit={onSubmit}
-                    onSuccess={onSuccess}
-                    onError={onError}
-                    operator={operator}
-                    className={className}
-                    formId={formId}
-                    cart={cart}
-                    customer={customer}
-                    paymentSchedule={paymentSchedule}>
+          onSuccess={onSuccess}
+          onError={onError}
+          operator={operator}
+          className={className}
+          formId={formId}
+          cart={cart}
+          customer={customer}
+          paymentSchedule={paymentSchedule}>
           {children}
         </StripeForm>
       </StripeElements>
     );
-  }
+  };
 
   return (
     <AbstractPaymentModal className="stripe-modal"
-                          isOpen={isOpen}
-                          toggleModal={toggleModal}
-                          logoFooter={logoFooter()}
-                          formId="stripe-form"
-                          formClassName="stripe-form"
-                          currentUser={currentUser}
-                          cart={cart}
-                          customer={customer}
-                          afterSuccess={afterSuccess}
-                          schedule={schedule}
-                          GatewayForm={renderForm} />
+      isOpen={isOpen}
+      toggleModal={toggleModal}
+      logoFooter={logoFooter()}
+      formId="stripe-form"
+      formClassName="stripe-form"
+      currentUser={currentUser}
+      cart={cart}
+      customer={customer}
+      afterSuccess={afterSuccess}
+      schedule={schedule}
+      GatewayForm={renderForm} />
   );
-}
+};
