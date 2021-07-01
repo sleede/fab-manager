@@ -1206,7 +1206,7 @@ zu:
         statistics_module: "crwdns20864:0crwdne20864:0"
         upcoming_events_shown: "crwdns20898:0crwdne20898:0"
         display_invite_to_renew_pack: "crwdns22000:0crwdne22000:0"
-        packs_threshold_info_html: "crwdns22002:0crwdne22002:0"
+        packs_threshold_info_html: "crwdns22030:0crwdne22030:0"
         renew_pack_threshold: "crwdns22004:0crwdne22004:0"
         general:
           general: "crwdns20726:0crwdne20726:0"
