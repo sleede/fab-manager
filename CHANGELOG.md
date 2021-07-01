@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v5.1.0 2021 July 1st
+
 - Prepaid packs of hours for the machines
 - Tests for OpenAPI user trainings
 - Norwegian language
