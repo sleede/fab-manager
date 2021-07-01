@@ -106,6 +106,9 @@ de:
         add_an_attachment: "Anhang hinzufügen"
         disable_machine: "Maschine deaktivieren"
         validate_your_machine: "Bestätigen Sie Ihr Gerät"
+      #button to book a machine reservation
+      reserve_button:
+        book_this_machine: "Diese Maschine buchen"
       #frame to select a plan to subscribe
       plan_subscribe:
         subscribe_online: "online abonnieren"
@@ -126,8 +129,8 @@ de:
         booking_confirmation: "Buchungsbestätigung"
         here_is_the_summary_of_the_slots_to_book_for_the_current_user: "Hier ist die Zusammenfassung der zu buchenden Slots für den aktuellen Benutzer:"
         subscription_confirmation: "Abonnementbestätigung"
-        here_is_the_subscription_summary: "Here is the subscription summary:"
-        payment_method: "Payment method"
+        here_is_the_subscription_summary: "Hier ist die Zusammenfassung des -Abonnements:"
+        payment_method: "Zahlungsmethode"
         method_card: "Online by card"
         method_check: "By check"
         card_collection_info: "By validating, you'll be prompted for the member's card number. This card will be automatically charged at the deadlines."
@@ -276,16 +279,6 @@ de:
         do_you_want_to_change_NAME_s_booking_slot_initially_planned_at: "Möchten Sie den {NAME}-Buchungsplatz ändern? Ursprünglich geplant um:"
         cancel_this_reservation: "Reservierung stornieren"
         i_want_to_change_date: "Ich möchte das Datum ändern"
-      #modal telling users that they need to pass a training before booking a machine
-      request_training_modal:
-        to_book_the_MACHINE_you_must_have_completed_the_TRAINING: "Um \"{MACHINE}\" zu buchen, müssen Sie {TRAINING} abgeschlossen haben."
-        register_for_the_training: "Zur Schulung anmelden"
-        i_dont_want_to_register_now: "Ich möchte mich jetzt nicht anmelden"
-      #modal telling users that they must wait for their training validation before booking a machine
-      training_reservation_modal:
-        machine_reservation: "Maschinenreservierung"
-        you_must_wait_for_your_training_is_being_validated_by_the_fablab_team_to_book_this_machine: "Sie müssen bis zur Schulungsbestätigung warten, um diese Maschine buchen zu können."
-        your_training_will_occur_: "Ihre Schulung wird stattfinden"
       #user public profile
       public_profile:
         last_activity_html: "Letzte Aktivität <br><strong>am {DATE}</strong>"

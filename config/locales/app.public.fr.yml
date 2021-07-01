@@ -210,9 +210,14 @@ fr:
         new_availability: "Ouvrir des réservations"
         book: "Réserver"
         _or_the_: " ou la "
+      machines_filters:
+        show_machines: "Afficher les machines"
         status_enabled: "Actives"
         status_disabled: "Désactivées"
         status_all: "Toutes"
+      machine_card:
+        book: "Réserver"
+        consult: "Consulter"
       #details of a machine
       machines_show:
         book_this_machine: "Réserver cette machine"
