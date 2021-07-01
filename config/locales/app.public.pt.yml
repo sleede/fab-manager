@@ -212,12 +212,12 @@ pt:
         _or_the_: " ou o "
       machines_filters:
         show_machines: "Mostrar máquinas"
-        status_enabled: "Enabled"
-        status_disabled: "Disabled"
-        status_all: "All"
+        status_enabled: "Ativadas"
+        status_disabled: "Desabilitadas"
+        status_all: "Todas"
       machine_card:
-        book: "Book"
-        consult: "Consult"
+        book: "Reservar"
+        consult: "Consultar"
       #details of a machine
       machines_show:
         book_this_machine: "Reservar essa máquina"
@@ -249,7 +249,7 @@ pt:
         more_information: "Mais informação"
         your_subscription_expires_on_the_DATE: "Sua inscrição expira em {DATE}"
         no_plans: "Não há planos disponíveis para o seu grupo"
-        AMOUNT_per_month: "{AMOUNT} / month"
+        AMOUNT_per_month: "{AMOUNT} / meses"
         my_group: "Meu grupo"
         his_group: "{GENDER, select, male{Ele} female{Ela} other{Esses}} grupo"
         he_wants_to_change_group: "{ROLE, select, member{Eu quero} other{O usuário quer}} trocar de grupo"
@@ -265,7 +265,7 @@ pt:
         an_error_prevented_your_group_from_being_changed: "Um erro impediu que seu grupo fosse alterado."
         an_error_prevented_to_change_the_user_s_group: "Um erro impediu que o grupo de usuários fosse alterado com sucesso."
       plans_filter:
-        i_am: "I am"
+        i_am: "Eu sou"
         select_group: "select a group"
         i_want_duration: "I want to subscribe for"
         all_durations: "All durations"
