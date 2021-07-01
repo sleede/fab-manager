@@ -1206,8 +1206,8 @@ fr:
         statistics_module: "module de statistiques"
         upcoming_events_shown: "la limite d'affichage des événements à venir"
         display_invite_to_renew_pack: "Afficher l'invitation à renouveler les packs prépayés"
-        packs_threshold_info_html: "You can define under how many hours the user will be invited to buy a new prepaid-pack, if his stock of prepaid hours is under this threshold.<br/>You can set a <strong>number of hours</strong> (<em>eg. 5</em>) or a <strong>percentage</strong> of his current pack pack (<em>eg. 0.05 means 5%</em>)."
-        renew_pack_threshold: "threshold for packs renewal"
+        packs_threshold_info_html: "Vous pouvez définir le nombre d'heures en dessous duquel l'utilisateur sera invité à acheter un nouveau pack prépayé, si son stock d'heures prépayées est inférieur à ce seuil.<br/>Vous pouvez définir un <strong>nombre d'heures</strong> (<em>par exemple. 5</em>) ou un <strong>pourcentage</strong> de son pack actuel (<em>par exemple 0,05 signifie 5%</em>)."
+        renew_pack_threshold: "seuil de renouvellement des packs"
         general:
           general: "Général"
           title: "Titre"
@@ -1360,14 +1360,14 @@ fr:
         category_deleted: "La catégorie a bien été supprimée"
         unable_to_delete: "Impossible de supprimer la catégorie : "
       local_payment:
-        offline_payment: "Payment on site"
-        about_to_cash: "You're about to confirm the cashing by an external payment mean. Please do not click on the button below until you have fully cashed the requested payment."
-        payment_method: "Payment method"
-        method_card: "Online by card"
-        method_check: "By check"
-        card_collection_info: "By validating, you'll be prompted for the member's card number. This card will be automatically charged at the deadlines."
-        check_collection_info: "By validating, you confirm that you have {DEADLINES} checks, allowing you to collect all the monthly payments."
-        online_payment_disabled: "Online payment is not available. You cannot collect this payment schedule by online card."
+        offline_payment: "Paiement sur place"
+        about_to_cash: "Vous êtes sur le point de confirmer l'encaissement par un moyen de paiement externe. Veuillez ne pas cliquer sur le bouton ci-dessous tant que vous n'avez pas encaissé le paiement demandé."
+        payment_method: "Moyen de paiement"
+        method_card: "Carte bancaire en ligne"
+        method_check: "Par chèques"
+        card_collection_info: "En validant, vous serez invité à saisir les informations de carte bancaire du membre. Cette carte sera prélevée automatiquement aux échéances."
+        check_collection_info: "En validant, vous confirmez être en possession de {DEADLINES} chèques permettant d'encaisser l'ensemble des mensualité."
+        online_payment_disabled: "Le paiement en ligne n'est pas disponible. Vous ne pouvez pas encaisser cet échéancier de paiement en utilisant la carte bancaire en ligne."
       #feature tour
       tour:
         conclusion:
