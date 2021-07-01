@@ -1,4 +1,4 @@
-Application.Directives.directive('members', [ 'Member',
+Application.Directives.directive('members', ['Member',
   function (Member) {
     return ({
       restrict: 'E',
@@ -11,7 +11,7 @@ Application.Directives.directive('members', [ 'Member',
         const initialize = function () {
           Member.lastSubscribed({ limit: 4 }, function (data) {
             $scope.lastMembers = data;
-          })
+          });
         };
 
         // !!! MUST BE CALLED AT THE END of the directive

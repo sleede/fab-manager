@@ -3,11 +3,11 @@
 Application.Services.factory('AuthService', ['Session', function (Session) {
   const service = {};
 
-  service.isAuthenticated = function() {
+  service.isAuthenticated = function () {
     return (Session.currentUser != null) && (Session.currentUser.id != null);
   };
 
-  service.isAuthorized = function(authorizedRoles) {
+  service.isAuthorized = function (authorizedRoles) {
     if (!angular.isArray(authorizedRoles)) {
       authorizedRoles = [authorizedRoles];
     }

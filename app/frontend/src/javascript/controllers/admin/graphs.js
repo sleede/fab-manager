@@ -328,15 +328,15 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
     var getRankingLabel = function (key, typeKey) {
       if ($scope.selectedIndex) {
         if (typeKey === 'subType') {
-          for (let type of Array.from($scope.selectedIndex.types)) {
-            for (let subtype of Array.from(type.subtypes)) {
+          for (const type of Array.from($scope.selectedIndex.types)) {
+            for (const subtype of Array.from(type.subtypes)) {
               if (subtype.key === key) {
                 return subtype.label;
               }
             }
           }
         } else {
-          for (let field of Array.from($scope.selectedIndex.additional_fields)) {
+          for (const field of Array.from($scope.selectedIndex.additional_fields)) {
             if (field.key === typeKey) {
               switch (field.data_type) {
                 case 'date': return moment(key).format('LL'); break;
@@ -370,7 +370,7 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
       if (index.graph.chart_type !== 'discreteBarChart') {
       // list statistics types
         const stat_types = [];
-        for (let t of Array.from(index.types)) {
+        for (const t of Array.from(index.types)) {
           if (t.graph) {
             stat_types.push(t.key);
           }
@@ -430,15 +430,15 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
 
       // run query
       return es.search({
-        'index': 'stats',
-        'type': esType,
-        'searchType': 'query_then_fetch',
-        'size': 0,
+        index: 'stats',
+        type: esType,
+        searchType: 'query_then_fetch',
+        size: 0,
         'stat-type': statType,
         'custom-query': '',
         'start-date': moment($scope.datePickerStart.selected).format(),
         'end-date': moment($scope.datePickerEnd.selected).format(),
-        'body': buildElasticAggregationsQuery(statType, $scope.display.interval, moment($scope.datePickerStart.selected), moment($scope.datePickerEnd.selected))
+        body: buildElasticAggregationsQuery(statType, $scope.display.interval, moment($scope.datePickerStart.selected), moment($scope.datePickerEnd.selected))
       }
       , function (error, response) {
         if (error) {
@@ -468,11 +468,11 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
 
       // run query
       return es.search({
-        'index': 'stats',
-        'type': esType,
-        'searchType': 'query_then_fetch',
-        'size': 0,
-        'body': buildElasticAggregationsRankingQuery(groupKey, sortKey, moment($scope.datePickerStart.selected), moment($scope.datePickerEnd.selected))
+        index: 'stats',
+        type: esType,
+        searchType: 'query_then_fetch',
+        size: 0,
+        body: buildElasticAggregationsRankingQuery(groupKey, sortKey, moment($scope.datePickerStart.selected), moment($scope.datePickerEnd.selected))
       }
       , function (error, response) {
         if (error) {
@@ -487,7 +487,7 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
      * Parse a final elastic results bucket and return a D3 compatible object
      * @param bucket {{key_as_string:{String}, key:{Number}, doc_count:{Number}, total:{{value:{Number}}}}} interval bucket
      */
-    const parseElasticBucket = bucket => [ bucket.key, bucket.total.value ];
+    const parseElasticBucket = bucket => [bucket.key, bucket.total.value];
 
     /**
      * Build an object representing the content of the REST-JSON query to elasticSearch, based on the parameters
@@ -499,45 +499,45 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
      */
     var buildElasticAggregationsQuery = function (type, interval, intervalBegin, intervalEnd) {
       const q = {
-        'query': {
-          'bool': {
-            'must': [
+        query: {
+          bool: {
+            must: [
               {
-                'match': {
-                  'type': type
+                match: {
+                  type: type
                 }
               },
               {
-                'range': {
-                  'date': {
-                    'gte': intervalBegin.format(),
-                    'lte': intervalEnd.format()
+                range: {
+                  date: {
+                    gte: intervalBegin.format(),
+                    lte: intervalEnd.format()
                   }
                 }
               }
             ]
           }
         },
-        'aggregations': {
-          'subgroups': {
-            'terms': {
-              'field': 'subType'
+        aggregations: {
+          subgroups: {
+            terms: {
+              field: 'subType'
             }, // TODO allow aggregate by custom field
-            'aggregations': {
-              'intervals': {
-                'date_histogram': {
-                  'field': 'date',
-                  'interval': interval,
-                  'min_doc_count': 0,
-                  'extended_bounds': {
-                    'min': intervalBegin.valueOf(),
-                    'max': intervalEnd.valueOf()
+            aggregations: {
+              intervals: {
+                date_histogram: {
+                  field: 'date',
+                  interval: interval,
+                  min_doc_count: 0,
+                  extended_bounds: {
+                    min: intervalBegin.valueOf(),
+                    max: intervalEnd.valueOf()
                   }
                 },
-                'aggregations': {
-                  'total': {
-                    'sum': {
-                      'field': 'stat'
+                aggregations: {
+                  total: {
+                    sum: {
+                      field: 'stat'
                     }
                   }
                 }
@@ -549,11 +549,11 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
 
       // scale weeks on sunday as nvd3 supports only these weeks
       if (interval === 'week') {
-        q.aggregations.subgroups.aggregations.intervals.date_histogram['offset'] = '-1d';
+        q.aggregations.subgroups.aggregations.intervals.date_histogram.offset = '-1d';
         // scale days to UTC time
       } else if (interval === 'day') {
         const offset = moment().utcOffset();
-        q.aggregations.subgroups.aggregations.intervals.date_histogram['offset'] = (-offset) + 'm';
+        q.aggregations.subgroups.aggregations.intervals.date_histogram.offset = (-offset) + 'm';
       }
       return q;
     };
@@ -568,46 +568,46 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
      */
     var buildElasticAggregationsRankingQuery = function (groupKey, sortKey, intervalBegin, intervalEnd) {
       const q = {
-        'query': {
-          'bool': {
-            'must': [
+        query: {
+          bool: {
+            must: [
               {
-                'range': {
-                  'date': {
-                    'gte': intervalBegin.format(),
-                    'lte': intervalEnd.format()
+                range: {
+                  date: {
+                    gte: intervalBegin.format(),
+                    lte: intervalEnd.format()
                   }
                 }
               },
               {
-                'term': {
-                  'type': 'booking'
+                term: {
+                  type: 'booking'
                 }
               }
             ]
           }
         },
-        'aggregations': {
-          'subgroups': {
-            'terms': {
-              'field': groupKey,
-              'size': 10,
-              'order': {
-                'total': 'desc'
+        aggregations: {
+          subgroups: {
+            terms: {
+              field: groupKey,
+              size: 10,
+              order: {
+                total: 'desc'
               }
             },
-            'aggregations': {
-              'top_events': {
-                'top_hits': {
-                  'size': 1,
-                  'sort': [
-                    { 'ca': 'desc' }
+            aggregations: {
+              top_events: {
+                top_hits: {
+                  size: 1,
+                  sort: [
+                    { ca: 'desc' }
                   ]
                 }
               },
-              'total': {
-                'sum': {
-                  'field': 'stat'
+              total: {
+                sum: {
+                  field: 'stat'
                 }
               }
             }
@@ -716,12 +716,12 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
         values: []
       }
       ];
-      for (let info of Array.from(data)) {
+      for (const info of Array.from(data)) {
         if (info) {
           newData[0].values.push({
-            'label': info.key,
-            'value': info.values[0].y,
-            'color': info.color
+            label: info.key,
+            value: info.values[0].y,
+            color: info.color
           });
         }
       }

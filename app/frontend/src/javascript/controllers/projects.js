@@ -184,7 +184,7 @@ class ProjectsController {
         // reindex the remaining steps
         return (function () {
           const result = [];
-          for (let s of Array.from($scope.project.project_steps_attributes)) {
+          for (const s of Array.from($scope.project.project_steps_attributes)) {
             if (s.step_nb > step.step_nb) {
               result.push(s.step_nb -= 1);
             } else {
@@ -205,7 +205,7 @@ class ProjectsController {
      */
     $scope.changeStepIndex = function (event, step, newIdx) {
       if (event) { event.preventDefault(); }
-      for (let s of Array.from($scope.project.project_steps_attributes)) {
+      for (const s of Array.from($scope.project.project_steps_attributes)) {
         if (s.step_nb === newIdx) {
           s.step_nb = step.step_nb;
           step.step_nb = newIdx;
@@ -259,7 +259,7 @@ class ProjectsController {
         return _t('app.shared.project.save_as_draft');
       }
       return _t('app.shared.buttons.save');
-    }
+    };
   }
 }
 
@@ -277,7 +277,7 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
     /* PUBLIC SCOPE */
 
     // Fab-manager's instance ID in the openLab network
-    $scope.openlabAppId = settingsPromise.openlab_app_id
+    $scope.openlabAppId = settingsPromise.openlab_app_id;
 
     // Is openLab enabled on the instance?
     $scope.openlab = {
@@ -505,12 +505,12 @@ Application.Controllers.controller('EditProjectController', ['$rootScope', '$sco
 
       if ($scope.project.author_id !== $rootScope.currentUser.id && $scope.project.user_ids.indexOf($rootScope.currentUser.id) === -1 && $scope.currentUser.role !== 'admin') {
         $state.go('app.public.projects_show', { id: $scope.project.slug });
-        console.error('[EditProjectController::initialize] user is not allowed')
+        console.error('[EditProjectController::initialize] user is not allowed');
       }
 
       // Using the ProjectsController
       return new ProjectsController($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics, dialogs, allowedExtensions, _t);
-    }
+    };
 
     // !!! MUST BE CALLED AT THE END of the controller
     return initialize();

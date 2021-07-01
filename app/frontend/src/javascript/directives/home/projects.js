@@ -1,4 +1,4 @@
-Application.Directives.directive('projects', [ 'Project',
+Application.Directives.directive('projects', ['Project',
   function (Project) {
     return ({
       restrict: 'E',
@@ -14,7 +14,7 @@ Application.Directives.directive('projects', [ 'Project',
         const initialize = function () {
           Project.lastPublished(function (data) {
             $scope.lastProjects = data;
-          })
+          });
         };
 
         // !!! MUST BE CALLED AT THE END of the directive

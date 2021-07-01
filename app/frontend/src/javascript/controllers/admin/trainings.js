@@ -81,7 +81,7 @@ class TrainingsController {
 /**
  * Controller used in the training creation page (admin)
  */
-Application.Controllers.controller('NewTrainingController', [ '$scope', '$state', 'machinesPromise', 'CSRF',
+Application.Controllers.controller('NewTrainingController', ['$scope', '$state', 'machinesPromise', 'CSRF',
   function ($scope, $state, machinesPromise, CSRF) {
   /* PUBLIC SCOPE */
 
@@ -114,7 +114,7 @@ Application.Controllers.controller('NewTrainingController', [ '$scope', '$state'
 /**
  * Controller used in the training edition page (admin)
  */
-Application.Controllers.controller('EditTrainingController', [ '$scope', '$state', '$stateParams', 'trainingPromise', 'machinesPromise', 'CSRF',
+Application.Controllers.controller('EditTrainingController', ['$scope', '$state', '$stateParams', 'trainingPromise', 'machinesPromise', 'CSRF',
   function ($scope, $state, $stateParams, trainingPromise, machinesPromise, CSRF) {
   /* PUBLIC SCOPE */
 
@@ -152,7 +152,6 @@ Application.Controllers.controller('EditTrainingController', [ '$scope', '$state
  */
 Application.Controllers.controller('TrainingsAdminController', ['$scope', '$state', '$uibModal', 'Training', 'trainingsPromise', 'machinesPromise', '_t', 'growl', 'dialogs', 'Member', 'uiTourService', 'settingsPromise',
   function ($scope, $state, $uibModal, Training, trainingsPromise, machinesPromise, _t, growl, dialogs, Member, uiTourService, settingsPromise) {
-
     // list of trainings
     $scope.trainings = trainingsPromise;
 
@@ -262,7 +261,8 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
            */
           return $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
         }
-        ] });
+        ]
+      });
     };
 
     /**
@@ -401,8 +401,7 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
       if (settingsPromise.feature_tour_display !== 'manual' && $scope.currentUser.profile.tours.indexOf('trainings') < 0) {
         uitour.start();
       }
-    }
-
+    };
 
     /* PRIVATE SCOPE */
 
@@ -411,7 +410,6 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
      */
     const initialize = function () {};
 
-
     /**
      * Group the trainings availabilities by trainings and by dates and return the resulting tree
      * @param trainings {Array} $scope.trainings is expected here
@@ -419,10 +417,10 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
      */
     const groupAvailabilities = function (trainings) {
       const tree = {};
-      for (let training of Array.from(trainings)) {
+      for (const training of Array.from(trainings)) {
         tree[training.name] = {};
         tree[training.name].training = training;
-        for (let availability of Array.from(training.availabilities)) {
+        for (const availability of Array.from(training.availabilities)) {
           const start = moment(availability.start_at);
 
           // init the tree structure

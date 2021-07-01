@@ -19,20 +19,20 @@ Application.Directives.directive('twitter', ['Setting',
             $scope.twitterName = data.setting.value;
             if ($scope.twitterName) {
               const configProfile = {
-                'profile': { 'screenName': $scope.twitterName },
-                'domId': 'twitter',
-                'maxTweets': 1,
-                'enableLinks': true,
-                'showUser': false,
-                'showTime': true,
-                'showImages': false,
-                'showRetweet': true,
-                'showInteraction': false,
-                'lang': Fablab.locale
+                profile: { screenName: $scope.twitterName },
+                domId: 'twitter',
+                maxTweets: 1,
+                enableLinks: true,
+                showUser: false,
+                showTime: true,
+                showImages: false,
+                showRetweet: true,
+                showInteraction: false,
+                lang: Fablab.locale
               };
               twitterFetcher.fetch(configProfile);
             }
-          })
+          });
         };
 
         // !!! MUST BE CALLED AT THE END of the directive

@@ -13,8 +13,6 @@
     factory(window.jQuery);
   }
 }(function ($) {
-
-
   $.extend($.summernote.options, {
     nugget: {
       list: []
@@ -60,13 +58,13 @@
     /**
      * @param {Object} context - context object has status of editor.
      */
-    'nugget': function (context) {
+    nugget: function (context) {
       // ui has renders to build ui elements.
       //  - you can create a button with `ui.button`
       const ui = $.summernote.ui;
       const options = context.options.nugget;
-      const context_options = context.options;
-      const lang = context_options.langInfo;
+      const contextOptions = context.options;
+      const lang = contextOptions.langInfo;
       const defaultOptions = {
         label: lang.nugget.Nugget,
         tooltip: lang.nugget.Insert_nugget
@@ -74,7 +72,7 @@
 
       // Assign default values if not supplied
       for (const propertyName in defaultOptions) {
-        if (options.hasOwnProperty(propertyName) === false) {
+        if (Object.prototype.hasOwnProperty.call(options, propertyName) === false) {
           options[propertyName] = defaultOptions[propertyName];
         }
       }
@@ -110,7 +108,6 @@
               const node = document.createElement('div');
               node.innerHTML = value.trim();
               context.invoke('editor.insertNode', node.firstChild);
-
             }
           })
         ]);
@@ -121,5 +118,4 @@
     }
 
   });
-
 }));

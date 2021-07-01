@@ -8,12 +8,12 @@
  * which have a valid running subscription or not.
  * Usage: <select-member [subscription="false|true"]></select-member>
  */
-Application.Directives.directive('selectMember', [ 'Diacritics', 'Member', function (Diacritics, Member) {
+Application.Directives.directive('selectMember', ['Diacritics', 'Member', function (Diacritics, Member) {
   return ({
     restrict: 'E',
     templateUrl: '/shared/_member_select.html',
     link (scope, element, attributes) {
-      return scope.autoCompleteName = function (nameLookup) {
+      scope.autoCompleteName = function (nameLookup) {
         if (!nameLookup) {
           return;
         }
@@ -22,7 +22,7 @@ Application.Directives.directive('selectMember', [ 'Diacritics', 'Member', funct
 
         const q = { query: asciiName };
         if (attributes.subscription) {
-          q['subscription'] = attributes.subscription;
+          q.subscription = attributes.subscription;
         }
 
         Member.search(q, function (users) {
