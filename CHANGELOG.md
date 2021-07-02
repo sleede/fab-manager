@@ -3,6 +3,7 @@
 - Fix a bug: missing hour format for norwegian
 - Fix a bug: missing invoice watermark for norwegian
 - Fix a bug: prepaid hours not used if bought slot is longer than remaining prepaid time
+- Fix a bug: cookies modal buttons are too small
 
 ## v5.1.2 2021 July 2
 
