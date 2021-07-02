@@ -1,5 +1,8 @@
 # Changelog Fab-manager
 
+- Fix a bug: invalid rails locale for Norwegian
+
+
 ## v5.1.1 2021 July 1st
 
 - Set up the linter for Typescript files
