@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v5.1.3 2021 July 2
+
 - Fix a bug: missing hour format for norwegian
 - Fix a bug: missing invoice watermark for norwegian
 - Fix a bug: prepaid hours not used if bought slot is longer than remaining prepaid time
