@@ -1,6 +1,9 @@
 # Changelog Fab-manager
 
+## v5.1.2 2021 July 2
+
 - Fix a bug: invalid rails locale for Norwegian
+
 
 ## v5.1.1 2021 July 1st
 
