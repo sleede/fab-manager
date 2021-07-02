@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'test_helper'
+
 module Prices
   class AsAdminTest < ActionDispatch::IntegrationTest
     setup do
