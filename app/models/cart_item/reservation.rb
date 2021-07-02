@@ -86,7 +86,7 @@ class CartItem::Reservation < CartItem::BaseItem
                    slot_rate
                  end
     # subtract free minutes from prepaid packs
-    if real_price.positive? && options[:prepaid][:minutes] >= slot_minutes
+    if real_price.positive? && options[:prepaid][:minutes] >= 0
       consumed = slot_minutes
       consumed = options[:prepaid][:minutes] if slot_minutes > options[:prepaid][:minutes]
       real_price = (slot_minutes - consumed) * (slot_rate / MINUTES_PER_HOUR)

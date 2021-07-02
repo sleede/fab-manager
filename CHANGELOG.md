@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Fix a bug: missing hour format for norwegian
+- Fix a bug: prepaid hours not used if bought slot is longer than remaining prepaid time
 
 ## v5.1.2 2021 July 2
 
