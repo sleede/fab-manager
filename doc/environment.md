@@ -118,7 +118,7 @@ By default, these variables are not present in the env file, because they are on
 Optional email of the administrator account in charge of the system administration.
 If specified, he will be hidden from the administrators list, and he will exclusively receive the notifications related to the system administration.
 If not specified, every administrator will receive system administration notifications.
-Please note that setting this parameter does not automatically create the corresponding account in Fab-manager: you must specify here the email of an existing admin account. 
+Please note that setting this parameter does not automatically create the corresponding account in Fab-manager: you must specify here the email of an existing admin account.
 <a name="FORCE_VERSION_CHECK"></a>
 
     FORCE_VERSION_CHECK
@@ -130,14 +130,14 @@ In test and development environments, the version won't be check automatically, 
 
 In production and staging environments, the session cookie won't be sent to the server unless through the HTTPS protocol.
 If you're using Fab-manager on a non-public network or for testing purposes, you can disable this behavior by setting this variable to `true`.
-Please, ensure you know what you're doing, as this can lead to serious security issues. 
+Please, ensure you know what you're doing, as this can lead to serious security issues.
 <a name="LOCKED_SETTINGS"></a>
 
     LOCKED_SETTINGS
 
 A comma separated list of settings that cannot be changed from the UI.
 Please refer to https://github.com/sleede/fab-manager/blob/master/app/models/setting.rb for a list of possible values.
-Only the system administrator can change them, with the command: `ENV=value rails fablab:setup:env_to_db` 
+Only the system administrator can change them, with the command: `ENV=value rails fablab:setup:env_to_db`
 
 <a name="internationalization-settings"></a>
 ## Internationalization setting.
@@ -158,7 +158,7 @@ Please, be aware that **the configured locale will imply the CURRENCY symbol use
 
 _Eg.: configuring **es-ES** will set the currency symbol to **€** but **es-MX** will set **$** as currency symbol, so setting the `RAILS_LOCALE` to simple **es** (without country indication) will probably not do what you expect._
 
-Available values: `en, en-AU-CA, en-GB, en-IE, en-IN, en-NZ, en-US, en-ZA, fr, fa-CA, fr-CH, fr-CM, fr-FR, es, es-419, es-AR, es-CL, es-CO, es-CR, es-DO, 
+Available values: `en, en-AU-CA, en-GB, en-IE, en-IN, en-NZ, en-US, en-ZA, fr, fa-CA, fr-CH, fr-CM, fr-FR, es, es-419, es-AR, es-CL, es-CO, es-CR, es-DO,
   es-EC, es-ES, es-MX, es-MX, es-PA, es-PE, es-US, es-VE, no, pt, pt-BR, zu`.
 Default is **en**.
 
@@ -211,12 +211,12 @@ See [Intl - Javascript | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaS
 
 Configure the currency for the javascript Intl Object.
 Possible values are the ISO 4217 currency codes, such as "USD" for the US dollar, "EUR" for the euro.
-See [Current currency & funds code list](http://www.currency-iso.org/en/home/tables/table-a1.html) for a list of available values. 
+See [Current currency & funds code list](http://www.currency-iso.org/en/home/tables/table-a1.html) for a list of available values.
 There is no default value; this setting MUST be provided.
 <a name="POSTGRESQL_LANGUAGE_ANALYZER"></a>
 
     POSTGRESQL_LANGUAGE_ANALYZER
-    
+
 This variable configures the language analyzer for indexing and searching in projets with PostgreSQL.
 Available values: `danish, dutch, english, finnish, french, german, hungarian, italian, norwegian, portuguese, romanian, russian, simple, spanish, swedish, turkish`
 <a name="TIME_ZONE"></a>
