@@ -1,9 +1,16 @@
 # Changelog Fab-manager
 
+## v5.1.3 2021 July 2
+
+- Fix a bug: missing hour format for norwegian
+- Fix a bug: missing invoice watermark for norwegian
+- Fix a bug: prepaid hours not used if bought slot is longer than remaining prepaid time
+- Fix a bug: cookies modal buttons are too small
+- Fix a bug: do not include fully used packs in user's packs
+
 ## v5.1.2 2021 July 2
 
 - Fix a bug: invalid rails locale for Norwegian
-
 
 ## v5.1.1 2021 July 1st
 

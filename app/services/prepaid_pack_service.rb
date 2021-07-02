@@ -27,6 +27,7 @@ class PrepaidPackService
         .where('expires_at > ?', DateTime.current)
         .where('prepaid_packs.priceable_id = ?', priceable.id)
         .where('prepaid_packs.priceable_type = ?', priceable.class.name)
+        .where('minutes_used < prepaid_packs.minutes')
     end
 
     # subtract the number of used prepaid minutes from the user's count
