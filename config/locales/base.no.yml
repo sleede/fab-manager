@@ -1,4 +1,4 @@
-no:
+"no":
   time:
     formats:
       # See http://apidock.com/ruby/DateTime/strftime for a list of available directives
