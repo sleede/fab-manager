@@ -14,7 +14,7 @@ export default class StripeAPI {
   }
 
   static async confirmIntent (stp_payment_intent_id: string, cart_items: ShoppingCart): Promise<PaymentConfirmation|Invoice> {
-    const res: AxiosResponse = await apiClient.post(`/api/payments/confirm_payment`, {
+    const res: AxiosResponse = await apiClient.post(`/api/stripe/confirm_payment`, {
       payment_intent_id: stp_payment_intent_id,
       cart_items
     });
