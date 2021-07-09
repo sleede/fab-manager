@@ -1,5 +1,9 @@
 # Changelog Fab-manager
 
+## v5.1.4 2021 July 9
+
+- Fix a bug: stripe 3D Secure payment
+
 ## v5.1.3 2021 July 2
 
 - Fix a bug: missing hour format for norwegian
@@ -29,6 +33,10 @@
 - Fix a bug: public list of plans fails to render if a group has no plans
 - [TODO DEPLOY] `rails db:seed`
 - [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
+
+## v5.0.9 2021 July 9
+
+- Fix a bug: stripe 3D Secure payment
 
 ## v5.0.8 2021 June 28
 
