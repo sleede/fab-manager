@@ -3,9 +3,9 @@
     admin:
       #add a new machine
       machines_new:
-        declare_a_new_machine: "Sette opp en ny maskin"
-        watch_out_when_creating_a_new_machine_its_prices_are_initialized_at_0_for_all_subscriptions: "Pass på: når ny maskin settes opp blir alle priser satt til null."
-        consider_changing_them_before_creating_any_reservation_slot: "Vurder å endre dem før nye reserveringer gjøres."
+        declare_a_new_machine: "Sett opp en ny maskin"
+        watch_out_when_creating_a_new_machine_its_prices_are_initialized_at_0_for_all_subscriptions: "PASS PÅ: Når ny maskin settes opp blir alle priser satt til null."
+        consider_changing_them_before_creating_any_reservation_slot: "Vurder å endre før nye reserveringer gjøres."
       #machine edition
       machines_edit:
         machine_edit: "Rediger en maskin"
@@ -1382,13 +1382,13 @@
             content: "Her kan du se kurs/opplæring for de ulike maskinene. Du kan også validere opplæring og kurs medlemmene har deltatt i."
           trainings:
             title: "Manage trainings"
-            content: "<p>With each training, a default number of places is associated. However, the number of actual places may be modified for each session.</p><p>The training sessions are scheduled from the administrator tab « Calendar ».</p><p>Furthermore, a training may be associated with one or more machines. This makes it a prerequisite for the reservation of these machines.</p>"
+            content: "<p>Hvert kurs/opplæring er oppført med et standard antall plasser. Det er allikevel mulig å endre antall plasser for hver økt.</p><p>Opplæringsøktene planlegges fra administratorfanen «Kalender».</p><p>Videre kan en opplæring knyttes opp mot en eller flere maskiner. Det blir dermed ikke mulig å reservere disse maskinene uten å ha gjennomgått tilknyttet opplæring..</p>"
           filter:
             title: "Filter"
             content: "By default, only active courses are displayed here. Display the others by choosing another filter here."
           tracking:
             title: "Trainings monitoring"
-            content: "Once a training session is finished, you can validate the training for the members present from this screen. This validation is essential to allow them to use the associated machines, if applicable."
+            content: "Så snart en opplæringsøkt er ferdig kan du validere opplæringen for medlemmene her. Denne valideringen er nødvendig for å bruke de tilknyttede maskinene, hvis det er aktuelt."
         calendar:
           welcome:
             title: "Calendar"
@@ -1479,7 +1479,7 @@
             content: "Manage subscription plans and prices for the various services you offer to your members."
           new_plan:
             title: "New subscription plan"
-            content: "Create subscription plans to offer preferential prices on machines and spaces to regular users."
+            content: "Opprett abonnementsplaner for å kunne tilby spesialpriser på maskiner og lokaler til vanlige brukere."
           trainings:
             title: "Trainings"
             content: "Define training prices here, by user group."
