@@ -73,7 +73,7 @@
         labels: "Merke(r):"
         none: "Ingen"
         slot_successfully_deleted: "Reservasjonen {START} - {END} er slettet"
-        slots_deleted: "The slot of {START}, and {COUNT, plural, =1{one other} other{{COUNT} others}}, have been deleted"
+        slots_deleted: "Reservasjonen som starter {START} og {COUNT, plural, =1{en annen} other{{COUNT} andre}} er kansellert."
         unable_to_delete_the_slot: "Kan ikke slette reservasjoen {START} - {END}, sannsynligvis fordi det allerede er reservert av et medlem"
         slots_not_deleted: "On {TOTAL} slots, {COUNT, plural, =1{one was not deleted} other{{COUNT} were not deleted}}. Some reservations may exist on {COUNT, plural, =1{it} other{them}}."
         you_should_select_at_least_a_machine: "Du må velge minst én maskin for denne reservasjonen."
