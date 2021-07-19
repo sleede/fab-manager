@@ -152,7 +152,7 @@
           validation_info: "Brukere kan laste opp CAD (datamaskinbasert design) filer med dokumentasjon i sine prosjekter. Du kan angi hvilke filtyper som er tillatt. Bruk testen under for å bestemme MIME-typen av en fil."
           extensions: "Tillatte filtyper"
           new_extension: "Ny utvidelse"
-          new_ext_info_html: "<p>Spesifiser en ny filtype for å tillate at disse filene lastes opp.</p><p>Å tillate filarkiv (f. eks. ZIP) eller kjørbare binærfiler (f. eks. EXE) kan resultere i et <strong>farlig sikkerhetsproblem</strong> og bør unngås</p>"
+          new_ext_info_html: "<p>Spesifiser en ny filtype for å tillate at disse filene lastes opp.</p><p>Vær oppmerksom på at dersom filarkiv (f. eks. ZIP) eller kjørbare binærfiler (f. eks. EXE) kan resultere i <strong>farlige sikkerhetsproblemer</strong> og bør unngås</p>"
           mime_types: "Tillatte MIME-typer"
           new_mime_type: "Ny MIME-type"
           new_type_info_html: "<p>Specify a new MIME type to allow these files to be uploaded.</p><p>Please use the test input to determine the MIME type of a file. Please consider that allowing file archives (eg. application/zip) or binary executable (eg. application/exe) may result in a <strong>dangerous security issue</strong> and must be avoided in any cases.</p>"
