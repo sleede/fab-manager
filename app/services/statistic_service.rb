@@ -130,7 +130,7 @@ class StatisticService
                .eager_load(invoice: [:coupon], subscription: [:plan, statistic_profile: [:group]]).each do |i|
       next if i.invoice.is_a?(Avoir)
 
-      sub = i.invoice_items.find(&:subscription)
+      sub = i.subscription
 
       next unless sub
 
@@ -162,7 +162,7 @@ class StatisticService
     Reservation
       .where("reservable_type = 'Machine' AND slots.canceled_at IS NULL AND " \
              'reservations.created_at >= :start_date AND reservations.created_at <= :end_date', options)
-      .eager_load(:slots, statistic_profile: [:group], invoice: [:invoice_items])
+      .eager_load(:slots, :invoice_items, statistic_profile: [:group])
       .each do |r|
       next unless r.reservable
 
@@ -174,7 +174,7 @@ class StatisticService
         machine_type: r.reservable.friendly_id,
         machine_name: r.reservable.name,
         nb_hours: r.slots.size,
-        ca: calcul_ca(r.invoice)
+        ca: calcul_ca(r.original_invoice)
       }.merge(user_info(profile)))
     end
     result
@@ -185,7 +185,7 @@ class StatisticService
     Reservation
       .where("reservable_type = 'Space' AND slots.canceled_at IS NULL AND " \
              'reservations.created_at >= :start_date AND reservations.created_at <= :end_date', options)
-      .eager_load(:slots, statistic_profile: [:group], invoice: [:invoice_items])
+      .eager_load(:slots, :invoice_items, statistic_profile: [:group])
       .each do |r|
       next unless r.reservable
 
@@ -197,7 +197,7 @@ class StatisticService
         space_name: r.reservable.name,
         space_type: r.reservable.slug,
         nb_hours: r.slots.size,
-        ca: calcul_ca(r.invoice)
+        ca: calcul_ca(r.original_invoice)
       }.merge(user_info(profile)))
     end
     result
@@ -208,7 +208,7 @@ class StatisticService
     Reservation
       .where("reservable_type = 'Training' AND slots.canceled_at IS NULL AND " \
              'reservations.created_at >= :start_date AND reservations.created_at <= :end_date', options)
-      .eager_load(:slots, statistic_profile: [:group], invoice: [:invoice_items])
+      .eager_load(:slots, :invoice_items, statistic_profile: [:group])
       .each do |r|
       next unless r.reservable
 
@@ -222,7 +222,7 @@ class StatisticService
         training_name: r.reservable.name,
         training_date: slot.start_at.to_date,
         nb_hours: difference_in_hours(slot.start_at, slot.end_at),
-        ca: calcul_ca(r.invoice)
+        ca: calcul_ca(r.original_invoice)
       }.merge(user_info(profile)))
     end
     result
@@ -233,7 +233,7 @@ class StatisticService
     Reservation
       .where("reservable_type = 'Event' AND slots.canceled_at IS NULL AND " \
              'reservations.created_at >= :start_date AND reservations.created_at <= :end_date', options)
-      .eager_load(:slots, statistic_profile: [:group], invoice: [:invoice_items])
+      .eager_load(:slots, :invoice_items, statistic_profile: [:group])
       .each do |r|
       next unless r.reservable
 
@@ -250,7 +250,7 @@ class StatisticService
         age_range: (r.reservable.age_range_id ? r.reservable.age_range.name : ''),
         nb_places: r.total_booked_seats,
         nb_hours: difference_in_hours(slot.start_at, slot.end_at),
-        ca: calcul_ca(r.invoice)
+        ca: calcul_ca(r.original_invoice)
       }.merge(user_info(profile)))
     end
     result
@@ -262,13 +262,13 @@ class StatisticService
     avoirs_ca_list = []
     result = []
     Reservation.where('reservations.created_at >= :start_date AND reservations.created_at <= :end_date', options)
-               .eager_load(:slots, statistic_profile: [:group], invoice: [:invoice_items])
+               .eager_load(:slots, :invoice_items, statistic_profile: [:group])
                .each do |r|
       next unless r.reservable
 
       reservations_ca_list.push OpenStruct.new({
         date: options[:start_date].to_date,
-        ca: calcul_ca(r.invoice)
+        ca: calcul_ca(r.original_invoice)
       }.merge(user_info(r.statistic_profile)))
     end
     Avoir.where('invoices.created_at >= :start_date AND invoices.created_at <= :end_date', options)
