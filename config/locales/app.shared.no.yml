@@ -229,7 +229,7 @@
       #partial form to edit/create a user (admin view)
       user_admin:
         user: "User"
-        incomplete_profile: "Incomplete profile"
+        incomplete_profile: "Ufullstendig profil"
         user_profile: "User profile"
         warning_incomplete_user_profile_probably_imported_from_sso: "Warning: This user's profile is incomplete. As \"single sign-on\" (SSO) authentication is currently enabled, it may probably be an imported but non merged account. Do not modify it unless you know what your doing."
         group: "Group"
