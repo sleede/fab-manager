@@ -415,7 +415,7 @@
     reduced_fare_if_you_are_under_25_student_or_unemployed: "Reduced fare if you are under 25, student or unemployed."
   group:
     #name of the user's group for administrators
-    admins: 'Administrators'
+    admins: 'Administratorer'
   settings:
     locked_setting: "the setting is locked."
     about_title: "\"About\" page title"
