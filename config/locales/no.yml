@@ -144,50 +144,50 @@
     subscription: "abonn."
     Machine_reservation: "maskinreserv."
     Training_reservation: "bestilling, opplæring/kurs"
-    Event_reservation: "event reserv."
-    Space_reservation: "space reserv."
-    wallet: "wallet"
+    Event_reservation: "arrangementetsreserv."
+    Space_reservation: "reserv., plass/rom"
+    wallet: "lommebok"
   #training availabilities
   trainings:
-    i_ve_reserved: "I've reserved"
-    completed: "Full"
+    i_ve_reserved: "Jeg har reservert"
+    completed: "Fullt"
   #error messages when updating an event
   events:
-    error_deleting_reserved_price: "Unable to delete the requested price because it is associated with some reservations"
-    other_error: "An unexpected error occurred while updating the event"
+    error_deleting_reserved_price: "Kan ikke slette den forespurte prisen fordi den er tilknyttet noen reservasjoner"
+    other_error: "En uventet feil oppstod under oppdatering av arrangementet"
     #event duration
-    from_STARTDATE_to_ENDDATE: "From %{STARTDATE} to %{ENDDATE},"
-    from_STARTTIME_to_ENDTIME: "from %{STARTTIME} to %{ENDTIME}"
+    from_STARTDATE_to_ENDDATE: "Fra %{STARTDATE} til %{ENDDATE},"
+    from_STARTTIME_to_ENDTIME: "fra %{STARTTIME} til %{ENDTIME}"
   #members list export to EXCEL format
   export_members:
-    members: "Members"
+    members: "Medlemmer"
     id: "ID"
-    surname: "Surname"
-    first_name: "First name"
-    email: "E-mail"
-    newsletter: "Newsletter"
-    last_login: "Last login"
-    gender: "Gender"
-    age: "Age"
-    address: "Address"
-    phone: "Phone"
-    website: "Website"
-    job: "Job"
-    interests: "Interests"
-    cad_software_mastered: "CAD Softwares mastered"
-    group: "Group"
-    subscription: "Subscription"
-    subscription_end_date: "Subscription end date"
-    validated_trainings: "Validated trainings"
-    tags: "Tags"
-    number_of_invoices: "Number of invoices"
-    projects: "Projects"
+    surname: "Etternavn"
+    first_name: "Fornavn"
+    email: "E-post"
+    newsletter: "Nyhetsbrev"
+    last_login: "Sist innlogget"
+    gender: "Kjønn"
+    age: "Alder"
+    address: "Adresse"
+    phone: "Telefon"
+    website: "Nettsted"
+    job: "Jobb"
+    interests: "Interesser"
+    cad_software_mastered: "Mestret CAD-programvare"
+    group: "Gruppe"
+    subscription: "Medlemskap/abonnement"
+    subscription_end_date: "Sluttdato for abonnementet"
+    validated_trainings: "Godkjent opplæring/kurs"
+    tags: "Etiketter"
+    number_of_invoices: "Antall fakturaer"
+    projects: "Prosjekter"
     facebook: "Facebook"
     twitter: "Twitter"
     echo_sciences: "Echosciences"
-    organization: "Organization"
-    organization_address: "Organization address"
-    man: "Man"
+    organization: "Organisasjon"
+    organization_address: "Organisasjonens adresse"
+    man: "Mann"
     woman: "Woman"
     without_subscriptions: "Without subscriptions"
   #machines/trainings/events reservations list to EXCEL format
@@ -252,31 +252,31 @@
       notify_admin_slot_is_modified:
         a_booking_slot_was_modified: "A booking slot was modified."
       notify_admin_subscribed_plan:
-        subscription_PLAN_has_been_subscribed_by_USER_html: "Subscription <strong><em>%{PLAN}</em></strong> has been subscribed by <strong><em>%{USER}</strong></em>."
+        subscription_PLAN_has_been_subscribed_by_USER_html: "Abonnement/medlemskap <strong><em>%{PLAN}</em></strong> har blitt bestilt av <strong><em>%{USER}</strong></em>."
       notify_admin_subscription_canceled:
-        USER_s_subscription_has_been_cancelled: "%{USER}'s subscription has been cancelled."
+        USER_s_subscription_has_been_cancelled: "%{USER} sitt abonnement har blitt kansellert."
       notify_admin_subscription_extended:
-        subscription_PLAN_of_the_member_USER_has_been_extended_FREE_until_DATE_html: "Subscription <strong><em>{PLAN}</em></strong> of the member <strong><em>{USER}</strong></em> has been extended {FREE, select, true{for free} other{}} until {DATE}." #messageFormat interpolation
+        subscription_PLAN_of_the_member_USER_has_been_extended_FREE_until_DATE_html: "Abonnement <strong><em>{PLAN}</em></strong> for <strong><em>{USER}</strong></em> har blitt utvidet {FREE, select, true{gratis} other{}} til {DATE}." #messageFormat interpolation
       notify_admin_subscription_is_expired:
-        USER_s_subscription_has_expired: "%{USER}'s subscription has expired."
+        USER_s_subscription_has_expired: "%{USER}sitt abonnement har utløpt."
       notify_admin_subscription_will_expire_in_7_days:
-        USER_s_subscription_will_expire_in_7_days: "%{USER}'s subscription will expire in 7 days."
+        USER_s_subscription_will_expire_in_7_days: "%{USER} sitt abonnement utløper om 7 dager."
       notify_admin_user_group_changed:
-        user_NAME_changed_his_group_html: "User <strong><em>{NAME}</strong></em> changed {GENDER, select, true{his} other{her}} group." #messageFormat interpolation
+        user_NAME_changed_his_group_html: "Bruker <strong><em>{NAME}</strong></em> har endret gruppe." #messageFormat interpolation
       notify_admin_user_merged:
-        user_NAME_has_merged_his_account_with_the_one_imported_from_PROVIDER_UID_html: "User <strong><em>{NAME}</strong></em> has merged {GENDER, select, true{his} other{her}} account with the one imported from <strong><em>{PROVIDER} </strong> ({UID})</em>." #messageFormat interpolation
+        user_NAME_has_merged_his_account_with_the_one_imported_from_PROVIDER_UID_html: "Bruker <strong><em>{NAME}</strong></em> har slått sammen sin konto med den som er importert fra <strong><em>{PROVIDER} </strong> ({UID})</em>." #messageFormat interpolation
       notify_admin_when_project_published:
-        project_NAME_has_been_published_html: "Project <a href='/#!/projects/%{ID}'><strong><em>%{NAME}<em></strong></a> has been published."
+        project_NAME_has_been_published_html: "Prosjekt <a href='/#!/projects/%{ID}'><strong><em>%{NAME}<em></strong></a> har blitt publisert."
       notify_admin_when_user_is_created:
-        a_new_user_account_has_been_created_NAME_EMAIL_html: "A new user account has been created: <strong><em>%{NAME} &lt;%{EMAIL}&gt;</strong></em>."
+        a_new_user_account_has_been_created_NAME_EMAIL_html: "En ny brukerkonto er opprettet: <strong><em>%{NAME} &lt;%{EMAIL}&gt;</strong></em>."
       notify_admin_when_user_is_imported:
-        a_new_user_account_has_been_imported_from_PROVIDER_UID_html: "A new user account has been imported from: <strong><em>%{PROVIDER}</strong> (%{UID})</em>."
+        a_new_user_account_has_been_imported_from_PROVIDER_UID_html: "En ny brukerkonto har blitt importert fra: <strong><em>%{PROVIDER}</strong> (%{UID})</em>."
       notify_member_create_reservation:
-        your_reservation_RESERVABLE_was_successfully_saved_html: "Your reservation <strong><em>%{RESERVABLE}</em></strong> was successfully saved."
+        your_reservation_RESERVABLE_was_successfully_saved_html: "Din reservasjon <strong><em>%{RESERVABLE}</em></strong> er blitt lagret."
       notify_member_reservation_reminder:
-        reminder_you_have_a_reservation_RESERVABLE_to_be_held_on_DATE_html: "Reminder: You have a reservation <strong>%{RESERVABLE}</strong> to be held on <em>%{DATE}</em>"
+        reminder_you_have_a_reservation_RESERVABLE_to_be_held_on_DATE_html: "Påminnelse: Du har en reservasjon <strong>%{RESERVABLE}</strong> den <em>%{DATE}</em>"
       notify_member_slot_is_canceled:
-        your_reservation_RESERVABLE_of_DATE_was_successfully_cancelled: "Your reservation %{RESERVABLE} of %{DATE} was successfully cancelled."
+        your_reservation_RESERVABLE_of_DATE_was_successfully_cancelled: "Din reservasjon %{RESERVABLE} den %{DATE} ble kansellert."
       notify_member_slot_is_modified:
         your_reservation_slot_was_successfully_changed: "Your reservation slot was successfully changed."
       notify_member_subscribed_plan:
