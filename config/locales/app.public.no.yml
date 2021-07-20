@@ -3,14 +3,14 @@
     public:
       #header and "about" page
       common:
-        about_the_fablab: "About {GENDER, select, male{the} female{the} neutral{} other{the}} {NAME}"
-        return: "Return"
+        about_the_fablab: "Om Marineholmen Makerspace"
+        return: "Tilbake"
         #cookies
         cookies:
-          about_cookies: "This website uses cookies for audience measurement purposes."
-          learn_more: "Learn more"
+          about_cookies: "Dette nettstedet bruker informasjonskapsler for å måle aktivitet på nettstedet."
+          learn_more: "Finn ut mer"
           accept: "Godta informasjonskapsler"
-          decline: "Refuse"
+          decline: "Avslå"
         #dashboard sections
         dashboard: "Dashboard"
         my_profile: "My Profile"
@@ -31,9 +31,9 @@
         notifications: "Notifications"
         admin: "Admin"
         manager: "Manager"
-        reduce_panel: "Reduce panel"
+        reduce_panel: "Lukk sidepanel"
         #left menu (public)
-        home: "Home"
+        home: "Hjem"
         reserve_a_machine: "Reservere en maskin"
         trainings_registrations: "Registrering av opplæring/kurs"
         events_registrations: "Arrangementer"
@@ -104,12 +104,12 @@
         your_password_was_successfully_changed: "Your password was successfully changed."
         #connection modal
         connection: "Connection"
-        password_forgotten: "Forgotten password?"
-        confirm_my_account: "Confirm my e-mail"
-        not_registered_to_the_fablab: "Not registered to the FabLab?"
-        create_an_account: "Create an account"
+        password_forgotten: "Glemt passord?"
+        confirm_my_account: "Bekreft min e-post"
+        not_registered_to_the_fablab: "Ikke registrert i makerspacet?"
+        create_an_account: "Lag en konto"
         wrong_email_or_password: "Wrong e-mail or password."
-        caps_lock_is_on: "Caps lock key is on."
+        caps_lock_is_on: "Caps Lock er på."
         #confirmation modal
         you_will_receive_confirmation_instructions_by_email: "You will receive confirmation instructions by email."
         #forgotten password modal
@@ -231,11 +231,11 @@
         the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users: "The machine can't be deleted because it's already reserved by some users."
       #list of trainings
       trainings_list:
-        book: "Book"
-        the_trainings: "The trainings"
+        book: "Meld på"
+        the_trainings: "Kurs/opplæring"
       #details of a training
       training_show:
-        book_this_training: "Book this training"
+        book_this_training: "Meld deg på denne"
         do_you_really_want_to_delete_this_training: "Do you really want to delete this training?"
         unauthorized_operation: "Unauthorized operation"
         confirmation_required: "Confirmation required"
@@ -273,7 +273,7 @@
       #Fablab's events list
       events_list:
         the_fablab_s_events: "The Fablab's events"
-        all_categories: "All categories"
+        all_categories: "Alle kategorier"
         for_all: "For all"
         sold_out: "Sold Out"
         cancelled: "Cancelled"
@@ -287,29 +287,29 @@
         all_themes: "All themes"
       #details and booking of an event
       events_show:
-        event_description: "Event description"
-        downloadable_documents: "Downloadable documents"
-        information_and_booking: "Information and booking"
-        dates: "Dates"
-        beginning: "Beginning:"
-        ending: "Ending:"
-        opening_hours: "Opening hours:"
+        event_description: "Arrangementsbeskrivelse"
+        downloadable_documents: "Nedlastbare dokumenter"
+        information_and_booking: "Informasjon og bestilling"
+        dates: "Datoer"
+        beginning: "Start:"
+        ending: "Slutt:"
+        opening_hours: "Åpningstider:"
         all_day: "All day"
-        from_time: "From" #eg. from 18:00 to 21:00
-        to_time: "to" #eg. from 18:00 to 21:00
-        full_price_: "Full price:"
-        tickets_still_availables: "Tickets still available:"
+        from_time: "Fra" #eg. from 18:00 to 21:00
+        to_time: "til" #eg. from 18:00 to 21:00
+        full_price_: "Full pris:"
+        tickets_still_availables: "Ledige plasser:"
         sold_out: "Sold out."
         without_reservation: "Without reservation"
         cancelled: "Cancelled"
         ticket: "{NUMBER, plural, one{ticket} other{tickets}}"
-        make_a_gift_of_this_reservation: "Make a gift of this reservation"
+        make_a_gift_of_this_reservation: "Gi denne reservasjonen som gave"
         thank_you_your_payment_has_been_successfully_registered: "Tank you. Your payment has been successfully registered!"
         you_can_find_your_reservation_s_details_on_your_: "You can find your reservation's details on your"
         dashboard: "dashboard"
         you_booked_DATE: "You booked ({DATE}):"
         canceled_reservation_SEATS: "Reservation canceled ({SEATS} seats)"
-        book: "Book"
+        book: "Meld på"
         confirm_and_pay: "Confirm and pay"
         confirm_payment_of_html: "{ROLE, select, admin{Cash} other{Pay}}: {AMOUNT}" #(contexte : validate a payment of $20,00)
         online_payment_disabled: "Payment by credit card is not available. Please contact the FabLab's reception directly."
@@ -330,11 +330,11 @@
         do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "Do you really want to cancel this reservation? This apply to ALL booked tickets."
         reservation_was_successfully_cancelled: "Reservation was successfully cancelled."
         cancellation_failed: "Cancellation failed."
-        event_is_over: "The event is over."
-        thanks_for_coming: "Thanks for coming!"
-        view_event_list: "View events to come"
-        share_on_facebook: "Share on Facebook"
-        share_on_twitter: "Share on Twitter"
+        event_is_over: "Dette arrangementet er avsluttet."
+        thanks_for_coming: "Takk for besøket!"
+        view_event_list: "Vis hendelser som kommer"
+        share_on_facebook: "Del på Facebook"
+        share_on_twitter: "Del på Twitter"
       #public calendar
       calendar:
         calendar: "Kalender"
@@ -347,13 +347,13 @@
         externals: "Other calendars"
       #list of spaces
       spaces_list:
-        the_spaces: "The spaces"
+        the_spaces: "Plasser/rom"
         new_availability: "Open reservations"
         add_a_space: "Add a space"
-        status_enabled: "Enabled"
-        status_disabled: "Disabled"
-        status_all: "All"
-        book: "Book"
+        status_enabled: "Aktive"
+        status_disabled: "Inaktive"
+        status_all: "Alle"
+        book: "Reserver"
       #display the details of a space
       space_show:
         book_this_space: "Book this space"
