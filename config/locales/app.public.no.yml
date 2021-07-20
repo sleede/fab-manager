@@ -205,10 +205,10 @@
         do_you_really_want_to_delete_this_project: "Do you really want to delete this project?"
       #list of machines
       machines_list:
-        the_fablab_s_machines: "The FabLab's machines"
+        the_fablab_s_machines: "Makerspacets maskiner"
         add_a_machine: "Add a machine"
         new_availability: "Open reservations"
-        book: "Book"
+        book: "Reserver"
         _or_the_: " or the "
       machines_filters:
         show_machines: "Show machines"
@@ -220,10 +220,10 @@
         consult: "Se på"
       #details of a machine
       machines_show:
-        book_this_machine: "Book this machine"
-        technical_specifications: "Technical specifications"
-        files_to_download: "Files to download"
-        projects_using_the_machine: "Projects using the machine"
+        book_this_machine: "Reserver denne maskinen"
+        technical_specifications: "Tekniske detaljer"
+        files_to_download: "Filer som kan lastes ned"
+        projects_using_the_machine: "Prosjekter med denne maskinen"
         _or_the_: " or the "
         confirmation_required: "Confirmation required"
         do_you_really_want_to_delete_this_machine: "Do you really want to delete this machine?"
@@ -337,13 +337,13 @@
         share_on_twitter: "Share on Twitter"
       #public calendar
       calendar:
-        calendar: "Calendar"
+        calendar: "Kalender"
         show_unavailables: "Show unavailable slots"
-        filter_calendar: "Filter calendar"
+        filter_calendar: "Kalenderfilter"
         trainings: "Trainings"
-        machines: "Machines"
-        spaces: "Spaces"
-        events: "Events"
+        machines: "Maskiner"
+        spaces: "Plasser/rom"
+        events: "Arrangementer"
         externals: "Other calendars"
       #list of spaces
       spaces_list:
