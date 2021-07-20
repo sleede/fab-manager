@@ -244,7 +244,7 @@
       plans:
         subscriptions: "Medlemskap"
         i_choose_that_plan: "I choose that plan"
-        i_subscribe_online: "I subscribe online"
+        i_subscribe_online: "Online innmelding"
         i_already_subscribed: "I already subscribed"
         more_information: "More information"
         your_subscription_expires_on_the_DATE: "Your subscription expires on the {DATE}"
