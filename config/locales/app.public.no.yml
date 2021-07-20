@@ -24,7 +24,7 @@
         #contextual help
         help: "Hjelp"
         #login/logout
-        sign_out: "Logg ut"
+        sign_out: "Logg av"
         sign_up: "Melde deg på"
         sign_in: "Logg inn"
         #left menu
@@ -158,20 +158,20 @@
         all_day: "All day"
       #projects gallery
       projects_list:
-        the_fablab_projects: "The Fab Lab projects"
-        add_a_project: "Add a project"
+        the_fablab_projects: "Våre prosjekter"
+        add_a_project: "Legg til et prosjekt"
         search_over_the_whole_network: "Search over the whole Fab-manager network"
         tooltip_openlab_projects_switch: "The search over the whole network lets you search over the projects of every Fab-manager using this feature !"
         openlab_search_not_available_at_the_moment: "Search over the whole network is not available at the moment. You still can search over the projects of this platform."
-        project_search_result_is_empty: "Sorry, we found no results matching your search criteria."
-        reset_all_filters: "Reset all filters"
-        search: "Search"
-        all_projects: "All projects"
-        my_projects: "My projects"
-        projects_to_whom_i_take_part_in: "Projects to whom I take part in"
-        all_machines: "All machines"
-        all_themes: "All themes"
-        all_materials: "All materials"
+        project_search_result_is_empty: "Beklager, fant vi ingen resultater som samsvarte med dine søkekriterier."
+        reset_all_filters: "Tilbakestill alle filtre"
+        search: "Søk"
+        all_projects: "Alle prosjekter"
+        my_projects: "Mine prosjekter"
+        projects_to_whom_i_take_part_in: "Prosjekter jeg deltar i"
+        all_machines: "Alle maskiner"
+        all_themes: "Alle temaer"
+        all_materials: "Alle materialer"
         load_next_projects: "Load next projects"
         rough_draft: "Rough draft"
       #details of a projet
@@ -268,7 +268,7 @@
         i_am: "Jeg er"
         select_group: "velg gruppe"
         i_want_duration: "Jeg vil abonnere på"
-        all_durations: "All durations"
+        all_durations: "Alle varigheter"
         select_duration: "velg varighet"
       #Fablab's events list
       events_list:
