@@ -267,9 +267,9 @@
       plans_filter:
         i_am: "Jeg er"
         select_group: "velg gruppe"
-        i_want_duration: "I want to subscribe for"
+        i_want_duration: "Jeg vil abonnere på"
         all_durations: "All durations"
-        select_duration: "select a duration"
+        select_duration: "velg varighet"
       #Fablab's events list
       events_list:
         the_fablab_s_events: "The Fablab's events"
