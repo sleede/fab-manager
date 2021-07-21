@@ -4,19 +4,19 @@
       #translations of common buttons
       buttons:
         confirm_changes: "Confirm changes"
-        consult: "Consult"
-        edit: "Edit"
-        change: "Change"
-        delete: "Delete"
-        browse: "Browse"
-        cancel: "Cancel"
+        consult: "Se på"
+        edit: "Rediger"
+        change: "Endre"
+        delete: "Slett"
+        browse: "Bla igjennom"
+        cancel: "Avbryt"
         close: "Close"
         clear: "Clear"
         today: "Today"
-        confirm: "Confirm"
-        save: "Save"
-        "yes": "Yes"
-        "no": "No"
+        confirm: "Bekreft"
+        save: "Lagre"
+        "yes": "Ja"
+        "no": "Nei"
         apply: "Apply"
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "You will lose any unsaved modification if you quit this page"
@@ -93,19 +93,19 @@
         save_as_draft: "Save as draft"
       #machine edition form
       machine:
-        name: "Name"
-        name_is_required: "Name is required."
-        illustration: "Visual"
-        add_an_illustration: "Add a visual"
-        description: "Description"
-        description_is_required: "Description is required."
-        technical_specifications: "Technical specifications"
-        technical_specifications_are_required: "Technical specifications are required."
-        attached_files_pdf: "Attached files (pdf)"
+        name: "Navn"
+        name_is_required: "Bilde."
+        illustration: "Bilde"
+        add_an_illustration: "Legg til bilde"
+        description: "Beskrivelse"
+        description_is_required: "Beskrivelse er påkrevd."
+        technical_specifications: "Tekniske detaljer"
+        technical_specifications_are_required: "Tekniske spesifikasjoner kreves."
+        attached_files_pdf: "Vedlagte filer (pdf)"
         attach_a_file: "Attach a file"
-        add_an_attachment: "Add an attachment"
-        disable_machine: "Disable machine"
-        validate_your_machine: "Validate your machine"
+        add_an_attachment: "Legg til vedlegg"
+        disable_machine: "Deaktiver maskinen"
+        validate_your_machine: "Valider maskinen din"
       #button to book a machine reservation
       reserve_button:
         book_this_machine: "Book this machine"
@@ -115,8 +115,8 @@
         do_not_subscribe: "do not subscribe"
       #admin: choose a member to interact with
       member_select:
-        select_a_member: "Select a member"
-        start_typing: "Start typing..."
+        select_a_member: "Velg et medlem"
+        start_typing: "Begynn å skrive..."
       #payment modal
       payment:
         online_payment: "Online payment"
@@ -229,7 +229,7 @@
       #partial form to edit/create a user (admin view)
       user_admin:
         user: "User"
-        incomplete_profile: "Incomplete profile"
+        incomplete_profile: "Ufullstendig profil"
         user_profile: "User profile"
         warning_incomplete_user_profile_probably_imported_from_sso: "Warning: This user's profile is incomplete. As \"single sign-on\" (SSO) authentication is currently enabled, it may probably be an imported but non merged account. Do not modify it unless you know what your doing."
         group: "Group"
@@ -365,8 +365,8 @@
         enabled: "Active"
       #coupon (input zone for users)
       coupon_input:
-        i_have_a_coupon: "I have a coupon!"
-        code_: "Code:"
+        i_have_a_coupon: "Jeg har en kupong!"
+        code_: "Kode:"
         the_coupon_has_been_applied_you_get_PERCENT_discount: "The coupon has been applied. You get a {PERCENT}% discount."
         the_coupon_has_been_applied_you_get_AMOUNT_CURRENCY: "The coupon has been applied. You get a discount of {AMOUNT} {CURRENCY}."
         coupon_validity_once: "This coupon is valid only once. In case of payment schedule, only for the first deadline."
@@ -463,7 +463,7 @@
       tour:
         previous: "Previous"
         next: "Next"
-        end: "End the tour"
+        end: "Avslutt rundturen"
       #help modal
       help:
         title: "Help"
