@@ -53,7 +53,7 @@
         projects: "Prosjekter"
         statistics: "Statistikk"
         customization: "Tilpasninger"
-        open_api_clients: "OpenAPI klienter"
+        open_api_clients: "OpenAPI-klienter"
         #account creation modal
         create_your_account: "Opprett konto"
         man: "Mann"
