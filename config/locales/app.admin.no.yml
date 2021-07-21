@@ -1331,14 +1331,14 @@
         report_removed: "The report has been deleted"
         failed_to_remove: "An error occurred, unable to delete the report"
       plans_categories:
-        manage_plans_categories: "Manage plans' categories"
+        manage_plans_categories: "Administrer plankategorier"
       plan_categories_list:
-        categories_list: "List of the plan's categories"
-        no_categories: "No categories"
+        categories_list: "Liste over kategorier for denne planen"
+        no_categories: "Ingen kategorier"
         name: "Name"
         significance: "Significance"
       create_plan_category:
-        new_category: "New category"
+        new_category: "Ny kategori"
         name: "Name"
         significance: "Significance"
         significance_info: "Categories will be shown ordered by signifiance. The higher you set the significance, the first the category will be shown."
