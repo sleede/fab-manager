@@ -103,9 +103,9 @@
         technical_specifications_are_required: "Tekniske spesifikasjoner kreves."
         attached_files_pdf: "Vedlagte filer (pdf)"
         attach_a_file: "Attach a file"
-        add_an_attachment: "Add an attachment"
-        disable_machine: "Disable machine"
-        validate_your_machine: "Validate your machine"
+        add_an_attachment: "Legg til vedlegg"
+        disable_machine: "Deaktiver maskinen"
+        validate_your_machine: "Valider maskinen din"
       #button to book a machine reservation
       reserve_button:
         book_this_machine: "Book this machine"
