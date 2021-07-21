@@ -216,7 +216,7 @@
         mark_all_as_read: "Merk alt som lest"
         date: "Dato"
         notif_title: "Tittel"
-        no_new_notifications: "No new notifications."
+        no_new_notifications: "Ingen nye varsler."
         archives: "Arkiv"
         no_archived_notifications: "Ingen arkiverte varsler."
         load_the_next_notifications: "Load the next notifications..."
