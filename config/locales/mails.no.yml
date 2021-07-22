@@ -1,20 +1,20 @@
 "no":
   layouts:
     notifications_mailer:
-      see_you_later: "See you soon on {GENDER, select, neutral{} other{the}}" #messageFormat interpolation
-      sincerely: "Sincerely,"
-      signature: "The Fab Lab team."
-      do_not_reply: "Please do not reply to this email."
+      see_you_later: "Vi ses snart" #messageFormat interpolation
+      sincerely: "Vennlig hilsen,"
+      signature: "Ledelsen."
+      do_not_reply: "Vennligst ikke svar på denne e-posten."
   users_mailer:
     notify_user_account_created:
-      subject: "Your FabLab account has been successfully created"
+      subject: "Kontoen din har blitt opprettet"
       body:
-        hello: "Hello %{NAME},"
-        intro: "The FabLab team has just created an account for you, on {GENDER, select, neutral{} other{the}} {FABLAB} website:" #messageFormat interpolation
+        hello: "Hei %{NAME},"
+        intro: "Vi har opprettet en konto for deg, på {GENDER, select, neutral{} other{}} {FABLAB} nettsted:" #messageFormat interpolation
         connection_parameters: "Here are your connection parameters:"
-        account_name: "Account name:"
-        password: "Password:"
-        temporary_password: "This is a temporary password, you can modify it in your «My account» screen."
+        account_name: "Kontonavn:"
+        password: "Passord:"
+        temporary_password: "Dette er et midlertidig passord, du kan endre det på «Min konto»-skjermen."
         keep_advantages: "With this account, you keep all the advantages linked to your Fab Lab user profile (trainings, subscriptions plans)."
         to_use_platform: "To use the website, please"
         logon_or_login: "create a new account or log in by clicking here."
