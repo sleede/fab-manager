@@ -386,8 +386,8 @@
         select_interval: "Intervall..."
         intervals:
           day: "{COUNT, plural, one{Dag} other{Dager}}"
-          week: "{COUNT, plural, one{Week} other{Weeks}}"
-          month: "{COUNT, plural, one{Month} other{Months}}"
+          week: "{COUNT, plural, one{Uke} other{Uker}}"
+          month: "{COUNT, plural, one{Måned} other{Måneder}}"
           year: "{COUNT, plural, one{Year} other{Years}}"
       create_pack:
         new_pack: "New prepaid pack"
