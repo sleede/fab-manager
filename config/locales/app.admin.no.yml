@@ -388,7 +388,7 @@
           day: "{COUNT, plural, one{Dag} other{Dager}}"
           week: "{COUNT, plural, one{Uke} other{Uker}}"
           month: "{COUNT, plural, one{Måned} other{Måneder}}"
-          year: "{COUNT, plural, one{Year} other{Years}}"
+          year: "{COUNT, plural, one{År} other{År}}"
       create_pack:
         new_pack: "Ny forhåndsbetalt pakke"
         new_pack_info: "En forhåndsbetalt pakke tillater brukere å kjøpe {TYPE, select, Machine{Maskin} Space{plass} other{}} timer før du reserverer ledige plasser. Disse pakkene kan gi rabatter på volumkjøp."
@@ -416,7 +416,7 @@
         #add a subscription plan on the platform
         new:
           add_a_subscription_plan: "Legg til en abonnementsplan"
-          unable_to_create_the_subscription_please_try_again: "Unable to create the subscription plan. Please try again."
+          unable_to_create_the_subscription_please_try_again: "Kunne ikke opprette abonnementsplanen. Prøv på nytt."
           successfully_created_subscriptions_dont_forget_to_redefine_prices: "Subscription(s) successfully created. Don't forget to redefine prices."
           unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name: "Unable to save this user. Check that there isn't an already defined user with the same name."
         #edit a subscription plan / machine slots prices
