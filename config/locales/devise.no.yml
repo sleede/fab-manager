@@ -59,5 +59,5 @@
       not_found: "Denne e-postadressen ble ikke funnet"
       not_locked: "var ikke låst"
       not_saved:
-        one: "1 error prohibited this %{resource} from being saved:"
+        one: "1 feil har hindret %{resource} fra å bli lagret:"
         other: "%{count} feil har hindret %{resource} fra å bli lagret:"
