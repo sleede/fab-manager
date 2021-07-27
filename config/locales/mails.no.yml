@@ -86,15 +86,15 @@
         member_reserved_html: "Bruker %{NAME} har reservert <strong><em>%{RESERVABLE}</em></strong>."
         reserved_slots: "Reserverte tidsluker:"
     notify_member_slot_is_modified:
-      subject: "Your reservation slot has been successfully changed"
+      subject: "Din reservasjon er blitt endret"
       body:
-        reservation_changed_to: "Your reservation slot has been changed to:"
-        previous_date: "Previous date:"
+        reservation_changed_to: "Din reservasjon har blitt endret til:"
+        previous_date: "Forrige dato:"
     notify_admin_slot_is_modified:
-      subject: "A reservation slot has been modified"
+      subject: "En reservasjonstidsluke har blitt endret"
       body:
-        slot_modified: "User %{NAME} had modified his reservation slot"
-        new_date: "New slot"
+        slot_modified: "Brukeren %{NAME} hadde endret sitt reservasjon"
+        new_date: "Ny reservasjon"
         old_date: "Previous slot"
     notify_admin_when_user_is_created:
       subject: "A user account has been created"
@@ -171,29 +171,29 @@
         provider_uid: "its provider ID is: "
         known_information: "Here is what we know about this provider:"
         address_already_used: "This address is already associated with another user"
-        no_more_info_available: "No other info about this user can be provided before he completes his profile."
+        no_more_info_available: "Ingen annen informasjon om denne brukeren kan gis før han fullfører sin profil."
     notify_user_profile_complete:
-      subject: "You now have access to the whole website"
+      subject: "Du har nå tilgang til hele nettsiden"
       body:
-        message: "Your account informations has been correctly updated, you now have access to the whole website."
+        message: "Din kontoinformasjon er oppdatert, du har nå tilgang til hele nettsiden."
     notify_user_auth_migration:
-      subject: "Important change to your FabLab account"
+      subject: "Viktig endring i makerspace-kontoen din"
       body:
-        the_platform: "the website"
-        is_changing_its_auth_system_and_will_now_use: "is actually changing its user identification system and will use"
-        instead_of: "instead of"
-        consequence_of_the_modification: "Because of this change you won't be able to login to the website with your actual usernames"
-        to_use_the_platform_thanks_for: "To keep on using the website, please"
-        create_an_account_on: "create an account on"
-        or_use_an_existing_account_clicking_here: "or use an existing account by clicking here"
-        in_case_of_problem_enter_the_following_code: "In case of problem with this link, you can enter the following code at your first connection attempt in order to migrate your actual account into the new authentification system:"
+        the_platform: "nettstedet"
+        is_changing_its_auth_system_and_will_now_use: "endrer sitt system for brukeridentifikasjon og vil bruke"
+        instead_of: "i stedet for"
+        consequence_of_the_modification: "På grunn av denne endringen vil du ikke være i stand til å logge inn på nettstedet med dine brukernavn"
+        to_use_the_platform_thanks_for: "For å kunne fortsette å bruke nettsiden, vennligst"
+        create_an_account_on: "opprett en konto på"
+        or_use_an_existing_account_clicking_here: "eller bruk en eksisterende konto ved å klikke her"
+        in_case_of_problem_enter_the_following_code: "Hvis det er problem med denne lenken, kan du legge inn følgende kode ved første gangs forsøk på å overføre kontoen inn i det nye autentiseringssystemet:"
     notify_admin_user_merged:
-      subject: "An imported account has been merged with an existing account"
+      subject: "En importert konto er blitt slått sammen med en eksisterende konto"
       body:
-        imported_account_merged: "A previously imported user account via %{PROVIDER) has been merged with the existing account %{NAME}"
-        provider_uid: "its provider ID is:"
+        imported_account_merged: "En tidligere importert brukerkonto via %{PROVIDER) er slått sammen med den eksisterende kontoen %{NAME}"
+        provider_uid: "dens leverandør-ID er:"
     notify_admin_profile_complete:
-      subject: "An imported account has completed its profile"
+      subject: "En importert konto har fullført sin profil"
       body:
         account_completed: "An user account has completed its profile:"
         imported_account_completed: "An user account, previously imported through %{PROVIDER}, has completed its profile:"
