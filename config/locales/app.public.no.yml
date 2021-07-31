@@ -324,7 +324,7 @@
         delete_all: "Alle hendelser"
         event_successfully_deleted: "Hendelsen ble slettet."
         events_deleted: "Arrangementer som starter {START} og {COUNT, plural, =1{en annen} other{{COUNT} andre}} er kansellert"
-        unable_to_delete_the_event: "Unable to delete the event, it may be booked by a member"
+        unable_to_delete_the_event: "Kan ikke slette hendelsen, den kan være reservert av et medlem"
         events_not_deleted: "Av {TOTAL} gjeldende reservasjoner ble {COUNT, plural, =1{en ikke kanselllert} other{{COUNT} ikke kansellert}}. Noen reservasjoner kan fremdeles gjelde for {COUNT, plural, =1{it} other{disse}}."
         cancel_the_reservation: "Avbryt reservasjonen"
         do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "Vil du virkelig avbryte denne reservasjonen? Dette gjelder ALLE bestillte billetter."
@@ -361,25 +361,25 @@
         confirmation_required: "Bekreftelse påkrevd"
         do_you_really_want_to_delete_this_space: "Vil du virkelig slette denne plassen/rommet?"
         the_space_cant_be_deleted_because_it_is_already_reserved_by_some_users: "Kan ikke slette reservasjoen fordi det allerede er reservert av et medlem."
-        characteristics: "Characteristics"
-        files_to_download: "Files to download"
-        projects_using_the_space: "Projects using the space"
+        characteristics: "Egenskaper"
+        files_to_download: "Filer som kan lastes ned"
+        projects_using_the_space: "Prosjekter som bruker plassen/rommet"
       tour:
         conclusion:
-          title: "Thank you for your attention"
-          content: "<p>If you want to restart this contextual help, press <strong>F1</strong> at any time or click on « ? Help » from the user's menu.</p><p>If you need additional help, you can <a href='http://guide-fr.fab.mn' target='_blank'>check the user guide</a> (only in French for now).</p><p>The Fab-manager's team also provides personalized support (help with getting started, help with installation, customization, etc.), <a href='mailto:contact@fab-manager.com'>contact-us</a> for more info.</p>"
+          title: "Takk for din oppmerksomhet"
+          content: "<p>Hvis du vil restarte denne kontekstuelle hjelpen, trykk <strong>F1</strong> når som helst eller klikk på « ? Hjelp » fra brukerens meny.</p><p>Hvis du trenger ytterligere hjelp, kan du <a href='http://guide-fr.fab.mn' target='_blank'>sjekke brukerveiledningen</a> (kun på fransk for nå).</p><p>Fab-lederens team tilbyr også personlig støtte (hjelp med å komme i gang, hjelp med installering, tilpasning, osv. , <a href='mailto:contact@fab-manager.com'>contact-us</a> for mer info.</p>"
         welcome:
           welcome:
-            title: "Welcome to Fab-manager"
-            content: "To help you get started with the application, we are going to take a quick tour of the features."
+            title: "Velkommen til Fab-manager"
+            content: "For å hjelpe deg å komme i gang med programmet, vil vi raskt ta en titt på funksjonene."
           home:
             title: "Hjemmeside"
             content: "Ved å klikke her kommer du tilbake til hjemmesiden."
           machines:
-            title: "Machines"
-            content: "<p>This page will allow you to consult the list of all machines and reserve a slot on behalf of a member.</p><p>A machine can be, for example, a 3D printer.</p><p>Members can also access this page and reserve a machine themselves, if credit card payment is enabled, or if some prices are equal to 0.</p>"
+            title: "Maskiner"
+            content: "<p>Denne siden vil la deg sjekke listen over alle maskiner, og du kan reservere på vegne av et medlem.</p><p>En maskin kan for eksempel være en 3D-skriver.</p><p>Medlemmer kan også nå denne siden og reservere en maskin selv hvis kredittkortbetaling er aktivert, eller hvis noen priser er 0.</p>"
           trainings:
-            title: "Trainings"
+            title: "Opplæringer/kurs"
             content: "<p>This page will allow you to consult the list of all training sessions and to register a member for a training session.</p><p>Trainings can be set as prerequisites before allowing reservation of certain machines.</p><p>Members can also access this page and register for a training session themselves, if credit card payment is enabled, or if some prices are equal to 0.</p>"
           spaces:
             title: "Spaces"
