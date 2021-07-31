@@ -198,25 +198,25 @@
         your_surname: "Etternavn"
         your_surname_is_required: "Etternavn er påkrevd."
         your_email_address: "Din e-postadresse"
-        your_email_address_is_required: "Your email address is required."
+        your_email_address_is_required: "E-post-adresse er påkrevd."
         tell_us_why_this_looks_abusive: "Tell us why this looks abusive"
-        message_is_required: "Message is required."
-        report: "Report"
-        do_you_really_want_to_delete_this_project: "Do you really want to delete this project?"
+        message_is_required: "Melding er påkrevd."
+        report: "Rapporter"
+        do_you_really_want_to_delete_this_project: "Vil du virkelig slette dette prosjektet?"
       #list of machines
       machines_list:
         the_fablab_s_machines: "Makerspacets maskiner"
-        add_a_machine: "Add a machine"
-        new_availability: "Open reservations"
+        add_a_machine: "Legg til en maskin"
+        new_availability: "Åpne reservasjoner"
         book: "Reserver"
-        _or_the_: " or the "
+        _or_the_: " eller den "
       machines_filters:
-        show_machines: "Show machines"
-        status_enabled: "Enabled"
-        status_disabled: "Disabled"
-        status_all: "All"
+        show_machines: "Vis maskiner"
+        status_enabled: "Aktivert"
+        status_disabled: "Deaktivert"
+        status_all: "Alle"
       machine_card:
-        book: "Book"
+        book: "Reserver"
         consult: "Se på"
       #details of a machine
       machines_show:
@@ -224,11 +224,11 @@
         technical_specifications: "Tekniske detaljer"
         files_to_download: "Filer som kan lastes ned"
         projects_using_the_machine: "Prosjekter med denne maskinen"
-        _or_the_: " or the "
-        confirmation_required: "Confirmation required"
-        do_you_really_want_to_delete_this_machine: "Do you really want to delete this machine?"
-        unauthorized_operation: "Unauthorized operation"
-        the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users: "The machine can't be deleted because it's already reserved by some users."
+        _or_the_: " eller den "
+        confirmation_required: "Bekreftelse påkrevd"
+        do_you_really_want_to_delete_this_machine: "Vil du virkelig slette denne maskinen?"
+        unauthorized_operation: "Uautorisert operasjon"
+        the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users: "Maskinen kan ikke slettes fordi den allerede er reservert av noen brukere."
       #list of trainings
       trainings_list:
         book: "Meld på"
@@ -236,9 +236,9 @@
       #details of a training
       training_show:
         book_this_training: "Meld deg på denne"
-        do_you_really_want_to_delete_this_training: "Do you really want to delete this training?"
-        unauthorized_operation: "Unauthorized operation"
-        confirmation_required: "Confirmation required"
+        do_you_really_want_to_delete_this_training: "Vil du virkelig slette denne opplæringen/kurset?"
+        unauthorized_operation: "Uautorisert operasjon"
+        confirmation_required: "Bekreftelse påkrevd"
         the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "The training can't be deleted because it's already reserved by some users."
       #summary of the subscriptions
       plans:
