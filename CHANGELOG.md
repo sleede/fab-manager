@@ -1,5 +1,10 @@
 # Changelog Fab-manager
 
+## v5.0.10 2021 August 2
+
+- Fix a bug: unable to show statistics
+- [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2021,6]`
+
 ## v5.0.9 2021 July 9
 
 - Fix a bug: stripe 3D Secure payment
