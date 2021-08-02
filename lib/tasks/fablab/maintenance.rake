@@ -108,5 +108,23 @@ namespace :fablab do
         end
       end
     end
+
+    desc 'regenerate statistics'
+    task :regenerate_statistics, %i[year month] => :environment do |_task, args|
+      return unless Setting.get('statistics_module')
+
+      yesterday = 1.day.ago
+      year = args.year || yesterday.year
+      month = args.month || yesterday.month
+      start_date = Time.zone.local(year.to_i, month.to_i, 1)
+      end_date = yesterday.end_of_day
+      puts "-> Start regenerate statistics between #{I18n.l start_date, format: :long} and " \
+         "#{I18n.l end_date, format: :long}"
+      StatisticService.new.generate_statistic(
+        start_date: start_date,
+        end_date: end_date
+      )
+      puts '-> Done'
+    end
   end
 end
