@@ -68,7 +68,7 @@ export const ConfigurePacksButton: React.FC<ConfigurePacksButtonProps> = ({ pack
       <button className="packs-button" onClick={toggleShowList}>
         <i className="fas fa-box" />
       </button>
-      {showList && <FabPopover title={t('app.admin.configure_packs_button.packs')} headerButton={renderAddButton()}>
+      {showList && <FabPopover title={t('app.admin.configure_packs_button.packs')} headerButton={renderAddButton()} className="fab-popover__right">
         <ul>
           {packs?.map(p =>
             <li key={p.id} className={p.disabled ? 'disabled' : ''}>
