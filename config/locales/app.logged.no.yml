@@ -118,47 +118,47 @@
           your_next_events: "Dine neste arrangementer"
           no_events_to_come: "Ingen nye arrangementer foreløpig"
           your_previous_events: "Tidligere arrangementer"
-          no_passed_events: "No passed events"
+          no_passed_events: "Ingen tidligere arrangementer"
           NUMBER_normal_places_reserved: "{NUMBER} {NUMBER, plural, one {} =0{} =1{plass reservert} other{plasser reservert}}"
-          NUMBER_of_NAME_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{of {NAME} place reserved} other{of {NAME} places reserved}}"
+          NUMBER_of_NAME_places_reserved: "{NUMBER} {NUMBER, plural, one {} =0{} =1{plass reservert} other{plasser reservert}}"
         #dashboard: my invoices
         invoices:
-          reference_number: "Reference number"
-          date: "Date"
-          price: "Price"
-          download_the_invoice: "Download the invoice"
-          download_the_credit_note: "Download the refund invoice"
-          no_invoices_for_now: "No invoices for now."
+          reference_number: "Referansenummer"
+          date: "Dato"
+          price: "Pris"
+          download_the_invoice: "Last ned fakturaen"
+          download_the_credit_note: "Last ned refusjonsfakturaen"
+          no_invoices_for_now: "Ingen fakturaer for øyeblikket."
         payment_schedules:
-          no_payment_schedules: "No payment schedules to display"
-          load_more: "Load more"
-          card_updated_success: "Your card was successfully updated"
+          no_payment_schedules: "Ingen betalingsplaner å vise"
+          load_more: "Last mer"
+          card_updated_success: "Kortet ditt ble oppdatert"
       #public profil of a member
       members_show:
-        members_list: "Members list"
+        members_list: "Medlemsliste"
       #list of members accepting to be contacted
       members:
-        the_fablab_members: "The Fab Lab members"
-        display_more_members: "Display more members..."
-        no_members_for_now: "No members for now"
-        avatar: "Avatar"
-        user: "User"
+        the_fablab_members: "Medlemmer"
+        display_more_members: "Vis flere medlemmer..."
+        no_members_for_now: "Ingen medlemmer nå"
+        avatar: "Profilbilde"
+        user: "Bruker"
         pseudonym: "Pseudonym"
-        email_address: "Email address"
+        email_address: "E-postadresse"
       #add a new project
       projects_new:
-        add_a_new_project: "Add a new project"
+        add_a_new_project: "Legg til nytt prosjekt"
       #modify an existing project
       projects_edit:
-        edit_the_project: "Edit the project"
-        rough_draft: "Draft"
-        publish: "Publish"
+        edit_the_project: "Redigere prosjekt"
+        rough_draft: "Utkast"
+        publish: "Publisér"
       #book a machine
       machines_reserve:
-        machine_planning: "Machine planning"
-        i_ve_reserved: "I've reserved"
-        not_available: "Not available"
-        i_reserve: "I reserve"
+        machine_planning: "Maskinplanlegging"
+        i_ve_reserved: "Jeg har reservert"
+        not_available: "Ikke tilgjengelig"
+        i_reserve: "Jeg reserverer"
         i_shift: "I shift"
         i_change: "I change"
         do_you_really_want_to_cancel_this_reservation: "Do you really want to cancel this reservation?"
@@ -190,27 +190,27 @@
           day: "{COUNT, plural, one{day} other{days}}"
           week: "{COUNT, plural, one{uke} other{uker}}"
           month: "{COUNT, plural, one{måned} other{måneder}}"
-          year: "{COUNT, plural, one{year} other{years}}"
+          year: "år"
       packs_summary:
-        prepaid_hours: "Prepaid hours"
+        prepaid_hours: "Forhåndsbetalte timer"
         remaining_HOURS: "You have {HOURS} prepaid hours remaining for this {ITEM, select, Machine{machine} Space{space} other{}}."
-        no_hours: "You don't have any prepaid hours for this {ITEM, select, Machine{machine} Space{space} other{}}."
-        buy_a_new_pack: "Buy a new pack"
+        no_hours: "Du har ikke noen forhåndsbetalt timer for {ITEM, select, Machine{maskinen} Space{plass/rom} other{}}."
+        buy_a_new_pack: "Kjøp en ny pakke"
       #book a training
       trainings_reserve:
-        trainings_planning: "Trainings planning"
-        planning_of: "Planning of " #eg. Planning of 3d printer training
-        all_trainings: "All trainings"
-        cancel_my_selection: "Cancel my selection"
-        i_change: "I change"
+        trainings_planning: "Planlegging, opplæring og kurs"
+        planning_of: "Planlegging av " #eg. Planning of 3d printer training
+        all_trainings: "All opplæringer/kurs"
+        cancel_my_selection: "Avbryt valget mitt"
+        i_change: "Jeg endrer"
         i_shift: "I shift"
-        i_ve_reserved: "I've reserved"
+        i_ve_reserved: "Jeg har reservert"
       #book a space
       space_reserve:
-        planning_of_space_NAME: "Planning of the {NAME} space"
-        i_ve_reserved: "I've reserved"
-        i_shift: "I shift"
-        i_change: "I change"
+        planning_of_space_NAME: "Planlegging av {NAME} plass/rom"
+        i_ve_reserved: "Jeg har reservert"
+        i_shift: "Jeg skifter"
+        i_change: "Jeg endrer"
       notifications:
         notifications_center: "Varslingssenter"
         mark_all_as_read: "Merk alt som lest"
@@ -219,4 +219,4 @@
         no_new_notifications: "Ingen nye varsler."
         archives: "Arkiv"
         no_archived_notifications: "Ingen arkiverte varsler."
-        load_the_next_notifications: "Load the next notifications..."
+        load_the_next_notifications: "Last neste varsling..."
