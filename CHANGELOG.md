@@ -1,5 +1,10 @@
 # Changelog Fab-manager
 
+## v5.0.11 2021 August 6
+
+- Fix a bug: unable to generate avoir of wallet
+- Fix a bug: manager cant reserve training for user
+
 ## v5.0.10 2021 August 2
 
 - Fix a bug: unable to show statistics
