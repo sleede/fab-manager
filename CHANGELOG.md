@@ -1,5 +1,14 @@
 # Changelog Fab-manager
 
+## v5.1.6 2021 August 6
+
+- Adjuste packs pricing popover position
+- Updated Norwegian language
+- Updated addressable from 2.7.0 to 2.8.0
+- Updated tar from 6.1.0 to 6.1.4
+- Fix a bug: unable to generate avoir of wallet
+- Fix a bug: manager cant reserve training for user
+
 ## v5.1.5 2021 August 2
 
 - Fix a bug: unable to show statistics
@@ -38,6 +47,11 @@
 - Fix a bug: public list of plans fails to render if a group has no plans
 - [TODO DEPLOY] `rails db:seed`
 - [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
+
+## v5.0.11 2021 August 6
+
+- Fix a bug: unable to generate avoir of wallet
+- Fix a bug: manager cant reserve training for user
 
 ## v5.0.10 2021 August 2
 
