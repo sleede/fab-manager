@@ -214,7 +214,7 @@
         passed_events: "Tidligere arragnementer"
         events_to_come: "Fremtidige arrangementer"
         events_to_come_asc: "Kommende arrangementer i kronologisk rekkefølge"
-        on_DATE: "på {DATE}"
+        on_DATE: "{DATE}"
         from_DATE: "fra {DATE}"
         from_TIME: "fra {TIME}"
         to_date: "til" #eg: from 01/01 to 01/05
