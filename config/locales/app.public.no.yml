@@ -278,7 +278,7 @@
         sold_out: "Utsolgt"
         cancelled: "Avslyst"
         free_admission: "Gratis adgang"
-        still_available: "tilgjengelige sted(er)"
+        still_available: "ledig"
         without_reservation: "Uten reservasjon"
         add_an_event: "Legg til arrangement"
         load_the_next_events: "Last inn flere arrangementer..."

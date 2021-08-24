@@ -1,5 +1,10 @@
 # Changelog Fab-manager
 
+## v5.1.7 2021 August 24
+
+- Updated Norwegian language
+- Fix a bug: unable to show plans list page
+
 ## v5.1.6 2021 August 6
 
 - Adjuste packs pricing popover position
