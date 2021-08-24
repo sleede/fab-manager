@@ -94,7 +94,7 @@ const PlansList: React.FC<PlansListProps> = ({ onError, onPlanSelection, onLogin
     const res = new Map<number, Map<number, Array<Plan>>>();
     for (const [groupId, plansByGroup] of byGroup) {
       const group = groups.find(g => g.id === groupId);
-      if (!group.disabled) {
+      if (group && !group.disabled) {
         res.set(groupId, groupBy(plansByGroup, 'plan_category_id'));
       }
     }
