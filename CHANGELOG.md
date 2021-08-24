@@ -1,5 +1,9 @@
 # Changelog Fab-manager
 
+## v5.0.12 2021 August 24
+
+- Fix a bug: unable to show plans page
+
 ## v5.0.11 2021 August 6
 
 - Fix a bug: unable to generate avoir of wallet
