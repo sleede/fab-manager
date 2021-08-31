@@ -22,6 +22,7 @@
  * in the various projects' admin controllers.
  *
  * Provides :
+ *  - $scope.summernoteOptsProject
  *  - $scope.totalSteps
  *  - $scope.machines = [{Machine}]
  *  - $scope.components = [{Component}]
@@ -42,7 +43,11 @@
  *  - $state (Ui-Router) [ 'app.public.projects_show', 'app.public.projects_list' ]
  */
 class ProjectsController {
-  constructor ($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics, dialogs, allowedExtensions, _t) {
+  constructor ($rootScope, $scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics, dialogs, allowedExtensions, _t) {
+    // remove codeview from summernote editor
+    $scope.summernoteOptsProject = angular.copy($rootScope.summernoteOpts);
+    $scope.summernoteOptsProject.toolbar[6][1].splice(1, 1);
+
     // Retrieve the list of machines from the server
     Machine.query().$promise.then(function (data) {
       $scope.machines = data.map(function (d) {
@@ -449,8 +454,8 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
 /**
  * Controller used in the project creation page
  */
-Application.Controllers.controller('NewProjectController', ['$scope', '$state', 'Project', 'Machine', 'Member', 'Component', 'Theme', 'Licence', '$document', 'CSRF', 'Diacritics', 'dialogs', 'allowedExtensions', '_t',
-  function ($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, CSRF, Diacritics, dialogs, allowedExtensions, _t) {
+Application.Controllers.controller('NewProjectController', ['$rootScope', '$scope', '$state', 'Project', 'Machine', 'Member', 'Component', 'Theme', 'Licence', '$document', 'CSRF', 'Diacritics', 'dialogs', 'allowedExtensions', '_t',
+  function ($rootScope, $scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, CSRF, Diacritics, dialogs, allowedExtensions, _t) {
     CSRF.setMetaTags();
 
     // API URL where the form will be posted
@@ -468,7 +473,7 @@ Application.Controllers.controller('NewProjectController', ['$scope', '$state', 
     $scope.matchingMembers = [];
 
     // Using the ProjectsController
-    return new ProjectsController($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics, dialogs, allowedExtensions, _t);
+    return new ProjectsController($rootScope, $scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics, dialogs, allowedExtensions, _t);
   }
 ]);
 
@@ -509,7 +514,7 @@ Application.Controllers.controller('EditProjectController', ['$rootScope', '$sco
       }
 
       // Using the ProjectsController
-      return new ProjectsController($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics, dialogs, allowedExtensions, _t);
+      return new ProjectsController($rootScope, $scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics, dialogs, allowedExtensions, _t);
     };
 
     // !!! MUST BE CALLED AT THE END of the controller
