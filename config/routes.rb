@@ -180,6 +180,7 @@ Rails.application.routes.draw do
     # card payments handling
     ## Stripe gateway
     post 'stripe/confirm_payment' => 'stripe/confirm_payment'
+    post 'stripe/payment_schedule' => 'stripe/payment_schedule'
     get 'stripe/online_payment_status' => 'stripe/online_payment_status'
     get 'stripe/setup_intent/:user_id' => 'stripe#setup_intent'
     post 'stripe/confirm_payment_schedule' => 'stripe#confirm_payment_schedule'

@@ -81,6 +81,12 @@ class PaymentSchedule < PaymentDocument
     PaymentGatewayService.new.create_subscription(self, gateway_method_id)
   end
 
+  def pay(gateway_method_id)
+    return unless payment_method == 'card'
+
+    PaymentGatewayService.new.pay_subscription(self, gateway_method_id)
+  end
+
   def render_resource
     { partial: 'api/payment_schedules/payment_schedule', locals: { payment_schedule: self } }
   end

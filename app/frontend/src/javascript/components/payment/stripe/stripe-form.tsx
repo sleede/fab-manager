@@ -43,26 +43,35 @@ export const StripeForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, on
           const res = await StripeAPI.confirmMethod(paymentMethod.id, cart);
           await handleServerConfirmation(res);
         } else {
-          // we start by associating the payment method with the user
-          const intent = await StripeAPI.setupIntent(customer.id);
-          const { setupIntent, error } = await stripe.confirmCardSetup(intent.client_secret, {
-            payment_method: paymentMethod.id,
-            mandate_data: {
-              customer_acceptance: {
-                type: 'online',
-                online: {
-                  ip_address: operator.ip_address,
-                  user_agent: navigator.userAgent
-                }
-              }
-            }
-          });
-          if (error) {
-            onError(error.message);
-          } else {
-            // then we confirm the payment schedule
-            const res = await StripeAPI.confirmPaymentSchedule(setupIntent.id, cart);
+          const paymentMethodId = paymentMethod.id;
+          const subscription: any = await StripeAPI.paymentSchedule(paymentMethod.id, cart);
+          if (subscription && subscription.status === 'active') {
+            // Subscription is active, no customer actions required.
+            const res = await StripeAPI.confirmPaymentSchedule(subscription.id, cart);
             onSuccess(res);
+          }
+          const paymentIntent = subscription.latest_invoice.payment_intent;
+
+          if (paymentIntent.status === 'requires_action') {
+            return stripe
+              .confirmCardPayment(paymentIntent.client_secret, {
+                payment_method: paymentMethodId
+              })
+              .then(async (result) => {
+                if (result.error) {
+                  throw result.error;
+                } else {
+                  if (result.paymentIntent.status === 'succeeded') {
+                    const res = await StripeAPI.confirmPaymentSchedule(subscription.id, cart);
+                    onSuccess(res);
+                  }
+                }
+              })
+              .catch((error) => {
+                onError(error.message);
+              });
+          } else if (paymentIntent.status === 'requires_payment_method') {
+            onError('Your card was declined.');
           }
         }
       } catch (err) {
