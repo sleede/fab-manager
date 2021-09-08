@@ -5,31 +5,39 @@ import { PaymentSchedule } from '../models/payment-schedule';
 import { Invoice } from '../models/invoice';
 
 export default class StripeAPI {
-  static async confirmMethod (stp_payment_method_id: string, cart_items: ShoppingCart): Promise<PaymentConfirmation|Invoice> {
+  static async confirmMethod (paymentMethodId: string, cart_items: ShoppingCart): Promise<PaymentConfirmation|Invoice> {
     const res: AxiosResponse<PaymentConfirmation|Invoice> = await apiClient.post(`/api/stripe/confirm_payment`, {
-      payment_method_id: stp_payment_method_id,
+      payment_method_id: paymentMethodId,
       cart_items
     });
     return res?.data;
   }
 
-  static async confirmIntent (stp_payment_intent_id: string, cart_items: ShoppingCart): Promise<PaymentConfirmation|Invoice> {
-    const res: AxiosResponse = await apiClient.post(`/api/stripe/confirm_payment`, {
-      payment_intent_id: stp_payment_intent_id,
-      cart_items
+  static async confirmIntent (paymentMethodId: string, cartItems: ShoppingCart): Promise<PaymentConfirmation|Invoice> {
+    const res: AxiosResponse = await apiClient.post('/api/stripe/confirm_payment', {
+      payment_intent_id: paymentMethodId,
+      cart_items: cartItems
     });
     return res?.data;
   }
 
-  static async setupIntent (user_id: number): Promise<IntentConfirmation> {
-    const res: AxiosResponse<IntentConfirmation> = await apiClient.get(`/api/stripe/setup_intent/${user_id}`);
+  static async paymentSchedule (paymentMethodId: string, cartItems: ShoppingCart): Promise<any> {
+    const res: AxiosResponse = await apiClient.post('/api/stripe/payment_schedule', {
+      payment_method_id: paymentMethodId,
+      cart_items: cartItems
+    });
     return res?.data;
   }
 
-  static async confirmPaymentSchedule (setup_intent_id: string, cart_items: ShoppingCart): Promise<PaymentSchedule> {
-    const res: AxiosResponse<PaymentSchedule> = await apiClient.post(`/api/stripe/confirm_payment_schedule`, {
-      setup_intent_id,
-      cart_items
+  static async setupIntent (userId: number): Promise<IntentConfirmation> {
+    const res: AxiosResponse<IntentConfirmation> = await apiClient.get(`/api/stripe/setup_intent/${userId}`);
+    return res?.data;
+  }
+
+  static async confirmPaymentSchedule (subscriptionId: string, cartItems: ShoppingCart): Promise<PaymentSchedule> {
+    const res: AxiosResponse<PaymentSchedule> = await apiClient.post('/api/stripe/confirm_payment_schedule', {
+      subscription_id: subscriptionId,
+      cart_items: cartItems
     });
     return res?.data;
   }

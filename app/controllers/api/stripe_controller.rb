@@ -69,14 +69,30 @@ class API::StripeController < API::PaymentsController
     render json: { id: @intent.id, client_secret: @intent.client_secret }
   end
 
+  def payment_schedule
+    cart = shopping_cart
+    Stripe.api_key = Setting.get('stripe_secret_key')
+    @intent = Stripe::PaymentMethod.attach(
+      params[:payment_method_id],
+      customer: cart.customer.payment_gateway_object.gateway_object_id
+    )
+    # Set the default payment method on the customer
+    Stripe::Customer.update(
+      cart.customer.payment_gateway_object.gateway_object_id,
+      invoice_settings: { default_payment_method: params[:payment_method_id] }
+    )
+    @res = cart.pay_schedule(@intent.id, @intent.class.name)
+    render json: @res.to_json
+  end
+
   def confirm_payment_schedule
     key = Setting.get('stripe_secret_key')
-    intent = Stripe::SetupIntent.retrieve(params[:setup_intent_id], api_key: key)
+    subscription = Stripe::Subscription.retrieve(params[:subscription_id], api_key: key)
 
     cart = shopping_cart
-    if intent&.status == 'succeeded'
-      res = on_payment_success(intent, cart)
-      render generate_payment_response(intent, res)
+    if subscription&.status == 'active'
+      res = on_payment_success(subscription, cart)
+      render generate_payment_response(subscription, res)
     end
   rescue Stripe::InvalidRequestError => e
     render json: e, status: :unprocessable_entity

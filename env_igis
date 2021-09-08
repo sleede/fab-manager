@@ -1,0 +1,66 @@
+# Add application configuration variables here, as shown below.
+
+# Databases
+POSTGRES_HOST=localhost
+POSTGRES_PASSWORD=
+REDIS_HOST=localhost
+ELASTICSEARCH_HOST=localhost
+
+# Stripe
+SECRET_KEY_BASE=83daf5e7b80d990f037407bab78dff9904aaf3c195a50f84fa8695a22287e707dfbd9524b403b1dcf116ae1d8c06844c3d7ed942564e5b46be6ae3ead93a9d30
+
+# Stripe keys for tests
+STRIPE_API_KEY=sk_test_mGokO9TGtrVxMOyK4yZiktBE
+STRIPE_PUBLISHABLE_KEY=pk_test_aScrMu3y4AocfCN5XLJjGzmQ
+
+# oAuth SSO keys for tests
+OAUTH_CLIENT_ID=github-oauth-app-id
+OAUTH_CLIENT_SECRET=github-oauth-app-secret
+
+# Configure carefully!
+DEFAULT_HOST=localhost:5000
+DEFAULT_PROTOCOL=http
+
+# Email config
+DELIVERY_METHOD=smtp
+SMTP_ADDRESS=localhost
+SMTP_PORT=1025
+SMTP_USER_NAME=
+SMTP_PASSWORD=
+SMTP_AUTHENTICATION=plain
+SMTP_ENABLE_STARTTLS_AUTO=true
+SMTP_OPENSSL_VERIFY_MODE=
+SMTP_TLS=false
+
+# I18N configuration
+RAILS_LOCALE=fr-CM
+APP_LOCALE=fr
+MOMENT_LOCALE=fr
+SUMMERNOTE_LOCALE=fr-FR
+ANGULAR_LOCALE=fr-cg
+FULLCALENDAR_LOCALE=fr
+INTL_LOCALE=fr-CG
+INTL_CURRENCY=XAF
+
+POSTGRESQL_LANGUAGE_ANALYZER=french
+
+TIME_ZONE=West Central Africa
+WEEK_STARTING_DAY=monday
+D3_DATE_FORMAT=%d/%m/%y
+UIB_DATE_FORMAT=dd/MM/yyyy
+EXCEL_DATE_FORMAT=dd/mm/yyyy
+
+OPENLAB_BASE_URI=https://openprojects.fab-manager.com
+
+LOG_LEVEL=debug
+DISK_SPACE_MB_ALERT=1024
+ADMINSYS_EMAIL=admin@sleede.com
+ALLOW_INSECURE_HTTP=false
+LOCKED_SETTINGS=payzen_username
+
+# 5242880 = 5 megabytes
+MAX_IMPORT_SIZE='5242880'
+# 10485760 = 10 megabytes
+MAX_IMAGE_SIZE='10485760'
+# 20971520 = 20 megabytes
+MAX_CAO_SIZE='20971520'
