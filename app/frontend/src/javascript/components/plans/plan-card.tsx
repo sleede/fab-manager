@@ -85,7 +85,7 @@ const PlanCardComponent: React.FC<PlanCardProps> = ({ plan, userId, subscribedPl
    */
   const canBeScheduled = (): boolean => {
     return plan.monthly_payment;
-  }
+  };
   /**
    * Callback triggered when the user select the plan
    */
