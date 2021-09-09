@@ -46,7 +46,7 @@ const EventThemes: React.FC<EventThemesProps> = ({ event, onChange }) => {
   const defaultValues = (): Array<selectOption> => {
     const res = [];
     themes.forEach(t => {
-      if (event.event_theme_ids.indexOf(t.id) > -1) {
+      if (event.event_theme_ids && event.event_theme_ids.indexOf(t.id) > -1) {
         res.push({ value: t.id, label: t.name });
       }
     });
