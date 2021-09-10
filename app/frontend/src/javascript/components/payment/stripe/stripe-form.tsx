@@ -2,7 +2,7 @@ import React, { FormEvent } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { useTranslation } from 'react-i18next';
 import { GatewayFormProps } from '../abstract-payment-modal';
-import { PaymentConfirmation } from '../../../models/payment';
+import { PaymentConfirmation, StripeSubscription } from '../../../models/payment';
 import StripeAPI from '../../../api/stripe';
 import { Invoice } from '../../../models/invoice';
 
@@ -44,7 +44,7 @@ export const StripeForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, on
           await handleServerConfirmation(res);
         } else {
           const paymentMethodId = paymentMethod.id;
-          const subscription: any = await StripeAPI.paymentSchedule(paymentMethod.id, cart);
+          const subscription: StripeSubscription = await StripeAPI.paymentSchedule(paymentMethod.id, cart);
           if (subscription && subscription.status === 'active') {
             // Subscription is active, no customer actions required.
             const res = await StripeAPI.confirmPaymentSchedule(subscription.id, cart);
@@ -71,7 +71,7 @@ export const StripeForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, on
                 onError(error.message);
               });
           } else if (paymentIntent.status === 'requires_payment_method') {
-            onError('Your card was declined.');
+            onError(t('app.shared.messages.payment_card_declined'));
           }
         }
       } catch (err) {

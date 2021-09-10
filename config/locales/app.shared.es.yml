@@ -22,6 +22,7 @@ es:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "Si cierra la página se perderán todas las modificaciones que no se hayan guardado"
         you_will_lose_any_unsaved_modification_if_you_reload_this_page: "Si recarga la página se perderán todas las modificaciones que no se hayan guardado"
         payment_card_error: "A problem has occurred with your credit card:"
+        payment_card_declined: "Your card was declined."
       #user edition form
       user:
         man: "Man"

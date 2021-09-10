@@ -73,7 +73,8 @@ class ShoppingCart
     price = total
     objects = []
     items.each do |item|
-      rails InvalidSubscriptionError unless item.valid?(@items)
+      raise InvalidSubscriptionError unless item.valid?(@items)
+
       object = item.to_object
       objects.push(object)
       raise InvalidSubscriptionError unless object.errors.empty?
