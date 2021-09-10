@@ -8,6 +8,7 @@ import SettingAPI from '../../../api/setting';
 import { SettingName } from '../../../models/setting';
 import { PaymentModal } from '../payment-modal';
 import { PaymentSchedule } from '../../../models/payment-schedule';
+import { PaymentMethod } from '../../../models/payment';
 
 const ALL_SCHEDULE_METHODS = ['card', 'check'] as const;
 type scheduleMethod = typeof ALL_SCHEDULE_METHODS[number];
@@ -56,6 +57,11 @@ export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSucce
    * Callback triggered when the user selects a payment method for the current payment schedule.
    */
   const handleUpdateMethod = (option: selectOption) => {
+    if (option.value === 'card') {
+      cart.payment_method = PaymentMethod.Card;
+    } else {
+      cart.payment_method = PaymentMethod.Other;
+    }
     setMethod(option.value);
   };
 
@@ -129,7 +135,8 @@ export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSucce
           onError={onError}
           cart={cart}
           currentUser={operator}
-          customer={customer} />
+          customer={customer}
+          schedule={paymentSchedule} />
       </div>}
       {children}
     </form>
