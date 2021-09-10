@@ -45,7 +45,7 @@ class Stripe::Service < Payment::Service
 
     Stripe::Subscription.create({
       customer: payment_schedule.invoicing_profile.user.payment_gateway_object.gateway_object_id,
-      cancel_at: (payment_schedule.payment_schedule_items.max_by(&:due_date).due_date + 3.day).to_i,
+      cancel_at: (payment_schedule.payment_schedule_items.max_by(&:due_date).due_date + 1.month).to_i,
       add_invoice_items: items,
       coupon: payment_schedule.coupon&.code,
       items: [
