@@ -602,7 +602,6 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
           if (Auth.isAuthenticated()) {
             if ($scope.selectedPlan !== $scope.plan) {
               $scope.selectedPlan = $scope.plan;
-              if ($scope.selectedPlan.monthly_payment && $scope.selectedPlan.interval_count === 1) { $scope.selectedPlan.monthly_payment = false; }
               $scope.schedule.requested_schedule = $scope.plan.monthly_payment;
             } else {
               $scope.selectedPlan = null;
