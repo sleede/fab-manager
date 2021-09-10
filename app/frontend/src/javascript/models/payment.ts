@@ -34,3 +34,14 @@ export interface UpdateCardResponse {
   updated: boolean,
   error?: string
 }
+
+export interface StripeSubscription {
+  id: string,
+  status: string,
+  latest_invoice: {
+    payment_intent: {
+      status: string,
+      client_secret: string
+    }
+  }
+}

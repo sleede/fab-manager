@@ -22,6 +22,7 @@ de:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "Sie verlieren jede ungespeicherte Änderung, wenn Sie diese Seite verlassen"
         you_will_lose_any_unsaved_modification_if_you_reload_this_page: "Ungespeicherte Änderungen gehen verloren, wenn Sie die Seite neu laden"
         payment_card_error: "Mit Ihrer Kreditkarte ist ein Problem aufgetreten:"
+        payment_card_declined: "Your card was declined."
       #user edition form
       user:
         man: "Männlich"
