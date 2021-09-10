@@ -84,7 +84,7 @@ const PlanCardComponent: React.FC<PlanCardProps> = ({ plan, userId, subscribedPl
    * Check if the plan is allowing a monthly payment schedule
    */
   const canBeScheduled = (): boolean => {
-    return plan.monthly_payment && plan.interval_count !== 1;
+    return plan.monthly_payment;
   };
   /**
    * Callback triggered when the user select the plan
