@@ -22,7 +22,7 @@ zu:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "crwdns9405:0crwdne9405:0"
         you_will_lose_any_unsaved_modification_if_you_reload_this_page: "crwdns9407:0crwdne9407:0"
         payment_card_error: "crwdns9409:0crwdne9409:0"
-        payment_card_declined: "Your card was declined."
+        payment_card_declined: "crwdns22033:0crwdne22033:0"
       #user edition form
       user:
         man: "crwdns9411:0crwdne9411:0"
