@@ -195,36 +195,37 @@ class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
     payment_schedule_items_count = PaymentScheduleItem.count
 
     VCR.use_cassette('subscriptions_user_create_with_payment_schedule') do
-      get "/api/stripe/setup_intent/#{@user.id}"
+      post '/api/stripe/payment_schedule',
+           params: {
+             payment_method_id: stripe_payment_method,
+             cart_items: {
+               items: [
+                 {
+                   subscription: {
+                     plan_id: plan.id
+                   }
+                 }
+               ],
+               payment_schedule: true,
+               payment_method: 'cart'
+             }
+           }.to_json, headers: default_headers
 
       # Check response format & status
       assert_equal 200, response.status, response.body
       assert_equal Mime[:json], response.content_type
 
       # Check the response
-      setup_intent = json_response(response.body)
-      assert_not_nil setup_intent[:client_secret]
-      assert_not_nil setup_intent[:id]
-      assert_match /^#{setup_intent[:id]}_secret_/, setup_intent[:client_secret]
+      sub = json_response(response.body)
+      assert_not_nil sub[:id]
 
-      # Confirm the intent
-      stripe_res = Stripe::SetupIntent.confirm(
-        setup_intent[:id],
-        { payment_method: stripe_payment_method },
-        { api_key: Setting.get('stripe_secret_key') }
-      )
-
-      # check the confirmation
-      assert_equal setup_intent[:id], stripe_res.id
-      assert_equal 'succeeded', stripe_res.status
-      assert_equal 'off_session', stripe_res.usage
-
-
+      # create the subscription
       post '/api/stripe/confirm_payment_schedule',
            params: {
-             setup_intent_id: setup_intent[:id],
+             subscription_id: sub[:id],
              cart_items: {
                payment_schedule: true,
+               payment_method: 'card',
                items: [
                  {
                    subscription: {
