@@ -82,8 +82,6 @@ class PaymentSchedule < PaymentDocument
   end
 
   def pay(gateway_method_id)
-    return unless payment_method == 'card'
-
     PaymentGatewayService.new.pay_subscription(self, gateway_method_id)
   end
 
