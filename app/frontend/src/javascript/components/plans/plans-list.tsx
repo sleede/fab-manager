@@ -186,6 +186,9 @@ const PlansList: React.FC<PlansListProps> = ({ onError, onPlanSelection, onLogin
    * Render the provided list of categories, with each associated plans
    */
   const renderPlansByCategory = (plans: Map<number, Array<Plan>>): ReactNode => {
+    if (!plans) {
+      return null;
+    }
     return (
       <div className="list-of-categories">
         {Array.from(plans).sort(compareCategories).map(([categoryId, plansByCategory]) => {

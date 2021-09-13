@@ -95,16 +95,20 @@ class WalletService
   ##
   # Subtract the amount of the payment document (Invoice|PaymentSchedule) from the customer's wallet
   ##
-  def self.debit_user_wallet(payment, user)
+  def self.debit_user_wallet(payment, user, transaction: true)
     wallet_amount = WalletService.wallet_amount_debit(payment, user)
     return unless wallet_amount.present? && wallet_amount != 0
 
     amount = wallet_amount / 100.0
-    wallet_transaction = WalletService.new(user: user, wallet: user.wallet).debit(amount)
-    # wallet debit success
-    raise DebitWalletError unless wallet_transaction
+    if transaction
+      wallet_transaction = WalletService.new(user: user, wallet: user.wallet).debit(amount)
+      # wallet debit success
+      raise DebitWalletError unless wallet_transaction
 
-    payment.set_wallet_transaction(wallet_amount, wallet_transaction.id)
+      payment.set_wallet_transaction(wallet_amount, wallet_transaction.id)
+    else
+      payment.set_wallet_transaction(wallet_amount, nil)
+    end
   end
 
 end

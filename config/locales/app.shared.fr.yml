@@ -22,6 +22,7 @@ fr:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "Vous perdrez les modifications non enregistrées si vous quittez cette page"
         you_will_lose_any_unsaved_modification_if_you_reload_this_page: "Vous perdrez les modifications non enregistrées si vous rechargez cette page"
         payment_card_error: "Un problème est survenu avec votre carte bancaire :"
+        payment_card_declined: "Votre carte a été refusée."
       #user edition form
       user:
         man: "Homme"

@@ -22,6 +22,7 @@
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "Du vil miste noen ulagrede endringer hvis du avslutter denne siden"
         you_will_lose_any_unsaved_modification_if_you_reload_this_page: "Du vil miste ulagrede endringer hvis du gjeninnlaster denne siden"
         payment_card_error: "Et problem har oppstått med ditt kredittkort:"
+        payment_card_declined: "Your card was declined."
       #user edition form
       user:
         man: "Mann"
