@@ -173,7 +173,7 @@ class InvoicesService
 
     invoice.invoice_items.push InvoiceItem.new(
       amount: payment_details[:elements][:plan],
-      description: subscription.plan.name,
+      description: subscription.plan.base_name,
       object: subscription,
       main: main
     )

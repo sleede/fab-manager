@@ -956,14 +956,14 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
       });
       $scope.tagsName = localizedList(tags);
       if ($scope.isOnlySubscriptions && $scope.selectedPlans.length > 0) {
-        $scope.plansName = localizedList($scope.selectedPlans);
+        $scope.plansName = localizedList($scope.selectedPlans, 'base_name');
       }
     };
 
-    const localizedList = function (items) {
+    const localizedList = function (items, attr = 'name') {
       if (items.length === 0) return `<span class="text-gray text-italic">${_t('app.admin.calendar.none')}</span>`;
 
-      const names = items.map(function (i) { return $sce.trustAsHtml(`<strong>${i.name}</strong>`); });
+      const names = items.map(function (i) { return $sce.trustAsHtml(`<strong>${i[attr]}</strong>`); });
       if (items.length > 1) return names.slice(0, -1).join(', ') + ` ${_t('app.admin.calendar.and')} ` + names[names.length - 1];
 
       return names[0];

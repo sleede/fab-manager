@@ -57,7 +57,7 @@ class Subscription < ApplicationRecord
       operator_profile_id: operator_profile_id,
       total: 0
     )
-    invoice.invoice_items.push InvoiceItem.new(amount: 0, description: plan.name, object: od)
+    invoice.invoice_items.push InvoiceItem.new(amount: 0, description: plan.base_name, object: od)
     invoice.save
 
     if save
