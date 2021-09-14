@@ -249,7 +249,7 @@ class PaymentScheduleService
 
     invoice.invoice_items.push InvoiceItem.new(
       amount: payment_details[:subscription],
-      description: subscription.plan.name,
+      description: subscription.plan.base_name,
       object: subscription,
       main: main
     )

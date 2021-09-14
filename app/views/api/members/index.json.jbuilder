@@ -57,6 +57,7 @@ json.array!(@members) do |member|
           json.plan do
             json.id member.subscription.plan.id
             json.name member.subscription.plan.name
+            json.base_name member.subscription.plan.base_name
             json.interval member.subscription.plan.interval
             json.amount member.subscription.plan.amount ? (member.subscription.plan.amount / 100.0) : 0
           end
