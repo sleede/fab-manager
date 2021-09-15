@@ -1120,6 +1120,7 @@ zu:
         an_error_occurred_saving_the_setting: "crwdns20380:0crwdne20380:0"
         book_overlapping_slots_info: "crwdns20642:0crwdne20642:0"
         prevent_booking: "crwdns21478:0crwdne21478:0"
+        allow_booking: "Allow booking"
         default_slot_duration: "crwdns20646:0crwdne20646:0"
         duration_minutes: "crwdns20648:0crwdne20648:0"
         default_slot_duration_info: "crwdns20650:0crwdne20650:0"

@@ -1120,6 +1120,7 @@ pt:
         an_error_occurred_saving_the_setting: "Ocorreu um erro ao salvar a configuração. Por favor, tente novamente mais tarde."
         book_overlapping_slots_info: "Permitir / impedir a reserva de slots sobrepostos"
         prevent_booking: "Prevent booking"
+        allow_booking: "Allow booking"
         default_slot_duration: "Duração padrão para slots"
         duration_minutes: "Duração (em minutos)"
         default_slot_duration_info: "Máquina e espaço disponíveis são divididos em vários slots desta duração. Esse valor pode ser substituído por disponibilidade."
