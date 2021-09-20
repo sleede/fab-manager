@@ -36,10 +36,14 @@ const PacksSummaryComponent: React.FC<PacksSummaryProps> = ({ item, itemType, cu
   const [userPacks, setUserPacks] = useState<Array<UserPack>>(null);
   const [threshold, setThreshold] = useState<number>(null);
   const [packsModal, setPacksModal] = useState<boolean>(false);
+  const [isPackOnlyForSubscription, setIsPackOnlyForSubscription] = useState<boolean>(true);
 
   useEffect(() => {
     SettingAPI.get(SettingName.RenewPackThreshold)
       .then(data => setThreshold(parseFloat(data.value)))
+      .catch(error => onError(error));
+    SettingAPI.get(SettingName.PackOnlyForSubscription)
+      .then(data => setIsPackOnlyForSubscription(data.value === 'true'))
       .catch(error => onError(error));
   }, []);
 
@@ -127,13 +131,32 @@ const PacksSummaryComponent: React.FC<PacksSummaryProps> = ({ item, itemType, cu
   if (_.isEmpty(customer)) return <div />;
   // prevent component rendering if ths customer have no packs and there are no packs available
   if (totalHours() === 0 && packs?.length === 0) return <div/>;
+  // render remaining hours and a warning if customer has not any subscription if admin active pack only for subscription option
+  if (totalHours() > 0) {
+    return (
+      <div className="packs-summary">
+        <h3>{t('app.logged.packs_summary.prepaid_hours')}</h3>
+        <div className="content">
+          <span className="remaining-hours">
+            {t('app.logged.packs_summary.remaining_HOURS', { HOURS: totalHours(), ITEM: itemType })}
+            {isPackOnlyForSubscription && !customer.subscribed_plan &&
+              <div className="alert alert-warning m-t m-b">
+                {t('app.logged.packs_summary.unable_to_use_pack_for_subsription_is_expired')}
+              </div>
+            }
+          </span>
+        </div>
+      </div>
+    );
+  }
+  // prevent component rendering buy pack button if customer has not any subscription if admin active pack only for subscription option
+  if (isPackOnlyForSubscription && !customer.subscribed_plan) return <div/>;
 
   return (
     <div className="packs-summary">
       <h3>{t('app.logged.packs_summary.prepaid_hours')}</h3>
       <div className="content">
         <span className="remaining-hours">
-          {totalHours() > 0 && t('app.logged.packs_summary.remaining_HOURS', { HOURS: totalHours(), ITEM: itemType })}
           {totalHours() === 0 && t('app.logged.packs_summary.no_hours', { ITEM: itemType })}
         </span>
         {shouldDisplayButton() && <div className="button-wrapper">

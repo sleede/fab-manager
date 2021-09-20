@@ -110,6 +110,7 @@ export enum SettingName {
   PayZenCurrency = 'payzen_currency',
   PublicAgendaModule = 'public_agenda_module',
   RenewPackThreshold = 'renew_pack_threshold',
+  PackOnlyForSubscription = 'pack_only_for_subscription',
 }
 
 export type SettingValue = string|boolean|number;
