@@ -1209,6 +1209,9 @@ pt:
         display_invite_to_renew_pack: "Display the invite to renew prepaid-packs"
         packs_threshold_info_html: "You can define under how many hours the user will be invited to buy a new prepaid-pack, if his stock of prepaid hours is under this threshold.<br/>You can set a <strong>number of hours</strong> (<em>eg. 5</em>) or a <strong>percentage</strong> of his current pack pack (<em>eg. 0.05 means 5%</em>)."
         renew_pack_threshold: "threshold for packs renewal"
+        pack_only_for_subscription_info_html: "If this option is activated, the purchase and use of a prepaid pack is only possible for the user with a valid subscription."
+        pack_only_for_subscription: "Subscription valid for purchase and use of a prepaid pack"
+        pack_only_for_subscription_info: "Make subscription mandatory for prepaid packs"
         general:
           general: "Geral"
           title: "Título"

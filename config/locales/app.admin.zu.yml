@@ -1209,6 +1209,9 @@ zu:
         display_invite_to_renew_pack: "crwdns22000:0crwdne22000:0"
         packs_threshold_info_html: "crwdns22030:0crwdne22030:0"
         renew_pack_threshold: "crwdns22004:0crwdne22004:0"
+        pack_only_for_subscription_info_html: "If this option is activated, the purchase and use of a prepaid pack is only possible for the user with a valid subscription."
+        pack_only_for_subscription: "Subscription valid for purchase and use of a prepaid pack"
+        pack_only_for_subscription_info: "Make subscription mandatory for prepaid packs"
         general:
           general: "crwdns20726:0crwdne20726:0"
           title: "crwdns20728:0crwdne20728:0"

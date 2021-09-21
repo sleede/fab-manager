@@ -1209,6 +1209,9 @@ fr:
         display_invite_to_renew_pack: "Afficher l'invitation à renouveler les packs prépayés"
         packs_threshold_info_html: "Vous pouvez définir le nombre d'heures en dessous duquel l'utilisateur sera invité à acheter un nouveau pack prépayé, si son stock d'heures prépayées est inférieur à ce seuil.<br/>Vous pouvez définir un <strong>nombre d'heures</strong> (<em>par exemple. 5</em>) ou un <strong>pourcentage</strong> de son pack actuel (<em>par exemple 0,05 signifie 5%</em>)."
         renew_pack_threshold: "seuil de renouvellement des packs"
+        pack_only_for_subscription_info_html: "Si cette option est activée, l'achat et l'utilisation d'un pack prépayé est seulement possible pour l'utilisateur possédant un abonnement en cours de validité."
+        pack_only_for_subscription: "Abonnement valide pour achat et utilisation d'un pack prépayé"
+        pack_only_for_subscription_info: "Rendre obligatoire l'abonnement pour les packs prépayés"
         general:
           general: "Général"
           title: "Titre"

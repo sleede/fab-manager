@@ -169,5 +169,14 @@
                         step="0.01">
         </number-setting>
       </div>
+      <div class="row">
+        <h3 class="m-l" translate>{{ 'app.admin.settings.pack_only_for_subscription_info' }}</h3>
+        <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.pack_only_for_subscription_info_html' | translate"></p>
+        <boolean-setting name="pack_only_for_subscription"
+                         settings="allSettings"
+                         label="app.admin.settings.pack_only_for_subscription"
+                         classes="m-l">
+        </boolean-setting>
+      </div>
     </div>
 </div>
