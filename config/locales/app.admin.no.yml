@@ -1155,6 +1155,7 @@
         an_error_occurred_saving_the_setting: "An error occurred while saving the setting. Please try again later."
         book_overlapping_slots_info: "Allow / prevent the reservation of overlapping slots"
         prevent_booking: "Prevent booking"
+        allow_booking: "Allow booking"
         default_slot_duration: "Default duration for slots"
         duration_minutes: "Duration (in minutes)"
         default_slot_duration_info: "Machine and space availabilities are divided in multiple slots of this duration. This value can be overridden per availability."
@@ -1208,6 +1209,9 @@
         display_invite_to_renew_pack: "Vis invitasjonen til å fornye forhånds-pakker"
         packs_threshold_info_html: "Du kan definere under hvor mange timer brukeren vil bli invitert til å kjøpe en ny prepaid-pakke, hvis hans beholdning av forhåndsbetalte timer er under denne grensen.<br/>Du kan angi <strong>antall timer</strong> (<em>f. eks. 5</em>) eller en <strong>prosentenhet</strong> i sin nåværende pakningspakke<em>f. eks. 0,05 betyr 5 %</em>)."
         renew_pack_threshold: "terskel for fornyelse av pakker"
+        pack_only_for_subscription_info_html: "If this option is activated, the purchase and use of a prepaid pack is only possible for the user with a valid subscription."
+        pack_only_for_subscription: "Subscription valid for purchase and use of a prepaid pack"
+        pack_only_for_subscription_info: "Make subscription mandatory for prepaid packs"
         general:
           general: "Generelt"
           title: "Tittel"
