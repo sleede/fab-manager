@@ -196,6 +196,7 @@
         remaining_HOURS: "Du har {HOURS} forhåndsbetalte timer igjen for denne {ITEM, select, Machine{maskinen} Space{plassen/rommet} other{}}."
         no_hours: "Du har ikke noen forhåndsbetalt timer for {ITEM, select, Machine{maskinen} Space{plass/rom} other{}}."
         buy_a_new_pack: "Kjøp en ny pakke"
+        unable_to_use_pack_for_subsription_is_expired: "You must have a valid subscription to use your remaining hours."
       #book a training
       trainings_reserve:
         trainings_planning: "Planlegging, opplæring og kurs"
