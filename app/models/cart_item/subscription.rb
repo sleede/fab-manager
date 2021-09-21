@@ -24,7 +24,7 @@ class CartItem::Subscription < CartItem::BaseItem
   end
 
   def name
-    @plan.name
+    @plan.base_name
   end
 
   def to_object

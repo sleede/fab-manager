@@ -1,5 +1,11 @@
 # Changelog Fab-manager
 
+## v5.1.9 2021 September 21
+
+- Add a setting for the purchase and use of a prepaid pack is only possible for the user with a valid subscription
+- Fix a bug: unable to show plan name in calendar reservations
+- Fix a bug: book overlapping slot setting labal name
+
 ## v5.1.8 2021 September 13
 
 - Improved stripe 3D secure payment on payment schedules

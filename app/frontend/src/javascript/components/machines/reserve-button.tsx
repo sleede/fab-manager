@@ -9,6 +9,8 @@ import MachineAPI from '../../api/machine';
 import { Machine } from '../../models/machine';
 import { User } from '../../models/user';
 import { IApplication } from '../../models/application';
+import SettingAPI from '../../api/setting';
+import { SettingName } from '../../models/setting';
 
 declare const Application: IApplication;
 
@@ -36,11 +38,17 @@ const ReserveButtonComponent: React.FC<ReserveButtonProps> = ({ currentUser, mac
   const [pendingTraining, setPendingTraining] = useState<boolean>(false);
   const [trainingRequired, setTrainingRequired] = useState<boolean>(false);
   const [proposePacks, setProposePacks] = useState<boolean>(false);
+  const [isPackOnlyForSubscription, setIsPackOnlyForSubscription] = useState<boolean>(true);
 
   // handle login from an external process
   useEffect(() => setUser(currentUser), [currentUser]);
   // check the trainings after we retrieved the machine data
   useEffect(() => checkTraining(), [machine]);
+  useEffect(() => {
+    SettingAPI.get(SettingName.PackOnlyForSubscription)
+      .then(data => setIsPackOnlyForSubscription(data.value === 'true'))
+      .catch(error => onError(error));
+  }, []);
 
   /**
    * Callback triggered when the user clicks on the 'reserve' button.
@@ -136,8 +144,9 @@ const ReserveButtonComponent: React.FC<ReserveButtonProps> = ({ currentUser, mac
    */
   const checkPrepaidPack = (): void => {
     // if the customer has already bought a pack or if there's no active packs for this machine,
+    // or customer has not any subscription if admin active pack only for subscription option
     // let the customer reserve
-    if (machine.current_user_has_packs || !machine.has_prepaid_packs_for_current_user) {
+    if (machine.current_user_has_packs || !machine.has_prepaid_packs_for_current_user || (isPackOnlyForSubscription && !currentUser.subscribed_plan)) {
       return onReserveMachine(machine);
     }
 
