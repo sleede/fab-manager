@@ -1,5 +1,8 @@
 # Changelog Fab-manager
 
+## NEXT DEPLOY
+- Fixed about page image not using the image set in backoffice
+
 ## v5.1.9 2021 September 21
 
 - Add a setting for the purchase and use of a prepaid pack is only possible for the user with a valid subscription
