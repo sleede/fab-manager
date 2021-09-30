@@ -196,7 +196,7 @@ fr:
         remaining_HOURS: "Il vous reste {HOURS} heures prépayées pour {ITEM, select, Machine{cette machine} Space{cet espace} other{}}."
         no_hours: "Vous n'avez aucune heure prépayée pour {ITEM, select, Machine{cette machine} Space{cet espace} other{}}."
         buy_a_new_pack: "Acheter un nouveau pack"
-        unable_to_use_pack_for_subsription_is_expired: "You must have a valid subscription to use your remaining hours."
+        unable_to_use_pack_for_subsription_is_expired: "Vous devez avoir un abonnement valide pour utiliser vos heures restantes."
       #book a training
       trainings_reserve:
         trainings_planning: "Planning formations"
