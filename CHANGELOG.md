@@ -458,7 +458,7 @@
 
 ## v4.7.14 2021 September 30
 
-- Fix a bug: updated sassc to 2.4.0 to fix ruby runtime error on some CPU architectures
+- Fix a bug: update sassc to 2.4.0 to try to fix #270 (ruby runtime error on some CPU architectures)
 
 ## v4.7.13 2021 June 11
 
