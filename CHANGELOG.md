@@ -1,5 +1,9 @@
 # Changelog Fab-manager
 
+## v5.0.14 2021 September 30
+- Fix a bug: unable to show plan name in calendar reservations
+- Fix a bug: book overlapping slot setting labal name
+
 ## v5.0.13 2021 September 13
 - Improved stripe 3D secure payment on payment schedules
 - Disable monthly payment for the subscription with interval 1 month
