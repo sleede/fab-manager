@@ -378,7 +378,7 @@ GEM
     rufus-scheduler (3.8.1)
       fugit (~> 1.1, >= 1.1.6)
     safe_yaml (1.0.5)
-    sassc (2.4.0)
+    sassc (2.1.0)
       ffi (~> 1.9)
     seed_dump (3.3.1)
       activerecord (>= 4)
@@ -545,7 +545,7 @@ DEPENDENCIES
   rubocop (~> 0.61.1)
   rubyXL
   rubyzip (>= 1.3.0)
-  sassc
+  sassc (= 2.1.0)
   seed_dump
   sha3
   shakapacker (= 6.2.0)
