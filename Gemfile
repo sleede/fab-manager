@@ -138,4 +138,4 @@ gem 'icalendar'
 gem 'tzinfo-data'
 
 # compilation of dynamic stylesheets (home page & theme)
-gem 'sassc'
+gem 'sassc', '= 2.1.0'

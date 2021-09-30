@@ -341,7 +341,7 @@ GEM
       rubyzip (>= 1.3.0)
     rubyzip (2.3.0)
     safe_yaml (1.0.5)
-    sassc (2.4.0)
+    sassc (2.1.0)
       ffi (~> 1.9)
     seed_dump (3.3.1)
       activerecord (>= 4)
@@ -484,7 +484,7 @@ DEPENDENCIES
   rubocop (~> 0.61.1)
   rubyXL
   rubyzip (>= 1.3.0)
-  sassc
+  sassc (= 2.1.0)
   seed_dump
   sha3
   sidekiq (>= 6.0.7)
