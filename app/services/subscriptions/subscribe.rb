@@ -54,7 +54,7 @@ class Subscriptions::Subscribe
                   )
                 end
       payment.save
-      payment.post_save(schedule&.gateway_payment_mean&.id)
+      payment.post_save_extend(schedule&.gateway_payment_mean&.id)
       UsersCredits::Manager.new(user: new_sub.user).reset_credits
       return new_sub
     end

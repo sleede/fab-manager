@@ -14,8 +14,11 @@ class Stripe::Service < Payment::Service
     handle_wallet_transaction(payment_schedule)
 
     stp_subscription = Stripe::Subscription.retrieve(subscription_id, api_key: stripe_key)
+
+    payment_method_id = stp_subscription.default_payment_method
+    payment_method = Stripe::PaymentMethod.retrieve(payment_method_id, api_key: stripe_key)
     pgo = PaymentGatewayObject.new(item: payment_schedule)
-    pgo.gateway_object = stp_subscription
+    pgo.gateway_object = payment_method
     pgo.save!
   end
 
@@ -54,6 +57,16 @@ class Stripe::Service < Payment::Service
       default_payment_method: payment_method_id,
       expand: %w[latest_invoice.payment_intent]
     }, { api_key: stripe_key })
+  end
+
+  def extend_subscription(payment_schedule, payment_method_id)
+    stp_subscription = pay_subscription(payment_schedule, payment_method_id)
+
+    handle_wallet_transaction(payment_schedule)
+
+    pgo = PaymentGatewayObject.new(item: payment_schedule)
+    pgo.gateway_object = stp_subscription
+    pgo.save!
   end
 
   def create_user(user_id)
