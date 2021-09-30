@@ -1,5 +1,9 @@
 # Changelog Fab-manager
 
+## v4.7.14 2021 September 30
+
+- Fix a bug: update sassc to 2.4.0 to try to fix #270
+
 ## v4.7.13 2020 June 11
 
 - Fix a bug: unable to process stripe payments with 3DS authentication
