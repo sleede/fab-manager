@@ -70,6 +70,22 @@
 - [TODO DEPLOY] `rails db:seed`
 - [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
 
+## v5.0.14 2021 September 30
+
+- Fix a bug: unable to show plan name in calendar reservations
+- Fix a bug: book overlapping slot setting labal name
+
+## v5.0.13 2021 September 13
+
+- Improved stripe 3D secure payment on payment schedules
+- Disable monthly payment for the subscription with interval 1 month
+- Fix a bug: unable to show statistics module in nav menu after login
+- Fix a bug: plans page show an error if admin dont create any plans
+
+## v5.0.12 2021 August 24
+
+- Fix a bug: unable to show plans page
+
 ## v5.0.11 2021 August 6
 
 - Fix a bug: unable to generate avoir of wallet
