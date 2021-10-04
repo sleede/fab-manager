@@ -3,7 +3,10 @@
 - The upgrade script will check and report the ability to access the hub API
 - Fix a bug: the upgrade script report an invalid version to upgrade to
 - Fix a security issue: updated tar to 6.1.11 to fix [CVE-2021-37712](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-37712), [CVE-2021-37701](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-37701) and [CVE-2021-37713](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-37713)
-- Fix a security issue: updated tar to 6.1.11 to fix [CVE-2021-3757](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3757) and [CVE-2021-23436](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23436)
+- Fix a security issue: updated immer to 9.0.6 to fix [CVE-2021-3757](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3757) and [CVE-2021-23436](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23436)
+- Fix a security issue: updated url-parse to 1.5.3 to fix [CVE-2021-3664](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3664)
+- Fix a security issue: updated axios to 0.21.2 to fix [CVE-2021-3749](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3749)
+- Fix a security issue: updated nokogiri to 1.12.5 to fix [CVE-2021-41098](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41098)
 
 ## v5.1.10 2021 October 04
 
