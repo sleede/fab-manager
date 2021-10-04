@@ -1,6 +1,9 @@
 # Changelog Fab-manager
 
+- Fix a bug: the upgrade script report an invalid version to upgrade to
+
 ## v5.1.10 2021 October 04
+
 - Fix a bug: the image of the about page is not using the image set in backoffice
 - Fix a bug: updated sassc to 2.4.0 to fix ruby runtime error on some CPU architectures (#270)
 - Fix a security issue: prevent HTML code edition in projects, to prevent XSS vulnerability (#293)

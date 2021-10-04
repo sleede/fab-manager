@@ -120,8 +120,8 @@ version_check()
     version_error "v4.0.4 first"
   elif verlt "$VERSION" 4.4.6 && verlt 4.4.6 "$TARGET"; then
     version_error "v4.4.6 first"
-  elif verlt "$VERSION" 4.7.13 && verlt 4.7.13 "$TARGET"; then
-    version_error "v4.7.13 first"
+  elif verlt "$VERSION" 4.7.14 && verlt 4.7.14 "$TARGET"; then
+    version_error "v4.7.14 first"
   elif verlt "$TARGET" "$VERSION"; then
     version_error "a version > $VERSION"
   fi
