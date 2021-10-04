@@ -279,9 +279,6 @@ a.label:focus,
 }
 
 .about-picture {
-  background: linear-gradient( rgba(255,255,255,0.12), rgba(255,255,255,0.13) ),
-              linear-gradient(<%=Stylesheet.primary_with_alpha(0.78)%>, <%=Stylesheet.primary_with_alpha(0.82)%>),
-              url('/about-fablab.jpg') no-repeat;
 }
 
 .social-icons > div:hover {
@@ -289,7 +286,7 @@ a.label:focus,
   color: $secondary-text-color;
 }
 
-.profile-top {
+.profile-top, .about-picture {
   background: linear-gradient( rgba(255,255,255,0.12), rgba(255,255,255,0.13) ),
               linear-gradient(<%=Stylesheet.primary_with_alpha(0.78)%>, <%=Stylesheet.primary_with_alpha(0.82)%>),
               url("<%=CustomAsset.get_url('profile-image-file') || '/about-fablab.jpg'%>") no-repeat;
