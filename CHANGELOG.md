@@ -1,20 +1,21 @@
 # Changelog Fab-manager
 
 ## NEXT DEPLOY
-- Fixed about page image not using the image set in backoffice
+- Fix a bug: the image of the about page is not using the image set in backoffice
+- Fix a security issue: prevent HTML code edition in projects, to prevent XSS vulnerability (#293)
 
 ## v5.1.9 2021 September 21
 
 - Add a setting for the purchase and use of a prepaid pack is only possible for the user with a valid subscription
 - Fix a bug: unable to show plan name in calendar reservations
-- Fix a bug: book overlapping slot setting labal name
+- Fix a bug: book overlapping slot setting label name
 
 ## v5.1.8 2021 September 13
 
 - Improved stripe 3D secure payment on payment schedules
 - Disable monthly payment for the subscription with interval 1 month
 - Fix a bug: unable to show statistics module in nav menu after login
-- Fix a bug: plans page show an error if admin dont create any plans
+- Fix a bug: plans page show an error if admin don't create any plans
 
 ## v5.1.7 2021 August 24
 
@@ -23,12 +24,12 @@
 
 ## v5.1.6 2021 August 6
 
-- Adjuste packs pricing popover position
+- Adjust packs pricing popover position
 - Updated Norwegian language
 - Updated addressable from 2.7.0 to 2.8.0
 - Updated tar from 6.1.0 to 6.1.4
 - Fix a bug: unable to generate avoir of wallet
-- Fix a bug: manager cant reserve training for user
+- Fix a bug: managers can't reserve trainings for users
 
 ## v5.1.5 2021 August 2
 
