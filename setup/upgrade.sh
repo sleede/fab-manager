@@ -89,6 +89,11 @@ target_version()
   if [[ "$TAG" =~ ^:release-v[\.0-9]+$ ]]; then
     TARGET=$(echo "$TAG" | grep -Eo '[\.0-9]{5}')
   elif [ "$TAG" = ":latest" ] || [ "$TAG" = "" ]; then
+    HTTP_CODE=$(curl -I -s -w "%{http_code}\n" -o /dev/null https://hub.fab-manager.com/api/versions/latest)
+    if [ "$HTTP_CODE" != 200 ]; then
+      printf "\n\n\e[91m[ ❌ ] Unable to retrieve the last version of Fab-manager. Please check your internet connection or restart this script providing the \e[1m-t\e[0m\e[91m option\n\e[39m"
+      exit 3
+    fi
     TARGET=$(\curl -sSL "https://hub.fab-manager.com/api/versions/latest" | jq -r '.semver')
   else
     TARGET='custom'
