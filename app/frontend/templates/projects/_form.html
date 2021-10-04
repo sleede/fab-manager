@@ -71,7 +71,7 @@
         <label for="description" class="col-sm-2 control-label">{{ 'app.shared.project.description' | translate }} *</label>
         <div class="col-sm-10">
           <input type="hidden" name="project[description]" ng-value="project.description" />
-          <summernote ng-model="project.description" id="project_description" placeholder="" config="summernoteOpts" name="project[description]" required></summernote>
+          <summernote ng-model="project.description" id="project_description" placeholder="" config="summernoteOptsProject" name="project[description]" required></summernote>
           <span class="help-block" ng-show="projectForm['project[description]'].$dirty && projectForm['project[description]'].$error.required" translate>{{ 'app.shared.project.description_is_required' }}</span>
         </div>
       </div>
