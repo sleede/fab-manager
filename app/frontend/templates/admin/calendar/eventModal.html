@@ -149,7 +149,7 @@
           <div ng-repeat="group in plansClassifiedByGroup">
             <div class="text-center font-sbold">{{::group.name}}</div>
             <label class="checkbox m-l-md" ng-repeat="plan in group.plans">
-              <input type="checkbox" ng-click="toggleSelectPlan(plan)" ng-model="selectedPlansBinding[plan.id]"> {{::plan.name}}</span>
+              <input type="checkbox" ng-click="toggleSelectPlan(plan)" ng-model="selectedPlansBinding[plan.id]"> {{::plan.base_name}}</span>
             </label>
           </div>
         </div>

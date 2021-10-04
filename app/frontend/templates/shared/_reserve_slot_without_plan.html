@@ -11,7 +11,7 @@
     <div ng-repeat="group in slot.plansGrouped">
       <div class="font-sbold">{{::group.name}}</div>
       <ul class="m-n" ng-repeat="plan in group.plans">
-        <li>{{::plan.name}}</li>
+        <li>{{::plan.base_name}}</li>
       </ul>
     </div>
   </div>

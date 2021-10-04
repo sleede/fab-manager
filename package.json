@@ -1,6 +1,6 @@
 {
   "name": "fab-manager",
-  "version": "5.1.8",
+  "version": "5.1.10",
   "description": "Fab-manager is the FabLab management solution. It provides a comprehensive, web-based, open-source tool to simplify your administrative tasks and your marker's projects.",
   "keywords": [
     "fablab",
@@ -83,7 +83,7 @@
     "angular-ui-tour": "https://github.com/sleede/angular-ui-tour.git#master",
     "angular-unsavedchanges": "0.2",
     "angular-xeditable": "0.10",
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "bootstrap-sass": "3.4.1",
     "checklist-model": "0.2",
@@ -95,7 +95,7 @@
     "i18next": "^19.8.3",
     "i18next-http-backend": "^1.0.21",
     "i18next-icu": "^1.4.2",
-    "immer": "^9.0.1",
+    "immer": "^9.0.6",
     "jasny-bootstrap": "3.1",
     "jquery": ">=3.5.0",
     "jquery-ujs": "^1.2.2",
