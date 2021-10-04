@@ -3,6 +3,7 @@
 - The upgrade script will check and report the ability to access the hub API
 - Fix a bug: the upgrade script report an invalid version to upgrade to
 - Fix a security issue: updated tar to 6.1.11 to fix [CVE-2021-37712](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-37712), [CVE-2021-37701](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-37701) and [CVE-2021-37713](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-37713)
+- Fix a security issue: updated tar to 6.1.11 to fix [CVE-2021-3757](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3757) and [CVE-2021-23436](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23436)
 
 ## v5.1.10 2021 October 04
 
