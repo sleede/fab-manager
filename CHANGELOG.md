@@ -4,6 +4,8 @@
 - Fix a bug: missing translations
 - Fix a bug: the upgrade script report an invalid version to upgrade to
 - Updated @rails/webpacker to 5.4.3
+- Updated react-refresh-webpack-plugin to 0.5.1
+- Updated react-refresh to 0.10.0
 - Fix a security issue: updated tar to 6.1.11 to fix [CVE-2021-37712](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-37712), [CVE-2021-37701](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-37701) and [CVE-2021-37713](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-37713)
 - Fix a security issue: updated immer to 9.0.6 to fix [CVE-2021-3757](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3757) and [CVE-2021-23436](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23436)
 - Fix a security issue: updated url-parse to 1.5.3 to fix [CVE-2021-3664](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3664)
