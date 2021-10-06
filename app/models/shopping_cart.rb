@@ -69,21 +69,6 @@ class ShoppingCart
     { success: success, payment: payment, errors: errors }
   end
 
-  def pay_schedule(payment_id, payment_type)
-    price = total
-    objects = []
-    items.each do |item|
-      raise InvalidSubscriptionError unless item.valid?(@items)
-
-      object = item.to_object
-      objects.push(object)
-      raise InvalidSubscriptionError unless object.errors.empty?
-    end
-    payment = create_payment_document(price, objects, payment_id, payment_type)
-    WalletService.debit_user_wallet(payment, @customer, transaction: false)
-    payment.pay(payment_id)
-  end
-
   private
 
   # Save the object associated with the provided item or raise and Rollback if something wrong append.

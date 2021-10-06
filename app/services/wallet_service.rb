@@ -94,6 +94,7 @@ class WalletService
 
   ##
   # Subtract the amount of the payment document (Invoice|PaymentSchedule) from the customer's wallet
+  # @param transaction, if false: the wallet is not debited, the transaction is only simulated on the payment document
   ##
   def self.debit_user_wallet(payment, user, transaction: true)
     wallet_amount = WalletService.wallet_amount_debit(payment, user)

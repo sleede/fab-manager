@@ -8,33 +8,16 @@ module Stripe; end
 ## create remote objects on stripe
 class Stripe::Service < Payment::Service
   # Create the provided PaymentSchedule on Stripe, using the Subscription API
-  def create_subscription(payment_schedule, subscription_id)
-    stripe_key = Setting.get('stripe_secret_key')
+  def subscribe(payment_method_id, shopping_cart)
+    price_details = shopping_cart.total
 
-    handle_wallet_transaction(payment_schedule)
+    payment_schedule = price_details[:schedule][:payment_schedule]
+    first_item = price_details[:schedule][:items].min_by(&:due_date)
+    subscription = shopping_cart.items.find { |item| item.class == CartItem::Subscription }
+    reservable_stp_id = shopping_cart.items.find { |item| item.is_a?(CartItem::Reservation) }.to_object
+                                     .reservable&.payment_gateway_object&.gateway_object_id
 
-    stp_subscription = Stripe::Subscription.retrieve(subscription_id, api_key: stripe_key)
-    pgo = PaymentGatewayObject.new(item: payment_schedule)
-    pgo.gateway_object = stp_subscription
-    pgo.save!
-  end
-
-  def pay_subscription(payment_schedule, payment_method_id)
-    stripe_key = Setting.get('stripe_secret_key')
-    first_item = payment_schedule.payment_schedule_items.min_by(&:due_date)
-
-    main_object = payment_schedule.payment_schedule_objects.find(&:main)
-    case main_object.object_type
-    when Reservation.name
-      subscription = payment_schedule.payment_schedule_objects.find { |pso| pso.object_type == Subscription.name }.object
-      reservable_stp_id = main_object.object.reservable&.payment_gateway_object&.gateway_object_id
-    when Subscription.name
-      subscription = main_object.object
-      reservable_stp_id = nil
-    else
-      raise InvalidSubscriptionError
-    end
-
+    WalletService.debit_user_wallet(payment_schedule, payment_schedule.invoicing_profile.user, transaction: false)
     handle_wallet_transaction(payment_schedule)
 
     price = create_price(first_item.details['recurring'],
@@ -44,16 +27,27 @@ class Stripe::Service < Payment::Service
     items = subscription_invoice_items(payment_schedule, subscription, first_item, reservable_stp_id)
 
     Stripe::Subscription.create({
-      customer: payment_schedule.invoicing_profile.user.payment_gateway_object.gateway_object_id,
-      cancel_at: (payment_schedule.payment_schedule_items.max_by(&:due_date).due_date + 1.month).to_i,
-      add_invoice_items: items,
-      coupon: payment_schedule.coupon&.code,
-      items: [
-        { price: price[:id] }
-      ],
-      default_payment_method: payment_method_id,
-      expand: %w[latest_invoice.payment_intent]
-    }, { api_key: stripe_key })
+                                  customer: payment_schedule.invoicing_profile.user.payment_gateway_object.gateway_object_id,
+                                  cancel_at: (payment_schedule.payment_schedule_items.max_by(&:due_date).due_date + 1.month).to_i,
+                                  add_invoice_items: items,
+                                  coupon: payment_schedule.coupon&.code,
+                                  items: [
+                                    { price: price[:id] }
+                                  ],
+                                  default_payment_method: payment_method_id,
+                                  expand: %w[latest_invoice.payment_intent]
+                                }, { api_key: stripe_key })
+  end
+
+  def create_subscription(payment_schedule, subscription_id)
+    stripe_key = Setting.get('stripe_secret_key')
+
+    handle_wallet_transaction(payment_schedule)
+
+    stp_subscription = Stripe::Subscription.retrieve(subscription_id, api_key: stripe_key)
+    pgo = PaymentGatewayObject.new(item: payment_schedule)
+    pgo.gateway_object = stp_subscription
+    pgo.save!
   end
 
   def create_user(user_id)
@@ -146,19 +140,21 @@ class Stripe::Service < Payment::Service
   end
 
   def attach_method_as_default(payment_method_id, customer_id)
-    Stripe.api_key = Setting.get('stripe_secret_key')
+    stripe_key = Setting.get('stripe_secret_key')
 
     # attach the payment method to the given customer
-    intent = Stripe::PaymentMethod.attach(
+    method = Stripe::PaymentMethod.attach(
       payment_method_id,
-      customer: customer_id
+      { customer: customer_id },
+      { api_key: stripe_key }
     )
     # then set it as the default payment method for this customer
     Stripe::Customer.update(
-      cart.customer.payment_gateway_object.gateway_object_id,
-      invoice_settings: { default_payment_method: params[:payment_method_id] }
+      customer_id,
+      { invoice_settings: { default_payment_method: payment_method_id } },
+      { api_key: stripe_key }
     )
-    intent
+    method
   end
 
   private

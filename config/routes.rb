@@ -180,10 +180,10 @@ Rails.application.routes.draw do
     # card payments handling
     ## Stripe gateway
     post 'stripe/confirm_payment' => 'stripe/confirm_payment'
-    post 'stripe/create_subscription' => 'stripe/create_subscription'
     get 'stripe/online_payment_status' => 'stripe/online_payment_status'
     get 'stripe/setup_intent/:user_id' => 'stripe#setup_intent'
-    post 'stripe/confirm_payment_schedule' => 'stripe#confirm_payment_schedule'
+    post 'stripe/create_subscription' => 'stripe/create_subscription'
+    post 'stripe/confirm_subscription' => 'stripe#confirm_subscription'
     post 'stripe/update_card' => 'stripe#update_card'
 
     ## PayZen gateway

@@ -47,7 +47,7 @@ class API::StripeController < API::PaymentsController
 
     res = on_payment_success(intent, cart) if intent&.status == 'succeeded'
 
-    render generate_payment_response(intent, res)
+    render generate_payment_response(intent, 'payment', res)
   end
 
   def online_payment_status
@@ -71,15 +71,24 @@ class API::StripeController < API::PaymentsController
 
   def create_subscription
     cart = shopping_cart
-    intent = Stripe::Service.new.attach_method_as_default(
+    cart.items.each do |item|
+      raise InvalidSubscriptionError unless item.valid?(@items)
+      raise InvalidSubscriptionError unless item.to_object.errors.empty?
+    end
+
+    service = Stripe::Service.new
+    method = service.attach_method_as_default(
       params[:payment_method_id],
       cart.customer.payment_gateway_object.gateway_object_id
     )
-    @res = cart.pay_schedule(intent.id, intent.class.name)
-    render json: @res.to_json
+
+    stp_subscription = service.subscribe(method.id, cart)
+
+    res = on_payment_success(stp_subscription, cart) if stp_subscription&.status == 'active'
+    render generate_payment_response(stp_subscription.latest_invoice.payment_intent, 'subscription', res, stp_subscription.id)
   end
 
-  def confirm_payment_schedule
+  def confirm_subscription
     key = Setting.get('stripe_secret_key')
     subscription = Stripe::Subscription.retrieve(params[:subscription_id], api_key: key)
 
@@ -124,7 +133,7 @@ class API::StripeController < API::PaymentsController
     super(intent.id, intent.class.name, cart)
   end
 
-  def generate_payment_response(intent, res = nil)
+  def generate_payment_response(intent, type, res = nil, stp_subscription_id = nil)
     return res unless res.nil?
 
     if intent.status == 'requires_action' && intent.next_action.type == 'use_stripe_sdk'
@@ -133,7 +142,9 @@ class API::StripeController < API::PaymentsController
         status: 200,
         json: {
           requires_action: true,
-          payment_intent_client_secret: intent.client_secret
+          payment_intent_client_secret: intent.client_secret,
+          type: type,
+          subscription_id: stp_subscription_id
         }
       }
     elsif intent.status == 'succeeded'
