@@ -69,19 +69,13 @@ class API::StripeController < API::PaymentsController
     render json: { id: @intent.id, client_secret: @intent.client_secret }
   end
 
-  def payment_schedule
+  def create_subscription
     cart = shopping_cart
-    Stripe.api_key = Setting.get('stripe_secret_key')
-    @intent = Stripe::PaymentMethod.attach(
+    intent = Stripe::Service.new.attach_method_as_default(
       params[:payment_method_id],
-      customer: cart.customer.payment_gateway_object.gateway_object_id
+      cart.customer.payment_gateway_object.gateway_object_id
     )
-    # Set the default payment method on the customer
-    Stripe::Customer.update(
-      cart.customer.payment_gateway_object.gateway_object_id,
-      invoice_settings: { default_payment_method: params[:payment_method_id] }
-    )
-    @res = cart.pay_schedule(@intent.id, @intent.class.name)
+    @res = cart.pay_schedule(intent.id, intent.class.name)
     render json: @res.to_json
   end
 

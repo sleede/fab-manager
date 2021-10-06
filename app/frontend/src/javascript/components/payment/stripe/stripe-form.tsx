@@ -44,7 +44,7 @@ export const StripeForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, on
           await handleServerConfirmation(res);
         } else {
           const paymentMethodId = paymentMethod.id;
-          const subscription: StripeSubscription = await StripeAPI.paymentSchedule(paymentMethod.id, cart);
+          const subscription: StripeSubscription = await StripeAPI.createSubscription(paymentMethod.id, cart);
           if (subscription && subscription.status === 'active') {
             // Subscription is active, no customer actions required.
             const res = await StripeAPI.confirmPaymentSchedule(subscription.id, cart);

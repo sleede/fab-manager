@@ -145,6 +145,22 @@ class Stripe::Service < Payment::Service
     { status: stp_invoice.status, error: e }
   end
 
+  def attach_method_as_default(payment_method_id, customer_id)
+    Stripe.api_key = Setting.get('stripe_secret_key')
+
+    # attach the payment method to the given customer
+    intent = Stripe::PaymentMethod.attach(
+      payment_method_id,
+      customer: customer_id
+    )
+    # then set it as the default payment method for this customer
+    Stripe::Customer.update(
+      cart.customer.payment_gateway_object.gateway_object_id,
+      invoice_settings: { default_payment_method: params[:payment_method_id] }
+    )
+    intent
+  end
+
   private
 
   def subscription_invoice_items(payment_schedule, subscription, first_item, reservable_stp_id)

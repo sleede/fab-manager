@@ -21,8 +21,8 @@ export default class StripeAPI {
     return res?.data;
   }
 
-  static async paymentSchedule (paymentMethodId: string, cartItems: ShoppingCart): Promise<StripeSubscription> {
-    const res: AxiosResponse = await apiClient.post('/api/stripe/payment_schedule', {
+  static async createSubscription (paymentMethodId: string, cartItems: ShoppingCart): Promise<StripeSubscription> {
+    const res: AxiosResponse = await apiClient.post('/api/stripe/create_subscription', {
       payment_method_id: paymentMethodId,
       cart_items: cartItems
     });
