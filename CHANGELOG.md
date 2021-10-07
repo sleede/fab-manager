@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Updated production documentation
+- Improved stripe subscription process with better error handling
 - The upgrade script will check and report the ability to access the hub API
 - Fix a bug: missing translations
 - Fix a bug: the upgrade script report an invalid version to upgrade to
