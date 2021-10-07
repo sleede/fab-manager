@@ -162,6 +162,7 @@ export const ProposePacksModal: React.FC<ProposePacksModalProps> = ({ isOpen, to
         <LocalPaymentModal isOpen={localPaymentModal}
           toggleModal={toggleLocalPaymentModal}
           afterSuccess={handlePackBought}
+          onError={onError}
           cart={cart}
           currentUser={operator}
           customer={customer} />

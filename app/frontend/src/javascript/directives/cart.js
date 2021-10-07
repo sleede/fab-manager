@@ -363,6 +363,14 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
         };
 
         /**
+         * Invoked when something wrong occurred after the payment dialog has been closed
+         * @param message {string}
+         */
+        $scope.onLocalPaymentError = (message) => {
+          growl.error(message);
+        };
+
+        /**
          * Invoked when something wrong occurred during the payment dialog initialization
          * @param message {string}
          */

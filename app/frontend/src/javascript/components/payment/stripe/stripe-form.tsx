@@ -44,8 +44,8 @@ export const StripeForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, on
           const res = await StripeAPI.confirmMethod(paymentMethod.id, cart);
           await handleServerConfirmation(res);
         } else {
-          const res = await StripeAPI.createSubscription(paymentMethod.id, cart);
-          await handleServerConfirmation(res);
+          const res = await StripeAPI.setupSubscription(paymentMethod.id, cart);
+          await handleServerConfirmation(res, paymentMethod.id);
         }
       } catch (err) {
         // catch api errors
@@ -57,9 +57,10 @@ export const StripeForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, on
   /**
    * Process the server response about the Strong-customer authentication (SCA)
    * @param response can be a PaymentConfirmation, or an Invoice/PaymentSchedule (if the payment succeeded)
+   * @param paymentMethodId ID of the payment method, required only when confirming a payment schedule
    * @see app/controllers/api/stripe_controller.rb#confirm_payment
    */
-  const handleServerConfirmation = async (response: PaymentConfirmation|Invoice|PaymentSchedule) => {
+  const handleServerConfirmation = async (response: PaymentConfirmation|Invoice|PaymentSchedule, paymentMethodId?: string) => {
     if ('error' in response) {
       if (response.error.statusText) {
         onError(response.error.statusText);
@@ -67,24 +68,34 @@ export const StripeForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, on
         onError(`${t('app.shared.messages.payment_card_error')} ${response.error}`);
       }
     } else if ('requires_action' in response) {
-      // Use Stripe.js to handle required card action
-      const result = await stripe.handleCardAction(response.payment_intent_client_secret);
-      if (result.error) {
-        onError(result.error.message);
-      } else {
-        // The card action has been handled
-        // The PaymentIntent can be confirmed again on the server
-        try {
-          if (response.type === 'payment') {
+      if (response.type === 'payment') {
+        // Use Stripe.js to handle required card action
+        const result = await stripe.handleCardAction(response.payment_intent_client_secret);
+        if (result.error) {
+          onError(result.error.message);
+        } else {
+          // The card action has been handled
+          // The PaymentIntent can be confirmed again on the server
+          try {
             const confirmation = await StripeAPI.confirmIntent(result.paymentIntent.id, cart);
             await handleServerConfirmation(confirmation);
+          } catch (e) {
+            onError(e);
           }
-          if (response.type === 'subscription') {
+        }
+      } else if (response.type === 'subscription') {
+        const result = await stripe.confirmCardPayment(response.payment_intent_client_secret, {
+          payment_method: paymentMethodId
+        });
+        if (result.error) {
+          onError(result.error.message);
+        } else {
+          try {
             const confirmation = await StripeAPI.confirmSubscription(response.subscription_id, cart);
             await handleServerConfirmation(confirmation);
+          } catch (e) {
+            onError(e);
           }
-        } catch (e) {
-          onError(e);
         }
       }
     } else if ('id' in response) {

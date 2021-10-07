@@ -17,6 +17,7 @@ interface LocalPaymentModalProps {
   isOpen: boolean,
   toggleModal: () => void,
   afterSuccess: (result: Invoice|PaymentSchedule) => void,
+  onError: (message: string) => void,
   cart: ShoppingCart,
   currentUser: User,
   schedule?: PaymentSchedule,
@@ -26,7 +27,7 @@ interface LocalPaymentModalProps {
 /**
  * This component enables a privileged user to confirm a local payments.
  */
-const LocalPaymentModalComponent: React.FC<LocalPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, cart, currentUser, schedule, customer }) => {
+const LocalPaymentModalComponent: React.FC<LocalPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, cart, currentUser, schedule, customer }) => {
   const { t } = useTranslation('admin');
 
   /**
@@ -71,6 +72,7 @@ const LocalPaymentModalComponent: React.FC<LocalPaymentModalProps> = ({ isOpen, 
       cart={cart}
       customer={customer}
       afterSuccess={afterSuccess}
+      onError={onError}
       schedule={schedule}
       GatewayForm={renderForm}
       modalSize={schedule ? ModalSize.large : ModalSize.medium}
@@ -79,12 +81,12 @@ const LocalPaymentModalComponent: React.FC<LocalPaymentModalProps> = ({ isOpen, 
   );
 };
 
-export const LocalPaymentModal: React.FC<LocalPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, currentUser, schedule, cart, customer }) => {
+export const LocalPaymentModal: React.FC<LocalPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, currentUser, schedule, cart, customer }) => {
   return (
     <Loader>
-      <LocalPaymentModalComponent isOpen={isOpen} toggleModal={toggleModal} afterSuccess={afterSuccess} currentUser={currentUser} schedule={schedule} cart={cart} customer={customer} />
+      <LocalPaymentModalComponent isOpen={isOpen} toggleModal={toggleModal} afterSuccess={afterSuccess} onError={onError} currentUser={currentUser} schedule={schedule} cart={cart} customer={customer} />
     </Loader>
   );
 };
 
-Application.Components.component('localPaymentModal', react2angular(LocalPaymentModal, ['isOpen', 'toggleModal', 'afterSuccess', 'currentUser', 'schedule', 'cart', 'customer']));
+Application.Components.component('localPaymentModal', react2angular(LocalPaymentModal, ['isOpen', 'toggleModal', 'afterSuccess', 'onError', 'currentUser', 'schedule', 'cart', 'customer']));
