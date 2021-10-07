@@ -64,8 +64,9 @@ class ShoppingCart
       payment.post_save(payment_id)
     end
 
-    success = objects.map(&:errors).flatten.map(&:empty?).all? && items.map(&:errors).map(&:empty?).all?
+    success = !payment.nil? && objects.map(&:errors).flatten.map(&:empty?).all? && items.map(&:errors).map(&:empty?).all?
     errors = objects.map(&:errors).flatten.concat(items.map(&:errors))
+    errors.push('Unable to create the PaymentDocument') if payment.nil?
     { success: success, payment: payment, errors: errors }
   end
 

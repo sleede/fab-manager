@@ -69,10 +69,10 @@ class API::StripeController < API::PaymentsController
     render json: { id: @intent.id, client_secret: @intent.client_secret }
   end
 
-  def create_subscription
+  def setup_subscription
     cart = shopping_cart
     cart.items.each do |item|
-      raise InvalidSubscriptionError unless item.valid?(@items)
+      raise InvalidSubscriptionError unless item.valid?(cart.items)
       raise InvalidSubscriptionError unless item.to_object.errors.empty?
     end
 
@@ -90,12 +90,15 @@ class API::StripeController < API::PaymentsController
 
   def confirm_subscription
     key = Setting.get('stripe_secret_key')
-    subscription = Stripe::Subscription.retrieve(params[:subscription_id], api_key: key)
+    subscription = Stripe::Subscription.retrieve(
+      { id: params[:subscription_id], expand: %w[latest_invoice.payment_intent] },
+      { api_key: key }
+    )
 
     cart = shopping_cart
     if subscription&.status == 'active'
-      res = on_payment_success(subscription, cart)
-      render generate_payment_response(subscription, res)
+      res = on_payment_success(subscription.latest_invoice.payment_intent, cart)
+      render generate_payment_response(subscription.latest_invoice.payment_intent, 'subscription', res)
     end
   rescue Stripe::InvalidRequestError => e
     render json: e, status: :unprocessable_entity

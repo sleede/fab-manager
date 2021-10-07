@@ -12,12 +12,13 @@ class Stripe::Service < Payment::Service
     price_details = shopping_cart.total
 
     payment_schedule = price_details[:schedule][:payment_schedule]
+    payment_schedule.payment_schedule_items = price_details[:schedule][:items]
     first_item = price_details[:schedule][:items].min_by(&:due_date)
     subscription = shopping_cart.items.find { |item| item.class == CartItem::Subscription }
     reservable_stp_id = shopping_cart.items.find { |item| item.is_a?(CartItem::Reservation) }.to_object
                                      .reservable&.payment_gateway_object&.gateway_object_id
 
-    WalletService.debit_user_wallet(payment_schedule, payment_schedule.invoicing_profile.user, transaction: false)
+    WalletService.debit_user_wallet(payment_schedule, shopping_cart.customer, transaction: false)
     handle_wallet_transaction(payment_schedule)
 
     price = create_price(first_item.details['recurring'],
@@ -26,8 +27,10 @@ class Stripe::Service < Payment::Service
     # other items (not recurring)
     items = subscription_invoice_items(payment_schedule, subscription, first_item, reservable_stp_id)
 
+
+    stripe_key = Setting.get('stripe_secret_key')
     Stripe::Subscription.create({
-                                  customer: payment_schedule.invoicing_profile.user.payment_gateway_object.gateway_object_id,
+                                  customer: shopping_cart.customer.payment_gateway_object.gateway_object_id,
                                   cancel_at: (payment_schedule.payment_schedule_items.max_by(&:due_date).due_date + 1.month).to_i,
                                   add_invoice_items: items,
                                   coupon: payment_schedule.coupon&.code,
@@ -39,12 +42,11 @@ class Stripe::Service < Payment::Service
                                 }, { api_key: stripe_key })
   end
 
-  def create_subscription(payment_schedule, subscription_id)
+  def create_subscription(payment_schedule, payment_intent_id)
     stripe_key = Setting.get('stripe_secret_key')
 
-    handle_wallet_transaction(payment_schedule)
-
-    stp_subscription = Stripe::Subscription.retrieve(subscription_id, api_key: stripe_key)
+    pi = Stripe::PaymentIntent.retrieve({ id: payment_intent_id, expand: %w[invoice] }, { api_key: stripe_key })
+    stp_subscription = Stripe::Subscription.retrieve(pi.invoice.subscription, api_key: stripe_key)
     pgo = PaymentGatewayObject.new(item: payment_schedule)
     pgo.gateway_object = stp_subscription
     pgo.save!

@@ -182,7 +182,7 @@ Rails.application.routes.draw do
     post 'stripe/confirm_payment' => 'stripe/confirm_payment'
     get 'stripe/online_payment_status' => 'stripe/online_payment_status'
     get 'stripe/setup_intent/:user_id' => 'stripe#setup_intent'
-    post 'stripe/create_subscription' => 'stripe/create_subscription'
+    post 'stripe/setup_subscription' => 'stripe/setup_subscription'
     post 'stripe/confirm_subscription' => 'stripe#confirm_subscription'
     post 'stripe/update_card' => 'stripe#update_card'
 
