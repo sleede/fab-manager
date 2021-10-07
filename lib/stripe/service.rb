@@ -50,6 +50,26 @@ class Stripe::Service < Payment::Service
     pgo = PaymentGatewayObject.new(item: payment_schedule)
     pgo.gateway_object = stp_subscription
     pgo.save!
+
+    payment_method_id = stp_subscription.default_payment_method
+    payment_method = Stripe::PaymentMethod.retrieve(payment_method_id, api_key: stripe_key)
+    pgo2 = PaymentGatewayObject.new(item: payment_schedule)
+    pgo2.gateway_object = payment_method
+    pgo2.save!
+  end
+
+  def extend_subscription(payment_schedule, payment_method_id)
+    # TODO, use Stripe::Subscription.update(sub_xxx, {cancel_at: new_date}, {api_key: stripe_key})
+
+    # FIXME, argument cart missing
+    stp_subscription = subscribe(payment_schedule, payment_method_id)
+
+    # not required?
+    handle_wallet_transaction(payment_schedule)
+
+    pgo = PaymentGatewayObject.new(item: payment_schedule)
+    pgo.gateway_object = stp_subscription
+    pgo.save!
   end
 
   def create_user(user_id)

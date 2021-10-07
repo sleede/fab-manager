@@ -14,7 +14,7 @@ class Subscriptions::Subscribe
 
     new_sub = Subscription.create(
       plan_id: subscription.plan_id,
-      statistic_profile_id: subscription.statistic_profile_id,
+      statistic_profile_id: subscription.statistic_profile_id
     )
     new_sub.expiration_date = new_expiration_date
     if new_sub.save
@@ -54,7 +54,7 @@ class Subscriptions::Subscribe
                   )
                 end
       payment.save
-      payment.post_save(schedule&.gateway_payment_mean&.id)
+      payment.post_save_extend(schedule&.gateway_payment_mean&.id)
       UsersCredits::Manager.new(user: new_sub.user).reset_credits
       return new_sub
     end
