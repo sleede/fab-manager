@@ -762,9 +762,19 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
         animation: true,
         templateUrl: '/admin/subscriptions/expired_at_modal.html',
         size: 'lg',
-        controller: ['$scope', '$uibModalInstance', 'Subscription', function ($scope, $uibModalInstance, Subscription) {
-          $scope.new_expired_at = angular.copy(subscription.expired_at);
+        resolve: {
+          paymentDetails () {
+            return Subscription.payment_details({ id: subscription.id }).$promise;
+          }
+        },
+        controller: ['$scope', '$uibModalInstance', 'Subscription', 'paymentDetails', function ($scope, $uibModalInstance, Subscription, paymentDetails) {
+          /* PUBLIC SCOPE */
+
+          $scope.expire_at = subscription.expired_at;
+          $scope.new_expired_at = new Date(subscription.expired_at);
           $scope.free = free;
+          $scope.days = 0;
+          $scope.payment_details = paymentDetails;
           $scope.datePicker = {
             opened: false,
             format: Fablab.uibDateFormat,
@@ -779,6 +789,11 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
             ev.stopPropagation();
             return $scope.datePicker.opened = true;
           };
+
+          $scope.$watch(scope => scope.expire_at
+            , () => refreshDays());
+          $scope.$watch(scope => scope.new_expired_at
+            , () => refreshDays());
 
           $scope.ok = function () {
             Subscription.update(
@@ -796,6 +811,31 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
           };
 
           $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
+
+          /* PRIVATE SCOPE */
+
+          /**
+           * Kind of constructor: these actions will be realized first when the controller is loaded
+           */
+          function initialize () {
+            if (!free) {
+              $scope.new_expired_at = moment($scope.expire_at).add(subscription.plan.interval_count, subscription.plan.interval).toDate();
+            }
+          }
+
+          /**
+           * Refresh the number of free days depending on the original subscription expiration date and on the new selected date
+           */
+          function refreshDays () {
+            if (!$scope.new_expired_at || !$scope.expire_at) {
+              return $scope.days = 0;
+            }
+            // 86400000 = 1000 * 3600 * 24 = number of ms per day
+            $scope.days = Math.round((new Date($scope.new_expired_at).getTime() - new Date($scope.expire_at).getTime()) / 86400000);
+          }
+
+          // !!! MUST BE CALLED AT THE END of the controller
+          initialize();
         }]
       });
       // once the form was validated successfully ...

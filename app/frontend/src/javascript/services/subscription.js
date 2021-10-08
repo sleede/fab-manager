@@ -5,6 +5,10 @@ Application.Services.factory('Subscription', ['$resource', function ($resource) 
     { id: '@id' }, {
       update: {
         method: 'PUT'
+      },
+      payment_details: {
+        url: '/api/subscriptions/:id/payment_details',
+        method: 'GET'
       }
     }
   );

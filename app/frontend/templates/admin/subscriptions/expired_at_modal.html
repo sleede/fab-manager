@@ -4,29 +4,48 @@
 <div class="modal-body m-lg">
     <div class="alert alert-danger">
       <div ng-show="free">
-        <p translate>{{ 'app.admin.members_edit.you_intentionally_decide_to_extend_the_user_s_subscription_by_offering_him_free_days' }}</p>
+        <p translate>{{ 'app.admin.members_edit.offer_free_days_infos' }}</p>
         <p translate>{{ 'app.admin.members_edit.credits_will_remain_unchanged' }}</p>
       </div>
       <div ng-hide="free">
-        <p translate>{{ 'app.admin.members_edit.you_intentionally_decide_to_extend_the_user_s_subscription_by_charging_him_again_for_his_current_subscription' }}</p>
+        <p translate>{{ 'app.admin.members_edit.renew_subscription_info' }}</p>
         <p translate>{{ 'app.admin.members_edit.credits_will_be_reset' }}</p>
-        <p translate>{{ 'app.admin.members_edit.payment_scheduled' }}</p>
       </div>
     </div>
     <form role="form" name="subscriptionForm" novalidate>
       <div class="form-group">
-        <label translate>{{ 'app.admin.members_edit.until_expiration_date' }}</label>
+        <label translate>{{ 'app.admin.members_edit.current_expiration_date' }}</label>
+        <span class="form-control">{{expire_at | amDateFormat:'L LT'}}</span>
+      </div>
+      <div class="form-group" ng-hide="free">
+        <label translate>{{ 'app.admin.members_edit.new_subscription_start' }}</label>
+        <span class="form-control">{{expire_at | amDateFormat:'L LT'}}</span>
+      </div>
+      <div class="form-group">
+        <label for="subscription[expired_at]" translate>{{ 'app.admin.members_edit.new_expiration_date' }}</label>
         <input type="text"
                class="form-control"
                name="subscription[expired_at]"
+               id="subscription[expired_at]"
                ng-model="new_expired_at"
                uib-datepicker-popup="{{datePicker.format}}"
                datepicker-options="datePicker.options"
                is-open="datePicker.opened"
                ng-click="openDatePicker($event)"
                min-date="datePicker.minDate"
-               placeholder=""
+               ng-readonly="!free"
+               ng-disabled="!free"
                required/>
+      </div>
+      <div class="alert alert-info" ng-show="!free">
+        <p ng-show="payment_details.payment_schedule && payment_details.card" translate>{{ 'app.admin.members_edit.payment_schedule_card' }}</p>
+        <p ng-show="payment_details.payment_schedule && !payment_details.card" translate>{{ 'app.admin.members_edit.payment_schedule_check' }}</p>
+        <p ng-show="!payment_details.payment_schedule && payment_details.card" translate>{{ 'app.admin.members_edit.one_payment_card' }}</p>
+        <p ng-show="!payment_details.payment_schedule && !payment_details.card" translate>{{ 'app.admin.members_edit.one_payment_check' }}</p>
+      </div>
+      <div class="form-group" ng-show="free">
+        <label translate>{{ 'app.admin.members_edit.number_of_free_days' }}</label>
+        <span class="form-control">{{days}}</span>
       </div>
     </form>
 </div>

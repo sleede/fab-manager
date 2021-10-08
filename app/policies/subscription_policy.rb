@@ -13,4 +13,8 @@ class SubscriptionPolicy < ApplicationPolicy
   def update?
     user.admin? || (user.manager? && record.user.id != user.id)
   end
+
+  def payment_details?
+    user.admin? || user.manager?
+  end
 end

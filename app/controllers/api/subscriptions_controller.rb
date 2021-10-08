@@ -2,7 +2,7 @@
 
 # API Controller for resources of type Subscription
 class API::SubscriptionsController < API::ApiController
-  before_action :set_subscription, only: %i[show edit update destroy]
+  before_action :set_subscription, only: %i[show payment_details edit update destroy]
   before_action :authenticate_user!
 
   def show
@@ -24,6 +24,10 @@ class API::SubscriptionsController < API::ApiController
     else
       render status: :unprocessable_entity
     end
+  end
+
+  def payment_details
+    authorize @subscription
   end
 
   private
