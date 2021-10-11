@@ -17,6 +17,7 @@ import { Price } from '../../models/price';
 import PrepaidPackAPI from '../../api/prepaid-pack';
 import { PrepaidPack } from '../../models/prepaid-pack';
 import { useImmer } from 'use-immer';
+import FormatLib from '../../lib/format';
 
 declare let Fablab: IFablab;
 declare const Application: IApplication;
@@ -63,11 +64,11 @@ const MachinesPricing: React.FC<MachinesPricingProps> = ({ onError, onSuccess })
     const hourlyRate = 10;
 
     if (type === 'hourly_rate') {
-      return new Intl.NumberFormat(Fablab.intl_locale, { style: 'currency', currency: Fablab.intl_currency }).format(hourlyRate);
+      return FormatLib.price(hourlyRate);
     }
 
     const price = (hourlyRate / 60) * EXEMPLE_DURATION;
-    return new Intl.NumberFormat(Fablab.intl_locale, { style: 'currency', currency: Fablab.intl_currency }).format(price);
+    return FormatLib.price(price);
   };
 
   /**
@@ -111,7 +112,7 @@ const MachinesPricing: React.FC<MachinesPricingProps> = ({ onError, onSuccess })
     <div className="machines-pricing">
       <FabAlert level="warning">
         <p><HtmlTranslate trKey="app.admin.machines_pricing.prices_match_machine_hours_rates_html"/></p>
-        <p><HtmlTranslate trKey="app.admin.machines_pricing.prices_calculated_on_hourly_rate_html" options={{ DURATION: EXEMPLE_DURATION, RATE: examplePrice('hourly_rate'), PRICE: examplePrice('final_price') }} /></p>
+        <p><HtmlTranslate trKey="app.admin.machines_pricing.prices_calculated_on_hourly_rate_html" options={{ DURATION: `${EXEMPLE_DURATION}`, RATE: examplePrice('hourly_rate'), PRICE: examplePrice('final_price') }} /></p>
         <p>{t('app.admin.machines_pricing.you_can_override')}</p>
       </FabAlert>
       <table>

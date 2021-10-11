@@ -705,6 +705,9 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
     // current active authentication provider
     $scope.activeProvider = activeProviderPromise;
 
+    //  modal dialog to extend the current subscription for free
+    $scope.isOpenFreeExtendModal = false;
+
     /**
      * Open a modal dialog asking for confirmation to change the role of the given user
      * @returns {*}
@@ -753,6 +756,27 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
     };
 
     /**
+     * Opens/closes the modal dialog to freely extend the subscription
+     */
+    $scope.toggleFreeExtendModal = () => {
+      $scope.isOpenFreeExtendModal = !$scope.isOpenFreeExtendModal;
+    };
+
+    /**
+     * Callback triggered if the subscription was successfully extended
+     */
+    $scope.onExtendSuccess = (subscription) => {
+      $scope.subscription = subscription;
+    };
+
+    /**
+     * Callback triggered in case of error
+     */
+    $scope.onError = (message) => {
+      growl.error(message);
+    };
+
+    /**
      * Open a modal dialog, allowing the admin to extend the current user's subscription (freely or not)
      * @param subscription {Object} User's subscription object
      * @param free {boolean} True if the extent is offered, false otherwise
@@ -772,7 +796,6 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
 
           $scope.expire_at = subscription.expired_at;
           $scope.new_expired_at = new Date(subscription.expired_at);
-          $scope.free = free;
           $scope.days = 0;
           $scope.payment_details = paymentDetails;
           $scope.datePicker = {
@@ -789,11 +812,6 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
             ev.stopPropagation();
             return $scope.datePicker.opened = true;
           };
-
-          $scope.$watch(scope => scope.expire_at
-            , () => refreshDays());
-          $scope.$watch(scope => scope.new_expired_at
-            , () => refreshDays());
 
           $scope.ok = function () {
             Subscription.update(
@@ -821,17 +839,6 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
             if (!free) {
               $scope.new_expired_at = moment($scope.expire_at).add(subscription.plan.interval_count, subscription.plan.interval).toDate();
             }
-          }
-
-          /**
-           * Refresh the number of free days depending on the original subscription expiration date and on the new selected date
-           */
-          function refreshDays () {
-            if (!$scope.new_expired_at || !$scope.expire_at) {
-              return $scope.days = 0;
-            }
-            // 86400000 = 1000 * 3600 * 24 = number of ms per day
-            $scope.days = Math.round((new Date($scope.new_expired_at).getTime() - new Date($scope.expire_at).getTime()) / 86400000);
           }
 
           // !!! MUST BE CALLED AT THE END of the controller

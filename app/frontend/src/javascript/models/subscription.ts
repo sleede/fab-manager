@@ -5,10 +5,20 @@ export interface Subscription {
   plan_id: number,
   expired_at: Date,
   canceled_at?: Date,
-  stripe: boolean,
   plan: Plan
 }
 
 export interface SubscriptionRequest {
   plan_id: number
+}
+
+export interface UpdateSubscriptionRequest {
+  id: number,
+  expired_at: Date,
+  free: boolean
+}
+
+export interface SubscriptionPaymentDetails {
+  payment_schedule: boolean,
+  card: boolean
 }

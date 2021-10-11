@@ -1,0 +1,18 @@
+.free-extend-modal {
+  .fab-modal-content {
+    padding: 30px;
+
+    .configuration-form {
+      padding: 15px;
+
+      .input-wrapper {
+        display: block;
+      }
+
+      .free-days {
+        display: block;
+        @extend .fab-input--input;
+      }
+    }
+  }
+}

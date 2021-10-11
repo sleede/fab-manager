@@ -77,6 +77,7 @@ const PaymentScheduleSummary: React.FC<PaymentScheduleSummaryProps> = ({ schedul
     </div>
   );
 };
+
 const PaymentScheduleSummaryWrapper: React.FC<PaymentScheduleSummaryProps> = ({ schedule }) => {
   return (
     <Loader>

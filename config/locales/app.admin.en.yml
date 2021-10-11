@@ -890,13 +890,7 @@ en:
         no_invoices_for_now: "No invoices for now."
         current_expiration_date: "Current subscription will expire at:"
         expiration_date: "Change subscription expiration date"
-        offer_free_days_infos: "You are about to extend the user's subscription by offering him free additional days."
-        credits_will_remain_unchanged: "The balance of free credits (training / machines / spaces) of the user will remain unchanged."
-        renew_subscription_info: "You are about to renew the user's subscription by charging him again for his current subscription."
-        credits_will_be_reset: "The balance of free credits (training / machines / spaces) of the user will be reset, unused credits will be lost."
         new_subscription_start: "The new subscription will start at:"
-        new_expiration_date: "New expiration date:"
-        number_of_free_days: "Number of free days:"
         payment_schedule_card: "The previous subscription was charged by card through a payment schedule, this one will be charged the same way. The first deadline will be charged when the current subscription expires, then each following month."
         payment_schedule_check: "The previous subscription was charged by check through a payment schedule, this one will be charged the same way. Before confirming please ensure you have all the checks to collect all the monthly payments."
         one_payment_card: "The previous subscription was charged by card through a single payment, this one will be charged the same way. The payment will be charged right now."
@@ -912,6 +906,21 @@ en:
         to_credit: 'Credit'
         cannot_credit_own_wallet: "You cannot credit your own wallet. Please ask another manager or an administrator to credit your wallet."
         cannot_extend_own_subscription: "You cannot extend your own subscription. Please ask another manager or an administrator to extend your subscription."
+      # extend a subscription for free
+      free_extend_modal:
+        extend_subscription: "Extend the subscription"
+        offer_free_days_infos: "You are about to extend the user's subscription by offering him free additional days."
+        credits_will_remain_unchanged: "The balance of free credits (training / machines / spaces) of the user will remain unchanged."
+        current_expiration: "Current subscription will expire at:"
+        DATE_TIME: "{DATE} {TIME}"
+        new_expiration_date: "New expiration date:"
+        number_of_free_days: "Number of free days:"
+        extend: "Extend"
+      # renew a subscription
+      renew_subscription_modal:
+        renew_subscription: "Renew the subscription"
+        renew_subscription_info: "You are about to renew the user's subscription by charging him again for his current subscription."
+        credits_will_be_reset: "The balance of free credits (training / machines / spaces) of the user will be reset, unused credits will be lost."
       #add a new administrator to the platform
       admins_new:
         add_an_administrator: "Add an administrator"

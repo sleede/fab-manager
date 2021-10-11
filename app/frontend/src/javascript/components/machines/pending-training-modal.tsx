@@ -1,11 +1,8 @@
 import React from 'react';
-import moment from 'moment';
 import { FabModal } from '../base/fab-modal';
 import { useTranslation } from 'react-i18next';
 import { HtmlTranslate } from '../base/html-translate';
-import { IFablab } from '../../models/fablab';
-
-declare let Fablab: IFablab;
+import FormatLib from '../../lib/format';
 
 interface PendingTrainingModalProps {
   isOpen: boolean,
@@ -24,9 +21,7 @@ export const PendingTrainingModal: React.FC<PendingTrainingModalProps> = ({ isOp
    * Return the formatted localized date for the given date
    */
   const formatDateTime = (date: Date): string => {
-    const day = Intl.DateTimeFormat().format(moment(date).toDate());
-    const time = Intl.DateTimeFormat(Fablab.intl_locale, { hour: 'numeric', minute: 'numeric' }).format(moment(date).toDate());
-    return t('app.logged.pending_training_modal.DATE_TIME', { DATE: day, TIME: time });
+    return t('app.logged.pending_training_modal.DATE_TIME', { DATE: FormatLib.date(date), TIME: FormatLib.time(date) });
   };
 
   return (
