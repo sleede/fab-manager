@@ -19,6 +19,8 @@
 - Fix a bug: the image of the about page is not using the image set in backoffice
 - Fix a bug: updated sassc to 2.4.0 to fix ruby runtime error on some CPU architectures (#270)
 - Fix a security issue: prevent HTML code edition in projects, to prevent XSS vulnerability (#293)
+- Fix a bug : cover image doesn't display in profile
+- Fix a bug : it redirects to home when we delete a machine record photo
 
 ## v5.1.9 2021 September 21
 
