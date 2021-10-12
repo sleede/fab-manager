@@ -78,7 +78,7 @@
                   </p>
                   <div ng-hide="user.id === currentUser.id">
                     <button class="btn btn-default" ng-click="toggleFreeExtendModal()" translate>{{ 'app.admin.members_edit.offer_free_days' }}</button>
-                    <button class="btn btn-default" ng-click="updateSubscriptionModal(subscription, false)" translate>{{ 'app.admin.members_edit.renew_subscription' }}</button>
+                    <button class="btn btn-default" ng-click="toggleRenewModal()" translate>{{ 'app.admin.members_edit.renew_subscription' }}</button>
                     <free-extend-modal is-open="isOpenFreeExtendModal"
                                        toggle-modal="toggleFreeExtendModal"
                                        subscription="subscription"
@@ -86,6 +86,13 @@
                                        on-error="onError"
                                        on-success="onExtendSuccess">
                     </free-extend-modal>
+                    <renew-modal is-open="isOpenRenewModal"
+                                 toggle-modal="toggleRenewModal"
+                                 subscription="subscription"
+                                 customer-id="user.id"
+                                 on-error="onError"
+                                 on-success="onExtendSuccess">
+                    </renew-modal>
                   </div>
                   <p class="alert alert-info" ng-show="user.id === currentUser.id" translate>
                     {{ 'app.admin.members_edit.cannot_extend_own_subscription' }}

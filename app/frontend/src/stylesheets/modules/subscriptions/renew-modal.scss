@@ -1,0 +1,24 @@
+.renew-modal {
+  .fab-modal-content {
+    padding: 30px;
+
+    .form-and-payment {
+      display: flex;
+
+      .configuration-form {
+        padding-right: 15px;
+
+        .input-wrapper {
+          display: block;
+        }
+      }
+
+      .payment {
+        border: 1px solid #ccc;
+        border-radius: 2px;
+        padding: 10px;
+        width: 50%;
+      }
+    }
+  }
+}

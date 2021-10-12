@@ -705,8 +705,11 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
     // current active authentication provider
     $scope.activeProvider = activeProviderPromise;
 
-    //  modal dialog to extend the current subscription for free
+    // modal dialog to extend the current subscription for free
     $scope.isOpenFreeExtendModal = false;
+
+    // modal dialog to renew the current subscription
+    $scope.isOpenRenewModal = false;
 
     /**
      * Open a modal dialog asking for confirmation to change the role of the given user
@@ -761,6 +764,16 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
     $scope.toggleFreeExtendModal = () => {
       setTimeout(() => {
         $scope.isOpenFreeExtendModal = !$scope.isOpenFreeExtendModal;
+        $scope.$apply();
+      }, 50);
+    };
+
+    /**
+     * Opens/closes the modal dialog to renew the subscription (with payment)
+     */
+    $scope.toggleRenewModal = () => {
+      setTimeout(() => {
+        $scope.isOpenRenewModal = !$scope.isOpenRenewModal;
         $scope.$apply();
       }, 50);
     };
