@@ -759,14 +759,18 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
      * Opens/closes the modal dialog to freely extend the subscription
      */
     $scope.toggleFreeExtendModal = () => {
-      $scope.isOpenFreeExtendModal = !$scope.isOpenFreeExtendModal;
+      setTimeout(() => {
+        $scope.isOpenFreeExtendModal = !$scope.isOpenFreeExtendModal;
+        $scope.$apply();
+      }, 50);
     };
 
     /**
      * Callback triggered if the subscription was successfully extended
      */
-    $scope.onExtendSuccess = (subscription) => {
-      $scope.subscription = subscription;
+    $scope.onExtendSuccess = (message, newExpirationDate) => {
+      growl.success(message);
+      $scope.subscription.expired_at = newExpirationDate;
     };
 
     /**

@@ -22,6 +22,8 @@ class CartService
         items.push(reservable_from_hash(item[:reservation], plan_info))
       elsif ['prepaid_pack', :prepaid_pack].include?(item.keys.first)
         items.push(CartItem::PrepaidPack.new(PrepaidPack.find(item[:prepaid_pack][:id]), @customer))
+      elsif ['free_extension', :free_extension].include?(item.keys.first)
+        items.push(CartItem::FreeExtension.new(@customer, plan_info[:subscription], item[:free_extension][:end_at]))
       end
     end
 
@@ -70,18 +72,21 @@ class CartService
 
   def plan(cart_items)
     new_plan_being_bought = false
+    subscription = nil
     plan = if cart_items[:items].any? { |item| ['subscription', :subscription].include?(item.keys.first) }
              index = cart_items[:items].index { |item| ['subscription', :subscription].include?(item.keys.first) }
              if cart_items[:items][index][:subscription][:plan_id]
                new_plan_being_bought = true
+               subscription = cart_items[:items][index][:subscription].to_object
                Plan.find(cart_items[:items][index][:subscription][:plan_id])
              end
            elsif @customer.subscribed_plan
+             subscription = @customer.subscription unless @customer.subscription.expired_at < DateTime.current
              @customer.subscribed_plan
            else
              nil
            end
-    { plan: plan, new_subscription: new_plan_being_bought }
+    { plan: plan, subscription: subscription, new_subscription: new_plan_being_bought }
   end
 
   def customer(cart_items)

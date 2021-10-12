@@ -47,26 +47,6 @@ class Subscription < ApplicationRecord
     expiration_date
   end
 
-  def free_extend(expiration, operator_profile_id)
-    return false if expiration <= expired_at
-
-    od = offer_days.create(start_at: expired_at, end_at: expiration)
-    invoice = Invoice.new(
-      invoicing_profile: user.invoicing_profile,
-      statistic_profile: user.statistic_profile,
-      operator_profile_id: operator_profile_id,
-      total: 0
-    )
-    invoice.invoice_items.push InvoiceItem.new(amount: 0, description: plan.base_name, object: od)
-    invoice.save
-
-    if save
-      notify_subscription_extended(true)
-      return true
-    end
-    false
-  end
-
   def user
     statistic_profile.user
   end
@@ -116,9 +96,8 @@ class Subscription < ApplicationRecord
                             attached_object: self
   end
 
-  def notify_subscription_extended(free_days)
-    meta_data = {}
-    meta_data[:free_days] = true if free_days
+  def notify_subscription_extended
+    meta_data = { free_days: false }
     NotificationCenter.call type: :notify_member_subscription_extended,
                             receiver: user,
                             attached_object: self,

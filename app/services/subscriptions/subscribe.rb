@@ -9,9 +9,7 @@ class Subscriptions::Subscribe
     @operator_profile_id = operator_profile_id
   end
 
-  def extend_subscription(subscription, new_expiration_date, free_days)
-    return subscription.free_extend(new_expiration_date, @operator_profile_id) if free_days
-
+  def extend_subscription(subscription, new_expiration_date)
     new_sub = Subscription.create(
       plan_id: subscription.plan_id,
       statistic_profile_id: subscription.statistic_profile_id

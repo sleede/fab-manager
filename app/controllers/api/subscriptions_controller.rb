@@ -12,10 +12,8 @@ class API::SubscriptionsController < API::ApiController
   def update
     authorize @subscription
 
-    free_days = params[:subscription][:free] || false
-
     res = Subscriptions::Subscribe.new(current_user.invoicing_profile.id)
-                                  .extend_subscription(@subscription, subscription_update_params[:expired_at], free_days)
+                                  .extend_subscription(@subscription, subscription_update_params[:expired_at])
     if res.is_a?(Subscription)
       @subscription = res
       render status: :created

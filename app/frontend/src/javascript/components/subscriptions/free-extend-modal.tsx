@@ -8,7 +8,8 @@ import FormatLib from '../../lib/format';
 import { Loader } from '../base/loader';
 import { react2angular } from 'react2angular';
 import { IApplication } from '../../models/application';
-import SubscriptionAPI from '../../api/subscription';
+import LocalPaymentAPI from '../../api/local-payment';
+import { PaymentMethod } from '../../models/payment';
 
 declare const Application: IApplication;
 
@@ -16,14 +17,15 @@ interface FreeExtendModalProps {
   isOpen: boolean,
   toggleModal: () => void,
   subscription: Subscription,
-  onSuccess: (subscription: Subscription) => void,
+  customerId: number,
+  onSuccess: (message: string, newExpirationDate: Date) => void,
   onError: (message: string) => void,
 }
 
 /**
  * Modal dialog shown to extend the current subscription of a customer, for free
  */
-const FreeExtendModal: React.FC<FreeExtendModalProps> = ({ isOpen, toggleModal, subscription, onError, onSuccess }) => {
+const FreeExtendModal: React.FC<FreeExtendModalProps> = ({ isOpen, toggleModal, subscription, customerId, onError, onSuccess }) => {
   const { t } = useTranslation('admin');
 
   const [expirationDate, setExpirationDate] = useState<Date>(new Date(subscription.expired_at));
@@ -63,12 +65,20 @@ const FreeExtendModal: React.FC<FreeExtendModalProps> = ({ isOpen, toggleModal, 
    * Callback triggered when the user validates the free extent of the subscription
    */
   const handleConfirmExtend = (): void => {
-    SubscriptionAPI.update({
-      id: subscription.id,
-      expired_at: expirationDate,
-      free: true
-    }).then(res => onSuccess(res))
-      .catch(err => onError(err));
+    LocalPaymentAPI.confirmPayment({
+      customer_id: customerId,
+      payment_method: PaymentMethod.Other,
+      items: [
+        {
+          free_extension: {
+            end_at: expirationDate
+          }
+        }
+      ]
+    }).then(() => {
+      onSuccess(t('app.admin.free_extend_modal.extend_success'), expirationDate);
+      toggleModal();
+    }).catch(err => onError(err));
   };
 
   return (
@@ -101,12 +111,12 @@ const FreeExtendModal: React.FC<FreeExtendModalProps> = ({ isOpen, toggleModal, 
   );
 };
 
-const FreeExtendModalWrapper: React.FC<FreeExtendModalProps> = ({ toggleModal, subscription, isOpen, onSuccess, onError }) => {
+const FreeExtendModalWrapper: React.FC<FreeExtendModalProps> = ({ toggleModal, subscription, customerId, isOpen, onSuccess, onError }) => {
   return (
     <Loader>
-      <FreeExtendModal toggleModal={toggleModal} subscription={subscription} isOpen={isOpen} onError={onError} onSuccess={onSuccess} />
+      <FreeExtendModal toggleModal={toggleModal} subscription={subscription} customerId={customerId} isOpen={isOpen} onError={onError} onSuccess={onSuccess} />
     </Loader>
   );
 };
 
-Application.Components.component('freeExtendModal', react2angular(FreeExtendModalWrapper, ['toggleModal', 'subscription', 'isOpen', 'onError', 'onSuccess']));
+Application.Components.component('freeExtendModal', react2angular(FreeExtendModalWrapper, ['toggleModal', 'subscription', 'customerId', 'isOpen', 'onError', 'onSuccess']));

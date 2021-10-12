@@ -916,6 +916,7 @@ en:
         new_expiration_date: "New expiration date:"
         number_of_free_days: "Number of free days:"
         extend: "Extend"
+        extend_success: "The subscription was successfully extended for free"
       # renew a subscription
       renew_subscription_modal:
         renew_subscription: "Renew the subscription"
