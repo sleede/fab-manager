@@ -77,8 +77,9 @@ class CartService
              index = cart_items[:items].index { |item| ['subscription', :subscription].include?(item.keys.first) }
              if cart_items[:items][index][:subscription][:plan_id]
                new_plan_being_bought = true
-               subscription = cart_items[:items][index][:subscription].to_object
-               Plan.find(cart_items[:items][index][:subscription][:plan_id])
+               plan = Plan.find(cart_items[:items][index][:subscription][:plan_id])
+               subscription = CartItem::Subscription.new(plan, @customer).to_object
+               plan
              end
            elsif @customer.subscribed_plan
              subscription = @customer.subscription unless @customer.subscription.expired_at < DateTime.current

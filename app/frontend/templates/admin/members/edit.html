@@ -89,7 +89,8 @@
                     <renew-modal is-open="isOpenRenewModal"
                                  toggle-modal="toggleRenewModal"
                                  subscription="subscription"
-                                 customer-id="user.id"
+                                 customer="user"
+                                 operator="currentUser"
                                  on-error="onError"
                                  on-success="onExtendSuccess">
                     </renew-modal>

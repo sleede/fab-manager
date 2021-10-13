@@ -922,6 +922,7 @@ en:
         payment_schedule_check: "The previous subscription was charged by check through a payment schedule, this one will be charged the same way. Before confirming please ensure you have all the checks to collect all the monthly payments."
         one_payment_card: "The previous subscription was charged by card through a single payment, this one will be charged the same way. The payment will be charged right now."
         one_payment_check: "The previous subscription was charged by check through a single payment, this one will be charged the same way. Before confirming please ensure you have collected the payment."
+        pay_in_one_go: "Pay in one go"
         renew: "Renew"
         renew_success: "The subscription was successfully renewed"
       #add a new administrator to the platform
