@@ -26,6 +26,10 @@ interface FreeExtendModalProps {
  * Modal dialog shown to extend the current subscription of a customer, for free
  */
 const FreeExtendModal: React.FC<FreeExtendModalProps> = ({ isOpen, toggleModal, subscription, customerId, onError, onSuccess }) => {
+
+  // we do not render the modal if the subscription was not provided
+  if (!subscription) return null;
+
   const { t } = useTranslation('admin');
 
   const [expirationDate, setExpirationDate] = useState<Date>(new Date(subscription.expired_at));

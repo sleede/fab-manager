@@ -9,6 +9,7 @@ class Subscriptions::Subscribe
     @operator_profile_id = operator_profile_id
   end
 
+  # TODO, delete this
   def extend_subscription(subscription, new_expiration_date)
     new_sub = Subscription.create(
       plan_id: subscription.plan_id,

@@ -9,7 +9,8 @@ export interface Subscription {
 }
 
 export interface SubscriptionRequest {
-  plan_id: number
+  plan_id: number,
+  start_at?: Date
 }
 
 export interface UpdateSubscriptionRequest {

@@ -35,6 +35,10 @@ interface RenewModalProps {
  * Modal dialog shown to renew the current subscription of a customer, for free
  */
 const RenewModal: React.FC<RenewModalProps> = ({ isOpen, toggleModal, subscription, customer, operator, onError, onSuccess }) => {
+
+  // we do not render the modal if the subscription was not provided
+  if (!subscription) return null;
+
   const { t } = useTranslation('admin');
 
   const [expirationDate, setExpirationDate] = useState<Date>(new Date());
@@ -45,8 +49,6 @@ const RenewModal: React.FC<RenewModalProps> = ({ isOpen, toggleModal, subscripti
 
   // on init, we compute the new expiration date
   useEffect(() => {
-    if (!subscription) return;
-
     setExpirationDate(moment(subscription.expired_at)
       .add(subscription.plan.interval_count, subscription.plan.interval)
       .toDate());
@@ -57,13 +59,12 @@ const RenewModal: React.FC<RenewModalProps> = ({ isOpen, toggleModal, subscripti
 
   // when the payment schedule is toggled (requested/ignored), we update the cart accordingly
   useEffect(() => {
-    if (!subscription) return;
-
     setCart({
       customer_id: customer.id,
       items: [{
         subscription: {
-          plan_id: subscription.plan.id
+          plan_id: subscription.plan.id,
+          start_at: subscription.expired_at
         }
       }],
       payment_method: PaymentMethod.Other,
@@ -101,9 +102,6 @@ const RenewModal: React.FC<RenewModalProps> = ({ isOpen, toggleModal, subscripti
   const toggleLocalPaymentModal = (): void => {
     setLocalPaymentModal(!localPaymentModal);
   };
-
-  // we do not render the modal if the subscription was not provided
-  if (!subscription) return null;
 
   return (
     <FabModal isOpen={isOpen}

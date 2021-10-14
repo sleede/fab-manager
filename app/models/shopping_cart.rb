@@ -89,10 +89,10 @@ class ShoppingCart
       PaymentScheduleService.new.create(
         objects,
         price[:before_coupon],
+        @customer,
         coupon: @coupon.coupon,
         operator: @operator,
         payment_method: @payment_method,
-        user: @customer,
         payment_id: payment_id,
         payment_type: payment_type
       )

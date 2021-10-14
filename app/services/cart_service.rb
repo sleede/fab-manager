@@ -28,7 +28,7 @@ class CartService
     end
 
     coupon = CartItem::Coupon.new(@customer, @operator, cart_items[:coupon_code])
-    schedule = CartItem::PaymentSchedule.new(plan_info[:plan], coupon, cart_items[:payment_schedule])
+    schedule = CartItem::PaymentSchedule.new(plan_info[:plan], coupon, cart_items[:payment_schedule], @customer, plan_info[:subscription]&.start_at)
 
     ShoppingCart.new(
       @customer,
@@ -42,19 +42,22 @@ class CartService
 
   def from_payment_schedule(payment_schedule)
     @customer = payment_schedule.user
-    plan = payment_schedule.payment_schedule_objects.find { |pso| pso.object_type == Subscription.name }&.subscription&.plan
+    subscription = payment_schedule.payment_schedule_objects.find { |pso| pso.object_type == Subscription.name }&.subscription
+    plan = subscription&.plan
 
     coupon = CartItem::Coupon.new(@customer, @operator, payment_schedule.coupon&.code)
-    schedule = CartItem::PaymentSchedule.new(plan, coupon, true)
+    schedule = CartItem::PaymentSchedule.new(plan, coupon, true, @customer, subscription.start_at)
 
     items = []
     payment_schedule.payment_schedule_objects.each do |object|
       if object.object_type == Subscription.name
-        items.push(CartItem::Subscription.new(object.subscription.plan, @customer))
+        items.push(CartItem::Subscription.new(object.subscription.plan, @customer, object.subscription.start_at))
       elsif object.object_type == Reservation.name
         items.push(reservable_from_payment_schedule_object(object, plan))
       elsif object.object_type == PrepaidPack.name
         items.push(CartItem::PrepaidPack.new(object.statistic_profile_prepaid_pack.prepaid_pack_id, @customer))
+      elsif object.object_type == OfferDay.name
+        items.push(CartItem::FreeExtension.new(@customer, object.offer_day.subscription, object.offer_day.end_date))
       end
     end
 
@@ -78,7 +81,7 @@ class CartService
              if cart_items[:items][index][:subscription][:plan_id]
                new_plan_being_bought = true
                plan = Plan.find(cart_items[:items][index][:subscription][:plan_id])
-               subscription = CartItem::Subscription.new(plan, @customer).to_object
+               subscription = CartItem::Subscription.new(plan, @customer, cart_items[:items][index][:subscription][:start_at]).to_object
                plan
              end
            elsif @customer.subscribed_plan

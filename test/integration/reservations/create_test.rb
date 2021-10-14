@@ -705,36 +705,10 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     plan = Plan.find_by(group_id: @user_without_subscription.group.id, type: 'Plan', base_name: 'Abonnement mensualisable')
 
     VCR.use_cassette('reservations_training_subscription_with_payment_schedule') do
-      post '/api/stripe/payment_schedule',
+      post '/api/stripe/setup_subscription',
            params: {
              payment_method_id: stripe_payment_method,
              cart_items: {
-               items: [
-                 {
-                   subscription: {
-                     plan_id: plan.id
-                   }
-                 }
-               ],
-               payment_schedule: true,
-               payment_method: 'cart'
-             }
-           }.to_json, headers: default_headers
-
-      # Check response format & status
-      assert_equal 200, response.status, response.body
-      assert_equal Mime[:json], response.content_type
-
-      # Check the response
-      sub = json_response(response.body)
-      assert_not_nil sub[:id]
-
-      post '/api/stripe/confirm_payment_schedule',
-           params: {
-             subscription_id: sub[:id],
-             cart_items: {
-               payment_schedule: true,
-               payment_method: 'card',
                items: [
                  {
                    reservation: {
@@ -754,9 +728,19 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
                      plan_id: plan.id
                    }
                  }
-               ]
+               ],
+               payment_schedule: true,
+               payment_method: 'cart'
              }
            }.to_json, headers: default_headers
+
+      # Check response format & status
+      assert_equal 201, response.status, response.body
+      assert_equal Mime[:json], response.content_type
+
+      # Check the response
+      sub = json_response(response.body)
+      assert_not_nil sub[:id]
     end
 
     # Check response format & status
@@ -809,37 +793,10 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     plan = Plan.find_by(group_id: user.group.id, type: 'Plan', base_name: 'Abonnement mensualisable')
 
     VCR.use_cassette('reservations_machine_subscription_with_payment_schedule_coupon_wallet') do
-      post '/api/stripe/payment_schedule',
+      post '/api/stripe/setup_subscription',
            params: {
              payment_method_id: stripe_payment_method,
              cart_items: {
-               items: [
-                 {
-                   subscription: {
-                     plan_id: plan.id
-                   }
-                 }
-               ],
-               payment_schedule: true,
-               payment_method: 'cart'
-             }
-           }.to_json, headers: default_headers
-
-      # Check response format & status
-      assert_equal 200, response.status, response.body
-      assert_equal Mime[:json], response.content_type
-
-      # Check the response
-      res = json_response(response.body)
-      assert_not_nil res[:id]
-
-      post '/api/stripe/confirm_payment_schedule',
-           params: {
-             subscription_id: res[:id],
-             cart_items: {
-               coupon_code: 'GIME3EUR',
-               payment_schedule: true,
-               payment_method: 'card',
                items: [
                  {
                    reservation: {
@@ -859,9 +816,19 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
                      plan_id: plan.id
                    }
                  }
-               ]
+               ],
+               payment_schedule: true,
+               payment_method: 'cart'
              }
            }.to_json, headers: default_headers
+
+      # Check response format & status
+      assert_equal 201, response.status, response.body
+      assert_equal Mime[:json], response.content_type
+
+      # Check the response
+      res = json_response(response.body)
+      assert_not_nil res[:id]
     end
 
     # Check response format & status
@@ -896,7 +863,7 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     assert_not_nil payment_schedule.reference
     assert_equal 'card', payment_schedule.payment_method
     assert_equal 2, payment_schedule.payment_gateway_objects.count
-    #assert_not_nil payment_schedule.gateway_payment_mean
+    assert_not_nil payment_schedule.gateway_payment_mean
     assert_not_nil payment_schedule.wallet_transaction
     assert_equal payment_schedule.ordered_items.first.amount, payment_schedule.wallet_amount
     assert_equal Coupon.find_by(code: 'GIME3EUR').id, payment_schedule.coupon_id
