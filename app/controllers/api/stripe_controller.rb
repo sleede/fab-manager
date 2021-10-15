@@ -97,7 +97,7 @@ class API::StripeController < API::PaymentsController
 
     cart = shopping_cart
     if subscription&.status == 'active'
-      res = on_payment_success(subscription.latest_invoice.payment_intent, cart)
+      res = on_payment_success(subscription, cart)
       render generate_payment_response(subscription.latest_invoice.payment_intent, 'subscription', res)
     else
       render generate_payment_response(subscription.latest_invoice.payment_intent, 'subscription', nil, subscription.id)

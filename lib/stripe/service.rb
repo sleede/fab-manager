@@ -50,20 +50,16 @@ class Stripe::Service < Payment::Service
     stp_subscription
   end
 
-  def create_subscription(payment_schedule, payment_intent_id)
+  def create_subscription(payment_schedule, stp_subscription_id)
     stripe_key = Setting.get('stripe_secret_key')
 
-    pi = Stripe::PaymentIntent.retrieve({ id: payment_intent_id, expand: %w[invoice] }, { api_key: stripe_key })
-    stp_subscription = Stripe::Subscription.retrieve(pi.invoice.subscription, api_key: stripe_key)
-    pgo = PaymentGatewayObject.new(item: payment_schedule)
-    pgo.gateway_object = stp_subscription
-    pgo.save!
+    stp_subscription = Stripe::Subscription.retrieve({ id: stp_subscription_id }, { api_key: stripe_key })
 
     payment_method_id = stp_subscription.default_payment_method
     payment_method = Stripe::PaymentMethod.retrieve(payment_method_id, api_key: stripe_key)
-    pgo2 = PaymentGatewayObject.new(item: payment_schedule)
-    pgo2.gateway_object = payment_method
-    pgo2.save!
+    pgo = PaymentGatewayObject.new(item: payment_schedule)
+    pgo.gateway_object = payment_method
+    pgo.save!
   end
 
   def extend_subscription(payment_schedule, payment_method_id)
