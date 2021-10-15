@@ -6,7 +6,7 @@ module Payment; end
 # Abstract class that must be implemented by each payment gateway.
 # Provides methods to create remote objects on the payment gateway
 class Payment::Service
-  def create_subscription(_payment_schedule, _gateway_object_id); end
+  def create_subscription(_payment_schedule, *args); end
 
   def create_user(_user_id); end
 

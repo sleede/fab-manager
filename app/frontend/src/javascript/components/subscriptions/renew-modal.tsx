@@ -132,7 +132,7 @@ const RenewModal: React.FC<RenewModalProps> = ({ isOpen, toggleModal, subscripti
             readOnly/>
         </form>
         <div className="payment">
-          <SelectSchedule show selected={scheduleRequired} onChange={setScheduleRequired} />
+          {subscription.plan.monthly_payment && <SelectSchedule show selected={scheduleRequired} onChange={setScheduleRequired} />}
           {price?.schedule && <PaymentScheduleSummary schedule={price.schedule as PaymentSchedule} />}
           {price && !price?.schedule && <div className="one-go-payment">
             <h4>{t('app.admin.renew_subscription_modal.pay_in_one_go')}</h4>
@@ -145,6 +145,7 @@ const RenewModal: React.FC<RenewModalProps> = ({ isOpen, toggleModal, subscripti
         afterSuccess={onPaymentSuccess}
         onError={onError}
         cart={cart}
+        updateCart={setCart}
         currentUser={operator}
         customer={customer}
         schedule={price?.schedule as PaymentSchedule} />

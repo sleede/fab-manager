@@ -17,7 +17,7 @@ class CartService
     items = []
     cart_items[:items].each do |item|
       if ['subscription', :subscription].include?(item.keys.first)
-        items.push(CartItem::Subscription.new(plan_info[:plan], @customer)) if plan_info[:new_subscription]
+        items.push(CartItem::Subscription.new(plan_info[:plan], @customer, item[:subscription][:start_at])) if plan_info[:new_subscription]
       elsif ['reservation', :reservation].include?(item.keys.first)
         items.push(reservable_from_hash(item[:reservation], plan_info))
       elsif ['prepaid_pack', :prepaid_pack].include?(item.keys.first)

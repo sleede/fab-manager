@@ -14,7 +14,7 @@ class Stripe::Service < Payment::Service
     payment_schedule = price_details[:schedule][:payment_schedule]
     payment_schedule.payment_schedule_items = price_details[:schedule][:items]
     first_item = price_details[:schedule][:items].min_by(&:due_date)
-    subscription = shopping_cart.items.find { |item| item.class == CartItem::Subscription }
+    subscription = shopping_cart.items.find { |item| item.class == CartItem::Subscription }.to_object
     reservable_stp_id = shopping_cart.items.find { |item| item.is_a?(CartItem::Reservation) }&.to_object
                           &.reservable&.payment_gateway_object&.gateway_object_id
 
@@ -29,33 +29,46 @@ class Stripe::Service < Payment::Service
 
 
     stripe_key = Setting.get('stripe_secret_key')
-    stp_subscription = Stripe::Subscription.create({
-                                                     customer: shopping_cart.customer.payment_gateway_object.gateway_object_id,
-                                                     cancel_at: (payment_schedule.payment_schedule_items.max_by(&:due_date).due_date + 1.month).to_i,
-                                                     add_invoice_items: items,
-                                                     coupon: payment_schedule.coupon&.code,
-                                                     items: [
-                                                       { price: price[:id] }
-                                                     ],
-                                                     default_payment_method: payment_method_id,
-                                                     expand: %w[latest_invoice.payment_intent]
-                                                   }, { api_key: stripe_key })
-    return stp_subscription unless subscription.start_at
-
-    Stripe::SubscriptionSchedule.create({
-                                          from_subscription: stp_subscription.id,
-                                          start_date: subscription.start_at
-                                        }, { api_key: stripe_key })
-
-    stp_subscription
+    if subscription.start_at.nil?
+      Stripe::Subscription.create({
+                                    customer: shopping_cart.customer.payment_gateway_object.gateway_object_id,
+                                    cancel_at: (payment_schedule.payment_schedule_items.max_by(&:due_date).due_date + 1.month).to_i,
+                                    add_invoice_items: items,
+                                    coupon: payment_schedule.coupon&.code,
+                                    items: [
+                                      { price: price[:id] }
+                                    ],
+                                    default_payment_method: payment_method_id,
+                                    expand: %w[latest_invoice.payment_intent]
+                                  }, { api_key: stripe_key })
+    else
+      Stripe::SubscriptionSchedule.create({
+                                            customer: shopping_cart.customer.payment_gateway_object.gateway_object_id,
+                                            start_date: subscription.start_at.nil? ? 'now' : subscription.start_at.to_i,
+                                            end_behavior: 'cancel',
+                                            phases: [
+                                              {
+                                                items: [
+                                                  { price: price[:id] }
+                                                ],
+                                                add_invoice_items: items,
+                                                coupon: payment_schedule.coupon&.code,
+                                                default_payment_method: payment_method_id,
+                                                end_date: (
+                                                  payment_schedule.payment_schedule_items.max_by(&:due_date).due_date + 1.month
+                                                ).to_i
+                                              }
+                                            ]
+                                          }, { api_key: stripe_key })
+    end
   end
 
-  def create_subscription(payment_schedule, stp_subscription_id)
+  def create_subscription(payment_schedule, stp_object_id, stp_object_type)
     stripe_key = Setting.get('stripe_secret_key')
 
-    stp_subscription = Stripe::Subscription.retrieve({ id: stp_subscription_id }, { api_key: stripe_key })
+    stp_subscription = Stripe::Item.new(stp_object_type, stp_object_id).retrieve
 
-    payment_method_id = stp_subscription.default_payment_method
+    payment_method_id = Stripe::Customer.retrieve(stp_subscription.customer, api_key: stripe_key).invoice_settings.default_payment_method
     payment_method = Stripe::PaymentMethod.retrieve(payment_method_id, api_key: stripe_key)
     pgo = PaymentGatewayObject.new(item: payment_schedule)
     pgo.gateway_object = payment_method

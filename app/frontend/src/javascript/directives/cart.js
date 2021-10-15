@@ -378,6 +378,17 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
           growl.error(message);
         };
 
+        /**
+         * Callback triggered when a child component (LocalPaymentModal) requires to update the cart content
+         * @param cart {ShoppingCart}
+         */
+        $scope.updateCart = (cart) => {
+          setTimeout(() => {
+            $scope.localPayment.cartItems = cart;
+            $scope.$apply();
+          }, 50);
+        };
+
         /* PRIVATE SCOPE */
 
         /**

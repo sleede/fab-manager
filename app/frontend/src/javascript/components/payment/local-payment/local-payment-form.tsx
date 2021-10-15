@@ -24,7 +24,7 @@ type selectOption = { value: scheduleMethod, label: string };
  * This is intended for use by privileged users.
  * The form validation button must be created elsewhere, using the attribute form={formId}.
  */
-export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, onError, children, className, paymentSchedule, cart, customer, operator, formId }) => {
+export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, onError, children, className, paymentSchedule, cart, updateCart, customer, operator, formId }) => {
   const { t } = useTranslation('admin');
 
   const [method, setMethod] = useState<scheduleMethod>('check');
@@ -58,9 +58,9 @@ export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSucce
    */
   const handleUpdateMethod = (option: selectOption) => {
     if (option.value === 'card') {
-      cart.payment_method = PaymentMethod.Card;
+      updateCart(Object.assign({}, cart, { payment_method: PaymentMethod.Card }));
     } else {
-      cart.payment_method = PaymentMethod.Other;
+      updateCart(Object.assign({}, cart, { payment_method: PaymentMethod.Other }));
     }
     setMethod(option.value);
   };
