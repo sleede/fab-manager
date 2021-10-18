@@ -18,6 +18,7 @@ Metrics/BlockLength:
     - 'app/pdfs/pdf/*.rb'
     - 'test/**/*.rb'
 Metrics/ParameterLists:
+  Max: 6
   CountKeywordArgs: false
 Style/BracesAroundHashParameters:
   EnforcedStyle: context_dependent

@@ -81,10 +81,6 @@ class PaymentSchedule < PaymentDocument
     PaymentGatewayService.new.create_subscription(self, *args)
   end
 
-  def post_save_extend(gateway_method_id)
-    PaymentGatewayService.new.extend_subscription(self, gateway_method_id)
-  end
-
   def render_resource
     { partial: 'api/payment_schedules/payment_schedule', locals: { payment_schedule: self } }
   end

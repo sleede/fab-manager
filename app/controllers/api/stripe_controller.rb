@@ -85,12 +85,7 @@ class API::StripeController < API::PaymentsController
     stp_subscription = service.subscribe(method.id, cart)
 
     res = on_payment_success(stp_subscription, cart) if %w[active not_started].include?(stp_subscription&.status)
-    intent = if stp_subscription.object == 'subscription_schedule'
-               nil
-             elsif stp_subscription.object == 'subscription'
-               stp_subscription.latest_invoice&.payment_intent
-             end
-    render generate_payment_response(intent, 'subscription', res, stp_subscription.id)
+    render generate_payment_response(stp_subscription.try(:latest_invoice)&.payment_intent, 'subscription', res, stp_subscription.id)
   end
 
   def confirm_subscription

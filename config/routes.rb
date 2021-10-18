@@ -98,7 +98,7 @@ Rails.application.routes.draw do
     end
 
     resources :groups, only: %i[index create update destroy]
-    resources :subscriptions, only: %i[show update] do
+    resources :subscriptions, only: %i[show] do
       get 'payment_details', action: 'payment_details', on: :member
     end
     resources :plan_categories

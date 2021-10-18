@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import Select from 'react-select';
 import { useTranslation } from 'react-i18next';
 import { GatewayFormProps } from '../abstract-payment-modal';
@@ -29,6 +29,14 @@ export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSucce
 
   const [method, setMethod] = useState<scheduleMethod>('check');
   const [onlinePaymentModal, setOnlinePaymentModal] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (cart.payment_method === PaymentMethod.Card) {
+      setMethod('card');
+    } else {
+      setMethod('check');
+    }
+  }, [cart]);
 
   /**
    * Open/closes the online payment modal, used to collect card credentials when paying the payment schedule by card.
@@ -112,7 +120,7 @@ export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSucce
             className="method-select"
             onChange={handleUpdateMethod}
             options={buildMethodOptions()}
-            defaultValue={methodToOption(method)} />
+            value={methodToOption(method)} />
           {method === 'card' && <p>{t('app.admin.local_payment.card_collection_info')}</p>}
           {method === 'check' && <p>{t('app.admin.local_payment.check_collection_info', { DEADLINES: paymentSchedule.items.length })}</p>}
         </div>
