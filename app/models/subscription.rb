@@ -110,7 +110,7 @@ class Subscription < ApplicationRecord
   end
 
   def set_expiration_date
-    start_at = DateTime.current.in_time_zone
+    start_at = self.start_at || DateTime.current.in_time_zone
     self.expiration_date = start_at + plan.duration
   end
 
