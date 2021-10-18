@@ -28,7 +28,7 @@ class Stripe::Service < Payment::Service
     # other items (not recurring)
     items = subscription_invoice_items(payment_schedule, subscription, first_item, reservable_stp_id)
 
-    create_remote_subscription(shopping_cart, payment_schedule, items, price, payment_method_id, subscription)
+    create_remote_subscription(shopping_cart, payment_schedule, items, price, payment_method_id)
   end
 
   def create_subscription(payment_schedule, stp_object_id, stp_object_type)
@@ -154,9 +154,9 @@ class Stripe::Service < Payment::Service
 
 
   # Create the provided PaymentSchedule on Stripe, using the Subscription API
-  def create_remote_subscription(shopping_cart, payment_schedule, items, price, payment_method_id, subscription)
+  def create_remote_subscription(shopping_cart, payment_schedule, items, price, payment_method_id)
     stripe_key = Setting.get('stripe_secret_key')
-    if subscription.start_at.nil?
+    if payment_schedule.start_at.nil?
       Stripe::Subscription.create({
                                     customer: shopping_cart.customer.payment_gateway_object.gateway_object_id,
                                     cancel_at: (payment_schedule.payment_schedule_items.max_by(&:due_date).due_date + 1.month).to_i,
@@ -171,7 +171,7 @@ class Stripe::Service < Payment::Service
     else
       Stripe::SubscriptionSchedule.create({
                                             customer: shopping_cart.customer.payment_gateway_object.gateway_object_id,
-                                            start_date: subscription.start_at.to_i,
+                                            start_date: payment_schedule.start_at.to_i,
                                             end_behavior: 'cancel',
                                             phases: [
                                               {

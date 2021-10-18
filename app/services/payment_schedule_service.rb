@@ -47,6 +47,7 @@ class PaymentScheduleService
         details: details
       )
     end
+    ps.start_at = start_at
     ps.total = items.map(&:amount).reduce(:+)
     ps.invoicing_profile = customer.invoicing_profile
     ps.statistic_profile = customer.statistic_profile
