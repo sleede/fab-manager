@@ -10,7 +10,7 @@ module PayZen; end
 
 ## create remote objects on PayZen
 class PayZen::Service < Payment::Service
-  def create_subscription(payment_schedule, order_id)
+  def create_subscription(payment_schedule, order_id, *args)
     first_item = payment_schedule.ordered_items.first
 
     order = PayZen::Order.new.get(order_id, operation_type: 'VERIFICATION')
