@@ -57,6 +57,8 @@ class ActiveSupport::TestCase
       exp_year = 1964
     when /invalid_cvc/
       cvc = '99'
+    when /require_3ds/
+      number = '4000002760003184'
     end
 
     Stripe::PaymentMethod.create(

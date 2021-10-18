@@ -705,6 +705,12 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
     // current active authentication provider
     $scope.activeProvider = activeProviderPromise;
 
+    // modal dialog to extend the current subscription for free
+    $scope.isOpenFreeExtendModal = false;
+
+    // modal dialog to renew the current subscription
+    $scope.isOpenRenewModal = false;
+
     /**
      * Open a modal dialog asking for confirmation to change the role of the given user
      * @returns {*}
@@ -753,53 +759,38 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
     };
 
     /**
-     * Open a modal dialog, allowing the admin to extend the current user's subscription (freely or not)
-     * @param subscription {Object} User's subscription object
-     * @param free {boolean} True if the extent is offered, false otherwise
+     * Opens/closes the modal dialog to freely extend the subscription
      */
-    $scope.updateSubscriptionModal = function (subscription, free) {
-      const modalInstance = $uibModal.open({
-        animation: true,
-        templateUrl: '/admin/subscriptions/expired_at_modal.html',
-        size: 'lg',
-        controller: ['$scope', '$uibModalInstance', 'Subscription', function ($scope, $uibModalInstance, Subscription) {
-          $scope.new_expired_at = angular.copy(subscription.expired_at);
-          $scope.free = free;
-          $scope.datePicker = {
-            opened: false,
-            format: Fablab.uibDateFormat,
-            options: {
-              startingDay: Fablab.weekStartingDay
-            },
-            minDate: new Date()
-          };
+    $scope.toggleFreeExtendModal = () => {
+      setTimeout(() => {
+        $scope.isOpenFreeExtendModal = !$scope.isOpenFreeExtendModal;
+        $scope.$apply();
+      }, 50);
+    };
 
-          $scope.openDatePicker = function (ev) {
-            ev.preventDefault();
-            ev.stopPropagation();
-            return $scope.datePicker.opened = true;
-          };
+    /**
+     * Opens/closes the modal dialog to renew the subscription (with payment)
+     */
+    $scope.toggleRenewModal = () => {
+      setTimeout(() => {
+        $scope.isOpenRenewModal = !$scope.isOpenRenewModal;
+        $scope.$apply();
+      }, 50);
+    };
 
-          $scope.ok = function () {
-            Subscription.update(
-              { id: subscription.id },
-              { subscription: { expired_at: $scope.new_expired_at, free } },
-              function (_subscription) {
-                growl.success(_t('app.admin.members_edit.you_successfully_changed_the_expiration_date_of_the_user_s_subscription'));
-                return $uibModalInstance.close(_subscription);
-              },
-              function (error) {
-                growl.error(_t('app.admin.members_edit.a_problem_occurred_while_saving_the_date'));
-                console.error(error);
-              }
-            );
-          };
+    /**
+     * Callback triggered if the subscription was successfully extended
+     */
+    $scope.onExtendSuccess = (message, newExpirationDate) => {
+      growl.success(message);
+      $scope.subscription.expired_at = newExpirationDate;
+    };
 
-          $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
-        }]
-      });
-      // once the form was validated successfully ...
-      return modalInstance.result.then(function (subscription) { $scope.subscription.expired_at = subscription.expired_at; });
+    /**
+     * Callback triggered in case of error
+     */
+    $scope.onError = (message) => {
+      growl.error(message);
     };
 
     /**

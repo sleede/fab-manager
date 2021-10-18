@@ -12,6 +12,13 @@ export default class FormatLib {
   }
 
   /**
+   * Return the formatted localized time for the given date
+   */
+  static time = (date: Date): string => {
+    return Intl.DateTimeFormat(Fablab.intl_locale, { hour: 'numeric', minute: 'numeric' }).format(moment(date).toDate());
+  };
+
+  /**
    * Return the formatted localized amount for the given price (eg. 20.5 => "20,50 €")
    */
   static price = (price: number): string => {

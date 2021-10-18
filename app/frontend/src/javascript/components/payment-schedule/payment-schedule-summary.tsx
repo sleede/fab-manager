@@ -17,7 +17,7 @@ interface PaymentScheduleSummaryProps {
 /**
  * This component displays a summary of the monthly payment schedule for the current cart, with a subscription
  */
-const PaymentScheduleSummary: React.FC<PaymentScheduleSummaryProps> = ({ schedule }) => {
+export const PaymentScheduleSummary: React.FC<PaymentScheduleSummaryProps> = ({ schedule }) => {
   const { t } = useTranslation('shared');
 
   // is open, the modal dialog showing the full details of the payment schedule?
@@ -77,6 +77,7 @@ const PaymentScheduleSummary: React.FC<PaymentScheduleSummaryProps> = ({ schedul
     </div>
   );
 };
+
 const PaymentScheduleSummaryWrapper: React.FC<PaymentScheduleSummaryProps> = ({ schedule }) => {
   return (
     <Loader>

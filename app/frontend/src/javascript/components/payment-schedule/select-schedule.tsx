@@ -12,19 +12,19 @@ interface SelectScheduleProps {
   show: boolean,
   selected: boolean,
   onChange: (selected: boolean) => void,
-  className: string,
+  className?: string,
 }
 
 /**
  * This component is a switch enabling the users to choose if they want to pay by monthly schedule
  * or with a one time payment
  */
-const SelectSchedule: React.FC<SelectScheduleProps> = ({ show, selected, onChange, className }) => {
+export const SelectSchedule: React.FC<SelectScheduleProps> = ({ show, selected, onChange, className }) => {
   const { t } = useTranslation('shared');
 
   return (
     <div className="select-schedule">
-      {show && <div className={className}>
+      {show && <div className={className || ''}>
         <label htmlFor="payment_schedule">{ t('app.shared.cart.monthly_payment') }</label>
         <Switch checked={selected} id="payment_schedule" onChange={onChange} className="schedule-switch" />
       </div>}

@@ -19,12 +19,8 @@ class PaymentGatewayService
     @gateway = service.new
   end
 
-  def create_subscription(payment_schedule, gateway_object_id)
-    @gateway.create_subscription(payment_schedule, gateway_object_id)
-  end
-
-  def extend_subscription(payment_schedule, gateway_object_id)
-    @gateway.extend_subscription(payment_schedule, gateway_object_id)
+  def create_subscription(payment_schedule, *args)
+    @gateway.create_subscription(payment_schedule, *args)
   end
 
   def create_user(user_id)

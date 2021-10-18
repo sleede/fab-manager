@@ -122,6 +122,7 @@ class Setting < ApplicationRecord
                              renew_pack_threshold
                              pack_only_for_subscription] }
   # WARNING: when adding a new key, you may also want to add it in app/policies/setting_policy.rb#public_whitelist
+  # and in config/locales/en.yml#settings
 
   def value
     last_value = history_values.order(HistoryValue.arel_table['created_at'].desc).limit(1).first

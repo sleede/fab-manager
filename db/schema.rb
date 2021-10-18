@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_22_135401) do
+ActiveRecord::Schema.define(version: 2021_10_14_135151) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 2020_06_22_135401) do
   enable_extension "unaccent"
 
   create_table "abuses", id: :serial, force: :cascade do |t|
-    t.integer "signaled_id"
     t.string "signaled_type"
+    t.integer "signaled_id"
     t.string "first_name"
     t.string "last_name"
     t.string "email"
@@ -49,8 +49,8 @@ ActiveRecord::Schema.define(version: 2020_06_22_135401) do
     t.string "locality"
     t.string "country"
     t.string "postal_code"
-    t.integer "placeable_id"
     t.string "placeable_type"
+    t.integer "placeable_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -64,8 +64,8 @@ ActiveRecord::Schema.define(version: 2020_06_22_135401) do
   end
 
   create_table "assets", id: :serial, force: :cascade do |t|
-    t.integer "viewable_id"
     t.string "viewable_type"
+    t.integer "viewable_id"
     t.string "attachment"
     t.string "type"
     t.datetime "created_at"
@@ -133,8 +133,8 @@ ActiveRecord::Schema.define(version: 2020_06_22_135401) do
   end
 
   create_table "credits", id: :serial, force: :cascade do |t|
-    t.integer "creditable_id"
     t.string "creditable_type"
+    t.integer "creditable_id"
     t.integer "plan_id"
     t.integer "hours"
     t.datetime "created_at"
@@ -207,6 +207,14 @@ ActiveRecord::Schema.define(version: 2020_06_22_135401) do
     t.index ["user_id"], name: "index_exports_on_user_id"
   end
 
+  create_table "footprint_debugs", force: :cascade do |t|
+    t.string "footprint"
+    t.string "data"
+    t.string "klass"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "friendly_id_slugs", id: :serial, force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
@@ -274,21 +282,20 @@ ActiveRecord::Schema.define(version: 2020_06_22_135401) do
 
   create_table "invoice_items", id: :serial, force: :cascade do |t|
     t.integer "invoice_id"
-    t.string "stp_invoice_item_id"
     t.integer "amount"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text "description"
-    t.integer "subscription_id"
     t.integer "invoice_item_id"
     t.string "footprint"
+    t.string "object_type"
+    t.bigint "object_id"
+    t.boolean "main"
     t.index ["invoice_id"], name: "index_invoice_items_on_invoice_id"
+    t.index ["object_type", "object_id"], name: "index_invoice_items_on_object_type_and_object_id"
   end
 
   create_table "invoices", id: :serial, force: :cascade do |t|
-    t.integer "invoiced_id"
-    t.string "invoiced_type"
-    t.string "stp_invoice_id"
     t.integer "total"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -307,7 +314,6 @@ ActiveRecord::Schema.define(version: 2020_06_22_135401) do
     t.integer "invoicing_profile_id"
     t.integer "operator_profile_id"
     t.integer "statistic_profile_id"
-    t.string "stp_payment_intent_id"
     t.index ["coupon_id"], name: "index_invoices_on_coupon_id"
     t.index ["invoice_id"], name: "index_invoices_on_invoice_id"
     t.index ["invoicing_profile_id"], name: "index_invoices_on_invoicing_profile_id"
@@ -350,15 +356,15 @@ ActiveRecord::Schema.define(version: 2020_06_22_135401) do
 
   create_table "notifications", id: :serial, force: :cascade do |t|
     t.integer "receiver_id"
-    t.integer "attached_object_id"
     t.string "attached_object_type"
+    t.integer "attached_object_id"
     t.integer "notification_type_id"
     t.boolean "is_read", default: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string "receiver_type"
     t.boolean "is_send", default: false
-    t.jsonb "meta_data", default: {}
+    t.jsonb "meta_data", default: "{}"
     t.index ["notification_type_id"], name: "index_notifications_on_notification_type_id"
     t.index ["receiver_id"], name: "index_notifications_on_receiver_id"
   end
@@ -421,6 +427,72 @@ ActiveRecord::Schema.define(version: 2020_06_22_135401) do
     t.index ["invoicing_profile_id"], name: "index_organizations_on_invoicing_profile_id"
   end
 
+  create_table "payment_gateway_objects", force: :cascade do |t|
+    t.string "gateway_object_id"
+    t.string "gateway_object_type"
+    t.string "item_type"
+    t.bigint "item_id"
+    t.bigint "payment_gateway_object_id"
+    t.index ["item_type", "item_id"], name: "index_payment_gateway_objects_on_item_type_and_item_id"
+    t.index ["payment_gateway_object_id"], name: "index_payment_gateway_objects_on_payment_gateway_object_id"
+  end
+
+  create_table "payment_schedule_items", force: :cascade do |t|
+    t.integer "amount"
+    t.datetime "due_date"
+    t.string "state", default: "new"
+    t.jsonb "details", default: "{}"
+    t.string "payment_method"
+    t.string "client_secret"
+    t.bigint "payment_schedule_id"
+    t.bigint "invoice_id"
+    t.string "footprint"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["invoice_id"], name: "index_payment_schedule_items_on_invoice_id"
+    t.index ["payment_schedule_id"], name: "index_payment_schedule_items_on_payment_schedule_id"
+  end
+
+  create_table "payment_schedule_objects", force: :cascade do |t|
+    t.string "object_type"
+    t.bigint "object_id"
+    t.bigint "payment_schedule_id"
+    t.boolean "main"
+    t.string "footprint"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["object_type", "object_id"], name: "index_payment_schedule_objects_on_object_type_and_object_id"
+    t.index ["payment_schedule_id"], name: "index_payment_schedule_objects_on_payment_schedule_id"
+  end
+
+  create_table "payment_schedules", force: :cascade do |t|
+    t.integer "total"
+    t.string "reference"
+    t.string "payment_method"
+    t.integer "wallet_amount"
+    t.bigint "wallet_transaction_id"
+    t.bigint "coupon_id"
+    t.string "footprint"
+    t.string "environment"
+    t.bigint "invoicing_profile_id"
+    t.bigint "statistic_profile_id"
+    t.bigint "operator_profile_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["coupon_id"], name: "index_payment_schedules_on_coupon_id"
+    t.index ["invoicing_profile_id"], name: "index_payment_schedules_on_invoicing_profile_id"
+    t.index ["operator_profile_id"], name: "index_payment_schedules_on_operator_profile_id"
+    t.index ["statistic_profile_id"], name: "index_payment_schedules_on_statistic_profile_id"
+    t.index ["wallet_transaction_id"], name: "index_payment_schedules_on_wallet_transaction_id"
+  end
+
+  create_table "plan_categories", force: :cascade do |t|
+    t.string "name"
+    t.integer "weight"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "plans", id: :serial, force: :cascade do |t|
     t.string "name"
     t.integer "amount"
@@ -438,7 +510,10 @@ ActiveRecord::Schema.define(version: 2020_06_22_135401) do
     t.integer "interval_count", default: 1
     t.string "slug"
     t.boolean "disabled"
+    t.boolean "monthly_payment"
+    t.bigint "plan_category_id"
     t.index ["group_id"], name: "index_plans_on_group_id"
+    t.index ["plan_category_id"], name: "index_plans_on_plan_category_id"
   end
 
   create_table "plans_availabilities", id: :serial, force: :cascade do |t|
@@ -446,6 +521,21 @@ ActiveRecord::Schema.define(version: 2020_06_22_135401) do
     t.integer "availability_id"
     t.index ["availability_id"], name: "index_plans_availabilities_on_availability_id"
     t.index ["plan_id"], name: "index_plans_availabilities_on_plan_id"
+  end
+
+  create_table "prepaid_packs", force: :cascade do |t|
+    t.string "priceable_type"
+    t.bigint "priceable_id"
+    t.bigint "group_id"
+    t.integer "amount"
+    t.integer "minutes"
+    t.string "validity_interval"
+    t.integer "validity_count"
+    t.boolean "disabled"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_prepaid_packs_on_group_id"
+    t.index ["priceable_type", "priceable_id"], name: "index_prepaid_packs_on_priceable_type_and_priceable_id"
   end
 
   create_table "price_categories", id: :serial, force: :cascade do |t|
@@ -458,8 +548,8 @@ ActiveRecord::Schema.define(version: 2020_06_22_135401) do
   create_table "prices", id: :serial, force: :cascade do |t|
     t.integer "group_id"
     t.integer "plan_id"
-    t.integer "priceable_id"
     t.string "priceable_type"
+    t.integer "priceable_id"
     t.integer "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -531,6 +621,8 @@ ActiveRecord::Schema.define(version: 2020_06_22_135401) do
     t.string "slug"
     t.datetime "published_at"
     t.integer "author_statistic_profile_id"
+    t.tsvector "search_vector"
+    t.index ["search_vector"], name: "projects_search_vector_idx", using: :gin
     t.index ["slug"], name: "index_projects_on_slug", unique: true
   end
 
@@ -566,8 +658,8 @@ ActiveRecord::Schema.define(version: 2020_06_22_135401) do
     t.text "message"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer "reservable_id"
     t.string "reservable_type"
+    t.integer "reservable_id"
     t.integer "nb_reserve_places"
     t.integer "statistic_profile_id"
     t.index ["reservable_type", "reservable_id"], name: "index_reservations_on_reservable_type_and_reservable_id"
@@ -576,8 +668,8 @@ ActiveRecord::Schema.define(version: 2020_06_22_135401) do
 
   create_table "roles", id: :serial, force: :cascade do |t|
     t.string "name"
-    t.integer "resource_id"
     t.string "resource_type"
+    t.integer "resource_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
@@ -671,6 +763,17 @@ ActiveRecord::Schema.define(version: 2020_06_22_135401) do
     t.boolean "ca", default: true
   end
 
+  create_table "statistic_profile_prepaid_packs", force: :cascade do |t|
+    t.bigint "prepaid_pack_id"
+    t.bigint "statistic_profile_id"
+    t.integer "minutes_used", default: 0
+    t.datetime "expires_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["prepaid_pack_id"], name: "index_statistic_profile_prepaid_packs_on_prepaid_pack_id"
+    t.index ["statistic_profile_id"], name: "index_statistic_profile_prepaid_packs_on_statistic_profile_id"
+  end
+
   create_table "statistic_profile_trainings", id: :serial, force: :cascade do |t|
     t.integer "statistic_profile_id"
     t.integer "training_id"
@@ -729,12 +832,12 @@ ActiveRecord::Schema.define(version: 2020_06_22_135401) do
 
   create_table "subscriptions", id: :serial, force: :cascade do |t|
     t.integer "plan_id"
-    t.string "stp_subscription_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "expiration_date"
     t.datetime "canceled_at"
     t.integer "statistic_profile_id"
+    t.datetime "start_at"
     t.index ["plan_id"], name: "index_subscriptions_on_plan_id"
     t.index ["statistic_profile_id"], name: "index_subscriptions_on_statistic_profile_id"
   end
@@ -827,7 +930,6 @@ ActiveRecord::Schema.define(version: 2020_06_22_135401) do
     t.datetime "updated_at"
     t.boolean "is_allow_contact", default: true
     t.integer "group_id"
-    t.string "stp_customer_id"
     t.string "username"
     t.string "slug"
     t.boolean "is_active", default: true
@@ -868,15 +970,12 @@ ActiveRecord::Schema.define(version: 2020_06_22_135401) do
 
   create_table "wallet_transactions", id: :serial, force: :cascade do |t|
     t.integer "wallet_id"
-    t.integer "transactable_id"
-    t.string "transactable_type"
     t.string "transaction_type"
     t.integer "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "invoicing_profile_id"
     t.index ["invoicing_profile_id"], name: "index_wallet_transactions_on_invoicing_profile_id"
-    t.index ["transactable_type", "transactable_id"], name: "index_wallet_transactions_on_transactable"
     t.index ["wallet_id"], name: "index_wallet_transactions_on_wallet_id"
   end
 
@@ -909,6 +1008,17 @@ ActiveRecord::Schema.define(version: 2020_06_22_135401) do
   add_foreign_key "o_auth2_mappings", "o_auth2_providers"
   add_foreign_key "open_api_calls_count_tracings", "open_api_clients"
   add_foreign_key "organizations", "invoicing_profiles"
+  add_foreign_key "payment_gateway_objects", "payment_gateway_objects"
+  add_foreign_key "payment_schedule_items", "invoices"
+  add_foreign_key "payment_schedule_items", "payment_schedules"
+  add_foreign_key "payment_schedule_objects", "payment_schedules"
+  add_foreign_key "payment_schedules", "coupons"
+  add_foreign_key "payment_schedules", "invoicing_profiles"
+  add_foreign_key "payment_schedules", "invoicing_profiles", column: "operator_profile_id"
+  add_foreign_key "payment_schedules", "statistic_profiles"
+  add_foreign_key "payment_schedules", "wallet_transactions"
+  add_foreign_key "plans", "plan_categories"
+  add_foreign_key "prepaid_packs", "groups"
   add_foreign_key "prices", "groups"
   add_foreign_key "prices", "plans"
   add_foreign_key "project_steps", "projects"
@@ -929,6 +1039,8 @@ ActiveRecord::Schema.define(version: 2020_06_22_135401) do
   add_foreign_key "spaces_availabilities", "availabilities"
   add_foreign_key "spaces_availabilities", "spaces"
   add_foreign_key "statistic_custom_aggregations", "statistic_types"
+  add_foreign_key "statistic_profile_prepaid_packs", "prepaid_packs"
+  add_foreign_key "statistic_profile_prepaid_packs", "statistic_profiles"
   add_foreign_key "statistic_profile_trainings", "statistic_profiles"
   add_foreign_key "statistic_profile_trainings", "trainings"
   add_foreign_key "statistic_profiles", "groups"

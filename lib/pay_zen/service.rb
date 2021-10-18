@@ -48,10 +48,6 @@ class PayZen::Service < Payment::Service
     pgo_sub.save!
   end
 
-  def extend_subscription(payment_schedule, payment_method_id)
-    create_subscription(payment_schedule, payment_method_id)
-  end
-
   def process_payment_schedule_item(payment_schedule_item)
     pz_order = payment_schedule_item.payment_schedule.gateway_order.retrieve
     transaction = pz_order['answer']['transactions'].last

@@ -61,7 +61,7 @@ class ShoppingCart
       payment = create_payment_document(price, objects, payment_id, payment_type)
       WalletService.debit_user_wallet(payment, @customer)
       payment.save
-      payment.post_save(payment_id)
+      payment.post_save(payment_id, payment_type)
     end
 
     success = !payment.nil? && objects.map(&:errors).flatten.map(&:empty?).all? && items.map(&:errors).map(&:empty?).all?
@@ -89,10 +89,10 @@ class ShoppingCart
       PaymentScheduleService.new.create(
         objects,
         price[:before_coupon],
+        @customer,
         coupon: @coupon.coupon,
         operator: @operator,
         payment_method: @payment_method,
-        user: @customer,
         payment_id: payment_id,
         payment_type: payment_type
       )

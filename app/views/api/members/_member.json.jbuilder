@@ -72,6 +72,7 @@ if member.subscription
       json.interval member.subscription.plan.interval
       json.interval_count member.subscription.plan.interval_count
       json.amount member.subscription.plan.amount ? (member.subscription.plan.amount / 100.0) : 0
+      json.monthly_payment member.subscription.plan.monthly_payment
     end
   end
 end

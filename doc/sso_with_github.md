@@ -33,6 +33,8 @@ For this guide, we will use [GitHub](https://developer.github.com/v3/oauth/) as 
   - **Client identifier**: Your Client ID, collected just before.
   - **Client secret**: Your Client Secret, collected just before.
 
+Please note that in some cases we'll encounter an issue unless the **common URL** must only contain the root domain (e.g. `http://github.com`), and the other parts of the URL must go to **Authorization endpoint** (e.g. `/login/oauth/authorize`) and **Token Acquisition Endpoint** (e.g. `/login/oauth/access_token`). 
+
 - Then you will need to define the matching of the fields between the Fab-manager and what the external SSO can provide.
   Please note that the only mandatory field is `User.uid`.
   To continue with our GitHub example, you will need to look at [this documentation page](https://developer.github.com/v3/users/#get-the-authenticated-user) to know witch field can be mapped and how, and [this one](https://developer.github.com/v3/) to know the root URL of the API.
@@ -59,7 +61,7 @@ rails fablab:auth:switch_provider[GitHub]
 
 - As the command just prompted you, you have to re-compile the assets
   - In development, `rails tmp:clear` will do the job.
-  - In production with Docker, `rm -rf public/assets`, followed by `docker-compose run --rm fabmanager bundle exec rails assets:precompile`
+  - In production with Docker, `rm -rf public/packs`, followed by `docker-compose run --rm fabmanager bundle exec rails assets:precompile`
 - Then restart the web-server or the container.
 - Finally, to notify all existing users about the change (and send them their migration code/link), run:
 ```bash

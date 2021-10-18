@@ -2,6 +2,9 @@
 
 require 'test_helper'
 
+module Subscriptions; end
+
+
 class Subscriptions::RenewAsAdminTest < ActionDispatch::IntegrationTest
   setup do
     @admin = User.find_by(username: 'admin')
@@ -81,29 +84,38 @@ class Subscriptions::RenewAsAdminTest < ActionDispatch::IntegrationTest
     user = User.find_by(username: 'pdurand')
     subscription = user.subscription.clone
     new_date = (1.month.from_now - 4.days).utc
+    offer_days_count = OfferDay.count
 
     VCR.use_cassette('subscriptions_admin_offer_free_days') do
-      put "/api/subscriptions/#{subscription.id}",
-          params: {
-            subscription: {
-              expired_at: new_date.strftime('%Y-%m-%d %H:%M:%S.%9N Z'),
-              free: true
-            }
-          }.to_json, headers: default_headers
+      post '/api/local_payment/confirm_payment',
+           params: {
+             customer_id: user.id,
+             items: [
+               {
+                 free_extension: {
+                   end_at: new_date.strftime('%Y-%m-%d %H:%M:%S.%9N Z')
+                 }
+               }
+             ]
+           }.to_json, headers: default_headers
     end
 
     # Check response format & status
-    assert_equal 200, response.status, response.body
+    assert_equal 201, response.status, response.body
     assert_equal Mime[:json], response.content_type
 
     # Check that the subscribed plan was not altered
-    res_subscription = json_response(response.body)
-    assert_equal subscription.id, res_subscription[:id], 'subscription id has changed'
-    assert_equal subscription.plan_id, res_subscription[:plan_id], 'subscribed plan does not match'
-    assert_dates_equal new_date, res_subscription[:expired_at], 'subscription end date was not updated'
+    res = json_response(response.body)
+    assert_equal 'OfferDay', res[:main_object][:type]
+    assert_equal 0, res[:items][0][:amount]
+
+    assert_equal subscription.id, user.subscription.id, 'subscription id has changed'
+    assert_equal subscription.plan_id, user.subscription.plan_id, 'subscribed plan does not match'
+    assert_dates_equal new_date, user.subscription.expired_at, 'subscription end date was not updated'
 
     # Check the subscription was correctly saved
     assert_equal 1, user.subscriptions.count
+    assert_equal offer_days_count + 1, OfferDay.count
 
     # Check notification was sent to the user
     notification = Notification.find_by(
@@ -120,31 +132,39 @@ class Subscriptions::RenewAsAdminTest < ActionDispatch::IntegrationTest
   test 'admin successfully extends a subscription' do
     user = User.find_by(username: 'pdurand')
     subscription = user.subscription.clone
-    new_date = (1.month.from_now - 4.days).utc
+    new_date = subscription.expired_at + subscription.plan.interval_count.send(subscription.plan.interval)
 
     VCR.use_cassette('subscriptions_admin_extends_subscription') do
-      put "/api/subscriptions/#{subscription.id}",
-          params: {
-            subscription: {
-              expired_at: new_date.strftime('%Y-%m-%d %H:%M:%S.%9N Z')
-            }
-          }.to_json, headers: default_headers
+      post '/api/local_payment/confirm_payment',
+           params: {
+             customer_id: user.id,
+             payment_method: 'check',
+             payment_schedule: false,
+             items: [
+               {
+                 subscription: {
+                   start_at: subscription.expired_at.strftime('%Y-%m-%d %H:%M:%S.%9N Z'),
+                   plan_id: subscription.plan_id
+                 }
+               }
+             ]
+           }.to_json, headers: default_headers
     end
 
     # Check response format & status
     assert_equal 201, response.status, response.body
     assert_equal Mime[:json], response.content_type
 
-    # Check that the subscribed plan is still the same
     res_subscription = json_response(response.body)
-    assert_equal subscription.plan_id, res_subscription[:plan_id], 'subscribed plan does not match'
+    assert_equal 'Subscription', res_subscription[:main_object][:type]
+    assert_equal subscription.plan.amount / 100.0, res_subscription[:items][0][:amount]
 
     # Check the subscription was correctly saved
     assert_equal 2, user.subscriptions.count
 
     # Check that the subscription is new
-    assert_not_equal subscription.id, res_subscription[:id], 'subscription id has not changed'
-    assert_dates_equal new_date, res_subscription[:expired_at], 'subscription end date does not match'
+    assert_not_equal subscription.id, user.subscription.id, 'subscription id has not changed'
+    assert_dates_equal new_date, user.subscription.expired_at, 'subscription end date does not match'
 
     # Check notification was sent to the user
     notification = Notification.find_by(

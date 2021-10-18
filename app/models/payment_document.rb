@@ -22,7 +22,7 @@ class PaymentDocument < Footprintable
     self.wallet_transaction_id = transaction_id
   end
 
-  def post_save(arg); end
+  def post_save(*args); end
 
   def render_resource; end
 end

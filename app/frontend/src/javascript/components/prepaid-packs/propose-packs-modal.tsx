@@ -164,6 +164,7 @@ export const ProposePacksModal: React.FC<ProposePacksModalProps> = ({ isOpen, to
           afterSuccess={handlePackBought}
           onError={onError}
           cart={cart}
+          updateCart={setCart}
           currentUser={operator}
           customer={customer} />
       </div>}

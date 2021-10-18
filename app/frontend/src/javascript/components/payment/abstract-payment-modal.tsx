@@ -27,6 +27,7 @@ export interface GatewayFormProps {
   className?: string,
   paymentSchedule?: PaymentSchedule,
   cart?: ShoppingCart,
+  updateCart?: (cart: ShoppingCart) => void,
   formId: string,
 }
 
@@ -36,6 +37,7 @@ interface AbstractPaymentModalProps {
   afterSuccess: (result: Invoice|PaymentSchedule) => void,
   onError: (message: string) => void,
   cart: ShoppingCart,
+  updateCart?: (cart: ShoppingCart) => void,
   currentUser: User,
   schedule?: PaymentSchedule,
   customer: User,
@@ -56,7 +58,7 @@ interface AbstractPaymentModalProps {
  * This component must not be called directly but must be extended for each implemented payment gateway
  * @see https://reactjs.org/docs/composition-vs-inheritance.html
  */
-export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, cart, currentUser, schedule, customer, logoFooter, GatewayForm, formId, className, formClassName, title, preventCgv, preventScheduleInfo, modalSize }) => {
+export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, cart, updateCart, currentUser, schedule, customer, logoFooter, GatewayForm, formId, className, formClassName, title, preventCgv, preventScheduleInfo, modalSize }) => {
   // customer's wallet
   const [wallet, setWallet] = useState<Wallet>(null);
   // server-computed price with all details
@@ -205,6 +207,7 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
           className={`gateway-form ${formClassName || ''}`}
           formId={formId}
           cart={cart}
+          updateCart={updateCart}
           customer={customer}
           paymentSchedule={schedule}>
           {hasErrors() && <div className="payment-errors">

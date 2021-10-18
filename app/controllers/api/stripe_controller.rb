@@ -84,8 +84,8 @@ class API::StripeController < API::PaymentsController
 
     stp_subscription = service.subscribe(method.id, cart)
 
-    res = on_payment_success(stp_subscription, cart) if stp_subscription&.status == 'active'
-    render generate_payment_response(stp_subscription.latest_invoice.payment_intent, 'subscription', res, stp_subscription.id)
+    res = on_payment_success(stp_subscription, cart) if %w[active not_started].include?(stp_subscription&.status)
+    render generate_payment_response(stp_subscription.try(:latest_invoice)&.payment_intent, 'subscription', res, stp_subscription.id)
   end
 
   def confirm_subscription
@@ -97,8 +97,10 @@ class API::StripeController < API::PaymentsController
 
     cart = shopping_cart
     if subscription&.status == 'active'
-      res = on_payment_success(subscription.latest_invoice.payment_intent, cart)
+      res = on_payment_success(subscription, cart)
       render generate_payment_response(subscription.latest_invoice.payment_intent, 'subscription', res)
+    else
+      render generate_payment_response(subscription.latest_invoice.payment_intent, 'subscription', nil, subscription.id)
     end
   rescue Stripe::InvalidRequestError => e
     render json: e, status: :unprocessable_entity
