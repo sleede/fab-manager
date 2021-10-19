@@ -417,7 +417,7 @@ fr:
         NUMBER_monthly_payment_of_AMOUNT: "{NUMBER} {NUMBER, plural, =1{mensualité} other{mensualités}} de {AMOUNT}"
         first_debit: "Premier prélèvement le jour de la commande."
         debit: "Prélèvement le jour de la commande."
-        view_full_schedule: "Voir tout l'échéancier de paiement"
+        view_full_schedule: "View the complete payment schedule"
         confirm_and_pay: "Valider et payer"
         you_have_settled_the_following_TYPE: "Vous avez réglé {TYPE, select, Machine{les créneaux machines suivants} Training{la formation suivante} other{les éléments suivants}} :"
         you_have_settled_a_: "Vous avez réglé un"
