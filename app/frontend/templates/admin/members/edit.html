@@ -105,7 +105,14 @@
                   <p translate>
                     {{ 'app.admin.members_edit.user_has_no_current_subscription' }}
                   </p>
-                  <button class="btn btn-default" ng-click="createSubscriptionModal(user, plans.filter(filterDisabledPlans))" translate>{{ 'app.admin.members_edit.subscribe_to_a_plan' }}</button>
+                  <button class="btn btn-default" ng-click="toggleSubscribeModal()" translate>{{ 'app.admin.members_edit.subscribe_to_a_plan' }}</button>
+                  <subscribe-modal is-open="isOpenSubscribeModal"
+                                   toggle-modal="toggleSubscribeModal"
+                                   customer="user"
+                                   operator="currentUser"
+                                   on-error="onError"
+                                   on-success="onSubscribeSuccess">
+                  </subscribe-modal>
                 </div>
 
               </div>
