@@ -416,6 +416,8 @@ fr:
   group:
     #name of the user's group for administrators
     admins: 'Administrateurs'
+  cart_items:
+    free_extension: "Free extension of a subscription, until %{DATE}"
   settings:
     locked_setting: "le paramètre est verrouillé."
     about_title: "Le titre de la page \"À propos\""
@@ -529,3 +531,4 @@ fr:
     payzen_currency: "Devise PayZen"
     public_agenda_module: "Module d'agenda public"
     renew_pack_threshold: "Seuil de renouvellement des packs"
+    pack_only_for_subscription: "Restrict packs for subscribers"
