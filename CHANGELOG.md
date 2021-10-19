@@ -15,6 +15,8 @@
 - Fix a security issue: updated url-parse to 1.5.3 to fix [CVE-2021-3664](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3664)
 - Fix a security issue: updated axios to 0.21.2 to fix [CVE-2021-3749](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3749)
 - Fix a security issue: updated nokogiri to 1.12.5 to fix [CVE-2021-41098](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41098)
+- Fix a security issue: updated puma to 4.3.9 to fix [CVE-2021-41136](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41136)
+- Fix a security issue: updated sidekiq to 6.2.1 to fix [CVE-2021-30151](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30151)
 
 ## v5.1.10 2021 October 04
 
