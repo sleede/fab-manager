@@ -417,7 +417,7 @@ es:
         NUMBER_monthly_payment_of_AMOUNT: "{NUMBER} monthly {NUMBER, plural, =1{payment} other{payments}} of {AMOUNT}"
         first_debit: "First debit on the day of the order."
         debit: "Debit on the day of the order."
-        view_full_schedule: "View the complete payement schedule"
+        view_full_schedule: "View the complete payment schedule"
         confirm_and_pay: "Confirmar y pagar"
         you_have_settled_the_following_TYPE: "Acaba de seleccionar {TYPE, select, Machine{machine slots} Training{training} other{elements}}:"
         you_have_settled_a_: "Ha establecido una"
