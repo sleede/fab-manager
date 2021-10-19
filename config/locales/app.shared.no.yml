@@ -417,7 +417,7 @@
         NUMBER_monthly_payment_of_AMOUNT: "{NUMBER} månedlig {NUMBER, plural, one {} =1{betaling} other{betalinger}} på {AMOUNT}"
         first_debit: "Første debet på bestillingsdato."
         debit: "Første trekk på bestillingsdato."
-        view_full_schedule: "Vis fullstendig betalingsplan"
+        view_full_schedule: "View the complete payment schedule"
         confirm_and_pay: "Bekreft og betal"
         you_have_settled_the_following_TYPE: "Du har betalt for følgende {TYPE, select, Machine{maskinplasser} Training{opplæring/kurs} other{elementer}}:"
         you_have_settled_a_: "Du har gjort opp en"
