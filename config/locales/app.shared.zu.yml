@@ -417,7 +417,7 @@ zu:
         NUMBER_monthly_payment_of_AMOUNT: "crwdns20980:0NUMBER={NUMBER}crwdnd20980:0NUMBER={NUMBER}crwdnd20980:0AMOUNT={AMOUNT}crwdne20980:0"
         first_debit: "crwdns20982:0crwdne20982:0"
         debit: "crwdns20984:0crwdne20984:0"
-        view_full_schedule: "crwdns20986:0crwdne20986:0"
+        view_full_schedule: "crwdns22095:0crwdne22095:0"
         confirm_and_pay: "crwdns10057:0crwdne10057:0"
         you_have_settled_the_following_TYPE: "crwdns10059:0TYPE={TYPE}crwdne10059:0"
         you_have_settled_a_: "crwdns10061:0crwdne10061:0"
