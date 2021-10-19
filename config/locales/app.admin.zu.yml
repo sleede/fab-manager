@@ -925,6 +925,13 @@ zu:
         pay_in_one_go: "crwdns22085:0crwdne22085:0"
         renew: "crwdns22087:0crwdne22087:0"
         renew_success: "crwdns22089:0crwdne22089:0"
+      #take a new subscription
+      subscribe_modal:
+        subscribe_USER: "crwdns22097:0{USER}crwdne22097:0"
+        subscribe: "crwdns22099:0crwdne22099:0"
+        select_plan: "crwdns22101:0crwdne22101:0"
+        pay_in_one_go: "crwdns22103:0crwdne22103:0"
+        subscription_success: "crwdns22105:0crwdne22105:0"
       #add a new administrator to the platform
       admins_new:
         add_an_administrator: "crwdns8027:0crwdne8027:0"
