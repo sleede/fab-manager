@@ -418,6 +418,8 @@ en:
     admins: 'Administrators'
   cart_items:
     free_extension: "Free extension of a subscription, until %{DATE}"
+  statistic_profile:
+    birthday_in_past: "The date of birth must be in the past"
   settings:
     locked_setting: "the setting is locked."
     about_title: "\"About\" page title"

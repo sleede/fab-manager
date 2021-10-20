@@ -28,6 +28,8 @@ class StatisticProfile < ApplicationRecord
   # Projects that the current user is the author
   has_many :my_projects, foreign_key: :author_statistic_profile_id, class_name: 'Project', dependent: :destroy
 
+  validates :check_birthday_in_past
+
   def str_gender
     gender ? 'male' : 'female'
   end
@@ -39,5 +41,11 @@ class StatisticProfile < ApplicationRecord
     else
       ''
     end
+  end
+
+  private
+
+  def check_birthday_in_past
+    errors.add(:birthday, I18n.t('statistic_profile.birthday_in_past')) if birthday.present? && birthday > DateTime.current
   end
 end
