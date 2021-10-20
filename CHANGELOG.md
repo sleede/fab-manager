@@ -1,9 +1,12 @@
 # Changelog Fab-manager
 
+- Refactored subscription new/renew/free extend interfaces and API 
 - Updated production documentation
 - Updated SSO documentation
 - Improved stripe subscription process with better error handling
 - The upgrade script will check and report the ability to access the hub API
+- Fix a bug: the upgrade script won't add environment variables that are already present anymore
+- Fix a bug: admin cannot take or renew a subscription for a member from member/edit interface
 - Fix a bug: missing translations
 - Fix a bug: the upgrade script report an invalid version to upgrade to
 - Fix a bug: invalid amount provided to the PayZen payment gateway when using a currency with anything else than 2 decimals

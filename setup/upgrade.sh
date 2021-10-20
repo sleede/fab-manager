@@ -136,8 +136,14 @@ add_environments()
 {
   for ENV in "${ENVIRONMENTS[@]}"; do
     if [[ "$ENV" =~ ^[A-Z0-9_]+=.*$ ]]; then
-      printf "\e[91m::\e[0m \e[1mInserting variable %s..\e[0m.\n" "$ENV"
-      printf "# added on %s\n%s\n" "$(date +%Y-%m-%d\ %R)" "$ENV" >> "config/env"
+      local var=$(echo "$ENV" | cut -d '=' -f1)
+      grep "$var" ./config/env
+      if [[ "$?" = 1 ]]; then
+        printf "\e[91m::\e[0m \e[1mInserting variable %s..\e[0m.\n" "$ENV"
+        printf "# added on %s\n%s\n" "$(date +%Y-%m-%d\ %R)" "$ENV" >> "config/env"
+      else
+        printf "\e[93m[ ⚠ ] %s is already defined in config/env, ignoring...\e[39m\n" "$var"
+      fi
     else
       printf "\e[93m[ ⚠ ] Ignoring invalid option: -e %s.\e[39m\n Given value is not valid environment variable, please see http://env.doc.fab.mn\n" "$ENV"
     fi
