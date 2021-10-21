@@ -120,7 +120,8 @@ class Setting < ApplicationRecord
                              payzen_currency
                              public_agenda_module
                              renew_pack_threshold
-                             pack_only_for_subscription] }
+                             pack_only_for_subscription
+                             overlapping_categories] }
   # WARNING: when adding a new key, you may also want to add it in app/policies/setting_policy.rb#public_whitelist
   # and in config/locales/en.yml#settings
 
