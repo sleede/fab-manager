@@ -129,7 +129,6 @@ class Invoice < PaymentDocument
   def prevent_refund?
     return true if user.nil?
 
-    # workaround for reservation saved after invoice
     if main_item.object_type == 'Reservation' && main_item.object&.reservable_type == 'Training'
       user.trainings.include?(main_item.object.reservable_id)
     else
