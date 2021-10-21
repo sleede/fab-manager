@@ -20,7 +20,7 @@ class RegistrationsController < Devise::RegistrationsController
         # Allows sending the confirmation email without blocking the access to the dashboard
         resource.send_confirmation_instructions
 
-        sign_up(resource_name, resource)
+        sign_up(resource_name, resource) unless Setting.get('confirmation_required')
         respond_with resource, location: after_sign_up_path_for(resource)
       else
         set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_flashing_format?

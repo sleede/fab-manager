@@ -12,6 +12,7 @@
 - Fix a bug: missing translations
 - Fix a bug: the upgrade script report an invalid version to upgrade to
 - Fix a bug: invalid amount provided to the PayZen payment gateway when using a currency with anything else than 2 decimals
+- Fix a bug: incorrect behavior for the setting "email confirmation required"
 - Updated @rails/webpacker to 5.4.3
 - Updated react-refresh-webpack-plugin to 0.5.1
 - Updated react-refresh to 0.10.0

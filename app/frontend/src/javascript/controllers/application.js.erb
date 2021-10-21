@@ -180,7 +180,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
         }]
       }).result['finally'](null).then(function (res) {
         // when the account was created successfully, set the session to the newly created account
-        if(res.settings.confirmation_required) {
+        if(res.settings.confirmation_required === 'true') {
           Auth._currentUser = null;
           growl.info(_t('app.public.common.you_will_receive_confirmation_instructions_by_email_detailed'));
         } else {
