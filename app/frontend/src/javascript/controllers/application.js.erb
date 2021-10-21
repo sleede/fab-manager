@@ -100,7 +100,8 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
             format: Fablab.uibDateFormat,
             opened: false,
             options: {
-              startingDay: Fablab.weekStartingDay
+              startingDay: Fablab.weekStartingDay,
+              maxDate: new Date()
             }
           };
 

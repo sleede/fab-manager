@@ -28,7 +28,7 @@ class StatisticProfile < ApplicationRecord
   # Projects that the current user is the author
   has_many :my_projects, foreign_key: :author_statistic_profile_id, class_name: 'Project', dependent: :destroy
 
-  validates :check_birthday_in_past
+  validate :check_birthday_in_past
 
   def str_gender
     gender ? 'male' : 'female'
