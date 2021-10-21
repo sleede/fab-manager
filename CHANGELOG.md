@@ -5,6 +5,7 @@
 - Updated SSO documentation
 - Improved stripe subscription process with better error handling
 - The upgrade script will check and report the ability to access the hub API
+- Fix a bug: canceled training reservation is not marked as this in admin/edit members/trainings
 - Fix a bug: users can set their birthdate in the future
 - Fix a bug: the upgrade script won't add environment variables that are already present anymore
 - Fix a bug: admin cannot take or renew a subscription for a member from member/edit interface
