@@ -3,7 +3,7 @@ import { AbstractPaymentModal, GatewayFormProps } from '../abstract-payment-moda
 import { LocalPaymentForm } from './local-payment-form';
 import { ShoppingCart } from '../../../models/payment';
 import { PaymentSchedule } from '../../../models/payment-schedule';
-import { User } from '../../../models/user';
+import { User, UserRole } from '../../../models/user';
 import { Invoice } from '../../../models/invoice';
 import { useTranslation } from 'react-i18next';
 import { ModalSize } from '../../base/fab-modal';
@@ -43,6 +43,15 @@ const LocalPaymentModalComponent: React.FC<LocalPaymentModalProps> = ({ isOpen, 
   };
 
   /**
+   * Generally, this modal dialog is only shown to admins or to managers when they book for someone else.
+   * If this is not the case, then it is shown to validate a free (or prepaid by wallet) cart.
+   * This function will return `true` in the later case.
+   */
+  const isFreeOfCharge = (): boolean => {
+    return (customer.id === currentUser.id);
+  };
+
+  /**
    * Integrates the LocalPaymentForm into the parent AbstractPaymentModal
    */
   const renderForm: FunctionComponent<GatewayFormProps> = ({ onSubmit, onSuccess, onError, operator, className, formId, cart, updateCart, customer, paymentSchedule, children }) => {
@@ -67,7 +76,7 @@ const LocalPaymentModalComponent: React.FC<LocalPaymentModalProps> = ({ isOpen, 
       isOpen={isOpen}
       toggleModal={toggleModal}
       logoFooter={logoFooter()}
-      title={t('app.admin.local_payment.offline_payment')}
+      title={isFreeOfCharge() ? t('app.admin.local_payment.validate_cart') : t('app.admin.local_payment.offline_payment')}
       formId="local-payment-form"
       formClassName="local-payment-form"
       currentUser={currentUser}

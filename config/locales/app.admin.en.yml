@@ -1396,8 +1396,10 @@ en:
         category_deleted: "The category was successfully deleted"
         unable_to_delete: "Unable to delete the category: "
       local_payment:
+        validate_cart: "Validate my cart"
         offline_payment: "Payment on site"
         about_to_cash: "You're about to confirm the cashing by an external payment mean. Please do not click on the button below until you have fully cashed the requested payment."
+        about_to_confirm: "You're about to confirm your {ITEM, select, subscription{subscription} other{reservation}}."
         payment_method: "Payment method"
         method_card: "Online by card"
         method_check: "By check"

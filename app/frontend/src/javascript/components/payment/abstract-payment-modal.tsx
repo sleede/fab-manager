@@ -229,7 +229,8 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
           disabled={!canSubmit()}
           form={formId}
           className="validate-btn">
-          {t('app.shared.payment.confirm_payment_of_', { AMOUNT: FormatLib.price(remainingPrice) })}
+          {remainingPrice > 0 && t('app.shared.payment.confirm_payment_of_', { AMOUNT: FormatLib.price(remainingPrice) })}
+          {remainingPrice === 0 && t('app.shared.payment.validate')}
         </button>}
         {submitState && <div className="payment-pending">
           <div className="fa-2x">

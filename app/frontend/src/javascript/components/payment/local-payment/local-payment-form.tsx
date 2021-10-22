@@ -109,9 +109,26 @@ export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSucce
     onSuccess(document);
   };
 
+  /**
+   * Generally, this form component is only shown to admins or to managers when they book for someone else.
+   * If this is not the case, then it is shown to validate a free (or prepaid by wallet) cart.
+   * This function will return `true` in the later case.
+   */
+  const isFreeOfCharge = (): boolean => {
+    return (customer.id === operator.id);
+  };
+
+  /**
+   * Get the type of the main item in the cart compile
+   */
+  const mainItemType = (): string => {
+    return Object.keys(cart.items[0])[0];
+  };
+
   return (
     <form onSubmit={handleSubmit} id={formId} className={className || ''}>
-      {!paymentSchedule && <p className="payment">{t('app.admin.local_payment.about_to_cash')}</p>}
+      {!paymentSchedule && !isFreeOfCharge && <p className="payment">{t('app.admin.local_payment.about_to_cash')}</p>}
+      {!paymentSchedule && isFreeOfCharge && <p className="payment">{t('app.admin.local_payment.about_to_confirm', { ITEM: mainItemType() })}</p>}
       {paymentSchedule && <div className="payment-schedule">
         <div className="schedule-method">
           <label htmlFor="payment-method">{t('app.admin.local_payment.payment_method')}</label>
