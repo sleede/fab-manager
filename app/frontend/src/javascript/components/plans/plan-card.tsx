@@ -2,13 +2,11 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import _ from 'lodash';
-import { IFablab } from '../../models/fablab';
 import { Plan } from '../../models/plan';
 import { User, UserRole } from '../../models/user';
 import { Loader } from '../base/loader';
 import '../../lib/i18n';
-
-declare let Fablab: IFablab;
+import FormatLib from '../../lib/format';
 
 interface PlanCardProps {
   plan: Plan,
@@ -29,14 +27,14 @@ const PlanCardComponent: React.FC<PlanCardProps> = ({ plan, userId, subscribedPl
    * Return the formatted localized amount of the given plan (eg. 20.5 => "20,50 €")
    */
   const amount = () : string => {
-    return new Intl.NumberFormat(Fablab.intl_locale, { style: 'currency', currency: Fablab.intl_currency }).format(plan.amount);
+    return FormatLib.price(plan.amount);
   };
   /**
    * Return the formatted localized amount, divided by the number of months (eg. 120 => "10,00 € / month")
    */
   const monthlyAmount = (): string => {
     const monthly = plan.amount / moment.duration(plan.interval_count, plan.interval).asMonths();
-    return new Intl.NumberFormat(Fablab.intl_locale, { style: 'currency', currency: Fablab.intl_currency }).format(monthly);
+    return FormatLib.price(monthly);
   };
   /**
    * Return the formatted localized duration of te given plan (eg. Month/3 => "3 mois")

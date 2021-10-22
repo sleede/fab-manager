@@ -4,6 +4,8 @@ import { SubscriptionRequest } from './subscription';
 export interface PaymentConfirmation {
   requires_action?: boolean,
   payment_intent_client_secret?: string,
+  type?: 'payment' | 'subscription',
+  subscription_id?: string,
   success?: boolean,
   error?: {
     statusText: string
@@ -19,7 +21,10 @@ export enum PaymentMethod {
   Other = ''
 }
 
-export type CartItem = { reservation: Reservation }|{ subscription: SubscriptionRequest }|{ prepaid_pack: { id: number } };
+export type CartItem = { reservation: Reservation }|
+  { subscription: SubscriptionRequest }|
+  { prepaid_pack: { id: number } }|
+  { free_extension: { end_at: Date } };
 
 export interface ShoppingCart {
   customer_id: number,
@@ -33,15 +38,4 @@ export interface ShoppingCart {
 export interface UpdateCardResponse {
   updated: boolean,
   error?: string
-}
-
-export interface StripeSubscription {
-  id: string,
-  status: string,
-  latest_invoice: {
-    payment_intent: {
-      status: string,
-      client_secret: string
-    }
-  }
 }

@@ -7,6 +7,7 @@ class API::PayzenController < API::PaymentsController
   require 'pay_zen/token'
   require 'pay_zen/transaction'
   require 'pay_zen/helper'
+  require 'pay_zen/service'
 
   def sdk_test
     str = 'fab-manager'
@@ -25,7 +26,7 @@ class API::PayzenController < API::PaymentsController
     @id = PayZen::Helper.generate_ref(params[:cart_items], params[:customer_id])
 
     client = PayZen::Charge.new
-    @result = client.create_payment(amount: amount[:amount],
+    @result = client.create_payment(amount: PayZen::Service.new.payzen_amount(amount[:amount]),
                                     order_id: @id,
                                     customer: PayZen::Helper.generate_customer(params[:customer_id], current_user.id, params[:cart_items]))
   rescue PayzenError => e

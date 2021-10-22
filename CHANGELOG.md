@@ -1,9 +1,42 @@
 # Changelog Fab-manager
 
+## v5.1.11 2021 October 22
+
+- Refactored subscription new/renew/free extend interfaces and API
+- Ability to configure data sources for preventing booking on overlapping slots
+- Updated production documentation
+- Updated SSO documentation
+- Improved stripe subscription process with better error handling
+- The upgrade script will check and report the ability to access the hub API
+- Fix a bug: canceled training reservation is not marked as this in admin/edit members/trainings
+- Fix a bug: users can set their birthdate in the future
+- Fix a bug: the upgrade script won't add environment variables that are already present anymore
+- Fix a bug: admin cannot take or renew a subscription for a member from member/edit interface
+- Fix a bug: missing translations
+- Fix a bug: the upgrade script report an invalid version to upgrade to
+- Fix a bug: invalid amount provided to the PayZen payment gateway when using a currency with anything else than 2 decimals
+- Fix a bug: incorrect behavior for the setting "email confirmation required"
+- Fix a bug: invalid text shown when a member confirms a free cart
+- Fix a bug: 3DS confirmation is not asked when an admin is subscribing a user through a payment schedule using PayZen
+- Updated @rails/webpacker to 5.4.3
+- Updated react-refresh-webpack-plugin to 0.5.1
+- Updated react-refresh to 0.10.0
+- Fix a security issue: updated tar to 6.1.11 to fix [CVE-2021-37712](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-37712), [CVE-2021-37701](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-37701) and [CVE-2021-37713](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-37713)
+- Fix a security issue: updated immer to 9.0.6 to fix [CVE-2021-3757](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3757) and [CVE-2021-23436](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23436)
+- Fix a security issue: updated url-parse to 1.5.3 to fix [CVE-2021-3664](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3664)
+- Fix a security issue: updated axios to 0.21.2 to fix [CVE-2021-3749](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3749)
+- Fix a security issue: updated nokogiri to 1.12.5 to fix [CVE-2021-41098](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41098)
+- Fix a security issue: updated puma to 4.3.9 to fix [CVE-2021-41136](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41136)
+- Fix a security issue: updated sidekiq to 6.2.1 to fix [CVE-2021-30151](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30151)
+- [TODO DEPLOY] `rails db:seed`
+
 ## v5.1.10 2021 October 04
+
 - Fix a bug: the image of the about page is not using the image set in backoffice
 - Fix a bug: updated sassc to 2.4.0 to fix ruby runtime error on some CPU architectures (#270)
 - Fix a security issue: prevent HTML code edition in projects, to prevent XSS vulnerability (#293)
+- Fix a bug : cover image doesn't display in profile
+- Fix a bug : it redirects to home when we delete a machine record photo
 
 ## v5.1.9 2021 September 21
 

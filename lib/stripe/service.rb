@@ -7,34 +7,19 @@ module Stripe; end
 
 ## create remote objects on stripe
 class Stripe::Service < Payment::Service
-  # Create the provided PaymentSchedule on Stripe, using the Subscription API
-  def create_subscription(payment_schedule, subscription_id)
-    stripe_key = Setting.get('stripe_secret_key')
 
-    handle_wallet_transaction(payment_schedule)
+  # Build the subscription base on the given shopping cart and create it on the remote stripe API
+  def subscribe(payment_method_id, shopping_cart)
+    price_details = shopping_cart.total
 
-    stp_subscription = Stripe::Subscription.retrieve(subscription_id, api_key: stripe_key)
-    pgo = PaymentGatewayObject.new(item: payment_schedule)
-    pgo.gateway_object = stp_subscription
-    pgo.save!
-  end
+    payment_schedule = price_details[:schedule][:payment_schedule]
+    payment_schedule.payment_schedule_items = price_details[:schedule][:items]
+    first_item = price_details[:schedule][:items].min_by(&:due_date)
+    subscription = shopping_cart.items.find { |item| item.class == CartItem::Subscription }.to_object
+    reservable_stp_id = shopping_cart.items.find { |item| item.is_a?(CartItem::Reservation) }&.to_object
+                          &.reservable&.payment_gateway_object&.gateway_object_id
 
-  def pay_subscription(payment_schedule, payment_method_id)
-    stripe_key = Setting.get('stripe_secret_key')
-    first_item = payment_schedule.payment_schedule_items.min_by(&:due_date)
-
-    main_object = payment_schedule.payment_schedule_objects.find(&:main)
-    case main_object.object_type
-    when Reservation.name
-      subscription = payment_schedule.payment_schedule_objects.find { |pso| pso.object_type == Subscription.name }.object
-      reservable_stp_id = main_object.object.reservable&.payment_gateway_object&.gateway_object_id
-    when Subscription.name
-      subscription = main_object.object
-      reservable_stp_id = nil
-    else
-      raise InvalidSubscriptionError
-    end
-
+    WalletService.debit_user_wallet(payment_schedule, shopping_cart.customer, transaction: false)
     handle_wallet_transaction(payment_schedule)
 
     price = create_price(first_item.details['recurring'],
@@ -43,17 +28,19 @@ class Stripe::Service < Payment::Service
     # other items (not recurring)
     items = subscription_invoice_items(payment_schedule, subscription, first_item, reservable_stp_id)
 
-    Stripe::Subscription.create({
-      customer: payment_schedule.invoicing_profile.user.payment_gateway_object.gateway_object_id,
-      cancel_at: (payment_schedule.payment_schedule_items.max_by(&:due_date).due_date + 1.month).to_i,
-      add_invoice_items: items,
-      coupon: payment_schedule.coupon&.code,
-      items: [
-        { price: price[:id] }
-      ],
-      default_payment_method: payment_method_id,
-      expand: %w[latest_invoice.payment_intent]
-    }, { api_key: stripe_key })
+    create_remote_subscription(shopping_cart, payment_schedule, items, price, payment_method_id)
+  end
+
+  def create_subscription(payment_schedule, stp_object_id, stp_object_type)
+    stripe_key = Setting.get('stripe_secret_key')
+
+    stp_subscription = Stripe::Item.new(stp_object_type, stp_object_id).retrieve
+
+    payment_method_id = Stripe::Customer.retrieve(stp_subscription.customer, api_key: stripe_key).invoice_settings.default_payment_method
+    payment_method = Stripe::PaymentMethod.retrieve(payment_method_id, api_key: stripe_key)
+    pgo = PaymentGatewayObject.new(item: payment_schedule)
+    pgo.gateway_object = payment_method
+    pgo.save!
   end
 
   def create_user(user_id)
@@ -145,7 +132,63 @@ class Stripe::Service < Payment::Service
     { status: stp_invoice.status, error: e }
   end
 
+  def attach_method_as_default(payment_method_id, customer_id)
+    stripe_key = Setting.get('stripe_secret_key')
+
+    # attach the payment method to the given customer
+    method = Stripe::PaymentMethod.attach(
+      payment_method_id,
+      { customer: customer_id },
+      { api_key: stripe_key }
+    )
+    # then set it as the default payment method for this customer
+    Stripe::Customer.update(
+      customer_id,
+      { invoice_settings: { default_payment_method: payment_method_id } },
+      { api_key: stripe_key }
+    )
+    method
+  end
+
   private
+
+
+  # Create the provided PaymentSchedule on Stripe, using the Subscription API
+  def create_remote_subscription(shopping_cart, payment_schedule, items, price, payment_method_id)
+    stripe_key = Setting.get('stripe_secret_key')
+    if payment_schedule.start_at.nil?
+      Stripe::Subscription.create({
+                                    customer: shopping_cart.customer.payment_gateway_object.gateway_object_id,
+                                    cancel_at: (payment_schedule.payment_schedule_items.max_by(&:due_date).due_date + 1.month).to_i,
+                                    add_invoice_items: items,
+                                    coupon: payment_schedule.coupon&.code,
+                                    items: [
+                                      { price: price[:id] }
+                                    ],
+                                    default_payment_method: payment_method_id,
+                                    expand: %w[latest_invoice.payment_intent]
+                                  }, { api_key: stripe_key })
+    else
+      Stripe::SubscriptionSchedule.create({
+                                            customer: shopping_cart.customer.payment_gateway_object.gateway_object_id,
+                                            start_date: payment_schedule.start_at.to_i,
+                                            end_behavior: 'cancel',
+                                            phases: [
+                                              {
+                                                items: [
+                                                  { price: price[:id] }
+                                                ],
+                                                add_invoice_items: items,
+                                                coupon: payment_schedule.coupon&.code,
+                                                default_payment_method: payment_method_id,
+                                                end_date: (
+                                                  payment_schedule.payment_schedule_items.max_by(&:due_date).due_date + 1.month
+                                                ).to_i
+                                              }
+                                            ]
+                                          }, { api_key: stripe_key })
+    end
+  end
 
   def subscription_invoice_items(payment_schedule, subscription, first_item, reservable_stp_id)
     second_item = payment_schedule.payment_schedule_items.sort_by(&:due_date)[1]

@@ -14,6 +14,7 @@ interface PayZenModalProps {
   isOpen: boolean,
   toggleModal: () => void,
   afterSuccess: (result: Invoice|PaymentSchedule) => void,
+  onError: (message: string) => void,
   cart: ShoppingCart,
   currentUser: User,
   schedule?: PaymentSchedule,
@@ -27,7 +28,7 @@ interface PayZenModalProps {
  * This component should not be called directly. Prefer using <PaymentModal> which can handle the configuration
  *  of a different payment gateway.
  */
-export const PayZenModal: React.FC<PayZenModalProps> = ({ isOpen, toggleModal, afterSuccess, cart, currentUser, schedule, customer }) => {
+export const PayZenModal: React.FC<PayZenModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, cart, currentUser, schedule, customer }) => {
   /**
    * Return the logos, shown in the modal footer.
    */
@@ -71,6 +72,7 @@ export const PayZenModal: React.FC<PayZenModalProps> = ({ isOpen, toggleModal, a
       cart={cart}
       customer={customer}
       afterSuccess={afterSuccess}
+      onError={onError}
       schedule={schedule}
       GatewayForm={renderForm} />
   );

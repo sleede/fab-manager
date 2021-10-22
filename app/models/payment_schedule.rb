@@ -75,14 +75,10 @@ class PaymentSchedule < PaymentDocument
     payment_schedule_items
   end
 
-  def post_save(gateway_method_id)
+  def post_save(*args)
     return unless payment_method == 'card'
 
-    PaymentGatewayService.new.create_subscription(self, gateway_method_id)
-  end
-
-  def pay(gateway_method_id)
-    PaymentGatewayService.new.pay_subscription(self, gateway_method_id)
+    PaymentGatewayService.new.create_subscription(self, *args)
   end
 
   def render_resource

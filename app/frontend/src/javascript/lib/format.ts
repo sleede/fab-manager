@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment, { unitOfTime } from 'moment';
 import { IFablab } from '../models/fablab';
 
 declare let Fablab: IFablab;
@@ -9,6 +9,20 @@ export default class FormatLib {
    */
   static date = (date: Date): string => {
     return Intl.DateTimeFormat().format(moment(date).toDate());
+  }
+
+  /**
+   * Return the formatted localized time for the given date
+   */
+  static time = (date: Date): string => {
+    return Intl.DateTimeFormat(Fablab.intl_locale, { hour: 'numeric', minute: 'numeric' }).format(moment(date).toDate());
+  };
+
+  /**
+   * Return the formatted localized duration
+   */
+  static duration = (interval: unitOfTime.DurationConstructor, intervalCount: number): string => {
+    return moment.duration(intervalCount, interval).locale(Fablab.moment_locale).humanize();
   }
 
   /**

@@ -9,20 +9,25 @@ class Integrity::Checksum
     def code
       dir = Dir.pwd
 
-      files = children_files("#{dir}/*")
-              .concat(children_files("#{dir}/app/**/*"))
-              .concat(children_files("#{dir}/bin/**/*"))
-              .concat(children_files("#{dir}/config/**/*"))
-              .concat(children_files("#{dir}/db/**/*"))
-              .concat(children_files("#{dir}/doc/**/*"))
-              .concat(children_files("#{dir}/docker/**/*"))
-              .concat(children_files("#{dir}/lib/**/*"))
-              .concat(children_files("#{dir}/node_modules/**/*"))
-              .concat(children_files("#{dir}/plugins/**/*"))
-              .concat(children_files("#{dir}/provision/**/*"))
-              .concat(children_files("#{dir}/scripts/**/*"))
-              .concat(children_files("#{dir}/test/**/*"))
-              .concat(children_files("#{dir}/vendor/**/*"))
+      files = if Rails.env.test?
+                # in test mode, we compute a "lite" checksum to speed-up test running time
+                children_files("#{dir}/*")
+              else
+                children_files("#{dir}/*")
+                  .concat(children_files("#{dir}/app/**/*"))
+                  .concat(children_files("#{dir}/bin/**/*"))
+                  .concat(children_files("#{dir}/config/**/*"))
+                  .concat(children_files("#{dir}/db/**/*"))
+                  .concat(children_files("#{dir}/doc/**/*"))
+                  .concat(children_files("#{dir}/docker/**/*"))
+                  .concat(children_files("#{dir}/lib/**/*"))
+                  .concat(children_files("#{dir}/node_modules/**/*"))
+                  .concat(children_files("#{dir}/plugins/**/*"))
+                  .concat(children_files("#{dir}/provision/**/*"))
+                  .concat(children_files("#{dir}/scripts/**/*"))
+                  .concat(children_files("#{dir}/test/**/*"))
+                  .concat(children_files("#{dir}/vendor/**/*"))
+              end
 
       content = files.map { |f| File.read(f) }.join
 

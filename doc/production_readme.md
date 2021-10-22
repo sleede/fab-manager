@@ -13,7 +13,7 @@ You will need to be root through the rest of the setup.
 1.3. [Connect through SSH](#connect-through-ssh)<br/>
 1.4. [Prepare the server](#prepare-the-server)<br/>
 2. [Install Fab-manager](#install-fab-manager)<br/>
-3. [Docker utils](#docker-utils)
+3. [Useful commands](#useful-commands)
 4. [Update Fab-manager](#update-fab-manager)<br/>
 4.1. [Scripted update](#scripted-update)<br/>
 4.2. [Update manually](#update-manually)<br/>
@@ -29,36 +29,34 @@ You will need to be root through the rest of the setup.
 <a name="setup-the-server"></a>
 ### Setup the server
 
-There are many hosting providers on the internet, providing affordable virtual private serveurs (VPS).
-Here's a non exhaustive list:
-- [DigitalOcean](https://www.digitalocean.com/pricing/#droplet)
-- [OVH](https://www.ovh.com/fr/vps/) 
-- [Amazon](https://aws.amazon.com/fr/ec2/)
-- [Gandi](https://v4.gandi.net/hebergement/serveur/prix)
-- [Ikoula](https://express.ikoula.com/fr/serveur-virtuel)
-- [1&1](https://www.1and1.fr/serveurs-virtuels)
-- [GoDaddy](https://fr.godaddy.com/hosting/vps-hosting)
-- [and many others...](https://www.google.fr/search?q=vps+hosting)
-
+There are [many hosting providers](https://duckduckgo.com/?q=vps+hosting) on the internet, providing affordable virtual private serveurs (VPS).
 Choose one, depending on your budget, on the server's location, on the uptime guarantee, etc.
 
-You will need at least 2GB of addressable memory (RAM + swap) to install and use Fab-manager.
-We recommend 4 GB RAM for larger communities.
+#### System requirements
+##### Memory
+
+If you do not plan to use the statistics module, you will need at least 2 GB of addressable memory (RAM + swap) to install and use Fab-manager.
+We recommend 4 GB of RAM to take full advantage of Fab-manager and be able to use the statistics module.
+If you have a large community (~ 200 active membres), we recommend 4 GB of RAM, even without the statistics module.
+
+During the installation and the upgrades, the assets' compilation phase may fail if you do not have sufficient available memory.
+
+##### CPU and Operating system
 
 Supported operating systems are Ubuntu LTS 16.04+ and Debian 8+ with an x86 64-bits architecture.
 This might work on other linux systems, and CPU architectures but this is untested for now, and we do not recommend for production purposes.
 
-Choose one and install docker on it:
-- Install [Docker on Debian](https://docs.docker.com/engine/installation/linux/docker-ce/debian/)
-- Install [Docker on Ubuntu](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)
+#### Software requirements
+`curl` and `bash` are needed to retrieve and run the automated deployment scripts.  
+Then the various scripts will check for their own dependencies.
 
-Then install [Docker Compose](https://docs.docker.com/compose/install/)
+Moreover, the main software dependencies to run fab-manager are [Docker](https://docs.docker.com/engine/installation/linux/docker-ce/debian/) and [Docker Compose](https://docs.docker.com/compose/install/) 
+They can be easily installed using the [`prepare-vps.sleede.com` script below](#prepare-the-server).
 
 <a name="setup-the-domain-name"></a>
 ### Set up the domain name
 
-There are many domain name registrars on the internet, you may choose one that fit your needs.
-You can find an exhaustive list [on the ICANN website](https://www.icann.org/registrar-reports/accredited-list.html)
+There are [many domain name registrars](https://duckduckgo.com/?q=register+domain+name) on the internet, choose one that fit your needs.
 
 1. Once done, buy a domain name on it
 2. Replace the IP address of the domain with the IP address of your VPS (This is a DNS record of **type A**)
@@ -113,8 +111,8 @@ docker-compose down && docker-compose up -d
 
 Disabling ElasticSearch will save up to 800 Mb of memory. 
 
-<a name="docker-utils"></a>
-## Docker utils
+<a name="useful-commands"></a>
+## Useful commands
 Below, you'll find a collection of useful commands to control your instance with docker-compose.
 Before using any of these commands, you must first `cd` into the app directory.
 
@@ -122,15 +120,19 @@ Before using any of these commands, you must first `cd` into the app directory.
 ```bash
 docker-compose down && docker-compose up -d
 ```
-- Open a bash prompt in the app context
+- Open a bash prompt inside the app container
 ```bash
 docker-compose exec fabmanager bash
+```
+- Open the ruby console in the application
+```bash
+\curl -sSL run.fab.mn | bash
 ```
 - Show services status
 ```bash
 docker-compose ps
 ```
-- Example of command passing env variables
+- Run a command and provide it environment variables
 ```bash
 docker-compose run --rm -e VAR1=xxx -e VAR2=xxx fabmanager bundle exec rails my:command
 ```

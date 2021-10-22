@@ -196,7 +196,7 @@ zu:
         remaining_HOURS: "crwdns21934:0HOURS={HOURS}crwdnd21934:0ITEM={ITEM}crwdne21934:0"
         no_hours: "crwdns21936:0ITEM={ITEM}crwdne21936:0"
         buy_a_new_pack: "crwdns21938:0crwdne21938:0"
-        unable_to_use_pack_for_subsription_is_expired: "You must have a valid subscription to use your remaining hours."
+        unable_to_use_pack_for_subsription_is_expired: "crwdns22043:0crwdne22043:0"
       #book a training
       trainings_reserve:
         trainings_planning: "crwdns8767:0crwdne8767:0"

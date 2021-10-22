@@ -22,7 +22,7 @@ zu:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "crwdns9405:0crwdne9405:0"
         you_will_lose_any_unsaved_modification_if_you_reload_this_page: "crwdns9407:0crwdne9407:0"
         payment_card_error: "crwdns9409:0crwdne9409:0"
-        payment_card_declined: "Your card was declined."
+        payment_card_declined: "crwdns22033:0crwdne22033:0"
       #user edition form
       user:
         man: "crwdns9411:0crwdne9411:0"
@@ -125,6 +125,7 @@ zu:
         _the_general_terms_and_conditions: "crwdns21488:0crwdne21488:0"
         payment_schedule_html: "crwdns21490:0{DEADLINES}crwdnd21490:0{GATEWAY}crwdne21490:0"
         confirm_payment_of_: "crwdns21492:0{AMOUNT}crwdne21492:0"
+        validate: "crwdns22131:0crwdne22131:0"
       #dialog of on site payment for reservations
       valid_reservation_modal:
         booking_confirmation: "crwdns9587:0crwdne9587:0"
@@ -417,7 +418,7 @@ zu:
         NUMBER_monthly_payment_of_AMOUNT: "crwdns20980:0NUMBER={NUMBER}crwdnd20980:0NUMBER={NUMBER}crwdnd20980:0AMOUNT={AMOUNT}crwdne20980:0"
         first_debit: "crwdns20982:0crwdne20982:0"
         debit: "crwdns20984:0crwdne20984:0"
-        view_full_schedule: "crwdns20986:0crwdne20986:0"
+        view_full_schedule: "crwdns22095:0crwdne22095:0"
         confirm_and_pay: "crwdns10057:0crwdne10057:0"
         you_have_settled_the_following_TYPE: "crwdns10059:0TYPE={TYPE}crwdne10059:0"
         you_have_settled_a_: "crwdns10061:0crwdne10061:0"

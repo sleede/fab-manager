@@ -705,6 +705,15 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
     // current active authentication provider
     $scope.activeProvider = activeProviderPromise;
 
+    // modal dialog to extend the current subscription for free
+    $scope.isOpenFreeExtendModal = false;
+
+    // modal dialog to renew the current subscription
+    $scope.isOpenRenewModal = false;
+
+    // modal dialog to take a new subscription
+    $scope.isOpenSubscribeModal = false;
+
     /**
      * Open a modal dialog asking for confirmation to change the role of the given user
      * @returns {*}
@@ -753,135 +762,55 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
     };
 
     /**
-     * Open a modal dialog, allowing the admin to extend the current user's subscription (freely or not)
-     * @param subscription {Object} User's subscription object
-     * @param free {boolean} True if the extent is offered, false otherwise
+     * Opens/closes the modal dialog to freely extend the subscription
      */
-    $scope.updateSubscriptionModal = function (subscription, free) {
-      const modalInstance = $uibModal.open({
-        animation: true,
-        templateUrl: '/admin/subscriptions/expired_at_modal.html',
-        size: 'lg',
-        controller: ['$scope', '$uibModalInstance', 'Subscription', function ($scope, $uibModalInstance, Subscription) {
-          $scope.new_expired_at = angular.copy(subscription.expired_at);
-          $scope.free = free;
-          $scope.datePicker = {
-            opened: false,
-            format: Fablab.uibDateFormat,
-            options: {
-              startingDay: Fablab.weekStartingDay
-            },
-            minDate: new Date()
-          };
-
-          $scope.openDatePicker = function (ev) {
-            ev.preventDefault();
-            ev.stopPropagation();
-            return $scope.datePicker.opened = true;
-          };
-
-          $scope.ok = function () {
-            Subscription.update(
-              { id: subscription.id },
-              { subscription: { expired_at: $scope.new_expired_at, free } },
-              function (_subscription) {
-                growl.success(_t('app.admin.members_edit.you_successfully_changed_the_expiration_date_of_the_user_s_subscription'));
-                return $uibModalInstance.close(_subscription);
-              },
-              function (error) {
-                growl.error(_t('app.admin.members_edit.a_problem_occurred_while_saving_the_date'));
-                console.error(error);
-              }
-            );
-          };
-
-          $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
-        }]
-      });
-      // once the form was validated successfully ...
-      return modalInstance.result.then(function (subscription) { $scope.subscription.expired_at = subscription.expired_at; });
+    $scope.toggleFreeExtendModal = () => {
+      setTimeout(() => {
+        $scope.isOpenFreeExtendModal = !$scope.isOpenFreeExtendModal;
+        $scope.$apply();
+      }, 50);
     };
 
     /**
-     * Open a modal dialog allowing the admin to set a subscription for the given user.
-     * @param user {Object} User object, user currently reviewed, as recovered from GET /api/members/:id
-     * @param plans {Array} List of plans, available for the currently reviewed user, as recovered from GET /api/plans
+     * Opens/closes the modal dialog to renew the subscription (with payment)
      */
-    $scope.createSubscriptionModal = function (user, plans) {
-      const modalInstance = $uibModal.open({
-        animation: true,
-        templateUrl: '/admin/subscriptions/create_modal.html',
-        size: 'lg',
-        controller: ['$scope', '$uibModalInstance', 'Subscription', function ($scope, $uibModalInstance, Subscription) {
-          // selected user
-          $scope.user = user;
+    $scope.toggleRenewModal = () => {
+      setTimeout(() => {
+        $scope.isOpenRenewModal = !$scope.isOpenRenewModal;
+        $scope.$apply();
+      }, 50);
+    };
 
-          // available plans for the selected user
-          $scope.plans = plans;
+    /**
+     * Opens/closes the modal dialog to renew the subscription (with payment)
+     */
+    $scope.toggleSubscribeModal = () => {
+      setTimeout(() => {
+        $scope.isOpenSubscribeModal = !$scope.isOpenSubscribeModal;
+        $scope.$apply();
+      }, 50);
+    };
+    /**
+     * Callback triggered if the subscription was successfully extended
+     */
+    $scope.onExtendSuccess = (message, newExpirationDate) => {
+      growl.success(message);
+      $scope.subscription.expired_at = newExpirationDate;
+    };
 
-          // default parameters for the new subscription
-          $scope.subscription = {
-            payment_schedule: false,
-            payment_method: 'check'
-          };
+    /**
+     * Callback triggered if a new subscription was successfully taken
+     */
+    $scope.onSubscribeSuccess = (message, newSubscription) => {
+      growl.success(message);
+      $scope.subscription = newSubscription;
+    };
 
-          /**
-           * Generate a string identifying the given plan by literal human-readable name
-           * @param plan {Object} Plan object, as recovered from GET /api/plan/:id
-           * @param groups {Array} List of Groups objects, as recovered from GET /api/groups
-           * @param short {boolean} If true, the generated name will contain the group slug, otherwise the group full name
-           * will be included.
-           * @returns {String}
-           */
-          $scope.humanReadablePlanName = function (plan, groups, short) { return `${$filter('humanReadablePlanName')(plan, groups, short)}`; };
-
-          /**
-           * Check if the currently selected plan can be paid with a payment schedule or not
-           * @return {boolean}
-           */
-          $scope.allowMonthlySchedule = function () {
-            if (!$scope.subscription) return false;
-
-            const plan = plans.find(p => p.id === $scope.subscription.plan_id);
-            return plan && plan.monthly_payment;
-          };
-
-          /**
-           * Triggered by the <switch> component.
-           * We must use a setTimeout to workaround the react integration.
-           * @param checked {Boolean}
-           */
-          $scope.toggleSchedule = function (checked) {
-            setTimeout(() => {
-              $scope.subscription.payment_schedule = checked;
-              $scope.$apply();
-            }, 50);
-          };
-
-          /**
-           * Modal dialog validation callback
-           */
-          $scope.ok = function () {
-            $scope.subscription.user_id = user.id;
-            return Subscription.save({ }, { subscription: $scope.subscription }, function (_subscription) {
-              growl.success(_t('app.admin.members_edit.subscription_successfully_purchased'));
-              $uibModalInstance.close(_subscription);
-              return $state.reload();
-            }
-            , function (error) {
-              growl.error(_t('app.admin.members_edit.a_problem_occurred_while_taking_the_subscription'));
-              console.error(error);
-            });
-          };
-
-          /**
-           * Modal dialog cancellation callback
-           */
-          $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
-        }]
-      });
-      // once the form was validated successfully ...
-      return modalInstance.result.then(function (subscription) { $scope.subscription = subscription; });
+    /**
+     * Callback triggered in case of error
+     */
+    $scope.onError = (message) => {
+      growl.error(message);
     };
 
     $scope.createWalletCreditModal = function (user, wallet) {

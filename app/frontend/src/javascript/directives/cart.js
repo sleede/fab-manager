@@ -363,11 +363,30 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
         };
 
         /**
+         * Invoked when something wrong occurred after the payment dialog has been closed
+         * @param message {string}
+         */
+        $scope.onLocalPaymentError = (message) => {
+          growl.error(message);
+        };
+
+        /**
          * Invoked when something wrong occurred during the payment dialog initialization
          * @param message {string}
          */
         $scope.onOnlinePaymentError = (message) => {
           growl.error(message);
+        };
+
+        /**
+         * Callback triggered when a child component (LocalPaymentModal) requires to update the cart content
+         * @param cart {ShoppingCart}
+         */
+        $scope.updateCart = (cart) => {
+          setTimeout(() => {
+            $scope.localPayment.cartItems = cart;
+            $scope.$apply();
+          }, 50);
         };
 
         /* PRIVATE SCOPE */
@@ -437,12 +456,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
          * @param callback {function}
          */
         const validateSameTimeReservations = function (slot, callback) {
-          let sameTimeReservations = [
-            'training_reservations',
-            'machine_reservations',
-            'space_reservations',
-            'events_reservations'
-          ].map(function (k) {
+          let sameTimeReservations = $scope.settings.overlapping_categories.split(',').map(function (k) {
             return _.filter($scope.user[k], function (r) {
               return slot.start.isSame(r.start_at) ||
                 (slot.end.isAfter(r.start_at) && slot.end.isBefore(r.end_at)) ||

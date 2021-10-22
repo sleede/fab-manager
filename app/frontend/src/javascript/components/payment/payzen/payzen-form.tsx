@@ -40,7 +40,8 @@ export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onE
           .then(({ KR, result }) => KR.showForm(result.formId))
           .then(({ KR }) => KR.onFormReady(handleFormReady))
           .then(({ KR }) => KR.onFormCreated(handleFormCreated))
-          .then(({ KR }) => { PayZenKR.current = KR; });
+          .then(({ KR }) => { PayZenKR.current = KR; })
+          .catch(error => onError(error));
       }).catch(error => onError(error));
     });
   }, [cart, paymentSchedule, customer]);
@@ -125,6 +126,7 @@ export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onE
    */
   const handleSubmit = async (event: FormEvent): Promise<void> => {
     event.preventDefault();
+    event.stopPropagation();
     onSubmit();
 
     try {

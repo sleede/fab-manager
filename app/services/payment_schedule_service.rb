@@ -6,9 +6,11 @@ class PaymentScheduleService
   # Compute a payment schedule for a new subscription to the provided plan
   # @param plan {Plan}
   # @param total {Number} Total amount of the current shopping cart (which includes this plan) - without coupon
+  # @param customer {User} the customer
   # @param coupon {Coupon} apply this coupon, if any
+  # @param start_at {DateTime} schedule the PaymentSchedule to start in the future
   ##
-  def compute(plan, total, coupon: nil)
+  def compute(plan, total, customer, coupon: nil, start_at: nil)
     other_items = total - plan.amount
     # base monthly price of the plan
     price = plan.amount
@@ -22,7 +24,7 @@ class PaymentScheduleService
                  end
     items = []
     (0..deadlines - 1).each do |i|
-      date = DateTime.current + i.months
+      date = (start_at || DateTime.current) + i.months
       details = { recurring: per_month }
       amount = if i.zero?
                  details[:adjustment] = adjustment.truncate
@@ -45,15 +47,18 @@ class PaymentScheduleService
         details: details
       )
     end
+    ps.start_at = start_at
     ps.total = items.map(&:amount).reduce(:+)
+    ps.invoicing_profile = customer.invoicing_profile
+    ps.statistic_profile = customer.statistic_profile
     { payment_schedule: ps, items: items }
   end
 
-  def create(objects, total, coupon: nil, operator: nil, payment_method: nil, user: nil,
+  def create(objects, total, customer, coupon: nil, operator: nil, payment_method: nil,
              payment_id: nil, payment_type: nil)
     subscription = objects.find { |item| item.class == Subscription }
 
-    schedule = compute(subscription.plan, total, coupon: coupon)
+    schedule = compute(subscription.plan, total, customer, coupon: coupon, start_at: subscription.start_at)
     ps = schedule[:payment_schedule]
     items = schedule[:items]
 
@@ -68,8 +73,6 @@ class PaymentScheduleService
       ps.payment_gateway_objects.push(pgo)
     end
     ps.operator_profile = operator.invoicing_profile
-    ps.invoicing_profile = user.invoicing_profile
-    ps.statistic_profile = user.statistic_profile
     ps.payment_schedule_items = items
     ps
   end

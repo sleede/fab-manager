@@ -39,7 +39,7 @@ class API::PaymentsController < API::ApiController
       post_save(gateway_item_id, gateway_item_type, res[:payment])
       res[:payment].render_resource.merge(status: :created)
     else
-      { json: res[:errors], status: :unprocessable_entity }
+      { json: res[:errors].drop_while(&:empty?), status: :unprocessable_entity }
     end
   end
 end

@@ -61,27 +61,13 @@ class ShoppingCart
       payment = create_payment_document(price, objects, payment_id, payment_type)
       WalletService.debit_user_wallet(payment, @customer)
       payment.save
-      payment.post_save(payment_id)
+      payment.post_save(payment_id, payment_type)
     end
 
-    success = objects.map(&:errors).flatten.map(&:empty?).all? && items.map(&:errors).map(&:empty?).all?
+    success = !payment.nil? && objects.map(&:errors).flatten.map(&:empty?).all? && items.map(&:errors).map(&:empty?).all?
     errors = objects.map(&:errors).flatten.concat(items.map(&:errors))
+    errors.push('Unable to create the PaymentDocument') if payment.nil?
     { success: success, payment: payment, errors: errors }
-  end
-
-  def pay_schedule(payment_id, payment_type)
-    price = total
-    objects = []
-    items.each do |item|
-      raise InvalidSubscriptionError unless item.valid?(@items)
-
-      object = item.to_object
-      objects.push(object)
-      raise InvalidSubscriptionError unless object.errors.empty?
-    end
-    payment = create_payment_document(price, objects, payment_id, payment_type)
-    WalletService.debit_user_wallet(payment, @customer, transaction: false)
-    payment.pay(payment_id)
   end
 
   private
@@ -103,10 +89,10 @@ class ShoppingCart
       PaymentScheduleService.new.create(
         objects,
         price[:before_coupon],
+        @customer,
         coupon: @coupon.coupon,
         operator: @operator,
         payment_method: @payment_method,
-        user: @customer,
         payment_id: payment_id,
         payment_type: payment_type
       )

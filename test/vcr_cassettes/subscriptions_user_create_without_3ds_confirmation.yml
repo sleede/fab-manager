@@ -1,0 +1,2125 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/payment_methods
+    body:
+      encoding: UTF-8
+      string: type=card&card[number]=4000002760003184&card[exp_month]=4&card[exp_year]=2022&card[cvc]=314
+    headers:
+      User-Agent:
+      - Stripe/v1 RubyBindings/5.29.0
+      Authorization:
+      - Bearer sk_test_testfaketestfaketestfake
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Stripe-Version:
+      - '2019-08-14'
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"5.29.0","lang":"ruby","lang_version":"2.6.7 p197 (2021-04-05)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 5.14.11-arch1-1 (linux@archlinux) (gcc (GCC) 11.1.0, GNU ld (GNU Binutils)
+        2.36.1) #1 SMP PREEMPT Sun, 10 Oct 2021 00:48:26 +0000","hostname":"Sylvain-desktop"}'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 14 Oct 2021 15:59:53 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '934'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_KLWSiHeEtTwdGE
+      Stripe-Version:
+      - '2019-08-14'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "pm_1JkWLV2sOmf47Nz9xRAxhRsO",
+          "object": "payment_method",
+          "billing_details": {
+            "address": {
+              "city": null,
+              "country": null,
+              "line1": null,
+              "line2": null,
+              "postal_code": null,
+              "state": null
+            },
+            "email": null,
+            "name": null,
+            "phone": null
+          },
+          "card": {
+            "brand": "visa",
+            "checks": {
+              "address_line1_check": null,
+              "address_postal_code_check": null,
+              "cvc_check": "unchecked"
+            },
+            "country": "DE",
+            "exp_month": 4,
+            "exp_year": 2022,
+            "fingerprint": "fve96mejTdIvAPVC",
+            "funding": "credit",
+            "generated_from": null,
+            "last4": "3184",
+            "networks": {
+              "available": [
+                "visa"
+              ],
+              "preferred": null
+            },
+            "three_d_secure_usage": {
+              "supported": true
+            },
+            "wallet": null
+          },
+          "created": 1634227193,
+          "customer": null,
+          "livemode": false,
+          "metadata": {
+          },
+          "type": "card"
+        }
+  recorded_at: Thu, 14 Oct 2021 15:59:53 GMT
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/payment_methods/pm_1JkWLV2sOmf47Nz9xRAxhRsO/attach
+    body:
+      encoding: UTF-8
+      string: customer=cus_8Di1wjdVktv5kt
+    headers:
+      User-Agent:
+      - Stripe/v1 RubyBindings/5.29.0
+      Authorization:
+      - Bearer sk_test_testfaketestfaketestfake
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-Telemetry:
+      - '{"last_request_metrics":{"request_id":"req_KLWSiHeEtTwdGE","request_duration_ms":790}}'
+      Stripe-Version:
+      - '2019-08-14'
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"5.29.0","lang":"ruby","lang_version":"2.6.7 p197 (2021-04-05)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 5.14.11-arch1-1 (linux@archlinux) (gcc (GCC) 11.1.0, GNU ld (GNU Binutils)
+        2.36.1) #1 SMP PREEMPT Sun, 10 Oct 2021 00:48:26 +0000","hostname":"Sylvain-desktop"}'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 14 Oct 2021 15:59:54 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '945'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_0cIp6IwIYb9772
+      Stripe-Version:
+      - '2019-08-14'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "pm_1JkWLV2sOmf47Nz9xRAxhRsO",
+          "object": "payment_method",
+          "billing_details": {
+            "address": {
+              "city": null,
+              "country": null,
+              "line1": null,
+              "line2": null,
+              "postal_code": null,
+              "state": null
+            },
+            "email": null,
+            "name": null,
+            "phone": null
+          },
+          "card": {
+            "brand": "visa",
+            "checks": {
+              "address_line1_check": null,
+              "address_postal_code_check": null,
+              "cvc_check": "pass"
+            },
+            "country": "DE",
+            "exp_month": 4,
+            "exp_year": 2022,
+            "fingerprint": "fve96mejTdIvAPVC",
+            "funding": "credit",
+            "generated_from": null,
+            "last4": "3184",
+            "networks": {
+              "available": [
+                "visa"
+              ],
+              "preferred": null
+            },
+            "three_d_secure_usage": {
+              "supported": true
+            },
+            "wallet": null
+          },
+          "created": 1634227193,
+          "customer": "cus_8Di1wjdVktv5kt",
+          "livemode": false,
+          "metadata": {
+          },
+          "type": "card"
+        }
+  recorded_at: Thu, 14 Oct 2021 15:59:55 GMT
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/customers/cus_8Di1wjdVktv5kt
+    body:
+      encoding: UTF-8
+      string: invoice_settings[default_payment_method]=pm_1JkWLV2sOmf47Nz9xRAxhRsO
+    headers:
+      User-Agent:
+      - Stripe/v1 RubyBindings/5.29.0
+      Authorization:
+      - Bearer sk_test_testfaketestfaketestfake
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-Telemetry:
+      - '{"last_request_metrics":{"request_id":"req_0cIp6IwIYb9772","request_duration_ms":957}}'
+      Stripe-Version:
+      - '2019-08-14'
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"5.29.0","lang":"ruby","lang_version":"2.6.7 p197 (2021-04-05)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 5.14.11-arch1-1 (linux@archlinux) (gcc (GCC) 11.1.0, GNU ld (GNU Binutils)
+        2.36.1) #1 SMP PREEMPT Sun, 10 Oct 2021 00:48:26 +0000","hostname":"Sylvain-desktop"}'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 14 Oct 2021 15:59:55 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '49811'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_97UZMKjbUaevgC
+      Stripe-Version:
+      - '2019-08-14'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "cus_8Di1wjdVktv5kt",
+          "object": "customer",
+          "account_balance": 0,
+          "address": null,
+          "balance": 0,
+          "created": 1459948888,
+          "currency": "usd",
+          "default_source": "card_1Euc972sOmf47Nz9kex4UjRG",
+          "delinquent": false,
+          "description": "Jean Dupond",
+          "discount": null,
+          "email": "jean.dupond@gmail.com",
+          "invoice_prefix": "C0E661C",
+          "invoice_settings": {
+            "custom_fields": null,
+            "default_payment_method": "pm_1JkWLV2sOmf47Nz9xRAxhRsO",
+            "footer": null
+          },
+          "livemode": false,
+          "metadata": {
+          },
+          "name": null,
+          "next_invoice_sequence": 1456,
+          "phone": null,
+          "preferred_locales": [
+
+          ],
+          "shipping": null,
+          "sources": {
+            "object": "list",
+            "data": [
+              {
+                "id": "card_1Euc972sOmf47Nz9kex4UjRG",
+                "object": "card",
+                "address_city": null,
+                "address_country": null,
+                "address_line1": null,
+                "address_line1_check": null,
+                "address_line2": null,
+                "address_state": null,
+                "address_zip": null,
+                "address_zip_check": null,
+                "brand": "Visa",
+                "country": "US",
+                "customer": "cus_8Di1wjdVktv5kt",
+                "cvc_check": "unchecked",
+                "dynamic_last4": null,
+                "exp_month": 4,
+                "exp_year": 2020,
+                "fingerprint": "o52jybR7bnmNn6AT",
+                "funding": "credit",
+                "last4": "4242",
+                "metadata": {
+                },
+                "name": null,
+                "tokenization_method": null
+              }
+            ],
+            "has_more": false,
+            "total_count": 1,
+            "url": "/v1/customers/cus_8Di1wjdVktv5kt/sources"
+          },
+          "subscriptions": {
+            "object": "list",
+            "data": [
+              {
+                "id": "sub_1JkWL22sOmf47Nz9QynJVnJq",
+                "object": "subscription",
+                "application_fee_percent": null,
+                "automatic_tax": {
+                  "enabled": false
+                },
+                "billing": "charge_automatically",
+                "billing_cycle_anchor": 1634227164,
+                "billing_thresholds": null,
+                "cancel_at": 1665763162,
+                "cancel_at_period_end": false,
+                "canceled_at": 1634227164,
+                "collection_method": "charge_automatically",
+                "created": 1634227164,
+                "current_period_end": 1636905564,
+                "current_period_start": 1634227164,
+                "customer": "cus_8Di1wjdVktv5kt",
+                "days_until_due": null,
+                "default_payment_method": "pm_1JkWKy2sOmf47Nz9hyz9oVKt",
+                "default_source": null,
+                "default_tax_rates": [
+
+                ],
+                "discount": null,
+                "ended_at": null,
+                "invoice_customer_balance_settings": {
+                  "consume_applied_balance_on_void": true
+                },
+                "items": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "id": "si_KPL1rIMIn7Dja5",
+                      "object": "subscription_item",
+                      "billing_thresholds": null,
+                      "created": 1634227164,
+                      "metadata": {
+                      },
+                      "plan": {
+                        "id": "price_1JkWL12sOmf47Nz98iad0nyI",
+                        "object": "plan",
+                        "active": true,
+                        "aggregate_usage": null,
+                        "amount": 9466,
+                        "amount_decimal": "9466",
+                        "billing_scheme": "per_unit",
+                        "created": 1634227163,
+                        "currency": "usd",
+                        "interval": "month",
+                        "interval_count": 1,
+                        "livemode": false,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "tiers": null,
+                        "tiers_mode": null,
+                        "transform_usage": null,
+                        "trial_period_days": null,
+                        "usage_type": "licensed"
+                      },
+                      "price": {
+                        "id": "price_1JkWL12sOmf47Nz98iad0nyI",
+                        "object": "price",
+                        "active": true,
+                        "billing_scheme": "per_unit",
+                        "created": 1634227163,
+                        "currency": "usd",
+                        "livemode": false,
+                        "lookup_key": null,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "recurring": {
+                          "aggregate_usage": null,
+                          "interval": "month",
+                          "interval_count": 1,
+                          "trial_period_days": null,
+                          "usage_type": "licensed"
+                        },
+                        "tax_behavior": "unspecified",
+                        "tiers_mode": null,
+                        "transform_quantity": null,
+                        "type": "recurring",
+                        "unit_amount": 9466,
+                        "unit_amount_decimal": "9466"
+                      },
+                      "quantity": 1,
+                      "subscription": "sub_1JkWL22sOmf47Nz9QynJVnJq",
+                      "tax_rates": [
+
+                      ]
+                    }
+                  ],
+                  "has_more": false,
+                  "total_count": 1,
+                  "url": "/v1/subscription_items?subscription=sub_1JkWL22sOmf47Nz9QynJVnJq"
+                },
+                "latest_invoice": "in_1JkWL22sOmf47Nz9zTqCdG1T",
+                "livemode": false,
+                "metadata": {
+                },
+                "next_pending_invoice_item_invoice": null,
+                "pause_collection": null,
+                "payment_settings": {
+                  "payment_method_options": null,
+                  "payment_method_types": null
+                },
+                "pending_invoice_item_interval": null,
+                "pending_setup_intent": null,
+                "pending_update": null,
+                "plan": {
+                  "id": "price_1JkWL12sOmf47Nz98iad0nyI",
+                  "object": "plan",
+                  "active": true,
+                  "aggregate_usage": null,
+                  "amount": 9466,
+                  "amount_decimal": "9466",
+                  "billing_scheme": "per_unit",
+                  "created": 1634227163,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {
+                  },
+                  "nickname": null,
+                  "product": "prod_IZQAhb9nLu4jfN",
+                  "tiers": null,
+                  "tiers_mode": null,
+                  "transform_usage": null,
+                  "trial_period_days": null,
+                  "usage_type": "licensed"
+                },
+                "quantity": 1,
+                "schedule": null,
+                "start": 1634227164,
+                "start_date": 1634227164,
+                "status": "incomplete",
+                "tax_percent": null,
+                "transfer_data": null,
+                "trial_end": null,
+                "trial_start": null
+              },
+              {
+                "id": "sub_1JkWIu2sOmf47Nz9blZ3AdqA",
+                "object": "subscription",
+                "application_fee_percent": null,
+                "automatic_tax": {
+                  "enabled": false
+                },
+                "billing": "charge_automatically",
+                "billing_cycle_anchor": 1634227031,
+                "billing_thresholds": null,
+                "cancel_at": 1665763030,
+                "cancel_at_period_end": false,
+                "canceled_at": 1634227031,
+                "collection_method": "charge_automatically",
+                "created": 1634227031,
+                "current_period_end": 1636905431,
+                "current_period_start": 1634227031,
+                "customer": "cus_8Di1wjdVktv5kt",
+                "days_until_due": null,
+                "default_payment_method": "pm_1JkWIq2sOmf47Nz9y8vyE7cz",
+                "default_source": null,
+                "default_tax_rates": [
+
+                ],
+                "discount": null,
+                "ended_at": null,
+                "invoice_customer_balance_settings": {
+                  "consume_applied_balance_on_void": true
+                },
+                "items": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "id": "si_KPKyNBY7Dth5wf",
+                      "object": "subscription_item",
+                      "billing_thresholds": null,
+                      "created": 1634227032,
+                      "metadata": {
+                      },
+                      "plan": {
+                        "id": "price_1JkWIs2sOmf47Nz9eGVZoz2W",
+                        "object": "plan",
+                        "active": true,
+                        "aggregate_usage": null,
+                        "amount": 9466,
+                        "amount_decimal": "9466",
+                        "billing_scheme": "per_unit",
+                        "created": 1634227030,
+                        "currency": "usd",
+                        "interval": "month",
+                        "interval_count": 1,
+                        "livemode": false,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "tiers": null,
+                        "tiers_mode": null,
+                        "transform_usage": null,
+                        "trial_period_days": null,
+                        "usage_type": "licensed"
+                      },
+                      "price": {
+                        "id": "price_1JkWIs2sOmf47Nz9eGVZoz2W",
+                        "object": "price",
+                        "active": true,
+                        "billing_scheme": "per_unit",
+                        "created": 1634227030,
+                        "currency": "usd",
+                        "livemode": false,
+                        "lookup_key": null,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "recurring": {
+                          "aggregate_usage": null,
+                          "interval": "month",
+                          "interval_count": 1,
+                          "trial_period_days": null,
+                          "usage_type": "licensed"
+                        },
+                        "tax_behavior": "unspecified",
+                        "tiers_mode": null,
+                        "transform_quantity": null,
+                        "type": "recurring",
+                        "unit_amount": 9466,
+                        "unit_amount_decimal": "9466"
+                      },
+                      "quantity": 1,
+                      "subscription": "sub_1JkWIu2sOmf47Nz9blZ3AdqA",
+                      "tax_rates": [
+
+                      ]
+                    }
+                  ],
+                  "has_more": false,
+                  "total_count": 1,
+                  "url": "/v1/subscription_items?subscription=sub_1JkWIu2sOmf47Nz9blZ3AdqA"
+                },
+                "latest_invoice": "in_1JkWIu2sOmf47Nz9obDWtNdH",
+                "livemode": false,
+                "metadata": {
+                },
+                "next_pending_invoice_item_invoice": null,
+                "pause_collection": null,
+                "payment_settings": {
+                  "payment_method_options": null,
+                  "payment_method_types": null
+                },
+                "pending_invoice_item_interval": null,
+                "pending_setup_intent": null,
+                "pending_update": null,
+                "plan": {
+                  "id": "price_1JkWIs2sOmf47Nz9eGVZoz2W",
+                  "object": "plan",
+                  "active": true,
+                  "aggregate_usage": null,
+                  "amount": 9466,
+                  "amount_decimal": "9466",
+                  "billing_scheme": "per_unit",
+                  "created": 1634227030,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {
+                  },
+                  "nickname": null,
+                  "product": "prod_IZQAhb9nLu4jfN",
+                  "tiers": null,
+                  "tiers_mode": null,
+                  "transform_usage": null,
+                  "trial_period_days": null,
+                  "usage_type": "licensed"
+                },
+                "quantity": 1,
+                "schedule": null,
+                "start": 1634227031,
+                "start_date": 1634227031,
+                "status": "active",
+                "tax_percent": null,
+                "transfer_data": null,
+                "trial_end": null,
+                "trial_start": null
+              },
+              {
+                "id": "sub_1JkW7C2sOmf47Nz9v1DfTXVk",
+                "object": "subscription",
+                "application_fee_percent": null,
+                "automatic_tax": {
+                  "enabled": false
+                },
+                "billing": "charge_automatically",
+                "billing_cycle_anchor": 1634226305,
+                "billing_thresholds": null,
+                "cancel_at": 1665762304,
+                "cancel_at_period_end": false,
+                "canceled_at": 1634226305,
+                "collection_method": "charge_automatically",
+                "created": 1634226305,
+                "current_period_end": 1636904705,
+                "current_period_start": 1634226305,
+                "customer": "cus_8Di1wjdVktv5kt",
+                "days_until_due": null,
+                "default_payment_method": "pm_1JkW772sOmf47Nz9IlBfocG1",
+                "default_source": null,
+                "default_tax_rates": [
+
+                ],
+                "discount": null,
+                "ended_at": null,
+                "invoice_customer_balance_settings": {
+                  "consume_applied_balance_on_void": true
+                },
+                "items": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "id": "si_KPKmRh1aVMvlVs",
+                      "object": "subscription_item",
+                      "billing_thresholds": null,
+                      "created": 1634226306,
+                      "metadata": {
+                      },
+                      "plan": {
+                        "id": "price_1JkW7B2sOmf47Nz9bktMHJcG",
+                        "object": "plan",
+                        "active": true,
+                        "aggregate_usage": null,
+                        "amount": 9466,
+                        "amount_decimal": "9466",
+                        "billing_scheme": "per_unit",
+                        "created": 1634226305,
+                        "currency": "usd",
+                        "interval": "month",
+                        "interval_count": 1,
+                        "livemode": false,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "tiers": null,
+                        "tiers_mode": null,
+                        "transform_usage": null,
+                        "trial_period_days": null,
+                        "usage_type": "licensed"
+                      },
+                      "price": {
+                        "id": "price_1JkW7B2sOmf47Nz9bktMHJcG",
+                        "object": "price",
+                        "active": true,
+                        "billing_scheme": "per_unit",
+                        "created": 1634226305,
+                        "currency": "usd",
+                        "livemode": false,
+                        "lookup_key": null,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "recurring": {
+                          "aggregate_usage": null,
+                          "interval": "month",
+                          "interval_count": 1,
+                          "trial_period_days": null,
+                          "usage_type": "licensed"
+                        },
+                        "tax_behavior": "unspecified",
+                        "tiers_mode": null,
+                        "transform_quantity": null,
+                        "type": "recurring",
+                        "unit_amount": 9466,
+                        "unit_amount_decimal": "9466"
+                      },
+                      "quantity": 1,
+                      "subscription": "sub_1JkW7C2sOmf47Nz9v1DfTXVk",
+                      "tax_rates": [
+
+                      ]
+                    }
+                  ],
+                  "has_more": false,
+                  "total_count": 1,
+                  "url": "/v1/subscription_items?subscription=sub_1JkW7C2sOmf47Nz9v1DfTXVk"
+                },
+                "latest_invoice": "in_1JkW7C2sOmf47Nz9DHI5iyGy",
+                "livemode": false,
+                "metadata": {
+                },
+                "next_pending_invoice_item_invoice": null,
+                "pause_collection": null,
+                "payment_settings": {
+                  "payment_method_options": null,
+                  "payment_method_types": null
+                },
+                "pending_invoice_item_interval": null,
+                "pending_setup_intent": null,
+                "pending_update": null,
+                "plan": {
+                  "id": "price_1JkW7B2sOmf47Nz9bktMHJcG",
+                  "object": "plan",
+                  "active": true,
+                  "aggregate_usage": null,
+                  "amount": 9466,
+                  "amount_decimal": "9466",
+                  "billing_scheme": "per_unit",
+                  "created": 1634226305,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {
+                  },
+                  "nickname": null,
+                  "product": "prod_IZQAhb9nLu4jfN",
+                  "tiers": null,
+                  "tiers_mode": null,
+                  "transform_usage": null,
+                  "trial_period_days": null,
+                  "usage_type": "licensed"
+                },
+                "quantity": 1,
+                "schedule": null,
+                "start": 1634226305,
+                "start_date": 1634226305,
+                "status": "incomplete",
+                "tax_percent": null,
+                "transfer_data": null,
+                "trial_end": null,
+                "trial_start": null
+              },
+              {
+                "id": "sub_1JkW4B2sOmf47Nz9H7F8oy4X",
+                "object": "subscription",
+                "application_fee_percent": null,
+                "automatic_tax": {
+                  "enabled": false
+                },
+                "billing": "charge_automatically",
+                "billing_cycle_anchor": 1634226119,
+                "billing_thresholds": null,
+                "cancel_at": 1665762118,
+                "cancel_at_period_end": false,
+                "canceled_at": 1634226119,
+                "collection_method": "charge_automatically",
+                "created": 1634226119,
+                "current_period_end": 1636904519,
+                "current_period_start": 1634226119,
+                "customer": "cus_8Di1wjdVktv5kt",
+                "days_until_due": null,
+                "default_payment_method": "pm_1JkW472sOmf47Nz9eDPVcQRR",
+                "default_source": null,
+                "default_tax_rates": [
+
+                ],
+                "discount": null,
+                "ended_at": null,
+                "invoice_customer_balance_settings": {
+                  "consume_applied_balance_on_void": true
+                },
+                "items": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "id": "si_KPKjWzNKMgo5Fm",
+                      "object": "subscription_item",
+                      "billing_thresholds": null,
+                      "created": 1634226120,
+                      "metadata": {
+                      },
+                      "plan": {
+                        "id": "price_1JkW4A2sOmf47Nz9OWxtnQoG",
+                        "object": "plan",
+                        "active": true,
+                        "aggregate_usage": null,
+                        "amount": 9466,
+                        "amount_decimal": "9466",
+                        "billing_scheme": "per_unit",
+                        "created": 1634226118,
+                        "currency": "usd",
+                        "interval": "month",
+                        "interval_count": 1,
+                        "livemode": false,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "tiers": null,
+                        "tiers_mode": null,
+                        "transform_usage": null,
+                        "trial_period_days": null,
+                        "usage_type": "licensed"
+                      },
+                      "price": {
+                        "id": "price_1JkW4A2sOmf47Nz9OWxtnQoG",
+                        "object": "price",
+                        "active": true,
+                        "billing_scheme": "per_unit",
+                        "created": 1634226118,
+                        "currency": "usd",
+                        "livemode": false,
+                        "lookup_key": null,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "recurring": {
+                          "aggregate_usage": null,
+                          "interval": "month",
+                          "interval_count": 1,
+                          "trial_period_days": null,
+                          "usage_type": "licensed"
+                        },
+                        "tax_behavior": "unspecified",
+                        "tiers_mode": null,
+                        "transform_quantity": null,
+                        "type": "recurring",
+                        "unit_amount": 9466,
+                        "unit_amount_decimal": "9466"
+                      },
+                      "quantity": 1,
+                      "subscription": "sub_1JkW4B2sOmf47Nz9H7F8oy4X",
+                      "tax_rates": [
+
+                      ]
+                    }
+                  ],
+                  "has_more": false,
+                  "total_count": 1,
+                  "url": "/v1/subscription_items?subscription=sub_1JkW4B2sOmf47Nz9H7F8oy4X"
+                },
+                "latest_invoice": "in_1JkW4B2sOmf47Nz99kAOQNRU",
+                "livemode": false,
+                "metadata": {
+                },
+                "next_pending_invoice_item_invoice": null,
+                "pause_collection": null,
+                "payment_settings": {
+                  "payment_method_options": null,
+                  "payment_method_types": null
+                },
+                "pending_invoice_item_interval": null,
+                "pending_setup_intent": null,
+                "pending_update": null,
+                "plan": {
+                  "id": "price_1JkW4A2sOmf47Nz9OWxtnQoG",
+                  "object": "plan",
+                  "active": true,
+                  "aggregate_usage": null,
+                  "amount": 9466,
+                  "amount_decimal": "9466",
+                  "billing_scheme": "per_unit",
+                  "created": 1634226118,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {
+                  },
+                  "nickname": null,
+                  "product": "prod_IZQAhb9nLu4jfN",
+                  "tiers": null,
+                  "tiers_mode": null,
+                  "transform_usage": null,
+                  "trial_period_days": null,
+                  "usage_type": "licensed"
+                },
+                "quantity": 1,
+                "schedule": null,
+                "start": 1634226119,
+                "start_date": 1634226119,
+                "status": "incomplete",
+                "tax_percent": null,
+                "transfer_data": null,
+                "trial_end": null,
+                "trial_start": null
+              },
+              {
+                "id": "sub_KDebRcYreXVUnH",
+                "object": "subscription",
+                "application_fee_percent": null,
+                "automatic_tax": {
+                  "enabled": false
+                },
+                "billing": "charge_automatically",
+                "billing_cycle_anchor": 1631532361,
+                "billing_thresholds": null,
+                "cancel_at": 1663068360,
+                "cancel_at_period_end": false,
+                "canceled_at": 1631532361,
+                "collection_method": "charge_automatically",
+                "created": 1631532361,
+                "current_period_end": 1636802761,
+                "current_period_start": 1634124361,
+                "customer": "cus_8Di1wjdVktv5kt",
+                "days_until_due": null,
+                "default_payment_method": "pm_1JZDIP2sOmf47Nz9RVtJc1dz",
+                "default_source": null,
+                "default_tax_rates": [
+
+                ],
+                "discount": null,
+                "ended_at": null,
+                "invoice_customer_balance_settings": {
+                  "consume_applied_balance_on_void": true
+                },
+                "items": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "id": "si_KDebUR1KKDUfV6",
+                      "object": "subscription_item",
+                      "billing_thresholds": null,
+                      "created": 1631532361,
+                      "metadata": {
+                      },
+                      "plan": {
+                        "id": "price_1JZDIS2sOmf47Nz9jK6fXjAN",
+                        "object": "plan",
+                        "active": true,
+                        "aggregate_usage": null,
+                        "amount": 9466,
+                        "amount_decimal": "9466",
+                        "billing_scheme": "per_unit",
+                        "created": 1631532360,
+                        "currency": "usd",
+                        "interval": "month",
+                        "interval_count": 1,
+                        "livemode": false,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "tiers": null,
+                        "tiers_mode": null,
+                        "transform_usage": null,
+                        "trial_period_days": null,
+                        "usage_type": "licensed"
+                      },
+                      "price": {
+                        "id": "price_1JZDIS2sOmf47Nz9jK6fXjAN",
+                        "object": "price",
+                        "active": true,
+                        "billing_scheme": "per_unit",
+                        "created": 1631532360,
+                        "currency": "usd",
+                        "livemode": false,
+                        "lookup_key": null,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "recurring": {
+                          "aggregate_usage": null,
+                          "interval": "month",
+                          "interval_count": 1,
+                          "trial_period_days": null,
+                          "usage_type": "licensed"
+                        },
+                        "tax_behavior": "unspecified",
+                        "tiers_mode": null,
+                        "transform_quantity": null,
+                        "type": "recurring",
+                        "unit_amount": 9466,
+                        "unit_amount_decimal": "9466"
+                      },
+                      "quantity": 1,
+                      "subscription": "sub_KDebRcYreXVUnH",
+                      "tax_rates": [
+
+                      ]
+                    }
+                  ],
+                  "has_more": false,
+                  "total_count": 1,
+                  "url": "/v1/subscription_items?subscription=sub_KDebRcYreXVUnH"
+                },
+                "latest_invoice": "in_1Jk5cF2sOmf47Nz9UrRCYQQP",
+                "livemode": false,
+                "metadata": {
+                },
+                "next_pending_invoice_item_invoice": null,
+                "pause_collection": null,
+                "payment_settings": {
+                  "payment_method_options": null,
+                  "payment_method_types": null
+                },
+                "pending_invoice_item_interval": null,
+                "pending_setup_intent": null,
+                "pending_update": null,
+                "plan": {
+                  "id": "price_1JZDIS2sOmf47Nz9jK6fXjAN",
+                  "object": "plan",
+                  "active": true,
+                  "aggregate_usage": null,
+                  "amount": 9466,
+                  "amount_decimal": "9466",
+                  "billing_scheme": "per_unit",
+                  "created": 1631532360,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {
+                  },
+                  "nickname": null,
+                  "product": "prod_IZQAhb9nLu4jfN",
+                  "tiers": null,
+                  "tiers_mode": null,
+                  "transform_usage": null,
+                  "trial_period_days": null,
+                  "usage_type": "licensed"
+                },
+                "quantity": 1,
+                "schedule": null,
+                "start": 1631532361,
+                "start_date": 1631532361,
+                "status": "active",
+                "tax_percent": null,
+                "transfer_data": null,
+                "trial_end": null,
+                "trial_start": null
+              },
+              {
+                "id": "sub_KDeatKq0nLrE5s",
+                "object": "subscription",
+                "application_fee_percent": null,
+                "automatic_tax": {
+                  "enabled": false
+                },
+                "billing": "charge_automatically",
+                "billing_cycle_anchor": 1631532298,
+                "billing_thresholds": null,
+                "cancel_at": 1663068297,
+                "cancel_at_period_end": false,
+                "canceled_at": 1631532298,
+                "collection_method": "charge_automatically",
+                "created": 1631532298,
+                "current_period_end": 1636802698,
+                "current_period_start": 1634124298,
+                "customer": "cus_8Di1wjdVktv5kt",
+                "days_until_due": null,
+                "default_payment_method": "pm_1JZDHP2sOmf47Nz9SPvppX4K",
+                "default_source": null,
+                "default_tax_rates": [
+
+                ],
+                "discount": null,
+                "ended_at": null,
+                "invoice_customer_balance_settings": {
+                  "consume_applied_balance_on_void": true
+                },
+                "items": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "id": "si_KDea7Zt4pCFPCd",
+                      "object": "subscription_item",
+                      "billing_thresholds": null,
+                      "created": 1631532299,
+                      "metadata": {
+                      },
+                      "plan": {
+                        "id": "price_1JZDHR2sOmf47Nz9BWE3ZEvx",
+                        "object": "plan",
+                        "active": true,
+                        "aggregate_usage": null,
+                        "amount": 9466,
+                        "amount_decimal": "9466",
+                        "billing_scheme": "per_unit",
+                        "created": 1631532297,
+                        "currency": "usd",
+                        "interval": "month",
+                        "interval_count": 1,
+                        "livemode": false,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "tiers": null,
+                        "tiers_mode": null,
+                        "transform_usage": null,
+                        "trial_period_days": null,
+                        "usage_type": "licensed"
+                      },
+                      "price": {
+                        "id": "price_1JZDHR2sOmf47Nz9BWE3ZEvx",
+                        "object": "price",
+                        "active": true,
+                        "billing_scheme": "per_unit",
+                        "created": 1631532297,
+                        "currency": "usd",
+                        "livemode": false,
+                        "lookup_key": null,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "recurring": {
+                          "aggregate_usage": null,
+                          "interval": "month",
+                          "interval_count": 1,
+                          "trial_period_days": null,
+                          "usage_type": "licensed"
+                        },
+                        "tax_behavior": "unspecified",
+                        "tiers_mode": null,
+                        "transform_quantity": null,
+                        "type": "recurring",
+                        "unit_amount": 9466,
+                        "unit_amount_decimal": "9466"
+                      },
+                      "quantity": 1,
+                      "subscription": "sub_KDeatKq0nLrE5s",
+                      "tax_rates": [
+
+                      ]
+                    }
+                  ],
+                  "has_more": false,
+                  "total_count": 1,
+                  "url": "/v1/subscription_items?subscription=sub_KDeatKq0nLrE5s"
+                },
+                "latest_invoice": "in_1Jk5bN2sOmf47Nz9YtlYT2cW",
+                "livemode": false,
+                "metadata": {
+                },
+                "next_pending_invoice_item_invoice": null,
+                "pause_collection": null,
+                "payment_settings": {
+                  "payment_method_options": null,
+                  "payment_method_types": null
+                },
+                "pending_invoice_item_interval": null,
+                "pending_setup_intent": null,
+                "pending_update": null,
+                "plan": {
+                  "id": "price_1JZDHR2sOmf47Nz9BWE3ZEvx",
+                  "object": "plan",
+                  "active": true,
+                  "aggregate_usage": null,
+                  "amount": 9466,
+                  "amount_decimal": "9466",
+                  "billing_scheme": "per_unit",
+                  "created": 1631532297,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {
+                  },
+                  "nickname": null,
+                  "product": "prod_IZQAhb9nLu4jfN",
+                  "tiers": null,
+                  "tiers_mode": null,
+                  "transform_usage": null,
+                  "trial_period_days": null,
+                  "usage_type": "licensed"
+                },
+                "quantity": 1,
+                "schedule": null,
+                "start": 1631532298,
+                "start_date": 1631532298,
+                "status": "active",
+                "tax_percent": null,
+                "transfer_data": null,
+                "trial_end": null,
+                "trial_start": null
+              },
+              {
+                "id": "sub_KDeaVj7yYl0taQ",
+                "object": "subscription",
+                "application_fee_percent": null,
+                "automatic_tax": {
+                  "enabled": false
+                },
+                "billing": "charge_automatically",
+                "billing_cycle_anchor": 1631532268,
+                "billing_thresholds": null,
+                "cancel_at": 1663068267,
+                "cancel_at_period_end": false,
+                "canceled_at": 1631532268,
+                "collection_method": "charge_automatically",
+                "created": 1631532268,
+                "current_period_end": 1636802668,
+                "current_period_start": 1634124268,
+                "customer": "cus_8Di1wjdVktv5kt",
+                "days_until_due": null,
+                "default_payment_method": "pm_1JZDGv2sOmf47Nz9SM0WLRa7",
+                "default_source": null,
+                "default_tax_rates": [
+
+                ],
+                "discount": null,
+                "ended_at": null,
+                "invoice_customer_balance_settings": {
+                  "consume_applied_balance_on_void": true
+                },
+                "items": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "id": "si_KDeakx3Jp75roY",
+                      "object": "subscription_item",
+                      "billing_thresholds": null,
+                      "created": 1631532269,
+                      "metadata": {
+                      },
+                      "plan": {
+                        "id": "price_1JZDGx2sOmf47Nz9nUWex1u2",
+                        "object": "plan",
+                        "active": true,
+                        "aggregate_usage": null,
+                        "amount": 9466,
+                        "amount_decimal": "9466",
+                        "billing_scheme": "per_unit",
+                        "created": 1631532267,
+                        "currency": "usd",
+                        "interval": "month",
+                        "interval_count": 1,
+                        "livemode": false,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "tiers": null,
+                        "tiers_mode": null,
+                        "transform_usage": null,
+                        "trial_period_days": null,
+                        "usage_type": "licensed"
+                      },
+                      "price": {
+                        "id": "price_1JZDGx2sOmf47Nz9nUWex1u2",
+                        "object": "price",
+                        "active": true,
+                        "billing_scheme": "per_unit",
+                        "created": 1631532267,
+                        "currency": "usd",
+                        "livemode": false,
+                        "lookup_key": null,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "recurring": {
+                          "aggregate_usage": null,
+                          "interval": "month",
+                          "interval_count": 1,
+                          "trial_period_days": null,
+                          "usage_type": "licensed"
+                        },
+                        "tax_behavior": "unspecified",
+                        "tiers_mode": null,
+                        "transform_quantity": null,
+                        "type": "recurring",
+                        "unit_amount": 9466,
+                        "unit_amount_decimal": "9466"
+                      },
+                      "quantity": 1,
+                      "subscription": "sub_KDeaVj7yYl0taQ",
+                      "tax_rates": [
+
+                      ]
+                    }
+                  ],
+                  "has_more": false,
+                  "total_count": 1,
+                  "url": "/v1/subscription_items?subscription=sub_KDeaVj7yYl0taQ"
+                },
+                "latest_invoice": "in_1Jk5ab2sOmf47Nz9HGfetsPd",
+                "livemode": false,
+                "metadata": {
+                },
+                "next_pending_invoice_item_invoice": null,
+                "pause_collection": null,
+                "payment_settings": {
+                  "payment_method_options": null,
+                  "payment_method_types": null
+                },
+                "pending_invoice_item_interval": null,
+                "pending_setup_intent": null,
+                "pending_update": null,
+                "plan": {
+                  "id": "price_1JZDGx2sOmf47Nz9nUWex1u2",
+                  "object": "plan",
+                  "active": true,
+                  "aggregate_usage": null,
+                  "amount": 9466,
+                  "amount_decimal": "9466",
+                  "billing_scheme": "per_unit",
+                  "created": 1631532267,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {
+                  },
+                  "nickname": null,
+                  "product": "prod_IZQAhb9nLu4jfN",
+                  "tiers": null,
+                  "tiers_mode": null,
+                  "transform_usage": null,
+                  "trial_period_days": null,
+                  "usage_type": "licensed"
+                },
+                "quantity": 1,
+                "schedule": null,
+                "start": 1631532268,
+                "start_date": 1631532268,
+                "status": "active",
+                "tax_percent": null,
+                "transfer_data": null,
+                "trial_end": null,
+                "trial_start": null
+              },
+              {
+                "id": "sub_KDeToJCqy8AUki",
+                "object": "subscription",
+                "application_fee_percent": null,
+                "automatic_tax": {
+                  "enabled": false
+                },
+                "billing": "charge_automatically",
+                "billing_cycle_anchor": 1631531879,
+                "billing_thresholds": null,
+                "cancel_at": 1663067878,
+                "cancel_at_period_end": false,
+                "canceled_at": 1631531879,
+                "collection_method": "charge_automatically",
+                "created": 1631531879,
+                "current_period_end": 1636802279,
+                "current_period_start": 1634123879,
+                "customer": "cus_8Di1wjdVktv5kt",
+                "days_until_due": null,
+                "default_payment_method": "pm_1JZDAe2sOmf47Nz9bsm9wPFI",
+                "default_source": null,
+                "default_tax_rates": [
+
+                ],
+                "discount": null,
+                "ended_at": null,
+                "invoice_customer_balance_settings": {
+                  "consume_applied_balance_on_void": true
+                },
+                "items": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "id": "si_KDeT8jHdC6UAxx",
+                      "object": "subscription_item",
+                      "billing_thresholds": null,
+                      "created": 1631531880,
+                      "metadata": {
+                      },
+                      "plan": {
+                        "id": "price_1JZDAh2sOmf47Nz9yYZ1jglu",
+                        "object": "plan",
+                        "active": true,
+                        "aggregate_usage": null,
+                        "amount": 9466,
+                        "amount_decimal": "9466",
+                        "billing_scheme": "per_unit",
+                        "created": 1631531879,
+                        "currency": "usd",
+                        "interval": "month",
+                        "interval_count": 1,
+                        "livemode": false,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "tiers": null,
+                        "tiers_mode": null,
+                        "transform_usage": null,
+                        "trial_period_days": null,
+                        "usage_type": "licensed"
+                      },
+                      "price": {
+                        "id": "price_1JZDAh2sOmf47Nz9yYZ1jglu",
+                        "object": "price",
+                        "active": true,
+                        "billing_scheme": "per_unit",
+                        "created": 1631531879,
+                        "currency": "usd",
+                        "livemode": false,
+                        "lookup_key": null,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "recurring": {
+                          "aggregate_usage": null,
+                          "interval": "month",
+                          "interval_count": 1,
+                          "trial_period_days": null,
+                          "usage_type": "licensed"
+                        },
+                        "tax_behavior": "unspecified",
+                        "tiers_mode": null,
+                        "transform_quantity": null,
+                        "type": "recurring",
+                        "unit_amount": 9466,
+                        "unit_amount_decimal": "9466"
+                      },
+                      "quantity": 1,
+                      "subscription": "sub_KDeToJCqy8AUki",
+                      "tax_rates": [
+
+                      ]
+                    }
+                  ],
+                  "has_more": false,
+                  "total_count": 1,
+                  "url": "/v1/subscription_items?subscription=sub_KDeToJCqy8AUki"
+                },
+                "latest_invoice": "in_1Jk5Tj2sOmf47Nz94oD4YTbF",
+                "livemode": false,
+                "metadata": {
+                },
+                "next_pending_invoice_item_invoice": null,
+                "pause_collection": null,
+                "payment_settings": {
+                  "payment_method_options": null,
+                  "payment_method_types": null
+                },
+                "pending_invoice_item_interval": null,
+                "pending_setup_intent": null,
+                "pending_update": null,
+                "plan": {
+                  "id": "price_1JZDAh2sOmf47Nz9yYZ1jglu",
+                  "object": "plan",
+                  "active": true,
+                  "aggregate_usage": null,
+                  "amount": 9466,
+                  "amount_decimal": "9466",
+                  "billing_scheme": "per_unit",
+                  "created": 1631531879,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {
+                  },
+                  "nickname": null,
+                  "product": "prod_IZQAhb9nLu4jfN",
+                  "tiers": null,
+                  "tiers_mode": null,
+                  "transform_usage": null,
+                  "trial_period_days": null,
+                  "usage_type": "licensed"
+                },
+                "quantity": 1,
+                "schedule": null,
+                "start": 1631531879,
+                "start_date": 1631531879,
+                "status": "active",
+                "tax_percent": null,
+                "transfer_data": null,
+                "trial_end": null,
+                "trial_start": null
+              },
+              {
+                "id": "sub_KDePb9wwv9HEXL",
+                "object": "subscription",
+                "application_fee_percent": null,
+                "automatic_tax": {
+                  "enabled": false
+                },
+                "billing": "charge_automatically",
+                "billing_cycle_anchor": 1631531618,
+                "billing_thresholds": null,
+                "cancel_at": 1663067617,
+                "cancel_at_period_end": false,
+                "canceled_at": 1631531618,
+                "collection_method": "charge_automatically",
+                "created": 1631531618,
+                "current_period_end": 1636802018,
+                "current_period_start": 1634123618,
+                "customer": "cus_8Di1wjdVktv5kt",
+                "days_until_due": null,
+                "default_payment_method": "pm_1JZD6R2sOmf47Nz9CVbi40LS",
+                "default_source": null,
+                "default_tax_rates": [
+
+                ],
+                "discount": null,
+                "ended_at": null,
+                "invoice_customer_balance_settings": {
+                  "consume_applied_balance_on_void": true
+                },
+                "items": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "id": "si_KDePymBNRiUzu7",
+                      "object": "subscription_item",
+                      "billing_thresholds": null,
+                      "created": 1631531619,
+                      "metadata": {
+                      },
+                      "plan": {
+                        "id": "price_1JZD6T2sOmf47Nz9eBszbfr3",
+                        "object": "plan",
+                        "active": true,
+                        "aggregate_usage": null,
+                        "amount": 9466,
+                        "amount_decimal": "9466",
+                        "billing_scheme": "per_unit",
+                        "created": 1631531617,
+                        "currency": "usd",
+                        "interval": "month",
+                        "interval_count": 1,
+                        "livemode": false,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "tiers": null,
+                        "tiers_mode": null,
+                        "transform_usage": null,
+                        "trial_period_days": null,
+                        "usage_type": "licensed"
+                      },
+                      "price": {
+                        "id": "price_1JZD6T2sOmf47Nz9eBszbfr3",
+                        "object": "price",
+                        "active": true,
+                        "billing_scheme": "per_unit",
+                        "created": 1631531617,
+                        "currency": "usd",
+                        "livemode": false,
+                        "lookup_key": null,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "recurring": {
+                          "aggregate_usage": null,
+                          "interval": "month",
+                          "interval_count": 1,
+                          "trial_period_days": null,
+                          "usage_type": "licensed"
+                        },
+                        "tax_behavior": "unspecified",
+                        "tiers_mode": null,
+                        "transform_quantity": null,
+                        "type": "recurring",
+                        "unit_amount": 9466,
+                        "unit_amount_decimal": "9466"
+                      },
+                      "quantity": 1,
+                      "subscription": "sub_KDePb9wwv9HEXL",
+                      "tax_rates": [
+
+                      ]
+                    }
+                  ],
+                  "has_more": false,
+                  "total_count": 1,
+                  "url": "/v1/subscription_items?subscription=sub_KDePb9wwv9HEXL"
+                },
+                "latest_invoice": "in_1Jk5Q92sOmf47Nz9EPwy8dVf",
+                "livemode": false,
+                "metadata": {
+                },
+                "next_pending_invoice_item_invoice": null,
+                "pause_collection": null,
+                "payment_settings": {
+                  "payment_method_options": null,
+                  "payment_method_types": null
+                },
+                "pending_invoice_item_interval": null,
+                "pending_setup_intent": null,
+                "pending_update": null,
+                "plan": {
+                  "id": "price_1JZD6T2sOmf47Nz9eBszbfr3",
+                  "object": "plan",
+                  "active": true,
+                  "aggregate_usage": null,
+                  "amount": 9466,
+                  "amount_decimal": "9466",
+                  "billing_scheme": "per_unit",
+                  "created": 1631531617,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {
+                  },
+                  "nickname": null,
+                  "product": "prod_IZQAhb9nLu4jfN",
+                  "tiers": null,
+                  "tiers_mode": null,
+                  "transform_usage": null,
+                  "trial_period_days": null,
+                  "usage_type": "licensed"
+                },
+                "quantity": 1,
+                "schedule": null,
+                "start": 1631531618,
+                "start_date": 1631531618,
+                "status": "active",
+                "tax_percent": null,
+                "transfer_data": null,
+                "trial_end": null,
+                "trial_start": null
+              },
+              {
+                "id": "sub_KDcntUY1yaA3Fc",
+                "object": "subscription",
+                "application_fee_percent": null,
+                "automatic_tax": {
+                  "enabled": false
+                },
+                "billing": "charge_automatically",
+                "billing_cycle_anchor": 1631525640,
+                "billing_thresholds": null,
+                "cancel_at": 1663061639,
+                "cancel_at_period_end": false,
+                "canceled_at": 1631525640,
+                "collection_method": "charge_automatically",
+                "created": 1631525640,
+                "current_period_end": 1636796040,
+                "current_period_start": 1634117640,
+                "customer": "cus_8Di1wjdVktv5kt",
+                "days_until_due": null,
+                "default_payment_method": "pm_1JZBY02sOmf47Nz9cujVPxe4",
+                "default_source": null,
+                "default_tax_rates": [
+
+                ],
+                "discount": null,
+                "ended_at": null,
+                "invoice_customer_balance_settings": {
+                  "consume_applied_balance_on_void": true
+                },
+                "items": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "id": "si_KDcn9Ud8rYiNXU",
+                      "object": "subscription_item",
+                      "billing_thresholds": null,
+                      "created": 1631525641,
+                      "metadata": {
+                      },
+                      "plan": {
+                        "id": "price_1JZBY32sOmf47Nz9ifmaJSjX",
+                        "object": "plan",
+                        "active": true,
+                        "aggregate_usage": null,
+                        "amount": 9466,
+                        "amount_decimal": "9466",
+                        "billing_scheme": "per_unit",
+                        "created": 1631525639,
+                        "currency": "usd",
+                        "interval": "month",
+                        "interval_count": 1,
+                        "livemode": false,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "tiers": null,
+                        "tiers_mode": null,
+                        "transform_usage": null,
+                        "trial_period_days": null,
+                        "usage_type": "licensed"
+                      },
+                      "price": {
+                        "id": "price_1JZBY32sOmf47Nz9ifmaJSjX",
+                        "object": "price",
+                        "active": true,
+                        "billing_scheme": "per_unit",
+                        "created": 1631525639,
+                        "currency": "usd",
+                        "livemode": false,
+                        "lookup_key": null,
+                        "metadata": {
+                        },
+                        "nickname": null,
+                        "product": "prod_IZQAhb9nLu4jfN",
+                        "recurring": {
+                          "aggregate_usage": null,
+                          "interval": "month",
+                          "interval_count": 1,
+                          "trial_period_days": null,
+                          "usage_type": "licensed"
+                        },
+                        "tax_behavior": "unspecified",
+                        "tiers_mode": null,
+                        "transform_quantity": null,
+                        "type": "recurring",
+                        "unit_amount": 9466,
+                        "unit_amount_decimal": "9466"
+                      },
+                      "quantity": 1,
+                      "subscription": "sub_KDcntUY1yaA3Fc",
+                      "tax_rates": [
+
+                      ]
+                    }
+                  ],
+                  "has_more": false,
+                  "total_count": 1,
+                  "url": "/v1/subscription_items?subscription=sub_KDcntUY1yaA3Fc"
+                },
+                "latest_invoice": "in_1Jk3rN2sOmf47Nz9RqBSO0Dg",
+                "livemode": false,
+                "metadata": {
+                },
+                "next_pending_invoice_item_invoice": null,
+                "pause_collection": null,
+                "payment_settings": {
+                  "payment_method_options": null,
+                  "payment_method_types": null
+                },
+                "pending_invoice_item_interval": null,
+                "pending_setup_intent": null,
+                "pending_update": null,
+                "plan": {
+                  "id": "price_1JZBY32sOmf47Nz9ifmaJSjX",
+                  "object": "plan",
+                  "active": true,
+                  "aggregate_usage": null,
+                  "amount": 9466,
+                  "amount_decimal": "9466",
+                  "billing_scheme": "per_unit",
+                  "created": 1631525639,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {
+                  },
+                  "nickname": null,
+                  "product": "prod_IZQAhb9nLu4jfN",
+                  "tiers": null,
+                  "tiers_mode": null,
+                  "transform_usage": null,
+                  "trial_period_days": null,
+                  "usage_type": "licensed"
+                },
+                "quantity": 1,
+                "schedule": null,
+                "start": 1631525640,
+                "start_date": 1631525640,
+                "status": "active",
+                "tax_percent": null,
+                "transfer_data": null,
+                "trial_end": null,
+                "trial_start": null
+              }
+            ],
+            "has_more": true,
+            "total_count": 199,
+            "url": "/v1/customers/cus_8Di1wjdVktv5kt/subscriptions"
+          },
+          "tax_exempt": "none",
+          "tax_ids": {
+            "object": "list",
+            "data": [
+
+            ],
+            "has_more": false,
+            "total_count": 0,
+            "url": "/v1/customers/cus_8Di1wjdVktv5kt/tax_ids"
+          },
+          "tax_info": null,
+          "tax_info_verification": null
+        }
+  recorded_at: Thu, 14 Oct 2021 15:59:55 GMT
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/prices
+    body:
+      encoding: UTF-8
+      string: unit_amount=9466&currency=usd&product=prod_IZQAhb9nLu4jfN&recurring[interval]=month&recurring[interval_count]=1
+    headers:
+      User-Agent:
+      - Stripe/v1 RubyBindings/5.29.0
+      Authorization:
+      - Bearer sk_test_testfaketestfaketestfake
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-Telemetry:
+      - '{"last_request_metrics":{"request_id":"req_97UZMKjbUaevgC","request_duration_ms":896}}'
+      Stripe-Version:
+      - '2019-08-14'
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"5.29.0","lang":"ruby","lang_version":"2.6.7 p197 (2021-04-05)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 5.14.11-arch1-1 (linux@archlinux) (gcc (GCC) 11.1.0, GNU ld (GNU Binutils)
+        2.36.1) #1 SMP PREEMPT Sun, 10 Oct 2021 00:48:26 +0000","hostname":"Sylvain-desktop"}'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 14 Oct 2021 15:59:56 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '607'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_hpvmHqBRhnRALa
+      Stripe-Version:
+      - '2019-08-14'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "price_1JkWLY2sOmf47Nz9qBznWZ1L",
+          "object": "price",
+          "active": true,
+          "billing_scheme": "per_unit",
+          "created": 1634227196,
+          "currency": "usd",
+          "livemode": false,
+          "lookup_key": null,
+          "metadata": {
+          },
+          "nickname": null,
+          "product": "prod_IZQAhb9nLu4jfN",
+          "recurring": {
+            "aggregate_usage": null,
+            "interval": "month",
+            "interval_count": 1,
+            "trial_period_days": null,
+            "usage_type": "licensed"
+          },
+          "tax_behavior": "unspecified",
+          "tiers_mode": null,
+          "transform_quantity": null,
+          "type": "recurring",
+          "unit_amount": 9466,
+          "unit_amount_decimal": "9466"
+        }
+  recorded_at: Thu, 14 Oct 2021 15:59:56 GMT
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/prices
+    body:
+      encoding: UTF-8
+      string: unit_amount=8&currency=usd&product=prod_IZQAhb9nLu4jfN&nickname=Price+adjustment+for+payment+schedule+
+    headers:
+      User-Agent:
+      - Stripe/v1 RubyBindings/5.29.0
+      Authorization:
+      - Bearer sk_test_testfaketestfaketestfake
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-Telemetry:
+      - '{"last_request_metrics":{"request_id":"req_hpvmHqBRhnRALa","request_duration_ms":457}}'
+      Stripe-Version:
+      - '2019-08-14'
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"5.29.0","lang":"ruby","lang_version":"2.6.7 p197 (2021-04-05)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 5.14.11-arch1-1 (linux@archlinux) (gcc (GCC) 11.1.0, GNU ld (GNU Binutils)
+        2.36.1) #1 SMP PREEMPT Sun, 10 Oct 2021 00:48:26 +0000","hostname":"Sylvain-desktop"}'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 14 Oct 2021 15:59:56 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '495'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_LbbugttwDGhJwk
+      Stripe-Version:
+      - '2019-08-14'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "price_1JkWLY2sOmf47Nz9zvSdP7uw",
+          "object": "price",
+          "active": true,
+          "billing_scheme": "per_unit",
+          "created": 1634227196,
+          "currency": "usd",
+          "livemode": false,
+          "lookup_key": null,
+          "metadata": {
+          },
+          "nickname": "Price adjustment for payment schedule",
+          "product": "prod_IZQAhb9nLu4jfN",
+          "recurring": null,
+          "tax_behavior": "unspecified",
+          "tiers_mode": null,
+          "transform_quantity": null,
+          "type": "one_time",
+          "unit_amount": 8,
+          "unit_amount_decimal": "8"
+        }
+  recorded_at: Thu, 14 Oct 2021 15:59:56 GMT
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/subscriptions
+    body:
+      encoding: UTF-8
+      string: customer=cus_8Di1wjdVktv5kt&cancel_at=1665763195&add_invoice_items[0][price]=price_1JkWLY2sOmf47Nz9zvSdP7uw&items[0][price]=price_1JkWLY2sOmf47Nz9qBznWZ1L&default_payment_method=pm_1JkWLV2sOmf47Nz9xRAxhRsO&expand[0]=latest_invoice.payment_intent
+    headers:
+      User-Agent:
+      - Stripe/v1 RubyBindings/5.29.0
+      Authorization:
+      - Bearer sk_test_testfaketestfaketestfake
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-Telemetry:
+      - '{"last_request_metrics":{"request_id":"req_LbbugttwDGhJwk","request_duration_ms":412}}'
+      Stripe-Version:
+      - '2019-08-14'
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"5.29.0","lang":"ruby","lang_version":"2.6.7 p197 (2021-04-05)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 5.14.11-arch1-1 (linux@archlinux) (gcc (GCC) 11.1.0, GNU ld (GNU Binutils)
+        2.36.1) #1 SMP PREEMPT Sun, 10 Oct 2021 00:48:26 +0000","hostname":"Sylvain-desktop"}'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 14 Oct 2021 15:59:59 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '12766'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_GRcz5UM9Yt2ThF
+      Stripe-Version:
+      - '2019-08-14'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains; preload
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        ewogICJpZCI6ICJzdWJfMUprV0xaMnNPbWY0N056OXcybktmZUVLIiwKICAib2JqZWN0IjogInN1YnNjcmlwdGlvbiIsCiAgImFwcGxpY2F0aW9uX2ZlZV9wZXJjZW50IjogbnVsbCwKICAiYXV0b21hdGljX3RheCI6IHsKICAgICJlbmFibGVkIjogZmFsc2UKICB9LAogICJiaWxsaW5nIjogImNoYXJnZV9hdXRvbWF0aWNhbGx5IiwKICAiYmlsbGluZ19jeWNsZV9hbmNob3IiOiAxNjM0MjI3MTk3LAogICJiaWxsaW5nX3RocmVzaG9sZHMiOiBudWxsLAogICJjYW5jZWxfYXQiOiAxNjY1NzYzMTk1LAogICJjYW5jZWxfYXRfcGVyaW9kX2VuZCI6IGZhbHNlLAogICJjYW5jZWxlZF9hdCI6IDE2MzQyMjcxOTcsCiAgImNvbGxlY3Rpb25fbWV0aG9kIjogImNoYXJnZV9hdXRvbWF0aWNhbGx5IiwKICAiY3JlYXRlZCI6IDE2MzQyMjcxOTcsCiAgImN1cnJlbnRfcGVyaW9kX2VuZCI6IDE2MzY5MDU1OTcsCiAgImN1cnJlbnRfcGVyaW9kX3N0YXJ0IjogMTYzNDIyNzE5NywKICAiY3VzdG9tZXIiOiAiY3VzXzhEaTF3amRWa3R2NWt0IiwKICAiZGF5c191bnRpbF9kdWUiOiBudWxsLAogICJkZWZhdWx0X3BheW1lbnRfbWV0aG9kIjogInBtXzFKa1dMVjJzT21mNDdOejl4UkF4aFJzTyIsCiAgImRlZmF1bHRfc291cmNlIjogbnVsbCwKICAiZGVmYXVsdF90YXhfcmF0ZXMiOiBbCgogIF0sCiAgImRpc2NvdW50IjogbnVsbCwKICAiZW5kZWRfYXQiOiBudWxsLAogICJpbnZvaWNlX2N1c3RvbWVyX2JhbGFuY2Vfc2V0dGluZ3MiOiB7CiAgICAiY29uc3VtZV9hcHBsaWVkX2JhbGFuY2Vfb25fdm9pZCI6IHRydWUKICB9LAogICJpdGVtcyI6IHsKICAgICJvYmplY3QiOiAibGlzdCIsCiAgICAiZGF0YSI6IFsKICAgICAgewogICAgICAgICJpZCI6ICJzaV9LUEwxTVg5UmFjcG9sTSIsCiAgICAgICAgIm9iamVjdCI6ICJzdWJzY3JpcHRpb25faXRlbSIsCiAgICAgICAgImJpbGxpbmdfdGhyZXNob2xkcyI6IG51bGwsCiAgICAgICAgImNyZWF0ZWQiOiAxNjM0MjI3MTk3LAogICAgICAgICJtZXRhZGF0YSI6IHsKICAgICAgICB9LAogICAgICAgICJwbGFuIjogewogICAgICAgICAgImlkIjogInByaWNlXzFKa1dMWTJzT21mNDdOejlxQnpuV1oxTCIsCiAgICAgICAgICAib2JqZWN0IjogInBsYW4iLAogICAgICAgICAgImFjdGl2ZSI6IHRydWUsCiAgICAgICAgICAiYWdncmVnYXRlX3VzYWdlIjogbnVsbCwKICAgICAgICAgICJhbW91bnQiOiA5NDY2LAogICAgICAgICAgImFtb3VudF9kZWNpbWFsIjogIjk0NjYiLAogICAgICAgICAgImJpbGxpbmdfc2NoZW1lIjogInBlcl91bml0IiwKICAgICAgICAgICJjcmVhdGVkIjogMTYzNDIyNzE5NiwKICAgICAgICAgICJjdXJyZW5jeSI6ICJ1c2QiLAogICAgICAgICAgImludGVydmFsIjogIm1vbnRoIiwKICAgICAgICAgICJpbnRlcnZhbF9jb3VudCI6IDEsCiAgICAgICAgICAibGl2ZW1vZGUiOiBmYWxzZSwKICAgICAgICAgICJtZXRhZGF0YSI6IHsKICAgICAgICAgIH0sCiAgICAgICAgICAibmlja25hbWUiOiBudWxsLAogICAgICAgICAgInByb2R1Y3QiOiAicHJvZF9JWlFBaGI5bkx1NGpmTiIsCiAgICAgICAgICAidGllcnMiOiBudWxsLAogICAgICAgICAgInRpZXJzX21vZGUiOiBudWxsLAogICAgICAgICAgInRyYW5zZm9ybV91c2FnZSI6IG51bGwsCiAgICAgICAgICAidHJpYWxfcGVyaW9kX2RheXMiOiBudWxsLAogICAgICAgICAgInVzYWdlX3R5cGUiOiAibGljZW5zZWQiCiAgICAgICAgfSwKICAgICAgICAicHJpY2UiOiB7CiAgICAgICAgICAiaWQiOiAicHJpY2VfMUprV0xZMnNPbWY0N056OXFCem5XWjFMIiwKICAgICAgICAgICJvYmplY3QiOiAicHJpY2UiLAogICAgICAgICAgImFjdGl2ZSI6IHRydWUsCiAgICAgICAgICAiYmlsbGluZ19zY2hlbWUiOiAicGVyX3VuaXQiLAogICAgICAgICAgImNyZWF0ZWQiOiAxNjM0MjI3MTk2LAogICAgICAgICAgImN1cnJlbmN5IjogInVzZCIsCiAgICAgICAgICAibGl2ZW1vZGUiOiBmYWxzZSwKICAgICAgICAgICJsb29rdXBfa2V5IjogbnVsbCwKICAgICAgICAgICJtZXRhZGF0YSI6IHsKICAgICAgICAgIH0sCiAgICAgICAgICAibmlja25hbWUiOiBudWxsLAogICAgICAgICAgInByb2R1Y3QiOiAicHJvZF9JWlFBaGI5bkx1NGpmTiIsCiAgICAgICAgICAicmVjdXJyaW5nIjogewogICAgICAgICAgICAiYWdncmVnYXRlX3VzYWdlIjogbnVsbCwKICAgICAgICAgICAgImludGVydmFsIjogIm1vbnRoIiwKICAgICAgICAgICAgImludGVydmFsX2NvdW50IjogMSwKICAgICAgICAgICAgInRyaWFsX3BlcmlvZF9kYXlzIjogbnVsbCwKICAgICAgICAgICAgInVzYWdlX3R5cGUiOiAibGljZW5zZWQiCiAgICAgICAgICB9LAogICAgICAgICAgInRheF9iZWhhdmlvciI6ICJ1bnNwZWNpZmllZCIsCiAgICAgICAgICAidGllcnNfbW9kZSI6IG51bGwsCiAgICAgICAgICAidHJhbnNmb3JtX3F1YW50aXR5IjogbnVsbCwKICAgICAgICAgICJ0eXBlIjogInJlY3VycmluZyIsCiAgICAgICAgICAidW5pdF9hbW91bnQiOiA5NDY2LAogICAgICAgICAgInVuaXRfYW1vdW50X2RlY2ltYWwiOiAiOTQ2NiIKICAgICAgICB9LAogICAgICAgICJxdWFudGl0eSI6IDEsCiAgICAgICAgInN1YnNjcmlwdGlvbiI6ICJzdWJfMUprV0xaMnNPbWY0N056OXcybktmZUVLIiwKICAgICAgICAidGF4X3JhdGVzIjogWwoKICAgICAgICBdCiAgICAgIH0KICAgIF0sCiAgICAiaGFzX21vcmUiOiBmYWxzZSwKICAgICJ0b3RhbF9jb3VudCI6IDEsCiAgICAidXJsIjogIi92MS9zdWJzY3JpcHRpb25faXRlbXM/c3Vic2NyaXB0aW9uPXN1Yl8xSmtXTFoyc09tZjQ3Tno5dzJuS2ZlRUsiCiAgfSwKICAibGF0ZXN0X2ludm9pY2UiOiB7CiAgICAiaWQiOiAiaW5fMUprV0xaMnNPbWY0N056OUc3cFh6QlhtIiwKICAgICJvYmplY3QiOiAiaW52b2ljZSIsCiAgICAiYWNjb3VudF9jb3VudHJ5IjogIkZSIiwKICAgICJhY2NvdW50X25hbWUiOiAiU2xlZWRlIiwKICAgICJhY2NvdW50X3RheF9pZHMiOiBudWxsLAogICAgImFtb3VudF9kdWUiOiA5NDc0LAogICAgImFtb3VudF9wYWlkIjogMCwKICAgICJhbW91bnRfcmVtYWluaW5nIjogOTQ3NCwKICAgICJhcHBsaWNhdGlvbl9mZWVfYW1vdW50IjogbnVsbCwKICAgICJhdHRlbXB0X2NvdW50IjogMCwKICAgICJhdHRlbXB0ZWQiOiB0cnVlLAogICAgImF1dG9fYWR2YW5jZSI6IHRydWUsCiAgICAiYXV0b21hdGljX3RheCI6IHsKICAgICAgImVuYWJsZWQiOiBmYWxzZSwKICAgICAgInN0YXR1cyI6IG51bGwKICAgIH0sCiAgICAiYmlsbGluZyI6ICJjaGFyZ2VfYXV0b21hdGljYWxseSIsCiAgICAiYmlsbGluZ19yZWFzb24iOiAic3Vic2NyaXB0aW9uX2NyZWF0ZSIsCiAgICAiY2hhcmdlIjogbnVsbCwKICAgICJjb2xsZWN0aW9uX21ldGhvZCI6ICJjaGFyZ2VfYXV0b21hdGljYWxseSIsCiAgICAiY3JlYXRlZCI6IDE2MzQyMjcxOTcsCiAgICAiY3VycmVuY3kiOiAidXNkIiwKICAgICJjdXN0b21fZmllbGRzIjogbnVsbCwKICAgICJjdXN0b21lciI6ICJjdXNfOERpMXdqZFZrdHY1a3QiLAogICAgImN1c3RvbWVyX2FkZHJlc3MiOiBudWxsLAogICAgImN1c3RvbWVyX2VtYWlsIjogImplYW4uZHVwb25kQGdtYWlsLmNvbSIsCiAgICAiY3VzdG9tZXJfbmFtZSI6IG51bGwsCiAgICAiY3VzdG9tZXJfcGhvbmUiOiBudWxsLAogICAgImN1c3RvbWVyX3NoaXBwaW5nIjogbnVsbCwKICAgICJjdXN0b21lcl90YXhfZXhlbXB0IjogIm5vbmUiLAogICAgImN1c3RvbWVyX3RheF9pZHMiOiBbCgogICAgXSwKICAgICJkZWZhdWx0X3BheW1lbnRfbWV0aG9kIjogbnVsbCwKICAgICJkZWZhdWx0X3NvdXJjZSI6IG51bGwsCiAgICAiZGVmYXVsdF90YXhfcmF0ZXMiOiBbCgogICAgXSwKICAgICJkZXNjcmlwdGlvbiI6IG51bGwsCiAgICAiZGlzY291bnQiOiBudWxsLAogICAgImRpc2NvdW50cyI6IFsKCiAgICBdLAogICAgImR1ZV9kYXRlIjogbnVsbCwKICAgICJlbmRpbmdfYmFsYW5jZSI6IDAsCiAgICAiZm9vdGVyIjogbnVsbCwKICAgICJob3N0ZWRfaW52b2ljZV91cmwiOiAiaHR0cHM6Ly9pbnZvaWNlLnN0cmlwZS5jb20vaS9hY2N0XzEwM3JFNjJzT21mNDdOejkvdGVzdF9ZV05qZEY4eE1ETnlSVFl5YzA5dFpqUTNUbm81TEY5TFVFd3hjRGg2WWtodFUxaG9VVE53TmpNNVNtZFBOVTl1VGtOdFVUTnkwMTAwS0ZCemVyQ3MiLAogICAgImludm9pY2VfcGRmIjogImh0dHBzOi8vcGF5LnN0cmlwZS5jb20vaW52b2ljZS9hY2N0XzEwM3JFNjJzT21mNDdOejkvdGVzdF9ZV05qZEY4eE1ETnlSVFl5YzA5dFpqUTNUbm81TEY5TFVFd3hjRGg2WWtodFUxaG9VVE53TmpNNVNtZFBOVTl1VGtOdFVUTnkwMTAwS0ZCemVyQ3MvcGRmIiwKICAgICJsYXN0X2ZpbmFsaXphdGlvbl9lcnJvciI6IG51bGwsCiAgICAibGluZXMiOiB7CiAgICAgICJvYmplY3QiOiAibGlzdCIsCiAgICAgICJkYXRhIjogWwogICAgICAgIHsKICAgICAgICAgICJpZCI6ICJpaV8xSmtXTFoyc09tZjQ3Tno5RGdWMnVGZ3YiLAogICAgICAgICAgIm9iamVjdCI6ICJsaW5lX2l0ZW0iLAogICAgICAgICAgImFtb3VudCI6IDgsCiAgICAgICAgICAiY3VycmVuY3kiOiAidXNkIiwKICAgICAgICAgICJkZXNjcmlwdGlvbiI6ICJBYm9ubmVtZW50IG1lbnN1YWxpc2FibGUgLSBzdGFuZGFyZCwgYXNzb2NpYXRpb24sIHllYXIiLAogICAgICAgICAgImRpc2NvdW50X2Ftb3VudHMiOiBbCgogICAgICAgICAgXSwKICAgICAgICAgICJkaXNjb3VudGFibGUiOiB0cnVlLAogICAgICAgICAgImRpc2NvdW50cyI6IFsKCiAgICAgICAgICBdLAogICAgICAgICAgImludm9pY2VfaXRlbSI6ICJpaV8xSmtXTFoyc09tZjQ3Tno5RGdWMnVGZ3YiLAogICAgICAgICAgImxpdmVtb2RlIjogZmFsc2UsCiAgICAgICAgICAibWV0YWRhdGEiOiB7CiAgICAgICAgICB9LAogICAgICAgICAgInBlcmlvZCI6IHsKICAgICAgICAgICAgImVuZCI6IDE2MzY5MDU1OTcsCiAgICAgICAgICAgICJzdGFydCI6IDE2MzQyMjcxOTcKICAgICAgICAgIH0sCiAgICAgICAgICAicGxhbiI6IG51bGwsCiAgICAgICAgICAicHJpY2UiOiB7CiAgICAgICAgICAgICJpZCI6ICJwcmljZV8xSmtXTFkyc09tZjQ3Tno5enZTZFA3dXciLAogICAgICAgICAgICAib2JqZWN0IjogInByaWNlIiwKICAgICAgICAgICAgImFjdGl2ZSI6IHRydWUsCiAgICAgICAgICAgICJiaWxsaW5nX3NjaGVtZSI6ICJwZXJfdW5pdCIsCiAgICAgICAgICAgICJjcmVhdGVkIjogMTYzNDIyNzE5NiwKICAgICAgICAgICAgImN1cnJlbmN5IjogInVzZCIsCiAgICAgICAgICAgICJsaXZlbW9kZSI6IGZhbHNlLAogICAgICAgICAgICAibG9va3VwX2tleSI6IG51bGwsCiAgICAgICAgICAgICJtZXRhZGF0YSI6IHsKICAgICAgICAgICAgfSwKICAgICAgICAgICAgIm5pY2tuYW1lIjogIlByaWNlIGFkanVzdG1lbnQgZm9yIHBheW1lbnQgc2NoZWR1bGUiLAogICAgICAgICAgICAicHJvZHVjdCI6ICJwcm9kX0laUUFoYjluTHU0amZOIiwKICAgICAgICAgICAgInJlY3VycmluZyI6IG51bGwsCiAgICAgICAgICAgICJ0YXhfYmVoYXZpb3IiOiAidW5zcGVjaWZpZWQiLAogICAgICAgICAgICAidGllcnNfbW9kZSI6IG51bGwsCiAgICAgICAgICAgICJ0cmFuc2Zvcm1fcXVhbnRpdHkiOiBudWxsLAogICAgICAgICAgICAidHlwZSI6ICJvbmVfdGltZSIsCiAgICAgICAgICAgICJ1bml0X2Ftb3VudCI6IDgsCiAgICAgICAgICAgICJ1bml0X2Ftb3VudF9kZWNpbWFsIjogIjgiCiAgICAgICAgICB9LAogICAgICAgICAgInByb3JhdGlvbiI6IGZhbHNlLAogICAgICAgICAgInF1YW50aXR5IjogMSwKICAgICAgICAgICJzdWJzY3JpcHRpb24iOiAic3ViXzFKa1dMWjJzT21mNDdOejl3Mm5LZmVFSyIsCiAgICAgICAgICAidGF4X2Ftb3VudHMiOiBbCgogICAgICAgICAgXSwKICAgICAgICAgICJ0YXhfcmF0ZXMiOiBbCgogICAgICAgICAgXSwKICAgICAgICAgICJ0eXBlIjogImludm9pY2VpdGVtIiwKICAgICAgICAgICJ1bmlxdWVfaWQiOiAiaWxfMUprV0xaMnNPbWY0N056OVNvNDh6SHQ2IgogICAgICAgIH0sCiAgICAgICAgewogICAgICAgICAgImlkIjogInNsaV8xM2M3NDEyc09tZjQ3Tno5ZjRjMzA3MzQiLAogICAgICAgICAgIm9iamVjdCI6ICJsaW5lX2l0ZW0iLAogICAgICAgICAgImFtb3VudCI6IDk0NjYsCiAgICAgICAgICAiY3VycmVuY3kiOiAidXNkIiwKICAgICAgICAgICJkZXNjcmlwdGlvbiI6ICIxIMOXIEFib25uZW1lbnQgbWVuc3VhbGlzYWJsZSAtIHN0YW5kYXJkLCBhc3NvY2lhdGlvbiwgeWVhciAoYXQgJDk0LjY2IC8gbW9udGgpIiwKICAgICAgICAgICJkaXNjb3VudF9hbW91bnRzIjogWwoKICAgICAgICAgIF0sCiAgICAgICAgICAiZGlzY291bnRhYmxlIjogdHJ1ZSwKICAgICAgICAgICJkaXNjb3VudHMiOiBbCgogICAgICAgICAgXSwKICAgICAgICAgICJsaXZlbW9kZSI6IGZhbHNlLAogICAgICAgICAgIm1ldGFkYXRhIjogewogICAgICAgICAgfSwKICAgICAgICAgICJwZXJpb2QiOiB7CiAgICAgICAgICAgICJlbmQiOiAxNjM2OTA1NTk3LAogICAgICAgICAgICAic3RhcnQiOiAxNjM0MjI3MTk3CiAgICAgICAgICB9LAogICAgICAgICAgInBsYW4iOiB7CiAgICAgICAgICAgICJpZCI6ICJwcmljZV8xSmtXTFkyc09tZjQ3Tno5cUJ6bldaMUwiLAogICAgICAgICAgICAib2JqZWN0IjogInBsYW4iLAogICAgICAgICAgICAiYWN0aXZlIjogdHJ1ZSwKICAgICAgICAgICAgImFnZ3JlZ2F0ZV91c2FnZSI6IG51bGwsCiAgICAgICAgICAgICJhbW91bnQiOiA5NDY2LAogICAgICAgICAgICAiYW1vdW50X2RlY2ltYWwiOiAiOTQ2NiIsCiAgICAgICAgICAgICJiaWxsaW5nX3NjaGVtZSI6ICJwZXJfdW5pdCIsCiAgICAgICAgICAgICJjcmVhdGVkIjogMTYzNDIyNzE5NiwKICAgICAgICAgICAgImN1cnJlbmN5IjogInVzZCIsCiAgICAgICAgICAgICJpbnRlcnZhbCI6ICJtb250aCIsCiAgICAgICAgICAgICJpbnRlcnZhbF9jb3VudCI6IDEsCiAgICAgICAgICAgICJsaXZlbW9kZSI6IGZhbHNlLAogICAgICAgICAgICAibWV0YWRhdGEiOiB7CiAgICAgICAgICAgIH0sCiAgICAgICAgICAgICJuaWNrbmFtZSI6IG51bGwsCiAgICAgICAgICAgICJwcm9kdWN0IjogInByb2RfSVpRQWhiOW5MdTRqZk4iLAogICAgICAgICAgICAidGllcnMiOiBudWxsLAogICAgICAgICAgICAidGllcnNfbW9kZSI6IG51bGwsCiAgICAgICAgICAgICJ0cmFuc2Zvcm1fdXNhZ2UiOiBudWxsLAogICAgICAgICAgICAidHJpYWxfcGVyaW9kX2RheXMiOiBudWxsLAogICAgICAgICAgICAidXNhZ2VfdHlwZSI6ICJsaWNlbnNlZCIKICAgICAgICAgIH0sCiAgICAgICAgICAicHJpY2UiOiB7CiAgICAgICAgICAgICJpZCI6ICJwcmljZV8xSmtXTFkyc09tZjQ3Tno5cUJ6bldaMUwiLAogICAgICAgICAgICAib2JqZWN0IjogInByaWNlIiwKICAgICAgICAgICAgImFjdGl2ZSI6IHRydWUsCiAgICAgICAgICAgICJiaWxsaW5nX3NjaGVtZSI6ICJwZXJfdW5pdCIsCiAgICAgICAgICAgICJjcmVhdGVkIjogMTYzNDIyNzE5NiwKICAgICAgICAgICAgImN1cnJlbmN5IjogInVzZCIsCiAgICAgICAgICAgICJsaXZlbW9kZSI6IGZhbHNlLAogICAgICAgICAgICAibG9va3VwX2tleSI6IG51bGwsCiAgICAgICAgICAgICJtZXRhZGF0YSI6IHsKICAgICAgICAgICAgfSwKICAgICAgICAgICAgIm5pY2tuYW1lIjogbnVsbCwKICAgICAgICAgICAgInByb2R1Y3QiOiAicHJvZF9JWlFBaGI5bkx1NGpmTiIsCiAgICAgICAgICAgICJyZWN1cnJpbmciOiB7CiAgICAgICAgICAgICAgImFnZ3JlZ2F0ZV91c2FnZSI6IG51bGwsCiAgICAgICAgICAgICAgImludGVydmFsIjogIm1vbnRoIiwKICAgICAgICAgICAgICAiaW50ZXJ2YWxfY291bnQiOiAxLAogICAgICAgICAgICAgICJ0cmlhbF9wZXJpb2RfZGF5cyI6IG51bGwsCiAgICAgICAgICAgICAgInVzYWdlX3R5cGUiOiAibGljZW5zZWQiCiAgICAgICAgICAgIH0sCiAgICAgICAgICAgICJ0YXhfYmVoYXZpb3IiOiAidW5zcGVjaWZpZWQiLAogICAgICAgICAgICAidGllcnNfbW9kZSI6IG51bGwsCiAgICAgICAgICAgICJ0cmFuc2Zvcm1fcXVhbnRpdHkiOiBudWxsLAogICAgICAgICAgICAidHlwZSI6ICJyZWN1cnJpbmciLAogICAgICAgICAgICAidW5pdF9hbW91bnQiOiA5NDY2LAogICAgICAgICAgICAidW5pdF9hbW91bnRfZGVjaW1hbCI6ICI5NDY2IgogICAgICAgICAgfSwKICAgICAgICAgICJwcm9yYXRpb24iOiBmYWxzZSwKICAgICAgICAgICJxdWFudGl0eSI6IDEsCiAgICAgICAgICAic3Vic2NyaXB0aW9uIjogInN1Yl8xSmtXTFoyc09tZjQ3Tno5dzJuS2ZlRUsiLAogICAgICAgICAgInN1YnNjcmlwdGlvbl9pdGVtIjogInNpX0tQTDFNWDlSYWNwb2xNIiwKICAgICAgICAgICJ0YXhfYW1vdW50cyI6IFsKCiAgICAgICAgICBdLAogICAgICAgICAgInRheF9yYXRlcyI6IFsKCiAgICAgICAgICBdLAogICAgICAgICAgInR5cGUiOiAic3Vic2NyaXB0aW9uIiwKICAgICAgICAgICJ1bmlxdWVfaWQiOiAiaWxfMUprV0xaMnNPbWY0N056OWttdXpadHdYIgogICAgICAgIH0KICAgICAgXSwKICAgICAgImhhc19tb3JlIjogZmFsc2UsCiAgICAgICJ0b3RhbF9jb3VudCI6IDIsCiAgICAgICJ1cmwiOiAiL3YxL2ludm9pY2VzL2luXzFKa1dMWjJzT21mNDdOejlHN3BYekJYbS9saW5lcyIKICAgIH0sCiAgICAibGl2ZW1vZGUiOiBmYWxzZSwKICAgICJtZXRhZGF0YSI6IHsKICAgIH0sCiAgICAibmV4dF9wYXltZW50X2F0dGVtcHQiOiBudWxsLAogICAgIm51bWJlciI6ICJDMEU2NjFDLTE0NTYiLAogICAgIm9uX2JlaGFsZl9vZiI6IG51bGwsCiAgICAicGFpZCI6IGZhbHNlLAogICAgInBheW1lbnRfaW50ZW50IjogewogICAgICAiaWQiOiAicGlfM0prV0xaMnNPbWY0N056OTBoZzZUeXFtIiwKICAgICAgIm9iamVjdCI6ICJwYXltZW50X2ludGVudCIsCiAgICAgICJhbW91bnQiOiA5NDc0LAogICAgICAiYW1vdW50X2NhcHR1cmFibGUiOiAwLAogICAgICAiYW1vdW50X3JlY2VpdmVkIjogMCwKICAgICAgImFwcGxpY2F0aW9uIjogbnVsbCwKICAgICAgImFwcGxpY2F0aW9uX2ZlZV9hbW91bnQiOiBudWxsLAogICAgICAiY2FuY2VsZWRfYXQiOiBudWxsLAogICAgICAiY2FuY2VsbGF0aW9uX3JlYXNvbiI6IG51bGwsCiAgICAgICJjYXB0dXJlX21ldGhvZCI6ICJhdXRvbWF0aWMiLAogICAgICAiY2hhcmdlcyI6IHsKICAgICAgICAib2JqZWN0IjogImxpc3QiLAogICAgICAgICJkYXRhIjogWwoKICAgICAgICBdLAogICAgICAgICJoYXNfbW9yZSI6IGZhbHNlLAogICAgICAgICJ0b3RhbF9jb3VudCI6IDAsCiAgICAgICAgInVybCI6ICIvdjEvY2hhcmdlcz9wYXltZW50X2ludGVudD1waV8zSmtXTFoyc09tZjQ3Tno5MGhnNlR5cW0iCiAgICAgIH0sCiAgICAgICJjbGllbnRfc2VjcmV0IjogInBpXzNKa1dMWjJzT21mNDdOejkwaGc2VHlxbV9zZWNyZXRfeXFJbFhKVXZ2dWdTaVQ2ek1jeWJQb3NycCIsCiAgICAgICJjb25maXJtYXRpb25fbWV0aG9kIjogImF1dG9tYXRpYyIsCiAgICAgICJjcmVhdGVkIjogMTYzNDIyNzE5NywKICAgICAgImN1cnJlbmN5IjogInVzZCIsCiAgICAgICJjdXN0b21lciI6ICJjdXNfOERpMXdqZFZrdHY1a3QiLAogICAgICAiZGVzY3JpcHRpb24iOiAiU3Vic2NyaXB0aW9uIGNyZWF0aW9uIiwKICAgICAgImludm9pY2UiOiAiaW5fMUprV0xaMnNPbWY0N056OUc3cFh6QlhtIiwKICAgICAgImxhc3RfcGF5bWVudF9lcnJvciI6IG51bGwsCiAgICAgICJsaXZlbW9kZSI6IGZhbHNlLAogICAgICAibWV0YWRhdGEiOiB7CiAgICAgIH0sCiAgICAgICJuZXh0X2FjdGlvbiI6IHsKICAgICAgICAidHlwZSI6ICJ1c2Vfc3RyaXBlX3NkayIsCiAgICAgICAgInVzZV9zdHJpcGVfc2RrIjogewogICAgICAgICAgInR5cGUiOiAidGhyZWVfZF9zZWN1cmVfcmVkaXJlY3QiLAogICAgICAgICAgInN0cmlwZV9qcyI6ICJodHRwczovL2hvb2tzLnN0cmlwZS5jb20vcmVkaXJlY3QvYXV0aGVudGljYXRlL3NyY18xSmtXTGEyc09tZjQ3Tno5c0RuN0Y2WVc/Y2xpZW50X3NlY3JldD1zcmNfY2xpZW50X3NlY3JldF9VR2dWenlMQTRCN0ttRERLOTNJN1BsSk5cdTAwMjZzb3VyY2VfcmVkaXJlY3Rfc2x1Zz10ZXN0X1lXTmpkRjh4TUROeVJUWXljMDl0WmpRM1RubzVMRjlMVUV3eFZIQkZaMkZQU0V0VFdsWkVTa0ZSZEVsMlVVMVBiMXAxVWpCWTAxMDA2NmtXMGx2SCIsCiAgICAgICAgICAic291cmNlIjogInNyY18xSmtXTGEyc09tZjQ3Tno5c0RuN0Y2WVciCiAgICAgICAgfQogICAgICB9LAogICAgICAib25fYmVoYWxmX29mIjogbnVsbCwKICAgICAgInBheW1lbnRfbWV0aG9kIjogInBtXzFKa1dMVjJzT21mNDdOejl4UkF4aFJzTyIsCiAgICAgICJwYXltZW50X21ldGhvZF9vcHRpb25zIjogewogICAgICAgICJjYXJkIjogewogICAgICAgICAgImluc3RhbGxtZW50cyI6IG51bGwsCiAgICAgICAgICAibmV0d29yayI6IG51bGwsCiAgICAgICAgICAicmVxdWVzdF90aHJlZV9kX3NlY3VyZSI6ICJhdXRvbWF0aWMiCiAgICAgICAgfQogICAgICB9LAogICAgICAicGF5bWVudF9tZXRob2RfdHlwZXMiOiBbCiAgICAgICAgImNhcmQiCiAgICAgIF0sCiAgICAgICJyZWNlaXB0X2VtYWlsIjogbnVsbCwKICAgICAgInJldmlldyI6IG51bGwsCiAgICAgICJzZXR1cF9mdXR1cmVfdXNhZ2UiOiAib2ZmX3Nlc3Npb24iLAogICAgICAic2hpcHBpbmciOiBudWxsLAogICAgICAic291cmNlIjogbnVsbCwKICAgICAgInN0YXRlbWVudF9kZXNjcmlwdG9yIjogbnVsbCwKICAgICAgInN0YXRlbWVudF9kZXNjcmlwdG9yX3N1ZmZpeCI6IG51bGwsCiAgICAgICJzdGF0dXMiOiAicmVxdWlyZXNfYWN0aW9uIiwKICAgICAgInRyYW5zZmVyX2RhdGEiOiBudWxsLAogICAgICAidHJhbnNmZXJfZ3JvdXAiOiBudWxsCiAgICB9LAogICAgInBheW1lbnRfc2V0dGluZ3MiOiB7CiAgICAgICJwYXltZW50X21ldGhvZF9vcHRpb25zIjogbnVsbCwKICAgICAgInBheW1lbnRfbWV0aG9kX3R5cGVzIjogbnVsbAogICAgfSwKICAgICJwZXJpb2RfZW5kIjogMTYzNDIyNzE5NywKICAgICJwZXJpb2Rfc3RhcnQiOiAxNjM0MjI3MTk3LAogICAgInBvc3RfcGF5bWVudF9jcmVkaXRfbm90ZXNfYW1vdW50IjogMCwKICAgICJwcmVfcGF5bWVudF9jcmVkaXRfbm90ZXNfYW1vdW50IjogMCwKICAgICJxdW90ZSI6IG51bGwsCiAgICAicmVjZWlwdF9udW1iZXIiOiBudWxsLAogICAgInN0YXJ0aW5nX2JhbGFuY2UiOiAwLAogICAgInN0YXRlbWVudF9kZXNjcmlwdG9yIjogbnVsbCwKICAgICJzdGF0dXMiOiAib3BlbiIsCiAgICAic3RhdHVzX3RyYW5zaXRpb25zIjogewogICAgICAiZmluYWxpemVkX2F0IjogMTYzNDIyNzE5NywKICAgICAgIm1hcmtlZF91bmNvbGxlY3RpYmxlX2F0IjogbnVsbCwKICAgICAgInBhaWRfYXQiOiBudWxsLAogICAgICAidm9pZGVkX2F0IjogbnVsbAogICAgfSwKICAgICJzdWJzY3JpcHRpb24iOiAic3ViXzFKa1dMWjJzT21mNDdOejl3Mm5LZmVFSyIsCiAgICAic3VidG90YWwiOiA5NDc0LAogICAgInRheCI6IG51bGwsCiAgICAidGF4X3BlcmNlbnQiOiBudWxsLAogICAgInRvdGFsIjogOTQ3NCwKICAgICJ0b3RhbF9kaXNjb3VudF9hbW91bnRzIjogWwoKICAgIF0sCiAgICAidG90YWxfdGF4X2Ftb3VudHMiOiBbCgogICAgXSwKICAgICJ0cmFuc2Zlcl9kYXRhIjogbnVsbCwKICAgICJ3ZWJob29rc19kZWxpdmVyZWRfYXQiOiAxNjM0MjI3MTk3CiAgfSwKICAibGl2ZW1vZGUiOiBmYWxzZSwKICAibWV0YWRhdGEiOiB7CiAgfSwKICAibmV4dF9wZW5kaW5nX2ludm9pY2VfaXRlbV9pbnZvaWNlIjogbnVsbCwKICAicGF1c2VfY29sbGVjdGlvbiI6IG51bGwsCiAgInBheW1lbnRfc2V0dGluZ3MiOiB7CiAgICAicGF5bWVudF9tZXRob2Rfb3B0aW9ucyI6IG51bGwsCiAgICAicGF5bWVudF9tZXRob2RfdHlwZXMiOiBudWxsCiAgfSwKICAicGVuZGluZ19pbnZvaWNlX2l0ZW1faW50ZXJ2YWwiOiBudWxsLAogICJwZW5kaW5nX3NldHVwX2ludGVudCI6IG51bGwsCiAgInBlbmRpbmdfdXBkYXRlIjogbnVsbCwKICAicGxhbiI6IHsKICAgICJpZCI6ICJwcmljZV8xSmtXTFkyc09tZjQ3Tno5cUJ6bldaMUwiLAogICAgIm9iamVjdCI6ICJwbGFuIiwKICAgICJhY3RpdmUiOiB0cnVlLAogICAgImFnZ3JlZ2F0ZV91c2FnZSI6IG51bGwsCiAgICAiYW1vdW50IjogOTQ2NiwKICAgICJhbW91bnRfZGVjaW1hbCI6ICI5NDY2IiwKICAgICJiaWxsaW5nX3NjaGVtZSI6ICJwZXJfdW5pdCIsCiAgICAiY3JlYXRlZCI6IDE2MzQyMjcxOTYsCiAgICAiY3VycmVuY3kiOiAidXNkIiwKICAgICJpbnRlcnZhbCI6ICJtb250aCIsCiAgICAiaW50ZXJ2YWxfY291bnQiOiAxLAogICAgImxpdmVtb2RlIjogZmFsc2UsCiAgICAibWV0YWRhdGEiOiB7CiAgICB9LAogICAgIm5pY2tuYW1lIjogbnVsbCwKICAgICJwcm9kdWN0IjogInByb2RfSVpRQWhiOW5MdTRqZk4iLAogICAgInRpZXJzIjogbnVsbCwKICAgICJ0aWVyc19tb2RlIjogbnVsbCwKICAgICJ0cmFuc2Zvcm1fdXNhZ2UiOiBudWxsLAogICAgInRyaWFsX3BlcmlvZF9kYXlzIjogbnVsbCwKICAgICJ1c2FnZV90eXBlIjogImxpY2Vuc2VkIgogIH0sCiAgInF1YW50aXR5IjogMSwKICAic2NoZWR1bGUiOiBudWxsLAogICJzdGFydCI6IDE2MzQyMjcxOTcsCiAgInN0YXJ0X2RhdGUiOiAxNjM0MjI3MTk3LAogICJzdGF0dXMiOiAiaW5jb21wbGV0ZSIsCiAgInRheF9wZXJjZW50IjogbnVsbCwKICAidHJhbnNmZXJfZGF0YSI6IG51bGwsCiAgInRyaWFsX2VuZCI6IG51bGwsCiAgInRyaWFsX3N0YXJ0IjogbnVsbAp9Cg==
+  recorded_at: Thu, 14 Oct 2021 15:59:59 GMT
+- request:
+    method: get
+    uri: https://api.stripe.com/v1/subscriptions/sub_1JkWLZ2sOmf47Nz9w2nKfeEK?expand%5B%5D=latest_invoice.payment_intent
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Stripe/v1 RubyBindings/5.29.0
+      Authorization:
+      - Bearer sk_test_testfaketestfaketestfake
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-Telemetry:
+      - '{"last_request_metrics":{"request_id":"req_GRcz5UM9Yt2ThF","request_duration_ms":2510}}'
+      Stripe-Version:
+      - '2019-08-14'
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"5.29.0","lang":"ruby","lang_version":"2.6.7 p197 (2021-04-05)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 5.14.11-arch1-1 (linux@archlinux) (gcc (GCC) 11.1.0, GNU ld (GNU Binutils)
+        2.36.1) #1 SMP PREEMPT Sun, 10 Oct 2021 00:48:26 +0000","hostname":"Sylvain-desktop"}'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 14 Oct 2021 15:59:59 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '12766'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_AW45tHvpsliv0P
+      Stripe-Version:
+      - '2019-08-14'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains; preload
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        ewogICJpZCI6ICJzdWJfMUprV0xaMnNPbWY0N056OXcybktmZUVLIiwKICAib2JqZWN0IjogInN1YnNjcmlwdGlvbiIsCiAgImFwcGxpY2F0aW9uX2ZlZV9wZXJjZW50IjogbnVsbCwKICAiYXV0b21hdGljX3RheCI6IHsKICAgICJlbmFibGVkIjogZmFsc2UKICB9LAogICJiaWxsaW5nIjogImNoYXJnZV9hdXRvbWF0aWNhbGx5IiwKICAiYmlsbGluZ19jeWNsZV9hbmNob3IiOiAxNjM0MjI3MTk3LAogICJiaWxsaW5nX3RocmVzaG9sZHMiOiBudWxsLAogICJjYW5jZWxfYXQiOiAxNjY1NzYzMTk1LAogICJjYW5jZWxfYXRfcGVyaW9kX2VuZCI6IGZhbHNlLAogICJjYW5jZWxlZF9hdCI6IDE2MzQyMjcxOTcsCiAgImNvbGxlY3Rpb25fbWV0aG9kIjogImNoYXJnZV9hdXRvbWF0aWNhbGx5IiwKICAiY3JlYXRlZCI6IDE2MzQyMjcxOTcsCiAgImN1cnJlbnRfcGVyaW9kX2VuZCI6IDE2MzY5MDU1OTcsCiAgImN1cnJlbnRfcGVyaW9kX3N0YXJ0IjogMTYzNDIyNzE5NywKICAiY3VzdG9tZXIiOiAiY3VzXzhEaTF3amRWa3R2NWt0IiwKICAiZGF5c191bnRpbF9kdWUiOiBudWxsLAogICJkZWZhdWx0X3BheW1lbnRfbWV0aG9kIjogInBtXzFKa1dMVjJzT21mNDdOejl4UkF4aFJzTyIsCiAgImRlZmF1bHRfc291cmNlIjogbnVsbCwKICAiZGVmYXVsdF90YXhfcmF0ZXMiOiBbCgogIF0sCiAgImRpc2NvdW50IjogbnVsbCwKICAiZW5kZWRfYXQiOiBudWxsLAogICJpbnZvaWNlX2N1c3RvbWVyX2JhbGFuY2Vfc2V0dGluZ3MiOiB7CiAgICAiY29uc3VtZV9hcHBsaWVkX2JhbGFuY2Vfb25fdm9pZCI6IHRydWUKICB9LAogICJpdGVtcyI6IHsKICAgICJvYmplY3QiOiAibGlzdCIsCiAgICAiZGF0YSI6IFsKICAgICAgewogICAgICAgICJpZCI6ICJzaV9LUEwxTVg5UmFjcG9sTSIsCiAgICAgICAgIm9iamVjdCI6ICJzdWJzY3JpcHRpb25faXRlbSIsCiAgICAgICAgImJpbGxpbmdfdGhyZXNob2xkcyI6IG51bGwsCiAgICAgICAgImNyZWF0ZWQiOiAxNjM0MjI3MTk3LAogICAgICAgICJtZXRhZGF0YSI6IHsKICAgICAgICB9LAogICAgICAgICJwbGFuIjogewogICAgICAgICAgImlkIjogInByaWNlXzFKa1dMWTJzT21mNDdOejlxQnpuV1oxTCIsCiAgICAgICAgICAib2JqZWN0IjogInBsYW4iLAogICAgICAgICAgImFjdGl2ZSI6IHRydWUsCiAgICAgICAgICAiYWdncmVnYXRlX3VzYWdlIjogbnVsbCwKICAgICAgICAgICJhbW91bnQiOiA5NDY2LAogICAgICAgICAgImFtb3VudF9kZWNpbWFsIjogIjk0NjYiLAogICAgICAgICAgImJpbGxpbmdfc2NoZW1lIjogInBlcl91bml0IiwKICAgICAgICAgICJjcmVhdGVkIjogMTYzNDIyNzE5NiwKICAgICAgICAgICJjdXJyZW5jeSI6ICJ1c2QiLAogICAgICAgICAgImludGVydmFsIjogIm1vbnRoIiwKICAgICAgICAgICJpbnRlcnZhbF9jb3VudCI6IDEsCiAgICAgICAgICAibGl2ZW1vZGUiOiBmYWxzZSwKICAgICAgICAgICJtZXRhZGF0YSI6IHsKICAgICAgICAgIH0sCiAgICAgICAgICAibmlja25hbWUiOiBudWxsLAogICAgICAgICAgInByb2R1Y3QiOiAicHJvZF9JWlFBaGI5bkx1NGpmTiIsCiAgICAgICAgICAidGllcnMiOiBudWxsLAogICAgICAgICAgInRpZXJzX21vZGUiOiBudWxsLAogICAgICAgICAgInRyYW5zZm9ybV91c2FnZSI6IG51bGwsCiAgICAgICAgICAidHJpYWxfcGVyaW9kX2RheXMiOiBudWxsLAogICAgICAgICAgInVzYWdlX3R5cGUiOiAibGljZW5zZWQiCiAgICAgICAgfSwKICAgICAgICAicHJpY2UiOiB7CiAgICAgICAgICAiaWQiOiAicHJpY2VfMUprV0xZMnNPbWY0N056OXFCem5XWjFMIiwKICAgICAgICAgICJvYmplY3QiOiAicHJpY2UiLAogICAgICAgICAgImFjdGl2ZSI6IHRydWUsCiAgICAgICAgICAiYmlsbGluZ19zY2hlbWUiOiAicGVyX3VuaXQiLAogICAgICAgICAgImNyZWF0ZWQiOiAxNjM0MjI3MTk2LAogICAgICAgICAgImN1cnJlbmN5IjogInVzZCIsCiAgICAgICAgICAibGl2ZW1vZGUiOiBmYWxzZSwKICAgICAgICAgICJsb29rdXBfa2V5IjogbnVsbCwKICAgICAgICAgICJtZXRhZGF0YSI6IHsKICAgICAgICAgIH0sCiAgICAgICAgICAibmlja25hbWUiOiBudWxsLAogICAgICAgICAgInByb2R1Y3QiOiAicHJvZF9JWlFBaGI5bkx1NGpmTiIsCiAgICAgICAgICAicmVjdXJyaW5nIjogewogICAgICAgICAgICAiYWdncmVnYXRlX3VzYWdlIjogbnVsbCwKICAgICAgICAgICAgImludGVydmFsIjogIm1vbnRoIiwKICAgICAgICAgICAgImludGVydmFsX2NvdW50IjogMSwKICAgICAgICAgICAgInRyaWFsX3BlcmlvZF9kYXlzIjogbnVsbCwKICAgICAgICAgICAgInVzYWdlX3R5cGUiOiAibGljZW5zZWQiCiAgICAgICAgICB9LAogICAgICAgICAgInRheF9iZWhhdmlvciI6ICJ1bnNwZWNpZmllZCIsCiAgICAgICAgICAidGllcnNfbW9kZSI6IG51bGwsCiAgICAgICAgICAidHJhbnNmb3JtX3F1YW50aXR5IjogbnVsbCwKICAgICAgICAgICJ0eXBlIjogInJlY3VycmluZyIsCiAgICAgICAgICAidW5pdF9hbW91bnQiOiA5NDY2LAogICAgICAgICAgInVuaXRfYW1vdW50X2RlY2ltYWwiOiAiOTQ2NiIKICAgICAgICB9LAogICAgICAgICJxdWFudGl0eSI6IDEsCiAgICAgICAgInN1YnNjcmlwdGlvbiI6ICJzdWJfMUprV0xaMnNPbWY0N056OXcybktmZUVLIiwKICAgICAgICAidGF4X3JhdGVzIjogWwoKICAgICAgICBdCiAgICAgIH0KICAgIF0sCiAgICAiaGFzX21vcmUiOiBmYWxzZSwKICAgICJ0b3RhbF9jb3VudCI6IDEsCiAgICAidXJsIjogIi92MS9zdWJzY3JpcHRpb25faXRlbXM/c3Vic2NyaXB0aW9uPXN1Yl8xSmtXTFoyc09tZjQ3Tno5dzJuS2ZlRUsiCiAgfSwKICAibGF0ZXN0X2ludm9pY2UiOiB7CiAgICAiaWQiOiAiaW5fMUprV0xaMnNPbWY0N056OUc3cFh6QlhtIiwKICAgICJvYmplY3QiOiAiaW52b2ljZSIsCiAgICAiYWNjb3VudF9jb3VudHJ5IjogIkZSIiwKICAgICJhY2NvdW50X25hbWUiOiAiU2xlZWRlIiwKICAgICJhY2NvdW50X3RheF9pZHMiOiBudWxsLAogICAgImFtb3VudF9kdWUiOiA5NDc0LAogICAgImFtb3VudF9wYWlkIjogMCwKICAgICJhbW91bnRfcmVtYWluaW5nIjogOTQ3NCwKICAgICJhcHBsaWNhdGlvbl9mZWVfYW1vdW50IjogbnVsbCwKICAgICJhdHRlbXB0X2NvdW50IjogMCwKICAgICJhdHRlbXB0ZWQiOiB0cnVlLAogICAgImF1dG9fYWR2YW5jZSI6IHRydWUsCiAgICAiYXV0b21hdGljX3RheCI6IHsKICAgICAgImVuYWJsZWQiOiBmYWxzZSwKICAgICAgInN0YXR1cyI6IG51bGwKICAgIH0sCiAgICAiYmlsbGluZyI6ICJjaGFyZ2VfYXV0b21hdGljYWxseSIsCiAgICAiYmlsbGluZ19yZWFzb24iOiAic3Vic2NyaXB0aW9uX2NyZWF0ZSIsCiAgICAiY2hhcmdlIjogbnVsbCwKICAgICJjb2xsZWN0aW9uX21ldGhvZCI6ICJjaGFyZ2VfYXV0b21hdGljYWxseSIsCiAgICAiY3JlYXRlZCI6IDE2MzQyMjcxOTcsCiAgICAiY3VycmVuY3kiOiAidXNkIiwKICAgICJjdXN0b21fZmllbGRzIjogbnVsbCwKICAgICJjdXN0b21lciI6ICJjdXNfOERpMXdqZFZrdHY1a3QiLAogICAgImN1c3RvbWVyX2FkZHJlc3MiOiBudWxsLAogICAgImN1c3RvbWVyX2VtYWlsIjogImplYW4uZHVwb25kQGdtYWlsLmNvbSIsCiAgICAiY3VzdG9tZXJfbmFtZSI6IG51bGwsCiAgICAiY3VzdG9tZXJfcGhvbmUiOiBudWxsLAogICAgImN1c3RvbWVyX3NoaXBwaW5nIjogbnVsbCwKICAgICJjdXN0b21lcl90YXhfZXhlbXB0IjogIm5vbmUiLAogICAgImN1c3RvbWVyX3RheF9pZHMiOiBbCgogICAgXSwKICAgICJkZWZhdWx0X3BheW1lbnRfbWV0aG9kIjogbnVsbCwKICAgICJkZWZhdWx0X3NvdXJjZSI6IG51bGwsCiAgICAiZGVmYXVsdF90YXhfcmF0ZXMiOiBbCgogICAgXSwKICAgICJkZXNjcmlwdGlvbiI6IG51bGwsCiAgICAiZGlzY291bnQiOiBudWxsLAogICAgImRpc2NvdW50cyI6IFsKCiAgICBdLAogICAgImR1ZV9kYXRlIjogbnVsbCwKICAgICJlbmRpbmdfYmFsYW5jZSI6IDAsCiAgICAiZm9vdGVyIjogbnVsbCwKICAgICJob3N0ZWRfaW52b2ljZV91cmwiOiAiaHR0cHM6Ly9pbnZvaWNlLnN0cmlwZS5jb20vaS9hY2N0XzEwM3JFNjJzT21mNDdOejkvdGVzdF9ZV05qZEY4eE1ETnlSVFl5YzA5dFpqUTNUbm81TEY5TFVFd3hjRGg2WWtodFUxaG9VVE53TmpNNVNtZFBOVTl1VGtOdFVUTnkwMTAwS0ZCemVyQ3MiLAogICAgImludm9pY2VfcGRmIjogImh0dHBzOi8vcGF5LnN0cmlwZS5jb20vaW52b2ljZS9hY2N0XzEwM3JFNjJzT21mNDdOejkvdGVzdF9ZV05qZEY4eE1ETnlSVFl5YzA5dFpqUTNUbm81TEY5TFVFd3hjRGg2WWtodFUxaG9VVE53TmpNNVNtZFBOVTl1VGtOdFVUTnkwMTAwS0ZCemVyQ3MvcGRmIiwKICAgICJsYXN0X2ZpbmFsaXphdGlvbl9lcnJvciI6IG51bGwsCiAgICAibGluZXMiOiB7CiAgICAgICJvYmplY3QiOiAibGlzdCIsCiAgICAgICJkYXRhIjogWwogICAgICAgIHsKICAgICAgICAgICJpZCI6ICJpaV8xSmtXTFoyc09tZjQ3Tno5RGdWMnVGZ3YiLAogICAgICAgICAgIm9iamVjdCI6ICJsaW5lX2l0ZW0iLAogICAgICAgICAgImFtb3VudCI6IDgsCiAgICAgICAgICAiY3VycmVuY3kiOiAidXNkIiwKICAgICAgICAgICJkZXNjcmlwdGlvbiI6ICJBYm9ubmVtZW50IG1lbnN1YWxpc2FibGUgLSBzdGFuZGFyZCwgYXNzb2NpYXRpb24sIHllYXIiLAogICAgICAgICAgImRpc2NvdW50X2Ftb3VudHMiOiBbCgogICAgICAgICAgXSwKICAgICAgICAgICJkaXNjb3VudGFibGUiOiB0cnVlLAogICAgICAgICAgImRpc2NvdW50cyI6IFsKCiAgICAgICAgICBdLAogICAgICAgICAgImludm9pY2VfaXRlbSI6ICJpaV8xSmtXTFoyc09tZjQ3Tno5RGdWMnVGZ3YiLAogICAgICAgICAgImxpdmVtb2RlIjogZmFsc2UsCiAgICAgICAgICAibWV0YWRhdGEiOiB7CiAgICAgICAgICB9LAogICAgICAgICAgInBlcmlvZCI6IHsKICAgICAgICAgICAgImVuZCI6IDE2MzY5MDU1OTcsCiAgICAgICAgICAgICJzdGFydCI6IDE2MzQyMjcxOTcKICAgICAgICAgIH0sCiAgICAgICAgICAicGxhbiI6IG51bGwsCiAgICAgICAgICAicHJpY2UiOiB7CiAgICAgICAgICAgICJpZCI6ICJwcmljZV8xSmtXTFkyc09tZjQ3Tno5enZTZFA3dXciLAogICAgICAgICAgICAib2JqZWN0IjogInByaWNlIiwKICAgICAgICAgICAgImFjdGl2ZSI6IHRydWUsCiAgICAgICAgICAgICJiaWxsaW5nX3NjaGVtZSI6ICJwZXJfdW5pdCIsCiAgICAgICAgICAgICJjcmVhdGVkIjogMTYzNDIyNzE5NiwKICAgICAgICAgICAgImN1cnJlbmN5IjogInVzZCIsCiAgICAgICAgICAgICJsaXZlbW9kZSI6IGZhbHNlLAogICAgICAgICAgICAibG9va3VwX2tleSI6IG51bGwsCiAgICAgICAgICAgICJtZXRhZGF0YSI6IHsKICAgICAgICAgICAgfSwKICAgICAgICAgICAgIm5pY2tuYW1lIjogIlByaWNlIGFkanVzdG1lbnQgZm9yIHBheW1lbnQgc2NoZWR1bGUiLAogICAgICAgICAgICAicHJvZHVjdCI6ICJwcm9kX0laUUFoYjluTHU0amZOIiwKICAgICAgICAgICAgInJlY3VycmluZyI6IG51bGwsCiAgICAgICAgICAgICJ0YXhfYmVoYXZpb3IiOiAidW5zcGVjaWZpZWQiLAogICAgICAgICAgICAidGllcnNfbW9kZSI6IG51bGwsCiAgICAgICAgICAgICJ0cmFuc2Zvcm1fcXVhbnRpdHkiOiBudWxsLAogICAgICAgICAgICAidHlwZSI6ICJvbmVfdGltZSIsCiAgICAgICAgICAgICJ1bml0X2Ftb3VudCI6IDgsCiAgICAgICAgICAgICJ1bml0X2Ftb3VudF9kZWNpbWFsIjogIjgiCiAgICAgICAgICB9LAogICAgICAgICAgInByb3JhdGlvbiI6IGZhbHNlLAogICAgICAgICAgInF1YW50aXR5IjogMSwKICAgICAgICAgICJzdWJzY3JpcHRpb24iOiAic3ViXzFKa1dMWjJzT21mNDdOejl3Mm5LZmVFSyIsCiAgICAgICAgICAidGF4X2Ftb3VudHMiOiBbCgogICAgICAgICAgXSwKICAgICAgICAgICJ0YXhfcmF0ZXMiOiBbCgogICAgICAgICAgXSwKICAgICAgICAgICJ0eXBlIjogImludm9pY2VpdGVtIiwKICAgICAgICAgICJ1bmlxdWVfaWQiOiAiaWxfMUprV0xaMnNPbWY0N056OVNvNDh6SHQ2IgogICAgICAgIH0sCiAgICAgICAgewogICAgICAgICAgImlkIjogInNsaV8xM2M3NDEyc09tZjQ3Tno5ZjRjMzA3MzQiLAogICAgICAgICAgIm9iamVjdCI6ICJsaW5lX2l0ZW0iLAogICAgICAgICAgImFtb3VudCI6IDk0NjYsCiAgICAgICAgICAiY3VycmVuY3kiOiAidXNkIiwKICAgICAgICAgICJkZXNjcmlwdGlvbiI6ICIxIMOXIEFib25uZW1lbnQgbWVuc3VhbGlzYWJsZSAtIHN0YW5kYXJkLCBhc3NvY2lhdGlvbiwgeWVhciAoYXQgJDk0LjY2IC8gbW9udGgpIiwKICAgICAgICAgICJkaXNjb3VudF9hbW91bnRzIjogWwoKICAgICAgICAgIF0sCiAgICAgICAgICAiZGlzY291bnRhYmxlIjogdHJ1ZSwKICAgICAgICAgICJkaXNjb3VudHMiOiBbCgogICAgICAgICAgXSwKICAgICAgICAgICJsaXZlbW9kZSI6IGZhbHNlLAogICAgICAgICAgIm1ldGFkYXRhIjogewogICAgICAgICAgfSwKICAgICAgICAgICJwZXJpb2QiOiB7CiAgICAgICAgICAgICJlbmQiOiAxNjM2OTA1NTk3LAogICAgICAgICAgICAic3RhcnQiOiAxNjM0MjI3MTk3CiAgICAgICAgICB9LAogICAgICAgICAgInBsYW4iOiB7CiAgICAgICAgICAgICJpZCI6ICJwcmljZV8xSmtXTFkyc09tZjQ3Tno5cUJ6bldaMUwiLAogICAgICAgICAgICAib2JqZWN0IjogInBsYW4iLAogICAgICAgICAgICAiYWN0aXZlIjogdHJ1ZSwKICAgICAgICAgICAgImFnZ3JlZ2F0ZV91c2FnZSI6IG51bGwsCiAgICAgICAgICAgICJhbW91bnQiOiA5NDY2LAogICAgICAgICAgICAiYW1vdW50X2RlY2ltYWwiOiAiOTQ2NiIsCiAgICAgICAgICAgICJiaWxsaW5nX3NjaGVtZSI6ICJwZXJfdW5pdCIsCiAgICAgICAgICAgICJjcmVhdGVkIjogMTYzNDIyNzE5NiwKICAgICAgICAgICAgImN1cnJlbmN5IjogInVzZCIsCiAgICAgICAgICAgICJpbnRlcnZhbCI6ICJtb250aCIsCiAgICAgICAgICAgICJpbnRlcnZhbF9jb3VudCI6IDEsCiAgICAgICAgICAgICJsaXZlbW9kZSI6IGZhbHNlLAogICAgICAgICAgICAibWV0YWRhdGEiOiB7CiAgICAgICAgICAgIH0sCiAgICAgICAgICAgICJuaWNrbmFtZSI6IG51bGwsCiAgICAgICAgICAgICJwcm9kdWN0IjogInByb2RfSVpRQWhiOW5MdTRqZk4iLAogICAgICAgICAgICAidGllcnMiOiBudWxsLAogICAgICAgICAgICAidGllcnNfbW9kZSI6IG51bGwsCiAgICAgICAgICAgICJ0cmFuc2Zvcm1fdXNhZ2UiOiBudWxsLAogICAgICAgICAgICAidHJpYWxfcGVyaW9kX2RheXMiOiBudWxsLAogICAgICAgICAgICAidXNhZ2VfdHlwZSI6ICJsaWNlbnNlZCIKICAgICAgICAgIH0sCiAgICAgICAgICAicHJpY2UiOiB7CiAgICAgICAgICAgICJpZCI6ICJwcmljZV8xSmtXTFkyc09tZjQ3Tno5cUJ6bldaMUwiLAogICAgICAgICAgICAib2JqZWN0IjogInByaWNlIiwKICAgICAgICAgICAgImFjdGl2ZSI6IHRydWUsCiAgICAgICAgICAgICJiaWxsaW5nX3NjaGVtZSI6ICJwZXJfdW5pdCIsCiAgICAgICAgICAgICJjcmVhdGVkIjogMTYzNDIyNzE5NiwKICAgICAgICAgICAgImN1cnJlbmN5IjogInVzZCIsCiAgICAgICAgICAgICJsaXZlbW9kZSI6IGZhbHNlLAogICAgICAgICAgICAibG9va3VwX2tleSI6IG51bGwsCiAgICAgICAgICAgICJtZXRhZGF0YSI6IHsKICAgICAgICAgICAgfSwKICAgICAgICAgICAgIm5pY2tuYW1lIjogbnVsbCwKICAgICAgICAgICAgInByb2R1Y3QiOiAicHJvZF9JWlFBaGI5bkx1NGpmTiIsCiAgICAgICAgICAgICJyZWN1cnJpbmciOiB7CiAgICAgICAgICAgICAgImFnZ3JlZ2F0ZV91c2FnZSI6IG51bGwsCiAgICAgICAgICAgICAgImludGVydmFsIjogIm1vbnRoIiwKICAgICAgICAgICAgICAiaW50ZXJ2YWxfY291bnQiOiAxLAogICAgICAgICAgICAgICJ0cmlhbF9wZXJpb2RfZGF5cyI6IG51bGwsCiAgICAgICAgICAgICAgInVzYWdlX3R5cGUiOiAibGljZW5zZWQiCiAgICAgICAgICAgIH0sCiAgICAgICAgICAgICJ0YXhfYmVoYXZpb3IiOiAidW5zcGVjaWZpZWQiLAogICAgICAgICAgICAidGllcnNfbW9kZSI6IG51bGwsCiAgICAgICAgICAgICJ0cmFuc2Zvcm1fcXVhbnRpdHkiOiBudWxsLAogICAgICAgICAgICAidHlwZSI6ICJyZWN1cnJpbmciLAogICAgICAgICAgICAidW5pdF9hbW91bnQiOiA5NDY2LAogICAgICAgICAgICAidW5pdF9hbW91bnRfZGVjaW1hbCI6ICI5NDY2IgogICAgICAgICAgfSwKICAgICAgICAgICJwcm9yYXRpb24iOiBmYWxzZSwKICAgICAgICAgICJxdWFudGl0eSI6IDEsCiAgICAgICAgICAic3Vic2NyaXB0aW9uIjogInN1Yl8xSmtXTFoyc09tZjQ3Tno5dzJuS2ZlRUsiLAogICAgICAgICAgInN1YnNjcmlwdGlvbl9pdGVtIjogInNpX0tQTDFNWDlSYWNwb2xNIiwKICAgICAgICAgICJ0YXhfYW1vdW50cyI6IFsKCiAgICAgICAgICBdLAogICAgICAgICAgInRheF9yYXRlcyI6IFsKCiAgICAgICAgICBdLAogICAgICAgICAgInR5cGUiOiAic3Vic2NyaXB0aW9uIiwKICAgICAgICAgICJ1bmlxdWVfaWQiOiAiaWxfMUprV0xaMnNPbWY0N056OWttdXpadHdYIgogICAgICAgIH0KICAgICAgXSwKICAgICAgImhhc19tb3JlIjogZmFsc2UsCiAgICAgICJ0b3RhbF9jb3VudCI6IDIsCiAgICAgICJ1cmwiOiAiL3YxL2ludm9pY2VzL2luXzFKa1dMWjJzT21mNDdOejlHN3BYekJYbS9saW5lcyIKICAgIH0sCiAgICAibGl2ZW1vZGUiOiBmYWxzZSwKICAgICJtZXRhZGF0YSI6IHsKICAgIH0sCiAgICAibmV4dF9wYXltZW50X2F0dGVtcHQiOiBudWxsLAogICAgIm51bWJlciI6ICJDMEU2NjFDLTE0NTYiLAogICAgIm9uX2JlaGFsZl9vZiI6IG51bGwsCiAgICAicGFpZCI6IGZhbHNlLAogICAgInBheW1lbnRfaW50ZW50IjogewogICAgICAiaWQiOiAicGlfM0prV0xaMnNPbWY0N056OTBoZzZUeXFtIiwKICAgICAgIm9iamVjdCI6ICJwYXltZW50X2ludGVudCIsCiAgICAgICJhbW91bnQiOiA5NDc0LAogICAgICAiYW1vdW50X2NhcHR1cmFibGUiOiAwLAogICAgICAiYW1vdW50X3JlY2VpdmVkIjogMCwKICAgICAgImFwcGxpY2F0aW9uIjogbnVsbCwKICAgICAgImFwcGxpY2F0aW9uX2ZlZV9hbW91bnQiOiBudWxsLAogICAgICAiY2FuY2VsZWRfYXQiOiBudWxsLAogICAgICAiY2FuY2VsbGF0aW9uX3JlYXNvbiI6IG51bGwsCiAgICAgICJjYXB0dXJlX21ldGhvZCI6ICJhdXRvbWF0aWMiLAogICAgICAiY2hhcmdlcyI6IHsKICAgICAgICAib2JqZWN0IjogImxpc3QiLAogICAgICAgICJkYXRhIjogWwoKICAgICAgICBdLAogICAgICAgICJoYXNfbW9yZSI6IGZhbHNlLAogICAgICAgICJ0b3RhbF9jb3VudCI6IDAsCiAgICAgICAgInVybCI6ICIvdjEvY2hhcmdlcz9wYXltZW50X2ludGVudD1waV8zSmtXTFoyc09tZjQ3Tno5MGhnNlR5cW0iCiAgICAgIH0sCiAgICAgICJjbGllbnRfc2VjcmV0IjogInBpXzNKa1dMWjJzT21mNDdOejkwaGc2VHlxbV9zZWNyZXRfeXFJbFhKVXZ2dWdTaVQ2ek1jeWJQb3NycCIsCiAgICAgICJjb25maXJtYXRpb25fbWV0aG9kIjogImF1dG9tYXRpYyIsCiAgICAgICJjcmVhdGVkIjogMTYzNDIyNzE5NywKICAgICAgImN1cnJlbmN5IjogInVzZCIsCiAgICAgICJjdXN0b21lciI6ICJjdXNfOERpMXdqZFZrdHY1a3QiLAogICAgICAiZGVzY3JpcHRpb24iOiAiU3Vic2NyaXB0aW9uIGNyZWF0aW9uIiwKICAgICAgImludm9pY2UiOiAiaW5fMUprV0xaMnNPbWY0N056OUc3cFh6QlhtIiwKICAgICAgImxhc3RfcGF5bWVudF9lcnJvciI6IG51bGwsCiAgICAgICJsaXZlbW9kZSI6IGZhbHNlLAogICAgICAibWV0YWRhdGEiOiB7CiAgICAgIH0sCiAgICAgICJuZXh0X2FjdGlvbiI6IHsKICAgICAgICAidHlwZSI6ICJ1c2Vfc3RyaXBlX3NkayIsCiAgICAgICAgInVzZV9zdHJpcGVfc2RrIjogewogICAgICAgICAgInR5cGUiOiAidGhyZWVfZF9zZWN1cmVfcmVkaXJlY3QiLAogICAgICAgICAgInN0cmlwZV9qcyI6ICJodHRwczovL2hvb2tzLnN0cmlwZS5jb20vcmVkaXJlY3QvYXV0aGVudGljYXRlL3NyY18xSmtXTGEyc09tZjQ3Tno5c0RuN0Y2WVc/Y2xpZW50X3NlY3JldD1zcmNfY2xpZW50X3NlY3JldF9VR2dWenlMQTRCN0ttRERLOTNJN1BsSk5cdTAwMjZzb3VyY2VfcmVkaXJlY3Rfc2x1Zz10ZXN0X1lXTmpkRjh4TUROeVJUWXljMDl0WmpRM1RubzVMRjlMVUV3eFZIQkZaMkZQU0V0VFdsWkVTa0ZSZEVsMlVVMVBiMXAxVWpCWTAxMDA2NmtXMGx2SCIsCiAgICAgICAgICAic291cmNlIjogInNyY18xSmtXTGEyc09tZjQ3Tno5c0RuN0Y2WVciCiAgICAgICAgfQogICAgICB9LAogICAgICAib25fYmVoYWxmX29mIjogbnVsbCwKICAgICAgInBheW1lbnRfbWV0aG9kIjogInBtXzFKa1dMVjJzT21mNDdOejl4UkF4aFJzTyIsCiAgICAgICJwYXltZW50X21ldGhvZF9vcHRpb25zIjogewogICAgICAgICJjYXJkIjogewogICAgICAgICAgImluc3RhbGxtZW50cyI6IG51bGwsCiAgICAgICAgICAibmV0d29yayI6IG51bGwsCiAgICAgICAgICAicmVxdWVzdF90aHJlZV9kX3NlY3VyZSI6ICJhdXRvbWF0aWMiCiAgICAgICAgfQogICAgICB9LAogICAgICAicGF5bWVudF9tZXRob2RfdHlwZXMiOiBbCiAgICAgICAgImNhcmQiCiAgICAgIF0sCiAgICAgICJyZWNlaXB0X2VtYWlsIjogbnVsbCwKICAgICAgInJldmlldyI6IG51bGwsCiAgICAgICJzZXR1cF9mdXR1cmVfdXNhZ2UiOiAib2ZmX3Nlc3Npb24iLAogICAgICAic2hpcHBpbmciOiBudWxsLAogICAgICAic291cmNlIjogbnVsbCwKICAgICAgInN0YXRlbWVudF9kZXNjcmlwdG9yIjogbnVsbCwKICAgICAgInN0YXRlbWVudF9kZXNjcmlwdG9yX3N1ZmZpeCI6IG51bGwsCiAgICAgICJzdGF0dXMiOiAicmVxdWlyZXNfYWN0aW9uIiwKICAgICAgInRyYW5zZmVyX2RhdGEiOiBudWxsLAogICAgICAidHJhbnNmZXJfZ3JvdXAiOiBudWxsCiAgICB9LAogICAgInBheW1lbnRfc2V0dGluZ3MiOiB7CiAgICAgICJwYXltZW50X21ldGhvZF9vcHRpb25zIjogbnVsbCwKICAgICAgInBheW1lbnRfbWV0aG9kX3R5cGVzIjogbnVsbAogICAgfSwKICAgICJwZXJpb2RfZW5kIjogMTYzNDIyNzE5NywKICAgICJwZXJpb2Rfc3RhcnQiOiAxNjM0MjI3MTk3LAogICAgInBvc3RfcGF5bWVudF9jcmVkaXRfbm90ZXNfYW1vdW50IjogMCwKICAgICJwcmVfcGF5bWVudF9jcmVkaXRfbm90ZXNfYW1vdW50IjogMCwKICAgICJxdW90ZSI6IG51bGwsCiAgICAicmVjZWlwdF9udW1iZXIiOiBudWxsLAogICAgInN0YXJ0aW5nX2JhbGFuY2UiOiAwLAogICAgInN0YXRlbWVudF9kZXNjcmlwdG9yIjogbnVsbCwKICAgICJzdGF0dXMiOiAib3BlbiIsCiAgICAic3RhdHVzX3RyYW5zaXRpb25zIjogewogICAgICAiZmluYWxpemVkX2F0IjogMTYzNDIyNzE5NywKICAgICAgIm1hcmtlZF91bmNvbGxlY3RpYmxlX2F0IjogbnVsbCwKICAgICAgInBhaWRfYXQiOiBudWxsLAogICAgICAidm9pZGVkX2F0IjogbnVsbAogICAgfSwKICAgICJzdWJzY3JpcHRpb24iOiAic3ViXzFKa1dMWjJzT21mNDdOejl3Mm5LZmVFSyIsCiAgICAic3VidG90YWwiOiA5NDc0LAogICAgInRheCI6IG51bGwsCiAgICAidGF4X3BlcmNlbnQiOiBudWxsLAogICAgInRvdGFsIjogOTQ3NCwKICAgICJ0b3RhbF9kaXNjb3VudF9hbW91bnRzIjogWwoKICAgIF0sCiAgICAidG90YWxfdGF4X2Ftb3VudHMiOiBbCgogICAgXSwKICAgICJ0cmFuc2Zlcl9kYXRhIjogbnVsbCwKICAgICJ3ZWJob29rc19kZWxpdmVyZWRfYXQiOiAxNjM0MjI3MTk3CiAgfSwKICAibGl2ZW1vZGUiOiBmYWxzZSwKICAibWV0YWRhdGEiOiB7CiAgfSwKICAibmV4dF9wZW5kaW5nX2ludm9pY2VfaXRlbV9pbnZvaWNlIjogbnVsbCwKICAicGF1c2VfY29sbGVjdGlvbiI6IG51bGwsCiAgInBheW1lbnRfc2V0dGluZ3MiOiB7CiAgICAicGF5bWVudF9tZXRob2Rfb3B0aW9ucyI6IG51bGwsCiAgICAicGF5bWVudF9tZXRob2RfdHlwZXMiOiBudWxsCiAgfSwKICAicGVuZGluZ19pbnZvaWNlX2l0ZW1faW50ZXJ2YWwiOiBudWxsLAogICJwZW5kaW5nX3NldHVwX2ludGVudCI6IG51bGwsCiAgInBlbmRpbmdfdXBkYXRlIjogbnVsbCwKICAicGxhbiI6IHsKICAgICJpZCI6ICJwcmljZV8xSmtXTFkyc09tZjQ3Tno5cUJ6bldaMUwiLAogICAgIm9iamVjdCI6ICJwbGFuIiwKICAgICJhY3RpdmUiOiB0cnVlLAogICAgImFnZ3JlZ2F0ZV91c2FnZSI6IG51bGwsCiAgICAiYW1vdW50IjogOTQ2NiwKICAgICJhbW91bnRfZGVjaW1hbCI6ICI5NDY2IiwKICAgICJiaWxsaW5nX3NjaGVtZSI6ICJwZXJfdW5pdCIsCiAgICAiY3JlYXRlZCI6IDE2MzQyMjcxOTYsCiAgICAiY3VycmVuY3kiOiAidXNkIiwKICAgICJpbnRlcnZhbCI6ICJtb250aCIsCiAgICAiaW50ZXJ2YWxfY291bnQiOiAxLAogICAgImxpdmVtb2RlIjogZmFsc2UsCiAgICAibWV0YWRhdGEiOiB7CiAgICB9LAogICAgIm5pY2tuYW1lIjogbnVsbCwKICAgICJwcm9kdWN0IjogInByb2RfSVpRQWhiOW5MdTRqZk4iLAogICAgInRpZXJzIjogbnVsbCwKICAgICJ0aWVyc19tb2RlIjogbnVsbCwKICAgICJ0cmFuc2Zvcm1fdXNhZ2UiOiBudWxsLAogICAgInRyaWFsX3BlcmlvZF9kYXlzIjogbnVsbCwKICAgICJ1c2FnZV90eXBlIjogImxpY2Vuc2VkIgogIH0sCiAgInF1YW50aXR5IjogMSwKICAic2NoZWR1bGUiOiBudWxsLAogICJzdGFydCI6IDE2MzQyMjcxOTcsCiAgInN0YXJ0X2RhdGUiOiAxNjM0MjI3MTk3LAogICJzdGF0dXMiOiAiaW5jb21wbGV0ZSIsCiAgInRheF9wZXJjZW50IjogbnVsbCwKICAidHJhbnNmZXJfZGF0YSI6IG51bGwsCiAgInRyaWFsX2VuZCI6IG51bGwsCiAgInRyaWFsX3N0YXJ0IjogbnVsbAp9Cg==
+  recorded_at: Thu, 14 Oct 2021 15:59:59 GMT
+recorded_with: VCR 6.0.0

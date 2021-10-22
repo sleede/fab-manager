@@ -2,11 +2,14 @@
 
 # A subscription added to the shopping cart
 class CartItem::Subscription < CartItem::BaseItem
-  def initialize(plan, customer)
+  attr_reader :start_at
+
+  def initialize(plan, customer, start_at = nil)
     raise TypeError unless plan.is_a? Plan
 
     @plan = plan
     @customer = customer
+    @start_at = start_at
     super
   end
 
@@ -30,7 +33,8 @@ class CartItem::Subscription < CartItem::BaseItem
   def to_object
     ::Subscription.new(
       plan_id: @plan.id,
-      statistic_profile_id: StatisticProfile.find_by(user: @customer).id
+      statistic_profile_id: StatisticProfile.find_by(user: @customer).id,
+      start_at: @start_at
     )
   end
 end

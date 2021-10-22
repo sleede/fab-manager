@@ -125,6 +125,7 @@
         _the_general_terms_and_conditions: "generelle vilkår og betingelser."
         payment_schedule_html: "<p>Du er i ferd med å abonnere på en betalingsplan på {DEADLINES} måneder.</p><p>Ved å betale denne regningen godtar du å sende instrukser til den finansielle institusjonen som utsteder kortet, for å ta betalinger fra din kortkonto, så lenge det varer i dette abonnementet. Dette antyder at kortdataene dine lagres av {GATEWAY} og en rekke betalinger vil bli satt i gang på dine vegne, i samsvar med betalingsplanen som tidligere er vist</p>"
         confirm_payment_of_: "Betal: {AMOUNT}"
+        validate: "Validate"
       #dialog of on site payment for reservations
       valid_reservation_modal:
         booking_confirmation: "Bestillingsbekreftelse"
@@ -417,7 +418,7 @@
         NUMBER_monthly_payment_of_AMOUNT: "{NUMBER} månedlig {NUMBER, plural, one {} =1{betaling} other{betalinger}} på {AMOUNT}"
         first_debit: "Første debet på bestillingsdato."
         debit: "Første trekk på bestillingsdato."
-        view_full_schedule: "Vis fullstendig betalingsplan"
+        view_full_schedule: "View the complete payment schedule"
         confirm_and_pay: "Bekreft og betal"
         you_have_settled_the_following_TYPE: "Du har betalt for følgende {TYPE, select, Machine{maskinplasser} Training{opplæring/kurs} other{elementer}}:"
         you_have_settled_a_: "Du har gjort opp en"

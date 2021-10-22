@@ -353,7 +353,7 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
                   <tr>
                     <td className="w-35 row-header" onClick={togglePaymentScheduleDetails(p.id)}>{expandCollapseIcon(p.id)}</td>
                     <td className="w-200">{p.reference}</td>
-                    <td className="w-200">{FormatLib.date(p.created_at)}</td>
+                    <td className="w-200">{FormatLib.date(_.minBy(p.items, 'due_date').due_date)}</td>
                     <td className="w-120">{FormatLib.price(p.total)}</td>
                     {showCustomer && <td className="w-200">{p.user.name}</td>}
                     <td className="w-200">{downloadButton(TargetType.PaymentSchedule, p.id)}</td>

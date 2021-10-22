@@ -10,7 +10,7 @@ module PayZen; end
 
 ## create remote objects on PayZen
 class PayZen::Service < Payment::Service
-  def create_subscription(payment_schedule, order_id)
+  def create_subscription(payment_schedule, order_id, *args)
     first_item = payment_schedule.ordered_items.first
 
     order = PayZen::Order.new.get(order_id, operation_type: 'VERIFICATION')
@@ -18,14 +18,14 @@ class PayZen::Service < Payment::Service
     token_id = order['answer']['transactions'].first['paymentMethodToken']
 
     params = {
-      amount: first_item.details['recurring'].to_i,
+      amount: payzen_amount(first_item.details['recurring'].to_i),
       effect_date: first_item.due_date.iso8601,
       payment_method_token: token_id,
       rrule: rrule(payment_schedule),
       order_id: order_id
     }
     unless first_item.details['adjustment']&.zero? && first_item.details['other_items']&.zero?
-      params[:initial_amount] = first_item.amount
+      params[:initial_amount] = payzen_amount(first_item.amount)
       params[:initial_amount_number] = 1
     end
     pz_subscription = client.create_subscription(params)
@@ -81,6 +81,14 @@ class PayZen::Service < Payment::Service
     end
   end
 
+  def payzen_amount(amount)
+    currency = Setting.get('payzen_currency')
+    return amount / 100 if zero_decimal_currencies.any? { |s| s.casecmp(currency).zero? }
+    return amount * 10 if three_decimal_currencies.any? { |s| s.casecmp(currency).zero? }
+
+    amount
+  end
+
   private
 
   def rrule(payment_schedule)
@@ -95,5 +103,14 @@ class PayZen::Service < Payment::Service
     transaction['amount'] == payment_schedule_item.amount &&
       transaction_date >= payment_schedule_item.due_date.to_date &&
       transaction_date <= payment_schedule_item.due_date.to_date + 7.days
+  end
+
+  # @see https://payzen.io/en-EN/payment-file/ips/list-of-supported-currencies.html
+  def zero_decimal_currencies
+    %w[KHR JPY KRW XOF XPF]
+  end
+
+  def three_decimal_currencies
+    %w[KWD TND]
   end
 end

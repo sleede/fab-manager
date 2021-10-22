@@ -15,7 +15,7 @@ class Stripe::Item < Payment::Item
   end
 
   def payment_mean?
-    klass == 'Stripe::SetupIntent'
+    klass == 'Stripe::PaymentMethod'
   end
 
   def subscription?

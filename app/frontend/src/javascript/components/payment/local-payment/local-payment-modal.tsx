@@ -3,7 +3,7 @@ import { AbstractPaymentModal, GatewayFormProps } from '../abstract-payment-moda
 import { LocalPaymentForm } from './local-payment-form';
 import { ShoppingCart } from '../../../models/payment';
 import { PaymentSchedule } from '../../../models/payment-schedule';
-import { User } from '../../../models/user';
+import { User, UserRole } from '../../../models/user';
 import { Invoice } from '../../../models/invoice';
 import { useTranslation } from 'react-i18next';
 import { ModalSize } from '../../base/fab-modal';
@@ -17,7 +17,9 @@ interface LocalPaymentModalProps {
   isOpen: boolean,
   toggleModal: () => void,
   afterSuccess: (result: Invoice|PaymentSchedule) => void,
+  onError: (message: string) => void,
   cart: ShoppingCart,
+  updateCart: (cart: ShoppingCart) => void,
   currentUser: User,
   schedule?: PaymentSchedule,
   customer: User
@@ -26,7 +28,7 @@ interface LocalPaymentModalProps {
 /**
  * This component enables a privileged user to confirm a local payments.
  */
-const LocalPaymentModalComponent: React.FC<LocalPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, cart, currentUser, schedule, customer }) => {
+const LocalPaymentModalComponent: React.FC<LocalPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, cart, updateCart, currentUser, schedule, customer }) => {
   const { t } = useTranslation('admin');
 
   /**
@@ -41,9 +43,18 @@ const LocalPaymentModalComponent: React.FC<LocalPaymentModalProps> = ({ isOpen, 
   };
 
   /**
+   * Generally, this modal dialog is only shown to admins or to managers when they book for someone else.
+   * If this is not the case, then it is shown to validate a free (or prepaid by wallet) cart.
+   * This function will return `true` in the later case.
+   */
+  const isFreeOfCharge = (): boolean => {
+    return (customer.id === currentUser.id);
+  };
+
+  /**
    * Integrates the LocalPaymentForm into the parent AbstractPaymentModal
    */
-  const renderForm: FunctionComponent<GatewayFormProps> = ({ onSubmit, onSuccess, onError, operator, className, formId, cart, customer, paymentSchedule, children }) => {
+  const renderForm: FunctionComponent<GatewayFormProps> = ({ onSubmit, onSuccess, onError, operator, className, formId, cart, updateCart, customer, paymentSchedule, children }) => {
     return (
       <LocalPaymentForm onSubmit={onSubmit}
         onSuccess={onSuccess}
@@ -52,6 +63,7 @@ const LocalPaymentModalComponent: React.FC<LocalPaymentModalProps> = ({ isOpen, 
         className={className}
         formId={formId}
         cart={cart}
+        updateCart={updateCart}
         customer={customer}
         paymentSchedule={paymentSchedule}>
         {children}
@@ -64,13 +76,15 @@ const LocalPaymentModalComponent: React.FC<LocalPaymentModalProps> = ({ isOpen, 
       isOpen={isOpen}
       toggleModal={toggleModal}
       logoFooter={logoFooter()}
-      title={t('app.admin.local_payment.offline_payment')}
+      title={isFreeOfCharge() ? t('app.admin.local_payment.validate_cart') : t('app.admin.local_payment.offline_payment')}
       formId="local-payment-form"
       formClassName="local-payment-form"
       currentUser={currentUser}
       cart={cart}
+      updateCart={updateCart}
       customer={customer}
       afterSuccess={afterSuccess}
+      onError={onError}
       schedule={schedule}
       GatewayForm={renderForm}
       modalSize={schedule ? ModalSize.large : ModalSize.medium}
@@ -79,12 +93,12 @@ const LocalPaymentModalComponent: React.FC<LocalPaymentModalProps> = ({ isOpen, 
   );
 };
 
-export const LocalPaymentModal: React.FC<LocalPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, currentUser, schedule, cart, customer }) => {
+export const LocalPaymentModal: React.FC<LocalPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, currentUser, schedule, cart, updateCart, customer }) => {
   return (
     <Loader>
-      <LocalPaymentModalComponent isOpen={isOpen} toggleModal={toggleModal} afterSuccess={afterSuccess} currentUser={currentUser} schedule={schedule} cart={cart} customer={customer} />
+      <LocalPaymentModalComponent isOpen={isOpen} toggleModal={toggleModal} afterSuccess={afterSuccess} onError={onError} currentUser={currentUser} schedule={schedule} cart={cart} updateCart={updateCart} customer={customer} />
     </Loader>
   );
 };
 
-Application.Components.component('localPaymentModal', react2angular(LocalPaymentModal, ['isOpen', 'toggleModal', 'afterSuccess', 'currentUser', 'schedule', 'cart', 'customer']));
+Application.Components.component('localPaymentModal', react2angular(LocalPaymentModal, ['isOpen', 'toggleModal', 'afterSuccess', 'onError', 'currentUser', 'schedule', 'cart', 'updateCart', 'customer']));

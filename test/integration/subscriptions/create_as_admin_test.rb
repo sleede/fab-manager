@@ -77,7 +77,7 @@ class Subscriptions::CreateAsAdminTest < ActionDispatch::IntegrationTest
     payment_schedule_items_count = PaymentScheduleItem.count
 
     VCR.use_cassette('subscriptions_admin_create_with_payment_schedule') do
-      post '/api/stripe/payment_schedule',
+      post '/api/stripe/setup_subscription',
            params: {
              payment_method_id: stripe_payment_method,
              cart_items: {
@@ -95,34 +95,15 @@ class Subscriptions::CreateAsAdminTest < ActionDispatch::IntegrationTest
            }.to_json, headers: default_headers
 
       # Check response format & status
-      assert_equal 200, response.status, response.body
+      assert_equal 201, response.status, response.body
       assert_equal Mime[:json], response.content_type
 
       # Check the response
       res = json_response(response.body)
       assert_not_nil res[:id]
-
-      post '/api/stripe/confirm_payment_schedule',
-           params: {
-             subscription_id: res[:id],
-             cart_items: {
-               customer_id: user.id,
-               payment_schedule: true,
-               payment_method: 'card',
-               items: [
-                 {
-                   subscription: {
-                     plan_id: plan.id
-                   }
-                 }
-               ]
-             }
-           }.to_json, headers: default_headers
     end
 
     # Check generalities
-    assert_equal 201, response.status, response.body
-    assert_equal Mime[:json], response.content_type
     assert_equal invoice_count, Invoice.count, "an invoice was generated but it shouldn't"
     assert_equal payment_schedule_count + 1, PaymentSchedule.count, 'missing the payment schedule'
     assert_equal payment_schedule_items_count + 12, PaymentScheduleItem.count, 'missing some payment schedule items'

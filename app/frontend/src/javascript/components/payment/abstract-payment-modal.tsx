@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactNode, useEffect, useState } from 'react';
+import React, { FunctionComponent, ReactNode, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import WalletLib from '../../lib/wallet';
 import { WalletInfo } from '../wallet-info';
@@ -27,6 +27,7 @@ export interface GatewayFormProps {
   className?: string,
   paymentSchedule?: PaymentSchedule,
   cart?: ShoppingCart,
+  updateCart?: (cart: ShoppingCart) => void,
   formId: string,
 }
 
@@ -34,7 +35,9 @@ interface AbstractPaymentModalProps {
   isOpen: boolean,
   toggleModal: () => void,
   afterSuccess: (result: Invoice|PaymentSchedule) => void,
+  onError: (message: string) => void,
   cart: ShoppingCart,
+  updateCart?: (cart: ShoppingCart) => void,
   currentUser: User,
   schedule?: PaymentSchedule,
   customer: User,
@@ -55,7 +58,7 @@ interface AbstractPaymentModalProps {
  * This component must not be called directly but must be extended for each implemented payment gateway
  * @see https://reactjs.org/docs/composition-vs-inheritance.html
  */
-export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, cart, currentUser, schedule, customer, logoFooter, GatewayForm, formId, className, formClassName, title, preventCgv, preventScheduleInfo, modalSize }) => {
+export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, cart, updateCart, currentUser, schedule, customer, logoFooter, GatewayForm, formId, className, formClassName, title, preventCgv, preventScheduleInfo, modalSize }) => {
   // customer's wallet
   const [wallet, setWallet] = useState<Wallet>(null);
   // server-computed price with all details
@@ -74,6 +77,8 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
   const [gateway, setGateway] = useState<string>(null);
   // the sales conditions
   const [cgv, setCgv] = useState<CustomAsset>(null);
+  // is the component mounted
+  const mounted = useRef(false);
 
   const { t } = useTranslation('shared');
 
@@ -81,11 +86,14 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
    * When the component loads first, get the name of the currently active payment modal
    */
   useEffect(() => {
+    mounted.current = true;
     CustomAssetAPI.get(CustomAssetName.CgvFile).then(asset => setCgv(asset));
     SettingAPI.get(SettingName.PaymentGateway).then((setting) => {
       // we capitalize the first letter of the name
       setGateway(setting.value.replace(/^\w/, (c) => c.toUpperCase()));
     });
+
+    return () => { mounted.current = false; };
   }, []);
 
   /**
@@ -153,8 +161,12 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
    * When the payment form raises an error, it is handled by this callback which display it in the modal.
    */
   const handleFormError = (message: string): void => {
-    setSubmitState(false);
-    setErrors(message);
+    if (mounted.current) {
+      setSubmitState(false);
+      setErrors(message);
+    } else {
+      onError(message);
+    }
   };
 
   /**
@@ -195,13 +207,14 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
           className={`gateway-form ${formClassName || ''}`}
           formId={formId}
           cart={cart}
+          updateCart={updateCart}
           customer={customer}
           paymentSchedule={schedule}>
           {hasErrors() && <div className="payment-errors">
             {errors}
           </div>}
           {hasPaymentScheduleInfo() && <div className="payment-schedule-info">
-            <HtmlTranslate trKey="app.shared.payment.payment_schedule_html" options={{ DEADLINES: schedule.items.length, GATEWAY: gateway }} />
+            <HtmlTranslate trKey="app.shared.payment.payment_schedule_html" options={{ DEADLINES: `${schedule.items.length}`, GATEWAY: gateway }} />
           </div>}
           {hasCgv() && <div className="terms-of-sales">
             <input type="checkbox" id="acceptToS" name="acceptCondition" checked={tos} onChange={toggleTos} required />
@@ -216,7 +229,8 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
           disabled={!canSubmit()}
           form={formId}
           className="validate-btn">
-          {t('app.shared.payment.confirm_payment_of_', { AMOUNT: FormatLib.price(remainingPrice) })}
+          {remainingPrice > 0 && t('app.shared.payment.confirm_payment_of_', { AMOUNT: FormatLib.price(remainingPrice) })}
+          {remainingPrice === 0 && t('app.shared.payment.validate')}
         </button>}
         {submitState && <div className="payment-pending">
           <div className="fa-2x">

@@ -1,6 +1,6 @@
 import apiClient from './clients/api-client';
 import { AxiosResponse } from 'axios';
-import { ShoppingCart, IntentConfirmation, PaymentConfirmation, UpdateCardResponse, StripeSubscription } from '../models/payment';
+import { ShoppingCart, IntentConfirmation, PaymentConfirmation, UpdateCardResponse } from '../models/payment';
 import { PaymentSchedule } from '../models/payment-schedule';
 import { Invoice } from '../models/invoice';
 
@@ -21,8 +21,8 @@ export default class StripeAPI {
     return res?.data;
   }
 
-  static async paymentSchedule (paymentMethodId: string, cartItems: ShoppingCart): Promise<StripeSubscription> {
-    const res: AxiosResponse = await apiClient.post('/api/stripe/payment_schedule', {
+  static async setupSubscription (paymentMethodId: string, cartItems: ShoppingCart): Promise<PaymentConfirmation|PaymentSchedule> {
+    const res: AxiosResponse = await apiClient.post('/api/stripe/setup_subscription', {
       payment_method_id: paymentMethodId,
       cart_items: cartItems
     });
@@ -34,8 +34,8 @@ export default class StripeAPI {
     return res?.data;
   }
 
-  static async confirmPaymentSchedule (subscriptionId: string, cartItems: ShoppingCart): Promise<PaymentSchedule> {
-    const res: AxiosResponse<PaymentSchedule> = await apiClient.post('/api/stripe/confirm_payment_schedule', {
+  static async confirmSubscription (subscriptionId: string, cartItems: ShoppingCart): Promise<PaymentSchedule> {
+    const res: AxiosResponse<PaymentSchedule> = await apiClient.post('/api/stripe/confirm_subscription', {
       subscription_id: subscriptionId,
       cart_items: cartItems
     });
