@@ -918,9 +918,9 @@ fr:
         current_expiration: "L'abonnement actuel expirera le :"
         new_start: "La nouvelle souscription commencera le :"
         new_expiration_date: "Le nouvel abonnement expirera le :"
-        pay_in_one_go: "Pay in one go"
-        renew: "Renew"
-        renew_success: "The subscription was successfully renewed"
+        pay_in_one_go: "Payer en une fois"
+        renew: "Renouveler"
+        renew_success: "L'abonnement a bien été renouvelé"
       #take a new subscription
       subscribe_modal:
         subscribe_USER: "Subscribe for {USER}"
