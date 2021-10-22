@@ -923,10 +923,10 @@ fr:
         renew_success: "L'abonnement a bien été renouvelé"
       #take a new subscription
       subscribe_modal:
-        subscribe_USER: "Subscribe {USER}"
-        subscribe: "Subscribe"
-        select_plan: "Please select a plan"
-        pay_in_one_go: "Pay in one go"
+        subscribe_USER: "Abonner {USER}"
+        subscribe: "Abonner"
+        select_plan: "Veuillez choisir une formule d'abonnement"
+        pay_in_one_go: "Payer en une fois"
         subscription_success: ""
       #add a new administrator to the platform
       admins_new:
@@ -1177,8 +1177,8 @@ fr:
         an_error_occurred_saving_the_setting: "Une erreur est survenue pendant l'enregistrement du paramètre. Veuillez réessayer plus tard."
         book_overlapping_slots_info: "Autoriser / empêcher la réservation de créneaux qui se chevauchent"
         allow_booking: "Autoriser la réservation"
-        overlapping_categories: "Overlapping categories"
-        overlapping_categories_info: "Preventing booking on overlapping slots will be done by comparing the date and time of the following categories of reservations."
+        overlapping_categories: "Catégories des chevauchements"
+        overlapping_categories_info: "Éviter la réservation de créneaux qui se chevauchent sera effectué en comparant la date et l'heure des catégories de réservations suivantes."
         default_slot_duration: "Durée par défaut pour les créneaux"
         duration_minutes: "Durée (en minutes)"
         default_slot_duration_info: "Les disponibilités des machines et des espaces sont divisées en plusieurs créneaux de cette durée. Cette valeur peur être changée pour chaque disponibilité."
@@ -1236,10 +1236,10 @@ fr:
         pack_only_for_subscription: "Abonnement valide pour l'achat et l'utilisation d'un pack prépayé"
         pack_only_for_subscription_info: "Rendre l'abonnement obligatoire pour les packs prépayés"
         overlapping_options:
-          training_reservations: "Trainings"
+          training_reservations: "Formations"
           machine_reservations: "Machines"
-          space_reservations: "Spaces"
-          events_reservations: "Events"
+          space_reservations: "Espaces"
+          events_reservations: "Événements"
         general:
           general: "Général"
           title: "Titre"
@@ -1392,10 +1392,10 @@ fr:
         category_deleted: "La catégorie a bien été supprimée"
         unable_to_delete: "Impossible de supprimer la catégorie : "
       local_payment:
-        validate_cart: "Validate my cart"
+        validate_cart: "Valider mon panier"
         offline_payment: "Paiement sur place"
         about_to_cash: "Vous êtes sur le point de confirmer l'encaissement par un moyen de paiement externe. Veuillez ne pas cliquer sur le bouton ci-dessous tant que vous n'avez pas encaissé le paiement demandé."
-        about_to_confirm: "You're about to confirm your {ITEM, select, subscription{subscription} other{reservation}}."
+        about_to_confirm: "Vous êtes sur le point de confirmer votre {ITEM, select, subscription{abonnement} other{réservation}}."
         payment_method: "Moyen de paiement"
         method_card: "Carte bancaire en ligne"
         method_check: "Par chèques"
@@ -1403,8 +1403,8 @@ fr:
         check_collection_info: "En validant, vous confirmez être en possession de {DEADLINES} chèques permettant d'encaisser l'ensemble des mensualité."
         online_payment_disabled: "Le paiement en ligne n'est pas disponible. Vous ne pouvez pas encaisser cet échéancier de paiement en utilisant la carte bancaire en ligne."
       check_list_setting:
-        save: 'Save'
-        customization_of_SETTING_successfully_saved: "Customization of the {SETTING} successfully saved."
+        save: 'Enregistrer'
+        customization_of_SETTING_successfully_saved: "La personnalisation de {SETTING} a bien été enregistrée."
       #feature tour
       tour:
         conclusion:
