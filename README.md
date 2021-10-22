@@ -9,13 +9,6 @@ Fab-manager is the Fab Lab management solution. It provides a comprehensive, web
 
 Please visit [fab-manager.com](https://www.fab-manager.com/) for more information about this software and its features.
 
-##### Table of Contents
-1. [Contributing](#contributing)
-2. [Documentation](#documentation)
-3. [Open Projects](#open-projects)
-4. [Plugins](#plugins)
-5. [Single Sign-On](#sso)
-
 <a name="contributing"></a>
 ## Contributing
 
@@ -26,45 +19,8 @@ Contributions are welcome. Please read [the contribution guidelines](CONTRIBUTIN
 
 The full documentation is available at [doc.fab.mn](http://doc.fab.mn).
 
-<a name="open-projects"></a>
-## Open Projects
+<a name="Copyright"></a>
+## Copyright
 
-**This configuration is optional.**
-
-You can configure your Fab-manager to synchronize every project with the [Open Projects platform](https://github.com/sleede/openlab-projects).
-It's very simple and straightforward and in return, your users will be able to search over projects from all Fab-manager instances from within your platform.
-The deal is fair, you share your projects and as reward you benefits from projects of the whole community.
-
-If you want to try it, you can visit [this Fab-manager](https://fablab.lacasemate.fr/#!/projects) and see projects from different Fab-managers.
-
-To start using this awesome feature, there are a few steps:
-- send a mail to **contact@fab-manager.com** asking for your Open Projects client's credentials and giving them the name and the URL of your Fab-manager, they will give you an `App ID` and a `secret`
-- fill in the value of the keys in Admin > Projects > Settings > Projects sharing
-- export your projects to open-projects (if you already have projects created on your Fab-manager, unless you can skip that part) executing this command: `bundle exec rails fablab:openlab:bulk_export`
-
-**IMPORTANT: please run your server in production mode.**
-
-Go to your projects gallery and enjoy seeing your projects available from everywhere ! That's all.
-
-<a name="plugins"></a>
-## Plugins
-
-Fab-manager has a system of plugins mainly inspired by [Discourse](https://github.com/discourse/discourse) architecture.
-
-It enables you to write plugins which can:
-- have its proper models and database tables
-- have its proper assets (js & css)
-- override existing behaviours of Fab-manager
-- add features by adding views, controllers, ect...
-
-To install a plugin, you just have to copy the plugin folder which contains its code into the folder `plugins` of Fab-manager.
-
-You can see an example on the [repo of navinum gamification plugin](https://github.com/sleede/navinum-gamification)
-
-<a name="sso"></a>
-## Single Sign-On
-
-Fab-manager can be connected to a [Single Sign-On](https://en.wikipedia.org/wiki/Single_sign-on) server which will provide its own authentication for the platform's users.
-Currently, OAuth 2 is the only supported protocol for SSO authentication.
-
-For an example of how to use configure an SSO in Fab-manager, please read [sso_with_github.md](doc/sso_with_github.md).
+This free software is available under the terms of the [GNU Affero General Public License](LICENSE.md).
+Fab-manager is developed by [sleede](https://www.sleede.com/) and the [open-open contributors](https://github.com/sleede/fab-manager/graphs/contributors) of the community.  

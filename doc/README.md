@@ -26,9 +26,11 @@ The following guides are designed for the people that perform software maintenan
 
 - [Advanced PostgreSQL usage](postgresql_readme.md)
 
-- [Connecting a SSO using oAuth 2.0](sso_with_github.md)
+- [Connecting an SSO using oAuth 2.0](sso_with_github.md)
 
 - [Upgrade from Fab-manager v1.0](upgrade_v1.md)
+
+- [Configuring OpenProjects](open_projects.md)
 
 #### Upgrades procedures
 - [PostgreSQL](postgres_upgrade.md)
@@ -42,6 +44,8 @@ If you intend to translate Fab-manager to a new, or an already supported languag
 The following guides should help those who want to contribute to the code.
 #### Architecture
 - [Code architecture](architecture.md)
+
+- [Plugins](plugins.md)
 
 #### How to setup a development environment
 - [With docker-compose](development_readme.md)
