@@ -418,6 +418,8 @@
     admins: 'Administratorer'
   cart_items:
     free_extension: "Free extension of a subscription, until %{DATE}"
+  statistic_profile:
+    birthday_in_past: "The date of birth must be in the past"
   settings:
     locked_setting: "innstillingen er låst."
     about_title: "\"Om\" sidetittel"
@@ -532,3 +534,4 @@
     public_agenda_module: "Public agenda module"
     renew_pack_threshold: "Threshold for packs renewal"
     pack_only_for_subscription: "Restrict packs for subscribers"
+    overlapping_categories: "Categories for overlapping booking prevention"
