@@ -125,6 +125,7 @@ zu:
         _the_general_terms_and_conditions: "crwdns21488:0crwdne21488:0"
         payment_schedule_html: "crwdns21490:0{DEADLINES}crwdnd21490:0{GATEWAY}crwdne21490:0"
         confirm_payment_of_: "crwdns21492:0{AMOUNT}crwdne21492:0"
+        validate: "crwdns22131:0crwdne22131:0"
       #dialog of on site payment for reservations
       valid_reservation_modal:
         booking_confirmation: "crwdns9587:0crwdne9587:0"
