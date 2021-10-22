@@ -418,6 +418,8 @@ fr:
     admins: 'Administrateurs'
   cart_items:
     free_extension: "Free extension of a subscription, until %{DATE}"
+  statistic_profile:
+    birthday_in_past: "The date of birth must be in the past"
   settings:
     locked_setting: "le paramètre est verrouillé."
     about_title: "Le titre de la page \"À propos\""
@@ -532,3 +534,4 @@ fr:
     public_agenda_module: "Module d'agenda public"
     renew_pack_threshold: "Seuil de renouvellement des packs"
     pack_only_for_subscription: "Restrict packs for subscribers"
+    overlapping_categories: "Categories for overlapping booking prevention"
