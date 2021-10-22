@@ -122,8 +122,11 @@ class Setting < ApplicationRecord
                              renew_pack_threshold
                              pack_only_for_subscription
                              overlapping_categories] }
-  # WARNING: when adding a new key, you may also want to add it in app/policies/setting_policy.rb#public_whitelist
-  # and in config/locales/en.yml#settings
+  # WARNING: when adding a new key, you may also want to add it in:
+  # - config/locales/en.yml#settings
+  # - app/frontend/src/javascript/models/setting.ts#SettingName
+  # - db/seeds.rb (to set the default value)
+  # - app/policies/setting_policy.rb#public_whitelist (if the setting can be read by anyone)
 
   def value
     last_value = history_values.order(HistoryValue.arel_table['created_at'].desc).limit(1).first

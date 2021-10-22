@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
-- Refactored subscription new/renew/free extend interfaces and API 
+- Refactored subscription new/renew/free extend interfaces and API
+- Ability to configure data sources for preventing booking on overlapping slots
 - Updated production documentation
 - Updated SSO documentation
 - Improved stripe subscription process with better error handling
@@ -23,6 +24,7 @@
 - Fix a security issue: updated nokogiri to 1.12.5 to fix [CVE-2021-41098](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41098)
 - Fix a security issue: updated puma to 4.3.9 to fix [CVE-2021-41136](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41136)
 - Fix a security issue: updated sidekiq to 6.2.1 to fix [CVE-2021-30151](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30151)
+- [TODO DEPLOY] `rails db:seed`
 
 ## v5.1.10 2021 October 04
 

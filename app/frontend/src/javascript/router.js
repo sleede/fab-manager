@@ -365,7 +365,7 @@ angular.module('application.router', ['ui.router'])
             return Setting.query({
               names: "['machine_explications_alert', 'booking_window_start',  'booking_window_end',  'booking_move_enable', " +
                      "'booking_move_delay', 'booking_cancel_enable',  'booking_cancel_delay', 'subscription_explications_alert', " +
-                     "'online_payment_module', 'payment_gateway']"
+                     "'online_payment_module', 'payment_gateway', 'overlapping_categories']"
             }).$promise;
           }]
         }
@@ -451,7 +451,7 @@ angular.module('application.router', ['ui.router'])
             return Setting.query({
               names: "['booking_window_start', 'booking_window_end', 'booking_move_enable',  'booking_move_delay', " +
                      "'booking_cancel_enable', 'booking_cancel_delay', 'subscription_explications_alert',  " +
-                     "'space_explications_alert', 'online_payment_module', 'payment_gateway']"
+                     "'space_explications_alert', 'online_payment_module', 'payment_gateway', 'overlapping_categories']"
             }).$promise;
           }]
         }
@@ -505,7 +505,7 @@ angular.module('application.router', ['ui.router'])
               names: "['booking_window_start', 'booking_window_end', 'booking_move_enable', 'booking_move_delay', " +
                      "'booking_cancel_enable', 'booking_cancel_delay', 'subscription_explications_alert', " +
                      "'training_explications_alert', 'training_information_message', 'online_payment_module', " +
-                     "'payment_gateway']"
+                     "'payment_gateway', 'overlapping_categories']"
             }).$promise;
           }]
         }
@@ -534,7 +534,7 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           subscriptionExplicationsPromise: ['Setting', function (Setting) { return Setting.get({ name: 'subscription_explications_alert' }).$promise; }],
           groupsPromise: ['Group', function (Group) { return Group.query().$promise; }],
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['online_payment_module', 'payment_gateway']" }).$promise; }]
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['online_payment_module', 'payment_gateway', 'overlapping_categories']" }).$promise; }]
         }
       })
 
@@ -1080,7 +1080,7 @@ angular.module('application.router', ['ui.router'])
                      "'reminder_delay', 'visibility_yearly', 'visibility_others', 'wallet_module', 'trainings_module', " +
                      "'display_name_enable', 'machines_sort_by', 'fab_analytics', 'statistics_module', 'address_required', " +
                      "'link_name', 'home_content', 'home_css', 'phone_required', 'upcoming_events_shown', 'public_agenda_module'," +
-                     "'renew_pack_threshold', 'pack_only_for_subscription']"
+                     "'renew_pack_threshold', 'pack_only_for_subscription', 'overlapping_categories']"
             }).$promise;
           }],
           privacyDraftsPromise: ['Setting', function (Setting) { return Setting.get({ name: 'privacy_draft', history: true }).$promise; }],

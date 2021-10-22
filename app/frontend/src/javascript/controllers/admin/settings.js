@@ -329,6 +329,16 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
     };
 
     /**
+     * Options for allow/prevent book overlapping slots: which kind of slots are used in the overlapping computation
+     */
+    $scope.availableOverlappingOptions = [
+      ['training_reservations', _t('app.admin.settings.overlapping_options.training_reservations')],
+      ['machine_reservations', _t('app.admin.settings.overlapping_options.machine_reservations')],
+      ['space_reservations', _t('app.admin.settings.overlapping_options.space_reservations')],
+      ['events_reservations', _t('app.admin.settings.overlapping_options.events_reservations')]
+    ];
+
+    /**
      * Setup the feature-tour for the admin/settings page.
      * This is intended as a contextual help (when pressing F1)
      */

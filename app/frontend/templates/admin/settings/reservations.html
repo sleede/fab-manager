@@ -91,12 +91,14 @@
                                      label="app.admin.settings.allow_booking"
                                      classes="m-l">
                     </boolean-setting>
+                    <div class="alert alert-warning" ng-show="allSettings.book_overlapping_slots !== 'true'" translate>
+                        {{ 'app.admin.settings.overlapping_categories_info' }}
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <check-list-setting name="overlapping_categories"
+                <div class="col-md-6" ng-show="allSettings.book_overlapping_slots !== 'true'">
+                    <check-list-setting name="'overlapping_categories'"
                                         label="'app.admin.settings.overlapping_categories' | translate"
-                                        all-setting="allSettings"
-                                        available-options="['training_reservations','machine_reservations','space_reservations','events_reservations']"
+                                        available-options="availableOverlappingOptions"
                                         on-success="onSuccess"
                                         on-error="onError">
                     </check-list-setting>

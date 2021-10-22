@@ -111,6 +111,7 @@ export enum SettingName {
   PublicAgendaModule = 'public_agenda_module',
   RenewPackThreshold = 'renew_pack_threshold',
   PackOnlyForSubscription = 'pack_only_for_subscription',
+  OverlappingCategories = 'overlapping_categories'
 }
 
 export type SettingValue = string|boolean|number;
