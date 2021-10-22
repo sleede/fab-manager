@@ -456,7 +456,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
          * @param callback {function}
          */
         const validateSameTimeReservations = function (slot, callback) {
-          $scope.settings.overlapping_categories.split(',').map(function (k) {
+          let sameTimeReservations = $scope.settings.overlapping_categories.split(',').map(function (k) {
             return _.filter($scope.user[k], function (r) {
               return slot.start.isSame(r.start_at) ||
                 (slot.end.isAfter(r.start_at) && slot.end.isBefore(r.end_at)) ||
