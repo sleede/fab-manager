@@ -125,6 +125,7 @@ de:
         _the_general_terms_and_conditions: "die allgemeinen Nutzungs- und Geschäftsbedingungen."
         payment_schedule_html: "<p>You're about to subscribe to a payment schedule of {DEADLINES} months.</p><p>By paying this bill, you agree to send instructions to the financial institution that issue your card, to take payments from your card account, for the whole duration of this subscription. This imply that your card data are saved by {GATEWAY} and a series of payments will be initiated on your behalf, conforming to the payment schedule previously shown.</p>"
         confirm_payment_of_: "Bezahlen: {AMOUNT}"
+        validate: "Validate"
       #dialog of on site payment for reservations
       valid_reservation_modal:
         booking_confirmation: "Buchungsbestätigung"
@@ -417,7 +418,7 @@ de:
         NUMBER_monthly_payment_of_AMOUNT: "{NUMBER} monthly {NUMBER, plural, =1{payment} other{payments}} of {AMOUNT}"
         first_debit: "First debit on the day of the order."
         debit: "Debit on the day of the order."
-        view_full_schedule: "View the complete payement schedule"
+        view_full_schedule: "View the complete payment schedule"
         confirm_and_pay: "Bestätigen und bezahlen"
         you_have_settled_the_following_TYPE: "Sie haben die folgenden {TYPE, select, Machine{Maschinenslots} Training{Schulungen} other{Elemente}} beglichen:"
         you_have_settled_a_: "Sie haben beglichen"

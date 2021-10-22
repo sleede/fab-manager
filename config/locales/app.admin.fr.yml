@@ -866,7 +866,7 @@ fr:
         expires_at: "Expire le :"
         price_: "Prix :"
         offer_free_days: "Offrir des jours gratuits"
-        extend_subscription: "Prolonger l'abonnement"
+        renew_subscription: "Renouveler l'abonnement"
         user_has_no_current_subscription: "L'utilisateur n'a pas d'abonnement en cours."
         subscribe_to_a_plan: "Souscrire à un abonnement"
         trainings: "Formations"
@@ -888,13 +888,6 @@ fr:
         download_the_invoice: "Télécharger la facture"
         download_the_refund_invoice: "Télécharger l'avoir"
         no_invoices_for_now: "Aucune facture pour le moment."
-        expiration_date: "Date d'expiration"
-        you_intentionally_decide_to_extend_the_user_s_subscription_by_offering_him_free_days: "Vous décidez délibérément d'étendre l'abonnement de l'utilisateur en lui offrant des jours gratuits."
-        credits_will_remain_unchanged: "Le solde de crédits gratuits (formations/machines/espaces) de l'utilisateur restera inchangé."
-        you_intentionally_decide_to_extend_the_user_s_subscription_by_charging_him_again_for_his_current_subscription: "Vous décidez délibérément d'étendre l'abonnement de l'utilisateur en lui faisant repayer le prix de l'abonnement qu'il possède actuellement."
-        credits_will_be_reset: "Le solde de crédits gratuits (formations/machines/espaces) de l'utilisateur sera remis à zéro, ses crédits non utilisés seront perdu."
-        payment_scheduled: "Si l'abonnement précédent a été facturé via un échéancier de paiement mensualisé, celui-ci sera facturé de la même façon, la première échéance étant facturée immédiatement, puis chaque mois suivant."
-        until_expiration_date: "Jusqu'à (date d'expiration) :"
         you_successfully_changed_the_expiration_date_of_the_user_s_subscription: "Vous avez bien modifié la date d'expiration de l'abonnement de l'utilisateur"
         a_problem_occurred_while_saving_the_date: "Il y a eu un problème lors de l'enregistrement de la date."
         new_subscription: "Nouvelle souscription"
@@ -906,6 +899,35 @@ fr:
         to_credit: 'Créditer'
         cannot_credit_own_wallet: "Vous ne pouvez pas créditer votre propre porte-monnaie. Veuillez demander à un autre gestionnaire ou à un administrateur de créditer votre porte-monnaie."
         cannot_extend_own_subscription: "Vous ne pouvez pas prolonger votre propre abonnement. Veuillez demander à un autre gestionnaire ou à un administrateur de prolonger votre abonnement."
+      #extend a subscription for free
+      free_extend_modal:
+        extend_subscription: "Prolonger l'abonnement"
+        offer_free_days_infos: "Vous êtes sur le point de prolonger l'abonnement de l'utilisateur en lui offrant des jours supplémentaires gratuits."
+        credits_will_remain_unchanged: "Le solde de crédits gratuits (formations / machines / espaces) de l'utilisateur restera inchangé."
+        current_expiration: "L'abonnement actuel expirera le :"
+        DATE_TIME: "{DATE} à {TIME}"
+        new_expiration_date: "Nouvelle date d'expiration :"
+        number_of_free_days: "Nombre de jours gratuits :"
+        extend: "Prolonger"
+        extend_success: "L'abonnement a été prolongé gratuitement"
+      #renew a subscription
+      renew_subscription_modal:
+        renew_subscription: "Renouveler l'abonnement"
+        renew_subscription_info: "Vous êtes sur le point de renouveler l'abonnement de l'utilisateur en lui refacturant son abonnement actuel."
+        credits_will_be_reset: "Le solde de crédits gratuits (formations / machines / espaces) de l'utilisateur sera remis à zéro, ses crédits non utilisés seront perdu."
+        current_expiration: "L'abonnement actuel expirera le :"
+        new_start: "La nouvelle souscription commencera le :"
+        new_expiration_date: "Le nouvel abonnement expirera le :"
+        pay_in_one_go: "Payer en une fois"
+        renew: "Renouveler"
+        renew_success: "L'abonnement a bien été renouvelé"
+      #take a new subscription
+      subscribe_modal:
+        subscribe_USER: "Abonner {USER}"
+        subscribe: "Abonner"
+        select_plan: "Veuillez choisir une formule d'abonnement"
+        pay_in_one_go: "Payer en une fois"
+        subscription_success: ""
       #add a new administrator to the platform
       admins_new:
         add_an_administrator: "Ajouter un administrateur"
@@ -1155,6 +1177,8 @@ fr:
         an_error_occurred_saving_the_setting: "Une erreur est survenue pendant l'enregistrement du paramètre. Veuillez réessayer plus tard."
         book_overlapping_slots_info: "Autoriser / empêcher la réservation de créneaux qui se chevauchent"
         allow_booking: "Autoriser la réservation"
+        overlapping_categories: "Catégories des chevauchements"
+        overlapping_categories_info: "Éviter la réservation de créneaux qui se chevauchent sera effectué en comparant la date et l'heure des catégories de réservations suivantes."
         default_slot_duration: "Durée par défaut pour les créneaux"
         duration_minutes: "Durée (en minutes)"
         default_slot_duration_info: "Les disponibilités des machines et des espaces sont divisées en plusieurs créneaux de cette durée. Cette valeur peur être changée pour chaque disponibilité."
@@ -1211,6 +1235,11 @@ fr:
         pack_only_for_subscription_info_html: "Si cette option est activée, l'achat et l'utilisation d'un pack prépayé n'est possible que pour l'utilisateur possédant un abonnement en cours de validité."
         pack_only_for_subscription: "Abonnement valide pour l'achat et l'utilisation d'un pack prépayé"
         pack_only_for_subscription_info: "Rendre l'abonnement obligatoire pour les packs prépayés"
+        overlapping_options:
+          training_reservations: "Formations"
+          machine_reservations: "Machines"
+          space_reservations: "Espaces"
+          events_reservations: "Événements"
         general:
           general: "Général"
           title: "Titre"
@@ -1363,14 +1392,19 @@ fr:
         category_deleted: "La catégorie a bien été supprimée"
         unable_to_delete: "Impossible de supprimer la catégorie : "
       local_payment:
+        validate_cart: "Valider mon panier"
         offline_payment: "Paiement sur place"
         about_to_cash: "Vous êtes sur le point de confirmer l'encaissement par un moyen de paiement externe. Veuillez ne pas cliquer sur le bouton ci-dessous tant que vous n'avez pas encaissé le paiement demandé."
+        about_to_confirm: "Vous êtes sur le point de confirmer votre {ITEM, select, subscription{abonnement} other{réservation}}."
         payment_method: "Moyen de paiement"
         method_card: "Carte bancaire en ligne"
         method_check: "Par chèques"
         card_collection_info: "En validant, vous serez invité à saisir les informations de carte bancaire du membre. Cette carte sera prélevée automatiquement aux échéances."
         check_collection_info: "En validant, vous confirmez être en possession de {DEADLINES} chèques permettant d'encaisser l'ensemble des mensualité."
         online_payment_disabled: "Le paiement en ligne n'est pas disponible. Vous ne pouvez pas encaisser cet échéancier de paiement en utilisant la carte bancaire en ligne."
+      check_list_setting:
+        save: 'Enregistrer'
+        customization_of_SETTING_successfully_saved: "La personnalisation de {SETTING} a bien été enregistrée."
       #feature tour
       tour:
         conclusion:
