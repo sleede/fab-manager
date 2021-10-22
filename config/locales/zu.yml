@@ -418,6 +418,8 @@ zu:
     admins: 'crwdns3769:0crwdne3769:0'
   cart_items:
     free_extension: "crwdns22091:0%{DATE}crwdne22091:0"
+  statistic_profile:
+    birthday_in_past: "crwdns22127:0crwdne22127:0"
   settings:
     locked_setting: "crwdns21632:0crwdne21632:0"
     about_title: "crwdns21634:0crwdne21634:0"
@@ -532,3 +534,4 @@ zu:
     public_agenda_module: "crwdns21874:0crwdne21874:0"
     renew_pack_threshold: "crwdns22032:0crwdne22032:0"
     pack_only_for_subscription: "crwdns22093:0crwdne22093:0"
+    overlapping_categories: "crwdns22129:0crwdne22129:0"
