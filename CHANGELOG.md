@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v5.1.11 2021 October 22
+
 - Refactored subscription new/renew/free extend interfaces and API
 - Ability to configure data sources for preventing booking on overlapping slots
 - Updated production documentation
