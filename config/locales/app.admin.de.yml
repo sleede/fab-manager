@@ -1181,6 +1181,8 @@ de:
         an_error_occurred_saving_the_setting: "Beim Speichern der Einstellung ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut."
         book_overlapping_slots_info: "Erlauben / Verhindern der Reservierung von überlappenden Slots"
         allow_booking: "Allow booking"
+        overlapping_categories: "Overlapping categories"
+        overlapping_categories_info: "Preventing booking on overlapping slots will be done by comparing the date and time of the following categories of reservations."
         default_slot_duration: "Standarddauer für Slots"
         duration_minutes: "Dauer (in Minuten)"
         default_slot_duration_info: "Die Verfügbarkeit von Maschinen und Räumen ist in mehrere Slots dieser Dauer aufgeteilt. Dieser Wert kann je Verfügbarkeit überschrieben werden."
@@ -1237,6 +1239,11 @@ de:
         pack_only_for_subscription_info_html: "If this option is activated, the purchase and use of a prepaid pack is only possible for the user with a valid subscription."
         pack_only_for_subscription: "Subscription valid for purchase and use of a prepaid pack"
         pack_only_for_subscription_info: "Make subscription mandatory for prepaid packs"
+        overlapping_options:
+          training_reservations: "Trainings"
+          machine_reservations: "Machines"
+          space_reservations: "Spaces"
+          events_reservations: "Events"
         general:
           general: "Allgemein"
           title: "Titel"
@@ -1389,14 +1396,19 @@ de:
         category_deleted: "The category was successfully deleted"
         unable_to_delete: "Unable to delete the category: "
       local_payment:
+        validate_cart: "Validate my cart"
         offline_payment: "Payment on site"
         about_to_cash: "You're about to confirm the cashing by an external payment mean. Please do not click on the button below until you have fully cashed the requested payment."
+        about_to_confirm: "You're about to confirm your {ITEM, select, subscription{subscription} other{reservation}}."
         payment_method: "Payment method"
         method_card: "Online by card"
         method_check: "By check"
         card_collection_info: "By validating, you'll be prompted for the member's card number. This card will be automatically charged at the deadlines."
         check_collection_info: "By validating, you confirm that you have {DEADLINES} checks, allowing you to collect all the monthly payments."
         online_payment_disabled: "Online payment is not available. You cannot collect this payment schedule by online card."
+      check_list_setting:
+        save: 'Save'
+        customization_of_SETTING_successfully_saved: "Customization of the {SETTING} successfully saved."
       #feature tour
       tour:
         conclusion:
