@@ -923,7 +923,7 @@ en:
         renew_success: "The subscription was successfully renewed"
       # take a new subscription
       subscribe_modal:
-        subscribe_USER: "Subscribe for {USER}"
+        subscribe_USER: "Subscribe {USER}"
         subscribe: "Subscribe"
         select_plan: "Please select a plan"
         pay_in_one_go: "Pay in one go"
