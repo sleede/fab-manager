@@ -126,6 +126,7 @@ export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onE
    */
   const handleSubmit = async (event: FormEvent): Promise<void> => {
     event.preventDefault();
+    event.stopPropagation();
     onSubmit();
 
     try {

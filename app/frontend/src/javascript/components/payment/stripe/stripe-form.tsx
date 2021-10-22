@@ -23,6 +23,7 @@ export const StripeForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, on
    */
   const handleSubmit = async (event: FormEvent): Promise<void> => {
     event.preventDefault();
+    event.stopPropagation();
     onSubmit();
 
     // Stripe.js has not loaded yet

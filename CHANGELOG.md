@@ -15,6 +15,7 @@
 - Fix a bug: invalid amount provided to the PayZen payment gateway when using a currency with anything else than 2 decimals
 - Fix a bug: incorrect behavior for the setting "email confirmation required"
 - Fix a bug: invalid text shown when a member confirms a free cart
+- Fix a bug: 3DS confirmation is not asked when an admin is subscribing a user through a payment schedule using PayZen
 - Updated @rails/webpacker to 5.4.3
 - Updated react-refresh-webpack-plugin to 0.5.1
 - Updated react-refresh to 0.10.0
