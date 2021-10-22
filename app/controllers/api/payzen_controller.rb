@@ -7,6 +7,7 @@ class API::PayzenController < API::PaymentsController
   require 'pay_zen/token'
   require 'pay_zen/transaction'
   require 'pay_zen/helper'
+  require 'pay_zen/service'
 
   def sdk_test
     str = 'fab-manager'
