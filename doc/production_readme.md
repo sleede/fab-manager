@@ -47,11 +47,11 @@ Supported operating systems are Ubuntu LTS 16.04+ and Debian 8+ with an x86 64-b
 This might work on other linux systems, and CPU architectures but this is untested for now, and we do not recommend for production purposes.
 
 #### Software requirements
-First, you need to install docker:
-- Install [Docker on Debian](https://docs.docker.com/engine/installation/linux/docker-ce/debian/)
-- Install [Docker on Ubuntu](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)
+`curl` and `bash` are needed to retrieve and run the automated deployment scripts.  
+Then the various scripts will check for their own dependencies.
 
-Then install [Docker Compose](https://docs.docker.com/compose/install/)
+Moreover, the main software dependencies to run fab-manager are [Docker](https://docs.docker.com/engine/installation/linux/docker-ce/debian/) and [Docker Compose](https://docs.docker.com/compose/install/) 
+They can be easily installed using the [`prepare-vps.sleede.com` script below](#prepare-the-server).
 
 <a name="setup-the-domain-name"></a>
 ### Set up the domain name
