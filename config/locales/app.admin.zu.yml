@@ -1181,6 +1181,8 @@ zu:
         an_error_occurred_saving_the_setting: "crwdns20380:0crwdne20380:0"
         book_overlapping_slots_info: "crwdns20642:0crwdne20642:0"
         allow_booking: "crwdns22035:0crwdne22035:0"
+        overlapping_categories: "crwdns22107:0crwdne22107:0"
+        overlapping_categories_info: "crwdns22109:0crwdne22109:0"
         default_slot_duration: "crwdns20646:0crwdne20646:0"
         duration_minutes: "crwdns20648:0crwdne20648:0"
         default_slot_duration_info: "crwdns20650:0crwdne20650:0"
@@ -1237,6 +1239,11 @@ zu:
         pack_only_for_subscription_info_html: "crwdns22037:0crwdne22037:0"
         pack_only_for_subscription: "crwdns22039:0crwdne22039:0"
         pack_only_for_subscription_info: "crwdns22041:0crwdne22041:0"
+        overlapping_options:
+          training_reservations: "crwdns22111:0crwdne22111:0"
+          machine_reservations: "crwdns22113:0crwdne22113:0"
+          space_reservations: "crwdns22115:0crwdne22115:0"
+          events_reservations: "crwdns22117:0crwdne22117:0"
         general:
           general: "crwdns20726:0crwdne20726:0"
           title: "crwdns20728:0crwdne20728:0"
@@ -1389,14 +1396,19 @@ zu:
         category_deleted: "crwdns21618:0crwdne21618:0"
         unable_to_delete: "crwdns21620:0crwdne21620:0"
       local_payment:
+        validate_cart: "crwdns22119:0crwdne22119:0"
         offline_payment: "crwdns22006:0crwdne22006:0"
         about_to_cash: "crwdns22008:0crwdne22008:0"
+        about_to_confirm: "crwdns22121:0ITEM={ITEM}crwdne22121:0"
         payment_method: "crwdns22010:0crwdne22010:0"
         method_card: "crwdns22012:0crwdne22012:0"
         method_check: "crwdns22014:0crwdne22014:0"
         card_collection_info: "crwdns22016:0crwdne22016:0"
         check_collection_info: "crwdns22018:0{DEADLINES}crwdne22018:0"
         online_payment_disabled: "crwdns22020:0crwdne22020:0"
+      check_list_setting:
+        save: 'crwdns22123:0crwdne22123:0'
+        customization_of_SETTING_successfully_saved: "crwdns22125:0{SETTING}crwdne22125:0"
       #feature tour
       tour:
         conclusion:
