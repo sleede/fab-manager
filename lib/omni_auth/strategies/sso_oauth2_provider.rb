@@ -24,6 +24,12 @@ module OmniAuth::Strategies
            authorize_url: active_provider.providable.authorization_endpoint,
            token_url: active_provider.providable.token_endpoint
 
+    def authorize_params
+      super.tap do |params|
+        params[:scope] = ''
+      end
+    end
+
     def callback_url
       url = Rails.application.config.action_controller.default_url_options
       "#{url[:protocol]}://#{url[:host]}#{script_name}#{callback_path}"
