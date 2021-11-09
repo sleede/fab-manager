@@ -36,7 +36,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
       # We BYPASS THE VALIDATION because, in case of a new user, we want to save him anyway, we'll ask him later to complete his profile (on first login).
       # In case of an existing user, we trust the SSO validation as we want the SSO to have authority on users management and policy.
-      @user.save(validate: false)
+      raise @user.errors.full_messages.join(', ') unless @user.save(validate: false)
+
       sign_in_and_redirect @user, event: :authentication # this will throw if @user is not activated
     else
       @user = User.find_by(auth_token: request.env['omniauth.params']['auth_token'])
