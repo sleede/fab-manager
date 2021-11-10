@@ -1,5 +1,10 @@
 # Changelog Fab-manager
 
+## v5.1.12 2021 November 10
+
+- Added an automated test on the plan creation endpoint
+- Fix a bug: unable to create a plan
+
 ## v5.1.11 2021 October 22
 
 - Refactored subscription new/renew/free extend interfaces and API
