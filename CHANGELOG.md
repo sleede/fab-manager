@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v5.1.12 2021 November 10
+
 - Added an automated test on the plan creation endpoint
 - Fix a bug: unable to create a plan
 
