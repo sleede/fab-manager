@@ -507,8 +507,8 @@
         this_will_never_be_added_when_a_refund_notice_is_present: "Dette vil aldri bli lagt til når det foreligger en refusjonsvarsel."
         eg_XVL_will_add_VL_to_the_invoices_settled_by_card: '(eks. X[/VL] vil legge til "/VL" i fakturaene som gjøres opp elektronisk)'
         add_a_notice_regarding_refunds_only_if_the_invoice_is_concerned: "Legg til et varsel om det elektroniske salget om en faktura er klar."
-        this_will_never_be_added_when_an_online_sales_notice_is_present: "This will never be added when an online sales notice is present."
-        eg_RA_will_add_A_to_the_refund_invoices: '(eg. R[/A] will add "/A" to the refund invoices)'
+        this_will_never_be_added_when_an_online_sales_notice_is_present: "Dette vil aldri bli lagt til når en nettbasert salgsvarsel er tilstede."
+        eg_RA_will_add_A_to_the_refund_invoices: '(eks. R[/A] vil legge "/A" til refusjonsfakturaene)'
         add_a_notice_regarding_payment_schedule: "Legg til en melding om betalingsplaner, kun for berørte dokumenter."
         this_will_never_be_added_with_other_notices: "Dette vil aldri bli lagt til når det foreligger andre notater."
         eg_SE_to_schedules: '(eg. S[/E] will add "/E" to the payment schedules)'
@@ -866,7 +866,7 @@
         expires_at: "Utløper:"
         price_: "Pris:"
         offer_free_days: "Tilby gratis dager"
-        renew_subscription: "Renew the subscription"
+        renew_subscription: "Forny abonnementet"
         user_has_no_current_subscription: "Brukeren har ikke noe gjeldende medlemskap."
         subscribe_to_a_plan: "Abonner på et medlemskap"
         trainings: "Opplæringer/kurs"
@@ -901,13 +901,13 @@
         cannot_extend_own_subscription: "Du kan ikke utvide ditt eget medlemskap. Be en annen leder eller en administrator om å utvide abonnementet."
       #extend a subscription for free
       free_extend_modal:
-        extend_subscription: "Extend the subscription"
-        offer_free_days_infos: "You are about to extend the user's subscription by offering him free additional days."
-        credits_will_remain_unchanged: "The balance of free credits (training / machines / spaces) of the user will remain unchanged."
-        current_expiration: "Current subscription will expire at:"
+        extend_subscription: "Forleng abonnementet"
+        offer_free_days_infos: "Du er i ferd med å forlenge brukerens abonnement ved å tilby ham gratis ekstra dager."
+        credits_will_remain_unchanged: "Brukernes gjenværende kreditter (opplæring / maskiner/lokaler) vil ikke bli endret."
+        current_expiration: "Gjeldende abonnement vil utløpe på:"
         DATE_TIME: "{DATE} {TIME}"
-        new_expiration_date: "New expiration date:"
-        number_of_free_days: "Number of free days:"
+        new_expiration_date: "Ny utløpsdato:"
+        number_of_free_days: "Antall gratis dager:"
         extend: "Extend"
         extend_success: "The subscription was successfully extended for free"
       #renew a subscription
