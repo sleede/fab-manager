@@ -1,5 +1,9 @@
 # Changelog Fab-manager
 
+## v5.1.13 2021 November 16
+
+- Fix a bug: unable to run the setup/upgrade scripts as root
+
 ## v5.1.12 2021 November 10
 
 - Added an automated test on the plan creation endpoint

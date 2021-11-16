@@ -194,7 +194,7 @@ prepare_files()
 }
 
 yq() {
-  docker run --rm -i -v "${FABMANAGER_PATH}:/workdir" mikefarah/yq:4 "$@"
+  docker run --rm -i -v "${FABMANAGER_PATH}:/workdir" --user "$UID" mikefarah/yq:4 "$@"
 }
 
 prepare_nginx()

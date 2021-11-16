@@ -36,7 +36,7 @@ parseparams()
 }
 
 yq() {
-  docker run --rm -i -v "${PWD}:/workdir" mikefarah/yq:4 "$@"
+  docker run --rm -i -v "${PWD}:/workdir" --user "$UID" mikefarah/yq:4 "$@"
 }
 
 jq() {
