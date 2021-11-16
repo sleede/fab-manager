@@ -59,7 +59,7 @@ module OmniAuth::Strategies
           unless @raw_info.key?(mapping.api_endpoint.to_sym)
             puts "api_endpoint = #{mapping.api_endpoint.to_sym}"
             puts "access_token = #{access_token&.to_json}"
-            puts "token get = #{access_token.get(mapping.api_endpoint)&.to_json}"
+            puts "token get = #{access_token.get(mapping.api_endpoint)}"
             puts "parsed = #{access_token.get(mapping.api_endpoint).parsed}"
             @raw_info[mapping.api_endpoint.to_sym] = access_token.get(mapping.api_endpoint).parsed
           end
