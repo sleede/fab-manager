@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/sleede/omniauth.git
+  revision: 832d5ac48fcc3b93eba8bf1444145d0c876314cf
+  branch: v1.9
+  specs:
+    omniauth (1.9.1)
+      hashie (>= 3.4.6)
+      rack (>= 1.6.2, < 3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -231,9 +240,6 @@ GEM
       multi_xml (~> 0.5)
       rack (>= 1.2, < 3)
     oj (3.10.5)
-    omniauth (1.9.1)
-      hashie (>= 3.4.6)
-      rack (>= 1.6.2, < 3)
     omniauth-oauth2 (1.6.0)
       oauth2 (~> 1.1)
       omniauth (~> 1.9)
@@ -458,7 +464,7 @@ DEPENDENCIES
   minitest-reporters
   notify_with
   oj
-  omniauth (~> 1.9.0)
+  omniauth (~> 1.9.0)!
   omniauth-oauth2
   omniauth-rails_csrf_protection (~> 0.1)
   openlab_ruby
@@ -498,4 +504,4 @@ DEPENDENCIES
   webpacker (~> 5.x)
 
 BUNDLED WITH
-   2.1.4
+   2.2.19

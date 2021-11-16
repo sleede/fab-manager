@@ -64,7 +64,10 @@ gem 'pg_search'
 # authentication
 gem 'devise', '>= 4.6.0'
 
-gem 'omniauth', '~> 1.9.0'
+
+git 'https://github.com/sleede/omniauth.git', branch: 'v1.9' do
+  gem 'omniauth', '~> 1.9.0'
+end
 gem 'omniauth-oauth2'
 gem 'omniauth-rails_csrf_protection', '~> 0.1'
 
