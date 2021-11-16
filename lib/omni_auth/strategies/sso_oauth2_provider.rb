@@ -52,9 +52,15 @@ module OmniAuth::Strategies
     # retrieve data from various url, querying each only once
     def raw_info
       @raw_info ||= {}
+      logger.debug "[raw_info] @raw_infos = #{@raw_info}"
       unless @raw_info.size.positive?
         OmniAuth::Strategies::SsoOauth2Provider.active_provider.providable.o_auth2_mappings.each do |mapping|
+          logger.debug "mapping = #{mapping}"
           unless @raw_info.key?(mapping.api_endpoint.to_sym)
+            logger.debug "api_endpoint = #{mapping.api_endpoint.to_sym}"
+            logger.debug "access_token = #{access_token}"
+            logger.debug "token get = #{access_token.get(mapping.api_endpoint)}"
+            logger.debug "parsed = #{access_token.get(mapping.api_endpoint).parsed}"
             @raw_info[mapping.api_endpoint.to_sym] = access_token.get(mapping.api_endpoint).parsed
           end
         end
