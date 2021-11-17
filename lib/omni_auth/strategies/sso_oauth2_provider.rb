@@ -26,7 +26,7 @@ module OmniAuth::Strategies
 
     def authorize_params
       super.tap do |params|
-        params[:scope] = 'api://b8b974a0-ecee-45fd-89cc-91d8f09d7904/User.read https://graph.microsoft.com/.default'
+        params[:scope] = ENV['OAUTH2_SCOPE']
       end
     end
 
