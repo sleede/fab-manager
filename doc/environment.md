@@ -197,7 +197,7 @@ See [code.angularjs.org/i18n/angular-locale_*.js](https://code.angularjs.org/1.8
 
 Configure the fullCalendar JS agenda library.
 
-See [github.com/fullcalendar/fullcalendar/locale/*.js](https://github.com/fullcalendar/fullcalendar/tree/v3.10.2/locale) for a list of available locales. Default is **en-us**.
+See [github.com/fullcalendar/fullcalendar/locale/*.js](https://github.com/fullcalendar/fullcalendar/tree/v3.10.2/locale) for a list of available locales. Default is **en**.
 <a name="INTL_LOCALE"></a>
 
     INTL_LOCALE
