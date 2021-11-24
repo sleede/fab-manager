@@ -1,0 +1,9 @@
+.carousel {
+  &-inner {
+      aspect-ratio: 16/9;
+    }
+  
+  &-inner > .item {
+    height: 100%;
+  }
+}

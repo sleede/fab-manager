@@ -51,13 +51,13 @@
 
   .machine-picture {
     height: 250px;
-    background-size: cover;
+    background-size: contain;
     background-position: center;
+    background-repeat: no-repeat;
     transition: opacity 0.5s ease;
     cursor: pointer;
     padding: 0;
     color: #333333;
-    background-color: #f5f5f5;
     border-color: #ddd;
     border-bottom: 1px solid transparent;
     border-top-left-radius: 5px;

@@ -243,8 +243,10 @@
 
     &.picture {
       height: 250px;
-      background-size: cover;
+      background-size: contain;
       background-position: center;
+      background-repeat: no-repeat;
+      background-color: transparent;
 
       @include transition(opacity 0.5s ease);
 
