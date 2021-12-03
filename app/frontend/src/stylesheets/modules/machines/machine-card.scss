@@ -51,28 +51,30 @@
 
   .machine-picture {
     height: 250px;
-    background-size: contain;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     transition: opacity 0.5s ease;
     cursor: pointer;
     padding: 0;
     color: #333333;
-    border-color: #ddd;
-    border-bottom: 1px solid transparent;
+    border-bottom: 1px solid #ebebeb;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     position: relative;
 
     &.no-picture::before {
       position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       content: '\f03e';
       font-family: 'Font Awesome 5 Free' !important;
       font-weight: 900;
-      font-size: 4em;
-      width: 100%;
-      text-align: center;
-      padding-top: 84px;
+      font-size: 80px;
+      color: #ebebeb;
     }
   }
 

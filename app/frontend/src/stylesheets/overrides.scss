@@ -1,4 +1,21 @@
 .carousel {
+  position: relative;
+  border-radius: 5px;
+  overflow: hidden;
+  &::before {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    content: '\f03e';
+    font-family: 'Font Awesome 5 Free' !important;
+    font-weight: 900;
+    font-size: 80px;
+    color: #ebebeb;
+  }
+  
   &-inner {
       aspect-ratio: 16/9;
     }
