@@ -1400,11 +1400,11 @@ pt:
         method_card: "Online por cartão"
         method_check: "Por verificação"
         card_collection_info: "Ao validar, será solicitado o número do cartão do membro. Este cartão será cobrado automaticamente nos prazos."
-        check_collection_info: "By validating, you confirm that you have {DEADLINES} checks, allowing you to collect all the monthly payments."
-        online_payment_disabled: "Online payment is not available. You cannot collect this payment schedule by online card."
+        check_collection_info: "Ao validar, você confirma que tem {DEADLINES} checks, permitindo que você colete todos os pagamentos mensais."
+        online_payment_disabled: "Pagamento online não está disponível. Você não pode selecionar este horário com pagamento online."
       check_list_setting:
-        save: 'Save'
-        customization_of_SETTING_successfully_saved: "Customization of the {SETTING} successfully saved."
+        save: 'Salvar'
+        customization_of_SETTING_successfully_saved: "Personalização do {SETTING} salvo com êxito."
       #feature tour
       tour:
         conclusion:
@@ -1493,8 +1493,8 @@ pt:
             title: "Nota de crédito"
             content: "Permite gerar uma nota de crédito para a fatura nesta linha ou alguns de seus sub-elementos. <strong>Aviso:</strong> Isto só irá gerar o documento de contabilidade, o reembolso real do usuário será sempre sua responsabilidade."
           payment-schedules:
-            title: "Payment schedules"
-            content: "<p>Some subscription plans may be configured to allow the members to pay them with a monthly payment schedule.</p><p>Here you can view all existing payment schedules and manage their deadlines.</p><p>Click on [+] at the beginning of a row to display all deadlines associated with a payment schedule, and run some actions on them.</p>"
+            title: "Datas de pagamento"
+            content: "<p>Alguns planos de assinatura podem ser configurados para permitir que os membros o paguem com um calendário de pagamento mensal.</p><p>Aqui você pode ver todas as agendas de pagamentos existentes e gerenciar seus prazos.</p><p>Clique em [+] no início de uma linha para exibir todos os prazos associados com um cronograma de pagamentos, e execute algumas ações nelas.</p>"
           settings:
             title: "Configurações"
             content: "<p>Aqui você pode modificar os parâmetros para a geração de faturas. Clique no item em que está interessado para começar a editar.</p><p>Em particular, é aqui que você pode definir se está sujeito a IVA e à taxa aplicável.</p>"
