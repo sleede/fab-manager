@@ -133,9 +133,9 @@ pt:
         subscription_confirmation: "Inscrição confirmada"
         here_is_the_subscription_summary: "Aqui está o resumo da assinatura:"
         payment_method: "Método de pagamento"
-        method_card: "Online by card"
-        method_check: "By check"
-        card_collection_info: "By validating, you'll be prompted for the member's card number. This card will be automatically charged at the deadlines."
+        method_card: "Online por cartão"
+        method_check: "Por verificação"
+        card_collection_info: "Ao confirmar, será solicitado o número do cartão do membro. Este cartão será cobrado automaticamente nos prazos determinados."
         check_collection_info: "By validating, you confirm that you have {DEADLINES} checks, allowing you to collect all the monthly payments."
       #event edition form
       event:
