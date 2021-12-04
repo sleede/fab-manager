@@ -913,18 +913,18 @@ pt:
       #renew a subscription
       renew_subscription_modal:
         renew_subscription: "Renovar assinatura"
-        renew_subscription_info: "You are about to renew the user's subscription by charging him again for his current subscription."
-        credits_will_be_reset: "The balance of free credits (training / machines / spaces) of the user will be reset, unused credits will be lost."
-        current_expiration: "Current subscription will expire at:"
-        new_start: "The new subscription will start at:"
-        new_expiration_date: "The new subscription will expire at:"
-        pay_in_one_go: "Pay in one go"
-        renew: "Renew"
-        renew_success: "The subscription was successfully renewed"
+        renew_subscription_info: "Você estenderá a assinatura do usuário cobrando-o novamente por sua assinatura atual."
+        credits_will_be_reset: "O saldo de créditos gratuitos (treinamento / máquinas / espaços) do usuário será redefinido, os créditos não utilizados serão perdidos."
+        current_expiration: "A assinatura atual expirará em:"
+        new_start: "A nova assinatura começará em:"
+        new_expiration_date: "A nova assinatura expirará em:"
+        pay_in_one_go: "Pagar de á vista"
+        renew: "Renovar"
+        renew_success: "A assinatura foi renovada com sucesso"
       #take a new subscription
       subscribe_modal:
-        subscribe_USER: "Subscribe {USER}"
-        subscribe: "Subscribe"
+        subscribe_USER: "Inscreva-se {USER}"
+        subscribe: "Inscrever-se"
         select_plan: "Please select a plan"
         pay_in_one_go: "Pay in one go"
         subscription_success: ""
