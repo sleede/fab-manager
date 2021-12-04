@@ -299,20 +299,20 @@ pt:
       subject: "[URGENT] Falha no débito do cartão"
       body:
         remember: "De acordo com o calendário de pagamento de %{REFERENCE}, um débito por cartão de %{AMOUNT} foi agendado em %{DATE}."
-        error: "Unfortunately, this card debit was unable to complete successfully."
-        action: "Please contact the member as soon as possible, then go to the payment schedule management interface to resolve the problem. After about 24 hours, the card subscription will be cancelled."
+        error: "Infelizmente, não foi possível completar o débito no cartão com sucesso."
+        action: "Por favor, entre em contato com o membro assim que possível, depois vá à interface de gestão de horários de pagamento para resolver o problema. Após cerca de 24 horas, a assinatura do cartão será cancelada."
     notify_member_payment_schedule_failed:
-      subject: "[URGENT] Card debit failure"
+      subject: "[URGENT] Falha no débito do cartão"
       body:
-        remember: "In accordance with your %{REFERENCE} payment schedule, a debit by card of %{AMOUNT} was scheduled on %{DATE}."
-        error: "Unfortunately, this card debit was unable to complete successfully."
-        action_html: "Please check %{DASHBOARD} or contact a manager before 24 hours, otherwise your subscription may be interrupted."
-        your_dashboard: "your dashboard"
+        remember: "De acordo com a sua agenda de pagamentos %{REFERENCE}, um débito por cartão de %{AMOUNT} foi agendado para %{DATE}."
+        error: "Infelizmente, não foi possível completar o débito no cartão com sucesso."
+        action_html: "Por favor, verifique %{DASHBOARD} ou entre em contato com um gerente antes de 24 horas, caso contrário sua assinatura pode ser interrompida."
+        your_dashboard: "seu dashboard"
     notify_admin_payment_schedule_check_deadline:
-      subject: "Payment deadline"
+      subject: "Prazo de pagamento"
       body:
-        remember: "In accordance with the %{REFERENCE} payment schedule, %{AMOUNT} was due to be debited on %{DATE}."
-        date: "This is a reminder to cash the scheduled check as soon as possible."
-        confirm: "Do not forget to confirm the receipt in your payment schedule management interface, so that the corresponding invoice will be generated."
+        remember: "De acordo com a agenda de pagamento %{REFERENCE}, %{AMOUNT} deveria ser debitado em %{DATE}."
+        date: "Este é um lembrete para descontar o pagamento programado o mais rápido possível."
+        confirm: "Não se esqueça de confirmar o recibo na interface de gestão de agenda de pagamento, para que a fatura correspondente seja gerada."
     shared:
       hello: "Olá %{user_name}"
