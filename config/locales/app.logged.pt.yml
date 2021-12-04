@@ -109,10 +109,10 @@ pt:
           your_previous_trainings: "Seus treinamentos anteriores"
           your_approved_trainings: "Seus treinamentos aprovados"
           no_trainings: "Sem treinamentos"
-          your_training_credits: "Your training credits"
-          subscribe_for_credits: "Subscribe to benefit from free trainings"
-          register_for_free: "Register for free to the following trainings:"
-          book_here: "Book here"
+          your_training_credits: "Seus créditos para treinamento"
+          subscribe_for_credits: "Inscreva-se para se beneficiar dos treinamentos gratuitos"
+          register_for_free: "Registre-se gratuitamente para os seguintes treinamentos:"
+          book_here: "Reserve aqui"
         #dashboard: my events
         events:
           your_next_events: "Seus próximos eventos"
@@ -130,9 +130,9 @@ pt:
           download_the_credit_note: "Baixar fatura de reembolso"
           no_invoices_for_now: "Nenhuma fatura."
         payment_schedules:
-          no_payment_schedules: "No payment schedules to display"
-          load_more: "Load more"
-          card_updated_success: "Your card was successfully updated"
+          no_payment_schedules: "Nenhuma assinatura para exibir"
+          load_more: "Ver mais"
+          card_updated_success: "O seu cartão foi atualizado com sucesso"
       #public profil of a member
       members_show:
         members_list: "Lista de membros"
@@ -174,16 +174,16 @@ pt:
       #modal telling users that they need to pass a training before booking a machine
       required_training_modal:
         to_book_MACHINE_requires_TRAINING_html: "Para agendar \"{MACHINE}\" você deve completar o treinamento <strong>{TRAINING}</strong>."
-        training_or_training_html: "</strong> or the training <strong>"
+        training_or_training_html: "</strong> ou o treinamento <strong>"
         enroll_now: "Inscrever-se no treinamento"
         no_enroll_for_now: "Não desejo me inscrever agora"
         close: "Fechar"
       propose_packs_modal:
-        available_packs: "Prepaid packs available"
-        packs_proposed: "You can buy a prepaid pack of hours for this machine. These packs allows you to benefit from volume discounts."
-        no_thanks: "No, thanks"
-        pack_DURATION: "{DURATION} hours"
-        buy_this_pack: "Buy this pack"
+        available_packs: "Pacotes pré-pagos disponíveis"
+        packs_proposed: "Você pode comprar um pacote de horas pré-pago para esta máquina. Estes pacotes permitem que você se beneficie de descontos por volume."
+        no_thanks: "Não, obrigado"
+        pack_DURATION: "{DURATION} horas"
+        buy_this_pack: "Comprar este pacote"
         pack_bought_success: "You have successfully bought this pack of prepaid-hours. Your invoice will ba available soon from your dashboard."
         validity: "Usable for {COUNT} {PERIODS}"
         period:
