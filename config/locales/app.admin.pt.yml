@@ -1382,8 +1382,8 @@ pt:
         name: "Nome"
         significance: "Importância"
         confirm_edition: "Validar"
-        category_updated: "The category was successfully updated"
-        unable_to_update: "Unable to update the category: "
+        category_updated: "A categoria foi atualizada com sucesso"
+        unable_to_update: "Não foi possível atualizar a categoria: "
         significance_info: "Categories will be shown ordered by signifiance. The higher you set the significance, the first the category will be shown."
       delete_plan_category:
         delete_category: "Delete a category"
