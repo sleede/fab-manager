@@ -22,7 +22,7 @@ pt:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "Você irá perder todas as modificações não salvas se sair desta página"
         you_will_lose_any_unsaved_modification_if_you_reload_this_page: "Você irá perder todas as modificações não salvas se recarregar desta página"
         payment_card_error: "Ocorreu um problema com o seu cartão de crédito:"
-        payment_card_declined: "Your card was declined."
+        payment_card_declined: "O seu cartão foi recusado."
       #user edition form
       user:
         man: "Homem"
