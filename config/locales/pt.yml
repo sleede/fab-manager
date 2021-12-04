@@ -39,7 +39,7 @@ pt:
       must_be_in_the_past: "O período deve ser estritamente anterior à data de hoje."
   apipie:
     api_documentation: "Documentação da API"
-    code: "HTTP code"
+    code: "Código HTTP"
   #error messages when importing an account from a SSO
   omniauth:
     email_already_linked_to_another_account_please_input_your_authentication_code: "E-mail \"%{OLD_MAIL}\" já está vinculado a outra conta, insira seu código de autenticação."
@@ -112,13 +112,13 @@ pt:
     subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "Assinatura de %{NAME} estendida (dias livres) a partir de% STARTDATE até %{ENDDATE}"
     and: 'e'
     invoice_text_example: "Nossa associação não está sujeita a IVA"
-    error_invoice: "Erroneous invoice. The items below ware not booked. Please contact the FabLab for a refund."
-    prepaid_pack: "Prepaid pack of hours"
-    pack_item: "Pack of %{COUNT} hours for the %{ITEM}"
+    error_invoice: "Esta fatura está incorreta. Os itens abaixo que não foram reservados. Por favor contate o FabLab para um reembolso."
+    prepaid_pack: "Pacote de horas pré-pago"
+    pack_item: "Pacote de %{COUNT} horas para a %{ITEM}"
   #PDF payment schedule generation
   payment_schedules:
-    schedule_reference: "Payment schedule reference: %{REF}"
-    schedule_issued_on_DATE: "Schedule issued on %{DATE}"
+    schedule_reference: "Agendamento de pagamento: %{REF}"
+    schedule_issued_on_DATE: "Cronograma emitido em %{DATE}"
     object: "Object: Payment schedule for %{ITEM}"
     subscription_of_NAME_for_DURATION_starting_from_DATE: "the subscription of %{NAME} for %{DURATION} starting from %{DATE}"
     deadlines: "Table of your deadlines"
