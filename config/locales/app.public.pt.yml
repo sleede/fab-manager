@@ -19,7 +19,7 @@ pt:
         my_trainings: "Meus Treinamentos"
         my_events: "Meus Eventos"
         my_invoices: "Minhas Contas"
-        my_payment_schedules: "My payment schedules"
+        my_payment_schedules: "Meus agendamentos de pagamento"
         my_wallet: "Minha Carteira"
         #contextual help
         help: "Ajuda"
@@ -84,8 +84,8 @@ pt:
         birth_date_is_required: "Data de nascimento é obrigatório."
         phone_number: "Número de telefone"
         phone_number_is_required: "Número de telefone é obrigatório."
-        address: "Address"
-        address_is_required: "Address is required"
+        address: "Endereço"
+        address_is_required: "O endereço é necessário"
         i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "Eu autorizo usuários do FabLab, registrados no site, a entrarem em contato comigo"
         i_accept_to_receive_information_from_the_fablab: "Eu aceito receber informações do FabLab"
         i_ve_read_and_i_accept_: "Eu li e aceito"
@@ -266,10 +266,10 @@ pt:
         an_error_prevented_to_change_the_user_s_group: "Um erro impediu que o grupo de usuários fosse alterado com sucesso."
       plans_filter:
         i_am: "Eu sou"
-        select_group: "select a group"
-        i_want_duration: "I want to subscribe for"
-        all_durations: "All durations"
-        select_duration: "select a duration"
+        select_group: "seleccionar Grupo"
+        i_want_duration: "Quero me inscrever em"
+        all_durations: "Todas as durações"
+        select_duration: "selecione uma duração"
       #Fablab's events list
       events_list:
         the_fablab_s_events: "Eventos do Fablab"
