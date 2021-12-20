@@ -61,10 +61,7 @@ class PrepaidPackService
 
     ## Total number of prepaid minutes available
     def minutes_available(user, priceable)
-      is_pack_only_for_subscription = Setting.find_by(name: "pack_only_for_subscription")&.value
-      if is_pack_only_for_subscription == 'true' && !user.subscribed_plan
-        return 0
-      end
+      return 0 if Setting.get('pack_only_for_subscription') && !user.subscribed_plan
 
       user_packs = user_packs(user, priceable)
       total_available = user_packs.map { |up| up.prepaid_pack.minutes }.reduce(:+) || 0

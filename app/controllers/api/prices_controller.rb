@@ -30,6 +30,6 @@ class API::PricesController < API::ApiController
   private
 
   def price_params
-    params.require(:price).permit(:amount)
+    params.require(:price).permit(:amount, :duration)
   end
 end
