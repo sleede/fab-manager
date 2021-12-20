@@ -274,6 +274,7 @@ en:
         api_endpoint_url: "API endpoint URL"
         api_type: "API type"
         api_fields: "API fields"
+        api_field_help: "JsonPath syntax is supported.\n If many fields are selected, the first one will be used.\n Example: $.data[*].name"
       #machine/training slot modification modal
       confirm_modify_slot_modal:
         change_the_slot: "Change the slot"

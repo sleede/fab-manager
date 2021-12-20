@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'omniauth-oauth2'
+require 'jsonpath'
 
 module OmniAuth::Strategies
   # Authentication strategy provided trough oAuth 2.0
@@ -102,7 +103,7 @@ module OmniAuth::Strategies
           ## NO TRANSFORMATION
           else
             puts "@parsed_info[#{local_sym(mapping)}] found in #{raw_info[mapping.api_endpoint.to_sym]}"
-            @parsed_info[local_sym(mapping)] = raw_info[mapping.api_endpoint.to_sym][mapping.api_field]
+            @parsed_info[local_sym(mapping)] = ::JsonPath.new(mapping.api_field).on(raw_info[mapping.api_endpoint.to_sym]).first
           end
         end
       end

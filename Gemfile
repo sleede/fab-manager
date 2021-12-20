@@ -14,6 +14,7 @@ gem 'webpacker', '~> 5.x'
 gem 'jbuilder', '~> 2.5'
 gem 'jbuilder_cache_multi'
 gem 'json', '>= 2.3.0'
+gem 'jsonpath'
 
 gem 'forgery'
 gem 'responders', '~> 2.0'

@@ -181,6 +181,8 @@ GEM
     jbuilder_cache_multi (0.1.0)
       jbuilder (>= 1.5.0, < 3)
     json (2.3.1)
+    jsonpath (1.1.0)
+      multi_json
     jwt (2.2.1)
     kaminari (1.2.1)
       activesupport (>= 4.1.0)
@@ -457,6 +459,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jbuilder_cache_multi
   json (>= 2.3.0)
+  jsonpath
   kaminari
   listen (~> 3.0.5)
   message_format
