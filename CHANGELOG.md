@@ -1,5 +1,8 @@
 # Changelog Fab-manager
 
+- Updated portuguese translation
+- Refactored the ReserveButton component to use the same user's data across all the component
+
 ## v5.1.13 2021 November 16
 
 - Fix a bug: unable to run the setup/upgrade scripts as root
