@@ -6,7 +6,6 @@ import { FabAlert } from '../base/fab-alert';
 import { HtmlTranslate } from '../base/html-translate';
 import MachineAPI from '../../api/machine';
 import GroupAPI from '../../api/group';
-import { IFablab } from '../../models/fablab';
 import { Machine } from '../../models/machine';
 import { Group } from '../../models/group';
 import { IApplication } from '../../models/application';
@@ -19,7 +18,6 @@ import { PrepaidPack } from '../../models/prepaid-pack';
 import { useImmer } from 'use-immer';
 import FormatLib from '../../lib/format';
 
-declare let Fablab: IFablab;
 declare const Application: IApplication;
 
 interface MachinesPricingProps {
