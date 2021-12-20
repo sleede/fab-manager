@@ -242,6 +242,10 @@ class User < ApplicationRecord
         invoicing_profile.organization.name
       when 'profile.organization_address'
         invoicing_profile.organization.address.address
+      when 'profile.gender'
+        statistic_profile.gender
+      when 'profile.birthday'
+        statistic_profile.birthday
       else
         profile[parsed[2].to_sym]
       end
@@ -269,6 +273,12 @@ class User < ApplicationRecord
         invoicing_profile.organization ||= Organization.new
         invoicing_profile.organization.address ||= Address.new
         invoicing_profile.organization.address.address = data
+      when 'profile.gender'
+        statistic_profile ||= StatisticProfile.new
+        statistic_profile.gender = data
+      when 'profile.birthday'
+        statistic_profile ||= StatisticProfile.new
+        statistic_profile.birthday = data
       else
         profile[sso_mapping[8..-1].to_sym] = data unless data.nil?
       end
