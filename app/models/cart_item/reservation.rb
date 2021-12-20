@@ -16,7 +16,7 @@ class CartItem::Reservation < CartItem::BaseItem
   end
 
   def price
-    base_amount = @reservable.prices.find_by(group_id: @customer.group_id, plan_id: @plan.try(:id)).amount
+    base_amount = @reservable.prices.find_by(group_id: @customer.group_id, plan_id: @plan.try(:id), duration: 60).amount
     is_privileged = @operator.privileged? && @operator.id != @customer.id
     prepaid = { minutes: PrepaidPackService.minutes_available(@customer, @reservable) }
 
