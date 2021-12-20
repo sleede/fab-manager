@@ -1,5 +1,11 @@
 # Changelog Fab-manager
 
+- Support for JSONPath syntax in OAuth2 SSO fields mapping
+- Support for OAuth2 scopes
+- Add debug logs for the SSO authentication process
+- Fix a bug: SSO configuration interface has a misnamed field (Common URL)
+- Fix a bug: unable to bind Profile.birthday and Profile.gender from an SSO
+
 ## v5.1.11 2021 October 22
 
 - Refactored subscription new/renew/free extend interfaces and API
