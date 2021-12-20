@@ -324,13 +324,18 @@ class User < ApplicationRecord
     end
 
     # run the account transfer in an SQL transaction to ensure data integrity
-    User.transaction do
-      # remove the temporary account
-      logger.debug 'removing the temporary user'
-      sso_user.destroy
-      # finally, save the new details
-      logger.debug 'saving the updated user'
-      logger.error "unable to save the user, an error occurred : #{errors.full_messages.join(', ')}" unless save!
+    begin
+      User.transaction do
+        # remove the temporary account
+        logger.debug 'removing the temporary user'
+        sso_user.destroy
+        # finally, save the new details
+        logger.debug 'saving the updated user'
+        save!
+      end
+    rescue ActiveRecord::RecordInvalid => e
+      logger.error "error while merging user #{sso_user.id} into #{id}: #{e.message}"
+      raise e
     end
   end
 
