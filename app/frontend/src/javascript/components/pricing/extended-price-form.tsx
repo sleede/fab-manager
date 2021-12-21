@@ -14,11 +14,11 @@ interface PackFormProps {
 }
 
 /**
- * A form component to create/edit a time slot.
+ * A form component to create/edit a extended price.
  * The form validation must be created elsewhere, using the attribute form={formId}.
  */
-export const TimeslotForm: React.FC<PackFormProps> = ({ formId, onSubmit, price }) => {
-  const [timeslotData, updateTimeslotData] = useImmer<Price>(price || {} as Price);
+export const ExtendedPriceForm: React.FC<PackFormProps> = ({ formId, onSubmit, price }) => {
+  const [extendedPriceData, updateExtendedPriceData] = useImmer<Price>(price || {} as Price);
 
   const { t } = useTranslation('admin');
 
@@ -27,23 +27,23 @@ export const TimeslotForm: React.FC<PackFormProps> = ({ formId, onSubmit, price 
    */
   const handleSubmit = (event: BaseSyntheticEvent): void => {
     event.preventDefault();
-    onSubmit(timeslotData);
+    onSubmit(extendedPriceData);
   };
 
   /**
-   * Callback triggered when the user inputs an amount for the current time slot.
+   * Callback triggered when the user inputs an amount for the current extended price.
    */
   const handleUpdateAmount = (amount: string) => {
-    updateTimeslotData(draft => {
+    updateExtendedPriceData(draft => {
       draft.amount = parseFloat(amount);
     });
   };
 
   /**
-   * Callback triggered when the user inputs a number of minutes for the current time slot.
+   * Callback triggered when the user inputs a number of minutes for the current extended price.
    */
   const handleUpdateHours = (minutes: string) => {
-    updateTimeslotData(draft => {
+    updateExtendedPriceData(draft => {
       draft.duration = parseInt(minutes, 10);
     });
   };
@@ -53,7 +53,7 @@ export const TimeslotForm: React.FC<PackFormProps> = ({ formId, onSubmit, price 
       <label htmlFor="duration">{t('app.admin.calendar.minutes')} *</label>
       <FabInput id="duration"
         type="number"
-        defaultValue={timeslotData?.duration || ''}
+        defaultValue={extendedPriceData?.duration || ''}
         onChange={handleUpdateHours}
         step={1}
         min={1}
@@ -64,7 +64,7 @@ export const TimeslotForm: React.FC<PackFormProps> = ({ formId, onSubmit, price 
         type="number"
         step={0.01}
         min={0}
-        defaultValue={timeslotData?.amount || ''}
+        defaultValue={extendedPriceData?.amount || ''}
         onChange={handleUpdateAmount}
         icon={<i className="fas fa-money-bill" />}
         addOn={Fablab.intl_currency}

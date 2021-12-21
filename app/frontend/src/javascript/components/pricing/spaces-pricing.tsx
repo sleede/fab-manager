@@ -9,7 +9,7 @@ import GroupAPI from '../../api/group';
 import { Group } from '../../models/group';
 import { IApplication } from '../../models/application';
 import { EditablePrice } from './editable-price';
-import { ConfigureTimeslotButton } from './configure-timeslot-button';
+import { ConfigureExtendedPriceButton } from './configure-extended-price-button';
 import PriceAPI from '../../api/price';
 import { Price } from '../../models/price';
 import { useImmer } from 'use-immer';
@@ -108,7 +108,7 @@ const SpacesPricing: React.FC<SpacesPricingProps> = ({ onError, onSuccess }) => 
             <td>{space.name}</td>
             {groups?.map(group => <td key={group.id}>
               {prices && <EditablePrice price={findPricesBy(space.id, group.id)[0]} onSave={handleUpdatePrice} />}
-              <ConfigureTimeslotButton
+              <ConfigureExtendedPriceButton
                 prices={findPricesBy(space.id, group.id)}
                 onError={onError}
                 onSuccess={onSuccess}
