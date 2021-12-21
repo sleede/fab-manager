@@ -1235,6 +1235,9 @@ en:
         pack_only_for_subscription_info_html: "If this option is activated, the purchase and use of a prepaid pack is only possible for the user with a valid subscription."
         pack_only_for_subscription: "Subscription valid for purchase and use of a prepaid pack"
         pack_only_for_subscription_info: "Make subscription mandatory for prepaid packs"
+        extended_prices: "Extended prices"
+        extended_prices_info_html: "Spaces can have different prices depending on the cumulated duration of the booking. You can choose if this apply to all bookings or only to those starting within the same day."
+        extended_prices_in_same_day: "Extended prices in the same day"
         overlapping_options:
           training_reservations: "Trainings"
           machine_reservations: "Machines"
