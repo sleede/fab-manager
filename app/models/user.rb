@@ -264,12 +264,15 @@ class User < ApplicationRecord
         profile.user_avatar ||= UserAvatar.new
         profile.user_avatar.remote_attachment_url = data
       when 'profile.address'
+        invoicing_profile ||= InvoicingProfile.new
         invoicing_profile.address ||= Address.new
         invoicing_profile.address.address = data
       when 'profile.organization_name'
+        invoicing_profile ||= InvoicingProfile.new
         invoicing_profile.organization ||= Organization.new
         invoicing_profile.organization.name = data
       when 'profile.organization_address'
+        invoicing_profile ||= InvoicingProfile.new
         invoicing_profile.organization ||= Organization.new
         invoicing_profile.organization.address ||= Address.new
         invoicing_profile.organization.address.address = data
