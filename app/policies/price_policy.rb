@@ -6,6 +6,10 @@ class PricePolicy < ApplicationPolicy
     user.admin? && record.duration != 60
   end
 
+  def destroy?
+    user.admin? && record.duration != 60
+  end
+
   def update?
     user.admin?
   end
