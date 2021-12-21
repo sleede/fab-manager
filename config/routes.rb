@@ -75,7 +75,7 @@ Rails.application.routes.draw do
     get 'pricing' => 'pricing#index'
     put 'pricing' => 'pricing#update'
 
-    resources :prices, only: %i[index update] do
+    resources :prices, only: %i[create index update] do
       post 'compute', on: :collection
     end
     resources :prepaid_packs
