@@ -16,7 +16,7 @@ class CartItem::Reservation < CartItem::BaseItem
   end
 
   def price
-    base_amount = get_hourly_rate
+    base_amount = hourly_rate
     is_privileged = @operator.privileged? && @operator.id != @customer.id
     prepaid = { minutes: PrepaidPackService.minutes_available(@customer, @reservable) }
 
@@ -109,25 +109,23 @@ class CartItem::Reservation < CartItem::BaseItem
   # Eg. If the reservation is for 12 hours, and there are prices for 3 hours, 7 hours,
   # and the base price (1 hours), we use the 7 hours price, then 3 hours price, and finally the base price.
   # Then we divide the total price by the total duration to get the hourly rate.
-  def get_hourly_rate
+  def hourly_rate
     total_duration = @slots.map { |slot| (slot[:end_at].to_time - slot[:start_at].to_time) / SECONDS_PER_MINUTE }.reduce(:+)
     price = 0
 
     remaining_duration = total_duration
-    while remaining_duration > 60
+    while remaining_duration.positive?
       max_duration = @reservable.prices.where(group_id: @customer.group_id, plan_id: @plan.try(:id))
                                 .where(Price.arel_table[:duration].lteq(remaining_duration))
                                 .maximum(:duration)
+      max_duration = 60 if max_duration.nil?
       max_duration_amount = @reservable.prices.find_by(group_id: @customer.group_id, plan_id: @plan.try(:id), duration: max_duration)
                                        .amount
 
-      price += max_duration_amount
+      current_duration = [remaining_duration, max_duration].min
+      price += (max_duration_amount / max_duration) * current_duration
       remaining_duration -= max_duration
     end
-
-    # base price for the last hour or less
-    base_amount = @reservable.prices.find_by(group_id: @customer.group_id, plan_id: @plan.try(:id), duration: 60).amount
-    price += (base_amount / MINUTES_PER_HOUR) * remaining_duration
 
     price / (total_duration / MINUTES_PER_HOUR)
   end
