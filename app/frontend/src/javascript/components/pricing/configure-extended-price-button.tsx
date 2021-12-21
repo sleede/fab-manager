@@ -41,7 +41,7 @@ export const ConfigureExtendedPriceButton: React.FC<ConfigureExtendedPriceButton
   const handleSuccess = (message: string) => {
     onSuccess(message);
     PriceAPI.index({ group_id: groupId, priceable_id: priceableId, priceable_type: priceableType })
-      .then(data => setExtendedPrices(data))
+      .then(data => setExtendedPrices(data.filter(p => p.duration !== 60)))
       .catch(error => onError(error));
   };
 
@@ -59,7 +59,7 @@ export const ConfigureExtendedPriceButton: React.FC<ConfigureExtendedPriceButton
   return (
     <div className="configure-packs-button">
       <button className="packs-button" onClick={toggleShowList}>
-        <i className="fas fa-box" />
+        <i className="fas fa-stopwatch" />
       </button>
       {showList && <FabPopover title={t('app.admin.configure_extendedPrices_button.extendedPrices')} headerButton={renderAddButton()} className="fab-popover__right">
         <ul>

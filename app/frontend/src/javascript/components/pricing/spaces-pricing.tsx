@@ -8,6 +8,7 @@ import SpaceAPI from '../../api/space';
 import GroupAPI from '../../api/group';
 import { Group } from '../../models/group';
 import { IApplication } from '../../models/application';
+import { Space } from '../../models/space';
 import { EditablePrice } from './editable-price';
 import { ConfigureExtendedPriceButton } from './configure-extended-price-button';
 import PriceAPI from '../../api/price';
@@ -28,9 +29,9 @@ interface SpacesPricingProps {
 const SpacesPricing: React.FC<SpacesPricingProps> = ({ onError, onSuccess }) => {
   const { t } = useTranslation('admin');
 
-  const [spaces, setSpaces] = useState<Array<any>>(null);
+  const [spaces, setSpaces] = useState<Array<Space>>(null);
   const [groups, setGroups] = useState<Array<Group>>(null);
-  const [prices, updatePrices] = useImmer<Array<Price>>(null);
+  const [prices, updatePrices] = useImmer<Array<Price>>([]);
 
   // retrieve the initial data
   useEffect(() => {
@@ -62,8 +63,14 @@ const SpacesPricing: React.FC<SpacesPricingProps> = ({ onError, onSuccess }) => 
     return FormatLib.price(price);
   };
 
+  /**
+   * Find the price matching the given criterion
+   */
+  const findPriceBy = (spaceId, groupId): Price => {
+    return prices.find(price => price.priceable_id === spaceId && price.group_id === groupId);
+  };
   const findPricesBy = (spaceId, groupId): Array<Price> => {
-    return prices.filter(price => price.priceable_id === spaceId && price.group_id === groupId);
+    return prices.filter(price => price.priceable_id === spaceId && price.group_id === groupId && price.duration !== 60);
   };
 
   /**
@@ -107,7 +114,7 @@ const SpacesPricing: React.FC<SpacesPricingProps> = ({ onError, onSuccess }) => 
           {spaces?.map(space => <tr key={space.id}>
             <td>{space.name}</td>
             {groups?.map(group => <td key={group.id}>
-              {prices && <EditablePrice price={findPricesBy(space.id, group.id)[0]} onSave={handleUpdatePrice} />}
+              {prices && <EditablePrice price={findPriceBy(space.id, group.id)} onSave={handleUpdatePrice} />}
               <ConfigureExtendedPriceButton
                 prices={findPricesBy(space.id, group.id)}
                 onError={onError}
