@@ -12,7 +12,7 @@ export interface Price {
   priceable_type: string,
   priceable_id: number,
   amount: number,
-  duration: number // in minutes
+  duration?: number // in minutes
 }
 
 export interface ComputePriceResult {
