@@ -9,6 +9,7 @@ import GroupAPI from '../../api/group';
 import { Group } from '../../models/group';
 import { IApplication } from '../../models/application';
 import { EditablePrice } from './editable-price';
+import { ConfigureTimeslotButton } from './configure-timeslot-button';
 import PriceAPI from '../../api/price';
 import { Price } from '../../models/price';
 import { useImmer } from 'use-immer';
@@ -61,11 +62,8 @@ const SpacesPricing: React.FC<SpacesPricingProps> = ({ onError, onSuccess }) => 
     return FormatLib.price(price);
   };
 
-  /**
-   * Find the price matching the given criterion
-   */
-  const findPriceBy = (spaceId, groupId): Price => {
-    return prices.find(price => price.priceable_id === spaceId && price.group_id === groupId);
+  const findPricesBy = (spaceId, groupId): Array<Price> => {
+    return prices.filter(price => price.priceable_id === spaceId && price.group_id === groupId);
   };
 
   /**
@@ -109,7 +107,14 @@ const SpacesPricing: React.FC<SpacesPricingProps> = ({ onError, onSuccess }) => 
           {spaces?.map(space => <tr key={space.id}>
             <td>{space.name}</td>
             {groups?.map(group => <td key={group.id}>
-              {prices && <EditablePrice price={findPriceBy(space.id, group.id)} onSave={handleUpdatePrice} />}
+              {prices && <EditablePrice price={findPricesBy(space.id, group.id)[0]} onSave={handleUpdatePrice} />}
+              <ConfigureTimeslotButton
+                prices={findPricesBy(space.id, group.id)}
+                onError={onError}
+                onSuccess={onSuccess}
+                groupId={group.id}
+                priceableId={space.id}
+                priceableType='Space' />
             </td>)}
           </tr>)}
         </tbody>
