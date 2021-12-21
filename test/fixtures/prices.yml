@@ -6,6 +6,7 @@ price_1:
   priceable_id: 1
   priceable_type: Machine
   amount: 2400
+  duration: 60
   created_at: 2016-04-04 14:11:34.242608000 Z
   updated_at: 2016-04-04 14:11:34.242608000 Z
 
@@ -16,6 +17,7 @@ price_2:
   priceable_id: 1
   priceable_type: Machine
   amount: 5300
+  duration: 60
   created_at: 2016-04-04 14:11:34.247363000 Z
   updated_at: 2016-04-04 14:11:34.247363000 Z
 
@@ -26,6 +28,7 @@ price_5:
   priceable_id: 2
   priceable_type: Machine
   amount: 4200
+  duration: 60
   created_at: 2016-04-04 14:11:34.290427000 Z
   updated_at: 2016-04-04 14:11:34.290427000 Z
 
@@ -36,6 +39,7 @@ price_6:
   priceable_id: 2
   priceable_type: Machine
   amount: 1100
+  duration: 60
   created_at: 2016-04-04 14:11:34.293603000 Z
   updated_at: 2016-04-04 14:11:34.293603000 Z
 
@@ -46,6 +50,7 @@ price_9:
   priceable_id: 3
   priceable_type: Machine
   amount: 4100
+  duration: 60
   created_at: 2016-04-04 14:11:34.320809000 Z
   updated_at: 2016-04-04 14:11:34.320809000 Z
 
@@ -56,6 +61,7 @@ price_10:
   priceable_id: 3
   priceable_type: Machine
   amount: 5300
+  duration: 60
   created_at: 2016-04-04 14:11:34.325274000 Z
   updated_at: 2016-04-04 14:11:34.325274000 Z
 
@@ -66,6 +72,7 @@ price_13:
   priceable_id: 4
   priceable_type: Machine
   amount: 900
+  duration: 60
   created_at: 2016-04-04 14:11:34.362313000 Z
   updated_at: 2016-04-04 14:11:34.362313000 Z
 
@@ -76,6 +83,7 @@ price_14:
   priceable_id: 4
   priceable_type: Machine
   amount: 5100
+  duration: 60
   created_at: 2016-04-04 14:11:34.366049000 Z
   updated_at: 2016-04-04 14:11:34.366049000 Z
 
@@ -86,6 +94,7 @@ price_17:
   priceable_id: 5
   priceable_type: Machine
   amount: 1600
+  duration: 60
   created_at: 2016-04-04 14:11:34.398206000 Z
   updated_at: 2016-04-04 14:11:34.398206000 Z
 
@@ -96,6 +105,7 @@ price_18:
   priceable_id: 5
   priceable_type: Machine
   amount: 2000
+  duration: 60
   created_at: 2016-04-04 14:11:34.407216000 Z
   updated_at: 2016-04-04 14:11:34.407216000 Z
 
@@ -106,6 +116,7 @@ price_21:
   priceable_id: 6
   priceable_type: Machine
   amount: 3200
+  duration: 60
   created_at: 2016-04-04 14:11:34.442054000 Z
   updated_at: 2016-04-04 14:11:34.442054000 Z
 
@@ -116,6 +127,7 @@ price_22:
   priceable_id: 6
   priceable_type: Machine
   amount: 3400
+  duration: 60
   created_at: 2016-04-04 14:11:34.445147000 Z
   updated_at: 2016-04-04 14:11:34.445147000 Z
 
@@ -126,6 +138,7 @@ price_25:
   priceable_id: 1
   priceable_type: Machine
   amount: 1500
+  duration: 60
   created_at: 2016-04-04 15:15:21.038387000 Z
   updated_at: 2016-04-04 15:15:45.691674000 Z
 
@@ -136,6 +149,7 @@ price_26:
   priceable_id: 2
   priceable_type: Machine
   amount: 1500
+  duration: 60
   created_at: 2016-04-04 15:15:21.048838000 Z
   updated_at: 2016-04-04 15:15:45.693896000 Z
 
@@ -146,6 +160,7 @@ price_27:
   priceable_id: 3
   priceable_type: Machine
   amount: 2500
+  duration: 60
   created_at: 2016-04-04 15:15:21.053412000 Z
   updated_at: 2016-04-04 15:15:45.697794000 Z
 
@@ -156,6 +171,7 @@ price_28:
   priceable_id: 4
   priceable_type: Machine
   amount: 1500
+  duration: 60
   created_at: 2016-04-04 15:15:21.057117000 Z
   updated_at: 2016-04-04 15:15:45.700657000 Z
 
@@ -166,6 +182,7 @@ price_29:
   priceable_id: 5
   priceable_type: Machine
   amount: 1300
+  duration: 60
   created_at: 2016-04-04 15:15:21.061171000 Z
   updated_at: 2016-04-04 15:15:45.707564000 Z
 
@@ -176,6 +193,7 @@ price_30:
   priceable_id: 6
   priceable_type: Machine
   amount: 1500
+  duration: 60
   created_at: 2016-04-04 15:15:21.065166000 Z
   updated_at: 2016-04-04 15:15:45.710945000 Z
 
@@ -186,6 +204,7 @@ price_31:
   priceable_id: 1
   priceable_type: Machine
   amount: 1500
+  duration: 60
   created_at: 2016-04-04 15:17:24.920457000 Z
   updated_at: 2016-04-04 15:17:34.255229000 Z
 
@@ -196,6 +215,7 @@ price_32:
   priceable_id: 2
   priceable_type: Machine
   amount: 1500
+  duration: 60
   created_at: 2016-04-04 15:17:24.926967000 Z
   updated_at: 2016-04-04 15:17:34.257285000 Z
 
@@ -206,6 +226,7 @@ price_33:
   priceable_id: 3
   priceable_type: Machine
   amount: 2500
+  duration: 60
   created_at: 2016-04-04 15:17:24.932723000 Z
   updated_at: 2016-04-04 15:17:34.258741000 Z
 
@@ -216,6 +237,7 @@ price_34:
   priceable_id: 4
   priceable_type: Machine
   amount: 1500
+  duration: 60
   created_at: 2016-04-04 15:17:24.937168000 Z
   updated_at: 2016-04-04 15:17:34.260503000 Z
 
@@ -226,6 +248,7 @@ price_35:
   priceable_id: 5
   priceable_type: Machine
   amount: 1300
+  duration: 60
   created_at: 2016-04-04 15:17:24.940520000 Z
   updated_at: 2016-04-04 15:17:34.263627000 Z
 
@@ -236,6 +259,7 @@ price_36:
   priceable_id: 6
   priceable_type: Machine
   amount: 1500
+  duration: 60
   created_at: 2016-04-04 15:17:24.944460000 Z
   updated_at: 2016-04-04 15:17:34.267328000 Z
 
@@ -246,6 +270,7 @@ price_37:
   priceable_id: 1
   priceable_type: Machine
   amount: 1000
+  duration: 60
   created_at: 2016-04-04 15:18:28.836899000 Z
   updated_at: 2016-04-04 15:18:50.507019000 Z
 
@@ -256,6 +281,7 @@ price_38:
   priceable_id: 2
   priceable_type: Machine
   amount: 1000
+  duration: 60
   created_at: 2016-04-04 15:18:28.842674000 Z
   updated_at: 2016-04-04 15:18:50.508799000 Z
 
@@ -266,6 +292,7 @@ price_39:
   priceable_id: 3
   priceable_type: Machine
   amount: 1500
+  duration: 60
   created_at: 2016-04-04 15:18:28.847736000 Z
   updated_at: 2016-04-04 15:18:50.510437000 Z
 
@@ -276,6 +303,7 @@ price_40:
   priceable_id: 4
   priceable_type: Machine
   amount: 1000
+  duration: 60
   created_at: 2016-04-04 15:18:28.852783000 Z
   updated_at: 2016-04-04 15:18:50.512239000 Z
 
@@ -286,6 +314,7 @@ price_41:
   priceable_id: 5
   priceable_type: Machine
   amount: 800
+  duration: 60
   created_at: 2016-04-04 15:18:28.856602000 Z
   updated_at: 2016-04-04 15:18:50.514062000 Z
 
@@ -296,6 +325,7 @@ price_42:
   priceable_id: 6
   priceable_type: Machine
   amount: 1000
+  duration: 60
   created_at: 2016-04-04 15:18:28.860220000 Z
   updated_at: 2016-04-04 15:18:50.517702000 Z
 
@@ -306,6 +336,7 @@ price_43:
   priceable_id: 1
   priceable_type: Machine
   amount: 1000
+  duration: 60
   created_at: 2016-04-04 15:18:28.836899000 Z
   updated_at: 2016-04-04 15:18:50.507019000 Z
 
@@ -316,6 +347,7 @@ price_44:
   priceable_id: 2
   priceable_type: Machine
   amount: 1000
+  duration: 60
   created_at: 2016-04-04 15:18:28.842674000 Z
   updated_at: 2016-04-04 15:18:50.508799000 Z
 
@@ -326,6 +358,7 @@ price_45:
   priceable_id: 3
   priceable_type: Machine
   amount: 1500
+  duration: 60
   created_at: 2016-04-04 15:18:28.847736000 Z
   updated_at: 2016-04-04 15:18:50.510437000 Z
 
@@ -336,6 +369,7 @@ price_46:
   priceable_id: 4
   priceable_type: Machine
   amount: 1000
+  duration: 60
   created_at: 2016-04-04 15:18:28.852783000 Z
   updated_at: 2016-04-04 15:18:50.512239000 Z
 
@@ -346,6 +380,7 @@ price_47:
   priceable_id: 5
   priceable_type: Machine
   amount: 800
+  duration: 60
   created_at: 2016-04-04 15:18:28.856602000 Z
   updated_at: 2016-04-04 15:18:50.514062000 Z
 
@@ -356,5 +391,6 @@ price_48:
   priceable_id: 6
   priceable_type: Machine
   amount: 1000
+  duration: 60
   created_at: 2016-04-04 15:18:28.860220000 Z
   updated_at: 2016-04-04 15:18:50.517702000 Z
