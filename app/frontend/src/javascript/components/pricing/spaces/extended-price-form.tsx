@@ -1,9 +1,9 @@
 import React, { BaseSyntheticEvent } from 'react';
-import { Price } from '../../models/price';
+import { Price } from '../../../models/price';
 import { useTranslation } from 'react-i18next';
 import { useImmer } from 'use-immer';
-import { FabInput } from '../base/fab-input';
-import { IFablab } from '../../models/fablab';
+import { FabInput } from '../../base/fab-input';
+import { IFablab } from '../../../models/fablab';
 
 declare let Fablab: IFablab;
 

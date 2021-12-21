@@ -1,10 +1,10 @@
 import React, { ReactNode, useState } from 'react';
-import { Price } from '../../models/price';
+import { Price } from '../../../models/price';
 import { useTranslation } from 'react-i18next';
-import { FabPopover } from '../base/fab-popover';
+import { FabPopover } from '../../base/fab-popover';
 import { CreateExtendedPrice } from './create-extended-price';
-import PriceAPI from '../../api/price';
-import FormatLib from '../../lib/format';
+import PriceAPI from '../../../api/price';
+import FormatLib from '../../../lib/format';
 import { EditExtendedPrice } from './edit-extended-price';
 import { DeleteExtendedPrice } from './delete-extended-price';
 

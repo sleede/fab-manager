@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
-import { Loader } from '../base/loader';
-import { FabAlert } from '../base/fab-alert';
-import { HtmlTranslate } from '../base/html-translate';
-import SpaceAPI from '../../api/space';
-import GroupAPI from '../../api/group';
-import { Group } from '../../models/group';
-import { IApplication } from '../../models/application';
-import { Space } from '../../models/space';
-import { EditablePrice } from './editable-price';
+import { Loader } from '../../base/loader';
+import { FabAlert } from '../../base/fab-alert';
+import { HtmlTranslate } from '../../base/html-translate';
+import SpaceAPI from '../../../api/space';
+import GroupAPI from '../../../api/group';
+import { Group } from '../../../models/group';
+import { IApplication } from '../../../models/application';
+import { Space } from '../../../models/space';
+import { EditablePrice } from '../editable-price';
 import { ConfigureExtendedPriceButton } from './configure-extended-price-button';
-import PriceAPI from '../../api/price';
-import { Price } from '../../models/price';
+import PriceAPI from '../../../api/price';
+import { Price } from '../../../models/price';
 import { useImmer } from 'use-immer';
-import FormatLib from '../../lib/format';
+import FormatLib from '../../../lib/format';
 
 declare const Application: IApplication;
 

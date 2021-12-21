@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { FabModal } from '../base/fab-modal';
+import { FabModal } from '../../base/fab-modal';
 import { ExtendedPriceForm } from './extended-price-form';
-import { Price } from '../../models/price';
-import PriceAPI from '../../api/price';
+import { Price } from '../../../models/price';
+import PriceAPI from '../../../api/price';
 import { useTranslation } from 'react-i18next';
-import { FabAlert } from '../base/fab-alert';
+import { FabAlert } from '../../base/fab-alert';
 
 interface CreateExtendedPriceProps {
   onSuccess: (message: string) => void,

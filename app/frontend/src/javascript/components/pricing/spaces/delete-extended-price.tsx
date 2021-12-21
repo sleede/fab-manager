@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FabButton } from '../base/fab-button';
-import { FabModal } from '../base/fab-modal';
-import { Price } from '../../models/price';
-import PriceAPI from '../../api/price';
+import { FabButton } from '../../base/fab-button';
+import { FabModal } from '../../base/fab-modal';
+import { Price } from '../../../models/price';
+import PriceAPI from '../../../api/price';
 
 interface DeleteExtendedPriceProps {
   onSuccess: (message: string) => void,
