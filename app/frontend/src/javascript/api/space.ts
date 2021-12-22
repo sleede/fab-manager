@@ -1,7 +1,7 @@
 import apiClient from './clients/api-client';
 import { AxiosResponse } from 'axios';
 
-export default class MachineAPI {
+export default class SpaceAPI {
   static async index (filters?: boolean): Promise<Array<any>> {
     const res: AxiosResponse<Array<any>> = await apiClient.get(`/api/spaces${this.filtersToQuery(filters)}`);
     return res?.data;
