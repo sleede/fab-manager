@@ -24,7 +24,7 @@ export const CreateExtendedPrice: React.FC<CreateExtendedPriceProps> = ({ onSucc
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   /**
-   * Open/closes the "new pack" modal dialog
+   * Open/closes the "new extended price" modal dialog
    */
   const toggleModal = (): void => {
     setIsOpen(!isOpen);
@@ -34,7 +34,7 @@ export const CreateExtendedPrice: React.FC<CreateExtendedPriceProps> = ({ onSucc
    * Callback triggered when the user has validated the creation of the new extended price
    */
   const handleSubmit = (extendedPrice: Price): void => {
-    // set the already-known attributes of the new pack
+    // set the already-known attributes of the new extended price
     const newExtendedPrice = Object.assign<Price, Price>({} as Price, extendedPrice);
     newExtendedPrice.group_id = groupId;
     newExtendedPrice.priceable_id = priceableId;
@@ -58,11 +58,11 @@ export const CreateExtendedPrice: React.FC<CreateExtendedPriceProps> = ({ onSucc
         className="new-pack-modal"
         closeButton
         confirmButton={t('app.admin.create_extendedPrice.create_extendedPrice')}
-        onConfirmSendFormId="new-pack">
+        onConfirmSendFormId="new-extended-price">
         <FabAlert level="info">
           {t('app.admin.create_extendedPrice.new_extendedPrice_info', { TYPE: priceableType })}
         </FabAlert>
-        <ExtendedPriceForm formId="new-pack" onSubmit={handleSubmit} />
+        <ExtendedPriceForm formId="new-extended-price" onSubmit={handleSubmit} />
       </FabModal>
     </div>
   );

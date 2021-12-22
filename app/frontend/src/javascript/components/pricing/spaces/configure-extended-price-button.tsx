@@ -19,7 +19,7 @@ interface ConfigureExtendedPriceButtonProps {
 
 /**
  * This component is a button that shows the list of extendedPrices.
- * It also triggers modal dialogs to configure (add/delete/edit/remove) extendedPrices.
+ * It also triggers modal dialogs to configure (add/edit/remove) extendedPrices.
  */
 export const ConfigureExtendedPriceButton: React.FC<ConfigureExtendedPriceButtonProps> = ({ prices, onError, onSuccess, groupId, priceableId, priceableType }) => {
   const { t } = useTranslation('admin');
@@ -46,7 +46,7 @@ export const ConfigureExtendedPriceButton: React.FC<ConfigureExtendedPriceButton
   };
 
   /**
-   * Render the button used to trigger the "new pack" modal
+   * Render the button used to trigger the "new extended price" modal
    */
   const renderAddButton = (): ReactNode => {
     return <CreateExtendedPrice onSuccess={handleSuccess}
@@ -57,7 +57,7 @@ export const ConfigureExtendedPriceButton: React.FC<ConfigureExtendedPriceButton
   };
 
   return (
-    <div className="configure-packs-button">
+    <div className="configure-extended-prices-button">
       <button className="packs-button" onClick={toggleShowList}>
         <i className="fas fa-stopwatch" />
       </button>

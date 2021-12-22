@@ -64,12 +64,16 @@ const SpacesPricing: React.FC<SpacesPricingProps> = ({ onError, onSuccess }) => 
   };
 
   /**
-   * Find the price matching the given criterion
+   * Find the default price (hourly rate) matching the given criterion
    */
   const findPriceBy = (spaceId, groupId): Price => {
-    return prices.find(price => price.priceable_id === spaceId && price.group_id === groupId);
+    return prices.find(price => price.priceable_id === spaceId && price.group_id === groupId && price.duration == 60);
   };
-  const findPricesBy = (spaceId, groupId): Array<Price> => {
+
+  /**
+   * Find prices matching the given criterion, except the default hourly rate
+   */
+  const findExtendedPricesBy = (spaceId, groupId): Array<Price> => {
     return prices.filter(price => price.priceable_id === spaceId && price.group_id === groupId && price.duration !== 60);
   };
 
@@ -90,7 +94,7 @@ const SpacesPricing: React.FC<SpacesPricingProps> = ({ onError, onSuccess }) => 
   const handleUpdatePrice = (price: Price): void => {
     PriceAPI.update(price)
       .then(() => {
-        onSuccess(t('app.admin.machines_pricing.price_updated'));
+        onSuccess(t('app.admin.spaces_pricing.price_updated'));
         updatePrice(price);
       })
       .catch(error => onError(error));
@@ -116,7 +120,7 @@ const SpacesPricing: React.FC<SpacesPricingProps> = ({ onError, onSuccess }) => 
             {groups?.map(group => <td key={group.id}>
               {prices && <EditablePrice price={findPriceBy(space.id, group.id)} onSave={handleUpdatePrice} />}
               <ConfigureExtendedPriceButton
-                prices={findPricesBy(space.id, group.id)}
+                prices={findExtendedPricesBy(space.id, group.id)}
                 onError={onError}
                 onSuccess={onSuccess}
                 groupId={group.id}

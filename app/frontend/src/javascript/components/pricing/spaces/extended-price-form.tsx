@@ -59,7 +59,7 @@ export const ExtendedPriceForm: React.FC<PackFormProps> = ({ formId, onSubmit, p
         min={1}
         icon={<i className="fas fa-clock" />}
         required />
-      <label htmlFor="amount">{t('app.admin.pack_form.amount')} *</label>
+      <label htmlFor="amount">{t('app.admin.extended_price_form.amount')} *</label>
       <FabInput id="amount"
         type="number"
         step={0.01}
