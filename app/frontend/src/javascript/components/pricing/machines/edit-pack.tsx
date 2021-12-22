@@ -54,16 +54,15 @@ export const EditPack: React.FC<EditPackProps> = ({ pack, onSuccess, onError }) 
   };
 
   return (
-    <div className="edit-pack">
-      <FabButton type='button' className="edit-pack-button" icon={<i className="fas fa-edit" />} onClick={handleRequestEdit} />
+    <div className="edit-group">
+      <FabButton type='button' icon={<i className="fas fa-edit" />} onClick={handleRequestEdit} />
       <FabModal isOpen={isOpen}
         toggleModal={toggleModal}
         title={t('app.admin.edit_pack.edit_pack')}
-        className="edit-pack-modal"
         closeButton
         confirmButton={t('app.admin.edit_pack.confirm_changes')}
-        onConfirmSendFormId="edit-pack">
-        {packData && <PackForm formId="edit-pack" onSubmit={handleUpdate} pack={packData} />}
+        onConfirmSendFormId="edit-group">
+        {packData && <PackForm formId="edit-group" onSubmit={handleUpdate} pack={packData} />}
       </FabModal>
     </div>
   );

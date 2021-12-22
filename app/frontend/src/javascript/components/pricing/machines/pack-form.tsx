@@ -103,7 +103,7 @@ export const PackForm: React.FC<PackFormProps> = ({ formId, onSubmit, pack }) =>
   };
 
   return (
-    <form id={formId} onSubmit={handleSubmit} className="pack-form">
+    <form id={formId} onSubmit={handleSubmit} className="group-form">
       <label htmlFor="hours">{t('app.admin.pack_form.hours')} *</label>
       <FabInput id="hours"
         type="number"

@@ -35,7 +35,7 @@ const SpacesPricing: React.FC<SpacesPricingProps> = ({ onError, onSuccess }) => 
 
   // retrieve the initial data
   useEffect(() => {
-    SpaceAPI.index(false)
+    SpaceAPI.index()
       .then(data => setSpaces(data))
       .catch(error => onError(error));
     GroupAPI.index({ disabled: false, admins: false })
@@ -67,7 +67,7 @@ const SpacesPricing: React.FC<SpacesPricingProps> = ({ onError, onSuccess }) => 
    * Find the default price (hourly rate) matching the given criterion
    */
   const findPriceBy = (spaceId, groupId): Price => {
-    return prices.find(price => price.priceable_id === spaceId && price.group_id === groupId && price.duration == 60);
+    return prices.find(price => price.priceable_id === spaceId && price.group_id === groupId && price.duration === 60);
   };
 
   /**
@@ -101,7 +101,7 @@ const SpacesPricing: React.FC<SpacesPricingProps> = ({ onError, onSuccess }) => 
   };
 
   return (
-    <div className="machines-pricing">
+    <div className="pricing-list">
       <FabAlert level="warning">
         <p><HtmlTranslate trKey="app.admin.pricing.these_prices_match_space_hours_rates_html"/></p>
         <p><HtmlTranslate trKey="app.admin.pricing.prices_calculated_on_hourly_rate_html" options={{ DURATION: `${EXEMPLE_DURATION}`, RATE: examplePrice('hourly_rate'), PRICE: examplePrice('final_price') }} /></p>
@@ -118,7 +118,7 @@ const SpacesPricing: React.FC<SpacesPricingProps> = ({ onError, onSuccess }) => 
           {spaces?.map(space => <tr key={space.id}>
             <td>{space.name}</td>
             {groups?.map(group => <td key={group.id}>
-              {prices && <EditablePrice price={findPriceBy(space.id, group.id)} onSave={handleUpdatePrice} />}
+              {prices.length && <EditablePrice price={findPriceBy(space.id, group.id)} onSave={handleUpdatePrice} />}
               <ConfigureExtendedPriceButton
                 prices={findExtendedPricesBy(space.id, group.id)}
                 onError={onError}
