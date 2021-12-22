@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
 import { DocumentFilters } from '../document-filters';
@@ -37,13 +37,6 @@ const PaymentSchedulesList: React.FC<PaymentSchedulesListProps> = ({ currentUser
   const [customerFilter, setCustomerFilter] = useState<string>(null);
   // current filter, by date, for the schedules and the deadlines
   const [dateFilter, setDateFilter] = useState<Date>(null);
-
-  /**
-   * When the component is loaded first, refresh the list of schedules to fill the first page.
-   */
-  useEffect(() => {
-    handleRefreshList();
-  }, []);
 
   /**
    * Fetch from the API the payments schedules matching the given filters and reset the results table with the new schedules.
