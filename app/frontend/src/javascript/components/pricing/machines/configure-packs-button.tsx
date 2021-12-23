@@ -1,12 +1,12 @@
 import React, { ReactNode, useState } from 'react';
-import { PrepaidPack } from '../../models/prepaid-pack';
+import { PrepaidPack } from '../../../models/prepaid-pack';
 import { useTranslation } from 'react-i18next';
-import { FabPopover } from '../base/fab-popover';
+import { FabPopover } from '../../base/fab-popover';
 import { CreatePack } from './create-pack';
-import PrepaidPackAPI from '../../api/prepaid-pack';
+import PrepaidPackAPI from '../../../api/prepaid-pack';
 import { DeletePack } from './delete-pack';
 import { EditPack } from './edit-pack';
-import FormatLib from '../../lib/format';
+import FormatLib from '../../../lib/format';
 
 interface ConfigurePacksButtonProps {
   packsData: Array<PrepaidPack>,
@@ -64,8 +64,8 @@ export const ConfigurePacksButton: React.FC<ConfigurePacksButtonProps> = ({ pack
   };
 
   return (
-    <div className="configure-packs-button">
-      <button className="packs-button" onClick={toggleShowList}>
+    <div className="configure-group">
+      <button className="configure-group-button" onClick={toggleShowList}>
         <i className="fas fa-box" />
       </button>
       {showList && <FabPopover title={t('app.admin.configure_packs_button.packs')} headerButton={renderAddButton()} className="fab-popover__right">
@@ -73,7 +73,7 @@ export const ConfigurePacksButton: React.FC<ConfigurePacksButtonProps> = ({ pack
           {packs?.map(p =>
             <li key={p.id} className={p.disabled ? 'disabled' : ''}>
               {formatDuration(p.minutes)} - {FormatLib.price(p.amount)}
-              <span className="pack-actions">
+              <span className="group-actions">
                 <EditPack onSuccess={handleSuccess} onError={onError} pack={p} />
                 <DeletePack onSuccess={handleSuccess} onError={onError} pack={p} />
               </span>

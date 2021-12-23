@@ -1,5 +1,8 @@
 # Changelog Fab-manager
 
+## v5.1.14 2021 December 21
+
+- Ability to configure prices for spaces by time slots different than the default hourly rate
 - Updated portuguese translation
 - Refactored the ReserveButton component to use the same user's data across all the component
 - First optimization the load time of the payment schedules list
