@@ -90,7 +90,7 @@ de:
       other: "%{count} %{NAME}-Tickets"
     coupon_CODE_discount_of_DISCOUNT: "Gutschein {CODE}: Rabatt von {DISCOUNT}{TYPE, select, percent_off{%} other{}}" #messageFormat interpolation
     total_including_all_taxes: "Gesamtpreis inkl. Steuern"
-    including_VAT_RATE: "Inklusive MwSt. %{RATE}%"
+    including_VAT_RATE: "Inklusive MwSt. %{RATE} von %{AMOUNT}"
     including_total_excluding_taxes: "Gesamtbetrag zzgl. Steuern"
     including_amount_payed_on_ordering: "Inklusive bei Bestellung bezahlter Betrag"
     total_amount: "Gesamtbetrag"
