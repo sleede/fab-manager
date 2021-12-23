@@ -383,7 +383,7 @@ en:
       configure_extendedPrices_button:
         extendedPrices: "Extended prices"
         no_extendedPrices: "No extended price for now"
-      extended_prices_form:
+      extended_price_form:
         amount: "Price"
       pack_form:
         hours: "Hours"
