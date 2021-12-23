@@ -1,6 +1,6 @@
 # Changelog Fab-manager
 
-## v5.1.14 2021 December 21
+## v5.2.0 2021 December 23
 
 - Ability to configure prices for spaces by time slots different than the default hourly rate
 - Updated portuguese translation
