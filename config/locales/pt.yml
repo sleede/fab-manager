@@ -535,3 +535,4 @@ pt:
     renew_pack_threshold: "Limite para renovação de pacotes"
     pack_only_for_subscription: "Restringir pacotes para assinantes"
     overlapping_categories: "Categorias para prevenção de reservas sobrepostas"
+    extended_prices_in_same_day: "Extended prices in the same day"
