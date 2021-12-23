@@ -368,6 +368,8 @@ pt:
         status_enabled: "Ativos"
         status_disabled: "Desabilitados"
         status_all: "Todos"
+      spaces_pricing:
+        price_updated: "Price successfully updated"
       machines_pricing:
         prices_match_machine_hours_rates_html: "Os preços abaixo correspondem a uma hora de uso de máquina, <strong>sem assinatura</strong>."
         prices_calculated_on_hourly_rate_html: "Todos os preços serão calculados automaticamente com base na taxa horária definida aqui.<br/><em>Por exemplo</em>, se você definir uma taxa horária em {RATE}: um slot de {DURATION} minutos, será cobrada a tarifa <strong>{PRICE}</strong>."
@@ -378,6 +380,11 @@ pt:
         packs: "Pacotes pré-pagos"
         no_packs: "Não há pacotes no momento"
         pack_DURATION: "{DURATION} horas"
+      configure_extendedPrices_button:
+        extendedPrices: "Extended prices"
+        no_extendedPrices: "No extended price for now"
+      extended_prices_form:
+        amount: "Price"
       pack_form:
         hours: "Horas"
         amount: "Preço"
@@ -404,6 +411,21 @@ pt:
         edit_pack: "Editar o pacote"
         confirm_changes: "Confirmar alterações"
         pack_successfully_updated: "O pacote pré-pago foi atualizado com sucesso."
+      create_extendedPrice:
+        new_extendedPrice: "New extended price"
+        new_extendedPrice_info: "Extended prices allows you to define prices based on custom durations, intead on the default hourly rates."
+        create_extendedPrice: "Create extended price"
+        extendedPrice_successfully_created: "The new extended price was successfully created."
+      delete_extendedPrice:
+        extendedPrice_deleted: "The extended price was successfully deleted."
+        unable_to_delete: "Unable to delete the extended price: "
+        delete_extendedPrice: "Delete the extended price"
+        confirm_delete: "Delete"
+        delete_confirmation: "Are you sure you want to delete this extended price? This won't be possible if it was already bought by users."
+      edit_extendedPrice:
+        edit_extendedPrice: "Edit the extended price"
+        confirm_changes: "Confirm changes"
+        extendedPrice_successfully_updated: "The extended price was successfully updated."
       #ajouter un code promotionnel
       coupons_new:
         add_a_coupon: "Adicionar cupom"
@@ -1235,6 +1257,9 @@ pt:
         pack_only_for_subscription_info_html: "Se esta opção estiver ativada, a compra e uso de um pacote pré-pago só é possível para o usuário com uma assinatura válida."
         pack_only_for_subscription: "Assinatura válida para compra e uso de um pacote pré-pago"
         pack_only_for_subscription_info: "Tornar obrigatória a assinatura para pacotes pré-pagos"
+        extended_prices: "Extended prices"
+        extended_prices_info_html: "Spaces can have different prices depending on the cumulated duration of the booking. You can choose if this apply to all bookings or only to those starting within the same day."
+        extended_prices_in_same_day: "Extended prices in the same day"
         overlapping_options:
           training_reservations: "Treinamentos"
           machine_reservations: "Máquinas"
