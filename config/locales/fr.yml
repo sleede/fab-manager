@@ -535,3 +535,4 @@ fr:
     renew_pack_threshold: "Seuil de renouvellement des packs"
     pack_only_for_subscription: "Restreindre les packs pour les abonnés"
     overlapping_categories: "Catégories pour la prévention du chevauchement des réservations"
+    extended_prices_in_same_day: "Extended prices in the same day"
