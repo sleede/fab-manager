@@ -368,6 +368,8 @@ zu:
         status_enabled: "crwdns7265:0crwdne7265:0"
         status_disabled: "crwdns7267:0crwdne7267:0"
         status_all: "crwdns7269:0crwdne7269:0"
+      spaces_pricing:
+        price_updated: "crwdns22135:0crwdne22135:0"
       machines_pricing:
         prices_match_machine_hours_rates_html: "crwdns21942:0crwdne21942:0"
         prices_calculated_on_hourly_rate_html: "crwdns22028:0{RATE}crwdnd22028:0{DURATION}crwdnd22028:0{PRICE}crwdne22028:0"
@@ -378,6 +380,11 @@ zu:
         packs: "crwdns21952:0crwdne21952:0"
         no_packs: "crwdns21954:0crwdne21954:0"
         pack_DURATION: "crwdns21956:0{DURATION}crwdne21956:0"
+      configure_extendedPrices_button:
+        extendedPrices: "crwdns22137:0crwdne22137:0"
+        no_extendedPrices: "crwdns22139:0crwdne22139:0"
+      extended_prices_form:
+        amount: "crwdns22141:0crwdne22141:0"
       pack_form:
         hours: "crwdns21958:0crwdne21958:0"
         amount: "crwdns21960:0crwdne21960:0"
@@ -404,6 +411,21 @@ zu:
         edit_pack: "crwdns21994:0crwdne21994:0"
         confirm_changes: "crwdns21996:0crwdne21996:0"
         pack_successfully_updated: "crwdns21998:0crwdne21998:0"
+      create_extendedPrice:
+        new_extendedPrice: "crwdns22143:0crwdne22143:0"
+        new_extendedPrice_info: "crwdns22145:0crwdne22145:0"
+        create_extendedPrice: "crwdns22147:0crwdne22147:0"
+        extendedPrice_successfully_created: "crwdns22149:0crwdne22149:0"
+      delete_extendedPrice:
+        extendedPrice_deleted: "crwdns22151:0crwdne22151:0"
+        unable_to_delete: "crwdns22153:0crwdne22153:0"
+        delete_extendedPrice: "crwdns22155:0crwdne22155:0"
+        confirm_delete: "crwdns22157:0crwdne22157:0"
+        delete_confirmation: "crwdns22159:0crwdne22159:0"
+      edit_extendedPrice:
+        edit_extendedPrice: "crwdns22161:0crwdne22161:0"
+        confirm_changes: "crwdns22163:0crwdne22163:0"
+        extendedPrice_successfully_updated: "crwdns22165:0crwdne22165:0"
       #ajouter un code promotionnel
       coupons_new:
         add_a_coupon: "crwdns7271:0crwdne7271:0"
@@ -1235,6 +1257,9 @@ zu:
         pack_only_for_subscription_info_html: "crwdns22037:0crwdne22037:0"
         pack_only_for_subscription: "crwdns22039:0crwdne22039:0"
         pack_only_for_subscription_info: "crwdns22041:0crwdne22041:0"
+        extended_prices: "crwdns22167:0crwdne22167:0"
+        extended_prices_info_html: "crwdns22169:0crwdne22169:0"
+        extended_prices_in_same_day: "crwdns22171:0crwdne22171:0"
         overlapping_options:
           training_reservations: "crwdns22111:0crwdne22111:0"
           machine_reservations: "crwdns22113:0crwdne22113:0"
