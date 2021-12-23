@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FabButton } from '../base/fab-button';
-import { FabModal } from '../base/fab-modal';
-import { Loader } from '../base/loader';
-import { PrepaidPack } from '../../models/prepaid-pack';
-import PrepaidPackAPI from '../../api/prepaid-pack';
+import { FabButton } from '../../base/fab-button';
+import { FabModal } from '../../base/fab-modal';
+import { Loader } from '../../base/loader';
+import { PrepaidPack } from '../../../models/prepaid-pack';
+import PrepaidPackAPI from '../../../api/prepaid-pack';
 
 interface DeletePackProps {
   onSuccess: (message: string) => void,
@@ -42,8 +42,8 @@ const DeletePackComponent: React.FC<DeletePackProps> = ({ onSuccess, onError, pa
   };
 
   return (
-    <div className="delete-pack">
-      <FabButton type='button' className="remove-pack-button" icon={<i className="fa fa-trash" />} onClick={toggleDeletionModal} />
+    <div className="delete-group">
+      <FabButton type='button' className="delete-group-button" icon={<i className="fa fa-trash" />} onClick={toggleDeletionModal} />
       <FabModal title={t('app.admin.delete_pack.delete_pack')}
         isOpen={deletionModal}
         toggleModal={toggleDeletionModal}

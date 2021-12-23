@@ -11,7 +11,8 @@ export interface Price {
   plan_id: number,
   priceable_type: string,
   priceable_id: number,
-  amount: number
+  amount: number,
+  duration?: number // in minutes
 }
 
 export interface ComputePriceResult {

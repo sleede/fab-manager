@@ -3,7 +3,7 @@
 MINUTES_PER_HOUR = 60.0
 SECONDS_PER_MINUTE = 60.0
 
-GET_SLOT_PRICE_DEFAULT_OPTS = { has_credits: false, elements: nil, is_division: true, prepaid: { minutes: 0 } }.freeze
+GET_SLOT_PRICE_DEFAULT_OPTS = { has_credits: false, elements: nil, is_division: true, prepaid: { minutes: 0 }, custom_duration: nil }.freeze
 
 # A generic reservation added to the shopping cart
 class CartItem::Reservation < CartItem::BaseItem
@@ -16,19 +16,19 @@ class CartItem::Reservation < CartItem::BaseItem
   end
 
   def price
-    base_amount = @reservable.prices.find_by(group_id: @customer.group_id, plan_id: @plan.try(:id)).amount
     is_privileged = @operator.privileged? && @operator.id != @customer.id
     prepaid = { minutes: PrepaidPackService.minutes_available(@customer, @reservable) }
+    prices = applicable_prices
 
     elements = { slots: [] }
     amount = 0
 
     hours_available = credits
     @slots.each_with_index do |slot, index|
-      amount += get_slot_price(base_amount, slot, is_privileged,
-                               elements: elements,
-                               has_credits: (index < hours_available),
-                               prepaid: prepaid)
+      amount += get_slot_price_from_prices(prices, slot, is_privileged,
+                                           elements: elements,
+                                           has_credits: (index < hours_available),
+                                           prepaid: prepaid)
     end
 
     { elements: elements, amount: amount }
@@ -59,6 +59,27 @@ class CartItem::Reservation < CartItem::BaseItem
 
   def credits
     0
+  end
+
+  ##
+  # Compute the price of a single slot, according to the list of applicable prices.
+  # @param prices {{ prices: Array<{price: Price, duration: number}> }} list of prices to use with the current reservation
+  # @see get_slot_price
+  ##
+  def get_slot_price_from_prices(prices, slot, is_privileged, options = {})
+    options = GET_SLOT_PRICE_DEFAULT_OPTS.merge(options)
+
+    slot_minutes = (slot[:end_at].to_time - slot[:start_at].to_time) / SECONDS_PER_MINUTE
+    price = prices[:prices].find { |p| p[:duration] <= slot_minutes && p[:duration].positive? }
+    price = prices[:prices].first if price.nil?
+    hourly_rate = (price[:price].amount.to_f / price[:price].duration) * MINUTES_PER_HOUR
+
+    # apply the base price to the real slot duration
+    real_price = get_slot_price(hourly_rate, slot, is_privileged, options)
+
+    price[:duration] -= slot_minutes
+
+    real_price
   end
 
   ##
@@ -101,6 +122,35 @@ class CartItem::Reservation < CartItem::BaseItem
       )
     end
     real_price
+  end
+
+  # We determine the list of prices applicable to current reservation
+  # The longest available price is always used in priority.
+  # Eg. If the reservation is for 12 hours, and there are prices for 3 hours, 7 hours,
+  # and the base price (1 hours), we use the 7 hours price, then 3 hours price, and finally the base price twice (7+3+1+1 = 12).
+  # All these prices are returned to be applied to the reservation.
+  def applicable_prices
+    all_slots_in_same_day = @slots.map { |slot| slot[:start_at].to_date }.uniq.size == 1
+
+    total_duration = @slots.map { |slot| (slot[:end_at].to_time - slot[:start_at].to_time) / SECONDS_PER_MINUTE }.reduce(:+)
+    rates = { prices: [] }
+
+    remaining_duration = total_duration
+    while remaining_duration.positive?
+      max_duration = @reservable.prices.where(group_id: @customer.group_id, plan_id: @plan.try(:id))
+                                .where(Price.arel_table[:duration].lteq(remaining_duration))
+                                .maximum(:duration)
+      max_duration = 60 if max_duration.nil? || Setting.get('extended_prices_in_same_day') && !all_slots_in_same_day
+      max_duration_price = @reservable.prices.find_by(group_id: @customer.group_id, plan_id: @plan.try(:id), duration: max_duration)
+
+      current_duration = [remaining_duration, max_duration].min
+      rates[:prices].push(price: max_duration_price, duration: current_duration)
+
+      remaining_duration -= current_duration
+    end
+
+    rates[:prices].sort! { |a, b| b[:duration] <=> a[:duration] }
+    rates
   end
 
   ##

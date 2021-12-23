@@ -146,7 +146,7 @@ const ReserveButtonComponent: React.FC<ReserveButtonProps> = ({ currentUser, mac
     // if the customer has already bought a pack or if there's no active packs for this machine,
     // or customer has not any subscription if admin active pack only for subscription option
     // let the customer reserve
-    if (machine.current_user_has_packs || !machine.has_prepaid_packs_for_current_user || (isPackOnlyForSubscription && !currentUser.subscribed_plan)) {
+    if (machine.current_user_has_packs || !machine.has_prepaid_packs_for_current_user || (isPackOnlyForSubscription && !user.subscribed_plan)) {
       return onReserveMachine(machine);
     }
 
@@ -168,14 +168,14 @@ const ReserveButtonComponent: React.FC<ReserveButtonProps> = ({ currentUser, mac
         user={user}
         machine={machine}
         onEnrollRequested={onEnrollRequested} />
-      {machine && currentUser && <ProposePacksModal isOpen={proposePacks}
+      {machine && user && <ProposePacksModal isOpen={proposePacks}
         toggleModal={toggleProposePacksModal}
         item={machine}
         itemType="Machine"
         onError={onError}
-        customer={currentUser}
+        customer={user}
         onDecline={onReserveMachine}
-        operator={currentUser}
+        operator={user}
         onSuccess={handlePackBought} />}
     </span>
 

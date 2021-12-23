@@ -127,7 +127,7 @@ class PaymentScheduleService
   # @param filters {Hash} allowed filters: reference, customer, date.
   ##
   def self.list(page, size, filters = {})
-    ps = PaymentSchedule.includes(:invoicing_profile, :payment_schedule_items)
+    ps = PaymentSchedule.includes(:invoicing_profile, :payment_schedule_items, :payment_schedule_objects)
                         .joins(:invoicing_profile)
                         .order('payment_schedules.created_at DESC')
                         .page(page)

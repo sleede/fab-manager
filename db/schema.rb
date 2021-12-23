@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_18_121822) do
+ActiveRecord::Schema.define(version: 2021_12_20_143400) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -492,6 +492,7 @@ ActiveRecord::Schema.define(version: 2021_10_18_121822) do
     t.integer "weight"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "description"
   end
 
   create_table "plans", id: :serial, force: :cascade do |t|
@@ -554,6 +555,7 @@ ActiveRecord::Schema.define(version: 2021_10_18_121822) do
     t.integer "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "duration", default: 60
     t.index ["group_id"], name: "index_prices_on_group_id"
     t.index ["plan_id"], name: "index_prices_on_plan_id"
     t.index ["priceable_type", "priceable_id"], name: "index_prices_on_priceable_type_and_priceable_id"

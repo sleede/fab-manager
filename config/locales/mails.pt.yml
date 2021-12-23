@@ -100,7 +100,7 @@ pt:
       subject: "A conta de usuário foi criada"
       body:
         new_account_created: "Uma nova conta de usuário foi criada no site:"
-        user_of_group_html: "The user has registered in the group <strong>%{GROUP}</strong>"
+        user_of_group_html: "O usuário se registrou no grupo <strong>%{GROUP}</strong>"
         account_for_organization: "Esta conta gerencia uma organização:"
     notify_admin_subscribed_plan:
       subject: "Uma assinatura foi comprada"
@@ -273,7 +273,7 @@ pt:
       subject: "Um reembolso foi gerado"
       body:
         refund_created: "Um reembolso de %{AMOUNT} foi gerado na fatura %{INVOICE} do usuário %{USER}"
-        wallet_refund_created: "A refund of %{AMOUNT} has been generated for the credit of the wallet of user %{USER}"
+        wallet_refund_created: "Foi gerado um reembolso de %{AMOUNT} para o crédito da carteira de usuário %{USER}"
         download: "Clique aqui para fazer o download da fatura de reembolso"
     notify_admins_role_update:
       subject: "O papel de um usuário foi alterado"
@@ -290,29 +290,29 @@ pt:
       body:
         objects_sync: "Todos os membros, cupons, máquinas, treinamentos, espaços e planos foram sincronizados com sucesso no Stripe."
     notify_member_payment_schedule_ready:
-      subject: "Your payment schedule"
+      subject: "Sua agenda de pagamentos"
       body:
-        please_find_attached_html: "Please find attached your payment schedule, issued on {DATE}, with an amount of {AMOUNT} concerning your {TYPE, select, Reservation{reservation} other{subscription}}." #messageFormat interpolation
-        schedule_in_your_dashboard_html: "You can find this payment schedule at any time from %{DASHBOARD} on the Fab Lab's website."
-        your_dashboard: "your dashboard"
+        please_find_attached_html: "Por favor, anexe a sua agenda de pagamento, emitida em {DATE}, com um valor de {AMOUNT} relativo à sua reserva {TYPE, select, Reservation{reserva} other{assinatura}}." #messageFormat interpolation
+        schedule_in_your_dashboard_html: "Você pode encontrar a agenda de pagamento a qualquer momento a partir de %{DASHBOARD} no site do Fab Lab."
+        your_dashboard: "seu dashboard"
     notify_admin_payment_schedule_failed:
-      subject: "[URGENT] Card debit failure"
+      subject: "[URGENT] Falha no débito do cartão"
       body:
-        remember: "In accordance with the %{REFERENCE} payment schedule, a debit by card of %{AMOUNT} was scheduled on %{DATE}."
-        error: "Unfortunately, this card debit was unable to complete successfully."
-        action: "Please contact the member as soon as possible, then go to the payment schedule management interface to resolve the problem. After about 24 hours, the card subscription will be cancelled."
+        remember: "De acordo com o calendário de pagamento de %{REFERENCE}, um débito por cartão de %{AMOUNT} foi agendado em %{DATE}."
+        error: "Infelizmente, não foi possível completar o débito no cartão com sucesso."
+        action: "Por favor, entre em contato com o membro assim que possível, depois vá à interface de gestão de horários de pagamento para resolver o problema. Após cerca de 24 horas, a assinatura do cartão será cancelada."
     notify_member_payment_schedule_failed:
-      subject: "[URGENT] Card debit failure"
+      subject: "[URGENT] Falha no débito do cartão"
       body:
-        remember: "In accordance with your %{REFERENCE} payment schedule, a debit by card of %{AMOUNT} was scheduled on %{DATE}."
-        error: "Unfortunately, this card debit was unable to complete successfully."
-        action_html: "Please check %{DASHBOARD} or contact a manager before 24 hours, otherwise your subscription may be interrupted."
-        your_dashboard: "your dashboard"
+        remember: "De acordo com a sua agenda de pagamentos %{REFERENCE}, um débito por cartão de %{AMOUNT} foi agendado para %{DATE}."
+        error: "Infelizmente, não foi possível completar o débito no cartão com sucesso."
+        action_html: "Por favor, verifique %{DASHBOARD} ou entre em contato com um gerente antes de 24 horas, caso contrário sua assinatura pode ser interrompida."
+        your_dashboard: "seu dashboard"
     notify_admin_payment_schedule_check_deadline:
-      subject: "Payment deadline"
+      subject: "Prazo de pagamento"
       body:
-        remember: "In accordance with the %{REFERENCE} payment schedule, %{AMOUNT} was due to be debited on %{DATE}."
-        date: "This is a reminder to cash the scheduled check as soon as possible."
-        confirm: "Do not forget to confirm the receipt in your payment schedule management interface, so that the corresponding invoice will be generated."
+        remember: "De acordo com a agenda de pagamento %{REFERENCE}, %{AMOUNT} deveria ser debitado em %{DATE}."
+        date: "Este é um lembrete para descontar o pagamento programado o mais rápido possível."
+        confirm: "Não se esqueça de confirmar o recibo na interface de gestão de agenda de pagamento, para que a fatura correspondente seja gerada."
     shared:
       hello: "Olá %{user_name}"

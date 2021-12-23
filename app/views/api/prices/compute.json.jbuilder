@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.price @amount[:total] / 100.00
 json.price_without_coupon @amount[:before_coupon] / 100.00
 if @amount[:elements]
