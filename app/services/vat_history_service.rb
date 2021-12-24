@@ -37,7 +37,7 @@ class VatHistoryService
     vat_rate_history_values = []
     if vat_rate_type.present?
       vat_rate_by_type = Setting.find_by(name: "invoice_VAT-rate_#{vat_rate_type}")&.history_values&.order(created_at: 'ASC')
-      first_vat_rate_by_type = vat_rate_by_type.select { |v| v.value.present? }.first
+      first_vat_rate_by_type = vat_rate_by_type&.select { |v| v.value.present? }&.first
       if first_vat_rate_by_type
         vat_rate_history_values = Setting.find_by(name: 'invoice_VAT-rate').history_values.where('created_at < ?', first_vat_rate_by_type.created_at).order(created_at: 'ASC').to_a
         vat_rate_by_type = Setting.find_by(name: "invoice_VAT-rate_#{vat_rate_type}").history_values.where('created_at >= ?', first_vat_rate_by_type.created_at).order(created_at: 'ASC')
