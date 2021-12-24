@@ -869,7 +869,8 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           settings: ['Setting', function (Setting) {
             return Setting.query({
-              names: "['invoice_legals', 'invoice_text', 'invoice_VAT-rate', 'invoice_VAT-active', 'invoice_order-nb', 'invoice_code-value', " +
+              names: "['invoice_legals', 'invoice_text', 'invoice_VAT-rate', 'invoice_VAT-rate_Machine', 'invoice_VAT-rate_Training', 'invoice_VAT-rate_Space', " +
+                     "'invoice_VAT-rate_Event', 'invoice_VAT-rate_Subscription', 'invoice_VAT-active', 'invoice_order-nb', 'invoice_code-value', " +
                      "'invoice_code-active', 'invoice_reference', 'invoice_logo', 'accounting_journal_code', 'accounting_card_client_code', " +
                      "'accounting_card_client_label', 'accounting_wallet_client_code', 'accounting_wallet_client_label', 'invoicing_module', " +
                      "'accounting_other_client_code', 'accounting_other_client_label', 'accounting_wallet_code', 'accounting_wallet_label', " +
