@@ -134,9 +134,9 @@ class AccountingExportService
 
   # Generate the "VAT" row, which contains the credit to the VAT account, with VAT amount only
   def vat_row(invoice)
-    rate = VatHistoryService.new.invoice_vat(invoice)
+    total = invoice.invoice_items.map(&:net_amount).sum
     # we do not render the VAT row if it was disabled for this invoice
-    return nil if rate.zero?
+    return nil if total == invoice.total
 
     row(
       invoice,
