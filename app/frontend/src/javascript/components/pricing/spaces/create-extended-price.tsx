@@ -43,24 +43,24 @@ export const CreateExtendedPrice: React.FC<CreateExtendedPriceProps> = ({ onSucc
     // create it on the API
     PriceAPI.create(newExtendedPrice)
       .then(() => {
-        onSuccess(t('app.admin.create_extendedPrice.extendedPrice_successfully_created'));
+        onSuccess(t('app.admin.create_extended_price.extended_price_successfully_created'));
         toggleModal();
       })
       .catch(error => onError(error));
   };
 
   return (
-    <div className="create-pack">
-      <button className="add-pack-button" onClick={toggleModal}><i className="fas fa-plus"/></button>
+    <div className="create-extended-price">
+      <button className="add-price-button" onClick={toggleModal}><i className="fas fa-plus"/></button>
       <FabModal isOpen={isOpen}
         toggleModal={toggleModal}
-        title={t('app.admin.create_extendedPrice.new_extendedPrice')}
-        className="new-pack-modal"
+        title={t('app.admin.create_extended_price.new_extended_price')}
+        className="new-extended-price-modal"
         closeButton
-        confirmButton={t('app.admin.create_extendedPrice.create_extendedPrice')}
+        confirmButton={t('app.admin.create_extended_price.create_extended_price')}
         onConfirmSendFormId="new-extended-price">
         <FabAlert level="info">
-          {t('app.admin.create_extendedPrice.new_extendedPrice_info', { TYPE: priceableType })}
+          {t('app.admin.create_extended_price.new_extended_price_info', { TYPE: priceableType })}
         </FabAlert>
         <ExtendedPriceForm formId="new-extended-price" onSubmit={handleSubmit} />
       </FabModal>

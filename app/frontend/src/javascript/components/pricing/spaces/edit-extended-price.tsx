@@ -42,7 +42,7 @@ export const EditExtendedPrice: React.FC<EditExtendedPriceProps> = ({ price, onS
   const handleUpdate = (price: Price): void => {
     PriceAPI.update(price)
       .then(() => {
-        onSuccess(t('app.admin.edit_extendedPrice.extendedPrice_successfully_updated'));
+        onSuccess(t('app.admin.edit_extended_price.extended_price_successfully_updated'));
         setExtendedPriceData(price);
         toggleModal();
       })
@@ -50,16 +50,16 @@ export const EditExtendedPrice: React.FC<EditExtendedPriceProps> = ({ price, onS
   };
 
   return (
-    <div className="edit-pack">
-      <FabButton type='button' className="edit-pack-button" icon={<i className="fas fa-edit" />} onClick={handleRequestEdit} />
+    <div className="edit-extended-price">
+      <FabButton type='button' className="edit-price-button" icon={<i className="fas fa-edit" />} onClick={handleRequestEdit} />
       <FabModal isOpen={isOpen}
         toggleModal={toggleModal}
-        title={t('app.admin.edit_extendedPrice.edit_extendedPrice')}
+        title={t('app.admin.edit_extended_price.edit_extended_price')}
         className="edit-pack-modal"
         closeButton
-        confirmButton={t('app.admin.edit_extendedPrice.confirm_changes')}
-        onConfirmSendFormId="edit-pack">
-        {extendedPriceData && <ExtendedPriceForm formId="edit-pack" onSubmit={handleUpdate} price={extendedPriceData} />}
+        confirmButton={t('app.admin.edit_extended_price.confirm_changes')}
+        onConfirmSendFormId="edit-extended-price">
+        {extendedPriceData && <ExtendedPriceForm formId="edit-extended-price" onSubmit={handleUpdate} price={extendedPriceData} />}
       </FabModal>
     </div>
   );

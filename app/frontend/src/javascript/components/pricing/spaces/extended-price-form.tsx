@@ -7,9 +7,9 @@ import { IFablab } from '../../../models/fablab';
 
 declare let Fablab: IFablab;
 
-interface PackFormProps {
+interface ExtendedPriceFormProps {
   formId: string,
-  onSubmit: (pack: Price) => void,
+  onSubmit: (price: Price) => void,
   price?: Price,
 }
 
@@ -17,7 +17,7 @@ interface PackFormProps {
  * A form component to create/edit a extended price.
  * The form validation must be created elsewhere, using the attribute form={formId}.
  */
-export const ExtendedPriceForm: React.FC<PackFormProps> = ({ formId, onSubmit, price }) => {
+export const ExtendedPriceForm: React.FC<ExtendedPriceFormProps> = ({ formId, onSubmit, price }) => {
   const [extendedPriceData, updateExtendedPriceData] = useImmer<Price>(price || {} as Price);
 
   const { t } = useTranslation('admin');
@@ -49,8 +49,8 @@ export const ExtendedPriceForm: React.FC<PackFormProps> = ({ formId, onSubmit, p
   };
 
   return (
-    <form id={formId} onSubmit={handleSubmit} className="pack-form">
-      <label htmlFor="duration">{t('app.admin.calendar.minutes')} *</label>
+    <form id={formId} onSubmit={handleSubmit} className="extended-price-form">
+      <label htmlFor="duration">{t('app.admin.extended_price_form.duration')} *</label>
       <FabInput id="duration"
         type="number"
         defaultValue={extendedPriceData?.duration || ''}

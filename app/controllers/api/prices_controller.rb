@@ -36,7 +36,7 @@ class API::PricesController < API::ApiController
 
   def destroy
     authorize @price
-    @price.destroy
+    @price.safe_destroy
     head :no_content
   end
 
