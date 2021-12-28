@@ -37,7 +37,7 @@ class AccountingPeriod < ApplicationRecord
       vat_rate_group = {}
       i.invoice_items.each do |item|
         vat_type = item.invoice_item_type
-        vat_rate_group[vat_type] = vat_service.invoice_vat(item) / 100.0 unless vat_rate_group[vat_type]
+        vat_rate_group[vat_type] = vat_service.invoice_item_vat(item) / 100.0 unless vat_rate_group[vat_type]
       end
       { invoice: i, vat_rate: vat_rate_group }
     end

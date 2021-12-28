@@ -2,8 +2,20 @@
 
 # Provides the VAT rate in use at the given date
 class VatHistoryService
+  # @return the VAT rate for the given Invoice
+  def invoice_vat(invoice)
+    vat_rate_group = {}
+    invoice.invoice_items.each do |item|
+      vat_type = item.invoice_item_type
+      vat_rate_group[vat_type] = { vat_rate: invoice_item_vat(item), total_vat: 0, amount: 0 } unless vat_rate_group[vat_type]
+      vat_rate_group[vat_type][:total_vat] += item.vat
+      vat_rate_group[vat_type][:amount] += item.amount.to_i
+    end
+    vat_rate_group
+  end
+
   # return the VAT rate for the given InvoiceItem
-  def invoice_vat(invoice_item)
+  def invoice_item_vat(invoice_item)
     if invoice_item.invoice.is_a?(Avoir)
       vat_rate(invoice_item.invoice.avoir_date, invoice_item.invoice_item_type)
     else

@@ -105,7 +105,7 @@ class ActiveSupport::TestCase
 
     vat_service = VatHistoryService.new
     invoice.invoice_items.each do |item|
-      vat_rate = vat_service.invoice_vat(item)
+      vat_rate = vat_service.invoice_item_vat(item)
       if vat_rate.positive?
         computed_ht = sprintf('%.2f', (item.amount_after_coupon / (vat_rate / 100.00 + 1)) / 100.00).to_f
 
