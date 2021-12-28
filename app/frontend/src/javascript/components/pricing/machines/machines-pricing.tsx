@@ -107,7 +107,7 @@ const MachinesPricing: React.FC<MachinesPricingProps> = ({ onError, onSuccess })
   };
 
   return (
-    <div className="pricing-list">
+    <div className="machines-pricing">
       <FabAlert level="warning">
         <p><HtmlTranslate trKey="app.admin.machines_pricing.prices_match_machine_hours_rates_html"/></p>
         <p><HtmlTranslate trKey="app.admin.machines_pricing.prices_calculated_on_hourly_rate_html" options={{ DURATION: `${EXEMPLE_DURATION}`, RATE: examplePrice('hourly_rate'), PRICE: examplePrice('final_price') }} /></p>

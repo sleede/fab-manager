@@ -50,15 +50,16 @@ export const EditExtendedPrice: React.FC<EditExtendedPriceProps> = ({ price, onS
   };
 
   return (
-    <div className="edit-group">
-      <FabButton type='button' icon={<i className="fas fa-edit" />} onClick={handleRequestEdit} />
+    <div className="edit-pack">
+      <FabButton type='button' className="edit-pack-button" icon={<i className="fas fa-edit" />} onClick={handleRequestEdit} />
       <FabModal isOpen={isOpen}
         toggleModal={toggleModal}
         title={t('app.admin.edit_extendedPrice.edit_extendedPrice')}
+        className="edit-pack-modal"
         closeButton
         confirmButton={t('app.admin.edit_extendedPrice.confirm_changes')}
-        onConfirmSendFormId="edit-group">
-        {extendedPriceData && <ExtendedPriceForm formId="edit-group" onSubmit={handleUpdate} price={extendedPriceData} />}
+        onConfirmSendFormId="edit-pack">
+        {extendedPriceData && <ExtendedPriceForm formId="edit-pack" onSubmit={handleUpdate} price={extendedPriceData} />}
       </FabModal>
     </div>
   );

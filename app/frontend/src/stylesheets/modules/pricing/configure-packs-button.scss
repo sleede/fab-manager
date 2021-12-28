@@ -1,9 +1,9 @@
-.configure-group {
+.configure-packs-button {
   display: inline-block;
   margin-left: 6px;
   position: relative;
 
-  &-button {
+  .packs-button {
     border: 1px solid #d0cccc;
     border-radius: 50%;
     cursor: pointer;
@@ -44,7 +44,7 @@
           line-height: 24px;
         }
 
-        .group-actions button {
+        .pack-actions button {
           font-size: 10px;
           vertical-align: middle;
           line-height: 10px;

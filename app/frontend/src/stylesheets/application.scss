@@ -57,12 +57,12 @@
 @import "modules/machines/machines-filters";
 @import "modules/machines/required-training-modal";
 @import "modules/user/avatar";
-@import "modules/pricing/pricing-list";
+@import "modules/pricing/machines-pricing";
 @import "modules/pricing/editable-price";
-@import "modules/pricing/configure-group-button";
-@import "modules/pricing/group-form";
-@import "modules/pricing/delete-group";
-@import "modules/pricing/edit-group";
+@import "modules/pricing/configure-packs-button";
+@import "modules/pricing/pack-form";
+@import "modules/pricing/delete-pack";
+@import "modules/pricing/edit-pack";
 @import "modules/settings/check-list-setting";
 @import "modules/prepaid-packs/propose-packs-modal";
 @import "modules/prepaid-packs/packs-summary";

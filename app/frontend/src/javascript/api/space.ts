@@ -12,4 +12,5 @@ export default class SpaceAPI {
     const res: AxiosResponse<Space> = await apiClient.get(`/api/spaces/${id}`);
     return res?.data;
   }
+
 }

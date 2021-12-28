@@ -28,7 +28,7 @@ export const ConfigureExtendedPriceButton: React.FC<ConfigureExtendedPriceButton
   const [showList, setShowList] = useState<boolean>(false);
 
   /**
-   * Open/closes the popover listing the existing extended prices
+   * Open/closes the popover listing the existing packs
    */
   const toggleShowList = (): void => {
     setShowList(!showList);
@@ -57,8 +57,8 @@ export const ConfigureExtendedPriceButton: React.FC<ConfigureExtendedPriceButton
   };
 
   return (
-    <div className="configure-group">
-      <button className="configure-group-button" onClick={toggleShowList}>
+    <div className="configure-extended-prices-button">
+      <button className="packs-button" onClick={toggleShowList}>
         <i className="fas fa-stopwatch" />
       </button>
       {showList && <FabPopover title={t('app.admin.configure_extendedPrices_button.extendedPrices')} headerButton={renderAddButton()} className="fab-popover__right">
@@ -66,7 +66,7 @@ export const ConfigureExtendedPriceButton: React.FC<ConfigureExtendedPriceButton
           {extendedPrices?.map(extendedPrice =>
             <li key={extendedPrice.id}>
               {extendedPrice.duration} {t('app.admin.calendar.minutes')} - {FormatLib.price(extendedPrice.amount)}
-              <span className="group-actions">
+              <span className="pack-actions">
                 <EditExtendedPrice onSuccess={handleSuccess} onError={onError} price={extendedPrice} />
                 <DeleteExtendedPrice onSuccess={handleSuccess} onError={onError} price={extendedPrice} />
               </span>
