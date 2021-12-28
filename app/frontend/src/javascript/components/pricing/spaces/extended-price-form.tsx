@@ -9,7 +9,7 @@ declare let Fablab: IFablab;
 
 interface ExtendedPriceFormProps {
   formId: string,
-  onSubmit: (pack: Price) => void,
+  onSubmit: (price: Price) => void,
   price?: Price,
 }
 
@@ -49,8 +49,8 @@ export const ExtendedPriceForm: React.FC<ExtendedPriceFormProps> = ({ formId, on
   };
 
   return (
-    <form id={formId} onSubmit={handleSubmit} className="group-form">
-      <label htmlFor="duration">{t('app.admin.calendar.minutes')} *</label>
+    <form id={formId} onSubmit={handleSubmit} className="extended-price-form">
+      <label htmlFor="duration">{t('app.admin.extended_price_form.duration')} *</label>
       <FabInput id="duration"
         type="number"
         defaultValue={extendedPriceData?.duration || ''}

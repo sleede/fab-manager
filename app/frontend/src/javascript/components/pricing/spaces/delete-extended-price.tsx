@@ -33,23 +33,23 @@ export const DeleteExtendedPrice: React.FC<DeleteExtendedPriceProps> = ({ onSucc
    */
   const onDeleteConfirmed = (): void => {
     PriceAPI.destroy(price.id).then(() => {
-      onSuccess(t('app.admin.delete_extendedPrice.extendedPrice_deleted'));
+      onSuccess(t('app.admin.delete_extended_price.extended_price_deleted'));
     }).catch((error) => {
-      onError(t('app.admin.delete_extendedPrice.unable_to_delete') + error);
+      onError(t('app.admin.delete_extended_price.unable_to_delete') + error);
     });
     toggleDeletionModal();
   };
 
   return (
-    <div className="delete-group">
-      <FabButton type='button' className="delete-group-button" icon={<i className="fa fa-trash" />} onClick={toggleDeletionModal} />
-      <FabModal title={t('app.admin.delete_extendedPrice.delete_extendedPrice')}
+    <div className="delete-extended-price">
+      <FabButton type='button' className="remove-price-button" icon={<i className="fa fa-trash" />} onClick={toggleDeletionModal} />
+      <FabModal title={t('app.admin.delete_extended_price.delete_extended_price')}
         isOpen={deletionModal}
         toggleModal={toggleDeletionModal}
         closeButton={true}
-        confirmButton={t('app.admin.delete_extendedPrice.confirm_delete')}
+        confirmButton={t('app.admin.delete_extended_price.confirm_delete')}
         onConfirm={onDeleteConfirmed}>
-        <span>{t('app.admin.delete_extendedPrice.delete_confirmation')}</span>
+        <span>{t('app.admin.delete_extended_price.delete_confirmation')}</span>
       </FabModal>
     </div>
   );
