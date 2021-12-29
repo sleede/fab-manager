@@ -231,7 +231,8 @@ de:
         users_subscriptions: "der Abonnementliste"
         users_reservations: "der Reservierungsliste"
         availabilities_index: "der Verfügbarkeit der Reservierungen"
-        accounting_accounting-software: "der Buchhaltungsdaten"
+        accounting_acd: "of the accounting data to ACD"
+        accounting_vat: "of the collected VAT data"
         click_to_download: "Excel-Datei erfolgreich erstellt. Zum Herunterladen klicken Sie"
         here: "hier"
         file_type:

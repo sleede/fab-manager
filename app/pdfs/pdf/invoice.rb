@@ -230,10 +230,12 @@ class PDF::Invoice < Prawn::Document
 
       # TVA
       vat_service = VatHistoryService.new
-      vat_rate = vat_service.invoice_vat(invoice)
-      if vat_rate != 0
+      vat_rate_group = vat_service.invoice_vat(invoice)
+      if total_vat != 0
         data += [[I18n.t('invoices.total_including_all_taxes'), number_to_currency(total)]]
-        data += [[I18n.t('invoices.including_VAT_RATE', RATE: vat_rate), number_to_currency(total_vat / 100.00)]]
+        vat_rate_group.each do |_type, rate|
+          data += [[I18n.t('invoices.including_VAT_RATE', RATE: rate[:vat_rate], AMOUNT: number_to_currency(rate[:amount] / 100.00)), number_to_currency(rate[:total_vat] / 100.00)]]
+        end
         data += [[I18n.t('invoices.including_total_excluding_taxes'), number_to_currency(total_ht / 100.00)]]
         data += [[I18n.t('invoices.including_amount_payed_on_ordering'), number_to_currency(total)]]
 
@@ -252,23 +254,25 @@ class PDF::Invoice < Prawn::Document
         row(0).font_style = :bold
         column(1).style align: :right
 
-        if Setting.get('invoice_VAT-active')
+        if total_vat != 0
           # Total incl. taxes
           row(-1).style align: :right
           row(-1).background_color = 'E4E4E4'
           row(-1).font_style = :bold
-          # including VAT xx%
-          row(-2).style align: :right
-          row(-2).background_color = 'E4E4E4'
-          row(-2).font_style = :italic
+          vat_rate_group.size.times do |i|
+            # including VAT xx%
+            row(-2 - i).style align: :right
+            row(-2 - i).background_color = 'E4E4E4'
+            row(-2 - i).font_style = :italic
+          end
           # including total excl. taxes
-          row(-3).style align: :right
-          row(-3).background_color = 'E4E4E4'
-          row(-3).font_style = :italic
+          row(-3 - vat_rate_group.size + 1).style align: :right
+          row(-3 - vat_rate_group.size + 1).background_color = 'E4E4E4'
+          row(-3 - vat_rate_group.size + 1).font_style = :italic
           # including amount payed on ordering
-          row(-4).style align: :right
-          row(-4).background_color = 'E4E4E4'
-          row(-4).font_style = :bold
+          row(-4 - vat_rate_group.size + 1).style align: :right
+          row(-4 - vat_rate_group.size + 1).background_color = 'E4E4E4'
+          row(-4 - vat_rate_group.size + 1).font_style = :bold
         end
       end
 

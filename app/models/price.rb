@@ -8,4 +8,8 @@ class Price < ApplicationRecord
 
   validates :priceable, :group_id, :amount, presence: true
   validates :priceable_id, uniqueness: { scope: %i[priceable_type plan_id group_id duration] }
+
+  def safe_destroy
+    destroy unless duration == 60
+  end
 end

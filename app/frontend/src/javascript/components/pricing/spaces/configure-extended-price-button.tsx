@@ -28,7 +28,14 @@ export const ConfigureExtendedPriceButton: React.FC<ConfigureExtendedPriceButton
   const [showList, setShowList] = useState<boolean>(false);
 
   /**
-   * Open/closes the popover listing the existing extended prices
+   * Return the number of minutes, user-friendly formatted
+   */
+  const formatDuration = (minutes: number): string => {
+    return t('app.admin.configure_extended_prices_button.extended_price_DURATION', { DURATION: minutes });
+  };
+
+  /**
+   * Open/closes the popover listing the existing packs
    */
   const toggleShowList = (): void => {
     setShowList(!showList);
@@ -57,22 +64,22 @@ export const ConfigureExtendedPriceButton: React.FC<ConfigureExtendedPriceButton
   };
 
   return (
-    <div className="configure-group">
-      <button className="configure-group-button" onClick={toggleShowList}>
+    <div className="configure-extended-prices-button">
+      <button className="extended-prices-button" onClick={toggleShowList}>
         <i className="fas fa-stopwatch" />
       </button>
-      {showList && <FabPopover title={t('app.admin.configure_extendedPrices_button.extendedPrices')} headerButton={renderAddButton()} className="fab-popover__right">
+      {showList && <FabPopover title={t('app.admin.configure_extended_prices_button.extended_prices')} headerButton={renderAddButton()} className="fab-popover__right">
         <ul>
           {extendedPrices?.map(extendedPrice =>
             <li key={extendedPrice.id}>
-              {extendedPrice.duration} {t('app.admin.calendar.minutes')} - {FormatLib.price(extendedPrice.amount)}
-              <span className="group-actions">
+              {formatDuration(extendedPrice.duration)} - {FormatLib.price(extendedPrice.amount)}
+              <span className="extended-prices-actions">
                 <EditExtendedPrice onSuccess={handleSuccess} onError={onError} price={extendedPrice} />
                 <DeleteExtendedPrice onSuccess={handleSuccess} onError={onError} price={extendedPrice} />
               </span>
             </li>)}
         </ul>
-        {extendedPrices?.length === 0 && <span>{t('app.admin.configure_extendedPrices_button.no_extendedPrices')}</span>}
+        {extendedPrices?.length === 0 && <span>{t('app.admin.configure_extended_prices_button.no_extended_prices')}</span>}
       </FabPopover>}
     </div>
   );

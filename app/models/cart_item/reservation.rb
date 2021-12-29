@@ -18,17 +18,19 @@ class CartItem::Reservation < CartItem::BaseItem
   def price
     is_privileged = @operator.privileged? && @operator.id != @customer.id
     prepaid = { minutes: PrepaidPackService.minutes_available(@customer, @reservable) }
-    prices = applicable_prices
 
     elements = { slots: [] }
     amount = 0
 
     hours_available = credits
-    @slots.each_with_index do |slot, index|
-      amount += get_slot_price_from_prices(prices, slot, is_privileged,
-                                           elements: elements,
-                                           has_credits: (index < hours_available),
-                                           prepaid: prepaid)
+    grouped_slots.values.each do |slots|
+      prices = applicable_prices(slots)
+      slots.each_with_index do |slot, index|
+        amount += get_slot_price_from_prices(prices, slot, is_privileged,
+                                             elements: elements,
+                                             has_credits: (index < hours_available),
+                                             prepaid: prepaid)
+      end
     end
 
     { elements: elements, amount: amount }
@@ -59,6 +61,15 @@ class CartItem::Reservation < CartItem::BaseItem
 
   def credits
     0
+  end
+
+  ##
+  # Group the slots by date, if the extended_prices_in_same_day option is set to true
+  ##
+  def grouped_slots
+    return { all: @slots } unless Setting.get('extended_prices_in_same_day')
+
+    @slots.group_by { |slot| slot[:start_at].to_date }
   end
 
   ##
@@ -129,10 +140,8 @@ class CartItem::Reservation < CartItem::BaseItem
   # Eg. If the reservation is for 12 hours, and there are prices for 3 hours, 7 hours,
   # and the base price (1 hours), we use the 7 hours price, then 3 hours price, and finally the base price twice (7+3+1+1 = 12).
   # All these prices are returned to be applied to the reservation.
-  def applicable_prices
-    all_slots_in_same_day = @slots.map { |slot| slot[:start_at].to_date }.uniq.size == 1
-
-    total_duration = @slots.map { |slot| (slot[:end_at].to_time - slot[:start_at].to_time) / SECONDS_PER_MINUTE }.reduce(:+)
+  def applicable_prices(slots)
+    total_duration = slots.map { |slot| (slot[:end_at].to_time - slot[:start_at].to_time) / SECONDS_PER_MINUTE }.reduce(:+)
     rates = { prices: [] }
 
     remaining_duration = total_duration
@@ -140,7 +149,7 @@ class CartItem::Reservation < CartItem::BaseItem
       max_duration = @reservable.prices.where(group_id: @customer.group_id, plan_id: @plan.try(:id))
                                 .where(Price.arel_table[:duration].lteq(remaining_duration))
                                 .maximum(:duration)
-      max_duration = 60 if max_duration.nil? || Setting.get('extended_prices_in_same_day') && !all_slots_in_same_day
+      max_duration = 60 if max_duration.nil?
       max_duration_price = @reservable.prices.find_by(group_id: @customer.group_id, plan_id: @plan.try(:id), duration: max_duration)
 
       current_duration = [remaining_duration, max_duration].min
