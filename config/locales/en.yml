@@ -147,6 +147,11 @@ en:
     Event_reservation: "event reserv."
     Space_reservation: "space reserv."
     wallet: "wallet"
+  vat_export:
+    start_date: "Start date"
+    end_date: "End date"
+    vat_rate: "VAT rate"
+    amount: "Total amount"
   #training availabilities
   trainings:
     i_ve_reserved: "I've reserved"
@@ -331,6 +336,7 @@ en:
         users_reservations: "of the reservations' list"
         availabilities_index: "of the reservations availabilities"
         accounting_acd: "of the accounting data to ACD"
+        accounting_vat: "of the collected VAT"
         is_over: "is over."
         download_here: "Download here"
       notify_admin_import_complete:

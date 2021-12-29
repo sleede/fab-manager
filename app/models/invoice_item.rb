@@ -40,8 +40,10 @@ class InvoiceItem < Footprintable
   def invoice_item_type
     if object_type == Reservation.name
       object.try(:reservable_type) || ''
-    elsif object_type == Subscription.name
+    elsif [Subscription.name, OfferDay.name].include? object_type
       Subscription.name
+    elsif object_type == StatisticProfilePrepaidPack.name
+      object.prepaid_pack.priceable_type
     else
       ''
     end

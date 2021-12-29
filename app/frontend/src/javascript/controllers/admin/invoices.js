@@ -1414,6 +1414,16 @@ Application.Controllers.controller('AccountingExportModalController', ['$scope',
         decimalSeparator: ',',
         exportInvoicesAtZero: false,
         columns: ['journal_code', 'date', 'account_code', 'account_label', 'piece', 'line_label', 'debit_origin', 'credit_origin', 'debit_euro', 'credit_euro', 'lettering']
+      },
+      vat: {
+        format: 'csv',
+        encoding: 'UTF-8',
+        separator: ';',
+        dateFormat: '%Y-%m-%d',
+        labelMaxLength: 'N/A',
+        decimalSeparator: '.',
+        exportInvoicesAtZero: false,
+        columns: ['start_date', 'end_date', 'vat_rate', 'amount']
       }
     };
 
@@ -1433,6 +1443,7 @@ Application.Controllers.controller('AccountingExportModalController', ['$scope',
 
     // binding to radio button "export to"
     $scope.exportTarget = {
+      type: null,
       software: null,
       startDate: null,
       endDate: null,
