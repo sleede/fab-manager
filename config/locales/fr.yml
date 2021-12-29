@@ -90,7 +90,7 @@ fr:
       other: "%{count} places %{NAME}"
     coupon_CODE_discount_of_DISCOUNT: "Code {CODE} : remise de {DISCOUNT} {TYPE, select, percent_off{%} other{}}" #messageFormat interpolation
     total_including_all_taxes: "Total TTC"
-    including_VAT_RATE: "Dont TVA %{RATE}% de %{AMOUNT}"
+    including_VAT_RATE: "Dont TVA %{RATE} % de %{AMOUNT}"
     including_total_excluding_taxes: "Dont total HT"
     including_amount_payed_on_ordering: "Dont montant payé à la commande"
     total_amount: "Montant total"
@@ -147,6 +147,11 @@ fr:
     Event_reservation: "réserv. événement"
     Space_reservation: "réserv. espace"
     wallet: "porte-monnaie"
+  vat_export:
+    start_date: "Date de début"
+    end_date: "Date de fin"
+    vat_rate: "Taux de TVA"
+    amount: "Montant total"
   #training availabilities
   trainings:
     i_ve_reserved: "J'ai réservé"
@@ -331,6 +336,7 @@ fr:
         users_reservations: "de la liste des réservations"
         availabilities_index: "des disponibilités de réservations"
         accounting_acd: "des données comptables pour ACD"
+        accounting_vat: "de la TVA collectée"
         is_over: "est terminé."
         download_here: "Téléchargez ici"
       notify_admin_import_complete:
@@ -535,3 +541,4 @@ fr:
     renew_pack_threshold: "Seuil de renouvellement des packs"
     pack_only_for_subscription: "Restreindre les packs pour les abonnés"
     overlapping_categories: "Catégories pour la prévention du chevauchement des réservations"
+    extended_prices_in_same_day: "Prix étendus le même jour"
