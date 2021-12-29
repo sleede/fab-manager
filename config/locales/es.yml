@@ -90,7 +90,7 @@ es:
       other: "%{count} %{NAME} entradas"
     coupon_CODE_discount_of_DISCOUNT: "Cupón {CODE}: descuento de {DISCOUNT}{TYPE, select, percent_off{%} other{}}" #messageFormat interpolation
     total_including_all_taxes: "Total impuestos incluidos"
-    including_VAT_RATE: "Incluyendo IVA %{RATE}%"
+    including_VAT_RATE: "Including VAT %{RATE}% of %{AMOUNT}"
     including_total_excluding_taxes: "Excluyendo IVA"
     including_amount_payed_on_ordering: "Incluyendo cantidad pagada en el pedido"
     total_amount: "Precio total"
@@ -147,6 +147,11 @@ es:
     Event_reservation: "reserv. evento"
     Space_reservation: "reserv. espacio"
     wallet: "cartera"
+  vat_export:
+    start_date: "Start date"
+    end_date: "End date"
+    vat_rate: "VAT rate"
+    amount: "Total amount"
   #training availabilities
   trainings:
     i_ve_reserved: "Reservé"
@@ -331,6 +336,7 @@ es:
         users_reservations: "de la lista de reservas"
         availabilities_index: "de las reservas disponibles"
         accounting_acd: "de los datos contables para ACD"
+        accounting_vat: "of the collected VAT"
         is_over: "se ha acabado."
         download_here: "Descargar aquí"
       notify_admin_import_complete:
