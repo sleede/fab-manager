@@ -45,35 +45,65 @@ class VatHistoryService
       end_date = v.created_at
     end
     chronology.push(start: DateTime.new(0), end: end_date, enabled: false)
-    date_rates = []
-    vat_rate_history_values = []
+    # now chronology contains something like one of the following:
+    # - [{start: 0000-01-01, end: now, enabled: false}] => VAT was never enabled
+    # - [
+    #     {start: fab-manager initial setup date, end: now, enabled: true},
+    #     {start: 0000-01-01, end: fab-manager initial setup date, enabled: false}
+    #   ] => VAT was enabled from the beginning
+    # - [
+    #    {start: [date disabled], end: now, enabled: false},
+    #    {start: [date enable], end: [date disabled], enabled: true},
+    #    {start: fab-manager initial setup date, end: [date enabled], enabled: false},
+    #    {start: 0000-01-01, end: fab-manager initial setup date, enabled: false}
+    #  ] => VAT was enabled at some point, and disabled at some other point later
+
     if vat_rate_type.present?
       vat_rate_by_type = Setting.find_by(name: "invoice_VAT-rate_#{vat_rate_type}")&.history_values&.order(created_at: 'ASC')
       first_vat_rate_by_type = vat_rate_by_type&.select { |v| v.value.present? }&.first
       if first_vat_rate_by_type
-        vat_rate_history_values = Setting.find_by(name: 'invoice_VAT-rate').history_values.where('created_at < ?', first_vat_rate_by_type.created_at).order(created_at: 'ASC').to_a
-        vat_rate_by_type = Setting.find_by(name: "invoice_VAT-rate_#{vat_rate_type}").history_values.where('created_at >= ?', first_vat_rate_by_type.created_at).order(created_at: 'ASC')
+        # before the first VAT rate was defined for the given type, the general VAT rate is used
+        vat_rate_history_values = Setting.find_by(name: 'invoice_VAT-rate')
+                                         .history_values.where('created_at < ?', first_vat_rate_by_type.created_at)
+                                         .order(created_at: 'ASC').to_a
+        # after that, the VAT rate for the given type is used
+        vat_rate_by_type = Setting.find_by(name: "invoice_VAT-rate_#{vat_rate_type}")
+                                  .history_values.where('created_at >= ?', first_vat_rate_by_type.created_at)
+                                  .order(created_at: 'ASC')
         vat_rate_by_type.each do |rate|
           if rate.value.blank?
-            vat_rate = Setting.find_by(name: 'invoice_VAT-rate').history_values.where('created_at < ?', rate.created_at).order(created_at: 'DESC').first
+            # if, at some point in the history, a blank rate was set, the general VAT rate is used instead
+            vat_rate = Setting.find_by(name: 'invoice_VAT-rate')
+                              .history_values.where('created_at < ?', rate.created_at)
+                              .order(created_at: 'DESC')
+                              .first
             rate.value = vat_rate.value
           end
           vat_rate_history_values.push(rate)
         end
       else
+        # if no VAT rate is defined for the given type, the general VAT rate is always used
         vat_rate_history_values = Setting.find_by(name: 'invoice_VAT-rate').history_values.order(created_at: 'ASC').to_a
       end
+
+      # Now we have all the rates history, we can build the final chronology, depending on whether VAT was enabled or not
+      date_rates = []
       vat_rate_history_values.each do |rate|
+        # when the VAT rate was enabled, set the date it was enabled and the rate
         range = chronology.select { |p| rate.created_at.to_i.between?(p[:start].to_i, p[:end].to_i) }.first
         date = range[:enabled] ? rate.created_at : range[:end]
         date_rates.push(date: date, rate: rate.value.to_i)
       end
       chronology.reverse_each do |period|
+        # when the VAT rate was disabled, set the date it was disabled and rate=0
         date_rates.push(date: period[:start], rate: 0) unless period[:enabled]
       end
     else
+      # if no VAT rate type is given, we return rate=0 from 0000-01-01
       date_rates.push(date: chronology[-1][:start], rate: 0)
     end
+
+    # finally, we return the chronology, sorted by dates (ascending)
     date_rates.sort_by { |k| k[:date] }
   end
 end

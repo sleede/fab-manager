@@ -230,13 +230,7 @@ class PDF::Invoice < Prawn::Document
 
       # TVA
       vat_service = VatHistoryService.new
-      vat_rate_group = {}
-      invoice.invoice_items.each do |item|
-        vat_type = item.invoice_item_type
-        vat_rate_group[vat_type] = { vat_rate: vat_service.invoice_item_vat(item), total_vat: 0, amount: 0 } unless vat_rate_group[vat_type]
-        vat_rate_group[vat_type][:total_vat] += item.vat
-        vat_rate_group[vat_type][:amount] += item.amount.to_i
-      end
+      vat_rate_group = vat_service.invoice_vat(invoice)
       if total_vat != 0
         data += [[I18n.t('invoices.total_including_all_taxes'), number_to_currency(total)]]
         vat_rate_group.each do |_type, rate|
