@@ -90,7 +90,7 @@
       other: "%{count} %{NAME} tickets"
     coupon_CODE_discount_of_DISCOUNT: "Kupong {CODE}: rabatt på {DISCOUNT}{TYPE, select, percent_off{%} other{}}" #messageFormat interpolation
     total_including_all_taxes: "Sum inkl. MVA"
-    including_VAT_RATE: "Including VAT %{RATE}% of %{AMOUNT}"
+    including_VAT_RATE: "Inkludert MVA %{RATE}% av %{AMOUNT}"
     including_total_excluding_taxes: "Inkludert total ekskl. MVA"
     including_amount_payed_on_ordering: "Inkludert beløp betalt ved bestilling"
     total_amount: "Totalbeløp"
