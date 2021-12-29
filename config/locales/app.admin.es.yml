@@ -368,6 +368,13 @@ es:
         status_enabled: "Enabled"
         status_disabled: "Disabled"
         status_all: "All"
+      spaces_pricing:
+        prices_match_space_hours_rates_html: "The prices below match one hour of space reservation, <strong>without subscription</strong>."
+        prices_calculated_on_hourly_rate_html: "All the prices will be automatically calculated based on the hourly rate defined here.<br/><em>For example</em>, if you define an hourly rate at {RATE}: a slot of {DURATION} minutes, will be charged <strong>{PRICE}</strong>."
+        you_can_override: "You can override this duration for each availability you create in the agenda. The price will then be adjusted accordingly."
+        extended_prices: "Moreover, you can define extended prices which will apply in priority over the hourly rate below. Extended prices allow you, for example, to set a favorable price for a booking of several hours."
+        spaces: "Spaces"
+        price_updated: "Price successfully updated"
       machines_pricing:
         prices_match_machine_hours_rates_html: "The prices below match one hour of machine usage, <strong>without subscription</strong>."
         prices_calculated_on_hourly_rate_html: "All the prices will be automatically calculated based on the hourly rate defined here.<br/><em>For example</em>, if you define an hourly rate at {RATE}: a slot of {DURATION} minutes, will be charged <strong>{PRICE}</strong>."
@@ -378,6 +385,13 @@ es:
         packs: "Prepaid packs"
         no_packs: "No packs for now"
         pack_DURATION: "{DURATION} hours"
+      configure_extended_prices_button:
+        extended_prices: "Extended prices"
+        no_extended_prices: "No extended price for now"
+        extended_price_DURATION: "{DURATION} minutes"
+      extended_price_form:
+        duration: "Duration (minutes)"
+        amount: "Price"
       pack_form:
         hours: "Hours"
         amount: "Price"
@@ -404,6 +418,21 @@ es:
         edit_pack: "Edit the pack"
         confirm_changes: "Confirm changes"
         pack_successfully_updated: "The prepaid pack was successfully updated."
+      create_extended_price:
+        new_extended_price: "New extended price"
+        new_extended_price_info: "Extended prices allows you to define prices based on custom durations, instead of the default hourly rates."
+        create_extended_price: "Create extended price"
+        extended_price_successfully_created: "The new extended price was successfully created."
+      delete_extended_price:
+        extended_price_deleted: "The extended price was successfully deleted."
+        unable_to_delete: "Unable to delete the extended price: "
+        delete_extended_price: "Delete the extended price"
+        confirm_delete: "Delete"
+        delete_confirmation: "Are you sure you want to delete this extended price?"
+      edit_extended_price:
+        edit_extended_price: "Edit the extended price"
+        confirm_changes: "Confirm changes"
+        extended_price_successfully_updated: "The extended price was successfully updated."
       #ajouter un code promotionnel
       coupons_new:
         add_a_coupon: "Añadir un cupón"
@@ -466,11 +495,12 @@ es:
         details: "Detalles"
         amount: "Cantidad"
         machine_booking-3D_printer: "Reserva de la máquina- Impresora 3D"
+        training_booking-3D_print: "Training booking - initiation to 3d printing"
         total_amount: "Cantidad total"
         total_including_all_taxes: "Total incl. todos los impuestos"
         VAT_disabled: "IVA desactivado"
         VAT_enabled: "IVA activado"
-        including_VAT: "Incluido IVA"
+        including_VAT: "Incluido IVA {RATE}% de {AMOUNT}"
         including_total_excluding_taxes: "Incluido Total excl. impuestos"
         including_amount_payed_on_ordering: "Incluido el monto pagado en el pedido"
         settlement_by_debit_card_on_DATE_at_TIME_for_an_amount_of_AMOUNT: "Liquidación por tarjeta de débito el {DATE} a las {TIME}, por una cantidad de {AMOUNT}"
@@ -649,9 +679,10 @@ es:
         codes_customization_success: "Customization of accounting codes successfully saved."
         unexpected_error_occurred: "An unexpected error occurred while saving the codes. Please try again later."
         export_accounting_data: "Export accounting data"
-        export_to: "Export to the accounting software"
+        export_what: "What do you want to export?"
+        export_VAT: "Export the collected VAT"
+        export_to_ACD: "Export all data to the accounting software ACD"
         export_is_running: "Exportando, será notificado cuando esté listo."
-        acd: "ACD"
         export_form_date: "Export from"
         export_to_date: "Export until"
         format: "File format"
@@ -674,6 +705,10 @@ es:
           debit_euro: "Euro debit"
           credit_euro: "Euro credit"
           lettering: "Lettering"
+          start_date: "Start date"
+          end_date: "End date"
+          vat_rate: "VAT rate"
+          amount: "Total amount"
         payment:
           payment_settings: "Payment settings"
           online_payment: "Online payment"
@@ -1244,6 +1279,9 @@ es:
         pack_only_for_subscription_info_html: "If this option is activated, the purchase and use of a prepaid pack is only possible for the user with a valid subscription."
         pack_only_for_subscription: "Subscription valid for purchase and use of a prepaid pack"
         pack_only_for_subscription_info: "Make subscription mandatory for prepaid packs"
+        extended_prices: "Extended prices"
+        extended_prices_info_html: "Spaces can have different prices depending on the cumulated duration of the booking. You can choose if this apply to all bookings or only to those starting within the same day."
+        extended_prices_in_same_day: "Extended prices in the same day"
         overlapping_options:
           training_reservations: "Trainings"
           machine_reservations: "Machines"

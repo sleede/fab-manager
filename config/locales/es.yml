@@ -90,7 +90,7 @@ es:
       other: "%{count} %{NAME} entradas"
     coupon_CODE_discount_of_DISCOUNT: "Cupón {CODE}: descuento de {DISCOUNT}{TYPE, select, percent_off{%} other{}}" #messageFormat interpolation
     total_including_all_taxes: "Total impuestos incluidos"
-    including_VAT_RATE: "Incluyendo IVA %{RATE}% de %{AMOUNT}"
+    including_VAT_RATE: "Incluido IVA %{RATE}% de %{AMOUNT}"
     including_total_excluding_taxes: "Excluyendo IVA"
     including_amount_payed_on_ordering: "Incluyendo cantidad pagada en el pedido"
     total_amount: "Precio total"
@@ -123,7 +123,7 @@ es:
     subscription_of_NAME_for_DURATION_starting_from_DATE: "the subscription of %{NAME} for %{DURATION} starting from %{DATE}"
     deadlines: "Table of your deadlines"
     deadline_date: "Payment date"
-    deadline_amount: "Amount including tax"
+    deadline_amount: "Total Incluyendo Impuesto"
     total_amount: "Total amount"
     settlement_by_METHOD: "Debits will be made by {METHOD, select, card{card} other{check}} for each deadlines."
     settlement_by_wallet: "%{AMOUNT} will be debited from your wallet to settle the first deadline."
@@ -147,6 +147,11 @@ es:
     Event_reservation: "reserv. evento"
     Space_reservation: "reserv. espacio"
     wallet: "cartera"
+  vat_export:
+    start_date: "Start date"
+    end_date: "End date"
+    vat_rate: "VAT rate"
+    amount: "Total amount"
   #training availabilities
   trainings:
     i_ve_reserved: "Reservé"
@@ -331,6 +336,7 @@ es:
         users_reservations: "de la lista de reservas"
         availabilities_index: "de las reservas disponibles"
         accounting_acd: "de los datos contables para ACD"
+        accounting_vat: "of the collected VAT"
         is_over: "se ha acabado."
         download_here: "Descargar aquí"
       notify_admin_import_complete:
@@ -535,3 +541,4 @@ es:
     renew_pack_threshold: "Threshold for packs renewal"
     pack_only_for_subscription: "Restrict packs for subscribers"
     overlapping_categories: "Categories for overlapping booking prevention"
+    extended_prices_in_same_day: "Extended prices in the same day"

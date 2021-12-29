@@ -231,7 +231,8 @@ pt:
         users_subscriptions: "da lista de assinaturas"
         users_reservations: "da lista de reservas"
         availabilities_index: "as reservas disponíveis"
-        accounting_accounting-software: "de dados contábeis"
+        accounting_acd: "of the accounting data to ACD"
+        accounting_vat: "of the collected VAT data"
         click_to_download: "Arquivo do Excel gerado com êxito. Para fazer o download, clique"
         here: "aqui"
         file_type:
