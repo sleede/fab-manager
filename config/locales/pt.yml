@@ -90,7 +90,7 @@ pt:
       other: "%{count} %{NAME} tickets"
     coupon_CODE_discount_of_DISCOUNT: "Cupom {CODE}: desconto de {DISCOUNT}{TYPE, select, percent_off{%} other{}}" #messageFormat interpolation
     total_including_all_taxes: "Total de taxas inclusas"
-    including_VAT_RATE: "Incluindo VAT %{RATE}%"
+    including_VAT_RATE: "Including VAT %{RATE}% of %{AMOUNT}"
     including_total_excluding_taxes: "Incluindo total de faixas exclusas"
     including_amount_payed_on_ordering: "Incluindo o valor pago na encomenda"
     total_amount: "Montante total"
@@ -147,6 +147,11 @@ pt:
     Event_reservation: "reserva de evento."
     Space_reservation: "reserva de espaço."
     wallet: "carteira"
+  vat_export:
+    start_date: "Start date"
+    end_date: "End date"
+    vat_rate: "VAT rate"
+    amount: "Total amount"
   #training availabilities
   trainings:
     i_ve_reserved: "Eu reservei"
@@ -331,6 +336,7 @@ pt:
         users_reservations: "da lista de reservas"
         availabilities_index: "de reservas disponíveis"
         accounting_acd: "de dados contábeis para ACD"
+        accounting_vat: "of the collected VAT"
         is_over: "está finalizado."
         download_here: "Baixe aqui"
       notify_admin_import_complete:
