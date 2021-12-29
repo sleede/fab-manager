@@ -90,7 +90,7 @@
       other: "%{count} %{NAME} tickets"
     coupon_CODE_discount_of_DISCOUNT: "Kupong {CODE}: rabatt på {DISCOUNT}{TYPE, select, percent_off{%} other{}}" #messageFormat interpolation
     total_including_all_taxes: "Sum inkl. MVA"
-    including_VAT_RATE: "Inkludert MVA %{RATE}%"
+    including_VAT_RATE: "Including VAT %{RATE}% of %{AMOUNT}"
     including_total_excluding_taxes: "Inkludert total ekskl. MVA"
     including_amount_payed_on_ordering: "Inkludert beløp betalt ved bestilling"
     total_amount: "Totalbeløp"
@@ -147,6 +147,11 @@
     Event_reservation: "arrangementetsreserv."
     Space_reservation: "reserv., plass/rom"
     wallet: "lommebok"
+  vat_export:
+    start_date: "Start date"
+    end_date: "End date"
+    vat_rate: "VAT rate"
+    amount: "Total amount"
   #training availabilities
   trainings:
     i_ve_reserved: "Jeg har reservert"
@@ -331,6 +336,7 @@
         users_reservations: "fra reservasjonslisten"
         availabilities_index: "of the reservations availabilities"
         accounting_acd: "of the accounting data to ACD"
+        accounting_vat: "of the collected VAT"
         is_over: "is over."
         download_here: "Download here"
       notify_admin_import_complete:
