@@ -28,6 +28,11 @@ class Setting < ApplicationRecord
                              invoice_order-nb
                              invoice_VAT-active
                              invoice_VAT-rate
+                             invoice_VAT-rate_Machine
+                             invoice_VAT-rate_Training
+                             invoice_VAT-rate_Space
+                             invoice_VAT-rate_Event
+                             invoice_VAT-rate_Subscription
                              invoice_text
                              invoice_legals
                              booking_window_start

@@ -64,8 +64,8 @@ export const ConfigurePacksButton: React.FC<ConfigurePacksButtonProps> = ({ pack
   };
 
   return (
-    <div className="configure-group">
-      <button className="configure-group-button" onClick={toggleShowList}>
+    <div className="configure-packs-button">
+      <button className="packs-button" onClick={toggleShowList}>
         <i className="fas fa-box" />
       </button>
       {showList && <FabPopover title={t('app.admin.configure_packs_button.packs')} headerButton={renderAddButton()} className="fab-popover__right">
@@ -73,7 +73,7 @@ export const ConfigurePacksButton: React.FC<ConfigurePacksButtonProps> = ({ pack
           {packs?.map(p =>
             <li key={p.id} className={p.disabled ? 'disabled' : ''}>
               {formatDuration(p.minutes)} - {FormatLib.price(p.amount)}
-              <span className="group-actions">
+              <span className="pack-actions">
                 <EditPack onSuccess={handleSuccess} onError={onError} pack={p} />
                 <DeletePack onSuccess={handleSuccess} onError={onError} pack={p} />
               </span>

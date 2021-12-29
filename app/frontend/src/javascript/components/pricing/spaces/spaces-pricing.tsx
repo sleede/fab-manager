@@ -101,16 +101,17 @@ const SpacesPricing: React.FC<SpacesPricingProps> = ({ onError, onSuccess }) => 
   };
 
   return (
-    <div className="pricing-list">
+    <div className="spaces-pricing">
       <FabAlert level="warning">
-        <p><HtmlTranslate trKey="app.admin.pricing.these_prices_match_space_hours_rates_html"/></p>
-        <p><HtmlTranslate trKey="app.admin.pricing.prices_calculated_on_hourly_rate_html" options={{ DURATION: `${EXEMPLE_DURATION}`, RATE: examplePrice('hourly_rate'), PRICE: examplePrice('final_price') }} /></p>
-        <p>{t('app.admin.pricing.you_can_override')}</p>
+        <p><HtmlTranslate trKey="app.admin.spaces_pricing.prices_match_space_hours_rates_html"/></p>
+        <p><HtmlTranslate trKey="app.admin.spaces_pricing.prices_calculated_on_hourly_rate_html" options={{ DURATION: `${EXEMPLE_DURATION}`, RATE: examplePrice('hourly_rate'), PRICE: examplePrice('final_price') }} /></p>
+        <p>{t('app.admin.spaces_pricing.you_can_override')}</p>
+        <p>{t('app.admin.spaces_pricing.extended_prices')}</p>
       </FabAlert>
       <table>
         <thead>
           <tr>
-            <th>{t('app.admin.pricing.spaces')}</th>
+            <th>{t('app.admin.spaces_pricing.spaces')}</th>
             {groups?.map(group => <th key={group.id} className="group-name">{group.name}</th>)}
           </tr>
         </thead>

@@ -1,5 +1,9 @@
 # Changelog Fab-manager
 
+- Ability to configure multiple VAT rates, per kind of invoiced item
+- Refactored the extended prices frontend code to allow future customization
+- Fix a bug: the amount label in not correctly shown in the extended prices modal 
+
 ## v5.2.0 2021 December 23
 
 - Ability to configure prices for spaces by time slots different than the default hourly rate

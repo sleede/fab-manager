@@ -1,0 +1,57 @@
+<div class="custom-invoice">
+  <div class="modal-header">
+    <h3 class="modal-title" translate>{{ 'app.admin.invoices.multiVAT' }}</h3>
+  </div>
+  <div class="modal-body">
+    <uib-alert type="warning">
+      <p class="text-sm">
+        <i class="fa fa-warning"></i>
+        <span ng-bind-html="'app.admin.invoices.multi_VAT_notice' | translate:{ RATE: rate }"></span>
+      </p>
+    </uib-alert>
+    <div class="form-group">
+      <label for="vatRateMachine" class="control-label" translate>{{ 'app.admin.invoices.VAT_rate_machine' }}</label>
+      <div class="input-group">
+        <span class="input-group-addon">% </span>
+        <input id="vatRateMachine" type="number" ng-model="multiVAT.rateMachine" class="form-control multi-vat-rate-input" min="0" max="100"/>
+        <button class="btn pull-right" ng-click="showMultiRateHistory('Machine')"><i class="fa fa-history"></i></button>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="vatRateSpace" class="control-label" translate>{{ 'app.admin.invoices.VAT_rate_space' }}</label>
+      <div class="input-group">
+        <span class="input-group-addon">% </span>
+        <input id="vatRateSpace" type="number" ng-model="multiVAT.rateSpace" class="form-control multi-vat-rate-input" min="0" max="100"/>
+        <button class="btn pull-right" ng-click="showMultiRateHistory('Space')"><i class="fa fa-history"></i></button>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="vatRateTraining" class="control-label" translate>{{ 'app.admin.invoices.VAT_rate_training' }}</label>
+      <div class="input-group">
+        <span class="input-group-addon">% </span>
+        <input id="vatRateTraining" type="number" ng-model="multiVAT.rateTraining" class="form-control multi-vat-rate-input" min="0" max="100"/>
+        <button class="btn pull-right" ng-click="showMultiRateHistory('Training')"><i class="fa fa-history"></i></button>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="vatRateEvent" class="control-label" translate>{{ 'app.admin.invoices.VAT_rate_event' }}</label>
+      <div class="input-group">
+        <span class="input-group-addon">% </span>
+        <input id="vatRateEvent" type="number" ng-model="multiVAT.rateEvent" class="form-control multi-vat-rate-input" min="0" max="100"/>
+        <button class="btn pull-right" ng-click="showMultiRateHistory('Event')"><i class="fa fa-history"></i></button>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="vatRateSubscription" class="control-label" translate>{{ 'app.admin.invoices.VAT_rate_subscription' }}</label>
+      <div class="input-group">
+        <span class="input-group-addon">% </span>
+        <input id="vatRateSubscription" type="number" ng-model="multiVAT.rateSubscription" class="form-control multi-vat-rate-input" min="0" max="100"/>
+        <button class="btn pull-right" ng-click="showMultiRateHistory('Subscription')"><i class="fa fa-history"></i></button>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-warning" ng-click="ok()" translate>{{ 'app.shared.buttons.confirm' }}</button>
+    <button class="btn btn-default" ng-click="cancel()" translate>{{ 'app.shared.buttons.cancel' }}</button>
+  </div>
+</div>
