@@ -227,6 +227,14 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     $scope.openSelectGatewayModal = false;
 
     /**
+     * Return the VAT rate applicable to the machine reservations
+     * @return {number}
+     */
+    $scope.getMachineExampleRate = function () {
+      return $scope.invoice.multiVAT.rateMachine || $scope.invoice.VAT.rate;
+    };
+
+    /**
      * Change the invoices ordering criterion to the one provided
      * @param orderBy {string} ordering criterion
      */

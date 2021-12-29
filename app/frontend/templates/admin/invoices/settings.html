@@ -54,12 +54,12 @@
       </tr>
 
       <tr class="invoice-vat invoice-editable vat-line italic" ng-click="openEditVAT()" ng-show="invoice.VAT.active">
-        <td>{{ 'app.admin.invoices.including_VAT' | translate }} {{invoice.VAT.rate}} %</td>
-        <td>{{30-(30/(invoice.VAT.rate/100+1)) | currency}}</td>
+        <td translate translate-values="{RATE:getMachineExampleRate(), AMOUNT:(30.0 | currency)}">{{ 'app.admin.invoices.including_VAT' }}</td>
+        <td>{{30-(30/(getMachineExampleRate()/100+1)) | currency}}</td>
       </tr>
       <tr class="invoice-ht vat-line italic" ng-show="invoice.VAT.active">
         <td translate>{{ 'app.admin.invoices.including_total_excluding_taxes' }}</td>
-        <td>{{30/(invoice.VAT.rate/100+1) | currency}}</td>
+        <td>{{30/(getMachineExampleRate()/100+1) | currency}}</td>
       </tr>
       <tr class="invoice-payed vat-line bold" ng-show="invoice.VAT.active">
         <td translate>{{ 'app.admin.invoices.including_amount_payed_on_ordering' }}</td>

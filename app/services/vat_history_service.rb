@@ -58,6 +58,7 @@ class VatHistoryService
     #    {start: 0000-01-01, end: fab-manager initial setup date, enabled: false}
     #  ] => VAT was enabled at some point, and disabled at some other point later
 
+    date_rates = []
     if vat_rate_type.present?
       vat_rate_by_type = Setting.find_by(name: "invoice_VAT-rate_#{vat_rate_type}")&.history_values&.order(created_at: 'ASC')
       first_vat_rate_by_type = vat_rate_by_type&.select { |v| v.value.present? }&.first
@@ -87,7 +88,6 @@ class VatHistoryService
       end
 
       # Now we have all the rates history, we can build the final chronology, depending on whether VAT was enabled or not
-      date_rates = []
       vat_rate_history_values.each do |rate|
         # when the VAT rate was enabled, set the date it was enabled and the rate
         range = chronology.select { |p| rate.created_at.to_i.between?(p[:start].to_i, p[:end].to_i) }.first
