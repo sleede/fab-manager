@@ -1,9 +1,11 @@
 # Changelog Fab-manager
 
+# v5.3.0 2021 December 29
+
 - Ability to configure multiple VAT rates, per kind of invoiced item
 - Refactored the extended prices frontend code to allow future customization
 - Fix a bug: the amount label in not correctly shown in the extended prices modal 
-- Fix a bug: extended_prices_in_same_day apply the extended prices to each days
+- Fix a bug: `extended_prices_in_same_day` apply the extended prices to each days
 
 ## v5.2.0 2021 December 23
 
