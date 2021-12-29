@@ -231,7 +231,8 @@ zu:
         users_subscriptions: "crwdns4157:0crwdne4157:0"
         users_reservations: "crwdns4159:0crwdne4159:0"
         availabilities_index: "crwdns4161:0crwdne4161:0"
-        accounting_accounting-software: "crwdns4163:0crwdne4163:0"
+        accounting_acd: "crwdns22269:0crwdne22269:0"
+        accounting_vat: "crwdns22271:0crwdne22271:0"
         click_to_download: "crwdns4165:0crwdne4165:0"
         here: "crwdns4167:0crwdne4167:0"
         file_type:
