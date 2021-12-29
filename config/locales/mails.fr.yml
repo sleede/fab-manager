@@ -231,7 +231,8 @@ fr:
         users_subscriptions: "de la liste des abonnements"
         users_reservations: "de la liste des réservations"
         availabilities_index: "des disponibilités de réservations"
-        accounting_accounting-software: "des données comptables"
+        accounting_acd: "of the accounting data to ACD"
+        accounting_vat: "of the collected VAT data"
         click_to_download: "La génération est terminée. Pour télécharger le fichier %{TYPE}, cliquez"
         here: "ici"
         file_type:
