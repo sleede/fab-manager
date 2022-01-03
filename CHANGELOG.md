@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Updated caniuse db
+- Optimized the load time of the payment schedules list
 
 # v5.3.0 2021 December 29
 

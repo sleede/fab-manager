@@ -8,7 +8,7 @@ class PaymentSchedulePolicy < ApplicationPolicy
     end
   end
 
-  %w[refresh_item? download? pay_item?].each do |action|
+  %w[refresh_item? download? pay_item? show_item?].each do |action|
     define_method action do
       user.admin? || user.manager? || (record.invoicing_profile.user_id == user.id)
     end

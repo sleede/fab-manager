@@ -24,7 +24,5 @@ if payment_schedule.gateway_subscription
   end
 end
 json.items payment_schedule.payment_schedule_items do |item|
-  json.extract! item, :id, :due_date, :state, :invoice_id, :payment_method
-  json.amount item.amount / 100.00
-  json.client_secret item.payment_intent.client_secret if item.payment_gateway_object && item.state == 'requires_action'
+  json.partial! 'api/payment_schedules/payment_schedule_item', item: item
 end

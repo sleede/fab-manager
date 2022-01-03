@@ -4,8 +4,9 @@
 class API::PaymentSchedulesController < API::ApiController
   before_action :authenticate_user!
   before_action :set_payment_schedule, only: %i[download cancel]
-  before_action :set_payment_schedule_item, only: %i[cash_check refresh_item pay_item]
+  before_action :set_payment_schedule_item, only: %i[show_item cash_check refresh_item pay_item]
 
+  # retrieve all payment schedules for the current user, paginated
   def index
     @payment_schedules = PaymentSchedule.where('invoicing_profile_id = ?', current_user.invoicing_profile.id)
                                         .includes(:invoicing_profile, :payment_schedule_items, :payment_schedule_objects)
@@ -15,6 +16,7 @@ class API::PaymentSchedulesController < API::ApiController
                                         .per(params[:size])
   end
 
+  # retrieve all payment schedules for all users. Filtering is supported
   def list
     authorize PaymentSchedule
 
@@ -60,6 +62,11 @@ class API::PaymentSchedulesController < API::ApiController
     else
       render json: res, status: :ok
     end
+  end
+
+  def show_item
+    authorize @payment_schedule_item.payment_schedule
+    render json: @payment_schedule_item, status: :ok
   end
 
   def cancel

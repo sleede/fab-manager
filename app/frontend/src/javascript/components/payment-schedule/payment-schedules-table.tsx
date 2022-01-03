@@ -11,6 +11,7 @@ import { User, UserRole } from '../../models/user';
 import { PaymentSchedule, PaymentScheduleItem, PaymentScheduleItemState } from '../../models/payment-schedule';
 import PaymentScheduleAPI from '../../api/payment-schedule';
 import FormatLib from '../../lib/format';
+import { StripeConfirmModal } from '../payment/stripe/stripe-confirm-modal';
 
 interface PaymentSchedulesTableProps {
   paymentSchedules: Array<PaymentSchedule>,
@@ -412,14 +413,10 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
           {t('app.shared.schedules_table.confirm_cancel_subscription')}
         </FabModal>
         <StripeElements>
-          <FabModal title={t('app.shared.schedules_table.resolve_action')}
-            isOpen={showResolveAction}
+          {tempDeadline && <StripeConfirmModal isOpen={showResolveAction}
             toggleModal={toggleResolveActionModal}
-            onConfirm={afterAction}
-            confirmButton={t('app.shared.schedules_table.ok_button')}
-            preventConfirm={isConfirmActionDisabled}>
-            {tempDeadline && <StripeConfirm clientSecret={tempDeadline.client_secret} onResponse={toggleConfirmActionButton} />}
-          </FabModal>
+            onSuccess={afterAction}
+            paymentScheduleItemId={tempDeadline.id} />}
           {tempSchedule && <UpdateCardModal isOpen={showUpdateCard}
             toggleModal={toggleUpdateCardModal}
             operator={operator}

@@ -29,5 +29,9 @@ class Payment::Item
     false
   end
 
+  def gateway
+    klass[/^(PayZen|Stripe)::/, 1]
+  end
+
   def retrieve(_id = nil, *_args); end
 end
