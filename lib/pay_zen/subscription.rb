@@ -14,4 +14,11 @@ class PayZen::Subscription < PayZen::Client
   def get(subscription_id, payment_method_token)
     post('/Subscription/Get/', subscriptionId: subscription_id, paymentMethodToken: payment_method_token)
   end
+
+  ##
+  # @see https://payzen.io/fr-FR/rest/V4.0/api/playground/Subscription/Cancel/
+  ##
+  def cancel(subscription_id, payment_method_token)
+    post('/Subscription/Cancel/', subscriptionId: subscription_id, paymentMethodToken: payment_method_token)
+  end
 end

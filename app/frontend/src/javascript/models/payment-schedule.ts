@@ -26,7 +26,7 @@ export interface PaymentSchedule {
   id: number,
   total: number,
   reference: string,
-  payment_method: string,
+  payment_method: 'card' | '',
   items: Array<PaymentScheduleItem>,
   created_at: Date,
   chained_footprint: boolean,
@@ -43,9 +43,7 @@ export interface PaymentSchedule {
     first_name: string,
     last_name: string,
   },
-  gateway_subscription: {
-    classname: string
-  }
+  gateway: 'PayZen' | 'Stripe',
 }
 
 export interface PaymentScheduleIndexRequest {

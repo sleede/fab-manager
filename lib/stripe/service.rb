@@ -43,6 +43,15 @@ class Stripe::Service < Payment::Service
     pgo.save!
   end
 
+  def cancel_subscription(payment_schedule)
+    stripe_key = Setting.get('stripe_secret_key')
+
+    stp_subscription = payment_schedule.gateway_subscription.retrieve
+
+    res = Stripe::Subscription.delete(stp_subscription.id, {}, api_key: stripe_key)
+    res.status == 'canceled'
+  end
+
   def create_user(user_id)
     StripeWorker.perform_async(:create_stripe_customer, user_id)
   end
