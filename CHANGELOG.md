@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Updated caniuse db
+
 # v5.3.0 2021 December 29
 
 - Ability to configure multiple VAT rates, per kind of invoiced item
