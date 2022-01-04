@@ -1283,6 +1283,7 @@ pt:
         extended_prices: "Extended prices"
         extended_prices_info_html: "Spaces can have different prices depending on the cumulated duration of the booking. You can choose if this apply to all bookings or only to those starting within the same day."
         extended_prices_in_same_day: "Extended prices in the same day"
+        public_registrations: "Public registrations"
         overlapping_options:
           training_reservations: "Treinamentos"
           machine_reservations: "Máquinas"
@@ -1309,6 +1310,9 @@ pt:
             name: "Nome"
             created_at: "Data de criação"
             updated_at: "Última Data de Atualização"
+          public_registrations: "Public registrations"
+          public_registrations_info: "Allow everyone to register a new account on the platform. If disabled, only administrators and managers can create new accounts."
+          public_registrations_allowed: "Public registrations allowed"
           help: "Ajuda"
           feature_tour: "Tour de recursos"
           feature_tour_info_html: "<p>Quando um administrador ou um gerente está logado, um tour de recurso será acionado na primeira vez que ele/ela visita cada seção do aplicativo. Você pode mudar esse comportamento para um dos seguintes valores:</p><ul><li>« Uma vez » para manter o comportamento padrão.</li><li>« Por sessão » para exibir os tours cada vez que você reabrir o aplicativo.</li><li>« Ativação manual » para evitar a exibição automática dos tours. Ainda será possível ativá-los pressionando a tecla F1 ou clicando em « Ajuda » no menu do usuário.</li></ul>"
