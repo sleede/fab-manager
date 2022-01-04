@@ -37,6 +37,7 @@ pt:
       end_before_start: "A data final não pode ser anterior à data de início. Escolha uma data após %{START}"
       invalid_duration: "A duração permitida deve ter entre 1 dia e 1 ano. Sua menstruação tem %{DAYS} dias."
       must_be_in_the_past: "O período deve ser estritamente anterior à data de hoje."
+      registration_disabled: "Registration is disabled"
   apipie:
     api_documentation: "Documentação da API"
     code: "Código HTTP"
@@ -542,3 +543,4 @@ pt:
     pack_only_for_subscription: "Restringir pacotes para assinantes"
     overlapping_categories: "Categorias para prevenção de reservas sobrepostas"
     extended_prices_in_same_day: "Extended prices in the same day"
+    public_registrations: "Public registrations"
