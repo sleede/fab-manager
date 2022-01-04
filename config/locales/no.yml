@@ -37,6 +37,7 @@
       end_before_start: "Sluttdatoen kan ikke være før startdato. Velg en dato etter %{START}"
       invalid_duration: "Den tillatte varigheten må være mellom 1 dag og 1 år. Din periode er %{DAYS} dager lang."
       must_be_in_the_past: "Perioden må være før dagens dato."
+      registration_disabled: "Registration is disabled"
   apipie:
     api_documentation: "API-dokumentasjon"
     code: "HTTP kode"
@@ -542,3 +543,4 @@
     pack_only_for_subscription: "Restrict packs for subscribers"
     overlapping_categories: "Categories for overlapping booking prevention"
     extended_prices_in_same_day: "Extended prices in the same day"
+    public_registrations: "Public registrations"
