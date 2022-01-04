@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Ability to cancel a payement schedule from the interface
+- Ability to create slots in the past
 - Updated caniuse db
 - Optimized the load time of the payment schedules list
 
