@@ -37,6 +37,7 @@ en:
       end_before_start: "The end date can't be before the start date. Pick a date after %{START}"
       invalid_duration: "The allowed duration must be between 1 day and 1 year. Your period is %{DAYS} days long."
       must_be_in_the_past: "The period must be strictly prior to today's date."
+      registration_disabled: "Registration is disabled"
   apipie:
     api_documentation: "API Documentation"
     code: "HTTP code"
@@ -542,3 +543,4 @@ en:
     pack_only_for_subscription: "Restrict packs for subscribers"
     overlapping_categories: "Categories for overlapping booking prevention"
     extended_prices_in_same_day: "Extended prices in the same day"
+    public_registrations: "Public registrations"

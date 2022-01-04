@@ -117,7 +117,8 @@ export enum SettingName {
   RenewPackThreshold = 'renew_pack_threshold',
   PackOnlyForSubscription = 'pack_only_for_subscription',
   OverlappingCategories = 'overlapping_categories',
-  ExtendedPricesInSameDay = 'extended_prices_in_same_day'
+  ExtendedPricesInSameDay = 'extended_prices_in_same_day',
+  PublicRegistrations = 'public_registrations'
 }
 
 export type SettingValue = string|boolean|number;

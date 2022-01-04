@@ -413,6 +413,18 @@
   </div>
   <div class="panel-body">
     <div class="row">
+      <h3 class="m-l" translate>{{ 'app.admin.settings.general.public_registrations' }}</h3>
+      <p class="alert alert-warning m-h-md" translate>
+        {{ 'app.admin.settings.general.public_registrations_info' }}
+      </p>
+      <div class="col-md-10 col-md-offset-1">
+        <boolean-setting name="public_registrations"
+                         settings="allSettings"
+                         label="app.admin.settings.general.public_registrations_allowed">
+        </boolean-setting>
+      </div>
+    </div>
+    <div class="row">
       <h3 class="m-l" translate>{{ 'app.admin.settings.phone' }}</h3>
       <p class="alert alert-warning m-h-md" translate>
         {{ 'app.admin.settings.phone_required_info' }}

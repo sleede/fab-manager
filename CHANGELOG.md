@@ -2,8 +2,10 @@
 
 - Ability to cancel a payement schedule from the interface
 - Ability to create slots in the past
+- Ability to disable public account creation
 - Updated caniuse db
 - Optimized the load time of the payment schedules list
+- [TODO DEPLOY] `rails db:seed`
 
 # v5.3.0 2021 December 29
 
