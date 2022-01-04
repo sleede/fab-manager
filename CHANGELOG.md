@@ -285,6 +285,10 @@
 - [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
 - [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/rename-adminsys.sh | bash`
 
+## v4.7.14 2021 September 30
+
+- Fix a bug: updated sassc to 2.4.0 to fix ruby runtime error on some CPU architectures
+
 ## v4.7.13 2020 June 11
 
 - Fix a bug: unable to process stripe payments with 3DS authentication
