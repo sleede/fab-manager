@@ -126,7 +126,7 @@
     deadline_date: "Betalingsdato"
     deadline_amount: "Beløp inkludert mva"
     total_amount: "Totalbeløp"
-    settlement_by_METHOD: "Debitering vil bli utført av {METHOD, select, card{kort} other{sjekk}} for hver deadline."
+    settlement_by_METHOD: "Debits will be made by {METHOD, select, card{card} transfer{bank transfer} other{check}} for each deadlines."
     settlement_by_wallet: "%{AMOUNT} vil bli trukket fra lommeboken for å gjøre opp den første fristen."
   #CVS accounting export (columns headers)
   accounting_export:
@@ -373,6 +373,8 @@
         schedule_failed: "Failed card debit for the %{DATE} deadline, for your schedule %{REFERENCE}"
       notify_admin_payment_schedule_check_deadline:
         schedule_deadline: "You must cash the check for the %{DATE} deadline, for schedule %{REFERENCE}"
+      notify_admin_payment_schedule_transfer_deadline:
+        schedule_deadline: "You must confirm the bank direct debit for the %{DATE} deadline, for schedule %{REFERENCE}"
   #statistics tools for admins
   statistics:
     subscriptions: "Subscriptions"
