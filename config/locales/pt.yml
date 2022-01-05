@@ -126,7 +126,7 @@ pt:
     deadline_date: "Data de pagamento"
     deadline_amount: "Valor incluindo impostos"
     total_amount: "Valor total"
-    settlement_by_METHOD: "Os débitos serão feitos por {METHOD, select, card{cartão} other{verificação}} para cada prazo."
+    settlement_by_METHOD: "Debits will be made by {METHOD, select, card{card} transfer{bank transfer} other{check}} for each deadlines."
     settlement_by_wallet: "%{AMOUNT} será debitado da sua carteira fixando o primeiro prazo."
   #CVS accounting export (columns headers)
   accounting_export:
@@ -373,6 +373,8 @@ pt:
         schedule_failed: "Falha no débito para o período %{DATE} de agendamento %{REFERENCE}"
       notify_admin_payment_schedule_check_deadline:
         schedule_deadline: "Você deve realizar a verificação para a data limite de %{DATE} para agendar %{REFERENCE}"
+      notify_admin_payment_schedule_transfer_deadline:
+        schedule_deadline: "You must confirm the bank direct debit for the %{DATE} deadline, for schedule %{REFERENCE}"
   #statistics tools for admins
   statistics:
     subscriptions: "Assinaturas"
