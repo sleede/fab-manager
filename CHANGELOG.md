@@ -4,6 +4,7 @@
 - Ability to create slots in the past
 - Ability to disable public account creation
 - Ability to select "bank transfer" as the payment mean for a payment schedule
+- When a payment schedule was canceled by the payment gateway, inform the user in the interface
 - Updated caniuse db
 - Optimized the load time of the payment schedules list
 - Fix a bug: do not load Stripe if no keys were defined

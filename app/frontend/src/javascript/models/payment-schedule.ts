@@ -4,7 +4,8 @@ export enum PaymentScheduleItemState {
   RequirePaymentMethod = 'requires_payment_method',
   RequireAction = 'requires_action',
   Paid = 'paid',
-  Error = 'error'
+  Error = 'error',
+  GatewayCanceled = 'gateway_canceled'
 }
 
 export enum PaymentMethod {

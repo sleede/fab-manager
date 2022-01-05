@@ -189,7 +189,9 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
             {t('app.shared.schedules_table.update_card')}
           </FabButton>
         );
+      case PaymentScheduleItemState.GatewayCanceled:
       case PaymentScheduleItemState.Error:
+        // if the payment schedule was canceled by the gateway, or
         // if the payment is in error, the schedule is over, and we can't update the card
         cardUpdateButton.set(schedule.id, true);
         if (!isPrivileged()) {

@@ -493,6 +493,7 @@ en:
         state_requires_action: "Action required"
         state_paid: "Paid"
         state_error: "Error"
+        state_gateway_canceled: "Canceled by the payment gateway"
         state_canceled: "Canceled"
         method_card: "by card"
         method_check: "by check"
