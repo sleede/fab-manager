@@ -315,5 +315,11 @@ de:
         remember: "In accordance with the %{REFERENCE} payment schedule, %{AMOUNT} was due to be debited on %{DATE}."
         date: "This is a reminder to cash the scheduled check as soon as possible."
         confirm: "Do not forget to confirm the receipt in your payment schedule management interface, so that the corresponding invoice will be generated."
+    notify_member_payment_schedule_transfer_deadline:
+      subject: "Payment deadline"
+      body:
+        remember: "In accordance with your %{REFERENCE} payment schedule, %{AMOUNT} was due to be debited on %{DATE}."
+        date: "This is a reminder to verify that the direct bank debit was successfull."
+        confirm: "Please confirm the receipt of funds in your payment schedule management interface, so that the corresponding invoice will be generated."
     shared:
       hello: "Hallo %{user_name}"
