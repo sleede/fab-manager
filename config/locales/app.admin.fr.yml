@@ -1454,7 +1454,7 @@ fr:
         method_transfer: "Par virement bancaire"
         card_collection_info: "En validant, vous serez invité à saisir les informations de carte bancaire du membre. Cette carte sera prélevée automatiquement aux échéances."
         check_collection_info: "En validant, vous confirmez être en possession de {DEADLINES} chèques permettant d'encaisser l'ensemble des mensualité."
-        transfer_collection_info: "<p>By validating, you confirm that you set up {DEADLINES} bank direct debits, allowing you to collect all the monthly payments.</p><p><strong>Please note:</strong> the bank transfers are not automatically handled by Fab-manager.</p>"
+        transfer_collection_info: "<p>En validant, vous confirmez avoir mis en place {DEADLINES} prélèvements bancaires, vous permettant de percevoir toutes les mensualités.</p><p><strong>Veuillez noter :</strong> les prélèvements bancaires ne sont pas automatiquement gérés par Fab-manager.</p>"
         online_payment_disabled: "Le paiement en ligne n'est pas disponible. Vous ne pouvez pas encaisser cet échéancier de paiement en utilisant la carte bancaire en ligne."
       check_list_setting:
         save: 'Enregistrer'
