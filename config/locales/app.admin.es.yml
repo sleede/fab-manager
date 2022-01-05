@@ -1451,8 +1451,10 @@ es:
         payment_method: "Payment method"
         method_card: "Online by card"
         method_check: "By check"
+        method_transfer: "By bank transfer"
         card_collection_info: "By validating, you'll be prompted for the member's card number. This card will be automatically charged at the deadlines."
         check_collection_info: "By validating, you confirm that you have {DEADLINES} checks, allowing you to collect all the monthly payments."
+        transfer_collection_info: "<p>By validating, you confirm that you set up {DEADLINES} bank direct debits, allowing you to collect all the monthly payments.</p><p><strong>Please note:</strong> the bank transfers are not automatically handled by Fab-manager.</p>"
         online_payment_disabled: "Online payment is not available. You cannot collect this payment schedule by online card."
       check_list_setting:
         save: 'Save'
