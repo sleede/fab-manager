@@ -5,6 +5,7 @@
 - Ability to disable public account creation
 - Updated caniuse db
 - Optimized the load time of the payment schedules list
+- Fix a bug: do not load Stripe if no keys were defined
 - [TODO DEPLOY] `rails db:seed`
 
 # v5.3.0 2021 December 29
