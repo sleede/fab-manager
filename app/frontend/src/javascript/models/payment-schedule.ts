@@ -26,7 +26,7 @@ export interface PaymentSchedule {
   id: number,
   total: number,
   reference: string,
-  payment_method: 'card' | '',
+  payment_method: 'card' | 'transfer' | '',
   items: Array<PaymentScheduleItem>,
   created_at: Date,
   chained_footprint: boolean,

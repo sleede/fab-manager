@@ -59,6 +59,7 @@ const UpdateCardModalComponent: React.FC<UpdateCardModalProps> = ({ isOpen, togg
     case 'PayZen':
       return renderPayZenModal();
     case '':
+    case undefined:
       return <div/>;
     default:
       onError(t('app.shared.update_card_modal.unexpected_error'));

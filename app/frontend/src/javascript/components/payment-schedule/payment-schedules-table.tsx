@@ -31,6 +31,8 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
   const [showExpanded, setShowExpanded] = useState<Map<number, boolean>>(new Map());
   // is open, the modal dialog to confirm the cashing of a check?
   const [showConfirmCashing, setShowConfirmCashing] = useState<boolean>(false);
+  // is open, the modal dialog to confirm a back transfer?
+  const [showConfirmTransfer, setShowConfirmTransfer] = useState<boolean>(false);
   // is open, the modal dialog the resolve a pending card payment?
   const [showResolveAction, setShowResolveAction] = useState<boolean>(false);
   // the user cannot confirm the action modal (3D secure), unless he has resolved the pending action
@@ -130,8 +132,8 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
   /**
    * Return the human-readable string for the status of the provided deadline.
    */
-  const formatState = (item: PaymentScheduleItem): JSX.Element => {
-    let res = t(`app.shared.schedules_table.state_${item.state}`);
+  const formatState = (item: PaymentScheduleItem, schedule: PaymentSchedule): JSX.Element => {
+    let res = t(`app.shared.schedules_table.state_${item.state}${item.state === 'pending' ? '_' + schedule.payment_method : ''}`);
     if (item.state === PaymentScheduleItemState.Paid) {
       const key = `app.shared.schedules_table.method_${item.payment_method}`;
       res += ` (${t(key)})`;
@@ -155,12 +157,21 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
         return downloadButton(TargetType.Invoice, item.invoice_id);
       case PaymentScheduleItemState.Pending:
         if (isPrivileged()) {
-          return (
-            <FabButton onClick={handleConfirmCheckPayment(item)}
-              icon={<i className="fas fa-money-check" />}>
-              {t('app.shared.schedules_table.confirm_payment')}
-            </FabButton>
-          );
+          if (schedule.payment_method === 'transfer') {
+            return (
+              <FabButton onClick={handleConfirmTransferPayment(item)}
+                icon={<i className="fas fa-university"/>}>
+                {t('app.shared.schedules_table.confirm_payment')}
+              </FabButton>
+            );
+          } else {
+            return (
+              <FabButton onClick={handleConfirmCheckPayment(item)}
+                icon={<i className="fas fa-money-check"/>}>
+                {t('app.shared.schedules_table.confirm_payment')}
+              </FabButton>
+            );
+          }
         } else {
           return <span>{t('app.shared.schedules_table.please_ask_reception')}</span>;
         }
@@ -217,6 +228,15 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
   };
 
   /**
+   * Callback triggered when the user's clicks on the "confirm transfer" button: show a confirmation modal
+   */
+  const handleConfirmTransferPayment = (item: PaymentScheduleItem): ReactEventHandler => {
+    return (): void => {
+      setTempDeadline(item);
+      toggleConfirmTransferModal();
+    };
+  };
+  /**
    * After the user has confirmed that he wants to cash the check, update the API, refresh the list and close the modal.
    */
   const onCheckCashingConfirmed = (): void => {
@@ -224,6 +244,18 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
       if (res.state === PaymentScheduleItemState.Paid) {
         refreshSchedulesTable();
         toggleConfirmCashingModal();
+      }
+    });
+  };
+
+  /**
+   * After the user has confirmed that he validates the tranfer, update the API, refresh the list and close the modal.
+   */
+  const onTransferConfirmed = (): void => {
+    PaymentScheduleAPI.confirmTransfer(tempDeadline.id).then((res) => {
+      if (res.state === PaymentScheduleItemState.Paid) {
+        refreshSchedulesTable();
+        toggleConfirmTransferModal();
       }
     });
   };
@@ -240,6 +272,13 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
    */
   const toggleConfirmCashingModal = (): void => {
     setShowConfirmCashing(!showConfirmCashing);
+  };
+
+  /**
+   * Show/hide the modal dialog that enable to confirm the bank transfer for a given deadline.
+   */
+  const toggleConfirmTransferModal = (): void => {
+    setShowConfirmTransfer(!showConfirmTransfer);
   };
 
   /**
@@ -392,7 +431,7 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
                             {_.orderBy(p.items, 'due_date').map(item => <tr key={item.id}>
                               <td>{FormatLib.date(item.due_date)}</td>
                               <td>{FormatLib.price(item.amount)}</td>
-                              <td>{formatState(item)}</td>
+                              <td>{formatState(item, p)}</td>
                               <td>{itemButtons(item, p)}</td>
                             </tr>)}
                           </tbody>
@@ -416,6 +455,20 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
           confirmButton={t('app.shared.schedules_table.confirm_button')}>
           {tempDeadline && <span>
             {t('app.shared.schedules_table.confirm_check_cashing_body', {
+              AMOUNT: FormatLib.price(tempDeadline.amount),
+              DATE: FormatLib.date(tempDeadline.due_date)
+            })}
+          </span>}
+        </FabModal>
+        {/* Confirm the bank transfer for the current deadline */}
+        <FabModal title={t('app.shared.schedules_table.confirm_bank_transfer')}
+          isOpen={showConfirmTransfer}
+          toggleModal={toggleConfirmTransferModal}
+          onConfirm={onTransferConfirmed}
+          closeButton={true}
+          confirmButton={t('app.shared.schedules_table.confirm_button')}>
+          {tempDeadline && <span>
+            {t('app.shared.schedules_table.confirm_bank_transfer_body', {
               AMOUNT: FormatLib.price(tempDeadline.amount),
               DATE: FormatLib.date(tempDeadline.due_date)
             })}

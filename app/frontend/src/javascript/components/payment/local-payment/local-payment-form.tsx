@@ -8,9 +8,9 @@ import SettingAPI from '../../../api/setting';
 import { SettingName } from '../../../models/setting';
 import { PaymentModal } from '../payment-modal';
 import { PaymentSchedule } from '../../../models/payment-schedule';
-import { PaymentMethod } from '../../../models/payment';
+import { HtmlTranslate } from '../../base/html-translate';
 
-const ALL_SCHEDULE_METHODS = ['card', 'check'] as const;
+const ALL_SCHEDULE_METHODS = ['card', 'check', 'transfer'] as const;
 type scheduleMethod = typeof ALL_SCHEDULE_METHODS[number];
 
 /**
@@ -31,11 +31,7 @@ export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSucce
   const [onlinePaymentModal, setOnlinePaymentModal] = useState<boolean>(false);
 
   useEffect(() => {
-    if (cart.payment_method === PaymentMethod.Card) {
-      setMethod('card');
-    } else {
-      setMethod('check');
-    }
+    setMethod(cart.payment_method || 'check');
   }, [cart]);
 
   /**
@@ -65,11 +61,7 @@ export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSucce
    * Callback triggered when the user selects a payment method for the current payment schedule.
    */
   const handleUpdateMethod = (option: selectOption) => {
-    if (option.value === 'card') {
-      updateCart(Object.assign({}, cart, { payment_method: PaymentMethod.Card }));
-    } else {
-      updateCart(Object.assign({}, cart, { payment_method: PaymentMethod.Other }));
-    }
+    updateCart(Object.assign({}, cart, { payment_method: option.value }));
     setMethod(option.value);
   };
 
@@ -140,6 +132,7 @@ export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSucce
             value={methodToOption(method)} />
           {method === 'card' && <p>{t('app.admin.local_payment.card_collection_info')}</p>}
           {method === 'check' && <p>{t('app.admin.local_payment.check_collection_info', { DEADLINES: paymentSchedule.items.length })}</p>}
+          {method === 'transfer' && <HtmlTranslate trKey="app.admin.local_payment.transfer_collection_info" options={{ DEADLINES: paymentSchedule.items.length }} />}
         </div>
         <div className="full-schedule">
           <ul>

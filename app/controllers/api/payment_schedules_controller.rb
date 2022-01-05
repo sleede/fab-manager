@@ -4,7 +4,7 @@
 class API::PaymentSchedulesController < API::ApiController
   before_action :authenticate_user!
   before_action :set_payment_schedule, only: %i[download cancel]
-  before_action :set_payment_schedule_item, only: %i[show_item cash_check refresh_item pay_item]
+  before_action :set_payment_schedule_item, only: %i[show_item cash_check confirm_transfer refresh_item pay_item]
 
   # retrieve all payment schedules for the current user, paginated
   def index
@@ -41,6 +41,15 @@ class API::PaymentSchedulesController < API::ApiController
     authorize @payment_schedule_item.payment_schedule
     PaymentScheduleService.new.generate_invoice(@payment_schedule_item, payment_method: 'check')
     attrs = { state: 'paid', payment_method: 'check' }
+    @payment_schedule_item.update_attributes(attrs)
+
+    render json: attrs, status: :ok
+  end
+
+  def confirm_transfer
+    authorize @payment_schedule_item.payment_schedule
+    PaymentScheduleService.new.generate_invoice(@payment_schedule_item, payment_method: 'transfer')
+    attrs = { state: 'paid', payment_method: 'transfer' }
     @payment_schedule_item.update_attributes(attrs)
 
     render json: attrs, status: :ok
