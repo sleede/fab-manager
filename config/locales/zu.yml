@@ -126,7 +126,7 @@ zu:
     deadline_date: "crwdns21104:0crwdne21104:0"
     deadline_amount: "crwdns21106:0crwdne21106:0"
     total_amount: "crwdns21108:0crwdne21108:0"
-    settlement_by_METHOD: "crwdns21570:0METHOD={METHOD}crwdne21570:0"
+    settlement_by_METHOD: "crwdns22303:0METHOD={METHOD}crwdne22303:0"
     settlement_by_wallet: "crwdns21112:0%{AMOUNT}crwdne21112:0"
   #CVS accounting export (columns headers)
   accounting_export:
@@ -373,6 +373,8 @@ zu:
         schedule_failed: "crwdns21118:0%{DATE}crwdnd21118:0%{REFERENCE}crwdne21118:0"
       notify_admin_payment_schedule_check_deadline:
         schedule_deadline: "crwdns21120:0%{DATE}crwdnd21120:0%{REFERENCE}crwdne21120:0"
+      notify_admin_payment_schedule_transfer_deadline:
+        schedule_deadline: "crwdns22305:0%{DATE}crwdnd22305:0%{REFERENCE}crwdne22305:0"
   #statistics tools for admins
   statistics:
     subscriptions: "crwdns3689:0crwdne3689:0"
