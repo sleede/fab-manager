@@ -1451,8 +1451,10 @@ pt:
         payment_method: "Método de pagamento"
         method_card: "Online por cartão"
         method_check: "Por verificação"
+        method_transfer: "By bank transfer"
         card_collection_info: "Ao validar, será solicitado o número do cartão do membro. Este cartão será cobrado automaticamente nos prazos."
         check_collection_info: "Ao validar, você confirma que tem {DEADLINES} checks, permitindo que você colete todos os pagamentos mensais."
+        transfer_collection_info: "<p>By validating, you confirm that you set up {DEADLINES} bank direct debits, allowing you to collect all the monthly payments.</p><p><strong>Please note:</strong> the bank transfers are not automatically handled by Fab-manager.</p>"
         online_payment_disabled: "Pagamento online não está disponível. Você não pode selecionar este horário com pagamento online."
       check_list_setting:
         save: 'Salvar'
