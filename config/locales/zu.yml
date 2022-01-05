@@ -37,6 +37,7 @@ zu:
       end_before_start: "crwdns3205:0%{START}crwdne3205:0"
       invalid_duration: "crwdns3207:0%{DAYS}crwdne3207:0"
       must_be_in_the_past: "crwdns3209:0crwdne3209:0"
+      registration_disabled: "crwdns22285:0crwdne22285:0"
   apipie:
     api_documentation: "crwdns3257:0crwdne3257:0"
     code: "crwdns20914:0crwdne20914:0"
@@ -125,7 +126,7 @@ zu:
     deadline_date: "crwdns21104:0crwdne21104:0"
     deadline_amount: "crwdns21106:0crwdne21106:0"
     total_amount: "crwdns21108:0crwdne21108:0"
-    settlement_by_METHOD: "crwdns21570:0METHOD={METHOD}crwdne21570:0"
+    settlement_by_METHOD: "crwdns22303:0METHOD={METHOD}crwdne22303:0"
     settlement_by_wallet: "crwdns21112:0%{AMOUNT}crwdne21112:0"
   #CVS accounting export (columns headers)
   accounting_export:
@@ -372,6 +373,8 @@ zu:
         schedule_failed: "crwdns21118:0%{DATE}crwdnd21118:0%{REFERENCE}crwdne21118:0"
       notify_admin_payment_schedule_check_deadline:
         schedule_deadline: "crwdns21120:0%{DATE}crwdnd21120:0%{REFERENCE}crwdne21120:0"
+      notify_admin_payment_schedule_transfer_deadline:
+        schedule_deadline: "crwdns22305:0%{DATE}crwdnd22305:0%{REFERENCE}crwdne22305:0"
   #statistics tools for admins
   statistics:
     subscriptions: "crwdns3689:0crwdne3689:0"
@@ -542,3 +545,4 @@ zu:
     pack_only_for_subscription: "crwdns22093:0crwdne22093:0"
     overlapping_categories: "crwdns22129:0crwdne22129:0"
     extended_prices_in_same_day: "crwdns22173:0crwdne22173:0"
+    public_registrations: "crwdns22287:0crwdne22287:0"

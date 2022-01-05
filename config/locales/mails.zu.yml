@@ -315,5 +315,11 @@ zu:
         remember: "crwdns21152:0%{REFERENCE}crwdnd21152:0%{AMOUNT}crwdnd21152:0%{DATE}crwdne21152:0"
         date: "crwdns21154:0crwdne21154:0"
         confirm: "crwdns21156:0crwdne21156:0"
+    notify_member_payment_schedule_transfer_deadline:
+      subject: "crwdns22307:0crwdne22307:0"
+      body:
+        remember: "crwdns22309:0%{REFERENCE}crwdnd22309:0%{AMOUNT}crwdnd22309:0%{DATE}crwdne22309:0"
+        date: "crwdns22311:0crwdne22311:0"
+        confirm: "crwdns22313:0crwdne22313:0"
     shared:
       hello: "crwdns4215:0%{user_name}crwdne4215:0"

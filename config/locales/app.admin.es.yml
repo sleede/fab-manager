@@ -1283,6 +1283,7 @@ es:
         extended_prices: "Extended prices"
         extended_prices_info_html: "Spaces can have different prices depending on the cumulated duration of the booking. You can choose if this apply to all bookings or only to those starting within the same day."
         extended_prices_in_same_day: "Extended prices in the same day"
+        public_registrations: "Public registrations"
         overlapping_options:
           training_reservations: "Trainings"
           machine_reservations: "Machines"
@@ -1309,6 +1310,9 @@ es:
             name: "Name"
             created_at: "Creation date"
             updated_at: "Last update date"
+          public_registrations: "Public registrations"
+          public_registrations_info: "Allow everyone to register a new account on the platform. If disabled, only administrators and managers can create new accounts."
+          public_registrations_allowed: "Public registrations allowed"
           help: "Help"
           feature_tour: "Feature tour"
           feature_tour_info_html: "<p>When an administrator or a manager in logged-in, a feature tour will be triggered the first time he/she visits each section of the application. You can change this behavior to one of the following values:</p><ul><li>« Once » to keep the default behavior.</li><li>« By session » to display the tours each time you reopen the application.</li><li>« Manual trigger » to prevent displaying the tours automatically. It'll still be possible to trigger them by pressing the F1 key or by clicking on « Help » in the user's menu.</li></ul>"
@@ -1447,8 +1451,10 @@ es:
         payment_method: "Payment method"
         method_card: "Online by card"
         method_check: "By check"
+        method_transfer: "By bank transfer"
         card_collection_info: "By validating, you'll be prompted for the member's card number. This card will be automatically charged at the deadlines."
         check_collection_info: "By validating, you confirm that you have {DEADLINES} checks, allowing you to collect all the monthly payments."
+        transfer_collection_info: "<p>By validating, you confirm that you set up {DEADLINES} bank direct debits, allowing you to collect all the monthly payments.</p><p><strong>Please note:</strong> the bank transfers are not automatically handled by Fab-manager.</p>"
         online_payment_disabled: "Online payment is not available. You cannot collect this payment schedule by online card."
       check_list_setting:
         save: 'Save'

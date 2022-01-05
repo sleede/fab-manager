@@ -315,5 +315,11 @@ fr:
         remember: "Conformément à l'échéancier de paiement %{REFERENCE}, une échéance de %{AMOUNT} était prévu pour être prélevée le %{DATE}."
         date: "Ceci est un rappel d'encaisser le chèque prévu dès que possible."
         confirm: "N'oubliez pas de confirmer l'encaissement dans votre interface de gestion des échéanciers, afin que la facture correspondante soit générée."
+    notify_member_payment_schedule_transfer_deadline:
+      subject: "Échéance d'encaissement"
+      body:
+        remember: "Conformément à l'échéancier de paiement %{REFERENCE}, une échéance de %{AMOUNT} était prévu pour être prélevée le %{DATE}."
+        date: "Ceci est un rappel pour vérifier que le prélèvement bancaire a bien été effectué."
+        confirm: "Veuillez confirmer la réception des fonds dans votre interface de gestion des échéanciers de paiement, afin que la facture correspondante soit générée."
     shared:
       hello: "Bonjour %{user_name}"

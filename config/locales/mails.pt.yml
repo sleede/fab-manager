@@ -315,5 +315,11 @@ pt:
         remember: "De acordo com a agenda de pagamento %{REFERENCE}, %{AMOUNT} deveria ser debitado em %{DATE}."
         date: "Este é um lembrete para descontar o pagamento programado o mais rápido possível."
         confirm: "Não se esqueça de confirmar o recibo na interface de gestão de agenda de pagamento, para que a fatura correspondente seja gerada."
+    notify_member_payment_schedule_transfer_deadline:
+      subject: "Payment deadline"
+      body:
+        remember: "In accordance with your %{REFERENCE} payment schedule, %{AMOUNT} was due to be debited on %{DATE}."
+        date: "This is a reminder to verify that the direct bank debit was successfull."
+        confirm: "Please confirm the receipt of funds in your payment schedule management interface, so that the corresponding invoice will be generated."
     shared:
       hello: "Olá %{user_name}"
