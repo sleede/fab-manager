@@ -1451,8 +1451,10 @@ fr:
         payment_method: "Moyen de paiement"
         method_card: "Carte bancaire en ligne"
         method_check: "Par chèques"
+        method_transfer: "By bank transfer"
         card_collection_info: "En validant, vous serez invité à saisir les informations de carte bancaire du membre. Cette carte sera prélevée automatiquement aux échéances."
         check_collection_info: "En validant, vous confirmez être en possession de {DEADLINES} chèques permettant d'encaisser l'ensemble des mensualité."
+        transfer_collection_info: "<p>By validating, you confirm that you set up {DEADLINES} bank direct debits, allowing you to collect all the monthly payments.</p><p><strong>Please note:</strong> the bank transfers are not automatically handled by Fab-manager.</p>"
         online_payment_disabled: "Le paiement en ligne n'est pas disponible. Vous ne pouvez pas encaisser cet échéancier de paiement en utilisant la carte bancaire en ligne."
       check_list_setting:
         save: 'Enregistrer'
