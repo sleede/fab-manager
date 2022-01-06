@@ -26,7 +26,7 @@ class AvailabilitiesExportService
 
     content = av.render template: 'exports/availabilities_index.xlsx.axlsx'
     # write content to file
-    File.open(export.file, 'w+b') { |f| f.puts content }
+    File.open(export.file, 'w+b') { |f| f.write content }
   end
 
 end

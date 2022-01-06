@@ -39,7 +39,7 @@ class StatisticsExportService
 
     content = av.render template: 'exports/statistics_global.xlsx.axlsx'
     # write content to file
-    File.open(export.file, 'w+b') { |f| f.puts content }
+    File.open(export.file, 'w+b') { |f| f.write content }
   end
 
   %w[account event machine project subscription training space].each do |path|
