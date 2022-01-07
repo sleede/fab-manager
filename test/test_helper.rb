@@ -104,13 +104,15 @@ class ActiveSupport::TestCase
     end
 
     vat_service = VatHistoryService.new
-    vat_rate = vat_service.invoice_vat(invoice)
-    if vat_rate.positive?
-      computed_ht = sprintf('%.2f', (invoice.total / (vat_rate / 100.00 + 1)) / 100.00).to_f
+    invoice.invoice_items.each do |item|
+      vat_rate = vat_service.invoice_item_vat(item)
+      if vat_rate.positive?
+        computed_ht = sprintf('%.2f', (item.amount_after_coupon / (vat_rate / 100.00 + 1)) / 100.00).to_f
 
-      assert_equal computed_ht, ht_amount, 'Total excluding taxes rendered in the PDF file is not computed correctly'
-    else
-      assert_equal invoice.total, ht_amount, 'VAT information was rendered in the PDF file despite that VAT was disabled'
+        assert_equal computed_ht, item.net_amount / 100.00, 'Total excluding taxes rendered in the PDF file is not computed correctly'
+      else
+        assert_equal item.amount_after_coupon, item.net_amount, 'VAT information was rendered in the PDF file despite that VAT was disabled'
+      end
     end
 
     # check the recipient & the address

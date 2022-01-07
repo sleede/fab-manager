@@ -231,7 +231,8 @@
         users_subscriptions: "of the subscriptions' list"
         users_reservations: "of the reservations' list"
         availabilities_index: "of the reservations availabilities"
-        accounting_accounting-software: "of the accounting data"
+        accounting_acd: "of the accounting data to ACD"
+        accounting_vat: "of the collected VAT data"
         click_to_download: "Excel file generated successfully. To download it, click"
         here: "here"
         file_type:
@@ -314,5 +315,11 @@
         remember: "In accordance with the %{REFERENCE} payment schedule, %{AMOUNT} was due to be debited on %{DATE}."
         date: "This is a reminder to cash the scheduled check as soon as possible."
         confirm: "Do not forget to confirm the receipt in your payment schedule management interface, so that the corresponding invoice will be generated."
+    notify_member_payment_schedule_transfer_deadline:
+      subject: "Payment deadline"
+      body:
+        remember: "In accordance with your %{REFERENCE} payment schedule, %{AMOUNT} was due to be debited on %{DATE}."
+        date: "This is a reminder to verify that the direct bank debit was successfull."
+        confirm: "Please confirm the receipt of funds in your payment schedule management interface, so that the corresponding invoice will be generated."
     shared:
       hello: "Hello %{user_name}"

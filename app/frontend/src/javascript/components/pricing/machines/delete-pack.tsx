@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FabButton } from '../base/fab-button';
-import { FabModal } from '../base/fab-modal';
-import { Loader } from '../base/loader';
-import { PrepaidPack } from '../../models/prepaid-pack';
-import PrepaidPackAPI from '../../api/prepaid-pack';
+import { FabButton } from '../../base/fab-button';
+import { FabModal } from '../../base/fab-modal';
+import { Loader } from '../../base/loader';
+import { PrepaidPack } from '../../../models/prepaid-pack';
+import PrepaidPackAPI from '../../../api/prepaid-pack';
 
 interface DeletePackProps {
   onSuccess: (message: string) => void,

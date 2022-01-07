@@ -127,7 +127,7 @@ class PaymentScheduleService
   # @param filters {Hash} allowed filters: reference, customer, date.
   ##
   def self.list(page, size, filters = {})
-    ps = PaymentSchedule.includes(:invoicing_profile, :payment_schedule_items)
+    ps = PaymentSchedule.includes(:invoicing_profile, :payment_schedule_items, :payment_schedule_objects)
                         .joins(:invoicing_profile)
                         .order('payment_schedules.created_at DESC')
                         .page(page)
@@ -158,6 +158,8 @@ class PaymentScheduleService
   end
 
   def self.cancel(payment_schedule)
+    PaymentGatewayService.new.cancel_subscription(payment_schedule)
+
     # cancel all item where state != paid
     payment_schedule.ordered_items.each do |item|
       next if item.state == 'paid'

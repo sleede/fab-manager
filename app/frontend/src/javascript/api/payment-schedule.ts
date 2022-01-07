@@ -4,7 +4,7 @@ import {
   CancelScheduleResponse,
   CashCheckResponse, PayItemResponse,
   PaymentSchedule,
-  PaymentScheduleIndexRequest, RefreshItemResponse
+  PaymentScheduleIndexRequest, PaymentScheduleItem, RefreshItemResponse
 } from '../models/payment-schedule';
 
 export default class PaymentScheduleAPI {
@@ -20,6 +20,16 @@ export default class PaymentScheduleAPI {
 
   static async cashCheck (paymentScheduleItemId: number): Promise<CashCheckResponse> {
     const res: AxiosResponse = await apiClient.post(`/api/payment_schedules/items/${paymentScheduleItemId}/cash_check`);
+    return res?.data;
+  }
+
+  static async confirmTransfer (paymentScheduleItemId: number): Promise<CashCheckResponse> {
+    const res: AxiosResponse = await apiClient.post(`/api/payment_schedules/items/${paymentScheduleItemId}/confirm_transfer`);
+    return res?.data;
+  }
+
+  static async getItem (paymentScheduleItemId: number): Promise<PaymentScheduleItem> {
+    const res: AxiosResponse = await apiClient.get(`/api/payment_schedules/items/${paymentScheduleItemId}`);
     return res?.data;
   }
 

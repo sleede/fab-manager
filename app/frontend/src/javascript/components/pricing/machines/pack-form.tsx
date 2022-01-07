@@ -1,11 +1,11 @@
 import React, { BaseSyntheticEvent } from 'react';
 import Select from 'react-select';
 import Switch from 'react-switch';
-import { PrepaidPack } from '../../models/prepaid-pack';
+import { PrepaidPack } from '../../../models/prepaid-pack';
 import { useTranslation } from 'react-i18next';
 import { useImmer } from 'use-immer';
-import { FabInput } from '../base/fab-input';
-import { IFablab } from '../../models/fablab';
+import { FabInput } from '../../base/fab-input';
+import { IFablab } from '../../../models/fablab';
 
 declare let Fablab: IFablab;
 

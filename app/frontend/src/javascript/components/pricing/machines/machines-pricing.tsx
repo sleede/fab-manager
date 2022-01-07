@@ -1,25 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
-import { Loader } from '../base/loader';
-import { FabAlert } from '../base/fab-alert';
-import { HtmlTranslate } from '../base/html-translate';
-import MachineAPI from '../../api/machine';
-import GroupAPI from '../../api/group';
-import { IFablab } from '../../models/fablab';
-import { Machine } from '../../models/machine';
-import { Group } from '../../models/group';
-import { IApplication } from '../../models/application';
-import { EditablePrice } from './editable-price';
+import { Loader } from '../../base/loader';
+import { FabAlert } from '../../base/fab-alert';
+import { HtmlTranslate } from '../../base/html-translate';
+import MachineAPI from '../../../api/machine';
+import GroupAPI from '../../../api/group';
+import { Machine } from '../../../models/machine';
+import { Group } from '../../../models/group';
+import { IApplication } from '../../../models/application';
+import { EditablePrice } from '../editable-price';
 import { ConfigurePacksButton } from './configure-packs-button';
-import PriceAPI from '../../api/price';
-import { Price } from '../../models/price';
-import PrepaidPackAPI from '../../api/prepaid-pack';
-import { PrepaidPack } from '../../models/prepaid-pack';
+import PriceAPI from '../../../api/price';
+import { Price } from '../../../models/price';
+import PrepaidPackAPI from '../../../api/prepaid-pack';
+import { PrepaidPack } from '../../../models/prepaid-pack';
 import { useImmer } from 'use-immer';
-import FormatLib from '../../lib/format';
+import FormatLib from '../../../lib/format';
 
-declare let Fablab: IFablab;
 declare const Application: IApplication;
 
 interface MachinesPricingProps {

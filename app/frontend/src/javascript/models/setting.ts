@@ -20,6 +20,11 @@ export enum SettingName {
   InvoiceOrderNb = 'invoice_order-nb',
   InvoiceVATActive = 'invoice_VAT-active',
   InvoiceVATRate = 'invoice_VAT-rate',
+  InvoiceVATRateMachine = 'invoice_VAT-rate_Machine',
+  InvoiceVATRateTraining = 'invoice_VAT-rate_Training',
+  InvoiceVATRateSpace = 'invoice_VAT-rate_Space',
+  InvoiceVATRateEvent = 'invoice_VAT-rate_Event',
+  InvoiceVATRateSubscription = 'invoice_VAT-rate_Subscription',
   InvoiceText = 'invoice_text',
   InvoiceLegals = 'invoice_legals',
   BookingWindowStart = 'booking_window_start',
@@ -111,7 +116,9 @@ export enum SettingName {
   PublicAgendaModule = 'public_agenda_module',
   RenewPackThreshold = 'renew_pack_threshold',
   PackOnlyForSubscription = 'pack_only_for_subscription',
-  OverlappingCategories = 'overlapping_categories'
+  OverlappingCategories = 'overlapping_categories',
+  ExtendedPricesInSameDay = 'extended_prices_in_same_day',
+  PublicRegistrations = 'public_registrations'
 }
 
 export type SettingValue = string|boolean|number;

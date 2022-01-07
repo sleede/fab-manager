@@ -37,6 +37,7 @@ fr:
       end_before_start: "La date de fin ne peut pas être antérieure à la date de début. Choisissez une date après le %{START}"
       invalid_duration: "La durée doit être comprise entre 1 jour et 1 an. Votre période dure %{DAYS} jours."
       must_be_in_the_past: "La période doit être strictement antérieure à la date du jour."
+      registration_disabled: "L'inscription est désactivée"
   apipie:
     api_documentation: "Documentation de l'API"
     code: "Code HTTP "
@@ -90,7 +91,7 @@ fr:
       other: "%{count} places %{NAME}"
     coupon_CODE_discount_of_DISCOUNT: "Code {CODE} : remise de {DISCOUNT} {TYPE, select, percent_off{%} other{}}" #messageFormat interpolation
     total_including_all_taxes: "Total TTC"
-    including_VAT_RATE: "Dont TVA %{RATE}%"
+    including_VAT_RATE: "Dont TVA %{RATE} % de %{AMOUNT}"
     including_total_excluding_taxes: "Dont total HT"
     including_amount_payed_on_ordering: "Dont montant payé à la commande"
     total_amount: "Montant total"
@@ -125,7 +126,7 @@ fr:
     deadline_date: "Date du prélèvement"
     deadline_amount: "Montant TTC"
     total_amount: "Montant total"
-    settlement_by_METHOD: "Les prélèvements seront effectués par {METHOD, select, card{carte bancaire} other{chèque}} à l'échéance."
+    settlement_by_METHOD: "Les prélèvements seront effectués par {METHOD, select, card{carte bancaire} transfer{prélèvement bancaire} other{chèque}} à l'échéance."
     settlement_by_wallet: "%{AMOUNT} seront prélevés de votre porte-monnaie pour régler la première échéance."
   #CVS accounting export (columns headers)
   accounting_export:
@@ -147,6 +148,11 @@ fr:
     Event_reservation: "réserv. événement"
     Space_reservation: "réserv. espace"
     wallet: "porte-monnaie"
+  vat_export:
+    start_date: "Date de début"
+    end_date: "Date de fin"
+    vat_rate: "Taux de TVA"
+    amount: "Montant total"
   #training availabilities
   trainings:
     i_ve_reserved: "J'ai réservé"
@@ -331,6 +337,7 @@ fr:
         users_reservations: "de la liste des réservations"
         availabilities_index: "des disponibilités de réservations"
         accounting_acd: "des données comptables pour ACD"
+        accounting_vat: "de la TVA collectée"
         is_over: "est terminé."
         download_here: "Téléchargez ici"
       notify_admin_import_complete:
@@ -366,6 +373,8 @@ fr:
         schedule_failed: "Échec du prélèvement par carte de l'échéance du %{DATE}, pour votre échéancier %{REFERENCE}"
       notify_admin_payment_schedule_check_deadline:
         schedule_deadline: "Vous devez encaisser le chèque de l'échéance du %{DATE}, pour l'échéancier %{REFERENCE}"
+      notify_admin_payment_schedule_transfer_deadline:
+        schedule_deadline: "Vous devez confirmer le prélèvement bancaire pour l'échéance du %{DATE} , pour l'échéancier %{REFERENCE}"
   #statistics tools for admins
   statistics:
     subscriptions: "Abonnements"
@@ -535,3 +544,5 @@ fr:
     renew_pack_threshold: "Seuil de renouvellement des packs"
     pack_only_for_subscription: "Restreindre les packs pour les abonnés"
     overlapping_categories: "Catégories pour la prévention du chevauchement des réservations"
+    extended_prices_in_same_day: "Prix étendus le même jour"
+    public_registrations: "Inscriptions publiques"

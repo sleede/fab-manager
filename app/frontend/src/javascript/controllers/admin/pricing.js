@@ -461,7 +461,7 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
      */
     $scope.findPriceBy = function (prices, machineId, groupId) {
       for (const price of Array.from(prices)) {
-        if ((price.priceable_id === machineId) && (price.group_id === groupId)) {
+        if ((price.priceable_id === machineId) && (price.group_id === groupId) && (price.duration === 60)) {
           return price;
         }
       }

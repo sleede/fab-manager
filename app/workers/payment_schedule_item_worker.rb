@@ -22,8 +22,8 @@ class PaymentScheduleItemWorker
       ### Cards
       PaymentGatewayService.new.process_payment_schedule_item(psi)
     elsif psi.state == 'new'
-      ### Check (only new deadlines, to prevent spamming)
-      NotificationCenter.call type: 'notify_admin_payment_schedule_check_deadline',
+      ### Check/Bank transfer (only new deadlines, to prevent spamming)
+      NotificationCenter.call type: "notify_admin_payment_schedule_#{psi.payment_schedule.payment_method}_deadline",
                               receiver: User.admins_and_managers,
                               attached_object: psi
       psi.update_attributes(state: 'pending')

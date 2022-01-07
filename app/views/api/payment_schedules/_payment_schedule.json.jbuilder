@@ -18,13 +18,9 @@ json.main_object do
   json.id payment_schedule.main_object.object_id
 end
 if payment_schedule.gateway_subscription
-  json.gateway_subscription do
-    # this attribute is used to known which gateway should we interact with, in the front-end
-    json.classname payment_schedule.gateway_subscription.klass
-  end
+  # this attribute is used to known which gateway should we interact with, in the front-end
+  json.gateway json.classname payment_schedule.gateway_subscription.gateway
 end
 json.items payment_schedule.payment_schedule_items do |item|
-  json.extract! item, :id, :due_date, :state, :invoice_id, :payment_method
-  json.amount item.amount / 100.00
-  json.client_secret item.payment_intent.client_secret if item.payment_gateway_object && item.state == 'requires_action'
+  json.partial! 'api/payment_schedules/payment_schedule_item', item: item
 end

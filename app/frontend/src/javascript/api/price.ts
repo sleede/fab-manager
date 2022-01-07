@@ -14,8 +14,18 @@ export default class PriceAPI {
     return res?.data;
   }
 
+  static async create (price: Price): Promise<Price> {
+    const res: AxiosResponse<Price> = await apiClient.post('/api/prices', { price });
+    return res?.data;
+  }
+
   static async update (price: Price): Promise<Price> {
     const res: AxiosResponse<Price> = await apiClient.patch(`/api/prices/${price.id}`, { price });
+    return res?.data;
+  }
+
+  static async destroy (priceId: number): Promise<void> {
+    const res: AxiosResponse<void> = await apiClient.delete(`/api/prices/${priceId}`);
     return res?.data;
   }
 

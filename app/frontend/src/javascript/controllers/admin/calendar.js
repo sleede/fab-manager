@@ -407,10 +407,30 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
       // check if slot is not in the past
       const today = new Date();
       if (Math.trunc((start.valueOf() - today) / (60 * 1000)) < 0) {
-        growl.warning(_t('app.admin.calendar.event_in_the_past'));
-        return uiCalendarConfig.calendars.calendar.fullCalendar('unselect');
+        return dialogs.confirm({
+          resolve: {
+            object () {
+              return {
+                title: _t('app.admin.calendar.event_in_the_past'),
+                msg: _t('app.admin.calendar.confirm_create_event_in_the_past')
+              };
+            }
+          }
+        },
+        function () { // confirmed
+          startAvailabilityCreation(start, end);
+        }, function () { // canceled
+          uiCalendarConfig.calendars.calendar.fullCalendar('unselect');
+        });
       }
 
+      startAvailabilityCreation(start, end);
+    };
+
+    /**
+     * Start the process to create a new availability between the given start and end datetimes
+     */
+    const startAvailabilityCreation = function (start, end) {
       // check that the selected slot is an multiple of SLOT_MULTIPLE (ie. not decimal)
       const slots = Math.trunc((end.valueOf() - start.valueOf()) / (60 * 1000)) / SLOT_MULTIPLE;
       if (!Number.isInteger(slots)) {

@@ -1,5 +1,30 @@
 # Changelog Fab-manager
 
+- Ability to cancel a payement schedule from the interface
+- Ability to create slots in the past
+- Ability to disable public account creation
+- Ability to select "bank transfer" as the payment mean for a payment schedule
+- When a payment schedule was canceled by the payment gateway, inform the user in the interface
+- Updated caniuse db
+- Optimized the load time of the payment schedules list
+- Fix a bug: do not load Stripe if no keys were defined
+- [TODO DEPLOY] `rails db:seed`
+
+# v5.3.0 2021 December 29
+
+- Ability to configure multiple VAT rates, per kind of invoiced item
+- Ability to export the collected VAT, by rates, to a CSV file
+- Refactored the extended prices' frontend code to allow future customization
+- Fix a bug: the amount label in not correctly shown in the extended prices modal 
+- Fix a bug: `extended_prices_in_same_day` apply the extended prices to each day
+
+## v5.2.0 2021 December 23
+
+- Ability to configure prices for spaces, by time slots different from the default hourly rate
+- Updated portuguese translation
+- Refactored the ReserveButton component to use the same user's data across all the component
+- First optimization the load time of the payment schedules list
+
 ## v5.1.13 2021 November 16
 
 - Fix a bug: unable to run the setup/upgrade scripts as root
@@ -12,21 +37,21 @@
 ## v5.1.11 2021 October 22
 
 - Refactored subscription new/renew/free extend interfaces and API
-- Ability to configure data sources for preventing booking on overlapping slots
-- Updated production documentation
-- Updated SSO documentation
-- Improved stripe subscription process with better error handling
+- Ability to configure the data sources of the booking prevention on overlapping slots
+- Updated the production documentation
+- Updated the SSO documentation
+- Improved the stripe subscription process with better error handling
 - The upgrade script will check and report the ability to access the hub API
-- Fix a bug: canceled training reservation is not marked as this in admin/edit members/trainings
+- Fix a bug: canceled training reservation is not marked as this in admin > edit members > trainings
 - Fix a bug: users can set their birthdate in the future
-- Fix a bug: the upgrade script won't add environment variables that are already present anymore
+- Fix a bug: the upgrade script won't add anymore the environment variables that are already present
 - Fix a bug: admin cannot take or renew a subscription for a member from member/edit interface
 - Fix a bug: missing translations
 - Fix a bug: the upgrade script report an invalid version to upgrade to
-- Fix a bug: invalid amount provided to the PayZen payment gateway when using a currency with anything else than 2 decimals
+- Fix a bug: invalid amount provided to the PayZen payment gateway, when using a 0-decimal or a 3-decimal currency
 - Fix a bug: incorrect behavior for the setting "email confirmation required"
 - Fix a bug: invalid text shown when a member confirms a free cart
-- Fix a bug: 3DS confirmation is not asked when an admin is subscribing a user through a payment schedule using PayZen
+- Fix a bug: 3DS confirmation is not asked when an admin is subscribing a user through a payment schedule, using PayZen
 - Updated @rails/webpacker to 5.4.3
 - Updated react-refresh-webpack-plugin to 0.5.1
 - Updated react-refresh to 0.10.0
@@ -41,17 +66,17 @@
 
 ## v5.1.10 2021 October 04
 
-- Fix a bug: the image of the about page is not using the image set in backoffice
+- Fix a bug: the image of the about page is not using the image set in the backoffice
 - Fix a bug: updated sassc to 2.4.0 to fix ruby runtime error on some CPU architectures (#270)
 - Fix a security issue: prevent HTML code edition in projects, to prevent XSS vulnerability (#293)
-- Fix a bug : cover image doesn't display in profile
-- Fix a bug : it redirects to home when we delete a machine record photo
+- Fix a bug: cover image doesn't display in profile
+- Fix a bug: fab-manager redirects to the home page when we delete a machine photo
 
 ## v5.1.9 2021 September 21
 
-- Add a setting for the purchase and use of a prepaid pack is only possible for the user with a valid subscription
-- Fix a bug: unable to show plan name in calendar reservations
-- Fix a bug: book overlapping slot setting label name
+- Add a setting to restrict the purchase and use of a prepaid pack to users with a valid subscription
+- Fix a bug: unable to view the plans names in the reservation calendar
+- Fix a bug: label name of the book overlapping slot setting
 
 ## v5.1.8 2021 September 13
 
@@ -266,7 +291,11 @@
 - [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
 - [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/rename-adminsys.sh | bash`
 
-## v4.7.13 2020 June 11
+## v4.7.14 2021 September 30
+
+- Fix a bug: updated sassc to 2.4.0 to fix ruby runtime error on some CPU architectures
+
+## v4.7.13 2021 June 11
 
 - Fix a bug: unable to process stripe payments with 3DS authentication
 

@@ -7,12 +7,12 @@
         <nav class="nav-primary hidden-xs">
           <ul class="nav nav-main m-t-xs" data-ride="collapse">
             <!-- Disconnected user menu for small devices -->
-            <li class="hidden-sm hidden-md hidden-lg" ng-if-start="!isAuthenticated()">
+            <li class="hidden-sm hidden-md hidden-lg" ng-if="!isAuthenticated() && registrationEnabled()">
               <a class="auto pointer" ng-click="signup($event)">
                   <i class="fa fa-rocket"></i> <span translate>{{ 'app.public.common.sign_up' }}</span>
               </a>
             </li>
-            <li class="hidden-sm hidden-md hidden-lg" ng-if-end>
+            <li class="hidden-sm hidden-md hidden-lg" ng-if="!isAuthenticated()">
               <a class="auto pointer" ng-click="login($event)">
                   <i class="fa fa-sign-in"></i> <span translate>{{ 'app.public.common.sign_in' }}</span>
               </a>

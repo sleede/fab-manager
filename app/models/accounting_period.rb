@@ -34,7 +34,12 @@ class AccountingPeriod < ApplicationRecord
   def invoices_with_vat(invoices)
     vat_service = VatHistoryService.new
     invoices.map do |i|
-      { invoice: i, vat_rate: vat_service.invoice_vat(i) / 100.0 }
+      vat_rate_group = {}
+      i.invoice_items.each do |item|
+        vat_type = item.invoice_item_type
+        vat_rate_group[vat_type] = vat_service.invoice_item_vat(item) / 100.0 unless vat_rate_group[vat_type]
+      end
+      { invoice: i, vat_rate: vat_rate_group }
     end
   end
 
@@ -70,7 +75,7 @@ class AccountingPeriod < ApplicationRecord
   end
 
   def price_without_taxe(invoice)
-    invoice[:invoice].total - (invoice[:invoice].total * invoice[:vat_rate])
+    invoice[:invoice].invoice_items.map(&:net_amount).sum
   end
 
   def compute_totals

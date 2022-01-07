@@ -28,6 +28,11 @@ class Setting < ApplicationRecord
                              invoice_order-nb
                              invoice_VAT-active
                              invoice_VAT-rate
+                             invoice_VAT-rate_Machine
+                             invoice_VAT-rate_Training
+                             invoice_VAT-rate_Space
+                             invoice_VAT-rate_Event
+                             invoice_VAT-rate_Subscription
                              invoice_text
                              invoice_legals
                              booking_window_start
@@ -121,7 +126,9 @@ class Setting < ApplicationRecord
                              public_agenda_module
                              renew_pack_threshold
                              pack_only_for_subscription
-                             overlapping_categories] }
+                             overlapping_categories
+                             extended_prices_in_same_day
+                             public_registrations] }
   # WARNING: when adding a new key, you may also want to add it in:
   # - config/locales/en.yml#settings
   # - app/frontend/src/javascript/models/setting.ts#SettingName

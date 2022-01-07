@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { FabModal } from '../base/fab-modal';
+import { FabModal } from '../../base/fab-modal';
 import { PackForm } from './pack-form';
-import { PrepaidPack } from '../../models/prepaid-pack';
-import PrepaidPackAPI from '../../api/prepaid-pack';
+import { PrepaidPack } from '../../../models/prepaid-pack';
+import PrepaidPackAPI from '../../../api/prepaid-pack';
 import { useTranslation } from 'react-i18next';
-import { FabAlert } from '../base/fab-alert';
+import { FabAlert } from '../../base/fab-alert';
 
 interface CreatePackProps {
   onSuccess: (message: string) => void,

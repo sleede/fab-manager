@@ -901,9 +901,13 @@ Setting.set('renew_pack_threshold', 0.2) unless Setting.find_by(name: 'renew_pac
 
 Setting.set('pack_only_for_subscription', true) unless Setting.find_by(name: 'pack_only_for_subscription').try(:value)
 
+Setting.set('public_registrations', true) unless Setting.find_by(name: 'public_registrations').try(:value)
+
 unless Setting.find_by(name: 'overlapping_categories').try(:value)
   Setting.set('overlapping_categories', 'training_reservations,machine_reservations,space_reservations,events_reservations')
 end
+
+Setting.set('extended_prices_in_same_day', false) unless Setting.find_by(name: 'extended_prices_in_same_day').try(:value)
 
 if StatisticCustomAggregation.count.zero?
   # available reservations hours for machines

@@ -58,6 +58,7 @@ class NotificationType
     notify_admin_payment_schedule_failed
     notify_member_payment_schedule_failed
     notify_admin_payment_schedule_check_deadline
+    notify_admin_payment_schedule_transfer_deadline
   ]
   # deprecated:
   # - notify_member_subscribed_plan_is_changed

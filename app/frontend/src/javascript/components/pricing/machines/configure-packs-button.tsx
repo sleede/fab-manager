@@ -1,12 +1,12 @@
 import React, { ReactNode, useState } from 'react';
-import { PrepaidPack } from '../../models/prepaid-pack';
+import { PrepaidPack } from '../../../models/prepaid-pack';
 import { useTranslation } from 'react-i18next';
-import { FabPopover } from '../base/fab-popover';
+import { FabPopover } from '../../base/fab-popover';
 import { CreatePack } from './create-pack';
-import PrepaidPackAPI from '../../api/prepaid-pack';
+import PrepaidPackAPI from '../../../api/prepaid-pack';
 import { DeletePack } from './delete-pack';
 import { EditPack } from './edit-pack';
-import FormatLib from '../../lib/format';
+import FormatLib from '../../../lib/format';
 
 interface ConfigurePacksButtonProps {
   packsData: Array<PrepaidPack>,

@@ -1,9 +1,9 @@
-.configure-packs-button {
+.configure-extended-prices-button {
   display: inline-block;
   margin-left: 6px;
   position: relative;
 
-  .packs-button {
+  .extended-prices-button {
     border: 1px solid #d0cccc;
     border-radius: 50%;
     cursor: pointer;
@@ -16,13 +16,6 @@
     &:hover  {
       background-color: #b9b9b9;
       color: white;
-    }
-  }
-  .popover-title {
-    .add-pack-button {
-      position: absolute;
-      right: 5px;
-      top: 10px;
     }
   }
 
@@ -44,16 +37,11 @@
           line-height: 24px;
         }
 
-        .pack-actions button {
+        .extended-prices-actions button {
           font-size: 10px;
           vertical-align: middle;
           line-height: 10px;
           height: auto;
-        }
-
-        &.disabled {
-          background-color: #eeeeee;
-          color: #999999;
         }
       }
     }

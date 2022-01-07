@@ -34,7 +34,7 @@ json.invoices do
         json.id item.object_id
         json.main item.main
       end
-      json.partial! 'archive/vat', price: item.amount, vat_rate: invoice[:vat_rate]
+      json.partial! 'archive/vat', price: item.amount, vat_rate: invoice[:vat_rate][item.invoice_item_type]
     end
   end
 end

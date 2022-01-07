@@ -28,7 +28,7 @@ class SettingPolicy < ApplicationPolicy
   end
 
   ##
-  # Every settings that anyone can read. The other settings are restricted for admins.
+  # List of settings that anyone can read. The other settings are restricted for admins.
   # This list must be manually updated if a new setting should be world-readable
   ##
   def self.public_whitelist
@@ -40,11 +40,11 @@ class SettingPolicy < ApplicationPolicy
        recaptcha_site_key feature_tour_display disqus_shortname allowed_cad_extensions openlab_app_id openlab_default
        online_payment_module stripe_public_key confirmation_required wallet_module trainings_module address_required
        payment_gateway payzen_endpoint payzen_public_key public_agenda_module renew_pack_threshold statistics_module
-       pack_only_for_subscription overlapping_categories]
+       pack_only_for_subscription overlapping_categories public_registrations]
   end
 
   ##
-  # Every settings that only admins can read.
+  # List of settings that only admins can read.
   # This blacklist is automatically generated from the public_whitelist above.
   ##
   def self.public_blacklist

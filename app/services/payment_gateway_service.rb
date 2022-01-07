@@ -23,6 +23,11 @@ class PaymentGatewayService
     @gateway.create_subscription(payment_schedule, *args)
   end
 
+  def cancel_subscription(payment_schedule)
+    gateway = service_for_payment_schedule(payment_schedule)
+    gateway.cancel_subscription(payment_schedule)
+  end
+
   def create_user(user_id)
     @gateway.create_user(user_id)
   end
@@ -52,7 +57,7 @@ class PaymentGatewayService
   private
 
   def service_for_payment_schedule(payment_schedule)
-    service = case payment_schedule.gateway_subscription.klass
+    service = case payment_schedule.gateway_subscription&.klass
               when /^PayZen::/
                 require 'pay_zen/service'
                 PayZen::Service

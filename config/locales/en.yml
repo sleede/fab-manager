@@ -37,6 +37,7 @@ en:
       end_before_start: "The end date can't be before the start date. Pick a date after %{START}"
       invalid_duration: "The allowed duration must be between 1 day and 1 year. Your period is %{DAYS} days long."
       must_be_in_the_past: "The period must be strictly prior to today's date."
+      registration_disabled: "Registration is disabled"
   apipie:
     api_documentation: "API Documentation"
     code: "HTTP code"
@@ -90,7 +91,7 @@ en:
       other: "%{count} %{NAME} tickets"
     coupon_CODE_discount_of_DISCOUNT: "Coupon {CODE}: discount of {DISCOUNT}{TYPE, select, percent_off{%} other{}}"  #messageFormat interpolation
     total_including_all_taxes: "Total incl. all taxes"
-    including_VAT_RATE: "Including VAT %{RATE}%"
+    including_VAT_RATE: "Including VAT %{RATE}% of %{AMOUNT}"
     including_total_excluding_taxes: "Including Total excl. taxes"
     including_amount_payed_on_ordering: "Including amount payed on ordering"
     total_amount: "Total amount"
@@ -125,7 +126,7 @@ en:
     deadline_date: "Payment date"
     deadline_amount: "Amount including tax"
     total_amount: "Total amount"
-    settlement_by_METHOD: "Debits will be made by {METHOD, select, card{card} other{check}} for each deadlines."
+    settlement_by_METHOD: "Debits will be made by {METHOD, select, card{card} transfer{bank transfer} other{check}} for each deadlines."
     settlement_by_wallet: "%{AMOUNT} will be debited from your wallet to settle the first deadline."
   # CVS accounting export (columns headers)
   accounting_export:
@@ -147,6 +148,11 @@ en:
     Event_reservation: "event reserv."
     Space_reservation: "space reserv."
     wallet: "wallet"
+  vat_export:
+    start_date: "Start date"
+    end_date: "End date"
+    vat_rate: "VAT rate"
+    amount: "Total amount"
   #training availabilities
   trainings:
     i_ve_reserved: "I've reserved"
@@ -331,6 +337,7 @@ en:
         users_reservations: "of the reservations' list"
         availabilities_index: "of the reservations availabilities"
         accounting_acd: "of the accounting data to ACD"
+        accounting_vat: "of the collected VAT"
         is_over: "is over."
         download_here: "Download here"
       notify_admin_import_complete:
@@ -366,6 +373,8 @@ en:
         schedule_failed: "Failed card debit for the %{DATE} deadline, for your schedule %{REFERENCE}"
       notify_admin_payment_schedule_check_deadline:
         schedule_deadline: "You must cash the check for the %{DATE} deadline, for schedule %{REFERENCE}"
+      notify_admin_payment_schedule_transfer_deadline:
+        schedule_deadline: "You must confirm the bank direct debit for the %{DATE} deadline, for schedule %{REFERENCE}"
   #statistics tools for admins
   statistics:
     subscriptions: "Subscriptions"
@@ -535,3 +544,5 @@ en:
     renew_pack_threshold: "Threshold for packs renewal"
     pack_only_for_subscription: "Restrict packs for subscribers"
     overlapping_categories: "Categories for overlapping booking prevention"
+    extended_prices_in_same_day: "Extended prices in the same day"
+    public_registrations: "Public registrations"

@@ -43,6 +43,15 @@ class Stripe::Service < Payment::Service
     pgo.save!
   end
 
+  def cancel_subscription(payment_schedule)
+    stripe_key = Setting.get('stripe_secret_key')
+
+    stp_subscription = payment_schedule.gateway_subscription.retrieve
+
+    res = Stripe::Subscription.delete(stp_subscription.id, {}, api_key: stripe_key)
+    res.status == 'canceled'
+  end
+
   def create_user(user_id)
     StripeWorker.perform_async(:create_stripe_customer, user_id)
   end
@@ -85,6 +94,11 @@ class Stripe::Service < Payment::Service
   def process_payment_schedule_item(payment_schedule_item)
     stripe_key = Setting.get('stripe_secret_key')
     stp_subscription = payment_schedule_item.payment_schedule.gateway_subscription.retrieve
+    if stp_subscription.status == 'canceled'
+      # the subscription was canceled by the gateway => update the status
+      payment_schedule_item.update_attributes(state: 'gateway_canceled')
+      return
+    end
     stp_invoice = Stripe::Invoice.retrieve(stp_subscription.latest_invoice, api_key: stripe_key)
     if stp_invoice.status == 'paid'
       ##### Successfully paid

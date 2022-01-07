@@ -35,7 +35,7 @@ const EditPlanCategoryComponent: React.FC<EditPlanCategoryProps> = ({ onSuccess,
 
   /**
    * The edit has been confirmed by the user.
-   * Call the API to trigger the update of the temporary set plan-category
+   * Call the API to trigger the update of the temporary set plan-category.
    */
   const onEditConfirmed = (): void => {
     PlanCategoryAPI.update(tempCategory).then((updatedCategory) => {

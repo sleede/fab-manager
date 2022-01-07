@@ -37,6 +37,7 @@ zu:
       end_before_start: "crwdns3205:0%{START}crwdne3205:0"
       invalid_duration: "crwdns3207:0%{DAYS}crwdne3207:0"
       must_be_in_the_past: "crwdns3209:0crwdne3209:0"
+      registration_disabled: "crwdns22285:0crwdne22285:0"
   apipie:
     api_documentation: "crwdns3257:0crwdne3257:0"
     code: "crwdns20914:0crwdne20914:0"
@@ -90,7 +91,7 @@ zu:
       other: "crwdns3327:5%{count}crwdnd3327:5%{NAME}crwdne3327:5"
     coupon_CODE_discount_of_DISCOUNT: "crwdns3331:0CODE={CODE}crwdnd3331:0DISCOUNT={DISCOUNT}crwdnd3331:0TYPE={TYPE}crwdne3331:0" #messageFormat interpolation
     total_including_all_taxes: "crwdns3333:0crwdne3333:0"
-    including_VAT_RATE: "crwdns3335:0%{RATE}crwdne3335:0"
+    including_VAT_RATE: "crwdns22257:0%{RATE}crwdnd22257:0%{AMOUNT}crwdne22257:0"
     including_total_excluding_taxes: "crwdns3337:0crwdne3337:0"
     including_amount_payed_on_ordering: "crwdns3339:0crwdne3339:0"
     total_amount: "crwdns3341:0crwdne3341:0"
@@ -125,7 +126,7 @@ zu:
     deadline_date: "crwdns21104:0crwdne21104:0"
     deadline_amount: "crwdns21106:0crwdne21106:0"
     total_amount: "crwdns21108:0crwdne21108:0"
-    settlement_by_METHOD: "crwdns21570:0METHOD={METHOD}crwdne21570:0"
+    settlement_by_METHOD: "crwdns22303:0METHOD={METHOD}crwdne22303:0"
     settlement_by_wallet: "crwdns21112:0%{AMOUNT}crwdne21112:0"
   #CVS accounting export (columns headers)
   accounting_export:
@@ -147,6 +148,11 @@ zu:
     Event_reservation: "crwdns3407:0crwdne3407:0"
     Space_reservation: "crwdns3409:0crwdne3409:0"
     wallet: "crwdns3411:0crwdne3411:0"
+  vat_export:
+    start_date: "crwdns22259:0crwdne22259:0"
+    end_date: "crwdns22261:0crwdne22261:0"
+    vat_rate: "crwdns22263:0crwdne22263:0"
+    amount: "crwdns22265:0crwdne22265:0"
   #training availabilities
   trainings:
     i_ve_reserved: "crwdns3413:0crwdne3413:0"
@@ -331,6 +337,7 @@ zu:
         users_reservations: "crwdns3657:0crwdne3657:0"
         availabilities_index: "crwdns3659:0crwdne3659:0"
         accounting_acd: "crwdns3661:0crwdne3661:0"
+        accounting_vat: "crwdns22267:0crwdne22267:0"
         is_over: "crwdns3663:0crwdne3663:0"
         download_here: "crwdns3665:0crwdne3665:0"
       notify_admin_import_complete:
@@ -366,6 +373,8 @@ zu:
         schedule_failed: "crwdns21118:0%{DATE}crwdnd21118:0%{REFERENCE}crwdne21118:0"
       notify_admin_payment_schedule_check_deadline:
         schedule_deadline: "crwdns21120:0%{DATE}crwdnd21120:0%{REFERENCE}crwdne21120:0"
+      notify_admin_payment_schedule_transfer_deadline:
+        schedule_deadline: "crwdns22305:0%{DATE}crwdnd22305:0%{REFERENCE}crwdne22305:0"
   #statistics tools for admins
   statistics:
     subscriptions: "crwdns3689:0crwdne3689:0"
@@ -535,3 +544,5 @@ zu:
     renew_pack_threshold: "crwdns22032:0crwdne22032:0"
     pack_only_for_subscription: "crwdns22093:0crwdne22093:0"
     overlapping_categories: "crwdns22129:0crwdne22129:0"
+    extended_prices_in_same_day: "crwdns22173:0crwdne22173:0"
+    public_registrations: "crwdns22287:0crwdne22287:0"

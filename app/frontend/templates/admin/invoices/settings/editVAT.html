@@ -22,6 +22,12 @@
         <input id="vatRate" type="number" ng-model="rate" class="form-control" min="0" max="100"/>
       </div>
     </div>
+    <uib-alert type="warning" ng-show="isSelected">
+      <p class="text-sm">
+        <i class="fa fa-warning"></i>
+        <span>{{ 'app.admin.invoices.VAT_notice' | translate }}</span>
+      </p>
+    </uib-alert>
 
     <div class="m-t-lg">
       <h4 translate>{{ 'app.admin.invoices.VAT_history' }}</h4>
@@ -48,6 +54,7 @@
     </div>
   </div>
   <div class="modal-footer">
+    <button class="btn btn-warning pull-left" ng-click="editMultiVAT()" ng-show="isSelected" translate>{{ 'app.admin.invoices.edit_multi_VAT_button' }}</button>
     <button class="btn btn-warning" ng-click="ok()" translate>{{ 'app.shared.buttons.confirm' }}</button>
     <button class="btn btn-default" ng-click="cancel()" translate>{{ 'app.shared.buttons.cancel' }}</button>
   </div>
