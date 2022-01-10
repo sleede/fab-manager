@@ -6,6 +6,9 @@
 - Ability to select "bank transfer" as the payment mean for a payment schedule
 - When a payment schedule was canceled by the payment gateway, inform the user in the interface
 - Updated caniuse db
+- Fix card image ratio
+- Update events heading style
+- Update some icons
 - Optimized the load time of the payment schedules list
 - Fix a bug: do not load Stripe if no keys were defined
 - [TODO DEPLOY] `rails db:seed`
