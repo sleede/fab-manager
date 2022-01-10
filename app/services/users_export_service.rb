@@ -26,7 +26,7 @@ class UsersExportService
 
     content = av.render template: 'exports/users_subscriptions.xlsx.axlsx'
     # write content to file
-    File.open(export.file, 'w+b') { |f| f.puts content }
+    File.open(export.file, 'w+b') { |f| f.write content }
   end
 
   # export reservations
@@ -44,7 +44,7 @@ class UsersExportService
 
     content = av.render template: 'exports/users_reservations.xlsx.axlsx'
     # write content to file
-    File.open(export.file, 'w+b') { |f| f.puts content }
+    File.open(export.file, 'w+b') { |f| f.write content }
   end
 
   # export members
@@ -65,7 +65,7 @@ class UsersExportService
 
     content = av.render template: 'exports/users_members.xlsx.axlsx'
     # write content to file
-    File.open(export.file, 'w+b') { |f| f.puts content }
+    File.open(export.file, 'w+b') { |f| f.write content }
   end
 
 end
