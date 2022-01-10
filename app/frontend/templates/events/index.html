@@ -43,45 +43,37 @@
     <div ng-repeat="month in monthOrder">
       <h1>{{monthNames[month.split(',')[0] - 1]}}, {{month.split(',')[1]}}</h1>
 
-      <div class="row" ng-repeat="event in (eventsGroupByMonth[month].length/3 | array)">
+      <div class="month-events-list" ng-repeat="event in (eventsGroupByMonth[month].length/3 | array)">
+        <a class="Event" ng-repeat="event in eventsGroupByMonth[month].slice(3*$index, 3*$index + 3)" ui-sref="app.public.events_show({id: event.id})">
+          <div class="Event-desc"> 
+            <h5 class="text-xs m-t-n">{{event.category.name}}</h5>
+            <h4 class="m-n text-sm clear l-n">{{event.title}}</h4>
+            <h3 class="m-n" ng-show="onSingleDay(event)">{{event.start_date | amDateFormat:'L'}}</h3>
+            <h3 class="m-n" ng-hide="onSingleDay(event)">{{event.start_date | amDateFormat:'L'}} <span class="text-sm font-thin" translate> {{ 'app.public.events_list.to_date' }} </span> {{event.end_date | amDateFormat:'L'}}</h3>
 
-        <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="event in eventsGroupByMonth[month].slice(3*$index, 3*$index + 3)" ng-click="showEvent(event)">
+            <h6 class="m-n" ng-if="!event.amount" translate>{{ 'app.public.events_list.free_admission' }}</h6>
+            <h6 class="m-n" ng-if="event.amount">{{ 'app.public.events_list.full_price_' | translate }} {{event.amount | currency}} <span ng-repeat="price in event.prices">/ {{ price.category.name }} {{price.amount | currency}}</span></h6>
 
-
-          <a class="block bg-white img-full p-sm p-l-m box-h-m event b b-light-dark m-t-sm" ui-sref="app.public.events_show({id: event.id})">
-            <div class="pull-left half-w m-t-n-sm">
-              <h5 class="text-xs">{{event.category.name}}</h5>
-              <h4 class="m-n text-sm clear l-n">{{event.title}}</h4>
-              <h3 class="m-n" ng-show="onSingleDay(event)">{{event.start_date | amDateFormat:'L'}}</h3>
-              <h3 class="m-n" ng-hide="onSingleDay(event)">{{event.start_date | amDateFormat:'L'}} <span class="text-sm font-thin" translate> {{ 'app.public.events_list.to_date' }} </span> {{event.end_date | amDateFormat:'L'}}</h3>
-
-              <h6 class="m-n" ng-if="!event.amount" translate>{{ 'app.public.events_list.free_admission' }}</h6>
-              <h6 class="m-n" ng-if="event.amount">{{ 'app.public.events_list.full_price_' | translate }} {{event.amount | currency}} <span ng-repeat="price in event.prices">/ {{ price.category.name }} {{price.amount | currency}}</span></h6>
-
-              <div>
-                <span class="text-black-light text-xs m-r-xs" ng-repeat="theme in event.event_themes">
-                  <i class="fa fa-tags" aria-hidden="true"></i> {{theme.name}}
-                </span>
-                <span class="text-black-light text-xs" ng-if="event.age_range"><i class="fa fa-users" aria-hidden="true"></i> {{event.age_range.name}}</span>
-              </div>
-
-              <div>
-                <span class="text-black-light text-xs" ng-if="event.nb_free_places > 0">{{event.nb_free_places}} {{ 'app.public.events_list.still_available' | translate }}</span>
-                <span class="text-black-light text-xs" ng-if="event.nb_total_places > 0 && event.nb_free_places <= 0" translate>{{ 'app.public.events_list.sold_out' }}</span>
-                <span class="text-black-light text-xs" ng-if="event.nb_total_places == -1" translate>{{ 'app.public.events_list.cancelled' }}</span>
-                <span class="text-black-light text-xs" ng-if="!event.nb_total_places" translate>{{ 'app.public.events_list.without_reservation' }}</span>
-              </div>
+            <div>
+              <span class="text-black-light text-xs m-r-xs" ng-repeat="theme in event.event_themes">
+                <i class="fa fa-tags" aria-hidden="true"></i> {{theme.name}}
+              </span>
+              <span class="text-black-light text-xs" ng-if="event.age_range"><i class="fa fa-users" aria-hidden="true"></i> {{event.age_range.name}}</span>
             </div>
 
-            <!-- Event Image -->
-            <div class="pull-right crop-155">
-              <img class="pull-right" ng-src="{{event.event_image_small}}" title="{{event.title}}" ng-if="event.event_image">
-              <img class="pull-right img-responsive" src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:'Font Awesome 5 Free'/icon" bs-holder ng-if="!event.event_image">
+            <div>
+              <span class="text-black-light text-xs" ng-if="event.nb_free_places > 0">{{event.nb_free_places}} {{ 'app.public.events_list.still_available' | translate }}</span>
+              <span class="text-black-light text-xs" ng-if="event.nb_total_places > 0 && event.nb_free_places <= 0" translate>{{ 'app.public.events_list.sold_out' }}</span>
+              <span class="text-black-light text-xs" ng-if="event.nb_total_places == -1" translate>{{ 'app.public.events_list.cancelled' }}</span>
+              <span class="text-black-light text-xs" ng-if="!event.nb_total_places" translate>{{ 'app.public.events_list.without_reservation' }}</span>
             </div>
+          </div>
 
-          </a>
-
-        </div>
+          <!-- Event Image -->
+          <div class="Event-picture" ng-if="event.event_image">
+            <img ng-src="{{event.event_image_small}}" title="{{event.title}}">
+          </div>
+        </a> 
       </div>
     </div>
 
