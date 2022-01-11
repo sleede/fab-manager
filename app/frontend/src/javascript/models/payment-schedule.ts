@@ -9,9 +9,11 @@ export enum PaymentScheduleItemState {
 }
 
 export enum PaymentMethod {
-  Stripe = 'stripe',
+  Card = 'card',
+  Transfer = 'transfer',
   Check = 'check'
 }
+
 export interface PaymentScheduleItem {
   id: number,
   amount: number,
@@ -27,7 +29,7 @@ export interface PaymentSchedule {
   id: number,
   total: number,
   reference: string,
-  payment_method: 'card' | 'transfer' | '',
+  payment_method: PaymentMethod,
   items: Array<PaymentScheduleItem>,
   created_at: Date,
   chained_footprint: boolean,

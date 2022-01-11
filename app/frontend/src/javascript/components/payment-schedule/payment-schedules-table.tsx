@@ -7,7 +7,12 @@ import { FabModal } from '../base/fab-modal';
 import { UpdateCardModal } from '../payment/update-card-modal';
 import { StripeElements } from '../payment/stripe/stripe-elements';
 import { User, UserRole } from '../../models/user';
-import { PaymentSchedule, PaymentScheduleItem, PaymentScheduleItemState } from '../../models/payment-schedule';
+import {
+  PaymentMethod,
+  PaymentSchedule,
+  PaymentScheduleItem,
+  PaymentScheduleItemState
+} from '../../models/payment-schedule';
 import PaymentScheduleAPI from '../../api/payment-schedule';
 import FormatLib from '../../lib/format';
 import { StripeConfirmModal } from '../payment/stripe/stripe-confirm-modal';
@@ -157,7 +162,7 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
         return downloadButton(TargetType.Invoice, item.invoice_id);
       case PaymentScheduleItemState.Pending:
         if (isPrivileged()) {
-          if (schedule.payment_method === 'transfer') {
+          if (schedule.payment_method === PaymentMethod.Transfer) {
             return (
               <FabButton onClick={handleConfirmTransferPayment(item)}
                 icon={<i className="fas fa-university"/>}>
@@ -199,7 +204,7 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
         }
         return cancelSubscriptionButton(schedule);
       case PaymentScheduleItemState.New:
-        if (!cardUpdateButton.get(schedule.id) && schedule.payment_method === 'card') {
+        if (!cardUpdateButton.get(schedule.id) && schedule.payment_method === PaymentMethod.Card) {
           cardUpdateButton.set(schedule.id, true);
           return (
             <span>

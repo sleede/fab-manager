@@ -75,6 +75,10 @@ class PaymentSchedule < PaymentDocument
     payment_schedule_items
   end
 
+  def self.columns_out_of_footprint
+    %w[payment_method]
+  end
+
   def post_save(*args)
     return unless payment_method == 'card'
 
