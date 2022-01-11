@@ -133,7 +133,7 @@
       <div class="panel-body">
         <div class="font-sbold text-u-c">{{ 'app.shared.cart.datetime_to_time' | translate:{START_DATETIME:(events.modifiable.start | amDateFormat:'LLLL'), END_TIME:(events.modifiable.end | amDateFormat:'LT') } }}</div>
       </div>
-      <div class="clear"><a class="pull-right m-b-sm text-u-l ng-scope m-r-sm" href="#" ng-click="cancelModifySlot($event)" translate>{{ 'app.shared.cart.cancel_my_modification' }}</a></div>
+      <div class="clear"><a class="pull-right m-b-sm text-u-l ng-scope m-r-sm" ng-click="cancelModifySlot($event)" translate>{{ 'app.shared.cart.cancel_my_modification' }}</a></div>
     </div>
 
     <div class="widget-content no-bg">
@@ -145,7 +145,7 @@
       <div class="panel-body">
         <div class="font-sbold text-u-c">{{ 'app.shared.cart.datetime_to_time' | translate:{START_DATETIME:(events.placable.start | amDateFormat:'LLLL'), END_TIME:(events.placable.end | amDateFormat:'LT') } }}</div>
       </div>
-      <div class="clear"><a class="pull-right m-b-sm text-u-l ng-scope m-r-sm" href="#" ng-click="removeSlotToPlace($event)" translate>{{ 'app.shared.cart.cancel_my_selection' }}</a></div>
+      <div class="clear"><a class="pull-right m-b-sm text-u-l ng-scope m-r-sm" ng-click="removeSlotToPlace($event)" translate>{{ 'app.shared.cart.cancel_my_selection' }}</a></div>
     </div>
 
     <div ng-if="events.placable && (events.modifiable.tags.length > 0 || events.placable.tags.length > 0)" ng-class="{'panel panel-danger bg-red': tagMissmatch()}">

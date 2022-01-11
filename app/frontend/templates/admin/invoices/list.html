@@ -37,13 +37,13 @@
       <thead>
       <tr>
         <th style="width:8%"></th>
-        <th style="width:14%"><a href="" ng-click="setOrderInvoice('reference')">{{ 'app.admin.invoices.invoice_num' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': orderInvoice=='reference', 'fa fa-sort-numeric-desc': orderInvoice=='-reference', 'fa fa-arrows-v': orderInvoice }"></i></a></th>
+        <th style="width:14%"><a ng-click="setOrderInvoice('reference')">{{ 'app.admin.invoices.invoice_num' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': orderInvoice=='reference', 'fa fa-sort-numeric-desc': orderInvoice=='-reference', 'fa fa-arrows-v': orderInvoice }"></i></a></th>
 
-        <th style="width:19%"><a href="" ng-click="setOrderInvoice('date')">{{ 'app.admin.invoices.date' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': orderInvoice=='date', 'fa fa-sort-numeric-desc': orderInvoice=='-date', 'fa fa-arrows-v': orderInvoice }"></i></a></th>
+        <th style="width:19%"><a ng-click="setOrderInvoice('date')">{{ 'app.admin.invoices.date' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': orderInvoice=='date', 'fa fa-sort-numeric-desc': orderInvoice=='-date', 'fa fa-arrows-v': orderInvoice }"></i></a></th>
 
-        <th style="width:9%"><a href="" ng-click="setOrderInvoice('total')"> {{ 'app.admin.invoices.price' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': orderInvoice=='total', 'fa fa-sort-numeric-desc': orderInvoice=='-total', 'fa fa-arrows-v': orderInvoice }"></i></a></th>
+        <th style="width:9%"><a ng-click="setOrderInvoice('total')"> {{ 'app.admin.invoices.price' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': orderInvoice=='total', 'fa fa-sort-numeric-desc': orderInvoice=='-total', 'fa fa-arrows-v': orderInvoice }"></i></a></th>
 
-        <th style="width:20%"><a href="" ng-click="setOrderInvoice('name')">{{ 'app.admin.invoices.customer' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderInvoice=='name', 'fa fa-sort-alpha-desc': orderInvoice=='-name', 'fa fa-arrows-v': orderInvoice }"></i></a></th>
+        <th style="width:20%"><a ng-click="setOrderInvoice('name')">{{ 'app.admin.invoices.customer' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderInvoice=='name', 'fa fa-sort-alpha-desc': orderInvoice=='-name', 'fa fa-arrows-v': orderInvoice }"></i></a></th>
 
         <th style="width:30%"></th>
       </tr>
@@ -64,7 +64,7 @@
         <td ng-if="invoice.is_avoir">{{ invoice.date | amDateFormat:'L' }}</td>
         <td>{{ invoice.total | currency}}</td>
         <td>
-          <a href="" ui-sref="app.admin.members_edit({id: invoice.user_id})" ng-show="invoice.user_id">{{ invoice.name }}</a>
+          <a ui-sref="app.admin.members_edit({id: invoice.user_id})" ng-show="invoice.user_id">{{ invoice.name }}</a>
           <span ng-hide="invoice.user_id">{{ invoice.name }}</span>
         <td>
           <div class="buttons">

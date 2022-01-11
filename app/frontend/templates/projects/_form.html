@@ -87,7 +87,7 @@
                   {{ 'app.shared.project.step_N' | translate:{ INDEX:step.step_nb } }}/{{totalSteps}} <i class="fa fa-caret-down" aria-hidden="true"></i>
                 </button>
                 <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-                  <li role="menuitem" ng-repeat="step_idx in intArray(1, totalSteps +1)"><a href="#" ng-click="changeStepIndex($event, step, step_idx)">{{ 'app.shared.project.step_N' | translate:{ INDEX:step_idx } }}</a></li>
+                  <li role="menuitem" ng-repeat="step_idx in intArray(1, totalSteps +1)"><a ng-click="changeStepIndex($event, step, step_idx)">{{ 'app.shared.project.step_N' | translate:{ INDEX:step_idx } }}</a></li>
                 </ul>
               </div>
               <span class="label label-warning m-t m-b"></span>

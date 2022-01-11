@@ -2,7 +2,7 @@
   <div class="row no-gutter b-b">
     <div class="col-xs-2 col-sm-2 col-md-1">
       <section class="heading-btn">
-        <a href="#" ng-click="backPrevLocation($event)"><i class="fas fa-long-arrow-alt-left "></i></a>
+        <a ng-click="backPrevLocation($event)"><i class="fas fa-long-arrow-alt-left "></i></a>
       </section>
     </div>
     <div class="col-xs-10 col-sm-10 col-md-8 b-l b-r-md">
@@ -45,7 +45,7 @@
 
       <div class="month-events-list" ng-repeat="event in (eventsGroupByMonth[month].length/3 | array)">
         <a class="Event" ng-repeat="event in eventsGroupByMonth[month].slice(3*$index, 3*$index + 3)" ui-sref="app.public.events_show({id: event.id})">
-          <div class="Event-desc"> 
+          <div class="Event-desc">
             <h5 class="text-xs m-t-n">{{event.category.name}}</h5>
             <h4 class="m-n text-sm clear l-n">{{event.title}}</h4>
             <h3 class="m-n" ng-show="onSingleDay(event)">{{event.start_date | amDateFormat:'L'}}</h3>
@@ -73,7 +73,7 @@
           <div class="Event-picture" ng-if="event.event_image">
             <img ng-src="{{event.event_image_small}}" title="{{event.title}}">
           </div>
-        </a> 
+        </a>
       </div>
     </div>
 

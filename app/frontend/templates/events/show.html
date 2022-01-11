@@ -5,7 +5,7 @@
   <div class="row no-gutter">
     <div class="col-xs-2 col-sm-2 col-md-1">
       <section class="heading-btn">
-        <a href="#" ng-click="backPrevLocation($event)"><i class="fas fa-long-arrow-alt-left "></i></a>
+        <a ng-click="backPrevLocation($event)"><i class="fas fa-long-arrow-alt-left "></i></a>
       </section>
     </div>
     <div class="col-xs-10 col-sm-10 col-md-8 b-l b-r-md">
@@ -147,7 +147,7 @@
           </div>
 
           <div class="clear">
-            <a class="pull-right m-t-xs text-u-l ng-scope" href="#" ng-click="cancelReserve($event)" ng-show="reserve.toReserve" translate>{{ 'app.shared.buttons.cancel' }}</a>
+            <a class="pull-right m-t-xs text-u-l ng-scope" ng-click="cancelReserve($event)" ng-show="reserve.toReserve" translate>{{ 'app.shared.buttons.cancel' }}</a>
           </div>
 
           <div ng-if="reserveSuccess" class="alert alert-success">{{ 'app.public.events_show.thank_you_your_payment_has_been_successfully_registered' | translate }}<br>

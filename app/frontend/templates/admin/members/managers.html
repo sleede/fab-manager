@@ -18,13 +18,13 @@
   <table class="table">
     <thead>
     <tr>
-      <th style="width:15%"><a href="" ng-click="setOrderManager('last_name')">{{ 'app.admin.members.surname' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderAdmin =='last_name', 'fa fa-sort-alpha-desc': orderAdmin =='-last_name', 'fa fa-arrows-v': orderAdmin  }"></i></a></th>
+      <th style="width:15%"><a ng-click="setOrderManager('last_name')">{{ 'app.admin.members.surname' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderAdmin =='last_name', 'fa fa-sort-alpha-desc': orderAdmin =='-last_name', 'fa fa-arrows-v': orderAdmin  }"></i></a></th>
 
-      <th style="width:15%"><a href="" ng-click="setOrderManager('first_name')">{{ 'app.admin.members.first_name' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderAdmin =='first_name', 'fa fa-sort-alpha-desc': orderAdmin =='-first_name', 'fa fa-arrows-v': orderAdmin  }"></i></a></th>
+      <th style="width:15%"><a ng-click="setOrderManager('first_name')">{{ 'app.admin.members.first_name' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderAdmin =='first_name', 'fa fa-sort-alpha-desc': orderAdmin =='-first_name', 'fa fa-arrows-v': orderAdmin  }"></i></a></th>
 
-      <th style="width:15%"><a href="" ng-click="setOrderManager('email')">{{ 'app.admin.members.email' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderAdmin =='email', 'fa fa-sort-alpha-desc': orderAdmin =='-email', 'fa fa-arrows-v': orderAdmin  }"></i></a></th>
+      <th style="width:15%"><a ng-click="setOrderManager('email')">{{ 'app.admin.members.email' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderAdmin =='email', 'fa fa-sort-alpha-desc': orderAdmin =='-email', 'fa fa-arrows-v': orderAdmin  }"></i></a></th>
 
-      <th style="width:10%"><a href="" ng-click="setOrderManager('phone')">{{ 'app.admin.members.phone' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': orderAdmin =='profile_attributes.phone', 'fa fa-sort-numeric-desc': orderAdmin =='-profile_attributes.phone', 'fa fa-arrows-v': orderAdmin  }"></i></a></th>
+      <th style="width:10%"><a ng-click="setOrderManager('phone')">{{ 'app.admin.members.phone' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': orderAdmin =='profile_attributes.phone', 'fa fa-sort-numeric-desc': orderAdmin =='-profile_attributes.phone', 'fa fa-arrows-v': orderAdmin  }"></i></a></th>
       <th style="width:10%"></th>
     </tr>
     </thead>

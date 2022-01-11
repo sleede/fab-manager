@@ -11,6 +11,7 @@
 - Update some icons
 - Optimized the load time of the payment schedules list
 - Fix a bug: do not load Stripe if no keys were defined
+- Fix a bug: some links redirect to the home page instead of triggering the requested action
 - Fix a bug: exports to Excel are corrupted (#49)
 - [TODO DEPLOY] `rails db:seed`
 

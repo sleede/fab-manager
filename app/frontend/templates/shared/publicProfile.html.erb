@@ -16,7 +16,7 @@
           <ng-repeat ng-repeat="network in social.networks.slice(0,3)">
             <social-link network="{{network}}" user="user"></social-link>
           </ng-repeat>
-          <a href="#" ng-click="social.showAllLinks = !social.showAllLinks">
+          <a ng-click="social.showAllLinks = !social.showAllLinks">
             <i class="fa fa-plus" ng-show="!social.showAllLinks"></i>
             <i class="fa fa-minus" ng-show="social.showAllLinks"></i>
           </a>
