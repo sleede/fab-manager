@@ -78,8 +78,8 @@ class PayZen::Service < Payment::Service
   end
 
   def process_payment_schedule_item(payment_schedule_item)
-    pz_subscription = payment_schedule_item.gateway_subscription.retrieve
-    if DateTime.parse(pz_subscription['answer']['cancelDate']) < DateTime.current
+    pz_subscription = payment_schedule_item.payment_schedule.gateway_subscription.retrieve
+    if pz_subscription['answer']['cancelDate'] && DateTime.parse(pz_subscription['answer']['cancelDate']) < DateTime.current
       # the subscription was canceled by the gateway => notify & update the status
       notify_payment_schedule_gateway_canceled(payment_schedule_item)
       payment_schedule_item.update_attributes(state: 'gateway_canceled')

@@ -4,7 +4,8 @@
 - Ability to create slots in the past
 - Ability to disable public account creation
 - Ability to select "bank transfer" as the payment mean for a payment schedule
-- When a payment schedule was canceled by the payment gateway, inform the user in the interface
+- When a payment schedule was canceled by the payment gateway, alert the users
+- When a payment schedule is in error, alert the users
 - Updated caniuse db
 - Fix card image ratio
 - Update events heading style
