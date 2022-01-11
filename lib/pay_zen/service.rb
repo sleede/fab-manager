@@ -80,7 +80,8 @@ class PayZen::Service < Payment::Service
   def process_payment_schedule_item(payment_schedule_item)
     pz_subscription = payment_schedule_item.gateway_subscription.retrieve
     if DateTime.parse(pz_subscription['answer']['cancelDate']) < DateTime.current
-      # the subscription was canceled by the gateway => update the status
+      # the subscription was canceled by the gateway => notify & update the status
+      notify_payment_schedule_gateway_canceled(payment_schedule_item)
       payment_schedule_item.update_attributes(state: 'gateway_canceled')
       return
     end
@@ -98,20 +99,13 @@ class PayZen::Service < Payment::Service
       pgo.gateway_object = PayZen::Item.new('PayZen::Transaction', transaction['uuid'])
       pgo.save!
     elsif transaction['status'] == 'RUNNING'
-      if payment_schedule_item.state == 'new'
-        # notify only for new deadlines, to prevent spamming
-        NotificationCenter.call type: 'notify_admin_payment_schedule_failed',
-                                receiver: User.admins_and_managers,
-                                attached_object: payment_schedule_item
-        NotificationCenter.call type: 'notify_member_payment_schedule_failed',
-                                receiver: payment_schedule_item.payment_schedule.user,
-                                attached_object: payment_schedule_item
-      end
+      notify_payment_schedule_item_failed(payment_schedule_item)
       payment_schedule_item.update_attributes(state: transaction['detailedStatus'])
       pgo = PaymentGatewayObject.find_or_initialize_by(item: payment_schedule_item)
       pgo.gateway_object = PayZen::Item.new('PayZen::Transaction', transaction['uuid'])
       pgo.save!
     else
+      notify_payment_schedule_item_error(payment_schedule_item)
       payment_schedule_item.update_attributes(state: 'error')
     end
   end

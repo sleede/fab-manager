@@ -21,4 +21,46 @@ class Payment::Service
   def process_payment_schedule_item(_payment_schedule_item); end
 
   def pay_payment_schedule_item(_payment_schedule_item); end
+
+  protected
+
+  # payment has failed but a recovery is still possible
+  def notify_payment_schedule_item_failed(payment_schedule_item)
+    # notify only for new deadlines, to prevent spamming
+    return unless payment_schedule_item.state == 'new'
+
+    NotificationCenter.call type: 'notify_admin_payment_schedule_failed',
+                            receiver: User.admins_and_managers,
+                            attached_object: payment_schedule_item
+    NotificationCenter.call type: 'notify_member_payment_schedule_failed',
+                            receiver: payment_schedule_item.payment_schedule.user,
+                            attached_object: payment_schedule_item
+  end
+
+  # payment has failed and recovery is not possible
+  def notify_payment_schedule_item_error(payment_schedule_item)
+    # notify only for new deadlines, to prevent spamming
+    return unless payment_schedule_item.state == 'new'
+
+    NotificationCenter.call type: 'notify_admin_payment_schedule_error',
+                            receiver: User.admins_and_managers,
+                            attached_object: payment_schedule_item
+    NotificationCenter.call type: 'notify_member_payment_schedule_error',
+                            receiver: payment_schedule_item.payment_schedule.user,
+                            attached_object: payment_schedule_item
+  end
+
+  # payment schedule was cancelled by the gateway
+  def notify_payment_schedule_gateway_canceled(payment_schedule_item)
+    # notify only for new deadlines, to prevent spamming
+    return unless payment_schedule_item.state == 'new'
+
+    NotificationCenter.call type: 'notify_admin_payment_schedule_gateway_canceled',
+                            receiver: User.admins_and_managers,
+                            attached_object: payment_schedule_item
+    NotificationCenter.call type: 'notify_member_payment_schedule_gateway_canceled',
+                            receiver: payment_schedule_item.payment_schedule.user,
+                            attached_object: payment_schedule_item
+  end
+
 end

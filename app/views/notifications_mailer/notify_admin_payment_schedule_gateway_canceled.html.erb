@@ -1,0 +1,8 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p>
+  <%= t('.body.error',
+        REFERENCE: @attached_object.payment_schedule.reference,
+        GATEWAY: @attached_object.payment_gateway_object.gateway_object.gateway) %>
+</p>
+<p><%= t('.body.action') %></p>
