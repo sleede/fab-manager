@@ -29,6 +29,7 @@ group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'active_record_query_trace'
   gem 'awesome_print'
+  gem 'bullet'
   gem 'coveralls_reborn', '~> 0.18.0', require: false
   gem 'foreman'
   gem 'web-console', '>= 3.3.0'

@@ -80,4 +80,13 @@ class ApplicationController < ActionController::Base
   def authenticate_user!
     super
   end
+
+  # N+1 query detection (https://github.com/flyerhzm/bullet)
+  def skip_bullet
+    previous_value = Bullet.enable?
+    Bullet.enable = false
+    yield
+  ensure
+    Bullet.enable = previous_value
+  end
 end
