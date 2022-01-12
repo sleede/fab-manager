@@ -15,6 +15,7 @@
 - Fix a bug: do not load Stripe if no keys were defined
 - Fix a bug: some links redirect to the home page instead of triggering the requested action
 - Fix a bug: exports to Excel are corrupted (#49)
+- Fix a bug: if a specialized VAT rate was defined when the VAT was disabled, the resulting VAT rate is wrong
 - [TODO DEPLOY] `rails db:seed`
 
 # v5.3.0 2021 December 29
