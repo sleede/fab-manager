@@ -6,12 +6,13 @@
 - Ability to select "bank transfer" as the payment mean for a payment schedule
 - When a payment schedule was canceled by the payment gateway, alert the users
 - When a payment schedule is in error, alert the users
-- Updated caniuse db
+- Specilized VAT rate cannot be defined unless the VAT is enabled and saved
 - Fix card image ratio
 - Update events heading style
 - Update some icons
 - Optimized the load time of the payment schedules list
 - Optimized multiple DB queries
+- Updated caniuse db
 - Fix a bug: do not load Stripe if no keys were defined
 - Fix a bug: some links redirect to the home page instead of triggering the requested action
 - Fix a bug: exports to Excel are corrupted (#49)

@@ -476,6 +476,8 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         controller: ['$scope', '$uibModalInstance', 'rate', 'active', 'rateHistory', 'activeHistory', 'multiVAT', function ($scope, $uibModalInstance, rate, active, rateHistory, activeHistory, multiVAT) {
           $scope.rate = rate;
           $scope.isSelected = active;
+          // this one is read only
+          $scope.isActive = active;
           $scope.history = [];
 
           // callback on "enable VAT" switch toggle
