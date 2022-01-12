@@ -5,14 +5,11 @@
   <div class="modal-body">
     <div class="form-group">
       <label for="enableVAT" class="control-label" translate>{{ 'app.admin.invoices.enable_VAT' }}</label>
-      <input bs-switch
-             ng-model="isSelected"
-             id="enableVAT"
-             type="checkbox"
-             class="form-control m-l-sm"
-             switch-on-text="{{ 'app.admin.invoices.enabled' | translate }}"
-             switch-off-text="{{ 'app.admin.invoices.disabled' | translate }}"
-             switch-animate="true"/>
+      <switch id="enableVAT"
+        checked="isSelected"
+        on-change="enableVATChanged"
+        classname="form-control m-l-sm">
+      </switch>
     </div>
 
     <div class="form-group" ng-show="isSelected">

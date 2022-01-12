@@ -17,6 +17,7 @@
 - Fix a bug: exports to Excel are corrupted (#49)
 - Fix a bug: if a specialized VAT rate was defined when the VAT was disabled, the resulting VAT rate is wrong
 - Fix a bug: unable to rebuild the PDF for invoices without subscriptions
+- Fix a bug: the switch to enable/disable the VAT does not reflect the current state of the VAT
 - [TODO DEPLOY] `rails db:seed`
 
 # v5.3.0 2021 December 29
