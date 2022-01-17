@@ -367,10 +367,18 @@ zu:
         all_objects_sync: "crwdns21572:0crwdne21572:0"
       notify_user_when_payment_schedule_ready:
         your_schedule_is_ready_html: "crwdns21114:0%{REFERENCE}crwdnd21114:0%{AMOUNT}crwdnd21114:0%{SCHEDULE_ID}crwdne21114:0"
+      notify_admin_payment_schedule_error:
+        schedule_error: "crwdns22365:0%{DATE}crwdnd22365:0%{REFERENCE}crwdne22365:0"
+      notify_member_payment_schedule_error:
+        schedule_error: "crwdns22367:0%{DATE}crwdnd22367:0%{REFERENCE}crwdne22367:0"
       notify_admin_payment_schedule_failed:
         schedule_failed: "crwdns21116:0%{DATE}crwdnd21116:0%{REFERENCE}crwdne21116:0"
       notify_member_payment_schedule_failed:
         schedule_failed: "crwdns21118:0%{DATE}crwdnd21118:0%{REFERENCE}crwdne21118:0"
+      notify_admin_payment_schedule_gateway_canceled:
+        schedule_canceled: "crwdns22369:0%{REFERENCE}crwdne22369:0"
+      notify_member_payment_schedule_gateway_canceled:
+        schedule_canceled: "crwdns22371:0%{REFERENCE}crwdne22371:0"
       notify_admin_payment_schedule_check_deadline:
         schedule_deadline: "crwdns21120:0%{DATE}crwdnd21120:0%{REFERENCE}crwdne21120:0"
       notify_admin_payment_schedule_transfer_deadline:
