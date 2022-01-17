@@ -389,9 +389,9 @@ fr:
       configure_extended_prices_button:
         extended_prices: "Prix étendus"
         no_extended_prices: "Aucun prix étendu pour l'instant"
-        extended_price_DURATION: "{DURATION} minutes"
+        extended_price_DURATION: "{DURATION} hours"
       extended_price_form:
-        duration: "Durée (minutes)"
+        duration: "Duration (hours)"
         amount: "Prix"
       pack_form:
         hours: "Heures"
@@ -762,6 +762,13 @@ fr:
           reference: "Référence"
           customer: "Client"
           date: "Date"
+      update_payment_mean_modal:
+        title: "Update the payment mean"
+        update_info: "Please specify below the new payment mean for this payment schedule to continue."
+        select_payment_mean: "Select a new payment mean"
+        method_Transfer: "By bank transfer"
+        method_Check: "By check"
+        confirm_button: "Update"
       #management of users, labels, groups, and so on
       members:
         users_management: "Gestion des utilisateurs"
