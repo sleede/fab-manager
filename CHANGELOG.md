@@ -26,6 +26,7 @@
 - Fix a bug: the switch to enable/disable the VAT does not reflect the current state of the VAT
 - Fix a bug: SSO configuration interface has a misnamed field (Common URL)
 - Fix a bug: unable to bind Profile.birthday and Profile.gender from an SSO
+- Fix a security issue: updated follow-redirects to 1.14.7 to fix [CVE-2022-0155](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0155)
 - [TODO DEPLOY] `rails db:seed`
 
 # v5.3.0 2021 December 29
