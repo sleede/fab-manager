@@ -1,7 +1,7 @@
 json.setting do
   json.partial! 'api/settings/setting', setting: @setting
   if @show_history
-    json.history @setting.history_values do |value|
+    json.history @setting.history_values.includes(:invoicing_profile) do |value|
       json.extract! value, :id, :value, :created_at
       unless value.invoicing_profile.nil?
         json.user do

@@ -47,4 +47,9 @@ export default class PaymentScheduleAPI {
     const res: AxiosResponse = await apiClient.put(`/api/payment_schedules/${paymentScheduleId}/cancel`);
     return res?.data;
   }
+
+  static async update (paymentSchedule: PaymentSchedule): Promise<PaymentSchedule> {
+    const res:AxiosResponse<PaymentSchedule> = await apiClient.patch(`/api/payment_schedules/${paymentSchedule.id}`, paymentSchedule);
+    return res?.data;
+  }
 }

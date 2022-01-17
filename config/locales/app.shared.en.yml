@@ -505,6 +505,7 @@ en:
         confirm_check: "Confirm cashing"
         resolve_action: "Resolve the action"
         update_card: "Update the card"
+        update_payment_mean: "Update the payment mean"
         please_ask_reception: "For any questions, please contact the FabLab's reception."
         confirm_button: "Confirm"
         confirm_check_cashing: "Confirm the cashing of the check"

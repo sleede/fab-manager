@@ -19,7 +19,7 @@ json.main_object do
 end
 if payment_schedule.gateway_subscription
   # this attribute is used to known which gateway should we interact with, in the front-end
-  json.gateway json.classname payment_schedule.gateway_subscription.gateway
+  json.gateway payment_schedule.gateway_subscription.gateway
 end
 json.items payment_schedule.payment_schedule_items do |item|
   json.partial! 'api/payment_schedules/payment_schedule_item', item: item

@@ -6,7 +6,7 @@
 - Ability to select "bank transfer" as the payment mean for a payment schedule
 - When a payment schedule was canceled by the payment gateway, alert the users
 - When a payment schedule is in error, alert the users
-- Specilized VAT rate cannot be defined unless the VAT is enabled and saved
+- When a payment schedule is in error or canceled, ability to re-enable it with another payment method
 - Fix card image ratio
 - Update events heading style
 - Update some icons

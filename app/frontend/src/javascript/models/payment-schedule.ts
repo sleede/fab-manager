@@ -25,28 +25,28 @@ export interface PaymentScheduleItem {
 }
 
 export interface PaymentSchedule {
-  max_length: number;
+  max_length?: number;
   id: number,
-  total: number,
-  reference: string,
+  total?: number,
+  reference?: string,
   payment_method: PaymentMethod,
-  items: Array<PaymentScheduleItem>,
-  created_at: Date,
-  chained_footprint: boolean,
-  main_object: {
+  items?: Array<PaymentScheduleItem>,
+  created_at?: Date,
+  chained_footprint?: boolean,
+  main_object?: {
     type: string,
     id: number
   },
-  user: {
+  user?: {
     id: number,
     name: string
   },
-  operator: {
+  operator?: {
     id: number,
     first_name: string,
     last_name: string,
   },
-  gateway: 'PayZen' | 'Stripe',
+  gateway?: 'PayZen' | 'Stripe',
 }
 
 export interface PaymentScheduleIndexRequest {

@@ -32,7 +32,8 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
   // we want to display some buttons only once. This map keep track of the buttons that have been displayed.
   const [displayOnceMap] = useState<Map<TypeOnce, Map<number, number>>>(new Map([
     [TypeOnce.SubscriptionCancel, new Map()],
-    [TypeOnce.CardUpdate, new Map()]
+    [TypeOnce.CardUpdate, new Map()],
+    [TypeOnce.UpdatePaymentMean, new Map()]
   ]));
 
   /**

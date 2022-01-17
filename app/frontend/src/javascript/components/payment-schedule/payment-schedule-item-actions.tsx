@@ -13,11 +13,13 @@ import { FabModal } from '../base/fab-modal';
 import FormatLib from '../../lib/format';
 import { StripeConfirmModal } from '../payment/stripe/stripe-confirm-modal';
 import { UpdateCardModal } from '../payment/update-card-modal';
+import { UpdatePaymentMeanModal } from './update-payment-mean-modal';
 
 // we want to display some buttons only once. This is the types of buttons it applies to.
 export enum TypeOnce {
   CardUpdate = 'card-update',
   SubscriptionCancel = 'subscription-cancel',
+  UpdatePaymentMean = 'update-payment-mean'
 }
 
 interface PaymentScheduleItemActionsProps {
@@ -47,6 +49,8 @@ export const PaymentScheduleItemActions: React.FC<PaymentScheduleItemActionsProp
   const [showResolveAction, setShowResolveAction] = useState<boolean>(false);
   // is open, the modal dialog to update the card details
   const [showUpdateCard, setShowUpdateCard] = useState<boolean>(false);
+  // is open, the modal dialog to update the payment mean
+  const [showUpdatePaymentMean, setShowUpdatePaymentMean] = useState<boolean>(false);
   // the user cannot confirm the action modal (3D secure), unless he has resolved the pending action
   const [isConfirmActionDisabled, setConfirmActionDisabled] = useState<boolean>(true);
 
@@ -131,6 +135,23 @@ export const PaymentScheduleItemActions: React.FC<PaymentScheduleItemActionsProp
   };
 
   /**
+   * Return a button to update the default payment mean for the current payment schedule
+   */
+  const updatePaymentMeanButton = (): ReactElement => {
+    const displayOnceStatus = displayOnceMap.get(TypeOnce.UpdatePaymentMean).get(paymentSchedule.id);
+    if (isPrivileged() && (!displayOnceStatus || displayOnceStatus === paymentScheduleItem.id)) {
+      displayOnceMap.get(TypeOnce.UpdatePaymentMean).set(paymentSchedule.id, paymentScheduleItem.id);
+      return (
+        <FabButton key={`update-payment-mean-${paymentScheduleItem.id}`}
+          onClick={toggleUpdatePaymentMeanModal}
+          icon={<i className="fas fa-money-bill-alt" />}>
+          {t('app.shared.payment_schedule_item_actions.update_payment_mean')}
+        </FabButton>
+      );
+    }
+  };
+
+  /**
    * Return a button to update the credit card associated with the payment schedule
    */
   const updateCardButton = (): ReactElement => {
@@ -166,14 +187,18 @@ export const PaymentScheduleItemActions: React.FC<PaymentScheduleItemActionsProp
   /**
    * Return the actions button(s) for current paymentScheduleItem with state Error or GatewayCanceled
    */
-  const errorActions = (): ReactElement => {
+  const errorActions = (): ReactElement[] => {
     // if the payment schedule is canceled/in error, the schedule is over, and we can't update the card
     displayOnceMap.get(TypeOnce.CardUpdate).set(paymentSchedule.id, paymentScheduleItem.id);
+
+    const buttons = [];
     if (isPrivileged()) {
-      return cancelSubscriptionButton();
+      buttons.push(cancelSubscriptionButton());
+      buttons.push(updatePaymentMeanButton());
     } else {
-      return <span>{t('app.shared.payment_schedule_item_actions.please_ask_reception')}</span>;
+      buttons.push(<span>{t('app.shared.payment_schedule_item_actions.please_ask_reception')}</span>);
     }
+    return buttons;
   };
 
   /**
@@ -233,6 +258,13 @@ export const PaymentScheduleItemActions: React.FC<PaymentScheduleItemActionsProp
   };
 
   /**
+   * Show/hide the modal dialog to update the payment mean
+   */
+  const toggleUpdatePaymentMeanModal = (): void => {
+    setShowUpdatePaymentMean(!showUpdatePaymentMean);
+  };
+
+  /**
    * After the user has confirmed that he wants to cash the check, update the API, refresh the list and close the modal.
    */
   const onCheckCashingConfirmed = (): void => {
@@ -245,10 +277,10 @@ export const PaymentScheduleItemActions: React.FC<PaymentScheduleItemActionsProp
   };
 
   /**
-   * After the user has confirmed that he validates the tranfer, update the API, refresh the list and close the modal.
+   * After the user has confirmed that he validates the transfer, update the API, refresh the list and close the modal.
    */
   const onTransferConfirmed = (): void => {
-    PaymentScheduleAPI.confirmTransfer(paymentSchedule.id).then((res) => {
+    PaymentScheduleAPI.confirmTransfer(paymentScheduleItem.id).then((res) => {
       if (res.state === PaymentScheduleItemState.Paid) {
         onSuccess();
         toggleConfirmTransferModal();
@@ -295,6 +327,14 @@ export const PaymentScheduleItemActions: React.FC<PaymentScheduleItemActionsProp
       onSuccess();
       toggleResolveActionModal();
     });
+  };
+
+  /**
+   * When the update of the payment mean was successful, refresh the list and close the modal
+   */
+  const onPaymentMeanUpdateSuccess = (): void => {
+    onSuccess();
+    toggleUpdatePaymentMeanModal();
   };
 
   if (!show) return null;
@@ -359,6 +399,12 @@ export const PaymentScheduleItemActions: React.FC<PaymentScheduleItemActionsProp
           onError={onError}
           schedule={paymentSchedule}>
         </UpdateCardModal>
+        {/* Update the payment mean */}
+        <UpdatePaymentMeanModal isOpen={showUpdatePaymentMean}
+          toggleModal={toggleUpdatePaymentMeanModal}
+          onError={onError}
+          afterSuccess={onPaymentMeanUpdateSuccess}
+          paymentSchedule={paymentSchedule} />
       </div>
     </span>
   );

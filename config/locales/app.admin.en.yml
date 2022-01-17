@@ -762,6 +762,13 @@ en:
           reference: "Reference"
           customer: "Customer"
           date: "Date"
+      update_payment_mean_modal:
+        title: "Update the payment mean"
+        update_info: "Please specify below the new payment mean for this payment schedule to continue."
+        select_payment_mean: "Select a new payment mean"
+        method_Transfer: "By bank transfer"
+        method_Check: "By check"
+        confirm_button: "Update"
       #management of users, labels, groups, and so on
       members:
         users_management: "Users management"

@@ -376,9 +376,9 @@ en:
       notify_member_payment_schedule_failed:
         schedule_failed: "Failed card debit for the %{DATE} deadline, for your schedule %{REFERENCE}"
       notify_admin_payment_schedule_gateway_canceled:
-        schedule_error: "The payment schedule %{REFERENCE} was canceled by the gateway. An action is required."
+        schedule_canceled: "The payment schedule %{REFERENCE} was canceled by the gateway. An action is required."
       notify_member_payment_schedule_gateway_canceled:
-        schedule_error: "Your payment schedule %{REFERENCE} was canceled by the gateway."
+        schedule_canceled: "Your payment schedule %{REFERENCE} was canceled by the gateway."
       notify_admin_payment_schedule_check_deadline:
         schedule_deadline: "You must cash the check for the %{DATE} deadline, for schedule %{REFERENCE}"
       notify_admin_payment_schedule_transfer_deadline:
