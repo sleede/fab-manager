@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+# v5.3.1 2022 January 17
+
 - Definition of extended prices for spaces is now made in hours (previously in minutes)
 - Support for JSONPath syntax in OAuth2 SSO fields mapping
 - Basic support for OAuth2 scopes through an environment variable
