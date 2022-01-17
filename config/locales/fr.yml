@@ -367,10 +367,18 @@ fr:
         all_objects_sync: "Toutes les données ont été synchronisés avec succès sur Stripe."
       notify_user_when_payment_schedule_ready:
         your_schedule_is_ready_html: "Votre échéancier n°%{REFERENCE}, d'un montant de %{AMOUNT}, est prêt. <a href='api/payment_schedules/%{SCHEDULE_ID}/download' target='_blank'>Cliquez ici pour le télécharger</a>."
+      notify_admin_payment_schedule_error:
+        schedule_error: "An error occurred for the card debit of the %{DATE} deadline, for schedule %{REFERENCE}"
+      notify_member_payment_schedule_error:
+        schedule_error: "An error occurred for the card debit of the %{DATE} deadline, for your schedule %{REFERENCE}"
       notify_admin_payment_schedule_failed:
         schedule_failed: "Échec du prélèvement par carte de l'échéance du %{DATE}, pour l'échéancier %{REFERENCE}"
       notify_member_payment_schedule_failed:
         schedule_failed: "Échec du prélèvement par carte de l'échéance du %{DATE}, pour votre échéancier %{REFERENCE}"
+      notify_admin_payment_schedule_gateway_canceled:
+        schedule_canceled: "The payment schedule %{REFERENCE} was canceled by the gateway. An action is required."
+      notify_member_payment_schedule_gateway_canceled:
+        schedule_canceled: "Your payment schedule %{REFERENCE} was canceled by the gateway."
       notify_admin_payment_schedule_check_deadline:
         schedule_deadline: "Vous devez encaisser le chèque de l'échéance du %{DATE}, pour l'échéancier %{REFERENCE}"
       notify_admin_payment_schedule_transfer_deadline:
