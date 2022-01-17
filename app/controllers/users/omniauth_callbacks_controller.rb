@@ -79,17 +79,17 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def username_exists?(username, exclude_id = nil)
     if exclude_id.nil?
-      User.where('lower(username) = ?', username.downcase).size.positive?
+      User.where('lower(username) = ?', username&.downcase).size.positive?
     else
-      User.where('lower(username) = ?', username.downcase).where.not(id: exclude_id).size.positive?
+      User.where('lower(username) = ?', username&.downcase).where.not(id: exclude_id).size.positive?
     end
   end
 
   def email_exists?(email, exclude_id = nil)
     if exclude_id.nil?
-      User.where('lower(email) = ?', email.downcase).size.positive?
+      User.where('lower(email) = ?', email&.downcase).size.positive?
     else
-      User.where('lower(email) = ?', email.downcase).where.not(id: exclude_id).size.positive?
+      User.where('lower(email) = ?', email&.downcase).where.not(id: exclude_id).size.positive?
     end
   end
 
