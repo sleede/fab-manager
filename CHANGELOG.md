@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- Definition of extended prices for spaces is now made in hours (previously in minutes)
 - Support for JSONPath syntax in OAuth2 SSO fields mapping
 - Basic support for OAuth2 scopes through an environment variable
 - Ability to enable debug logs for the SSO authentication process using `SSO_DEBUG=true`
