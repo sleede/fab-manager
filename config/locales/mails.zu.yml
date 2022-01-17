@@ -296,6 +296,18 @@ zu:
         please_find_attached_html: "crwdns21126:0DATE={DATE}crwdnd21126:0AMOUNT={AMOUNT}crwdnd21126:0TYPE={TYPE}crwdne21126:0" #messageFormat interpolation
         schedule_in_your_dashboard_html: "crwdns21128:0%{DASHBOARD}crwdne21128:0"
         your_dashboard: "crwdns21130:0crwdne21130:0"
+    notify_admin_payment_schedule_error:
+      subject: "crwdns22373:0[URGENT]crwdne22373:0"
+      body:
+        remember: "crwdns22375:0%{REFERENCE}crwdnd22375:0%{AMOUNT}crwdnd22375:0%{DATE}crwdne22375:0"
+        error: "crwdns22377:0crwdne22377:0"
+        action: "crwdns22379:0%{GATEWAY}crwdne22379:0"
+    notify_member_payment_schedule_error:
+      subject: "crwdns22381:0[URGENT]crwdne22381:0"
+      body:
+        remember: "crwdns22383:0%{REFERENCE}crwdnd22383:0%{AMOUNT}crwdnd22383:0%{DATE}crwdne22383:0"
+        error: "crwdns22385:0crwdne22385:0"
+        action: "crwdns22387:0crwdne22387:0"
     notify_admin_payment_schedule_failed:
       subject: "crwdns21132:0[URGENT]crwdne21132:0"
       body:
@@ -309,6 +321,16 @@ zu:
         error: "crwdns21144:0crwdne21144:0"
         action_html: "crwdns21146:0%{DASHBOARD}crwdne21146:0"
         your_dashboard: "crwdns21148:0crwdne21148:0"
+    notify_admin_payment_schedule_gateway_canceled:
+      subject: "crwdns22389:0[URGENT]crwdne22389:0"
+      body:
+        error: "crwdns22391:0%{REFERENCE}crwdnd22391:0%{GATEWAY}crwdne22391:0"
+        action: "crwdns22393:0crwdne22393:0"
+    notify_member_payment_schedule_gateway_canceled:
+      subject: "crwdns22395:0[URGENT]crwdne22395:0"
+      body:
+        error: "crwdns22397:0%{REFERENCE}crwdne22397:0"
+        action: "crwdns22399:0crwdne22399:0"
     notify_admin_payment_schedule_check_deadline:
       subject: "crwdns21150:0crwdne21150:0"
       body:
