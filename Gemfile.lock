@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/sleede/omniauth.git
+  revision: 832d5ac48fcc3b93eba8bf1444145d0c876314cf
+  branch: v1.9
+  specs:
+    omniauth (1.9.1)
+      hashie (>= 3.4.6)
+      rack (>= 1.6.2, < 3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -175,6 +184,8 @@ GEM
     jbuilder_cache_multi (0.1.0)
       jbuilder (>= 1.5.0, < 3)
     json (2.3.1)
+    jsonpath (1.1.0)
+      multi_json
     jwt (2.2.1)
     kaminari (1.2.1)
       activesupport (>= 4.1.0)
@@ -234,9 +245,6 @@ GEM
       multi_xml (~> 0.5)
       rack (>= 1.2, < 3)
     oj (3.10.5)
-    omniauth (1.9.1)
-      hashie (>= 3.4.6)
-      rack (>= 1.6.2, < 3)
     omniauth-oauth2 (1.6.0)
       oauth2 (~> 1.1)
       omniauth (~> 1.9)
@@ -456,6 +464,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jbuilder_cache_multi
   json (>= 2.3.0)
+  jsonpath
   kaminari
   listen (~> 3.0.5)
   message_format
@@ -463,7 +472,7 @@ DEPENDENCIES
   minitest-reporters
   notify_with
   oj
-  omniauth (~> 1.9.0)
+  omniauth (~> 1.9.0)!
   omniauth-oauth2
   omniauth-rails_csrf_protection (~> 0.1)
   openlab_ruby

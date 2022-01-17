@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'omniauth-oauth2'
+require 'jsonpath'
 
 module OmniAuth::Strategies
   # Authentication strategy provided trough oAuth 2.0
@@ -24,6 +25,12 @@ module OmniAuth::Strategies
            authorize_url: active_provider.providable.authorization_endpoint,
            token_url: active_provider.providable.token_endpoint
 
+    def authorize_params
+      super.tap do |params|
+        params[:scope] = ENV['OAUTH2_SCOPE']
+      end
+    end
+
     def callback_url
       url = Rails.application.config.action_controller.default_url_options
       "#{url[:protocol]}://#{url[:host]}#{script_name}#{callback_path}"
@@ -46,9 +53,15 @@ module OmniAuth::Strategies
     # retrieve data from various url, querying each only once
     def raw_info
       @raw_info ||= {}
+      puts "[raw_info] @raw_infos = #{@raw_info&.to_json}"
       unless @raw_info.size.positive?
         OmniAuth::Strategies::SsoOauth2Provider.active_provider.providable.o_auth2_mappings.each do |mapping|
+          puts "mapping = #{mapping&.to_json}"
           unless @raw_info.key?(mapping.api_endpoint.to_sym)
+            puts "api_endpoint = #{mapping.api_endpoint.to_sym}"
+            puts "access_token = #{access_token&.to_json}"
+            puts "token get = #{access_token.get(mapping.api_endpoint)}"
+            puts "parsed = #{access_token.get(mapping.api_endpoint).parsed}"
             @raw_info[mapping.api_endpoint.to_sym] = access_token.get(mapping.api_endpoint).parsed
           end
         end
@@ -58,6 +71,7 @@ module OmniAuth::Strategies
 
     def parsed_info
       @parsed_info ||= {}
+      puts "[parsed_info] @parsed_info = #{@parsed_info.to_json}"
       unless @parsed_info.size.positive?
         OmniAuth::Strategies::SsoOauth2Provider.active_provider.providable.o_auth2_mappings.each do |mapping|
 
@@ -88,7 +102,8 @@ module OmniAuth::Strategies
 
           ## NO TRANSFORMATION
           else
-            @parsed_info[local_sym(mapping)] = raw_info[mapping.api_endpoint.to_sym][mapping.api_field]
+            puts "@parsed_info[#{local_sym(mapping)}] found in #{raw_info[mapping.api_endpoint.to_sym]}"
+            @parsed_info[local_sym(mapping)] = ::JsonPath.new(mapping.api_field).on(raw_info[mapping.api_endpoint.to_sym]).first
           end
         end
       end

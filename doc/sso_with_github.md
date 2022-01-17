@@ -26,9 +26,9 @@ For this guide, we will use [GitHub](https://developer.github.com/v3/oauth/) as 
   3. The slug of this name is used in the callback URL provided to the SSO server (eg. /users/auth/oauth2-**github**/callback)
 
 - Fulfill the form with the following parameters:
-  - **Common URL**: `https://github.com/login/oauth/` This is the common part in the URLs of the two following parameters.
-  - **Authorization endpoint**: `authorize` This URL can be found [here](https://developer.github.com/v3/oauth/).
-  - **Token Acquisition Endpoint**: `access_token` This URL can be found [here](https://developer.github.com/v3/oauth/).
+  - **Server root URL**: `https://github.com` This is the domain name of the where the SSO server is located.
+  - **Authorization endpoint**: `/login/oauth/authorize` This URL can be found [here](https://developer.github.com/v3/oauth/).
+  - **Token Acquisition Endpoint**: `/login/oauth/access_token` This URL can be found [here](https://developer.github.com/v3/oauth/).
   - **Profile edition URL**: `https://github.com/settings/profile` This is the URL where you are directed when you click on `Edit profile` in your GitHub dashboard.
   - **Client identifier**: Your Client ID, collected just before.
   - **Client secret**: Your Client Secret, collected just before.

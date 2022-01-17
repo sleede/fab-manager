@@ -1,5 +1,11 @@
 # Changelog Fab-manager
 
+- Support for JSONPath syntax in OAuth2 SSO fields mapping
+- Support for OAuth2 scopes
+- Add debug logs for the SSO authentication process
+- Fix a bug: SSO configuration interface has a misnamed field (Common URL)
+- Fix a bug: unable to bind Profile.birthday and Profile.gender from an SSO
+
 - Ability to cancel a payement schedule from the interface
 - Ability to create slots in the past
 - Ability to disable public account creation
