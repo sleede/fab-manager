@@ -4,14 +4,13 @@ import {
   PaymentScheduleItem,
   PaymentScheduleItemState
 } from '../../models/payment-schedule';
-import React, { ReactElement, useEffect, useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { FabButton } from '../base/fab-button';
 import { useTranslation } from 'react-i18next';
 import { User, UserRole } from '../../models/user';
 import PaymentScheduleAPI from '../../api/payment-schedule';
 import { FabModal } from '../base/fab-modal';
 import FormatLib from '../../lib/format';
-import { StripeElements } from '../payment/stripe/stripe-elements';
 import { StripeConfirmModal } from '../payment/stripe/stripe-confirm-modal';
 import { UpdateCardModal } from '../payment/update-card-modal';
 
@@ -28,13 +27,14 @@ interface PaymentScheduleItemActionsProps {
   onSuccess: () => void,
   onCardUpdateSuccess: () => void
   operator: User,
-  displayOnceMap: Map<TypeOnce, Map<number, boolean>>,
+  displayOnceMap: Map<TypeOnce, Map<number, number>>,
+  show: boolean,
 }
 
 /**
  * This component is responsible for rendering the actions buttons for a payment schedule item.
  */
-export const PaymentScheduleItemActions: React.FC<PaymentScheduleItemActionsProps> = ({ paymentScheduleItem, paymentSchedule, onError, onSuccess, onCardUpdateSuccess, displayOnceMap, operator }) => {
+export const PaymentScheduleItemActions: React.FC<PaymentScheduleItemActionsProps> = ({ paymentScheduleItem, paymentSchedule, onError, onSuccess, onCardUpdateSuccess, displayOnceMap, operator, show }) => {
   const { t } = useTranslation('shared');
 
   // is open, the modal dialog to cancel the associated subscription?
@@ -49,14 +49,6 @@ export const PaymentScheduleItemActions: React.FC<PaymentScheduleItemActionsProp
   const [showUpdateCard, setShowUpdateCard] = useState<boolean>(false);
   // the user cannot confirm the action modal (3D secure), unless he has resolved the pending action
   const [isConfirmActionDisabled, setConfirmActionDisabled] = useState<boolean>(true);
-
-  useEffect(() => {
-    Object.keys(TypeOnce).forEach((type) => {
-      if (!displayOnceMap.has(type as TypeOnce)) {
-        displayOnceMap.set(type as TypeOnce, new Map<number, boolean>());
-      }
-    });
-  }, []);
 
   /**
    * Check if the current operator has administrative rights or is a normal member
@@ -82,10 +74,12 @@ export const PaymentScheduleItemActions: React.FC<PaymentScheduleItemActionsProp
    * Return a button to cancel the given subscription, if the user is privileged enough
    */
   const cancelSubscriptionButton = (): ReactElement => {
-    if (isPrivileged() && !displayOnceMap.get(TypeOnce.SubscriptionCancel).get(paymentSchedule.id)) {
-      displayOnceMap.get(TypeOnce.SubscriptionCancel).set(paymentSchedule.id, true);
+    const displayOnceStatus = displayOnceMap.get(TypeOnce.SubscriptionCancel).get(paymentSchedule.id);
+    if (isPrivileged() && (!displayOnceStatus || displayOnceStatus === paymentScheduleItem.id)) {
+      displayOnceMap.get(TypeOnce.SubscriptionCancel).set(paymentSchedule.id, paymentScheduleItem.id);
       return (
-        <FabButton onClick={toggleCancelSubscriptionModal}
+        <FabButton key={`cancel-subscription-${paymentSchedule.id}`}
+          onClick={toggleCancelSubscriptionModal}
           icon={<i className="fas fa-times" />}>
           {t('app.shared.payment_schedule_item_actions.cancel_subscription')}
         </FabButton>
@@ -99,7 +93,8 @@ export const PaymentScheduleItemActions: React.FC<PaymentScheduleItemActionsProp
   const confirmTransferButton = (): ReactElement => {
     if (isPrivileged()) {
       return (
-        <FabButton onClick={toggleConfirmTransferModal}
+        <FabButton key={`confirm-transfer-${paymentScheduleItem.id}`}
+          onClick={toggleConfirmTransferModal}
           icon={<i className="fas fa-university"/>}>
           {t('app.shared.payment_schedule_item_actions.confirm_payment')}
         </FabButton>
@@ -113,7 +108,8 @@ export const PaymentScheduleItemActions: React.FC<PaymentScheduleItemActionsProp
   const confirmCheckButton = (): ReactElement => {
     if (isPrivileged()) {
       return (
-        <FabButton onClick={toggleConfirmCashingModal}
+        <FabButton key={`confirm-check-${paymentScheduleItem.id}`}
+          onClick={toggleConfirmCashingModal}
           icon={<i className="fas fa-check"/>}>
           {t('app.shared.payment_schedule_item_actions.confirm_check')}
         </FabButton>
@@ -126,7 +122,8 @@ export const PaymentScheduleItemActions: React.FC<PaymentScheduleItemActionsProp
    */
   const solveActionButton = (): ReactElement => {
     return (
-      <FabButton onClick={toggleResolveActionModal}
+      <FabButton key={`solve-action-${paymentScheduleItem.id}`}
+        onClick={toggleResolveActionModal}
         icon={<i className="fas fa-wrench"/>}>
         {t('app.shared.payment_schedule_item_actions.resolve_action')}
       </FabButton>
@@ -137,10 +134,12 @@ export const PaymentScheduleItemActions: React.FC<PaymentScheduleItemActionsProp
    * Return a button to update the credit card associated with the payment schedule
    */
   const updateCardButton = (): ReactElement => {
-    if (!displayOnceMap.get(TypeOnce.CardUpdate).get(paymentSchedule.id)) {
-      displayOnceMap.get(TypeOnce.CardUpdate).set(paymentSchedule.id, true);
+    const displayOnceStatus = displayOnceMap.get(TypeOnce.SubscriptionCancel).get(paymentSchedule.id);
+    if (isPrivileged() && (!displayOnceStatus || displayOnceStatus === paymentScheduleItem.id)) {
+      displayOnceMap.get(TypeOnce.CardUpdate).set(paymentSchedule.id, paymentScheduleItem.id);
       return (
-        <FabButton onClick={toggleUpdateCardModal}
+        <FabButton key={`update-card-${paymentSchedule.id}`}
+          onClick={toggleUpdateCardModal}
           icon={<i className="fas fa-credit-card"/>}>
           {t('app.shared.payment_schedule_item_actions.update_card')}
         </FabButton>
@@ -169,7 +168,7 @@ export const PaymentScheduleItemActions: React.FC<PaymentScheduleItemActionsProp
    */
   const errorActions = (): ReactElement => {
     // if the payment schedule is canceled/in error, the schedule is over, and we can't update the card
-    displayOnceMap.get(TypeOnce.CardUpdate).set(paymentSchedule.id, true);
+    displayOnceMap.get(TypeOnce.CardUpdate).set(paymentSchedule.id, paymentScheduleItem.id);
     if (isPrivileged()) {
       return cancelSubscriptionButton();
     } else {
@@ -298,7 +297,7 @@ export const PaymentScheduleItemActions: React.FC<PaymentScheduleItemActionsProp
     });
   };
 
-  if (!displayOnceMap.get(TypeOnce.CardUpdate) || !displayOnceMap.get(TypeOnce.SubscriptionCancel)) return null;
+  if (!show) return null;
 
   return (
     <span className="payment-schedule-item-actions">
@@ -311,58 +310,58 @@ export const PaymentScheduleItemActions: React.FC<PaymentScheduleItemActionsProp
       {paymentScheduleItem.state === PaymentScheduleItemState.New && newActions()}
       <div className="modals">
         {/* Confirm the cashing of the current deadline by check */}
-        <FabModal title={t('app.shared.schedules_table.confirm_check_cashing')}
+        <FabModal title={t('app.shared.payment_schedule_item_actions.confirm_check_cashing')}
           isOpen={showConfirmCashing}
           toggleModal={toggleConfirmCashingModal}
           onConfirm={onCheckCashingConfirmed}
           closeButton={true}
-          confirmButton={t('app.shared.schedules_table.confirm_button')}>
+          confirmButton={t('app.shared.payment_schedule_item_actions.confirm_button')}>
           <span>
-            {t('app.shared.schedules_table.confirm_check_cashing_body', {
+            {t('app.shared.payment_schedule_item_actions.confirm_check_cashing_body', {
               AMOUNT: FormatLib.price(paymentScheduleItem.amount),
               DATE: FormatLib.date(paymentScheduleItem.due_date)
             })}
           </span>
         </FabModal>
         {/* Confirm the bank transfer for the current deadline */}
-        <FabModal title={t('app.shared.schedules_table.confirm_bank_transfer')}
+        <FabModal title={t('app.shared.payment_schedule_item_actions.confirm_bank_transfer')}
           isOpen={showConfirmTransfer}
           toggleModal={toggleConfirmTransferModal}
           onConfirm={onTransferConfirmed}
           closeButton={true}
-          confirmButton={t('app.shared.schedules_table.confirm_button')}>
+          confirmButton={t('app.shared.payment_schedule_item_actions.confirm_button')}>
           <span>
-            {t('app.shared.schedules_table.confirm_bank_transfer_body', {
+            {t('app.shared.payment_schedule_item_actions.confirm_bank_transfer_body', {
               AMOUNT: FormatLib.price(paymentScheduleItem.amount),
               DATE: FormatLib.date(paymentScheduleItem.due_date)
             })}
           </span>
         </FabModal>
         {/* Cancel the subscription */}
-        <FabModal title={t('app.shared.schedules_table.cancel_subscription')}
+        <FabModal title={t('app.shared.payment_schedule_item_actions.cancel_subscription')}
           isOpen={showCancelSubscription}
           toggleModal={toggleCancelSubscriptionModal}
           onConfirm={onCancelSubscriptionConfirmed}
           closeButton={true}
-          confirmButton={t('app.shared.schedules_table.confirm_button')}>
-          {t('app.shared.schedules_table.confirm_cancel_subscription')}
+          confirmButton={t('app.shared.payment_schedule_item_actions.confirm_button')}>
+          {t('app.shared.payment_schedule_item_actions.confirm_cancel_subscription')}
         </FabModal>
-        <StripeElements>
-          {/* 3D secure confirmation */}
-          <StripeConfirmModal isOpen={showResolveAction}
-            toggleModal={toggleResolveActionModal}
-            onSuccess={afterConfirmAction}
-            paymentScheduleItemId={paymentScheduleItem.id} />
-          {/* Update credit card */}
-          <UpdateCardModal isOpen={showUpdateCard}
-            toggleModal={toggleUpdateCardModal}
-            operator={operator}
-            afterSuccess={handleCardUpdateSuccess}
-            onError={onError}
-            schedule={paymentSchedule}>
-          </UpdateCardModal>
-        </StripeElements>
+        {/* 3D secure confirmation */}
+        <StripeConfirmModal isOpen={showResolveAction}
+          toggleModal={toggleResolveActionModal}
+          onSuccess={afterConfirmAction}
+          paymentScheduleItemId={paymentScheduleItem.id} />
+        {/* Update credit card */}
+        <UpdateCardModal isOpen={showUpdateCard}
+          toggleModal={toggleUpdateCardModal}
+          operator={operator}
+          afterSuccess={handleCardUpdateSuccess}
+          onError={onError}
+          schedule={paymentSchedule}>
+        </UpdateCardModal>
       </div>
     </span>
   );
 };
+
+PaymentScheduleItemActions.defaultProps = { show: false };

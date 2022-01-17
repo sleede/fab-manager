@@ -10,6 +10,7 @@ import {
 } from '../../models/payment-schedule';
 import FormatLib from '../../lib/format';
 import { PaymentScheduleItemActions, TypeOnce } from './payment-schedule-item-actions';
+import { StripeElements } from '../payment/stripe/stripe-elements';
 
 interface PaymentSchedulesTableProps {
   paymentSchedules: Array<PaymentSchedule>,
@@ -29,7 +30,10 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
   // for each payment schedule: are the details (all deadlines) shown or hidden?
   const [showExpanded, setShowExpanded] = useState<Map<number, boolean>>(new Map());
   // we want to display some buttons only once. This map keep track of the buttons that have been displayed.
-  const [displayOnceMap] = useState<Map<TypeOnce, Map<number, boolean>>>(new Map());
+  const [displayOnceMap] = useState<Map<TypeOnce, Map<number, number>>>(new Map([
+    [TypeOnce.SubscriptionCancel, new Map()],
+    [TypeOnce.CardUpdate, new Map()]
+  ]));
 
   /**
    * Check if the requested payment schedule is displayed with its deadlines (PaymentScheduleItem) or without them
@@ -107,69 +111,72 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
 
   return (
     <div>
-      <table className="schedules-table">
-        <thead>
-          <tr>
-            <th className="w-35" />
-            <th className="w-200">{t('app.shared.schedules_table.schedule_num')}</th>
-            <th className="w-200">{t('app.shared.schedules_table.date')}</th>
-            <th className="w-120">{t('app.shared.schedules_table.price')}</th>
-            {showCustomer && <th className="w-200">{t('app.shared.schedules_table.customer')}</th>}
-            <th className="w-200"/>
-          </tr>
-        </thead>
-        <tbody>
-          {paymentSchedules.map(p => <tr key={p.id}>
-            <td colSpan={showCustomer ? 6 : 5}>
-              <table className="schedules-table-body">
-                <tbody>
-                  <tr>
-                    <td className="w-35 row-header" onClick={togglePaymentScheduleDetails(p.id)}>{expandCollapseIcon(p.id)}</td>
-                    <td className="w-200">{p.reference}</td>
-                    <td className="w-200">{FormatLib.date(_.minBy(p.items, 'due_date').due_date)}</td>
-                    <td className="w-120">{FormatLib.price(p.total)}</td>
-                    {showCustomer && <td className="w-200">{p.user.name}</td>}
-                    <td className="w-200">{downloadScheduleButton(p.id)}</td>
-                  </tr>
-                  <tr style={{ display: statusDisplay(p.id) }}>
-                    <td className="w-35" />
-                    <td colSpan={showCustomer ? 5 : 4}>
-                      <div>
-                        <table className="schedule-items-table">
-                          <thead>
-                            <tr>
-                              <th className="w-120">{t('app.shared.schedules_table.deadline')}</th>
-                              <th className="w-120">{t('app.shared.schedules_table.amount')}</th>
-                              <th className="w-200">{t('app.shared.schedules_table.state')}</th>
-                              <th className="w-200" />
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {_.orderBy(p.items, 'due_date').map(item => <tr key={item.id}>
-                              <td>{FormatLib.date(item.due_date)}</td>
-                              <td>{FormatLib.price(item.amount)}</td>
-                              <td>{formatState(item, p)}</td>
-                              <td>
-                                <PaymentScheduleItemActions paymentScheduleItem={item}
-                                  paymentSchedule={p}
-                                  onError={onError}
-                                  onSuccess={refreshSchedulesTable}
-                                  onCardUpdateSuccess={onCardUpdateSuccess}
-                                  operator={operator}
-                                  displayOnceMap={displayOnceMap} />
-                              </td>
-                            </tr>)}
-                          </tbody>
-                        </table>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </td>
-          </tr>)}
-        </tbody>
-      </table>
+      <StripeElements>
+        <table className="schedules-table">
+          <thead>
+            <tr>
+              <th className="w-35" />
+              <th className="w-200">{t('app.shared.schedules_table.schedule_num')}</th>
+              <th className="w-200">{t('app.shared.schedules_table.date')}</th>
+              <th className="w-120">{t('app.shared.schedules_table.price')}</th>
+              {showCustomer && <th className="w-200">{t('app.shared.schedules_table.customer')}</th>}
+              <th className="w-200"/>
+            </tr>
+          </thead>
+          <tbody>
+            {paymentSchedules.map(p => <tr key={p.id}>
+              <td colSpan={showCustomer ? 6 : 5}>
+                <table className="schedules-table-body">
+                  <tbody>
+                    <tr>
+                      <td className="w-35 row-header" onClick={togglePaymentScheduleDetails(p.id)}>{expandCollapseIcon(p.id)}</td>
+                      <td className="w-200">{p.reference}</td>
+                      <td className="w-200">{FormatLib.date(_.minBy(p.items, 'due_date').due_date)}</td>
+                      <td className="w-120">{FormatLib.price(p.total)}</td>
+                      {showCustomer && <td className="w-200">{p.user.name}</td>}
+                      <td className="w-200">{downloadScheduleButton(p.id)}</td>
+                    </tr>
+                    <tr style={{ display: statusDisplay(p.id) }}>
+                      <td className="w-35" />
+                      <td colSpan={showCustomer ? 5 : 4}>
+                        <div>
+                          <table className="schedule-items-table">
+                            <thead>
+                              <tr>
+                                <th className="w-120">{t('app.shared.schedules_table.deadline')}</th>
+                                <th className="w-120">{t('app.shared.schedules_table.amount')}</th>
+                                <th className="w-200">{t('app.shared.schedules_table.state')}</th>
+                                <th className="w-200" />
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {_.orderBy(p.items, 'due_date').map(item => <tr key={item.id}>
+                                <td>{FormatLib.date(item.due_date)}</td>
+                                <td>{FormatLib.price(item.amount)}</td>
+                                <td>{formatState(item, p)}</td>
+                                <td>
+                                  <PaymentScheduleItemActions paymentScheduleItem={item}
+                                    paymentSchedule={p}
+                                    onError={onError}
+                                    onSuccess={refreshSchedulesTable}
+                                    onCardUpdateSuccess={onCardUpdateSuccess}
+                                    operator={operator}
+                                    displayOnceMap={displayOnceMap}
+                                    show={isExpanded(p.id)}/>
+                                </td>
+                              </tr>)}
+                            </tbody>
+                          </table>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>)}
+          </tbody>
+        </table>
+      </StripeElements>
     </div>
   );
 };
