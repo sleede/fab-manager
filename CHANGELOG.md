@@ -1,11 +1,9 @@
 # Changelog Fab-manager
 
 - Support for JSONPath syntax in OAuth2 SSO fields mapping
-- Support for OAuth2 scopes
+- Basic support for OAuth2 scopes through an environment variable
 - Add debug logs for the SSO authentication process
-- Fix a bug: SSO configuration interface has a misnamed field (Common URL)
-- Fix a bug: unable to bind Profile.birthday and Profile.gender from an SSO
-
+- Remove case sensitivity for the SSO account mapping process
 - Ability to cancel a payement schedule from the interface
 - Ability to create slots in the past
 - Ability to disable public account creation
@@ -25,6 +23,8 @@
 - Fix a bug: if a specialized VAT rate was defined when the VAT was disabled, the resulting VAT rate is wrong
 - Fix a bug: unable to rebuild the PDF for invoices without subscriptions
 - Fix a bug: the switch to enable/disable the VAT does not reflect the current state of the VAT
+- Fix a bug: SSO configuration interface has a misnamed field (Common URL)
+- Fix a bug: unable to bind Profile.birthday and Profile.gender from an SSO
 - [TODO DEPLOY] `rails db:seed`
 
 # v5.3.0 2021 December 29
