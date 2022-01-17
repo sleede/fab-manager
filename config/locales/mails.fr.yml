@@ -296,6 +296,18 @@ fr:
         please_find_attached_html: "Vous trouverez en pièce jointe votre échéancier de paiement du {DATE}, d'un montant de {AMOUNT} concernant votre {TYPE, select, Reservation{réservation} other{abonnement}}." #messageFormat interpolation
         schedule_in_your_dashboard_html: "Vous pouvez à tout moment retrouver votre échéancier dans %{DASHBOARD} sur le site du Fab Lab."
         your_dashboard: "votre tableau de bord"
+    notify_admin_payment_schedule_error:
+      subject: "[URGENT] Card debit error"
+      body:
+        remember: "In accordance with the %{REFERENCE} payment schedule, a debit by card of %{AMOUNT} was scheduled on %{DATE}."
+        error: "Unfortunately, an error occurred and this card debit was unable to complete successfully."
+        action: "Please then consult the %{GATEWAY} dashboard and contact the member as soon as possible to resolve the problem."
+    notify_member_payment_schedule_error:
+      subject: "[URGENT] Card debit error"
+      body:
+        remember: "In accordance with your %{REFERENCE} payment schedule, a debit by card of %{AMOUNT} was scheduled on %{DATE}."
+        error: "Unfortunately, an error occurred and this card debit was unable to complete successfully."
+        action: "Please contact a manager as soon as possible to resolve the problem."
     notify_admin_payment_schedule_failed:
       subject: "[URGENT] Échec du prélèvement par carte"
       body:
@@ -309,6 +321,16 @@ fr:
         error: "Malheureusement, ce prélèvement n'a pas pu être effectué correctement."
         action_html: "Veuillez vous rendre dans %{DASHBOARD} ou prendre contact avec un gestionnaire sous 24 heures, faute de quoi votre abonnement risque d'être interrompu."
         your_dashboard: "votre tableau de bord"
+    notify_admin_payment_schedule_gateway_canceled:
+      subject: "[URGENT] Payment schedule canceled by the payment gateway"
+      body:
+        error: "The payment schedule %{REFERENCE} was canceled by the payment gateway (%{GATEWAY}). No further debits will be made on this payment mean."
+        action: "Please consult the payment schedule management interface and contact the member as soon as possible to resolve the problem."
+    notify_member_payment_schedule_gateway_canceled:
+      subject: "[URGENT] Payment schedule canceled by the payment gateway"
+      body:
+        error: "Your payment schedule %{REFERENCE} was canceled by the payment gateway. No further debits will be made on this payment mean."
+        action: "Please contact a manager as soon as possible to resolve the problem."
     notify_admin_payment_schedule_check_deadline:
       subject: "Échéance d'encaissement"
       body:
