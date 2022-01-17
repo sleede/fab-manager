@@ -296,6 +296,18 @@ fr:
         please_find_attached_html: "Vous trouverez en pièce jointe votre échéancier de paiement du {DATE}, d'un montant de {AMOUNT} concernant votre {TYPE, select, Reservation{réservation} other{abonnement}}." #messageFormat interpolation
         schedule_in_your_dashboard_html: "Vous pouvez à tout moment retrouver votre échéancier dans %{DASHBOARD} sur le site du Fab Lab."
         your_dashboard: "votre tableau de bord"
+    notify_admin_payment_schedule_error:
+      subject: "[URGENT] Erreur lors du prélèvement par carte"
+      body:
+        remember: "Conformément à l'échéancier de paiement %{REFERENCE}, un prélèvement par carte de %{AMOUNT} était prévu le %{DATE}."
+        error: "Malheureusement, une erreur s'est prouite et ce prélèvement n'a pas pu être effectué correctement."
+        action: "Veuillez ensuite consulter le tableau de bord de %{GATEWAY} et contacter le membre dès que possible pour résoudre le problème."
+    notify_member_payment_schedule_error:
+      subject: "[URGENT] Erreur lors du prélèvement par carte"
+      body:
+        remember: "Conformément à votre échéancier de paiement %{REFERENCE}, un prélèvement par carte de %{AMOUNT} était prévu le %{DATE}."
+        error: "Malheureusement, une erreur s'est prouite et ce prélèvement n'a pas pu être effectué correctement."
+        action: "Veuillez contacter un responsable dès que possible pour résoudre le problème."
     notify_admin_payment_schedule_failed:
       subject: "[URGENT] Échec du prélèvement par carte"
       body:
@@ -309,6 +321,16 @@ fr:
         error: "Malheureusement, ce prélèvement n'a pas pu être effectué correctement."
         action_html: "Veuillez vous rendre dans %{DASHBOARD} ou prendre contact avec un gestionnaire sous 24 heures, faute de quoi votre abonnement risque d'être interrompu."
         your_dashboard: "votre tableau de bord"
+    notify_admin_payment_schedule_gateway_canceled:
+      subject: "[URGENT] Échéancier de paiement annulé par la passerelle de paiement"
+      body:
+        error: "L'échéancier de paiement %{REFERENCE} a été annulé par la passerelle de paiement (%{GATEWAY}). Aucun autre prélèvement ne sera effectué sur ce moyen de paiement."
+        action: "Veuillez consulter l'interface de gestion des échéanciers de paiement et contacter le membre dès que possible pour résoudre le problème."
+    notify_member_payment_schedule_gateway_canceled:
+      subject: "[URGENT] Échéancier de paiement annulé par la passerelle de paiement"
+      body:
+        error: "Votre échéancier de paiement %{REFERENCE} a été annulé par la passerelle de paiement. Aucun autre prélèvement ne sera effectué sur ce moyen de paiement."
+        action: "Veuillez contacter un responsable dès que possible pour résoudre le problème."
     notify_admin_payment_schedule_check_deadline:
       subject: "Échéance d'encaissement"
       body:
