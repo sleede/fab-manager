@@ -389,9 +389,9 @@ zu:
       configure_extended_prices_button:
         extended_prices: "crwdns22185:0crwdne22185:0"
         no_extended_prices: "crwdns22187:0crwdne22187:0"
-        extended_price_DURATION: "crwdns22189:0{DURATION}crwdne22189:0"
+        extended_price_DURATION: "crwdns22349:0{DURATION}crwdne22349:0"
       extended_price_form:
-        duration: "crwdns22191:0crwdne22191:0"
+        duration: "crwdns22351:0crwdne22351:0"
         amount: "crwdns22193:0crwdne22193:0"
       pack_form:
         hours: "crwdns21958:0crwdne21958:0"
@@ -762,6 +762,13 @@ zu:
           reference: "crwdns21078:0crwdne21078:0"
           customer: "crwdns21080:0crwdne21080:0"
           date: "crwdns21082:0crwdne21082:0"
+      update_payment_mean_modal:
+        title: "crwdns22353:0crwdne22353:0"
+        update_info: "crwdns22355:0crwdne22355:0"
+        select_payment_mean: "crwdns22357:0crwdne22357:0"
+        method_Transfer: "crwdns22359:0crwdne22359:0"
+        method_Check: "crwdns22361:0crwdne22361:0"
+        confirm_button: "crwdns22363:0crwdne22363:0"
       #management of users, labels, groups, and so on
       members:
         users_management: "crwdns7735:0crwdne7735:0"
