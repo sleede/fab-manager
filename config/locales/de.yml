@@ -367,10 +367,18 @@ de:
         all_objects_sync: "Alle daten wurden erfolgreich auf Stripe synchronisiert."
       notify_user_when_payment_schedule_ready:
         your_schedule_is_ready_html: "Your payment schedule #%{REFERENCE}, of %{AMOUNT}, is ready. <a href='api/payment_schedules/%{SCHEDULE_ID}/download' target='_blank'>Click here to download</a>."
+      notify_admin_payment_schedule_error:
+        schedule_error: "An error occurred for the card debit of the %{DATE} deadline, for schedule %{REFERENCE}"
+      notify_member_payment_schedule_error:
+        schedule_error: "An error occurred for the card debit of the %{DATE} deadline, for your schedule %{REFERENCE}"
       notify_admin_payment_schedule_failed:
         schedule_failed: "Failed card debit for the %{DATE} deadline, for schedule %{REFERENCE}"
       notify_member_payment_schedule_failed:
         schedule_failed: "Failed card debit for the %{DATE} deadline, for your schedule %{REFERENCE}"
+      notify_admin_payment_schedule_gateway_canceled:
+        schedule_canceled: "The payment schedule %{REFERENCE} was canceled by the gateway. An action is required."
+      notify_member_payment_schedule_gateway_canceled:
+        schedule_canceled: "Your payment schedule %{REFERENCE} was canceled by the gateway."
       notify_admin_payment_schedule_check_deadline:
         schedule_deadline: "You must cash the check for the %{DATE} deadline, for schedule %{REFERENCE}"
       notify_admin_payment_schedule_transfer_deadline:
