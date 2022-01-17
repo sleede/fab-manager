@@ -53,7 +53,7 @@
         <li><a class="text-black pointer" ng-click="logout($event)"><i class="fa fa-power-off"></i> {{ 'app.public.common.sign_out' | translate }}</a></li>
       </ul>
     </li>
-    <li ng-if="!isAuthenticated()"><a class="font-sbold label text-md pointer" ng-click="signup($event)"><i class="fa fa-rocket"></i> {{ 'app.public.common.sign_up' | translate }}</a></li>
+    <li ng-if="!isAuthenticated() && registrationEnabled()"><a class="font-sbold label text-md pointer" ng-click="signup($event)"><i class="fa fa-rocket"></i> {{ 'app.public.common.sign_up' | translate }}</a></li>
     <li ng-if="!isAuthenticated()">
         <a class="font-sbold label text-md pointer" ng-click="login($event)"><i class="fa fa-sign-in"></i> {{ 'app.public.common.sign_in' | translate }}</a>
     </li>

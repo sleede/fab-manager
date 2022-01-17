@@ -9,7 +9,7 @@ class InvoicesService
   # @param size {number} number of items per page
   # @param filters {Hash} allowed filters: number, customer, date.
   def self.list(order_key, direction, page, size, filters = {})
-    invoices = Invoice.includes(:avoir, :invoicing_profile, invoice_items: %i[subscription invoice_item])
+    invoices = Invoice.includes(:avoir, :operator_profile, :payment_gateway_object, invoicing_profile: [:user])
                       .joins(:invoicing_profile)
                       .order("#{order_key} #{direction}")
                       .page(page)

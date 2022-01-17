@@ -14,6 +14,7 @@ gem 'webpacker', '~> 5.x'
 gem 'jbuilder', '~> 2.5'
 gem 'jbuilder_cache_multi'
 gem 'json', '>= 2.3.0'
+gem 'jsonpath'
 
 gem 'forgery'
 gem 'responders', '~> 2.0'
@@ -29,6 +30,7 @@ group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'active_record_query_trace'
   gem 'awesome_print'
+  gem 'bullet'
   gem 'coveralls_reborn', '~> 0.18.0', require: false
   gem 'foreman'
   gem 'web-console', '>= 3.3.0'
@@ -63,6 +65,7 @@ gem 'pg_search'
 
 # authentication
 gem 'devise', '>= 4.6.0'
+
 
 gem 'omniauth', '~> 1.9.0'
 gem 'omniauth-oauth2'

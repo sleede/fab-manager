@@ -138,7 +138,18 @@ Please, ensure you know what you're doing, as this can lead to serious security 
 A comma separated list of settings that cannot be changed from the UI.
 Please refer to https://github.com/sleede/fab-manager/blob/master/app/models/setting.rb for a list of possible values.
 Only the system administrator can change them, with the command: `ENV=value rails fablab:setup:env_to_db`
+<a name="OAUTH2_SCOPE"></a>
 
+    OAUTH2_SCOPE
+
+A comma separated list of scopes that will be requested when authenticating with OAuth2.
+<a name="SSO_DEBUG"></a>
+
+    SSO_DEBUG
+
+If set to `true`, the SSO authentication process will print more debug logs. 
+Use in accordance with LOG_LEVEL=debug.
+Please do not enable this in production, as it can expose sensitive information.
 <a name="internationalization-settings"></a>
 ## Internationalization setting.
 <a name="APP_LOCALE"></a>

@@ -3,6 +3,8 @@
 # User is a physical or moral person with its authentication parameters
 # It is linked to the Profile model with hold information about this person (like address, name, etc.)
 class User < ApplicationRecord
+  require 'sso_logger'
+
   include NotifyWith::NotificationReceiver
   include NotifyWith::NotificationAttachedObject
   # Include default devise modules. Others available are:
@@ -201,16 +203,21 @@ class User < ApplicationRecord
   end
 
   def self.from_omniauth(auth)
+    logger = SsoLogger.new
+    logger.debug "[User::from_omniauth] initiated with parameter #{auth}"
     active_provider = AuthProvider.active
     raise SecurityError, 'The identity provider does not match the activated one' if active_provider.strategy_name != auth.provider
 
     where(provider: auth.provider, uid: auth.uid).first_or_create.tap do |user|
       # execute this regardless of whether record exists or not (-> User#tap)
       # this will init or update the user thanks to the information retrieved from the SSO
+      logger.debug user.id.nil? ? 'no user found, creating a new one' : "found user id=#{user.id}"
       user.profile ||= Profile.new
       auth.info.mapping.each do |key, value|
+        logger.debug "mapping info #{key} with value=#{value}"
         user.set_data_from_sso_mapping(key, value)
       end
+      logger.debug "generating a new password"
       user.password = Devise.friendly_token[0, 20]
     end
   end
@@ -238,6 +245,10 @@ class User < ApplicationRecord
         invoicing_profile.organization.name
       when 'profile.organization_address'
         invoicing_profile.organization.address.address
+      when 'profile.gender'
+        statistic_profile.gender
+      when 'profile.birthday'
+        statistic_profile.birthday
       else
         profile[parsed[2].to_sym]
       end
@@ -256,15 +267,24 @@ class User < ApplicationRecord
         profile.user_avatar ||= UserAvatar.new
         profile.user_avatar.remote_attachment_url = data
       when 'profile.address'
+        invoicing_profile ||= InvoicingProfile.new
         invoicing_profile.address ||= Address.new
         invoicing_profile.address.address = data
       when 'profile.organization_name'
+        invoicing_profile ||= InvoicingProfile.new
         invoicing_profile.organization ||= Organization.new
         invoicing_profile.organization.name = data
       when 'profile.organization_address'
+        invoicing_profile ||= InvoicingProfile.new
         invoicing_profile.organization ||= Organization.new
         invoicing_profile.organization.address ||= Address.new
         invoicing_profile.organization.address.address = data
+      when 'profile.gender'
+        statistic_profile ||= StatisticProfile.new
+        statistic_profile.gender = data
+      when 'profile.birthday'
+        statistic_profile ||= StatisticProfile.new
+        statistic_profile.birthday = data
       else
         profile[sso_mapping[8..-1].to_sym] = data unless data.nil?
       end
@@ -292,6 +312,8 @@ class User < ApplicationRecord
   ## Merge the provided User's SSO details into the current user and drop the provided user to ensure the unity
   ## @param sso_user {User} the provided user will be DELETED after the merge was successful
   def merge_from_sso(sso_user)
+    logger = SsoLogger.new
+    logger.debug "[User::merge_from_sso] initiated with parameter #{sso_user}"
     # update the attributes to link the account to the sso account
     self.provider = sso_user.provider
     self.uid = sso_user.uid
@@ -303,24 +325,34 @@ class User < ApplicationRecord
     # check that the email duplication was resolved
     if sso_user.email.end_with? '-duplicate'
       email_addr = sso_user.email.match(/^<([^>]+)>.{20}-duplicate$/)[1]
+      logger.error 'duplicate email was not resolved'
       raise(DuplicateIndexError, email_addr) unless email_addr == email
     end
 
     # update the user's profile to set the data managed by the SSO
     auth_provider = AuthProvider.from_strategy_name(sso_user.provider)
+    logger.debug "found auth_provider=#{auth_provider.name}"
     auth_provider.sso_fields.each do |field|
       value = sso_user.get_data_from_sso_mapping(field)
+      logger.debug "mapping sso field #{field} with value=#{value}"
       # we do not merge the email field if its end with the special value '-duplicate' as this means
       # that the user is currently merging with the account that have the same email than the sso
       set_data_from_sso_mapping(field, value) unless field == 'user.email' && value.end_with?('-duplicate')
     end
 
     # run the account transfer in an SQL transaction to ensure data integrity
-    User.transaction do
-      # remove the temporary account
-      sso_user.destroy
-      # finally, save the new details
-      save!
+    begin
+      User.transaction do
+        # remove the temporary account
+        logger.debug 'removing the temporary user'
+        sso_user.destroy
+        # finally, save the new details
+        logger.debug 'saving the updated user'
+        save!
+      end
+    rescue ActiveRecord::RecordInvalid => e
+      logger.error "error while merging user #{sso_user.id} into #{id}: #{e.message}"
+      raise e
     end
   end
 

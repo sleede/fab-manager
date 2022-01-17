@@ -98,7 +98,8 @@ fr:
         delete_this_slot: "Uniquement ce créneau"
         delete_this_and_next: "Ce créneau et tous les suivants"
         delete_all: "Tous les créneaux"
-        event_in_the_past: "Impossible de créer un créneau dans le passé."
+        event_in_the_past: "Créer un créneau dans le passé"
+        confirm_create_event_in_the_past: "Vous êtes sur le point de créer un créneau dans le passé. Êtes-vous sûr de vouloir faire cela ? Les membres ne pourront pas réserver ce créneau."
         edit_event: "Modifier l'événement"
         view_reservations: "Voir les réservations"
         legend: "Légende"
@@ -388,9 +389,9 @@ fr:
       configure_extended_prices_button:
         extended_prices: "Prix étendus"
         no_extended_prices: "Aucun prix étendu pour l'instant"
-        extended_price_DURATION: "{DURATION} minutes"
+        extended_price_DURATION: "{DURATION} heures"
       extended_price_form:
-        duration: "Durée (minutes)"
+        duration: "Durée (heures)"
         amount: "Prix"
       pack_form:
         hours: "Heures"
@@ -761,6 +762,13 @@ fr:
           reference: "Référence"
           customer: "Client"
           date: "Date"
+      update_payment_mean_modal:
+        title: "Mettre à jour le moyen de paiement"
+        update_info: "Veuillez indiquer ci-dessous le nouveau moyen de paiement pour que cet échéancier de paiement puisse continuer."
+        select_payment_mean: "Sélectionner un nouveau moyen de paiement"
+        method_Transfer: "Par virement bancaire"
+        method_Check: "Par chèques"
+        confirm_button: "Mettre à jour"
       #management of users, labels, groups, and so on
       members:
         users_management: "Gestion des utilisateurs"
@@ -1282,6 +1290,7 @@ fr:
         extended_prices: "Prix étendus"
         extended_prices_info_html: "Les espaces peuvent avoir des prix différents selon la durée cumulée de la réservation. Vous pouvez choisir si cela s'applique à toutes les réservations ou seulement à celles qui commencent dans la même journée."
         extended_prices_in_same_day: "Prix étendus le même jour"
+        public_registrations: "Inscriptions publiques"
         overlapping_options:
           training_reservations: "Formations"
           machine_reservations: "Machines"
@@ -1308,6 +1317,9 @@ fr:
             name: "Nom"
             created_at: "Date de création"
             updated_at: "Date de mise à jour"
+          public_registrations: "Inscriptions publiques"
+          public_registrations_info: "Permettre à tout le monde de créer un nouveau compte sur la plateforme. Si désactivé, seuls les administrateurs et les gestionnaires peuvent créer de nouveaux comptes."
+          public_registrations_allowed: "Inscriptions publiques autorisées"
           help: "Aide"
           feature_tour: "Visite guidée des fonctionnalités"
           feature_tour_info_html: "<p>Lorsque un administrateur ou un gestionnaire est connecté, une visite guidée des fonctionnalités se déclenchera lors de la première visite de chaque section de l'application. Vous pouvez modifier ce comportement pour une des valeur suivantes :</p><ul><li>« Une fois » pour garder le comportement par défaut.</li><li>« Par session » pour afficher les visites guidées chaque fois que l'application est ouverte de nouveau.</li><li>« Lancement manuel » pour éviter l'affichage automatique des visites guidées. Il sera toujours possible de les déclencher en appuyant sur F1 ou en cliquant sur « Aide » dans le menu utilisateur.</li></ul>"
@@ -1446,8 +1458,10 @@ fr:
         payment_method: "Moyen de paiement"
         method_card: "Carte bancaire en ligne"
         method_check: "Par chèques"
+        method_transfer: "Par virement bancaire"
         card_collection_info: "En validant, vous serez invité à saisir les informations de carte bancaire du membre. Cette carte sera prélevée automatiquement aux échéances."
         check_collection_info: "En validant, vous confirmez être en possession de {DEADLINES} chèques permettant d'encaisser l'ensemble des mensualité."
+        transfer_collection_info: "<p>En validant, vous confirmez avoir mis en place {DEADLINES} prélèvements bancaires, vous permettant de percevoir toutes les mensualités.</p><p><strong>Veuillez noter :</strong> les prélèvements bancaires ne sont pas automatiquement gérés par Fab-manager.</p>"
         online_payment_disabled: "Le paiement en ligne n'est pas disponible. Vous ne pouvez pas encaisser cet échéancier de paiement en utilisant la carte bancaire en ligne."
       check_list_setting:
         save: 'Enregistrer'

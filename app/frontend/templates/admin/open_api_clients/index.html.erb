@@ -4,7 +4,7 @@
   <div class="row no-gutter">
     <div class="col-xs-2 col-sm-2 col-md-1">
       <section class="heading-btn">
-        <a href="#" ng-click="backPrevLocation($event)"><i class="fas fa-long-arrow-alt-left "></i></a>
+        <a ng-click="backPrevLocation($event)"><i class="fas fa-long-arrow-alt-left "></i></a>
       </section>
     </div>
     <div class="col-xs-10 col-sm-10 col-md-7 b-l b-r-md">
@@ -50,13 +50,13 @@
         <table class="table">
           <thead>
             <tr>
-              <th style="width:20%"><a href="" ng-click="setOrder('name')">{{ 'app.admin.open_api_clients.name' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': order == 'name', 'fa fa-sort-alpha-desc': order == '-name', 'fa fa-arrows-v': order }"></i></a></th>
+              <th style="width:20%"><a ng-click="setOrder('name')">{{ 'app.admin.open_api_clients.name' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': order == 'name', 'fa fa-sort-alpha-desc': order == '-name', 'fa fa-arrows-v': order }"></i></a></th>
 
-              <th style="width:15%"><a href="" ng-click="setOrder('calls_count')">{{ 'app.admin.open_api_clients.calls_count' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': order == 'calls_count', 'fa fa-sort-numeric-desc': order == '-calls_count', 'fa fa-arrows-v': order }"></i></a></th>
+              <th style="width:15%"><a ng-click="setOrder('calls_count')">{{ 'app.admin.open_api_clients.calls_count' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': order == 'calls_count', 'fa fa-sort-numeric-desc': order == '-calls_count', 'fa fa-arrows-v': order }"></i></a></th>
 
-              <th style="width:20%"><a href="">{{ 'app.admin.open_api_clients.token' | translate }}</a></th>
+              <th style="width:20%"><a>{{ 'app.admin.open_api_clients.token' | translate }}</a></th>
 
-              <th style="width:20%"><a href="" ng-click="setOrder('created_at')">{{ 'app.admin.open_api_clients.created_at' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': order == 'created_at', 'fa fa-sort-numeric-desc': order == '-created_at', 'fa fa-arrows-v': order }"></i></a></th>
+              <th style="width:20%"><a ng-click="setOrder('created_at')">{{ 'app.admin.open_api_clients.created_at' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': order == 'created_at', 'fa fa-sort-numeric-desc': order == '-created_at', 'fa fa-arrows-v': order }"></i></a></th>
 
               <th style="width:25%"></th>
             </tr>

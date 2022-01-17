@@ -28,10 +28,10 @@ export const ConfigureExtendedPriceButton: React.FC<ConfigureExtendedPriceButton
   const [showList, setShowList] = useState<boolean>(false);
 
   /**
-   * Return the number of minutes, user-friendly formatted
+   * Return the number of hours, user-friendly formatted
    */
   const formatDuration = (minutes: number): string => {
-    return t('app.admin.configure_extended_prices_button.extended_price_DURATION', { DURATION: minutes });
+    return t('app.admin.configure_extended_prices_button.extended_price_DURATION', { DURATION: minutes / 60 });
   };
 
   /**

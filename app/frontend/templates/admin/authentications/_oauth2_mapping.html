@@ -64,10 +64,11 @@
             </td>
             <td ng-class="{'has-error': mappingForm['auth_mapping[api_field]'].$dirty && mappingForm['auth_mapping[api_field]'].$invalid}">
                 <input type="text"
-                       class="form-control"
+                       class="form-control help-cursor"
                        placeholder="field_name"
                        ng-model="newMapping.api_field"
                        name="auth_mapping[api_field]"
+                       title="{{ 'app.shared.oauth2.api_field_help' | translate }}"
                        required/>
             </td>
             <td>

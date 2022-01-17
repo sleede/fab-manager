@@ -1,4 +1,4 @@
-# Detailed informations about PostgreSQL usage in Fab-manager
+# Detailed information about PostgreSQL usage in Fab-manager
 
 <a name="run-postgresql-cli"></a>
 ## Run the PostgreSQL command line interface
@@ -10,7 +10,7 @@ This can be achieved doing the following:
    cd /apps/fabmanager
    docker-compose exec postgres psql -Upostgres
    ```
-   
+
 ## Dumping the database
 
 Use the following commands to dump the PostgreSQL database to an archive file

@@ -13,7 +13,7 @@ class UpdatePgTrgm < ActiveRecord::Migration[5.2]
   end
 
   def down
-    # we cannot downgrade a postgresSQL extension, so we do notinf
+    # we cannot downgrade a postgresSQL extension, so we do nothing
     execute <<~SQL
       ALTER EXTENSION pg_trgm UPDATE;
     SQL

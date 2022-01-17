@@ -43,6 +43,15 @@ class Stripe::Service < Payment::Service
     pgo.save!
   end
 
+  def cancel_subscription(payment_schedule)
+    stripe_key = Setting.get('stripe_secret_key')
+
+    stp_subscription = payment_schedule.gateway_subscription.retrieve
+
+    res = Stripe::Subscription.delete(stp_subscription.id, {}, api_key: stripe_key)
+    res.status == 'canceled'
+  end
+
   def create_user(user_id)
     StripeWorker.perform_async(:create_stripe_customer, user_id)
   end
@@ -85,6 +94,12 @@ class Stripe::Service < Payment::Service
   def process_payment_schedule_item(payment_schedule_item)
     stripe_key = Setting.get('stripe_secret_key')
     stp_subscription = payment_schedule_item.payment_schedule.gateway_subscription.retrieve
+    if stp_subscription.status == 'canceled'
+      # the subscription was canceled by the gateway => notify & update the status
+      notify_payment_schedule_gateway_canceled(payment_schedule_item)
+      payment_schedule_item.update_attributes(state: 'gateway_canceled')
+      return
+    end
     stp_invoice = Stripe::Invoice.retrieve(stp_subscription.latest_invoice, api_key: stripe_key)
     if stp_invoice.status == 'paid'
       ##### Successfully paid
@@ -98,15 +113,7 @@ class Stripe::Service < Payment::Service
       pgo.save!
     elsif stp_subscription.status == 'past_due' || stp_invoice.status == 'open'
       ##### Payment error
-      if payment_schedule_item.state == 'new'
-        # notify only for new deadlines, to prevent spamming
-        NotificationCenter.call type: 'notify_admin_payment_schedule_failed',
-                                receiver: User.admins_and_managers,
-                                attached_object: payment_schedule_item
-        NotificationCenter.call type: 'notify_member_payment_schedule_failed',
-                                receiver: payment_schedule_item.payment_schedule.user,
-                                attached_object: payment_schedule_item
-      end
+      notify_payment_schedule_item_failed(payment_schedule_item)
       stp_payment_intent = Stripe::PaymentIntent.retrieve(stp_invoice.payment_intent, api_key: stripe_key)
       payment_schedule_item.update_attributes(state: stp_payment_intent.status,
                                               client_secret: stp_payment_intent.client_secret)
@@ -114,6 +121,7 @@ class Stripe::Service < Payment::Service
       pgo.gateway_object = stp_invoice
       pgo.save!
     else
+      notify_payment_schedule_item_error(payment_schedule_item)
       payment_schedule_item.update_attributes(state: 'error')
     end
   end

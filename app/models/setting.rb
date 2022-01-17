@@ -127,7 +127,8 @@ class Setting < ApplicationRecord
                              renew_pack_threshold
                              pack_only_for_subscription
                              overlapping_categories
-                             extended_prices_in_same_day] }
+                             extended_prices_in_same_day
+                             public_registrations] }
   # WARNING: when adding a new key, you may also want to add it in:
   # - config/locales/en.yml#settings
   # - app/frontend/src/javascript/models/setting.ts#SettingName

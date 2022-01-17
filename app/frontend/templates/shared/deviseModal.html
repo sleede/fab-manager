@@ -42,9 +42,9 @@
                          translate-attr="{ placeholder: 'app.public.common.your_password' }"
                          ng-minlength="8"/>
                 </div>
-                <a href="#" ng-click="openResetPassword($event)" class="text-xs" translate translate-default="Forgotten password">{{ 'app.public.common.password_forgotten' }}</a>
+                <a ng-click="openResetPassword($event)" class="text-xs" translate translate-default="Forgotten password">{{ 'app.public.common.password_forgotten' }}</a>
                 <span ng-if="confirmationRequired">
-                  <br><a href="#" ng-click="openConfirmationNewModal($event)" class="text-xs" translate translate-default="Confirm account">{{ 'app.public.common.confirm_my_account' }}</a>
+                  <br><a ng-click="openConfirmationNewModal($event)" class="text-xs" translate translate-default="Confirm account">{{ 'app.public.common.confirm_my_account' }}</a>
                 </span>
                 <div class="alert alert-warning m-t-sm m-b-none text-xs p-sm" ng-show='isCapsLockOn' role="alert">
                   <i class="fa fa-warning"></i>
@@ -63,7 +63,7 @@
       <p class="text-center font-sbold">
         <span translate translate-default="Not registered?">{{ 'app.public.common.not_registered_to_the_fablab' }}</span>
         <br/>
-        <a href="#" ng-click="openSignup($event)" class="text-u-l" translate translate-default="Create an account">{{ 'app.public.common.create_an_account' }}</a></br>
+        <a ng-click="openSignup($event)" class="text-u-l" translate translate-default="Create an account">{{ 'app.public.common.create_an_account' }}</a></br>
       </p>
     </div>
 

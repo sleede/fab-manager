@@ -13,7 +13,7 @@
 /**
  * Navigation controller. List the links availables in the left navigation pane and their icon.
  */
-Application.Controllers.controller('MainNavController', ['$scope', function ($scope) {
+Application.Controllers.controller('MainNavController', ['$scope', 'settingsPromise', function ($scope, settingsPromise) {
   // Common links (public application)
   $scope.navLinks = [
     {
@@ -172,5 +172,12 @@ Application.Controllers.controller('MainNavController', ['$scope', function ($sc
       authorizedRoles: ['admin']
     });
   }
+
+  /**
+   * Returns the current state of the public registration setting (allowed/blocked).
+   */
+  $scope.registrationEnabled = function () {
+    return settingsPromise.public_registrations === 'true';
+  };
 }
 ]);

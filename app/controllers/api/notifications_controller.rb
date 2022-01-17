@@ -6,12 +6,15 @@ class API::NotificationsController < API::ApiController
   include NotifyWith::NotificationsApi
   before_action :authenticate_user!
 
+  # notifications can have anything attached, so we won't eager load the whole database
+  around_action :skip_bullet, if: -> { defined?(Bullet) }
+
   # Number of notifications added to the page when the user clicks on 'load next notifications'
   NOTIFICATIONS_PER_PAGE = 15
 
   def index
     loop do
-      @notifications = current_user.notifications.page(params[:page]).per(NOTIFICATIONS_PER_PAGE).order('created_at DESC')
+      @notifications = current_user.notifications.includes(:attached_object).page(params[:page]).per(NOTIFICATIONS_PER_PAGE).order('created_at DESC')
       # we delete obsolete notifications on first access
       break unless delete_obsoletes(@notifications)
     end
@@ -24,7 +27,7 @@ class API::NotificationsController < API::ApiController
 
   def last_unread
     loop do
-      @notifications = current_user.notifications.where(is_read: false).limit(3).order('created_at DESC')
+      @notifications = current_user.notifications.includes(:attached_object).where(is_read: false).limit(3).order('created_at DESC')
       # we delete obsolete notifications on first access
       break unless delete_obsoletes(@notifications)
     end

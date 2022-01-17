@@ -4,7 +4,7 @@ import {
   CancelScheduleResponse,
   CashCheckResponse, PayItemResponse,
   PaymentSchedule,
-  PaymentScheduleIndexRequest, RefreshItemResponse
+  PaymentScheduleIndexRequest, PaymentScheduleItem, RefreshItemResponse
 } from '../models/payment-schedule';
 
 export default class PaymentScheduleAPI {
@@ -23,6 +23,16 @@ export default class PaymentScheduleAPI {
     return res?.data;
   }
 
+  static async confirmTransfer (paymentScheduleItemId: number): Promise<CashCheckResponse> {
+    const res: AxiosResponse = await apiClient.post(`/api/payment_schedules/items/${paymentScheduleItemId}/confirm_transfer`);
+    return res?.data;
+  }
+
+  static async getItem (paymentScheduleItemId: number): Promise<PaymentScheduleItem> {
+    const res: AxiosResponse = await apiClient.get(`/api/payment_schedules/items/${paymentScheduleItemId}`);
+    return res?.data;
+  }
+
   static async refreshItem (paymentScheduleItemId: number): Promise<RefreshItemResponse> {
     const res: AxiosResponse = await apiClient.post(`/api/payment_schedules/items/${paymentScheduleItemId}/refresh_item`);
     return res?.data;
@@ -35,6 +45,11 @@ export default class PaymentScheduleAPI {
 
   static async cancel (paymentScheduleId: number): Promise<CancelScheduleResponse> {
     const res: AxiosResponse = await apiClient.put(`/api/payment_schedules/${paymentScheduleId}/cancel`);
+    return res?.data;
+  }
+
+  static async update (paymentSchedule: PaymentSchedule): Promise<PaymentSchedule> {
+    const res:AxiosResponse<PaymentSchedule> = await apiClient.patch(`/api/payment_schedules/${paymentSchedule.id}`, paymentSchedule);
     return res?.data;
   }
 }

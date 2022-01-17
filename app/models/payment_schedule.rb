@@ -50,7 +50,7 @@ class PaymentSchedule < PaymentDocument
   end
 
   def gateway_subscription
-    payment_gateway_objects.map(&:gateway_object).find(&:subscription?)
+    payment_gateway_objects.includes(:payment_gateway_object).map(&:gateway_object).find(&:subscription?)
   end
 
   def gateway_order
@@ -73,6 +73,10 @@ class PaymentSchedule < PaymentDocument
 
   def footprint_children
     payment_schedule_items
+  end
+
+  def self.columns_out_of_footprint
+    %w[payment_method]
   end
 
   def post_save(*args)

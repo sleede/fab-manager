@@ -98,7 +98,8 @@ zu:
         delete_this_slot: "crwdns6839:0crwdne6839:0"
         delete_this_and_next: "crwdns6841:0crwdne6841:0"
         delete_all: "crwdns6843:0crwdne6843:0"
-        event_in_the_past: "crwdns6845:0crwdne6845:0"
+        event_in_the_past: "crwdns22273:0crwdne22273:0"
+        confirm_create_event_in_the_past: "crwdns22275:0crwdne22275:0"
         edit_event: "crwdns6847:0crwdne6847:0"
         view_reservations: "crwdns6849:0crwdne6849:0"
         legend: "crwdns20198:0crwdne20198:0"
@@ -388,9 +389,9 @@ zu:
       configure_extended_prices_button:
         extended_prices: "crwdns22185:0crwdne22185:0"
         no_extended_prices: "crwdns22187:0crwdne22187:0"
-        extended_price_DURATION: "crwdns22189:0{DURATION}crwdne22189:0"
+        extended_price_DURATION: "crwdns22349:0{DURATION}crwdne22349:0"
       extended_price_form:
-        duration: "crwdns22191:0crwdne22191:0"
+        duration: "crwdns22351:0crwdne22351:0"
         amount: "crwdns22193:0crwdne22193:0"
       pack_form:
         hours: "crwdns21958:0crwdne21958:0"
@@ -761,6 +762,13 @@ zu:
           reference: "crwdns21078:0crwdne21078:0"
           customer: "crwdns21080:0crwdne21080:0"
           date: "crwdns21082:0crwdne21082:0"
+      update_payment_mean_modal:
+        title: "crwdns22353:0crwdne22353:0"
+        update_info: "crwdns22355:0crwdne22355:0"
+        select_payment_mean: "crwdns22357:0crwdne22357:0"
+        method_Transfer: "crwdns22359:0crwdne22359:0"
+        method_Check: "crwdns22361:0crwdne22361:0"
+        confirm_button: "crwdns22363:0crwdne22363:0"
       #management of users, labels, groups, and so on
       members:
         users_management: "crwdns7735:0crwdne7735:0"
@@ -1282,6 +1290,7 @@ zu:
         extended_prices: "crwdns22167:0crwdne22167:0"
         extended_prices_info_html: "crwdns22169:0crwdne22169:0"
         extended_prices_in_same_day: "crwdns22171:0crwdne22171:0"
+        public_registrations: "crwdns22277:0crwdne22277:0"
         overlapping_options:
           training_reservations: "crwdns22111:0crwdne22111:0"
           machine_reservations: "crwdns22113:0crwdne22113:0"
@@ -1308,6 +1317,9 @@ zu:
             name: "crwdns20758:0crwdne20758:0"
             created_at: "crwdns20760:0crwdne20760:0"
             updated_at: "crwdns20762:0crwdne20762:0"
+          public_registrations: "crwdns22279:0crwdne22279:0"
+          public_registrations_info: "crwdns22281:0crwdne22281:0"
+          public_registrations_allowed: "crwdns22283:0crwdne22283:0"
           help: "crwdns20764:0crwdne20764:0"
           feature_tour: "crwdns20766:0crwdne20766:0"
           feature_tour_info_html: "crwdns20768:0crwdne20768:0"
@@ -1446,8 +1458,10 @@ zu:
         payment_method: "crwdns22010:0crwdne22010:0"
         method_card: "crwdns22012:0crwdne22012:0"
         method_check: "crwdns22014:0crwdne22014:0"
+        method_transfer: "crwdns22289:0crwdne22289:0"
         card_collection_info: "crwdns22016:0crwdne22016:0"
         check_collection_info: "crwdns22018:0{DEADLINES}crwdne22018:0"
+        transfer_collection_info: "crwdns22291:0{DEADLINES}crwdne22291:0"
         online_payment_disabled: "crwdns22020:0crwdne22020:0"
       check_list_setting:
         save: 'crwdns22123:0crwdne22123:0'

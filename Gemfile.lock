@@ -67,6 +67,9 @@ GEM
     bootsnap (1.4.6)
       msgpack (~> 1.0)
     builder (3.2.4)
+    bullet (7.0.0)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11)
     camertron-eprun (1.1.1)
     carrierwave (2.1.1)
       activemodel (>= 5.0.0)
@@ -172,6 +175,8 @@ GEM
     jbuilder_cache_multi (0.1.0)
       jbuilder (>= 1.5.0, < 3)
     json (2.3.1)
+    jsonpath (1.1.0)
+      multi_json
     jwt (2.2.1)
     kaminari (1.2.1)
       activesupport (>= 4.1.0)
@@ -394,6 +399,7 @@ GEM
     tzinfo-data (1.2020.4)
       tzinfo (>= 1.0.0)
     unicode-display_width (1.4.1)
+    uniform_notifier (1.14.2)
     vcr (6.0.0)
     virtus (1.0.5)
       axiom-types (~> 0.1)
@@ -431,6 +437,7 @@ DEPENDENCIES
   apipie-rails
   awesome_print
   bootsnap
+  bullet
   carrierwave
   caxlsx
   caxlsx_rails
@@ -451,6 +458,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jbuilder_cache_multi
   json (>= 2.3.0)
+  jsonpath
   kaminari
   listen (~> 3.0.5)
   message_format
@@ -498,4 +506,4 @@ DEPENDENCIES
   webpacker (~> 5.x)
 
 BUNDLED WITH
-   2.1.4
+   2.2.19

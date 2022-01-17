@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require 'omniauth-oauth2'
+require 'jsonpath'
+require 'sso_logger'
 
 module OmniAuth::Strategies
   # Authentication strategy provided trough oAuth 2.0
@@ -24,6 +26,12 @@ module OmniAuth::Strategies
            authorize_url: active_provider.providable.authorization_endpoint,
            token_url: active_provider.providable.token_endpoint
 
+    def authorize_params
+      super.tap do |params|
+        params[:scope] = ENV['OAUTH2_SCOPE']
+      end
+    end
+
     def callback_url
       url = Rails.application.config.action_controller.default_url_options
       "#{url[:protocol]}://#{url[:host]}#{script_name}#{callback_path}"
@@ -45,50 +53,57 @@ module OmniAuth::Strategies
 
     # retrieve data from various url, querying each only once
     def raw_info
+      logger = SsoLogger.new
+
       @raw_info ||= {}
+      logger.debug "[raw_info] @raw_infos = #{@raw_info&.to_json}"
       unless @raw_info.size.positive?
         OmniAuth::Strategies::SsoOauth2Provider.active_provider.providable.o_auth2_mappings.each do |mapping|
-          unless @raw_info.key?(mapping.api_endpoint.to_sym)
-            @raw_info[mapping.api_endpoint.to_sym] = access_token.get(mapping.api_endpoint).parsed
-          end
+          logger.debug "mapping = #{mapping&.to_json}"
+          next if @raw_info.key?(mapping.api_endpoint.to_sym)
+
+          logger.debug "api_endpoint = #{mapping.api_endpoint.to_sym}"
+          logger.debug "access_token = #{access_token&.to_json}"
+          logger.debug "token get = #{access_token.get(mapping.api_endpoint)}"
+          logger.debug "parsed = #{access_token.get(mapping.api_endpoint).parsed}"
+          @raw_info[mapping.api_endpoint.to_sym] = access_token.get(mapping.api_endpoint).parsed
         end
       end
       @raw_info
     end
 
     def parsed_info
+      logger = SsoLogger.new
+
       @parsed_info ||= {}
+      logger.debug "[parsed_info] @parsed_info = #{@parsed_info.to_json}"
       unless @parsed_info.size.positive?
         OmniAuth::Strategies::SsoOauth2Provider.active_provider.providable.o_auth2_mappings.each do |mapping|
 
+          raw_data = ::JsonPath.new(mapping.api_field).on(raw_info[mapping.api_endpoint.to_sym]).first
+          logger.debug "@parsed_info[#{local_sym(mapping)}] mapped from #{raw_data}"
           if mapping.transformation
             case mapping.transformation['type']
             ## INTEGER
             when 'integer'
-              @parsed_info[local_sym(mapping)] = map_integer(mapping.transformation,
-                                                             mapping.api_endpoint.to_sym,
-                                                             mapping.api_field)
+              @parsed_info[local_sym(mapping)] = map_integer(mapping.transformation, raw_data)
 
             ## BOOLEAN
             when 'boolean'
-              @parsed_info[local_sym(mapping)] = map_boolean(mapping.transformation,
-                                                             mapping.api_endpoint.to_sym,
-                                                             mapping.api_field)
+              @parsed_info[local_sym(mapping)] = map_boolean(mapping.transformation, raw_data)
 
             ## DATE
             when 'date'
-              @params[local_sym(mapping)] = map_date(mapping.transformation,
-                                                     mapping.api_endpoint.to_sym,
-                                                     mapping.api_field)
+              @params[local_sym(mapping)] = map_date(mapping.transformation, raw_data)
 
             ## OTHER TRANSFORMATIONS (not supported)
             else
-              @parsed_info[local_sym(mapping)] = raw_info[mapping.api_endpoint.to_sym][mapping.api_field]
+              @parsed_info[local_sym(mapping)] = raw_data
             end
 
           ## NO TRANSFORMATION
           else
-            @parsed_info[local_sym(mapping)] = raw_info[mapping.api_endpoint.to_sym][mapping.api_field]
+            @parsed_info[local_sym(mapping)] = raw_data
           end
         end
       end
@@ -101,38 +116,38 @@ module OmniAuth::Strategies
       (mapping.local_model + '.' + mapping.local_field).to_sym
     end
 
-    def map_integer(transformation, api_endpoint, api_field)
+    def map_integer(transformation, raw_data)
       value = nil
       transformation['mapping'].each do |m|
-        if m['from'] == raw_info[api_endpoint][api_field]
+        if m['from'] == raw_data
           value = m['to']
           break
         end
       end
       # if no transformation had set any value, return the raw value
-      value || raw_info[api_endpoint.to_sym][api_field]
+      value || raw_data
     end
 
-    def map_boolean(transformation, api_endpoint, api_field)
-      return false if raw_info[api_endpoint][api_field] == transformation['false_value']
+    def map_boolean(transformation, raw_data)
+      return false if raw_data == transformation['false_value']
 
-      true if raw_info[api_endpoint][api_field] == transformation['true_value']
+      true if raw_data == transformation['true_value']
     end
 
-    def map_date(transformation, api_endpoint, api_field)
+    def map_date(transformation, raw_data)
       case transformation['format']
       when 'iso8601'
-        DateTime.iso8601(raw_info[api_endpoint][api_field])
+        DateTime.iso8601(raw_data)
       when 'rfc2822'
-        DateTime.rfc2822(raw_info[api_endpoint][api_field])
+        DateTime.rfc2822(raw_data)
       when 'rfc3339'
-        DateTime.rfc3339(raw_info[api_endpoint][api_field])
+        DateTime.rfc3339(raw_data)
       when 'timestamp-s'
-        DateTime.strptime(raw_info[api_endpoint][api_field], '%s')
+        DateTime.strptime(raw_data, '%s')
       when 'timestamp-ms'
-        DateTime.strptime(raw_info[api_endpoint][api_field], '%Q')
+        DateTime.strptime(raw_data, '%Q')
       else
-        DateTime.parse(raw_info[api_endpoint][api_field])
+        DateTime.parse(raw_data)
       end
     end
   end

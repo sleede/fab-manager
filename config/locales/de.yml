@@ -37,6 +37,7 @@ de:
       end_before_start: "Das Enddatum darf nicht vor dem Startdatum liegen. Wählen Sie ein Datum nach %{START}"
       invalid_duration: "Der zulässige Zeitraum muss zwischen 1 Tag und 1 Jahr lang sein. Ihr Zeitraum ist %{DAYS} Tage lang."
       must_be_in_the_past: "Der Zeitraum darf ausschließlich vor dem heutigen Datum liegen."
+      registration_disabled: "Registration is disabled"
   apipie:
     api_documentation: "API-Dokumentation"
     code: "HTTP code"
@@ -125,7 +126,7 @@ de:
     deadline_date: "Payment date"
     deadline_amount: "Betrag inklusive Steuern"
     total_amount: "Total amount"
-    settlement_by_METHOD: "Debits will be made by {METHOD, select, card{card} other{check}} for each deadlines."
+    settlement_by_METHOD: "Debits will be made by {METHOD, select, card{card} transfer{bank transfer} other{check}} for each deadlines."
     settlement_by_wallet: "%{AMOUNT} will be debited from your wallet to settle the first deadline."
   #CVS accounting export (columns headers)
   accounting_export:
@@ -366,12 +367,22 @@ de:
         all_objects_sync: "Alle daten wurden erfolgreich auf Stripe synchronisiert."
       notify_user_when_payment_schedule_ready:
         your_schedule_is_ready_html: "Your payment schedule #%{REFERENCE}, of %{AMOUNT}, is ready. <a href='api/payment_schedules/%{SCHEDULE_ID}/download' target='_blank'>Click here to download</a>."
+      notify_admin_payment_schedule_error:
+        schedule_error: "An error occurred for the card debit of the %{DATE} deadline, for schedule %{REFERENCE}"
+      notify_member_payment_schedule_error:
+        schedule_error: "An error occurred for the card debit of the %{DATE} deadline, for your schedule %{REFERENCE}"
       notify_admin_payment_schedule_failed:
         schedule_failed: "Failed card debit for the %{DATE} deadline, for schedule %{REFERENCE}"
       notify_member_payment_schedule_failed:
         schedule_failed: "Failed card debit for the %{DATE} deadline, for your schedule %{REFERENCE}"
+      notify_admin_payment_schedule_gateway_canceled:
+        schedule_canceled: "The payment schedule %{REFERENCE} was canceled by the gateway. An action is required."
+      notify_member_payment_schedule_gateway_canceled:
+        schedule_canceled: "Your payment schedule %{REFERENCE} was canceled by the gateway."
       notify_admin_payment_schedule_check_deadline:
         schedule_deadline: "You must cash the check for the %{DATE} deadline, for schedule %{REFERENCE}"
+      notify_admin_payment_schedule_transfer_deadline:
+        schedule_deadline: "You must confirm the bank direct debit for the %{DATE} deadline, for schedule %{REFERENCE}"
   #statistics tools for admins
   statistics:
     subscriptions: "Abonnements"
@@ -542,3 +553,4 @@ de:
     pack_only_for_subscription: "Restrict packs for subscribers"
     overlapping_categories: "Categories for overlapping booking prevention"
     extended_prices_in_same_day: "Extended prices in the same day"
+    public_registrations: "Public registrations"

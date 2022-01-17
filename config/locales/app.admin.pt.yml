@@ -98,7 +98,8 @@ pt:
         delete_this_slot: "Somente este slot"
         delete_this_and_next: "Este slot e o seguinte"
         delete_all: "Todos os slots"
-        event_in_the_past: "Não foi possível criar um slot no passado."
+        event_in_the_past: "Create a slot in the past"
+        confirm_create_event_in_the_past: "You are about to create a slot in the past. Are you sure you want to do this? Members will not be able to book this slot."
         edit_event: "Editar evento"
         view_reservations: "Ver reservas"
         legend: "Legenda"
@@ -388,9 +389,9 @@ pt:
       configure_extended_prices_button:
         extended_prices: "Extended prices"
         no_extended_prices: "No extended price for now"
-        extended_price_DURATION: "{DURATION} minutes"
+        extended_price_DURATION: "{DURATION} hours"
       extended_price_form:
-        duration: "Duration (minutes)"
+        duration: "Duration (hours)"
         amount: "Price"
       pack_form:
         hours: "Horas"
@@ -761,6 +762,13 @@ pt:
           reference: "Referências"
           customer: "Cliente"
           date: "Data"
+      update_payment_mean_modal:
+        title: "Update the payment mean"
+        update_info: "Please specify below the new payment mean for this payment schedule to continue."
+        select_payment_mean: "Select a new payment mean"
+        method_Transfer: "By bank transfer"
+        method_Check: "By check"
+        confirm_button: "Update"
       #management of users, labels, groups, and so on
       members:
         users_management: "Gerenciamento de usuários"
@@ -1282,6 +1290,7 @@ pt:
         extended_prices: "Extended prices"
         extended_prices_info_html: "Spaces can have different prices depending on the cumulated duration of the booking. You can choose if this apply to all bookings or only to those starting within the same day."
         extended_prices_in_same_day: "Extended prices in the same day"
+        public_registrations: "Public registrations"
         overlapping_options:
           training_reservations: "Treinamentos"
           machine_reservations: "Máquinas"
@@ -1308,6 +1317,9 @@ pt:
             name: "Nome"
             created_at: "Data de criação"
             updated_at: "Última Data de Atualização"
+          public_registrations: "Public registrations"
+          public_registrations_info: "Allow everyone to register a new account on the platform. If disabled, only administrators and managers can create new accounts."
+          public_registrations_allowed: "Public registrations allowed"
           help: "Ajuda"
           feature_tour: "Tour de recursos"
           feature_tour_info_html: "<p>Quando um administrador ou um gerente está logado, um tour de recurso será acionado na primeira vez que ele/ela visita cada seção do aplicativo. Você pode mudar esse comportamento para um dos seguintes valores:</p><ul><li>« Uma vez » para manter o comportamento padrão.</li><li>« Por sessão » para exibir os tours cada vez que você reabrir o aplicativo.</li><li>« Ativação manual » para evitar a exibição automática dos tours. Ainda será possível ativá-los pressionando a tecla F1 ou clicando em « Ajuda » no menu do usuário.</li></ul>"
@@ -1446,8 +1458,10 @@ pt:
         payment_method: "Método de pagamento"
         method_card: "Online por cartão"
         method_check: "Por verificação"
+        method_transfer: "By bank transfer"
         card_collection_info: "Ao validar, será solicitado o número do cartão do membro. Este cartão será cobrado automaticamente nos prazos."
         check_collection_info: "Ao validar, você confirma que tem {DEADLINES} checks, permitindo que você colete todos os pagamentos mensais."
+        transfer_collection_info: "<p>By validating, you confirm that you set up {DEADLINES} bank direct debits, allowing you to collect all the monthly payments.</p><p><strong>Please note:</strong> the bank transfers are not automatically handled by Fab-manager.</p>"
         online_payment_disabled: "Pagamento online não está disponível. Você não pode selecionar este horário com pagamento online."
       check_list_setting:
         save: 'Salvar'

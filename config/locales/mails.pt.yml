@@ -296,6 +296,18 @@ pt:
         please_find_attached_html: "Por favor, anexe a sua agenda de pagamento, emitida em {DATE}, com um valor de {AMOUNT} relativo à sua reserva {TYPE, select, Reservation{reserva} other{assinatura}}." #messageFormat interpolation
         schedule_in_your_dashboard_html: "Você pode encontrar a agenda de pagamento a qualquer momento a partir de %{DASHBOARD} no site do Fab Lab."
         your_dashboard: "seu dashboard"
+    notify_admin_payment_schedule_error:
+      subject: "[URGENT] Card debit error"
+      body:
+        remember: "In accordance with the %{REFERENCE} payment schedule, a debit by card of %{AMOUNT} was scheduled on %{DATE}."
+        error: "Unfortunately, an error occurred and this card debit was unable to complete successfully."
+        action: "Please then consult the %{GATEWAY} dashboard and contact the member as soon as possible to resolve the problem."
+    notify_member_payment_schedule_error:
+      subject: "[URGENT] Card debit error"
+      body:
+        remember: "In accordance with your %{REFERENCE} payment schedule, a debit by card of %{AMOUNT} was scheduled on %{DATE}."
+        error: "Unfortunately, an error occurred and this card debit was unable to complete successfully."
+        action: "Please contact a manager as soon as possible to resolve the problem."
     notify_admin_payment_schedule_failed:
       subject: "[URGENT] Falha no débito do cartão"
       body:
@@ -309,11 +321,27 @@ pt:
         error: "Infelizmente, não foi possível completar o débito no cartão com sucesso."
         action_html: "Por favor, verifique %{DASHBOARD} ou entre em contato com um gerente antes de 24 horas, caso contrário sua assinatura pode ser interrompida."
         your_dashboard: "seu dashboard"
+    notify_admin_payment_schedule_gateway_canceled:
+      subject: "[URGENT] Payment schedule canceled by the payment gateway"
+      body:
+        error: "The payment schedule %{REFERENCE} was canceled by the payment gateway (%{GATEWAY}). No further debits will be made on this payment mean."
+        action: "Please consult the payment schedule management interface and contact the member as soon as possible to resolve the problem."
+    notify_member_payment_schedule_gateway_canceled:
+      subject: "[URGENT] Payment schedule canceled by the payment gateway"
+      body:
+        error: "Your payment schedule %{REFERENCE} was canceled by the payment gateway. No further debits will be made on this payment mean."
+        action: "Please contact a manager as soon as possible to resolve the problem."
     notify_admin_payment_schedule_check_deadline:
       subject: "Prazo de pagamento"
       body:
         remember: "De acordo com a agenda de pagamento %{REFERENCE}, %{AMOUNT} deveria ser debitado em %{DATE}."
         date: "Este é um lembrete para descontar o pagamento programado o mais rápido possível."
         confirm: "Não se esqueça de confirmar o recibo na interface de gestão de agenda de pagamento, para que a fatura correspondente seja gerada."
+    notify_member_payment_schedule_transfer_deadline:
+      subject: "Payment deadline"
+      body:
+        remember: "In accordance with your %{REFERENCE} payment schedule, %{AMOUNT} was due to be debited on %{DATE}."
+        date: "This is a reminder to verify that the direct bank debit was successfull."
+        confirm: "Please confirm the receipt of funds in your payment schedule management interface, so that the corresponding invoice will be generated."
     shared:
       hello: "Olá %{user_name}"

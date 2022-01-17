@@ -4,13 +4,16 @@ export enum PaymentScheduleItemState {
   RequirePaymentMethod = 'requires_payment_method',
   RequireAction = 'requires_action',
   Paid = 'paid',
-  Error = 'error'
+  Error = 'error',
+  GatewayCanceled = 'gateway_canceled'
 }
 
 export enum PaymentMethod {
-  Stripe = 'stripe',
+  Card = 'card',
+  Transfer = 'transfer',
   Check = 'check'
 }
+
 export interface PaymentScheduleItem {
   id: number,
   amount: number,
@@ -22,30 +25,28 @@ export interface PaymentScheduleItem {
 }
 
 export interface PaymentSchedule {
-  max_length: number;
+  max_length?: number;
   id: number,
-  total: number,
-  reference: string,
-  payment_method: string,
-  items: Array<PaymentScheduleItem>,
-  created_at: Date,
-  chained_footprint: boolean,
-  main_object: {
+  total?: number,
+  reference?: string,
+  payment_method: PaymentMethod,
+  items?: Array<PaymentScheduleItem>,
+  created_at?: Date,
+  chained_footprint?: boolean,
+  main_object?: {
     type: string,
     id: number
   },
-  user: {
+  user?: {
     id: number,
     name: string
   },
-  operator: {
+  operator?: {
     id: number,
     first_name: string,
     last_name: string,
   },
-  gateway_subscription: {
-    classname: string
-  }
+  gateway?: 'PayZen' | 'Stripe',
 }
 
 export interface PaymentScheduleIndexRequest {

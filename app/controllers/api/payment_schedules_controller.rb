@@ -3,9 +3,10 @@
 # API Controller for resources of PaymentSchedule
 class API::PaymentSchedulesController < API::ApiController
   before_action :authenticate_user!
-  before_action :set_payment_schedule, only: %i[download cancel]
-  before_action :set_payment_schedule_item, only: %i[cash_check refresh_item pay_item]
+  before_action :set_payment_schedule, only: %i[download cancel update]
+  before_action :set_payment_schedule_item, only: %i[show_item cash_check confirm_transfer refresh_item pay_item]
 
+  # retrieve all payment schedules for the current user, paginated
   def index
     @payment_schedules = PaymentSchedule.where('invoicing_profile_id = ?', current_user.invoicing_profile.id)
                                         .includes(:invoicing_profile, :payment_schedule_items, :payment_schedule_objects)
@@ -15,6 +16,7 @@ class API::PaymentSchedulesController < API::ApiController
                                         .per(params[:size])
   end
 
+  # retrieve all payment schedules for all users. Filtering is supported
   def list
     authorize PaymentSchedule
 
@@ -44,6 +46,15 @@ class API::PaymentSchedulesController < API::ApiController
     render json: attrs, status: :ok
   end
 
+  def confirm_transfer
+    authorize @payment_schedule_item.payment_schedule
+    PaymentScheduleService.new.generate_invoice(@payment_schedule_item, payment_method: 'transfer')
+    attrs = { state: 'paid', payment_method: 'transfer' }
+    @payment_schedule_item.update_attributes(attrs)
+
+    render json: attrs, status: :ok
+  end
+
   def refresh_item
     authorize @payment_schedule_item.payment_schedule
     PaymentScheduleItemWorker.new.perform(@payment_schedule_item.id)
@@ -62,11 +73,27 @@ class API::PaymentSchedulesController < API::ApiController
     end
   end
 
+  def show_item
+    authorize @payment_schedule_item.payment_schedule
+    render json: @payment_schedule_item, status: :ok
+  end
+
   def cancel
     authorize @payment_schedule
 
     canceled_at = PaymentScheduleService.cancel(@payment_schedule)
     render json: { canceled_at: canceled_at }, status: :ok
+  end
+
+  ## Only the update of the payment method is allowed
+  def update
+    authorize PaymentSchedule
+
+    if PaymentScheduleService.new.update_payment_mean(@payment_schedule, update_params)
+      render :show, status: :ok, location: @payment_schedule
+    else
+      render json: @payment_schedule.errors, status: :unprocessable_entity
+    end
   end
 
   private
@@ -77,5 +104,9 @@ class API::PaymentSchedulesController < API::ApiController
 
   def set_payment_schedule_item
     @payment_schedule_item = PaymentScheduleItem.find(params[:id])
+  end
+
+  def update_params
+    params.require(:payment_schedule).permit(:payment_method)
   end
 end

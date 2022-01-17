@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 interface HtmlTranslateProps {
   trKey: string,
-  options?: Record<string, string>
+  options?: Record<string, string|number>
 }
 
 /**

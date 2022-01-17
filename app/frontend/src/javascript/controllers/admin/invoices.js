@@ -478,6 +478,13 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           $scope.isSelected = active;
           $scope.history = [];
 
+          // callback on "enable VAT" switch toggle
+          $scope.enableVATChanged = function (checked) {
+            setTimeout(() => {
+              $scope.isSelected = checked;
+              $scope.$apply();
+            }, 1);
+          };
           $scope.ok = function () { $uibModalInstance.close({ rate: $scope.rate, active: $scope.isSelected }); };
           $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
           $scope.editMultiVAT = function () {

@@ -58,6 +58,11 @@ class NotificationType
     notify_admin_payment_schedule_failed
     notify_member_payment_schedule_failed
     notify_admin_payment_schedule_check_deadline
+    notify_admin_payment_schedule_transfer_deadline
+    notify_admin_payment_schedule_error
+    notify_member_payment_schedule_error
+    notify_admin_payment_schedule_gateway_canceled
+    notify_member_payment_schedule_gateway_canceled
   ]
   # deprecated:
   # - notify_member_subscribed_plan_is_changed

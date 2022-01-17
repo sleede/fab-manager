@@ -34,8 +34,8 @@ Application.Directives.directive('fileread', [() =>
 Application.Directives.directive('bsHolder', [() =>
   ({
     link (scope, element, attrs) {
-      Holder.addTheme('icon', { background: 'white', foreground: '#e9e9e9', size: 80, font: 'FontAwesome' })
-        .addTheme('icon-xs', { background: 'white', foreground: '#e0e0e0', size: 20, font: 'FontAwesome' })
+      Holder.addTheme('icon', { background: 'white', foreground: '#ebebeb', size: 60, font: 'FontAwesome' })
+        .addTheme('icon-xs', { background: 'white', foreground: '#ebebeb', size: 20, font: 'FontAwesome' })
         .addTheme('icon-black-xs', { background: 'black', foreground: 'white', size: 20, font: 'FontAwesome' })
         .addTheme('avatar', { background: '#eeeeee', foreground: '#555555', size: 16, font: 'FontAwesome' })
         .run(element[0]);

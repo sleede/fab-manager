@@ -119,11 +119,13 @@ Rails.application.routes.draw do
       get 'first', action: 'first', on: :collection
     end
 
-    resources :payment_schedules, only: %i[index show] do
+    resources :payment_schedules, only: %i[index show update] do
       post 'list', action: 'list', on: :collection
       put 'cancel', on: :member
       get 'download', on: :member
+      get 'items/:id', action: 'show_item', on: :collection
       post 'items/:id/cash_check', action: 'cash_check', on: :collection
+      post 'items/:id/confirm_transfer', action: 'confirm_transfer', on: :collection
       post 'items/:id/refresh_item', action: 'refresh_item', on: :collection
       post 'items/:id/pay_item', action: 'pay_item', on: :collection
     end

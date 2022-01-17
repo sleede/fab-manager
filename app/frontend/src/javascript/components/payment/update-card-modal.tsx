@@ -24,11 +24,7 @@ const UpdateCardModalComponent: React.FC<UpdateCardModalProps> = ({ isOpen, togg
   const [gateway, setGateway] = useState<string>('');
 
   useEffect(() => {
-    if (schedule.gateway_subscription.classname.match(/^PayZen::/)) {
-      setGateway('payzen');
-    } else if (schedule.gateway_subscription.classname.match(/^Stripe::/)) {
-      setGateway('stripe');
-    }
+    setGateway(schedule.gateway);
   }, [schedule]);
 
   /**
@@ -44,7 +40,7 @@ const UpdateCardModalComponent: React.FC<UpdateCardModalProps> = ({ isOpen, togg
 
   /**
    * Render the PayZen update-card modal
-   */ // 1
+   */
   const renderPayZenModal = (): ReactElement => {
     return <PayzenCardUpdateModal isOpen={isOpen}
       toggleModal={toggleModal}
@@ -58,15 +54,16 @@ const UpdateCardModalComponent: React.FC<UpdateCardModalProps> = ({ isOpen, togg
    */
 
   switch (gateway) {
-    case 'stripe':
+    case 'Stripe':
       return renderStripeModal();
-    case 'payzen':
+    case 'PayZen':
       return renderPayZenModal();
     case '':
+    case undefined:
       return <div/>;
     default:
       onError(t('app.shared.update_card_modal.unexpected_error'));
-      console.error(`[UpdateCardModal] unexpected gateway: ${schedule.gateway_subscription?.classname}`);
+      console.error(`[UpdateCardModal] unexpected gateway: ${schedule.gateway} for schedule ${schedule.id}`);
       return <div />;
   }
 };

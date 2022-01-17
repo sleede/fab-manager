@@ -40,11 +40,11 @@ export const ExtendedPriceForm: React.FC<ExtendedPriceFormProps> = ({ formId, on
   };
 
   /**
-   * Callback triggered when the user inputs a number of minutes for the current extended price.
+   * Callback triggered when the user inputs a number of hours for the current extended price.
    */
   const handleUpdateHours = (minutes: string) => {
     updateExtendedPriceData(draft => {
-      draft.duration = parseInt(minutes, 10);
+      draft.duration = parseFloat(minutes) * 60;
     });
   };
 
@@ -53,10 +53,10 @@ export const ExtendedPriceForm: React.FC<ExtendedPriceFormProps> = ({ formId, on
       <label htmlFor="duration">{t('app.admin.extended_price_form.duration')} *</label>
       <FabInput id="duration"
         type="number"
-        defaultValue={extendedPriceData?.duration || ''}
+        defaultValue={extendedPriceData?.duration / 60 || ''}
         onChange={handleUpdateHours}
-        step={1}
-        min={1}
+        step={0.25}
+        min={0.5}
         icon={<i className="fas fa-clock" />}
         required />
       <label htmlFor="amount">{t('app.admin.extended_price_form.amount')} *</label>

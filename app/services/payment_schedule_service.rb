@@ -127,7 +127,7 @@ class PaymentScheduleService
   # @param filters {Hash} allowed filters: reference, customer, date.
   ##
   def self.list(page, size, filters = {})
-    ps = PaymentSchedule.includes(:invoicing_profile, :payment_schedule_items, :payment_schedule_objects)
+    ps = PaymentSchedule.includes(:operator_profile, :payment_schedule_items, invoicing_profile: [:user])
                         .joins(:invoicing_profile)
                         .order('payment_schedules.created_at DESC')
                         .page(page)
@@ -157,7 +157,13 @@ class PaymentScheduleService
     ps
   end
 
+  ##
+  # Cancel the given PaymentSchedule: cancel the remote subscription on the payment gateway, mark the PaymentSchedule as cancelled,
+  # the remaining PaymentScheduleItems as canceled too, and cancel the associated Subscription.
+  ##
   def self.cancel(payment_schedule)
+    PaymentGatewayService.new.cancel_subscription(payment_schedule)
+
     # cancel all item where state != paid
     payment_schedule.ordered_items.each do |item|
       next if item.state == 'paid'
@@ -171,7 +177,25 @@ class PaymentScheduleService
     subscription.canceled_at
   end
 
+  ##
+  # Update the payment mean associated with the given PaymentSchedule and reset the erroneous items
+  ##
+  def update_payment_mean(payment_schedule, payment_mean)
+    payment_schedule.update(payment_mean) && reset_erroneous_payment_schedule_items(payment_schedule)
+  end
+
   private
+
+  ##
+  # After the payment method has been updated, we need to reset the erroneous payment schedule items
+  # so the admin can confirm them to generate the invoice
+  ##
+  def reset_erroneous_payment_schedule_items(payment_schedule)
+    results = payment_schedule.payment_schedule_items.where(state: %w[error gateway_canceled]).map do |item|
+      item.update_attributes(state: item.due_date < DateTime.current ? 'pending' : 'new')
+    end
+    results.reduce(true) { |acc, item| acc && item }
+  end
 
   ##
   # The first PaymentScheduleItem contains references to the reservation price (if any) and to the adjustment price

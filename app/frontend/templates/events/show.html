@@ -5,7 +5,7 @@
   <div class="row no-gutter">
     <div class="col-xs-2 col-sm-2 col-md-1">
       <section class="heading-btn">
-        <a href="#" ng-click="backPrevLocation($event)"><i class="fas fa-long-arrow-alt-left "></i></a>
+        <a ng-click="backPrevLocation($event)"><i class="fas fa-long-arrow-alt-left "></i></a>
       </section>
     </div>
     <div class="col-xs-10 col-sm-10 col-md-8 b-l b-r-md">
@@ -83,7 +83,7 @@
         <dl class="text-sm">
           <dt><i class="fa fa-calendar" aria-hidden="true"></i> {{ 'app.public.events_show.dates' | translate }}</dt>
           <dd>{{ 'app.public.events_show.beginning' | translate }} <span class="text-u-l">{{event.start_date | amDateFormat:'L'}}</span><br>{{ 'app.public.events_show.ending' | translate }} <span class="text-u-l">{{event.end_date | amDateFormat:'L'}}</span></dd>
-          <dt><i class="fa fa-clock-o"></i> {{ 'app.public.events_show.opening_hours' | translate }}</dt>
+          <dt><i class="fas fa-clock"></i> {{ 'app.public.events_show.opening_hours' | translate }}</dt>
           <dd ng-if="event.all_day == 'true'"><span translate>{{ 'app.public.events_show.all_day' }}</span></dd>
           <dd ng-if="event.all_day == 'false'">{{ 'app.public.events_show.from_time' | translate }} <span class="text-u-l">{{event.start_date | amDateFormat:'LT'}}</span> {{ 'app.public.events_show.to_time' | translate }} <span class="text-u-l">{{event.end_date | amDateFormat:'LT'}}</span></dd>
         </dl>
@@ -147,7 +147,7 @@
           </div>
 
           <div class="clear">
-            <a class="pull-right m-t-xs text-u-l ng-scope" href="#" ng-click="cancelReserve($event)" ng-show="reserve.toReserve" translate>{{ 'app.shared.buttons.cancel' }}</a>
+            <a class="pull-right m-t-xs text-u-l ng-scope" ng-click="cancelReserve($event)" ng-show="reserve.toReserve" translate>{{ 'app.shared.buttons.cancel' }}</a>
           </div>
 
           <div ng-if="reserveSuccess" class="alert alert-success">{{ 'app.public.events_show.thank_you_your_payment_has_been_successfully_registered' | translate }}<br>

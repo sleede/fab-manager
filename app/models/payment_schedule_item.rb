@@ -14,9 +14,10 @@ class PaymentScheduleItem < Footprintable
 
   def payment_intent
     return unless payment_gateway_object
+    return unless payment_gateway_object.gateway_object.gateway == 'Stripe'
 
     stp_invoice = payment_gateway_object.gateway_object.retrieve
-    Stripe::PaymentIntent.retrieve(stp_invoice.payment_intent, api_key: Setting.get('stripe_secret_key')) # FIXME, maybe this is only used for stripe?
+    Stripe::PaymentIntent.retrieve(stp_invoice.payment_intent, api_key: Setting.get('stripe_secret_key'))
   end
 
   def self.columns_out_of_footprint
