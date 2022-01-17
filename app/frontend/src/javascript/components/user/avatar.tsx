@@ -9,7 +9,7 @@ interface AvatarProps {
 }
 
 /**
- * This component renders the user-profile's picture or a placeholder
+ * This component renders the user-profile's picture or a placeholder.
  */
 export const Avatar: React.FC<AvatarProps> = ({ user, className }) => {
   /**

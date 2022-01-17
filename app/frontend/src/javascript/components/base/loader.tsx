@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 
 /**
- * This component is a wrapper that display a loader while the children components have their rendering suspended
+ * This component is a wrapper that display a loader while the children components have their rendering suspended.
  */
 export const Loader: React.FC = ({ children }) => {
   const loading = (

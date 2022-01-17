@@ -2,7 +2,7 @@
 
 - Support for JSONPath syntax in OAuth2 SSO fields mapping
 - Basic support for OAuth2 scopes through an environment variable
-- Add debug logs for the SSO authentication process
+- Ability to enable debug logs for the SSO authentication process using `SSO_DEBUG=true`
 - Remove case sensitivity for the SSO account mapping process
 - Ability to cancel a payement schedule from the interface
 - Ability to create slots in the past

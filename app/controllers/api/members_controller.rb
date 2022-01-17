@@ -19,7 +19,7 @@ class API::MembersController < API::ApiController
 
   def last_subscribed
     @query = User.active.with_role(:member)
-                 .includes(profile: [:user_avatar])
+                 .includes(:statistic_profile, profile: [:user_avatar])
                  .where('is_allow_contact = true AND confirmed_at IS NOT NULL')
                  .order('created_at desc')
                  .limit(params[:last])

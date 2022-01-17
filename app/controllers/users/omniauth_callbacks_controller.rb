@@ -1,8 +1,13 @@
+# frozen_string_literal: true
+
+# Handle authentication actions via OmniAuth (used by SSO providers)
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  require 'sso_logger'
+  logger = SsoLogger.new
 
   active_provider = AuthProvider.active
   define_method active_provider.strategy_name do
-    logger.debug "[Users::OmniauthCallbacksController##{active_provider.strategy_name}] initiated"
+    logger.info "[Users::OmniauthCallbacksController##{active_provider.strategy_name}] initiated"
     if request.env['omniauth.params'].blank?
       logger.debug 'the user has not provided any authentication token'
       @user = User.from_omniauth(request.env['omniauth.auth'])

@@ -3,6 +3,8 @@
 # User is a physical or moral person with its authentication parameters
 # It is linked to the Profile model with hold information about this person (like address, name, etc.)
 class User < ApplicationRecord
+  require 'sso_logger'
+
   include NotifyWith::NotificationReceiver
   include NotifyWith::NotificationAttachedObject
   # Include default devise modules. Others available are:
@@ -201,6 +203,7 @@ class User < ApplicationRecord
   end
 
   def self.from_omniauth(auth)
+    logger = SsoLogger.new
     logger.debug "[User::from_omniauth] initiated with parameter #{auth}"
     active_provider = AuthProvider.active
     raise SecurityError, 'The identity provider does not match the activated one' if active_provider.strategy_name != auth.provider
@@ -309,6 +312,7 @@ class User < ApplicationRecord
   ## Merge the provided User's SSO details into the current user and drop the provided user to ensure the unity
   ## @param sso_user {User} the provided user will be DELETED after the merge was successful
   def merge_from_sso(sso_user)
+    logger = SsoLogger.new
     logger.debug "[User::merge_from_sso] initiated with parameter #{sso_user}"
     # update the attributes to link the account to the sso account
     self.provider = sso_user.provider
