@@ -19,7 +19,8 @@ export interface IntentConfirmation {
 export enum PaymentMethod {
   Card = 'card',
   Check = 'check',
-  Transfer = 'transfer'
+  Transfer = 'transfer',
+  Other = ''
 }
 
 export type CartItem = { reservation: Reservation }|

@@ -8,7 +8,7 @@ export default class WalletLib {
   }
 
   /**
-   * Return the price remaining to pay, after we have used the maximum possible amount in the wallet
+   * Return the price remaining to pay, after we have used the maximum possible amount in the wallet.
    */
   computeRemainingPrice = (price: number): number => {
     if (this.wallet.amount > price) {
