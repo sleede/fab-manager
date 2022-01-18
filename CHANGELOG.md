@@ -4,8 +4,9 @@
 - Fix a bug: missing the Other payment method
 - Fix a bug: do not display an untranslated string if a prepaid pack has no maximum validity
 - Fix a bug: statistics not built for instances with plans created before v4.3.3
-- Fix a bug: when requesting to send the sso migration code, the email was case-sensitive.
-- Fix a bug: the adminsys email was case-sensitive.
+- Fix a bug: when requesting to send the sso migration code, the email was case-sensitive
+- Fix a bug: the adminsys email was case-sensitive
+- Fix a bug: members are unable to buy prepaid-packs by wallet
 - [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2020,04]`
 
 # v5.3.1 2022 January 17

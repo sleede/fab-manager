@@ -9,10 +9,8 @@ import { FabButton } from '../base/fab-button';
 import PriceAPI from '../../api/price';
 import { Price } from '../../models/price';
 import { PaymentMethod, ShoppingCart } from '../../models/payment';
-import { CardPaymentModal } from '../payment/card-payment-modal';
-import UserLib from '../../lib/user';
-import { LocalPaymentModal } from '../payment/local-payment/local-payment-modal';
 import FormatLib from '../../lib/format';
+import { PaymentModal } from '../payment/stripe/payment-modal';
 
 type PackableItem = Machine;
 
@@ -38,7 +36,6 @@ export const ProposePacksModal: React.FC<ProposePacksModalProps> = ({ isOpen, to
   const [packs, setPacks] = useState<Array<PrepaidPack>>(null);
   const [cart, setCart] = useState<ShoppingCart>(null);
   const [paymentModal, setPaymentModal] = useState<boolean>(false);
-  const [localPaymentModal, setLocalPaymentModal] = useState<boolean>(false);
 
   useEffect(() => {
     PrepaidPackAPI.index({ priceable_id: item.id, priceable_type: itemType, group_id: customer.group_id, disabled: false })
@@ -54,13 +51,6 @@ export const ProposePacksModal: React.FC<ProposePacksModalProps> = ({ isOpen, to
    */
   const togglePaymentModal = (): void => {
     setPaymentModal(!paymentModal);
-  };
-
-  /**
-   * Open/closes the local payment modal (for admins and managers)
-   */
-  const toggleLocalPaymentModal = (): void => {
-    setLocalPaymentModal(!localPaymentModal);
   };
 
   /**
@@ -107,9 +97,6 @@ export const ProposePacksModal: React.FC<ProposePacksModalProps> = ({ isOpen, to
           { prepaid_pack: { id: pack.id } }
         ]
       });
-      if (new UserLib(operator).isPrivileged(customer)) {
-        return toggleLocalPaymentModal();
-      }
       togglePaymentModal();
     };
   };
@@ -154,21 +141,14 @@ export const ProposePacksModal: React.FC<ProposePacksModalProps> = ({ isOpen, to
         {packs?.map(p => renderPack(p))}
       </div>
       {cart && <div>
-        <CardPaymentModal isOpen={paymentModal}
+        <PaymentModal isOpen={paymentModal}
           toggleModal={togglePaymentModal}
           afterSuccess={handlePackBought}
           onError={onError}
           cart={cart}
-          currentUser={operator}
-          customer={customer} />
-        <LocalPaymentModal isOpen={localPaymentModal}
-          toggleModal={toggleLocalPaymentModal}
-          afterSuccess={handlePackBought}
-          onError={onError}
-          cart={cart}
-          updateCart={setCart}
-          currentUser={operator}
-          customer={customer} />
+          operator={operator}
+          customer={customer}
+          updateCart={setCart} />
       </div>}
     </FabModal>
   );
