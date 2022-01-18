@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Add a test for statistics generation
+- Fix a bug: do not display an untranslated string if a prepaid pack has no maximum validity
 - Fix a bug: statistics not built for instances with plans created before v4.3.3
 - Fix a bug: when requesting to send the sso migration code, the email was case-sensitive.
 - Fix a bug: the adminsys email was case-sensitive.

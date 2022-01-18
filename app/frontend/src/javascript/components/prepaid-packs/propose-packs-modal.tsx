@@ -82,6 +82,8 @@ export const ProposePacksModal: React.FC<ProposePacksModalProps> = ({ isOpen, to
    * Return a user-friendly string for the validity of the provided pack
    */
   const formatValidity = (pack: PrepaidPack): string => {
+    if (!pack.validity_interval) return null;
+
     const period = t(`app.logged.propose_packs_modal.period.${pack.validity_interval}`, { COUNT: pack.validity_count });
     return t('app.logged.propose_packs_modal.validity', { COUNT: pack.validity_count, PERIODS: period });
   };
