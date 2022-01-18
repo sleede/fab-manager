@@ -1,5 +1,8 @@
 # Changelog Fab-manager
 
+- Fix a bug: when requesting to send the sso migration code, the email was case-sensitive.
+- Fix a bug: the adminsys email was case-sensitive.
+
 # v5.3.1 2022 January 17
 
 - Definition of extended prices for spaces is now made in hours (previously in minutes)

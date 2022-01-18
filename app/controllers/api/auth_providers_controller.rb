@@ -52,10 +52,9 @@ class API::AuthProvidersController < API::ApiController
     @previous = AuthProvider.previous
   end
 
-
   def send_code
     authorize AuthProvider
-    user = User.find_by(email: params[:email])
+    user = User.find_by('lower(email) = ?', params[:email]&.downcase)
 
     if user&.auth_token
       if AuthProvider.active.providable_type != DatabaseProvider.name
