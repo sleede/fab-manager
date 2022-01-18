@@ -9,7 +9,7 @@ import { FabButton } from '../base/fab-button';
 import PriceAPI from '../../api/price';
 import { Price } from '../../models/price';
 import { PaymentMethod, ShoppingCart } from '../../models/payment';
-import { PaymentModal } from '../payment/payment-modal';
+import { CardPaymentModal } from '../payment/card-payment-modal';
 import UserLib from '../../lib/user';
 import { LocalPaymentModal } from '../payment/local-payment/local-payment-modal';
 import FormatLib from '../../lib/format';
@@ -154,7 +154,7 @@ export const ProposePacksModal: React.FC<ProposePacksModalProps> = ({ isOpen, to
         {packs?.map(p => renderPack(p))}
       </div>
       {cart && <div>
-        <PaymentModal isOpen={paymentModal}
+        <CardPaymentModal isOpen={paymentModal}
           toggleModal={togglePaymentModal}
           afterSuccess={handlePackBought}
           onError={onError}

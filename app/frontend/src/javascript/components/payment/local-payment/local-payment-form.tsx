@@ -6,7 +6,7 @@ import LocalPaymentAPI from '../../../api/local-payment';
 import FormatLib from '../../../lib/format';
 import SettingAPI from '../../../api/setting';
 import { SettingName } from '../../../models/setting';
-import { PaymentModal } from '../payment-modal';
+import { CardPaymentModal } from '../card-payment-modal';
 import { PaymentSchedule } from '../../../models/payment-schedule';
 import { HtmlTranslate } from '../../base/html-translate';
 
@@ -147,7 +147,7 @@ export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSucce
             })}
           </ul>
         </div>
-        <PaymentModal isOpen={onlinePaymentModal}
+        <CardPaymentModal isOpen={onlinePaymentModal}
           toggleModal={toggleOnlinePaymentModal}
           afterSuccess={afterCreatePaymentSchedule}
           onError={onError}

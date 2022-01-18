@@ -3,7 +3,7 @@ import { AbstractPaymentModal, GatewayFormProps } from '../abstract-payment-moda
 import { LocalPaymentForm } from './local-payment-form';
 import { ShoppingCart } from '../../../models/payment';
 import { PaymentSchedule } from '../../../models/payment-schedule';
-import { User, UserRole } from '../../../models/user';
+import { User } from '../../../models/user';
 import { Invoice } from '../../../models/invoice';
 import { useTranslation } from 'react-i18next';
 import { ModalSize } from '../../base/fab-modal';
