@@ -7,6 +7,7 @@
 - Fix a bug: when requesting to send the sso migration code, the email was case-sensitive
 - Fix a bug: the adminsys email was case-sensitive
 - Fix a bug: members are unable to buy prepaid-packs by wallet
+- Fix a bug: prepaid-packs without expiration date do not work
 - [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2020,04]`
 
 # v5.3.1 2022 January 17
