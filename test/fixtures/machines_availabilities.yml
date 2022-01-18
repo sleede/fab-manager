@@ -103,3 +103,8 @@ machines_availability_21:
   id: 21
   machine_id: 2
   availability_id: 16
+
+machines_availability_22:
+  id: 22
+  machine_id: 1
+  availability_id: 19
