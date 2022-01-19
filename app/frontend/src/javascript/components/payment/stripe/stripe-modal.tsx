@@ -26,7 +26,7 @@ interface StripeModalProps {
  * This component enables the user to input his card data or process payments, using the Stripe gateway.
  * Supports Strong-Customer Authentication (SCA).
  *
- * This component should not be called directly. Prefer using <PaymentModal> which can handle the configuration
+ * This component should not be called directly. Prefer using <CardPaymentModal> which can handle the configuration
  *  of a different payment gateway.
  */
 export const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, cart, currentUser, schedule, customer }) => {

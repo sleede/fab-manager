@@ -49,13 +49,13 @@
 <div class="modal-footer">
   <button class="btn btn-info" ng-click="ok()" ng-disabled="attempting" ng-bind-html="validButtonName"></button>
   <button class="btn btn-default" ng-click="cancel()" translate>{{ 'app.shared.buttons.cancel' }}</button>
-  <payment-modal is-open="isOpenOnlinePaymentModal"
-                 toggle-modal="toggleOnlinePaymentModal"
-                 after-success="afterCreatePaymentSchedule"
-                 on-error="onCreatePaymentScheduleError"
-                 cart="cartItems"
-                 current-user="currentUser"
-                 schedule="schedule"
-                 customer="user"
-                 processPayment="false"/>
+  <card-payment-modal is-open="isOpenOnlinePaymentModal"
+                      toggle-modal="toggleOnlinePaymentModal"
+                      after-success="afterCreatePaymentSchedule"
+                      on-error="onCreatePaymentScheduleError"
+                      cart="cartItems"
+                      current-user="currentUser"
+                      schedule="schedule"
+                      customer="user"
+                      processPayment="false"/>
 </div>

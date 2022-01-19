@@ -18,7 +18,9 @@ class PrepaidPack < ApplicationRecord
   validates :amount, :group_id, :priceable_id, :priceable_type, :minutes, presence: true
 
   def validity
-    validity_count.send(validity_interval)
+    return nil if validity_interval.nil?
+
+    validity_count&.send(validity_interval)
   end
 
   def destroyable?

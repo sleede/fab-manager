@@ -121,7 +121,7 @@ class User < ApplicationRecord
   def self.adminsys
     return unless Rails.application.secrets.adminsys_email.present?
 
-    User.find_by(email: Rails.application.secrets.adminsys_email)
+    User.find_by('lower(email) = ?', Rails.application.secrets.adminsys_email&.downcase)
   end
 
   def training_machine?(machine)

@@ -14,7 +14,7 @@ import { useTranslation } from 'react-i18next';
 
 declare const Application: IApplication;
 
-interface PaymentModalProps {
+interface CardPaymentModalProps {
   isOpen: boolean,
   toggleModal: () => void,
   afterSuccess: (result: Invoice|PaymentSchedule) => void,
@@ -29,7 +29,7 @@ interface PaymentModalProps {
  * This component open a modal dialog for the configured payment gateway, allowing the user to input his card data
  * to process an online payment.
  */
-const PaymentModalComponent: React.FC<PaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, currentUser, schedule, cart, customer }) => {
+const CardPaymentModalComponent: React.FC<CardPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, currentUser, schedule, cart, customer }) => {
   const { t } = useTranslation('shared');
 
   const [gateway, setGateway] = useState<Setting>(null);
@@ -89,12 +89,12 @@ const PaymentModalComponent: React.FC<PaymentModalProps> = ({ isOpen, toggleModa
   }
 };
 
-export const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, currentUser, schedule, cart, customer }) => {
+export const CardPaymentModal: React.FC<CardPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, currentUser, schedule, cart, customer }) => {
   return (
     <Loader>
-      <PaymentModalComponent isOpen={isOpen} toggleModal={toggleModal} afterSuccess={afterSuccess} onError={onError} currentUser={currentUser} schedule={schedule} cart={cart} customer={customer} />
+      <CardPaymentModalComponent isOpen={isOpen} toggleModal={toggleModal} afterSuccess={afterSuccess} onError={onError} currentUser={currentUser} schedule={schedule} cart={cart} customer={customer} />
     </Loader>
   );
 };
 
-Application.Components.component('paymentModal', react2angular(PaymentModal, ['isOpen', 'toggleModal', 'afterSuccess', 'onError', 'currentUser', 'schedule', 'cart', 'customer']));
+Application.Components.component('cardPaymentModal', react2angular(CardPaymentModal, ['isOpen', 'toggleModal', 'afterSuccess', 'onError', 'currentUser', 'schedule', 'cart', 'customer']));
