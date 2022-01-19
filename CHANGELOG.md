@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+# v5.3.2 2022 January 19
+
 - Add a test for statistics generation
 - Fix a bug: missing the Other payment method
 - Fix a bug: do not display an untranslated string if a prepaid pack has no maximum validity
