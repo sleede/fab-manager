@@ -37,10 +37,10 @@ de:
       end_before_start: "Das Enddatum darf nicht vor dem Startdatum liegen. Wählen Sie ein Datum nach %{START}"
       invalid_duration: "Der zulässige Zeitraum muss zwischen 1 Tag und 1 Jahr lang sein. Ihr Zeitraum ist %{DAYS} Tage lang."
       must_be_in_the_past: "Der Zeitraum darf ausschließlich vor dem heutigen Datum liegen."
-      registration_disabled: "Registration is disabled"
+      registration_disabled: "Registrierung ist deaktiviert"
   apipie:
     api_documentation: "API-Dokumentation"
-    code: "HTTP code"
+    code: "HTTP-Code"
   #error messages when importing an account from a SSO
   omniauth:
     email_already_linked_to_another_account_please_input_your_authentication_code: "E-Mail-Adresse \"%{OLD_MAIL}\" ist bereits mit einem Konto verknüpft. Bitte geben Sie Ihren Authentifizierungscode ein."
@@ -113,7 +113,7 @@ de:
     subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "Abonnement von %{NAME} verlängert (kostenlose Tage) ab %{STARTDATE} bis %{ENDDATE}"
     and: 'und'
     invoice_text_example: "Unsere Einrichtung ist nicht mehrwertsteuerpflichtig"
-    error_invoice: "Erroneous invoice. The items below ware not booked. Please contact the FabLab for a refund."
+    error_invoice: "Fehlerhafte Rechnung. Die folgenden Artikel sind nicht gebucht. Bitte kontaktieren Sie das FabLab für eine Rückerstattung."
     prepaid_pack: "Prepaid pack of hours"
     pack_item: "Pack of %{COUNT} hours for the %{ITEM}"
   #PDF payment schedule generation
