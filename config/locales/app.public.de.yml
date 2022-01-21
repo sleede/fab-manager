@@ -19,7 +19,7 @@ de:
         my_trainings: "Meine Trainings"
         my_events: "Meine Veranstaltungen"
         my_invoices: "Meine Rechnungen"
-        my_payment_schedules: "My payment schedules"
+        my_payment_schedules: "Meine Zahlungspläne"
         my_wallet: "Mein Guthaben"
         #contextual help
         help: "Hilfe"
@@ -84,8 +84,8 @@ de:
         birth_date_is_required: "Geburtsdatum ist erforderlich."
         phone_number: "Telefonnummer"
         phone_number_is_required: "Die Angabe der Telefonnummer ist erforderlich."
-        address: "Address"
-        address_is_required: "Address is required"
+        address: "Adresse"
+        address_is_required: "Adresse ist erforderlich"
         i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "Angemeldete Benutzer dürfen mich kontaktieren"
         i_accept_to_receive_information_from_the_fablab: "Das Fablab darf mir Informationen schicken"
         i_ve_read_and_i_accept_: "Ich habe gelesen und akzeptiere"
@@ -211,7 +211,7 @@ de:
         book: "Buchen"
         _or_the_: " oder die "
       machines_filters:
-        show_machines: "Show machines"
+        show_machines: "Maschinen anzeigen"
         status_enabled: "Aktiviert"
         status_disabled: "Deaktiviert"
         status_all: "Alle"
@@ -266,10 +266,10 @@ de:
         an_error_prevented_to_change_the_user_s_group: "Fehler beim Ändern der Benutzergruppe."
       plans_filter:
         i_am: "Ich bin"
-        select_group: "select a group"
-        i_want_duration: "I want to subscribe for"
-        all_durations: "All durations"
-        select_duration: "select a duration"
+        select_group: "Wählen Sie eine Gruppe aus"
+        i_want_duration: "Ich möchte mich anmelden für"
+        all_durations: "Alle Laufzeiten"
+        select_duration: "Wählen Sie eine Laufzeit"
       #Fablab's events list
       events_list:
         the_fablab_s_events: "Veranstaltungen des Fablabs"
