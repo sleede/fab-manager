@@ -123,9 +123,9 @@ de:
         online_payment: "Online-Bezahlung"
         i_have_read_and_accept_: "Ich habe gelesen und akzeptiere "
         _the_general_terms_and_conditions: "die allgemeinen Nutzungs- und Geschäftsbedingungen."
-        payment_schedule_html: "<p>You're about to subscribe to a payment schedule of {DEADLINES} months.</p><p>By paying this bill, you agree to send instructions to the financial institution that issue your card, to take payments from your card account, for the whole duration of this subscription. This imply that your card data are saved by {GATEWAY} and a series of payments will be initiated on your behalf, conforming to the payment schedule previously shown.</p>"
+        payment_schedule_html: "<p>Sie abonnieren einen Zahlungszeitraum von {DEADLINES} Monaten.</p><p>Mit der Zahlung dieser Rechnung erklären Sie sich damit einverstanden, Ihr kartenausstellendes Finanzinstitut anzuweisen, Zahlungen von Ihrem Kartenkonto für die gesamte Dauer dieses Abonnements zu übernehmen. Das bedeutet auch, dass Kartendaten von {GATEWAY} gespeichert werden und eine Reihe von Zahlungen in Ihrem Namen und entsprechend dem angezeigten Zahlungsplan gestartet werden.</p>"
         confirm_payment_of_: "Bezahlen: {AMOUNT}"
-        validate: "Validate"
+        validate: "Bestätigen"
       #dialog of on site payment for reservations
       valid_reservation_modal:
         booking_confirmation: "Buchungsbestätigung"
@@ -133,10 +133,10 @@ de:
         subscription_confirmation: "Abonnementbestätigung"
         here_is_the_subscription_summary: "Hier ist die Zusammenfassung des -Abonnements:"
         payment_method: "Zahlungsmethode"
-        method_card: "Online by card"
-        method_check: "By check"
-        card_collection_info: "By validating, you'll be prompted for the member's card number. This card will be automatically charged at the deadlines."
-        check_collection_info: "By validating, you confirm that you have {DEADLINES} checks, allowing you to collect all the monthly payments."
+        method_card: "Online per Karte"
+        method_check: "Per Scheck"
+        card_collection_info: "Nach der Validierung werden Sie nach der Kartennummer des Mitglieds gefragt. Diese Karte wird automatisch zu den Fristen belastet."
+        check_collection_info: "Durch die Validierung bestätigen Sie, dass Sie {DEADLINES} Schecks haben und so alle monatlichen Zahlungen abwickeln können."
       #event edition form
       event:
         title: "Titel"
@@ -161,7 +161,7 @@ de:
         0_equal_free: "0 = kostenlos"
         tickets_available: "Tickets verfügbar"
         event_themes: "Veranstaltungsthemen"
-        select_theme: "Pick up a theme..."
+        select_theme: "Ein Theme auswählen..."
         age_range: "Altersklasse"
         add_price: "Add a price"
       #subscription plan edition form
