@@ -100,7 +100,7 @@ de:
       subject: "Ein Benutzerkonto wurde erstellt"
       body:
         new_account_created: "Ein neues Benutzerkonto wurde auf der Website erstellt:"
-        user_of_group_html: "The user has registered in the group <strong>%{GROUP}</strong>"
+        user_of_group_html: "Der Benutzer hat sich in der Gruppe <strong>%{GROUP}</strong> registriert"
         account_for_organization: "Dieses Konto verwaltet eine Organisation:"
     notify_admin_subscribed_plan:
       subject: "Ein Abonnement wurde gekauft"
@@ -231,8 +231,8 @@ de:
         users_subscriptions: "der Abonnementliste"
         users_reservations: "der Reservierungsliste"
         availabilities_index: "der Verfügbarkeit der Reservierungen"
-        accounting_acd: "of the accounting data to ACD"
-        accounting_vat: "of the collected VAT data"
+        accounting_acd: "der Rechnungsdaten für ACD"
+        accounting_vat: "der gesammelten MwSt-Daten"
         click_to_download: "Excel-Datei erfolgreich erstellt. Zum Herunterladen klicken Sie"
         here: "hier"
         file_type:
