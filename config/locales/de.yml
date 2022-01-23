@@ -121,7 +121,7 @@ de:
     schedule_reference: "Zahlungsplan Referenz: %{REF}"
     schedule_issued_on_DATE: "Zeitplan erstellt am %{DATE}"
     object: "Objekt: Zahlungsplan für %{ITEM}"
-    subscription_of_NAME_for_DURATION_starting_from_DATE: "the subscription of %{NAME} for %{DURATION} starting from %{DATE}"
+    subscription_of_NAME_for_DURATION_starting_from_DATE: "das Abonnement von %{NAME} für %{DURATION} ab %{DATE}"
     deadlines: "Tabelle Ihrer Fristen"
     deadline_date: "Zahlungsdatum"
     deadline_amount: "Betrag inklusive Steuern"
