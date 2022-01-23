@@ -78,7 +78,7 @@ de:
         slots_not_deleted: "Von {TOTAL} Slots {COUNT, plural, one {} =1{wurde einer wurde nicht gelöscht} other{wurden {COUNT} nicht gelöscht}}. Möglicherweise {COUNT, plural, =1{ist er} other{sind sie}} bereits reserviert."
         you_should_select_at_least_a_machine: "Sie sollten mindestens eine Maschine auf diesem Slot auswählen."
         inconsistent_times: "Fehler: das Ende der Verfügbarkeit liegt vor dem Beginn."
-        min_one_slot: "The availability must be split in one slot at least."
+        min_one_slot: "Die Verfügbarkeit muss auf mindestens einen Slot aufgeteilt werden."
         min_slot_duration: "You must specify a valid duration for the slots."
         export_is_running_you_ll_be_notified_when_its_ready: "Export wird ausgeführt. Sie werden nach Fertigstellung benachrichtigt."
         actions: "Aktionen"
