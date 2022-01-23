@@ -193,7 +193,7 @@ de:
           year: "{COUNT, plural, one {Jahr} other {Jahre}}"
       packs_summary:
         prepaid_hours: "Vorausbezahlte Stunden"
-        remaining_HOURS: "You have {HOURS} prepaid hours remaining for this {ITEM, select, Machine{machine} Space{space} other{}}."
+        remaining_HOURS: "Sie haben {HOURS} vorausbezahlte Stunden für {ITEM, select, Machine{diese Maschine} Space{diesen Raum} other{}} übrig."
         no_hours: "Sie haben keine vorausbezahlte Nutzungsdauer für {ITEM, select, Machine{diese Maschine} Space{diesen Raum} other{}}."
         buy_a_new_pack: "Ein neues Paket kaufen"
         unable_to_use_pack_for_subsription_is_expired: "Sie benötigen für die verbleibenden Stunden ein gültiges Abonnement."
