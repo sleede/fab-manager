@@ -321,7 +321,7 @@ GEM
     recurrence (1.3.0)
       activesupport
       i18n
-    redis (4.4.0)
+    redis (4.5.1)
     repost (0.3.2)
     responders (2.4.1)
       actionpack (>= 4.2.0, < 6.0)
@@ -351,7 +351,7 @@ GEM
       activesupport (>= 4)
     semantic_range (2.3.0)
     sha3 (1.0.1)
-    sidekiq (6.2.1)
+    sidekiq (6.4.0)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
