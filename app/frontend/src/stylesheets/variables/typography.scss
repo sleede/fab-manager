@@ -1,0 +1,110 @@
+// Font
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
+
+:root {
+  --font-text: 'Work Sans', sans-serif;
+}
+
+// Title
+@mixin title-xl {
+  font-family: var(--font-text);
+  font-weight: 700;
+  font-size: 4rem;
+  line-height: 1.175;
+}
+@mixin title-lg {
+  font-family: var(--font-text);
+  font-weight: 600;
+  font-size: 2.8rem;
+  line-height: 1.175;
+}
+@mixin title-base {
+  font-family: var(--font-text);
+  font-weight: 600;
+  font-size: 2rem;
+  line-height: 1.175;
+}
+@mixin title-sm {
+  font-family: var(--font-text);
+  font-weight: 400;
+  font-size: 1.8rem;
+  line-height: 1.175;
+}
+
+// Text
+@mixin text-xl {
+  font-family: var(--font-text);
+  font-weight: 500;
+  font-size: 2rem;
+  line-height: 1.175;
+}
+@mixin text-lg($weight: normal) {
+  font-family: var(--font-text);
+  font-weight: $weight;
+  font-size: 1.8rem;
+  line-height: normal;
+}
+@mixin text-base($weight: normal) {
+  font-family: var(--font-text);
+  font-weight: $weight;
+  font-size: 1.6rem;
+  line-height: normal;
+}
+@mixin text-sm($weight: normal) {
+  font-family: var(--font-text);
+  font-weight: $weight;
+  font-size: 1.4rem;
+  line-height: normal;
+}
+
+// Text Editor
+@mixin editor {
+  *:first-child {
+    margin-top: 0;
+  }
+  h3 {
+    @include text-lg(600);
+    margin: 0 0 1rem;
+    color: var(--gray-hard-darkest);
+  }
+  ul {
+    padding-inline-start: 2.2rem;
+  }
+  blockquote {
+    position: relative;
+    margin: 2rem 0;
+    padding: 0.3rem 1.2rem;
+    border: none;
+    font-style: italic;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 4px;
+      border-radius: 2px;
+      background-color: var(--gray-hard-darkest);
+    }
+  }
+
+  p { @include text-base; }
+  p:last-of-type { margin: 0; }
+  //placeholder
+  p.is-editor-empty:first-child:before {
+    content: attr(data-placeholder);
+    height: 0;
+    float: left;
+    pointer-events: none;
+    color: var(--gray-soft-darkest);
+  }
+
+  strong { font-weight: 600; }
+  em { font-style: italic; }
+  u { text-decoration: underline; }
+
+  a {
+    color: var(--main-dark);
+    text-decoration: underline;
+  }
+}
