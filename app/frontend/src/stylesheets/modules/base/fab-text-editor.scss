@@ -46,7 +46,7 @@
       border-radius: 1px;
     }
   }
-  
+
   // tiptap class for the editor
   .ProseMirror {
     max-height: 40vh;
@@ -94,7 +94,7 @@
       @include text-sm();
       margin-top: 0;
     }
-    
+
     input[type="text"],
     select {
       width: 100%;
@@ -154,6 +154,11 @@
         right: 0;
         border-color: var(--information);
       }
+    }
+
+    button {
+      @include button(3.2rem);
+      margin-left: auto;
     }
   }
 
