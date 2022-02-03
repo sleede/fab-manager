@@ -34,9 +34,9 @@ const DeletePlanCategoryComponent: React.FC<DeletePlanCategoryProps> = ({ onSucc
    */
   const onDeleteConfirmed = (): void => {
     PlanCategoryAPI.destroy(category.id).then(() => {
-      onSuccess(t('app.admin.delete_plan_category.category_deleted'));
+      onSuccess(t('app.admin.manage_plan_category.delete_category.success'));
     }).catch((error) => {
-      onError(t('app.admin.delete_plan_category.unable_to_delete') + error);
+      onError(t('app.admin.manage_plan_category.delete_category.error') + error);
     });
     toggleDeletionModal();
   };
@@ -44,13 +44,13 @@ const DeletePlanCategoryComponent: React.FC<DeletePlanCategoryProps> = ({ onSucc
   return (
     <div className="delete-plan-category">
       <FabButton type='button' className="delete-button" icon={<i className="fa fa-trash" />} onClick={toggleDeletionModal} />
-      <FabModal title={t('app.admin.delete_plan_category.delete_category')}
+      <FabModal title={t('app.admin.manage_plan_category.delete_category.title')}
         isOpen={deletionModal}
         toggleModal={toggleDeletionModal}
         closeButton={true}
-        confirmButton={t('app.admin.delete_plan_category.confirm_delete')}
+        confirmButton={t('app.admin.manage_plan_category.delete_category.cta')}
         onConfirm={onDeleteConfirmed}>
-        <span>{t('app.admin.delete_plan_category.delete_confirmation')}</span>
+        <span>{t('app.admin.manage_plan_category.delete_category.confirm')}</span>
       </FabModal>
     </div>
   );

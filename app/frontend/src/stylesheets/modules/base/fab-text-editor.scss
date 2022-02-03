@@ -1,0 +1,170 @@
+.fab-textEditor {
+  position: relative;
+  margin-bottom: 1.6rem;
+  padding-bottom: 1.6rem;
+  background-color: var(--gray-soft-lightest);
+  border: 1px solid var(--gray-soft-dark);
+  // TODO: border radius from variable
+  border-radius: 8px;
+
+  &-label {
+    display: block;
+    margin-bottom: 0.8rem;
+  }
+
+  @mixin button($height, $width: $height) {
+    width: $width;
+    height: $height;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    color: var(--gray-hard-darkest);
+    background-color: transparent;
+    border: none;
+    &.is-active { color: var(--information); }
+    &:hover {
+      background-color: var(--gray-soft);
+      cursor: pointer;
+    }
+  }
+
+  &-menu {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem;
+    border-bottom: 1px solid var(--gray-soft-darkest);
+    & > *:not(:last-child) {
+      margin-right: 4px;
+    }
+
+    button { @include button(4rem); }
+    .divider {
+      width: 2px;
+      height: 2.4rem;
+      background-color: var(--gray-soft-dark);
+      border-radius: 1px;
+    }
+  }
+  
+  // tiptap class for the editor
+  .ProseMirror {
+    padding: 1.6rem 1.6rem 1.2rem;
+    &:focus { outline: none; }
+    @include editor;
+  }
+
+  &-character-count {
+    padding-right: 1.6rem;
+    @include text-sm;
+    text-align: right;
+    color: var(--gray-hard-lightest);
+  }
+
+  &-linkMenu {
+    position: absolute;
+    top: 4.5rem;
+    right: 0;
+    left: 0;
+    max-width: 50ch;
+    margin: 0 0.8rem;
+    padding: 1.2rem;
+    background-color: var(--gray-soft-lightest);
+    border: 1px solid var(--gray-soft-darkest);
+    border-radius: 8px;
+    // TODO: shadow from variable 
+    box-shadow: 0 0 10px rgba(39, 32, 32, 0.25);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease-out;
+    z-index: 10;
+    &.is-active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    & > div {
+      display: flex;
+      align-items: center
+    }
+    .url {
+      margin-bottom: 0.8rem;
+      input {
+        width: 100%;
+        height: 4rem;
+        margin-right: 1.2rem;
+        padding: 0.4rem 0.8rem;
+        background-color: var(--gray-soft-light);
+        border: 1px solid var(--secondary);
+        border-radius: 8px;
+        font-size: var(--text-base);
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        &::placeholder { color: var(--gray-soft-darkest);}
+      }
+    }
+    .tab {
+      display: flex;
+      align-items: center;
+      margin: 0;
+      cursor: pointer;
+      p {
+        margin: 0 1.2rem 0 0;
+        @include text-sm();
+        color: var(--gray-hard);
+      }
+      input[type="checkbox"] { opacity: 0; width: 0; height: 0; }
+      .switch {
+        position: relative;
+        width: 3.6rem;
+        height: 2rem;
+        background-color: var(--gray-soft);
+        border-radius: 2rem;
+        &::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          width: 2rem;
+          height: 2rem;
+          background-color: var(--gray-soft-lightest);
+          border: 2px solid var(--gray-soft);
+          border-radius: 2rem;
+        }
+      }
+      input:checked + .switch { background-color: var(--information); }
+      input:checked + .switch::after {
+        left: auto;
+        right: 0;
+        border-color: var(--information);
+      }
+    }
+
+    button {
+      @include button(3.2rem);
+      margin-left: auto;
+    }
+  }
+
+  &-error {
+    position: absolute;
+    top: 4.5rem;
+    right: 0;
+    left: 0;
+    display: flex;
+    max-width: 50ch;
+    margin: 0 0.8rem;
+    padding: 1.2rem;
+    color: var(--main-dark);
+    background-color: var(--main-lightest);
+    border: 1px solid var(--main-light);
+    border-radius: 8px;
+    // TODO: shadow from variable
+    box-shadow: 0 0 10px rgba(39, 32, 32, 0.25);
+
+    svg {
+      flex-shrink: 0;
+      margin-right: 1.2rem;
+    }
+    p { margin: 0; }
+  }
+}

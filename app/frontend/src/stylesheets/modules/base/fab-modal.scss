@@ -1,6 +1,7 @@
 @keyframes slideInFromTop {
   0% { transform: translate(0, -25%); }
   100% { transform: translate(0, 0); }
+
 }
 
 @keyframes fadeIn {
@@ -38,6 +39,25 @@
   border-radius: 6px;
   outline: 0;
 
+  .modal-btn--close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translateY(calc(-100% + 4px));
+    padding-bottom: 1rem;
+    color: var(--gray-soft-lightest);
+    background-color: transparent;
+    border: none;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
+    &:hover {
+      color: var(--gray-hard-darkest);
+      background-color: var(--gray-soft-lightest);
+      cursor: pointer;
+    }
+  }
+
     .fab-modal-header {
       padding: 8px;
       border-bottom: 1px solid #e5e5e5;
@@ -60,6 +80,18 @@
     .fab-modal-content {
       position: relative;
       padding: 15px;
+
+      form {
+        display: flex;
+        flex-direction: column;
+
+        button[type="submit"] {
+          margin-left: auto;
+          background-color: var(--secondary);
+          border: none;
+          &:hover { background-color: var(--secondary-dark);}
+        }
+      }
     }
 
     .fab-modal-footer {
@@ -69,16 +101,6 @@
       border-top: 1px solid #e5e5e5;
 
       .modal-btn {
-        &--close {
-          color: black;
-          background-color: #fbfbfb;
-          border: 1px solid #c9c9c9;
-
-          &:hover {
-            background-color: #f2f2f2;
-          }
-        }
-
         &--confirm {
           margin-left: 0.5em;
         }

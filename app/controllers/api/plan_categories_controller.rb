@@ -45,6 +45,6 @@ class API::PlanCategoriesController < API::ApiController
   end
 
   def plan_category_params
-    params.require(:plan_category).permit(:name, :weight)
+    params.require(:plan_category).permit(:name, :weight, :description)
   end
 end
