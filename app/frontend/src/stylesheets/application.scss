@@ -1,3 +1,5 @@
+@import "variables/colors";
+@import "variables/typography";
 @import "app.functions";
 @import "bootstrap_and_overrides";
 
@@ -23,10 +25,12 @@
 @import "modules/tour";
 @import "modules/base/fab-modal";
 @import "modules/base/fab-input";
+@import "modules/base/rhf-input";
 @import "modules/base/fab-button";
 @import "modules/base/fab-alert";
 @import "modules/base/fab-popover";
 @import "modules/base/labelled-input";
+@import "modules/base/fab-text-editor";
 @import "modules/payment-schedule/payment-schedule-summary";
 @import "modules/wallet-info";
 @import "modules/document-filters";
@@ -49,8 +53,7 @@
 @import "modules/payment/payzen/payzen-update-card-modal";
 @import "modules/payment/local-payment/local-payment-modal";
 @import "modules/plan-categories/plan-categories-list";
-@import "modules/plan-categories/create-plan-category";
-@import "modules/plan-categories/edit-plan-category";
+@import "modules/plan-categories/manage-plan-category";
 @import "modules/plan-categories/delete-plan-category";
 @import "modules/machines/machine-card";
 @import "modules/machines/machines-list";
