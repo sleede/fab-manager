@@ -4,10 +4,10 @@
   padding-bottom: 1.6rem;
   background-color: var(--gray-soft-lightest);
   border: 1px solid var(--gray-soft-dark);
-  // TODO: border radius from variable
-  border-radius: 8px;
+  border-radius: var(--border-radius);
 
   &-label {
+    @include text-sm;
     display: block;
     margin-bottom: 0.8rem;
   }
@@ -71,9 +71,8 @@
     padding: 1.2rem;
     background-color: var(--gray-soft-lightest);
     border: 1px solid var(--gray-soft-darkest);
-    border-radius: 8px;
-    // TODO: shadow from variable 
-    box-shadow: 0 0 10px rgba(39, 32, 32, 0.25);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.25s ease-out;
@@ -95,7 +94,7 @@
         padding: 0.4rem 0.8rem;
         background-color: var(--gray-soft-light);
         border: 1px solid var(--secondary);
-        border-radius: 8px;
+        border-radius: var(--border-radius);
         font-size: var(--text-base);
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -157,9 +156,8 @@
     color: var(--main-dark);
     background-color: var(--main-lightest);
     border: 1px solid var(--main-light);
-    border-radius: 8px;
-    // TODO: shadow from variable
-    box-shadow: 0 0 10px rgba(39, 32, 32, 0.25);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
 
     svg {
       flex-shrink: 0;
