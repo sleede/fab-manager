@@ -111,7 +111,7 @@ namespace :fablab do
 
     desc 'regenerate statistics'
     task :regenerate_statistics, %i[year month] => :environment do |_task, args|
-      return unless Setting.get('statistics_module')
+      exit unless Setting.get('statistics_module')
 
       yesterday = 1.day.ago
       year = args.year || yesterday.year

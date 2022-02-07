@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: unable to rebuild the statistics
+
 # v5.3.2 2022 January 19
 
 - Add a test for statistics generation
