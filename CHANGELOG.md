@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Fix a bug: unable to rebuild the statistics
+- [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2020,04]`
 
 # v5.3.2 2022 January 19
 
