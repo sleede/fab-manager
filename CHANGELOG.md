@@ -2,6 +2,7 @@
 
 ## next deploy
 
+- Updated Node to 16.13.2
 - when generating an avoir, the option "by_wallet" is not present anymore if wallet module is off
 - Fix a bug: edge case of birthday in the future in seeds.rb, we should use Date.current instead of DateTime.current since birthday is a date (see https://github.com/sleede/fab-manager/issues/344)
 - Fix a security issue: updated ruby to 2.6.10 to fix [CVE-2022-28739](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-28739)
