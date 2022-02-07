@@ -1,7 +1,9 @@
 # Changelog Fab-manager
 
+- Updated Node to 16.13.2
 - Updated eslint to v8 and eslint related packages to their latest versions
 - Webpack overlay will now report eslint issues
+- Linted all code according to eslint rules
 
 ## v5.3.7 2022 March 28
 
