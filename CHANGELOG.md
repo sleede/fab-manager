@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Updated Node to 16.13.2
+
 # v5.3.2 2022 January 19
 
 - Add a test for statistics generation
