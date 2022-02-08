@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- Updated german translations
 - Fix a bug: unable to rebuild the statistics
 - [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2020,04]`
 - Fix a bug/regresion: $sce.getTrustedHtml removes all dangerous html like iframe (youtube players, ect), replaced by $sce.trustAsHtml which trusts the content, it creates a security breach but all contents are created by users to we trust them
