@@ -100,7 +100,7 @@ de:
       subject: "Ein Benutzerkonto wurde erstellt"
       body:
         new_account_created: "Ein neues Benutzerkonto wurde auf der Website erstellt:"
-        user_of_group_html: "The user has registered in the group <strong>%{GROUP}</strong>"
+        user_of_group_html: "Der Benutzer hat sich in der Gruppe <strong>%{GROUP}</strong> registriert"
         account_for_organization: "Dieses Konto verwaltet eine Organisation:"
     notify_admin_subscribed_plan:
       subject: "Ein Abonnement wurde gekauft"
@@ -231,8 +231,8 @@ de:
         users_subscriptions: "der Abonnementliste"
         users_reservations: "der Reservierungsliste"
         availabilities_index: "der Verfügbarkeit der Reservierungen"
-        accounting_acd: "of the accounting data to ACD"
-        accounting_vat: "of the collected VAT data"
+        accounting_acd: "der Rechnungsdaten für ACD"
+        accounting_vat: "der gesammelten MwSt-Daten"
         click_to_download: "Excel-Datei erfolgreich erstellt. Zum Herunterladen klicken Sie"
         here: "hier"
         file_type:
@@ -274,7 +274,7 @@ de:
       subject: "Eine Rückerstattung wurde durchgeführt"
       body:
         refund_created: "Eine Rückerstattung von %{AMOUNT} wurde auf die Rechnung %{INVOICE} des Benutzers %{USER} generiert"
-        wallet_refund_created: "A refund of %{AMOUNT} has been generated for the credit of the wallet of user %{USER}"
+        wallet_refund_created: "Eine Rückerstattung von %{AMOUNT} wurde für das Guthabenkonto des Benutzers %{USER} generiert"
         download: "Hier klicken, um diese Erstattungsrechnung herunterzuladen"
     notify_admins_role_update:
       subject: "Die Rolle eines Benutzers hat sich geändert"
@@ -291,57 +291,57 @@ de:
       body:
         objects_sync: "Alle Mitglieder, Coupons, Maschinen, Schulungen, Räume und Pläne wurden erfolgreich auf Stripe synchronisiert."
     notify_member_payment_schedule_ready:
-      subject: "Your payment schedule"
+      subject: "Ihr Zahlungsplan"
       body:
-        please_find_attached_html: "Please find attached your payment schedule, issued on {DATE}, with an amount of {AMOUNT} concerning your {TYPE, select, Reservation{reservation} other{subscription}}." #messageFormat interpolation
-        schedule_in_your_dashboard_html: "You can find this payment schedule at any time from %{DASHBOARD} on the Fab Lab's website."
-        your_dashboard: "your dashboard"
+        please_find_attached_html: "Die angehängte Datei enthält Ihren Zahlungsplan vom {DATE}, über den Betrag von {AMOUNT} in Bezug auf {TYPE, select, Reservation{Ihre Reservierung} other{Ihr Abonnement}}." #messageFormat interpolation
+        schedule_in_your_dashboard_html: "Dieser Zahlungsplan ist jederzeit vom %{DASHBOARD} auf der Webseite des FabLabs abrufbar."
+        your_dashboard: "Ihr Dashboard"
     notify_admin_payment_schedule_error:
-      subject: "[URGENT] Card debit error"
+      subject: "[URGENT] Kartenbelastungsfehler"
       body:
-        remember: "In accordance with the %{REFERENCE} payment schedule, a debit by card of %{AMOUNT} was scheduled on %{DATE}."
-        error: "Unfortunately, an error occurred and this card debit was unable to complete successfully."
-        action: "Please then consult the %{GATEWAY} dashboard and contact the member as soon as possible to resolve the problem."
+        remember: "Gemäß dem Zahlungsplan von %{REFERENCE} wurde für %{DATE} eine Belastung der Karte in Höhe von %{AMOUNT} geplant."
+        error: "Leider ist ein Fehler aufgetreten und die Abbuchung über die Karte konnte nicht erfolgreich abgeschlossen werden."
+        action: "Bitte rufen Sie das Dashboard von %{GATEWAY} auf und kontaktieren Sie das Mitglied so bald wie möglich, um das Problem zu lösen."
     notify_member_payment_schedule_error:
-      subject: "[URGENT] Card debit error"
+      subject: "[URGENT] Kartenbelastungsfehler"
       body:
-        remember: "In accordance with your %{REFERENCE} payment schedule, a debit by card of %{AMOUNT} was scheduled on %{DATE}."
-        error: "Unfortunately, an error occurred and this card debit was unable to complete successfully."
-        action: "Please contact a manager as soon as possible to resolve the problem."
+        remember: "Gemäß dem Zahlungsplan von %{REFERENCE} wurde für %{DATE} eine Belastung der Karte in Höhe von %{AMOUNT} geplant."
+        error: "Leider ist ein Fehler aufgetreten und die Abbuchung über die Karte konnte nicht erfolgreich abgeschlossen werden."
+        action: "Bitte wenden Sie sich so schnell wie möglich an einen Manager, um das Problem zu lösen."
     notify_admin_payment_schedule_failed:
-      subject: "[URGENT] Card debit failure"
+      subject: "[URGENT] Kartenbelastungsfehler"
       body:
-        remember: "In accordance with the %{REFERENCE} payment schedule, a debit by card of %{AMOUNT} was scheduled on %{DATE}."
-        error: "Unfortunately, this card debit was unable to complete successfully."
-        action: "Please contact the member as soon as possible, then go to the payment schedule management interface to resolve the problem. After about 24 hours, the card subscription will be cancelled."
+        remember: "Gemäß dem Zahlungsplan von %{REFERENCE} wurde für %{DATE} eine Belastung der Karte in Höhe von %{AMOUNT} geplant."
+        error: "Leider konnte die Abbuchung über die Karte nicht erfolgreich abgeschlossen werden."
+        action: "Bitte kontaktieren Sie das Mitglied so bald wie möglich und lösen Sie dann das Problem in der Verwaltung der Zahlungsfristen. Nach etwa 24 Stunden wird das Kartenabonnement storniert."
     notify_member_payment_schedule_failed:
-      subject: "[URGENT] Card debit failure"
+      subject: "[URGENT] Kartenbelastungsfehler"
       body:
-        remember: "In accordance with your %{REFERENCE} payment schedule, a debit by card of %{AMOUNT} was scheduled on %{DATE}."
-        error: "Unfortunately, this card debit was unable to complete successfully."
-        action_html: "Please check %{DASHBOARD} or contact a manager before 24 hours, otherwise your subscription may be interrupted."
-        your_dashboard: "your dashboard"
+        remember: "Gemäß Ihrem Zahlungsplan von %{REFERENCE} wurde für %{DATE} eine Belastung der Karte in Höhe von %{AMOUNT} geplant."
+        error: "Leider konnte die Abbuchung über die Karte nicht erfolgreich abgeschlossen werden."
+        action_html: "Bitte überprüfen Sie %{DASHBOARD} oder kontaktieren Sie einen Manager innerhalb von 24 Stunden. Andernfalls kann Ihr Abonnement unterbrochen werden."
+        your_dashboard: "Ihr Dashboard"
     notify_admin_payment_schedule_gateway_canceled:
-      subject: "[URGENT] Payment schedule canceled by the payment gateway"
+      subject: "[URGENT] Zahlungsplan vom Zahlungs-Gateway abgebrochen"
       body:
-        error: "The payment schedule %{REFERENCE} was canceled by the payment gateway (%{GATEWAY}). No further debits will be made on this payment mean."
-        action: "Please consult the payment schedule management interface and contact the member as soon as possible to resolve the problem."
+        error: "Der Zahlungsplan %{REFERENCE} wurde vom Zahlungsdienstleister (%{GATEWAY}) storniert. Über diese Zahlungsart werden keine weiteren Abbuchungen mehr durchgeführt."
+        action: "Bitte konsultieren Sie die Schnittstelle zur Verwaltung des Zahlungszeitplans und wenden Sie sich so schnell wie möglich an das Mitglied, um das Problem zu lösen."
     notify_member_payment_schedule_gateway_canceled:
-      subject: "[URGENT] Payment schedule canceled by the payment gateway"
+      subject: "[URGENT] Zahlungsplan vom Zahlungs-Gateway abgebrochen"
       body:
-        error: "Your payment schedule %{REFERENCE} was canceled by the payment gateway. No further debits will be made on this payment mean."
-        action: "Please contact a manager as soon as possible to resolve the problem."
+        error: "Ihr Zahlungsplan %{REFERENCE} wurde vom Zahlungsdienstleister storniert. Über diese Zahlungsart werden keine weiteren Abbuchungen mehr durchgeführt."
+        action: "Bitte wenden Sie sich so schnell wie möglich an einen Manager, um das Problem zu lösen."
     notify_admin_payment_schedule_check_deadline:
-      subject: "Payment deadline"
+      subject: "Zahlungsfrist"
       body:
-        remember: "In accordance with the %{REFERENCE} payment schedule, %{AMOUNT} was due to be debited on %{DATE}."
-        date: "This is a reminder to cash the scheduled check as soon as possible."
-        confirm: "Do not forget to confirm the receipt in your payment schedule management interface, so that the corresponding invoice will be generated."
+        remember: "Gemäß dem Zahlungsplan von %{REFERENCE} wurde zum %{DATE} eine Belastung der Karte in Höhe von %{AMOUNT} geplant."
+        date: "Dies ist eine Erinnerung, den geplanten Scheck so schnell wie möglich zu bezahlen."
+        confirm: "Vergessen Sie nicht, die Quittung in Ihrer Zahlungsverwaltung zu bestätigen, damit die entsprechende Rechnung generiert werden kann."
     notify_member_payment_schedule_transfer_deadline:
-      subject: "Payment deadline"
+      subject: "Zahlungsfrist"
       body:
-        remember: "In accordance with your %{REFERENCE} payment schedule, %{AMOUNT} was due to be debited on %{DATE}."
-        date: "This is a reminder to verify that the direct bank debit was successfull."
-        confirm: "Please confirm the receipt of funds in your payment schedule management interface, so that the corresponding invoice will be generated."
+        remember: "Gemäß Ihrem Zahlungsplan von %{REFERENCE} wurde zum %{DATE} eine Belastung der Karte in Höhe von %{AMOUNT} geplant."
+        date: "Dies ist eine Erinnerung zur Prüfung, ob das Bankkonto erfolgreich belastet werden konnte."
+        confirm: "Bitte bestätigen Sie den Erhalt des Guthabens in Ihrer Zahlungsverwaltung, damit die entsprechende Rechnung generiert werden kann."
     shared:
       hello: "Hallo %{user_name}"
