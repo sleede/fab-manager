@@ -1,14 +1,16 @@
 # Changelog Fab-manager
 
+## v5.3.3 2022 February 08
+
 - Updated german translations
 - Fix a bug: unable to rebuild the statistics
-- [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2020,04]`
 - Fix a bug/regresion: $sce.getTrustedHtml removes all dangerous html like iframe (youtube players, ect), replaced by $sce.trustAsHtml which trusts the content, it creates a security breach but all contents are created by users to we trust them
 - Fix a bug: in SubscriptionPolicy#show?, was causing an error notice, making user think that the payment was not done, but it was
 - Fix a bug: destroying a project was impossible
 - Fix a bug: fix non-blocking js error when there was not payment gateway set 
+- [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2020,04]`
 
-# v5.3.2 2022 January 19
+## v5.3.2 2022 January 19
 
 - Add a test for statistics generation
 - Fix a bug: missing the Other payment method
@@ -20,7 +22,7 @@
 - Fix a bug: prepaid-packs without expiration date do not work
 - [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2020,04]`
 
-# v5.3.1 2022 January 17
+## v5.3.1 2022 January 17
 
 - Definition of extended prices for spaces is now made in hours (previously in minutes)
 - Support for JSONPath syntax in OAuth2 SSO fields mapping
@@ -51,7 +53,7 @@
 - Fix a security issue: updated follow-redirects to 1.14.7 to fix [CVE-2022-0155](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0155)
 - [TODO DEPLOY] `rails db:seed`
 
-# v5.3.0 2021 December 29
+## v5.3.0 2021 December 29
 
 - Ability to configure multiple VAT rates, per kind of invoiced item
 - Ability to export the collected VAT, by rates, to a CSV file
