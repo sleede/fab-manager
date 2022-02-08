@@ -20,6 +20,6 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.admin? or record.author.user_id == user
+    user.admin? or record.author.user_id == user.id
   end
 end

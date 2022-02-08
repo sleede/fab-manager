@@ -166,7 +166,7 @@ Application.Filters.filter('simpleText', [function () {
 }]);
 
 Application.Filters.filter('toTrusted', ['$sce', function ($sce) {
-  return text => $sce.getTrustedHtml(text);
+  return text => $sce.trustAsHtml(text);
 }]);
 
 Application.Filters.filter('planIntervalFilter', [function () {

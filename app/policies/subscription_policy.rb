@@ -3,7 +3,7 @@
 # Check the access policies for API::SubscriptionsController
 class SubscriptionPolicy < ApplicationPolicy
   def show?
-    user.admin? or record.user_id == user.id
+    user.admin? || user.manager? || record.user.id == user.id
   end
 
   def payment_details?

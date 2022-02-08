@@ -1,5 +1,13 @@
 # Changelog Fab-manager
 
+- Updated german translations
+- Fix a bug: unable to rebuild the statistics
+- [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2020,04]`
+- Fix a bug/regresion: $sce.getTrustedHtml removes all dangerous html like iframe (youtube players, ect), replaced by $sce.trustAsHtml which trusts the content, it creates a security breach but all contents are created by users to we trust them
+- Fix a bug: in SubscriptionPolicy#show?, was causing an error notice, making user think that the payment was not done, but it was
+- Fix a bug: destroying a project was impossible
+- Fix a bug: fix non-blocking js error when there was not payment gateway set 
+
 # v5.3.2 2022 January 19
 
 - Add a test for statistics generation

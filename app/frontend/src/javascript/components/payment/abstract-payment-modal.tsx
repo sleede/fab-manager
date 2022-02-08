@@ -90,7 +90,9 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
     CustomAssetAPI.get(CustomAssetName.CgvFile).then(asset => setCgv(asset));
     SettingAPI.get(SettingName.PaymentGateway).then((setting) => {
       // we capitalize the first letter of the name
-      setGateway(setting.value.replace(/^\w/, (c) => c.toUpperCase()));
+      if (setting.value) {
+        setGateway(setting.value.replace(/^\w/, (c) => c.toUpperCase()));
+      }
     });
 
     return () => { mounted.current = false; };
