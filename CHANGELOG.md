@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix line break on home events' cards
+
 ## v5.3.3 2022 February 08
 
 - Updated german translations
