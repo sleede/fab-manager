@@ -2,17 +2,18 @@ import React, { useCallback, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import useOnclickOutside from 'react-cool-onclickoutside';
 import { Editor } from '@tiptap/react';
-import { TextAa, TextBolder, TextItalic, TextUnderline, LinkSimpleHorizontal, ListBullets, Quotes, Trash, CheckCircle } from 'phosphor-react';
+import { TextAa, TextBolder, TextItalic, TextUnderline, LinkSimpleHorizontal, ListBullets, Quotes, Trash, CheckCircle, VideoCamera } from 'phosphor-react';
 
 interface MenuBarProps {
   paragraphTools?: boolean,
+  extra?: boolean,
   editor?: Editor,
 }
 
 /**
  * This component is the menu bar for the WYSIWYG text editor
  */
-export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools }) => {
+export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, extra }) => {
   const { t } = useTranslation('shared');
 
   const [linkMenu, setLinkMenu] = useState<boolean>(false);
@@ -83,6 +84,11 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools }) => {
     setLinkMenu(false);
   };
 
+  // Add iFrame
+  const addIframe = () => {
+    editor.chain().focus().setIframe({ src: 'https://www.youtube.com/embed/XIMLoLxmTDw' }).run();
+  };
+
   if (!editor) {
     return null;
   }
@@ -144,6 +150,16 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools }) => {
         >
           <LinkSimpleHorizontal size={24} />
         </button>
+        { extra &&
+        (<>
+          <button
+            type='button'
+            onClick={() => addIframe()}
+          >
+            <VideoCamera size={24} />
+          </button>
+        </>)
+        }
       </div>
       <div ref={ref} className={`fab-textEditor-linkMenu ${linkMenu ? 'is-active' : ''}`}>
         <div className="url">

@@ -9,6 +9,7 @@ import Placeholder from '@tiptap/extension-placeholder';
 import CharacterCount from '@tiptap/extension-character-count';
 import Underline from '@tiptap/extension-underline';
 import Link from '@tiptap/extension-link';
+import Iframe from './iframe';
 import { MenuBar } from './menu-bar';
 import { WarningOctagon } from 'phosphor-react';
 
@@ -51,7 +52,8 @@ export const FabTextEditor: React.FC<FabTextEditorProps> = ({ label, paragraphTo
       }),
       CharacterCount.configure({
         limit
-      })
+      }),
+      Iframe
     ],
     content,
     onUpdate: ({ editor }) => {

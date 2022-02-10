@@ -144,6 +144,15 @@
     }
   }
 
+  &-video {
+    position: relative;
+    height: 0;
+    width: 100%;
+    max-width: 600px;
+    padding-bottom: calc(100 / 16 * 9);
+    overflow: hidden;
+  }
+
   &-error {
     position: absolute;
     top: 4.5rem;
