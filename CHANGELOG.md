@@ -2,6 +2,7 @@
 
 - Fix line break on home events' cards
 - fix typo "projets" => "projects"
+- removes dead code about OpenAPI (open_api_calls_count_tracings)
 
 ## v5.3.3 2022 February 08
 

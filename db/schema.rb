@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_18_123741) do
+ActiveRecord::Schema.define(version: 2022_02_25_143203) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 2022_01_18_123741) do
   enable_extension "unaccent"
 
   create_table "abuses", id: :serial, force: :cascade do |t|
-    t.integer "signaled_id"
     t.string "signaled_type"
+    t.integer "signaled_id"
     t.string "first_name"
     t.string "last_name"
     t.string "email"
@@ -49,8 +49,8 @@ ActiveRecord::Schema.define(version: 2022_01_18_123741) do
     t.string "locality"
     t.string "country"
     t.string "postal_code"
-    t.integer "placeable_id"
     t.string "placeable_type"
+    t.integer "placeable_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -64,8 +64,8 @@ ActiveRecord::Schema.define(version: 2022_01_18_123741) do
   end
 
   create_table "assets", id: :serial, force: :cascade do |t|
-    t.integer "viewable_id"
     t.string "viewable_type"
+    t.integer "viewable_id"
     t.string "attachment"
     t.string "type"
     t.datetime "created_at"
@@ -133,8 +133,8 @@ ActiveRecord::Schema.define(version: 2022_01_18_123741) do
   end
 
   create_table "credits", id: :serial, force: :cascade do |t|
-    t.integer "creditable_id"
     t.string "creditable_type"
+    t.integer "creditable_id"
     t.integer "plan_id"
     t.integer "hours"
     t.datetime "created_at"
@@ -356,15 +356,15 @@ ActiveRecord::Schema.define(version: 2022_01_18_123741) do
 
   create_table "notifications", id: :serial, force: :cascade do |t|
     t.integer "receiver_id"
-    t.integer "attached_object_id"
     t.string "attached_object_type"
+    t.integer "attached_object_id"
     t.integer "notification_type_id"
     t.boolean "is_read", default: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string "receiver_type"
     t.boolean "is_send", default: false
-    t.jsonb "meta_data", default: {}
+    t.jsonb "meta_data", default: "{}"
     t.index ["notification_type_id"], name: "index_notifications_on_notification_type_id"
     t.index ["receiver_id"], name: "index_notifications_on_receiver_id"
   end
@@ -400,15 +400,6 @@ ActiveRecord::Schema.define(version: 2022_01_18_123741) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["subscription_id"], name: "index_offer_days_on_subscription_id"
-  end
-
-  create_table "open_api_calls_count_tracings", id: :serial, force: :cascade do |t|
-    t.integer "open_api_client_id"
-    t.integer "calls_count", null: false
-    t.datetime "at", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["open_api_client_id"], name: "index_open_api_calls_count_tracings_on_open_api_client_id"
   end
 
   create_table "open_api_clients", id: :serial, force: :cascade do |t|
@@ -492,7 +483,6 @@ ActiveRecord::Schema.define(version: 2022_01_18_123741) do
     t.integer "weight"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "description"
   end
 
   create_table "plans", id: :serial, force: :cascade do |t|
@@ -550,8 +540,8 @@ ActiveRecord::Schema.define(version: 2022_01_18_123741) do
   create_table "prices", id: :serial, force: :cascade do |t|
     t.integer "group_id"
     t.integer "plan_id"
-    t.integer "priceable_id"
     t.string "priceable_type"
+    t.integer "priceable_id"
     t.integer "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -661,8 +651,8 @@ ActiveRecord::Schema.define(version: 2022_01_18_123741) do
     t.text "message"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer "reservable_id"
     t.string "reservable_type"
+    t.integer "reservable_id"
     t.integer "nb_reserve_places"
     t.integer "statistic_profile_id"
     t.index ["reservable_type", "reservable_id"], name: "index_reservations_on_reservable_type_and_reservable_id"
@@ -671,8 +661,8 @@ ActiveRecord::Schema.define(version: 2022_01_18_123741) do
 
   create_table "roles", id: :serial, force: :cascade do |t|
     t.string "name"
-    t.integer "resource_id"
     t.string "resource_type"
+    t.integer "resource_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
@@ -1009,7 +999,6 @@ ActiveRecord::Schema.define(version: 2022_01_18_123741) do
   add_foreign_key "invoices", "wallet_transactions"
   add_foreign_key "invoicing_profiles", "users"
   add_foreign_key "o_auth2_mappings", "o_auth2_providers"
-  add_foreign_key "open_api_calls_count_tracings", "open_api_clients"
   add_foreign_key "organizations", "invoicing_profiles"
   add_foreign_key "payment_gateway_objects", "payment_gateway_objects"
   add_foreign_key "payment_schedule_items", "invoices"
