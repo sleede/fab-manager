@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Fix line break on home events' cards
+- fix typo "projets" => "projects"
 
 ## v5.3.3 2022 February 08
 

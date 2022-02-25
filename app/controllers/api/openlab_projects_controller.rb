@@ -6,7 +6,7 @@ class API::OpenlabProjectsController < API::ApiController
   before_action :init_openlab
 
   def index
-    render json: @projets.search(params[:q], page: params[:page], per_page: params[:per_page]).response.body
+    render json: @projects.search(params[:q], page: params[:page], per_page: params[:per_page]).response.body
   rescue StandardError
     render json: { errors: ['service unavailable'] }
   end
@@ -15,6 +15,6 @@ class API::OpenlabProjectsController < API::ApiController
 
   def init_openlab
     client = Openlab::Client.new(app_secret: Setting.get('openlab_app_secret'))
-    @projets = Openlab::Projects.new(client)
+    @projects = Openlab::Projects.new(client)
   end
 end
