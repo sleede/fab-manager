@@ -2,8 +2,6 @@
 
 # OpenAPI::Client keeps track of the authorized accesses to the 3-rd party API (aka. OpenAPI)
 class OpenAPI::Client < ApplicationRecord
-  has_many :calls_count_tracings, foreign_key: :open_api_client_id, dependent: :destroy
-
   validates :name, presence: true
   validates_uniqueness_of :token
 

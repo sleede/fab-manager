@@ -7,7 +7,7 @@ class OpenlabWorker
 
   def initialize
     client = Openlab::Client.new(app_secret: Setting.get('openlab_app_secret'))
-    @projets = Openlab::Projects.new(client)
+    @projects = Openlab::Projects.new(client)
     super
   end
 
@@ -17,12 +17,12 @@ class OpenlabWorker
     case action.to_s
     when /create/
       project = Project.find(project_id)
-      response = @projets.create(project.openlab_attributes)
+      response = @projects.create(project.openlab_attributes)
     when /update/
       project = Project.find(project_id)
-      response = @projets.update(project_id, project.openlab_attributes)
+      response = @projects.update(project_id, project.openlab_attributes)
     when /destroy/
-      response = @projets.destroy(project_id)
+      response = @projects.destroy(project_id)
     else
       raise NotImplementedError
     end

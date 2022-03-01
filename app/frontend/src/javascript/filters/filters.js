@@ -157,6 +157,8 @@ Application.Filters.filter('breakFilter', [function () {
 Application.Filters.filter('simpleText', [function () {
   return function (text) {
     if (text != null) {
+      // add a line break after specific closing tags
+      text = text.replace(/(<\/p>|<\/h4>|<\/h5>|<\/h6>|<\/pre>|<\/blockquote>)/g, '\n');
       text = text.replace(/<br\s*\/?>/g, '\n');
       return text.replace(/<\/?\w+[^>]*>/g, '');
     } else {
