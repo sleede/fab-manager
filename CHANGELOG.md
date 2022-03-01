@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v5.3.4 2022 March 01
+
 - Fix line break on home events' cards
 - Fix typo "projets" => "projects"
 - Removes dead code about OpenAPI (open_api_calls_count_tracings)
