@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Added [an option](doc/environment.md#OPENLAB_SSL_VERIFY) to allow set verify ssl option for OpenLab
+
 ## v5.3.4 2022 March 01
 
 - Fix line break on home events' cards
