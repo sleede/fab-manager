@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v5.3.5 2022 March 02
+
 - Added [an option](doc/environment.md#OPENLAB_SSL_VERIFY) to allow set verify ssl option for OpenLab
 
 ## v5.3.4 2022 March 01
