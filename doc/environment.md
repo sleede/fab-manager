@@ -281,7 +281,7 @@ These two variables are also used for SSO authentication.
 
 <a name="OPENLAB_SSL_VERIFY"></a>
 
-    OPENLAB_SSL_VERIFY
+    OPENLAB_SSL_VERIFY, OPENLAB_SSL_VERIFY_PEER
 
 Set this variable to `false` if you want to disable verify ssl certs.
 
