@@ -147,7 +147,7 @@ A comma separated list of scopes that will be requested when authenticating with
 
     SSO_DEBUG
 
-If set to `true`, the SSO authentication process will print more debug logs. 
+If set to `true`, the SSO authentication process will print more debug logs.
 Use in accordance with LOG_LEVEL=debug.
 Please do not enable this in production, as it can expose sensitive information.
 <a name="internationalization-settings"></a>
@@ -275,6 +275,15 @@ Accordingly, `RAILS_LOCALE` and `APP_LOCALE` must be configured to `zu`.
     OPENLAB_BASE_URI
 
 Set this variable to `https://openprojects.fab-manager.com` if you want to use the common projects repository or set it to your own OpenLab server.
+Typically, `DEFAULT_PROTOCOL` will be `https` (`http` if you are in development, or if you set `ALLOW_INSECURE_HTTP`).
+The variable `DEFAULT_HOST` should be your domain name (eg. fabmanager.example.com), and is also used for visits statistics (configuration of Google Analytics).
+These two variables are also used for SSO authentication.
+
+<a name="OPENLAB_SSL_VERIFY"></a>
+
+    OPENLAB_SSL_VERIFY, OPENLAB_SSL_VERIFY_PEER
+
+Set this variable to `false` if you want to disable verify ssl certs.
 
 <a name="other-settings"></a>
 ## Other settings
