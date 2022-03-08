@@ -165,6 +165,7 @@ en:
         openlab_search_not_available_at_the_moment: "Search over the whole network is not available at the moment. You still can search over the projects of this platform."
         project_search_result_is_empty: "Sorry, we found no results matching your search criteria."
         reset_all_filters: "Reset all filters"
+        keywords: "Keywords"
         search: "Search"
         all_projects: "All projects"
         my_projects: "My projects"
