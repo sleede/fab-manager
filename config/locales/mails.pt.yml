@@ -313,13 +313,13 @@ pt:
       body:
         remember: "De acordo com o calendário de pagamento de %{REFERENCE}, um débito por cartão de %{AMOUNT} foi agendado em %{DATE}."
         error: "Infelizmente, não foi possível completar o débito no cartão com sucesso."
-        action: "Por favor, entre em contato com o membro assim que possível, depois vá à interface de gestão de horários de pagamento para resolver o problema. Após cerca de 24 horas, a assinatura do cartão será cancelada."
+        action: "Please contact the member as soon as possible, then go to the payment schedule management interface to resolve the problem. After a certain period of time, the card subscription could be cancelled."
     notify_member_payment_schedule_failed:
       subject: "[URGENT] Falha no débito do cartão"
       body:
         remember: "De acordo com a sua agenda de pagamentos %{REFERENCE}, um débito por cartão de %{AMOUNT} foi agendado para %{DATE}."
         error: "Infelizmente, não foi possível completar o débito no cartão com sucesso."
-        action_html: "Por favor, verifique %{DASHBOARD} ou entre em contato com um gerente antes de 24 horas, caso contrário sua assinatura pode ser interrompida."
+        action_html: "Please check %{DASHBOARD} or contact a manager quickly, otherwise your subscription may be interrupted."
         your_dashboard: "seu dashboard"
     notify_admin_payment_schedule_gateway_canceled:
       subject: "[URGENT] Payment schedule canceled by the payment gateway"
