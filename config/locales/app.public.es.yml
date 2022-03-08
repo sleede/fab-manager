@@ -165,6 +165,7 @@ es:
         openlab_search_not_available_at_the_moment: "La busqueda en toda la red no está disponible en este momento. Puede seguir buscando proyectos en este FabLab."
         project_search_result_is_empty: "Lo sentimos, no hemos encontrado nada."
         reset_all_filters: "Limpiar filtros"
+        keywords: "Keywords"
         search: "Buscar"
         all_projects: "Todos los proyectos"
         my_projects: "Mis proyectos"
