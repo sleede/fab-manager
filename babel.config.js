@@ -4,7 +4,6 @@ module.exports = function (api) {
   const isDevelopmentEnv = api.env('development');
   const isProductionEnv = api.env('production');
   const isTestEnv = api.env('test');
-  const isWebpackDevServer = process.env.WEBPACK_DEV_SERVER;
 
   if (!validEnv.includes(currentEnv)) {
     throw new Error(
@@ -16,7 +15,10 @@ module.exports = function (api) {
     );
   }
 
-  return {
+  const defaultConfigFunc = require('shakapacker/package/babel/preset.js');
+  const resultConfig = defaultConfigFunc(api);
+
+  const changesOnDefault = {
     presets: [
       isTestEnv && [
         '@babel/preset-env',
@@ -48,7 +50,6 @@ module.exports = function (api) {
       ['@babel/preset-typescript', { allExtensions: true, isTSX: true }]
     ].filter(Boolean),
     plugins: [
-      isWebpackDevServer && 'react-refresh/babel',
       'babel-plugin-macros',
       '@babel/plugin-syntax-dynamic-import',
       isTestEnv && 'babel-plugin-dynamic-import-node',
@@ -79,12 +80,17 @@ module.exports = function (api) {
           async: false
         }
       ],
-      isProductionEnv && [
-        'babel-plugin-transform-react-remove-prop-types',
+      isProductionEnv && ['babel-plugin-transform-react-remove-prop-types',
         {
           removeImport: true
         }
-      ]
+      ],
+      process.env.WEBPACK_SERVE && 'react-refresh/babel'
     ].filter(Boolean)
   };
+
+  resultConfig.presets = [...resultConfig.presets, ...changesOnDefault.presets];
+  resultConfig.plugins = [...resultConfig.plugins, ...changesOnDefault.plugins];
+
+  return resultConfig;
 };

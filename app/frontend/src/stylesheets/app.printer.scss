@@ -1,1 +1,3 @@
-@import "~fullcalendar/dist/fullcalendar.print";
+@media print {
+  @import "~fullcalendar/dist/fullcalendar.print";
+}
