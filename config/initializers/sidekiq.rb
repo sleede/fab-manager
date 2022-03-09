@@ -6,6 +6,16 @@ redis_url = "redis://#{redis_host}:6379"
 Sidekiq.configure_server do |config|
   config.redis = { url: redis_url }
 
+  config.client_middleware do |chain|
+    chain.add SidekiqUniqueJobs::Middleware::Client
+  end
+
+  config.server_middleware do |chain|
+    chain.add SidekiqUniqueJobs::Middleware::Server
+  end
+
+  SidekiqUniqueJobs::Server.configure(config)
+
   # load sidekiq-cron schedule config
   schedule_file = 'config/schedule.yml'
 
@@ -17,6 +27,10 @@ end
 
 Sidekiq.configure_client do |config|
   config.redis = { url: redis_url }
+
+  config.client_middleware do |chain|
+    chain.add SidekiqUniqueJobs::Middleware::Client
+  end
 end
 
 Sidekiq::Extensions.enable_delay!

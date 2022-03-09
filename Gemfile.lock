@@ -66,6 +66,9 @@ GEM
     bindex (0.8.1)
     bootsnap (1.4.6)
       msgpack (~> 1.0)
+    brpoplpush-redis_script (0.1.2)
+      concurrent-ruby (~> 1.0, >= 1.0.5)
+      redis (>= 1.0, <= 5.0)
     builder (3.2.4)
     bullet (7.0.0)
       activesupport (>= 3.0.0)
@@ -358,10 +361,11 @@ GEM
     sidekiq-cron (1.1.0)
       fugit (~> 1.1)
       sidekiq (>= 4.2.1)
-    sidekiq-unique-jobs (6.0.22)
+    sidekiq-unique-jobs (7.1.15)
+      brpoplpush-redis_script (> 0.1.1, <= 2.0.0)
       concurrent-ruby (~> 1.0, >= 1.0.5)
-      sidekiq (>= 4.0, < 7.0)
-      thor (~> 0)
+      sidekiq (>= 5.0, < 8.0)
+      thor (>= 0.20, < 3.0)
     simplecov (0.19.0)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
@@ -494,7 +498,7 @@ DEPENDENCIES
   sha3
   sidekiq (>= 6.0.7)
   sidekiq-cron
-  sidekiq-unique-jobs (~> 6.0.22)
+  sidekiq-unique-jobs (~> 7.1.15)
   spring
   spring-watcher-listen (~> 2.0.0)
   stripe (= 5.29.0)
