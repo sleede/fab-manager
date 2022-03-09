@@ -1,7 +1,8 @@
 # Changelog Fab-manager
 
-- Fix a bug: a sentence was not linked to a translation key
 - Updated environment documentation
+- Fix a bug: a sentence was not linked to a translation key
+- Fix a security issue: updated image_processing to 1.12.2 to fix [CVE-2022-24720](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24720)
 
 ## v5.3.5 2022 March 02
 
