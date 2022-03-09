@@ -90,7 +90,7 @@ gem 'aasm'
 # Background job processing
 gem 'sidekiq', '>= 6.0.7'
 # Recurring jobs for Sidekiq
-gem 'sidekiq-cron'
+gem 'sidekiq-scheduler'
 gem 'sidekiq-unique-jobs', '~> 7.1.15'
 
 gem 'stripe', '5.29.0'
