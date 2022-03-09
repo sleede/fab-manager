@@ -1,38 +1,38 @@
 subscription_expire_in_7_days:
   cron: "0 0 * * *"
-  class: "SubscriptionExpireWorker"
+  class: SubscriptionExpireWorker
   queue: default
   args: [7]
 
 subscription_is_expired:
   cron: "0 23 * * *"
-  class: "SubscriptionExpireWorker"
+  class: SubscriptionExpireWorker
   queue: default
   args: [0]
 
 generate_statistic:
   cron: "0 1 * * *"
-  class: "StatisticWorker"
+  class: StatisticWorker
   queue: default
 
 i_calendar_import:
   cron: "0 * * * *"
-  class: "ICalendarImportWorker"
+  class: ICalendarImportWorker
   queue: default
 
 reservation_reminder:
   cron: "1 * * * *"
-  class: "ReservationReminderWorker"
+  class: ReservationReminderWorker
   queue: default
 
 close_period_reminder_worker:
   cron: "0 12 * * 1" # every monday at 12pm
-  class: "ClosePeriodReminderWorker"
+  class: ClosePeriodReminderWorker
   queue: default
 
 free_disk_space:
   cron: "0 5 * * 0" # every sunday at 5am
-  class: "FreeDiskSpaceWorker"
+  class: FreeDiskSpaceWorker
   queue: system
 
 # schedule a version check, every week at the current day+time
@@ -40,12 +40,12 @@ free_disk_space:
 <% m = DateTime.current.minute - 1; h = DateTime.current.hour; d = DateTime.current.cwday %>
 version_check:
   cron: <%="#{m} #{h} * * #{d}" %>
-  class: 'VersionCheckWorker'
+  class: VersionCheckWorker
   queue: system
 
 payment_schedule_item:
   cron: "0 * * * *" # every day, every hour
-  class: 'PaymentScheduleItemWorker'
+  class: PaymentScheduleItemWorker
   queue: default
 
 <%= PluginRegistry.insert_code('yml.schedule') %>

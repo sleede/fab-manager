@@ -278,13 +278,16 @@ Set this variable to `https://openprojects.fab-manager.com` if you want to use t
 Typically, `DEFAULT_PROTOCOL` will be `https` (`http` if you are in development, or if you set `ALLOW_INSECURE_HTTP`).
 The variable `DEFAULT_HOST` should be your domain name (eg. fabmanager.example.com), and is also used for visits statistics (configuration of Google Analytics).
 These two variables are also used for SSO authentication.
-
 <a name="OPENLAB_SSL_VERIFY"></a>
 
-    OPENLAB_SSL_VERIFY, OPENLAB_SSL_VERIFY_PEER
+    OPENLAB_SSL_VERIFY
 
-Set this variable to `false` if you want to disable verify ssl certs.
+Set this variable to `false` if you do not want to verify the OpenLab's server's certificate against the CA certificate.
+<a name="OPENLAB_SSL_VERIFY_PEER"></a>
 
+    OPENLAB_SSL_VERIFY_PEER
+
+Set this variable to `false` if you want to turn off the OpenLab's server's verification but still send client certificate. 
 <a name="other-settings"></a>
 ## Other settings
 
