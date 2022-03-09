@@ -8,7 +8,7 @@ gem 'rails', '~> 5.2.4'
 gem 'bootsnap'
 # Use Puma as web server
 gem 'puma', '4.3.11'
-gem 'webpacker', '~> 5.x'
+gem 'shakapacker', '6.1.1'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
