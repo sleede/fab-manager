@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# OpenApiCallsCountTracings was an unused table probably from a wrong copy/paste. We removed this dead code.
 class DropTableOpenAPICallsCountTracings < ActiveRecord::Migration[5.2]
   def up
     drop_table :open_api_calls_count_tracings
