@@ -4,6 +4,7 @@
 - Fix a bug: a sentence was not linked to a translation key
 - Fix a security issue: updated image_processing to 1.12.2 to fix [CVE-2022-24720](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24720)
 - Fix a security issue: updated url-parse to 1.5.10 to fix [CVE-2022-0686](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0686), [CVE-2022-0691](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0691), [CVE-2022-0639](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0639) and [CVE-2022-0512](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0512)
+- Fix a security issue: updated rails to 5.2.6.3 to fix [CVE-2022-21831](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-21831), [CVE-2022-23633](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23633)
 
 ## v5.3.5 2022 March 02
 
