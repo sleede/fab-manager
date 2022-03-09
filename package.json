@@ -25,13 +25,13 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.15.6",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/plugin-transform-destructuring": "^7.14.7",
-    "@babel/plugin-transform-runtime": "^7.15.0",
-    "@babel/preset-env": "^7.15.6",
+    "@babel/plugin-transform-runtime": "7",
+    "@babel/preset-env": "7",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.1",
     "@typescript-eslint/eslint-plugin": "^4.28.1",
     "@typescript-eslint/parser": "^4.28.1",
     "auto-ngtemplate-loader": "^3.1.0",
-    "babel-loader": "^8.2.2",
+    "babel-loader": "8",
     "eslint": "~6.8.0",
     "eslint-config-standard": "~14.1.1",
     "eslint-plugin-import": "~2.20.1",
@@ -45,11 +45,13 @@
     "rails-erb-loader": "^5.5.2",
     "react-refresh": "^0.10.0",
     "resolve-url-loader": "^4.0.0",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^4.7.4"
   },
   "dependencies": {
+    "@babel/core": "7",
     "@babel/preset-react": "^7.12.1",
     "@babel/preset-typescript": "^7.12.1",
+    "@babel/runtime": "7",
     "@claviska/jquery-minicolors": "^2.3.5",
     "@fortawesome/fontawesome-free": "5.14.0",
     "@lyracom/embedded-form-glue": "^0.3.3",
@@ -94,6 +96,7 @@
     "bootstrap-sass": "3.4.1",
     "checklist-model": "0.2",
     "codemirror": "^5.58.2",
+    "compression-webpack-plugin": "9",
     "d3": "3.5",
     "elasticsearch-browser": "3.1",
     "fullcalendar": "3.10.2",
@@ -123,10 +126,23 @@
     "react2angular": "^4.0.6",
     "shakapacker": "6.1.1",
     "summernote": "0.8.18",
+    "terser-webpack-plugin": "5",
     "twitter-fetcher": "^18.0.2",
     "typescript": "^4.0.5",
     "ui-select": "0.19",
     "underscore": "1.12",
-    "use-immer": "^0.5.1"
-  }
+    "use-immer": "^0.5.1",
+    "webpack": "5",
+    "webpack-assets-manifest": "5",
+    "webpack-cli": "4",
+    "webpack-merge": "5"
+  },
+  "babel": {
+    "presets": [
+      "./node_modules/shakapacker/package/babel/preset.js"
+    ]
+  },
+  "browserslist": [
+    "defaults"
+  ]
 }
