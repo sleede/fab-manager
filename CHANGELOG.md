@@ -7,6 +7,7 @@
 - Fix a security issue: updated rails to 5.2.6.3 to fix [CVE-2022-21831](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-21831), [CVE-2022-23633](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23633)
 - Fix a security issue: updated sidekiq to 6.4.0 to fix [CVE-2022-23837](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23837)
 - Fix a security issue: updated nokogiri to 1.13.3 to fix [CVE-2021-30560](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30560) and [CVE-2022-23308](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23308)
+- Fix a security issue: updated puma to 4.3.11 to fix [CVE-2022-23634](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23634)
 
 ## v5.3.5 2022 March 02
 
