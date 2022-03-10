@@ -268,9 +268,9 @@ zu:
       notify_admin_subscription_will_expire_in_7_days:
         USER_s_subscription_will_expire_in_7_days: "crwdns3577:0%{USER}crwdne3577:0"
       notify_admin_user_group_changed:
-        user_NAME_changed_his_group_html: "crwdns3579:0NAME={NAME}crwdnd3579:0GENDER={GENDER}crwdne3579:0" #messageFormat interpolation
+        user_NAME_changed_his_group_html: "crwdns22438:0{NAME}crwdne22438:0" #messageFormat interpolation
       notify_admin_user_merged:
-        user_NAME_has_merged_his_account_with_the_one_imported_from_PROVIDER_UID_html: "crwdns3581:0NAME={NAME}crwdnd3581:0GENDER={GENDER}crwdnd3581:0PROVIDER={PROVIDER}crwdnd3581:0UID={UID}crwdne3581:0" #messageFormat interpolation
+        user_NAME_has_merged_his_account_with_the_one_imported_from_PROVIDER_UID_html: "crwdns22440:0{NAME}crwdnd22440:0{PROVIDER}crwdne22440:0" #messageFormat interpolation
       notify_admin_when_project_published:
         project_NAME_has_been_published_html: "crwdns3583:0%{ID}crwdnd3583:0%{NAME}crwdne3583:0"
       notify_admin_when_user_is_created:
