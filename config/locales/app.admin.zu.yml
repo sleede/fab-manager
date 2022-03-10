@@ -15,7 +15,7 @@ zu:
         trainings: "crwdns6709:0crwdne6709:0"
         machines: "crwdns6711:0crwdne6711:0"
         spaces: "crwdns6713:0crwdne6713:0"
-        events: "crwdns6715:0crwdne6715:0"
+        events: "crwdns22406:0crwdne22406:0"
         availabilities: "crwdns6717:0crwdne6717:0"
         availabilities_notice: "crwdns6719:0crwdne6719:0"
         info: "crwdns20468:0crwdne20468:0"
@@ -24,7 +24,7 @@ zu:
         ongoing_reservations: "crwdns6721:0crwdne6721:0"
         without_reservation: "crwdns20326:0crwdne20326:0"
         confirmation_required: "crwdns6725:0crwdne6725:0"
-        do_you_really_want_to_cancel_the_USER_s_reservation_the_DATE_at_TIME_concerning_RESERVATION: "crwdns20296:0GENDER={GENDER}crwdnd20296:0USER={USER}crwdnd20296:0DATE={DATE}crwdnd20296:0TIME={TIME}crwdnd20296:0RESERVATION={RESERVATION}crwdne20296:0"
+        do_you_really_want_to_cancel_the_USER_s_reservation_the_DATE_at_TIME_concerning_RESERVATION: "crwdns22408:0{USER}crwdnd22408:0{DATE}crwdnd22408:0{TIME}crwdnd22408:0{RESERVATION}crwdne22408:0"
         reservation_was_successfully_cancelled: "crwdns6729:0crwdne6729:0"
         reservation_cancellation_failed: "crwdns6731:0crwdne6731:0"
         unable_to_remove_the_last_machine_of_the_slot_delete_the_slot_rather: "crwdns6733:0crwdne6733:0"
@@ -271,7 +271,7 @@ zu:
       events_edit:
         edit_the_event: "crwdns7095:0crwdne7095:0"
         confirmation_required: "crwdns19784:0crwdne19784:0"
-        edit_recurring_event: "crwdns19786:0crwdne19786:0"
+        edit_recurring_event: "crwdns22410:0crwdne22410:0"
         edit_this_event: "crwdns19788:0crwdne19788:0"
         edit_this_and_next: "crwdns19790:0crwdne19790:0"
         edit_all: "crwdns19792:0crwdne19792:0"
@@ -322,10 +322,10 @@ zu:
         none: "crwdns19808:0crwdne19808:0" #grammar concordance with training.
         an_error_occurred_while_saving_the_number_of_credits: "crwdns7173:0crwdne7173:0"
         an_error_occurred_while_deleting_credit_with_the_TRAINING: "crwdns7175:0{TRAINING}crwdne7175:0"
-        an_error_occurred_unable_to_find_the_credit_to_revoke: "crwdns7177:0crwdne7177:0"
+        an_error_occurred_unable_to_find_the_credit_to_revoke: "crwdns22412:0crwdne22412:0"
         an_error_occurred_while_creating_credit_with_the_TRAINING: "crwdns7179:0{TRAINING}crwdne7179:0"
         not_set: "crwdns7181:0crwdne7181:0"
-        error_a_credit_linking_this_machine_with_that_subscription_already_exists: "crwdns7183:0crwdne7183:0"
+        error_a_credit_linking_this_machine_with_that_subscription_already_exists: "crwdns22414:0crwdne22414:0"
         changes_have_been_successfully_saved: "crwdns7185:0crwdne7185:0"
         credit_was_successfully_saved: "crwdns7187:0crwdne7187:0"
         error_creating_credit: "crwdns7189:0crwdne7189:0"
@@ -365,7 +365,7 @@ zu:
         these_prices_match_space_hours_rates_html: "crwdns20480:0crwdne20480:0"
         add_a_space_credit: "crwdns7259:0crwdne7259:0"
         space: "crwdns7261:0crwdne7261:0"
-        error_a_credit_linking_this_space_with_that_subscription_already_exists: "crwdns7263:0crwdne7263:0"
+        error_a_credit_linking_this_space_with_that_subscription_already_exists: "crwdns22416:0crwdne22416:0"
         status_enabled: "crwdns7265:0crwdne7265:0"
         status_disabled: "crwdns7267:0crwdne7267:0"
         status_all: "crwdns7269:0crwdne7269:0"
@@ -482,7 +482,7 @@ zu:
         no_invoices_for_now: "crwdns7337:0crwdne7337:0"
         payment_schedules_list: "crwdns21058:0crwdne21058:0"
         invoicing_settings: "crwdns7339:0crwdne7339:0"
-        warning_invoices_disabled: "crwdns7341:0crwdne7341:0"
+        warning_invoices_disabled: "crwdns22418:0crwdne22418:0"
         change_logo: "crwdns7343:0crwdne7343:0"
         john_smith: "crwdns7345:0crwdne7345:0"
         john_smith_at_example_com: "crwdns7347:0crwdne7347:0"
@@ -983,7 +983,7 @@ zu:
       #add a new administrator to the platform
       admins_new:
         add_an_administrator: "crwdns8027:0crwdne8027:0"
-        administrator_successfully_created_he_will_receive_his_connection_directives_by_email: "crwdns8029:0GENDER={GENDER}crwdnd8029:0GENDER={GENDER}crwdne8029:0"
+        administrator_successfully_created_he_will_receive_his_connection_directives_by_email: "crwdns22420:0crwdne22420:0"
         failed_to_create_admin: "crwdns8031:0crwdne8031:0"
         man: "crwdns8033:0crwdne8033:0"
         woman: "crwdns8035:0crwdne8035:0"
@@ -1001,7 +1001,7 @@ zu:
       #add a new manager to the platform
       manager_new:
         add_a_manager: "crwdns20348:0crwdne20348:0"
-        manager_successfully_created: "crwdns20350:0GENDER={GENDER}crwdnd20350:0GENDER={GENDER}crwdne20350:0"
+        manager_successfully_created: "crwdns22422:0crwdne22422:0"
         failed_to_create_manager: "crwdns20352:0crwdne20352:0"
         man: "crwdns20354:0crwdne20354:0"
         woman: "crwdns20356:0crwdne20356:0"
@@ -1032,7 +1032,7 @@ zu:
         oauth2_provider_successfully_added: "crwdns8081:0crwdne8081:0"
       #edit an authentication provider (SSO)
       authentication_edit:
-        provider: "crwdns8083:0crwdne8083:0"
+        provider: "crwdns22424:0crwdne22424:0"
         it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider: "crwdns20208:0crwdne20208:0"
         provider_successfully_updated: "crwdns20210:0crwdne20210:0"
         an_error_occurred_unable_to_update_the_provider: "crwdns8089:0crwdne8089:0"
@@ -1322,7 +1322,7 @@ zu:
           public_registrations_allowed: "crwdns22283:0crwdne22283:0"
           help: "crwdns20764:0crwdne20764:0"
           feature_tour: "crwdns20766:0crwdne20766:0"
-          feature_tour_info_html: "crwdns20768:0crwdne20768:0"
+          feature_tour_info_html: "crwdns22426:0crwdne22426:0"
           feature_tour_display_mode: "crwdns20770:0crwdne20770:0"
           display_mode:
             once: "crwdns20772:0crwdne20772:0"
@@ -1395,7 +1395,7 @@ zu:
         client_name: "crwdns8459:0crwdne8459:0"
         confirmation_required: "crwdns8461:0crwdne8461:0"
         do_you_really_want_to_delete_this_open_api_client: "crwdns8463:0crwdne8463:0"
-        do_you_really_want_to_revoke_this_open_api_access: "crwdns8465:0crwdne8465:0"
+        do_you_really_want_to_revoke_this_open_api_access: "crwdns22428:0crwdne22428:0"
         client_successfully_created: "crwdns8467:0crwdne8467:0"
         client_successfully_updated: "crwdns8469:0crwdne8469:0"
         client_successfully_deleted: "crwdns8471:0crwdne8471:0"
