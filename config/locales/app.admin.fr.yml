@@ -15,7 +15,7 @@ fr:
         trainings: "Formations"
         machines: "Machines"
         spaces: "Espaces"
-        events: "Events"
+        events: "Événements"
         availabilities: "Disponibilités"
         availabilities_notice: "Exporter dans un classeur Excel tous les créneaux ouverts à la réservation et leurs taux d'occupation."
         info: "Informations"
