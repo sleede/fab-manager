@@ -423,7 +423,7 @@ zu:
         confirm_and_pay: "crwdns10057:0crwdne10057:0"
         you_have_settled_the_following_TYPE: "crwdns10059:0TYPE={TYPE}crwdne10059:0"
         you_have_settled_a_: "crwdns10061:0crwdne10061:0"
-        total_: "crwdns10063:0crwdne10063:0"
+        total_: "crwdns22436:0crwdne22436:0"
         thank_you_your_payment_has_been_successfully_registered: "crwdns10065:0crwdne10065:0"
         your_invoice_will_be_available_soon_from_your_: "crwdns10067:0crwdne10067:0"
         dashboard: "crwdns10069:0crwdne10069:0"
