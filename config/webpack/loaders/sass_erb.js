@@ -1,4 +1,4 @@
-const getStyleRule = require('@rails/webpacker/package/utils/get_style_rule');
+const getStyleRule = require('shakapacker/package/utils/get_style_rule');
 
 module.exports = getStyleRule(/\.(scss|sass)\.erb$/, false, [
   {
