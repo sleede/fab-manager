@@ -43,7 +43,10 @@ const customConfig = {
     extensions: ['.jpg', '.jpeg', '.png', '.gif', '.tiff', '.ico',
       '.svg', '.eot', '.otf', '.ttf', '.woff', '.woff2',
       '.tsx', '.ts', '.erb', '.html', '.mjs', '.js', '.jsx',
-      '.sass', '.scss', '.css', '.module.sass', '.module.scss', '.module.css']
+      '.sass', '.scss', '.css', '.module.sass', '.module.scss', '.module.css'],
+    fallback: {
+      assert: false
+    }
   }
 };
 

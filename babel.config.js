@@ -21,33 +21,15 @@ module.exports = function (api) {
   const changesOnDefault = {
     presets: [
       isTestEnv && [
-        '@babel/preset-env',
-        {
-          targets: {
-            node: 'current'
-          },
-          modules: 'commonjs'
-        },
         '@babel/preset-react'
       ],
       (isProductionEnv || isDevelopmentEnv) && [
-        '@babel/preset-env',
-        {
-          forceAllTransforms: true,
-          useBuiltIns: 'entry',
-          corejs: 3,
-          modules: false,
-          exclude: ['transform-typeof-symbol']
-        }
-      ],
-      [
         '@babel/preset-react',
         {
           development: isDevelopmentEnv || isTestEnv,
           useBuiltIns: true
         }
-      ],
-      ['@babel/preset-typescript', { allExtensions: true, isTSX: true }]
+      ]
     ].filter(Boolean),
     plugins: [
       'babel-plugin-macros',
@@ -57,21 +39,13 @@ module.exports = function (api) {
       [
         '@babel/plugin-proposal-class-properties',
         {
-          loose: false
+          loose: true
         }
       ],
       [
         '@babel/plugin-proposal-object-rest-spread',
         {
           useBuiltIns: true
-        }
-      ],
-      [
-        '@babel/plugin-transform-runtime',
-        {
-          helpers: false,
-          regenerator: true,
-          corejs: false
         }
       ],
       [
