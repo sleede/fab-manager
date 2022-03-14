@@ -20,10 +20,7 @@ module.exports = function (api) {
 
   const changesOnDefault = {
     presets: [
-      isTestEnv && [
-        '@babel/preset-react'
-      ],
-      (isProductionEnv || isDevelopmentEnv) && [
+      [
         '@babel/preset-react',
         {
           development: isDevelopmentEnv || isTestEnv,
