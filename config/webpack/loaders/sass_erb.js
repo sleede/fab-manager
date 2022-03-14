@@ -3,16 +3,6 @@ module.exports = {
   exclude: /node_modules/,
   use: [
     {
-      loader: require('mini-css-extract-plugin').loader
-    },
-    {
-      loader: 'css-loader',
-      options: {
-        sourceMap: true,
-        importLoaders: 2
-      }
-    },
-    {
       loader: 'resolve-url-loader',
       options: {
         sourceMap: true
