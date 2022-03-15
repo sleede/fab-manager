@@ -113,7 +113,7 @@
     "jquery-ujs": "^1.2.2",
     "medium-editor": "^5.23.3",
     "mini-css-extract-plugin": "^2.6.0",
-    "moment": "2.22",
+    "moment": "2.29",
     "moment-timezone": "0.5",
     "ng-caps-lock": "https://github.com/FabioMR/ng-caps-lock.git#1.0.3",
     "ng-fittext": "https://github.com/patrickmarabeas/ng-FitText.js.git#4.1.1",
