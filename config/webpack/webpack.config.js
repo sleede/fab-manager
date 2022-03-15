@@ -2,13 +2,13 @@ const { webpackConfig, merge } = require('shakapacker');
 const webpack = require('webpack');
 const path = require('path');
 
-const htmlErb = require('./loaders/html_erb');
-const js = require('./loaders/js');
-const jsErb = require('./loaders/js_erb');
-const sass = require('./loaders/sass');
-const sassErb = require('./loaders/sass_erb');
-const html = require('./loaders/html');
-const uiTour = require('./loaders/ui-tour');
+const htmlErb = require('./modules/html_erb');
+const js = require('./modules/js');
+const jsErb = require('./modules/js_erb');
+const sass = require('./modules/sass');
+const sassErb = require('./modules/sass_erb');
+const html = require('./modules/html');
+const uiTour = require('./modules/ui-tour');
 
 // See the shakacode/shakapacker README and docs directory for advice on customizing your webpackConfig.
 const customConfig = {
