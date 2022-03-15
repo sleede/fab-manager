@@ -5,7 +5,7 @@ const path = require('path');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 const htmlErb = require('./modules/html_erb');
-const js = require('./modules/js');
+// const js = require('./modules/js');
 const jsErb = require('./modules/js_erb');
 const sass = require('./modules/sass');
 const sassErb = require('./modules/sass_erb');
@@ -40,7 +40,7 @@ const customConfig = {
       jsErb,
       htmlErb,
       sassErb,
-      js,
+      // js,
       html,
       sass,
       uiTour,
