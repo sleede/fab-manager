@@ -7,6 +7,7 @@
 - Updated sidekiq-unique-jobs to 7.1.15
 - Removed unmaintained gem sidekiq-cron and replaced it with sidekiq-scheduler
 - Fix a bug: a sentence was not linked to a translation key
+- Fix a bug: the version check may be scheduled at an invalid time
 - Fix a bug: the moment-timezone relied on an outdated version of moment with a case-sensitive locale file
 - Fix a security issue: updated image_processing to 1.12.2 to fix [CVE-2022-24720](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24720)
 - Fix a security issue: updated url-parse to 1.5.10 to fix [CVE-2022-0686](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0686), [CVE-2022-0691](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0691), [CVE-2022-0639](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0639) and [CVE-2022-0512](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0512)

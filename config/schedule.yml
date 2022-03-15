@@ -37,9 +37,9 @@ free_disk_space:
 
 # schedule a version check, every week at the current day+time
 # this will prevent that all the instances query the hub simultaneously
-<% m = DateTime.current.minute - 1; h = DateTime.current.hour; d = DateTime.current.cwday %>
+<% h = DateTime.current - 1.minute %>
 version_check:
-  cron: <%="#{m} #{h} * * #{d}" %>
+  cron: <%="#{h.strftime('%M %H')} * * #{h.cwday}" %>
   class: VersionCheckWorker
   queue: system
 
