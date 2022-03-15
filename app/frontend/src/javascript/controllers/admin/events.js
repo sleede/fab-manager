@@ -619,12 +619,12 @@ Application.Controllers.controller('NewEventController', ['$scope', '$state', 'C
 /**
  * Controller used in the events edition page
  */
-Application.Controllers.controller('EditEventController', ['$scope', '$state', '$stateParams', 'CSRF', 'eventPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', 'priceCategoriesPromise', '$uibModal', 'growl', '_t',
-  function ($scope, $state, $stateParams, CSRF, eventPromise, categoriesPromise, themesPromise, ageRangesPromise, priceCategoriesPromise, $uibModal, growl, _t) {
+Application.Controllers.controller('EditEventController', ['$scope', '$state', '$transition$', 'CSRF', 'eventPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', 'priceCategoriesPromise', '$uibModal', 'growl', '_t',
+  function ($scope, $state, $transition$, CSRF, eventPromise, categoriesPromise, themesPromise, ageRangesPromise, priceCategoriesPromise, $uibModal, growl, _t) {
     /* PUBLIC SCOPE */
 
     // API URL where the form will be posted
-    $scope.actionUrl = `/api/events/${$stateParams.id}`;
+    $scope.actionUrl = `/api/events/${$transition$.params().id}`;
 
     // Form action on the above URL
     $scope.method = 'put';

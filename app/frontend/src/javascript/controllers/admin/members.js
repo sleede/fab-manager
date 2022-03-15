@@ -650,12 +650,12 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
 /**
  * Controller used in the member edition page
  */
-Application.Controllers.controller('EditMemberController', ['$scope', '$state', '$stateParams', 'Member', 'Training', 'dialogs', 'growl', 'Group', 'Subscription', 'CSRF', 'memberPromise', 'tagsPromise', '$uibModal', 'Plan', '$filter', '_t', 'walletPromise', 'transactionsPromise', 'activeProviderPromise', 'Wallet', 'settingsPromise',
-  function ($scope, $state, $stateParams, Member, Training, dialogs, growl, Group, Subscription, CSRF, memberPromise, tagsPromise, $uibModal, Plan, $filter, _t, walletPromise, transactionsPromise, activeProviderPromise, Wallet, settingsPromise) {
+Application.Controllers.controller('EditMemberController', ['$scope', '$state', '$transition$', 'Member', 'Training', 'dialogs', 'growl', 'Group', 'Subscription', 'CSRF', 'memberPromise', 'tagsPromise', '$uibModal', 'Plan', '$filter', '_t', 'walletPromise', 'transactionsPromise', 'activeProviderPromise', 'Wallet', 'settingsPromise',
+  function ($scope, $state, $transition$, Member, Training, dialogs, growl, Group, Subscription, CSRF, memberPromise, tagsPromise, $uibModal, Plan, $filter, _t, walletPromise, transactionsPromise, activeProviderPromise, Wallet, settingsPromise) {
   /* PUBLIC SCOPE */
 
     // API URL where the form will be posted
-    $scope.actionUrl = `/api/members/${$stateParams.id}`;
+    $scope.actionUrl = `/api/members/${$transition$.params().id}`;
 
     // Form action on the above URL
     $scope.method = 'patch';
@@ -922,8 +922,8 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
 /**
  * Controller used in the member's creation page (admin view)
  */
-Application.Controllers.controller('NewMemberController', ['$scope', '$state', '$stateParams', 'Member', 'Training', 'Group', 'CSRF', 'settingsPromise',
-  function ($scope, $state, $stateParams, Member, Training, Group, CSRF, settingsPromise) {
+Application.Controllers.controller('NewMemberController', ['$scope', '$state', 'Member', 'Training', 'Group', 'CSRF', 'settingsPromise',
+  function ($scope, $state, Member, Training, Group, CSRF, settingsPromise) {
     CSRF.setMetaTags();
 
     /* PUBLIC SCOPE */

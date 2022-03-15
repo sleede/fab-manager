@@ -17,8 +17,8 @@
  */
 'use strict';
 
-Application.Controllers.controller('GraphsController', ['$scope', '$state', '$rootScope', 'es', 'Statistics', '_t',
-  function ($scope, $state, $rootScope, es, Statistics, _t) {
+Application.Controllers.controller('GraphsController', ['$scope', '$state', '$rootScope', '$transitions', 'es', 'Statistics', '_t',
+  function ($scope, $state, $rootScope, $transitions, es, Statistics, _t) {
   /* PRIVATE STATIC CONSTANTS */
 
     // height of the HTML/SVG charts elements in pixels
@@ -167,8 +167,8 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
 
       // workaround for angular-bootstrap::tabs behavior: on tab deletion, another tab will be selected
       // which will cause every tabs to reload, one by one, when the view is closed
-      $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-        if ((fromState.name === 'app.admin.stats_graphs') && (Object.keys(fromParams).length === 0)) {
+      $transitions.onStart({ to: 'app.admin.stats_graphs' }, function (trans) {
+        if (Object.keys(trans.from().params).length === 0) {
           return $scope.preventRefresh = true;
         }
       });

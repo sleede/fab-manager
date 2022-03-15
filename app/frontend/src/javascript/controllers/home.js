@@ -1,7 +1,7 @@
 'use strict';
 
-Application.Controllers.controller('HomeController', ['$scope', '$stateParams', '$translatePartialLoader', 'AuthService', 'settingsPromise', 'Member', 'uiTourService', '_t',
-  function ($scope, $stateParams, $translatePartialLoader, AuthService, settingsPromise, Member, uiTourService, _t) {
+Application.Controllers.controller('HomeController', ['$scope', '$transition$', '$translatePartialLoader', 'AuthService', 'settingsPromise', 'Member', 'uiTourService', '_t',
+  function ($scope, $transition$, $translatePartialLoader, AuthService, settingsPromise, Member, uiTourService, _t) {
   /* PUBLIC SCOPE */
 
     // Home page HTML content
@@ -38,8 +38,8 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
     const initialize = function () {
       // if we receive a token to reset the password as GET parameter, trigger the
       // changePassword modal from the parent controller
-      if ($stateParams.reset_password_token) {
-        return $scope.$parent.editPassword($stateParams.reset_password_token);
+      if ($transition$.params().reset_password_token) {
+        return $scope.$parent.editPassword($transition$.params().reset_password_token);
       }
 
       // We set the home page content, with the directives replacing the placeholders

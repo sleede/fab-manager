@@ -91,8 +91,8 @@ Application.Controllers.controller('ShowTrainingController', ['$scope', '$state'
  * training can be reserved during the reservation process (the shopping cart may contains only one training and a subscription).
  */
 
-Application.Controllers.controller('ReserveTrainingController', ['$scope', '$stateParams', 'Auth', 'AuthService', '$timeout', 'Availability', 'Member', 'plansPromise', 'groupsPromise', 'settingsPromise', 'trainingPromise', '_t', 'uiCalendarConfig', 'CalendarConfig', 'Reservation',
-  function ($scope, $stateParams, Auth, AuthService, $timeout, Availability, Member, plansPromise, groupsPromise, settingsPromise, trainingPromise, _t, uiCalendarConfig, CalendarConfig, Reservation) {
+Application.Controllers.controller('ReserveTrainingController', ['$scope', '$transition$', 'Auth', 'AuthService', '$timeout', 'Availability', 'Member', 'plansPromise', 'groupsPromise', 'settingsPromise', 'trainingPromise', '_t', 'uiCalendarConfig', 'CalendarConfig', 'Reservation',
+  function ($scope, $transition$, Auth, AuthService, $timeout, Availability, Member, plansPromise, groupsPromise, settingsPromise, trainingPromise, _t, uiCalendarConfig, CalendarConfig, Reservation) {
   /* PRIVATE STATIC CONSTANTS */
 
     // Color of the selected event backgound
@@ -144,7 +144,7 @@ Application.Controllers.controller('ReserveTrainingController', ['$scope', '$sta
     $scope.training = trainingPromise;
 
     // 'all' OR training's slug
-    $scope.mode = $stateParams.id;
+    $scope.mode = $transition$.params().id;
 
     // fullCalendar (v2) configuration
     $scope.calendarConfig = CalendarConfig({
@@ -279,7 +279,7 @@ Application.Controllers.controller('ReserveTrainingController', ['$scope', '$sta
       if ($scope.ctrl.member) {
         Member.get({ id: $scope.ctrl.member.id }, function (member) {
           $scope.ctrl.member = member;
-          const id = $stateParams.id === 'all' ? $stateParams.id : $scope.training.id;
+          const id = $transition$.params().id === 'all' ? $transition$.params().id : $scope.training.id;
           return Availability.trainings({ trainingId: id, member_id: $scope.ctrl.member.id }, function (trainings) {
             uiCalendarConfig.calendars.calendar.fullCalendar('removeEvents');
             return $scope.eventSources.splice(0, 1, {
@@ -391,7 +391,7 @@ Application.Controllers.controller('ReserveTrainingController', ['$scope', '$sta
       // in the router because this allows to refetchEvents from fullCalendar API.
       $scope.eventSources.push({
         events: function (start, end, timezone, callback) {
-          Availability.trainings({ trainingId: $stateParams.id }, function (availabilities) {
+          Availability.trainings({ trainingId: $transition$.params().id }, function (availabilities) {
             callback(availabilities);
           });
         },
@@ -408,7 +408,7 @@ Application.Controllers.controller('ReserveTrainingController', ['$scope', '$sta
      */
     const calendarEventClickCb = function (event, jsEvent, view) {
       $scope.selectedEvent = event;
-      if ($stateParams.id === 'all') {
+      if ($transition$.params().id === 'all') {
         $scope.training = event.training;
       }
       return $scope.selectionTime = new Date();

@@ -234,12 +234,12 @@ Application.Controllers.controller('NewSpaceController', ['$scope', '$state', 'C
 /**
  * Controller used in the space edition page (admin)
  */
-Application.Controllers.controller('EditSpaceController', ['$scope', '$state', '$stateParams', 'spacePromise', 'CSRF',
-  function ($scope, $state, $stateParams, spacePromise, CSRF) {
+Application.Controllers.controller('EditSpaceController', ['$scope', '$state', '$transition$', 'spacePromise', 'CSRF',
+  function ($scope, $state, $transition$, spacePromise, CSRF) {
     CSRF.setMetaTags();
 
     // API URL where the form will be posted
-    $scope.actionUrl = `/api/spaces/${$stateParams.id}`;
+    $scope.actionUrl = `/api/spaces/${$transition$.params().id}`;
 
     // Form action on the above URL
     $scope.method = 'put';
@@ -307,8 +307,8 @@ Application.Controllers.controller('ShowSpaceController', ['$scope', '$state', '
  * per slots.
  */
 
-Application.Controllers.controller('ReserveSpaceController', ['$scope', '$stateParams', 'Auth', '$timeout', 'Availability', 'Member', 'plansPromise', 'groupsPromise', 'settingsPromise', 'spacePromise', '_t', 'uiCalendarConfig', 'CalendarConfig', 'Reservation',
-  function ($scope, $stateParams, Auth, $timeout, Availability, Member, plansPromise, groupsPromise, settingsPromise, spacePromise, _t, uiCalendarConfig, CalendarConfig, Reservation) {
+Application.Controllers.controller('ReserveSpaceController', ['$scope', '$transition$', 'Auth', '$timeout', 'Availability', 'Member', 'plansPromise', 'groupsPromise', 'settingsPromise', 'spacePromise', '_t', 'uiCalendarConfig', 'CalendarConfig', 'Reservation',
+  function ($scope, $transition$, Auth, $timeout, Availability, Member, plansPromise, groupsPromise, settingsPromise, spacePromise, _t, uiCalendarConfig, CalendarConfig, Reservation) {
     /* PRIVATE STATIC CONSTANTS */
 
     // Color of the selected event backgound
@@ -601,7 +601,7 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$stateP
       // in the router because this allows to refetchEvents from fullCalendar API.
       $scope.eventSources.push({
         events: function (start, end, timezone, callback) {
-          Availability.spaces({ spaceId: $stateParams.id }, function (availabilities) {
+          Availability.spaces({ spaceId: $transition$.params().id }, function (availabilities) {
             callback(availabilities);
           });
         },

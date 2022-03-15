@@ -224,8 +224,8 @@ Application.Controllers.controller('NewPlanController', ['$scope', '$uibModal', 
 /**
  * Controller used in the plan edition form
  */
-Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'plans', 'planPromise', 'machines', 'spaces', 'prices', 'partners', 'CSRF', '$state', '$stateParams', 'growl', '$filter', '_t', 'Plan', 'planCategories',
-  function ($scope, groups, plans, planPromise, machines, spaces, prices, partners, CSRF, $state, $stateParams, growl, $filter, _t, Plan, planCategories) {
+Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'plans', 'planPromise', 'machines', 'spaces', 'prices', 'partners', 'CSRF', '$state', '$transition$', 'growl', '$filter', '_t', 'Plan', 'planCategories',
+  function ($scope, groups, plans, planPromise, machines, spaces, prices, partners, CSRF, $state, $transition$, growl, $filter, _t, Plan, planCategories) {
   /* PUBLIC SCOPE */
 
     // List of spaces
@@ -254,7 +254,7 @@ Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'p
     if ($scope.plan.disabled) { $scope.plan.disabled = 'true'; }
 
     // API URL where the form will be posted
-    $scope.actionUrl = `/api/plans/${$stateParams.id}`;
+    $scope.actionUrl = `/api/plans/${$transition$.params().id}`;
 
     // HTTP method for the rest API
     $scope.method = 'PATCH';

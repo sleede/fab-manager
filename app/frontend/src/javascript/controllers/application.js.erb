@@ -12,8 +12,8 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 
-Application.Controllers.controller('ApplicationController', ['$rootScope', '$scope', '$window', '$locale', '$timeout', 'Session', 'AuthService', 'Auth', '$uibModal', '$state', 'growl', 'Notification', '$interval', 'Setting', '_t', 'Version', 'Help',
-  function ($rootScope, $scope, $window, $locale, $timeout, Session, AuthService, Auth, $uibModal, $state, growl, Notification, $interval, Setting, _t, Version, Help) {
+Application.Controllers.controller('ApplicationController', ['$rootScope', '$scope', '$transitions', '$window', '$locale', '$timeout', 'Session', 'AuthService', 'Auth', '$uibModal', '$state', 'growl', 'Notification', '$interval', 'Setting', '_t', 'Version', 'Help',
+  function ($rootScope, $scope, $transitions, $window, $locale, $timeout, Session, AuthService, Auth, $uibModal, $state, growl, Notification, $interval, Setting, _t, Version, Help) {
   /* PRIVATE STATIC CONSTANTS */
 
     // User's notifications will get refreshed every 30s
@@ -325,19 +325,18 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
         $rootScope.toCheckNotifications = false;
       });
 
-      // bind to the $stateChangeStart event (AngularJS/UI-Router)
-      $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
-        if (!toState.data) { return; }
+      // bind to the $transitions.onStart event (UI-Router)
+      $transitions.onStart({}, function (trans) {
+        if (!trans.$to().data) { return; }
 
-        const { authorizedRoles } = toState.data;
+        const { authorizedRoles } = trans.$to().data;
         if (!AuthService.isAuthorized(authorizedRoles)) {
-          event.preventDefault();
           if (AuthService.isAuthenticated()) {
           // user is not allowed
             console.error('[ApplicationController::initialize] user is not allowed');
           } else {
           // user is not logged in
-            openLoginModal(toState, toParams);
+            openLoginModal(trans.$to().name, trans.$to().params);
           }
         }
       });

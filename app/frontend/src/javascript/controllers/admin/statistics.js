@@ -15,8 +15,8 @@
  */
 'use strict';
 
-Application.Controllers.controller('StatisticsController', ['$scope', '$state', '$rootScope', '$uibModal', 'es', 'Member', '_t', 'membersPromise', 'statisticsPromise', 'uiTourService', 'settingsPromise',
-  function ($scope, $state, $rootScope, $uibModal, es, Member, _t, membersPromise, statisticsPromise, uiTourService, settingsPromise) {
+Application.Controllers.controller('StatisticsController', ['$scope', '$state', '$transitions', '$rootScope', '$uibModal', 'es', 'Member', '_t', 'membersPromise', 'statisticsPromise', 'uiTourService', 'settingsPromise',
+  function ($scope, $state, $transitions, $rootScope, $uibModal, es, Member, _t, membersPromise, statisticsPromise, uiTourService, settingsPromise) {
   /* PRIVATE STATIC CONSTANTS */
 
     // search window size
@@ -407,8 +407,8 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
     const initialize = function () {
       // workaround for angular-bootstrap::tabs behavior: on tab deletion, another tab will be selected
       // which will cause every tabs to reload, one by one, when the view is closed
-      $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-        if ((fromState.name === 'app.admin.statistics') && (Object.keys(fromParams).length === 0)) {
+      $transitions.onStart({ to: 'app.admin.statistics' }, function (trans) {
+        if (Object.keys(trans.from().params).length === 0) {
           return $scope.preventRefresh = true;
         }
       });

@@ -21,8 +21,8 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
   'angularUtils.directives.dirDisqus', 'summernote', 'elasticsearch', 'angular-medium-editor', 'naif.base64',
   'minicolors', 'pascalprecht.translate', 'ngFitText', 'ngAside', 'ngCapsLock', 'vcRecaptcha', 'ui.codemirror',
   'bm.uiTour'])
-  .config(['$httpProvider', 'AuthProvider', 'growlProvider', 'unsavedWarningsConfigProvider', 'AnalyticsProvider', 'uibDatepickerPopupConfig', '$provide', '$translateProvider', 'TourConfigProvider',
-    function ($httpProvider, AuthProvider, growlProvider, unsavedWarningsConfigProvider, AnalyticsProvider, uibDatepickerPopupConfig, $provide, $translateProvider, TourConfigProvider) {
+  .config(['$httpProvider', 'AuthProvider', 'growlProvider', 'unsavedWarningsConfigProvider', 'AnalyticsProvider', 'uibDatepickerPopupConfig', '$provide', '$translateProvider', 'TourConfigProvider', '$sceDelegateProvider',
+    function ($httpProvider, AuthProvider, growlProvider, unsavedWarningsConfigProvider, AnalyticsProvider, uibDatepickerPopupConfig, $provide, $translateProvider, TourConfigProvider, $sceDelegateProvider) {
       // Google analytics
       // first we check the user acceptance
       const cookiesConsent = document.cookie.replace(/(?:(?:^|.*;\s*)fab-manager-cookies-consent\s*=\s*([^;]*).*$)|^.*$/, '$1');
@@ -65,8 +65,10 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
       $translateProvider.preferredLanguage(Fablab.locale);
       // End the tour when the user clicks the forward or back buttons of the browser
       TourConfigProvider.enableNavigationInterceptors();
-    }]).run(['$rootScope', '$log', 'Auth', 'amMoment', '$state', 'editableOptions', 'Analytics',
-    function ($rootScope, $log, Auth, amMoment, $state, editableOptions, Analytics) {
+
+      $sceDelegateProvider.resourceUrlWhitelist(['self']);
+    }]).run(['$rootScope', '$transitions', '$log', 'Auth', 'amMoment', '$state', 'editableOptions', 'Analytics',
+    function ($rootScope, $transitions, $log, Auth, amMoment, $state, editableOptions, Analytics) {
       // Angular-moment (date-time manipulations library)
       amMoment.changeLocale(Fablab.moment_locale);
 
@@ -75,9 +77,9 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
 
       // Alter the UI-Router's $state, registering into some information concerning the previous $state.
       // This is used to allow the user to navigate to the previous state
-      $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
-        $state.prevState = fromState;
-        $state.prevParams = fromParams;
+      $transitions.onSuccess({ }, function (trans) {
+        $state.prevState = trans.$from().name;
+        $state.prevParams = trans.$from().params;
       });
 
       // Global function to allow the user to navigate to the previous screen (ie. $state).
@@ -85,7 +87,7 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
       $rootScope.backPrevLocation = function (event) {
         event.preventDefault();
         event.stopPropagation();
-        if ($state.prevState.name === '') {
+        if ($state.prevState === '') {
           $state.prevState = 'app.public.home';
         }
         $state.go($state.prevState, $state.prevParams);
@@ -112,9 +114,9 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
 
       // Prevent the usage of the application for members with incomplete profiles: they will be redirected to
       // the 'profile completion' page. This is especially useful for user's accounts imported through SSO.
-      $rootScope.$on('$stateChangeStart', function (event, toState) {
+      $transitions.onStart({}, function (trans) {
         Auth.currentUser().then(function (currentUser) {
-          if (currentUser.need_completion && toState.name !== 'app.logged.profileCompletion') {
+          if (currentUser.need_completion && trans.$to().name !== 'app.logged.profileCompletion') {
             $state.go('app.logged.profileCompletion');
           }
         }).catch(() => {

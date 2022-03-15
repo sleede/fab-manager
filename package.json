@@ -55,7 +55,7 @@
     "@types/prop-types": "^15.7.2",
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.3",
-    "@uirouter/angularjs": "0.4",
+    "@uirouter/angularjs": "1.0.30",
     "AngularDevise": "https://github.com/cloudspace/angular_devise.git#1.0.2",
     "angular": "1.8",
     "angular-animate": "1.7",
