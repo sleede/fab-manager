@@ -56,7 +56,12 @@ module.exports = function (api) {
           removeImport: true
         }
       ],
-      process.env.WEBPACK_SERVE && 'react-refresh/babel'
+      process.env.WEBPACK_SERVE && [
+        'react-refresh/babel',
+        {
+          exclude: 'node_modules/**'
+        }
+      ]
     ].filter(Boolean)
   };
 

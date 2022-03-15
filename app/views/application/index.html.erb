@@ -67,7 +67,7 @@
       Fablab.sessionTours = [];
   </script>
 
-  <%= stylesheet_pack_tag 'application', 'plugins', 'print' %>
+  <%= stylesheet_pack_tag 'application', 'plugins', 'printer' %>
   <% unless Stylesheet.theme.nil? %>
   <link rel="stylesheet" media="all" href="<%= stylesheet_path(Stylesheet.theme.id) %>-<%= Stylesheet.theme.updated_at.to_i.to_s %>.css" />
   <%  end %>

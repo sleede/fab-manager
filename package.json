@@ -85,6 +85,7 @@
     "angular-ui-tour": "https://github.com/sleede/angular-ui-tour.git#master",
     "angular-unsavedchanges": "0.2",
     "angular-xeditable": "0.10",
+    "assert": "^2.0.0",
     "auto-ngtemplate-loader": "^3.1.0",
     "axios": "^0.21.2",
     "babel-loader": "^8.2.3",
@@ -119,6 +120,7 @@
     "ngUpload": "0.5",
     "ngtemplate-loader": "^2.1.0",
     "nvd3": "1.8",
+    "process": "^0.11.10",
     "prop-types": "^15.7.2",
     "rails-erb-loader": "^5.5.2",
     "react": "^17.0.2",
@@ -145,11 +147,6 @@
     "webpack-cli": "4",
     "webpack-merge": "5",
     "webpack-sources": "^3.2.3"
-  },
-  "babel": {
-    "presets": [
-      "./node_modules/shakapacker/package/babel/preset.js"
-    ]
   },
   "browserslist": [
     "defaults"
