@@ -8,7 +8,7 @@
 - Updated @uirouter/angularjs to 1.0.30
 - Updated bootstrap-sass to 3.4.3
 - Removed unmaintained gem sidekiq-cron and replaced it with sidekiq-scheduler
-- Removed unmaintained @rails/webpacker and replaced it with shakapacker
+- Removed unmaintained @rails/webpacker v5 and replaced it with shakapacker v6
 - Removed dependency to auto-ngtemplate-loader
 - Updated deprecated division operators in sass
 - Fix a bug: a sentence was not linked to a translation key
