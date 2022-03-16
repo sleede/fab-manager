@@ -86,7 +86,6 @@
     "angular-unsavedchanges": "0.2",
     "angular-xeditable": "0.10",
     "assert": "^2.0.0",
-    "auto-ngtemplate-loader": "^3.1.0",
     "axios": "^0.21.2",
     "babel-loader": "^8.2.3",
     "babel-plugin-macros": "^3.1.0",

@@ -9,6 +9,7 @@
 - Updated bootstrap-sass to 3.4.3
 - Removed unmaintained gem sidekiq-cron and replaced it with sidekiq-scheduler
 - Removed unmaintained @rails/webpacker and replaced it with shakapacker
+- Removed dependency to auto-ngtemplate-loader
 - Updated deprecated division operators in sass
 - Fix a bug: a sentence was not linked to a translation key
 - Fix a bug: the version check may be scheduled at an invalid time

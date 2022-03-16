@@ -2241,17 +2241,6 @@ async@^2.6.2:
   dependencies:
     lodash "^4.17.14"
 
-auto-ngtemplate-loader@^3.1.0:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/auto-ngtemplate-loader/-/auto-ngtemplate-loader-3.1.1.tgz#6873149359ce19536e8fd0758f50faea365f95ae"
-  integrity sha512-z3H/DNCTF730FMxvL4fGURR3R5vCzXqpC3bQdZUKAhHZdHteAabEFjNPOhFzkJXsbf4+d31hh9BchtxXXm8MJA==
-  dependencies:
-    html-loader "~2.1.2"
-    loader-utils "~2.0.0"
-    lodash "~4.17.20"
-    ngtemplate-loader "~2.1.0"
-    var-validator "0.0.3"
-
 available-typed-arrays@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/available-typed-arrays/-/available-typed-arrays-1.0.5.tgz#92f95616501069d07d10edb2fc37d3e1c65123b7"
@@ -3954,14 +3943,6 @@ html-loader@^1.3.0:
     loader-utils "^2.0.0"
     schema-utils "^3.0.0"
 
-html-loader@~2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/html-loader/-/html-loader-2.1.2.tgz#17eb111441e863a9308071ed876b4ba861f143df"
-  integrity sha512-XB4O1+6mpLp4qy/3qg5+1QPZ/uXvWtO64hNAX87sKHwcHkp1LJGU7V3sJ9iVmRACElAZXQ4YOO/Lbkx5kYfl9A==
-  dependencies:
-    html-minifier-terser "^5.1.1"
-    parse5 "^6.0.1"
-
 html-minifier-terser@^5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/html-minifier-terser/-/html-minifier-terser-5.1.1.tgz#922e96f1f3bb60832c2634b79884096389b1f054"
@@ -4601,7 +4582,7 @@ loader-utils@^1.0.2, loader-utils@^1.1.0, loader-utils@^1.4.0:
     emojis-list "^3.0.0"
     json5 "^1.0.1"
 
-loader-utils@^2.0.0, loader-utils@~2.0.0:
+loader-utils@^2.0.0:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/loader-utils/-/loader-utils-2.0.2.tgz#d6e3b4fb81870721ae4e0868ab11dd638368c129"
   integrity sha512-TM57VeHptv569d/GKh6TAYdzKblwDNiumOdkFnejjD0XwTH87K90w3O7AiJRqdQoXygvi1VQTJTLGhJl7WqA7A==
@@ -4674,7 +4655,7 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-lodash@^4.17.14, lodash@^4.17.19, lodash@^4.17.4, lodash@~4.17.20:
+lodash@^4.17.14, lodash@^4.17.19, lodash@^4.17.4:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
@@ -4943,7 +4924,7 @@ ngcomponent@^4.1.0:
     angular ">=1.5.0"
     lodash "^4.17.4"
 
-ngtemplate-loader@^2.1.0, ngtemplate-loader@~2.1.0:
+ngtemplate-loader@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/ngtemplate-loader/-/ngtemplate-loader-2.1.0.tgz#fb71c614c509b114b3bb28a828cb608757531e96"
   integrity sha512-8t1a2YOb1vk1A4C74o1ru+T7UeyKDdABWXtGDkjBupmOaV/RPCXjLLF4UZMI45Lfpebkr2p4NlVSROXRshkIhg==
@@ -5253,11 +5234,6 @@ parse-json@^5.0.0:
     error-ex "^1.3.1"
     json-parse-even-better-errors "^2.3.0"
     lines-and-columns "^1.1.6"
-
-parse5@^6.0.1:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/parse5/-/parse5-6.0.1.tgz#e1a1c085c569b3dc08321184f19a39cc27f7c30b"
-  integrity sha512-Ofn/CTFzRGTTxwpNEs9PP93gXShHcTq255nzRYSKe8AkVpZY7e1fpmTfOyoIvjP5HG7Z2ZM7VS9PPhQGW2pOpw==
 
 parseurl@~1.3.2, parseurl@~1.3.3:
   version "1.3.3"
@@ -6861,11 +6837,6 @@ validate-npm-package-license@^3.0.1:
   dependencies:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
-
-var-validator@0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/var-validator/-/var-validator-0.0.3.tgz#8c20155a350373233a542d3e5aed046c90891d70"
-  integrity sha1-jCAVWjUDcyM6VC0+Wu0EbJCJHXA=
 
 vary@~1.1.2:
   version "1.1.2"
