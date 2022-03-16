@@ -2,6 +2,7 @@ const path = require('path');
 
 module.exports = {
   test: /angular-ui-tour\/.*\.html$/i,
+  type: 'javascript/auto',
   use: [
     {
       loader: 'ngtemplate-loader',
