@@ -49,6 +49,8 @@ class User < ApplicationRecord
 
   has_one :payment_gateway_object, as: :item
 
+  has_many :accounting_periods, foreign_key: 'closed_by', dependent: :nullify
+
   # fix for create admin user
   before_save do
     email&.downcase!

@@ -19,6 +19,8 @@ class AccountingPeriod < ApplicationRecord
   validates_with PeriodOverlapValidator
   validates_with PeriodIntegrityValidator
 
+  belongs_to :user, class_name: 'User', foreign_key: 'closed_by'
+
   def delete
     false
   end
@@ -79,13 +81,15 @@ class AccountingPeriod < ApplicationRecord
   end
 
   def compute_totals
-    period_invoices = invoices_with_vat(invoices.where(type: nil))
-    period_avoirs = invoices_with_vat(invoices.where(type: 'Avoir'))
+    period_invoices = invoices_with_vat(invoices.where(type: nil).includes([:invoice_items]))
+    period_avoirs = invoices_with_vat(invoices.where(type: 'Avoir').includes([:invoice_items]))
     self.period_total = (period_invoices.map(&method(:price_without_taxe)).reduce(:+) || 0) -
                         (period_avoirs.map(&method(:price_without_taxe)).reduce(:+) || 0)
 
-    all_invoices = invoices_with_vat(Invoice.where('CAST(created_at AS DATE) <= :end_date AND type IS NULL', end_date: end_at))
-    all_avoirs = invoices_with_vat(Invoice.where("CAST(created_at AS DATE) <= :end_date AND type = 'Avoir'", end_date: end_at))
+    all_invoices = invoices_with_vat(Invoice.where('CAST(created_at AS DATE) <= :end_date AND type IS NULL', end_date: end_at)
+                                            .includes([:invoice_items]))
+    all_avoirs = invoices_with_vat(Invoice.where("CAST(created_at AS DATE) <= :end_date AND type = 'Avoir'", end_date: end_at)
+                                          .includes([:invoice_items]))
     self.perpetual_total = (all_invoices.map(&method(:price_without_taxe)).reduce(:+) || 0) -
                            (all_avoirs.map(&method(:price_without_taxe)).reduce(:+) || 0)
     self.footprint = compute_footprint
