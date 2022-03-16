@@ -6,6 +6,7 @@
 - Updated i18next-icu to 2.0.3
 - Updated sidekiq-unique-jobs to 7.1.15
 - Updated @uirouter/angularjs to 1.0.30
+- Updated bootstrap-sass to 3.4.3
 - Removed unmaintained gem sidekiq-cron and replaced it with sidekiq-scheduler
 - Fix a bug: a sentence was not linked to a translation key
 - Fix a bug: the version check may be scheduled at an invalid time
