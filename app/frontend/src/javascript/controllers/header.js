@@ -1,6 +1,6 @@
 'use strict';
 
-Application.Controllers.controller('HeaderController', ['$scope', '$rootScope', '$state', 'settingsPromise',
+Application.Controllers.controller('HeaderController', ['$scope', '$transitions', '$state', 'settingsPromise',
   function ($scope, $transitions, $state, settingsPromise) {
     $scope.aboutPage = ($state.current.name === 'app.public.about');
 
