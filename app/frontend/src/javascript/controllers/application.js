@@ -79,9 +79,11 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
           resolve: {
             settingsPromise: ['Setting', function (Setting) {
               return Setting.query({ names: "['phone_required', 'recaptcha_site_key', 'confirmation_required', 'address_required']" }).$promise;
-            }]
+            }],
+            profileCustomFieldsPromise: ['ProfileCustomField', function (ProfileCustomField) { return ProfileCustomField.query({}).$promise; }],
+            proofOfIdentityTypesPromise: ['ProofOfIdentityType', function (ProofOfIdentityType) { return ProofOfIdentityType.query({}).$promise; }]
           },
-          controller: ['$scope', '$uibModalInstance', 'Group', 'CustomAsset', 'settingsPromise', 'growl', '_t', function ($scope, $uibModalInstance, Group, CustomAsset, settingsPromise, growl, _t) {
+          controller: ['$scope', '$uibModalInstance', 'Group', 'CustomAsset', 'settingsPromise', 'growl', '_t', 'profileCustomFieldsPromise', 'proofOfIdentityTypesPromise', function ($scope, $uibModalInstance, Group, CustomAsset, settingsPromise, growl, _t, profileCustomFieldsPromise, proofOfIdentityTypesPromise) {
             // default parameters for the date picker in the account creation modal
             $scope.datePicker = {
               format: Fablab.uibDateFormat,
@@ -108,6 +110,8 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
               $scope.datePicker.opened = true;
             };
 
+            $scope.profileCustomFields = profileCustomFieldsPromise.filter(f => f.actived);
+
             // retrieve the groups (standard, student ...)
             Group.query(function (groups) {
               $scope.groups = groups;
@@ -126,7 +130,23 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
               is_allow_contact: true,
               is_allow_newsletter: false,
               // reCaptcha response, received from Google (through AJAX) and sent to server for validation
-              recaptcha: undefined
+              recaptcha: undefined,
+              invoicing_profile_attributes: {
+                user_profile_custom_fields_attributes: $scope.profileCustomFields.map(f => {
+                  return { profile_custom_field_id: f.id };
+                })
+              }
+            };
+
+            $scope.hasProofOfIdentityTypes = function (groupId) {
+              return proofOfIdentityTypesPromise.filter(t => t.group_ids.includes(groupId)).length > 0;
+            };
+
+            $scope.groupName = function (groupId) {
+              if (!$scope.enabledGroups || groupId === undefined || groupId === null) {
+                return '';
+              }
+              return $scope.enabledGroups.find(g => g.id === groupId).name;
             };
 
             // Errors display

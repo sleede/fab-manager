@@ -12,8 +12,8 @@
  */
 'use strict';
 
-Application.Controllers.controller('DashboardController', ['$scope', 'memberPromise', 'trainingsPromise', 'SocialNetworks', 'growl',
-  function ($scope, memberPromise, trainingsPromise, SocialNetworks, growl) {
+Application.Controllers.controller('DashboardController', ['$scope', 'memberPromise', 'trainingsPromise', 'SocialNetworks', 'growl', 'proofOfIdentityTypesPromise',
+  function ($scope, memberPromise, trainingsPromise, SocialNetworks, growl, proofOfIdentityTypesPromise) {
     // Current user's profile
     $scope.user = memberPromise;
 
@@ -22,6 +22,8 @@ Application.Controllers.controller('DashboardController', ['$scope', 'memberProm
       showAllLinks: false,
       networks: SocialNetworks
     };
+
+    $scope.hasProofOfIdentityTypes = proofOfIdentityTypesPromise.length > 0;
 
     /**
      * Check if the member has used his training credits for the given credit
@@ -60,7 +62,9 @@ Application.Controllers.controller('DashboardController', ['$scope', 'memberProm
     /**
      * Kind of constructor: these actions will be realized first when the controller is loaded
      */
-    const initialize = () => $scope.social.networks = filterNetworks();
+    const initialize = () => {
+      $scope.social.networks = filterNetworks();
+    };
 
     /**
      * Filter the social networks or websites that are associated with the profile of the user provided in promise
@@ -75,6 +79,27 @@ Application.Controllers.controller('DashboardController', ['$scope', 'memberProm
         }
       }
       return networks;
+    };
+
+    /**
+     * Callback used in case of error
+     */
+    $scope.onSuccess = function (message) {
+      growl.success(message);
+    };
+
+    /**
+     * Callback used in PaymentScheduleDashboard, in case of error
+     */
+    $scope.onError = function (message) {
+      growl.error(message);
+    };
+
+    /**
+     * Callback triggered when the user has successfully updated his card
+     */
+    $scope.onCardUpdateSuccess = function (message) {
+      growl.success(message);
     };
 
     // !!! MUST BE CALLED AT THE END of the controller

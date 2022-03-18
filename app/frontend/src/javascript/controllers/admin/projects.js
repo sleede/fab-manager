@@ -265,6 +265,20 @@ Application.Controllers.controller('AdminProjectsController', ['$scope', '$state
       }
     };
 
+    /**
+     * Shows a success message forwarded from a child react component
+     */
+    $scope.onSuccess = function (message) {
+      growl.success(message);
+    };
+
+    /**
+     * Callback triggered by react components
+     */
+    $scope.onError = function (message) {
+      growl.error(message);
+    };
+
     /* PRIVATE SCOPE */
 
     /**

@@ -1,0 +1,107 @@
+<div class="panel panel-default m-t-md">
+  <div class="panel-heading">
+    <span class="font-sbold" translate>{{ 'app.admin.settings.account_creation' }}</span>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <h3 class="m-l" translate>{{ 'app.admin.settings.general.public_registrations' }}</h3>
+      <p class="alert alert-warning m-h-md" translate>
+        {{ 'app.admin.settings.general.public_registrations_info' }}
+      </p>
+      <div class="col-md-10 col-md-offset-1">
+        <boolean-setting name="'public_registrations'"
+                         label="'app.admin.settings.general.public_registrations_allowed' | translate"
+                         on-success="onSuccess"
+                         on-error="onError">
+        </boolean-setting>
+      </div>
+    </div>
+    <div class="row">
+        <h3 class="m-l" translate>{{ 'app.admin.settings.account_confirmation' }}</h3>
+        <p class="alert alert-warning m-h-md" translate>
+            {{ 'app.admin.settings.confirmation_required_info' }}
+        </p>
+        <div class="col-md-10 col-md-offset-1">
+            <boolean-setting name="'confirmation_required'"
+                             label="'app.admin.settings.confirmation_is_required' | translate"
+                             on-success="onSuccess"
+                             on-error="onError">
+            </boolean-setting>
+        </div>
+    </div>
+    <div class="row">
+      <h3 class="m-l" translate>{{ 'app.admin.settings.compte.user_validation_required_title' }}</h3>
+      <p class="alert alert-warning m-h-md" translate>
+        {{ 'app.admin.settings.compte.user_validation_required_info' }}
+      <div class="col-md-10 col-md-offset-1">
+        <user-validation-setting on-success="onSuccess" on-error="onError" />
+      </div>
+    </div>
+    <div class="row">
+      <h3 class="m-l" translate>{{ 'app.admin.settings.captcha' }}</h3>
+      <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.captcha_info_html' | translate"></p>
+      <div class="col-md-6">
+        <text-setting name="recaptcha_site_key"
+                      settings="allSettings"
+                      label="app.admin.settings.site_key"
+                      fa-icon="fa-info"
+                      placeholder="0000000000000000000000000000000000000000">
+        </text-setting>
+      </div>
+      <div class="col-md-6">
+        <text-setting name="recaptcha_secret_key"
+                      settings="allSettings"
+                      label="app.admin.settings.secret_key"
+                      fa-icon="fa-key"
+                      placeholder="0000000000000000000000000000000000000000">
+        </text-setting>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-default m-t-md">
+  <div class="panel-heading">
+    <span class="font-sbold" translate>{{ 'app.admin.settings.compte.customize_account_settings' }}</span>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <h3 class="m-l" translate>{{ 'app.admin.settings.phone' }}</h3>
+      <p class="alert alert-warning m-h-md" translate>
+        {{ 'app.admin.settings.phone_required_info' }}
+      </p>
+      <div class="col-md-10 col-md-offset-1">
+        <boolean-setting name="'phone_required'"
+                         label="'app.admin.settings.phone_is_required' | translate"
+                         on-success="onSuccess"
+                         on-error="onError">
+        </boolean-setting>
+      </div>
+    </div>
+    <div class="row">
+      <h3 class="m-l" translate>{{ 'app.admin.settings.address' }}</h3>
+      <p class="alert alert-warning m-h-md" translate>
+        {{ 'app.admin.settings.address_required_info_html' }}
+      </p>
+      <div class="col-md-10 col-md-offset-1">
+        <boolean-setting name="'address_required'"
+                         label="'app.admin.settings.address_is_required' | translate"
+                         on-success="onSuccess"
+                         on-error="onError">
+        </boolean-setting>
+      </div>
+    </div>
+
+    <div class="row">
+      <h3 class="m-l" translate>{{ 'app.admin.settings.compte.organization' }}</h3>
+      <p class="alert alert-warning m-h-md" translate>
+        {{ 'app.admin.settings.compte.organization_profile_custom_fields_info' }}
+      <div class="col-md-12">
+        <profile-custom-fields-list on-success="onSuccess" on-error="onError" />
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<proof-of-identity-types-list on-success="onSuccess" on-error="onError"/>

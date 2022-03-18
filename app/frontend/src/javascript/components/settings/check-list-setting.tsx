@@ -1,5 +1,6 @@
 import React, { BaseSyntheticEvent, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import _ from 'lodash';
 import { SettingName } from '../../models/setting';
 import { IApplication } from '../../models/application';
 import { react2angular } from 'react2angular';
@@ -13,8 +14,11 @@ interface CheckListSettingProps {
   name: SettingName,
   label: string,
   className?: string,
+  hideSave?: boolean,
+  defaultValue?: string,
   // availableOptions must be like this [['option1', 'label 1'], ['option2', 'label 2']]
   availableOptions: Array<Array<string>>,
+  onChange?: (value: string) => void,
   onSuccess: (message: string) => void,
   onError: (message: string) => void,
 }
@@ -23,7 +27,7 @@ interface CheckListSettingProps {
  * This component allows to configure multiples values for a setting, like a check list.
  * The result is stored as a string, composed of the checked values, e.g. 'option1,option2'
  */
-const CheckListSetting: React.FC<CheckListSettingProps> = ({ name, label, className, availableOptions, onSuccess, onError }) => {
+export const CheckListSetting: React.FC<CheckListSettingProps> = ({ name, label, hideSave, defaultValue, className, availableOptions, onChange, onSuccess, onError }) => {
   const { t } = useTranslation('admin');
 
   const [value, setValue] = useState<string>(null);
@@ -31,7 +35,13 @@ const CheckListSetting: React.FC<CheckListSettingProps> = ({ name, label, classN
   // on component load, we retrieve the current value of the list from the API
   useEffect(() => {
     SettingAPI.get(name)
-      .then(res => setValue(res.value))
+      .then(res => {
+        const value = res.value === null && defaultValue ? defaultValue : res.value;
+        setValue(value);
+        if (_.isFunction(onChange)) {
+          onChange(value);
+        }
+      })
       .catch(err => onError(err));
   }, []);
 
@@ -45,9 +55,16 @@ const CheckListSetting: React.FC<CheckListSettingProps> = ({ name, label, classN
         let newValue = value ? `${value},` : '';
         newValue += option;
         setValue(newValue);
+        if (_.isFunction(onChange)) {
+          onChange(newValue);
+        }
       } else {
         const regex = new RegExp(`,?${option}`, 'g');
-        setValue(value.replace(regex, ''));
+        const newValue = value.replace(regex, '');
+        setValue(newValue);
+        if (_.isFunction(onChange)) {
+          onChange(newValue);
+        }
       }
     };
   };
@@ -76,15 +93,15 @@ const CheckListSetting: React.FC<CheckListSettingProps> = ({ name, label, classN
         <input id={`setting-${name}-${option[0]}`} type="checkbox" checked={isChecked(option[0])} onChange={toggleCheckbox(option[0])} />
         <label htmlFor={`setting-${name}-${option[0]}`}>{option[1]}</label>
       </div>)}
-      <FabButton className="save" onClick={handleSave}>{t('app.admin.check_list_setting.save')}</FabButton>
+      {!hideSave && <FabButton className="save" onClick={handleSave}>{t('app.admin.check_list_setting.save')}</FabButton>}
     </div>
   );
 };
 
-const CheckListSettingWrapper: React.FC<CheckListSettingProps> = ({ availableOptions, onSuccess, onError, label, className, name }) => {
+export const CheckListSettingWrapper: React.FC<CheckListSettingProps> = ({ availableOptions, onSuccess, onError, label, className, name, hideSave, defaultValue, onChange }) => {
   return (
     <Loader>
-      <CheckListSetting availableOptions={availableOptions} label={label} name={name} onError={onError} onSuccess={onSuccess} className={className} />
+      <CheckListSetting availableOptions={availableOptions} label={label} name={name} onError={onError} onSuccess={onSuccess} className={className} hideSave={hideSave} defaultValue={defaultValue} onChange={onChange} />
     </Loader>
   );
 };

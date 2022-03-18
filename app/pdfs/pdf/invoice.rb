@@ -61,6 +61,9 @@ class PDF::Invoice < Prawn::Document
       if invoice&.invoicing_profile&.organization
         name = invoice.invoicing_profile.organization.name
         full_name = "#{name} (#{invoice.invoicing_profile.full_name})"
+        others = invoice&.invoicing_profile&.user_profile_custom_fields&.includes(:profile_custom_field)&.map do |f|
+          "#{f.profile_custom_field.label}: #{f.value}"
+        end
       else
         name = invoice.invoicing_profile.full_name
         full_name = name
@@ -74,15 +77,15 @@ class PDF::Invoice < Prawn::Document
                   ''
                 end
 
-      text_box "<b>#{name}</b>\n#{invoice.invoicing_profile.email}\n#{address}",
-               at: [bounds.width - 130, bounds.top - 49],
-               width: 130,
+      text_box "<b>#{name}</b>\n#{invoice.invoicing_profile.email}\n#{address}\n#{others&.join("\n")}",
+               at: [bounds.width - 180, bounds.top - 49],
+               width: 180,
                align: :right,
                inline_format: true
       name = full_name
 
       # object
-      move_down 25
+      move_down 28
       if invoice.is_a?(Avoir)
         object = if invoice.main_item.object_type == WalletTransaction.name
                    I18n.t('invoices.wallet_credit')

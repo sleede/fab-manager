@@ -384,6 +384,18 @@ de:
         schedule_deadline: "Sie müssen den Scheck zur %{DATE} -Frist einlösen, für den Zeitplan %{REFERENCE}"
       notify_admin_payment_schedule_transfer_deadline:
         schedule_deadline: "Sie müssen das Lastschriftverfahren für die %{DATE} -Frist bestätigen, für Zeitplan %{REFERENCE}"
+      notify_admin_user_proof_of_identity_files_created:
+        proof_of_identity_files_uploaded: " Proof of identity uploaded by member <strong><em>%{NAME}</strong></em>."
+      notify_admin_user_proof_of_identity_files_updated:
+        proof_of_identity_files_uploaded: "Proof of identity changed by Member <strong><em>%{NAME}</strong></em>."
+      notify_user_is_validated:
+        account_validated: "Your account is valid."
+      notify_user_is_invalidated:
+        account_invalidated: "Your account is invalid."
+      notify_user_proof_of_identity_refusal:
+        refusal: "Your proof of identity are not accepted"
+      notify_admin_user_proof_of_identity_refusal:
+        refusal: "Member's proof of identity <strong><em>%{NAME}</strong></em> refused."
   #statistics tools for admins
   statistics:
     subscriptions: "Abonnements"

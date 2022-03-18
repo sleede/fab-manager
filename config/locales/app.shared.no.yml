@@ -118,6 +118,7 @@
       member_select:
         select_a_member: "Velg et medlem"
         start_typing: "Begynn å skrive..."
+        member_not_validated: "Attention:</br> The member has not validated."
       #payment modal
       payment:
         online_payment: "Online betaling"

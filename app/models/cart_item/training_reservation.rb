@@ -41,6 +41,10 @@ class CartItem::TrainingReservation < CartItem::Reservation
     )
   end
 
+  def type
+    'training'
+  end
+
   protected
 
   def credits

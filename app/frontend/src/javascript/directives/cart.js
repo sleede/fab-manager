@@ -389,6 +389,11 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
           }, 50);
         };
 
+        $scope.isUserValidatedByType = (type) => {
+          return AuthService.isAuthorized(['admin', 'manager']) || (!helpers.isUserValidationRequired($scope.settings, type) || (
+            helpers.isUserValidationRequired($scope.settings, type) && helpers.isUserValidated($scope.user)));
+        };
+
         /* PRIVATE SCOPE */
 
         /**

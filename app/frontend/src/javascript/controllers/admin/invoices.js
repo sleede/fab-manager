@@ -834,7 +834,9 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           $scope.stripeSecretKey = (res.isPresent ? STRIPE_SK_HIDDEN : '');
         });
         Payment.onlinePaymentStatus(function (res) {
-          $scope.onlinePaymentStatus = res.status;
+          const value = res.status.toString();
+          $scope.onlinePaymentStatus = value;
+          $scope.allSettings.online_payment_module = value;
         });
       }
     };

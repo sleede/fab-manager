@@ -79,3 +79,5 @@ json.machine_credits member.machine_credits do |mc|
 end
 # TODO, missing space_credits?
 json.last_sign_in_at member.last_sign_in_at.iso8601 if member.last_sign_in_at
+
+json.validated_at member.validated_at

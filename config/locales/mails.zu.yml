@@ -24,12 +24,14 @@ zu:
       subject: "crwdns3891:0crwdne3891:0"
       body:
         warning: "crwdns3893:0crwdne3893:0"
+        user_invalidated: "Your account is invalidated, please upload your new proof of identity to validate your account."
     notify_admin_user_group_changed:
       subject: "crwdns3895:0crwdne3895:0"
       body:
         user_changed_group_html: "crwdns3897:0%{NAME}crwdne3897:0"
         previous_group: "crwdns3899:0crwdne3899:0"
         new_group: "crwdns3901:0crwdne3901:0"
+        user_invalidated: "The user's account is invalidated."
     notify_admin_subscription_extended:
       subject: "crwdns3903:0crwdne3903:0"
       body:
@@ -343,5 +345,32 @@ zu:
         remember: "crwdns22309:0%{REFERENCE}crwdnd22309:0%{AMOUNT}crwdnd22309:0%{DATE}crwdne22309:0"
         date: "crwdns22311:0crwdne22311:0"
         confirm: "crwdns22313:0crwdne22313:0"
+    notify_admin_user_proof_of_identity_files_created:
+      subject: "Proof of identity uploaded by a member"
+      body:
+        proof_of_identity_files_uploaded_below: "Member %{NAME} has uploaded the following proof of identity :"
+        validate_user: "Please validate this account"
+    notify_admin_user_proof_of_identity_files_updated:
+      subject: "Proof of identity is changed by m member"
+      body:
+        user_update_proof_of_identity_file: "Member %{NAME} has modified the proof of identity below:"
+        validate_user: "Please validate this account"
+    notify_user_is_validated:
+      subject: "The account is validated"
+      body:
+        account_validated: "Your account is valid."
+    notify_user_is_invalidated:
+      subject: "The account is invalid"
+      body:
+        account_invalidated: "Your account is invalid."
+    notify_user_proof_of_identity_refusal:
+      subject: "Your proof of identity are not accepted"
+      body:
+        user_proof_of_identity_files_refusal: "Your proof of identity are not accepted :"
+        action: "Please re-upload the new proof of identity."
+    notify_admin_user_proof_of_identity_refusal:
+      subject: "A member's proof of identity are not accepted"
+      body:
+        user_proof_of_identity_files_refusal: "Member %{NAME}'s proof of identity are rejected by %{OPERATOR}:"
     shared:
       hello: "crwdns4215:0%{user_name}crwdne4215:0"

@@ -99,6 +99,12 @@ If this parameter is not specified, the maximum size allowed will be 5MB.
 Maximum size (in bytes) allowed for import files uploaded on the platform.
 Currently, this is only used to import users from a CSV file.
 If this parameter is not specified, the maximum size allowed will be 5MB.
+<a name="MAX_PROOF_OF_IDENTITY_FILE_SIZE"></a>
+
+    MAX_PROOF_OF_IDENTITY_FILE_SIZE
+
+Maximum size (in bytes) allowed for proof of identity files uploaded on the platform.
+If this parameter is not specified, the maximum size allowed will be 5MB.
 <a name="DISK_SPACE_MB_ALERT"></a>
 
     DISK_SPACE_MB_ALERT
@@ -282,7 +288,7 @@ Set this variable to `false` if you do not want to verify the OpenLab's server's
 
     OPENLAB_SSL_VERIFY_PEER
 
-Set this variable to `false` if you want to turn off the OpenLab's server's verification but still send client certificate. 
+Set this variable to `false` if you want to turn off the OpenLab's server's verification but still send client certificate.
 <a name="other-settings"></a>
 ## Other settings
 

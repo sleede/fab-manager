@@ -33,6 +33,7 @@
 - Fix a security issue: updated rails to 5.2.7.1 to fix [CVE-2022-22577](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-22577) and [CVE-2022-27777](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-27777)
 - [TODO DEPLOY] `rails db:seed`
 - [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
+- [TODO DEPLOY] add the `MAX_PROOF_OF_IDENTITY_FILE_SIZE` environment variable (see [doc/environment.md](doc/environment.md#MAX_PROOF_OF_IDENTITY_FILE_SIZE) for configuration details)
 
 ## v5.3.13 2022 May 02
 

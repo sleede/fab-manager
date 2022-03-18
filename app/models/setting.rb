@@ -145,7 +145,9 @@ class Setting < ApplicationRecord
                              lastfm
                              flickr
                              machines_module
-                             user_change_group] }
+                             user_change_group
+                             user_validation_required
+                             user_validation_required_list] }
   # WARNING: when adding a new key, you may also want to add it in:
   # - config/locales/en.yml#settings
   # - app/frontend/src/javascript/models/setting.ts#SettingName

@@ -137,7 +137,8 @@ angular.module('application.router', ['ui.router'])
         url: '/dashboard',
         resolve: {
           memberPromise: ['Member', 'currentUser', function (Member, currentUser) { return Member.get({ id: currentUser.id }).$promise; }],
-          trainingsPromise: ['Training', function (Training) { return Training.query().$promise; }]
+          trainingsPromise: ['Training', function (Training) { return Training.query().$promise; }],
+          proofOfIdentityTypesPromise: ['ProofOfIdentityType', 'currentUser', function (ProofOfIdentityType, currentUser) { return ProofOfIdentityType.query({ group_id: currentUser.group_id }).$promise; }]
         }
       })
       .state('app.logged.dashboard.profile', {
@@ -161,6 +162,15 @@ angular.module('application.router', ['ui.router'])
           groups: ['Group', function (Group) { return Group.query().$promise; }],
           activeProviderPromise: ['AuthProvider', function (AuthProvider) { return AuthProvider.active().$promise; }],
           settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['phone_required', 'address_required']" }).$promise; }]
+        }
+      })
+      .state('app.logged.dashboard.proof_of_identity_files', {
+        url: '/proof_of_identity_files',
+        views: {
+          'main@': {
+            templateUrl: '/dashboard/proof_of_identity_files.html',
+            controller: 'DashboardController'
+          }
         }
       })
       .state('app.logged.dashboard.projects', {
@@ -317,7 +327,7 @@ angular.module('application.router', ['ui.router'])
         },
         resolve: {
           machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['feature_tour_display']" }).$promise; }]
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['feature_tour_display', 'user_validation_required', 'user_validation_required_list']" }).$promise; }]
         }
       })
       .state('app.admin.machines_new', {
@@ -357,7 +367,7 @@ angular.module('application.router', ['ui.router'])
             return Setting.query({
               names: "['machine_explications_alert', 'booking_window_start',  'booking_window_end',  'booking_move_enable', " +
                      "'booking_move_delay', 'booking_cancel_enable',  'booking_cancel_delay', 'subscription_explications_alert', " +
-                     "'online_payment_module', 'payment_gateway', 'overlapping_categories']"
+                     "'online_payment_module', 'payment_gateway', 'overlapping_categories', 'user_validation_required', 'user_validation_required_list']"
             }).$promise;
           }]
         }
@@ -443,7 +453,8 @@ angular.module('application.router', ['ui.router'])
             return Setting.query({
               names: "['booking_window_start', 'booking_window_end', 'booking_move_enable',  'booking_move_delay', " +
                      "'booking_cancel_enable', 'booking_cancel_delay', 'subscription_explications_alert',  " +
-                     "'space_explications_alert', 'online_payment_module', 'payment_gateway', 'overlapping_categories']"
+                     "'space_explications_alert', 'online_payment_module', 'payment_gateway', 'overlapping_categories', " +
+                     "'user_validation_required', 'user_validation_required_list']"
             }).$promise;
           }]
         }
@@ -497,7 +508,7 @@ angular.module('application.router', ['ui.router'])
               names: "['booking_window_start', 'booking_window_end', 'booking_move_enable', 'booking_move_delay', " +
                      "'booking_cancel_enable', 'booking_cancel_delay', 'subscription_explications_alert', " +
                      "'training_explications_alert', 'training_information_message', 'online_payment_module', " +
-                     "'payment_gateway', 'overlapping_categories', 'user_validation_required_training']"
+                     "'payment_gateway', 'overlapping_categories', 'user_validation_required', 'user_validation_required_list']"
             }).$promise;
           }]
         }
@@ -525,7 +536,8 @@ angular.module('application.router', ['ui.router'])
         },
         resolve: {
           subscriptionExplicationsPromise: ['Setting', function (Setting) { return Setting.get({ name: 'subscription_explications_alert' }).$promise; }],
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['online_payment_module', 'payment_gateway', 'overlapping_categories']" }).$promise; }]
+          groupsPromise: ['Group', function (Group) { return Group.query().$promise; }],
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['online_payment_module', 'payment_gateway', 'overlapping_categories', 'user_validation_required', 'user_validation_required_list']" }).$promise; }]
         }
       })
 
@@ -555,7 +567,7 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           eventPromise: ['Event', '$transition$', function (Event, $transition$) { return Event.get({ id: $transition$.params().id }).$promise; }],
           priceCategoriesPromise: ['PriceCategory', function (PriceCategory) { return PriceCategory.query().$promise; }],
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['booking_move_enable', 'booking_move_delay', 'booking_cancel_enable', 'booking_cancel_delay', 'event_explications_alert', 'online_payment_module']" }).$promise; }]
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['booking_move_enable', 'booking_move_delay', 'booking_cancel_enable', 'booking_cancel_delay', 'event_explications_alert', 'online_payment_module', 'user_validation_required', 'user_validation_required_list']" }).$promise; }]
         }
       })
 
@@ -772,7 +784,7 @@ angular.module('application.router', ['ui.router'])
           spacesPromise: ['Space', function (Space) { return Space.query().$promise; }],
           spacesPricesPromise: ['Price', function (Price) { return Price.query({ priceable_type: 'Space', plan_id: 'null' }).$promise; }],
           spacesCreditsPromise: ['Credit', function (Credit) { return Credit.query({ creditable_type: 'Space' }).$promise; }],
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['feature_tour_display', 'slot_duration']" }).$promise; }],
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['feature_tour_display', 'slot_duration', 'user_validation_required', 'user_validation_required_list']" }).$promise; }],
           planCategories: ['PlanCategory', function (PlanCategory) { return PlanCategory.query().$promise; }]
         }
       })
@@ -913,7 +925,7 @@ angular.module('application.router', ['ui.router'])
           groupsPromise: ['Group', function (Group) { return Group.query().$promise; }],
           tagsPromise: ['Tag', function (Tag) { return Tag.query().$promise; }],
           authProvidersPromise: ['AuthProvider', function (AuthProvider) { return AuthProvider.query().$promise; }],
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['feature_tour_display']" }).$promise; }]
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['feature_tour_display', 'user_validation_required']" }).$promise; }]
         }
       })
       .state('app.admin.members_new', {
@@ -966,7 +978,7 @@ angular.module('application.router', ['ui.router'])
           walletPromise: ['Wallet', '$transition$', function (Wallet, $transition$) { return Wallet.getWalletByUser({ user_id: $transition$.params().id }).$promise; }],
           transactionsPromise: ['Wallet', 'walletPromise', function (Wallet, walletPromise) { return Wallet.transactions({ id: walletPromise.id }).$promise; }],
           tagsPromise: ['Tag', function (Tag) { return Tag.query().$promise; }],
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['phone_required', 'address_required']" }).$promise; }]
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['phone_required', 'address_required', 'user_validation_required']" }).$promise; }]
         }
       })
       .state('app.admin.admins_new', {
@@ -1069,10 +1081,8 @@ angular.module('application.router', ['ui.router'])
                      "'display_name_enable', 'machines_sort_by', 'fab_analytics', 'statistics_module', 'address_required', " +
                      "'link_name', 'home_content', 'home_css', 'phone_required', 'upcoming_events_shown', 'public_agenda_module'," +
                      "'renew_pack_threshold', 'pack_only_for_subscription', 'overlapping_categories', 'public_registrations'," +
-                     "'extended_prices_in_same_day', 'recaptcha_site_key', 'recaptcha_secret_key', 'user_validation_required', 'user_validation_required_machine', " +
-                     "'user_validation_required_training', 'user_validation_required_subscription', 'user_validation_required_space'," +
-                     "'user_validation_required_event', 'user_validation_required_pack', 'user_validation_required_list'," +
-                     "'machines_module', 'user_change_group']"
+                     "'extended_prices_in_same_day', 'recaptcha_site_key', 'recaptcha_secret_key', 'user_validation_required', " +
+                     "'user_validation_required_list', 'machines_module', 'user_change_group']"
             }).$promise;
           }],
           privacyDraftsPromise: ['Setting', function (Setting) { return Setting.get({ name: 'privacy_draft', history: true }).$promise; }],

@@ -126,8 +126,8 @@ class MembersController {
 /**
  * Controller used in the members/groups management page
  */
-Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', '$uibModal', 'membersPromise', 'adminsPromise', 'partnersPromise', 'managersPromise', 'growl', 'Admin', 'AuthService', 'dialogs', '_t', 'Member', 'Export', 'User', 'uiTourService', 'settingsPromise',
-  function ($scope, $sce, $uibModal, membersPromise, adminsPromise, partnersPromise, managersPromise, growl, Admin, AuthService, dialogs, _t, Member, Export, User, uiTourService, settingsPromise) {
+Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', '$uibModal', 'membersPromise', 'adminsPromise', 'partnersPromise', 'managersPromise', 'growl', 'Admin', 'AuthService', 'dialogs', '_t', 'Member', 'Export', 'User', 'uiTourService', 'settingsPromise', '$location',
+  function ($scope, $sce, $uibModal, membersPromise, adminsPromise, partnersPromise, managersPromise, growl, Admin, AuthService, dialogs, _t, Member, Export, User, uiTourService, settingsPromise, $location) {
   /* PRIVATE STATIC CONSTANTS */
 
     // number of users loaded each time we click on 'load more...'
@@ -160,6 +160,9 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
     // admins list
     $scope.admins = adminsPromise.admins.filter(function (m) { return m.id !== Fablab.adminSysId; });
 
+    // is user validation required
+    $scope.enableUserValidationRequired = (settingsPromise.user_validation_required === 'true');
+
     // Admins ordering/sorting. Default: not sorted
     $scope.orderAdmin = null;
 
@@ -176,7 +179,8 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
     $scope.orderManager = null;
 
     // default tab: members list
-    $scope.tabs = { active: 0, sub: 0 };
+    const defaultActiveTab = $location.search().tabs ? parseInt($location.search().tabs, 10) : 0;
+    $scope.tabs = { active: defaultActiveTab, sub: 0 };
 
     /**
      * Change the members ordering criterion to the one provided
@@ -650,8 +654,8 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
 /**
  * Controller used in the member edition page
  */
-Application.Controllers.controller('EditMemberController', ['$scope', '$state', '$transition$', 'Member', 'Training', 'dialogs', 'growl', 'Group', 'Subscription', 'CSRF', 'memberPromise', 'tagsPromise', '$uibModal', 'Plan', '$filter', '_t', 'walletPromise', 'transactionsPromise', 'activeProviderPromise', 'Wallet', 'settingsPromise',
-  function ($scope, $state, $transition$, Member, Training, dialogs, growl, Group, Subscription, CSRF, memberPromise, tagsPromise, $uibModal, Plan, $filter, _t, walletPromise, transactionsPromise, activeProviderPromise, Wallet, settingsPromise) {
+Application.Controllers.controller('EditMemberController', ['$scope', '$state', '$transition$', 'Member', 'Training', 'dialogs', 'growl', 'Group', 'Subscription', 'CSRF', 'memberPromise', 'tagsPromise', '$uibModal', 'Plan', '$filter', '_t', 'walletPromise', 'transactionsPromise', 'activeProviderPromise', 'Wallet', 'settingsPromise', 'ProofOfIdentityType',
+  function ($scope, $state, $transition$, Member, Training, dialogs, growl, Group, Subscription, CSRF, memberPromise, tagsPromise, $uibModal, Plan, $filter, _t, walletPromise, transactionsPromise, activeProviderPromise, Wallet, settingsPromise, ProofOfIdentityType) {
   /* PUBLIC SCOPE */
 
     // API URL where the form will be posted
@@ -674,6 +678,9 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
 
     // is the address required in _member_form?
     $scope.addressRequired = (settingsPromise.address_required === 'true');
+
+    // is user validation required
+    $scope.enableUserValidationRequired = (settingsPromise.user_validation_required === 'true');
 
     // the user subscription
     if (($scope.user.subscribed_plan != null) && ($scope.user.subscription != null)) {
@@ -807,6 +814,18 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
     };
 
     /**
+     * Callback triggered if validate member was successfully taken
+     */
+    $scope.onValidateMemberSuccess = (_user, message) => {
+      growl.success(message);
+      setTimeout(() => {
+        $scope.user = _user;
+        $scope.user.statistic_profile.birthday = moment(_user.statistic_profile.birthday).toDate();
+        $scope.$apply();
+      }, 50);
+    };
+
+    /**
      * Callback triggered in case of error
      */
     $scope.onError = (message) => {
@@ -819,6 +838,13 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
     $scope.onUserSuccess = () => {
       growl.success(_t('app.admin.members_edit.update_success'));
       $state.go('app.admin.members');
+    };
+
+    /**
+     * Callback triggered in case of success
+     */
+    $scope.onSuccess = (message) => {
+      growl.success(message);
     };
 
     $scope.createWalletCreditModal = function (user, wallet) {
@@ -917,6 +943,10 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
           });
         });
       }
+
+      ProofOfIdentityType.query({ group_id: $scope.user.group_id }, function (proofOfIdentityTypes) {
+        $scope.hasProofOfIdentityTypes = proofOfIdentityTypes.length > 0;
+      });
 
       // Using the MembersController
       return new MembersController($scope, $state, Group, Training);

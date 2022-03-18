@@ -47,6 +47,9 @@ class User < ApplicationRecord
 
   has_many :accounting_periods, foreign_key: 'closed_by', dependent: :nullify
 
+  has_many :proof_of_identity_files, dependent: :destroy
+  has_many :proof_of_identity_refusals, dependent: :destroy
+
   # fix for create admin user
   before_save do
     email&.downcase!
@@ -56,7 +59,6 @@ class User < ApplicationRecord
   after_commit :create_gateway_customer, on: [:create]
   after_commit :notify_admin_when_user_is_created, on: :create
   after_create :init_dependencies
-  after_update :notify_group_changed, if: :saved_change_to_group_id?
   after_update :update_invoicing_profile, if: :invoicing_data_was_modified?
   after_update :update_statistic_profile, if: :statistic_data_was_modified?
   before_destroy :remove_orphan_drafts
@@ -232,6 +234,20 @@ class User < ApplicationRecord
     !invoicing_profile.organization.nil?
   end
 
+  def notify_group_changed(ex_group, user_invalidated)
+    meta_data = { ex_group_name: ex_group.name, user_invalidated: user_invalidated }
+
+    NotificationCenter.call type: :notify_admin_user_group_changed,
+                            receiver: User.admins_and_managers,
+                            attached_object: self,
+                            meta_data: meta_data
+
+    NotificationCenter.call type: :notify_user_user_group_changed,
+                            receiver: self,
+                            attached_object: self,
+                            meta_data: meta_data
+  end
+
   protected
 
   # remove projects drafts that are not linked to another user
@@ -284,22 +300,6 @@ class User < ApplicationRecord
                               receiver: User.admins_and_managers,
                               attached_object: self
     end
-  end
-
-  def notify_group_changed
-    return unless changes[:group_id]&.first
-
-    ex_group = Group.find(changes[:group_id].first)
-    meta_data = { ex_group_name: ex_group.name }
-
-    NotificationCenter.call type: :notify_admin_user_group_changed,
-                            receiver: User.admins_and_managers,
-                            attached_object: self,
-                            meta_data: meta_data
-
-    NotificationCenter.call type: :notify_user_user_group_changed,
-                            receiver: self,
-                            attached_object: self
   end
 
   def invoicing_data_was_modified?

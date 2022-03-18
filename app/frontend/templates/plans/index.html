@@ -28,7 +28,9 @@
                 on-error="onError"
                 on-plan-selection="selectPlan"
                 on-login-request="userLogin"
-                operator="currentUser" >
+                operator="currentUser"
+                can-select-plan="canSelectPlan()"
+                >
     </plans-list>
 
   </div>
@@ -65,6 +67,7 @@
           plan="selectedPlan"
           plan-selection-time="planSelectionTime"
           settings="settings"
+          reservable-type="Subscription"
           after-payment="afterPayment"></cart>
 
 

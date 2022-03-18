@@ -6,3 +6,6 @@
   <small><%= t('.body.previous_group') %> <strong><%= "#{@notification.get_meta_data(:ex_group_name)}" %></strong></small>
   <br/><%= t('.body.new_group') %> <strong><%= "#{@attached_object.group.name}" %></strong>
 </p>
+<% if @notification.get_meta_data(:user_invalidated) %>
+  <p><%= t(".body.user_invalidated") %></p>
+<% end %>

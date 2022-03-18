@@ -35,6 +35,9 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
     // the application global settings
     $scope.settings = settingsPromise;
 
+    // Global config: is the user validation required ?
+    $scope.enableUserValidationRequired = settingsPromise.user_validation_required === 'true';
+
     // Discount coupon to apply to the basket, if any
     $scope.coupon =
       { applied: null };
@@ -61,6 +64,9 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
     $scope.selectPlan = function (plan) {
       setTimeout(() => {
         if ($scope.isAuthenticated()) {
+          if (!AuthService.isAuthorized(['admin', 'manager']) && (helpers.isUserValidationRequired($scope.settings, 'subscription') && !helpers.isUserValidated($scope.ctrl.member))) {
+            return;
+          }
           if ($scope.selectedPlan !== plan) {
             $scope.selectedPlan = plan;
             $scope.planSelectionTime = new Date();
@@ -70,6 +76,10 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
         }
         $scope.$apply();
       }, 50);
+    };
+
+    $scope.canSelectPlan = function () {
+      return helpers.isUserValidatedByType($scope.ctrl.member, $scope.settings, 'subscription');
     };
 
     /**

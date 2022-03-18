@@ -62,6 +62,7 @@ Rails.application.routes.draw do
       get 'mapping', action: 'mapping', on: :collection
       patch ':id/complete_tour', action: 'complete_tour', on: :collection
       patch ':id/update_role', action: 'update_role', on: :collection
+      patch ':id/validate', action: 'validate', on: :collection
     end
     resources :reservations, only: %i[show index update]
     resources :notifications, only: %i[index show update] do
@@ -140,6 +141,14 @@ Rails.application.routes.draw do
       get 'events', on: :member
       post 'sync', on: :member
     end
+
+    resources :proof_of_identity_types
+    resources :proof_of_identity_files, only: %i[index show create update] do
+      get 'download', on: :member
+    end
+    resources :proof_of_identity_refusals, only: %i[index show create]
+
+    resources :profile_custom_fields
 
     # for admin
     resources :trainings do

@@ -72,8 +72,8 @@ Application.Controllers.controller('MembersController', ['$scope', 'Member', 'me
 /**
  * Controller used when editing the current user's profile (in dashboard)
  */
-Application.Controllers.controller('EditProfileController', ['$scope', '$rootScope', '$state', '$window', '$sce', '$cookies', '$injector', 'Member', 'Auth', 'Session', 'activeProviderPromise', 'settingsPromise', 'growl', 'dialogs', 'CSRF', 'memberPromise', 'groups', '_t',
-  function ($scope, $rootScope, $state, $window, $sce, $cookies, $injector, Member, Auth, Session, activeProviderPromise, settingsPromise, growl, dialogs, CSRF, memberPromise, groups, _t) {
+Application.Controllers.controller('EditProfileController', ['$scope', '$rootScope', '$state', '$window', '$sce', '$cookies', '$injector', 'Member', 'Auth', 'Session', 'activeProviderPromise', 'settingsPromise', 'growl', 'dialogs', 'CSRF', 'memberPromise', 'groups', '_t', 'proofOfIdentityTypesPromise', 'ProofOfIdentityType',
+  function ($scope, $rootScope, $state, $window, $sce, $cookies, $injector, Member, Auth, Session, activeProviderPromise, settingsPromise, growl, dialogs, CSRF, memberPromise, groups, _t, proofOfIdentityTypesPromise, ProofOfIdentityType) {
     /* PUBLIC SCOPE */
 
     // API URL where the form will be posted
@@ -128,6 +128,8 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
     // This boolean value will tell if the current user is the system admin
     $scope.isAdminSys = memberPromise.id === Fablab.adminSysId;
 
+    $scope.hasProofOfIdentityTypes = proofOfIdentityTypesPromise.length > 0;
+
     /**
      * Return the group object, identified by the ID set in $scope.userGroup
      */
@@ -150,6 +152,9 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
       }, 50);
       $rootScope.currentUser.group_id = user.group_id;
       Auth._currentUser.group_id = user.group_id;
+      ProofOfIdentityType.query({ group_id: user.group_id }, function (proofOfIdentityTypes) {
+        $scope.hasProofOfIdentityTypes = proofOfIdentityTypes.length > 0;
+      });
     };
 
     /**
@@ -309,6 +314,7 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
       if ($scope.activeProvider.providable_type !== 'DatabaseProvider') {
         $scope.preventPassword = true;
       }
+
       // bind fields protection with sso fields
       return angular.forEach(activeProviderPromise.mapping, map => $scope.preventField[map] = true);
     };

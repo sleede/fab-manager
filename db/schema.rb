@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_25_095244) do
+ActiveRecord::Schema.define(version: 2022_05_09_105714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -581,6 +581,14 @@ ActiveRecord::Schema.define(version: 2022_04_25_095244) do
     t.index ["priceable_type", "priceable_id"], name: "index_prices_on_priceable_type_and_priceable_id"
   end
 
+  create_table "profile_custom_fields", force: :cascade do |t|
+    t.string "label"
+    t.boolean "required", default: false
+    t.boolean "actived", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "profiles", id: :serial, force: :cascade do |t|
     t.integer "user_id"
     t.string "first_name"
@@ -675,6 +683,46 @@ ActiveRecord::Schema.define(version: 2022_04_25_095244) do
     t.integer "theme_id"
     t.index ["project_id"], name: "index_projects_themes_on_project_id"
     t.index ["theme_id"], name: "index_projects_themes_on_theme_id"
+  end
+
+  create_table "proof_of_identity_files", force: :cascade do |t|
+    t.bigint "proof_of_identity_type_id"
+    t.bigint "user_id"
+    t.string "attachment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["proof_of_identity_type_id"], name: "index_proof_of_identity_files_on_proof_of_identity_type_id"
+    t.index ["user_id"], name: "index_proof_of_identity_files_on_user_id"
+  end
+
+  create_table "proof_of_identity_refusals", force: :cascade do |t|
+    t.bigint "user_id"
+    t.integer "operator_id"
+    t.text "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_proof_of_identity_refusals_on_user_id"
+  end
+
+  create_table "proof_of_identity_refusals_types", id: false, force: :cascade do |t|
+    t.bigint "proof_of_identity_type_id", null: false
+    t.bigint "proof_of_identity_refusal_id", null: false
+    t.index ["proof_of_identity_type_id", "proof_of_identity_refusal_id"], name: "proof_of_identity_type_id_and_proof_of_identity_refusal_id"
+  end
+
+  create_table "proof_of_identity_types", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "proof_of_identity_types_groups", force: :cascade do |t|
+    t.bigint "proof_of_identity_type_id"
+    t.bigint "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_p_o_i_t_groups_on_group_id"
+    t.index ["proof_of_identity_type_id"], name: "index_p_o_i_t_groups_on_proof_of_identity_type_id"
   end
 
   create_table "reservations", id: :serial, force: :cascade do |t|
@@ -924,6 +972,16 @@ ActiveRecord::Schema.define(version: 2022_04_25_095244) do
     t.index ["training_id"], name: "index_trainings_pricings_on_training_id"
   end
 
+  create_table "user_profile_custom_fields", force: :cascade do |t|
+    t.bigint "invoicing_profile_id"
+    t.bigint "profile_custom_field_id"
+    t.string "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["invoicing_profile_id"], name: "index_user_profile_custom_fields_on_invoicing_profile_id"
+    t.index ["profile_custom_field_id"], name: "index_user_profile_custom_fields_on_profile_custom_field_id"
+  end
+
   create_table "user_tags", id: :serial, force: :cascade do |t|
     t.integer "user_id"
     t.integer "tag_id"
@@ -964,6 +1022,7 @@ ActiveRecord::Schema.define(version: 2022_04_25_095244) do
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
     t.string "mapped_from_sso"
+    t.datetime "validated_at"
     t.index ["auth_token"], name: "index_users_on_auth_token"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -1056,6 +1115,9 @@ ActiveRecord::Schema.define(version: 2022_04_25_095244) do
   add_foreign_key "projects_spaces", "spaces"
   add_foreign_key "projects_themes", "projects"
   add_foreign_key "projects_themes", "themes"
+  add_foreign_key "proof_of_identity_refusals", "users"
+  add_foreign_key "proof_of_identity_types_groups", "groups"
+  add_foreign_key "proof_of_identity_types_groups", "proof_of_identity_types"
   add_foreign_key "reservations", "statistic_profiles"
   add_foreign_key "slots_reservations", "reservations"
   add_foreign_key "slots_reservations", "slots"
@@ -1072,6 +1134,8 @@ ActiveRecord::Schema.define(version: 2022_04_25_095244) do
   add_foreign_key "subscriptions", "statistic_profiles"
   add_foreign_key "tickets", "event_price_categories"
   add_foreign_key "tickets", "reservations"
+  add_foreign_key "user_profile_custom_fields", "invoicing_profiles"
+  add_foreign_key "user_profile_custom_fields", "profile_custom_fields"
   add_foreign_key "user_tags", "tags"
   add_foreign_key "user_tags", "users"
   add_foreign_key "wallet_transactions", "invoicing_profiles"

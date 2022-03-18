@@ -39,4 +39,9 @@ export default class MemberAPI {
     const res: AxiosResponse<User> = await apiClient.get('/api/members/current');
     return res?.data;
   }
+
+  static async validate (member: User): Promise<User> {
+    const res: AxiosResponse<User> = await apiClient.patch(`/api/members/${member.id}/validate`, { user: member });
+    return res?.data;
+  }
 }

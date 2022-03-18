@@ -14,6 +14,7 @@ interface PlanCardProps {
   subscribedPlanId?: number,
   operator: User,
   isSelected: boolean,
+  canSelectPlan: boolean,
   onSelectPlan: (plan: Plan) => void,
   onLoginRequested: () => void,
 }
@@ -21,7 +22,7 @@ interface PlanCardProps {
 /**
  * This component is a "card" (visually), publicly presenting the details of a plan and allowing a user to subscribe.
  */
-const PlanCardComponent: React.FC<PlanCardProps> = ({ plan, userId, subscribedPlanId, operator, onSelectPlan, isSelected, onLoginRequested }) => {
+const PlanCardComponent: React.FC<PlanCardProps> = ({ plan, userId, subscribedPlanId, operator, onSelectPlan, isSelected, onLoginRequested, canSelectPlan }) => {
   const { t } = useTranslation('public');
   /**
    * Return the formatted localized amount of the given plan (eg. 20.5 => "20,50 €")
@@ -88,7 +89,9 @@ const PlanCardComponent: React.FC<PlanCardProps> = ({ plan, userId, subscribedPl
    * Callback triggered when the user select the plan
    */
   const handleSelectPlan = (): void => {
-    onSelectPlan(plan);
+    if (canSelectPlan) {
+      onSelectPlan(plan);
+    }
   };
   /**
    * Callback triggered when a visitor (not logged-in user) select a plan
@@ -141,10 +144,10 @@ const PlanCardComponent: React.FC<PlanCardProps> = ({ plan, userId, subscribedPl
   );
 };
 
-export const PlanCard: React.FC<PlanCardProps> = ({ plan, userId, subscribedPlanId, operator, onSelectPlan, isSelected, onLoginRequested }) => {
+export const PlanCard: React.FC<PlanCardProps> = ({ plan, userId, subscribedPlanId, operator, onSelectPlan, isSelected, onLoginRequested, canSelectPlan }) => {
   return (
     <Loader>
-      <PlanCardComponent plan={plan} userId={userId} subscribedPlanId={subscribedPlanId} operator={operator} isSelected={isSelected} onSelectPlan={onSelectPlan} onLoginRequested={onLoginRequested}/>
+      <PlanCardComponent plan={plan} userId={userId} subscribedPlanId={subscribedPlanId} operator={operator} isSelected={isSelected} onSelectPlan={onSelectPlan} onLoginRequested={onLoginRequested} canSelectPlan={canSelectPlan}/>
     </Loader>
   );
 };

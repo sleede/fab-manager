@@ -135,6 +135,8 @@ export enum SettingName {
   SocialsFlickr = 'flickr',
   MachinesModule = 'machines_module',
   UserChangeGroup = 'user_change_group',
+  UserValidationRequired = 'user_validation_required',
+  UserValidationRequiredList = 'user_validation_required_list'
 }
 
 export type SettingValue = string|boolean|number;

@@ -118,6 +118,7 @@ de:
       member_select:
         select_a_member: "Ein Mitglied auswählen"
         start_typing: "Tippe ein..."
+        member_not_validated: "Attention:</br> The member has not validated."
       #payment modal
       payment:
         online_payment: "Online-Bezahlung"
@@ -464,6 +465,7 @@ de:
         slot_tags: "Slot-Tags"
         user_tags: "Nutzer-Tags"
         no_tags: "Keine Tags"
+        user_validation_required_alert: "Attention !</br>Votre administrateur doit valider votre compte ? Vous pourrez alors accéder à l'ensemble des fonctionnalités de réservation."
       #feature-tour modal
       tour:
         previous: "Vorherige"

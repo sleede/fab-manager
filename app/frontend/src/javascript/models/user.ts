@@ -78,6 +78,7 @@ export interface User {
   training_credits: Array<number>,
   machine_credits: Array<{ machine_id: number, hours_used: number }>,
   last_sign_in_at: TDateISO
+  validated_at: TDateISO
 }
 
 type OrderingKey = 'last_name' | 'first_name' | 'email' | 'phone' | 'group' | 'plan' | 'id'

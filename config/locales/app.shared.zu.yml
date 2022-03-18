@@ -118,6 +118,7 @@ zu:
       member_select:
         select_a_member: "crwdns9571:0crwdne9571:0"
         start_typing: "crwdns9573:0crwdne9573:0"
+        member_not_validated: "Attention:</br> The member has not validated."
       #payment modal
       payment:
         online_payment: "crwdns21484:0crwdne21484:0"
@@ -464,6 +465,7 @@ zu:
         slot_tags: "crwdns20490:0crwdne20490:0"
         user_tags: "crwdns20492:0crwdne20492:0"
         no_tags: "crwdns20494:0crwdne20494:0"
+        user_validation_required_alert: "Attention !</br>Votre administrateur doit valider votre compte ? Vous pourrez alors accéder à l'ensemble des fonctionnalités de réservation."
       #feature-tour modal
       tour:
         previous: "crwdns20166:0crwdne20166:0"

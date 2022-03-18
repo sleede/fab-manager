@@ -41,7 +41,8 @@ class SettingPolicy < ApplicationPolicy
        online_payment_module stripe_public_key confirmation_required wallet_module trainings_module address_required
        payment_gateway payzen_endpoint payzen_public_key public_agenda_module renew_pack_threshold statistics_module
        pack_only_for_subscription overlapping_categories public_registrations facebook twitter viadeo linkedin instagram
-       youtube vimeo dailymotion github echosciences pinterest lastfm flickr machines_module user_change_group]
+       youtube vimeo dailymotion github echosciences pinterest lastfm flickr machines_module user_change_group
+       user_validation_required user_validation_required_list]
   end
 
   ##

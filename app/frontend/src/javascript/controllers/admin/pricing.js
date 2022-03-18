@@ -573,11 +573,15 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       $uibModal.open({
         templateUrl: '/admin/pricing/sendCoupon.html',
         resolve: {
-          coupon () { return coupon; }
+          coupon () { return coupon; },
+          enableUserValidationRequired () { return settingsPromise.user_validation_required === 'true'; }
         },
         size: 'md',
-        controller: ['$scope', '$uibModalInstance', 'Coupon', 'coupon', '_t', function ($scope, $uibModalInstance, Coupon, coupon, _t) {
-        // Member, receiver of the coupon
+        controller: ['$scope', '$uibModalInstance', 'Coupon', 'coupon', '_t', 'enableUserValidationRequired', function ($scope, $uibModalInstance, Coupon, coupon, _t, enableUserValidationRequired) {
+          // Global config: is the user validation required ?
+          $scope.enableUserValidationRequired = enableUserValidationRequired;
+
+          // Member, receiver of the coupon
           $scope.ctrl =
           { member: null };
 

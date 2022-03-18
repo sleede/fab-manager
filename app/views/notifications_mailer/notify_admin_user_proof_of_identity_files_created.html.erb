@@ -1,0 +1,18 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p>
+  <%= t('.body.proof_of_identity_files_uploaded_below',
+        NAME: @attached_object&.profile&.full_name || t('api.notifications.deleted_user')) %>
+</p>
+<ul>
+<% if @attached_object %>
+  <% @attached_object.group.proof_of_identity_types.each do |type| %>
+    <li><%= type.name %></li>
+  <% end %>
+<% end %>
+</ul>
+<% if Setting.get('user_validation_required') %>
+<p>
+  <%= t('.body.validate_user') %>
+</p>
+<% end %>

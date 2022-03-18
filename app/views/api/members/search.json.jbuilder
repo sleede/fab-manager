@@ -3,4 +3,5 @@ json.array!(@members) do |member|
   json.name "#{member.profile.first_name} #{member.profile.last_name}"
   json.group_id member.group_id
   json.need_completion member.need_completion?
+  json.validated_at member.validated_at
 end

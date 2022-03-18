@@ -512,57 +512,64 @@
     <div class="row">
       <h3 class="m-l" translate>{{ 'app.admin.settings.spaces' }}</h3>
       <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.spaces_info_html' | translate"></p>
-      <boolean-setting name="spaces_module"
-                       settings="allSettings"
-                       label="app.admin.settings.enable_spaces"
-                       classes="m-l"></boolean-setting>
+      <boolean-setting name="'spaces_module'"
+                       label="'app.admin.settings.enable_spaces' | translate"
+                       on-success="onSuccess"
+                       on-error="onError"
+                       class-name="'m-l'"></boolean-setting>
     </div>
     <div class="row">
       <h3 class="m-l" translate>{{ 'app.admin.settings.plans' }}</h3>
       <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.plans_info_html' | translate"></p>
-      <boolean-setting name="plans_module"
-                       settings="allSettings"
-                       label="app.admin.settings.enable_plans"
-                       classes="m-l"></boolean-setting>
+      <boolean-setting name="'plans_module'"
+                       label="'app.admin.settings.enable_plans' | translate"
+                       on-success="onSuccess"
+                       on-error="onError"
+                       class-name="'m-l'"></boolean-setting>
     </div>
     <div class="row">
       <h3 class="m-l" translate>{{ 'app.admin.settings.trainings' }}</h3>
       <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.trainings_info_html' | translate"></p>
-      <boolean-setting name="trainings_module"
-                       settings="allSettings"
-                       label="app.admin.settings.enable_trainings"
-                       classes="m-l"></boolean-setting>
+      <boolean-setting name="'trainings_module'"
+                       label="'app.admin.settings.enable_trainings' | translate"
+                       on-success="onSuccess"
+                       on-error="onError"
+                       class-name="'m-l'"></boolean-setting>
     </div>
     <div class="row">
       <h3 class="m-l" translate>{{ 'app.admin.settings.invoicing' }}</h3>
       <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.invoicing_info_html' | translate"></p>
-      <boolean-setting name="invoicing_module"
-                       settings="allSettings"
-                       label="app.admin.settings.enable_invoicing"
-                       classes="m-l"></boolean-setting>
+      <boolean-setting name="'invoicing_module'"
+                       label="'app.admin.settings.enable_invoicing' | translate"
+                       on-success="onSuccess"
+                       on-error="onError"
+                       class-name="'m-l'"></boolean-setting>
     </div>
     <div class="row">
         <h3 class="m-l" translate>{{ 'app.admin.settings.general.wallet' }}</h3>
         <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.general.wallet_info_html' | translate"></p>
-        <boolean-setting name="wallet_module"
-                         settings="allSettings"
-                         label="app.admin.settings.general.enable_wallet"
-                         classes="m-l"></boolean-setting>
+        <boolean-setting name="'wallet_module'"
+                         label="'app.admin.settings.general.enable_wallet' | translate"
+                         on-success="onSuccess"
+                         on-error="onError"
+                         class-name="'m-l'"></boolean-setting>
     </div>
     <div class="row">
       <h3 class="m-l" translate>{{ 'app.admin.settings.general.public_agenda' }}</h3>
       <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.general.public_agenda_info_html' | translate"></p>
-      <boolean-setting name="public_agenda_module"
-                       settings="allSettings"
-                       label="app.admin.settings.general.enable_public_agenda"
-                       classes="m-l"></boolean-setting>
+      <boolean-setting name="'public_agenda_module'"
+                       label="'app.admin.settings.general.enable_public_agenda' | translate"
+                       on-success="onSuccess"
+                       on-error="onError"
+                       class-name="'m-l'"></boolean-setting>
     </div>
     <div class="row">
         <h3 class="m-l" translate>{{ 'app.admin.settings.general.statistics' }}</h3>
         <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.general.statistics_info_html' | translate"></p>
-        <boolean-setting name="statistics_module"
-                         settings="allSettings"
-                         label="app.admin.settings.general.enable_statistics"
+        <boolean-setting name="'statistics_module'"
+                         label="'app.admin.settings.general.enable_statistics' | translate"
+                         on-success="onSuccess"
+                         on-error="onError"
                          classes="m-l"></boolean-setting>
     </div>
   </div>

@@ -11,8 +11,12 @@
         <section class="heading-title">
           <h1 class="inline">{{ 'app.shared.user_admin.user' | translate }} {{ user.name }}</h1>
           <span class="label label-danger text-white" ng-show="user.need_completion" translate>{{ 'app.shared.user_admin.incomplete_profile' }}</span>
+          <div class="pull-right" style="top: 35%;position: relative;right: 10px;" ng-if="enableUserValidationRequired">
+            <user-validation member="user"
+             on-error="onError"
+             on-success="onValidateMemberSuccess" />
+          </div>
         </section>
-
       </div>
 
       <div class="col-md-3">
@@ -54,6 +58,14 @@
             </div>
           </section>
 
+        </uib-tab>
+
+        <uib-tab heading="{{ 'app.admin.members_edit.proof_of_identity_files' | translate }}" ng-show="hasProofOfIdentityTypes">
+          <proof-of-identity-validation
+            operator="currentUser"
+            member="user"
+            on-error="onError"
+            on-success="onSuccess" />
         </uib-tab>
 
         <uib-tab heading="{{ 'app.admin.members_edit.subscription' | translate }}" ng-if="$root.modules.plans">
