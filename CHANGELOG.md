@@ -15,6 +15,7 @@
 - Fix a bug: the version check may be scheduled at an invalid time
 - Fix a bug: the moment-timezone relied on an outdated version of moment with a case-sensitive locale file
 - Fix a bug: unable to delete an administrator who had closed an accounting period
+- Fix a bug: captcha keys are not shown in the admin panel, once configured
 - Fix a security issue: removed message format in elasticsearch's log4j to fix [CVE-2021-44228](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-44228)
 - Fix a security issue: updated image_processing to 1.12.2 to fix [CVE-2022-24720](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24720)
 - Fix a security issue: updated url-parse to 1.5.10 to fix [CVE-2022-0686](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0686), [CVE-2022-0691](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0691), [CVE-2022-0639](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0639) and [CVE-2022-0512](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0512)

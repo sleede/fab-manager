@@ -1072,7 +1072,7 @@ angular.module('application.router', ['ui.router'])
                      "'display_name_enable', 'machines_sort_by', 'fab_analytics', 'statistics_module', 'address_required', " +
                      "'link_name', 'home_content', 'home_css', 'phone_required', 'upcoming_events_shown', 'public_agenda_module'," +
                      "'renew_pack_threshold', 'pack_only_for_subscription', 'overlapping_categories', 'public_registrations'," +
-                     "'extended_prices_in_same_day']"
+                     "'extended_prices_in_same_day', 'recaptcha_site_key', 'recaptcha_secret_key']"
             }).$promise;
           }],
           privacyDraftsPromise: ['Setting', function (Setting) { return Setting.get({ name: 'privacy_draft', history: true }).$promise; }],
