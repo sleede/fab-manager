@@ -28,6 +28,7 @@ const customConfig = {
       'window.CodeMirror': 'codemirror',
       MediumEditor: 'medium-editor',
       Humanize: path.resolve(path.join(__dirname, '../../app/frontend/src/javascript/lib/humanize.js')),
+      GTM: path.resolve(path.join(__dirname, '../../app/frontend/src/javascript/lib/gtm.js')),
       moment: 'moment',
       Application: [path.resolve(path.join(__dirname, '../../app/frontend/src/javascript/app.js')), 'Application'],
       process: 'process/browser'

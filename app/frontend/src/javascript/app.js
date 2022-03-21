@@ -17,7 +17,7 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
   'ngUpload', 'duScroll', 'application.filters', 'application.services', 'application.directives',
   'frapontillo.bootstrap-switch', 'application.controllers', 'application.router', 'application.components',
   'ui.select', 'ui.calendar', 'angularMoment', 'Devise', 'angular-growl', 'xeditable',
-  'checklist-model', 'unsavedChanges', 'angular-loading-bar', 'ngTouch', 'angular-google-analytics',
+  'checklist-model', 'unsavedChanges', 'angular-loading-bar', 'ngTouch',
   'angularUtils.directives.dirDisqus', 'summernote', 'elasticsearch', 'angular-medium-editor', 'naif.base64',
   'minicolors', 'pascalprecht.translate', 'ngFitText', 'ngAside', 'ngCapsLock', 'vcRecaptcha', 'ui.codemirror',
   'bm.uiTour'])
@@ -27,9 +27,7 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
       // first we check the user acceptance
       const cookiesConsent = document.cookie.replace(/(?:(?:^|.*;\s*)fab-manager-cookies-consent\s*=\s*([^;]*).*$)|^.*$/, '$1');
       if (cookiesConsent === 'accept') {
-        // TODO: account configuration (Fablab.trackingId)
-        // TODO: domain configuration (Fablab.baseHostUrl)
-        // TODO: handle page change
+        GTM.enableAnalytics(Fablab.trackingId);
       } else {
         // if the cookies were not explicitly accepted, delete them
         document.cookie = '_ga=; expires=Thu, 01 Jan 1970 00:00:00 GMT';
