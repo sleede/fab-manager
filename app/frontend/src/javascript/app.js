@@ -21,18 +21,15 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
   'angularUtils.directives.dirDisqus', 'summernote', 'elasticsearch', 'angular-medium-editor', 'naif.base64',
   'minicolors', 'pascalprecht.translate', 'ngFitText', 'ngAside', 'ngCapsLock', 'vcRecaptcha', 'ui.codemirror',
   'bm.uiTour'])
-  .config(['$httpProvider', 'AuthProvider', 'growlProvider', 'unsavedWarningsConfigProvider', 'AnalyticsProvider', 'uibDatepickerPopupConfig', '$provide', '$translateProvider', 'TourConfigProvider', '$sceDelegateProvider',
-    function ($httpProvider, AuthProvider, growlProvider, unsavedWarningsConfigProvider, AnalyticsProvider, uibDatepickerPopupConfig, $provide, $translateProvider, TourConfigProvider, $sceDelegateProvider) {
+  .config(['$httpProvider', 'AuthProvider', 'growlProvider', 'unsavedWarningsConfigProvider', 'uibDatepickerPopupConfig', '$provide', '$translateProvider', 'TourConfigProvider', '$sceDelegateProvider',
+    function ($httpProvider, AuthProvider, growlProvider, unsavedWarningsConfigProvider, uibDatepickerPopupConfig, $provide, $translateProvider, TourConfigProvider, $sceDelegateProvider) {
       // Google analytics
       // first we check the user acceptance
       const cookiesConsent = document.cookie.replace(/(?:(?:^|.*;\s*)fab-manager-cookies-consent\s*=\s*([^;]*).*$)|^.*$/, '$1');
       if (cookiesConsent === 'accept') {
-        AnalyticsProvider.setAccount(Fablab.trackingId);
-        // track all routes (or not)
-        AnalyticsProvider.trackPages(true);
-        AnalyticsProvider.setDomainName(Fablab.baseHostUrl);
-        AnalyticsProvider.useAnalytics(true);
-        AnalyticsProvider.setPageEvent('$stateChangeSuccess');
+        // TODO: account configuration (Fablab.trackingId)
+        // TODO: domain configuration (Fablab.baseHostUrl)
+        // TODO: handle page change
       } else {
         // if the cookies were not explicitly accepted, delete them
         document.cookie = '_ga=; expires=Thu, 01 Jan 1970 00:00:00 GMT';
@@ -67,8 +64,8 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
       TourConfigProvider.enableNavigationInterceptors();
 
       $sceDelegateProvider.resourceUrlWhitelist(['self']);
-    }]).run(['$rootScope', '$transitions', '$log', 'Auth', 'amMoment', '$state', 'editableOptions', 'Analytics',
-    function ($rootScope, $transitions, $log, Auth, amMoment, $state, editableOptions, Analytics) {
+    }]).run(['$rootScope', '$transitions', '$log', 'Auth', 'amMoment', '$state', 'editableOptions',
+    function ($rootScope, $transitions, $log, Auth, amMoment, $state, editableOptions) {
       // Angular-moment (date-time manipulations library)
       amMoment.changeLocale(Fablab.moment_locale);
 
@@ -123,10 +120,6 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
           // no one is logged, just ignore
         });
       });
-
-      // This code does nothing but it is here to remember to not remove the Analytics dependency,
-      // see https://github.com/revolunet/angular-google-analytics#automatic-page-view-tracking
-      Analytics.pageView();
 
       /**
        * This helper method builds and return an array containing every integers between

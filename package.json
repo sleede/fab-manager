@@ -63,7 +63,6 @@
     "angular-base64-upload": "^0.0.9",
     "angular-bootstrap-switch": "https://github.com/sleede/angular-bootstrap-switch.git#develop",
     "angular-cookies": "1.7",
-    "angular-google-analytics": "1.1",
     "angular-growl-v2": "https://github.com/JanStevens/angular-growl-2.git#0.7.9",
     "angular-i18n": "1.7",
     "angular-loading-bar": "^0.9.0",
