@@ -15,6 +15,7 @@
 - Fix a bug: the version check may be scheduled at an invalid time
 - Fix a bug: the moment-timezone relied on an outdated version of moment with a case-sensitive locale file
 - Fix a bug: unable to delete an administrator who had closed an accounting period
+- Fix a security issue: removed message format in elasticsearch's log4j to fix [CVE-2021-44228](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-44228)
 - Fix a security issue: updated image_processing to 1.12.2 to fix [CVE-2022-24720](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24720)
 - Fix a security issue: updated url-parse to 1.5.10 to fix [CVE-2022-0686](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0686), [CVE-2022-0691](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0691), [CVE-2022-0639](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0639) and [CVE-2022-0512](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0512)
 - Fix a security issue: updated rails to 5.2.6.3 to fix [CVE-2022-21831](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-21831), [CVE-2022-23633](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23633)
@@ -23,6 +24,7 @@
 - Fix a security issue: updated puma to 4.3.11 to fix [CVE-2022-23634](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23634)
 - Fix a security issue: updated i18next-http-backend to 1.3.2 to fix [CVE-2022-0235](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0235)
 - Fix a security issue: updated follow-redirects to 1.18.8 to fix [CVE-2022-0536](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0536)
+- [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/cve-2021-44228.sh | bash`
 
 ## v5.3.5 2022 March 02
 
