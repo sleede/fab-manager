@@ -1032,7 +1032,7 @@
         oauth2_provider_successfully_added: "Usikret OAuth 2.0 leverandør lagt til."
       #edit an authentication provider (SSO)
       authentication_edit:
-        provider: "Provider:"
+        provider: "Tilbyder:"
         it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider: "It is required to set the matching between User.uid and the API to add this provider."
         provider_successfully_updated: "Autorisasjonsleverandør oppdatert."
         an_error_occurred_unable_to_update_the_provider: "En feil oppstod: ikke mulig å oppdatere den angitte leverandøren."
