@@ -46,7 +46,7 @@ class UserService
       admin.send_confirmation_instructions
       admin.add_role(:admin)
       admin.remove_role(:member)
-      UsersMailer.delay.notify_user_account_created(admin, generated_password)
+      UsersMailer.notify_user_account_created(admin, generated_password).deliver_later
     end
     { saved: saved, user: admin }
   end
@@ -61,7 +61,7 @@ class UserService
       manager.send_confirmation_instructions
       manager.add_role(:manager)
       manager.remove_role(:member)
-      UsersMailer.delay.notify_user_account_created(manager, generated_password)
+      UsersMailer.notify_user_account_created(manager, generated_password).deliver_later
     end
     { saved: saved, user: manager }
   end
