@@ -983,7 +983,7 @@
       #add a new administrator to the platform
       admins_new:
         add_an_administrator: "Legg til administrator"
-        administrator_successfully_created_he_will_receive_his_connection_directives_by_email: "Administrator erfolgreich erstellt. Er seine Verbindungsanweisungen per E-Mail."
+        administrator_successfully_created_he_will_receive_his_connection_directives_by_email: "Administrator ble opprettet og vil få sin innloggingsinfo via e-post."
         failed_to_create_admin: "Kan ikke opprette administrator:"
         man: "Mann"
         woman: "Kvinne"
@@ -1001,7 +1001,7 @@
       #add a new manager to the platform
       manager_new:
         add_a_manager: "Legg til en manager"
-        manager_successfully_created: "Manager erfolgreich erstellt. Er seine Verbindungsanweisungen per E-Mail."
+        manager_successfully_created: "Ny leder ble opprettet og vil få sin innloggingsinfo via e-post."
         failed_to_create_manager: "Kan ikke opprette leder:"
         man: "Mann"
         woman: "Kvinne"
