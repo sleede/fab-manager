@@ -75,6 +75,9 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
       $transitions.onSuccess({ }, function (trans) {
         $state.prevState = trans.$from().name;
         $state.prevParams = trans.$from().params;
+
+        const path = trans.router.stateService.href(trans.$to(), {}, { absolute: true });
+        GTM.trackPage(path, trans.$to().name);
       });
 
       // Global function to allow the user to navigate to the previous screen (ie. $state).

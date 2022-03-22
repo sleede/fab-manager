@@ -461,6 +461,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
         // what to do when the modal is closed
 
         // authentication succeeded, set the session, gather the notifications and redirect
+        GTM.trackLogin();
         $scope.setCurrentUser(user);
 
         if ((toState !== null) && (toParams !== null)) {

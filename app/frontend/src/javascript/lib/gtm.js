@@ -2,9 +2,10 @@
 (function () {
   const GTM = {};
 
+  window.dataLayer = window.dataLayer || [];
+  function gtag () { window.dataLayer.push(arguments); }
+
   GTM.enableAnalytics = function (trackingId) {
-    window.dataLayer = window.dataLayer || [];
-    function gtag () { window.dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', trackingId);
 
@@ -13,6 +14,25 @@
     node.async = true;
     node.src = `//www.googletagmanager.com/gtag/js?id=${trackingId}`;
     firstScript.parentNode.insertBefore(node, firstScript);
+  };
+
+  GTM.trackPage = function (url, title) {
+    gtag('event', 'page_view', {
+      page_location: url,
+      page_title: title
+    });
+  };
+
+  GTM.trackLogin = function () {
+    gtag('event', 'login');
+  };
+
+  GTM.trackPurchase = function (transactionId, value) {
+    gtag('event', 'purchase', {
+      transaction_id: transactionId,
+      value: value,
+      currency: Fablab.intl_currency
+    });
   };
 
   this.GTM = GTM;

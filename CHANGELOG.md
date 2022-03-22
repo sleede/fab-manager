@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- Support for Google Analytics V4
 - Updated environment documentation
 - Updated react-i18next to 11.15.6
 - Updated i18next to 21.6.13
@@ -10,6 +11,7 @@
 - Removed unmaintained gem sidekiq-cron and replaced it with sidekiq-scheduler
 - Removed unmaintained @rails/webpacker v5 and replaced it with shakapacker v6
 - Removed dependency to auto-ngtemplate-loader
+- Removed support for Universal Analytics
 - Updated deprecated division operators in sass
 - Fix a bug: a sentence was not linked to a translation key
 - Fix a bug: the version check may be scheduled at an invalid time
