@@ -24,7 +24,7 @@
         ongoing_reservations: "Pågående reservasjoner"
         without_reservation: "Ikke reservert"
         confirmation_required: "Bekreftelse nødvendig"
-        do_you_really_want_to_cancel_the_USER_s_reservation_the_DATE_at_TIME_concerning_RESERVATION: "Do you really want to cancel {USER}'s reservation, the {DATE} at {TIME}, concerning {RESERVATION}?"
+        do_you_really_want_to_cancel_the_USER_s_reservation_the_DATE_at_TIME_concerning_RESERVATION: "Ønsker du å kansellere {USER} sin reservasjon {DATE}, {TIME} for {RESERVATION}?"
         reservation_was_successfully_cancelled: "Kansellering av reservasjon er gjennomført."
         reservation_cancellation_failed: "Det gikk ikke an å kansellere reservasjonen."
         unable_to_remove_the_last_machine_of_the_slot_delete_the_slot_rather: "Kan ikke fjerne siste maskinen fra reservasjonen. Slett reservasjonen."
