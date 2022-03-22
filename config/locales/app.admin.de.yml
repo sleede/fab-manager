@@ -24,7 +24,7 @@ de:
         ongoing_reservations: "Laufende Reservierungen"
         without_reservation: "Ohne Reservierung"
         confirmation_required: "Bestätigung erforderlich"
-        do_you_really_want_to_cancel_the_USER_s_reservation_the_DATE_at_TIME_concerning_RESERVATION: "Do you really want to cancel {USER}'s reservation, the {DATE} at {TIME}, concerning {RESERVATION}?"
+        do_you_really_want_to_cancel_the_USER_s_reservation_the_DATE_at_TIME_concerning_RESERVATION: "Wollen Sie wirklich die Reservierung {RESERVATION} von {USER} am {DATE} um {TIME} stornieren?"
         reservation_was_successfully_cancelled: "Reservierung wurde erfolgreich storniert."
         reservation_cancellation_failed: "Stornierung der Reservierung fehlgeschlagen."
         unable_to_remove_the_last_machine_of_the_slot_delete_the_slot_rather: "Die letzte Maschine des Slots konnte nicht entfernt werden. Löschen Sie den Slot."
@@ -1381,7 +1381,7 @@ de:
             online_payment: "Ist das Online-Zahlungsmodul aktiv?"
             invoices: "Ist das Rechnungsmodul aktiv?"
             openlab: "Ist das Projektteilungsmodul (OpenLab) aktiv?"
-          tracking_id_info_html: "<p>Um die statistische Analyse der Besuche mithilfe von Google Analytics zu ermöglichen, tragen Sie hier Ihre Tracking-ID in der Form UA-000000-0 ein. Besuchen Sie <a href='https://analytics.google.com/analytics/web/' target='_blank'>die Google Analytics Website</a>, um eine Tracking-ID zu erstellen.<br/><strong>Warnung:</strong> wenn Sie dieses Feature aktivieren, muss in Ihrer Datenschutzrichtlinie darauf hingewiesen werden.</p><p> Um Google Analytics verwenden zu können, benötigen Sie auch den Hostnamen. Klicken Sie auf die angrenzende Schaltfläche. Dieser letzte Parameter wird auch an anderen Stellen verwendet, bitte verwenden Sie ihn vorsichtig.</p>"
+          tracking_id_info_html: "To enable the statistical tracking of the visits using Google Analytics V4, set your tracking ID here. It is in the form G-XXXXXX. Visit <a href='https://analytics.google.com/analytics/web/' target='_blank'>the Google Analytics website</a> to get one.<br/><strong>Warning:</strong> if you enable this feature, a cookie will be created. Remember to write it down in your privacy policy, above."
           tracking_id: "Tracking-ID"
       open_api_clients:
         add_new_client: "Neuen API-Client erstellen"
