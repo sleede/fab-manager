@@ -983,7 +983,7 @@ de:
       #add a new administrator to the platform
       admins_new:
         add_an_administrator: "Administrator hinzufügen"
-        administrator_successfully_created_he_will_receive_his_connection_directives_by_email: "Administrator erfolgreich erstellt. {GENDER, select, female{Sie} other{Er}} erhält {GENDER, select, female{ihre} other{seine}} Verbindungsanweisungen per E-Mail."
+        administrator_successfully_created_he_will_receive_his_connection_directives_by_email: "Administrator erfolgreich erstellt. Er erhält seine Verbindungsanweisungen per E-Mail."
         failed_to_create_admin: "Administrator konnte nicht erstellt werden:"
         man: "Männlich"
         woman: "Weiblich"
@@ -1001,7 +1001,7 @@ de:
       #add a new manager to the platform
       manager_new:
         add_a_manager: "Manager hinzufügen"
-        manager_successfully_created: "Manager erfolgreich erstellt. {GENDER, select, female{Sie} other{Er}} erhält {GENDER, select, female{ihre} other{seine}} Verbindungsanweisungen per E-Mail."
+        manager_successfully_created: "Manager erfolgreich erstellt. Er erhält seine Verbindungsanweisungen per E-Mail."
         failed_to_create_manager: "Konnte den Manager nicht erstellen:"
         man: "Männlich"
         woman: "Weiblich"
@@ -1032,7 +1032,7 @@ de:
         oauth2_provider_successfully_added: "OAuth 2.0 Provider erfolgreich hinzugefügt."
       #edit an authentication provider (SSO)
       authentication_edit:
-        provider: "Provider:"
+        provider: "Anbieter:"
         it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider: "Um diesen Provider hinzuzufügen, muss die Übereinstimmung zwischen User.uid und der API festgelegt werden."
         provider_successfully_updated: "Anbieter erfolgreich aktualisiert."
         an_error_occurred_unable_to_update_the_provider: "Ein Fehler ist aufgetreten: Der Anbieter konnte nicht aktualisiert werden."
@@ -1381,7 +1381,7 @@ de:
             online_payment: "Ist das Online-Zahlungsmodul aktiv?"
             invoices: "Ist das Rechnungsmodul aktiv?"
             openlab: "Ist das Projektteilungsmodul (OpenLab) aktiv?"
-          tracking_id_info_html: "<p>Um die statistische Analyse der Besuche mithilfe von Google Analytics zu ermöglichen, tragen Sie hier Ihre Tracking-ID in der Form UA-000000-0 ein. Besuchen Sie <a href='https://analytics.google.com/analytics/web/' target='_blank'>die Google Analytics Website</a>, um eine Tracking-ID zu erstellen.<br/><strong>Warnung:</strong> wenn Sie dieses Feature aktivieren, muss in Ihrer Datenschutzrichtlinie darauf hingewiesen werden.</p><p> Um Google Analytics verwenden zu können, benötigen Sie auch den Hostnamen. Klicken Sie auf die angrenzende Schaltfläche. Dieser letzte Parameter wird auch an anderen Stellen verwendet, bitte verwenden Sie ihn vorsichtig.</p>"
+          tracking_id_info_html: "Um die statistische Analyse der Besuche mithilfe von Google Analytics V4 zu ermöglichen, tragen Sie hier Ihre Tracking-ID in der Form G-XXXXXX ein. Besuchen Sie <a href='https://analytics.google.com/analytics/web/' target='_blank'>die Google Analytics Website</a>, um eine Tracking-ID zu erstellen.<br/><strong>Warnung:</strong> wenn Sie dieses Feature aktivieren, wird ein Cookie erstellt. Denken Sie daran, es oben in Ihrer Datenschutzrichtlinie darauf hingewiesen werden."
           tracking_id: "Tracking-ID"
       open_api_clients:
         add_new_client: "Neuen API-Client erstellen"
@@ -1395,7 +1395,7 @@ de:
         client_name: "Kundenname"
         confirmation_required: "Bestätigung erforderlich"
         do_you_really_want_to_delete_this_open_api_client: "Möchten Sie diesen OpenAPI-Client wirklich löschen?"
-        do_you_really_want_to_revoke_this_open_api_access: "Möchten Sie diesen Zugriff wirklich widerrufen ? Er wird das aktuelle Token löschen und ersetzen."
+        do_you_really_want_to_revoke_this_open_api_access: "Möchten Sie diesen Zugriff wirklich widerrufen? Er wird das aktuelle Token löschen und ersetzen."
         client_successfully_created: "Client erfolgreich erstellt."
         client_successfully_updated: "Client erfolgreich aktualisiert."
         client_successfully_deleted: "Client erfolgreich gelöscht."

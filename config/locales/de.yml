@@ -268,9 +268,9 @@ de:
       notify_admin_subscription_will_expire_in_7_days:
         USER_s_subscription_will_expire_in_7_days: "Das Abonnement von %{USER} wird in 7 Tagen ablaufen."
       notify_admin_user_group_changed:
-        user_NAME_changed_his_group_html: "Benutzer <strong><em>{NAME}</strong></em> hat {GENDER, select, true{seine} other{ihre}} Gruppe geändert." #messageFormat interpolation
+        user_NAME_changed_his_group_html: "User <strong><em>{NAME}</strong></em> changed group." #messageFormat interpolation
       notify_admin_user_merged:
-        user_NAME_has_merged_his_account_with_the_one_imported_from_PROVIDER_UID_html: "Nutzer <strong><em>{NAME}</strong></em> hat {GENDER, select, true{seinen} other{ihren}} Account mit dem von <strong><em>{PROVIDER} </strong> ({UID})</em> importierten Account zusammengeführt." #messageFormat interpolation
+        user_NAME_has_merged_his_account_with_the_one_imported_from_PROVIDER_UID_html: "<strong><em>{NAME}</strong></em>'s account was merged with the one imported from <strong><em>{PROVIDER} </strong> ({%UID})</em>." #messageFormat interpolation
       notify_admin_when_project_published:
         project_NAME_has_been_published_html: "Projekt <a href='/#!/projects/%{ID}'><strong><em>%{NAME}<em></strong></a> wurde veröffentlicht."
       notify_admin_when_user_is_created:

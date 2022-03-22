@@ -24,7 +24,7 @@
         ongoing_reservations: "Pågående reservasjoner"
         without_reservation: "Ikke reservert"
         confirmation_required: "Bekreftelse nødvendig"
-        do_you_really_want_to_cancel_the_USER_s_reservation_the_DATE_at_TIME_concerning_RESERVATION: "{GENDER, select, other {Ønsker du å}} kansellere {USER} sin reservasjon {DATE}, {TIME} for {RESERVATION}?"
+        do_you_really_want_to_cancel_the_USER_s_reservation_the_DATE_at_TIME_concerning_RESERVATION: "Ønsker du å kansellere {USER} sin reservasjon {DATE}, {TIME} for {RESERVATION}?"
         reservation_was_successfully_cancelled: "Kansellering av reservasjon er gjennomført."
         reservation_cancellation_failed: "Det gikk ikke an å kansellere reservasjonen."
         unable_to_remove_the_last_machine_of_the_slot_delete_the_slot_rather: "Kan ikke fjerne siste maskinen fra reservasjonen. Slett reservasjonen."
@@ -325,7 +325,7 @@
         an_error_occurred_unable_to_find_the_credit_to_revoke: "En feil oppstod: kunne ikke finne kreditten som skal tilbakekalles."
         an_error_occurred_while_creating_credit_with_the_TRAINING: "Det oppstod en feil under oppretting av kreditt med {TRAINING}."
         not_set: "Ikke angitt"
-        error_a_credit_linking_this_machine_with_that_subscription_already_exists: "Feil : en kreditnota på denne maskinen med dette abonnementet finnes allerede."
+        error_a_credit_linking_this_machine_with_that_subscription_already_exists: "Feil: en kreditnota på denne maskinen med dette abonnementet finnes allerede."
         changes_have_been_successfully_saved: "Endringene er lagret."
         credit_was_successfully_saved: "Kreditten ble lagret."
         error_creating_credit: "Kan ikke opprette kreditt, feil oppstod"
@@ -365,7 +365,7 @@
         these_prices_match_space_hours_rates_html: "Prisene under samsvarer med en time maskinbruk <strong>uten abonnement</strong>."
         add_a_space_credit: "Legg til en plass/romkreditt"
         space: "Plass/rom"
-        error_a_credit_linking_this_space_with_that_subscription_already_exists: "Feil : en kreditnota på denne maskinen med dette abonnementet finnes allerede."
+        error_a_credit_linking_this_space_with_that_subscription_already_exists: "Feil: en kreditnota på denne maskinen med dette abonnementet finnes allerede."
         status_enabled: "Aktivert"
         status_disabled: "Deaktivert"
         status_all: "Alle"
@@ -1295,7 +1295,7 @@
           training_reservations: "Trainings"
           machine_reservations: "Machines"
           space_reservations: "Spaces"
-          events_reservations: "Events"
+          events_reservations: "Arrangementer"
         general:
           general: "Generelt"
           title: "Tittel"
@@ -1322,7 +1322,7 @@
           public_registrations_allowed: "Public registrations allowed"
           help: "Hjelp"
           feature_tour: "Funksjonsgjennomgang"
-          feature_tour_info_html: "<p>When an administrator or a manager in logged-in, a feature tour will be triggered the first time he/she visits each section of the application. You can change this behavior to one of the following values:</p><ul><li>« Once » to keep the default behavior.</li><li>« By session » to display the tours each time you reopen the application.</li><li>« Manual trigger » to prevent displaying the tours automatically. It'll still be possible to trigger them by pressing the F1 key or by clicking on « Help » in the user's menu.</li></ul>"
+          feature_tour_info_html: "<p>Når en administrator eller en leder er innlogget En fremvisning utløses første gang han besøker hver del av applikasjonen. Du kan endre denne adferden til en av følgende verdier:</p><ul><li>« Once » for å beholde standardvirkemåten.</li><li>« By session » to display the tours each time you reopen the application.</li><li>« Manual trigger » for å forhindre at turene vises automatisk. Det vil fortsatt være mulig å utløse dem ved å trykke F1-tasten eller ved å klikke på « Hjelp » i brukermenyen.</li></ul>"
           feature_tour_display_mode: "Modus for funksjonsgjennomgang"
           display_mode:
             once: "Én gang"
@@ -1381,7 +1381,7 @@
             online_payment: "Is the online payment module active?"
             invoices: "Is the invoicing module active?"
             openlab: "Is the project sharing module (OpenLab) active?"
-          tracking_id_info_html: "<p>To enable the statistical tracking of the visits using Google Analytics, set your tracking ID here. It is in the form UA-000000-2. Visit <a href='https://analytics.google.com/analytics/web/' target='_blank'>the Google Analytics website</a> to get one.<br/><strong>Warning:</strong> if you enable this feature, remember to write it in your privacy policy, above.</p><p>The host name is also required to use Google Analytics. You can get it by clicking on the adjacent button. This last parameter is used elsewhere, please set it carefully.</p>"
+          tracking_id_info_html: "To enable the statistical tracking of the visits using Google Analytics V4, set your tracking ID here. It is in the form G-XXXXXX. Visit <a href='https://analytics.google.com/analytics/web/' target='_blank'>the Google Analytics website</a> to get one.<br/><strong>Warning:</strong> if you enable this feature, a cookie will be created. Remember to write it down in your privacy policy, above."
           tracking_id: "Tracking ID"
       open_api_clients:
         add_new_client: "Lage ny API-klient"
@@ -1395,7 +1395,7 @@
         client_name: "Klientens navn"
         confirmation_required: "Confirmation required"
         do_you_really_want_to_delete_this_open_api_client: "Do you really want to delete this OpenAPI client?"
-        do_you_really_want_to_revoke_this_open_api_access: "Do you really want to revoke this access ? It will erase and replace the current token."
+        do_you_really_want_to_revoke_this_open_api_access: "Do you really want to revoke this access? It will erase and replace the current token."
         client_successfully_created: "Client successfully created."
         client_successfully_updated: "Client successfully updated."
         client_successfully_deleted: "Client successfully deleted."
@@ -1595,7 +1595,7 @@
             content: "Create and manage promotional coupons allowing to offer punctual discounts to their holders."
         events:
           welcome:
-            title: "Events"
+            title: "Arrangementer"
             content: "Create events, track their reservations and organize them from this page."
           list:
             title: "The events"
