@@ -90,4 +90,15 @@
     </div>
 </div>
 
+<div class="form-group" ng-class="{'has-error': providerForm['auth_provider[scopes]'].$dirty && providerForm['auth_provider[scopes]'].$invalid}">
+    <label for="provider_client_secret" class="col-sm-3 control-label" translate>{{ 'app.shared.oauth2.scopes' }}</label>
+    <div class="col-sm-9">
+        <input type="text"
+          ng-model="provider.providable_attributes.scopes"
+          class="form-control"
+          name="auth_provider[scopes]"
+          id="provider_scopes"
+          placeholder="profile,email...">
+    </div>
+</div>
 <ng-include src="'/admin/authentications/_oauth2_mapping.html'"></ng-include>

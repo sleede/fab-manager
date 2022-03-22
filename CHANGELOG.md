@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Support for Google Analytics V4
+- OAuth2 scopes are now configurable from the interface
 - Updated environment documentation
 - Updated react-i18next to 11.15.6
 - Updated i18next to 21.6.13
@@ -30,6 +31,7 @@
 - [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/cve-2021-44228.sh | bash`
 - [TODO DEPLOY] migrate your Google Analytics property to GA4, see [this guide](https://support.google.com/analytics/answer/9744165)
 - [TODO DEPLOY] update your tracking ID in Customization > Privacy > Statistics > Google Analytics
+- [TODO DEPLOY] update your oAuth2 provider configuration with the scopes previously defined in the OAUTH2_SCOPE environment variable
 
 ## v5.3.5 2022 March 02
 

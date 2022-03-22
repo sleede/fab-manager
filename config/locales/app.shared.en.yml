@@ -267,6 +267,7 @@ en:
         obtain_it_when_registering_with_your_provider: "Obtain it when registering with your provider."
         client_secret: "Client secret"
         oauth2_client_secret_is_required: "OAuth 2.0 client secret is required."
+        scopes: "Scopes"
         define_the_fields_mapping: "Define the fields mapping"
         add_a_match: "Add a match"
         model: "Model"

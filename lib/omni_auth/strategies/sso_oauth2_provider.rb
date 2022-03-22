@@ -28,7 +28,7 @@ module OmniAuth::Strategies
 
     def authorize_params
       super.tap do |params|
-        params[:scope] = ENV['OAUTH2_SCOPE']
+        params[:scope] = active_provider.providable.scopes
       end
     end
 
