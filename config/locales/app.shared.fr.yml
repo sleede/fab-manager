@@ -267,7 +267,7 @@ fr:
         obtain_it_when_registering_with_your_provider: "Enregistrez-vous auprès du fournisseur pour l'obtenir."
         client_secret: "Secret client"
         oauth2_client_secret_is_required: "Le secret client OAuth 2 est requis."
-        scopes: "Scopes"
+        scopes: "Portée de l’autorisation"
         define_the_fields_mapping: "Définir la correspondance des champs"
         add_a_match: "Ajouter une correspondance"
         model: "Modèle"
