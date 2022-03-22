@@ -267,6 +267,7 @@ es:
         obtain_it_when_registering_with_your_provider: "Obtengalo al registrarse con su proveedor."
         client_secret: "Secreto del cliente"
         oauth2_client_secret_is_required: "Se requiere el secreto de cliente OAuth 2.0."
+        scopes: "Scopes"
         define_the_fields_mapping: "Definir el mapeo de campos"
         add_a_match: "agregar coincidencia"
         model: "Model"
