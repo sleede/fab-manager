@@ -15,7 +15,7 @@ es:
         trainings: "Formación"
         machines: "Máquinas"
         spaces: "Espacios"
-        events: "Events"
+        events: "Eventos"
         availabilities: "Disponibilidades"
         availabilities_notice: "Exportar a un libro de trabajo de Excel cada ranura disponible para reserva, y su ratio de ocupación."
         info: "Info"
