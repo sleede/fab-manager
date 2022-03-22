@@ -267,6 +267,7 @@
         obtain_it_when_registering_with_your_provider: "Få det når du registrerer deg hos leverandøren din."
         client_secret: "Klienthemmelighet"
         oauth2_client_secret_is_required: "OAuth 2.0 klient-hemmelighet er nødvendig."
+        scopes: "Scopes"
         define_the_fields_mapping: "Definer tilordning av felter"
         add_a_match: "Legg til en match"
         model: "Modell"
