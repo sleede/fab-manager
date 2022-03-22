@@ -34,7 +34,7 @@ const customConfig = {
       process: 'process/browser'
     }),
     isDevelopment && new ReactRefreshWebpackPlugin()
-  ],
+  ].filter(Boolean),
   module: {
     rules: [
       jsErb,
