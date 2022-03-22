@@ -267,6 +267,7 @@ pt:
         obtain_it_when_registering_with_your_provider: "Obtenha-o ao se registrar no seu provedor."
         client_secret: "Chave secreta"
         oauth2_client_secret_is_required: "A senha do cliente OAuth 2.0 é necessário."
+        scopes: "Scopes"
         define_the_fields_mapping: "Defina o mapeamento dos campos"
         add_a_match: "Adicionar uma correspondência"
         model: "Modelo"
