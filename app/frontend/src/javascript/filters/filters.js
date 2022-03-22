@@ -1,8 +1,3 @@
-/* eslint-disable
-    no-undef,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS101: Remove unnecessary use of Array.from
@@ -135,7 +130,7 @@ Application.Filters.filter('projectsCollabored', [function () {
   };
 }]);
 
-// depend on humanize.js lib in /vendor
+// depend on app/frontend/src/javascript/lib/humanize.js
 Application.Filters.filter('humanize', [function () {
   return (element, param) => Humanize.truncate(element, param, null);
 }]);

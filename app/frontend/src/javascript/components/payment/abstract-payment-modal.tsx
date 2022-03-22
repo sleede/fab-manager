@@ -52,6 +52,8 @@ interface AbstractPaymentModalProps {
   modalSize?: ModalSize,
 }
 
+declare const GTM: any;
+
 /**
  * This component is an abstract modal that must be extended by each payment gateway to include its payment form.
  *
@@ -156,6 +158,7 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
    */
   const handleFormSuccess = async (result: Invoice|PaymentSchedule): Promise<void> => {
     setSubmitState(false);
+    GTM.trackPurchase(result.id, result.total);
     afterSuccess(result);
   };
 

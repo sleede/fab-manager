@@ -1968,11 +1968,6 @@ angular-cookies@1.7:
   resolved "https://registry.yarnpkg.com/angular-cookies/-/angular-cookies-1.7.9.tgz#0f0cd2a9d1c81e5b8d6c6711d41f0909f9d0b8e0"
   integrity sha512-3eRq/aPrtCZKDWQnc3nW3sFoMbLiHkCkyDF2O9u7VXnqvVsUPaipk5R1ZqahgcSQHQrN/F5IU4T4nrz52qAZmA==
 
-angular-google-analytics@1.1:
-  version "1.1.8"
-  resolved "https://registry.yarnpkg.com/angular-google-analytics/-/angular-google-analytics-1.1.8.tgz#e497926c0f77cd6eec0c0cbdf0b20e58938cf8a0"
-  integrity sha1-5JeSbA93zW7sDAy98LIOWJOM+KA=
-
 "angular-growl-v2@https://github.com/JanStevens/angular-growl-2.git#0.7.9":
   version "0.7.9"
   resolved "https://github.com/JanStevens/angular-growl-2.git#2a3a40e01419af879f80f582baaeceef3408e295"

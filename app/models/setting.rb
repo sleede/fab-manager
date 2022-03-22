@@ -195,4 +195,11 @@ class Setting < ApplicationRecord
     setting = find_or_initialize_by(name: name)
     setting.save && setting.history_values.create(invoicing_profile: user.invoicing_profile, value: value.to_s)
   end
+
+  ##
+  # Check if the given setting was set
+  ##
+  def self.set?(name)
+    find_by(name: name)&.value.nil? ? false : true
+  end
 end

@@ -1381,7 +1381,7 @@ en:
             online_payment: "Is the online payment module active?"
             invoices: "Is the invoicing module active?"
             openlab: "Is the project sharing module (OpenLab) active?"
-          tracking_id_info_html: "<p>To enable the statistical tracking of the visits using Google Analytics, set your tracking ID here. It is in the form UA-000000-2. Visit <a href='https://analytics.google.com/analytics/web/' target='_blank'>the Google Analytics website</a> to get one.<br/><strong>Warning:</strong> if you enable this feature, remember to write it in your privacy policy, above.</p><p>The host name is also required to use Google Analytics. You can get it by clicking on the adjacent button. This last parameter is used elsewhere, please set it carefully.</p>"
+          tracking_id_info_html: "To enable the statistical tracking of the visits using Google Analytics V4, set your tracking ID here. It is in the form G-XXXXXX. Visit <a href='https://analytics.google.com/analytics/web/' target='_blank'>the Google Analytics website</a> to get one.<br/><strong>Warning:</strong> if you enable this feature, a cookie will be created. Remember to write it down in your privacy policy, above."
           tracking_id: "Tracking ID"
       open_api_clients:
         add_new_client: "Create new API client"
