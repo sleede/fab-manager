@@ -424,7 +424,7 @@ de:
         confirm_and_pay: "Bestätigen und bezahlen"
         you_have_settled_the_following_TYPE: "Sie haben die folgenden {TYPE, select, Machine{Maschinenslots} Training{Schulungen} other{Elemente}} beglichen:"
         you_have_settled_a_: "Sie haben beglichen"
-        total_: "TOTAL:"
+        total_: "GESAMT :"
         thank_you_your_payment_has_been_successfully_registered: "Vielen Dank. Ihre Zahlung wurde erfolgreich registriert!"
         your_invoice_will_be_available_soon_from_your_: "Ihre Rechnung wird in Kürze verfügbar sein via"
         dashboard: "Dashboard"
