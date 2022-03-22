@@ -267,6 +267,7 @@ zu:
         obtain_it_when_registering_with_your_provider: "crwdns9801:0crwdne9801:0"
         client_secret: "crwdns9803:0crwdne9803:0"
         oauth2_client_secret_is_required: "crwdns9805:0crwdne9805:0"
+        scopes: "crwdns22444:0crwdne22444:0"
         define_the_fields_mapping: "crwdns9807:0crwdne9807:0"
         add_a_match: "crwdns9809:0crwdne9809:0"
         model: "crwdns9811:0crwdne9811:0"
