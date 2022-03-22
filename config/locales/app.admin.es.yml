@@ -838,7 +838,7 @@ es:
           active: "Activo"
           pending: "Pendiente"
           previous_provider: "Proveedor anteriorr"
-          confirmation_required: "Delete the provider?"
+          confirmation_required: "¿Eliminar el proveedor?"
           do_you_really_want_to_delete_the_TYPE_authentication_provider_NAME: "¿Realmente desea eliminar la {TYPE} proveedor de autenticación: {NAME}?"
           authentication_provider_successfully_deleted: "El proveedor de autenticación se eliminó correctamente."
           an_error_occurred_unable_to_delete_the_specified_provider: "Se ha producido un error: no se puede eliminar el proveedor especificado."
@@ -1032,7 +1032,7 @@ es:
         oauth2_provider_successfully_added: "OAuth 2.0 proveedor agregado correctamente."
       #edit an authentication provider (SSO)
       authentication_edit:
-        provider: "Provider:"
+        provider: "Proveedor:"
         it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider: "Es necesario establecer la coincidencia entre User.uid y la API para agregar este proveedor."
         provider_successfully_updated: "Proveedor actualizado correctamente."
         an_error_occurred_unable_to_update_the_provider: "Se ha producido un error: no se puede actualizar el proveedor."
