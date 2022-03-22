@@ -1381,7 +1381,7 @@ fr:
             online_payment: "Le module de paiement par carte bancaire est-il actif ?"
             invoices: "Le module est facturation est-il actif ?"
             openlab: "Le module de partage de projets (OpenLab) est-il actif ?"
-          tracking_id_info_html: "<p>Pour activer les suivi statistique des visites utilisant Google Analytics, définissez ici votre ID de suivi. Il se présente sous la forme UA-000000-2. Visitez <a href='https://analytics.google.com/analytics/web/' target='_blank'>le site web de Google Analytics</a> pour en obtenir un.<br/><strong>Attention :</strong> si vous activez cette fonctionnalité, pensez à l'indiquer dans votre politique de confidentialité, ci-dessus.</p><p>Le nom d'hôte est également requis pour pouvoir utiliser Google Analytics. Vous pouvez l'obtenir en cliquant sur le bouton adjacent. Ce dernier paramètre est utilisé ailleurs, veuillez le définir avec soin.</p>"
+          tracking_id_info_html: "To enable the statistical tracking of the visits using Google Analytics V4, set your tracking ID here. It is in the form G-XXXXXX. Visit <a href='https://analytics.google.com/analytics/web/' target='_blank'>the Google Analytics website</a> to get one.<br/><strong>Warning:</strong> if you enable this feature, a cookie will be created. Remember to write it down in your privacy policy, above."
           tracking_id: "ID de suivi"
       open_api_clients:
         add_new_client: "Créer un compte client"
