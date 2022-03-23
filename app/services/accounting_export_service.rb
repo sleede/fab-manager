@@ -69,6 +69,8 @@ class AccountingExportService
       end
     elsif invoice.main_item.object_type == 'WalletTransaction'
       rows << "#{wallet_row(invoice)}\n"
+    elsif invoice.main_item.object_type == 'StatisticProfilePrepaidPack'
+      rows << "#{pack_row(invoice)}\n"
     elsif invoice.main_item.object_type == 'Error'
       items = invoice.invoice_items.reject { |ii| ii.object_type == 'Subscription' }
       items.each do |item|
@@ -126,6 +128,16 @@ class AccountingExportService
       invoice,
       account(invoice, :wallet),
       account(invoice, :wallet, type: :label),
+      invoice.invoice_items.first.net_amount / 100.00,
+      line_label: label(invoice)
+    )
+  end
+
+  def pack_row(invoice)
+    row(
+      invoice,
+      account(invoice, :pack),
+      account(invoice, :pack, type: :label),
       invoice.invoice_items.first.net_amount / 100.00,
       line_label: label(invoice)
     )
@@ -215,6 +227,12 @@ class AccountingExportService
         Setting.find_by(name: "accounting_wallet_#{type}")&.value
       else
         puts "WARN: Invoice #{invoice.id} is not a wallet credit"
+      end
+    when :pack
+      if invoice.main_item.object_type == 'StatisticProfilePrepaidPack'
+        Setting.find_by(name: "accounting_Pack_#{type}")&.value
+      else
+        puts "WARN: Invoice #{invoice.id} has no prepaid-pack"
       end
     when :error
       Setting.find_by(name: "accounting_Error_#{type}")&.value

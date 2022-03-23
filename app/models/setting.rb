@@ -128,7 +128,9 @@ class Setting < ApplicationRecord
                              pack_only_for_subscription
                              overlapping_categories
                              extended_prices_in_same_day
-                             public_registrations] }
+                             public_registrations
+                             accounting_Pack_code
+                             accounting_Pack_label] }
   # WARNING: when adding a new key, you may also want to add it in:
   # - config/locales/en.yml#settings
   # - app/frontend/src/javascript/models/setting.ts#SettingName

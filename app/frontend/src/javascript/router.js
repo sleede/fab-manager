@@ -868,7 +868,8 @@ angular.module('application.router', ['ui.router'])
                      "'accounting_Machine_code', 'accounting_Machine_label', 'accounting_Training_code', 'accounting_Training_label', " +
                      "'accounting_Event_code', 'accounting_Event_label', 'accounting_Space_code', 'accounting_Space_label', " +
                      "'payment_gateway', 'accounting_Error_code', 'accounting_Error_label', 'payment_schedule_prefix', " +
-                     "'feature_tour_display', 'online_payment_module', 'stripe_public_key', 'stripe_currency', 'invoice_prefix']"
+                     "'feature_tour_display', 'online_payment_module', 'stripe_public_key', 'stripe_currency', 'invoice_prefix', " +
+                     "'accounting_Pack_code', 'accounting_Pack_label']"
             }).$promise;
           }],
           stripeSecretKey: ['Setting', function (Setting) { return Setting.isPresent({ name: 'stripe_secret_key' }).$promise; }],

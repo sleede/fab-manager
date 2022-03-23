@@ -2,6 +2,7 @@
 
 - Support for Google Analytics V4
 - OAuth2 scopes are now configurable from the interface
+- Prepaid-packs purchases are exported to the accounting CSV file
 - Updated environment documentation
 - Updated react-i18next to 11.15.6
 - Updated i18next to 21.6.13

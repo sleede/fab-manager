@@ -108,6 +108,16 @@
     </div>
     <div class="row">
       <div class="col-md-6">
+        <label for="packCode" translate>{{ 'app.admin.invoices.accounting_Pack_code' }}</label>
+        <input type="text" id="packCode" ng-model="settings.packCode.value" class="form-control" placeholder="{{ 'app.admin.invoices.general_pack_code' | translate }}"/>
+      </div>
+      <div class="col-md-6">
+        <label for="packLabel" translate>{{ 'app.admin.invoices.accounting_Pack_label' }}</label>
+        <input type="text" id="packLabel" ng-model="settings.packLabel.value" class="form-control" placeholder="{{ 'app.admin.invoices.general_pack_label' | translate }}"/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
         <label for="spaceCode" translate>{{ 'app.admin.invoices.accounting_Error_code' }}</label>
         <input type="text" id="errorCode" ng-model="settings.errorCode.value" class="form-control" placeholder="{{ 'app.admin.invoices.general_error_code' | translate }}" />
       </div>
