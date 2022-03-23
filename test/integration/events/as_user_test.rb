@@ -19,13 +19,8 @@ class Events::AsUserTest < ActionDispatch::IntegrationTest
     wallet_transactions_count = WalletTransaction.count
 
     # Enable the VAT at 19.6%
-    vat_active = Setting.get('invoice_VAT-active')
-    vat_active.value = 'true'
-    vat_active.save!
-
-    vat_rate = Setting.get('invoice_VAT-rate')
-    vat_rate.value = '19.6'
-    vat_rate.save!
+    Setting.set('invoice_VAT-active', true)
+    Setting.set('invoice_VAT-rate', '19.6')
 
     # Reserve the 'radio' event
     VCR.use_cassette('reserve_event_with_many_prices_and_payment_means') do
