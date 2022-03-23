@@ -34,8 +34,6 @@
 - Fix a security issue: updated follow-redirects to 1.18.8 to fix [CVE-2022-0536](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0536)
 - [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2021,07]`
 - [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/cve-2021-44228.sh | bash`
-- [TODO DEPLOY] migrate your Google Analytics property to GA4, see [this guide](https://support.google.com/analytics/answer/9744165)
-- [TODO DEPLOY] update your tracking ID in Customization > Privacy > Statistics > Google Analytics
 - [TODO DEPLOY] update your oAuth2 provider configuration with the scopes previously defined in the OAUTH2_SCOPE environment variable
 
 ## v5.3.5 2022 March 02
