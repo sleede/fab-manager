@@ -14,6 +14,7 @@
 - Removed dependency to auto-ngtemplate-loader
 - Removed support for Universal Analytics
 - Updated deprecated division operators in sass
+- Fix a bug: prepaid-packs purchases are reported as subscriptions in the statistics
 - Fix a bug: error Couldn't find the binary git during assets compilation
 - Fix a bug: a sentence was not linked to a translation key
 - Fix a bug: the version check may be scheduled at an invalid time
@@ -30,6 +31,7 @@
 - Fix a security issue: updated puma to 4.3.11 to fix [CVE-2022-23634](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23634)
 - Fix a security issue: updated i18next-http-backend to 1.3.2 to fix [CVE-2022-0235](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0235)
 - Fix a security issue: updated follow-redirects to 1.18.8 to fix [CVE-2022-0536](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0536)
+- [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2021,07]`
 - [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/cve-2021-44228.sh | bash`
 - [TODO DEPLOY] migrate your Google Analytics property to GA4, see [this guide](https://support.google.com/analytics/answer/9744165)
 - [TODO DEPLOY] update your tracking ID in Customization > Privacy > Statistics > Google Analytics

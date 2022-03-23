@@ -129,10 +129,13 @@ class StatisticService
     InvoiceItem.where('invoice_items.created_at >= :start_date AND invoice_items.created_at <= :end_date', options)
                .eager_load(invoice: [:coupon], subscription: [:plan, statistic_profile: [:group]]).each do |i|
       next if i.invoice.is_a?(Avoir)
+      next unless i.invoice_item_type == Subscription.name
 
-      sub = i.subscription
-
-      next unless sub
+      sub = if i.object_type == Subscription.name
+              i.object
+            else
+              i.object.subscription
+            end
 
       ca = i.amount.to_i
       cs = CouponService.new

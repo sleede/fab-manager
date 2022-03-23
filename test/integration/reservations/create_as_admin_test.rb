@@ -499,7 +499,7 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
     # invoice_items
     invoice_items = InvoiceItem.last(2)
 
-    assert(invoice_items.any? { |ii| ii.amount == plan.amount && !ii.subscription.nil? })
+    assert(invoice_items.any? { |ii| ii.amount == plan.amount && ii.object_type == Subscription.name })
     assert(invoice_items.any? { |ii| ii.amount.zero? })
 
     # invoice assertions
