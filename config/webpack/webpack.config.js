@@ -2,8 +2,6 @@ const { webpackConfig, merge } = require('shakapacker');
 const webpack = require('webpack');
 const path = require('path');
 
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-
 const htmlErb = require('./modules/html_erb');
 const jsErb = require('./modules/js_erb');
 const sass = require('./modules/sass');
@@ -33,7 +31,7 @@ const customConfig = {
       Application: [path.resolve(path.join(__dirname, '../../app/frontend/src/javascript/app.js')), 'Application'],
       process: 'process/browser'
     }),
-    isDevelopment && new ReactRefreshWebpackPlugin()
+    isDevelopment && new (require('@pmmmwh/react-refresh-webpack-plugin'))()
   ].filter(Boolean),
   module: {
     rules: [
