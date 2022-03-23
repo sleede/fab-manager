@@ -673,7 +673,7 @@ fr:
         general_space_code: "Code comptable pour tous les espaces"
         accounting_Space_label: "Libellé espaces"
         general_space_label: "Libellé du compte pour tous les espaces"
-        accounting_Pack_code: "Prepaid-pack code"
+        accounting_Pack_code: "Code pack prépayé"
         general_pack_code: "Accounting code for prepaid-packs"
         accounting_Pack_label: "Prepaid-pack label"
         general_pack_label: "Account label for prepaid-packs"
