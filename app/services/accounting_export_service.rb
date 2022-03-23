@@ -207,35 +207,35 @@ class AccountingExportService
   def account(invoice, account, type: :code, means: :other)
     case account
     when :projets
-      Setting.find_by(name: "accounting_#{means}_client_#{type}")&.value
+      Setting.get("accounting_#{means}_client_#{type}")
     when :vat
-      Setting.find_by(name: "accounting_VAT_#{type}")&.value
+      Setting.get("accounting_VAT_#{type}")
     when :subscription
       if invoice.subscription_invoice?
-        Setting.find_by(name: "accounting_subscription_#{type}")&.value
+        Setting.get("accounting_subscription_#{type}")
       else
         puts "WARN: Invoice #{invoice.id} has no subscription"
       end
     when :reservation
       if invoice.main_item.object_type == 'Reservation'
-        Setting.find_by(name: "accounting_#{invoice.main_item.object.reservable_type}_#{type}")&.value
+        Setting.get("accounting_#{invoice.main_item.object.reservable_type}_#{type}")
       else
         puts "WARN: Invoice #{invoice.id} has no reservation"
       end
     when :wallet
       if invoice.main_item.object_type == 'WalletTransaction'
-        Setting.find_by(name: "accounting_wallet_#{type}")&.value
+        Setting.get("accounting_wallet_#{type}")
       else
         puts "WARN: Invoice #{invoice.id} is not a wallet credit"
       end
     when :pack
       if invoice.main_item.object_type == 'StatisticProfilePrepaidPack'
-        Setting.find_by(name: "accounting_Pack_#{type}")&.value
+        Setting.get("accounting_Pack_#{type}")
       else
         puts "WARN: Invoice #{invoice.id} has no prepaid-pack"
       end
     when :error
-      Setting.find_by(name: "accounting_Error_#{type}")&.value
+      Setting.get("accounting_Error_#{type}")
     else
       puts "Unsupported account #{account}"
     end || ''

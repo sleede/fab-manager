@@ -28,7 +28,7 @@ class PDF::PaymentSchedule < Prawn::Document
     )
 
     # logo
-    img_b64 = Setting.find_by(name: 'invoice_logo')
+    img_b64 = Setting.get('invoice_logo')
     begin
       image StringIO.new(Base64.decode64(img_b64.value)), fit: [415, 40]
     rescue StandardError => e

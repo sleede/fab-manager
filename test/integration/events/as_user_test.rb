@@ -19,11 +19,11 @@ class Events::AsUserTest < ActionDispatch::IntegrationTest
     wallet_transactions_count = WalletTransaction.count
 
     # Enable the VAT at 19.6%
-    vat_active = Setting.find_by(name: 'invoice_VAT-active')
+    vat_active = Setting.get('invoice_VAT-active')
     vat_active.value = 'true'
     vat_active.save!
 
-    vat_rate = Setting.find_by(name: 'invoice_VAT-rate')
+    vat_rate = Setting.get('invoice_VAT-rate')
     vat_rate.value = '19.6'
     vat_rate.save!
 
