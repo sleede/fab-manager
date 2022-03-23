@@ -14,6 +14,7 @@
 - Removed dependency to auto-ngtemplate-loader
 - Removed support for Universal Analytics
 - Updated deprecated division operators in sass
+- Fix a bug: error Couldn't find the binary git during assets compilation
 - Fix a bug: a sentence was not linked to a translation key
 - Fix a bug: the version check may be scheduled at an invalid time
 - Fix a bug: the moment-timezone relied on an outdated version of moment with a case-sensitive locale file
