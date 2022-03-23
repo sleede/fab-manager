@@ -10,7 +10,7 @@
 - Updated @uirouter/angularjs to 1.0.30
 - Updated bootstrap-sass to 3.4.3
 - Removed unmaintained gem sidekiq-cron and replaced it with sidekiq-scheduler
-- Removed unmaintained @rails/webpacker v5 and replaced it with shakapacker v6
+- Removed unmaintained @rails/webpacker v5 and replaced it with shakapacker v6.2.0
 - Removed dependency to auto-ngtemplate-loader
 - Removed support for Universal Analytics
 - Updated deprecated division operators in sass

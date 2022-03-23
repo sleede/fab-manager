@@ -357,7 +357,7 @@ GEM
       activesupport (>= 4)
     semantic_range (3.0.0)
     sha3 (1.0.1)
-    shakapacker (6.1.1)
+    shakapacker (6.2.0)
       activesupport (>= 5.2)
       rack-proxy (>= 0.6.1)
       railties (>= 5.2)
@@ -506,7 +506,7 @@ DEPENDENCIES
   sassc
   seed_dump
   sha3
-  shakapacker (= 6.1.1)
+  shakapacker (= 6.2.0)
   sidekiq (>= 6.0.7)
   sidekiq-scheduler
   sidekiq-unique-jobs (~> 7.1.15)

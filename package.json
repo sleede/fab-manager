@@ -131,7 +131,7 @@
     "resolve-url-loader": "^4.0.0",
     "sass": "^1.49.9",
     "sass-loader": "^12.6.0",
-    "shakapacker": "6.1.1",
+    "shakapacker": "6.2.0",
     "style-loader": "^3.3.1",
     "summernote": "0.8.18",
     "terser-webpack-plugin": "5",
