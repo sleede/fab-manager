@@ -126,8 +126,10 @@ class StatisticService
 
   def subscriptions_list(options = default_options)
     result = []
-    InvoiceItem.where("object_type = #{Subscription.name} invoice_items.created_at >= :start_date AND invoice_items.created_at <= :end_date", options)
-               .eager_load(invoice: [:coupon], object: [:plan, statistic_profile: [:group]]).each do |i|
+    join_clause = "INNER JOIN suscriptions ON invoice_items.object_id = suscriptions.id AND invoice_items.object_type = '#{Subscription.name}'"
+    InvoiceItem.joins(join_clause)
+               .where("object_type = #{Subscription.name} invoice_items.created_at >= :start_date AND invoice_items.created_at <= :end_date", options)
+               .eager_load(invoice: [:coupon]).each do |i|
       next if i.invoice.is_a?(Avoir)
 
       sub = i.object
