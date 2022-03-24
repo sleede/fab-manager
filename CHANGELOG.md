@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v5.3.6 2022 March 24
+
 - Support for Google Analytics V4
 - OAuth2 scopes are now configurable from the interface
 - Prepaid-packs purchases are exported to the accounting CSV file
