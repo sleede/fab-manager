@@ -1,11 +1,11 @@
 'use strict';
 
-Application.Controllers.controller('HeaderController', ['$scope', '$rootScope', '$state', 'settingsPromise',
-  function ($scope, $rootScope, $state, settingsPromise) {
+Application.Controllers.controller('HeaderController', ['$scope', '$transitions', '$state', 'settingsPromise',
+  function ($scope, $transitions, $state, settingsPromise) {
     $scope.aboutPage = ($state.current.name === 'app.public.about');
 
-    $rootScope.$on('$stateChangeStart', function (event, toState) {
-      $scope.aboutPage = (toState.name === 'app.public.about');
+    $transitions.onStart({}, function (trans) {
+      $scope.aboutPage = (trans.$to().name === 'app.public.about');
     });
 
     /**

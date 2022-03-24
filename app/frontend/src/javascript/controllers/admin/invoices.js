@@ -195,6 +195,14 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         name: 'accounting_Space_label',
         value: settings.accounting_Space_label
       },
+      packCode: {
+        name: 'accounting_Pack_code',
+        value: settings.accounting_Pack_code
+      },
+      packLabel: {
+        name: 'accounting_Pack_label',
+        value: settings.accounting_Pack_label
+      },
       errorCode: {
         name: 'accounting_Error_code',
         value: settings.accounting_Error_code

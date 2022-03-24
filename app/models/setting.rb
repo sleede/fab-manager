@@ -128,7 +128,9 @@ class Setting < ApplicationRecord
                              pack_only_for_subscription
                              overlapping_categories
                              extended_prices_in_same_day
-                             public_registrations] }
+                             public_registrations
+                             accounting_Pack_code
+                             accounting_Pack_label] }
   # WARNING: when adding a new key, you may also want to add it in:
   # - config/locales/en.yml#settings
   # - app/frontend/src/javascript/models/setting.ts#SettingName
@@ -194,5 +196,12 @@ class Setting < ApplicationRecord
   def self.set(name, value, user = User.admins.first)
     setting = find_or_initialize_by(name: name)
     setting.save && setting.history_values.create(invoicing_profile: user.invoicing_profile, value: value.to_s)
+  end
+
+  ##
+  # Check if the given setting was set
+  ##
+  def self.set?(name)
+    find_by(name: name)&.value.nil? ? false : true
   end
 end

@@ -46,7 +46,7 @@ class Members::MembersService
         @member.update_statistic_profile
         @member.generate_subscription_invoice(current_user.id)
         @member.send_confirmation_instructions
-        UsersMailer.delay.notify_user_account_created(@member, @member.password)
+        UsersMailer.notify_user_account_created(@member, @member.password).deliver_later
         true
       else
         false

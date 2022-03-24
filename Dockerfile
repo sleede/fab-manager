@@ -9,6 +9,8 @@ RUN apk update && apk upgrade && \
       curl \
       nodejs \
       yarn \
+      git \
+      openssh \
       imagemagick \
       supervisor \
       tzdata \
@@ -26,7 +28,6 @@ RUN apk update && apk upgrade && \
       alpine-sdk \
       build-base \
       linux-headers \
-      git \
       patch
 
 RUN gem install bundler

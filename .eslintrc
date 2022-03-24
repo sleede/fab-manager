@@ -13,7 +13,9 @@
     "angular": true,
     "Fablab": true,
     "moment": true,
-    "_": true
+    "_": true,
+    "Humanize": true,
+    "GTM": true
   },
   "plugins": ["lint-erb"],
   "overrides": [

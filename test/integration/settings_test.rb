@@ -22,7 +22,7 @@ class SettingsTest < ActionDispatch::IntegrationTest
     assert_equal 'Test Fablab', resp[:setting][:value]
 
     # Check record
-    setting = Setting.find_by_name(resp[:setting][:name])
+    setting = Setting.find_by(name: resp[:setting][:name])
     assert_not_nil setting, 'setting was not found in database'
     assert_equal 2, setting.history_values.count, 'all historical values were not found'
     assert_includes setting.history_values.map(&:value), 'Fab Lab de La Casemate', 'previous parameter was not saved'

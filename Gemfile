@@ -7,8 +7,8 @@ gem 'rails', '~> 5.2.4'
 # Used by rails 5.2 to reduce the app boot time by over 50%
 gem 'bootsnap'
 # Use Puma as web server
-gem 'puma', '4.3.9'
-gem 'webpacker', '~> 5.x'
+gem 'puma', '4.3.11'
+gem 'shakapacker', '6.2.0'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
@@ -90,8 +90,8 @@ gem 'aasm'
 # Background job processing
 gem 'sidekiq', '>= 6.0.7'
 # Recurring jobs for Sidekiq
-gem 'sidekiq-cron'
-gem 'sidekiq-unique-jobs', '~> 6.0.22'
+gem 'sidekiq-scheduler'
+gem 'sidekiq-unique-jobs', '~> 7.1.15'
 
 gem 'stripe', '5.29.0'
 

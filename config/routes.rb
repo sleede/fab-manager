@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'sidekiq_unique_jobs/web'
-require 'sidekiq/cron/web'
+require 'sidekiq-scheduler/web'
 
 Rails.application.routes.draw do
   if AuthProvider.active.providable_type == DatabaseProvider.name

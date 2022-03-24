@@ -13,28 +13,20 @@ Application.Controllers.controller('CookiesController', ['$scope', '$cookies', '
     // link pointed by "learn more"
     $scope.learnMoreUrl = 'https://www.cookiesandyou.com/';
 
-    // current user wallet
+    // add a cookie to the browser, saving the user choice to refuse cookies
     $scope.declineCookies = function () {
       const expires = moment().add(13, 'months').toDate();
       $cookies.put('fab-manager-cookies-consent', 'decline', { expires });
       readCookie();
     };
 
-    // current wallet transactions
+    // add a cookie to the browser, saving the user choice to accept cookies.
+    // Then enable the analytics
     $scope.acceptCookies = function () {
       const expires = moment().add(13, 'months').toDate();
       $cookies.put('fab-manager-cookies-consent', 'accept', { expires });
       readCookie();
-      // enable tracking using code provided by google analytics
-      /* eslint-disable */
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-      ga('create', Fablab.trackingId, 'auto');
-      ga('send', 'pageview');
-      /* eslint-enable */
+      GTM.enableAnalytics(Fablab.trackingId);
     };
 
     /* PRIVATE SCOPE */
@@ -44,7 +36,7 @@ Application.Controllers.controller('CookiesController', ['$scope', '$cookies', '
      */
     const initialize = function () {
       readCookie();
-      // if the privacy policy was defined, redirect the user to it
+      // if the privacy policy was defined, redirect the user to it when clicking on "read more"
       Setting.get({ name: 'privacy_body' }, data => {
         if (data.setting.value) {
           $scope.learnMoreUrl = '#!/privacy-policy';

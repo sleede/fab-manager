@@ -114,15 +114,15 @@ Application.Controllers.controller('NewTrainingController', ['$scope', '$state',
 /**
  * Controller used in the training edition page (admin)
  */
-Application.Controllers.controller('EditTrainingController', ['$scope', '$state', '$stateParams', 'trainingPromise', 'machinesPromise', 'CSRF',
-  function ($scope, $state, $stateParams, trainingPromise, machinesPromise, CSRF) {
+Application.Controllers.controller('EditTrainingController', ['$scope', '$state', '$transition$', 'trainingPromise', 'machinesPromise', 'CSRF',
+  function ($scope, $state, $transition$, trainingPromise, machinesPromise, CSRF) {
   /* PUBLIC SCOPE */
 
     // Form action on the following URL
     $scope.method = 'patch';
 
     // API URL where the form will be posted
-    $scope.actionUrl = `/api/trainings/${$stateParams.id}`;
+    $scope.actionUrl = `/api/trainings/${$transition$.params().id}`;
 
     // Details of the training to edit (id in URL)
     $scope.training = trainingPromise;

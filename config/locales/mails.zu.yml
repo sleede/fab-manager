@@ -313,13 +313,13 @@ zu:
       body:
         remember: "crwdns21134:0%{REFERENCE}crwdnd21134:0%{AMOUNT}crwdnd21134:0%{DATE}crwdne21134:0"
         error: "crwdns21136:0crwdne21136:0"
-        action: "crwdns21138:0crwdne21138:0"
+        action: "crwdns22400:0crwdne22400:0"
     notify_member_payment_schedule_failed:
       subject: "crwdns21140:0[URGENT]crwdne21140:0"
       body:
         remember: "crwdns21142:0%{REFERENCE}crwdnd21142:0%{AMOUNT}crwdnd21142:0%{DATE}crwdne21142:0"
         error: "crwdns21144:0crwdne21144:0"
-        action_html: "crwdns21146:0%{DASHBOARD}crwdne21146:0"
+        action_html: "crwdns22402:0%{DASHBOARD}crwdne22402:0"
         your_dashboard: "crwdns21148:0crwdne21148:0"
     notify_admin_payment_schedule_gateway_canceled:
       subject: "crwdns22389:0[URGENT]crwdne22389:0"

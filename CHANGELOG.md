@@ -1,5 +1,43 @@
 # Changelog Fab-manager
 
+## v5.3.6 2022 March 24
+
+- Support for Google Analytics V4
+- OAuth2 scopes are now configurable from the interface
+- Prepaid-packs purchases are exported to the accounting CSV file
+- Updated environment documentation
+- Updated react-i18next to 11.15.6
+- Updated i18next to 21.6.13
+- Updated i18next-icu to 2.0.3
+- Updated sidekiq-unique-jobs to 7.1.15
+- Updated @uirouter/angularjs to 1.0.30
+- Updated bootstrap-sass to 3.4.3
+- Removed unmaintained gem sidekiq-cron and replaced it with sidekiq-scheduler
+- Removed unmaintained @rails/webpacker v5 and replaced it with shakapacker v6.2.0
+- Removed dependency to auto-ngtemplate-loader
+- Removed support for Universal Analytics
+- Updated deprecated division operators in sass
+- Fix a bug: prepaid-packs purchases are reported as subscriptions in the statistics
+- Fix a bug: error Couldn't find the binary git during assets compilation
+- Fix a bug: a sentence was not linked to a translation key
+- Fix a bug: the version check may be scheduled at an invalid time
+- Fix a bug: the moment-timezone relied on an outdated version of moment with a case-sensitive locale file
+- Fix a bug: unable to delete an administrator who had closed an accounting period
+- Fix a bug: captcha keys are not shown in the admin panel, once configured
+- Fix a bug: help message in upgrade script has a bogus format
+- Fix a security issue: removed message format in elasticsearch's log4j to fix [CVE-2021-44228](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-44228)
+- Fix a security issue: updated image_processing to 1.12.2 to fix [CVE-2022-24720](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24720)
+- Fix a security issue: updated url-parse to 1.5.10 to fix [CVE-2022-0686](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0686), [CVE-2022-0691](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0691), [CVE-2022-0639](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0639) and [CVE-2022-0512](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0512)
+- Fix a security issue: updated rails to 5.2.6.3 to fix [CVE-2022-21831](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-21831), [CVE-2022-23633](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23633)
+- Fix a security issue: updated sidekiq to 6.4.1 to fix [CVE-2022-23837](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23837)
+- Fix a security issue: updated nokogiri to 1.13.3 to fix [CVE-2021-30560](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30560) and [CVE-2022-23308](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23308)
+- Fix a security issue: updated puma to 4.3.11 to fix [CVE-2022-23634](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23634)
+- Fix a security issue: updated i18next-http-backend to 1.3.2 to fix [CVE-2022-0235](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0235)
+- Fix a security issue: updated follow-redirects to 1.18.8 to fix [CVE-2022-0536](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0536)
+- [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2021,07]`
+- [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/cve-2021-44228.sh | bash`
+- [TODO DEPLOY] update your oAuth2 provider configuration with the scopes previously defined in the OAUTH2_SCOPE environment variable
+
 ## v5.3.5 2022 March 02
 
 - Added [an option](doc/environment.md#OPENLAB_SSL_VERIFY) to allow set verify ssl option for OpenLab

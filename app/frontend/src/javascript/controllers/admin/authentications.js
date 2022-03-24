@@ -318,8 +318,8 @@ Application.Controllers.controller('NewAuthenticationController', ['$scope', '$s
 /**
  * Page to edit an already added authentication provider
  */
-Application.Controllers.controller('EditAuthenticationController', ['$scope', '$state', '$stateParams', '$rootScope', '$uibModal', 'dialogs', 'growl', 'providerPromise', 'mappingFieldsPromise', 'AuthProvider', '_t',
-  function ($scope, $state, $stateParams, $rootScope, $uibModal, dialogs, growl, providerPromise, mappingFieldsPromise, AuthProvider, _t) {
+Application.Controllers.controller('EditAuthenticationController', ['$scope', '$state', '$rootScope', '$uibModal', 'dialogs', 'growl', 'providerPromise', 'mappingFieldsPromise', 'AuthProvider', '_t',
+  function ($scope, $state, $rootScope, $uibModal, dialogs, growl, providerPromise, mappingFieldsPromise, AuthProvider, _t) {
   // parameters of the currently edited authentication provider
     $scope.provider = providerPromise;
 

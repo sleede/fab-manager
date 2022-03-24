@@ -25,9 +25,9 @@ class PDF::Invoice < Prawn::Document
     )
 
     # logo
-    img_b64 = Setting.find_by(name: 'invoice_logo')
+    img_b64 = Setting.get('invoice_logo')
     begin
-      image StringIO.new(Base64.decode64(img_b64.value)), fit: [415, 40]
+      image StringIO.new(Base64.decode64(img_b64)), fit: [415, 40]
     rescue StandardError => e
       puts "Unable to decode invoice logo from base64: #{e}"
     end
@@ -97,9 +97,9 @@ class PDF::Invoice < Prawn::Document
                           DATE: I18n.l(invoice.main_item.object.slots[0].start_at.to_date),
                           TIME: I18n.l(invoice.main_item.object.slots[0].start_at, format: :hour_minute))
           invoice.invoice_items.each do |item|
-            next unless item.subscription
+            next unless item.object_type == Subscription.name
 
-            subscription = item.subscription
+            subscription = item.object
             cancellation = invoice.is_a?(Avoir) ? I18n.t('invoices.cancellation') + ' - ' : ''
             object = "\n- #{object}\n- #{cancellation + subscription_verbose(subscription, name)}"
             break
@@ -135,7 +135,7 @@ class PDF::Invoice < Prawn::Document
         details = invoice.is_a?(Avoir) ? I18n.t('invoices.cancellation') + ' - ' : ''
 
         if item.object_type == Subscription.name
-          subscription = item.subscription
+          subscription = item.object
           if invoice.main_item.object_type == 'OfferDay'
             details += I18n.t('invoices.subscription_extended_for_free_from_START_to_END',
                               START: I18n.l(invoice.main_item.object.start_at.to_date),

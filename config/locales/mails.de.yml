@@ -313,13 +313,13 @@ de:
       body:
         remember: "Gemäß dem Zahlungsplan von %{REFERENCE} wurde für %{DATE} eine Belastung der Karte in Höhe von %{AMOUNT} geplant."
         error: "Leider konnte die Abbuchung über die Karte nicht erfolgreich abgeschlossen werden."
-        action: "Bitte kontaktieren Sie das Mitglied so bald wie möglich und lösen Sie dann das Problem in der Verwaltung der Zahlungsfristen. Nach etwa 24 Stunden wird das Kartenabonnement storniert."
+        action: "Please contact the member as soon as possible, then go to the payment schedule management interface to resolve the problem. After a certain period of time, the card subscription could be cancelled."
     notify_member_payment_schedule_failed:
       subject: "[URGENT] Kartenbelastungsfehler"
       body:
         remember: "Gemäß Ihrem Zahlungsplan von %{REFERENCE} wurde für %{DATE} eine Belastung der Karte in Höhe von %{AMOUNT} geplant."
         error: "Leider konnte die Abbuchung über die Karte nicht erfolgreich abgeschlossen werden."
-        action_html: "Bitte überprüfen Sie %{DASHBOARD} oder kontaktieren Sie einen Manager innerhalb von 24 Stunden. Andernfalls kann Ihr Abonnement unterbrochen werden."
+        action_html: "Please check %{DASHBOARD} or contact a manager quickly, otherwise your subscription may be interrupted."
         your_dashboard: "Ihr Dashboard"
     notify_admin_payment_schedule_gateway_canceled:
       subject: "[URGENT] Zahlungsplan vom Zahlungs-Gateway abgebrochen"

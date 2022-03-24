@@ -1,25 +1,28 @@
 .cookies-consent {
   display: flex;
   position: fixed;
-  bottom: 3rem;
-  left: 3rem;
-  width: 40rem;
+  right: 0;
+  bottom: 0;
+  left: 0;
   background-color: #f5f5f5;
   padding: 3rem;
   flex-direction: column;
   z-index: 100;
-  -webkit-box-shadow: 0 4px 10px 2px rgba(224, 224, 224, 0.43);
-  -moz-box-shadow: 0 4px 10px 2px rgba(224, 224, 224, 0.43);
-  box-shadow: 0 4px 10px 2px rgba(224, 224, 224, 0.43);
+  -webkit-box-shadow: 0 4px 10px 2px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0 4px 10px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 10px 2px rgba(0, 0, 0, 0.25);
 
   .cookies-actions {
+    flex-wrap: wrap;
     display: flex;
-    height: 45px;
-
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1rem;
+    
     button {
-      flex-basis: 50%;
+      @extend .fab-button;
+      flex: 1; 
     }
-
     button.decline {
       background-color: transparent;
       border: 0;
@@ -30,5 +33,11 @@
       border: 0;
       font-size: 17px;
     }
+  }
+
+  @media (min-width: 480px) {
+    bottom: 3rem;
+    left: 3rem;
+    width: 40rem;
   }
 }
