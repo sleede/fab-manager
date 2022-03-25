@@ -49,7 +49,10 @@
   
   // tiptap class for the editor
   .ProseMirror {
+    max-height: 40vh;
     padding: 1.6rem 1.6rem 1.2rem;
+    overflow: auto;
+    resize: vertical;
     &:focus { outline: none; }
     @include editor;
   }
@@ -61,7 +64,7 @@
     color: var(--gray-hard-lightest);
   }
 
-  &-linkMenu {
+  &-subMenu {
     position: absolute;
     top: 4.5rem;
     right: 0;
@@ -83,25 +86,35 @@
     }
     & > div {
       display: flex;
-      align-items: center
+      align-items: center;
+      &:not(:last-of-type) { margin-bottom: 0.8rem; }
     }
-    .url {
+    
+    input[type="text"],
+    select {
+      width: 100%;
+      height: 4rem;
+      padding: 0.4rem 0.8rem;
+      background-color: var(--gray-soft-light);
+      border: 1px solid var(--secondary);
+      border-radius: var(--border-radius);
+      font-size: var(--text-base);
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    input[type="text"] {
+      margin-right: 1.2rem;
+      &::placeholder { color: var(--gray-soft-darkest);}
+    }
+    select {
       margin-bottom: 0.8rem;
-      input {
-        width: 100%;
-        height: 4rem;
-        margin-right: 1.2rem;
-        padding: 0.4rem 0.8rem;
-        background-color: var(--gray-soft-light);
-        border: 1px solid var(--secondary);
-        border-radius: var(--border-radius);
-        font-size: var(--text-base);
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-        &::placeholder { color: var(--gray-soft-darkest);}
-      }
     }
+    button {
+      @include button(3.2rem);
+      margin-left: auto;
+    }
+
     .tab {
       display: flex;
       align-items: center;
@@ -137,11 +150,6 @@
         border-color: var(--information);
       }
     }
-
-    button {
-      @include button(3.2rem);
-      margin-left: auto;
-    }
   }
 
   &-video {
@@ -149,8 +157,14 @@
     height: 0;
     width: 100%;
     max-width: 600px;
-    padding-bottom: calc(100 / 16 * 9);
+    padding-bottom: calc(100% / 16 * 9);
     overflow: hidden;
+
+    iframe {
+      position: absolute;
+      max-width: 100%;
+      inset: 0;
+    }
   }
 
   &-error {

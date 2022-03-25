@@ -20,15 +20,16 @@ interface FabTextEditorProps {
   paragraphTools?: boolean,
   content?: string,
   limit?: number,
+  video?: boolean,
   onChange?: (content: string) => void,
   placeholder?: string,
-  error?: string,
+  error?: string
 }
 
 /**
  * This component is a WYSIWYG text editor
  */
-export const FabTextEditor: React.FC<FabTextEditorProps> = ({ label, paragraphTools, content, limit = 400, onChange, placeholder, error }) => {
+export const FabTextEditor: React.FC<FabTextEditorProps> = ({ label, paragraphTools, content, limit = 400, video, onChange, placeholder, error }) => {
   const { t } = useTranslation('shared');
   const placeholderText = placeholder || t('app.shared.text_editor.placeholder');
   // TODO: Add ctrl+click on link to visit
@@ -69,7 +70,7 @@ export const FabTextEditor: React.FC<FabTextEditorProps> = ({ label, paragraphTo
     <>
       {label && <label onClick={focusEditor} className="fab-textEditor-label">{label}</label>}
       <div className="fab-textEditor">
-        <MenuBar editor={editor} paragraphTools={paragraphTools} />
+        <MenuBar editor={editor} paragraphTools={paragraphTools} video={video} />
         <EditorContent editor={editor} />
         <div className="fab-textEditor-character-count">
           {editor?.storage.characterCount.characters()} / {limit}
@@ -85,12 +86,12 @@ export const FabTextEditor: React.FC<FabTextEditorProps> = ({ label, paragraphTo
   );
 };
 
-const FabTextEditorWrapper: React.FC<FabTextEditorProps> = ({ label, paragraphTools, content, limit, placeholder, error }) => {
+const FabTextEditorWrapper: React.FC<FabTextEditorProps> = ({ label, paragraphTools, content, limit, video, placeholder, error }) => {
   return (
     <Loader>
-      <FabTextEditor label={label} paragraphTools={paragraphTools} content={content} limit={limit} placeholder={placeholder} error={error} />
+      <FabTextEditor label={label} paragraphTools={paragraphTools} content={content} limit={limit} video={video} placeholder={placeholder} error={error} />
     </Loader>
   );
 };
 
-Application.Components.component('fabTextEditor', react2angular(FabTextEditorWrapper, ['label', 'paragraphTools', 'content', 'limit', 'placeholder', 'error']));
+Application.Components.component('fabTextEditor', react2angular(FabTextEditorWrapper, ['label', 'paragraphTools', 'content', 'limit', 'video', 'placeholder', 'error']));
