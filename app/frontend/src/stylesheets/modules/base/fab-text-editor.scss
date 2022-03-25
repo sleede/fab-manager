@@ -155,11 +155,6 @@
         border-color: var(--information);
       }
     }
-
-    button {
-      @include button(3.2rem);
-      margin-left: auto;
-    }
   }
 
   &-video {
