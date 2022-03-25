@@ -6,34 +6,39 @@ import { TextAa, TextBolder, TextItalic, TextUnderline, LinkSimpleHorizontal, Li
 
 interface MenuBarProps {
   paragraphTools?: boolean,
-  extra?: boolean,
+  video?: boolean,
   editor?: Editor,
 }
 
 /**
  * This component is the menu bar for the WYSIWYG text editor
  */
-export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, extra }) => {
+export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, video }) => {
   const { t } = useTranslation('shared');
 
-  const [linkMenu, setLinkMenu] = useState<boolean>(false);
+  const [submenu, setSubmenu] = useState('');
   const resetUrl = { href: '', target: '_blank' };
   const [url, setUrl] = useState(resetUrl);
-  const ref = useOnclickOutside(() => {
-    setLinkMenu(false);
-  });
+  const [videoProvider, setVideoProvider] = useState('youtube');
+  const [videoId, setVideoId] = useState('');
 
-  // Reset state values when the link menu is closed
+  // Reset state values when the submenu is closed
   useEffect(() => {
-    if (!linkMenu) {
+    if (!submenu) {
       setUrl(resetUrl);
+      setVideoProvider('youtube');
     }
-  }, [linkMenu]);
+  }, [submenu]);
+
+  // Close the submenu frame on click outside
+  const ref = useOnclickOutside(() => {
+    setSubmenu('');
+  });
 
   // Toggle link menu's visibility
   const toggleLinkMenu = () => {
-    if (!linkMenu) {
-      setLinkMenu(true);
+    if (submenu !== 'link') {
+      setSubmenu('link');
       const previousUrl = {
         href: editor.getAttributes('link').href,
         target: editor.getAttributes('link').target || ''
@@ -43,8 +48,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, extra 
         setUrl(previousUrl);
       }
     } else {
-      setLinkMenu(false);
-      setUrl(resetUrl);
+      setSubmenu('');
     }
   };
 
@@ -56,7 +60,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, extra 
   };
 
   // Update url
-  const handleChange = (evt) => {
+  const linkUrlChange = (evt) => {
     setUrl({ ...url, href: evt.target.value });
   };
   // Support keyboard "Enter" key event to validate
@@ -74,19 +78,52 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, extra 
     }
     editor.chain().focus().extendMarkRange('link').setLink({ href: url.href, target: url.target }).run();
     if (closeLinkMenu) {
-      setLinkMenu(false);
+      setSubmenu('');
     }
   }, [editor, url]);
 
   // Remove the link tag from the selected text
   const unsetLink = () => {
     editor.chain().focus().extendMarkRange('link').unsetLink().run();
-    setLinkMenu(false);
+    setSubmenu('');
   };
 
-  // Add iFrame
+  // Toggle video menu's visibility
+  const toggleVideoMenu = () => {
+    if (submenu !== 'video') {
+      setSubmenu('video');
+    } else {
+      setSubmenu('');
+    }
+  };
+
+  // Store selected video provider in state
+  const handleSelect = (evt) => {
+    setVideoProvider(evt.target.value);
+  };
+  // Store video id in state
+  const VideoUrlChange = (evt) => {
+    const id = evt.target.value.match(/([^/]+$)/g);
+    setVideoId(id);
+  };
+  // Insert iframe containing the video player
   const addIframe = () => {
-    editor.chain().focus().setIframe({ src: 'https://www.youtube.com/embed/XIMLoLxmTDw' }).run();
+    let videoUrl = '';
+    switch (videoProvider) {
+      case 'youtube':
+        videoUrl = `https://www.youtube.com/embed/${videoId}`;
+        break;
+      case 'vimeo':
+        videoUrl = `https://player.vimeo.com/video/${videoId}`;
+        break;
+      case 'dailymotion':
+        videoUrl = `https://www.dailymotion.com/embed/video/${videoId}`;
+        break;
+      default:
+        break;
+    }
+    editor.chain().focus().setIframe({ src: videoUrl }).run();
+    setSubmenu('');
   };
 
   if (!editor) {
@@ -150,34 +187,53 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, extra 
         >
           <LinkSimpleHorizontal size={24} />
         </button>
-        { extra &&
+        { video &&
         (<>
           <button
             type='button'
-            onClick={() => addIframe()}
+            onClick={toggleVideoMenu}
           >
             <VideoCamera size={24} />
           </button>
         </>)
         }
       </div>
-      <div ref={ref} className={`fab-textEditor-linkMenu ${linkMenu ? 'is-active' : ''}`}>
-        <div className="url">
-          <input value={url.href} onChange={handleChange} onKeyDown={handleEnter} type="text" placeholder={t('app.shared.text_editor.link_placeholder')} />
-          <button type='button' onClick={unsetLink}>
-            <Trash size={24} />
-          </button>
-        </div>
-        <div>
-          <label className='tab'>
-            <p>{t('app.shared.text_editor.new_tab')}</p>
-            <input type="checkbox" onChange={toggleTarget} checked={url.target === '_blank'} />
-            <span className='switch'></span>
-          </label>
-          <button type='button' onClick={() => setLink(true)}>
-            <CheckCircle size={24} />
-          </button>
-        </div>
+      <div ref={ref} className={`fab-textEditor-subMenu ${submenu ? 'is-active' : ''}`}>
+        { submenu === 'link' &&
+          (<>
+            <div>
+              <input value={url.href} onChange={linkUrlChange} onKeyDown={handleEnter} type="text" placeholder={t('app.shared.text_editor.link_placeholder')} />
+              <button type='button' onClick={unsetLink}>
+                <Trash size={24} />
+              </button>
+            </div>
+            <div>
+              <label className='tab'>
+                <p>{t('app.shared.text_editor.new_tab')}</p>
+                <input type="checkbox" onChange={toggleTarget} checked={url.target === '_blank'} />
+                <span className='switch'></span>
+              </label>
+              <button type='button' onClick={() => setLink(true)}>
+                <CheckCircle size={24} />
+              </button>
+            </div>
+          </>)
+        }
+        { submenu === 'video' &&
+          (<>
+            <select name="provider" onChange={handleSelect}>
+              <option value="youtube">YouTube</option>
+              <option value="vimeo">Vimeo</option>
+              <option value="dailymotion">Dailymotion</option>
+            </select>
+            <div>
+              <input type="text" onChange={VideoUrlChange} placeholder={t('app.shared.text_editor.link_placeholder')} />
+              <button type='button' onClick={() => addIframe()}>
+                <CheckCircle size={24} />
+              </button>
+            </div>
+          </>)
+        }
       </div>
     </>
   );
