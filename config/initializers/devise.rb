@@ -231,7 +231,9 @@ Devise.setup do |config|
   require_relative '../../lib/omni_auth/omni_auth'
   active_provider = AuthProvider.active
   if active_provider.providable_type == OAuth2Provider.name
-    config.omniauth OmniAuth::Strategies::SsoOauth2Provider.name.to_sym, active_provider.providable.client_id, active_provider.providable.client_secret
+    config.omniauth OmniAuth::Strategies::SsoOauth2Provider.name.to_sym,
+                    active_provider.providable.client_id,
+                    active_provider.providable.client_secret
   end
 
   # ==> Warden configuration

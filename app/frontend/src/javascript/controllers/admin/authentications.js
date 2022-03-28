@@ -34,7 +34,7 @@ const findIdxById = function (elements, id) {
 /**
  * For OAuth2 authentications, mapping the user's ID is mandatory. This function will check that this mapping
  * is effective and will return false otherwise
- * @param mappings {Array<Object>} expected: $scope.provider.providable_attributes.o_auth2_mappings_attributes
+ * @param mappings {Array<Object>} expected: $scope.provider.auth_provider_mappings_attributes
  * @returns {Boolean} true if the mapping is declared
  */
 const check_oauth2_id_is_mapped = function (mappings) {
@@ -246,8 +246,8 @@ Application.Controllers.controller('NewAuthenticationController', ['$scope', '$s
     $scope.updateProvidable = function () {
     // === OAuth2Provider ===
       if ($scope.provider.providable_type === 'OAuth2Provider') {
-        if (typeof $scope.provider.providable_attributes.o_auth2_mappings_attributes === 'undefined') {
-          return $scope.provider.providable_attributes.o_auth2_mappings_attributes = [];
+        if (typeof $scope.provider.auth_provider_mappings_attributes === 'undefined') {
+          return $scope.provider.auth_provider_mappings_attributes = [];
         }
       }
     };
@@ -274,7 +274,7 @@ Application.Controllers.controller('NewAuthenticationController', ['$scope', '$s
         // === OAuth2Provider ===
       } else if ($scope.provider.providable_type === 'OAuth2Provider') {
       // check the ID mapping
-        if (!check_oauth2_id_is_mapped($scope.provider.providable_attributes.o_auth2_mappings_attributes)) {
+        if (!check_oauth2_id_is_mapped($scope.provider.auth_provider_mappings_attributes)) {
           growl.error(_t('app.admin.authentication_new.it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider'));
           return false;
         }
@@ -330,7 +330,7 @@ Application.Controllers.controller('EditAuthenticationController', ['$scope', '$
      */
     $scope.updateProvider = function () {
     // check the ID mapping
-      if (!check_oauth2_id_is_mapped($scope.provider.providable_attributes.o_auth2_mappings_attributes)) {
+      if (!check_oauth2_id_is_mapped($scope.provider.auth_provider_mappings_attributes)) {
         growl.error(_t('app.admin.authentication_edit.it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider'));
         return false;
       }

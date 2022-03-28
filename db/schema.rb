@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_22_135836) do
+ActiveRecord::Schema.define(version: 2022_03_28_145017) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -70,6 +70,19 @@ ActiveRecord::Schema.define(version: 2022_03_22_135836) do
     t.string "type"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "auth_provider_mappings", id: :serial, force: :cascade do |t|
+    t.string "local_field"
+    t.string "api_field"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "local_model"
+    t.string "api_endpoint"
+    t.string "api_data_type"
+    t.jsonb "transformation"
+    t.bigint "auth_provider_id"
+    t.index ["auth_provider_id"], name: "index_auth_provider_mappings_on_auth_provider_id"
   end
 
   create_table "auth_providers", id: :serial, force: :cascade do |t|
@@ -369,19 +382,6 @@ ActiveRecord::Schema.define(version: 2022_03_22_135836) do
     t.index ["receiver_id"], name: "index_notifications_on_receiver_id"
   end
 
-  create_table "o_auth2_mappings", id: :serial, force: :cascade do |t|
-    t.integer "o_auth2_provider_id"
-    t.string "local_field"
-    t.string "api_field"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "local_model"
-    t.string "api_endpoint"
-    t.string "api_data_type"
-    t.jsonb "transformation"
-    t.index ["o_auth2_provider_id"], name: "index_o_auth2_mappings_on_o_auth2_provider_id"
-  end
-
   create_table "o_auth2_providers", id: :serial, force: :cascade do |t|
     t.string "base_url"
     t.string "token_endpoint"
@@ -407,6 +407,35 @@ ActiveRecord::Schema.define(version: 2022_03_22_135836) do
     t.string "name"
     t.integer "calls_count", default: 0
     t.string "token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "open_id_connect_providers", force: :cascade do |t|
+    t.string "issuer"
+    t.boolean "discovery"
+    t.string "client_auth_method"
+    t.string "scope"
+    t.string "response_type"
+    t.string "response_mode"
+    t.string "display"
+    t.string "prompt"
+    t.boolean "send_scope_to_token_endpoint"
+    t.string "post_logout_redirect_uri"
+    t.string "uid_field"
+    t.string "extra_authorize_params"
+    t.string "allow_authorize_params"
+    t.string "client_identifier"
+    t.string "client_secret"
+    t.string "client_redirect_uri"
+    t.string "client_scheme"
+    t.string "client_host"
+    t.string "client_port"
+    t.string "client_authorization_endpoint"
+    t.string "client_token_endpoint"
+    t.string "client_userinfo_endpoint"
+    t.string "client_jwks_uri"
+    t.string "client_end_session_endpoint"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -982,6 +1011,7 @@ ActiveRecord::Schema.define(version: 2022_03_22_135836) do
   end
 
   add_foreign_key "accounting_periods", "users", column: "closed_by"
+  add_foreign_key "auth_provider_mappings", "auth_providers"
   add_foreign_key "availability_tags", "availabilities"
   add_foreign_key "availability_tags", "tags"
   add_foreign_key "event_price_categories", "events"
@@ -999,7 +1029,6 @@ ActiveRecord::Schema.define(version: 2022_03_22_135836) do
   add_foreign_key "invoices", "statistic_profiles"
   add_foreign_key "invoices", "wallet_transactions"
   add_foreign_key "invoicing_profiles", "users"
-  add_foreign_key "o_auth2_mappings", "o_auth2_providers"
   add_foreign_key "organizations", "invoicing_profiles"
   add_foreign_key "payment_gateway_objects", "payment_gateway_objects"
   add_foreign_key "payment_schedule_items", "invoices"

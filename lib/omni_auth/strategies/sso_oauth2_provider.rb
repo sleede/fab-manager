@@ -58,7 +58,7 @@ module OmniAuth::Strategies
       @raw_info ||= {}
       logger.debug "[raw_info] @raw_infos = #{@raw_info&.to_json}"
       unless @raw_info.size.positive?
-        OmniAuth::Strategies::SsoOauth2Provider.active_provider.providable.o_auth2_mappings.each do |mapping|
+        OmniAuth::Strategies::SsoOauth2Provider.active_provider.auth_provider_mappings.each do |mapping|
           logger.debug "mapping = #{mapping&.to_json}"
           next if @raw_info.key?(mapping.api_endpoint.to_sym)
 
@@ -78,7 +78,7 @@ module OmniAuth::Strategies
       @parsed_info ||= {}
       logger.debug "[parsed_info] @parsed_info = #{@parsed_info.to_json}"
       unless @parsed_info.size.positive?
-        OmniAuth::Strategies::SsoOauth2Provider.active_provider.providable.o_auth2_mappings.each do |mapping|
+        OmniAuth::Strategies::SsoOauth2Provider.active_provider.auth_provider_mappings.each do |mapping|
 
           raw_data = ::JsonPath.new(mapping.api_field).on(raw_info[mapping.api_endpoint.to_sym]).first
           logger.debug "@parsed_info[#{local_sym(mapping)}] mapped from #{raw_data}"
