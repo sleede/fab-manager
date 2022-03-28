@@ -157,6 +157,7 @@
     height: 0;
     width: 100%;
     max-width: 600px;
+    margin: 1rem 0;
     padding-bottom: calc(100% / 16 * 9);
     overflow: hidden;
 
@@ -164,6 +165,16 @@
       position: absolute;
       max-width: 100%;
       inset: 0;
+    }
+  }
+
+  &-image {
+    height: auto;
+    max-width: 100%;
+    max-height: min(75vh, 600px);
+    margin: 1rem 0;
+    &.ProseMirror-selectednode {
+      box-shadow: 0 0 0 2px var(--secondary);
     }
   }
 
