@@ -10,6 +10,7 @@ import CharacterCount from '@tiptap/extension-character-count';
 import Underline from '@tiptap/extension-underline';
 import Link from '@tiptap/extension-link';
 import Iframe from './iframe';
+import Image from '@tiptap/extension-image';
 import { MenuBar } from './menu-bar';
 import { WarningOctagon } from 'phosphor-react';
 
@@ -21,6 +22,7 @@ interface FabTextEditorProps {
   content?: string,
   limit?: number,
   video?: boolean,
+  image?: boolean,
   onChange?: (content: string) => void,
   placeholder?: string,
   error?: string
@@ -29,7 +31,7 @@ interface FabTextEditorProps {
 /**
  * This component is a WYSIWYG text editor
  */
-export const FabTextEditor: React.FC<FabTextEditorProps> = ({ label, paragraphTools, content, limit = 400, video, onChange, placeholder, error }) => {
+export const FabTextEditor: React.FC<FabTextEditorProps> = ({ label, paragraphTools, content, limit = 400, video, image, onChange, placeholder, error }) => {
   const { t } = useTranslation('shared');
   const placeholderText = placeholder || t('app.shared.text_editor.placeholder');
   // TODO: Add ctrl+click on link to visit
@@ -54,7 +56,12 @@ export const FabTextEditor: React.FC<FabTextEditorProps> = ({ label, paragraphTo
       CharacterCount.configure({
         limit
       }),
-      Iframe
+      Iframe,
+      Image.configure({
+        HTMLAttributes: {
+          class: 'fab-textEditor-image'
+        }
+      })
     ],
     content,
     onUpdate: ({ editor }) => {
@@ -70,7 +77,7 @@ export const FabTextEditor: React.FC<FabTextEditorProps> = ({ label, paragraphTo
     <>
       {label && <label onClick={focusEditor} className="fab-textEditor-label">{label}</label>}
       <div className="fab-textEditor">
-        <MenuBar editor={editor} paragraphTools={paragraphTools} video={video} />
+        <MenuBar editor={editor} paragraphTools={paragraphTools} video={video} image={image} />
         <EditorContent editor={editor} />
         <div className="fab-textEditor-character-count">
           {editor?.storage.characterCount.characters()} / {limit}
@@ -86,12 +93,12 @@ export const FabTextEditor: React.FC<FabTextEditorProps> = ({ label, paragraphTo
   );
 };
 
-const FabTextEditorWrapper: React.FC<FabTextEditorProps> = ({ label, paragraphTools, content, limit, video, placeholder, error }) => {
+const FabTextEditorWrapper: React.FC<FabTextEditorProps> = ({ label, paragraphTools, content, limit, video, image, placeholder, error }) => {
   return (
     <Loader>
-      <FabTextEditor label={label} paragraphTools={paragraphTools} content={content} limit={limit} video={video} placeholder={placeholder} error={error} />
+      <FabTextEditor label={label} paragraphTools={paragraphTools} content={content} limit={limit} video={video} image={image} placeholder={placeholder} error={error} />
     </Loader>
   );
 };
 
-Application.Components.component('fabTextEditor', react2angular(FabTextEditorWrapper, ['label', 'paragraphTools', 'content', 'limit', 'video', 'placeholder', 'error']));
+Application.Components.component('fabTextEditor', react2angular(FabTextEditorWrapper, ['label', 'paragraphTools', 'content', 'limit', 'video', 'image', 'placeholder', 'error']));

@@ -2,18 +2,19 @@ import React, { useCallback, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import useOnclickOutside from 'react-cool-onclickoutside';
 import { Editor } from '@tiptap/react';
-import { TextAa, TextBolder, TextItalic, TextUnderline, LinkSimpleHorizontal, ListBullets, Quotes, Trash, CheckCircle, VideoCamera } from 'phosphor-react';
+import { TextAa, TextBolder, TextItalic, TextUnderline, LinkSimpleHorizontal, ListBullets, Quotes, Trash, CheckCircle, VideoCamera, Image } from 'phosphor-react';
 
 interface MenuBarProps {
+  editor?: Editor,
   paragraphTools?: boolean,
   video?: boolean,
-  editor?: Editor,
+  image?: boolean,
 }
 
 /**
  * This component is the menu bar for the WYSIWYG text editor
  */
-export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, video }) => {
+export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, video, image }) => {
   const { t } = useTranslation('shared');
 
   const [submenu, setSubmenu] = useState('');
@@ -21,12 +22,14 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, video 
   const [url, setUrl] = useState(resetUrl);
   const [videoProvider, setVideoProvider] = useState('youtube');
   const [videoId, setVideoId] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
 
   // Reset state values when the submenu is closed
   useEffect(() => {
     if (!submenu) {
       setUrl(resetUrl);
       setVideoProvider('youtube');
+      setImageUrl('');
     }
   }, [submenu]);
 
@@ -35,17 +38,19 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, video 
     setSubmenu('');
   });
 
-  // Toggle link menu's visibility
-  const toggleLinkMenu = () => {
-    if (submenu !== 'link') {
-      setSubmenu('link');
-      const previousUrl = {
-        href: editor.getAttributes('link').href,
-        target: editor.getAttributes('link').target || ''
-      };
-      // display selected text's attributes if it's a link
-      if (previousUrl.href) {
-        setUrl(previousUrl);
+  // Toggle submenu's visibility
+  const toggleSubmenu = (type) => {
+    if (submenu !== type) {
+      setSubmenu(type);
+      if (type === 'link') {
+        const previousUrl = {
+          href: editor.getAttributes('link').href,
+          target: editor.getAttributes('link').target || ''
+        };
+        // display selected text's attributes if it's a link
+        if (previousUrl.href) {
+          setUrl(previousUrl);
+        }
       }
     } else {
       setSubmenu('');
@@ -88,21 +93,12 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, video 
     setSubmenu('');
   };
 
-  // Toggle video menu's visibility
-  const toggleVideoMenu = () => {
-    if (submenu !== 'video') {
-      setSubmenu('video');
-    } else {
-      setSubmenu('');
-    }
-  };
-
   // Store selected video provider in state
   const handleSelect = (evt) => {
     setVideoProvider(evt.target.value);
   };
   // Store video id in state
-  const VideoUrlChange = (evt) => {
+  const videoUrlChange = (evt) => {
     const id = evt.target.value.match(/([^/]+$)/g);
     setVideoId(id);
   };
@@ -124,6 +120,18 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, video 
     }
     editor.chain().focus().setIframe({ src: videoUrl }).run();
     setSubmenu('');
+  };
+
+  // Store image url in state
+  const imageUrlChange = (evt) => {
+    setImageUrl(evt.target.value);
+  };
+  // Insert image
+  const addImage = () => {
+    if (imageUrl) {
+      editor.chain().focus().setImage({ src: imageUrl }).run();
+      setSubmenu('');
+    }
   };
 
   if (!editor) {
@@ -182,22 +190,34 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, video 
         </button>
         <button
           type='button'
-          onClick={toggleLinkMenu}
+          onClick={() => toggleSubmenu('link')}
           className={`ignore-onclickoutside ${editor.isActive('link') ? 'is-active' : ''}`}
         >
           <LinkSimpleHorizontal size={24} />
         </button>
+        { (video || image) && <span className='divider'></span> }
         { video &&
         (<>
           <button
             type='button'
-            onClick={toggleVideoMenu}
+            onClick={() => toggleSubmenu('video')}
           >
             <VideoCamera size={24} />
           </button>
         </>)
         }
+        { image &&
+        (<>
+          <button
+            type='button'
+            onClick={() => toggleSubmenu('image')}
+          >
+            <Image size={24} />
+          </button>
+        </>)
+        }
       </div>
+
       <div ref={ref} className={`fab-textEditor-subMenu ${submenu ? 'is-active' : ''}`}>
         { submenu === 'link' &&
           (<>
@@ -227,8 +247,18 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, video 
               <option value="dailymotion">Dailymotion</option>
             </select>
             <div>
-              <input type="text" onChange={VideoUrlChange} placeholder={t('app.shared.text_editor.link_placeholder')} />
+              <input type="text" onChange={videoUrlChange} placeholder={t('app.shared.text_editor.link_placeholder')} />
               <button type='button' onClick={() => addIframe()}>
+                <CheckCircle size={24} />
+              </button>
+            </div>
+          </>)
+        }
+        { submenu === 'image' &&
+          (<>
+            <div>
+              <input type="text" onChange={imageUrlChange} placeholder={t('app.shared.text_editor.link_placeholder')} />
+              <button type='button' onClick={() => addImage()}>
                 <CheckCircle size={24} />
               </button>
             </div>
