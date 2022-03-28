@@ -25,9 +25,13 @@ en:
         payment_card_declined: "Your card was declined."
       #text editor
       text_editor:
-        placeholder: "Type something…"
+        text_placeholder: "Type something…"
         link_placeholder: "Paste link…"
+        url_placeholder: "Paste url…"
         new_tab: "Open in a new tab"
+        add_link: "Insert a link"
+        add_video: "Embed a video"
+        add_image: "Insert an image"
       #user edition form
       user:
         man: "Man"

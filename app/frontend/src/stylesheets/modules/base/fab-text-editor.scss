@@ -89,6 +89,11 @@
       align-items: center;
       &:not(:last-of-type) { margin-bottom: 0.8rem; }
     }
+
+    h6 {
+      @include text-sm();
+      margin-top: 0;
+    }
     
     input[type="text"],
     select {
