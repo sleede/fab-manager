@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a security issue: updated minimist to 1.2.6 to fix [CVE-2021-44906](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-44906)
+ 
 ## v5.3.6 2022 March 24
 
 - Support for Google Analytics V4
