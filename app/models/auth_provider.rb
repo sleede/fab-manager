@@ -18,6 +18,9 @@ class AuthProvider < ApplicationRecord
   belongs_to :providable, polymorphic: true, dependent: :destroy
   accepts_nested_attributes_for :providable
 
+  has_many :auth_provider_mappings, dependent: :destroy
+  accepts_nested_attributes_for :auth_provider_mappings, allow_destroy: true
+
   before_create :set_initial_state
 
   def build_providable(params)
@@ -75,7 +78,11 @@ class AuthProvider < ApplicationRecord
   ## Return the user's profile fields that are currently managed from the SSO
   ## @return [Array]
   def sso_fields
-    providable.protected_fields
+    fields = []
+    auth_provider_mappings.each do |mapping|
+      fields.push(mapping.local_model + '.' + mapping.local_field)
+    end
+    fields
   end
 
   ## Return the link the user have to follow to edit his profile on the SSO
