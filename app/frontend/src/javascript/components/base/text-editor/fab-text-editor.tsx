@@ -33,7 +33,7 @@ interface FabTextEditorProps {
  */
 export const FabTextEditor: React.FC<FabTextEditorProps> = ({ label, paragraphTools, content, limit = 400, video, image, onChange, placeholder, error }) => {
   const { t } = useTranslation('shared');
-  const placeholderText = placeholder || t('app.shared.text_editor.placeholder');
+  const placeholderText = placeholder || t('app.shared.text_editor.text_placeholder');
   // TODO: Add ctrl+click on link to visit
 
   // Setup the editor
