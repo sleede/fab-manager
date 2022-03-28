@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- Updated Spanish translations (thanks to [@altieriranedo](https://crowdin.com/profile/altieriranedo))
 - Fix a security issue: updated minimist to 1.2.6 to fix [CVE-2021-44906](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-44906)
 - Fix a security issue: updated node-forge to 1.3.0 to fix [CVE-2022-24771](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24771), [CVE-2022-24772](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24772) and [CVE-2022-24773](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24773)
  
