@@ -1247,7 +1247,7 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
           function (avoir) { // success
             $uibModalInstance.close({ avoir, invoice: $scope.invoice });
           },
-          function (err) { // failed
+          function () { // failed
             growl.error(_t('app.admin.invoices.unable_to_create_the_refund'));
           }
         );

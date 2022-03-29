@@ -32,7 +32,9 @@ const customConfig = {
       process: 'process/browser'
     }),
     isDevelopment && new (require('@pmmmwh/react-refresh-webpack-plugin'))(),
-    isDevelopment && new (require('eslint-webpack-plugin'))()
+    isDevelopment && new (require('eslint-webpack-plugin'))({
+      extensions: ['js', 'ts', 'tsx'],
+    })
   ].filter(Boolean),
   module: {
     rules: [

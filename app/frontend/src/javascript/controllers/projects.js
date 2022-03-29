@@ -618,7 +618,7 @@ Application.Controllers.controller('ShowProjectController', ['$scope', '$state',
                 growl.success(_t('app.public.projects_show.your_report_was_successful_thanks'));
                 return $uibModalInstance.close(res);
               }
-              , function (error) {
+              , function () {
                 // creation failed...
                 growl.error(_t('app.public.projects_show.an_error_occured_while_sending_your_report'));
               }

@@ -46,7 +46,7 @@ angular.module('angularUtils.directives.dirDisqus', [])
 
             // get the remote Disqus script and insert it into the DOM, but only if it not already loaded (as that will cause warnings)
             if (!$window.DISQUS) {
-              var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              const dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
               dsq.src = '//' + scope.disqus_shortname + '.disqus.com/embed.js';
               (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
             } else {

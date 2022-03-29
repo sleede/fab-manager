@@ -5,6 +5,7 @@
 * creating namespaces and moduled for controllers, filters, services, and directives.
 */
 
+// eslint-disable-next-line no-var -- Application is a global variable.
 var Application = Application || {};
 
 Application.Components = angular.module('application.components', []);

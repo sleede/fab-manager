@@ -9,7 +9,7 @@ export default class FormatLib {
    */
   static date = (date: Date): string => {
     return Intl.DateTimeFormat().format(moment(date).toDate());
-  }
+  };
 
   /**
    * Return the formatted localized time for the given date
@@ -23,12 +23,12 @@ export default class FormatLib {
    */
   static duration = (interval: unitOfTime.DurationConstructor, intervalCount: number): string => {
     return moment.duration(intervalCount, interval).locale(Fablab.moment_locale).humanize();
-  }
+  };
 
   /**
    * Return the formatted localized amount for the given price (eg. 20.5 => "20,50 €")
    */
   static price = (price: number): string => {
     return new Intl.NumberFormat(Fablab.intl_locale, { style: 'currency', currency: Fablab.intl_currency }).format(price);
-  }
+  };
 }

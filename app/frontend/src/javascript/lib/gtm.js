@@ -30,7 +30,7 @@
   GTM.trackPurchase = function (transactionId, value) {
     gtag('event', 'purchase', {
       transaction_id: transactionId,
-      value: value,
+      value,
       currency: Fablab.intl_currency
     });
   };
