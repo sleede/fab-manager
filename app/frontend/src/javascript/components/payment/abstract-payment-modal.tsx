@@ -55,8 +55,6 @@ interface AbstractPaymentModalProps {
 
 declare const GTM: GoogleTagManager;
 
-declare const GTM: any;
-
 /**
  * This component is an abstract modal that must be extended by each payment gateway to include its payment form.
  *
