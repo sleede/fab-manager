@@ -234,6 +234,8 @@ Devise.setup do |config|
     config.omniauth OmniAuth::Strategies::SsoOauth2Provider.name.to_sym,
                     active_provider.providable.client_id,
                     active_provider.providable.client_secret
+  elsif active_provider.providable_type == OpenIdConnectProvider.name
+    config.omniauth :openid_connect, active_provider.config
   end
 
   # ==> Warden configuration

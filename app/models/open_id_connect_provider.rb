@@ -4,4 +4,28 @@
 # the OpenID Connect protocol.
 class OpenIdConnectProvider < ApplicationRecord
   has_one :auth_provider, as: :providable
+
+  validates :issuer, presence: true
+  validates :client_identifier, presence: true
+  validates :client_secret, presence: true
+  validates :client_host, presence: true
+
+  validates :client_scheme, inclusion: { in: %w[http https] }
+  validates :client_port, numericality: { only_integer: true, greater_than: 0, less_than: 65_535 }
+  validates :response_type, inclusion: { in: %w[code id_token], allow_nil: true }
+  validates :response_mode, inclusion: { in: %w[query fragment form_post web_message], allow_nil: true }
+  validates :display, inclusion: { in: %w[page popup touch wap], allow_nil: true }
+  validates :prompt, inclusion: { in: %w[none login consent select_account], allow_nil: true }
+
+  def config
+    OpenIdConnectProvider.columns.map(&:name).filter { |n| !n.start_with?('client_') }.map do |n|
+      [n, send(n)]
+    end.push(['client_options', client_config]).to_h
+  end
+
+  def client_config
+    OpenIdConnectProvider.columns.map(&:name).filter { |n| n.start_with?('client_') }.map do |n|
+      [n.sub('client_', ''), send(n)]
+    end.to_h
+  end
 end
