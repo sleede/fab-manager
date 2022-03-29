@@ -1,6 +1,8 @@
 # Changelog Fab-manager
 
 - Fix a bug: unable to show payment schedules list if active PayZen
+- Fix a bug: unable to set user's invoicing profile names and email if active address required in create user form
+- [TODO DEPLOY] `rails fablab:fix:invoices_without_names_and_email`
 
 ## v5.3.7 2022 March 28
 
