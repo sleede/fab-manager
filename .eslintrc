@@ -17,7 +17,7 @@
     "Humanize": true,
     "GTM": true
   },
-  "plugins": ["lint-erb"],
+  "plugins": ["html-erb"],
   "overrides": [
     {
       "files": ["**/*.ts", "**/*.tsx"],

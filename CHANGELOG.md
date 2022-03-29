@@ -1,5 +1,8 @@
 # Changelog Fab-manager
 
+- Updated eslint to v8 and eslint related packages to their latest versions
+- Webpack overlay will now report eslint issues
+
 ## v5.3.7 2022 March 28
 
 - Updated Spanish translations (thanks to [@altieriranedo](https://crowdin.com/profile/altieriranedo))

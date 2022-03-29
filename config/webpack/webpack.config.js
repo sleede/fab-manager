@@ -31,7 +31,8 @@ const customConfig = {
       Application: [path.resolve(path.join(__dirname, '../../app/frontend/src/javascript/app.js')), 'Application'],
       process: 'process/browser'
     }),
-    isDevelopment && new (require('@pmmmwh/react-refresh-webpack-plugin'))()
+    isDevelopment && new (require('@pmmmwh/react-refresh-webpack-plugin'))(),
+    isDevelopment && new (require('eslint-webpack-plugin'))()
   ].filter(Boolean),
   module: {
     rules: [
