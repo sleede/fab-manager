@@ -469,6 +469,8 @@ class User < ApplicationRecord
         first_name: first_name,
         last_name: last_name
       )
+    else
+      update_invoicing_profile
     end
     if wallet.nil?
       ip ||= invoicing_profile

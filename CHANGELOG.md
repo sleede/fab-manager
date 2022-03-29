@@ -1,11 +1,18 @@
 # Changelog Fab-manager
 
+## v5.3.8 2022 March 29
+
+- Updated the version of ruby to 2.6.9
+- Fix a bug: unable to show payment schedules list if active PayZen
+- Fix a bug: unable to set user's invoicing profile names and email if active address required in create user form
+- [TODO DEPLOY] `rails fablab:fix:invoices_without_names_and_email`
+
 ## v5.3.7 2022 March 28
 
 - Updated Spanish translations (thanks to [@altieriranedo](https://crowdin.com/profile/altieriranedo))
 - Fix a security issue: updated minimist to 1.2.6 to fix [CVE-2021-44906](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-44906)
 - Fix a security issue: updated node-forge to 1.3.0 to fix [CVE-2022-24771](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24771), [CVE-2022-24772](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24772) and [CVE-2022-24773](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24773)
- 
+
 ## v5.3.6 2022 March 24
 
 - Support for Google Analytics V4
