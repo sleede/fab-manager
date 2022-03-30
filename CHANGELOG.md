@@ -6,7 +6,7 @@
 
 - Fix a bug: unable to show payment schedules list if active PayZen
 - Fix a bug: unable to set user's invoicing profile names and email if active address required in create user form
-- Fix a security issue: updated ruby to 2.6.9 to fix [CVE-2021-41817](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41817) and [CVE-2021-41819](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41819)
+- Fix a security issue: updated ruby to 2.6.9 to fix [CVE-2021-31810](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-31810), [CVE-2021-32066](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-32066) , [CVE-2021-31799](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41817), [CVE-2021-31799](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41817) and [CVE-2021-41819](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41819)
 - [TODO DEPLOY] `rails fablab:fix:invoices_without_names_and_email`
 
 ## v5.3.7 2022 March 28
