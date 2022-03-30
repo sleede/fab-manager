@@ -13,7 +13,7 @@ class AuthProvider < ApplicationRecord
     end
   end
 
-  PROVIDABLE_TYPES = %w[DatabaseProvider OAuth2Provider].freeze
+  PROVIDABLE_TYPES = %w[DatabaseProvider OAuth2Provider OpenIdConnectProvider].freeze
 
   belongs_to :providable, polymorphic: true, dependent: :destroy
   accepts_nested_attributes_for :providable
