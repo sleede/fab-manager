@@ -2,6 +2,7 @@
 
 ## next deploy
 
+- Updated the documentation about the minimum docker version
 - Updated nodejs version to 16.13.2 for dev environment, to reflect production version
 - Changed the apparence of the modal dialogs (React): no more logo and the close button appears in full-text in the top right corner.
 - Use react-hook-form to manage and validate forms
