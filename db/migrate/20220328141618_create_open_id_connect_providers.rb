@@ -18,17 +18,17 @@ class CreateOpenIdConnectProviders < ActiveRecord::Migration[5.2]
       t.string :uid_field
       t.string :extra_authorize_params
       t.string :allow_authorize_params
-      t.string :client_identifier
-      t.string :client_secret
-      t.string :client_redirect_uri
-      t.string :client_scheme
-      t.string :client_host
-      t.string :client_port
-      t.string :client_authorization_endpoint
-      t.string :client_token_endpoint
-      t.string :client_userinfo_endpoint
-      t.string :client_jwks_uri
-      t.string :client_end_session_endpoint
+      t.string :client__identifier
+      t.string :client__secret
+      t.string :client__redirect_uri
+      t.string :client__scheme
+      t.string :client__host
+      t.string :client__port
+      t.string :client__authorization_endpoint
+      t.string :client__token_endpoint
+      t.string :client__userinfo_endpoint
+      t.string :client__jwks_uri
+      t.string :client__end_session_endpoint
       t.string :profile_url
 
       t.timestamps
