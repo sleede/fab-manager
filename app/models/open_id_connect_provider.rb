@@ -6,12 +6,11 @@ class OpenIdConnectProvider < ApplicationRecord
   has_one :auth_provider, as: :providable
 
   validates :issuer, presence: true
-  validates :client_identifier, presence: true
-  validates :client_secret, presence: true
-  validates :client_host, presence: true
-
-  validates :client_scheme, inclusion: { in: %w[http https] }
-  validates :client_port, numericality: { only_integer: true, greater_than: 0, less_than: 65_535 }
+  validates :client__identifier, presence: true
+  validates :client__secret, presence: true
+  validates :client__host, presence: true
+  validates :client__scheme, inclusion: { in: %w[http https] }
+  validates :client__port, numericality: { only_integer: true, greater_than: 0, less_than: 65_535 }
   validates :response_type, inclusion: { in: %w[code id_token], allow_nil: true }
   validates :response_mode, inclusion: { in: %w[query fragment form_post web_message], allow_nil: true }
   validates :display, inclusion: { in: %w[page popup touch wap], allow_nil: true }
