@@ -29,6 +29,7 @@ class CreateOpenIdConnectProviders < ActiveRecord::Migration[5.2]
       t.string :client_userinfo_endpoint
       t.string :client_jwks_uri
       t.string :client_end_session_endpoint
+      t.string :profile_url
 
       t.timestamps
     end
