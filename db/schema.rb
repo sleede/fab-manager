@@ -512,6 +512,7 @@ ActiveRecord::Schema.define(version: 2022_03_28_145017) do
     t.integer "weight"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "description"
   end
 
   create_table "plans", id: :serial, force: :cascade do |t|
