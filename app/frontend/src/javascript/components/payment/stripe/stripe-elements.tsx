@@ -27,7 +27,6 @@ export const StripeElements: React.FC = memo(({ children }) => {
       {stripe && <Elements stripe={stripe}>
         {children}
       </Elements>}
-      {!stripe && children}
     </div>
   );
 });

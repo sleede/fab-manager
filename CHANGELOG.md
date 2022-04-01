@@ -1,10 +1,16 @@
 # Changelog Fab-manager
 
+## v5.3.9 2022 April 01
+
+- Optimise sql query, avoid to N+1
+- Fix a security issue: updated ansi-regex to 4.1.1 to fix [CVE-2021-3807](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3807)
+- Fix a bug: unable to show payment modal for stripe
+
 ## v5.3.8 2022 March 29
 
-- Updated the version of ruby to 2.6.9
 - Fix a bug: unable to show payment schedules list if active PayZen
 - Fix a bug: unable to set user's invoicing profile names and email if active address required in create user form
+- Fix a security issue: updated ruby to 2.6.9 to fix [CVE-2021-31810](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-31810), [CVE-2021-32066](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-32066) , [CVE-2021-31799](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41817), [CVE-2021-31799](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41817) and [CVE-2021-41819](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41819)
 - [TODO DEPLOY] `rails fablab:fix:invoices_without_names_and_email`
 
 ## v5.3.7 2022 March 28
@@ -28,7 +34,6 @@
 - Removed unmaintained gem sidekiq-cron and replaced it with sidekiq-scheduler
 - Removed unmaintained @rails/webpacker v5 and replaced it with shakapacker v6.2.0
 - Removed dependency to auto-ngtemplate-loader
-- Removed support for Universal Analytics
 - Updated deprecated division operators in sass
 - Fix a bug: prepaid-packs purchases are reported as subscriptions in the statistics
 - Fix a bug: error Couldn't find the binary git during assets compilation

@@ -103,14 +103,14 @@ class Availabilities::AvailabilitiesService
   def availabilities(reservable, type, user)
     if user.admin? || user.manager?
       reservable.availabilities
-                .includes(:tags)
+                .includes(:tags, :plans)
                 .where('end_at > ? AND available_type = ?', 1.month.ago, type)
                 .where(lock: false)
     else
       end_at = @maximum_visibility[:other]
       end_at = @maximum_visibility[:year] if subscription_year?(user)
       reservable.availabilities
-                .includes(:tags)
+                .includes(:tags, :plans)
                 .where('end_at > ? AND end_at < ? AND available_type = ?', DateTime.current, end_at, type)
                 .where('availability_tags.tag_id' => user.tag_ids.concat([nil]))
                 .where(lock: false)
@@ -127,14 +127,14 @@ class Availabilities::AvailabilitiesService
     # who made the request?
     # 1) an admin (he can see all availabilities of 1 month ago and future)
     if @current_user.admin?
-      availabilities.includes(:tags, :slots, trainings: [:machines])
+      availabilities.includes(:tags, :slots, :plans, trainings: [:machines])
                     .where('availabilities.start_at > ?', 1.month.ago)
                     .where(lock: false)
     # 2) an user (he cannot see availabilities further than 1 (or 3) months)
     else
       end_at = @maximum_visibility[:other]
       end_at = @maximum_visibility[:year] if show_extended_slots?(user)
-      availabilities.includes(:tags, :slots, :availability_tags, trainings: [:machines])
+      availabilities.includes(:tags, :slots, :availability_tags, :plans, trainings: [:machines])
                     .where('availabilities.start_at > ? AND availabilities.start_at < ?', DateTime.current, end_at)
                     .where('availability_tags.tag_id' => user.tag_ids.concat([nil]))
                     .where(lock: false)
