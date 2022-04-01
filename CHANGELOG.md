@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v5.3.9 2022 April 01
+
 - Optimise sql query, avoid to N+1
 - Fix a security issue: updated ansi-regex to 4.1.1 to fix [CVE-2021-3807](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3807)
 - Fix a bug: unable to show payment modal for stripe
