@@ -1,14 +1,3 @@
-/* eslint-disable
-    no-return-assign,
-    no-undef,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 angular.module('application.router', ['ui.router'])
   .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $locationProvider.hashPrefix('!');
@@ -243,7 +232,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          memberPromise: ['$stateParams', 'Member', function ($stateParams, Member) { return Member.get({ id: $stateParams.id }).$promise; }]
+          memberPromise: ['$transition$', 'Member', function ($transition$, Member) { return Member.get({ id: $transition$.params().id }).$promise; }]
         }
       })
       .state('app.logged.members', {
@@ -297,7 +286,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          projectPromise: ['$stateParams', 'Project', function ($stateParams, Project) { return Project.get({ id: $stateParams.id }).$promise; }],
+          projectPromise: ['$transition$', 'Project', function ($transition$, Project) { return Project.get({ id: $transition$.params().id }).$promise; }],
           shortnamePromise: ['Setting', function (Setting) { return Setting.get({ name: 'disqus_shortname' }).$promise; }]
         }
       })
@@ -310,7 +299,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          projectPromise: ['$stateParams', 'Project', function ($stateParams, Project) { return Project.get({ id: $stateParams.id }).$promise; }],
+          projectPromise: ['$transition$', 'Project', function ($transition$, Project) { return Project.get({ id: $transition$.params().id }).$promise; }],
           allowedExtensions: ['Setting', function (Setting) { return Setting.get({ name: 'allowed_cad_extensions' }).$promise; }]
         }
       })
@@ -347,7 +336,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          machinePromise: ['Machine', '$stateParams', function (Machine, $stateParams) { return Machine.get({ id: $stateParams.id }).$promise; }]
+          machinePromise: ['Machine', '$transition$', function (Machine, $transition$) { return Machine.get({ id: $transition$.params().id }).$promise; }]
         }
       })
       .state('app.logged.machines_reserve', {
@@ -361,7 +350,7 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           plansPromise: ['Plan', function (Plan) { return Plan.query().$promise; }],
           groupsPromise: ['Group', function (Group) { return Group.query().$promise; }],
-          machinePromise: ['Machine', '$stateParams', function (Machine, $stateParams) { return Machine.get({ id: $stateParams.id }).$promise; }],
+          machinePromise: ['Machine', '$transition$', function (Machine, $transition$) { return Machine.get({ id: $transition$.params().id }).$promise; }],
           settingsPromise: ['Setting', function (Setting) {
             return Setting.query({
               names: "['machine_explications_alert', 'booking_window_start',  'booking_window_end',  'booking_move_enable', " +
@@ -380,7 +369,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          machinePromise: ['Machine', '$stateParams', function (Machine, $stateParams) { return Machine.get({ id: $stateParams.id }).$promise; }]
+          machinePromise: ['Machine', '$transition$', function (Machine, $transition$) { return Machine.get({ id: $transition$.params().id }).$promise; }]
         }
       })
 
@@ -419,7 +408,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          spacePromise: ['Space', '$stateParams', function (Space, $stateParams) { return Space.get({ id: $stateParams.id }).$promise; }]
+          spacePromise: ['Space', '$transition$', function (Space, $transition$) { return Space.get({ id: $transition$.params().id }).$promise; }]
         }
       })
       .state('app.admin.space_edit', {
@@ -432,7 +421,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          spacePromise: ['Space', '$stateParams', function (Space, $stateParams) { return Space.get({ id: $stateParams.id }).$promise; }]
+          spacePromise: ['Space', '$transition$', function (Space, $transition$) { return Space.get({ id: $transition$.params().id }).$promise; }]
         }
       })
       .state('app.logged.space_reserve', {
@@ -445,7 +434,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          spacePromise: ['Space', '$stateParams', function (Space, $stateParams) { return Space.get({ id: $stateParams.id }).$promise; }],
+          spacePromise: ['Space', '$transition$', function (Space, $transition$) { return Space.get({ id: $transition$.params().id }).$promise; }],
           plansPromise: ['Plan', function (Plan) { return Plan.query().$promise; }],
           groupsPromise: ['Group', function (Group) { return Group.query().$promise; }],
           settingsPromise: ['Setting', function (Setting) {
@@ -482,7 +471,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          trainingPromise: ['Training', '$stateParams', function (Training, $stateParams) { return Training.get({ id: $stateParams.id }).$promise; }]
+          trainingPromise: ['Training', '$transition$', function (Training, $transition$) { return Training.get({ id: $transition$.params().id }).$promise; }]
         }
       })
       .state('app.logged.trainings_reserve', {
@@ -498,8 +487,8 @@ angular.module('application.router', ['ui.router'])
           explicationAlertPromise: ['Setting', function (Setting) { return Setting.get({ name: 'training_explications_alert' }).$promise; }],
           plansPromise: ['Plan', function (Plan) { return Plan.query().$promise; }],
           groupsPromise: ['Group', function (Group) { return Group.query().$promise; }],
-          trainingPromise: ['Training', '$stateParams', function (Training, $stateParams) {
-            if ($stateParams.id !== 'all') { return Training.get({ id: $stateParams.id }).$promise; }
+          trainingPromise: ['Training', '$transition$', function (Training, $transition$) {
+            if ($transition$.params().id !== 'all') { return Training.get({ id: $transition$.params().id }).$promise; }
           }],
           settingsPromise: ['Setting', function (Setting) {
             return Setting.query({
@@ -563,7 +552,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          eventPromise: ['Event', '$stateParams', function (Event, $stateParams) { return Event.get({ id: $stateParams.id }).$promise; }],
+          eventPromise: ['Event', '$transition$', function (Event, $transition$) { return Event.get({ id: $transition$.params().id }).$promise; }],
           priceCategoriesPromise: ['PriceCategory', function (PriceCategory) { return PriceCategory.query().$promise; }],
           settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['booking_move_enable', 'booking_move_delay', 'booking_cancel_enable', 'booking_cancel_delay', 'event_explications_alert', 'online_payment_module']" }).$promise; }]
         }
@@ -694,7 +683,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          trainingPromise: ['Training', '$stateParams', function (Training, $stateParams) { return Training.get({ id: $stateParams.id }).$promise; }],
+          trainingPromise: ['Training', '$transition$', function (Training, $transition$) { return Training.get({ id: $transition$.params().id }).$promise; }],
           machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }]
         }
       })
@@ -740,7 +729,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          eventPromise: ['Event', '$stateParams', function (Event, $stateParams) { return Event.get({ id: $stateParams.id }).$promise; }],
+          eventPromise: ['Event', '$transition$', function (Event, $transition$) { return Event.get({ id: $transition$.params().id }).$promise; }],
           categoriesPromise: ['Category', function (Category) { return Category.query().$promise; }],
           themesPromise: ['EventTheme', function (EventTheme) { return EventTheme.query().$promise; }],
           ageRangesPromise: ['AgeRange', function (AgeRange) { return AgeRange.query().$promise; }],
@@ -756,8 +745,8 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          eventPromise: ['Event', '$stateParams', function (Event, $stateParams) { return Event.get({ id: $stateParams.id }).$promise; }],
-          reservationsPromise: ['Reservation', '$stateParams', function (Reservation, $stateParams) { return Reservation.query({ reservable_id: $stateParams.id, reservable_type: 'Event' }).$promise; }]
+          eventPromise: ['Event', '$transition$', function (Event, $transition$) { return Event.get({ id: $transition$.params().id }).$promise; }],
+          reservationsPromise: ['Reservation', '$transition$', function (Reservation, $transition$) { return Reservation.query({ reservable_id: $transition$.params().id, reservable_type: 'Event' }).$promise; }]
         }
       })
 
@@ -820,7 +809,7 @@ angular.module('application.router', ['ui.router'])
           spaces: ['Space', function (Space) { return Space.query().$promise; }],
           machines: ['Machine', function (Machine) { return Machine.query().$promise; }],
           plans: ['Plan', function (Plan) { return Plan.query().$promise; }],
-          planPromise: ['Plan', '$stateParams', function (Plan, $stateParams) { return Plan.get({ id: $stateParams.id }).$promise; }],
+          planPromise: ['Plan', '$transition$', function (Plan, $transition$) { return Plan.get({ id: $transition$.params().id }).$promise; }],
           planCategories: ['PlanCategory', function (PlanCategory) { return PlanCategory.query().$promise; }]
         }
       })
@@ -854,7 +843,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          couponPromise: ['Coupon', '$stateParams', function (Coupon, $stateParams) { return Coupon.get({ id: $stateParams.id }).$promise; }]
+          couponPromise: ['Coupon', '$transition$', function (Coupon, $transition$) { return Coupon.get({ id: $transition$.params().id }).$promise; }]
         }
       })
 
@@ -879,7 +868,8 @@ angular.module('application.router', ['ui.router'])
                      "'accounting_Machine_code', 'accounting_Machine_label', 'accounting_Training_code', 'accounting_Training_label', " +
                      "'accounting_Event_code', 'accounting_Event_label', 'accounting_Space_code', 'accounting_Space_label', " +
                      "'payment_gateway', 'accounting_Error_code', 'accounting_Error_label', 'payment_schedule_prefix', " +
-                     "'feature_tour_display', 'online_payment_module', 'stripe_public_key', 'stripe_currency', 'invoice_prefix']"
+                     "'feature_tour_display', 'online_payment_module', 'stripe_public_key', 'stripe_currency', 'invoice_prefix', " +
+                     "'accounting_Pack_code', 'accounting_Pack_label']"
             }).$promise;
           }],
           stripeSecretKey: ['Setting', function (Setting) { return Setting.isPresent({ name: 'stripe_secret_key' }).$promise; }],
@@ -958,7 +948,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          importItem: ['Import', '$stateParams', function (Import, $stateParams) { return Import.get({ id: $stateParams.id }).$promise; }]
+          importItem: ['Import', '$transition$', function (Import, $transition$) { return Import.get({ id: $transition$.params().id }).$promise; }]
         }
       })
       .state('app.admin.members_edit', {
@@ -970,9 +960,9 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          memberPromise: ['Member', '$stateParams', function (Member, $stateParams) { return Member.get({ id: $stateParams.id }).$promise; }],
+          memberPromise: ['Member', '$transition$', function (Member, $transition$) { return Member.get({ id: $transition$.params().id }).$promise; }],
           activeProviderPromise: ['AuthProvider', function (AuthProvider) { return AuthProvider.active().$promise; }],
-          walletPromise: ['Wallet', '$stateParams', function (Wallet, $stateParams) { return Wallet.getWalletByUser({ user_id: $stateParams.id }).$promise; }],
+          walletPromise: ['Wallet', '$transition$', function (Wallet, $transition$) { return Wallet.getWalletByUser({ user_id: $transition$.params().id }).$promise; }],
           transactionsPromise: ['Wallet', 'walletPromise', function (Wallet, walletPromise) { return Wallet.transactions({ id: walletPromise.id }).$promise; }],
           tagsPromise: ['Tag', function (Tag) { return Tag.query().$promise; }],
           settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['phone_required', 'address_required']" }).$promise; }]
@@ -1027,7 +1017,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          providerPromise: ['AuthProvider', '$stateParams', function (AuthProvider, $stateParams) { return AuthProvider.get({ id: $stateParams.id }).$promise; }],
+          providerPromise: ['AuthProvider', '$transition$', function (AuthProvider, $transition$) { return AuthProvider.get({ id: $transition$.params().id }).$promise; }],
           mappingFieldsPromise: ['AuthProvider', function (AuthProvider) { return AuthProvider.mapping_fields().$promise; }]
         }
       })
@@ -1083,7 +1073,7 @@ angular.module('application.router', ['ui.router'])
                      "'display_name_enable', 'machines_sort_by', 'fab_analytics', 'statistics_module', 'address_required', " +
                      "'link_name', 'home_content', 'home_css', 'phone_required', 'upcoming_events_shown', 'public_agenda_module'," +
                      "'renew_pack_threshold', 'pack_only_for_subscription', 'overlapping_categories', 'public_registrations'," +
-                     "'extended_prices_in_same_day']"
+                     "'extended_prices_in_same_day', 'recaptcha_site_key', 'recaptcha_secret_key']"
             }).$promise;
           }],
           privacyDraftsPromise: ['Setting', function (Setting) { return Setting.get({ name: 'privacy_draft', history: true }).$promise; }],

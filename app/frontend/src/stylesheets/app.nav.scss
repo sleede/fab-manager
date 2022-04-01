@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 /*primary nav*/
 .navbar-header {
   position: relative;
@@ -42,7 +44,7 @@
 .nav-primary {
   li {
     > a > i {
-      margin: floor(-($nav-primary-height - $line-height-computed) / 2) -10px;
+      margin: floor(math.div(-($nav-primary-height - $line-height-computed), 2)) -10px;
       line-height: $nav-primary-height;
       width: $nav-primary-height;
       float: left;
@@ -61,7 +63,7 @@
   ul.nav {
     > li {
       > a {
-        padding: floor(($nav-primary-height - $line-height-computed) / 2) 15px;
+        padding: floor(math.div($nav-primary-height - $line-height-computed, 2)) 15px;
         position: relative;
         font-size: 14px;
 
@@ -245,7 +247,7 @@
 
     > .vbox > .header,
     > .vbox > .footer {
-      padding: 0 floor(($nav-xs-width - 30px) / 2);
+      padding: 0 floor(math.div($nav-xs-width - 30px, 2));
     }
 
     .hidden-nav-xs {
@@ -309,7 +311,7 @@
     > li {
       > a {
         .header-md & {
-          padding: floor(($header-md-height - $line-height-computed) / 2 - 1);
+          padding: floor(math.div($header-md-height - $line-height-computed, 2) - 1);
         }
       }
     }
@@ -326,7 +328,7 @@
     // + *{
     // 	padding-top: 50px !important;
     // }
- 
+
   }
 
   .nav-bar-fixed-bottom {
@@ -518,7 +520,7 @@
           border-left: 3px solid;
 
           // #870003;
-       
+
         }
       }
     }

@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import { FieldErrors, UseFormRegister, Validate } from 'react-hook-form';
+import { FieldValues } from 'react-hook-form/dist/types/fields';
 
 type inputType = string|number|readonly string [];
 type ruleTypes = {
@@ -9,12 +10,12 @@ type ruleTypes = {
   maxLenght?: number,
   min?: number,
   max?: number,
-  validate?: Validate<any>;
+  validate?: Validate<FieldValues>;
 };
 
 interface RHFInputProps {
   id: string,
-  register: UseFormRegister<any>,
+  register: UseFormRegister<FieldValues>,
   label?: string,
   tooltip?: string,
   defaultValue?: inputType,

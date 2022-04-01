@@ -24,7 +24,7 @@ fr:
         ongoing_reservations: "Réservations en cours"
         without_reservation: "Sans réservation"
         confirmation_required: "Confirmation requise"
-        do_you_really_want_to_cancel_the_USER_s_reservation_the_DATE_at_TIME_concerning_RESERVATION: "Êtes-vous {GENDER, select, female{sûre} other{sûr}} de vouloir annuler la réservation de {USER}, le {DATE} à {TIME}, concernant {RESERVATION} ?"
+        do_you_really_want_to_cancel_the_USER_s_reservation_the_DATE_at_TIME_concerning_RESERVATION: "Voulez-vous vraiment annuler la réservation de {USER}, le {DATE} à {TIME}, concernant {RESERVATION} ?"
         reservation_was_successfully_cancelled: "La réservation a bien été annulée."
         reservation_cancellation_failed: "L'annulation de la réservation a échouée."
         unable_to_remove_the_last_machine_of_the_slot_delete_the_slot_rather: "Impossible de supprimer la dernière machine du créneau. Supprimez plutôt le créneau."
@@ -271,7 +271,7 @@ fr:
       events_edit:
         edit_the_event: "Éditer l’événement"
         confirmation_required: "Confirmation requise"
-        edit_recurring_event: "Vous êtes sur le point de modifier un événement périodique. Que voulez-vous modifier ?"
+        edit_recurring_event: "Vous êtes sur le point de mettre à jour un événement périodique. Que voulez-vous mettre à jour ?"
         edit_this_event: "Uniquement cet événement"
         edit_this_and_next: "Cet événement et tous les suivants"
         edit_all: "Tous les événements"
@@ -673,6 +673,10 @@ fr:
         general_space_code: "Code comptable pour tous les espaces"
         accounting_Space_label: "Libellé espaces"
         general_space_label: "Libellé du compte pour tous les espaces"
+        accounting_Pack_code: "Code pack prépayé"
+        general_pack_code: "Code comptable pour tous les packs prépayés"
+        accounting_Pack_label: "Libellé pack prépayé"
+        general_pack_label: "Libellé du compte pour tous les packs prépayés"
         accounting_Error_code: "Code erreurs"
         general_error_code: "Code comptable pour les factures en erreur"
         accounting_Error_label: "Libellé erreurs"
@@ -983,7 +987,7 @@ fr:
       #add a new administrator to the platform
       admins_new:
         add_an_administrator: "Ajouter un administrateur"
-        administrator_successfully_created_he_will_receive_his_connection_directives_by_email: "L'administrateur a bien été créé. {GENDER, select, female{Elle} other{Il}} recevra ses instructions de connexion par email."
+        administrator_successfully_created_he_will_receive_his_connection_directives_by_email: "Création réussie. Les directives de connexion ont été envoyées à l'administrateur par e-mail."
         failed_to_create_admin: "Impossible de créer l'administrateur :"
         man: "Homme"
         woman: "Femme"
@@ -1001,7 +1005,7 @@ fr:
       #add a new manager to the platform
       manager_new:
         add_a_manager: "Ajouter un gestionnaire"
-        manager_successfully_created: "Le gestionnaire a bien été créé. {GENDER, select, female{Elle} other{Il}} recevra ses instructions de connexion par courriel."
+        manager_successfully_created: "Création réussie. Les directives de connexion ont été envoyées au nouveau gestionnaire par e-mail."
         failed_to_create_manager: "Impossible de créer le gestionnaire :"
         man: "Homme"
         woman: "Femme"
@@ -1381,7 +1385,7 @@ fr:
             online_payment: "Le module de paiement par carte bancaire est-il actif ?"
             invoices: "Le module est facturation est-il actif ?"
             openlab: "Le module de partage de projets (OpenLab) est-il actif ?"
-          tracking_id_info_html: "<p>Pour activer les suivi statistique des visites utilisant Google Analytics, définissez ici votre ID de suivi. Il se présente sous la forme UA-000000-2. Visitez <a href='https://analytics.google.com/analytics/web/' target='_blank'>le site web de Google Analytics</a> pour en obtenir un.<br/><strong>Attention :</strong> si vous activez cette fonctionnalité, pensez à l'indiquer dans votre politique de confidentialité, ci-dessus.</p><p>Le nom d'hôte est également requis pour pouvoir utiliser Google Analytics. Vous pouvez l'obtenir en cliquant sur le bouton adjacent. Ce dernier paramètre est utilisé ailleurs, veuillez le définir avec soin.</p>"
+          tracking_id_info_html: "Pour activer les suivi statistique des visites utilisant Google Analytics V4, définissez ici votre ID de suivi. Il se présente sous la forme G-XXXXXX. Visitez <a href='https://analytics.google.com/analytics/web/' target='_blank'>le site web de Google Analytics</a> pour en obtenir un.<br/><strong>Attention :</strong> si vous activez cette fonctionnalité, une cookie sera créé. Pensez à l'indiquer dans votre politique de confidentialité, ci-dessus."
           tracking_id: "ID de suivi"
       open_api_clients:
         add_new_client: "Créer un compte client"

@@ -14,6 +14,7 @@ import WalletAPI from '../../api/wallet';
 import { Invoice } from '../../models/invoice';
 import SettingAPI from '../../api/setting';
 import { SettingName } from '../../models/setting';
+import { GoogleTagManager } from '../../models/gtm';
 import { ComputePriceResult } from '../../models/price';
 import { Wallet } from '../../models/wallet';
 import FormatLib from '../../lib/format';
@@ -51,6 +52,8 @@ interface AbstractPaymentModalProps {
   preventScheduleInfo?: boolean,
   modalSize?: ModalSize,
 }
+
+declare const GTM: GoogleTagManager;
 
 /**
  * This component is an abstract modal that must be extended by each payment gateway to include its payment form.
@@ -90,7 +93,9 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
     CustomAssetAPI.get(CustomAssetName.CgvFile).then(asset => setCgv(asset));
     SettingAPI.get(SettingName.PaymentGateway).then((setting) => {
       // we capitalize the first letter of the name
-      setGateway(setting.value.replace(/^\w/, (c) => c.toUpperCase()));
+      if (setting.value) {
+        setGateway(setting.value.replace(/^\w/, (c) => c.toUpperCase()));
+      }
     });
 
     return () => { mounted.current = false; };
@@ -154,6 +159,7 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
    */
   const handleFormSuccess = async (result: Invoice|PaymentSchedule): Promise<void> => {
     setSubmitState(false);
+    GTM.trackPurchase(result.id, result.total);
     afterSuccess(result);
   };
 

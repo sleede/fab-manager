@@ -126,8 +126,8 @@ Application.Controllers.controller('EventsController', ['$scope', '$state', 'Eve
   }
 ]);
 
-Application.Controllers.controller('ShowEventController', ['$scope', '$state', '$stateParams', '$rootScope', 'Event', '$uibModal', 'Member', 'Reservation', 'Price', 'CustomAsset', 'Slot', 'eventPromise', 'growl', '_t', 'Wallet', 'AuthService', 'helpers', 'dialogs', 'priceCategoriesPromise', 'settingsPromise', 'LocalPayment',
-  function ($scope, $state, $stateParams, $rootScope, Event, $uibModal, Member, Reservation, Price, CustomAsset, Slot, eventPromise, growl, _t, Wallet, AuthService, helpers, dialogs, priceCategoriesPromise, settingsPromise, LocalPayment) {
+Application.Controllers.controller('ShowEventController', ['$scope', '$state', '$rootScope', 'Event', '$uibModal', 'Member', 'Reservation', 'Price', 'CustomAsset', 'Slot', 'eventPromise', 'growl', '_t', 'Wallet', 'AuthService', 'helpers', 'dialogs', 'priceCategoriesPromise', 'settingsPromise', 'LocalPayment',
+  function ($scope, $state,$rootScope, Event, $uibModal, Member, Reservation, Price, CustomAsset, Slot, eventPromise, growl, _t, Wallet, AuthService, helpers, dialogs, priceCategoriesPromise, settingsPromise, LocalPayment) {
     /* PUBLIC SCOPE */
 
     // reservations for the currently shown event

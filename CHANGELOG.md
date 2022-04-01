@@ -1,8 +1,77 @@
 # Changelog Fab-manager
 
 - Updated Node to 16.13.2
+- Updated eslint to v8 and eslint related packages to their latest versions
+- Updated typescript to v4.6.3
+- Webpack overlay will now report eslint issues
+- Linted all code according to eslint rules
 
-# v5.3.2 2022 January 19
+## v5.3.7 2022 March 28
+
+- Updated Spanish translations (thanks to [@altieriranedo](https://crowdin.com/profile/altieriranedo))
+- Fix a security issue: updated minimist to 1.2.6 to fix [CVE-2021-44906](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-44906)
+- Fix a security issue: updated node-forge to 1.3.0 to fix [CVE-2022-24771](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24771), [CVE-2022-24772](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24772) and [CVE-2022-24773](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24773)
+ 
+## v5.3.6 2022 March 24
+
+- Support for Google Analytics V4
+- OAuth2 scopes are now configurable from the interface
+- Prepaid-packs purchases are exported to the accounting CSV file
+- Updated environment documentation
+- Updated react-i18next to 11.15.6
+- Updated i18next to 21.6.13
+- Updated i18next-icu to 2.0.3
+- Updated sidekiq-unique-jobs to 7.1.15
+- Updated @uirouter/angularjs to 1.0.30
+- Updated bootstrap-sass to 3.4.3
+- Removed unmaintained gem sidekiq-cron and replaced it with sidekiq-scheduler
+- Removed unmaintained @rails/webpacker v5 and replaced it with shakapacker v6.2.0
+- Removed dependency to auto-ngtemplate-loader
+- Removed support for Universal Analytics
+- Updated deprecated division operators in sass
+- Fix a bug: prepaid-packs purchases are reported as subscriptions in the statistics
+- Fix a bug: error Couldn't find the binary git during assets compilation
+- Fix a bug: a sentence was not linked to a translation key
+- Fix a bug: the version check may be scheduled at an invalid time
+- Fix a bug: the moment-timezone relied on an outdated version of moment with a case-sensitive locale file
+- Fix a bug: unable to delete an administrator who had closed an accounting period
+- Fix a bug: captcha keys are not shown in the admin panel, once configured
+- Fix a bug: help message in upgrade script has a bogus format
+- Fix a security issue: removed message format in elasticsearch's log4j to fix [CVE-2021-44228](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-44228)
+- Fix a security issue: updated image_processing to 1.12.2 to fix [CVE-2022-24720](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24720)
+- Fix a security issue: updated url-parse to 1.5.10 to fix [CVE-2022-0686](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0686), [CVE-2022-0691](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0691), [CVE-2022-0639](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0639) and [CVE-2022-0512](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0512)
+- Fix a security issue: updated rails to 5.2.6.3 to fix [CVE-2022-21831](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-21831), [CVE-2022-23633](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23633)
+- Fix a security issue: updated sidekiq to 6.4.1 to fix [CVE-2022-23837](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23837)
+- Fix a security issue: updated nokogiri to 1.13.3 to fix [CVE-2021-30560](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30560) and [CVE-2022-23308](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23308)
+- Fix a security issue: updated puma to 4.3.11 to fix [CVE-2022-23634](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23634)
+- Fix a security issue: updated i18next-http-backend to 1.3.2 to fix [CVE-2022-0235](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0235)
+- Fix a security issue: updated follow-redirects to 1.18.8 to fix [CVE-2022-0536](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0536)
+- [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2021,07]`
+- [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/cve-2021-44228.sh | bash`
+- [TODO DEPLOY] update your oAuth2 provider configuration with the scopes previously defined in the OAUTH2_SCOPE environment variable
+
+## v5.3.5 2022 March 02
+
+- Added [an option](doc/environment.md#OPENLAB_SSL_VERIFY) to allow set verify ssl option for OpenLab
+
+## v5.3.4 2022 March 01
+
+- Fix line break on home events' cards
+- Fix typo "projets" => "projects"
+- Removes dead code about OpenAPI (open_api_calls_count_tracings)
+- Fix a bug: unable to modify OpenLab url for production
+
+## v5.3.3 2022 February 08
+
+- Updated german translations
+- Fix a bug: unable to rebuild the statistics
+- Fix a bug/regresion: $sce.getTrustedHtml removes all dangerous html like iframe (youtube players, ect), replaced by $sce.trustAsHtml which trusts the content, it creates a security breach but all contents are created by users to we trust them
+- Fix a bug: in SubscriptionPolicy#show?, was causing an error notice, making user think that the payment was not done, but it was
+- Fix a bug: destroying a project was impossible
+- Fix a bug: fix non-blocking js error when there was not payment gateway set
+- [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2020,04]`
+
+## v5.3.2 2022 January 19
 
 - Add a test for statistics generation
 - Fix a bug: missing the Other payment method
@@ -14,7 +83,7 @@
 - Fix a bug: prepaid-packs without expiration date do not work
 - [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2020,04]`
 
-# v5.3.1 2022 January 17
+## v5.3.1 2022 January 17
 
 - Definition of extended prices for spaces is now made in hours (previously in minutes)
 - Support for JSONPath syntax in OAuth2 SSO fields mapping
@@ -45,12 +114,12 @@
 - Fix a security issue: updated follow-redirects to 1.14.7 to fix [CVE-2022-0155](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0155)
 - [TODO DEPLOY] `rails db:seed`
 
-# v5.3.0 2021 December 29
+## v5.3.0 2021 December 29
 
 - Ability to configure multiple VAT rates, per kind of invoiced item
 - Ability to export the collected VAT, by rates, to a CSV file
 - Refactored the extended prices' frontend code to allow future customization
-- Fix a bug: the amount label in not correctly shown in the extended prices modal 
+- Fix a bug: the amount label in not correctly shown in the extended prices modal
 - Fix a bug: `extended_prices_in_same_day` apply the extended prices to each day
 
 ## v5.2.0 2021 December 23

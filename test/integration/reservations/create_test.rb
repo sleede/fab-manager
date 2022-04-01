@@ -622,7 +622,7 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
 
     assert_not_nil subscription_item
 
-    subscription = subscription_item.subscription
+    subscription = subscription_item.object
 
     assert_equal subscription_item.amount, plan.amount
     assert_equal subscription.plan_id, plan.id

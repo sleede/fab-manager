@@ -45,13 +45,13 @@ Application.Controllers.controller('TagsController', ['$scope', 'tagsPromise', '
   $scope.saveTag = function (data, id) {
     if (id != null) {
       return Tag.update({ id }, { tag: data }, response => growl.success(_t('app.admin.members.tag_form.changes_successfully_saved'))
-        , error => growl.error(_t('app.admin.members.tag_form.an_error_occurred_while_saving_changes')));
+        , () => growl.error(_t('app.admin.members.tag_form.an_error_occurred_while_saving_changes')));
     } else {
       return Tag.save({ tag: data }, function (resp) {
         growl.success(_t('app.admin.members.tag_form.new_tag_successfully_saved'));
         return $scope.tags[$scope.tags.length - 1].id = resp.id;
       }
-      , function (error) {
+      , function () {
         growl.error(_t('app.admin.members.tag_form.an_error_occurred_while_saving_the_new_tag'));
         return $scope.tags.splice($scope.tags.length - 1, 1);
       });
@@ -78,7 +78,7 @@ Application.Controllers.controller('TagsController', ['$scope', 'tagsPromise', '
         growl.success(_t('app.admin.members.tag_form.tag_successfully_deleted'));
         return $scope.tags.splice(index, 1);
       }
-      , error => growl.error(_t('app.admin.members.tag_form.an_error_occurred_and_the_tag_deletion_failed')));
+      , () => growl.error(_t('app.admin.members.tag_form.an_error_occurred_and_the_tag_deletion_failed')));
     });
 }
 

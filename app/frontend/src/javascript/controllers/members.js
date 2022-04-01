@@ -323,7 +323,7 @@ Application.Controllers.controller('ShowProfileController', ['$scope', 'memberPr
    * and return the filtered networks
    * @return {Array}
    */
-  var filterNetworks = function () {
+  const filterNetworks = function () {
     const networks = [];
     for (const network of Array.from(SocialNetworks)) {
       if ($scope.user.profile[network] && ($scope.user.profile[network].length > 0)) {

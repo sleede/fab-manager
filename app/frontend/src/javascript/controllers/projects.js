@@ -480,12 +480,12 @@ Application.Controllers.controller('NewProjectController', ['$rootScope', '$scop
 /**
  * Controller used in the project edition page
  */
-Application.Controllers.controller('EditProjectController', ['$rootScope', '$scope', '$state', '$stateParams', 'Project', 'Machine', 'Member', 'Component', 'Theme', 'Licence', '$document', 'CSRF', 'projectPromise', 'Diacritics', 'dialogs', 'allowedExtensions', '_t',
-  function ($rootScope, $scope, $state, $stateParams, Project, Machine, Member, Component, Theme, Licence, $document, CSRF, projectPromise, Diacritics, dialogs, allowedExtensions, _t) {
+Application.Controllers.controller('EditProjectController', ['$rootScope', '$scope', '$state', '$transition$', 'Project', 'Machine', 'Member', 'Component', 'Theme', 'Licence', '$document', 'CSRF', 'projectPromise', 'Diacritics', 'dialogs', 'allowedExtensions', '_t',
+  function ($rootScope, $scope, $state, $transition$, Project, Machine, Member, Component, Theme, Licence, $document, CSRF, projectPromise, Diacritics, dialogs, allowedExtensions, _t) {
     /* PUBLIC SCOPE */
 
     // API URL where the form will be posted
-    $scope.actionUrl = `/api/projects/${$stateParams.id}`;
+    $scope.actionUrl = `/api/projects/${$transition$.params().id}`;
 
     // Form action on the above URL
     $scope.method = 'put';
@@ -618,7 +618,7 @@ Application.Controllers.controller('ShowProjectController', ['$scope', '$state',
                 growl.success(_t('app.public.projects_show.your_report_was_successful_thanks'));
                 return $uibModalInstance.close(res);
               }
-              , function (error) {
+              , function () {
                 // creation failed...
                 growl.error(_t('app.public.projects_show.an_error_occured_while_sending_your_report'));
               }

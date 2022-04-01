@@ -1,23 +1,21 @@
 (function () {
-  var Humanize, isArray, isFinite, isNaN, objectRef, timeFormats, toString;
+  const objectRef = new function () {}();
 
-  objectRef = new function () {}();
+  const toString = objectRef.toString;
 
-  toString = objectRef.toString;
-
-  isNaN = function (value) {
+  const isNaN = function (value) {
     return Number.isNaN(value);
   };
 
-  isFinite = function (value) {
+  const isFinite = function (value) {
     return ((typeof window !== 'undefined' && window !== null ? window.isFinite : undefined) || global.isFinite)(value) && !isNaN(parseFloat(value));
   };
 
-  isArray = function (value) {
+  const isArray = function (value) {
     return toString.call(value) === '[object Array]';
   };
 
-  timeFormats = [
+  const timeFormats = [
     {
       name: 'second',
       value: 1e3
@@ -36,7 +34,7 @@
     }
   ];
 
-  Humanize = {};
+  const Humanize = {};
 
   Humanize.intword = function (number, charWidth, decimals) {
     if (decimals == null) {
@@ -51,18 +49,18 @@
   };
 
   Humanize.compactInteger = function (input, decimals) {
-    var bigNumPrefixes, decimalIndex, decimalPart, decimalPartArray, length, number, numberLength, numberLengths, output, outputNumber, signString, unsignedNumber, unsignedNumberCharacterArray, unsignedNumberString, wholePart, wholePartArray, _i, _len, _length;
+    let decimalPart, length, output, outputNumber, unsignedNumberString, _i, _len, _length;
     if (decimals == null) {
       decimals = 0;
     }
     decimals = Math.max(decimals, 0);
-    number = parseInt(input, 10);
-    signString = number < 0 ? '-' : '';
-    unsignedNumber = Math.abs(number);
+    const number = parseInt(input, 10);
+    const signString = number < 0 ? '-' : '';
+    const unsignedNumber = Math.abs(number);
     unsignedNumberString = '' + unsignedNumber;
-    numberLength = unsignedNumberString.length;
-    numberLengths = [13, 10, 7, 4];
-    bigNumPrefixes = ['T', 'B', 'M', 'k'];
+    const numberLength = unsignedNumberString.length;
+    const numberLengths = [13, 10, 7, 4];
+    const bigNumPrefixes = ['T', 'B', 'M', 'k'];
     if (unsignedNumber < 1000) {
       if (decimals > 0) {
         unsignedNumberString += '.' + (Array(decimals + 1).join('0'));
@@ -79,11 +77,11 @@
         break;
       }
     }
-    decimalIndex = numberLength - length + 1;
-    unsignedNumberCharacterArray = unsignedNumberString.split('');
-    wholePartArray = unsignedNumberCharacterArray.slice(0, decimalIndex);
-    decimalPartArray = unsignedNumberCharacterArray.slice(decimalIndex, decimalIndex + decimals + 1);
-    wholePart = wholePartArray.join('');
+    const decimalIndex = numberLength - length + 1;
+    const unsignedNumberCharacterArray = unsignedNumberString.split('');
+    const wholePartArray = unsignedNumberCharacterArray.slice(0, decimalIndex);
+    const decimalPartArray = unsignedNumberCharacterArray.slice(decimalIndex, decimalIndex + decimals + 1);
+    const wholePart = wholePartArray.join('');
     decimalPart = decimalPartArray.join('');
     if (decimalPart.length < decimals) {
       decimalPart += '' + (Array(decimals - decimalPart.length + 1).join('0'));
@@ -105,7 +103,7 @@
   };
 
   Humanize.filesize = Humanize.fileSize = function (filesize) {
-    var sizeStr;
+    let sizeStr;
     if (filesize >= 1073741824) {
       sizeStr = Humanize.formatNumber(filesize / 1073741824, 2, '') + ' GB';
     } else if (filesize >= 1048576) {
@@ -119,7 +117,6 @@
   };
 
   Humanize.formatNumber = function (number, precision, thousand, decimal) {
-    var base; var commas; var decimals; var firstComma; var mod; var negative; var usePrecision;
     if (precision == null) {
       precision = 0;
     }
@@ -129,36 +126,35 @@
     if (decimal == null) {
       decimal = '.';
     }
-    firstComma = function (number, thousand, position) {
+    const firstComma = function (number, thousand, position) {
       if (position) {
         return number.substr(0, position) + thousand;
       } else {
         return '';
       }
     };
-    commas = function (number, thousand, position) {
+    const commas = function (number, thousand, position) {
       return number.substr(position).replace(/(\d{3})(?=\d)/g, '$1' + thousand);
     };
-    decimals = function (number, decimal, usePrecision) {
+    const decimals = function (number, decimal, usePrecision) {
       if (usePrecision) {
         return decimal + Humanize.toFixed(Math.abs(number), usePrecision).split('.')[1];
       } else {
         return '';
       }
     };
-    usePrecision = Humanize.normalizePrecision(precision);
-    negative = number < 0 ? '-' : '';
-    base = parseInt(Humanize.toFixed(Math.abs(number || 0), usePrecision), 10) + '';
-    mod = base.length > 3 ? base.length % 3 : 0;
+    const usePrecision = Humanize.normalizePrecision(precision);
+    const negative = number < 0 ? '-' : '';
+    const base = parseInt(Humanize.toFixed(Math.abs(number || 0), usePrecision), 10) + '';
+    const mod = base.length > 3 ? base.length % 3 : 0;
     return negative + firstComma(base, thousand, mod) + commas(base, thousand, mod) + decimals(number, decimal, usePrecision);
   };
 
   Humanize.toFixed = function (value, precision) {
-    var power;
     if (precision == null) {
       precision = Humanize.normalizePrecision(precision, 0);
     }
-    power = Math.pow(10, precision);
+    const power = Math.pow(10, precision);
     return (Math.round(value * power) / power).toFixed(precision);
   };
 
@@ -172,16 +168,16 @@
   };
 
   Humanize.ordinal = function (value) {
-    var end, leastSignificant, number, specialCase;
-    number = parseInt(value, 10);
+    let end;
+    const number = parseInt(value, 10);
     if (number === 0) {
       return value;
     }
-    specialCase = number % 100;
+    const specialCase = number % 100;
     if (specialCase === 11 || specialCase === 12 || specialCase === 13) {
       return '' + number + 'th';
     }
-    leastSignificant = number % 10;
+    const leastSignificant = number % 10;
     switch (leastSignificant) {
       case 1:
         end = 'st';
@@ -199,7 +195,7 @@
   };
 
   Humanize.times = function (value, overrides) {
-    var number, smallTimes, _ref;
+    let number, smallTimes, _ref;
     if (overrides == null) {
       overrides = {};
     }
@@ -243,8 +239,8 @@
   };
 
   Humanize.truncatewords = Humanize.truncateWords = function (string, length) {
-    var array, i, result;
-    array = string.split(' ');
+    let i, result;
+    const array = string.split(' ');
     result = '';
     i = 0;
     while (i < length) {
@@ -259,7 +255,7 @@
   };
 
   Humanize.truncatenumber = Humanize.boundedNumber = function (num, bound, ending) {
-    var result;
+    let result;
     if (bound == null) {
       bound = 100;
     }
@@ -276,8 +272,8 @@
   };
 
   Humanize.oxford = function (items, limit, limitStr) {
-    var extra, limitIndex, numItems;
-    numItems = items.length;
+    let extra, limitIndex;
+    const numItems = items.length;
     if (numItems < 2) {
       return '' + items;
     } else if (numItems === 2) {
@@ -296,7 +292,7 @@
   };
 
   Humanize.dictionary = function (object, joiner, separator) {
-    var defs, key, result, val;
+    let defs, key, result, val;
     if (joiner == null) {
       joiner = ' is ';
     }
@@ -316,12 +312,12 @@
   };
 
   Humanize.frequency = function (list, verb) {
-    var len, str, times;
+    let str;
     if (!isArray(list)) {
       return;
     }
-    len = list.length;
-    times = Humanize.times(len);
+    const len = list.length;
+    const times = Humanize.times(len);
     if (len === 0) {
       str = '' + times + ' ' + verb;
     } else {
@@ -331,7 +327,7 @@
   };
 
   Humanize.pace = function (value, intervalMs, unit) {
-    var f, prefix, rate, relativePace, roundedPace, timeUnit, _i, _len;
+    let f, prefix, relativePace, timeUnit, _i, _len;
     if (unit == null) {
       unit = 'time';
     }
@@ -340,7 +336,7 @@
     }
     prefix = 'Approximately';
     timeUnit = null;
-    rate = value / intervalMs;
+    const rate = value / intervalMs;
     for (_i = 0, _len = timeFormats.length; _i < _len; _i++) {
       f = timeFormats[_i];
       relativePace = rate * f.value;
@@ -354,7 +350,7 @@
       relativePace = 1;
       timeUnit = timeFormats[timeFormats.length - 1].name;
     }
-    roundedPace = Math.round(relativePace);
+    const roundedPace = Math.round(relativePace);
     unit = Humanize.pluralize(roundedPace, unit);
     return '' + prefix + ' ' + roundedPace + ' ' + unit + ' per ' + timeUnit;
   };
@@ -387,21 +383,20 @@
   };
 
   Humanize.titlecase = Humanize.titleCase = function (string) {
-    var doTitleCase; var internalCaps; var smallWords; var splitOnHyphensRegex; var splitOnWhiteSpaceRegex;
-    smallWords = /\b(a|an|and|at|but|by|de|en|for|if|in|of|on|or|the|to|via|vs?\.?)\b/i;
-    internalCaps = /\S+[A-Z]+\S*/;
-    splitOnWhiteSpaceRegex = /\s+/;
-    splitOnHyphensRegex = /-/;
-    doTitleCase = function (_string, hyphenated, firstOrLast) {
-      var index, stringArray, titleCasedArray, word, _i, _len;
+    const smallWords = /\b(a|an|and|at|but|by|de|en|for|if|in|of|on|or|the|to|via|vs?\.?)\b/i;
+    const internalCaps = /\S+[A-Z]+\S*/;
+    const splitOnWhiteSpaceRegex = /\s+/;
+    const splitOnHyphensRegex = /-/;
+    const doTitleCase = function (_string, hyphenated, firstOrLast) {
+      let index, word, _i, _len;
       if (hyphenated == null) {
         hyphenated = false;
       }
       if (firstOrLast == null) {
         firstOrLast = true;
       }
-      titleCasedArray = [];
-      stringArray = _string.split(hyphenated ? splitOnHyphensRegex : splitOnWhiteSpaceRegex);
+      const titleCasedArray = [];
+      const stringArray = _string.split(hyphenated ? splitOnHyphensRegex : splitOnWhiteSpaceRegex);
       for (index = _i = 0, _len = stringArray.length; _i < _len; index = ++_i) {
         word = stringArray[index];
         if (word.indexOf('-') !== -1) {

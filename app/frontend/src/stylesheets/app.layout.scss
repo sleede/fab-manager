@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 /*layout*/
 .header,
 .footer {
@@ -286,8 +288,8 @@ body.container {
     height: $header-md-height;
 
     .navbar-form {
-      margin-top: floor(($header-md-height - 30) / 2);
-      margin-bottom: floor(($header-md-height - 30) / 2);
+      margin-top: floor(math.div($header-md-height - 30, 2));
+      margin-bottom: floor(math.div($header-md-height - 30, 2));
     }
   }
 
@@ -689,7 +691,7 @@ body.container {
       cursor: pointer;
       & .Event-picture {opacity: 0.7;}
     }
-    
+
     &-picture {
       height: 250px;
       background-color: #fff;
@@ -701,7 +703,7 @@ body.container {
         object-fit: cover;
       }
     }
-    
+
     &-desc {
       position: relative;
       padding: 15px;

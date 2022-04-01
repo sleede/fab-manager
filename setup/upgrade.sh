@@ -269,13 +269,13 @@ Options:
   -p <string>        Run the preprocessing command (TODO DEPLOY)
   -c <string>        Provides additional upgrade command, run in the context of the app (TODO DEPLOY)
   -s <string>        Executes a remote script (TODO DEPOY)
-  -e <string>        Adds the environment variable to config/env\n" "$(basename "$0")
+  -e <string>        Adds the environment variable to config/env
 Return codes:
   0                  Upgrade terminated successfully
   1                  Configuration required
   2                  Aborted by user
   3                  Version not supported
-  4                  Unexpected error" 1>&2
+  4                  Unexpected error\n" "$(basename "$0")" 1>&2
   exit 1
 }
 

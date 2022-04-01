@@ -83,7 +83,7 @@ class API::AuthProvidersController < API::ApiController
     params.require(:auth_provider)
           .permit(:name, :providable_type,
                   providable_attributes: [:id, :base_url, :token_endpoint, :authorization_endpoint, :logout_endpoint,
-                                          :profile_url, :client_id, :client_secret,
+                                          :profile_url, :client_id, :client_secret, :scopes,
                                           o_auth2_mappings_attributes: [:id, :local_model, :local_field, :api_field,
                                                                         :api_endpoint, :api_data_type, :_destroy,
                                                                         transformation: [:type, :format, :true_value,

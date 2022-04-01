@@ -3,7 +3,7 @@ import { Node } from '@tiptap/core';
 export interface IframeOptions {
   allowFullscreen: boolean,
   HTMLAttributes: {
-    [key: string]: any
+    [key: string]: string
   },
 }
 

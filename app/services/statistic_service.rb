@@ -126,13 +126,11 @@ class StatisticService
 
   def subscriptions_list(options = default_options)
     result = []
-    InvoiceItem.where('invoice_items.created_at >= :start_date AND invoice_items.created_at <= :end_date', options)
-               .eager_load(invoice: [:coupon], subscription: [:plan, statistic_profile: [:group]]).each do |i|
+    InvoiceItem.where("object_type = '#{Subscription.name}' AND invoice_items.created_at >= :start_date AND invoice_items.created_at <= :end_date", options)
+               .eager_load(invoice: [:coupon]).each do |i|
       next if i.invoice.is_a?(Avoir)
 
-      sub = i.subscription
-
-      next unless sub
+      sub = i.object
 
       ca = i.amount.to_i
       cs = CouponService.new

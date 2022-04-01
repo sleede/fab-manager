@@ -4,7 +4,7 @@
     no-undef,
     no-unreachable,
     no-unused-vars,
-    standard/no-callback-literal,
+    n/no-callback-literal,
 */
 // TODO: This file was created by bulk-decaffeinate.
 // Fix any style issues and re-enable lint.
@@ -17,8 +17,8 @@
  */
 'use strict';
 
-Application.Controllers.controller('GraphsController', ['$scope', '$state', '$rootScope', 'es', 'Statistics', '_t',
-  function ($scope, $state, $rootScope, es, Statistics, _t) {
+Application.Controllers.controller('GraphsController', ['$scope', '$state', '$rootScope', '$transitions', 'es', 'Statistics', '_t',
+  function ($scope, $state, $rootScope, $transitions, es, Statistics, _t) {
   /* PRIVATE STATIC CONSTANTS */
 
     // height of the HTML/SVG charts elements in pixels
@@ -167,8 +167,8 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
 
       // workaround for angular-bootstrap::tabs behavior: on tab deletion, another tab will be selected
       // which will cause every tabs to reload, one by one, when the view is closed
-      $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-        if ((fromState.name === 'app.admin.stats_graphs') && (Object.keys(fromParams).length === 0)) {
+      $transitions.onStart({ to: 'app.admin.stats_graphs' }, function (trans) {
+        if (Object.keys(trans.from().params).length === 0) {
           return $scope.preventRefresh = true;
         }
       });
@@ -179,7 +179,7 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
      * @param $event {Object} jQuery event object
      * @param datePicker {Object} settings object of the concerned datepicker. Must have an 'opened' property
      */
-    var toggleDatePicker = function ($event, datePicker) {
+    const toggleDatePicker = function ($event, datePicker) {
       $event.preventDefault();
       $event.stopPropagation();
       return datePicker.opened = !datePicker.opened;
@@ -188,7 +188,7 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
     /**
      * Query elasticSearch according to the current parameters and update the chart
      */
-    var refreshChart = function () {
+    const refreshChart = function () {
       if ($scope.selectedIndex && !$scope.preventRefresh) {
         return query($scope.selectedIndex, function (aggregations, error) {
           if (error) {
@@ -239,7 +239,7 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
      * Format aggregations as retuned by elasticSearch to an understandable format for NVD3
      * @param aggs {Object} as returned by elasticsearch
      */
-    var formatAggregations = function (aggs) {
+    const formatAggregations = function (aggs) {
       const format = {};
 
       angular.forEach(aggs, function (type, type_key) { // go through aggs[$TYPE] where $TYPE = month|year|hour|booking|...
@@ -254,7 +254,7 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
                     const cur_subtype = cur_type.subtypes[it_st];
                     if (subgroup.key === cur_subtype.key) { // ... which match $SUBTYPE
                     // then we construct NVD3 dataSource according to these information
-                      var dataSource = {
+                      const dataSource = {
                         values: [],
                         key: cur_subtype.label,
                         total: 0,
@@ -292,7 +292,7 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
      * @param limit {number} limit the number of stats in the bar chart
      * @param typeKey {String} field name witch results are grouped by
      */
-    var formatRankingAggregations = function (aggs, limit, typeKey) {
+    const formatRankingAggregations = function (aggs, limit, typeKey) {
       const format =
       { ranking: [] };
 
@@ -325,7 +325,7 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
      * @param key {string} raw value of the label
      * @param typeKey {string} name of the field the results are grouped by
      */
-    var getRankingLabel = function (key, typeKey) {
+    const getRankingLabel = function (key, typeKey) {
       if ($scope.selectedIndex) {
         if (typeKey === 'subType') {
           for (const type of Array.from($scope.selectedIndex.types)) {
@@ -356,7 +356,7 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
      * @param callback {function} function be to run after results were retrieved,
      *   it will receive two parameters : results {Array}, error {String} (if any)
      */
-    var query = function (index, callback) {
+    const query = function (index, callback) {
     // invalid callback handeling
       if (typeof (callback) !== 'function') {
         console.error('[graphsController::query] Error: invalid callback provided');
@@ -384,7 +384,7 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
         let type_it = 0;
         const results = {};
         let error = '';
-        var recursiveCb = function () {
+        const recursiveCb = function () {
           if (type_it < stat_types.length) {
             return queryElasticStats(index.es_type_key, stat_types[type_it], function (prevResults, prevError) {
               if (prevError) {
@@ -418,7 +418,7 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
      * @param callback {function} function be to run after results were retrieved,
      *   it will receive two parameters : results {Array}, error {String} (if any)
      */
-    var queryElasticStats = function (esType, statType, callback) {
+    const queryElasticStats = function (esType, statType, callback) {
     // handle invalid callback
       if (typeof (callback) !== 'function') {
         console.error('[graphsController::queryElasticStats] Error: invalid callback provided');
@@ -457,7 +457,7 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
      * @param callback {function} function be to run after results were retrieved,
      * it will receive two parameters : results {Array}, error {String} (if any)
      */
-    var queryElasticRanking = function (esType, groupKey, sortKey, callback) {
+    const queryElasticRanking = function (esType, groupKey, sortKey, callback) {
     // handle invalid callback
       if (typeof (callback) !== 'function') {
         return console.error('[graphsController::queryElasticRanking] Error: invalid callback provided');
@@ -497,15 +497,13 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
      * @param intervalBegin {moment} statitics interval beginning (moment.js type)
      * @param intervalEnd {moment} statitics interval ending (moment.js type)
      */
-    var buildElasticAggregationsQuery = function (type, interval, intervalBegin, intervalEnd) {
+    const buildElasticAggregationsQuery = function (type, interval, intervalBegin, intervalEnd) {
       const q = {
         query: {
           bool: {
             must: [
               {
-                match: {
-                  type: type
-                }
+                match: { type }
               },
               {
                 range: {
@@ -527,7 +525,7 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
               intervals: {
                 date_histogram: {
                   field: 'date',
-                  interval: interval,
+                  interval,
                   min_doc_count: 0,
                   extended_bounds: {
                     min: intervalBegin.valueOf(),
@@ -566,7 +564,7 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
      * @param intervalBegin {moment} statitics interval beginning (moment.js type)
      * @param intervalEnd {moment} statitics interval ending (moment.js type)
      */
-    var buildElasticAggregationsRankingQuery = function (groupKey, sortKey, intervalBegin, intervalEnd) {
+    const buildElasticAggregationsRankingQuery = function (groupKey, sortKey, intervalBegin, intervalEnd) {
       const q = {
         query: {
           bool: {
@@ -635,7 +633,7 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
      * @param data {Array} array of NVD3 dataSources
      * @param type {String} which chart to update (statistic type key)
      */
-    var updateChart = function (chart_type, data, type) {
+    const updateChart = function (chart_type, data, type) {
       const id = `#chart-${type} svg`;
 
       // clean old charts
@@ -695,7 +693,7 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
     /**
      * Given an NVD3 line chart axis, scale it to display ordinated dates, according to the given arguments
      */
-    var setTimeScale = function (nvd3Axis, nvd3Scale, argsArray) {
+    const setTimeScale = function (nvd3Axis, nvd3Scale, argsArray) {
       const scale = d3.time.scale();
 
       nvd3Axis.scale(scale);
@@ -710,7 +708,7 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
     /**
      * Translate line chart data in dates row to bar chart data, one bar per type.
      */
-    var prepareDataForBarChart = function (data, type) {
+    const prepareDataForBarChart = function (data, type) {
       const newData = [{
         key: type,
         values: []
@@ -738,7 +736,7 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
      * @param getValue {function} the callback which will return the value on which the sort will occurs
      * @returns {Array}
      */
-    var stableSort = function (array, order, getValue) {
+    const stableSort = function (array, order, getValue) {
     // prepare sorting
       const keys_order = [];
       const result = [];

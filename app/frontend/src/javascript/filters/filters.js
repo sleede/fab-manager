@@ -1,8 +1,3 @@
-/* eslint-disable
-    no-undef,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS101: Remove unnecessary use of Array.from
@@ -135,7 +130,7 @@ Application.Filters.filter('projectsCollabored', [function () {
   };
 }]);
 
-// depend on humanize.js lib in /vendor
+// depend on app/frontend/src/javascript/lib/humanize.js
 Application.Filters.filter('humanize', [function () {
   return (element, param) => Humanize.truncate(element, param, null);
 }]);
@@ -157,6 +152,8 @@ Application.Filters.filter('breakFilter', [function () {
 Application.Filters.filter('simpleText', [function () {
   return function (text) {
     if (text != null) {
+      // add a line break after specific closing tags
+      text = text.replace(/(<\/p>|<\/h4>|<\/h5>|<\/h6>|<\/pre>|<\/blockquote>)/g, '\n');
       text = text.replace(/<br\s*\/?>/g, '\n');
       return text.replace(/<\/?\w+[^>]*>/g, '');
     } else {
@@ -166,7 +163,7 @@ Application.Filters.filter('simpleText', [function () {
 }]);
 
 Application.Filters.filter('toTrusted', ['$sce', function ($sce) {
-  return text => $sce.getTrustedHtml(text);
+  return text => $sce.trustAsHtml(text);
 }]);
 
 Application.Filters.filter('planIntervalFilter', [function () {
