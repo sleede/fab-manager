@@ -18,5 +18,5 @@ export default class UserLib {
     }
 
     return false;
-  }
+  };
 }

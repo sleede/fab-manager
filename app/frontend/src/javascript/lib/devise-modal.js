@@ -11,7 +11,7 @@
     'Auth',
     '$rootScope',
     function ($uibModal, $http, Auth, $rootScope) {
-      var promise = null;
+      let promise = null;
       function reset () {
         promise = null;
       }

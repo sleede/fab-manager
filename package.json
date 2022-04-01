@@ -16,22 +16,21 @@
     "url": "https://github.com/sleede/fab-manager/issues"
   },
   "scripts": {
-    "lint": "eslint ./app/frontend/src",
-    "lint-ts": "eslint ./app/frontend/src --ext .ts --ext .tsx"
+    "lint": "eslint ./app/frontend/src"
   },
   "license": "AGPL-3.0-only",
   "devDependencies": {
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.4",
-    "@typescript-eslint/eslint-plugin": "^4.28.1",
-    "@typescript-eslint/parser": "^4.28.1",
-    "eslint": "~6.8.0",
-    "eslint-config-standard": "~14.1.1",
-    "eslint-plugin-import": "~2.20.1",
-    "eslint-plugin-lint-erb": "https://github.com/sleede/eslint-plugin-lint-erb.git#master",
-    "eslint-plugin-node": "~11.0.0",
-    "eslint-plugin-promise": "~4.2.1",
-    "eslint-plugin-react": "^7.21.5",
-    "eslint-plugin-standard": "~4.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.17.0",
+    "@typescript-eslint/parser": "^5.17.0",
+    "eslint": "~8.12.0",
+    "eslint-config-standard": "~17.0.0-1",
+    "eslint-plugin-html-erb": "^1.0.1",
+    "eslint-plugin-import": "~2.25.4",
+    "eslint-plugin-n": "^15.1.0",
+    "eslint-plugin-promise": "~6.0.0",
+    "eslint-plugin-react": "^7.29.4",
+    "eslint-webpack-plugin": "^3.1.1",
     "react-refresh": "^0.11.0",
     "webpack-dev-server": "^4.7.4"
   },
@@ -147,7 +146,7 @@
     "summernote": "0.8.18",
     "terser-webpack-plugin": "5",
     "twitter-fetcher": "^18.0.2",
-    "typescript": "^4.0.5",
+    "typescript": "^4.6.3",
     "ui-select": "0.19",
     "underscore": "1.12",
     "use-immer": "^0.5.1",

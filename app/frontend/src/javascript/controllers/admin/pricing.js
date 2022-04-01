@@ -403,7 +403,7 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
             $scope.spaceCredits[$scope.spaceCredits.length - 1].id = resp.id;
             return growl.success(_t('app.admin.pricing.credit_was_successfully_saved'));
           }
-          , function (err) {
+          , function () {
             $scope.spaceCredits.pop();
             return growl.error(_t('app.admin.pricing.error_creating_credit'));
           });

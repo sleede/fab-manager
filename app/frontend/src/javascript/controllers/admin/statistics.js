@@ -2,7 +2,7 @@
     no-constant-condition,
     no-return-assign,
     no-undef,
-    standard/no-callback-literal,
+    n/no-callback-literal,
 */
 // TODO: This file was created by bulk-decaffeinate.
 // Fix any style issues and re-enable lint.
@@ -522,9 +522,7 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
           bool: {
             must: [
               {
-                term: {
-                  type: type
-                }
+                term: { type }
               },
               {
                 range: {

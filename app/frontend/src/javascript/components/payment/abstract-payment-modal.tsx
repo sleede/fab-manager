@@ -14,6 +14,7 @@ import WalletAPI from '../../api/wallet';
 import { Invoice } from '../../models/invoice';
 import SettingAPI from '../../api/setting';
 import { SettingName } from '../../models/setting';
+import { GoogleTagManager } from '../../models/gtm';
 import { ComputePriceResult } from '../../models/price';
 import { Wallet } from '../../models/wallet';
 import FormatLib from '../../lib/format';
@@ -51,6 +52,8 @@ interface AbstractPaymentModalProps {
   preventScheduleInfo?: boolean,
   modalSize?: ModalSize,
 }
+
+declare const GTM: GoogleTagManager;
 
 declare const GTM: any;
 

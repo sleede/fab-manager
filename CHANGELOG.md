@@ -3,6 +3,10 @@
 ## next deploy
 
 - Updated Node to 16.13.2
+- Updated eslint to v8 and eslint related packages to their latest versions
+- Updated typescript to v4.6.3
+- Webpack overlay will now report eslint issues
+- Linted all code according to eslint rules
 - when generating an avoir, the option "by_wallet" is not present anymore if wallet module is off
 - Fix a bug: edge case of birthday in the future in seeds.rb, we should use Date.current instead of DateTime.current since birthday is a date (see https://github.com/sleede/fab-manager/issues/344)
 - Fix a security issue: updated ruby to 2.6.10 to fix [CVE-2022-28739](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-28739)
@@ -103,6 +107,23 @@
 - Added [an option](doc/environment.md#OPENLAB_SSL_VERIFY) to allow set verify ssl option for OpenLab
 
 ## v5.3.4 2022 March 01
+
+- Fix line break on home events' cards
+- Fix typo "projets" => "projects"
+- Removes dead code about OpenAPI (open_api_calls_count_tracings)
+- Fix a bug: unable to modify OpenLab url for production
+
+## v5.3.3 2022 February 08
+
+- Updated german translations
+- Fix a bug: unable to rebuild the statistics
+- Fix a bug/regresion: $sce.getTrustedHtml removes all dangerous html like iframe (youtube players, ect), replaced by $sce.trustAsHtml which trusts the content, it creates a security breach but all contents are created by users to we trust them
+- Fix a bug: in SubscriptionPolicy#show?, was causing an error notice, making user think that the payment was not done, but it was
+- Fix a bug: destroying a project was impossible
+- Fix a bug: fix non-blocking js error when there was not payment gateway set
+- [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2020,04]`
+
+### v5.3.4 2022 March 01
 
 - Fix line break on home events' cards
 - Fix typo "projets" => "projects"
