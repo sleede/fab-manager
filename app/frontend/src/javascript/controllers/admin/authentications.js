@@ -233,6 +233,20 @@ Application.Controllers.controller('NewAuthenticationController', ['$scope', '$s
   function ($scope, $state, $rootScope, $uibModal, dialogs, growl, mappingFieldsPromise, authProvidersPromise, AuthProvider, _t) {
     $scope.mode = 'creation';
 
+    /**
+     * Shows a success message forwarded from a child react component
+     */
+    $scope.onSuccess = function (message) {
+      growl.success(message);
+    };
+
+    /**
+     * Callback triggered by react components
+     */
+    $scope.onError = function (message) {
+      growl.error(message);
+    };
+
     // default parameters for the new authentication provider
     $scope.provider = {
       name: '',
