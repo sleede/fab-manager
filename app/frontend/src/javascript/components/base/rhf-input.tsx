@@ -1,20 +1,22 @@
 import React, { ReactNode } from 'react';
-import { FieldErrors, UseFormRegister, Validate } from 'react-hook-form';
+import { FieldErrors, FieldPathValue, UseFormRegister, Validate } from 'react-hook-form';
+import { FieldValues } from 'react-hook-form/dist/types/fields';
+import { FieldPath } from 'react-hook-form/dist/types/path';
 
 type inputType = string|number|readonly string [];
-type ruleTypes<T> = {
+type ruleTypes<TFieldValues> = {
   required?: boolean | string,
   pattern?: RegExp | {value: RegExp, message: string},
   minLenght?: number,
   maxLenght?: number,
   min?: number,
   max?: number,
-  validate?: Validate<T>;
+  validate?: Validate<TFieldValues>;
 };
 
-interface RHFInputProps<T> {
+interface RHFInputProps<TFieldValues> {
   id: string,
-  register: UseFormRegister<T>,
+  register: UseFormRegister<TFieldValues>,
   label?: string,
   tooltip?: string,
   defaultValue?: inputType,
@@ -22,7 +24,7 @@ interface RHFInputProps<T> {
   addOn?: ReactNode,
   addOnClassName?: string,
   classes?: string,
-  rules?: ruleTypes<T>,
+  rules?: ruleTypes<TFieldValues>,
   readOnly?: boolean,
   disabled?: boolean,
   placeholder?: string,
@@ -34,8 +36,7 @@ interface RHFInputProps<T> {
 /**
  * This component is a template for an input component to use within React Hook Form
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const RHFInput: React.FC<RHFInputProps<any>> = ({ id, register, label, tooltip, defaultValue, icon, classes, rules, readOnly, disabled, type, addOn, addOnClassName, placeholder, error, step }) => {
+export const RHFInput = <TFieldValues extends FieldValues>({ id, register, label, tooltip, defaultValue, icon, classes, rules, readOnly, disabled, type, addOn, addOnClassName, placeholder, error, step }: RHFInputProps<TFieldValues>) => {
   // Compose classnames from props
   const classNames = `
     rhf-input ${classes || ''}
@@ -54,10 +55,10 @@ export const RHFInput: React.FC<RHFInputProps<any>> = ({ id, register, label, to
       <div className='rhf-input-field'>
         {icon && <span className="icon">{icon}</span>}
         <input id={id}
-          {...register(id, {
+          {...register(id as FieldPath<TFieldValues>, {
             ...rules,
             valueAsNumber: type === 'number',
-            value: defaultValue
+            value: defaultValue as FieldPathValue<TFieldValues, FieldPath<TFieldValues>>
           })}
           type={type}
           step={step}
