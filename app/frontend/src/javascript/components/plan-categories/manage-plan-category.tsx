@@ -15,7 +15,7 @@ interface ManagePlanCategoryProps {
 
 /**
  * This component shows a button.
- * When clicked, we show a modal dialog allowing to fill the parameters with a new plan-category.
+ * When clicked, we show a modal dialog allowing to fill the parameters of a plan-category (create new or update existing).
  */
 const ManagePlanCategoryComponent: React.FC<ManagePlanCategoryProps> = ({ category, action, onSuccess, onError }) => {
   const { t } = useTranslation('admin');

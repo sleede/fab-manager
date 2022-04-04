@@ -5,6 +5,7 @@
 - Updated typescript to v4.6.3
 - Webpack overlay will now report eslint issues
 - Linted all code according to eslint rules
+- Fix a bug: Refused to connect to 'wss://localhost:3035/ws' when using a https tunnel in development mode
 
 ## v5.3.7 2022 March 28
 
