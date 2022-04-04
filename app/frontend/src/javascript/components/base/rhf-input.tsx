@@ -1,21 +1,20 @@
 import React, { ReactNode } from 'react';
 import { FieldErrors, UseFormRegister, Validate } from 'react-hook-form';
-import { FieldValues } from 'react-hook-form/dist/types/fields';
 
 type inputType = string|number|readonly string [];
-type ruleTypes = {
+type ruleTypes<T> = {
   required?: boolean | string,
   pattern?: RegExp | {value: RegExp, message: string},
   minLenght?: number,
   maxLenght?: number,
   min?: number,
   max?: number,
-  validate?: Validate<FieldValues>;
+  validate?: Validate<T>;
 };
 
-interface RHFInputProps {
+interface RHFInputProps<T> {
   id: string,
-  register: UseFormRegister<FieldValues>,
+  register: UseFormRegister<T>,
   label?: string,
   tooltip?: string,
   defaultValue?: inputType,
@@ -23,7 +22,7 @@ interface RHFInputProps {
   addOn?: ReactNode,
   addOnClassName?: string,
   classes?: string,
-  rules?: ruleTypes,
+  rules?: ruleTypes<T>,
   readOnly?: boolean,
   disabled?: boolean,
   placeholder?: string,
@@ -35,7 +34,7 @@ interface RHFInputProps {
 /**
  * This component is a template for an input component to use within React Hook Form
  */
-export const RHFInput: React.FC<RHFInputProps> = ({ id, register, label, tooltip, defaultValue, icon, classes, rules, readOnly, disabled, type, addOn, addOnClassName, placeholder, error, step }) => {
+export const RHFInput: React.FC<RHFInputProps<any>> = ({ id, register, label, tooltip, defaultValue, icon, classes, rules, readOnly, disabled, type, addOn, addOnClassName, placeholder, error, step }) => {
   // Compose classnames from props
   const classNames = `
     rhf-input ${classes || ''}
