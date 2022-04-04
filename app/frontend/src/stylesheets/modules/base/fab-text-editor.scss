@@ -1,0 +1,207 @@
+.fab-textEditor {
+  position: relative;
+  margin-bottom: 1.6rem;
+  padding-bottom: 1.6rem;
+  background-color: var(--gray-soft-lightest);
+  border: 1px solid var(--gray-soft-dark);
+  border-radius: var(--border-radius);
+
+  &-label {
+    @include text-sm;
+    display: block;
+    margin-bottom: 0.8rem;
+  }
+
+  @mixin button($height, $width: $height) {
+    width: $width;
+    height: $height;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    color: var(--gray-hard-darkest);
+    background-color: transparent;
+    border: none;
+    &.is-active { color: var(--information); }
+    &:hover {
+      background-color: var(--gray-soft);
+      cursor: pointer;
+    }
+  }
+
+  &-menu {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem;
+    border-bottom: 1px solid var(--gray-soft-darkest);
+    & > *:not(:last-child) {
+      margin-right: 4px;
+    }
+
+    button { @include button(4rem); }
+    .divider {
+      width: 2px;
+      height: 2.4rem;
+      background-color: var(--gray-soft-dark);
+      border-radius: 1px;
+    }
+  }
+  
+  // tiptap class for the editor
+  .ProseMirror {
+    max-height: 40vh;
+    padding: 1.6rem 1.6rem 1.2rem;
+    overflow: auto;
+    resize: vertical;
+    &:focus { outline: none; }
+    @include editor;
+  }
+
+  &-character-count {
+    padding-right: 1.6rem;
+    @include text-sm;
+    text-align: right;
+    color: var(--gray-hard-lightest);
+  }
+
+  &-subMenu {
+    position: absolute;
+    top: 4.5rem;
+    right: 0;
+    left: 0;
+    max-width: 50ch;
+    margin: 0 0.8rem;
+    padding: 1.2rem;
+    background-color: var(--gray-soft-lightest);
+    border: 1px solid var(--gray-soft-darkest);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease-out;
+    z-index: 10;
+    &.is-active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    & > div {
+      display: flex;
+      align-items: center;
+      &:not(:last-of-type) { margin-bottom: 0.8rem; }
+    }
+
+    h6 {
+      @include text-sm();
+      margin-top: 0;
+    }
+    
+    input[type="text"],
+    select {
+      width: 100%;
+      height: 4rem;
+      padding: 0.4rem 0.8rem;
+      background-color: var(--gray-soft-light);
+      border: 1px solid var(--secondary);
+      border-radius: var(--border-radius);
+      font-size: var(--text-base);
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    input[type="text"] {
+      margin-right: 1.2rem;
+      &::placeholder { color: var(--gray-soft-darkest);}
+    }
+    select {
+      margin-bottom: 0.8rem;
+    }
+    button {
+      @include button(3.2rem);
+      margin-left: auto;
+    }
+
+    .tab {
+      display: flex;
+      align-items: center;
+      margin: 0;
+      cursor: pointer;
+      p {
+        margin: 0 1.2rem 0 0;
+        @include text-sm();
+        color: var(--gray-hard);
+      }
+      input[type="checkbox"] { opacity: 0; width: 0; height: 0; }
+      .switch {
+        position: relative;
+        width: 3.6rem;
+        height: 2rem;
+        background-color: var(--gray-soft);
+        border-radius: 2rem;
+        &::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          width: 2rem;
+          height: 2rem;
+          background-color: var(--gray-soft-lightest);
+          border: 2px solid var(--gray-soft);
+          border-radius: 2rem;
+        }
+      }
+      input:checked + .switch { background-color: var(--information); }
+      input:checked + .switch::after {
+        left: auto;
+        right: 0;
+        border-color: var(--information);
+      }
+    }
+  }
+
+  &-video {
+    position: relative;
+    height: 0;
+    width: 100%;
+    max-width: 600px;
+    margin: 1rem 0;
+    padding-bottom: calc(100% / 16 * 9);
+    overflow: hidden;
+
+    iframe {
+      position: absolute;
+      max-width: 100%;
+      inset: 0;
+    }
+  }
+
+  &-image {
+    height: auto;
+    max-width: 100%;
+    max-height: min(75vh, 600px);
+    margin: 1rem 0;
+    &.ProseMirror-selectednode {
+      box-shadow: 0 0 0 2px var(--secondary);
+    }
+  }
+
+  &-error {
+    position: absolute;
+    top: 4.5rem;
+    right: 0;
+    left: 0;
+    display: flex;
+    max-width: 50ch;
+    margin: 0 0.8rem;
+    padding: 1.2rem;
+    color: var(--main-dark);
+    background-color: var(--main-lightest);
+    border: 1px solid var(--main-light);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+
+    svg {
+      flex-shrink: 0;
+      margin-right: 1.2rem;
+    }
+    p { margin: 0; }
+  }
+}

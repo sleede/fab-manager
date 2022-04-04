@@ -23,6 +23,15 @@ en:
         you_will_lose_any_unsaved_modification_if_you_reload_this_page: "You will lose any unsaved modification if you reload this page"
         payment_card_error: "A problem has occurred with your credit card:"
         payment_card_declined: "Your card was declined."
+      #text editor
+      text_editor:
+        text_placeholder: "Type something…"
+        link_placeholder: "Paste link…"
+        url_placeholder: "Paste url…"
+        new_tab: "Open in a new tab"
+        add_link: "Insert a link"
+        add_video: "Embed a video"
+        add_image: "Insert an image"
       #user edition form
       user:
         man: "Man"
