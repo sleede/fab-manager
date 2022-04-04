@@ -7,8 +7,8 @@ type inputType = string|number|readonly string [];
 type ruleTypes<TFieldValues> = {
   required?: boolean | string,
   pattern?: RegExp | {value: RegExp, message: string},
-  minLenght?: number,
-  maxLenght?: number,
+  minLength?: number,
+  maxLength?: number,
   min?: number,
   max?: number,
   validate?: Validate<TFieldValues>;
