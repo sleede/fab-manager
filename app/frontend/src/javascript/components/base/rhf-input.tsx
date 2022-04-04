@@ -34,6 +34,7 @@ interface RHFInputProps<T> {
 /**
  * This component is a template for an input component to use within React Hook Form
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const RHFInput: React.FC<RHFInputProps<any>> = ({ id, register, label, tooltip, defaultValue, icon, classes, rules, readOnly, disabled, type, addOn, addOnClassName, placeholder, error, step }) => {
   // Compose classnames from props
   const classNames = `
