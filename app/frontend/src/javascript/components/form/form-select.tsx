@@ -24,22 +24,24 @@ type selectOption<TOptionValue> = { value: TOptionValue, label: string };
  */
 export const FormSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, className, control, placeholder, options, valueDefault, error, rules, disabled }: FormSelectProps<TFieldValues, TContext, TOptionValue>) => {
   const classNames = `
-    form-select ${className || ''}
+    form-item ${className || ''}
     ${error && error[id] ? 'is-incorrect' : ''}
     ${rules && rules.required ? 'is-required' : ''}
     ${disabled ? 'is-disabled' : ''}`;
 
   return (
     <label className={classNames}>
-      {label && <div className="form-select-header">
+      {label && <div className="form-item-header">
         <p>{label}</p>
       </div>}
-      <div>
+      <div className="form-item-field">
         <Controller name={id as FieldPath<TFieldValues>}
                     control={control}
                     defaultValue={valueDefault as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>}
                     render={({ field: { onChange, value, ref } }) =>
           <Select inputRef={ref}
+                  classNamePrefix="rs"
+                  className="rs"
                   value={options.find(c => c.value === value)}
                   onChange={val => onChange(val.value)}
                   placeholder={placeholder}
