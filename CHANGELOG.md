@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Fix a bug: unable to show machine availability slot for admin
+- Fix a bug: unable to confirm modification of reservation for client
 
 ## v5.3.9 2022 April 01
 
