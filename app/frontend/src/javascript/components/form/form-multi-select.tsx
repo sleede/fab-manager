@@ -25,22 +25,24 @@ type selectOption<TOptionValue> = { value: TOptionValue, label: string };
  */
 export const FormMultiSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, className, control, placeholder, options, valuesDefault, error, rules, disabled }: FormSelectProps<TFieldValues, TContext, TOptionValue>) => {
   const classNames = `
-    form-multi-select ${className || ''}
+    form-item ${className || ''}
     ${error && error[id] ? 'is-incorrect' : ''}
     ${rules && rules.required ? 'is-required' : ''}
     ${disabled ? 'is-disabled' : ''}`;
 
   return (
     <label className={classNames}>
-      {label && <div className="form-multi-select-header">
+      {label && <div className="form-item-header">
         <p>{label}</p>
       </div>}
-      <div className="form-multi-select-field">
+      <div className="form-item-field">
         <Controller name={id as FieldPath<TFieldValues>}
                     control={control}
                     defaultValue={valuesDefault as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>}
                     render={({ field: { onChange, value, ref } }) =>
           <Select inputRef={ref}
+                  classNamePrefix="rs"
+                  className="rs"
                   value={options.filter(c => value?.includes(c.value))}
                   onChange={val => onChange(val.map(c => c.value))}
                   placeholder={placeholder}
