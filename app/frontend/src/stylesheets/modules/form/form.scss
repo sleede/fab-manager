@@ -20,10 +20,10 @@
   }
 
   &-field {
-    height: 4rem;
+    min-height: 4rem;
     display: grid;
     grid-template-areas: "icon field addon";
-    grid-template-columns: min-content 1fr min-content;
+    grid-template-columns: min-content minmax(0, 1fr) min-content;
     border: 1px solid var(--gray-soft-dark);
     border-radius: var(--border-radius);
     transition: border-color ease-in-out 0.15s;
