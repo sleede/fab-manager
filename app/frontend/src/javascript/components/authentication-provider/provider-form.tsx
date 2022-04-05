@@ -4,9 +4,9 @@ import { react2angular } from 'react2angular';
 import { AuthenticationProvider } from '../../models/authentication-provider';
 import { Loader } from '../base/loader';
 import { IApplication } from '../../models/application';
-import { RHFInput } from '../base/rhf-input';
+import { FormInput } from '../form/form-input';
 import { useTranslation } from 'react-i18next';
-import { FabSelect } from '../base/fab-select';
+import { FormSelect } from '../form/form-select';
 
 declare const Application: IApplication;
 
@@ -46,8 +46,8 @@ export const ProviderForm: React.FC<ProviderFormProps> = ({ action, provider, on
 
   return (
     <form className="provider-form" onSubmit={handleSubmit(onSubmit)}>
-      <RHFInput id="name" register={register} readOnly={action === 'update'} rules={{ required: true }} label={t('app.shared.authentication.name')} />
-      <FabSelect id="providable_type" control={control} options={buildProvidableTypeOptions()} label={t('app.shared.authentication.authentication_type')} rules={{ required: true }} />
+      <FormInput id="name" register={register} readOnly={action === 'update'} rules={{ required: true }} label={t('app.shared.authentication.name')} />
+      <FormSelect id="providable_type" control={control} options={buildProvidableTypeOptions()} label={t('app.shared.authentication.authentication_type')} rules={{ required: true }} />
       <input type={'submit'} />
     </form>
   );

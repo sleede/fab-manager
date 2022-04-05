@@ -1,4 +1,5 @@
-.rhf-input {
+.form-select,
+.form-multi-select {
   width: 100%;
   margin-bottom: 1.6rem;
 
@@ -42,7 +43,7 @@
       grid-area: icon;
       border-right: 1px solid var(--gray-soft-dark);
     }
-    input {
+    &-input {
       grid-area: input;
       border: none;
       border-radius: var(--border-radius);

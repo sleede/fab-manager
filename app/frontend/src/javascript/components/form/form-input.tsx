@@ -4,7 +4,7 @@ import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { FieldPath } from 'react-hook-form/dist/types/path';
 import { FormComponent } from '../../models/form-component';
 
-interface RHFInputProps<TFieldValues> extends InputHTMLAttributes<HTMLInputElement>, FormComponent<TFieldValues>{
+interface FormInputProps<TFieldValues> extends InputHTMLAttributes<HTMLInputElement>, FormComponent<TFieldValues>{
   id: string,
   label?: string,
   tooltip?: string,
@@ -16,10 +16,10 @@ interface RHFInputProps<TFieldValues> extends InputHTMLAttributes<HTMLInputEleme
 /**
  * This component is a template for an input component to use within React Hook Form
  */
-export const RHFInput = <TFieldValues extends FieldValues>({ id, register, label, tooltip, defaultValue, icon, className, rules, readOnly, disabled, type, addOn, addOnClassName, placeholder, error, step }: RHFInputProps<TFieldValues>) => {
+export const FormInput = <TFieldValues extends FieldValues>({ id, register, label, tooltip, defaultValue, icon, className, rules, readOnly, disabled, type, addOn, addOnClassName, placeholder, error, step }: FormInputProps<TFieldValues>) => {
   // Compose classnames from props
   const classNames = `
-    rhf-input ${className || ''}
+    form-input ${className || ''}
     ${error && error[id] ? 'is-incorrect' : ''}
     ${rules && rules.required ? 'is-required' : ''}
     ${readOnly ? 'is-readOnly' : ''}
@@ -27,12 +27,12 @@ export const RHFInput = <TFieldValues extends FieldValues>({ id, register, label
 
   return (
     <label className={classNames}>
-      {label && <div className='rhf-input-header'>
+      {label && <div className='form-input-header'>
         <p>{label}</p>
         {/* TODO: Create tooltip component */}
         {tooltip && <span>{tooltip}</span>}
       </div>}
-      <div className='rhf-input-field'>
+      <div className='form-input-field'>
         {icon && <span className="icon">{icon}</span>}
         <input id={id}
           {...register(id as FieldPath<TFieldValues>, {
@@ -47,7 +47,7 @@ export const RHFInput = <TFieldValues extends FieldValues>({ id, register, label
           placeholder={placeholder} />
         {addOn && <span className={`addon ${addOnClassName || ''}`}>{addOn}</span>}
       </div>
-      {(error && error[id]) && <div className="rhf-input-error">{error[id].message}</div> }
+      {(error && error[id]) && <div className="form-input-error">{error[id].message}</div> }
     </label>
   );
 };
