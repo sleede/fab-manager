@@ -13,7 +13,7 @@ interface FabSelectProps<TFieldValues, TContext extends object, TOptionValue> ex
   control: Control<TFieldValues, TContext>,
   placeholder?: string,
   options: Array<selectOption<TOptionValue>>,
-  valueDefault?: TOptionValue,
+  valuesDefault?: Array<TOptionValue>,
 }
 
 /**
@@ -23,25 +23,26 @@ interface FabSelectProps<TFieldValues, TContext extends object, TOptionValue> ex
 type selectOption<TOptionValue> = { value: TOptionValue, label: string };
 
 /**
- * This component is a wrapper for react-select to use with react-hook-form
+ * This component is a wrapper around react-select to use with react-hook-form.
+ * It is a multi-select component.
  */
-export const FabSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, className, control, placeholder, options, valueDefault }: FabSelectProps<TFieldValues, TContext, TOptionValue>) => {
+export const FabMultiSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, className, control, placeholder, options, valuesDefault }: FabSelectProps<TFieldValues, TContext, TOptionValue>) => {
   return (
-    <label className={`fab-select ${className || ''}`}>
-      {label && <div className="fab-select-header">
+    <label className={`fab-multi-select ${className || ''}`}>
+      {label && <div className="fab-multi-select-header">
         <p>{label}</p>
       </div>}
-      <div className="fab-select-field">
+      <div className="fab-multi-select-field">
         <Controller name={id as FieldPath<TFieldValues>}
                     control={control}
-                    defaultValue={valueDefault as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>}
+                    defaultValue={valuesDefault as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>}
                     render={({ field: { onChange, value, ref } }) =>
           <Select inputRef={ref}
-                  className="fab-select-field-input"
-                  value={options.find(c => c.value === value)}
-                  onChange={val => onChange(val.value)}
+                  value={options.filter(c => value?.includes(c.value))}
+                  onChange={val => onChange(val.map(c => c.value))}
                   placeholder={placeholder}
-                  options={options} />
+                  options={options}
+                  isMulti />
         } />
       </div>
     </label>
