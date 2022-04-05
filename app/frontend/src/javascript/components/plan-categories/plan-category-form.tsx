@@ -5,7 +5,7 @@ import { PlanCategory } from '../../models/plan-category';
 import { Loader } from '../base/loader';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { FabTextEditor } from '../base/text-editor/fab-text-editor';
-import { RHFInput } from '../base/rhf-input';
+import { FormInput } from '../form/form-input';
 import { FabAlert } from '../base/fab-alert';
 import { FabButton } from '../base/fab-button';
 
@@ -45,13 +45,13 @@ const PlanCategoryFormComponent: React.FC<PlanCategoryFormProps> = ({ action, ca
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <RHFInput id='name' register={register} rules={{ required: 'true' }} label={t('app.admin.manage_plan_category.name')} />
+      <FormInput id='name' register={register} rules={{ required: 'true' }} label={t('app.admin.manage_plan_category.name')} />
 
       <Controller name="description" control={control} render={({ field: { onChange, value } }) =>
         <FabTextEditor label={t('app.admin.manage_plan_category.description')} onChange={onChange} content={value} limit={100} />
       } />
 
-      <RHFInput id='weight' register={register} type='number' label={t('app.admin.manage_plan_category.significance')} />
+      <FormInput id='weight' register={register} type='number' label={t('app.admin.manage_plan_category.significance')} />
       <FabAlert level="info" className="significance-info">
         {t('app.admin.manage_plan_category.info')}
       </FabAlert>

@@ -6,11 +6,11 @@ import { FieldPath } from 'react-hook-form/dist/types/path';
 import { FieldPathValue, UnpackNestedValue } from 'react-hook-form/dist/types';
 import { FormControlledComponent } from '../../models/form-component';
 
-interface FabSelectProps<TFieldValues, TContext extends object, TOptionValue> extends SelectHTMLAttributes<HTMLSelectElement>, FormControlledComponent<TFieldValues, TContext> {
+interface FormSelectProps<TFieldValues, TContext extends object, TOptionValue> extends SelectHTMLAttributes<HTMLSelectElement>, FormControlledComponent<TFieldValues, TContext> {
   id: string,
   label?: string,
   options: Array<selectOption<TOptionValue>>,
-  valueDefault?: TOptionValue,
+  valuesDefault?: Array<TOptionValue>,
 }
 
 /**
@@ -20,31 +20,32 @@ interface FabSelectProps<TFieldValues, TContext extends object, TOptionValue> ex
 type selectOption<TOptionValue> = { value: TOptionValue, label: string };
 
 /**
- * This component is a wrapper for react-select to use with react-hook-form
+ * This component is a wrapper around react-select to use with react-hook-form.
+ * It is a multi-select component.
  */
-export const FabSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, className, control, placeholder, options, valueDefault, error, rules, disabled }: FabSelectProps<TFieldValues, TContext, TOptionValue>) => {
+export const FormMultiSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, className, control, placeholder, options, valuesDefault, error, rules, disabled }: FormSelectProps<TFieldValues, TContext, TOptionValue>) => {
   const classNames = `
-    fab-select ${className || ''}
+    form-multi-select ${className || ''}
     ${error && error[id] ? 'is-incorrect' : ''}
     ${rules && rules.required ? 'is-required' : ''}
     ${disabled ? 'is-disabled' : ''}`;
 
   return (
     <label className={classNames}>
-      {label && <div className="fab-select-header">
+      {label && <div className="form-multi-select-header">
         <p>{label}</p>
       </div>}
-      <div className="fab-select-field">
+      <div className="form-multi-select-field">
         <Controller name={id as FieldPath<TFieldValues>}
                     control={control}
-                    defaultValue={valueDefault as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>}
+                    defaultValue={valuesDefault as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>}
                     render={({ field: { onChange, value, ref } }) =>
           <Select inputRef={ref}
-                  className="fab-select-field-input"
-                  value={options.find(c => c.value === value)}
-                  onChange={val => onChange(val.value)}
+                  value={options.filter(c => value?.includes(c.value))}
+                  onChange={val => onChange(val.map(c => c.value))}
                   placeholder={placeholder}
-                  options={options} />
+                  options={options}
+                  isMulti />
         } />
       </div>
     </label>
