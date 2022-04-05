@@ -8,6 +8,8 @@ export interface AuthenticationProvider {
   providable_attributes?: OAuth2Provider | OpenIdConnectProvider
 }
 
+export type mappingType = 'string' | 'text' | 'date' | 'integer' | 'boolean';
+
 export interface AuthenticationProviderMapping {
   id?: number,
   local_model: 'user' | 'profile',
@@ -16,7 +18,7 @@ export interface AuthenticationProviderMapping {
   api_endpoint: string,
   api_data_type: 'json',
   transformation: {
-    type: 'string' | 'text' | 'date' | 'integer' | 'boolean',
+    type: mappingType,
     format: 'iso8601' | 'rfc2822' | 'rfc3339' | 'timestamp-s' | 'timestamp-ms',
     true_value: string,
     false_value: string,
@@ -65,4 +67,9 @@ export interface OpenIdConnectProvider {
   client__jwks_uri?: string,
   client__end_session_endpoint?: string,
   profile_url?: string
+}
+
+export interface MappingFields {
+  user: Array<[string, mappingType]>,
+  profile: Array<[string, mappingType]>
 }

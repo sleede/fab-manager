@@ -1,4 +1,4 @@
-import { AuthenticationProvider } from '../models/authentication-provider';
+import { AuthenticationProvider, MappingFields } from '../models/authentication-provider';
 import { AxiosResponse } from 'axios';
 import apiClient from './clients/api-client';
 
@@ -27,5 +27,8 @@ export default class AuthProviderAPI {
     await apiClient.delete(`/api/auth_providers/${id}`);
   }
 
-  static async mappingFields(): Promise<>
+  static async mappingFields (): Promise<MappingFields> {
+    const res: AxiosResponse<MappingFields> = await apiClient.get('/api/auth_providers/mapping_fields');
+    return res?.data;
+  }
 }

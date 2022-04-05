@@ -7,6 +7,7 @@ import { IApplication } from '../../models/application';
 import { FormInput } from '../form/form-input';
 import { useTranslation } from 'react-i18next';
 import { FormSelect } from '../form/form-select';
+import { Oauth2Form } from './oauth2-form';
 
 declare const Application: IApplication;
 
@@ -26,10 +27,16 @@ interface ProviderFormProps {
 
 type selectProvidableTypeOption = { value: string, label: string };
 
+/**
+ * Form to create or update an authentication provider.
+ */
 export const ProviderForm: React.FC<ProviderFormProps> = ({ action, provider, onError, onSuccess }) => {
   const { handleSubmit, register, control } = useForm<AuthenticationProvider>({ defaultValues: { ...provider } });
   const { t } = useTranslation('shared');
 
+  /**
+   * Callback triggered when the form is submitted: process with the provider creation or update.
+   */
   const onSubmit: SubmitHandler<AuthenticationProvider> = (data: AuthenticationProvider) => {
     if (data) {
       onSuccess('Provider created successfully');
@@ -38,6 +45,9 @@ export const ProviderForm: React.FC<ProviderFormProps> = ({ action, provider, on
     }
   };
 
+  /**
+   * Build the list of available authentication methods to match with react-select requirements.
+   */
   const buildProvidableTypeOptions = (): Array<selectProvidableTypeOption> => {
     return Object.keys(METHODS).map((method: string) => {
       return { value: method, label: t(`app.shared.authentication.${METHODS[method]}`) };
@@ -48,6 +58,7 @@ export const ProviderForm: React.FC<ProviderFormProps> = ({ action, provider, on
     <form className="provider-form" onSubmit={handleSubmit(onSubmit)}>
       <FormInput id="name" register={register} readOnly={action === 'update'} rules={{ required: true }} label={t('app.shared.authentication.name')} />
       <FormSelect id="providable_type" control={control} options={buildProvidableTypeOptions()} label={t('app.shared.authentication.authentication_type')} rules={{ required: true }} />
+      {provider?.providable_type === 'OAuth2Provider' && <Oauth2Form register={register} />}
       <input type={'submit'} />
     </form>
   );
