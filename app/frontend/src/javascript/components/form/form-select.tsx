@@ -34,13 +34,12 @@ export const FormSelect = <TFieldValues extends FieldValues, TContext extends ob
       {label && <div className="form-select-header">
         <p>{label}</p>
       </div>}
-      <div className="form-select-field">
+      <div>
         <Controller name={id as FieldPath<TFieldValues>}
                     control={control}
                     defaultValue={valueDefault as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>}
                     render={({ field: { onChange, value, ref } }) =>
           <Select inputRef={ref}
-                  className="form-select-field-input"
                   value={options.find(c => c.value === value)}
                   onChange={val => onChange(val.value)}
                   placeholder={placeholder}
