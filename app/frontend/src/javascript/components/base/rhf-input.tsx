@@ -1,45 +1,25 @@
-import React, { ReactNode } from 'react';
-import { FieldErrors, FieldPathValue, UseFormRegister, Validate } from 'react-hook-form';
+import React, { InputHTMLAttributes, ReactNode } from 'react';
+import { FieldPathValue } from 'react-hook-form';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { FieldPath } from 'react-hook-form/dist/types/path';
+import { FormComponent } from '../../models/form-component';
 
-type inputType = string|number|readonly string [];
-type ruleTypes<TFieldValues> = {
-  required?: boolean | string,
-  pattern?: RegExp | {value: RegExp, message: string},
-  minLength?: number,
-  maxLength?: number,
-  min?: number,
-  max?: number,
-  validate?: Validate<TFieldValues>;
-};
-
-interface RHFInputProps<TFieldValues> {
+interface RHFInputProps<TFieldValues> extends InputHTMLAttributes<HTMLInputElement>, FormComponent<TFieldValues>{
   id: string,
-  register: UseFormRegister<TFieldValues>,
   label?: string,
   tooltip?: string,
-  defaultValue?: inputType,
   icon?: ReactNode,
   addOn?: ReactNode,
   addOnClassName?: string,
-  classes?: string,
-  rules?: ruleTypes<TFieldValues>,
-  readOnly?: boolean,
-  disabled?: boolean,
-  placeholder?: string,
-  error?: FieldErrors,
-  type?: 'text' | 'date' | 'password' | 'url' | 'time' | 'tel' | 'search' | 'number' | 'month' | 'email' | 'datetime-local' | 'week',
-  step?: number | 'any'
 }
 
 /**
  * This component is a template for an input component to use within React Hook Form
  */
-export const RHFInput = <TFieldValues extends FieldValues>({ id, register, label, tooltip, defaultValue, icon, classes, rules, readOnly, disabled, type, addOn, addOnClassName, placeholder, error, step }: RHFInputProps<TFieldValues>) => {
+export const RHFInput = <TFieldValues extends FieldValues>({ id, register, label, tooltip, defaultValue, icon, className, rules, readOnly, disabled, type, addOn, addOnClassName, placeholder, error, step }: RHFInputProps<TFieldValues>) => {
   // Compose classnames from props
   const classNames = `
-    rhf-input ${classes || ''}
+    rhf-input ${className || ''}
     ${error && error[id] ? 'is-incorrect' : ''}
     ${rules && rules.required ? 'is-required' : ''}
     ${readOnly ? 'is-readOnly' : ''}

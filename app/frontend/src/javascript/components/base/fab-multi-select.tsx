@@ -1,17 +1,14 @@
 import React, { SelectHTMLAttributes } from 'react';
 import Select from 'react-select';
 import { Controller, Path } from 'react-hook-form';
-import { Control } from 'react-hook-form/dist/types/form';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { FieldPath } from 'react-hook-form/dist/types/path';
 import { FieldPathValue, UnpackNestedValue } from 'react-hook-form/dist/types';
+import { FormControlledComponent } from '../../models/form-component';
 
-interface FabSelectProps<TFieldValues, TContext extends object, TOptionValue> extends SelectHTMLAttributes<HTMLSelectElement> {
+interface FabSelectProps<TFieldValues, TContext extends object, TOptionValue> extends SelectHTMLAttributes<HTMLSelectElement>, FormControlledComponent<TFieldValues, TContext> {
   id: string,
   label?: string,
-  className?: string,
-  control: Control<TFieldValues, TContext>,
-  placeholder?: string,
   options: Array<selectOption<TOptionValue>>,
   valuesDefault?: Array<TOptionValue>,
 }
@@ -26,9 +23,15 @@ type selectOption<TOptionValue> = { value: TOptionValue, label: string };
  * This component is a wrapper around react-select to use with react-hook-form.
  * It is a multi-select component.
  */
-export const FabMultiSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, className, control, placeholder, options, valuesDefault }: FabSelectProps<TFieldValues, TContext, TOptionValue>) => {
+export const FabMultiSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, className, control, placeholder, options, valuesDefault, error, rules, disabled }: FabSelectProps<TFieldValues, TContext, TOptionValue>) => {
+  const classNames = `
+    fab-multi-select ${className || ''}
+    ${error && error[id] ? 'is-incorrect' : ''}
+    ${rules && rules.required ? 'is-required' : ''}
+    ${disabled ? 'is-disabled' : ''}`;
+
   return (
-    <label className={`fab-multi-select ${className || ''}`}>
+    <label className={classNames}>
       {label && <div className="fab-multi-select-header">
         <p>{label}</p>
       </div>}

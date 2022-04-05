@@ -47,7 +47,7 @@ export const ProviderForm: React.FC<ProviderFormProps> = ({ action, provider, on
   return (
     <form className="provider-form" onSubmit={handleSubmit(onSubmit)}>
       <RHFInput id="name" register={register} readOnly={action === 'update'} rules={{ required: true }} label={t('app.shared.authentication.name')} />
-      <FabSelect id="providable_type" control={control} options={buildProvidableTypeOptions()} valueDefault={'DatabaseProvider'} />
+      <FabSelect id="providable_type" control={control} options={buildProvidableTypeOptions()} label={t('app.shared.authentication.authentication_type')} rules={{ required: true }} />
       <input type={'submit'} />
     </form>
   );
