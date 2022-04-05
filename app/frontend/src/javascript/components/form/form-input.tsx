@@ -19,7 +19,7 @@ interface FormInputProps<TFieldValues> extends InputHTMLAttributes<HTMLInputElem
 export const FormInput = <TFieldValues extends FieldValues>({ id, register, label, tooltip, defaultValue, icon, className, rules, readOnly, disabled, type, addOn, addOnClassName, placeholder, error, step }: FormInputProps<TFieldValues>) => {
   // Compose classnames from props
   const classNames = `
-    form-input ${className || ''}
+    form-item ${className || ''}
     ${error && error[id] ? 'is-incorrect' : ''}
     ${rules && rules.required ? 'is-required' : ''}
     ${readOnly ? 'is-readOnly' : ''}
@@ -27,12 +27,12 @@ export const FormInput = <TFieldValues extends FieldValues>({ id, register, labe
 
   return (
     <label className={classNames}>
-      {label && <div className='form-input-header'>
+      {label && <div className='form-item-header'>
         <p>{label}</p>
         {/* TODO: Create tooltip component */}
         {tooltip && <span>{tooltip}</span>}
       </div>}
-      <div className='form-input-field'>
+      <div className='form-item-field'>
         {icon && <span className="icon">{icon}</span>}
         <input id={id}
           {...register(id as FieldPath<TFieldValues>, {
@@ -47,7 +47,7 @@ export const FormInput = <TFieldValues extends FieldValues>({ id, register, labe
           placeholder={placeholder} />
         {addOn && <span className={`addon ${addOnClassName || ''}`}>{addOn}</span>}
       </div>
-      {(error && error[id]) && <div className="form-input-error">{error[id].message}</div> }
+      {(error && error[id]) && <div className="form-item-error">{error[id].message}</div> }
     </label>
   );
 };
