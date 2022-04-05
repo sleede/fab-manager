@@ -564,7 +564,12 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
               return dialogs.confirm({
                 templateUrl: '/shared/confirm_modify_slot_modal.html',
                 resolve: {
-                  object () { return $scope.slot; }
+                  object () {
+                    if ($scope.slot.user && !$scope.slot.user.name) {
+                      $scope.slot.user.name = _t('app.shared.confirm_modify_slot_modal.deleted_user');
+                    }
+                    return $scope.slot;
+                  }
                 }
               }
               , function (type) {

@@ -283,6 +283,7 @@
         do_you_want_to_change_NAME_s_booking_slot_initially_planned_at: "Vil du endre {NAME} sin bestillingsplass, som opprinnelig er planlagt på:"
         cancel_this_reservation: "Avbryt reservasjon"
         i_want_to_change_date: "Jeg vil endre dato"
+        deleted_user: "deleted user"
       #user public profile
       public_profile:
         last_activity_html: "Siste aktivitet <br><strong>{DATE}</strong>"

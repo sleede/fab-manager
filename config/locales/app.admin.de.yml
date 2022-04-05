@@ -109,6 +109,7 @@ de:
         slots: "Slots"
         slots_of: "von"
         minutes: "Minuten"
+        deleted_user: "Deleted user"
       #import external iCal calendar
       icalendar:
         icalendar_import: "iCalendar Import"

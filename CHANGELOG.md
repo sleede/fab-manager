@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: unable to show machine availability slot for admin
+
 ## v5.3.9 2022 April 01
 
 - Optimise sql query, avoid to N+1

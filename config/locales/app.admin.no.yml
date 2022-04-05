@@ -109,6 +109,7 @@
         slots: "reservasjoner"
         slots_of: "av"
         minutes: "minutter"
+        deleted_user: "Deleted user"
       #import external iCal calendar
       icalendar:
         icalendar_import: "iCalendar import"

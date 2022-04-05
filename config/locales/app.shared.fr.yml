@@ -283,6 +283,7 @@ fr:
         do_you_want_to_change_NAME_s_booking_slot_initially_planned_at: "Souhaitez-vous changer le créneau de réservation de {NAME}, initialement prévu au :"
         cancel_this_reservation: "Annuler cette réservation"
         i_want_to_change_date: "Je veux changer de date"
+        deleted_user: "l'utilisateur supprimé"
       #user public profile
       public_profile:
         last_activity_html: "Dernière activité <br><strong>le {DATE}</strong>"

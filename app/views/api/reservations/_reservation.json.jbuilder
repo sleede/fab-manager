@@ -2,7 +2,7 @@
 
 json.id reservation.id
 json.user_id reservation.statistic_profile.user_id
-json.user_full_name reservation.user.profile.full_name
+json.user_full_name reservation.user&.profile&.full_name
 json.message reservation.message
 json.slots_attributes reservation.slots do |s|
   json.id s.id

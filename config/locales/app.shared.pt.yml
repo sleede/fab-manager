@@ -283,6 +283,7 @@ pt:
         do_you_want_to_change_NAME_s_booking_slot_initially_planned_at: "Você deseja alterar o agendamento do usuário {NAME}, inicialmente marcado para:"
         cancel_this_reservation: "Cancelar essa reserva"
         i_want_to_change_date: "Eu quero alterar a data"
+        deleted_user: "deleted user"
       #user public profile
       public_profile:
         last_activity_html: "Última atividade <br><strong>em {DATE}</strong>"

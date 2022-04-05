@@ -109,6 +109,7 @@ fr:
         slots: "créneaux"
         slots_of: "de"
         minutes: "minutes"
+        deleted_user: "Utilisateur supprimé"
       #import external iCal calendar
       icalendar:
         icalendar_import: "Import iCalendar"

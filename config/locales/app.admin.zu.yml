@@ -109,6 +109,7 @@ zu:
         slots: "crwdns20302:0crwdne20302:0"
         slots_of: "crwdns20304:0crwdne20304:0"
         minutes: "crwdns20288:0crwdne20288:0"
+        deleted_user: "Deleted user"
       #import external iCal calendar
       icalendar:
         icalendar_import: "crwdns6855:0crwdne6855:0"

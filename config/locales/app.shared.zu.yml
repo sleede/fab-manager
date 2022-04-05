@@ -283,6 +283,7 @@ zu:
         do_you_want_to_change_NAME_s_booking_slot_initially_planned_at: "crwdns9825:0{NAME}crwdne9825:0"
         cancel_this_reservation: "crwdns9827:0crwdne9827:0"
         i_want_to_change_date: "crwdns9829:0crwdne9829:0"
+        deleted_user: "deleted user"
       #user public profile
       public_profile:
         last_activity_html: "crwdns9843:0{DATE}crwdne9843:0"
