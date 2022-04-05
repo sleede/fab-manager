@@ -53,6 +53,7 @@ zu:
     i_ve_reserved: "crwdns3269:0crwdne3269:0"
     length_must_be_slot_multiple: "crwdns3271:0%{MIN}crwdne3271:0"
     must_be_associated_with_at_least_1_machine: "crwdns3273:0crwdne3273:0"
+    deleted_user: "Deleted user"
   #members management
   members:
     unable_to_change_the_group_while_a_subscription_is_running: "crwdns3275:0crwdne3275:0"

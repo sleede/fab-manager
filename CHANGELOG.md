@@ -2,6 +2,7 @@
 
 - Fix a bug: unable to show machine availability slot for admin
 - Fix a bug: unable to confirm modification of reservation for client
+- Fix a bug: unable to show deleted user in reservation slot
 
 ## v5.3.9 2022 April 01
 
