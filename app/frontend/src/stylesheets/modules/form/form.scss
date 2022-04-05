@@ -1,5 +1,4 @@
-.form-select,
-.form-multi-select {
+.form-input {
   width: 100%;
   margin-bottom: 1.6rem;
 
@@ -9,10 +8,7 @@
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 0.8rem;
-    p {
-      @include text-sm;
-      margin: 0;
-    }
+    p { margin: 0; }
   }
   &.is-required &-header p::after {
     content: "*";
@@ -23,11 +19,10 @@
   &-field {
     height: 4rem;
     display: grid;
-    grid-template-areas: "icon input addon";
+    grid-template-areas: "icon field addon";
     grid-template-columns: min-content 1fr min-content;
     border: 1px solid var(--gray-soft-dark);
     border-radius: var(--border-radius);
-    overflow: hidden;
     transition: border-color ease-in-out 0.15s;
 
     .icon,
@@ -43,17 +38,49 @@
       grid-area: icon;
       border-right: 1px solid var(--gray-soft-dark);
     }
-    &-input {
-      grid-area: input;
+
+    & > input {
+      grid-area: field;
       border: none;
-      border-radius: var(--border-radius);
       box-shadow: inset 0 1px 1px rgba(0, 0, 0, .08);
       padding: 0 0.8rem;
       color: var(--gray-hard-darkest);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px var(--information);
+      }
     }
+
+    // override React-select component's style
+    .rs {
+      grid-area: field;
+      &__control {
+        border: none;
+        border-radius: var(--border-radius);
+        &--is-focused {
+          box-shadow: 0 0 0 2px var(--information);
+        }
+      }
+      &__menu {
+        margin-top: 1px;
+        border: 1px solid var(--gray-soft-dark);
+        box-shadow: var(--shadow);
+      }
+      &__option {
+        color: #000000;
+        &:hover {
+          background-color: var(--information-lightest);
+        }
+        &--is-selected,
+        &--is-selected:hover {
+          background-color: var(--information-light);
+        }
+      }
+    }
+
     .addon {
       grid-area: addon;
       border-left: 1px solid var(--gray-soft-dark);
