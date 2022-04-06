@@ -8,6 +8,7 @@
 - Change font family to "Work Sans"
 - Updated eslint to v8 and eslint related packages to their latest versions
 - Updated typescript to v4.6.3
+- Updated react-select to v5.2.2
 - Webpack overlay will now report eslint issues
 - Linted all code according to eslint rules
 - Fix a bug: Refused to connect to 'wss://localhost:3035/ws' when using a https tunnel in development mode
