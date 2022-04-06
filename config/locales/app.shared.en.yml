@@ -280,7 +280,7 @@ en:
         define_the_fields_mapping: "Define the fields mapping"
         add_a_match: "Add a match"
         model: "Model"
-        field: "Fiels"
+        field: "Field"
         api_endpoint_url: "API endpoint URL"
         api_type: "API type"
         api_fields: "API fields"

@@ -8,6 +8,7 @@ import { FormInput } from '../form/form-input';
 import { useTranslation } from 'react-i18next';
 import { FormSelect } from '../form/form-select';
 import { Oauth2Form } from './oauth2-form';
+import { DataMappingForm } from './data-mapping-form';
 
 declare const Application: IApplication;
 
@@ -77,6 +78,7 @@ export const ProviderForm: React.FC<ProviderFormProps> = ({ action, provider, on
                   onChange={onProvidableTypeChange}
                   rules={{ required: true }} />
       {providableType === 'OAuth2Provider' && <Oauth2Form register={register} />}
+      {providableType && providableType !== 'DatabaseProvider' && <DataMappingForm register={register} control={control} />}
       <input type={'submit'} />
     </form>
   );
