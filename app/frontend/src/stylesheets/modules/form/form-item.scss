@@ -87,6 +87,10 @@
           background-color: var(--information-light);
         }
       }
+      &__placeholder {
+        font-weight: 400;
+        color: var(--gray-soft-darkest);
+      }
     }
 
     .addon {
