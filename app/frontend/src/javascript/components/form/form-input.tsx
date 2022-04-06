@@ -20,6 +20,7 @@ export const FormInput = <TFieldValues extends FieldValues>({ id, register, labe
   // Compose classnames from props
   const classNames = `
     form-item ${className || ''}
+    ${type === 'hidden' ? 'is-hidden' : ''}
     ${error && error[id] ? 'is-incorrect' : ''}
     ${rules && rules.required ? 'is-required' : ''}
     ${readOnly ? 'is-readOnly' : ''}
