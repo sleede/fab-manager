@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { react2angular } from 'react2angular';
 import { AuthenticationProvider } from '../../models/authentication-provider';
@@ -32,6 +32,7 @@ type selectProvidableTypeOption = { value: string, label: string };
  */
 export const ProviderForm: React.FC<ProviderFormProps> = ({ action, provider, onError, onSuccess }) => {
   const { handleSubmit, register, control } = useForm<AuthenticationProvider>({ defaultValues: { ...provider } });
+  const [providableType, setProvidableType] = useState<string>(provider?.providable_type);
   const { t } = useTranslation('shared');
 
   /**
@@ -54,11 +55,28 @@ export const ProviderForm: React.FC<ProviderFormProps> = ({ action, provider, on
     });
   };
 
+  /**
+   * Callback triggered when the providable type is changed.
+   * Changing the providable type will change the form to match the new type.
+   */
+  const onProvidableTypeChange = (type: string) => {
+    setProvidableType(type);
+  };
+
   return (
     <form className="provider-form" onSubmit={handleSubmit(onSubmit)}>
-      <FormInput id="name" register={register} readOnly={action === 'update'} rules={{ required: true }} label={t('app.shared.authentication.name')} />
-      <FormSelect id="providable_type" control={control} options={buildProvidableTypeOptions()} label={t('app.shared.authentication.authentication_type')} rules={{ required: true }} />
-      {provider?.providable_type === 'OAuth2Provider' && <Oauth2Form register={register} />}
+      <FormInput id="name"
+                 register={register}
+                 readOnly={action === 'update'}
+                 rules={{ required: true }}
+                 label={t('app.shared.authentication.name')} />
+      <FormSelect id="providable_type"
+                  control={control}
+                  options={buildProvidableTypeOptions()}
+                  label={t('app.shared.authentication.authentication_type')}
+                  onChange={onProvidableTypeChange}
+                  rules={{ required: true }} />
+      {providableType === 'OAuth2Provider' && <Oauth2Form register={register} />}
       <input type={'submit'} />
     </form>
   );
