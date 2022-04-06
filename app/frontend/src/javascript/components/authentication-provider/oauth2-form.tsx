@@ -21,35 +21,35 @@ export const Oauth2Form = <TFieldValues extends FieldValues>({ register }: Oauth
   return (
     <div className="oauth2-form">
       <hr/>
-      <FormInput id="base_url"
+      <FormInput id="providable_attributes.base_url"
                  register={register}
                  placeholder="https://sso.example.net..."
                  label={t('app.shared.oauth2.common_url')}
                  rules={{ required: true, pattern: urlRegex }} />
-      <FormInput id="authorization_endpoint"
+      <FormInput id="providable_attributes.authorization_endpoint"
                  register={register}
                  placeholder="/oauth2/auth..."
                  label={t('app.shared.oauth2.authorization_endpoint')}
                  rules={{ required: true, pattern: endpointRegex }} />
-      <FormInput id="token_endpoint"
+      <FormInput id="providable_attributes.token_endpoint"
                  register={register}
                  placeholder="/oauth2/token..."
                  label={t('app.shared.oauth2.token_acquisition_endpoint')}
                  rules={{ required: true, pattern: endpointRegex }} />
-      <FormInput id="profile_url"
+      <FormInput id="providable_attributes.profile_url"
                  register={register}
                  placeholder="https://exemple.net/user..."
                  label={t('app.shared.oauth2.profil_edition_url')}
                  rules={{ required: true, pattern: urlRegex }} />
-      <FormInput id="client_id"
+      <FormInput id="providable_attributes.client_id"
                  register={register}
                  label={t('app.shared.oauth2.client_identifier')}
                  rules={{ required: true }} />
-      <FormInput id="client_secret"
+      <FormInput id="providable_attributes.client_secret"
                  register={register}
                  label={t('app.shared.oauth2.client_secret')}
                  rules={{ required: true }} />
-      <FormInput id="scopes" register={register}
+      <FormInput id="providable_attributes.scopes" register={register}
                  placeholder="profile,email..."
                  label={t('app.shared.oauth2.scopes')} />
     </div>
