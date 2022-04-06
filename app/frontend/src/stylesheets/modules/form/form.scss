@@ -52,6 +52,10 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      &::placeholder {
+        font-weight: 400;
+        color: var(--gray-soft-darkest);
+      }
       &:focus {
         outline: none;
         box-shadow: 0 0 0 2px var(--information);
