@@ -10,6 +10,7 @@
 - Change font family to "Work Sans"
 - Updated eslint to v8 and eslint related packages to their latest versions
 - Updated typescript to v4.6.3
+- Updated react-select to v5.2.2
 - Webpack overlay will now report eslint issues
 - Linted all code according to eslint rules
 - when generating an avoir, the option "by_wallet" is not present anymore if wallet module is off
