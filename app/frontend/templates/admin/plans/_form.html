@@ -7,6 +7,7 @@
            name="plan[base_name]"
            class="form-control"
            ng-maxlength="24"
+           ng-trim="false"
            ng-model="plan.base_name"
            required="true"/>
     <span class="help-block error" ng-show="planForm['plan[base_name]'].$dirty && planForm['plan[base_name]'].$error.required" translate>{{ 'app.shared.plan.name_is_required' }}</span>
