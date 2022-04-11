@@ -21,12 +21,19 @@ interface TypeMappingModalProps<TFieldValues, TContext extends object> {
   fieldMappingId: number,
 }
 
+/**
+ * Modal dialog to display the expected type for the current data field.
+ * Also allows to map the incoming data (from the authentication provider API) to the expected type/data.
+ *
+ * This component is intended to be used in a react-hook-form context.
+ */
 export const TypeMappingModal = <TFieldValues extends FieldValues, TContext extends object>({ model, field, type, isOpen, toggleModal, register, control, fieldMappingId }:TypeMappingModalProps<TFieldValues, TContext>) => {
   const { t } = useTranslation('shared');
 
   return (
     <FabModal isOpen={isOpen}
               toggleModal={toggleModal}
+              className="type-mapping-modal"
               title={t('app.shared.authentication.data_mapping')}
               confirmButton={<i className="fa fa-check" />}
               onConfirm={toggleModal}>

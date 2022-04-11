@@ -1,0 +1,20 @@
+
+.provider-form {
+  .main-actions {
+    display: flex;
+    flex-direction: row-reverse;
+
+    .submit-button {
+      margin-top: 2em;
+      border-color: var(--information-light);
+      background-color: var(--information);
+      color: white;
+
+      &:hover {
+        border-color: var(--information);
+        background-color: var(--information-dark);
+        color: white;
+      }
+    }
+  }
+}

@@ -9,6 +9,9 @@ export interface DateMappingFormProps<TFieldValues, TContext extends object> {
   fieldMappingId: number,
 }
 
+/**
+ * Partial form for mapping an internal date field to an external API.
+ */
 export const DateMappingForm = <TFieldValues extends FieldValues, TContext extends object>({ control, fieldMappingId }: DateMappingFormProps<TFieldValues, TContext>) => {
   const { t } = useTranslation('shared');
 

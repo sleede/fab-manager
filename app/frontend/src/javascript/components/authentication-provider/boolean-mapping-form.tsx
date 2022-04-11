@@ -9,6 +9,9 @@ export interface BooleanMappingFormProps<TFieldValues> {
   fieldMappingId: number,
 }
 
+/**
+ * Partial form to map an internal boolean field to an external API providing a string value.
+ */
 export const BooleanMappingForm = <TFieldValues extends FieldValues>({ register, fieldMappingId }: BooleanMappingFormProps<TFieldValues>) => {
   const { t } = useTranslation('shared');
 

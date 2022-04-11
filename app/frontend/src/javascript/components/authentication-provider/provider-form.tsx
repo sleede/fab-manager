@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { FormSelect } from '../form/form-select';
 import { Oauth2Form } from './oauth2-form';
 import { DataMappingForm } from './data-mapping-form';
+import { FabButton } from '../base/fab-button';
 
 declare const Application: IApplication;
 
@@ -79,7 +80,9 @@ export const ProviderForm: React.FC<ProviderFormProps> = ({ action, provider, on
                   rules={{ required: true }} />
       {providableType === 'OAuth2Provider' && <Oauth2Form register={register} />}
       {providableType && providableType !== 'DatabaseProvider' && <DataMappingForm register={register} control={control} />}
-      <input type={'submit'} />
+      <div className="main-actions">
+        <FabButton type="submit" className="submit-button">{t('app.shared.authentication.save')}</FabButton>
+      </div>
     </form>
   );
 };

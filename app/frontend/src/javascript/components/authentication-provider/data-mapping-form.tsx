@@ -17,6 +17,9 @@ export interface DataMappingFormProps<TFieldValues, TContext extends object> {
 
 type selectModelFieldOption = { value: string, label: string };
 
+/**
+ * Partial form to define the mapping of the data between the API of the authentication provider and the application internals.
+ */
 export const DataMappingForm = <TFieldValues extends FieldValues, TContext extends object>({ register, control }: DataMappingFormProps<TFieldValues, TContext>) => {
   const { t } = useTranslation('shared');
   const [dataMapping, setDataMapping] = useState<MappingFields>(null);
@@ -91,11 +94,13 @@ export const DataMappingForm = <TFieldValues extends FieldValues, TContext exten
   return (
     <div className="data-mapping-form array-mapping-form">
       <h4>{t('app.shared.oauth2.define_the_fields_mapping')}</h4>
-      <FabButton
-        icon={<i className="fa fa-plus"/>}
-        onClick={() => append({})}>
-         {t('app.shared.oauth2.add_a_match')}
-      </FabButton>
+      <div className="mapping-actions">
+        <FabButton
+          icon={<i className="fa fa-plus"/>}
+          onClick={() => append({})}>
+           {t('app.shared.oauth2.add_a_match')}
+        </FabButton>
+      </div>
       {fields.map((item, index) => (
         <div key={item.id} className="mapping-item">
           <div className="inputs">
@@ -128,7 +133,7 @@ export const DataMappingForm = <TFieldValues extends FieldValues, TContext exten
             </div>
           </div>
           <div className="actions">
-            <FabButton icon={<i className="fa fa-random" />} onClick={toggleTypeMappingModal} disabled={getField(output, index) === undefined} />
+            <FabButton icon={<i className="fa fa-random" />} onClick={toggleTypeMappingModal} disabled={getField(output, index) === undefined} tooltip={t('app.shared.authentication.data_mapping')} />
             <FabButton icon={<i className="fa fa-trash" />} onClick={() => remove(index)} className="delete-button" />
             <TypeMappingModal model={getModel(output, index)}
                               field={getField(output, index)}
