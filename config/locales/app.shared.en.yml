@@ -257,8 +257,20 @@ en:
         authentication_type_is_required: "Authentication type is required."
         data_mapping: "Data mapping"
         expected_data_type: "Expected data type"
+        TYPE_expected: "{TYPE} expected"
         input_format: "Input format"
         mappings: "Mappings"
+        mapping_from: "From"
+        mapping_to: "To"
+        true_value: "True value"
+        false_value: "False value"
+        date_format: "Date format"
+        types:
+          integer: "integer"
+          string: "string"
+          text: "text"
+          date: "date"
+          boolean: "boolean"
       #edition/creation form of an OAuth2 authentication provider
       oauth2:
         common_url: "Server root URL"

@@ -1,0 +1,28 @@
+import React from 'react';
+import { UseFormRegister } from 'react-hook-form';
+import { FieldValues } from 'react-hook-form/dist/types/fields';
+import { useTranslation } from 'react-i18next';
+import { FormInput } from '../form/form-input';
+
+export interface BooleanMappingFormProps<TFieldValues> {
+  register: UseFormRegister<TFieldValues>,
+  fieldMappingId: number,
+}
+
+export const BooleanMappingForm = <TFieldValues extends FieldValues>({ register, fieldMappingId }: BooleanMappingFormProps<TFieldValues>) => {
+  const { t } = useTranslation('shared');
+
+  return (
+    <div className="boolean-mapping-form">
+      <h4>{t('app.shared.authentication.mappings')}</h4>
+      <FormInput id={`auth_provider_mappings_attributes.${fieldMappingId}.transformation.true_value`}
+                 register={register}
+                 rules={{ required: true }}
+                 label={t('app.shared.authentication.true_value')} />
+      <FormInput id={`auth_provider_mappings_attributes.${fieldMappingId}.transformation.false_value`}
+                 register={register}
+                 rules={{ required: true }}
+                 label={t('app.shared.authentication.false_value')} />
+    </div>
+  );
+};

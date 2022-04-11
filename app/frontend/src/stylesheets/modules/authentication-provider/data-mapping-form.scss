@@ -1,25 +1,4 @@
 .data-mapping-form {
-  .data-mapping-item {
-    margin: 1rem;
-    border-left: 4px solid var(--gray-soft-dark);
-    border-radius: 4px;
-    padding-left: 1em;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    .inputs {
-      width: 85%;
-    }
-
-    .actions {
-      padding: 1em;
-      .delete-button {
-        background-color: #cb1117;
-        color: white;
-      }
-    }
-  }
   .local-data,
   .remote-data{
     display: flex;

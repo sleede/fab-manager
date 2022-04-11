@@ -29,7 +29,7 @@ type selectOption<TOptionValue> = { value: TOptionValue, label: string };
  */
 export const FormMultiSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, className, control, placeholder, options, valuesDefault, error, rules, disabled, onChange }: FormSelectProps<TFieldValues, TContext, TOptionValue>) => {
   const classNames = `
-    form-item ${className || ''}
+    form-multi-select form-item ${className || ''}
     ${error && error[id] ? 'is-incorrect' : ''}
     ${rules && rules.required ? 'is-required' : ''}
     ${disabled ? 'is-disabled' : ''}`;

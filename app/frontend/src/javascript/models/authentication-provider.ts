@@ -24,7 +24,7 @@ export interface AuthenticationProviderMapping {
     false_value: string,
     mapping: {
       from: string,
-      to: number
+      to: number|string
     }
   }
 }
