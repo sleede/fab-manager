@@ -21,6 +21,9 @@ class AuthProvider < ApplicationRecord
   has_many :auth_provider_mappings, dependent: :destroy
   accepts_nested_attributes_for :auth_provider_mappings, allow_destroy: true
 
+  validates :providable_type, inclusion: { in: PROVIDABLE_TYPES }
+  validates :name, presence: true, uniqueness: true
+
   before_create :set_initial_state
 
   def build_providable(params)

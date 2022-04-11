@@ -47,114 +47,6 @@ const check_oauth2_id_is_mapped = function (mappings) {
 };
 
 /**
- * Provides a set of common callback methods and data to the $scope parameter. These methods are used
- * in the various authentication providers' controllers.
- *
- * Provides :
- *  - $scope.authMethods
- *  - $scope.mappingFields
- *  - $scope.cancel()
- *  - $scope.methodName()
- *  - $scope.defineDataMapping(mapping)
- *
- * Requires :
- *  - mappingFieldsPromise: retrieved by AuthProvider.mapping_fields()
- *  - $state (Ui-Router) [ 'app.admin.members' ]
- *  - _t : translation method
- */
-class AuthenticationController {
-  constructor ($scope, $state, $uibModal, _t, mappingFieldsPromise) {
-    // list of supported authentication methods
-    $scope.authMethods = METHODS;
-
-    // list of fields that can be mapped through the SSO
-    $scope.mappingFields = mappingFieldsPromise;
-
-    /**
-     * Changes the admin's view to the members list page
-     */
-    $scope.cancel = function () { $state.go('app.admin.members'); };
-
-    /**
-     * Return a localized string for the provided method
-     */
-    $scope.methodName = function (method) {
-      return _t('app.shared.authentication.' + METHODS[method]);
-    };
-
-    /**
-     * Open a modal allowing to specify the data mapping for the given field
-     */
-    $scope.defineDataMapping = function (mapping) {
-      $uibModal.open({
-        templateUrl: '/admin/authentications/_data_mapping.html',
-        size: 'md',
-        resolve: {
-          field () { return mapping; },
-          datatype () {
-            for (const field of Array.from($scope.mappingFields[mapping.local_model])) {
-              if (field[0] === mapping.local_field) {
-                return field[1];
-              }
-            }
-          }
-        },
-
-        controller: ['$scope', '$uibModalInstance', 'field', 'datatype', function ($scope, $uibModalInstance, field, datatype) {
-          // parent field
-          $scope.field = field;
-          // expected data type
-          $scope.datatype = datatype;
-          // data transformation rules
-          $scope.transformation =
-            { rules: field.transformation || { type: datatype } };
-          // available transformation formats
-          $scope.formats = {
-            date: [
-              {
-                label: 'ISO 8601',
-                value: 'iso8601'
-              },
-              {
-                label: 'RFC 2822',
-                value: 'rfc2822'
-              },
-              {
-                label: 'RFC 3339',
-                value: 'rfc3339'
-              },
-              {
-                label: 'Timestamp (s)',
-                value: 'timestamp-s'
-              },
-              {
-                label: 'Timestamp (ms)',
-                value: 'timestamp-ms'
-              }
-            ]
-          };
-
-          // Create a new mapping between anything and an expected integer
-          $scope.addIntegerMapping = function () {
-            if (!angular.isArray($scope.transformation.rules.mapping)) {
-              $scope.transformation.rules.mapping = [];
-            }
-            return $scope.transformation.rules.mapping.push({ from: '', to: 0 });
-          };
-
-          // close and save the modifications
-          $scope.ok = function () { $uibModalInstance.close($scope.transformation.rules); };
-
-          // do not save the modifications
-          $scope.cancel = function () { $uibModalInstance.dismiss(); };
-        }]
-      })
-        .result.finally(null).then(function (transfo_rules) { mapping.transformation = transfo_rules; });
-    };
-  }
-}
-
-/**
  * Page listing all authentication providers
  */
 Application.Controllers.controller('AuthentificationController', ['$scope', '$state', '$rootScope', 'dialogs', 'growl', 'authProvidersPromise', 'AuthProvider', '_t',
@@ -323,9 +215,6 @@ Application.Controllers.controller('NewAuthenticationController', ['$scope', '$s
         }
       }
     };
-
-    // Using the AuthenticationController
-    return new AuthenticationController($scope, $state, $uibModal, _t, mappingFieldsPromise);
   }
 ]);
 
@@ -359,7 +248,18 @@ Application.Controllers.controller('EditAuthenticationController', ['$scope', '$
       );
     };
 
-    // Using the AuthenticationController
-    return new AuthenticationController($scope, $state, $uibModal, _t, mappingFieldsPromise);
+    /**
+     * Shows a success message forwarded from a child react component
+     */
+    $scope.onSuccess = function (message) {
+      growl.success(message);
+    };
+
+    /**
+     * Callback triggered by react components
+     */
+    $scope.onError = function (message) {
+      growl.error(message);
+    };
   }
 ]);

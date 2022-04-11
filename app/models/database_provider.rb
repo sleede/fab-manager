@@ -5,6 +5,8 @@
 class DatabaseProvider < ApplicationRecord
   has_one :auth_provider, as: :providable, dependent: :destroy
 
+  validates_with DatabaseProviderValidator
+
   def profile_url
     '/#!/dashboard/profile'
   end
