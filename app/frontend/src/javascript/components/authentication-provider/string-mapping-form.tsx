@@ -12,6 +12,9 @@ export interface StringMappingFormProps<TFieldValues, TContext extends object> {
   fieldMappingId: number,
 }
 
+/**
+ * Partial form to map an internal string field to an external API.
+ */
 export const StringMappingForm = <TFieldValues extends FieldValues, TContext extends object>({ register, control, fieldMappingId }: StringMappingFormProps<TFieldValues, TContext>) => {
   const { t } = useTranslation('shared');
 
@@ -20,9 +23,11 @@ export const StringMappingForm = <TFieldValues extends FieldValues, TContext ext
   return (
     <div className="string-mapping-form array-mapping-form">
       <h4>{t('app.shared.authentication.mappings')}</h4>
-      <FabButton
-        icon={<i className="fa fa-plus" />}
-        onClick={() => append({})} />
+      <div className="mapping-actions">
+        <FabButton
+          icon={<i className="fa fa-plus" />}
+          onClick={() => append({})} />
+      </div>
       {fields.map((item, index) => (
         <div key={item.id} className="mapping-item">
           <div className="inputs">

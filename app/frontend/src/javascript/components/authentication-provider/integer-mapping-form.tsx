@@ -12,6 +12,9 @@ export interface IntegerMappingFormProps<TFieldValues, TContext extends object> 
   fieldMappingId: number,
 }
 
+/**
+ * Partial for to map an internal integer field to an external API providing a string value.
+ */
 export const IntegerMappingForm = <TFieldValues extends FieldValues, TContext extends object>({ register, control, fieldMappingId }: IntegerMappingFormProps<TFieldValues, TContext>) => {
   const { t } = useTranslation('shared');
 
@@ -20,9 +23,11 @@ export const IntegerMappingForm = <TFieldValues extends FieldValues, TContext ex
   return (
     <div className="integer-mapping-form array-mapping-form">
       <h4>{t('app.shared.authentication.mappings')}</h4>
-      <FabButton
-        icon={<i className="fa fa-plus" />}
-        onClick={() => append({})} />
+      <div className="mapping-actions">
+        <FabButton
+          icon={<i className="fa fa-plus" />}
+          onClick={() => append({})} />
+      </div>
       {fields.map((item, index) => (
         <div key={item.id} className="mapping-item">
           <div className="inputs">

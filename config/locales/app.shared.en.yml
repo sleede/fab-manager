@@ -265,6 +265,7 @@ en:
         true_value: "True value"
         false_value: "False value"
         date_format: "Date format"
+        save: "Save"
         types:
           integer: "integer"
           string: "string"

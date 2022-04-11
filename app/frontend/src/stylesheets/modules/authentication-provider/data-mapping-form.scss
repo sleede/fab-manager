@@ -1,6 +1,9 @@
 .data-mapping-form {
+  .mapping-item .inputs .form-item {
+    margin-left: 20px;
+  }
   .local-data,
-  .remote-data{
+  .remote-data {
     display: flex;
     flex-direction: row;
   }
