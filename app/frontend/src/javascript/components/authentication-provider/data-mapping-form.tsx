@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { UseFormRegister, useFieldArray, ArrayPath, useWatch, Path } from 'react-hook-form';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 import AuthProviderAPI from '../../api/auth-provider';
-import { MappingFields } from '../../models/authentication-provider';
+import { MappingFields, mappingType } from '../../models/authentication-provider';
 import { Control } from 'react-hook-form/dist/types/form';
 import { FormSelect } from '../form/form-select';
 import { FormInput } from '../form/form-input';
@@ -66,7 +66,7 @@ export const DataMappingForm = <TFieldValues extends FieldValues, TContext exten
   /**
    * Return the type of data expected for the given index, in the current data-mapping form
    */
-  const getDataType = (formData: Array<TFieldValues>, index: number): string => {
+  const getDataType = (formData: Array<TFieldValues>, index: number): mappingType => {
     const model = getModel(formData, index);
     const field = getField(formData, index);
     if (model && field) {
@@ -89,7 +89,7 @@ export const DataMappingForm = <TFieldValues extends FieldValues, TContext exten
   }, []);
 
   return (
-    <div className="data-mapping-form">
+    <div className="data-mapping-form array-mapping-form">
       <h4>{t('app.shared.oauth2.define_the_fields_mapping')}</h4>
       <FabButton
         icon={<i className="fa fa-plus"/>}
@@ -97,23 +97,46 @@ export const DataMappingForm = <TFieldValues extends FieldValues, TContext exten
          {t('app.shared.oauth2.add_a_match')}
       </FabButton>
       {fields.map((item, index) => (
-        <div key={item.id} className="data-mapping-item">
+        <div key={item.id} className="mapping-item">
           <div className="inputs">
             <FormInput id={`auth_provider_mappings_attributes.${index}.id`} register={register} type="hidden" />
             <div className="local-data">
-              <FormSelect id={`auth_provider_mappings_attributes.${index}.local_model`} control={control} rules={{ required: true }} options={buildModelOptions()} label={t('app.shared.oauth2.model')}/>
-              <FormSelect id={`auth_provider_mappings_attributes.${index}.local_field`} options={buildFieldOptions(output, index)} control={control} rules={{ required: true }} label={t('app.shared.oauth2.field')} />
+              <FormSelect id={`auth_provider_mappings_attributes.${index}.local_model`}
+                          control={control} rules={{ required: true }}
+                          options={buildModelOptions()} label={t('app.shared.oauth2.model')}/>
+              <FormSelect id={`auth_provider_mappings_attributes.${index}.local_field`}
+                          options={buildFieldOptions(output, index)}
+                          control={control}
+                          rules={{ required: true }}
+                          label={t('app.shared.oauth2.field')} />
             </div>
             <div className="remote-data">
-              <FormInput id={`auth_provider_mappings_attributes.${index}.api_endpoint`} register={register} rules={{ required: true }} placeholder="/api/resource..." label={t('app.shared.oauth2.api_endpoint_url')} />
-              <FormSelect id={`auth_provider_mappings_attributes.${index}.api_data_type`} options={[{ label: 'JSON', value: 'json' }]} control={control} rules={{ required: true }} label={t('app.shared.oauth2.api_type')} />
-              <FormInput id={`auth_provider_mappings_attributes.${index}.api_field`} register={register} rules={{ required: true }} placeholder="field_name..." label={t('app.shared.oauth2.api_fields')} />
+              <FormInput id={`auth_provider_mappings_attributes.${index}.api_endpoint`}
+                         register={register}
+                         rules={{ required: true }}
+                         placeholder="/api/resource..."
+                         label={t('app.shared.oauth2.api_endpoint_url')} />
+              <FormSelect id={`auth_provider_mappings_attributes.${index}.api_data_type`}
+                          options={[{ label: 'JSON', value: 'json' }]}
+                          control={control} rules={{ required: true }}
+                          label={t('app.shared.oauth2.api_type')} />
+              <FormInput id={`auth_provider_mappings_attributes.${index}.api_field`}
+                         register={register}
+                         rules={{ required: true }}
+                         placeholder="field_name..."
+                         label={t('app.shared.oauth2.api_fields')} />
             </div>
           </div>
           <div className="actions">
-            <FabButton icon={<i className="fa fa-random" />} onClick={toggleTypeMappingModal} />
+            <FabButton icon={<i className="fa fa-random" />} onClick={toggleTypeMappingModal} disabled={getField(output, index) === undefined} />
             <FabButton icon={<i className="fa fa-trash" />} onClick={() => remove(index)} className="delete-button" />
-            <TypeMappingModal model={getModel(output, index)} field={getField(output, index)} type={getDataType(output, index)} isOpen={isOpenTypeMappingModal} toggleModal={toggleTypeMappingModal} />
+            <TypeMappingModal model={getModel(output, index)}
+                              field={getField(output, index)}
+                              type={getDataType(output, index)}
+                              isOpen={isOpenTypeMappingModal}
+                              toggleModal={toggleTypeMappingModal}
+                              control={control} register={register}
+                              fieldMappingId={index} />
           </div>
         </div>
       ))}

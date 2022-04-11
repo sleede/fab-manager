@@ -19,7 +19,7 @@ interface FormInputProps<TFieldValues> extends InputHTMLAttributes<HTMLInputElem
 export const FormInput = <TFieldValues extends FieldValues>({ id, register, label, tooltip, defaultValue, icon, className, rules, readOnly, disabled, type, addOn, addOnClassName, placeholder, error, step }: FormInputProps<TFieldValues>) => {
   // Compose classnames from props
   const classNames = `
-    form-item ${className || ''}
+    form-input form-item ${className || ''}
     ${type === 'hidden' ? 'is-hidden' : ''}
     ${error && error[id] ? 'is-incorrect' : ''}
     ${rules && rules.required ? 'is-required' : ''}

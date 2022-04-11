@@ -28,7 +28,7 @@ type selectOption<TOptionValue> = { value: TOptionValue, label: string };
  */
 export const FormSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, className, control, placeholder, options, valueDefault, error, rules, disabled, onChange }: FormSelectProps<TFieldValues, TContext, TOptionValue>) => {
   const classNames = `
-    form-item ${className || ''}
+    form-select form-item ${className || ''}
     ${error && error[id] ? 'is-incorrect' : ''}
     ${rules && rules.required ? 'is-required' : ''}
     ${disabled ? 'is-disabled' : ''}`;

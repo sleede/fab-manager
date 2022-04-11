@@ -1,20 +1,40 @@
 import React from 'react';
 import { FabModal } from '../base/fab-modal';
+import { useTranslation } from 'react-i18next';
+import { IntegerMappingForm } from './integer-mapping-form';
+import { UseFormRegister } from 'react-hook-form';
+import { Control } from 'react-hook-form/dist/types/form';
+import { FieldValues } from 'react-hook-form/dist/types/fields';
+import { mappingType } from '../../models/authentication-provider';
+import { BooleanMappingForm } from './boolean-mapping-form';
+import { DateMappingForm } from './date-mapping-form';
+import { StringMappingForm } from './string-mapping-form';
 
-interface TypeMappingModalProps {
+interface TypeMappingModalProps<TFieldValues, TContext extends object> {
   model: string,
   field: string,
-  type: string,
+  type: mappingType,
   isOpen: boolean,
   toggleModal: () => void,
+  register: UseFormRegister<TFieldValues>,
+  control: Control<TFieldValues, TContext>,
+  fieldMappingId: number,
 }
 
-export const TypeMappingModal: React.FC<TypeMappingModalProps> = ({ model, field, type, isOpen, toggleModal }) => {
+export const TypeMappingModal = <TFieldValues extends FieldValues, TContext extends object>({ model, field, type, isOpen, toggleModal, register, control, fieldMappingId }:TypeMappingModalProps<TFieldValues, TContext>) => {
+  const { t } = useTranslation('shared');
+
   return (
-    <FabModal isOpen={isOpen} toggleModal={toggleModal}>
-      <h1>{model}</h1>
-      <h2>{field}</h2>
-      <h3>{type}</h3>
+    <FabModal isOpen={isOpen}
+              toggleModal={toggleModal}
+              title={t('app.shared.authentication.data_mapping')}
+              confirmButton={<i className="fa fa-check" />}
+              onConfirm={toggleModal}>
+      <span>{model} &gt; {field} ({t('app.shared.authentication.TYPE_expected', { TYPE: t(`app.shared.authentication.types.${type}`) })})</span>
+      {type === 'integer' && <IntegerMappingForm register={register} control={control} fieldMappingId={fieldMappingId} />}
+      {type === 'boolean' && <BooleanMappingForm register={register} fieldMappingId={fieldMappingId} />}
+      {type === 'date' && <DateMappingForm control={control} fieldMappingId={fieldMappingId} />}
+      {type === 'string' && <StringMappingForm register={register} control={control} fieldMappingId={fieldMappingId} />}
     </FabModal>
   );
 };
