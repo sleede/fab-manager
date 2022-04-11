@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- Updated generate invoice reference method
 - Fix a bug: unable to show machine availability slot for admin
 - Fix a bug: unable to confirm modification of reservation for client
 - Fix a bug: unable to show deleted user in reservation slot
