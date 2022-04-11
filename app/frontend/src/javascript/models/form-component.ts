@@ -3,7 +3,7 @@ import { Control } from 'react-hook-form/dist/types/form';
 
 export type ruleTypes<TFieldValues> = {
   required?: boolean | string,
-  pattern?: RegExp | {value: RegExp, message: string},
+  pattern?: RegExp | { value: RegExp, message: string },
   minLength?: number,
   maxLength?: number,
   min?: number,

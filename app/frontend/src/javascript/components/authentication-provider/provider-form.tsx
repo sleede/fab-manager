@@ -10,6 +10,7 @@ import { FormSelect } from '../form/form-select';
 import { Oauth2Form } from './oauth2-form';
 import { DataMappingForm } from './data-mapping-form';
 import { FabButton } from '../base/fab-button';
+import AuthProviderAPI from '../../api/auth-provider';
 
 declare const Application: IApplication;
 
@@ -41,11 +42,11 @@ export const ProviderForm: React.FC<ProviderFormProps> = ({ action, provider, on
    * Callback triggered when the form is submitted: process with the provider creation or update.
    */
   const onSubmit: SubmitHandler<AuthenticationProvider> = (data: AuthenticationProvider) => {
-    if (data) {
-      onSuccess('Provider created successfully');
-    } else {
-      onError('Failed to created provider');
-    }
+    AuthProviderAPI[action](data).then(() => {
+      onSuccess(t(`app.shared.authentication.${action}_success`));
+    }).catch(error => {
+      onError(error);
+    });
   };
 
   /**
