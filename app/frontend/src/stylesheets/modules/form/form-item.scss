@@ -29,12 +29,20 @@
         position: absolute;
         right: 0;
         top: 0;
-        background-color: white;
-        color: var(--gray-hard);
+        background-color: var(--information-lightest);
+        color: var(--information);
+        border: 1px solid var(--information);
         border-radius: 8px;
         padding: 1rem;
-        font-size: 12px;
+        font-size: 14px;
         width: auto;
+        font-weight: normal;
+        line-height: 1.2em;
+
+        & a {
+          color: var(--gray-hard);
+          text-decoration: underline;
+        }
 
         &:hover {
           display: block;

@@ -15,11 +15,14 @@ export const FabOutputCopy: React.FC<FabOutputCopyProps> = ({ label, text, onCop
    * Copy the given text to the clipboard.
    */
   const textToClipboard = () => {
-    if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text);
-      if (typeof onCopy === 'function') onCopy();
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1000);
+    if (navigator?.clipboard?.writeText) {
+      navigator.clipboard.writeText(text).then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 1000);
+        if (onCopy) {
+          onCopy();
+        }
+      });
     }
   };
 
