@@ -3,15 +3,17 @@ import { FormInput } from '../form/form-input';
 import { UseFormRegister } from 'react-hook-form';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { useTranslation } from 'react-i18next';
+import { FabOutputCopy } from '../base/fab-output-copy';
 
 interface Oauth2FormProps<TFieldValues> {
   register: UseFormRegister<TFieldValues>,
+  callbackUrl?: string,
 }
 
 /**
  * Partial form to fill the OAuth2 settings for a new/existing authentication provider.
  */
-export const Oauth2Form = <TFieldValues extends FieldValues>({ register }: Oauth2FormProps<TFieldValues>) => {
+export const Oauth2Form = <TFieldValues extends FieldValues>({ register, callbackUrl }: Oauth2FormProps<TFieldValues>) => {
   const { t } = useTranslation('admin');
 
   // regular expression to validate the the input fields
@@ -21,6 +23,7 @@ export const Oauth2Form = <TFieldValues extends FieldValues>({ register }: Oauth
   return (
     <div className="oauth2-form">
       <hr/>
+      <FabOutputCopy text={callbackUrl} label={t('app.admin.authentication.oauth2_form.authorization_callback_url')} />
       <FormInput id="providable_attributes.base_url"
                  register={register}
                  placeholder="https://sso.example.net..."

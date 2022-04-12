@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Check the access policies for API::AuthProvidersController
 class AuthProviderPolicy < ApplicationPolicy
 
   class Scope < Scope
@@ -6,7 +9,7 @@ class AuthProviderPolicy < ApplicationPolicy
     end
   end
 
-  %w(index? show? create? update? destroy? mapping_fields?).each do |action|
+  %w[index? show? create? update? destroy? mapping_fields? strategy_name?].each do |action|
     define_method action do
       user.admin?
     end

@@ -1086,6 +1086,7 @@ en:
             date: "date"
             boolean: "boolean"
         oauth2_form:
+          authorization_callback_url: "Authorization callback URL"
           common_url: "Server root URL"
           authorization_endpoint: "Authorization endpoint"
           token_acquisition_endpoint: "Token acquisition endpoint"
@@ -1099,7 +1100,7 @@ en:
           save: "Save"
           methods:
             local_database: "Local database"
-            o_auth2: "OAuth 2.0"
+            oauth2: "OAuth 2.0"
             openid_connect: "OpenID Connect"
       #create a new authentication provider (SSO)
       authentication_new:

@@ -76,7 +76,7 @@ class AuthProvider < ApplicationRecord
   ## Return the provider type name without the "Provider" part.
   ## eg. DatabaseProvider will return 'database'
   def provider_type
-    providable.class.name[0..-9].downcase
+    providable_type[0..-9].downcase
   end
 
   ## Return the user's profile fields that are currently managed from the SSO

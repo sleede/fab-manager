@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useForm, SubmitHandler, useWatch } from 'react-hook-form';
 import { react2angular } from 'react2angular';
+import { debounce as _debounce } from 'lodash';
 import { AuthenticationProvider } from '../../models/authentication-provider';
 import { Loader } from '../base/loader';
 import { IApplication } from '../../models/application';
@@ -17,7 +18,7 @@ declare const Application: IApplication;
 // list of supported authentication methods
 const METHODS = {
   DatabaseProvider: 'local_database',
-  OAuth2Provider: 'o_auth2',
+  OAuth2Provider: 'oauth2',
   OpenIdConnectProvider: 'openid_connect'
 };
 
@@ -35,8 +36,15 @@ type selectProvidableTypeOption = { value: string, label: string };
  */
 export const ProviderForm: React.FC<ProviderFormProps> = ({ action, provider, onError, onSuccess }) => {
   const { handleSubmit, register, control } = useForm<AuthenticationProvider>({ defaultValues: { ...provider } });
+  const output = useWatch({ control });
   const [providableType, setProvidableType] = useState<string>(provider?.providable_type);
+  const [strategyName, setStrategyName] = useState<string>(provider?.strategy_name);
+
   const { t } = useTranslation('admin');
+
+  useEffect(() => {
+    updateStrategyName(output as AuthenticationProvider);
+  }, [output?.providable_type, output?.name]);
 
   /**
    * Callback triggered when the form is submitted: process with the provider creation or update.
@@ -66,6 +74,24 @@ export const ProviderForm: React.FC<ProviderFormProps> = ({ action, provider, on
     setProvidableType(type);
   };
 
+  /**
+   * Request the API the strategy name for the current "in-progress" provider.
+   */
+  const updateStrategyName = useCallback(_debounce((provider: AuthenticationProvider): void => {
+    AuthProviderAPI.strategyName(provider).then(strategyName => {
+      setStrategyName(strategyName);
+    }).catch(error => {
+      onError(error);
+    });
+  }, 400), []);
+
+  /**
+   * Build the callback URL, based on the strategy name.
+   */
+  const buildCallbackUrl = (): string => {
+    return `${window.location.origin}/users/auth/${strategyName}/callback`;
+  };
+
   return (
     <form className="provider-form" onSubmit={handleSubmit(onSubmit)}>
       <FormInput id="name"
@@ -80,7 +106,7 @@ export const ProviderForm: React.FC<ProviderFormProps> = ({ action, provider, on
                   onChange={onProvidableTypeChange}
                   readOnly={action === 'update'}
                   rules={{ required: true }} />
-      {providableType === 'OAuth2Provider' && <Oauth2Form register={register} />}
+      {providableType === 'OAuth2Provider' && <Oauth2Form register={register} callbackUrl={buildCallbackUrl()} />}
       {providableType && providableType !== 'DatabaseProvider' && <DataMappingForm register={register} control={control} />}
       <div className="main-actions">
         <FabButton type="submit" className="submit-button">{t('app.admin.authentication.provider_form.save')}</FabButton>
