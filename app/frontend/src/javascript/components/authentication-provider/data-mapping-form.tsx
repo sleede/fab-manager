@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { FabButton } from '../base/fab-button';
 import { TypeMappingModal } from './type-mapping-modal';
 import { useImmer } from 'use-immer';
+import { HtmlTranslate } from '../base/html-translate';
 
 export interface DataMappingFormProps<TFieldValues, TContext extends object> {
   register: UseFormRegister<TFieldValues>,
@@ -136,6 +137,7 @@ export const DataMappingForm = <TFieldValues extends FieldValues, TContext exten
                          register={register}
                          rules={{ required: true }}
                          placeholder="field_name..."
+                         tooltip={<HtmlTranslate trKey="app.shared.oauth2.api_field_help_html" />}
                          label={t('app.shared.oauth2.api_fields')} />
             </div>
           </div>

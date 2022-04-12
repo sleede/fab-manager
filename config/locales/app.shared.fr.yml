@@ -275,7 +275,7 @@ fr:
         api_endpoint_url: "Point d'accès/URL de l'API"
         api_type: "Type d'API"
         api_fields: "Champ de l'API"
-        api_field_help: "La syntaxe JsonPath est prise en charge.\n Si plusieurs champs sont sélectionnés, le premier sera utilisé.\n Exemple : $.data[*].name"
+        api_field_help_html: '<p>La syntaxe <a href="https://jsonpath.com/" target="_blank">JsonPath</a> est prise en charge.\n Si plusieurs champs sont sélectionnés, le premier sera utilisé.\n Exemple : $.data[*].name</p>'
       #machine/training slot modification modal
       confirm_modify_slot_modal:
         change_the_slot: "Modifier le créneau"
