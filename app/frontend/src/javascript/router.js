@@ -1003,10 +1003,6 @@ angular.module('application.router', ['ui.router'])
             templateUrl: '/admin/authentications/new.html',
             controller: 'NewAuthenticationController'
           }
-        },
-        resolve: {
-          mappingFieldsPromise: ['AuthProvider', function (AuthProvider) { return AuthProvider.mapping_fields().$promise; }],
-          authProvidersPromise: ['AuthProvider', function (AuthProvider) { return AuthProvider.query().$promise; }]
         }
       })
       .state('app.admin.authentication_edit', {
@@ -1018,8 +1014,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          providerPromise: ['AuthProvider', '$transition$', function (AuthProvider, $transition$) { return AuthProvider.get({ id: $transition$.params().id }).$promise; }],
-          mappingFieldsPromise: ['AuthProvider', function (AuthProvider) { return AuthProvider.mapping_fields().$promise; }]
+          providerPromise: ['AuthProvider', '$transition$', function (AuthProvider, $transition$) { return AuthProvider.get({ id: $transition$.params().id }).$promise; }]
         }
       })
 

@@ -33,6 +33,8 @@ export const DataMappingForm = <TFieldValues extends FieldValues, TContext exten
    * Build the list of available models for the data mapping
    */
   const buildModelOptions = (): Array<selectModelFieldOption> => {
+    if (!dataMapping) return [];
+
     return Object.keys(dataMapping).map(model => {
       return {
         label: model,
@@ -45,6 +47,8 @@ export const DataMappingForm = <TFieldValues extends FieldValues, TContext exten
    * Build the list of fields of the current model for the data mapping
    */
   const buildFieldOptions = (formData: Array<TFieldValues>, index: number): Array<selectModelFieldOption> => {
+    if (!dataMapping) return [];
+
     return dataMapping[getModel(formData, index)]?.map(field => {
       return {
         label: field[0],
@@ -73,7 +77,7 @@ export const DataMappingForm = <TFieldValues extends FieldValues, TContext exten
   const getDataType = (formData: Array<TFieldValues>, index: number): mappingType => {
     const model = getModel(formData, index);
     const field = getField(formData, index);
-    if (model && field) {
+    if (model && field && dataMapping) {
       return dataMapping[model]?.find(f => f[0] === field)?.[1];
     }
   };
