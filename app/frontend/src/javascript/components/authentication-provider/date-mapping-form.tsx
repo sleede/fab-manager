@@ -13,7 +13,7 @@ export interface DateMappingFormProps<TFieldValues, TContext extends object> {
  * Partial form for mapping an internal date field to an external API.
  */
 export const DateMappingForm = <TFieldValues extends FieldValues, TContext extends object>({ control, fieldMappingId }: DateMappingFormProps<TFieldValues, TContext>) => {
-  const { t } = useTranslation('shared');
+  const { t } = useTranslation('admin');
 
   // available date formats
   const dateFormats = [
@@ -41,12 +41,12 @@ export const DateMappingForm = <TFieldValues extends FieldValues, TContext exten
 
   return (
     <div className="date-mapping-form">
-      <h4>{t('app.shared.authentication.input_format')}</h4>
+      <h4>{t('app.admin.authentication.date_mapping_form.input_format')}</h4>
       <FormSelect id={`auth_provider_mappings_attributes.${fieldMappingId}.transformation.format`}
                   control={control}
                   rules={{ required: true }}
                   options={dateFormats}
-                  label={t('app.shared.authentication.date_format')} />
+                  label={t('app.admin.authentication.date_mapping_form.date_format')} />
     </div>
   );
 };

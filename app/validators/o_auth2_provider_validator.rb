@@ -9,6 +9,6 @@ class OAuth2ProviderValidator < ActiveModel::Validator
       mapping.local_model == 'user' && mapping.local_field == 'uid'
     end
 
-    record.errors.add(:uid, I18n.t('app.admin.authentication_new.it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider'))
+    record.errors.add(:uid, I18n.t('authentication_providers.matching_between_User_uid_and_API_required'))
   end
 end

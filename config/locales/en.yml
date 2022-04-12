@@ -61,6 +61,10 @@ en:
     your_authentication_code_is_not_valid: "Your authentication code is not valid."
     current_authentication_method_no_code: "The current authentication method does not require any migration code"
     requested_account_does_not_exists: "The requested account does not exist"
+  #SSO external authentication
+  authentication_providers:
+    local_database_provider_already_exists: 'A "Local Database" provider already exists. Unable to create another.'
+    matching_between_User_uid_and_API_required: "It is required to set the matching between User.uid and the API to add this provider."
   #PDF invoices generation
   invoices:
     refund_invoice_reference: "Refund invoice reference: %{REF}"

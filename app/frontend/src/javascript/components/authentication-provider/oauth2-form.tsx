@@ -12,7 +12,7 @@ interface Oauth2FormProps<TFieldValues> {
  * Partial form to fill the OAuth2 settings for a new/existing authentication provider.
  */
 export const Oauth2Form = <TFieldValues extends FieldValues>({ register }: Oauth2FormProps<TFieldValues>) => {
-  const { t } = useTranslation('shared');
+  const { t } = useTranslation('admin');
 
   // regular expression to validate the the input fields
   const endpointRegex = /^\/?([-._~:?#[\]@!$&'()*+,;=%\w]+\/?)*$/;
@@ -24,34 +24,34 @@ export const Oauth2Form = <TFieldValues extends FieldValues>({ register }: Oauth
       <FormInput id="providable_attributes.base_url"
                  register={register}
                  placeholder="https://sso.example.net..."
-                 label={t('app.shared.oauth2.common_url')}
+                 label={t('app.admin.authentication.oauth2_form.common_url')}
                  rules={{ required: true, pattern: urlRegex }} />
       <FormInput id="providable_attributes.authorization_endpoint"
                  register={register}
                  placeholder="/oauth2/auth..."
-                 label={t('app.shared.oauth2.authorization_endpoint')}
+                 label={t('app.admin.authentication.oauth2_form.authorization_endpoint')}
                  rules={{ required: true, pattern: endpointRegex }} />
       <FormInput id="providable_attributes.token_endpoint"
                  register={register}
                  placeholder="/oauth2/token..."
-                 label={t('app.shared.oauth2.token_acquisition_endpoint')}
+                 label={t('app.admin.authentication.oauth2_form.token_acquisition_endpoint')}
                  rules={{ required: true, pattern: endpointRegex }} />
       <FormInput id="providable_attributes.profile_url"
                  register={register}
                  placeholder="https://exemple.net/user..."
-                 label={t('app.shared.oauth2.profil_edition_url')}
+                 label={t('app.admin.authentication.oauth2_form.profil_edition_url')}
                  rules={{ required: true, pattern: urlRegex }} />
       <FormInput id="providable_attributes.client_id"
                  register={register}
-                 label={t('app.shared.oauth2.client_identifier')}
+                 label={t('app.admin.authentication.oauth2_form.client_identifier')}
                  rules={{ required: true }} />
       <FormInput id="providable_attributes.client_secret"
                  register={register}
-                 label={t('app.shared.oauth2.client_secret')}
+                 label={t('app.admin.authentication.oauth2_form.client_secret')}
                  rules={{ required: true }} />
       <FormInput id="providable_attributes.scopes" register={register}
                  placeholder="profile,email..."
-                 label={t('app.shared.oauth2.scopes')} />
+                 label={t('app.admin.authentication.oauth2_form.scopes')} />
     </div>
   );
 };

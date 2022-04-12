@@ -15,6 +15,7 @@ interface FormSelectProps<TFieldValues, TContext extends object, TOptionValue> e
   className?: string,
   placeholder?: string,
   disabled?: boolean,
+  readOnly?: boolean,
 }
 
 /**
@@ -26,7 +27,7 @@ type selectOption<TOptionValue> = { value: TOptionValue, label: string };
 /**
  * This component is a wrapper for react-select to use with react-hook-form
  */
-export const FormSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, className, control, placeholder, options, valueDefault, error, rules, disabled, onChange }: FormSelectProps<TFieldValues, TContext, TOptionValue>) => {
+export const FormSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, className, control, placeholder, options, valueDefault, error, rules, disabled, onChange, readOnly }: FormSelectProps<TFieldValues, TContext, TOptionValue>) => {
   const classNames = `
     form-select form-item ${className || ''}
     ${error && error[id] ? 'is-incorrect' : ''}
@@ -62,6 +63,7 @@ export const FormSelect = <TFieldValues extends FieldValues, TContext extends ob
                                 onChange(val.value);
                               }}
                               placeholder={placeholder}
+                              isDisabled={readOnly}
                               options={options} />
                     } />
       </div>
