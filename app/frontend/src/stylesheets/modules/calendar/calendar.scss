@@ -1,0 +1,113 @@
+.calendar {
+  $tab-width: 40px;
+  &-admin {
+    &-header {
+      margin: 10px 30px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap-reverse;
+    }
+    &-info {
+      display: contents;
+
+      input[type="checkbox"] { display: none; }
+      .content {
+        padding: 0 15px;
+        .placeholder {
+          display: none;
+          position: absolute;
+          font-weight: 400;
+          z-index: -1;
+        }
+      }
+    }
+
+    @media screen and (min-width: $screen-sm) {
+      &-header { margin-bottom: -20px; }
+      &-info .content { padding: 0 30px; }
+    }
+    @media screen and (min-width: $screen-md) {
+      &-section {
+        position: relative;
+        padding-right: $tab-width;
+      }
+      &-info {
+        position: absolute;
+        top: 0;
+        left: calc(100% - $tab-width);
+        width: $tab-width;
+        height: 100%;
+        display: block;
+        z-index: 1; 
+  
+        .content {
+          position: relative;
+          min-width: 220px;
+          width: fit-content;
+          height: 100%;
+          padding: 1px 20px 0 $tab-width;
+          border-left: 1px solid #dddddd;
+          background: linear-gradient(to right, var(--secondary) 0 $tab-width, var(--gray-soft-lightest) $tab-width 100%);
+          box-shadow: 0 10px 10px rgb(0 0 0 / 50%);
+          transition: transform 500ms ease-in-out;
+          cursor: pointer;
+          &::before {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: $tab-width;
+            height: $tab-width;
+            content: "\f30a";
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: "Font Awesome 5 Free"; font-weight: 900;
+            transform: translateX(-$tab-width);
+            transition: transform 300ms ease-in-out;
+            cursor: pointer;
+          }
+          .placeholder {
+            display: block;
+          }
+        }
+        input[type="checkbox"]:checked ~ .content {
+          background: var(--gray-soft-lightest);
+          transform: translateX(calc(-100% + $tab-width));
+          cursor: default;
+          &::before {
+            transform: translateX(-$tab-width) rotateZ(-180deg);
+          }
+        }
+      }
+    }
+  }
+
+  &-legend {
+    display: flex;
+    align-items: center;
+    h4 {
+      margin-right: 1rem;
+      font-size: 12px;
+      font-style: italic;
+      font-weight: 500;
+    }
+  
+    &-group {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  
+    &-item {
+      display: inline-block;
+      padding: 2px;
+      border: 1px solid;
+      border-left: 3px solid;
+      border-radius: 3px;
+      font-size: 10px;
+      &:not(:first-of-type) {
+        margin-left: 1rem;
+      }
+    }
+  }
+}
