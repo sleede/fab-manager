@@ -53,6 +53,7 @@ pt:
     i_ve_reserved: "Eu reservei"
     length_must_be_slot_multiple: "deve ser pelo menos %{MIN} minutos após a data de início"
     must_be_associated_with_at_least_1_machine: "deve estar associada a pelo menos uma máquina"
+    deleted_user: "Deleted user"
   #members management
   members:
     unable_to_change_the_group_while_a_subscription_is_running: "Não é possível alterar o grupo enquanto uma assinatura está sendo executada"

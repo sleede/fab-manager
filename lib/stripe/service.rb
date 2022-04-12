@@ -120,6 +120,8 @@ class Stripe::Service < Payment::Service
       pgo = PaymentGatewayObject.find_or_initialize_by(item: payment_schedule_item)
       pgo.gateway_object = stp_invoice
       pgo.save!
+    elsif stp_invoice.status == 'draft'
+      return # Could be that the stripe invoice does not yet reflect the payment made by the member, because we called that service just after payment is made. We call return here and PaymentScheduleItemWorker will anyway call that method every hour
     else
       notify_payment_schedule_item_error(payment_schedule_item)
       payment_schedule_item.update_attributes(state: 'error')

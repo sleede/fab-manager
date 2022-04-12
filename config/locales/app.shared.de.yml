@@ -283,6 +283,7 @@ de:
         do_you_want_to_change_NAME_s_booking_slot_initially_planned_at: "Möchten Sie den {NAME}-Buchungsplatz ändern? Ursprünglich geplant um:"
         cancel_this_reservation: "Reservierung stornieren"
         i_want_to_change_date: "Ich möchte das Datum ändern"
+        deleted_user: "Deleted user"
       #user public profile
       public_profile:
         last_activity_html: "Letzte Aktivität <br><strong>am {DATE}</strong>"

@@ -126,5 +126,19 @@ namespace :fablab do
       )
       puts '-> Done'
     end
+
+    desc 'Regenerate the invoices (invoices & avoirs) reference'
+    task :regenerate_invoices_reference, %i[year month] => :environment do |_task, args|
+      year = args.year || Time.current.year
+      month = args.month || Time.current.month
+      start_date = Time.zone.local(year.to_i, month.to_i, 1)
+      end_date = start_date.next_month
+      puts "-> Start regenerate the invoices reference between #{I18n.l start_date, format: :long} and " \
+         "#{I18n.l end_date - 1.minute, format: :long}"
+      invoices = Invoice.where('created_at >= :start_date AND created_at < :end_date', start_date: start_date, end_date: end_date)
+                        .order(created_at: :asc)
+      invoices.each(&:update_reference)
+      puts '-> Done'
+    end
   end
 end

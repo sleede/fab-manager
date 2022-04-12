@@ -93,6 +93,13 @@
                 </tr>
                 </tbody>
               </table>
+              <ul>
+              <li ng-repeat="(key, errors) in planForm.$error track by $index"> <strong>{{ key }}</strong> errors
+                <ul>
+                  <li ng-repeat="e in errors">{{ e.$name }} has an error: <strong>{{ key }}</strong>.</li>
+                </ul>
+              </li>
+              </ul>
 
               <div class="panel-footer no-padder">
                   <input type="submit" value="{{ 'app.shared.buttons.confirm_changes' | translate }}" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="planForm.$invalid"/>

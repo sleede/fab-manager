@@ -53,6 +53,7 @@ de:
     i_ve_reserved: "Ich reservierte"
     length_must_be_slot_multiple: "muss mindestens %{MIN} Minuten nach dem Startdatum liegen"
     must_be_associated_with_at_least_1_machine: "muss mindestens einer Maschine zugeordnet sein"
+    deleted_user: "Deleted user"
   #members management
   members:
     unable_to_change_the_group_while_a_subscription_is_running: "Die Gruppe kann während eines Abonnements nicht geändert werden"

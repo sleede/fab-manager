@@ -6,7 +6,7 @@ class PaymentDocumentService
     def generate_reference(document, date: DateTime.current)
       pattern = Setting.get('invoice_reference')
 
-      reference = replace_invoice_number_pattern(pattern)
+      reference = replace_invoice_number_pattern(pattern, document.created_at)
       reference = replace_date_pattern(reference, date)
 
       if document.is_a? Avoir
@@ -51,7 +51,7 @@ class PaymentDocumentService
         pad_and_truncate(number_of_invoices('global'), match.to_s.length)
       end
 
-      reference = replace_invoice_number_pattern(reference)
+      reference = replace_invoice_number_pattern(reference, invoice.created_at)
       replace_date_pattern(reference, invoice.created_at)
     end
 
@@ -71,26 +71,25 @@ class PaymentDocumentService
     # Returns the number of current invoices in the given range around the current date.
     # If range is invalid or not specified, the total number of invoices is returned.
     # @param range {String} 'day', 'month', 'year'
+    # @param date {Date} the ending date
     # @return {Integer}
     ##
-    def number_of_invoices(range)
+    def number_of_invoices(range, date = DateTime.current)
       case range.to_s
       when 'day'
-        start = DateTime.current.beginning_of_day
-        ending = DateTime.current.end_of_day
+        start = date.beginning_of_day
       when 'month'
-        start = DateTime.current.beginning_of_month
-        ending = DateTime.current.end_of_month
+        start = date.beginning_of_month
       when 'year'
-        start = DateTime.current.beginning_of_year
-        ending = DateTime.current.end_of_year
+        start = date.beginning_of_year
       else
         return get_max_id(Invoice) + get_max_id(PaymentSchedule)
       end
-      return Invoice.count + PaymentSchedule.count unless defined? start && defined? ending
+      ending = date
+      return Invoice.count + PaymentSchedule.count unless defined? start
 
-      Invoice.where('created_at >= :start_date AND created_at < :end_date', start_date: start, end_date: ending).length +
-        PaymentSchedule.where('created_at >= :start_date AND created_at < :end_date', start_date: start, end_date: ending).length
+      Invoice.where('created_at >= :start_date AND created_at <= :end_date', start_date: start, end_date: ending).length +
+        PaymentSchedule.where('created_at >= :start_date AND created_at <= :end_date', start_date: start, end_date: ending).length
     end
 
     ##
@@ -125,20 +124,20 @@ class PaymentDocumentService
     # Replace the document number elements in the provided pattern with counts from the database
     # @param reference {string}
     ##
-    def replace_invoice_number_pattern(reference)
+    def replace_invoice_number_pattern(reference, date)
       copy = reference.dup
 
       # document number per year (yy..yy)
       copy.gsub!(/y+(?![^\[]*\])/) do |match|
-        pad_and_truncate(number_of_invoices('year'), match.to_s.length)
+        pad_and_truncate(number_of_invoices('year', date), match.to_s.length)
       end
       # document number per month (mm..mm)
       copy.gsub!(/m+(?![^\[]*\])/) do |match|
-        pad_and_truncate(number_of_invoices('month'), match.to_s.length)
+        pad_and_truncate(number_of_invoices('month', date), match.to_s.length)
       end
       # document number per day (dd..dd)
       copy.gsub!(/d+(?![^\[]*\])/) do |match|
-        pad_and_truncate(number_of_invoices('day'), match.to_s.length)
+        pad_and_truncate(number_of_invoices('day', date), match.to_s.length)
       end
 
       copy

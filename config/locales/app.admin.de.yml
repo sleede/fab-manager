@@ -109,6 +109,7 @@ de:
         slots: "Slots"
         slots_of: "von"
         minutes: "Minuten"
+        deleted_user: "Deleted user"
       #import external iCal calendar
       icalendar:
         icalendar_import: "iCalendar Import"
@@ -508,6 +509,7 @@ de:
         important_notes: "Wichtige Hinweise"
         address_and_legal_information: "Adresse und rechtliche Informationen"
         invoice_reference: "Rechnungsbezug"
+        invoice_reference_is_required: "Invoice reference is required."
         text: "Text"
         year: "Jahr"
         month: "Monat"

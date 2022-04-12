@@ -4,7 +4,7 @@
 <div class="modal-body">
   <form name="trainingForm" novalidate>
     <div class="form-group" ng-class="{'has-error': trainingForm['training[description]'].$dirty && trainingForm['training[description]'].$invalid }">
-      <textarea name="training[description]" class="form-control" placeholder="{{ 'app.admin.trainings.describe_the_training_in_a_few_words' | translate }}" ng-model="training.description" ng-maxlength="255"></textarea>
+      <textarea name="training[description]" class="form-control" placeholder="{{ 'app.admin.trainings.describe_the_training_in_a_few_words' | translate }}" ng-model="training.description" ng-maxlength="255" ng-trim="false"></textarea>
       <span class="help-block" ng-show="trainingForm['training[description]'].$dirty && trainingForm['training[description]'].$error.maxlength" translate>{{ 'app.admin.trainings.description_is_limited_to_255_characters' }}</span>
     </div>
   </form>

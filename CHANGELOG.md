@@ -1,5 +1,15 @@
 # Changelog Fab-manager
 
+## v5.3.10 2022 April 12
+
+- Updated generate invoice reference method
+- Set invoice reference is required
+- Fix a bug: unable to show machine availability slot for admin
+- Fix a bug: unable to confirm modification of reservation for client
+- Fix a bug: unable to show deleted user in reservation slot
+- Fix a bug: race condition on invoice after payment (concerning payment schedules) https://app.clickup.com/t/25zpmn1
+- Fix a bug: form maxlength count to exclude spaces and newline
+
 ## v5.3.9 2022 April 01
 
 - Optimise sql query, avoid to N+1
