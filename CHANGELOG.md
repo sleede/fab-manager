@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v5.3.10 2022 April 12
+
 - Updated generate invoice reference method
 - Set invoice reference is required
 - Fix a bug: unable to show machine availability slot for admin
