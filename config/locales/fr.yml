@@ -53,7 +53,7 @@ fr:
     i_ve_reserved: "J'ai réservé"
     length_must_be_slot_multiple: "doit être au moins %{MIN} minutes après la date de début"
     must_be_associated_with_at_least_1_machine: "doit être associé avec au moins 1 machine"
-    deleted_user: "Utilisateur supprimé"
+    deleted_user: "Deleted user"
   #members management
   members:
     unable_to_change_the_group_while_a_subscription_is_running: "Impossible de changer le groupe tant qu'un abonnement est en cours"
