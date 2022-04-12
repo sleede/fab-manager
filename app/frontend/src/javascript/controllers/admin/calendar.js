@@ -494,6 +494,9 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
       $scope.availability = event;
       $scope.availability.plans = availabilityPlans();
 
+      // mark the side panel as available to be opened
+      $('label.calendar-admin-info').removeClass('is-empty');
+
       if ($scope.availabilityDom) {
         $scope.availabilityDom.classList.remove('fc-selected');
       }
@@ -546,6 +549,9 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
       // we unselect the current event to keep consistency
       $scope.availability = null;
       $scope.availabilityDom = null;
+
+      // mark the side panel as available to hide because no event is selected anymore
+      $('label.calendar-admin-info').addClass('is-empty');
     };
 
     // !!! MUST BE CALLED AT THE END of the controller
