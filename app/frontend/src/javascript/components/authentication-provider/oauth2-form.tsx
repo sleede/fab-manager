@@ -30,7 +30,6 @@ export const Oauth2Form = <TFieldValues extends FieldValues>({ register, strateg
   return (
     <div className="oauth2-form">
       <hr/>
-      <FabOutputCopy text={buildCallbackUrl()} label={t('app.admin.authentication.oauth2_form.authorization_callback_url')} />
       <FormInput id="providable_attributes.base_url"
                  register={register}
                  placeholder="https://sso.example.net..."
