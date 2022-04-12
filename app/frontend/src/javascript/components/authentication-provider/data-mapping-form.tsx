@@ -9,6 +9,7 @@ import { FormInput } from '../form/form-input';
 import { useTranslation } from 'react-i18next';
 import { FabButton } from '../base/fab-button';
 import { TypeMappingModal } from './type-mapping-modal';
+import { useImmer } from 'use-immer';
 
 export interface DataMappingFormProps<TFieldValues, TContext extends object> {
   register: UseFormRegister<TFieldValues>,
@@ -23,7 +24,7 @@ type selectModelFieldOption = { value: string, label: string };
 export const DataMappingForm = <TFieldValues extends FieldValues, TContext extends object>({ register, control }: DataMappingFormProps<TFieldValues, TContext>) => {
   const { t } = useTranslation('shared');
   const [dataMapping, setDataMapping] = useState<MappingFields>(null);
-  const [isOpenTypeMappingModal, setIsOpenTypeMappingModal] = useState<boolean>(false);
+  const [isOpenTypeMappingModal, updateIsOpenTypeMappingModal] = useImmer<Map<number, boolean>>(new Map());
 
   const { fields, append, remove } = useFieldArray({ control, name: 'auth_provider_mappings_attributes' as ArrayPath<TFieldValues> });
   const output = useWatch({ name: 'auth_provider_mappings_attributes' as Path<TFieldValues>, control });
@@ -78,10 +79,12 @@ export const DataMappingForm = <TFieldValues extends FieldValues, TContext exten
   };
 
   /**
-   * Open/closes the "edit type mapping" modal dialog
+   * Open/closes the "edit type mapping" modal dialog for the given mapping index
    */
-  const toggleTypeMappingModal = (): void => {
-    setIsOpenTypeMappingModal(!isOpenTypeMappingModal);
+  const toggleTypeMappingModal = (index: number): () => void => {
+    return () => {
+      updateIsOpenTypeMappingModal(draft => draft.set(index, !draft.get(index)));
+    };
   };
 
   // fetch the mapping data from the API on mount
@@ -133,13 +136,13 @@ export const DataMappingForm = <TFieldValues extends FieldValues, TContext exten
             </div>
           </div>
           <div className="actions">
-            <FabButton icon={<i className="fa fa-random" />} onClick={toggleTypeMappingModal} disabled={getField(output, index) === undefined} tooltip={t('app.shared.authentication.data_mapping')} />
+            <FabButton icon={<i className="fa fa-random" />} onClick={toggleTypeMappingModal(index)} disabled={getField(output, index) === undefined} tooltip={t('app.shared.authentication.data_mapping')} />
             <FabButton icon={<i className="fa fa-trash" />} onClick={() => remove(index)} className="delete-button" />
             <TypeMappingModal model={getModel(output, index)}
                               field={getField(output, index)}
                               type={getDataType(output, index)}
-                              isOpen={isOpenTypeMappingModal}
-                              toggleModal={toggleTypeMappingModal}
+                              isOpen={isOpenTypeMappingModal.get(index)}
+                              toggleModal={toggleTypeMappingModal(index)}
                               control={control} register={register}
                               fieldMappingId={index} />
           </div>
