@@ -58,10 +58,10 @@
     <div ui-calendar="calendarConfig" ng-model="eventSources" calendar="calendar" class="wrapper-lg"></div>
   </div>
 
-  <label class="calendar-admin-info">
+  <label class="calendar-admin-info is-empty">
     <input type="checkbox">
     <div class="content">
-      <p class="placeholder">Veuillez sélectionner un créneau</p>
+      <p class="placeholder" translate>{{ 'app.admin.calendar.select_a_slot' }}</p>
       <div class="widget panel b-a" ng-if="availability" ng-show="(availability.slot_duration || availability.tags.length > 0) && availability.available_type !== 'event'">
         <div class="panel-heading b-b small">
           <h3><i class="fa fa-info-circle m-r" aria-hidden="true"></i><span translate>{{ 'app.admin.calendar.info' }}</span></h3>

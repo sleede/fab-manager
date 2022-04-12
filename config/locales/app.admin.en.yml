@@ -18,6 +18,7 @@ en:
         events: "Events"
         availabilities: "Availabilities"
         availabilities_notice: "Export to an Excel workbook every slots available for reservation, and their occupancy rate."
+        select_a_slot: "Please select a slot"
         info: "Info"
         tags: "Tags"
         slot_duration: "Slot duration: {DURATION} minutes"
