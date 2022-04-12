@@ -16,13 +16,13 @@ export interface StringMappingFormProps<TFieldValues, TContext extends object> {
  * Partial form to map an internal string field to an external API.
  */
 export const StringMappingForm = <TFieldValues extends FieldValues, TContext extends object>({ register, control, fieldMappingId }: StringMappingFormProps<TFieldValues, TContext>) => {
-  const { t } = useTranslation('shared');
+  const { t } = useTranslation('admin');
 
   const { fields, append, remove } = useFieldArray({ control, name: 'auth_provider_mappings_attributes_transformation_mapping' as ArrayPath<TFieldValues> });
 
   return (
     <div className="string-mapping-form array-mapping-form">
-      <h4>{t('app.shared.authentication.mappings')}</h4>
+      <h4>{t('app.admin.authentication.string_mapping_form.mappings')}</h4>
       <div className="mapping-actions">
         <FabButton
           icon={<i className="fa fa-plus" />}
@@ -34,11 +34,11 @@ export const StringMappingForm = <TFieldValues extends FieldValues, TContext ext
             <FormInput id={`auth_provider_mappings_attributes.${fieldMappingId}.transformation.mapping.${index}.from`}
                        register={register}
                        rules={{ required: true }}
-                       label={t('app.shared.authentication.mapping_from')} />
+                       label={t('app.admin.authentication.string_mapping_form.mapping_from')} />
             <FormInput id={`auth_provider_mappings_attributes.${fieldMappingId}.transformation.mapping.${index}.to`}
                        register={register}
                        rules={{ required: true }}
-                       label={t('app.shared.authentication.mapping_to')} />
+                       label={t('app.admin.authentication.string_mapping_form.mapping_to')} />
           </div>
           <div className="actions">
             <FabButton icon={<i className="fa fa-trash" />} onClick={() => remove(index)} className="delete-button" />

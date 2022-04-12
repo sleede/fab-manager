@@ -113,6 +113,7 @@ Application.Controllers.controller('NewAuthenticationController', ['$scope', '$s
      */
     $scope.onSuccess = function (message) {
       growl.success(message);
+      $scope.cancel();
     };
 
     /**

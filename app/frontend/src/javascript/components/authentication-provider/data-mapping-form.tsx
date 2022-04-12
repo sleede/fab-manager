@@ -23,7 +23,7 @@ type selectModelFieldOption = { value: string, label: string };
  * Partial form to define the mapping of the data between the API of the authentication provider and the application internals.
  */
 export const DataMappingForm = <TFieldValues extends FieldValues, TContext extends object>({ register, control }: DataMappingFormProps<TFieldValues, TContext>) => {
-  const { t } = useTranslation('shared');
+  const { t } = useTranslation('admin');
   const [dataMapping, setDataMapping] = useState<MappingFields>(null);
   const [isOpenTypeMappingModal, updateIsOpenTypeMappingModal] = useImmer<Map<number, boolean>>(new Map());
 
@@ -101,12 +101,12 @@ export const DataMappingForm = <TFieldValues extends FieldValues, TContext exten
 
   return (
     <div className="data-mapping-form array-mapping-form">
-      <h4>{t('app.shared.oauth2.define_the_fields_mapping')}</h4>
+      <h4>{t('app.admin.authentication.data_mapping_form.define_the_fields_mapping')}</h4>
       <div className="mapping-actions">
         <FabButton
           icon={<i className="fa fa-plus"/>}
           onClick={() => append({})}>
-           {t('app.shared.oauth2.add_a_match')}
+           {t('app.admin.authentication.data_mapping_form.add_a_match')}
         </FabButton>
       </div>
       {fields.map((item, index) => (
@@ -116,33 +116,37 @@ export const DataMappingForm = <TFieldValues extends FieldValues, TContext exten
             <div className="local-data">
               <FormSelect id={`auth_provider_mappings_attributes.${index}.local_model`}
                           control={control} rules={{ required: true }}
-                          options={buildModelOptions()} label={t('app.shared.oauth2.model')}/>
+                          options={buildModelOptions()}
+                          label={t('app.admin.authentication.data_mapping_form.model')}/>
               <FormSelect id={`auth_provider_mappings_attributes.${index}.local_field`}
                           options={buildFieldOptions(output, index)}
                           control={control}
                           rules={{ required: true }}
-                          label={t('app.shared.oauth2.field')} />
+                          label={t('app.admin.authentication.data_mapping_form.field')} />
             </div>
             <div className="remote-data">
               <FormInput id={`auth_provider_mappings_attributes.${index}.api_endpoint`}
                          register={register}
                          rules={{ required: true }}
                          placeholder="/api/resource..."
-                         label={t('app.shared.oauth2.api_endpoint_url')} />
+                         label={t('app.admin.authentication.data_mapping_form.api_endpoint_url')} />
               <FormSelect id={`auth_provider_mappings_attributes.${index}.api_data_type`}
                           options={[{ label: 'JSON', value: 'json' }]}
                           control={control} rules={{ required: true }}
-                          label={t('app.shared.oauth2.api_type')} />
+                          label={t('app.admin.authentication.data_mapping_form.api_type')} />
               <FormInput id={`auth_provider_mappings_attributes.${index}.api_field`}
                          register={register}
                          rules={{ required: true }}
                          placeholder="field_name..."
-                         tooltip={<HtmlTranslate trKey="app.shared.oauth2.api_field_help_html" />}
-                         label={t('app.shared.oauth2.api_fields')} />
+                         tooltip={<HtmlTranslate trKey="app.admin.authentication.data_mapping_form.api_field_help_html" />}
+                         label={t('app.admin.authentication.data_mapping_form.api_field')} />
             </div>
           </div>
           <div className="actions">
-            <FabButton icon={<i className="fa fa-random" />} onClick={toggleTypeMappingModal(index)} disabled={getField(output, index) === undefined} tooltip={t('app.shared.authentication.data_mapping')} />
+            <FabButton icon={<i className="fa fa-random" />}
+                       onClick={toggleTypeMappingModal(index)}
+                       disabled={getField(output, index) === undefined}
+                       tooltip={t('app.admin.authentication.data_mapping_form.data_mapping')} />
             <FabButton icon={<i className="fa fa-trash" />} onClick={() => remove(index)} className="delete-button" />
             <TypeMappingModal model={getModel(output, index)}
                               field={getField(output, index)}

@@ -36,14 +36,14 @@ type selectProvidableTypeOption = { value: string, label: string };
 export const ProviderForm: React.FC<ProviderFormProps> = ({ action, provider, onError, onSuccess }) => {
   const { handleSubmit, register, control } = useForm<AuthenticationProvider>({ defaultValues: { ...provider } });
   const [providableType, setProvidableType] = useState<string>(provider?.providable_type);
-  const { t } = useTranslation('shared');
+  const { t } = useTranslation('admin');
 
   /**
    * Callback triggered when the form is submitted: process with the provider creation or update.
    */
   const onSubmit: SubmitHandler<AuthenticationProvider> = (data: AuthenticationProvider) => {
     AuthProviderAPI[action](data).then(() => {
-      onSuccess(t(`app.shared.authentication.${action}_success`));
+      onSuccess(t(`app.admin.authentication.provider_form.${action}_success`));
     }).catch(error => {
       onError(error);
     });
@@ -54,7 +54,7 @@ export const ProviderForm: React.FC<ProviderFormProps> = ({ action, provider, on
    */
   const buildProvidableTypeOptions = (): Array<selectProvidableTypeOption> => {
     return Object.keys(METHODS).map((method: string) => {
-      return { value: method, label: t(`app.shared.authentication.${METHODS[method]}`) };
+      return { value: method, label: t(`app.admin.authentication.provider_form.methods.${METHODS[method]}`) };
     });
   };
 
@@ -72,17 +72,18 @@ export const ProviderForm: React.FC<ProviderFormProps> = ({ action, provider, on
                  register={register}
                  readOnly={action === 'update'}
                  rules={{ required: true }}
-                 label={t('app.shared.authentication.name')} />
+                 label={t('app.admin.authentication.provider_form.name')} />
       <FormSelect id="providable_type"
                   control={control}
                   options={buildProvidableTypeOptions()}
-                  label={t('app.shared.authentication.authentication_type')}
+                  label={t('app.admin.authentication.provider_form.authentication_type')}
                   onChange={onProvidableTypeChange}
+                  readOnly={action === 'update'}
                   rules={{ required: true }} />
       {providableType === 'OAuth2Provider' && <Oauth2Form register={register} />}
       {providableType && providableType !== 'DatabaseProvider' && <DataMappingForm register={register} control={control} />}
       <div className="main-actions">
-        <FabButton type="submit" className="submit-button">{t('app.shared.authentication.save')}</FabButton>
+        <FabButton type="submit" className="submit-button">{t('app.admin.authentication.provider_form.save')}</FabButton>
       </div>
     </form>
   );

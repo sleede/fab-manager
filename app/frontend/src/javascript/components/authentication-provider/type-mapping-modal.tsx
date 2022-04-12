@@ -28,16 +28,16 @@ interface TypeMappingModalProps<TFieldValues, TContext extends object> {
  * This component is intended to be used in a react-hook-form context.
  */
 export const TypeMappingModal = <TFieldValues extends FieldValues, TContext extends object>({ model, field, type, isOpen, toggleModal, register, control, fieldMappingId }:TypeMappingModalProps<TFieldValues, TContext>) => {
-  const { t } = useTranslation('shared');
+  const { t } = useTranslation('admin');
 
   return (
     <FabModal isOpen={isOpen}
               toggleModal={toggleModal}
               className="type-mapping-modal"
-              title={t('app.shared.authentication.data_mapping')}
+              title={t('app.admin.authentication.type_mapping_modal.data_mapping')}
               confirmButton={<i className="fa fa-check" />}
               onConfirm={toggleModal}>
-      <span>{model} &gt; {field} ({t('app.shared.authentication.TYPE_expected', { TYPE: t(`app.shared.authentication.types.${type}`) })})</span>
+      <span>{model} &gt; {field} ({t('app.admin.authentication.type_mapping_modal.TYPE_expected', { TYPE: t(`app.admin.authentication.type_mapping_modal.types.${type}`) })})</span>
       {type === 'integer' && <IntegerMappingForm register={register} control={control} fieldMappingId={fieldMappingId} />}
       {type === 'boolean' && <BooleanMappingForm register={register} fieldMappingId={fieldMappingId} />}
       {type === 'date' && <DateMappingForm control={control} fieldMappingId={fieldMappingId} />}
