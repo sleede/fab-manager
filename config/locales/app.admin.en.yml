@@ -509,6 +509,7 @@ en:
         important_notes: "Important notes"
         address_and_legal_information: "Address and legal information"
         invoice_reference: "Invoice reference"
+        invoice_reference_is_required: "Invoice reference is required."
         text: "text"
         year: "Year"
         month: "Month"

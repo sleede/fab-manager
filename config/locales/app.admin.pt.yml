@@ -509,6 +509,7 @@ pt:
         important_notes: "Notas importantes"
         address_and_legal_information: "Endereço e informações legais"
         invoice_reference: "Referencia de fatura"
+        invoice_reference_is_required: "Invoice reference is required."
         text: "texto"
         year: "Ano"
         month: "Mês"

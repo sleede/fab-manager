@@ -509,6 +509,7 @@
         important_notes: "Viktige merknader"
         address_and_legal_information: "Adresse og juridisk informasjon"
         invoice_reference: "Fakturareferanse"
+        invoice_reference_is_required: "Invoice reference is required."
         text: "tekst"
         year: "År"
         month: "Måned"

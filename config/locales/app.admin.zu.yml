@@ -509,6 +509,7 @@ zu:
         important_notes: "crwdns7385:0crwdne7385:0"
         address_and_legal_information: "crwdns7387:0crwdne7387:0"
         invoice_reference: "crwdns7389:0crwdne7389:0"
+        invoice_reference_is_required: "Invoice reference is required."
         text: "crwdns21060:0crwdne21060:0"
         year: "crwdns7391:0crwdne7391:0"
         month: "crwdns7393:0crwdne7393:0"
