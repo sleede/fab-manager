@@ -44,7 +44,7 @@
         &.is-empty {
           opacity: 0;
         }
-  
+
         .content {
           position: relative;
           min-width: 220px;
@@ -96,12 +96,12 @@
       font-style: italic;
       font-weight: 500;
     }
-  
+
     &-group {
       display: flex;
       flex-wrap: wrap;
     }
-  
+
     &-item {
       display: inline-block;
       padding: 2px;
