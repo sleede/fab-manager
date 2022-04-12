@@ -8,9 +8,38 @@
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 0.8rem;
+    position: relative;
     p {
       @include text-sm;
       margin: 0;
+    }
+
+    .item-tooltip {
+      position: absolute;
+      width: 100%;
+      .trigger {
+        position: absolute;
+        right: 0;
+        &:hover + .content {
+          display: block;
+        }
+      }
+      .content {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 0;
+        background-color: black;
+        color: white;
+        border-radius: 8px;
+        padding: 1rem;
+        font-size: 12px;
+        width: auto;
+
+        &:hover {
+          display: block;
+        }
+      }
     }
   }
   &.is-hidden {

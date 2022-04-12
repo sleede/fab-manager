@@ -7,7 +7,7 @@ import { FormComponent } from '../../models/form-component';
 interface FormInputProps<TFieldValues> extends InputHTMLAttributes<HTMLInputElement>, FormComponent<TFieldValues>{
   id: string,
   label?: string,
-  tooltip?: string,
+  tooltip?: ReactNode,
   icon?: ReactNode,
   addOn?: ReactNode,
   addOnClassName?: string,
@@ -30,8 +30,10 @@ export const FormInput = <TFieldValues extends FieldValues>({ id, register, labe
     <label className={classNames}>
       {label && <div className='form-item-header'>
         <p>{label}</p>
-        {/* TODO: Create tooltip component */}
-        {tooltip && <span>{tooltip}</span>}
+        {tooltip && <div className="item-tooltip">
+          <span className="trigger"><i className="fa fa-question-circle" /></span>
+          <div className="content">{tooltip}</div>
+        </div>}
       </div>}
       <div className='form-item-field'>
         {icon && <span className="icon">{icon}</span>}
