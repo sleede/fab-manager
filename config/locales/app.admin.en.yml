@@ -1077,7 +1077,7 @@ en:
           api_endpoint_url: "API endpoint or URL"
           api_type: "API type"
           api_field: "API field"
-          api_field_help_html: '<a href="https://jsonpath.com/" target="_blank">JsonPath</a> syntax is supported.<br> If many fields are selected, the first one will be used.<br> Example: $.data[*].name"'
+          api_field_help_html: '<a href="https://jsonpath.com/" target="_blank">JsonPath</a> syntax is supported.<br> If many fields are selected, the first one will be used.<br> Example: $.data[*].name'
           data_mapping: "Data mapping"
         type_mapping_modal:
           data_mapping: "Data mapping"
