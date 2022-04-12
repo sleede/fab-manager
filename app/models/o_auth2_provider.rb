@@ -5,8 +5,6 @@
 class OAuth2Provider < ApplicationRecord
   has_one :auth_provider, as: :providable
 
-  validates_with OAuth2ProviderValidator
-
   def domain
     URI(base_url).scheme + '://' + URI(base_url).host
   end
