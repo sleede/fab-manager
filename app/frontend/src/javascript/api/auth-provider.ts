@@ -31,4 +31,9 @@ export default class AuthProviderAPI {
     const res: AxiosResponse<MappingFields> = await apiClient.get('/api/auth_providers/mapping_fields');
     return res?.data;
   }
+
+  static async strategyName (authProvider: AuthenticationProvider): Promise<string> {
+    const res: AxiosResponse<string> = await apiClient.get(`/api/auth_providers/strategy_name?providable_type=${authProvider.providable_type}&name=${authProvider.name}`);
+    return res?.data;
+  }
 }

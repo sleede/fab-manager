@@ -28,6 +28,12 @@ class API::AuthProvidersController < API::ApiController
     end
   end
 
+  def strategy_name
+    authorize AuthProvider
+    @provider = AuthProvider.new(providable_type: params[:providable_type], name: params[:name])
+    render json: @provider.strategy_name
+  end
+
   def show
     authorize AuthProvider
   end

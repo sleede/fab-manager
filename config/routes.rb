@@ -151,6 +151,7 @@ Rails.application.routes.draw do
       get 'mapping_fields', on: :collection
       get 'active', action: 'active', on: :collection
       post 'send_code', action: 'send_code', on: :collection
+      get 'strategy_name', action: 'strategy_name', on: :collection
     end
     resources :abuses, only: %i[index create destroy]
     resources :open_api_clients, only: %i[index create update destroy] do
