@@ -509,7 +509,7 @@ fr:
         important_notes: "Informations importantes"
         address_and_legal_information: "Adresse et informations légales"
         invoice_reference: "Référence facture"
-        invoice_reference_is_required: "La référence facture est requis."
+        invoice_reference_is_required: "La référence facture est requise."
         text: "texte"
         year: "Année"
         month: "Mois"
