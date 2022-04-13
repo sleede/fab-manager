@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a security issue: updated puma to 4.3.12 to fix [CVE-2022-24790](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24790)
+
 ## v5.3.10 2022 April 12
 
 - Updated generate invoice reference method
