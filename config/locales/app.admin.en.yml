@@ -877,6 +877,7 @@ en:
           an_error_occurred_unable_to_delete_the_specified_provider: "An error occurred: unable to delete the specified provider."
           local_database: "Local database"
           o_auth2: "OAuth 2.0"
+          openid_connect: "OpenID Connect"
         group_form:
           add_a_group: "Add a group"
           group_name: "Group name"
@@ -1138,6 +1139,8 @@ en:
           uid_field_help: "The field of the user info response to be used as a unique id."
           extra_authorize_params: "Extra authorize params"
           extra_authorize_params_help_html: "A list of extra fixed parameters that will be merged to the authorization request.<br>The list is expected to be in a JSON-like format.<br> <b>Eg.</b> {tenant: common, max_age: 3600}"
+          profile_edition_url: "Profil edition URL"
+          profile_edition_url_help: "The URL of the page where the user can edit his profile."
           client_options: "Client options"
           client__identifier: "Identifier"
           client__secret: "Secret"

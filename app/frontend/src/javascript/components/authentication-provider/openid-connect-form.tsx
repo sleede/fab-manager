@@ -27,7 +27,7 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
       <FormInput id="providable_attributes.issuer"
                  register={register}
                  label={t('app.admin.authentication.openid_connect_form.issuer')}
-                 placeholder="https://myprovider.com"
+                 placeholder="https://sso.exemple.com"
                  tooltip={t('app.admin.authentication.openid_connect_form.issuer_help')}
                  rules={{ required: true, pattern: urlRegex }} />
       <FormSelect id="providable_attributes.discovery"
@@ -37,7 +37,7 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
                     { value: true, label: t('app.admin.authentication.openid_connect_form.discovery_enabled') },
                     { value: false, label: t('app.admin.authentication.openid_connect_form.discovery_disabled') }
                   ]}
-                  valueDefault={false}
+                  valueDefault={true}
                   control={control} />
       <FormSelect id="providable_attributes.client_auth_method"
                   label={t('app.admin.authentication.openid_connect_form.client_auth_method')}
@@ -110,6 +110,12 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
                  defaultValue="sub"
                  placeholder="user_id"
                  register={register} />
+      <FormInput id="providable_attributes.profile_url"
+                 register={register}
+                 placeholder="https://sso.exemple.com/my-account"
+                 label={t('app.admin.authentication.openid_connect_form.profile_edition_url')}
+                 tooltip={t('app.admin.authentication.openid_connect_form.profile_edition_url_help')}
+                 rules={{ pattern: urlRegex }} />
       <h4>{t('app.admin.authentication.openid_connect_form.client_options')}</h4>
       <FormInput id="providable_attributes.client__identifier"
                  label={t('app.admin.authentication.openid_connect_form.client__identifier')}
@@ -135,7 +141,7 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
                    placeholder="/userinfo"
                    rules={{ required: !currentFormValues?.discovery, pattern: endpointRegex }}
                    register={register} />
-        {currentFormValues.client_auth_method === 'jwks' && <FormInput id="providable_attributes.client__jwks_uri"
+        {currentFormValues?.client_auth_method === 'jwks' && <FormInput id="providable_attributes.client__jwks_uri"
                    label={t('app.admin.authentication.openid_connect_form.client__jwks_uri')}
                    rules={{ required: currentFormValues.client_auth_method === 'jwks', pattern: endpointRegex }}
                    placeholder="/jwk"

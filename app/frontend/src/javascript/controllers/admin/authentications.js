@@ -18,7 +18,8 @@
 // list of supported authentication methods
 const METHODS = {
   DatabaseProvider: 'local_database',
-  OAuth2Provider: 'o_auth2'
+  OAuth2Provider: 'o_auth2',
+  OpenIdConnectProvider: 'openid_connect'
 };
 
 /**

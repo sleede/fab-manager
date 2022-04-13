@@ -5,7 +5,7 @@ class AuthProviderPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      scope.includes(:providable)
+      scope.includes(:providable, :auth_provider_mappings)
     end
   end
 

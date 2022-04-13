@@ -84,7 +84,7 @@ class API::AuthProvidersController < API::ApiController
 
   def provider_params
     if params['auth_provider']['providable_type'] == DatabaseProvider.name
-      params.require(:auth_provider).permit(:name, :providable_type)
+      params.require(:auth_provider).permit(:name, :providable_type, providable_attributes: [:id])
     elsif params['auth_provider']['providable_type'] == OAuth2Provider.name
       params.require(:auth_provider)
             .permit(:name, :providable_type,
