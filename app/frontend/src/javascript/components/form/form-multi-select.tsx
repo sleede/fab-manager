@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import Select from 'react-select';
 import { Controller, Path } from 'react-hook-form';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
@@ -9,6 +9,7 @@ import { FormControlledComponent } from '../../models/form-component';
 interface FormSelectProps<TFieldValues, TContext extends object, TOptionValue> extends FormControlledComponent<TFieldValues, TContext> {
   id: string,
   label?: string,
+  tooltip?: ReactNode,
   options: Array<selectOption<TOptionValue>>,
   valuesDefault?: Array<TOptionValue>,
   onChange?: (values: Array<TOptionValue>) => void,
@@ -27,7 +28,7 @@ type selectOption<TOptionValue> = { value: TOptionValue, label: string };
  * This component is a wrapper around react-select to use with react-hook-form.
  * It is a multi-select component.
  */
-export const FormMultiSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, className, control, placeholder, options, valuesDefault, error, rules, disabled, onChange }: FormSelectProps<TFieldValues, TContext, TOptionValue>) => {
+export const FormMultiSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, tooltip, className, control, placeholder, options, valuesDefault, error, rules, disabled, onChange }: FormSelectProps<TFieldValues, TContext, TOptionValue>) => {
   const classNames = `
     form-multi-select form-item ${className || ''}
     ${error && error[id] ? 'is-incorrect' : ''}
@@ -48,6 +49,10 @@ export const FormMultiSelect = <TFieldValues extends FieldValues, TContext exten
     <label className={classNames}>
       {label && <div className="form-item-header">
         <p>{label}</p>
+        {tooltip && <div className="item-tooltip">
+          <span className="trigger"><i className="fa fa-question-circle" /></span>
+          <div className="content">{tooltip}</div>
+        </div>}
       </div>}
       <div className="form-item-field">
         <Controller name={id as FieldPath<TFieldValues>}

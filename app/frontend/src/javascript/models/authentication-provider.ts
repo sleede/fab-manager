@@ -44,7 +44,7 @@ export interface OpenIdConnectProvider {
   id?: string,
   issuer: string,
   discovery: boolean,
-  client_auth_method?: string,
+  client_auth_method?: 'basic' | 'jwks',
   scope?: string,
   response_type?: 'code' | 'id_token',
   response_mode?: 'query' | 'fragment' | 'form_post' | 'web_message',

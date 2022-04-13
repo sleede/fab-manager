@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useForm, SubmitHandler, useWatch } from 'react-hook-form';
 import { react2angular } from 'react2angular';
 import { debounce as _debounce } from 'lodash';
-import { AuthenticationProvider } from '../../models/authentication-provider';
+import { AuthenticationProvider, OpenIdConnectProvider } from '../../models/authentication-provider';
 import { Loader } from '../base/loader';
 import { IApplication } from '../../models/application';
 import { FormInput } from '../form/form-input';
@@ -12,6 +12,7 @@ import { Oauth2Form } from './oauth2-form';
 import { DataMappingForm } from './data-mapping-form';
 import { FabButton } from '../base/fab-button';
 import AuthProviderAPI from '../../api/auth-provider';
+import { OpenidConnectForm } from './openid-connect-form';
 
 declare const Application: IApplication;
 
@@ -36,7 +37,7 @@ type selectProvidableTypeOption = { value: string, label: string };
  */
 export const ProviderForm: React.FC<ProviderFormProps> = ({ action, provider, onError, onSuccess }) => {
   const { handleSubmit, register, control } = useForm<AuthenticationProvider>({ defaultValues: { ...provider } });
-  const output = useWatch({ control });
+  const output = useWatch<AuthenticationProvider>({ control });
   const [providableType, setProvidableType] = useState<string>(provider?.providable_type);
   const [strategyName, setStrategyName] = useState<string>(provider?.strategy_name);
 
@@ -85,13 +86,6 @@ export const ProviderForm: React.FC<ProviderFormProps> = ({ action, provider, on
     });
   }, 400), []);
 
-  /**
-   * Build the callback URL, based on the strategy name.
-   */
-  const buildCallbackUrl = (): string => {
-    return `${window.location.origin}/users/auth/${strategyName}/callback`;
-  };
-
   return (
     <form className="provider-form" onSubmit={handleSubmit(onSubmit)}>
       <FormInput id="name"
@@ -106,7 +100,8 @@ export const ProviderForm: React.FC<ProviderFormProps> = ({ action, provider, on
                   onChange={onProvidableTypeChange}
                   readOnly={action === 'update'}
                   rules={{ required: true }} />
-      {providableType === 'OAuth2Provider' && <Oauth2Form register={register} callbackUrl={buildCallbackUrl()} />}
+      {providableType === 'OAuth2Provider' && <Oauth2Form register={register} strategyName={strategyName} />}
+      {providableType === 'OpenIdConnectProvider' && <OpenidConnectForm register={register} control={control} currentFormValues={output.providable_attributes as OpenIdConnectProvider} />}
       {providableType && providableType !== 'DatabaseProvider' && <DataMappingForm register={register} control={control} />}
       <div className="main-actions">
         <FabButton type="submit" className="submit-button">{t('app.admin.authentication.provider_form.save')}</FabButton>

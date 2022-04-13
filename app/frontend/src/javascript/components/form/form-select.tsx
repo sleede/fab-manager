@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import Select from 'react-select';
 import { Controller, Path } from 'react-hook-form';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
@@ -9,6 +9,7 @@ import { FormControlledComponent } from '../../models/form-component';
 interface FormSelectProps<TFieldValues, TContext extends object, TOptionValue> extends FormControlledComponent<TFieldValues, TContext> {
   id: string,
   label?: string,
+  tooltip?: ReactNode,
   options: Array<selectOption<TOptionValue>>,
   valueDefault?: TOptionValue,
   onChange?: (value: TOptionValue) => void,
@@ -16,6 +17,7 @@ interface FormSelectProps<TFieldValues, TContext extends object, TOptionValue> e
   placeholder?: string,
   disabled?: boolean,
   readOnly?: boolean,
+  clearable?: boolean,
 }
 
 /**
@@ -27,7 +29,7 @@ type selectOption<TOptionValue> = { value: TOptionValue, label: string };
 /**
  * This component is a wrapper for react-select to use with react-hook-form
  */
-export const FormSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, className, control, placeholder, options, valueDefault, error, rules, disabled, onChange, readOnly }: FormSelectProps<TFieldValues, TContext, TOptionValue>) => {
+export const FormSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, tooltip, className, control, placeholder, options, valueDefault, error, rules, disabled, onChange, readOnly, clearable }: FormSelectProps<TFieldValues, TContext, TOptionValue>) => {
   const classNames = `
     form-select form-item ${className || ''}
     ${error && error[id] ? 'is-incorrect' : ''}
@@ -48,6 +50,10 @@ export const FormSelect = <TFieldValues extends FieldValues, TContext extends ob
     <label className={classNames}>
       {label && <div className="form-item-header">
         <p>{label}</p>
+        {tooltip && <div className="item-tooltip">
+          <span className="trigger"><i className="fa fa-question-circle" /></span>
+          <div className="content">{tooltip}</div>
+        </div>}
       </div>}
       <div className="form-item-field">
         <Controller name={id as FieldPath<TFieldValues>}
@@ -64,6 +70,7 @@ export const FormSelect = <TFieldValues extends FieldValues, TContext extends ob
                               }}
                               placeholder={placeholder}
                               isDisabled={readOnly}
+                              isClearable={clearable}
                               options={options} />
                     } />
       </div>
