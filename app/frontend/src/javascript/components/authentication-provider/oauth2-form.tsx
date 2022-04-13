@@ -7,23 +7,30 @@ import { FabOutputCopy } from '../base/fab-output-copy';
 
 interface Oauth2FormProps<TFieldValues> {
   register: UseFormRegister<TFieldValues>,
-  callbackUrl?: string,
+  strategyName?: string,
 }
 
 /**
  * Partial form to fill the OAuth2 settings for a new/existing authentication provider.
  */
-export const Oauth2Form = <TFieldValues extends FieldValues>({ register, callbackUrl }: Oauth2FormProps<TFieldValues>) => {
+export const Oauth2Form = <TFieldValues extends FieldValues>({ register, strategyName }: Oauth2FormProps<TFieldValues>) => {
   const { t } = useTranslation('admin');
 
   // regular expression to validate the the input fields
   const endpointRegex = /^\/?([-._~:?#[\]@!$&'()*+,;=%\w]+\/?)*$/;
   const urlRegex = /^(https?:\/\/)([\da-z.-]+)\.([-a-z0-9.]{2,30})([/\w .-]*)*\/?$/;
 
+  /**
+   * Build the callback URL, based on the strategy name.
+   */
+  const buildCallbackUrl = (): string => {
+    return `${window.location.origin}/users/auth/${strategyName}/callback`;
+  };
+
   return (
     <div className="oauth2-form">
       <hr/>
-      <FabOutputCopy text={callbackUrl} label={t('app.admin.authentication.oauth2_form.authorization_callback_url')} />
+      <FabOutputCopy text={buildCallbackUrl()} label={t('app.admin.authentication.oauth2_form.authorization_callback_url')} />
       <FormInput id="providable_attributes.base_url"
                  register={register}
                  placeholder="https://sso.example.net..."
@@ -42,7 +49,8 @@ export const Oauth2Form = <TFieldValues extends FieldValues>({ register, callbac
       <FormInput id="providable_attributes.profile_url"
                  register={register}
                  placeholder="https://exemple.net/user..."
-                 label={t('app.admin.authentication.oauth2_form.profil_edition_url')}
+                 label={t('app.admin.authentication.oauth2_form.profile_edition_url')}
+                 tooltip={t('app.admin.authentication.oauth2_form.profile_edition_url_help')}
                  rules={{ required: true, pattern: urlRegex }} />
       <FormInput id="providable_attributes.client_id"
                  register={register}

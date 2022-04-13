@@ -15,6 +15,10 @@ class OpenIdConnectProvider < ApplicationRecord
   validates :response_mode, inclusion: { in: %w[query fragment form_post web_message], allow_nil: true }
   validates :display, inclusion: { in: %w[page popup touch wap], allow_nil: true }
   validates :prompt, inclusion: { in: %w[none login consent select_account], allow_nil: true }
+  validates :client_auth_method, inclusion: { in: %w[basic jwks] }
+
+  before_save :set_post_logout_redirect_uri
+  before_save :set_client_scheme_host_port
 
   def config
     OpenIdConnectProvider.columns.map(&:name).filter { |n| !n.start_with?('client__') && n != 'profile_url' }.map do |n|
@@ -26,5 +30,21 @@ class OpenIdConnectProvider < ApplicationRecord
     OpenIdConnectProvider.columns.map(&:name).filter { |n| n.start_with?('client__') }.map do |n|
       [n.sub('client__', ''), send(n)]
     end.to_h
+  end
+
+  private
+
+  def set_post_logout_redirect_uri
+    self.post_logout_redirect_uri = "#{ENV.fetch('DEFAULT_PROTOCOL')}://#{ENV.fetch('DEFAULT_HOST')}/sessions/sign_out"
+  end
+
+  def set_client_scheme_host_port
+    require 'uri'
+
+    URI.parse(issuer).tap do |uri|
+      self.client__scheme = uri.scheme
+      self.client__host = uri.host
+      self.client__port = uri.port
+    end
   end
 end
