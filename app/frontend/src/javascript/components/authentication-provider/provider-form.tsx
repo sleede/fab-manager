@@ -13,6 +13,7 @@ import { DataMappingForm } from './data-mapping-form';
 import { FabButton } from '../base/fab-button';
 import AuthProviderAPI from '../../api/auth-provider';
 import { OpenidConnectForm } from './openid-connect-form';
+import { DatabaseForm } from './database-form';
 
 declare const Application: IApplication;
 
@@ -100,6 +101,7 @@ export const ProviderForm: React.FC<ProviderFormProps> = ({ action, provider, on
                   onChange={onProvidableTypeChange}
                   readOnly={action === 'update'}
                   rules={{ required: true }} />
+      {providableType === 'DatabaseProvider' && <DatabaseForm register={register} />}
       {providableType === 'OAuth2Provider' && <Oauth2Form register={register} strategyName={strategyName} />}
       {providableType === 'OpenIdConnectProvider' && <OpenidConnectForm register={register} control={control} currentFormValues={output.providable_attributes as OpenIdConnectProvider} />}
       {providableType && providableType !== 'DatabaseProvider' && <DataMappingForm register={register} control={control} />}

@@ -17,8 +17,8 @@ class OpenIdConnectProvider < ApplicationRecord
   validates :prompt, inclusion: { in: %w[none login consent select_account], allow_nil: true }
   validates :client_auth_method, inclusion: { in: %w[basic jwks] }
 
-  before_save :set_post_logout_redirect_uri
-  before_save :set_client_scheme_host_port
+  before_validation :set_post_logout_redirect_uri
+  before_validation :set_client_scheme_host_port
 
   def config
     OpenIdConnectProvider.columns.map(&:name).filter { |n| !n.start_with?('client__') && n != 'profile_url' }.map do |n|
