@@ -74,6 +74,8 @@
             <img ng-src="{{event.event_image_small}}" title="{{event.title}}">
           </div>
         </a>
+
+        <event-card style="display: contents" event="event" card-type="sm" ng-repeat="event in eventsGroupByMonth[month].slice(3*$index, 3*$index + 3)" />
       </div>
     </div>
 

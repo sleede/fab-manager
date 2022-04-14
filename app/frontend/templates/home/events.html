@@ -50,4 +50,8 @@
       </div>
     </div>
   </div>
+
+  <div class="event-home-list" ng-repeat="event in (upcomingEvents.length/3 | array)">
+    <event-card style="display: contents" event="event" card-type="md" ng-repeat="event in upcomingEvents.slice(3*$index, 3*$index + 3)" />
+  </div>
 </section>
