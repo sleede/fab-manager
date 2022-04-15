@@ -13,9 +13,9 @@ interface EventCardProps {
   cardType: 'sm' | 'md' | 'lg'
 }
 
-export const EventCard: React.FC<EventCardProps> = ({ event, cardType = 'sm' }) => {
+export const EventCard: React.FC<EventCardProps> = ({ event, cardType = 'md' }) => {
   const { t } = useTranslation('public');
-  console.log(event);
+
   /**
    * Format description to remove HTML tags and set a maximum character count
    */
@@ -23,10 +23,10 @@ export const EventCard: React.FC<EventCardProps> = ({ event, cardType = 'sm' }) 
     text = text.replace(/(<\/p>|<\/h4>|<\/h5>|<\/h6>|<\/pre>|<\/blockquote>)/g, '\n');
     text = text.replace(/<br\s*\/?>/g, '\n');
     text = text.replace(/<\/?\w+[^>]*>/g, '');
-    text = text.replace(/\n+/g, '<br />');
     if (text.length > count) {
-      return text.slice(0, count) + '...';
+      text = text.slice(0, count) + '…';
     }
+    text = text.replace(/\n+/g, '<br />');
     return text;
   };
 
@@ -51,28 +51,30 @@ export const EventCard: React.FC<EventCardProps> = ({ event, cardType = 'sm' }) 
   };
 
   /**
-   * Link to event by id
+   * TODO: Link to event by id ?
    */
   const showEvent = (id: number) => {
-    // TODO: ???
-    console.log(id);
+    console.log(window.location.href + '/' + id);
   };
 
   return (
     <div className={`event-card event-card--${cardType}`} onClick={() => showEvent(event.id)}>
-      <div className="event-card-picture">
-        {event.event_image
-          ? <img src={event.event_image} alt="" />
-          : <i className="fas fa-image"></i>
-        }
-      </div>
+      {event.event_image
+        ? <div className="event-card-picture">
+            <img src={event.event_image} alt="" />
+          </div>
+        : cardType !== 'sm' &&
+          <div className="event-card-picture">
+            <i className="fas fa-image"></i>
+          </div>
+      }
       <div className="event-card-desc">
         <header>
           <p className='title'>{event?.title}</p>
           <span className={`badge bg-${event.category.slug}`}>{event.category.name}</span>
         </header>
         {cardType !== 'sm' &&
-          <p dangerouslySetInnerHTML={{ __html: formatText(event.description, 500) }}></p>
+          <p dangerouslySetInnerHTML={{ __html: formatText(event.description, cardType === 'md' ? 500 : 400) }}></p>
         }
       </div>
       <div className="event-card-info">
