@@ -55,7 +55,7 @@ class Project < ApplicationRecord
     where("state = 'published' OR (state = 'draft' AND author_statistic_profile_id = ?)", author_profile)
   }
   scope :user_projects, ->(author_profile) { where('author_statistic_profile_id = ?', author_profile) }
-  scope :collaborations, ->(collaborators_ids) { joins(:projects_users).where(projects_users: { user_id: collaborators_ids }) }
+  scope :collaborations, ->(collaborators_ids) { joins(:project_users).where(project_users: { user_id: collaborators_ids }) }
   scope :with_machine, ->(machines_ids) { joins(:projects_machines).where(projects_machines: { machine_id: machines_ids }) }
   scope :with_theme, ->(themes_ids) { joins(:projects_themes).where(projects_themes: { theme_id: themes_ids }) }
   scope :with_component, ->(component_ids) { joins(:projects_components).where(projects_components: { component_id: component_ids }) }
