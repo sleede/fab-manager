@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Fix a bug: unable to send notification mail if no set a logo
+- Fix a bug: unable to switch OpenLab projets
 - Fix a security issue: updated puma to 4.3.12 to fix [CVE-2022-24790](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24790)
 - Fix a security issue: updated moment to 2.29.2 to fix [CVE-2022-24785](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24785)
 - Fix a security issue: updated nokogiri to 1.13.4 to fix [CVE-2022-24839](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24839), [CVE-2018-25032](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-25032), [CVE-2022-24836](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24836) and [CVE-2022-23437](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23437)
