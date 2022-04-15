@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v5.3.11 2022 April 15
+
 - Fix a bug: unable to send notification mail if no set a logo
 - Fix a bug: unable to switch OpenLab projets
 - Fix a bug: miss smtp tls in secrets.yml
