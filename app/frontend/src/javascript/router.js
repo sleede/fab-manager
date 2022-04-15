@@ -251,6 +251,7 @@ angular.module('application.router', ['ui.router'])
       // projects
       .state('app.public.projects_list', {
         url: '/projects?q&page&theme_id&component_id&machine_id&from&whole_network',
+        reloadOnSearch: false,
         views: {
           'main@': {
             templateUrl: '/projects/index.html',
@@ -495,7 +496,7 @@ angular.module('application.router', ['ui.router'])
               names: "['booking_window_start', 'booking_window_end', 'booking_move_enable', 'booking_move_delay', " +
                      "'booking_cancel_enable', 'booking_cancel_delay', 'subscription_explications_alert', " +
                      "'training_explications_alert', 'training_information_message', 'online_payment_module', " +
-                     "'payment_gateway', 'overlapping_categories']"
+                     "'payment_gateway', 'overlapping_categories', 'user_validation_required_training']"
             }).$promise;
           }]
         }
@@ -1073,7 +1074,9 @@ angular.module('application.router', ['ui.router'])
                      "'display_name_enable', 'machines_sort_by', 'fab_analytics', 'statistics_module', 'address_required', " +
                      "'link_name', 'home_content', 'home_css', 'phone_required', 'upcoming_events_shown', 'public_agenda_module'," +
                      "'renew_pack_threshold', 'pack_only_for_subscription', 'overlapping_categories', 'public_registrations'," +
-                     "'extended_prices_in_same_day', 'recaptcha_site_key', 'recaptcha_secret_key']"
+                     "'extended_prices_in_same_day', 'recaptcha_site_key', 'recaptcha_secret_key', 'user_validation_required', 'user_validation_required_machine', " +
+                     "'user_validation_required_training', 'user_validation_required_subscription', 'user_validation_required_space'," +
+                     "'user_validation_required_event', 'user_validation_required_pack', 'user_validation_required_list']"
             }).$promise;
           }],
           privacyDraftsPromise: ['Setting', function (Setting) { return Setting.get({ name: 'privacy_draft', history: true }).$promise; }],

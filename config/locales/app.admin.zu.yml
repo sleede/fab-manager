@@ -109,7 +109,7 @@ zu:
         slots: "crwdns20302:0crwdne20302:0"
         slots_of: "crwdns20304:0crwdne20304:0"
         minutes: "crwdns20288:0crwdne20288:0"
-        deleted_user: "Deleted user"
+        deleted_user: "crwdns22454:0crwdne22454:0"
       #import external iCal calendar
       icalendar:
         icalendar_import: "crwdns6855:0crwdne6855:0"
@@ -509,7 +509,7 @@ zu:
         important_notes: "crwdns7385:0crwdne7385:0"
         address_and_legal_information: "crwdns7387:0crwdne7387:0"
         invoice_reference: "crwdns7389:0crwdne7389:0"
-        invoice_reference_is_required: "Invoice reference is required."
+        invoice_reference_is_required: "crwdns22456:0crwdne22456:0"
         text: "crwdns21060:0crwdne21060:0"
         year: "crwdns7391:0crwdne7391:0"
         month: "crwdns7393:0crwdne7393:0"
