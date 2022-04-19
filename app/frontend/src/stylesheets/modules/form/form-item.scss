@@ -15,40 +15,33 @@
     }
 
     .item-tooltip {
-      position: absolute;
-      z-index: 1;
-      width: 100%;
-      .trigger {
-        position: absolute;
-        right: 0;
-        &:hover + .content {
-          display: block;
-        }
-      }
+      position: relative;
+      cursor: pointer;
+
+      .trigger i { display: block; }
       .content {
-        display: none;
         position: absolute;
-        right: 0;
         top: 0;
+        right: 0;
+        display: none;
+        width: max-content;
+        max-width: min(75vw, 65ch);
+        padding: 1rem;
         background-color: var(--information-lightest);
         color: var(--information);
         border: 1px solid var(--information);
         border-radius: 8px;
-        padding: 1rem;
         font-size: 14px;
-        width: auto;
         font-weight: normal;
         line-height: 1.2em;
-
-        & a {
+        z-index: 1;
+        & > span { display: block; }
+        a {
           color: var(--gray-hard);
           text-decoration: underline;
         }
-
-        &:hover {
-          display: block;
-        }
       }
+      &:hover .content { display: block; }
     }
   }
   &.is-hidden {
