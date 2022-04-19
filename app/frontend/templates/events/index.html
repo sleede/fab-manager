@@ -42,16 +42,19 @@
 
     <div class="event-focus">
       <!-- TODO: get focus event -->
-      <!-- FIXME: get [card-type] in React component's props -->
-      <!--<event-card style="display: contents" event="" card-type="lg" />-->
+      <!--<event-card style="display: contents" event="" card-type="'lg'" />-->
     </div>
 
     <div ng-repeat="month in monthOrder">
       <h1>{{monthNames[month.split(',')[0] - 1]}}, {{month.split(',')[1]}}</h1>
 
       <div class="event-monthList" ng-repeat="event in (eventsGroupByMonth[month].length/3 | array)">
-        <!-- FIXME: get [card-type] in React component's props -->
-        <event-card style="display: contents" event="event" card-type="sm" ng-repeat="event in eventsGroupByMonth[month].slice(3*$index, 3*$index + 3)" />
+        <event-card style="display: contents"
+                    event="event"
+                    card-type="'sm'"
+                    ng-repeat="event in eventsGroupByMonth[month].slice(3*$index, 3*$index + 3)"
+                    ui-sref="app.public.events_show({id: event.id})">
+        </event-card>
       </div>
 
     </div>

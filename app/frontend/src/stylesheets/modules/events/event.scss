@@ -28,9 +28,6 @@
     &-desc {
       padding: 15px 15px 30px;
       header {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
         margin-bottom: 1rem;
         p {
           margin: 0;
@@ -39,18 +36,38 @@
           line-height: 1.3;
           text-transform: uppercase;
         }
+        .badge {
+          min-width: auto;
+          max-width: min(16ch, 33%);
+          white-space: normal;
+          word-break: break-word;
+          margin: 0 0 10px 15px;
+          float: right;
+        }
       }
       p { margin: 0; }
     }
     &-info {
-      margin-top: auto;
       padding: 15px 20px;
+      & > p {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: var(--main);
+        span {
+          display: block;
+          font-size: 0.75em;
+          font-weight: 400;
+          line-height: 1.2;
+          text-transform: lowercase;
+        }
+      }
       .grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
+        align-items: baseline;
         gap: 15px;
         &-item {
-          height: 20px;
+          min-height: 20px;
           display: flex;
           align-items: center;
           i {
@@ -61,6 +78,7 @@
             text-align: center;
             color: var(--main);
           }
+          h6 { margin: 0; }
         }
       }
     }
@@ -69,11 +87,15 @@
   // Card size specific
   &-card--sm {
     display: grid;
+    grid-template-rows: max-content 1fr;
     grid-template-columns: 1fr max-content;
     .event-card-desc {
       grid-area: 1/1/2/2;
       padding-bottom: 10px;
-      header p { font-size: 1.6rem; }
+      header {
+        margin-bottom: 0;
+        p { font-size: 1.6rem; }
+      }
     }
     .event-card-picture {
       grid-area: 1/2/3/3;
@@ -87,21 +109,15 @@
     .event-card-info {
       grid-area: 2/1/3/2;
       padding: 0 15px 15px;
-      & > p {
-        font-size: 1.8rem;
-        font-weight: 600;
-        color: var(--main);
-      }
       .grid {
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-        gap: 5px 10px;
+        gap: 10px 15px;
         &-item i {
           width: 12px;
           height: 12px;
-          margin-right: 6px;
+          //margin-right: 6px;
           font-size: 12px;
           text-align: center;
-          color: var(--gray-hard-light);
+          //color: var(--gray-hard-light);
         }
       }
     }
@@ -114,6 +130,7 @@
       border-bottom: 1px solid var(--gray-soft-dark);
     }
     .event-card-info {
+      margin-top: auto;
       padding-bottom: 30px;
       border-top: 1px solid var(--gray-soft-dark);
     }
@@ -122,11 +139,6 @@
     border: 1px solid var(--gray-hard);
     .event-card-info {
       padding-top: 0;
-      & > p {
-        font-size: 1.8rem;
-        font-weight: 600;
-        color: var(--main);
-      }
     }
     .event-card-picture {
       border-bottom: 1px solid var(--gray-hard);
@@ -184,7 +196,7 @@
     gap: 15px;
     margin-bottom: 2rem;
     @media (min-width: 768px) {
-      grid-template-columns: repeat(auto-fill, minmax(425px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(430px, 1fr));
     }
   }
 }

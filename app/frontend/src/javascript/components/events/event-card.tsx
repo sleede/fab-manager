@@ -13,7 +13,7 @@ interface EventCardProps {
   cardType: 'sm' | 'md' | 'lg'
 }
 
-export const EventCard: React.FC<EventCardProps> = ({ event, cardType = 'md' }) => {
+export const EventCard: React.FC<EventCardProps> = ({ event, cardType }) => {
   const { t } = useTranslation('public');
 
   /**
@@ -34,31 +34,27 @@ export const EventCard: React.FC<EventCardProps> = ({ event, cardType = 'md' }) 
    * Return the formatted localized date of the event
    */
   const formatDate = (): string => {
-    // FIXME: typeof event.all_day = sting ?
-    return event.all_day === 'true'
-      ? t('app.public.home.from_date_to_date', { START: FormatLib.date(event.start_date), END: FormatLib.date(event.end_date) })
-      : t('app.public.home.on_the_date', { DATE: FormatLib.date(event.start_date) });
+    const startDate = new Date(event.start_date);
+    const endDate = new Date(event.end_date);
+    const singleDayEvent = startDate.getFullYear() === endDate.getFullYear() &&
+    startDate.getMonth() === endDate.getMonth() &&
+    startDate.getDate() === endDate.getDate();
+    return singleDayEvent
+      ? t('app.public.home.on_the_date', { DATE: FormatLib.date(event.start_date) })
+      : t('app.public.home.from_date_to_date', { START: FormatLib.date(event.start_date), END: FormatLib.date(event.end_date) });
   };
 
   /**
    * Return the formatted localized hours of the event
    */
   const formatTime = (): string => {
-    // FIXME: typeof event.all_day = sting ?
-    return event.all_day === 'true'
+    return event.all_day
       ? t('app.public.home.all_day')
       : t('app.public.home.from_time_to_time', { START: FormatLib.time(event.start_date), END: FormatLib.time(event.end_date) });
   };
 
-  /**
-   * TODO: Link to event by id ?
-   */
-  const showEvent = (id: number) => {
-    console.log(window.location.href + '/' + id);
-  };
-
   return (
-    <div className={`event-card event-card--${cardType}`} onClick={() => showEvent(event.id)}>
+    <div className={`event-card event-card--${cardType}`}>
       {event.event_image
         ? <div className="event-card-picture">
             <img src={event.event_image} alt="" />
@@ -70,17 +66,22 @@ export const EventCard: React.FC<EventCardProps> = ({ event, cardType = 'md' }) 
       }
       <div className="event-card-desc">
         <header>
-          <p className='title'>{event?.title}</p>
           <span className={`badge bg-${event.category.slug}`}>{event.category.name}</span>
+          <p className='title'>{event?.title}</p>
         </header>
         {cardType !== 'sm' &&
           <p dangerouslySetInnerHTML={{ __html: formatText(event.description, cardType === 'md' ? 500 : 400) }}></p>
         }
       </div>
       <div className="event-card-info">
-        {cardType !== 'md' && <p>{formatDate()}</p> }
+        {cardType !== 'md' &&
+          <p>
+            {formatDate()}
+            <span>{formatTime()}</span>
+          </p>
+        }
         <div className="grid">
-          {cardType === 'sm' &&
+          {cardType !== 'md' &&
             event.event_themes.map(theme => {
               return (<div key={theme.name} className="grid-item">
                 <i className="fa fa-tags"></i>
@@ -88,33 +89,34 @@ export const EventCard: React.FC<EventCardProps> = ({ event, cardType = 'md' }) 
               </div>);
             })
           }
-          {(cardType === 'sm' && event.age_range) &&
+          {(cardType !== 'md' && event.age_range) &&
             <div className="grid-item">
               <i className="fa fa-users"></i>
               <h6>{event.age_range?.name}</h6>
             </div>
           }
           {cardType === 'md' &&
-            <div className="grid-item">
-              <i className="fa fa-calendar"></i>
-              <h6>{formatDate()}</h6>
-            </div>
+            <>
+              <div className="grid-item">
+                <i className="fa fa-calendar"></i>
+                <h6>{formatDate()}</h6>
+              </div>
+              <div className="grid-item">
+                <i className="fa fa-clock"></i>
+                <h6>{formatTime()}</h6>
+              </div>
+            </>
           }
           <div className="grid-item">
-            {cardType !== 'sm' && <i className="fa fa-clock"></i>}
-            <h6>{formatTime()}</h6>
-          </div>
-          <div className="grid-item">
-            {cardType !== 'sm' && <i className="fa fa-user"></i>}
+            <i className="fa fa-user"></i>
             {event.nb_free_places > 0 && <h6>{t('app.public.home.still_available') + event.nb_free_places}</h6>}
             {event.nb_total_places > 0 && event.nb_free_places <= 0 && <h6>{t('app.public.home.event_full')}</h6>}
             {!event.nb_total_places && <h6>{t('app.public.home.without_reservation')}</h6>}
           </div>
           <div className="grid-item">
-            {cardType !== 'sm' && <i className="fa fa-bookmark"></i>}
+            <i className="fa fa-bookmark"></i>
             {event.amount === 0 && <h6>{t('app.public.home.free_admission')}</h6>}
-            {/* TODO: Display currency ? */}
-            {event.amount > 0 && <h6>{t('app.public.home.full_price') + event.amount}</h6>}
+            {event.amount > 0 && <h6>{t('app.public.home.full_price') + FormatLib.price(event.amount)}</h6>}
           </div>
         </div>
       </div>

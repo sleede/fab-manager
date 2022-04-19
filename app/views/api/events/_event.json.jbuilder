@@ -32,7 +32,7 @@ json.end_time event.availability.end_at
 json.month t('date.month_names')[event.availability.start_at.month]
 json.month_id event.availability.start_at.month
 json.year event.availability.start_at.year
-json.all_day event.availability.start_at.hour.zero? ? 'true' : 'false'
+json.all_day event.availability.start_at.hour.zero?
 json.availability do
   json.id event.availability.id
   json.start_at event.availability.start_at
