@@ -6,20 +6,27 @@ namespace :fablab do
 
     desc 'switch the active authentication provider'
     task :switch_provider, [:provider] => :environment do |_task, args|
-      raise 'FATAL ERROR: You must pass a provider name to activate' unless args.provider
+      unless args.provider
+        puts "\e[0;31mERROR\e[0m: You must pass a provider name to activate"
+        next
+      end
 
       if AuthProvider.find_by(name: args.provider).nil?
         providers = AuthProvider.all.inject('') { |str, item| str + item[:name] + ', ' }
-        raise "FATAL ERROR: the provider '#{args.provider}' does not exists. Available providers are: #{providers[0..-3]}"
+        puts "\e[0;31mERROR\e[0m: the provider '#{args.provider}' does not exists. Available providers are: #{providers[0..-3]}"
+        next
       end
 
-      raise "FATAL ERROR: the provider '#{args.provider}' is already enabled" if AuthProvider.active.name == args.provider
+      if AuthProvider.active.name == args.provider
+        puts "\e[0;31mERROR\e[0m: the provider '#{args.provider}' is already enabled"
+        next
+      end
 
       # disable previous provider
       prev_prev = AuthProvider.previous
       prev_prev&.update_attribute(:status, 'pending')
 
-      AuthProvider.active.update_attribute(:status, 'previous')
+      AuthProvider.active.update_attribute(:status, 'previous') unless AuthProvider.active.name == 'DatabaseProvider::SimpleAuthProvider'
 
       # enable given provider
       AuthProvider.find_by(name: args.provider).update_attribute(:status, 'active')
@@ -38,14 +45,11 @@ namespace :fablab do
       # ask the user to restart the application
       next if Rails.env.test?
 
-      puts "\nActivation successful"
+      puts "\n\e[0;32m#{args.provider} successfully enabled\e[0m"
 
-      puts "\n/!\\ WARNING: Please consider the following, otherwise the authentication will be bogus:"
-      puts "\t1) CLEAN the cache with `rails tmp:clear`"
-      puts "\t2) REBUILD the assets with `rails assets:precompile`"
-      puts "\t3) RESTART the application"
-      puts "\t4) NOTIFY the current users with `rails fablab:auth:notify_changed`\n\n"
-
+      puts "\n\e[0;33m⚠ WARNING\e[0m: Please consider the following, otherwise the authentication will be bogus:"
+      puts "\t1) RESTART the application"
+      puts "\t2) NOTIFY the current users with `rails fablab:auth:notify_changed`\n\n"
     end
 
     desc 'notify users that the auth provider has changed'
@@ -63,6 +67,11 @@ namespace :fablab do
       end
 
       puts "\nUsers successfully notified\n\n"
+    end
+
+    desc 'display the current active authentication provider'
+    task current: :environment do
+      puts "Current active authentication provider: #{AuthProvider.active.name}"
     end
   end
 end

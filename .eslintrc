@@ -15,7 +15,9 @@
     "moment": true,
     "_": true,
     "Humanize": true,
-    "GTM": true
+    "GTM": true,
+    "$": true,
+    "KeyboardEvent": true
   },
   "plugins": ["html-erb"],
   "overrides": [

@@ -1,16 +1,3 @@
-/* eslint-disable
-    handle-callback-err,
-    no-return-assign,
-    no-undef,
-    standard/no-callback-literal,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 
 Application.Controllers.controller('ApplicationController', ['$rootScope', '$scope', '$transitions', '$window', '$locale', '$timeout', 'Session', 'AuthService', 'Auth', '$uibModal', '$state', 'growl', 'Notification', '$interval', 'Setting', '_t', 'Version', 'Help',
   function ($rootScope, $scope, $transitions, $window, $locale, $timeout, Session, AuthService, Auth, $uibModal, $state, growl, Notification, $interval, Setting, _t, Version, Help) {
@@ -40,7 +27,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
         // Fab-manager's app-version
         if (user.role === 'admin') {
           // get the version
-          $scope.version = Version.get({origin: window.location.origin});
+          $scope.version = Version.get({ origin: window.location.origin });
         } else {
           $scope.version = { current: '' };
         }
@@ -83,111 +70,116 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
      */
     $scope.signup = function (e) {
       if (e) { e.preventDefault(); }
-      <% active_provider = AuthProvider.active %>
-      <% if active_provider.providable_type != DatabaseProvider.name %>
-      $window.location.href = '/sso-redirect';
-      <% else %>
-
-      return $uibModal.open({
-        templateUrl: '/shared/signupModal.html',
-        size: 'md',
-        resolve: {
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['phone_required', 'recaptcha_site_key', 'confirmation_required', 'address_required']" }).$promise; }]
-        },
-        controller: ['$scope', '$uibModalInstance', 'Group', 'CustomAsset', 'settingsPromise', 'growl', '_t', function ($scope, $uibModalInstance, Group, CustomAsset, settingsPromise, growl, _t) {
-          // default parameters for the date picker in the account creation modal
-          $scope.datePicker = {
-            format: Fablab.uibDateFormat,
-            opened: false,
-            options: {
-              startingDay: Fablab.weekStartingDay,
-              maxDate: new Date()
-            }
-          };
-
-          // is the phone number required to sign-up?
-          $scope.phoneRequired = (settingsPromise.phone_required === 'true');
-
-          // is the address required to sign-up?
-          $scope.addressRequired = (settingsPromise.address_required === 'true');
-
-          // reCaptcha v2 site key (or undefined)
-          $scope.recaptchaSiteKey = settingsPromise.recaptcha_site_key;
-
-          // callback to open the date picker (account creation modal)
-          $scope.openDatePicker = function ($event) {
-            $event.preventDefault();
-            $event.stopPropagation();
-            return $scope.datePicker.opened = true;
-          };
-
-          // retrieve the groups (standard, student ...)
-          Group.query(function (groups) {
-            $scope.groups = groups;
-            $scope.enabledGroups = groups.filter(function (g) { return (g.slug !== 'admins') && !g.disabled; });
-          });
-
-          // retrieve the CGU
-          CustomAsset.get({ name: 'cgu-file' }, function (cgu) {
-            $scope.cgu = cgu.custom_asset;
-          });
-
-          // default user's parameters
-          $scope.user = {
-            is_allow_contact: true,
-            is_allow_newsletter: false,
-            // reCaptcha response, received from Google (through AJAX) and sent to server for validation
-            recaptcha: undefined
-          };
-
-          // Errors display
-          $scope.alerts = [];
-          $scope.closeAlert = function (index) {
-            $scope.alerts.splice(index, 1);
-          };
-
-          // callback for form validation
-          $scope.ok = function () {
-          // try to create the account
-            $scope.alerts = [];
-            // remove 'organization' attribute
-            const orga = $scope.user.organization;
-            delete $scope.user.organization;
-            // register on server
-            return Auth.register($scope.user).then(function (user) {
-              if (user.id) {
-                // creation successful
-                $uibModalInstance.close({ user, settings: settingsPromise });
-              } else {
-                // the user was not saved in database, something wrong occurred
-                growl.error(_t('app.public.common.unexpected_error_occurred'));
+      if (Fablab.activeProviderType !== 'DatabaseProvider') {
+        $window.location.href = '/sso-redirect';
+      } else {
+        return $uibModal.open({
+          templateUrl: '/shared/signupModal.html',
+          size: 'md',
+          resolve: {
+            settingsPromise: ['Setting', function (Setting) {
+              return Setting.query({ names: "['phone_required', 'recaptcha_site_key', 'confirmation_required', 'address_required']" }).$promise;
+            }]
+          },
+          controller: ['$scope', '$uibModalInstance', 'Group', 'CustomAsset', 'settingsPromise', 'growl', '_t', function ($scope, $uibModalInstance, Group, CustomAsset, settingsPromise, growl, _t) {
+            // default parameters for the date picker in the account creation modal
+            $scope.datePicker = {
+              format: Fablab.uibDateFormat,
+              opened: false,
+              options: {
+                startingDay: Fablab.weekStartingDay,
+                maxDate: new Date()
               }
-            }, function (error) {
-              // creation failed...
-              // restore organization param
-              $scope.user.organization = orga;
-              // display errors
-              angular.forEach(error.data.errors, function (v, k) {
-                angular.forEach(v, function (err) {
-                  $scope.alerts.push({
-                    msg: k + ': ' + err,
-                    type: 'danger'
+            };
+
+            // is the phone number required to sign-up?
+            $scope.phoneRequired = (settingsPromise.phone_required === 'true');
+
+            // is the address required to sign-up?
+            $scope.addressRequired = (settingsPromise.address_required === 'true');
+
+            // reCaptcha v2 site key (or undefined)
+            $scope.recaptchaSiteKey = settingsPromise.recaptcha_site_key;
+
+            // callback to open the date picker (account creation modal)
+            $scope.openDatePicker = function ($event) {
+              $event.preventDefault();
+              $event.stopPropagation();
+              $scope.datePicker.opened = true;
+            };
+
+            // retrieve the groups (standard, student ...)
+            Group.query(function (groups) {
+              $scope.groups = groups;
+              $scope.enabledGroups = groups.filter(function (g) {
+                return (g.slug !== 'admins') && !g.disabled;
+              });
+            });
+
+            // retrieve the CGU
+            CustomAsset.get({ name: 'cgu-file' }, function (cgu) {
+              $scope.cgu = cgu.custom_asset;
+            });
+
+            // default user's parameters
+            $scope.user = {
+              is_allow_contact: true,
+              is_allow_newsletter: false,
+              // reCaptcha response, received from Google (through AJAX) and sent to server for validation
+              recaptcha: undefined
+            };
+
+            // Errors display
+            $scope.alerts = [];
+            $scope.closeAlert = function (index) {
+              $scope.alerts.splice(index, 1);
+            };
+
+            // callback for form validation
+            $scope.ok = function () {
+              // try to create the account
+              $scope.alerts = [];
+              // remove 'organization' attribute
+              const orga = $scope.user.organization;
+              delete $scope.user.organization;
+              // register on server
+              return Auth.register($scope.user).then(function (user) {
+                if (user.id) {
+                  // creation successful
+                  $uibModalInstance.close({
+                    user,
+                    settings: settingsPromise
+                  });
+                } else {
+                  // the user was not saved in database, something wrong occurred
+                  growl.error(_t('app.public.common.unexpected_error_occurred'));
+                }
+              }, function (error) {
+                // creation failed...
+                // restore organization param
+                $scope.user.organization = orga;
+                // display errors
+                angular.forEach(error.data.errors, function (v, k) {
+                  angular.forEach(v, function (err) {
+                    $scope.alerts.push({
+                      msg: k + ': ' + err,
+                      type: 'danger'
+                    });
                   });
                 });
               });
-            });
-          };
-        }]
-      }).result['finally'](null).then(function (res) {
-        // when the account was created successfully, set the session to the newly created account
-        if(res.settings.confirmation_required === 'true') {
-          Auth._currentUser = null;
-          growl.info(_t('app.public.common.you_will_receive_confirmation_instructions_by_email_detailed'));
-        } else {
-          $scope.setCurrentUser(res.user);
-        }
-      });
-      <% end %>
+            };
+          }]
+        }).result.finally(null).then(function (res) {
+          // when the account was created successfully, set the session to the newly created account
+          if (res.settings.confirmation_required === 'true') {
+            Auth._currentUser = null;
+            growl.info(_t('app.public.common.you_will_receive_confirmation_instructions_by_email_detailed'));
+          } else {
+            $scope.setCurrentUser(res.user);
+          }
+        });
+      }
     };
 
     /**
@@ -205,7 +197,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
             $scope.alerts.splice(index, 1);
           };
 
-          return $scope.changePassword = function () {
+          $scope.changePassword = function () {
             $scope.alerts = [];
             return $http.put('/users/password.json', { user: $scope.user }).then(function () { $uibModalInstance.close(); }).catch(function (data) {
               angular.forEach(data.data.errors, function (v, k) {
@@ -219,7 +211,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
             });
           };
         }]
-      }).result['finally'](null).then(function () {
+      }).result.finally(null).then(function () {
         growl.success(_t('app.public.common.your_password_was_successfully_changed'));
         return Auth.login().then(function (user) {
           $scope.setCurrentUser(user);
@@ -244,7 +236,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
       let toggler = $(event.target);
       if (!toggler.data('toggle')) { toggler = toggler.closest('[data-toggle^="class"]'); }
 
-      const $class = toggler.data()['toggle'];
+      const $class = toggler.data().toggle;
       const $target = toggler.data('target') || toggler.attr('data-link');
 
       if ($class) {
@@ -267,7 +259,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
               while (patt.test(cn)) {
                 cn = cn.replace(patt, ' ');
               }
-              return it.className = $.trim(cn);
+              it.className = $.trim(cn);
             });
           }
 
@@ -281,7 +273,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
     /**
      * Open the modal dialog showing that an upgrade is available
      */
-    $scope.versionModal = function() {
+    $scope.versionModal = function () {
       if ($scope.version.up_to_date) return;
       if ($rootScope.currentUser.role !== 'admin') return;
 
@@ -289,10 +281,10 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
         templateUrl: '/admin/versions/upgradeModal.html',
         controller: 'VersionModalController',
         resolve: {
-          version() { return $scope.version; }
+          version () { return $scope.version; }
         }
       });
-    }
+    };
 
     /**
      * Trigger the contextual help "feature tour".
@@ -303,10 +295,10 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
 
       // we wrap the event triggering into a $timeout to prevent conflicting with current $apply
       $timeout(function () {
-        var evt = new KeyboardEvent('keydown', { key: 'F1' });
+        const evt = new KeyboardEvent('keydown', { key: 'F1' });
         window.dispatchEvent(evt);
       });
-    }
+    };
 
     /* PRIVATE SCOPE */
     /**
@@ -405,115 +397,125 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
      * Open the modal window allowing the user to log in.
      */
     const openLoginModal = function (toState, toParams, callback) {
-      <% active_provider = AuthProvider.active %>
-      <% if active_provider.providable_type != DatabaseProvider.name %>
-      $window.location.href = '/sso-redirect';
-      <% else %>
-      return $uibModal.open({
-        templateUrl: '/shared/deviseModal.html',
-        backdrop: 'static',
-        size: 'sm',
-        resolve: {
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['confirmation_required']" }).$promise; }]
-        },
-        controller: ['$scope', '$uibModalInstance', '_t', 'settingsPromise', function ($scope, $uibModalInstance, _t, settingsPromise) {
-          const user = ($scope.user = {});
+      if (Fablab.activeProviderType !== 'DatabaseProvider') {
+        $window.location.href = '/sso-redirect';
+      } else {
+        return $uibModal.open({
+          templateUrl: '/shared/deviseModal.html',
+          backdrop: 'static',
+          size: 'sm',
+          resolve: {
+            settingsPromise: ['Setting', function (Setting) {
+              return Setting.query({ names: "['confirmation_required']" }).$promise;
+            }]
+          },
+          controller: ['$scope', '$uibModalInstance', '_t', 'settingsPromise', function ($scope, $uibModalInstance, _t, settingsPromise) {
+            const user = ($scope.user = {});
 
-          // email confirmation required before user sign-in?
-          $scope.confirmationRequired = settingsPromise.confirmation_required;
+            // email confirmation required before user sign-in?
+            $scope.confirmationRequired = settingsPromise.confirmation_required;
 
-          $scope.login = function () {
-            Auth.login(user).then(function (user) {
-              // Authentication succeeded ...
-              $uibModalInstance.close(user);
-              if (callback && (typeof callback === 'function')) {
-                return callback(user);
+            $scope.login = function () {
+              Auth.login(user).then(function (user) {
+                // Authentication succeeded ...
+                $uibModalInstance.close(user);
+                if (callback && (typeof callback === 'function')) {
+                  return callback(user);
+                }
               }
-            }
-            , function (error) {
-              console.error(`Authentication failed: ${JSON.stringify(error)}`);
-              $scope.alerts = [];
-              return $scope.alerts.push({
-                msg: error.data.error,
-                type: 'danger'
+              , function (error) {
+                console.error(`Authentication failed: ${JSON.stringify(error)}`);
+                $scope.alerts = [];
+                return $scope.alerts.push({
+                  msg: error.data.error,
+                  type: 'danger'
+                });
               });
+            };
+            // handle modal behaviors. The provided reason will be used to define the following actions
+            $scope.dismiss = function () {
+              $uibModalInstance.dismiss('cancel');
+            };
+
+            $scope.openSignup = function (e) {
+              e.preventDefault();
+              return $uibModalInstance.dismiss('signup');
+            };
+
+            $scope.openConfirmationNewModal = function (e) {
+              e.preventDefault();
+              return $uibModalInstance.dismiss('confirmationNew');
+            };
+
+            $scope.openResetPassword = function (e) {
+              e.preventDefault();
+              return $uibModalInstance.dismiss('resetPassword');
+            };
+          }]
+        }).result.finally(null).then(function (user) {
+          // what to do when the modal is closed
+
+          // authentication succeeded, set the session, gather the notifications and redirect
+          GTM.trackLogin();
+          $scope.setCurrentUser(user);
+
+          if ((toState !== null) && (toParams !== null)) {
+            return $state.go(toState, toParams);
+          }
+        }, function (reason) {
+          // authentication did not end successfully
+          if (reason === 'signup') {
+            // open sign-up modal
+            $scope.signup();
+          } else if (reason === 'resetPassword') {
+            // open the 'reset password' modal
+            return $uibModal.open({
+              templateUrl: '/shared/passwordNewModal.html',
+              size: 'sm',
+              controller: ['$scope', '$uibModalInstance', '$http', function ($scope, $uibModalInstance, $http) {
+                $scope.user = { email: '' };
+                $scope.sendReset = function () {
+                  $scope.alerts = [];
+                  return $http.post('/users/password.json', { user: $scope.user }).then(function () {
+                    $uibModalInstance.close();
+                  }).catch(function () {
+                    $scope.alerts.push({
+                      msg: _t('app.public.common.your_email_address_is_unknown'),
+                      type: 'danger'
+                    });
+                  });
+                };
+              }]
+            }).result.finally(null).then(function () {
+              growl.info(_t('app.public.common.you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password'));
             });
-          };
-          // handle modal behaviors. The provided reason will be used to define the following actions
-          $scope.dismiss = function () { $uibModalInstance.dismiss('cancel'); };
-
-          $scope.openSignup = function (e) {
-            e.preventDefault();
-            return $uibModalInstance.dismiss('signup');
-          };
-
-          $scope.openConfirmationNewModal = function(e) {
-            e.preventDefault();
-            return $uibModalInstance.dismiss('confirmationNew');
-          };
-
-          $scope.openResetPassword = function (e) {
-            e.preventDefault();
-            return $uibModalInstance.dismiss('resetPassword');
-          };
-        }]
-      }).result['finally'](null).then(function (user) {
-        // what to do when the modal is closed
-
-        // authentication succeeded, set the session, gather the notifications and redirect
-        GTM.trackLogin();
-        $scope.setCurrentUser(user);
-
-        if ((toState !== null) && (toParams !== null)) {
-          return $state.go(toState, toParams);
-        }
-      }, function (reason) {
-        // authentication did not end successfully
-        if (reason === 'signup') {
-          // open sign-up modal
-          $scope.signup();
-        } else if (reason === 'resetPassword') {
-          // open the 'reset password' modal
-          return $uibModal.open({
-            templateUrl: '/shared/passwordNewModal.html',
-            size: 'sm',
-            controller: ['$scope', '$uibModalInstance', '$http', function ($scope, $uibModalInstance, $http) {
-              $scope.user = { email: '' };
-              return $scope.sendReset = function () {
-                $scope.alerts = [];
-                return $http.post('/users/password.json', { user: $scope.user }).then(function () { $uibModalInstance.close(); }).catch(function () {
-                  $scope.alerts.push({
-                    msg: _t('app.public.common.your_email_address_is_unknown'),
-                    type: 'danger'
+          } else if (reason === 'confirmationNew') {
+            // open the 'reset password' modal
+            return $uibModal.open({
+              templateUrl: '/shared/ConfirmationNewModal.html',
+              size: 'sm',
+              controller: ['$scope', '$uibModalInstance', '$http', function ($scope, $uibModalInstance, $http) {
+                $scope.user = { email: '' };
+                $scope.submitConfirmationNewForm = function () {
+                  $scope.alerts = [];
+                  return $http.post('/users/confirmation.json', { user: $scope.user }).then(function () {
+                    $uibModalInstance.close();
+                  }).catch(function (res) {
+                    $scope.alerts.push({
+                      msg: res.data.errors.email[0],
+                      type: 'danger'
+                    });
                   });
-                });
-              };
-            }]
-          }).result['finally'](null).then(function () { growl.info(_t('app.public.common.you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password')); });
-        } else if (reason === 'confirmationNew') {
-          // open the 'reset password' modal
-          return $uibModal.open({
-            templateUrl: '/shared/ConfirmationNewModal.html',
-            size: 'sm',
-            controller: ['$scope', '$uibModalInstance', '$http', function ($scope, $uibModalInstance, $http) {
-              $scope.user = { email: '' };
-              return $scope.submitConfirmationNewForm = function () {
-                $scope.alerts = [];
-                return $http.post('/users/confirmation.json', { user: $scope.user }).then(function () { $uibModalInstance.close(); }).catch(function (res) {
-                  $scope.alerts.push({
-                    msg: res.data.errors.email[0],
-                    type: 'danger'
-                  });
-                });
-              };
-            }]
-          }).result['finally'](null).then(function () { growl.info(_t('app.public.common.you_will_receive_confirmation_instructions_by_email_detailed')); });
-        }
-      });
-      // otherwise the user just closed the modal
-      <% end %>
+                };
+              }]
+            }).result.finally(null).then(function () {
+              growl.info(_t('app.public.common.you_will_receive_confirmation_instructions_by_email_detailed'));
+            });
+          }
+        });
+        // otherwise the user just closed the modal
+      }
     };
-
 
     /**
      * Detect if the current page (tab/window) is active of put as background.
@@ -538,7 +540,8 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
         if (evt.type in evtMap) {
           if (typeof callback === 'function') { callback(evtMap[evt.type]); }
         } else {
-          if (typeof callback === 'function') { callback(this[hidden] ? 'hidden' : 'visible'); }
+          const visibility = this[hidden] ? 'hidden' : 'visible';
+          if (typeof callback === 'function') { callback(visibility); }
         }
       };
 
@@ -579,5 +582,5 @@ Application.Controllers.controller('VersionModalController', ['$scope', '$uibMod
   // callback to close the modal
   $scope.close = function () {
     $uibModalInstance.dismiss();
-  }
+  };
 }]);
