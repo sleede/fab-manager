@@ -21,6 +21,7 @@ class OpenIdConnectProvider < ApplicationRecord
   before_validation :set_client_scheme_host_port
   before_validation :set_redirect_uri
   before_validation :set_display
+  before_validation :set_response_type
 
   def config
     OpenIdConnectProvider.columns.map(&:name).filter { |n| !n.start_with?('client__') && n != 'profile_url' }.map do |n|
@@ -50,6 +51,10 @@ class OpenIdConnectProvider < ApplicationRecord
 
   def set_response_mode
     self.response_mode = 'query'
+  end
+
+  def set_response_type
+    self.response_type = 'code'
   end
 
   def set_client_scheme_host_port
