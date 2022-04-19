@@ -103,15 +103,6 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
                  label={t('app.admin.authentication.openid_connect_form.scope')}
                  placeholder="openid,profile,email"
                  tooltip={t('app.admin.authentication.openid_connect_form.scope_help')} />
-      <FormSelect id="providable_attributes.response_type"
-                  label={t('app.admin.authentication.openid_connect_form.response_type')}
-                  tooltip={t('app.admin.authentication.openid_connect_form.response_type_help')}
-                  options={[
-                    { value: 'code', label: t('app.admin.authentication.openid_connect_form.response_type_code') },
-                    { value: 'id_token', label: t('app.admin.authentication.openid_connect_form.response_type_id_token') }
-                  ]}
-                  valueDefault={'code'}
-                  control={control} />
       <FormSelect id="providable_attributes.prompt"
                   label={t('app.admin.authentication.openid_connect_form.prompt')}
                   tooltip={<HtmlTranslate trKey="app.admin.authentication.openid_connect_form.prompt_help_html" />}
