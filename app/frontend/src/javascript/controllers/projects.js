@@ -287,7 +287,7 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
     // Is openLab enabled on the instance?
     $scope.openlab = {
       projectsActive: openLabActive.isPresent,
-      searchOverWholeNetwork: false
+      searchOverWholeNetwork: settingsPromise.openlab_default === 'true'
     };
 
     // default search parameters
@@ -405,8 +405,10 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
     const initialize = function () {
       if ($location.$$search.whole_network === 'f') {
         $scope.openlab.searchOverWholeNetwork = false;
+      } else if ($location.$$search.whole_network === undefined) {
+        $scope.openlab.searchOverWholeNetwork = $scope.openlab.projectsActive && settingsPromise.openlab_default === 'true';
       } else {
-        $scope.openlab.searchOverWholeNetwork = ($scope.openlab.projectsActive && settingsPromise.openlab_default === 'true') || false;
+        $scope.openlab.searchOverWholeNetwork = $scope.openlab.projectsActive;
       }
       return $scope.triggerSearch();
     };
