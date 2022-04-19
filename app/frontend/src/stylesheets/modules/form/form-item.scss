@@ -140,6 +140,14 @@
       background-color: var(--error-lightest);
     }
   }
+  &.is-warned &-field {
+    border-color: var(--warning);
+    .icon {
+      color: var(--warning);
+      border-color: var(--warning);
+      background-color: var(--warning-lightest);
+    }
+  }
   &.is-disabled &-field input,
   &.is-readOnly &-field input {
     background-color: var(--gray-soft-light);
@@ -148,5 +156,9 @@
   &-error {
     margin-top: 0.4rem;
     color: var(--error);
+  }
+  &-warning {
+    margin-top: 0.4rem;
+    color: var(--warning);
   }
 }

@@ -1,25 +1,74 @@
-import React from 'react';
-import { UseFormRegister } from 'react-hook-form';
+import React, { useEffect, useState } from 'react';
+import { Path, UseFormRegister } from 'react-hook-form';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { useTranslation } from 'react-i18next';
 import { FormInput } from '../form/form-input';
 import { FormSelect } from '../form/form-select';
-import { Control } from 'react-hook-form/dist/types/form';
+import { Control, FormState, UnpackNestedValue, UseFormSetValue } from 'react-hook-form/dist/types/form';
 import { HtmlTranslate } from '../base/html-translate';
 import { OpenIdConnectProvider } from '../../models/authentication-provider';
+import SsoClient from '../../api/external/sso';
+import { FieldPathValue } from 'react-hook-form/dist/types/path';
 
 interface OpenidConnectFormProps<TFieldValues, TContext extends object> {
   register: UseFormRegister<TFieldValues>,
   control: Control<TFieldValues, TContext>,
-  currentFormValues: OpenIdConnectProvider
+  currentFormValues: OpenIdConnectProvider,
+  formState: FormState<TFieldValues>,
+  setValue: UseFormSetValue<TFieldValues>,
 }
 
-export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext extends object>({ register, control, currentFormValues }: OpenidConnectFormProps<TFieldValues, TContext>) => {
+export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext extends object>({ register, control, currentFormValues, formState, setValue }: OpenidConnectFormProps<TFieldValues, TContext>) => {
   const { t } = useTranslation('admin');
+
+  // saves the state of the discovery endpoint
+  const [discoveryAvailable, setDiscoveryAvailable] = useState<boolean>(false);
+
+  // when we have detected a discovery endpoint, we mark it as available
+  useEffect(() => {
+    setValue(
+      'providable_attributes.discovery' as Path<TFieldValues>,
+      discoveryAvailable as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>
+    );
+  }, [discoveryAvailable]);
+
+  // when the component is mounted, we try to discover the discovery endpoint for the current configuration (if any)
+  useEffect(() => {
+    checkForDiscoveryEndpoint({ target: { value: currentFormValues?.issuer } } as React.ChangeEvent<HTMLInputElement>);
+  }, []);
 
   // regular expression to validate the the input fields
   const endpointRegex = /^\/?([-._~:?#[\]@!$&'()*+,;=%\w]+\/?)*$/;
   const urlRegex = /^(https?:\/\/)([\da-z.-]+)\.([-a-z0-9.]{2,30})([/\w .-]*)*\/?$/;
+
+  /**
+   * If the discovery endpoint is available, the user will be able to choose to use it or not.
+   * Otherwise, he will need to end the client configuration manually.
+   */
+  const buildDiscoveryOptions = () => {
+    if (discoveryAvailable) {
+      return [
+        { value: true, label: t('app.admin.authentication.openid_connect_form.discovery_enabled') },
+        { value: false, label: t('app.admin.authentication.openid_connect_form.discovery_disabled') }
+      ];
+    }
+
+    return [
+      { value: false, label: t('app.admin.authentication.openid_connect_form.discovery_disabled') }
+    ];
+  };
+
+  /**
+   * Callback that check for the existence of the .well-known/openid-configuration endpoint, for the given issuer.
+   * This callback is triggered when the user changes the issuer field.
+   */
+  const checkForDiscoveryEndpoint = (e: React.ChangeEvent<HTMLInputElement>) => {
+    SsoClient.openIdConfiguration(e.target.value).then(() => {
+      setDiscoveryAvailable(true);
+    }).catch(() => {
+      setDiscoveryAvailable(false);
+    });
+  };
 
   return (
     <div className="openid-connect-form">
@@ -29,15 +78,16 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
                  label={t('app.admin.authentication.openid_connect_form.issuer')}
                  placeholder="https://sso.exemple.com"
                  tooltip={t('app.admin.authentication.openid_connect_form.issuer_help')}
-                 rules={{ required: true, pattern: urlRegex }} />
+                 rules={{ required: true, pattern: urlRegex }}
+                 onChange={checkForDiscoveryEndpoint}
+                 debounce={400}
+                 warning={!discoveryAvailable && { 'providable_attributes.issuer': { message: t('app.admin.authentication.openid_connect_form.discovery_unavailable') } }}
+                 formState={formState} />
       <FormSelect id="providable_attributes.discovery"
                   label={t('app.admin.authentication.openid_connect_form.discovery')}
                   tooltip={t('app.admin.authentication.openid_connect_form.discovery_help')}
-                  options={[
-                    { value: true, label: t('app.admin.authentication.openid_connect_form.discovery_enabled') },
-                    { value: false, label: t('app.admin.authentication.openid_connect_form.discovery_disabled') }
-                  ]}
-                  valueDefault={true}
+                  options={buildDiscoveryOptions()}
+                  valueDefault={discoveryAvailable}
                   control={control} />
       <FormSelect id="providable_attributes.client_auth_method"
                   label={t('app.admin.authentication.openid_connect_form.client_auth_method')}
@@ -70,17 +120,6 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
                     { value: 'fragment', label: t('app.admin.authentication.openid_connect_form.response_mode_fragment') },
                     { value: 'form_post', label: t('app.admin.authentication.openid_connect_form.response_mode_form_post') },
                     { value: 'web_message', label: t('app.admin.authentication.openid_connect_form.response_mode_web_message') }
-                  ]}
-                  clearable
-                  control={control} />
-      <FormSelect id="providable_attributes.display"
-                  label={t('app.admin.authentication.openid_connect_form.display')}
-                  tooltip={<HtmlTranslate trKey="app.admin.authentication.openid_connect_form.display_help_html" />}
-                  options={[
-                    { value: 'page', label: t('app.admin.authentication.openid_connect_form.display_page') },
-                    { value: 'popup', label: t('app.admin.authentication.openid_connect_form.display_popup') },
-                    { value: 'touch', label: t('app.admin.authentication.openid_connect_form.display_touch') },
-                    { value: 'wap', label: t('app.admin.authentication.openid_connect_form.display_wap') }
                   ]}
                   clearable
                   control={control} />
