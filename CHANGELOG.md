@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a security issue: updated async to 2.6.4 to fix [CVE-2021-43138](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-43138)
+
 ## v5.3.11 2022 April 15
 
 - Fix a bug: unable to send notification mail if no set a logo
