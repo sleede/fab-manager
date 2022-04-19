@@ -96,7 +96,7 @@ class API::AuthProvidersController < API::ApiController
     elsif params['auth_provider']['providable_type'] == OpenIdConnectProvider.name
       params.require(:auth_provider)
             .permit(:name, :providable_type,
-                    providable_attributes: %i[id issuer discovery client_auth_method scope response_type response_mode display prompt
+                    providable_attributes: %i[id issuer discovery client_auth_method scope response_type prompt
                                               send_scope_to_token_endpoint post_logout_redirect_uri uid_field extra_authorize_params
                                               allow_authorize_params client__identifier client__secret client__redirect_uri
                                               client__scheme client__host client__port client__authorization_endpoint client__token_endpoint

@@ -112,17 +112,6 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
                   ]}
                   valueDefault={'code'}
                   control={control} />
-      <FormSelect id="providable_attributes.response_mode"
-                  label={t('app.admin.authentication.openid_connect_form.response_mode')}
-                  tooltip={<HtmlTranslate trKey="app.admin.authentication.openid_connect_form.response_mode_help_html" />}
-                  options={[
-                    { value: 'query', label: t('app.admin.authentication.openid_connect_form.response_mode_query') },
-                    { value: 'fragment', label: t('app.admin.authentication.openid_connect_form.response_mode_fragment') },
-                    { value: 'form_post', label: t('app.admin.authentication.openid_connect_form.response_mode_form_post') },
-                    { value: 'web_message', label: t('app.admin.authentication.openid_connect_form.response_mode_web_message') }
-                  ]}
-                  clearable
-                  control={control} />
       <FormSelect id="providable_attributes.prompt"
                   label={t('app.admin.authentication.openid_connect_form.prompt')}
                   tooltip={<HtmlTranslate trKey="app.admin.authentication.openid_connect_form.prompt_help_html" />}

@@ -16,8 +16,6 @@ class CreateOpenIdConnectProviders < ActiveRecord::Migration[5.2]
       t.boolean :send_scope_to_token_endpoint
       t.string :post_logout_redirect_uri
       t.string :uid_field
-      t.string :extra_authorize_params
-      t.string :allow_authorize_params
       t.string :client__identifier
       t.string :client__secret
       t.string :client__redirect_uri

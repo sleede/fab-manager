@@ -19,6 +19,8 @@ class OpenIdConnectProvider < ApplicationRecord
 
   before_validation :set_post_logout_redirect_uri
   before_validation :set_client_scheme_host_port
+  before_validation :set_redirect_uri
+  before_validation :set_display
 
   def config
     OpenIdConnectProvider.columns.map(&:name).filter { |n| !n.start_with?('client__') && n != 'profile_url' }.map do |n|
@@ -36,6 +38,18 @@ class OpenIdConnectProvider < ApplicationRecord
 
   def set_post_logout_redirect_uri
     self.post_logout_redirect_uri = "#{ENV.fetch('DEFAULT_PROTOCOL')}://#{ENV.fetch('DEFAULT_HOST')}/sessions/sign_out"
+  end
+
+  def set_redirect_uri
+    self.client__redirect_uri = "#{ENV.fetch('DEFAULT_PROTOCOL')}://#{ENV.fetch('DEFAULT_HOST')}/users/auth/#{auth_provider.strategy_name}/callback"
+  end
+
+  def set_display
+    self.display = 'page'
+  end
+
+  def set_response_mode
+    self.response_mode = 'query'
   end
 
   def set_client_scheme_host_port
