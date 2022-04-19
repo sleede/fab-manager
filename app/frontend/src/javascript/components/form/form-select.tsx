@@ -30,11 +30,13 @@ type selectOption<TOptionValue> = { value: TOptionValue, label: string };
  * This component is a wrapper for react-select to use with react-hook-form
  */
 export const FormSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, tooltip, className, control, placeholder, options, valueDefault, error, rules, disabled, onChange, readOnly, clearable }: FormSelectProps<TFieldValues, TContext, TOptionValue>) => {
-  const classNames = `
-    form-select form-item ${className || ''}
-    ${error && error[id] ? 'is-incorrect' : ''}
-    ${rules && rules.required ? 'is-required' : ''}
-    ${disabled ? 'is-disabled' : ''}`;
+  const classNames = [
+    'form-select form-item',
+    `${className || ''}`,
+    `${error && error[id] ? 'is-incorrect' : ''}`,
+    `${rules && rules.required ? 'is-required' : ''}`,
+    `${disabled ? 'is-disabled' : ''}`
+  ].join(' ');
 
   /**
    * The following callback will trigger the onChange callback, if it was passed to this component,
@@ -74,6 +76,7 @@ export const FormSelect = <TFieldValues extends FieldValues, TContext extends ob
                               options={options} />
                     } />
       </div>
+      {(error && error[id]) && <div className="form-item-error">{error[id].message}</div> }
     </label>
   );
 };

@@ -37,7 +37,7 @@ type selectProvidableTypeOption = { value: string, label: string };
  * Form to create or update an authentication provider.
  */
 export const ProviderForm: React.FC<ProviderFormProps> = ({ action, provider, onError, onSuccess }) => {
-  const { handleSubmit, register, control } = useForm<AuthenticationProvider>({ defaultValues: { ...provider } });
+  const { handleSubmit, register, control, formState, setValue } = useForm<AuthenticationProvider>({ defaultValues: { ...provider } });
   const output = useWatch<AuthenticationProvider>({ control });
   const [providableType, setProvidableType] = useState<string>(provider?.providable_type);
   const [strategyName, setStrategyName] = useState<string>(provider?.strategy_name);
@@ -103,7 +103,11 @@ export const ProviderForm: React.FC<ProviderFormProps> = ({ action, provider, on
                   rules={{ required: true }} />
       {providableType === 'DatabaseProvider' && <DatabaseForm register={register} />}
       {providableType === 'OAuth2Provider' && <Oauth2Form register={register} strategyName={strategyName} />}
-      {providableType === 'OpenIdConnectProvider' && <OpenidConnectForm register={register} control={control} currentFormValues={output.providable_attributes as OpenIdConnectProvider} />}
+      {providableType === 'OpenIdConnectProvider' && <OpenidConnectForm register={register}
+                                                                        control={control}
+                                                                        currentFormValues={output.providable_attributes as OpenIdConnectProvider}
+                                                                        formState={formState}
+                                                                        setValue={setValue} />}
       {providableType && providableType !== 'DatabaseProvider' && <DataMappingForm register={register} control={control} />}
       <div className="main-actions">
         <FabButton type="submit" className="submit-button">{t('app.admin.authentication.provider_form.save')}</FabButton>

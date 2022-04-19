@@ -29,11 +29,13 @@ type selectOption<TOptionValue> = { value: TOptionValue, label: string };
  * It is a multi-select component.
  */
 export const FormMultiSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, tooltip, className, control, placeholder, options, valuesDefault, error, rules, disabled, onChange }: FormSelectProps<TFieldValues, TContext, TOptionValue>) => {
-  const classNames = `
-    form-multi-select form-item ${className || ''}
-    ${error && error[id] ? 'is-incorrect' : ''}
-    ${rules && rules.required ? 'is-required' : ''}
-    ${disabled ? 'is-disabled' : ''}`;
+  const classNames = [
+    'form-multi-select form-item',
+    `${className || ''}`,
+    `${error && error[id] ? 'is-incorrect' : ''}`,
+    `${rules && rules.required ? 'is-required' : ''}`,
+    `${disabled ? 'is-disabled' : ''}`
+  ].join(' ');
 
   /**
    * The following callback will trigger the onChange callback, if it was passed to this component,
@@ -73,6 +75,7 @@ export const FormMultiSelect = <TFieldValues extends FieldValues, TContext exten
                               isMulti />
                     } />
       </div>
+      {(error && error[id]) && <div className="form-item-error">{error[id].message}</div> }
     </label>
   );
 };
