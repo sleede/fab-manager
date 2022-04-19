@@ -47,8 +47,6 @@ export interface OpenIdConnectProvider {
   client_auth_method?: 'basic' | 'jwks',
   scope?: string,
   response_type?: 'code' | 'id_token',
-  response_mode?: 'query' | 'fragment' | 'form_post' | 'web_message',
-  display?: 'page' | 'popup' | 'touch' | 'wap',
   prompt?: 'none' | 'login' | 'consent' | 'select_account',
   send_scope_to_token_endpoint?: string,
   post_logout_redirect_uri?: string,
