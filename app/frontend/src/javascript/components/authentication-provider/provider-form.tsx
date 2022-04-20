@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useForm, SubmitHandler, useWatch } from 'react-hook-form';
 import { react2angular } from 'react2angular';
 import { debounce as _debounce } from 'lodash';
-import { AuthenticationProvider, OpenIdConnectProvider } from '../../models/authentication-provider';
+import { AuthenticationProvider, OpenIdConnectProvider, ProvidableType } from '../../models/authentication-provider';
 import { Loader } from '../base/loader';
 import { IApplication } from '../../models/application';
 import { FormInput } from '../form/form-input';
@@ -39,7 +39,7 @@ type selectProvidableTypeOption = { value: string, label: string };
 export const ProviderForm: React.FC<ProviderFormProps> = ({ action, provider, onError, onSuccess }) => {
   const { handleSubmit, register, control, formState, setValue } = useForm<AuthenticationProvider>({ defaultValues: { ...provider } });
   const output = useWatch<AuthenticationProvider>({ control });
-  const [providableType, setProvidableType] = useState<string>(provider?.providable_type);
+  const [providableType, setProvidableType] = useState<ProvidableType>(provider?.providable_type);
   const [strategyName, setStrategyName] = useState<string>(provider?.strategy_name);
 
   const { t } = useTranslation('admin');
@@ -72,7 +72,7 @@ export const ProviderForm: React.FC<ProviderFormProps> = ({ action, provider, on
    * Callback triggered when the providable type is changed.
    * Changing the providable type will change the form to match the new type.
    */
-  const onProvidableTypeChange = (type: string) => {
+  const onProvidableTypeChange = (type: ProvidableType) => {
     setProvidableType(type);
   };
 
@@ -108,7 +108,7 @@ export const ProviderForm: React.FC<ProviderFormProps> = ({ action, provider, on
                                                                         currentFormValues={output.providable_attributes as OpenIdConnectProvider}
                                                                         formState={formState}
                                                                         setValue={setValue} />}
-      {providableType && providableType !== 'DatabaseProvider' && <DataMappingForm register={register} control={control} />}
+      {providableType && providableType !== 'DatabaseProvider' && <DataMappingForm register={register} control={control} providerType={providableType} />}
       <div className="main-actions">
         <FabButton type="submit" className="submit-button">{t('app.admin.authentication.provider_form.save')}</FabButton>
       </div>

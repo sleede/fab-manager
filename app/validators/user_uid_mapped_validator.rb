@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 # Validates the presence of the User.uid mapping
-class OAuth2ProviderValidator < ActiveModel::Validator
+class UserUidMappedValidator < ActiveModel::Validator
   def validate(record)
-    return unless record.providable_type == 'OAuth2Provider'
+    return unless %w[OAuth2Provider OpenIdConnectProvider].include?(record.providable_type)
 
     return if record.auth_provider_mappings.any? do |mapping|
       mapping.local_model == 'user' && mapping.local_field == 'uid'
