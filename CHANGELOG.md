@@ -4,9 +4,9 @@
 - Fix a bug: back bouton can't return to previously page in projects page (list/new/show/edit)
 - Fix a security issue: updated async to 2.6.4 to fix [CVE-2021-43138](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-43138)
 - Fix a bug on OpenLab Projects, if you are using OpenLab Projects, please follow the following TODO DEPLOY
-- [TODO DEPLOY] `rails runner 'Project.all.each { |pr| pr.openlab_create }'`
+- [TODO DEPLOY] `rails fablab:openlab:bulk_export`
 - [TODO DEPLOY] wait 1 minute
-- [TODO DEPLOY] `rails runner 'Project.all.each { |pr| pr.openlab_update }'`
+- [TODO DEPLOY] `rails fablab:openlab:bulk_update`
 
 ## v5.3.11 2022 April 15
 
