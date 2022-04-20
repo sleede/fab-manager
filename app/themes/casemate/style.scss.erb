@@ -12,6 +12,25 @@ $secondary-text-color: <%= Stylesheet.secondary_text_color %> !default;
 
 $primary-decoration-color: <%= Stylesheet.primary_decoration_color %> !default;
 
+:root {
+  --main-lightest: lighten(<%= Stylesheet.primary_light %>, 20%);
+  --main-light: <%= Stylesheet.primary_light %>;
+  --main: <%= Stylesheet.primary %>;
+  --main-dark: <%= Stylesheet.primary_dark %>;
+  --main-darkest: darken(<%= Stylesheet.primary_dark %>, 20%);
+
+  --secondary-lightest: lighten(<%= Stylesheet.secondary_light %>, 20%);
+  --secondary-light: <%= Stylesheet.secondary_light %>;
+  --secondary: <%= Stylesheet.secondary %>;
+  --secondary-dark: <%= Stylesheet.secondary_dark %>;
+  --secondary-darkest: darken(<%= Stylesheet.secondary_dark %>, 20%);
+
+  --primary-text-color: <%= Stylesheet.primary_text_color %>;
+  --secondary-text-color: <%= Stylesheet.secondary_text_color %>;
+
+  --primary-decoration-color: <%= Stylesheet.primary_decoration_color %>;
+}
+
 .bg-red {
   background-color: $primary;
 }
