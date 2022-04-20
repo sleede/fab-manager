@@ -132,12 +132,6 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
                   ]}
                   valueDefault={true}
                   control={control} />
-      <FormInput id="providable_attributes.uid_field"
-                 label={t('app.admin.authentication.openid_connect_form.uid_field')}
-                 tooltip={t('app.admin.authentication.openid_connect_form.uid_field_help')}
-                 defaultValue="sub"
-                 placeholder="user_id"
-                 register={register} />
       <FormInput id="providable_attributes.profile_url"
                  register={register}
                  placeholder="https://sso.exemple.com/my-account"

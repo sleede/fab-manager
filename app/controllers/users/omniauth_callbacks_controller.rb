@@ -73,7 +73,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         logger.error 'user already linked'
         redirect_to root_url, alert: t('omniauth.this_account_is_already_linked_to_an_user_of_the_platform', NAME: active_provider.name)
       rescue StandardError => e
-        logger.unknown "an expected error occurred: #{e}"
+        logger.error "an expected error occurred: #{e}"
         raise e
       end
     end

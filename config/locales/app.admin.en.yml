@@ -1072,11 +1072,15 @@ en:
           add_a_match: "Add a match"
           model: "Model"
           field: "Field"
+          data_mapping: "Data mapping"
+        oauth2_data_mapping_form:
           api_endpoint_url: "API endpoint or URL"
           api_type: "API type"
           api_field: "API field"
           api_field_help_html: '<a href="https://jsonpath.com/" target="_blank">JsonPath</a> syntax is supported.<br> If many fields are selected, the first one will be used.<br> Example: $.data[*].name'
-          data_mapping: "Data mapping"
+        openid_connect_data_mapping_form:
+          api_field: "Userinfo claim"
+          api_field_help_html: 'Set the field providing the corresponding data through <a href="https://openid.net/specs/openid-connect-core-1_0.html#Claims" target="_blank">the userinfo endpoint</a>.<br> <a href="https://jsonpath.com/" target="_blank">JsonPath</a> syntax is supported. If many fields are selected, the first one will be used.<br> <b>Example</b>: $.data[*].name'
         type_mapping_modal:
           data_mapping: "Data mapping"
           TYPE_expected: "{TYPE} expected"
@@ -1120,8 +1124,6 @@ en:
           send_scope_to_token_endpoint_help: "Should the scope parameter be sent to the authorization token endpoint?"
           send_scope_to_token_endpoint_false: "No"
           send_scope_to_token_endpoint_true: "Yes"
-          uid_field: "UID field"
-          uid_field_help: "The field of the user info response to be used as a unique id."
           extra_authorize_params: "Extra authorize params"
           extra_authorize_params_help_html: "A list of extra fixed parameters that will be merged to the authorization request.<br>The list is expected to be in a JSON-like format.<br> <b>Eg.</b> {tenant: common, max_age: 3600}"
           profile_edition_url: "Profil edition URL"

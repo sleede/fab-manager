@@ -3,10 +3,12 @@
 require 'omniauth-oauth2'
 require 'jsonpath'
 require 'sso_logger'
+require_relative '../data_mapping/mapper'
 
 module OmniAuth::Strategies
   # Authentication strategy provided trough oAuth 2.0
   class SsoOauth2Provider < OmniAuth::Strategies::OAuth2
+    include OmniAuth::DataMapping::Mapper
 
     def self.active_provider
       active_provider = AuthProvider.active
@@ -73,82 +75,7 @@ module OmniAuth::Strategies
     end
 
     def parsed_info
-      logger = SsoLogger.new
-
-      @parsed_info ||= {}
-      logger.debug "[parsed_info] @parsed_info = #{@parsed_info.to_json}"
-      unless @parsed_info.size.positive?
-        OmniAuth::Strategies::SsoOauth2Provider.active_provider.auth_provider_mappings.each do |mapping|
-
-          raw_data = ::JsonPath.new(mapping.api_field).on(raw_info[mapping.api_endpoint.to_sym]).first
-          logger.debug "@parsed_info[#{local_sym(mapping)}] mapped from #{raw_data}"
-          if mapping.transformation
-            case mapping.transformation['type']
-            ## INTEGER
-            when 'integer'
-              @parsed_info[local_sym(mapping)] = map_integer(mapping.transformation, raw_data)
-
-            ## BOOLEAN
-            when 'boolean'
-              @parsed_info[local_sym(mapping)] = map_boolean(mapping.transformation, raw_data)
-
-            ## DATE
-            when 'date'
-              @params[local_sym(mapping)] = map_date(mapping.transformation, raw_data)
-
-            ## OTHER TRANSFORMATIONS (not supported)
-            else
-              @parsed_info[local_sym(mapping)] = raw_data
-            end
-
-          ## NO TRANSFORMATION
-          else
-            @parsed_info[local_sym(mapping)] = raw_data
-          end
-        end
-      end
-      @parsed_info
-    end
-
-    private
-
-    def local_sym(mapping)
-      (mapping.local_model + '.' + mapping.local_field).to_sym
-    end
-
-    def map_integer(transformation, raw_data)
-      value = nil
-      transformation['mapping'].each do |m|
-        if m['from'] == raw_data
-          value = m['to']
-          break
-        end
-      end
-      # if no transformation had set any value, return the raw value
-      value || raw_data
-    end
-
-    def map_boolean(transformation, raw_data)
-      return false if raw_data == transformation['false_value']
-
-      true if raw_data == transformation['true_value']
-    end
-
-    def map_date(transformation, raw_data)
-      case transformation['format']
-      when 'iso8601'
-        DateTime.iso8601(raw_data)
-      when 'rfc2822'
-        DateTime.rfc2822(raw_data)
-      when 'rfc3339'
-        DateTime.rfc3339(raw_data)
-      when 'timestamp-s'
-        DateTime.strptime(raw_data, '%s')
-      when 'timestamp-ms'
-        DateTime.strptime(raw_data, '%Q')
-      else
-        DateTime.parse(raw_data)
-      end
+      mapped_info(OmniAuth::Strategies::SsoOauth2Provider.active_provider.auth_provider_mappings, raw_info)
     end
   end
 end

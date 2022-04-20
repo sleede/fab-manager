@@ -23,7 +23,7 @@ class AuthProvider < ApplicationRecord
 
   validates :providable_type, inclusion: { in: PROVIDABLE_TYPES }
   validates :name, presence: true, uniqueness: true
-  validates_with OAuth2ProviderValidator, if: -> { providable_type == 'OAuth2Provider' }
+  validates_with UserUidMappedValidator, if: -> { %w[OAuth2Provider OpenIdConnectProvider].include?(providable_type) }
 
   before_create :set_initial_state
 

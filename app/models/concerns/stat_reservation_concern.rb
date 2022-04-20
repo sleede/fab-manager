@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Defines the reservation statistics data model
 module StatReservationConcern
   extend ActiveSupport::Concern
 

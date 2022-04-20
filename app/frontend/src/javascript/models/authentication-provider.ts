@@ -1,8 +1,10 @@
+export type ProvidableType = 'DatabaseProvider' | 'OAuth2Provider' | 'OpenIdConnectProvider';
+
 export interface AuthenticationProvider {
   id?: number,
   name: string,
   status: 'active' | 'previous' | 'pending'
-  providable_type: 'DatabaseProvider' | 'OAuth2Provider' | 'OpenIdConnectProvider',
+  providable_type: ProvidableType,
   strategy_name: string
   auth_provider_mappings_attributes: Array<AuthenticationProviderMapping>,
   providable_attributes?: OAuth2Provider | OpenIdConnectProvider
@@ -46,19 +48,11 @@ export interface OpenIdConnectProvider {
   discovery: boolean,
   client_auth_method?: 'basic' | 'jwks',
   scope?: string,
-  response_type?: 'code' | 'id_token',
   prompt?: 'none' | 'login' | 'consent' | 'select_account',
   send_scope_to_token_endpoint?: string,
-  post_logout_redirect_uri?: string,
-  uid_field?: string,
-  extra_authorize_params?: string,
-  allow_authorize_params?: string,
   client__identifier: string,
   client__secret: string,
   client__redirect_uri?: string,
-  client__scheme: 'http' | 'https',
-  client__host: string,
-  client__port: number,
   client__authorization_endpoint?: string,
   client__token_endpoint?: string,
   client__userinfo_endpoint?: string,
