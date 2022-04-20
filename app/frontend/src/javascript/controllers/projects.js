@@ -397,6 +397,20 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
       return true;
     };
 
+    /**
+     * Overlap global function to allow the user to navigate to the previous screen
+     * If no previous $state were recorded, navigate to the project list page
+     */
+    $scope.backPrevLocation = function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      if ($state.prevState === '' || $state.prevState === 'app.public.projects_list') {
+        $state.prevState = 'app.public.home';
+        return $state.go($state.prevState, {});
+      }
+      window.history.back();
+    };
+
     /* PRIVATE SCOPE */
 
     /**
@@ -474,6 +488,20 @@ Application.Controllers.controller('NewProjectController', ['$rootScope', '$scop
 
     $scope.matchingMembers = [];
 
+    /*
+     * Overlap global function to allow the user to navigate to the previous screen
+     * If no previous $state were recorded, navigate to the project list page
+     */
+    $scope.backPrevLocation = function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      if ($state.prevState === '') {
+        $state.prevState = 'app.public.projects_list';
+        return $state.go($state.prevState, {});
+      }
+      window.history.back();
+    };
+
     // Using the ProjectsController
     return new ProjectsController($rootScope, $scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics, dialogs, allowedExtensions, _t);
   }
@@ -501,6 +529,19 @@ Application.Controllers.controller('EditProjectController', ['$rootScope', '$sco
         name: u.full_name
       });
     });
+
+    /**
+     * Overlap global function to allow the user to navigate to the previous screen
+     * If no previous $state were recorded, navigate to the project show page
+     */
+    $scope.backPrevLocation = function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      if ($state.prevState === '') {
+        $state.prevState = 'app.public.projects_show';
+      }
+      $state.go($state.prevState, { id: $transition$.params().id });
+    };
 
     /* PRIVATE SCOPE */
 
@@ -639,5 +680,19 @@ Application.Controllers.controller('ShowProjectController', ['$scope', '$state',
      * Return the URL allowing to share the current project on the Twitter social network
      */
     $scope.shareOnTwitter = function () { return `https://twitter.com/intent/tweet?url=${encodeURIComponent($state.href('app.public.projects_show', { id: $scope.project.slug }, { absolute: true }))}&text=${encodeURIComponent($scope.project.name)}`; };
+
+    /**
+     * Overlap global function to allow the user to navigate to the previous screen
+     * If no previous $state were recorded, navigate to the project list page
+     */
+    $scope.backPrevLocation = function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      if ($state.prevState === '') {
+        $state.prevState = 'app.public.projects_list';
+        return $state.go($state.prevState, {});
+      }
+      window.history.back();
+    };
   }
 ]);

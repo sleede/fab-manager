@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- Fix a bug: back bouton can't return to previously page in projects page (list/new/show/edit)
 - Fix a security issue: updated async to 2.6.4 to fix [CVE-2021-43138](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-43138)
 
 ## v5.3.11 2022 April 15
