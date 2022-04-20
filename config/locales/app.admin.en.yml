@@ -1084,6 +1084,7 @@ en:
         openid_connect_data_mapping_form:
           api_field: "Userinfo claim"
           api_field_help_html: 'Set the field providing the corresponding data through <a href="https://openid.net/specs/openid-connect-core-1_0.html#Claims" target="_blank">the userinfo endpoint</a>.<br> <a href="https://jsonpath.com/" target="_blank">JsonPath</a> syntax is supported. If many fields are selected, the first one will be used.<br> <b>Example</b>: $.data[*].name'
+          openid_standard_configuration: "Use the OpenID standard configuration"
         type_mapping_modal:
           data_mapping: "Data mapping"
           TYPE_expected: "{TYPE} expected"

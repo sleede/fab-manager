@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { UseFormRegister, useFieldArray, ArrayPath, useWatch, Path } from 'react-hook-form';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 import AuthProviderAPI from '../../api/auth-provider';
-import { MappingFields, mappingType, ProvidableType } from '../../models/authentication-provider';
-import { Control } from 'react-hook-form/dist/types/form';
+import { AuthenticationProviderMapping, MappingFields, mappingType, ProvidableType } from '../../models/authentication-provider';
+import { Control, UseFormSetValue } from 'react-hook-form/dist/types/form';
 import { FormSelect } from '../form/form-select';
 import { FormInput } from '../form/form-input';
 import { useTranslation } from 'react-i18next';
@@ -17,6 +17,8 @@ export interface DataMappingFormProps<TFieldValues, TContext extends object> {
   register: UseFormRegister<TFieldValues>,
   control: Control<TFieldValues, TContext>,
   providerType: ProvidableType,
+  setValue: UseFormSetValue<TFieldValues>,
+  currentFormValues: Array<AuthenticationProviderMapping>,
 }
 
 type selectModelFieldOption = { value: string, label: string };
@@ -24,7 +26,7 @@ type selectModelFieldOption = { value: string, label: string };
 /**
  * Partial form to define the mapping of the data between the API of the authentication provider and the application internals.
  */
-export const DataMappingForm = <TFieldValues extends FieldValues, TContext extends object>({ register, control, providerType }: DataMappingFormProps<TFieldValues, TContext>) => {
+export const DataMappingForm = <TFieldValues extends FieldValues, TContext extends object>({ register, control, providerType, setValue, currentFormValues }: DataMappingFormProps<TFieldValues, TContext>) => {
   const { t } = useTranslation('admin');
   const [dataMapping, setDataMapping] = useState<MappingFields>(null);
   const [isOpenTypeMappingModal, updateIsOpenTypeMappingModal] = useImmer<Map<number, boolean>>(new Map());
@@ -128,7 +130,10 @@ export const DataMappingForm = <TFieldValues extends FieldValues, TContext exten
             </div>
             <div className="remote-data">
               {providerType === 'OAuth2Provider' && <Oauth2DataMappingForm register={register} control={control} index={index} />}
-              {providerType === 'OpenIdConnectProvider' && <OpenidConnectDataMappingForm register={register} index={index} />}
+              {providerType === 'OpenIdConnectProvider' && <OpenidConnectDataMappingForm register={register}
+                                                                                         index={index}
+                                                                                         setValue={setValue}
+                                                                                         currentFormValues={currentFormValues} />}
             </div>
           </div>
           <div className="actions">
