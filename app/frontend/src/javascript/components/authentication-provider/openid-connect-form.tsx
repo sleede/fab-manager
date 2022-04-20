@@ -9,6 +9,7 @@ import { HtmlTranslate } from '../base/html-translate';
 import { OpenIdConnectProvider } from '../../models/authentication-provider';
 import SsoClient from '../../api/external/sso';
 import { FieldPathValue } from 'react-hook-form/dist/types/path';
+import { FormMultiSelect } from '../form/form-multi-select';
 
 interface OpenidConnectFormProps<TFieldValues, TContext extends object> {
   register: UseFormRegister<TFieldValues>,
@@ -23,6 +24,7 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
 
   // saves the state of the discovery endpoint
   const [discoveryAvailable, setDiscoveryAvailable] = useState<boolean>(false);
+  const [scopesAvailable, setScopesAvailable] = useState<string[]>(null);
 
   // when we have detected a discovery endpoint, we mark it as available
   useEffect(() => {
@@ -63,10 +65,12 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
    * This callback is triggered when the user changes the issuer field.
    */
   const checkForDiscoveryEndpoint = (e: React.ChangeEvent<HTMLInputElement>) => {
-    SsoClient.openIdConfiguration(e.target.value).then(() => {
+    SsoClient.openIdConfiguration(e.target.value).then((configuration) => {
       setDiscoveryAvailable(true);
+      setScopesAvailable(configuration.scopes_supported);
     }).catch(() => {
       setDiscoveryAvailable(false);
+      setScopesAvailable(null);
     });
   };
 
@@ -98,11 +102,16 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
                   ]}
                   valueDefault={'basic'}
                   control={control} />
-      <FormInput id="providable_attributes.scope"
+      {!scopesAvailable && <FormInput id="providable_attributes.scope"
                  register={register}
                  label={t('app.admin.authentication.openid_connect_form.scope')}
                  placeholder="openid,profile,email"
-                 tooltip={t('app.admin.authentication.openid_connect_form.scope_help')} />
+                 tooltip={<HtmlTranslate trKey="app.admin.authentication.openid_connect_form.scope_help_html" />} />}
+      {scopesAvailable && <FormMultiSelect id="providable_attributes.scope"
+                 label={t('app.admin.authentication.openid_connect_form.scope')}
+                 tooltip={<HtmlTranslate trKey="app.admin.authentication.openid_connect_form.scope_help_html" />}
+                 options={scopesAvailable.map((scope) => ({ value: scope, label: scope }))}
+                 control={control} />}
       <FormSelect id="providable_attributes.prompt"
                   label={t('app.admin.authentication.openid_connect_form.prompt')}
                   tooltip={<HtmlTranslate trKey="app.admin.authentication.openid_connect_form.prompt_help_html" />}
