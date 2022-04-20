@@ -1112,7 +1112,7 @@ en:
           client_auth_method_basic: "Basic"
           client_auth_method_jwks: "JWKS"
           scope: "Scope"
-          scope_help: "Which OpenID scopes to include (openid is always required)"
+          scope_help_html: "Which OpenID scopes to include (openid is always required). <br> If <b>Discovery</b> is enabled, the available scopes will be automatically proposed."
           prompt: "Prompt"
           prompt_help_html: "Which OpenID pages the user will be shown. <br> <b>None</b> - no authentication or consent user interface pages are shown. <br> <b>Login</b> - the authorization server prompt the user for reauthentication. <br> <b>Consent</b> - the authorization server prompt the user for consent before returning information to Fab-manager. <br> <b>Select account</b> - the authorization server prompt the user to select a user account."
           prompt_none: "None"
