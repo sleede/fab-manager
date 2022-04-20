@@ -1,5 +1,15 @@
 # Changelog Fab-manager
 
+## v5.3.12 2022 April 20
+
+- Auto sync projects to OpenLab if set openlab_app_id and openlab_app_secret
+- Fix a bug: back bouton can't return to previously page in projects page (list/new/show/edit)
+- Fix a bug: OpenLab duplicate projects, if you are using OpenLab Projects, please follow the following TODO DEPLOY
+- Fix a security issue: updated async to 2.6.4 to fix [CVE-2021-43138](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-43138)
+- [TODO DEPLOY] `rails fablab:openlab:bulk_export`
+- [TODO DEPLOY] wait 1 minute
+- [TODO DEPLOY] `rails fablab:openlab:bulk_update`
+
 ## v5.3.11 2022 April 15
 
 - Fix a bug: unable to send notification mail if no set a logo
