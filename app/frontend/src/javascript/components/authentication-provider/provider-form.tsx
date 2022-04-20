@@ -2,7 +2,12 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useForm, SubmitHandler, useWatch } from 'react-hook-form';
 import { react2angular } from 'react2angular';
 import { debounce as _debounce } from 'lodash';
-import { AuthenticationProvider, OpenIdConnectProvider, ProvidableType } from '../../models/authentication-provider';
+import {
+  AuthenticationProvider,
+  AuthenticationProviderMapping,
+  OpenIdConnectProvider,
+  ProvidableType
+} from '../../models/authentication-provider';
 import { Loader } from '../base/loader';
 import { IApplication } from '../../models/application';
 import { FormInput } from '../form/form-input';
@@ -108,7 +113,11 @@ export const ProviderForm: React.FC<ProviderFormProps> = ({ action, provider, on
                                                                         currentFormValues={output.providable_attributes as OpenIdConnectProvider}
                                                                         formState={formState}
                                                                         setValue={setValue} />}
-      {providableType && providableType !== 'DatabaseProvider' && <DataMappingForm register={register} control={control} providerType={providableType} />}
+      {providableType && providableType !== 'DatabaseProvider' && <DataMappingForm register={register}
+                                                                                   control={control}
+                                                                                   providerType={providableType}
+                                                                                   setValue={setValue}
+                                                                                   currentFormValues={output.auth_provider_mappings_attributes as Array<AuthenticationProviderMapping>} />}
       <div className="main-actions">
         <FabButton type="submit" className="submit-button">{t('app.admin.authentication.provider_form.save')}</FabButton>
       </div>
