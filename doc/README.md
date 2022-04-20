@@ -27,6 +27,7 @@ The following guides are designed for the people that perform software maintenan
 - [Advanced PostgreSQL usage](postgresql_readme.md)
 
 - [Connecting an SSO using oAuth 2.0](sso_with_github.md)
+- [Connecting an SSO using OpenID Connect](sso_open_id_connect.md)
 
 - [Upgrade from Fab-manager v1.0](upgrade_v1.md)
 
