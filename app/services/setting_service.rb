@@ -23,5 +23,12 @@ class SettingService
 
     # generate statistics
     PeriodStatisticsWorker.perform_async(setting.previous_update) if setting.name == 'statistics_module' && setting.value == 'true'
+
+    # export projects to openlab
+    if %w[openlab_app_id openlab_app_secret].include? setting.name
+      if Setting.get('openlab_app_id').present? && Setting.get('openlab_app_secret').present?
+        Project.all.each { |pr| pr.openlab_create }
+      end
+    end
   end
 end

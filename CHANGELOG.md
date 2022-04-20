@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- Auto sync projects to OpenLab if set openlab_app_id and openlab_app_secret
 - Fix a bug: back bouton can't return to previously page in projects page (list/new/show/edit)
 - Fix a security issue: updated async to 2.6.4 to fix [CVE-2021-43138](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-43138)
 - Fix a bug on OpenLab Projects, if you are using OpenLab Projects, please follow the following TODO DEPLOY
