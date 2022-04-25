@@ -1,4 +1,5 @@
 import { Plan } from './plan';
+import { TDateISO } from '../typings/date-iso';
 
 export enum UserRole {
   Member = 'member',
@@ -63,13 +64,13 @@ export interface User {
   statistic_profile: {
     id: number,
     gender: string,
-    birthday: Date
+    birthday: TDateISO
   },
   subscribed_plan: Plan,
   subscription: {
     id: number,
-    expired_at: Date,
-    canceled_at: Date,
+    expired_at: TDateISO,
+    canceled_at: TDateISO,
     stripe: boolean,
     plan: {
       id: number,
@@ -82,5 +83,5 @@ export interface User {
   },
   training_credits: Array<number>,
   machine_credits: Array<{machine_id: number, hours_used: number}>,
-  last_sign_in_at: Date
+  last_sign_in_at: TDateISO
 }
