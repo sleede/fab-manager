@@ -1,12 +1,15 @@
 # Changelog Fab-manager
 
+- No longer needed to recompile the assets when switching the authentication provider
+- Updated the documentation about the minimum docker version
+- Updated nodejs version to 16.13.2 for dev environment, to reflect production version
 - Changed the apparence of the modal dialogs (React): no more logo and the close button appears in full-text in the top right corner.
 - Use react-hook-form to manage and validate forms
 - New text editor
 - Change font family to "Work Sans"
-- Updated Node to 16.13.2
 - Updated eslint to v8 and eslint related packages to their latest versions
 - Updated typescript to v4.6.3
+- Updated react-select to v5.2.2
 - Webpack overlay will now report eslint issues
 - Linted all code according to eslint rules
 - Fix a bug: Refused to connect to 'wss://localhost:3035/ws' when using a https tunnel in development mode

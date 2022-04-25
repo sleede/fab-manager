@@ -33,7 +33,7 @@ const customConfig = {
     }),
     isDevelopment && new (require('@pmmmwh/react-refresh-webpack-plugin'))(),
     isDevelopment && new (require('eslint-webpack-plugin'))({
-      extensions: ['js', 'ts', 'tsx'],
+      extensions: ['js', 'ts', 'tsx']
     })
   ].filter(Boolean),
   module: {

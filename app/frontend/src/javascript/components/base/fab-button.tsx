@@ -7,12 +7,13 @@ interface FabButtonProps {
   disabled?: boolean,
   type?: 'submit' | 'reset' | 'button',
   form?: string,
+  tooltip?: string,
 }
 
 /**
  * This component is a template for a clickable button that wraps the application style
  */
-export const FabButton: React.FC<FabButtonProps> = ({ onClick, icon, className, disabled, type, form, children }) => {
+export const FabButton: React.FC<FabButtonProps> = ({ onClick, icon, className, disabled, type, form, tooltip, children }) => {
   /**
    * Check if the current component was provided an icon to display
    */
@@ -37,7 +38,7 @@ export const FabButton: React.FC<FabButtonProps> = ({ onClick, icon, className, 
   };
 
   return (
-    <button type={type} form={form} onClick={handleClick} disabled={disabled} className={`fab-button ${className || ''}`}>
+    <button type={type} form={form} onClick={handleClick} disabled={disabled} className={`fab-button ${className || ''}`} title={tooltip}>
       {hasIcon() && <span className={hasChildren() ? 'fab-button--icon' : 'fab-button--icon-only'}>{icon}</span>}
       {children}
     </button>

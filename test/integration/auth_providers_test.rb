@@ -22,24 +22,24 @@ class AuthProvidersTest < ActionDispatch::IntegrationTest
                base_url: 'https://github.com/login/oauth/',
                profile_url: 'https://github.com/settings/profile',
                client_id: ENV.fetch('OAUTH_CLIENT_ID') { 'github-oauth-app-id' },
-               client_secret: ENV.fetch('OAUTH_CLIENT_SECRET') { 'github-oauth-app-secret' },
-               o_auth2_mappings_attributes: [
-                 {
-                   api_data_type: 'json',
-                   api_endpoint: 'https://api.github.com/user',
-                   api_field: 'id',
-                   local_field: 'uid',
-                   local_model: 'user'
-                 },
-                 {
-                   api_data_type: 'json',
-                   api_endpoint: 'https://api.github.com/user',
-                   api_field: 'html_url',
-                   local_field: 'github',
-                   local_model: 'profile'
-                 }
-               ]
-             }
+               client_secret: ENV.fetch('OAUTH_CLIENT_SECRET') { 'github-oauth-app-secret' }
+             },
+             auth_provider_mappings_attributes: [
+               {
+                 api_data_type: 'json',
+                 api_endpoint: 'https://api.github.com/user',
+                 api_field: 'id',
+                 local_field: 'uid',
+                 local_model: 'user'
+               },
+               {
+                 api_data_type: 'json',
+                 api_endpoint: 'https://api.github.com/user',
+                 api_field: 'html_url',
+                 local_field: 'github',
+                 local_model: 'profile'
+               }
+             ]
            }
          }.to_json,
          headers: default_headers
@@ -56,7 +56,7 @@ class AuthProvidersTest < ActionDispatch::IntegrationTest
     assert_equal name, provider[:name]
     assert_equal db_provider.id, provider[:id]
     assert_equal 'pending', provider[:status]
-    assert_equal 2, provider[:providable_attributes][:o_auth2_mappings_attributes].length
+    assert_equal 2, provider[:auth_provider_mappings_attributes].length
 
     # now let's activate this new provider
     Fablab::Application.load_tasks if Rake::Task.tasks.empty?

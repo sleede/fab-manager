@@ -15,15 +15,21 @@
 @import "app.components";
 @import "app.plugins";
 
+@import "modules/authentication-provider/array-mapping-form";
+@import "modules/authentication-provider/data-mapping-form";
+@import "modules/authentication-provider/openid-connect-data-mapping-form";
+@import "modules/authentication-provider/provider-form";
+@import "modules/authentication-provider/type-mapping-modal";
 @import "modules/base/fab-alert";
 @import "modules/base/fab-button";
 @import "modules/base/fab-input";
 @import "modules/base/fab-modal";
+@import "modules/base/fab-output-copy";
 @import "modules/base/fab-popover";
 @import "modules/base/fab-text-editor";
 @import "modules/base/labelled-input";
 @import "modules/calendar/calendar";
-@import "modules/base/rhf-input";
+@import "modules/form/form-item";
 @import "modules/machines/machine-card";
 @import "modules/machines/machines-filters";
 @import "modules/machines/machines-list";
@@ -83,4 +89,4 @@
 
 @import "app.responsive";
 
-@import "overrides"
+@import "overrides";

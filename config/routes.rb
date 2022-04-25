@@ -17,6 +17,10 @@ Rails.application.routes.draw do
     get '/sso-redirect', to: 'application#sso_redirect', as: :sso_redirect
   end
 
+  devise_scope :user do
+    get '/sessions/sign_out', to: 'devise/sessions#destroy'
+  end
+
   ## The priority is based upon order of creation: first created -> highest priority.
   ## See how all your routes lay out with "rake routes".
 
@@ -151,6 +155,7 @@ Rails.application.routes.draw do
       get 'mapping_fields', on: :collection
       get 'active', action: 'active', on: :collection
       post 'send_code', action: 'send_code', on: :collection
+      get 'strategy_name', action: 'strategy_name', on: :collection
     end
     resources :abuses, only: %i[index create destroy]
     resources :open_api_clients, only: %i[index create update destroy] do

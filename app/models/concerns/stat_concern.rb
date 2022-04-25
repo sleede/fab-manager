@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Defines the standard statistics data model.
 module StatConcern
   extend ActiveSupport::Concern
 
