@@ -5,6 +5,7 @@ json.role member.roles.first.name
 json.name member.profile.full_name
 json.need_completion member.need_completion?
 json.ip_address member.current_sign_in_ip.to_s
+json.mapped_from_sso member.mapped_from_sso&.split(',')
 
 json.profile do
   json.id member.profile.id

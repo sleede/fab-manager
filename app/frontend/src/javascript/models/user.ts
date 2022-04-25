@@ -15,6 +15,7 @@ export interface User {
   name: string,
   need_completion: boolean,
   ip_address: string,
+  mapped_from_sso?: string[],
   profile: {
     id: number,
     first_name: string,
