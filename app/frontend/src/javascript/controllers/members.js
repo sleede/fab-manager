@@ -86,7 +86,7 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
     $scope.method = 'patch';
 
     // Current user's profile
-    $scope.user = memberPromise;
+    $scope.user = cleanUser(memberPromise);
 
     // default : do not show the group changing form
     $scope.group =
@@ -292,6 +292,13 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
       // bind fields protection with sso fields
       return angular.forEach(activeProviderPromise.mapping, map => $scope.preventField[map] = true);
     };
+
+    // prepare the user for the react-hook-form
+    function cleanUser (user) {
+      delete user.$promise;
+      delete user.$resolved;
+      return user;
+    }
 
     // !!! MUST BE CALLED AT THE END of the controller
     return initialize();
