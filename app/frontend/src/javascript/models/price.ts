@@ -1,3 +1,5 @@
+import { TDateISO } from '../typings/date-iso';
+
 export interface PriceIndexFilter {
   priceable_type?: string,
   priceable_id?: number,
@@ -20,7 +22,7 @@ export interface ComputePriceResult {
   price_without_coupon: number,
   details?: {
     slots: Array<{
-      start_at: Date,
+      start_at: TDateISO,
       price: number,
       promo: boolean
     }>
@@ -29,7 +31,7 @@ export interface ComputePriceResult {
   schedule?: {
     items: Array<{
       amount: number,
-      due_date: Date
+      due_date: TDateISO
     }>
   }
 }

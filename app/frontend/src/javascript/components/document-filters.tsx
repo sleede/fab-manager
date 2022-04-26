@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { LabelledInput } from './base/labelled-input';
 import { useTranslation } from 'react-i18next';
+import { TDateISODate } from '../typings/date-iso';
 
 interface DocumentFiltersProps {
-  onFilterChange: (value: { reference: string, customer: string, date: Date }) => void
+  onFilterChange: (value: { reference: string, customer: string, date: TDateISODate }) => void
 }
 
 /**
@@ -13,11 +14,11 @@ export const DocumentFilters: React.FC<DocumentFiltersProps> = ({ onFilterChange
   const { t } = useTranslation('admin');
 
   // stores the value of reference input
-  const [referenceFilter, setReferenceFilter] = useState('');
+  const [referenceFilter, setReferenceFilter] = useState<string>('');
   // stores the value of the customer input
-  const [customerFilter, setCustomerFilter] = useState('');
+  const [customerFilter, setCustomerFilter] = useState<string>('');
   // stores the value of the date input
-  const [dateFilter, setDateFilter] = useState(null);
+  const [dateFilter, setDateFilter] = useState<TDateISODate>(null);
 
   /**
    * When any filter changes, trigger the callback with the current value of all filters

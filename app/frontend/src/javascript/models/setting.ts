@@ -1,4 +1,5 @@
 import { HistoryValue } from './history-value';
+import { TDateISO } from '../typings/date-iso';
 
 export enum SettingName {
   AboutTitle = 'about_title',
@@ -127,7 +128,7 @@ export interface Setting {
   name: SettingName,
   localized?: string,
   value: string,
-  last_update?: Date,
+  last_update?: TDateISO,
   history?: Array<HistoryValue>
 }
 
