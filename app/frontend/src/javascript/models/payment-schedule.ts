@@ -1,3 +1,5 @@
+import { TDateISO, TDateISODate } from '../typings/date-iso';
+
 export enum PaymentScheduleItemState {
   New = 'new',
   Pending = 'pending',
@@ -17,7 +19,7 @@ export enum PaymentMethod {
 export interface PaymentScheduleItem {
   id: number,
   amount: number,
-  due_date: Date,
+  due_date: TDateISO,
   state: PaymentScheduleItemState,
   invoice_id: number,
   payment_method: PaymentMethod,
@@ -31,7 +33,7 @@ export interface PaymentSchedule {
   reference?: string,
   payment_method: PaymentMethod,
   items?: Array<PaymentScheduleItem>,
-  created_at?: Date,
+  created_at?: TDateISO,
   chained_footprint?: boolean,
   main_object?: {
     type: string,
@@ -53,7 +55,7 @@ export interface PaymentScheduleIndexRequest {
   query: {
     reference?: string,
     customer?: string,
-    date?: Date,
+    date?: TDateISODate,
     page: number,
     size: number
   }
@@ -74,5 +76,5 @@ export interface PayItemResponse {
 }
 
 export interface CancelScheduleResponse {
-  canceled_at: Date
+  canceled_at: TDateISO
 }
