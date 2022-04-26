@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     get '/sessions/sign_out', to: 'devise/sessions#destroy'
+    post '/password/verify', to: 'passwords#verify'
   end
 
   ## The priority is based upon order of creation: first created -> highest priority.

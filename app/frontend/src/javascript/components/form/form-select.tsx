@@ -33,7 +33,7 @@ export const FormSelect = <TFieldValues extends FieldValues, TContext extends ob
   const classNames = [
     'form-select form-item',
     `${className || ''}`,
-    `${error && error[id] ? 'is-incorrect' : ''}`,
+    `${error ? 'is-incorrect' : ''}`,
     `${rules && rules.required ? 'is-required' : ''}`,
     `${disabled ? 'is-disabled' : ''}`
   ].join(' ');
@@ -76,7 +76,7 @@ export const FormSelect = <TFieldValues extends FieldValues, TContext extends ob
                               options={options} />
                     } />
       </div>
-      {(error && error[id]) && <div className="form-item-error">{error[id].message}</div> }
+      {(error) && <div className="form-item-error">{error.message}</div> }
     </label>
   );
 };

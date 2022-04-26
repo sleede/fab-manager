@@ -32,7 +32,7 @@ export const FormMultiSelect = <TFieldValues extends FieldValues, TContext exten
   const classNames = [
     'form-multi-select form-item',
     `${className || ''}`,
-    `${error && error[id] ? 'is-incorrect' : ''}`,
+    `${error ? 'is-incorrect' : ''}`,
     `${rules && rules.required ? 'is-required' : ''}`,
     `${disabled ? 'is-disabled' : ''}`
   ].join(' ');
@@ -75,7 +75,7 @@ export const FormMultiSelect = <TFieldValues extends FieldValues, TContext exten
                               isMulti />
                     } />
       </div>
-      {(error && error[id]) && <div className="form-item-error">{error[id].message}</div> }
+      {(error) && <div className="form-item-error">{error.message}</div> }
     </label>
   );
 };

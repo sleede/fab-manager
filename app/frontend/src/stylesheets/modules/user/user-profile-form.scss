@@ -1,0 +1,43 @@
+.user-profile-form {
+  display: flex;
+  flex-direction: row;
+
+  .fields-group {
+    width: 100%;
+
+    & > * {
+      margin-top: 1.5rem;
+    }
+
+    .names, .birth-phone {
+      display: flex;
+      flex-direction: row;
+
+      .form-input:first-child {
+        margin-right: 32px;
+      }
+    }
+
+    .organization-toggle {
+      p {
+        font-family: var(--font-text);
+        font-weight: normal;
+        font-size: 1.4rem;
+        line-height: normal;
+        margin: 0;
+      }
+    }
+  }
+
+  &--small {
+    flex-direction: column;
+
+    .names, .birth-phone {
+      flex-direction: column;
+
+      .form-input:first-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

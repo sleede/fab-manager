@@ -65,3 +65,11 @@ export interface MappingFields {
   user: Array<[string, mappingType]>,
   profile: Array<[string, mappingType]>
 }
+
+export interface ActiveProviderResponse extends AuthenticationProvider {
+  previous_provider?: AuthenticationProvider
+  mapping: Array<string>,
+  link_to_sso_profile: string,
+  link_to_sso_connect: string,
+  domain?: string
+}
