@@ -1,0 +1,36 @@
+.gender-input {
+  margin-bottom: 1.6rem;
+
+  label {
+    display: inline-flex;
+    justify-content: flex-start;
+    flex-direction: row-reverse;
+    border: 1px solid  #c9c9c9;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+    touch-action: manipulation;
+    user-select: none;
+    vertical-align: middle;
+    white-space: nowrap;
+    position: relative;
+    max-width: 100%;
+    background-color: #fbfbfb;
+    color: #000;
+    margin-bottom: 0;
+    margin-top: 0;
+    padding: 7px 12px 6px;
+    margin-right: 16px;
+
+    p {
+      margin: 0 8px;
+    }
+
+    input {
+      margin: 5px 0 0;
+    }
+  }
+}

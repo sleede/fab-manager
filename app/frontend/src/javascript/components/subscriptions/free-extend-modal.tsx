@@ -10,6 +10,7 @@ import { react2angular } from 'react2angular';
 import { IApplication } from '../../models/application';
 import LocalPaymentAPI from '../../api/local-payment';
 import { PaymentMethod } from '../../models/payment';
+import { TDateISO } from '../../typings/date-iso';
 
 declare const Application: IApplication;
 
@@ -46,7 +47,7 @@ const FreeExtendModal: React.FC<FreeExtendModalProps> = ({ isOpen, toggleModal, 
   /**
    * Return the formatted localized date for the given date
    */
-  const formatDateTime = (date: Date): string => {
+  const formatDateTime = (date: TDateISO): string => {
     return t('app.admin.free_extend_modal.DATE_TIME', { DATE: FormatLib.date(date), TIME: FormatLib.time(date) });
   };
 

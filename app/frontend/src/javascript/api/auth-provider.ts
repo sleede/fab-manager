@@ -1,4 +1,4 @@
-import { AuthenticationProvider, MappingFields } from '../models/authentication-provider';
+import { ActiveProviderResponse, AuthenticationProvider, MappingFields } from '../models/authentication-provider';
 import { AxiosResponse } from 'axios';
 import apiClient from './clients/api-client';
 
@@ -34,6 +34,11 @@ export default class AuthProviderAPI {
 
   static async strategyName (authProvider: AuthenticationProvider): Promise<string> {
     const res: AxiosResponse<string> = await apiClient.get(`/api/auth_providers/strategy_name?providable_type=${authProvider.providable_type}&name=${authProvider.name}`);
+    return res?.data;
+  }
+
+  static async active (): Promise<ActiveProviderResponse> {
+    const res: AxiosResponse<ActiveProviderResponse> = await apiClient.get('/api/auth_providers/active');
     return res?.data;
   }
 }

@@ -275,6 +275,14 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
       $injector.get('$state').reload();
     };
 
+    /**
+     * Callback triggered when an error is raised on a lower-level component
+     * @param message {string}
+     */
+    $scope.onError = function (message) {
+      growl.error(message);
+    };
+
     /* PRIVATE SCOPE */
 
     /**

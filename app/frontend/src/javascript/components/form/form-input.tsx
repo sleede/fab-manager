@@ -20,10 +20,16 @@ interface FormInputProps<TFieldValues> extends InputHTMLAttributes<HTMLInputElem
  */
 export const FormInput = <TFieldValues extends FieldValues>({ id, register, label, tooltip, defaultValue, icon, className, rules, readOnly, disabled, type, addOn, addOnClassName, placeholder, error, warning, formState, step, onChange, debounce }: FormInputProps<TFieldValues>) => {
   const [isDirty, setIsDirty] = useState(false);
+  const [fieldError, setFieldError] = useState(error);
 
   useEffect(() => {
     setIsDirty(_get(formState?.dirtyFields, id));
+    setFieldError(_get(formState?.errors, id));
   }, [formState]);
+
+  useEffect(() => {
+    setFieldError(error);
+  }, [error]);
 
   /**
    * Debounced (ie. temporised) version of the 'on change' callback.
@@ -48,8 +54,8 @@ export const FormInput = <TFieldValues extends FieldValues>({ id, register, labe
     'form-input form-item',
     `${className || ''}`,
     `${type === 'hidden' ? 'is-hidden' : ''}`,
-    `${isDirty && error && error[id] ? 'is-incorrect' : ''}`,
-    `${isDirty && warning && warning[id] ? 'is-warned' : ''}`,
+    `${isDirty && fieldError ? 'is-incorrect' : ''}`,
+    `${isDirty && warning ? 'is-warned' : ''}`,
     `${rules && rules.required ? 'is-required' : ''}`,
     `${readOnly ? 'is-readonly' : ''}`,
     `${disabled ? 'is-disabled' : ''}`
@@ -80,8 +86,8 @@ export const FormInput = <TFieldValues extends FieldValues>({ id, register, labe
           placeholder={placeholder} />
         {addOn && <span className={`addon ${addOnClassName || ''}`}>{addOn}</span>}
       </div>
-      {(isDirty && error && error[id]) && <div className="form-item-error">{error[id].message}</div> }
-      {(isDirty && warning && warning[id]) && <div className="form-item-warning">{warning[id].message}</div> }
+      {(isDirty && fieldError) && <div className="form-item-error">{fieldError.message}</div> }
+      {(isDirty && warning) && <div className="form-item-warning">{warning.message}</div> }
     </label>
   );
 };

@@ -1,6 +1,5 @@
 import { Reservation } from './reservation';
 import { SubscriptionRequest } from './subscription';
-import { TDateISO } from '../typings/date-iso';
 
 export interface PaymentConfirmation {
   requires_action?: boolean,
@@ -27,7 +26,7 @@ export enum PaymentMethod {
 export type CartItem = { reservation: Reservation }|
   { subscription: SubscriptionRequest }|
   { prepaid_pack: { id: number } }|
-  { free_extension: { end_at: TDateISO } };
+  { free_extension: { end_at: Date } };
 
 export interface ShoppingCart {
   customer_id: number,
