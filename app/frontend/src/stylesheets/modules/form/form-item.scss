@@ -47,9 +47,6 @@
   &.is-hidden {
     display: none;
   }
-  &.is-hidden {
-    display: none;
-  }
   &.is-required &-header p::after {
     content: "*";
     margin-left: 0.5ch;
