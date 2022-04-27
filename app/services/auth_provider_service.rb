@@ -20,6 +20,9 @@ class AuthProviderService
       provider.providable.display = 'page'
       provider.providable.response_mode = 'query'
       provider.providable.response_type = 'code'
+      provider.providable.uid_field = provider.auth_provider_mappings
+                                              .find { |m| m.local_model == 'user' && m.local_field == 'uid' }
+                                              .api_field
 
       URI.parse(provider.providable.issuer).tap do |uri|
         provider.providable.client__scheme = uri.scheme
