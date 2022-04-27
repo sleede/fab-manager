@@ -131,6 +131,20 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
                        label={t('app.shared.user_profile_form.organization_address')} />
           </div>}
         </div>
+        <div className="profile-data">
+          <h4>{t('app.shared.user_profile_form.profile_data')}</h4>
+        </div>
+        <div className="preferences-data">
+          <h4>{t('app.shared.user_profile_form.preferences_data')}</h4>
+          <FormSwitch control={control}
+                      id="is_allow_contact"
+                      label={t('app.shared.user_profile_form.allow_public_profile')}
+                      tooltip={t('app.shared.user_profile_form.allow_public_profile_help')} />
+          <FormSwitch control={control}
+                      id="is_allow_newsletter"
+                      label={t('app.shared.user_profile_form.allow_newsletter')}
+                      tooltip={t('app.shared.user_profile_form.allow_newsletter_help')} />
+        </div>
       </div>
     </form>
   );
