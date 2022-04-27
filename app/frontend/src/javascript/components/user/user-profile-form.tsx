@@ -9,8 +9,8 @@ import { useTranslation } from 'react-i18next';
 import { Avatar } from './avatar';
 import { GenderInput } from './gender-input';
 import { ChangePassword } from './change-password';
-import Switch from 'react-switch';
 import { PasswordInput } from './password-input';
+import { FormSwitch } from '../form/form-switch';
 
 declare const Application: IApplication;
 
@@ -106,10 +106,12 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
         </div>
         <div className="organization-data">
           <h4>{t('app.shared.user_profile_form.organization_data')}</h4>
-          <label className="organization-toggle">
-            <p>{t('app.shared.user_profile_form.declare_organization')}</p>
-            <Switch checked={isOrganization} onChange={setIsOrganization} />
-          </label>
+          <FormSwitch control={control}
+                      id="invoicing_profile_attributes.organization"
+                      label={t('app.shared.user_profile_form.declare_organization')}
+                      tooltip={t('app.shared.user_profile_form.declare_organization_help')}
+                      defaultValue={user.invoicing_profile.organization !== null}
+                      onChange={setIsOrganization} />
           {isOrganization && <div className="organization-fields">
             <FormInput id="invoicing_profile_attributes.organization_attributes.id"
                        register={register}

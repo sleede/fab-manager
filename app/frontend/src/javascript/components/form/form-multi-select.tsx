@@ -37,7 +37,7 @@ export const FormMultiSelect = <TFieldValues extends FieldValues, TContext exten
 
   return (
     <AbstractFormItem id={id} formState={formState} label={label}
-                      className={`form-multi-select ${className}`} tooltip={tooltip}
+                      className={`form-multi-select ${className || ''}`} tooltip={tooltip}
                       disabled={disabled} readOnly={readOnly}
                       rules={rules} error={error} warning={warning}>
         <Controller name={id as FieldPath<TFieldValues>}

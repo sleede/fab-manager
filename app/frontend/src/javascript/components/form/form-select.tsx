@@ -37,7 +37,7 @@ export const FormSelect = <TFieldValues extends FieldValues, TContext extends ob
 
   return (
     <AbstractFormItem id={id} label={label} tooltip={tooltip}
-                      className={`form-select ${className}`} formState={formState}
+                      className={`form-select ${className || ''}`} formState={formState}
                       error={error} warning={warning} rules={rules}
                       disabled={disabled} readOnly={readOnly}>
       <Controller name={id as FieldPath<TFieldValues>}
