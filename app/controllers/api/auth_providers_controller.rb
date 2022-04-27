@@ -12,6 +12,7 @@ class API::AuthProvidersController < API::ApiController
   def create
     authorize AuthProvider
     @provider = AuthProvider.new(provider_params)
+    AuthProviderService.auto_configure(@provider)
     if @provider.save
       render :show, status: :created, location: @provider
     else
@@ -97,7 +98,7 @@ class API::AuthProvidersController < API::ApiController
       params.require(:auth_provider)
             .permit(:name, :providable_type,
                     providable_attributes: %i[id issuer discovery client_auth_method scope prompt send_scope_to_token_endpoint
-                                              client__identifier client__secretclient__authorization_endpoint client__token_endpoint
+                                              client__identifier client__secret client__authorization_endpoint client__token_endpoint
                                               client__userinfo_endpoint client__jwks_uri client__end_session_endpoint profile_url],
                     auth_provider_mappings_attributes: [:id, :local_model, :local_field, :api_field, :api_endpoint, :api_data_type,
                                                         :_destroy, transformation: [:type, :format, :true_value, :false_value,

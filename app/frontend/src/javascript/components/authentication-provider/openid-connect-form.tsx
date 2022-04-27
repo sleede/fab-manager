@@ -103,15 +103,16 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
                   valueDefault={'basic'}
                   control={control} />
       {!scopesAvailable && <FormInput id="providable_attributes.scope"
-                 register={register}
-                 label={t('app.admin.authentication.openid_connect_form.scope')}
-                 placeholder="openid,profile,email"
-                 tooltip={<HtmlTranslate trKey="app.admin.authentication.openid_connect_form.scope_help_html" />} />}
+                                      register={register}
+                                      label={t('app.admin.authentication.openid_connect_form.scope')}
+                                      placeholder="openid,profile,email"
+                                      tooltip={<HtmlTranslate trKey="app.admin.authentication.openid_connect_form.scope_help_html" />} />}
       {scopesAvailable && <FormMultiSelect id="providable_attributes.scope"
-                 label={t('app.admin.authentication.openid_connect_form.scope')}
-                 tooltip={<HtmlTranslate trKey="app.admin.authentication.openid_connect_form.scope_help_html" />}
-                 options={scopesAvailable.map((scope) => ({ value: scope, label: scope }))}
-                 control={control} />}
+                                           expectedResult="string"
+                                           label={t('app.admin.authentication.openid_connect_form.scope')}
+                                           tooltip={<HtmlTranslate trKey="app.admin.authentication.openid_connect_form.scope_help_html" />}
+                                           options={scopesAvailable.map((scope) => ({ value: scope, label: scope }))}
+                                           control={control} />}
       <FormSelect id="providable_attributes.prompt"
                   label={t('app.admin.authentication.openid_connect_form.prompt')}
                   tooltip={<HtmlTranslate trKey="app.admin.authentication.openid_connect_form.prompt_help_html" />}
