@@ -1,3 +1,28 @@
 .form-switch {
+  position: relative;
 
+  .form-item-header {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    padding-top: 2px;
+    width: fit-content;
+
+    .item-tooltip {
+      margin-left: 12px;
+      position: unset;
+
+      .content {
+        right: unset;
+        left: 0;
+      }
+    }
+  }
+
+  .form-item-field {
+    display: flex;
+    flex-direction: row-reverse;
+    background-color: white;
+    padding: 16px;
+  }
 }
