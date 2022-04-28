@@ -19,4 +19,17 @@ export default class UserLib {
 
     return false;
   };
+
+  /**
+   * Filter social networks from the user's profile
+   */
+  getSocialNetworks = (customer: User): {name: string, url: string, active: boolean}[] => {
+    const userNetworks = [];
+    const supportedNetworks = ['facebook', 'twitter', 'viadeo', 'linkedin', 'instagram', 'youtube', 'vimeo', 'dailymotion', 'github', 'echosciences', 'pinterest', 'lastfm', 'flickr'];
+
+    for (const [name, url] of Object.entries(customer.profile)) {
+      supportedNetworks.includes(name) && userNetworks.push({ name, url });
+    }
+    return userNetworks;
+  };
 }

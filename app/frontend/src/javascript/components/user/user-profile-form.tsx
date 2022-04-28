@@ -11,6 +11,8 @@ import { GenderInput } from './gender-input';
 import { ChangePassword } from './change-password';
 import Switch from 'react-switch';
 import { PasswordInput } from './password-input';
+import { EditSocials } from '../socials/edit-socials';
+import UserLib from '../../lib/user';
 
 declare const Application: IApplication;
 
@@ -25,7 +27,7 @@ interface UserProfileFormProps {
 export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, user, className, onError }) => {
   const { t } = useTranslation('shared');
 
-  const { handleSubmit, register, control, formState } = useForm<User>({ defaultValues: { ...user } });
+  const { handleSubmit, register, resetField, control, formState } = useForm<User>({ defaultValues: { ...user } });
   const output = useWatch<User>({ control });
 
   const [isOrganization, setIsOrganization] = React.useState<boolean>(user.invoicing_profile.organization !== null);
@@ -36,6 +38,8 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
   const onSubmit: SubmitHandler<User> = (data: User) => {
     console.log(action, data);
   };
+
+  const userNetworks = new UserLib(user).getSocialNetworks(user);
 
   return (
     <form className={`user-profile-form user-profile-form--${size} ${className}`} onSubmit={handleSubmit(onSubmit)}>
@@ -103,6 +107,12 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
           {action === 'create' && <PasswordInput register={register}
                                                  currentFormPassword={output.password}
                                                  formState={formState} />}
+        </div>
+        <div className='account-networks'>
+          <h4>{t('app.shared.user_profile_form.account_networks')}</h4>
+          <EditSocials register={register}
+                      networks={userNetworks}
+                      resetField={resetField} />
         </div>
         <div className="organization-data">
           <h4>{t('app.shared.user_profile_form.organization_data')}</h4>
