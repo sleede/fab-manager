@@ -9,6 +9,7 @@ const sassErb = require('./modules/sass_erb');
 const html = require('./modules/html');
 const uiTour = require('./modules/ui-tour');
 const hmr = require('./modules/hmr');
+const svg = require('./modules/svg');
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
@@ -44,7 +45,8 @@ const customConfig = {
       html,
       sass,
       uiTour,
-      hmr
+      hmr,
+      svg
     ]
   },
   resolve: {
