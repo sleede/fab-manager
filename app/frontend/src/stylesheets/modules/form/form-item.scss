@@ -81,9 +81,13 @@
     .addon {
       grid-area: addon;
       border-left: 1px solid var(--gray-soft-dark);
-      &.is-btn:hover {
-        cursor: pointer;
-        filter: brightness(90%);
+      &.is-btn {
+        color: var(--gray-soft-lightest);
+        background-color: var(--gray-hard-darkest);
+        &:hover {
+          cursor: pointer;
+          background-color: var(--gray-hard-light);
+        }
       }
     }
 
