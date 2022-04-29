@@ -584,13 +584,11 @@ body.container {
   & > img {
     border: 1px solid var(--gray-soft-dark);
     background-color: var(--gray-soft-lightest);
-    &:hover {
-      border-color: var(--secondary);
-      background-color: var(--secondary);
-    }
+    &:hover {  opacity: 0.65; }
   }
   & > a {
-    &:hover { box-shadow: 0 0 0 1px var(--main); }
+    transition: transform 200ms ease-in-out;
+    &:hover { transform: translateY(-4px); }
     img {
       max-width: 100%;
       height: inherit;
