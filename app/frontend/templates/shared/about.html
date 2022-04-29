@@ -20,16 +20,16 @@
       <p ng-show="privacyPolicy.value">
         <a ui-sref="app.public.privacy" translate>{{ 'app.public.about.privacy_policy' }}</a>
       </p>
-      <div class="b-t m-t-xl">
+    </div>
+
+    <div class="col-sm-offset-0 col-md-offset-0 col-lg-offset-1 col-sm-4 col-md-4" ng-show="aboutContacts.value">
+      <h2 class="about-title-aside" translate>{{ 'app.public.about.your_fablab_s_contacts' }}</h2>
+      <span ng-bind-html="aboutContacts.value"></span>
+      <div class="m-t-xl">
         <h2 translate>{{ 'app.public.home.follow_us' }}</h2>
         <!-- TODO: get fablab's social networks -->
         <socials />
       </div>
-    </div>
-
-    <div class="col-sm-offset-0 col-md-offset-0 col-lg-offset-1 col-sm-4 col-md-4" ng-show="aboutContacts.value">
-      <h2 class="about-title-aside text-u-c" translate>{{ 'app.public.about.your_fablab_s_contacts' }}</h2>
-      <span ng-bind-html="aboutContacts.value"></span>
     </div>
   </div>
 </div>
