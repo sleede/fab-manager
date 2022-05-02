@@ -60,7 +60,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
       .catch((error) => { onError(error); });
   };
 
-  const userNetworks = new UserLib(user).getSocialNetworks(user);
+  const userNetworks = new UserLib(user).getUserSocialNetworks(user);
 
   return (
     <form className={`user-profile-form user-profile-form--${size} ${className}`} onSubmit={handleSubmit(onSubmit)}>
