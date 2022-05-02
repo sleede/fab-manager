@@ -2,6 +2,7 @@
 
 ## next deploy
 
+- Support for OpenID Connect in Sign-Sign-On authentication providers
 - No longer needed to recompile the assets when switching the authentication provider
 - Updated the documentation about the minimum docker version
 - Updated nodejs version to 16.13.2 for dev environment, to reflect production version
