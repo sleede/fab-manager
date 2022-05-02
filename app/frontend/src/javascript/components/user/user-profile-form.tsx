@@ -11,6 +11,7 @@ import { GenderInput } from './gender-input';
 import { ChangePassword } from './change-password';
 import { PasswordInput } from './password-input';
 import { FormSwitch } from '../form/form-switch';
+import { FormRichText } from '../form/form-rich-text';
 
 declare const Application: IApplication;
 
@@ -24,6 +25,10 @@ interface UserProfileFormProps {
 
 export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, user, className, onError }) => {
   const { t } = useTranslation('shared');
+
+  // regular expression to validate the the input fields
+  const phoneRegex = /^((00|\+)[0-9]{2,3})?[0-9]{4,14}$/;
+  const urlRegex = /^(https?:\/\/)([\da-z.-]+)\.([-a-z0-9.]{2,30})([/\w .-]*)*\/?$/;
 
   const { handleSubmit, register, control, formState } = useForm<User>({ defaultValues: { ...user } });
   const output = useWatch<User>({ control });
@@ -67,7 +72,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
                        register={register}
                        rules={{
                          pattern: {
-                           value: /^((00|\+)[0-9]{2,3})?[0-9]{4,14}$/,
+                           value: phoneRegex,
                            message: t('app.shared.user_profile_form.phone_number_invalid')
                          }
                        }}
@@ -133,6 +138,30 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
         </div>
         <div className="profile-data">
           <h4>{t('app.shared.user_profile_form.profile_data')}</h4>
+          <div className="website-job">
+            <FormInput id="profile_attributes.website"
+                       register={register}
+                       rules={{
+                         pattern: {
+                           value: urlRegex,
+                           message: t('app.shared.user_profile_form.website_invalid')
+                         }
+                       }}
+                       placeholder="https://www.example.com"
+                       formState={formState}
+                       label={t('app.shared.user_profile_form.website')} />
+            <FormInput id="profile_attributes.job"
+                       register={register}
+                       label={t('app.shared.user_profile_form.job')} />
+          </div>
+          <div className="interests-CAD">
+            <FormRichText control={control}
+                          id="profile_attributes.interest"
+                          label={t('app.shared.user_profile_form.interests')} />
+            <FormRichText control={control}
+                          id="profile_attributes.software_mastered"
+                          label={t('app.shared.user_profile_form.CAD_softwares_mastered')} />
+          </div>
         </div>
         <div className="preferences-data">
           <h4>{t('app.shared.user_profile_form.preferences_data')}</h4>
@@ -144,6 +173,9 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
                       id="is_allow_newsletter"
                       label={t('app.shared.user_profile_form.allow_newsletter')}
                       tooltip={t('app.shared.user_profile_form.allow_newsletter_help')} />
+        </div>
+        <div>
+          <button type="submit">GO</button>
         </div>
       </div>
     </form>

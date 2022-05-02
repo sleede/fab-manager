@@ -3,11 +3,11 @@ import { useTranslation } from 'react-i18next';
 import PlanCategoryAPI from '../../api/plan-category';
 import { PlanCategory } from '../../models/plan-category';
 import { Loader } from '../base/loader';
-import { useForm, Controller, SubmitHandler } from 'react-hook-form';
-import { FabTextEditor } from '../base/text-editor/fab-text-editor';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import { FormInput } from '../form/form-input';
 import { FabAlert } from '../base/fab-alert';
 import { FabButton } from '../base/fab-button';
+import { FormRichText } from '../form/form-rich-text';
 
 interface PlanCategoryFormProps {
   action: 'create' | 'update',
@@ -47,9 +47,7 @@ const PlanCategoryFormComponent: React.FC<PlanCategoryFormProps> = ({ action, ca
     <form onSubmit={handleSubmit(onSubmit)}>
       <FormInput id='name' register={register} rules={{ required: 'true' }} label={t('app.admin.manage_plan_category.name')} />
 
-      <Controller name="description" control={control} render={({ field: { onChange, value } }) =>
-        <FabTextEditor label={t('app.admin.manage_plan_category.description')} onChange={onChange} content={value} limit={100} />
-      } />
+      <FormRichText control={control} id="description" label={t('app.admin.manage_plan_category.description')} limit={100} />
 
       <FormInput id='weight' register={register} type='number' label={t('app.admin.manage_plan_category.significance')} />
       <FabAlert level="info" className="significance-info">

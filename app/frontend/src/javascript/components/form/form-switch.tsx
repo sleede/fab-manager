@@ -38,7 +38,7 @@ export const FormSwitch = <TFieldValues, TContext extends object>({ id, label, t
                         onChange(val);
                         onChangeCb(val);
                       }}
-                      checked={value as boolean}
+                      checked={value as boolean || false}
                       height={19}
                       width={40}
                       ref={ref}
