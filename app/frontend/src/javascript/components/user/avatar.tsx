@@ -16,13 +16,13 @@ export const Avatar: React.FC<AvatarProps> = ({ user, className }) => {
    * Check if the provided user has a configured avatar
    */
   const hasAvatar = (): boolean => {
-    return !!user?.profile?.user_avatar?.attachment_url;
+    return !!user?.profile_attributes?.user_avatar_attributes?.attachment_url;
   };
 
   return (
     <div className={`avatar ${className || ''}`}>
       {!hasAvatar() && <img src={noAvatar} alt="avatar placeholder"/>}
-      {hasAvatar() && <img src={user.profile.user_avatar.attachment_url} alt="user's avatar"/>}
+      {hasAvatar() && <img src={user.profile_attributes.user_avatar_attributes.attachment_url} alt="user's avatar"/>}
     </div>
   );
 };

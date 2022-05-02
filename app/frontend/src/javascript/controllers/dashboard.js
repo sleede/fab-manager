@@ -70,7 +70,7 @@ Application.Controllers.controller('DashboardController', ['$scope', 'memberProm
     const filterNetworks = function () {
       const networks = [];
       for (const network of Array.from(SocialNetworks)) {
-        if ($scope.user.profile[network] && ($scope.user.profile[network].length > 0)) {
+        if ($scope.user.profile_attributes[network] && ($scope.user.profile_attributes[network].length > 0)) {
           networks.push(network);
         }
       }

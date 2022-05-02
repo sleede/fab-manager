@@ -569,14 +569,14 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
       });
       // on tour end, save the status in database
       uitour.on('ended', function () {
-        if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile.tours.indexOf('members') < 0) {
+        if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile_attributes.tours.indexOf('members') < 0) {
           Member.completeTour({ id: $scope.currentUser.id }, { tour: 'members' }, function (res) {
-            $scope.currentUser.profile.tours = res.tours;
+            $scope.currentUser.profile_attributes.tours = res.tours;
           });
         }
       });
       // if the user has never seen the tour, show him now
-      if (settingsPromise.feature_tour_display !== 'manual' && $scope.currentUser.profile.tours.indexOf('members') < 0) {
+      if (settingsPromise.feature_tour_display !== 'manual' && $scope.currentUser.profile_attributes.tours.indexOf('members') < 0) {
         uitour.start();
       }
     };
@@ -896,7 +896,7 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
       CSRF.setMetaTags();
 
       // init the birthdate to JS object
-      $scope.user.statistic_profile.birthday = moment($scope.user.statistic_profile.birthday).toDate();
+      $scope.user.statistic_profile_attributes.birthday = moment($scope.user.statistic_profile_attributes.birthday).toDate();
 
       // the user subscription
       if (($scope.user.subscribed_plan != null) && ($scope.user.subscription != null)) {
@@ -946,18 +946,18 @@ Application.Controllers.controller('NewMemberController', ['$scope', '$state', '
     // Default member's profile parameters
     $scope.user = {
       plan_interval: '',
-      invoicing_profile: {},
-      statistic_profile: {}
+      invoicing_profile_attributes: {},
+      statistic_profile_attributes: {}
     };
 
     // Callback when the admin check/uncheck the box telling that the new user is an organization.
     // Disable or enable the organization fields in the form, accordingly
     $scope.toggleOrganization = function () {
       if ($scope.user.organization) {
-        if (!$scope.user.invoicing_profile) { $scope.user.invoicing_profile = {}; }
-        $scope.user.invoicing_profile.organization = {};
+        if (!$scope.user.invoicing_profile_attributes) { $scope.user.invoicing_profile_attributes = {}; }
+        $scope.user.invoicing_profile_attributes.organization_attributes = {};
       } else {
-        $scope.user.invoicing_profile.organization = undefined;
+        $scope.user.invoicing_profile_attributes.organization_attributes = undefined;
       }
     };
 

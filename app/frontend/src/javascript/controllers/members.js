@@ -184,8 +184,8 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
           )
         );
       } else {
-        $scope.currentUser.profile.user_avatar = content.profile.user_avatar;
-        Auth._currentUser.profile.user_avatar = content.profile.user_avatar;
+        $scope.currentUser.profile_attributes.user_avatar_attributes = content.profile_attributes.user_avatar_attributes;
+        Auth._currentUser.profile_attributes.user_avatar_attributes = content.profile_attributes.user_avatar_attributes;
         $scope.currentUser.name = content.name;
         Auth._currentUser.name = content.name;
         $scope.currentUser = content;
@@ -292,7 +292,7 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
       CSRF.setMetaTags();
 
       // init the birth date to JS object
-      $scope.user.statistic_profile.birthday = moment($scope.user.statistic_profile.birthday).toDate();
+      $scope.user.statistic_profile_attributes.birthday = moment($scope.user.statistic_profile_attributes.birthday).toDate();
 
       if ($scope.activeProvider.providable_type !== 'DatabaseProvider') {
         $scope.preventPassword = true;
@@ -341,7 +341,7 @@ Application.Controllers.controller('ShowProfileController', ['$scope', 'memberPr
   const filterNetworks = function () {
     const networks = [];
     for (const network of Array.from(SocialNetworks)) {
-      if ($scope.user.profile[network] && ($scope.user.profile[network].length > 0)) {
+      if ($scope.user.profile_attributes[network] && ($scope.user.profile_attributes[network].length > 0)) {
         networks.push(network);
       }
     }

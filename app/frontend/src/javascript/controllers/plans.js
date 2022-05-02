@@ -151,8 +151,8 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
      * @return {string} 'male' or 'female'
      */
     $scope.getGender = function (user) {
-      if (user && user.statistic_profile) {
-        if (user.statistic_profile.gender === 'true') { return 'male'; } else { return 'female'; }
+      if (user && user.statistic_profile_attributes) {
+        if (user.statistic_profile_attributes.gender === 'true') { return 'male'; } else { return 'female'; }
       } else { return 'other'; }
     };
 
