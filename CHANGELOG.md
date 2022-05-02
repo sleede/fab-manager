@@ -4,7 +4,7 @@
 
 ## v5.3.13 2022 May 02
 
-- Fix a bug: With PayZen, when there was more than one transaction (for ex: 1 failed atempt + 1 successful atemp), the order was not considered PAID because only the first transaction was checked (https://app.clickup.com/t/28zvhwy)
+- Fix a bug: With PayZen, when there was more than one transaction (for ex: 1 failed atempt + 1 successful atemp), the order was not considered PAID because only the first transaction was checked
 
 ## v5.3.12 2022 April 20
 
