@@ -50,7 +50,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
   return (
     <form className={`user-profile-form user-profile-form--${size} ${className}`} onSubmit={handleSubmit(onSubmit)}>
       <div className="avatar-group">
-        <Avatar user={user}/>
+        <Avatar user={user} />
       </div>
       <div className="fields-group">
         <div className="personnal-data">
