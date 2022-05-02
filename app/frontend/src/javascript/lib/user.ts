@@ -23,7 +23,7 @@ export default class UserLib {
   /**
    * Filter social networks from the user's profile
    */
-  getSocialNetworks = (customer: User): {name: string, url: string, active: boolean}[] => {
+  getUserSocialNetworks = (customer: User): {name: string, url: string}[] => {
     const userNetworks = [];
     const supportedNetworks = ['facebook', 'twitter', 'viadeo', 'linkedin', 'instagram', 'youtube', 'vimeo', 'dailymotion', 'github', 'echosciences', 'pinterest', 'lastfm', 'flickr'];
 

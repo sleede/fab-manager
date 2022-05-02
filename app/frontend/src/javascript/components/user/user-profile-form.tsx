@@ -39,7 +39,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
     console.log(action, data);
   };
 
-  const userNetworks = new UserLib(user).getSocialNetworks(user);
+  const userNetworks = new UserLib(user).getUserSocialNetworks(user);
 
   return (
     <form className={`user-profile-form user-profile-form--${size} ${className}`} onSubmit={handleSubmit(onSubmit)}>
@@ -111,8 +111,8 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
         <div className='account-networks'>
           <h4>{t('app.shared.user_profile_form.account_networks')}</h4>
           <EditSocials register={register}
-                      networks={userNetworks}
-                      resetField={resetField} />
+                       networks={userNetworks}
+                       resetField={resetField} />
         </div>
         <div className="organization-data">
           <h4>{t('app.shared.user_profile_form.organization_data')}</h4>
@@ -139,6 +139,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
                        label={t('app.shared.user_profile_form.organization_address')} />
           </div>}
         </div>
+        <button type="submit">go</button>
       </div>
     </form>
   );

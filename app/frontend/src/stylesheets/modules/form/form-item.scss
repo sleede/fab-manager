@@ -12,6 +12,7 @@
     p {
       @include text-sm;
       margin: 0;
+      &::first-letter { text-transform: uppercase; }
     }
 
     .item-tooltip {

@@ -130,7 +130,20 @@ class Setting < ApplicationRecord
                              extended_prices_in_same_day
                              public_registrations
                              accounting_Pack_code
-                             accounting_Pack_label] }
+                             accounting_Pack_label
+                             socials_facebook
+                             socials_twitter
+                             socials_viadeo
+                             socials_linkedin
+                             socials_instagram
+                             socials_youtube
+                             socials_vimeo
+                             socials_dailymotion
+                             socials_github
+                             socials_echosciences
+                             socials_pinterest
+                             socials_lastfm
+                             socials_flickr] }
   # WARNING: when adding a new key, you may also want to add it in:
   # - config/locales/en.yml#settings
   # - app/frontend/src/javascript/models/setting.ts#SettingName
