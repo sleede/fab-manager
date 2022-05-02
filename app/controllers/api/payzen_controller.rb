@@ -65,7 +65,7 @@ class API::PayzenController < API::PaymentsController
 
     cart = shopping_cart
 
-    if order['answer']['transactions'].first['status'] == 'PAID'
+    if order['answer']['transactions'].any? { |transaction| transaction['status'] == 'PAID' }
       render on_payment_success(params[:order_id], cart)
     else
       render json: order['answer'], status: :unprocessable_entity
