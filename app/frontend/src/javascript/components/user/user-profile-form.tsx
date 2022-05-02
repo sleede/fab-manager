@@ -1,6 +1,7 @@
 import React from 'react';
 import { react2angular } from 'react2angular';
 import { SubmitHandler, useForm, useWatch } from 'react-hook-form';
+import { isNil as _isNil } from 'lodash';
 import { User } from '../../models/user';
 import { IApplication } from '../../models/application';
 import { Loader } from '../base/loader';
@@ -33,7 +34,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
   const { handleSubmit, register, control, formState } = useForm<User>({ defaultValues: { ...user } });
   const output = useWatch<User>({ control });
 
-  const [isOrganization, setIsOrganization] = React.useState<boolean>(user.invoicing_profile.organization !== null);
+  const [isOrganization, setIsOrganization] = React.useState<boolean>(!_isNil(user.invoicing_profile_attributes.organization_attributes));
 
   /**
    * Callback triggered when the form is submitted: process with the user creation or update.
@@ -115,7 +116,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
                       id="invoicing_profile_attributes.organization"
                       label={t('app.shared.user_profile_form.declare_organization')}
                       tooltip={t('app.shared.user_profile_form.declare_organization_help')}
-                      defaultValue={user.invoicing_profile.organization !== null}
+                      defaultValue={isOrganization}
                       onChange={setIsOrganization} />
           {isOrganization && <div className="organization-fields">
             <FormInput id="invoicing_profile_attributes.organization_attributes.id"

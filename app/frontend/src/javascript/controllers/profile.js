@@ -91,8 +91,8 @@ Application.Controllers.controller('CompleteProfileController', ['$scope', '$roo
           });
         });
       } else {
-        $scope.user.profile.user_avatar = content.profile.user_avatar;
-        Auth._currentUser.profile.user_avatar = content.profile.user_avatar;
+        $scope.user.profile_attributes.user_avatar_attributes = content.profile_attributes.user_avatar_attributes;
+        Auth._currentUser.profile_attributes.user_avatar_attributes = content.profile_attributes.user_avatar_attributes;
         $scope.user.name = content.name;
         Auth._currentUser.name = content.name;
         $scope.user = content;
@@ -220,7 +220,7 @@ Application.Controllers.controller('CompleteProfileController', ['$scope', '$roo
       CSRF.setMetaTags();
 
       // init the birth date to JS object
-      $scope.user.statistic_profile.birthday = $scope.user.statistic_profile.birthday ? moment($scope.user.statistic_profile.birthday).toDate() : undefined;
+      $scope.user.statistic_profile_attributes.birthday = $scope.user.statistic_profile_attributes.birthday ? moment($scope.user.statistic_profile_attributes.birthday).toDate() : undefined;
 
       // bind fields protection with sso fields
       angular.forEach(activeProviderPromise.mapping, function (map) { $scope.preventField[map] = true; });

@@ -740,14 +740,14 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       });
       // on tour end, save the status in database
       uitour.on('ended', function () {
-        if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile.tours.indexOf('pricing') < 0) {
+        if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile_attributes.tours.indexOf('pricing') < 0) {
           Member.completeTour({ id: $scope.currentUser.id }, { tour: 'pricing' }, function (res) {
-            $scope.currentUser.profile.tours = res.tours;
+            $scope.currentUser.profile_attributes.tours = res.tours;
           });
         }
       });
       // if the user has never seen the tour, show him now
-      if (settingsPromise.feature_tour_display !== 'manual' && $scope.currentUser.profile.tours.indexOf('pricing') < 0) {
+      if (settingsPromise.feature_tour_display !== 'manual' && $scope.currentUser.profile_attributes.tours.indexOf('pricing') < 0) {
         uitour.start();
       }
     };

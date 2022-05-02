@@ -19,7 +19,7 @@ export interface User {
   mapped_from_sso?: string[],
   password?: string,
   password_confirmation?: string,
-  profile: {
+  profile_attributes: {
     id: number,
     first_name: string,
     last_name: string,
@@ -43,27 +43,27 @@ export interface User {
     pinterest: string,
     lastfm: string,
     flickr: string,
-    user_avatar: {
+    user_avatar_attributes: {
       id: number,
       attachment_url: string
     }
   },
-  invoicing_profile: {
+  invoicing_profile_attributes: {
     id: number,
-    address: {
+    address_attributes: {
       id: number,
       address: string
     },
-    organization: {
+    organization_attributes: {
       id: number,
       name: string,
-      address: {
+      address_attributes: {
         id: number,
         address: string
       }
     }
   },
-  statistic_profile: {
+  statistic_profile_attributes: {
     id: number,
     gender: string,
     birthday: TDateISO
