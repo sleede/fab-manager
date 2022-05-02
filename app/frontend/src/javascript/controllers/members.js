@@ -283,6 +283,16 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
       growl.error(message);
     };
 
+    /**
+     * Callback triggered when the user was successfully updated
+     * @param user {object} the updated user
+     */
+    $scope.onSuccess = function (user) {
+      $scope.currentUser = _.cloneDeep(user);
+      Auth._currentUser = _.cloneDeep(user);
+      $rootScope.currentUser = _.cloneDeep(user);
+    };
+
     /* PRIVATE SCOPE */
 
     /**
