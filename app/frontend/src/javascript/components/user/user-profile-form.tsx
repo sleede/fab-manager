@@ -13,6 +13,7 @@ import { ChangePassword } from './change-password';
 import { PasswordInput } from './password-input';
 import { FormSwitch } from '../form/form-switch';
 import { FormRichText } from '../form/form-rich-text';
+import MemberAPI from '../../api/member';
 
 declare const Application: IApplication;
 
@@ -22,9 +23,10 @@ interface UserProfileFormProps {
   user: User,
   className?: string,
   onError: (message: string) => void,
+  onSuccess: (user: User) => void,
 }
 
-export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, user, className, onError }) => {
+export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, user, className, onError, onSuccess }) => {
   const { t } = useTranslation('shared');
 
   // regular expression to validate the the input fields
@@ -40,7 +42,9 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
    * Callback triggered when the form is submitted: process with the user creation or update.
    */
   const onSubmit: SubmitHandler<User> = (data: User) => {
-    console.log(action, data);
+    MemberAPI[action](data)
+      .then(res => { onSuccess(res); })
+      .catch((error) => { onError(error); });
   };
 
   return (
@@ -195,4 +199,4 @@ const UserProfileFormWrapper: React.FC<UserProfileFormProps> = (props) => {
   );
 };
 
-Application.Components.component('userProfileForm', react2angular(UserProfileFormWrapper, ['action', 'size', 'user', 'className', 'onError']));
+Application.Components.component('userProfileForm', react2angular(UserProfileFormWrapper, ['action', 'size', 'user', 'className', 'onError', 'onSuccess']));

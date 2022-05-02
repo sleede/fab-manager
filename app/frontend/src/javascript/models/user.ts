@@ -87,3 +87,13 @@ export interface User {
   machine_credits: Array<{machine_id: number, hours_used: number}>,
   last_sign_in_at: TDateISO
 }
+
+type OrderingKey = 'last_name' | 'first_name' | 'email' | 'phone' | 'group' | 'plan' | 'id'
+
+export interface UserIndexFilter {
+  search?: string,
+  filter?: 'inactive_for_3_years' | 'not_confirmed',
+  order_by?: OrderingKey | `-${OrderingKey}`,
+  page?: number,
+  size?: number
+}
