@@ -2,6 +2,8 @@
 
 ## next deploy
 
+- when generating an avoir, the option "by_wallet" is not present anymore if wallet module is off
+
 ## v5.3.13 2022 May 02
 
 - Fix a bug: With PayZen, when there was more than one transaction (for ex: 1 failed atempt + 1 successful atemp), the order was not considered PAID because only the first transaction was checked

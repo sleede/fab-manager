@@ -1198,8 +1198,11 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
       { name: _t('app.admin.invoices.by_cash'), value: 'cash' },
       { name: _t('app.admin.invoices.by_cheque'), value: 'cheque' },
       { name: _t('app.admin.invoices.by_transfer'), value: 'transfer' },
-      { name: _t('app.admin.invoices.by_wallet'), value: 'wallet' }
     ];
+
+    if (Fablab.walletModule) {
+      $scope.avoirModes.push({ name: _t('app.admin.invoices.by_wallet'), value: 'wallet' });
+    }
 
     // If a subscription was took with the current invoice, should it be canceled or not
     $scope.subscriptionExpireOptions = {};
