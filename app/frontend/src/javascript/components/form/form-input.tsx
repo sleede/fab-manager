@@ -11,7 +11,8 @@ interface FormInputProps<TFieldValues, TInputType> extends FormComponent<TFieldV
   addOn?: ReactNode,
   addOnClassName?: string,
   debounce?: number,
-  type?: 'text' | 'date' | 'password' | 'url' | 'time' | 'tel' | 'search' | 'number' | 'month' | 'email' | 'datetime-local' | 'week' | 'hidden',
+  type?: 'text' | 'date' | 'password' | 'url' | 'time' | 'tel' | 'search' | 'number' | 'month' | 'email' | 'datetime-local' | 'week' | 'hidden' | 'file',
+  accept?: string,
   defaultValue?: TInputType,
   placeholder?: string,
   step?: number | 'any',
@@ -21,7 +22,7 @@ interface FormInputProps<TFieldValues, TInputType> extends FormComponent<TFieldV
 /**
  * This component is a template for an input component to use within React Hook Form
  */
-export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, register, label, tooltip, defaultValue, icon, className, rules, readOnly, disabled, type, addOn, addOnClassName, placeholder, error, warning, formState, step, onChange, debounce }: FormInputProps<TFieldValues, TInputType>) => {
+export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, register, label, tooltip, defaultValue, icon, className, rules, readOnly, disabled, type, addOn, addOnClassName, placeholder, error, warning, formState, step, onChange, debounce, accept }: FormInputProps<TFieldValues, TInputType>) => {
   /**
    * Debounced (ie. temporised) version of the 'on change' callback.
    */
@@ -64,7 +65,8 @@ export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, re
           step={step}
           disabled={disabled}
           readOnly={readOnly}
-          placeholder={placeholder} />
+          placeholder={placeholder}
+          accept={accept} />
         {addOn && <span className={`addon ${addOnClassName || ''}`}>{addOn}</span>}
     </AbstractFormItem>
   );
