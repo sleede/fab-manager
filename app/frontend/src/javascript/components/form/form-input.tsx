@@ -58,6 +58,7 @@ export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, re
           {...register(id as FieldPath<TFieldValues>, {
             ...rules,
             valueAsNumber: type === 'number',
+            valueAsDate: type === 'date',
             value: defaultValue as FieldPathValue<TFieldValues, FieldPath<TFieldValues>>,
             onChange: (e) => { handleChange(e); }
           })}

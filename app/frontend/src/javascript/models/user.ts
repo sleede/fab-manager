@@ -45,7 +45,10 @@ export interface User {
     flickr: string,
     user_avatar_attributes: {
       id: number,
-      attachment_url: string
+      attachment?: File,
+      attachment_url?: string,
+      attachment_files: FileList,
+      _destroy?: boolean
     }
   },
   invoicing_profile_attributes: {
