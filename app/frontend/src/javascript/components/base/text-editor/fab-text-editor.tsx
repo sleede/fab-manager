@@ -1,9 +1,6 @@
-import React from 'react';
+import React, { forwardRef, RefObject, useImperativeHandle, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { react2angular } from 'react2angular';
-import { IApplication } from '../../../models/application';
-import { Loader } from '../loader';
-import { useEditor, EditorContent } from '@tiptap/react';
+import { useEditor, EditorContent, Editor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Placeholder from '@tiptap/extension-placeholder';
 import CharacterCount from '@tiptap/extension-character-count';
@@ -13,8 +10,6 @@ import Iframe from './iframe';
 import Image from '@tiptap/extension-image';
 import { MenuBar } from './menu-bar';
 import { WarningOctagon } from 'phosphor-react';
-
-declare const Application: IApplication;
 
 interface FabTextEditorProps {
   label?: string,
@@ -28,13 +23,25 @@ interface FabTextEditorProps {
   error?: string
 }
 
+export interface FabTextEditorRef {
+  focus: () => void
+}
+
 /**
  * This component is a WYSIWYG text editor
  */
-export const FabTextEditor: React.FC<FabTextEditorProps> = ({ label, paragraphTools, content, limit = 400, video, image, onChange, placeholder, error }) => {
+export const FabTextEditor: React.ForwardRefRenderFunction<FabTextEditorRef, FabTextEditorProps> = ({ label, paragraphTools, content, limit = 400, video, image, onChange, placeholder, error }, ref: RefObject<FabTextEditorRef>) => {
   const { t } = useTranslation('shared');
   const placeholderText = placeholder || t('app.shared.text_editor.text_placeholder');
   // TODO: Add ctrl+click on link to visit
+
+  const editorRef: React.MutableRefObject<Editor | null> = useRef(null);
+  // the methods in useImperativeHandle are exposed to the parent component
+  useImperativeHandle(ref, () => ({
+    focus () {
+      focusEditor();
+    }
+  }), []);
 
   // Setup the editor
   // Extensions add functionalities to the editor (Bold, Italic…)
@@ -69,9 +76,16 @@ export const FabTextEditor: React.FC<FabTextEditorProps> = ({ label, paragraphTo
     }
   });
 
+  /**
+   * Callback triggered when the label is clicked: we want to focus the text edition zone
+   */
   const focusEditor = () => {
-    editor.commands.focus('start');
+    editorRef.current?.commands?.focus();
   };
+
+  // bind the editor to the ref, once it is ready
+  if (!editor) return null;
+  editorRef.current = editor;
 
   return (
     <>
@@ -93,12 +107,4 @@ export const FabTextEditor: React.FC<FabTextEditorProps> = ({ label, paragraphTo
   );
 };
 
-const FabTextEditorWrapper: React.FC<FabTextEditorProps> = ({ label, paragraphTools, content, limit, video, image, placeholder, error }) => {
-  return (
-    <Loader>
-      <FabTextEditor label={label} paragraphTools={paragraphTools} content={content} limit={limit} video={video} image={image} placeholder={placeholder} error={error} />
-    </Loader>
-  );
-};
-
-Application.Components.component('fabTextEditor', react2angular(FabTextEditorWrapper, ['label', 'paragraphTools', 'content', 'limit', 'video', 'image', 'placeholder', 'error']));
+export default forwardRef(FabTextEditor);
