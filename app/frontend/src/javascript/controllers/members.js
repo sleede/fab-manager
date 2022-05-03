@@ -291,6 +291,7 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
       $scope.currentUser = _.cloneDeep(user);
       Auth._currentUser = _.cloneDeep(user);
       $rootScope.currentUser = _.cloneDeep(user);
+      growl.success(_t('app.logged.dashboard.settings.your_profile_has_been_successfully_updated'));
     };
 
     /* PRIVATE SCOPE */
