@@ -1,5 +1,5 @@
 import { Plan } from './plan';
-import { TDateISO } from '../typings/date-iso';
+import { TDateISO, TDateISODate } from '../typings/date-iso';
 
 export enum UserRole {
   Member = 'member',
@@ -69,7 +69,7 @@ export interface User {
   statistic_profile_attributes: {
     id: number,
     gender: string,
-    birthday: TDateISO
+    birthday: TDateISODate
   },
   subscribed_plan: Plan,
   subscription: {

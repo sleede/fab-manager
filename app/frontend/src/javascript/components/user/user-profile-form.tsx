@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { react2angular } from 'react2angular';
 import { SubmitHandler, useForm, useWatch } from 'react-hook-form';
 import { isNil as _isNil } from 'lodash';
@@ -14,6 +14,8 @@ import { FormSwitch } from '../form/form-switch';
 import { FormRichText } from '../form/form-rich-text';
 import MemberAPI from '../../api/member';
 import { AvatarInput } from './avatar-input';
+import moment from 'moment';
+import { TDateISODate } from '../../typings/date-iso';
 
 declare const Application: IApplication;
 
@@ -35,6 +37,14 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
 
   const { handleSubmit, register, control, formState, setValue } = useForm<User>({ defaultValues: { ...user } });
   const output = useWatch<User>({ control });
+
+  useEffect(() => {
+    // this is a workaround needed because something in angular.js is transforming the YYY-MM-DD string to a Date Object
+    setValue(
+      'statistic_profile_attributes.birthday',
+      moment(user.statistic_profile_attributes.birthday).format('YYYY-MM-DD') as TDateISODate
+    );
+  }, [user]);
 
   const [isOrganization, setIsOrganization] = React.useState<boolean>(!_isNil(user.invoicing_profile_attributes.organization_attributes));
 
