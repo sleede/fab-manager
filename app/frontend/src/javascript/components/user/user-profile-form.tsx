@@ -16,6 +16,7 @@ import MemberAPI from '../../api/member';
 import { AvatarInput } from './avatar-input';
 import moment from 'moment';
 import { TDateISODate } from '../../typings/date-iso';
+import { FabButton } from '../base/fab-button';
 
 declare const Application: IApplication;
 
@@ -193,8 +194,8 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
                       label={t('app.shared.user_profile_form.allow_newsletter')}
                       tooltip={t('app.shared.user_profile_form.allow_newsletter_help')} />
         </div>
-        <div>
-          <button type="submit">GO</button>
+        <div className="main-actions">
+          <FabButton type="submit" className="submit-button">{t('app.shared.user_profile_form.save')}</FabButton>
         </div>
       </div>
     </form>

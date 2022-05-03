@@ -122,12 +122,8 @@
               <section class="panel panel-default bg-light m">
                 <div class="panel-body m-r">
                   <user-profile-form user="user" action="'update'" on-error="onError" on-success="onSuccess" />
-                  <ng-include src="'/shared/_member_form.html'"></ng-include>
                 </div>   <!-- ./panel-body  -->
               </section>
-          </div>
-          <div class="panel-footer no-padder">
-            <input type="submit" value="{{ 'app.logged.dashboard.settings.confirm_changes' | translate }}" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="userForm.$invalid"/>
           </div>
         </form>
       </div>

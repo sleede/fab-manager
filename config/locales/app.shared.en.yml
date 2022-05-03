@@ -67,6 +67,7 @@ en:
         used_for_invoicing: "This data will be used for billing purposes"
         used_for_reservation: "This data will be used in case of change on one of your bookings"
         used_for_profile: "This data will only be displayed on your profile"
+        save: "Save"
       gender_input:
         man: "Man"
         woman: "Woman"
