@@ -7,13 +7,13 @@ import { IApplication } from '../../models/application';
 import { Loader } from '../base/loader';
 import { FormInput } from '../form/form-input';
 import { useTranslation } from 'react-i18next';
-import { Avatar } from './avatar';
 import { GenderInput } from './gender-input';
 import { ChangePassword } from './change-password';
 import { PasswordInput } from './password-input';
 import { FormSwitch } from '../form/form-switch';
 import { FormRichText } from '../form/form-rich-text';
 import MemberAPI from '../../api/member';
+import { AvatarInput } from './avatar-input';
 
 declare const Application: IApplication;
 
@@ -33,7 +33,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
   const phoneRegex = /^((00|\+)[0-9]{2,3})?[0-9]{4,14}$/;
   const urlRegex = /^(https?:\/\/)([\da-z.-]+)\.([-a-z0-9.]{2,30})([/\w .-]*)*\/?$/;
 
-  const { handleSubmit, register, control, formState } = useForm<User>({ defaultValues: { ...user } });
+  const { handleSubmit, register, control, formState, setValue } = useForm<User>({ defaultValues: { ...user } });
   const output = useWatch<User>({ control });
 
   const [isOrganization, setIsOrganization] = React.useState<boolean>(!_isNil(user.invoicing_profile_attributes.organization_attributes));
@@ -50,7 +50,11 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
   return (
     <form className={`user-profile-form user-profile-form--${size} ${className}`} onSubmit={handleSubmit(onSubmit)}>
       <div className="avatar-group">
-        <Avatar user={user} />
+        <AvatarInput currentAvatar={output.profile_attributes.user_avatar_attributes?.attachment_url}
+                     userName={`${output.profile_attributes.first_name} ${output.profile_attributes.last_name}`}
+                     register={register}
+                     setValue={setValue}
+                     size={size} />
       </div>
       <div className="fields-group">
         <div className="personnal-data">
