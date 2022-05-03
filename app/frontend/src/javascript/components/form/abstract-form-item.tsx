@@ -10,13 +10,14 @@ export interface AbstractFormItemProps<TFieldValues> extends PropsWithChildren<A
   className?: string,
   disabled?: boolean,
   readOnly?: boolean
+  onLabelClick?: (event: React.MouseEvent<HTMLLabelElement, MouseEvent>) => void,
 }
 
 /**
  * This abstract component should not be used directly.
  * Other forms components that are intended to be used with react-hook-form must extend this component.
  */
-export const AbstractFormItem = <TFieldValues extends FieldValues>({ id, label, tooltip, className, disabled, readOnly, error, warning, rules, formState, children }: AbstractFormItemProps<TFieldValues>) => {
+export const AbstractFormItem = <TFieldValues extends FieldValues>({ id, label, tooltip, className, disabled, readOnly, error, warning, rules, formState, onLabelClick, children }: AbstractFormItemProps<TFieldValues>) => {
   const [isDirty, setIsDirty] = useState(false);
   const [fieldError, setFieldError] = useState(error);
 
@@ -40,8 +41,18 @@ export const AbstractFormItem = <TFieldValues extends FieldValues>({ id, label, 
     `${disabled ? 'is-disabled' : ''}`
   ].join(' ');
 
+  /**
+   * This function is called when the label is clicked.
+   * It is used to focus the input.
+   */
+  function handleLabelClick (event: React.MouseEvent<HTMLLabelElement, MouseEvent>) {
+    if (typeof onLabelClick === 'function') {
+      onLabelClick(event);
+    }
+  }
+
   return (
-    <label className={classNames}>
+    <label className={classNames} onClick={handleLabelClick}>
       {label && <div className='form-item-header'>
         <p>{label}</p>
         {tooltip && <div className="item-tooltip">
