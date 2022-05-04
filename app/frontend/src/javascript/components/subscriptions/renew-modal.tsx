@@ -18,6 +18,7 @@ import { PaymentScheduleSummary } from '../payment-schedule/payment-schedule-sum
 import { PaymentSchedule } from '../../models/payment-schedule';
 import { LocalPaymentModal } from '../payment/local-payment/local-payment-modal';
 import { User } from '../../models/user';
+import { TDateISO } from '../../typings/date-iso';
 
 declare const Application: IApplication;
 
@@ -83,7 +84,7 @@ const RenewModal: React.FC<RenewModalProps> = ({ isOpen, toggleModal, subscripti
   /**
    * Return the formatted localized date for the given date
    */
-  const formatDateTime = (date: Date): string => {
+  const formatDateTime = (date: Date|TDateISO): string => {
     return t('app.admin.free_extend_modal.DATE_TIME', { DATE: FormatLib.date(date), TIME: FormatLib.time(date) });
   };
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FormControlledComponent } from '../../models/form-component';
 import { AbstractFormItem, AbstractFormItemProps } from './abstract-form-item';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
@@ -18,8 +18,17 @@ interface FormRichTextProps<TFieldValues, TContext extends object> extends FormC
 /**
  * This component is a rich-text editor to use with react-hook-form.
  */
-export const FormRichText = <TFieldValues extends FieldValues, TContext extends object>({ id, label, tooltip, className, control, valueDefault, error, warning, rules, disabled, formState, limit, paragraphTools, video, image }: FormRichTextProps<TFieldValues, TContext>) => {
+export const FormRichText = <TFieldValues extends FieldValues, TContext extends object>({ id, label, tooltip, className, control, valueDefault, error, warning, rules, disabled, readOnly, formState, limit, paragraphTools, video, image }: FormRichTextProps<TFieldValues, TContext>) => {
   const textEditorRef = React.useRef<FabTextEditorRef>();
+  const [isDisabled, setIsDisabled] = React.useState<boolean>(false);
+
+  useEffect(() => {
+    if (typeof disabled === 'function') {
+      setIsDisabled(disabled(id) || readOnly);
+    } else {
+      setIsDisabled(disabled || readOnly);
+    }
+  }, [disabled]);
 
   /**
    * Callback triggered when the user clicks to get the focus on the editor.
@@ -40,7 +49,14 @@ export const FormRichText = <TFieldValues extends FieldValues, TContext extends 
                   control={control}
                   defaultValue={valueDefault as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>}
                   render={({ field: { onChange, value } }) =>
-        <FabTextEditor onChange={onChange} content={value} limit={limit} paragraphTools={paragraphTools} video={video} image={image} ref={textEditorRef} />
+        <FabTextEditor onChange={onChange}
+                       content={value}
+                       limit={limit}
+                       paragraphTools={paragraphTools}
+                       video={video}
+                       image={image}
+                       readOnly={isDisabled}
+                       ref={textEditorRef} />
       } />
     </AbstractFormItem>
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Select from 'react-select';
 import { Controller, Path } from 'react-hook-form';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
@@ -26,6 +26,16 @@ type selectOption<TOptionValue> = { value: TOptionValue, label: string };
  * It is a multi-select component.
  */
 export const FormMultiSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, tooltip, className, control, placeholder, options, valuesDefault, error, rules, disabled, onChange, formState, readOnly, warning, expectedResult }: FormSelectProps<TFieldValues, TContext, TOptionValue>) => {
+  const [isDisabled, setIsDisabled] = React.useState<boolean>(false);
+
+  useEffect(() => {
+    if (typeof disabled === 'function') {
+      setIsDisabled(disabled(id) || readOnly);
+    } else {
+      setIsDisabled(disabled || readOnly);
+    }
+  }, [disabled]);
+
   /**
    * The following callback will trigger the onChange callback, if it was passed to this component,
    * when the selected option changes.
@@ -74,6 +84,7 @@ export const FormMultiSelect = <TFieldValues extends FieldValues, TContext exten
                               }}
                               placeholder={placeholder}
                               options={options}
+                              isDisabled={isDisabled}
                               isMulti />
                     } />
     </AbstractFormItem>

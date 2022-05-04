@@ -20,7 +20,8 @@ interface FabTextEditorProps {
   image?: boolean,
   onChange?: (content: string) => void,
   placeholder?: string,
-  error?: string
+  error?: string,
+  readOnly?: boolean,
 }
 
 export interface FabTextEditorRef {
@@ -30,7 +31,7 @@ export interface FabTextEditorRef {
 /**
  * This component is a WYSIWYG text editor
  */
-export const FabTextEditor: React.ForwardRefRenderFunction<FabTextEditorRef, FabTextEditorProps> = ({ label, paragraphTools, content, limit = 400, video, image, onChange, placeholder, error }, ref: RefObject<FabTextEditorRef>) => {
+export const FabTextEditor: React.ForwardRefRenderFunction<FabTextEditorRef, FabTextEditorProps> = ({ label, paragraphTools, content, limit = 400, video, image, onChange, placeholder, error, readOnly = false }, ref: RefObject<FabTextEditorRef>) => {
   const { t } = useTranslation('shared');
   const placeholderText = placeholder || t('app.shared.text_editor.text_placeholder');
   // TODO: Add ctrl+click on link to visit
@@ -70,6 +71,7 @@ export const FabTextEditor: React.ForwardRefRenderFunction<FabTextEditorRef, Fab
         }
       })
     ],
+    editable: readOnly,
     content,
     onUpdate: ({ editor }) => {
       onChange(editor.getHTML());

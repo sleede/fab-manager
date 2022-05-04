@@ -64,7 +64,7 @@ export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, re
           })}
           type={type}
           step={step}
-          disabled={disabled}
+          disabled={typeof disabled === 'function' ? disabled(id) : disabled}
           readOnly={readOnly}
           placeholder={placeholder}
           accept={accept} />

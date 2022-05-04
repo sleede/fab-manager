@@ -42,7 +42,7 @@ export const FormSwitch = <TFieldValues, TContext extends object>({ id, label, t
                       height={19}
                       width={40}
                       ref={ref}
-                      disabled={disabled}
+                      disabled={typeof disabled === 'function' ? disabled(id) : disabled}
                       readOnly={readOnly} />
                     } />
     </AbstractFormItem>

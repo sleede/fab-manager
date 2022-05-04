@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Select from 'react-select';
 import { Controller, Path } from 'react-hook-form';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
@@ -25,6 +25,16 @@ type selectOption<TOptionValue> = { value: TOptionValue, label: string };
  * This component is a wrapper for react-select to use with react-hook-form
  */
 export const FormSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, tooltip, className, control, placeholder, options, valueDefault, error, warning, rules, disabled, onChange, readOnly, clearable, formState }: FormSelectProps<TFieldValues, TContext, TOptionValue>) => {
+  const [isDisabled, setIsDisabled] = React.useState<boolean>(false);
+
+  useEffect(() => {
+    if (typeof disabled === 'function') {
+      setIsDisabled(disabled(id) || readOnly);
+    } else {
+      setIsDisabled(disabled || readOnly);
+    }
+  }, [disabled]);
+
   /**
    * The following callback will trigger the onChange callback, if it was passed to this component,
    * when the selected option changes.
@@ -53,7 +63,7 @@ export const FormSelect = <TFieldValues extends FieldValues, TContext extends ob
                               onChange(val.value);
                             }}
                             placeholder={placeholder}
-                            isDisabled={readOnly}
+                            isDisabled={isDisabled}
                             isClearable={clearable}
                             options={options} />
                   } />
