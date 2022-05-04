@@ -55,7 +55,7 @@ export const EditSocials = <TFieldValues extends FieldValues>({ register, setVal
         {userNetworks.map((network, index) =>
           selectedNetworks.includes(network) &&
           <FormInput key={index}
-                     id={`profile.${network.name}`}
+                     id={`profile_attributes.${network.name}`}
                      register={register}
                      rules= {{
                        pattern: {
@@ -69,7 +69,7 @@ export const EditSocials = <TFieldValues extends FieldValues>({ register, setVal
                      placeholder={t('app.shared.text_editor.url_placeholder')}
                      icon={<img src={`${Icons}#${network.name}`}></img>}
                      addOn={<Trash size={16} />}
-                     addOnAction={() => dispatch({ type: 'delete', payload: { network, field: `profile.${network.name}` } })} />
+                     addOnAction={() => dispatch({ type: 'delete', payload: { network, field: `profile_attributes.${network.name}` } })} />
         )}
       </div>}
     </>
