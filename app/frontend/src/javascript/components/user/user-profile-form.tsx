@@ -137,7 +137,8 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
           <h4>{t('app.shared.user_profile_form.account_networks')}</h4>
           <EditSocials register={register}
                        networks={userNetworks}
-                       setValue={setValue} />
+                       setValue={setValue}
+                       formState={formState} />
         </div>
         <div className="organization-data">
           <h4>{t('app.shared.user_profile_form.organization_data')}</h4>

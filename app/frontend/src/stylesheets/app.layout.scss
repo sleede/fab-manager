@@ -595,6 +595,11 @@ body.container {
     }
   }
 }
+.social-inputs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  column-gap: 3rem;
+}
 
 // public profile view
 .profile-top {

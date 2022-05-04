@@ -27,7 +27,7 @@ export default class UserLib {
   getUserSocialNetworks = (customer: User): {name: string, url: string}[] => {
     const userNetworks = [];
 
-    for (const [name, url] of Object.entries(customer.profile)) {
+    for (const [name, url] of Object.entries(customer.profile_attributes)) {
       supportedNetworks.includes(name) && userNetworks.push({ name, url });
     }
     return userNetworks;

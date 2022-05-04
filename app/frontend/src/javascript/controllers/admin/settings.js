@@ -466,6 +466,14 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
       }
     };
 
+    $scope.onSuccess = function (message) {
+      growl.success(message);
+    };
+
+    $scope.onError = function (message) {
+      growl.error(message);
+    };
+
     /* PRIVATE SCOPE */
 
     /**
