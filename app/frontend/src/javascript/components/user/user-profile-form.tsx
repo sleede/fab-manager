@@ -27,7 +27,7 @@ interface UserProfileFormProps {
 export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, user, className, onError }) => {
   const { t } = useTranslation('shared');
 
-  const { handleSubmit, register, resetField, control, formState } = useForm<User>({ defaultValues: { ...user } });
+  const { handleSubmit, register, setValue, control, formState } = useForm<User>({ defaultValues: { ...user } });
   const output = useWatch<User>({ control });
 
   const [isOrganization, setIsOrganization] = React.useState<boolean>(user.invoicing_profile.organization !== null);
@@ -112,7 +112,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
           <h4>{t('app.shared.user_profile_form.account_networks')}</h4>
           <EditSocials register={register}
                        networks={userNetworks}
-                       resetField={resetField} />
+                       setValue={setValue} />
         </div>
         <div className="organization-data">
           <h4>{t('app.shared.user_profile_form.organization_data')}</h4>
@@ -139,7 +139,6 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
                        label={t('app.shared.user_profile_form.organization_address')} />
           </div>}
         </div>
-        <button type="submit">go</button>
       </div>
     </form>
   );
