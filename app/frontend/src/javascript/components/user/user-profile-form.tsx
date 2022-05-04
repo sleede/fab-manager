@@ -2,7 +2,7 @@ import React from 'react';
 import { react2angular } from 'react2angular';
 import { SubmitHandler, useForm, useWatch } from 'react-hook-form';
 import { isNil as _isNil } from 'lodash';
-import { User } from '../../models/user';
+import { User, UserFieldMapping } from '../../models/user';
 import { IApplication } from '../../models/application';
 import { Loader } from '../base/loader';
 import { FormInput } from '../form/form-input';
@@ -50,6 +50,14 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
       .catch((error) => { onError(error); });
   };
 
+  /**
+   * Check if the given field path should be disabled because it's mapped to the SSO API.
+   */
+  const isDisabled = function (id: string) {
+    // TODO: check if AuthenticationProvider is not LocalDatabase
+    return user.mapped_from_sso?.includes(UserFieldMapping[id]);
+  };
+
   const userNetworks = new UserLib(user).getUserSocialNetworks(user);
 
   return (
@@ -69,11 +77,13 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
             <FormInput id="profile_attributes.last_name"
                        register={register}
                        rules={{ required: true }}
+                       disabled={isDisabled}
                        formState={formState}
                        label={t('app.shared.user_profile_form.surname')} />
             <FormInput id="profile_attributes.first_name"
                        register={register}
                        rules={{ required: true }}
+                       disabled={isDisabled}
                        formState={formState}
                        label={t('app.shared.user_profile_form.first_name')} />
           </div>
@@ -81,6 +91,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
             <FormInput id="statistic_profile_attributes.birthday"
                        register={register}
                        label={t('app.shared.user_profile_form.date_of_birth')}
+                       disabled={isDisabled}
                        type="date" />
             <FormInput id="profile_attributes.phone"
                        register={register}
@@ -90,6 +101,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
                            message: t('app.shared.user_profile_form.phone_number_invalid')
                          }
                        }}
+                       disabled={isDisabled}
                        formState={formState}
                        label={t('app.shared.user_profile_form.phone_number')} />
           </div>
@@ -99,6 +111,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
                        type="hidden" />
             <FormInput id="invoicing_profile_attributes.address_attributes.address"
                        register={register}
+                       disabled={isDisabled}
                        label={t('app.shared.user_profile_form.address')} />
           </div>
         </div>
@@ -107,11 +120,13 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
           <FormInput id="username"
                      register={register}
                      rules={{ required: true }}
+                     disabled={isDisabled}
                      formState={formState}
                      label={t('app.shared.user_profile_form.pseudonym')} />
           <FormInput id="email"
                      register={register}
                      rules={{ required: true }}
+                     disabled={isDisabled}
                      formState={formState}
                      label={t('app.shared.user_profile_form.email_address')} />
           {/* TODO: no password change if sso */}
@@ -122,13 +137,6 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
           {action === 'create' && <PasswordInput register={register}
                                                  currentFormPassword={output.password}
                                                  formState={formState} />}
-        </div>
-        <div className='account-networks'>
-          <h4>{t('app.shared.user_profile_form.account_networks')}</h4>
-          <EditSocials register={register}
-                       networks={userNetworks}
-                       setValue={setValue}
-                       formState={formState} />
         </div>
         <div className="organization-data">
           <h4>{t('app.shared.user_profile_form.organization_data')}</h4>
@@ -145,6 +153,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
             <FormInput id="invoicing_profile_attributes.organization_attributes.name"
                        register={register}
                        rules={{ required: isOrganization }}
+                       disabled={isDisabled}
                        formState={formState}
                        label={t('app.shared.user_profile_form.organization_name')} />
             <FormInput id="invoicing_profile_attributes.organization_attributes.address_attributes.id"
@@ -153,6 +162,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
             <FormInput id="invoicing_profile_attributes.organization_attributes.address_attributes.address"
                        register={register}
                        rules={{ required: isOrganization }}
+                       disabled={isDisabled}
                        formState={formState}
                        label={t('app.shared.user_profile_form.organization_address')} />
           </div>}
@@ -169,6 +179,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
                          }
                        }}
                        placeholder="https://www.example.com"
+                       disabled={isDisabled}
                        formState={formState}
                        label={t('app.shared.user_profile_form.website')} />
             <FormInput id="profile_attributes.job"
@@ -178,20 +189,31 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
           <div className="interests-CAD">
             <FormRichText control={control}
                           id="profile_attributes.interest"
+                          disabled={isDisabled}
                           label={t('app.shared.user_profile_form.interests')} />
             <FormRichText control={control}
+                          disabled={isDisabled}
                           id="profile_attributes.software_mastered"
                           label={t('app.shared.user_profile_form.CAD_softwares_mastered')} />
           </div>
+        </div>
+        <div className='account-networks'>
+          <h4>{t('app.shared.user_profile_form.account_networks')}</h4>
+          <EditSocials register={register}
+                       networks={userNetworks}
+                       setValue={setValue}
+                       formState={formState} />
         </div>
         <div className="preferences-data">
           <h4>{t('app.shared.user_profile_form.preferences_data')}</h4>
           <FormSwitch control={control}
                       id="is_allow_contact"
+                      disabled={isDisabled}
                       label={t('app.shared.user_profile_form.allow_public_profile')}
                       tooltip={t('app.shared.user_profile_form.allow_public_profile_help')} />
           <FormSwitch control={control}
                       id="is_allow_newsletter"
+                      disabled={isDisabled}
                       label={t('app.shared.user_profile_form.allow_newsletter')}
                       tooltip={t('app.shared.user_profile_form.allow_newsletter_help')} />
         </div>

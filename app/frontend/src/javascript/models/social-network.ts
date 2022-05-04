@@ -17,4 +17,6 @@ export const supportedNetworks = [
   'pinterest',
   'lastfm',
   'flickr'
-];
+] as const;
+
+export type SupportedSocialNetwork = typeof supportedNetworks[number];
