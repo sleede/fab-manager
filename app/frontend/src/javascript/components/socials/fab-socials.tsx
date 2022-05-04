@@ -23,7 +23,7 @@ export const FabSocials: React.FC<FabSocialsProps> = ({ show = false }) => {
 
   const { handleSubmit, register, setValue } = useForm();
 
-  const settingsList = supportedNetworks.map(el => `socials_${el}` as SettingName);
+  const settingsList = supportedNetworks.map(el => el as SettingName);
 
   const [fabNetworks, setFabNetworks] = useState([]);
   const [selectedNetworks, setSelectedNetworks] = useState([]);
@@ -64,7 +64,7 @@ export const FabSocials: React.FC<FabSocialsProps> = ({ show = false }) => {
         {fabNetworks.map((network, index) =>
           selectedNetworks.includes(network) &&
           <a key={index} href={network.url} target='_blank' rel="noreferrer">
-            <img src={`${Icons}#${network.name.replace('socials_', '')}`}></img>
+            <img src={`${Icons}#${network.name}`}></img>
           </a>
         )}
       </div>
@@ -73,7 +73,7 @@ export const FabSocials: React.FC<FabSocialsProps> = ({ show = false }) => {
         <div className="social-icons">
           {fabNetworks.map((network, index) =>
             !selectedNetworks.includes(network) &&
-            <img key={index} src={`${Icons}#${network.name.replace('socials_', '')}`} onClick={() => selectNetwork(network)}></img>
+            <img key={index} src={`${Icons}#${network.name}`} onClick={() => selectNetwork(network)}></img>
           )}
         </div>
         {fabNetworks.map((network, index) =>
@@ -82,9 +82,9 @@ export const FabSocials: React.FC<FabSocialsProps> = ({ show = false }) => {
                     key={index}
                     register={register}
                     defaultValue={network.url}
-                    label={network.name.replace('socials_', '')}
+                    label={network.name}
                     placeholder={t('app.shared.text_editor.url_placeholder')}
-                    icon={<img src={`${Icons}#${network.name.replace('socials_', '')}`}></img>}
+                    icon={<img src={`${Icons}#${network.name}`}></img>}
                     addOn={<Trash size={16} />}
                     addOnAction={() => remove(network)} />
         )}
