@@ -1197,7 +1197,7 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
       { name: _t('app.admin.invoices.none'), value: 'none' },
       { name: _t('app.admin.invoices.by_cash'), value: 'cash' },
       { name: _t('app.admin.invoices.by_cheque'), value: 'cheque' },
-      { name: _t('app.admin.invoices.by_transfer'), value: 'transfer' },
+      { name: _t('app.admin.invoices.by_transfer'), value: 'transfer' }
     ];
 
     if (Fablab.walletModule) {

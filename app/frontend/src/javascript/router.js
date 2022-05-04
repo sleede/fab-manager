@@ -1014,7 +1014,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          providerPromise: ['AuthProvider', '$transition$', function (AuthProvider, $transition$) { return AuthProvider.get({ id: $transition$.params().id }).$promise; }],
+          providerPromise: ['AuthProvider', '$transition$', function (AuthProvider, $transition$) { return AuthProvider.get({ id: $transition$.params().id }).$promise; }]
         }
       })
 
