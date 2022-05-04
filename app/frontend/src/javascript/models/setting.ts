@@ -120,19 +120,19 @@ export enum SettingName {
   OverlappingCategories = 'overlapping_categories',
   ExtendedPricesInSameDay = 'extended_prices_in_same_day',
   PublicRegistrations = 'public_registrations',
-  SocialsFacebook = 'socials_facebook',
-  SocialsTwitter = 'socials_twitter',
-  SocialsViadeo = 'socials_viadeo',
-  SocialsLinkedin = 'socials_linkedin',
-  SocialsInstagram = 'socials_instagram',
-  SocialsYoutube = 'socials_youtube',
-  SocialsVimeo = 'socials_vimeo',
-  SocialsDailymotion = 'socials_dailymotion',
-  SocialsGithub = 'socials_github',
-  SocialsEchosciences = 'socials_echosciences',
-  SocialsPinterest = 'socials_pinterest',
-  SocialsLastfm = 'socials_lastfm',
-  SocialsFlickr = 'socials_flickr'
+  SocialsFacebook = 'facebook',
+  SocialsTwitter = 'twitter',
+  SocialsViadeo = 'viadeo',
+  SocialsLinkedin = 'linkedin',
+  SocialsInstagram = 'instagram',
+  SocialsYoutube = 'youtube',
+  SocialsVimeo = 'vimeo',
+  SocialsDailymotion = 'dailymotion',
+  SocialsGithub = 'github',
+  SocialsEchosciences = 'echosciences',
+  SocialsPinterest = 'pinterest',
+  SocialsLastfm = 'lastfm',
+  SocialsFlickr = 'flickr'
 }
 
 export type SettingValue = string|boolean|number;
