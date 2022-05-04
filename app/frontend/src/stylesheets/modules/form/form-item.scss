@@ -12,6 +12,7 @@
     p {
       @include text-sm;
       margin: 0;
+      &::first-letter { text-transform: uppercase; }
     }
 
     .item-tooltip {
@@ -61,6 +62,7 @@
     border: 1px solid var(--gray-soft-dark);
     border-radius: var(--border-radius);
     transition: border-color ease-in-out 0.15s;
+    overflow: hidden;
 
     .icon,
     .addon {
@@ -74,6 +76,23 @@
     .icon {
       grid-area: icon;
       border-right: 1px solid var(--gray-soft-dark);
+      & > * {
+        max-width: 24px;
+        max-height: 24px;
+      }
+    }
+
+    .addon {
+      grid-area: addon;
+      border-left: 1px solid var(--gray-soft-dark);
+      &.is-btn {
+        color: var(--gray-soft-lightest);
+        background-color: var(--gray-hard-darkest);
+        &:hover {
+          cursor: pointer;
+          background-color: var(--gray-hard-light);
+        }
+      }
     }
 
     & > input {
@@ -125,11 +144,6 @@
         font-weight: 400;
         color: var(--gray-soft-darkest);
       }
-    }
-
-    .addon {
-      grid-area: addon;
-      border-left: 1px solid var(--gray-soft-dark);
     }
   }
   &.is-incorrect &-field {

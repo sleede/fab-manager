@@ -1,4 +1,5 @@
 import { User, UserRole } from '../models/user';
+import { supportedNetworks } from '../models/social-network';
 
 export default class UserLib {
   private user: User;
@@ -18,5 +19,17 @@ export default class UserLib {
     }
 
     return false;
+  };
+
+  /**
+   * Filter social networks from the user's profile
+   */
+  getUserSocialNetworks = (customer: User): {name: string, url: string}[] => {
+    const userNetworks = [];
+
+    for (const [name, url] of Object.entries(customer.profile_attributes)) {
+      supportedNetworks.includes(name) && userNetworks.push({ name, url });
+    }
+    return userNetworks;
   };
 }

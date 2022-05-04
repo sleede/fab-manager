@@ -9,6 +9,7 @@ import { AbstractFormItem, AbstractFormItemProps } from './abstract-form-item';
 interface FormInputProps<TFieldValues, TInputType> extends FormComponent<TFieldValues>, AbstractFormItemProps<TFieldValues> {
   icon?: ReactNode,
   addOn?: ReactNode,
+  addOnAction?: (event: React.MouseEvent<HTMLButtonElement>) => void,
   addOnClassName?: string,
   debounce?: number,
   type?: 'text' | 'date' | 'password' | 'url' | 'time' | 'tel' | 'search' | 'number' | 'month' | 'email' | 'datetime-local' | 'week' | 'hidden' | 'file',
@@ -22,7 +23,7 @@ interface FormInputProps<TFieldValues, TInputType> extends FormComponent<TFieldV
 /**
  * This component is a template for an input component to use within React Hook Form
  */
-export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, register, label, tooltip, defaultValue, icon, className, rules, readOnly, disabled, type, addOn, addOnClassName, placeholder, error, warning, formState, step, onChange, debounce, accept }: FormInputProps<TFieldValues, TInputType>) => {
+export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, register, label, tooltip, defaultValue, icon, className, rules, readOnly, disabled, type, addOn, addOnAction, addOnClassName, placeholder, error, warning, formState, step, onChange, debounce, accept }: FormInputProps<TFieldValues, TInputType>) => {
   /**
    * Debounced (ie. temporised) version of the 'on change' callback.
    */
@@ -68,7 +69,7 @@ export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, re
           readOnly={readOnly}
           placeholder={placeholder}
           accept={accept} />
-        {addOn && <span className={`addon ${addOnClassName || ''}`}>{addOn}</span>}
+        {addOn && <span onClick={addOnAction} className={`addon ${addOnClassName || ''} ${addOnAction ? 'is-btn' : ''}`}>{addOn}</span>}
     </AbstractFormItem>
   );
 };

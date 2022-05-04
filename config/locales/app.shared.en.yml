@@ -32,11 +32,16 @@ en:
         add_link: "Insert a link"
         add_video: "Embed a video"
         add_image: "Insert an image"
+      fab_socials:
+        networks_update_success: "Social networks update successful"
+        networks_update_error: "Problem trying to update social networks"
+        url_placeholder: "Paste url…"
       #user edition form
       user_profile_form:
         add_an_avatar: "Add an avatar"
         personal_data: "Personal"
         account_data: "Account"
+        account_networks: "Social networks"
         organization_data: "Organization"
         profile_data: "Profile"
         preferences_data: "Preferences"

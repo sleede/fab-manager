@@ -15,6 +15,8 @@ import { FormRichText } from '../form/form-rich-text';
 import MemberAPI from '../../api/member';
 import { AvatarInput } from './avatar-input';
 import { FabButton } from '../base/fab-button';
+import { EditSocials } from '../socials/edit-socials';
+import UserLib from '../../lib/user';
 
 declare const Application: IApplication;
 
@@ -47,6 +49,8 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
       .then(res => { onSuccess(res); })
       .catch((error) => { onError(error); });
   };
+
+  const userNetworks = new UserLib(user).getUserSocialNetworks(user);
 
   return (
     <form className={`user-profile-form user-profile-form--${size} ${className}`} onSubmit={handleSubmit(onSubmit)}>
@@ -118,6 +122,13 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
           {action === 'create' && <PasswordInput register={register}
                                                  currentFormPassword={output.password}
                                                  formState={formState} />}
+        </div>
+        <div className='account-networks'>
+          <h4>{t('app.shared.user_profile_form.account_networks')}</h4>
+          <EditSocials register={register}
+                       networks={userNetworks}
+                       setValue={setValue}
+                       formState={formState} />
         </div>
         <div className="organization-data">
           <h4>{t('app.shared.user_profile_form.organization_data')}</h4>

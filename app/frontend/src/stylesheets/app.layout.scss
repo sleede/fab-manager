@@ -566,19 +566,39 @@ body.container {
 
 // profile edition -- add a social network buttons
 .social-icons {
-  & > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 1.6rem;
+  & > * {
     cursor: pointer;
     padding: 0.2em;
     width: 3em;
-    display: inline-block;
-    text-align: center;
+    height: 3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 3px;
-    border: 1px solid transparent;
-
-    &:hover {
-      border: 1px solid $border-color;
+    overflow: hidden;
+  }
+  & > img {
+    border: 1px solid var(--gray-soft-dark);
+    background-color: var(--gray-soft-lightest);
+    &:hover {  opacity: 0.65; }
+  }
+  & > a {
+    transition: transform 200ms ease-in-out;
+    &:hover { transform: translateY(-4px); }
+    img {
+      max-width: 100%;
+      height: inherit;
     }
   }
+}
+.social-inputs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  column-gap: 3rem;
 }
 
 // public profile view

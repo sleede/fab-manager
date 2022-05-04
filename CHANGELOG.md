@@ -2,6 +2,7 @@
 
 ## next deploy
 
+- Ability to define social networks for the FabLab "about page"
 - Support for OpenID Connect in Sign-Sign-On authentication providers
 - No longer needed to recompile the assets when switching the authentication provider
 - Updated the documentation about the minimum docker version
