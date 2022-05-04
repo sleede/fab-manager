@@ -39,7 +39,7 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
     checkForDiscoveryEndpoint({ target: { value: currentFormValues?.issuer } } as React.ChangeEvent<HTMLInputElement>);
   }, []);
 
-  // regular expression to validate the the input fields
+  // regular expression to validate the input fields
   const endpointRegex = /^\/?([-._~:?#[\]@!$&'()*+,;=%\w]+\/?)*$/;
   const urlRegex = /^(https?:\/\/)([\da-z.-]+)\.([-a-z0-9.]{2,30})([/\w .-]*)*\/?$/;
 

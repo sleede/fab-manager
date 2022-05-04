@@ -26,7 +26,7 @@ export const ChangePassword = <TFieldValues extends FieldValues>({ register, onE
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
   const [isConfirmedPassword, setIsConfirmedPassword] = React.useState<boolean>(false);
 
-  const passwordConfirmationForm = useForm<{ password: string }>();
+  const { handleSubmit, register: passwordRegister } = useForm<{ password: string }>();
 
   /**
    * Opens/closes the dialog asking to confirm the current password before changing it.
@@ -38,17 +38,23 @@ export const ChangePassword = <TFieldValues extends FieldValues>({ register, onE
   /**
    * Callback triggered when the user confirms his current password.
    */
-  const onSubmit = (data: { password: string }) => {
-    Authentication.verifyPassword(data.password).then(res => {
-      if (res) {
-        setIsConfirmedPassword(true);
-        toggleConfirmationModal();
-      } else {
-        onError(t('app.shared.change_password.wrong_password'));
-      }
-    }).catch(err => {
-      onError(err);
-    });
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    if (event) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
+    return handleSubmit((data: { password: string }) => {
+      Authentication.verifyPassword(data.password).then(res => {
+        if (res) {
+          setIsConfirmedPassword(true);
+          toggleConfirmationModal();
+        } else {
+          onError(t('app.shared.change_password.wrong_password'));
+        }
+      }).catch(err => {
+        onError(err);
+      });
+    })(event);
   };
 
   return (
@@ -59,9 +65,13 @@ export const ChangePassword = <TFieldValues extends FieldValues>({ register, onE
       {isConfirmedPassword && <div className="password-fields">
         <PasswordInput register={register} currentFormPassword={currentFormPassword} formState={formState} />
       </div>}
-      <FabModal isOpen={isModalOpen} toggleModal={toggleConfirmationModal} title={t('app.shared.change_password.change_my_password')}>
-        <form onSubmit={passwordConfirmationForm.handleSubmit(onSubmit)}>
-          <FormInput id="password" type="password" register={passwordConfirmationForm.register} rules={{ required: true }} label={t('app.shared.change_password.confirm_current')} />
+      <FabModal isOpen={isModalOpen} toggleModal={toggleConfirmationModal} title={t('app.shared.change_password.change_my_password')} closeButton>
+        <form onSubmit={onSubmit}>
+          <FormInput id="password"
+                     type="password"
+                     register={passwordRegister}
+                     rules={{ required: true }}
+                     label={t('app.shared.change_password.confirm_current')} />
           <FabButton type="submit">
             {t('app.shared.change_password.confirm')}
           </FabButton>

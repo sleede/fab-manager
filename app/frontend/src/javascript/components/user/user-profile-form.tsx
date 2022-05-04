@@ -30,7 +30,7 @@ interface UserProfileFormProps {
 export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, user, className, onError, onSuccess }) => {
   const { t } = useTranslation('shared');
 
-  // regular expression to validate the the input fields
+  // regular expression to validate the input fields
   const phoneRegex = /^((00|\+)\d{2,3})?\d{4,14}$/;
   const urlRegex = /^(https?:\/\/)([\da-z.-]+)\.([-a-z\d.]{2,30})([/\w .-]*)*\/?$/;
 
