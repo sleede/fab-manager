@@ -33,8 +33,8 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
   const { t } = useTranslation('shared');
 
   // regular expression to validate the the input fields
-  const phoneRegex = /^((00|\+)[0-9]{2,3})?[0-9]{4,14}$/;
-  const urlRegex = /^(https?:\/\/)([\da-z.-]+)\.([-a-z0-9.]{2,30})([/\w .-]*)*\/?$/;
+  const phoneRegex = /^((00|\+)\d{2,3})?\d{4,14}$/;
+  const urlRegex = /^(https?:\/\/)([\da-z.-]+)\.([-a-z\d.]{2,30})([/\w .-]*)*\/?$/;
 
   const { handleSubmit, register, control, formState, setValue } = useForm<User>({ defaultValues: { ...user } });
   const output = useWatch<User>({ control });
