@@ -1,4 +1,5 @@
 import { User, UserRole } from '../models/user';
+import { supportedNetworks } from '../models/social-network';
 
 export default class UserLib {
   private user: User;
@@ -25,7 +26,6 @@ export default class UserLib {
    */
   getUserSocialNetworks = (customer: User): {name: string, url: string}[] => {
     const userNetworks = [];
-    const supportedNetworks = ['facebook', 'twitter', 'viadeo', 'linkedin', 'instagram', 'youtube', 'vimeo', 'dailymotion', 'github', 'echosciences', 'pinterest', 'lastfm', 'flickr'];
 
     for (const [name, url] of Object.entries(customer.profile)) {
       supportedNetworks.includes(name) && userNetworks.push({ name, url });
