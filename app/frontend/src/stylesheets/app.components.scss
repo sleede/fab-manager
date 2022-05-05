@@ -390,13 +390,13 @@
 
 .about-fablab {
   position: relative;
-  z-index: 101;
-  height: 93%;
+  z-index: 100;
+  height: 100%;
   background-color: white;
-
   @include transition(0.5s linear all);
-
   opacity: 1;
+
+  img { max-width: 100%; }
 
   .about-picture {
     padding: 70px 0;
@@ -411,9 +411,6 @@
     line-height: rem-calc(48);
     color: #fff;
     font-weight: 900;
-
-    //black
-
   }
 
   .about-title-aside {
@@ -520,7 +517,7 @@
   position: absolute;
   bottom: 0;
   right: 10px;
-  z-index: 100;
+  z-index: 300;
   padding: 3px 15px;
   border: 1px solid $border-color;
   border-top-left-radius: 8px;
