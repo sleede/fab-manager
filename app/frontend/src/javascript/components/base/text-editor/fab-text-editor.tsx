@@ -71,7 +71,7 @@ export const FabTextEditor: React.ForwardRefRenderFunction<FabTextEditorRef, Fab
         }
       })
     ],
-    editable: readOnly,
+    editable: !readOnly,
     content,
     onUpdate: ({ editor }) => {
       onChange(editor.getHTML());

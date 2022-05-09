@@ -24,7 +24,7 @@ type selectOption<TOptionValue> = { value: TOptionValue, label: string };
 /**
  * This component is a wrapper for react-select to use with react-hook-form
  */
-export const FormSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, tooltip, className, control, placeholder, options, valueDefault, error, warning, rules, disabled, onChange, readOnly, clearable, formState }: FormSelectProps<TFieldValues, TContext, TOptionValue>) => {
+export const FormSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, tooltip, className, control, placeholder, options, valueDefault, error, warning, rules, disabled = false, onChange, readOnly = false, clearable, formState }: FormSelectProps<TFieldValues, TContext, TOptionValue>) => {
   const [isDisabled, setIsDisabled] = React.useState<boolean>(false);
 
   useEffect(() => {
