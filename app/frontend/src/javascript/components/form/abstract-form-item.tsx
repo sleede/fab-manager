@@ -5,7 +5,7 @@ import { get as _get } from 'lodash';
 
 export interface AbstractFormItemProps<TFieldValues> extends PropsWithChildren<AbstractFormComponent<TFieldValues>> {
   id: string,
-  label?: string,
+  label?: string|ReactNode,
   tooltip?: ReactNode,
   className?: string,
   disabled?: boolean|((id: string) => boolean),
@@ -24,6 +24,7 @@ export const AbstractFormItem = <TFieldValues extends FieldValues>({ id, label, 
 
   useEffect(() => {
     setIsDirty(_get(formState?.dirtyFields, id));
+    console.log(_get(formState?.dirtyFields, id));
     setFieldError(_get(formState?.errors, id));
   }, [formState]);
 

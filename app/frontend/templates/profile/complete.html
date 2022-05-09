@@ -63,51 +63,16 @@
 
                                     <div class="panel-body m-r">
                                         <!-- common fields -->
-                                        <ng-include src="'/shared/_member_form.html'"></ng-include>
-
-                                        <div class="row">
-                                            <div class="col-sm-3 col-sm-offset-1"></div>
-                                            <div class="col-sm-offset-1 col-sm-6">
-                                                <!-- group -->
-                                                <div class="form-group" ng-class="{'has-error': userForm['user[group_id]'].$dirty && userForm['user[group_id]'].$invalid}">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">
-                                                          <i class="fa fa-users"></i>
-                                                          <span class="exponent m-l-xs help-cursor" title="{{ 'app.logged.profile_completion.used_for_statistics' | translate }}">
-                                                            <i class="fa fa-asterisk" aria-hidden="true"></i>
-                                                          </span>
-                                                        </span>
-                                                        <select ng-model="user.group_id" class="form-control" ng-disabled="user.role === 'admin'" required>
-                                                            <option value=null translate>{{ 'app.logged.profile_completion.your_user_s_profile' }}</option>
-                                                            <option ng-repeat="group in groups" ng-value="group.id" ng-selected="group.id == user.group_id">{{group.name}}</option>
-                                                        </select>
-                                                        <input type="hidden" name="user[group_id]" ng-value="user.group_id">
-                                                    </div>
-                                                    <span class="help-block" ng-show="userForm['user[group_id]'].$dirty && userForm['user[group_id]'].$error.required" translate>{{ 'app.logged.profile_completion.user_s_profile_is_required' }}</span>
-                                                </div>
-
-                                                <!-- accept cgu -->
-                                                <div class="form-group" ng-class="{'has-error': userForm.cgu.$dirty && userForm.cgu.$invalid}" ng-show="cgu">
-                                                    <input type="checkbox"
-                                                           name="cgu"
-                                                           ng-model="user.cgu"
-                                                           value="true"
-                                                           ng-required="cgu != null"/> {{ 'app.logged.profile_completion.i_ve_read_and_i_accept_' | translate }}
-                                                  <a href="{{cgu.custom_asset_file_attributes.attachment_url}}" target="_blank" translate>{{ 'app.logged.profile_completion._the_fablab_policy' }}</a>
-                                                  <span class="exponent m-l-xs"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
-                                                </div>
-                                            </div>
-                                        </div>
+                                      <user-profile-form user="user"
+                                                         size="'small'"
+                                                         action="'update'"
+                                                         on-error="onError"
+                                                         on-success="onSuccess"
+                                                         show-group-input="true"
+                                                         show-terms-and-conditions-input="true" />
 
                                     </div>   <!-- ./panel-body  -->
 
-
-                                    <div class="panel-footer no-padder">
-                                        <input type="submit"
-                                               value="{{ 'app.shared.buttons.confirm_changes' | translate }}"
-                                               class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c"
-                                               ng-disabled="userForm.$invalid"/>
-                                    </div>
                                 </section>
                             </form>
                         </div>

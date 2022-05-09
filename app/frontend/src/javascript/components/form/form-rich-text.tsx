@@ -48,6 +48,7 @@ export const FormRichText = <TFieldValues extends FieldValues, TContext extends 
       <Controller name={id as FieldPath<TFieldValues>}
                   control={control}
                   defaultValue={valueDefault as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>}
+                  rules={rules}
                   render={({ field: { onChange, value } }) =>
         <FabTextEditor onChange={onChange}
                        content={value}

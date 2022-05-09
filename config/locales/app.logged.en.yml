@@ -39,6 +39,7 @@ en:
         _click_on_the_synchronization_button_opposite_: "click on the synchronization button opposite"
         _disconnect_then_reconnect_: "disconnect then reconnect"
         _for_your_changes_to_take_effect: "for your changes to take effect."
+        your_profile_has_been_successfully_updated: "Your profile has been successfully updated."
       dashboard:
         #dashboard: public profile
         profile:

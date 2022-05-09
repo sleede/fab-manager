@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { react2angular } from 'react2angular';
-import { SubmitHandler, useForm, useWatch } from 'react-hook-form';
+import { useForm, useWatch, ValidateResult } from 'react-hook-form';
 import { isNil as _isNil } from 'lodash';
 import { User, UserFieldMapping } from '../../models/user';
 import { IApplication } from '../../models/application';
@@ -18,6 +18,12 @@ import { FabButton } from '../base/fab-button';
 import { EditSocials } from '../socials/edit-socials';
 import UserLib from '../../lib/user';
 import AuthProviderAPI from '../../api/auth-provider';
+import { FormSelect } from '../form/form-select';
+import { Group } from '../../models/group';
+import GroupAPI from '../../api/group';
+import CustomAssetAPI from '../../api/custom-asset';
+import { CustomAsset, CustomAssetName } from '../../models/custom-asset';
+import { HtmlTranslate } from '../base/html-translate';
 
 declare const Application: IApplication;
 
@@ -28,9 +34,20 @@ interface UserProfileFormProps {
   className?: string,
   onError: (message: string) => void,
   onSuccess: (user: User) => void,
+  showGroupInput?: boolean,
+  showTermsAndConditionsInput?: boolean,
 }
 
-export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, user, className, onError, onSuccess }) => {
+/**
+ * Option format, expected by react-select
+ * @see https://github.com/JedWatson/react-select
+ */
+type selectOption = { value: number, label: string };
+
+/**
+ * Form component to create or update a user
+ */
+export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, user, className, onError, onSuccess, showGroupInput = false, showTermsAndConditionsInput = false }) => {
   const { t } = useTranslation('shared');
 
   // regular expression to validate the input fields
@@ -42,37 +59,76 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
 
   const [isOrganization, setIsOrganization] = useState<boolean>(!_isNil(user.invoicing_profile_attributes.organization_attributes));
   const [isLocalDatabaseProvider, setIsLocalDatabaseProvider] = useState<boolean>(false);
+  const [groups, setGroups] = useState<Group[]>([]);
+  const [termsAndConditions, setTermsAndConditions] = useState<CustomAsset>(null);
 
   useEffect(() => {
     AuthProviderAPI.active().then(data => {
       setIsLocalDatabaseProvider(data.providable_type === 'DatabaseProvider');
+    }).catch(error => onError(error));
+    GroupAPI.index({ disabled: false, admins: user.role === 'admin' }).then(data => {
+      setGroups(data);
+    }).catch(error => onError(error));
+    CustomAssetAPI.get(CustomAssetName.CguFile).then(data => {
+      setTermsAndConditions(data);
+    }).catch(error => onError(error));
+  }, []);
+
+  /**
+   * Convert all groups to the react-select format
+   */
+  const buildGroupsOptions = (): Array<selectOption> => {
+    return groups.map(t => {
+      return { value: t.id, label: t.name };
     });
-  });
+  };
 
   /**
    * Callback triggered when the form is submitted: process with the user creation or update.
    */
-  const onSubmit: SubmitHandler<User> = (data: User) => {
-    MemberAPI[action](data)
-      .then(res => { onSuccess(res); })
-      .catch((error) => { onError(error); });
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    if (showTermsAndConditionsInput) {
+      // When the form is submitted, we consider that the user should have accepted the terms and conditions,
+      // so we mark the field as dirty, even if he doesn't touch it. Like that, the error message is displayed.
+      setValue('cgu', !!output.cgu, { shouldDirty: true, shouldTouch: true });
+    }
+
+    return handleSubmit((data: User) => {
+      MemberAPI[action](data)
+        .then(res => { onSuccess(res); })
+        .catch((error) => { onError(error); });
+    })(event);
   };
 
   /**
-   * Check if the given field path should be disabled because it's mapped to the SSO API.
+   * Check if the given field path should be disabled
    */
   const isDisabled = function (id: string) {
+    // never allows admins to change their group
+    if (id === 'group_id' && user.role === 'admin') {
+      return true;
+    }
+
+    // if the current provider is the local database, then all fields are enabled
     if (isLocalDatabaseProvider) {
       return false;
     }
 
+    // if the current provider is not the local database, then fields are disabled based on their mapping status.
     return user.mapped_from_sso?.includes(UserFieldMapping[id]);
+  };
+
+  /**
+   * Check if the user has accepted the terms and conditions
+   */
+  const checkAcceptTerms = function (value: boolean): ValidateResult {
+    return value === true || (t('app.shared.user_profile_form.must_accept_terms') as string);
   };
 
   const userNetworks = new UserLib(user).getUserSocialNetworks(user);
 
   return (
-    <form className={`user-profile-form user-profile-form--${size} ${className}`} onSubmit={handleSubmit(onSubmit)}>
+    <form className={`user-profile-form user-profile-form--${size} ${className}`} onSubmit={onSubmit}>
       <div className="avatar-group">
         <AvatarInput currentAvatar={output.profile_attributes.user_avatar_attributes?.attachment_url}
                      userName={`${output.profile_attributes.first_name} ${output.profile_attributes.last_name}`}
@@ -231,6 +287,25 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
                       label={t('app.shared.user_profile_form.allow_newsletter')}
                       tooltip={t('app.shared.user_profile_form.allow_newsletter_help')} />
         </div>
+        {showGroupInput && <div className="group">
+          <FormSelect options={buildGroupsOptions()}
+                      control={control}
+                      id="group_id"
+                      rules={{ required: true }}
+                      disabled={isDisabled}
+                      formState={formState}
+                      label={t('app.shared.user_profile_form.group')} />
+        </div>}
+        {showTermsAndConditionsInput && termsAndConditions && <div className="terms-and-conditions">
+          <FormSwitch control={control}
+                      disabled={isDisabled}
+                      id="cgu"
+                      rules={{ validate: checkAcceptTerms }}
+                      formState={formState}
+                      label={<HtmlTranslate trKey="app.shared.user_profile_form.terms_and_conditions_html"
+                                            options={{ POLICY_URL: termsAndConditions.custom_asset_file_attributes.attachment_url }} />}
+          />
+        </div>}
         <div className="main-actions">
           <FabButton type="submit" className="submit-button">{t('app.shared.user_profile_form.save')}</FabButton>
         </div>
@@ -251,4 +326,4 @@ const UserProfileFormWrapper: React.FC<UserProfileFormProps> = (props) => {
   );
 };
 
-Application.Components.component('userProfileForm', react2angular(UserProfileFormWrapper, ['action', 'size', 'user', 'className', 'onError', 'onSuccess']));
+Application.Components.component('userProfileForm', react2angular(UserProfileFormWrapper, ['action', 'size', 'user', 'className', 'onError', 'onSuccess', 'showGroupInput', 'showTermsAndConditionsInput']));

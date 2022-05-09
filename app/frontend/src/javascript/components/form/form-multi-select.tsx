@@ -73,6 +73,7 @@ export const FormMultiSelect = <TFieldValues extends FieldValues, TContext exten
         <Controller name={id as FieldPath<TFieldValues>}
                     control={control}
                     defaultValue={valuesDefault as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>}
+                    rules={rules}
                     render={({ field: { onChange, value, ref } }) =>
                       <Select ref={ref}
                               classNamePrefix="rs"

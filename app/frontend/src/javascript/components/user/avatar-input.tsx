@@ -67,7 +67,7 @@ export const AvatarInput = <TFieldValues extends FieldValues>({ currentAvatar, u
 
   return (
     <div className={`avatar-input avatar-input--${size}`}>
-      <Avatar avatar={avatar} userName={userName} size={size} />
+      <Avatar avatar={avatar} userName={userName} size="large" />
       <div className="buttons">
         <FabButton onClick={onAddAvatar} className="select-button">
           {!hasAvatar() && <span>Add an avatar</span>}

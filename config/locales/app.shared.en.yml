@@ -72,6 +72,9 @@ en:
         used_for_invoicing: "This data will be used for billing purposes"
         used_for_reservation: "This data will be used in case of change on one of your bookings"
         used_for_profile: "This data will only be displayed on your profile"
+        group: "Group"
+        terms_and_conditions_html: "I've read and accept <a href=\"{POLICY_URL}\" target=\"_blank\">the terms and conditions<a/>"
+        must_accept_terms: "You must accept the terms and conditions"
         save: "Save"
       gender_input:
         man: "Man"

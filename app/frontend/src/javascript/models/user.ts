@@ -2,11 +2,7 @@ import { Plan } from './plan';
 import { TDateISO, TDateISODate } from '../typings/date-iso';
 import { supportedNetworks, SupportedSocialNetwork } from './social-network';
 
-export enum UserRole {
-  Member = 'member',
-  Manager = 'manager',
-  Admin = 'admin'
-}
+export type UserRole = 'member' | 'manager' | 'admin';
 
 type ProfileAttributesSocial = {
   [network in SupportedSocialNetwork]: string
@@ -24,6 +20,7 @@ export interface User {
   mapped_from_sso?: string[],
   password?: string,
   password_confirmation?: string,
+  cgu?: boolean, // Accepted terms and conditions?
   profile_attributes: ProfileAttributesSocial & {
     id: number,
     first_name: string,

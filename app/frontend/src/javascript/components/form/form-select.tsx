@@ -53,6 +53,7 @@ export const FormSelect = <TFieldValues extends FieldValues, TContext extends ob
       <Controller name={id as FieldPath<TFieldValues>}
                   control={control}
                   defaultValue={valueDefault as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>}
+                  rules={rules}
                   render={({ field: { onChange, value, ref } }) =>
                     <Select ref={ref}
                             classNamePrefix="rs"

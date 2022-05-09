@@ -33,6 +33,7 @@ export const FormSwitch = <TFieldValues, TContext extends object>({ id, label, t
         <Controller name={id as FieldPath<TFieldValues>}
                     control={control}
                     defaultValue={defaultValue as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>}
+                    rules={rules}
                     render={({ field: { onChange, value, ref } }) =>
                       <Switch onChange={val => {
                         onChange(val);
