@@ -70,7 +70,7 @@ module SingleSignOnConcern
           profile[sso_mapping[8..-1].to_sym] = data unless data.nil?
         end
       end
-      return if data.nil? || mapped_from_sso.include?(sso_mapping)
+      return if data.nil? || mapped_from_sso&.include?(sso_mapping)
 
       self.mapped_from_sso = [mapped_from_sso, sso_mapping].compact.join(',')
     end

@@ -71,5 +71,4 @@ export interface ActiveProviderResponse extends AuthenticationProvider {
   mapping: Array<string>,
   link_to_sso_profile: string,
   link_to_sso_connect: string,
-  domain?: string
 }

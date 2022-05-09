@@ -32,4 +32,29 @@ export default class UserLib {
     }
     return userNetworks;
   };
+
+  /**
+   * Return the email given by the SSO provider, parsed if needed
+   * @return {String} E-mail of the current user
+   */
+  ssoEmail = (): string => {
+    const { email } = this.user;
+    if (email) {
+      const duplicate = email.match(/^<([^>]+)>.{20}-duplicate$/);
+      if (duplicate) {
+        return duplicate[1];
+      }
+    }
+    return email;
+  };
+
+  /**
+   * Test if the user's mail is marked as duplicate
+   */
+  hasDuplicate = (): boolean => {
+    const { email } = this.user;
+    if (email) {
+      return !(email.match(/^<([^>]+)>.{20}-duplicate$/) === null);
+    }
+  };
 }

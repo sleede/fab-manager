@@ -21,7 +21,7 @@ export const EditSocials = <TFieldValues extends FieldValues>({ register, setVal
   // regular expression to validate the the input fields
   const urlRegex = /^(https?:\/\/)([\da-z.-]+)\.([-a-z\d.]{2,30})([/\w .-]*)*\/?$/;
 
-  const initSelectedNetworks = networks.filter(el => el.url !== '');
+  const initSelectedNetworks = networks.filter(el => !['', null, undefined].includes(el.url));
   const [selectedNetworks, setSelectedNetworks] = useState(initSelectedNetworks);
   const selectNetwork = (network) => {
     setSelectedNetworks([...selectedNetworks, network]);

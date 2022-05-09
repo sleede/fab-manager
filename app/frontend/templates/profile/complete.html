@@ -21,17 +21,9 @@
 
     <div class="row no-gutter">
         <div class="col-sm-12 col-md-12 b-r">
-            <div class="row" ng-hide="hideNewAccountConfirmation()">
+            <div class="row">
                 <div class="col-md-offset-2 col-md-8 m-t-md">
-                    <section class="panel panel-default bg-light m-lg">
-                        <div class="panel-body m-r">
-                            {{ 'app.logged.profile_completion.you_ve_just_created_a_new_account_on_the_fablab_by_logging_from' | translate:{ GENDER: nameGenre, NAME: fablabName } }}<br/>
-                            <img class="m-l v-middle" height="16" width="16" src='https://www.google.com/s2/favicons?domain={{activeProvider.domain}}' />
-                            <strong class="v-middle">{{activeProvider.name}} <span ng-if="ssoEmail()">({{ssoEmail()}})</span></strong><br/>
-                            <p class="m-t-md" ng-hide="hasDuplicate()" translate>{{ 'app.logged.profile_completion.we_need_some_more_details' }}.</p>
-                            <p class="m-t-md" ng-show="hasDuplicate()" translate>{{ 'app.logged.profile_completion.your_email_is_already_used_by_another_account_on_the_platform' }}</p>
-                        </div>
-                    </section>
+                    <completion-header-info on-error="onError" user="user" active-provider="activeProvider" />
                 </div>
             </div>
             <div class="row col-md-2 col-md-offset-5 hidden-sm hidden-xs" ng-hide="user.merged_at || hideNewAccountConfirmation()">
@@ -43,72 +35,16 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <div class="m-lg panel panel-default bg-light pos-rlt" ng-hide="hasDuplicate()">
+                    <div class="m-lg panel panel-default bg-light pos-rlt">
                         <div ng-class="{'disabling-overlay' : !!user.auth_token}">
                             <div class="panel-body">
-                              <h3 translate ng-hide="hideNewAccountConfirmation()">{{ 'app.logged.profile_completion.new_on_this_platform' }}</h3>
-                              <p translate>{{ 'app.logged.profile_completion.please_fill_the_following_form'}}.</p>
-                              <p class="text-italic">{{ 'app.logged.profile_completion.some_data_may_have_already_been_provided_by_provider_and_cannot_be_modified' | translate:{NAME:activeProvider.name} }}.<br/>
-                                {{ 'app.logged.profile_completion.then_click_on_' | translate }} <strong translate>{{ 'app.shared.buttons.confirm_changes' }}</strong> {{ 'app.logged.profile_completion._to_start_using_the_application' | translate }}.</p>
+                              <profile-form-option on-error="onError"
+                                                   on-success="onSuccess"
+                                                   user="user"
+                                                   active-provider="activeProvider" />
                             </div>
-                            <form role="form"
-                                  name="userForm"
-                                  class="form-horizontal"
-                                  action="{{ actionUrl }}"
-                                  ng-upload="submited(content)"
-                                  upload-options-enable-rails-csrf="true"
-                                  novalidate>
-
-                                <section>
-
-                                    <div class="panel-body m-r">
-                                        <!-- common fields -->
-                                      <user-profile-form user="user"
-                                                         size="'small'"
-                                                         action="'update'"
-                                                         on-error="onError"
-                                                         on-success="onSuccess"
-                                                         show-group-input="true"
-                                                         show-terms-and-conditions-input="true" />
-
-                                    </div>   <!-- ./panel-body  -->
-
-                                </section>
-                            </form>
                         </div>
                     </div>
-                    <section class="m-lg panel panel-default bg-light pos-rlt" ng-show="hasDuplicate()">
-                        <div ng-class="{'disabling-overlay' : !!user.auth_token}">
-                            <div class="panel-body">
-                                <h3 translate>{{ 'app.logged.profile_completion.new_on_this_platform' }}</h3>
-                                <p class="text-italic">
-                                  {{ 'app.logged.profile_completion.your_email_' | translate }}
-                                  <strong>({{ssoEmail()}})</strong>
-                                  {{ 'app.logged.profile_completion._is_currently_associated_with_another_account_on_this_platform' | translate }}
-                                  {{ 'app.logged.profile_completion.please_click_to_change_email_associated_with_your_PROVIDER_account' | translate:{PROVDER: activeProvider.name} }}
-                                </p>
-                                <div class="row">
-                                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                    <a class="btn btn-default" ng-href="{{activeProvider.link_to_sso_profile}}" target="_blank">
-                                      <i class="fa fa-edit"></i> {{ 'app.logged.profile_completion.change_my_data' | translate }}
-                                    </a>
-                                    <p class="text-italic">
-                                      {{ 'app.logged.profile_completion.once_your_data_are_up_to_date_' | translate }}
-                                      <strong translate>{{ 'app.logged.profile_completion._click_on_the_synchronization_button_opposite_' }}</strong>
-                                      {{ 'app.logged.profile_completion.or' | translate}}
-                                      <strong translate>{{ 'app.logged.profile_completion._disconnect_then_reconnect_' }}</strong>
-                                      {{ 'app.logged.profile_completion._for_your_changes_to_take_effect' | translate }}
-                                    </p>
-                                  </div>
-                                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                    <a class="btn btn-default" ng-click="syncProfile()">
-                                      <i class="fa fa-refresh"></i> {{ 'app.logged.profile_completion.sync_my_profile' | translate }}
-                                    </a>
-                                  </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
                 </div>
               <div class="row col-xs-2 col-xs-offset-5 hidden-md hidden-lg" ng-hide="hideNewAccountConfirmation()">
                 <p class="font-felt fleche-left text-lg upper text-center">
