@@ -12,10 +12,11 @@ interface EditSocialsProps<TFieldValues> {
   register: UseFormRegister<TFieldValues>,
   setValue: UseFormSetValue<User>,
   networks: SocialNetwork[],
-  formState: FormState<TFieldValues>
+  formState: FormState<TFieldValues>,
+  disabled: boolean|((id: string) => boolean),
 }
 
-export const EditSocials = <TFieldValues extends FieldValues>({ register, setValue, networks, formState }: EditSocialsProps<TFieldValues>) => {
+export const EditSocials = <TFieldValues extends FieldValues>({ register, setValue, networks, formState, disabled }: EditSocialsProps<TFieldValues>) => {
   const { t } = useTranslation('shared');
   // regular expression to validate the the input fields
   const urlRegex = /^(https?:\/\/)([\da-z.-]+)\.([-a-z\d.]{2,30})([/\w .-]*)*\/?$/;
@@ -66,6 +67,7 @@ export const EditSocials = <TFieldValues extends FieldValues>({ register, setVal
                      formState={formState}
                      defaultValue={network.url}
                      label={network.name}
+                     disabled={disabled}
                      placeholder={t('app.shared.text_editor.url_placeholder')}
                      icon={<img src={`${Icons}#${network.name}`}></img>}
                      addOn={<Trash size={16} />}

@@ -45,6 +45,14 @@
       background-color: var(--gray-soft-dark);
       border-radius: 1px;
     }
+
+    &--disabled {
+      opacity: 0.5;
+
+      button:hover {
+        background-color: transparent;
+      }
+    }
   }
 
   // tiptap class for the editor

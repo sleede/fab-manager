@@ -93,7 +93,7 @@ export const FabTextEditor: React.ForwardRefRenderFunction<FabTextEditorRef, Fab
     <>
       {label && <label onClick={focusEditor} className="fab-textEditor-label">{label}</label>}
       <div className="fab-textEditor">
-        <MenuBar editor={editor} paragraphTools={paragraphTools} video={video} image={image} />
+        <MenuBar editor={editor} paragraphTools={paragraphTools} video={video} image={image} disabled={readOnly} />
         <EditorContent editor={editor} />
         <div className="fab-textEditor-character-count">
           {editor?.storage.characterCount.characters()} / {limit}

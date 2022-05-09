@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { react2angular } from 'react2angular';
 import { SubmitHandler, useForm, useWatch } from 'react-hook-form';
 import { isNil as _isNil } from 'lodash';
@@ -17,6 +17,7 @@ import { AvatarInput } from './avatar-input';
 import { FabButton } from '../base/fab-button';
 import { EditSocials } from '../socials/edit-socials';
 import UserLib from '../../lib/user';
+import AuthProviderAPI from '../../api/auth-provider';
 
 declare const Application: IApplication;
 
@@ -39,7 +40,14 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
   const { handleSubmit, register, control, formState, setValue } = useForm<User>({ defaultValues: { ...user } });
   const output = useWatch<User>({ control });
 
-  const [isOrganization, setIsOrganization] = React.useState<boolean>(!_isNil(user.invoicing_profile_attributes.organization_attributes));
+  const [isOrganization, setIsOrganization] = useState<boolean>(!_isNil(user.invoicing_profile_attributes.organization_attributes));
+  const [isLocalDatabaseProvider, setIsLocalDatabaseProvider] = useState<boolean>(false);
+
+  useEffect(() => {
+    AuthProviderAPI.active().then(data => {
+      setIsLocalDatabaseProvider(data.providable_type === 'DatabaseProvider');
+    });
+  });
 
   /**
    * Callback triggered when the form is submitted: process with the user creation or update.
@@ -54,7 +62,10 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
    * Check if the given field path should be disabled because it's mapped to the SSO API.
    */
   const isDisabled = function (id: string) {
-    // TODO: check if AuthenticationProvider is not LocalDatabase
+    if (isLocalDatabaseProvider) {
+      return false;
+    }
+
     return user.mapped_from_sso?.includes(UserFieldMapping[id]);
   };
 
@@ -72,7 +83,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
       <div className="fields-group">
         <div className="personnal-data">
           <h4>{t('app.shared.user_profile_form.personal_data')}</h4>
-          <GenderInput register={register} />
+          <GenderInput register={register} disabled={isDisabled} />
           <div className="names">
             <FormInput id="profile_attributes.last_name"
                        register={register}
@@ -129,14 +140,15 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
                      disabled={isDisabled}
                      formState={formState}
                      label={t('app.shared.user_profile_form.email_address')} />
-          {/* TODO: no password change if sso */}
-          {action === 'update' && <ChangePassword register={register}
-                                                  onError={onError}
-                                                  currentFormPassword={output.password}
-                                                  formState={formState} />}
-          {action === 'create' && <PasswordInput register={register}
-                                                 currentFormPassword={output.password}
-                                                 formState={formState} />}
+          {isLocalDatabaseProvider && <div className="password">
+            { action === 'update' && <ChangePassword register={register}
+                                                     onError={onError}
+                                                     currentFormPassword={output.password}
+                                                     formState={formState} />}
+            {action === 'create' && <PasswordInput register={register}
+              currentFormPassword={output.password}
+              formState={formState} />}
+          </div>}
         </div>
         <div className="organization-data">
           <h4>{t('app.shared.user_profile_form.organization_data')}</h4>
@@ -145,6 +157,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
                       label={t('app.shared.user_profile_form.declare_organization')}
                       tooltip={t('app.shared.user_profile_form.declare_organization_help')}
                       defaultValue={isOrganization}
+                      disabled={isDisabled('invoicing_profile_attributes.organization_attributes.name')}
                       onChange={setIsOrganization} />
           {isOrganization && <div className="organization-fields">
             <FormInput id="invoicing_profile_attributes.organization_attributes.id"
@@ -200,6 +213,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
         <div className='account-networks'>
           <h4>{t('app.shared.user_profile_form.account_networks')}</h4>
           <EditSocials register={register}
+                       disabled={isDisabled}
                        networks={userNetworks}
                        setValue={setValue}
                        formState={formState} />
