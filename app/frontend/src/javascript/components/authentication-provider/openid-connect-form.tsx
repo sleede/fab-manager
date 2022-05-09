@@ -112,6 +112,7 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
                                            label={t('app.admin.authentication.openid_connect_form.scope')}
                                            tooltip={<HtmlTranslate trKey="app.admin.authentication.openid_connect_form.scope_help_html" />}
                                            options={scopesAvailable.map((scope) => ({ value: scope, label: scope }))}
+                                           creatable
                                            control={control} />}
       <FormSelect id="providable_attributes.prompt"
                   label={t('app.admin.authentication.openid_connect_form.prompt')}

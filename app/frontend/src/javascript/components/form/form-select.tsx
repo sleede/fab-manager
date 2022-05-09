@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import Select from 'react-select';
+import CreatableSelect from 'react-select/creatable';
 import { Controller, Path } from 'react-hook-form';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { FieldPath } from 'react-hook-form/dist/types/path';
@@ -13,6 +14,7 @@ interface FormSelectProps<TFieldValues, TContext extends object, TOptionValue> e
   onChange?: (value: TOptionValue) => void,
   placeholder?: string,
   clearable?: boolean,
+  creatable?: boolean,
 }
 
 /**
@@ -24,7 +26,7 @@ type selectOption<TOptionValue> = { value: TOptionValue, label: string };
 /**
  * This component is a wrapper for react-select to use with react-hook-form
  */
-export const FormSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, tooltip, className, control, placeholder, options, valueDefault, error, warning, rules, disabled = false, onChange, readOnly = false, clearable, formState }: FormSelectProps<TFieldValues, TContext, TOptionValue>) => {
+export const FormSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, tooltip, className, control, placeholder, options, valueDefault, error, warning, rules, disabled = false, onChange, readOnly = false, clearable = false, formState, creatable = false }: FormSelectProps<TFieldValues, TContext, TOptionValue>) => {
   const [isDisabled, setIsDisabled] = React.useState<boolean>(false);
 
   useEffect(() => {
@@ -45,6 +47,9 @@ export const FormSelect = <TFieldValues extends FieldValues, TContext extends ob
     }
   };
 
+  // if the user can create new options, we need to use a different component
+  const AbstractSelect = creatable ? CreatableSelect : Select;
+
   return (
     <AbstractFormItem id={id} label={label} tooltip={tooltip}
                       className={`form-select ${className || ''}`} formState={formState}
@@ -55,18 +60,18 @@ export const FormSelect = <TFieldValues extends FieldValues, TContext extends ob
                   defaultValue={valueDefault as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>}
                   rules={rules}
                   render={({ field: { onChange, value, ref } }) =>
-                    <Select ref={ref}
-                            classNamePrefix="rs"
-                            className="rs"
-                            value={options.find(c => c.value === value)}
-                            onChange={val => {
-                              onChangeCb(val.value);
-                              onChange(val.value);
-                            }}
-                            placeholder={placeholder}
-                            isDisabled={isDisabled}
-                            isClearable={clearable}
-                            options={options} />
+                    <AbstractSelect ref={ref}
+                                    classNamePrefix="rs"
+                                    className="rs"
+                                    value={options.find(c => c.value === value)}
+                                    onChange={val => {
+                                      onChangeCb(val.value);
+                                      onChange(val.value);
+                                    }}
+                                    placeholder={placeholder}
+                                    isDisabled={isDisabled}
+                                    isClearable={clearable}
+                                    options={options} />
                   } />
     </AbstractFormItem>
   );

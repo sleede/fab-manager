@@ -6,6 +6,7 @@ import { FieldPath } from 'react-hook-form/dist/types/path';
 import { FieldPathValue, UnpackNestedValue } from 'react-hook-form/dist/types';
 import { FormControlledComponent } from '../../models/form-component';
 import { AbstractFormItem, AbstractFormItemProps } from './abstract-form-item';
+import CreatableSelect from 'react-select/creatable';
 
 interface FormSelectProps<TFieldValues, TContext extends object, TOptionValue> extends FormControlledComponent<TFieldValues, TContext>, AbstractFormItemProps<TFieldValues> {
   options: Array<selectOption<TOptionValue>>,
@@ -13,6 +14,7 @@ interface FormSelectProps<TFieldValues, TContext extends object, TOptionValue> e
   onChange?: (values: Array<TOptionValue>) => void,
   placeholder?: string,
   expectedResult?: 'array' | 'string'
+  creatable?: boolean,
 }
 
 /**
@@ -25,8 +27,9 @@ type selectOption<TOptionValue> = { value: TOptionValue, label: string };
  * This component is a wrapper around react-select to use with react-hook-form.
  * It is a multi-select component.
  */
-export const FormMultiSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, tooltip, className, control, placeholder, options, valuesDefault, error, rules, disabled = false, onChange, formState, readOnly = false, warning, expectedResult }: FormSelectProps<TFieldValues, TContext, TOptionValue>) => {
+export const FormMultiSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, tooltip, className, control, placeholder, options, valuesDefault, error, rules, disabled, onChange, formState, readOnly, warning, expectedResult, creatable }: FormSelectProps<TFieldValues, TContext, TOptionValue>) => {
   const [isDisabled, setIsDisabled] = React.useState<boolean>(false);
+  const [allOptions, setAllOptions] = React.useState<Array<selectOption<TOptionValue>>>(options);
 
   useEffect(() => {
     if (typeof disabled === 'function') {
@@ -62,8 +65,27 @@ export const FormMultiSelect = <TFieldValues extends FieldValues, TContext exten
     } else {
       values = value;
     }
-    return options.filter(c => values?.includes(c.value));
+    return allOptions.filter(c => values?.includes(c.value));
   };
+
+  /**
+   * When the select is 'creatable', this callback handle the creation and the selection of a new option.
+   */
+  const handleCreate = (value: Array<TOptionValue>|string, rhfOnChange) => {
+    return (inputValue: string) => {
+      // add the new value to the list of options
+      const newOption = { value: inputValue as unknown as TOptionValue, label: inputValue };
+      setAllOptions([...allOptions, newOption]);
+
+      // select the new option
+      const values = getCurrentValues(value);
+      values.push(newOption);
+      onChangeCb(values.map(c => c.value), rhfOnChange);
+    };
+  };
+
+  // if the user can create new options, we need to use a different component
+  const AbstractSelect = creatable ? CreatableSelect : Select;
 
   return (
     <AbstractFormItem id={id} formState={formState} label={label}
@@ -75,23 +97,27 @@ export const FormMultiSelect = <TFieldValues extends FieldValues, TContext exten
                     defaultValue={valuesDefault as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>}
                     rules={rules}
                     render={({ field: { onChange, value, ref } }) =>
-                      <Select ref={ref}
-                              classNamePrefix="rs"
-                              className="rs"
-                              value={getCurrentValues(value)}
-                              onChange={val => {
-                                const values = val?.map(c => c.value);
-                                onChangeCb(values, onChange);
-                              }}
-                              placeholder={placeholder}
-                              options={options}
-                              isDisabled={isDisabled}
-                              isMulti />
+                      <AbstractSelect ref={ref}
+                                      classNamePrefix="rs"
+                                      className="rs"
+                                      value={getCurrentValues(value)}
+                                      onChange={val => {
+                                        const values = val?.map(c => c.value);
+                                        onChangeCb(values, onChange);
+                                      }}
+                                      onCreateOption={handleCreate(value, onChange)}
+                                      placeholder={placeholder}
+                                      options={allOptions}
+                                      isDisabled={isDisabled}
+                                      isMulti />
                     } />
     </AbstractFormItem>
   );
 };
 
 FormMultiSelect.defaultProps = {
-  expectedResult: 'array'
+  expectedResult: 'array',
+  creatable: false,
+  readOnly: false,
+  disabled: false
 };
