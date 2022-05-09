@@ -39,6 +39,10 @@ export const FormMultiSelect = <TFieldValues extends FieldValues, TContext exten
     }
   }, [disabled]);
 
+  useEffect(() => {
+    setAllOptions(options);
+  }, [options]);
+
   /**
    * The following callback will trigger the onChange callback, if it was passed to this component,
    * when the selected option changes.

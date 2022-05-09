@@ -24,7 +24,6 @@ export const AbstractFormItem = <TFieldValues extends FieldValues>({ id, label, 
 
   useEffect(() => {
     setIsDirty(_get(formState?.dirtyFields, id));
-    console.log(_get(formState?.dirtyFields, id));
     setFieldError(_get(formState?.errors, id));
   }, [formState]);
 

@@ -19,11 +19,13 @@ import { EditSocials } from '../socials/edit-socials';
 import UserLib from '../../lib/user';
 import AuthProviderAPI from '../../api/auth-provider';
 import { FormSelect } from '../form/form-select';
-import { Group } from '../../models/group';
 import GroupAPI from '../../api/group';
 import CustomAssetAPI from '../../api/custom-asset';
 import { CustomAsset, CustomAssetName } from '../../models/custom-asset';
 import { HtmlTranslate } from '../base/html-translate';
+import TrainingAPI from '../../api/training';
+import TagAPI from '../../api/tag';
+import { FormMultiSelect } from '../form/form-multi-select';
 
 declare const Application: IApplication;
 
@@ -36,6 +38,8 @@ interface UserProfileFormProps {
   onSuccess: (user: User) => void,
   showGroupInput?: boolean,
   showTermsAndConditionsInput?: boolean,
+  showTrainingsInput?: boolean,
+  showTagsInput?: boolean,
 }
 
 /**
@@ -47,7 +51,7 @@ type selectOption = { value: number, label: string };
 /**
  * Form component to create or update a user
  */
-export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, user, className, onError, onSuccess, showGroupInput = false, showTermsAndConditionsInput = false }) => {
+export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, user, className, onError, onSuccess, showGroupInput, showTermsAndConditionsInput, showTrainingsInput, showTagsInput }) => {
   const { t } = useTranslation('shared');
 
   // regular expression to validate the input fields
@@ -59,26 +63,40 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
 
   const [isOrganization, setIsOrganization] = useState<boolean>(!_isNil(user.invoicing_profile_attributes.organization_attributes));
   const [isLocalDatabaseProvider, setIsLocalDatabaseProvider] = useState<boolean>(false);
-  const [groups, setGroups] = useState<Group[]>([]);
+  const [groups, setGroups] = useState<selectOption[]>([]);
   const [termsAndConditions, setTermsAndConditions] = useState<CustomAsset>(null);
+  const [trainings, setTrainings] = useState<selectOption[]>([]);
+  const [tags, setTags] = useState<selectOption[]>([]);
 
   useEffect(() => {
     AuthProviderAPI.active().then(data => {
       setIsLocalDatabaseProvider(data.providable_type === 'DatabaseProvider');
     }).catch(error => onError(error));
-    GroupAPI.index({ disabled: false, admins: user.role === 'admin' }).then(data => {
-      setGroups(data);
-    }).catch(error => onError(error));
-    CustomAssetAPI.get(CustomAssetName.CguFile).then(data => {
-      setTermsAndConditions(data);
-    }).catch(error => onError(error));
+    if (showGroupInput) {
+      GroupAPI.index({ disabled: false, admins: user.role === 'admin' }).then(data => {
+        setGroups(buildOptions(data));
+      }).catch(error => onError(error));
+    }
+    if (showTermsAndConditionsInput) {
+      CustomAssetAPI.get(CustomAssetName.CguFile).then(setTermsAndConditions).catch(error => onError(error));
+    }
+    if (showTrainingsInput) {
+      TrainingAPI.index({ disabled: false }).then(data => {
+        setTrainings(buildOptions(data));
+      }).catch(error => onError(error));
+    }
+    if (showTagsInput) {
+      TagAPI.index().then(data => {
+        setTags(buildOptions(data));
+      }).catch(error => onError(error));
+    }
   }, []);
 
   /**
-   * Convert all groups to the react-select format
+   * Convert the provided array of items to the react-select format
    */
-  const buildGroupsOptions = (): Array<selectOption> => {
-    return groups.map(t => {
+  const buildOptions = (items: Array<{ id?: number, name: string }>): Array<selectOption> => {
+    return items.map(t => {
       return { value: t.id, label: t.name };
     });
   };
@@ -288,13 +306,27 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
                       tooltip={t('app.shared.user_profile_form.allow_newsletter_help')} />
         </div>
         {showGroupInput && <div className="group">
-          <FormSelect options={buildGroupsOptions()}
+          <FormSelect options={groups}
                       control={control}
                       id="group_id"
                       rules={{ required: true }}
                       disabled={isDisabled}
                       formState={formState}
                       label={t('app.shared.user_profile_form.group')} />
+        </div>}
+        {showTrainingsInput && <div className="trainings">
+          <FormMultiSelect control={control}
+                           options={trainings}
+                           formState={formState}
+                           label={t('app.shared.user_profile_form.trainings')}
+                           id="statistic_profile_attributes.training_ids" />
+        </div>}
+        {showTagsInput && <div className="tags">
+          <FormMultiSelect control={control}
+                           options={tags}
+                           formState={formState}
+                           label={t('app.shared.user_profile_form.tags')}
+                           id="tag_ids" />
         </div>}
         {showTermsAndConditionsInput && termsAndConditions && <div className="terms-and-conditions">
           <FormSwitch control={control}
@@ -315,7 +347,11 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
 };
 
 UserProfileForm.defaultProps = {
-  size: 'large'
+  size: 'large',
+  showGroupInput: false,
+  showTrainingsInput: false,
+  showTermsAndConditionsInput: false,
+  showTagsInput: false
 };
 
 const UserProfileFormWrapper: React.FC<UserProfileFormProps> = (props) => {
@@ -326,4 +362,4 @@ const UserProfileFormWrapper: React.FC<UserProfileFormProps> = (props) => {
   );
 };
 
-Application.Components.component('userProfileForm', react2angular(UserProfileFormWrapper, ['action', 'size', 'user', 'className', 'onError', 'onSuccess', 'showGroupInput', 'showTermsAndConditionsInput']));
+Application.Components.component('userProfileForm', react2angular(UserProfileFormWrapper, ['action', 'size', 'user', 'className', 'onError', 'onSuccess', 'showGroupInput', 'showTermsAndConditionsInput', 'showTagsInput', 'showTrainingsInput']));

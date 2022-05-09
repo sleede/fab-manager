@@ -664,7 +664,7 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
     $scope.tags = tagsPromise;
 
     // The user to edit
-    $scope.user = memberPromise;
+    $scope.user = cleanUser(memberPromise);
 
     // Should the password be modified?
     $scope.password = { change: false };
@@ -813,6 +813,14 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
       growl.error(message);
     };
 
+    /**
+     * Callback triggered when the user was successfully updated
+     */
+    $scope.onUserSuccess = (user) => {
+      growl.success(_t('app.admin.members_edit.update_success'));
+      $state.go('app.admin.members');
+    };
+
     $scope.createWalletCreditModal = function (user, wallet) {
       const modalInstance = $uibModal.open({
         animation: true,
@@ -913,6 +921,13 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
       // Using the MembersController
       return new MembersController($scope, $state, Group, Training);
     };
+
+    // prepare the user for the react-hook-form
+    function cleanUser (user) {
+      delete user.$promise;
+      delete user.$resolved;
+      return user;
+    }
 
     // !!! MUST BE CALLED AT THE END of the controller
     return initialize();

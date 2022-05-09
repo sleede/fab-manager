@@ -45,6 +45,7 @@ json.statistic_profile_attributes do
   json.id member.statistic_profile.id
   json.gender member.statistic_profile.gender.to_s
   json.birthday member.statistic_profile&.birthday&.to_date&.iso8601
+  json.training_ids member.statistic_profile&.training_ids
 end
 
 if member.subscribed_plan

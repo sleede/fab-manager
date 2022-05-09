@@ -58,6 +58,7 @@ export interface User {
     id: number,
     gender: string,
     birthday: TDateISODate
+    training_ids: Array<number>
   },
   subscribed_plan: Plan,
   subscription: {
@@ -75,7 +76,7 @@ export interface User {
     }
   },
   training_credits: Array<number>,
-  machine_credits: Array<{machine_id: number, hours_used: number}>,
+  machine_credits: Array<{ machine_id: number, hours_used: number }>,
   last_sign_in_at: TDateISO
 }
 
