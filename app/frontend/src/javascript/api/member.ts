@@ -34,4 +34,9 @@ export default class MemberAPI {
     });
     return res?.data;
   }
+
+  static async current (): Promise<User> {
+    const res: AxiosResponse<User> = await apiClient.get('/api/members/current');
+    return res?.data;
+  }
 }

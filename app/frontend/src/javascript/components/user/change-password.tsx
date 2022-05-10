@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FabButton } from '../base/fab-button';
 import { FabModal } from '../base/fab-modal';
 import { FormInput } from '../form/form-input';
@@ -8,6 +8,7 @@ import Authentication from '../../api/authentication';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { PasswordInput } from './password-input';
 import { FormState } from 'react-hook-form/dist/types/form';
+import MemberAPI from '../../api/member';
 
 interface ChangePasswordProp<TFieldValues> {
   register: UseFormRegister<TFieldValues>,
@@ -25,14 +26,32 @@ export const ChangePassword = <TFieldValues extends FieldValues>({ register, onE
 
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
   const [isConfirmedPassword, setIsConfirmedPassword] = React.useState<boolean>(false);
+  const [isPrivileged, setIsPrivileged] = React.useState<boolean>(false);
 
   const { handleSubmit, register: passwordRegister } = useForm<{ password: string }>();
+
+  useEffect(() => {
+    MemberAPI.current().then(user => {
+      setIsPrivileged(user.role === 'admin' || user.role === 'manager');
+    }).catch(error => onError(error));
+  }, []);
 
   /**
    * Opens/closes the dialog asking to confirm the current password before changing it.
    */
   const toggleConfirmationModal = () => {
     setIsModalOpen(!isModalOpen);
+  };
+
+  /**
+   * Callback triggered when the user clicks on the "change my password" button
+   */
+  const handleChangePasswordRequested = () => {
+    if (isPrivileged) {
+      setIsConfirmedPassword(true);
+    } else {
+      toggleConfirmationModal();
+    }
   };
 
   /**
@@ -59,7 +78,7 @@ export const ChangePassword = <TFieldValues extends FieldValues>({ register, onE
 
   return (
     <div className="change-password">
-      {!isConfirmedPassword && <FabButton onClick={() => toggleConfirmationModal()}>
+      {!isConfirmedPassword && <FabButton onClick={() => handleChangePasswordRequested()}>
         {t('app.shared.change_password.change_my_password')}
       </FabButton>}
       {isConfirmedPassword && <div className="password-fields">

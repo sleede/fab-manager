@@ -234,6 +234,12 @@ class API::MembersController < API::ApiController
     render json: @member
   end
 
+  def current
+    @member = current_user
+    authorize @member
+    render json: @member
+  end
+
   private
 
   def set_member

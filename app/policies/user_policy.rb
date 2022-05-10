@@ -19,6 +19,10 @@ class UserPolicy < ApplicationPolicy
     user.admin? || user.manager? || (record.is_allow_contact && record.member?) || (user.id == record.id)
   end
 
+  def current?
+    user.admin? || user.manager? || (user.id == record.id)
+  end
+
   def update?
     user.admin? || user.manager? || (user.id == record.id)
   end
