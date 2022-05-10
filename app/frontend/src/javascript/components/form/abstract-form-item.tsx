@@ -9,7 +9,6 @@ export interface AbstractFormItemProps<TFieldValues> extends PropsWithChildren<A
   tooltip?: ReactNode,
   className?: string,
   disabled?: boolean|((id: string) => boolean),
-  readOnly?: boolean
   onLabelClick?: (event: React.MouseEvent<HTMLLabelElement, MouseEvent>) => void,
 }
 
@@ -17,7 +16,7 @@ export interface AbstractFormItemProps<TFieldValues> extends PropsWithChildren<A
  * This abstract component should not be used directly.
  * Other forms components that are intended to be used with react-hook-form must extend this component.
  */
-export const AbstractFormItem = <TFieldValues extends FieldValues>({ id, label, tooltip, className, disabled, readOnly, error, warning, rules, formState, onLabelClick, children }: AbstractFormItemProps<TFieldValues>) => {
+export const AbstractFormItem = <TFieldValues extends FieldValues>({ id, label, tooltip, className, disabled, error, warning, rules, formState, onLabelClick, children }: AbstractFormItemProps<TFieldValues>) => {
   const [isDirty, setIsDirty] = useState<boolean>(false);
   const [fieldError, setFieldError] = useState<{ message: string }>(error);
   const [isDisabled, setIsDisabled] = useState<boolean>(false);
@@ -46,7 +45,6 @@ export const AbstractFormItem = <TFieldValues extends FieldValues>({ id, label, 
     `${isDirty && fieldError ? 'is-incorrect' : ''}`,
     `${isDirty && warning ? 'is-warned' : ''}`,
     `${rules && rules.required ? 'is-required' : ''}`,
-    `${readOnly ? 'is-readonly' : ''}`,
     `${isDisabled ? 'is-disabled' : ''}`
   ].join(' ');
 

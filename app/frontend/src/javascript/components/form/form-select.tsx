@@ -26,14 +26,14 @@ type selectOption<TOptionValue> = { value: TOptionValue, label: string };
 /**
  * This component is a wrapper for react-select to use with react-hook-form
  */
-export const FormSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, tooltip, className, control, placeholder, options, valueDefault, error, warning, rules, disabled = false, onChange, readOnly = false, clearable = false, formState, creatable = false }: FormSelectProps<TFieldValues, TContext, TOptionValue>) => {
+export const FormSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, tooltip, className, control, placeholder, options, valueDefault, error, warning, rules, disabled = false, onChange, clearable = false, formState, creatable = false }: FormSelectProps<TFieldValues, TContext, TOptionValue>) => {
   const [isDisabled, setIsDisabled] = React.useState<boolean>(false);
 
   useEffect(() => {
     if (typeof disabled === 'function') {
-      setIsDisabled(disabled(id) || readOnly);
+      setIsDisabled(disabled(id));
     } else {
-      setIsDisabled(disabled || readOnly);
+      setIsDisabled(disabled);
     }
   }, [disabled]);
 
@@ -54,7 +54,7 @@ export const FormSelect = <TFieldValues extends FieldValues, TContext extends ob
     <AbstractFormItem id={id} label={label} tooltip={tooltip}
                       className={`form-select ${className || ''}`} formState={formState}
                       error={error} warning={warning} rules={rules}
-                      disabled={disabled} readOnly={readOnly}>
+                      disabled={disabled}>
       <Controller name={id as FieldPath<TFieldValues>}
                   control={control}
                   defaultValue={valueDefault as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>}

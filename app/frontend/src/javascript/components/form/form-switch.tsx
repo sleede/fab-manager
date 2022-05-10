@@ -14,7 +14,7 @@ interface FormSwitchProps<TFieldValues, TContext extends object> extends FormCon
 /**
  * This component is a wrapper for react-switch, to use with react-hook-form.
  */
-export const FormSwitch = <TFieldValues, TContext extends object>({ id, label, tooltip, className, error, rules, disabled, control, defaultValue, formState, readOnly, warning, onChange }: FormSwitchProps<TFieldValues, TContext>) => {
+export const FormSwitch = <TFieldValues, TContext extends object>({ id, label, tooltip, className, error, rules, disabled, control, defaultValue, formState, warning, onChange }: FormSwitchProps<TFieldValues, TContext>) => {
   /**
    * The following callback will trigger the onChange callback, if it was passed to this component,
    * when the selected option changes.
@@ -28,7 +28,7 @@ export const FormSwitch = <TFieldValues, TContext extends object>({ id, label, t
   return (
     <AbstractFormItem id={id} formState={formState} label={label}
                       className={`form-switch ${className || ''}`} tooltip={tooltip}
-                      disabled={disabled} readOnly={readOnly}
+                      disabled={disabled}
                       rules={rules} error={error} warning={warning}>
         <Controller name={id as FieldPath<TFieldValues>}
                     control={control}
@@ -43,8 +43,7 @@ export const FormSwitch = <TFieldValues, TContext extends object>({ id, label, t
                       height={19}
                       width={40}
                       ref={ref}
-                      disabled={typeof disabled === 'function' ? disabled(id) : disabled}
-                      readOnly={readOnly} />
+                      disabled={typeof disabled === 'function' ? disabled(id) : disabled} />
                     } />
     </AbstractFormItem>
   );

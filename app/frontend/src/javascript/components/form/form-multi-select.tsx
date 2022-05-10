@@ -27,15 +27,15 @@ type selectOption<TOptionValue> = { value: TOptionValue, label: string };
  * This component is a wrapper around react-select to use with react-hook-form.
  * It is a multi-select component.
  */
-export const FormMultiSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, tooltip, className, control, placeholder, options, valuesDefault, error, rules, disabled, onChange, formState, readOnly, warning, expectedResult, creatable }: FormSelectProps<TFieldValues, TContext, TOptionValue>) => {
+export const FormMultiSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, tooltip, className, control, placeholder, options, valuesDefault, error, rules, disabled, onChange, formState, warning, expectedResult, creatable }: FormSelectProps<TFieldValues, TContext, TOptionValue>) => {
   const [isDisabled, setIsDisabled] = React.useState<boolean>(false);
   const [allOptions, setAllOptions] = React.useState<Array<selectOption<TOptionValue>>>(options);
 
   useEffect(() => {
     if (typeof disabled === 'function') {
-      setIsDisabled(disabled(id) || readOnly);
+      setIsDisabled(disabled(id));
     } else {
-      setIsDisabled(disabled || readOnly);
+      setIsDisabled(disabled);
     }
   }, [disabled]);
 
@@ -94,7 +94,7 @@ export const FormMultiSelect = <TFieldValues extends FieldValues, TContext exten
   return (
     <AbstractFormItem id={id} formState={formState} label={label}
                       className={`form-multi-select ${className || ''}`} tooltip={tooltip}
-                      disabled={disabled} readOnly={readOnly}
+                      disabled={disabled}
                       rules={rules} error={error} warning={warning}>
         <Controller name={id as FieldPath<TFieldValues>}
                     control={control}
@@ -122,6 +122,5 @@ export const FormMultiSelect = <TFieldValues extends FieldValues, TContext exten
 FormMultiSelect.defaultProps = {
   expectedResult: 'array',
   creatable: false,
-  readOnly: false,
   disabled: false
 };

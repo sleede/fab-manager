@@ -212,4 +212,13 @@
     }
     p { margin: 0; }
   }
+
+  &.is-disabled {
+    .ProseMirror {
+      resize: none;
+    }
+    button {
+      cursor: not-allowed;
+    }
+  }
 }

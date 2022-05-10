@@ -23,7 +23,7 @@ interface FormInputProps<TFieldValues, TInputType> extends FormComponent<TFieldV
 /**
  * This component is a template for an input component to use within React Hook Form
  */
-export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, register, label, tooltip, defaultValue, icon, className, rules, readOnly, disabled, type, addOn, addOnAction, addOnClassName, placeholder, error, warning, formState, step, onChange, debounce, accept }: FormInputProps<TFieldValues, TInputType>) => {
+export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, register, label, tooltip, defaultValue, icon, className, rules, disabled, type, addOn, addOnAction, addOnClassName, placeholder, error, warning, formState, step, onChange, debounce, accept }: FormInputProps<TFieldValues, TInputType>) => {
   /**
    * Debounced (ie. temporised) version of the 'on change' callback.
    */
@@ -52,7 +52,7 @@ export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, re
   return (
     <AbstractFormItem id={id} formState={formState} label={label}
                       className={classNames} tooltip={tooltip}
-                      disabled={disabled} readOnly={readOnly}
+                      disabled={disabled}
                       rules={rules} error={error} warning={warning}>
         {icon && <span className="icon">{icon}</span>}
         <input id={id}
@@ -66,7 +66,6 @@ export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, re
           type={type}
           step={step}
           disabled={typeof disabled === 'function' ? disabled(id) : disabled}
-          readOnly={readOnly}
           placeholder={placeholder}
           accept={accept} />
         {addOn && <span onClick={addOnAction} className={`addon ${addOnClassName || ''} ${addOnAction ? 'is-btn' : ''}`}>{addOn}</span>}
