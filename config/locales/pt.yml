@@ -37,7 +37,7 @@ pt:
       end_before_start: "A data final não pode ser anterior à data de início. Escolha uma data após %{START}"
       invalid_duration: "A duração permitida deve ter entre 1 dia e 1 ano. Sua menstruação tem %{DAYS} dias."
       must_be_in_the_past: "O período deve ser estritamente anterior à data de hoje."
-      registration_disabled: "Registration is disabled"
+      registration_disabled: "Registo está desabilitado"
   apipie:
     api_documentation: "Documentação da API"
     code: "Código HTTP"
@@ -53,7 +53,7 @@ pt:
     i_ve_reserved: "Eu reservei"
     length_must_be_slot_multiple: "deve ser pelo menos %{MIN} minutos após a data de início"
     must_be_associated_with_at_least_1_machine: "deve estar associada a pelo menos uma máquina"
-    deleted_user: "Deleted user"
+    deleted_user: "Usuário deletado"
   #members management
   members:
     unable_to_change_the_group_while_a_subscription_is_running: "Não é possível alterar o grupo enquanto uma assinatura está sendo executada"
@@ -127,7 +127,7 @@ pt:
     deadline_date: "Data de pagamento"
     deadline_amount: "Valor incluindo impostos"
     total_amount: "Valor total"
-    settlement_by_METHOD: "Debits will be made by {METHOD, select, card{card} transfer{bank transfer} other{check}} for each deadlines."
+    settlement_by_METHOD: "Os débitos serão feitos por {METHOD, select, card{cartão} other{verificação}} para cada prazo."
     settlement_by_wallet: "%{AMOUNT} será debitado da sua carteira fixando o primeiro prazo."
   #CVS accounting export (columns headers)
   accounting_export:
@@ -150,10 +150,10 @@ pt:
     Space_reservation: "reserva de espaço."
     wallet: "carteira"
   vat_export:
-    start_date: "Start date"
-    end_date: "End date"
-    vat_rate: "VAT rate"
-    amount: "Total amount"
+    start_date: "Data de início"
+    end_date: "Data de término"
+    vat_rate: "Taxa de imposto"
+    amount: "Valor total"
   #training availabilities
   trainings:
     i_ve_reserved: "Eu reservei"
@@ -269,9 +269,9 @@ pt:
       notify_admin_subscription_will_expire_in_7_days:
         USER_s_subscription_will_expire_in_7_days: "A assinatura do usuário %{USER} expira em 7 dias."
       notify_admin_user_group_changed:
-        user_NAME_changed_his_group_html: "User <strong><em>{NAME}</strong></em> changed group." #messageFormat interpolation
+        user_NAME_changed_his_group_html: "O usuário <strong><em>{NAME}</strong></em> mudou de grupo." #messageFormat interpolation
       notify_admin_user_merged:
-        user_NAME_has_merged_his_account_with_the_one_imported_from_PROVIDER_UID_html: "<strong><em>{NAME}</strong></em>'s account was merged with the one imported from <strong><em>{PROVIDER} </strong> ({%UID})</em>." #messageFormat interpolation
+        user_NAME_has_merged_his_account_with_the_one_imported_from_PROVIDER_UID_html: "A conta de <strong><em>{NAME}</strong></em> foi mesclada com a importada de <strong><em>{PROVIDER} </strong> ({%UID})</em>." #messageFormat interpolation
       notify_admin_when_project_published:
         project_NAME_has_been_published_html: "Projeto <a href='/#!/projects/%{ID}'><strong><em>%{NAME}<em></strong></a> foi publicado."
       notify_admin_when_user_is_created:
@@ -338,7 +338,7 @@ pt:
         users_reservations: "da lista de reservas"
         availabilities_index: "de reservas disponíveis"
         accounting_acd: "de dados contábeis para ACD"
-        accounting_vat: "of the collected VAT"
+        accounting_vat: "do imposto coletado"
         is_over: "está finalizado."
         download_here: "Baixe aqui"
       notify_admin_import_complete:
@@ -369,21 +369,21 @@ pt:
       notify_user_when_payment_schedule_ready:
         your_schedule_is_ready_html: "Sua fatura #%{REFERENCE}, de %{AMOUNT}, está pronta. <a href='api/invoices/%{SCHEDULE_ID}/download' target='_blank'>Clique aqui para fazer o download</a>."
       notify_admin_payment_schedule_error:
-        schedule_error: "An error occurred for the card debit of the %{DATE} deadline, for schedule %{REFERENCE}"
+        schedule_error: "Falha no débito para a data limite de %{DATE} para o agendamento %{REFERENCE}"
       notify_member_payment_schedule_error:
-        schedule_error: "An error occurred for the card debit of the %{DATE} deadline, for your schedule %{REFERENCE}"
+        schedule_error: "Falha no débito para a data limite de %{DATE} para o seu agendamento %{REFERENCE}"
       notify_admin_payment_schedule_failed:
         schedule_failed: "Falha no débito para a data limite de %{DATE} para agendamento %{REFERENCE}"
       notify_member_payment_schedule_failed:
         schedule_failed: "Falha no débito para o período %{DATE} de agendamento %{REFERENCE}"
       notify_admin_payment_schedule_gateway_canceled:
-        schedule_canceled: "The payment schedule %{REFERENCE} was canceled by the gateway. An action is required."
+        schedule_canceled: "O cronograma de pagamento %{REFERENCE} foi cancelado pelo gateway. Uma ação é necessária."
       notify_member_payment_schedule_gateway_canceled:
-        schedule_canceled: "Your payment schedule %{REFERENCE} was canceled by the gateway."
+        schedule_canceled: "Sua agenda de pagamento %{REFERENCE} foi cancelada pelo gateway."
       notify_admin_payment_schedule_check_deadline:
         schedule_deadline: "Você deve realizar a verificação para a data limite de %{DATE} para agendar %{REFERENCE}"
       notify_admin_payment_schedule_transfer_deadline:
-        schedule_deadline: "You must confirm the bank direct debit for the %{DATE} deadline, for schedule %{REFERENCE}"
+        schedule_deadline: "Você deve realizar a verificação do débito para a data limite de %{DATE}, para o agendamento %{REFERENCE}"
   #statistics tools for admins
   statistics:
     subscriptions: "Assinaturas"
@@ -553,5 +553,5 @@ pt:
     renew_pack_threshold: "Limite para renovação de pacotes"
     pack_only_for_subscription: "Restringir pacotes para assinantes"
     overlapping_categories: "Categorias para prevenção de reservas sobrepostas"
-    extended_prices_in_same_day: "Extended prices in the same day"
-    public_registrations: "Public registrations"
+    extended_prices_in_same_day: "Preços estendidos no mesmo dia"
+    public_registrations: "Inscrições públicas"
