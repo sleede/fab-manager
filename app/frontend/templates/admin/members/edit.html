@@ -42,22 +42,18 @@
             </div>
           </section>
 
-          <form role="form" name="userForm" class="form-horizontal col-md-8" novalidate  action="{{ actionUrl }}" ng-upload="submited(content)" upload-options-enable-rails-csrf="true">
+          <section class="panel panel-default bg-light m-lg">
+            <div class="panel-body m-r">
+              <user-profile-form user="user"
+                                 action="'update'"
+                                 on-error="onError"
+                                 on-success="onUserSuccess"
+                                 show-group-input="true"
+                                 show-tags-input="true" 
+                                 show-trainings-input="true" />
+            </div>
+          </section>
 
-            <section class="panel panel-default bg-light m-lg">
-              <div class="panel-body m-r">
-                <ng-include src="'/shared/_member_form.html'"></ng-include>
-
-                <ng-include src="'/admin/members/_form.html'"></ng-include>
-
-              </div>   <!-- ./panel-body  -->
-
-
-              <div class="panel-footer no-padder">
-                <input type="submit" value="{{ 'app.shared.buttons.confirm_changes' | translate }}" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="userForm.$invalid"/>
-              </div>
-            </section>
-          </form>
         </uib-tab>
 
         <uib-tab heading="{{ 'app.admin.members_edit.subscription' | translate }}" ng-if="$root.modules.plans">

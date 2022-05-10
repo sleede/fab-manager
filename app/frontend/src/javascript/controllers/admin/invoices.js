@@ -1012,14 +1012,14 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       });
       // on tour end, save the status in database
       uitour.on('ended', function () {
-        if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile.tours.indexOf('invoices') < 0) {
+        if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile_attributes.tours.indexOf('invoices') < 0) {
           Member.completeTour({ id: $scope.currentUser.id }, { tour: 'invoices' }, function (res) {
-            $scope.currentUser.profile.tours = res.tours;
+            $scope.currentUser.profile_attributes.tours = res.tours;
           });
         }
       });
       // if the user has never seen the tour, show him now
-      if (settings.feature_tour_display !== 'manual' && $scope.currentUser.profile.tours.indexOf('invoices') < 0) {
+      if (settings.feature_tour_display !== 'manual' && $scope.currentUser.profile_attributes.tours.indexOf('invoices') < 0) {
         uitour.start();
       }
     };
@@ -1197,7 +1197,7 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
       { name: _t('app.admin.invoices.none'), value: 'none' },
       { name: _t('app.admin.invoices.by_cash'), value: 'cash' },
       { name: _t('app.admin.invoices.by_cheque'), value: 'cheque' },
-      { name: _t('app.admin.invoices.by_transfer'), value: 'transfer' },
+      { name: _t('app.admin.invoices.by_transfer'), value: 'transfer' }
     ];
 
     if (Fablab.walletModule) {

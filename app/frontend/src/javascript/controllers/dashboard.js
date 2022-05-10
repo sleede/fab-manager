@@ -41,6 +41,20 @@ Application.Controllers.controller('DashboardController', ['$scope', 'memberProm
       return trainingsPromise.find(t => t.id === trainingId).name;
     };
 
+    /**
+     * Callback used in PaymentScheduleDashboard, in case of error
+     */
+    $scope.onError = function (message) {
+      growl.error(message);
+    };
+
+    /**
+     * Callback triggered when the user has successfully updated his card
+     */
+    $scope.onCardUpdateSuccess = function (message) {
+      growl.success(message);
+    };
+
     /* PRIVATE SCOPE */
 
     /**
@@ -56,25 +70,11 @@ Application.Controllers.controller('DashboardController', ['$scope', 'memberProm
     const filterNetworks = function () {
       const networks = [];
       for (const network of Array.from(SocialNetworks)) {
-        if ($scope.user.profile[network] && ($scope.user.profile[network].length > 0)) {
+        if ($scope.user.profile_attributes[network] && ($scope.user.profile_attributes[network].length > 0)) {
           networks.push(network);
         }
       }
       return networks;
-    };
-
-    /**
-     * Callback used in PaymentScheduleDashboard, in case of error
-     */
-    $scope.onError = function (message) {
-      growl.error(message);
-    };
-
-    /**
-     * Callback triggered when the user has successfully updated his card
-     */
-    $scope.onCardUpdateSuccess = function (message) {
-      growl.success(message);
     };
 
     // !!! MUST BE CALLED AT THE END of the controller

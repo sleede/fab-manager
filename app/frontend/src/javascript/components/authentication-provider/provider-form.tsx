@@ -96,7 +96,7 @@ export const ProviderForm: React.FC<ProviderFormProps> = ({ action, provider, on
     <form className="provider-form" onSubmit={handleSubmit(onSubmit)}>
       <FormInput id="name"
                  register={register}
-                 readOnly={action === 'update'}
+                 disabled={action === 'update'}
                  rules={{ required: true }}
                  label={t('app.admin.authentication.provider_form.name')} />
       <FormSelect id="providable_type"
@@ -104,7 +104,7 @@ export const ProviderForm: React.FC<ProviderFormProps> = ({ action, provider, on
                   options={buildProvidableTypeOptions()}
                   label={t('app.admin.authentication.provider_form.authentication_type')}
                   onChange={onProvidableTypeChange}
-                  readOnly={action === 'update'}
+                  disabled={action === 'update'}
                   rules={{ required: true }} />
       {providableType === 'DatabaseProvider' && <DatabaseForm register={register} />}
       {providableType === 'OAuth2Provider' && <Oauth2Form register={register} strategyName={strategyName} />}

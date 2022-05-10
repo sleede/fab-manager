@@ -905,6 +905,7 @@ en:
       members_new:
         add_a_member: "Add a member"
         user_is_an_organization: "User is an organization"
+        create_success: "Member successfully created"
       #members bulk import
       members_import:
         import_members: "Import members"
@@ -988,6 +989,7 @@ en:
         to_credit: 'Credit'
         cannot_credit_own_wallet: "You cannot credit your own wallet. Please ask another manager or an administrator to credit your wallet."
         cannot_extend_own_subscription: "You cannot extend your own subscription. Please ask another manager or an administrator to extend your subscription."
+        update_success: "Member's profile successfully updated"
       # extend a subscription for free
       free_extend_modal:
         extend_subscription: "Extend the subscription"
@@ -1311,6 +1313,8 @@ en:
         about_title: "\"About\" page title"
         about_body: "\"About\" page content"
         about_contacts: "\"About\" page contacts"
+        about_follow_us: "Follow us"
+        about_networks: "Social networks"
         privacy_draft: "privacy policy draft"
         privacy_body: "privacy policy"
         privacy_dpo: "data protection officer address"

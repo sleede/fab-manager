@@ -569,14 +569,14 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
       });
       // on tour end, save the status in database
       uitour.on('ended', function () {
-        if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile.tours.indexOf('members') < 0) {
+        if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile_attributes.tours.indexOf('members') < 0) {
           Member.completeTour({ id: $scope.currentUser.id }, { tour: 'members' }, function (res) {
-            $scope.currentUser.profile.tours = res.tours;
+            $scope.currentUser.profile_attributes.tours = res.tours;
           });
         }
       });
       // if the user has never seen the tour, show him now
-      if (settingsPromise.feature_tour_display !== 'manual' && $scope.currentUser.profile.tours.indexOf('members') < 0) {
+      if (settingsPromise.feature_tour_display !== 'manual' && $scope.currentUser.profile_attributes.tours.indexOf('members') < 0) {
         uitour.start();
       }
     };
@@ -664,7 +664,7 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
     $scope.tags = tagsPromise;
 
     // The user to edit
-    $scope.user = memberPromise;
+    $scope.user = cleanUser(memberPromise);
 
     // Should the password be modified?
     $scope.password = { change: false };
@@ -813,6 +813,14 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
       growl.error(message);
     };
 
+    /**
+     * Callback triggered when the user was successfully updated
+     */
+    $scope.onUserSuccess = () => {
+      growl.success(_t('app.admin.members_edit.update_success'));
+      $state.go('app.admin.members');
+    };
+
     $scope.createWalletCreditModal = function (user, wallet) {
       const modalInstance = $uibModal.open({
         animation: true,
@@ -896,7 +904,7 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
       CSRF.setMetaTags();
 
       // init the birthdate to JS object
-      $scope.user.statistic_profile.birthday = moment($scope.user.statistic_profile.birthday).toDate();
+      $scope.user.statistic_profile_attributes.birthday = moment($scope.user.statistic_profile_attributes.birthday).toDate();
 
       // the user subscription
       if (($scope.user.subscribed_plan != null) && ($scope.user.subscription != null)) {
@@ -914,6 +922,13 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
       return new MembersController($scope, $state, Group, Training);
     };
 
+    // prepare the user for the react-hook-form
+    function cleanUser (user) {
+      delete user.$promise;
+      delete user.$resolved;
+      return user;
+    }
+
     // !!! MUST BE CALLED AT THE END of the controller
     return initialize();
   }
@@ -922,8 +937,8 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
 /**
  * Controller used in the member's creation page (admin view)
  */
-Application.Controllers.controller('NewMemberController', ['$scope', '$state', 'Member', 'Training', 'Group', 'CSRF', 'settingsPromise',
-  function ($scope, $state, Member, Training, Group, CSRF, settingsPromise) {
+Application.Controllers.controller('NewMemberController', ['$scope', '$state', 'Member', 'Training', 'Group', 'CSRF', 'settingsPromise', 'growl', '_t',
+  function ($scope, $state, Member, Training, Group, CSRF, settingsPromise, growl, _t) {
     CSRF.setMetaTags();
 
     /* PUBLIC SCOPE */
@@ -946,19 +961,34 @@ Application.Controllers.controller('NewMemberController', ['$scope', '$state', '
     // Default member's profile parameters
     $scope.user = {
       plan_interval: '',
-      invoicing_profile: {},
-      statistic_profile: {}
+      invoicing_profile_attributes: {},
+      statistic_profile_attributes: {}
     };
 
     // Callback when the admin check/uncheck the box telling that the new user is an organization.
     // Disable or enable the organization fields in the form, accordingly
     $scope.toggleOrganization = function () {
       if ($scope.user.organization) {
-        if (!$scope.user.invoicing_profile) { $scope.user.invoicing_profile = {}; }
-        $scope.user.invoicing_profile.organization = {};
+        if (!$scope.user.invoicing_profile_attributes) { $scope.user.invoicing_profile_attributes = {}; }
+        $scope.user.invoicing_profile_attributes.organization_attributes = {};
       } else {
-        $scope.user.invoicing_profile.organization = undefined;
+        $scope.user.invoicing_profile_attributes.organization_attributes = undefined;
       }
+    };
+
+    /**
+     * Callback triggered when the user was successfully updated
+     */
+    $scope.onUserSuccess = () => {
+      growl.success(_t('app.admin.members_new.create_success'));
+      $state.go('app.admin.members');
+    };
+
+    /**
+     * Callback triggered in case of error
+     */
+    $scope.onError = (message) => {
+      growl.error(message);
     };
 
     // Using the MembersController

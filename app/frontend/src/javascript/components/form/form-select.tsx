@@ -1,23 +1,20 @@
-import React, { ReactNode } from 'react';
+import React, { useEffect } from 'react';
 import Select from 'react-select';
+import CreatableSelect from 'react-select/creatable';
 import { Controller, Path } from 'react-hook-form';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { FieldPath } from 'react-hook-form/dist/types/path';
 import { FieldPathValue, UnpackNestedValue } from 'react-hook-form/dist/types';
 import { FormControlledComponent } from '../../models/form-component';
+import { AbstractFormItem, AbstractFormItemProps } from './abstract-form-item';
 
-interface FormSelectProps<TFieldValues, TContext extends object, TOptionValue> extends FormControlledComponent<TFieldValues, TContext> {
-  id: string,
-  label?: string,
-  tooltip?: ReactNode,
+interface FormSelectProps<TFieldValues, TContext extends object, TOptionValue> extends FormControlledComponent<TFieldValues, TContext>, AbstractFormItemProps<TFieldValues> {
   options: Array<selectOption<TOptionValue>>,
   valueDefault?: TOptionValue,
   onChange?: (value: TOptionValue) => void,
-  className?: string,
   placeholder?: string,
-  disabled?: boolean,
-  readOnly?: boolean,
   clearable?: boolean,
+  creatable?: boolean,
 }
 
 /**
@@ -29,14 +26,16 @@ type selectOption<TOptionValue> = { value: TOptionValue, label: string };
 /**
  * This component is a wrapper for react-select to use with react-hook-form
  */
-export const FormSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, tooltip, className, control, placeholder, options, valueDefault, error, rules, disabled, onChange, readOnly, clearable }: FormSelectProps<TFieldValues, TContext, TOptionValue>) => {
-  const classNames = [
-    'form-select form-item',
-    `${className || ''}`,
-    `${error && error[id] ? 'is-incorrect' : ''}`,
-    `${rules && rules.required ? 'is-required' : ''}`,
-    `${disabled ? 'is-disabled' : ''}`
-  ].join(' ');
+export const FormSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, tooltip, className, control, placeholder, options, valueDefault, error, warning, rules, disabled = false, onChange, readOnly = false, clearable = false, formState, creatable = false }: FormSelectProps<TFieldValues, TContext, TOptionValue>) => {
+  const [isDisabled, setIsDisabled] = React.useState<boolean>(false);
+
+  useEffect(() => {
+    if (typeof disabled === 'function') {
+      setIsDisabled(disabled(id) || readOnly);
+    } else {
+      setIsDisabled(disabled || readOnly);
+    }
+  }, [disabled]);
 
   /**
    * The following callback will trigger the onChange callback, if it was passed to this component,
@@ -48,35 +47,32 @@ export const FormSelect = <TFieldValues extends FieldValues, TContext extends ob
     }
   };
 
+  // if the user can create new options, we need to use a different component
+  const AbstractSelect = creatable ? CreatableSelect : Select;
+
   return (
-    <label className={classNames}>
-      {label && <div className="form-item-header">
-        <p>{label}</p>
-        {tooltip && <div className="item-tooltip">
-          <span className="trigger"><i className="fa fa-question-circle" /></span>
-          <div className="content">{tooltip}</div>
-        </div>}
-      </div>}
-      <div className="form-item-field">
-        <Controller name={id as FieldPath<TFieldValues>}
-                    control={control}
-                    defaultValue={valueDefault as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>}
-                    render={({ field: { onChange, value, ref } }) =>
-                      <Select ref={ref}
-                              classNamePrefix="rs"
-                              className="rs"
-                              value={options.find(c => c.value === value)}
-                              onChange={val => {
-                                onChangeCb(val.value);
-                                onChange(val.value);
-                              }}
-                              placeholder={placeholder}
-                              isDisabled={readOnly}
-                              isClearable={clearable}
-                              options={options} />
-                    } />
-      </div>
-      {(error && error[id]) && <div className="form-item-error">{error[id].message}</div> }
-    </label>
+    <AbstractFormItem id={id} label={label} tooltip={tooltip}
+                      className={`form-select ${className || ''}`} formState={formState}
+                      error={error} warning={warning} rules={rules}
+                      disabled={disabled} readOnly={readOnly}>
+      <Controller name={id as FieldPath<TFieldValues>}
+                  control={control}
+                  defaultValue={valueDefault as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>}
+                  rules={rules}
+                  render={({ field: { onChange, value, ref } }) =>
+                    <AbstractSelect ref={ref}
+                                    classNamePrefix="rs"
+                                    className="rs"
+                                    value={options.find(c => c.value === value)}
+                                    onChange={val => {
+                                      onChangeCb(val.value);
+                                      onChange(val.value);
+                                    }}
+                                    placeholder={placeholder}
+                                    isDisabled={isDisabled}
+                                    isClearable={clearable}
+                                    options={options} />
+                  } />
+    </AbstractFormItem>
   );
 };

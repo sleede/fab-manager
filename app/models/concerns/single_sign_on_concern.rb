@@ -21,11 +21,11 @@ module SingleSignOnConcern
         when 'profile.avatar'
           profile.user_avatar.remote_attachment_url
         when 'profile.address'
-          invoicing_profile.address.address
+          invoicing_profile.address&.address
         when 'profile.organization_name'
-          invoicing_profile.organization.name
+          invoicing_profile.organization&.name
         when 'profile.organization_address'
-          invoicing_profile.organization.address.address
+          invoicing_profile.organization&.address&.address
         when 'profile.gender'
           statistic_profile.gender
         when 'profile.birthday'
@@ -70,6 +70,9 @@ module SingleSignOnConcern
           profile[sso_mapping[8..-1].to_sym] = data unless data.nil?
         end
       end
+      return if data.nil? || mapped_from_sso&.include?(sso_mapping)
+
+      self.mapped_from_sso = [mapped_from_sso, sso_mapping].compact.join(',')
     end
 
     ## used to allow the migration of existing users between authentication providers

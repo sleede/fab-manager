@@ -17,3 +17,4 @@ if @provider.providable_type == OpenIdConnectProvider.name
                   :client__token_endpoint, :client__userinfo_endpoint, :client__jwks_uri, :client__end_session_endpoint, :profile_url
   end
 end
+

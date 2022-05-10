@@ -12,11 +12,12 @@
     p {
       @include text-sm;
       margin: 0;
+      &::first-letter { text-transform: uppercase; }
     }
 
     .item-tooltip {
       position: relative;
-      cursor: pointer;
+      cursor: help;
 
       .trigger i { display: block; }
       .content {
@@ -58,6 +59,7 @@
     display: grid;
     grid-template-areas: "icon field addon";
     grid-template-columns: min-content minmax(0, 1fr) min-content;
+    background-color: var(--gray-soft-lightest);
     border: 1px solid var(--gray-soft-dark);
     border-radius: var(--border-radius);
     transition: border-color ease-in-out 0.15s;
@@ -74,13 +76,33 @@
     .icon {
       grid-area: icon;
       border-right: 1px solid var(--gray-soft-dark);
+      border-top-left-radius: var(--border-radius);
+      border-bottom-left-radius: var(--border-radius);
+      & > * {
+        max-width: 24px;
+        max-height: 24px;
+      }
+    }
+    
+    .addon {
+      grid-area: addon;
+      border-left: 1px solid var(--gray-soft-dark);
+      border-top-right-radius: var(--border-radius);
+      border-bottom-right-radius: var(--border-radius);
+      &.is-btn {
+        color: var(--gray-soft-lightest);
+        background-color: var(--gray-hard-darkest);
+        &:hover {
+          cursor: pointer;
+          background-color: var(--gray-hard-light);
+        }
+      }
     }
 
     & > input {
       grid-area: field;
       border: none;
       border-radius: var(--border-radius);
-      box-shadow: inset 0 1px 1px rgba(0, 0, 0, .08);
       padding: 0 0.8rem;
       color: var(--gray-hard-darkest);
       white-space: nowrap;
@@ -125,11 +147,6 @@
         font-weight: 400;
         color: var(--gray-soft-darkest);
       }
-    }
-
-    .addon {
-      grid-area: addon;
-      border-left: 1px solid var(--gray-soft-dark);
     }
   }
   &.is-incorrect &-field {

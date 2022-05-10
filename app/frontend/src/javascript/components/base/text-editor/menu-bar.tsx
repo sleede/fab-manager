@@ -9,12 +9,13 @@ interface MenuBarProps {
   paragraphTools?: boolean,
   video?: boolean,
   image?: boolean,
+  disabled?: boolean,
 }
 
 /**
  * This component is the menu bar for the WYSIWYG text editor
  */
-export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, video, image }) => {
+export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, video, image, disabled = false }) => {
   const { t } = useTranslation('shared');
 
   const [submenu, setSubmenu] = useState('');
@@ -140,12 +141,13 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, video,
 
   return (
     <>
-      <div className='fab-textEditor-menu'>
+      <div className={`fab-textEditor-menu ${disabled ? 'fab-textEditor-menu--disabled' : ''}`}>
         { paragraphTools &&
         (<>
           <button
             type='button'
             onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
+            disabled={disabled}
             className={editor.isActive('heading', { level: 3 }) ? 'is-active' : ''}
           >
             <TextAa size={24} />
@@ -153,6 +155,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, video,
           <button
             type='button'
             onClick={() => editor.chain().focus().toggleBulletList().run()}
+            disabled={disabled}
             className={editor.isActive('bulletList') ? 'is-active' : ''}
           >
             <ListBullets size={24} />
@@ -160,6 +163,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, video,
           <button
             type='button'
             onClick={() => editor.chain().focus().toggleBlockquote().run()}
+            disabled={disabled}
             className={editor.isActive('blockquote') ? 'is-active' : ''}
           >
             <Quotes size={24} />
@@ -170,6 +174,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, video,
         <button
           type='button'
           onClick={() => editor.chain().focus().toggleBold().run()}
+          disabled={disabled}
           className={editor.isActive('bold') ? 'is-active' : ''}
         >
           <TextBolder size={24} />
@@ -177,6 +182,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, video,
         <button
           type='button'
           onClick={() => editor.chain().focus().toggleItalic().run()}
+          disabled={disabled}
           className={editor.isActive('italic') ? 'is-active' : ''}
         >
           <TextItalic size={24} />
@@ -184,6 +190,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, video,
         <button
           type='button'
           onClick={() => editor.chain().focus().toggleUnderline().run()}
+          disabled={disabled}
           className={editor.isActive('underline') ? 'is-active' : ''}
         >
           <TextUnderline size={24} />
@@ -191,6 +198,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, video,
         <button
           type='button'
           onClick={() => toggleSubmenu('link')}
+          disabled={disabled}
           className={`ignore-onclickoutside ${editor.isActive('link') ? 'is-active' : ''}`}
         >
           <LinkSimpleHorizontal size={24} />
@@ -200,6 +208,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, video,
         (<>
           <button
             type='button'
+            disabled={disabled}
             onClick={() => toggleSubmenu('video')}
           >
             <VideoCamera size={24} />
@@ -210,6 +219,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, video,
         (<>
           <button
             type='button'
+            disabled={disabled}
             onClick={() => toggleSubmenu('image')}
           >
             <Image size={24} />

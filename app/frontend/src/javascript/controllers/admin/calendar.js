@@ -344,14 +344,14 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
       });
       // on tour end, save the status in database
       uitour.on('ended', function () {
-        if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile.tours.indexOf('calendar') < 0) {
+        if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile_attributes.tours.indexOf('calendar') < 0) {
           Member.completeTour({ id: $scope.currentUser.id }, { tour: 'calendar' }, function (res) {
-            $scope.currentUser.profile.tours = res.tours;
+            $scope.currentUser.profile_attributes.tours = res.tours;
           });
         }
       });
       // if the user has never seen the tour, show him now
-      if (settingsPromise.feature_tour_display !== 'manual' && $scope.currentUser.profile.tours.indexOf('calendar') < 0) {
+      if (settingsPromise.feature_tour_display !== 'manual' && $scope.currentUser.profile_attributes.tours.indexOf('calendar') < 0) {
         uitour.start();
       }
     };
@@ -369,8 +369,8 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
      * @return {string} 'male' or 'female'
      */
     const getGender = function (user) {
-      if (user.statistic_profile) {
-        if (user.statistic_profile.gender === 'true') { return 'male'; } else { return 'female'; }
+      if (user.statistic_profile_attributes) {
+        if (user.statistic_profile_attributes.gender === 'true') { return 'male'; } else { return 'female'; }
       } else { return 'other'; }
     };
 

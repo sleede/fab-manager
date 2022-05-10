@@ -35,7 +35,7 @@
       &-info {
         position: absolute;
         top: 0;
-        left: calc(100% - $tab-width);
+        left: calc(100% - #{$tab-width});
         width: $tab-width;
         height: 100%;
         display: block;
@@ -44,7 +44,7 @@
         &.is-empty {
           opacity: 0;
         }
-  
+
         .content {
           position: relative;
           min-width: 220px;
@@ -77,7 +77,7 @@
         }
         input[type="checkbox"]:checked ~ .content {
           background: var(--gray-soft-lightest);
-          transform: translateX(calc(-100% + $tab-width));
+          transform: translateX(calc(-100% + #{$tab-width}));
           cursor: default;
           &::before {
             transform: translateX(-$tab-width) rotateZ(-180deg);
@@ -96,12 +96,12 @@
       font-style: italic;
       font-weight: 500;
     }
-  
+
     &-group {
       display: flex;
       flex-wrap: wrap;
     }
-  
+
     &-item {
       display: inline-block;
       padding: 2px;

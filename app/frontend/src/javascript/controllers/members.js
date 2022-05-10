@@ -86,7 +86,7 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
     $scope.method = 'patch';
 
     // Current user's profile
-    $scope.user = memberPromise;
+    $scope.user = cleanUser(memberPromise);
 
     // default : do not show the group changing form
     $scope.group =
@@ -184,8 +184,8 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
           )
         );
       } else {
-        $scope.currentUser.profile.user_avatar = content.profile.user_avatar;
-        Auth._currentUser.profile.user_avatar = content.profile.user_avatar;
+        $scope.currentUser.profile_attributes.user_avatar_attributes = content.profile_attributes.user_avatar_attributes;
+        Auth._currentUser.profile_attributes.user_avatar_attributes = content.profile_attributes.user_avatar_attributes;
         $scope.currentUser.name = content.name;
         Auth._currentUser.name = content.name;
         $scope.currentUser = content;
@@ -275,6 +275,25 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
       $injector.get('$state').reload();
     };
 
+    /**
+     * Callback triggered when an error is raised on a lower-level component
+     * @param message {string}
+     */
+    $scope.onError = function (message) {
+      growl.error(message);
+    };
+
+    /**
+     * Callback triggered when the user was successfully updated
+     * @param user {object} the updated user
+     */
+    $scope.onSuccess = function (user) {
+      $scope.currentUser = _.cloneDeep(user);
+      Auth._currentUser = _.cloneDeep(user);
+      $rootScope.currentUser = _.cloneDeep(user);
+      growl.success(_t('app.logged.dashboard.settings.your_profile_has_been_successfully_updated'));
+    };
+
     /* PRIVATE SCOPE */
 
     /**
@@ -283,15 +302,19 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
     const initialize = function () {
       CSRF.setMetaTags();
 
-      // init the birth date to JS object
-      $scope.user.statistic_profile.birthday = moment($scope.user.statistic_profile.birthday).toDate();
-
       if ($scope.activeProvider.providable_type !== 'DatabaseProvider') {
         $scope.preventPassword = true;
       }
       // bind fields protection with sso fields
       return angular.forEach(activeProviderPromise.mapping, map => $scope.preventField[map] = true);
     };
+
+    // prepare the user for the react-hook-form
+    function cleanUser (user) {
+      delete user.$promise;
+      delete user.$resolved;
+      return user;
+    }
 
     // !!! MUST BE CALLED AT THE END of the controller
     return initialize();
@@ -326,7 +349,7 @@ Application.Controllers.controller('ShowProfileController', ['$scope', 'memberPr
   const filterNetworks = function () {
     const networks = [];
     for (const network of Array.from(SocialNetworks)) {
-      if ($scope.user.profile[network] && ($scope.user.profile[network].length > 0)) {
+      if ($scope.user.profile_attributes[network] && ($scope.user.profile_attributes[network].length > 0)) {
         networks.push(network);
       }
     }

@@ -16,7 +16,7 @@ interface Oauth2FormProps<TFieldValues> {
 export const Oauth2Form = <TFieldValues extends FieldValues>({ register, strategyName }: Oauth2FormProps<TFieldValues>) => {
   const { t } = useTranslation('admin');
 
-  // regular expression to validate the the input fields
+  // regular expression to validate the input fields
   const endpointRegex = /^\/?([-._~:?#[\]@!$&'()*+,;=%\w]+\/?)*$/;
   const urlRegex = /^(https?:\/\/)([\da-z.-]+)\.([-a-z0-9.]{2,30})([/\w .-]*)*\/?$/;
 

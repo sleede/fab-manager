@@ -1,4 +1,5 @@
 import { HistoryValue } from './history-value';
+import { TDateISO } from '../typings/date-iso';
 
 export enum SettingName {
   AboutTitle = 'about_title',
@@ -118,7 +119,20 @@ export enum SettingName {
   PackOnlyForSubscription = 'pack_only_for_subscription',
   OverlappingCategories = 'overlapping_categories',
   ExtendedPricesInSameDay = 'extended_prices_in_same_day',
-  PublicRegistrations = 'public_registrations'
+  PublicRegistrations = 'public_registrations',
+  SocialsFacebook = 'facebook',
+  SocialsTwitter = 'twitter',
+  SocialsViadeo = 'viadeo',
+  SocialsLinkedin = 'linkedin',
+  SocialsInstagram = 'instagram',
+  SocialsYoutube = 'youtube',
+  SocialsVimeo = 'vimeo',
+  SocialsDailymotion = 'dailymotion',
+  SocialsGithub = 'github',
+  SocialsEchosciences = 'echosciences',
+  SocialsPinterest = 'pinterest',
+  SocialsLastfm = 'lastfm',
+  SocialsFlickr = 'flickr'
 }
 
 export type SettingValue = string|boolean|number;
@@ -127,7 +141,7 @@ export interface Setting {
   name: SettingName,
   localized?: string,
   value: string,
-  last_update?: Date,
+  last_update?: TDateISO,
   history?: Array<HistoryValue>
 }
 

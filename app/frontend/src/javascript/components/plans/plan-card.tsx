@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import _ from 'lodash';
 import { Plan } from '../../models/plan';
-import { User, UserRole } from '../../models/user';
+import { User } from '../../models/user';
 import { Loader } from '../base/loader';
 import '../../lib/i18n';
 import FormatLib from '../../lib/format';
@@ -52,13 +52,13 @@ const PlanCardComponent: React.FC<PlanCardProps> = ({ plan, userId, subscribedPl
    * Check if the user can subscribe to the current plan, for himself
    */
   const canSubscribeForMe = (): boolean => {
-    return operator?.role === UserRole.Member || (operator?.role === UserRole.Manager && userId === operator?.id);
+    return operator?.role === 'member' || (operator?.role === 'manager' && userId === operator?.id);
   };
   /**
    * Check if the user can subscribe to the current plan, for someone else
    */
   const canSubscribeForOther = (): boolean => {
-    return operator?.role === UserRole.Admin || (operator?.role === UserRole.Manager && userId !== operator?.id);
+    return operator?.role === 'admin' || (operator?.role === 'manager' && userId !== operator?.id);
   };
   /**
    * Check it the user has subscribed to this plan or not

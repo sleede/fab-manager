@@ -1,8 +1,10 @@
+import { TDateISO } from '../typings/date-iso';
+
 export interface Invoice {
   id: number,
-  created_at: Date,
+  created_at: TDateISO,
   reference: string,
-  avoir_date: Date,
+  avoir_date: TDateISO,
   description: string
   user_id: number,
   total: number,
@@ -11,7 +13,7 @@ export interface Invoice {
   is_avoir: boolean,
   is_subscription_invoice: boolean,
   is_online_card: boolean,
-  date: Date,
+  date: TDateISO,
   chained_footprint: boolean,
   main_object: {
     type: string,

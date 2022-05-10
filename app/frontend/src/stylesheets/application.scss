@@ -28,7 +28,11 @@
 @import "modules/base/fab-popover";
 @import "modules/base/fab-text-editor";
 @import "modules/base/labelled-input";
+@import "modules/calendar/calendar";
+@import "modules/form/form-input";
 @import "modules/form/form-item";
+@import "modules/form/form-rich-text";
+@import "modules/form/form-switch";
 @import "modules/machines/machine-card";
 @import "modules/machines/machines-filters";
 @import "modules/machines/machines-list";
@@ -67,11 +71,16 @@
 @import "modules/pricing/spaces/delete-extended-price";
 @import "modules/pricing/spaces/edit-extended-price";
 @import "modules/pricing/spaces/spaces-pricing";
+@import "modules/profile-completion/completion-header-info";
+@import "modules/profile-completion/profile-form-option";
 @import "modules/select-gateway-modal";
 @import "modules/settings/check-list-setting";
 @import "modules/subscriptions/free-extend-modal";
 @import "modules/subscriptions/renew-modal";
 @import "modules/user/avatar";
+@import "modules/user/avatar-input";
+@import "modules/user/gender-input";
+@import "modules/user/user-profile-form";
 
 @import "modules/abuses";
 @import "modules/cookies";

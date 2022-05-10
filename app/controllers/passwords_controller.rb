@@ -13,4 +13,9 @@ class PasswordsController < Devise::PasswordsController
       head 404
     end
   end
+
+  # POST /password/verify
+  def verify
+    current_user.valid_password?(params[:password]) ? head(200) : head(404)
+  end
 end

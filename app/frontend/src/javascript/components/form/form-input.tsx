@@ -1,30 +1,29 @@
-import React, { InputHTMLAttributes, ReactNode, useCallback, useEffect, useState } from 'react';
+import React, { ReactNode, useCallback } from 'react';
 import { FieldPathValue } from 'react-hook-form';
-import { debounce as _debounce, get as _get } from 'lodash';
+import { debounce as _debounce } from 'lodash';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { FieldPath } from 'react-hook-form/dist/types/path';
 import { FormComponent } from '../../models/form-component';
+import { AbstractFormItem, AbstractFormItemProps } from './abstract-form-item';
 
-interface FormInputProps<TFieldValues> extends InputHTMLAttributes<HTMLInputElement>, FormComponent<TFieldValues>{
-  id: string,
-  label?: string,
-  tooltip?: ReactNode,
+interface FormInputProps<TFieldValues, TInputType> extends FormComponent<TFieldValues>, AbstractFormItemProps<TFieldValues> {
   icon?: ReactNode,
   addOn?: ReactNode,
+  addOnAction?: (event: React.MouseEvent<HTMLButtonElement>) => void,
   addOnClassName?: string,
   debounce?: number,
+  type?: 'text' | 'date' | 'password' | 'url' | 'time' | 'tel' | 'search' | 'number' | 'month' | 'email' | 'datetime-local' | 'week' | 'hidden' | 'file',
+  accept?: string,
+  defaultValue?: TInputType,
+  placeholder?: string,
+  step?: number | 'any',
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void,
 }
 
 /**
  * This component is a template for an input component to use within React Hook Form
  */
-export const FormInput = <TFieldValues extends FieldValues>({ id, register, label, tooltip, defaultValue, icon, className, rules, readOnly, disabled, type, addOn, addOnClassName, placeholder, error, warning, formState, step, onChange, debounce }: FormInputProps<TFieldValues>) => {
-  const [isDirty, setIsDirty] = useState(false);
-
-  useEffect(() => {
-    setIsDirty(_get(formState?.dirtyFields, id));
-  }, [formState]);
-
+export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, register, label, tooltip, defaultValue, icon, className, rules, readOnly, disabled, type, addOn, addOnAction, addOnClassName, placeholder, error, warning, formState, step, onChange, debounce, accept }: FormInputProps<TFieldValues, TInputType>) => {
   /**
    * Debounced (ie. temporised) version of the 'on change' callback.
    */
@@ -45,43 +44,32 @@ export const FormInput = <TFieldValues extends FieldValues>({ id, register, labe
 
   // Compose classnames from props
   const classNames = [
-    'form-input form-item',
+    'form-input',
     `${className || ''}`,
-    `${type === 'hidden' ? 'is-hidden' : ''}`,
-    `${isDirty && error && error[id] ? 'is-incorrect' : ''}`,
-    `${isDirty && warning && warning[id] ? 'is-warned' : ''}`,
-    `${rules && rules.required ? 'is-required' : ''}`,
-    `${readOnly ? 'is-readonly' : ''}`,
-    `${disabled ? 'is-disabled' : ''}`
+    `${type === 'hidden' ? 'is-hidden' : ''}`
   ].join(' ');
 
   return (
-    <label className={classNames}>
-      {label && <div className='form-item-header'>
-        <p>{label}</p>
-        {tooltip && <div className="item-tooltip">
-          <span className="trigger"><i className="fa fa-question-circle" /></span>
-          <div className="content">{tooltip}</div>
-        </div>}
-      </div>}
-      <div className='form-item-field'>
+    <AbstractFormItem id={id} formState={formState} label={label}
+                      className={classNames} tooltip={tooltip}
+                      disabled={disabled} readOnly={readOnly}
+                      rules={rules} error={error} warning={warning}>
         {icon && <span className="icon">{icon}</span>}
         <input id={id}
           {...register(id as FieldPath<TFieldValues>, {
             ...rules,
             valueAsNumber: type === 'number',
+            valueAsDate: type === 'date',
             value: defaultValue as FieldPathValue<TFieldValues, FieldPath<TFieldValues>>,
             onChange: (e) => { handleChange(e); }
           })}
           type={type}
           step={step}
-          disabled={disabled}
+          disabled={typeof disabled === 'function' ? disabled(id) : disabled}
           readOnly={readOnly}
-          placeholder={placeholder} />
-        {addOn && <span className={`addon ${addOnClassName || ''}`}>{addOn}</span>}
-      </div>
-      {(isDirty && error && error[id]) && <div className="form-item-error">{error[id].message}</div> }
-      {(isDirty && warning && warning[id]) && <div className="form-item-warning">{warning[id].message}</div> }
-    </label>
+          placeholder={placeholder}
+          accept={accept} />
+        {addOn && <span onClick={addOnAction} className={`addon ${addOnClassName || ''} ${addOnAction ? 'is-btn' : ''}`}>{addOn}</span>}
+    </AbstractFormItem>
   );
 };

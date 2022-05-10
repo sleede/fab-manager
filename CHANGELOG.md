@@ -2,6 +2,7 @@
 
 ## next deploy
 
+- Ability to define social networks for the FabLab "about page"
 - Support for OpenID Connect in Sign-Sign-On authentication providers
 - No longer needed to recompile the assets when switching the authentication provider
 - Updated the documentation about the minimum docker version
@@ -13,6 +14,7 @@
 - Updated eslint to v8 and eslint related packages to their latest versions
 - Updated typescript to v4.6.3
 - Updated react-select to v5.2.2
+- Updated sidekiq-scheduler to v4.0.0
 - Webpack overlay will now report eslint issues
 - Linted all code according to eslint rules
 - when generating an avoir, the option "by_wallet" is not present anymore if wallet module is off
@@ -458,7 +460,7 @@
 
 ## v4.7.14 2021 September 30
 
-- Fix a bug: updated sassc to 2.4.0 to fix ruby runtime error on some CPU architectures
+- Fix a bug: update sassc to 2.4.0 to try to fix #270 (ruby runtime error on some CPU architectures)
 
 ## v4.7.13 2021 June 11
 

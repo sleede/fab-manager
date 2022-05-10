@@ -39,7 +39,7 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
     checkForDiscoveryEndpoint({ target: { value: currentFormValues?.issuer } } as React.ChangeEvent<HTMLInputElement>);
   }, []);
 
-  // regular expression to validate the the input fields
+  // regular expression to validate the input fields
   const endpointRegex = /^\/?([-._~:?#[\]@!$&'()*+,;=%\w]+\/?)*$/;
   const urlRegex = /^(https?:\/\/)([\da-z.-]+)\.([-a-z0-9.]{2,30})([/\w .-]*)*\/?$/;
 
@@ -85,7 +85,7 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
                  rules={{ required: true, pattern: urlRegex }}
                  onChange={checkForDiscoveryEndpoint}
                  debounce={400}
-                 warning={!discoveryAvailable && { 'providable_attributes.issuer': { message: t('app.admin.authentication.openid_connect_form.discovery_unavailable') } }}
+                 warning={!discoveryAvailable && { message: t('app.admin.authentication.openid_connect_form.discovery_unavailable') } }
                  formState={formState} />
       <FormSelect id="providable_attributes.discovery"
                   label={t('app.admin.authentication.openid_connect_form.discovery')}
@@ -112,6 +112,7 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
                                            label={t('app.admin.authentication.openid_connect_form.scope')}
                                            tooltip={<HtmlTranslate trKey="app.admin.authentication.openid_connect_form.scope_help_html" />}
                                            options={scopesAvailable.map((scope) => ({ value: scope, label: scope }))}
+                                           creatable
                                            control={control} />}
       <FormSelect id="providable_attributes.prompt"
                   label={t('app.admin.authentication.openid_connect_form.prompt')}
