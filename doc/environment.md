@@ -269,6 +269,11 @@ See [Microsoft support](https://support.microsoft.com/en-us/kb/264372) for a lis
 If set to `true`, and the application in started into a staging environment, this will enable the Crowdin In-context translation layer for the front-end application.
 See [Crowdin documentation](https://support.crowdin.com/in-context-localization/) for more details about this.
 Accordingly, `RAILS_LOCALE` and `APP_LOCALE` must be configured to `zu`.
+<a name="NO_COLOR"></a>
+
+    NO_COLOR
+
+If set to any value, this will set `config.colorize_logging` to `false`, disabling ANSI color codes when logging information.
 <a name="open-projects-settings"></a>
 ## OpenLab settings
 <a name="OPENLAB_BASE_URI"></a>
