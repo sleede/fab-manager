@@ -244,6 +244,14 @@ en:
     event: "Event"
     reservations: "Reservations"
     available_seats: "Available seats"
+  reservation_ics:
+    summary: "%{TYPE} reservation"
+    type:
+      Machine: "Machine"
+      Space: "Space"
+      Event: "Event"
+      Training: "Training"
+    description: "You have reserved %{COUNT} slots of %{ITEM}"
   roles:
     member: "Member"
     manager: "Manager"

@@ -15,6 +15,7 @@
 - Updated typescript to v4.6.3
 - Updated react-select to v5.2.2
 - Updated sidekiq-scheduler to v4.0.0
+- Updated icalendar to 2.7.1
 - Webpack overlay will now report eslint issues
 - Linted all code according to eslint rules
 - when generating an avoir, the option "by_wallet" is not present anymore if wallet module is off

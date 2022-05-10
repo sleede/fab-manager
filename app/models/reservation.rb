@@ -67,6 +67,32 @@ class Reservation < ApplicationRecord
                  .first
   end
 
+  def to_ics
+    ReservationService.build_ics(self)
+  end
+
+  # Group all slots related to this reservation by dates and by continuous time ranges
+  def grouped_slots
+    slots_by_date = slots.group_by { |slot| slot[:start_at].to_date }.transform_values { |slots| slots.sort_by { |slot| slot[:start_at] } }
+    result = {}
+    slots_by_date.each do |date, daily_slots|
+      result[date] = { daily_slots.first[:start_at] => [daily_slots.first] }
+
+      daily_slots[1..].each do |slot|
+        found = false
+        result[date].each do |group_start, group_slots|
+          if slot[:start_at] === group_slots.last[:end_at]
+            result[date][group_start].push(slot)
+            found = true
+            break
+          end
+        end
+        result[date][slot[:start_at]] = [slot] unless found
+      end
+    end
+    result
+  end
+
   private
 
   def machine_not_already_reserved
