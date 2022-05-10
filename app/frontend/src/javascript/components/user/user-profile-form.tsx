@@ -143,13 +143,13 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
     return value === true || (t('app.shared.user_profile_form.must_accept_terms') as string);
   };
 
-  const userNetworks = new UserLib(user).getUserSocialNetworks(user);
+  const userNetworks = new UserLib(user).getUserSocialNetworks();
 
   return (
     <form className={`user-profile-form user-profile-form--${size} ${className}`} onSubmit={onSubmit}>
       <div className="avatar-group">
-        <AvatarInput currentAvatar={output.profile_attributes.user_avatar_attributes?.attachment_url}
-                     userName={`${output.profile_attributes.first_name} ${output.profile_attributes.last_name}`}
+        <AvatarInput currentAvatar={output.profile_attributes?.user_avatar_attributes?.attachment_url}
+                     userName={`${output.profile_attributes?.first_name} ${output.profile_attributes?.last_name}`}
                      register={register}
                      setValue={setValue}
                      size={size} />

@@ -1,3 +1,4 @@
+import { isNil, isEmpty } from 'lodash';
 import { User } from '../models/user';
 import { supportedNetworks, SupportedSocialNetwork } from '../models/social-network';
 
@@ -24,10 +25,15 @@ export default class UserLib {
   /**
    * Filter social networks from the user's profile
    */
-  getUserSocialNetworks = (customer: User): {name: string, url: string}[] => {
-    const userNetworks = [];
+  getUserSocialNetworks = (): { name: string, url: string }[] => {
+    if (!this.isUser()) {
+      return supportedNetworks.map(network => {
+        return { name: network, url: '' };
+      });
+    }
 
-    for (const [name, url] of Object.entries(customer.profile_attributes)) {
+    const userNetworks = [];
+    for (const [name, url] of Object.entries(this.user.profile_attributes)) {
       supportedNetworks.includes(name as SupportedSocialNetwork) && userNetworks.push({ name, url });
     }
     return userNetworks;
@@ -56,5 +62,14 @@ export default class UserLib {
     if (email) {
       return !(email.match(/^<([^>]+)>.{20}-duplicate$/) === null);
     }
+  };
+
+  /**
+   * Check if the current user is not empty
+   */
+  private isUser = (): boolean => {
+    if (isNil(this.user)) return false;
+
+    return !(isEmpty(this.user.invoicing_profile_attributes) && isEmpty(this.user.statistic_profile_attributes));
   };
 }

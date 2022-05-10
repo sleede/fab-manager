@@ -905,6 +905,7 @@ en:
       members_new:
         add_a_member: "Add a member"
         user_is_an_organization: "User is an organization"
+        create_success: "Member successfully created"
       #members bulk import
       members_import:
         import_members: "Import members"

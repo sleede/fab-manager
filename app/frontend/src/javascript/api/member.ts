@@ -14,7 +14,7 @@ export default class MemberAPI {
     if (user.profile_attributes.user_avatar_attributes.attachment_files[0]) {
       data.set('user[profile_attributes][user_avatar_attributes][attachment]', user.profile_attributes.user_avatar_attributes.attachment_files[0]);
     }
-    const res: AxiosResponse<User> = await apiClient.post('/api/members/create', data, {
+    const res: AxiosResponse<User> = await apiClient.post('/api/members', data, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }

@@ -816,7 +816,7 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
     /**
      * Callback triggered when the user was successfully updated
      */
-    $scope.onUserSuccess = (user) => {
+    $scope.onUserSuccess = () => {
       growl.success(_t('app.admin.members_edit.update_success'));
       $state.go('app.admin.members');
     };
@@ -937,8 +937,8 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
 /**
  * Controller used in the member's creation page (admin view)
  */
-Application.Controllers.controller('NewMemberController', ['$scope', '$state', 'Member', 'Training', 'Group', 'CSRF', 'settingsPromise',
-  function ($scope, $state, Member, Training, Group, CSRF, settingsPromise) {
+Application.Controllers.controller('NewMemberController', ['$scope', '$state', 'Member', 'Training', 'Group', 'CSRF', 'settingsPromise', 'growl', '_t',
+  function ($scope, $state, Member, Training, Group, CSRF, settingsPromise, growl, _t) {
     CSRF.setMetaTags();
 
     /* PUBLIC SCOPE */
@@ -974,6 +974,21 @@ Application.Controllers.controller('NewMemberController', ['$scope', '$state', '
       } else {
         $scope.user.invoicing_profile_attributes.organization_attributes = undefined;
       }
+    };
+
+    /**
+     * Callback triggered when the user was successfully updated
+     */
+    $scope.onUserSuccess = () => {
+      growl.success(_t('app.admin.members_new.create_success'));
+      $state.go('app.admin.members');
+    };
+
+    /**
+     * Callback triggered in case of error
+     */
+    $scope.onError = (message) => {
+      growl.error(message);
     };
 
     // Using the MembersController
