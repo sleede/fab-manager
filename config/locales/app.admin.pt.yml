@@ -989,7 +989,7 @@ pt:
       #add a new administrator to the platform
       admins_new:
         add_an_administrator: "Adicionar administrador"
-        administrator_successfully_created_he_will_receive_his_connection_directives_by_email: "Successful creation. Connection directives were sent to the new administrator by e-mail."
+        administrator_successfully_created_he_will_receive_his_connection_directives_by_email: "Criado com sucesso. Diretrizes de conexão foram enviadas por e-mail ao novo administrador."
         failed_to_create_admin: "Não é possível criar administrador:"
         man: "Homem"
         woman: "Mulher"
@@ -1007,7 +1007,7 @@ pt:
       #add a new manager to the platform
       manager_new:
         add_a_manager: "Adicionar Gestor"
-        manager_successfully_created: "Successful creation. Connection directives were sent to the new manager by e-mail."
+        manager_successfully_created: "Criado com sucesso. Diretrizes de conexão foram enviadas por e-mail ao novo gerente."
         failed_to_create_manager: "Não foi possível criar o gerente:"
         man: "Homem"
         woman: "Mulher"
@@ -1293,9 +1293,9 @@ pt:
         pack_only_for_subscription_info_html: "Se esta opção estiver ativada, a compra e uso de um pacote pré-pago só é possível para o usuário com uma assinatura válida."
         pack_only_for_subscription: "Assinatura válida para compra e uso de um pacote pré-pago"
         pack_only_for_subscription_info: "Tornar obrigatória a assinatura para pacotes pré-pagos"
-        extended_prices: "Extended prices"
-        extended_prices_info_html: "Spaces can have different prices depending on the cumulated duration of the booking. You can choose if this apply to all bookings or only to those starting within the same day."
-        extended_prices_in_same_day: "Extended prices in the same day"
+        extended_prices: "Preços estendidos"
+        extended_prices_info_html: "Os espaços podem ter preços diferentes dependendo da duração acumulada da reserva. Você pode escolher se isso se aplica a todas as reservas ou apenas àqueles que iniciam no mesmo dia."
+        extended_prices_in_same_day: "Preços estendidos no mesmo dia"
         public_registrations: "Public registrations"
         overlapping_options:
           training_reservations: "Treinamentos"
