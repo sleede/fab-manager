@@ -515,7 +515,7 @@ pt:
         confirm_check_cashing_body: "Você deve pagar uma verificação de {AMOUNT} pelo prazo de {DATE}. Ao confirmar o pagamento, uma fatura será gerada para este prazo."
         confirm_bank_transfer: "Confirme a transferência bancária"
         confirm_bank_transfer_body: "Você deve confirmar o recibo de {AMOUNT} para o prazo de {DATE}. Ao confirmar a transferência bancária, uma fatura será gerada para este prazo."
-        confirm_cancel_subscription: "You're about to cancel this payment schedule and the related subscription. Are you sure?"
+        confirm_cancel_subscription: "Você está prestes a cancelar esta agenda de pagamento e a assinatura relacionada. Tem certeza?"
       payment_modal:
         online_payment_disabled: "O pagamento online não está disponível. Entre em contato diretamente com a recepção do FabLab."
         unexpected_error: "Ocorreu um erro. Por favor, reporte este problema à equipe do FabLab."
