@@ -26,6 +26,8 @@ import { HtmlTranslate } from '../base/html-translate';
 import TrainingAPI from '../../api/training';
 import TagAPI from '../../api/tag';
 import { FormMultiSelect } from '../form/form-multi-select';
+import ProfileCustomFieldAPI from '../../api/profile-custom-field';
+import { ProfileCustomField } from '../../models/profile-custom-field';
 
 declare const Application: IApplication;
 
@@ -67,6 +69,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
   const [termsAndConditions, setTermsAndConditions] = useState<CustomAsset>(null);
   const [trainings, setTrainings] = useState<selectOption[]>([]);
   const [tags, setTags] = useState<selectOption[]>([]);
+  const [profileCustomFields, setProfileCustomFields] = useState<ProfileCustomField[]>([]);
 
   useEffect(() => {
     AuthProviderAPI.active().then(data => {
@@ -90,6 +93,9 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
         setTags(buildOptions(data));
       }).catch(error => onError(error));
     }
+    ProfileCustomFieldAPI.index().then(data => {
+      setProfileCustomFields(data.filter(f => f.actived));
+    }).catch(error => onError(error));
   }, []);
 
   /**
@@ -252,6 +258,15 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
                        disabled={isDisabled}
                        formState={formState}
                        label={t('app.shared.user_profile_form.organization_address')} />
+            {profileCustomFields.map((f, i) => {
+              return (<FormInput key={`profileCustomField${i}`}
+                           id={`invoicing_profile_attributes.user_profile_custom_fields_attributes[${i}].value`}
+                           register={register}
+                           rules={{ required: f.required ? t('app.shared.user_profile_form.profile_custom_field_is_required', { FEILD: f.label }) as string : false }}
+                           disabled={isDisabled}
+                           formState={formState}
+                           label={f.label} />);
+            })}
           </div>}
         </div>
         <div className="profile-data">

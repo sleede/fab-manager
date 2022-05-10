@@ -268,7 +268,8 @@ class API::MembersController < API::ApiController
                                    invoicing_profile_attributes: [
                                      :id,
                                      address_attributes: %i[id address],
-                                     organization_attributes: [:id, :name, address_attributes: %i[id address]]
+                                     organization_attributes: [:id, :name, address_attributes: %i[id address]],
+                                     user_profile_custom_fields_attributes: %i[id value]
                                    ],
                                    statistic_profile_attributes: %i[id gender birthday])
 
@@ -282,7 +283,8 @@ class API::MembersController < API::ApiController
                                    invoicing_profile_attributes: [
                                      :id,
                                      address_attributes: %i[id address],
-                                     organization_attributes: [:id, :name, address_attributes: %i[id address]]
+                                     organization_attributes: [:id, :name, address_attributes: %i[id address]],
+                                     user_profile_custom_fields_attributes: %i[id value]
                                    ],
                                    statistic_profile_attributes: [:id, :gender, :birthday, training_ids: []])
 

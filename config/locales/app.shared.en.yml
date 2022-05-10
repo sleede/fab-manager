@@ -59,6 +59,7 @@ en:
         email_address: "Email address"
         organization_name: "Organization name"
         organization_address: "Organization address"
+        profile_custom_field_is_required: "{FEILD} is required"
         date_of_birth: "Date of birth"
         website: "Website"
         website_invalid: "The website address is not a valid URL"

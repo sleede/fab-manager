@@ -39,6 +39,14 @@ json.invoicing_profile_attributes do
       end
     end
   end
+
+  json.user_profile_custom_fields_attributes member.invoicing_profile.user_profile_custom_fields
+    .joins(:profile_custom_field).where('profile_custom_fields.actived' => true).order('profile_custom_fields.id ASC') do |f|
+    json.id f.id
+    json.invoicing_profile_id f.invoicing_profile_id
+    json.profile_custom_field_id f.profile_custom_field_id
+    json.value f.value
+  end
 end
 
 json.statistic_profile_attributes do
