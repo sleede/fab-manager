@@ -407,93 +407,7 @@
   </div>
 </div>
 
-<div class="panel panel-default m-t-md">
-  <div class="panel-heading">
-    <span class="font-sbold" translate>{{ 'app.admin.settings.account_creation' }}</span>
-  </div>
-  <div class="panel-body">
-    <div class="row">
-      <h3 class="m-l" translate>{{ 'app.admin.settings.general.public_registrations' }}</h3>
-      <p class="alert alert-warning m-h-md" translate>
-        {{ 'app.admin.settings.general.public_registrations_info' }}
-      </p>
-      <div class="col-md-10 col-md-offset-1">
-        <boolean-setting name="public_registrations"
-                         settings="allSettings"
-                         label="app.admin.settings.general.public_registrations_allowed">
-        </boolean-setting>
-      </div>
-    </div>
-    <div class="row">
-      <h3 class="m-l" translate>{{ 'app.admin.settings.phone' }}</h3>
-      <p class="alert alert-warning m-h-md" translate>
-        {{ 'app.admin.settings.phone_required_info' }}
-      </p>
-      <div class="col-md-10 col-md-offset-1">
-        <boolean-setting name="phone_required"
-                         settings="allSettings"
-                         label="app.admin.settings.phone_is_required">
-        </boolean-setting>
-      </div>
-    </div>
-    <div class="row">
-      <h3 class="m-l" translate>{{ 'app.admin.settings.address' }}</h3>
-      <p class="alert alert-warning m-h-md" translate>
-        {{ 'app.admin.settings.address_required_info_html' }}
-      </p>
-      <div class="col-md-10 col-md-offset-1">
-        <boolean-setting name="address_required"
-                         settings="allSettings"
-                         label="app.admin.settings.address_is_required">
-        </boolean-setting>
-      </div>
-    </div>
-    <div class="row">
-      <h3 class="m-l" translate>{{ 'app.admin.settings.captcha' }}</h3>
-      <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.captcha_info_html' | translate"></p>
-      <div class="col-md-6">
-        <text-setting name="recaptcha_site_key"
-                      settings="allSettings"
-                      label="app.admin.settings.site_key"
-                      fa-icon="fa-info"
-                      placeholder="0000000000000000000000000000000000000000">
-        </text-setting>
-      </div>
-      <div class="col-md-6">
-        <text-setting name="recaptcha_secret_key"
-                      settings="allSettings"
-                      label="app.admin.settings.secret_key"
-                      fa-icon="fa-key"
-                      placeholder="0000000000000000000000000000000000000000">
-        </text-setting>
-      </div>
-    </div>
-      <div class="row">
-          <h3 class="m-l" translate>{{ 'app.admin.settings.account_confirmation' }}</h3>
-          <p class="alert alert-warning m-h-md" translate>
-              {{ 'app.admin.settings.confirmation_required_info' }}
-          </p>
-          <div class="col-md-10 col-md-offset-1">
-              <boolean-setting name="confirmation_required"
-                               settings="allSettings"
-                               label="app.admin.settings.confirmation_is_required">
-              </boolean-setting>
-          </div>
-      </div>
-    <div class="row">
-      <h3 class="m-l" translate>{{ 'app.admin.settings.change_group' }}</h3>
-      <p class="alert alert-warning m-h-md" translate>
-        {{ 'app.admin.settings.change_group_info' }}
-      </p>
-      <div class="col-md-10 col-md-offset-1">
-        <boolean-setting name="user_change_group"
-                         settings="allSettings"
-                         label="app.admin.settings.allow_group_change">
-        </boolean-setting>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 <div class="panel panel-default m-t-lg">
   <div class="panel-heading">
@@ -504,9 +418,11 @@
     <div class="row">
       <h3 class="m-l" translate>{{ 'app.admin.settings.machines' }}</h3>
       <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.machines_info_html' | translate"></p>
-      <boolean-setting name="machines_module"
+      <boolean-setting name="'machines_module'"
                        settings="allSettings"
-                       label="app.admin.settings.enable_machines"
+                       on-success="onSuccess"
+                       on-error="onError"
+                       label="'app.admin.settings.enable_machines' | translate"
                        classes="m-l"></boolean-setting>
     </div>
     <div class="row">
