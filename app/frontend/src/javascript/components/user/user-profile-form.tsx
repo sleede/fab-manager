@@ -60,7 +60,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
   const phoneRegex = /^((00|\+)\d{2,3})?\d{4,14}$/;
   const urlRegex = /^(https?:\/\/)([\da-z.-]+)\.([-a-z\d.]{2,30})([/\w .-]*)*\/?$/;
 
-  const { handleSubmit, register, control, formState, setValue } = useForm<User>({ defaultValues: { ...user } });
+  const { handleSubmit, register, control, formState, setValue, reset } = useForm<User>({ defaultValues: { ...user } });
   const output = useWatch<User>({ control });
 
   const [isOrganization, setIsOrganization] = useState<boolean>(!_isNil(user.invoicing_profile_attributes.organization_attributes));
@@ -94,7 +94,17 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
       }).catch(error => onError(error));
     }
     ProfileCustomFieldAPI.index().then(data => {
-      setProfileCustomFields(data.filter(f => f.actived));
+      const fData = data.filter(f => f.actived);
+      setProfileCustomFields(fData);
+      const userProfileCustomFields = fData.map(f => {
+        const upcf = user.invoicing_profile_attributes.user_profile_custom_fields_attributes.find(uf => uf.profile_custom_field_id === f.id);
+        return upcf || {
+          value: '',
+          invoicing_profile_id: user.invoicing_profile_attributes.id,
+          profile_custom_field_id: f.id
+        };
+      });
+      setValue('invoicing_profile_attributes.user_profile_custom_fields_attributes', userProfileCustomFields);
     }).catch(error => onError(error));
   }, []);
 
@@ -119,7 +129,10 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
 
     return handleSubmit((data: User) => {
       MemberAPI[action](data)
-        .then(res => { onSuccess(res); })
+        .then(res => {
+          reset(res);
+          onSuccess(res);
+        })
         .catch((error) => { onError(error); });
     })(event);
   };

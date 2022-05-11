@@ -52,6 +52,12 @@ export interface User {
         id: number,
         address: string
       }
+    },
+    user_profile_custom_fields_attributes: {
+      id: number,
+      value: string,
+      invoicing_profile_id: number,
+      profile_custom_field_id: number
     }
   },
   statistic_profile_attributes: {
