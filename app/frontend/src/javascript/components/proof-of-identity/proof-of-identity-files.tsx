@@ -10,6 +10,9 @@ import { ProofOfIdentityType } from '../../models/proof-of-identity-type';
 import { ProofOfIdentityFile } from '../../models/proof-of-identity-file';
 import ProofOfIdentityTypeAPI from '../../api/proof-of-identity-type';
 import ProofOfIdentityFileAPI from '../../api/proof-of-identity-file';
+import { IFablab } from '../../models/fablab';
+
+declare let Fablab: IFablab;
 
 declare const Application: IApplication;
 
@@ -28,6 +31,8 @@ interface FilesType {
  */
 const ProofOfIdentityFiles: React.FC<ProofOfIdentityFilesProps> = ({ currentUser, onSuccess, onError }) => {
   const { t } = useTranslation('admin');
+
+  const maxProofOfIdentityFileSizeMb = (Fablab.maxProofOfIdentityFileSize / 1024 / 1024).toFixed();
 
   // list of proof of identity type
   const [proofOfIdentityTypes, setProofOfIdentityTypes] = useState<Array<ProofOfIdentityType>>([]);
@@ -64,8 +69,7 @@ const ProofOfIdentityFiles: React.FC<ProofOfIdentityFilesProps> = ({ currentUser
     return (event) => {
       const fileSize = event.target.files[0].size;
       let _errors = errors;
-      // 5m max
-      if (fileSize > 5242880) {
+      if (fileSize > Fablab.maxProofOfIdentityFileSize) {
         _errors = errors.concat(poitId);
         setErrors(_errors);
       } else {
@@ -115,7 +119,7 @@ const ProofOfIdentityFiles: React.FC<ProofOfIdentityFilesProps> = ({ currentUser
       <h3>{t('app.admin.members_edit.proof_of_identity_files')}</h3>
       <p className="text-black font-sbold">{t('app.admin.members_edit.my_documents_info')}</p>
       <div className="alert alert-warning">
-        <HtmlTranslate trKey="app.admin.members_edit.my_documents_alert" />
+        <HtmlTranslate trKey="app.admin.members_edit.my_documents_alert" options={{ SIZE: maxProofOfIdentityFileSizeMb }}/>
       </div>
       <div className="widget-content no-bg auto">
         {proofOfIdentityTypes.map((poit: ProofOfIdentityType) => {
@@ -146,7 +150,7 @@ const ProofOfIdentityFiles: React.FC<ProofOfIdentityFilesProps> = ({ currentUser
                     required />
                 </span>
               </div>
-              {errors.includes(poit.id) && <span className="help-block">{t('app.admin.members_edit.proof_of_identity_file_size_error')}</span>}
+              {errors.includes(poit.id) && <span className="help-block">{t('app.admin.members_edit.proof_of_identity_file_size_error', { SIZE: maxProofOfIdentityFileSizeMb })}</span>}
             </div>
           );
         })}
