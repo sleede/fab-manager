@@ -24,12 +24,14 @@ zu:
       subject: "crwdns3891:0crwdne3891:0"
       body:
         warning: "crwdns3893:0crwdne3893:0"
+        user_invalidated: "crwdns23042:0crwdne23042:0"
     notify_admin_user_group_changed:
       subject: "crwdns3895:0crwdne3895:0"
       body:
         user_changed_group_html: "crwdns3897:0%{NAME}crwdne3897:0"
         previous_group: "crwdns3899:0crwdne3899:0"
         new_group: "crwdns3901:0crwdne3901:0"
+        user_invalidated: "crwdns23044:0crwdne23044:0"
     notify_admin_subscription_extended:
       subject: "crwdns3903:0crwdne3903:0"
       body:
@@ -343,5 +345,32 @@ zu:
         remember: "crwdns22309:0%{REFERENCE}crwdnd22309:0%{AMOUNT}crwdnd22309:0%{DATE}crwdne22309:0"
         date: "crwdns22311:0crwdne22311:0"
         confirm: "crwdns22313:0crwdne22313:0"
+    notify_admin_user_proof_of_identity_files_created:
+      subject: "crwdns23046:0crwdne23046:0"
+      body:
+        proof_of_identity_files_uploaded_below: "crwdns23048:0%{NAME}crwdne23048:0"
+        validate_user: "crwdns23050:0crwdne23050:0"
+    notify_admin_user_proof_of_identity_files_updated:
+      subject: "crwdns23052:0crwdne23052:0"
+      body:
+        user_update_proof_of_identity_file: "crwdns23054:0%{NAME}crwdne23054:0"
+        validate_user: "crwdns23056:0crwdne23056:0"
+    notify_user_is_validated:
+      subject: "crwdns23058:0crwdne23058:0"
+      body:
+        account_validated: "crwdns23060:0crwdne23060:0"
+    notify_user_is_invalidated:
+      subject: "crwdns23062:0crwdne23062:0"
+      body:
+        account_invalidated: "crwdns23064:0crwdne23064:0"
+    notify_user_proof_of_identity_refusal:
+      subject: "crwdns23066:0crwdne23066:0"
+      body:
+        user_proof_of_identity_files_refusal: "crwdns23068:0crwdne23068:0"
+        action: "crwdns23070:0crwdne23070:0"
+    notify_admin_user_proof_of_identity_refusal:
+      subject: "crwdns23072:0crwdne23072:0"
+      body:
+        user_proof_of_identity_files_refusal: "crwdns23074:0%{NAME}crwdnd23074:0%{OPERATOR}crwdne23074:0"
     shared:
       hello: "crwdns4215:0%{user_name}crwdne4215:0"
