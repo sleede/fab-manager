@@ -27,13 +27,19 @@
 - Webpack overlay will now report eslint issues
 - Linted all code according to eslint rules
 - Fix a bug: when enabled, the statistics module is still not shown in the menu
+- Feature User validation, an option for allow admin validate account of user to active/disable the reservation
+- Feature Proof of identity by group, allow user upload his proof of identity and admin can check it for validate the account of user
+- Feature Organization custom fields
 - Fix a bug: Refused to connect to 'wss://localhost:3035/ws' when using a https tunnel in development mode
 - Fix a bug: edge case of birthday in the future in seeds.rb, we should use Date.current instead of DateTime.current since birthday is a date (see https://github.com/sleede/fab-manager/issues/344)
 - Fix a security issue: updated ruby to 2.6.10 to fix [CVE-2022-28739](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-28739)
 - Fix a security issue: updated rails to 5.2.7.1 to fix [CVE-2022-22577](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-22577) and [CVE-2022-27777](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-27777)
-- [TODO DEPLOY] `rails db:seed`
 - [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
 - [TODO DEPLOY] add the `MAX_PROOF_OF_IDENTITY_FILE_SIZE` environment variable (see [doc/environment.md](doc/environment.md#MAX_PROOF_OF_IDENTITY_FILE_SIZE) for configuration details)
+- [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/mount-proof-of-identity-files.sh | bash`
+- [TODO DEPLOY] `rails db:migrate`
+- [TODO DEPLOY] `rails db:seed`
+- [TODO DEPLOY] -> (only dev) `bundle install`
 
 ## v5.3.13 2022 May 02
 
