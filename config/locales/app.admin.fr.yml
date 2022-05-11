@@ -1417,6 +1417,7 @@ fr:
           proof_of_identity_type_unable_to_delete: "Impossible de supprimer le justificatif : "
           organization: "Structure"
           organization_profile_custom_fields_info: "Vous pouvez afficher des champs supplémentaires pour les utilisateurs qui déclarent être une structure. Vous pouvez aussi choisir de les rendre obligatoires à la création du compte."
+          organization_profile_custom_fields_alert: "Attention: les champs activés seront automatiquement affichés sur les factures émises. Une fois configurés, merci de veiller à ne pas les modifier."
           organization_profile_custom_field:
             required: "Confirmation requise"
             actived: "Activer le champs"

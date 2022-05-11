@@ -94,8 +94,12 @@
 
     <div class="row">
       <h3 class="m-l" translate>{{ 'app.admin.settings.compte.organization' }}</h3>
-      <p class="alert alert-warning m-h-md" translate>
+      <p class="alert alert-warning m-h-md m-b" translate>
         {{ 'app.admin.settings.compte.organization_profile_custom_fields_info' }}
+      </p>
+      <p class="alert alert-danger m-h-md" translate>
+        {{ 'app.admin.settings.compte.organization_profile_custom_fields_alert' }}
+      </p>
       <div class="col-md-12">
         <profile-custom-fields-list on-success="onSuccess" on-error="onError" />
       </div>

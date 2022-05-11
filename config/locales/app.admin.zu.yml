@@ -1417,6 +1417,7 @@ zu:
           proof_of_identity_type_unable_to_delete: "Unable to delete the proof of identity : "
           organization: "Organization"
           organization_profile_custom_fields_info: "You can display additional fields for users who declare themselves to be an organization. You can also choose to make them mandatory at account creation."
+          organization_profile_custom_fields_alert: "Attention: the activated fields will be automatically displayed on the issued invoices. Once configured, please do not modify them."
           organization_profile_custom_field:
             required: "Confirmation required"
             actived: "Activate the field"
