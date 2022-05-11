@@ -4,7 +4,7 @@
 
 
 
-  <div class="row no-gutter wrapper">
+  <div class="row no-gutter wrapper dashboard">
     <div class="col-sm-12 col-md-12 col-lg-3">
       <div class="widget panel b-a m m-t-lg">
         <div class="panel-heading b-b small text-center">
@@ -16,24 +16,12 @@
           <div class="text-xs" ng-show="user.last_sign_in_at"><i>{{ 'app.logged.dashboard.settings.last_activity_on_' | translate:{DATE:(user.last_sign_in_at | amDateFormat: 'LL')} }}</i></div>
         </div>
         <div class="widget-content no-bg b-b auto wrapper">
-          <div class="m-b-md">
-            <h3 class="text-u-c" translate>{{ 'app.logged.dashboard.settings.group' }}</h3>
-            <div ng-show="!group.change">
-              <uib-alert type="warning">
-                <span class="text-black font-sbold">{{getUserGroup().name}}</span>
-              </uib-alert>
-              <button class="btn text-black btn-warning-full btn-sm m-t-n-sm"
-                      ng-click="group.change = !group.change"
-                      ng-hide="user.subscribed_plan.name || user.role === 'admin'"
-                      translate>
-                {{ 'app.logged.dashboard.settings.i_want_to_change_group' }}
-              </button>
-            </div>
-            <div ng-show="group.change">
-                <select class="form-control" ng-options="g.id as g.name for g in groups" ng-model="userGroup"></select>
-                <button class="btn btn-success m-t" ng-click="selectGroup()">Changer mon groupe</button>
-            </div>
-          </div>
+          <change-group user="user"
+                        on-success="onGroupUpdateSuccess"
+                        on-error="onError"
+                        class-name="'dashboard-change-group'"
+                        allow-change="isAllowedChangingGroup()">
+          </change-group>
           <div ng-show="$root.modules.plans">
             <h3 class="text-u-c" translate>{{ 'app.logged.dashboard.settings.subscription' }}</h3>
             <div ng-show="user.subscribed_plan">

@@ -144,7 +144,8 @@ class Setting < ApplicationRecord
                              pinterest
                              lastfm
                              flickr
-                             machines_module] }
+                             machines_module
+                             user_change_group] }
   # WARNING: when adding a new key, you may also want to add it in:
   # - config/locales/en.yml#settings
   # - app/frontend/src/javascript/models/setting.ts#SettingName

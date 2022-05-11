@@ -134,6 +134,7 @@ export enum SettingName {
   SocialsLastfm = 'lastfm',
   SocialsFlickr = 'flickr',
   MachinesModule = 'machines_module',
+  UserChangeGroup = 'user_change_group',
 }
 
 export type SettingValue = string|boolean|number;

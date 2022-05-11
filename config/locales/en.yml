@@ -582,3 +582,4 @@ en:
     lastfm: "lastfm"
     flickr: "flickr"
     machines_module: "Machines module"
+    user_change_group: "Allow users to change their group"

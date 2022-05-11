@@ -140,20 +140,24 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
     };
 
     /**
-     * Change the group of the current user to the one set in $scope.userGroup
+     * Callback triggered when the user has successfully changed his group
      */
-    $scope.selectGroup = () =>
-      Member.update({ id: $scope.user.id }, { user: { group_id: $scope.userGroup } }, function (user) {
-        $scope.user = user;
-        $rootScope.currentUser = user;
-        Auth._currentUser.group_id = user.group_id;
-        $scope.group.change = false;
-        return growl.success(_t('app.logged.dashboard.settings.your_group_has_been_successfully_changed'));
-      }
-      , function (err) {
-        growl.error(_t('app.logged.dashboard.settings.an_unexpected_error_prevented_your_group_from_being_changed'));
-        return console.error(err);
-      });
+    $scope.onGroupUpdateSuccess = function (message, user) {
+      growl.success(message);
+      setTimeout(() => {
+        $scope.user = _.cloneDeep(user);
+        $scope.$apply();
+      }, 50);
+      $rootScope.currentUser.group_id = user.group_id;
+      Auth._currentUser.group_id = user.group_id;
+    };
+
+    /**
+     * Check if it is allowed the change the group of the current user
+     */
+    $scope.isAllowedChangingGroup = function () {
+      return !$scope.user.subscribed_plan?.name && $scope.user.role !== 'admin';
+    };
 
     /**
      * Callback to diplay the datepicker as a dropdown when clicking on the input field

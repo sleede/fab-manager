@@ -13,10 +13,10 @@ export default class UserLib {
    * Check if the current user has privileged access for resources concerning the provided customer
    */
   isPrivileged = (customer: User): boolean => {
-    if (this.user.role === 'admin') return true;
+    if (this.user?.role === 'admin') return true;
 
-    if (this.user.role === 'manager') {
-      return (this.user.id !== customer.id);
+    if (this.user?.role === 'manager') {
+      return (this.user?.id !== customer.id);
     }
 
     return false;

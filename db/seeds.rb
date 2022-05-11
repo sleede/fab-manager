@@ -905,6 +905,8 @@ Setting.set('pack_only_for_subscription', true) unless Setting.find_by(name: 'pa
 
 Setting.set('public_registrations', true) unless Setting.find_by(name: 'public_registrations').try(:value)
 
+Setting.set('user_change_group', true) unless Setting.find_by(name: 'user_change_group').try(:value)
+
 unless Setting.find_by(name: 'overlapping_categories').try(:value)
   Setting.set('overlapping_categories', 'training_reservations,machine_reservations,space_reservations,events_reservations')
 end
