@@ -48,6 +48,23 @@ class ShoppingCart
   # Build the dataset for the current ShoppingCart and save it into the database.
   # Data integrity is guaranteed: all goes right or nothing is saved.
   def build_and_save(payment_id, payment_type)
+    user_validation_required = Setting.get('user_validation_required')
+    user_validation_required_list = Setting.get('user_validation_required_list')
+    unless @operator.privileged?
+      if user_validation_required && user_validation_required_list.present?
+        list = user_validation_required_list.split(',')
+        errors = []
+        items.each do |item|
+          if list.include?(item.type) && !@customer.validated_at?
+            errors.push("User validation is required for reserve #{item.type}")
+          end
+        end
+        unless errors.empty?
+          return { success: nil, payment: nil, errors: errors }
+        end
+      end
+    end
+
     price = total
     objects = []
     payment = nil

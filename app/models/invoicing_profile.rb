@@ -20,6 +20,10 @@ class InvoicingProfile < ApplicationRecord
   has_many :operated_invoices, foreign_key: :operator_profile_id, class_name: 'Invoice', dependent: :nullify
   has_many :operated_payment_schedules, foreign_key: :operator_profile_id, class_name: 'PaymentSchedule', dependent: :nullify
 
+  has_many :user_profile_custom_fields
+  has_many :profile_custom_fields, through: :user_profile_custom_fields
+  accepts_nested_attributes_for :user_profile_custom_fields, allow_destroy: true
+
   validates :address, presence: true, if: -> { Setting.get('address_required') }
 
   def full_name

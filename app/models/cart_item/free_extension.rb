@@ -35,4 +35,8 @@ class CartItem::FreeExtension < CartItem::BaseItem
       end_at: @new_expiration_date
     )
   end
+
+  def type
+    'subscription'
+  end
 end

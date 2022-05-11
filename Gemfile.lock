@@ -50,6 +50,7 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
+    aes_key_wrap (1.1.0)
     afm (0.2.2)
     ansi (1.5.0)
     api-pagination (4.8.2)
@@ -57,12 +58,14 @@ GEM
       rails (>= 4.1)
     arel (9.0.0)
     ast (2.4.0)
+    attr_required (1.0.1)
     awesome_print (1.8.0)
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
     bcrypt (3.1.13)
+    bindata (2.4.10)
     bindex (0.8.1)
     bootsnap (1.4.6)
       msgpack (~> 1.0)
@@ -118,7 +121,6 @@ GEM
     dotenv-rails (2.7.5)
       dotenv (= 2.7.5)
       railties (>= 3.2, < 6.1)
-    e2mmap (0.1.0)
     elasticsearch (5.0.5)
       elasticsearch-api (= 5.0.5)
       elasticsearch-transport (= 5.0.5)
@@ -152,8 +154,8 @@ GEM
     forgery (0.7.0)
     friendly_id (5.1.0)
       activerecord (>= 4.0.0)
-    fugit (1.5.2)
-      et-orbi (~> 1.1, >= 1.1.8)
+    fugit (1.5.3)
+      et-orbi (~> 1, >= 1.2.7)
       raabro (~> 1.4)
     globalid (1.0.0)
       activesupport (>= 5.0)
@@ -164,11 +166,12 @@ GEM
     httparty (0.20.0)
       mime-types (~> 3.0)
       multi_xml (>= 0.5.2)
+    httpclient (2.8.3)
     i18n (1.10.0)
       concurrent-ruby (~> 1.0)
-    icalendar (2.5.3)
+    icalendar (2.7.1)
       ice_cube (~> 0.16)
-    ice_cube (0.16.3)
+    ice_cube (0.16.4)
     ice_nine (0.11.2)
     image_processing (1.12.2)
       mini_magick (>= 4.9.5, < 5)
@@ -179,6 +182,10 @@ GEM
     jbuilder_cache_multi (0.1.0)
       jbuilder (>= 1.5.0, < 3)
     json (2.3.1)
+    json-jwt (1.13.0)
+      activesupport (>= 4.2)
+      aes_key_wrap
+      bindata
     jsonpath (1.1.0)
       multi_json
     jwt (2.2.1)
@@ -249,6 +256,20 @@ GEM
     omniauth-rails_csrf_protection (0.1.2)
       actionpack (>= 4.2)
       omniauth (>= 1.3.1)
+    omniauth_openid_connect (0.4.0)
+      addressable (~> 2.5)
+      omniauth (>= 1.9, < 3)
+      openid_connect (~> 1.1)
+    openid_connect (1.3.0)
+      activemodel
+      attr_required (>= 1.0.0)
+      json-jwt (>= 1.5.0)
+      rack-oauth2 (>= 1.6.1)
+      swd (>= 1.0.0)
+      tzinfo
+      validate_email
+      validate_url
+      webfinger (>= 1.0.1)
     openlab_ruby (0.0.7)
       httparty (~> 0.20)
     orm_adapter (0.5.0)
@@ -280,6 +301,12 @@ GEM
     raabro (1.4.0)
     racc (1.6.0)
     rack (2.2.3)
+    rack-oauth2 (1.19.0)
+      activesupport
+      attr_required
+      httpclient
+      json-jwt (>= 1.11.0)
+      rack (>= 2.1.0)
     rack-proxy (0.7.2)
       rack
     rack-test (1.1.0)
@@ -350,7 +377,7 @@ GEM
     rufus-scheduler (3.8.1)
       fugit (~> 1.1, >= 1.1.6)
     safe_yaml (1.0.5)
-    sassc (2.4.0)
+    sassc (2.1.0)
       ffi (~> 1.9)
     seed_dump (3.3.1)
       activerecord (>= 4)
@@ -362,16 +389,14 @@ GEM
       rack-proxy (>= 0.6.1)
       railties (>= 5.2)
       semantic_range (>= 2.3.0)
-    sidekiq (6.4.1)
+    sidekiq (6.4.2)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
-    sidekiq-scheduler (3.1.1)
-      e2mmap
-      redis (>= 3, < 5)
+    sidekiq-scheduler (4.0.0)
+      redis (>= 4.2.0)
       rufus-scheduler (~> 3.2)
-      sidekiq (>= 3)
-      thwait
+      sidekiq (>= 4)
       tilt (>= 1.4.0)
     sidekiq-unique-jobs (7.1.15)
       brpoplpush-redis_script (> 0.1.1, <= 2.0.0)
@@ -396,6 +421,10 @@ GEM
       sprockets (>= 3.0.0)
     ssrf_filter (1.0.7)
     stripe (5.29.0)
+    swd (1.3.0)
+      activesupport (>= 3)
+      attr_required (>= 0.0.5)
+      httpclient (>= 2.4)
     sync (0.5.0)
     sys-filesystem (1.3.3)
       ffi
@@ -403,8 +432,6 @@ GEM
       tins (~> 1.0)
     thor (1.2.1)
     thread_safe (0.3.6)
-    thwait (0.2.0)
-      e2mmap
     tilt (2.0.10)
     tins (1.25.0)
       sync
@@ -419,6 +446,12 @@ GEM
       tzinfo (>= 1.0.0)
     unicode-display_width (1.4.1)
     uniform_notifier (1.14.2)
+    validate_email (0.1.6)
+      activemodel (>= 3.0)
+      mail (>= 2.2.5)
+    validate_url (1.0.13)
+      activemodel (>= 3.0.0)
+      public_suffix
     vcr (6.0.0)
     virtus (1.0.5)
       axiom-types (~> 0.1)
@@ -432,6 +465,9 @@ GEM
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
       railties (>= 5.0)
+    webfinger (1.2.0)
+      activesupport
+      httpclient (>= 2.4)
     webmock (3.8.2)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
@@ -483,6 +519,7 @@ DEPENDENCIES
   omniauth (~> 1.9.0)
   omniauth-oauth2
   omniauth-rails_csrf_protection (~> 0.1)
+  omniauth_openid_connect
   openlab_ruby
   pdf-reader
   pg
@@ -503,7 +540,7 @@ DEPENDENCIES
   rubocop (~> 0.61.1)
   rubyXL
   rubyzip (>= 1.3.0)
-  sassc
+  sassc (= 2.1.0)
   seed_dump
   sha3
   shakapacker (= 6.2.0)

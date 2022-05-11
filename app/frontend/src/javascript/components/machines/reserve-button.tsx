@@ -24,13 +24,14 @@ interface ReserveButtonProps {
   onReserveMachine: (machine: Machine) => void,
   onLoginRequested: () => Promise<User>,
   onEnrollRequested: (trainingId: number) => void,
-  className?: string
+  className?: string,
+  canProposePacks: boolean,
 }
 
 /**
  * Button component that makes the training verification before redirecting the user to the reservation calendar
  */
-const ReserveButtonComponent: React.FC<ReserveButtonProps> = ({ currentUser, machineId, onLoginRequested, onLoadingStart, onLoadingEnd, onError, onSuccess, onReserveMachine, onEnrollRequested, className, children }) => {
+const ReserveButtonComponent: React.FC<ReserveButtonProps> = ({ currentUser, machineId, onLoginRequested, onLoadingStart, onLoadingEnd, onError, onSuccess, onReserveMachine, onEnrollRequested, className, children, canProposePacks }) => {
   const { t } = useTranslation('shared');
 
   const [machine, setMachine] = useState<Machine>(null);
@@ -146,7 +147,7 @@ const ReserveButtonComponent: React.FC<ReserveButtonProps> = ({ currentUser, mac
     // if the customer has already bought a pack or if there's no active packs for this machine,
     // or customer has not any subscription if admin active pack only for subscription option
     // let the customer reserve
-    if (machine.current_user_has_packs || !machine.has_prepaid_packs_for_current_user || (isPackOnlyForSubscription && !user.subscribed_plan)) {
+    if (machine.current_user_has_packs || !machine.has_prepaid_packs_for_current_user || (isPackOnlyForSubscription && !user.subscribed_plan) || !canProposePacks) {
       return onReserveMachine(machine);
     }
 
@@ -182,14 +183,14 @@ const ReserveButtonComponent: React.FC<ReserveButtonProps> = ({ currentUser, mac
   );
 };
 
-export const ReserveButton: React.FC<ReserveButtonProps> = ({ currentUser, machineId, onLoginRequested, onLoadingStart, onLoadingEnd, onError, onSuccess, onReserveMachine, onEnrollRequested, className, children }) => {
+export const ReserveButton: React.FC<ReserveButtonProps> = ({ currentUser, machineId, onLoginRequested, onLoadingStart, onLoadingEnd, onError, onSuccess, onReserveMachine, onEnrollRequested, className, children, canProposePacks }) => {
   return (
     <Loader>
-      <ReserveButtonComponent currentUser={currentUser} machineId={machineId} onError={onError} onSuccess={onSuccess} onLoadingStart={onLoadingStart} onLoadingEnd={onLoadingEnd} onReserveMachine={onReserveMachine} onLoginRequested={onLoginRequested} onEnrollRequested={onEnrollRequested} className={className}>
+      <ReserveButtonComponent currentUser={currentUser} machineId={machineId} onError={onError} onSuccess={onSuccess} onLoadingStart={onLoadingStart} onLoadingEnd={onLoadingEnd} onReserveMachine={onReserveMachine} onLoginRequested={onLoginRequested} onEnrollRequested={onEnrollRequested} className={className} canProposePacks={canProposePacks}>
         {children}
       </ReserveButtonComponent>
     </Loader>
   );
 };
 
-Application.Components.component('reserveButton', react2angular(ReserveButton, ['currentUser', 'machineId', 'onLoadingStart', 'onLoadingEnd', 'onError', 'onSuccess', 'onReserveMachine', 'onLoginRequested', 'onEnrollRequested', 'className']));
+Application.Components.component('reserveButton', react2angular(ReserveButton, ['currentUser', 'machineId', 'onLoadingStart', 'onLoadingEnd', 'onError', 'onSuccess', 'onReserveMachine', 'onLoginRequested', 'onEnrollRequested', 'className', 'canProposePacks']));

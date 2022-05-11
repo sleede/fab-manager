@@ -24,6 +24,7 @@
       z-index: -1;
       margin: -$border;
       border-radius: inherit;
+      background: linear-gradient(to left, white, var(--main), white);
     }
   }
 
@@ -35,6 +36,8 @@
       width: 50%;
       margin: 2em auto;
       line-height: 3em;
+      background-color: var(--main);
+      color: var(--main-text-color) !important;
     }
   }
 

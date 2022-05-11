@@ -1,0 +1,61 @@
+.user-profile-form {
+  display: flex;
+  flex-direction: row;
+
+  .fields-group {
+    width: 100%;
+
+    & > * {
+      margin-top: 1.5rem;
+    }
+
+    .names, .birth-phone, .website-job, .interests-CAD {
+      display: flex;
+      flex-direction: row;
+
+      .form-item:first-child {
+        margin-right: 32px;
+      }
+    }
+
+    .organization-toggle {
+      p {
+        font-family: var(--font-text);
+        font-weight: normal;
+        font-size: 1.4rem;
+        line-height: normal;
+        margin: 0;
+      }
+    }
+  }
+
+  .main-actions {
+    display: flex;
+    flex-direction: row-reverse;
+
+    .submit-button {
+      margin-top: 2em;
+      border-color: var(--information-light);
+      background-color: var(--information);
+      color: white;
+
+      &:hover {
+        border-color: var(--information);
+        background-color: var(--information-dark);
+        color: white;
+      }
+    }
+  }
+
+  &--small {
+    flex-direction: column;
+
+    .names, .birth-phone, .website-job, .interests-CAD {
+      flex-direction: column;
+
+      .form-item:first-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

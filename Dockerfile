@@ -66,6 +66,7 @@ RUN mkdir -p /usr/src/app && \
     mkdir -p /usr/src/app/public/uploads && \
     mkdir -p /usr/src/app/public/packs && \
     mkdir -p /usr/src/app/accounting && \
+    mkdir -p /usr/src/app/proof_of_identity_files && \
     mkdir -p /usr/src/app/tmp/sockets && \
     mkdir -p /usr/src/app/tmp/pids
 
@@ -81,6 +82,7 @@ VOLUME /usr/src/app/public
 VOLUME /usr/src/app/public/uploads
 VOLUME /usr/src/app/public/packs
 VOLUME /usr/src/app/accounting
+VOLUME /usr/src/app/proof_of_identity_files
 VOLUME /var/log/supervisor
 
 # Expose port 3000 to the Docker host, so we can access it from the outside

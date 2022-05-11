@@ -22,6 +22,7 @@ interface PlansListProps {
   operator?: User,
   customer?: User,
   subscribedPlanId?: number,
+  canSelectPlan: boolean,
 }
 
 // A list of plans, organized by group ID - then organized by plan-category ID (or NaN if the plan has no category)
@@ -30,7 +31,7 @@ type PlansTree = Map<number, Map<number, Array<Plan>>>;
 /**
  * This component display an organized list of plans to allow the end-user to select one and subscribe online
  */
-const PlansList: React.FC<PlansListProps> = ({ onError, onPlanSelection, onLoginRequest, operator, customer, subscribedPlanId }) => {
+const PlansList: React.FC<PlansListProps> = ({ onError, onPlanSelection, onLoginRequest, operator, customer, subscribedPlanId, canSelectPlan }) => {
   // all plans
   const [plans, setPlans] = useState<PlansTree>(null);
   // all plan-categories, ordered by weight
@@ -218,6 +219,7 @@ const PlansList: React.FC<PlansListProps> = ({ onError, onPlanSelection, onLogin
             operator={operator}
             isSelected={isSelectedPlan(plan)}
             onSelectPlan={handlePlanSelection}
+            canSelectPlan={canSelectPlan}
             onLoginRequested={onLoginRequest} />
         ))}
       </div>
@@ -239,12 +241,12 @@ const PlansList: React.FC<PlansListProps> = ({ onError, onPlanSelection, onLogin
   );
 };
 
-const PlansListWrapper: React.FC<PlansListProps> = ({ customer, onError, onPlanSelection, onLoginRequest, operator, subscribedPlanId }) => {
+const PlansListWrapper: React.FC<PlansListProps> = ({ customer, onError, onPlanSelection, onLoginRequest, operator, subscribedPlanId, canSelectPlan }) => {
   return (
     <Loader>
-      <PlansList customer={customer} onError={onError} onPlanSelection={onPlanSelection} onLoginRequest={onLoginRequest} operator={operator} subscribedPlanId={subscribedPlanId} />
+      <PlansList customer={customer} onError={onError} onPlanSelection={onPlanSelection} onLoginRequest={onLoginRequest} operator={operator} subscribedPlanId={subscribedPlanId} canSelectPlan={canSelectPlan} />
     </Loader>
   );
 };
 
-Application.Components.component('plansList', react2angular(PlansListWrapper, ['customer', 'onError', 'onPlanSelection', 'onLoginRequest', 'operator', 'subscribedPlanId']));
+Application.Components.component('plansList', react2angular(PlansListWrapper, ['customer', 'onError', 'onPlanSelection', 'onLoginRequest', 'operator', 'subscribedPlanId', 'canSelectPlan']));

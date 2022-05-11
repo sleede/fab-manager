@@ -1,3 +1,6 @@
 <%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
 
 <p><%= t(".body.warning") %></p>
+<% if @notification.get_meta_data(:user_invalidated) %>
+  <p><%= t(".body.user_invalidated") %></p>
+<% end %>

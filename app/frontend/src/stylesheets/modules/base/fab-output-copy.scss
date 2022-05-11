@@ -1,0 +1,22 @@
+.fab-output-copy {
+  .form-item-field {
+    & > input {
+      background-color: var(--gray-soft);
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    & > .addon > button.copied {
+      position: relative;
+      &:after {
+        content: '\f00c';
+        font-family: 'Font Awesome 5 Free';
+        position: absolute;
+        right: 0;
+        width: 100%;
+        background-color: #EFEFEF;
+      }
+    }
+  }
+}
+

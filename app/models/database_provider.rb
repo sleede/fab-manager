@@ -5,9 +5,7 @@
 class DatabaseProvider < ApplicationRecord
   has_one :auth_provider, as: :providable, dependent: :destroy
 
-  def protected_fields
-    []
-  end
+  validates_with DatabaseProviderValidator
 
   def profile_url
     '/#!/dashboard/profile'

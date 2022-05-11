@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_22_135836) do
+ActiveRecord::Schema.define(version: 2022_05_09_105714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 2022_03_22_135836) do
   enable_extension "unaccent"
 
   create_table "abuses", id: :serial, force: :cascade do |t|
-    t.integer "signaled_id"
     t.string "signaled_type"
+    t.integer "signaled_id"
     t.string "first_name"
     t.string "last_name"
     t.string "email"
@@ -49,8 +49,8 @@ ActiveRecord::Schema.define(version: 2022_03_22_135836) do
     t.string "locality"
     t.string "country"
     t.string "postal_code"
-    t.integer "placeable_id"
     t.string "placeable_type"
+    t.integer "placeable_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -64,12 +64,25 @@ ActiveRecord::Schema.define(version: 2022_03_22_135836) do
   end
 
   create_table "assets", id: :serial, force: :cascade do |t|
-    t.integer "viewable_id"
     t.string "viewable_type"
+    t.integer "viewable_id"
     t.string "attachment"
     t.string "type"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "auth_provider_mappings", id: :serial, force: :cascade do |t|
+    t.string "local_field"
+    t.string "api_field"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "local_model"
+    t.string "api_endpoint"
+    t.string "api_data_type"
+    t.jsonb "transformation"
+    t.bigint "auth_provider_id"
+    t.index ["auth_provider_id"], name: "index_auth_provider_mappings_on_auth_provider_id"
   end
 
   create_table "auth_providers", id: :serial, force: :cascade do |t|
@@ -133,8 +146,8 @@ ActiveRecord::Schema.define(version: 2022_03_22_135836) do
   end
 
   create_table "credits", id: :serial, force: :cascade do |t|
-    t.integer "creditable_id"
     t.string "creditable_type"
+    t.integer "creditable_id"
     t.integer "plan_id"
     t.integer "hours"
     t.datetime "created_at"
@@ -356,30 +369,17 @@ ActiveRecord::Schema.define(version: 2022_03_22_135836) do
 
   create_table "notifications", id: :serial, force: :cascade do |t|
     t.integer "receiver_id"
-    t.integer "attached_object_id"
     t.string "attached_object_type"
+    t.integer "attached_object_id"
     t.integer "notification_type_id"
     t.boolean "is_read", default: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string "receiver_type"
     t.boolean "is_send", default: false
-    t.jsonb "meta_data", default: {}
+    t.jsonb "meta_data", default: "{}"
     t.index ["notification_type_id"], name: "index_notifications_on_notification_type_id"
     t.index ["receiver_id"], name: "index_notifications_on_receiver_id"
-  end
-
-  create_table "o_auth2_mappings", id: :serial, force: :cascade do |t|
-    t.integer "o_auth2_provider_id"
-    t.string "local_field"
-    t.string "api_field"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "local_model"
-    t.string "api_endpoint"
-    t.string "api_data_type"
-    t.jsonb "transformation"
-    t.index ["o_auth2_provider_id"], name: "index_o_auth2_mappings_on_o_auth2_provider_id"
   end
 
   create_table "o_auth2_providers", id: :serial, force: :cascade do |t|
@@ -407,6 +407,34 @@ ActiveRecord::Schema.define(version: 2022_03_22_135836) do
     t.string "name"
     t.integer "calls_count", default: 0
     t.string "token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "open_id_connect_providers", force: :cascade do |t|
+    t.string "issuer"
+    t.boolean "discovery"
+    t.string "client_auth_method"
+    t.string "scope"
+    t.string "response_type"
+    t.string "response_mode"
+    t.string "display"
+    t.string "prompt"
+    t.boolean "send_scope_to_token_endpoint"
+    t.string "post_logout_redirect_uri"
+    t.string "uid_field"
+    t.string "client__identifier"
+    t.string "client__secret"
+    t.string "client__redirect_uri"
+    t.string "client__scheme"
+    t.string "client__host"
+    t.string "client__port"
+    t.string "client__authorization_endpoint"
+    t.string "client__token_endpoint"
+    t.string "client__userinfo_endpoint"
+    t.string "client__jwks_uri"
+    t.string "client__end_session_endpoint"
+    t.string "profile_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -484,6 +512,7 @@ ActiveRecord::Schema.define(version: 2022_03_22_135836) do
     t.integer "weight"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "description"
   end
 
   create_table "plans", id: :serial, force: :cascade do |t|
@@ -541,8 +570,8 @@ ActiveRecord::Schema.define(version: 2022_03_22_135836) do
   create_table "prices", id: :serial, force: :cascade do |t|
     t.integer "group_id"
     t.integer "plan_id"
-    t.integer "priceable_id"
     t.string "priceable_type"
+    t.integer "priceable_id"
     t.integer "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -550,6 +579,14 @@ ActiveRecord::Schema.define(version: 2022_03_22_135836) do
     t.index ["group_id"], name: "index_prices_on_group_id"
     t.index ["plan_id"], name: "index_prices_on_plan_id"
     t.index ["priceable_type", "priceable_id"], name: "index_prices_on_priceable_type_and_priceable_id"
+  end
+
+  create_table "profile_custom_fields", force: :cascade do |t|
+    t.string "label"
+    t.boolean "required", default: false
+    t.boolean "actived", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "profiles", id: :serial, force: :cascade do |t|
@@ -648,12 +685,52 @@ ActiveRecord::Schema.define(version: 2022_03_22_135836) do
     t.index ["theme_id"], name: "index_projects_themes_on_theme_id"
   end
 
+  create_table "proof_of_identity_files", force: :cascade do |t|
+    t.bigint "proof_of_identity_type_id"
+    t.bigint "user_id"
+    t.string "attachment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["proof_of_identity_type_id"], name: "index_proof_of_identity_files_on_proof_of_identity_type_id"
+    t.index ["user_id"], name: "index_proof_of_identity_files_on_user_id"
+  end
+
+  create_table "proof_of_identity_refusals", force: :cascade do |t|
+    t.bigint "user_id"
+    t.integer "operator_id"
+    t.text "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_proof_of_identity_refusals_on_user_id"
+  end
+
+  create_table "proof_of_identity_refusals_types", id: false, force: :cascade do |t|
+    t.bigint "proof_of_identity_type_id", null: false
+    t.bigint "proof_of_identity_refusal_id", null: false
+    t.index ["proof_of_identity_type_id", "proof_of_identity_refusal_id"], name: "proof_of_identity_type_id_and_proof_of_identity_refusal_id"
+  end
+
+  create_table "proof_of_identity_types", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "proof_of_identity_types_groups", force: :cascade do |t|
+    t.bigint "proof_of_identity_type_id"
+    t.bigint "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_p_o_i_t_groups_on_group_id"
+    t.index ["proof_of_identity_type_id"], name: "index_p_o_i_t_groups_on_proof_of_identity_type_id"
+  end
+
   create_table "reservations", id: :serial, force: :cascade do |t|
     t.text "message"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer "reservable_id"
     t.string "reservable_type"
+    t.integer "reservable_id"
     t.integer "nb_reserve_places"
     t.integer "statistic_profile_id"
     t.index ["reservable_type", "reservable_id"], name: "index_reservations_on_reservable_type_and_reservable_id"
@@ -662,8 +739,8 @@ ActiveRecord::Schema.define(version: 2022_03_22_135836) do
 
   create_table "roles", id: :serial, force: :cascade do |t|
     t.string "name"
-    t.integer "resource_id"
     t.string "resource_type"
+    t.integer "resource_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
@@ -895,6 +972,16 @@ ActiveRecord::Schema.define(version: 2022_03_22_135836) do
     t.index ["training_id"], name: "index_trainings_pricings_on_training_id"
   end
 
+  create_table "user_profile_custom_fields", force: :cascade do |t|
+    t.bigint "invoicing_profile_id"
+    t.bigint "profile_custom_field_id"
+    t.string "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["invoicing_profile_id"], name: "index_user_profile_custom_fields_on_invoicing_profile_id"
+    t.index ["profile_custom_field_id"], name: "index_user_profile_custom_fields_on_profile_custom_field_id"
+  end
+
   create_table "user_tags", id: :serial, force: :cascade do |t|
     t.integer "user_id"
     t.integer "tag_id"
@@ -934,6 +1021,8 @@ ActiveRecord::Schema.define(version: 2022_03_22_135836) do
     t.boolean "is_allow_newsletter"
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
+    t.string "mapped_from_sso"
+    t.datetime "validated_at"
     t.index ["auth_token"], name: "index_users_on_auth_token"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -982,6 +1071,7 @@ ActiveRecord::Schema.define(version: 2022_03_22_135836) do
   end
 
   add_foreign_key "accounting_periods", "users", column: "closed_by"
+  add_foreign_key "auth_provider_mappings", "auth_providers"
   add_foreign_key "availability_tags", "availabilities"
   add_foreign_key "availability_tags", "tags"
   add_foreign_key "event_price_categories", "events"
@@ -999,7 +1089,6 @@ ActiveRecord::Schema.define(version: 2022_03_22_135836) do
   add_foreign_key "invoices", "statistic_profiles"
   add_foreign_key "invoices", "wallet_transactions"
   add_foreign_key "invoicing_profiles", "users"
-  add_foreign_key "o_auth2_mappings", "o_auth2_providers"
   add_foreign_key "organizations", "invoicing_profiles"
   add_foreign_key "payment_gateway_objects", "payment_gateway_objects"
   add_foreign_key "payment_schedule_items", "invoices"
@@ -1026,6 +1115,9 @@ ActiveRecord::Schema.define(version: 2022_03_22_135836) do
   add_foreign_key "projects_spaces", "spaces"
   add_foreign_key "projects_themes", "projects"
   add_foreign_key "projects_themes", "themes"
+  add_foreign_key "proof_of_identity_refusals", "users"
+  add_foreign_key "proof_of_identity_types_groups", "groups"
+  add_foreign_key "proof_of_identity_types_groups", "proof_of_identity_types"
   add_foreign_key "reservations", "statistic_profiles"
   add_foreign_key "slots_reservations", "reservations"
   add_foreign_key "slots_reservations", "slots"
@@ -1042,6 +1134,8 @@ ActiveRecord::Schema.define(version: 2022_03_22_135836) do
   add_foreign_key "subscriptions", "statistic_profiles"
   add_foreign_key "tickets", "event_price_categories"
   add_foreign_key "tickets", "reservations"
+  add_foreign_key "user_profile_custom_fields", "invoicing_profiles"
+  add_foreign_key "user_profile_custom_fields", "profile_custom_fields"
   add_foreign_key "user_tags", "tags"
   add_foreign_key "user_tags", "users"
   add_foreign_key "wallet_transactions", "invoicing_profiles"

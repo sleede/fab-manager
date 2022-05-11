@@ -344,14 +344,14 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
       });
       // on tour end, save the status in database
       uitour.on('ended', function () {
-        if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile.tours.indexOf('calendar') < 0) {
+        if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile_attributes.tours.indexOf('calendar') < 0) {
           Member.completeTour({ id: $scope.currentUser.id }, { tour: 'calendar' }, function (res) {
-            $scope.currentUser.profile.tours = res.tours;
+            $scope.currentUser.profile_attributes.tours = res.tours;
           });
         }
       });
       // if the user has never seen the tour, show him now
-      if (settingsPromise.feature_tour_display !== 'manual' && $scope.currentUser.profile.tours.indexOf('calendar') < 0) {
+      if (settingsPromise.feature_tour_display !== 'manual' && $scope.currentUser.profile_attributes.tours.indexOf('calendar') < 0) {
         uitour.start();
       }
     };
@@ -369,8 +369,8 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
      * @return {string} 'male' or 'female'
      */
     const getGender = function (user) {
-      if (user.statistic_profile) {
-        if (user.statistic_profile.gender === 'true') { return 'male'; } else { return 'female'; }
+      if (user.statistic_profile_attributes) {
+        if (user.statistic_profile_attributes.gender === 'true') { return 'male'; } else { return 'female'; }
       } else { return 'other'; }
     };
 
@@ -494,6 +494,9 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
       $scope.availability = event;
       $scope.availability.plans = availabilityPlans();
 
+      // mark the side panel as available to be opened
+      $('label.calendar-admin-info').removeClass('is-empty');
+
       if ($scope.availabilityDom) {
         $scope.availabilityDom.classList.remove('fc-selected');
       }
@@ -546,6 +549,9 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
       // we unselect the current event to keep consistency
       $scope.availability = null;
       $scope.availabilityDom = null;
+
+      // mark the side panel as available to hide because no event is selected anymore
+      $('label.calendar-admin-info').addClass('is-empty');
     };
 
     // !!! MUST BE CALLED AT THE END of the controller
@@ -615,7 +621,7 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
     $scope.availability = {
       start_at: start,
       end_at: end,
-      available_type: 'machines', // default
+      available_type: $scope.$root.modules.machines ? 'machines' : undefined, // default to machines if enabled
       tag_ids: [],
       is_recurrent: false,
       period: 'week',
@@ -921,6 +927,9 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
      * Initialize some settings, depending on the availability type, before continuing to step 2 (select a machine/training/space)
      */
     const validateType = function () {
+      if ($scope.availability.available_type === null || $scope.availability.available_type === undefined) {
+        return growl.error(_t('app.admin.calendar.select_type'));
+      }
       $scope.setNbTotalPlaces();
       if ($scope.availability.available_type === 'training') {
         $scope.availability.slot_duration = undefined;

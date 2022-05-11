@@ -1,0 +1,15 @@
+.type-mapping-modal {
+  .fab-modal-footer {
+    .modal-btn--confirm {
+      border-color: var(--information-light);
+      background-color: var(--information);
+      color: white;
+
+      &:hover {
+        border-color: var(--information);
+        background-color: var(--information-dark);
+        color: white;
+      }
+    }
+  }
+}

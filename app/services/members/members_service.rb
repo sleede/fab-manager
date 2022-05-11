@@ -21,10 +21,26 @@ class Members::MembersService
       return false
     end
 
+    group_changed = params[:group_id] && @member.group_id != params[:group_id].to_i
+    ex_group = @member.group
+
+    user_validation_required = Setting.get('user_validation_required')
+    validated_at_changed = false
+    if group_changed && user_validation_required
+      # here a group change, user must re-validate by admin
+      current_proof_of_identity_types = @member.group.proof_of_identity_types
+      new_proof_of_identity_types = Group.find(params[:group_id].to_i).proof_of_identity_types
+      if @member.validated_at? && !(new_proof_of_identity_types - current_proof_of_identity_types).empty?
+        validated_at_changed = true
+        @member.validated_at = nil
+      end
+    end
+
     not_complete = member.need_completion?
     up_result = member.update(params)
 
     notify_user_profile_complete(not_complete) if up_result
+    member.notify_group_changed(ex_group, validated_at_changed) if group_changed
     up_result
   end
 
@@ -59,6 +75,22 @@ class Members::MembersService
 
     notify_admin_user_merged if merge_result
     merge_result
+  end
+
+  def validate(is_valid)
+    is_updated = member.update(validated_at: is_valid ? Time.now : nil)
+    if is_updated
+      if is_valid
+        NotificationCenter.call type: 'notify_user_is_validated',
+                                receiver: member,
+                                attached_object: member
+      else
+        NotificationCenter.call type: 'notify_user_is_invalidated',
+                                receiver: member,
+                                attached_object: member
+      end
+    end
+    is_updated
   end
 
   private

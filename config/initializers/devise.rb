@@ -228,10 +228,16 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
 
-  require_relative '../../lib/omni_auth/omni_auth'
   active_provider = AuthProvider.active
   if active_provider.providable_type == OAuth2Provider.name
-    config.omniauth OmniAuth::Strategies::SsoOauth2Provider.name.to_sym, active_provider.providable.client_id, active_provider.providable.client_secret
+    require_relative '../../lib/omni_auth/oauth2'
+    config.omniauth OmniAuth::Strategies::SsoOauth2Provider.name.to_sym,
+                    active_provider.providable.client_id,
+                    active_provider.providable.client_secret
+  elsif active_provider.providable_type == OpenIdConnectProvider.name
+    require_relative '../../lib/omni_auth/openid_connect'
+    config.omniauth OmniAuth::Strategies::SsoOpenidConnectProvider.name.to_sym,
+                    active_provider.providable.config
   end
 
   # ==> Warden configuration

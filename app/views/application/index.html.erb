@@ -32,6 +32,7 @@
   <script type="text/javascript">
       var Fablab = Fablab || {};
 
+      Fablab.machinesModule = ('<%= Setting.get('machines_module') %>' === 'true');
       Fablab.plansModule = ('<%= Setting.get('plans_module') %>' === 'true');
       Fablab.spacesModule = ('<%= Setting.get('spaces_module') %>' === 'true');
       Fablab.trainingsModule = ('<%= Setting.get('trainings_module') %>' === 'true');
@@ -41,7 +42,7 @@
       Fablab.defaultHost = "<%= Rails.application.secrets.default_host %>";
       Fablab.trackingId = "<%= Setting.get('tracking_id') %>";
       Fablab.adminSysId = parseInt("<%= User.adminsys&.id %>", 10);
-      Fablab.baseHostUrl = "<%= Rails.application.secrets.default_host %>";
+      Fablab.activeProviderType = "<%= AuthProvider.active&.providable_type %>";
 
       // i18n stuff
       Fablab.locale = "<%= Rails.application.secrets.app_locale %>";

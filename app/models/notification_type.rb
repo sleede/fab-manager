@@ -63,6 +63,12 @@ class NotificationType
     notify_member_payment_schedule_error
     notify_admin_payment_schedule_gateway_canceled
     notify_member_payment_schedule_gateway_canceled
+    notify_admin_user_proof_of_identity_files_created
+    notify_admin_user_proof_of_identity_files_updated
+    notify_user_is_validated
+    notify_user_is_invalidated
+    notify_user_proof_of_identity_refusal
+    notify_admin_user_proof_of_identity_refusal
   ]
   # deprecated:
   # - notify_member_subscribed_plan_is_changed

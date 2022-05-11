@@ -7,7 +7,7 @@ import {
 import React, { ReactElement, useState } from 'react';
 import { FabButton } from '../base/fab-button';
 import { useTranslation } from 'react-i18next';
-import { User, UserRole } from '../../models/user';
+import { User } from '../../models/user';
 import PaymentScheduleAPI from '../../api/payment-schedule';
 import { FabModal } from '../base/fab-modal';
 import FormatLib from '../../lib/format';
@@ -58,7 +58,7 @@ export const PaymentScheduleItemActions: React.FC<PaymentScheduleItemActionsProp
    * Check if the current operator has administrative rights or is a normal member
    */
   const isPrivileged = (): boolean => {
-    return (operator.role === UserRole.Admin || operator.role === UserRole.Manager);
+    return (operator.role === 'admin' || operator.role === 'manager');
   };
 
   /**

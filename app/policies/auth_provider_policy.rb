@@ -1,12 +1,15 @@
+# frozen_string_literal: true
+
+# Check the access policies for API::AuthProvidersController
 class AuthProviderPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      scope.includes(:providable)
+      scope.includes(:providable, :auth_provider_mappings)
     end
   end
 
-  %w(index? show? create? update? destroy? mapping_fields?).each do |action|
+  %w[index? show? create? update? destroy? mapping_fields? strategy_name?].each do |action|
     define_method action do
       user.admin?
     end

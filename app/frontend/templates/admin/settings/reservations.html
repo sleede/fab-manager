@@ -45,10 +45,10 @@
             <div class="row">
                 <h3 class="m-l m-t-lg" translate>{{ 'app.admin.settings.ability_for_the_users_to_move_their_reservations' }}</h3>
                 <div class="col-md-6">
-                    <boolean-setting name="booking_move_enable"
-                                     settings="allSettings"
-                                     label="app.admin.settings.reservations_shifting"
-                                     classes="m-l">
+                    <boolean-setting name="'booking_move_enable'"
+                                     label="'app.admin.settings.reservations_shifting' | translate"
+                                     on-success="onSuccess"
+                                     on-error="onError">
                     </boolean-setting>
                 </div>
                 <div class="col-md-6" ng-show="allSettings.booking_move_enable === 'true'">
@@ -65,10 +65,10 @@
             <div class="row">
                 <h3 class="m-l m-t-lg" translate>{{ 'app.admin.settings.ability_for_the_users_to_cancel_their_reservations' }}</h3>
                 <div class="col-md-6">
-                    <boolean-setting name="booking_cancel_enable"
-                                     settings="allSettings"
-                                     label="app.admin.settings.reservations_cancelling"
-                                     classes="m-l">
+                    <boolean-setting name="'booking_cancel_enable'"
+                                     label="'app.admin.settings.reservations_cancelling' | translate"
+                                     on-success="onSuccess"
+                                     on-error="onError">
                     </boolean-setting>
                 </div>
                 <div class="col-md-6" ng-show="allSettings.booking_cancel_enable === 'true'">
@@ -86,10 +86,10 @@
             <div class="row">
                 <h3 class="m-l m-t-lg" translate>{{ 'app.admin.settings.book_overlapping_slots_info' }}</h3>
                 <div class="col-md-6">
-                    <boolean-setting name="book_overlapping_slots"
-                                     settings="allSettings"
-                                     label="app.admin.settings.allow_booking"
-                                     classes="m-l">
+                    <boolean-setting name="'book_overlapping_slots'"
+                                     label="'app.admin.settings.allow_booking' | translate"
+                                     on-success="onSuccess"
+                                     on-error="onError">
                     </boolean-setting>
                     <div class="alert alert-warning" ng-show="allSettings.book_overlapping_slots !== 'true'" translate>
                         {{ 'app.admin.settings.overlapping_categories_info' }}
@@ -122,10 +122,11 @@
             <div class="row">
                 <h3 class="m-l" translate>{{ 'app.admin.settings.pack_only_for_subscription_info' }}</h3>
                 <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.pack_only_for_subscription_info_html' | translate"></p>
-                <boolean-setting name="pack_only_for_subscription"
-                                 settings="allSettings"
-                                 label="app.admin.settings.pack_only_for_subscription"
-                                 classes="m-l">
+                <boolean-setting name="'pack_only_for_subscription'"
+                                 label="'app.admin.settings.pack_only_for_subscription' | translate"
+                                 class-name="'m-l'"
+                                 on-success="onSuccess"
+                                 on-error="onError">
                 </boolean-setting>
             </div>
 
@@ -133,10 +134,11 @@
             <div class="row">
                 <h3 class="m-l" translate>{{ 'app.admin.settings.extended_prices' }}</h3>
                 <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.extended_prices_info_html' | translate"></p>
-                <boolean-setting name="extended_prices_in_same_day"
-                                 settings="allSettings"
-                                 label="app.admin.settings.extended_prices_in_same_day"
-                                 classes="m-l">
+                <boolean-setting name="'extended_prices_in_same_day'"
+                                 label="'app.admin.settings.extended_prices_in_same_day' | translate"
+                                 class-name="'m-l'"
+                                 on-success="onSuccess"
+                                 on-error="onError">
                 </boolean-setting>
             </div>
         </div>
@@ -150,10 +152,11 @@
     <div class="panel-body">
         <div class="row">
             <h3 class="m-l" translate>{{ 'app.admin.settings.notification_sending_before_the_reservation_occurs' }}</h3>
-            <boolean-setting name="reminder_enable"
-                             settings="allSettings"
-                             label="app.admin.settings.reservations_reminders"
-                             classes="m-l">
+            <boolean-setting name="'reminder_enable'"
+                             label="'app.admin.settings.reservations_reminders' | translate"
+                             class-name="'m-l'"
+                             on-success="onSuccess"
+                             on-error="onError">
             </boolean-setting>
         </div>
         <div class="row" ng-show="allSettings.reminder_enable === 'true'">
@@ -175,22 +178,24 @@
         <span class="font-sbold" translate>{{ 'app.admin.settings.display' }}</span>
     </div>
     <div class="panel-body">
-        <div class="row">
+        <div class="row" ng-show="$root.modules.machines">
             <h3 class="m-l" translate>{{ 'app.admin.settings.display_machine_reservation_user_name' }}</h3>
             <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.display_name_info_html' | translate"></p>
-            <boolean-setting name="display_name_enable"
-                             settings="allSettings"
-                             label="app.admin.settings.display_name"
-                             classes="m-l">
+            <boolean-setting name="'display_name_enable'"
+                             label="'app.admin.settings.display_name' | translate"
+                             class-name="'m-l'"
+                             on-success="onSuccess"
+                             on-error="onError">
             </boolean-setting>
         </div>
       <div class="row">
         <h3 class="m-l" translate>{{ 'app.admin.settings.events_in_the_calendar' }}</h3>
         <p class="alert alert-warning m-h-md" translate>{{ 'app.admin.settings.events_in_calendar_info' }}</p>
-        <boolean-setting name="events_in_calendar"
-                         settings="allSettings"
-                         label="app.admin.settings.show_event"
-                         classes="m-l"></boolean-setting>
+        <boolean-setting name="'events_in_calendar'"
+                         label="'app.admin.settings.show_event' | translate"
+                         on-success="onSuccess"
+                         on-error="onError"
+                         class-name="'m-l'"></boolean-setting>
       </div>
 
       <div class="section-separator"></div>

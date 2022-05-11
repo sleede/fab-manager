@@ -1,0 +1,181 @@
+.form-item {
+  width: 100%;
+  margin-bottom: 1.6rem;
+
+  &-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.8rem;
+    position: relative;
+    p {
+      @include text-sm;
+      margin: 0;
+      &::first-letter { text-transform: uppercase; }
+    }
+
+    .item-tooltip {
+      position: relative;
+      cursor: help;
+
+      .trigger i { display: block; }
+      .content {
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: none;
+        width: max-content;
+        max-width: min(75vw, 65ch);
+        padding: 1rem;
+        background-color: var(--information-lightest);
+        color: var(--information);
+        border: 1px solid var(--information);
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: normal;
+        line-height: 1.2em;
+        z-index: 1;
+        & > span { display: block; }
+        a {
+          color: var(--gray-hard);
+          text-decoration: underline;
+        }
+      }
+      &:hover .content { display: block; }
+    }
+  }
+  &.is-hidden {
+    display: none;
+  }
+  &.is-required &-header p::after {
+    content: "*";
+    margin-left: 0.5ch;
+    color: var(--error);
+  }
+
+  &-field {
+    min-height: 4rem;
+    display: grid;
+    grid-template-areas: "icon field addon";
+    grid-template-columns: min-content minmax(0, 1fr) min-content;
+    background-color: var(--gray-soft-lightest);
+    border: 1px solid var(--gray-soft-dark);
+    border-radius: var(--border-radius);
+    transition: border-color ease-in-out 0.15s;
+
+    .icon,
+    .addon {
+      width: 4rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--gray-hard-light);
+      background-color: var(--gray-soft);
+    }
+    .icon {
+      grid-area: icon;
+      border-right: 1px solid var(--gray-soft-dark);
+      border-top-left-radius: var(--border-radius);
+      border-bottom-left-radius: var(--border-radius);
+      & > * {
+        max-width: 24px;
+        max-height: 24px;
+      }
+    }
+    
+    .addon {
+      grid-area: addon;
+      border-left: 1px solid var(--gray-soft-dark);
+      border-top-right-radius: var(--border-radius);
+      border-bottom-right-radius: var(--border-radius);
+      &.is-btn {
+        color: var(--gray-soft-lightest);
+        background-color: var(--gray-hard-darkest);
+        &:hover {
+          cursor: pointer;
+          background-color: var(--gray-hard-light);
+        }
+      }
+    }
+
+    & > input {
+      grid-area: field;
+      border: none;
+      border-radius: var(--border-radius);
+      padding: 0 0.8rem;
+      color: var(--gray-hard-darkest);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      &::placeholder {
+        font-weight: 400;
+        color: var(--gray-soft-darkest);
+      }
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px var(--information);
+      }
+    }
+
+    // override React-select component's style
+    .rs {
+      grid-area: field;
+      &__control {
+        border: none;
+        border-radius: var(--border-radius);
+        &--is-focused {
+          box-shadow: 0 0 0 2px var(--information);
+        }
+      }
+      &__menu {
+        margin-top: 1px;
+        border: 1px solid var(--gray-soft-dark);
+        box-shadow: var(--shadow);
+      }
+      &__option {
+        color: #000000;
+        &:hover {
+          background-color: var(--information-lightest);
+        }
+        &--is-selected,
+        &--is-selected:hover {
+          background-color: var(--information-light);
+        }
+      }
+      &__placeholder {
+        font-weight: 400;
+        color: var(--gray-soft-darkest);
+      }
+    }
+  }
+  &.is-incorrect &-field {
+    border-color: var(--error);
+    .icon {
+      color: var(--error);
+      border-color: var(--error);
+      background-color: var(--error-lightest);
+    }
+  }
+  &.is-warned &-field {
+    border-color: var(--warning);
+    .icon {
+      color: var(--warning);
+      border-color: var(--warning);
+      background-color: var(--warning-lightest);
+    }
+  }
+  &.is-disabled &-field input,
+  &.is-readOnly &-field input {
+    background-color: var(--gray-soft-light);
+  }
+
+  &-error {
+    margin-top: 0.4rem;
+    color: var(--error);
+  }
+  &-warning {
+    margin-top: 0.4rem;
+    color: var(--warning);
+  }
+}

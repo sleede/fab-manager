@@ -43,6 +43,7 @@ class ApplicationController < ActionController::Base
                                           profile_attributes: %i[phone last_name first_name interest software_mastered],
                                           invoicing_profile_attributes: [
                                             organization_attributes: [:name, address_attributes: [:address]],
+                                            user_profile_custom_fields_attributes: %i[profile_custom_field_id value],
                                             address_attributes: [:address]
                                           ],
                                           statistic_profile_attributes: %i[gender birthday]

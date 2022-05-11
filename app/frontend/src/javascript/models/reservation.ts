@@ -1,7 +1,9 @@
+import { TDateISO } from '../typings/date-iso';
+
 export interface ReservationSlot {
   id?: number,
-  start_at: Date,
-  end_at: Date,
+  start_at: TDateISO,
+  end_at: TDateISO,
   availability_id: number,
   offered: boolean
 }

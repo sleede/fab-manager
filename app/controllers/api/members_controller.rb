@@ -3,7 +3,7 @@
 # API Controller for resources of type User with role 'member'
 class API::MembersController < API::ApiController
   before_action :authenticate_user!, except: [:last_subscribed]
-  before_action :set_member, only: %i[update destroy merge complete_tour update_role]
+  before_action :set_member, only: %i[update destroy merge complete_tour update_role validate]
   respond_to :json
 
   def index
@@ -234,6 +234,24 @@ class API::MembersController < API::ApiController
     render json: @member
   end
 
+  def current
+    @member = current_user
+    authorize @member
+    render json: @member
+  end
+
+  def validate
+    authorize @member
+
+    members_service = Members::MembersService.new(@member)
+
+    if members_service.validate(user_params[:validated_at].present?)
+      render :show, status: :ok, location: member_path(@member)
+    else
+      render json: @member.errors, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def set_member
@@ -250,13 +268,14 @@ class API::MembersController < API::ApiController
                                    invoicing_profile_attributes: [
                                      :id,
                                      address_attributes: %i[id address],
-                                     organization_attributes: [:id, :name, address_attributes: %i[id address]]
+                                     organization_attributes: [:id, :name, address_attributes: %i[id address]],
+                                     user_profile_custom_fields_attributes: %i[id value invoicing_profile_id profile_custom_field_id]
                                    ],
                                    statistic_profile_attributes: %i[id gender birthday])
 
     elsif current_user.admin? || current_user.manager?
       params.require(:user).permit(:username, :email, :password, :password_confirmation, :is_allow_contact, :is_allow_newsletter, :group_id,
-                                   tag_ids: [],
+                                   :validated_at, tag_ids: [],
                                    profile_attributes: [:id, :first_name, :last_name, :phone, :interest, :software_mastered, :website, :job,
                                                         :facebook, :twitter, :google_plus, :viadeo, :linkedin, :instagram, :youtube, :vimeo,
                                                         :dailymotion, :github, :echosciences, :pinterest, :lastfm, :flickr,
@@ -264,7 +283,8 @@ class API::MembersController < API::ApiController
                                    invoicing_profile_attributes: [
                                      :id,
                                      address_attributes: %i[id address],
-                                     organization_attributes: [:id, :name, address_attributes: %i[id address]]
+                                     organization_attributes: [:id, :name, address_attributes: %i[id address]],
+                                     user_profile_custom_fields_attributes: %i[id value invoicing_profile_id profile_custom_field_id]
                                    ],
                                    statistic_profile_attributes: [:id, :gender, :birthday, training_ids: []])
 

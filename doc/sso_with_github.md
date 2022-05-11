@@ -5,27 +5,23 @@ For this guide, we will use [GitHub](https://developer.github.com/v3/oauth/) as 
 - First, you must have a GitHub account. This is free, so create one if you don't have any.
   Visit https://github.com/join?source=login to create an account.
 
-- Secondly, you will need to register your Fab-manager instance as an application in GitHub.
-  Visit https://github.com/settings/applications/new to register your instance.
-  - In `Application name`, we advise you to set the same name as your Fab-manager's instance title.
-  - In `Homepage URL`, put the public URL where your Fab-manager's instance is located (eg. https://example.com).
-  - In `Authorization callback URL`, you must specify an URL that will match this scheme: https://example.com/users/auth/oauth2-github/callback
-    - **example.com** is your own Fab-manager's address
-    - **oauth2-github** match the provider's "strategy name" in the Fab-manager.
-      It is composed of: **SSO's protocol**, _dash_, **slug of the provider's name**.
-      If you have a doubt about what it will be, set any value, create the authentication provider in your Fab-manager (see below), then the strategy's name will be shown in the providers list. 
-      Afterwards, edit your app on GitHub to set the correct name. 
-
-- You'll be redirected to a page displaying two important information: your **Client ID** and your **Client Secret**.
-
-- Now go to your Fab-manager's instance, login as an administrator, go to `Users management` and `Authentication`.
+- Go to your Fab-manager's instance, login as an administrator, go to `Users management` and `Authentication`.
   Click `Add a new authentication provider`, and select _OAuth 2.0_ in the `Authentication type` drop-down list.
   In `name`, you can set whatever you want, but you must be aware that:
   1. You will need to type this name in a terminal to activate the provider, so prefer avoiding chars that must be escaped.
   2. This name will be occasionally displayed to end users, so prefer sweet and speaking names.
-  3. The slug of this name is used in the callback URL provided to the SSO server (eg. /users/auth/oauth2-**github**/callback)
 
-- Fulfill the form with the following parameters:
+- You'll see an "Authorization Callback URL" field, generated based on what you typed previously. Copy the content of this field to your clipboard.
+
+- Now, you will need to register your Fab-manager instance as an application in GitHub.
+  Visit https://github.com/settings/applications/new to register your instance.
+  - In `Application name`, we advise you to set the same name as your Fab-manager's instance title.
+  - In `Homepage URL`, put the public URL where your Fab-manager's instance is located (eg. https://example.com).
+  - In `Authorization callback URL`, you must paste the URL previously copied from Fa-manager. 
+
+- You'll be redirected to a page displaying two important information: your **Client ID** and your **Client Secret**. Keep them safe, you'll need them to configure Fab-manager.
+
+- Now go back to your Fab-manager's configuration interface and fulfill the remaining form with the following parameters:
   - **Server root URL**: `https://github.com` This is the domain name of the where the SSO server is located.
   - **Authorization endpoint**: `/login/oauth/authorize` This URL can be found [here](https://developer.github.com/v3/oauth/).
   - **Token Acquisition Endpoint**: `/login/oauth/access_token` This URL can be found [here](https://developer.github.com/v3/oauth/).
@@ -33,7 +29,7 @@ For this guide, we will use [GitHub](https://developer.github.com/v3/oauth/) as 
   - **Client identifier**: Your Client ID, collected just before.
   - **Client secret**: Your Client Secret, collected just before.
 
-Please note that in some cases we'll encounter an issue unless the **common URL** must only contain the root domain (e.g. `http://github.com`), and the other parts of the URL must go to **Authorization endpoint** (e.g. `/login/oauth/authorize`) and **Token Acquisition Endpoint** (e.g. `/login/oauth/access_token`). 
+Please note the **common URL** must only contain the root domain (e.g. `http://github.com`), and the other parts of the URL must go to **Authorization endpoint** (e.g. `/login/oauth/authorize`) and **Token Acquisition Endpoint** (e.g. `/login/oauth/access_token`). 
 
 - Then you will need to define the matching of the fields between the Fab-manager and what the external SSO can provide.
   Please note that the only mandatory field is `User.uid`.

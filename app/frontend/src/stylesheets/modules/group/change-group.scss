@@ -1,0 +1,50 @@
+.change-group {
+  border: 1px solid #dddddd;
+  border-radius: var(--border-radius);
+  margin: 30px 15px;
+
+  h3 {
+    margin: 0;
+    padding: 18px 15px;
+    line-height: 1.8rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    border-bottom: 1px solid #dddddd;
+  }
+
+  .display,
+  .change-group-form {
+    padding: 15px;
+  }
+
+  .display {
+  .current-group {
+      background-color: #999;
+      color: #000;
+      min-height: 20px;
+      border: 1px solid #999;
+      margin-bottom: 20px;
+      padding: 5px 10px;
+      border-radius: var(--border-radius);
+      font-size: 1.4rem;
+      font-weight: bold;
+    }
+
+    .request-change-btn {
+      width: 100%;
+    }
+  }
+
+  .change-group-form {
+    .actions {
+      display: flex;
+      justify-content: space-between;
+
+      .validate-btn {
+        border-color: var(--information-light);
+        background-color: var(--information);
+        color: white;
+      }
+    }
+  }
+}

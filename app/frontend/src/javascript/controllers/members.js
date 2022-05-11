@@ -72,8 +72,8 @@ Application.Controllers.controller('MembersController', ['$scope', 'Member', 'me
 /**
  * Controller used when editing the current user's profile (in dashboard)
  */
-Application.Controllers.controller('EditProfileController', ['$scope', '$rootScope', '$state', '$window', '$sce', '$cookies', '$injector', 'Member', 'Auth', 'Session', 'activeProviderPromise', 'settingsPromise', 'growl', 'dialogs', 'CSRF', 'memberPromise', 'groups', '_t',
-  function ($scope, $rootScope, $state, $window, $sce, $cookies, $injector, Member, Auth, Session, activeProviderPromise, settingsPromise, growl, dialogs, CSRF, memberPromise, groups, _t) {
+Application.Controllers.controller('EditProfileController', ['$scope', '$rootScope', '$state', '$window', '$sce', '$cookies', '$injector', 'Member', 'Auth', 'Session', 'activeProviderPromise', 'settingsPromise', 'growl', 'dialogs', 'CSRF', 'memberPromise', 'groups', '_t', 'proofOfIdentityTypesPromise', 'ProofOfIdentityType',
+  function ($scope, $rootScope, $state, $window, $sce, $cookies, $injector, Member, Auth, Session, activeProviderPromise, settingsPromise, growl, dialogs, CSRF, memberPromise, groups, _t, proofOfIdentityTypesPromise, ProofOfIdentityType) {
     /* PUBLIC SCOPE */
 
     // API URL where the form will be posted
@@ -86,7 +86,7 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
     $scope.method = 'patch';
 
     // Current user's profile
-    $scope.user = memberPromise;
+    $scope.user = cleanUser(memberPromise);
 
     // default : do not show the group changing form
     $scope.group =
@@ -128,6 +128,8 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
     // This boolean value will tell if the current user is the system admin
     $scope.isAdminSys = memberPromise.id === Fablab.adminSysId;
 
+    $scope.hasProofOfIdentityTypes = proofOfIdentityTypesPromise.length > 0;
+
     /**
      * Return the group object, identified by the ID set in $scope.userGroup
      */
@@ -140,20 +142,27 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
     };
 
     /**
-     * Change the group of the current user to the one set in $scope.userGroup
+     * Callback triggered when the user has successfully changed his group
      */
-    $scope.selectGroup = () =>
-      Member.update({ id: $scope.user.id }, { user: { group_id: $scope.userGroup } }, function (user) {
-        $scope.user = user;
-        $rootScope.currentUser = user;
-        Auth._currentUser.group_id = user.group_id;
-        $scope.group.change = false;
-        return growl.success(_t('app.logged.dashboard.settings.your_group_has_been_successfully_changed'));
-      }
-      , function (err) {
-        growl.error(_t('app.logged.dashboard.settings.an_unexpected_error_prevented_your_group_from_being_changed'));
-        return console.error(err);
+    $scope.onGroupUpdateSuccess = function (message, user) {
+      growl.success(message);
+      setTimeout(() => {
+        $scope.user = _.cloneDeep(user);
+        $scope.$apply();
+      }, 50);
+      $rootScope.currentUser.group_id = user.group_id;
+      Auth._currentUser.group_id = user.group_id;
+      ProofOfIdentityType.query({ group_id: user.group_id }, function (proofOfIdentityTypes) {
+        $scope.hasProofOfIdentityTypes = proofOfIdentityTypes.length > 0;
       });
+    };
+
+    /**
+     * Check if it is allowed the change the group of the current user
+     */
+    $scope.isAllowedChangingGroup = function () {
+      return !$scope.user.subscribed_plan?.name && $scope.user.role !== 'admin';
+    };
 
     /**
      * Callback to diplay the datepicker as a dropdown when clicking on the input field
@@ -184,8 +193,8 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
           )
         );
       } else {
-        $scope.currentUser.profile.user_avatar = content.profile.user_avatar;
-        Auth._currentUser.profile.user_avatar = content.profile.user_avatar;
+        $scope.currentUser.profile_attributes.user_avatar_attributes = content.profile_attributes.user_avatar_attributes;
+        Auth._currentUser.profile_attributes.user_avatar_attributes = content.profile_attributes.user_avatar_attributes;
         $scope.currentUser.name = content.name;
         Auth._currentUser.name = content.name;
         $scope.currentUser = content;
@@ -275,6 +284,25 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
       $injector.get('$state').reload();
     };
 
+    /**
+     * Callback triggered when an error is raised on a lower-level component
+     * @param message {string}
+     */
+    $scope.onError = function (message) {
+      growl.error(message);
+    };
+
+    /**
+     * Callback triggered when the user was successfully updated
+     * @param user {object} the updated user
+     */
+    $scope.onSuccess = function (user) {
+      $scope.currentUser = _.cloneDeep(user);
+      Auth._currentUser = _.cloneDeep(user);
+      $rootScope.currentUser = _.cloneDeep(user);
+      growl.success(_t('app.logged.dashboard.settings.your_profile_has_been_successfully_updated'));
+    };
+
     /* PRIVATE SCOPE */
 
     /**
@@ -283,15 +311,20 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
     const initialize = function () {
       CSRF.setMetaTags();
 
-      // init the birth date to JS object
-      $scope.user.statistic_profile.birthday = moment($scope.user.statistic_profile.birthday).toDate();
-
       if ($scope.activeProvider.providable_type !== 'DatabaseProvider') {
         $scope.preventPassword = true;
       }
+
       // bind fields protection with sso fields
       return angular.forEach(activeProviderPromise.mapping, map => $scope.preventField[map] = true);
     };
+
+    // prepare the user for the react-hook-form
+    function cleanUser (user) {
+      delete user.$promise;
+      delete user.$resolved;
+      return user;
+    }
 
     // !!! MUST BE CALLED AT THE END of the controller
     return initialize();
@@ -323,10 +356,10 @@ Application.Controllers.controller('ShowProfileController', ['$scope', 'memberPr
    * and return the filtered networks
    * @return {Array}
    */
-  var filterNetworks = function () {
+  const filterNetworks = function () {
     const networks = [];
     for (const network of Array.from(SocialNetworks)) {
-      if ($scope.user.profile[network] && ($scope.user.profile[network].length > 0)) {
+      if ($scope.user.profile_attributes[network] && ($scope.user.profile_attributes[network].length > 0)) {
         networks.push(network);
       }
     }

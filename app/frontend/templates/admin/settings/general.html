@@ -46,7 +46,7 @@
 
 
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-3" ng-show="$root.modules.machines">
                 <h4 translate>{{ 'app.admin.settings.message_of_the_machine_booking_page' }}</h4>
                 <div ng-model="machineExplicationsAlert.value"
                      medium-editor
@@ -59,7 +59,7 @@
                 </div>
                 <button name="button" class="btn btn-warning" ng-click="save(machineExplicationsAlert)" translate>{{ 'app.shared.buttons.save' }}</button>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3" ng-show="$root.modules.trainings">
                 <h4 translate>{{ 'app.admin.settings.warning_message_of_the_training_booking_page'}}</h4>
                 <div ng-model="trainingExplicationsAlert.value"
                      medium-editor
@@ -72,7 +72,7 @@
                 </div>
                 <button name="button" class="btn btn-warning" ng-click="save(trainingExplicationsAlert)" translate>{{ 'app.shared.buttons.save' }}</button>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3" ng-show="$root.modules.trainings">
                 <h4 translate>{{ 'app.admin.settings.information_message_of_the_training_reservation_page'}}</h4>
                 <div ng-model="trainingInformationMessage.value"
                      medium-editor
@@ -85,7 +85,7 @@
                 </div>
                 <button name="button" class="btn btn-warning" ng-click="save(trainingInformationMessage)" translate>{{ 'app.shared.buttons.save' }}</button>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3" ng-show="$root.modules.plans">
                 <h4 translate>{{ 'app.admin.settings.message_of_the_subscriptions_page' }}</h4>
                 <div ng-model="subscriptionExplicationsAlert.value"
                      medium-editor
@@ -109,7 +109,7 @@
                 </div>
                 <button name="button" class="btn btn-warning" ng-click="save(eventExplicationsAlert)" translate>{{ 'app.shared.buttons.save' }}</button>
             </div>
-            <div class="col-md-3" ng-show="$root.modules.spaces">
+            <div class="col-md-3" ng-show="$root.modules.spaces" ng-show="$root.modules.spaces">
                 <h4 translate>{{ 'app.admin.settings.message_of_the_spaces_page' }}</h4>
                 <div ng-model="spaceExplicationsAlert.value"
                      medium-editor
@@ -340,7 +340,7 @@
     </div>
 </div>
 
-<div class="panel panel-default m-t-lg">
+<div class="panel panel-default m-t-lg"  ng-show="$root.modules.machines">
     <div class="panel-heading">
         <span class="font-sbold" translate>{{ 'app.admin.settings.general.elements_ordering' }}</span>
     </div>
@@ -407,81 +407,7 @@
   </div>
 </div>
 
-<div class="panel panel-default m-t-md">
-  <div class="panel-heading">
-    <span class="font-sbold" translate>{{ 'app.admin.settings.account_creation' }}</span>
-  </div>
-  <div class="panel-body">
-    <div class="row">
-      <h3 class="m-l" translate>{{ 'app.admin.settings.general.public_registrations' }}</h3>
-      <p class="alert alert-warning m-h-md" translate>
-        {{ 'app.admin.settings.general.public_registrations_info' }}
-      </p>
-      <div class="col-md-10 col-md-offset-1">
-        <boolean-setting name="public_registrations"
-                         settings="allSettings"
-                         label="app.admin.settings.general.public_registrations_allowed">
-        </boolean-setting>
-      </div>
-    </div>
-    <div class="row">
-      <h3 class="m-l" translate>{{ 'app.admin.settings.phone' }}</h3>
-      <p class="alert alert-warning m-h-md" translate>
-        {{ 'app.admin.settings.phone_required_info' }}
-      </p>
-      <div class="col-md-10 col-md-offset-1">
-        <boolean-setting name="phone_required"
-                         settings="allSettings"
-                         label="app.admin.settings.phone_is_required">
-        </boolean-setting>
-      </div>
-    </div>
-    <div class="row">
-      <h3 class="m-l" translate>{{ 'app.admin.settings.address' }}</h3>
-      <p class="alert alert-warning m-h-md" translate>
-        {{ 'app.admin.settings.address_required_info_html' }}
-      </p>
-      <div class="col-md-10 col-md-offset-1">
-        <boolean-setting name="address_required"
-                         settings="allSettings"
-                         label="app.admin.settings.address_is_required">
-        </boolean-setting>
-      </div>
-    </div>
-    <div class="row">
-      <h3 class="m-l" translate>{{ 'app.admin.settings.captcha' }}</h3>
-      <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.captcha_info_html' | translate"></p>
-      <div class="col-md-6">
-        <text-setting name="recaptcha_site_key"
-                      settings="allSettings"
-                      label="app.admin.settings.site_key"
-                      fa-icon="fa-info"
-                      placeholder="0000000000000000000000000000000000000000">
-        </text-setting>
-      </div>
-      <div class="col-md-6">
-        <text-setting name="recaptcha_secret_key"
-                      settings="allSettings"
-                      label="app.admin.settings.secret_key"
-                      fa-icon="fa-key"
-                      placeholder="0000000000000000000000000000000000000000">
-        </text-setting>
-      </div>
-    </div>
-      <div class="row">
-          <h3 class="m-l" translate>{{ 'app.admin.settings.account_confirmation' }}</h3>
-          <p class="alert alert-warning m-h-md" translate>
-              {{ 'app.admin.settings.confirmation_required_info' }}
-          </p>
-          <div class="col-md-10 col-md-offset-1">
-              <boolean-setting name="confirmation_required"
-                               settings="allSettings"
-                               label="app.admin.settings.confirmation_is_required">
-              </boolean-setting>
-          </div>
-      </div>
-  </div>
-</div>
+
 
 <div class="panel panel-default m-t-lg">
   <div class="panel-heading">
@@ -490,59 +416,76 @@
   <div class="panel-body">
     <p class="alert alert-info"><i class="fa fa-info-circle m-r"></i><span translate>{{ 'app.admin.settings.remember_to_refresh_the_page_for_the_changes_to_take_effect' }}</span> </p>
     <div class="row">
+      <h3 class="m-l" translate>{{ 'app.admin.settings.machines' }}</h3>
+      <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.machines_info_html' | translate"></p>
+      <boolean-setting name="'machines_module'"
+                       settings="allSettings"
+                       on-success="onSuccess"
+                       on-error="onError"
+                       label="'app.admin.settings.enable_machines' | translate"
+                       classes="m-l"></boolean-setting>
+    </div>
+    <div class="row">
       <h3 class="m-l" translate>{{ 'app.admin.settings.spaces' }}</h3>
       <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.spaces_info_html' | translate"></p>
-      <boolean-setting name="spaces_module"
-                       settings="allSettings"
-                       label="app.admin.settings.enable_spaces"
-                       classes="m-l"></boolean-setting>
+      <boolean-setting name="'spaces_module'"
+                       label="'app.admin.settings.enable_spaces' | translate"
+                       on-success="onSuccess"
+                       on-error="onError"
+                       class-name="'m-l'"></boolean-setting>
     </div>
     <div class="row">
       <h3 class="m-l" translate>{{ 'app.admin.settings.plans' }}</h3>
       <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.plans_info_html' | translate"></p>
-      <boolean-setting name="plans_module"
-                       settings="allSettings"
-                       label="app.admin.settings.enable_plans"
-                       classes="m-l"></boolean-setting>
+      <boolean-setting name="'plans_module'"
+                       label="'app.admin.settings.enable_plans' | translate"
+                       on-success="onSuccess"
+                       on-error="onError"
+                       class-name="'m-l'"></boolean-setting>
     </div>
     <div class="row">
       <h3 class="m-l" translate>{{ 'app.admin.settings.trainings' }}</h3>
       <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.trainings_info_html' | translate"></p>
-      <boolean-setting name="trainings_module"
-                       settings="allSettings"
-                       label="app.admin.settings.enable_trainings"
-                       classes="m-l"></boolean-setting>
+      <boolean-setting name="'trainings_module'"
+                       label="'app.admin.settings.enable_trainings' | translate"
+                       on-success="onSuccess"
+                       on-error="onError"
+                       class-name="'m-l'"></boolean-setting>
     </div>
     <div class="row">
       <h3 class="m-l" translate>{{ 'app.admin.settings.invoicing' }}</h3>
       <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.invoicing_info_html' | translate"></p>
-      <boolean-setting name="invoicing_module"
-                       settings="allSettings"
-                       label="app.admin.settings.enable_invoicing"
-                       classes="m-l"></boolean-setting>
+      <boolean-setting name="'invoicing_module'"
+                       label="'app.admin.settings.enable_invoicing' | translate"
+                       on-success="onSuccess"
+                       on-error="onError"
+                       class-name="'m-l'"></boolean-setting>
     </div>
     <div class="row">
         <h3 class="m-l" translate>{{ 'app.admin.settings.general.wallet' }}</h3>
         <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.general.wallet_info_html' | translate"></p>
-        <boolean-setting name="wallet_module"
-                         settings="allSettings"
-                         label="app.admin.settings.general.enable_wallet"
-                         classes="m-l"></boolean-setting>
+        <boolean-setting name="'wallet_module'"
+                         label="'app.admin.settings.general.enable_wallet' | translate"
+                         on-success="onSuccess"
+                         on-error="onError"
+                         class-name="'m-l'"></boolean-setting>
     </div>
     <div class="row">
       <h3 class="m-l" translate>{{ 'app.admin.settings.general.public_agenda' }}</h3>
       <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.general.public_agenda_info_html' | translate"></p>
-      <boolean-setting name="public_agenda_module"
-                       settings="allSettings"
-                       label="app.admin.settings.general.enable_public_agenda"
-                       classes="m-l"></boolean-setting>
+      <boolean-setting name="'public_agenda_module'"
+                       label="'app.admin.settings.general.enable_public_agenda' | translate"
+                       on-success="onSuccess"
+                       on-error="onError"
+                       class-name="'m-l'"></boolean-setting>
     </div>
     <div class="row">
         <h3 class="m-l" translate>{{ 'app.admin.settings.general.statistics' }}</h3>
         <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.general.statistics_info_html' | translate"></p>
-        <boolean-setting name="statistics_module"
-                         settings="allSettings"
-                         label="app.admin.settings.general.enable_statistics"
+        <boolean-setting name="'statistics_module'"
+                         label="'app.admin.settings.general.enable_statistics' | translate"
+                         on-success="onSuccess"
+                         on-error="onError"
                          classes="m-l"></boolean-setting>
     </div>
   </div>

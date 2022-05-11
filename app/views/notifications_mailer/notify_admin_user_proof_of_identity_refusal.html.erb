@@ -1,0 +1,15 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p>
+  <%= t('.body.user_proof_of_identity_files_refusal',
+        NAME: @attached_object&.user&.profile&.full_name || t('api.notifications.deleted_user'),
+        OPERATOR: @attached_object&.operator&.profile&.full_name || t('api.notifications.deleted_user')) %>
+</p>
+<ul>
+  <% @attached_object.proof_of_identity_types.each do |type| %>
+    <li><%= type.name %></li>
+  <% end %>
+</ul>
+<p>
+  <%= @attached_object.message %>
+</p>

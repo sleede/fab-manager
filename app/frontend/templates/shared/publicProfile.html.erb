@@ -4,7 +4,7 @@
     <section class="profile-top text-white widget panel b-a m row">
       <div class="col-lg-2 col-md-12 profile-top-pictos">
         <div class="avatar thumb-140-wrapper img m-b-md">
-          <fab-user-avatar ng-model="user.profile.user_avatar" avatar-class="thumb-140"></fab-user-avatar>
+          <fab-user-avatar ng-model="user.profile_attributes.user_avatar_attributes" avatar-class="thumb-140"></fab-user-avatar>
         </div>
         <br/>
         <div class="social-links links-center" ng-if="social.networks.length <= 4">
@@ -54,11 +54,11 @@
             <div class="row m-b">
               <div class="col-xs-5 text-right">
                 <span class="font-bold bio-title" translate>{{ 'app.shared.public_profile.interests' }}</span>
-                <div class="m-b m-t-sm">{{user.profile.interest}}</div>
+                <div class="m-b m-t-sm" ng-bind-html="user.profile_attributes.interest"></div>
               </div>
               <div class="col-xs-offset-2 col-xs-5">
                 <span class="font-bold bio-title" translate>{{ 'app.shared.public_profile.CAD_softwares_mastered' }}</span>
-                <div class="m-t-sm">{{user.profile.software_mastered}}</div>
+                <div class="m-t-sm" ng-bind-html="user.profile_attributes.software_mastered"></div>
               </div>
             </div>
           </div>

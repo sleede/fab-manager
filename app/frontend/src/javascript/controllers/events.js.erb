@@ -160,6 +160,9 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
     // Get the details for the current event (event's id is recovered from the current URL)
     $scope.event = eventPromise;
 
+    // the application global settings
+    $scope.settings = settingsPromise;
+
     // List of price categories for the events
     $scope.priceCategories = priceCategoriesPromise;
 
@@ -177,6 +180,9 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
 
     // Message displayed to the end user about rules that applies to events reservations
     $scope.eventExplicationsAlert = settingsPromise.event_explications_alert;
+
+    // Global config: is the user validation required ?
+    $scope.enableUserValidationRequired = settingsPromise.user_validation_required === 'true';
 
     // online payments (by card)
     $scope.onlinePayment = {
@@ -241,6 +247,17 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
     $scope.cancelReserve = function (e) {
       e.preventDefault();
       return resetEventReserve();
+    };
+
+    $scope.isUserValidatedByType = () => {
+      return helpers.isUserValidatedByType($scope.ctrl.member, $scope.settings, 'event');
+    };
+
+    $scope.isShowReserveEventButton = () => {
+      return $scope.event.nb_free_places > 0 &&
+        !$scope.reserve.toReserve &&
+        $scope.now.isBefore($scope.event.end_date) &&
+        helpers.isUserValidatedByType($scope.ctrl.member, $scope.settings, 'event');
     };
 
     /**

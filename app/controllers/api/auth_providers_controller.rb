@@ -12,6 +12,7 @@ class API::AuthProvidersController < API::ApiController
   def create
     authorize AuthProvider
     @provider = AuthProvider.new(provider_params)
+    AuthProviderService.auto_configure(@provider)
     if @provider.save
       render :show, status: :created, location: @provider
     else
@@ -26,6 +27,12 @@ class API::AuthProvidersController < API::ApiController
     else
       render json: @provider.errors, status: :unprocessable_entity
     end
+  end
+
+  def strategy_name
+    authorize AuthProvider
+    @provider = AuthProvider.new(providable_type: params[:providable_type], name: params[:name])
+    render json: @provider.strategy_name
   end
 
   def show
@@ -78,16 +85,24 @@ class API::AuthProvidersController < API::ApiController
 
   def provider_params
     if params['auth_provider']['providable_type'] == DatabaseProvider.name
-      params.require(:auth_provider).permit(:name, :providable_type)
+      params.require(:auth_provider).permit(:name, :providable_type, providable_attributes: [:id])
     elsif params['auth_provider']['providable_type'] == OAuth2Provider.name
-    params.require(:auth_provider)
-          .permit(:name, :providable_type,
-                  providable_attributes: [:id, :base_url, :token_endpoint, :authorization_endpoint, :logout_endpoint,
-                                          :profile_url, :client_id, :client_secret, :scopes,
-                                          o_auth2_mappings_attributes: [:id, :local_model, :local_field, :api_field,
-                                                                        :api_endpoint, :api_data_type, :_destroy,
-                                                                        transformation: [:type, :format, :true_value,
-                                                                                         :false_value, mapping: %i[from to]]]])
+      params.require(:auth_provider)
+            .permit(:name, :providable_type,
+                    providable_attributes: %i[id base_url token_endpoint authorization_endpoint
+                                              profile_url client_id client_secret scopes],
+                    auth_provider_mappings_attributes: [:id, :local_model, :local_field, :api_field, :api_endpoint, :api_data_type,
+                                                        :_destroy, transformation: [:type, :format, :true_value, :false_value,
+                                                                                    mapping: %i[from to]]])
+    elsif params['auth_provider']['providable_type'] == OpenIdConnectProvider.name
+      params.require(:auth_provider)
+            .permit(:name, :providable_type,
+                    providable_attributes: %i[id issuer discovery client_auth_method scope prompt send_scope_to_token_endpoint
+                                              client__identifier client__secret client__authorization_endpoint client__token_endpoint
+                                              client__userinfo_endpoint client__jwks_uri client__end_session_endpoint profile_url],
+                    auth_provider_mappings_attributes: [:id, :local_model, :local_field, :api_field, :api_endpoint, :api_data_type,
+                                                        :_destroy, transformation: [:type, :format, :true_value, :false_value,
+                                                                                    mapping: %i[from to]]])
     end
   end
 end
