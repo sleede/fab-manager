@@ -61,7 +61,11 @@ class PDF::Invoice < Prawn::Document
       if invoice&.invoicing_profile&.organization
         name = invoice.invoicing_profile.organization.name
         full_name = "#{name} (#{invoice.invoicing_profile.full_name})"
-        others = invoice&.invoicing_profile&.user_profile_custom_fields&.includes(:profile_custom_field)&.map do |f|
+        others = invoice&.invoicing_profile&.user_profile_custom_fields&.joins(:profile_custom_field)
+          &.where('profile_custom_fields.actived' => true)
+          &.order('profile_custom_fields.id ASC')
+          &.select { |f| f.value.present? }
+          &.map do |f|
           "#{f.profile_custom_field.label}: #{f.value}"
         end
       else
