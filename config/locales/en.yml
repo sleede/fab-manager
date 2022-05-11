@@ -252,6 +252,7 @@ en:
       Event: "Event"
       Training: "Training"
     description: "You have reserved %{COUNT} slots of %{ITEM}"
+    alarm_summary: "Remind your reservation"
   roles:
     member: "Member"
     manager: "Manager"

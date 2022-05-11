@@ -4,6 +4,7 @@
 
 - Ability to define social networks for the FabLab "about page"
 - Support for OpenID Connect in Sign-Sign-On authentication providers
+- ICS file attached to the reservation notification email
 - No longer needed to recompile the assets when switching the authentication provider
 - Updated the documentation about the minimum docker version
 - Updated nodejs version to 16.13.2 for dev environment, to reflect production version

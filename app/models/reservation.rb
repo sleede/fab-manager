@@ -5,6 +5,7 @@
 # Tickets are for Event reservations.
 class Reservation < ApplicationRecord
   include NotifyWith::NotificationAttachedObject
+  include ICalendarConcern
 
   belongs_to :statistic_profile
 
@@ -65,10 +66,6 @@ class Reservation < ApplicationRecord
                  .map(&:invoice_id)
                  .map { |id| Invoice.find_by(id: id, type: nil) }
                  .first
-  end
-
-  def to_ics
-    ReservationService.build_ics(self)
   end
 
   # Group all slots related to this reservation by dates and by continuous time ranges
