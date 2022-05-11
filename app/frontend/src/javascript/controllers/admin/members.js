@@ -820,7 +820,7 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
       growl.success(message);
       setTimeout(() => {
         $scope.user = _user;
-        $scope.user.statistic_profile.birthday = moment(_user.statistic_profile.birthday).toDate();
+        $scope.user.statistic_profile_attributes.birthday = moment(_user.statistic_profile_attributes.birthday).toDate();
         $scope.$apply();
       }, 50);
     };

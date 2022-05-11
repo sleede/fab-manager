@@ -1156,8 +1156,6 @@ en:
           send_scope_to_token_endpoint_help: "Should the scope parameter be sent to the authorization token endpoint?"
           send_scope_to_token_endpoint_false: "No"
           send_scope_to_token_endpoint_true: "Yes"
-          extra_authorize_params: "Extra authorize params"
-          extra_authorize_params_help_html: "A list of extra fixed parameters that will be merged to the authorization request.<br>The list is expected to be in a JSON-like format.<br> <b>Eg.</b> {tenant: common, max_age: 3600}"
           profile_edition_url: "Profil edition URL"
           profile_edition_url_help: "The URL of the page where the user can edit his profile."
           client_options: "Client options"
@@ -1501,7 +1499,7 @@ en:
           statistics_info_html: "<p>Enable or disable the statistics module.</p><p>If enabled, every nights, the data of the day just passed will be consolidated in the database of a powerful analysis engine. Then, every administrators will be able to browse statistical charts and tables in the corresponding section.</p>"
           enable_statistics: "Enable statistics"
         compte:
-          compte: "Compte"
+          account: "Account"
           customize_account_settings: "Customize account settings"
           user_validation_required: "validation of accounts"
           user_validation_required_title: "Validation of accounts"
