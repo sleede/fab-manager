@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'test_helper'
+
 class MembersTest < ActionDispatch::IntegrationTest
   # Called before every test method runs. Can be used
   # to set up fixture information.
@@ -63,18 +65,14 @@ class MembersTest < ActionDispatch::IntegrationTest
 
   test 'admin successfully updates a member' do
     user = User.friendly.find('vlonchamp')
-    user_hash = {
-      user: {
-        profile_attributes: JSON.parse(user.to_json)['profile']
-      }.merge(JSON.parse(user.to_json))
-    }
+    user_hash = { user: JSON.parse(user.to_json) }
     instagram = 'https://www.instagram.com/vanessa/'
 
     put "/api/members/#{user.id}", params: user_hash.deep_merge(
       user: {
-        group_id: 2,
-        profile_attributes: {
-          instagram: instagram
+        'group_id' => 1,
+        'profile_attributes' => {
+          'instagram' => instagram
         }
       }
     ).to_json, headers: default_headers
@@ -85,21 +83,21 @@ class MembersTest < ActionDispatch::IntegrationTest
 
     # Check update result
     res = json_response(response.body)
-    assert_equal 2, res[:group_id], "user's group does not match"
-    assert_equal instagram, res[:profile][:instagram], "user's social network not updated"
+    assert_equal 1, res[:group_id], "user's group does not match"
+    assert_equal instagram, res[:profile_attributes][:instagram], "user's social network not updated"
   end
 
-  # test 'admin search for autocompletion of a member s name' do
-  # get '/api/members/search/kevin?subscription=true'
+  test 'admin search for autocompletion of a member s name' do
+    get '/api/members/search/kevin?subscription=true'
 
-  ## Check response format & status
-  # assert_equal 200, response.status, response.body
-  # assert_equal Mime[:json], response.content_type
+    # Check response format & status
+    assert_equal 200, response.status, response.body
+    assert_equal Mime[:json], response.content_type
 
-  ## Check search result
-  # res = json_response(response.body)
-  # assert_equal 1, res.length
+    # Check search result
+    res = json_response(response.body)
+    assert_equal 1, res.length
 
-  # assert_match /Kevin/, res[0][:name]
-  # end
+    assert_match /Kevin/, res[0][:name]
+  end
 end
