@@ -98,6 +98,6 @@ class MembersTest < ActionDispatch::IntegrationTest
     res = json_response(response.body)
     assert_equal 1, res.length
 
-    assert_match /Kevin/, res[0][:name]
+    assert_match(/Kevin/, res[0][:name])
   end
 end
