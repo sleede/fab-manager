@@ -24,14 +24,14 @@ fr:
       subject: "Vous avez changé de groupe"
       body:
         warning: "Vous venez de changer de groupe utilisateurs. Des contrôles pourront être opérés au Fab Lab afin de vérifier que ce changement est justifié."
-        user_invalidated: "Your account is invalidated, please upload your new proof of identity to validate your account."
+        user_invalidated: "Votre compte est invalidé, veuillez téléverser votre nouveau justificatif d'identité pour valider votre compte."
     notify_admin_user_group_changed:
       subject: "Un membre a changé de groupe"
       body:
         user_changed_group_html: "L'utilisateur <em><strong>%{NAME}</strong></em> a changé de groupe."
         previous_group: "Ancien groupe :"
         new_group: "Nouveau groupe :"
-        user_invalidated: "The user's account is invalidated."
+        user_invalidated: "Le compte de l'utilisateur est invalidé."
     notify_admin_subscription_extended:
       subject: "Un abonnement a été prolongé"
       body:
@@ -346,12 +346,12 @@ fr:
         date: "Ceci est un rappel pour vérifier que le prélèvement bancaire a bien été effectué."
         confirm: "Veuillez confirmer la réception des fonds dans votre interface de gestion des échéanciers de paiement, afin que la facture correspondante soit générée."
     notify_admin_user_proof_of_identity_files_created:
-      subject: "Proof of identity uploaded by a member"
+      subject: "Justufucatif d'identité téléversé par un membre"
       body:
-        proof_of_identity_files_uploaded_below: "Member %{NAME} has uploaded the following proof of identity :"
-        validate_user: "Please validate this account"
+        proof_of_identity_files_uploaded_below: "Le membre %{NAME} a téléversé le justificatif d'identité suivant :"
+        validate_user: "Veuillez valider ce compte"
     notify_admin_user_proof_of_identity_files_updated:
-      subject: "Proof of identity is changed by m member"
+      subject: "Le justificatif d'identité est modifiée par le membre"
       body:
         user_update_proof_of_identity_file: "Member %{NAME} has modified the proof of identity below:"
         validate_user: "Please validate this account"
