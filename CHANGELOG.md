@@ -6,10 +6,11 @@
 - Option to prevent users from changing their group
 - Ability to define social networks for the FabLab "about page"
 - Improved security when changing passwords
-- Support for OpenID Connect in Sign-Sign-On authentication providers
+- Support for OpenID Connect in Single-Sign-On authentication providers
 - ICS file attached to the reservation notification email
 - Refactored the user profile edition form
 - Improved the profile completion page
+- When generating an avoir, the option "by_wallet" is not present anymore if wallet module is disabled
 - No longer needed to recompile the assets when switching the authentication provider
 - Updated the documentation about the minimum docker version
 - Updated nodejs version to 16.13.2 for dev environment, to reflect production version
@@ -25,7 +26,6 @@
 - Updated icalendar to 2.7.1
 - Webpack overlay will now report eslint issues
 - Linted all code according to eslint rules
-- when generating an avoir, the option "by_wallet" is not present anymore if wallet module is off
 - Fix a bug: when enabled, the statistics module is still not shown in the menu
 - Fix a bug: Refused to connect to 'wss://localhost:3035/ws' when using a https tunnel in development mode
 - Fix a bug: edge case of birthday in the future in seeds.rb, we should use Date.current instead of DateTime.current since birthday is a date (see https://github.com/sleede/fab-manager/issues/344)
