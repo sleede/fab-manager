@@ -27,4 +27,11 @@
       text-align: right;
     }
   }
+
+  .add-category,
+  .add-category:hover {
+    background-color: var(--secondary-dark);
+    border-color: var(--secondary-dark);
+    color: var(--secondary-text-color);
+  }
 }
