@@ -63,7 +63,7 @@ pt:
         first_name_is_required: "Primeiro nome é obrigatório."
         your_surname: "Seu sobrenome"
         surname_is_required: "Sobrenome é obrigatório."
-        your_pseudonym: "Seu apelido"
+        your_pseudonym: "Seu usuário"
         pseudonym_is_required: "Apelido é obrigatório."
         your_email_address: "Seu e-mail"
         email_is_required: "E-mail é obrigatório."
