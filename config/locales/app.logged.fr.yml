@@ -22,21 +22,21 @@ fr:
         user_s_profile_is_required: "Le profil utilisateur est requis."
         i_ve_read_and_i_accept_: "J'ai lu et j'accepte"
         _the_fablab_policy: "la charte d'utilisation du Fab Lab"
-        your_profile_has_been_successfully_updated: "Your profile has been successfully updated."
+        your_profile_has_been_successfully_updated: "Votre profil a été mis à jour avec succès."
         completion_header_info:
-          rules_changed: "Please fill the following form to update your profile and continue to use the platform."
-          sso_intro: "You've just created a new account on {GENDER, select, neutral{} other{the}} {NAME}, by logging from"
-          duplicate_email_info: "It looks like your email address is already used by another user. Check your email address and please input below the code you have received."
-          details_needed_info: "To finalize your account, we need some more details."
+          rules_changed: "Veuillez remplir le formulaire suivant pour mettre à jour votre profil et continuer à utiliser la plateforme."
+          sso_intro: "Vous venez de créer un nouveau compte sur {GENDER, select, male{le} female{la} neutral{} other{les}} {NAME}, en vous connectant depuis"
+          duplicate_email_info: "Il semblerait que votre adresse de courriel soit déjà utilisée par un autre utilisateur. Vérifiez votre adresse électronique et veuillez saisir ci-dessous le code qui vient de vous être envoyé."
+          details_needed_info: "Afin de finaliser votre compte, nous avons besoin de quelques renseignements supplémentaires."
         profile_form_option:
-          title: "New on this platform?"
-          please_fill: "Please fill in the following form to create your account."
-          disabled_data_from_sso: "Some data may have already been provided by {NAME} and cannot be modified."
-          confirm_instructions_html: "Once you are done, please click on <strong>Save</strong> to confirm your account and start using the application."
-          duplicate_email_html: "It looks like your email address <strong>({EMAIL})</strong> is already associated with another account. If this account is not yours, please click on the following button to change the email associated with your {PROVIDER} account."
-          edit_profile: "Change my data"
-          after_edition_info_html: "Once your data are up to date, <strong>click on the synchronization button below</strong>, or <strong>disconnect then reconnect</strong> for your changes to take effect."
-          sync_profile: "Sync my profile"
+          title: "Nouveau sur cette plate-forme ?"
+          please_fill: "Veuillez renseigner le formulaire suivant pour créer votre compte."
+          disabled_data_from_sso: "Certaines informations peuvent nous avoir été déjà fournies par {NAME} et ne sont pas modifiables."
+          confirm_instructions_html: "Une fois que vous avez terminé, cliquez sur <strong>Enregistrer</strong> pour confirmer votre compte et commencer à utiliser l'application."
+          duplicate_email_html: "Il semble que votre adresse e-mail <strong>({EMAIL})</strong> soit déjà associée à un autre compte. Si ce compte n'est pas le vôtre, veuillez cliquer sur le bouton suivant pour changer l'e-mail associé à votre compte {PROVIDER}."
+          edit_profile: "Modifier mes données"
+          after_edition_info_html: "Une fois que vos données sont à jour, <strong>cliquez sur le bouton de synchronisation ci-dessous</strong>, ou <strong>déconnectez-vous puis reconnectez-vous</strong> pour que vos changements prennent effet."
+          sync_profile: "Synchroniser mon profil"
       dashboard:
         #dashboard: public profile
         profile:
@@ -89,7 +89,7 @@ fr:
           _click_on_the_synchronization_button_opposite_: "cliquez sur le bouton de synchronisation ci-contre"
           _disconnect_then_reconnect_: "déconnectez-vous puis reconnectez vous"
           _for_your_changes_to_take_effect: "pour que les modifications soient prises en compte."
-          your_profile_has_been_successfully_updated: "Your profile has been successfully updated."
+          your_profile_has_been_successfully_updated: "Votre profil a été mis à jour avec succès."
         #dashboard: my projects
         projects:
           you_dont_have_any_projects: "Vous n'avez aucun projet."
