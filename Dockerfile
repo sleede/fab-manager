@@ -66,6 +66,7 @@ RUN mkdir -p /usr/src/app && \
     mkdir -p /usr/src/app/public/uploads && \
     mkdir -p /usr/src/app/public/packs && \
     mkdir -p /usr/src/app/accounting && \
+    mkdir -p /usr/src/app/proof_of_identity_files && \
     mkdir -p /usr/src/app/tmp/sockets && \
     mkdir -p /usr/src/app/tmp/pids
 
