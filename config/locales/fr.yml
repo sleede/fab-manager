@@ -64,8 +64,8 @@ fr:
     requested_account_does_not_exists: "Le compte utilisateur demandé n'existe pas"
   #SSO external authentication
   authentication_providers:
-    local_database_provider_already_exists: 'A "Local Database" provider already exists. Unable to create another.'
-    matching_between_User_uid_and_API_required: "It is required to set the matching between User.uid and the API to add this provider."
+    local_database_provider_already_exists: 'Un fournisseur de type "Base de données locale" existe déjà. Impossible d''en créer un second.'
+    matching_between_User_uid_and_API_required: "Il est obligatoire d'établir la correspondance entre User.uid et l'API pour pouvoir ajouter ce fournisseur."
   #PDF invoices generation
   invoices:
     refund_invoice_reference: "Référence de l'avoir : %{REF}"
@@ -245,14 +245,14 @@ fr:
     reservations: "Réservations"
     available_seats: "Places disponibles"
   reservation_ics:
-    summary: "%{TYPE} reservation"
+    summary: "%{TYPE} réservation"
     type:
       Machine: "Machine"
-      Space: "Space"
-      Event: "Event"
-      Training: "Training"
-    description: "You have reserved %{COUNT} slots of %{ITEM}"
-    alarm_summary: "Remind your reservation"
+      Space: "Espace"
+      Event: "Événement"
+      Training: "Formation"
+    description: "Vous avez réservé %{COUNT} emplacements de %{ITEM}"
+    alarm_summary: "Rappelez-vous votre réservation"
   roles:
     member: "Membre"
     manager: "Gestionnaire"
@@ -398,17 +398,17 @@ fr:
       notify_admin_payment_schedule_transfer_deadline:
         schedule_deadline: "Vous devez confirmer le prélèvement bancaire pour l'échéance du %{DATE} , pour l'échéancier %{REFERENCE}"
       notify_admin_user_proof_of_identity_files_created:
-        proof_of_identity_files_uploaded: "Proof of identity uploaded by member <strong><em>%{NAME}</strong></em>."
+        proof_of_identity_files_uploaded: "Justificatif d'identité téléchargé par le membre <strong><em>%{NAME}</strong></em>."
       notify_admin_user_proof_of_identity_files_updated:
-        proof_of_identity_files_uploaded: "Proof of identity changed by Member <strong><em>%{NAME}</strong></em>."
+        proof_of_identity_files_uploaded: "Justificatif d'identité modifié par le Membre <strong><em>%{NAME}</strong></em>."
       notify_user_is_validated:
-        account_validated: "Your account is valid."
+        account_validated: "Votre compte est valide."
       notify_user_is_invalidated:
-        account_invalidated: "Your account is invalid."
+        account_invalidated: "Votre compte est invalide."
       notify_user_proof_of_identity_refusal:
-        refusal: "Your proof of identity are not accepted"
+        refusal: "Votre justificatif d'identité n'est pas accepté"
       notify_admin_user_proof_of_identity_refusal:
-        refusal: "Member's proof of identity <strong><em>%{NAME}</strong></em> refused."
+        refusal: "Le justificatif d'identité du membre <strong><em>%{NAME}</strong></em> a été refusé."
   #statistics tools for admins
   statistics:
     subscriptions: "Abonnements"
@@ -589,9 +589,9 @@ fr:
     vimeo: "vimeo"
     dailymotion: "dailymotion"
     github: "github"
-    echosciences: "echosciences"
+    echosciences: "échosciences"
     pinterest: "pinterest"
     lastfm: "lastfm"
     flickr: "flickr"
-    machines_module: "Machines module"
-    user_change_group: "Allow users to change their group"
+    machines_module: "Module machines"
+    user_change_group: "Permettre aux utilisateurs de changer leur groupe"
