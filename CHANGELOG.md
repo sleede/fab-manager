@@ -15,6 +15,7 @@
 - Updated nodejs version to 16.13.2 for dev environment, to reflect production version
 - Changed the apparence of the modal dialogs (React): no more logo and the close button appears in full-text in the top right corner.
 - Use react-hook-form to manage and validate forms
+- Use of CSS variables for main and secondary colors in react components styles
 - New text editor
 - Change font family to "Work Sans"
 - Updated eslint to v8 and eslint related packages to their latest versions
@@ -31,6 +32,7 @@
 - Fix a security issue: updated ruby to 2.6.10 to fix [CVE-2022-28739](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-28739)
 - Fix a security issue: updated rails to 5.2.7.1 to fix [CVE-2022-22577](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-22577) and [CVE-2022-27777](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-27777)
 - [TODO DEPLOY] `rails db:seed`
+- [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
 
 ## v5.3.13 2022 May 02
 

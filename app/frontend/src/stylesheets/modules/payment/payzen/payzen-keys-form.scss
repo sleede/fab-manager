@@ -25,6 +25,8 @@
       margin-left: 1em;
       margin-bottom: 0;
       position: relative;
+      background-color: var(--secondary);
+      color: var(--secondary-text-color);
 
       &.with-addon {
         border-radius: 4px 0 0 4px;;

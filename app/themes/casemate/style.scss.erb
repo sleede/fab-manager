@@ -13,22 +13,22 @@ $secondary-text-color: <%= Stylesheet.secondary_text_color %> !default;
 $primary-decoration-color: <%= Stylesheet.primary_decoration_color %> !default;
 
 :root {
-  --main-lightest: lighten(<%= Stylesheet.primary_light %>, 20%);
-  --main-light: <%= Stylesheet.primary_light %>;
-  --main: <%= Stylesheet.primary %>;
-  --main-dark: <%= Stylesheet.primary_dark %>;
-  --main-darkest: darken(<%= Stylesheet.primary_dark %>, 20%);
+  --main-lightest: lighten(<%= Stylesheet.primary_light %>, 20%) !important;
+  --main-light: <%= Stylesheet.primary_light %> !important;
+  --main: <%= Stylesheet.primary %> !important;
+  --main-dark: <%= Stylesheet.primary_dark %> !important;
+  --main-darkest: darken(<%= Stylesheet.primary_dark %>, 20%) !important;
 
-  --secondary-lightest: lighten(<%= Stylesheet.secondary_light %>, 20%);
-  --secondary-light: <%= Stylesheet.secondary_light %>;
-  --secondary: <%= Stylesheet.secondary %>;
-  --secondary-dark: <%= Stylesheet.secondary_dark %>;
-  --secondary-darkest: darken(<%= Stylesheet.secondary_dark %>, 20%);
+  --secondary-lightest: lighten(<%= Stylesheet.secondary_light %>, 20%) !important;
+  --secondary-light: <%= Stylesheet.secondary_light %> !important;
+  --secondary: <%= Stylesheet.secondary %> !important;
+  --secondary-dark: <%= Stylesheet.secondary_dark %> !important;
+  --secondary-darkest: darken(<%= Stylesheet.secondary_dark %>, 20%) !important;
 
-  --primary-text-color: <%= Stylesheet.primary_text_color %>;
-  --secondary-text-color: <%= Stylesheet.secondary_text_color %>;
+  --main-text-color: <%= Stylesheet.primary_text_color %> !important;
+  --secondary-text-color: <%= Stylesheet.secondary_text_color %> !important;
 
-  --primary-decoration-color: <%= Stylesheet.primary_decoration_color %>;
+  --main-decoration-color: <%= Stylesheet.primary_decoration_color %> !important;
 }
 
 .bg-red {
@@ -297,9 +297,6 @@ a.label:focus,
   color: $primary;
 }
 
-.about-picture {
-}
-
 .social-icons > div:hover {
   background-color: $secondary;
   color: $secondary-text-color;
@@ -320,103 +317,4 @@ a.label:focus,
 section#cookies-modal div.cookies-consent .cookies-actions button.accept {
   background-color: $secondary;
   color: $secondary-text-color;
-}
-
-.plans-list {
-  .group-title:before {
-    background: linear-gradient(to left, white, $primary, white);
-  }
-  .category-title {
-    background-color: $primary;
-    color: $primary-text-color !important;
-  }
-}
-
-.plan-card  {
-  .card-footer {
-    .cta-button {
-      button.subscribe-button {
-        border-color: $secondary;
-
-        &.selected-card {
-          background-color: $secondary;
-        }
-      }
-    }
-  }
-}
-
-.fab-modal {
-  .fab-modal-footer {
-    .modal-btn--confirm {
-      & {
-        background-color: $secondary;
-        color: $secondary-text-color;
-        border-color: $secondary
-      }
-
-      &:hover {
-        background-color: $secondary-dark;
-        border-color: $secondary-dark;
-        color: $secondary-text-color;
-      }
-
-      &[disabled] {
-        background-color: $secondary-light;
-        color: $secondary-lighter;
-        border-color: $secondary-lighter;
-      }
-
-      &[disabled]:hover {
-        background-color: $secondary-light;
-        color: $secondary-lighter;
-        border-color: $secondary-lighter;
-      }
-    }
-  }
-}
-
-.payzen-keys-form {
-  fieldset > legend {
-    background-color: $secondary;
-    color: $secondary-text-color;
-  }
-}
-
-.payzen-settings {
-  .payzen-currency {
-    .payzen-currency-form {
-      .save-currency {
-        background-color: $secondary;
-        border-color: $secondary;
-        color: $secondary-text-color;
-      }
-    }
-  }
-}
-
-.plan-categories-list {
-  .add-category,
-  .add-category:hover {
-    background-color: $secondary-dark;
-    border-color: $secondary-dark;
-    color: $secondary-text-color;
-  }
-}
-
-.machine-card {
-  .machine-actions {
-    button {
-      color: $primary;
-    }
-  }
-}
-
-
-.propose-packs-modal {
-  .list-of-packs {
-    .pack {
-      border-color: $secondary;
-    }
-  }
 }

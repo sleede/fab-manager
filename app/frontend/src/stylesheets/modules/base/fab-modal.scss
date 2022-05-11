@@ -103,6 +103,27 @@
       .modal-btn {
         &--confirm {
           margin-left: 0.5em;
+          background-color: var(--secondary);
+          color: var(--secondary-text-color);
+          border-color: var(--secondary);
+
+          &:hover {
+            background-color: var(--secondary-dark);
+            border-color: var(--secondary-dark);
+            color: var(--secondary-text-color);
+          }
+
+          &[disabled] {
+            background-color: var(--secondary-light);
+            color: var(--secondary-lightest);
+            border-color: var(--secondary-lightest);
+          }
+
+          &[disabled]:hover {
+            background-color: var(--secondary-light);
+            color: var(--secondary-lightest);
+            border-color: var(--secondary-lightest);
+          }
         }
       }
     }
