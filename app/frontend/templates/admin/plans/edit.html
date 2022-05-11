@@ -52,47 +52,52 @@
                       <option value=""></option>
                   </select>
               </div>
-              <h3 translate>{{ 'app.admin.plans.edit.machines' }}</h3>
-              <table class="table">
+
+              <div ng-show="$root.modules.machines">
+                <h3 translate>{{ 'app.admin.plans.edit.machines' }}</h3>
+                <table class="table">
+                    <thead>
+                        <th translate>{{ 'app.admin.plans.edit.machine' }}</th>
+                        <th translate>{{ 'app.admin.plans.edit.hourly_rate' }}</th>
+                    </thead>
+                    <tbody>
+
+                    <tr ng-repeat="price in plan.prices" ng-if="price.priceable_type === 'Machine'" ng-hide="getMachine(price.priceable_id).disabled">
+                        <td style="width: 60%;">{{ getMachine(price.priceable_id).name }} (id {{ price.priceable_id }}) *</td>
+                        <td>
+                            <div class="input-group" ng-class="{'has-error': planForm['plan[prices_attributes][][amount]'].$dirty && planForm['plan[prices_attributes][][amount]'].$invalid}">
+                                <span class="input-group-addon">{{currencySymbol}}</span>
+                                <input type="number" class="form-control" name="plan[prices_attributes][][amount]" ng-value="price.amount" required="true"/>
+                                <input type="hidden" class="form-control" name="plan[prices_attributes][][id]" ng-value="price.id"/>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+              </div>
+
+              <div ng-show="$root.modules.spaces">
+                <h3 translate>{{ 'app.admin.plans.edit.spaces' }}</h3>
+                <table class="table">
                   <thead>
-                      <th translate>{{ 'app.admin.plans.edit.machine' }}</th>
-                      <th translate>{{ 'app.admin.plans.edit.hourly_rate' }}</th>
+                    <th translate>{{ 'app.admin.plans.edit.space' }}</th>
+                    <th translate>{{ 'app.admin.plans.edit.hourly_rate' }}</th>
                   </thead>
                   <tbody>
 
-                  <tr ng-repeat="price in plan.prices" ng-if="price.priceable_type === 'Machine'" ng-hide="getMachine(price.priceable_id).disabled">
-                      <td style="width: 60%;">{{ getMachine(price.priceable_id).name }} (id {{ price.priceable_id }}) *</td>
-                      <td>
-                          <div class="input-group" ng-class="{'has-error': planForm['plan[prices_attributes][][amount]'].$dirty && planForm['plan[prices_attributes][][amount]'].$invalid}">
-                              <span class="input-group-addon">{{currencySymbol}}</span>
-                              <input type="number" class="form-control" name="plan[prices_attributes][][amount]" ng-value="price.amount" required="true"/>
-                              <input type="hidden" class="form-control" name="plan[prices_attributes][][id]" ng-value="price.id"/>
-                          </div>
-                      </td>
+                  <tr ng-repeat="price in plan.prices" ng-if="price.priceable_type === 'Space'" ng-hide="getSpace(price.priceable_id).disabled">
+                    <td style="width: 60%;">{{ getSpace(price.priceable_id).name }} *</td>
+                    <td>
+                      <div class="input-group" ng-class="{'has-error': planForm['plan[prices_attributes][][amount]'].$dirty && planForm['plan[prices_attributes][][amount]'].$invalid}">
+                        <span class="input-group-addon">{{currencySymbol}}</span>
+                        <input type="number" class="form-control" name="plan[prices_attributes][][amount]" ng-value="price.amount" required="true"/>
+                        <input type="hidden" class="form-control" name="plan[prices_attributes][][id]" ng-value="price.id"/>
+                      </div>
+                    </td>
                   </tr>
                   </tbody>
-              </table>
-
-              <h3 ng-show="$root.modules.spaces" translate>{{ 'app.admin.plans.edit.spaces' }}</h3>
-              <table class="table" ng-show="$root.modules.spaces">
-                <thead>
-                  <th translate>{{ 'app.admin.plans.edit.space' }}</th>
-                  <th translate>{{ 'app.admin.plans.edit.hourly_rate' }}</th>
-                </thead>
-                <tbody>
-
-                <tr ng-repeat="price in plan.prices" ng-if="price.priceable_type === 'Space'" ng-hide="getSpace(price.priceable_id).disabled">
-                  <td style="width: 60%;">{{ getSpace(price.priceable_id).name }} *</td>
-                  <td>
-                    <div class="input-group" ng-class="{'has-error': planForm['plan[prices_attributes][][amount]'].$dirty && planForm['plan[prices_attributes][][amount]'].$invalid}">
-                      <span class="input-group-addon">{{currencySymbol}}</span>
-                      <input type="number" class="form-control" name="plan[prices_attributes][][amount]" ng-value="price.amount" required="true"/>
-                      <input type="hidden" class="form-control" name="plan[prices_attributes][][id]" ng-value="price.id"/>
-                    </div>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
+                </table>
+              </div>
               <ul>
               <li ng-repeat="(key, errors) in planForm.$error track by $index"> <strong>{{ key }}</strong> errors
                 <ul>

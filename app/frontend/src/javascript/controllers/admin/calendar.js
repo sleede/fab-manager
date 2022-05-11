@@ -621,7 +621,7 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
     $scope.availability = {
       start_at: start,
       end_at: end,
-      available_type: 'machines', // default
+      available_type: $scope.$root.modules.machines ? 'machines' : undefined, // default to machines if enabled
       tag_ids: [],
       is_recurrent: false,
       period: 'week',
@@ -927,6 +927,9 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
      * Initialize some settings, depending on the availability type, before continuing to step 2 (select a machine/training/space)
      */
     const validateType = function () {
+      if ($scope.availability.available_type === null || $scope.availability.available_type === undefined) {
+        return growl.error(_t('app.admin.calendar.select_type'));
+      }
       $scope.setNbTotalPlaces();
       if ($scope.availability.available_type === 'training') {
         $scope.availability.slot_duration = undefined;

@@ -891,6 +891,8 @@ Setting.set('wallet_module', true) unless Setting.find_by(name: 'wallet_module')
 
 Setting.set('statistics_module', true) unless Setting.find_by(name: 'statistics_module').try(:value)
 
+Setting.set('machines_module', true) unless Setting.find_by(name: 'machines_module').try(:value)
+
 Setting.set('upcoming_events_shown', 'until_start') unless Setting.find_by(name: 'upcoming_events_shown').try(:value)
 
 Setting.set('trainings_module', true) unless Setting.find_by(name: 'trainings_module').try(:value)

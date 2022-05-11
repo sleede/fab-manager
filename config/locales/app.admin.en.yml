@@ -111,6 +111,8 @@ en:
         slots_of: "of"
         minutes: "minutes"
         deleted_user: "Deleted user"
+        select_type: "Please select a type to continue"
+        no_modules_available: "No reservable module available. Please enable at least one module (machines, spaces or trainings) in the Customization section."
       # import external iCal calendar
       icalendar:
         icalendar_import: "iCalendar import"
@@ -1360,6 +1362,10 @@ en:
         duration_minutes: "Duration (in minutes)"
         default_slot_duration_info: "Machine and space availabilities are divided in multiple slots of this duration. This value can be overridden per availability."
         modules: "Modules"
+        machines: "Machines"
+        machines_info_html: "<p>Machines are the resources which are available for booking. A machine can be, <em>for example</em>, a 3D printer or a laser cutter.</p>"
+        enable_machines: "Enable the machines"
+        machines_module: "machines module"
         spaces: "Spaces"
         spaces_info_html: "<p>A space can be, for example, a woodshop or a meeting room. Their particularity is that they can be booked by several people at the same time.</p><p><strong>Warning:</strong> It is not recommended to disable spaces if at least one space reservation was made on the system.</p>"
         enable_spaces: "Enable the spaces"

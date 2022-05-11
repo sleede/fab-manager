@@ -132,7 +132,8 @@ export enum SettingName {
   SocialsEchosciences = 'echosciences',
   SocialsPinterest = 'pinterest',
   SocialsLastfm = 'lastfm',
-  SocialsFlickr = 'flickr'
+  SocialsFlickr = 'flickr',
+  MachinesModule = 'machines_module',
 }
 
 export type SettingValue = string|boolean|number;

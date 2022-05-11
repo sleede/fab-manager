@@ -685,14 +685,16 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
           placement: 'bottom'
         });
       }
-      uitour.createStep({
-        selector: '.plans-pricing .machines-tab',
-        stepId: 'machines',
-        order: 3,
-        title: _t('app.admin.tour.pricing.machines.title'),
-        content: _t('app.admin.tour.pricing.machines.content'),
-        placement: 'bottom'
-      });
+      if ($scope.$root.modules.machines) {
+        uitour.createStep({
+          selector: '.plans-pricing .machines-tab',
+          stepId: 'machines',
+          order: 3,
+          title: _t('app.admin.tour.pricing.machines.title'),
+          content: _t('app.admin.tour.pricing.machines.content'),
+          placement: 'bottom'
+        });
+      }
       if ($scope.$root.modules.spaces) {
         uitour.createStep({
           selector: '.plans-pricing .spaces-tab',

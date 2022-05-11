@@ -27,7 +27,7 @@ angular.module('application.router', ['ui.router'])
           logoFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'logo-file' }).$promise; }],
           logoBlackFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'logo-black-file' }).$promise; }],
           sharedTranslations: ['Translations', function (Translations) { return Translations.query(['app.shared', 'app.public.common']).$promise; }],
-          modulesPromise: ['Setting', function (Setting) { return Setting.query({ names: "['spaces_module', 'plans_module', 'invoicing_module', 'wallet_module', 'statistics_module', 'trainings_module', 'public_agenda_module']" }).$promise; }],
+          modulesPromise: ['Setting', function (Setting) { return Setting.query({ names: "['machines_module', 'spaces_module', 'plans_module', 'invoicing_module', 'wallet_module', 'statistics_module', 'trainings_module', 'public_agenda_module']" }).$promise; }],
           settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['public_registrations']" }).$promise; }]
         },
         onEnter: ['$rootScope', 'logoFile', 'logoBlackFile', 'modulesPromise', 'CSRF', function ($rootScope, logoFile, logoBlackFile, modulesPromise, CSRF) {
@@ -37,6 +37,7 @@ angular.module('application.router', ['ui.router'])
           $rootScope.logo = logoFile.custom_asset;
           $rootScope.logoBlack = logoBlackFile.custom_asset;
           $rootScope.modules = {
+            machines: (modulesPromise.machines_module === 'true'),
             spaces: (modulesPromise.spaces_module === 'true'),
             plans: (modulesPromise.plans_module === 'true'),
             trainings: (modulesPromise.trainings_module === 'true'),
@@ -1071,7 +1072,7 @@ angular.module('application.router', ['ui.router'])
                      "'renew_pack_threshold', 'pack_only_for_subscription', 'overlapping_categories', 'public_registrations'," +
                      "'extended_prices_in_same_day', 'recaptcha_site_key', 'recaptcha_secret_key', 'user_validation_required', 'user_validation_required_machine', " +
                      "'user_validation_required_training', 'user_validation_required_subscription', 'user_validation_required_space'," +
-                     "'user_validation_required_event', 'user_validation_required_pack', 'user_validation_required_list']"
+                     "'user_validation_required_event', 'user_validation_required_pack', 'user_validation_required_list', 'machines_module']"
             }).$promise;
           }],
           privacyDraftsPromise: ['Setting', function (Setting) { return Setting.get({ name: 'privacy_draft', history: true }).$promise; }],
