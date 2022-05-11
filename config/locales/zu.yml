@@ -62,6 +62,10 @@ zu:
     your_authentication_code_is_not_valid: "crwdns3279:0crwdne3279:0"
     current_authentication_method_no_code: "crwdns3281:0crwdne3281:0"
     requested_account_does_not_exists: "crwdns3283:0crwdne3283:0"
+  #SSO external authentication
+  authentication_providers:
+    local_database_provider_already_exists: 'crwdns22982:0crwdne22982:0'
+    matching_between_User_uid_and_API_required: "crwdns22984:0crwdne22984:0"
   #PDF invoices generation
   invoices:
     refund_invoice_reference: "crwdns3285:0%{REF}crwdne3285:0"
@@ -240,6 +244,15 @@ zu:
     event: "crwdns3551:0crwdne3551:0"
     reservations: "crwdns3553:0crwdne3553:0"
     available_seats: "crwdns3555:0crwdne3555:0"
+  reservation_ics:
+    summary: "crwdns22986:0%{TYPE}crwdne22986:0"
+    type:
+      Machine: "crwdns22988:0crwdne22988:0"
+      Space: "crwdns22990:0crwdne22990:0"
+      Event: "crwdns22992:0crwdne22992:0"
+      Training: "crwdns22994:0crwdne22994:0"
+    description: "crwdns22996:0%{COUNT}crwdnd22996:0%{ITEM}crwdne22996:0"
+    alarm_summary: "crwdns22998:0crwdne22998:0"
   roles:
     member: "crwdns20446:0crwdne20446:0"
     manager: "crwdns20448:0crwdne20448:0"
@@ -384,6 +397,18 @@ zu:
         schedule_deadline: "crwdns21120:0%{DATE}crwdnd21120:0%{REFERENCE}crwdne21120:0"
       notify_admin_payment_schedule_transfer_deadline:
         schedule_deadline: "crwdns22305:0%{DATE}crwdnd22305:0%{REFERENCE}crwdne22305:0"
+      notify_admin_user_proof_of_identity_files_created:
+        proof_of_identity_files_uploaded: "crwdns23000:0%{NAME}crwdne23000:0"
+      notify_admin_user_proof_of_identity_files_updated:
+        proof_of_identity_files_uploaded: "crwdns23002:0%{NAME}crwdne23002:0"
+      notify_user_is_validated:
+        account_validated: "crwdns23004:0crwdne23004:0"
+      notify_user_is_invalidated:
+        account_invalidated: "crwdns23006:0crwdne23006:0"
+      notify_user_proof_of_identity_refusal:
+        refusal: "crwdns23008:0crwdne23008:0"
+      notify_admin_user_proof_of_identity_refusal:
+        refusal: "crwdns23010:0%{NAME}crwdne23010:0"
   #statistics tools for admins
   statistics:
     subscriptions: "crwdns3689:0crwdne3689:0"
@@ -555,3 +580,18 @@ zu:
     overlapping_categories: "crwdns22129:0crwdne22129:0"
     extended_prices_in_same_day: "crwdns22173:0crwdne22173:0"
     public_registrations: "crwdns22287:0crwdne22287:0"
+    facebook: "crwdns23012:0crwdne23012:0"
+    twitter: "crwdns23014:0crwdne23014:0"
+    viadeo: "crwdns23016:0crwdne23016:0"
+    linkedin: "crwdns23018:0crwdne23018:0"
+    instagram: "crwdns23020:0crwdne23020:0"
+    youtube: "crwdns23022:0crwdne23022:0"
+    vimeo: "crwdns23024:0crwdne23024:0"
+    dailymotion: "crwdns23026:0crwdne23026:0"
+    github: "crwdns23028:0crwdne23028:0"
+    echosciences: "crwdns23030:0crwdne23030:0"
+    pinterest: "crwdns23032:0crwdne23032:0"
+    lastfm: "crwdns23034:0crwdne23034:0"
+    flickr: "crwdns23036:0crwdne23036:0"
+    machines_module: "crwdns23038:0crwdne23038:0"
+    user_change_group: "crwdns23040:0crwdne23040:0"
