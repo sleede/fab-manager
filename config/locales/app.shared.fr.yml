@@ -90,14 +90,14 @@ fr:
         woman: "Femme"
       change_password:
         change_my_password: "Changer mon mot de passe"
-        confirm_current: "Confirm your current password"
+        confirm_current: "Confirmez votre mot de passe actuel"
         confirm: "OK"
-        wrong_password: "Wrong password"
+        wrong_password: "Mot de passe incorrect"
       password_input:
-        new_password: "New password"
-        confirm_password: "Confirm password"
-        password_too_short: "Password is too short (must be at least 8 characters)"
-        confirmation_mismatch: "Confirmation mismatch with password."
+        new_password: "Nouveau mot de passe"
+        confirm_password: "Confirmez le mot de passe"
+        password_too_short: "Le mot de passe est trop court (doit contenir au moins 8 caractères)"
+        confirmation_mismatch: "La confirmation ne concorde pas avec le mot de passe."
       #project edition form
       project:
         name: "Nom"
@@ -153,7 +153,7 @@ fr:
       member_select:
         select_a_member: "Sélectionnez un membre"
         start_typing: "Commencez à écrire..."
-        member_not_validated: "Attention:</br> The member has not validated."
+        member_not_validated: "Attention :</br> Le membre n'a pas validé."
       #payment modal
       payment:
         online_payment: "Paiement en ligne"
@@ -462,7 +462,7 @@ fr:
         slot_tags: "Étiquettes du créneau"
         user_tags: "Étiquettes de l'utilisateur"
         no_tags: "Aucune étiquette"
-        user_validation_required_alert: "Attention !</br>Votre administrateur doit valider votre compte ? Vous pourrez alors accéder à l'ensemble des fonctionnalités de réservation."
+        user_validation_required_alert: "Attention !</br>Votre administrateur doit valider votre compte ? Vous pourrez ensuite accéder à l'ensemble des fonctionnalités de réservation."
       #feature-tour modal
       tour:
         previous: "Précédent"
