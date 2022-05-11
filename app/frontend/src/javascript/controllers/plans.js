@@ -76,8 +76,6 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
           if ($scope.selectedPlan !== plan) {
             $scope.selectedPlan = plan;
             $scope.planSelectionTime = new Date();
-          } else {
-            $scope.selectedPlan = null;
           }
         } else {
           $scope.login();
@@ -182,6 +180,29 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
       $scope.paid.plan = angular.copy($scope.selectedPlan);
       $scope.selectedPlan = null;
       $scope.coupon.applied = null;
+    };
+
+    /**
+     * Callback triggered when the user has successfully changed his group
+     */
+    $scope.onGroupUpdateSuccess = function (message, user) {
+      growl.success(message);
+      setTimeout(() => {
+        $scope.ctrl.member = _.cloneDeep(user);
+        $scope.$apply();
+      }, 50);
+      if (AuthService.isAuthorized('member') ||
+        (AuthService.isAuthorized('manager') && $scope.currentUser.id !== $scope.ctrl.member.id)) {
+        $rootScope.currentUser.group_id = user.group_id;
+        Auth._currentUser.group_id = user.group_id;
+      }
+    };
+
+    /**
+     * Check if it is allowed the change the group of teh selected user
+     */
+    $scope.isAllowedChangingGroup = function () {
+      return $scope.ctrl.member && !$scope.selectedPlan && !$scope.paid.plan;
     };
 
     /* PRIVATE SCOPE */

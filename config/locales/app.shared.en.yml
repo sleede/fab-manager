@@ -23,6 +23,12 @@ en:
         you_will_lose_any_unsaved_modification_if_you_reload_this_page: "You will lose any unsaved modification if you reload this page"
         payment_card_error: "A problem has occurred with your credit card:"
         payment_card_declined: "Your card was declined."
+      change_group:
+        title: "{OPERATOR, select, self{My group} other{User's group}}"
+        change: "Change {OPERATOR, select, self{my} other{his}} group"
+        cancel: "Cancel"
+        validate: "Validate group change"
+        success: "Group successfully changed"
       #text editor
       text_editor:
         text_placeholder: "Type something…"
