@@ -3,7 +3,7 @@ import { User } from '../models/user';
 import { supportedNetworks, SupportedSocialNetwork } from '../models/social-network';
 
 export default class UserLib {
-  private user: User;
+  private readonly user: User;
 
   constructor (user: User) {
     this.user = user;

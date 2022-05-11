@@ -4,6 +4,7 @@
 
 - Ability to define social networks for the FabLab "about page"
 - Support for OpenID Connect in Sign-Sign-On authentication providers
+- ICS file attached to the reservation notification email
 - No longer needed to recompile the assets when switching the authentication provider
 - Updated the documentation about the minimum docker version
 - Updated nodejs version to 16.13.2 for dev environment, to reflect production version
@@ -15,6 +16,7 @@
 - Updated typescript to v4.6.3
 - Updated react-select to v5.2.2
 - Updated sidekiq-scheduler to v4.0.0
+- Updated icalendar to 2.7.1
 - Webpack overlay will now report eslint issues
 - Linted all code according to eslint rules
 - when generating an avoir, the option "by_wallet" is not present anymore if wallet module is off
