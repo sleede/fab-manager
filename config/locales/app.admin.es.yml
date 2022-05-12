@@ -1288,7 +1288,7 @@ es:
         title_of_the_about_page: "Título de la página Acerca de"
         shift_enter_to_force_carriage_return: "MAYÚS + ENTRAR para forzar el retorno de carro"
         input_the_main_content: "Introduzca el contenido principal"
-        drag_and_drop_to_insert_images: "Arrastrar y soltar para insertar imágenes"
+        drag_and_drop_to_insert_images: "Drag and drop to insert images"
         input_the_fablab_contacts: "Ingrese los contactos de FabLab"
         reservations: "Reservas"
         reservations_parameters: "Parámetros de reservas"
