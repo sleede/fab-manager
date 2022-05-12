@@ -176,7 +176,7 @@
                        placeholder="{{profileCustomField.label}}"
                        ng-required="profileCustomField.required">
               </div>
-              <span class="exponent help-cursor" title="{{ 'app.public.common.used_for_invoicing' | translate }}"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+              <span ng-show="profileCustomField.required" class="exponent help-cursor" title="{{ 'app.public.common.used_for_invoicing' | translate }}"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
               <span class="help-block" ng-show="signupForm.user_profile_custom_fields{{i}}.$dirty && signupForm.user_profile_custom_fields{{i}}.$error.required" translate translate-values="{FEILD: profileCustomField.label}">{{ 'app.public.common.profile_custom_field_is_required' }}</span>
             </div>
           </div>
