@@ -142,7 +142,7 @@
       #home page
       home:
         latest_documented_projects: "De siste dokumenterte prosjektene"
-        follow_us: "Følg oss"
+        follow_us: "Follow us"
         latest_tweets: "Siste tweets"
         latest_registered_members: "Siste registrerte medlemmer"
         create_an_account: "Lag en konto"
