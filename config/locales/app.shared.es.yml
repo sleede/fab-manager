@@ -39,6 +39,7 @@ es:
         add_video: "Embed a video"
         add_image: "Insert an image"
       fab_socials:
+        follow_us: "Follow us"
         networks_update_success: "Social networks update successful"
         networks_update_error: "Problem trying to update social networks"
         url_placeholder: "Paste url…"
