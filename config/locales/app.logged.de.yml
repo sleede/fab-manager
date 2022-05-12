@@ -4,18 +4,7 @@ de:
       #user's profile completion page when logging from an SSO provider
       profile_completion:
         confirm_your_new_account: "Bestätigen Sie Ihr neues Konto"
-        you_ve_just_created_a_new_account_on_the_fablab_by_logging_from: "Sie haben ein neues Konto auf {GENDER, select, neutral{} other{dem}} {NAME} erstellt, über Anmeldung von"
-        we_need_some_more_details: "Um die Einrichtung der Plattform abzuschließen, benötigen wir weitere Details"
-        your_email_is_already_used_by_another_account_on_the_platform: "Ihre E-Mail-Adresse scheint bereits von einem anderen Benutzer verwendet zu werden. Prüfen Sie bitte Ihr Postfach und geben Sie den Code ein, der Ihnen geschickt wurde."
         or: "oder"
-        please_fill_the_following_form: "Bitte füllen Sie das folgende Formular aus"
-        some_data_may_have_already_been_provided_by_provider_and_cannot_be_modified: "Einige Daten wurden möglicherweise bereits von {NAME} bereitgestellt und können nicht geändert werden"
-        then_click_on_: "Dann klicken Sie auf"
-        _to_start_using_the_application: "um die Anwendung zu verwenden"
-        new_on_this_platform: "Neu auf dieser Plattform?"
-        your_email_: "Ihre E-Mail-Adresse"
-        _is_currently_associated_with_another_account_on_this_platform: "ist derzeit mit einem anderen Konto auf dieser Plattform verknüpft."
-        please_click_to_change_email_associated_with_your_PROVIDER_account: "Wenn es nicht Ihre Mailadresse ist, klicken Sie bitte auf den folgenden Button, um die E-Mail zu ändern, die mit Ihrem {PROVIDER} -Konto verknüpft ist."
         do_you_already_have_an_account: "Haben Sie bereits ein Konto?"
         do_not_fill_the_form_beside_but_specify_here_the_code_you_ve_received_by_email_to_recover_your_access: "Füllen Sie nicht das Formular aus. Geben Sie stattdessen hier den Code an, den Sie per E-Mail erhalten haben, um Ihren Zugang wiederherzustellen."
         just_specify_code_here_to_recover_access: "Geben Sie hier den Code an, den Sie per E-Mail erhalten haben, um Ihren Zugriff wiederherzustellen."
@@ -33,12 +22,21 @@ de:
         user_s_profile_is_required: "Benutzerprofil ist erforderlich."
         i_ve_read_and_i_accept_: "Ich habe gelesen und akzeptiere"
         _the_fablab_policy: "die FabLab Richtlinie"
-        change_my_data: "Meine Daten ändern"
-        sync_my_profile: "Mein Profil synchronisieren"
-        once_your_data_are_up_to_date_: "Sobald Ihre Daten auf dem neuesten Stand sind,"
-        _click_on_the_synchronization_button_opposite_: "klicken Sie auf den Synchronisation-Button gegenüber"
-        _disconnect_then_reconnect_: "trennen und erneut verbinden"
-        _for_your_changes_to_take_effect: "damit Ihre Änderungen wirksam werden."
+        your_profile_has_been_successfully_updated: "Your profile has been successfully updated."
+        completion_header_info:
+          rules_changed: "Please fill the following form to update your profile and continue to use the platform."
+          sso_intro: "You've just created a new account on {GENDER, select, neutral{} other{the}} {NAME}, by logging from"
+          duplicate_email_info: "It looks like your email address is already used by another user. Check your email address and please input below the code you have received."
+          details_needed_info: "To finalize your account, we need some more details."
+        profile_form_option:
+          title: "New on this platform?"
+          please_fill: "Please fill in the following form to create your account."
+          disabled_data_from_sso: "Some data may have already been provided by {NAME} and cannot be modified."
+          confirm_instructions_html: "Once you are done, please click on <strong>Save</strong> to confirm your account and start using the application."
+          duplicate_email_html: "It looks like your email address <strong>({EMAIL})</strong> is already associated with another account. If this account is not yours, please click on the following button to change the email associated with your {PROVIDER} account."
+          edit_profile: "Change my data"
+          after_edition_info_html: "Once your data are up to date, <strong>click on the synchronization button below</strong>, or <strong>disconnect then reconnect</strong> for your changes to take effect."
+          sync_profile: "Sync my profile"
       dashboard:
         #dashboard: public profile
         profile:
@@ -91,6 +89,7 @@ de:
           _click_on_the_synchronization_button_opposite_: "klicken Sie auf den Synchronisation-Button gegenüber"
           _disconnect_then_reconnect_: "trennen und erneut verbinden"
           _for_your_changes_to_take_effect: "damit Ihre Änderungen wirksam werden."
+          your_profile_has_been_successfully_updated: "Your profile has been successfully updated."
         #dashboard: my projects
         projects:
           you_dont_have_any_projects: "Sie haben keine Projekte."

@@ -24,7 +24,7 @@ fr:
       subject: "Vous avez changé de groupe"
       body:
         warning: "Vous venez de changer de groupe utilisateurs. Des contrôles pourront être opérés au Fab Lab afin de vérifier que ce changement est justifié."
-        user_invalidated: "Votre compte est invalidé, Veuillez vous télécharger vos nouveaux justificatifs pour valider votre compte."
+        user_invalidated: "Votre compte est invalidé, veuillez téléverser votre nouveau justificatif d'identité pour valider votre compte."
     notify_admin_user_group_changed:
       subject: "Un membre a changé de groupe"
       body:

@@ -4,18 +4,7 @@
       #user's profile completion page when logging from an SSO provider
       profile_completion:
         confirm_your_new_account: "Bekreft din nye konto"
-        you_ve_just_created_a_new_account_on_the_fablab_by_logging_from: "Du har nettopp opprettet en ny konto for {NAME} ved å logge fra"
-        we_need_some_more_details: "For å fullføre plattformoppsettet trenger vi flere detaljer"
-        your_email_is_already_used_by_another_account_on_the_platform: "Det ser ut som din e-postadresse er allerede i bruk av en annen bruker. Kontroller e-postadressen og skriv inn koden som er sendt til deg nedenfor."
         or: "eller"
-        please_fill_the_following_form: "Vennligst fyll ut følgende skjema"
-        some_data_may_have_already_been_provided_by_provider_and_cannot_be_modified: "Noen data er allerede gitt av {NAME} og kan ikke endres"
-        then_click_on_: "Klikk deretter"
-        _to_start_using_the_application: "for å begynne å bruke applikasjonen"
-        new_on_this_platform: "Ny på denne plattformen?"
-        your_email_: "Din e-post"
-        _is_currently_associated_with_another_account_on_this_platform: "er for øyeblikket assosiert med en annen konto på denne plattformen."
-        please_click_to_change_email_associated_with_your_PROVIDER_account: "Hvis det ikke er ditt, klikk på følgende knapp for å endre e-postadressen tilknyttet din {PROVIDER} -konto."
         do_you_already_have_an_account: "Har du allerede en konto?"
         do_not_fill_the_form_beside_but_specify_here_the_code_you_ve_received_by_email_to_recover_your_access: "Ikke fyll ut skjemaet, men skriv inn koden du har mottatt via e-post for å gjenopprette tilgangen."
         just_specify_code_here_to_recover_access: "Angi koden du har mottatt via e-post her for å gjenopprette tilgangen din."
@@ -33,12 +22,21 @@
         user_s_profile_is_required: "Brukerprofilen er påkrevd."
         i_ve_read_and_i_accept_: "Jeg har lest og aksepterer"
         _the_fablab_policy: "policyen for FabLab"
-        change_my_data: "Endre mine data"
-        sync_my_profile: "Synkroniser min profil"
-        once_your_data_are_up_to_date_: "Når dine data er oppdatert,"
-        _click_on_the_synchronization_button_opposite_: "klikk synkroniseringsknappen på den andre siden"
-        _disconnect_then_reconnect_: "koble fra og koble til på nytt"
-        _for_your_changes_to_take_effect: "for at dine endringer skal tre i kraft."
+        your_profile_has_been_successfully_updated: "Your profile has been successfully updated."
+        completion_header_info:
+          rules_changed: "Please fill the following form to update your profile and continue to use the platform."
+          sso_intro: "You've just created a new account on {GENDER, select, neutral{} other{the}} {NAME}, by logging from"
+          duplicate_email_info: "It looks like your email address is already used by another user. Check your email address and please input below the code you have received."
+          details_needed_info: "To finalize your account, we need some more details."
+        profile_form_option:
+          title: "New on this platform?"
+          please_fill: "Please fill in the following form to create your account."
+          disabled_data_from_sso: "Some data may have already been provided by {NAME} and cannot be modified."
+          confirm_instructions_html: "Once you are done, please click on <strong>Save</strong> to confirm your account and start using the application."
+          duplicate_email_html: "It looks like your email address <strong>({EMAIL})</strong> is already associated with another account. If this account is not yours, please click on the following button to change the email associated with your {PROVIDER} account."
+          edit_profile: "Change my data"
+          after_edition_info_html: "Once your data are up to date, <strong>click on the synchronization button below</strong>, or <strong>disconnect then reconnect</strong> for your changes to take effect."
+          sync_profile: "Sync my profile"
       dashboard:
         #dashboard: public profile
         profile:
@@ -91,6 +89,7 @@
           _click_on_the_synchronization_button_opposite_: "klikker du på synkroniseringsknappen "
           _disconnect_then_reconnect_: "koble fra og koble til på nytt"
           _for_your_changes_to_take_effect: "for at dine endringer skal tre i kraft."
+          your_profile_has_been_successfully_updated: "Your profile has been successfully updated."
         #dashboard: my projects
         projects:
           you_dont_have_any_projects: "Du har ingen prosjekter enda."

@@ -18,6 +18,7 @@ de:
         events: "Veranstaltungen"
         availabilities: "Verfügbarkeiten"
         availabilities_notice: "Export aller für Reservierungen verfügbaren Slots und ihrer Belegung in ein Excel-Arbeitsbuch."
+        select_a_slot: "Please select a slot"
         info: "Info"
         tags: "Tags"
         slot_duration: "Slot-Dauer: {DURATION} Minuten"
@@ -110,6 +111,8 @@ de:
         slots_of: "von"
         minutes: "Minuten"
         deleted_user: "Deleted user"
+        select_type: "Please select a type to continue"
+        no_modules_available: "No reservable module available. Please enable at least one module (machines, spaces or trainings) in the Customization section."
       #import external iCal calendar
       icalendar:
         icalendar_import: "iCalendar Import"
@@ -435,6 +438,35 @@ de:
         edit_extended_price: "Erweiterten Preis bearbeiten"
         confirm_changes: "Änderungen bestätigen"
         extended_price_successfully_updated: "Der erweiterte Preis wurde erfolgreich aktualisiert."
+      plans_categories:
+        manage_plans_categories: "Plan-Kategorien verwalten"
+      plan_categories_list:
+        categories_list: "Liste der Kategorien des Plans"
+        no_categories: "Keine Kategorien"
+        name: "Name"
+        description: "Description"
+        significance: "Signifikanz"
+      manage_plan_category:
+        name: "Name"
+        description: "Description"
+        significance: "Significance"
+        info: "Categories will be shown ordered by signifiance. The higher you set the significance, the first the category will be shown."
+        create_category:
+          title: "New category"
+          cta: "Create the category"
+          success: "The new category was successfully created"
+          error: "Unable to create the category: "
+        update_category:
+          title: "Edit the category"
+          cta: "Validate"
+          success: "The category was successfully updated"
+          error: "Unable to update the category: "
+        delete_category:
+          title: "Delete a category"
+          confirm: "Are you sure you want to delete this category? If you do, the plans associated with this category won't be sorted anymore."
+          cta: "Delete"
+          success: "The category was successfully deleted"
+          error: "Unable to delete the category: "
       #ajouter un code promotionnel
       coupons_new:
         add_a_coupon: "Gutschein hinzufügen"
@@ -850,6 +882,7 @@ de:
           an_error_occurred_unable_to_delete_the_specified_provider: "Ein Fehler ist aufgetreten: Der angegebene Anbieter konnte nicht gelöscht werden."
           local_database: "Lokale Datenbank"
           o_auth2: "OAuth 2.0"
+          openid_connect: "OpenID Connect"
         group_form:
           add_a_group: "Gruppe hinzufügen"
           group_name: "Gruppenname"
@@ -874,6 +907,7 @@ de:
       members_new:
         add_a_member: "Mitglied hinzufügen"
         user_is_an_organization: "Benutzer ist eine Organisation"
+        create_success: "Member successfully created"
       #members bulk import
       members_import:
         import_members: "Mitglieder importieren"
@@ -957,6 +991,7 @@ de:
         to_credit: 'Guthaben'
         cannot_credit_own_wallet: "Sie können keine Gutschrift auf Ihr eigenes Guthaben einbuchen. Bitten Sie einen anderen Manager oder einen Administrator um die Gutschreibung."
         cannot_extend_own_subscription: "Sie können Ihr eigenes Abonnement nicht erweitern. Bitte fragen Sie einen anderen Manager oder einen Administrator."
+        update_success: "Member's profile successfully updated"
         my_documents: "My documents"
         my_documents_info: "Following the declaration of your profile, you must declare the proof of identity documents. Once submitted, these documents will be verified by the administrator."
         proof_of_identity_file_size_error: "The weight limit is {SIZE} MB max"
@@ -1046,26 +1081,108 @@ de:
         birth_date: "Geburtsdatum"
         address: "Adresse"
         phone_number: "Telefonnummer"
-      #add a new authentication provider (SSO)
+      #authentication providers (SSO) components
+      authentication:
+        boolean_mapping_form:
+          mappings: "Mappings"
+          true_value: "True value"
+          false_value: "False value"
+        date_mapping_form:
+          input_format: "Input format"
+          date_format: "Date format"
+        integer_mapping_form:
+          mappings: "Mappings"
+          mapping_from: "From"
+          mapping_to: "To"
+        string_mapping_form:
+          mappings: "Mappings"
+          mapping_from: "From"
+          mapping_to: "To"
+        data_mapping_form:
+          define_the_fields_mapping: "Define the fields mapping"
+          add_a_match: "Add a match"
+          model: "Model"
+          field: "Field"
+          data_mapping: "Data mapping"
+        oauth2_data_mapping_form:
+          api_endpoint_url: "API endpoint or URL"
+          api_type: "API type"
+          api_field: "API field"
+          api_field_help_html: '<a href="https://jsonpath.com/" target="_blank">JsonPath</a> syntax is supported.<br> If many fields are selected, the first one will be used.<br> Example: $.data[*].name'
+        openid_connect_data_mapping_form:
+          api_field: "Userinfo claim"
+          api_field_help_html: 'Set the field providing the corresponding data through <a href="https://openid.net/specs/openid-connect-core-1_0.html#Claims" target="_blank">the userinfo endpoint</a>.<br> <a href="https://jsonpath.com/" target="_blank">JsonPath</a> syntax is supported. If many fields are selected, the first one will be used.<br> <b>Example</b>: $.data[*].name'
+          openid_standard_configuration: "Use the OpenID standard configuration"
+        type_mapping_modal:
+          data_mapping: "Data mapping"
+          TYPE_expected: "{TYPE} expected"
+          types:
+            integer: "integer"
+            string: "string"
+            text: "text"
+            date: "date"
+            boolean: "boolean"
+        oauth2_form:
+          authorization_callback_url: "Authorization callback URL"
+          common_url: "Server root URL"
+          authorization_endpoint: "Authorization endpoint"
+          token_acquisition_endpoint: "Token acquisition endpoint"
+          profile_edition_url: "Profil edition URL"
+          profile_edition_url_help: "The URL of the page where the user can edit his profile."
+          client_identifier: "Client identifier"
+          client_secret: "Client secret"
+          scopes: "Scopes"
+        openid_connect_form:
+          issuer: "Issuer"
+          issuer_help: "Root url for the authorization server."
+          discovery: "Discovery"
+          discovery_help: "Should OpenID discovery be used. This is recommended if the IDP provides a discovery endpoint."
+          discovery_unavailable: "Discovery is unavailable for the configured issuer."
+          discovery_enabled: "Enable discovery"
+          discovery_disabled: "Disable discovery"
+          client_auth_method: "Client authentication method"
+          client_auth_method_help: "Which authentication method to use to authenticate Fab-manager with the authorization server."
+          client_auth_method_basic: "Basic"
+          client_auth_method_jwks: "JWKS"
+          scope: "Scope"
+          scope_help_html: "Which OpenID scopes to include (openid is always required). <br> If <b>Discovery</b> is enabled, the available scopes will be automatically proposed."
+          prompt: "Prompt"
+          prompt_help_html: "Which OpenID pages the user will be shown. <br> <b>None</b> - no authentication or consent user interface pages are shown. <br> <b>Login</b> - the authorization server prompt the user for reauthentication. <br> <b>Consent</b> - the authorization server prompt the user for consent before returning information to Fab-manager. <br> <b>Select account</b> - the authorization server prompt the user to select a user account."
+          prompt_none: "None"
+          prompt_login: "Login"
+          prompt_consent: "Consent"
+          prompt_select_account: "Select account"
+          send_scope_to_token_endpoint: "Send scope to token endpoint?"
+          send_scope_to_token_endpoint_help: "Should the scope parameter be sent to the authorization token endpoint?"
+          send_scope_to_token_endpoint_false: "No"
+          send_scope_to_token_endpoint_true: "Yes"
+          profile_edition_url: "Profil edition URL"
+          profile_edition_url_help: "The URL of the page where the user can edit his profile."
+          client_options: "Client options"
+          client__identifier: "Identifier"
+          client__secret: "Secret"
+          client__authorization_endpoint: "Authorization endpoint"
+          client__token_endpoint: "Token endpoint"
+          client__userinfo_endpoint: "Userinfo endpoint"
+          client__jwks_uri: "JWKS URI"
+          client__end_session_endpoint: "End session endpoint"
+          client__end_session_endpoint_help: "The url to call to log the user out at the authorization server."
+        provider_form:
+          name: "Name"
+          authentication_type: "Authentication type"
+          save: "Save"
+          create_success: "Authentication provider created"
+          update_success: "Authentication provider updated"
+          methods:
+            local_database: "Local database"
+            oauth2: "OAuth 2.0"
+            openid_connect: "OpenID Connect"
+      #create a new authentication provider (SSO)
       authentication_new:
-        local_database: "Lokale Datenbank"
-        o_auth2: "OAuth 2.0"
         add_a_new_authentication_provider: "Neuen Authentifizierungsanbieter hinzufügen"
-        a_local_database_provider_already_exists_unable_to_create_another: "Ein \"Lokale Datenbank\" Provider existiert bereits. Kann keinen anderen erstellen."
-        local_provider_successfully_saved: "Lokaler Anbieter erfolgreich gespeichert."
-        it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider: "Um diesen Provider hinzuzufügen, muss die Übereinstimmung zwischen User.uid und der API festgelegt werden."
-        security_issue_detected: "Sicherheitsproblem erkannt"
-        beware_the_oauth2_authenticatoin_provider_you_are_about_to_add_isnt_using_HTTPS: "Vorsicht: Der OAuth 2 Provider, den Sie hinzufügen werden, verwendet kein HTTPS."
-        this_is_a_serious_security_issue_on_internet_and_should_never_be_used_except_for_testing_purposes: "Dies ist ein ernstes Sicherheitsproblem im Internet und sollte nur für Testzwecke verwendet werden."
-        do_you_really_want_to_continue: "Möchten Sie wirklich fortfahren?"
-        unsecured_oauth2_provider_successfully_added: "Ungesicherter OAuth 2.0 Provider erfolgreich hinzugefügt."
-        oauth2_provider_successfully_added: "OAuth 2.0 Provider erfolgreich hinzugefügt."
       #edit an authentication provider (SSO)
       authentication_edit:
         provider: "Anbieter:"
-        it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider: "Um diesen Provider hinzuzufügen, muss die Übereinstimmung zwischen User.uid und der API festgelegt werden."
-        provider_successfully_updated: "Anbieter erfolgreich aktualisiert."
-        an_error_occurred_unable_to_update_the_provider: "Ein Fehler ist aufgetreten: Der Anbieter konnte nicht aktualisiert werden."
       #statistics tables
       statistics:
         statistics: "Statistiken"
@@ -1220,6 +1337,8 @@ de:
         about_title: "Seitentitel \"Über\""
         about_body: "Seiteninhalt \"Über\""
         about_contacts: "Kontakte auf der \"Über\"-Seite"
+        about_follow_us: "Follow us"
+        about_networks: "Social networks"
         privacy_draft: "Entwurf der Datenschutzrichtlinien"
         privacy_body: "Datenschutzrichtlinie"
         privacy_dpo: "Adresse des Datenschutzbeauftragten"
@@ -1265,6 +1384,10 @@ de:
         duration_minutes: "Dauer (in Minuten)"
         default_slot_duration_info: "Die Verfügbarkeit von Maschinen und Räumen ist in mehrere Slots dieser Dauer aufgeteilt. Dieser Wert kann je Verfügbarkeit überschrieben werden."
         modules: "Module"
+        machines: "Machines"
+        machines_info_html: "<p>Machines are the resources which are available for booking. A machine can be, <em>for example</em>, a 3D printer or a laser cutter.</p>"
+        enable_machines: "Enable the machines"
+        machines_module: "machines module"
         spaces: "Räume"
         spaces_info_html: "<p>Ein Raum kann zum Beispiel eine Holzwerkstatt oder ein Meetingraum sein. Die Besonderheit von Räumen ist, dass sie von mehreren Personen gleichzeitig gebucht werden können.</p><p><strong>Warnung:</strong> Es wird nicht empfohlen, Räume zu deaktivieren, wenn mindestens eine Raumreservierung auf dem System vorgenommen wurde.</p>"
         enable_spaces: "Räume aktivieren"
@@ -1307,6 +1430,10 @@ de:
         account_confirmation: "Kontobestätigung"
         confirmation_required_info: "Optional können Sie die Bestätigung der E-Mail-Adresse für Benutzer obligatorisch machen, bevor Sie Zugriff auf Fab-Manager bekommen."
         confirmation_is_required: "Bestätigung erforderlich"
+        change_group: "Group change"
+        change_group_info: "After an user has created his account, you can restrict him from changing his group. In that case, only managers and administrators will be able to change the user's group."
+        allow_group_change: "Allow group change"
+        user_change_group: "users can change their group"
         wallet_module: "Guthabenkonto-Modul"
         public_agenda_module: "öffentliches Agenda-Modul"
         statistics_module: "Statistik-Modul"
@@ -1372,6 +1499,7 @@ de:
           statistics_info_html: "<p>Aktivieren oder deaktivieren Sie das Statistik-Modul.</p><p>Wenn aktiviert, konsolidiert das Modul die Tagesdaten in der Datenbank einer leistungsstarken Analyse-Engine. Administratoren können im entsprechenden Abschnitt die erstellten Diagramme und Tabellen durchsuchen.</p>"
           enable_statistics: "Statistik-Modul aktivieren"
         compte:
+          account: "Account"
           compte: "Compte"
           customize_account_settings: "Customize account settings"
           user_validation_required: "validation of accounts"
@@ -1503,35 +1631,6 @@ de:
         report_will_be_destroyed: "Sobald der Bericht verarbeitet wurde, wird er gelöscht. Dies kann nicht rückgängig gemacht werden. Fortfahren?"
         report_removed: "Der Bericht wurde gelöscht"
         failed_to_remove: "Ein Fehler ist aufgetreten, der Bericht konnte nicht gelöscht werden"
-      plans_categories:
-        manage_plans_categories: "Plan-Kategorien verwalten"
-      plan_categories_list:
-        categories_list: "Liste der Kategorien des Plans"
-        no_categories: "Keine Kategorien"
-        name: "Name"
-        significance: "Signifikanz"
-      create_plan_category:
-        new_category: "Neue Kategorie"
-        name: "Name"
-        significance: "Signifikanz"
-        significance_info: "Kategorien werden nach Signifikanz sortiert. Je höher die Signifikanz, desto weiter oben wird die Kategorie angezeigt."
-        confirm_create: "Kategorie erstellen"
-        category_created: "Die neue Kategorie wurde erfolgreich erstellt"
-        unable_to_create: "Die Kategorie konnte nicht erstellt werden: "
-      edit_plan_category:
-        edit_category: "Kategorie bearbeiten"
-        name: "Name"
-        significance: "Signifikanz"
-        confirm_edition: "Bestätigen"
-        category_updated: "Die Kategorie wurde erfolgreich aktualisiert"
-        unable_to_update: "Die Kategorie konnte nicht aktualisiert werden: "
-        significance_info: "Kategorien werden nach Signifikanz sortiert. Je höher die Signifikanz, desto weiter oben wird die Kategorie angezeigt."
-      delete_plan_category:
-        delete_category: "Kategorie löschen"
-        confirm_delete: "Löschen"
-        delete_confirmation: "Sind Sie sicher, dass Sie diese Kategorie löschen möchten? Wenn Sie dies tun, werden die mit dieser Kategorie verbundenen Pläne nicht mehr sortiert."
-        category_deleted: "Die Kategorie wurde erfolgreich gelöscht"
-        unable_to_delete: "Die Kategorie konnte nicht gelöscht werden: "
       local_payment:
         validate_cart: "Bestätigen Sie den Warenkorb"
         offline_payment: "Zahlung vor Ort"
