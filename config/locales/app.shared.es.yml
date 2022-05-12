@@ -463,6 +463,7 @@ es:
         slot_tags: "Slot tags"
         user_tags: "User tags"
         no_tags: "No tags"
+        user_validation_required_alert: "Attention !</br>Your administrator must validate your account. You will then be able to access all the booking features."
       #feature-tour modal
       tour:
         previous: "Previous"
