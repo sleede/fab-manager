@@ -41,7 +41,7 @@ export const ChangeGroup: React.FC<ChangeGroupProps> = ({ user, onSuccess, onErr
   const { handleSubmit, control } = useForm();
 
   useEffect(() => {
-    GroupAPI.index({ disabled: false, admins: false }).then(setGroups).catch(onError);
+    GroupAPI.index({ disabled: false, admins: user?.role === 'admin' }).then(setGroups).catch(onError);
     MemberAPI.current().then(setOperator).catch(onError);
     SettingAPI.get(SettingName.UserChangeGroup).then((setting) => {
       setAllowedUserChangeGoup(setting.value === 'true');
