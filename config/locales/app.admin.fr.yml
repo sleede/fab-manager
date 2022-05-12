@@ -1000,7 +1000,7 @@ fr:
         find_below_the_proof_of_identity_files: "Retrouvez ci-dessous, les justificatifs déposés par le membre."
         save: "Enregistrer"
         to_complete: "À compléter"
-        proof_of_identity_refusal: "Refus du justificatif"
+        proof_of_identity_refusal: "Refus du document"
         refuse_proof_of_identity_files: "Refus du justificatif"
         refuse_proof_of_identity_files_info: "Après vérification, vous pouvez notifier le membre que le ou les justificatifs déposés ne sont pas recevables. Vous pouvez préciser les motifs de votre refus et lui indiquer les actions à mettre en oeuvre. Le membre sera notifié par mail."
         confirm: "Valider"
