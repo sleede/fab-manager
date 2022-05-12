@@ -15,6 +15,7 @@ zu:
         dashboard: "crwdns8817:0crwdne8817:0"
         my_profile: "crwdns8819:0crwdne8819:0"
         my_settings: "crwdns8821:0crwdne8821:0"
+        my_proof_of_identity_files: "crwdns22976:0crwdne22976:0"
         my_projects: "crwdns8823:0crwdne8823:0"
         my_trainings: "crwdns8825:0crwdne8825:0"
         my_events: "crwdns8827:0crwdne8827:0"
@@ -91,6 +92,8 @@ zu:
         i_ve_read_and_i_accept_: "crwdns8947:0crwdne8947:0"
         _the_fablab_policy: "crwdns8949:0crwdne8949:0"
         field_required: "crwdns8951:0crwdne8951:0"
+        profile_custom_field_is_required: "crwdns22978:0{FEILD}crwdne22978:0"
+        user_proof_of_identity_files_is_required: "crwdns22980:0{GROUP}crwdne22980:0"
         unexpected_error_occurred: "crwdns8953:0crwdne8953:0"
         used_for_statistics: "crwdns8955:0crwdne8955:0"
         used_for_invoicing: "crwdns8957:0crwdne8957:0"
@@ -139,7 +142,7 @@ zu:
       #home page
       home:
         latest_documented_projects: "crwdns9005:0crwdne9005:0"
-        follow_us: "crwdns9007:0crwdne9007:0"
+        follow_us: "crwdns23110:0crwdne23110:0"
         latest_tweets: "crwdns9009:0crwdne9009:0"
         latest_registered_members: "crwdns9011:0crwdne9011:0"
         create_an_account: "crwdns9013:0crwdne9013:0"

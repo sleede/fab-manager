@@ -33,4 +33,8 @@ class CartItem::PrepaidPack < CartItem::BaseItem
       statistic_profile_id: StatisticProfile.find_by(user: @customer).id
     )
   end
+
+  def type
+    'pack'
+  end
 end

@@ -454,16 +454,24 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
       });
       // on tour end, save the status in database
       uitour.on('ended', function () {
-        if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile.tours.indexOf('settings') < 0) {
+        if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile_attributes.tours.indexOf('settings') < 0) {
           Member.completeTour({ id: $scope.currentUser.id }, { tour: 'settings' }, function (res) {
-            $scope.currentUser.profile.tours = res.tours;
+            $scope.currentUser.profile_attributes.tours = res.tours;
           });
         }
       });
       // if the user has never seen the tour, show him now
-      if ($scope.allSettings.feature_tour_display !== 'manual' && $scope.currentUser.profile.tours.indexOf('settings') < 0) {
+      if ($scope.allSettings.feature_tour_display !== 'manual' && $scope.currentUser.profile_attributes.tours.indexOf('settings') < 0) {
         uitour.start();
       }
+    };
+
+    $scope.onSuccess = function (message) {
+      growl.success(message);
+    };
+
+    $scope.onError = function (message) {
+      growl.error(message);
     };
 
     /* PRIVATE SCOPE */
@@ -522,10 +530,10 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
         if (newValue === oldValue) return;
 
         if (newValue === 'session') {
-          $scope.currentUser.profile.tours = Fablab.sessionTours;
+          $scope.currentUser.profile_attributes.tours = Fablab.sessionTours;
         } else if (newValue === 'once') {
           Member.get({ id: $scope.currentUser.id }, function (user) {
-            $scope.currentUser.profile.tours = user.profile.tours;
+            $scope.currentUser.profile_attributes.tours = user.profile_attributes.tours;
           });
         }
       });

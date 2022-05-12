@@ -29,4 +29,8 @@ class CartItem::PaymentSchedule
 
     { schedule: schedule, total: total_amount }
   end
+
+  def type
+    'subscription'
+  end
 end

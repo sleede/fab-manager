@@ -12,5 +12,8 @@
         </ui-select-choices>
     </ui-select>
     {{member}}
+    <div class="alert alert-danger m-t" style="margin-bottom: 0 !important;" ng-if="enableUserValidationRequired && ctrl.member.id && !ctrl.member.validated_at">
+      <span translate>{{ 'app.shared.member_select.member_not_validated' }}</span>
+    </div>
   </div>
 </div>

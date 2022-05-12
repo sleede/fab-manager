@@ -17,6 +17,7 @@ export interface IFablab {
   weekStartingDay: string,
   d3DateFormat: string,
   uibDateFormat: string,
+  maxProofOfIdentityFileSize: number,
   sessionTours: Array<string>,
   translations: {
     app: {

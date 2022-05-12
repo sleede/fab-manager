@@ -36,7 +36,7 @@ Application.Controllers.controller('CompleteProfileController', ['$scope', '$roo
     $scope.groups = groupsPromise;
 
     // current user, contains information retrieved from the SSO
-    $scope.user = memberPromise;
+    $scope.user = cleanUser(memberPromise);
 
     // disallow the user to change his password as he connect from SSO
     $scope.preventPassword = true;
@@ -91,8 +91,8 @@ Application.Controllers.controller('CompleteProfileController', ['$scope', '$roo
           });
         });
       } else {
-        $scope.user.profile.user_avatar = content.profile.user_avatar;
-        Auth._currentUser.profile.user_avatar = content.profile.user_avatar;
+        $scope.user.profile_attributes.user_avatar_attributes = content.profile_attributes.user_avatar_attributes;
+        Auth._currentUser.profile_attributes.user_avatar_attributes = content.profile_attributes.user_avatar_attributes;
         $scope.user.name = content.name;
         Auth._currentUser.name = content.name;
         $scope.user = content;
@@ -211,6 +211,26 @@ Application.Controllers.controller('CompleteProfileController', ['$scope', '$roo
       return !$scope.activeProvider.previous_provider || $scope.activeProvider.previous_provider.id === $scope.activeProvider.id;
     };
 
+    /**
+     * Callback triggered when an error is raised on a lower-level component
+     * @param message {string}
+     */
+    $scope.onError = function (message) {
+      growl.error(message);
+    };
+
+    /**
+     * Callback triggered when the user was successfully updated
+     * @param user {object} the updated user
+     */
+    $scope.onSuccess = function (user) {
+      $scope.currentUser = _.cloneDeep(user);
+      Auth._currentUser = _.cloneDeep(user);
+      $rootScope.currentUser = _.cloneDeep(user);
+      growl.success(_t('app.logged.profile_completion.your_profile_has_been_successfully_updated'));
+      $state.go('app.public.home');
+    };
+
     /* PRIVATE SCOPE */
 
     /**
@@ -220,11 +240,18 @@ Application.Controllers.controller('CompleteProfileController', ['$scope', '$roo
       CSRF.setMetaTags();
 
       // init the birth date to JS object
-      $scope.user.statistic_profile.birthday = $scope.user.statistic_profile.birthday ? moment($scope.user.statistic_profile.birthday).toDate() : undefined;
+      $scope.user.statistic_profile_attributes.birthday = $scope.user.statistic_profile_attributes.birthday ? moment($scope.user.statistic_profile_attributes.birthday).toDate() : undefined;
 
       // bind fields protection with sso fields
       angular.forEach(activeProviderPromise.mapping, function (map) { $scope.preventField[map] = true; });
     };
+
+    // prepare the user for the react-hook-form
+    function cleanUser (user) {
+      delete user.$promise;
+      delete user.$resolved;
+      return user;
+    }
 
     // !!! MUST BE CALLED AT THE END of the controller
     return initialize();

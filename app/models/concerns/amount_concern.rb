@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Read and write the amount attribute, after converting to/from cents.
 module AmountConcern
   extend ActiveSupport::Concern
 

@@ -11,5 +11,3 @@ if @provider.providable_type == DatabaseProvider.name
 else
   json.link_to_sso_connect '/sso-redirect'
 end
-
-json.domain @provider.providable.domain if @provider.providable_type == OAuth2Provider.name

@@ -307,8 +307,8 @@ Application.Controllers.controller('ShowSpaceController', ['$scope', '$state', '
  * per slots.
  */
 
-Application.Controllers.controller('ReserveSpaceController', ['$scope', '$transition$', 'Auth', '$timeout', 'Availability', 'Member', 'plansPromise', 'groupsPromise', 'settingsPromise', 'spacePromise', '_t', 'uiCalendarConfig', 'CalendarConfig', 'Reservation',
-  function ($scope, $transition$, Auth, $timeout, Availability, Member, plansPromise, groupsPromise, settingsPromise, spacePromise, _t, uiCalendarConfig, CalendarConfig, Reservation) {
+Application.Controllers.controller('ReserveSpaceController', ['$scope', '$transition$', 'Auth', '$timeout', 'Availability', 'Member', 'plansPromise', 'groupsPromise', 'settingsPromise', 'spacePromise', '_t', 'uiCalendarConfig', 'CalendarConfig', 'Reservation', 'helpers', 'AuthService',
+  function ($scope, $transition$, Auth, $timeout, Availability, Member, plansPromise, groupsPromise, settingsPromise, spacePromise, _t, uiCalendarConfig, CalendarConfig, Reservation, helpers, AuthService) {
     /* PRIVATE STATIC CONSTANTS */
 
     // Color of the selected event backgound
@@ -382,6 +382,9 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$transi
 
     // Global config: message to the end user concerning the space reservation
     $scope.spaceExplicationsAlert = settingsPromise.space_explications_alert;
+
+    // Global config: is the user validation required ?
+    $scope.enableUserValidationRequired = settingsPromise.user_validation_required === 'true';
 
     /**
      * Change the last selected slot's appearance to looks like 'added to cart'
@@ -523,6 +526,10 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$transi
       }, 50);
     };
 
+    $scope.canSelectPlan = function () {
+      return helpers.isUserValidatedByType($scope.ctrl.member, $scope.settings, 'subscription');
+    };
+
     /**
      * Check if the provided plan is currently selected
      * @param plan {Object} Resource plan
@@ -617,6 +624,9 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$transi
      * @see http://fullcalendar.io/docs/mouse/eventClick/
      */
     const calendarEventClickCb = function (event, jsEvent, view) {
+      if (!AuthService.isAuthorized(['admin', 'manager']) && (helpers.isUserValidationRequired($scope.settings, 'space') && !helpers.isUserValidated($scope.ctrl.member))) {
+        return;
+      }
       $scope.selectedEvent = event;
       $scope.selectionTime = new Date();
     };

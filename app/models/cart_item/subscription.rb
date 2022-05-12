@@ -37,4 +37,8 @@ class CartItem::Subscription < CartItem::BaseItem
       start_at: @start_at
     )
   end
+
+  def type
+    'subscription'
+  end
 end

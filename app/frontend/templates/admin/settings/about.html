@@ -40,7 +40,7 @@
                      }'>
 
                 </div>
-                <span class="help-block text-info text-xs"><i class="fa fa-lightbulb-o"></i> {{ 'app.admin.settings.drag_and_drop_to_insert_images' | translate }}</span>
+                <span class="help-block text-info text-xs"><i class="fa fa-lightbulb-o"></i> {{ 'app.admin.settings.drag_and_drop_to_insert_images' | translate }} (max. 1200px)</span>
                 <button name="button" class="btn btn-warning" ng-click="save(aboutBodySetting)" translate>{{ 'app.shared.buttons.save' }}</button>
             </div>
             <div class="col-md-4 col-md-offset-2">
@@ -56,8 +56,10 @@
                 <span class="help-block text-info text-xs"><i class="fa fa-lightbulb-o"></i> {{ 'app.admin.settings.shift_enter_to_force_carriage_return' | translate }}</span>
                 <button name="button" class="btn btn-warning" ng-click="save(aboutContactsSetting)" translate>{{ 'app.shared.buttons.save' }}</button>
             </div>
-
+            <div class="col-md-4 col-md-offset-2 m-t-xl">
+              <h2 translate>{{ 'app.admin.settings.about_follow_us' }}</h2>
+              <fab-socials on-success="onSuccess" on-error="onError"></fab-socials>
+            </div>
         </div>
-
     </div>
 </div>

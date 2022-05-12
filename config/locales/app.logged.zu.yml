@@ -4,18 +4,7 @@ zu:
       #user's profile completion page when logging from an SSO provider
       profile_completion:
         confirm_your_new_account: "crwdns8505:0crwdne8505:0"
-        you_ve_just_created_a_new_account_on_the_fablab_by_logging_from: "crwdns8507:0GENDER={GENDER}crwdnd8507:0NAME={NAME}crwdne8507:0"
-        we_need_some_more_details: "crwdns8509:0crwdne8509:0"
-        your_email_is_already_used_by_another_account_on_the_platform: "crwdns8511:0crwdne8511:0"
         or: "crwdns8513:0crwdne8513:0"
-        please_fill_the_following_form: "crwdns8515:0crwdne8515:0"
-        some_data_may_have_already_been_provided_by_provider_and_cannot_be_modified: "crwdns8517:0{NAME}crwdne8517:0"
-        then_click_on_: "crwdns8519:0crwdne8519:0"
-        _to_start_using_the_application: "crwdns8521:0crwdne8521:0"
-        new_on_this_platform: "crwdns8523:0crwdne8523:0"
-        your_email_: "crwdns8525:0crwdne8525:0"
-        _is_currently_associated_with_another_account_on_this_platform: "crwdns8527:0crwdne8527:0"
-        please_click_to_change_email_associated_with_your_PROVIDER_account: "crwdns8529:0{PROVIDER}crwdne8529:0"
         do_you_already_have_an_account: "crwdns8531:0crwdne8531:0"
         do_not_fill_the_form_beside_but_specify_here_the_code_you_ve_received_by_email_to_recover_your_access: "crwdns8533:0crwdne8533:0"
         just_specify_code_here_to_recover_access: "crwdns8535:0crwdne8535:0"
@@ -33,12 +22,21 @@ zu:
         user_s_profile_is_required: "crwdns8559:0crwdne8559:0"
         i_ve_read_and_i_accept_: "crwdns8561:0crwdne8561:0"
         _the_fablab_policy: "crwdns8563:0crwdne8563:0"
-        change_my_data: "crwdns8565:0crwdne8565:0"
-        sync_my_profile: "crwdns8567:0crwdne8567:0"
-        once_your_data_are_up_to_date_: "crwdns8569:0crwdne8569:0"
-        _click_on_the_synchronization_button_opposite_: "crwdns8571:0crwdne8571:0"
-        _disconnect_then_reconnect_: "crwdns8573:0crwdne8573:0"
-        _for_your_changes_to_take_effect: "crwdns8575:0crwdne8575:0"
+        your_profile_has_been_successfully_updated: "crwdns23076:0crwdne23076:0"
+        completion_header_info:
+          rules_changed: "crwdns23078:0crwdne23078:0"
+          sso_intro: "crwdns23080:0GENDER={GENDER}crwdnd23080:0NAME={NAME}crwdne23080:0"
+          duplicate_email_info: "crwdns23082:0crwdne23082:0"
+          details_needed_info: "crwdns23084:0crwdne23084:0"
+        profile_form_option:
+          title: "crwdns23086:0crwdne23086:0"
+          please_fill: "crwdns23088:0crwdne23088:0"
+          disabled_data_from_sso: "crwdns23090:0{NAME}crwdne23090:0"
+          confirm_instructions_html: "crwdns23092:0crwdne23092:0"
+          duplicate_email_html: "crwdns23094:0{EMAIL}crwdnd23094:0{PROVIDER}crwdne23094:0"
+          edit_profile: "crwdns23096:0crwdne23096:0"
+          after_edition_info_html: "crwdns23098:0crwdne23098:0"
+          sync_profile: "crwdns23100:0crwdne23100:0"
       dashboard:
         #dashboard: public profile
         profile:
@@ -91,6 +89,7 @@ zu:
           _click_on_the_synchronization_button_opposite_: "crwdns8665:0crwdne8665:0"
           _disconnect_then_reconnect_: "crwdns8667:0crwdne8667:0"
           _for_your_changes_to_take_effect: "crwdns8669:0crwdne8669:0"
+          your_profile_has_been_successfully_updated: "crwdns23102:0crwdne23102:0"
         #dashboard: my projects
         projects:
           you_dont_have_any_projects: "crwdns8671:0crwdne8671:0"

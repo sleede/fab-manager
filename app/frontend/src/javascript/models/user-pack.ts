@@ -1,3 +1,4 @@
+import { TDateISO } from '../typings/date-iso';
 
 export interface UserPackIndexFilter {
   user_id?: number,
@@ -7,7 +8,7 @@ export interface UserPackIndexFilter {
 
 export interface UserPack {
   minutes_used: number,
-  expires_at: Date,
+  expires_at: TDateISO,
   prepaid_pack: {
     minutes: number,
   }

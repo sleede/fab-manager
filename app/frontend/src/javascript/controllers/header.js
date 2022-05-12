@@ -1,7 +1,7 @@
 'use strict';
 
-Application.Controllers.controller('HeaderController', ['$scope', '$transitions', '$state', 'settingsPromise',
-  function ($scope, $transitions, $state, settingsPromise) {
+Application.Controllers.controller('HeaderController', ['$scope', '$transitions', '$state', 'settingsPromise', 'ProofOfIdentityType', 'AuthService',
+  function ($scope, $transitions, $state, settingsPromise, ProofOfIdentityType, AuthService) {
     $scope.aboutPage = ($state.current.name === 'app.public.about');
 
     $transitions.onStart({}, function (trans) {
@@ -13,6 +13,14 @@ Application.Controllers.controller('HeaderController', ['$scope', '$transitions'
      */
     $scope.registrationEnabled = function () {
       return settingsPromise.public_registrations === 'true';
+    };
+
+    $scope.dropdownOnToggled = function (open) {
+      if (open) {
+        ProofOfIdentityType.query({ group_id: $scope.currentUser.group_id }, function (proofOfIdentityTypes) {
+          $scope.hasProofOfIdentityTypes = proofOfIdentityTypes.length > 0;
+        });
+      }
     };
   }
 ]);

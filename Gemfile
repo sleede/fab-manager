@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.4'
+gem 'rails', '~> 5.2.7'
 # Used by rails 5.2 to reduce the app boot time by over 50%
 gem 'bootsnap'
 # Use Puma as web server
@@ -69,6 +69,7 @@ gem 'devise', '>= 4.6.0'
 
 gem 'omniauth', '~> 1.9.0'
 gem 'omniauth-oauth2'
+gem 'omniauth_openid_connect'
 gem 'omniauth-rails_csrf_protection', '~> 0.1'
 
 gem 'rolify'
@@ -141,4 +142,4 @@ gem 'icalendar'
 gem 'tzinfo-data'
 
 # compilation of dynamic stylesheets (home page & theme)
-gem 'sassc'
+gem 'sassc', '= 2.1.0'

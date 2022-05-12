@@ -39,9 +39,10 @@
       <div class="row">
         <div class="col-md-10 col-md-offset-1">
           <boolean-setting
-              name="fab_analytics"
-              settings="allSettings"
-              label="app.admin.settings.fab_analytics">
+              name="'fab_analytics'"
+              label="'app.admin.settings.fab_analytics' | translate"
+              on-success="onSuccess"
+              on-error="onError">
           </boolean-setting>
           <p>
             <span translate>{{ 'app.admin.settings.privacy.about_analytics' }}</span>

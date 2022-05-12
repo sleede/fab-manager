@@ -31,6 +31,9 @@ imports
 # accounting archives
 accounting
 
+# Proof of identity files
+proof_of_identity_files
+
 # Development files
 Vagrantfile
 provision

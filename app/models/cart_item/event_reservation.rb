@@ -49,6 +49,10 @@ class CartItem::EventReservation < CartItem::Reservation
     @reservable.title
   end
 
+  def type
+    'event'
+  end
+
   protected
 
   def tickets_params

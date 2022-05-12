@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import _ from 'lodash';
 import { Plan } from '../../models/plan';
-import { User, UserRole } from '../../models/user';
+import { User } from '../../models/user';
 import { Loader } from '../base/loader';
 import '../../lib/i18n';
 import FormatLib from '../../lib/format';
@@ -14,6 +14,7 @@ interface PlanCardProps {
   subscribedPlanId?: number,
   operator: User,
   isSelected: boolean,
+  canSelectPlan: boolean,
   onSelectPlan: (plan: Plan) => void,
   onLoginRequested: () => void,
 }
@@ -21,7 +22,7 @@ interface PlanCardProps {
 /**
  * This component is a "card" (visually), publicly presenting the details of a plan and allowing a user to subscribe.
  */
-const PlanCardComponent: React.FC<PlanCardProps> = ({ plan, userId, subscribedPlanId, operator, onSelectPlan, isSelected, onLoginRequested }) => {
+const PlanCardComponent: React.FC<PlanCardProps> = ({ plan, userId, subscribedPlanId, operator, onSelectPlan, isSelected, onLoginRequested, canSelectPlan }) => {
   const { t } = useTranslation('public');
   /**
    * Return the formatted localized amount of the given plan (eg. 20.5 => "20,50 €")
@@ -52,13 +53,13 @@ const PlanCardComponent: React.FC<PlanCardProps> = ({ plan, userId, subscribedPl
    * Check if the user can subscribe to the current plan, for himself
    */
   const canSubscribeForMe = (): boolean => {
-    return operator?.role === UserRole.Member || (operator?.role === UserRole.Manager && userId === operator?.id);
+    return operator?.role === 'member' || (operator?.role === 'manager' && userId === operator?.id);
   };
   /**
    * Check if the user can subscribe to the current plan, for someone else
    */
   const canSubscribeForOther = (): boolean => {
-    return operator?.role === UserRole.Admin || (operator?.role === UserRole.Manager && userId !== operator?.id);
+    return operator?.role === 'admin' || (operator?.role === 'manager' && userId !== operator?.id);
   };
   /**
    * Check it the user has subscribed to this plan or not
@@ -88,7 +89,9 @@ const PlanCardComponent: React.FC<PlanCardProps> = ({ plan, userId, subscribedPl
    * Callback triggered when the user select the plan
    */
   const handleSelectPlan = (): void => {
-    onSelectPlan(plan);
+    if (canSelectPlan) {
+      onSelectPlan(plan);
+    }
   };
   /**
    * Callback triggered when a visitor (not logged-in user) select a plan
@@ -141,10 +144,10 @@ const PlanCardComponent: React.FC<PlanCardProps> = ({ plan, userId, subscribedPl
   );
 };
 
-export const PlanCard: React.FC<PlanCardProps> = ({ plan, userId, subscribedPlanId, operator, onSelectPlan, isSelected, onLoginRequested }) => {
+export const PlanCard: React.FC<PlanCardProps> = ({ plan, userId, subscribedPlanId, operator, onSelectPlan, isSelected, onLoginRequested, canSelectPlan }) => {
   return (
     <Loader>
-      <PlanCardComponent plan={plan} userId={userId} subscribedPlanId={subscribedPlanId} operator={operator} isSelected={isSelected} onSelectPlan={onSelectPlan} onLoginRequested={onLoginRequested}/>
+      <PlanCardComponent plan={plan} userId={userId} subscribedPlanId={subscribedPlanId} operator={operator} isSelected={isSelected} onSelectPlan={onSelectPlan} onLoginRequested={onLoginRequested} canSelectPlan={canSelectPlan}/>
     </Loader>
   );
 };

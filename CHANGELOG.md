@@ -2,9 +2,50 @@
 
 ## next deploy
 
+## v5.4.0 2022 May 12
+
+- Option to disable the 'machines' module
+- Option to prevent users from changing their group
+- Ability to define social networks for the FabLab "about page"
+- Improved security when changing passwords
+- Support for OpenID Connect in Single-Sign-On authentication providers
+- ICS file attached to the reservation notification email
+- Refactored the user profile edition form
+- Improved the profile completion page
+- When generating an avoir, the option "by_wallet" is not present anymore if wallet module is disabled
+- No longer needed to recompile the assets when switching the authentication provider
+- Updated the documentation about the minimum docker version
+- Updated nodejs version to 16.13.2 for dev environment, to reflect production version
+- Changed the apparence of the modal dialogs (React): no more logo and the close button appears in full-text in the top right corner.
+- Use react-hook-form to manage and validate forms
+- Use of CSS variables for main and secondary colors in react components styles
+- New text editor
+- Change font family to "Work Sans"
+- Updated eslint to v8 and eslint related packages to their latest versions
+- Updated typescript to v4.6.3
+- Updated react-select to v5.2.2
+- Updated sidekiq-scheduler to v4.0.0
+- Updated icalendar to 2.7.1
+- Webpack overlay will now report eslint issues
+- Linted all code according to eslint rules
+- Fix a bug: when enabled, the statistics module is still not shown in the menu
+- Feature User validation, an option for allow admin validate account of user to active/disable the reservation
+- Feature Proof of identity by group, allow user upload his proof of identity and admin can check it for validate the account of user
+- Feature Organization custom fields
+- Fix a bug: Refused to connect to 'wss://localhost:3035/ws' when using a https tunnel in development mode
+- Fix a bug: edge case of birthday in the future in seeds.rb, we should use Date.current instead of DateTime.current since birthday is a date (see https://github.com/sleede/fab-manager/issues/344)
+- Fix a security issue: updated ruby to 2.6.10 to fix [CVE-2022-28739](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-28739)
+- Fix a security issue: updated rails to 5.2.7.1 to fix [CVE-2022-22577](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-22577) and [CVE-2022-27777](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-27777)
+- [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
+- [TODO DEPLOY] add the `MAX_PROOF_OF_IDENTITY_FILE_SIZE` environment variable (see [doc/environment.md](doc/environment.md#MAX_PROOF_OF_IDENTITY_FILE_SIZE) for configuration details)
+- [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/mount-proof-of-identity-files.sh | bash`
+- [TODO DEPLOY] `rails db:migrate`
+- [TODO DEPLOY] `rails db:seed`
+- [TODO DEPLOY] -> (only dev) `bundle install`
+
 ## v5.3.13 2022 May 02
 
-- Fix a bug: With PayZen, when there was more than one transaction (for ex: 1 failed atempt + 1 successful atemp), the order was not considered PAID because only the first transaction was checked (https://app.clickup.com/t/28zvhwy)
+- Fix a bug: With PayZen, when there was more than one transaction (for ex: 1 failed atempt + 1 successful atemp), the order was not considered PAID because only the first transaction was checked
 
 ## v5.3.12 2022 April 20
 
@@ -439,7 +480,7 @@
 
 ## v4.7.14 2021 September 30
 
-- Fix a bug: updated sassc to 2.4.0 to fix ruby runtime error on some CPU architectures
+- Fix a bug: update sassc to 2.4.0 to try to fix #270 (ruby runtime error on some CPU architectures)
 
 ## v4.7.13 2021 June 11
 

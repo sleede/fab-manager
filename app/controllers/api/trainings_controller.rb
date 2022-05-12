@@ -8,14 +8,7 @@ class API::TrainingsController < API::ApiController
   before_action :set_training, only: %i[update destroy]
 
   def index
-    @requested_attributes = params[:requested_attributes]
-    @trainings = policy_scope(Training)
-    @trainings = @trainings.where(public_page: true) if params[:public_page]
-
-    return unless attribute_requested?(@requested_attributes, 'availabilities')
-
-    @trainings = @trainings.includes(availabilities: [slots: [reservation: [user: %i[profile trainings]]]])
-                           .order('availabilities.start_at DESC')
+    @trainings = TrainingService.list(params)
   end
 
   def show

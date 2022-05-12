@@ -46,6 +46,9 @@
 # Archives of closed accounting periods
 /accounting/*
 
+# Proof of identity files
+/proof_of_identity_files/*
+
 .DS_Store
 
 .vagrant

@@ -1,0 +1,51 @@
+.dashboard {
+  .dashboard-change-group {
+    border: 0;
+    margin: 0;
+
+    h3 {
+      padding: 0;
+      text-transform: uppercase;
+      border: 0;
+    }
+
+    .display,
+    .change-group-form {
+      padding: 10px 0 0;
+      margin-bottom: 10px;
+    }
+
+    .display {
+      .current-group {
+        margin-bottom: 10px;
+        background-color: #fcf8e3;
+        border-color: #faebcc;
+        color: #8a6d3b;
+      }
+      .request-change-btn {
+        width: auto;
+        text-transform: uppercase;
+        border-radius: 3px;
+        font-size: 12px;
+        line-height: 18px;
+        padding: 5px 10px;
+        height: 30px;
+        background-color: var(--secondary);
+        border-color: var(--secondary);
+
+        &:hover {
+          background-color: white;
+        }
+      }
+    }
+
+    .actions {
+      .fab-button {
+        font-size: 12px;
+        line-height: 18px;
+        padding: 5px 10px;
+        height: 30px;
+      }
+    }
+  }
+}

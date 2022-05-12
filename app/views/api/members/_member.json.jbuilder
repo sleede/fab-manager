@@ -5,53 +5,55 @@ json.role member.roles.first.name
 json.name member.profile.full_name
 json.need_completion member.need_completion?
 json.ip_address member.current_sign_in_ip.to_s
+json.mapped_from_sso member.mapped_from_sso&.split(',')
 
-json.profile do
-  json.id member.profile.id
+json.profile_attributes do
+  json.extract! member.profile, :id, :first_name, :last_name, :interest, :software_mastered, :phone, :website, :job
   if member.profile.user_avatar
-    json.user_avatar do
+    json.user_avatar_attributes do
       json.id member.profile.user_avatar.id
       json.attachment_url "#{member.profile.user_avatar.attachment_url}?#{member.profile.user_avatar.updated_at.to_i}"
     end
   end
-  json.first_name member.profile.first_name
-  json.last_name member.profile.last_name
-  json.interest member.profile.interest
-  json.software_mastered member.profile.software_mastered
-  json.phone member.profile.phone
-  json.website member.profile.website
-  json.job member.profile.job
-  json.extract! member.profile, :facebook, :twitter, :google_plus, :viadeo, :linkedin, :instagram, :youtube, :vimeo, :dailymotion, :github, :echosciences, :pinterest, :lastfm, :flickr
+  json.extract! member.profile, :facebook, :twitter, :viadeo, :linkedin, :instagram, :youtube, :vimeo, :dailymotion, :github, :echosciences, :pinterest, :lastfm, :flickr
   json.tours member.profile.tours&.split || []
 end
 
-json.invoicing_profile do
+json.invoicing_profile_attributes do
   json.id member.invoicing_profile.id
   if member.invoicing_profile.address
-    json.address do
+    json.address_attributes do
       json.id member.invoicing_profile.address.id
       json.address member.invoicing_profile.address.address
     end
   end
 
   if member.invoicing_profile.organization
-    json.organization do
-      json.id member.invoicing_profile.organization.id
-      json.name member.invoicing_profile.organization.name
+    json.organization_attributes do
+      json.extract! member.invoicing_profile.organization, :id, :name
       if member.invoicing_profile.organization.address
-        json.address do
+        json.address_attributes do
           json.id member.invoicing_profile.organization.address.id
           json.address member.invoicing_profile.organization.address.address
         end
       end
     end
   end
+
+  json.user_profile_custom_fields_attributes member.invoicing_profile.user_profile_custom_fields
+    .joins(:profile_custom_field).where('profile_custom_fields.actived' => true).order('profile_custom_fields.id ASC') do |f|
+    json.id f.id
+    json.invoicing_profile_id f.invoicing_profile_id
+    json.profile_custom_field_id f.profile_custom_field_id
+    json.value f.value
+  end
 end
 
-json.statistic_profile do
+json.statistic_profile_attributes do
   json.id member.statistic_profile.id
   json.gender member.statistic_profile.gender.to_s
   json.birthday member.statistic_profile&.birthday&.to_date&.iso8601
+  json.training_ids member.statistic_profile&.training_ids
 end
 
 if member.subscribed_plan
@@ -85,3 +87,5 @@ json.machine_credits member.machine_credits do |mc|
 end
 # TODO, missing space_credits?
 json.last_sign_in_at member.last_sign_in_at.iso8601 if member.last_sign_in_at
+
+json.validated_at member.validated_at

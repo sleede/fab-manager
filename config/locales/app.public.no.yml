@@ -15,6 +15,7 @@
         dashboard: "Kontrollpanel"
         my_profile: "Min profil"
         my_settings: "Mine innstillinger"
+        my_proof_of_identity_files: "My proof of identity"
         my_projects: "Mine prosjekter"
         my_trainings: "Mine opplæringer/kurs"
         my_events: "Mine arrangementer"
@@ -91,6 +92,8 @@
         i_ve_read_and_i_accept_: "Jeg har lest og aksepterer"
         _the_fablab_policy: "Les policyen vår"
         field_required: "Nødvendig felt"
+        profile_custom_field_is_required: "{FEILD} is required"
+        user_proof_of_identity_files_is_required: "Attention !</br>You have declared to be \"{GROUP}\", proof of identity may be requested."
         unexpected_error_occurred: "En uventet feil oppstod, vennligst forsøk igjen."
         used_for_statistics: "Dataene vil bli brukt til statistiske formål"
         used_for_invoicing: "Disse dataene vil bli brukt i fakturering"
@@ -139,7 +142,7 @@
       #home page
       home:
         latest_documented_projects: "De siste dokumenterte prosjektene"
-        follow_us: "Følg oss"
+        follow_us: "Follow us"
         latest_tweets: "Siste tweets"
         latest_registered_members: "Siste registrerte medlemmer"
         create_an_account: "Lag en konto"

@@ -21,6 +21,10 @@ class CartItem::MachineReservation < CartItem::Reservation
     )
   end
 
+  def type
+    'machine'
+  end
+
   protected
 
   def credits

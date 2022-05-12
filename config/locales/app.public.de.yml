@@ -15,6 +15,7 @@ de:
         dashboard: "Dashboard"
         my_profile: "Mein Profil"
         my_settings: "Persönliche Einstellungen"
+        my_proof_of_identity_files: "My proof of identity"
         my_projects: "Meine Projekte"
         my_trainings: "Meine Trainings"
         my_events: "Meine Veranstaltungen"
@@ -91,6 +92,8 @@ de:
         i_ve_read_and_i_accept_: "Ich habe gelesen und akzeptiere"
         _the_fablab_policy: "die FabLab Richtlinie"
         field_required: "Erforderliche Felder"
+        profile_custom_field_is_required: "{FEILD} is required"
+        user_proof_of_identity_files_is_required: "Attention !</br>You have declared to be \"{GROUP}\", proof of identity may be requested."
         unexpected_error_occurred: "Ein unerwarteter Fehler ist aufgetreten. Bitte versuche es später erneut."
         used_for_statistics: "Diese Daten werden für statistische Zwecke verwendet"
         used_for_invoicing: "Diese Daten werden für Abrechnungszwecke verwendet"
@@ -139,7 +142,7 @@ de:
       #home page
       home:
         latest_documented_projects: "Die neuesten dokumentierten Projekte"
-        follow_us: "Folge uns"
+        follow_us: "Follow us"
         latest_tweets: "Die neuesten Tweets"
         latest_registered_members: "Neueste registrierte Mitglieder"
         create_an_account: "Neues Konto einrichten"

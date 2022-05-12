@@ -11,7 +11,7 @@ import { PaymentSchedule } from '../../../models/payment-schedule';
  * A form component to collect the credit card details and to create the payment method on Stripe.
  * The form validation button must be created elsewhere, using the attribute form={formId}.
  */
-export const StripeForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, onError, children, className, paymentSchedule = false, cart, customer, operator, formId }) => {
+export const StripeForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, onError, children, className, paymentSchedule = false, cart, formId }) => {
   const { t } = useTranslation('shared');
 
   const stripe = useStripe();

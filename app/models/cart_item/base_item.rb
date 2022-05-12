@@ -26,4 +26,8 @@ class CartItem::BaseItem
   end
 
   def to_object; end
+
+  def type
+    ''
+  end
 end

@@ -15,6 +15,7 @@ es:
         dashboard: "Panel"
         my_profile: "My Perfil"
         my_settings: "Mis ajustes"
+        my_proof_of_identity_files: "My proof of identity"
         my_projects: "Mis proyectos"
         my_trainings: "Mis cursos"
         my_events: "Mis eventos"
@@ -91,6 +92,8 @@ es:
         i_ve_read_and_i_accept_: "He leido y acepto"
         _the_fablab_policy: "la política de FabLab"
         field_required: "Field required"
+        profile_custom_field_is_required: "{FEILD} is required"
+        user_proof_of_identity_files_is_required: "Attention !</br>You have declared to be \"{GROUP}\", proof of identity may be requested."
         unexpected_error_occurred: "An unexpected error occurred. Please try again later."
         used_for_statistics: "This data will be used for statistical purposes"
         used_for_invoicing: "This data will be used for billing purposes"
@@ -139,7 +142,7 @@ es:
       #home page
       home:
         latest_documented_projects: "Los últimos proyectos documentados"
-        follow_us: "Siguenos"
+        follow_us: "Follow us"
         latest_tweets: "Los últimos tweets"
         latest_registered_members: "Miembros más recientes"
         create_an_account: "Crear una cuenta"

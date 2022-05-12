@@ -24,12 +24,14 @@ pt:
       subject: "Seu grupo mudou"
       body:
         warning: "Você mudou de grupo. As inspeções podem ser realizadas no laboratório para verificar a legitimidade dessa mudança."
+        user_invalidated: "Your account is invalidated, please upload your new proof of identity to validate your account."
     notify_admin_user_group_changed:
       subject: "Um membro mudou de grupo"
       body:
         user_changed_group_html: "O usuário <em><strong>%{NAME}</strong></em> mudou de grupo."
         previous_group: "Grupo anterior:"
         new_group: "Novo grupo:"
+        user_invalidated: "The user's account is invalidated."
     notify_admin_subscription_extended:
       subject: "Uma assinatura foi estendida"
       body:
@@ -231,8 +233,8 @@ pt:
         users_subscriptions: "da lista de assinaturas"
         users_reservations: "da lista de reservas"
         availabilities_index: "as reservas disponíveis"
-        accounting_acd: "of the accounting data to ACD"
-        accounting_vat: "of the collected VAT data"
+        accounting_acd: "de dados contábeis para ACD"
+        accounting_vat: "do imposto coletado"
         click_to_download: "Arquivo do Excel gerado com êxito. Para fazer o download, clique"
         here: "aqui"
         file_type:
@@ -297,40 +299,40 @@ pt:
         schedule_in_your_dashboard_html: "Você pode encontrar a agenda de pagamento a qualquer momento a partir de %{DASHBOARD} no site do Fab Lab."
         your_dashboard: "seu dashboard"
     notify_admin_payment_schedule_error:
-      subject: "[URGENT] Card debit error"
+      subject: "[URGENT] Erro no débito do cartão"
       body:
-        remember: "In accordance with the %{REFERENCE} payment schedule, a debit by card of %{AMOUNT} was scheduled on %{DATE}."
-        error: "Unfortunately, an error occurred and this card debit was unable to complete successfully."
-        action: "Please then consult the %{GATEWAY} dashboard and contact the member as soon as possible to resolve the problem."
+        remember: "De acordo com o calendário de pagamento de %{REFERENCE}, um débito por cartão de %{AMOUNT} foi agendado em %{DATE}."
+        error: "Infelizmente, não foi possível completar o débito no cartão."
+        action: "Consulte o painel %{GATEWAY} e entre em contato com o membro o mais rápido possível para resolver o problema."
     notify_member_payment_schedule_error:
-      subject: "[URGENT] Card debit error"
+      subject: "[URGENT] Erro no débito do cartão"
       body:
-        remember: "In accordance with your %{REFERENCE} payment schedule, a debit by card of %{AMOUNT} was scheduled on %{DATE}."
-        error: "Unfortunately, an error occurred and this card debit was unable to complete successfully."
-        action: "Please contact a manager as soon as possible to resolve the problem."
+        remember: "De acordo com a sua agenda de pagamentos %{REFERENCE}, um débito por cartão de %{AMOUNT} foi agendado para %{DATE}."
+        error: "Infelizmente, não foi possível completar o débito no cartão."
+        action: "Entre em contato com um gerente o mais rápido possível para resolver o problema."
     notify_admin_payment_schedule_failed:
       subject: "[URGENT] Falha no débito do cartão"
       body:
         remember: "De acordo com o calendário de pagamento de %{REFERENCE}, um débito por cartão de %{AMOUNT} foi agendado em %{DATE}."
         error: "Infelizmente, não foi possível completar o débito no cartão com sucesso."
-        action: "Please contact the member as soon as possible, then go to the payment schedule management interface to resolve the problem. After a certain period of time, the card subscription could be cancelled."
+        action: "Por favor, entre em contato com o membro assim que possível, depois vá à interface de gestão de pagamento para resolver o problema. Após um período, a assinatura do cartão poderá ser cancelada."
     notify_member_payment_schedule_failed:
       subject: "[URGENT] Falha no débito do cartão"
       body:
         remember: "De acordo com a sua agenda de pagamentos %{REFERENCE}, um débito por cartão de %{AMOUNT} foi agendado para %{DATE}."
         error: "Infelizmente, não foi possível completar o débito no cartão com sucesso."
-        action_html: "Please check %{DASHBOARD} or contact a manager quickly, otherwise your subscription may be interrupted."
+        action_html: "Por favor, verifique %{DASHBOARD} ou entre em contato com um gerente assim que possível, caso contrário sua assinatura pode ser interrompida."
         your_dashboard: "seu dashboard"
     notify_admin_payment_schedule_gateway_canceled:
-      subject: "[URGENT] Payment schedule canceled by the payment gateway"
+      subject: "[URGENT] Agendamento de pagamento cancelado pelo gateway"
       body:
-        error: "The payment schedule %{REFERENCE} was canceled by the payment gateway (%{GATEWAY}). No further debits will be made on this payment mean."
-        action: "Please consult the payment schedule management interface and contact the member as soon as possible to resolve the problem."
+        error: "O agendamento do pagamento %{REFERENCE} foi cancelado pelo gateway de pagamento (%{GATEWAY}). Nenhum débito adicional será feito neste método de pagamento."
+        action: "Por favor, consulte a interface de gestão de pagamento e entre em contato com o membro assim que possível para resolver o problema."
     notify_member_payment_schedule_gateway_canceled:
-      subject: "[URGENT] Payment schedule canceled by the payment gateway"
+      subject: "[URGENT] Agendamento de pagamento cancelado pelo gateway"
       body:
-        error: "Your payment schedule %{REFERENCE} was canceled by the payment gateway. No further debits will be made on this payment mean."
-        action: "Please contact a manager as soon as possible to resolve the problem."
+        error: "O agendamento do pagamento %{REFERENCE} foi cancelado pelo gateway de pagamento. Nenhum débito adicional será feito neste método de pagamento."
+        action: "Entre em contato com um gerente o mais rápido possível para resolver o problema."
     notify_admin_payment_schedule_check_deadline:
       subject: "Prazo de pagamento"
       body:
@@ -338,10 +340,37 @@ pt:
         date: "Este é um lembrete para descontar o pagamento programado o mais rápido possível."
         confirm: "Não se esqueça de confirmar o recibo na interface de gestão de agenda de pagamento, para que a fatura correspondente seja gerada."
     notify_member_payment_schedule_transfer_deadline:
-      subject: "Payment deadline"
+      subject: "Prazo de pagamento"
       body:
-        remember: "In accordance with your %{REFERENCE} payment schedule, %{AMOUNT} was due to be debited on %{DATE}."
-        date: "This is a reminder to verify that the direct bank debit was successfull."
-        confirm: "Please confirm the receipt of funds in your payment schedule management interface, so that the corresponding invoice will be generated."
+        remember: "De acordo com a agenda de pagamento %{REFERENCE}, %{AMOUNT} deveria ser debitado em %{DATE}."
+        date: "Este é um lembrete para verificar se o débito bancário foi bem sucedido."
+        confirm: "Não se esqueça de confirmar o recibo na interface de gestão de pagamento, para que a fatura correspondente seja gerada."
+    notify_admin_user_proof_of_identity_files_created:
+      subject: "Proof of identity uploaded by a member"
+      body:
+        proof_of_identity_files_uploaded_below: "Member %{NAME} has uploaded the following proof of identity :"
+        validate_user: "Please validate this account"
+    notify_admin_user_proof_of_identity_files_updated:
+      subject: "Proof of identity is changed by m member"
+      body:
+        user_update_proof_of_identity_file: "Member %{NAME} has modified the proof of identity below:"
+        validate_user: "Please validate this account"
+    notify_user_is_validated:
+      subject: "The account is validated"
+      body:
+        account_validated: "Your account is valid."
+    notify_user_is_invalidated:
+      subject: "The account is invalid"
+      body:
+        account_invalidated: "Your account is invalid."
+    notify_user_proof_of_identity_refusal:
+      subject: "Your proof of identity are not accepted"
+      body:
+        user_proof_of_identity_files_refusal: "Your proof of identity are not accepted :"
+        action: "Please re-upload the new proof of identity."
+    notify_admin_user_proof_of_identity_refusal:
+      subject: "A member's proof of identity are not accepted"
+      body:
+        user_proof_of_identity_files_refusal: "Member %{NAME}'s proof of identity are rejected by %{OPERATOR}:"
     shared:
       hello: "Olá %{user_name}"

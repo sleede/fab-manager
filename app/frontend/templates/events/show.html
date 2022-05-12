@@ -178,7 +178,13 @@
             <span ng-show="reservations.length > 0" translate>{{ 'app.public.events_show.thanks_for_coming' }}</span>
             <a ui-sref="app.public.events_list" translate>{{ 'app.public.events_show.view_event_list' }}</a>
           </div>
-          <button class="btn btn-warning-full rounded btn-block text-sm" ng-click="reserveEvent()" ng-show="event.nb_free_places > 0 && !reserve.toReserve && now.isBefore(event.end_date)">{{ 'app.public.events_show.book' | translate }}</button>
+          <button class="btn btn-warning-full rounded btn-block text-sm" ng-click="reserveEvent()" ng-show="isShowReserveEventButton()">{{ 'app.public.events_show.book' | translate }}</button>
+          <uib-alert type="danger" ng-if="ctrl.member.id && !isUserValidatedByType()">
+            <p class="text-sm">
+              <i class="fa fa-warning"></i>
+              <span translate>{{ 'app.shared.cart.user_validation_required_alert' }}</span>
+            </p>
+          </uib-alert>
 
           <coupon show="reserve.totalSeats > 0 && ctrl.member" coupon="coupon.applied" total="reserve.totalNoCoupon" user-id="{{ctrl.member.id}}"></coupon>
         </div>

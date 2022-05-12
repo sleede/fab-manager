@@ -1,4 +1,10 @@
-<div class="widget panel b-a m m-t-lg" ng-if="user && !events.modifiable && !events.moved && !paidPlan">
+<uib-alert type="danger m" ng-if="user && !isUserValidatedByType(reservableType.toLowerCase())">
+  <p class="text-sm">
+    <i class="fa fa-warning"></i>
+    <span translate>{{ 'app.shared.cart.user_validation_required_alert' }}</span>
+  </p>
+</uib-alert>
+<div class="widget panel b-a m m-t-lg" ng-if="user && !events.modifiable && !events.moved && !paidPlan && isUserValidatedByType(reservableType.toLowerCase())">
   <div class="panel-heading b-b small">
     <h3 translate>{{ 'app.shared.cart.summary' }}</h3>
   </div>
@@ -55,7 +61,7 @@
 
     <coupon show="isSlotsValid() && (!modePlans || selectedPlan)" coupon="coupon.applied" total="totalNoCoupon" user-id="{{user.id}}"></coupon>
 
-    <div ng-show="$root.modules.plans">
+    <div ng-show="$root.modules.plans && isUserValidatedByType('subscription')">
       <div ng-if="isSlotsValid() && !user.subscribed_plan" ng-show="!modePlans">
         <p class="font-sbold text-base l-h-2x" translate>{{ 'app.shared.cart.to_benefit_from_attractive_prices' }}</p>
         <div><button class="btn btn-warning-full rounded btn-block text-xs" ng-click="showPlans()" translate>{{ 'app.shared.cart.view_our_subscriptions' }}</button></div>

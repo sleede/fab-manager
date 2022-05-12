@@ -87,10 +87,11 @@
     </div>
     <div class="row m-t" ng-show="allSettings.openlab_app_secret">
       <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.projects.settings.openlab_default_info_html' | translate"></p>
-      <boolean-setting name="openlab_default"
-                       settings="allSettings"
-                       label="app.admin.projects.settings.default_to_openlab"
-                       classes="m-l"></boolean-setting>
+      <boolean-setting name="'openlab_default'"
+                       label="'app.admin.projects.settings.default_to_openlab' | translate"
+                       on-success="onSuccess"
+                       on-error="onError"
+                       class-name="'m-l'"></boolean-setting>
     </div>
   </div>
 </div>

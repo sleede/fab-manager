@@ -23,11 +23,29 @@ Application.Controllers.controller('MainNavController', ['$scope', 'settingsProm
       class: 'home-link'
     },
     { class: 'menu-spacer' },
-    {
+    $scope.$root.modules.publicAgenda && {
+      state: 'app.public.calendar',
+      linkText: 'app.public.common.public_calendar',
+      linkIcon: 'calendar',
+      class: 'public-calendar-link'
+    },
+    $scope.$root.modules.machines && {
       state: 'app.public.machines_list',
       linkText: 'app.public.common.reserve_a_machine',
       linkIcon: 'cogs',
       class: 'reserve-machine-link'
+    },
+    $scope.$root.modules.trainings && {
+      state: 'app.public.trainings_list',
+      linkText: 'app.public.common.trainings_registrations',
+      linkIcon: 'graduation-cap',
+      class: 'reserve-training-link'
+    },
+    $scope.$root.modules.spaces && {
+      state: 'app.public.spaces_list',
+      linkText: 'app.public.common.reserve_a_space',
+      linkIcon: 'rocket',
+      class: 'reserve-space-link'
     },
     {
       state: 'app.public.events_list',
@@ -42,59 +60,39 @@ Application.Controllers.controller('MainNavController', ['$scope', 'settingsProm
       linkIcon: 'th',
       class: 'projects-gallery-link'
     },
-    { class: 'menu-spacer' }
-
-  ];
-
-  if ($scope.$root.modules.plans) {
-    $scope.navLinks.push({
+    $scope.$root.modules.plans && { class: 'menu-spacer' },
+    $scope.$root.modules.plans && {
       state: 'app.public.plans',
       linkText: 'app.public.common.subscriptions',
       linkIcon: 'credit-card',
       class: 'plans-link'
-    });
-  }
-
-  if ($scope.$root.modules.trainings) {
-    $scope.navLinks.splice(4, 0, {
-      state: 'app.public.trainings_list',
-      linkText: 'app.public.common.trainings_registrations',
-      linkIcon: 'graduation-cap',
-      class: 'reserve-training-link'
-    });
-  }
-
-  if ($scope.$root.modules.spaces) {
-    $scope.navLinks.splice(4, 0, {
-      state: 'app.public.spaces_list',
-      linkText: 'app.public.common.reserve_a_space',
-      linkIcon: 'rocket',
-      class: 'reserve-space-link'
-    });
-  }
-
-  if ($scope.$root.modules.publicAgenda) {
-    $scope.navLinks.splice(2, 0, {
-      state: 'app.public.calendar',
-      linkText: 'app.public.common.public_calendar',
-      linkIcon: 'calendar',
-      class: 'public-calendar-link'
-    });
-  }
+    }
+  ].filter(Boolean);
 
   Fablab.adminNavLinks = Fablab.adminNavLinks || [];
-  const adminNavLinks = [
+  $scope.adminNavLinks = [
     {
       state: 'app.admin.calendar',
       linkText: 'app.public.common.manage_the_calendar',
       linkIcon: 'calendar',
       authorizedRoles: ['admin', 'manager']
     },
-    {
+    $scope.$root.modules.machines && {
       state: 'app.public.machines_list',
       linkText: 'app.public.common.manage_the_machines',
       linkIcon: 'cogs',
       authorizedRoles: ['admin', 'manager']
+    },
+    $scope.$root.modules.trainings && {
+      state: 'app.admin.trainings',
+      linkText: 'app.public.common.trainings_monitoring',
+      linkIcon: 'graduation-cap',
+      authorizedRoles: ['admin', 'manager']
+    },
+    $scope.$root.modules.spaces && {
+      state: 'app.public.spaces_list',
+      linkText: 'app.public.common.manage_the_spaces',
+      linkIcon: 'rocket'
     },
     {
       state: 'app.admin.events',
@@ -121,6 +119,12 @@ Application.Controllers.controller('MainNavController', ['$scope', 'settingsProm
       linkIcon: 'file-pdf-o',
       authorizedRoles: ['admin', 'manager']
     },
+    $scope.$root.modules.statistics && {
+      state: 'app.admin.statistics',
+      linkText: 'app.public.common.statistics',
+      linkIcon: 'bar-chart-o',
+      authorizedRoles: ['admin']
+    },
     {
       class: 'menu-spacer',
       authorizedRoles: ['admin']
@@ -143,35 +147,7 @@ Application.Controllers.controller('MainNavController', ['$scope', 'settingsProm
       linkIcon: 'cloud',
       authorizedRoles: ['admin']
     }
-  ].concat(Fablab.adminNavLinks);
-
-  $scope.adminNavLinks = adminNavLinks;
-
-  if ($scope.$root.modules.trainings) {
-    $scope.adminNavLinks.splice(3, 0, {
-      state: 'app.admin.trainings',
-      linkText: 'app.public.common.trainings_monitoring',
-      linkIcon: 'graduation-cap',
-      authorizedRoles: ['admin', 'manager']
-    });
-  }
-
-  if ($scope.$root.modules.spaces) {
-    $scope.adminNavLinks.splice(3, 0, {
-      state: 'app.public.spaces_list',
-      linkText: 'app.public.common.manage_the_spaces',
-      linkIcon: 'rocket'
-    });
-  }
-
-  if ($scope.$root.modules.statistics) {
-    $scope.adminNavLinks.splice($scope.$root.modules.spaces ? 9 : 8, 0, {
-      state: 'app.admin.statistics',
-      linkText: 'app.public.common.statistics',
-      linkIcon: 'bar-chart-o',
-      authorizedRoles: ['admin']
-    });
-  }
+  ].filter(Boolean).concat(Fablab.adminNavLinks);
 
   /**
    * Returns the current state of the public registration setting (allowed/blocked).

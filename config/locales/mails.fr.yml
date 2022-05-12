@@ -24,12 +24,14 @@ fr:
       subject: "Vous avez changé de groupe"
       body:
         warning: "Vous venez de changer de groupe utilisateurs. Des contrôles pourront être opérés au Fab Lab afin de vérifier que ce changement est justifié."
+        user_invalidated: "Votre compte est invalidé, veuillez téléverser votre nouveau justificatif pour valider votre compte."
     notify_admin_user_group_changed:
       subject: "Un membre a changé de groupe"
       body:
         user_changed_group_html: "L'utilisateur <em><strong>%{NAME}</strong></em> a changé de groupe."
         previous_group: "Ancien groupe :"
         new_group: "Nouveau groupe :"
+        user_invalidated: "Le compte de l'utilisateur est invalidé."
     notify_admin_subscription_extended:
       subject: "Un abonnement a été prolongé"
       body:
@@ -343,5 +345,32 @@ fr:
         remember: "Conformément à l'échéancier de paiement %{REFERENCE}, une échéance de %{AMOUNT} était prévu pour être prélevée le %{DATE}."
         date: "Ceci est un rappel pour vérifier que le prélèvement bancaire a bien été effectué."
         confirm: "Veuillez confirmer la réception des fonds dans votre interface de gestion des échéanciers de paiement, afin que la facture correspondante soit générée."
+    notify_admin_user_proof_of_identity_files_created:
+      subject: "Justufucatif téléversé par un membre"
+      body:
+        proof_of_identity_files_uploaded_below: "Le membre %{NAME} a téléversé le justificatif suivant :"
+        validate_user: "Veuillez valider ce compte"
+    notify_admin_user_proof_of_identity_files_updated:
+      subject: "Le justificatif est modifiée par le membre"
+      body:
+        user_update_proof_of_identity_file: "Le membre %{NAME} a modifié le justificatif ci-dessous :"
+        validate_user: "Veuillez valider son compte"
+    notify_user_is_validated:
+      subject: "Le compte est valid"
+      body:
+        account_validated: "Votre compte est valid."
+    notify_user_is_invalidated:
+      subject: "Le compte est invalid"
+      body:
+        account_invalidated: "Votre compte est invalid."
+    notify_user_proof_of_identity_refusal:
+      subject: "Les justificatifs refusés"
+      body:
+        user_proof_of_identity_files_refusal: "Vos justificatifs sont refusés :"
+        action: "Veuillez re-télécharger les nouveaux justificatifs."
+    notify_admin_user_proof_of_identity_refusal:
+      subject: "Justificatifs d'un membre refusés"
+      body:
+        user_proof_of_identity_files_refusal: "Les justificatifs du membre %{NAME} sont refusés par %{OPERATOR}:"
     shared:
       hello: "Bonjour %{user_name}"

@@ -14,6 +14,7 @@ import WalletAPI from '../../api/wallet';
 import { Invoice } from '../../models/invoice';
 import SettingAPI from '../../api/setting';
 import { SettingName } from '../../models/setting';
+import { GoogleTagManager } from '../../models/gtm';
 import { ComputePriceResult } from '../../models/price';
 import { Wallet } from '../../models/wallet';
 import FormatLib from '../../lib/format';
@@ -52,7 +53,7 @@ interface AbstractPaymentModalProps {
   modalSize?: ModalSize,
 }
 
-declare const GTM: any;
+declare const GTM: GoogleTagManager;
 
 /**
  * This component is an abstract modal that must be extended by each payment gateway to include its payment form.

@@ -16,4 +16,5 @@ json.array!(@members) do |member|
       json.partial! 'api/shared/plan', plan: member.subscribed_plan
     end
   end
+  json.validated_at member.validated_at
 end

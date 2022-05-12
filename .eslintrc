@@ -15,9 +15,11 @@
     "moment": true,
     "_": true,
     "Humanize": true,
-    "GTM": true
+    "GTM": true,
+    "$": true,
+    "KeyboardEvent": true
   },
-  "plugins": ["lint-erb"],
+  "plugins": ["html-erb"],
   "overrides": [
     {
       "files": ["**/*.ts", "**/*.tsx"],

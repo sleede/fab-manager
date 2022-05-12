@@ -126,8 +126,8 @@ class MembersController {
 /**
  * Controller used in the members/groups management page
  */
-Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', '$uibModal', 'membersPromise', 'adminsPromise', 'partnersPromise', 'managersPromise', 'growl', 'Admin', 'AuthService', 'dialogs', '_t', 'Member', 'Export', 'User', 'uiTourService', 'settingsPromise',
-  function ($scope, $sce, $uibModal, membersPromise, adminsPromise, partnersPromise, managersPromise, growl, Admin, AuthService, dialogs, _t, Member, Export, User, uiTourService, settingsPromise) {
+Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', '$uibModal', 'membersPromise', 'adminsPromise', 'partnersPromise', 'managersPromise', 'growl', 'Admin', 'AuthService', 'dialogs', '_t', 'Member', 'Export', 'User', 'uiTourService', 'settingsPromise', '$location',
+  function ($scope, $sce, $uibModal, membersPromise, adminsPromise, partnersPromise, managersPromise, growl, Admin, AuthService, dialogs, _t, Member, Export, User, uiTourService, settingsPromise, $location) {
   /* PRIVATE STATIC CONSTANTS */
 
     // number of users loaded each time we click on 'load more...'
@@ -160,6 +160,9 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
     // admins list
     $scope.admins = adminsPromise.admins.filter(function (m) { return m.id !== Fablab.adminSysId; });
 
+    // is user validation required
+    $scope.enableUserValidationRequired = (settingsPromise.user_validation_required === 'true');
+
     // Admins ordering/sorting. Default: not sorted
     $scope.orderAdmin = null;
 
@@ -176,7 +179,8 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
     $scope.orderManager = null;
 
     // default tab: members list
-    $scope.tabs = { active: 0, sub: 0 };
+    const defaultActiveTab = $location.search().tabs ? parseInt($location.search().tabs, 10) : 0;
+    $scope.tabs = { active: defaultActiveTab, sub: 0 };
 
     /**
      * Change the members ordering criterion to the one provided
@@ -569,14 +573,14 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
       });
       // on tour end, save the status in database
       uitour.on('ended', function () {
-        if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile.tours.indexOf('members') < 0) {
+        if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile_attributes.tours.indexOf('members') < 0) {
           Member.completeTour({ id: $scope.currentUser.id }, { tour: 'members' }, function (res) {
-            $scope.currentUser.profile.tours = res.tours;
+            $scope.currentUser.profile_attributes.tours = res.tours;
           });
         }
       });
       // if the user has never seen the tour, show him now
-      if (settingsPromise.feature_tour_display !== 'manual' && $scope.currentUser.profile.tours.indexOf('members') < 0) {
+      if (settingsPromise.feature_tour_display !== 'manual' && $scope.currentUser.profile_attributes.tours.indexOf('members') < 0) {
         uitour.start();
       }
     };
@@ -650,8 +654,8 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
 /**
  * Controller used in the member edition page
  */
-Application.Controllers.controller('EditMemberController', ['$scope', '$state', '$transition$', 'Member', 'Training', 'dialogs', 'growl', 'Group', 'Subscription', 'CSRF', 'memberPromise', 'tagsPromise', '$uibModal', 'Plan', '$filter', '_t', 'walletPromise', 'transactionsPromise', 'activeProviderPromise', 'Wallet', 'settingsPromise',
-  function ($scope, $state, $transition$, Member, Training, dialogs, growl, Group, Subscription, CSRF, memberPromise, tagsPromise, $uibModal, Plan, $filter, _t, walletPromise, transactionsPromise, activeProviderPromise, Wallet, settingsPromise) {
+Application.Controllers.controller('EditMemberController', ['$scope', '$state', '$transition$', 'Member', 'Training', 'dialogs', 'growl', 'Group', 'Subscription', 'CSRF', 'memberPromise', 'tagsPromise', '$uibModal', 'Plan', '$filter', '_t', 'walletPromise', 'transactionsPromise', 'activeProviderPromise', 'Wallet', 'settingsPromise', 'ProofOfIdentityType',
+  function ($scope, $state, $transition$, Member, Training, dialogs, growl, Group, Subscription, CSRF, memberPromise, tagsPromise, $uibModal, Plan, $filter, _t, walletPromise, transactionsPromise, activeProviderPromise, Wallet, settingsPromise, ProofOfIdentityType) {
   /* PUBLIC SCOPE */
 
     // API URL where the form will be posted
@@ -664,7 +668,7 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
     $scope.tags = tagsPromise;
 
     // The user to edit
-    $scope.user = memberPromise;
+    $scope.user = cleanUser(memberPromise);
 
     // Should the password be modified?
     $scope.password = { change: false };
@@ -674,6 +678,9 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
 
     // is the address required in _member_form?
     $scope.addressRequired = (settingsPromise.address_required === 'true');
+
+    // is user validation required
+    $scope.enableUserValidationRequired = (settingsPromise.user_validation_required === 'true');
 
     // the user subscription
     if (($scope.user.subscribed_plan != null) && ($scope.user.subscription != null)) {
@@ -807,10 +814,37 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
     };
 
     /**
+     * Callback triggered if validate member was successfully taken
+     */
+    $scope.onValidateMemberSuccess = (_user, message) => {
+      growl.success(message);
+      setTimeout(() => {
+        $scope.user = _user;
+        $scope.user.statistic_profile_attributes.birthday = moment(_user.statistic_profile_attributes.birthday).toDate();
+        $scope.$apply();
+      }, 50);
+    };
+
+    /**
      * Callback triggered in case of error
      */
     $scope.onError = (message) => {
       growl.error(message);
+    };
+
+    /**
+     * Callback triggered when the user was successfully updated
+     */
+    $scope.onUserSuccess = () => {
+      growl.success(_t('app.admin.members_edit.update_success'));
+      $state.go('app.admin.members');
+    };
+
+    /**
+     * Callback triggered in case of success
+     */
+    $scope.onSuccess = (message) => {
+      growl.success(message);
     };
 
     $scope.createWalletCreditModal = function (user, wallet) {
@@ -896,7 +930,7 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
       CSRF.setMetaTags();
 
       // init the birthdate to JS object
-      $scope.user.statistic_profile.birthday = moment($scope.user.statistic_profile.birthday).toDate();
+      $scope.user.statistic_profile_attributes.birthday = moment($scope.user.statistic_profile_attributes.birthday).toDate();
 
       // the user subscription
       if (($scope.user.subscribed_plan != null) && ($scope.user.subscription != null)) {
@@ -910,9 +944,20 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
         });
       }
 
+      ProofOfIdentityType.query({ group_id: $scope.user.group_id }, function (proofOfIdentityTypes) {
+        $scope.hasProofOfIdentityTypes = proofOfIdentityTypes.length > 0;
+      });
+
       // Using the MembersController
       return new MembersController($scope, $state, Group, Training);
     };
+
+    // prepare the user for the react-hook-form
+    function cleanUser (user) {
+      delete user.$promise;
+      delete user.$resolved;
+      return user;
+    }
 
     // !!! MUST BE CALLED AT THE END of the controller
     return initialize();
@@ -922,8 +967,8 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
 /**
  * Controller used in the member's creation page (admin view)
  */
-Application.Controllers.controller('NewMemberController', ['$scope', '$state', 'Member', 'Training', 'Group', 'CSRF', 'settingsPromise',
-  function ($scope, $state, Member, Training, Group, CSRF, settingsPromise) {
+Application.Controllers.controller('NewMemberController', ['$scope', '$state', 'Member', 'Training', 'Group', 'CSRF', 'settingsPromise', 'growl', '_t',
+  function ($scope, $state, Member, Training, Group, CSRF, settingsPromise, growl, _t) {
     CSRF.setMetaTags();
 
     /* PUBLIC SCOPE */
@@ -946,19 +991,34 @@ Application.Controllers.controller('NewMemberController', ['$scope', '$state', '
     // Default member's profile parameters
     $scope.user = {
       plan_interval: '',
-      invoicing_profile: {},
-      statistic_profile: {}
+      invoicing_profile_attributes: {},
+      statistic_profile_attributes: {}
     };
 
     // Callback when the admin check/uncheck the box telling that the new user is an organization.
     // Disable or enable the organization fields in the form, accordingly
     $scope.toggleOrganization = function () {
       if ($scope.user.organization) {
-        if (!$scope.user.invoicing_profile) { $scope.user.invoicing_profile = {}; }
-        $scope.user.invoicing_profile.organization = {};
+        if (!$scope.user.invoicing_profile_attributes) { $scope.user.invoicing_profile_attributes = {}; }
+        $scope.user.invoicing_profile_attributes.organization_attributes = {};
       } else {
-        $scope.user.invoicing_profile.organization = undefined;
+        $scope.user.invoicing_profile_attributes.organization_attributes = undefined;
       }
+    };
+
+    /**
+     * Callback triggered when the user was successfully updated
+     */
+    $scope.onUserSuccess = () => {
+      growl.success(_t('app.admin.members_new.create_success'));
+      $state.go('app.admin.members');
+    };
+
+    /**
+     * Callback triggered in case of error
+     */
+    $scope.onError = (message) => {
+      growl.error(message);
     };
 
     // Using the MembersController
