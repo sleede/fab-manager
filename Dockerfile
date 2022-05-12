@@ -22,6 +22,9 @@ RUN apk update && apk upgrade && \
       postgresql-client \
       libxml2-dev \
       libxslt-dev \
+      libsass-dev \
+      libsass \
+      libc6-compat \
       libidn-dev && \
 # Install buildtime apk dependencies
     apk add --update --no-cache --virtual .build-deps \
@@ -29,6 +32,10 @@ RUN apk update && apk upgrade && \
       build-base \
       linux-headers \
       patch
+
+# Fix bug: LoadError: Could not open library '/usr/local/bundle/gems/sassc-2.1.0-x86_64-linux/lib/sassc/libsass.so': Error loading shared library ld-linux-x86-64.so.2: No such file or directory (needed by /usr/local/bundle/gems/sassc-2.1.0-x86_64-linux/lib/sassc/libsass.so)
+# add libsass-dev libsass libc6-compat and env below
+ENV LD_LIBRARY_PATH=/lib64
 
 RUN gem install bundler
 
