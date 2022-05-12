@@ -65,7 +65,7 @@
       </div>
     </div>
 
-    <div class="form-group m-b-lg" ng-class="{'has-error': trainingForm['training[machine_ids]'].$dirty && trainingForm['training[machine_ids]'].$invalid}">
+    <div ng-if="enableMachinesModule" class="form-group m-b-lg" ng-class="{'has-error': trainingForm['training[machine_ids]'].$dirty && trainingForm['training[machine_ids]'].$invalid}">
       <label for="training_machines" class="col-sm-2 control-label">{{ 'app.shared.trainings.associated_machines' | translate }}</label>
       <div class="col-sm-4">
         <ui-select multiple ng-model="training.machine_ids" class="form-control" id="training_machines">

@@ -683,7 +683,8 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }]
+          machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['machines_module']" }).$promise; }]
         }
       })
       .state('app.admin.trainings_edit', {
@@ -697,7 +698,8 @@ angular.module('application.router', ['ui.router'])
         },
         resolve: {
           trainingPromise: ['Training', '$transition$', function (Training, $transition$) { return Training.get({ id: $transition$.params().id }).$promise; }],
-          machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }]
+          machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['machines_module']" }).$promise; }]
         }
       })
       // events
