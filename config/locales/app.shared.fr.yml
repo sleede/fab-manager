@@ -39,7 +39,7 @@ fr:
         add_video: "Intégrer une vidéo"
         add_image: "Insérer une image"
       fab_socials:
-        follow_us: "Follow us"
+        follow_us: "Suivez-nous"
         networks_update_success: "Réseaux sociaux mis à jour avec succès"
         networks_update_error: "Problème lors de la mise à jour des réseaux sociaux"
         url_placeholder: "Coller l'url…"
