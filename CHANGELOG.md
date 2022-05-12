@@ -2,6 +2,8 @@
 
 ## next deploy
 
+## v5.4.0 2022 May 12
+
 - Option to disable the 'machines' module
 - Option to prevent users from changing their group
 - Ability to define social networks for the FabLab "about page"
