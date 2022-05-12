@@ -66,14 +66,17 @@ export const FabSocials: React.FC<FabSocialsProps> = ({ show = false, onError, o
 
   return (
     <>{show
-      ? <div className='social-icons'>
-        {fabNetworks.map((network, index) =>
-          selectedNetworks.includes(network) &&
-          <a key={index} href={network.url} target='_blank' rel="noreferrer">
-            <img src={`${Icons}#${network.name}`}></img>
-          </a>
-        )}
-      </div>
+      ? (selectedNetworks.length > 0) && <>
+          <h2>{t('app.shared.fab_socials.follow_us')}</h2>
+          <div className='social-icons'>
+          {fabNetworks.map((network, index) =>
+            selectedNetworks.includes(network) &&
+            <a key={index} href={network.url} target='_blank' rel="noreferrer">
+              <img src={`${Icons}#${network.name}`}></img>
+            </a>
+          )}
+        </div>
+      </>
 
       : <form onSubmit={handleSubmit(onSubmit)}>
         <div className='social-icons'>
