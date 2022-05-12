@@ -1516,7 +1516,7 @@ fr:
             training: "Formations"
             pack: "Packs prépayés"
           create_groups: "Créer des groupes"
-          add_proof_of_identity_types: "Ajouter un justificatif"
+          add_proof_of_identity_types: "Ajouter des justificatifs"
           proof_of_identity_type_info: "Vous pouvez ajouter un justificatif d'identité en fonction des groupes d'utilisateurs créés. Il sera demandé à vos membres de les déposer dans leur espace. Chaque membre sera informé du justificatif d'identité à fournir dans son espace personnel (onglet Mes justificatifs d'identité). De votre côté, vous pouvez vérifier les justificatifs et valider leur compte (à condition que l'option de validation du compte soit activée)."
           proof_of_identity_type_no_group_info: "Un justificatif est nécessairement appliquée aux groupes.</br>Si vous n'avez pas encore de groupe, vous pouvez en créer un à partir de la page \"Utilisateurs/Groupes\" (bouton à droite)."
           proof_of_identity_type_title: "Justificatif"
