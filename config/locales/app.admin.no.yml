@@ -1385,7 +1385,7 @@
         default_slot_duration_info: "Machine and space availabilities are divided in multiple slots of this duration. This value can be overridden per availability."
         modules: "Modules"
         machines: "Machines"
-        machines_info_html: "<p>Machines are the resources which are available for booking. A machine can be, <em>for example</em>, a 3D printer or a laser cutter.</p>"
+        machines_info_html: "The module Reserve a machine module can be disabled."
         enable_machines: "Enable the machines"
         machines_module: "machines module"
         spaces: "Spaces"
@@ -1506,7 +1506,7 @@
           user_validation_required_info: "By activating this option, only members whose account is validated by an administrator or a manager will be able to make reservations."
           user_validation_required_option_label: "Activate the account validation option"
           user_validation_required_list_title: "Member account validation information message"
-          user_validation_required_list_info: "Your administrator must validate your account ? You will then be able to access all the booking features."
+          user_validation_required_list_info: "Your administrator must validate your account. You will then be able to access all the booking features."
           user_validation_required_list_other_info: "The resources selected below will be subject to member account validation."
           user_validation_required_list:
             subscription: "Subscriptions"
