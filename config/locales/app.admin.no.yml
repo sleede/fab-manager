@@ -1397,7 +1397,7 @@
         enable_plans: "Enable the plans"
         plans_module: "plans module"
         trainings: "Trainings"
-        trainings_info_html: "<p>Opplæring/treninger er fullt integrert i agendaen til Fab-manger. Hvis den er aktivert, vil medlemmene dine kunne bestille og betale opplæring.</p><p>Treninger gir deg en måte å unngå medlemmer å bestille noen maskiner, hvis de ikke har tatt betingelseskurset.</p>"
+        trainings_info_html: "<p>Trainings are fully integrated Fab-manager's agenda. If enabled, your members will be able to book and pay trainings.</p><p>Trainings provides a way to prevent members to book some machines, if they do have not taken the prerequisite course.</p>"
         enable_trainings: "Enable the trainings"
         trainings_module: "trainings module"
         invoicing: "Invoicing"
