@@ -142,7 +142,7 @@ fr:
       #home page
       home:
         latest_documented_projects: "Les derniers projets documentés"
-        follow_us: "Suivez-nous"
+        follow_us: "Follow us"
         latest_tweets: "Les derniers tweets"
         latest_registered_members: "Derniers membres inscrits"
         create_an_account: "Créer un compte"
