@@ -39,6 +39,7 @@ zu:
         add_video: "crwdns22860:0crwdne22860:0"
         add_image: "crwdns22862:0crwdne22862:0"
       fab_socials:
+        follow_us: "crwdns23112:0crwdne23112:0"
         networks_update_success: "crwdns22864:0crwdne22864:0"
         networks_update_error: "crwdns22866:0crwdne22866:0"
         url_placeholder: "crwdns22868:0crwdne22868:0"
