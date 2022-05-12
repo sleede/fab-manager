@@ -152,7 +152,7 @@ const ProofOfIdentityTypesList: React.FC<ProofOfIdentityTypesListProps> = ({ onS
             <div className="col-md-8">
               <HtmlTranslate trKey="app.admin.settings.compte.proof_of_identity_type_no_group_info" />
             </div>
-            <a href="/#!/admin/members?tabs=1" className="btn btn-warning pull-right m-t m-r-md col-md-3" style={{ color: '#000' }}>{t('app.admin.settings.compte.create_groups')}</a>
+            <a href="/#!/admin/members?tabs=1" className="btn btn-warning pull-right m-t m-r-md col-md-3" style={{ color: '#000', maxWidth: '200px' }}>{t('app.admin.settings.compte.create_groups')}</a>
           </div>
         </div>
 
