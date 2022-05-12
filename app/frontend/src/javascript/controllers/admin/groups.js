@@ -55,13 +55,13 @@ Application.Controllers.controller('GroupsController', ['$scope', 'groupsPromise
   $scope.saveGroup = function (data, id) {
     if (id != null) {
       return Group.update({ id }, { group: data }, response => growl.success(_t('app.admin.members.group_form.changes_successfully_saved'))
-        , error => growl.error(_t('app.admin.members.group_form.an_error_occurred_while_saving_changes')));
+        , () => growl.error(_t('app.admin.members.group_form.an_error_occurred_while_saving_changes')));
     } else {
       return Group.save({ group: data }, function (resp) {
         growl.success(_t('app.admin.members.group_form.new_group_successfully_saved'));
         return $scope.groups[$scope.groups.length - 1].id = resp.id;
       }
-      , function (error) {
+      , function () {
         growl.error(_t('app.admin.members.group_form.an_error_occurred_when_saving_the_new_group'));
         return $scope.groups.splice($scope.groups.length - 1, 1);
       });
@@ -77,7 +77,7 @@ Application.Controllers.controller('GroupsController', ['$scope', 'groupsPromise
       growl.success(_t('app.admin.members.group_form.group_successfully_deleted'));
       return $scope.groups.splice(index, 1);
     }
-    , error => growl.error(_t('app.admin.members.group_form.unable_to_delete_group_because_some_users_and_or_groups_are_still_linked_to_it')));
+    , () => growl.error(_t('app.admin.members.group_form.unable_to_delete_group_because_some_users_and_or_groups_are_still_linked_to_it')));
 
   /**
    * Enable/disable the group at the specified index
@@ -92,7 +92,7 @@ Application.Controllers.controller('GroupsController', ['$scope', 'groupsPromise
         $scope.groups[index] = response;
         return growl.success(_t('app.admin.members.group_form.group_successfully_enabled_disabled', { STATUS: response.disabled }));
       }
-      , error => growl.error(_t('app.admin.members.group_form.unable_to_enable_disable_group', { STATUS: !group.disabled })));
+      , () => growl.error(_t('app.admin.members.group_form.unable_to_enable_disable_group', { STATUS: !group.disabled })));
     }
   };
 }

@@ -1,0 +1,17 @@
+.completion-header-info {
+  padding: 15px;
+  background-color: #f4f3f3;
+  margin-bottom: 30px;
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius);
+
+  .provider-name {
+    font-weight: bold;
+    display: block;
+    margin-left: 40px;
+
+    .user-email {
+      margin-left: 5px;
+    }
+  }
+}

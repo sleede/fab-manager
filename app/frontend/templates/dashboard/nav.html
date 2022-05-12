@@ -12,6 +12,7 @@
         <ul class="nav-page nav nav-pills text-u-c text-sm">
           <li ui-sref-active="active"><a class="text-black" ui-sref="app.logged.dashboard.profile" translate>{{ 'app.public.common.my_profile' }}</a></li>
           <li ui-sref-active="active"><a class="text-black" ui-sref="app.logged.dashboard.settings" translate>{{ 'app.public.common.my_settings' }}</a></li>
+          <li ng-if="!isAuthorized(['admin', 'manager']) && hasProofOfIdentityTypes" ui-sref-active="active"><a class="text-black" ui-sref="app.logged.dashboard.proof_of_identity_files" translate>{{ 'app.public.common.my_proof_of_identity_files' }}</a></li>
           <li ui-sref-active="active"><a class="text-black" ui-sref="app.logged.dashboard.projects" translate>{{ 'app.public.common.my_projects' }}</a></li>
           <li ui-sref-active="active"><a class="text-black" ui-sref="app.logged.dashboard.trainings" translate>{{ 'app.public.common.my_trainings' }}</a></li>
           <li ui-sref-active="active"><a class="text-black" ui-sref="app.logged.dashboard.events" translate>{{ 'app.public.common.my_events' }}</a></li>

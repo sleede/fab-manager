@@ -1500,6 +1500,7 @@ zu:
           enable_statistics: "crwdns20870:0crwdne20870:0"
         compte:
           account: "crwdns23104:0crwdne23104:0"
+          compte: "Compte"
           customize_account_settings: "crwdns22746:0crwdne22746:0"
           user_validation_required: "crwdns22748:0crwdne22748:0"
           user_validation_required_title: "crwdns22750:0crwdne22750:0"

@@ -12,7 +12,7 @@
         <span translate>{{ 'app.admin.calendar.training' }}</span>
       </label>
     </div>
-    <div class="radio">
+    <div class="radio" ng-show="$root.modules.machines">
       <label>
         <input type="radio" id="machine" name="available_type" value="machines" ng-model="availability.available_type">
         <span translate>{{ 'app.admin.calendar.machine' }}</span>
@@ -23,6 +23,9 @@
         <input type="radio" id="space" name="available_type" value="space" ng-model="availability.available_type" ng-disabled="spaces.length === 0">
         <span translate>{{ 'app.admin.calendar.space' }}</span>
       </label>
+    </div>
+    <div class="alert alert-warning" ng-hide="$root.modules.spaces || $root.modules.machines || $root.modules.trainings">
+      <span translate>{{ 'app.admin.calendar.no_modules_available' }}</span>
     </div>
   </div>
 </div>

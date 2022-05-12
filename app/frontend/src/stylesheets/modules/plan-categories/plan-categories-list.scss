@@ -19,8 +19,19 @@
       border-color: #c9c9c9;
     }
 
+    .category-weight {
+      width: 13ch;
+    }
     .category-actions {
+      width: 110px;
       text-align: right;
     }
+  }
+
+  .add-category,
+  .add-category:hover {
+    background-color: var(--secondary-dark);
+    border-color: var(--secondary-dark);
+    color: var(--secondary-text-color);
   }
 }

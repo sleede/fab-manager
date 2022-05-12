@@ -1,0 +1,9 @@
+.form-rich-text {
+  .form-item-field {
+    border: 0;
+    display: block;
+  }
+  &.is-disabled {
+    opacity: 0.5;
+  }
+}

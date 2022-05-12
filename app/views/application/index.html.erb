@@ -32,6 +32,7 @@
   <script type="text/javascript">
       var Fablab = Fablab || {};
 
+      Fablab.machinesModule = ('<%= Setting.get('machines_module') %>' === 'true');
       Fablab.plansModule = ('<%= Setting.get('plans_module') %>' === 'true');
       Fablab.spacesModule = ('<%= Setting.get('spaces_module') %>' === 'true');
       Fablab.trainingsModule = ('<%= Setting.get('trainings_module') %>' === 'true');
@@ -41,7 +42,7 @@
       Fablab.defaultHost = "<%= Rails.application.secrets.default_host %>";
       Fablab.trackingId = "<%= Setting.get('tracking_id') %>";
       Fablab.adminSysId = parseInt("<%= User.adminsys&.id %>", 10);
-      Fablab.baseHostUrl = "<%= Rails.application.secrets.default_host %>";
+      Fablab.activeProviderType = "<%= AuthProvider.active&.providable_type %>";
 
       // i18n stuff
       Fablab.locale = "<%= Rails.application.secrets.app_locale %>";
@@ -62,6 +63,7 @@
       Fablab.weekStartingDay = <%= Date.parse(Rails.application.secrets.week_starting_day).strftime('%w') %>;
       Fablab.d3DateFormat = "<%= Rails.application.secrets.d3_date_format %>";
       Fablab.uibDateFormat = "<%= Rails.application.secrets.uib_date_format %>";
+      Fablab.maxProofOfIdentityFileSize = <%= Rails.application.secrets.max_proof_of_identity_file_size&.to_i || 5.megabytes.to_i %>;
 
       // feature tour (used when feature_tour_display = session)
       Fablab.sessionTours = [];

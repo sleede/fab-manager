@@ -35,14 +35,10 @@
 
                 <section class="panel panel-default bg-light m-lg">
                     <div class="panel-body m-r">
-                        <ng-include src="'/admin/authentications/_form.html'"></ng-include>
-                        <ng-include src="'/admin/authentications/_oauth2.html'" ng-if="provider.providable_type == 'OAuth2Provider'"></ng-include>
-                    </div>   <!-- ./panel-body  -->
 
-
-                    <div class="panel-footer no-padder">
-                        <input type="button" value="{{ 'app.shared.buttons.confirm_changes' | translate }}" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="providerForm.$invalid" ng-click="updateProvider()"/>
+                        <provider-form action="'update'" on-success="onSuccess" on-error="onError" provider="provider"></provider-form>
                     </div>
+
                 </section>
             </form>
 

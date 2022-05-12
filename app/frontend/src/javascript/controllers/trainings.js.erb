@@ -91,8 +91,8 @@ Application.Controllers.controller('ShowTrainingController', ['$scope', '$state'
  * training can be reserved during the reservation process (the shopping cart may contains only one training and a subscription).
  */
 
-Application.Controllers.controller('ReserveTrainingController', ['$scope', '$transition$', 'Auth', 'AuthService', '$timeout', 'Availability', 'Member', 'plansPromise', 'groupsPromise', 'settingsPromise', 'trainingPromise', '_t', 'uiCalendarConfig', 'CalendarConfig', 'Reservation',
-  function ($scope, $transition$, Auth, AuthService, $timeout, Availability, Member, plansPromise, groupsPromise, settingsPromise, trainingPromise, _t, uiCalendarConfig, CalendarConfig, Reservation) {
+Application.Controllers.controller('ReserveTrainingController', ['$scope', '$transition$', 'Auth', 'AuthService', '$timeout', 'Availability', 'Member', 'plansPromise', 'groupsPromise', 'settingsPromise', 'trainingPromise', '_t', 'uiCalendarConfig', 'CalendarConfig', 'Reservation', 'helpers',
+  function ($scope, $transition$, Auth, AuthService, $timeout, Availability, Member, plansPromise, groupsPromise, settingsPromise, trainingPromise, _t, uiCalendarConfig, CalendarConfig, Reservation, helpers) {
   /* PRIVATE STATIC CONSTANTS */
 
     // Color of the selected event backgound
@@ -169,6 +169,9 @@ Application.Controllers.controller('ReserveTrainingController', ['$scope', '$tra
 
     // Global config: message to the end user giving advice about the training reservation
     $scope.trainingInformationMessage = settingsPromise.training_information_message;
+
+    // Global config: is the user validation required ?
+    $scope.enableUserValidationRequired = settingsPromise.user_validation_required === 'true';
 
     /**
      * Change the last selected slot's appearance to looks like 'added to cart'
@@ -313,6 +316,10 @@ Application.Controllers.controller('ReserveTrainingController', ['$scope', '$tra
       }, 50);
     };
 
+    $scope.canSelectPlan = function () {
+      return helpers.isUserValidatedByType($scope.ctrl.member, $scope.settings, 'subscription');
+    };
+
     /**
      * Check if the provided plan is currently selected
      * @param plan {Object} Resource plan
@@ -407,6 +414,9 @@ Application.Controllers.controller('ReserveTrainingController', ['$scope', '$tra
      * @see http://fullcalendar.io/docs/mouse/eventClick/
      */
     const calendarEventClickCb = function (event, jsEvent, view) {
+      if (!AuthService.isAuthorized(['admin', 'manager']) && (helpers.isUserValidationRequired($scope.settings, 'training') && !helpers.isUserValidated($scope.ctrl.member))) {
+        return;
+      }
       $scope.selectedEvent = event;
       if ($transition$.params().id === 'all') {
         $scope.training = event.training;

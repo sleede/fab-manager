@@ -6,12 +6,12 @@
     <div class="row">
       <h3 class="m-l" translate>{{ 'app.admin.invoices.payment.online_payment' }}</h3>
       <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.invoices.payment.online_payment_info_html' | translate"></p>
-      <boolean-setting name="online_payment_module"
-                       settings="allSettings"
-                       label="app.admin.invoices.payment.enable_online_payment"
-                       classes="m-l"
+      <boolean-setting name="'online_payment_module'"
+                       label="'app.admin.invoices.payment.enable_online_payment' | translate"
+                       class-name="'m-l'"
                        on-before-save="selectPaymentGateway"
-                       fa-icon="fa-font">
+                       on-success="onCardUpdateSuccess"
+                       on-error="onError">
       </boolean-setting>
       <select-gateway-modal is-open="openSelectGatewayModal"
                             toggle-modal="toggleSelectGatewayModal"

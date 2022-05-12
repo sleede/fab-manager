@@ -89,7 +89,7 @@ if Role.where(name: 'admin').joins(:users).count.zero?
   admin = User.new(username: 'admin', email: ENV['ADMIN_EMAIL'], password: ENV['ADMIN_PASSWORD'],
                    password_confirmation: Rails.application.secrets.admin_password, group_id: Group.find_by(slug: 'admins').id,
                    profile_attributes: { first_name: 'admin', last_name: 'admin', phone: '0123456789' },
-                   statistic_profile_attributes: { gender: true, birthday: DateTime.current })
+                   statistic_profile_attributes: { gender: true, birthday: Date.current })
   admin.add_role 'admin'
   admin.save!
 end
@@ -887,9 +887,15 @@ Setting.set('payment_schedule_prefix', 'FabManager_paymentSchedule') unless Sett
 
 Setting.set('confirmation_required', false) unless Setting.find_by(name: 'confirmation_required').try(:value)
 
+Setting.set('user_validation_required', false) unless Setting.find_by(name: 'user_validation_required').try(:value)
+
+Setting.set('user_validation_required_list', '') unless Setting.find_by(name: 'user_validation_required_list').try(:value)
+
 Setting.set('wallet_module', true) unless Setting.find_by(name: 'wallet_module').try(:value)
 
 Setting.set('statistics_module', true) unless Setting.find_by(name: 'statistics_module').try(:value)
+
+Setting.set('machines_module', true) unless Setting.find_by(name: 'machines_module').try(:value)
 
 Setting.set('upcoming_events_shown', 'until_start') unless Setting.find_by(name: 'upcoming_events_shown').try(:value)
 
@@ -902,6 +908,8 @@ Setting.set('renew_pack_threshold', 0.2) unless Setting.find_by(name: 'renew_pac
 Setting.set('pack_only_for_subscription', true) unless Setting.find_by(name: 'pack_only_for_subscription').try(:value)
 
 Setting.set('public_registrations', true) unless Setting.find_by(name: 'public_registrations').try(:value)
+
+Setting.set('user_change_group', true) unless Setting.find_by(name: 'user_change_group').try(:value)
 
 unless Setting.find_by(name: 'overlapping_categories').try(:value)
   Setting.set('overlapping_categories', 'training_reservations,machine_reservations,space_reservations,events_reservations')
@@ -946,3 +954,8 @@ unless StatisticIndex.find_by(es_type_key: 'space')
                             graph: true, simple: false }
                         ])
 end
+
+ProfileCustomField.find_or_create_by(label: 'N° SIRET')
+ProfileCustomField.find_or_create_by(label: 'Code NAF')
+ProfileCustomField.find_or_create_by(label: 'N° TVA intracommunautaire')
+ProfileCustomField.find_or_create_by(label: 'N° DUNS')

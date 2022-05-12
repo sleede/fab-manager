@@ -16,5 +16,5 @@ export default class WalletLib {
     } else {
       return price - this.wallet.amount;
     }
-  }
+  };
 }

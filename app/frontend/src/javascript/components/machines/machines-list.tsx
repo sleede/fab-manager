@@ -18,12 +18,13 @@ interface MachinesListProps {
   onReserveMachine: (machine: Machine) => void,
   onLoginRequested: () => Promise<User>,
   onEnrollRequested: (trainingId: number) => void,
+  canProposePacks: boolean,
 }
 
 /**
  * This component shows a list of all machines and allows filtering on that list.
  */
-const MachinesList: React.FC<MachinesListProps> = ({ onError, onSuccess, onShowMachine, onReserveMachine, onLoginRequested, onEnrollRequested, user }) => {
+const MachinesList: React.FC<MachinesListProps> = ({ onError, onSuccess, onShowMachine, onReserveMachine, onLoginRequested, onEnrollRequested, user, canProposePacks }) => {
   // shown machines
   const [machines, setMachines] = useState<Array<Machine>>(null);
   // we keep the full list of machines, for filtering
@@ -68,19 +69,20 @@ const MachinesList: React.FC<MachinesListProps> = ({ onError, onSuccess, onShowM
             onError={onError}
             onSuccess={onSuccess}
             onLoginRequested={onLoginRequested}
-            onEnrollRequested={onEnrollRequested} />;
+            onEnrollRequested={onEnrollRequested}
+            canProposePacks={canProposePacks}/>;
         })}
       </div>
     </div>
   );
 };
 
-const MachinesListWrapper: React.FC<MachinesListProps> = ({ user, onError, onSuccess, onShowMachine, onReserveMachine, onLoginRequested, onEnrollRequested }) => {
+const MachinesListWrapper: React.FC<MachinesListProps> = ({ user, onError, onSuccess, onShowMachine, onReserveMachine, onLoginRequested, onEnrollRequested, canProposePacks }) => {
   return (
     <Loader>
-      <MachinesList user={user} onError={onError} onSuccess={onSuccess} onShowMachine={onShowMachine} onReserveMachine={onReserveMachine} onLoginRequested={onLoginRequested} onEnrollRequested={onEnrollRequested} />
+      <MachinesList user={user} onError={onError} onSuccess={onSuccess} onShowMachine={onShowMachine} onReserveMachine={onReserveMachine} onLoginRequested={onLoginRequested} onEnrollRequested={onEnrollRequested} canProposePacks={canProposePacks}/>
     </Loader>
   );
 };
 
-Application.Components.component('machinesList', react2angular(MachinesListWrapper, ['user', 'onError', 'onSuccess', 'onShowMachine', 'onReserveMachine', 'onLoginRequested', 'onEnrollRequested']));
+Application.Components.component('machinesList', react2angular(MachinesListWrapper, ['user', 'onError', 'onSuccess', 'onShowMachine', 'onReserveMachine', 'onLoginRequested', 'onEnrollRequested', 'canProposePacks']));

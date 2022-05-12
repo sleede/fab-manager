@@ -46,6 +46,6 @@ class StatisticProfile < ApplicationRecord
   private
 
   def check_birthday_in_past
-    errors.add(:birthday, I18n.t('statistic_profile.birthday_in_past')) if birthday.present? && birthday > DateTime.current
+    errors.add(:birthday, I18n.t('statistic_profile.birthday_in_past')) if birthday.present? && birthday > Date.current
   end
 end

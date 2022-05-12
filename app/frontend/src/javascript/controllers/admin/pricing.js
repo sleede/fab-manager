@@ -403,7 +403,7 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
             $scope.spaceCredits[$scope.spaceCredits.length - 1].id = resp.id;
             return growl.success(_t('app.admin.pricing.credit_was_successfully_saved'));
           }
-          , function (err) {
+          , function () {
             $scope.spaceCredits.pop();
             return growl.error(_t('app.admin.pricing.error_creating_credit'));
           });
@@ -573,11 +573,15 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       $uibModal.open({
         templateUrl: '/admin/pricing/sendCoupon.html',
         resolve: {
-          coupon () { return coupon; }
+          coupon () { return coupon; },
+          enableUserValidationRequired () { return settingsPromise.user_validation_required === 'true'; }
         },
         size: 'md',
-        controller: ['$scope', '$uibModalInstance', 'Coupon', 'coupon', '_t', function ($scope, $uibModalInstance, Coupon, coupon, _t) {
-        // Member, receiver of the coupon
+        controller: ['$scope', '$uibModalInstance', 'Coupon', 'coupon', '_t', 'enableUserValidationRequired', function ($scope, $uibModalInstance, Coupon, coupon, _t, enableUserValidationRequired) {
+          // Global config: is the user validation required ?
+          $scope.enableUserValidationRequired = enableUserValidationRequired;
+
+          // Member, receiver of the coupon
           $scope.ctrl =
           { member: null };
 
@@ -685,14 +689,16 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
           placement: 'bottom'
         });
       }
-      uitour.createStep({
-        selector: '.plans-pricing .machines-tab',
-        stepId: 'machines',
-        order: 3,
-        title: _t('app.admin.tour.pricing.machines.title'),
-        content: _t('app.admin.tour.pricing.machines.content'),
-        placement: 'bottom'
-      });
+      if ($scope.$root.modules.machines) {
+        uitour.createStep({
+          selector: '.plans-pricing .machines-tab',
+          stepId: 'machines',
+          order: 3,
+          title: _t('app.admin.tour.pricing.machines.title'),
+          content: _t('app.admin.tour.pricing.machines.content'),
+          placement: 'bottom'
+        });
+      }
       if ($scope.$root.modules.spaces) {
         uitour.createStep({
           selector: '.plans-pricing .spaces-tab',
@@ -740,14 +746,14 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       });
       // on tour end, save the status in database
       uitour.on('ended', function () {
-        if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile.tours.indexOf('pricing') < 0) {
+        if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile_attributes.tours.indexOf('pricing') < 0) {
           Member.completeTour({ id: $scope.currentUser.id }, { tour: 'pricing' }, function (res) {
-            $scope.currentUser.profile.tours = res.tours;
+            $scope.currentUser.profile_attributes.tours = res.tours;
           });
         }
       });
       // if the user has never seen the tour, show him now
-      if (settingsPromise.feature_tour_display !== 'manual' && $scope.currentUser.profile.tours.indexOf('pricing') < 0) {
+      if (settingsPromise.feature_tour_display !== 'manual' && $scope.currentUser.profile_attributes.tours.indexOf('pricing') < 0) {
         uitour.start();
       }
     };

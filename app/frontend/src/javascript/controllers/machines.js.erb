@@ -98,9 +98,12 @@ class MachinesController {
 /**
  * Controller used in the public listing page, allowing everyone to see the list of machines
  */
-Application.Controllers.controller('MachinesController', ['$scope', '$state', '_t', 'AuthService', 'Machine', '$uibModal', 'settingsPromise', 'Member', 'uiTourService', 'machinesPromise', 'growl',
-  function ($scope, $state, _t, AuthService, Machine, $uibModal, settingsPromise, Member, uiTourService, machinesPromise, growl) {
+Application.Controllers.controller('MachinesController', ['$scope', '$state', '_t', 'AuthService', 'Machine', '$uibModal', 'settingsPromise', 'Member', 'uiTourService', 'machinesPromise', 'growl', 'helpers',
+  function ($scope, $state, _t, AuthService, Machine, $uibModal, settingsPromise, Member, uiTourService, machinesPromise, growl, helpers) {
     /* PUBLIC SCOPE */
+
+    // the application global settings
+    $scope.settings = settingsPromise;
 
     /**
      * Redirect the user to the machine details page
@@ -144,6 +147,10 @@ Application.Controllers.controller('MachinesController', ['$scope', '$state', '_
     $scope.reserveMachine = function (machine) {
       $state.go('app.logged.machines_reserve', { id: machine.slug });
     }
+
+    $scope.canProposePacks = function () {
+      return AuthService.isAuthorized(['admin', 'manager']) || !helpers.isUserValidationRequired($scope.settings, 'pack') || (helpers.isUserValidationRequired($scope.settings, 'pack') && helpers.isUserValidated($scope.currentUser));
+    };
 
     /**
      * Setup the feature-tour for the machines page. (admins only)
@@ -357,8 +364,8 @@ Application.Controllers.controller('ShowMachineController', ['$scope', '$state',
  * This controller workflow is pretty similar to the trainings reservation controller.
  */
 
-Application.Controllers.controller('ReserveMachineController', ['$scope', '$transition$', '_t', 'moment', 'Auth', '$timeout', 'Member', 'Availability', 'plansPromise', 'groupsPromise', 'machinePromise', 'settingsPromise', 'uiCalendarConfig', 'CalendarConfig', 'Reservation', 'growl',
-  function ($scope, $transition$, _t, moment, Auth, $timeout, Member, Availability, plansPromise, groupsPromise, machinePromise, settingsPromise, uiCalendarConfig, CalendarConfig, Reservation, growl) {
+Application.Controllers.controller('ReserveMachineController', ['$scope', '$transition$', '_t', 'moment', 'Auth', '$timeout', 'Member', 'Availability', 'plansPromise', 'groupsPromise', 'machinePromise', 'settingsPromise', 'uiCalendarConfig', 'CalendarConfig', 'Reservation', 'growl', 'helpers', 'AuthService',
+  function ($scope, $transition$, _t, moment, Auth, $timeout, Member, Availability, plansPromise, groupsPromise, machinePromise, settingsPromise, uiCalendarConfig, CalendarConfig, Reservation, growl, helpers, AuthService) {
   /* PRIVATE STATIC CONSTANTS */
 
     // Slot free to be booked
@@ -435,6 +442,9 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$tran
 
     // Global config: message to the end user concerning the machine bookings
     $scope.machineExplicationsAlert = settingsPromise.machine_explications_alert;
+
+    // Global config: is the user validation required ?
+    $scope.enableUserValidationRequired = settingsPromise.user_validation_required === 'true';
 
     /**
      * Change the last selected slot's appearance to looks like 'added to cart'
@@ -579,6 +589,10 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$tran
       }, 50);
     };
 
+    $scope.canSelectPlan = function () {
+      return helpers.isUserValidatedByType($scope.ctrl.member, $scope.settings, 'subscription');
+    };
+
     /**
      * Check if the provided plan is currently selected
      * @param plan {Object} Resource plan
@@ -652,6 +666,10 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$tran
       growl.error(message);
     };
 
+    $scope.isShowPacks = function () {
+      return !helpers.isUserValidationRequired($scope.settings, 'pack') || (helpers.isUserValidationRequired($scope.settings, 'pack') && helpers.isUserValidated($scope.ctrl.member));
+    };
+
     /* PRIVATE SCOPE */
 
     /**
@@ -679,6 +697,9 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$tran
      * if it's too late).
      */
     const calendarEventClickCb = function (event, jsEvent, view) {
+      if (!AuthService.isAuthorized(['admin', 'manager']) && (helpers.isUserValidationRequired($scope.settings, 'machine') && !helpers.isUserValidated($scope.ctrl.member))) {
+        return;
+      }
       $scope.selectedEvent = event;
       return $scope.selectionTime = new Date();
     };

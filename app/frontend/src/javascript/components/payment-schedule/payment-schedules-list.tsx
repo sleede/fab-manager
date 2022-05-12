@@ -9,6 +9,7 @@ import { User } from '../../models/user';
 import { PaymentSchedule } from '../../models/payment-schedule';
 import { IApplication } from '../../models/application';
 import PaymentScheduleAPI from '../../api/payment-schedule';
+import { TDateISODate } from '../../typings/date-iso';
 
 declare const Application: IApplication;
 
@@ -36,7 +37,7 @@ const PaymentSchedulesList: React.FC<PaymentSchedulesListProps> = ({ currentUser
   // current filter, by customer's name, for the schedules
   const [customerFilter, setCustomerFilter] = useState<string>(null);
   // current filter, by date, for the schedules and the deadlines
-  const [dateFilter, setDateFilter] = useState<Date>(null);
+  const [dateFilter, setDateFilter] = useState<TDateISODate>(null);
 
   /**
    * Fetch from the API the payments schedules matching the given filters and reset the results table with the new schedules.

@@ -1,0 +1,38 @@
+.avatar-input {
+  margin-right: 20px;
+
+  .avatar {
+    background-color: #fff;
+    border: 1px solid var(--gray-soft);
+    padding: 4px;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+
+    .select-button {
+      position: relative;
+      .avatar-file-input {
+        position: absolute;
+        z-index: 2;
+        opacity: 0;
+        top: 0;
+        left: 0;
+      }
+    }
+    .delete-avatar {
+      background-color: var(--error);
+      color: white;
+    }
+  }
+
+  &--large {
+    margin: 80px 40px;
+  }
+
+  &--small {
+    text-align: center;
+  }
+}

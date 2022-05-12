@@ -23,7 +23,7 @@ export interface Charge {
   application_fee_amount?: number,
   calculated_statement_descriptor: string,
   captured: boolean,
-  created: Date,
+  created: number,
   failure_code?: string
   failure_message?: string,
   fraud_details: Record<string, unknown>,
@@ -61,7 +61,7 @@ export interface Price {
   object: 'price',
   active: boolean,
   billing_scheme: 'per_unit' | 'tiered',
-  created: Date,
+  created: number,
   currency: string,
   livemode: boolean,
   lookup_key: string,
@@ -108,7 +108,7 @@ export interface TaxRate {
   metadata: Record<string, unknown>,
   percentage: number,
   state: string,
-  created: Date,
+  created: number,
   livemode: boolean,
   tax_type: 'vat' | 'sales_tax' | string
 }
@@ -120,7 +120,7 @@ export interface SubscriptionItem {
   billing_thresholds: {
     usage_gte: number,
   },
-  created: Date,
+  created: number,
   metadata: Record<string, unknown>,
   price: Price,
   quantity: number,
@@ -142,8 +142,8 @@ export interface Invoice {
   lines: [],
   metadata: Record<string, unknown>,
   payment_intent: PaymentIntent,
-  period_end: Date,
-  period_start: Date,
+  period_end: number,
+  period_start: number,
   status: 'draft' | 'open' | 'paid' | 'uncollectible' | 'void',
   subscription: string,
   total: number
@@ -154,8 +154,8 @@ export interface Subscription {
   id: string,
   object: 'subscription',
   cancel_at_period_end: boolean,
-  current_period_end: Date,
-  current_period_start: Date,
+  current_period_end: number,
+  current_period_start: number,
   customer: string,
   default_payment_method: string,
   items: [

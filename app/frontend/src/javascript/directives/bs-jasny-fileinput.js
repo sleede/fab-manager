@@ -4,9 +4,9 @@ Application.Directives.directive('bsJasnyFileinput', [function () {
   return {
     require: ['ngModel'],
     link: function ($scope, elm, attrs, requiredCtrls) {
-      var ngModelCtrl = requiredCtrls[0];
-      var fileinput = elm.parents('[data-provides=fileinput]');
-      var filetypeRegex = attrs.bsJasnyFileinput;
+      const ngModelCtrl = requiredCtrls[0];
+      const fileinput = elm.parents('[data-provides=fileinput]');
+      const filetypeRegex = attrs.bsJasnyFileinput;
       fileinput.on('clear.bs.fileinput', function (e) {
         if (ngModelCtrl) {
           ngModelCtrl.$setViewValue(null);

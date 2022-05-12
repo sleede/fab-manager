@@ -12,19 +12,9 @@
  */
 'use strict';
 
-Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScope', '$state', '$uibModal', 'Auth', 'AuthService', 'dialogs', 'growl', 'groupsPromise', 'Subscription', 'Member', 'subscriptionExplicationsPromise', '_t', 'Wallet', 'helpers', 'settingsPromise', 'Price',
-  function ($scope, $rootScope, $state, $uibModal, Auth, AuthService, dialogs, growl, groupsPromise, Subscription, Member, subscriptionExplicationsPromise, _t, Wallet, helpers, settingsPromise, Price) {
+Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScope', '$state', '$uibModal', 'Auth', 'AuthService', 'dialogs', 'growl', 'Subscription', 'Member', 'subscriptionExplicationsPromise', '_t', 'Wallet', 'helpers', 'settingsPromise', 'Price',
+  function ($scope, $rootScope, $state, $uibModal, Auth, AuthService, dialogs, growl, Subscription, Member, subscriptionExplicationsPromise, _t, Wallet, helpers, settingsPromise, Price) {
     /* PUBLIC SCOPE */
-
-    // list of groups
-    $scope.groups = groupsPromise.filter(function (g) { return (g.slug !== 'admins') & !g.disabled; });
-
-    // default : do not show the group changing form
-    // group ID of the current/selected user
-    $scope.group = {
-      change: false,
-      id: null
-    };
 
     // user to deal with
     $scope.ctrl = {
@@ -45,6 +35,9 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
     // the application global settings
     $scope.settings = settingsPromise;
 
+    // Global config: is the user validation required ?
+    $scope.enableUserValidationRequired = settingsPromise.user_validation_required === 'true';
+
     // Discount coupon to apply to the basket, if any
     $scope.coupon =
       { applied: null };
@@ -59,10 +52,8 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
     $scope.updateMember = function () {
       $scope.selectedPlan = null;
       $scope.paid.plan = null;
-      $scope.group.change = false;
       Member.get({ id: $scope.ctrl.member.id }, function (member) {
         $scope.ctrl.member = member;
-        $scope.group.id = $scope.ctrl.member.group_id;
       });
     };
 
@@ -73,17 +64,22 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
     $scope.selectPlan = function (plan) {
       setTimeout(() => {
         if ($scope.isAuthenticated()) {
+          if (!AuthService.isAuthorized(['admin', 'manager']) && (helpers.isUserValidationRequired($scope.settings, 'subscription') && !helpers.isUserValidated($scope.ctrl.member))) {
+            return;
+          }
           if ($scope.selectedPlan !== plan) {
             $scope.selectedPlan = plan;
             $scope.planSelectionTime = new Date();
-          } else {
-            $scope.selectedPlan = null;
           }
         } else {
           $scope.login();
         }
         $scope.$apply();
       }, 50);
+    };
+
+    $scope.canSelectPlan = function () {
+      return helpers.isUserValidatedByType($scope.ctrl.member, $scope.settings, 'subscription');
     };
 
     /**
@@ -104,56 +100,6 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
      */
     $scope.onError = function (message) {
       growl.error(message);
-    };
-
-    /**
-     * Return the group object, identified by the ID set in $scope.group.id
-     */
-    $scope.getUserGroup = function () {
-      for (const group of Array.from($scope.groups)) {
-        if (group.id === $scope.group.id) {
-          return group;
-        }
-      }
-    };
-
-    /**
-     * Change the group of the current/selected user to the one set in $scope.group.id
-     */
-    $scope.selectGroup = function () {
-      Member.update({ id: $scope.ctrl.member.id }, { user: { group_id: $scope.group.id } }, function (user) {
-        $scope.ctrl.member = user;
-        $scope.group.change = false;
-        $scope.selectedPlan = null;
-        if (AuthService.isAuthorized('member') ||
-          (AuthService.isAuthorized('manager') && $scope.currentUser.id !== $scope.ctrl.member.id)) {
-          $rootScope.currentUser = user;
-          Auth._currentUser.group_id = user.group_id;
-          growl.success(_t('app.public.plans.your_group_was_successfully_changed'));
-        } else {
-          growl.success(_t('app.public.plans.the_user_s_group_was_successfully_changed'));
-        }
-      }
-      , function (err) {
-        if (AuthService.isAuthorized('member') ||
-          (AuthService.isAuthorized('manager') && $scope.currentUser.id !== $scope.ctrl.member.id)) {
-          growl.error(_t('app.public.plans.an_error_prevented_your_group_from_being_changed'));
-        } else {
-          growl.error(_t('app.public.plans.an_error_prevented_to_change_the_user_s_group'));
-        }
-        console.error(err);
-      });
-    };
-
-    /**
-     * Return an enumerable meaninful string for the gender of the provider user
-     * @param user {Object} Database user record
-     * @return {string} 'male' or 'female'
-     */
-    $scope.getGender = function (user) {
-      if (user && user.statistic_profile) {
-        if (user.statistic_profile.gender === 'true') { return 'male'; } else { return 'female'; }
-      } else { return 'other'; }
     };
 
     /**
@@ -184,6 +130,29 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
       $scope.coupon.applied = null;
     };
 
+    /**
+     * Callback triggered when the user has successfully changed his group
+     */
+    $scope.onGroupUpdateSuccess = function (message, user) {
+      growl.success(message);
+      setTimeout(() => {
+        $scope.ctrl.member = _.cloneDeep(user);
+        $scope.$apply();
+      }, 50);
+      if (AuthService.isAuthorized('member') ||
+        (AuthService.isAuthorized('manager') && $scope.currentUser.id !== $scope.ctrl.member.id)) {
+        $rootScope.currentUser.group_id = user.group_id;
+        Auth._currentUser.group_id = user.group_id;
+      }
+    };
+
+    /**
+     * Check if it is allowed the change the group of the selected user
+     */
+    $scope.isAllowedChangingGroup = function () {
+      return $scope.ctrl.member && !$scope.selectedPlan && !$scope.paid.plan;
+    };
+
     /* PRIVATE SCOPE */
 
     /**
@@ -194,7 +163,6 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
         if (!AuthService.isAuthorized('admin')) {
           $scope.ctrl.member = $scope.currentUser;
           $scope.paid.plan = $scope.currentUser.subscribed_plan;
-          $scope.group.id = $scope.currentUser.group_id;
         }
       }
 

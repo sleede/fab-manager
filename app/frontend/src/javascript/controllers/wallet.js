@@ -1,7 +1,7 @@
 'use strict';
 
-Application.Controllers.controller('WalletController', ['$scope', 'walletPromise', 'transactionsPromise',
-  function ($scope, walletPromise, transactionsPromise) {
+Application.Controllers.controller('WalletController', ['$scope', 'walletPromise', 'transactionsPromise', 'proofOfIdentityTypesPromise',
+  function ($scope, walletPromise, transactionsPromise, proofOfIdentityTypesPromise) {
   /* PUBLIC SCOPE */
 
     // current user wallet
@@ -9,5 +9,7 @@ Application.Controllers.controller('WalletController', ['$scope', 'walletPromise
 
     // current wallet transactions
     $scope.transactions = transactionsPromise;
+
+    $scope.hasProofOfIdentityTypes = proofOfIdentityTypesPromise.length > 0;
   }
 ]);

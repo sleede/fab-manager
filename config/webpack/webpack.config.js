@@ -9,6 +9,7 @@ const sassErb = require('./modules/sass_erb');
 const html = require('./modules/html');
 const uiTour = require('./modules/ui-tour');
 const hmr = require('./modules/hmr');
+const svg = require('./modules/svg');
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
@@ -31,7 +32,10 @@ const customConfig = {
       Application: [path.resolve(path.join(__dirname, '../../app/frontend/src/javascript/app.js')), 'Application'],
       process: 'process/browser'
     }),
-    isDevelopment && new (require('@pmmmwh/react-refresh-webpack-plugin'))()
+    isDevelopment && new (require('@pmmmwh/react-refresh-webpack-plugin'))(),
+    isDevelopment && new (require('eslint-webpack-plugin'))({
+      extensions: ['js', 'ts', 'tsx']
+    })
   ].filter(Boolean),
   module: {
     rules: [
@@ -41,7 +45,8 @@ const customConfig = {
       html,
       sass,
       uiTour,
-      hmr
+      hmr,
+      svg
     ]
   },
   resolve: {

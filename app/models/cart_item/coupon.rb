@@ -23,4 +23,8 @@ class CartItem::Coupon
 
     { amount: amount, total_with_coupon: new_total, total_without_coupon: cart_total }
   end
+
+  def type
+    'coupon'
+  end
 end

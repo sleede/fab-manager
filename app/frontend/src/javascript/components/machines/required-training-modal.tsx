@@ -42,7 +42,7 @@ export const RequiredTrainingModal: React.FC<RequiredTrainingModalProps> = ({ is
   const header = (): ReactNode => {
     return (
       <div className="user-info">
-        <Avatar user={user} />
+        <Avatar userName={user?.name} avatar={user?.profile_attributes?.user_avatar_attributes?.attachment} />
         <span className="user-name">{user?.name}</span>
       </div>
     );

@@ -40,7 +40,7 @@
           <ng-include src="'/admin/pricing/trainings.html'"></ng-include>
         </uib-tab>
 
-        <uib-tab heading="{{ 'app.admin.pricing.machine_hours' | translate }}" index="2" class="machines-tab">
+        <uib-tab heading="{{ 'app.admin.pricing.machine_hours' | translate }}" ng-show="$root.modules.machines" index="2" class="machines-tab">
           <ng-include src="'/admin/pricing/machine_hours.html'"></ng-include>
         </uib-tab>
 

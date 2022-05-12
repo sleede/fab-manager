@@ -14,6 +14,7 @@ services:
       - ${PWD}/payment_schedules:/usr/src/app/payment_schedules
       - ${PWD}/exports:/usr/src/app/exports
       - ${PWD}/imports:/usr/src/app/imports
+      - ${PWD}/proof_of_identity_files:/usr/src/app/proof_of_identity_files
       - ${PWD}/log:/var/log/supervisor
       - ${PWD}/plugins:/usr/src/app/plugins
       - ${PWD}/accounting:/usr/src/app/accounting

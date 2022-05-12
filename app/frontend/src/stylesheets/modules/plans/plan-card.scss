@@ -90,6 +90,11 @@
         background-color: white;
         padding-left: 30px;
         padding-right: 30px;
+        border-color: var(--secondary);
+
+        &.selected-card {
+          background-color: var(--secondary);
+        }
       }
       button.subscribe-button:focus, button.subscribe-button:hover {
         outline: 0;

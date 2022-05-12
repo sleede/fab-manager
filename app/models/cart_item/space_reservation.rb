@@ -21,6 +21,10 @@ class CartItem::SpaceReservation < CartItem::Reservation
     )
   end
 
+  def type
+    'space'
+  end
+
   protected
 
   def credits
