@@ -1397,7 +1397,7 @@ pt:
         enable_plans: "Ativar os planos"
         plans_module: "módulo de planos"
         trainings: "Treinamentos"
-        trainings_info_html: "<p>Os treinamentos estão totalmente integrados na agenda do Fabmanager. Se ativado, seus membros poderão reservar e pagar treinamentos.</p><p>A forma de impedir que os membros agendem determinadas máquinas é através dos pré-requisitos para uso das mesmas </p>"
+        trainings_info_html: "<p>Trainings are fully integrated Fab-manager's agenda. If enabled, your members will be able to book and pay trainings.</p><p>Trainings provides a way to prevent members to book some machines, if they do have not taken the prerequisite course.</p>"
         enable_trainings: "Ativar treinamentos"
         trainings_module: "módulo de treinamentos"
         invoicing: "Faturamento"

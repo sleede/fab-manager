@@ -1397,7 +1397,7 @@ de:
         enable_plans: "Pläne aktivieren"
         plans_module: "Plan-Modul"
         trainings: "Schulungen"
-        trainings_info_html: "<p>Schulungen sind vollständig in die Agenda von Fab-Manger integriert. Wenn aktiviert, können Mitglieder Schulungen buchen und bezahlen.</p><p>Schulungen können Mitglieder daran hindern, Maschinen zu buchen, für die sie noch nicht den Grundkurs absolviert haben.</p>"
+        trainings_info_html: "<p>Trainings are fully integrated Fab-manager's agenda. If enabled, your members will be able to book and pay trainings.</p><p>Trainings provides a way to prevent members to book some machines, if they do have not taken the prerequisite course.</p>"
         enable_trainings: "Schulungen aktivieren"
         trainings_module: "Schulungs-Modul"
         invoicing: "Rechnungsstellung"

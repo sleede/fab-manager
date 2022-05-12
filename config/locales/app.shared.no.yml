@@ -463,6 +463,7 @@
         slot_tags: "Tidsluke-etiketter"
         user_tags: "Brukeretiketter"
         no_tags: "Ingen etiketter"
+        user_validation_required_alert: "Attention !</br>Your administrator must validate your account. You will then be able to access all the booking features."
       #feature-tour modal
       tour:
         previous: "Forrige"

@@ -463,6 +463,7 @@ pt:
         slot_tags: "Tags do Slot"
         user_tags: "Etiquetas de usuários"
         no_tags: "Sem etiquetas"
+        user_validation_required_alert: "Attention !</br>Your administrator must validate your account. You will then be able to access all the booking features."
       #feature-tour modal
       tour:
         previous: "Anterior"
