@@ -463,7 +463,7 @@ fr:
         slot_tags: "Étiquettes du créneau"
         user_tags: "Étiquettes de l'utilisateur"
         no_tags: "Aucune étiquette"
-        user_validation_required_alert: "Attention !</br>Your administrator must validate your account. You will then be able to access all the booking features."
+        user_validation_required_alert: "Attention !</br>Votre administrateur doit valider votre compte. Vous pourrez alors accéder à l'ensemble des fonctionnalités de réservation."
       #feature-tour modal
       tour:
         previous: "Précédent"
