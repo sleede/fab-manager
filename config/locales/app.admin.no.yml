@@ -1500,7 +1500,6 @@
           enable_statistics: "Enable statistics"
         compte:
           account: "Account"
-          compte: "Compte"
           customize_account_settings: "Customize account settings"
           user_validation_required: "validation of accounts"
           user_validation_required_title: "Validation of accounts"

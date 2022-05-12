@@ -1288,7 +1288,7 @@ zu:
         title_of_the_about_page: "crwdns8297:0crwdne8297:0"
         shift_enter_to_force_carriage_return: "crwdns8299:0crwdne8299:0"
         input_the_main_content: "crwdns8301:0crwdne8301:0"
-        drag_and_drop_to_insert_images: "crwdns8303:0crwdne8303:0"
+        drag_and_drop_to_insert_images: "crwdns23114:0crwdne23114:0"
         input_the_fablab_contacts: "crwdns8305:0crwdne8305:0"
         reservations: "crwdns8307:0crwdne8307:0"
         reservations_parameters: "crwdns8309:0crwdne8309:0"
@@ -1500,7 +1500,6 @@ zu:
           enable_statistics: "crwdns20870:0crwdne20870:0"
         compte:
           account: "crwdns23104:0crwdne23104:0"
-          compte: "Compte"
           customize_account_settings: "crwdns22746:0crwdne22746:0"
           user_validation_required: "crwdns22748:0crwdne22748:0"
           user_validation_required_title: "crwdns22750:0crwdne22750:0"

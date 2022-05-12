@@ -346,12 +346,12 @@ fr:
         date: "Ceci est un rappel pour vérifier que le prélèvement bancaire a bien été effectué."
         confirm: "Veuillez confirmer la réception des fonds dans votre interface de gestion des échéanciers de paiement, afin que la facture correspondante soit générée."
     notify_admin_user_proof_of_identity_files_created:
-      subject: "Justificatifs téléchargés par un membre"
+      subject: "Justufucatif d'identité téléversé par un membre"
       body:
-        proof_of_identity_files_uploaded_below: "Le membre %{NAME} a téléchargé les justificatifs ci-dessous :"
-        validate_user: "Veuillez valider son compte"
+        proof_of_identity_files_uploaded_below: "Le membre %{NAME} a téléversé le justificatif d'identité suivant :"
+        validate_user: "Veuillez valider ce compte"
     notify_admin_user_proof_of_identity_files_updated:
-      subject: "Justificatif modifié par un membre"
+      subject: "Le justificatif d'identité est modifiée par le membre"
       body:
         user_update_proof_of_identity_file: "Le membre %{NAME} a modifié le justificatif ci-dessous :"
         validate_user: "Veuillez valider son compte"

@@ -142,7 +142,7 @@ es:
       #home page
       home:
         latest_documented_projects: "Los últimos proyectos documentados"
-        follow_us: "Siguenos"
+        follow_us: "Follow us"
         latest_tweets: "Los últimos tweets"
         latest_registered_members: "Miembros más recientes"
         create_an_account: "Crear una cuenta"
