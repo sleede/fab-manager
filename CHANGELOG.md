@@ -2,6 +2,8 @@
 
 ## next deploy
 
+- Fix a bug: when machines module disabled, Associated machines is still shown in trainings list
+
 ## v5.4.0 2022 May 12
 
 - Option to disable the 'machines' module

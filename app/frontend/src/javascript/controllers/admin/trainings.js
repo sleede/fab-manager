@@ -187,6 +187,8 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
     // default tab: trainings list
     $scope.tabs = { active: 0 };
 
+    $scope.enableMachinesModule = settingsPromise.machines_module === 'true';
+
     /**
      * In the trainings listing tab, return the stringified list of machines associated with the provided training
      * @param training {Object} Training object, inherited from $resource
