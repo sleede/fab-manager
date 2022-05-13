@@ -1433,7 +1433,7 @@ fr:
         change_group: "Changement de groupe"
         change_group_info: "Une fois qu'un utilisateur a créé son compte, vous pouvez l'empêcher de changer de groupe. Dans ce cas, seuls les gestionnaires et les administrateurs pourront changer le groupe de l'utilisateur."
         allow_group_change: "Autoriser le changement de groupe"
-        user_change_group: "les utilisateurs peuvent changer de groupe"
+        user_change_group: "changement de groupe"
         wallet_module: "module porte-monnaie"
         public_agenda_module: "module d'agenda public"
         statistics_module: "module de statistiques"
