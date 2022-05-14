@@ -64,6 +64,20 @@ See http://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-config
 
 When DELIVERY_METHOD is set to **smtp**, configure the SMTP server parameters.
 See https://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration for more details.
+<a name="SMTP_CA_FILE"></a>
+
+    SMTP_CA_FILE
+
+The path to a file containing a PEM-format CA certificate.
+See [OpenSSL::SSL::SSLContext](https://ruby-doc.org/stdlib-2.6/libdoc/openssl/rdoc/OpenSSL/SSL/SSLContext.html).
+This is an undocumented setting of [mail gem](https://github.com/mikel/mail).
+<a name="SMTP_CA_PATH"></a>
+
+    SMTP_CA_PATH
+
+The path to a directory containing CA certificates in PEM format.
+See [OpenSSL::SSL::SSLContext](https://ruby-doc.org/stdlib-2.6/libdoc/openssl/rdoc/OpenSSL/SSL/SSLContext.html).
+This is an undocumented setting of [mail gem](https://github.com/mikel/mail).
 <a name="DEFAULT_HOST"></a><a name="DEFAULT_PROTOCOL"></a>
 
     DEFAULT_HOST, DEFAULT_PROTOCOL
