@@ -78,6 +78,10 @@ This is an undocumented setting of [mail gem](https://github.com/mikel/mail).
 The path to a directory containing CA certificates in PEM format.
 See [OpenSSL::SSL::SSLContext](https://ruby-doc.org/stdlib-2.6/libdoc/openssl/rdoc/OpenSSL/SSL/SSLContext.html).
 This is an undocumented setting of [mail gem](https://github.com/mikel/mail).
+<a name="SMTP_TLS"></a>
+
+    SMTP_TLS
+Enables the SMTP connection to use SMTP/TLS (SMTPS: SMTP over direct TLS connection).
 <a name="DEFAULT_HOST"></a><a name="DEFAULT_PROTOCOL"></a>
 
     DEFAULT_HOST, DEFAULT_PROTOCOL
