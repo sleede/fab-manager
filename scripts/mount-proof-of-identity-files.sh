@@ -22,7 +22,10 @@ add_mount()
   if [[ ! $(yq eval ".services.$SERVICE.volumes.[] | select (. == \"*proof_of_identity_files\")" docker-compose.yml) ]]; then
     # shellcheck disable=SC2016
     # we don't want to expand ${PWD}
+    # change docker-compose.yml permissions for fix yq can't modify file issue
+    chmod 666 docker-compose.yml
     yq -i eval ".services.$SERVICE.volumes += [\"\${PWD}/proof_of_identity_files:/usr/src/app/proof_of_identity_files\"]" docker-compose.yml
+    chmod 644 docker-compose.yml
   fi
 }
 
