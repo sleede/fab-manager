@@ -181,16 +181,14 @@ Application.Controllers.controller('NewPlanController', ['$scope', '$uibModal', 
      * @param content {Object}
      */
     $scope.afterSubmit = function (content) {
-      if ((content.id == null) && (content.plan_ids == null)) {
+      if (content.plan_ids === null || content.plan_ids === undefined) {
         return growl.error(_t('app.admin.plans.new.unable_to_create_the_subscription_please_try_again'));
       } else {
         growl.success(_t('app.admin.plans.new.successfully_created_subscriptions_dont_forget_to_redefine_prices'));
-        if (content.plan_ids != null) {
+        if (content.plan_ids.length > 1) {
           return $state.go('app.admin.pricing');
         } else {
-          if (content.id != null) {
-            return $state.go('app.admin.plans.edit', { id: content.id });
-          }
+          return $state.go('app.admin.plans.edit', { id: content.plan_ids[0] });
         }
       }
     };

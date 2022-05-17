@@ -6,6 +6,7 @@
 - Fix a bug: script mount-proof-of-identity-files unable to modify docker-compose.yml
 - Fix a bug: Event reservation calendar encoding in mail
 - Fix a bug: Missing of description of PlanCategory migration
+- Fix a bug: Unable to create plans for all group
 
 ## v5.4.0 2022 May 12
 

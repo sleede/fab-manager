@@ -27,7 +27,7 @@ class API::PlansController < API::ApiController
     partner = params[:plan][:partner_id].empty? ? nil : User.find(params[:plan][:partner_id])
 
     plan = PlansService.create(type, partner, plan_params)
-    if plan.errors.keys.count.positive?
+    if plan.key?(:errors)
       render json: plan.errors, status: :unprocessable_entity
     else
       render json: plan, status: :created
