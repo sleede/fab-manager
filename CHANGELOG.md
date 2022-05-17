@@ -5,6 +5,7 @@
 - Fix a bug: when machines module disabled, Associated machines is still shown in trainings list
 - Fix a bug: script mount-proof-of-identity-files unable to modify docker-compose.yml
 - Fix a bug: Event reservation calendar encoding in mail
+- Fix a bug: Missing of description of PlanCategory migration
 
 ## v5.4.0 2022 May 12
 

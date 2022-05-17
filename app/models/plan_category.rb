@@ -6,5 +6,5 @@
 # - plan_category
 # - plan
 class PlanCategory < ApplicationRecord
-  has_many :plan, dependent: :nullify
+  has_many :plans, dependent: :nullify
 end
