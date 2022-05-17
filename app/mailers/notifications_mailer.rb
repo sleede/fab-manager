@@ -54,7 +54,7 @@ class NotificationsMailer < NotifyWith::NotificationsMailer
   end
 
   def notify_member_create_reservation
-    attachments[@attached_object.ics_filename] = @attached_object.to_ics
+    attachments[@attached_object.ics_filename] = @attached_object.to_ics.encode(Encoding::ISO_8859_15)
     mail(to: @recipient.email,
          subject: t('notifications_mailer.notify_member_create_reservation.subject'),
          template_name: 'notify_member_create_reservation')
