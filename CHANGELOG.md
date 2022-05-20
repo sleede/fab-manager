@@ -7,6 +7,7 @@
 - Fix a bug: Event reservation calendar encoding in mail
 - Fix a bug: Missing of description of PlanCategory migration
 - Fix a bug: Unable to create plans for all group
+- Disable to clicking outside or pressing escape to close sign up modal
 
 ## v5.4.0 2022 May 12
 
