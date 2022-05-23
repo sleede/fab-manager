@@ -2,6 +2,8 @@
 
 ## next deploy
 
+## v5.4.1 2022 May 23
+
 - Disable to clicking outside or pressing escape to close sign up modal
 - Ability to disable colorize logging (#345)
 - Detect assets compilation issue during the initial setup
