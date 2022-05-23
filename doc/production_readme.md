@@ -106,7 +106,7 @@ In order to remove ElasticSearch, you must **first** disable the statistics modu
 
 Then, you can remove the `elasticsearch` service from the [docker-compose.yml](../setup/docker-compose.yml) file and restart the whole application:
 ```bash
-docker-compose down && docker-compose up -d
+docker compose down && docker compose up -d
 ```
 
 Disabling ElasticSearch will save up to 800 Mb of memory. 
@@ -118,11 +118,11 @@ Before using any of these commands, you must first `cd` into the app directory.
 
 - Read again the environment variables and restart
 ```bash
-docker-compose down && docker-compose up -d
+docker compose down && docker compose up -d
 ```
 - Open a bash prompt inside the app container
 ```bash
-docker-compose exec fabmanager bash
+docker compose exec fabmanager bash
 ```
 - Open the ruby console in the application
 ```bash
@@ -130,11 +130,11 @@ docker-compose exec fabmanager bash
 ```
 - Show services status
 ```bash
-docker-compose ps
+docker compose ps
 ```
 - Run a command and provide it environment variables
 ```bash
-docker-compose run --rm -e VAR1=xxx -e VAR2=xxx fabmanager bundle exec rails my:command
+docker compose run --rm -e VAR1=xxx -e VAR2=xxx fabmanager bundle exec rails my:command
 ```
 <a name="update-fab-manager"></a>
 ## Update Fab-manager
@@ -192,11 +192,11 @@ Then, you'll need to perform the upgrade with the following command:
 
 2. Pull last docker images 
 
-   `docker-compose pull`
+   `docker compose pull`
 
 3. Stop the app
 
-   `docker-compose stop fabmanager`
+   `docker compose stop fabmanager`
 
 4. Remove old assets
 
@@ -204,7 +204,7 @@ Then, you'll need to perform the upgrade with the following command:
 
 5. Compile new assets
 
-   `docker-compose run --rm fabmanager bundle exec rails assets:precompile`
+   `docker compose run --rm fabmanager bundle exec rails assets:precompile`
 
 6. Run specific commands
 
@@ -212,23 +212,23 @@ Then, you'll need to perform the upgrade with the following command:
    are always specified in the [CHANGELOG](https://github.com/sleede/fab-manager/blob/master/CHANGELOG.md) and prefixed by **[TODO DEPLOY]**.
  
    Those commands execute specific tasks and have to be run manually.
-   You must prefix the commands starting by `rails...` or `rake...` with: `docker-compose run --rm fabmanager bundle exec`.
+   You must prefix the commands starting by `rails...` or `rake...` with: `docker compose run --rm fabmanager bundle exec`.
    In any other cases, the other commands (like those invoking curl `\curl -sSL... | bash`) must not be prefixed.
    You can also ignore commands only applicable to development environnement, which are prefixed by `(dev)` in the CHANGELOG.
 
 7. Restart all containers
 
    ```bash
-     docker-compose down
-     docker-compose up -d
+     docker compose down
+     docker compose up -d
    ```
 
-You can check that all containers are running with `docker-compose ps`.
+You can check that all containers are running with `docker compose ps`.
 
 <a name="upgrade-to-the-last-version"></a>
 ### Upgrade to the last version
 
-It's the default behaviour as `docker-compose pull` command will fetch the latest versions of the docker images. 
+It's the default behaviour as `docker compose pull` command will fetch the latest versions of the docker images. 
 Be sure to run all the specific commands listed in the [CHANGELOG](https://github.com/sleede/fab-manager/blob/master/CHANGELOG.md) between your actual, and the new version in sequential order. 
 __Example:__ to update from v2.4.0 to v2.4.3, you will run the specific commands for the v2.4.1, v2.4.2 and v2.4.3.
 
