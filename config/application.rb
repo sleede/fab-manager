@@ -69,6 +69,9 @@ module Fablab
       Rails.application.config.paths['app/views'] << path
     end
 
+    # disable ANSI color escape codes in active_record if NO_COLOR is defined.
+    config.colorize_logging = ENV['NO_COLOR'] ? false : true
+
     FabManager.activate_plugins!
 
     config.after_initialize do

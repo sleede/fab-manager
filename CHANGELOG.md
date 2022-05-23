@@ -2,12 +2,13 @@
 
 ## next deploy
 
+- Disable to clicking outside or pressing escape to close sign up modal
+- Ability to disable colorize logging (#345)
 - Fix a bug: when machines module disabled, Associated machines is still shown in trainings list
 - Fix a bug: script mount-proof-of-identity-files unable to modify docker-compose.yml
 - Fix a bug: Event reservation calendar encoding in mail
 - Fix a bug: Missing of description of PlanCategory migration
 - Fix a bug: Unable to create plans for all group
-- Disable to clicking outside or pressing escape to close sign up modal
 
 ## v5.4.0 2022 May 12
 
