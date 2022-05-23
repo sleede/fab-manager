@@ -670,7 +670,7 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           trainingsPromise: ['Training', function (Training) { return Training.query().$promise; }],
           machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['feature_tour_display']" }).$promise; }]
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['feature_tour_display', 'machines_module']" }).$promise; }]
         }
       })
       .state('app.admin.trainings_new', {

@@ -14,8 +14,10 @@ class PlansService
         plan = type.constantize.new(params)
         if plan.save
           partner&.add_role :partner, plan
+        else
+          return { errors: plan.errors.full_messages }
         end
-        plan
+        { plan_ids: [plan.id] }
       end
     rescue PaymentGatewayError => e
       { errors: e.message }

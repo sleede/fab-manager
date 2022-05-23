@@ -2,6 +2,22 @@
 
 ## next deploy
 
+## v5.4.1 2022 May 23
+
+- Disable to clicking outside or pressing escape to close sign up modal
+- Ability to disable colorize logging (#345)
+- Detect assets compilation issue during the initial setup
+- Fix a bug: when machines module disabled, Associated machines is still shown in trainings list
+- Fix a bug: script mount-proof-of-identity-files unable to modify docker-compose.yml
+- Fix a bug: Event reservation calendar encoding in mail
+- Fix a bug: Missing of description of PlanCategory migration
+- Fix a bug: Unable to create plans for all group
+- Fix a bug: backPrevLocation button on Notification Center opens reset password page (#348)
+- Fix a bug: compatibility with the new docker-compose CLI (#355)
+- Fix a security issue: updated moment.js to 2.29.2. to fix [CVE-2022-24785](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24785)
+- Fix a security issue: updated nokogiri to 1.13.6 to fix [CVE-2022-298240](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-298240)
+- Fix a security issue: updated async to 2.6.4 to fix [CVE-2021-43138](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-43138)
+
 ## v5.4.0 2022 May 12
 
 - Option to disable the 'machines' module

@@ -45,7 +45,7 @@ system_requirements()
       fi
     done
   fi
-  local _commands=("sudo" "curl" "sed" "openssl" "docker" "docker-compose" "systemctl")
+  local _commands=("sudo" "curl" "sed" "openssl" "docker" "systemctl")
   for _command in "${_commands[@]}"; do
     echo "detecting $_command..."
     if ! command -v "$_command"
@@ -54,7 +54,24 @@ system_requirements()
       echo -e "\e[91m[ ❌ ] $_command was not found, exiting...\e[39m" && exit 1
     fi
   done
+  echo "detecting docker-compose..."
+  docker-compose version
   printf "\e[92m[ ✔ ] All requirements successfully checked.\e[39m \n\n"
+}
+
+docker-compose()
+{
+  if ! docker compose version 1>/dev/null 2>/dev/null
+  then
+    if ! \docker-compose version 1>/dev/null 2>/dev/null
+    then
+      echo -e "\e[91m[ ❌ ] docker-compose was not found, exiting...\e[39m" && exit 1
+    else
+      \docker-compose "$@"
+    fi
+  else
+    docker compose "$@"
+  fi
 }
 
 is_root()
@@ -363,7 +380,9 @@ setup_assets_and_databases()
   cd "$FABMANAGER_PATH" && docker-compose run --rm -e ADMIN_EMAIL="$EMAIL" -e ADMIN_PASSWORD="$PASSWORD" "$SERVICE" bundle exec rake db:seed # seed the database
 
   # now build the assets
-  cd "$FABMANAGER_PATH" && docker-compose run --rm "$SERVICE" bundle exec rake assets:precompile
+  if ! docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rake assets:precompile; then
+    echo -e "\e[91m[ ❌ ] someting went wrong while compiling the assets, exiting...\e[39m" && exit 1
+  fi
 
   # and prepare elasticsearch
   cd "$FABMANAGER_PATH" && docker-compose run --rm "$SERVICE" bundle exec rake fablab:es:build_stats

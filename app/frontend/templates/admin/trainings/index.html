@@ -53,7 +53,7 @@
             <thead>
             <tr>
               <th style="width:20%" translate>{{ 'app.admin.trainings.name' }}</th>
-              <th style="width:40%" translate>{{ 'app.admin.trainings.associated_machines' }}</th>
+              <th ng-if="enableMachinesModule" style="width:40%" translate>{{ 'app.admin.trainings.associated_machines' }}</th>
               <th style="width:20%" translate>{{ 'app.admin.trainings.number_of_tickets' }}</th>
               <th style="width:20%"></th>
             </tr>
@@ -61,7 +61,7 @@
             <tbody>
             <tr ng-repeat="training in trainings | filterDisabled:trainingFiltering" ng-class="{'disabled-line' : training.disabled && trainingFiltering === 'all'}">
               <td>{{ training.name }}</td>
-              <td>{{ showMachines(training) }}</td>
+              <td ng-if="enableMachinesModule">{{ showMachines(training) }}</td>
               <td>{{ training.nb_total_places }}</td>
               <td>
                 <div class="buttons" ng-show="isAuthorized('admin')">

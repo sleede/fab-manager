@@ -75,6 +75,8 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
       } else {
         return $uibModal.open({
           templateUrl: '/shared/signupModal.html',
+          backdrop: 'static',
+          keyboard: false,
           size: 'md',
           resolve: {
             settingsPromise: ['Setting', function (Setting) {
@@ -188,6 +190,10 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
                   });
                 });
               });
+            };
+
+            $scope.dismiss = function () {
+              $uibModalInstance.dismiss('cancel');
             };
           }]
         }).result.finally(null).then(function (res) {

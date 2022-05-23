@@ -63,7 +63,7 @@ const ManagePlanCategoryComponent: React.FC<ManagePlanCategoryProps> = ({ catego
             icon={<i className='fa fa-plus' />}
             className="btn-warning"
             onClick={toggleModal}>
-            {t('app.admin.create_plan_category.new_category')}
+            {t('app.admin.manage_plan_category.create_category.title')}
           </FabButton>
         );
       case 'update':
