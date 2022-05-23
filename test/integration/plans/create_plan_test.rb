@@ -41,7 +41,7 @@ class CreatePlanTest < ActionDispatch::IntegrationTest
 
     # Check the created plan
     plan = json_response(response.body)
-    assert_equal Plan.last.id, plan[:id]
+    assert_equal Plan.last.id, plan[:plan_ids][0]
     assert_equal plans_count + 1, Plan.count
   end
 end
