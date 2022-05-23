@@ -75,7 +75,11 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
       // This is used to allow the user to navigate to the previous state
       $transitions.onSuccess({ }, function (trans) {
         $state.prevState = trans.$from().name;
-        $state.prevParams = trans.$from().params;
+        $state.prevParams = Object.fromEntries(
+          Object.keys(trans.$from().params).map(k => {
+            return [k, trans.$from().params[k].value()];
+          })
+        );
 
         const path = trans.router.stateService.href(trans.$to(), {}, { absolute: true });
         GTM.trackPage(path, trans.$to().name);
