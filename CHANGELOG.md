@@ -9,6 +9,7 @@
 - Fix a bug: Event reservation calendar encoding in mail
 - Fix a bug: Missing of description of PlanCategory migration
 - Fix a bug: Unable to create plans for all group
+- Fix a security issue: updated moment.js to 2.29.2. to fix [CVE-2022-24785](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24785)
 
 ## v5.4.0 2022 May 12
 
