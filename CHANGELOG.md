@@ -4,6 +4,7 @@
 
 - Disable to clicking outside or pressing escape to close sign up modal
 - Ability to disable colorize logging (#345)
+- Detect assets compilation issue during the initial setup
 - Fix a bug: when machines module disabled, Associated machines is still shown in trainings list
 - Fix a bug: script mount-proof-of-identity-files unable to modify docker-compose.yml
 - Fix a bug: Event reservation calendar encoding in mail

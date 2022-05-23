@@ -380,7 +380,9 @@ setup_assets_and_databases()
   cd "$FABMANAGER_PATH" && docker-compose run --rm -e ADMIN_EMAIL="$EMAIL" -e ADMIN_PASSWORD="$PASSWORD" "$SERVICE" bundle exec rake db:seed # seed the database
 
   # now build the assets
-  cd "$FABMANAGER_PATH" && docker-compose run --rm "$SERVICE" bundle exec rake assets:precompile
+  if ! docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rake assets:precompile; then
+    echo -e "\e[91m[ ❌ ] someting went wrong while compiling the assets, exiting...\e[39m" && exit 1
+  fi
 
   # and prepare elasticsearch
   cd "$FABMANAGER_PATH" && docker-compose run --rm "$SERVICE" bundle exec rake fablab:es:build_stats
