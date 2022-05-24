@@ -26,7 +26,7 @@ interface PaymentSchedulesTableProps {
 /**
  * This component shows a list of all payment schedules with their associated deadlines (aka. PaymentScheduleItem) and invoices
  */
-const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ paymentSchedules, showCustomer, refreshList, operator, onError, onCardUpdateSuccess }) => {
+const PaymentSchedulesTable: React.FC<PaymentSchedulesTableProps> = ({ paymentSchedules, showCustomer, refreshList, operator, onError, onCardUpdateSuccess }) => {
   const { t } = useTranslation('shared');
 
   // for each payment schedule: are the details (all deadlines) shown or hidden?
@@ -68,8 +68,10 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
    */
   const expandCollapseIcon = (paymentScheduleId: number): JSX.Element => {
     if (isExpanded(paymentScheduleId)) {
+      // eslint-disable-next-line fabmanager/component-class-named-as-component
       return <i className="fas fa-minus-square" />;
     } else {
+      // eslint-disable-next-line fabmanager/component-class-named-as-component
       return <i className="fas fa-plus-square" />;
     }
   };
@@ -93,6 +95,7 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
   const downloadScheduleButton = (id: number): JSX.Element => {
     const link = `api/payment_schedules/${id}/download`;
     return (
+      // eslint-disable-next-line fabmanager/component-class-named-as-component
       <a href={link} target="_blank" className="download-button" rel="noreferrer">
         <i className="fas fa-download" />
         {t('app.shared.schedules_table.download')}
@@ -109,6 +112,7 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
       const key = `app.shared.schedules_table.method_${item.payment_method}`;
       res += ` (${t(key)})`;
     }
+    // eslint-disable-next-line fabmanager/component-class-named-as-component
     return <span className={`state-${item.state}`}>{res}</span>;
   };
 
@@ -121,7 +125,7 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
 
   const renderPaymentSchedulesTable = (): ReactElement => {
     return (
-      <table className="schedules-table">
+      <table className="payment-schedules-table">
         <thead>
           <tr>
             <th className="w-35" />
@@ -212,12 +216,14 @@ const PaymentSchedulesTableComponent: React.FC<PaymentSchedulesTableProps> = ({ 
       return <div />;
   }
 };
-PaymentSchedulesTableComponent.defaultProps = { showCustomer: false };
+PaymentSchedulesTable.defaultProps = { showCustomer: false };
 
-export const PaymentSchedulesTable: React.FC<PaymentSchedulesTableProps> = ({ paymentSchedules, showCustomer, refreshList, operator, onError, onCardUpdateSuccess }) => {
+const PaymentSchedulesTableWrapper: React.FC<PaymentSchedulesTableProps> = ({ paymentSchedules, showCustomer, refreshList, operator, onError, onCardUpdateSuccess }) => {
   return (
     <Loader>
-      <PaymentSchedulesTableComponent paymentSchedules={paymentSchedules} showCustomer={showCustomer} refreshList={refreshList} operator={operator} onError={onError} onCardUpdateSuccess={onCardUpdateSuccess} />
+      <PaymentSchedulesTable paymentSchedules={paymentSchedules} showCustomer={showCustomer} refreshList={refreshList} operator={operator} onError={onError} onCardUpdateSuccess={onCardUpdateSuccess} />
     </Loader>
   );
 };
+
+export { PaymentSchedulesTableWrapper as PaymentSchedulesTable };

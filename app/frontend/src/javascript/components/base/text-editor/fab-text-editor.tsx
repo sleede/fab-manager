@@ -101,4 +101,5 @@ export const FabTextEditor: React.ForwardRefRenderFunction<FabTextEditorRef, Fab
   );
 };
 
+// eslint-disable-next-line import/no-default-export
 export default forwardRef(FabTextEditor);

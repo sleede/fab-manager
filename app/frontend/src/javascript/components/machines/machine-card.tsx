@@ -21,7 +21,7 @@ interface MachineCardProps {
  * This component is a box showing the picture of the given machine and two buttons: one to start the reservation process
  * and another to redirect the user to the machine description page.
  */
-const MachineCardComponent: React.FC<MachineCardProps> = ({ user, machine, onShowMachine, onReserveMachine, onError, onSuccess, onLoginRequested, onEnrollRequested, canProposePacks }) => {
+const MachineCard: React.FC<MachineCardProps> = ({ user, machine, onShowMachine, onReserveMachine, onError, onSuccess, onLoginRequested, onEnrollRequested, canProposePacks }) => {
   const { t } = useTranslation('public');
 
   // shall we display a loader to prevent double-clicking, while the machine details are loading?
@@ -82,10 +82,12 @@ const MachineCardComponent: React.FC<MachineCardProps> = ({ user, machine, onSho
   );
 };
 
-export const MachineCard: React.FC<MachineCardProps> = ({ user, machine, onShowMachine, onReserveMachine, onError, onSuccess, onLoginRequested, onEnrollRequested, canProposePacks }) => {
+const MachineCardWrapper: React.FC<MachineCardProps> = ({ user, machine, onShowMachine, onReserveMachine, onError, onSuccess, onLoginRequested, onEnrollRequested, canProposePacks }) => {
   return (
     <Loader>
-      <MachineCardComponent user={user} machine={machine} onShowMachine={onShowMachine} onReserveMachine={onReserveMachine} onError={onError} onSuccess={onSuccess} onLoginRequested={onLoginRequested} onEnrollRequested={onEnrollRequested} canProposePacks={canProposePacks} />
+      <MachineCard user={user} machine={machine} onShowMachine={onShowMachine} onReserveMachine={onReserveMachine} onError={onError} onSuccess={onSuccess} onLoginRequested={onLoginRequested} onEnrollRequested={onEnrollRequested} canProposePacks={canProposePacks} />
     </Loader>
   );
 };
+
+export { MachineCardWrapper as MachineCard };

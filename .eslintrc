@@ -6,7 +6,9 @@
   ],
   "rules": {
     "semi": ["error", "always"],
-    "no-use-before-define": "off"
+    "no-use-before-define": "off",
+    "fabmanager/component-class-named-as-component": "error",
+    "import/no-default-export": "error"
   },
   "globals": {
     "Application": true,
@@ -19,7 +21,7 @@
     "$": true,
     "KeyboardEvent": true
   },
-  "plugins": ["html-erb"],
+  "plugins": ["html-erb", "fabmanager"],
   "overrides": [
     {
       "files": ["**/*.ts", "**/*.tsx"],

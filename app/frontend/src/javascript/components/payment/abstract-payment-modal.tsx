@@ -203,7 +203,7 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
       width={modalSize}
       closeButton={false}
       customFooter={logoFooter}
-      className={`payment-modal ${className || ''}`}>
+      className={`abstract-payment-modal ${className || ''}`}>
       {ready && <div>
         <WalletInfo cart={cart} currentUser={currentUser} wallet={wallet} price={price?.price} />
         <GatewayForm onSubmit={handleSubmit}
