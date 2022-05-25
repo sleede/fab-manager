@@ -7,7 +7,7 @@
   "rules": {
     "semi": ["error", "always"],
     "no-use-before-define": "off",
-    "fabmanager/component-class-named-as-component": "error",
+    "fabmanager/component-class-named-as-component": ["error", { "ignoreAbstractKeyword": true }],
     "import/no-default-export": "error"
   },
   "globals": {

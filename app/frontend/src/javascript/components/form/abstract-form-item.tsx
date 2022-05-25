@@ -40,7 +40,6 @@ export const AbstractFormItem = <TFieldValues extends FieldValues>({ id, label, 
 
   // Compose classnames from props
   const classNames = [
-    'form-item',
     `${className || ''}`,
     `${isDirty && fieldError ? 'is-incorrect' : ''}`,
     `${isDirty && warning ? 'is-warned' : ''}`,
@@ -59,7 +58,7 @@ export const AbstractFormItem = <TFieldValues extends FieldValues>({ id, label, 
   }
 
   return (
-    <label className={classNames} onClick={handleLabelClick}>
+    <label className={`form-item ${classNames}`} onClick={handleLabelClick}>
       {label && <div className='form-item-header'>
         <p>{label}</p>
         {tooltip && <div className="item-tooltip">
