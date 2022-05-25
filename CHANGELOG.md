@@ -2,6 +2,8 @@
 
 ## next deploy
 
+- Fix a bug: unable to run scripts on systemts with legacy version of docker-compose
+
 ## v5.4.1 2022 May 23
 
 - Disable to clicking outside or pressing escape to close sign up modal

@@ -4,11 +4,11 @@ docker-compose()
 {
   if ! docker compose version 1>/dev/null 2>/dev/null
   then
-    if ! \docker-compose version 1>/dev/null 2>/dev/null
+    if ! command docker-compose version 1>/dev/null 2>/dev/null
     then
       echo -e "\e[91m[ ❌ ] docker-compose was not found, exiting...\e[39m" && exit 1
     else
-      \docker-compose "$@"
+      command docker-compose "$@"
     fi
   else
     docker compose "$@"
