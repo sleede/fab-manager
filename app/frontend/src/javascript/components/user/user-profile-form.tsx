@@ -97,7 +97,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
       const fData = data.filter(f => f.actived);
       setProfileCustomFields(fData);
       const userProfileCustomFields = fData.map(f => {
-        const upcf = user.invoicing_profile_attributes.user_profile_custom_fields_attributes.find(uf => uf.profile_custom_field_id === f.id);
+        const upcf = user?.invoicing_profile_attributes?.user_profile_custom_fields_attributes?.find(uf => uf.profile_custom_field_id === f.id);
         return upcf || {
           value: '',
           invoicing_profile_id: user.invoicing_profile_attributes.id,
