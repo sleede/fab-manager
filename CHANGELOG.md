@@ -3,6 +3,7 @@
 ## next deploy
 
 - Fix a bug: unable to run scripts on systemts with legacy version of docker-compose
+- Fix a bug: unable to sign up if admin actived organization's additional fields with required
 
 ## v5.4.1 2022 May 23
 

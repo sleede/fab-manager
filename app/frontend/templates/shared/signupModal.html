@@ -165,8 +165,8 @@
           </div>
         </div>
 
-        <div ng-repeat="(i, profileCustomField) in profileCustomFields">
-          <div class="form-group required-row" ng-show="user.organization" ng-class="{'has-error': signupForm.user_profile_custom_fields{{i}}.$dirty && signupForm.user_profile_custom_fields{{i}}.$invalid}">
+        <div ng-if="user.organization" ng-repeat="(i, profileCustomField) in profileCustomFields">
+          <div class="form-group required-row" ng-class="{'has-error': signupForm.user_profile_custom_fields{{i}}.$dirty && signupForm.user_profile_custom_fields{{i}}.$invalid}">
             <div class="col-sm-12">
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-building-o"></i></span>
