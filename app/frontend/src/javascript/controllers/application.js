@@ -432,7 +432,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
           size: 'sm',
           resolve: {
             settingsPromise: ['Setting', function (Setting) {
-              return Setting.query({ names: "['confirmation_required']" }).$promise;
+              return Setting.query({ names: "['confirmation_required', 'public_registrations']" }).$promise;
             }]
           },
           controller: ['$scope', '$uibModalInstance', '_t', 'settingsPromise', function ($scope, $uibModalInstance, _t, settingsPromise) {
@@ -440,6 +440,9 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
 
             // email confirmation required before user sign-in?
             $scope.confirmationRequired = settingsPromise.confirmation_required;
+
+            // is public registrations allowed?
+            $scope.publicRegistrations = (settingsPromise.public_registrations !== 'false');
 
             $scope.login = function () {
               Auth.login(user).then(function (user) {
