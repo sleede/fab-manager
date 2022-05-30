@@ -7,6 +7,7 @@
 - Fix a bug: undefined error in new member page
 - Fix a bug: OIDC scopes are separated by spaces, not commas
 - Fix a bug: unable to create OIDC custom scopes
+- Fix a bug: enable admins to be invited to collaborate on projects
 - Fix a security issue: updated rack to 2.2.3.1 to fix [CVE-2022-30123](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-30123) and [CVE-2022-30122](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-30122)
 
 
