@@ -71,6 +71,7 @@ See https://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-confi
 The path to a file containing a PEM-format CA certificate.
 See [OpenSSL::SSL::SSLContext](https://ruby-doc.org/stdlib-2.6/libdoc/openssl/rdoc/OpenSSL/SSL/SSLContext.html).
 This is an undocumented setting of [mail gem](https://github.com/mikel/mail).
+In production with Docker, you may need to mount your certificate into the running container, by adding an entry in your [docker-compose.yml](https://github.com/sleede/fab-manager/blob/master/setup/docker-compose.yml), under `services > fabmanager > volumes`, like the following: `- ${PWD}/certs/ca-cert-file.pem:/etc/ssl/my-certs/ca-cert-file.pem`
 <a name="SMTP_CA_PATH"></a>
 
     SMTP_CA_PATH
@@ -78,6 +79,7 @@ This is an undocumented setting of [mail gem](https://github.com/mikel/mail).
 The path to a directory containing CA certificates in PEM format.
 See [OpenSSL::SSL::SSLContext](https://ruby-doc.org/stdlib-2.6/libdoc/openssl/rdoc/OpenSSL/SSL/SSLContext.html).
 This is an undocumented setting of [mail gem](https://github.com/mikel/mail).
+In production with Docker, you may need to mount your certificate into the running container, by adding an entry in your [docker-compose.yml](https://github.com/sleede/fab-manager/blob/master/setup/docker-compose.yml), under `services > fabmanager > volumes`, like the following: `- ${PWD}/certs:/etc/ssl/my-certs`
 <a name="SMTP_TLS"></a>
 
     SMTP_TLS
