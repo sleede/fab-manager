@@ -41,7 +41,7 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
 
   // regular expression to validate the input fields
   const endpointRegex = /^\/?([-._~:?#[\]@!$&'()*+,;=%\w]+\/?)*$/;
-  const urlRegex = /^(https?:\/\/)([\da-z.-]+)\.([-a-z0-9.]{2,30})([/\w .-]*)*\/?$/;
+  const urlRegex = /^(https?:\/\/)([^.]+)\.(.{2,30})(\/.*)*\/?$/;
 
   /**
    * If the discovery endpoint is available, the user will be able to choose to use it or not.
@@ -72,14 +72,6 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
       setDiscoveryAvailable(false);
       setScopesAvailable(null);
     });
-  };
-
-  /**
-   * Some OIDC providers expect that the scopes are separated by the space character,
-   * rather than a comma.
-   */
-  const formatScopes = (values: Array<string>): string => {
-    return values.join(' ');
   };
 
   return (
@@ -119,11 +111,9 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
                                            label={t('app.admin.authentication.openid_connect_form.scope')}
                                            tooltip={<HtmlTranslate trKey="app.admin.authentication.openid_connect_form.scope_help_html" />}
                                            options={scopesAvailable.map((scope) => ({ value: scope, label: scope }))}
-                                           formatResult={formatScopes}
+                                           delimiter={' '}
                                            creatable
-                                           setValue={setValue}
-                                           currentValue={currentFormValues.scope?.split(' ')}
-                                           register={register} />}
+                                           control={control} />}
       <FormSelect id="providable_attributes.prompt"
                   label={t('app.admin.authentication.openid_connect_form.prompt')}
                   tooltip={<HtmlTranslate trKey="app.admin.authentication.openid_connect_form.prompt_help_html" />}

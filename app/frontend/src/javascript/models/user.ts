@@ -53,12 +53,14 @@ export interface User {
         address: string
       }
     },
-    user_profile_custom_fields_attributes: {
-      id: number,
-      value: string,
-      invoicing_profile_id: number,
-      profile_custom_field_id: number
-    }
+    user_profile_custom_fields_attributes: Array<
+      {
+        id?: number,
+        value: string,
+        invoicing_profile_id: number,
+        profile_custom_field_id: number
+      }
+    >
   },
   statistic_profile_attributes: {
     id: number,
@@ -84,7 +86,8 @@ export interface User {
   training_credits: Array<number>,
   machine_credits: Array<{ machine_id: number, hours_used: number }>,
   last_sign_in_at: TDateISO
-  validated_at: TDateISO
+  validated_at: TDateISO,
+  tag_ids: Array<number>
 }
 
 type OrderingKey = 'last_name' | 'first_name' | 'email' | 'phone' | 'group' | 'plan' | 'id'

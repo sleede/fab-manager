@@ -2,6 +2,7 @@
 
 ## next deploy
 
+- Updated react-select to 5.3.2
 - Fix a bug: unable to run scripts on systemts with legacy version of docker-compose
 - Fix a bug: unable to sign up if admin actived organization's additional fields with required
 - Fix a bug: undefined error in new member page

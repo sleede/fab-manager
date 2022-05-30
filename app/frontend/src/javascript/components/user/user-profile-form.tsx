@@ -58,7 +58,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
 
   // regular expression to validate the input fields
   const phoneRegex = /^((00|\+)\d{2,3})?\d{4,14}$/;
-  const urlRegex = /^(https?:\/\/)([\da-z.-]+)\.([-a-z\d.]{2,30})([/\w .-]*)*\/?$/;
+  const urlRegex = /^(https?:\/\/)([^.]+)\.(.{2,30})(\/.*)*\/?$/;
 
   const { handleSubmit, register, control, formState, setValue, reset } = useForm<User>({ defaultValues: { ...user } });
   const output = useWatch<User>({ control });
@@ -67,8 +67,6 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
   const [isLocalDatabaseProvider, setIsLocalDatabaseProvider] = useState<boolean>(false);
   const [groups, setGroups] = useState<selectOption[]>([]);
   const [termsAndConditions, setTermsAndConditions] = useState<CustomAsset>(null);
-  const [trainings, setTrainings] = useState<selectOption[]>([]);
-  const [tags, setTags] = useState<selectOption[]>([]);
   const [profileCustomFields, setProfileCustomFields] = useState<ProfileCustomField[]>([]);
 
   useEffect(() => {
@@ -82,16 +80,6 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
     }
     if (showTermsAndConditionsInput) {
       CustomAssetAPI.get(CustomAssetName.CguFile).then(setTermsAndConditions).catch(error => onError(error));
-    }
-    if (showTrainingsInput) {
-      TrainingAPI.index({ disabled: false }).then(data => {
-        setTrainings(buildOptions(data));
-      }).catch(error => onError(error));
-    }
-    if (showTagsInput) {
-      TagAPI.index().then(data => {
-        setTags(buildOptions(data));
-      }).catch(error => onError(error));
     }
     ProfileCustomFieldAPI.index().then(data => {
       const fData = data.filter(f => f.actived);
@@ -115,6 +103,24 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
     return items.map(t => {
       return { value: t.id, label: t.name };
     });
+  };
+
+  /**
+   * Asynchronously load the full list of enabled trainings to display in the drop-down select field
+   */
+  const loadTrainings = (inputValue: string, callback: (options: Array<selectOption>) => void): void => {
+    TrainingAPI.index({ disabled: false }).then(data => {
+      callback(buildOptions(data));
+    }).catch(error => onError(error));
+  };
+
+  /**
+   * Asynchronously load the full list of tags to display in the drop-down select field
+   */
+  const loadTags = (inputValue: string, callback: (options: Array<selectOption>) => void): void => {
+    TagAPI.index().then(data => {
+      callback(buildOptions(data));
+    }).catch(error => onError(error));
   };
 
   /**
@@ -344,14 +350,14 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
         </div>}
         {showTrainingsInput && <div className="trainings">
           <FormMultiSelect control={control}
-                           options={trainings}
+                           loadOptions={loadTrainings}
                            formState={formState}
                            label={t('app.shared.user_profile_form.trainings')}
                            id="statistic_profile_attributes.training_ids" />
         </div>}
         {showTagsInput && <div className="tags">
           <FormMultiSelect control={control}
-                           options={tags}
+                           loadOptions={loadTags}
                            formState={formState}
                            label={t('app.shared.user_profile_form.tags')}
                            id="tag_ids" />
