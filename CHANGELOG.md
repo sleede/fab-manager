@@ -5,6 +5,8 @@
 - Fix a bug: unable to run scripts on systemts with legacy version of docker-compose
 - Fix a bug: unable to sign up if admin actived organization's additional fields with required
 - Fix a bug: undefined error in new member page
+- Fix a security issue: updated rack to 2.2.3.1 to fix [CVE-2022-30123](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-30123) and [CVE-2022-30122](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-30122)
+
 
 ## v5.4.1 2022 May 23
 
