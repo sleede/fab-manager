@@ -74,6 +74,14 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
     });
   };
 
+  /**
+   * Some OIDC providers expect that the scopes are separated by the space character,
+   * rather than a comma.
+   */
+  const formatScopes = (values: Array<string>): string => {
+    return values.join(' ');
+  };
+
   return (
     <div className="openid-connect-form">
       <hr/>
@@ -105,15 +113,17 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
       {!scopesAvailable && <FormInput id="providable_attributes.scope"
                                       register={register}
                                       label={t('app.admin.authentication.openid_connect_form.scope')}
-                                      placeholder="openid,profile,email"
+                                      placeholder="openid profile email"
                                       tooltip={<HtmlTranslate trKey="app.admin.authentication.openid_connect_form.scope_help_html" />} />}
       {scopesAvailable && <FormMultiSelect id="providable_attributes.scope"
-                                           expectedResult="string"
                                            label={t('app.admin.authentication.openid_connect_form.scope')}
                                            tooltip={<HtmlTranslate trKey="app.admin.authentication.openid_connect_form.scope_help_html" />}
                                            options={scopesAvailable.map((scope) => ({ value: scope, label: scope }))}
+                                           formatResult={formatScopes}
                                            creatable
-                                           control={control} />}
+                                           setValue={setValue}
+                                           currentValue={currentFormValues.scope?.split(' ')}
+                                           register={register} />}
       <FormSelect id="providable_attributes.prompt"
                   label={t('app.admin.authentication.openid_connect_form.prompt')}
                   tooltip={<HtmlTranslate trKey="app.admin.authentication.openid_connect_form.prompt_help_html" />}
@@ -139,7 +149,7 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
                  placeholder="https://sso.exemple.com/my-account"
                  label={t('app.admin.authentication.openid_connect_form.profile_edition_url')}
                  tooltip={t('app.admin.authentication.openid_connect_form.profile_edition_url_help')}
-                 rules={{ pattern: urlRegex }} />
+                 rules={{ required: false, pattern: urlRegex }} />
       <h4>{t('app.admin.authentication.openid_connect_form.client_options')}</h4>
       <FormInput id="providable_attributes.client__identifier"
                  label={t('app.admin.authentication.openid_connect_form.client__identifier')}
