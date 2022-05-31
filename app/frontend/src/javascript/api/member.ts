@@ -23,7 +23,7 @@ export default class MemberAPI {
   }
 
   static async update (user: User): Promise<User> {
-    const data = serialize({ user });
+    const data = serialize({ user }, { allowEmptyArrays: true });
     if (user.profile_attributes?.user_avatar_attributes?.attachment_files[0]) {
       data.set('user[profile_attributes][user_avatar_attributes][attachment]', user.profile_attributes.user_avatar_attributes.attachment_files[0]);
     }
