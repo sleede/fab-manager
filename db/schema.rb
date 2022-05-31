@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_17_140916) do
+ActiveRecord::Schema.define(version: 2022_05_31_160223) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -415,7 +415,7 @@ ActiveRecord::Schema.define(version: 2022_05_17_140916) do
     t.string "issuer"
     t.boolean "discovery"
     t.string "client_auth_method"
-    t.string "scope"
+    t.string "scope", array: true
     t.string "response_type"
     t.string "response_mode"
     t.string "display"

@@ -10,6 +10,7 @@ import { OpenIdConnectProvider } from '../../models/authentication-provider';
 import SsoClient from '../../api/external/sso';
 import { FieldPathValue } from 'react-hook-form/dist/types/path';
 import { FormMultiSelect } from '../form/form-multi-select';
+import { difference } from 'lodash';
 
 interface OpenidConnectFormProps<TFieldValues, TContext extends object> {
   register: UseFormRegister<TFieldValues>,
@@ -61,6 +62,21 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
   };
 
   /**
+   * Return the list of scopes that are available for the current configuration.
+   * The resulting list is provided through the callback parameter.
+   */
+  const loadScopes = (inputValue: string, callback: (options: Array<{ value: string, label: string }>) => void): void => {
+    const current = currentFormValues.scope || [];
+    if (scopesAvailable) {
+      // add custom scopes to the list of available scopes
+      const unlisted = difference(current, scopesAvailable);
+      callback(scopesAvailable.concat(unlisted).map(scope => ({ value: scope, label: scope })));
+    } else {
+      current.map(scope => ({ value: scope, label: scope }));
+    }
+  };
+
+  /**
    * Callback that check for the existence of the .well-known/openid-configuration endpoint, for the given issuer.
    * This callback is triggered when the user changes the issuer field.
    */
@@ -102,18 +118,12 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
                   ]}
                   valueDefault={'basic'}
                   control={control} />
-      {!scopesAvailable && <FormInput id="providable_attributes.scope"
-                                      register={register}
-                                      label={t('app.admin.authentication.openid_connect_form.scope')}
-                                      placeholder="openid profile email"
-                                      tooltip={<HtmlTranslate trKey="app.admin.authentication.openid_connect_form.scope_help_html" />} />}
-      {scopesAvailable && <FormMultiSelect id="providable_attributes.scope"
-                                           label={t('app.admin.authentication.openid_connect_form.scope')}
-                                           tooltip={<HtmlTranslate trKey="app.admin.authentication.openid_connect_form.scope_help_html" />}
-                                           options={scopesAvailable.map((scope) => ({ value: scope, label: scope }))}
-                                           delimiter={' '}
-                                           creatable
-                                           control={control} />}
+      <FormMultiSelect id="providable_attributes.scope"
+                       label={t('app.admin.authentication.openid_connect_form.scope')}
+                       tooltip={<HtmlTranslate trKey="app.admin.authentication.openid_connect_form.scope_help_html" />}
+                       loadOptions={loadScopes}
+                       creatable
+                       control={control} />
       <FormSelect id="providable_attributes.prompt"
                   label={t('app.admin.authentication.openid_connect_form.prompt')}
                   tooltip={<HtmlTranslate trKey="app.admin.authentication.openid_connect_form.prompt_help_html" />}

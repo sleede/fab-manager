@@ -16,7 +16,6 @@ interface CommonProps<TFieldValues, TContext extends object, TOptionValue> exten
   onChange?: (values: Array<TOptionValue>) => void,
   placeholder?: string,
   creatable?: boolean,
-  delimiter?: string
 }
 
 // we should provide either an array of options or a function that returns a promise, but not both
@@ -36,7 +35,7 @@ type selectOption<TOptionValue> = { value: TOptionValue, label: string, select?:
  * This component is a wrapper around react-select to use with react-hook-form.
  * It is a multi-select component.
  */
-export const FormMultiSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, tooltip, className, control, placeholder, options, valuesDefault, error, rules, disabled, onChange, formState, warning, loadOptions, creatable, delimiter }: FormSelectProps<TFieldValues, TContext, TOptionValue>) => {
+export const FormMultiSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, tooltip, className, control, placeholder, options, valuesDefault, error, rules, disabled, onChange, formState, warning, loadOptions, creatable }: FormSelectProps<TFieldValues, TContext, TOptionValue>) => {
   const { t } = useTranslation('shared');
 
   const [isDisabled, setIsDisabled] = React.useState<boolean>(false);
@@ -121,7 +120,6 @@ export const FormMultiSelect = <TFieldValues extends FieldValues, TContext exten
                       className: 'rs',
                       ref,
                       value: getCurrentValues(value),
-                      delimiter,
                       placeholder,
                       isDisabled,
                       isMulti: true,

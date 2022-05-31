@@ -47,7 +47,7 @@ export interface OpenIdConnectProvider {
   issuer: string,
   discovery: boolean,
   client_auth_method?: 'basic' | 'jwks',
-  scope?: string,
+  scope?: Array<string>,
   prompt?: 'none' | 'login' | 'consent' | 'select_account',
   send_scope_to_token_endpoint?: string,
   client__identifier: string,
