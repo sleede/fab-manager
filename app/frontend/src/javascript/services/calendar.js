@@ -13,9 +13,9 @@ Application.Services.factory('CalendarConfig', [() =>
       timezone: Fablab.timezone,
       locale: Fablab.fullcalendar_locale,
       header: {
-        left: 'month agendaWeek',
+        left: 'month agendaWeek today prev,next',
         center: 'title',
-        right: 'today prev,next'
+        right: ''
       },
       firstDay: Fablab.weekStartingDay,
       scrollTime: DEFAULT_CALENDAR_POSITION,

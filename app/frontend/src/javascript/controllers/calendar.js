@@ -166,9 +166,9 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
       $scope.calendarConfig = CalendarConfig({
         slotEventOverlap: true,
         header: {
-          left: 'month agendaWeek agendaDay',
+          left: 'month agendaWeek agendaDay today prev,next',
           center: 'title',
-          right: 'today prev,next'
+          right: ''
         },
         minTime: moment.duration(moment(bookingWindowStart.setting.value).format('HH:mm:ss')),
         maxTime: moment.duration(moment(bookingWindowEnd.setting.value).format('HH:mm:ss')),
