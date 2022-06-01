@@ -245,7 +245,8 @@ class API::MembersController < API::ApiController
 
     members_service = Members::MembersService.new(@member)
 
-    if members_service.validate(user_params[:validated_at].present?)
+    uparams = params.require(:user).permit(:validated_at)
+    if members_service.validate(uparams[:validated_at].present?)
       render :show, status: :ok, location: member_path(@member)
     else
       render json: @member.errors, status: :unprocessable_entity
@@ -275,7 +276,7 @@ class API::MembersController < API::ApiController
 
     elsif current_user.admin? || current_user.manager?
       params.require(:user).permit(:username, :email, :password, :password_confirmation, :is_allow_contact, :is_allow_newsletter, :group_id,
-                                   :validated_at, tag_ids: [],
+                                   tag_ids: [],
                                    profile_attributes: [:id, :first_name, :last_name, :phone, :interest, :software_mastered, :website, :job,
                                                         :facebook, :twitter, :google_plus, :viadeo, :linkedin, :instagram, :youtube, :vimeo,
                                                         :dailymotion, :github, :echosciences, :pinterest, :lastfm, :flickr,
