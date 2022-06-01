@@ -527,3 +527,5 @@ pt:
       payzen_card_update_modal:
         update_card: "Atualizar o cartão"
         validate_button: "Verificar o novo cartão"
+      form_multi_select:
+        create_label: "Add {VALUE}"
