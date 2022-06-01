@@ -72,7 +72,7 @@ class VatHistoryService
                                   .history_values.where('created_at >= ?', first_vat_rate_by_type.created_at)
                                   .order(created_at: 'ASC')
         vat_rate_by_type.each do |rate|
-          if rate.value.blank?
+          if rate.value.blank? || rate.value == 'null' || rate.value == 'undefined' || rate.value == 'NaN'
             # if, at some point in the history, a blank rate was set, the general VAT rate is used instead
             vat_rate = Setting.find_by(name: 'invoice_VAT-rate')
                               .history_values.where('created_at < ?', rate.created_at)

@@ -530,6 +530,13 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
 
                       $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
 
+                      $scope.rateValue = function (value) {
+                        if (value.rate === 'null' || value.value === 'undefined' || value.rate === 'NaN') {
+                          return '';
+                        }
+                        return value.rate;
+                      };
+
                       const initialize = function () {
                         rateHistory.setting.history.forEach(function (rate) {
                           $scope.history.push({ date: rate.created_at, rate: rate.value, user: rate.user });
@@ -544,7 +551,8 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
             });
             return editMultiVATModalInstance.result.then(function (result) {
               ['Machine', 'Space', 'Training', 'Event', 'Subscription'].forEach(rateType => {
-                Setting.update({ name: `invoice_VAT-rate_${rateType}` }, { value: result.multiVAT[`rate${rateType}`] + '' }, function (data) {
+                const value = _.isFinite(result.multiVAT[`rate${rateType}`]) ? result.multiVAT[`rate${rateType}`] + '' : '';
+                Setting.update({ name: `invoice_VAT-rate_${rateType}` }, { value }, function (data) {
                   return growl.success(_t('app.admin.invoices.VAT_rate_successfully_saved'));
                 }
                 , function (error) {
