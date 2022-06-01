@@ -2,6 +2,8 @@
 
 ## next deploy
 
+## v5.4.2 2022 June 1
+
 - Updated react-select to 5.3.2
 - Moved the calendar navigation buttons to the left side
 - Fix a bug: unable to remove the last training or the last tag to a member
@@ -15,7 +17,6 @@
 - Fix a bug: unable to save user validation if admin click save user profile button after switch user valitation
 - Fix a bug: if multi VAT no value is filled in, the general rate can't apply
 - Fix a security issue: updated rack to 2.2.3.1 to fix [CVE-2022-30123](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-30123) and [CVE-2022-30122](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-30122)
-
 
 ## v5.4.1 2022 May 23
 
