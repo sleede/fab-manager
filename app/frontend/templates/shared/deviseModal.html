@@ -60,7 +60,7 @@
           <button class="btn btn-valid btn-warning btn-block p-l btn-lg text-u-c r-b" ng-click="login()" ng-disabled="loginForm.$invalid" translate translate-default="OK">{{ 'app.shared.buttons.confirm' }}</button>
         </div>
       </div>
-      <p class="text-center font-sbold">
+      <p class="text-center font-sbold" ng-show="publicRegistrations">
         <span translate translate-default="Not registered?">{{ 'app.public.common.not_registered_to_the_fablab' }}</span>
         <br/>
         <a ng-click="openSignup($event)" class="text-u-l" translate translate-default="Create an account">{{ 'app.public.common.create_an_account' }}</a></br>

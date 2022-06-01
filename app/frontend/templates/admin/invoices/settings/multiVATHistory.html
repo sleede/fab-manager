@@ -17,7 +17,7 @@
           <td>
             <span class="no-user-label" ng-show="value.enabled === false" translate>{{'app.admin.invoices.VAT_disabled'}}</span>
             <span class="no-user-label" ng-show="value.enabled === true" translate>{{'app.admin.invoices.VAT_enabled'}}</span>
-            <span ng-show="value.rate">{{value.rate}}</span>
+            <span ng-show="value.rate">{{rateValue(value)}}</span>
           </td>
           <td>{{value.date | amDateFormat:'L LT'}}</td>
           <td>{{value.user.name}}<span class="no-user-label" ng-hide="value.user" translate>{{ 'app.admin.invoices.deleted_user' }}</span></td>

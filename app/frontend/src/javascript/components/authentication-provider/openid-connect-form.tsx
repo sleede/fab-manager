@@ -10,6 +10,7 @@ import { OpenIdConnectProvider } from '../../models/authentication-provider';
 import SsoClient from '../../api/external/sso';
 import { FieldPathValue } from 'react-hook-form/dist/types/path';
 import { FormMultiSelect } from '../form/form-multi-select';
+import { difference } from 'lodash';
 
 interface OpenidConnectFormProps<TFieldValues, TContext extends object> {
   register: UseFormRegister<TFieldValues>,
@@ -41,7 +42,7 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
 
   // regular expression to validate the input fields
   const endpointRegex = /^\/?([-._~:?#[\]@!$&'()*+,;=%\w]+\/?)*$/;
-  const urlRegex = /^(https?:\/\/)([\da-z.-]+)\.([-a-z0-9.]{2,30})([/\w .-]*)*\/?$/;
+  const urlRegex = /^(https?:\/\/)([^.]+)\.(.{2,30})(\/.*)*\/?$/;
 
   /**
    * If the discovery endpoint is available, the user will be able to choose to use it or not.
@@ -58,6 +59,21 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
     return [
       { value: false, label: t('app.admin.authentication.openid_connect_form.discovery_disabled') }
     ];
+  };
+
+  /**
+   * Return the list of scopes that are available for the current configuration.
+   * The resulting list is provided through the callback parameter.
+   */
+  const loadScopes = (inputValue: string, callback: (options: Array<{ value: string, label: string }>) => void): void => {
+    const current = currentFormValues.scope || [];
+    if (scopesAvailable) {
+      // add custom scopes to the list of available scopes
+      const unlisted = difference(current, scopesAvailable);
+      callback(scopesAvailable.concat(unlisted).map(scope => ({ value: scope, label: scope })));
+    } else {
+      current.map(scope => ({ value: scope, label: scope }));
+    }
   };
 
   /**
@@ -102,18 +118,12 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
                   ]}
                   valueDefault={'basic'}
                   control={control} />
-      {!scopesAvailable && <FormInput id="providable_attributes.scope"
-                                      register={register}
-                                      label={t('app.admin.authentication.openid_connect_form.scope')}
-                                      placeholder="openid,profile,email"
-                                      tooltip={<HtmlTranslate trKey="app.admin.authentication.openid_connect_form.scope_help_html" />} />}
-      {scopesAvailable && <FormMultiSelect id="providable_attributes.scope"
-                                           expectedResult="string"
-                                           label={t('app.admin.authentication.openid_connect_form.scope')}
-                                           tooltip={<HtmlTranslate trKey="app.admin.authentication.openid_connect_form.scope_help_html" />}
-                                           options={scopesAvailable.map((scope) => ({ value: scope, label: scope }))}
-                                           creatable
-                                           control={control} />}
+      <FormMultiSelect id="providable_attributes.scope"
+                       label={t('app.admin.authentication.openid_connect_form.scope')}
+                       tooltip={<HtmlTranslate trKey="app.admin.authentication.openid_connect_form.scope_help_html" />}
+                       loadOptions={loadScopes}
+                       creatable
+                       control={control} />
       <FormSelect id="providable_attributes.prompt"
                   label={t('app.admin.authentication.openid_connect_form.prompt')}
                   tooltip={<HtmlTranslate trKey="app.admin.authentication.openid_connect_form.prompt_help_html" />}
@@ -139,7 +149,7 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
                  placeholder="https://sso.exemple.com/my-account"
                  label={t('app.admin.authentication.openid_connect_form.profile_edition_url')}
                  tooltip={t('app.admin.authentication.openid_connect_form.profile_edition_url_help')}
-                 rules={{ pattern: urlRegex }} />
+                 rules={{ required: false, pattern: urlRegex }} />
       <h4>{t('app.admin.authentication.openid_connect_form.client_options')}</h4>
       <FormInput id="providable_attributes.client__identifier"
                  label={t('app.admin.authentication.openid_connect_form.client__identifier')}

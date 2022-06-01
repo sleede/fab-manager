@@ -2,6 +2,22 @@
 
 ## next deploy
 
+## v5.4.2 2022 June 1
+
+- Updated react-select to 5.3.2
+- Moved the calendar navigation buttons to the left side
+- Fix a bug: unable to remove the last training or the last tag to a member
+- Fix a bug: unable to run scripts on systems with legacy version of docker-compose
+- Fix a bug: unable to sign up if admin actived organization's additional fields with required
+- Fix a bug: undefined error in new member page
+- Fix a bug: OIDC scopes are separated by spaces, not commas
+- Fix a bug: unable to create OIDC custom scopes
+- Fix a bug: enable admins to be invited to collaborate on projects
+- Fix a bug: hide some links to create an account if public registrations is disabled
+- Fix a bug: unable to save user validation if admin click save user profile button after switch user valitation
+- Fix a bug: if multi VAT no value is filled in, the general rate can't apply
+- Fix a security issue: updated rack to 2.2.3.1 to fix [CVE-2022-30123](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-30123) and [CVE-2022-30122](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-30122)
+
 ## v5.4.1 2022 May 23
 
 - Disable to clicking outside or pressing escape to close sign up modal
@@ -23,6 +39,7 @@
 - Option to disable the 'machines' module
 - Option to prevent users from changing their group
 - Ability to define social networks for the FabLab "about page"
+- Plan categories can have rich-text descriptions
 - Improved security when changing passwords
 - Support for OpenID Connect in Single-Sign-On authentication providers
 - ICS file attached to the reservation notification email

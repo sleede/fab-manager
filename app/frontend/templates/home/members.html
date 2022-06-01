@@ -17,7 +17,7 @@
     </div>
 
   </div>
-  <div class="m-t-sm m-b-sm text-center" ng-if="!isAuthenticated()">
+  <div class="m-t-sm m-b-sm text-center" ng-if="!isAuthenticated()" ng-show="publicRegistrations">
     <button ng-click="signup($event)" class="btn btn-warning-full width-70 font-sbold rounded text-sm" translate>{{ 'app.public.home.create_an_account' }}</button>
   </div>
 

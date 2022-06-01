@@ -55,9 +55,13 @@
   box-shadow: none;
   text-shadow: none;
   margin: 0;
+  margin-right: 0.5rem;
   height: 40px;
   line-height: 18px;
   padding: 10px;
+}
+.fc-button-group .fc-button {
+  margin: 0;
 }
 
 .fc-toolbar h2 {

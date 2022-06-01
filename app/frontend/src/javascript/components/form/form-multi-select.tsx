@@ -1,35 +1,45 @@
 import React, { useEffect } from 'react';
+import AsyncSelect from 'react-select/async';
 import Select from 'react-select';
-import { Controller, Path } from 'react-hook-form';
+import AsyncCreatableSelect from 'react-select/async-creatable';
+import CreatableSelect from 'react-select/creatable';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { FieldPath } from 'react-hook-form/dist/types/path';
-import { FieldPathValue, UnpackNestedValue } from 'react-hook-form/dist/types';
 import { FormControlledComponent } from '../../models/form-component';
 import { AbstractFormItem, AbstractFormItemProps } from './abstract-form-item';
-import CreatableSelect from 'react-select/creatable';
+import { useTranslation } from 'react-i18next';
+import { Controller, FieldPathValue, Path } from 'react-hook-form';
+import { UnpackNestedValue } from 'react-hook-form/dist/types/form';
 
-interface FormSelectProps<TFieldValues, TContext extends object, TOptionValue> extends FormControlledComponent<TFieldValues, TContext>, AbstractFormItemProps<TFieldValues> {
-  options: Array<selectOption<TOptionValue>>,
+interface CommonProps<TFieldValues, TContext extends object, TOptionValue> extends FormControlledComponent<TFieldValues, TContext>, AbstractFormItemProps<TFieldValues> {
   valuesDefault?: Array<TOptionValue>,
   onChange?: (values: Array<TOptionValue>) => void,
   placeholder?: string,
-  expectedResult?: 'array' | 'string'
   creatable?: boolean,
 }
+
+// we should provide either an array of options or a function that returns a promise, but not both
+type OptionsProps<TOptionValue> =
+  { options: Array<selectOption<TOptionValue>>, loadOptions?: never } |
+  { options?: never, loadOptions: (inputValue: string, callback: (options: Array<selectOption<TOptionValue>>) => void) => void };
+
+type FormSelectProps<TFieldValues, TContext extends object, TOptionValue> = CommonProps<TFieldValues, TContext, TOptionValue> & OptionsProps<TOptionValue>;
 
 /**
  * Option format, expected by react-select
  * @see https://github.com/JedWatson/react-select
  */
-type selectOption<TOptionValue> = { value: TOptionValue, label: string };
+type selectOption<TOptionValue> = { value: TOptionValue, label: string, select?: boolean };
 
 /**
  * This component is a wrapper around react-select to use with react-hook-form.
  * It is a multi-select component.
  */
-export const FormMultiSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, tooltip, className, control, placeholder, options, valuesDefault, error, rules, disabled, onChange, formState, warning, expectedResult, creatable }: FormSelectProps<TFieldValues, TContext, TOptionValue>) => {
+export const FormMultiSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, tooltip, className, control, placeholder, options, valuesDefault, error, rules, disabled, onChange, formState, warning, loadOptions, creatable }: FormSelectProps<TFieldValues, TContext, TOptionValue>) => {
+  const { t } = useTranslation('shared');
+
   const [isDisabled, setIsDisabled] = React.useState<boolean>(false);
-  const [allOptions, setAllOptions] = React.useState<Array<selectOption<TOptionValue>>>(options);
+  const [allOptions, setAllOptions] = React.useState<Array<selectOption<TOptionValue>>>(options || []);
 
   useEffect(() => {
     if (typeof disabled === 'function') {
@@ -40,87 +50,102 @@ export const FormMultiSelect = <TFieldValues extends FieldValues, TContext exten
   }, [disabled]);
 
   useEffect(() => {
-    setAllOptions(options);
-  }, [options]);
+    if (typeof loadOptions === 'function') {
+      loadOptions('', options => {
+        setAllOptions(options);
+      });
+    }
+  }, [loadOptions]);
 
   /**
-   * The following callback will trigger the onChange callback, if it was passed to this component,
-   * when the selected option changes.
-   * It will also update the react-hook-form's value, according to the provided 'result' property (string or array).
+   * The following callback will set the new selected options in the component state.
    */
-  const onChangeCb = (newValues: Array<TOptionValue>, rhfOnChange): void => {
+  const onChangeCb = (newValues: Array<TOptionValue>, rhfOnChange: (values: Array<TOptionValue>) => void): void => {
     if (typeof onChange === 'function') {
       onChange(newValues);
     }
-    if (expectedResult === 'string') {
-      rhfOnChange(newValues.join(','));
-    } else {
+    if (typeof rhfOnChange === 'function') {
       rhfOnChange(newValues);
     }
   };
 
   /**
-   * This function will return the currently selected options, according to the provided react-hook-form's value.
+   * This function will return the currently selected options, according to the selectedOptions state.
    */
-  const getCurrentValues = (value: Array<TOptionValue>|string): Array<selectOption<TOptionValue>> => {
-    let values: Array<TOptionValue> = [];
-    if (typeof value === 'string') {
-      values = value.split(',') as Array<unknown> as Array<TOptionValue>;
-    } else {
-      values = value;
-    }
-    return allOptions.filter(c => values?.includes(c.value));
+  const getCurrentValues = (value: Array<TOptionValue>): Array<selectOption<TOptionValue>> => {
+    return allOptions.filter(c => value?.includes(c.value));
   };
 
   /**
    * When the select is 'creatable', this callback handle the creation and the selection of a new option.
    */
-  const handleCreate = (value: Array<TOptionValue>|string, rhfOnChange) => {
-    return (inputValue: string) => {
-      // add the new value to the list of options
-      const newOption = { value: inputValue as unknown as TOptionValue, label: inputValue };
-      setAllOptions([...allOptions, newOption]);
-
-      // select the new option
-      const values = getCurrentValues(value);
-      values.push(newOption);
-      onChangeCb(values.map(c => c.value), rhfOnChange);
-    };
+  const handleCreate = (inputValue: string, currentSelection: Array<TOptionValue>, rhfOnChange: (values: Array<TOptionValue>) => void) => {
+    // add the new value to the list of options
+    const newValue = inputValue as unknown as TOptionValue;
+    const newOption = { value: newValue, label: inputValue };
+    setAllOptions([...allOptions, newOption]);
+    if (typeof rhfOnChange === 'function') {
+      rhfOnChange([...currentSelection, newValue]);
+    }
   };
 
-  // if the user can create new options, we need to use a different component
-  const AbstractSelect = creatable ? CreatableSelect : Select;
+  /**
+   * Translate the label for a new item when the select is "creatable"
+   */
+  const formatCreateLabel = (inputValue: string): string => {
+    return t('app.shared.form_multi_select.create_label', { VALUE: inputValue });
+  };
+
+  // if the user can create new options, and/or load the options through a promise need to use different components
+  const AbstractSelect = loadOptions
+    ? creatable
+      ? AsyncCreatableSelect
+      : AsyncSelect
+    : creatable
+      ? CreatableSelect
+      : Select;
 
   return (
     <AbstractFormItem id={id} formState={formState} label={label}
                       className={`form-multi-select ${className || ''}`} tooltip={tooltip}
                       disabled={disabled}
                       rules={rules} error={error} warning={warning}>
-        <Controller name={id as FieldPath<TFieldValues>}
-                    control={control}
-                    defaultValue={valuesDefault as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>}
-                    rules={rules}
-                    render={({ field: { onChange, value, ref } }) =>
-                      <AbstractSelect ref={ref}
-                                      classNamePrefix="rs"
-                                      className="rs"
-                                      value={getCurrentValues(value)}
-                                      onChange={val => {
-                                        const values = val?.map(c => c.value);
-                                        onChangeCb(values, onChange);
-                                      }}
-                                      onCreateOption={handleCreate(value, onChange)}
-                                      placeholder={placeholder}
-                                      options={allOptions}
-                                      isDisabled={isDisabled}
-                                      isMulti />
-                    } />
+      <Controller name={id as FieldPath<TFieldValues>}
+                  control={control}
+                  defaultValue={valuesDefault as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>}
+                  rules={rules}
+                  render={({ field: { onChange: rhfOnChange, value, ref } }) => {
+                    const selectProps = {
+                      classNamePrefix: 'rs',
+                      className: 'rs',
+                      ref,
+                      value: getCurrentValues(value),
+                      placeholder,
+                      isDisabled,
+                      isMulti: true,
+                      onChange: val => onChangeCb(val?.map(c => c.value), rhfOnChange),
+                      options: allOptions
+                    };
+
+                    if (loadOptions) {
+                      Object.assign(selectProps, { loadOptions, defaultOptions: true, cacheOptions: true });
+                    }
+
+                    if (creatable) {
+                      Object.assign(selectProps, {
+                        formatCreateLabel,
+                        onCreateOption: inputValue => handleCreate(inputValue, value, rhfOnChange)
+                      });
+                    }
+
+                    return (<AbstractSelect {...selectProps} />);
+                  }}
+      />
     </AbstractFormItem>
   );
 };
 
 FormMultiSelect.defaultProps = {
-  expectedResult: 'array',
   creatable: false,
   disabled: false
 };

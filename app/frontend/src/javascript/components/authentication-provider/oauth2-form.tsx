@@ -18,7 +18,7 @@ export const Oauth2Form = <TFieldValues extends FieldValues>({ register, strateg
 
   // regular expression to validate the input fields
   const endpointRegex = /^\/?([-._~:?#[\]@!$&'()*+,;=%\w]+\/?)*$/;
-  const urlRegex = /^(https?:\/\/)([\da-z.-]+)\.([-a-z0-9.]{2,30})([/\w .-]*)*\/?$/;
+  const urlRegex = /^(https?:\/\/)([^.]+)\.(.{2,30})(\/.*)*\/?$/;
 
   /**
    * Build the callback URL, based on the strategy name.

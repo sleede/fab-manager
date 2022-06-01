@@ -64,6 +64,26 @@ See http://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-config
 
 When DELIVERY_METHOD is set to **smtp**, configure the SMTP server parameters.
 See https://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration for more details.
+<a name="SMTP_CA_FILE"></a>
+
+    SMTP_CA_FILE
+
+The path to a file containing a PEM-format CA certificate.
+See [OpenSSL::SSL::SSLContext](https://ruby-doc.org/stdlib-2.6/libdoc/openssl/rdoc/OpenSSL/SSL/SSLContext.html).
+This is an undocumented setting of [mail gem](https://github.com/mikel/mail).
+In production with Docker, you may need to mount your certificate into the running container, by adding an entry in your [docker-compose.yml](https://github.com/sleede/fab-manager/blob/master/setup/docker-compose.yml), under `services > fabmanager > volumes`, like the following: `- ${PWD}/certs/ca-cert-file.pem:/etc/ssl/my-certs/ca-cert-file.pem`
+<a name="SMTP_CA_PATH"></a>
+
+    SMTP_CA_PATH
+
+The path to a directory containing CA certificates in PEM format.
+See [OpenSSL::SSL::SSLContext](https://ruby-doc.org/stdlib-2.6/libdoc/openssl/rdoc/OpenSSL/SSL/SSLContext.html).
+This is an undocumented setting of [mail gem](https://github.com/mikel/mail).
+In production with Docker, you may need to mount your certificate into the running container, by adding an entry in your [docker-compose.yml](https://github.com/sleede/fab-manager/blob/master/setup/docker-compose.yml), under `services > fabmanager > volumes`, like the following: `- ${PWD}/certs:/etc/ssl/my-certs`
+<a name="SMTP_TLS"></a>
+
+    SMTP_TLS
+Enables the SMTP connection to use SMTP/TLS (SMTPS: SMTP over direct TLS connection).
 <a name="DEFAULT_HOST"></a><a name="DEFAULT_PROTOCOL"></a>
 
     DEFAULT_HOST, DEFAULT_PROTOCOL

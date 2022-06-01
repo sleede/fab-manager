@@ -154,7 +154,7 @@ fr:
       member_select:
         select_a_member: "Sélectionnez un membre"
         start_typing: "Commencez à écrire..."
-        member_not_validated: "Attention :</br> Le membre n'a pas validé."
+        member_not_validated: "Attention :</br> Le compte du membre n'est pas validé."
       #payment modal
       payment:
         online_payment: "Paiement en ligne"
