@@ -35,7 +35,7 @@ interface RenewModalProps {
 /**
  * Modal dialog shown to renew the current subscription of a customer, for free
  */
-const RenewModal: React.FC<RenewModalProps> = ({ isOpen, toggleModal, subscription, customer, operator, onError, onSuccess }) => {
+export const RenewModal: React.FC<RenewModalProps> = ({ isOpen, toggleModal, subscription, customer, operator, onError, onSuccess }) => {
   // we do not render the modal if the subscription was not provided
   if (!subscription) return null;
 

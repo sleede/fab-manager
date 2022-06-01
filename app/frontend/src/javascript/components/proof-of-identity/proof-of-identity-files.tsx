@@ -29,7 +29,7 @@ interface FilesType {
 /**
  * This component upload the proof of identity file of member
  */
-const ProofOfIdentityFiles: React.FC<ProofOfIdentityFilesProps> = ({ currentUser, onSuccess, onError }) => {
+export const ProofOfIdentityFiles: React.FC<ProofOfIdentityFilesProps> = ({ currentUser, onSuccess, onError }) => {
   const { t } = useTranslation('admin');
 
   const maxProofOfIdentityFileSizeMb = (Fablab.maxProofOfIdentityFileSize / 1024 / 1024).toFixed();

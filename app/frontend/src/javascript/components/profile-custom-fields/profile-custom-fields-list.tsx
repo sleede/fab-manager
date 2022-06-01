@@ -18,7 +18,7 @@ interface ProfileCustomFieldsListProps {
 /**
  * This component shows a list of all profile custom fields
  */
-const ProfileCustomFieldsList: React.FC<ProfileCustomFieldsListProps> = ({ onSuccess, onError }) => {
+export const ProfileCustomFieldsList: React.FC<ProfileCustomFieldsListProps> = ({ onSuccess, onError }) => {
   const { t } = useTranslation('admin');
 
   const [profileCustomFields, setProfileCustomFields] = useState<Array<ProfileCustomField>>([]);

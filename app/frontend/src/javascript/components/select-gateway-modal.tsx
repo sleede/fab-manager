@@ -7,7 +7,7 @@ import React, { BaseSyntheticEvent, useEffect, useState } from 'react';
 import { react2angular } from 'react2angular';
 import { useTranslation } from 'react-i18next';
 import { StripeKeysForm } from './payment/stripe/stripe-keys-form';
-import { PayZenKeysForm } from './payment/payzen/payzen-keys-form';
+import { PayzenKeysForm } from './payment/payzen/payzen-keys-form';
 import { FabModal, ModalSize } from './base/fab-modal';
 import { Loader } from './base/loader';
 import { User } from '../models/user';
@@ -26,7 +26,7 @@ interface SelectGatewayModalModalProps {
   onSuccess: (results: Map<SettingName, SettingBulkResult>) => void,
 }
 
-const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isOpen, toggleModal, onError, onSuccess }) => {
+export const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isOpen, toggleModal, onError, onSuccess }) => {
   const { t } = useTranslation('admin');
 
   const [preventConfirmGateway, setPreventConfirmGateway] = useState<boolean>(true);
@@ -117,7 +117,7 @@ const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isOpen, to
       isOpen={isOpen}
       toggleModal={toggleModal}
       width={ModalSize.medium}
-      className="gateway-modal"
+      className="select-gateway-modal"
       confirmButton={t('app.admin.invoices.payment.gateway_modal.confirm_button')}
       onConfirm={onGatewayConfirmed}
       preventConfirm={preventConfirmGateway}>
@@ -131,7 +131,7 @@ const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isOpen, to
         <option value={Gateway.PayZen}>{t('app.admin.invoices.payment.gateway_modal.payzen')}</option>
       </select>
       {selectedGateway === Gateway.Stripe && <StripeKeysForm onValidKeys={handleValidStripeKeys} onInvalidKeys={handleInvalidKeys} />}
-      {selectedGateway === Gateway.PayZen && <PayZenKeysForm onValidKeys={handleValidPayZenKeys} onInvalidKeys={handleInvalidKeys} />}
+      {selectedGateway === Gateway.PayZen && <PayzenKeysForm onValidKeys={handleValidPayZenKeys} onInvalidKeys={handleInvalidKeys} />}
     </FabModal>
   );
 };

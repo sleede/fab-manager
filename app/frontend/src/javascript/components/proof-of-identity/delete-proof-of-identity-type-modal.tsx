@@ -30,7 +30,7 @@ export const DeleteProofOfIdentityTypeModal: React.FC<DeleteProofOfIdentityTypeM
       closeButton={true}
       confirmButton={t('app.admin.settings.compte.confirm')}
       onConfirm={handleDeleteProofOfIdentityType}
-      className="proof-of-identity-type-modal">
+      className="delete-proof-of-identity-type-modal">
       <p>{t('app.admin.settings.compte.do_you_really_want_to_delete_this_proof_of_identity_type')}</p>
     </FabModal>
   );

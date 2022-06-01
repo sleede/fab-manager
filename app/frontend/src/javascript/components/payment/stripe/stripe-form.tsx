@@ -125,7 +125,7 @@ export const StripeForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, on
   };
 
   return (
-    <form onSubmit={handleSubmit} id={formId} className={className || ''}>
+    <form onSubmit={handleSubmit} id={formId} className={`stripe-form ${className || ''}`}>
       <CardElement options={cardOptions} />
       {children}
     </form>

@@ -24,7 +24,7 @@ const PAGE_SIZE = 20;
  * This component shows a list of all payment schedules with their associated deadlines (aka. PaymentScheduleItem) and invoices
  * for the currentUser
  */
-const PaymentSchedulesDashboard: React.FC<PaymentSchedulesDashboardProps> = ({ currentUser, onError, onCardUpdateSuccess }) => {
+export const PaymentSchedulesDashboard: React.FC<PaymentSchedulesDashboardProps> = ({ currentUser, onError, onCardUpdateSuccess }) => {
   const { t } = useTranslation('logged');
 
   // list of displayed payment schedules

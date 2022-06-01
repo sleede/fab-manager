@@ -141,7 +141,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, video,
 
   return (
     <>
-      <div className={`fab-textEditor-menu ${disabled ? 'fab-textEditor-menu--disabled' : ''}`}>
+      <div className={`fab-text-editor-menu ${disabled ? 'fab-text-editor-menu--disabled' : ''}`}>
         { paragraphTools &&
         (<>
           <button
@@ -228,7 +228,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, video,
         }
       </div>
 
-      <div ref={ref} className={`fab-textEditor-subMenu ${submenu ? 'is-active' : ''}`}>
+      <div ref={ref} className={`fab-text-editor-subMenu ${submenu ? 'is-active' : ''}`}>
         { submenu === 'link' &&
           (<>
             <h6>{t('app.shared.text_editor.add_link')}</h6>

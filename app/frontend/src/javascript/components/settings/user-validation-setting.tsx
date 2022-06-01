@@ -19,7 +19,7 @@ interface UserValidationSettingProps {
 /**
  * This component allows to configure user validation required setting.
  */
-const UserValidationSetting: React.FC<UserValidationSettingProps> = ({ onSuccess, onError }) => {
+export const UserValidationSetting: React.FC<UserValidationSettingProps> = ({ onSuccess, onError }) => {
   const { t } = useTranslation('admin');
 
   const [userValidationRequired, setUserValidationRequired] = useState<string>('false');

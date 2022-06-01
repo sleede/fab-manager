@@ -2,7 +2,7 @@ import React, { ReactElement, useEffect, useState } from 'react';
 import { react2angular } from 'react2angular';
 import { Loader } from '../base/loader';
 import { StripeModal } from './stripe/stripe-modal';
-import { PayZenModal } from './payzen/payzen-modal';
+import { PayzenModal } from './payzen/payzen-modal';
 import { IApplication } from '../../models/application';
 import { ShoppingCart } from '../../models/payment';
 import { User } from '../../models/user';
@@ -58,7 +58,7 @@ const CardPaymentModalComponent: React.FC<CardPaymentModalProps> = ({ isOpen, to
    * Render the PayZen payment modal
    */
   const renderPayZenModal = (): ReactElement => {
-    return <PayZenModal isOpen={isOpen}
+    return <PayzenModal isOpen={isOpen}
       toggleModal={toggleModal}
       afterSuccess={afterSuccess}
       onError={onError}

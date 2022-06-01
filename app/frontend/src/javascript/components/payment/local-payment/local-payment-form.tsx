@@ -118,7 +118,7 @@ export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSucce
   };
 
   return (
-    <form onSubmit={handleSubmit} id={formId} className={className || ''}>
+    <form onSubmit={handleSubmit} id={formId} className={`local-payment-form ${className || ''}`}>
       {!paymentSchedule && !isFreeOfCharge() && <p className="payment">{t('app.admin.local_payment.about_to_cash')}</p>}
       {!paymentSchedule && isFreeOfCharge() && <p className="payment">{t('app.admin.local_payment.about_to_confirm', { ITEM: mainItemType() })}</p>}
       {paymentSchedule && <div className="payment-schedule">

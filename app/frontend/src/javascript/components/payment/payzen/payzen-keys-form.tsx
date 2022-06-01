@@ -11,7 +11,7 @@ import PayzenAPI from '../../../api/payzen';
 
 enableMapSet();
 
-interface PayZenKeysFormProps {
+interface PayzenKeysFormProps {
   onValidKeys: (payZenSettings: Map<SettingName, string>) => void,
   onInvalidKeys: () => void,
 }
@@ -28,7 +28,7 @@ let pendingKeysValidation = false;
 /**
  * Form to set the PayZen's username, password and public key
  */
-const PayZenKeysFormComponent: React.FC<PayZenKeysFormProps> = ({ onValidKeys, onInvalidKeys }) => {
+const PayzenKeysFormComponent: React.FC<PayzenKeysFormProps> = ({ onValidKeys, onInvalidKeys }) => {
   const { t } = useTranslation('admin');
 
   // values of the PayZen settings
@@ -205,10 +205,10 @@ const PayZenKeysFormComponent: React.FC<PayZenKeysFormProps> = ({ onValidKeys, o
   );
 };
 
-export const PayZenKeysForm: React.FC<PayZenKeysFormProps> = ({ onValidKeys, onInvalidKeys }) => {
+export const PayzenKeysForm: React.FC<PayzenKeysFormProps> = ({ onValidKeys, onInvalidKeys }) => {
   return (
     <Loader>
-      <PayZenKeysFormComponent onValidKeys={onValidKeys} onInvalidKeys={onInvalidKeys} />
+      <PayzenKeysFormComponent onValidKeys={onValidKeys} onInvalidKeys={onInvalidKeys} />
     </Loader>
   );
 };

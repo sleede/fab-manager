@@ -95,7 +95,7 @@ export const StripeCardUpdate: React.FC<StripeCardUpdateProps> = ({ onSubmit, on
   };
 
   return (
-    <form onSubmit={handleSubmit} id="stripe-card" className={className}>
+    <form onSubmit={handleSubmit} id="stripe-card" className={`stripe-card-update ${className}`}>
       <CardElement options={cardOptions} />
       {children}
     </form>

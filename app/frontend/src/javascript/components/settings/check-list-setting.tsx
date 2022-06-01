@@ -98,7 +98,7 @@ export const CheckListSetting: React.FC<CheckListSettingProps> = ({ name, label,
   );
 };
 
-export const CheckListSettingWrapper: React.FC<CheckListSettingProps> = ({ availableOptions, onSuccess, onError, label, className, name, hideSave, defaultValue, onChange }) => {
+const CheckListSettingWrapper: React.FC<CheckListSettingProps> = ({ availableOptions, onSuccess, onError, label, className, name, hideSave, defaultValue, onChange }) => {
   return (
     <Loader>
       <CheckListSetting availableOptions={availableOptions} label={label} name={name} onError={onError} onSuccess={onSuccess} className={className} hideSave={hideSave} defaultValue={defaultValue} onChange={onChange} />

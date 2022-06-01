@@ -97,7 +97,7 @@ export const BooleanSetting: React.FC<BooleanSettingProps> = ({ name, label, cla
   };
 
   return (
-    <div className={`form-group ${className || ''}`}>
+    <div className={`boolean-setting form-group ${className || ''}`}>
       <label htmlFor={`setting-${name}`} className="control-label m-r">{label}</label>
       <Switch checked={value} id={`setting-${name}}`} onChange={handleChanged} className="v-middle"></Switch>
       {!hideSave && <FabButton className="btn btn-warning m-l" onClick={handleSave}>{t('app.admin.check_list_setting.save')}</FabButton> }
@@ -105,7 +105,7 @@ export const BooleanSetting: React.FC<BooleanSettingProps> = ({ name, label, cla
   );
 };
 
-export const BooleanSettingWrapper: React.FC<BooleanSettingProps> = ({ onChange, onSuccess, onError, label, className, name, hideSave, onBeforeSave }) => {
+const BooleanSettingWrapper: React.FC<BooleanSettingProps> = ({ onChange, onSuccess, onError, label, className, name, hideSave, onBeforeSave }) => {
   return (
     <Loader>
       <BooleanSetting label={label} name={name} onError={onError} onSuccess={onSuccess} onChange={onChange} className={className} hideSave={hideSave} onBeforeSave={onBeforeSave} />

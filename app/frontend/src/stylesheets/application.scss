@@ -30,8 +30,8 @@
 @import "modules/base/labelled-input";
 @import "modules/calendar/calendar";
 @import "modules/events/event";
+@import "modules/form/abstract-form-item";
 @import "modules/form/form-input";
-@import "modules/form/form-item";
 @import "modules/form/form-rich-text";
 @import "modules/form/form-switch";
 @import "modules/group/change-group";
@@ -45,10 +45,11 @@
 @import "modules/payment-schedule/payment-schedules-table";
 @import "modules/payment/local-payment/local-payment-modal";
 @import "modules/payment/abstract-payment-modal";
+@import "modules/payment/payzen/payzen-card-update-modal";
 @import "modules/payment/payzen/payzen-keys-form";
 @import "modules/payment/payzen/payzen-modal";
 @import "modules/payment/payzen/payzen-settings";
-@import "modules/payment/payzen/payzen-update-card-modal";
+@import "modules/payment/stripe/stripe-card-update-modal";
 @import "modules/payment/stripe/stripe-confirm";
 @import "modules/payment/stripe/stripe-keys-form";
 @import "modules/payment/stripe/stripe-modal";

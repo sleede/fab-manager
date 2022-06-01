@@ -4082,10 +4082,10 @@ eslint-plugin-es@^4.1.0:
     eslint-utils "^2.0.0"
     regexpp "^3.0.0"
 
-eslint-plugin-fabmanager@^0.0.21:
-  version "0.0.21"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-fabmanager/-/eslint-plugin-fabmanager-0.0.21.tgz#c2f2ccfbafc2f202adefdf73bb2650604a53541c"
-  integrity sha512-sy8SW7K0NSpm/l8sWJ75NAJfQuMLDZ98LnrYfnHGt119CeulaylgqYniyFnKRxUrYJH2c9dO2vBhiTFgFTeJUg==
+eslint-plugin-fabmanager@^0.0.23:
+  version "0.0.23"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-fabmanager/-/eslint-plugin-fabmanager-0.0.23.tgz#7475999e23f9f658186c172c40a73e15587930e4"
+  integrity sha512-yXxJWPvUyhszBp/jL+aW4I9Qm43kkGH140Pm1EfEBnFkGaC63/U4UX+XSA2ibSocvw2Gqi8igEACEIf6/H4GYw==
 
 eslint-plugin-html-erb@^1.0.1:
   version "1.0.1"

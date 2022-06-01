@@ -66,7 +66,7 @@ export const FabTextEditor: React.ForwardRefRenderFunction<FabTextEditorRef, Fab
       Iframe,
       Image.configure({
         HTMLAttributes: {
-          class: 'fab-textEditor-image'
+          class: 'fab-text-editor-image'
         }
       })
     ],
@@ -85,14 +85,14 @@ export const FabTextEditor: React.ForwardRefRenderFunction<FabTextEditorRef, Fab
   editorRef.current = editor;
 
   return (
-    <div className={`fab-textEditor ${disabled && 'is-disabled'}`}>
+    <div className={`fab-text-editor ${disabled && 'is-disabled'}`}>
       <MenuBar editor={editor} paragraphTools={paragraphTools} video={video} image={image} disabled={disabled} />
       <EditorContent editor={editor} />
-      <div className="fab-textEditor-character-count">
+      <div className="fab-text-editor-character-count">
         {editor?.storage.characterCount.characters()} / {limit}
       </div>
       {error &&
-        <div className="fab-textEditor-error">
+        <div className="fab-text-editor-error">
           <WarningOctagon size={24} />
           <p className="">{error}</p>
         </div>

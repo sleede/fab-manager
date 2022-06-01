@@ -29,7 +29,7 @@ export default Node.create<IframeOptions>({
     return {
       allowFullscreen: true,
       HTMLAttributes: {
-        class: 'fab-textEditor-video'
+        class: 'fab-text-editor-video'
       }
     };
   },

@@ -24,7 +24,7 @@ type selectOption = { value: number, label: string };
 /**
  * This component shows a select input to edit the themes associated with the event
  */
-const EventThemes: React.FC<EventThemesProps> = ({ event, onChange }) => {
+export const EventThemes: React.FC<EventThemesProps> = ({ event, onChange }) => {
   const { t } = useTranslation('shared');
 
   const [themes, setThemes] = useState<Array<EventTheme>>([]);

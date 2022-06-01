@@ -7,8 +7,6 @@
   "rules": {
     "semi": ["error", "always"],
     "no-use-before-define": "off",
-    "fabmanager/component-class-named-as-component": ["error", { "ignoreAbstractKeyword": true }],
-    "import/no-default-export": "error"
   },
   "globals": {
     "Application": true,
@@ -46,6 +44,14 @@
       "plugins": ["@typescript-eslint", "react"],
       "rules": {
         "react/prop-types": "off"
+      }
+    },
+    {
+      "files": ["app/frontend/src/javascript/components/**/*.tsx"],
+      "rules": {
+        "import/no-default-export": "error",
+        "import/no-unused-modules": ["error", { "missingExports": true }],
+        "fabmanager/component-class-named-as-component": ["error", { "ignoreAbstractKeyword": true }]
       }
     },
     {

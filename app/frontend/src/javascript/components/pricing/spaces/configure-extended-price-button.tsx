@@ -8,7 +8,7 @@ import FormatLib from '../../../lib/format';
 import { EditExtendedPrice } from './edit-extended-price';
 import { DeleteExtendedPrice } from './delete-extended-price';
 
-interface ConfigureExtendedPriceButtonProps {
+interface ConfigureExtendedPricesButtonProps {
   prices: Array<Price>,
   onError: (message: string) => void,
   onSuccess: (message: string) => void,
@@ -21,7 +21,7 @@ interface ConfigureExtendedPriceButtonProps {
  * This component is a button that shows the list of extendedPrices.
  * It also triggers modal dialogs to configure (add/edit/remove) extendedPrices.
  */
-export const ConfigureExtendedPriceButton: React.FC<ConfigureExtendedPriceButtonProps> = ({ prices, onError, onSuccess, groupId, priceableId, priceableType }) => {
+export const ConfigureExtendedPricesButton: React.FC<ConfigureExtendedPricesButtonProps> = ({ prices, onError, onSuccess, groupId, priceableId, priceableType }) => {
   const { t } = useTranslation('admin');
 
   const [extendedPrices, setExtendedPrices] = useState<Array<Price>>(prices);
