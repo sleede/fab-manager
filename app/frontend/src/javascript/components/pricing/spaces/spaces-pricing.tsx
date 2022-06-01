@@ -10,7 +10,7 @@ import { Group } from '../../../models/group';
 import { IApplication } from '../../../models/application';
 import { Space } from '../../../models/space';
 import { EditablePrice } from '../editable-price';
-import { ConfigureExtendedPricesButton } from './configure-extended-price-button';
+import { ConfigureExtendedPricesButton } from './configure-extended-prices-button';
 import PriceAPI from '../../../api/price';
 import { Price } from '../../../models/price';
 import { useImmer } from 'use-immer';

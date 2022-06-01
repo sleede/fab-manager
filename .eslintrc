@@ -51,7 +51,8 @@
       "rules": {
         "import/no-default-export": "error",
         "import/no-unused-modules": ["error", { "missingExports": true }],
-        "fabmanager/component-class-named-as-component": ["error", { "ignoreAbstractKeyword": true }]
+        "fabmanager/component-class-named-as-component": ["error", { "ignoreAbstractKeyword": true }],
+        "fabmanager/component-named-like-file": "error"
       }
     },
     {
