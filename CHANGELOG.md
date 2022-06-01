@@ -37,6 +37,7 @@
 - Option to disable the 'machines' module
 - Option to prevent users from changing their group
 - Ability to define social networks for the FabLab "about page"
+- Plan categories can have rich-text descriptions
 - Improved security when changing passwords
 - Support for OpenID Connect in Single-Sign-On authentication providers
 - ICS file attached to the reservation notification email
