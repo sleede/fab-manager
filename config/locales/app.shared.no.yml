@@ -527,3 +527,5 @@
       payzen_card_update_modal:
         update_card: "Oppdater kortet"
         validate_button: "Valider det nye kortet"
+      form_multi_select:
+        create_label: "Add {VALUE}"
