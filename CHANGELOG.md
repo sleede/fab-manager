@@ -3,6 +3,7 @@
 ## next deploy
 
 - Updated react-select to 5.3.2
+- Moved the calendar navigation buttons to the left side
 - Fix a bug: unable to remove the last training or the last tag to a member
 - Fix a bug: unable to run scripts on systems with legacy version of docker-compose
 - Fix a bug: unable to sign up if admin actived organization's additional fields with required
