@@ -231,7 +231,7 @@ class ProjectsController {
       const asciiName = Diacritics.remove(nameLookup);
 
       Member.search(
-        { query: asciiName },
+        { query: asciiName, project: 'true' },
         function (users) { $scope.matchingMembers = users; },
         function (error) { console.error(error); }
       );

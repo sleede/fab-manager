@@ -2,6 +2,8 @@
 
 ## next deploy
 
+- Fix a bug: admins are shown in select member for reservation by admin
+
 ## v5.4.2 2022 June 1
 
 - Updated react-select to 5.3.2
