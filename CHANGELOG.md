@@ -2,6 +2,8 @@
 
 ## next deploy
 
+- Updated sidekiq-unique-jobs to 7.1.23 to get rid of Sidekiq's default_worker_options deprecation warning
+
 ## v5.4.3 2022 June 6
 
 - Updated translations

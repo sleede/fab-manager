@@ -92,7 +92,7 @@ gem 'aasm'
 gem 'sidekiq', '>= 6.0.7'
 # Recurring jobs for Sidekiq
 gem 'sidekiq-scheduler'
-gem 'sidekiq-unique-jobs', '~> 7.1.15'
+gem 'sidekiq-unique-jobs', '~> 7.1.23'
 
 gem 'stripe', '5.29.0'
 
