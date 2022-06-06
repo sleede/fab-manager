@@ -3,6 +3,7 @@
 ## next deploy
 
 - Updated sidekiq-unique-jobs to 7.1.23 to get rid of Sidekiq's default_worker_options deprecation warning
+- Fix a bug: unable to edit OIDC provider
 
 ## v5.4.3 2022 June 6
 
