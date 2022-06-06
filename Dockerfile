@@ -1,6 +1,9 @@
 FROM ruby:2.6.10-alpine
 MAINTAINER contact@fab-manager.com
 
+RUN addgroup --gid 1000 fabmanager && \
+    adduser --uid 1000 -G fabmanager -s /bin/bash -D fabmanager
+
 # Install upgrade system packages
 RUN apk update && apk upgrade && \
 # Install runtime apk dependencies
@@ -48,6 +51,11 @@ COPY Gemfile /tmp/
 COPY Gemfile.lock /tmp/
 RUN bundle config set --local without 'development test doc' && bundle install && bundle binstubs --all
 
+# Prepare the application directory
+RUN mkdir -p /usr/src/app && chown -R fabmanager:fabmanager /usr/src/app
+# Change to non-root user
+USER fabmanager
+
 # Install Javascript packages
 WORKDIR /usr/src/app
 COPY package.json /usr/src/app/package.json
@@ -63,8 +71,7 @@ RUN apk del .build-deps && \
            /usr/lib/ruby/gems/*/cache/*
 
 # Web app
-RUN mkdir -p /usr/src/app && \
-    mkdir -p /usr/src/app/config && \
+RUN mkdir -p /usr/src/app/config && \
     mkdir -p /usr/src/app/invoices && \
     mkdir -p /usr/src/app/payment_schedules && \
     mkdir -p /usr/src/app/exports && \

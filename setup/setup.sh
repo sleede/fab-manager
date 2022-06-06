@@ -117,7 +117,7 @@ elevate_cmd()
 read_email()
 {
   local email
-  read -rp "Please input a valid email address > " email </dev/tty
+  read -rep "Please input a valid email address > " email </dev/tty
   if [[ "$email" == *"@"*"."* ]]; then
     EMAIL="$email"
   else
@@ -152,7 +152,7 @@ config()
 
 read_domain()
 {
-  read -rp 'Please input the domain name > ' domain </dev/tty
+  read -rep 'Please input the domain name > ' domain </dev/tty
   if [[ "$domain" == *"."* ]]; then
     DOMAINS+=("$domain")
   else
@@ -175,7 +175,7 @@ prepare_files()
   if [[ "$confirm" = "n" ]]; then exit 1; fi
 
   elevate_cmd mkdir -p "$FABMANAGER_PATH/config"
-  elevate_cmd chown -R "$(whoami)" "$FABMANAGER_PATH"
+  elevate_cmd chown -R "$(whoami):$(whoami)" "$FABMANAGER_PATH"
 
   mkdir -p "$FABMANAGER_PATH/elasticsearch/config"
 
@@ -228,7 +228,7 @@ prepare_nginx()
     printf "The two following configurations are useful if you want to install Fab-manager behind a reverse proxy...\n"
     read -rp "- Do you want to map the Fab-manager's service to an external network? (Y/n) " confirm </dev/tty
     if [ "$confirm" != "n" ]; then
-      read -rp "Please input the name of the external network (default: web) " network </dev/tty
+      read -rep "Please input the name of the external network (default: web) " network </dev/tty
       if [ "$network" = "" ]; then network="web"; fi
 
       echo "Adding a network configuration to the docker-compose.yml file..."
@@ -248,7 +248,7 @@ prepare_nginx()
     if [ "$confirm" != "n" ]; then
       current="$(yq eval '.services.*.image | select(. == "sleede/fab-manager*") | path | .[-2]' docker-compose.yml)"
       printf "=======================\n- \e[1mCurrent value: %s\e[21m\n- New value? (leave empty to keep the current value)\n" "$current"
-      read -rp "  > " value </dev/tty
+      read -rep "  > " value </dev/tty
       echo "======================="
       if [ "$value" != "" ]; then
         escaped=$(printf '%s\n' "$value" | iconv -f utf8 -t ascii//TRANSLIT//IGNORE | sed -e 's/[^a-zA-Z0-9-]/_/g')
@@ -331,7 +331,7 @@ configure_env_file()
     printf "**** \e[1mDocumentation:\e[21m ****\n"
     echo "$var_doc"
     printf "=======================\n- \e[1mCurrent value: %s\e[21m\n- New value? (leave empty to keep the current value)\n" "$current"
-    read -rp "  > " value </dev/tty
+    read -rep "  > " value </dev/tty
     echo "======================="
     if [ "$value" != "" ]; then
       esc_val=$(printf '%s\n' "$value" | sed -e 's/\//\\\//g')
@@ -340,7 +340,7 @@ configure_env_file()
     fi
   done
   # we automatically generate the SECRET_KEY_BASE
-  secret=$(cd "$FABMANAGER_PATH" && docker-compose run --rm "$SERVICE" bundle exec rake secret)
+  secret=$(docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --user "$(id -u):$(id -g)" --rm "$SERVICE" bundle exec rake secret)
   sed -i.bak "s/SECRET_KEY_BASE=/SECRET_KEY_BASE=$secret/g" "$FABMANAGER_PATH/config/env"
 }
 
@@ -370,32 +370,32 @@ setup_assets_and_databases()
   read -rp "Continue? (Y/n) " confirm </dev/tty
   if [ "$confirm" = "n" ]; then return; fi
 
-  cd "$FABMANAGER_PATH" && docker-compose run --rm "$SERVICE" bundle exec rake db:create # create the database
-  cd "$FABMANAGER_PATH" && docker-compose run --rm "$SERVICE" bundle exec rake db:migrate # run all the migrations
+  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --user "$(id -u):$(id -g)" --rm "$SERVICE" bundle exec rake db:create # create the database
+  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --user "$(id -u):$(id -g)" --rm "$SERVICE" bundle exec rake db:migrate # run all the migrations
   # prompt default admin email/password
   printf "\n\nWe will now create the default administrator of Fab-manager.\n"
   read_email
   PASSWORD=$(read_password)
   printf "\nOK. We will fill the database now...\n"
-  cd "$FABMANAGER_PATH" && docker-compose run --rm -e ADMIN_EMAIL="$EMAIL" -e ADMIN_PASSWORD="$PASSWORD" "$SERVICE" bundle exec rake db:seed # seed the database
+  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --user "$(id -u):$(id -g)" --rm -e ADMIN_EMAIL="$EMAIL" -e ADMIN_PASSWORD="$PASSWORD" "$SERVICE" bundle exec rake db:seed # seed the database
 
   # now build the assets
-  if ! docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rake assets:precompile; then
+  if ! docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --user "$(id -u):$(id -g)" --rm "$SERVICE" bundle exec rake assets:precompile; then
     echo -e "\e[91m[ ❌ ] someting went wrong while compiling the assets, exiting...\e[39m" && exit 1
   fi
 
   # and prepare elasticsearch
-  cd "$FABMANAGER_PATH" && docker-compose run --rm "$SERVICE" bundle exec rake fablab:es:build_stats
+  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --user "$(id -u):$(id -g)" --rm "$SERVICE" bundle exec rake fablab:es:build_stats
 }
 
 stop()
 {
-  cd "$FABMANAGER_PATH" && docker-compose down
+  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" down
 }
 
 start()
 {
-  cd "$FABMANAGER_PATH" && docker-compose up -d
+  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" up -d
 }
 
 enable_ssl()

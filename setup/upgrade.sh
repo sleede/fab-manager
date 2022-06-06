@@ -40,7 +40,7 @@ yq() {
 }
 
 jq() {
-  docker run --rm -i -v "${PWD}:/data" imega/jq "$@"
+  docker run --rm -i -v "${PWD}:/data" --user "$UID" imega/jq "$@"
 }
 
 docker-compose()
@@ -57,6 +57,43 @@ docker-compose()
     docker compose "$@"
   fi
 }
+
+
+has_sudo()
+{
+  local prompt
+
+  prompt=$(sudo -nv 2>&1)
+  if [ $? -eq 0 ]; then
+    echo "has_sudo__pass_set"
+  elif echo $prompt | grep -q '^sudo:'; then
+    echo "has_sudo__needs_pass"
+  else
+    echo "no_sudo"
+  fi
+}
+
+elevate_cmd()
+{
+  local cmd=$@
+
+  HAS_SUDO=$(has_sudo)
+
+  case "$HAS_SUDO" in
+  has_sudo__pass_set)
+    sudo $cmd
+    ;;
+  has_sudo__needs_pass)
+    echo "Please supply sudo password for the following command: sudo $cmd"
+    sudo $cmd
+    ;;
+  *)
+    echo "Please supply root password for the following command: su -c \"$cmd\""
+    su -c "$cmd"
+    ;;
+  esac
+}
+
 
 # set $SERVICE and $YES_ALL
 config()
@@ -125,9 +162,9 @@ version_error()
 # set $VERSION
 version_check()
 {
-  VERSION=$(docker-compose exec -T "$SERVICE" cat .fabmanager-version 2>/dev/null)
+  VERSION=$(docker-compose exec --user "$(id -u):$(id -g)" -T "$SERVICE" cat .fabmanager-version 2>/dev/null)
   if [[ $? = 1 ]]; then
-    VERSION=$(docker-compose exec -T "$SERVICE" cat package.json | jq -r '.version')
+    VERSION=$(docker-compose exec --user "$(id -u):$(id -g)" -T "$SERVICE" cat package.json | jq -r '.version')
   fi
   target_version
   if [ "$TARGET" = 'custom' ]; then return; fi
@@ -185,13 +222,16 @@ compile_assets()
   PG_NET_ID=$(docker inspect "$PG_ID" -f "{{json .NetworkSettings.Networks }}" | jq -r '.[] .NetworkID')
   clean_env_file
   # shellcheck disable=SC2068
-  if ! docker run --rm --env-file ./config/env ${ENV_ARGS[@]} --link "$PG_ID" --net "$PG_NET_ID" -v "${PWD}/public/new_packs:/usr/src/app/public/packs" "$IMAGE" bundle exec rake assets:precompile; then
+  if ! docker run --user "$(id -u):$(id -g)" --rm --env-file ./config/env ${ENV_ARGS[@]} --link "$PG_ID" --net "$PG_NET_ID" -v "${PWD}/public/new_packs:/usr/src/app/public/packs" "$IMAGE" bundle exec rake assets:precompile; then
     restore_tag
     printf "\e[91m[ ❌ ] Something went wrong while compiling the assets, please check the logs above.\e[39m\nExiting...\n"
     exit 4
   fi
   docker-compose down
-  rm -rf public/packs
+  if ! rm -rf public/packs; then
+    # sometimes we can't delete the packs folder, because of a permission issue. In that case try with sudo
+    elevate_cmd rm -rf public/packs
+  fi
   mv public/new_packs public/packs
 }
 
@@ -239,21 +279,21 @@ upgrade()
   done
   for PRE in "${PREPROCESSING[@]}"; do
     printf "\e[91m::\e[0m \e[1mRunning preprocessing command %s...\e[0m\n" "$PRE"
-    if ! docker-compose run --rm "$SERVICE" bundle exec "$PRE" </dev/tty; then
+    if ! docker-compose run --user "$(id -u):$(id -g)" --rm "$SERVICE" bundle exec "$PRE" </dev/tty; then
       restore_tag
       printf "\e[91m[ ❌ ] Something went wrong while running \"%s\", please check the logs above.\e[39m\nExiting...\n" "$PRE"
       exit 4
     fi
   done
   compile_assets
-  if ! docker-compose run --rm "$SERVICE" bundle exec rake db:migrate; then
+  if ! docker-compose run --user "$(id -u):$(id -g)" --rm "$SERVICE" bundle exec rake db:migrate; then
     restore_tag
     printf "\e[91m[ ❌ ] Something went wrong while migrating the database, please check the logs above.\e[39m\nExiting...\n"
     exit 4
   fi
   for COMMAND in "${COMMANDS[@]}"; do
     printf "\e[91m::\e[0m \e[1mRunning command %s...\e[0m\n" "$COMMAND"
-    if ! docker-compose run --rm "$SERVICE" bundle exec "$COMMAND" </dev/tty; then
+    if ! docker-compose run --user "$(id -u):$(id -g)" --rm "$SERVICE" bundle exec "$COMMAND" </dev/tty; then
       restore_tag
       printf "\e[91m[ ❌ ] Something went wrong while running \"%s\", please check the logs above.\e[39m\nExiting...\n" "$COMMAND"
       exit 4

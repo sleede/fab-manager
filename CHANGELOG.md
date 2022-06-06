@@ -3,6 +3,7 @@
 ## next deploy
 
 - Updated sidekiq-unique-jobs to 7.1.23 to get rid of Sidekiq's default_worker_options deprecation warning
+- Allow moving with arrows in the setup script's inputs
 - Fix a bug: unable to edit OIDC provider
 - Fix a bug: list of OIDC scopes are loading indefinitely
 
