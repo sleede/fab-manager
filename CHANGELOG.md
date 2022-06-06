@@ -4,6 +4,7 @@
 
 - Updated sidekiq-unique-jobs to 7.1.23 to get rid of Sidekiq's default_worker_options deprecation warning
 - Fix a bug: unable to edit OIDC provider
+- Fix a bug: list of OIDC scopes are loading indefinitely
 
 ## v5.4.3 2022 June 6
 
