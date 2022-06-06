@@ -2,6 +2,7 @@
 
 ## next deploy
 
+- Updated translations
 - Fix a bug: deprecated bundler arguments (#362)
 - Fix a bug: unable to compile the assets when OIDC is enabled but the scopes were not set
 
