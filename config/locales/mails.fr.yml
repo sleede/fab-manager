@@ -346,7 +346,7 @@ fr:
         date: "Ceci est un rappel pour vérifier que le prélèvement bancaire a bien été effectué."
         confirm: "Veuillez confirmer la réception des fonds dans votre interface de gestion des échéanciers de paiement, afin que la facture correspondante soit générée."
     notify_admin_user_proof_of_identity_files_created:
-      subject: "Justufucatif téléversé par un membre"
+      subject: "Justificatif téléversé par un membre"
       body:
         proof_of_identity_files_uploaded_below: "Le membre %{NAME} a téléversé le justificatif suivant :"
         validate_user: "Veuillez valider ce compte"

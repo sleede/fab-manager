@@ -995,7 +995,7 @@ fr:
         my_documents: "Mes documents"
         my_documents_info: "Suite à la déclaration de votre profil, vous devez déclarer des justificatifs. Une fois déposés, ces documents vont être vérifiés par l'administrateur."
         proof_of_identity_file_size_error: "La limite de poids est de {SIZE} Mo max"
-        my_documents_alert: "Attention !</br>Vous pouvez déposer vos documents en pdf ou en image (jpg) sous une limit de poids de {SIZE} Mo max"
+        my_documents_alert: "Attention !</br>Vous pouvez déposer vos documents en pdf ou en image (.jpg) sous une limite de poids de {SIZE} Mo max"
         proof_of_identity_files: "Justificatifs"
         find_below_the_proof_of_identity_files: "Retrouvez ci-dessous, les justificatifs déposés par le membre."
         save: "Enregistrer"

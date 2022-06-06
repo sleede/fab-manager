@@ -18,7 +18,7 @@ class OpenIdConnectProvider < ApplicationRecord
   validates :client_auth_method, inclusion: { in: %w[basic jwks] }
 
   def scope
-    self[:scope].join(' ')
+    self[:scope]&.join(' ')
   end
 
   def config

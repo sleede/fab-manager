@@ -527,3 +527,5 @@ zu:
       payzen_card_update_modal:
         update_card: "crwdns21512:0crwdne21512:0"
         validate_button: "crwdns21514:0crwdne21514:0"
+      form_multi_select:
+        create_label: "crwdns23124:0{VALUE}crwdne23124:0"

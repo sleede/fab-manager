@@ -46,7 +46,7 @@ RUN bundle config --global frozen 1
 WORKDIR /tmp
 COPY Gemfile /tmp/
 COPY Gemfile.lock /tmp/
-RUN bundle install --binstubs --without development test doc
+RUN bundle config set --local without 'development test doc' && bundle install && bundle binstubs --all
 
 # Install Javascript packages
 WORKDIR /usr/src/app

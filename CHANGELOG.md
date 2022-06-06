@@ -2,6 +2,12 @@
 
 ## next deploy
 
+## v5.4.3 2022 June 6
+
+- Updated translations
+- Fix a bug: deprecated bundler arguments (#362)
+- Fix a bug: unable to compile the assets when OIDC is enabled but the scopes were not set
+
 ## v5.4.2 2022 June 1
 
 - Updated react-select to 5.3.2
