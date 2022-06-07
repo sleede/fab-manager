@@ -72,7 +72,7 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
       const unlisted = difference(current, scopesAvailable);
       callback(scopesAvailable.concat(unlisted).map(scope => ({ value: scope, label: scope })));
     } else {
-      current.map(scope => ({ value: scope, label: scope }));
+      callback(current.map(scope => ({ value: scope, label: scope })));
     }
   };
 

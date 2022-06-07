@@ -6,18 +6,18 @@ services:
       RAILS_ENV: production
       RACK_ENV: production
     env_file:
-      - ${PWD}/config/env
+      - ./config/env
     volumes:
-      - ${PWD}/public/packs:/usr/src/app/public/packs
-      - ${PWD}/public/uploads:/usr/src/app/public/uploads
-      - ${PWD}/invoices:/usr/src/app/invoices
-      - ${PWD}/payment_schedules:/usr/src/app/payment_schedules
-      - ${PWD}/exports:/usr/src/app/exports
-      - ${PWD}/imports:/usr/src/app/imports
-      - ${PWD}/proof_of_identity_files:/usr/src/app/proof_of_identity_files
-      - ${PWD}/log:/var/log/supervisor
-      - ${PWD}/plugins:/usr/src/app/plugins
-      - ${PWD}/accounting:/usr/src/app/accounting
+      - ./public/packs:/usr/src/app/public/packs
+      - ./public/uploads:/usr/src/app/public/uploads
+      - ./invoices:/usr/src/app/invoices
+      - ./payment_schedules:/usr/src/app/payment_schedules
+      - ./exports:/usr/src/app/exports
+      - ./imports:/usr/src/app/imports
+      - ./proof_of_identity_files:/usr/src/app/proof_of_identity_files
+      - ./log:/var/log/supervisor
+      - ./plugins:/usr/src/app/plugins
+      - ./accounting:/usr/src/app/accounting
     depends_on:
       - postgres
       - redis
@@ -27,7 +27,7 @@ services:
   postgres:
     image: postgres:9.6
     volumes:
-      - ${PWD}/postgresql:/var/lib/postgresql/data
+      - ./postgresql:/var/lib/postgresql/data
     restart: always
     environment:
       POSTGRES_HOST_AUTH_METHOD: trust
@@ -41,14 +41,14 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - ${PWD}/elasticsearch/config:/usr/share/elasticsearch/config
-      - ${PWD}/elasticsearch:/usr/share/elasticsearch/data
+      - ./elasticsearch/config:/usr/share/elasticsearch/config
+      - ./elasticsearch:/usr/share/elasticsearch/data
     restart: always
 
   redis:
     image: redis:6-alpine
     volumes:
-      - ${PWD}/redis:/data
+      - ./redis:/data
     restart: always
 
   nginx:
@@ -57,9 +57,9 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ${PWD}/config/nginx:/etc/nginx/conf.d
-      - ${PWD}/letsencrypt/etc:/etc/letsencrypt
-      - ${PWD}/log:/var/log/nginx
+      - ./config/nginx:/etc/nginx/conf.d
+      - ./letsencrypt/etc:/etc/letsencrypt
+      - ./log:/var/log/nginx
     volumes_from:
       - fabmanager:ro
     links:

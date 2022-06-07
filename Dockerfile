@@ -1,6 +1,9 @@
 FROM ruby:2.6.10-alpine
 MAINTAINER contact@fab-manager.com
 
+RUN addgroup --gid 1000 fabmanager && \
+    adduser --uid 1000 -G fabmanager -s /bin/bash -D fabmanager
+
 # Install upgrade system packages
 RUN apk update && apk upgrade && \
 # Install runtime apk dependencies
@@ -46,7 +49,12 @@ RUN bundle config --global frozen 1
 WORKDIR /tmp
 COPY Gemfile /tmp/
 COPY Gemfile.lock /tmp/
-RUN bundle install --binstubs --without development test doc
+RUN bundle config set --local without 'development test doc' && bundle install && bundle binstubs --all
+
+# Prepare the application directory
+RUN mkdir -p /usr/src/app && chown -R fabmanager:fabmanager /usr/src/app
+# Change to non-root user
+USER fabmanager
 
 # Install Javascript packages
 WORKDIR /usr/src/app
@@ -55,6 +63,7 @@ COPY yarn.lock /usr/src/app/yarn.lock
 RUN yarn install
 
 # Clean up build deps, cached packages and temp files
+USER root
 RUN apk del .build-deps && \
     yarn cache clean && \
     rm -rf /tmp/* \
@@ -63,24 +72,15 @@ RUN apk del .build-deps && \
            /usr/lib/ruby/gems/*/cache/*
 
 # Web app
-RUN mkdir -p /usr/src/app && \
-    mkdir -p /usr/src/app/config && \
-    mkdir -p /usr/src/app/invoices && \
-    mkdir -p /usr/src/app/payment_schedules && \
-    mkdir -p /usr/src/app/exports && \
-    mkdir -p /usr/src/app/imports && \
-    mkdir -p /usr/src/app/log && \
-    mkdir -p /usr/src/app/public/uploads && \
-    mkdir -p /usr/src/app/public/packs && \
-    mkdir -p /usr/src/app/accounting && \
-    mkdir -p /usr/src/app/proof_of_identity_files && \
-    mkdir -p /usr/src/app/tmp/sockets && \
+USER fabmanager
+RUN mkdir -p /usr/src/app/tmp/sockets && \
     mkdir -p /usr/src/app/tmp/pids
 
+# Copy source files
 COPY docker/database.yml /usr/src/app/config/database.yml
 COPY . /usr/src/app
 
-# Volumes
+# Volumes (the folders are created by setup.sh)
 VOLUME /usr/src/app/invoices
 VOLUME /usr/src/app/payment_schedules
 VOLUME /usr/src/app/exports

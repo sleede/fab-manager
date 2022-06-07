@@ -30,7 +30,7 @@ module OmniAuth::Strategies
 
     def authorize_params
       super.tap do |params|
-        params[:scope] = active_provider.providable.scopes
+        params[:scope] = OmniAuth::Strategies::SsoOauth2Provider.active_provider.providable.scopes
       end
     end
 
