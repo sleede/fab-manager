@@ -87,6 +87,19 @@ class ShoppingCart
     { success: success, payment: payment, errors: errors }
   end
 
+  def valid?
+    items.each do |item|
+      next if item.valid?(@items)
+
+      return false
+    end
+    return false unless @coupon.valid?([])
+
+    return false unless @payment_schedule.valid?([])
+
+    true
+  end
+
   private
 
   # Save the object associated with the provided item or raise and Rollback if something wrong append.

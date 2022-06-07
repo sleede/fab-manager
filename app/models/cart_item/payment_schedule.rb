@@ -2,7 +2,7 @@
 
 # A payment schedule applied to plan in the shopping cart
 class CartItem::PaymentSchedule
-  attr_reader :requested
+  attr_reader :requested, :errors
 
   def initialize(plan, coupon, requested, customer, start_at = nil)
     raise TypeError unless coupon.is_a? CartItem::Coupon
@@ -12,6 +12,7 @@ class CartItem::PaymentSchedule
     @requested = requested
     @customer = customer
     @start_at = start_at
+    @errors = {}
   end
 
   def schedule(total, total_without_coupon)
@@ -32,5 +33,13 @@ class CartItem::PaymentSchedule
 
   def type
     'subscription'
+  end
+
+  def valid?(_all_items)
+    if @plan&.disabled
+      @errors[:item] = 'plan is disabled'
+      return false
+    end
+    true
   end
 end

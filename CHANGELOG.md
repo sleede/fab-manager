@@ -4,6 +4,7 @@
 
 - Fix a bug: admins are shown in select member for reservation by admin
 - Fix a bug: unable to show tours in machines and spaces page
+- Check shopping cart items is valid before pay online
 
 ## v5.4.2 2022 June 1
 

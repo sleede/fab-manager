@@ -46,4 +46,9 @@ export default class PayzenAPI {
     const res: AxiosResponse<CreateTokenResponse> = await apiClient.post('/api/payzen/update_token', { payment_schedule_id: paymentScheduleId });
     return res?.data;
   }
+
+  static async checkCart (cart: ShoppingCart, customer: User): Promise<CreatePaymentResponse> {
+    const res: AxiosResponse<CreatePaymentResponse> = await apiClient.post('/api/payzen/check_cart', { cart_items: cart, customer_id: customer.id });
+    return res?.data;
+  }
 }

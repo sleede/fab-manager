@@ -43,7 +43,26 @@ class CartItem::Reservation < CartItem::BaseItem
   def valid?(all_items)
     pending_subscription = all_items.find { |i| i.is_a?(CartItem::Subscription) }
     @slots.each do |slot|
-      availability = Availability.find(slot[:availability_id])
+      availability = Availability.find_by(id: slot[:availability_id])
+      if availability.nil?
+        @errors[:slot] = 'slot availability no exist'
+        return false
+      end
+
+      if availability.available_type == 'machines'
+        s = Slot.find_by(start_at: slot[:start_at], end_at: slot[:end_at], availability_id: slot[:availability_id], canceled_at: nil)
+        unless s.nil?
+          @errors[:slot] = 'slot has reserved'
+          return false
+        end
+      elsif availability.available_type == 'space' && availability.spaces.first.disabled.nil?
+        @errors[:slot] = 'space is disabled'
+        return false
+      elsif availability.completed?
+        @errors[:slot] = 'availability has completed'
+        return false
+      end
+
       next if availability.plan_ids.empty?
       next if (@customer.subscribed_plan && availability.plan_ids.include?(@customer.subscribed_plan.id)) ||
               (pending_subscription && availability.plan_ids.include?(pending_subscription.plan.id)) ||

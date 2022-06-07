@@ -19,6 +19,9 @@ class API::StripeController < API::PaymentsController
     res = nil # json of the API answer
 
     cart = shopping_cart
+    unless cart.valid?
+      render json: { error: 'unable to pay' }, status: :unprocessable_entity and return
+    end
     begin
       amount = debit_amount(cart) # will contains the amount and the details of each invoice lines
       if params[:payment_method_id].present?
@@ -71,10 +74,7 @@ class API::StripeController < API::PaymentsController
 
   def setup_subscription
     cart = shopping_cart
-    cart.items.each do |item|
-      raise InvalidSubscriptionError unless item.valid?(cart.items)
-      raise InvalidSubscriptionError unless item.to_object.errors.empty?
-    end
+    raise InvalidSubscriptionError unless cart.valid?
 
     service = Stripe::Service.new
     method = service.attach_method_as_default(

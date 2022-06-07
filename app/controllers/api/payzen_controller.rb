@@ -53,6 +53,14 @@ class API::PayzenController < API::PaymentsController
     render json: e, status: :unprocessable_entity
   end
 
+  def check_cart
+    cart = shopping_cart
+    unless cart.valid?
+      render json: { error: 'unable to pay' }, status: :unprocessable_entity and return
+    end
+    render json: { cart: 'ok' }, status: :ok
+  end
+
   def check_hash
     @result = PayZen::Helper.check_hash(params[:algorithm], params[:hash_key], params[:hash], params[:data])
   end
