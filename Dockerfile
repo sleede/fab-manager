@@ -51,7 +51,8 @@ COPY Gemfile /tmp/
 COPY Gemfile.lock /tmp/
 RUN bundle config set --local without 'development test doc' && bundle install && bundle binstubs --all
 
-# Prepare the application directory
+# Prepare the application directories
+RUN mkdir -p /var/log/supervisor && chown -R fabmanager:fabmanager /var/log/supervisor
 RUN mkdir -p /usr/src/app && chown -R fabmanager:fabmanager /usr/src/app
 # Change to non-root user
 USER fabmanager
