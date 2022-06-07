@@ -224,9 +224,9 @@ compile_assets()
   mkdir -p public/new_packs
   # shellcheck disable=SC2068
   if ! docker run --user "$(id -u):$(id -g)" --rm --env-file ./config/env ${ENV_ARGS[@]} --link "$PG_ID" --net "$PG_NET_ID" -v "${PWD}/public/new_packs:/usr/src/app/public/packs" "$IMAGE" bundle exec rake assets:precompile; then
-    restore_tag
-    printf "\e[91m[ ❌ ] Something went wrong while compiling the assets, please check the logs above.\e[39m\nExiting...\n"
-    exit 4
+    printf "\e[93m[ ⚠ ] Something may have went wrong while compiling the assets, please check the logs above.\e[39m\n"
+    [[ "$YES_ALL" = "true" ]] && confirm="y" || read -rp "[91m::[0m [1mIgnore and continue?[0m (Y/n) " confirm </dev/tty
+    if [[ "$confirm" = "n" ]]; then restore_tag; echo "Exiting..."; exit 4; fi
   fi
   docker-compose down
   if ! rm -rf public/packs; then
