@@ -174,10 +174,15 @@ prepare_files()
   read -rp "Continue? (Y/n) " confirm </dev/tty
   if [[ "$confirm" = "n" ]]; then exit 1; fi
 
-  elevate_cmd mkdir -p "$FABMANAGER_PATH/config"
+  elevate_cmd mkdir -p "$FABMANAGER_PATH"
   elevate_cmd chown -R "$(whoami):$(whoami)" "$FABMANAGER_PATH"
 
-  mkdir -p "$FABMANAGER_PATH/elasticsearch/config"
+  # create folders before starting the containers, otherwise root will own them
+  local folders=(accounting config elasticsearch/config exports imports invoices log payment_schedules plugins postgresql \
+  proof_of_identity_files public/packs public/uploads)
+  for folder in "${folders[@]}"; do
+    mkdir -p "$FABMANAGER_PATH/$folder"
+  done
 
   # Fab-manager environment variables
   \curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/setup/env.example > "$FABMANAGER_PATH/config/env"

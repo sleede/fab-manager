@@ -221,6 +221,7 @@ compile_assets()
   fi
   PG_NET_ID=$(docker inspect "$PG_ID" -f "{{json .NetworkSettings.Networks }}" | jq -r '.[] .NetworkID')
   clean_env_file
+  mkdir -p public/new_packs
   # shellcheck disable=SC2068
   if ! docker run --user "$(id -u):$(id -g)" --rm --env-file ./config/env ${ENV_ARGS[@]} --link "$PG_ID" --net "$PG_NET_ID" -v "${PWD}/public/new_packs:/usr/src/app/public/packs" "$IMAGE" bundle exec rake assets:precompile; then
     restore_tag
