@@ -50,7 +50,9 @@ RUN bundle config set --local without 'development test doc' && bundle install &
 # Prepare the application directories
 RUN mkdir -p /var/log/supervisor && \
     mkdir -p /usr/src/app/tmp/sockets && \
-    mkdir -p /usr/src/app/tmp/pids
+    mkdir -p /usr/src/app/tmp/pids && \
+    mkdir -p /usr/src/app/tmp/cache && \
+    chmod -R a+w /usr/src/app/tmp
 
 # Install Javascript packages
 WORKDIR /usr/src/app

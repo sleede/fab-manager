@@ -4,6 +4,7 @@
 
 - Improved docker image building time
 - Use relative paths in mount scripts
+- Fix a bug: unable to generate the secret key base during the setup
 
 ## v5.4.4 2022 June 8
 
