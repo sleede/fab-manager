@@ -1,9 +1,6 @@
 FROM ruby:2.6.10-alpine
 MAINTAINER contact@fab-manager.com
 
-RUN addgroup --gid 1000 fabmanager && \
-    adduser --uid 1000 -G fabmanager -s /bin/bash -D fabmanager
-
 # Install upgrade system packages
 RUN apk update && apk upgrade && \
 # Install runtime apk dependencies
@@ -52,10 +49,9 @@ COPY Gemfile.lock /tmp/
 RUN bundle config set --local without 'development test doc' && bundle install && bundle binstubs --all
 
 # Prepare the application directories
-RUN mkdir -p /var/log/supervisor && chown -R fabmanager:fabmanager /var/log/supervisor
-RUN mkdir -p /usr/src/app && chown -R fabmanager:fabmanager /usr/src/app
-# Change to non-root user
-USER fabmanager
+RUN mkdir -p /var/log/supervisor && \
+    mkdir -p /usr/src/app/tmp/sockets && \
+    mkdir -p /usr/src/app/tmp/pids
 
 # Install Javascript packages
 WORKDIR /usr/src/app
@@ -64,18 +60,12 @@ COPY yarn.lock /usr/src/app/yarn.lock
 RUN yarn install
 
 # Clean up build deps, cached packages and temp files
-USER root
 RUN apk del .build-deps && \
     yarn cache clean && \
     rm -rf /tmp/* \
            /var/tmp/* \
            /var/cache/apk/* \
            /usr/lib/ruby/gems/*/cache/*
-
-# Web app
-USER fabmanager
-RUN mkdir -p /usr/src/app/tmp/sockets && \
-    mkdir -p /usr/src/app/tmp/pids
 
 # Copy source files
 COPY docker/database.yml /usr/src/app/config/database.yml
@@ -98,5 +88,5 @@ EXPOSE 3000
 
 # The main command to run when the container starts. Also tell the Rails server
 # to bind to all interfaces by default.
-COPY docker/supervisor.conf /etc/supervisor/conf.d/fablab.conf
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/fablab.conf"]
+COPY docker/supervisor.conf /etc/supervisor/conf.d/fabmanager.conf
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/fabmanager.conf"]
