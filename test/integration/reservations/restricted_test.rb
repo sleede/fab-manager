@@ -141,7 +141,7 @@ class Reservations::RestrictedTest < ActionDispatch::IntegrationTest
     end
 
     assert_equal 422, response.status
-    assert_match /slot is restricted for subscribers/, response.body
+    assert_match /unable to pay/, response.body
 
     assert_equal reservations_count, Reservation.count
     assert_equal invoices_count, Invoice.count

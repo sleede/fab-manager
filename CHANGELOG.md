@@ -2,6 +2,20 @@
 
 ## next deploy
 
+## v5.4.4 2022 June 8
+
+- Check shopping cart items are valid before online payment
+- Updated sidekiq-unique-jobs to 7.1.23 to get rid of Sidekiq's default_worker_options deprecation warning
+- Allow moving with arrows in the setup script's inputs
+- Ability to ignore assets compilation errors in the upgrade script
+- Fix a bug: admins are shown in select member for reservation by admin
+- Fix a bug: unable to show tours in machines and spaces page
+- Fix a bug: unable to connect with OAuth2
+- Fix a bug: when installing fab-manager as non-root user, most of the resulting installation directories were owned by root
+- Fix a bug: unable to edit OIDC provider
+- Fix a bug: list of OIDC scopes are loading indefinitely
+- [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/use-relative-paths.sh | bash`
+
 ## v5.4.3 2022 June 6
 
 - Updated translations

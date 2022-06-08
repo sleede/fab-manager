@@ -41,4 +41,12 @@ class CartItem::Subscription < CartItem::BaseItem
   def type
     'subscription'
   end
+
+  def valid?(_all_items)
+    if @plan.disabled
+      @errors[:item] = 'plan is disabled'
+      return false
+    end
+    true
+  end
 end

@@ -132,6 +132,7 @@ export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onE
     try {
       const { result } = await PayZenKR.current.validateForm();
       if (result === null) {
+        await PayzenAPI.checkCart(cart, customer);
         await PayZenKR.current.onSubmit(onPaid);
         await PayZenKR.current.onError(handleError);
         await PayZenKR.current.submit();

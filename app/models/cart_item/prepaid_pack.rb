@@ -37,4 +37,12 @@ class CartItem::PrepaidPack < CartItem::BaseItem
   def type
     'pack'
   end
+
+  def valid?(_all_items)
+    if @pack.disabled
+      @errors[:item] = 'pack is disabled'
+      return false
+    end
+    true
+  end
 end

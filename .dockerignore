@@ -42,6 +42,7 @@ Dockerfile
 docker-compose*
 test
 .env
+.docker
 
 # Docs
 *.md
