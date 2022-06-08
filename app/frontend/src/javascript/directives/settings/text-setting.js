@@ -21,6 +21,10 @@ Application.Directives.directive('textSetting', ['Setting', 'growl', '_t',
         if (typeof $scope.type === 'undefined') {
           $scope.type = 'text';
         }
+        // 'required' default to true
+        if (typeof $scope.required === 'undefined') {
+          $scope.required = true;
+        }
         // The setting
         $scope.setting = {
           name: $scope.name,
