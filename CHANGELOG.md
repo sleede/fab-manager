@@ -2,6 +2,8 @@
 
 ## next deploy
 
+- Improved docker image building time
+
 ## v5.4.4 2022 June 8
 
 - Check shopping cart items are valid before online payment
