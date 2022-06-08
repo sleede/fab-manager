@@ -3,6 +3,7 @@
 ## next deploy
 
 - Improved docker image building time
+- Use relative paths in mount scripts
 
 ## v5.4.4 2022 June 8
 

@@ -20,7 +20,7 @@ config()
 change_mount()
 {
   if [[ $(yq eval ".services.$SERVICE.volumes.[] | select (. == \"*assets\")" docker-compose.yml) ]]; then
-    yq -i eval ".services.$SERVICE.volumes.[] |= select(. == \"*assets\") |= \"\${PWD}/public/packs:/usr/src/app/public/packs\"" docker-compose.yml
+    yq -i eval ".services.$SERVICE.volumes.[] |= select(. == \"*assets\") |= \"\./public/packs:/usr/src/app/public/packs\"" docker-compose.yml
     echo "Service volume was replaced for $SERVICE: /assets changed to /packs"
   fi
 }
