@@ -20,6 +20,8 @@ The following guide describes what you can do and how to use Fab-manager.
 The following guides are designed for the people that perform software maintenance.
 - [Setup and update a production environment](production_readme.md)
 
+- [Installing behind a corporate proxy](proxy.md)
+
 - [Configuring the environment variables](environment.md)
 
 - [Known issues with Fab-Manager](known-issues.md)

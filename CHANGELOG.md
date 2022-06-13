@@ -2,6 +2,7 @@
 
 ## next deploy
 
+- Documentation for installing behind a proxy
 - Improved docker image building time
 - Use relative paths in mount scripts
 - Run the docker image with the system user
