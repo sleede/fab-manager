@@ -1,0 +1,2 @@
+[http]
+        sslCAInfo = /etc/ssl/certs/ca-cert-proxy.pem

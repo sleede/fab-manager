@@ -51,3 +51,4 @@ export http_proxy="http://proxy.example.com:8080" https_proxy="https://proxy.exa
 \curl -sSL setup.fab.mn | bash
 ```
 
+During the installation, if you have correctly exported the variable `http_proxy`, you will be prompted to enter your proxy CA certificate, if needed.

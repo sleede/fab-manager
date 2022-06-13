@@ -128,6 +128,15 @@ read_email()
 config()
 {
   SERVICE="fabmanager"
+  # http_proxy should have been exported externally
+  # shellcheck disable=SC2154
+  if [ "$http_proxy" != "" ]; then
+    read -rp "You seems to be behind a proxy. Do you want to configure a custom CA certificate? (Y/n) " confirm </dev/tty
+    if [[ "$confirm" != "n" ]]; then
+      echo "Paste the certificate below and terminate with an empty line:"
+      CERTIFICATE=$(sed '/^$/q')
+    fi
+  fi
   echo 'We recommend nginx to serve the application over the network (internet). You can use your own solution or let this script install and configure nginx for Fab-manager.'
   printf 'If you want to install Fab-manager behind a reverse proxy, you may not need to install the integrated nginx.\n'
   read -rp 'Do you want install nginx? (Y/n) ' NGINX </dev/tty
@@ -213,6 +222,14 @@ prepare_files()
 
   # docker-compose
   \curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/setup/docker-compose.yml > "$FABMANAGER_PATH/docker-compose.yml"
+
+  # proxy
+  if [ "$CERTIFICATE" != "" ]; then
+    mkdir -p "$FABMANAGER_PATH/config/proxy"
+    echo "$CERTIFICATE" > "$FABMANAGER_PATH/config/proxy/certificate.pem"
+    \curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/setup/proxy/.npmrc > "$FABMANAGER_PATH/config/proxy/.npmrc"
+    \curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/setup/proxy/gitconfig > "$FABMANAGER_PATH/config/proxy/gitconfig"
+  fi
 }
 
 yq() {
@@ -301,6 +318,14 @@ prepare_docker()
   # set the current user in the docker-compose.yml, as the owner of the process
   sed -i.bak "s/USER_ID/$(id -u):$(id -g)/g" "$FABMANAGER_PATH/docker-compose.yml"
 
+  # if a certificate was provided, modify the docker-compose.yml file to use it
+  if [ "$CERTIFICATE" != "" ]; then
+    echo "Using the certificate provided..."
+    yq -i eval ".services.$SERVICE.volumes += [\"\./config/proxy/certificate.pem:/etc/ssl/certs/ca-cert-proxy.pem\"]" docker-compose.yml
+    yq -i eval ".services.$SERVICE.volumes += [\"\./config/proxy/.npmrc:/usr/src/app/.npmrc\"]" docker-compose.yml
+    yq -i eval ".services.$SERVICE.volumes += [\"\./config/proxy/gitconfig:/etc/gitconfig\"]" docker-compose.yml
+  fi
+
   cd "$FABMANAGER_PATH" && docker-compose pull
 }
 
@@ -353,7 +378,7 @@ configure_env_file()
     fi
   done
   # we automatically generate the SECRET_KEY_BASE
-  secret=$(docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --user "$(id -u):$(id -g)" --rm "$SERVICE" bundle exec rake secret)
+  secret=$(docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rake secret)
   sed -i.bak "s/SECRET_KEY_BASE=/SECRET_KEY_BASE=$secret/g" "$FABMANAGER_PATH/config/env"
 
   # if DEFAULT_PROTOCOL was set to http, ALLOW_INSECURE_HTTP is probably required
@@ -393,22 +418,22 @@ setup_assets_and_databases()
   read -rp "Continue? (Y/n) " confirm </dev/tty
   if [ "$confirm" = "n" ]; then return; fi
 
-  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --user "$(id -u):$(id -g)" --rm "$SERVICE" bundle exec rake db:create # create the database
-  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --user "$(id -u):$(id -g)" --rm "$SERVICE" bundle exec rake db:migrate # run all the migrations
+  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rake db:create # create the database
+  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rake db:migrate # run all the migrations
   # prompt default admin email/password
   printf "\n\nWe will now create the default administrator of Fab-manager.\n"
   read_email
   PASSWORD=$(read_password)
   printf "\nOK. We will fill the database now...\n"
-  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --user "$(id -u):$(id -g)" --rm -e ADMIN_EMAIL="$EMAIL" -e ADMIN_PASSWORD="$PASSWORD" "$SERVICE" bundle exec rake db:seed # seed the database
+  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm -e ADMIN_EMAIL="$EMAIL" -e ADMIN_PASSWORD="$PASSWORD" "$SERVICE" bundle exec rake db:seed # seed the database
 
   # now build the assets
-  if ! docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --user "$(id -u):$(id -g)" --rm "$SERVICE" bundle exec rake assets:precompile; then
+  if ! docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --user "0:0" --rm "$SERVICE" bundle exec rake assets:precompile; then
     echo -e "\e[91m[ ❌ ] someting went wrong while compiling the assets, exiting...\e[39m" && exit 1
   fi
 
   # and prepare elasticsearch
-  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --user "$(id -u):$(id -g)" --rm "$SERVICE" bundle exec rake fablab:es:build_stats
+  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rake fablab:es:build_stats
 }
 
 stop()
