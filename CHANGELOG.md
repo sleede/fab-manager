@@ -7,6 +7,7 @@
 - Use relative paths in mount scripts
 - Run the docker image with the system user
 - During the setup, autoconfigure the main domain
+- During the setup, ask to set ALLOW_INSECURE_HTTP if DEFAULT_PROTOCOL was set to http
 - Fix a bug: unable to generate the secret key base during the setup
 - [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/set-docker-user.sh | bash`
 

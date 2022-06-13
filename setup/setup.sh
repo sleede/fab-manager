@@ -355,6 +355,16 @@ configure_env_file()
   # we automatically generate the SECRET_KEY_BASE
   secret=$(docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --user "$(id -u):$(id -g)" --rm "$SERVICE" bundle exec rake secret)
   sed -i.bak "s/SECRET_KEY_BASE=/SECRET_KEY_BASE=$secret/g" "$FABMANAGER_PATH/config/env"
+
+  # if DEFAULT_PROTOCOL was set to http, ALLOW_INSECURE_HTTP is probably required
+  if grep "^DEFAULT_PROTOCOL=http$" "$FABMANAGER_PATH/config/env"; then
+    get_md_anchor "$doc" "ALLOW_INSECURE_HTTP"
+    printf "You have set \e[1mDEFAULT_PROTOCOL\e[21m to \e[1mhttp\e[21m.\n"
+    read -rp "Do you want to allow insecure HTTP? (y/N) " confirm </dev/tty
+    if [ "$confirm" = "y" ]; then
+      sed -i.bak "s/ALLOW_INSECURE_HTTP=.*/ALLOW_INSECURE_HTTP=true/g" "$FABMANAGER_PATH/config/env"
+    fi
+  fi
 }
 
 read_password()
