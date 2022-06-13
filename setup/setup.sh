@@ -317,6 +317,11 @@ get_md_anchor()
 
 configure_env_file()
 {
+  # pre-configure the main domain
+  if [ "${MAIN_DOMAIN[0]}" != "" ]; then
+    sed -i.bak "s/DEFAULT_HOST=.*/DEFAULT_HOST=${MAIN_DOMAIN[0]}/g" "$FABMANAGER_PATH/config/env"
+  fi
+
   printf "\n\nWe will now configure the environment variables.\n"
   echo "This allows you to customize Fab-manager's appearance and behavior."
   read -rp "Proceed? (Y/n) " confirm </dev/tty
