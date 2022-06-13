@@ -221,7 +221,11 @@ compile_assets()
   fi
   PG_NET_ID=$(docker inspect "$PG_ID" -f "{{json .NetworkSettings.Networks }}" | jq -r '.[] .NetworkID')
   clean_env_file
-  mkdir -p public/new_packs
+  if ! mkdir -p public/new_packs; then
+    # if, for any reason, the directory cannot be created, we create it with sudo privileges and changes the ownership to the current user
+    elevate_cmd mkdir -p public/new_packs
+    elevate_cmd chown "$(id -u):$(id -g)" public/new_packs
+  fi
   # shellcheck disable=SC2068
   if ! docker run --user "$(id -u):$(id -g)" --rm --env-file ./config/env ${ENV_ARGS[@]} --link "$PG_ID" --net "$PG_NET_ID" -v "${PWD}/public/new_packs:/usr/src/app/public/packs" "$IMAGE" bundle exec rake assets:precompile; then
     printf "\e[93m[ ⚠ ] Something may have went wrong while compiling the assets, please check the logs above.\e[39m\n"
