@@ -52,7 +52,9 @@ RUN mkdir -p /var/log/supervisor && \
     mkdir -p /usr/src/app/tmp/sockets && \
     mkdir -p /usr/src/app/tmp/pids && \
     mkdir -p /usr/src/app/tmp/cache && \
-    chmod -R a+w /usr/src/app/tmp
+    mkdir -p /usr/src/app/log && \
+    chmod -R a+w /usr/src/app/tmp && \
+    chmod -R a+w /usr/src/app/log
 
 # Install Javascript packages
 WORKDIR /usr/src/app

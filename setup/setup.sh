@@ -298,6 +298,9 @@ prepare_docker()
     fi
   fi
 
+  # set the current user in the docker-compose.yml, as the owner of the process
+  sed -i.bak "s/USER_ID/$(id -u):$(id -g)/g" "$FABMANAGER_PATH/docker-compose.yml"
+
   cd "$FABMANAGER_PATH" && docker-compose pull
 }
 

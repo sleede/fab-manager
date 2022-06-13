@@ -4,8 +4,10 @@
 
 - Improved docker image building time
 - Use relative paths in mount scripts
-- During the setup, auto configure the main domain
+- Run the docker image with the system user
+- During the setup, autoconfigure the main domain
 - Fix a bug: unable to generate the secret key base during the setup
+- [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/set-docker-user.sh | bash`
 
 ## v5.4.4 2022 June 8
 
