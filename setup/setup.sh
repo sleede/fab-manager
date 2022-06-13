@@ -134,7 +134,7 @@ config()
     read -rp "You seems to be behind a proxy. Do you want to configure a custom CA certificate? (Y/n) " confirm </dev/tty
     if [[ "$confirm" != "n" ]]; then
       echo "Paste the certificate below and terminate with an empty line:"
-      CERTIFICATE=$(sed '/^$/q')
+      CERTIFICATE=$(sed '/^$/q' </dev/tty)
     fi
   fi
   echo 'We recommend nginx to serve the application over the network (internet). You can use your own solution or let this script install and configure nginx for Fab-manager.'
@@ -321,9 +321,9 @@ prepare_docker()
   # if a certificate was provided, modify the docker-compose.yml file to use it
   if [ "$CERTIFICATE" != "" ]; then
     echo "Using the certificate provided..."
-    yq -i eval ".services.$SERVICE.volumes += [\"\./config/proxy/certificate.pem:/etc/ssl/certs/ca-cert-proxy.pem\"]" docker-compose.yml
-    yq -i eval ".services.$SERVICE.volumes += [\"\./config/proxy/.npmrc:/usr/src/app/.npmrc\"]" docker-compose.yml
-    yq -i eval ".services.$SERVICE.volumes += [\"\./config/proxy/gitconfig:/etc/gitconfig\"]" docker-compose.yml
+    yq -i eval ".services.$SERVICE.volumes += [\"./config/proxy/certificate.pem:/etc/ssl/certs/ca-cert-proxy.pem\"]" docker-compose.yml
+    yq -i eval ".services.$SERVICE.volumes += [\"./config/proxy/.npmrc:/usr/src/app/.npmrc\"]" docker-compose.yml
+    yq -i eval ".services.$SERVICE.volumes += [\"./config/proxy/gitconfig:/etc/gitconfig\"]" docker-compose.yml
   fi
 
   cd "$FABMANAGER_PATH" && docker-compose pull
@@ -382,11 +382,11 @@ configure_env_file()
   sed -i.bak "s/SECRET_KEY_BASE=/SECRET_KEY_BASE=$secret/g" "$FABMANAGER_PATH/config/env"
 
   # if DEFAULT_PROTOCOL was set to http, ALLOW_INSECURE_HTTP is probably required
-  if grep "^DEFAULT_PROTOCOL=http$" "$FABMANAGER_PATH/config/env"; then
+  if grep "^DEFAULT_PROTOCOL=http$" "$FABMANAGER_PATH/config/env" 1>/dev/null; then
     get_md_anchor "$doc" "ALLOW_INSECURE_HTTP"
     printf "You have set \e[1mDEFAULT_PROTOCOL\e[21m to \e[1mhttp\e[21m.\n"
-    read -rp "Do you want to allow insecure HTTP? (y/N) " confirm </dev/tty
-    if [ "$confirm" = "y" ]; then
+    read -rp "Do you want to allow insecure HTTP? (Y/n) " confirm </dev/tty
+    if [ "$confirm" != "n" ]; then
       sed -i.bak "s/ALLOW_INSECURE_HTTP=.*/ALLOW_INSECURE_HTTP=true/g" "$FABMANAGER_PATH/config/env"
     fi
   fi
