@@ -418,22 +418,22 @@ setup_assets_and_databases()
   read -rp "Continue? (Y/n) " confirm </dev/tty
   if [ "$confirm" = "n" ]; then return; fi
 
-  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rake db:create # create the database
-  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rake db:migrate # run all the migrations
+  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rake db:create </dev/tty # create the database
+  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rake db:migrate </dev/tty # run all the migrations
   # prompt default admin email/password
   printf "\n\nWe will now create the default administrator of Fab-manager.\n"
   read_email
   PASSWORD=$(read_password)
   printf "\nOK. We will fill the database now...\n"
-  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm -e ADMIN_EMAIL="$EMAIL" -e ADMIN_PASSWORD="$PASSWORD" "$SERVICE" bundle exec rake db:seed # seed the database
+  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm -e ADMIN_EMAIL="$EMAIL" -e ADMIN_PASSWORD="$PASSWORD" "$SERVICE" bundle exec rake db:seed </dev/tty # seed the database
 
   # now build the assets
-  if ! docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --user "0:0" --rm "$SERVICE" bundle exec rake assets:precompile; then
+  if ! docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --user "0:0" --rm "$SERVICE" bundle exec rake assets:precompile </dev/tty; then
     echo -e "\e[91m[ ❌ ] someting went wrong while compiling the assets, exiting...\e[39m" && exit 1
   fi
 
   # and prepare elasticsearch
-  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rake fablab:es:build_stats
+  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rake fablab:es:build_stats </dev/tty
 }
 
 stop()

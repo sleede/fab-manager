@@ -10,6 +10,7 @@
 - During the setup, autoconfigure the main domain
 - During the setup, ask to set ALLOW_INSECURE_HTTP if DEFAULT_PROTOCOL was set to http
 - Fix a bug: unable to generate the secret key base during the setup
+- Fix a bug: error message during the setup: the input device is not a TTY
 - [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/set-docker-user.sh | bash`
 
 ## v5.4.4 2022 June 8
