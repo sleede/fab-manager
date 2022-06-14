@@ -7,7 +7,7 @@ services:
       RACK_ENV: production
     env_file:
       - ./config/env
-    user: 1000:100
+    user: USER_ID
     volumes:
       - ./public/packs:/usr/src/app/public/packs
       - ./public/uploads:/usr/src/app/public/uploads
