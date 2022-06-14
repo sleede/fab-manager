@@ -72,6 +72,7 @@ Application.Controllers.controller('EventsController', ['$scope', '$state', 'Eve
     // reinitialize results datasets
       $scope.page = 1;
       $scope.eventsGroupByMonth = {};
+      $scope.featuredEevent = null;
       $scope.events = [];
       $scope.monthOrder = [];
       $scope.noMoreResults = false;
@@ -111,13 +112,14 @@ Application.Controllers.controller('EventsController', ['$scope', '$state', 'Eve
      */
     const groupEvents = function (events) {
       if (events.length > 0) {
-        const eventsGroupedByMonth = _.groupBy(events, function (obj) {
+        const eventsGroupedByMonth = _.groupBy(events.slice(1), function (obj) {
           return _.map(['month_id', 'year'], function (key) {
             return obj[key];
           });
         });
         $scope.eventsGroupByMonth = Object.assign($scope.eventsGroupByMonth, eventsGroupedByMonth);
-        return $scope.monthOrder = Object.keys($scope.eventsGroupByMonth);
+        $scope.monthOrder = Object.keys($scope.eventsGroupByMonth);
+        $scope.featuredEevent = events[0];
       }
     };
 

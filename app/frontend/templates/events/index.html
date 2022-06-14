@@ -40,9 +40,12 @@
       </div>
     </div>
 
-    <div class="event-focus">
-      <!-- TODO: get focus event -->
-      <!--<event-card style="display: contents" event="" card-type="'lg'" />-->
+    <div class="event-focus" ng-if="featuredEevent">
+      <event-card style="display: contents"
+                  event="featuredEevent"
+                  card-type="'lg'"
+                  ui-sref="app.public.events_show({id: featuredEevent.id})">
+      </event-card>
     </div>
 
     <div ng-repeat="month in monthOrder">
