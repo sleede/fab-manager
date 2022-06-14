@@ -54,7 +54,8 @@ RUN mkdir -p /var/log/supervisor && \
     mkdir -p /usr/src/app/tmp/cache && \
     mkdir -p /usr/src/app/log && \
     chmod -R a+w /usr/src/app/tmp && \
-    chmod -R a+w /usr/src/app/log
+    chmod -R a+w /usr/src/app/log && \
+    chmod -R a+w /var/run
 
 # Install Javascript packages
 WORKDIR /usr/src/app
