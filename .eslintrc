@@ -53,7 +53,10 @@
         "import/no-unused-modules": ["error", { "missingExports": true }],
         "fabmanager/component-class-named-as-component": ["error", { "ignoreAbstractKeyword": true }],
         "fabmanager/component-named-like-file": "error",
-        "fabmanager/component-documentation": "error"
+        "fabmanager/component-documentation": "error",
+        "fabmanager/component-methods-documentation": "error",
+        "fabmanager/no-bootstrap": "error",
+        "fabmanager/no-utilities": "error"
       }
     },
     {

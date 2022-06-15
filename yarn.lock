@@ -4082,10 +4082,12 @@ eslint-plugin-es@^4.1.0:
     eslint-utils "^2.0.0"
     regexpp "^3.0.0"
 
-eslint-plugin-fabmanager@^0.2.2:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-fabmanager/-/eslint-plugin-fabmanager-0.2.2.tgz#395acebad1d4b5e98e2a4843f0970740081592c5"
-  integrity sha512-GWAJzJhr59s3+/A3amSu4UtmeoUPB3pkzxFOEeAHKdkkZ5WfIS3Hlfx7gKe9CdC7Moli0VK+ZZ7KT2Xcc26S4A==
+eslint-plugin-fabmanager@^0.4.2:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-fabmanager/-/eslint-plugin-fabmanager-0.4.2.tgz#87f18b13a29fe77dcbb9cb8c4a996b0b108f8a07"
+  integrity sha512-3SKm4YXXzrgQYnaCmk0/QLh+2YaCSMAZFazC7fFB57BBo0PR70YMrGNoyiEW4oQ52qYNeIMwlFHHNPEgWfcwsw==
+  dependencies:
+    requireindex "^1.2.0"
 
 eslint-plugin-html-erb@^1.0.1:
   version "1.0.1"
@@ -6790,6 +6792,11 @@ require-from-string@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/require-from-string/-/require-from-string-2.0.2.tgz#89a7fdd938261267318eafe14f9c32e598c36909"
   integrity sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==
+
+requireindex@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/requireindex/-/requireindex-1.2.0.tgz#3463cdb22ee151902635aa6c9535d4de9c2ef1ef"
+  integrity sha512-L9jEkOi3ASd9PYit2cwRfyppc9NoABujTP8/5gFcbERmo5jUoAKovIC3fsF17pkTnGsrByysqX+Kxd2OTNI1ww==
 
 requires-port@^1.0.0:
   version "1.0.0"
