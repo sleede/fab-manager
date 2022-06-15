@@ -95,6 +95,16 @@ Application.Controllers.controller('EventsController', ['$scope', '$state', 'Eve
      */
     $scope.onSingleDay = function (event) { moment(event.start_date).isSame(event.end_date, 'day'); };
 
+    /**
+     * Move down the viewport to the featured event
+     */
+    $scope.scrollToFeaturedEvent = function () {
+      const card = document.getElementsByClassName('featured-event')[0];
+      if (card) {
+        card.childNodes[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+
     /* PRIVATE SCOPE */
 
     /**
