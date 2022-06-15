@@ -112,14 +112,14 @@ Application.Controllers.controller('EventsController', ['$scope', '$state', 'Eve
      */
     const groupEvents = function (events) {
       if (events.length > 0) {
-        const eventsGroupedByMonth = _.groupBy(events.slice(1), function (obj) {
+        const eventsGroupedByMonth = _.groupBy(events, function (obj) {
           return _.map(['month_id', 'year'], function (key) {
             return obj[key];
           });
         });
         $scope.eventsGroupByMonth = Object.assign($scope.eventsGroupByMonth, eventsGroupedByMonth);
         $scope.monthOrder = Object.keys($scope.eventsGroupByMonth);
-        $scope.featuredEevent = events[0];
+        $scope.featuredEevent = _.minBy(events.filter(e => moment(e.start_date).isAfter()), e => e.start_date);
       }
     };
 

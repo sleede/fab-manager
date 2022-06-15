@@ -2,6 +2,7 @@
 
 ## next deploy
 
+- Feature the next event in the event page
 - Documentation for installing behind a proxy
 - Ability to install behind a proxy
 - Improved docker image building time

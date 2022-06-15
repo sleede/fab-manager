@@ -56,6 +56,7 @@
                     event="event"
                     card-type="'sm'"
                     ng-repeat="event in eventsGroupByMonth[month].slice(3*$index, 3*$index + 3)"
+                    ng-if="event.id !== featuredEevent.id"
                     ui-sref="app.public.events_show({id: event.id})">
         </event-card>
       </div>
