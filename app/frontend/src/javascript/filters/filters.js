@@ -350,3 +350,12 @@ Application.Filters.filter('filterDisabled', [function () {
     }
   };
 }]);
+
+Application.Filters.filter('currency', [function ($locale) {
+  return function (amount) {
+    // if null or undefined pass it through
+    return (amount == null)
+      ? amount
+      : new Intl.NumberFormat(Fablab.intl_locale, { style: 'currency', currency: Fablab.intl_currency }).format(amount);
+  };
+}]);
