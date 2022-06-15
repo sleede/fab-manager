@@ -289,6 +289,7 @@ es:
         full_price_: "Precio completo:"
         to_date: "to" #eg. from 01/01 to 01/05
         all_themes: "All themes"
+        show_featured: "Show the featured event"
       #details and booking of an event
       events_show:
         event_description: "Descripción del evento"
