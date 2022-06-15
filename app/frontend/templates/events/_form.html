@@ -138,10 +138,10 @@
           <label class="v-bottom" translate>{{ 'app.shared.event.all_day' }}</label>
           <div class="inline v-top">
             <label class="checkbox-inline">
-              <input type="radio" name="event[all_day]" ng-model="event.all_day" value="true" required/> {{ 'app.shared.buttons.yes' | translate }}
+              <input type="radio" name="event[all_day]" ng-model="event.all_day" ng-value="true" required/> {{ 'app.shared.buttons.yes' | translate }}
             </label>
             <label class="checkbox-inline">
-              <input type="radio" name="event[all_day]" ng-model="event.all_day" value="false"/> {{ 'app.shared.buttons.no' | translate }}
+              <input type="radio" name="event[all_day]" ng-model="event.all_day" ng-value="false"/> {{ 'app.shared.buttons.no' | translate }}
             </label>
           </div>
         </div>
@@ -180,7 +180,7 @@
             </span>
           </div>
         </div>
-        <div class="m-b row" ng-if="event.all_day =='false'">
+        <div class="m-b row" ng-if="event.all_day === false">
           <div class="col-xs-6">
               <label translate>{{ 'app.shared.event.start_time' }}</label>
               <div>

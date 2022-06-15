@@ -37,8 +37,8 @@ class EventService
         start_at = DateTime.new(start_date.year, start_date.month, start_date.day, 0, 0, 0, start_date.zone)
         end_at = DateTime.new(end_date.year, end_date.month, end_date.day, 23, 59, 59, end_date.zone)
       else
-        start_at = DateTime.new(start_date.year, start_date.month, start_date.day, start_time.hour, start_time.min, start_time.sec, start_date.zone)
-        end_at = DateTime.new(end_date.year, end_date.month, end_date.day, end_time.hour, end_time.min, end_time.sec, end_date.zone)
+        start_at = DateTime.new(start_date.year, start_date.month, start_date.day, start_time&.hour, start_time&.min, start_time&.sec, start_date.zone)
+        end_at = DateTime.new(end_date.year, end_date.month, end_date.day, end_time&.hour, end_time&.min, end_time&.sec, end_date.zone)
       end
       { start_at: start_at, end_at: end_at }
     end
