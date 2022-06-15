@@ -289,6 +289,7 @@ pt:
         full_price_: "Valor inteira:"
         to_date: "até" #eg. from 01/01 to 01/05
         all_themes: "Todos os temas"
+        show_featured: "Show the featured event"
       #details and booking of an event
       events_show:
         event_description: "Descrição do evento"
