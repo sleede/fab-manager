@@ -54,9 +54,10 @@
     <div ng-repeat="month in monthOrder">
       <h1>{{monthNames[month.split(',')[0] - 1]}}, {{month.split(',')[1]}}</h1>
 
-      <div class="event-monthList" ng-repeat="event in eventsGroupByMonth[month]">
+      <div class="event-monthList">
         <event-card style="display: contents"
                     event="event"
+                    ng-repeat="event in eventsGroupByMonth[month]"
                     card-type="'sm'"
                     ng-if="isAuthorized(['admin', 'manager']) || event.id !== featuredEevent.id"
                     ng-class="{'featured-event': event.id === featuredEevent.id}"
