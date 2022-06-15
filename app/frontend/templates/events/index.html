@@ -40,7 +40,7 @@
       </div>
     </div>
 
-    <div class="event-focus" ng-if="featuredEevent">
+    <div class="event-focus" ng-if="featuredEevent && (!currentUser || currentUser.role === 'member')">
       <event-card style="display: contents"
                   event="featuredEevent"
                   card-type="'lg'"
@@ -51,12 +51,11 @@
     <div ng-repeat="month in monthOrder">
       <h1>{{monthNames[month.split(',')[0] - 1]}}, {{month.split(',')[1]}}</h1>
 
-      <div class="event-monthList" ng-repeat="event in (eventsGroupByMonth[month].length/3 | array)">
+      <div class="event-monthList" ng-repeat="event in eventsGroupByMonth[month]">
         <event-card style="display: contents"
                     event="event"
                     card-type="'sm'"
-                    ng-repeat="event in eventsGroupByMonth[month].slice(3*$index, 3*$index + 3)"
-                    ng-if="event.id !== featuredEevent.id"
+                    ng-class="{'focus': event.id === featuredEevent.id}"
                     ui-sref="app.public.events_show({id: event.id})">
         </event-card>
       </div>
