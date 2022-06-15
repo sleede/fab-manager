@@ -84,6 +84,10 @@ class Event < ApplicationRecord
     end
   end
 
+  def all_day?
+    availability.start_at.hour.zero?
+  end
+
   private
 
   def event_recurrence
