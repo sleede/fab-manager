@@ -10,6 +10,7 @@
 - Run the docker image with the system user
 - During the setup, autoconfigure the main domain
 - During the setup, ask to set ALLOW_INSECURE_HTTP if DEFAULT_PROTOCOL was set to http
+- Fix a bug: unable to set the twitter input empty
 - Fix a bug: unable to edit an event
 - Fix a bug: times are not shown in admin/events monitoring page
 - Fix a bug: unable to generate the secret key base during the setup
