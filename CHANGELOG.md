@@ -17,6 +17,7 @@
 - Fix a bug: error message during the setup: the input device is not a TTY
 - Fix a bug: when Fab-manager was installed as non-root user, unable to compile the assets during the upgrade
 - [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/set-docker-user.sh | bash`
+- Fix canceled event label's translation
 
 ## v5.4.4 2022 June 8
 
