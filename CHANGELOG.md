@@ -10,6 +10,8 @@
 - Run the docker image with the system user
 - During the setup, autoconfigure the main domain
 - During the setup, ask to set ALLOW_INSECURE_HTTP if DEFAULT_PROTOCOL was set to http
+- Fix a bug: the birthdate was not marked as required, in the profile edition form
+- Fix a bug: when the phone or the address were required, they were not marked as this, in the profile edition form
 - Fix a bug: unable to set the twitter input empty
 - Fix a bug: unable to edit an event
 - Fix a bug: times are not shown in admin/events monitoring page
