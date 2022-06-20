@@ -48,17 +48,21 @@ export const BooleanSetting: React.FC<BooleanSettingProps> = ({ name, label, cla
    */
   const updateSetting = () => {
     SettingAPI.update(name, value ? 'true' : 'false')
-      .then(() => onSuccess(t('app.admin.settings.customization_of_SETTING_successfully_saved', { SETTING: t(`app.admin.settings.${name}`) })))
+      .then(() => onSuccess(t('app.admin.boolean_setting.customization_of_SETTING_successfully_saved', {
+        SETTING: t(`app.admin.settings.${name}`) // eslint-disable-line fabmanager/scoped-translation
+      })))
       .catch(err => {
         if (err.status === 304) return;
 
         if (err.status === 423) {
-          onError(t('app.admin.settings.error_SETTING_locked', { SETTING: t(`app.admin.settings.${name}`) }));
+          onError(t('app.admin.boolean_setting.error_SETTING_locked', {
+            SETTING: t(`app.admin.settings.${name}`) // eslint-disable-line fabmanager/scoped-translation
+          }));
           return;
         }
 
         console.log(err);
-        onError(t('app.admin.settings.an_error_occurred_saving_the_setting'));
+        onError(t('app.admin.boolean_setting.an_error_occurred_saving_the_setting'));
       });
   };
 
@@ -100,7 +104,7 @@ export const BooleanSetting: React.FC<BooleanSettingProps> = ({ name, label, cla
     <div className={`boolean-setting ${className || ''}`}>
       <label htmlFor={`setting-${name}`}>{label}</label>
       <Switch checked={value} id={`setting-${name}}`} onChange={handleChanged} className="switch"></Switch>
-      {!hideSave && <FabButton className="save-btn" onClick={handleSave}>{t('app.admin.check_list_setting.save')}</FabButton> }
+      {!hideSave && <FabButton className="save-btn" onClick={handleSave}>{t('app.admin.boolean_setting.save')}</FabButton> }
     </div>
   );
 };

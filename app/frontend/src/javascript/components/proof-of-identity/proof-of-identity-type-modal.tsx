@@ -35,16 +35,16 @@ export const ProofOfIdentityTypeModal: React.FC<ProofOfIdentityTypeModalProps> =
     try {
       if (proofOfIdentityType?.id) {
         await ProofOfIdentityTypeAPI.update(data);
-        onSuccess(t('app.admin.settings.compte.proof_of_identity_type_successfully_updated'));
+        onSuccess(t('app.admin.settings.account.proof_of_identity_type_successfully_updated'));
       } else {
         await ProofOfIdentityTypeAPI.create(data);
-        onSuccess(t('app.admin.settings.compte.proof_of_identity_type_successfully_created'));
+        onSuccess(t('app.admin.settings.account.proof_of_identity_type_successfully_created'));
       }
     } catch (e) {
       if (proofOfIdentityType?.id) {
-        onError(t('app.admin.settings.compte.proof_of_identity_type_unable_to_update') + e);
+        onError(t('app.admin.settings.account.proof_of_identity_type_unable_to_update') + e);
       } else {
-        onError(t('app.admin.settings.compte.proof_of_identity_type_unable_to_create') + e);
+        onError(t('app.admin.settings.account.proof_of_identity_type_unable_to_create') + e);
       }
     }
   };
@@ -54,11 +54,11 @@ export const ProofOfIdentityTypeModal: React.FC<ProofOfIdentityTypeModalProps> =
   };
 
   return (
-    <FabModal title={t(`app.admin.settings.compte.${proofOfIdentityType ? 'edit' : 'new'}_proof_of_identity_type`)}
+    <FabModal title={t(`app.admin.settings.account.${proofOfIdentityType ? 'edit' : 'new'}_proof_of_identity_type`)}
       isOpen={isOpen}
       toggleModal={toggleModal}
       closeButton={false}
-      confirmButton={t(`app.admin.settings.compte.${proofOfIdentityType ? 'edit' : 'create'}`)}
+      confirmButton={t(`app.admin.settings.account.${proofOfIdentityType ? 'edit' : 'create'}`)}
       onConfirm={handleSaveProofOfIdentityType}
       preventConfirm={isPreventSaveProofOfIdentityType()}
       className="proof-of-identity-type-modal">

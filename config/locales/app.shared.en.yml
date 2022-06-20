@@ -43,6 +43,11 @@ en:
         networks_update_success: "Social networks update successful"
         networks_update_error: "Problem trying to update social networks"
         url_placeholder: "Paste url…"
+        save: "Save"
+        website_invalid: "The website address is not a valid URL"
+      edit_socials:
+        url_placeholder: "Paste url…"
+        website_invalid: "The website address is not a valid URL"
       #user edition form
       user_profile_form:
         add_an_avatar: "Add an avatar"
@@ -174,6 +179,9 @@ en:
         method_check: "By check"
         card_collection_info: "By validating, you'll be prompted for the member's card number. This card will be automatically charged at the deadlines."
         check_collection_info: "By validating, you confirm that you have {DEADLINES} checks, allowing you to collect all the monthly payments."
+      event_themes:
+        title: "Event themes"
+        select_theme: "Pick up a theme…"
       #event edition form
       event:
         title: "Title"

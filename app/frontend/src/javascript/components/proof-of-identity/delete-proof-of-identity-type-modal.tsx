@@ -17,21 +17,21 @@ export const DeleteProofOfIdentityTypeModal: React.FC<DeleteProofOfIdentityTypeM
   const handleDeleteProofOfIdentityType = async (): Promise<void> => {
     try {
       await ProofOfIdentityTypeAPI.destroy(proofOfIdentityTypeId);
-      onSuccess(t('app.admin.settings.compte.proof_of_identity_type_deleted'));
+      onSuccess(t('app.admin.settings.account.proof_of_identity_type_deleted'));
     } catch (e) {
-      onError(t('app.admin.settings.compte.proof_of_identity_type_unable_to_delete') + e);
+      onError(t('app.admin.settings.account.proof_of_identity_type_unable_to_delete') + e);
     }
   };
 
   return (
-    <FabModal title={t('app.admin.settings.compte.confirmation_required')}
+    <FabModal title={t('app.admin.settings.account.confirmation_required')}
       isOpen={isOpen}
       toggleModal={toggleModal}
       closeButton={true}
-      confirmButton={t('app.admin.settings.compte.confirm')}
+      confirmButton={t('app.admin.settings.account.confirm')}
       onConfirm={handleDeleteProofOfIdentityType}
       className="delete-proof-of-identity-type-modal">
-      <p>{t('app.admin.settings.compte.do_you_really_want_to_delete_this_proof_of_identity_type')}</p>
+      <p>{t('app.admin.settings.account.do_you_really_want_to_delete_this_proof_of_identity_type')}</p>
     </FabModal>
   );
 };

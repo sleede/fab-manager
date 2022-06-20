@@ -75,7 +75,9 @@ export const CheckListSetting: React.FC<CheckListSettingProps> = ({ name, label,
    */
   const handleSave = () => {
     SettingAPI.update(name, value)
-      .then(() => onSuccess(t('app.admin.check_list_setting.customization_of_SETTING_successfully_saved', { SETTING: t(`app.admin.settings.${name}`) })))
+      .then(() => onSuccess(t('app.admin.check_list_setting.customization_of_SETTING_successfully_saved', {
+        SETTING: t(`app.admin.settings.${name}`) // eslint-disable-line fabmanager/scoped-translation
+      })))
       .catch(err => onError(err));
   };
 

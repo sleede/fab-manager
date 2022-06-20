@@ -784,7 +784,7 @@ en:
             error_while_saving: "An error occurred while saving the currency: "
             currency_updated: "The PayZen currency was successfully updated to {CURRENCY}."
           # select a payment gateway
-          gateway_modal:
+          select_gateway_modal:
             select_gateway_title: "Select a payment gateway"
             gateway_info: "To securely collect and process payments online, Fab-manager needs to use an third-party service authorized by the financial institutions, called a payment gateway."
             select_gateway: "Please select an available gateway"
@@ -944,6 +944,12 @@ en:
         success: "Success"
         failed: "Failed"
         error_details: "Error's details:"
+      user_validation:
+        validate_member_success: "Member successfully validated"
+        invalidate_member_success: "Member successfully invalidated"
+        validate_member_error: "An unexpected error occurred: unable to validate this member."
+        invalidate_member_error: "An unexpected error occurred: unable to invalidate this member."
+        validate_account: "Validate the account"
       #edit a member
       members_edit:
         change_role: "Change role"
@@ -1028,7 +1034,7 @@ en:
         extend: "Extend"
         extend_success: "The subscription was successfully extended for free"
       # renew a subscription
-      renew_subscription_modal:
+      renew_modal:
         renew_subscription: "Renew the subscription"
         renew_subscription_info: "You are about to renew the user's subscription by charging him again for his current subscription."
         credits_will_be_reset: "The balance of free credits (training / machines / spaces) of the user will be reset, unused credits will be lost."
@@ -1038,6 +1044,7 @@ en:
         pay_in_one_go: "Pay in one go"
         renew: "Renew"
         renew_success: "The subscription was successfully renewed"
+        DATE_TIME: "{DATE} {TIME}"
       # take a new subscription
       subscribe_modal:
         subscribe_USER: "Subscribe {USER}"
@@ -1244,6 +1251,11 @@ en:
         week_of_START_to_END: "Week of {START} to {END}"
         no_data_for_this_period: "No data for this period"
         date: "Date"
+      boolean_setting:
+        customization_of_SETTING_successfully_saved: "Customization of the {SETTING} successfully saved."
+        error_SETTING_locked: "Unable to update the setting: {SETTING} is locked. Please contact your system administrator."
+        an_error_occurred_saving_the_setting: "An error occurred while saving the setting. Please try again later."
+        save: "save"
       #global application parameters and customization
       settings:
         customize_the_application: "Customize the application"
@@ -1498,23 +1510,27 @@ en:
           statistics: "Statistics"
           statistics_info_html: "<p>Enable or disable the statistics module.</p><p>If enabled, every nights, the data of the day just passed will be consolidated in the database of a powerful analysis engine. Then, every administrators will be able to browse statistical charts and tables in the corresponding section.</p>"
           enable_statistics: "Enable statistics"
-        compte:
+        account:
           account: "Account"
           customize_account_settings: "Customize account settings"
           user_validation_required: "validation of accounts"
           user_validation_required_title: "Validation of accounts"
           user_validation_required_info: "By activating this option, only members whose account is validated by an administrator or a manager will be able to make reservations."
-          user_validation_required_option_label: "Activate the account validation option"
-          user_validation_required_list_title: "Member account validation information message"
-          user_validation_required_list_info: "Your administrator must validate your account. You will then be able to access all the booking features."
-          user_validation_required_list_other_info: "The resources selected below will be subject to member account validation."
-          user_validation_required_list:
-            subscription: "Subscriptions"
-            machine: "Machines"
-            event: "Events"
-            space: "Spaces"
-            training: "Trainings"
-            pack: "Prepaid pack"
+          user_validation_setting:
+            customization_of_SETTING_successfully_saved: "Customization of the {SETTING} successfully saved."
+            error_SETTING_locked: "Unable to update the setting: {SETTING} is locked. Please contact your system administrator."
+            an_error_occurred_saving_the_setting: "An error occurred while saving the setting. Please try again later."
+            user_validation_required_option_label: "Activate the account validation option"
+            user_validation_required_list_title: "Member account validation information message"
+            user_validation_required_list_info: "Your administrator must validate your account. Then, you will be able to access all the booking features."
+            user_validation_required_list_other_info: "The resources selected below will be subject to member account validation."
+            user_validation_required_list:
+              subscription: "Subscriptions"
+              machine: "Machines"
+              event: "Events"
+              space: "Spaces"
+              training: "Trainings"
+              pack: "Prepaid pack"
           create_groups: "Create groups"
           add_proof_of_identity_types: "Add proof of identity"
           proof_of_identity_type_info: "You can add proof of identity according to the user groups created in order to ask your members to deposit them in their space. Each member will be informed of the proof of identity to be provided in their personal space (My proof of identity tab). On your side, you can check the proof of identity and validate their account (provided that the Account Validation option is activated)."

@@ -41,16 +41,16 @@ export const UserValidation: React.FC<UserValidationProps> = ({ member, onSucces
     }
     MemberAPI.validate(_member)
       .then((user: User) => {
-        onSuccess(user, t(`app.admin.members_edit.${_value ? 'validate' : 'invalidate'}_member_success`));
+        onSuccess(user, t(`app.admin.user_validation.${_value ? 'validate' : 'invalidate'}_member_success`));
       }).catch(err => {
         setValue(!_value);
-        onError(t(`app.admin.members_edit.${_value ? 'validate' : 'invalidate'}_member_error`) + err);
+        onError(t(`app.admin.user_validation.${_value ? 'validate' : 'invalidate'}_member_error`) + err);
       });
   };
 
   return (
     <div className="user-validation">
-      <label htmlFor="user-validation-switch">{t('app.admin.members_edit.validate_account')}</label>
+      <label htmlFor="user-validation-switch">{t('app.admin.user_validation.validate_account')}</label>
       <Switch checked={value} id="user-validation-switch" onChange={handleChanged} className="switch"></Switch>
     </div>
   );

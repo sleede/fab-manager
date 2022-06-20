@@ -26,6 +26,9 @@ interface SelectGatewayModalModalProps {
   onSuccess: (results: Map<SettingName, SettingBulkResult>) => void,
 }
 
+/**
+ * Modal dialog that enable an admin to configure the active payment gateway
+ */
 export const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isOpen, toggleModal, onError, onSuccess }) => {
   const { t } = useTranslation('admin');
 
@@ -113,22 +116,22 @@ export const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isO
   };
 
   return (
-    <FabModal title={t('app.admin.invoices.payment.gateway_modal.select_gateway_title')}
+    <FabModal title={t('app.admin.invoices.payment.select_gateway_modal.select_gateway_title')}
       isOpen={isOpen}
       toggleModal={toggleModal}
       width={ModalSize.medium}
       className="select-gateway-modal"
-      confirmButton={t('app.admin.invoices.payment.gateway_modal.confirm_button')}
+      confirmButton={t('app.admin.invoices.payment.select_gateway_modal.confirm_button')}
       onConfirm={onGatewayConfirmed}
       preventConfirm={preventConfirmGateway}>
       {!hasSelectedGateway() && <p className="info-gateway">
-        {t('app.admin.invoices.payment.gateway_modal.gateway_info')}
+        {t('app.admin.invoices.payment.select_gateway_modal.gateway_info')}
       </p>}
-      <label htmlFor="gateway">{t('app.admin.invoices.payment.gateway_modal.select_gateway')}</label>
+      <label htmlFor="gateway">{t('app.admin.invoices.payment.select_gateway_modal.select_gateway')}</label>
       <select id="gateway" className="select-gateway" onChange={setGateway} value={selectedGateway}>
         <option />
-        <option value={Gateway.Stripe}>{t('app.admin.invoices.payment.gateway_modal.stripe')}</option>
-        <option value={Gateway.PayZen}>{t('app.admin.invoices.payment.gateway_modal.payzen')}</option>
+        <option value={Gateway.Stripe}>{t('app.admin.invoices.payment.select_gateway_modal.stripe')}</option>
+        <option value={Gateway.PayZen}>{t('app.admin.invoices.payment.select_gateway_modal.payzen')}</option>
       </select>
       {selectedGateway === Gateway.Stripe && <StripeKeysForm onValidKeys={handleValidStripeKeys} onInvalidKeys={handleInvalidKeys} />}
       {selectedGateway === Gateway.PayZen && <PayzenKeysForm onValidKeys={handleValidPayZenKeys} onInvalidKeys={handleInvalidKeys} />}

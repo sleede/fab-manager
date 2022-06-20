@@ -65,12 +65,12 @@ export const ProofOfIdentityTypeForm: React.FC<ProofOfIdentityTypeFormProps> = (
   return (
     <div className="proof-of-identity-type-form">
       <div className="proof-of-identity-type-form-info">
-        {t('app.admin.settings.compte.proof_of_identity_type_form_info')}
+        {t('app.admin.settings.account.proof_of_identity_type_form_info')}
       </div>
       <form name="proofOfIdentityTypeForm">
         <div className="proof-of-identity-type-select m-t">
           <Select defaultValue={groupsValues()}
-            placeholder={t('app.admin.settings.compte.proof_of_identity_type_select_group')}
+            placeholder={t('app.admin.settings.account.proof_of_identity_type_select_group')}
             onChange={handleGroupsChange}
             options={buildOptions()}
             isMulti />
@@ -79,7 +79,7 @@ export const ProofOfIdentityTypeForm: React.FC<ProofOfIdentityTypeFormProps> = (
           <FabInput id="proof_of_identity_type_name"
             icon={<i className="fa fa-edit" />}
             defaultValue={proofOfIdentityType?.name || ''}
-            placeholder={t('app.admin.settings.compte.proof_of_identity_type_input_name')}
+            placeholder={t('app.admin.settings.account.proof_of_identity_type_input_name')}
             onChange={handleNameChange}
             debounce={200}
             required/>

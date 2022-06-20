@@ -107,7 +107,7 @@ export const FabSocials: React.FC<FabSocialsProps> = ({ show = false, onError, o
                       rules={{
                         pattern: {
                           value: urlRegex,
-                          message: t('app.shared.user_profile_form.website_invalid')
+                          message: t('app.shared.fab_socials.website_invalid')
                         }
                       }}
                       formState={formState}
@@ -121,7 +121,7 @@ export const FabSocials: React.FC<FabSocialsProps> = ({ show = false, onError, o
         </div>}
         <FabButton type='submit'
                   className='save-btn'>
-          {t('app.shared.buttons.save')}
+          {t('app.shared.fab_socials.save')}
         </FabButton>
       </form>
     }</div>

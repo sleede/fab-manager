@@ -71,14 +71,14 @@ export const EditSocials = <TFieldValues extends FieldValues>({ register, setVal
                      rules= {{
                        pattern: {
                          value: urlRegex,
-                         message: t('app.shared.user_profile_form.website_invalid')
+                         message: t('app.shared.edit_socials.website_invalid')
                        }
                      }}
                      formState={formState}
                      defaultValue={network.url}
                      label={network.name}
                      disabled={disabled}
-                     placeholder={t('app.shared.text_editor.url_placeholder')}
+                     placeholder={t('app.shared.edit_socials.url_placeholder')}
                      icon={<img src={`${Icons}#${network.name}`}></img>}
                      addOn={<Trash size={16} />}
                      addOnAction={() => dispatch({ type: 'delete', payload: { network, field: `profile_attributes.${network.name}` } })} />

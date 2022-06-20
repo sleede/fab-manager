@@ -25,7 +25,7 @@
     "@typescript-eslint/parser": "^5.17.0",
     "eslint": "~8.12.0",
     "eslint-config-standard": "~17.0.0-1",
-    "eslint-plugin-fabmanager": "^0.4.8",
+    "eslint-plugin-fabmanager": "^0.5.3",
     "eslint-plugin-html-erb": "^1.0.1",
     "eslint-plugin-import": "~2.25.4",
     "eslint-plugin-n": "^15.1.0",

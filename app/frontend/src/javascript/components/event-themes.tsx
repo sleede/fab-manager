@@ -77,10 +77,10 @@ export const EventThemes: React.FC<EventThemesProps> = ({ event, onChange }) => 
   return (
     <div className="event-themes">
       {hasThemes() && <div className="event-themes--panel">
-        <h3>{ t('app.shared.event.event_themes') }</h3>
+        <h3>{ t('app.shared.event_themes.title') }</h3>
         <div className="content">
           <Select defaultValue={defaultValues()}
-            placeholder={t('app.shared.event.select_theme')}
+            placeholder={t('app.shared.event_themes.select_theme')}
             onChange={handleChange}
             options={buildOptions()}
             isMulti />

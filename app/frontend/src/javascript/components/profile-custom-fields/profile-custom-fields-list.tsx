@@ -43,9 +43,9 @@ export const ProfileCustomFieldsList: React.FC<ProfileCustomFieldsListProps> = (
       if (profileCustomFieldToEdit) {
         setProfileCustomFieldToEdit(null);
       }
-      onSuccess(t('app.admin.settings.compte.organization_profile_custom_field_successfully_updated'));
+      onSuccess(t('app.admin.settings.account.organization_profile_custom_field_successfully_updated'));
     }).catch(err => {
-      onError(t('app.admin.settings.compte.organization_profile_custom_field_unable_to_update') + err);
+      onError(t('app.admin.settings.account.organization_profile_custom_field_unable_to_update') + err);
     });
   };
 
@@ -120,11 +120,11 @@ export const ProfileCustomFieldsList: React.FC<ProfileCustomFieldsListProps> = (
                 )}
               </td>
               <td>
-                <label htmlFor="profile-custom-field-actived" className="control-label m-r">{t('app.admin.settings.compte.organization_profile_custom_field.actived')}</label>
+                <label htmlFor="profile-custom-field-actived" className="control-label m-r">{t('app.admin.settings.account.organization_profile_custom_field.actived')}</label>
                 <Switch checked={field.actived} id="profile-custom-field-actived" onChange={handleSwitchChanged(field, 'actived')} className="v-middle"></Switch>
               </td>
               <td>
-                <label htmlFor="profile-custom-field-required" className="control-label m-r">{t('app.admin.settings.compte.organization_profile_custom_field.required')}</label>
+                <label htmlFor="profile-custom-field-required" className="control-label m-r">{t('app.admin.settings.account.organization_profile_custom_field.required')}</label>
                 <Switch checked={field.required} disabled={!field.actived} id="profile-custom-field-required" onChange={handleSwitchChanged(field, 'required')} className="v-middle"></Switch>
               </td>
             </tr>

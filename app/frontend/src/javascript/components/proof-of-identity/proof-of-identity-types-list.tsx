@@ -134,7 +134,7 @@ const ProofOfIdentityTypesList: React.FC<ProofOfIdentityTypesListProps> = ({ onS
 
   const getGroupName = (groupIds: Array<number>): string => {
     if (groupIds.length === groups.length && groupIds.length > 0) {
-      return t('app.admin.settings.compte.all_groups');
+      return t('app.admin.settings.account.all_groups');
     }
     const _groups = _.filter(groups, (g: Group) => { return groupIds.includes(g.id); });
     return _groups.map((g: Group) => g.name).join(', ');
@@ -143,22 +143,22 @@ const ProofOfIdentityTypesList: React.FC<ProofOfIdentityTypesListProps> = ({ onS
   return (
     <div className="panel panel-default m-t-md">
       <div className="panel-heading">
-        <span className="font-sbold">{t('app.admin.settings.compte.add_proof_of_identity_types')}</span>
+        <span className="font-sbold">{t('app.admin.settings.account.add_proof_of_identity_types')}</span>
       </div>
       <div className="panel-body">
         <div className="row">
-          <p className="m-h">{t('app.admin.settings.compte.proof_of_identity_type_info')}</p>
+          <p className="m-h">{t('app.admin.settings.account.proof_of_identity_type_info')}</p>
           <div className="alert alert-warning m-h-md row">
             <div className="col-md-8">
-              <HtmlTranslate trKey="app.admin.settings.compte.proof_of_identity_type_no_group_info" />
+              <HtmlTranslate trKey="app.admin.settings.account.proof_of_identity_type_no_group_info" />
             </div>
-            <a href="/#!/admin/members?tabs=1" className="btn btn-warning pull-right m-t m-r-md col-md-3" style={{ color: '#000', maxWidth: '200px' }}>{t('app.admin.settings.compte.create_groups')}</a>
+            <a href="/#!/admin/members?tabs=1" className="btn btn-warning pull-right m-t m-r-md col-md-3" style={{ color: '#000', maxWidth: '200px' }}>{t('app.admin.settings.account.create_groups')}</a>
           </div>
         </div>
 
         <div className="row">
-          <h3 className="m-l inline">{t('app.admin.settings.compte.proof_of_identity_type_title')}</h3>
-          <button name="button" className="btn btn-warning pull-right m-t m-r-md" onClick={addProofOfIdentityType}>{t('app.admin.settings.compte.add_proof_of_identity_type_button')}</button>
+          <h3 className="m-l inline">{t('app.admin.settings.account.proof_of_identity_type_title')}</h3>
+          <button name="button" className="btn btn-warning pull-right m-t m-r-md" onClick={addProofOfIdentityType}>{t('app.admin.settings.account.add_proof_of_identity_type_button')}</button>
         </div>
 
         <ProofOfIdentityTypeModal isOpen={modalIsOpen} groups={groups} proofOfIdentityType={proofOfIdentityType} toggleModal={toggleCreateAndEditModal} onSuccess={saveProofOfIdentityTypeOnSuccess} onError={onError} />
@@ -167,8 +167,8 @@ const ProofOfIdentityTypesList: React.FC<ProofOfIdentityTypesListProps> = ({ onS
         <table className="table proof-of-identity-type-list">
           <thead>
             <tr>
-              <th style={{ width: '40%' }}><a onClick={setOrderProofOfIdentityType('group_name')}>{t('app.admin.settings.compte.proof_of_identity_type.group_name')} <i className={orderClassName('group_name')}></i></a></th>
-              <th style={{ width: '40%' }}><a onClick={setOrderProofOfIdentityType('name')}>{t('app.admin.settings.compte.proof_of_identity_type.name')} <i className={orderClassName('name')}></i></a></th>
+              <th style={{ width: '40%' }}><a onClick={setOrderProofOfIdentityType('group_name')}>{t('app.admin.settings.account.proof_of_identity_type.group_name')} <i className={orderClassName('group_name')}></i></a></th>
+              <th style={{ width: '40%' }}><a onClick={setOrderProofOfIdentityType('name')}>{t('app.admin.settings.account.proof_of_identity_type.name')} <i className={orderClassName('name')}></i></a></th>
               <th style={{ width: '20%' }} className="buttons-col"></th>
             </tr>
           </thead>
@@ -195,7 +195,7 @@ const ProofOfIdentityTypesList: React.FC<ProofOfIdentityTypesListProps> = ({ onS
         </table>
         {!hasProofOfIdentityTypes() && (
           <p className="text-center">
-            <HtmlTranslate trKey="app.admin.settings.compte.no_proof_of_identity_types" />
+            <HtmlTranslate trKey="app.admin.settings.account.no_proof_of_identity_types" />
           </p>
         )}
       </div>
