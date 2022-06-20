@@ -168,7 +168,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, video,
           >
             <Quotes size={24} />
           </button>
-          <span className='divider'></span>
+          <span className='menu-divider'></span>
         </>)
         }
         <button
@@ -203,7 +203,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, video,
         >
           <LinkSimpleHorizontal size={24} />
         </button>
-        { (video || image) && <span className='divider'></span> }
+        { (video || image) && <span className='menu-divider'></span> }
         { video &&
         (<>
           <button

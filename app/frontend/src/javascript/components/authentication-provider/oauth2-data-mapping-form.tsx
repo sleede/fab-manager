@@ -13,6 +13,10 @@ interface Oauth2DataMappingFormProps<TFieldValues, TContext extends object> {
   index: number,
 }
 
+/**
+ * Partial form to set the data mapping for an OAuth 2.0 provider.
+ * The data mapping is the way to bind data from the authentication provider API to the Fab-manager's database
+ */
 export const Oauth2DataMappingForm = <TFieldValues extends FieldValues, TContext extends object>({ register, control, index }: Oauth2DataMappingFormProps<TFieldValues, TContext>) => {
   const { t } = useTranslation('admin');
 

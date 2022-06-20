@@ -13,6 +13,9 @@ interface EventCardProps {
   cardType: 'sm' | 'md' | 'lg'
 }
 
+/**
+ * This component is a box showing the picture of the given event, and a short description of it.
+ */
 export const EventCard: React.FC<EventCardProps> = ({ event, cardType }) => {
   const { t } = useTranslation('public');
 

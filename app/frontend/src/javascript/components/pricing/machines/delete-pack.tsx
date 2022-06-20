@@ -16,7 +16,7 @@ interface DeletePackProps {
  * This component shows a button.
  * When clicked, we show a modal dialog to ask the user for confirmation about the deletion of the provided pack.
  */
-const DeletePackComponent: React.FC<DeletePackProps> = ({ onSuccess, onError, pack }) => {
+const DeletePack: React.FC<DeletePackProps> = ({ onSuccess, onError, pack }) => {
   const { t } = useTranslation('admin');
 
   const [deletionModal, setDeletionModal] = useState<boolean>(false);
@@ -56,10 +56,12 @@ const DeletePackComponent: React.FC<DeletePackProps> = ({ onSuccess, onError, pa
   );
 };
 
-export const DeletePack: React.FC<DeletePackProps> = ({ onSuccess, onError, pack }) => {
+const DeletePackWrapper: React.FC<DeletePackProps> = (props) => {
   return (
     <Loader>
-      <DeletePackComponent onSuccess={onSuccess} onError={onError} pack={pack} />
+      <DeletePack {...props} />
     </Loader>
   );
 };
+
+export { DeletePackWrapper as DeletePack };

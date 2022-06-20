@@ -123,6 +123,9 @@ const PaymentSchedulesTable: React.FC<PaymentSchedulesTableProps> = ({ paymentSc
     refreshList();
   };
 
+  /**
+   * Return the JSX table element that list all payment schedules and allows to perform actions on them.
+   */
   const renderPaymentSchedulesTable = (): ReactElement => {
     return (
       <table className="payment-schedules-table">

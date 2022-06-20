@@ -6,6 +6,7 @@ import { User } from '../../models/user';
 import { IApplication } from '../../models/application';
 import { react2angular } from 'react2angular';
 import MemberAPI from '../../api/member';
+import { TDateISO } from '../../typings/date-iso';
 
 declare const Application: IApplication;
 
@@ -34,7 +35,7 @@ export const UserValidation: React.FC<UserValidationProps> = ({ member, onSucces
     setValue(_value);
     const _member = _.clone(member);
     if (_value) {
-      _member.validated_at = new Date();
+      _member.validated_at = new Date().toISOString() as TDateISO;
     } else {
       _member.validated_at = null;
     }
@@ -49,8 +50,8 @@ export const UserValidation: React.FC<UserValidationProps> = ({ member, onSucces
 
   return (
     <div className="user-validation">
-      <label htmlFor="user-validation-switch" className="control-label m-r">{t('app.admin.members_edit.validate_account')}</label>
-      <Switch checked={value} id="user-validation-switch" onChange={handleChanged} className="v-middle"></Switch>
+      <label htmlFor="user-validation-switch">{t('app.admin.members_edit.validate_account')}</label>
+      <Switch checked={value} id="user-validation-switch" onChange={handleChanged} className="switch"></Switch>
     </div>
   );
 };

@@ -40,6 +40,9 @@ const MachineCard: React.FC<MachineCardProps> = ({ user, machine, onShowMachine,
     onShowMachine(machine);
   };
 
+  /**
+   * Return the machine's picture or a placeholder
+   */
   const machinePicture = (): ReactNode => {
     if (!machine.machine_image) {
       return <div className="machine-picture no-picture" />;
@@ -82,10 +85,10 @@ const MachineCard: React.FC<MachineCardProps> = ({ user, machine, onShowMachine,
   );
 };
 
-const MachineCardWrapper: React.FC<MachineCardProps> = ({ user, machine, onShowMachine, onReserveMachine, onError, onSuccess, onLoginRequested, onEnrollRequested, canProposePacks }) => {
+const MachineCardWrapper: React.FC<MachineCardProps> = (props) => {
   return (
     <Loader>
-      <MachineCard user={user} machine={machine} onShowMachine={onShowMachine} onReserveMachine={onReserveMachine} onError={onError} onSuccess={onSuccess} onLoginRequested={onLoginRequested} onEnrollRequested={onEnrollRequested} canProposePacks={canProposePacks} />
+      <MachineCard {...props} />
     </Loader>
   );
 };

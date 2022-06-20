@@ -28,7 +28,7 @@ let pendingKeysValidation = false;
 /**
  * Form to set the PayZen's username, password and public key
  */
-const PayzenKeysFormComponent: React.FC<PayzenKeysFormProps> = ({ onValidKeys, onInvalidKeys }) => {
+const PayzenKeysForm: React.FC<PayzenKeysFormProps> = ({ onValidKeys, onInvalidKeys }) => {
   const { t } = useTranslation('admin');
 
   // values of the PayZen settings
@@ -205,10 +205,12 @@ const PayzenKeysFormComponent: React.FC<PayzenKeysFormProps> = ({ onValidKeys, o
   );
 };
 
-export const PayzenKeysForm: React.FC<PayzenKeysFormProps> = ({ onValidKeys, onInvalidKeys }) => {
+const PayzenKeysFormWrapper: React.FC<PayzenKeysFormProps> = (props) => {
   return (
     <Loader>
-      <PayzenKeysFormComponent onValidKeys={onValidKeys} onInvalidKeys={onInvalidKeys} />
+      <PayzenKeysForm {...props} />
     </Loader>
   );
 };
+
+export { PayzenKeysFormWrapper as PayzenKeysForm };

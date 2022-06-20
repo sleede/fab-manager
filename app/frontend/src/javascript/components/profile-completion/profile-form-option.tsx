@@ -20,6 +20,13 @@ interface ProfileFormOptionProps {
   onSuccess: (user: User) => void,
 }
 
+/**
+ * After first logged-in from a SSO, the user has two options:
+ * - complete his profile (*) ;
+ * - bind his profile to his existing account ;
+ * (*) This component handle the first case.
+ * It also deals with duplicate email addresses in database
+ */
 export const ProfileFormOption: React.FC<ProfileFormOptionProps> = ({ user, activeProvider, onError, onSuccess }) => {
   const { t } = useTranslation('logged');
 

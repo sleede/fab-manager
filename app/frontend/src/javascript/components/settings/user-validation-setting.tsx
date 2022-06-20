@@ -8,6 +8,7 @@ import { Loader } from '../base/loader';
 import { FabButton } from '../base/fab-button';
 import { BooleanSetting } from './boolean-setting';
 import { CheckListSetting } from './check-list-setting';
+import { FabAlert } from '../base/fab-alert';
 
 declare const Application: IApplication;
 
@@ -82,9 +83,9 @@ export const UserValidationSetting: React.FC<UserValidationSettingProps> = ({ on
           <p>
             {t('app.admin.settings.compte.user_validation_required_list_info')}
           </p>
-          <p className="alert alert-warning">
+          <FabAlert level="warning">
             {t('app.admin.settings.compte.user_validation_required_list_other_info')}
-          </p>
+          </FabAlert>
           <CheckListSetting name={SettingName.UserValidationRequiredList}
             label=""
             availableOptions={userValidationRequiredOptions}
@@ -96,7 +97,7 @@ export const UserValidationSetting: React.FC<UserValidationSettingProps> = ({ on
           </CheckListSetting>
         </div>
       }
-      <FabButton className="btn btn-warning m-t" onClick={handleSave}>{t('app.admin.check_list_setting.save')}</FabButton>
+      <FabButton className="save-btn" onClick={handleSave}>{t('app.admin.check_list_setting.save')}</FabButton>
     </div>
   );
 };

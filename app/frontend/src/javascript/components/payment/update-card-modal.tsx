@@ -19,7 +19,7 @@ interface UpdateCardModalProps {
  * This component open a modal dialog for the configured payment gateway, allowing the user to input his card data
  * to process an online payment.
  */
-const UpdateCardModalComponent: React.FC<UpdateCardModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, operator, schedule }) => {
+const UpdateCardModal: React.FC<UpdateCardModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, operator, schedule }) => {
   const { t } = useTranslation('shared');
   const [gateway, setGateway] = useState<string>('');
 
@@ -68,10 +68,12 @@ const UpdateCardModalComponent: React.FC<UpdateCardModalProps> = ({ isOpen, togg
   }
 };
 
-export const UpdateCardModal: React.FC<UpdateCardModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, operator, schedule }) => {
+const UpdateCardModalWrapper: React.FC<UpdateCardModalProps> = (props) => {
   return (
     <Loader>
-      <UpdateCardModalComponent isOpen={isOpen} toggleModal={toggleModal} afterSuccess={afterSuccess} onError={onError} operator={operator} schedule={schedule} />
+      <UpdateCardModal {...props} />
     </Loader>
   );
 };
+
+export { UpdateCardModalWrapper as UpdateCardModal };

@@ -28,7 +28,7 @@ interface LocalPaymentModalProps {
 /**
  * This component enables a privileged user to confirm a local payments.
  */
-const LocalPaymentModalComponent: React.FC<LocalPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, cart, updateCart, currentUser, schedule, customer }) => {
+const LocalPaymentModal: React.FC<LocalPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, cart, updateCart, currentUser, schedule, customer }) => {
   const { t } = useTranslation('admin');
 
   /**
@@ -93,12 +93,14 @@ const LocalPaymentModalComponent: React.FC<LocalPaymentModalProps> = ({ isOpen, 
   );
 };
 
-export const LocalPaymentModal: React.FC<LocalPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, currentUser, schedule, cart, updateCart, customer }) => {
+const LocalPaymentModalWrapper: React.FC<LocalPaymentModalProps> = (props) => {
   return (
     <Loader>
-      <LocalPaymentModalComponent isOpen={isOpen} toggleModal={toggleModal} afterSuccess={afterSuccess} onError={onError} currentUser={currentUser} schedule={schedule} cart={cart} updateCart={updateCart} customer={customer} />
+      <LocalPaymentModal {...props} />
     </Loader>
   );
 };
 
-Application.Components.component('localPaymentModal', react2angular(LocalPaymentModal, ['isOpen', 'toggleModal', 'afterSuccess', 'onError', 'currentUser', 'schedule', 'cart', 'updateCart', 'customer']));
+export { LocalPaymentModalWrapper as LocalPaymentModal };
+
+Application.Components.component('localPaymentModal', react2angular(LocalPaymentModalWrapper, ['isOpen', 'toggleModal', 'afterSuccess', 'onError', 'currentUser', 'schedule', 'cart', 'updateCart', 'customer']));

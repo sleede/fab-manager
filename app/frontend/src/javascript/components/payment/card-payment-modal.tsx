@@ -29,7 +29,7 @@ interface CardPaymentModalProps {
  * This component open a modal dialog for the configured payment gateway, allowing the user to input his card data
  * to process an online payment.
  */
-const CardPaymentModalComponent: React.FC<CardPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, currentUser, schedule, cart, customer }) => {
+const CardPaymentModal: React.FC<CardPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, currentUser, schedule, cart, customer }) => {
   const { t } = useTranslation('shared');
 
   const [gateway, setGateway] = useState<Setting>(null);
@@ -89,12 +89,14 @@ const CardPaymentModalComponent: React.FC<CardPaymentModalProps> = ({ isOpen, to
   }
 };
 
-export const CardPaymentModal: React.FC<CardPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, currentUser, schedule, cart, customer }) => {
+const CardPaymentModalWrapper: React.FC<CardPaymentModalProps> = (props) => {
   return (
     <Loader>
-      <CardPaymentModalComponent isOpen={isOpen} toggleModal={toggleModal} afterSuccess={afterSuccess} onError={onError} currentUser={currentUser} schedule={schedule} cart={cart} customer={customer} />
+      <CardPaymentModal {...props} />
     </Loader>
   );
 };
 
-Application.Components.component('cardPaymentModal', react2angular(CardPaymentModal, ['isOpen', 'toggleModal', 'afterSuccess', 'onError', 'currentUser', 'schedule', 'cart', 'customer']));
+export { CardPaymentModalWrapper as CardPaymentModal };
+
+Application.Components.component('cardPaymentModal', react2angular(CardPaymentModalWrapper, ['isOpen', 'toggleModal', 'afterSuccess', 'onError', 'currentUser', 'schedule', 'cart', 'customer']));

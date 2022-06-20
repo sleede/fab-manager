@@ -15,7 +15,7 @@ interface StripeKeysFormProps {
 /**
  * Form to set the stripe's public and private keys
  */
-const StripeKeysFormComponent: React.FC<StripeKeysFormProps> = ({ onValidKeys, onInvalidKeys }) => {
+const StripeKeysForm: React.FC<StripeKeysFormProps> = ({ onValidKeys, onInvalidKeys }) => {
   const { t } = useTranslation('admin');
 
   // used to prevent promises from resolving if the component was unmounted
@@ -153,10 +153,12 @@ const StripeKeysFormComponent: React.FC<StripeKeysFormProps> = ({ onValidKeys, o
   );
 };
 
-export const StripeKeysForm: React.FC<StripeKeysFormProps> = ({ onValidKeys, onInvalidKeys }) => {
+const StripeKeysFormWrapper: React.FC<StripeKeysFormProps> = (props) => {
   return (
     <Loader>
-      <StripeKeysFormComponent onValidKeys={onValidKeys} onInvalidKeys={onInvalidKeys} />
+      <StripeKeysForm {...props} />
     </Loader>
   );
 };
+
+export { StripeKeysFormWrapper as StripeKeysForm };

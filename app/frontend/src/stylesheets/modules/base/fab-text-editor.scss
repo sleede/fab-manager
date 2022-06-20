@@ -39,7 +39,7 @@
     }
 
     button { @include button(4rem); }
-    .divider {
+    .menu-divider {
       width: 2px;
       height: 2.4rem;
       background-color: var(--gray-soft-dark);

@@ -16,7 +16,10 @@ interface PlanCategoryFormProps {
   onError: (message: string) => void
 }
 
-const PlanCategoryFormComponent: React.FC<PlanCategoryFormProps> = ({ action, category, onSuccess, onError }) => {
+/**
+ * Form to create/edit a plan category
+ */
+const PlanCategoryForm: React.FC<PlanCategoryFormProps> = ({ action, category, onSuccess, onError }) => {
   const { t } = useTranslation('admin');
 
   const { register, control, handleSubmit } = useForm<PlanCategory>({ defaultValues: { ...category } });
@@ -58,10 +61,12 @@ const PlanCategoryFormComponent: React.FC<PlanCategoryFormProps> = ({ action, ca
   );
 };
 
-export const PlanCategoryForm: React.FC<PlanCategoryFormProps> = ({ action, category, onSuccess, onError }) => {
+const PlanCategoryFormWrapper: React.FC<PlanCategoryFormProps> = (props) => {
   return (
     <Loader>
-      <PlanCategoryFormComponent action={action} category={category} onSuccess={onSuccess} onError={onError} />
+      <PlanCategoryForm {...props} />
     </Loader>
   );
 };
+
+export { PlanCategoryFormWrapper as PlanCategoryForm };

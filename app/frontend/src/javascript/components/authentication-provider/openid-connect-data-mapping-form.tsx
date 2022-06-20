@@ -16,6 +16,10 @@ interface OpenidConnectDataMappingFormProps<TFieldValues> {
   index: number,
 }
 
+/**
+ * Partial form to set the data mapping for an OpenID Connect provider.
+ * The data mapping is the way to bind data from the OIDC claims to the Fab-manager's database
+ */
 export const OpenidConnectDataMappingForm = <TFieldValues extends FieldValues>({ register, setValue, currentFormValues, index }: OpenidConnectDataMappingFormProps<TFieldValues>) => {
   const { t } = useTranslation('admin');
 

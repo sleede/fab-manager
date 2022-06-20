@@ -30,6 +30,9 @@ interface ChangeGroupProps {
  */
 type selectOption = { value: number, label: string };
 
+/**
+ * Component to display the group of the provided user, and allow him to change his group.
+ */
 export const ChangeGroup: React.FC<ChangeGroupProps> = ({ user, onSuccess, onError, allowChange, className }) => {
   const { t } = useTranslation('shared');
 

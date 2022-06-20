@@ -6,7 +6,7 @@
   ],
   "rules": {
     "semi": ["error", "always"],
-    "no-use-before-define": "off",
+    "no-use-before-define": "off"
   },
   "globals": {
     "Application": true,

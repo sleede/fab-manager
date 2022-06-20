@@ -16,7 +16,7 @@ interface DeletePlanCategoryProps {
  * This component shows a button.
  * When clicked, we show a modal dialog to ask the user for confirmation about the deletion of the provided plan-category.
  */
-const DeletePlanCategoryComponent: React.FC<DeletePlanCategoryProps> = ({ onSuccess, onError, category }) => {
+const DeletePlanCategory: React.FC<DeletePlanCategoryProps> = ({ onSuccess, onError, category }) => {
   const { t } = useTranslation('admin');
 
   const [deletionModal, setDeletionModal] = useState<boolean>(false);
@@ -56,10 +56,12 @@ const DeletePlanCategoryComponent: React.FC<DeletePlanCategoryProps> = ({ onSucc
   );
 };
 
-export const DeletePlanCategory: React.FC<DeletePlanCategoryProps> = ({ onSuccess, onError, category }) => {
+const DeletePlanCategoryWrapper: React.FC<DeletePlanCategoryProps> = (props) => {
   return (
     <Loader>
-      <DeletePlanCategoryComponent onSuccess={onSuccess} onError={onError} category={category} />
+      <DeletePlanCategory {...props} />
     </Loader>
   );
 };
+
+export { DeletePlanCategoryWrapper as DeletePlanCategory };

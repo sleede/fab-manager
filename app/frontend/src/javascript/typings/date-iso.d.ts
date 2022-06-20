@@ -1,13 +1,5 @@
 // from https://gist.github.com/MrChocolatine/367fb2a35d02f6175cc8ccb3d3a20054
 
-interface Date {
-  /**
-   * Give a more precise return type to the method `toISOString()`:
-   * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString
-   */
-  toISOString(): TDateISO;
-}
-
 type TYear = `${number}${number}${number}${number}`;
 type TMonth = `${number}${number}`;
 type TDay = `${number}${number}`;

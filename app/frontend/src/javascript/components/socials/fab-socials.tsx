@@ -20,6 +20,9 @@ interface FabSocialsProps {
   onSuccess: (message: string) => void
 }
 
+/**
+ * Allows the Fablab to edit its corporate social networks, or to display them read-only to the end users (show=true)
+ */
 export const FabSocials: React.FC<FabSocialsProps> = ({ show = false, onError, onSuccess }) => {
   const { t } = useTranslation('shared');
   // regular expression to validate the the input fields
@@ -42,6 +45,9 @@ export const FabSocials: React.FC<FabSocialsProps> = ({ show = false, onError, o
     setSelectedNetworks(fabNetworks.filter(el => el.url !== ''));
   }, [fabNetworks]);
 
+  /**
+   * Callback triggered when the social networks are saved
+   */
   const onSubmit = (data) => {
     const updatedNetworks = new Map<SettingName, string>();
     Object.keys(data).forEach(key => updatedNetworks.set(key as SettingName, data[key]));
@@ -55,17 +61,24 @@ export const FabSocials: React.FC<FabSocialsProps> = ({ show = false, onError, o
     });
   };
 
+  /**
+   * Callback triggered when the user adds a network, from the list of available networks, to the editable networks.
+   */
   const selectNetwork = (network) => {
     setSelectedNetworks([...selectedNetworks, network]);
   };
 
+  /**
+   * Callback triggered when the user removes a network, from the list of editables networks, add put it back to the
+   * list of avaiable networks.
+   */
   const remove = (network) => {
     setSelectedNetworks(selectedNetworks.filter(el => el !== network));
     setValue(network.name, '');
   };
 
   return (
-    <>{show
+    <div className="fab-socials">{show
       ? (selectedNetworks.length > 0) && <>
           <h2>{t('app.shared.fab_socials.follow_us')}</h2>
           <div className='social-icons'>
@@ -107,11 +120,11 @@ export const FabSocials: React.FC<FabSocialsProps> = ({ show = false, onError, o
           )}
         </div>}
         <FabButton type='submit'
-                  className='btn-warning'>
+                  className='save-btn'>
           {t('app.shared.buttons.save')}
         </FabButton>
       </form>
-    }</>
+    }</div>
   );
 };
 
