@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
-import { IApplication } from '../models/application';
-import '../lib/i18n';
-import { Loader } from './base/loader';
-import { User } from '../models/user';
-import { Wallet } from '../models/wallet';
-import WalletLib from '../lib/wallet';
-import { ShoppingCart } from '../models/payment';
-import FormatLib from '../lib/format';
+import { IApplication } from '../../models/application';
+import '../../lib/i18n';
+import { Loader } from '../base/loader';
+import { User } from '../../models/user';
+import { Wallet } from '../../models/wallet';
+import WalletLib from '../../lib/wallet';
+import { ShoppingCart } from '../../models/payment';
+import FormatLib from '../../lib/format';
 
 declare const Application: IApplication;
 

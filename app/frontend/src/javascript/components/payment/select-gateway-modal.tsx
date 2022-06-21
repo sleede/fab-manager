@@ -6,15 +6,15 @@
 import React, { BaseSyntheticEvent, useEffect, useState } from 'react';
 import { react2angular } from 'react2angular';
 import { useTranslation } from 'react-i18next';
-import { StripeKeysForm } from './payment/stripe/stripe-keys-form';
-import { PayzenKeysForm } from './payment/payzen/payzen-keys-form';
-import { FabModal, ModalSize } from './base/fab-modal';
-import { Loader } from './base/loader';
-import { User } from '../models/user';
-import { Gateway } from '../models/gateway';
-import { SettingBulkResult, SettingName } from '../models/setting';
-import { IApplication } from '../models/application';
-import SettingAPI from '../api/setting';
+import { StripeKeysForm } from './stripe/stripe-keys-form';
+import { PayzenKeysForm } from './payzen/payzen-keys-form';
+import { FabModal, ModalSize } from '../base/fab-modal';
+import { Loader } from '../base/loader';
+import { User } from '../../models/user';
+import { Gateway } from '../../models/gateway';
+import { SettingBulkResult, SettingName } from '../../models/setting';
+import { IApplication } from '../../models/application';
+import SettingAPI from '../../api/setting';
 
 declare const Application: IApplication;
 
@@ -139,10 +139,10 @@ export const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isO
   );
 };
 
-const SelectGatewayModalWrapper: React.FC<SelectGatewayModalModalProps> = ({ isOpen, toggleModal, currentUser, onSuccess, onError }) => {
+const SelectGatewayModalWrapper: React.FC<SelectGatewayModalModalProps> = (props) => {
   return (
     <Loader>
-      <SelectGatewayModal isOpen={isOpen} toggleModal={toggleModal} currentUser={currentUser} onSuccess={onSuccess} onError={onError} />
+      <SelectGatewayModal {...props} />
     </Loader>
   );
 };

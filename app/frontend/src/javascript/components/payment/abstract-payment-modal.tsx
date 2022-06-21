@@ -1,7 +1,7 @@
 import React, { FunctionComponent, ReactNode, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import WalletLib from '../../lib/wallet';
-import { WalletInfo } from '../wallet-info';
+import { WalletInfo } from './wallet-info';
 import { FabModal, ModalSize } from '../base/fab-modal';
 import { HtmlTranslate } from '../base/html-translate';
 import { CustomAsset, CustomAssetName } from '../../models/custom-asset';

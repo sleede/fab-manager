@@ -14,4 +14,5 @@ These components must be written using the following conventions:
 - Depending on if we want to use the `<Suspense>` wrapper or not, we can export the component directly or wrap it in a `<Loader>` wrapper.
 - When a component is used in angularJS, the wrapper is required. The component must be named like `const Foo` (no export if not used in React) and must have a `const FooWrapper` at the end of its file, which wraps the component in a `<Loader>`.
 - Translations must be grouped per component. For example, the `FooBar` component must have its translations in the  `config/locales/app.$SCOPE.en.yml` file, under the `foo_bar` key.
+- Most of these rules are validated by eslint-plugin-fabmanager. Please ensure you write eslint valid code, and think twice you have a very good reason before disabling any rule.
 
