@@ -25,7 +25,7 @@ interface ProofOfIdentityTypesListProps {
 const ProofOfIdentityTypesList: React.FC<ProofOfIdentityTypesListProps> = ({ onSuccess, onError }) => {
   const { t } = useTranslation('admin');
 
-  // list of displayed proof of identity type
+  // list of displayed supporting documents type
   const [proofOfIdentityTypes, setProofOfIdentityTypes] = useState<Array<ProofOfIdentityType>>([]);
   const [proofOfIdentityType, setProofOfIdentityType] = useState<ProofOfIdentityType>(null);
   const [proofOfIdentityTypeOrder, setProofOfIdentityTypeOrder] = useState<string>(null);
@@ -45,7 +45,7 @@ const ProofOfIdentityTypesList: React.FC<ProofOfIdentityTypesListProps> = ({ onS
   }, []);
 
   /**
-   * Check if the current collection of proof of identity types is empty or not.
+   * Check if the current collection of supporting documents types is empty or not.
    */
   const hasProofOfIdentityTypes = (): boolean => {
     return proofOfIdentityTypes.length > 0;

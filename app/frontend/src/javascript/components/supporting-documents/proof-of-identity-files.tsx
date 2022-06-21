@@ -27,20 +27,20 @@ interface FilesType {
 }
 
 /**
- * This component upload the proof of identity file of member
+ * This component upload the supporting documents file of the member
  */
 export const ProofOfIdentityFiles: React.FC<ProofOfIdentityFilesProps> = ({ currentUser, onSuccess, onError }) => {
   const { t } = useTranslation('admin');
 
   const maxProofOfIdentityFileSizeMb = (Fablab.maxProofOfIdentityFileSize / 1024 / 1024).toFixed();
 
-  // list of proof of identity type
+  // list of supporting documents type
   const [proofOfIdentityTypes, setProofOfIdentityTypes] = useState<Array<ProofOfIdentityType>>([]);
   const [proofOfIdentityFiles, setProofOfIdentityFiles] = useState<Array<ProofOfIdentityFile>>([]);
   const [files, setFiles] = useState<FilesType>({});
   const [errors, setErrors] = useState<Array<number>>([]);
 
-  // get proof of identity type and files
+  // get supporting documents type and files
   useEffect(() => {
     ProofOfIdentityTypeAPI.index({ group_id: currentUser.group_id }).then(tData => {
       setProofOfIdentityTypes(tData);
@@ -59,7 +59,7 @@ export const ProofOfIdentityFiles: React.FC<ProofOfIdentityFilesProps> = ({ curr
   };
 
   /**
-   * Check if the current collection of proof of identity types is empty or not.
+   * Check if the current collection of supporting documents types is empty or not.
    */
   const hasProofOfIdentityTypes = (): boolean => {
     return proofOfIdentityTypes.length > 0;

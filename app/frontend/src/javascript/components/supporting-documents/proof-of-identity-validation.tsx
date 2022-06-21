@@ -21,12 +21,12 @@ interface ProofOfIdentityValidationProps {
 }
 
 /**
- * This component shows a list of proof of identity file of member, admin can download and valid
+ * This component shows a list of supporting documents file of member, admin can download and valid
  **/
 const ProofOfIdentityValidation: React.FC<ProofOfIdentityValidationProps> = ({ operator, member, onSuccess, onError }) => {
   const { t } = useTranslation('admin');
 
-  // list of proof of identity type
+  // list of supporting documents type
   const [proofOfIdentityTypes, setProofOfIdentityTypes] = useState<Array<ProofOfIdentityType>>([]);
   const [proofOfIdentityFiles, setProofOfIdentityFiles] = useState<Array<ProofOfIdentityFile>>([]);
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
@@ -46,7 +46,7 @@ const ProofOfIdentityValidation: React.FC<ProofOfIdentityValidationProps> = ({ o
   };
 
   /**
-   * Check if the current collection of proof of identity types is empty or not.
+   * Check if the current collection of supporting documents types is empty or not.
    */
   const hasProofOfIdentityTypes = (): boolean => {
     return proofOfIdentityTypes.length > 0;
