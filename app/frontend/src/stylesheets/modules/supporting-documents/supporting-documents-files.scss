@@ -1,0 +1,120 @@
+.supporting-documents-files {
+  background-color: #f4f3f3;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  margin: 30px;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+  position: relative;
+  display: block;
+  border-spacing: 0;
+
+  .info-area {
+    color: #000;
+    font-weight: 600;
+  }
+
+  .files-list {
+    font-size: rem-calc(14);
+    background: unset;
+  }
+
+  .file-item {
+    &.has-error {
+      color: var(--error);
+    }
+
+    label {
+      margin-right: 15px;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 5px;
+      max-width: 100%;
+    }
+
+    .fileinput {
+      display: table;
+      border-collapse: separate;
+      position: relative;
+      margin-bottom: 9px;
+
+      .filename-container {
+        align-items: center;
+        display: inline-flex;
+
+        .fileinput-filename {
+          vertical-align: bottom;
+          display: inline-block;
+          overflow: hidden;
+        }
+
+        .file-download {
+          position: absolute;
+          right: 10px;
+
+          i {
+            color: black;
+          }
+        }
+      }
+      .fileinput-button {
+        z-index: 1;
+        border: 1px solid #c4c4c4;
+        border-left: 0;
+        border-radius: 0 4px 4px 0;
+        position: relative;
+        vertical-align: middle;
+        background-color: #eee;
+        color: #555;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1;
+        padding: 6px 12px;
+        text-align: center;
+        white-space: nowrap;
+        width: 1%;
+        display: table-cell;
+        background-image: none;
+        touch-action: manipulation;
+        overflow: hidden;
+      }
+    }
+
+    .errors-area {
+      display: block;
+      margin-bottom: 10px;
+      color: lighten($text-color, 25%);
+    }
+  }
+  .save-btn {
+    background-color: var(--secondary-dark);
+    border-color: var(--secondary-dark);
+    color: var(--secondary-text-color);
+    margin-bottom: 15px;
+    margin-top: 15px;
+    float: right;
+  }
+}
+
+@media (min-width: 1200px) {
+  .supporting-documents-files {
+    width: 58.3333333333%;
+    float: left;
+  }
+}
+
+@media (min-width: 992px) {
+  .supporting-documents-files {
+    width: 100%;
+    float: left;
+  }
+}
+
+@media (min-width: 768px) {
+  .supporting-documents-files {
+    width: 100%;
+    float: left;
+  }
+}

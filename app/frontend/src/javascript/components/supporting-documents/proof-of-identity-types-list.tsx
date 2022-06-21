@@ -8,7 +8,7 @@ import { IApplication } from '../../models/application';
 import { ProofOfIdentityType } from '../../models/proof-of-identity-type';
 import { Group } from '../../models/group';
 import { ProofOfIdentityTypeModal } from './proof-of-identity-type-modal';
-import { DeleteProofOfIdentityTypeModal } from './delete-proof-of-identity-type-modal';
+import { DeleteSupportingDocumentsTypeModal } from './delete-supporting-documents-type-modal';
 import GroupAPI from '../../api/group';
 import ProofOfIdentityTypeAPI from '../../api/proof-of-identity-type';
 
@@ -162,7 +162,7 @@ const ProofOfIdentityTypesList: React.FC<ProofOfIdentityTypesListProps> = ({ onS
         </div>
 
         <ProofOfIdentityTypeModal isOpen={modalIsOpen} groups={groups} proofOfIdentityType={proofOfIdentityType} toggleModal={toggleCreateAndEditModal} onSuccess={saveProofOfIdentityTypeOnSuccess} onError={onError} />
-        <DeleteProofOfIdentityTypeModal isOpen={destroyModalIsOpen} proofOfIdentityTypeId={proofOfIdentityTypeId} toggleModal={toggleDestroyModal} onSuccess={destroyProofOfIdentityTypeOnSuccess} onError={onError}/>
+        <DeleteSupportingDocumentsTypeModal isOpen={destroyModalIsOpen} proofOfIdentityTypeId={proofOfIdentityTypeId} toggleModal={toggleDestroyModal} onSuccess={destroyProofOfIdentityTypeOnSuccess} onError={onError}/>
 
         <table className="table proof-of-identity-type-list">
           <thead>
