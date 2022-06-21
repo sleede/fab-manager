@@ -21,7 +21,7 @@ interface ProfileFormOptionProps {
 }
 
 /**
- * After first logged-in from a SSO, the user has two options:
+ * After first logged-in from an SSO, the user has two options:
  * - complete his profile (*) ;
  * - bind his profile to his existing account ;
  * (*) This component handle the first case.

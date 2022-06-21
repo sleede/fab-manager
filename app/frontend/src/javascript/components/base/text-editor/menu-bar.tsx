@@ -231,16 +231,16 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, video,
       <div ref={ref} className={`fab-text-editor-subMenu ${submenu ? 'is-active' : ''}`}>
         { submenu === 'link' &&
           (<>
-            <h6>{t('app.shared.text_editor.add_link')}</h6>
+            <h6>{t('app.shared.text_editor.menu_bar.add_link')}</h6>
             <div>
-              <input value={url.href} onChange={linkUrlChange} onKeyDown={handleEnter} type="text" placeholder={t('app.shared.text_editor.link_placeholder')} />
+              <input value={url.href} onChange={linkUrlChange} onKeyDown={handleEnter} type="text" placeholder={t('app.shared.text_editor.menu_bar.link_placeholder')} />
               <button type='button' onClick={unsetLink}>
                 <Trash size={24} />
               </button>
             </div>
             <div>
               <label className='tab'>
-                <p>{t('app.shared.text_editor.new_tab')}</p>
+                <p>{t('app.shared.text_editor.menu_bar.new_tab')}</p>
                 <input type="checkbox" onChange={toggleTarget} checked={url.target === '_blank'} />
                 <span className='switch'></span>
               </label>
@@ -252,14 +252,14 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, video,
         }
         { submenu === 'video' &&
           (<>
-            <h6>{t('app.shared.text_editor.add_video')}</h6>
+            <h6>{t('app.shared.text_editor.menu_bar.add_video')}</h6>
             <select name="provider" onChange={handleSelect}>
               <option value="youtube">YouTube</option>
               <option value="vimeo">Vimeo</option>
               <option value="dailymotion">Dailymotion</option>
             </select>
             <div>
-              <input type="text" onChange={videoUrlChange} placeholder={t('app.shared.text_editor.url_placeholder')} />
+              <input type="text" onChange={videoUrlChange} placeholder={t('app.shared.text_editor.menu_bar.url_placeholder')} />
               <button type='button' onClick={() => addIframe()}>
                 <CheckCircle size={24} />
               </button>
@@ -268,9 +268,9 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, video,
         }
         { submenu === 'image' &&
           (<>
-            <h6>{t('app.shared.text_editor.add_image')}</h6>
+            <h6>{t('app.shared.text_editor.menu_bar.add_image')}</h6>
             <div>
-              <input type="text" onChange={imageUrlChange} placeholder={t('app.shared.text_editor.url_placeholder')} />
+              <input type="text" onChange={imageUrlChange} placeholder={t('app.shared.text_editor.menu_bar.url_placeholder')} />
               <button type='button' onClick={() => addImage()}>
                 <CheckCircle size={24} />
               </button>

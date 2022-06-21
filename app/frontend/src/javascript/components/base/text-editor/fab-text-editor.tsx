@@ -32,7 +32,7 @@ export interface FabTextEditorRef {
  */
 export const FabTextEditor: React.ForwardRefRenderFunction<FabTextEditorRef, FabTextEditorProps> = ({ paragraphTools, content, limit = 400, video, image, onChange, placeholder, error, disabled = false }, ref: RefObject<FabTextEditorRef>) => {
   const { t } = useTranslation('shared');
-  const placeholderText = placeholder || t('app.shared.text_editor.text_placeholder');
+  const placeholderText = placeholder || t('app.shared.text_editor.fab_text_editor.text_placeholder');
   // TODO: Add ctrl+click on link to visit
 
   const editorRef: React.MutableRefObject<Editor | null> = useRef(null);

@@ -45,7 +45,7 @@ export const FabModal: React.FC<FabModalProps> = ({ title, isOpen, toggleModal, 
       className={`fab-modal fab-modal-${width} ${className}`}
       overlayClassName="fab-modal-overlay"
       onRequestClose={toggleModal}>
-      {closeButton && <FabButton className="modal-btn--close" onClick={toggleModal}>{t('app.shared.buttons.close')}</FabButton>}
+      {closeButton && <FabButton className="modal-btn--close" onClick={toggleModal}>{t('app.shared.fab_modal.close')}</FabButton>}
       <div className="fab-modal-header">
         {!customHeader && <h1>{ title }</h1>}
         {customHeader && customHeader}

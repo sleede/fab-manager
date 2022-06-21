@@ -98,7 +98,7 @@ const PaymentSchedulesTable: React.FC<PaymentSchedulesTableProps> = ({ paymentSc
       // eslint-disable-next-line fabmanager/component-class-named-as-component
       <a href={link} target="_blank" className="download-button" rel="noreferrer">
         <i className="fas fa-download" />
-        {t('app.shared.schedules_table.download')}
+        {t('app.shared.payment_schedules_table.download')}
       </a>
     );
   };
@@ -107,7 +107,7 @@ const PaymentSchedulesTable: React.FC<PaymentSchedulesTableProps> = ({ paymentSc
    * Return the human-readable string for the status of the provided deadline.
    */
   const formatState = (item: PaymentScheduleItem, schedule: PaymentSchedule): JSX.Element => {
-    let res = t(`app.shared.schedules_table.state_${item.state}${item.state === 'pending' ? '_' + schedule.payment_method : ''}`);
+    let res = t(`app.shared.payment_schedules_table.state_${item.state}${item.state === 'pending' ? '_' + schedule.payment_method : ''}`);
     if (item.state === PaymentScheduleItemState.Paid) {
       const key = `app.shared.schedules_table.method_${item.payment_method}`;
       res += ` (${t(key)})`;
@@ -132,10 +132,10 @@ const PaymentSchedulesTable: React.FC<PaymentSchedulesTableProps> = ({ paymentSc
         <thead>
           <tr>
             <th className="w-35" />
-            <th className="w-200">{t('app.shared.schedules_table.schedule_num')}</th>
-            <th className="w-200">{t('app.shared.schedules_table.date')}</th>
-            <th className="w-120">{t('app.shared.schedules_table.price')}</th>
-            {showCustomer && <th className="w-200">{t('app.shared.schedules_table.customer')}</th>}
+            <th className="w-200">{t('app.shared.payment_schedules_table.schedule_num')}</th>
+            <th className="w-200">{t('app.shared.payment_schedules_table.date')}</th>
+            <th className="w-120">{t('app.shared.payment_schedules_table.price')}</th>
+            {showCustomer && <th className="w-200">{t('app.shared.payment_schedules_table.customer')}</th>}
             <th className="w-200"/>
           </tr>
         </thead>
@@ -159,9 +159,9 @@ const PaymentSchedulesTable: React.FC<PaymentSchedulesTableProps> = ({ paymentSc
                         <table className="schedule-items-table">
                           <thead>
                             <tr>
-                              <th className="w-120">{t('app.shared.schedules_table.deadline')}</th>
-                              <th className="w-120">{t('app.shared.schedules_table.amount')}</th>
-                              <th className="w-200">{t('app.shared.schedules_table.state')}</th>
+                              <th className="w-120">{t('app.shared.payment_schedules_table.deadline')}</th>
+                              <th className="w-120">{t('app.shared.payment_schedules_table.amount')}</th>
+                              <th className="w-200">{t('app.shared.payment_schedules_table.state')}</th>
                               <th className="w-200" />
                             </tr>
                           </thead>

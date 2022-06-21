@@ -43,8 +43,8 @@ export const EventCard: React.FC<EventCardProps> = ({ event, cardType }) => {
     startDate.getMonth() === endDate.getMonth() &&
     startDate.getDate() === endDate.getDate();
     return singleDayEvent
-      ? t('app.public.home.on_the_date', { DATE: FormatLib.date(event.start_date) })
-      : t('app.public.home.from_date_to_date', { START: FormatLib.date(event.start_date), END: FormatLib.date(event.end_date) });
+      ? t('app.public.event_card.on_the_date', { DATE: FormatLib.date(event.start_date) })
+      : t('app.public.event_card.from_date_to_date', { START: FormatLib.date(event.start_date), END: FormatLib.date(event.end_date) });
   };
 
   /**
@@ -52,8 +52,8 @@ export const EventCard: React.FC<EventCardProps> = ({ event, cardType }) => {
    */
   const formatTime = (): string => {
     return event.all_day
-      ? t('app.public.home.all_day')
-      : t('app.public.home.from_time_to_time', { START: FormatLib.time(event.start_date), END: FormatLib.time(event.end_date) });
+      ? t('app.public.event_card.all_day')
+      : t('app.public.event_card.from_time_to_time', { START: FormatLib.time(event.start_date), END: FormatLib.time(event.end_date) });
   };
 
   return (
@@ -112,14 +112,14 @@ export const EventCard: React.FC<EventCardProps> = ({ event, cardType }) => {
           }
           <div className="grid-item">
             <i className="fa fa-user"></i>
-            {event.nb_free_places > 0 && <h6>{t('app.public.home.still_available') + event.nb_free_places}</h6>}
-            {event.nb_total_places > 0 && event.nb_free_places <= 0 && <h6>{t('app.public.home.event_full')}</h6>}
-            {!event.nb_total_places && <h6>{t('app.public.home.without_reservation')}</h6>}
+            {event.nb_free_places > 0 && <h6>{t('app.public.event_card.still_available') + event.nb_free_places}</h6>}
+            {event.nb_total_places > 0 && event.nb_free_places <= 0 && <h6>{t('app.public.event_card.event_full')}</h6>}
+            {!event.nb_total_places && <h6>{t('app.public.event_card.without_reservation')}</h6>}
           </div>
           <div className="grid-item">
             <i className="fa fa-bookmark"></i>
-            {event.amount === 0 && <h6>{t('app.public.home.free_admission')}</h6>}
-            {event.amount > 0 && <h6>{t('app.public.home.full_price') + FormatLib.price(event.amount)}</h6>}
+            {event.amount === 0 && <h6>{t('app.public.event_card.free_admission')}</h6>}
+            {event.amount > 0 && <h6>{t('app.public.event_card.full_price') + FormatLib.price(event.amount)}</h6>}
           </div>
         </div>
       </div>

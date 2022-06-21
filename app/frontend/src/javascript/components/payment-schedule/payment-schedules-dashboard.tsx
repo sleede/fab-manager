@@ -66,7 +66,7 @@ export const PaymentSchedulesDashboard: React.FC<PaymentSchedulesDashboardProps>
    * after a successful card update, provide a success message to the end-user
    */
   const handleCardUpdateSuccess = (): void => {
-    onCardUpdateSuccess(t('app.logged.dashboard.payment_schedules.card_updated_success'));
+    onCardUpdateSuccess(t('app.logged.dashboard.payment_schedules_dashboard.card_updated_success'));
   };
 
   /**
@@ -85,7 +85,7 @@ export const PaymentSchedulesDashboard: React.FC<PaymentSchedulesDashboardProps>
 
   return (
     <div className="payment-schedules-dashboard">
-      {!hasSchedules() && <div>{t('app.logged.dashboard.payment_schedules.no_payment_schedules')}</div>}
+      {!hasSchedules() && <div>{t('app.logged.dashboard.payment_schedules_dashboard.no_payment_schedules')}</div>}
       {hasSchedules() && <div className="schedules-list">
         <PaymentSchedulesTable paymentSchedules={paymentSchedules}
           showCustomer={false}
@@ -93,7 +93,7 @@ export const PaymentSchedulesDashboard: React.FC<PaymentSchedulesDashboardProps>
           operator={currentUser}
           onError={onError}
           onCardUpdateSuccess={handleCardUpdateSuccess} />
-        {hasMoreSchedules() && <FabButton className="load-more" onClick={handleLoadMore}>{t('app.logged.dashboard.payment_schedules.load_more')}</FabButton>}
+        {hasMoreSchedules() && <FabButton className="load-more" onClick={handleLoadMore}>{t('app.logged.dashboard.payment_schedules_dashboard.load_more')}</FabButton>}
       </div>}
     </div>
   );

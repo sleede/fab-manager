@@ -80,10 +80,10 @@ const CardPaymentModal: React.FC<CardPaymentModalProps> = ({ isOpen, toggleModal
       return renderPayZenModal();
     case null:
     case undefined:
-      onError(t('app.shared.payment_modal.online_payment_disabled'));
+      onError(t('app.shared.card_payment_modal.online_payment_disabled'));
       return <div />;
     default:
-      onError(t('app.shared.payment_modal.unexpected_error'));
+      onError(t('app.shared.card_payment_modal.unexpected_error'));
       console.error(`[PaymentModal] Unimplemented gateway: ${gateway.value}`);
       return <div />;
   }

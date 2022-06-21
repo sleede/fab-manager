@@ -57,7 +57,7 @@
         "fabmanager/component-methods-documentation": "error",
         "fabmanager/no-bootstrap": "error",
         "fabmanager/no-utilities": "error",
-        "fabmanager/scoped-translation": ["error", { "ignoreAbstractKeyword": true }]
+        "fabmanager/scoped-translation": ["error", { "ignoreAbstractKeyword": false }]
       }
     },
     {

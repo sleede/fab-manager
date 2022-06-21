@@ -14,7 +14,7 @@ interface ExtendedPriceFormProps {
 }
 
 /**
- * A form component to create/edit a extended price.
+ * A form component to create/edit an extended price.
  * The form validation must be created elsewhere, using the attribute form={formId}.
  */
 export const ExtendedPriceForm: React.FC<ExtendedPriceFormProps> = ({ formId, onSubmit, price }) => {

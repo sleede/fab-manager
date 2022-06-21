@@ -18,6 +18,7 @@ declare module '@tiptap/core' {
   }
 }
 
+// eslint-disable-next-line import/no-default-export
 export default Node.create<IframeOptions>({
   name: 'iframe',
 

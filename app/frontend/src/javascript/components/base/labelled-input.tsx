@@ -16,8 +16,8 @@ interface LabelledInputProps {
 export const LabelledInput: React.FC<LabelledInputProps> = ({ id, type, label, value, onChange }) => {
   return (
     <div className="labelled-input">
-      <label className="label" htmlFor={id}>{label}</label>
-      <input className="input" id={id} type={type} value={value} onChange={onChange} />
+      <label htmlFor={id}>{label}</label>
+      <input id={id} type={type} value={value} onChange={onChange} />
     </div>
   );
 };

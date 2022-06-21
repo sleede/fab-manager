@@ -63,7 +63,7 @@ const ManagePlanCategory: React.FC<ManagePlanCategoryProps> = ({ category, actio
             icon={<i className='fa fa-plus' />}
             className="create-button"
             onClick={toggleModal}>
-            {t('app.admin.manage_plan_category.create_category.title')}
+            {t('app.admin.manage_plan_category.create')}
           </FabButton>
         );
       case 'update':
@@ -77,7 +77,7 @@ const ManagePlanCategory: React.FC<ManagePlanCategoryProps> = ({ category, actio
   return (
     <div className='manage-plan-category'>
       { toggleBtn() }
-      <FabModal title={t(`app.admin.manage_plan_category.${action}_category.title`)}
+      <FabModal title={t(`app.admin.manage_plan_category.${action}`)}
         isOpen={isOpen}
         toggleModal={toggleModal}
         onCreation={initCategoryCreation}

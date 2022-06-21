@@ -40,29 +40,29 @@ export const PaymentScheduleSummary: React.FC<PaymentScheduleSummaryProps> = ({ 
   return (
     <div className="payment-schedule-summary">
       <div>
-        <h4>{ t('app.shared.cart.your_payment_schedule') }</h4>
+        <h4>{ t('app.shared.payment_schedule_summary.your_payment_schedule') }</h4>
         {hasEqualDeadlines() && <ul>
           <li>
             <span className="schedule-item-info">
-              {t('app.shared.cart.NUMBER_monthly_payment_of_AMOUNT', { NUMBER: schedule.items.length, AMOUNT: FormatLib.price(schedule.items[0].amount) })}
+              {t('app.shared.payment_schedule_summary.NUMBER_monthly_payment_of_AMOUNT', { NUMBER: schedule.items.length, AMOUNT: FormatLib.price(schedule.items[0].amount) })}
             </span>
-            <span className="schedule-item-date">{t('app.shared.cart.first_debit')}</span>
+            <span className="schedule-item-date">{t('app.shared.payment_schedule_summary.first_debit')}</span>
           </li>
         </ul>}
         {!hasEqualDeadlines() && <ul>
           <li>
-            <span className="schedule-item-info">{t('app.shared.cart.monthly_payment_NUMBER', { NUMBER: 1 })}</span>
+            <span className="schedule-item-info">{t('app.shared.payment_schedule_summary.monthly_payment_NUMBER', { NUMBER: 1 })}</span>
             <span className="schedule-item-price">{FormatLib.price(schedule.items[0].amount)}</span>
-            <span className="schedule-item-date">{t('app.shared.cart.debit')}</span>
+            <span className="schedule-item-date">{t('app.shared.payment_schedule_summary.debit')}</span>
           </li>
           <li>
             <span className="schedule-item-info">
-              {t('app.shared.cart.NUMBER_monthly_payment_of_AMOUNT', { NUMBER: schedule.items.length - 1, AMOUNT: FormatLib.price(schedule.items[1].amount) })}
+              {t('app.shared.payment_schedule_summary.NUMBER_monthly_payment_of_AMOUNT', { NUMBER: schedule.items.length - 1, AMOUNT: FormatLib.price(schedule.items[1].amount) })}
             </span>
           </li>
         </ul>}
-        <button className="view-full-schedule" onClick={toggleFullScheduleModal}>{t('app.shared.cart.view_full_schedule')}</button>
-        <FabModal title={t('app.shared.cart.your_payment_schedule')} isOpen={modal} toggleModal={toggleFullScheduleModal}>
+        <button className="view-full-schedule" onClick={toggleFullScheduleModal}>{t('app.shared.payment_schedule_summary.view_full_schedule')}</button>
+        <FabModal title={t('app.shared.payment_schedule_summary.your_payment_schedule')} isOpen={modal} toggleModal={toggleFullScheduleModal}>
           <ul className="full-schedule">
             {schedule.items.map(item => (
               <li key={String(item.due_date)}>
