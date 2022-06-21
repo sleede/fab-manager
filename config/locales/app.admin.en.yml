@@ -1566,11 +1566,11 @@ en:
           organization: "Organization"
           organization_profile_custom_fields_info: "You can display additional fields for users who declare themselves to be an organization. You can also choose to make them mandatory at account creation."
           organization_profile_custom_fields_alert: "Attention: the activated fields will be automatically displayed on the issued invoices. Once configured, please do not modify them."
-          organization_profile_custom_field:
-            required: "Confirmation required"
-            actived: "Activate the field"
-          organization_profile_custom_field_successfully_updated: "The organization field has been updated."
-          organization_profile_custom_field_unable_to_update: "Impossible to modify the field : "
+        profile_custom_fields_list:
+          field_successfully_updated: "The organization field has been updated."
+          unable_to_update: "Impossible to modify the field : "
+          required: "Confirmation required"
+          actived: "Activate the field"
         home:
           show_upcoming_events: "Show upcoming events"
           upcoming_events:
