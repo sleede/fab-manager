@@ -1541,41 +1541,41 @@ fr:
           organization: "Structure"
           organization_profile_custom_fields_info: "Vous pouvez afficher des champs supplémentaires pour les utilisateurs qui se déclarent être une structure. Vous pouvez également choisir de les rendre obligatoires lors de la création du compte."
           organization_profile_custom_fields_alert: "Attention : les champs activés seront automatiquement affichés sur les factures émises. Une fois configurés, veuillez ne pas les modifier."
-        supporting_documents_type_modal:
-          successfully_created: "La nouvelle demande de justificatifs a bien été créée."
-          unable_to_create: "Impossible de supprimer la demande de justificatifs : "
-          successfully_updated: "La nouvelle demande de justificatifs a bien été mise à jour."
-          unable_to_update: "Impossible de modifier la demande de justificatifs : "
-          new_type: "Créer une demande de justificatifs"
-          edit_type: "Modifier la demande de justificatifs"
-          create: "Créer"
-          edit: "Modifier"
-        supporting_documents_type_form:
-          type_form_info: "Paramètres du champ"
-          select_group: "Choisissez un ou plusieurs groupe(s)"
-          name: "Nom"
-        supporting_documents_types_list:
-          add_supporting_documents_types: "Ajouter des justificatifs"
-          all_groups: 'Tous les groupes'
-          supporting_documents_type_info: "Vous pouvez demander des pièces justificatives en fonction des groupes d'utilisateurs créés. Cela demandera à vos membres de déposer ce type de documents dans leur espace personnel. Chaque membre sera informé de la nécessité de fournir une pièce justificative dans son espace personnel (onglet Mes justificatifs). De votre côté, vous pouvez vérifier les justificatifs fournis et valider le compte du membre (si l'option de validation de compte est activée)."
-          no_groups_info: "Un justificatif est nécessairement appliqué aux groupes.<br>Si vous n'avez pas encore de groupe, vous pouvez en créer un à partir de la page \"Utilisateurs/Groupes\" (bouton à droite)."
-          create_groups: "Créer des groupes"
-          supporting_documents_type_title: "Demandes de justificatifs"
-          add_type: "Nouvelle demande de justificatifs"
-          group_name: "Groupe"
-          name: "Pièces justificatives"
-          no_types: "Vous n'avez aucune demande de justificatif.<br> Assurez-vous d'avoir créé au moins un groupe pour ajouter une demande."
-        delete_supporting_documents_type_modal:
-          confirmation_required: "Confirmation requise"
-          confirm: "Valider"
-          deleted: "La demande de justificatifs a bien été supprimée."
-          unable_to_delete: "Impossible de supprimer la demande de justificatifs : "
-          confirm_delete_supporting_documents_type: "Êtes-vous sûr de vouloir supprimer la demande de ce type de justificatifs ?"
-        profile_custom_fields_list:
-          field_successfully_updated: "Le champ structure a été mis à jour."
-          unable_to_update: "Impossible de modifier le champ : "
-          required: "Confirmation requise"
-          actived: "Activer le champ"
+          supporting_documents_type_modal:
+            successfully_created: "La nouvelle demande de justificatifs a bien été créée."
+            unable_to_create: "Impossible de supprimer la demande de justificatifs : "
+            successfully_updated: "La nouvelle demande de justificatifs a bien été mise à jour."
+            unable_to_update: "Impossible de modifier la demande de justificatifs : "
+            new_type: "Créer une demande de justificatifs"
+            edit_type: "Modifier la demande de justificatifs"
+            create: "Créer"
+            edit: "Modifier"
+          supporting_documents_type_form:
+            type_form_info: "Veuillez définir ci-dessous les paramètres de la demande de justificatifs"
+            select_group: "Choisissez un ou plusieurs groupe(s)"
+            name: "Nom"
+          supporting_documents_types_list:
+            add_supporting_documents_types: "Ajouter des justificatifs"
+            all_groups: 'Tous les groupes'
+            supporting_documents_type_info: "Vous pouvez demander des pièces justificatives en fonction des groupes d'utilisateurs créés. Cela demandera à vos membres de déposer ce type de documents dans leur espace personnel. Chaque membre sera informé de la nécessité de fournir une pièce justificative dans son espace personnel (onglet Mes justificatifs). De votre côté, vous pouvez vérifier les justificatifs fournis et valider le compte du membre (si l'option de validation de compte est activée)."
+            no_groups_info: "Un justificatif est nécessairement appliqué aux groupes.<br>Si vous n'avez pas encore de groupe, vous pouvez en créer un à partir de la page \"Utilisateurs/Groupes\" (bouton à droite)."
+            create_groups: "Créer des groupes"
+            supporting_documents_type_title: "Demandes de justificatifs"
+            add_type: "Nouvelle demande de justificatifs"
+            group_name: "Groupe"
+            name: "Pièces justificatives"
+            no_types: "Vous n'avez aucune demande de justificatif.<br> Assurez-vous d'avoir créé au moins un groupe pour ajouter une demande."
+          delete_supporting_documents_type_modal:
+            confirmation_required: "Confirmation requise"
+            confirm: "Valider"
+            deleted: "La demande de justificatifs a bien été supprimée."
+            unable_to_delete: "Impossible de supprimer la demande de justificatifs : "
+            confirm_delete_supporting_documents_type: "Êtes-vous sûr de vouloir supprimer la demande de ce type de justificatifs ?"
+          profile_custom_fields_list:
+            field_successfully_updated: "Le champ structure a été mis à jour."
+            unable_to_update: "Impossible de modifier le champ : "
+            required: "Confirmation requise"
+            actived: "Activer le champ"
         home:
           show_upcoming_events: "Afficher les prochains événements"
           upcoming_events:

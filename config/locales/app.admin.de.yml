@@ -1541,41 +1541,41 @@ de:
           organization: "Organisation"
           organization_profile_custom_fields_info: "You can display additional fields for users who declare themselves to be an organization. You can also choose to make them mandatory at account creation."
           organization_profile_custom_fields_alert: "Warning: the activated fields will be automatically displayed on the issued invoices. Once configured, please do not modify them."
-        supporting_documents_type_modal:
-          successfully_created: "The new supporting documents request has been created."
-          unable_to_create: "Unable to delete the supporting documents request: "
-          successfully_updated: "The supporting documents request has been updated."
-          unable_to_update: "Unable to modify the supporting documents request: "
-          new_type: "Create a supporting documents request"
-          edit_type: "Edit the supporting documents request"
-          create: "Create"
-          edit: "Edit"
-        supporting_documents_type_form:
-          type_form_info: "Field parameters"
-          select_group: "Choose one or many group(s)"
-          name: "Name"
-        supporting_documents_types_list:
-          add_supporting_documents_types: "Add supporting documents"
-          all_groups: 'All groups'
-          supporting_documents_type_info: "You can ask for supporting documents, according to the user's groups. This will ask your members to deposit those kind of documents in their personnal space. Each members will be informed that supporting documents are required to be provided in their personal space (My supporting documents tab). On your side, you'll be able to check the provided supporting documents and validate the member's account (if the Account Validation option is enabled)."
-          no_groups_info: "Supporting documents are necessarily applied to groups.<br>If you do not have any group yet, you can create one from the \"Users/Groups\" page (button on the right)."
-          create_groups: "Create groups"
-          supporting_documents_type_title: "Supporting documents requests"
-          add_type: "New supporting documents request"
-          group_name: "Group"
-          name: "Supporting documents"
-          no_types: "You do not have any supporting documents requests.<br>Make sure you have created at least one group in order to add a request."
-        delete_supporting_documents_type_modal:
-          confirmation_required: "Confirmation required"
-          confirm: "Confirm"
-          deleted: "The supporting documents request has been deleted."
-          unable_to_delete: "Unable to delete the supporting documents request: "
-          confirm_delete_supporting_documents_type: "Do you really want to remove this requested type of supporting documents?"
-        profile_custom_fields_list:
-          field_successfully_updated: "The organization field has been updated."
-          unable_to_update: "Impossible to modify the field : "
-          required: "Confirmation required"
-          actived: "Activate the field"
+          supporting_documents_type_modal:
+            successfully_created: "The new supporting documents request has been created."
+            unable_to_create: "Unable to delete the supporting documents request: "
+            successfully_updated: "The supporting documents request has been updated."
+            unable_to_update: "Unable to modify the supporting documents request: "
+            new_type: "Create a supporting documents request"
+            edit_type: "Edit the supporting documents request"
+            create: "Create"
+            edit: "Edit"
+          supporting_documents_type_form:
+            type_form_info: "Please define the supporting documents request settings below"
+            select_group: "Choose one or many group(s)"
+            name: "Name"
+          supporting_documents_types_list:
+            add_supporting_documents_types: "Add supporting documents"
+            all_groups: 'All groups'
+            supporting_documents_type_info: "You can ask for supporting documents, according to the user's groups. This will ask your members to deposit those kind of documents in their personnal space. Each members will be informed that supporting documents are required to be provided in their personal space (My supporting documents tab). On your side, you'll be able to check the provided supporting documents and validate the member's account (if the Account Validation option is enabled)."
+            no_groups_info: "Supporting documents are necessarily applied to groups.<br>If you do not have any group yet, you can create one from the \"Users/Groups\" page (button on the right)."
+            create_groups: "Create groups"
+            supporting_documents_type_title: "Supporting documents requests"
+            add_type: "New supporting documents request"
+            group_name: "Group"
+            name: "Supporting documents"
+            no_types: "You do not have any supporting documents requests.<br>Make sure you have created at least one group in order to add a request."
+          delete_supporting_documents_type_modal:
+            confirmation_required: "Confirmation required"
+            confirm: "Confirm"
+            deleted: "The supporting documents request has been deleted."
+            unable_to_delete: "Unable to delete the supporting documents request: "
+            confirm_delete_supporting_documents_type: "Do you really want to remove this requested type of supporting documents?"
+          profile_custom_fields_list:
+            field_successfully_updated: "The organization field has been updated."
+            unable_to_update: "Impossible to modify the field : "
+            required: "Confirmation required"
+            actived: "Activate the field"
         home:
           show_upcoming_events: "Anstehende Veranstaltungen anzeigen"
           upcoming_events:
