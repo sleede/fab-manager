@@ -24,7 +24,7 @@ de:
       subject: "Ihre Gruppe wurde geändert"
       body:
         warning: "Sie haben die Gruppe gewechselt. Im FabLab kann geprüft werden, ob diese Änderung zulässig ist."
-        user_invalidated: "Your account is invalidated, please upload your new proof of identity to validate your account."
+        user_invalidated: "Your account was invalidated, please upload your new supporting documents to validate your account."
     notify_admin_user_group_changed:
       subject: "Ein Mitglied hat die Gruppe geändert"
       body:
@@ -346,14 +346,14 @@ de:
         date: "Dies ist eine Erinnerung zur Prüfung, ob das Bankkonto erfolgreich belastet werden konnte."
         confirm: "Bitte bestätigen Sie den Erhalt des Guthabens in Ihrer Zahlungsverwaltung, damit die entsprechende Rechnung generiert werden kann."
     notify_admin_user_proof_of_identity_files_created:
-      subject: "Proof of identity uploaded by a member"
+      subject: "Supporting documents uploaded by a member"
       body:
-        proof_of_identity_files_uploaded_below: "Member %{NAME} has uploaded the following proof of identity :"
+        proof_of_identity_files_uploaded_below: "Member %{NAME} has uploaded the following supporting documents:"
         validate_user: "Please validate this account"
     notify_admin_user_proof_of_identity_files_updated:
-      subject: "Proof of identity is changed by m member"
+      subject: "Member's supporting documents have changed"
       body:
-        user_update_proof_of_identity_file: "Member %{NAME} has modified the proof of identity below:"
+        user_update_proof_of_identity_file: "Member %{NAME} has modified the supporting documents below:"
         validate_user: "Please validate this account"
     notify_user_is_validated:
       subject: "The account is validated"
@@ -364,13 +364,13 @@ de:
       body:
         account_invalidated: "Your account is invalid."
     notify_user_proof_of_identity_refusal:
-      subject: "Your proof of identity are not accepted"
+      subject: "Your supporting documents were refused"
       body:
-        user_proof_of_identity_files_refusal: "Your proof of identity are not accepted :"
-        action: "Please re-upload the new proof of identity."
+        user_proof_of_identity_files_refusal: "Your supporting documents were refused:"
+        action: "Please re-upload some new supporting documents."
     notify_admin_user_proof_of_identity_refusal:
-      subject: "A member's proof of identity are not accepted"
+      subject: "A member'ssupporting documents were refused"
       body:
-        user_proof_of_identity_files_refusal: "Member %{NAME}'s proof of identity are rejected by %{OPERATOR}:"
+        user_proof_of_identity_files_refusal: "Member %{NAME}'s supporting documents were rejected by %{OPERATOR}:"
     shared:
       hello: "Hallo %{user_name}"
