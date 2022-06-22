@@ -21,7 +21,6 @@ zu:
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "crwdns9405:0crwdne9405:0"
         you_will_lose_any_unsaved_modification_if_you_reload_this_page: "crwdns9407:0crwdne9407:0"
-        payment_card_error: "crwdns9409:0crwdne9409:0"
         payment_card_declined: "crwdns22033:0crwdne22033:0"
       change_group:
         title: "crwdns22840:0OPERATOR={OPERATOR}crwdne22840:0"
@@ -29,20 +28,32 @@ zu:
         cancel: "crwdns22844:0crwdne22844:0"
         validate: "crwdns22846:0crwdne22846:0"
         success: "crwdns22848:0crwdne22848:0"
+      stripe_form:
+        payment_card_error: "crwdns23416:0crwdne23416:0"
       #text editor
       text_editor:
-        text_placeholder: "crwdns22850:0crwdne22850:0"
-        link_placeholder: "crwdns22852:0crwdne22852:0"
-        url_placeholder: "crwdns22854:0crwdne22854:0"
-        new_tab: "crwdns22856:0crwdne22856:0"
-        add_link: "crwdns22858:0crwdne22858:0"
-        add_video: "crwdns22860:0crwdne22860:0"
-        add_image: "crwdns22862:0crwdne22862:0"
+        fab_text_editor:
+          text_placeholder: "crwdns23418:0crwdne23418:0"
+        menu_bar:
+          link_placeholder: "crwdns23420:0crwdne23420:0"
+          url_placeholder: "crwdns23422:0crwdne23422:0"
+          new_tab: "crwdns23424:0crwdne23424:0"
+          add_link: "crwdns23426:0crwdne23426:0"
+          add_video: "crwdns23428:0crwdne23428:0"
+          add_image: "crwdns23430:0crwdne23430:0"
+      #modal dialog
+      fab_modal:
+        close: "crwdns23432:0crwdne23432:0"
       fab_socials:
         follow_us: "crwdns23112:0crwdne23112:0"
         networks_update_success: "crwdns22864:0crwdne22864:0"
         networks_update_error: "crwdns22866:0crwdne22866:0"
         url_placeholder: "crwdns22868:0crwdne22868:0"
+        save: "crwdns23434:0crwdne23434:0"
+        website_invalid: "crwdns23436:0crwdne23436:0"
+      edit_socials:
+        url_placeholder: "crwdns23438:0crwdne23438:0"
+        website_invalid: "crwdns23440:0crwdne23440:0"
       #user edition form
       user_profile_form:
         add_an_avatar: "crwdns22870:0crwdne22870:0"
@@ -156,13 +167,13 @@ zu:
         start_typing: "crwdns9573:0crwdne9573:0"
         member_not_validated: "crwdns22972:0crwdne22972:0"
       #payment modal
-      payment:
-        online_payment: "crwdns21484:0crwdne21484:0"
-        i_have_read_and_accept_: "crwdns21486:0crwdne21486:0"
-        _the_general_terms_and_conditions: "crwdns21488:0crwdne21488:0"
-        payment_schedule_html: "crwdns21490:0{DEADLINES}crwdnd21490:0{GATEWAY}crwdne21490:0"
-        confirm_payment_of_: "crwdns21492:0{AMOUNT}crwdne21492:0"
-        validate: "crwdns22131:0crwdne22131:0"
+      abstract_payment_modal:
+        online_payment: "crwdns23442:0crwdne23442:0"
+        i_have_read_and_accept_: "crwdns23444:0crwdne23444:0"
+        _the_general_terms_and_conditions: "crwdns23446:0crwdne23446:0"
+        payment_schedule_html: "crwdns23448:0{DEADLINES}crwdnd23448:0{GATEWAY}crwdne23448:0"
+        confirm_payment_of_: "crwdns23450:0{AMOUNT}crwdne23450:0"
+        validate: "crwdns23452:0crwdne23452:0"
       #dialog of on site payment for reservations
       valid_reservation_modal:
         booking_confirmation: "crwdns9587:0crwdne9587:0"
@@ -174,6 +185,9 @@ zu:
         method_check: "crwdns20928:0crwdne20928:0"
         card_collection_info: "crwdns21496:0crwdne21496:0"
         check_collection_info: "crwdns20932:0{DEADLINES}crwdne20932:0"
+      event_themes:
+        title: "crwdns23454:0crwdne23454:0"
+        select_theme: "crwdns23456:0crwdne23456:0"
       #event edition form
       event:
         title: "crwdns9591:0crwdne9591:0"
@@ -397,6 +411,15 @@ zu:
         default_places: "crwdns10023:0crwdne10023:0"
         default_places_is_required: "crwdns10025:0crwdne10025:0"
         disable_space: "crwdns10027:0crwdne10027:0"
+      payment_schedule_summary:
+        your_payment_schedule: "crwdns23458:0crwdne23458:0"
+        NUMBER_monthly_payment_of_AMOUNT: "crwdns23460:0NUMBER={NUMBER}crwdnd23460:0NUMBER={NUMBER}crwdnd23460:0AMOUNT={AMOUNT}crwdne23460:0"
+        first_debit: "crwdns23462:0crwdne23462:0"
+        monthly_payment_NUMBER: "crwdns23464:0NUMBER={NUMBER}crwdnd23464:0NUMBER={NUMBER}crwdne23464:0"
+        debit: "crwdns23466:0crwdne23466:0"
+        view_full_schedule: "crwdns23468:0crwdne23468:0"
+      select_schedule:
+        monthly_payment: "crwdns23470:0crwdne23470:0"
       #shopping cart module for reservations
       cart:
         summary: "crwdns10029:0crwdne10029:0"
@@ -414,13 +437,6 @@ zu:
         cost_of_the_subscription: "crwdns10055:0crwdne10055:0"
         subscription_price: "crwdns20970:0crwdne20970:0"
         you_ve_just_selected_a_subscription_html: "crwdns20972:0crwdne20972:0"
-        monthly_payment: "crwdns20974:0crwdne20974:0"
-        your_payment_schedule: "crwdns20976:0crwdne20976:0"
-        monthly_payment_NUMBER: "crwdns20978:0NUMBER={NUMBER}crwdnd20978:0NUMBER={NUMBER}crwdne20978:0"
-        NUMBER_monthly_payment_of_AMOUNT: "crwdns20980:0NUMBER={NUMBER}crwdnd20980:0NUMBER={NUMBER}crwdnd20980:0AMOUNT={AMOUNT}crwdne20980:0"
-        first_debit: "crwdns20982:0crwdne20982:0"
-        debit: "crwdns20984:0crwdne20984:0"
-        view_full_schedule: "crwdns22095:0crwdne22095:0"
         confirm_and_pay: "crwdns10057:0crwdne10057:0"
         you_have_settled_the_following_TYPE: "crwdns10059:0TYPE={TYPE}crwdne10059:0"
         you_have_settled_a_: "crwdns10061:0crwdne10061:0"
@@ -475,32 +491,35 @@ zu:
         what_to_do: "crwdns20232:0crwdne20232:0"
         tour: "crwdns20234:0crwdne20234:0"
         guide: "crwdns20236:0crwdne20236:0"
+      stripe_confirm_modal:
+        resolve_action: "crwdns23472:0crwdne23472:0"
+        ok_button: "crwdns23474:0crwdne23474:0"
       #2nd factor authentication for card payments
       stripe_confirm:
         pending: "crwdns20988:0crwdne20988:0"
         success: "crwdns20990:0crwdne20990:0"
       #the summary table of all payment schedules
-      schedules_table:
-        schedule_num: "crwdns20992:0crwdne20992:0"
-        date: "crwdns20994:0crwdne20994:0"
-        price: "crwdns20996:0crwdne20996:0"
-        customer: "crwdns20998:0crwdne20998:0"
-        deadline: "crwdns21000:0crwdne21000:0"
-        amount: "crwdns21002:0crwdne21002:0"
-        state: "crwdns21004:0crwdne21004:0"
-        download: "crwdns21006:0crwdne21006:0"
-        state_new: "crwdns21008:0crwdne21008:0"
-        state_pending_check: "crwdns22293:0crwdne22293:0"
-        state_pending_transfer: "crwdns22295:0crwdne22295:0"
-        state_requires_payment_method: "crwdns21012:0crwdne21012:0"
-        state_requires_action: "crwdns21014:0crwdne21014:0"
-        state_paid: "crwdns21016:0crwdne21016:0"
-        state_error: "crwdns21018:0crwdne21018:0"
-        state_gateway_canceled: "crwdns22319:0crwdne22319:0"
-        state_canceled: "crwdns21020:0crwdne21020:0"
-        method_card: "crwdns21500:0crwdne21500:0"
-        method_check: "crwdns21024:0crwdne21024:0"
-        method_transfer: "crwdns22297:0crwdne22297:0"
+      payment_schedules_table:
+        schedule_num: "crwdns23476:0crwdne23476:0"
+        date: "crwdns23478:0crwdne23478:0"
+        price: "crwdns23480:0crwdne23480:0"
+        customer: "crwdns23482:0crwdne23482:0"
+        deadline: "crwdns23484:0crwdne23484:0"
+        amount: "crwdns23486:0crwdne23486:0"
+        state: "crwdns23488:0crwdne23488:0"
+        download: "crwdns23490:0crwdne23490:0"
+        state_new: "crwdns23492:0crwdne23492:0"
+        state_pending_check: "crwdns23494:0crwdne23494:0"
+        state_pending_transfer: "crwdns23496:0crwdne23496:0"
+        state_requires_payment_method: "crwdns23498:0crwdne23498:0"
+        state_requires_action: "crwdns23500:0crwdne23500:0"
+        state_paid: "crwdns23502:0crwdne23502:0"
+        state_error: "crwdns23504:0crwdne23504:0"
+        state_gateway_canceled: "crwdns23506:0crwdne23506:0"
+        state_canceled: "crwdns23508:0crwdne23508:0"
+        method_card: "crwdns23510:0crwdne23510:0"
+        method_check: "crwdns23512:0crwdne23512:0"
+        method_transfer: "crwdns23514:0crwdne23514:0"
       payment_schedule_item_actions:
         download: "crwdns22321:0crwdne22321:0"
         cancel_subscription: "crwdns22323:0crwdne22323:0"
@@ -516,9 +535,9 @@ zu:
         confirm_bank_transfer: "crwdns22343:0crwdne22343:0"
         confirm_bank_transfer_body: "crwdns22345:0{AMOUNT}crwdnd22345:0{DATE}crwdne22345:0"
         confirm_cancel_subscription: "crwdns22347:0crwdne22347:0"
-      payment_modal:
-        online_payment_disabled: "crwdns21502:0crwdne21502:0"
-        unexpected_error: "crwdns21504:0crwdne21504:0"
+      card_payment_modal:
+        online_payment_disabled: "crwdns23516:0crwdne23516:0"
+        unexpected_error: "crwdns23518:0crwdne23518:0"
       update_card_modal:
         unexpected_error: "crwdns21506:0crwdne21506:0"
       stripe_card_update_modal:
