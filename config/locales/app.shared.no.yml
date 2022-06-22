@@ -21,7 +21,6 @@
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "Du vil miste noen ulagrede endringer hvis du avslutter denne siden"
         you_will_lose_any_unsaved_modification_if_you_reload_this_page: "Du vil miste ulagrede endringer hvis du gjeninnlaster denne siden"
-        payment_card_error: "Et problem har oppstått med ditt kredittkort:"
         payment_card_declined: "Your card was declined."
       change_group:
         title: "{OPERATOR, select, self{My group} other{User's group}}"
@@ -29,20 +28,32 @@
         cancel: "Cancel"
         validate: "Validate group change"
         success: "Group successfully changed"
+      stripe_form:
+        payment_card_error: "A problem occurred with your payment card:"
       #text editor
       text_editor:
-        text_placeholder: "Type something…"
-        link_placeholder: "Paste link…"
-        url_placeholder: "Paste url…"
-        new_tab: "Open in a new tab"
-        add_link: "Insert a link"
-        add_video: "Embed a video"
-        add_image: "Insert an image"
+        fab_text_editor:
+          text_placeholder: "Type something…"
+        menu_bar:
+          link_placeholder: "Paste link…"
+          url_placeholder: "Paste url…"
+          new_tab: "Open in a new tab"
+          add_link: "Insert a link"
+          add_video: "Embed a video"
+          add_image: "Insert an image"
+      #modal dialog
+      fab_modal:
+        close: "Close"
       fab_socials:
         follow_us: "Follow us"
         networks_update_success: "Social networks update successful"
         networks_update_error: "Problem trying to update social networks"
         url_placeholder: "Paste url…"
+        save: "Save"
+        website_invalid: "The website address is not a valid URL"
+      edit_socials:
+        url_placeholder: "Paste url…"
+        website_invalid: "The website address is not a valid URL"
       #user edition form
       user_profile_form:
         add_an_avatar: "Add an avatar"
@@ -156,12 +167,12 @@
         start_typing: "Begynn å skrive..."
         member_not_validated: "Attention:</br> The member has not validated."
       #payment modal
-      payment:
-        online_payment: "Online betaling"
-        i_have_read_and_accept_: "Jeg har lest og aksepterer "
-        _the_general_terms_and_conditions: "generelle vilkår og betingelser."
-        payment_schedule_html: "<p>Du er i ferd med å abonnere på en betalingsplan på {DEADLINES} måneder.</p><p>Ved å betale denne regningen godtar du å sende instrukser til den finansielle institusjonen som utsteder kortet, for å ta betalinger fra din kortkonto, så lenge det varer i dette abonnementet. Dette antyder at kortdataene dine lagres av {GATEWAY} og en rekke betalinger vil bli satt i gang på dine vegne, i samsvar med betalingsplanen som tidligere er vist</p>"
-        confirm_payment_of_: "Betal: {AMOUNT}"
+      abstract_payment_modal:
+        online_payment: "Online payment"
+        i_have_read_and_accept_: "I have read, and accept "
+        _the_general_terms_and_conditions: "the general terms and conditions."
+        payment_schedule_html: "<p>You're about to subscribe to a payment schedule of {DEADLINES} months.</p><p>By paying this bill, you agree to send instructions to the financial institution that issue your card, to take payments from your card account, for the whole duration of this subscription. This imply that your card data are saved by {GATEWAY} and a series of payments will be initiated on your behalf, conforming to the payment schedule previously shown.</p>"
+        confirm_payment_of_: "Pay: {AMOUNT}"
         validate: "Validate"
       #dialog of on site payment for reservations
       valid_reservation_modal:
@@ -174,6 +185,9 @@
         method_check: "Med sjekk"
         card_collection_info: "Ved å validere vil du bli bedt om å oppgi kortnummeret til medlemmet. Dette kortet vil automatisk bli belastet på fristen."
         check_collection_info: "Ved å validere, bekrefter du at du har {DEADLINES} sjekker slik at du kan samle inn alle månedlige betalinger."
+      event_themes:
+        title: "Event themes"
+        select_theme: "Pick up a theme…"
       #event edition form
       event:
         title: "Tittel"
@@ -397,6 +411,15 @@
         default_places: "Standard maksimalt antall billetter"
         default_places_is_required: "Standard maksimalt antall billetter er påkrevd."
         disable_space: "Deaktiver rom/plass"
+      payment_schedule_summary:
+        your_payment_schedule: "Your payment schedule"
+        NUMBER_monthly_payment_of_AMOUNT: "{NUMBER} monthly {NUMBER, plural, =1{payment} other{payments}} of {AMOUNT}"
+        first_debit: "First debit on the day of the order."
+        monthly_payment_NUMBER: "{NUMBER}{NUMBER, plural, =1{st} =2{nd} =3{rd} other{th}} monthly payment: "
+        debit: "Debit on the day of the order."
+        view_full_schedule: "View the complete payment schedule"
+      select_schedule:
+        monthly_payment: "Monthly payment"
       #shopping cart module for reservations
       cart:
         summary: "Sammendrag"
@@ -414,13 +437,6 @@
         cost_of_the_subscription: "Pris, medlemskap/abonnement"
         subscription_price: "Pris, medlemskap/abonnement"
         you_ve_just_selected_a_subscription_html: "Du har nettopp valgt et <strong>abonnement</strong>:"
-        monthly_payment: "Månedlig betaling"
-        your_payment_schedule: "Din betalingsplan"
-        monthly_payment_NUMBER: "Månedlig betaling nr. {NUMBER}: "
-        NUMBER_monthly_payment_of_AMOUNT: "{NUMBER} månedlig {NUMBER, plural, one {} =1{betaling} other{betalinger}} på {AMOUNT}"
-        first_debit: "Første debet på bestillingsdato."
-        debit: "Første trekk på bestillingsdato."
-        view_full_schedule: "View the complete payment schedule"
         confirm_and_pay: "Bekreft og betal"
         you_have_settled_the_following_TYPE: "Du har betalt for følgende {TYPE, select, Machine{maskinplasser} Training{opplæring/kurs} other{elementer}}:"
         you_have_settled_a_: "Du har gjort opp en"
@@ -475,31 +491,34 @@
         what_to_do: "Hva ønsker du å gjøre?"
         tour: "Start omvisningen"
         guide: "Les brukermanualen"
+      stripe_confirm_modal:
+        resolve_action: "Resolve the action"
+        ok_button: "OK"
       #2nd factor authentication for card payments
       stripe_confirm:
         pending: "Venter på handling..."
         success: "Takk, ditt betalingskortoppsett er fullført. Betalingen vil snart bli gjennomført."
       #the summary table of all payment schedules
-      schedules_table:
-        schedule_num: "Tidsplan"
-        date: "Dato"
-        price: "Pris"
-        customer: "Kunde"
-        deadline: "Tidsfrist"
-        amount: "Beløp"
-        state: "Status"
-        download: "Last ned"
-        state_new: "Ikke forfalt ennå"
+      payment_schedules_table:
+        schedule_num: "Schedule #"
+        date: "Date"
+        price: "Price"
+        customer: "Customer"
+        deadline: "Deadline"
+        amount: "Amount"
+        state: "State"
+        download: "Download"
+        state_new: "Not yet due"
         state_pending_check: "Waiting for the cashing of the check"
         state_pending_transfer: "Waiting for the tranfer confirmation"
-        state_requires_payment_method: "Kredittkortet må oppdateres"
-        state_requires_action: "Handling kreves"
-        state_paid: "Betalt"
-        state_error: "Feil"
+        state_requires_payment_method: "The credit card must be updated"
+        state_requires_action: "Action required"
+        state_paid: "Paid"
+        state_error: "Error"
         state_gateway_canceled: "Canceled by the payment gateway"
-        state_canceled: "Avbrutt"
-        method_card: "med kort"
-        method_check: "med sjekk"
+        state_canceled: "Canceled"
+        method_card: "by card"
+        method_check: "by check"
         method_transfer: "by transfer"
       payment_schedule_item_actions:
         download: "Download"
@@ -516,9 +535,9 @@
         confirm_bank_transfer: "Confirm the bank transfer"
         confirm_bank_transfer_body: "You must confirm the receipt of {AMOUNT} for the deadline of {DATE}. By confirming the bank transfer, an invoice will be generated for this due date."
         confirm_cancel_subscription: "You're about to cancel this payment schedule and the related subscription. Are you sure?"
-      payment_modal:
-        online_payment_disabled: "Elektronisk betaling er ikke tilgjengelig. Kontakt ledelsen."
-        unexpected_error: "Det oppstod en feil. Vennligst rapporter til Fab-Manager-teamet."
+      card_payment_modal:
+        online_payment_disabled: "Online payment is not available. Please contact the FabLab's reception directly."
+        unexpected_error: "An error occurred. Please report this issue to the Fab-Manager's team."
       update_card_modal:
         unexpected_error: "Det oppstod en feil. Rapporter dette problemet til Fab-Manager-teamet."
       stripe_card_update_modal:
