@@ -466,7 +466,7 @@ fr:
           error: "Impossible de mettre à jour la catégorie : "
       delete_plan_category:
         title: "Supprimer une catégorie"
-        confirm: "Êtes-vous sûr de vouloir supprimer cette catégorie ? Si vous le faites, les formules associés à cette catégorie ne seront plus triés."
+        confirm: "Êtes-vous sûr de vouloir supprimer cette catégorie ? Si vous le faites, les formules associées à cette catégorie ne seront plus triés."
         cta: "Supprimer"
         success: "La catégorie a bien été supprimée"
         error: "Impossible de supprimer la catégorie : "
