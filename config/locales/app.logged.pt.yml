@@ -137,7 +137,7 @@ pt:
           unable_to_upload: "Unable to send the supporting documents: "
           supporting_documents_files: "Supporting documents"
           my_documents_info: "Due to your group declaration, some supporting documents are required. Once submitted, these documents will be verified by the administrator."
-          upload_limits_alert_html: "Warning!</br>You can submit your documents as PDF or images (JPEG, PNG). Maximum allowed size: {SIZE} Mb"
+          upload_limits_alert_html: "Warning!<br>You can submit your documents as PDF or images (JPEG, PNG). Maximum allowed size: {SIZE} Mb"
           file_size_error: "The file size exceeds the limit ({SIZE} MB)"
           save: "Save"
           browse: "Browse"
