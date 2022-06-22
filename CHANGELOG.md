@@ -11,6 +11,9 @@
 - During the setup, autoconfigure the main domain
 - During the setup, ask to set ALLOW_INSECURE_HTTP if DEFAULT_PROTOCOL was set to http
 - Override angular currency filter, use Intl.NumberFormat to format amount
+- Added some eslint rules to validate react components code style
+- Fixed all react components code according to eslint rules
+- Renamed proof-of-identity to supporting-documents in react components and in end-user strings
 - Fix a bug: the birthdate was not marked as required, in the profile edition form
 - Fix a bug: when the phone or the address were required, they were not marked as this, in the profile edition form
 - Fix a bug: the birthday was not shown in user edition form
