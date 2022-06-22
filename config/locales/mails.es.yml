@@ -369,7 +369,7 @@ es:
         user_proof_of_identity_files_refusal: "Your supporting documents were refused:"
         action: "Please re-upload some new supporting documents."
     notify_admin_user_proof_of_identity_refusal:
-      subject: "A member'ssupporting documents were refused"
+      subject: "A member's supporting documents were refused"
       body:
         user_proof_of_identity_files_refusal: "Member %{NAME}'s supporting documents were rejected by %{OPERATOR}:"
     shared:
