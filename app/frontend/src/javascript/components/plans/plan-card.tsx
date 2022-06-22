@@ -22,7 +22,7 @@ interface PlanCardProps {
 /**
  * This component is a "card" (visually), publicly presenting the details of a plan and allowing a user to subscribe.
  */
-const PlanCardComponent: React.FC<PlanCardProps> = ({ plan, userId, subscribedPlanId, operator, onSelectPlan, isSelected, onLoginRequested, canSelectPlan }) => {
+const PlanCard: React.FC<PlanCardProps> = ({ plan, userId, subscribedPlanId, operator, onSelectPlan, isSelected, onLoginRequested, canSelectPlan }) => {
   const { t } = useTranslation('public');
   /**
    * Return the formatted localized amount of the given plan (eg. 20.5 => "20,50 €")
@@ -105,7 +105,7 @@ const PlanCardComponent: React.FC<PlanCardProps> = ({ plan, userId, subscribedPl
       <div className="content">
         {canBeScheduled() && <div className="wrap-monthly">
           <div className="price">
-            <div className="amount">{t('app.public.plans.AMOUNT_per_month', { AMOUNT: monthlyAmount() })}</div>
+            <div className="amount">{t('app.public.plan_card.AMOUNT_per_month', { AMOUNT: monthlyAmount() })}</div>
             <span className="period">{duration()}</span>
           </div>
         </div>}
@@ -118,25 +118,25 @@ const PlanCardComponent: React.FC<PlanCardProps> = ({ plan, userId, subscribedPl
       </div>
       <div className="card-footer">
         {hasDescription() && <div className="plan-description" dangerouslySetInnerHTML={{ __html: plan.description }}/>}
-        {hasAttachment() && <a className="info-link" href={ plan.plan_file_url } target="_blank" rel="noreferrer">{ t('app.public.plans.more_information') }</a>}
+        {hasAttachment() && <a className="info-link" href={ plan.plan_file_url } target="_blank" rel="noreferrer">{ t('app.public.plan_card.more_information') }</a>}
         {mustLogin() && <div className="cta-button">
-          <button className="subscribe-button" onClick={handleLoginRequest}>{t('app.public.plans.i_subscribe_online')}</button>
+          <button className="subscribe-button" onClick={handleLoginRequest}>{t('app.public.plan_card.i_subscribe_online')}</button>
         </div>}
         {canSubscribeForMe() && <div className="cta-button">
           {!hasSubscribedToThisPlan() && <button className={`subscribe-button ${isSelected ? 'selected-card' : ''}`}
             onClick={handleSelectPlan}
             disabled={!_.isNil(subscribedPlanId)}>
-            {t('app.public.plans.i_choose_that_plan')}
+            {t('app.public.plan_card.i_choose_that_plan')}
           </button>}
           {hasSubscribedToThisPlan() && <button className="subscribe-button selected-card" disabled>
-            { t('app.public.plans.i_already_subscribed') }
+            { t('app.public.plan_card.i_already_subscribed') }
           </button>}
         </div>}
         {canSubscribeForOther() && <div className="cta-button">
           <button className={`subscribe-button ${isSelected ? 'selected-card' : ''}`}
             onClick={handleSelectPlan}
             disabled={_.isNil(userId)}>
-            <span>{ t('app.public.plans.i_choose_that_plan') }</span>
+            <span>{ t('app.public.plan_card.i_choose_that_plan') }</span>
           </button>
         </div>}
       </div>
@@ -144,10 +144,12 @@ const PlanCardComponent: React.FC<PlanCardProps> = ({ plan, userId, subscribedPl
   );
 };
 
-export const PlanCard: React.FC<PlanCardProps> = ({ plan, userId, subscribedPlanId, operator, onSelectPlan, isSelected, onLoginRequested, canSelectPlan }) => {
+const PlanCardWrapper: React.FC<PlanCardProps> = ({ plan, userId, subscribedPlanId, operator, onSelectPlan, isSelected, onLoginRequested, canSelectPlan }) => {
   return (
     <Loader>
-      <PlanCardComponent plan={plan} userId={userId} subscribedPlanId={subscribedPlanId} operator={operator} isSelected={isSelected} onSelectPlan={onSelectPlan} onLoginRequested={onLoginRequested} canSelectPlan={canSelectPlan}/>
+      <PlanCard plan={plan} userId={userId} subscribedPlanId={subscribedPlanId} operator={operator} isSelected={isSelected} onSelectPlan={onSelectPlan} onLoginRequested={onLoginRequested} canSelectPlan={canSelectPlan}/>
     </Loader>
   );
 };
+
+export { PlanCardWrapper as PlanCard };

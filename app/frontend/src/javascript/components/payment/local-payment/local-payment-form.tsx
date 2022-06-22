@@ -54,7 +54,7 @@ export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSucce
   const methodToOption = (value: scheduleMethod): selectOption => {
     if (!value) return { value, label: '' };
 
-    return { value, label: t(`app.admin.local_payment.method_${value}`) };
+    return { value, label: t(`app.admin.local_payment_form.method_${value}`) };
   };
 
   /**
@@ -77,7 +77,7 @@ export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSucce
       try {
         const online = await SettingAPI.get(SettingName.OnlinePaymentModule);
         if (online.value !== 'true') {
-          return onError(t('app.admin.local_payment.online_payment_disabled'));
+          return onError(t('app.admin.local_payment_form.online_payment_disabled'));
         }
         return toggleOnlinePaymentModal();
       } catch (e) {
@@ -118,21 +118,21 @@ export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSucce
   };
 
   return (
-    <form onSubmit={handleSubmit} id={formId} className={className || ''}>
-      {!paymentSchedule && !isFreeOfCharge() && <p className="payment">{t('app.admin.local_payment.about_to_cash')}</p>}
-      {!paymentSchedule && isFreeOfCharge() && <p className="payment">{t('app.admin.local_payment.about_to_confirm', { ITEM: mainItemType() })}</p>}
+    <form onSubmit={handleSubmit} id={formId} className={`local-payment-form ${className || ''}`}>
+      {!paymentSchedule && !isFreeOfCharge() && <p className="payment">{t('app.admin.local_payment_form.about_to_cash')}</p>}
+      {!paymentSchedule && isFreeOfCharge() && <p className="payment">{t('app.admin.local_payment_form.about_to_confirm', { ITEM: mainItemType() })}</p>}
       {paymentSchedule && <div className="payment-schedule">
         <div className="schedule-method">
-          <label htmlFor="payment-method">{t('app.admin.local_payment.payment_method')}</label>
-          <Select placeholder={ t('app.admin.local_payment.payment_method') }
+          <label htmlFor="payment-method">{t('app.admin.local_payment_form.payment_method')}</label>
+          <Select placeholder={ t('app.admin.local_payment_form.payment_method') }
             id="payment-method"
             className="method-select"
             onChange={handleUpdateMethod}
             options={buildMethodOptions()}
             value={methodToOption(method)} />
-          {method === 'card' && <p>{t('app.admin.local_payment.card_collection_info')}</p>}
-          {method === 'check' && <p>{t('app.admin.local_payment.check_collection_info', { DEADLINES: paymentSchedule.items.length })}</p>}
-          {method === 'transfer' && <HtmlTranslate trKey="app.admin.local_payment.transfer_collection_info" options={{ DEADLINES: paymentSchedule.items.length }} />}
+          {method === 'card' && <p>{t('app.admin.local_payment_form.card_collection_info')}</p>}
+          {method === 'check' && <p>{t('app.admin.local_payment_form.check_collection_info', { DEADLINES: paymentSchedule.items.length })}</p>}
+          {method === 'transfer' && <HtmlTranslate trKey="app.admin.local_payment_form.transfer_collection_info" options={{ DEADLINES: paymentSchedule.items.length }} />}
         </div>
         <div className="full-schedule">
           <ul>

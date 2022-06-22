@@ -20,6 +20,9 @@ interface OpenidConnectFormProps<TFieldValues, TContext extends object> {
   setValue: UseFormSetValue<TFieldValues>,
 }
 
+/**
+ * Partial form to fill the OpenID Connect (OIDC) settings for a new/existing authentication provider.
+ */
 export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext extends object>({ register, control, currentFormValues, formState, setValue }: OpenidConnectFormProps<TFieldValues, TContext>) => {
   const { t } = useTranslation('admin');
 

@@ -15,7 +15,7 @@ interface StripeKeysFormProps {
 /**
  * Form to set the stripe's public and private keys
  */
-const StripeKeysFormComponent: React.FC<StripeKeysFormProps> = ({ onValidKeys, onInvalidKeys }) => {
+const StripeKeysForm: React.FC<StripeKeysFormProps> = ({ onValidKeys, onInvalidKeys }) => {
   const { t } = useTranslation('admin');
 
   // used to prevent promises from resolving if the component was unmounted
@@ -123,11 +123,11 @@ const StripeKeysFormComponent: React.FC<StripeKeysFormProps> = ({ onValidKeys, o
   return (
     <div className="stripe-keys-form">
       <div className="stripe-keys-info">
-        <HtmlTranslate trKey="app.admin.invoices.payment.stripe_keys_info_html" />
+        <HtmlTranslate trKey="app.admin.invoices.stripe_keys_form.stripe_keys_info_html" />
       </div>
       <form name="stripeKeysForm">
         <div className="stripe-public-input">
-          <label htmlFor="stripe_public_key">{ t('app.admin.invoices.payment.public_key') } *</label>
+          <label htmlFor="stripe_public_key">{ t('app.admin.invoices.stripe_keys_form.public_key') } *</label>
           <FabInput id="stripe_public_key"
             icon={<i className="fa fa-info" />}
             defaultValue={publicKey}
@@ -138,7 +138,7 @@ const StripeKeysFormComponent: React.FC<StripeKeysFormProps> = ({ onValidKeys, o
             required />
         </div>
         <div className="stripe-secret-input">
-          <label htmlFor="stripe_secret_key">{ t('app.admin.invoices.payment.secret_key') } *</label>
+          <label htmlFor="stripe_secret_key">{ t('app.admin.invoices.stripe_keys_form.secret_key') } *</label>
           <FabInput id="stripe_secret_key"
             icon={<i className="fa fa-key" />}
             defaultValue={secretKey}
@@ -153,10 +153,12 @@ const StripeKeysFormComponent: React.FC<StripeKeysFormProps> = ({ onValidKeys, o
   );
 };
 
-export const StripeKeysForm: React.FC<StripeKeysFormProps> = ({ onValidKeys, onInvalidKeys }) => {
+const StripeKeysFormWrapper: React.FC<StripeKeysFormProps> = (props) => {
   return (
     <Loader>
-      <StripeKeysFormComponent onValidKeys={onValidKeys} onInvalidKeys={onInvalidKeys} />
+      <StripeKeysForm {...props} />
     </Loader>
   );
 };
+
+export { StripeKeysFormWrapper as StripeKeysForm };

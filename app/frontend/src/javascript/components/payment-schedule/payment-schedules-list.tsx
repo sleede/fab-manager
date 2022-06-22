@@ -25,7 +25,7 @@ const PAGE_SIZE = 20;
 /**
  * This component shows a list of all payment schedules with their associated deadlines (aka. PaymentScheduleItem) and invoices
  */
-const PaymentSchedulesList: React.FC<PaymentSchedulesListProps> = ({ currentUser, onError, onCardUpdateSuccess }) => {
+export const PaymentSchedulesList: React.FC<PaymentSchedulesListProps> = ({ currentUser, onError, onCardUpdateSuccess }) => {
   const { t } = useTranslation('admin');
 
   // list of displayed payment schedules
@@ -93,19 +93,19 @@ const PaymentSchedulesList: React.FC<PaymentSchedulesListProps> = ({ currentUser
    * after a successful card update, provide a success message to the operator
    */
   const handleCardUpdateSuccess = (): void => {
-    onCardUpdateSuccess(t('app.admin.invoices.payment_schedules.card_updated_success'));
+    onCardUpdateSuccess(t('app.admin.invoices.payment_schedules_list.card_updated_success'));
   };
 
   return (
     <div className="payment-schedules-list">
       <h3>
         <i className="fas fa-filter" />
-        {t('app.admin.invoices.payment_schedules.filter_schedules')}
+        {t('app.admin.invoices.payment_schedules_list.filter_schedules')}
       </h3>
       <div className="schedules-filters">
         <DocumentFilters onFilterChange={handleFiltersChange} />
       </div>
-      {!hasSchedules() && <div>{t('app.admin.invoices.payment_schedules.no_payment_schedules')}</div>}
+      {!hasSchedules() && <div>{t('app.admin.invoices.payment_schedules_list.no_payment_schedules')}</div>}
       {hasSchedules() && <div className="schedules-list">
         <PaymentSchedulesTable paymentSchedules={paymentSchedules}
           showCustomer={true}
@@ -113,7 +113,7 @@ const PaymentSchedulesList: React.FC<PaymentSchedulesListProps> = ({ currentUser
           operator={currentUser}
           onError={onError}
           onCardUpdateSuccess={handleCardUpdateSuccess} />
-        {hasMoreSchedules() && <FabButton className="load-more" onClick={handleLoadMore}>{t('app.admin.invoices.payment_schedules.load_more')}</FabButton>}
+        {hasMoreSchedules() && <FabButton className="load-more" onClick={handleLoadMore}>{t('app.admin.invoices.payment_schedules_list.load_more')}</FabButton>}
       </div>}
     </div>
   );

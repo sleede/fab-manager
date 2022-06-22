@@ -75,7 +75,9 @@ export const CheckListSetting: React.FC<CheckListSettingProps> = ({ name, label,
    */
   const handleSave = () => {
     SettingAPI.update(name, value)
-      .then(() => onSuccess(t('app.admin.check_list_setting.customization_of_SETTING_successfully_saved', { SETTING: t(`app.admin.settings.${name}`) })))
+      .then(() => onSuccess(t('app.admin.check_list_setting.customization_of_SETTING_successfully_saved', {
+        SETTING: t(`app.admin.settings.${name}`) // eslint-disable-line fabmanager/scoped-translation
+      })))
       .catch(err => onError(err));
   };
 
@@ -98,7 +100,7 @@ export const CheckListSetting: React.FC<CheckListSettingProps> = ({ name, label,
   );
 };
 
-export const CheckListSettingWrapper: React.FC<CheckListSettingProps> = ({ availableOptions, onSuccess, onError, label, className, name, hideSave, defaultValue, onChange }) => {
+const CheckListSettingWrapper: React.FC<CheckListSettingProps> = ({ availableOptions, onSuccess, onError, label, className, name, hideSave, defaultValue, onChange }) => {
   return (
     <Loader>
       <CheckListSetting availableOptions={availableOptions} label={label} name={name} onError={onError} onSuccess={onSuccess} className={className} hideSave={hideSave} defaultValue={defaultValue} onChange={onChange} />

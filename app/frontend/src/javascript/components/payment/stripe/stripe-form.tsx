@@ -66,7 +66,7 @@ export const StripeForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, on
       if (response.error.statusText) {
         onError(response.error.statusText);
       } else {
-        onError(`${t('app.shared.messages.payment_card_error')} ${response.error}`);
+        onError(`${t('app.shared.stripe_form.payment_card_error')} ${response.error}`);
       }
     } else if ('requires_action' in response) {
       if (response.type === 'payment') {
@@ -125,7 +125,7 @@ export const StripeForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, on
   };
 
   return (
-    <form onSubmit={handleSubmit} id={formId} className={className || ''}>
+    <form onSubmit={handleSubmit} id={formId} className={`stripe-form ${className || ''}`}>
       <CardElement options={cardOptions} />
       {children}
     </form>

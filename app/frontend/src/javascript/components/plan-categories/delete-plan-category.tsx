@@ -16,7 +16,7 @@ interface DeletePlanCategoryProps {
  * This component shows a button.
  * When clicked, we show a modal dialog to ask the user for confirmation about the deletion of the provided plan-category.
  */
-const DeletePlanCategoryComponent: React.FC<DeletePlanCategoryProps> = ({ onSuccess, onError, category }) => {
+const DeletePlanCategory: React.FC<DeletePlanCategoryProps> = ({ onSuccess, onError, category }) => {
   const { t } = useTranslation('admin');
 
   const [deletionModal, setDeletionModal] = useState<boolean>(false);
@@ -34,9 +34,9 @@ const DeletePlanCategoryComponent: React.FC<DeletePlanCategoryProps> = ({ onSucc
    */
   const onDeleteConfirmed = (): void => {
     PlanCategoryAPI.destroy(category.id).then(() => {
-      onSuccess(t('app.admin.manage_plan_category.delete_category.success'));
+      onSuccess(t('app.admin.delete_plan_category.success'));
     }).catch((error) => {
-      onError(t('app.admin.manage_plan_category.delete_category.error') + error);
+      onError(t('app.admin.delete_plan_category.error') + error);
     });
     toggleDeletionModal();
   };
@@ -44,22 +44,24 @@ const DeletePlanCategoryComponent: React.FC<DeletePlanCategoryProps> = ({ onSucc
   return (
     <div className="delete-plan-category">
       <FabButton type='button' className="delete-button" icon={<i className="fa fa-trash" />} onClick={toggleDeletionModal} />
-      <FabModal title={t('app.admin.manage_plan_category.delete_category.title')}
+      <FabModal title={t('app.admin.delete_plan_category.title')}
         isOpen={deletionModal}
         toggleModal={toggleDeletionModal}
         closeButton={true}
-        confirmButton={t('app.admin.manage_plan_category.delete_category.cta')}
+        confirmButton={t('app.admin.delete_plan_category.cta')}
         onConfirm={onDeleteConfirmed}>
-        <span>{t('app.admin.manage_plan_category.delete_category.confirm')}</span>
+        <span>{t('app.admin.delete_plan_category.confirm')}</span>
       </FabModal>
     </div>
   );
 };
 
-export const DeletePlanCategory: React.FC<DeletePlanCategoryProps> = ({ onSuccess, onError, category }) => {
+const DeletePlanCategoryWrapper: React.FC<DeletePlanCategoryProps> = (props) => {
   return (
     <Loader>
-      <DeletePlanCategoryComponent onSuccess={onSuccess} onError={onError} category={category} />
+      <DeletePlanCategory {...props} />
     </Loader>
   );
 };
+
+export { DeletePlanCategoryWrapper as DeletePlanCategory };

@@ -929,9 +929,6 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
     const initialize = function () {
       CSRF.setMetaTags();
 
-      // init the birthdate to JS object
-      $scope.user.statistic_profile_attributes.birthday = moment($scope.user.statistic_profile_attributes.birthday).toDate();
-
       // the user subscription
       if (($scope.user.subscribed_plan != null) && ($scope.user.subscription != null)) {
         $scope.subscription = $scope.user.subscription;

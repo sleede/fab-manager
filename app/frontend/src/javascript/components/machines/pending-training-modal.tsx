@@ -3,11 +3,12 @@ import { FabModal } from '../base/fab-modal';
 import { useTranslation } from 'react-i18next';
 import { HtmlTranslate } from '../base/html-translate';
 import FormatLib from '../../lib/format';
+import { TDateISO } from '../../typings/date-iso';
 
 interface PendingTrainingModalProps {
   isOpen: boolean,
   toggleModal: () => void,
-  nextReservation: Date,
+  nextReservation: TDateISO,
 }
 
 /**
@@ -20,7 +21,7 @@ export const PendingTrainingModal: React.FC<PendingTrainingModalProps> = ({ isOp
   /**
    * Return the formatted localized date for the given date
    */
-  const formatDateTime = (date: Date): string => {
+  const formatDateTime = (date: TDateISO): string => {
     return t('app.logged.pending_training_modal.DATE_TIME', { DATE: FormatLib.date(date), TIME: FormatLib.time(date) });
   };
 

@@ -19,6 +19,9 @@ interface UpdatePaymentMeanModalProps {
  */
 type selectOption = { value: PaymentMethod, label: string };
 
+/**
+ * Component to allow the member to change his payment mean for the given payment schedule (e.g. from card to transfer)
+ */
 export const UpdatePaymentMeanModal: React.FC<UpdatePaymentMeanModalProps> = ({ isOpen, toggleModal, onError, afterSuccess, paymentSchedule }) => {
   const { t } = useTranslation('admin');
 

@@ -2,7 +2,7 @@ import React, { ReactElement, useEffect, useState } from 'react';
 import { react2angular } from 'react2angular';
 import { Loader } from '../base/loader';
 import { StripeModal } from './stripe/stripe-modal';
-import { PayZenModal } from './payzen/payzen-modal';
+import { PayzenModal } from './payzen/payzen-modal';
 import { IApplication } from '../../models/application';
 import { ShoppingCart } from '../../models/payment';
 import { User } from '../../models/user';
@@ -29,7 +29,7 @@ interface CardPaymentModalProps {
  * This component open a modal dialog for the configured payment gateway, allowing the user to input his card data
  * to process an online payment.
  */
-const CardPaymentModalComponent: React.FC<CardPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, currentUser, schedule, cart, customer }) => {
+const CardPaymentModal: React.FC<CardPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, currentUser, schedule, cart, customer }) => {
   const { t } = useTranslation('shared');
 
   const [gateway, setGateway] = useState<Setting>(null);
@@ -58,7 +58,7 @@ const CardPaymentModalComponent: React.FC<CardPaymentModalProps> = ({ isOpen, to
    * Render the PayZen payment modal
    */
   const renderPayZenModal = (): ReactElement => {
-    return <PayZenModal isOpen={isOpen}
+    return <PayzenModal isOpen={isOpen}
       toggleModal={toggleModal}
       afterSuccess={afterSuccess}
       onError={onError}
@@ -80,21 +80,23 @@ const CardPaymentModalComponent: React.FC<CardPaymentModalProps> = ({ isOpen, to
       return renderPayZenModal();
     case null:
     case undefined:
-      onError(t('app.shared.payment_modal.online_payment_disabled'));
+      onError(t('app.shared.card_payment_modal.online_payment_disabled'));
       return <div />;
     default:
-      onError(t('app.shared.payment_modal.unexpected_error'));
+      onError(t('app.shared.card_payment_modal.unexpected_error'));
       console.error(`[PaymentModal] Unimplemented gateway: ${gateway.value}`);
       return <div />;
   }
 };
 
-export const CardPaymentModal: React.FC<CardPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, currentUser, schedule, cart, customer }) => {
+const CardPaymentModalWrapper: React.FC<CardPaymentModalProps> = (props) => {
   return (
     <Loader>
-      <CardPaymentModalComponent isOpen={isOpen} toggleModal={toggleModal} afterSuccess={afterSuccess} onError={onError} currentUser={currentUser} schedule={schedule} cart={cart} customer={customer} />
+      <CardPaymentModal {...props} />
     </Loader>
   );
 };
 
-Application.Components.component('cardPaymentModal', react2angular(CardPaymentModal, ['isOpen', 'toggleModal', 'afterSuccess', 'onError', 'currentUser', 'schedule', 'cart', 'customer']));
+export { CardPaymentModalWrapper as CardPaymentModal };
+
+Application.Components.component('cardPaymentModal', react2angular(CardPaymentModalWrapper, ['isOpen', 'toggleModal', 'afterSuccess', 'onError', 'currentUser', 'schedule', 'cart', 'customer']));

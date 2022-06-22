@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Select from 'react-select';
 import { react2angular } from 'react2angular';
-import { Loader } from './base/loader';
-import { Event } from '../models/event';
-import { EventTheme } from '../models/event-theme';
-import { IApplication } from '../models/application';
-import EventThemeAPI from '../api/event-theme';
+import { Loader } from '../base/loader';
+import { Event } from '../../models/event';
+import { EventTheme } from '../../models/event-theme';
+import { IApplication } from '../../models/application';
+import EventThemeAPI from '../../api/event-theme';
 
 declare const Application: IApplication;
 
@@ -24,7 +24,7 @@ type selectOption = { value: number, label: string };
 /**
  * This component shows a select input to edit the themes associated with the event
  */
-const EventThemes: React.FC<EventThemesProps> = ({ event, onChange }) => {
+export const EventThemes: React.FC<EventThemesProps> = ({ event, onChange }) => {
   const { t } = useTranslation('shared');
 
   const [themes, setThemes] = useState<Array<EventTheme>>([]);
@@ -77,10 +77,10 @@ const EventThemes: React.FC<EventThemesProps> = ({ event, onChange }) => {
   return (
     <div className="event-themes">
       {hasThemes() && <div className="event-themes--panel">
-        <h3>{ t('app.shared.event.event_themes') }</h3>
+        <h3>{ t('app.shared.event_themes.title') }</h3>
         <div className="content">
           <Select defaultValue={defaultValues()}
-            placeholder={t('app.shared.event.select_theme')}
+            placeholder={t('app.shared.event_themes.select_theme')}
             onChange={handleChange}
             options={buildOptions()}
             isMulti />

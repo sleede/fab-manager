@@ -1,0 +1,123 @@
+.supporting-documents-files {
+
+  .info-area {
+    color: #000;
+    font-weight: 600;
+  }
+
+  .files-list {
+    font-size: rem-calc(14);
+    background: unset;
+  }
+
+  .file-item {
+    &.has-error {
+      color: var(--error);
+    }
+
+    label {
+      margin-right: 15px;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 5px;
+      max-width: 100%;
+    }
+
+    .fileinput {
+      display: table;
+      border-collapse: separate;
+      position: relative;
+      margin-bottom: 9px;
+
+      .filename-container {
+        align-items: center;
+        display: inline-flex;
+        float: left;
+        margin-bottom: 0;
+        position: relative;
+        width: 100%;
+        z-index: 2;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #c4c4c4;
+        border-radius: 4px;
+        box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+        height: 38px;
+        padding: 6px 12px;
+        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        color: #555;
+        font-size: 16px;
+        line-height: 1.5;
+
+        .fileinput-filename {
+          vertical-align: bottom;
+          display: inline-block;
+          overflow: hidden;
+          margin-left: 10px;
+        }
+
+        .file-download {
+          position: absolute;
+          right: 10px;
+
+          i {
+            color: black;
+          }
+        }
+      }
+      .fileinput-button {
+        z-index: 1;
+        border: 1px solid #c4c4c4;
+        border-left: 0;
+        border-radius: 0 4px 4px 0;
+        position: relative;
+        vertical-align: middle;
+        background-color: #eee;
+        color: #555;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1;
+        padding: 6px 12px;
+        text-align: center;
+        white-space: nowrap;
+        width: 1%;
+        display: table-cell;
+        background-image: none;
+        touch-action: manipulation;
+        overflow: hidden;
+        cursor: pointer;
+        border-collapse: separate;
+        border-spacing: 0;
+
+        input[type=file] {
+          display: block;
+          cursor: pointer;
+          direction: ltr;
+          filter: alpha(opacity=0);
+          font-size: 23px;
+          height: 100%;
+          margin: 0;
+          opacity: 0;
+          position: absolute;
+          right: 0;
+          top: 0;
+          width: 100%;
+        }
+      }
+    }
+
+    .errors-area {
+      display: block;
+      margin-bottom: 10px;
+      color: lighten($text-color, 25%);
+    }
+  }
+  .save-btn {
+    background-color: var(--secondary-dark);
+    border-color: var(--secondary-dark);
+    color: var(--secondary-text-color);
+    margin-bottom: 15px;
+    margin-top: 15px;
+    float: right;
+  }
+}

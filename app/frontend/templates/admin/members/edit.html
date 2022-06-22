@@ -53,7 +53,7 @@
                                  on-error="onError"
                                  on-success="onUserSuccess"
                                  show-group-input="true"
-                                 show-tags-input="true" 
+                                 show-tags-input="true"
                                  show-trainings-input="true" />
             </div>
           </section>
@@ -61,7 +61,7 @@
         </uib-tab>
 
         <uib-tab heading="{{ 'app.admin.members_edit.proof_of_identity_files' | translate }}" ng-show="hasProofOfIdentityTypes">
-          <proof-of-identity-validation
+          <supporting-documents-validation
             operator="currentUser"
             member="user"
             on-error="onError"

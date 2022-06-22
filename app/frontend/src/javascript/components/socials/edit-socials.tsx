@@ -16,6 +16,9 @@ interface EditSocialsProps<TFieldValues> {
   disabled: boolean|((id: string) => boolean),
 }
 
+/**
+ * Allow a user to edit its personnal social networks
+ */
 export const EditSocials = <TFieldValues extends FieldValues>({ register, setValue, networks, formState, disabled }: EditSocialsProps<TFieldValues>) => {
   const { t } = useTranslation('shared');
   // regular expression to validate the the input fields
@@ -23,10 +26,17 @@ export const EditSocials = <TFieldValues extends FieldValues>({ register, setVal
 
   const initSelectedNetworks = networks.filter(el => !['', null, undefined].includes(el.url));
   const [selectedNetworks, setSelectedNetworks] = useState(initSelectedNetworks);
+
+  /**
+   * Callback triggered when the user adds a network, from the list of available networks, to the editable networks.
+   */
   const selectNetwork = (network) => {
     setSelectedNetworks([...selectedNetworks, network]);
   };
 
+  /**
+   * Return a derivated state of the selected networks list, depending on the given action.
+   */
   const reducer = (state, action) => {
     switch (action.type) {
       case 'delete':
@@ -61,14 +71,14 @@ export const EditSocials = <TFieldValues extends FieldValues>({ register, setVal
                      rules= {{
                        pattern: {
                          value: urlRegex,
-                         message: t('app.shared.user_profile_form.website_invalid')
+                         message: t('app.shared.edit_socials.website_invalid')
                        }
                      }}
                      formState={formState}
                      defaultValue={network.url}
                      label={network.name}
                      disabled={disabled}
-                     placeholder={t('app.shared.text_editor.url_placeholder')}
+                     placeholder={t('app.shared.edit_socials.url_placeholder')}
                      icon={<img src={`${Icons}#${network.name}`}></img>}
                      addOn={<Trash size={16} />}
                      addOnAction={() => dispatch({ type: 'delete', payload: { network, field: `profile_attributes.${network.name}` } })} />

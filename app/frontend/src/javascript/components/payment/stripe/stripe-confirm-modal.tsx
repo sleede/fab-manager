@@ -43,11 +43,11 @@ export const StripeConfirmModal: React.FC<StripeConfirmModalProps> = ({ isOpen, 
   };
 
   return (
-    <FabModal title={t('app.shared.schedules_table.resolve_action')}
+    <FabModal title={t('app.shared.stripe_confirm_modal.resolve_action')}
       isOpen={isOpen}
       toggleModal={toggleModal}
       onConfirm={onConfirmed}
-      confirmButton={t('app.shared.schedules_table.ok_button')}
+      confirmButton={t('app.shared.stripe_confirm_modal.ok_button')}
       preventConfirm={isPending}>
       {item && <StripeConfirm clientSecret={item.client_secret} onResponse={togglePending} />}
     </FabModal>

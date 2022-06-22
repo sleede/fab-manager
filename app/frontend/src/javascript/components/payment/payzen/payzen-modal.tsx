@@ -10,7 +10,7 @@ import mastercardLogo from '../../../../../images/mastercard.png';
 import visaLogo from '../../../../../images/visa.png';
 import { PayzenForm } from './payzen-form';
 
-interface PayZenModalProps {
+interface PayzenModalProps {
   isOpen: boolean,
   toggleModal: () => void,
   afterSuccess: (result: Invoice|PaymentSchedule) => void,
@@ -28,7 +28,7 @@ interface PayZenModalProps {
  * This component should not be called directly. Prefer using <CardPaymentModal> which can handle the configuration
  *  of a different payment gateway.
  */
-export const PayZenModal: React.FC<PayZenModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, cart, currentUser, schedule, customer }) => {
+export const PayzenModal: React.FC<PayzenModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, cart, currentUser, schedule, customer }) => {
   /**
    * Return the logos, shown in the modal footer.
    */

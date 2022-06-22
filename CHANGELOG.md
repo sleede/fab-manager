@@ -11,6 +11,10 @@
 - During the setup, autoconfigure the main domain
 - During the setup, ask to set ALLOW_INSECURE_HTTP if DEFAULT_PROTOCOL was set to http
 - Override angular currency filter, use Intl.NumberFormat to format amount
+- Fix a bug: the birthdate was not marked as required, in the profile edition form
+- Fix a bug: when the phone or the address were required, they were not marked as this, in the profile edition form
+- Fix a bug: the birthday was not shown in user edition form
+- Fix a bug: canceled event label's translation
 - Fix a bug: unable to set the twitter input empty
 - Fix a bug: unable to edit an event
 - Fix a bug: times are not shown in admin/events monitoring page
@@ -18,7 +22,6 @@
 - Fix a bug: error message during the setup: the input device is not a TTY
 - Fix a bug: when Fab-manager was installed as non-root user, unable to compile the assets during the upgrade
 - [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/set-docker-user.sh | bash`
-- Fix canceled event label's translation
 
 ## v5.4.4 2022 June 8
 

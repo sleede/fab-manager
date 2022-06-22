@@ -7,6 +7,7 @@ import { Loader } from '../base/loader';
 import { IApplication } from '../../models/application';
 import { ProfileCustomField } from '../../models/profile-custom-field';
 import ProfileCustomFieldAPI from '../../api/profile-custom-field';
+import { FabButton } from '../base/fab-button';
 
 declare const Application: IApplication;
 
@@ -18,7 +19,7 @@ interface ProfileCustomFieldsListProps {
 /**
  * This component shows a list of all profile custom fields
  */
-const ProfileCustomFieldsList: React.FC<ProfileCustomFieldsListProps> = ({ onSuccess, onError }) => {
+export const ProfileCustomFieldsList: React.FC<ProfileCustomFieldsListProps> = ({ onSuccess, onError }) => {
   const { t } = useTranslation('admin');
 
   const [profileCustomFields, setProfileCustomFields] = useState<Array<ProfileCustomField>>([]);
@@ -31,6 +32,9 @@ const ProfileCustomFieldsList: React.FC<ProfileCustomFieldsListProps> = ({ onSuc
     });
   }, []);
 
+  /**
+   * Save the new state of the given custom field to the API
+   */
   const saveProfileCustomField = (profileCustomField: ProfileCustomField) => {
     ProfileCustomFieldAPI.update(profileCustomField).then(data => {
       const newFields = profileCustomFields.map(f => {
@@ -43,9 +47,9 @@ const ProfileCustomFieldsList: React.FC<ProfileCustomFieldsListProps> = ({ onSuc
       if (profileCustomFieldToEdit) {
         setProfileCustomFieldToEdit(null);
       }
-      onSuccess(t('app.admin.settings.compte.organization_profile_custom_field_successfully_updated'));
+      onSuccess(t('app.admin.settings.account.profile_custom_fields_list.field_successfully_updated'));
     }).catch(err => {
-      onError(t('app.admin.settings.compte.organization_profile_custom_field_unable_to_update') + err);
+      onError(t('app.admin.settings.account.profile_custom_fields_list.unable_to_update') + err);
     });
   };
 
@@ -63,12 +67,19 @@ const ProfileCustomFieldsList: React.FC<ProfileCustomFieldsListProps> = ({ onSuc
     };
   };
 
+  /**
+   * Callback triggered when the user clicks on the 'edit field' button.
+   * Opens the edition form for the given custom field
+   */
   const editProfileCustomFieldLabel = (profileCustomField: ProfileCustomField) => {
     return () => {
       setProfileCustomFieldToEdit(_.clone(profileCustomField));
     };
   };
 
+  /**
+   * Callback triggered when the input "label" is changed: updates the according state
+   */
   const onChangeProfileCustomFieldLabel = (e: BaseSyntheticEvent) => {
     const { value } = e.target;
     setProfileCustomFieldToEdit({
@@ -77,16 +88,22 @@ const ProfileCustomFieldsList: React.FC<ProfileCustomFieldsListProps> = ({ onSuc
     });
   };
 
+  /**
+   * Save the currently edited custom field
+   */
   const saveProfileCustomFieldLabel = () => {
     saveProfileCustomField(profileCustomFieldToEdit);
   };
 
+  /**
+   * Closes the edition form for the currently edited custom field
+   */
   const cancelEditProfileCustomFieldLabel = () => {
     setProfileCustomFieldToEdit(null);
   };
 
   return (
-    <table className="table profile-custom-fields-list">
+    <table className="profile-custom-fields-list">
       <thead>
         <tr>
           <th style={{ width: '50%' }}></th>
@@ -101,31 +118,44 @@ const ProfileCustomFieldsList: React.FC<ProfileCustomFieldsListProps> = ({ onSuc
               <td>
                 {profileCustomFieldToEdit?.id !== field.id && field.label}
                 {profileCustomFieldToEdit?.id !== field.id && (
-                  <button className="btn btn-default edit-profile-custom-field-label m-r-xs pull-right" onClick={editProfileCustomFieldLabel(field)}>
+                  <FabButton className="edit-field-button" onClick={editProfileCustomFieldLabel(field)}>
                     <i className="fa fa-edit"></i>
-                  </button>
+                  </FabButton>
                 )}
                 {profileCustomFieldToEdit?.id === field.id && (
                   <div>
-                    <input className="profile-custom-field-label-input" style={{ width: '80%', height: '38px' }} type="text" value={profileCustomFieldToEdit.label} onChange={onChangeProfileCustomFieldLabel} />
-                    <span className="buttons pull-right">
-                      <button className="btn btn-success save-profile-custom-field-label m-r-xs" onClick={saveProfileCustomFieldLabel}>
+                    <input className="edit-field-label-input"
+                      type="text" value={profileCustomFieldToEdit.label}
+                      onChange={onChangeProfileCustomFieldLabel} />
+                    <span className="buttons">
+                      <FabButton className="save-field-label" onClick={saveProfileCustomFieldLabel}>
                         <i className="fa fa-check"></i>
-                      </button>
-                      <button className="btn btn-default delete-profile-custom-field-label m-r-xs" onClick={cancelEditProfileCustomFieldLabel}>
+                      </FabButton>
+                      <FabButton className="cancel-field-edition" onClick={cancelEditProfileCustomFieldLabel}>
                         <i className="fa fa-ban"></i>
-                      </button>
+                      </FabButton>
                     </span>
                   </div>
                 )}
               </td>
-              <td>
-                <label htmlFor="profile-custom-field-actived" className="control-label m-r">{t('app.admin.settings.compte.organization_profile_custom_field.actived')}</label>
-                <Switch checked={field.actived} id="profile-custom-field-actived" onChange={handleSwitchChanged(field, 'actived')} className="v-middle"></Switch>
+              <td className="activated">
+                <label htmlFor="profile-custom-field-actived">
+                  {t('app.admin.settings.account.profile_custom_fields_list.actived')}
+                </label>
+                <Switch checked={field.actived}
+                  id="profile-custom-field-actived"
+                  onChange={handleSwitchChanged(field, 'actived')}
+                  className="switch"></Switch>
               </td>
-              <td>
-                <label htmlFor="profile-custom-field-required" className="control-label m-r">{t('app.admin.settings.compte.organization_profile_custom_field.required')}</label>
-                <Switch checked={field.required} disabled={!field.actived} id="profile-custom-field-required" onChange={handleSwitchChanged(field, 'required')} className="v-middle"></Switch>
+              <td className="required">
+                <label htmlFor="profile-custom-field-required">
+                  {t('app.admin.settings.account.profile_custom_fields_list.required')}
+                </label>
+                <Switch checked={field.required}
+                  disabled={!field.actived}
+                  id="profile-custom-field-required"
+                  onChange={handleSwitchChanged(field, 'required')}
+                  className="switch"></Switch>
               </td>
             </tr>
           );

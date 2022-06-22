@@ -35,7 +35,7 @@ interface RenewModalProps {
 /**
  * Modal dialog shown to renew the current subscription of a customer, for free
  */
-const RenewModal: React.FC<RenewModalProps> = ({ isOpen, toggleModal, subscription, customer, operator, onError, onSuccess }) => {
+export const RenewModal: React.FC<RenewModalProps> = ({ isOpen, toggleModal, subscription, customer, operator, onError, onSuccess }) => {
   // we do not render the modal if the subscription was not provided
   if (!subscription) return null;
 
@@ -85,14 +85,14 @@ const RenewModal: React.FC<RenewModalProps> = ({ isOpen, toggleModal, subscripti
    * Return the formatted localized date for the given date
    */
   const formatDateTime = (date: Date|TDateISO): string => {
-    return t('app.admin.free_extend_modal.DATE_TIME', { DATE: FormatLib.date(date), TIME: FormatLib.time(date) });
+    return t('app.admin.renew_modal.DATE_TIME', { DATE: FormatLib.date(date), TIME: FormatLib.time(date) });
   };
 
   /**
    * Callback triggered when the payment of the subscription renewal was successful
    */
   const onPaymentSuccess = (): void => {
-    onSuccess(t('app.admin.renew_subscription_modal.renew_success'), expirationDate);
+    onSuccess(t('app.admin.renew_modal.renew_success'), expirationDate);
     toggleModal();
   };
 
@@ -108,25 +108,25 @@ const RenewModal: React.FC<RenewModalProps> = ({ isOpen, toggleModal, subscripti
       toggleModal={toggleModal}
       width={ModalSize.large}
       className="renew-modal"
-      title={t('app.admin.renew_subscription_modal.renew_subscription')}
-      confirmButton={t('app.admin.renew_subscription_modal.renew')}
+      title={t('app.admin.renew_modal.renew_subscription')}
+      confirmButton={t('app.admin.renew_modal.renew')}
       onConfirm={toggleLocalPaymentModal}
       closeButton>
       <FabAlert level="danger" className="conditions">
-        <p>{t('app.admin.renew_subscription_modal.renew_subscription_info')}</p>
-        <p>{t('app.admin.renew_subscription_modal.credits_will_be_reset')}</p>
+        <p>{t('app.admin.renew_modal.renew_subscription_info')}</p>
+        <p>{t('app.admin.renew_modal.credits_will_be_reset')}</p>
       </FabAlert>
       <div className="form-and-payment">
         <form className="configuration-form">
-          <label htmlFor="current_expiration">{t('app.admin.renew_subscription_modal.current_expiration')}</label>
+          <label htmlFor="current_expiration">{t('app.admin.renew_modal.current_expiration')}</label>
           <FabInput id="current_expiration"
             defaultValue={formatDateTime(subscription.expired_at)}
             readOnly />
-          <label htmlFor="new_start">{t('app.admin.renew_subscription_modal.new_start')}</label>
+          <label htmlFor="new_start">{t('app.admin.renew_modal.new_start')}</label>
           <FabInput id="new_start"
             defaultValue={formatDateTime(subscription.expired_at)}
             readOnly />
-          <label htmlFor="new_expiration">{t('app.admin.renew_subscription_modal.new_expiration_date')}</label>
+          <label htmlFor="new_expiration">{t('app.admin.renew_modal.new_expiration_date')}</label>
           <FabInput id="new_expiration"
             defaultValue={formatDateTime(expirationDate)}
             readOnly/>
@@ -135,7 +135,7 @@ const RenewModal: React.FC<RenewModalProps> = ({ isOpen, toggleModal, subscripti
           {subscription.plan.monthly_payment && <SelectSchedule show selected={scheduleRequired} onChange={setScheduleRequired} />}
           {price?.schedule && <PaymentScheduleSummary schedule={price.schedule as PaymentSchedule} />}
           {price && !price?.schedule && <div className="one-go-payment">
-            <h4>{t('app.admin.renew_subscription_modal.pay_in_one_go')}</h4>
+            <h4>{t('app.admin.renew_modal.pay_in_one_go')}</h4>
             <span>{FormatLib.price(price.price)}</span>
           </div>}
         </div>

@@ -28,6 +28,8 @@ import TagAPI from '../../api/tag';
 import { FormMultiSelect } from '../form/form-multi-select';
 import ProfileCustomFieldAPI from '../../api/profile-custom-field';
 import { ProfileCustomField } from '../../models/profile-custom-field';
+import { SettingName } from '../../models/setting';
+import SettingAPI from '../../api/setting';
 
 declare const Application: IApplication;
 
@@ -68,6 +70,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
   const [groups, setGroups] = useState<selectOption[]>([]);
   const [termsAndConditions, setTermsAndConditions] = useState<CustomAsset>(null);
   const [profileCustomFields, setProfileCustomFields] = useState<ProfileCustomField[]>([]);
+  const [requiredFieldsSettings, setRequiredFieldsSettings] = useState<Map<SettingName, string>>(new Map());
 
   useEffect(() => {
     AuthProviderAPI.active().then(data => {
@@ -94,6 +97,9 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
       });
       setValue('invoicing_profile_attributes.user_profile_custom_fields_attributes', userProfileCustomFields);
     }).catch(error => onError(error));
+    SettingAPI.query([SettingName.PhoneRequired, SettingName.AddressRequired])
+      .then(settings => setRequiredFieldsSettings(settings))
+      .catch(error => onError(error));
   }, []);
 
   /**
@@ -202,6 +208,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
                        register={register}
                        label={t('app.shared.user_profile_form.date_of_birth')}
                        disabled={isDisabled}
+                       rules={{ required: true }}
                        type="date" />
             <FormInput id="profile_attributes.phone"
                        register={register}
@@ -209,7 +216,8 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
                          pattern: {
                            value: phoneRegex,
                            message: t('app.shared.user_profile_form.phone_number_invalid')
-                         }
+                         },
+                         required: requiredFieldsSettings.get(SettingName.PhoneRequired) === 'true'
                        }}
                        disabled={isDisabled}
                        formState={formState}
@@ -222,6 +230,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
             <FormInput id="invoicing_profile_attributes.address_attributes.address"
                        register={register}
                        disabled={isDisabled}
+                       rules={{ required: requiredFieldsSettings.get(SettingName.AddressRequired) === 'true' }}
                        label={t('app.shared.user_profile_form.address')} />
           </div>
         </div>

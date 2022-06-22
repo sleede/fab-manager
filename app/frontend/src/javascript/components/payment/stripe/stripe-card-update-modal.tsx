@@ -16,6 +16,9 @@ interface StripeCardUpdateModalProps {
   operator: User
 }
 
+/**
+ * Modal dialog to allow the member to update his payment card for a payment schedule, when the Stripe gateway is used
+ */
 export const StripeCardUpdateModal: React.FC<StripeCardUpdateModalProps> = ({ isOpen, toggleModal, onSuccess, schedule, operator }) => {
   const { t } = useTranslation('shared');
 
@@ -30,7 +33,7 @@ export const StripeCardUpdateModal: React.FC<StripeCardUpdateModalProps> = ({ is
   const logoFooter = (): ReactNode => {
     return (
       <div className="stripe-modal-icons">
-        <i className="fa fa-lock fa-2x m-r-sm pos-rlt" />
+        <i className="fa fa-lock fa-2x" />
         <img src={stripeLogo} alt="powered by stripe" />
         <img src={mastercardLogo} alt="mastercard" />
         <img src={visaLogo} alt="visa" />
@@ -59,7 +62,7 @@ export const StripeCardUpdateModal: React.FC<StripeCardUpdateModalProps> = ({ is
       toggleModal={toggleModal}
       closeButton={false}
       customFooter={logoFooter()}
-      className="stripe-update-card-modal">
+      className="stripe-card-update-modal">
       {schedule && <StripeCardUpdate onSubmit={handleCardUpdateSubmit}
         onSuccess={onSuccess}
         onError={handleCardUpdateError}

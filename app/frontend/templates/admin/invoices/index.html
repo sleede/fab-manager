@@ -34,7 +34,7 @@
           <ng-include src="'/admin/invoices/list.html'"></ng-include>
 	      </uib-tab>
 
-        <uib-tab heading="{{ 'app.admin.invoices.payment_schedules_list' | translate }}" ng-show="$root.modules.invoicing" index="4" class="payment-schedules-list">
+        <uib-tab heading="{{ 'app.admin.invoices.payment_schedules' | translate }}" ng-show="$root.modules.invoicing" index="4" class="payment-schedules-list">
           <payment-schedules-list current-user="currentUser" on-error="onError" on-card-update-success="onCardUpdateSuccess" />
         </uib-tab>
 
@@ -58,7 +58,7 @@
           <ng-include src="'/admin/invoices/list.html'"></ng-include>
         </uib-tab>
 
-        <uib-tab heading="{{ 'app.admin.invoices.payment_schedules_list' | translate }}" index="4" class="payment-schedules-list">
+        <uib-tab heading="{{ 'app.admin.invoices.payment_schedules' | translate }}" index="4" class="payment-schedules-list">
           <payment-schedules-list current-user="currentUser" on-error="onError" on-card-update-success="onCardUpdateSuccess" />
         </uib-tab>
       </uib-tabset>

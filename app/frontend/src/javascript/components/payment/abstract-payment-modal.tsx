@@ -1,7 +1,7 @@
 import React, { FunctionComponent, ReactNode, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import WalletLib from '../../lib/wallet';
-import { WalletInfo } from '../wallet-info';
+import { WalletInfo } from './wallet-info';
 import { FabModal, ModalSize } from '../base/fab-modal';
 import { HtmlTranslate } from '../base/html-translate';
 import { CustomAsset, CustomAssetName } from '../../models/custom-asset';
@@ -220,13 +220,13 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
             {errors}
           </div>}
           {hasPaymentScheduleInfo() && <div className="payment-schedule-info">
-            <HtmlTranslate trKey="app.shared.payment.payment_schedule_html" options={{ DEADLINES: `${schedule.items.length}`, GATEWAY: gateway }} />
+            <HtmlTranslate trKey="app.shared.abstract_payment_modal.payment_schedule_html" options={{ DEADLINES: `${schedule.items.length}`, GATEWAY: gateway }} />
           </div>}
           {hasCgv() && <div className="terms-of-sales">
             <input type="checkbox" id="acceptToS" name="acceptCondition" checked={tos} onChange={toggleTos} required />
-            <label htmlFor="acceptToS">{ t('app.shared.payment.i_have_read_and_accept_') }
+            <label htmlFor="acceptToS">{ t('app.shared.abstract_payment_modal.i_have_read_and_accept_') }
               <a href={cgv.custom_asset_file_attributes.attachment_url} target="_blank" rel="noreferrer">
-                { t('app.shared.payment._the_general_terms_and_conditions') }
+                { t('app.shared.abstract_payment_modal._the_general_terms_and_conditions') }
               </a>
             </label>
           </div>}
@@ -235,8 +235,8 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
           disabled={!canSubmit()}
           form={formId}
           className="validate-btn">
-          {remainingPrice > 0 && t('app.shared.payment.confirm_payment_of_', { AMOUNT: FormatLib.price(remainingPrice) })}
-          {remainingPrice === 0 && t('app.shared.payment.validate')}
+          {remainingPrice > 0 && t('app.shared.abstract_payment_modal.confirm_payment_of_', { AMOUNT: FormatLib.price(remainingPrice) })}
+          {remainingPrice === 0 && t('app.shared.abstract_payment_modal.validate')}
         </button>}
         {submitState && <div className="payment-pending">
           <div className="fa-2x">
