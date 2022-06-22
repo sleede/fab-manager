@@ -20,7 +20,9 @@ export const FabPanel: React.FC<FabPanelProps> = ({ className, header, size, chi
           {children}
         </div>
       </div>}
-      {!header && children}
+      {!header && <div className="no-header">
+        {children}
+      </div>}
     </div>
   );
 };

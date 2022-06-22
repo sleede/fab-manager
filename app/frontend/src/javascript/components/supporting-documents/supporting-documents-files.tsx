@@ -13,6 +13,7 @@ import ProofOfIdentityFileAPI from '../../api/proof-of-identity-file';
 import { IFablab } from '../../models/fablab';
 import { FabAlert } from '../base/fab-alert';
 import { FabPanel } from '../base/fab-panel';
+import { FabButton } from '../base/fab-button';
 
 declare let Fablab: IFablab;
 
@@ -186,9 +187,9 @@ export const SupportingDocumentsFiles: React.FC<SupportingDocumentsFilesProps> =
         })}
       </div>
       {hasProofOfIdentityTypes() && (
-        <button type="button" className="save-btn" onClick={onFileUpload} disabled={errors.length > 0}>
+        <FabButton className="save-btn" onClick={onFileUpload} disabled={errors.length > 0}>
           {t('app.logged.dashboard.supporting_documents_files.save')}
-        </button>
+        </FabButton>
       )}
     </FabPanel>
   );

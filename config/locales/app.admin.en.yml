@@ -968,7 +968,7 @@ en:
         title: "Supporting documents"
         find_below_documents_files: "You will find below the supporting documents submitted by the member."
         to_complete: "To complete"
-        refuse_documents: "Refusing to proof of identity"
+        refuse_documents: "Refusing the documents"
         refuse_documents_info: "After verification, you may notify the member that the evidence submitted is not acceptable. You can specify the reasons for your refusal and indicate the actions to be taken. The member will be notified by e-mail."
       #edit a member
       members_edit:
@@ -1542,12 +1542,12 @@ en:
           organization_profile_custom_fields_info: "You can display additional fields for users who declare themselves to be an organization. You can also choose to make them mandatory at account creation."
           organization_profile_custom_fields_alert: "Attention: the activated fields will be automatically displayed on the issued invoices. Once configured, please do not modify them."
         supporting_documents_type_modal:
-          successfully_created: "The new proof of identity has been created."
-          unable_to_create: "Unable to delete the proof of identity : "
-          successfully_updated: "The proof of identity has been updated."
-          unable_to_update: "Unable to modify the proof of identity : "
-          new_type: "Create a proof of identity"
-          edit_type: "Edit the proof of identity"
+          successfully_created: "The new supporting documents request has been created."
+          unable_to_create: "Unable to delete the supporting documents request: "
+          successfully_updated: "The supporting documents request has been updated."
+          unable_to_update: "Unable to modify the supporting documents request: "
+          new_type: "Create a supporting documents request"
+          edit_type: "Edit the supporting documents request"
           create: "Create"
           edit: "Edit"
         supporting_documents_type_form:
@@ -1568,9 +1568,9 @@ en:
         delete_supporting_documents_type_modal:
           confirmation_required: "Confirmation required"
           confirm: "Confirm"
-          deleted: "The credential has been deleted."
-          proof_of_identity_type_unable_to_delete: "Unable to delete the proof of identity: "
-          confirm_delete_supporting_documents_type: "Do you really want to remove this requested type of credential?"
+          deleted: "The supporting documents request has been deleted."
+          unable_to_delete: "Unable to delete the supporting documents request: "
+          confirm_delete_supporting_documents_type: "Do you really want to remove this requested type of supporting documents?"
         profile_custom_fields_list:
           field_successfully_updated: "The organization field has been updated."
           unable_to_update: "Impossible to modify the field : "

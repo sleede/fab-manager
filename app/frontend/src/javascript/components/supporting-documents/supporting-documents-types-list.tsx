@@ -196,12 +196,10 @@ const SupportingDocumentsTypesList: React.FC<SupportingDocumentsTypesListProps> 
       <div className="types-list">
         <div className="groups">
           <p>{t('app.admin.settings.account.supporting_documents_types_list.supporting_documents_type_info')}</p>
-          <div className="no-groups">
-            <FabAlert level="warning">
-              <HtmlTranslate trKey="app.admin.settings.account.supporting_documents_types_list.no_groups_info" />
-            </FabAlert>
+          <FabAlert level="warning">
+            <HtmlTranslate trKey="app.admin.settings.account.supporting_documents_types_list.no_groups_info" />
             <FabButton onClick={addGroup}>{t('app.admin.settings.account.supporting_documents_types_list.create_groups')}</FabButton>
-          </div>
+          </FabAlert>
         </div>
 
         <div className="title">

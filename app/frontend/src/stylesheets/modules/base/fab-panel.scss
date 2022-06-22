@@ -1,19 +1,18 @@
 .fab-panel {
-  background-color: #f4f3f3;
+  background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 6px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
   margin: 30px;
   min-height: 1px;
-  padding-left: 15px;
-  padding-right: 15px;
   position: relative;
   display: block;
   border-spacing: 0;
 
   .panel-header {
-    padding: 10px 15px;
-    border-bottom: 1px solid transparent;
+    background-color: #f4f3f3;
+    padding: 18px 15px;
+    border-bottom: 1px solid #ddd;
     border-top-right-radius: 3px;
     border-top-left-radius: 3px;
 
@@ -25,12 +24,16 @@
   .panel-content {
     padding: 15px;
   }
+
+  .no-header {
+    padding: 15px;
+    background-color: #f4f3f3;
+  }
 }
 
-
-@media (min-width: 1200px) {
+@media (min-width: 768px) {
   .fab-panel {
-    width: 58.3333333333%;
+    width: 100%;
     float: left;
   }
 }
@@ -42,9 +45,10 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
   .fab-panel {
-    width: 100%;
+    width: 75%;
     float: left;
   }
 }
+

@@ -1,5 +1,6 @@
 .supporting-documents-types-list {
-  margin-top: 20px;
+  margin: 20px 0 30px;
+  width: 100%;
 
   .panel-header span {
     font-weight: 600;
@@ -14,19 +15,23 @@
         margin-left: 15px;
         margin-right: 15px;
       }
-      .no-groups {
+      .fab-alert {
         display: flex;
         flex-direction: row;
-        .fab-alert {
+        justify-content: space-between;
+        span {
           margin-left: 20px;
           margin-right: 20px;
           width: 66.66666666666666%;
         }
+
         .fab-button {
           margin-top: 15px;
           margin-right: 20px;
-          color: #000;
           max-width: 200px;
+          background-color: var(--secondary-dark);
+          border-color: var(--secondary-dark);
+          color: var(--secondary-text-color);
         }
       }
     }
@@ -34,6 +39,7 @@
     .title {
       display: flex;
       flex-direction: row;
+      justify-content: space-between;
 
       h3 {
         margin-left: 15px;
@@ -42,6 +48,9 @@
       .fab-button {
         margin-top: 15px;
         margin-right: 20px;
+        background-color: var(--secondary-dark);
+        border-color: var(--secondary-dark);
+        color: var(--secondary-text-color);
       }
     }
 

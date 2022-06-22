@@ -32,11 +32,28 @@
       .filename-container {
         align-items: center;
         display: inline-flex;
+        float: left;
+        margin-bottom: 0;
+        position: relative;
+        width: 100%;
+        z-index: 2;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #c4c4c4;
+        border-radius: 4px;
+        box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+        height: 38px;
+        padding: 6px 12px;
+        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        color: #555;
+        font-size: 16px;
+        line-height: 1.5;
 
         .fileinput-filename {
           vertical-align: bottom;
           display: inline-block;
           overflow: hidden;
+          margin-left: 10px;
         }
 
         .file-download {
@@ -68,6 +85,24 @@
         background-image: none;
         touch-action: manipulation;
         overflow: hidden;
+        cursor: pointer;
+        border-collapse: separate;
+        border-spacing: 0;
+
+        input[type=file] {
+          display: block;
+          cursor: pointer;
+          direction: ltr;
+          filter: alpha(opacity=0);
+          font-size: 23px;
+          height: 100%;
+          margin: 0;
+          opacity: 0;
+          position: absolute;
+          right: 0;
+          top: 0;
+          width: 100%;
+        }
       }
     }
 
