@@ -1056,7 +1056,7 @@ zu:
         subscribe: "crwdns22099:0crwdne22099:0"
         select_plan: "crwdns22101:0crwdne22101:0"
         pay_in_one_go: "crwdns22103:0crwdne22103:0"
-        subscription_success: "crwdns22105:0crwdne22105:0"
+        subscription_success: "crwdns23598:0crwdne23598:0"
       #add a new administrator to the platform
       admins_new:
         add_an_administrator: "crwdns8027:0crwdne8027:0"
