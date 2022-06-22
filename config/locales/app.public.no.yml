@@ -142,7 +142,7 @@
       #home page
       home:
         latest_documented_projects: "De siste dokumenterte prosjektene"
-        follow_us: "Follow us"
+        follow_us: "Følg oss"
         latest_tweets: "Siste tweets"
         latest_registered_members: "Siste registrerte medlemmer"
         create_an_account: "Lag en konto"
@@ -151,15 +151,15 @@
         fablab_s_next_events: "Fremtidige arrangementer"
         every_events: "Alle arrangementer"
       event_card:
-        on_the_date: "On the {DATE}"
-        from_date_to_date: "From {START} to {END}"
+        on_the_date: "På {DATE}"
+        from_date_to_date: "Fra {START} til {END}"
         from_time_to_time: "From {START} to {END}"
-        all_day: "All day"
-        still_available: "Available place(s): "
-        event_full: "Event full"
-        without_reservation: "Without reservation"
-        free_admission: "Free admission"
-        full_price: "Full price: "
+        all_day: "Hele dagen"
+        still_available: "Tilgjengelig posisjoner: "
+        event_full: "Arrangementet er fullt"
+        without_reservation: "Ikke reservert"
+        free_admission: "Gratis adgang"
+        full_price: "Full pris: "
       #projects gallery
       projects_list:
         the_fablab_projects: "Våre prosjekter"
@@ -169,7 +169,7 @@
         openlab_search_not_available_at_the_moment: "Det er ikke mulig å søke over hele nettverket for øyeblikket. Du kan fortsatt søke over prosjektene her."
         project_search_result_is_empty: "Beklager, fant vi ingen resultater som samsvarte med dine søkekriterier."
         reset_all_filters: "Tilbakestill alle filtre"
-        keywords: "Keywords"
+        keywords: "Nøkkelord"
         search: "Søk"
         all_projects: "Alle prosjekter"
         my_projects: "Mine prosjekter"
@@ -246,11 +246,11 @@
         confirmation_required: "Bekreftelse påkrevd"
         the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "Treningen/kurset kan ikke slettes fordi det allerede er reservert av noen brukere."
       plan_card:
-        AMOUNT_per_month: "{AMOUNT} / month"
-        i_subscribe_online: "I subscribe online"
-        more_information: "More information"
-        i_choose_that_plan: "I choose that plan"
-        i_already_subscribed: "I already subscribed"
+        AMOUNT_per_month: "{AMOUNT} / måned"
+        i_subscribe_online: "Online innmelding"
+        more_information: "Mer informasjon"
+        i_choose_that_plan: "Jeg velger dette abonnementet"
+        i_already_subscribed: "Allerede påmeldt"
       #summary of the subscriptions
       plans:
         subscriptions: "Medlemskap"
@@ -258,7 +258,7 @@
         no_plans: "Ingen planer er tilgjengelige for din gruppe"
         my_group: "Min gruppe"
         his_group: "User's group"
-        he_wants_to_change_group: "Change group"
+        he_wants_to_change_group: "Endre gruppe"
         change_my_group: "Validate group change"
         summary: "Sammendrag"
         your_subscription_has_expired_on_the_DATE: "Ditt abonnement har utløpt {DATE}"
@@ -389,56 +389,56 @@
             title: "Opplæringer/kurs"
             content: "<p>This page will allow you to consult the list of all training sessions and to register a member for a training session.</p><p>Trainings can be set as prerequisites before allowing reservation of certain machines.</p><p>Members can also access this page and register for a training session themselves, if credit card payment is enabled, or if some prices are equal to 0.</p>"
           spaces:
-            title: "Spaces"
+            title: "Plass/rom"
             content: "<p>This page will allow you to consult the list of all available spaces and to reserve a place on a slot, on behalf of a member.</p><p>A space can be, for example, a woodshop or a meeting room.</p><p>Their particularity is that they can be booked by several people at the same time.</p><p>Members can also access this page and reserve a machine themselves, if credit card payment is enabled, or if some prices are equal to 0.</p>"
           events:
-            title: "Events"
+            title: "Arrangementer"
             content: "<p>An open house evening or an internship to make your desk lamp? It's over here!</p><p>Events can be free or paid (with different prices), with or without reservation.</p><p>Again, members can access this page and book themselves places for free events, or paid events if credit card payment is enabled.</p>"
           calendar:
-            title: "Agenda"
+            title: "Dagsorden"
             content: "Visualize at a glance everything that is scheduled for the next coming weeks (events, training, machines available, etc.)."
           projects:
-            title: "Projects"
+            title: "Prosjekter"
             content: "<p>Document and share all your creations with the community.</p><p>If you use OpenLab, you will also be able to consult the projects of the entire Fab-manager network. <a href='mailto:contact@fab-manager.com'>Contact-us</a> to get your access, it's free!</p>"
           plans:
-            title: "Subscriptions"
+            title: "Medlemskap"
             content: "Subscriptions provide a way to segment your prices and provide benefits to regular users."
           admin:
             title: "{ROLE} section"
             content: "<p>All of the elements below are only accessible to administrators and managers. They allow you to manage and configure Fab-manager.</p><p>At the end of this visit, click on one of them to find out more.</p>"
           about:
-            title: "About"
+            title: "Om"
             content: "A page that you can fully customize, to present your activity and your structure."
           notifications:
-            title: "Notifications center"
+            title: "Varslingssenter"
             content: "<p>Every time something important happens (reservations, creation of accounts, activity of your members, etc.), you will be notified here.</p><p>Your members also receive notifications there.</p>"
           profile:
             title: "User's menu"
             content: "<p>Find your personal information here as well as all your activity on Fab-manager.</p><p>This space is also available for all your members.</p>"
           news:
-            title: "News"
+            title: "Nyheter"
             content: "<p>This space allows you to display the latest news from your structure.</p><p>You can easily change its content from « Customization », « Home page ».</p>"
           last_projects:
-            title: "Last projects"
+            title: "Siste prosjekter"
             content: "<p>This carousel scrolls through the latest projects documented by your members.</p>"
           last_tweet:
-            title: "Last tweet"
+            title: "Siste tweet"
             content: "<p>The last tweet of your Tweeter feed can be shown here.</p><p>Configure it from « Customization », « Home page ».</p>"
           last_members:
-            title: "Last members"
+            title: "Nye medlemmer"
             content: "The last registered members who have validated their address and agreed to be contacted will be shown here."
           next_events:
-            title: "Upcoming events"
+            title: "Kommende hendelser"
             content: "The next three scheduled events are displayed in this space."
           customize:
-            title: "Customize the home page"
+            title: "Tilpass hjemmeside"
             content: "<p>This page can be fully personalized.</p><p>You can <a href='mailto:contact@fab-manager.com'>contact-us</a> to make a tailored customization of the home page.</p>"
           version:
-            title: "Application version"
+            title: "Program versjon"
             content: "Hover your cursor over this icon to find out the version of Fab-manager. If you are not up to date, this will be reported here and you'll be able to get details by clicking on it."
         machines:
           welcome:
-            title: "Machines"
+            title: "Maskiner"
             content: "<p>Machines are the tools available for your users. You must create here the machines which can then be reserved by the members.</p><p>You can also create entries for non-bookable or free access machines, then you just need to not associate availability slots with them.</p>"
           welcome_manager:
             title: "Maskiner"
@@ -454,11 +454,11 @@
             title: "Plass/rom"
             content: "<p>Spaces are places available for your users. For example, a meeting room or a woodshop. You must create here the spaces which can then be reserved by members.</p><p>The specificity of the spaces is that they can be reserved by several users at the same time.</p>"
           welcome_manager:
-            title: "Spaces"
+            title: "Plass/rom"
             content: "<p>Spaces are places available to users, by reservation. For example, a meeting room or a woodshop.</p><p>The specificity of the spaces is that they can be reserved by several users at the same time.</p>"
           view:
-            title: "View"
+            title: "Vis"
             content: "To modify or delete a space, click here first. You will not be able to delete a space that has already been associated with availability slots, but you can deactivate it."
           reserve:
-            title: "Reserve"
+            title: "Reserver"
             content: "Click here to access an agenda showing free slots. This will let you book this space for an user and manage existing reservations."
