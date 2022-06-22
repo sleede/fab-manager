@@ -593,7 +593,7 @@ fr:
         VAT_notice: "Ce paramètre configure le cas général du taux de TVA et s'applique à tout ce qui est vendu par le Fablab. Il est possible de surcharger ce paramètre en définissant un taux de TVA spécifique pour chaque objet."
         edit_multi_VAT_button: "Plus d'options"
         multiVAT: "TVA avancée"
-        multi_VAT_notice: "<strong>Veuillez noter</strong> : Le taux général actuel est de {RATE} %. Ici, vous pouvez définir des taux de TVA différents pour chaque catégorie.</br></br>Par exemple, vous pouvez surcharger cette valeur, uniquement pour les réservations de machines, en remplissant le champ correspondant ci-dessous. Si aucune valeur n'est remplie, le tarif général s'appliquera."
+        multi_VAT_notice: "<strong>Please note</strong>: The current general rate is {RATE}%. Here you can define different VAT rates for each category.<br><br>For example, you can override this value, only for machine reservations, by filling in the corresponding field below. If no value is filled in, the general rate will apply."
         VAT_rate_machine: "Réservation de machines"
         VAT_rate_space: "Réservation d'espaces"
         VAT_rate_training: "Réservation de formations"
@@ -1056,7 +1056,7 @@ fr:
         subscribe: "Abonner"
         select_plan: "Veuillez choisir une formule d'abonnement"
         pay_in_one_go: "Payer en une fois"
-        subscription_success: "Subscription successfully subscribed"
+        subscription_success: "Abonnement souscrit avec succès"
       #add a new administrator to the platform
       admins_new:
         add_an_administrator: "Ajouter un administrateur"
@@ -1558,13 +1558,13 @@ fr:
           add_supporting_documents_types: "Ajouter des justificatifs"
           all_groups: 'Tous les groupes'
           supporting_documents_type_info: "Vous pouvez demander des pièces justificatives en fonction des groupes d'utilisateurs créés. Cela demandera à vos membres de déposer ce type de documents dans leur espace personnel. Chaque membre sera informé de la nécessité de fournir une pièce justificative dans son espace personnel (onglet Mes justificatifs). De votre côté, vous pouvez vérifier les justificatifs fournis et valider le compte du membre (si l'option de validation de compte est activée)."
-          no_groups_info: "Un justificatif est nécessairement appliqué aux groupes.</br>Si vous n'avez pas encore de groupe, vous pouvez en créer un à partir de la page \"Utilisateurs/Groupes\" (bouton à droite)."
+          no_groups_info: "Supporting documents are necessarily applied to groups.<br>If you do not have any group yet, you can create one from the \"Users/Groups\" page (button on the right)."
           create_groups: "Créer des groupes"
           supporting_documents_type_title: "Demandes de justificatifs"
           add_type: "Nouvelle demande de justificatifs"
           group_name: "Groupe"
           name: "Pièces justificatives"
-          no_types: "Vous n'avez aucune demande de justificatif.</br> Assurez-vous d'avoir créé au moins un groupe pour ajouter une demande."
+          no_types: "You do not have any supporting documents requests.<br>Make sure you have created at least one group in order to add a request."
         delete_supporting_documents_type_modal:
           confirmation_required: "Confirmation requise"
           confirm: "Valider"
