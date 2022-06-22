@@ -93,7 +93,7 @@
         _the_fablab_policy: "Les policyen vår"
         field_required: "Nødvendig felt"
         profile_custom_field_is_required: "{FEILD} is required"
-        user_supporting_documents_required: "Warning !</br>You have declared to be \"{GROUP}\", supporting documents may be requested."
+        user_supporting_documents_required: "Warning!<br>You have declared to be \"{GROUP}\", supporting documents may be requested."
         unexpected_error_occurred: "En uventet feil oppstod, vennligst forsøk igjen."
         used_for_statistics: "Dataene vil bli brukt til statistiske formål"
         used_for_invoicing: "Disse dataene vil bli brukt i fakturering"
