@@ -165,7 +165,7 @@
       member_select:
         select_a_member: "Velg et medlem"
         start_typing: "Begynn å skrive..."
-        member_not_validated: "Attention:</br> The member has not validated."
+        member_not_validated: "Warning:<br> The member was not validated."
       #payment modal
       abstract_payment_modal:
         online_payment: "Online payment"
@@ -479,7 +479,7 @@
         slot_tags: "Tidsluke-etiketter"
         user_tags: "Brukeretiketter"
         no_tags: "Ingen etiketter"
-        user_validation_required_alert: "Attention !</br>Your administrator must validate your account. You will then be able to access all the booking features."
+        user_validation_required_alert: "Warning!<br>Your administrator must validate your account. Then, you'll then be able to access all the booking features."
       #feature-tour modal
       tour:
         previous: "Forrige"
