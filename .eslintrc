@@ -50,11 +50,11 @@
       "files": ["app/frontend/src/javascript/components/**/*.tsx"],
       "rules": {
         "import/no-default-export": "error",
-        "import/no-unused-modules": ["error", { "missingExports": true }],
+        "import/no-unused-modules": "error",
         "fabmanager/component-class-named-as-component": ["error", { "ignoreAbstractKeyword": true }],
         "fabmanager/component-named-like-file": "error",
-        "fabmanager/component-documentation": "error",
-        "fabmanager/component-methods-documentation": "error",
+        "fabmanager/component-documentation": "warn",
+        "fabmanager/component-methods-documentation": "warn",
         "fabmanager/no-bootstrap": "error",
         "fabmanager/no-utilities": "error",
         "fabmanager/scoped-translation": ["error", { "ignoreAbstractKeyword": false }]

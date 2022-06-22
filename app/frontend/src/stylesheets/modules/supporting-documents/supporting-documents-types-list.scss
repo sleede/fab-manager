@@ -1,0 +1,72 @@
+.supporting-documents-types-list {
+  margin-top: 20px;
+
+  .panel-header span {
+    font-weight: 600;
+  }
+
+  .types-list {
+    display: flex;
+    flex-direction: column;
+
+    .groups {
+      p {
+        margin-left: 15px;
+        margin-right: 15px;
+      }
+      .no-groups {
+        display: flex;
+        flex-direction: row;
+        .fab-alert {
+          margin-left: 20px;
+          margin-right: 20px;
+          width: 66.66666666666666%;
+        }
+        .fab-button {
+          margin-top: 15px;
+          margin-right: 20px;
+          color: #000;
+          max-width: 200px;
+        }
+      }
+    }
+
+    .title {
+      display: flex;
+      flex-direction: row;
+
+      h3 {
+        margin-left: 15px;
+        display: inline-block;
+      }
+      .fab-button {
+        margin-top: 15px;
+        margin-right: 20px;
+      }
+    }
+
+    table {
+      thead > tr {
+        th.group-name,
+        th.name {
+          width: 40%
+        }
+        th.actions {
+          width: 20%;
+        }
+      }
+
+      tbody {
+        .buttons {
+          .edit-btn {
+            margin-right: 5px;
+          }
+        }
+      }
+    }
+
+    .no-types-info {
+      text-align: center;
+    }
+  }
+}

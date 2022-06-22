@@ -132,7 +132,7 @@ export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSucce
             value={methodToOption(method)} />
           {method === 'card' && <p>{t('app.admin.local_payment_form.card_collection_info')}</p>}
           {method === 'check' && <p>{t('app.admin.local_payment_form.check_collection_info', { DEADLINES: paymentSchedule.items.length })}</p>}
-          {method === 'transfer' && <HtmlTranslate trKey="app.admin.local_payment.transfer_collection_info" options={{ DEADLINES: paymentSchedule.items.length }} />}
+          {method === 'transfer' && <HtmlTranslate trKey="app.admin.local_payment_form.transfer_collection_info" options={{ DEADLINES: paymentSchedule.items.length }} />}
         </div>
         <div className="full-schedule">
           <ul>

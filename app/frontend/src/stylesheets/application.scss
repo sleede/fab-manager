@@ -25,6 +25,7 @@
 @import "modules/base/fab-input";
 @import "modules/base/fab-modal";
 @import "modules/base/fab-output-copy";
+@import "modules/base/fab-panel";
 @import "modules/base/fab-popover";
 @import "modules/base/fab-text-editor";
 @import "modules/base/labelled-input";
@@ -86,10 +87,13 @@
 @import "modules/supporting-documents/supporting-documents-files";
 @import "modules/supporting-documents/supporting-documents-refusal-form";
 @import "modules/supporting-documents/supporting-documents-validation";
+@import "modules/supporting-documents/supporting-documents-type-form";
+@import "modules/supporting-documents/supporting-documents-types-list";
 @import "modules/user/avatar";
 @import "modules/user/avatar-input";
 @import "modules/user/gender-input";
 @import "modules/user/user-profile-form";
+@import "modules/user/user-validation";
 
 @import "modules/abuses";
 @import "modules/cookies";

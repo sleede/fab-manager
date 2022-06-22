@@ -1,18 +1,4 @@
 .supporting-documents-validation {
-  section {
-    background-color: #f4f3f3;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-    margin: 30px;
-    min-height: 1px;
-    padding-left: 15px;
-    padding-right: 15px;
-    position: relative;
-    display: block;
-    border-spacing: 0;
-  }
-
   .info-area {
     color: #000;
     font-weight: 600;
@@ -44,27 +30,7 @@
 }
 
 @media (min-width: 1200px) {
-  .supporting-documents-validation section {
-    width: 58.3333333333%;
-    float: left;
-  }
-
-  .supporting-documents-validation section.refusal {
+  .supporting-documents-validation .fab-panel.refusal {
     width: 33.33333333333333%;
-    float: left;
-  }
-}
-
-@media (min-width: 992px) {
-  .supporting-documents-validation section {
-    width: 100%;
-    float: left;
-  }
-}
-
-@media (min-width: 768px) {
-  .supporting-documents-validation section {
-    width: 100%;
-    float: left;
   }
 }

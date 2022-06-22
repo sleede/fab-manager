@@ -12,6 +12,7 @@ import ProofOfIdentityTypeAPI from '../../api/proof-of-identity-type';
 import ProofOfIdentityFileAPI from '../../api/proof-of-identity-file';
 import { IFablab } from '../../models/fablab';
 import { FabAlert } from '../base/fab-alert';
+import { FabPanel } from '../base/fab-panel';
 
 declare let Fablab: IFablab;
 
@@ -133,7 +134,7 @@ export const SupportingDocumentsFiles: React.FC<SupportingDocumentsFilesProps> =
   };
 
   return (
-    <section className="supporting-documents-files">
+    <FabPanel className="supporting-documents-files">
       <h3>{t('app.logged.dashboard.supporting_documents_files.supporting_documents_files')}</h3>
       <p className="info-area">{t('app.logged.dashboard.supporting_documents_files.my_documents_info')}</p>
       <FabAlert level="warning">
@@ -189,7 +190,7 @@ export const SupportingDocumentsFiles: React.FC<SupportingDocumentsFilesProps> =
           {t('app.logged.dashboard.supporting_documents_files.save')}
         </button>
       )}
-    </section>
+    </FabPanel>
   );
 };
 

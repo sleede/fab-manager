@@ -11,6 +11,7 @@ import ProofOfIdentityTypeAPI from '../../api/proof-of-identity-type';
 import ProofOfIdentityFileAPI from '../../api/proof-of-identity-file';
 import { SupportingDocumentsRefusalModal } from './supporting-documents-refusal-modal';
 import { FabButton } from '../base/fab-button';
+import { FabPanel } from '../base/fab-panel';
 
 declare const Application: IApplication;
 
@@ -80,7 +81,7 @@ const SupportingDocumentsValidation: React.FC<SupportingDocumentsValidationProps
 
   return (
     <div className="supporting-documents-validation">
-      <section>
+      <FabPanel>
         <h3>{t('app.admin.supporting_documents_validation.title')}</h3>
         <p className="info-area">{t('app.admin.supporting_documents_validation.find_below_documents_files')}</p>
         {documentsTypes.map((documentType: ProofOfIdentityType) => {
@@ -99,9 +100,9 @@ const SupportingDocumentsValidation: React.FC<SupportingDocumentsValidationProps
             </div>
           );
         })}
-      </section>
+      </FabPanel>
       {hasSupportingDocumentsTypes() && !member.validated_at && (
-        <section className="refusal">
+        <FabPanel className="refusal">
           <h3>{t('app.admin.supporting_documents_validation.refuse_documents')}</h3>
           <p className="text-black">{t('app.admin.supporting_documents_validation.refuse_documents_info')}</p>
           <FabButton className="refuse-btn" onClick={toggleModal}>{t('app.admin.supporting_documents_validation.refuse_documents')}</FabButton>
@@ -113,7 +114,7 @@ const SupportingDocumentsValidation: React.FC<SupportingDocumentsValidationProps
             member={member}
             onError={onError}
             onSuccess={onSaveRefusalSuccess}/>
-        </section>
+        </FabPanel>
       )}
     </div>
   );
