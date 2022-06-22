@@ -1027,6 +1027,7 @@ pt:
         invalidate_member_success: "The member is invalidated"
         validate_member_error: "An error occurred: impossible to validate from this member."
         invalidate_member_error: "An error occurred: impossible to invalidate from this member."
+        supporting_documents: "Supporting documents"
       #extend a subscription for free
       free_extend_modal:
         extend_subscription: "Estender assinatura"
