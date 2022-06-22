@@ -137,7 +137,7 @@ zu:
           unable_to_upload: "crwdns23528:0crwdne23528:0"
           supporting_documents_files: "crwdns23530:0crwdne23530:0"
           my_documents_info: "crwdns23532:0crwdne23532:0"
-          upload_limits_alert_html: "crwdns23534:0{SIZE}crwdne23534:0"
+          upload_limits_alert_html: "crwdns23606:0{SIZE}crwdne23606:0"
           file_size_error: "crwdns23536:0{SIZE}crwdne23536:0"
           save: "crwdns23538:0crwdne23538:0"
           browse: "crwdns23540:0crwdne23540:0"
