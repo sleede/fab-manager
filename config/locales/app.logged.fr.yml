@@ -137,11 +137,11 @@ fr:
           unable_to_upload: "Impossible d'envoyer la pièce justificative : "
           supporting_documents_files: "Pièces justificatives"
           my_documents_info: "En raison de votre déclaration de groupe, certaines pièces justificatives sont requises. Une fois soumis, ces documents seront vérifiés par l'administrateur."
-          upload_limits_alert_html: "Warning!<br>You can submit your documents as PDF or images (JPEG, PNG). Maximum allowed size: {SIZE} Mb"
-          file_size_error: "The file size exceeds the limit ({SIZE} MB)"
-          save: "Save"
-          browse: "Browse"
-          edit: "Edit"
+          upload_limits_alert_html: "Attention !<br>Vous pouvez soumettre vos documents en PDF ou en images (JPEG, PNG). Taille maximale autorisée : {SIZE} Mo"
+          file_size_error: "La taille du fichier dépasse la limite ({SIZE} Mo)"
+          save: "Enregistrer"
+          browse: "Parcourir"
+          edit: "Modifier"
       #public profil of a member
       members_show:
         members_list: "Liste des membres"
