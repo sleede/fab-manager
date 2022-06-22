@@ -1529,6 +1529,7 @@ pt:
             user_validation_required_list_title: "Member account validation information message"
             user_validation_required_list_info: "Your administrator must validate your account. Then, you will be able to access all the booking features."
             user_validation_required_list_other_info: "The resources selected below will be subject to member account validation."
+            save: "Save"
             user_validation_required_list:
               subscription: "Subscriptions"
               machine: "Machines"

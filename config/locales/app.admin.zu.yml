@@ -1529,6 +1529,7 @@ zu:
             user_validation_required_list_title: "crwdns23304:0crwdne23304:0"
             user_validation_required_list_info: "crwdns23306:0crwdne23306:0"
             user_validation_required_list_other_info: "crwdns23308:0crwdne23308:0"
+            save: "crwdns23676:0crwdne23676:0"
             user_validation_required_list:
               subscription: "crwdns23310:0crwdne23310:0"
               machine: "crwdns23312:0crwdne23312:0"

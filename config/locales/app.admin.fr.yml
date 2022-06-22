@@ -1529,6 +1529,7 @@ fr:
             user_validation_required_list_title: "Message d'information sur la validation du compte membre"
             user_validation_required_list_info: "Votre administrateur doit valider votre compte. Vous pourrez ensuite accéder à toutes les fonctions de réservation."
             user_validation_required_list_other_info: "Les ressources sélectionnées ci-dessous seront soumises à la validation du compte membre."
+            save: "Enregistrer"
             user_validation_required_list:
               subscription: "Abonnements"
               machine: "Machines"
