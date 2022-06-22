@@ -24,5 +24,13 @@
         color: white;
       }
     }
+
+    &.destroyed-item {
+      display: none;
+    }
+
+    &.new-item {
+      background-color: var(--information-lightest);
+    }
   }
 }

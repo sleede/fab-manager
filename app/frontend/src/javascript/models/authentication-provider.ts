@@ -14,6 +14,7 @@ export type mappingType = 'string' | 'text' | 'date' | 'integer' | 'boolean';
 
 export interface AuthenticationProviderMapping {
   id?: number,
+  _destroy?: boolean,
   local_model: 'user' | 'profile',
   local_field: string,
   api_field: string,

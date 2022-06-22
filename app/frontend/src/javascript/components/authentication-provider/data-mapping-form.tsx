@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { UseFormRegister, useFieldArray, ArrayPath, useWatch, Path } from 'react-hook-form';
+import { UseFormRegister, useFieldArray, ArrayPath, useWatch, Path, FieldPathValue } from 'react-hook-form';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 import AuthProviderAPI from '../../api/auth-provider';
 import { AuthenticationProviderMapping, MappingFields, mappingType, ProvidableType } from '../../models/authentication-provider';
-import { Control, UseFormSetValue } from 'react-hook-form/dist/types/form';
+import { Control, UnpackNestedValue, UseFormSetValue } from 'react-hook-form/dist/types/form';
 import { FormSelect } from '../form/form-select';
 import { FormInput } from '../form/form-input';
 import { useTranslation } from 'react-i18next';
@@ -96,6 +96,31 @@ export const DataMappingForm = <TFieldValues extends FieldValues, TContext exten
     };
   };
 
+  /**
+   * Remove the data whom index is provided: mark it as "to destroy" or simply remove it if it was unsaved
+   */
+  const removeMapping = (index: number): void => {
+    if (currentFormValues[index].id) {
+      setValue(
+        `auth_provider_mappings_attributes.${index}._destroy` as Path<TFieldValues>,
+        true as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>
+      );
+    } else {
+      remove(index);
+    }
+  };
+
+  /**
+   * Return a className based on the current mapping-item status
+   */
+  const itemStatus = (index: number): string => {
+    if (currentFormValues[index]?.id) {
+      if (currentFormValues[index]._destroy) return 'destroyed-item';
+      return 'saved-item';
+    }
+    return 'new-item';
+  };
+
   // fetch the mapping data from the API on mount
   useEffect(() => {
     AuthProviderAPI.mappingFields().then((data) => {
@@ -114,7 +139,7 @@ export const DataMappingForm = <TFieldValues extends FieldValues, TContext exten
         </FabButton>
       </div>
       {fields.map((item, index) => (
-        <div key={item.id} className="mapping-item">
+        <div key={item.id} className={`mapping-item ${itemStatus(index)}`}>
           <div className="inputs">
             <FormInput id={`auth_provider_mappings_attributes.${index}.id`} register={register} type="hidden" />
             <div className="local-data">
@@ -141,7 +166,7 @@ export const DataMappingForm = <TFieldValues extends FieldValues, TContext exten
                        onClick={toggleTypeMappingModal(index)}
                        disabled={getField(output, index) === undefined}
                        tooltip={t('app.admin.authentication.data_mapping_form.data_mapping')} />
-            <FabButton icon={<i className="fa fa-trash" />} onClick={() => remove(index)} className="delete-button" />
+            <FabButton icon={<i className="fa fa-trash" />} onClick={() => removeMapping(index)} className="delete-button" />
             <TypeMappingModal model={getModel(output, index)}
                               field={getField(output, index)}
                               type={getDataType(output, index)}
