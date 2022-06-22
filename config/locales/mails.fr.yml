@@ -369,8 +369,8 @@ fr:
         user_proof_of_identity_files_refusal: "Votre pièce justificative a été refusée :"
         action: "Veuillez téléverser une nouvelle pièce justificative."
     notify_admin_user_proof_of_identity_refusal:
-      subject: "A member's supporting documents were refused"
+      subject: "Le justificatif d'un membre a été refusé"
       body:
-        user_proof_of_identity_files_refusal: "Member %{NAME}'s supporting documents were rejected by %{OPERATOR}:"
+        user_proof_of_identity_files_refusal: "Le justificatif du membre %{NAME} a été refusé par %{OPERATOR} :"
     shared:
       hello: "Bonjour %{user_name}"
