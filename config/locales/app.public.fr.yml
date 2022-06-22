@@ -93,7 +93,7 @@ fr:
         _the_fablab_policy: "la charte d'utilisation du Fab Lab"
         field_required: "Champ requis"
         profile_custom_field_is_required: "{FEILD} est requis"
-        user_supporting_documents_required: "Warning !</br>You have declared to be \"{GROUP}\", supporting documents may be requested."
+        user_supporting_documents_required: "Warning!<br>You have declared to be \"{GROUP}\", supporting documents may be requested."
         unexpected_error_occurred: "Une erreur inattendue s'est produite. Veuillez réessayer ultérieurement."
         used_for_statistics: "Cette donnée sera utilisée à des fins statistiques"
         used_for_invoicing: "Cette donnée sera utilisée à des fins de facturation"
