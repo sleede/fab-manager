@@ -93,7 +93,7 @@ es:
         _the_fablab_policy: "la política de FabLab"
         field_required: "Field required"
         profile_custom_field_is_required: "{FEILD} is required"
-        user_supporting_documents_required: "Warning !</br>You have declared to be \"{GROUP}\", supporting documents may be requested."
+        user_supporting_documents_required: "Warning!<br>You have declared to be \"{GROUP}\", supporting documents may be requested."
         unexpected_error_occurred: "An unexpected error occurred. Please try again later."
         used_for_statistics: "This data will be used for statistical purposes"
         used_for_invoicing: "This data will be used for billing purposes"
