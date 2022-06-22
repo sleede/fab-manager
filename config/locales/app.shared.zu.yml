@@ -165,7 +165,7 @@ zu:
       member_select:
         select_a_member: "crwdns9571:0crwdne9571:0"
         start_typing: "crwdns9573:0crwdne9573:0"
-        member_not_validated: "crwdns22972:0crwdne22972:0"
+        member_not_validated: "crwdns23610:0crwdne23610:0"
       #payment modal
       abstract_payment_modal:
         online_payment: "crwdns23442:0crwdne23442:0"
@@ -479,7 +479,7 @@ zu:
         slot_tags: "crwdns20490:0crwdne20490:0"
         user_tags: "crwdns20492:0crwdne20492:0"
         no_tags: "crwdns20494:0crwdne20494:0"
-        user_validation_required_alert: "crwdns23122:0crwdne23122:0"
+        user_validation_required_alert: "crwdns23612:0crwdne23612:0"
       #feature-tour modal
       tour:
         previous: "crwdns20166:0crwdne20166:0"
