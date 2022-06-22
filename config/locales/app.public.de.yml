@@ -142,7 +142,7 @@ de:
       #home page
       home:
         latest_documented_projects: "Die neuesten dokumentierten Projekte"
-        follow_us: "Follow us"
+        follow_us: "Folge uns"
         latest_tweets: "Die neuesten Tweets"
         latest_registered_members: "Neueste registrierte Mitglieder"
         create_an_account: "Neues Konto einrichten"
@@ -151,15 +151,15 @@ de:
         fablab_s_next_events: "Fablab´s nächste Veranstaltungen"
         every_events: "Alle Veranstaltungen"
       event_card:
-        on_the_date: "On the {DATE}"
-        from_date_to_date: "From {START} to {END}"
+        on_the_date: "Am {DATE}"
+        from_date_to_date: "Von {START} bis {END}"
         from_time_to_time: "From {START} to {END}"
-        all_day: "All day"
-        still_available: "Available place(s): "
-        event_full: "Event full"
-        without_reservation: "Without reservation"
-        free_admission: "Free admission"
-        full_price: "Full price: "
+        all_day: "Ganztägig"
+        still_available: "Verfügbare Plätze: "
+        event_full: "Event ausgebucht"
+        without_reservation: "Ohne Reservierung"
+        free_admission: "Freier Eintritt"
+        full_price: "Voller Preis: "
       #projects gallery
       projects_list:
         the_fablab_projects: "Die Fab Lab-Projekte"
@@ -246,11 +246,11 @@ de:
         confirmation_required: "Bestätigung erforderlich"
         the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "Die Schulung kann nicht gelöscht werden, da sie bereits von einigen Benutzern gebucht ist."
       plan_card:
-        AMOUNT_per_month: "{AMOUNT} / month"
-        i_subscribe_online: "I subscribe online"
-        more_information: "More information"
-        i_choose_that_plan: "I choose that plan"
-        i_already_subscribed: "I already subscribed"
+        AMOUNT_per_month: "{AMOUNT} / monate"
+        i_subscribe_online: "Ich abonniere online"
+        more_information: "Weitere Informationen"
+        i_choose_that_plan: "Ich wähle dieses Abo"
+        i_already_subscribed: "Ich habe bereits abonniert"
       #summary of the subscriptions
       plans:
         subscriptions: "Abonnements"
@@ -258,7 +258,7 @@ de:
         no_plans: "Für Ihre Gruppe sind keine Pläne verfügbar"
         my_group: "Meine Gruppe"
         his_group: "User's group"
-        he_wants_to_change_group: "Change group"
+        he_wants_to_change_group: "Gruppen ändern"
         change_my_group: "Validate group change"
         summary: "Zusammenfassung"
         your_subscription_has_expired_on_the_DATE: "Ihr Abonnement ist am {DATE} abgelaufen"
