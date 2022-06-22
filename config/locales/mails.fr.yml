@@ -24,7 +24,7 @@ fr:
       subject: "Vous avez changé de groupe"
       body:
         warning: "Vous venez de changer de groupe utilisateurs. Des contrôles pourront être opérés au Fab Lab afin de vérifier que ce changement est justifié."
-        user_invalidated: "Votre compte est invalidé, veuillez téléverser votre nouveau justificatif pour valider votre compte."
+        user_invalidated: "Your account was invalidated, please upload your new supporting documents to validate your account."
     notify_admin_user_group_changed:
       subject: "Un membre a changé de groupe"
       body:
@@ -346,14 +346,14 @@ fr:
         date: "Ceci est un rappel pour vérifier que le prélèvement bancaire a bien été effectué."
         confirm: "Veuillez confirmer la réception des fonds dans votre interface de gestion des échéanciers de paiement, afin que la facture correspondante soit générée."
     notify_admin_user_proof_of_identity_files_created:
-      subject: "Justificatif téléversé par un membre"
+      subject: "Supporting documents uploaded by a member"
       body:
-        proof_of_identity_files_uploaded_below: "Le membre %{NAME} a téléversé le justificatif suivant :"
+        proof_of_identity_files_uploaded_below: "Member %{NAME} has uploaded the following supporting documents:"
         validate_user: "Veuillez valider ce compte"
     notify_admin_user_proof_of_identity_files_updated:
-      subject: "Le justificatif est modifiée par le membre"
+      subject: "Member's supporting documents have changed"
       body:
-        user_update_proof_of_identity_file: "Le membre %{NAME} a modifié le justificatif ci-dessous :"
+        user_update_proof_of_identity_file: "Member %{NAME} has modified the supporting documents below:"
         validate_user: "Veuillez valider son compte"
     notify_user_is_validated:
       subject: "Le compte est valid"
@@ -364,13 +364,13 @@ fr:
       body:
         account_invalidated: "Votre compte est invalid."
     notify_user_proof_of_identity_refusal:
-      subject: "Les justificatifs refusés"
+      subject: "Your supporting documents were refused"
       body:
-        user_proof_of_identity_files_refusal: "Vos justificatifs sont refusés :"
-        action: "Veuillez re-télécharger les nouveaux justificatifs."
+        user_proof_of_identity_files_refusal: "Your supporting documents were refused:"
+        action: "Please re-upload some new supporting documents."
     notify_admin_user_proof_of_identity_refusal:
-      subject: "Justificatifs d'un membre refusés"
+      subject: "A member'ssupporting documents were refused"
       body:
-        user_proof_of_identity_files_refusal: "Les justificatifs du membre %{NAME} sont refusés par %{OPERATOR}:"
+        user_proof_of_identity_files_refusal: "Member %{NAME}'s supporting documents were rejected by %{OPERATOR}:"
     shared:
       hello: "Bonjour %{user_name}"
