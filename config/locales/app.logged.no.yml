@@ -25,18 +25,18 @@
         your_profile_has_been_successfully_updated: "Your profile has been successfully updated."
         completion_header_info:
           rules_changed: "Please fill the following form to update your profile and continue to use the platform."
-          sso_intro: "You've just created a new account on {GENDER, select, neutral{} other{the}} {NAME}, by logging from"
+          sso_intro: "Du har nettopp opprettet en ny konto for {NAME} ved å logge fra"
           duplicate_email_info: "It looks like your email address is already used by another user. Check your email address and please input below the code you have received."
           details_needed_info: "To finalize your account, we need some more details."
         profile_form_option:
-          title: "New on this platform?"
+          title: "Ny på denne plattformen?"
           please_fill: "Please fill in the following form to create your account."
-          disabled_data_from_sso: "Some data may have already been provided by {NAME} and cannot be modified."
+          disabled_data_from_sso: "Noen data er allerede gitt av {NAME} og kan ikke endres."
           confirm_instructions_html: "Once you are done, please click on <strong>Save</strong> to confirm your account and start using the application."
           duplicate_email_html: "It looks like your email address <strong>({EMAIL})</strong> is already associated with another account. If this account is not yours, please click on the following button to change the email associated with your {PROVIDER} account."
-          edit_profile: "Change my data"
+          edit_profile: "Endre mine data"
           after_edition_info_html: "Once your data are up to date, <strong>click on the synchronization button below</strong>, or <strong>disconnect then reconnect</strong> for your changes to take effect."
-          sync_profile: "Sync my profile"
+          sync_profile: "Synkroniser min profil"
       dashboard:
         #dashboard: public profile
         profile:
@@ -128,10 +128,20 @@
           download_the_invoice: "Last ned fakturaen"
           download_the_credit_note: "Last ned refusjonsfakturaen"
           no_invoices_for_now: "Ingen fakturaer for øyeblikket."
-        payment_schedules:
+        payment_schedules_dashboard:
           no_payment_schedules: "Ingen betalingsplaner å vise"
           load_more: "Last mer"
           card_updated_success: "Kortet ditt ble oppdatert"
+        supporting_documents_files:
+          file_successfully_uploaded: "The supporting documents were sent."
+          unable_to_upload: "Unable to send the supporting documents: "
+          supporting_documents_files: "Supporting documents"
+          my_documents_info: "Due to your group declaration, some supporting documents are required. Once submitted, these documents will be verified by the administrator."
+          upload_limits_alert_html: "Warning!<br>You can submit your documents as PDF or images (JPEG, PNG). Maximum allowed size: {SIZE} Mb"
+          file_size_error: "The file size exceeds the limit ({SIZE} MB)"
+          save: "Lagre"
+          browse: "Bla igjennom"
+          edit: "Rediger"
       #public profil of a member
       members_show:
         members_list: "Medlemsliste"
@@ -203,7 +213,7 @@
         all_trainings: "All opplæringer/kurs"
         cancel_my_selection: "Avbryt valget mitt"
         i_change: "Jeg endrer"
-        i_shift: "I shift"
+        i_shift: "Jeg skifter"
         i_ve_reserved: "Jeg har reservert"
       #book a space
       space_reserve:

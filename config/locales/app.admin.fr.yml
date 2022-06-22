@@ -447,26 +447,29 @@ fr:
         description: "Description"
         significance: "Importance"
       manage_plan_category:
+        create: "Nouvelle catégorie"
+        update: "Modifier la catégorie"
+      plan_category_form:
         name: "Nom"
         description: "Description"
         significance: "Importance"
         info: "Les catégories seront affichées par ordre d'importance. Plus vous définissez une importance élevée, plus la catégorie sera affichée en premier."
-        create_category:
+        create:
           title: "Nouvelle catégorie"
           cta: "Créer la catégorie"
           success: "La nouvelle catégorie a bien été créée"
           error: "Impossible de créer la catégorie : "
-        update_category:
+        update:
           title: "Modifier la catégorie"
           cta: "Valider"
           success: "La catégorie a bien été mise à jour"
           error: "Impossible de mettre à jour la catégorie : "
-        delete_category:
-          title: "Supprimer une catégorie"
-          confirm: "Êtes-vous sûr de vouloir supprimer cette catégorie ? Si vous le faites, les formules associées à cette catégorie ne seront plus triés."
-          cta: "Supprimer"
-          success: "La catégorie a bien été supprimée"
-          error: "Impossible de supprimer la catégorie : "
+      delete_plan_category:
+        title: "Supprimer une catégorie"
+        confirm: "Êtes-vous sûr de vouloir supprimer cette catégorie ? Si vous le faites, les formules associées à cette catégorie ne seront plus triés."
+        cta: "Supprimer"
+        success: "La catégorie a bien été supprimée"
+        error: "Impossible de supprimer la catégorie : "
       #ajouter un code promotionnel
       coupons_new:
         add_a_coupon: "Ajouter un code promotionnel"
@@ -513,7 +516,7 @@ fr:
         credit_note: "Avoir"
         display_more_invoices: "Afficher plus de factures..."
         no_invoices_for_now: "Aucune facture pour le moment."
-        payment_schedules_list: "Échéanciers de paiement"
+        payment_schedules: "Échéanciers de paiement"
         invoicing_settings: "Paramètres de facturation"
         warning_invoices_disabled: "Attention : les factures ne sont pas activées. Aucune facture ne sera générée par Fab-manager. Vous devez néanmoins remplir correctement les informations ci-dessous, particulièrement la TVA."
         change_logo: "Changer le logo"
@@ -590,7 +593,7 @@ fr:
         VAT_notice: "Ce paramètre configure le cas général du taux de TVA et s'applique à tout ce qui est vendu par le Fablab. Il est possible de surcharger ce paramètre en définissant un taux de TVA spécifique pour chaque objet."
         edit_multi_VAT_button: "Plus d'options"
         multiVAT: "TVA avancée"
-        multi_VAT_notice: "<strong>Veuillez noter</strong> : Le taux général actuel est de {RATE} %. Ici, vous pouvez définir des taux de TVA différents pour chaque catégorie.</br></br>Par exemple, vous pouvez surcharger cette valeur, uniquement pour les réservations de machines, en remplissant le champ correspondant ci-dessous. Si aucune valeur n'est remplie, le tarif général s'appliquera."
+        multi_VAT_notice: "<strong>Veuillez noter</strong> : Le taux général actuel est de {RATE} %. Ici, vous pouvez définir des taux de TVA différents pour chaque catégorie.<br><br>Par exemple, vous pouvez surcharger cette valeur, uniquement pour les réservations de machines, en remplissant le champ correspondant ci-dessous. Si aucune valeur n'est remplie, le tarif général s'appliquera."
         VAT_rate_machine: "Réservation de machines"
         VAT_rate_space: "Réservation d'espaces"
         VAT_rate_training: "Réservation de formations"
@@ -748,20 +751,27 @@ fr:
           end_date: "Date de fin"
           vat_rate: "Taux de TVA"
           amount: "Montant total"
+        payzen_keys_form:
+          payzen_keys_info_html: "<p>Pour pouvoir encaisser des paiements en ligne, vous devez configurer les identifiants et les clefs <a href='https://payzen.eu' target='_blank'>PayZen</a>.</p><p>Retrouvez les dans <a href='https://secure.payzen.eu/vads-merchant/' target='_blank'>votre back office marchant</a>.</p>"
+          client_keys: "Clef client"
+          payzen_keys: "Clefs PayZen"
+          payzen_username: "Nom d'utilisateur"
+          payzen_password: "Mot de passe"
+          payzen_endpoint: "Nom du serveur de l'API REST"
+          payzen_hmac: "Clef HMAC-SHA-256"
+        stripe_keys_form:
+          stripe_keys_info_html: "<p>Pour pouvoir encaisser des paiements en ligne, vous devez configurer les clefs d'API <a href='https://stripe.com' target='_blank'>Stripe</a>.</p><p>Retrouvez les dans <a href='https://dashboard.stripe.com/account/apikeys' target='_blank'>votre tableau de bord</a>.</p><p>Mettre à jour ces clefs entraînera une synchronisation de tous les utilisateurs vers Stripe, ceci peut prendre du temps. Vous recevrez une notification lorsque cela sera terminé.</p>"
+          public_key: "Clef publique"
+          secret_key: "Clef secrète"
         payment:
           payment_settings: "Paramètres de paiement"
           online_payment: "Paiement en ligne"
           online_payment_info_html: "Vous pouvez permettre à vos membres de réserver directement en ligne, en payant par carte bancaire. De manière alternative, vous pouvez restreindre les processus de réservation et de paiement aux administrateurs et aux gestionnaires."
           enable_online_payment: "Activer les paiements en ligne"
           stripe_keys: "Clefs Stripe"
-          stripe_keys_info_html: "<p>Pour pouvoir encaisser des paiements en ligne, vous devez configurer les clefs d'API <a href='https://stripe.com' target='_blank'>Stripe</a>.</p><p>Retrouvez les dans <a href='https://dashboard.stripe.com/account/apikeys' target='_blank'>votre tableau de bord</a>.</p><p>Mettre à jour ces clefs entraînera une synchronisation de tous les utilisateurs vers Stripe, ceci peut prendre du temps. Vous recevrez une notification lorsque cela sera terminé.</p>"
-          public_key: "Clef publique"
-          secret_key: "Clef secrète"
           error_check_keys: "Erreur : veuillez vérifier vos clefs Stripe."
           stripe_keys_saved: "Les clefs Stripe ont bien été enregistrées."
           error_saving_stripe_keys: "Impossible d’enregistrer les clefs Stripe. Veuillez réessayer ultérieurement."
-          payzen_keys_info_html: "<p>Pour pouvoir encaisser des paiements en ligne, vous devez configurer les identifiants et les clefs <a href='https://payzen.eu' target='_blank'>PayZen</a>.</p><p>Retrouvez les dans <a href='https://secure.payzen.eu/vads-merchant/' target='_blank'>votre back office marchant</a>.</p>"
-          client_keys: "Clef client"
           api_keys: "Clefs d'API"
           edit_keys: "Modifier les clefs"
           currency: "Devise"
@@ -769,12 +779,8 @@ fr:
           currency_alert_html: "<strong>Attention</strong> : la devise ne peut pas être modifiée après que le premier paiement en ligne ait été effectué. Veuillez définir attentivement ce paramètre avant d'ouvrir Fab-manager à vos membres."
           stripe_currency: "Devise Stripe"
           gateway_configuration_error: "Une erreur est survenue lors de la configuration de la passerelle de paiement : "
-          payzen:
-            payzen_keys: "Clefs PayZen"
-            payzen_username: "Utilisateur"
-            payzen_password: "Mot de passe"
-            payzen_endpoint: "Nom du serveur de l'API REST"
-            payzen_hmac: "Clef HMAC-SHA-256"
+          payzen_settings:
+            edit_keys: "Modifier les clefs"
             payzen_public_key: "Clef publique client"
             currency: "Devise"
             payzen_currency: "Devise PayZen"
@@ -784,14 +790,14 @@ fr:
             error_while_saving: "Une erreur est survenue lors de l'enregistrement de la devise : "
             currency_updated: "La devise PayZen a bien été mise à jour à {CURRENCY}."
           #select a payment gateway
-          gateway_modal:
+          select_gateway_modal:
             select_gateway_title: "Sélectionnez une passerelle de paiement"
             gateway_info: "Pour collecter et traiter les paiements en ligne en toute sécurité, Fab-manager a besoin d'utiliser un service tiers autorisé par les institutions financières, appelé une passerelle de paiement."
             select_gateway: "Veuillez choisir une des passerelles disponibles"
             stripe: "Stripe"
             payzen: "PayZen"
             confirm_button: "Valider la passerelle"
-        payment_schedules:
+        payment_schedules_list:
           filter_schedules: "Filtrer les échéanciers"
           no_payment_schedules: "Pas d'échéancier à afficher"
           load_more: "Voir plus"
@@ -944,6 +950,26 @@ fr:
         success: "Succès"
         failed: "Échec"
         error_details: "Détails de l'erreur :"
+      user_validation:
+        validate_member_success: "Le compte membre a bien été validé"
+        invalidate_member_success: "Le compte membre a bien été invalidé"
+        validate_member_error: "Une erreur inattendue est survenue. Impossible de valider ce compte membre."
+        invalidate_member_error: "Une erreur inattendue est survenue. Impossible d'invalider ce compte membre."
+        validate_account: "Valider le compte"
+      supporting_documents_refusal_form:
+        refusal_comment: "Commentaire"
+        comment_placeholder: "Veuillez saisir un commentaire ici"
+      supporting_documents_refusal_modal:
+        title: "Refuser un justificatif"
+        refusal_successfully_sent: "Le refus a bien été envoyé."
+        unable_to_send: "Impossible de refuser le justificatif : "
+        confirm: "Valider"
+      supporting_documents_validation:
+        title: "Pièces justificatives"
+        find_below_documents_files: "Retrouvez ci-dessous, les justificatifs déposés par le membre."
+        to_complete: "À compléter"
+        refuse_documents: "Refuser les documents"
+        refuse_documents_info: "Après vérification, vous pouvez notifier le membre que le ou les justificatif(s) déposés ne sont pas recevables. Vous pouvez préciser les motifs de votre refus et lui indiquer les actions à mettre en œuvre. Le membre sera notifié par mail."
       #edit a member
       members_edit:
         change_role: "Changer le rôle"
@@ -993,29 +1019,14 @@ fr:
         cannot_extend_own_subscription: "Vous ne pouvez pas prolonger votre propre abonnement. Veuillez demander à un autre gestionnaire ou à un administrateur de prolonger votre abonnement."
         update_success: "Le profile du membre a bien été mis à jour"
         my_documents: "Mes documents"
-        my_documents_info: "Suite à la déclaration de votre profil, vous devez déclarer des justificatifs. Une fois déposés, ces documents vont être vérifiés par l'administrateur."
-        proof_of_identity_file_size_error: "La limite de poids est de {SIZE} Mo max"
-        my_documents_alert: "Attention !</br>Vous pouvez déposer vos documents en pdf ou en image (.jpg) sous une limite de poids de {SIZE} Mo max"
-        proof_of_identity_files: "Justificatifs"
-        find_below_the_proof_of_identity_files: "Retrouvez ci-dessous, les justificatifs déposés par le membre."
         save: "Enregistrer"
-        to_complete: "À compléter"
-        proof_of_identity_refusal: "Refus du document"
-        refuse_proof_of_identity_files: "Refus du justificatif"
-        refuse_proof_of_identity_files_info: "Après vérification, vous pouvez notifier le membre que le ou les justificatifs déposés ne sont pas recevables. Vous pouvez préciser les motifs de votre refus et lui indiquer les actions à mettre en oeuvre. Le membre sera notifié par mail."
         confirm: "Valider"
         cancel: "Annuler"
-        proof_of_identity_refusal_comment: "Commentaire"
-        proof_of_identity_refuse_input_message: "Saisissez votre texte"
         validate_account: "Valider le compte"
         validate_member_success: "Le membre est validé"
         invalidate_member_success: "Le membre est invalidé"
         validate_member_error: "Une erreur est survenue : impossible de valider ce membre."
         invalidate_member_error: "Une erreur est survenue : impossible d'invalider ce membre."
-        proof_of_identity_refusal_successfully_sent: "Le refus du justificatif a été envoyé."
-        proof_of_identity_refusal_unable_to_send: "Impossible de refuser le justificatif : "
-        proof_of_identity_files_successfully_uploaded: "Le justificatif a été envoyé."
-        proof_of_identity_files_unable_to_upload: "Impossible d'envoyer le justificatif : "
       #extend a subscription for free
       free_extend_modal:
         extend_subscription: "Prolonger l'abonnement"
@@ -1028,23 +1039,24 @@ fr:
         extend: "Prolonger"
         extend_success: "L'abonnement a été prolongé gratuitement"
       #renew a subscription
-      renew_subscription_modal:
+      renew_modal:
         renew_subscription: "Renouveler l'abonnement"
         renew_subscription_info: "Vous êtes sur le point de renouveler l'abonnement de l'utilisateur en lui refacturant son abonnement actuel."
-        credits_will_be_reset: "Le solde de crédits gratuits (formations / machines / espaces) de l'utilisateur sera remis à zéro, ses crédits non utilisés seront perdu."
+        credits_will_be_reset: "Le solde de crédits gratuits (formations/machines/espaces) de l'utilisateur sera remis à zéro, ses crédits non utilisés seront perdu."
         current_expiration: "L'abonnement actuel expirera le :"
-        new_start: "La nouvelle souscription commencera le :"
+        new_start: "Le nouvel abonnement commencera le :"
         new_expiration_date: "Le nouvel abonnement expirera le :"
         pay_in_one_go: "Payer en une fois"
         renew: "Renouveler"
         renew_success: "L'abonnement a bien été renouvelé"
+        DATE_TIME: "{DATE} à {TIME}"
       #take a new subscription
       subscribe_modal:
         subscribe_USER: "Abonner {USER}"
         subscribe: "Abonner"
         select_plan: "Veuillez choisir une formule d'abonnement"
         pay_in_one_go: "Payer en une fois"
-        subscription_success: ""
+        subscription_success: "Abonnement souscrit avec succès"
       #add a new administrator to the platform
       admins_new:
         add_an_administrator: "Ajouter un administrateur"
@@ -1244,6 +1256,11 @@ fr:
         week_of_START_to_END: "Semaine du {START} au {END}"
         no_data_for_this_period: "Pas de données pour cette période"
         date: "Date"
+      boolean_setting:
+        customization_of_SETTING_successfully_saved: "La personnalisation de {SETTING} a bien été enregistrée."
+        error_SETTING_locked: "Impossible de mettre à jour le paramètre : {SETTING} est verrouillé. Veuillez contacter votre administrateur système."
+        an_error_occurred_saving_the_setting: "Une erreur est survenue pendant l'enregistrement du paramètre. Veuillez réessayer plus tard."
+        save: "enregistrer"
       #global application parameters and customization
       settings:
         customize_the_application: "Personnalisation de l'application"
@@ -1498,58 +1515,67 @@ fr:
           statistics: "Statistiques"
           statistics_info_html: "<p>Activer ou désactiver le module de statistiques.</p><p>Si activé, chaque nuit, les données de la journée qui vient de s'écouler seront consolidées dans la base de données d'un puissant moteur d'analyse. Ensuite, chaque administrateur pourra parcourir les tableaux et graphiques statistiques dans la section correspondante.</p>"
           enable_statistics: "Activer les statistiques"
-        compte:
+        account:
           account: "Compte"
           customize_account_settings: "Personnaliser les paramètres du compte"
           user_validation_required: "validation des comptes"
           user_validation_required_title: "Validation des comptes"
           user_validation_required_info: "En activant cette option, seuls les membres dont le compte est validé par un administrateur ou un gestionnaire pourront faire des réservations."
-          user_validation_required_option_label: "Activer l'option de validation du compte"
-          user_validation_required_list_title: "Message d'information sur la validation du compte membre"
-          user_validation_required_list_info: "Votre administrateur doit valider votre compte. Vous pourrez ensuite accéder à toutes les fonctions de réservation."
-          user_validation_required_list_other_info: "Les ressources sélectionnées ci-dessous seront soumises à la validation du compte de membre."
-          user_validation_required_list:
-            subscription: "Abonnements"
-            machine: "Machines"
-            event: "Événements"
-            space: "Espaces"
-            training: "Formations"
-            pack: "Packs prépayés"
-          create_groups: "Créer des groupes"
-          add_proof_of_identity_types: "Ajouter des justificatifs"
-          proof_of_identity_type_info: "Vous pouvez ajouter un justificatif en fonction des groupes d'utilisateurs créés. Il sera demandé à vos membres de les déposer dans leur espace. Chaque membre sera informé du justificatif à fournir dans son espace personnel (onglet Mes justificatifs). De votre côté, vous pouvez vérifier les justificatifs et valider leur compte (à condition que l'option de validation du compte soit activée)."
-          proof_of_identity_type_no_group_info: "Un justificatif est nécessairement appliqué aux groupes.</br>Si vous n'avez pas encore de groupe, vous pouvez en créer un à partir de la page \"Utilisateurs/Groupes\" (bouton à droite)."
-          proof_of_identity_type_title: "Justificatif"
-          add_proof_of_identity_type_button: "Créer un justificatif"
-          no_proof_of_identity_types: "Vous n'avez aucun jusificatif.</br>Assurez-vous d'avoir créé au moins un groupe pour ajouter un document."
-          proof_of_identity_type:
-            group_name: "Groupe"
-            name: "Justificatif"
-          all_groups: 'Tous les groupes'
-          new_proof_of_identity_type: "Créer un justificatif"
-          edit_proof_of_identity_type: "Modifier le justificatif"
-          proof_of_identity_type_form_info: "Paramètres du champ"
-          proof_of_identity_type_select_group: "Sélectionnez un groupe"
-          proof_of_identity_type_input_name: "Nom"
-          create: "Créer"
-          edit: "Modifier"
+          user_validation_setting:
+            customization_of_SETTING_successfully_saved: "La personnalisation de {SETTING} a bien été enregistrée."
+            error_SETTING_locked: "Impossible de mettre à jour le paramètre : {SETTING} est verrouillé. Veuillez contacter votre administrateur système."
+            an_error_occurred_saving_the_setting: "Une erreur est survenue pendant l'enregistrement du paramètre. Veuillez réessayer plus tard."
+            user_validation_required_option_label: "Activer l'option de validation des comptes"
+            user_validation_required_list_title: "Message d'information sur la validation du compte membre"
+            user_validation_required_list_info: "Votre administrateur doit valider votre compte. Vous pourrez ensuite accéder à toutes les fonctions de réservation."
+            user_validation_required_list_other_info: "Les ressources sélectionnées ci-dessous seront soumises à la validation du compte membre."
+            user_validation_required_list:
+              subscription: "Abonnements"
+              machine: "Machines"
+              event: "Événements"
+              space: "Espaces"
+              training: "Formations"
+              pack: "Packs prépayés"
           confirm: "Valider"
           confirmation_required: "Confirmation requise"
-          do_you_really_want_to_delete_this_proof_of_identity_type: "Voulez-vous vraiment supprimer ce justificatif ?"
-          proof_of_identity_type_successfully_created: "Le nouveau justificatif a été créé."
-          proof_of_identity_type_unable_to_create: "Impossible de supprimer le justificatif : "
-          proof_of_identity_type_successfully_updated: "Le justificatif a été mis à jour."
-          proof_of_identity_type_unable_to_update: "Impossible de modifier le justificatif : "
-          proof_of_identity_type_deleted: "Le justificatif a été supprimé."
-          proof_of_identity_type_unable_to_delete: "Impossible de supprimer le justificatif : "
           organization: "Structure"
           organization_profile_custom_fields_info: "Vous pouvez afficher des champs supplémentaires pour les utilisateurs qui se déclarent être une structure. Vous pouvez également choisir de les rendre obligatoires lors de la création du compte."
           organization_profile_custom_fields_alert: "Attention : les champs activés seront automatiquement affichés sur les factures émises. Une fois configurés, veuillez ne pas les modifier."
-          organization_profile_custom_field:
-            required: "Confirmation requise"
-            actived: "Activer le champ"
-          organization_profile_custom_field_successfully_updated: "Le champ structure a été mis à jour."
-          organization_profile_custom_field_unable_to_update: "Impossible de modifier le champ : "
+        supporting_documents_type_modal:
+          successfully_created: "La nouvelle demande de justificatifs a bien été créée."
+          unable_to_create: "Impossible de supprimer la demande de justificatifs : "
+          successfully_updated: "La nouvelle demande de justificatifs a bien été mise à jour."
+          unable_to_update: "Impossible de modifier la demande de justificatifs : "
+          new_type: "Créer une demande de justificatifs"
+          edit_type: "Modifier la demande de justificatifs"
+          create: "Créer"
+          edit: "Modifier"
+        supporting_documents_type_form:
+          type_form_info: "Paramètres du champ"
+          select_group: "Choisissez un ou plusieurs groupe(s)"
+          name: "Nom"
+        supporting_documents_types_list:
+          add_supporting_documents_types: "Ajouter des justificatifs"
+          all_groups: 'Tous les groupes'
+          supporting_documents_type_info: "Vous pouvez demander des pièces justificatives en fonction des groupes d'utilisateurs créés. Cela demandera à vos membres de déposer ce type de documents dans leur espace personnel. Chaque membre sera informé de la nécessité de fournir une pièce justificative dans son espace personnel (onglet Mes justificatifs). De votre côté, vous pouvez vérifier les justificatifs fournis et valider le compte du membre (si l'option de validation de compte est activée)."
+          no_groups_info: "Un justificatif est nécessairement appliqué aux groupes.<br>Si vous n'avez pas encore de groupe, vous pouvez en créer un à partir de la page \"Utilisateurs/Groupes\" (bouton à droite)."
+          create_groups: "Créer des groupes"
+          supporting_documents_type_title: "Demandes de justificatifs"
+          add_type: "Nouvelle demande de justificatifs"
+          group_name: "Groupe"
+          name: "Pièces justificatives"
+          no_types: "Vous n'avez aucune demande de justificatif.<br> Assurez-vous d'avoir créé au moins un groupe pour ajouter une demande."
+        delete_supporting_documents_type_modal:
+          confirmation_required: "Confirmation requise"
+          confirm: "Valider"
+          deleted: "La demande de justificatifs a bien été supprimée."
+          unable_to_delete: "Impossible de supprimer la demande de justificatifs : "
+          confirm_delete_supporting_documents_type: "Êtes-vous sûr de vouloir supprimer la demande de ce type de justificatifs ?"
+        profile_custom_fields_list:
+          field_successfully_updated: "Le champ structure a été mis à jour."
+          unable_to_update: "Impossible de modifier le champ : "
+          required: "Confirmation requise"
+          actived: "Activer le champ"
         home:
           show_upcoming_events: "Afficher les prochains événements"
           upcoming_events:
@@ -1630,19 +1656,20 @@ fr:
         report_will_be_destroyed: "Une fois le signalement traité, le rapport sera supprimé. Cette action est irréversible, continuer ?"
         report_removed: "Le rapport a bien été supprimé"
         failed_to_remove: "Une erreur est survenue, impossible de supprimer le rapport"
-      local_payment:
-        validate_cart: "Valider mon panier"
-        offline_payment: "Paiement sur place"
+      local_payment_form:
         about_to_cash: "Vous êtes sur le point de confirmer l'encaissement par un moyen de paiement externe. Veuillez ne pas cliquer sur le bouton ci-dessous tant que vous n'avez pas encaissé le paiement demandé."
         about_to_confirm: "Vous êtes sur le point de confirmer votre {ITEM, select, subscription{abonnement} other{réservation}}."
         payment_method: "Moyen de paiement"
         method_card: "Carte bancaire en ligne"
-        method_check: "Par chèques"
+        method_check: "Par chèque"
         method_transfer: "Par virement bancaire"
         card_collection_info: "En validant, vous serez invité à saisir les informations de carte bancaire du membre. Cette carte sera prélevée automatiquement aux échéances."
         check_collection_info: "En validant, vous confirmez être en possession de {DEADLINES} chèques permettant d'encaisser l'ensemble des mensualité."
         transfer_collection_info: "<p>En validant, vous confirmez avoir mis en place {DEADLINES} prélèvements bancaires, vous permettant de percevoir toutes les mensualités.</p><p><strong>Veuillez noter :</strong> les prélèvements bancaires ne sont pas automatiquement gérés par Fab-manager.</p>"
         online_payment_disabled: "Le paiement en ligne n'est pas disponible. Vous ne pouvez pas encaisser cet échéancier de paiement en utilisant la carte bancaire en ligne."
+      local_payment_modal:
+        validate_cart: "Valider mon panier"
+        offline_payment: "Paiement sur place"
       check_list_setting:
         save: 'Enregistrer'
         customization_of_SETTING_successfully_saved: "La personnalisation de {SETTING} a bien été enregistrée."
