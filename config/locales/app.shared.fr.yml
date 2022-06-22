@@ -165,7 +165,7 @@ fr:
       member_select:
         select_a_member: "Sélectionnez un membre"
         start_typing: "Commencez à écrire..."
-        member_not_validated: "Attention :</br> Le compte du membre n'est pas validé."
+        member_not_validated: "Warning:<br> The member was not validated."
       #payment modal
       abstract_payment_modal:
         online_payment: "Online payment"
@@ -479,7 +479,7 @@ fr:
         slot_tags: "Étiquettes du créneau"
         user_tags: "Étiquettes de l'utilisateur"
         no_tags: "Aucune étiquette"
-        user_validation_required_alert: "Attention !</br>Votre administrateur doit valider votre compte. Vous pourrez alors accéder à l'ensemble des fonctionnalités de réservation."
+        user_validation_required_alert: "Warning!<br>Your administrator must validate your account. Then, you'll then be able to access all the booking features."
       #feature-tour modal
       tour:
         previous: "Précédent"
