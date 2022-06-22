@@ -369,7 +369,7 @@ zu:
         user_proof_of_identity_files_refusal: "crwdns23588:0crwdne23588:0"
         action: "crwdns23590:0crwdne23590:0"
     notify_admin_user_proof_of_identity_refusal:
-      subject: "crwdns23592:0crwdne23592:0"
+      subject: "crwdns23614:0crwdne23614:0"
       body:
         user_proof_of_identity_files_refusal: "crwdns23594:0%{NAME}crwdnd23594:0%{OPERATOR}crwdne23594:0"
     shared:
