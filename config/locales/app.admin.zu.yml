@@ -1027,6 +1027,7 @@ zu:
         invalidate_member_success: "crwdns22544:0crwdne22544:0"
         validate_member_error: "crwdns22546:0crwdne22546:0"
         invalidate_member_error: "crwdns22548:0crwdne22548:0"
+        supporting_documents: "crwdns23678:0crwdne23678:0"
       #extend a subscription for free
       free_extend_modal:
         extend_subscription: "crwdns22047:0crwdne22047:0"
