@@ -1056,7 +1056,7 @@ es:
         subscribe: "Subscribe"
         select_plan: "Please select a plan"
         pay_in_one_go: "Pay in one go"
-        subscription_success: ""
+        subscription_success: "Subscription successfully subscribed"
       #add a new administrator to the platform
       admins_new:
         add_an_administrator: "Agregar un administrador"
