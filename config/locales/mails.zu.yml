@@ -24,7 +24,7 @@ zu:
       subject: "crwdns3891:0crwdne3891:0"
       body:
         warning: "crwdns3893:0crwdne3893:0"
-        user_invalidated: "crwdns23042:0crwdne23042:0"
+        user_invalidated: "crwdns23576:0crwdne23576:0"
     notify_admin_user_group_changed:
       subject: "crwdns3895:0crwdne3895:0"
       body:
@@ -346,14 +346,14 @@ zu:
         date: "crwdns22311:0crwdne22311:0"
         confirm: "crwdns22313:0crwdne22313:0"
     notify_admin_user_proof_of_identity_files_created:
-      subject: "crwdns23046:0crwdne23046:0"
+      subject: "crwdns23578:0crwdne23578:0"
       body:
-        proof_of_identity_files_uploaded_below: "crwdns23048:0%{NAME}crwdne23048:0"
+        proof_of_identity_files_uploaded_below: "crwdns23580:0%{NAME}crwdne23580:0"
         validate_user: "crwdns23050:0crwdne23050:0"
     notify_admin_user_proof_of_identity_files_updated:
-      subject: "crwdns23052:0crwdne23052:0"
+      subject: "crwdns23582:0crwdne23582:0"
       body:
-        user_update_proof_of_identity_file: "crwdns23054:0%{NAME}crwdne23054:0"
+        user_update_proof_of_identity_file: "crwdns23584:0%{NAME}crwdne23584:0"
         validate_user: "crwdns23056:0crwdne23056:0"
     notify_user_is_validated:
       subject: "crwdns23058:0crwdne23058:0"
@@ -364,13 +364,13 @@ zu:
       body:
         account_invalidated: "crwdns23064:0crwdne23064:0"
     notify_user_proof_of_identity_refusal:
-      subject: "crwdns23066:0crwdne23066:0"
+      subject: "crwdns23586:0crwdne23586:0"
       body:
-        user_proof_of_identity_files_refusal: "crwdns23068:0crwdne23068:0"
-        action: "crwdns23070:0crwdne23070:0"
+        user_proof_of_identity_files_refusal: "crwdns23588:0crwdne23588:0"
+        action: "crwdns23590:0crwdne23590:0"
     notify_admin_user_proof_of_identity_refusal:
-      subject: "crwdns23072:0crwdne23072:0"
+      subject: "crwdns23592:0crwdne23592:0"
       body:
-        user_proof_of_identity_files_refusal: "crwdns23074:0%{NAME}crwdnd23074:0%{OPERATOR}crwdne23074:0"
+        user_proof_of_identity_files_refusal: "crwdns23594:0%{NAME}crwdnd23594:0%{OPERATOR}crwdne23594:0"
     shared:
       hello: "crwdns4215:0%{user_name}crwdne4215:0"
