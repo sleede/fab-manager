@@ -75,7 +75,7 @@ export const UserValidationSetting: React.FC<UserValidationSettingProps> = ({ on
   return (
     <div className="user-validation-setting">
       <BooleanSetting name={SettingName.UserValidationRequired}
-        label={t('app.admin.settings.user_validation_setting.user_validation_required_option_label')}
+        label={t('app.admin.settings.account.user_validation_setting.user_validation_required_option_label')}
         hideSave={true}
         onChange={setUserValidationRequired}
         onSuccess={onSuccess}
@@ -83,12 +83,12 @@ export const UserValidationSetting: React.FC<UserValidationSettingProps> = ({ on
       </BooleanSetting>
       {userValidationRequired === 'true' &&
         <div>
-          <h4>{t('app.admin.settings.user_validation_setting.user_validation_required_list_title')}</h4>
+          <h4>{t('app.admin.settings.account.user_validation_setting.user_validation_required_list_title')}</h4>
           <p>
-            {t('app.admin.settings.user_validation_setting.user_validation_required_list_info')}
+            {t('app.admin.settings.account.user_validation_setting.user_validation_required_list_info')}
           </p>
           <FabAlert level="warning">
-            {t('app.admin.settings.user_validation_setting.user_validation_required_list_other_info')}
+            {t('app.admin.settings.account.user_validation_setting.user_validation_required_list_other_info')}
           </FabAlert>
           <CheckListSetting name={SettingName.UserValidationRequiredList}
             label=""
@@ -101,7 +101,7 @@ export const UserValidationSetting: React.FC<UserValidationSettingProps> = ({ on
           </CheckListSetting>
         </div>
       }
-      <FabButton className="save-btn" onClick={handleSave}>{t('app.admin.user_validation_setting.save')}</FabButton>
+      <FabButton className="save-btn" onClick={handleSave}>{t('app.admin.account.user_validation_setting.save')}</FabButton>
     </div>
   );
 };
