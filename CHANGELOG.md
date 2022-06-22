@@ -25,6 +25,7 @@
 - Fix a bug: error message during the setup: the input device is not a TTY
 - Fix a bug: when Fab-manager was installed as non-root user, unable to compile the assets during the upgrade
 - Fix a bug: unable to remove an SSO data mapping field once saved
+- Fix a bug: unable to update the user profile after toggling the organization switch twice
 - [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/set-docker-user.sh | bash`
 
 ## v5.4.4 2022 June 8

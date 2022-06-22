@@ -267,7 +267,7 @@ class API::MembersController < API::ApiController
                                                         :dailymotion, :github, :echosciences, :pinterest, :lastfm, :flickr,
                                                         user_avatar_attributes: %i[id attachment destroy]],
                                    invoicing_profile_attributes: [
-                                     :id,
+                                     :id, :organization,
                                      address_attributes: %i[id address],
                                      organization_attributes: [:id, :name, address_attributes: %i[id address]],
                                      user_profile_custom_fields_attributes: %i[id value invoicing_profile_id profile_custom_field_id]
@@ -282,7 +282,7 @@ class API::MembersController < API::ApiController
                                                         :dailymotion, :github, :echosciences, :pinterest, :lastfm, :flickr,
                                                         user_avatar_attributes: %i[id attachment destroy]],
                                    invoicing_profile_attributes: [
-                                     :id,
+                                     :id, :organization,
                                      address_attributes: %i[id address],
                                      organization_attributes: [:id, :name, address_attributes: %i[id address]],
                                      user_profile_custom_fields_attributes: %i[id value invoicing_profile_id profile_custom_field_id]

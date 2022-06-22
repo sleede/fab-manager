@@ -30,7 +30,10 @@
 }
 
 @media (min-width: 1200px) {
+  .supporting-documents-validation .fab-panel {
+    width: 56.33%;
+  }
   .supporting-documents-validation .fab-panel.refusal {
-    width: 33.33333333333333%;
+    width: 33.33%;
   }
 }
