@@ -1540,7 +1540,7 @@ de:
           confirmation_required: "Confirmation required"
           organization: "Organization"
           organization_profile_custom_fields_info: "You can display additional fields for users who declare themselves to be an organization. You can also choose to make them mandatory at account creation."
-          organization_profile_custom_fields_alert: "Attention: the activated fields will be automatically displayed on the issued invoices. Once configured, please do not modify them."
+          organization_profile_custom_fields_alert: "Warning: the activated fields will be automatically displayed on the issued invoices. Once configured, please do not modify them."
         supporting_documents_type_modal:
           successfully_created: "The new supporting documents request has been created."
           unable_to_create: "Unable to delete the supporting documents request: "
