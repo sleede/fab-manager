@@ -165,7 +165,7 @@ pt:
       member_select:
         select_a_member: "Selecionar um membro"
         start_typing: "Escrevendo..."
-        member_not_validated: "Attention:</br> The member has not validated."
+        member_not_validated: "Warning:<br> The member was not validated."
       #payment modal
       abstract_payment_modal:
         online_payment: "Online payment"
@@ -479,7 +479,7 @@ pt:
         slot_tags: "Tags do Slot"
         user_tags: "Etiquetas de usuários"
         no_tags: "Sem etiquetas"
-        user_validation_required_alert: "Attention !</br>Your administrator must validate your account. You will then be able to access all the booking features."
+        user_validation_required_alert: "Warning!<br>Your administrator must validate your account. Then, you'll then be able to access all the booking features."
       #feature-tour modal
       tour:
         previous: "Anterior"
