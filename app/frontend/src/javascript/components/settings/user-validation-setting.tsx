@@ -101,7 +101,7 @@ export const UserValidationSetting: React.FC<UserValidationSettingProps> = ({ on
           </CheckListSetting>
         </div>
       }
-      <FabButton className="save-btn" onClick={handleSave}>{t('app.admin.account.user_validation_setting.save')}</FabButton>
+      <FabButton className="save-btn" onClick={handleSave}>{t('app.admin.settings.account.user_validation_setting.save')}</FabButton>
     </div>
   );
 };
