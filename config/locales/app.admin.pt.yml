@@ -1664,14 +1664,14 @@ pt:
         payment_method: "Payment method"
         method_card: "Online by card"
         method_check: "By check"
-        method_transfer: "By bank transfer"
-        card_collection_info: "By validating, you'll be prompted for the member's card number. This card will be automatically charged at the deadlines."
-        check_collection_info: "By validating, you confirm that you have {DEADLINES} checks, allowing you to collect all the monthly payments."
-        transfer_collection_info: "<p>By validating, you confirm that you set up {DEADLINES} bank direct debits, allowing you to collect all the monthly payments.</p><p><strong>Please note:</strong> the bank transfers are not automatically handled by Fab-manager.</p>"
-        online_payment_disabled: "Online payment is not available. You cannot collect this payment schedule by online card."
+        method_transfer: "Por transferência bancária"
+        card_collection_info: "Ao validar, será solicitado o número do cartão do membro. Este cartão será cobrado automaticamente nos prazos."
+        check_collection_info: "Ao validar, você confirma que tem {DEADLINES} cheques, permitindo que você colete todos os pagamentos mensais."
+        transfer_collection_info: "<p>Ao validar, você confirma que configurou {DEADLINES} débitos diretos do banco, permitindo que você colete todos os pagamentos mensais.</p><p><strong>Atenção:</strong> as transferências bancárias não são tratadas automaticamente pelo Fab-manager.</p>"
+        online_payment_disabled: "Pagamento online não está disponível. Você não pode coletar este horário de pagamento com cartão online."
       local_payment_modal:
-        validate_cart: "Validate my cart"
-        offline_payment: "Payment on site"
+        validate_cart: "Validar o meu carrinho"
+        offline_payment: "Pagamento pelo site"
       check_list_setting:
         save: 'Salvar'
         customization_of_SETTING_successfully_saved: "Personalização do {SETTING} salvo com êxito."
