@@ -24,15 +24,15 @@ pt:
         _the_fablab_policy: "a política do FabLab"
         your_profile_has_been_successfully_updated: "Seu perfil foi actualizado com êxito."
         completion_header_info:
-          rules_changed: "Please fill the following form to update your profile and continue to use the platform."
+          rules_changed: "Por favor, preencha o formulário a seguir para atualizar seu perfil e continuar a usar a plataforma."
           sso_intro: "Você acabou de criar uma nova conta como {GENDER, select, male{o} female{a} neutral{} other{do}} {NAME}"
           duplicate_email_info: "It looks like your email address is already used by another user. Check your email address and please input below the code you have received."
           details_needed_info: "To finalize your account, we need some more details."
         profile_form_option:
           title: "Novo nessa plataforma?"
-          please_fill: "Please fill in the following form to create your account."
+          please_fill: "Por favor, preencha o seguinte formulário para criar sua conta."
           disabled_data_from_sso: "Alguns dados podem já ter sido fornecidos por {NAME} e não podem ser modificados."
-          confirm_instructions_html: "Once you are done, please click on <strong>Save</strong> to confirm your account and start using the application."
+          confirm_instructions_html: "Depois de finalizar, clique em <strong>Salvar</strong> para confirmar sua conta e começar a usar o aplicativo."
           duplicate_email_html: "It looks like your email address <strong>({EMAIL})</strong> is already associated with another account. If this account is not yours, please click on the following button to change the email associated with your {PROVIDER} account."
           edit_profile: "Alterar meus dados"
           after_edition_info_html: "Once your data are up to date, <strong>click on the synchronization button below</strong>, or <strong>disconnect then reconnect</strong> for your changes to take effect."
