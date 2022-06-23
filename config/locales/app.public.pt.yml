@@ -15,7 +15,7 @@ pt:
         dashboard: "Painel de controle"
         my_profile: "Meu Perfil"
         my_settings: "Minhas Configurações"
-        my_supporting_documents_files: "My supporting documents"
+        my_supporting_documents_files: "Meus documentos"
         my_projects: "Meus Projetos"
         my_trainings: "Meus Treinamentos"
         my_events: "Meus Eventos"
@@ -41,7 +41,7 @@ pt:
         reserve_a_space: "Reservar Espaço"
         projects_gallery: "Galeria de Projetos"
         subscriptions: "Assinaturas"
-        public_calendar: "Agenda"
+        public_calendar: "Calendário"
         #left menu (admin)
         trainings_monitoring: "Treinamentos"
         manage_the_calendar: "Agenda"
@@ -92,8 +92,8 @@ pt:
         i_ve_read_and_i_accept_: "Eu li e aceito"
         _the_fablab_policy: "a política do FabLab"
         field_required: "Campo obrigatório"
-        profile_custom_field_is_required: "{FEILD} is required"
-        user_supporting_documents_required: "Warning!<br>You have declared to be \"{GROUP}\", supporting documents may be requested."
+        profile_custom_field_is_required: "{FEILD} é obrigatório"
+        user_supporting_documents_required: "Atenção!<br>Você se declarou como \"{GROUP}\", é possível sejam solicitados documentos de comprovação."
         unexpected_error_occurred: "Ocorreu um erro inesperado. Por favor, tenta novamente mais tarde."
         used_for_statistics: "Estes dados serão utilizados para fins estatísticos"
         used_for_invoicing: "Esses dados serão usados para fins de faturamento"
@@ -153,7 +153,7 @@ pt:
       event_card:
         on_the_date: "Em {DATE}"
         from_date_to_date: "De {START} até {END}"
-        from_time_to_time: "From {START} to {END}"
+        from_time_to_time: "De {START} até {END}"
         all_day: "Dia todo"
         still_available: "Locais disponíveis: "
         event_full: "Evento lotado"
@@ -291,7 +291,7 @@ pt:
         full_price_: "Valor inteira:"
         to_date: "até" #eg. from 01/01 to 01/05
         all_themes: "Todos os temas"
-        show_featured: "Show the featured event"
+        show_featured: "Exibir o evento em destaque"
       #details and booking of an event
       events_show:
         event_description: "Descrição do evento"
