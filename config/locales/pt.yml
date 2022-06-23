@@ -64,8 +64,8 @@ pt:
     requested_account_does_not_exists: "A conta requisitada não existe"
   #SSO external authentication
   authentication_providers:
-    local_database_provider_already_exists: 'A "Local Database" provider already exists. Unable to create another.'
-    matching_between_User_uid_and_API_required: "It is required to set the matching between User.uid and the API to add this provider."
+    local_database_provider_already_exists: 'Um provedor "Local Database" já existe. Não foi possível criar outro.'
+    matching_between_User_uid_and_API_required: "É necessário definir a correspondência entre User.uid e a API para adicionar este provedor."
   #PDF invoices generation
   invoices:
     refund_invoice_reference: "Referência da fatura de reembolso: %{REF}"
@@ -245,14 +245,14 @@ pt:
     reservations: "Reservas"
     available_seats: "Assentos disponíveis"
   reservation_ics:
-    summary: "%{TYPE} reservation"
+    summary: "%{TYPE} reserva"
     type:
-      Machine: "Machine"
-      Space: "Space"
-      Event: "Event"
-      Training: "Training"
-    description: "You have reserved %{COUNT} slots of %{ITEM}"
-    alarm_summary: "Remind your reservation"
+      Machine: "Máquina"
+      Space: "Espaço"
+      Event: "Evento"
+      Training: "Treinamento"
+    description: "Você reservou %{COUNT} vagas de %{ITEM}"
+    alarm_summary: "Lembrar a sua reserva"
   roles:
     member: "Membro"
     manager: "Gestor"
@@ -398,17 +398,17 @@ pt:
       notify_admin_payment_schedule_transfer_deadline:
         schedule_deadline: "Você deve realizar a verificação do débito para a data limite de %{DATE}, para o agendamento %{REFERENCE}"
       notify_admin_user_proof_of_identity_files_created:
-        proof_of_identity_files_uploaded: "Proof of identity uploaded by member <strong><em>%{NAME}</strong></em>."
+        proof_of_identity_files_uploaded: "Comprovante de identidade enviado pelo membro <strong><em>%{NAME}</strong></em>."
       notify_admin_user_proof_of_identity_files_updated:
-        proof_of_identity_files_uploaded: "Proof of identity changed by Member <strong><em>%{NAME}</strong></em>."
+        proof_of_identity_files_uploaded: "Comprovante de identidade alterado pelo membro <strong><em>%{NAME}</strong></em>."
       notify_user_is_validated:
-        account_validated: "Your account is valid."
+        account_validated: "Sua conta é válida."
       notify_user_is_invalidated:
-        account_invalidated: "Your account is invalid."
+        account_invalidated: "Sua conta é inválida."
       notify_user_proof_of_identity_refusal:
-        refusal: "Your proof of identity are not accepted"
+        refusal: "Seu comprovante de identidade não foi aceito"
       notify_admin_user_proof_of_identity_refusal:
-        refusal: "Member's proof of identity <strong><em>%{NAME}</strong></em> refused."
+        refusal: "Prova de identidade do membro <strong><em>%{NAME}</strong></em> recusada."
   #statistics tools for admins
   statistics:
     subscriptions: "Assinaturas"
@@ -593,5 +593,5 @@ pt:
     pinterest: "pinterest"
     lastfm: "lastfm"
     flickr: "flickr"
-    machines_module: "Machines module"
-    user_change_group: "Allow users to change their group"
+    machines_module: "Módulo de Máquinas"
+    user_change_group: "Permitir que os usuários mudem de grupo"
