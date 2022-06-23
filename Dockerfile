@@ -53,8 +53,8 @@ RUN mkdir -p /var/log/supervisor && \
     mkdir -p /usr/src/app/tmp/pids && \
     mkdir -p /usr/src/app/tmp/cache && \
     mkdir -p /usr/src/app/log && \
-    chmod -R a+w /usr/src/app/tmp && \
-    chmod -R a+w /usr/src/app/log && \
+    mkdir -p /usr/src/app/node_modules && \
+    chmod -R a+w /usr/src/app && \
     chmod -R a+w /var/run
 
 # Install Javascript packages
@@ -69,7 +69,8 @@ RUN apk del .build-deps && \
     rm -rf /tmp/* \
            /var/tmp/* \
            /var/cache/apk/* \
-           /usr/lib/ruby/gems/*/cache/*
+           /usr/lib/ruby/gems/*/cache/* && \
+    chmod -R a+w /usr/src/app/node_modules
 
 # Copy source files
 COPY docker/database.yml /usr/src/app/config/database.yml
