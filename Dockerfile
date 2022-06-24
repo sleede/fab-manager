@@ -69,7 +69,8 @@ RUN apk del .build-deps && \
     rm -rf /tmp/* \
            /var/tmp/* \
            /var/cache/apk/* \
-           /usr/lib/ruby/gems/*/cache/*
+           /usr/lib/ruby/gems/*/cache/* && \
+    chmod -R a+w /usr/src/app/node_modules
 
 # Copy source files
 COPY docker/database.yml /usr/src/app/config/database.yml
