@@ -41,7 +41,7 @@ module SingleSignOnConcern
     ## @param data {*} the data to put in the given key. Eg. 'user@example.com'
     def set_data_from_sso_mapping(sso_mapping, data)
       if sso_mapping.to_s.start_with? 'user.'
-        self[sso_mapping[5..-1].to_sym] = data unless data.nil?
+        self[sso_mapping[5..-1].to_sym] = data unless data.nil? || data.blank?
       elsif sso_mapping.to_s.start_with? 'profile.'
         case sso_mapping.to_s
         when 'profile.avatar'
