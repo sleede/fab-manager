@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 yq() {
-  docker run --rm -i -v "${NGINX_PATH}:/workdir" mikefarah/yq:4 "$@"
+  docker run --rm -i -v "${NGINX_PATH}:/workdir" --user "$UID" mikefarah/yq:4 "$@"
 }
 
 config()
