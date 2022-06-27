@@ -121,5 +121,6 @@ export const UserFieldMapping = Object.assign({
   'profile_attributes.interest': 'profile.interest',
   'profile_attributes.software_mastered': 'profile.software_mastered',
   is_allow_contact: 'user.is_allow_contact',
-  is_allow_newsletter: 'user.is_allow_newsletter'
+  is_allow_newsletter: 'user.is_allow_newsletter',
+  group_id: 'user.group_id'
 }, ...socialMappings);
