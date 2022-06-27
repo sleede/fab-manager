@@ -58,9 +58,9 @@ You can generate such a random key by running `rails secret`.
 
 Configure the Rails' Action Mailer delivery method.
 See http://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration for more details.
-<a name="SMTP_ADDRESS"></a><a name="SMTP_PORT"></a><a name="SMTP_USER_NAME"></a><a name="SMTP_PASSWORD"></a><a name="SMTP_AUTHENTICATION"></a><a name="SMTP_ENABLE_STARTTLS_AUTO"></a><a name="SMTP_OPENSSL_VERIFY_MODE"></a><a name="SMTP_TLS"></a>
+<a name="SMTP_ADDRESS"></a><a name="SMTP_PORT"></a><a name="SMTP_USER_NAME"></a><a name="SMTP_PASSWORD"></a><a name="SMTP_AUTHENTICATION"></a><a name="SMTP_ENABLE_STARTTLS_AUTO"></a><a name="SMTP_OPENSSL_VERIFY_MODE"></a>
 
-    SMTP_ADDRESS, SMTP_PORT, SMTP_USER_NAME, SMTP_PASSWORD, SMTP_AUTHENTICATION, SMTP_ENABLE_STARTTLS_AUTO, SMTP_OPENSSL_VERIFY_MODE & SMTP_TLS
+    SMTP_ADDRESS, SMTP_PORT, SMTP_USER_NAME, SMTP_PASSWORD, SMTP_AUTHENTICATION, SMTP_ENABLE_STARTTLS_AUTO & SMTP_OPENSSL_VERIFY_MODE
 
 When DELIVERY_METHOD is set to **smtp**, configure the SMTP server parameters.
 See https://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration for more details.
