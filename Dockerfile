@@ -54,6 +54,7 @@ RUN mkdir -p /var/log/supervisor && \
     mkdir -p /usr/src/app/tmp/cache && \
     mkdir -p /usr/src/app/log && \
     mkdir -p /usr/src/app/node_modules && \
+    mkdir -p /usr/src/app/public/api && \
     chmod -R a+w /usr/src/app && \
     chmod -R a+w /var/run
 
