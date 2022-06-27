@@ -15,6 +15,7 @@
 - Fixed all react components code according to eslint rules
 - Renamed proof-of-identity to supporting-documents in react components and in end-user strings
 - Fix a bug: when email was mapped from SSO provided as empty string -> unable to merge account
+- Fix a bug: when an empty data was retured by the SSO, unable to edit it
 - Fix a bug: the birthdate was not marked as required, in the profile edition form
 - Fix a bug: when the phone or the address were required, they were not marked as this, in the profile edition form
 - Fix a bug: the birthday was not shown in user edition form
