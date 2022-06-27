@@ -54,9 +54,23 @@ system_requirements()
       echo -e "\e[91m[ ❌ ] $_command was not found, exiting...\e[39m" && exit 1
     fi
   done
+  echo "detecting docker version..."
+  DOCKER_VERSION=$(docker -v | grep -oP "([0-9]{1,}\.)+[0-9]{1,}")
+  if verlt "$DOCKER_VERSION" 20.10; then
+    echo -e "\e[91m[ ❌ ] The installed docker version ($DOCKER_VERSION) is lower than the minimum required version (20.10). Exiting...\e[39m" && exit 1
+  fi
   echo "detecting docker-compose..."
   docker-compose version
   printf "\e[92m[ ✔ ] All requirements successfully checked.\e[39m \n\n"
+}
+
+# compare versions utilities
+# https://stackoverflow.com/a/4024263/1039377
+verlte() {
+    [  "$1" = "$(echo -e "$1\n$2" | sort -V | head -n1)" ]
+}
+verlt() {
+    [ "$1" = "$2" ] && return 1 || verlte "$1" "$2"
 }
 
 docker-compose()
