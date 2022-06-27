@@ -2,6 +2,10 @@
 
 ## next deploy
 
+## v5.4.6 2022 June 27
+
+- Fix a bug: unable to run yq in deployment scripts
+
 ## v5.4.5 2022 June 27
 
 - Feature the next event in the event page

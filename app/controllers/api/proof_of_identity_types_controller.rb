@@ -28,7 +28,7 @@ class API::ProofOfIdentityTypesController < API::ApiController
     if @proof_of_identity_type.update(proof_of_identity_type_params)
       render status: :ok
     else
-      render json: @pack.errors.full_messages, status: :unprocessable_entity
+      render json: @proof_of_identity_type.errors.full_messages, status: :unprocessable_entity
     end
   end
 

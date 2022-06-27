@@ -60,7 +60,7 @@ test_docker_compose()
 }
 
 yq() {
-  docker run --rm -i -v "${FM_PATH}:/workdir" mikefarah/yq:4 "$@"
+  docker run --rm -i -v "${FM_PATH}:/workdir" --user "$UID" mikefarah/yq:4 "$@"
 }
 
 
