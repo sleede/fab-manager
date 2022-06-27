@@ -2,6 +2,8 @@
 
 ## next deploy
 
+## v5.4.5 2022 June 27
+
 - Feature the next event in the event page
 - Documentation for installing behind a proxy
 - Ability to install behind a proxy
