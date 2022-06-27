@@ -21,7 +21,6 @@ de:
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "Sie verlieren jede ungespeicherte Änderung, wenn Sie diese Seite verlassen"
         you_will_lose_any_unsaved_modification_if_you_reload_this_page: "Ungespeicherte Änderungen gehen verloren, wenn Sie die Seite neu laden"
-        payment_card_error: "Mit Ihrer Kreditkarte ist ein Problem aufgetreten:"
         payment_card_declined: "Deine Kreditkarte wurde abgelehnt."
       change_group:
         title: "{OPERATOR, select, self{My group} other{User's group}}"
@@ -29,20 +28,32 @@ de:
         cancel: "Cancel"
         validate: "Validate group change"
         success: "Group successfully changed"
+      stripe_form:
+        payment_card_error: "A problem occurred with your payment card:"
       #text editor
       text_editor:
-        text_placeholder: "Type something…"
-        link_placeholder: "Paste link…"
-        url_placeholder: "Paste url…"
-        new_tab: "Open in a new tab"
-        add_link: "Insert a link"
-        add_video: "Embed a video"
-        add_image: "Insert an image"
+        fab_text_editor:
+          text_placeholder: "Type something…"
+        menu_bar:
+          link_placeholder: "Paste link…"
+          url_placeholder: "Paste url…"
+          new_tab: "Open in a new tab"
+          add_link: "Insert a link"
+          add_video: "Embed a video"
+          add_image: "Insert an image"
+      #modal dialog
+      fab_modal:
+        close: "Close"
       fab_socials:
         follow_us: "Follow us"
         networks_update_success: "Social networks update successful"
         networks_update_error: "Problem trying to update social networks"
         url_placeholder: "Paste url…"
+        save: "Save"
+        website_invalid: "The website address is not a valid URL"
+      edit_socials:
+        url_placeholder: "Paste url…"
+        website_invalid: "The website address is not a valid URL"
       #user edition form
       user_profile_form:
         add_an_avatar: "Add an avatar"
@@ -154,15 +165,15 @@ de:
       member_select:
         select_a_member: "Ein Mitglied auswählen"
         start_typing: "Tippe ein..."
-        member_not_validated: "Attention:</br> The member has not validated."
+        member_not_validated: "Warning:<br> The member was not validated."
       #payment modal
-      payment:
-        online_payment: "Online-Bezahlung"
-        i_have_read_and_accept_: "Ich habe gelesen und akzeptiere "
-        _the_general_terms_and_conditions: "die allgemeinen Nutzungs- und Geschäftsbedingungen."
-        payment_schedule_html: "<p>Sie abonnieren einen Zahlungszeitraum von {DEADLINES} Monaten.</p><p>Mit der Zahlung dieser Rechnung erklären Sie sich damit einverstanden, Ihr kartenausstellendes Finanzinstitut anzuweisen, Zahlungen von Ihrem Kartenkonto für die gesamte Dauer dieses Abonnements zu übernehmen. Das bedeutet auch, dass Kartendaten von {GATEWAY} gespeichert werden und eine Reihe von Zahlungen in Ihrem Namen und entsprechend dem angezeigten Zahlungsplan gestartet werden.</p>"
-        confirm_payment_of_: "Bezahlen: {AMOUNT}"
-        validate: "Bestätigen"
+      abstract_payment_modal:
+        online_payment: "Online payment"
+        i_have_read_and_accept_: "I have read, and accept "
+        _the_general_terms_and_conditions: "the general terms and conditions."
+        payment_schedule_html: "<p>You're about to subscribe to a payment schedule of {DEADLINES} months.</p><p>By paying this bill, you agree to send instructions to the financial institution that issue your card, to take payments from your card account, for the whole duration of this subscription. This imply that your card data are saved by {GATEWAY} and a series of payments will be initiated on your behalf, conforming to the payment schedule previously shown.</p>"
+        confirm_payment_of_: "Pay: {AMOUNT}"
+        validate: "Validate"
       #dialog of on site payment for reservations
       valid_reservation_modal:
         booking_confirmation: "Buchungsbestätigung"
@@ -174,6 +185,9 @@ de:
         method_check: "Per Scheck"
         card_collection_info: "Nach der Validierung werden Sie nach der Kartennummer des Mitglieds gefragt. Diese Karte wird automatisch zu den Fristen belastet."
         check_collection_info: "Durch die Validierung bestätigen Sie, dass Sie {DEADLINES} Schecks haben und so alle monatlichen Zahlungen abwickeln können."
+      event_themes:
+        title: "Event themes"
+        select_theme: "Pick up a theme…"
       #event edition form
       event:
         title: "Titel"
@@ -397,6 +411,15 @@ de:
         default_places: "Maximale Anzahl von Tickets"
         default_places_is_required: "Maximale Anzahl an Tickets ist erforderlich."
         disable_space: "Raum deaktivieren"
+      payment_schedule_summary:
+        your_payment_schedule: "Your payment schedule"
+        NUMBER_monthly_payment_of_AMOUNT: "{NUMBER} monthly {NUMBER, plural, =1{payment} other{payments}} of {AMOUNT}"
+        first_debit: "First debit on the day of the order."
+        monthly_payment_NUMBER: "{NUMBER}{NUMBER, plural, =1{st} =2{nd} =3{rd} other{th}} monthly payment: "
+        debit: "Debit on the day of the order."
+        view_full_schedule: "View the complete payment schedule"
+      select_schedule:
+        monthly_payment: "Monthly payment"
       #shopping cart module for reservations
       cart:
         summary: "Zusammenfassung"
@@ -414,13 +437,6 @@ de:
         cost_of_the_subscription: "Kosten des Abonnements"
         subscription_price: "Abonnementspreis"
         you_ve_just_selected_a_subscription_html: "Sie haben ein <strong>Abonnement</strong> ausgewählt:"
-        monthly_payment: "Monatliche Zahlung"
-        your_payment_schedule: "Ihr Zahlungsplan"
-        monthly_payment_NUMBER: "{NUMBER}{NUMBER, plural, one {} =1{.} =2{.} =3{.} other{.}} monatliche Zahlung:"
-        NUMBER_monthly_payment_of_AMOUNT: "{NUMBER} monatliche {NUMBER, plural, one {} =1{Zahlung} other{Zahlungen}} von {AMOUNT}"
-        first_debit: "Erstbelastung am Tag der Bestellung."
-        debit: "Kontobelastung am Tag der Bestellung."
-        view_full_schedule: "Den kompletten Zahlungsplan anzeigen"
         confirm_and_pay: "Bestätigen und bezahlen"
         you_have_settled_the_following_TYPE: "Sie haben die folgenden {TYPE, select, Machine{Maschinenslots} Training{Schulungen} other{Elemente}} beglichen:"
         you_have_settled_a_: "Sie haben beglichen"
@@ -463,7 +479,7 @@ de:
         slot_tags: "Slot-Tags"
         user_tags: "Nutzer-Tags"
         no_tags: "Keine Tags"
-        user_validation_required_alert: "Attention !</br>Your administrator must validate your account. You will then be able to access all the booking features."
+        user_validation_required_alert: "Warning!<br>Your administrator must validate your account. Then, you'll then be able to access all the booking features."
       #feature-tour modal
       tour:
         previous: "Vorherige"
@@ -475,32 +491,35 @@ de:
         what_to_do: "Was möchten Sie tun?"
         tour: "Funktionstour starten"
         guide: "Benutzerhandbuch öffnen"
+      stripe_confirm_modal:
+        resolve_action: "Resolve the action"
+        ok_button: "OK"
       #2nd factor authentication for card payments
       stripe_confirm:
         pending: "Warten auf Aktion..."
         success: "Danke, Ihre Karteneinrichtung ist abgeschlossen. Die Zahlung wird in Kürze fortgesetzt."
       #the summary table of all payment schedules
-      schedules_table:
-        schedule_num: "Zeitplan #"
-        date: "Datum"
-        price: "Preis"
-        customer: "Kunde"
-        deadline: "Fälligkeitsdatum"
-        amount: "Betrag"
-        state: "Status"
-        download: "Herunterladen"
-        state_new: "Noch nicht fällig"
-        state_pending_check: "Warten auf die Auszahlung des Schecks"
-        state_pending_transfer: "Warten auf die Buchungsbestätigung"
-        state_requires_payment_method: "Kreditkarte abgelaufen"
-        state_requires_action: "Aktion erforderlich"
-        state_paid: "Bezahlt"
-        state_error: "Fehler"
-        state_gateway_canceled: "Vom Zahlungs-Gateway abgebrochen"
-        state_canceled: "Storniert"
-        method_card: "Per Karte"
-        method_check: "per Scheck"
-        method_transfer: "per Banküberweisung"
+      payment_schedules_table:
+        schedule_num: "Schedule #"
+        date: "Date"
+        price: "Price"
+        customer: "Customer"
+        deadline: "Deadline"
+        amount: "Amount"
+        state: "State"
+        download: "Download"
+        state_new: "Not yet due"
+        state_pending_check: "Waiting for the cashing of the check"
+        state_pending_transfer: "Waiting for the tranfer confirmation"
+        state_requires_payment_method: "The credit card must be updated"
+        state_requires_action: "Action required"
+        state_paid: "Paid"
+        state_error: "Error"
+        state_gateway_canceled: "Canceled by the payment gateway"
+        state_canceled: "Canceled"
+        method_card: "by card"
+        method_check: "by check"
+        method_transfer: "by transfer"
       payment_schedule_item_actions:
         download: "Herunterladen"
         cancel_subscription: "Abonnement kündigen"
@@ -516,9 +535,9 @@ de:
         confirm_bank_transfer: "Banküberweisung bestätigen"
         confirm_bank_transfer_body: "Sie müssen den Erhalt von {AMOUNT} für den Zeitraum bis {DATE} bestätigen. Mit der Bestätigung der Banküberweisung wird für dieses Fälligkeitsdatum eine Rechnung generiert."
         confirm_cancel_subscription: "Sie sind dabei, diesen Zahlungsplan und das zugehörige Abonnement zu kündigen. Sind Sie sicher?"
-      payment_modal:
-        online_payment_disabled: "Online-Zahlung ist nicht verfügbar. Bitte kontaktieren Sie die FabLab-Rezeption direkt."
-        unexpected_error: "Ein Fehler ist aufgetreten. Bitte melden Sie dieses Problem dem Fab-Manager-Team."
+      card_payment_modal:
+        online_payment_disabled: "Online payment is not available. Please contact the FabLab's reception directly."
+        unexpected_error: "An error occurred. Please report this issue to the Fab-Manager's team."
       update_card_modal:
         unexpected_error: "Ein Fehler ist aufgetreten. Bitte melden Sie dieses Problem dem Fab-Manager-Team."
       stripe_card_update_modal:

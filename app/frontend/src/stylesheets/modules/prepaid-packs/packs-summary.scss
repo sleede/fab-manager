@@ -16,6 +16,13 @@
   .content {
     padding: 15px;
 
+    .remaining-hours {
+      .fab-alert {
+        margin-top: 15px;
+        margin-bottom: 15px;
+      }
+    }
+
     .button-wrapper {
       text-align: center;
 

@@ -44,14 +44,19 @@ RUN bundle config --global frozen 1
 
 # Install gems in a cache efficient way
 WORKDIR /tmp
-COPY Gemfile /tmp/
-COPY Gemfile.lock /tmp/
+COPY Gemfile* /tmp/
 RUN bundle config set --local without 'development test doc' && bundle install && bundle binstubs --all
 
 # Prepare the application directories
 RUN mkdir -p /var/log/supervisor && \
     mkdir -p /usr/src/app/tmp/sockets && \
-    mkdir -p /usr/src/app/tmp/pids
+    mkdir -p /usr/src/app/tmp/pids && \
+    mkdir -p /usr/src/app/tmp/cache && \
+    mkdir -p /usr/src/app/log && \
+    mkdir -p /usr/src/app/node_modules && \
+    mkdir -p /usr/src/app/public/api && \
+    chmod -R a+w /usr/src/app && \
+    chmod -R a+w /var/run
 
 # Install Javascript packages
 WORKDIR /usr/src/app
@@ -65,23 +70,24 @@ RUN apk del .build-deps && \
     rm -rf /tmp/* \
            /var/tmp/* \
            /var/cache/apk/* \
-           /usr/lib/ruby/gems/*/cache/*
+           /usr/lib/ruby/gems/*/cache/* && \
+    chmod -R a+w /usr/src/app/node_modules
 
 # Copy source files
 COPY docker/database.yml /usr/src/app/config/database.yml
 COPY . /usr/src/app
 
 # Volumes (the folders are created by setup.sh)
-VOLUME /usr/src/app/invoices
-VOLUME /usr/src/app/payment_schedules
-VOLUME /usr/src/app/exports
-VOLUME /usr/src/app/imports
-VOLUME /usr/src/app/public
-VOLUME /usr/src/app/public/uploads
-VOLUME /usr/src/app/public/packs
-VOLUME /usr/src/app/accounting
-VOLUME /usr/src/app/proof_of_identity_files
-VOLUME /var/log/supervisor
+VOLUME /usr/src/app/invoices \
+       /usr/src/app/payment_schedules \
+       /usr/src/app/exports \
+       /usr/src/app/imports \
+       /usr/src/app/public \
+       /usr/src/app/public/uploads \
+       /usr/src/app/public/packs \
+       /usr/src/app/accounting \
+       /usr/src/app/proof_of_identity_files \
+       /var/log/supervisor
 
 # Expose port 3000 to the Docker host, so we can access it from the outside
 EXPOSE 3000

@@ -1,4 +1,10 @@
 .manage-plan-category {
   display: inline;
   margin-right: 5px;
+
+  .create-button {
+    background-color: var(--secondary-dark);
+    border-color: var(--secondary-dark);
+    color: var(--secondary-text-color);
+  }
 }

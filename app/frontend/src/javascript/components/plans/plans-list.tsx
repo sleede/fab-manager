@@ -31,7 +31,7 @@ type PlansTree = Map<number, Map<number, Array<Plan>>>;
 /**
  * This component display an organized list of plans to allow the end-user to select one and subscribe online
  */
-const PlansList: React.FC<PlansListProps> = ({ onError, onPlanSelection, onLoginRequest, operator, customer, subscribedPlanId, canSelectPlan }) => {
+export const PlansList: React.FC<PlansListProps> = ({ onError, onPlanSelection, onLoginRequest, operator, customer, subscribedPlanId, canSelectPlan }) => {
   // all plans
   const [plans, setPlans] = useState<PlansTree>(null);
   // all plan-categories, ordered by weight

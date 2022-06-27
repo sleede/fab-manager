@@ -2,22 +2,22 @@ import React, { BaseSyntheticEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ProofOfIdentityType } from '../../models/proof-of-identity-type';
 
-interface ProofOfIdentityRefusalFormProps {
+interface SupportingDocumentsRefusalFormProps {
   proofOfIdentityTypes: Array<ProofOfIdentityType>,
   onChange: (field: string, value: string | Array<number>) => void,
 }
 
 /**
- * Form to set the stripe's public and private keys
+ * Form to set the refuse the uploaded supporting documents
  */
-export const ProofOfIdentityRefusalForm: React.FC<ProofOfIdentityRefusalFormProps> = ({ proofOfIdentityTypes, onChange }) => {
+export const SupportingDocumentsRefusalForm: React.FC<SupportingDocumentsRefusalFormProps> = ({ proofOfIdentityTypes, onChange }) => {
   const { t } = useTranslation('admin');
 
   const [values, setValues] = useState<Array<number>>([]);
   const [message, setMessage] = useState<string>('');
 
   /**
-   * Callback triggered when the name has changed.
+   * Callback triggered when the message has changed.
    */
   const handleMessageChange = (e: BaseSyntheticEvent): void => {
     const { value } = e.target;
@@ -26,10 +26,9 @@ export const ProofOfIdentityRefusalForm: React.FC<ProofOfIdentityRefusalFormProp
   };
 
   /**
-   * Callback triggered when a checkbox is ticked or unticked.
-   * This function construct the resulting string, by adding or deleting the provided option identifier.
+   * Callback triggered when the document type checkbox is ticked or unticked.
    */
-  const handleProofOfIdnentityTypesChange = (value: number) => {
+  const handleTypeSelectionChange = (value: number) => {
     return (event: BaseSyntheticEvent) => {
       let newValues: Array<number>;
       if (event.target.checked) {
@@ -43,27 +42,32 @@ export const ProofOfIdentityRefusalForm: React.FC<ProofOfIdentityRefusalFormProp
   };
 
   /**
-   * Verify if the provided option is currently ticked (i.e. included in the value string)
+   * Verify if the provided type is currently ticked (i.e. about to be refused)
    */
-  const isChecked = (value: number) => {
-    return values.includes(value);
+  const isChecked = (typeId: number) => {
+    return values.includes(typeId);
   };
 
   return (
-    <div className="proof-of-identity-type-form">
+    <div className="supporting-documents-refusal-form">
       <form name="proofOfIdentityRefusalForm">
         <div>
-          {proofOfIdentityTypes.map(type => <div key={type.id} className="">
+          {proofOfIdentityTypes.map(type => <div key={type.id}>
             <label htmlFor={`checkbox-${type.id}`}>{type.name}</label>
-            <input id={`checkbox-${type.id}`} className="pull-right" type="checkbox" checked={isChecked(type.id)} onChange={handleProofOfIdnentityTypesChange(type.id)} />
+            <input id={`checkbox-${type.id}`}
+              type="checkbox"
+              checked={isChecked(type.id)}
+              onChange={handleTypeSelectionChange(type.id)} />
           </div>)}
         </div>
-        <div className="proof-of-identity-refusal-comment-textarea m-t">
-          <label htmlFor="proof-of-identity-refusal-comment">{t('app.admin.members_edit.proof_of_identity_refusal_comment')}</label>
+        <div className="refusal-comment">
+          <label htmlFor="proof-of-identity-refusal-comment">
+            {t('app.admin.supporting_documents_refusal_form.refusal_comment')}
+          </label>
           <textarea
             id="proof-of-identity-refusal-comment"
             value={message}
-            placeholder={t('app.admin.members_edit.proof_of_identity_refuse_input_message')}
+            placeholder={t('app.admin.supporting_documents_refusal_form.comment_placeholder')}
             onChange={handleMessageChange}
             style={{ width: '100%' }}
             rows={5}

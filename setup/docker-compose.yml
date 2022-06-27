@@ -7,6 +7,7 @@ services:
       RACK_ENV: production
     env_file:
       - ./config/env
+    user: USER_ID
     volumes:
       - ./public/packs:/usr/src/app/public/packs
       - ./public/uploads:/usr/src/app/public/uploads
@@ -23,7 +24,6 @@ services:
       - redis
       - elasticsearch
     restart: always
-
   postgres:
     image: postgres:9.6
     volumes:
@@ -31,7 +31,6 @@ services:
     restart: always
     environment:
       POSTGRES_HOST_AUTH_METHOD: trust
-
   elasticsearch:
     image: elasticsearch:5.6
     environment:
@@ -44,13 +43,11 @@ services:
       - ./elasticsearch/config:/usr/share/elasticsearch/config
       - ./elasticsearch:/usr/share/elasticsearch/data
     restart: always
-
   redis:
     image: redis:6-alpine
     volumes:
       - ./redis:/data
     restart: always
-
   nginx:
     image: nginx:latest
     ports:

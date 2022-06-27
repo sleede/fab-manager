@@ -39,7 +39,7 @@ type selectOption = { value: number, label: string };
 /**
  * Modal dialog shown to create a subscription for the given customer
  */
-const SubscribeModal: React.FC<SubscribeModalProps> = ({ isOpen, toggleModal, customer, operator, onError, onSuccess }) => {
+export const SubscribeModal: React.FC<SubscribeModalProps> = ({ isOpen, toggleModal, customer, operator, onError, onSuccess }) => {
   const { t } = useTranslation('admin');
 
   const [selectedPlan, setSelectedPlan] = useState<Plan>(null);

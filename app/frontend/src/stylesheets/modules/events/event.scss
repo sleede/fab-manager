@@ -1,0 +1,202 @@
+.event {
+  &-card {
+    border: 1px solid var(--gray-soft-dark);
+    border-radius: 5px;
+    overflow: hidden;
+    color: var(--gray-hard-darkest);
+    &:hover {
+      color: var(--gray-hard-darkest);
+      border-color: var(--gray-hard);
+      cursor: pointer;
+      .event-card-picture,
+      .event-card-info { border-color: var(--gray-hard); }
+    }
+
+    &-picture {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #fff;
+      font-size: 8rem;
+      color: var(--gray-soft-light);
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    &-desc {
+      padding: 15px 15px 30px;
+      header {
+        margin-bottom: 1rem;
+        p {
+          margin: 0;
+          font-size: 2rem;
+          font-weight: 900;
+          line-height: 1.3;
+          text-transform: uppercase;
+        }
+        .badge {
+          min-width: auto;
+          max-width: min(16ch, 33%);
+          white-space: normal;
+          word-break: break-word;
+          margin: 0 0 10px 15px;
+          float: right;
+        }
+      }
+      p { margin: 0; }
+    }
+    &-info {
+      padding: 15px 20px;
+      & > p {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: var(--main);
+        span {
+          display: block;
+          font-size: 0.75em;
+          font-weight: 400;
+          line-height: 1.2;
+          text-transform: lowercase;
+        }
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        align-items: baseline;
+        gap: 15px;
+        &-item {
+          min-height: 20px;
+          display: flex;
+          align-items: center;
+          i {
+            width: 16px;
+            height: 16px;
+            margin-right: 10px;
+            font-size: 16px;
+            text-align: center;
+            color: var(--main);
+          }
+          h6 { margin: 0; }
+        }
+      }
+    }
+  }
+
+  // Card size specific
+  &-card--sm {
+    display: grid;
+    grid-template-rows: max-content 1fr;
+    grid-template-columns: 1fr max-content;
+    .event-card-desc {
+      grid-area: 1/1/2/2;
+      padding-bottom: 10px;
+      header {
+        margin-bottom: 0;
+        p { font-size: 1.6rem; }
+      }
+    }
+    .event-card-picture {
+      grid-area: 1/2/3/3;
+      width: 160px;
+      display: none;
+      border-left: 1px solid var(--gray-soft-dark);
+      @media (min-width: 500px) {
+        display: flex;
+      }
+    }
+    .event-card-info {
+      grid-area: 2/1/3/2;
+      padding: 0 15px 15px;
+      .grid {
+        gap: 10px 15px;
+        &-item i {
+          width: 12px;
+          height: 12px;
+          //margin-right: 6px;
+          font-size: 12px;
+          text-align: center;
+          //color: var(--gray-hard-light);
+        }
+      }
+    }
+  }
+  &-card--md {
+    display: grid;
+    grid-template-rows: min-content 1fr min-content;
+    .event-card-picture {
+      height: 250px;
+      border-bottom: 1px solid var(--gray-soft-dark);
+    }
+    .event-card-info {
+      margin-top: auto;
+      padding-bottom: 30px;
+      border-top: 1px solid var(--gray-soft-dark);
+    }
+  }
+  &-card--lg {
+    border: 1px solid var(--gray-hard);
+    .event-card-info {
+      padding-top: 0;
+    }
+    .event-card-picture {
+      border-bottom: 1px solid var(--gray-hard);
+      img { max-height: 300px; }
+    }
+
+    @media (min-width: 992px) {
+      grid-column: span 2;
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      .event-card-desc { grid-area: 1/1/2/2; }
+      .event-card-info { grid-area: 2/1/3/2; }
+      .event-card-picture {
+        grid-area: 1/2/3/3;
+        border-bottom: none;
+        border-left: 1px solid var(--gray-hard);
+        img { max-height: none; }
+      }
+    }
+  }
+
+  // layout specific
+  &-home {
+    h4 {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      column-gap: 1rem;
+      i { margin-right: 1rem;}
+    }
+    &-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+      margin-bottom: 5rem;
+      @media (min-width: 480px) {
+        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      }
+    }
+  }
+
+  &-focus {
+    display: grid;
+    margin-bottom: 50px;
+
+    @media (min-width: 992px) {
+      grid-template-columns: repeat(auto-fill, minmax(425px, 1fr));
+      gap: 15px;
+    }
+  }
+
+  &-monthList {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin-bottom: 2rem;
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(auto-fill, minmax(430px, 1fr));
+    }
+  }
+}

@@ -31,6 +31,13 @@ export const EditablePrice: React.FC<EditablePriceProps> = ({ price, onSave }) =
   };
 
   /**
+   * Callback triggered when the user input a new price
+   */
+  const handleChangePrice = (value: string): void => {
+    setTempPrice(value);
+  };
+
+  /**
    * Enable or disable the edit mode
    */
   const toggleEdit = (): void => {
@@ -41,7 +48,7 @@ export const EditablePrice: React.FC<EditablePriceProps> = ({ price, onSave }) =
     <span className="editable-price">
       {!edit && <span className="display-price" onClick={toggleEdit}>{FormatLib.price(price.amount)}</span>}
       {edit && <span>
-        <FabInput id="price" type="number" step={0.01} defaultValue={price.amount} addOn={Fablab.intl_currency} onChange={setTempPrice} required/>
+        <FabInput id="price" type="number" step={0.01} defaultValue={price.amount} addOn={Fablab.intl_currency} onChange={handleChangePrice} required/>
         <FabButton icon={<i className="fas fa-check" />} className="approve-button" onClick={handleValidateEdit} />
         <FabButton icon={<i className="fas fa-times" />} className="cancel-button" onClick={toggleEdit} />
       </span>}

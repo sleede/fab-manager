@@ -15,7 +15,7 @@ de:
         dashboard: "Dashboard"
         my_profile: "Mein Profil"
         my_settings: "Persönliche Einstellungen"
-        my_proof_of_identity_files: "My proof of identity"
+        my_supporting_documents_files: "My supporting documents"
         my_projects: "Meine Projekte"
         my_trainings: "Meine Trainings"
         my_events: "Meine Veranstaltungen"
@@ -93,7 +93,7 @@ de:
         _the_fablab_policy: "die FabLab Richtlinie"
         field_required: "Erforderliche Felder"
         profile_custom_field_is_required: "{FEILD} is required"
-        user_proof_of_identity_files_is_required: "Attention !</br>You have declared to be \"{GROUP}\", proof of identity may be requested."
+        user_supporting_documents_required: "Warning!<br>You have declared to be \"{GROUP}\", supporting documents may be requested."
         unexpected_error_occurred: "Ein unerwarteter Fehler ist aufgetreten. Bitte versuche es später erneut."
         used_for_statistics: "Diese Daten werden für statistische Zwecke verwendet"
         used_for_invoicing: "Diese Daten werden für Abrechnungszwecke verwendet"
@@ -142,7 +142,7 @@ de:
       #home page
       home:
         latest_documented_projects: "Die neuesten dokumentierten Projekte"
-        follow_us: "Follow us"
+        follow_us: "Folge uns"
         latest_tweets: "Die neuesten Tweets"
         latest_registered_members: "Neueste registrierte Mitglieder"
         create_an_account: "Neues Konto einrichten"
@@ -150,15 +150,16 @@ de:
         #next events summary on the home page
         fablab_s_next_events: "Fablab´s nächste Veranstaltungen"
         every_events: "Alle Veranstaltungen"
-        from_date_to_date: "Von {START} bis {END}"
+      event_card:
         on_the_date: "Am {DATE}"
-        from_time_to_time: "Von {START} bis {END}"
-        without_reservation: "Ohne Reservierung"
-        free_admission: "Freier Zugang"
-        full_price: "Voller Preis: "
-        event_full: "Event ausgebucht"
-        still_available: "Verfügbare Plätze: "
+        from_date_to_date: "Von {START} bis {END}"
+        from_time_to_time: "From {START} to {END}"
         all_day: "Ganztägig"
+        still_available: "Verfügbare Plätze: "
+        event_full: "Event ausgebucht"
+        without_reservation: "Ohne Reservierung"
+        free_admission: "Freier Eintritt"
+        full_price: "Voller Preis: "
       #projects gallery
       projects_list:
         the_fablab_projects: "Die Fab Lab-Projekte"
@@ -244,19 +245,20 @@ de:
         unauthorized_operation: "Unerlaubter Vorgang"
         confirmation_required: "Bestätigung erforderlich"
         the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "Die Schulung kann nicht gelöscht werden, da sie bereits von einigen Benutzern gebucht ist."
+      plan_card:
+        AMOUNT_per_month: "{AMOUNT} / monate"
+        i_subscribe_online: "Ich abonniere online"
+        more_information: "Weitere Informationen"
+        i_choose_that_plan: "Ich wähle dieses Abo"
+        i_already_subscribed: "Ich habe bereits abonniert"
       #summary of the subscriptions
       plans:
         subscriptions: "Abonnements"
-        i_choose_that_plan: "Ich wähle dieses Abo"
-        i_subscribe_online: "Ich abonniere online"
-        i_already_subscribed: "Ich habe bereits abonniert"
-        more_information: "Weitere Informationen"
         your_subscription_expires_on_the_DATE: "Ihr Abonnement läuft ab am {DATE}"
         no_plans: "Für Ihre Gruppe sind keine Pläne verfügbar"
-        AMOUNT_per_month: "{AMOUNT} / monate"
         my_group: "Meine Gruppe"
         his_group: "User's group"
-        he_wants_to_change_group: "Change group"
+        he_wants_to_change_group: "Gruppen ändern"
         change_my_group: "Validate group change"
         summary: "Zusammenfassung"
         your_subscription_has_expired_on_the_DATE: "Ihr Abonnement ist am {DATE} abgelaufen"
@@ -289,6 +291,7 @@ de:
         full_price_: "Voller Preis:"
         to_date: "bis" #eg. from 01/01 to 01/05
         all_themes: "Alle Themen"
+        show_featured: "Show the featured event"
       #details and booking of an event
       events_show:
         event_description: "Beschreibung"

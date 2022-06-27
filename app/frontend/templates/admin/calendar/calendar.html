@@ -83,7 +83,7 @@
         </div>
         <div class="widget-content no-bg auto wrapper" ng-class="{'reservations-locked': availability.lock}">
           <ul class="list-unstyled" ng-if="reservations.length > 0">
-            <li ng-repeat="r in reservations" class="m-b-xs" ng-class="{'reservation-canceled':r.canceled_at}">
+            <li ng-repeat="r in reservations" class="m-b-xs" data-label="{{ 'app.admin.event_reservations.canceled' | translate}}" ng-class="{'reservation-canceled':r.canceled_at}">
               <span ng-if="r.user.name">{{r.user.name}}</span>
               <span translate ng-if="!r.user.name">{{ 'app.admin.calendar.deleted_user' }}</span>
                 - <span class="label reservation-time">{{ r.start_at | amDateFormat:'LLL' }} - {{ r.end_at | amDateFormat:'LT' }}</span>

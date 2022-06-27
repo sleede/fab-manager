@@ -14,6 +14,7 @@ import { react2angular } from 'react2angular';
 import { IApplication } from '../../models/application';
 import { PrepaidPack } from '../../models/prepaid-pack';
 import PrepaidPackAPI from '../../api/prepaid-pack';
+import { FabAlert } from '../base/fab-alert';
 
 declare const Application: IApplication;
 
@@ -29,7 +30,11 @@ interface PacksSummaryProps {
   refresh?: Promise<void>
 }
 
-const PacksSummaryComponent: React.FC<PacksSummaryProps> = ({ item, itemType, customer, operator, onError, onSuccess, refresh }) => {
+/**
+ * Display a short summary of the prepaid-packs already bought by the provider customer, for the given item.
+ * May also allows members to buy directly some new prepaid-packs.
+ */
+const PacksSummary: React.FC<PacksSummaryProps> = ({ item, itemType, customer, operator, onError, onSuccess, refresh }) => {
   const { t } = useTranslation('logged');
 
   const [packs, setPacks] = useState<Array<PrepaidPack>>(null);
@@ -140,9 +145,9 @@ const PacksSummaryComponent: React.FC<PacksSummaryProps> = ({ item, itemType, cu
           <span className="remaining-hours">
             {t('app.logged.packs_summary.remaining_HOURS', { HOURS: totalHours(), ITEM: itemType })}
             {isPackOnlyForSubscription && !customer.subscribed_plan &&
-              <div className="alert alert-warning m-t m-b">
+              <FabAlert level="warning">
                 {t('app.logged.packs_summary.unable_to_use_pack_for_subsription_is_expired')}
-              </div>
+              </FabAlert>
             }
           </span>
         </div>
@@ -178,12 +183,14 @@ const PacksSummaryComponent: React.FC<PacksSummaryProps> = ({ item, itemType, cu
   );
 };
 
-export const PacksSummary: React.FC<PacksSummaryProps> = ({ item, itemType, customer, operator, onError, onSuccess, refresh }) => {
+const PacksSummaryWrapper: React.FC<PacksSummaryProps> = (props) => {
   return (
     <Loader>
-      <PacksSummaryComponent item={item} itemType={itemType} customer={customer} operator={operator} onError={onError} onSuccess={onSuccess} refresh={refresh} />
+      <PacksSummary {...props} />
     </Loader>
   );
 };
 
-Application.Components.component('packsSummary', react2angular(PacksSummary, ['item', 'itemType', 'customer', 'operator', 'onError', 'onSuccess', 'refresh']));
+export { PacksSummaryWrapper as PacksSummary };
+
+Application.Components.component('packsSummary', react2angular(PacksSummaryWrapper, ['item', 'itemType', 'customer', 'operator', 'onError', 'onSuccess', 'refresh']));

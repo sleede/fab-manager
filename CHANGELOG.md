@@ -2,6 +2,39 @@
 
 ## next deploy
 
+## v5.4.5 2022 June 27
+
+- Feature the next event in the event page
+- Documentation for installing behind a proxy
+- Ability to install behind a proxy
+- Improved docker image building time
+- Use relative paths in mount scripts
+- Run the docker image with the system user
+- During the setup, autoconfigure the main domain
+- During the setup, ask to set ALLOW_INSECURE_HTTP if DEFAULT_PROTOCOL was set to http
+- Override angular currency filter, use Intl.NumberFormat to format amount
+- Added some eslint rules to validate react components code style
+- Fixed all react components code according to eslint rules
+- Renamed proof-of-identity to supporting-documents in react components and in end-user strings
+- Use bat to display coloured documentation of environment variables during setup
+- Check the minimum docker version (20.10) during setup and upgrade
+- Fix a bug: when email was mapped from SSO provided as empty string -> unable to merge account
+- Fix a bug: when an empty data was retured by the SSO, unable to edit it
+- Fix a bug: user can change his group in the profile completion page, even if mapped from the SSO
+- Fix a bug: the birthdate was not marked as required, in the profile edition form
+- Fix a bug: when the phone or the address were required, they were not marked as this, in the profile edition form
+- Fix a bug: the birthday was not shown in user edition form
+- Fix a bug: canceled event label's translation
+- Fix a bug: unable to set the twitter input empty
+- Fix a bug: unable to edit an event
+- Fix a bug: times are not shown in admin/events monitoring page
+- Fix a bug: unable to generate the secret key base during the setup
+- Fix a bug: error message during the setup: the input device is not a TTY
+- Fix a bug: when Fab-manager was installed as non-root user, unable to compile the assets during the upgrade
+- Fix a bug: unable to remove an SSO data mapping field once saved
+- Fix a bug: unable to update the user profile after toggling the organization switch twice
+- [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/set-docker-user.sh | bash`
+
 ## v5.4.4 2022 June 8
 
 - Check shopping cart items are valid before online payment

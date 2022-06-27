@@ -21,7 +21,6 @@ fr:
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "Vous perdrez les modifications non enregistrées si vous quittez cette page"
         you_will_lose_any_unsaved_modification_if_you_reload_this_page: "Vous perdrez les modifications non enregistrées si vous rechargez cette page"
-        payment_card_error: "Un problème est survenu avec votre carte bancaire :"
         payment_card_declined: "Votre carte a été refusée."
       change_group:
         title: "{OPERATOR, select, self{Mon groupe} other{Groupe de l'utilisateur}}"
@@ -29,20 +28,32 @@ fr:
         cancel: "Annuler"
         validate: "Valider le changement de groupe"
         success: "Groupe changé avec succès"
+      stripe_form:
+        payment_card_error: "Un problème est survenu avec votre carte bancaire :"
       #text editor
       text_editor:
-        text_placeholder: "Tapez quelque chose…"
-        link_placeholder: "Coller le lien…"
-        url_placeholder: "Coller l'url…"
-        new_tab: "Ouvrir dans un nouvel onglet"
-        add_link: "Insérer un lien"
-        add_video: "Intégrer une vidéo"
-        add_image: "Insérer une image"
+        fab_text_editor:
+          text_placeholder: "Tapez quelque chose…"
+        menu_bar:
+          link_placeholder: "Collez un lien …"
+          url_placeholder: "Collez l'url …"
+          new_tab: "Ouvrir dans un nouvel onglet"
+          add_link: "Insérer un lien"
+          add_video: "Intégrer une vidéo"
+          add_image: "Insérer une image"
+      #modal dialog
+      fab_modal:
+        close: "Fermer"
       fab_socials:
         follow_us: "Suivez-nous"
         networks_update_success: "Réseaux sociaux mis à jour avec succès"
         networks_update_error: "Problème lors de la mise à jour des réseaux sociaux"
         url_placeholder: "Coller l'url…"
+        save: "Enregistrer"
+        website_invalid: "L'adresse du site web n'est pas une URL valide"
+      edit_socials:
+        url_placeholder: "Collez l'url …"
+        website_invalid: "L'adresse du site web n'est pas une URL valide"
       #user edition form
       user_profile_form:
         add_an_avatar: "Ajouter un avatar"
@@ -154,9 +165,9 @@ fr:
       member_select:
         select_a_member: "Sélectionnez un membre"
         start_typing: "Commencez à écrire..."
-        member_not_validated: "Attention :</br> Le compte du membre n'est pas validé."
+        member_not_validated: "Attention :<br> Le compte du membre n'a pas été validé."
       #payment modal
-      payment:
+      abstract_payment_modal:
         online_payment: "Paiement en ligne"
         i_have_read_and_accept_: "J'ai bien pris connaissance, et accepte "
         _the_general_terms_and_conditions: "les conditions générales de vente."
@@ -174,6 +185,9 @@ fr:
         method_check: "Par chèques"
         card_collection_info: "En validant, vous serez invité à saisir les informations de carte bancaire du membre. Cette carte sera prélevée automatiquement aux échéances."
         check_collection_info: "En validant, vous confirmez être en possession de {DEADLINES} chèques permettant d'encaisser l'ensemble des mensualité."
+      event_themes:
+        title: "Thèmes de l'événement"
+        select_theme: "Choisissez un thème …"
       #event edition form
       event:
         title: "Titre"
@@ -397,6 +411,15 @@ fr:
         default_places: "Maximum de places par défaut"
         default_places_is_required: "Le nombre de places maximum par défaut est requis."
         disable_space: "Désactiver l'espace"
+      payment_schedule_summary:
+        your_payment_schedule: "Votre échéancier de paiement"
+        NUMBER_monthly_payment_of_AMOUNT: "{NUMBER} {NUMBER, plural, =1{mensualité} other{mensualités}} de {AMOUNT}"
+        first_debit: "Premier prélèvement le jour de la commande."
+        monthly_payment_NUMBER: "{NUMBER}{NUMBER, plural, =1{ère} other{ème}} mensualité : "
+        debit: "Prélèvement le jour de la commande."
+        view_full_schedule: "Voir tout l'échéancier de paiement"
+      select_schedule:
+        monthly_payment: "Paiement mensuel"
       #shopping cart module for reservations
       cart:
         summary: "Résumé"
@@ -414,13 +437,6 @@ fr:
         cost_of_the_subscription: "Coût de l'abonnement"
         subscription_price: "Coût de l'abonnement"
         you_ve_just_selected_a_subscription_html: "Vous venez de sélectionner un <strong>abonnement</strong> :"
-        monthly_payment: "Paiement mensuel"
-        your_payment_schedule: "Votre échéancier de paiement"
-        monthly_payment_NUMBER: "{NUMBER}{NUMBER, plural, =1{ère} other{ème}} mensualité : "
-        NUMBER_monthly_payment_of_AMOUNT: "{NUMBER} {NUMBER, plural, =1{mensualité} other{mensualités}} de {AMOUNT}"
-        first_debit: "Premier prélèvement le jour de la commande."
-        debit: "Prélèvement le jour de la commande."
-        view_full_schedule: "Voir tout l'échéancier de paiement"
         confirm_and_pay: "Valider et payer"
         you_have_settled_the_following_TYPE: "Vous avez réglé {TYPE, select, Machine{les créneaux machines suivants} Training{la formation suivante} other{les éléments suivants}} :"
         you_have_settled_a_: "Vous avez réglé un"
@@ -463,7 +479,7 @@ fr:
         slot_tags: "Étiquettes du créneau"
         user_tags: "Étiquettes de l'utilisateur"
         no_tags: "Aucune étiquette"
-        user_validation_required_alert: "Attention !</br>Votre administrateur doit valider votre compte. Vous pourrez alors accéder à l'ensemble des fonctionnalités de réservation."
+        user_validation_required_alert: "Attention !<br>Votre administrateur doit valider votre compte. Vous pourrez alors accéder à l'ensemble des fonctionnalités de réservation."
       #feature-tour modal
       tour:
         previous: "Précédent"
@@ -475,12 +491,15 @@ fr:
         what_to_do: "Que voulez-vous faire ?"
         tour: "Lancer la visite guidée"
         guide: "Ouvrir le manuel de l'utilisateur"
+      stripe_confirm_modal:
+        resolve_action: "Résoudre l'action"
+        ok_button: "OK"
       #2nd factor authentication for card payments
       stripe_confirm:
         pending: "En attente de l'action ..."
         success: "Merci, la configuration de votre carte est terminée. Le paiement sera effectué sous peu."
       #the summary table of all payment schedules
-      schedules_table:
+      payment_schedules_table:
         schedule_num: "Échéancier n°"
         date: "Date"
         price: "Prix"
@@ -516,7 +535,7 @@ fr:
         confirm_bank_transfer: "Confirmer le virement bancaire"
         confirm_bank_transfer_body: "Vous devez confirmer l'encaissement de {AMOUNT} pour l'échéance du {DATE}. En confirmant le virement bancaire, une facture sera générée pour cette date d'échéance."
         confirm_cancel_subscription: "Vous êtes sur le point d'annuler cet échéancier de paiement ainsi que l'abonnement lié. Êtes-vous sur ?"
-      payment_modal:
+      card_payment_modal:
         online_payment_disabled: "Le paiement par carte bancaire n'est pas disponible. Merci de contacter directement l'accueil du FabLab."
         unexpected_error: "Une erreur est survenue. Merci de rapporter cet incident à l'équipe de Fab-Manager."
       update_card_modal:

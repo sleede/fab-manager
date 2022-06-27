@@ -5,7 +5,7 @@ import { FabInput } from '../base/fab-input';
 import { ProofOfIdentityType } from '../../models/proof-of-identity-type';
 import { Group } from '../../models/group';
 
-interface ProofOfIdentityTypeFormProps {
+interface SupportingDocumentsTypeFormProps {
   groups: Array<Group>,
   proofOfIdentityType?: ProofOfIdentityType,
   onChange: (field: string, value: string | Array<number>) => void,
@@ -18,13 +18,13 @@ interface ProofOfIdentityTypeFormProps {
 type selectOption = { value: number, label: string };
 
 /**
- * Form to set the stripe's public and private keys
+ * Form to set create/edit supporting documents type
  */
-export const ProofOfIdentityTypeForm: React.FC<ProofOfIdentityTypeFormProps> = ({ groups, proofOfIdentityType, onChange }) => {
+export const SupportingDocumentsTypeForm: React.FC<SupportingDocumentsTypeFormProps> = ({ groups, proofOfIdentityType, onChange }) => {
   const { t } = useTranslation('admin');
 
   /**
-   * Convert all themes to the react-select format
+   * Convert all groups to the react-select format
    */
   const buildOptions = (): Array<selectOption> => {
     return groups.map(t => {
@@ -33,7 +33,7 @@ export const ProofOfIdentityTypeForm: React.FC<ProofOfIdentityTypeFormProps> = (
   };
 
   /**
-   * Return the current groups(s), formatted to match the react-select format
+   * Return the group(s) associated with the current type, formatted to match the react-select format
    */
   const groupsValues = (): Array<selectOption> => {
     const res = [];
@@ -63,23 +63,23 @@ export const ProofOfIdentityTypeForm: React.FC<ProofOfIdentityTypeFormProps> = (
   };
 
   return (
-    <div className="proof-of-identity-type-form">
-      <div className="proof-of-identity-type-form-info">
-        {t('app.admin.settings.compte.proof_of_identity_type_form_info')}
+    <div className="supporting-documents-type-form">
+      <div className="info-area">
+        {t('app.admin.settings.account.supporting_documents_type_form.type_form_info')}
       </div>
       <form name="proofOfIdentityTypeForm">
-        <div className="proof-of-identity-type-select m-t">
+        <div className="field">
           <Select defaultValue={groupsValues()}
-            placeholder={t('app.admin.settings.compte.proof_of_identity_type_select_group')}
+            placeholder={t('app.admin.settings.account.supporting_documents_type_form.select_group')}
             onChange={handleGroupsChange}
             options={buildOptions()}
             isMulti />
         </div>
-        <div className="proof-of-identity-type-input m-t">
+        <div className="field">
           <FabInput id="proof_of_identity_type_name"
             icon={<i className="fa fa-edit" />}
             defaultValue={proofOfIdentityType?.name || ''}
-            placeholder={t('app.admin.settings.compte.proof_of_identity_type_input_name')}
+            placeholder={t('app.admin.settings.account.supporting_documents_type_form.name')}
             onChange={handleNameChange}
             debounce={200}
             required/>

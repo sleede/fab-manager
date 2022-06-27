@@ -83,7 +83,7 @@ export const PayzenSettings: React.FC<PayzenSettingsProps> = ({ onEditKeys, onCu
       setError('');
       updateSettings(draft => draft.set(SettingName.PayZenCurrency, value));
     } else {
-      setError(t('app.admin.invoices.payment.payzen.currency_error'));
+      setError(t('app.admin.invoices.payment.payzen_settings.currency_error'));
     }
   };
 
@@ -97,18 +97,18 @@ export const PayzenSettings: React.FC<PayzenSettingsProps> = ({ onEditKeys, onCu
       updateSettings(draft => draft.set(SettingName.PayZenCurrency, result.value));
       onCurrencyUpdateSuccess(result.value);
     }, reason => {
-      setError(t('app.admin.invoices.payment.payzen.error_while_saving') + reason);
+      setError(t('app.admin.invoices.payment.payzen_settings.error_while_saving') + reason);
     });
   };
 
   return (
     <div className="payzen-settings">
-      <h3 className="title">{t('app.admin.invoices.payment.payzen.payzen_keys')}</h3>
+      <h3 className="title">{t('app.admin.invoices.payment.payzen_settings.payzen_keys')}</h3>
       <div className="payzen-keys">
         {payZenPublicSettings.concat(payZenPrivateSettings).map(setting => {
           return (
             <div className="key-wrapper" key={setting}>
-              <label htmlFor={setting}>{t(`app.admin.invoices.payment.payzen.${setting}`)}</label>
+              <label htmlFor={setting}>{t(`app.admin.invoices.payment.payzen_settings.${setting}`)}</label>
               <FabInput defaultValue={settings.get(setting)}
                 id={setting}
                 type={payZenPrivateSettings.indexOf(setting) > -1 ? 'password' : 'text'}
@@ -119,17 +119,17 @@ export const PayzenSettings: React.FC<PayzenSettingsProps> = ({ onEditKeys, onCu
           );
         })}
         <div className="edit-keys">
-          <FabButton className="edit-keys-btn" onClick={handleKeysUpdate}>{t('app.admin.invoices.payment.edit_keys')}</FabButton>
+          <FabButton className="edit-keys-btn" onClick={handleKeysUpdate}>{t('app.admin.invoices.payment.payzen_settings.edit_keys')}</FabButton>
         </div>
       </div>
       <div className="payzen-currency">
-        <h3 className="title">{t('app.admin.invoices.payment.payzen.currency')}</h3>
+        <h3 className="title">{t('app.admin.invoices.payment.payzen_settings.currency')}</h3>
         <p className="currency-info">
-          <HtmlTranslate trKey="app.admin.invoices.payment.payzen.currency_info_html" />
+          <HtmlTranslate trKey="app.admin.invoices.payment.payzen_settings.currency_info_html" />
         </p>
         <div className="payzen-currency-form">
           <div className="currency-wrapper">
-            <label htmlFor="payzen_currency">{t('app.admin.invoices.payment.payzen.payzen_currency')}</label>
+            <label htmlFor="payzen_currency">{t('app.admin.invoices.payment.payzen_settings.payzen_currency')}</label>
             <FabInput defaultValue={settings.get(SettingName.PayZenCurrency)}
               id="payzen_currency"
               icon={<i className="fas fa-money-bill" />}
@@ -138,7 +138,7 @@ export const PayzenSettings: React.FC<PayzenSettingsProps> = ({ onEditKeys, onCu
               pattern="[A-Z]{3}"
               error={error} />
           </div>
-          <FabButton className="save-currency" onClick={saveCurrency}>{t('app.admin.invoices.payment.payzen.save')}</FabButton>
+          <FabButton className="save-currency" onClick={saveCurrency}>{t('app.admin.invoices.payment.payzen_settings.save')}</FabButton>
         </div>
       </div>
     </div>

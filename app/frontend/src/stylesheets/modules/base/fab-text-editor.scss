@@ -1,4 +1,4 @@
-.fab-textEditor {
+.fab-text-editor {
   position: relative;
   margin-bottom: 1.6rem;
   padding-bottom: 1.6rem;
@@ -39,7 +39,7 @@
     }
 
     button { @include button(4rem); }
-    .divider {
+    .menu-divider {
       width: 2px;
       height: 2.4rem;
       background-color: var(--gray-soft-dark);

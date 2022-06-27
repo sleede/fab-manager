@@ -24,7 +24,7 @@ const PAGE_SIZE = 20;
  * This component shows a list of all payment schedules with their associated deadlines (aka. PaymentScheduleItem) and invoices
  * for the currentUser
  */
-const PaymentSchedulesDashboard: React.FC<PaymentSchedulesDashboardProps> = ({ currentUser, onError, onCardUpdateSuccess }) => {
+export const PaymentSchedulesDashboard: React.FC<PaymentSchedulesDashboardProps> = ({ currentUser, onError, onCardUpdateSuccess }) => {
   const { t } = useTranslation('logged');
 
   // list of displayed payment schedules
@@ -66,7 +66,7 @@ const PaymentSchedulesDashboard: React.FC<PaymentSchedulesDashboardProps> = ({ c
    * after a successful card update, provide a success message to the end-user
    */
   const handleCardUpdateSuccess = (): void => {
-    onCardUpdateSuccess(t('app.logged.dashboard.payment_schedules.card_updated_success'));
+    onCardUpdateSuccess(t('app.logged.dashboard.payment_schedules_dashboard.card_updated_success'));
   };
 
   /**
@@ -85,7 +85,7 @@ const PaymentSchedulesDashboard: React.FC<PaymentSchedulesDashboardProps> = ({ c
 
   return (
     <div className="payment-schedules-dashboard">
-      {!hasSchedules() && <div>{t('app.logged.dashboard.payment_schedules.no_payment_schedules')}</div>}
+      {!hasSchedules() && <div>{t('app.logged.dashboard.payment_schedules_dashboard.no_payment_schedules')}</div>}
       {hasSchedules() && <div className="schedules-list">
         <PaymentSchedulesTable paymentSchedules={paymentSchedules}
           showCustomer={false}
@@ -93,7 +93,7 @@ const PaymentSchedulesDashboard: React.FC<PaymentSchedulesDashboardProps> = ({ c
           operator={currentUser}
           onError={onError}
           onCardUpdateSuccess={handleCardUpdateSuccess} />
-        {hasMoreSchedules() && <FabButton className="load-more" onClick={handleLoadMore}>{t('app.logged.dashboard.payment_schedules.load_more')}</FabButton>}
+        {hasMoreSchedules() && <FabButton className="load-more" onClick={handleLoadMore}>{t('app.logged.dashboard.payment_schedules_dashboard.load_more')}</FabButton>}
       </div>}
     </div>
   );

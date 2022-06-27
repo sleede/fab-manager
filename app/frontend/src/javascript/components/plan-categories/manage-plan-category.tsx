@@ -17,7 +17,7 @@ interface ManagePlanCategoryProps {
  * This component shows a button.
  * When clicked, we show a modal dialog allowing to fill the parameters of a plan-category (create new or update existing).
  */
-const ManagePlanCategoryComponent: React.FC<ManagePlanCategoryProps> = ({ category, action, onSuccess, onError }) => {
+const ManagePlanCategory: React.FC<ManagePlanCategoryProps> = ({ category, action, onSuccess, onError }) => {
   const { t } = useTranslation('admin');
 
   // is the creation modal open?
@@ -61,9 +61,9 @@ const ManagePlanCategoryComponent: React.FC<ManagePlanCategoryProps> = ({ catego
         return (
           <FabButton type='button'
             icon={<i className='fa fa-plus' />}
-            className="btn-warning"
+            className="create-button"
             onClick={toggleModal}>
-            {t('app.admin.manage_plan_category.create_category.title')}
+            {t('app.admin.manage_plan_category.create')}
           </FabButton>
         );
       case 'update':
@@ -77,7 +77,7 @@ const ManagePlanCategoryComponent: React.FC<ManagePlanCategoryProps> = ({ catego
   return (
     <div className='manage-plan-category'>
       { toggleBtn() }
-      <FabModal title={t(`app.admin.manage_plan_category.${action}_category.title`)}
+      <FabModal title={t(`app.admin.manage_plan_category.${action}`)}
         isOpen={isOpen}
         toggleModal={toggleModal}
         onCreation={initCategoryCreation}
@@ -90,10 +90,12 @@ const ManagePlanCategoryComponent: React.FC<ManagePlanCategoryProps> = ({ catego
   );
 };
 
-export const ManagePlanCategory: React.FC<ManagePlanCategoryProps> = ({ category, action, onSuccess, onError }) => {
+const ManagePlanCategoryWrapper: React.FC<ManagePlanCategoryProps> = (props) => {
   return (
     <Loader>
-      <ManagePlanCategoryComponent category={category} action={action} onSuccess={onSuccess} onError={onError} />
+      <ManagePlanCategory {...props} />
     </Loader>
   );
 };
+
+export { ManagePlanCategoryWrapper as ManagePlanCategory };

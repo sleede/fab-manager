@@ -10,7 +10,7 @@ import { Group } from '../../../models/group';
 import { IApplication } from '../../../models/application';
 import { Space } from '../../../models/space';
 import { EditablePrice } from '../editable-price';
-import { ConfigureExtendedPriceButton } from './configure-extended-price-button';
+import { ConfigureExtendedPricesButton } from './configure-extended-prices-button';
 import PriceAPI from '../../../api/price';
 import { Price } from '../../../models/price';
 import { useImmer } from 'use-immer';
@@ -26,7 +26,7 @@ interface SpacesPricingProps {
 /**
  * Interface to set and edit the prices of spaces-hours, per group
  */
-const SpacesPricing: React.FC<SpacesPricingProps> = ({ onError, onSuccess }) => {
+export const SpacesPricing: React.FC<SpacesPricingProps> = ({ onError, onSuccess }) => {
   const { t } = useTranslation('admin');
 
   const [spaces, setSpaces] = useState<Array<Space>>(null);
@@ -120,7 +120,7 @@ const SpacesPricing: React.FC<SpacesPricingProps> = ({ onError, onSuccess }) => 
             <td>{space.name}</td>
             {groups?.map(group => <td key={group.id}>
               {prices.length && <EditablePrice price={findPriceBy(space.id, group.id)} onSave={handleUpdatePrice} />}
-              <ConfigureExtendedPriceButton
+              <ConfigureExtendedPricesButton
                 prices={findExtendedPricesBy(space.id, group.id)}
                 onError={onError}
                 onSuccess={onSuccess}

@@ -28,7 +28,7 @@ interface MachinesPricingProps {
 /**
  * Interface to set and edit the prices of machines-hours, per group
  */
-const MachinesPricing: React.FC<MachinesPricingProps> = ({ onError, onSuccess }) => {
+export const MachinesPricing: React.FC<MachinesPricingProps> = ({ onError, onSuccess }) => {
   const { t } = useTranslation('admin');
 
   const [machines, setMachines] = useState<Array<Machine>>(null);

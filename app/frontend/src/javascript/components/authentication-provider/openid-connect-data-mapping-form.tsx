@@ -16,6 +16,10 @@ interface OpenidConnectDataMappingFormProps<TFieldValues> {
   index: number,
 }
 
+/**
+ * Partial form to set the data mapping for an OpenID Connect provider.
+ * The data mapping is the way to bind data from the OIDC claims to the Fab-manager's database
+ */
 export const OpenidConnectDataMappingForm = <TFieldValues extends FieldValues>({ register, setValue, currentFormValues, index }: OpenidConnectDataMappingFormProps<TFieldValues>) => {
   const { t } = useTranslation('admin');
 
@@ -40,17 +44,19 @@ export const OpenidConnectDataMappingForm = <TFieldValues extends FieldValues>({
     const model = currentFormValues[index]?.local_model;
     const field = currentFormValues[index]?.local_field;
     const configuration = standardConfiguration[`${model}.${field}`];
-    setValue(
-      `auth_provider_mappings_attributes.${index}.api_field` as Path<TFieldValues>,
-      configuration.api_field as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>
-    );
-    if (configuration.transformation) {
-      Object.keys(configuration.transformation).forEach((key) => {
-        setValue(
-          `auth_provider_mappings_attributes.${index}.transformation.${key}` as Path<TFieldValues>,
-          configuration.transformation[key] as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>
-        );
-      });
+    if (configuration) {
+      setValue(
+        `auth_provider_mappings_attributes.${index}.api_field` as Path<TFieldValues>,
+        configuration.api_field as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>
+      );
+      if (configuration.transformation) {
+        Object.keys(configuration.transformation).forEach((key) => {
+          setValue(
+            `auth_provider_mappings_attributes.${index}.transformation.${key}` as Path<TFieldValues>,
+            configuration.transformation[key] as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>
+          );
+        });
+      }
     }
   };
 

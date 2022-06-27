@@ -1,5 +1,5 @@
 /**
- * This is a compatibility wrapper to allow usage of react-switch inside of the angular.js app
+ * This is a compatibility wrapper to allow usage of react-switch inside the angular.js app
  */
 import Switch from 'react-switch';
 import { react2angular } from 'react2angular';

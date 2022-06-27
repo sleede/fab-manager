@@ -15,7 +15,7 @@ es:
         dashboard: "Panel"
         my_profile: "My Perfil"
         my_settings: "Mis ajustes"
-        my_proof_of_identity_files: "My proof of identity"
+        my_supporting_documents_files: "My supporting documents"
         my_projects: "Mis proyectos"
         my_trainings: "Mis cursos"
         my_events: "Mis eventos"
@@ -23,7 +23,7 @@ es:
         my_payment_schedules: "My payment schedules"
         my_wallet: "Mi cartera"
         #contextual help
-        help: "Help"
+        help: "Ayuda"
         #login/logout
         sign_out: "Salir"
         sign_up: "Registrarse"
@@ -31,7 +31,7 @@ es:
         #left menu
         notifications: "Notificaciones"
         admin: "Administrador"
-        manager: "Manager"
+        manager: "Gerente"
         reduce_panel: "Reducir panel"
         #left menu (public)
         home: "Menú principal"
@@ -85,7 +85,7 @@ es:
         birth_date_is_required: "La fecha de nacimiento es obligatoria."
         phone_number: "Número de telefono"
         phone_number_is_required: "El número de telefono es obligatorio."
-        address: "Address"
+        address: "Dirección"
         address_is_required: "Address is required"
         i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "Autorizo a los usuarios registrados en este FabLab a contactarme"
         i_accept_to_receive_information_from_the_fablab: "Acepto recibir información del FabLab"
@@ -93,7 +93,7 @@ es:
         _the_fablab_policy: "la política de FabLab"
         field_required: "Field required"
         profile_custom_field_is_required: "{FEILD} is required"
-        user_proof_of_identity_files_is_required: "Attention !</br>You have declared to be \"{GROUP}\", proof of identity may be requested."
+        user_supporting_documents_required: "Warning!<br>You have declared to be \"{GROUP}\", supporting documents may be requested."
         unexpected_error_occurred: "An unexpected error occurred. Please try again later."
         used_for_statistics: "This data will be used for statistical purposes"
         used_for_invoicing: "This data will be used for billing purposes"
@@ -119,7 +119,7 @@ es:
         your_email_address_is_unknown: "Se desconoce su email."
         you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password: "En un momento recibirá las instrucciones para restablecer su contraseña en su mail."
         #Fab-manager's version
-        version: "Version:"
+        version: "Versión:"
         upgrade_fabmanager: "Upgrade Fab-manager"
         current_version: "You are currently using version {VERSION} of Fab-manager."
         upgrade_to: "A new release is available. You can upgrade up to version {VERSION}."
@@ -142,7 +142,7 @@ es:
       #home page
       home:
         latest_documented_projects: "Los últimos proyectos documentados"
-        follow_us: "Follow us"
+        follow_us: "Síguenos"
         latest_tweets: "Los últimos tweets"
         latest_registered_members: "Miembros más recientes"
         create_an_account: "Crear una cuenta"
@@ -150,15 +150,16 @@ es:
         #next events summary on the home page
         fablab_s_next_events: "Próximos eventos del FabLab"
         every_events: "Todos los eventos"
-        from_date_to_date: "Desde {START} hasta {END}"
+      event_card:
         on_the_date: "El {DATE}"
-        from_time_to_time: "Desde {START} hasta {END}"
+        from_date_to_date: "Desde {START} hasta {END}"
+        from_time_to_time: "From {START} to {END}"
+        all_day: "Todo el día"
+        still_available: "Asiento(s) disponible(s): "
+        event_full: "Evento lleno"
         without_reservation: "Sin reserva"
         free_admission: "Entrada gratuita"
-        full_price: "Precio completo: "
-        event_full: "Evento lleno"
-        still_available: "Asiento(s) disponible(s): "
-        all_day: "Todo el día"
+        full_price: "Full price: "
       #projects gallery
       projects_list:
         the_fablab_projects: "Los proyectos del FabLab"
@@ -168,7 +169,7 @@ es:
         openlab_search_not_available_at_the_moment: "La busqueda en toda la red no está disponible en este momento. Puede seguir buscando proyectos en este FabLab."
         project_search_result_is_empty: "Lo sentimos, no hemos encontrado nada."
         reset_all_filters: "Limpiar filtros"
-        keywords: "Keywords"
+        keywords: "Palabras clave"
         search: "Buscar"
         all_projects: "Todos los proyectos"
         my_projects: "Mis proyectos"
@@ -180,19 +181,19 @@ es:
         rough_draft: "Borrador"
       #details of a projet
       projects_show:
-        rough_draft: "Draft"
+        rough_draft: "Borrador"
         project_description: "Descripción de proyecto"
         by_name: "Por {NAME}"
-        step_N: "Step {INDEX}"
-        share_on_facebook: "Share on Facebook"
-        share_on_twitter: "Share on Twitter"
-        deleted_user: "Deleted user"
+        step_N: "Paso {INDEX}"
+        share_on_facebook: "Compartir en Facebook"
+        share_on_twitter: "Compartir en Twitter"
+        deleted_user: "Usario eliminado"
         posted_on_: "Subido el"
         CAD_file_to_download: "{COUNT, plural, =0{No CAD files} =1{CAD file to download} other{CAD files to download}}"
-        machines_and_materials: "Machines and materials"
-        collaborators: "Collaborators"
+        machines_and_materials: "Máquinas y materiales"
+        collaborators: "Colaboradores"
         licence: "Licencia"
-        confirmation_required: "Confirmation required"
+        confirmation_required: "Confirmación requerida"
         report_an_abuse: "Reportar una infracción"
         unauthorized_operation: "Operación no autorizada"
         your_report_was_successful_thanks: "Su informe se ha enviado con éxito. Gracias."
@@ -215,13 +216,13 @@ es:
         book: "Reservar"
         _or_the_: " o el "
       machines_filters:
-        show_machines: "Show machines"
+        show_machines: "Mostrar máquinas"
         status_enabled: "Activadas"
         status_disabled: "Discapacitadas"
         status_all: "Todas"
       machine_card:
-        book: "Book"
-        consult: "Consult"
+        book: "Reservar"
+        consult: "Consultar"
       #details of a machine
       machines_show:
         book_this_machine: "Alquilar máquina"
@@ -244,16 +245,17 @@ es:
         unauthorized_operation: "Operación no autorizada"
         confirmation_required: "Confirmation required"
         the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "El curso no puede borrarse porque ya ha sido reservado por algún usuario."
+      plan_card:
+        AMOUNT_per_month: "{AMOUNT} / month"
+        i_subscribe_online: "I subscribe online"
+        more_information: "More information"
+        i_choose_that_plan: "I choose that plan"
+        i_already_subscribed: "I already subscribed"
       #summary of the subscriptions
       plans:
         subscriptions: "Suscripciones"
-        i_choose_that_plan: "Elijo este plan"
-        i_subscribe_online: "Suscribirme online"
-        i_already_subscribed: "Ya me he suscrito"
-        more_information: "Más información"
         your_subscription_expires_on_the_DATE: "Su suscripción termina {DATE}"
         no_plans: "No plans are available for your group"
-        AMOUNT_per_month: "{AMOUNT} / month"
         my_group: "My grupo"
         his_group: "User's group"
         he_wants_to_change_group: "Change group"
@@ -289,28 +291,29 @@ es:
         full_price_: "Precio completo:"
         to_date: "to" #eg. from 01/01 to 01/05
         all_themes: "All themes"
+        show_featured: "Show the featured event"
       #details and booking of an event
       events_show:
         event_description: "Descripción del evento"
         downloadable_documents: "Archivos descargables"
         information_and_booking: "Información y reservas"
-        dates: "Dates"
+        dates: "Fechas"
         beginning: "Empieza:"
         ending: "Termina:"
         opening_hours: "Hora de apertura:"
         all_day: "Todo el día"
-        from_time: "From" #eg. from 18:00 to 21:00
-        to_time: "to" #eg. from 18:00 to 21:00
+        from_time: "Desde" #eg. from 18:00 to 21:00
+        to_time: "a" #eg. from 18:00 to 21:00
         full_price_: "Precio completo:"
         tickets_still_availables: "Entradas disponibles:"
         sold_out: "Entradas vendidas."
         without_reservation: "Sin reserva"
-        cancelled: "Cancelled"
+        cancelled: "Cancelado"
         ticket: "{NUMBER, plural, one{ticket} other{tickets}}"
         make_a_gift_of_this_reservation: "Regalar esta reserva"
         thank_you_your_payment_has_been_successfully_registered: "Tank you. Your payment has been successfully registered!"
         you_can_find_your_reservation_s_details_on_your_: "Puede encontrar los detalles de su reserva en"
-        dashboard: "dashboard"
+        dashboard: "panel"
         you_booked_DATE: "You booked ({DATE}):"
         canceled_reservation_SEATS: "Reservation canceled ({SEATS} seats)"
         book: "Reservar"
@@ -325,7 +328,7 @@ es:
         delete_recurring_event: "You're about to delete a periodic event. What do you want to do?"
         delete_this_event: "Only this event"
         delete_this_and_next: "This event and the following"
-        delete_all: "All events"
+        delete_all: "Todos los eventos"
         event_successfully_deleted: "Event successfully deleted."
         events_deleted: "The event, and {COUNT, plural, =1{one other} other{{COUNT} others}}, have been deleted"
         unable_to_delete_the_event: "Unable to delete the event, it may be booked by a member"

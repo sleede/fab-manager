@@ -16,7 +16,10 @@ interface PlanCategoryFormProps {
   onError: (message: string) => void
 }
 
-const PlanCategoryFormComponent: React.FC<PlanCategoryFormProps> = ({ action, category, onSuccess, onError }) => {
+/**
+ * Form to create/edit a plan category
+ */
+const PlanCategoryForm: React.FC<PlanCategoryFormProps> = ({ action, category, onSuccess, onError }) => {
   const { t } = useTranslation('admin');
 
   const { register, control, handleSubmit } = useForm<PlanCategory>({ defaultValues: { ...category } });
@@ -28,16 +31,16 @@ const PlanCategoryFormComponent: React.FC<PlanCategoryFormProps> = ({ action, ca
     switch (action) {
       case 'create':
         PlanCategoryAPI.create(data).then(() => {
-          onSuccess(t('app.admin.manage_plan_category.create_category.success'));
+          onSuccess(t('app.admin.plan_category_form.create.success'));
         }).catch((error) => {
-          onError(t('app.admin.manage_plan_category.create_category.error') + error);
+          onError(t('app.admin.plan_category_form.create.error') + error);
         });
         break;
       case 'update':
         PlanCategoryAPI.update(data).then(() => {
-          onSuccess(t('app.admin.manage_plan_category.update_category.success'));
+          onSuccess(t('app.admin.plan_category_form.update.success'));
         }).catch((error) => {
-          onError(t('app.admin.manage_plan_category.update_category.error') + error);
+          onError(t('app.admin.plan_category_form.update.error') + error);
         });
         break;
     }
@@ -45,23 +48,25 @@ const PlanCategoryFormComponent: React.FC<PlanCategoryFormProps> = ({ action, ca
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <FormInput id='name' register={register} rules={{ required: 'true' }} label={t('app.admin.manage_plan_category.name')} />
+      <FormInput id='name' register={register} rules={{ required: 'true' }} label={t('app.admin.plan_category_form.name')} />
 
-      <FormRichText control={control} id="description" label={t('app.admin.manage_plan_category.description')} limit={100} />
+      <FormRichText control={control} id="description" label={t('app.admin.plan_category_form.description')} limit={100} />
 
-      <FormInput id='weight' register={register} type='number' label={t('app.admin.manage_plan_category.significance')} />
+      <FormInput id='weight' register={register} type='number' label={t('app.admin.plan_category_form.significance')} />
       <FabAlert level="info" className="significance-info">
-        {t('app.admin.manage_plan_category.info')}
+        {t('app.admin.plan_category_form.info')}
       </FabAlert>
-      <FabButton type='submit'>{t(`app.admin.manage_plan_category.${action}_category.cta`)}</FabButton>
+      <FabButton type='submit'>{t(`app.admin.plan_category_form.${action}.cta`)}</FabButton>
     </form>
   );
 };
 
-export const PlanCategoryForm: React.FC<PlanCategoryFormProps> = ({ action, category, onSuccess, onError }) => {
+const PlanCategoryFormWrapper: React.FC<PlanCategoryFormProps> = (props) => {
   return (
     <Loader>
-      <PlanCategoryFormComponent action={action} category={category} onSuccess={onSuccess} onError={onError} />
+      <PlanCategoryForm {...props} />
     </Loader>
   );
 };
+
+export { PlanCategoryFormWrapper as PlanCategoryForm };

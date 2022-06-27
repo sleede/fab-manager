@@ -420,7 +420,7 @@ body.container {
   }
 
   &:before {
-    content: "Annulée";
+    content: attr(data-label);
     display: inline-block;
     background-color: #c44242;
     border-radius: 0.25em;

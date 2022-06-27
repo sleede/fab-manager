@@ -36,7 +36,7 @@ export const StripeModal: React.FC<StripeModalProps> = ({ isOpen, toggleModal, a
   const logoFooter = (): ReactNode => {
     return (
       <div className="stripe-modal-icons">
-        <i className="fa fa-lock fa-2x m-r-sm pos-rlt" />
+        <i className="fa fa-lock fa-2x" />
         <img src={stripeLogo} alt="powered by stripe" />
         <img src={mastercardLogo} alt="mastercard" />
         <img src={visaLogo} alt="visa" />

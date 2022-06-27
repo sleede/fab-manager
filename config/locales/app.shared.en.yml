@@ -21,7 +21,6 @@ en:
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "You will lose any unsaved modification if you quit this page"
         you_will_lose_any_unsaved_modification_if_you_reload_this_page: "You will lose any unsaved modification if you reload this page"
-        payment_card_error: "A problem has occurred with your credit card:"
         payment_card_declined: "Your card was declined."
       change_group:
         title: "{OPERATOR, select, self{My group} other{User's group}}"
@@ -29,20 +28,32 @@ en:
         cancel: "Cancel"
         validate: "Validate group change"
         success: "Group successfully changed"
+      stripe_form:
+        payment_card_error: "A problem occurred with your payment card:"
       #text editor
       text_editor:
-        text_placeholder: "Type something…"
-        link_placeholder: "Paste link…"
-        url_placeholder: "Paste url…"
-        new_tab: "Open in a new tab"
-        add_link: "Insert a link"
-        add_video: "Embed a video"
-        add_image: "Insert an image"
+        fab_text_editor:
+          text_placeholder: "Type something…"
+        menu_bar:
+          link_placeholder: "Paste link…"
+          url_placeholder: "Paste url…"
+          new_tab: "Open in a new tab"
+          add_link: "Insert a link"
+          add_video: "Embed a video"
+          add_image: "Insert an image"
+      #modal dialog
+      fab_modal:
+        close: "Close"
       fab_socials:
         follow_us: "Follow us"
         networks_update_success: "Social networks update successful"
         networks_update_error: "Problem trying to update social networks"
         url_placeholder: "Paste url…"
+        save: "Save"
+        website_invalid: "The website address is not a valid URL"
+      edit_socials:
+        url_placeholder: "Paste url…"
+        website_invalid: "The website address is not a valid URL"
       #user edition form
       user_profile_form:
         add_an_avatar: "Add an avatar"
@@ -154,9 +165,9 @@ en:
       member_select:
         select_a_member: "Select a member"
         start_typing: "Start typing..."
-        member_not_validated: "Attention:</br> The member has not validated."
+        member_not_validated: "Warning:<br> The member was not validated."
       #payment modal
-      payment:
+      abstract_payment_modal:
         online_payment: "Online payment"
         i_have_read_and_accept_: "I have read, and accept "
         _the_general_terms_and_conditions: "the general terms and conditions."
@@ -174,6 +185,9 @@ en:
         method_check: "By check"
         card_collection_info: "By validating, you'll be prompted for the member's card number. This card will be automatically charged at the deadlines."
         check_collection_info: "By validating, you confirm that you have {DEADLINES} checks, allowing you to collect all the monthly payments."
+      event_themes:
+        title: "Event themes"
+        select_theme: "Pick up a theme…"
       #event edition form
       event:
         title: "Title"
@@ -397,6 +411,15 @@ en:
         default_places: "Default maximum tickets"
         default_places_is_required: "Default maximum tickets is required."
         disable_space: "Disable space"
+      payment_schedule_summary:
+        your_payment_schedule: "Your payment schedule"
+        NUMBER_monthly_payment_of_AMOUNT: "{NUMBER} monthly {NUMBER, plural, =1{payment} other{payments}} of {AMOUNT}"
+        first_debit: "First debit on the day of the order."
+        monthly_payment_NUMBER: "{NUMBER}{NUMBER, plural, =1{st} =2{nd} =3{rd} other{th}} monthly payment: "
+        debit: "Debit on the day of the order."
+        view_full_schedule: "View the complete payment schedule"
+      select_schedule:
+        monthly_payment: "Monthly payment"
       #shopping cart module for reservations
       cart:
         summary: "Summary"
@@ -414,13 +437,6 @@ en:
         cost_of_the_subscription: "Cost of the subscription"
         subscription_price: "Subscription price"
         you_ve_just_selected_a_subscription_html: "You've just selected a <strong>subscription</strong>:"
-        monthly_payment: "Monthly payment"
-        your_payment_schedule: "Your payment schedule"
-        monthly_payment_NUMBER: "{NUMBER}{NUMBER, plural, =1{st} =2{nd} =3{rd} other{th}} monthly payment: "
-        NUMBER_monthly_payment_of_AMOUNT: "{NUMBER} monthly {NUMBER, plural, =1{payment} other{payments}} of {AMOUNT}"
-        first_debit: "First debit on the day of the order."
-        debit: "Debit on the day of the order."
-        view_full_schedule: "View the complete payment schedule"
         confirm_and_pay: "Confirm and pay"
         you_have_settled_the_following_TYPE: "You have settled the following {TYPE, select, Machine{machine slots} Training{training} other{elements}}:"
         you_have_settled_a_: "You have settled a"
@@ -463,7 +479,7 @@ en:
         slot_tags: "Slot tags"
         user_tags: "User tags"
         no_tags: "No tags"
-        user_validation_required_alert: "Attention !</br>Your administrator must validate your account. You will then be able to access all the booking features."
+        user_validation_required_alert: "Warning!<br>Your administrator must validate your account. Then, you'll then be able to access all the booking features."
       # feature-tour modal
       tour:
         previous: "Previous"
@@ -475,12 +491,15 @@ en:
         what_to_do: "What do you want to do?"
         tour: "Start the feature tour"
         guide: "Open the user's manual"
+      stripe_confirm_modal:
+        resolve_action: "Resolve the action"
+        ok_button: "OK"
       # 2nd factor authentication for card payments
       stripe_confirm:
         pending: "Pending for action..."
         success: "Thank you, your card setup is complete. The payment will be proceeded shortly."
       # the summary table of all payment schedules
-      schedules_table:
+      payment_schedules_table:
         schedule_num: "Schedule #"
         date: "Date"
         price: "Price"
@@ -516,7 +535,7 @@ en:
         confirm_bank_transfer: "Confirm the bank transfer"
         confirm_bank_transfer_body: "You must confirm the receipt of {AMOUNT} for the deadline of {DATE}. By confirming the bank transfer, an invoice will be generated for this due date."
         confirm_cancel_subscription: "You're about to cancel this payment schedule and the related subscription. Are you sure?"
-      payment_modal:
+      card_payment_modal:
         online_payment_disabled: "Online payment is not available. Please contact the FabLab's reception directly."
         unexpected_error: "An error occurred. Please report this issue to the Fab-Manager's team."
       update_card_modal:

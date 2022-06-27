@@ -36,6 +36,12 @@ class Members::MembersService
       end
     end
 
+    if params[:invoicing_profile_attributes][:organization] == 'false'
+      params[:invoicing_profile_attributes].reject! { |p| %w[organization_attributes organization].include?(p) }
+    else
+      params[:invoicing_profile_attributes].reject! { |p| p == 'organization' }
+    end
+
     not_complete = member.need_completion?
     up_result = member.update(params)
 

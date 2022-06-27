@@ -12,6 +12,9 @@ interface MachinesFiltersProps {
  */
 type selectOption = { value: boolean, label: string };
 
+/**
+ * Allows filtering on machines list
+ */
 export const MachinesFilters: React.FC<MachinesFiltersProps> = ({ onStatusSelected }) => {
   const { t } = useTranslation('public');
 

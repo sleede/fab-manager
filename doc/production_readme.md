@@ -50,7 +50,7 @@ This might work on other linux systems, and CPU architectures but this is untest
 `curl` and `bash` are needed to retrieve and run the automated deployment scripts.  
 Then the various scripts will check for their own dependencies.
 
-Moreover, the main software dependencies to run fab-manager are [Docker](https://docs.docker.com/engine/installation/linux/docker-ce/debian/) v20.0 or above and [Docker Compose](https://docs.docker.com/compose/install/) 
+Moreover, the main software dependencies to run fab-manager are [Docker](https://docs.docker.com/engine/installation/linux/docker-ce/debian/) v20.10 or above and [Docker Compose](https://docs.docker.com/compose/install/) 
 They can be easily installed using the [`prepare-vps.sleede.com` script below](#prepare-the-server).
 
 <a name="setup-the-domain-name"></a>

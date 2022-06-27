@@ -25,7 +25,7 @@ export const SelectSchedule: React.FC<SelectScheduleProps> = ({ show, selected, 
   return (
     <div className="select-schedule">
       {show && <div className={className || ''}>
-        <label htmlFor="payment_schedule">{ t('app.shared.cart.monthly_payment') }</label>
+        <label htmlFor="payment_schedule">{ t('app.shared.select_schedule.monthly_payment') }</label>
         <Switch checked={selected} id="payment_schedule" onChange={onChange} className="schedule-switch" />
       </div>}
     </div>

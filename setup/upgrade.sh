@@ -110,6 +110,11 @@ config()
     echo -e "\e[91m[ ❌ ] docker-compose.yml was not found in ${PWD}. Please run this script from the Fab-manager's installation folder. Exiting... \e[39m"
     exit 1
   fi
+    echo "Checking docker version..."
+    DOCKER_VERSION=$(docker -v | grep -oP "([0-9]{1,}\.)+[0-9]{1,}")
+    if verlt "$DOCKER_VERSION" 20.10; then
+      echo -e "\e[91m[ ❌ ] The installed docker version ($DOCKER_VERSION) is lower than the minimum required version (20.10). Exiting...\e[39m" && exit 1
+    fi
 
   SERVICE="$(yq eval '.services.*.image | select(. == "sleede/fab-manager*") | path | .[-2]' docker-compose.yml)"
   YES_ALL=${Y:-false}
@@ -162,9 +167,9 @@ version_error()
 # set $VERSION
 version_check()
 {
-  VERSION=$(docker-compose exec --user "$(id -u):$(id -g)" -T "$SERVICE" cat .fabmanager-version 2>/dev/null)
+  VERSION=$(docker-compose exec -T "$SERVICE" cat .fabmanager-version 2>/dev/null)
   if [[ $? = 1 ]]; then
-    VERSION=$(docker-compose exec --user "$(id -u):$(id -g)" -T "$SERVICE" cat package.json | jq -r '.version')
+    VERSION=$(docker-compose exec -T "$SERVICE" cat package.json | jq -r '.version')
   fi
   target_version
   if [ "$TARGET" = 'custom' ]; then return; fi
@@ -221,9 +226,13 @@ compile_assets()
   fi
   PG_NET_ID=$(docker inspect "$PG_ID" -f "{{json .NetworkSettings.Networks }}" | jq -r '.[] .NetworkID')
   clean_env_file
-  mkdir -p public/new_packs
+  if ! mkdir -p public/new_packs; then
+    # if, for any reason, the directory cannot be created, we create it with sudo privileges and changes the ownership to the current user
+    elevate_cmd mkdir -p public/new_packs
+    elevate_cmd chown "$(id -u):$(id -g)" public/new_packs
+  fi
   # shellcheck disable=SC2068
-  if ! docker run --user "$(id -u):$(id -g)" --rm --env-file ./config/env ${ENV_ARGS[@]} --link "$PG_ID" --net "$PG_NET_ID" -v "${PWD}/public/new_packs:/usr/src/app/public/packs" "$IMAGE" bundle exec rake assets:precompile; then
+  if ! docker run --user "0:0" --rm --env-file ./config/env ${ENV_ARGS[@]} --link "$PG_ID" --net "$PG_NET_ID" -v "${PWD}/public/new_packs:/usr/src/app/public/packs" "$IMAGE" bundle exec rake assets:precompile; then
     printf "\e[93m[ ⚠ ] Something may have went wrong while compiling the assets, please check the logs above.\e[39m\n"
     [[ "$YES_ALL" = "true" ]] && confirm="y" || read -rp "[91m::[0m [1mIgnore and continue?[0m (Y/n) " confirm </dev/tty
     if [[ "$confirm" = "n" ]]; then restore_tag; echo "Exiting..."; exit 4; fi
@@ -280,21 +289,21 @@ upgrade()
   done
   for PRE in "${PREPROCESSING[@]}"; do
     printf "\e[91m::\e[0m \e[1mRunning preprocessing command %s...\e[0m\n" "$PRE"
-    if ! docker-compose run --user "$(id -u):$(id -g)" --rm "$SERVICE" bundle exec "$PRE" </dev/tty; then
+    if ! docker-compose run --rm "$SERVICE" bundle exec "$PRE" </dev/tty; then
       restore_tag
       printf "\e[91m[ ❌ ] Something went wrong while running \"%s\", please check the logs above.\e[39m\nExiting...\n" "$PRE"
       exit 4
     fi
   done
   compile_assets
-  if ! docker-compose run --user "$(id -u):$(id -g)" --rm "$SERVICE" bundle exec rake db:migrate; then
+  if ! docker-compose run --rm "$SERVICE" bundle exec rake db:migrate; then
     restore_tag
     printf "\e[91m[ ❌ ] Something went wrong while migrating the database, please check the logs above.\e[39m\nExiting...\n"
     exit 4
   fi
   for COMMAND in "${COMMANDS[@]}"; do
     printf "\e[91m::\e[0m \e[1mRunning command %s...\e[0m\n" "$COMMAND"
-    if ! docker-compose run --user "$(id -u):$(id -g)" --rm "$SERVICE" bundle exec "$COMMAND" </dev/tty; then
+    if ! docker-compose run --rm "$SERVICE" bundle exec "$COMMAND" </dev/tty; then
       restore_tag
       printf "\e[91m[ ❌ ] Something went wrong while running \"%s\", please check the logs above.\e[39m\nExiting...\n" "$COMMAND"
       exit 4

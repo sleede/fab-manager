@@ -20,6 +20,9 @@ interface PlansFilterProps {
  */
 type selectOption = { value: number, label: string };
 
+/**
+ * Allows filtering on plans list
+ */
 export const PlansFilter: React.FC<PlansFilterProps> = ({ user, groups, onGroupSelected, onError, onDurationSelected }) => {
   const { t } = useTranslation('public');
 

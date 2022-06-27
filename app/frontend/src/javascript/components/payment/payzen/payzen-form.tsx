@@ -143,6 +143,9 @@ export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onE
     }
   };
 
+  /**
+   * Return a loader
+   */
   const Loader: FunctionComponent = () => {
     return (
       <div className={`fa-3x ${loadingClass}`}>
@@ -152,9 +155,9 @@ export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onE
   };
 
   return (
-    <form onSubmit={handleSubmit} id={formId} className={className || ''}>
+    <form onSubmit={handleSubmit} id={formId} className={`payzen-form ${className || ''}`}>
       <Loader />
-      <div className="container">
+      <div className="payzen-container">
         <div id="payzenPaymentForm" />
       </div>
       {children}

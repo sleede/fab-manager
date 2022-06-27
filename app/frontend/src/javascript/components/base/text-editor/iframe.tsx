@@ -18,6 +18,7 @@ declare module '@tiptap/core' {
   }
 }
 
+// eslint-disable-next-line import/no-default-export
 export default Node.create<IframeOptions>({
   name: 'iframe',
 
@@ -29,7 +30,7 @@ export default Node.create<IframeOptions>({
     return {
       allowFullscreen: true,
       HTMLAttributes: {
-        class: 'fab-textEditor-video'
+        class: 'fab-text-editor-video'
       }
     };
   },

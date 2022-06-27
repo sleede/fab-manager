@@ -6,7 +6,7 @@ type inputType = string|number|readonly string [];
 interface FabInputProps {
   id: string,
   onChange?: (value: inputType, validity?: ValidityState) => void,
-  defaultValue: inputType,
+  defaultValue?: inputType,
   icon?: ReactNode,
   addOn?: ReactNode,
   addOnClassName?: string,

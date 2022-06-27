@@ -1,0 +1,39 @@
+.profile-custom-fields-list {
+  width: 100%;
+  margin-bottom: 20px;
+
+  .edit-field-button {
+    margin-right: 5px;
+    float: right;
+  }
+
+  .edit-field-label-input {
+    width: 80%;
+    height: 38px;
+  }
+
+  .buttons {
+    float: right;
+
+    .save-field-label {
+      color: #ffffff;
+      background-color: #5cb85c;
+      border-color: #4cae4c;
+      margin-right: 5px;
+    }
+
+    .cancel-field-edition {
+      margin-right: 5px;
+    }
+  }
+
+  td.activated > label,
+  td.required > label {
+    margin-right: 15px;
+  }
+
+  td.activated > .switch,
+  td.required > .switch {
+    vertical-align: middle;
+  }
+}

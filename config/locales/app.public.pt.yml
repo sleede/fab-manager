@@ -15,7 +15,7 @@ pt:
         dashboard: "Painel de controle"
         my_profile: "Meu Perfil"
         my_settings: "Minhas Configurações"
-        my_proof_of_identity_files: "My proof of identity"
+        my_supporting_documents_files: "My supporting documents"
         my_projects: "Meus Projetos"
         my_trainings: "Meus Treinamentos"
         my_events: "Meus Eventos"
@@ -93,7 +93,7 @@ pt:
         _the_fablab_policy: "a política do FabLab"
         field_required: "Campo obrigatório"
         profile_custom_field_is_required: "{FEILD} is required"
-        user_proof_of_identity_files_is_required: "Attention !</br>You have declared to be \"{GROUP}\", proof of identity may be requested."
+        user_supporting_documents_required: "Warning!<br>You have declared to be \"{GROUP}\", supporting documents may be requested."
         unexpected_error_occurred: "Ocorreu um erro inesperado. Por favor, tenta novamente mais tarde."
         used_for_statistics: "Estes dados serão utilizados para fins estatísticos"
         used_for_invoicing: "Esses dados serão usados para fins de faturamento"
@@ -142,7 +142,7 @@ pt:
       #home page
       home:
         latest_documented_projects: "Últimos projetos documentados"
-        follow_us: "Follow us"
+        follow_us: "Siga-nos"
         latest_tweets: "Últimos tweets"
         latest_registered_members: "Últimos membros registrados"
         create_an_account: "Criar uma conta"
@@ -150,15 +150,16 @@ pt:
         #next events summary on the home page
         fablab_s_next_events: "Próximos eventos do FabLab"
         every_events: "Todos Eventos"
-        from_date_to_date: "De {START} até {END}"
+      event_card:
         on_the_date: "Em {DATE}"
-        from_time_to_time: "Das {START} até {END}"
-        without_reservation: "Sem reservas"
-        free_admission: "Admissão grátis"
-        full_price: "Valor inteira: "
-        event_full: "Evento lotado"
+        from_date_to_date: "De {START} até {END}"
+        from_time_to_time: "From {START} to {END}"
+        all_day: "Dia todo"
         still_available: "Locais disponíveis: "
-        all_day: "O dia inteiro"
+        event_full: "Evento lotado"
+        without_reservation: "Sem reservas"
+        free_admission: "Admissão gratuita"
+        full_price: "Valor inteira: "
       #projects gallery
       projects_list:
         the_fablab_projects: "Projetos do Fab Lab"
@@ -244,16 +245,17 @@ pt:
         unauthorized_operation: "Operação não autorizada"
         confirmation_required: "Confirmação obrigatória"
         the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "O treinamento não pode ser deletado pois já foi reservado por alguns usuários."
+      plan_card:
+        AMOUNT_per_month: "{AMOUNT} / meses"
+        i_subscribe_online: "Me inscrever online"
+        more_information: "Mais informação"
+        i_choose_that_plan: "Eu escolho esse plano"
+        i_already_subscribed: "Eu já estou inscrito"
       #summary of the subscriptions
       plans:
         subscriptions: "Assinaturas"
-        i_choose_that_plan: "Eu escolho esse plano"
-        i_subscribe_online: "Me inscrever online"
-        i_already_subscribed: "Eu já estou inscrito"
-        more_information: "Mais informação"
         your_subscription_expires_on_the_DATE: "Sua inscrição expira em {DATE}"
         no_plans: "Não há planos disponíveis para o seu grupo"
-        AMOUNT_per_month: "{AMOUNT} / meses"
         my_group: "Meu grupo"
         his_group: "Grupo do usuário"
         he_wants_to_change_group: "Alterar grupo"
@@ -289,6 +291,7 @@ pt:
         full_price_: "Valor inteira:"
         to_date: "até" #eg. from 01/01 to 01/05
         all_themes: "Todos os temas"
+        show_featured: "Show the featured event"
       #details and booking of an event
       events_show:
         event_description: "Descrição do evento"

@@ -8,6 +8,7 @@ import { Loader } from '../base/loader';
 import { FabButton } from '../base/fab-button';
 import { BooleanSetting } from './boolean-setting';
 import { CheckListSetting } from './check-list-setting';
+import { FabAlert } from '../base/fab-alert';
 
 declare const Application: IApplication;
 
@@ -17,16 +18,16 @@ interface UserValidationSettingProps {
 }
 
 /**
- * This component allows to configure user validation required setting.
+ * This component allows an admin to configure the settings related to the user account validation.
  */
-const UserValidationSetting: React.FC<UserValidationSettingProps> = ({ onSuccess, onError }) => {
+export const UserValidationSetting: React.FC<UserValidationSettingProps> = ({ onSuccess, onError }) => {
   const { t } = useTranslation('admin');
 
   const [userValidationRequired, setUserValidationRequired] = useState<string>('false');
   const userValidationRequiredListDefault = ['subscription', 'machine', 'event', 'space', 'training', 'pack'];
   const [userValidationRequiredList, setUserValidationRequiredList] = useState<string>(null);
   const userValidationRequiredOptions = userValidationRequiredListDefault.map(l => {
-    return [l, t(`app.admin.settings.compte.user_validation_required_list.${l}`)];
+    return [l, t(`app.admin.settings.account.user_validation_setting.user_validation_required_list.${l}`)];
   });
 
   /**
@@ -36,20 +37,24 @@ const UserValidationSetting: React.FC<UserValidationSettingProps> = ({ onSuccess
     SettingAPI.update(name, value)
       .then(() => {
         if (name === SettingName.UserValidationRequired) {
-          onSuccess(t('app.admin.settings.customization_of_SETTING_successfully_saved', { SETTING: t(`app.admin.settings.compte.${name}`) }));
+          onSuccess(t('app.admin.settings.account.user_validation_setting.customization_of_SETTING_successfully_saved', {
+            SETTING: t(`app.admin.settings.account.${name}`) // eslint-disable-line fabmanager/scoped-translation
+          }));
         }
       }).catch(err => {
         if (err.status === 304) return;
 
         if (err.status === 423) {
           if (name === SettingName.UserValidationRequired) {
-            onError(t('app.admin.settings.error_SETTING_locked', { SETTING: t(`app.admin.settings.compte.${name}`) }));
+            onError(t('app.admin.settings.account.user_validation_setting.error_SETTING_locked', {
+              SETTING: t(`app.admin.settings.account.${name}`) // eslint-disable-line fabmanager/scoped-translation
+            }));
           }
           return;
         }
 
         console.log(err);
-        onError(t('app.admin.settings.an_error_occurred_saving_the_setting'));
+        onError(t('app.admin.settings.account.user_validation_setting.an_error_occurred_saving_the_setting'));
       });
   };
 
@@ -70,7 +75,7 @@ const UserValidationSetting: React.FC<UserValidationSettingProps> = ({ onSuccess
   return (
     <div className="user-validation-setting">
       <BooleanSetting name={SettingName.UserValidationRequired}
-        label={t('app.admin.settings.compte.user_validation_required_option_label')}
+        label={t('app.admin.settings.account.user_validation_setting.user_validation_required_option_label')}
         hideSave={true}
         onChange={setUserValidationRequired}
         onSuccess={onSuccess}
@@ -78,13 +83,13 @@ const UserValidationSetting: React.FC<UserValidationSettingProps> = ({ onSuccess
       </BooleanSetting>
       {userValidationRequired === 'true' &&
         <div>
-          <h4>{t('app.admin.settings.compte.user_validation_required_list_title')}</h4>
+          <h4>{t('app.admin.settings.account.user_validation_setting.user_validation_required_list_title')}</h4>
           <p>
-            {t('app.admin.settings.compte.user_validation_required_list_info')}
+            {t('app.admin.settings.account.user_validation_setting.user_validation_required_list_info')}
           </p>
-          <p className="alert alert-warning">
-            {t('app.admin.settings.compte.user_validation_required_list_other_info')}
-          </p>
+          <FabAlert level="warning">
+            {t('app.admin.settings.account.user_validation_setting.user_validation_required_list_other_info')}
+          </FabAlert>
           <CheckListSetting name={SettingName.UserValidationRequiredList}
             label=""
             availableOptions={userValidationRequiredOptions}
@@ -96,7 +101,7 @@ const UserValidationSetting: React.FC<UserValidationSettingProps> = ({ onSuccess
           </CheckListSetting>
         </div>
       }
-      <FabButton className="btn btn-warning m-t" onClick={handleSave}>{t('app.admin.check_list_setting.save')}</FabButton>
+      <FabButton className="save-btn" onClick={handleSave}>{t('app.admin.settings.account.user_validation_setting.save')}</FabButton>
     </div>
   );
 };

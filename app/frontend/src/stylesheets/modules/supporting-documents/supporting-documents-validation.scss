@@ -1,0 +1,39 @@
+.supporting-documents-validation {
+  .info-area {
+    color: #000;
+    font-weight: 600;
+  }
+
+  .document-type {
+    margin-bottom: 15px;
+
+    .type-name {
+      margin-bottom: 5px;
+    }
+
+    .filename {
+      margin-right: 15px;
+    }
+
+    .missing-file {
+      color: var(--error);
+    }
+  }
+
+  .refuse-btn {
+    background-color: var(--secondary);
+    border-color: var(--secondary);
+    color: var(--secondary-text-color);
+    margin-bottom: 15px;
+    margin-top: 15px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .supporting-documents-validation .fab-panel {
+    width: 56.33%;
+  }
+  .supporting-documents-validation .fab-panel.refusal {
+    width: 33.33%;
+  }
+}

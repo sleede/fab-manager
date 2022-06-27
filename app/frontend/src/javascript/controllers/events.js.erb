@@ -72,6 +72,7 @@ Application.Controllers.controller('EventsController', ['$scope', '$state', 'Eve
     // reinitialize results datasets
       $scope.page = 1;
       $scope.eventsGroupByMonth = {};
+      $scope.featuredEevent = null;
       $scope.events = [];
       $scope.monthOrder = [];
       $scope.noMoreResults = false;
@@ -93,6 +94,16 @@ Application.Controllers.controller('EventsController', ['$scope', '$state', 'Eve
      * @return {boolean} false if the event occurs on many days
      */
     $scope.onSingleDay = function (event) { moment(event.start_date).isSame(event.end_date, 'day'); };
+
+    /**
+     * Move down the viewport to the featured event
+     */
+    $scope.scrollToFeaturedEvent = function () {
+      const card = document.getElementsByClassName('featured-event')[0];
+      if (card) {
+        card.childNodes[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
 
     /* PRIVATE SCOPE */
 
@@ -117,7 +128,8 @@ Application.Controllers.controller('EventsController', ['$scope', '$state', 'Eve
           });
         });
         $scope.eventsGroupByMonth = Object.assign($scope.eventsGroupByMonth, eventsGroupedByMonth);
-        return $scope.monthOrder = Object.keys($scope.eventsGroupByMonth);
+        $scope.monthOrder = Object.keys($scope.eventsGroupByMonth);
+        $scope.featuredEevent = _.minBy(events.filter(e => moment(e.start_date).isAfter()), e => e.start_date);
       }
     };
 

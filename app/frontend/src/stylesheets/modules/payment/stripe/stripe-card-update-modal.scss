@@ -1,4 +1,4 @@
-.stripe-update-card-modal {
+.stripe-card-update-modal {
   .fab-modal-content {
     .card-form {
       background-color: #f4f3f3;
@@ -47,6 +47,8 @@
       .fa.fa-lock {
         top: 7px;
         color: #9edd78;
+        margin-right: 10px;
+        position: relative;
       }
 
       img {

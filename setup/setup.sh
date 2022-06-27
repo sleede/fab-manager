@@ -15,11 +15,11 @@ welcome_message()
   printf "\n                 Welcome to Fab-manager's setup assistant\n\n\n"
   echo "Thank you for installing Fab-manager."
   printf "This script will guide you through the installation process of Fab-manager\n\n"
-  echo -e "Please report any \e[1mfeedback or improvement request\e[21m on https://feedback.fab-manager.com/"
-  echo -e "For \e[1mbug reports\e[21m, please open a new issue on https://github.com/sleede/fab-manager/issues"
-  echo -e "You can call for \e[1mcommunity assistance\e[21m on https://forum.fab-manager.com/"
+  echo -e "Please report any \e[1mfeedback or improvement request\e[0m on https://feedback.fab-manager.com/"
+  echo -e "For \e[1mbug reports\e[0m, please open a new issue on https://github.com/sleede/fab-manager/issues"
+  echo -e "You can call for \e[1mcommunity assistance\e[0m on https://forum.fab-manager.com/"
   printf "\nYou can interrupt this installation at any time by pressing Ctrl+C\n"
-  printf "If you do not feel confortable with this installation, you can \e[4msubscribe to our hosting offers\e[24m:\nhttps://www.fab-manager.com/saas-offer\n\n"
+  printf "If you do not feel confortable with this installation, you can \e[4msubscribe to our hosting offers\e[0m:\nhttps://www.fab-manager.com/saas-offer\n\n"
   read -rp "Continue? (Y/n) " confirm </dev/tty
   if [[ "$confirm" = "n" ]]; then exit 1; fi
 }
@@ -54,9 +54,23 @@ system_requirements()
       echo -e "\e[91m[ ❌ ] $_command was not found, exiting...\e[39m" && exit 1
     fi
   done
+  echo "detecting docker version..."
+  DOCKER_VERSION=$(docker -v | grep -oP "([0-9]{1,}\.)+[0-9]{1,}")
+  if verlt "$DOCKER_VERSION" 20.10; then
+    echo -e "\e[91m[ ❌ ] The installed docker version ($DOCKER_VERSION) is lower than the minimum required version (20.10). Exiting...\e[39m" && exit 1
+  fi
   echo "detecting docker-compose..."
   docker-compose version
   printf "\e[92m[ ✔ ] All requirements successfully checked.\e[39m \n\n"
+}
+
+# compare versions utilities
+# https://stackoverflow.com/a/4024263/1039377
+verlte() {
+    [  "$1" = "$(echo -e "$1\n$2" | sort -V | head -n1)" ]
+}
+verlt() {
+    [ "$1" = "$2" ] && return 1 || verlte "$1" "$2"
 }
 
 docker-compose()
@@ -128,6 +142,15 @@ read_email()
 config()
 {
   SERVICE="fabmanager"
+  # http_proxy should have been exported externally
+  # shellcheck disable=SC2154
+  if [ "$http_proxy" != "" ]; then
+    read -rp "You seems to be behind a proxy. Do you want to configure a custom CA certificate? (Y/n) " confirm </dev/tty
+    if [[ "$confirm" != "n" ]]; then
+      echo "Paste the certificate below and terminate with an empty line:"
+      CERTIFICATE=$(sed '/^$/q' </dev/tty)
+    fi
+  fi
   echo 'We recommend nginx to serve the application over the network (internet). You can use your own solution or let this script install and configure nginx for Fab-manager.'
   printf 'If you want to install Fab-manager behind a reverse proxy, you may not need to install the integrated nginx.\n'
   read -rp 'Do you want install nginx? (Y/n) ' NGINX </dev/tty
@@ -213,10 +236,22 @@ prepare_files()
 
   # docker-compose
   \curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/setup/docker-compose.yml > "$FABMANAGER_PATH/docker-compose.yml"
+
+  # proxy
+  if [ "$CERTIFICATE" != "" ]; then
+    mkdir -p "$FABMANAGER_PATH/config/proxy"
+    echo "$CERTIFICATE" > "$FABMANAGER_PATH/config/proxy/certificate.pem"
+    \curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/setup/proxy/.npmrc > "$FABMANAGER_PATH/config/proxy/.npmrc"
+    \curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/setup/proxy/gitconfig > "$FABMANAGER_PATH/config/proxy/gitconfig"
+  fi
 }
 
 yq() {
   docker run --rm -i -v "${FABMANAGER_PATH}:/workdir" --user "$UID" mikefarah/yq:4 "$@"
+}
+
+bat() {
+  docker run --rm -i -v "${PWD}:/workdir"  --user "$UID" sleede/bat:latest "$@"
 }
 
 prepare_nginx()
@@ -298,6 +333,17 @@ prepare_docker()
     fi
   fi
 
+  # set the current user in the docker-compose.yml, as the owner of the process
+  sed -i.bak "s/USER_ID/$(id -u):$(id -g)/g" "$FABMANAGER_PATH/docker-compose.yml"
+
+  # if a certificate was provided, modify the docker-compose.yml file to use it
+  if [ "$CERTIFICATE" != "" ]; then
+    echo "Using the certificate provided..."
+    yq -i eval ".services.$SERVICE.volumes += [\"./config/proxy/certificate.pem:/etc/ssl/certs/ca-cert-proxy.pem\"]" docker-compose.yml
+    yq -i eval ".services.$SERVICE.volumes += [\"./config/proxy/.npmrc:/usr/src/app/.npmrc\"]" docker-compose.yml
+    yq -i eval ".services.$SERVICE.volumes += [\"./config/proxy/gitconfig:/etc/gitconfig\"]" docker-compose.yml
+  fi
+
   cd "$FABMANAGER_PATH" && docker-compose pull
 }
 
@@ -317,6 +363,11 @@ get_md_anchor()
 
 configure_env_file()
 {
+  # pre-configure the main domain
+  if [ "${MAIN_DOMAIN[0]}" != "" ]; then
+    sed -i.bak "s/DEFAULT_HOST=.*/DEFAULT_HOST=${MAIN_DOMAIN[0]}/g" "$FABMANAGER_PATH/config/env"
+  fi
+
   printf "\n\nWe will now configure the environment variables.\n"
   echo "This allows you to customize Fab-manager's appearance and behavior."
   read -rp "Proceed? (Y/n) " confirm </dev/tty
@@ -332,12 +383,9 @@ configure_env_file()
     local var_doc current
     var_doc=$(get_md_anchor "$doc" "$variable")
     current=$(grep "$variable=" "$FABMANAGER_PATH/config/env")
-    printf "\n\n\n==== \e[4m%s\e[24m ====\n" "$variable"
-    printf "**** \e[1mDocumentation:\e[21m ****\n"
-    echo "$var_doc"
-    printf "=======================\n- \e[1mCurrent value: %s\e[21m\n- New value? (leave empty to keep the current value)\n" "$current"
+    echo "$var_doc" | bat --file-name "$variable" --language md --color=always
+    printf "- \e[1mCurrent value: %s\e[21m\n- New value? (leave empty to keep the current value)\n" "$current"
     read -rep "  > " value </dev/tty
-    echo "======================="
     if [ "$value" != "" ]; then
       esc_val=$(printf '%s\n' "$value" | sed -e 's/\//\\\//g')
       esc_curr=$(printf '%s\n' "$current" | sed -e 's/\//\\\//g')
@@ -345,8 +393,18 @@ configure_env_file()
     fi
   done
   # we automatically generate the SECRET_KEY_BASE
-  secret=$(docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --user "$(id -u):$(id -g)" --rm "$SERVICE" bundle exec rake secret)
+  secret=$(docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rake secret)
   sed -i.bak "s/SECRET_KEY_BASE=/SECRET_KEY_BASE=$secret/g" "$FABMANAGER_PATH/config/env"
+
+  # if DEFAULT_PROTOCOL was set to http, ALLOW_INSECURE_HTTP is probably required
+  if grep "^DEFAULT_PROTOCOL=http$" "$FABMANAGER_PATH/config/env" 1>/dev/null; then
+    get_md_anchor "$doc" "ALLOW_INSECURE_HTTP" | bat --file-name "ALLOW_INSECURE_HTTP" --language md --color=always
+    printf "You have set \e[1mDEFAULT_PROTOCOL\e[21m to \e[1mhttp\e[21m.\n"
+    read -rp "Do you want to allow insecure HTTP? (Y/n) " confirm </dev/tty
+    if [ "$confirm" != "n" ]; then
+      sed -i.bak "s/ALLOW_INSECURE_HTTP=.*/ALLOW_INSECURE_HTTP=true/g" "$FABMANAGER_PATH/config/env"
+    fi
+  fi
 }
 
 read_password()
@@ -375,22 +433,22 @@ setup_assets_and_databases()
   read -rp "Continue? (Y/n) " confirm </dev/tty
   if [ "$confirm" = "n" ]; then return; fi
 
-  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --user "$(id -u):$(id -g)" --rm "$SERVICE" bundle exec rake db:create # create the database
-  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --user "$(id -u):$(id -g)" --rm "$SERVICE" bundle exec rake db:migrate # run all the migrations
+  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rake db:create </dev/tty # create the database
+  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rake db:migrate </dev/tty # run all the migrations
   # prompt default admin email/password
   printf "\n\nWe will now create the default administrator of Fab-manager.\n"
   read_email
   PASSWORD=$(read_password)
   printf "\nOK. We will fill the database now...\n"
-  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --user "$(id -u):$(id -g)" --rm -e ADMIN_EMAIL="$EMAIL" -e ADMIN_PASSWORD="$PASSWORD" "$SERVICE" bundle exec rake db:seed # seed the database
+  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm -e ADMIN_EMAIL="$EMAIL" -e ADMIN_PASSWORD="$PASSWORD" "$SERVICE" bundle exec rake db:seed </dev/tty # seed the database
 
   # now build the assets
-  if ! docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --user "$(id -u):$(id -g)" --rm "$SERVICE" bundle exec rake assets:precompile; then
+  if ! docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --user "0:0" --rm "$SERVICE" bundle exec rake assets:precompile </dev/tty; then
     echo -e "\e[91m[ ❌ ] someting went wrong while compiling the assets, exiting...\e[39m" && exit 1
   fi
 
   # and prepare elasticsearch
-  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --user "$(id -u):$(id -g)" --rm "$SERVICE" bundle exec rake fablab:es:build_stats
+  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rake fablab:es:build_stats </dev/tty
 }
 
 stop()

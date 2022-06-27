@@ -31,7 +31,7 @@ interface ReserveButtonProps {
 /**
  * Button component that makes the training verification before redirecting the user to the reservation calendar
  */
-const ReserveButtonComponent: React.FC<ReserveButtonProps> = ({ currentUser, machineId, onLoginRequested, onLoadingStart, onLoadingEnd, onError, onSuccess, onReserveMachine, onEnrollRequested, className, children, canProposePacks }) => {
+const ReserveButton: React.FC<ReserveButtonProps> = ({ currentUser, machineId, onLoginRequested, onLoadingStart, onLoadingEnd, onError, onSuccess, onReserveMachine, onEnrollRequested, className, children, canProposePacks }) => {
   const { t } = useTranslation('shared');
 
   const [machine, setMachine] = useState<Machine>(null);
@@ -183,14 +183,16 @@ const ReserveButtonComponent: React.FC<ReserveButtonProps> = ({ currentUser, mac
   );
 };
 
-export const ReserveButton: React.FC<ReserveButtonProps> = ({ currentUser, machineId, onLoginRequested, onLoadingStart, onLoadingEnd, onError, onSuccess, onReserveMachine, onEnrollRequested, className, children, canProposePacks }) => {
+const ReserveButtonWrapper: React.FC<ReserveButtonProps> = (props) => {
   return (
     <Loader>
-      <ReserveButtonComponent currentUser={currentUser} machineId={machineId} onError={onError} onSuccess={onSuccess} onLoadingStart={onLoadingStart} onLoadingEnd={onLoadingEnd} onReserveMachine={onReserveMachine} onLoginRequested={onLoginRequested} onEnrollRequested={onEnrollRequested} className={className} canProposePacks={canProposePacks}>
-        {children}
-      </ReserveButtonComponent>
+      <ReserveButton {...props}>
+        {props.children}
+      </ReserveButton>
     </Loader>
   );
 };
 
-Application.Components.component('reserveButton', react2angular(ReserveButton, ['currentUser', 'machineId', 'onLoadingStart', 'onLoadingEnd', 'onError', 'onSuccess', 'onReserveMachine', 'onLoginRequested', 'onEnrollRequested', 'className', 'canProposePacks']));
+export { ReserveButtonWrapper as ReserveButton };
+
+Application.Components.component('reserveButton', react2angular(ReserveButtonWrapper, ['currentUser', 'machineId', 'onLoadingStart', 'onLoadingEnd', 'onError', 'onSuccess', 'onReserveMachine', 'onLoginRequested', 'onEnrollRequested', 'className', 'canProposePacks']));

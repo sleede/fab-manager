@@ -48,17 +48,21 @@ export const BooleanSetting: React.FC<BooleanSettingProps> = ({ name, label, cla
    */
   const updateSetting = () => {
     SettingAPI.update(name, value ? 'true' : 'false')
-      .then(() => onSuccess(t('app.admin.settings.customization_of_SETTING_successfully_saved', { SETTING: t(`app.admin.settings.${name}`) })))
+      .then(() => onSuccess(t('app.admin.boolean_setting.customization_of_SETTING_successfully_saved', {
+        SETTING: t(`app.admin.settings.${name}`) // eslint-disable-line fabmanager/scoped-translation
+      })))
       .catch(err => {
         if (err.status === 304) return;
 
         if (err.status === 423) {
-          onError(t('app.admin.settings.error_SETTING_locked', { SETTING: t(`app.admin.settings.${name}`) }));
+          onError(t('app.admin.boolean_setting.error_SETTING_locked', {
+            SETTING: t(`app.admin.settings.${name}`) // eslint-disable-line fabmanager/scoped-translation
+          }));
           return;
         }
 
         console.log(err);
-        onError(t('app.admin.settings.an_error_occurred_saving_the_setting'));
+        onError(t('app.admin.boolean_setting.an_error_occurred_saving_the_setting'));
       });
   };
 
@@ -97,15 +101,15 @@ export const BooleanSetting: React.FC<BooleanSettingProps> = ({ name, label, cla
   };
 
   return (
-    <div className={`form-group ${className || ''}`}>
-      <label htmlFor={`setting-${name}`} className="control-label m-r">{label}</label>
-      <Switch checked={value} id={`setting-${name}}`} onChange={handleChanged} className="v-middle"></Switch>
-      {!hideSave && <FabButton className="btn btn-warning m-l" onClick={handleSave}>{t('app.admin.check_list_setting.save')}</FabButton> }
+    <div className={`boolean-setting ${className || ''}`}>
+      <label htmlFor={`setting-${name}`}>{label}</label>
+      <Switch checked={value} id={`setting-${name}}`} onChange={handleChanged} className="switch"></Switch>
+      {!hideSave && <FabButton className="save-btn" onClick={handleSave}>{t('app.admin.boolean_setting.save')}</FabButton> }
     </div>
   );
 };
 
-export const BooleanSettingWrapper: React.FC<BooleanSettingProps> = ({ onChange, onSuccess, onError, label, className, name, hideSave, onBeforeSave }) => {
+const BooleanSettingWrapper: React.FC<BooleanSettingProps> = ({ onChange, onSuccess, onError, label, className, name, hideSave, onBeforeSave }) => {
   return (
     <Loader>
       <BooleanSetting label={label} name={name} onError={onError} onSuccess={onSuccess} onChange={onChange} className={className} hideSave={hideSave} onBeforeSave={onBeforeSave} />

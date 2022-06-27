@@ -16,6 +16,9 @@ interface PayzenCardUpdateModalProps {
   operator: User
 }
 
+/**
+ * Modal dialog to allow the member to update his payment card for a payment schedule, when the PayZen gateway is used
+ */
 export const PayzenCardUpdateModal: React.FC<PayzenCardUpdateModalProps> = ({ isOpen, toggleModal, onSuccess, schedule, operator }) => {
   const { t } = useTranslation('shared');
 
@@ -61,7 +64,7 @@ export const PayzenCardUpdateModal: React.FC<PayzenCardUpdateModalProps> = ({ is
       toggleModal={toggleModal}
       closeButton={false}
       customFooter={logoFooter()}
-      className="payzen-update-card-modal">
+      className="payzen-card-update-modal">
       {schedule && <PayzenForm onSubmit={handleCardUpdateSubmit}
         onSuccess={onSuccess}
         onError={handleCardUpdateError}

@@ -44,14 +44,13 @@ export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, re
 
   // Compose classnames from props
   const classNames = [
-    'form-input',
     `${className || ''}`,
     `${type === 'hidden' ? 'is-hidden' : ''}`
   ].join(' ');
 
   return (
     <AbstractFormItem id={id} formState={formState} label={label}
-                      className={classNames} tooltip={tooltip}
+                      className={`form-input ${classNames}`} tooltip={tooltip}
                       disabled={disabled}
                       rules={rules} error={error} warning={warning}>
         {icon && <span className="icon">{icon}</span>}

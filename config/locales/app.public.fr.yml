@@ -15,7 +15,7 @@ fr:
         dashboard: "Tableau de bord"
         my_profile: "Mon profil"
         my_settings: "Mes paramètres"
-        my_proof_of_identity_files: "Mes justificatifs"
+        my_supporting_documents_files: "Mes justificatifs"
         my_projects: "Mes projets"
         my_trainings: "Mes formations"
         my_events: "Mes événements"
@@ -93,7 +93,7 @@ fr:
         _the_fablab_policy: "la charte d'utilisation du Fab Lab"
         field_required: "Champ requis"
         profile_custom_field_is_required: "{FEILD} est requis"
-        user_proof_of_identity_files_is_required: "Attention !</br>Vous avez déclarez être \"{GROUP}\", des pièces justificatives pourront vous être demandées."
+        user_supporting_documents_required: "Attention !<br>Vous avez déclarez être \"{GROUP}\", des pièces justificatives pourront vous être demandées."
         unexpected_error_occurred: "Une erreur inattendue s'est produite. Veuillez réessayer ultérieurement."
         used_for_statistics: "Cette donnée sera utilisée à des fins statistiques"
         used_for_invoicing: "Cette donnée sera utilisée à des fins de facturation"
@@ -150,15 +150,16 @@ fr:
         #next events summary on the home page
         fablab_s_next_events: "Les prochains événements du Fab Lab"
         every_events: "Tous les événements"
-        from_date_to_date: "Du {START} au {END}"
+      event_card:
         on_the_date: "Le {DATE}"
+        from_date_to_date: "Du {START} au {END}"
         from_time_to_time: "De {START} à {END}"
+        all_day: "Toute la journée"
+        still_available: "Place(s) disponible(s) : "
+        event_full: "Événement complet"
         without_reservation: "Sans réservation"
         free_admission: "Entrée gratuite"
         full_price: "Plein tarif : "
-        event_full: "Événement complet"
-        still_available: "Place(s) disponible(s) : "
-        all_day: "Toute la journée"
       #projects gallery
       projects_list:
         the_fablab_projects: "Les projets du FabLab"
@@ -244,16 +245,17 @@ fr:
         unauthorized_operation: "Opération non autorisée"
         confirmation_required: "Confirmation requise"
         the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "La formation ne peut pas être supprimée car elle a déjà été réservée par des utilisateurs."
+      plan_card:
+        AMOUNT_per_month: "{AMOUNT} / mois"
+        i_subscribe_online: "Je m'abonne en ligne"
+        more_information: "Plus d'infos"
+        i_choose_that_plan: "Je choisis cette formule"
+        i_already_subscribed: "Je suis déjà abonné"
       #summary of the subscriptions
       plans:
         subscriptions: "Les abonnements"
-        i_choose_that_plan: "Je choisis cette formule"
-        i_subscribe_online: "Je m'abonne en ligne"
-        i_already_subscribed: "Je suis déjà abonné"
-        more_information: "Plus d'infos"
         your_subscription_expires_on_the_DATE: "Votre abonnement expire au {DATE}"
         no_plans: "Aucun abonnement n'est disponible pour votre groupe"
-        AMOUNT_per_month: "{AMOUNT} / mois"
         my_group: "Mon groupe"
         his_group: "Groupe de l'utilisateur"
         he_wants_to_change_group: "Changer de groupe"
@@ -289,6 +291,7 @@ fr:
         full_price_: "Plein tarif :"
         to_date: "au" #eg. from 01/01 to 01/05
         all_themes: "Toutes les thématiques"
+        show_featured: "Afficher l'événement du moment"
       #details and booking of an event
       events_show:
         event_description: "Description de l’événement"
