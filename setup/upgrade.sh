@@ -110,6 +110,11 @@ config()
     echo -e "\e[91m[ ❌ ] docker-compose.yml was not found in ${PWD}. Please run this script from the Fab-manager's installation folder. Exiting... \e[39m"
     exit 1
   fi
+    echo "Checking docker version..."
+    DOCKER_VERSION=$(docker -v | grep -oP "([0-9]{1,}\.)+[0-9]{1,}")
+    if verlt "$DOCKER_VERSION" 20.10; then
+      echo -e "\e[91m[ ❌ ] The installed docker version ($DOCKER_VERSION) is lower than the minimum required version (20.10). Exiting...\e[39m" && exit 1
+    fi
 
   SERVICE="$(yq eval '.services.*.image | select(. == "sleede/fab-manager*") | path | .[-2]' docker-compose.yml)"
   YES_ALL=${Y:-false}
