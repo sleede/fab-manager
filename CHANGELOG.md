@@ -2,6 +2,8 @@
 
 ## next deploy
 
+- Removed the admins' button to scroll to the featured event
+
 ## v5.4.6 2022 June 27
 
 - Fix a bug: unable to run yq in deployment scripts

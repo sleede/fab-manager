@@ -47,9 +47,6 @@
                   ui-sref="app.public.events_show({id: featuredEevent.id})">
       </event-card>
     </div>
-    <div ng-if="isAuthorized(['admin', 'manager'])">
-      <button class="btn btn-default" ng-click="scrollToFeaturedEvent()" translate>{{ 'app.public.events_list.show_featured' }}</button>
-    </div>
 
     <div ng-repeat="month in monthOrder">
       <h1>{{monthNames[month.split(',')[0] - 1]}}, {{month.split(',')[1]}}</h1>
