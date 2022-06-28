@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { IApplication } from '../../../models/application';
 import { react2angular } from 'react2angular';
-import { MachineReservations } from './machine-reservations';
-import { SpaceReservations } from './space-reservations';
+import { ReservationsPanel } from './reservations-panel';
+import SettingAPI from '../../../api/setting';
+import { SettingName } from '../../../models/setting';
 
 declare const Application: IApplication;
 
@@ -15,10 +16,18 @@ interface ReservationsDashboardProps {
  * User dashboard showing everything about his spaces/machine reservations and also remaining credits
  */
 const ReservationsDashboard: React.FC<ReservationsDashboardProps> = ({ onError, userId }) => {
+  const [modules, setModules] = useState<Map<SettingName, string>>();
+
+  useEffect(() => {
+    SettingAPI.query([SettingName.SpacesModule, SettingName.MachinesModule])
+      .then(res => setModules(res))
+      .catch(error => onError(error));
+  }, []);
+
   return (
     <div className="reservations-dashboard">
-      <MachineReservations userId={userId} onError={onError} />
-      <SpaceReservations userId={userId} onError={onError} />
+      {modules?.get(SettingName.MachinesModule) !== 'false' && <ReservationsPanel userId={userId} onError={onError} reservableType="Machine" />}
+      {modules?.get(SettingName.SpacesModule) !== 'false' && <ReservationsPanel userId={userId} onError={onError} reservableType="Space" />}
     </div>
   );
 };

@@ -12,7 +12,7 @@ json.slots_attributes reservation.slots do |s|
   json.is_reserved true
 end
 json.nb_reserve_places reservation.nb_reserve_places
-json.tickets reservation.tickets do |t|
+json.tickets_attributes reservation.tickets do |t|
   json.extract! t, :booked, :created_at
   json.event_price_category do
     json.extract! t.event_price_category, :id, :price_category_id
@@ -25,3 +25,7 @@ json.total_booked_seats reservation.total_booked_seats(canceled: true)
 json.created_at reservation.created_at.iso8601
 json.reservable_id reservation.reservable_id
 json.reservable_type reservation.reservable_type
+json.reservable do
+  json.id reservation.reservable.id
+  json.name reservation.reservable.name
+end

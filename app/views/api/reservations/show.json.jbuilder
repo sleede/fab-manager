@@ -16,7 +16,3 @@ json.user do
     json.hours_used mc.users_credits.find_by(user_id: @reservation.statistic_profile.user_id).hours_used
   end
 end
-json.reservable do
-  json.id @reservation.reservable.id
-  json.name @reservation.reservable.name
-end

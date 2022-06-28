@@ -142,6 +142,13 @@ en:
           save: "Save"
           browse: "Browse"
           edit: "Edit"
+        reservations:
+          reservations_panel:
+            title_Space: "My space reservations"
+            title_Machine: "My machines reservations"
+            upcoming: "Upcoming"
+            passed: "Passed"
+            slots_details: "Slots details"
       #public profil of a member
       members_show:
         members_list: "Members list"

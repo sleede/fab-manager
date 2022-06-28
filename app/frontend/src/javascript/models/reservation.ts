@@ -21,10 +21,23 @@ export interface Reservation {
   reservable_id: number,
   reservable_type: ReservableType,
   slots_attributes: Array<ReservationSlot>,
+  reservable?: {
+    id: number,
+    name: string
+  },
   nb_reserve_places?: number,
   tickets_attributes?: {
     event_price_category_id: number,
+    event_price_category?: {
+      id: number,
+      price_category_id: number,
+      price_category: {
+        id: number,
+        name: string
+      }
+    },
     booked: boolean,
+    created_at?: TDateISO
   },
   total_booked_seats?: number,
   created_at?: TDateISO,

@@ -34,7 +34,7 @@
             <td>{{ reservation.created_at | amDateFormat:'LL LTS' }}</td>
             <td>
               <span ng-if="reservation.nb_reserve_places > 0">{{ 'app.admin.event_reservations.full_price_' | translate }} {{reservation.nb_reserve_places}}<br/></span>
-              <span ng-repeat="ticket in reservation.tickets">{{ticket.event_price_category.price_category.name}} : {{ticket.booked}}</span>
+              <span ng-repeat="ticket in reservation.tickets_attributes">{{ticket.event_price_category.price_category.name}} : {{ticket.booked}}</span>
               <div ng-show="isCancelled(reservation)" class="canceled-marker" translate>{{ 'app.admin.event_reservations.canceled' }}</div>
             </td>
             <td>
