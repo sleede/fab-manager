@@ -1,5 +1,6 @@
+import { ApiFilter } from './api';
 
-export interface PackIndexFilter {
+export interface PackIndexFilter extends ApiFilter {
   group_id?: number,
   priceable_id?: number,
   priceable_type?: string,

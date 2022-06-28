@@ -1,5 +1,6 @@
+import { ApiFilter } from './api';
 
-export interface ProofOfIdentityFileIndexFilter {
+export interface ProofOfIdentityFileIndexFilter extends ApiFilter {
   user_id: number,
 }
 

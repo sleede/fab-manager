@@ -1,6 +1,7 @@
 import { Reservation } from './reservation';
+import { ApiFilter } from './api';
 
-export interface MachineIndexFilter {
+export interface MachineIndexFilter extends ApiFilter {
   disabled: boolean,
 }
 

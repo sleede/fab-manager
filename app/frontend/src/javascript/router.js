@@ -191,6 +191,15 @@ angular.module('application.router', ['ui.router'])
           }
         }
       })
+      .state('app.logged.dashboard.reservations', {
+        url: '/reservations',
+        views: {
+          'main@': {
+            templateUrl: '/dashboard/reservations.html',
+            controller: 'DashboardController'
+          }
+        }
+      })
       .state('app.logged.dashboard.events', {
         url: '/events',
         views: {

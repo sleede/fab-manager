@@ -1,3 +1,5 @@
+import { ApiFilter } from './api';
+
 export interface Training {
   id?: number,
   name: string,
@@ -11,7 +13,7 @@ export interface Training {
   training_image?: string,
 }
 
-export interface TrainingIndexFilter {
+export interface TrainingIndexFilter extends ApiFilter {
   disabled?: boolean,
   public_page?: boolean,
   requested_attributes?: ['availabillities'],

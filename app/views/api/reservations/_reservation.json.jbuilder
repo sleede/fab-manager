@@ -9,6 +9,7 @@ json.slots_attributes reservation.slots do |s|
   json.start_at s.start_at.iso8601
   json.end_at s.end_at.iso8601
   json.canceled_at s.canceled_at&.iso8601
+  json.is_reserved true
 end
 json.nb_reserve_places reservation.nb_reserve_places
 json.tickets reservation.tickets do |t|

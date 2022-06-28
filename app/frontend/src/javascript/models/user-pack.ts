@@ -1,6 +1,7 @@
 import { TDateISO } from '../typings/date-iso';
+import { ApiFilter } from './api';
 
-export interface UserPackIndexFilter {
+export interface UserPackIndexFilter extends ApiFilter {
   user_id?: number,
   priceable_type: string,
   priceable_id: number

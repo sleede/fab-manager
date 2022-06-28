@@ -2,6 +2,7 @@ import apiClient from './clients/api-client';
 import { AxiosResponse } from 'axios';
 import { ShoppingCart } from '../models/payment';
 import { ComputePriceResult, Price, PriceIndexFilter } from '../models/price';
+import ApiLib from '../lib/api';
 
 export default class PriceAPI {
   static async compute (cart: ShoppingCart): Promise<ComputePriceResult> {
@@ -10,7 +11,7 @@ export default class PriceAPI {
   }
 
   static async index (filters?: PriceIndexFilter): Promise<Array<Price>> {
-    const res: AxiosResponse = await apiClient.get(`/api/prices${this.filtersToQuery(filters)}`);
+    const res: AxiosResponse = await apiClient.get(`/api/prices${ApiLib.filtersToQuery(filters)}`);
     return res?.data;
   }
 
@@ -27,11 +28,5 @@ export default class PriceAPI {
   static async destroy (priceId: number): Promise<void> {
     const res: AxiosResponse<void> = await apiClient.delete(`/api/prices/${priceId}`);
     return res?.data;
-  }
-
-  private static filtersToQuery (filters?: PriceIndexFilter): string {
-    if (!filters) return '';
-
-    return '?' + Object.entries(filters).map(f => `${f[0]}=${f[1]}`).join('&');
   }
 }

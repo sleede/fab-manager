@@ -1,6 +1,7 @@
 import { TDateISO } from '../typings/date-iso';
+import { ApiFilter } from './api';
 
-export interface PriceIndexFilter {
+export interface PriceIndexFilter extends ApiFilter {
   priceable_type?: string,
   priceable_id?: number,
   group_id?: number,

@@ -1,4 +1,6 @@
-export interface ProofOfIdentityTypeIndexfilter {
+import { ApiFilter } from './api';
+
+export interface ProofOfIdentityTypeIndexfilter extends ApiFilter {
   group_id?: number,
 }
 
