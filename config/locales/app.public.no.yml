@@ -291,7 +291,6 @@
         full_price_: "Full pris:"
         to_date: "til" #eg. from 01/01 to 01/05
         all_themes: "Alle temaer"
-        show_featured: "Show the featured event"
       #details and booking of an event
       events_show:
         event_description: "Arrangementsbeskrivelse"
