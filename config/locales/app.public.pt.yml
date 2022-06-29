@@ -18,6 +18,7 @@ pt:
         my_supporting_documents_files: "Meus documentos"
         my_projects: "Meus Projetos"
         my_trainings: "Meus Treinamentos"
+        my_reservations: "My reservations"
         my_events: "Meus Eventos"
         my_invoices: "Minhas Contas"
         my_payment_schedules: "Meus agendamentos de pagamento"
@@ -289,7 +290,7 @@ pt:
         add_an_event: "Adicionar um evento"
         load_the_next_events: "Carregar os próximos eventos..."
         full_price_: "Valor inteira:"
-        to_date: "até" #eg. from 01/01 to 01/05
+        to_date: "até" #e.g. from 01/01 to 01/05
         all_themes: "Todos os temas"
       #details and booking of an event
       events_show:
@@ -301,8 +302,8 @@ pt:
         ending: "Término:"
         opening_hours: "Abre ás:"
         all_day: "O dia inteiro"
-        from_time: "Das" #eg. from 18:00 to 21:00
-        to_time: "ás" #eg. from 18:00 to 21:00
+        from_time: "Das" #e.g. from 18:00 to 21:00
+        to_time: "ás" #e.g. from 18:00 to 21:00
         full_price_: "Valor inteira:"
         tickets_still_availables: "Tickets ainda disponíveis:"
         sold_out: "Esgotado."
