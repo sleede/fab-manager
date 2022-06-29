@@ -816,6 +816,7 @@ zu:
       #management of users, labels, groups, and so on
       members:
         users_management: "crwdns7735:0crwdne7735:0"
+        import: "crwdns23710:0crwdne23710:0"
         users: "crwdns20306:0crwdne20306:0"
         members: "crwdns7737:0crwdne7737:0"
         subscriptions: "crwdns7739:0crwdne7739:0"
@@ -919,7 +920,7 @@ zu:
         import_members: "crwdns7881:0crwdne7881:0"
         info: "crwdns7883:0crwdne7883:0"
         required_fields: "crwdns7885:0crwdne7885:0"
-        about_example: "crwdns7887:0crwdne7887:0"
+        about_example_html: "crwdns23712:0crwdne23712:0"
         groups: "crwdns7889:0crwdne7889:0"
         group_name: "crwdns7891:0crwdne7891:0"
         group_identifier: "crwdns7893:0crwdne7893:0"
