@@ -4,10 +4,11 @@
 
 - My reservations dashboard
 - Display reservations credits in the dashboard
-- Fix a bug: unable to reserve a space
-- Fix a bug: invalid users are reported in search
 - Added a test case for space reservation
 - Updated Portugueses translations (thanks to [@ghabreu](https://github.com/ghabreu))
+- Improved explanations about members CSV imports
+- Fix a bug: unable to reserve a space
+- Fix a bug: invalid users are reported in search
 
 ## v5.4.7 2022 June 29
 
