@@ -2,6 +2,8 @@
 
 ## next deploy
 
+## v5.4.9 2022 June 29
+
 - Fix a bug: validator of reservation can't find if slot has reserved by reservable type
 
 ## v5.4.8 2022 June 29
