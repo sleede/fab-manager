@@ -394,3 +394,69 @@ price_48:
   duration: 60
   created_at: 2016-04-04 15:18:28.860220000 Z
   updated_at: 2016-04-04 15:18:50.517702000 Z
+
+price_49:
+  id: 49
+  group_id: 1
+  plan_id:
+  priceable_id: 1
+  priceable_type: Space
+  amount: 2000
+  duration: 60
+  created_at: 2016-04-04 15:18:28.860220000 Z
+  updated_at: 2016-04-04 15:18:50.517702000 Z
+
+price_50:
+  id: 50
+  group_id: 2
+  plan_id:
+  priceable_id: 1
+  priceable_type: Space
+  amount: 1800
+  duration: 60
+  created_at: 2016-04-04 15:18:28.860220000 Z
+  updated_at: 2016-04-04 15:18:50.517702000 Z
+
+price_51:
+  id: 51
+  group_id: 1
+  plan_id: 1
+  priceable_id: 1
+  priceable_type: Space
+  amount: 1800
+  duration: 60
+  created_at: 2016-04-04 15:18:28.860220000 Z
+  updated_at: 2016-04-04 15:18:50.517702000 Z
+
+price_52:
+  id: 52
+  group_id: 1
+  plan_id: 2
+  priceable_id: 1
+  priceable_type: Space
+  amount: 1800
+  duration: 60
+  created_at: 2016-04-04 15:18:28.860220000 Z
+  updated_at: 2016-04-04 15:18:50.517702000 Z
+
+price_53:
+  id: 53
+  group_id: 2
+  plan_id: 3
+  priceable_id: 1
+  priceable_type: Space
+  amount: 1500
+  duration: 60
+  created_at: 2016-04-04 15:18:28.860220000 Z
+  updated_at: 2016-04-04 15:18:50.517702000 Z
+
+price_54:
+  id: 54
+  group_id: 1
+  plan_id: 4
+  priceable_id: 1
+  priceable_type: Space
+  amount: 1500
+  duration: 60
+  created_at: 2016-04-04 15:18:28.860220000 Z
+  updated_at: 2016-04-04 15:18:50.517702000 Z
