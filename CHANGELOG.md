@@ -4,6 +4,7 @@
 
 - My reservations dashboard
 - Fix a bug: unable to reserve a space
+- Fix a bug: invalid users are reported in search
 - Added a test case for space reservation
 ## v5.4.7 2022 June 29
 
