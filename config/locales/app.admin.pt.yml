@@ -816,6 +816,7 @@ pt:
       #management of users, labels, groups, and so on
       members:
         users_management: "Gerenciamento de usuários"
+        import: "Import members from a CSV file"
         users: "Usuários"
         members: "Membros"
         subscriptions: "Assinaturas"
@@ -919,7 +920,7 @@ pt:
         import_members: "Importar membros"
         info: "Você pode enviar um arquivo CSV para criar novos membros ou atualizar os já existentes. Seu arquivo deve utilizar os identificadores abaixo para especificar o grupo, os treinamentos e as tags dos membros."
         required_fields: "Seu arquivo deve conter, pelo menos, as seguintes informações para cada usuário criar: e-mail, nome, nome e grupo. Se a senha estiver vazia, ela será gerada. Em atualizações, os campos vazios serão mantidos como está."
-        about_example: "Por favor, consulte o arquivo de exemplo fornecido para gerar um arquivo CSV correto. Tenha cuidado ao usar a codificação Unicode UTF-8."
+        about_example_html: "Please refer to the provided example file to generate a correct CSV file.<br>This example will:<ol><li>create a new member (Jean Dupont) with a generated password</li><li>update the password of an existing membre (ID 43) using the new given password</li></ol><br>Be careful to use <strong>Unicode UTF-8</strong> encoding."
         groups: "Grupos"
         group_name: "Nome do grupo"
         group_identifier: "Identificador a ser usado"
