@@ -2,7 +2,5 @@
 
 json.array!(@credits) do |credit|
   json.partial! 'api/credits/credit', credit: credit
-  json.used_credits credit.users_credits do |uc|
-    json.extract! uc, :id, :created_at, :hours_used
-  end
+  json.hours_used credit.users_credits.find_by(user_id: @user.id)&.hours_used
 end

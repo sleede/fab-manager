@@ -30,14 +30,7 @@ const CreditsPanel: React.FC<CreditsPanelProps> = ({ userId, onError, reservable
    * Compute the remainings hours for the given credit
    */
   const remainingHours = (credit: Credit): number => {
-    return credit.hours - usedHours(credit);
-  };
-
-  /**
-   * Compute the used credits hours for the given credit
-   */
-  const usedHours = (credit: Credit): number => {
-    return credit.used_credits.map(uc => uc.hours_used).reduce((acc, val) => acc + val, 0);
+    return credit.hours - credit.hours_used;
   };
 
   /**
@@ -64,7 +57,7 @@ const CreditsPanel: React.FC<CreditsPanelProps> = ({ userId, onError, reservable
     <FabPanel className="credits-panel" header={header()}>
       <ul>
       {credits.map(c => <li key={c.id}>
-        <HtmlTranslate trKey="app.logged.dashboard.reservations.credits_panel.reamaining_credits_html" options={{ NAME: c.creditable.name, REMAINING: remainingHours(c), USED: usedHours(c) }} />
+        <HtmlTranslate trKey="app.logged.dashboard.reservations.credits_panel.reamaining_credits_html" options={{ NAME: c.creditable.name, REMAINING: remainingHours(c), USED: c.hours_used }} />
       </li>)}
       {credits.length === 0 && noCredits()}
       </ul>

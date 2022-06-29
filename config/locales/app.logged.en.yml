@@ -154,8 +154,8 @@ en:
           credits_panel:
             title_Space: "My space credits"
             title_Machine: "My machines credits"
-            reamaining_credits_html: "<strong>{NAME}</strong>: You can book <em>{REMAINING}</em> slots for free. You have already used {USED} credits."
-            no_credits: "No credits"
+            reamaining_credits_html: "<strong>{NAME}</strong>: You can book <em>{REMAINING} {REMAINING, plural, one{slot} other{slots}}</em> for free. You have already used {USED} {USED, plural, one{credit} other{credits}} for your current subscription."
+            no_credits: "You don't have any credits yet. Some subscriptions may allow you to book some slots free."
       #public profil of a member
       members_show:
         members_list: "Members list"

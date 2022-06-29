@@ -14,9 +14,5 @@ export interface Credit {
     id: number,
     name: string
   },
-  used_credits?: [{
-    id: number,
-    created_at: TDateISO,
-    hours_used: number
-  }]
+  hours_used?: number
 }
