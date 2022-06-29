@@ -142,6 +142,20 @@ zu:
           save: "crwdns23538:0crwdne23538:0"
           browse: "crwdns23540:0crwdne23540:0"
           edit: "crwdns23542:0crwdne23542:0"
+        reservations:
+          reservations_panel:
+            title_Space: "crwdns23682:0crwdne23682:0"
+            title_Machine: "crwdns23684:0crwdne23684:0"
+            upcoming: "crwdns23686:0crwdne23686:0"
+            passed: "crwdns23688:0crwdne23688:0"
+            slots_details: "crwdns23690:0crwdne23690:0"
+            no_reservations: "crwdns23692:0crwdne23692:0"
+            show_more: "crwdns23694:0crwdne23694:0"
+          credits_panel:
+            title_Space: "crwdns23696:0crwdne23696:0"
+            title_Machine: "crwdns23698:0crwdne23698:0"
+            reamaining_credits_html: "crwdns23700:0NAME={NAME}crwdnd23700:0REMAINING={REMAINING}crwdnd23700:0REMAINING={REMAINING}crwdnd23700:0USED={USED}crwdnd23700:0USED={USED}crwdne23700:0"
+            no_credits: "crwdns23702:0crwdne23702:0"
       #public profil of a member
       members_show:
         members_list: "crwdns8723:0crwdne8723:0"
