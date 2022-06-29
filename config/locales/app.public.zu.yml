@@ -291,7 +291,6 @@ zu:
         full_price_: "crwdns9243:0crwdne9243:0"
         to_date: "crwdns19622:0crwdne19622:0" #eg. from 01/01 to 01/05
         all_themes: "crwdns19624:0crwdne19624:0"
-        show_featured: "crwdns23126:0crwdne23126:0"
       #details and booking of an event
       events_show:
         event_description: "crwdns9247:0crwdne9247:0"
