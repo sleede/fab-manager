@@ -50,8 +50,8 @@ class CartItem::Reservation < CartItem::BaseItem
       end
 
       if availability.available_type == 'machines'
-        s = Slot.find_by(start_at: slot[:start_at], end_at: slot[:end_at], availability_id: slot[:availability_id], canceled_at: nil)
-        unless s.nil?
+        s = Slot.includes(:reservations).where(start_at: slot[:start_at], end_at: slot[:end_at], availability_id: slot[:availability_id], canceled_at: nil, "reservations.reservable": @reservable)
+        unless s.empty?
           @errors[:slot] = 'slot is reserved'
           return false
         end
