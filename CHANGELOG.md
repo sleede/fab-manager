@@ -2,6 +2,8 @@
 
 ## next deploy
 
+## v5.4.7 2022 June 29
+
 - Removed the admins' button to scroll to the featured event
 
 ## v5.4.6 2022 June 27
