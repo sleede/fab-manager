@@ -147,15 +147,15 @@ fr:
             title_Space: "Mes réservations d'espace"
             title_Machine: "Mes réservations de machines"
             upcoming: "À venir"
-            past: "Past"
-            slots_details: "Slots details"
-            no_reservations: "No reservations"
-            show_more: "Show more"
+            past: "Passées"
+            slots_details: "Détails des créneaux"
+            no_reservations: "Aucune réservation"
+            show_more: "Afficher plus"
           credits_panel:
-            title_Space: "My space credits"
-            title_Machine: "My machines credits"
-            reamaining_credits_html: "<strong>{NAME}</strong>: You can book <em>{REMAINING} {REMAINING, plural, one{slot} other{slots}}</em> for free. You have already used {USED} {USED, plural, one{credit} other{credits}} for your current subscription."
-            no_credits: "You don't have any credits yet. Some subscriptions may allow you to book some slots free."
+            title_Space: "Mes crédits espace"
+            title_Machine: "Mes crédits machine"
+            reamaining_credits_html: "<strong>{NAME}</strong>: You can book <em>{REMAINING} {REMAINING, plural, one{slot} other{slots}}</em> for free. You have already used {USED} {USED, plural, one{credit} other{credits}} from your current subscription."
+            no_credits: "You don't have any credits yet. Some subscriptions may allow you to book some slots for free."
       #public profil of a member
       members_show:
         members_list: "Liste des membres"
