@@ -1,5 +1,3 @@
-json.extract! @credit, :id, :creditable_id, :creditable_type, :created_at, :updated_at, :plan_id, :hours
-json.creditable do
-  json.id @credit.creditable.id
-  json.name @credit.creditable.name
-end if @credit.creditable
+# frozen_string_literal: true
+
+json.partial! 'api/credits/credit', credit: @credit

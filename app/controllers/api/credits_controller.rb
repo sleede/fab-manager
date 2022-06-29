@@ -40,6 +40,19 @@ class API::CreditsController < API::ApiController
     head :no_content
   end
 
+  def user_resource
+    @user = User.find(params[:id])
+    authorize @user, policy_class: CreditPolicy
+
+    @credits = []
+    return unless @user.subscribed_plan
+
+    @credits = @user.subscribed_plan
+                    .credits
+                    .where(creditable_type: params[:resource])
+                    .includes(:users_credits)
+  end
+
   private
 
   def set_credit

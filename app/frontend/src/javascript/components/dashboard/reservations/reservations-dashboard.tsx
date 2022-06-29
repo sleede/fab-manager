@@ -4,6 +4,7 @@ import { react2angular } from 'react2angular';
 import { ReservationsPanel } from './reservations-panel';
 import SettingAPI from '../../../api/setting';
 import { SettingName } from '../../../models/setting';
+import { CreditsPanel } from './credits-panel';
 
 declare const Application: IApplication;
 
@@ -26,6 +27,8 @@ const ReservationsDashboard: React.FC<ReservationsDashboardProps> = ({ onError, 
 
   return (
     <div className="reservations-dashboard">
+      {modules?.get(SettingName.MachinesModule) !== 'false' && <CreditsPanel userId={userId} onError={onError} reservableType="Machine" />}
+      {modules?.get(SettingName.SpacesModule) !== 'false' && <CreditsPanel userId={userId} onError={onError} reservableType="Space" />}
       {modules?.get(SettingName.MachinesModule) !== 'false' && <ReservationsPanel userId={userId} onError={onError} reservableType="Machine" />}
       {modules?.get(SettingName.SpacesModule) !== 'false' && <ReservationsPanel userId={userId} onError={onError} reservableType="Space" />}
     </div>

@@ -149,6 +149,13 @@ en:
             upcoming: "Upcoming"
             passed: "Passed"
             slots_details: "Slots details"
+            no_reservations: "No reservations"
+            show_more: "Show more"
+          credits_panel:
+            title_Space: "My space credits"
+            title_Machine: "My machines credits"
+            reamaining_credits_html: "<strong>{NAME}</strong>: You can book <em>{REMAINING}</em> slots for free. You have already used {USED} credits."
+            no_credits: "No credits"
       #public profil of a member
       members_show:
         members_list: "Members list"

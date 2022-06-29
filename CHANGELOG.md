@@ -3,6 +3,7 @@
 ## next deploy
 
 - My reservations dashboard
+- Display reservations credits in the dashboard
 - Fix a bug: unable to reserve a space
 - Fix a bug: invalid users are reported in search
 - Added a test case for space reservation
