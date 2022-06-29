@@ -111,9 +111,9 @@ class Availability < ApplicationRecord
     end
   end
 
-  # return training reservations is complete?
-  # if haven't defined a nb_total_places, places are unlimited
-  def completed?
+  # check if the reservations are complete?
+  # if a nb_total_places hasn't been defined, then places are unlimited
+  def full?
     return false if nb_total_places.blank?
 
     if available_type == 'training' || available_type == 'space'

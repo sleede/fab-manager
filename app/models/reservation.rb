@@ -112,7 +112,7 @@ class Reservation < ApplicationRecord
 
   def training_not_fully_reserved
     slot = slots.first
-    errors.add(:training, 'already fully reserved') if Availability.find(slot.availability_id).completed?
+    errors.add(:training, 'already fully reserved') if Availability.find(slot.availability_id).full?
   end
 
   def slots_not_locked

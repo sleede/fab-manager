@@ -167,7 +167,7 @@ class API::AvailabilitiesController < API::ApiController
         availabilities_filtered << a if filter_event?(a)
       end
     end
-    availabilities_filtered.delete_if(&method(:remove_completed?))
+    availabilities_filtered.delete_if(&method(:remove_full?))
   end
 
   def filter_training?(availability)
@@ -186,8 +186,8 @@ class API::AvailabilitiesController < API::ApiController
     params[:evt] && params[:evt] == 'true' && availability.available_type == 'event'
   end
 
-  def remove_completed?(availability)
-    params[:dispo] == 'false' && (availability.is_reserved || (availability.try(:completed?) && availability.completed?))
+  def remove_full?(availability)
+    params[:dispo] == 'false' && (availability.is_reserved || (availability.try(:full?) && availability.full?))
   end
 
   def define_max_visibility
