@@ -816,6 +816,7 @@
       #management of users, labels, groups, and so on
       members:
         users_management: "Brukeradministrasjon"
+        import: "Import members from a CSV file"
         users: "Brukere"
         members: "Medlemmer"
         subscriptions: "Abonnementer"
@@ -919,7 +920,7 @@
         import_members: "Importer medlemmer"
         info: "Du kan laste opp en CSV-fil for å opprette nye medlemmer eller oppdatere eksisterende. Filen må bruke identifikatoren under for å spesifisere gruppen, opplæring og taggene til medlemmene."
         required_fields: "Filen må inneholde minimum følgende informasjon for hver bruker: e-post, navn, fornavn og gruppe. Dersom passordet er tomt, vil det bli generert. Ved oppdateringer vil de tomme feltene bli bevart som de er."
-        about_example: "Vennligst referer til den oppgitte eksempelfilen for å generere en riktig CSV-fil. Pass på å bruke Unicode UTF-8 koding."
+        about_example_html: "Please refer to the provided example file to generate a correct CSV file.<br>This example will:<ol><li>create a new member (Jean Dupont) with a generated password</li><li>update the password of an existing membre (ID 43) using the new given password</li></ol><br>Be careful to use <strong>Unicode UTF-8</strong> encoding."
         groups: "Grupper"
         group_name: "Gruppenavn"
         group_identifier: "Identifikator å bruke"
