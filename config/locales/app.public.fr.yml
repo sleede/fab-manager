@@ -291,7 +291,6 @@ fr:
         full_price_: "Plein tarif :"
         to_date: "au" #eg. from 01/01 to 01/05
         all_themes: "Toutes les thématiques"
-        show_featured: "Afficher l'événement du moment"
       #details and booking of an event
       events_show:
         event_description: "Description de l’événement"
