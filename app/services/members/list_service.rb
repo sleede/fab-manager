@@ -40,7 +40,7 @@ class Members::ListService
       @query
     end
 
-    def search(current_user, query, subscription, project)
+    def search(current_user, query, subscription, include_admins = 'false')
       members = User.includes(:profile)
                     .joins(:profile,
                            :statistic_profile,
@@ -69,11 +69,9 @@ class Members::ListService
         members = members.where('subscriptions.id IS NULL OR subscriptions.expiration_date < :now', now: Date.today.to_s)
       end
 
-      if project == 'false' || project.blank?
-        members = members.where("roles.name = 'member' OR roles.name = 'manager'")
-      end
+      members = members.where("roles.name = 'member' OR roles.name = 'manager'") if include_admins == 'false' || include_admins.blank?
 
-      members.to_a
+      members.to_a.filter(&:valid?)
     end
 
     private

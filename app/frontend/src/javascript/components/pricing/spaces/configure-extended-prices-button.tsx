@@ -68,7 +68,7 @@ export const ConfigureExtendedPricesButton: React.FC<ConfigureExtendedPricesButt
       <button className="extended-prices-button" onClick={toggleShowList}>
         <i className="fas fa-stopwatch" />
       </button>
-      {showList && <FabPopover title={t('app.admin.configure_extended_prices_button.extended_prices')} headerButton={renderAddButton()} className="fab-popover__right">
+      {showList && <FabPopover title={t('app.admin.configure_extended_prices_button.extended_prices')} headerButton={renderAddButton()} position="right">
         <ul>
           {extendedPrices?.map(extendedPrice =>
             <li key={extendedPrice.id}>

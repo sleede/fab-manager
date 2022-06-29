@@ -18,6 +18,7 @@ en:
         my_supporting_documents_files: "My supporting documents"
         my_projects: "My Projects"
         my_trainings: "My Trainings"
+        my_reservations: "My reservations"
         my_events: "My Events"
         my_invoices: "My Invoices"
         my_payment_schedules: "My payment schedules"
@@ -289,7 +290,7 @@ en:
         add_an_event: "Add an event"
         load_the_next_events: "Load the next events..."
         full_price_: "Full price:"
-        to_date: "to" #eg. from 01/01 to 01/05
+        to_date: "to" #e.g. from 01/01 to 01/05
         all_themes: "All themes"
       #details and booking of an event
       events_show:
@@ -301,8 +302,8 @@ en:
         ending: "Ending:"
         opening_hours: "Opening hours:"
         all_day: "All day"
-        from_time: "From" #eg. from 18:00 to 21:00
-        to_time: "to"  #eg. from 18:00 to 21:00
+        from_time: "From" #e.g. from 18:00 to 21:00
+        to_time: "to"  #e.g. from 18:00 to 21:00
         full_price_: "Full price:"
         tickets_still_availables: "Tickets still available:"
         sold_out: "Sold out."

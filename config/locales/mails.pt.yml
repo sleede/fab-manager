@@ -24,14 +24,14 @@ pt:
       subject: "Seu grupo mudou"
       body:
         warning: "Você mudou de grupo. As inspeções podem ser realizadas no laboratório para verificar a legitimidade dessa mudança."
-        user_invalidated: "Your account was invalidated, please upload your new supporting documents to validate your account."
+        user_invalidated: "Sua conta foi invalidada, por favor, carregue novos documentos para validar sua conta."
     notify_admin_user_group_changed:
       subject: "Um membro mudou de grupo"
       body:
         user_changed_group_html: "O usuário <em><strong>%{NAME}</strong></em> mudou de grupo."
         previous_group: "Grupo anterior:"
         new_group: "Novo grupo:"
-        user_invalidated: "The user's account is invalidated."
+        user_invalidated: "A conta do usuário está invalidada."
     notify_admin_subscription_extended:
       subject: "Uma assinatura foi estendida"
       body:
@@ -346,31 +346,31 @@ pt:
         date: "Este é um lembrete para verificar se o débito bancário foi bem sucedido."
         confirm: "Não se esqueça de confirmar o recibo na interface de gestão de pagamento, para que a fatura correspondente seja gerada."
     notify_admin_user_proof_of_identity_files_created:
-      subject: "Supporting documents uploaded by a member"
+      subject: "Documentos enviados por um membro"
       body:
-        proof_of_identity_files_uploaded_below: "Member %{NAME} has uploaded the following supporting documents:"
-        validate_user: "Please validate this account"
+        proof_of_identity_files_uploaded_below: "O membro %{NAME} enviou os seguintes documentos:"
+        validate_user: "Por favor, valide esta conta"
     notify_admin_user_proof_of_identity_files_updated:
-      subject: "Member's supporting documents have changed"
+      subject: "Os documentos do membro mudaram"
       body:
-        user_update_proof_of_identity_file: "Member %{NAME} has modified the supporting documents below:"
-        validate_user: "Please validate this account"
+        user_update_proof_of_identity_file: "O membro %{NAME} modificou os documentos abaixo:"
+        validate_user: "Por favor valide esta conta"
     notify_user_is_validated:
-      subject: "The account is validated"
+      subject: "A conta está validada"
       body:
-        account_validated: "Your account is valid."
+        account_validated: "Sua conta é válida."
     notify_user_is_invalidated:
-      subject: "The account is invalid"
+      subject: "A conta é inválida"
       body:
-        account_invalidated: "Your account is invalid."
+        account_invalidated: "Sua conta é inválida."
     notify_user_proof_of_identity_refusal:
-      subject: "Your supporting documents were refused"
+      subject: "Seus documentos foram recusados"
       body:
-        user_proof_of_identity_files_refusal: "Your supporting documents were refused:"
-        action: "Please re-upload some new supporting documents."
+        user_proof_of_identity_files_refusal: "Seus documentos foram recusados:"
+        action: "Por favor, recarregue novos documentos."
     notify_admin_user_proof_of_identity_refusal:
-      subject: "A member's supporting documents were refused"
+      subject: "Documentos de um membro foram recusados"
       body:
-        user_proof_of_identity_files_refusal: "Member %{NAME}'s supporting documents were rejected by %{OPERATOR}:"
+        user_proof_of_identity_files_refusal: "Os documentos do membro %{NAME} foram rejeitados por %{OPERATOR}:"
     shared:
       hello: "Olá %{user_name}"

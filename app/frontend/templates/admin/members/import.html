@@ -121,9 +121,7 @@
               <p class="alert alert-warning m-h" translate>
                 {{ 'app.admin.members_import.required_fields' }}
               </p>
-              <p class="alert alert-warning m-h" translate>
-                {{ 'app.admin.members_import.about_example' }}
-              </p>
+              <p class="alert alert-warning m-h" ng-bind-html="'app.admin.members_import.about_example_html' | translate"></p>
             </div>
 
             <div class="fileinput input-group" data-provides="fileinput" ng-class="fileinputClass()">

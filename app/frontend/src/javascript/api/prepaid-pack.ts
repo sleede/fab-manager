@@ -1,10 +1,11 @@
 import apiClient from './clients/api-client';
 import { AxiosResponse } from 'axios';
 import { PackIndexFilter, PrepaidPack } from '../models/prepaid-pack';
+import ApiLib from '../lib/api';
 
 export default class PrepaidPackAPI {
   static async index (filters?: PackIndexFilter): Promise<Array<PrepaidPack>> {
-    const res: AxiosResponse<Array<PrepaidPack>> = await apiClient.get(`/api/prepaid_packs${this.filtersToQuery(filters)}`);
+    const res: AxiosResponse<Array<PrepaidPack>> = await apiClient.get(`/api/prepaid_packs${ApiLib.filtersToQuery(filters)}`);
     return res?.data;
   }
 
@@ -26,11 +27,5 @@ export default class PrepaidPackAPI {
   static async destroy (packId: number): Promise<void> {
     const res: AxiosResponse<void> = await apiClient.delete(`/api/prepaid_packs/${packId}`);
     return res?.data;
-  }
-
-  private static filtersToQuery (filters?: PackIndexFilter): string {
-    if (!filters) return '';
-
-    return '?' + Object.entries(filters).map(f => `${f[0]}=${f[1]}`).join('&');
   }
 }

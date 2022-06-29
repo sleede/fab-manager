@@ -1,0 +1,26 @@
+.credits-panel {
+  .no-credits {
+    list-style: none;
+    text-align: center;
+    font-style: italic;
+    color: #aaa;
+  }
+}
+
+@media (min-width: 1460px) {
+  .credits-panel {
+    width: 45%;
+  }
+}
+
+@media (max-width: 1459px) {
+  .credits-panel {
+    width: 95%;
+  }
+}
+
+@media (max-width: 992px) {
+  .credits-panel {
+    width: 90%;
+  }
+}

@@ -45,21 +45,21 @@ class CartItem::Reservation < CartItem::BaseItem
     @slots.each do |slot|
       availability = Availability.find_by(id: slot[:availability_id])
       if availability.nil?
-        @errors[:slot] = 'slot availability no exist'
+        @errors[:slot] = 'slot availability does not exist'
         return false
       end
 
       if availability.available_type == 'machines'
         s = Slot.find_by(start_at: slot[:start_at], end_at: slot[:end_at], availability_id: slot[:availability_id], canceled_at: nil)
         unless s.nil?
-          @errors[:slot] = 'slot has reserved'
+          @errors[:slot] = 'slot is reserved'
           return false
         end
-      elsif availability.available_type == 'space' && availability.spaces.first.disabled.nil?
+      elsif availability.available_type == 'space' && availability.spaces.first.disabled
         @errors[:slot] = 'space is disabled'
         return false
-      elsif availability.completed?
-        @errors[:slot] = 'availability has completed'
+      elsif availability.full?
+        @errors[:slot] = 'availability is complete'
         return false
       end
 

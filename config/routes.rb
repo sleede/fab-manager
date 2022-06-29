@@ -154,7 +154,9 @@ Rails.application.routes.draw do
     resources :trainings do
       get :availabilities, on: :member
     end
-    resources :credits
+    resources :credits do
+      get 'user/:id/:resource', action: :user_resource, on: :collection
+    end
     resources :categories
     resources :event_themes
     resources :age_ranges

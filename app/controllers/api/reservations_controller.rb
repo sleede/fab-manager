@@ -8,11 +8,12 @@ class API::ReservationsController < API::ApiController
   respond_to :json
 
   def index
-    if params[:reservable_id] && params[:reservable_type] && params[:user_id]
+    if params[:user_id]
       params[:user_id] = current_user.id unless current_user.admin? || current_user.manager?
 
-      where_clause = params.permit(:reservable_id, :reservable_type).to_h
-      where_clause[:statistic_profile_id] = StatisticProfile.find_by!(user_id: params[:user_id])
+      where_clause = { statistic_profile_id: StatisticProfile.find_by!(user_id: params[:user_id]) }
+      where_clause[:reservable_type] = params[:reservable_type] if params[:reservable_type]
+      where_clause[:reservable_id] = params[:reservable_id] if params[:reservable_id]
 
       @reservations = Reservation.where(where_clause)
     elsif params[:reservable_id] && params[:reservable_type] && (current_user.admin? || current_user.manager?)

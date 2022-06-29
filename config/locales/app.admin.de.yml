@@ -816,6 +816,7 @@ de:
       #management of users, labels, groups, and so on
       members:
         users_management: "Benutzer-Verwaltung"
+        import: "Import members from a CSV file"
         users: "Benutzer"
         members: "Mitglieder"
         subscriptions: "Abonnements"
@@ -919,7 +920,7 @@ de:
         import_members: "Mitglieder importieren"
         info: "Sie können eine CSV-Datei hochladen, um neue Mitglieder zu erstellen oder bestehende zu aktualisieren. Ihre Datei muss die unten angegebenen Identifikatoren verwenden, um die Gruppe, die Schulungen und die Tags der Mitglieder festzulegen."
         required_fields: "Ihre Datei muss mindestens folgende Informationen enthalten, die für jeden Benutzer erstellt werden: E-Mail, Name, Vorname und Gruppe. Wenn das Passwort leer ist, wird es generiert. Bei Aktualisierungen werden leere Felder so beibehalten, wie sie sind."
-        about_example: "Bitte nutzen Sie die angegebene Beispieldatei, um eine korrekte CSV-Datei zu generieren. Achten Sie auf die Verwendung des UTF-8-Encodings."
+        about_example_html: "Please refer to the provided example file to generate a correct CSV file.<br>This example will:<ol><li>create a new member (Jean Dupont) with a generated password</li><li>update the password of an existing membre (ID 43) using the new given password</li></ol><br>Be careful to use <strong>Unicode UTF-8</strong> encoding."
         groups: "Gruppen"
         group_name: "Gruppenname"
         group_identifier: "Zu verwendende Kennung"
@@ -1027,6 +1028,7 @@ de:
         invalidate_member_success: "The member is invalidated"
         validate_member_error: "An error occurred: impossible to validate from this member."
         invalidate_member_error: "An error occurred: impossible to invalidate from this member."
+        supporting_documents: "Supporting documents"
       #extend a subscription for free
       free_extend_modal:
         extend_subscription: "Abonnement verlängern"

@@ -44,7 +44,7 @@ module AvailabilityHelper
   def trainings_events_border_color(availability)
     if availability.is_reserved
       IS_RESERVED_BY_CURRENT_USER
-    elsif availability.completed?
+    elsif availability.full?
       IS_COMPLETED
     else
       case availability.available_type

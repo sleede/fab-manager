@@ -1,0 +1,49 @@
+.reservations-panel {
+  margin-bottom: 60px;
+  .reservation {
+    position: relative;
+    &-title {
+      cursor: pointer;
+
+      &.clicked {
+        color: var(--secondary-dark);
+      }
+    }
+    .slot-details {
+      display: block;
+    }
+
+    .fab-popover {
+      left: 0;
+    }
+  }
+  .no-reservations,
+  .show-more {
+    list-style: none;
+    text-align: center;
+    font-style: italic;
+    color: #aaa;
+  }
+
+  .show-more {
+    margin-top: 10px;
+  }
+}
+
+@media (min-width: 1460px) {
+  .reservations-panel {
+    width: 45%;
+  }
+}
+
+@media (max-width: 1459px) {
+  .reservations-panel {
+    width: 95%;
+  }
+}
+
+@media (max-width: 992px) {
+  .reservations-panel {
+    width: 90%;
+  }
+}

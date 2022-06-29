@@ -1,8 +1,5 @@
+# frozen_string_literal: true
+
 json.array!(@credits) do |credit|
-  json.extract! credit, :id, :creditable_id, :creditable_type, :plan_id, :hours
-  json.creditable do
-    json.id credit.creditable.id
-    json.name credit.creditable.name
-  end if credit.creditable.present?
-  
+  json.partial! 'api/credits/credit', credit: credit
 end

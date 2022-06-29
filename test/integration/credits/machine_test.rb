@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'test_helper'
+
 module Credits
   class TrainingTest < ActionDispatch::IntegrationTest
     # Called before every test method runs. Can be used
