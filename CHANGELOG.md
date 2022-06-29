@@ -7,6 +7,8 @@
 - Fix a bug: unable to reserve a space
 - Fix a bug: invalid users are reported in search
 - Added a test case for space reservation
+- Updated Portugueses translations (thanks to [@ghabreu](https://github.com/ghabreu))
+
 ## v5.4.7 2022 June 29
 
 - Removed the admins' button to scroll to the featured event
