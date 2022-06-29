@@ -2,6 +2,8 @@
 
 ## next deploy
 
+## v5.4.8 2022 June 29
+
 - My reservations dashboard
 - Display reservations credits in the dashboard
 - Added a test case for space reservation
