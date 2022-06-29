@@ -147,7 +147,7 @@ pt:
             title_Space: "My space reservations"
             title_Machine: "My machines reservations"
             upcoming: "Upcoming"
-            passed: "Passed"
+            past: "Past"
             slots_details: "Slots details"
             no_reservations: "No reservations"
             show_more: "Show more"
