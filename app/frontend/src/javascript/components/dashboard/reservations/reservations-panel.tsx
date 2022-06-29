@@ -36,17 +36,17 @@ const ReservationsPanel: React.FC<SpaceReservationsProps> = ({ userId, onError, 
   /**
    * Return the reservations for the given period
    */
-  const reservationsByDate = (state: 'passed' | 'futur'): Array<Reservation> => {
+  const reservationsByDate = (state: 'past' | 'futur'): Array<Reservation> => {
     return reservations.filter(r => {
       return !!r.slots_attributes.find(s => filterSlot(s, state));
     });
   };
 
   /**
-   * Check if the given slot if passed of futur
+   * Check if the given slot if past of futur
    */
-  const filterSlot = (slot: ReservationSlot, state: 'passed' | 'futur'): boolean => {
-    return (state === 'passed' && moment(slot.start_at).isBefore()) ||
+  const filterSlot = (slot: ReservationSlot, state: 'past' | 'futur'): boolean => {
+    return (state === 'past' && moment(slot.start_at).isBefore()) ||
       (state === 'futur' && moment(slot.start_at).isAfter());
   };
 
@@ -91,7 +91,7 @@ const ReservationsPanel: React.FC<SpaceReservationsProps> = ({ userId, onError, 
   /**
    * Render the reservation in a user-friendly way
    */
-  const renderReservation = (reservation: Reservation, state: 'passed' | 'futur'): ReactNode => {
+  const renderReservation = (reservation: Reservation, state: 'past' | 'futur'): ReactNode => {
     return (
       <li key={reservation.id} className="reservation">
         <a className={`reservation-title ${details[reservation.id] ? 'clicked' : ''}`} onClick={toggleDetails(reservation.id)}>
@@ -109,7 +109,7 @@ const ReservationsPanel: React.FC<SpaceReservationsProps> = ({ userId, onError, 
   };
 
   const futur = reservationsByDate('futur');
-  const passed = _.orderBy(reservationsByDate('passed'), r => r.slots_attributes[0].start_at, 'desc');
+  const past = _.orderBy(reservationsByDate('past'), r => r.slots_attributes[0].start_at, 'desc');
 
   return (
     <FabPanel className="reservations-panel" header={header()}>
@@ -118,14 +118,14 @@ const ReservationsPanel: React.FC<SpaceReservationsProps> = ({ userId, onError, 
         {futur.length === 0 && noReservations()}
         {futur.map(r => renderReservation(r, 'futur'))}
       </ul>
-      <h4>{t('app.logged.dashboard.reservations.reservations_panel.passed')}</h4>
+      <h4>{t('app.logged.dashboard.reservations.reservations_panel.past')}</h4>
       <ul>
-        {passed.length === 0 && noReservations()}
-        {passed.slice(0, 10).map(r => renderReservation(r, 'passed'))}
-        {passed.length > 10 && !showMore && <li className="show-more"><FabButton onClick={toggleShowMore}>
+        {past.length === 0 && noReservations()}
+        {past.slice(0, 10).map(r => renderReservation(r, 'past'))}
+        {past.length > 10 && !showMore && <li className="show-more"><FabButton onClick={toggleShowMore}>
           {t('app.logged.dashboard.reservations.reservations_panel.show_more')}
         </FabButton></li>}
-        {passed.length > 10 && showMore && passed.slice(10).map(r => renderReservation(r, 'passed'))}
+        {past.length > 10 && showMore && past.slice(10).map(r => renderReservation(r, 'past'))}
       </ul>
     </FabPanel>
   );
