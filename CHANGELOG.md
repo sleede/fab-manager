@@ -3,6 +3,7 @@
 ## next deploy
 
 - Fix a bug: unable to reserve a space
+- Added a test case for space reservation
 ## v5.4.7 2022 June 29
 
 - Removed the admins' button to scroll to the featured event
