@@ -24,18 +24,18 @@ pt:
         _the_fablab_policy: "a política do FabLab"
         your_profile_has_been_successfully_updated: "Seu perfil foi actualizado com êxito."
         completion_header_info:
-          rules_changed: "Please fill the following form to update your profile and continue to use the platform."
+          rules_changed: "Por favor, preencha o formulário a seguir para atualizar seu perfil e continuar a usar a plataforma."
           sso_intro: "Você acabou de criar uma nova conta como {GENDER, select, male{o} female{a} neutral{} other{do}} {NAME}"
-          duplicate_email_info: "It looks like your email address is already used by another user. Check your email address and please input below the code you have received."
-          details_needed_info: "To finalize your account, we need some more details."
+          duplicate_email_info: "Parece que seu endereço de e-mail já é usado por outro usuário. Verifique seu endereço de e-mail e insira abaixo o código que você recebeu."
+          details_needed_info: "Para finalizar a sua conta, precisamos de mais alguns detalhes."
         profile_form_option:
           title: "Novo nessa plataforma?"
-          please_fill: "Please fill in the following form to create your account."
+          please_fill: "Por favor, preencha o seguinte formulário para criar sua conta."
           disabled_data_from_sso: "Alguns dados podem já ter sido fornecidos por {NAME} e não podem ser modificados."
-          confirm_instructions_html: "Once you are done, please click on <strong>Save</strong> to confirm your account and start using the application."
-          duplicate_email_html: "It looks like your email address <strong>({EMAIL})</strong> is already associated with another account. If this account is not yours, please click on the following button to change the email associated with your {PROVIDER} account."
+          confirm_instructions_html: "Depois de finalizar, clique em <strong>Salvar</strong> para confirmar sua conta e começar a usar o aplicativo."
+          duplicate_email_html: "Parece que o endereço de e-mail <strong>({EMAIL})</strong> já está associado a outra conta. Se esta conta não é sua, por favor, clique no botão a seguir para alterar o e-mail associado à sua conta do {PROVIDER}."
           edit_profile: "Alterar meus dados"
-          after_edition_info_html: "Once your data are up to date, <strong>click on the synchronization button below</strong>, or <strong>disconnect then reconnect</strong> for your changes to take effect."
+          after_edition_info_html: "Após atualizar seus dados, <strong>clique no botão de sincronização abaixo</strong>, ou <strong>desconecte-se, então reconecte</strong> para que as alterações tenham efeito."
           sync_profile: "Sincronizar meu perfil"
       dashboard:
         #dashboard: public profile
@@ -133,15 +133,29 @@ pt:
           load_more: "Ver mais"
           card_updated_success: "O seu cartão foi atualizado com sucesso"
         supporting_documents_files:
-          file_successfully_uploaded: "The supporting documents were sent."
-          unable_to_upload: "Unable to send the supporting documents: "
-          supporting_documents_files: "Supporting documents"
-          my_documents_info: "Due to your group declaration, some supporting documents are required. Once submitted, these documents will be verified by the administrator."
-          upload_limits_alert_html: "Warning!<br>You can submit your documents as PDF or images (JPEG, PNG). Maximum allowed size: {SIZE} Mb"
-          file_size_error: "The file size exceeds the limit ({SIZE} MB)"
+          file_successfully_uploaded: "Os documentos foram enviados."
+          unable_to_upload: "Não foi possível enviar os documentos: "
+          supporting_documents_files: "Documentos"
+          my_documents_info: "Devido a sua declaração de grupo, alguns documentos são necessários. Uma vez enviados, esses documentos serão verificados pelo administrador."
+          upload_limits_alert_html: "Aviso!<br>Você pode enviar seus documentos como PDF ou imagens (JPEG, PNG). Tamanho máximo permitido: {SIZE} Mb"
+          file_size_error: "O tamanho do arquivo excede o limite de ({SIZE} MB)"
           save: "Salvar"
           browse: "Navegar"
           edit: "Editar"
+        reservations:
+          reservations_panel:
+            title_Space: "My space reservations"
+            title_Machine: "My machines reservations"
+            upcoming: "Upcoming"
+            past: "Past"
+            slots_details: "Slots details"
+            no_reservations: "No reservations"
+            show_more: "Show more"
+          credits_panel:
+            title_Space: "My space credits"
+            title_Machine: "My machines credits"
+            reamaining_credits_html: "<strong>{NAME}</strong>: You can book <em>{REMAINING} {REMAINING, plural, one{slot} other{slots}}</em> for free. You have already used {USED} {USED, plural, one{credit} other{credits}} from your current subscription."
+            no_credits: "You don't have any credits yet. Some subscriptions may allow you to book some slots for free."
       #public profil of a member
       members_show:
         members_list: "Lista de membros"

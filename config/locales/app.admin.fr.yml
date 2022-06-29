@@ -1027,6 +1027,7 @@ fr:
         invalidate_member_success: "Le membre est invalidé"
         validate_member_error: "Une erreur est survenue : impossible de valider ce membre."
         invalidate_member_error: "Une erreur est survenue : impossible d'invalider ce membre."
+        supporting_documents: "Pièces justificatives"
       #extend a subscription for free
       free_extend_modal:
         extend_subscription: "Prolonger l'abonnement"

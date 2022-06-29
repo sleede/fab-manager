@@ -18,6 +18,7 @@
         my_supporting_documents_files: "My supporting documents"
         my_projects: "Mine prosjekter"
         my_trainings: "Mine opplæringer/kurs"
+        my_reservations: "My reservations"
         my_events: "Mine arrangementer"
         my_invoices: "Mine fakturaer"
         my_payment_schedules: "Mine betalingsplaner"
@@ -289,9 +290,8 @@
         add_an_event: "Legg til arrangement"
         load_the_next_events: "Last inn flere arrangementer..."
         full_price_: "Full pris:"
-        to_date: "til" #eg. from 01/01 to 01/05
+        to_date: "til" #e.g. from 01/01 to 01/05
         all_themes: "Alle temaer"
-        show_featured: "Show the featured event"
       #details and booking of an event
       events_show:
         event_description: "Arrangementsbeskrivelse"
@@ -302,8 +302,8 @@
         ending: "Slutt:"
         opening_hours: "Åpningstider:"
         all_day: "Hele dagen"
-        from_time: "Fra" #eg. from 18:00 to 21:00
-        to_time: "til" #eg. from 18:00 to 21:00
+        from_time: "Fra" #e.g. from 18:00 to 21:00
+        to_time: "til" #e.g. from 18:00 to 21:00
         full_price_: "Full pris:"
         tickets_still_availables: "Ledige plasser:"
         sold_out: "Utsolgt."
