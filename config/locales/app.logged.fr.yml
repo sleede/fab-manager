@@ -144,10 +144,10 @@ fr:
           edit: "Modifier"
         reservations:
           reservations_panel:
-            title_Space: "My space reservations"
-            title_Machine: "My machines reservations"
-            upcoming: "Upcoming"
-            passed: "Passed"
+            title_Space: "Mes réservations d'espace"
+            title_Machine: "Mes réservations de machines"
+            upcoming: "À venir"
+            past: "Past"
             slots_details: "Slots details"
             no_reservations: "No reservations"
             show_more: "Show more"
