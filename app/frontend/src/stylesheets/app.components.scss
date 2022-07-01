@@ -408,22 +408,15 @@
   .about-title, .about-title p {
     margin: 0;
     font-size: rem-calc(50);
-    line-height: rem-calc(48);
+    line-height: rem-calc(56);
     color: #fff;
     font-weight: 900;
+    text-align: left;
   }
 
   .about-title-aside {
     margin-top: 0;
     font-size: rem-calc(18);
-  }
-
-  .about-title,
-  .about-title p
-  {
-    font-size: rem-calc(18);
-    line-height: rem-calc(30);
-    text-align: left;
   }
 
   &.ng-hide {
