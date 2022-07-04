@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
-# Time range, slicing an Availability.
-# Its duration is defined by globally by Setting.get('slot_duration') but can be overridden per availability
-# During a slot a Reservation is possible
-# Only reserved slots are persisted in DB, others are instantiated on the fly
+# A Time range.
+# Slots have two functions:
+# - slicing an Availability
+#   > Slots duration are defined globally by Setting.get('slot_duration') but can be overridden per availability.
+#   > These slots are not persisted in database and instantiated on the fly, if needed.
+# - hold detailed data about a Reservation.
+#   > Persisted slots (in DB) represents booked slots and stores data about a time range that have been reserved.
 class Slot < ApplicationRecord
   include NotifyWith::NotificationAttachedObject
 
