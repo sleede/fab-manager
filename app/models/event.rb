@@ -79,7 +79,10 @@ class Event < ApplicationRecord
     if nb_total_places.nil?
       self.nb_free_places = nil
     else
-      reserved_places = reservations.joins(:slots).where('slots.canceled_at': nil).map(&:total_booked_seats).inject(0) { |sum, t| sum + t }
+      reserved_places = reservations.joins(:slots_reservations)
+                                    .where('slots_reservations.canceled_at': nil)
+                                    .map(&:total_booked_seats)
+                                    .inject(0) { |sum, t| sum + t }
       self.nb_free_places = (nb_total_places - reserved_places)
     end
   end

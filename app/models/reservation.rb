@@ -35,12 +35,17 @@ class Reservation < ApplicationRecord
   # @param canceled    if true, count the number of seats for this reservation, including canceled seats
   def total_booked_seats(canceled: false)
     # cases:
-    # - machine/training/space reservation => 1 slot = 1 seat (currently not covered by this function)
-    # - event reservation => seats = nb_reserve_place (normal price) + tickets.booked (other prices)
-    return 0 if slots.first.canceled_at && !canceled
+    if reservable_type == 'Event'
+      # - event reservation => seats = nb_reserve_place (normal price) + tickets.booked (other prices)
+      total = nb_reserve_places
+      total += tickets.map(&:booked).map(&:to_i).reduce(:+) if tickets.count.positive?
 
-    total = nb_reserve_places
-    total += tickets.map(&:booked).map(&:to_i).reduce(:+) if tickets.count.positive?
+      total = 0 unless slots_reservations.first&.canceled_at.nil?
+    else
+      # - machine/training/space reservation => 1 slot_reservation = 1 seat
+      total = slots_reservations.count
+      total -= slots_reservations.where.not(canceled_at: nil).count unless canceled
+    end
 
     total
   end
