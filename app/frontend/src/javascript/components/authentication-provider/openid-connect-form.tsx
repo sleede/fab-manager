@@ -69,7 +69,7 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
    * The resulting list is provided through the callback parameter.
    */
   const loadScopes = (inputValue: string, callback: (options: Array<{ value: string, label: string }>) => void): void => {
-    const current = currentFormValues.scope || [];
+    const current = currentFormValues?.scope || [];
     if (scopesAvailable) {
       // add custom scopes to the list of available scopes
       const unlisted = difference(current, scopesAvailable);
