@@ -2,6 +2,8 @@
 
 ## next deploy
 
+## v5.4.10 2022 July 05
+
 - Increased About page title's size
 - Fix a bug: script mount-proof-of-identity-files creates a volume with an invalid path
 - Fix a bug: unable to access the new OIDC provider form
