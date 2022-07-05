@@ -10,7 +10,7 @@ class AddReservationFieldsToSlotsReservations < ActiveRecord::Migration[5.2]
     add_column :slots_reservations, :canceled_at, :datetime
     add_column :slots_reservations, :offered, :boolean
 
-    execute %(
+    execute <<-SQL
       UPDATE slots_reservations
       SET
         ex_start_at=slots.ex_start_at,
@@ -19,7 +19,7 @@ class AddReservationFieldsToSlotsReservations < ActiveRecord::Migration[5.2]
         offered=slots.offered
       FROM slots
       WHERE slots_reservations.slot_id = slots.id
-    )
+    SQL
 
     remove_column :slots, :ex_start_at
     remove_column :slots, :ex_end_at
@@ -30,7 +30,7 @@ class AddReservationFieldsToSlotsReservations < ActiveRecord::Migration[5.2]
     # we gonna keep only only one slot (remove duplicates) because data is now hold in slots_reservations
 
     # update slots_reservation.slot_id
-    execute %(
+    execute <<-SQL
       UPDATE slots_reservations
       SET slot_id=r.kept
       FROM (
@@ -39,45 +39,53 @@ class AddReservationFieldsToSlotsReservations < ActiveRecord::Migration[5.2]
           GROUP BY start_at, end_at, availability_id
           HAVING count(*) > 1) as r
       WHERE slot_id = ANY(r.all_ids);
-    )
+    SQL
 
     # remove useless slots
-    execute %q(
-     WITH same_slots AS (
-         SELECT count(*), start_at, end_at, availability_id, min(id) AS kept, array_agg(id) AS all_ids
-         FROM slots
-         GROUP BY start_at, end_at, availability_id
-         HAVING count(*) > 1
-     )
-     DELETE FROM slots
-     WHERE id IN (SELECT unnest(all_ids) FROM same_slots)
-     AND id NOT IN (SELECT kept FROM same_slots);
-   )
+    execute <<-SQL
+      WITH same_slots AS (
+          SELECT count(*), start_at, end_at, availability_id, min(id) AS kept, array_agg(id) AS all_ids
+          FROM slots
+          GROUP BY start_at, end_at, availability_id
+          HAVING count(*) > 1
+      )
+      DELETE FROM slots
+      WHERE id IN (SELECT unnest(all_ids) FROM same_slots)
+      AND id NOT IN (SELECT kept FROM same_slots);
+    SQL
   end
 
   def down
-    ## FIXME, more than one row returned by a subquery used as an expression
-    ## in UPDATE slots_reservations, slot_slots return all inserted ids
-    #
-    # WITH same_slots AS (
-    #     SELECT count(*), array_agg(id) AS all_ids, slot_id
-    #     FROM slots_reservations
-    #     GROUP BY slot_id
-    #     HAVING count(*) > 1
-    # ), slot AS (
-    #     SELECT *
-    #     FROM slots
-    #     WHERE id IN (SELECT slot_id FROM same_slots)
-    # ), insert_slot AS (
-    #     INSERT INTO slots (start_at, end_at, created_at, updated_at, availability_id)
-    #     SELECT start_at, end_at, now(), now(), availability_id
-    #     FROM slot
-    #     RETURNING id
-    # )
-    # UPDATE slots_reservations
-    # SET slot_id=(SELECT id FROM insert_slot)
-    # WHERE id IN (SELECT unnest(all_ids) FROM same_slots);
-    #
+    execute <<-SQL
+      DO
+      $$
+      DECLARE
+          sr_group RECORD;
+          slot slots%ROWTYPE;
+          new_slot_id slots.id%TYPE;
+          curr_slot_reservation_id slots_reservations.id%TYPE;
+      BEGIN
+          FOR sr_group IN
+              SELECT count(*), array_agg(id) AS all_ids, slot_id
+              FROM slots_reservations
+              GROUP BY slot_id
+              HAVING count(*) > 1
+          LOOP
+              SELECT * INTO slot FROM slots WHERE id = sr_group.slot_id;
+              FOR curr_slot_reservation_id IN
+                  SELECT unnest(sr_group.all_ids[2:])
+              LOOP
+                  INSERT INTO slots (start_at, end_at, created_at, updated_at, availability_id)
+                  VALUES (slot.start_at, slot.end_at, now(), now(), slot.availability_id)
+                  RETURNING id INTO new_slot_id;
+                  UPDATE slots_reservations
+                  SET slot_id=new_slot_id
+                  WHERE id=curr_slot_reservation_id;
+              END LOOP;
+          END LOOP;
+      END;
+      $$
+    SQL
 
     add_column :slots, :ex_start_at, :datetime
     add_column :slots, :ex_end_at, :datetime
@@ -85,7 +93,7 @@ class AddReservationFieldsToSlotsReservations < ActiveRecord::Migration[5.2]
     add_column :slots, :offered, :boolean
     add_column :slots, :destroying, :boolean, default: false
 
-    execute %(
+    execute <<-SQL
       UPDATE slots
       SET
         ex_start_at=slots_reservations.ex_start_at,
@@ -94,7 +102,7 @@ class AddReservationFieldsToSlotsReservations < ActiveRecord::Migration[5.2]
         offered=slots_reservations.offered
       FROM slots_reservations
       WHERE slots_reservations.slot_id = slots.id
-    )
+    SQL
 
     remove_column :slots_reservations, :ex_start_at
     remove_column :slots_reservations, :ex_end_at
