@@ -3,6 +3,7 @@
 ## next deploy
 
 - Fix a bug: script mount-proof-of-identity-files creates a volume with an invalid path
+- Fix a bug: unable to access the new OIDC provider form
 
 ## v5.4.9 2022 June 29
 
