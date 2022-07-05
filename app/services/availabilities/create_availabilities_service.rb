@@ -4,6 +4,7 @@
 class Availabilities::CreateAvailabilitiesService
   def create(availability, occurrences = [])
     availability.update_attributes(occurrence_id: availability.id)
+    slot_duration = availability.slot_duration || Setting.get('slot_duration').to_i
 
     occurrences.each do |o|
       next if availability.start_at == o[:start_at] && availability.end_at == o[:end_at]
@@ -25,6 +26,14 @@ class Availabilities::CreateAvailabilitiesService
         slot_duration: availability.slot_duration,
         plan_ids: availability.plan_ids
       ).save!
+
+      ((o.end_at - o.start_at) / slot_duration.minutes).to_i.times do |i|
+        Slot.new(
+          start_at: o.start_at + (i * slot_duration).minutes,
+          end_at: o.start_at + (i * slot_duration).minutes + slot_duration.minutes,
+          availability_id: o.id
+        ).save!
+      end
     end
   end
 end

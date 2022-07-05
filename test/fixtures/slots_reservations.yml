@@ -3,7 +3,15 @@
 one:
   slot_id: 1
   reservation_id: 1
+  ex_start_at:
+  canceled_at:
+  ex_end_at:
+  offered:
 
 two:
   slot_id: 2
   reservation_id: 2
+  ex_start_at:
+  canceled_at:
+  ex_end_at:
+  offered:

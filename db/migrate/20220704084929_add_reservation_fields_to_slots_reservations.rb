@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Previously, the Slot table was holding data about reservations.
 # This was a wrong assumption that leads to a bug.
 # An Availability should have many slots but a slot can be related to multiple Reservations,
@@ -8,7 +10,7 @@ class AddReservationFieldsToSlotsReservations < ActiveRecord::Migration[5.2]
     add_column :slots_reservations, :ex_start_at, :datetime
     add_column :slots_reservations, :ex_end_at, :datetime
     add_column :slots_reservations, :canceled_at, :datetime
-    add_column :slots_reservations, :offered, :boolean
+    add_column :slots_reservations, :offered, :boolean, default: false
 
     execute <<-SQL
       UPDATE slots_reservations
@@ -90,7 +92,7 @@ class AddReservationFieldsToSlotsReservations < ActiveRecord::Migration[5.2]
     add_column :slots, :ex_start_at, :datetime
     add_column :slots, :ex_end_at, :datetime
     add_column :slots, :canceled_at, :datetime
-    add_column :slots, :offered, :boolean
+    add_column :slots, :offered, :boolean, default: false
     add_column :slots, :destroying, :boolean, default: false
 
     execute <<-SQL

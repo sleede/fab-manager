@@ -17,18 +17,9 @@ class Availabilities::AvailabilitiesService
 
     slots = []
     availabilities.each do |a|
-      slot_duration = a.slot_duration || Setting.get('slot_duration').to_i
-      ((a.end_at - a.start_at) / slot_duration.minutes).to_i.times do |i|
-        next unless (a.start_at + (i * slot_duration).minutes) > DateTime.current || user.admin?
-
-        slot = Slot.new(
-          start_at: a.start_at + (i * slot_duration).minutes,
-          end_at: a.start_at + (i * slot_duration).minutes + slot_duration.minutes,
-          availability_id: a.id,
-          availability: a,
-          machine: machine,
-          title: ''
-        )
+      a.slots.each do |slot|
+        slot.machine = machine
+        slot.title = ''
         slot = @service.machine_reserved_status(slot, reservations, @current_user)
         slots << slot
       end
@@ -44,18 +35,9 @@ class Availabilities::AvailabilitiesService
 
     slots = []
     availabilities.each do |a|
-      slot_duration = a.slot_duration || Setting.get('slot_duration').to_i
-      ((a.end_at - a.start_at) / slot_duration.minutes).to_i.times do |i|
-        next unless (a.start_at + (i * slot_duration).minutes) > DateTime.current || user.admin?
-
-        slot = Slot.new(
-          start_at: a.start_at + (i * slot_duration).minutes,
-          end_at: a.start_at + (i * slot_duration).minutes + slot_duration.minutes,
-          availability_id: a.id,
-          availability: a,
-          space: space,
-          title: ''
-        )
+      a.slots.each do |slot|
+        slot.space = space
+        slot.title = ''
         slot = @service.space_reserved_status(slot, reservations, user)
         slots << slot
       end
@@ -71,7 +53,7 @@ class Availabilities::AvailabilitiesService
     # first, we get the already-made reservations
     reservations = user.reservations.where("reservable_type = 'Training'")
     reservations = reservations.where('reservable_id = :id', id: training_id.to_i) if training_id.is_number?
-    reservations = reservations.joins(:slots).where('slots.start_at > ?', @current_user.admin? ? 1.month.ago : DateTime.current)
+    reservations = reservations.joins(slots_reservations: :slots).where('slots.start_at > ?', @current_user.admin? ? 1.month.ago : DateTime.current)
 
     # visible availabilities depends on multiple parameters
     availabilities = training_availabilities(training_id, user)

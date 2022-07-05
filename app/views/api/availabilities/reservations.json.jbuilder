@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.array!(@reservation_slots) do |slot|
   json.slot_id slot.id
   json.start_at slot.start_at.iso8601
