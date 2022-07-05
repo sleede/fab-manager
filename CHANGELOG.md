@@ -2,6 +2,8 @@
 
 ## next deploy
 
+- Fix a bug: Gender, Address and Birthday are not mapped properly from SSO (#365)
+
 ## v5.4.10 2022 July 05
 
 - Increased About page title's size
