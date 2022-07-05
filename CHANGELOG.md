@@ -2,6 +2,7 @@
 
 ## next deploy
 
+- Increased About page title's size
 - Fix a bug: script mount-proof-of-identity-files creates a volume with an invalid path
 - Fix a bug: unable to access the new OIDC provider form
 
