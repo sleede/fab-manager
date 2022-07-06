@@ -85,10 +85,10 @@ class API::AuthProvidersController < API::ApiController
 
   def provider_params
     if params['auth_provider']['providable_type'] == DatabaseProvider.name
-      params.require(:auth_provider).permit(:name, :providable_type, providable_attributes: [:id])
+      params.require(:auth_provider).permit(:id, :name, :providable_type, providable_attributes: [:id])
     elsif params['auth_provider']['providable_type'] == OAuth2Provider.name
       params.require(:auth_provider)
-            .permit(:name, :providable_type,
+            .permit(:id, :name, :providable_type,
                     providable_attributes: %i[id base_url token_endpoint authorization_endpoint
                                               profile_url client_id client_secret scopes],
                     auth_provider_mappings_attributes: [:id, :local_model, :local_field, :api_field, :api_endpoint, :api_data_type,
@@ -96,10 +96,11 @@ class API::AuthProvidersController < API::ApiController
                                                                                     mapping: %i[from to]]])
     elsif params['auth_provider']['providable_type'] == OpenIdConnectProvider.name
       params.require(:auth_provider)
-            .permit(:name, :providable_type,
-                    providable_attributes: %i[id issuer discovery client_auth_method scope prompt send_scope_to_token_endpoint
-                                              client__identifier client__secret client__authorization_endpoint client__token_endpoint
-                                              client__userinfo_endpoint client__jwks_uri client__end_session_endpoint profile_url],
+            .permit(:id, :name, :providable_type,
+                    providable_attributes: [:id, :issuer, :discovery, :client_auth_method, :prompt, :send_scope_to_token_endpoint,
+                                            :client__identifier, :client__secret, :client__authorization_endpoint, :client__token_endpoint,
+                                            :client__userinfo_endpoint, :client__jwks_uri, :client__end_session_endpoint, :profile_url,
+                                            scope: []],
                     auth_provider_mappings_attributes: [:id, :local_model, :local_field, :api_field, :api_endpoint, :api_data_type,
                                                         :_destroy, transformation: [:type, :format, :true_value, :false_value,
                                                                                     mapping: %i[from to]]])

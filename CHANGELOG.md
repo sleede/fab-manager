@@ -4,6 +4,7 @@
 
 - Fix a bug: Gender, Address and Birthday are not mapped properly from SSO (#365)
 - Fix a bug: OIDC scopes are not shown in the configuration form select
+- Fix a bug: OIDC scopes are not saved
 
 ## v5.4.10 2022 July 05
 
