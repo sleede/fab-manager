@@ -2,6 +2,8 @@
 
 ## next deploy
 
+## v5.4.11 2022 July 06
+
 - Fix a bug: social networks icons not shown in firefox
 - Fix a bug: Gender, Address and Birthday are not mapped properly from SSO (#365)
 - Fix a bug: OIDC scopes are not shown in the configuration form select
