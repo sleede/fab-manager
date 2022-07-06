@@ -2,6 +2,7 @@
 
 ## next deploy
 
+- Fix a bug: Gender, Address and Birthday are not mapped properly from SSO (#365)
 - Fix a bug: unable to import a new account from an SSO provider
 - Fix a security issue: updated rails-html-sanitizer to 1.4.3 to fix [CVE-2022-32209](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32209)
 
