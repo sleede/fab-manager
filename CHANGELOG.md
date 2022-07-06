@@ -2,6 +2,8 @@
 
 ## next deploy
 
+- Fix a security issue: updated rails-html-sanitizer to 1.4.3 to fix [CVE-2022-32209](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32209)
+
 ## v5.4.11 2022 July 06
 
 - Fix a bug: social networks icons not shown in firefox
