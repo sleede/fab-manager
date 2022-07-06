@@ -16,6 +16,7 @@ interface CommonProps<TFieldValues, TContext extends object, TOptionValue> exten
   onChange?: (values: Array<TOptionValue>) => void,
   placeholder?: string,
   creatable?: boolean,
+  selectKey?: string,
 }
 
 // we should provide either an array of options or a function that returns a promise, but not both
@@ -35,7 +36,7 @@ type selectOption<TOptionValue> = { value: TOptionValue, label: string, select?:
  * This component is a wrapper around react-select to use with react-hook-form.
  * It is a multi-select component.
  */
-export const FormMultiSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, tooltip, className, control, placeholder, options, valuesDefault, error, rules, disabled, onChange, formState, warning, loadOptions, creatable }: FormSelectProps<TFieldValues, TContext, TOptionValue>) => {
+export const FormMultiSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, tooltip, className, control, placeholder, options, valuesDefault, error, rules, disabled, onChange, formState, warning, loadOptions, creatable, selectKey }: FormSelectProps<TFieldValues, TContext, TOptionValue>) => {
   const { t } = useTranslation('shared');
 
   const [isDisabled, setIsDisabled] = React.useState<boolean>(false);
@@ -52,7 +53,7 @@ export const FormMultiSelect = <TFieldValues extends FieldValues, TContext exten
   useEffect(() => {
     if (typeof loadOptions === 'function') {
       loadOptions('', options => {
-        setAllOptions(options);
+        setTimeout(() => setAllOptions(options), 1);
       });
     }
   }, [loadOptions]);
@@ -73,7 +74,7 @@ export const FormMultiSelect = <TFieldValues extends FieldValues, TContext exten
    * This function will return the currently selected options, according to the selectedOptions state.
    */
   const getCurrentValues = (value: Array<TOptionValue>): Array<selectOption<TOptionValue>> => {
-    return allOptions.filter(c => value?.includes(c.value));
+    return allOptions?.filter(c => value?.includes(c.value));
   };
 
   /**
@@ -119,6 +120,7 @@ export const FormMultiSelect = <TFieldValues extends FieldValues, TContext exten
                       classNamePrefix: 'rs',
                       className: 'rs',
                       ref,
+                      key: selectKey,
                       value: getCurrentValues(value),
                       placeholder,
                       isDisabled,
