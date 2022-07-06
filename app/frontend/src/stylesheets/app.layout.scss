@@ -581,7 +581,7 @@ body.container {
     border-radius: 3px;
     overflow: hidden;
   }
-  & > img {
+  & > svg {
     border: 1px solid var(--gray-soft-dark);
     background-color: var(--gray-soft-lightest);
     &:hover {  opacity: 0.65; }
@@ -589,7 +589,7 @@ body.container {
   & > a {
     transition: transform 200ms ease-in-out;
     &:hover { transform: translateY(-4px); }
-    img {
+    svg {
       max-width: 100%;
       height: inherit;
     }

@@ -85,7 +85,7 @@ export const FabSocials: React.FC<FabSocialsProps> = ({ show = false, onError, o
           {fabNetworks.map((network, index) =>
             selectedNetworks.includes(network) &&
             <a key={index} href={network.url} target='_blank' rel="noreferrer">
-              <img src={`${Icons}#${network.name}`}></img>
+              <svg viewBox="0 0 24 24"><use href={`${Icons}#${network.name}`}/></svg>
             </a>
           )}
         </div>
@@ -95,7 +95,9 @@ export const FabSocials: React.FC<FabSocialsProps> = ({ show = false, onError, o
         <div className='social-icons'>
           {fabNetworks.map((network, index) =>
             !selectedNetworks.includes(network) &&
-            <img key={index} src={`${Icons}#${network.name}`} onClick={() => selectNetwork(network)}></img>
+            <svg viewBox="0 0 24 24" key={index} onClick={() => selectNetwork(network)}>
+              <use href={`${Icons}#${network.name}`} />
+            </svg>
           )}
         </div>
         {selectNetwork.length && <div className='social-inputs'>
@@ -114,7 +116,7 @@ export const FabSocials: React.FC<FabSocialsProps> = ({ show = false, onError, o
                       defaultValue={network.url}
                       label={network.name}
                       placeholder={t('app.shared.fab_socials.url_placeholder')}
-                      icon={<img src={`${Icons}#${network.name}`}></img>}
+                      icon={<svg viewBox="0 0 24 24"><use href={`${Icons}#${network.name}`}/></svg>}
                       addOn={<Trash size={16} />}
                       addOnAction={() => remove(network)} />
           )}
