@@ -48,24 +48,24 @@ module SingleSignOnConcern
           profile.user_avatar ||= UserAvatar.new
           profile.user_avatar.remote_attachment_url = data
         when 'profile.address'
-          invoicing_profile ||= InvoicingProfile.new
-          invoicing_profile.address ||= Address.new
-          invoicing_profile.address.address = data
+          self.invoicing_profile ||= InvoicingProfile.new
+          self.invoicing_profile.address ||= Address.new
+          self.invoicing_profile.address.address = data
         when 'profile.organization_name'
-          invoicing_profile ||= InvoicingProfile.new
-          invoicing_profile.organization ||= Organization.new
-          invoicing_profile.organization.name = data
+          self.invoicing_profile ||= InvoicingProfile.new
+          self.invoicing_profile.organization ||= Organization.new
+          self.invoicing_profile.organization.name = data
         when 'profile.organization_address'
-          invoicing_profile ||= InvoicingProfile.new
-          invoicing_profile.organization ||= Organization.new
-          invoicing_profile.organization.address ||= Address.new
-          invoicing_profile.organization.address.address = data
+          self.invoicing_profile ||= InvoicingProfile.new
+          self.invoicing_profile.organization ||= Organization.new
+          self.invoicing_profile.organization.address ||= Address.new
+          self.invoicing_profile.organization.address.address = data
         when 'profile.gender'
-          statistic_profile ||= StatisticProfile.new
-          statistic_profile.gender = data
+          self.statistic_profile ||= StatisticProfile.new
+          self.statistic_profile.gender = data
         when 'profile.birthday'
-          statistic_profile ||= StatisticProfile.new
-          statistic_profile.birthday = data
+          self.statistic_profile ||= StatisticProfile.new
+          self.statistic_profile.birthday = data
         else
           profile[sso_mapping[8..-1].to_sym] = data unless data.nil?
         end
