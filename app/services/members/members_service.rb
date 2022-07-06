@@ -46,7 +46,7 @@ class Members::MembersService
     up_result = member.update(params)
 
     notify_user_profile_complete(not_complete) if up_result
-    member.notify_group_changed(ex_group, validated_at_changed) if group_changed
+    member.notify_group_changed(ex_group, validated_at_changed) if group_changed && !ex_group.nil?
     up_result
   end
 
