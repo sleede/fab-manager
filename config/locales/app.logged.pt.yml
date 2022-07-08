@@ -144,16 +144,16 @@ pt:
           edit: "Editar"
         reservations:
           reservations_panel:
-            title_Space: "My space reservations"
-            title_Machine: "My machines reservations"
-            upcoming: "Upcoming"
-            past: "Past"
-            slots_details: "Slots details"
-            no_reservations: "No reservations"
-            show_more: "Show more"
+            title_Space: "Minhas reservas de espaços"
+            title_Machine: "Minhas reservas de máquinas"
+            upcoming: "Próximas"
+            past: "Passadas"
+            slots_details: "Detalhes da reserva"
+            no_reservations: "Sem reservas"
+            show_more: "Mostrar mais"
           credits_panel:
-            title_Space: "My space credits"
-            title_Machine: "My machines credits"
+            title_Space: "Meus créditos de espaços"
+            title_Machine: "Meus créditos de máquinas"
             reamaining_credits_html: "<strong>{NAME}</strong>: You can book <em>{REMAINING} {REMAINING, plural, one{slot} other{slots}}</em> for free. You have already used {USED} {USED, plural, one{credit} other{credits}} from your current subscription."
             no_credits: "You don't have any credits yet. Some subscriptions may allow you to book some slots for free."
       #public profil of a member
