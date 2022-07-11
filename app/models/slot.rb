@@ -10,7 +10,7 @@ class Slot < ApplicationRecord
   has_many :reservations, through: :slots_reservations
   belongs_to :availability
 
-  attr_accessor :is_reserved, :machine, :space, :title, :can_modify, :is_reserved_by_current_user
+  attr_accessor :is_reserved, :machine, :space, :title, :can_modify, :current_user_slots_reservations_ids
 
   def complete?
     reservations.length >= availability.nb_total_places

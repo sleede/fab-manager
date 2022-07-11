@@ -397,11 +397,7 @@ Application.Controllers.controller('ReserveTrainingController', ['$scope', '$tra
       // we load the availabilities from a callback function of the $scope.eventSources, instead of resolving a promise
       // in the router because this allows to refetchEvents from fullCalendar API.
       $scope.eventSources.push({
-        events: function (start, end, timezone, callback) {
-          Availability.trainings({ trainingId: $transition$.params().id }, function (availabilities) {
-            callback(availabilities);
-          });
-        },
+        url: `/api/availabilities/trainings/${$transition$.params().id}`,
         textColor: 'black'
       });
     };

@@ -25,7 +25,7 @@ module AvailabilityHelper
 
   def machines_slot_border_color(slot)
     if slot.is_reserved
-      slot.is_reserved_by_current_user ? IS_RESERVED_BY_CURRENT_USER : IS_COMPLETED
+      slot.current_user_slots_reservations_ids.empty? ? IS_COMPLETED : IS_RESERVED_BY_CURRENT_USER
     else
       MACHINE_COLOR
     end

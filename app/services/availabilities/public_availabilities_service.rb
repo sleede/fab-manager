@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 # Provides helper methods for public calendar of Availability
+# FIXME, Availabilities::StatusService was refactored
+# TODO, Use Availabilities::AvailabilitiesService
 class Availabilities::PublicAvailabilitiesService
   def initialize(current_user)
     @current_user = current_user

@@ -4,15 +4,15 @@
 class API::AvailabilitiesController < API::ApiController
   before_action :authenticate_user!, except: [:public]
   before_action :set_availability, only: %i[show update reservations lock]
-  before_action :define_max_visibility, only: %i[machine trainings spaces]
+  before_action :set_operator_role, only: %i[machine spaces]
+  before_action :set_customer, only: %i[machine spaces trainings]
   respond_to :json
 
   def index
     authorize Availability
-    start_date = ActiveSupport::TimeZone[params[:timezone]].parse(params[:start])
-    end_date = ActiveSupport::TimeZone[params[:timezone]].parse(params[:end]).end_of_day
+    display_window = window
     @availabilities = Availability.includes(:machines, :tags, :trainings, :spaces)
-                                  .where('start_at >= ? AND end_at <= ?', start_date, end_date)
+                                  .where('start_at >= ? AND end_at <= ?', display_window[:start], display_window[:end])
 
     @availabilities = @availabilities.where.not(available_type: 'event') unless Setting.get('events_in_calendar')
 
@@ -20,17 +20,17 @@ class API::AvailabilitiesController < API::ApiController
   end
 
   def public
-    start_date = ActiveSupport::TimeZone[params[:timezone]].parse(params[:start])
-    end_date = ActiveSupport::TimeZone[params[:timezone]].parse(params[:end]).end_of_day
+    # FIXME, use AvailabilitiesService
+    display_window = window
     @reservations = Reservation.includes(:slots, :statistic_profile)
                                .references(:slots)
-                               .where('slots.start_at >= ? AND slots.end_at <= ?', start_date, end_date)
+                               .where('slots.start_at >= ? AND slots.end_at <= ?', display_window[:start], display_window[:end])
 
     machine_ids = params[:m] || []
     service = Availabilities::PublicAvailabilitiesService.new(current_user)
     @availabilities = service.public_availabilities(
-      start_date,
-      end_date,
+      display_window[:start],
+      display_window[:end],
       @reservations,
       machines: machine_ids, spaces: params[:s]
     )
@@ -78,22 +78,25 @@ class API::AvailabilitiesController < API::ApiController
   end
 
   def machine
-    @current_user_role = current_user.role
-
-    service = Availabilities::AvailabilitiesService.new(current_user, other: @visi_max_other, year: @visi_max_year)
-    @slots = service.machines(params[:machine_id], user)
+    service = Availabilities::AvailabilitiesService.new(current_user)
+    @machine = Machine.friendly.find(params[:machine_id])
+    @slots = service.machines(@machine, @customer, window)
   end
 
   def trainings
-    service = Availabilities::AvailabilitiesService.new(current_user, other: @visi_max_other, year: @visi_max_year)
-    @availabilities = service.trainings(params[:training_id], user)
+    service = Availabilities::AvailabilitiesService.new(current_user)
+    @trainings = if training_id.is_number? || (training_id.length.positive? && training_id != 'all')
+                   [Training.friendly.find(training_id)]
+                 else
+                   Training.all
+                 end
+    @slots = service.trainings(@trainings, @customer, window)
   end
 
   def spaces
-    @current_user_role = current_user.role
-
-    service = Availabilities::AvailabilitiesService.new(current_user, other: @visi_max_other, year: @visi_max_year)
-    @slots = service.spaces(params[:space_id], user)
+    service = Availabilities::AvailabilitiesService.new(current_user)
+    @space = Space.friendly.find(space_id)
+    @slots = service.spaces(@space, @customer, window)
   end
 
   def reservations
@@ -133,12 +136,22 @@ class API::AvailabilitiesController < API::ApiController
 
   private
 
-  def user
-    if params[:member_id]
-      User.find(params[:member_id])
-    else
-      current_user
-    end
+  def window
+    start_date = ActiveSupport::TimeZone[params[:timezone]]&.parse(params[:start])
+    end_date = ActiveSupport::TimeZone[params[:timezone]]&.parse(params[:end])&.end_of_day
+    { start: start_date, end: end_date }
+  end
+
+  def set_customer
+    @customer = if params[:member_id]
+                  User.find(params[:member_id])
+                else
+                  current_user
+                end
+  end
+
+  def set_operator_role
+    @current_user_role = current_user.role
   end
 
   def set_availability
@@ -190,10 +203,5 @@ class API::AvailabilitiesController < API::ApiController
 
   def remove_full?(availability)
     params[:dispo] == 'false' && (availability.is_reserved || (availability.try(:full?) && availability.full?))
-  end
-
-  def define_max_visibility
-    @visi_max_year = Setting.get('visibility_yearly').to_i.months.since
-    @visi_max_other = Setting.get('visibility_others').to_i.months.since
   end
 end

@@ -607,11 +607,7 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$transi
       // we load the availabilities from a callback function of the $scope.eventSources, instead of resolving a promise
       // in the router because this allows to refetchEvents from fullCalendar API.
       $scope.eventSources.push({
-        events: function (start, end, timezone, callback) {
-          Availability.spaces({ spaceId: $transition$.params().id }, function (availabilities) {
-            callback(availabilities);
-          });
-        },
+        url: `/api/availabilities/spaces/${$transition$.params().id}`,
         textColor: 'black'
       });
     };

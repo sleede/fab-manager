@@ -677,11 +677,7 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$tran
      */
     const initialize = function () {
       $scope.eventSources.push({
-        events: function (start, end, timezone, callback) {
-          Availability.machine({ machineId: $transition$.params().id }, function (availabilities) {
-            callback(availabilities);
-          });
-        },
+        url: `/api/availabilities/machines/${$transition$.params().id}`,
         textColor: 'black'
       });
 
