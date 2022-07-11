@@ -27,10 +27,10 @@ class Availabilities::CreateAvailabilitiesService
         plan_ids: availability.plan_ids
       ).save!
 
-      ((o.end_at - o.start_at) / slot_duration.minutes).to_i.times do |i|
+      (o[:end_at] - o[:start_at] / slot_duration.minutes).to_i.times do |i|
         Slot.new(
-          start_at: o.start_at + (i * slot_duration).minutes,
-          end_at: o.start_at + (i * slot_duration).minutes + slot_duration.minutes,
+          start_at: o[:start_at] + (i * slot_duration).minutes,
+          end_at: o[:start_at] + (i * slot_duration).minutes + slot_duration.minutes,
           availability_id: o.id
         ).save!
       end
