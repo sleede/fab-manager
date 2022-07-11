@@ -2,6 +2,8 @@
 
 ## next deploy
 
+- Fix a bug: Unable to import accounts from SSO when the transformation modal was opened but leaved empty
+
 ## v5.4.12 2022 July 06
 
 - Fix a bug: Gender, Address and Birthday are not mapped properly from SSO (#365)
