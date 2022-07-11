@@ -83,6 +83,12 @@ Application.Controllers.controller('MainNavController', ['$scope', 'settingsProm
       linkIcon: 'cogs',
       authorizedRoles: ['admin', 'manager']
     },
+    {
+      state: 'app.admin.store',
+      linkText: 'app.public.common.manage_the_store',
+      linkIcon: 'cogs',
+      authorizedRoles: ['admin', 'manager']
+    },
     $scope.$root.modules.trainings && {
       state: 'app.admin.trainings',
       linkText: 'app.public.common.trainings_monitoring',

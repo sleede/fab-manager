@@ -150,6 +150,8 @@ Rails.application.routes.draw do
 
     resources :profile_custom_fields
 
+    resources :product_categories
+
     # for admin
     resources :trainings do
       get :availabilities, on: :member

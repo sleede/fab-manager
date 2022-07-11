@@ -50,9 +50,9 @@ group :test do
   gem 'faker'
   gem 'minitest-reporters'
   gem 'pdf-reader'
+  gem 'rubyXL'
   gem 'vcr', '6.0.0'
   gem 'webmock'
-  gem 'rubyXL'
 end
 
 group :production, :staging do
@@ -66,7 +66,6 @@ gem 'pg_search'
 
 # authentication
 gem 'devise', '>= 4.6.0'
-
 
 gem 'omniauth', '~> 1.9.0'
 gem 'omniauth-oauth2'
@@ -146,3 +145,5 @@ gem 'tzinfo-data'
 gem 'sassc', '= 2.1.0'
 
 gem 'redis-session-store'
+
+gem 'acts_as_list'

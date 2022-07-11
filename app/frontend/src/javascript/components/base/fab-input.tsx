@@ -36,11 +36,9 @@ export const FabInput: React.FC<FabInputProps> = ({ id, onChange, defaultValue, 
    * If the default value changes, update the value of the input until there's no content in it.
    */
   useEffect(() => {
-    if (!inputValue) {
-      setInputValue(defaultValue);
-      if (typeof onChange === 'function') {
-        onChange(defaultValue);
-      }
+    setInputValue(defaultValue);
+    if (typeof onChange === 'function') {
+      onChange(defaultValue);
     }
   }, [defaultValue]);
 
