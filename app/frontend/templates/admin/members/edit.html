@@ -11,7 +11,7 @@
         <section class="heading-title">
           <h1 class="inline">{{ 'app.shared.user_admin.user' | translate }} {{ user.name }}</h1>
           <span class="label label-danger text-white" ng-show="user.need_completion" translate>{{ 'app.shared.user_admin.incomplete_profile' }}</span>
-          <div class="pull-right" style="top: 35%;position: relative;right: 10px;" ng-if="enableUserValidationRequired">
+          <div ng-if="enableUserValidationRequired">
             <user-validation member="user"
              on-error="onError"
              on-success="onValidateMemberSuccess" />
