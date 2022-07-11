@@ -145,3 +145,5 @@ gem 'tzinfo-data'
 gem 'sassc', '= 2.1.0'
 
 gem 'redis-session-store'
+
+gem 'acts_as_list'

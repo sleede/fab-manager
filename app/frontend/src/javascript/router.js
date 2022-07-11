@@ -1104,6 +1104,16 @@ angular.module('application.router', ['ui.router'])
         }
       })
 
+      .state('app.admin.store', {
+        url: '/admin/store',
+        views: {
+          'main@': {
+            templateUrl: '/admin/store/index.html',
+            controller: 'AdminStoreController'
+          }
+        }
+      })
+
       // OpenAPI Clients
       .state('app.admin.open_api_clients', {
         url: '/open_api_clients',
