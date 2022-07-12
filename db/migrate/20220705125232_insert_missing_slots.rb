@@ -4,7 +4,7 @@
 # Now we save all slots in DB, so we must re-create slots for the existing availabilities
 class InsertMissingSlots < ActiveRecord::Migration[5.2]
   def up
-    Availability.all.each do |availability|
+    Availability.where(available_type: %w[machines space]).each do |availability|
       slot_duration = availability.slot_duration || Setting.get('slot_duration').to_i
 
       ((availability.end_at - availability.start_at) / slot_duration.minutes).to_i.times do |i|
@@ -14,6 +14,14 @@ class InsertMissingSlots < ActiveRecord::Migration[5.2]
           availability_id: availability.id
         )
       end
+    end
+
+    Availability.where(available_type: %w[training event]).each do |availability|
+      Slot.find_or_create_by(
+        start_at: availability.start_at,
+        end_at: availability.end_at,
+        availability_id: availability.id
+      )
     end
   end
 

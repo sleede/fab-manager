@@ -129,8 +129,8 @@ Application.Controllers.controller('EventsController', ['$scope', '$state', 'Eve
   }
 ]);
 
-Application.Controllers.controller('ShowEventController', ['$scope', '$state', '$rootScope', 'Event', '$uibModal', 'Member', 'Reservation', 'Price', 'CustomAsset', 'Slot', 'eventPromise', 'growl', '_t', 'Wallet', 'AuthService', 'helpers', 'dialogs', 'priceCategoriesPromise', 'settingsPromise', 'LocalPayment',
-  function ($scope, $state,$rootScope, Event, $uibModal, Member, Reservation, Price, CustomAsset, Slot, eventPromise, growl, _t, Wallet, AuthService, helpers, dialogs, priceCategoriesPromise, settingsPromise, LocalPayment) {
+Application.Controllers.controller('ShowEventController', ['$scope', '$state', '$rootScope', 'Event', '$uibModal', 'Member', 'Reservation', 'Price', 'CustomAsset', 'SlotsReservation', 'eventPromise', 'growl', '_t', 'Wallet', 'AuthService', 'helpers', 'dialogs', 'priceCategoriesPromise', 'settingsPromise', 'LocalPayment',
+  function ($scope, $state,$rootScope, Event, $uibModal, Member, Reservation, Price, CustomAsset, SlotsReservation, eventPromise, growl, _t, Wallet, AuthService, helpers, dialogs, priceCategoriesPromise, settingsPromise, LocalPayment) {
     /* PUBLIC SCOPE */
 
     // reservations for the currently shown event
@@ -418,14 +418,14 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
           }
         }
       }, function() { // cancel confirmed
-        Slot.cancel({
-          id: reservation.slots_attributes[0].id
+        SlotsReservation.cancel({
+          id: reservation.slots_reservations_attributes[0].id
         }, function() { // successfully canceled
           let index;
           growl.success(_t('app.public.events_show.reservation_was_successfully_cancelled'));
           index = $scope.reservations.indexOf(reservation);
           $scope.event.nb_free_places = $scope.event.nb_free_places + reservation.total_booked_seats;
-          $scope.reservations[index].slots_attributes[0].canceled_at = new Date();
+          $scope.reservations[index].slots_reservations_attributes[0].canceled_at = new Date();
         }, function(error) {
           growl.warning(_t('app.public.events_show.cancellation_failed'));
         });
@@ -475,9 +475,9 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
                 return eventToPlace = e;
               }
             });
-            $scope.reservation.slots_attributes[0].start_at = eventToPlace.start_date;
-            $scope.reservation.slots_attributes[0].end_at = eventToPlace.end_date;
-            $scope.reservation.slots_attributes[0].availability_id = eventToPlace.availability_id;
+            $scope.reservation.slots_reservations_attributes[0].start_at = eventToPlace.start_date;
+            $scope.reservation.slots_reservations_attributes[0].end_at = eventToPlace.end_date;
+            $scope.reservation.slots_reservations_attributes[0].availability_id = eventToPlace.availability_id;
             $scope.attempting = true;
             Reservation.update({ id: reservation.id }, { reservation: $scope.reservation }, function (reservation) {
               $uibModalInstance.close(reservation);

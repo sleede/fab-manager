@@ -98,26 +98,22 @@ class Reservation < ApplicationRecord
   private
 
   def machine_not_already_reserved
-    already_reserved = false
-    slots.each do |slot|
-      same_hour_slots = Slot.joins(:reservations).where(
+    slots_reservations.each do |slot|
+      same_hour_slots = SlotsReservation.joins(:reservation).where(
         reservations: { reservable_type: reservable_type, reservable_id: reservable_id },
-        start_at: slot.start_at,
-        end_at: slot.end_at,
-        availability_id: slot.availability_id,
+        slot_id: slot_id,
         canceled_at: nil
-      )
-      if same_hour_slots.any?
-        already_reserved = true
+      ).count
+      if same_hour_slots.positive?
+        errors.add(:reservable, 'already reserved')
         break
       end
     end
-    errors.add(:machine, 'already reserved') if already_reserved
   end
 
   def training_not_fully_reserved
-    slot = slots.first
-    errors.add(:training, 'already fully reserved') if Availability.find(slot.availability_id).full?
+    full = slots_reservations.map(&:slot).map(&:full?).reduce(:&)
+    errors.add(:reservable, 'already fully reserved') if full
   end
 
   def slots_not_locked

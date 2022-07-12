@@ -9,8 +9,8 @@
     <div ng-class="{'col-md-6': schedule, 'm-h-sm': !schedule}">
       <div ng-if="reservation">
         <p translate>{{ 'app.shared.valid_reservation_modal.here_is_the_summary_of_the_slots_to_book_for_the_current_user' }}</p>
-        <ul ng-repeat="slot in reservation.slots_attributes">
-          <li><strong>{{slot.start_at | amDateFormat: 'LL'}} : {{slot.start_at | amDateFormat:'LT'}} - {{slot.end_at | amDateFormat:'LT'}}</strong></li>
+        <ul ng-repeat="sr in reservation.slots_reservations_attributes">
+          <li><strong>{{sr.slot_attributes.start_at | amDateFormat: 'LL'}} : {{sr.slot_attributes.start_at | amDateFormat:'LT'}} - {{sr.slot_attributes.end_at | amDateFormat:'LT'}}</strong></li>
         </ul>
       </div>
       <div ng-if="subscription">

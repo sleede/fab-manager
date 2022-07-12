@@ -20,6 +20,7 @@ class Availability < ApplicationRecord
   has_many :spaces, through: :spaces_availabilities
 
   has_many :slots
+  has_many :slots_reservations, through: :slots
   has_many :reservations, through: :slots
 
   has_one :event
@@ -116,23 +117,25 @@ class Availability < ApplicationRecord
   def full?
     return false if nb_total_places.blank?
 
-    if available_type == 'training' || available_type == 'space'
-      nb_total_places <= slots.to_a.select { |s| s.canceled_at.nil? }.size
-    elsif available_type == 'event'
+    if available_type == 'event'
       event.nb_free_places.zero?
+    else
+      slots.map(&:full?).reduce(:&)
     end
   end
 
-  def nb_total_places
+  def available_places_per_slot
     case available_type
     when 'training'
-      super.presence || trainings.map(&:nb_total_places).reduce(:+)
+      nb_total_places || trainings.map(&:nb_total_places).max
     when 'event'
       event.nb_total_places
     when 'space'
-      super.presence || spaces.map(&:default_places).reduce(:+)
+      nb_total_places || spaces.map(&:default_places).max
+    when 'machines'
+      machines.count
     else
-      nil
+      raise TypeError
     end
   end
 

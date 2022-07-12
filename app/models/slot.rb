@@ -12,7 +12,7 @@ class Slot < ApplicationRecord
 
   attr_accessor :is_reserved, :machine, :space, :title, :can_modify, :current_user_slots_reservations_ids
 
-  def complete?
-    reservations.length >= availability.nb_total_places
+  def full?
+    slots_reservations.where(canceled_at: nil).count >= availability.available_places_per_slot
   end
 end

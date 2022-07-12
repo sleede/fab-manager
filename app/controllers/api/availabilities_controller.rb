@@ -4,7 +4,7 @@
 class API::AvailabilitiesController < API::ApiController
   before_action :authenticate_user!, except: [:public]
   before_action :set_availability, only: %i[show update reservations lock]
-  before_action :set_operator_role, only: %i[machine spaces]
+  before_action :set_operator_role, only: %i[machine spaces trainings]
   before_action :set_customer, only: %i[machine spaces trainings]
   respond_to :json
 
@@ -101,9 +101,9 @@ class API::AvailabilitiesController < API::ApiController
 
   def reservations
     authorize Availability
-    @reservation_slots = @availability.slots
-                                      .includes(slots_reservations: [reservations: [statistic_profile: [user: [:profile]]]])
-                                      .order('slots.start_at ASC')
+    @slots_reservations = @availability.slots_reservations
+                                       .includes(:slot, reservation: [statistic_profile: [user: [:profile]]])
+                                       .order('slots.start_at ASC')
   end
 
   def export_availabilities
@@ -151,7 +151,7 @@ class API::AvailabilitiesController < API::ApiController
   end
 
   def set_operator_role
-    @current_user_role = current_user.role
+    @operator_role = current_user.role
   end
 
   def set_availability

@@ -10,8 +10,8 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 'growl', 'Auth', 'Price', 'Wallet', 'CustomAsset', 'Slot', 'AuthService', 'Payment', 'helpers', '_t',
-  function ($rootScope, $uibModal, dialogs, growl, Auth, Price, Wallet, CustomAsset, Slot, AuthService, Payment, helpers, _t) {
+Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 'growl', 'Auth', 'Price', 'Wallet', 'CustomAsset', 'SlotsReservation', 'AuthService', 'Payment', 'helpers', '_t',
+  function ($rootScope, $uibModal, dialogs, growl, Auth, Price, Wallet, CustomAsset, SlotsReservation, AuthService, Payment, helpers, _t) {
     return ({
       restrict: 'E',
       scope: {
@@ -232,11 +232,9 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
          * When modifying an already booked reservation, confirm the modification.
          */
         $scope.modifySlot = function () {
-          Slot.update({ id: $scope.events.modifiable.slot_id }, {
+          SlotsReservation.update({ id: $scope.events.modifiable.slots_reservations_ids[0] }, {
             slot: {
-              start_at: $scope.events.placable.start,
-              end_at: $scope.events.placable.end,
-              availability_id: $scope.events.placable.availability_id
+              slot_id: $scope.events.placable.slot_id
             }
           }
           , function () { // success
@@ -595,7 +593,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                       }
                     },
                     function () { // cancel confirmed
-                      Slot.cancel({ id: $scope.slot.slot_id }, function () { // successfully canceled
+                      SlotsReservation.cancel({ id: $scope.slot.slots_reservations_ids[0] }, function () { // successfully canceled
                         growl.success(_t('app.shared.cart.reservation_was_cancelled_successfully'));
                         if (typeof $scope.onSlotCancelSuccess === 'function') { return $scope.onSlotCancelSuccess(); }
                       }

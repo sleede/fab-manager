@@ -1,16 +1,17 @@
 # frozen_string_literal: true
 
-json.array!(@reservation_slots) do |slot|
-  json.slot_id slot.id
-  json.start_at slot.start_at.iso8601
-  json.end_at slot.end_at.iso8601
-  json.message slot.reservation.message
-  json.reservable slot.reservation.reservable
-  json.reservable_id slot.reservation.reservable_id
-  json.reservable_type slot.reservation.reservable_type
+json.array!(@slots_reservations) do |sr|
+  json.id sr.id
+  json.slot_id sr.slot_id
+  json.start_at sr.slot.start_at.iso8601
+  json.end_at sr.slot.end_at.iso8601
+  json.message sr.reservation.message
+  json.reservable sr.reservation.reservable
+  json.reservable_id sr.reservation.reservable_id
+  json.reservable_type sr.reservation.reservable_type
   json.user do
-    json.id slot.reservation.statistic_profile&.user_id
-    json.name slot.reservation.statistic_profile&.user&.profile&.full_name
+    json.id sr.reservation.statistic_profile&.user_id
+    json.name sr.reservation.statistic_profile&.user&.profile&.full_name
   end
-  json.canceled_at slot.canceled_at
+  json.canceled_at sr.canceled_at
 end

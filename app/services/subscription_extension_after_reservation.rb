@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# Extend the user's current subscription after his first training reservation if
+# he subscribed to a rolling plan
 class SubscriptionExtensionAfterReservation
   attr_accessor :user, :reservation
 

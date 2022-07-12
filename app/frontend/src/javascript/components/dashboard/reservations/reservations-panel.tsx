@@ -1,6 +1,6 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import { FabPanel } from '../../base/fab-panel';
-import { Reservation, ReservationSlot } from '../../../models/reservation';
+import { Reservation, SlotsReservation } from '../../../models/reservation';
 import ReservationAPI from '../../../api/reservation';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
@@ -38,16 +38,16 @@ const ReservationsPanel: React.FC<SpaceReservationsProps> = ({ userId, onError, 
    */
   const reservationsByDate = (state: 'past' | 'futur'): Array<Reservation> => {
     return reservations.filter(r => {
-      return !!r.slots_attributes.find(s => filterSlot(s, state));
+      return !!r.slots_reservations_attributes.find(s => filterSlot(s, state));
     });
   };
 
   /**
-   * Check if the given slot if past of futur
+   * Check if the given slot reservation if past of futur
    */
-  const filterSlot = (slot: ReservationSlot, state: 'past' | 'futur'): boolean => {
-    return (state === 'past' && moment(slot.start_at).isBefore()) ||
-      (state === 'futur' && moment(slot.start_at).isAfter());
+  const filterSlot = (sr: SlotsReservation, state: 'past' | 'futur'): boolean => {
+    return (state === 'past' && moment(sr.slot_attributes.start_at).isBefore()) ||
+      (state === 'futur' && moment(sr.slot_attributes.start_at).isAfter());
   };
 
   /**
@@ -95,12 +95,12 @@ const ReservationsPanel: React.FC<SpaceReservationsProps> = ({ userId, onError, 
     return (
       <li key={reservation.id} className="reservation">
         <a className={`reservation-title ${details[reservation.id] ? 'clicked' : ''}`} onClick={toggleDetails(reservation.id)}>
-          {reservation.reservable.name} - {FormatLib.date(reservation.slots_attributes[0].start_at)}
+          {reservation.reservable.name} - {FormatLib.date(reservation.slots_reservations_attributes[0].slot_attributes.start_at)}
         </a>
         {details[reservation.id] && <FabPopover title={t('app.logged.dashboard.reservations.reservations_panel.slots_details')}>
-          {reservation.slots_attributes.filter(s => filterSlot(s, state)).map(
-            slot => <span key={slot.id} className="slot-details">
-              {FormatLib.date(slot.start_at)}, {FormatLib.time(slot.start_at)} - {FormatLib.time(slot.end_at)}
+          {reservation.slots_reservations_attributes.filter(s => filterSlot(s, state)).map(
+            slotReservation => <span key={slotReservation.id} className="slot-details">
+              {FormatLib.date(slotReservation.slot_attributes.start_at)}, {FormatLib.time(slotReservation.slot_attributes.start_at)} - {FormatLib.time(slotReservation.slot_attributes.end_at)}
             </span>
           )}
         </FabPopover>}
@@ -109,7 +109,7 @@ const ReservationsPanel: React.FC<SpaceReservationsProps> = ({ userId, onError, 
   };
 
   const futur = reservationsByDate('futur');
-  const past = _.orderBy(reservationsByDate('past'), r => r.slots_attributes[0].start_at, 'desc');
+  const past = _.orderBy(reservationsByDate('past'), r => r.slots_reservations_attributes[0].slot_attributes.start_at, 'desc');
 
   return (
     <FabPanel className="reservations-panel" header={header()}>

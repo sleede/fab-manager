@@ -16,23 +16,23 @@ class Availabilities::AvailabilitiesService
   def machines(machine, user, window)
     availabilities = availabilities(machine.availabilities, 'machines', user, window[:start], window[:end])
 
-    availabilities.map(&:slots).flatten.map { |s| @service.slot_reserved_status(s, user, machine) }
+    availabilities.map(&:slots).flatten.map { |s| @service.slot_reserved_status(s, user, [machine]) }
   end
 
   # list all slots for the given space, with visibility relative to the given user
   def spaces(space, user, window)
     availabilities = availabilities(space.availabilities, 'space', user, window[:start], window[:end])
 
-    availabilities.map(&:slots).flatten.map { |s| @service.slot_reserved_status(s, user, space) }
+    availabilities.map(&:slots).flatten.map { |s| @service.slot_reserved_status(s, user, [space]) }
   end
 
-  # list all slots for the given training, with visibility relative to the given user
+  # list all slots for the given training(s), with visibility relative to the given user
   def trainings(trainings, user, window)
     tr_availabilities = Availability.includes('trainings_availabilities')
                                     .where('trainings_availabilities.training_id': trainings.map(&:id))
     availabilities = availabilities(tr_availabilities, 'training', user, window[:start], window[:end])
 
-    availabilities.map(&:slots).flatten.map { |s| @service.slot_reserved_status(s, user, trainings) }
+    availabilities.map(&:slots).flatten.map { |s| @service.slot_reserved_status(s, user, s.availability.trainings) }
   end
 
   private

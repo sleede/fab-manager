@@ -17,3 +17,11 @@ json.tags slot.availability.tags do |t|
   json.name t.name
 end
 json.plan_ids slot.availability.plan_ids
+
+# the users who booked on this slot, if any
+if (%w[admin manager].include? operator_role) && !slot.slots_reservations.empty?
+  json.users slot.slots_reservations do |sr|
+    json.id sr.reservation.user&.id
+    json.name sr.reservation.user&.profile&.full_name
+  end
+end
