@@ -27,4 +27,9 @@ export default class ProductCategoryAPI {
     const res: AxiosResponse<void> = await apiClient.delete(`/api/product_categories/${productCategoryId}`);
     return res?.data;
   }
+
+  static async updatePosition (productCategory: ProductCategory, position: number): Promise<ProductCategory> {
+    const res: AxiosResponse<ProductCategory> = await apiClient.patch(`/api/product_categories/${productCategory.id}/position`, { position });
+    return res?.data;
+  }
 }

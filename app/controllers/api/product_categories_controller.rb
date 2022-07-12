@@ -4,7 +4,7 @@
 # ProductCategorys are used to group products
 class API::ProductCategoriesController < API::ApiController
   before_action :authenticate_user!, except: :index
-  before_action :set_product_category, only: %i[show update destroy]
+  before_action :set_product_category, only: %i[show update destroy position]
 
   def index
     @product_categories = ProductCategoryService.list
@@ -32,6 +32,16 @@ class API::ProductCategoriesController < API::ApiController
     end
   end
 
+  def position
+    authorize @product_category
+
+    if @product_category.insert_at(params[:position])
+      render :show
+    else
+      render json: @product_category.errors.full_messages, status: :unprocessable_entity
+    end
+  end
+
   def destroy
     authorize @product_category
     ProductCategoryService.destroy(@product_category)
@@ -45,6 +55,6 @@ class API::ProductCategoriesController < API::ApiController
   end
 
   def product_category_params
-    params.require(:product_category).permit(:name, :parent_id, :slug, :position)
+    params.require(:product_category).permit(:name, :parent_id, :slug)
   end
 end

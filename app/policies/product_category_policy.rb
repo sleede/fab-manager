@@ -13,4 +13,8 @@ class ProductCategoryPolicy < ApplicationPolicy
   def destroy?
     user.admin?
   end
+
+  def position?
+    user.admin?
+  end
 end
