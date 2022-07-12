@@ -150,7 +150,9 @@ Rails.application.routes.draw do
 
     resources :profile_custom_fields
 
-    resources :product_categories
+    resources :product_categories do
+      patch 'position', on: :member
+    end
 
     # for admin
     resources :trainings do
