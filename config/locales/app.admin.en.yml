@@ -1894,17 +1894,18 @@ en:
             title: "Documentation"
             content: "Click here to access the API online documentation."
       store:
-        manage_the_store: "Manage the Store Fablab"
+        manage_the_store: "Manage the Store"
         settings: "Settings"
         all_products: "All products"
-        categories_of_store: "Categories of store"
+        categories_of_store: "Store's categories"
         the_orders: "Orders"
         product_categories:
-          create_a_product_category: "Create a category"
-          the_categories: "Categories"
+          title: "Categories"
           info: "<strong>Information:</strong></br>Find below all the categories created. The categories are arranged on two levels maximum, you can arrange them with a drag and drop. The order of the categories will be identical on the public view and the list below. Please note that you can delete a category or a sub-category even if they are associated with products. The latter will be left without categories. If you delete a category that contains sub-categories, the latter will also be deleted. <strong>Make sure that your categories are well arranged and save your choice.</strong>"
-          successfully_deleted: "The category has been successfully deleted"
-          unable_to_delete: "Unable to delete the category: "
+        manage_product_category:
+          create: "Create a product category"
+          update: "Modify the product category"
+          delete: "Delete the product category"
         product_category_modal:
           successfully_created: "The new category has been created."
           unable_to_create: "Unable to create the category: "
@@ -1912,8 +1913,12 @@ en:
           unable_to_update: "Unable to modify the category: "
           new_product_category: "Create a category"
           edit_product_category: "Modify a category"
-          save: "Save"
         product_category_form:
           name: "Name of category"
           slug: "Name of URL"
           select_parent_product_category: "Choose a parent category (N1)"
+          delete:
+            confirm: "Do you really want to delete this product category?"
+            error: "Unable to delete the category: "
+            success: "The category has been successfully deleted"
+          save: "Save"

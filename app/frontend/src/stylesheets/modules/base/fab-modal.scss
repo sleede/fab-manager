@@ -81,6 +81,12 @@
       position: relative;
       padding: 15px;
 
+      .subtitle {
+        margin-bottom: 3.2rem;
+        @include title-base;
+        color: var(--gray-hard-darkest);
+      }
+
       form {
         display: flex;
         flex-direction: column;

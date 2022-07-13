@@ -1,37 +1,38 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import Select from 'react-select';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import slugify from 'slugify';
-import { FabInput } from '../base/fab-input';
+import { FormInput } from '../form/form-input';
+import { FormSelect } from '../form/form-select';
 import { ProductCategory } from '../../models/product-category';
+import { FabButton } from '../base/fab-button';
+import { FabAlert } from '../base/fab-alert';
+import ProductCategoryAPI from '../../api/product-category';
 
 interface ProductCategoryFormProps {
+  action: 'create' | 'update' | 'delete',
   productCategories: Array<ProductCategory>,
   productCategory?: ProductCategory,
-  onChange: (field: string, value: string | number) => void,
+  onSuccess: (message: string) => void,
+  onError: (message: string) => void,
 }
 
 /**
  * Option format, expected by react-select
  * @see https://github.com/JedWatson/react-select
  */
-type selectOption = { value: number, label: string };
+ type selectOption = { value: number, label: string };
 
 /**
- * Form to set create/edit supporting documents type
+ * Form to create/edit/delete a product category
  */
-export const ProductCategoryForm: React.FC<ProductCategoryFormProps> = ({ productCategories, productCategory, onChange }) => {
+export const ProductCategoryForm: React.FC<ProductCategoryFormProps> = ({ action, productCategories, productCategory, onSuccess, onError }) => {
   const { t } = useTranslation('admin');
+
+  const { register, watch, setValue, control, handleSubmit } = useForm<ProductCategory>({ defaultValues: { ...productCategory } });
 
   // filter all first level product categorie
   const parents = productCategories.filter(c => !c.parent_id);
-
-  const [slug, setSlug] = useState<string>(productCategory?.slug || '');
-
-  /**
-   * Return the default first level product category, formatted to match the react-select format
-   */
-  const defaultValue = { value: productCategory?.parent_id, label: productCategory?.name };
 
   /**
    * Convert all parents to the react-select format
@@ -42,58 +43,63 @@ export const ProductCategoryForm: React.FC<ProductCategoryFormProps> = ({ produc
     });
   };
 
-  /**
-   * Callback triggered when the selection of parent product category has changed.
-   */
-  const handleCategoryParentChange = (option: selectOption): void => {
-    onChange('parent_id', option.value);
-  };
+  // Create slug from category's name
+  useEffect(() => {
+    const subscription = watch((value, { name }) => {
+      if (name === 'name') {
+        const _slug = slugify(value.name, { lower: true });
+        setValue('slug', _slug);
+      }
+    });
+    return () => subscription.unsubscribe();
+  }, [watch]);
 
-  /**
-   * Callback triggered when the name has changed.
-   */
-  const handleNameChange = (value: string): void => {
-    onChange('name', value);
-    const _slug = slugify(value, { lower: true });
-    setSlug(_slug);
-    onChange('slug', _slug);
-  };
-
-  /**
-   * Callback triggered when the slug has changed.
-   */
-  const handleSlugChange = (value: string): void => {
-    onChange('slug', value);
+  // Form submit
+  const onSubmit: SubmitHandler<ProductCategory> = (category: ProductCategory) => {
+    switch (action) {
+      case 'create':
+        console.log('create:', category);
+        break;
+      case 'update':
+        console.log('update:', category);
+        break;
+      case 'delete':
+        ProductCategoryAPI.destroy(category.id).then(() => {
+          onSuccess(t('app.admin.store.product_category_form.delete.success'));
+        }).catch((error) => {
+          onError(t('app.admin.store.product_category_form.delete.error') + error);
+        });
+        break;
+    }
   };
 
   return (
-    <div className="product-category-form">
-      <form name="productCategoryForm">
-        <div className="field">
-          <FabInput id="product_category_name"
-            icon={<i className="fa fa-edit" />}
-            defaultValue={productCategory?.name || ''}
-            placeholder={t('app.admin.store.product_category_form.name')}
-            onChange={handleNameChange}
-            debounce={200}
-            required/>
-        </div>
-        <div className="field">
-          <FabInput id="product_category_slug"
-            icon={<i className="fa fa-edit" />}
-            defaultValue={slug}
-            placeholder={t('app.admin.store.product_category_form.slug')}
-            onChange={handleSlugChange}
-            debounce={200}
-            required/>
-        </div>
-        <div className="field">
-          <Select defaultValue={defaultValue}
-            placeholder={t('app.admin.store.product_category_form.select_parent_product_category')}
-            onChange={handleCategoryParentChange}
-            options={buildOptions()} />
-        </div>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit(onSubmit)} name="productCategoryForm" className="product-category-form">
+      { action === 'delete'
+        ? <>
+            <FabAlert level='danger'>
+              {t('app.admin.store.product_category_form.delete.confirm')}
+            </FabAlert>
+            <FabButton type='submit'>{t('app.admin.store.product_category_form.save')}</FabButton>
+          </>
+        : <>
+            <FormInput id='name'
+                  register={register}
+                  rules={{ required: 'true' }}
+                  label={t('app.admin.store.product_category_form.name')}
+                  defaultValue={productCategory?.name || ''} />
+            <FormInput id='slug'
+                      register={register}
+                      rules={{ required: 'true' }}
+                      label={t('app.admin.store.product_category_form.slug')}
+                      defaultValue={productCategory?.slug} />
+            <FormSelect id='parent_id'
+                    control={control}
+                    options={buildOptions()}
+                    label={t('app.admin.store.product_category_form.select_parent_product_category')} />
+            <FabButton type='submit'>{t('app.admin.store.product_category_form.save')}</FabButton>
+          </>
+      }
+    </form>
   );
 };

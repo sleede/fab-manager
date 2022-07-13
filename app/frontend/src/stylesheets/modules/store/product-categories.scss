@@ -1,0 +1,97 @@
+@mixin btn {
+  width: 4rem;
+  height: 4rem;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  background: none;
+  border: none;
+  &:active {
+    color: currentColor;
+    box-shadow: none;
+  }
+}
+
+.product-categories {
+  max-width: 1300px;
+  margin: 0 auto;
+
+  header {
+    padding: 2.4rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    h2 {
+      margin: 0;
+      @include title-lg;
+      color: var(--gray-hard-darkest);
+    }
+  }
+
+  .create-button {
+    background-color: var(--gray-hard-darkest);
+    border-color: var(--gray-hard-darkest);
+    color: var(--gray-soft-lightest);
+    &:hover {
+      background-color: var(--gray-hard-light);
+      border-color: var(--gray-hard-light);
+    }
+  }
+
+  &-list {
+    & > *:not(:last-of-type) {
+      margin-bottom: 1.6rem;
+    }
+  }
+  &-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 1.6rem;
+    border: 1px solid var(--gray-soft-dark);
+    border-radius: var(--border-radius);
+
+    .itemInfo {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      &-name {
+        margin: 0;
+        @include text-base;
+        font-weight: 600;
+        color: var(--gray-hard-darkest);
+      }
+      &-count {
+        margin-left: 2.4rem;
+        @include text-sm;
+        font-weight: 500;
+        color: var(--information);
+      }
+    }
+
+    .action {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      .manage {
+        overflow: hidden;
+        display: flex;
+        border-radius: var(--border-radius);
+        button {
+          @include btn;
+          border-radius: 0;
+          color: var(--gray-soft-lightest);
+          &:hover { opacity: 0.75; }
+        }
+        .edit-button {background: var(--gray-hard-darkest) }
+        .delete-button {background: var(--error) }
+      }
+    }
+
+    .draghandle {
+      @include btn;
+      cursor: grab;
+    }
+  }
+}
