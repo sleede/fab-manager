@@ -441,7 +441,7 @@ slot_61:
 
 slot_62:
   id: 62
-  start_at:<%= 10.days.from_now.utc.change({hour: 16}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= 10.days.from_now.utc.change({hour: 16}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
   end_at: <%= 10.days.from_now.utc.change({hour: 17}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
   created_at: '2022-07-12 15:18:43.968371'
   updated_at: '2022-07-12 15:18:43.968371'
