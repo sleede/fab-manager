@@ -1926,3 +1926,8 @@ fr:
           save: "Enregistrer"
           required: "This field is required"
           slug_pattern: "Only lowercase alphanumeric groups of characters separated by an hyphen"
+        products:
+          all_products: "Tous les produits"
+          create_a_product: "Créer un produit"
+          successfully_deleted: "Le produit a bien été supprimé"
+          unable_to_delete: "Impossible de supprimer le produit: "

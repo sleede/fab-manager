@@ -4,9 +4,35 @@
 */
 'use strict';
 
-Application.Controllers.controller('AdminStoreController', ['$scope', 'CSRF', 'growl',
-  function ($scope, CSRF, growl) {
+Application.Controllers.controller('AdminStoreController', ['$scope', 'CSRF', 'growl', '$state',
+  function ($scope, CSRF, growl, $state) {
+    /* PRIVATE SCOPE */
+    // Map of tab state and index
+    const TABS = {
+      'app.admin.store.settings': 0,
+      'app.admin.store.products': 1,
+      'app.admin.store.categories': 2,
+      'app.admin.store.orders': 3
+    };
+
     /* PUBLIC SCOPE */
+    // default tab: products
+    $scope.tabs = {
+      active: TABS[$state.current.name]
+    };
+
+    /**
+     * Callback triggered in click tab
+     */
+    $scope.selectTab = () => {
+      setTimeout(function () {
+        const currentTab = _.keys(TABS)[$scope.tabs.active];
+        if (currentTab !== $state.current.name) {
+          $state.go(currentTab, { location: true, notify: false, reload: false });
+        }
+      });
+    };
+
     /**
      * Callback triggered in case of error
      */

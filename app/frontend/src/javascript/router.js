@@ -1105,6 +1105,7 @@ angular.module('application.router', ['ui.router'])
       })
 
       .state('app.admin.store', {
+        abstract: true,
         url: '/admin/store',
         views: {
           'main@': {
@@ -1112,6 +1113,22 @@ angular.module('application.router', ['ui.router'])
             controller: 'AdminStoreController'
           }
         }
+      })
+
+      .state('app.admin.store.settings', {
+        url: '/settings'
+      })
+
+      .state('app.admin.store.products', {
+        url: '/products'
+      })
+
+      .state('app.admin.store.categories', {
+        url: '/categories'
+      })
+
+      .state('app.admin.store.orders', {
+        url: '/orders'
       })
 
       // OpenAPI Clients
