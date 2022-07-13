@@ -84,7 +84,7 @@ Application.Controllers.controller('MainNavController', ['$scope', 'settingsProm
       authorizedRoles: ['admin', 'manager']
     },
     {
-      state: 'app.admin.store',
+      state: 'app.admin.store.products',
       linkText: 'app.public.common.manage_the_store',
       linkIcon: 'cart-plus',
       authorizedRoles: ['admin', 'manager']
