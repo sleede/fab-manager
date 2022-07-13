@@ -94,16 +94,16 @@ module UsersCredits
         super
 
         will_use_credits, free_hours_count, machine_credit = _will_use_credits?
-        if will_use_credits
-          users_credit = user.users_credits.find_or_initialize_by(credit_id: machine_credit.id)
+        return unless  will_use_credits
 
-          if users_credit.new_record?
-            users_credit.hours_used = free_hours_count
-          else
-            users_credit.hours_used += free_hours_count
-          end
-          users_credit.save!
+        users_credit = user.users_credits.find_or_initialize_by(credit_id: machine_credit.id)
+
+        if users_credit.new_record?
+          users_credit.hours_used = free_hours_count
+        else
+          users_credit.hours_used += free_hours_count
         end
+        users_credit.save!
       end
 
       private
@@ -111,19 +111,16 @@ module UsersCredits
       def _will_use_credits?
         return false, 0 unless plan
 
-        if machine_credit = plan.machine_credits.find_by(creditable_id: reservation.reservable_id)
+        machine_credit = plan.machine_credits.find_by(creditable_id: reservation.reservable_id)
+        if machine_credit
           users_credit = user.users_credits.find_by(credit_id: machine_credit.id)
           already_used_hours = users_credit ? users_credit.hours_used : 0
 
           remaining_hours = machine_credit.hours - already_used_hours
 
-          free_hours_count = [remaining_hours, reservation.slots.size].min
+          free_hours_count = [remaining_hours, reservation.slots_reservations.size].min
 
-          if free_hours_count.positive?
-            return true, free_hours_count, machine_credit
-          else
-            return false, free_hours_count, machine_credit
-          end
+          return free_hours_count&.positive?, free_hours_count, machine_credit
         end
         [false, 0]
       end
@@ -138,9 +135,8 @@ module UsersCredits
       def update_credits
         super
         will_use_credits, training_credit = _will_use_credits?
-        if will_use_credits
-          user.credits << training_credit # we create a new UsersCredit object
-        end
+
+        user.credits << training_credit if will_use_credits # we create a new UsersCredit object
       end
 
       private
@@ -149,11 +145,10 @@ module UsersCredits
         return false, nil unless plan
 
         # if there is a training_credit defined for this plan and this training
-        if training_credit = plan.training_credits.find_by(creditable_id: reservation.reservable_id)
+        training_credit = plan.training_credits.find_by(creditable_id: reservation.reservable_id)
+        if training_credit
           # if user has not used all the plan credits
-          if user.training_credits.where(plan: plan).count < plan.training_credit_nb
-            return true, training_credit
-          end
+          return true, training_credit if user.training_credits.where(plan: plan).count < plan.training_credit_nb
         end
         [false, nil]
       end
@@ -200,19 +195,16 @@ module UsersCredits
       def _will_use_credits?
         return false, 0 unless plan
 
-        if space_credit = plan.space_credits.find_by(creditable_id: reservation.reservable_id)
+        space_credit = plan.space_credits.find_by(creditable_id: reservation.reservable_id)
+        if space_credit
           users_credit = user.users_credits.find_by(credit_id: space_credit.id)
           already_used_hours = users_credit ? users_credit.hours_used : 0
 
           remaining_hours = space_credit.hours - already_used_hours
 
-          free_hours_count = [remaining_hours, reservation.slots.size].min
+          free_hours_count = [remaining_hours, reservation.slots_reservations.size].min
 
-          if free_hours_count.positive?
-            return true, free_hours_count, space_credit
-          else
-            return false, free_hours_count, space_credit
-          end
+          return free_hours_count&.positive?, free_hours_count, space_credit
         end
         [false, 0]
       end

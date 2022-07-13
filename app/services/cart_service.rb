@@ -28,7 +28,9 @@ class CartService
     end
 
     coupon = CartItem::Coupon.new(@customer, @operator, cart_items[:coupon_code])
-    schedule = CartItem::PaymentSchedule.new(plan_info[:plan], coupon, cart_items[:payment_schedule], @customer, plan_info[:subscription]&.start_at)
+    schedule = CartItem::PaymentSchedule.new(
+      plan_info[:plan], coupon, cart_items[:payment_schedule], @customer, plan_info[:subscription]&.start_at
+    )
 
     ShoppingCart.new(
       @customer,
@@ -108,28 +110,28 @@ class CartService
       CartItem::MachineReservation.new(@customer,
                                        @operator,
                                        reservable,
-                                       cart_item[:slots_attributes],
+                                       cart_item[:slots_reservations_attributes],
                                        plan: plan_info[:plan],
                                        new_subscription: plan_info[:new_subscription])
     when Training
       CartItem::TrainingReservation.new(@customer,
                                         @operator,
                                         reservable,
-                                        cart_item[:slots_attributes],
+                                        cart_item[:slots_reservations_attributes],
                                         plan: plan_info[:plan],
                                         new_subscription: plan_info[:new_subscription])
     when Event
       CartItem::EventReservation.new(@customer,
                                      @operator,
                                      reservable,
-                                     cart_item[:slots_attributes],
+                                     cart_item[:slots_reservations_attributes],
                                      normal_tickets: cart_item[:nb_reserve_places],
                                      other_tickets: cart_item[:tickets_attributes])
     when Space
       CartItem::SpaceReservation.new(@customer,
                                      @operator,
                                      reservable,
-                                     cart_item[:slots_attributes],
+                                     cart_item[:slots_reservations_attributes],
                                      plan: plan_info[:plan],
                                      new_subscription: plan_info[:new_subscription])
     else
@@ -145,28 +147,28 @@ class CartService
       CartItem::MachineReservation.new(@customer,
                                        @operator,
                                        reservable,
-                                       object.reservation.slots,
+                                       object.reservation.slots_reservations,
                                        plan: plan,
                                        new_subscription: true)
     when Training
       CartItem::TrainingReservation.new(@customer,
                                         @operator,
                                         reservable,
-                                        object.reservation.slots,
+                                        object.reservation.slots_reservations,
                                         plan: plan,
                                         new_subscription: true)
     when Event
       CartItem::EventReservation.new(@customer,
                                      @operator,
                                      reservable,
-                                     object.reservation.slots,
+                                     object.reservation.slots_reservations,
                                      normal_tickets: object.reservation.nb_reserve_places,
                                      other_tickets: object.reservation.tickets)
     when Space
       CartItem::SpaceReservation.new(@customer,
                                      @operator,
                                      reservable,
-                                     object.reservation.slots,
+                                     object.reservation.slots_reservations,
                                      plan: plan,
                                      new_subscription: true)
     else

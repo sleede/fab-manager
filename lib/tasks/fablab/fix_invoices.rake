@@ -50,7 +50,7 @@ namespace :fablab do
             reservation = ::Reservation.create!(
               reservable_id: reservable.id,
               reservable_type: reservable.class.name,
-              slots_attributes: slots_attributes(invoice, reservable),
+              slots_reservations_attributes: slots_reservations_attributes(invoice, reservable),
               statistic_profile_id: StatisticProfile.find_by(user: invoice.user).id
             )
             invoice.update_attributes(invoiced: reservation)
@@ -118,12 +118,12 @@ namespace :fablab do
     availability
   end
 
-  def slots_attributes(invoice, reservable)
-    find_slots(invoice).map do |slot|
+  def slots_reservations_attributes(invoice, reservable)
+    find_slots(invoice).map do |slot_dates|
+      availability = find_availability(reservable, slot_dates)
+      slot = Slot.find_by(start_at: slot_dates[0], end_at: slot_dates[1], availability_id: availability&.id)
       {
-        start_at: slot[0],
-        end_at: slot[1],
-        availability_id: find_availability(reservable, slot)&.id,
+        slot_id: slot&.id,
         offered: invoice.total.zero?
       }
     end

@@ -36,7 +36,7 @@ class CartItem::TrainingReservation < CartItem::Reservation
     ::Reservation.new(
       reservable_id: @reservable.id,
       reservable_type: Training.name,
-      slots_attributes: slots_params,
+      slots_reservations_attributes: slots_params,
       statistic_profile_id: StatisticProfile.find_by(user: @customer).id
     )
   end

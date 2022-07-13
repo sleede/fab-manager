@@ -74,11 +74,9 @@ class Events::AsAdminTest < ActionDispatch::IntegrationTest
                  reservable_id: e.id,
                  reservable_type: 'Event',
                  nb_reserve_places: 2,
-                 slots_attributes: [
+                 slots_reservations_attributes: [
                    {
-                     start_at: e.availability.start_at,
-                     end_at: e.availability.end_at,
-                     availability_id: e.availability.id,
+                     slot_id: e.availability.slots.first.id,
                      offered: false
                    }
                  ]
@@ -158,7 +156,7 @@ class Events::AsAdminTest < ActionDispatch::IntegrationTest
     assert_not_nil e, 'Event was not created in database'
 
     # Check the places numbers were set successfully
-    e = Event.where(id: event[:id]).first
+    e = Event.find(event[:id])
     assert_equal 10, e.nb_total_places, 'Total number of places was not updated'
     assert_equal 10, e.nb_free_places, 'Number of free places was not updated'
 
@@ -172,11 +170,9 @@ class Events::AsAdminTest < ActionDispatch::IntegrationTest
                  reservable_id: e.id,
                  reservable_type: 'Event',
                  nb_reserve_places: 4,
-                 slots_attributes: [
+                 slots_reservations_attributes: [
                    {
-                     start_at: e.availability.start_at,
-                     end_at: e.availability.end_at,
-                     availability_id: e.availability.id,
+                     slot_id: e.availability.slots.first.id,
                      offered: false
                    }
                  ],

@@ -9,7 +9,12 @@ class Availabilities::AsUserTest < ActionDispatch::IntegrationTest
   test 'get machine availabilities as user' do
     m = Machine.find_by(slug: 'decoupeuse-vinyle')
 
-    get "/api/availabilities/machines/#{m.id}"
+    # this simulates a fullCalendar (v2) call
+    start_date = DateTime.current.utc.strftime('%Y-%m-%d')
+    end_date = 7.days.from_now.utc.strftime('%Y-%m-%d')
+    tz = Time.zone.tzinfo.name
+
+    get "/api/availabilities/machines/#{m.id}?start=#{start_date}&end=#{end_date}&timezone=#{tz}&_=1800145267413"
 
     # Check response format & status
     assert_equal 200, response.status

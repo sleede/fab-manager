@@ -26,7 +26,7 @@ class SubscriptionExtensionAfterReservation
 
   def extend_subscription
     user.subscription.update_columns(
-      expiration_date: reservation.slots.first.start_at + user.subscribed_plan.duration
+      expiration_date: reservation.slots_reservations.first.slot.start_at + user.subscribed_plan.duration
     )
   end
 end

@@ -55,13 +55,9 @@ class ShoppingCart
         list = user_validation_required_list.split(',')
         errors = []
         items.each do |item|
-          if list.include?(item.type) && !@customer.validated_at?
-            errors.push("User validation is required for reserve #{item.type}")
-          end
+          errors.push("User validation is required to reserve #{item.type}") if list.include?(item.type) && !@customer.validated_at?
         end
-        unless errors.empty?
-          return { success: nil, payment: nil, errors: errors }
-        end
+        return { success: nil, payment: nil, errors: errors } unless errors.empty?
       end
     end
 

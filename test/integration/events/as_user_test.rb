@@ -10,7 +10,7 @@ class Events::AsUserTest < ActionDispatch::IntegrationTest
     login_as(vlonchamp, scope: :user)
 
     radio = Event.find(4)
-    availability = radio.availability
+    slot = radio.availability.slots.first
 
     reservations_count = Reservation.count
     invoice_count = Invoice.count
@@ -35,11 +35,9 @@ class Events::AsUserTest < ActionDispatch::IntegrationTest
                      reservable_id: radio.id,
                      reservable_type: 'Event',
                      nb_reserve_places: 2,
-                     slots_attributes: [
+                     slots_reservations_attributes: [
                        {
-                         start_at: availability.start_at,
-                         end_at: availability.end_at,
-                         availability_id: availability.id,
+                         slot_id: slot.id,
                          offered: false
                        }
                      ],

@@ -705,20 +705,18 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
         /**
          * Create a hash map implementing the Reservation specs
          * @param slots {Array<Object>} Array of fullCalendar events: slots selected on the calendar
-         * @return {{reservation: {reservable_type: string, reservable_id: string, slots_attributes: []}}}
+         * @return {{reservation: Reservation}}
          */
         const mkReservation = function (slots) {
           const reservation = {
             reservable_id: $scope.reservableId,
             reservable_type: $scope.reservableType,
-            slots_attributes: []
+            slots_reservations_attributes: []
           };
           angular.forEach(slots, function (slot) {
-            reservation.slots_attributes.push({
-              start_at: slot.start,
-              end_at: slot.end,
-              availability_id: slot.availability_id,
-              offered: slot.offered || false
+            reservation.slots_reservations_attributes.push({
+              offered: slot.offered || false,
+              slot_id: slot.slot_id
             });
           });
 
@@ -728,7 +726,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
         /**
          * Create a hash map implementing the Subscription specs
          * @param planId {number}
-         * @return {{subscription: {plan_id: number}}}
+         * @return {{subscription: SubscriptionRequest}}
          */
         const mkSubscription = function (planId) {
           return {
@@ -740,7 +738,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
 
         /**
          * Build the ShoppingCart object, from the current reservation
-         * @param items {Array<{reservation:{reservable_type: string, reservable_id: string, slots_attributes: []}}|{subscription: {plan_id: number}}>}
+         * @param items {Array<CartItem>}
          * @param paymentMethod {string}
          * @return {ShoppingCart}
          */

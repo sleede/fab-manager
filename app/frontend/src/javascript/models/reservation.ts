@@ -7,11 +7,12 @@ export interface SlotsReservation {
   id?: number,
   canceled_at?: TDateISO,
   offered?: boolean,
+  slot_id?: number,
   slot_attributes?: {
-    id?: number,
-    start_at?: TDateISO,
-    end_at?: TDateISO,
-    availability_id?: number
+    id: number,
+    start_at: TDateISO,
+    end_at: TDateISO,
+    availability_id: number
   }
 }
 // TODO, refactor Reservation for cart_items (in payment) => should use slot_id instead of (start_at + end_at)

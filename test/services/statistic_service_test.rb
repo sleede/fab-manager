@@ -15,7 +15,7 @@ class StatisticServiceTest < ActiveSupport::TestCase
 
     # Create a reservation to generate an invoice
     machine = Machine.find(1)
-    availability = Availability.find(19)
+    slot = Availability.find(19).slots.first
     post '/api/local_payment/confirm_payment', params: {
       customer_id: @user.id,
       items: [
@@ -23,11 +23,9 @@ class StatisticServiceTest < ActiveSupport::TestCase
           reservation: {
             reservable_id: machine.id,
             reservable_type: machine.class.name,
-            slots_attributes: [
+            slots_reservations_attributes: [
               {
-                start_at: availability.start_at.to_s(:iso8601),
-                end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-                availability_id: availability.id
+                slot_id: slot.id
               }
             ]
           }

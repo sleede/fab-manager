@@ -12,7 +12,7 @@ class Reservation < ApplicationRecord
   has_many :slots_reservations, dependent: :destroy
   has_many :slots, through: :slots_reservations
 
-  accepts_nested_attributes_for :slots, allow_destroy: true
+  accepts_nested_attributes_for :slots_reservations, allow_destroy: true
   belongs_to :reservable, polymorphic: true
 
   has_many :tickets
@@ -101,7 +101,7 @@ class Reservation < ApplicationRecord
     slots_reservations.each do |slot|
       same_hour_slots = SlotsReservation.joins(:reservation).where(
         reservations: { reservable_type: reservable_type, reservable_id: reservable_id },
-        slot_id: slot_id,
+        slot_id: slot.slot_id,
         canceled_at: nil
       ).count
       if same_hour_slots.positive?

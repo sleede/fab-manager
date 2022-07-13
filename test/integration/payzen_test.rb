@@ -12,7 +12,7 @@ class PayzenTest < ActionDispatch::IntegrationTest
 
   test 'create payment with payzen' do
     training = Training.first
-    availability = training.availabilities.first
+    slot = training.availabilities.first.slots.first
     plan = Plan.find_by(group_id: @user.group.id, type: 'Plan')
 
     VCR.use_cassette('create_payzen_payment_token_success') do
@@ -25,11 +25,9 @@ class PayzenTest < ActionDispatch::IntegrationTest
                    reservation: {
                      reservable_id: training.id,
                      reservable_type: training.class.name,
-                     slots_attributes: [
+                     slots_reservations_attributes: [
                        {
-                         start_at: availability.start_at.to_s(:iso8601),
-                         end_at: availability.end_at.to_s(:iso8601),
-                         availability_id: availability.id
+                         slot_id: slot.id
                        }
                      ]
                    }
@@ -57,13 +55,13 @@ class PayzenTest < ActionDispatch::IntegrationTest
     require 'pay_zen/pci/charge'
 
     training = Training.first
-    availability = training.availabilities.first
+    slot = training.availabilities.first.slots.first
     plan = Plan.find_by(group_id: @user.group.id, type: 'Plan')
 
     reservations_count = Reservation.count
     availabilities_count = Availability.count
     invoices_count = Invoice.count
-    slots_count = Slot.count
+    slots_reservation_count = SlotsReservation.count
 
 
     cart_items = {
@@ -72,11 +70,9 @@ class PayzenTest < ActionDispatch::IntegrationTest
           reservation: {
             reservable_id: training.id,
             reservable_type: training.class.name,
-            slots_attributes: [
+            slots_reservations_attributes: [
               {
-                start_at: availability.start_at.to_s(:iso8601),
-                end_at: availability.end_at.to_s(:iso8601),
-                availability_id: availability.id
+                slot_id: slot.id
               }
             ]
           }
@@ -138,7 +134,7 @@ class PayzenTest < ActionDispatch::IntegrationTest
 
     assert_equal reservations_count + 1, Reservation.count
     assert_equal invoices_count + 1, Invoice.count
-    assert_equal slots_count + 1, Slot.count
+    assert_equal slots_reservation_count + 1, SlotsReservation.count
     assert_equal availabilities_count, Availability.count
   end
 end

@@ -14,10 +14,16 @@ class SubscriptionExtensionAfterReservationTest < ActiveSupport::TestCase
 
     @user.reservations.destroy_all # ensure no reservations
 
-    @availability = @machine.availabilities.first
-    slot = Slot.new(start_at: @availability.start_at, end_at: @availability.end_at, availability_id: @availability.id)
-    @reservation_machine = Reservation.new(statistic_profile: @user.statistic_profile, reservable: @machine, slots: [slot])
-    @reservation_training = Reservation.new(statistic_profile: @user.statistic_profile, reservable: @training, slots: [slot])
+    @reservation_machine = Reservation.new(
+      statistic_profile: @user.statistic_profile,
+      reservable: @machine,
+      slots_reservations: [{ slot_id: @machine.availabilities.first.slots.first.id }]
+    )
+    @reservation_training = Reservation.new(
+      statistic_profile: @user.statistic_profile,
+      reservable: @training,
+      slots_reservations: [{ slot_id: @training.availabilities.first.slots.first.id }]
+    )
     @reservation_training.save!
   end
 

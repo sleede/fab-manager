@@ -360,7 +360,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
             reservation: {
               reservable_id: $scope.event.id,
               reservable_type: 'Event',
-              slots_attributes: [],
+              slots_reservations_attributes: [],
               nb_reserve_places: $scope.reserve.nbReservePlaces,
               tickets_attributes: []
             }
@@ -368,10 +368,8 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
         ]
       }
       // a single slot is used for events
-      cartItems.items[0].reservation.slots_attributes.push({
-        start_at: $scope.event.start_date,
-        end_at: $scope.event.end_date,
-        availability_id: $scope.event.availability.id
+      cartItems.items[0].reservation.slots_reservations_attributes.push({
+        slot_id: $scope.event.slot_id
       });
       // iterate over reservations per prices
       for (let price_id in $scope.reserve.tickets) {
@@ -405,7 +403,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
 
     /**
      * Callback to cancel a reservation
-     * @param reservation {{id:number, reservable_id:number, nb_reserve_places:number, slots_attributes:[{id: number, canceled_at: string}], total_booked_seats: number}}
+     * @param reservation {Reservation}
      */
     $scope.cancelReservation = function(reservation) {
       dialogs.confirm({
@@ -434,17 +432,17 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
 
     /**
      * Test if the provided reservation has been cancelled
-     * @param reservation {{slots_attributes: [{canceled_at: string}]}}
+     * @param reservation {Reservation}
      * @returns {boolean}
      */
     $scope.isCancelled = function(reservation) {
-      return !!(reservation.slots_attributes[0].canceled_at);
+      return !!(reservation.slots_reservations_attributes[0].canceled_at);
     }
 
     /**
      * Callback to alter an already booked reservation date. A modal window will be opened to allow the user to choose
      * a new date for his reservation (if any available)
-     * @param reservation {{id:number, reservable_id:number, nb_reserve_places:number}}
+     * @param reservation {Reservation}
      */
     $scope.modifyReservation = function (reservation) {
       const index = $scope.reservations.indexOf(reservation);
@@ -475,9 +473,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
                 return eventToPlace = e;
               }
             });
-            $scope.reservation.slots_reservations_attributes[0].start_at = eventToPlace.start_date;
-            $scope.reservation.slots_reservations_attributes[0].end_at = eventToPlace.end_date;
-            $scope.reservation.slots_reservations_attributes[0].availability_id = eventToPlace.availability_id;
+            $scope.reservation.slots_reservations_attributes[0].slot_id = eventToPlace.slot_id;
             $scope.attempting = true;
             Reservation.update({ id: reservation.id }, { reservation: $scope.reservation }, function (reservation) {
               $uibModalInstance.close(reservation);
@@ -514,10 +510,10 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
 
     /**
      * Checks if the provided reservation is able to be moved (date change)
-     * @param reservation {{slots_attributes:[], total_booked_seats:number}}
+     * @param reservation {Reservation}
      */
     $scope.reservationCanModify = function (reservation) {
-      const slotStart = moment(reservation.slots_attributes[0].start_at);
+      const slotStart = moment(reservation.slots_reservations_attributes[0].slot_attributes.start_at);
       const now = moment();
 
       let isAble = false;
@@ -529,10 +525,10 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
 
     /**
      * Checks if the provided reservation is able to be cancelled
-     * @param reservation {{slots_attributes:[]}}
+     * @param reservation {Reservation}
      */
     $scope.reservationCanCancel = function(reservation) {
-      const slotStart = moment(reservation.slots_attributes[0].start_at);
+      const slotStart = moment(reservation.slots_reservations_attributes[0].slot_attributes.start_at);
       const now = moment();
       return $scope.enableBookingCancel && slotStart.diff(now, "hours") >= $scope.cancelBookingDelay;
     };
@@ -653,22 +649,20 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
      * Create a hash map implementing the Reservation specs
      * @param reserve {Object} Reservation parameters (places...)
      * @param event {Object} Current event
-     * @return {{reservation: {reservable_id:number, reservable_type:string, slots_attributes:Array<Object>, nb_reserve_places:number}}}
+     * @return {{reservation: Reservation}}
      */
     const mkReservation = function (reserve, event) {
       const reservation = {
         reservable_id: event.id,
         reservable_type: 'Event',
-        slots_attributes: [],
+        slots_reservations_attributes: [],
         nb_reserve_places: reserve.nbReservePlaces,
         tickets_attributes: []
       };
 
-      reservation.slots_attributes.push({
-        start_at: event.start_date,
-        end_at: event.end_date,
-        availability_id: event.availability.id,
-        offered: event.offered || false
+      reservation.slots_reservations_attributes.push({
+        offered: event.offered || false,
+        slot_id: event.slot_id
       });
 
       for (let evt_px_cat of Array.from(event.prices)) {
