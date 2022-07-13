@@ -1,8 +1,4 @@
-rubocop:
-  stage: test
-  only:
-    - dev
-  image: sleede/rubocop-fm:latest
-  script:
-    - git diff --name-only master --diff-filter AMT | grep \\.rb$ | xargs bundle exec rubocop
-
+include:
+  - template: Code-Quality.gitlab-ci.yml
+  stages:
+    - test
