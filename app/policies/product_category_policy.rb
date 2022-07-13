@@ -3,18 +3,18 @@
 # Check the access policies for API::ProductCategoriesController
 class ProductCategoryPolicy < ApplicationPolicy
   def create?
-    user.admin?
+    user.privileged?
   end
 
   def update?
-    user.admin?
+    user.privileged?
   end
 
   def destroy?
-    user.admin?
+    user.privileged?
   end
 
   def position?
-    user.admin?
+    user.privileged?
   end
 end
