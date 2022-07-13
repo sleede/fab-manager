@@ -1,5 +1,7 @@
 rubocop:
-  stage: linting
+  stage: test
+  only:
+    - dev
   image: registry.gitlab.com/pipeline-components/rubocop:latest
   script:
     - git diff --name-only master --diff-filter AMT | grep \\.rb$ | xargs bundle exec rubocop
