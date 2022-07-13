@@ -1,47 +1,39 @@
 import React from 'react';
-import { FabButton } from '../base/fab-button';
 import { ProductCategory } from '../../models/product-category';
+import { DotsSixVertical } from 'phosphor-react';
+import { FabButton } from '../base/fab-button';
+import { ManageProductCategory } from './manage-product-category';
 
 interface ProductCategoriesListProps {
   productCategories: Array<ProductCategory>,
-  onEdit: (category: ProductCategory) => void,
-  onDelete: (categoryId: number) => void,
+  onSuccess: (message: string) => void,
+  onError: (message: string) => void,
 }
 
 /**
  * This component shows a Tree list of all Product's Categories
  */
-export const ProductCategoriesList: React.FC<ProductCategoriesListProps> = ({ productCategories, onEdit, onDelete }) => {
-  /**
-   * Init the process of editing the given product category
-   */
-  const editProductCategory = (category: ProductCategory): () => void => {
-    return (): void => {
-      onEdit(category);
-    };
-  };
-
-  /**
-   * Init the process of delete the given product category
-   */
-  const deleteProductCategory = (categoryId: number): () => void => {
-    return (): void => {
-      onDelete(categoryId);
-    };
-  };
-
+export const ProductCategoriesList: React.FC<ProductCategoriesListProps> = ({ productCategories, onSuccess, onError }) => {
   return (
-    <div>
+    <div className='product-categories-list'>
       {productCategories.map((category) => (
-        <div key={category.id}>
-          {category.name}
-          <div className="buttons">
-            <FabButton className="edit-btn" onClick={editProductCategory(category)}>
-              <i className="fa fa-edit" />
-            </FabButton>
-            <FabButton className="delete-btn" onClick={deleteProductCategory(category.id)}>
-              <i className="fa fa-trash" />
-            </FabButton>
+        <div key={category.id} className='product-categories-item'>
+          <div className='itemInfo'>
+            <p className='itemInfo-name'>{category.name}</p>
+            <span className='itemInfo-count'>[count]</span>
+          </div>
+          <div className='action'>
+            <div className='manage'>
+              <ManageProductCategory action='update'
+                productCategories={productCategories}
+                productCategory={category}
+                onSuccess={onSuccess} onError={onError} />
+              <ManageProductCategory action='delete'
+                productCategories={productCategories}
+                productCategory={category}
+                onSuccess={onSuccess} onError={onError} />
+            </div>
+            <FabButton icon={<DotsSixVertical size={16} />} className='draghandle' />
           </div>
         </div>
       ))}

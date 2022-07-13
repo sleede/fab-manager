@@ -1900,20 +1900,25 @@ fr:
         categories_of_store: "Les catégories de la boutique"
         the_orders: "Les commandes"
         product_categories:
-          create_a_product_category: "Créer une catégorie"
-          the_categories: "Les catégories"
-          info: "<strong>Information:</strong></br>Retrouvez ci-dessous toutes les catégories créés. Les catégories se rangent sur deux niveux maximum, vous pouvez les agancer avec un glisser-déposer. L'ordre d'affichage des catégories sera identique sur la vue publique et la liste ci-dessous. Attention, Vous pouvez supprimer une catégorie ou une sous-catégorie même si elles sont associées à des produits. Ces derniers se retrouveront sans catégories. Si vous supprimez une catégorie contenant des sous-catégories, ces dernières seront elles aussi supprimées. <strong>Veillez au bon agencement de vos catégories et sauvegarder votre choix.</strong>"
-          successfully_deleted: "La catégorie a bien été supprimé"
-          unable_to_delete: "Impossible de supprimer the category: "
+          title: "Les catégories"
+          info: "<strong>Information:</strong></br>Retrouvez ci-dessous toutes les catégories créés. Les catégories se rangent sur deux niveaux maximum, vous pouvez les agencer avec un glisser-déposer. L'ordre d'affichage des catégories sera identique sur la vue publique et la liste ci-dessous. Attention, Vous pouvez supprimer une catégorie ou une sous-catégorie même si elles sont associées à des produits. Ces derniers se retrouveront sans catégories. Si vous supprimez une catégorie contenant des sous-catégories, ces dernières seront elles aussi supprimées. <strong>Veillez au bon agencement de vos catégories et sauvegarder votre choix.</strong>"
+        manage_product_category:
+          create: "Create a product category"
+          update: "Update the product category"
+          delete: "Delete the product category"
         product_category_modal:
           successfully_created: "La catégorie a bien été créée."
           unable_to_create: "Impossible de créer la catégorie : "
           successfully_updated: "La nouvelle catégorie a bien été mise à jour."
           unable_to_update: "Impossible de modifier la catégorie : "
           new_product_category: "Créer une catégorie"
-          edit_product_category: "Modifier la catéogirie"
-          save: "Sauvgarder"
+          edit_product_category: "Modifier la catégorie"
         product_category_form:
           name: "Nom de la catégorie"
           slug: "Nom de l'URL"
           select_parent_product_category: "Choisir une catégorie parent (N1)"
+          delete:
+            confirm: "Do you really want to delete this product category?"
+            error: "Impossible de supprimer the catégorie : "
+            success: "La catégorie a bien été supprimée"
+          save: "Enregistrer"
