@@ -367,6 +367,11 @@ ActiveRecord::Schema.define(version: 2022_07_20_135828) do
     t.index ["machine_id"], name: "index_machines_availabilities_on_machine_id"
   end
 
+  create_table "machines_products", id: false, force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "machine_id", null: false
+  end
+
   create_table "notifications", id: :serial, force: :cascade do |t|
     t.integer "receiver_id"
     t.string "attached_object_type"
@@ -589,6 +594,23 @@ ActiveRecord::Schema.define(version: 2022_07_20_135828) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["parent_id"], name: "index_product_categories_on_parent_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.string "slug"
+    t.string "sku"
+    t.text "description"
+    t.boolean "is_active", default: false
+    t.bigint "product_category_id"
+    t.integer "amount"
+    t.integer "quantity_min"
+    t.jsonb "stock", default: {"external"=>0, "internal"=>0}
+    t.boolean "low_stock_alert", default: false
+    t.integer "low_stock_threshold"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_category_id"], name: "index_products_on_product_category_id"
   end
 
   create_table "profile_custom_fields", force: :cascade do |t|
@@ -1112,6 +1134,7 @@ ActiveRecord::Schema.define(version: 2022_07_20_135828) do
   add_foreign_key "prepaid_packs", "groups"
   add_foreign_key "prices", "groups"
   add_foreign_key "prices", "plans"
+  add_foreign_key "products", "product_categories"
   add_foreign_key "project_steps", "projects"
   add_foreign_key "project_users", "projects"
   add_foreign_key "project_users", "users"

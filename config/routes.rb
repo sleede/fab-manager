@@ -154,6 +154,8 @@ Rails.application.routes.draw do
       patch 'position', on: :member
     end
 
+    resources :products
+
     # for admin
     resources :trainings do
       get :availabilities, on: :member
