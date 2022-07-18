@@ -1907,18 +1907,22 @@ en:
           update: "Modify the product category"
           delete: "Delete the product category"
         product_category_modal:
-          successfully_created: "The new category has been created."
-          unable_to_create: "Unable to create the category: "
-          successfully_updated: "The category has been updated."
-          unable_to_update: "Unable to modify the category: "
           new_product_category: "Create a category"
           edit_product_category: "Modify a category"
         product_category_form:
           name: "Name of category"
           slug: "Name of URL"
           select_parent_product_category: "Choose a parent category (N1)"
+          create:
+            error: "Unable to create the category: "
+            success: "The new category has been created."
+          update:
+            error: "Unable to modify the category: "
+            success: "The category has been modified."
           delete:
             confirm: "Do you really want to delete this product category?"
             error: "Unable to delete the category: "
             success: "The category has been successfully deleted"
           save: "Save"
+          required: "This field is required"
+          slug_pattern: "Only lowercase alphanumeric groups of characters separated by an hyphen"

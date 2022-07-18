@@ -15,7 +15,7 @@ interface ManageProductCategoryProps {
 
 /**
  * This component shows a button.
- * When clicked, we show a modal dialog allowing to fill the parameters of a product category (create new or update existing).
+ * When clicked, we show a modal dialog allowing to fill the parameters of a product category.
  */
 export const ManageProductCategory: React.FC<ManageProductCategoryProps> = ({ productCategories, productCategory, action, onSuccess, onError }) => {
   const { t } = useTranslation('admin');

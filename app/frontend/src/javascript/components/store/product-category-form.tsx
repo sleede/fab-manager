@@ -29,7 +29,7 @@ interface ProductCategoryFormProps {
 export const ProductCategoryForm: React.FC<ProductCategoryFormProps> = ({ action, productCategories, productCategory, onSuccess, onError }) => {
   const { t } = useTranslation('admin');
 
-  const { register, watch, setValue, control, handleSubmit } = useForm<ProductCategory>({ defaultValues: { ...productCategory } });
+  const { register, watch, setValue, control, handleSubmit, formState } = useForm<ProductCategory>({ defaultValues: { ...productCategory } });
 
   // filter all first level product categorie
   const parents = productCategories.filter(c => !c.parent_id);
@@ -53,15 +53,26 @@ export const ProductCategoryForm: React.FC<ProductCategoryFormProps> = ({ action
     });
     return () => subscription.unsubscribe();
   }, [watch]);
+  // Check slug pattern
+  // Only lowercase alphanumeric groups of characters separated by an hyphen
+  const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/g;
 
   // Form submit
   const onSubmit: SubmitHandler<ProductCategory> = (category: ProductCategory) => {
     switch (action) {
       case 'create':
-        console.log('create:', category);
+        ProductCategoryAPI.create(category).then(() => {
+          onSuccess(t('app.admin.store.product_category_form.create.success'));
+        }).catch((error) => {
+          onError(t('app.admin.store.product_category_form.create.error') + error);
+        });
         break;
       case 'update':
-        console.log('update:', category);
+        ProductCategoryAPI.update(category).then(() => {
+          onSuccess(t('app.admin.store.product_category_form.update.success'));
+        }).catch((error) => {
+          onError(t('app.admin.store.product_category_form.update.error') + error);
+        });
         break;
       case 'delete':
         ProductCategoryAPI.destroy(category.id).then(() => {
@@ -84,13 +95,21 @@ export const ProductCategoryForm: React.FC<ProductCategoryFormProps> = ({ action
           </>
         : <>
             <FormInput id='name'
-                  register={register}
-                  rules={{ required: 'true' }}
-                  label={t('app.admin.store.product_category_form.name')}
-                  defaultValue={productCategory?.name || ''} />
+                       register={register}
+                       rules={{ required: `${t('app.admin.store.product_category_form.required')}` }}
+                       formState={formState}
+                       label={t('app.admin.store.product_category_form.name')}
+                       defaultValue={productCategory?.name || ''} />
             <FormInput id='slug'
                       register={register}
-                      rules={{ required: 'true' }}
+                      rules={{
+                        required: `${t('app.admin.store.product_category_form.required')}`,
+                        pattern: {
+                          value: slugPattern,
+                          message: `${t('app.admin.store.product_category_form.slug_pattern')}`
+                        }
+                      }}
+                      formState={formState}
                       label={t('app.admin.store.product_category_form.slug')}
                       defaultValue={productCategory?.slug} />
             <FormSelect id='parent_id'
