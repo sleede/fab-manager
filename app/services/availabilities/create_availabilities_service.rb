@@ -2,7 +2,9 @@
 
 # Provides an helper method to create the slots for an Availability and optionnaly, for its multiple occurrences
 class Availabilities::CreateAvailabilitiesService
-  def create(availability, occurrences = [])
+  def create(availability, occurrences)
+    occurrences = [] if occurrences.nil?
+
     availability.update_attributes(occurrence_id: availability.id)
     create_slots(availability)
 
