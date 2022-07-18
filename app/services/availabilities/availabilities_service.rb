@@ -1,29 +1,38 @@
 # frozen_string_literal: true
 
-# Provides helper methods for Availability resources and properties
+# List all Availability's slots for the given resources
 class Availabilities::AvailabilitiesService
 
-  def initialize(current_user)
+  def initialize(current_user, level = 'slot')
     @current_user = current_user
     @maximum_visibility = {
       year: Setting.get('visibility_yearly').to_i.months.since,
       other: Setting.get('visibility_others').to_i.months.since
     }
     @service = Availabilities::StatusService.new(current_user&.role)
+    @level = level
   end
 
   # list all slots for the given machine, with visibility relative to the given user
   def machines(machine, user, window)
     availabilities = availabilities(machine.availabilities, 'machines', user, window[:start], window[:end])
 
-    availabilities.map(&:slots).flatten.map { |s| @service.slot_reserved_status(s, user, [machine]) }
+    if @level == 'slot'
+      availabilities.map(&:slots).flatten.map { |s| @service.slot_reserved_status(s, user, [machine]) }
+    else
+      availabilities.map { |a| @service.availability_reserved_status(a, user, [machine]) }
+    end
   end
 
   # list all slots for the given space, with visibility relative to the given user
   def spaces(space, user, window)
     availabilities = availabilities(space.availabilities, 'space', user, window[:start], window[:end])
 
-    availabilities.map(&:slots).flatten.map { |s| @service.slot_reserved_status(s, user, [space]) }
+    if @level == 'slot'
+      availabilities.map(&:slots).flatten.map { |s| @service.slot_reserved_status(s, user, [space]) }
+    else
+      availabilities.map { |a| @service.availability_reserved_status(a, user, [space]) }
+    end
   end
 
   # list all slots for the given training(s), with visibility relative to the given user
@@ -32,7 +41,23 @@ class Availabilities::AvailabilitiesService
                                     .where('trainings_availabilities.training_id': trainings.map(&:id))
     availabilities = availabilities(tr_availabilities, 'training', user, window[:start], window[:end])
 
-    availabilities.map(&:slots).flatten.map { |s| @service.slot_reserved_status(s, user, s.availability.trainings) }
+    if @level == 'slot'
+      availabilities.map(&:slots).flatten.map { |s| @service.slot_reserved_status(s, user, s.availability.trainings) }
+    else
+      availabilities.map { |a| @service.availability_reserved_status(a, user, a.trainings) }
+    end
+  end
+
+  # list all slots for the given event(s), with visibility relative to the given user
+  def events(events, user, window)
+    ev_availabilities = Availability.includes('event').where('events.id': events.map(&:id))
+    availabilities = availabilities(ev_availabilities, 'event', user, window[:start], window[:end])
+
+    if @level == 'slot'
+      availabilities.map(&:slots).flatten.map { |s| @service.slot_reserved_status(s, user, [s.availability.event]) }
+    else
+      availabilities.map { |a| @service.availability_reserved_status(a, user, [a.event]) }
+    end
   end
 
   private
@@ -45,7 +70,7 @@ class Availabilities::AvailabilitiesService
   # the trainings further in the futur. This is used to prevent users with a rolling subscription to take
   # their first training in a very long delay.
   def show_more_trainings?(user)
-    user.trainings.size.positive? && subscription_year?(user)
+    user&.trainings&.size&.positive? && subscription_year?(user)
   end
 
   def availabilities(availabilities, type, user, range_start, range_end)
@@ -53,8 +78,10 @@ class Availabilities::AvailabilitiesService
     # 1) an admin (he can see all availabilities from 1 month ago to anytime in the future)
     if @current_user&.admin? || @current_user&.manager?
       window_start = [range_start, 1.month.ago].max
-      availabilities.includes(:tags, :plans)
-                    .where('start_at <= ? AND end_at >= ? AND available_type = ?', range_end, window_start, type)
+      availabilities.includes(:tags, :plans, :slots)
+                    .joins(:slots)
+                    .where('availabilities.start_at <= ? AND availabilities.end_at >= ? AND available_type = ?', range_end, window_start, type)
+                    .where('slots.start_at > ? AND slots.end_at < ?', window_start, range_end)
                     .where(lock: false)
     # 2) an user (he cannot see past availabilities neither those further than 1 (or 3) months in the future)
     else
@@ -63,9 +90,11 @@ class Availabilities::AvailabilitiesService
       end_at = @maximum_visibility[:year] if show_more_trainings?(user) && type == 'training'
       window_end = [end_at, range_end].min
       window_start = [range_start, DateTime.current].max
-      availabilities.includes(:tags, :plans)
-                    .where('start_at < ? AND end_at > ? AND available_type = ?', window_end, window_start, type)
-                    .where('availability_tags.tag_id' => user.tag_ids.concat([nil]))
+      availabilities.includes(:tags, :plans, :slots)
+                    .joins(:slots)
+                    .where('availabilities.start_at <= ? AND availabilities.end_at >= ? AND available_type = ?', window_end, window_start, type)
+                    .where('slots.start_at > ? AND slots.end_at < ?', window_start, window_end)
+                    .where('availability_tags.tag_id' => user&.tag_ids&.concat([nil]))
                     .where(lock: false)
     end
   end

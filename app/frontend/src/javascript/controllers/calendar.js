@@ -216,8 +216,9 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
       } else if (event.available_type === 'training') {
         $state.go('app.public.training_show', { id: event.training_id });
       } else {
-        if (event.machine_id) {
-          $state.go('app.public.machines_show', { id: event.machine_id });
+        if (event.machine_ids) {
+          // TODO open modal to ask the user to select the machine to show
+          $state.go('app.public.machines_show', { id: event.machine_ids[0] });
         } else if (event.space_id) {
           $state.go('app.public.space_show', { id: event.space_id });
         }

@@ -229,7 +229,7 @@ class Reservations::CreateAsAdminTest < ActionDispatch::IntegrationTest
           reservation: {
             reservable_id: machine.id,
             reservable_type: machine.class.name,
-            sslots_reservations_attributes: [
+            slots_reservations_attributes: [
               {
                 slot_id: availability.slots.first.id
               }

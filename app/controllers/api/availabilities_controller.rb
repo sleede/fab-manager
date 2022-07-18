@@ -20,19 +20,14 @@ class API::AvailabilitiesController < API::ApiController
   end
 
   def public
-    # FIXME, use AvailabilitiesService
     display_window = window
-    @reservations = Reservation.includes(:slots, :statistic_profile)
-                               .references(:slots)
-                               .where('slots.start_at >= ? AND slots.end_at <= ?', display_window[:start], display_window[:end])
 
     machine_ids = params[:m] || []
     service = Availabilities::PublicAvailabilitiesService.new(current_user)
     @availabilities = service.public_availabilities(
-      display_window[:start],
-      display_window[:end],
-      @reservations,
-      machines: machine_ids, spaces: params[:s]
+      display_window,
+      { machines: machine_ids, spaces: params[:s], trainings: params[:t] },
+      (params[:evt] && params[:evt] == 'true')
     )
 
     @title_filter = { machine_ids: machine_ids.map(&:to_i) }
@@ -47,10 +42,8 @@ class API::AvailabilitiesController < API::ApiController
     authorize Availability
     @availability = Availability.new(availability_params)
     if @availability.save
-      if params[:availability][:occurrences]
-        service = Availabilities::CreateAvailabilitiesService.new
-        service.create(@availability, params[:availability][:occurrences])
-      end
+      service = Availabilities::CreateAvailabilitiesService.new
+      service.create(@availability, params[:availability][:occurrences])
       render :show, status: :created, location: @availability
     else
       render json: @availability.errors, status: :unprocessable_entity
@@ -170,35 +163,7 @@ class API::AvailabilitiesController < API::ApiController
   end
 
   def filter_availabilites(availabilities)
-    availabilities_filtered = []
-    availabilities.to_ary.each do |a|
-      # machine slot
-      if !a.try(:available_type)
-        availabilities_filtered << a
-      else
-        availabilities_filtered << a if filter_training?(a)
-        availabilities_filtered << a if filter_space?(a)
-        availabilities_filtered << a if filter_machine?(a)
-        availabilities_filtered << a if filter_event?(a)
-      end
-    end
-    availabilities_filtered.delete_if(&method(:remove_full?))
-  end
-
-  def filter_training?(availability)
-    params[:t] && availability.available_type == 'training' && params[:t].include?(availability.trainings.first.id.to_s)
-  end
-
-  def filter_space?(availability)
-    params[:s] && availability.available_type == 'space' && params[:s].include?(availability.spaces.first.id.to_s)
-  end
-
-  def filter_machine?(availability)
-    params[:m] && availability.available_type == 'machines' && (params[:m].map(&:to_i) & availability.machine_ids).any?
-  end
-
-  def filter_event?(availability)
-    params[:evt] && params[:evt] == 'true' && availability.available_type == 'event'
+    availabilities.delete_if(&method(:remove_full?))
   end
 
   def remove_full?(availability)

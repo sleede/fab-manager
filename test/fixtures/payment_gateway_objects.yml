@@ -208,3 +208,25 @@ pgo30:
   item_type: PaymentSchedule
   item_id: 12
   payment_gateway_object_id: 29
+
+pgo31:
+  id: 31
+  gateway_object_id: fakefakefakefake
+  gateway_object_type: PayZen::Order
+  item_type: PaymentSchedule
+  item_id: 13
+
+pgo32:
+  id: 32
+  gateway_object_id: fakefakefakefake
+  gateway_object_type: PayZen::Token
+  item_type: PaymentSchedule
+  item_id: 13
+
+pgo33:
+  id: 33
+  gateway_object_id: fakefakefakefake
+  gateway_object_type: PayZen::Subscription
+  item_type: PaymentSchedule
+  item_id: 13
+  payment_gateway_object_id: 32

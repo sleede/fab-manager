@@ -10,6 +10,10 @@ class Availabilities::StatusService
   # check that the provided slot is reserved for the given reservable (machine, training or space).
   # Mark it accordingly for display in the calendar
   def slot_reserved_status(slot, user, reservables)
+    unless reservables.map(&:class).map(&:name).reduce(:==)
+      raise TypeError('[Availabilities::StatusService#slot_reserved_status] reservables have differents types')
+    end
+
     statistic_profile_id = user&.statistic_profile&.id
 
     slots_reservations = slot.slots_reservations
@@ -29,16 +33,22 @@ class Availabilities::StatusService
   end
 
   # check that the provided ability is reserved by the given user
-  def reserved_availability?(availability, user)
-    if user
-      reserved_slots = []
-      availability.slots.each do |s|
-        reserved_slots << s if s.canceled_at.nil?
-      end
-      reserved_slots.map(&:reservations).flatten.map(&:statistic_profile_id).include? user.statistic_profile&.id
-    else
-      false
+  def availability_reserved_status(availability, user, reservables)
+    unless reservables.map(&:class).map(&:name).reduce(:==)
+      raise TypeError('[Availabilities::StatusService#availability_reserved_status] reservables have differents types')
     end
+
+    slots_reservations = availability.slots_reservations
+                                     .includes(:reservation)
+                                     .where('reservations.reservable_type': reservables.map(&:class).map(&:name))
+                                     .where('reservations.reservable_id': reservables.map(&:id))
+                                     .where('slots_reservations.canceled_at': nil)
+
+    user_slots_reservations = slots_reservations.where('reservations.statistic_profile_id': user&.statistic_profile&.id)
+
+    availability.is_reserved = !slots_reservations.empty?
+    availability.current_user_slots_reservations_ids = user_slots_reservations.map(&:id)
+    availability
   end
 
   private

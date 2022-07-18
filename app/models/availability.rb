@@ -37,7 +37,7 @@ class Availability < ApplicationRecord
   scope :trainings, -> { includes(:trainings).where(available_type: 'training') }
   scope :spaces, -> { includes(:spaces).where(available_type: 'space') }
 
-  attr_accessor :is_reserved, :slot_id, :can_modify
+  attr_accessor :is_reserved, :current_user_slots_reservations_ids, :can_modify
 
   validates :start_at, :end_at, presence: true
   validate :length_must_be_slot_multiple, unless: proc { end_at.blank? or start_at.blank? }

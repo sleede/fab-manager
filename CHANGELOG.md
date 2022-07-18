@@ -2,6 +2,9 @@
 
 ## next deploy
 
+- Improved calendars loading time
+- Refactored and documented the availability-slot-reservation data model
+- Fix a bug: unable to book a space's slot with an existing reservation
 - Fix a bug: Unable to import accounts from SSO when the transformation modal was opened but leaved empty
 
 ## v5.4.12 2022 July 06

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'test_helper'
+
 class Availabilities::AsUserTest < ActionDispatch::IntegrationTest
   setup do
     user = User.find_by(username: 'kdumas')

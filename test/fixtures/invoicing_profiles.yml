@@ -60,3 +60,10 @@ proudhon:
   first_name: Pierre-Joseph
   last_name: Proudhon
   email: pj.proudhon@la-propriete.org
+
+acamus:
+  id: 10
+  user_id: 10
+  first_name: Albert
+  last_name: Camus
+  email: albert.camus@letranger.org
