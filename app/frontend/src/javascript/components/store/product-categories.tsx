@@ -18,7 +18,8 @@ interface ProductCategoriesProps {
 }
 
 /**
- * This component shows a Tree list of all Product's Categories
+ * This component shows a list of all product categories and offer to manager them
+ * by creating, deleting, modifying and reordering each product categories.
  */
 const ProductCategories: React.FC<ProductCategoriesProps> = ({ onSuccess, onError }) => {
   const { t } = useTranslation('admin');
