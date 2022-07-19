@@ -517,8 +517,8 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
               $scope.slot.group_ids = $scope.slot.plansGrouped.map(function (g) { return g.id; });
             }
 
-            if (!$scope.slot.is_reserved && !$scope.events.modifiable && !$scope.slot.is_completed) {
-              // slot is not reserved and we are not currently modifying a slot
+            if (!$scope.slot.is_completed && !$scope.events.modifiable) {
+              // slot is not fully reserved, and we are not currently modifying a slot
               // -> can be added to cart or removed if already present
               const index = _.findIndex($scope.events.reserved, (e) => e._id === $scope.slot._id);
               if (index === -1) {
@@ -538,9 +538,9 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
               resetCartState();
               // finally, we update the prices
               return updateCartPrice();
-            } else if (!$scope.slot.is_reserved && !$scope.slot.is_completed && $scope.events.modifiable) {
-              // slot is not reserved but we are currently modifying a slot
-              // -> we request the calender to change the rendering
+            } else if (!$scope.slot.is_completed && $scope.events.modifiable) {
+              // slot is not fully reserved, but we are currently modifying a slot
+              // -> we request the calendar to change the rendering
               if (typeof $scope.onSlotModifyUnselect === 'function') {
                 // if the callback return false, cancel the selection for the current modification
                 const res = $scope.onSlotModifyUnselect();

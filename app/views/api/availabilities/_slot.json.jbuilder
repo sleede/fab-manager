@@ -6,6 +6,7 @@ json.title slot.title
 json.start slot.start_at.iso8601
 json.end slot.end_at.iso8601
 json.is_reserved slot.is_reserved
+json.is_completed slot.full?
 json.backgroundColor 'white'
 
 json.availability_id slot.availability_id

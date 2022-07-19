@@ -19,9 +19,8 @@ class API::StripeController < API::PaymentsController
     res = nil # json of the API answer
 
     cart = shopping_cart
-    unless cart.valid?
-      render json: { error: 'unable to pay' }, status: :unprocessable_entity and return
-    end
+    render json: { error: 'invalid shopping cart' }, status: :unprocessable_entity and return unless cart.valid?
+
     begin
       amount = debit_amount(cart) # will contains the amount and the details of each invoice lines
       if params[:payment_method_id].present?

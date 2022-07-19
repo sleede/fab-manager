@@ -24,7 +24,7 @@ class Availabilities::StatusService
 
     user_slots_reservations = slots_reservations.where('reservations.statistic_profile_id': statistic_profile_id)
 
-    slot.is_reserved = !user_slots_reservations.empty?
+    slot.is_reserved = !slots_reservations.empty?
     slot.title = slot_title(slots_reservations, user_slots_reservations, reservables)
     slot.can_modify = true if %w[admin manager].include?(@current_user_role) || !user_slots_reservations.empty?
     slot.current_user_slots_reservations_ids = user_slots_reservations.map(&:id)
@@ -46,7 +46,7 @@ class Availabilities::StatusService
 
     user_slots_reservations = slots_reservations.where('reservations.statistic_profile_id': user&.statistic_profile&.id)
 
-    availability.is_reserved = !user_slots_reservations.empty?
+    availability.is_reserved = !slots_reservations.empty?
     availability.current_user_slots_reservations_ids = user_slots_reservations.map(&:id)
     availability
   end
@@ -62,7 +62,7 @@ class Availabilities::StatusService
                                      .map(&:user)
                                      .map { |u| u&.profile&.full_name || I18n.t('availabilities.deleted_user') }
                                      .join(', ')
-      "#{name} - #{@show_name ? user_names : I18n.t('availabilities.not_available')}"
+      "#{name} #{@show_name ? "- #{user_names}" : ''}"
     else
       "#{name} - #{I18n.t('availabilities.i_ve_reserved')}"
     end
