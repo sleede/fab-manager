@@ -25,6 +25,7 @@ class MembersTest < ActionDispatch::IntegrationTest
           phone: '0485232145'
         },
         invoicing_profile_attributes: {
+          organization: false,
           address_attributes: {
             address: '21 grand rue, 73110 Bourget-en-Huile'
           }

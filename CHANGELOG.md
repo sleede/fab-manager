@@ -8,6 +8,7 @@
 - Fix a bug: unable to book a space's slot with an existing reservation
 - Fix a bug: Unable to import accounts from SSO when the transformation modal was opened but leaved empty
 - Fix a bug: Unable to change the group of a user
+- Fix a bug: As admin, unable to create a new member (#374)
 
 ## v5.4.12 2022 July 06
 
