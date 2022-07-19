@@ -20,9 +20,9 @@ class Availabilities::AvailabilitiesService
     availabilities = availabilities(ma_availabilities, 'machines', user, window[:start], window[:end])
 
     if @level == 'slot'
-      availabilities.map(&:slots).flatten.map { |s| @service.slot_reserved_status(s, user, s.availability.machines) }
+      availabilities.map(&:slots).flatten.map { |s| @service.slot_reserved_status(s, user, (machines & s.availability.machines)) }
     else
-      availabilities.map { |a| @service.availability_reserved_status(a, user, a.machines) }
+      availabilities.map { |a| @service.availability_reserved_status(a, user, (machines & a.machines)) }
     end
   end
 
@@ -33,9 +33,9 @@ class Availabilities::AvailabilitiesService
     availabilities = availabilities(sp_availabilities, 'space', user, window[:start], window[:end])
 
     if @level == 'slot'
-      availabilities.map(&:slots).flatten.map { |s| @service.slot_reserved_status(s, user, s.availability.spaces) }
+      availabilities.map(&:slots).flatten.map { |s| @service.slot_reserved_status(s, user, (spaces & s.availability.spaces)) }
     else
-      availabilities.map { |a| @service.availability_reserved_status(a, user, a.spaces) }
+      availabilities.map { |a| @service.availability_reserved_status(a, user, (spaces & a.spaces)) }
     end
   end
 
@@ -46,9 +46,9 @@ class Availabilities::AvailabilitiesService
     availabilities = availabilities(tr_availabilities, 'training', user, window[:start], window[:end])
 
     if @level == 'slot'
-      availabilities.map(&:slots).flatten.map { |s| @service.slot_reserved_status(s, user, s.availability.trainings) }
+      availabilities.map(&:slots).flatten.map { |s| @service.slot_reserved_status(s, user, (trainings & s.availability.trainings)) }
     else
-      availabilities.map { |a| @service.availability_reserved_status(a, user, a.trainings) }
+      availabilities.map { |a| @service.availability_reserved_status(a, user, (trainings & a.trainings)) }
     end
   end
 
