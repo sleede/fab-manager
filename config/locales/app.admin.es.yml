@@ -769,6 +769,8 @@ es:
           online_payment_info_html: "You can enable your members to book directly online, paying by card. Alternatively, you can restrict the booking and payment processes for administrators and managers."
           enable_online_payment: "Enable online payment"
           stripe_keys: "Stripe keys"
+          public_key: "Public key"
+          secret_key: "Secret key"
           error_check_keys: "Error: please check your Stripe keys."
           stripe_keys_saved: "Stripe keys successfully saved."
           error_saving_stripe_keys: "Unable to save the Stripe keys. Please try again later."
