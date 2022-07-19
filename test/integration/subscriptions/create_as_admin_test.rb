@@ -38,7 +38,6 @@ class Subscriptions::CreateAsAdminTest < ActionDispatch::IntegrationTest
     subscription = Invoice.find(result[:id]).invoice_items.first.object
     assert_equal plan.id, subscription.plan_id, 'subscribed plan does not match'
 
-
     # Check that the user has only one subscription
     assert_equal 1, user.subscriptions.count
 

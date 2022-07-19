@@ -104,7 +104,7 @@ class Subscriptions::RenewAsUserTest < ActionDispatch::IntegrationTest
     assert_equal Mime[:json], response.content_type
 
     # Check the error was handled
-    assert_match /Your card was declined/, response.body
+    assert_match(/Your card was declined/, response.body)
 
     # Check that the user's subscription has not changed
     assert_equal previous_expiration, @user.subscription.expired_at.to_i, "user's subscription has changed"
