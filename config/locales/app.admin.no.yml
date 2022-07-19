@@ -769,6 +769,8 @@
           online_payment_info_html: "Du kan la medlemmene dine bestille direkte online og betale med kort. Du kan eventuelt begrense bestillingen og betalingsprosesser tiln administratorer og ledere."
           enable_online_payment: "Aktiver elektronisk betaling"
           stripe_keys: "Stripe-nøkler"
+          public_key: "Public key"
+          secret_key: "Secret key"
           error_check_keys: "Feil: Vennligst sjekk dine Stripe-nøkler."
           stripe_keys_saved: "Stripe-nøkler ble lagret."
           error_saving_stripe_keys: "Kan ikke lagre Stripe-nøkler. Prøv igjen senere."
