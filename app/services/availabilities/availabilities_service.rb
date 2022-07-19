@@ -13,25 +13,29 @@ class Availabilities::AvailabilitiesService
     @level = level
   end
 
-  # list all slots for the given machine, with visibility relative to the given user
-  def machines(machine, user, window)
-    availabilities = availabilities(machine.availabilities, 'machines', user, window[:start], window[:end])
+  # list all slots for the given machines, with visibility relative to the given user
+  def machines(machines, user, window)
+    ma_availabilities = Availability.includes('machines_availabilities')
+                                    .where('machines_availabilities.machine_id': machines.map(&:id))
+    availabilities = availabilities(ma_availabilities, 'machines', user, window[:start], window[:end])
 
     if @level == 'slot'
-      availabilities.map(&:slots).flatten.map { |s| @service.slot_reserved_status(s, user, [machine]) }
+      availabilities.map(&:slots).flatten.map { |s| @service.slot_reserved_status(s, user, s.availability.machines) }
     else
-      availabilities.map { |a| @service.availability_reserved_status(a, user, [machine]) }
+      availabilities.map { |a| @service.availability_reserved_status(a, user, a.machines) }
     end
   end
 
   # list all slots for the given space, with visibility relative to the given user
-  def spaces(space, user, window)
-    availabilities = availabilities(space.availabilities, 'space', user, window[:start], window[:end])
+  def spaces(spaces, user, window)
+    sp_availabilities = Availability.includes('spaces_availabilities')
+                                    .where('spaces_availabilities.space_id': spaces.map(&:id))
+    availabilities = availabilities(sp_availabilities, 'space', user, window[:start], window[:end])
 
     if @level == 'slot'
-      availabilities.map(&:slots).flatten.map { |s| @service.slot_reserved_status(s, user, [space]) }
+      availabilities.map(&:slots).flatten.map { |s| @service.slot_reserved_status(s, user, s.availability.spaces) }
     else
-      availabilities.map { |a| @service.availability_reserved_status(a, user, [space]) }
+      availabilities.map { |a| @service.availability_reserved_status(a, user, a.spaces) }
     end
   end
 

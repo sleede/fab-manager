@@ -13,28 +13,28 @@ class AvailabilitiesServiceTest < ActiveSupport::TestCase
 
   test 'no machines availabilities during given window' do
     service = Availabilities::AvailabilitiesService.new(@no_subscription)
-    slots = service.machines(Machine.find(3), @no_subscription, { start: DateTime.current.beginning_of_day, end: 1.day.from_now.end_of_day })
+    slots = service.machines([Machine.find(3)], @no_subscription, { start: DateTime.current.beginning_of_day, end: 1.day.from_now.end_of_day })
 
     assert_empty slots
   end
 
   test 'no machines availabilities for user tags' do
     service = Availabilities::AvailabilitiesService.new(@no_subscription)
-    slots = service.machines(Machine.find(3), @no_subscription, { start: 2.days.from_now.beginning_of_day, end: 4.days.from_now.end_of_day })
+    slots = service.machines([Machine.find(3)], @no_subscription, { start: 2.days.from_now.beginning_of_day, end: 4.days.from_now.end_of_day })
 
     assert_empty slots
   end
 
   test 'no past availabilities for members' do
     service = Availabilities::AvailabilitiesService.new(@no_subscription)
-    slots = service.machines(Machine.find(2), @no_subscription, { start: DateTime.parse('2015-06-15').beginning_of_day, end: DateTime.parse('2015-06-15').end_of_day })
+    slots = service.machines([Machine.find(2)], @no_subscription, { start: DateTime.parse('2015-06-15').beginning_of_day, end: DateTime.parse('2015-06-15').end_of_day })
 
     assert_empty slots
   end
 
   test 'admin cannot see past availabilities further than 1 month' do
     service = Availabilities::AvailabilitiesService.new(@admin)
-    slots = service.machines(Machine.find(2), @no_subscription, { start: DateTime.parse('2015-06-15').beginning_of_day, end: DateTime.parse('2015-06-15').end_of_day })
+    slots = service.machines([Machine.find(2)], @no_subscription, { start: DateTime.parse('2015-06-15').beginning_of_day, end: DateTime.parse('2015-06-15').end_of_day })
 
     assert_empty slots
   end
@@ -51,7 +51,7 @@ class AvailabilitiesServiceTest < ActiveSupport::TestCase
 
   test 'machines availabilities' do
     service = Availabilities::AvailabilitiesService.new(@no_subscription)
-    slots = service.machines(Machine.find(1), @no_subscription, { start: 2.days.from_now.beginning_of_day, end: 4.days.from_now.end_of_day })
+    slots = service.machines([Machine.find(1)], @no_subscription, { start: 2.days.from_now.beginning_of_day, end: 4.days.from_now.end_of_day })
 
     assert_not_empty slots
     assert_equal Availability.find(7).slots.count, slots.count
@@ -61,7 +61,7 @@ class AvailabilitiesServiceTest < ActiveSupport::TestCase
 
   test 'spaces availabilities' do
     service = Availabilities::AvailabilitiesService.new(@no_subscription)
-    slots = service.spaces(Space.find(1), @no_subscription, { start: 2.days.from_now.beginning_of_day, end: 4.days.from_now.end_of_day })
+    slots = service.spaces([Space.find(1)], @no_subscription, { start: 2.days.from_now.beginning_of_day, end: 4.days.from_now.end_of_day })
 
     assert_not_empty slots
     assert_equal Availability.find(18).slots.count, slots.count

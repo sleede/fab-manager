@@ -282,10 +282,17 @@ Application.Controllers.controller('ReserveTrainingController', ['$scope', '$tra
       if ($scope.ctrl.member) {
         Member.get({ id: $scope.ctrl.member.id }, function (member) {
           $scope.ctrl.member = member;
+          const view = uiCalendarConfig.calendars.calendar.fullCalendar('getView');
           const id = $transition$.params().id === 'all' ? $transition$.params().id : $scope.training.id;
-          return Availability.trainings({ trainingId: id, member_id: $scope.ctrl.member.id }, function (trainings) {
+          Availability.trainings({
+            trainingId: id,
+            member_id: $scope.ctrl.member.id,
+            start: view.start,
+            end: view.end,
+            timezone: Fablab.timezone
+          }, function (trainings) {
             uiCalendarConfig.calendars.calendar.fullCalendar('removeEvents');
-            return $scope.eventSources.splice(0, 1, {
+            $scope.eventSources.splice(0, 1, {
               events: trainings,
               textColor: 'black'
             }
@@ -296,7 +303,7 @@ Application.Controllers.controller('ReserveTrainingController', ['$scope', '$tra
       // as the events are re-fetched for the new user, we must re-init the cart
       $scope.events.reserved = [];
       $scope.selectedPlan = null;
-      return $scope.plansAreShown = false;
+      $scope.plansAreShown = false;
     };
 
     /**

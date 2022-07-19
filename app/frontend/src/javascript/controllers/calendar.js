@@ -16,8 +16,8 @@
  * Controller used in the public calendar global
  */
 
-Application.Controllers.controller('CalendarController', ['$scope', '$state', '$aside', 'moment', 'Availability', 'Slot', 'Setting', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', '_t', 'uiCalendarConfig', 'CalendarConfig', 'trainingsPromise', 'machinesPromise', 'spacesPromise', 'iCalendarPromise',
-  function ($scope, $state, $aside, moment, Availability, Slot, Setting, growl, dialogs, bookingWindowStart, bookingWindowEnd, _t, uiCalendarConfig, CalendarConfig, trainingsPromise, machinesPromise, spacesPromise, iCalendarPromise) {
+Application.Controllers.controller('CalendarController', ['$scope', '$state', '$aside', 'moment', 'Availability', 'Setting', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', '_t', 'uiCalendarConfig', 'CalendarConfig', 'trainingsPromise', 'machinesPromise', 'spacesPromise', 'iCalendarPromise',
+  function ($scope, $state, $aside, moment, Availability, Setting, growl, dialogs, bookingWindowStart, bookingWindowEnd, _t, uiCalendarConfig, CalendarConfig, trainingsPromise, machinesPromise, spacesPromise, iCalendarPromise) {
   /* PRIVATE STATIC CONSTANTS */
     let currentMachineEvent = null;
     machinesPromise.forEach(m => m.checked = true);

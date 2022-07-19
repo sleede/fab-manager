@@ -2,10 +2,10 @@
 
 json.array!(@slots) do |slot|
   json.partial! 'api/availabilities/slot', slot: slot, operator_role: @operator_role
-  json.borderColor trainings_events_border_color(slot)
+  json.borderColor trainings_events_border_color(slot.availability)
 
   json.is_completed slot.full?
-  json.nb_total_places slot.nb_total_places
+  json.nb_total_places slot.availability.nb_total_places
 
   json.training do
     json.id slot.availability.trainings.first.id

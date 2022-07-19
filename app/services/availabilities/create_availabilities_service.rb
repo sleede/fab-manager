@@ -38,10 +38,18 @@ class Availabilities::CreateAvailabilitiesService
   def create_slots(availability)
     slot_duration = availability.slot_duration || Setting.get('slot_duration').to_i
 
-    ((availability.end_at - availability.start_at) / slot_duration.minutes).to_i.times do |i|
+    if %w[machines space].include?(availability.available_type)
+      ((availability.end_at - availability.start_at) / slot_duration.minutes).to_i.times do |i|
+        Slot.new(
+          start_at: availability.start_at + (i * slot_duration).minutes,
+          end_at: availability.start_at + (i * slot_duration).minutes + slot_duration.minutes,
+          availability_id: availability.id
+        ).save!
+      end
+    else
       Slot.new(
-        start_at: availability.start_at + (i * slot_duration).minutes,
-        end_at: availability.start_at + (i * slot_duration).minutes + slot_duration.minutes,
+        start_at: availability.start_at,
+        end_at: availability.end_at,
         availability_id: availability.id
       ).save!
     end

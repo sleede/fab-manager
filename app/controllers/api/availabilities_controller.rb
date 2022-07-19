@@ -73,13 +73,13 @@ class API::AvailabilitiesController < API::ApiController
   def machine
     service = Availabilities::AvailabilitiesService.new(current_user)
     @machine = Machine.friendly.find(params[:machine_id])
-    @slots = service.machines(@machine, @customer, window)
+    @slots = service.machines([@machine], @customer, window)
   end
 
   def trainings
     service = Availabilities::AvailabilitiesService.new(current_user)
-    @trainings = if training_id.is_number? || (training_id.length.positive? && training_id != 'all')
-                   [Training.friendly.find(training_id)]
+    @trainings = if params[:training_id].is_number? || (params[:training_id].length.positive? && params[:training_id] != 'all')
+                   [Training.friendly.find(params[:training_id])]
                  else
                    Training.all
                  end
@@ -88,8 +88,8 @@ class API::AvailabilitiesController < API::ApiController
 
   def spaces
     service = Availabilities::AvailabilitiesService.new(current_user)
-    @space = Space.friendly.find(space_id)
-    @slots = service.spaces(@space, @customer, window)
+    @space = Space.friendly.find(params[:space_id])
+    @slots = service.spaces([@space], @customer, window)
   end
 
   def reservations

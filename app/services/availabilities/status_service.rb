@@ -4,13 +4,13 @@
 class Availabilities::StatusService
   def initialize(current_user_role)
     @current_user_role = current_user_role
-    @show_name = (%w[admin manager].include?(@current_user_role) || Setting.get('display_name_enable'))
+    @show_name = (%w[admin manager].include?(@current_user_role) || (current_user_role && Setting.get('display_name_enable')))
   end
 
   # check that the provided slot is reserved for the given reservable (machine, training or space).
   # Mark it accordingly for display in the calendar
   def slot_reserved_status(slot, user, reservables)
-    unless reservables.map(&:class).map(&:name).reduce(:==)
+    if reservables.map(&:class).map(&:name).uniq.size > 1
       raise TypeError('[Availabilities::StatusService#slot_reserved_status] reservables have differents types')
     end
 
@@ -24,7 +24,7 @@ class Availabilities::StatusService
 
     user_slots_reservations = slots_reservations.where('reservations.statistic_profile_id': statistic_profile_id)
 
-    slot.is_reserved = !slots_reservations.empty?
+    slot.is_reserved = !user_slots_reservations.empty?
     slot.title = slot_title(slots_reservations, user_slots_reservations, reservables)
     slot.can_modify = true if %w[admin manager].include?(@current_user_role) || !user_slots_reservations.empty?
     slot.current_user_slots_reservations_ids = user_slots_reservations.map(&:id)
@@ -34,7 +34,7 @@ class Availabilities::StatusService
 
   # check that the provided ability is reserved by the given user
   def availability_reserved_status(availability, user, reservables)
-    unless reservables.map(&:class).map(&:name).reduce(:==)
+    if reservables.map(&:class).map(&:name).uniq.size > 1
       raise TypeError('[Availabilities::StatusService#availability_reserved_status] reservables have differents types')
     end
 
@@ -46,7 +46,7 @@ class Availabilities::StatusService
 
     user_slots_reservations = slots_reservations.where('reservations.statistic_profile_id': user&.statistic_profile&.id)
 
-    availability.is_reserved = !slots_reservations.empty?
+    availability.is_reserved = !user_slots_reservations.empty?
     availability.current_user_slots_reservations_ids = user_slots_reservations.map(&:id)
     availability
   end
