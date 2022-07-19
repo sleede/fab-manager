@@ -17,7 +17,7 @@ json.training_reservations @member.reservations.where(reservable_type: 'Training
   json.reservable r.reservable
   json.reservable_type 'Training'
   json.is_valid @member.statistic_profile.training_ids.include?(r.reservable_id)
-  json.canceled_at r.slots.first.canceled_at
+  json.canceled_at r.slots_reservations.first.canceled_at
 end
 json.machine_reservations @member.reservations.where(reservable_type: 'Machine') do |r|
   json.id r.id
@@ -25,7 +25,7 @@ json.machine_reservations @member.reservations.where(reservable_type: 'Machine')
   json.end_at r.slots.first.end_at
   json.reservable r.reservable
   json.reservable_type 'Machine'
-  json.canceled_at r.slots.first.canceled_at
+  json.canceled_at r.slots_reservations.first.canceled_at
 end
 json.space_reservations @member.reservations.where(reservable_type: 'Space') do |r|
   json.id r.id
@@ -33,7 +33,7 @@ json.space_reservations @member.reservations.where(reservable_type: 'Space') do 
   json.end_at r.slots.first.end_at
   json.reservable r.reservable
   json.reservable_type 'Space'
-  json.canceled_at r.slots.first.canceled_at
+  json.canceled_at r.slots_reservations.first.canceled_at
 end
 
 json.all_projects @member.all_projects do |project|
