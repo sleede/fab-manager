@@ -14,7 +14,8 @@ class Exports::AccountingExportTest < ActionDispatch::IntegrationTest
     post '/api/accounting/export',
          params: {
            query: {
-             columns: %w[journal_code date account_code account_label piece line_label debit_origin credit_origin debit_euro credit_euro lettering],
+             columns: %w[journal_code date account_code account_label piece line_label
+                         debit_origin credit_origin debit_euro credit_euro lettering],
              encoding: 'ISO-8859-1',
              date_format: '%d/%m/%Y',
              start_date: '2012-03-12T00:00:00.000Z',
@@ -66,7 +67,7 @@ class Exports::AccountingExportTest < ActionDispatch::IntegrationTest
       card_client_label = Setting.get('accounting_card_client_label')
       assert_equal card_client_label, data[0][I18n.t('accounting_export.account_label')], 'Account label for card client is wrong'
     else
-      STDERR.puts "WARNING: unable to test accurately accounting export: invoice #{first_invoice.id} was not paid by card"
+      warn "WARNING: unable to test accurately accounting export: invoice #{first_invoice.id} was not paid by card"
     end
 
     assert_equal first_invoice.reference, data[0][I18n.t('accounting_export.piece')], 'Piece (invoice reference) is wrong'
@@ -76,14 +77,14 @@ class Exports::AccountingExportTest < ActionDispatch::IntegrationTest
                    data[0][I18n.t('accounting_export.line_label')],
                    'Line label does not contains the reference to the invoiced item'
     else
-      STDERR.puts "WARNING: unable to test accurately accounting export: invoice #{first_invoice.id} does not have a subscription"
+      warn "WARNING: unable to test accurately accounting export: invoice #{first_invoice.id} does not have a subscription"
     end
 
     if first_invoice.wallet_transaction_id.nil?
       assert_equal first_invoice.total / 100.00, data[0][I18n.t('accounting_export.debit_origin')].to_f, 'Origin debit amount does not match'
       assert_equal first_invoice.total / 100.00, data[0][I18n.t('accounting_export.debit_euro')].to_f, 'Euro debit amount does not match'
     else
-      STDERR.puts "WARNING: unable to test accurately accounting export: invoice #{first_invoice.id} is using wallet"
+      warn "WARNING: unable to test accurately accounting export: invoice #{first_invoice.id} is using wallet"
     end
 
     assert_equal 0, data[0][I18n.t('accounting_export.credit_origin')].to_f, 'Credit origin amount does not match'
@@ -130,7 +131,7 @@ class Exports::AccountingExportTest < ActionDispatch::IntegrationTest
       assert_equal machine_label, item_row[I18n.t('accounting_export.account_label')], 'Account label for machine reservation is wrong'
 
     else
-      STDERR.puts "WARNING: unable to test accurately accounting export: invoice #{machine_invoice.id} is not a Machine reservation"
+      warn "WARNING: unable to test accurately accounting export: invoice #{machine_invoice.id} is not a Machine reservation"
     end
 
     # Clean CSV file
