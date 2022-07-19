@@ -769,6 +769,8 @@ fr:
           online_payment_info_html: "Vous pouvez permettre à vos membres de réserver directement en ligne, en payant par carte bancaire. De manière alternative, vous pouvez restreindre les processus de réservation et de paiement aux administrateurs et aux gestionnaires."
           enable_online_payment: "Activer les paiements en ligne"
           stripe_keys: "Clefs Stripe"
+          public_key: "Public key"
+          secret_key: "Secret key"
           error_check_keys: "Erreur : veuillez vérifier vos clefs Stripe."
           stripe_keys_saved: "Les clefs Stripe ont bien été enregistrées."
           error_saving_stripe_keys: "Impossible d’enregistrer les clefs Stripe. Veuillez réessayer ultérieurement."
