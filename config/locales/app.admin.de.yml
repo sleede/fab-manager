@@ -769,6 +769,8 @@ de:
           online_payment_info_html: "Sie können Mitglieden gestatten, direkt online zu buchen und mit Kreditkarte zu bezahlen. Alternativ können Buchungs- und Zahlungsprozesse auf Administratoren und Manager beschränkt werden."
           enable_online_payment: "Online-Bezahlung aktivieren"
           stripe_keys: "Stripe-Schlüssel"
+          public_key: "Public key"
+          secret_key: "Secret key"
           error_check_keys: "Fehler: Bitte überprüfen Sie Ihre Stripe-Schlüssel."
           stripe_keys_saved: "Stripe-Schlüssel erfolgreich gespeichert."
           error_saving_stripe_keys: "Die Stripe-Schlüssel konnten nicht gespeichert werden. Bitte versuchen Sie es später erneut."
