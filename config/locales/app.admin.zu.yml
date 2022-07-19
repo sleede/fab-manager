@@ -769,6 +769,8 @@ zu:
           online_payment_info_html: "crwdns20584:0crwdne20584:0"
           enable_online_payment: "crwdns20586:0crwdne20586:0"
           stripe_keys: "crwdns20588:0crwdne20588:0"
+          public_key: "crwdns23718:0crwdne23718:0"
+          secret_key: "crwdns23720:0crwdne23720:0"
           error_check_keys: "crwdns20596:0crwdne20596:0"
           stripe_keys_saved: "crwdns20598:0crwdne20598:0"
           error_saving_stripe_keys: "crwdns20600:0crwdne20600:0"
