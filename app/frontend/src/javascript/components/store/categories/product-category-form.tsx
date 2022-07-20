@@ -2,12 +2,12 @@ import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import slugify from 'slugify';
-import { FormInput } from '../form/form-input';
-import { FormSelect } from '../form/form-select';
-import { ProductCategory } from '../../models/product-category';
-import { FabButton } from '../base/fab-button';
-import { FabAlert } from '../base/fab-alert';
-import ProductCategoryAPI from '../../api/product-category';
+import { FormInput } from '../../form/form-input';
+import { FormSelect } from '../../form/form-select';
+import { ProductCategory } from '../../../models/product-category';
+import { FabButton } from '../../base/fab-button';
+import { FabAlert } from '../../base/fab-alert';
+import ProductCategoryAPI from '../../../api/product-category';
 
 interface ProductCategoryFormProps {
   action: 'create' | 'update' | 'delete',

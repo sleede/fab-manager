@@ -1,21 +1,21 @@
 import React from 'react';
-import { ProductCategory } from '../../models/product-category';
+import { ProductCategory } from '../../../models/product-category';
 import { DotsSixVertical } from 'phosphor-react';
-import { FabButton } from '../base/fab-button';
+import { FabButton } from '../../base/fab-button';
 import { ManageProductCategory } from './manage-product-category';
 
-interface ProductCategoriesListProps {
+interface ProductCategoriesTreeProps {
   productCategories: Array<ProductCategory>,
   onSuccess: (message: string) => void,
   onError: (message: string) => void,
 }
 
 /**
- * This component shows a Tree list of all Product's Categories
+ * This component shows a tree list of all Product's Categories
  */
-export const ProductCategoriesList: React.FC<ProductCategoriesListProps> = ({ productCategories, onSuccess, onError }) => {
+export const ProductCategoriesTree: React.FC<ProductCategoriesTreeProps> = ({ productCategories, onSuccess, onError }) => {
   return (
-    <div className='product-categories-list'>
+    <div className='product-categories-tree'>
       {productCategories.map((category) => (
         <div key={category.id} className='product-categories-item'>
           <div className='itemInfo'>
