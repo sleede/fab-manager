@@ -55,8 +55,10 @@ pt:
         url_placeholder: "Colar Url…"
         website_invalid: "O endereço do site não é válido"
       #user edition form
+      avatar_input:
+        add_an_avatar: "Add an avatar"
+        change: "Change"
       user_profile_form:
-        add_an_avatar: "Adicionar avatar"
         personal_data: "Pessoal"
         account_data: "Conta"
         account_networks: "Redes sociais"
