@@ -55,8 +55,10 @@ fr:
         url_placeholder: "Collez l'url …"
         website_invalid: "L'adresse du site web n'est pas une URL valide"
       #user edition form
+      avatar_input:
+        add_an_avatar: "Add an avatar"
+        change: "Change"
       user_profile_form:
-        add_an_avatar: "Ajouter un avatar"
         personal_data: "Personnel"
         account_data: "Compte"
         account_networks: "Réseaux sociaux"
