@@ -25,8 +25,8 @@ class Event < ApplicationRecord
 
   attr_accessor :recurrence, :recurrence_end_at
 
-  after_create :event_recurrence
   before_save :update_nb_free_places
+  after_create :event_recurrence
   # update event updated_at for index cache
   after_save -> { touch }
 

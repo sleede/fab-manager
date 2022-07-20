@@ -6,7 +6,7 @@
 - Refactored and documented the availability-slot-reservation data model
 - Display bookers names to connected users now apply to all resources
 - Fix a bug: for admins and managers, the current password is not requested before changing their own password
-- Fix a bug: missing translation for avatar changing
+- Fix a bug: missing translations
 - Fix a bug: unable to book a space's slot with an existing reservation
 - Fix a bug: Unable to import accounts from SSO when the transformation modal was opened but leaved empty
 - Fix a bug: Unable to change the group of a user
