@@ -112,6 +112,7 @@ de:
           subscribe_for_credits: "Abonnement abschließen, um kostenlose Schulungen zu erhalten"
           register_for_free: "Melden Sie sich kostenlos für folgende Schulungen an:"
           book_here: "Hier buchen"
+          canceled: "Canceled"
         #dashboard: my events
         events:
           your_next_events: "Ihre nächsten Termine"
