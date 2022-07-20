@@ -2,7 +2,7 @@
 
 # Stores data about a shopping data
 class ShoppingCart
-  attr_accessor :customer, :operator, :payment_method, :items, :coupon, :payment_schedule
+  attr_accessor :customer, :operator, :payment_method, :items, :coupon, :payment_schedule, :errors
 
   # @param items {Array<CartItem::BaseItem>}
   # @param coupon {CartItem::Coupon}
@@ -18,6 +18,7 @@ class ShoppingCart
     @items = items
     @coupon = coupon
     @payment_schedule = payment_schedule
+    @errors = {}
   end
 
   # compute the price details of the current shopping cart
@@ -87,11 +88,18 @@ class ShoppingCart
     items.each do |item|
       next if item.valid?(@items)
 
+      @errors = item.errors
       return false
     end
-    return false unless @coupon.valid?([])
+    unless @coupon.valid?(items)
+      @errors = @coupon.errors
+      return false
+    end
 
-    return false unless @payment_schedule.valid?([])
+    unless @payment_schedule.valid?(items)
+      @errors = @payment_schedule.errors
+      return false
+    end
 
     true
   end

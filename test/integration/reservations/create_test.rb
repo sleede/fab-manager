@@ -526,7 +526,7 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     login_as(@user_without_subscription, scope: :user)
 
     machine = Machine.find(6)
-    plan = Plan.find_by(group_id: @user_without_subscription.group_id)
+    plan = Plan.find(4)
     availability = machine.availabilities.first
 
     reservations_count = Reservation.count

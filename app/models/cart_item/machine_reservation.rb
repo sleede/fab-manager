@@ -25,6 +25,22 @@ class CartItem::MachineReservation < CartItem::Reservation
     'machine'
   end
 
+  def valid?(all_items)
+    @slots.each do |slot|
+      same_hour_slots = SlotsReservation.joins(:reservation).where(
+        reservations: { reservable: @reservable },
+        slot_id: slot[:slot_id],
+        canceled_at: nil
+      ).count
+      if same_hour_slots.positive?
+        @errors[:slot] = 'slot is reserved'
+        return false
+      end
+    end
+
+    super
+  end
+
   protected
 
   def credits

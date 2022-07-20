@@ -142,7 +142,7 @@ class Reservations::RestrictedTest < ActionDispatch::IntegrationTest
     end
 
     assert_equal 422, response.status
-    assert_match(/invalid shopping cart/, response.body)
+    assert_match(/availability is restricted for subscribers/, response.body)
 
     assert_equal reservations_count, Reservation.count
     assert_equal invoices_count, Invoice.count

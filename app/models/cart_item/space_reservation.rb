@@ -9,6 +9,7 @@ class CartItem::SpaceReservation < CartItem::Reservation
 
     super(customer, operator, space, slots)
     @plan = plan
+    @space = space
     @new_subscription = new_subscription
   end
 
@@ -23,6 +24,15 @@ class CartItem::SpaceReservation < CartItem::Reservation
 
   def type
     'space'
+  end
+
+  def valid?(all_items)
+    if @space.disabled
+      @errors[:reservable] = 'space is disabled'
+      return false
+    end
+
+    super
   end
 
   protected

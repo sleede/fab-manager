@@ -43,42 +43,27 @@ class CartItem::Reservation < CartItem::BaseItem
   def valid?(all_items)
     pending_subscription = all_items.find { |i| i.is_a?(CartItem::Subscription) }
     @slots.each do |slot|
-      if Slot.find(slot[:slot_id]).nil?
+      slot_db = Slot.find(slot[:slot_id])
+      if slot_db.nil?
         @errors[:slot] = 'slot does not exist'
         return false
       end
 
       availability = Availability.find_by(id: slot[:slot_attributes][:availability_id])
       if availability.nil?
-        @errors[:slot] = 'slot availability does not exist'
+        @errors[:availability] = 'availability does not exist'
         return false
       end
 
-      if availability.available_type == 'machines'
-        same_hour_slots = SlotsReservation.joins(:reservation).where(
-          reservations: { reservable: @reservable },
-          slot_id: slot[:slot_id],
-          canceled_at: nil
-        ).count
-        if same_hour_slots.positive?
-          @errors[:slot] = 'slot is reserved'
-          return false
-        end
-      elsif availability.available_type == 'space' && availability.spaces.first.disabled
-        @errors[:slot] = 'space is disabled'
-        return false
-      elsif availability.full?
-        @errors[:slot] = 'availability is complete'
+      if slot_db.full?
+        @errors[:slot] = 'availability is full'
         return false
       end
 
       next if availability.plan_ids.empty?
-      next if (@customer.subscribed_plan && availability.plan_ids.include?(@customer.subscribed_plan.id)) ||
-              (pending_subscription && availability.plan_ids.include?(pending_subscription.plan.id)) ||
-              (@operator.manager? && @customer.id != @operator.id) ||
-              @operator.admin?
+      next if required_subscription?(availability, pending_subscription)
 
-      @errors[:slot] = 'slot is restricted for subscribers'
+      @errors[:availability] = 'availability is restricted for subscribers'
       return false
     end
 
@@ -210,5 +195,16 @@ class CartItem::Reservation < CartItem::BaseItem
 
   def slots_params
     @slots.map { |slot| slot.permit(:id, :slot_id, :offered) }
+  end
+
+  ##
+  # Check if the given availability requires a valid subscription. If so, check if the current customer
+  # has the required susbcription, otherwise, check if the operator is privileged
+  ##
+  def required_subscription?(availability, pending_subscription)
+    (@customer.subscribed_plan && availability.plan_ids.include?(@customer.subscribed_plan.id)) ||
+      (pending_subscription && availability.plan_ids.include?(pending_subscription.plan.id)) ||
+      (@operator.manager? && @customer.id != @operator.id) ||
+      @operator.admin?
   end
 end

@@ -36,6 +36,8 @@ class CartItem::PaymentSchedule
   end
 
   def valid?(_all_items)
+    return true unless @requested && @plan&.monthly_payment
+
     if @plan&.disabled
       @errors[:item] = 'plan is disabled'
       return false
