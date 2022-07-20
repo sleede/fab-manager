@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ProductCategory } from '../../models/product-category';
-import { FabButton } from '../base/fab-button';
-import { FabModal, ModalSize } from '../base/fab-modal';
+import { ProductCategory } from '../../../models/product-category';
+import { FabButton } from '../../base/fab-button';
+import { FabModal, ModalSize } from '../../base/fab-modal';
 import { ProductCategoryForm } from './product-category-form';
 
 interface ManageProductCategoryProps {

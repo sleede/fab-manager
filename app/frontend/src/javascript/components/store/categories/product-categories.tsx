@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ProductCategory } from '../../models/product-category';
-import ProductCategoryAPI from '../../api/product-category';
+import { ProductCategory } from '../../../models/product-category';
+import ProductCategoryAPI from '../../../api/product-category';
 import { ManageProductCategory } from './manage-product-category';
-import { ProductCategoriesList } from './product-categories-list';
-import { FabAlert } from '../base/fab-alert';
-import { HtmlTranslate } from '../base/html-translate';
-import { IApplication } from '../../models/application';
-import { Loader } from '../base/loader';
+import { ProductCategoriesTree } from './product-categories-tree';
+import { FabAlert } from '../../base/fab-alert';
+import { HtmlTranslate } from '../../base/html-translate';
+import { IApplication } from '../../../models/application';
+import { Loader } from '../../base/loader';
 import { react2angular } from 'react2angular';
 
 declare const Application: IApplication;
@@ -18,7 +18,7 @@ interface ProductCategoriesProps {
 }
 
 /**
- * This component shows a list of all product categories and offer to manager them
+ * This component shows a tree list of all product categories and offer to manager them
  * by creating, deleting, modifying and reordering each product categories.
  */
 const ProductCategories: React.FC<ProductCategoriesProps> = ({ onSuccess, onError }) => {
@@ -61,7 +61,7 @@ const ProductCategories: React.FC<ProductCategoriesProps> = ({ onSuccess, onErro
       <FabAlert level="warning">
         <HtmlTranslate trKey="app.admin.store.product_categories.info" />
       </FabAlert>
-      <ProductCategoriesList
+      <ProductCategoriesTree
         productCategories={productCategories}
         onSuccess={handleSuccess} onError={onError} />
     </div>
