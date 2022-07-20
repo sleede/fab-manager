@@ -8,5 +8,5 @@ class ProductCategory < ApplicationRecord
   belongs_to :parent, class_name: 'ProductCategory'
   has_many :children, class_name: 'ProductCategory', foreign_key: :parent_id
 
-  acts_as_list scope: :parent
+  acts_as_list scope: :parent, top_of_list: 0
 end
