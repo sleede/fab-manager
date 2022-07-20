@@ -37,6 +37,7 @@ json.availability do
   json.id event.availability.id
   json.start_at event.availability.start_at
   json.end_at event.availability.end_at
+  json.slot_id event.availability.slots.first&.id
 end
 json.availability_id event.availability_id
 json.amount (event.amount / 100.0) if event.amount

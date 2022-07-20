@@ -7,10 +7,11 @@
   <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
   <div class="row">
     <div ng-class="{'col-md-6': schedule, 'm-h-sm': !schedule}">
-      <div ng-if="reservation">
+      <!-- this modal dialog is only still used in events reservation, so the following workaround can do the trick -->
+      <div ng-if="reservation && bookedEvent">
         <p translate>{{ 'app.shared.valid_reservation_modal.here_is_the_summary_of_the_slots_to_book_for_the_current_user' }}</p>
-        <ul ng-repeat="sr in reservation.slots_reservations_attributes">
-          <li><strong>{{sr.slot_attributes.start_at | amDateFormat: 'LL'}} : {{sr.slot_attributes.start_at | amDateFormat:'LT'}} - {{sr.slot_attributes.end_at | amDateFormat:'LT'}}</strong></li>
+        <ul ng-repeat="sr in reservation.reservation.slots_reservations_attributes">
+          <li><strong>{{bookedEvent.availability.start_at | amDateFormat: 'LL'}} : {{bookedEvent.availability.start_at | amDateFormat:'LT'}} - {{bookedEvent.availability.end_at | amDateFormat:'LT'}}</strong></li>
         </ul>
       </div>
       <div ng-if="subscription">

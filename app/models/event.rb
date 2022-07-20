@@ -109,6 +109,7 @@ class Event < ApplicationRecord
            nil
          end
     r = Recurrence.new(every: recurrence, on: on, starts: availability.start_at + 1.day, until: recurrence_end_at)
+    service = Availabilities::CreateAvailabilitiesService.new
     r.events.each do |date|
       days_diff = availability.end_at.day - availability.start_at.day
       start_at = DateTime.new(
@@ -157,6 +158,7 @@ class Event < ApplicationRecord
         recurrence_id: id
       )
       event.save
+      service.create_slots(event.availability)
     end
     update_columns(recurrence_id: id)
   end

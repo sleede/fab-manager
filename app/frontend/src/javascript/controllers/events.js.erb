@@ -662,7 +662,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
 
       reservation.slots_reservations_attributes.push({
         offered: event.offered || false,
-        slot_id: event.slot_id
+        slot_id: event.availability.slot_id
       });
 
       for (let evt_px_cat of Array.from(event.prices)) {
@@ -758,9 +758,12 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
           cartItems () {
             return mkCartItems(reservation, $scope.coupon.applied);
           },
+          event () {
+            return $scope.event;
+          }
         },
-        controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'LocalPayment', 'wallet', 'helpers', '$filter', 'coupon', 'cartItems',
-          function ($scope, $uibModalInstance, $state, reservation, price, Auth, LocalPayment, wallet, helpers, $filter, coupon, cartItems) {
+        controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'LocalPayment', 'wallet', 'helpers', '$filter', 'coupon', 'cartItems', 'event',
+          function ($scope, $uibModalInstance, $state, reservation, price, Auth, LocalPayment, wallet, helpers, $filter, coupon, cartItems, event) {
             // User's wallet amount
             $scope.wallet = wallet;
 
@@ -775,6 +778,9 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
 
             // Reservation
             $scope.reservation = reservation;
+
+            // the event
+            $scope.bookedEvent = event;
 
             // Used in wallet info template to interpolate some translations
             $scope.numberFilter = $filter('number');
