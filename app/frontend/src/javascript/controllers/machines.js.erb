@@ -480,6 +480,7 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$tran
      */
     $scope.markSlotAsModifying = function () {
       $scope.selectedEvent.backgroundColor = '#eee';
+      $scope.selectedEvent.oldTitle = $scope.selectedEvent.title;
       $scope.selectedEvent.title = _t('app.logged.machines_reserve.i_change');
       updateEvents($scope.selectedEvent);
     };
@@ -508,8 +509,8 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$tran
       const save = {
         slotId: $scope.events.modifiable.slot_id,
         borderColor: $scope.events.modifiable.borderColor,
-        user: angular.copy($scope.events.modifiable.user),
-        title: (!$scope.events.modifiable.user || $scope.currentUser.id === $scope.events.modifiable.user.id) ? _t('app.logged.machines_reserve.i_ve_reserved') : _t('app.logged.machines_reserve.not_available')
+        users: angular.copy($scope.events.modifiable.users),
+        title: (!$scope.events.modifiable.users || $scope.events.modifiable.users.map(u => u.id).includes($scope.currentUser.id)) ? _t('app.logged.machines_reserve.i_ve_reserved') : _t('app.logged.machines_reserve.not_available')
       };
 
       $scope.events.modifiable.backgroundColor = 'white';
@@ -526,7 +527,7 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$tran
       $scope.events.placable.slot_id = save.slotId;
       $scope.events.placable.is_reserved = true;
       $scope.events.placable.can_modify = true;
-      $scope.events.placable.user = angular.copy(save.user);
+      $scope.events.placable.users = angular.copy(save.users);
       updateEvents($scope.events.placable);
 
       refetchCalendar();
@@ -540,7 +541,7 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$tran
         $scope.events.placable.backgroundColor = 'white';
         $scope.events.placable.title = '';
       }
-      $scope.events.modifiable.title = $scope.currentUser.id === $scope.events.modifiable.user.id ? _t('app.logged.machines_reserve.i_ve_reserved') : _t('app.logged.machines_reserve.not_available');
+      $scope.events.modifiable.title = $scope.events.modifiable.oldTitle;
       $scope.events.modifiable.backgroundColor = 'white';
 
       updateEvents($scope.events.placable, $scope.events.modifiable);
@@ -727,7 +728,7 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$tran
       angular.forEach(reservation.slots, function (s) {
         if (slot.start.isSame(s.start_at)) {
           slot.slot_id = s.id;
-          slot.user = user;
+          slot.users = [user];
         }
       });
       updateEvents(slot);

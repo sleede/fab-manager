@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 json.array!(@slots) do |slot|
-  json.partial! 'api/availabilities/slot', slot: slot, operator_role: @operator_role
+  json.partial! 'api/availabilities/slot', slot: slot, operator_role: @operator_role, reservable: slot.availability.trainings.first
   json.borderColor trainings_events_border_color(slot.availability)
 
   json.is_completed slot.full?

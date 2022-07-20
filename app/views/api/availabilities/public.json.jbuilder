@@ -40,16 +40,17 @@ json.array!(@availabilities) do |availability|
     end
     json.is_reserved availability.is_reserved
     json.is_completed availability.full?
-    if availability.availability.available_type == 'machines'
+    case availability.availability.available_type
+    when 'machines'
       json.machine_ids availability.availability.machines.map(&:id)
       json.borderColor machines_slot_border_color(availability)
-    elsif availability.availability.available_type == 'space'
+    when 'space'
       json.space_id availability.availability.space.first.id
       json.borderColor space_slot_border_color(availability)
-    elsif availability.availability.available_type == 'training'
+    when 'training'
       json.training_id availability.availability.trainings.first.id
       json.borderColor trainings_events_border_color(availability)
-    elsif availability.availability.available_type == 'event'
+    when 'event'
       json.event_id availability.availability.event.id
       json.borderColor trainings_events_border_color(availability)
     else

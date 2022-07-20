@@ -124,16 +124,16 @@ class Availability < ApplicationRecord
     end
   end
 
-  def available_places_per_slot
+  def available_places_per_slot(reservable = nil)
     case available_type
     when 'training'
-      nb_total_places || trainings.map(&:nb_total_places).max
+      nb_total_places || reservable&.nb_total_places || trainings.map(&:nb_total_places).max
     when 'event'
       event.nb_total_places
     when 'space'
-      nb_total_places || spaces.map(&:default_places).max
+      nb_total_places || reservable&.default_places || spaces.map(&:default_places).max
     when 'machines'
-      machines.count
+      reservable.nil? ? machines.count : 1
     else
       raise TypeError
     end
