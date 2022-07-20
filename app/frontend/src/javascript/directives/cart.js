@@ -233,16 +233,16 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
          */
         $scope.modifySlot = function () {
           SlotsReservation.update({ id: $scope.events.modifiable.slots_reservations_ids[0] }, {
-            slot: {
+            slots_reservation: {
               slot_id: $scope.events.placable.slot_id
             }
           }
-          , function () { // success
+          , function (slotReservation) { // success
             // -> run the callback
             if (typeof $scope.onSlotModifySuccess === 'function') { $scope.onSlotModifySuccess(); }
             // -> set the events as successfully moved (to display a summary)
             $scope.events.moved = {
-              newSlot: $scope.events.placable,
+              newSlot: Object.assign($scope.events.placable, { slots_reservations_ids: [slotReservation.id] }),
               oldSlot: $scope.events.modifiable
             };
             // -> reset the 'moving' status
@@ -517,10 +517,10 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
               $scope.slot.group_ids = $scope.slot.plansGrouped.map(function (g) { return g.id; });
             }
 
-            if (!$scope.slot.is_completed && !$scope.events.modifiable) {
-              // slot is not fully reserved, and we are not currently modifying a slot
+            if (!$scope.slot.is_completed && $scope.slot.slots_reservations_ids.length === 0 && !$scope.events.modifiable) {
+              // slot is not fully reserved, and not reserved by the current user, and we are not currently modifying a slot
               // -> can be added to cart or removed if already present
-              const index = _.findIndex($scope.events.reserved, (e) => e._id === $scope.slot._id);
+              const index = _.findIndex($scope.events.reserved, (e) => e.slot_id === $scope.slot.slot_id);
               if (index === -1) {
                 if (($scope.limitToOneSlot === 'true') && $scope.events.reserved[0]) {
                 // if we limit the number of slots in the cart to 1, and there is already
@@ -538,8 +538,8 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
               resetCartState();
               // finally, we update the prices
               return updateCartPrice();
-            } else if (!$scope.slot.is_completed && $scope.events.modifiable) {
-              // slot is not fully reserved, but we are currently modifying a slot
+            } else if (!$scope.slot.is_completed && $scope.slot.slots_reservations_ids.length === 0 && $scope.events.modifiable) {
+              // slot is not fully reserved, not reserved by the current user, and we are currently modifying a slot
               // -> we request the calendar to change the rendering
               if (typeof $scope.onSlotModifyUnselect === 'function') {
                 // if the callback return false, cancel the selection for the current modification
@@ -547,21 +547,21 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                 if (!res) return;
               }
               // -> then, we re-affect the destination slot
-              if (!$scope.events.placable || ($scope.events.placable._id !== $scope.slot._id)) {
+              if (!$scope.events.placable || ($scope.events.placable.slot_id !== $scope.slot.slot_id)) {
                 return $scope.events.placable = $scope.slot;
               } else {
                 return $scope.events.placable = null;
               }
-            } else if ($scope.slot.is_reserved && $scope.events.modifiable && ($scope.slot.is_reserved._id === $scope.events.modifiable._id)) {
+            } else if ($scope.slot.slots_reservations_ids.length > 0 &&
+              $scope.events.modifiable &&
+              ($scope.slot._id === $scope.events.modifiable._id)) {
               // slot is reserved and currently modified
               // -> we cancel the modification
               $scope.cancelModifySlot();
-            } else if ($scope.slot.is_reserved &&
+            } else if ($scope.slot.slots_reservations_ids.length > 0 &&
               (slotCanBeModified($scope.slot) || slotCanBeCanceled($scope.slot)) &&
               !$scope.events.modifiable &&
-              ($scope.events.reserved.length === 0) &&
-              $scope.user &&
-              $scope.slot.users.map(u => u.id).includes($scope.user.id)) {
+              $scope.events.reserved.length === 0) {
               // slot is reserved and is ok to be modified or cancelled
               // but we are not currently running a modification or having any slots in the cart
               // -> first affect the modification/cancellation rights attributes to the current slot

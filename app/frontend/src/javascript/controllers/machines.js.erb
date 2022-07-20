@@ -451,6 +451,7 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$tran
      */
     $scope.markSlotAsAdded = function () {
       $scope.selectedEvent.backgroundColor = FREE_SLOT_BORDER_COLOR;
+      $scope.selectedEvent.oldTitle = $scope.selectedEvent.title;
       $scope.selectedEvent.title = _t('app.logged.machines_reserve.i_reserve');
       updateEvents($scope.selectedEvent);
     };
@@ -461,19 +462,14 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$tran
     $scope.markSlotAsRemoved = function (slot) {
       slot.backgroundColor = 'white';
       slot.borderColor = FREE_SLOT_BORDER_COLOR;
-      slot.title = '';
-      slot.isValid = false;
-      slot.slot_id = null;
-      slot.is_reserved = false;
-      slot.can_modify = false;
-      slot.offered = false;
+      slot.title = slot.oldTitle;
       updateEvents(slot);
     };
 
     /**
      * Callback when a slot was successfully cancelled. Reset the slot style as 'ready to book'
      */
-    $scope.slotCancelled = function () { $scope.markSlotAsRemoved($scope.selectedEvent); };
+    $scope.slotCancelled = function () { refreshCalendar() };
 
     /**
      * Change the last selected slot's appearance to looks like 'currently looking for a new destination to exchange'
@@ -506,31 +502,7 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$tran
      * When modifying an already booked reservation, callback when the modification was successfully done.
      */
     $scope.modifyMachineSlot = function () {
-      const save = {
-        slotId: $scope.events.modifiable.slot_id,
-        borderColor: $scope.events.modifiable.borderColor,
-        users: angular.copy($scope.events.modifiable.users),
-        title: (!$scope.events.modifiable.users || $scope.events.modifiable.users.map(u => u.id).includes($scope.currentUser.id)) ? _t('app.logged.machines_reserve.i_ve_reserved') : _t('app.logged.machines_reserve.not_available')
-      };
-
-      $scope.events.modifiable.backgroundColor = 'white';
-      $scope.events.modifiable.title = '';
-      $scope.events.modifiable.borderColor = FREE_SLOT_BORDER_COLOR;
-      $scope.events.modifiable.slot_id = null;
-      $scope.events.modifiable.is_reserved = false;
-      $scope.events.modifiable.can_modify = false;
-      updateEvents($scope.events.modifiable);
-
-      $scope.events.placable.title = save.title;
-      $scope.events.placable.backgroundColor = 'white';
-      $scope.events.placable.borderColor = save.borderColor;
-      $scope.events.placable.slot_id = save.slotId;
-      $scope.events.placable.is_reserved = true;
-      $scope.events.placable.can_modify = true;
-      $scope.events.placable.users = angular.copy(save.users);
-      updateEvents($scope.events.placable);
-
-      refetchCalendar();
+      refreshCalendar();
     };
 
     /**
@@ -556,21 +528,7 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$tran
       $scope.selectedPlan = null;
       Member.get({ id: $scope.ctrl.member.id }, function (member) {
         $scope.ctrl.member = member;
-        const view = uiCalendarConfig.calendars.calendar.fullCalendar('getView');
-        return Availability.machine({
-          machineId: $scope.machine.id,
-          member_id: $scope.ctrl.member.id,
-          start: view.start,
-          end: view.end,
-          timezone: Fablab.timezone
-        }, function (slots) {
-          uiCalendarConfig.calendars.calendar.fullCalendar('removeEvents');
-          return $scope.eventSources.splice(0, 1, {
-              events: slots,
-              textColor: 'black'
-            }
-          );
-        });
+        refreshCalendar();
       });
     };
 
@@ -626,23 +584,6 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$tran
      */
     $scope.afterPayment = function (paymentDocument) {
       Reservation.get({ id: paymentDocument.main_object.id }, function (reservation) {
-        angular.forEach($scope.events.reserved, function (machineSlot, key) {
-          machineSlot.is_reserved = true;
-          machineSlot.can_modify = true;
-          if ($scope.currentUser.role === 'admin' || ($scope.currentUser.role === 'manager' && reservation.user_id !== $scope.currentUser.id)) {
-            // an admin or a manager booked for someone else
-            machineSlot.title = _t('app.logged.machines_reserve.not_available');
-            machineSlot.borderColor = UNAVAILABLE_SLOT_BORDER_COLOR;
-            updateMachineSlot(machineSlot, reservation, $scope.ctrl.member);
-          } else {
-            // booked for "myself"
-            machineSlot.title = _t('app.logged.machines_reserve.i_ve_reserved');
-            machineSlot.borderColor = BOOKED_SLOT_BORDER_COLOR;
-            updateMachineSlot(machineSlot, reservation, $scope.currentUser);
-          }
-          machineSlot.backgroundColor = 'white';
-        });
-
         if ($scope.selectedPlan) {
           $scope.ctrl.member.subscribed_plan = angular.copy($scope.selectedPlan);
           if ($scope.ctrl.member.id === Auth._currentUser.id) {
@@ -651,8 +592,14 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$tran
           $scope.plansAreShown = false;
           $scope.selectedPlan = null;
         }
+        $scope.ctrl.member.training_credits = angular.copy(reservation.user.training_credits);
+        $scope.ctrl.member.machine_credits = angular.copy(reservation.user.machine_credits);
+        if ($scope.ctrl.member.id === Auth._currentUser.id) {
+          Auth._currentUser.training_credits = angular.copy(reservation.user.training_credits);
+          Auth._currentUser.machine_credits = angular.copy(reservation.user.machine_credits);
+        }
 
-        refetchCalendar();
+        refreshCalendar();
 
         // trigger the refresh of react components
         setTimeout(() => {
@@ -719,6 +666,27 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$tran
     };
 
     /**
+     * Refetch all events from the API and re-populate the calendar with the resulting slots
+     */
+    const refreshCalendar = function () {
+      const view = uiCalendarConfig.calendars.calendar.fullCalendar('getView');
+      return Availability.machine({
+        machineId: $scope.machine.id,
+        member_id: $scope.ctrl.member.id,
+        start: view.start,
+        end: view.end,
+        timezone: Fablab.timezone
+      }, function (slots) {
+        uiCalendarConfig.calendars.calendar.fullCalendar('removeEvents');
+        return $scope.eventSources.splice(0, 1, {
+            events: slots,
+            textColor: 'black'
+          }
+        );
+      });
+    }
+
+    /**
      * Triggered when fullCalendar tries to graphically render an event block.
      * Append the event tag into the block, just after the event title.
      * @see http://fullcalendar.io/docs/event_rendering/eventRender/
@@ -731,24 +699,6 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$tran
         }
         element.find('.fc-time').append(html);
       }
-    };
-
-    /**
-     * After payment, update the id of the newly reserved slot with the id returned by the server.
-     * This will allow the user to modify the reservation he just booked. The associated user will also be registered
-     * with the slot.
-     * @param slot {Object}
-     * @param reservation {Object}
-     * @param user {Object} user associated with the slot
-     */
-    const updateMachineSlot = function (slot, reservation, user) {
-      angular.forEach(reservation.slots, function (s) {
-        if (slot.start.isSame(s.start_at)) {
-          slot.slot_id = s.id;
-          slot.users = [user];
-        }
-      });
-      updateEvents(slot);
     };
 
     /**

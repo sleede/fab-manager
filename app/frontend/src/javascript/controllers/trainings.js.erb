@@ -188,19 +188,13 @@ Application.Controllers.controller('ReserveTrainingController', ['$scope', '$tra
       slot.backgroundColor = 'white';
       slot.title = slot.training.name;
       slot.borderColor = FREE_SLOT_BORDER_COLOR;
-      slot.id = null;
-      slot.isValid = false;
-      slot.is_reserved = false;
-      slot.can_modify = false;
-      slot.offered = false;
-      if (slot.is_completed) { slot.is_completed = false; }
       updateEvents(slot);
     };
 
     /**
      * Callback when a slot was successfully cancelled. Reset the slot style as 'ready to book'
      */
-    $scope.slotCancelled = function () { $scope.markSlotAsRemoved($scope.selectedEvent); };
+    $scope.slotCancelled = function () { refreshCalendar() };
 
     /**
      * Change the last selected slot's appearence to looks like 'currently looking for a new destination to exchange'
@@ -234,30 +228,7 @@ Application.Controllers.controller('ReserveTrainingController', ['$scope', '$tra
      * When modifying an already booked reservation, callback when the modification was successfully done.
      */
     $scope.modifyTrainingSlot = function () {
-      const save = {
-        slotId: $scope.events.modifiable.slot_id,
-        borderColor: $scope.events.modifiable.borderColor,
-        title: !AuthService.isAuthorized(['admin', 'manager']) ? $scope.events.placable.training.name + ' - ' + _t('app.logged.trainings_reserve.i_ve_reserved') : $scope.events.placable.training.name,
-      };
-
-      $scope.events.modifiable.backgroundColor = 'white';
-      $scope.events.modifiable.title = $scope.events.modifiable.training.name;
-      $scope.events.modifiable.borderColor = FREE_SLOT_BORDER_COLOR;
-      $scope.events.modifiable.slot_id = null;
-      $scope.events.modifiable.is_reserved = false;
-      $scope.events.modifiable.can_modify = false;
-      if ($scope.events.modifiable.is_completed) { $scope.events.modifiable.is_completed = false; }
-      updateEvents($scope.events.modifiable);
-
-      $scope.events.placable.title = save.title;
-      $scope.events.placable.backgroundColor = 'white';
-      $scope.events.placable.borderColor = save.borderColor;
-      $scope.events.placable.slot_id = save.slotId;
-      $scope.events.placable.is_reserved = true;
-      $scope.events.placable.can_modify = true;
-      updateEvents($scope.events.placable);
-
-      refetchCalendar();
+      refreshCalendar();
     };
 
     /**
@@ -282,22 +253,7 @@ Application.Controllers.controller('ReserveTrainingController', ['$scope', '$tra
       if ($scope.ctrl.member) {
         Member.get({ id: $scope.ctrl.member.id }, function (member) {
           $scope.ctrl.member = member;
-          const view = uiCalendarConfig.calendars.calendar.fullCalendar('getView');
-          const id = $transition$.params().id === 'all' ? $transition$.params().id : $scope.training.id;
-          Availability.trainings({
-            trainingId: id,
-            member_id: $scope.ctrl.member.id,
-            start: view.start,
-            end: view.end,
-            timezone: Fablab.timezone
-          }, function (trainings) {
-            uiCalendarConfig.calendars.calendar.fullCalendar('removeEvents');
-            $scope.eventSources.splice(0, 1, {
-              events: trainings,
-              textColor: 'black'
-            }
-            );
-          });
+          refreshCalendar();
         });
       }
       // as the events are re-fetched for the new user, we must re-init the cart
@@ -358,16 +314,6 @@ Application.Controllers.controller('ReserveTrainingController', ['$scope', '$tra
      */
     $scope.afterPayment = function (paymentDocument) {
       Reservation.get({ id: paymentDocument.main_object.id }, function (reservation) {
-        angular.forEach($scope.events.paid, function (trainingSlot, key) {
-          trainingSlot.backgroundColor = 'white';
-          trainingSlot.is_reserved = true;
-          trainingSlot.can_modify = true;
-          updateTrainingSlotId(trainingSlot, reservation);
-          trainingSlot.borderColor = '#b2e774';
-          trainingSlot.title = trainingSlot.training.name + ' - ' + _t('app.logged.trainings_reserve.i_ve_reserved');
-          updateEvents(trainingSlot);
-        });
-
         if ($scope.selectedPlan) {
           $scope.ctrl.member.subscribed_plan = angular.copy($scope.selectedPlan);
           if ($scope.ctrl.member.id === Auth._currentUser.id) {
@@ -383,7 +329,7 @@ Application.Controllers.controller('ReserveTrainingController', ['$scope', '$tra
           Auth._currentUser.machine_credits = angular.copy(reservation.user.machine_credits);
         }
 
-        refetchCalendar();
+        refreshCalendar();
       });
     };
 
@@ -426,6 +372,27 @@ Application.Controllers.controller('ReserveTrainingController', ['$scope', '$tra
       }
       return $scope.selectionTime = new Date();
     };
+
+    /**
+     * Refetch all events from the API and re-populate the calendar with the resulting slots
+     */
+    const refreshCalendar = function () {
+      const view = uiCalendarConfig.calendars.calendar.fullCalendar('getView');
+      const id = $transition$.params().id === 'all' ? $transition$.params().id : $scope.training.id;
+      Availability.trainings({
+        trainingId: id,
+        member_id: $scope.ctrl.member.id,
+        start: view.start,
+        end: view.end,
+        timezone: Fablab.timezone
+      }, function (trainings) {
+        uiCalendarConfig.calendars.calendar.fullCalendar('removeEvents');
+        $scope.eventSources.splice(0, 1, {
+          events: trainings,
+          textColor: 'black'
+        });
+      });
+    }
 
     /**
      * Triggered when fullCalendar tries to graphicaly render an event block.
