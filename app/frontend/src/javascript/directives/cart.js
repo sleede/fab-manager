@@ -556,7 +556,12 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
               // slot is reserved and currently modified
               // -> we cancel the modification
               $scope.cancelModifySlot();
-            } else if ($scope.slot.is_reserved && (slotCanBeModified($scope.slot) || slotCanBeCanceled($scope.slot)) && !$scope.events.modifiable && ($scope.events.reserved.length === 0)) {
+            } else if ($scope.slot.is_reserved &&
+              (slotCanBeModified($scope.slot) || slotCanBeCanceled($scope.slot)) &&
+              !$scope.events.modifiable &&
+              ($scope.events.reserved.length === 0) &&
+              $scope.user &&
+              $scope.slot.users.map(u => u.id).includes($scope.user.id)) {
               // slot is reserved and is ok to be modified or cancelled
               // but we are not currently running a modification or having any slots in the cart
               // -> first affect the modification/cancellation rights attributes to the current slot

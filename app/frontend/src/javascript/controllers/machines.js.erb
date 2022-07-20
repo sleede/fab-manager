@@ -554,7 +554,24 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$tran
     $scope.updateMember = function () {
       $scope.plansAreShown = false;
       $scope.selectedPlan = null;
-      Member.get({ id: $scope.ctrl.member.id }, function (member) { $scope.ctrl.member = member; });
+      Member.get({ id: $scope.ctrl.member.id }, function (member) {
+        $scope.ctrl.member = member;
+        const view = uiCalendarConfig.calendars.calendar.fullCalendar('getView');
+        return Availability.machine({
+          machineId: $scope.machine.id,
+          member_id: $scope.ctrl.member.id,
+          start: view.start,
+          end: view.end,
+          timezone: Fablab.timezone
+        }, function (slots) {
+          uiCalendarConfig.calendars.calendar.fullCalendar('removeEvents');
+          return $scope.eventSources.splice(0, 1, {
+              events: slots,
+              textColor: 'black'
+            }
+          );
+        });
+      });
     };
 
     /**

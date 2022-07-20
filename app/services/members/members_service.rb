@@ -36,7 +36,7 @@ class Members::MembersService
       end
     end
 
-    MembersService.handle_organization(params)
+    Members::MembersService.handle_organization(params)
 
     not_complete = member.need_completion?
     up_result = member.update(params)
