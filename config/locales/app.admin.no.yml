@@ -823,7 +823,6 @@
         search_for_an_user: "Søk etter bruker"
         add_a_new_member: "Legge til nytt medlem"
         reservations: "Reservasjoner"
-        username: "Username"
         surname: "Etternavn"
         first_name: "Fornavn"
         email: "E-post"
