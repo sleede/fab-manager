@@ -56,8 +56,8 @@ pt:
         website_invalid: "O endereço do site não é válido"
       #user edition form
       avatar_input:
-        add_an_avatar: "Add an avatar"
-        change: "Change"
+        add_an_avatar: "Adicionar avatar"
+        change: "Alterar"
       user_profile_form:
         personal_data: "Pessoal"
         account_data: "Conta"
