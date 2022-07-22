@@ -1106,7 +1106,11 @@ angular.module('application.router', ['ui.router'])
 
       .state('app.admin.store', {
         abstract: true,
-        url: '/admin/store',
+        url: '/admin/store'
+      })
+
+      .state('app.admin.store.settings', {
+        url: '/settings',
         views: {
           'main@': {
             templateUrl: '/admin/store/index.html',
@@ -1115,20 +1119,54 @@ angular.module('application.router', ['ui.router'])
         }
       })
 
-      .state('app.admin.store.settings', {
-        url: '/settings'
+      .state('app.admin.store.products', {
+        url: '/products',
+        views: {
+          'main@': {
+            templateUrl: '/admin/store/index.html',
+            controller: 'AdminStoreController'
+          }
+        }
       })
 
-      .state('app.admin.store.products', {
-        url: '/products'
+      .state('app.admin.store.products_new', {
+        url: '/products/new',
+        views: {
+          'main@': {
+            templateUrl: '/admin/store/product_new.html',
+            controller: 'AdminStoreProductController'
+          }
+        }
+      })
+
+      .state('app.admin.store.products_edit', {
+        url: '/products/:id/edit',
+        views: {
+          'main@': {
+            templateUrl: '/admin/store/product_edit.html',
+            controller: 'AdminStoreProductController'
+          }
+        }
       })
 
       .state('app.admin.store.categories', {
-        url: '/categories'
+        url: '/categories',
+        views: {
+          'main@': {
+            templateUrl: '/admin/store/index.html',
+            controller: 'AdminStoreController'
+          }
+        }
       })
 
       .state('app.admin.store.orders', {
-        url: '/orders'
+        url: '/orders',
+        views: {
+          'main@': {
+            templateUrl: '/admin/store/index.html',
+            controller: 'AdminStoreController'
+          }
+        }
       })
 
       // OpenAPI Clients

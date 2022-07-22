@@ -1899,6 +1899,7 @@ en:
         all_products: "All products"
         categories_of_store: "Store's categories"
         the_orders: "Orders"
+        back_products_list: "Back to products list"
         product_categories:
           title: "Categories"
           info: "<strong>Information:</strong></br>Find below all the categories created. The categories are arranged on two levels maximum, you can arrange them with a drag and drop. The order of the categories will be identical on the public view and the list below. Please note that you can delete a category or a sub-category even if they are associated with products. The latter will be left without categories. If you delete a category that contains sub-categories, the latter will also be deleted. <strong>Make sure that your categories are well arranged and save your choice.</strong>"
@@ -1931,3 +1932,25 @@ en:
           create_a_product: "Create a product"
           successfully_deleted: "The product has been successfully deleted"
           unable_to_delete: "Unable to delete the product: "
+        new_product:
+          add_a_new_product: "Add a new product"
+          successfully_created: "The new product has been created."
+        edit_product:
+          successfully_updated: "The product has been updated."
+        product_form:
+          name: "Name of product"
+          sku: "Reference product (SKU)"
+          slug: "Name of URL"
+          is_show_in_store: "Available in the store"
+          is_active_price: "Activate the price"
+          price_and_rule_of_selling_product: "Price and rule for selling the product"
+          price: "Price of product"
+          quantity_min: "Minimum number of items for the shopping cart"
+          linking_product_to_category: "Linking this product to an existing category"
+          assigning_category: "Assigning a category"
+          assigning_category_info: "<strong>Information</strong></br>You can only declare one category per product. If you assign this product to a sub-category, it will automatically be assigned to its parent category as well."
+          assigning_machines: "Assigning machines"
+          assigning_machines_info: "<strong>Information</strong></br>You can link one or more machines from your fablab to your product, this product will then be subject to the filters on the catalogue view.</br>The machines selected below will be linked to the product."
+          product_description: "Product description"
+          product_description_info: "<strong>Information</strong></br>This product description will be present in the product sheet. You have a few editorial styles at your disposal to create the product sheet."
+          save: "Save"

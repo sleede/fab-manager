@@ -550,3 +550,5 @@ en:
         validate_button: "Validate the new card"
       form_multi_select:
         create_label: "Add {VALUE}"
+      form_check_list:
+        select_all: "Select all"

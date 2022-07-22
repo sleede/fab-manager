@@ -1,0 +1,17 @@
+.form-check-list {
+  position: relative;
+
+  .form-item-field {
+    display: block !important;
+  }
+
+  .checklist {
+    display: flex;
+    padding: 16px;
+    flex-wrap: wrap;
+  }
+
+  .checklist-item {
+    flex: 0 0 33.333333%;
+  }
+}

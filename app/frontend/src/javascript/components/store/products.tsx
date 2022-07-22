@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
-import { HtmlTranslate } from '../base/html-translate';
 import { Loader } from '../base/loader';
 import { IApplication } from '../../models/application';
-import { FabAlert } from '../base/fab-alert';
 import { FabButton } from '../base/fab-button';
 import { ProductsList } from './products-list';
 import { Product } from '../../models/product';
@@ -24,7 +22,6 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
   const { t } = useTranslation('admin');
 
   const [products, setProducts] = useState<Array<Product>>([]);
-  const [product, setProduct] = useState<Product>(null);
 
   useEffect(() => {
     ProductAPI.index().then(data => {
@@ -33,10 +30,10 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
   }, []);
 
   /**
-   * Open edit the product modal
+   * Goto edit product page
    */
   const editProduct = (product: Product) => {
-    setProduct(product);
+    window.location.href = `/#!/admin/store/products/${product.id}/edit`;
   };
 
   /**
@@ -53,10 +50,17 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
     }
   };
 
+  /**
+   * Goto new product page
+   */
+  const newProduct = (): void => {
+    window.location.href = '/#!/admin/store/products/new';
+  };
+
   return (
     <div>
       <h2>{t('app.admin.store.products.all_products')}</h2>
-      <FabButton className="save">{t('app.admin.store.products.create_a_product')}</FabButton>
+      <FabButton className="save" onClick={newProduct}>{t('app.admin.store.products.create_a_product')}</FabButton>
       <ProductsList
         products={products}
         onEdit={editProduct}

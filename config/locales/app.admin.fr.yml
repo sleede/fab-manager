@@ -1899,6 +1899,7 @@ fr:
         all_products: "Tous les produits"
         categories_of_store: "Les catégories de la boutique"
         the_orders: "Les commandes"
+        back_products_list: "Retrounez à la liste"
         product_categories:
           title: "Les catégories"
           info: "<strong>Information:</strong></br>Retrouvez ci-dessous toutes les catégories créés. Les catégories se rangent sur deux niveaux maximum, vous pouvez les agencer avec un glisser-déposer. L'ordre d'affichage des catégories sera identique sur la vue publique et la liste ci-dessous. Attention, Vous pouvez supprimer une catégorie ou une sous-catégorie même si elles sont associées à des produits. Ces derniers se retrouveront sans catégories. Si vous supprimez une catégorie contenant des sous-catégories, ces dernières seront elles aussi supprimées. <strong>Veillez au bon agencement de vos catégories et sauvegarder votre choix.</strong>"
@@ -1931,3 +1932,25 @@ fr:
           create_a_product: "Créer un produit"
           successfully_deleted: "Le produit a bien été supprimé"
           unable_to_delete: "Impossible de supprimer le produit: "
+        new_product:
+          add_a_new_product: "Ajouter un nouveau produit"
+          successfully_created: "Le produit a bien été créée."
+        edit_product:
+          successfully_updated: "Le produit a bien été mise à jour."
+        product_form:
+          name: "Nom de produit"
+          sku: "Référence produit (SKU)"
+          slug: "Nom de l'URL"
+          is_show_in_store: "Visible dans la boutique"
+          is_active_price: "Activer le prix"
+          price_and_rule_of_selling_product: "Prix et règle de vente du produit"
+          price: "Prix du produit"
+          quantity_min: "Nombre d'article minimum pour la mise au panier"
+          linking_product_to_category: "Lier ce product à une catégorie exisante"
+          assigning_category: "Attribuer à une catégorie"
+          assigning_category_info: "<strong>Information</strong></br>Vous ne pouvez déclarer qu'une catégorie par produit. Si vous attribuez ce produit à une sous catégorie, il sera attribué automatiquement aussi à sa catégorie parent."
+          assigning_machines: "Attribuer aux machines"
+          assigning_machines_info: "<strong>Information</strong></br>Vous pouvez lier une ou plusieurs machines de votre fablab à votre produit, Ce produit sera alors assujetti aux filtres sur la vue catalogue.</br>Les machines sélectionnées ci-dessous seront liées au produit."
+          product_description: "Description du produit"
+          product_description_info: "<strong>Information</strong></br>Cette description du produit sera présente dans la fiche du produit. Vous avez à disposition quelques styles rédactionnels pour créer la fiche du produit."
+          save: "Enregistrer"
