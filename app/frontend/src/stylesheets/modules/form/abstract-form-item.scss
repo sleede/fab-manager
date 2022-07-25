@@ -12,6 +12,7 @@
     p {
       @include text-sm;
       margin: 0;
+      cursor: pointer;
       &::first-letter { text-transform: uppercase; }
     }
 

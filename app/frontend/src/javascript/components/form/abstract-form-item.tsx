@@ -10,13 +10,14 @@ export interface AbstractFormItemProps<TFieldValues> extends PropsWithChildren<A
   className?: string,
   disabled?: boolean|((id: string) => boolean),
   onLabelClick?: (event: React.MouseEvent<HTMLLabelElement, MouseEvent>) => void,
+  inLine?: boolean,
 }
 
 /**
  * This abstract component should not be used directly.
  * Other forms components that are intended to be used with react-hook-form must extend this component.
  */
-export const AbstractFormItem = <TFieldValues extends FieldValues>({ id, label, tooltip, className, disabled, error, warning, rules, formState, onLabelClick, children }: AbstractFormItemProps<TFieldValues>) => {
+export const AbstractFormItem = <TFieldValues extends FieldValues>({ id, label, tooltip, className, disabled, error, warning, rules, formState, onLabelClick, inLine, children }: AbstractFormItemProps<TFieldValues>) => {
   const [isDirty, setIsDirty] = useState<boolean>(false);
   const [fieldError, setFieldError] = useState<{ message: string }>(error);
   const [isDisabled, setIsDisabled] = useState<boolean>(false);
@@ -59,14 +60,21 @@ export const AbstractFormItem = <TFieldValues extends FieldValues>({ id, label, 
 
   return (
     <label className={`form-item ${classNames}`} onClick={handleLabelClick}>
-      {label && <div className='form-item-header'>
+      {(label && !inLine) && <div className='form-item-header'>
         <p>{label}</p>
         {tooltip && <div className="item-tooltip">
           <span className="trigger"><i className="fa fa-question-circle" /></span>
           <div className="content">{tooltip}</div>
         </div>}
       </div>}
+
       <div className='form-item-field'>
+        {inLine && <div className='form-item-header'><p>{label}</p>
+          {tooltip && <div className="item-tooltip">
+            <span className="trigger"><i className="fa fa-question-circle" /></span>
+            <div className="content">{tooltip}</div>
+          </div>}
+        </div>}
         {children}
       </div>
       {(isDirty && fieldError) && <div className="form-item-error">{fieldError.message}</div> }

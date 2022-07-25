@@ -1,28 +1,22 @@
 .form-switch {
-  position: relative;
-
   .form-item-header {
-    position: absolute;
-    top: 16px;
-    left: 16px;
-    padding-top: 2px;
-    width: fit-content;
+    margin-bottom: 0;
 
-    .item-tooltip {
-      margin-left: 12px;
-      position: unset;
+    & > *:not(:first-child) {
+      margin-left: 1.5rem;
+    }
 
-      .content {
-        right: unset;
-        left: 0;
-      }
+    .item-tooltip .content {
+      max-width: min(75vw, 30ch);
     }
   }
 
   .form-item-field {
     display: flex;
-    flex-direction: row-reverse;
-    background-color: white;
     padding: 16px;
+    background-color: white;
+    & > *:not(:first-child) {
+      margin-left: 2rem;
+    }
   }
 }
