@@ -32,15 +32,22 @@ export const ProductCategoryForm: React.FC<ProductCategoryFormProps> = ({ action
   const { register, watch, setValue, control, handleSubmit, formState } = useForm<ProductCategory>({ defaultValues: { ...productCategory } });
 
   // filter all first level product categorie
-  const parents = productCategories.filter(c => !c.parent_id);
+  let parents = productCategories.filter(c => !c.parent_id);
+  if (action === 'update') {
+    parents = parents.filter(c => c.id !== productCategory.id);
+  }
 
   /**
    * Convert all parents to the react-select format
    */
   const buildOptions = (): Array<selectOption> => {
-    return parents.map(t => {
+    const options = parents.map(t => {
       return { value: t.id, label: t.name };
     });
+    if (action === 'update') {
+      options.unshift({ value: null, label: t('app.admin.store.product_category_form.no_parent') });
+    }
+    return options;
   };
 
   // Create slug from category's name
