@@ -16,7 +16,11 @@ class Slot < ApplicationRecord
     availability_places = availability.available_places_per_slot(reservable)
     return false if availability_places.nil?
 
-    slots_reservations.where(canceled_at: nil).count >= availability_places
+    if reservable.nil?
+      slots_reservations.where(canceled_at: nil).count >= availability_places
+    else
+      slots_reservations.includes(:reservation).where(canceled_at: nil).where('reservations.reservable': reservable).count >= availability_places
+    end
   end
 
   def duration
