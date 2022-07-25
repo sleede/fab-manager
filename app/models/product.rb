@@ -7,4 +7,6 @@ class Product < ApplicationRecord
   has_and_belongs_to_many :machines
 
   validates_numericality_of :amount, greater_than: 0, allow_nil: true
+
+  scope :active, -> { where(is_active: true) }
 end
