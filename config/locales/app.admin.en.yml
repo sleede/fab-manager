@@ -1914,6 +1914,7 @@ en:
           name: "Name of category"
           slug: "Name of URL"
           select_parent_product_category: "Choose a parent category (N1)"
+          no_parent: "No parent"
           create:
             error: "Unable to create the category: "
             success: "The new category has been created."
