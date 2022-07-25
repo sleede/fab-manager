@@ -353,34 +353,8 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
      * Callback to validate the booking of a free event
      */
     $scope.validReserveEvent = function () {
-      const cartItems = {
-        customer_id: $scope.ctrl.member.id,
-        items: [
-          {
-            reservation: {
-              reservable_id: $scope.event.id,
-              reservable_type: 'Event',
-              slots_reservations_attributes: [],
-              nb_reserve_places: $scope.reserve.nbReservePlaces,
-              tickets_attributes: []
-            }
-          }
-        ]
-      }
-      // a single slot is used for events
-      cartItems.items[0].reservation.slots_reservations_attributes.push({
-        slot_id: $scope.event.slot_id
-      });
-      // iterate over reservations per prices
-      for (let price_id in $scope.reserve.tickets) {
-        if (Object.prototype.hasOwnProperty.call($scope.reserve.tickets, price_id)) {
-          const seats = $scope.reserve.tickets[price_id];
-          cartItems.items[0].reservation.tickets_attributes.push({
-            event_price_category_id: price_id,
-            booked: seats
-          });
-        }
-      }
+      const reservation = mkReservation($scope.reserve, $scope.event)
+      const cartItems = mkCartItems(reservation, $scope.coupon.applied);
       // set the attempting marker
       $scope.attempting = true;
       // save the reservation to the API
@@ -391,14 +365,10 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
       }
       , function (response) {
       // reservation failed
-        $scope.alerts = [];
-        $scope.alerts.push({
-          msg: response.data.card[0],
-          type: 'danger'
-        });
+        growl.error(response && response.data && response.data.card && response.data.card[0] || 'server error');
         // unset the attempting marker
-        return $scope.attempting = false;
-      });
+        $scope.attempting = false;
+      })
     };
 
     /**
