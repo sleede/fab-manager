@@ -16,7 +16,7 @@ interface EditProductProps {
 }
 
 /**
- * This component show new product form
+ * This component show edit product form
  */
 const EditProduct: React.FC<EditProductProps> = ({ productId, onSuccess, onError }) => {
   const { t } = useTranslation('admin');
