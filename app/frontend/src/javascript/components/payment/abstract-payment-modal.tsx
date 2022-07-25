@@ -249,7 +249,7 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
 };
 
 AbstractPaymentModal.defaultProps = {
-  title: 'app.shared.payment.online_payment',
+  title: 'app.shared.abstract_payment_modal.online_payment',
   preventCgv: false,
   preventScheduleInfo: false,
   modalSize: ModalSize.medium
