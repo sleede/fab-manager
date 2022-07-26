@@ -1,173 +1,185 @@
 pt:
+  activerecord:
+    errors:
+      messages:
+        record_invalid: "Validation failed: %{errors}"
+        restrict_dependent_destroy:
+          has_one: "Cannot delete record because a dependent %{record} exists"
+          has_many: "Cannot delete record because dependent %{record} exist"
   date:
     abbr_day_names:
-    - Dom
-    - Seg
-    - Ter
-    - Qua
-    - Qui
-    - Sex
-    - Sáb
+      - Sun
+      - Mon
+      - Tue
+      - Wed
+      - Thu
+      - Fri
+      - Sat
     abbr_month_names:
-    - 
-    - Jan
-    - Fev
-    - Mar
-    - Abr
-    - Mai
-    - Jun
-    - Jul
-    - Ago
-    - Set
-    - Out
-    - Nov
-    - Dez
+      -
+      - Jan
+      - Feb
+      - Mar
+      - Apr
+      - May
+      - Jun
+      - Jul
+      - Aug
+      - Sep
+      - Oct
+      - Nov
+      - Dec
     day_names:
-    - Domingo
-    - Segunda-feira
-    - Terça-feira
-    - Quarta-feira
-    - Quinta-feira
-    - Sexta-feira
-    - Sábado
+      - Sunday
+      - Monday
+      - Tuesday
+      - Wednesday
+      - Thursday
+      - Friday
+      - Saturday
     formats:
-      default: "%d/%m/%Y"
-      long: "%d de %B de %Y"
-      short: "%d de %B"
+      default: "%Y-%m-%d"
+      long: "%B %d, %Y"
+      short: "%b %d"
     month_names:
-    - 
-    - Janeiro
-    - Fevereiro
-    - Março
-    - Abril
-    - Maio
-    - Junho
-    - Julho
-    - Agosto
-    - Setembro
-    - Outubro
-    - Novembro
-    - Dezembro
+      -
+      - January
+      - February
+      - March
+      - April
+      - May
+      - June
+      - July
+      - August
+      - September
+      - October
+      - November
+      - December
     order:
-    - :day
-    - :month
-    - :year
+      - :year
+      - :month
+      - :day
   datetime:
     distance_in_words:
       about_x_hours:
-        one: aproximadamente 1 hora
-        other: aproximadamente %{count} horas
+        one: about 1 hour
+        other: about %{count} hours
       about_x_months:
-        one: aproximadamente 1 mês
-        other: aproximadamente %{count} meses
+        one: about 1 month
+        other: about %{count} months
       about_x_years:
-        one: aproximadamente 1 ano
-        other: aproximadamente %{count} anos
+        one: about 1 year
+        other: about %{count} years
       almost_x_years:
-        one: quase 1 ano
-        other: quase %{count} anos
-      half_a_minute: meio minuto
+        one: almost 1 year
+        other: almost %{count} years
+      half_a_minute: half a minute
       less_than_x_minutes:
-        one: menos de um minuto
-        other: menos de %{count} minutos
+        one: less than a minute
+        other: less than %{count} minutes
       less_than_x_seconds:
-        one: menos de 1 segundo
-        other: menos de %{count} segundos
+        one: less than 1 second
+        other: less than %{count} seconds
       over_x_years:
-        one: mais de 1 ano
-        other: mais de %{count} anos
+        one: over 1 year
+        other: over %{count} years
       x_days:
-        one: 1 dia
-        other: "%{count} dias"
+        one: 1 day
+        other: "%{count} days"
       x_minutes:
-        one: 1 minuto
-        other: "%{count} minutos"
+        one: 1 minute
+        other: "%{count} minutes"
       x_months:
-        one: 1 mês
-        other: "%{count} meses"
+        one: 1 month
+        other: "%{count} months"
+      x_years:
+        one: 1 year
+        other: "%{count} years"
       x_seconds:
-        one: 1 segundo
-        other: "%{count} segundos"
+        one: 1 second
+        other: "%{count} seconds"
     prompts:
-      day: Dia
-      hour: Hora
-      minute: Minuto
-      month: Mês
-      second: Segundo
-      year: Ano
+      day: Day
+      hour: Hour
+      minute: Minute
+      month: Month
+      second: Seconds
+      year: Year
   errors:
     format: "%{attribute} %{message}"
     messages:
-      accepted: tem de ser aceite
-      blank: não pode estar em branco
-      confirmation: não coincide com a confirmação
-      empty: não pode estar vazio
-      equal_to: tem de ser igual a %{count}
-      even: tem de ser par
-      exclusion: é reservado
-      greater_than: tem de ser maior que %{count}
-      greater_than_or_equal_to: tem de ser maior ou igual a %{count}
-      inclusion: não está incluído na lista
-      invalid: é inválido
-      less_than: tem de ser menor que %{count}
-      less_than_or_equal_to: tem de ser menor ou igual a %{count}
-      not_a_number: não é um número
-      not_an_integer: tem de ser um inteiro
-      odd: tem de ser ímpar
-      record_invalid: 'A validação falhou: %{errors}'
-      taken: não está disponível
-      too_long: é demasiado grande (o máximo é de %{count} caracteres)
-      too_short: é demasiado pequeno (o mínimo é de %{count} caracteres)
-      wrong_length: comprimento errado (deve ter %{count} caracteres)
+      accepted: must be accepted
+      blank: can't be blank
+      present: must be blank
+      confirmation: doesn't match %{attribute}
+      empty: can't be empty
+      equal_to: must be equal to %{count}
+      even: must be even
+      exclusion: is reserved
+      greater_than: must be greater than %{count}
+      greater_than_or_equal_to: must be greater than or equal to %{count}
+      inclusion: is not included in the list
+      invalid: is invalid
+      less_than: must be less than %{count}
+      less_than_or_equal_to: must be less than or equal to %{count}
+      model_invalid: "Validation failed: %{errors}"
+      not_a_number: is not a number
+      not_an_integer: must be an integer
+      odd: must be odd
+      required: must exist
+      taken: has already been taken
+      too_long:
+        one: is too long (maximum is 1 character)
+        other: is too long (maximum is %{count} characters)
+      too_short:
+        one: is too short (minimum is 1 character)
+        other: is too short (minimum is %{count} characters)
+      wrong_length:
+        one: is the wrong length (should be 1 character)
+        other: is the wrong length (should be %{count} characters)
+      other_than: must be other than %{count}
+      wrong_content_type: "content type is not allowed"
     template:
-      body: 'Por favor, verifique os seguintes campos:'
+      body: 'There were problems with the following fields:'
       header:
-        one: 'Não foi possível guardar %{model}: 1 erro'
-        other: 'Não foi possível guardar %{model}: %{count} erros'
+        one: 1 error prohibited this %{model} from being saved
+        other: "%{count} errors prohibited this %{model} from being saved"
   helpers:
     select:
-      prompt: Por favor seleccione
+      prompt: Please select
     submit:
-      create: Criar %{model}
-      submit: Gravar %{model}
-      update: Actualizar %{model}
+      create: Create %{model}
+      submit: Save %{model}
+      update: Update %{model}
   number:
     currency:
       format:
-        delimiter: " "
-        format: "%n %u"
+        delimiter: ","
+        format: "%u%n"
         precision: 2
-        separator: ","
+        separator: "."
         significant: false
         strip_insignificant_zeros: false
-        unit: "€"
+        unit: "$"
     format:
-      delimiter: "."
+      delimiter: ","
       precision: 3
-      separator: ","
+      separator: "."
       significant: false
       strip_insignificant_zeros: false
     human:
       decimal_units:
         format: "%n %u"
         units:
-          billion:
-            one: mil milhões
-            other: mil milhões
-          million:
-            one: milhão
-            other: milhões
-          quadrillion:
-            one: mil biliões
-            other: mil biliões
-          thousand: mil
-          trillion:
-            one: bilião
-            other: biliões
+          billion: Billion
+          million: Million
+          quadrillion: Quadrillion
+          thousand: Thousand
+          trillion: Trillion
           unit: ''
       format:
         delimiter: ''
-        precision: 1
+        precision: 3
         significant: true
         strip_insignificant_zeros: true
       storage_units:
@@ -180,21 +192,24 @@ pt:
           kb: KB
           mb: MB
           tb: TB
+          pb: PB
+          eb: EB
     percentage:
       format:
         delimiter: ''
+        format: "%n%"
     precision:
       format:
         delimiter: ''
   support:
     array:
-      last_word_connector: ", e"
-      two_words_connector: " e "
+      last_word_connector: ", and "
+      two_words_connector: " and "
       words_connector: ", "
   time:
     am: am
     formats:
-      default: "%A, %d de %B de %Y, %H:%Mh"
-      long: "%A, %d de %B de %Y, %H:%Mh"
-      short: "%d/%m, %H:%M hs"
+      default: "%a, %d %b %Y %H:%M:%S %z"
+      long: "%B %d, %Y %H:%M"
+      short: "%d %b %H:%M"
     pm: pm
