@@ -55,8 +55,10 @@ de:
         url_placeholder: "Paste url…"
         website_invalid: "The website address is not a valid URL"
       #user edition form
-      user_profile_form:
+      avatar_input:
         add_an_avatar: "Add an avatar"
+        change: "Change"
+      user_profile_form:
         personal_data: "Personal"
         account_data: "Account"
         account_networks: "Social networks"
