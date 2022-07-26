@@ -62,7 +62,7 @@ class VatExportService
     vat_total = []
     service = VatHistoryService.new
     invoices.each do |i|
-      puts "processing invoice #{i.id}..." unless Rails.env.test?
+      Rails.logger.info "processing invoice #{i.id}..." unless Rails.env.test?
       vat_total.push service.invoice_vat(i)
     end
 
@@ -83,7 +83,7 @@ class VatExportService
       when 'amount'
         row << format_number(amount / 100.0)
       else
-        puts "Unsupported column: #{column}"
+        Rails.logger.warn "Unsupported column: #{column}"
       end
       row << separator
     end

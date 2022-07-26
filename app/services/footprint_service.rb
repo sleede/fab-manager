@@ -51,19 +51,18 @@ class FootprintService
       return saved if Rails.env.test?
 
       if saved.nil?
-        puts "Debug data not found for #{klass} [ id: #{item.id} ]"
+        Rails.logger.debug { "Debug data not found for #{klass} [ id: #{item.id} ]" }
       else
-        puts "Debug footprint for #{klass} [ id: #{item.id} ]"
-        puts '-----------------------------------------'
-        puts "columns: [ #{columns.join(', ')} ]"
-        puts "current: #{current}"
-        puts "  saved: #{saved.format_data(item.id)}"
-        puts '-----------------------------------------'
+        Rails.logger.debug do
+          "Debug footprint for #{klass} [ id: #{item.id} ]\n" \
+            "-----------------------------------------\ncolumns: [ #{columns.join(', ')} ]\n" \
+            "current: #{current}\n  saved: #{saved.format_data(item.id)}\n" \
+            '-----------------------------------------'
+        end
         item.footprint_children.map(&:debug_footprint)
       end
       others = FootprintDebug.where('klass = ? AND data LIKE ? AND id != ?', klass, "#{item.id}%", saved&.id)
-      puts "other possible matches IDs: #{others.map(&:id)}"
-      puts '-----------------------------------------'
+      Rails.logger.debug { "other possible matches IDs: #{others.map(&:id)}\n-----------------------------------------" }
     end
 
     private

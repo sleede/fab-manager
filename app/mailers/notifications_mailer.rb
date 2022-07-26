@@ -25,7 +25,7 @@ class NotificationsMailer < NotifyWith::NotificationsMailer
 
     send(notification.notification_type)
   rescue StandardError => e
-    STDERR.puts "[NotificationsMailer] notification cannot be sent: #{e}"
+    Rails.logger.error "[NotificationsMailer] notification cannot be sent: #{e}"
   end
 
   def helpers

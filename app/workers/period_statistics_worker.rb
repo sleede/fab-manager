@@ -8,7 +8,7 @@ class PeriodStatisticsWorker
   # @param period {String|Integer} date string or number of days until current date
   def perform(period)
     days = date_to_days(period)
-    puts "\n==> generating statistics for the last #{days} days <==\n"
+    Rails.logger.info "\n==> generating statistics for the last #{days} days <==\n"
     if days.zero?
       StatisticService.new.generate_statistic(start_date: DateTime.current.beginning_of_day, end_date: DateTime.current.end_of_day)
     else

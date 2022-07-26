@@ -74,7 +74,7 @@ class Availability < ApplicationRecord
                                 .joins(:slots)
                                 .where('slots.availability_id = ?', id)
     else
-      STDERR.puts "[safe_destroy] Availability with unknown type #{available_type}"
+      Rails.logger.warn "[safe_destroy] Availability with unknown type #{available_type}"
       reservations = []
     end
     if reservations.size.zero?
@@ -107,7 +107,7 @@ class Availability < ApplicationRecord
     when 'space'
       spaces.map(&:name).join(' - ')
     else
-      STDERR.puts "[title] Availability with unknown type #{available_type}"
+      Rails.logger.warn "[title] Availability with unknown type #{available_type}"
       '???'
     end
   end

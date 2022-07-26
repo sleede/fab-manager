@@ -135,7 +135,7 @@ class CartService
                                      plan: plan_info[:plan],
                                      new_subscription: plan_info[:new_subscription])
     else
-      STDERR.puts "WARNING: the reservable #{reservable} is not implemented"
+      Rails.logger.warn "the reservable #{reservable} is not implemented"
       raise NotImplementedError
     end
   end
@@ -172,7 +172,7 @@ class CartService
                                      plan: plan,
                                      new_subscription: true)
     else
-      STDERR.puts "WARNING: the reservable #{reservable} is not implemented"
+      Rails.logger.warn "WARNING: the reservable #{reservable} is not implemented"
       raise NotImplementedError
     end
   end

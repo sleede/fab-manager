@@ -175,8 +175,9 @@ class Invoice < PaymentDocument
     return unless Setting.get('invoicing_module')
 
     unless Rails.env.test?
-      puts "Creating an InvoiceWorker job to generate the following invoice: id(#{id}), main_item.object_id(#{main_item.object_id}), " \
-           "main_item.object_type(#{main_item.object_type}), user_id(#{invoicing_profile.user_id})"
+      Rails.logger.info "Creating an InvoiceWorker job to generate the following invoice: id(#{id}), " \
+                        "main_item.object_id(#{main_item.object_id}), " \
+                        "main_item.object_type(#{main_item.object_type}), user_id(#{invoicing_profile.user_id})"
     end
     InvoiceWorker.perform_async(id, user&.subscription&.expired_at)
   end
@@ -185,9 +186,7 @@ class Invoice < PaymentDocument
     return if Rails.env.test?
     return unless changed?
 
-    puts "WARNING: Invoice update triggered [ id: #{id}, reference: #{reference} ]"
-    puts '----------   changes   ----------'
-    puts changes
-    puts '---------------------------------'
+    Rails.logger.warn "Invoice update triggered [ id: #{id}, reference: #{reference} ]\n" \
+                      "----------   changes   ----------#{changes}\n---------------------------------"
   end
 end
