@@ -82,7 +82,9 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
       }).catch(error => onError(error));
     }
     if (showTermsAndConditionsInput) {
-      CustomAssetAPI.get(CustomAssetName.CguFile).then(setTermsAndConditions).catch(error => onError(error));
+      CustomAssetAPI.get(CustomAssetName.CguFile).then(cgu => {
+        if (cgu?.custom_asset_file_attributes) setTermsAndConditions(cgu);
+      }).catch(error => onError(error));
     }
     ProfileCustomFieldAPI.index().then(data => {
       const fData = data.filter(f => f.actived);

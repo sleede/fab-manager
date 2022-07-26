@@ -14,6 +14,7 @@
 - Fix a bug: Unable to import accounts from SSO when the transformation modal was opened but leaved empty
 - Fix a bug: Unable to change the group of a user
 - Fix a bug: As admin, unable to create a new member (#374)
+- Fix a bug: profile completion form is not shown is T&C were not filled
 
 ## v5.4.12 2022 July 06
 
