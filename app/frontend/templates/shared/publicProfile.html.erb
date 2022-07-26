@@ -74,7 +74,7 @@
         <h1 class="red text-u-c" translate>{{ 'app.shared.public_profile.trainings' }}</h1>
         <!-- <h3 class="text-u-c">Formations</h3> -->
         <ul class="list-unstyled" ng-if="user.training_reservations.length > 0 || user.trainings.length > 0">
-          <li ng-repeat="r in user.training_reservations | trainingReservationsFilter:'future'">
+          <li ng-repeat="r in user.training_reservations | trainingReservationsFilter:'future' | canceledReservationsFilter">
             {{r.reservable.name}} - <span class="label label-info text-white" translate>{{ 'app.shared.public_profile.to_come' }}</span>
           </li>
           <li ng-repeat="t in user.trainings">
