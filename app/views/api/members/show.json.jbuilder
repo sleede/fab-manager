@@ -70,19 +70,20 @@ json.all_projects @member.all_projects do |project|
     end
   end
 end
-json.events_reservations @member.reservations.where(reservable_type: 'Event').joins(:slots).order('slots.start_at asc') do |r|
-  json.id r.id
-  json.start_at r.slots.first.start_at
-  json.end_at r.slots.first.end_at
-  json.nb_reserve_places r.nb_reserve_places
-  json.tickets r.tickets do |t|
+json.events_reservations @member.reservations.where(reservable_type: 'Event').joins(:slots).order('slots.start_at asc').map(&:slots_reservations).flatten do |sr|
+  json.id sr.id
+  json.start_at sr.slot.start_at
+  json.end_at sr.slot.end_at
+  json.nb_reserve_places sr.reservation.nb_reserve_places
+  json.tickets sr.reservation.tickets do |t|
     json.booked t.booked
     json.price_category do
       json.name t.event_price_category.price_category.name
     end
   end
-  json.reservable r.reservable
+  json.reservable sr.reservation.reservable
   json.reservable_type 'Event'
+  json.canceled_at sr.canceled_at
 end
 json.invoices @member.invoices.order('reference DESC') do |i|
   json.id i.id

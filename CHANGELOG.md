@@ -6,6 +6,7 @@
 - Refactored and documented the availability-slot-reservation data model
 - Display bookers names to connected users now apply to all resources
 - Updated rails locales files
+- Fix a bug: prevent same slot booking feature ignores canceled reservations
 - Fix a bug: wrong currency on invoices files
 - Fix a bug: unable to reserve if user's subscription plan is disabled
 - Fix a bug: for admins and managers, the current password is not requested before changing their own password

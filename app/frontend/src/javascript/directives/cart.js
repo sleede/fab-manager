@@ -460,11 +460,13 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
          */
         const validateSameTimeReservations = function (slot, callback) {
           let sameTimeReservations = $scope.settings.overlapping_categories.split(',').map(function (k) {
-            return _.filter($scope.user[k], function (r) {
-              return slot.start.isSame(r.start_at) ||
-                (slot.end.isAfter(r.start_at) && slot.end.isBefore(r.end_at)) ||
-                (slot.start.isAfter(r.start_at) && slot.start.isBefore(r.end_at)) ||
-                (slot.start.isBefore(r.start_at) && slot.end.isAfter(r.end_at));
+            return _.filter($scope.user[k], function (sr) {
+              return !sr.canceled_at && (
+                slot.start.isSame(sr.start_at) ||
+                (slot.end.isAfter(sr.start_at) && slot.end.isBefore(sr.end_at)) ||
+                (slot.start.isAfter(sr.start_at) && slot.start.isBefore(sr.end_at)) ||
+                (slot.start.isBefore(sr.start_at) && slot.end.isAfter(sr.end_at))
+              );
             });
           });
           sameTimeReservations = _.union.apply(null, sameTimeReservations);
