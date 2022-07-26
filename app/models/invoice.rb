@@ -129,6 +129,11 @@ class Invoice < PaymentDocument
   def prevent_refund?
     return true if user.nil?
 
+    if main_item.nil?
+      Rails.logger.error "Invoice (id: #{id}) does not have a main_item and is probably in error"
+      return true
+    end
+
     if main_item.object_type == 'Reservation' && main_item.object&.reservable_type == 'Training'
       user.trainings.include?(main_item.object.reservable_id)
     else
