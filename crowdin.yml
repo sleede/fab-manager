@@ -13,5 +13,3 @@ files:
     translation: /config/locales/devise.%two_letters_code%.yml
   - source: /config/locales/mails.en.yml
     translation: /config/locales/mails.%two_letters_code%.yml
-  - source: /config/locales/rails.en.yml
-    translation: /config/locales/rails.%two_letters_code%.yml
