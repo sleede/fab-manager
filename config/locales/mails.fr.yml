@@ -31,7 +31,7 @@ fr:
         user_changed_group_html: "L'utilisateur <em><strong>%{NAME}</strong></em> a changé de groupe."
         previous_group: "Ancien groupe :"
         new_group: "Nouveau groupe :"
-        user_invalidated: "Le compte de l'utilisateur est invalidé."
+        user_invalidated: "Le compte de l'utilisateur a été invalidé."
     notify_admin_subscription_extended:
       subject: "Un abonnement a été prolongé"
       body:
@@ -356,13 +356,13 @@ fr:
         user_update_proof_of_identity_file: "Le membre %{NAME} a modifié le justificatif ci-dessous :"
         validate_user: "Veuillez valider son compte"
     notify_user_is_validated:
-      subject: "Le compte est valid"
+      subject: "Compte validé"
       body:
-        account_validated: "Votre compte est valid."
+        account_validated: "Votre compte a été validé. Vous avez maintenant accès aux fonctionnalités de réservation."
     notify_user_is_invalidated:
-      subject: "Le compte est invalid"
+      subject: "Compte invalidé"
       body:
-        account_invalidated: "Votre compte est invalid."
+        account_invalidated: "Votre compte a été invalidé. Vous ne pourrez plus réserver, jusqu'à ce que votre compte soit à nouveau validé."
     notify_user_proof_of_identity_refusal:
       subject: "Le justificatif a été refusé"
       body:
