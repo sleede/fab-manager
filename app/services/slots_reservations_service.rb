@@ -4,7 +4,7 @@
 class SlotsReservationsService
   class << self
     def cancel(slot_reservation)
-      # first we mark ths slot reseravtion as cancelled in DB, to free a ticket
+      # first we mark ths slot reservation as cancelled in DB, to free a ticket
       slot_reservation.update_attributes(canceled_at: DateTime.current)
 
       # then we try to remove this reservation from ElasticSearch, to keep the statistics up-to-date
@@ -18,6 +18,8 @@ class SlotsReservationsService
         conflicts: 'proceed',
         body: { query: { match: { reservationId: slot_reservation.reservation_id } } }
       )
+    rescue Faraday::ConnectionFailed
+      warn 'Unable to update data in elasticsearch'
     end
   end
 end
