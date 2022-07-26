@@ -356,13 +356,13 @@ fr:
         user_update_proof_of_identity_file: "Le membre %{NAME} a modifié le justificatif ci-dessous :"
         validate_user: "Veuillez valider son compte"
     notify_user_is_validated:
-      subject: "Le compte est valid"
+      subject: "Compte validé"
       body:
-        account_validated: "Votre compte est valid."
+        account_validated: "Votre compte a été validé."
     notify_user_is_invalidated:
-      subject: "Le compte est invalid"
+      subject: "Compte invalidé"
       body:
-        account_invalidated: "Votre compte est invalid."
+        account_invalidated: "Votre compte a été invalidé."
     notify_user_proof_of_identity_refusal:
       subject: "Le justificatif a été refusé"
       body:
