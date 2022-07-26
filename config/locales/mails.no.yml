@@ -31,7 +31,7 @@
         user_changed_group_html: "Bruker <em><strong>%{NAME}</strong></em> har endret gruppe."
         previous_group: "Forrige gruppe:"
         new_group: "Ny gruppe:"
-        user_invalidated: "The user's account is invalidated."
+        user_invalidated: "The user's account was invalidated."
     notify_admin_subscription_extended:
       subject: "Et abonnement har blitt utvidet"
       body:
@@ -356,13 +356,13 @@
         user_update_proof_of_identity_file: "Member %{NAME} has modified the supporting documents below:"
         validate_user: "Please validate this account"
     notify_user_is_validated:
-      subject: "The account is validated"
+      subject: "Account validated"
       body:
-        account_validated: "Your account is valid."
+        account_validated: "Your account was validated. Now, you have access to booking features."
     notify_user_is_invalidated:
-      subject: "The account is invalid"
+      subject: "Account invalidated"
       body:
-        account_invalidated: "Your account is invalid."
+        account_invalidated: "Your account was invalidated. You won't be able to book anymore, until your account is validated again."
     notify_user_proof_of_identity_refusal:
       subject: "Your supporting documents were refused"
       body:
