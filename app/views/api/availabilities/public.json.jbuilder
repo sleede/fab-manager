@@ -45,7 +45,7 @@ json.array!(@availabilities) do |availability|
       json.machine_ids availability.availability.machines.map(&:id)
       json.borderColor machines_slot_border_color(availability)
     when 'space'
-      json.space_id availability.availability.space.first.id
+      json.space_id availability.availability.spaces.first.id
       json.borderColor space_slot_border_color(availability)
     when 'training'
       json.training_id availability.availability.trainings.first.id
