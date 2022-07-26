@@ -1,205 +1,215 @@
 zu:
+  activerecord:
+    errors:
+      messages:
+        record_invalid: "crwdns23728:0%{errors}crwdne23728:0"
+        restrict_dependent_destroy:
+          has_one: "crwdns23730:0%{record}crwdne23730:0"
+          has_many: "crwdns23732:0%{record}crwdne23732:0"
   date:
     abbr_day_names:
-    - Sun
-    - Mon
-    - Tue
-    - Wed
-    - Thu
-    - Fri
-    - Sat
+      - crwdns23734:0crwdne23734:0
+      - crwdns23736:0crwdne23736:0
+      - crwdns23738:0crwdne23738:0
+      - crwdns23740:0crwdne23740:0
+      - crwdns23742:0crwdne23742:0
+      - crwdns23744:0crwdne23744:0
+      - crwdns23746:0crwdne23746:0
     abbr_month_names:
-    -
-    - Jan
-    - Feb
-    - Mar
-    - Apr
-    - May
-    - Jun
-    - Jul
-    - Aug
-    - Sep
-    - Oct
-    - Nov
-    - Dec
+      -
+      - crwdns23748:0crwdne23748:0
+      - crwdns23750:0crwdne23750:0
+      - crwdns23752:0crwdne23752:0
+      - crwdns23754:0crwdne23754:0
+      - crwdns23756:0crwdne23756:0
+      - crwdns23758:0crwdne23758:0
+      - crwdns23760:0crwdne23760:0
+      - crwdns23762:0crwdne23762:0
+      - crwdns23764:0crwdne23764:0
+      - crwdns23766:0crwdne23766:0
+      - crwdns23768:0crwdne23768:0
+      - crwdns23770:0crwdne23770:0
     day_names:
-    - Sunday
-    - Monday
-    - Tuesday
-    - Wednesday
-    - Thursday
-    - Friday
-    - Saturday
+      - crwdns23772:0crwdne23772:0
+      - crwdns23774:0crwdne23774:0
+      - crwdns23776:0crwdne23776:0
+      - crwdns23778:0crwdne23778:0
+      - crwdns23780:0crwdne23780:0
+      - crwdns23782:0crwdne23782:0
+      - crwdns23784:0crwdne23784:0
     formats:
-      default: "%Y-%m-%d"
-      long: "%B %d, %Y"
-      short: "%b %d"
+      default: "crwdns23786:0%Y-%m-%dcrwdne23786:0"
+      long: "crwdns23788:0%Bcrwdnd23788:0%dcrwdnd23788:0%Ycrwdne23788:0"
+      short: "crwdns23790:0%bcrwdnd23790:0%dcrwdne23790:0"
     month_names:
-    -
-    - January
-    - February
-    - March
-    - April
-    - May
-    - June
-    - July
-    - August
-    - September
-    - October
-    - November
-    - December
+      -
+      - crwdns23792:0crwdne23792:0
+      - crwdns23794:0crwdne23794:0
+      - crwdns23796:0crwdne23796:0
+      - crwdns23798:0crwdne23798:0
+      - crwdns23800:0crwdne23800:0
+      - crwdns23802:0crwdne23802:0
+      - crwdns23804:0crwdne23804:0
+      - crwdns23806:0crwdne23806:0
+      - crwdns23808:0crwdne23808:0
+      - crwdns23810:0crwdne23810:0
+      - crwdns23812:0crwdne23812:0
+      - crwdns23814:0crwdne23814:0
     order:
-    - :year
-    - :month
-    - :day
+      - crwdns23816:0crwdne23816:0
+      - crwdns23818:0crwdne23818:0
+      - crwdns23820:0crwdne23820:0
   datetime:
     distance_in_words:
       about_x_hours:
-        one: about 1 hour
-        other: about %{count} hours
+        one: crwdns23822:1crwdne23822:1
+        other: crwdns23822:5%{count}crwdne23822:5
       about_x_months:
-        one: about 1 month
-        other: about %{count} months
+        one: crwdns23824:1crwdne23824:1
+        other: crwdns23824:5%{count}crwdne23824:5
       about_x_years:
-        one: about 1 year
-        other: about %{count} years
+        one: crwdns23826:1crwdne23826:1
+        other: crwdns23826:5%{count}crwdne23826:5
       almost_x_years:
-        one: almost 1 year
-        other: almost %{count} years
-      half_a_minute: half a minute
+        one: crwdns23828:1crwdne23828:1
+        other: crwdns23828:5%{count}crwdne23828:5
+      half_a_minute: crwdns23830:0crwdne23830:0
       less_than_x_minutes:
-        one: less than a minute
-        other: less than %{count} minutes
+        one: crwdns23832:1crwdne23832:1
+        other: crwdns23832:5%{count}crwdne23832:5
       less_than_x_seconds:
-        one: less than 1 second
-        other: less than %{count} seconds
+        one: crwdns23834:1crwdne23834:1
+        other: crwdns23834:5%{count}crwdne23834:5
       over_x_years:
-        one: over 1 year
-        other: over %{count} years
+        one: crwdns23836:1crwdne23836:1
+        other: crwdns23836:5%{count}crwdne23836:5
       x_days:
-        one: 1 day
-        other: "%{count} days"
+        one: crwdns23838:1crwdne23838:1
+        other: "crwdns23838:5%{count}crwdne23838:5"
       x_minutes:
-        one: 1 minute
-        other: "%{count} minutes"
+        one: crwdns23840:1crwdne23840:1
+        other: "crwdns23840:5%{count}crwdne23840:5"
       x_months:
-        one: 1 month
-        other: "%{count} months"
+        one: crwdns23842:1crwdne23842:1
+        other: "crwdns23842:5%{count}crwdne23842:5"
+      x_years:
+        one: crwdns23844:1crwdne23844:1
+        other: "crwdns23844:5%{count}crwdne23844:5"
       x_seconds:
-        one: 1 second
-        other: "%{count} seconds"
+        one: crwdns23846:1crwdne23846:1
+        other: "crwdns23846:5%{count}crwdne23846:5"
     prompts:
-      day: Day
-      hour: Hour
-      minute: Minute
-      month: Month
-      second: Seconds
-      year: Year
+      day: crwdns23848:0crwdne23848:0
+      hour: crwdns23850:0crwdne23850:0
+      minute: crwdns23852:0crwdne23852:0
+      month: crwdns23854:0crwdne23854:0
+      second: crwdns23856:0crwdne23856:0
+      year: crwdns23858:0crwdne23858:0
   errors:
-    format: "%{attribute} %{message}"
+    format: "crwdns23860:0%{attribute}crwdnd23860:0%{message}crwdne23860:0"
     messages:
-      accepted: must be accepted
-      blank: can't be blank
-      present: must be blank
-      confirmation: doesn't match %{attribute}
-      empty: can't be empty
-      equal_to: must be equal to %{count}
-      even: must be even
-      exclusion: is reserved
-      greater_than: must be greater than %{count}
-      greater_than_or_equal_to: must be greater than or equal to %{count}
-      inclusion: is not included in the list
-      invalid: is invalid
-      less_than: must be less than %{count}
-      less_than_or_equal_to: must be less than or equal to %{count}
-      not_a_number: is not a number
-      not_an_integer: must be an integer
-      odd: must be odd
-      record_invalid: 'Validation failed: %{errors}'
-      restrict_dependent_destroy:
-        one: Cannot delete record because a dependent %{record} exists
-        many: Cannot delete record because dependent %{record} exist
-      taken: has already been taken
+      accepted: crwdns23862:0crwdne23862:0
+      blank: crwdns23864:0crwdne23864:0
+      present: crwdns23866:0crwdne23866:0
+      confirmation: crwdns23868:0%{attribute}crwdne23868:0
+      empty: crwdns23870:0crwdne23870:0
+      equal_to: crwdns23872:0%{count}crwdne23872:0
+      even: crwdns23874:0crwdne23874:0
+      exclusion: crwdns23876:0crwdne23876:0
+      greater_than: crwdns23878:0%{count}crwdne23878:0
+      greater_than_or_equal_to: crwdns23880:0%{count}crwdne23880:0
+      inclusion: crwdns23882:0crwdne23882:0
+      invalid: crwdns23884:0crwdne23884:0
+      less_than: crwdns23886:0%{count}crwdne23886:0
+      less_than_or_equal_to: crwdns23888:0%{count}crwdne23888:0
+      model_invalid: "crwdns23890:0%{errors}crwdne23890:0"
+      not_a_number: crwdns23892:0crwdne23892:0
+      not_an_integer: crwdns23894:0crwdne23894:0
+      odd: crwdns23896:0crwdne23896:0
+      required: crwdns23898:0crwdne23898:0
+      taken: crwdns23900:0crwdne23900:0
       too_long:
-        one: is too long (maximum is 1 character)
-        other: is too long (maximum is %{count} characters)
+        one: crwdns23902:1crwdne23902:1
+        other: crwdns23902:5%{count}crwdne23902:5
       too_short:
-        one: is too short (minimum is 1 character)
-        other: is too short (minimum is %{count} characters)
+        one: crwdns23904:1crwdne23904:1
+        other: crwdns23904:5%{count}crwdne23904:5
       wrong_length:
-        one: is the wrong length (should be 1 character)
-        other: is the wrong length (should be %{count} characters)
-      other_than: must be other than %{count}
-      wrong_content_type: "content type is not allowed"
+        one: crwdns23906:1crwdne23906:1
+        other: crwdns23906:5%{count}crwdne23906:5
+      other_than: crwdns23908:0%{count}crwdne23908:0
+      wrong_content_type: "crwdns23910:0crwdne23910:0"
     template:
-      body: 'There were problems with the following fields:'
+      body: 'crwdns23912:0crwdne23912:0'
       header:
-        one: 1 error prohibited this %{model} from being saved
-        other: "%{count} errors prohibited this %{model} from being saved"
+        one: crwdns23914:1%{model}crwdne23914:1
+        other: "crwdns23914:5%{count}crwdnd23914:5%{model}crwdne23914:5"
   helpers:
     select:
-      prompt: Please select
+      prompt: crwdns23916:0crwdne23916:0
     submit:
-      create: Create %{model}
-      submit: Save %{model}
-      update: Update %{model}
+      create: crwdns23918:0%{model}crwdne23918:0
+      submit: crwdns23920:0%{model}crwdne23920:0
+      update: crwdns23922:0%{model}crwdne23922:0
   number:
     currency:
       format:
-        delimiter: ","
-        format: "%u%n"
-        precision: 2
-        separator: "."
+        delimiter: "crwdns23924:0crwdne23924:0"
+        format: "crwdns23926:0%ucrwdnd23926:0%ncrwdne23926:0"
+        precision: 0
+        separator: "crwdns23930:0crwdne23930:0"
         significant: false
         strip_insignificant_zeros: false
-        unit: "$"
+        unit: "crwdns23932:0crwdne23932:0"
     format:
-      delimiter: ","
-      precision: 3
-      separator: "."
+      delimiter: "crwdns23934:0crwdne23934:0"
+      precision: 0
+      separator: "crwdns23938:0crwdne23938:0"
       significant: false
       strip_insignificant_zeros: false
     human:
       decimal_units:
-        format: "%n %u"
+        format: "crwdns23940:0%ncrwdnd23940:0%ucrwdne23940:0"
         units:
-          billion: Billion
-          million: Million
-          quadrillion: Quadrillion
-          thousand: Thousand
-          trillion: Trillion
-          unit: ''
+          billion: crwdns23942:0crwdne23942:0
+          million: crwdns23944:0crwdne23944:0
+          quadrillion: crwdns23946:0crwdne23946:0
+          thousand: crwdns23948:0crwdne23948:0
+          trillion: crwdns23950:0crwdne23950:0
+          unit: 'crwdns23952:0crwdne23952:0'
       format:
-        delimiter: ''
-        precision: 3
+        delimiter: 'crwdns23954:0crwdne23954:0'
+        precision: 0
         significant: true
         strip_insignificant_zeros: true
       storage_units:
-        format: "%n %u"
+        format: "crwdns23958:0%ncrwdnd23958:0%ucrwdne23958:0"
         units:
           byte:
-            one: Byte
-            other: Bytes
-          gb: GB
-          kb: KB
-          mb: MB
-          tb: TB
+            one: crwdns23960:1crwdne23960:1
+            other: crwdns23960:5crwdne23960:5
+          gb: crwdns23962:0crwdne23962:0
+          kb: crwdns23964:0crwdne23964:0
+          mb: crwdns23966:0crwdne23966:0
+          tb: crwdns23968:0crwdne23968:0
+          pb: crwdns23970:0crwdne23970:0
+          eb: crwdns23972:0crwdne23972:0
     percentage:
       format:
-        delimiter: ''
-        format: "%n%"
+        delimiter: 'crwdns23974:0crwdne23974:0'
+        format: "crwdns23976:0%ncrwdne23976:0"
     precision:
       format:
-        delimiter: ''
+        delimiter: 'crwdns23978:0crwdne23978:0'
   support:
     array:
-      last_word_connector: ", and "
-      two_words_connector: " and "
-      words_connector: ", "
+      last_word_connector: "crwdns23980:0crwdne23980:0"
+      two_words_connector: "crwdns23982:0crwdne23982:0"
+      words_connector: "crwdns23984:0crwdne23984:0"
   time:
-    am: am
+    am: crwdns23986:0crwdne23986:0
     formats:
-      default: "%a, %d %b %Y %H:%M:%S %z"
-      long: "%B %d, %Y %H:%M"
-      short: "%d %b %H:%M"
-    pm: pm
+      default: "crwdns23988:0%acrwdnd23988:0%dcrwdnd23988:0%bcrwdnd23988:0%Ycrwdnd23988:0%H:%M:%Scrwdnd23988:0%zcrwdne23988:0"
+      long: "crwdns23990:0%Bcrwdnd23990:0%dcrwdnd23990:0%Ycrwdnd23990:0%H:%Mcrwdne23990:0"
+      short: "crwdns23992:0%dcrwdnd23992:0%bcrwdnd23992:0%H:%Mcrwdne23992:0"
+    pm: crwdns23994:0crwdne23994:0
