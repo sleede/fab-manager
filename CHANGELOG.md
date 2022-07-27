@@ -19,6 +19,7 @@
 - Fix a bug: As admin, unable to create a new member (#374)
 - Fix a bug: profile completion form is not shown is T&C were not filled
 - Fix a bug: Erroneous "cancelation failed" message if elasticsearch was disabled
+- Fix a security issue: updated terser to 4.8.1 to fix [CVE-2022-25858](https://cve.mitre.org/cgi-bin/cvename.cgi?CVE-2022-25858)
 
 ## v5.4.12 2022 July 06
 
