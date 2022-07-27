@@ -7,6 +7,7 @@
 - Display bookers names to connected users now apply to all resources
 - Updated rails locales files
 - Usage of the rails logger instead of printing to standard output
+- Optionnaly add a username column to the member list (#375)
 - Fix a bug: canceled trainings are still shown on the public profile page
 - Fix a bug: prevent same slot booking feature ignores canceled reservations
 - Fix a bug: wrong currency on invoices files

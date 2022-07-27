@@ -1427,6 +1427,9 @@ en:
         enable_invoicing: "Enable invoicing"
         invoicing_module: "invoicing module"
         account_creation: "Account creation"
+        accounts_management: "Accounts management"
+        members_list: "Members list"
+        members_list_info: "You can customize the fields to display in the member management list"
         phone: "Phone"
         phone_is_required: "Phone required"
         phone_required_info: "You can define if the phone number should be required to register a new user on Fab-manager."
@@ -1470,6 +1473,7 @@ en:
         extended_prices_info_html: "Spaces can have different prices depending on the cumulated duration of the booking. You can choose if this apply to all bookings or only to those starting within the same day."
         extended_prices_in_same_day: "Extended prices in the same day"
         public_registrations: "Public registrations"
+        show_username_in_admin_list: "Show the username in the list"
         overlapping_options:
           training_reservations: "Trainings"
           machine_reservations: "Machines"

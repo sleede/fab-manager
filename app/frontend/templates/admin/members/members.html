@@ -38,7 +38,7 @@
     <thead>
     <tr>
       <th style="width:4%" class="hidden-xs" ng-if="enableUserValidationRequired"></th>
-      <th style="width:8%"><a ng-click="setOrderMember('username')">{{ 'app.admin.members.username' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': member.order=='username', 'fa fa-sort-alpha-desc': member.order=='-username', 'fa fa-arrows-v': member.order }"></i></a></th>
+      <th style="width:8%" ng-show="displayUsername"><a ng-click="setOrderMember('username')">{{ 'app.admin.members.username' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': member.order=='username', 'fa fa-sort-alpha-desc': member.order=='-username', 'fa fa-arrows-v': member.order }"></i></a></th>
       <th style="width:14%"><a ng-click="setOrderMember('last_name')">{{ 'app.admin.members.surname' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': member.order=='last_name', 'fa fa-sort-alpha-desc': member.order=='-last_name', 'fa fa-arrows-v': member.order }"></i></a></th>
       <th style="width:14%"><a ng-click="setOrderMember('first_name')">{{ 'app.admin.members.first_name' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': member.order=='first_name', 'fa fa-sort-alpha-desc': member.order=='-first_name', 'fa fa-arrows-v': member.order }"></i></a></th>
       <th style="width:14%" class="hidden-xs"><a ng-click="setOrderMember('email')">{{ 'app.admin.members.email' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': member.order=='email', 'fa fa-sort-alpha-desc': member.order=='-email', 'fa fa-arrows-v': member.order }"></i></a></th>
@@ -53,7 +53,7 @@
       <td class="text-center" ng-if="enableUserValidationRequired">
         <span ng-class="{ 'text-success': !!m.validated_at }"><i class="fa fa-user-check"></i></span>
       </td>
-      <td class="text-c">{{ m.username }}</td>
+      <td class="text-c" ng-show="displayUsername">{{ m.username }}</td>
       <td class="text-c">{{ m.profile.last_name }}</td>
       <td class="text-c">{{ m.profile.first_name }}</td>
       <td class="hidden-xs">{{ m.email }}</td>
