@@ -825,6 +825,7 @@ en:
         search_for_an_user: "Search for an user"
         add_a_new_member: "Add a new member"
         reservations: "Reservations"
+        username: "Username"
         surname: "Last name"
         first_name: "First name"
         email: "Email"

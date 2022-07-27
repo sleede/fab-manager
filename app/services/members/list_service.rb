@@ -26,7 +26,8 @@ class Members::ListService
 
       # ILIKE => PostgreSQL case-insensitive LIKE
       if params[:search].size.positive?
-        @query = @query.where('profiles.first_name ILIKE :search OR ' \
+        @query = @query.where('users.username ILIKE :search OR ' \
+                              'profiles.first_name ILIKE :search OR ' \
                               'profiles.last_name ILIKE :search OR '  \
                               'profiles.phone ILIKE :search OR ' \
                               'email ILIKE :search OR ' \
@@ -83,6 +84,8 @@ class Members::ListService
       offset = ((params[:page]&.to_i || 1) - 1) * (params[:size]&.to_i || 1)
 
       order_key = case order_key
+                  when 'username'
+                    'users.username'
                   when 'last_name'
                     'profiles.last_name'
                   when 'first_name'
