@@ -1,0 +1,28 @@
+.form-checklist {
+  position: relative;
+
+  .form-item-field {
+    display: block !important;
+  }
+
+  .checklist {
+    display: flex;
+    padding: 16px;
+    flex-wrap: wrap;
+
+    .checklist-item {
+      flex: 0 0 33.333333%;
+
+      & > input {
+        margin-right: 1em;
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+    justify-content: space-evenly;
+    width: 50%;
+    margin: auto auto 1.2em;
+  }
+}
