@@ -42,7 +42,7 @@ class Members::ListService
     end
 
     def search(current_user, query, subscription, include_admins = 'false')
-      members = User.includes(:profile)
+      members = User.includes(:profile, :statistic_profile)
                     .joins(:profile,
                            :statistic_profile,
                            :roles,
