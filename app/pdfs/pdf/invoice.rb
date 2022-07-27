@@ -249,7 +249,7 @@ class PDF::Invoice < Prawn::Document
         data += [[I18n.t('invoices.including_amount_payed_on_ordering'), number_to_currency(total)]]
 
         # checking the round number
-        rounded = sprintf('%.2f', total_vat / 100.00).to_f + sprintf('%.2f', total_ht / 100.00)
+        rounded = (sprintf('%.2f', total_vat / 100.00).to_f + sprintf('%.2f', total_ht / 100.00).to_f).to_s
         if rounded != sprintf('%.2f', total_calc)
           Rails.logger.error 'rounding the numbers cause an invoice inconsistency. ' \
                              "Total expected: #{sprintf('%.2f', total_calc)}, total computed: #{rounded}"
