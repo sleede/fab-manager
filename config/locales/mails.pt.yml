@@ -31,7 +31,7 @@ pt:
         user_changed_group_html: "O usuário <em><strong>%{NAME}</strong></em> mudou de grupo."
         previous_group: "Grupo anterior:"
         new_group: "Novo grupo:"
-        user_invalidated: "The user's account was invalidated."
+        user_invalidated: "A conta do usuário foi invalidada."
     notify_admin_subscription_extended:
       subject: "Uma assinatura foi estendida"
       body:
@@ -356,13 +356,13 @@ pt:
         user_update_proof_of_identity_file: "O membro %{NAME} modificou os documentos abaixo:"
         validate_user: "Por favor valide esta conta"
     notify_user_is_validated:
-      subject: "Account validated"
+      subject: "Conta validada"
       body:
-        account_validated: "Your account was validated. Now, you have access to booking features."
+        account_validated: "Sua conta foi validada. Agora, você tem acesso aos recursos do reserva."
     notify_user_is_invalidated:
-      subject: "Account invalidated"
+      subject: "Conta invalidada"
       body:
-        account_invalidated: "Your account was invalidated. You won't be able to book anymore, until your account is validated again."
+        account_invalidated: "Sua conta foi invalidada. Você não poderá mais reservar até que sua conta seja validada novamente."
     notify_user_proof_of_identity_refusal:
       subject: "Seus documentos foram recusados"
       body:
