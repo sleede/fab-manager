@@ -1,6 +1,6 @@
 # Changelog Fab-manager
 
-## next deploy
+## v5.4.13 2022 July 27
 
 - Improved calendars loading time
 - Refactored and documented the availability-slot-reservation data model
