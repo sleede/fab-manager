@@ -595,3 +595,4 @@ pt:
     flickr: "flickr"
     machines_module: "Módulo de Máquinas"
     user_change_group: "Permitir que os usuários mudem de grupo"
+    show_username_in_admin_list: "Show the username in the admin's members list"
