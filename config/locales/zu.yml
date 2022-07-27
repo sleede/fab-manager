@@ -245,13 +245,9 @@ zu:
     reservations: "crwdns3553:0crwdne3553:0"
     available_seats: "crwdns3555:0crwdne3555:0"
   reservation_ics:
-    summary: "crwdns22986:0%{TYPE}crwdne22986:0"
-    type:
-      Machine: "crwdns22988:0crwdne22988:0"
-      Space: "crwdns22990:0crwdne22990:0"
-      Event: "crwdns22992:0crwdne22992:0"
-      Training: "crwdns22994:0crwdne22994:0"
-    description: "crwdns22996:0%{COUNT}crwdnd22996:0%{ITEM}crwdne22996:0"
+    description_slot: "crwdns24018:0%{COUNT}crwdnd24018:0%{ITEM}crwdne24018:0"
+    description_training: "crwdns24020:0%{TYPE}crwdne24020:0"
+    description_event: "crwdns24022:0%{NUMBER}crwdne24022:0"
     alarm_summary: "crwdns22998:0crwdne22998:0"
   roles:
     member: "crwdns20446:0crwdne20446:0"
