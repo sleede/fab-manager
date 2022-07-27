@@ -245,9 +245,9 @@ fr:
     reservations: "Réservations"
     available_seats: "Places disponibles"
   reservation_ics:
-    description_slot: "You have booked %{COUNT} slots of %{ITEM}"
-    description_training: "You have booked a %{TYPE} training"
-    description_event: "You have booked %{NUMBER} tickets for this event"
+    description_slot: "Vous avez réservé %{COUNT} créneaux de %{ITEM}"
+    description_training: "Vous avez réservé une formation %{TYPE}"
+    description_event: "Vous avez réservé %{NUMBER} places pour cet événement"
     alarm_summary: "Rappelez-vous votre réservation"
   roles:
     member: "Membre"
