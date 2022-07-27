@@ -558,6 +558,7 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$transi
      */
     const initialize = function () {
       if ($scope.currentUser.role !== 'admin') {
+        $scope.ctrl.member = $scope.currentUser;
         Member.get({ id: $scope.currentUser.id }, function (member) { $scope.ctrl.member = member; });
       }
       // we load the availabilities from a callback function of the $scope.eventSources, instead of resolving a promise

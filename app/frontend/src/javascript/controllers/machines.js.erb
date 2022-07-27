@@ -647,6 +647,7 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$tran
       });
 
       if ($scope.currentUser.role !== 'admin') {
+        $scope.ctrl.member = $scope.currentUser;
         return Member.get({ id: $scope.currentUser.id }, function (member) { $scope.ctrl.member = member; });
       }
     };

@@ -9,6 +9,7 @@
 - Usage of the rails logger instead of printing to standard output
 - Optionnaly add a username column to the member list (#375)
 - Improved attached ICS file texts, in reservations emails
+- Fix a bug: user validation required alert is displayed and disappears instantly
 - Fix a bug: canceled trainings are still shown on the public profile page
 - Fix a bug: prevent same slot booking feature ignores canceled reservations
 - Fix a bug: wrong currency on invoices files
