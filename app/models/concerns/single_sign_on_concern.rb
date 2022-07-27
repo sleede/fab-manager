@@ -40,8 +40,10 @@ module SingleSignOnConcern
     ## @param sso_mapping {String} must be of form 'user._field_' or 'profile._field_'. Eg. 'user.email'
     ## @param data {*} the data to put in the given key. Eg. 'user@example.com'
     def set_data_from_sso_mapping(sso_mapping, data)
+      return if data.nil? || data.blank?
+
       if sso_mapping.to_s.start_with? 'user.'
-        self[sso_mapping[5..-1].to_sym] = data unless data.nil? || data.blank?
+        self[sso_mapping[5..-1].to_sym] = data
       elsif sso_mapping.to_s.start_with? 'profile.'
         case sso_mapping.to_s
         when 'profile.avatar'
@@ -67,10 +69,11 @@ module SingleSignOnConcern
           self.statistic_profile ||= StatisticProfile.new
           self.statistic_profile.birthday = data
         else
-          profile[sso_mapping[8..-1].to_sym] = data unless data.nil?
+          profile[sso_mapping[8..-1].to_sym] = data
         end
       end
-      return if data.nil? || data.blank? || mapped_from_sso&.include?(sso_mapping)
+
+      return if mapped_from_sso&.include?(sso_mapping)
 
       self.mapped_from_sso = [mapped_from_sso, sso_mapping].compact.join(',')
     end
