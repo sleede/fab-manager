@@ -595,4 +595,4 @@ fr:
     flickr: "flickr"
     machines_module: "Module machines"
     user_change_group: "Permettre aux utilisateurs de changer leur groupe"
-    show_username_in_admin_list: "Show the username in the admin's members list"
+    show_username_in_admin_list: "Afficher le nom d'utilisateur dans la liste des membres de l'administrateur"
