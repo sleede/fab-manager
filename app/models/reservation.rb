@@ -12,7 +12,7 @@ class Reservation < ApplicationRecord
   has_many :slots_reservations, dependent: :destroy
   has_many :slots, through: :slots_reservations
 
-  accepts_nested_attributes_for :slots, allow_destroy: true
+  accepts_nested_attributes_for :slots_reservations, allow_destroy: true
   belongs_to :reservable, polymorphic: true
 
   has_many :tickets
@@ -35,12 +35,17 @@ class Reservation < ApplicationRecord
   # @param canceled    if true, count the number of seats for this reservation, including canceled seats
   def total_booked_seats(canceled: false)
     # cases:
-    # - machine/training/space reservation => 1 slot = 1 seat (currently not covered by this function)
-    # - event reservation => seats = nb_reserve_place (normal price) + tickets.booked (other prices)
-    return 0 if slots.first.canceled_at && !canceled
+    if reservable_type == 'Event'
+      # - event reservation => seats = nb_reserve_place (normal price) + tickets.booked (other prices)
+      total = nb_reserve_places
+      total += tickets.map(&:booked).map(&:to_i).reduce(:+) if tickets.count.positive?
 
-    total = nb_reserve_places
-    total += tickets.map(&:booked).map(&:to_i).reduce(:+) if tickets.count.positive?
+      total = 0 unless slots_reservations.first&.canceled_at.nil?
+    else
+      # - machine/training/space reservation => 1 slot_reservation = 1 seat
+      total = slots_reservations.count
+      total -= slots_reservations.where.not(canceled_at: nil).count unless canceled
+    end
 
     total
   end
@@ -93,26 +98,22 @@ class Reservation < ApplicationRecord
   private
 
   def machine_not_already_reserved
-    already_reserved = false
-    slots.each do |slot|
-      same_hour_slots = Slot.joins(:reservations).where(
+    slots_reservations.each do |slot|
+      same_hour_slots = SlotsReservation.joins(:reservation).where(
         reservations: { reservable_type: reservable_type, reservable_id: reservable_id },
-        start_at: slot.start_at,
-        end_at: slot.end_at,
-        availability_id: slot.availability_id,
+        slot_id: slot.slot_id,
         canceled_at: nil
-      )
-      if same_hour_slots.any?
-        already_reserved = true
+      ).count
+      if same_hour_slots.positive?
+        errors.add(:reservable, 'already reserved')
         break
       end
     end
-    errors.add(:machine, 'already reserved') if already_reserved
   end
 
   def training_not_fully_reserved
-    slot = slots.first
-    errors.add(:training, 'already fully reserved') if Availability.find(slot.availability_id).full?
+    full = slots_reservations.map(&:slot).map(&:full?).reduce(:&)
+    errors.add(:reservable, 'already fully reserved') if full
   end
 
   def slots_not_locked

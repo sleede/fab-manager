@@ -25,7 +25,7 @@ class NotificationsMailer < NotifyWith::NotificationsMailer
 
     send(notification.notification_type)
   rescue StandardError => e
-    STDERR.puts "[NotificationsMailer] notification cannot be sent: #{e}"
+    Rails.logger.error "[NotificationsMailer] notification cannot be sent: #{e}"
   end
 
   def helpers
@@ -54,7 +54,7 @@ class NotificationsMailer < NotifyWith::NotificationsMailer
   end
 
   def notify_member_create_reservation
-    attachments[@attached_object.ics_filename] = @attached_object.to_ics.encode(Encoding::ISO_8859_15)
+    attachments[@attached_object.ics_filename] = @attached_object.to_ics.encode(Encoding::UTF_8)
     mail(to: @recipient.email,
          subject: t('notifications_mailer.notify_member_create_reservation.subject'),
          template_name: 'notify_member_create_reservation')

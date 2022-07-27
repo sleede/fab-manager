@@ -6,7 +6,7 @@ namespace :fablab do
 
     desc 'switch the active authentication provider'
     task :switch_provider, [:provider] => :environment do |_task, args|
-      providers = AuthProvider.all.inject('') { |str, item| str + item[:name] + ', ' }
+      providers = AuthProvider.all.inject('') { |str, item| "#{str}#{item[:name]}, " }
       unless args.provider
         puts "\e[0;31mERROR\e[0m: You must pass a provider name to activate. Available providers are: #{providers[0..-3]}"
         next
@@ -32,14 +32,14 @@ namespace :fablab do
       AuthProvider.find_by(name: args.provider).update_attribute(:status, 'active')
 
       # migrate the current users.
-      if AuthProvider.active.providable_type != DatabaseProvider.name
-        # Concerns any providers except local database
-        User.all.each(&:generate_auth_migration_token)
-      else
+      if AuthProvider.active.providable_type == DatabaseProvider.name
         User.all.each do |user|
           # Concerns local database provider
           user.update_attribute(:auth_token, nil)
         end
+      else
+        # Concerns any providers except local database
+        User.all.each(&:generate_auth_migration_token)
       end
 
       # ask the user to restart the application

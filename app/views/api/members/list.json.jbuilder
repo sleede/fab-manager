@@ -1,6 +1,7 @@
 json.array!(@members) do |member|
   json.maxMembers @max_members
   json.id member.id
+  json.username member.username
   json.email member.email if current_user
   json.profile do
     json.first_name member.profile.first_name

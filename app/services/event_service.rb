@@ -166,27 +166,33 @@ class EventService
         e_params = e_params.merge(
           event_files_attributes: ef_attributes
         )
+        original_slots_ids = event.availability.slots.map(&:id)
         begin
           results[:events].push status: !!e.update(e_params.permit!), event: e # rubocop:disable Style/DoubleNegation
         rescue StandardError => err
           results[:events].push status: false, event: e, error: err.try(:record).try(:class).try(:name), message: err.message
         end
-        results[:slots].concat(update_slots(e.availability_id))
+        results[:slots].concat(update_slots(e.availability_id, original_slots_ids))
       end
+      original_slots_ids = event.availability.slots.map(&:id)
       begin
+        event_params[:availability_attributes][:id] = event.availability_id
         results[:events].push status: !!event.update(event_params), event: event # rubocop:disable Style/DoubleNegation
       rescue StandardError => err
         results[:events].push status: false, event: event, error: err.try(:record).try(:class).try(:name), message: err.message
       end
-      results[:slots].concat(update_slots(event.availability_id))
+      results[:slots].concat(update_slots(event.availability_id, original_slots_ids))
       results
     end
 
-    def update_slots(availability_id)
+    def update_slots(availability_id, original_slots_ids)
       results = []
       avail = Availability.find(availability_id)
-      avail.slots.each do |s|
-        results.push(status: !!s.update_attributes(start_at: avail.start_at, end_at: avail.end_at), slot: s) # rubocop:disable Style/DoubleNegation
+      Slot.where(id: original_slots_ids).each do |slot|
+        results.push(
+          status: !!slot.update_attributes(availability_id: availability_id, start_at: avail.start_at, end_at: avail.end_at), # rubocop:disable Style/DoubleNegation
+          slot: slot
+        )
       rescue StandardError => err
         results.push status: false, slot: s, error: err.try(:record).try(:class).try(:name), message: err.message
       end

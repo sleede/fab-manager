@@ -55,9 +55,8 @@ class API::PayzenController < API::PaymentsController
 
   def check_cart
     cart = shopping_cart
-    unless cart.valid?
-      render json: { error: 'unable to pay' }, status: :unprocessable_entity and return
-    end
+    render json: { error: cart.errors }, status: :unprocessable_entity and return unless cart.valid?
+
     render json: { cart: 'ok' }, status: :ok
   end
 

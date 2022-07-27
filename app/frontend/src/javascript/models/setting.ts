@@ -136,7 +136,8 @@ export enum SettingName {
   MachinesModule = 'machines_module',
   UserChangeGroup = 'user_change_group',
   UserValidationRequired = 'user_validation_required',
-  UserValidationRequiredList = 'user_validation_required_list'
+  UserValidationRequiredList = 'user_validation_required_list',
+  ShowUsernameInAdminList = 'show_username_in_admin_list'
 }
 
 export type SettingValue = string|boolean|number;

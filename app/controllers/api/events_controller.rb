@@ -55,6 +55,8 @@ class API::EventsController < API::ApiController
     authorize Event
     @event = Event.new(event_params.permit!)
     if @event.save
+      service = Availabilities::CreateAvailabilitiesService.new
+      service.create_slots(@event.availability)
       render :show, status: :created, location: @event
     else
       render json: @event.errors, status: :unprocessable_entity

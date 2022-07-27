@@ -1,57 +1,64 @@
 es-VE:
+  activerecord:
+    errors:
+      messages:
+        record_invalid: "La validación falló: %{errors}"
+        restrict_dependent_destroy:
+          has_one: No se puede eliminar el registro porque existe un %{record} dependiente
+          has_many: No se puede eliminar el registro porque existen %{record} dependientes
   date:
     abbr_day_names:
-    - dom
-    - lun
-    - mar
-    - mié
-    - jue
-    - vie
-    - sáb
+      - dom
+      - lun
+      - mar
+      - mié
+      - jue
+      - vie
+      - sáb
     abbr_month_names:
-    - 
-    - ene
-    - feb
-    - mar
-    - abr
-    - may
-    - jun
-    - jul
-    - ago
-    - sep
-    - oct
-    - nov
-    - dic
+      -
+      - ene
+      - feb
+      - mar
+      - abr
+      - may
+      - jun
+      - jul
+      - ago
+      - sep
+      - oct
+      - nov
+      - dic
     day_names:
-    - domingo
-    - lunes
-    - martes
-    - miércoles
-    - jueves
-    - viernes
-    - sábado
+      - domingo
+      - lunes
+      - martes
+      - miércoles
+      - jueves
+      - viernes
+      - sábado
     formats:
       default: "%d/%m/%Y"
       long: "%A, %d de %B de %Y"
       short: "%d de %b"
     month_names:
-    - 
-    - enero
-    - febrero
-    - marzo
-    - abril
-    - mayo
-    - junio
-    - julio
-    - agosto
-    - septiembre
-    - octubre
-    - noviembre
-    - diciembre
+      -
+      - enero
+      - febrero
+      - marzo
+      - abril
+      - mayo
+      - junio
+      - julio
+      - agosto
+      - septiembre
+      - octubre
+      - noviembre
+      - diciembre
     order:
-    - :day
-    - :month
-    - :year
+      - :day
+      - :month
+      - :year
   datetime:
     distance_in_words:
       about_x_hours:
@@ -85,6 +92,9 @@ es-VE:
       x_months:
         one: 1 mes
         other: "%{count} meses"
+      x_years:
+        one: 1 año
+        other: "%{count} años"
       x_seconds:
         one: 1 segundo
         other: "%{count} segundos"
@@ -112,13 +122,11 @@ es-VE:
       invalid: no es válido
       less_than: debe ser menor que %{count}
       less_than_or_equal_to: debe ser menor o igual que %{count}
+      model_invalid: "La validación falló: %{errors}"
       not_a_number: no es un número
       not_an_integer: debe ser un entero
       odd: debe ser un número impar
-      record_invalid: 'La validación falló: %{errors}'
-      restrict_dependent_destroy:
-        one: No se puede eliminar el registro porque existe un %{record} dependiente
-        many: No se puede eliminar el registro porque existen %{record} dependientes
+      required: debe existir
       taken: ya está en  uso
       too_long:
         one: es demasiado largo (máximo 1 caracter)
@@ -130,6 +138,7 @@ es-VE:
         one: longitud errónea (debe ser de 1 caracter)
         other: longitud errónea (debe ser de %{count} caracteres)
       other_than: debe ser distinto de %{count}
+      wrong_content_type: "el tipo de contenido no está permitido"
     template:
       body: 'Revise que los siguientes campos sean válidos:'
       header:
@@ -163,10 +172,14 @@ es-VE:
         format: "%n %u"
         units:
           billion: mil millones
-          million: millón
+          million:
+            one: millón
+            other: millones
           quadrillion: mil billones
           thousand: mil
-          trillion: billón
+          trillion:
+            one: billón
+            other: billones
           unit: ''
       format:
         delimiter: "."
@@ -183,9 +196,12 @@ es-VE:
           kb: KB
           mb: MB
           tb: TB
+          pb: PB
+          eb: EB
     percentage:
       format:
         delimiter: ","
+        format: "%n%"
     precision:
       format:
         delimiter: ","

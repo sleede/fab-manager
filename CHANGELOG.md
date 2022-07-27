@@ -1,6 +1,32 @@
 # Changelog Fab-manager
 
-## next deploy
+## v5.4.13 2022 July 27
+
+- Improved calendars loading time
+- Refactored and documented the availability-slot-reservation data model
+- Display bookers names to connected users now apply to all resources
+- Updated rails locales files
+- Usage of the rails logger instead of printing to standard output
+- Optionnaly add a username column to the member list (#375)
+- Improved attached ICS file texts, in reservations emails
+- Fix a bug: user validation required alert is displayed and disappears instantly
+- Fix a bug: canceled trainings are still shown on the public profile page
+- Fix a bug: prevent same slot booking feature ignores canceled reservations
+- Fix a bug: wrong currency on invoices files
+- Fix a bug: unable to reserve if user's subscription plan is disabled
+- Fix a bug: for admins and managers, the current password is not requested before changing their own password
+- Fix a bug: missing translations
+- Fix a bug: unable to book a space's slot with an existing reservation
+- Fix a bug: Unable to import accounts from SSO when the transformation modal was opened but leaved empty
+- Fix a bug: Unable to change the group of a user
+- Fix a bug: As admin, unable to create a new member (#374)
+- Fix a bug: profile completion form is not shown is T&C were not filled
+- Fix a bug: Erroneous "cancelation failed" message if elasticsearch was disabled
+- Fix a bug: admin group being replaced in SSO authentication (#376)
+- Fix a bug: SSO data being overridden when it is empty and the user can change it (#377)
+- Fix a security issue: updated terser to 4.8.1 to fix [CVE-2022-25858](https://cve.mitre.org/cgi-bin/cvename.cgi?CVE-2022-25858)
+- Fix a security issue: updated tzinfo to 1.2.10 to fix [CVE-2022-31163](https://cve.mitre.org/cgi-bin/cvename.cgi?CVE-2022-31163)
+- Fix a security issue: updated rails to 5.2.8.1 to fix [CVE-2022-32224](https://cve.mitre.org/cgi-bin/cvename.cgi?CVE-2022-32224)
 
 ## v5.4.12 2022 July 06
 

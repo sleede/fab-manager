@@ -12,7 +12,7 @@ class MigrateInvoiceToInvoicingProfile < ActiveRecord::Migration[4.2]
     # remove and save periods in memory
     periods = Integrity::ArchiveHelper.backup_and_remove_periods
     # migrate invoices
-    puts 'Migrating invoices. This may take a while...'
+    Rails.logger.info 'Migrating invoices. This may take a while...'
     Invoice.order(:id).all.each do |i|
       user = User.find(i.user_id)
       operator = User.find_by(id: i.operator_id)

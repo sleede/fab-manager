@@ -122,7 +122,7 @@ class Plan < ApplicationRecord
     if !stat_type.nil? && !stat_subtype.nil?
       StatisticTypeSubType.create!(statistic_type: stat_type, statistic_sub_type: stat_subtype)
     else
-      puts 'ERROR: Unable to create the statistics association for the new plan. ' \
+      Rails.logger.error 'Unable to create the statistics association for the new plan. ' \
            'Possible causes: the type or the subtype were not created successfully.'
     end
   end

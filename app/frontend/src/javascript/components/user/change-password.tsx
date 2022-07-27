@@ -9,19 +9,21 @@ import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { PasswordInput } from './password-input';
 import { FormState } from 'react-hook-form/dist/types/form';
 import MemberAPI from '../../api/member';
+import { User } from '../../models/user';
 
 interface ChangePasswordProp<TFieldValues> {
   register: UseFormRegister<TFieldValues>,
   onError: (message: string) => void,
   currentFormPassword: string,
   formState: FormState<TFieldValues>,
+  user: User,
 }
 
 /**
  * This component shows a button that trigger a modal dialog to verify the user's current password.
  * If the user's current password is correct, the modal dialog is closed and the button is replaced by a form to set the new password.
  */
-export const ChangePassword = <TFieldValues extends FieldValues>({ register, onError, currentFormPassword, formState }: ChangePasswordProp<TFieldValues>) => {
+export const ChangePassword = <TFieldValues extends FieldValues>({ register, onError, currentFormPassword, formState, user }: ChangePasswordProp<TFieldValues>) => {
   const { t } = useTranslation('shared');
 
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
@@ -31,8 +33,8 @@ export const ChangePassword = <TFieldValues extends FieldValues>({ register, onE
   const { handleSubmit, register: passwordRegister } = useForm<{ password: string }>();
 
   useEffect(() => {
-    MemberAPI.current().then(user => {
-      setIsPrivileged(user.role === 'admin' || user.role === 'manager');
+    MemberAPI.current().then(operator => {
+      setIsPrivileged((operator.role === 'admin' || operator.role === 'manager') && user.id !== operator.id);
     }).catch(error => onError(error));
   }, []);
 

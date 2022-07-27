@@ -4,7 +4,7 @@ class MigrateProfileToInvoicingProfile < ActiveRecord::Migration[4.2]
   def up
     User.all.each do |u|
       p = u.profile
-      puts "WARNING: User #{u.id} has no profile" and next unless p
+      Rails.logger.warn "User #{u.id} has no profile" and next unless p
 
       ip = InvoicingProfile.create!(
         user: u,

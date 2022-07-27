@@ -32,7 +32,7 @@ class AccountingExportService
     invoices = Invoice.where('created_at >= ? AND created_at <= ?', start_date, end_date).order('created_at ASC')
     invoices = invoices.where('total > 0') unless export_zeros
     invoices.each do |i|
-      puts "processing invoice #{i.id}..." unless Rails.env.test?
+      Rails.logger.debug { "processing invoice #{i.id}..." } unless Rails.env.test?
       content << generate_rows(i)
     end
 
@@ -62,20 +62,25 @@ class AccountingExportService
   # Generate the "subscription" and "reservation" rows associated with the provided invoice
   def items_rows(invoice)
     rows = invoice.subscription_invoice? ? "#{subscription_row(invoice)}\n" : ''
-    if invoice.main_item.object_type == 'Reservation'
+    case invoice.main_item.object_type
+    when 'Reservation'
       items = invoice.invoice_items.reject { |ii| ii.object_type == 'Subscription' }
       items.each do |item|
         rows << "#{reservation_row(invoice, item)}\n"
       end
-    elsif invoice.main_item.object_type == 'WalletTransaction'
+    when 'WalletTransaction'
       rows << "#{wallet_row(invoice)}\n"
-    elsif invoice.main_item.object_type == 'StatisticProfilePrepaidPack'
+    when 'StatisticProfilePrepaidPack'
       rows << "#{pack_row(invoice)}\n"
-    elsif invoice.main_item.object_type == 'Error'
+    when 'Error'
       items = invoice.invoice_items.reject { |ii| ii.object_type == 'Subscription' }
       items.each do |item|
         rows << "#{error_row(invoice, item)}\n"
       end
+    when 'Subscription'
+      # do nothing, subscription was already handled by subscription_row
+    else
+      Rails.logger.warn { "Unknown main object type #{invoice.main_item.object_type}" }
     end
     rows
   end
@@ -185,18 +190,14 @@ class AccountingExportService
         row << invoice.reference
       when 'line_label'
         row << line_label
-      when 'debit_origin'
+      when 'debit_origin', 'debit_euro'
         row << method(debit_method).call(invoice, amount)
-      when 'credit_origin'
-        row << method(credit_method).call(invoice, amount)
-      when 'debit_euro'
-        row << method(debit_method).call(invoice, amount)
-      when 'credit_euro'
+      when 'credit_origin', 'credit_euro'
         row << method(credit_method).call(invoice, amount)
       when 'lettering'
         row << ''
       else
-        puts "Unsupported column: #{column}"
+        Rails.logger.debug { "Unsupported column: #{column}" }
       end
       row << separator
     end
@@ -214,30 +215,30 @@ class AccountingExportService
       if invoice.subscription_invoice?
         Setting.get("accounting_subscription_#{type}")
       else
-        puts "WARN: Invoice #{invoice.id} has no subscription"
+        Rails.logger.debug { "WARN: Invoice #{invoice.id} has no subscription" }
       end
     when :reservation
       if invoice.main_item.object_type == 'Reservation'
         Setting.get("accounting_#{invoice.main_item.object.reservable_type}_#{type}")
       else
-        puts "WARN: Invoice #{invoice.id} has no reservation"
+        Rails.logger.debug { "WARN: Invoice #{invoice.id} has no reservation" }
       end
     when :wallet
       if invoice.main_item.object_type == 'WalletTransaction'
         Setting.get("accounting_wallet_#{type}")
       else
-        puts "WARN: Invoice #{invoice.id} is not a wallet credit"
+        Rails.logger.debug { "WARN: Invoice #{invoice.id} is not a wallet credit" }
       end
     when :pack
       if invoice.main_item.object_type == 'StatisticProfilePrepaidPack'
         Setting.get("accounting_Pack_#{type}")
       else
-        puts "WARN: Invoice #{invoice.id} has no prepaid-pack"
+        Rails.logger.debug { "WARN: Invoice #{invoice.id} has no prepaid-pack" }
       end
     when :error
       Setting.get("accounting_Error_#{type}")
     else
-      puts "Unsupported account #{account}"
+      Rails.logger.debug { "Unsupported account #{account}" }
     end || ''
   end
 

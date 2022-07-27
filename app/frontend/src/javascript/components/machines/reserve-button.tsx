@@ -163,7 +163,7 @@ const ReserveButton: React.FC<ReserveButtonProps> = ({ currentUser, machineId, o
       </button>
       <PendingTrainingModal isOpen={pendingTraining}
         toggleModal={togglePendingTrainingModal}
-        nextReservation={machine?.current_user_next_training_reservation?.slots_attributes[0]?.start_at} />
+        nextReservation={machine?.current_user_next_training_reservation?.slots_reservations_attributes[0]?.slot_attributes.start_at} />
       <RequiredTrainingModal isOpen={trainingRequired}
         toggleModal={toggleRequiredTrainingModal}
         user={user}

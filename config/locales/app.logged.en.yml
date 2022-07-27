@@ -112,6 +112,7 @@ en:
           subscribe_for_credits: "Subscribe to benefit from free trainings"
           register_for_free: "Register for free to the following trainings:"
           book_here: "Book here"
+          canceled: "Canceled"
         #dashboard: my events
         events:
           your_next_events: "Your next events"

@@ -103,12 +103,20 @@
   }
 
   .heading-title {
-    //overflow: hidden;
-    height: 94px;
+    min-height: 94px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+
+    & > *:not(:last-child) {
+      margin-right: 3rem;
+    }
 
     h1 {
-      margin: 0 0 0 15px;
-      padding: 36px 15px;
+      margin: 0;
+      padding: 15px 0;
     }
   }
 
@@ -665,12 +673,17 @@ body.container {
     }
   }
 }
-
-.bio-title {
-  display: inherit;
-  text-align: center;
-  height: 50px;
+.profile-bio {
+  .bio-title {
+    display: inherit;
+    height: 50px;
+  }
+  a {
+    color: var(--gray-soft-lightest) !important;
+    text-decoration: underline;
+  }
 }
+
 
 .calendar-filter {
   h3 {

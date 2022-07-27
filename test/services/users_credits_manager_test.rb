@@ -9,16 +9,18 @@ class UsersCreditsManagerTest < ActiveSupport::TestCase
     @user.users_credits.destroy_all
     @availability = @machine.availabilities.first
     @reservation_machine = Reservation.new(statistic_profile: @user.statistic_profile, reservable: @machine)
-    @reservation_training = Reservation.new(statistic_profile: @user.statistic_profile, reservable: @training)
+    @reservation_training = Reservation.new(
+      statistic_profile: @user.statistic_profile,
+      reservable: @training,
+      slots_reservations_attributes: [{ slot_id: @training.availabilities.first.slots.first.id }]
+    )
   end
 
   ## context machine reservation
-  test "machine reservation from user without subscribed plan" do
+  test 'machine reservation from user without subscribed plan' do
     @user.subscriptions.destroy_all
 
-    @reservation_machine.assign_attributes(slots_attributes: [{
-      start_at: @availability.start_at, end_at: @availability.start_at + 1.hour, availability_id: @availability.id
-    }])
+    @reservation_machine.assign_attributes(slots_reservations_attributes: [{ slot_id: @availability.slots.first }])
     manager = UsersCredits::Manager.new(reservation: @reservation_machine)
 
     assert_equal false, manager.will_use_credits?
@@ -29,12 +31,10 @@ class UsersCreditsManagerTest < ActiveSupport::TestCase
     end
   end
 
-  test "machine reservation without credit associated" do
+  test 'machine reservation without credit associated' do
     Credit.where(creditable: @machine).destroy_all
 
-    @reservation_machine.assign_attributes(slots_attributes: [{
-      start_at: @availability.start_at, end_at: @availability.start_at + 1.hour, availability_id: @availability.id
-    }])
+    @reservation_machine.assign_attributes(slots_reservations_attributes: [{ slot_id: @availability.slots.first }])
     manager = UsersCredits::Manager.new(reservation: @reservation_machine)
 
     assert_equal false, manager.will_use_credits?
@@ -49,14 +49,12 @@ class UsersCreditsManagerTest < ActiveSupport::TestCase
     end
   end
 
-  test "machine reservation with credit associated and user never used his credit" do
+  test 'machine reservation with credit associated and user never used his credit' do
     credit = Credit.find_by!(creditable: @machine, plan: @plan)
     credit.update!(hours: 2)
     @user.users_credits.destroy_all
 
-    @reservation_machine.assign_attributes(slots_attributes: [{
-      start_at: @availability.start_at, end_at: @availability.start_at + 1.hour, availability_id: @availability.id
-    }])
+    @reservation_machine.assign_attributes(slots_reservations_attributes: [{ slot_id: @availability.slots.first }])
     manager = UsersCredits::Manager.new(reservation: @reservation_machine)
 
     assert_equal true, manager.will_use_credits?
@@ -71,15 +69,14 @@ class UsersCreditsManagerTest < ActiveSupport::TestCase
     end
   end
 
-  test "machine reservation with credit associated and user already used partially his credit" do
+  test 'machine reservation with credit associated and user already used partially his credit' do
     credit = Credit.find_by!(creditable: @machine, plan: @plan)
     credit.update!(hours: 2)
     users_credit = @user.users_credits.create!(credit: credit, hours_used: 1)
 
-    @reservation_machine.assign_attributes(slots_attributes: [
-      { start_at: @availability.start_at, end_at: @availability.start_at + 1.hour, availability_id: @availability.id },
-      { start_at: @availability.start_at + 1.hour, end_at: @availability.start_at + 2.hour, availability_id: @availability.id }
-    ])
+    @reservation_machine.assign_attributes(slots_reservations_attributes:
+                                             [{ slot_id: @availability.slots.first },
+                                              { slot_id: @availability.slots.last }])
 
     manager = UsersCredits::Manager.new(reservation: @reservation_machine)
 
@@ -94,14 +91,13 @@ class UsersCreditsManagerTest < ActiveSupport::TestCase
     assert_equal 2, users_credit.hours_used
   end
 
-  test "machine reservation with credit associated and user already used all credit" do
+  test 'machine reservation with credit associated and user already used all credit' do
     credit = Credit.find_by!(creditable: @machine, plan: @plan)
     users_credit = @user.users_credits.create!(credit: credit, hours_used: 1)
 
-    @reservation_machine.assign_attributes(slots_attributes: [
-      { start_at: @availability.start_at, end_at: @availability.start_at + 1.hour, availability_id: @availability.id },
-      { start_at: @availability.start_at + 1.hour, end_at: @availability.start_at + 2.hour, availability_id: @availability.id }
-    ])
+    @reservation_machine.assign_attributes(slots_reservations_attributes:
+                                             [{ slot_id: @availability.slots.first },
+                                              { slot_id: @availability.slots.last }])
     manager = UsersCredits::Manager.new(reservation: @reservation_machine)
 
     assert_equal false, manager.will_use_credits?
@@ -117,7 +113,7 @@ class UsersCreditsManagerTest < ActiveSupport::TestCase
 
   # context training reservation
 
-  test "training reservation from user without subscribed plan" do
+  test 'training reservation from user without subscribed plan' do
     @user.subscriptions.destroy_all
 
     manager = UsersCredits::Manager.new(reservation: @reservation_training)
@@ -129,7 +125,7 @@ class UsersCreditsManagerTest < ActiveSupport::TestCase
     end
   end
 
-  test "training reservation without credit associated" do
+  test 'training reservation without credit associated' do
     Credit.where(creditable: @training).destroy_all
 
     manager = UsersCredits::Manager.new(reservation: @reservation_training)
@@ -145,8 +141,8 @@ class UsersCreditsManagerTest < ActiveSupport::TestCase
     end
   end
 
-  test "training reservation with credit associated and user didnt use his credit yet" do
-    credit = Credit.find_or_create_by!(creditable: @training, plan: @plan)
+  test 'training reservation with credit associated and user didnt use his credit yet' do
+    Credit.find_or_create_by!(creditable: @training, plan: @plan)
     @user.users_credits.destroy_all
 
     manager = UsersCredits::Manager.new(reservation: @reservation_training)
@@ -158,7 +154,7 @@ class UsersCreditsManagerTest < ActiveSupport::TestCase
     end
   end
 
-  test "training reservation with credit associated but user already used all his credits" do
+  test 'training reservation with credit associated but user already used all his credits' do
     @user.users_credits.destroy_all
     another_training = Training.where.not(id: @training.id).first
     credit = Credit.find_or_create_by!(creditable: another_training, plan: @plan)
@@ -176,9 +172,9 @@ class UsersCreditsManagerTest < ActiveSupport::TestCase
 
   # context reset user credits
 
-  test "use UsersCredit::Manager to reset users_credits" do
+  test 'use UsersCredit::Manager to reset users_credits' do
     credit = Credit.find_by!(creditable: @machine, plan: @plan)
-    users_credit = @user.users_credits.create!(credit: credit, hours_used: 1)
+    @user.users_credits.create!(credit: credit, hours_used: 1)
 
     assert_not_empty @user.users_credits
 

@@ -245,13 +245,9 @@ pt:
     reservations: "Reservas"
     available_seats: "Assentos disponíveis"
   reservation_ics:
-    summary: "%{TYPE} reserva"
-    type:
-      Machine: "Máquina"
-      Space: "Espaço"
-      Event: "Evento"
-      Training: "Treinamento"
-    description: "Você reservou %{COUNT} vagas de %{ITEM}"
+    description_slot: "Você reservou %{COUNT} vaga(s) de %{ITEM}"
+    description_training: "Você reservou um treinamento de %{TYPE}"
+    description_event: "Você reservou %{NUMBER} ingresso(s) para este evento"
     alarm_summary: "Lembrar a sua reserva"
   roles:
     member: "Membro"
@@ -595,3 +591,4 @@ pt:
     flickr: "flickr"
     machines_module: "Módulo de Máquinas"
     user_change_group: "Permitir que os usuários mudem de grupo"
+    show_username_in_admin_list: "Mostrar o nome de usuário na lista de membros do administrador"

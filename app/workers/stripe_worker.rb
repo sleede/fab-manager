@@ -30,18 +30,12 @@ class StripeWorker
     cpn = Stripe::Coupon.retrieve(coupon_code, api_key: Setting.get('stripe_secret_key'))
     cpn.delete
   rescue Stripe::InvalidRequestError => e
-    STDERR.puts "WARNING: Unable to delete the coupon on Stripe: #{e}"
+    warn "WARNING: Unable to delete the coupon on Stripe: #{e}"
   end
 
   def create_or_update_stp_product(class_name, id)
     object = class_name.constantize.find(id)
-    if !object.payment_gateway_object.nil?
-      Stripe::Product.update(
-        object.payment_gateway_object.gateway_object_id,
-        { name: object.name },
-        { api_key: Setting.get('stripe_secret_key') }
-      )
-    else
+    if object.payment_gateway_object.nil?
       product = Stripe::Product.create(
         {
           name: object.name,
@@ -54,12 +48,18 @@ class StripeWorker
       pgo = PaymentGatewayObject.new(item: object)
       pgo.gateway_object = product
       pgo.save!
-      puts "Stripe product was created for the #{class_name} \##{id}"
+      Rails.logger.info "Stripe product was created for the #{class_name} \##{id}"
+    else
+      Stripe::Product.update(
+        object.payment_gateway_object.gateway_object_id,
+        { name: object.name },
+        { api_key: Setting.get('stripe_secret_key') }
+      )
     end
 
   rescue Stripe::InvalidRequestError
     obj_id = object.payment_gateway_object.gateway_object_id
-    STDERR.puts "WARNING: saved payment_gateway_object#id (#{obj_id}) does not match on Stripe, recreating..."
+    Rails.logger.warn "WARNING: saved payment_gateway_object#id (#{obj_id}) does not match on Stripe, recreating..."
     product = Stripe::Product.create(
       {
         name: object.name,
@@ -72,6 +72,6 @@ class StripeWorker
     pgo = PaymentGatewayObject.new(item: object)
     pgo.gateway_object = product
     pgo.save!
-    puts "Stripe product was created for the #{class_name} \##{id}"
+    Rails.logger.info "Stripe product was created for the #{class_name} \##{id}"
   end
 end

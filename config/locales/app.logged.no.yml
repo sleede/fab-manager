@@ -112,6 +112,7 @@
           subscribe_for_credits: "Abonner på å få glede av gratis opplæringer"
           register_for_free: "Registrer deg gratis til følgende opplæringer:"
           book_here: "Bestill her"
+          canceled: "Canceled"
         #dashboard: my events
         events:
           your_next_events: "Dine neste arrangementer"

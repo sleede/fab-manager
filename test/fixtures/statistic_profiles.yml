@@ -60,3 +60,10 @@ proudhon:
   gender: true
   birthday: 1809-01-15
   group_id: 1
+
+acamus:
+  id: 10
+  user_id: 10
+  gender: true
+  birthday: 1913-11-07
+  group_id: 1

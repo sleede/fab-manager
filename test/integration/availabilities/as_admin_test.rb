@@ -26,7 +26,12 @@ module Availabilities
     test 'get machine availabilities as admin' do
       m = Machine.find_by(slug: 'decoupeuse-vinyle')
 
-      get "/api/availabilities/machines/#{m.id}"
+      # this simulates a fullCalendar (v2) call
+      start_date = DateTime.current.utc.strftime('%Y-%m-%d')
+      end_date = 7.days.from_now.utc.strftime('%Y-%m-%d')
+      tz = Time.zone.tzinfo.name
+
+      get "/api/availabilities/machines/#{m.id}?start=#{start_date}&end=#{end_date}&timezone=#{tz}&_=1217026492144"
 
       # Check response format & status
       assert_equal 200, response.status
@@ -88,6 +93,8 @@ module Availabilities
 
     test 'create availabilities' do
       date = DateTime.current.change(hour: 8, min: 0, sec: 0)
+      slots_count = Slot.count
+
       post '/api/availabilities',
            params: {
              availability: {
@@ -122,6 +129,8 @@ module Availabilities
       assert_equal (availability[:start_at].to_datetime + availability[:slot_duration].minutes * 4).iso8601,
                    availability[:end_at],
                    'expected end_at = start_at + 4 slots of 90 minutes'
+      assert_equal (slots_count + 4 * 3), Slot.count, 'expected (4*3) slots of 90 minutes were created'
+      assert_equal 90.minutes, Availability.find(availability[:id]).slots.first.duration
 
       # Check the recurrence
       assert_equal (availability[:start_at].to_datetime + 2.weeks).to_date,

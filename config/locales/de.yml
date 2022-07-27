@@ -245,13 +245,9 @@ de:
     reservations: "Reservierungen"
     available_seats: "Verfügbare Plätze"
   reservation_ics:
-    summary: "%{TYPE} reservation"
-    type:
-      Machine: "Machine"
-      Space: "Space"
-      Event: "Event"
-      Training: "Training"
-    description: "You have reserved %{COUNT} slots of %{ITEM}"
+    description_slot: "You have booked %{COUNT} slots of %{ITEM}"
+    description_training: "You have booked a %{TYPE} training"
+    description_event: "You have booked %{NUMBER} tickets for this event"
     alarm_summary: "Remind your reservation"
   roles:
     member: "Mitglied"
@@ -595,3 +591,4 @@ de:
     flickr: "flickr"
     machines_module: "Machines module"
     user_change_group: "Allow users to change their group"
+    show_username_in_admin_list: "Show the username in the admin's members list"

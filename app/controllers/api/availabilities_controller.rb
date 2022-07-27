@@ -4,15 +4,15 @@
 class API::AvailabilitiesController < API::ApiController
   before_action :authenticate_user!, except: [:public]
   before_action :set_availability, only: %i[show update reservations lock]
-  before_action :define_max_visibility, only: %i[machine trainings spaces]
+  before_action :set_operator_role, only: %i[machine spaces trainings]
+  before_action :set_customer, only: %i[machine spaces trainings]
   respond_to :json
 
   def index
     authorize Availability
-    start_date = ActiveSupport::TimeZone[params[:timezone]].parse(params[:start])
-    end_date = ActiveSupport::TimeZone[params[:timezone]].parse(params[:end]).end_of_day
+    display_window = window
     @availabilities = Availability.includes(:machines, :tags, :trainings, :spaces)
-                                  .where('start_at >= ? AND end_at <= ?', start_date, end_date)
+                                  .where('start_at >= ? AND end_at <= ?', display_window[:start], display_window[:end])
 
     @availabilities = @availabilities.where.not(available_type: 'event') unless Setting.get('events_in_calendar')
 
@@ -20,19 +20,14 @@ class API::AvailabilitiesController < API::ApiController
   end
 
   def public
-    start_date = ActiveSupport::TimeZone[params[:timezone]].parse(params[:start])
-    end_date = ActiveSupport::TimeZone[params[:timezone]].parse(params[:end]).end_of_day
-    @reservations = Reservation.includes(:slots, :statistic_profile)
-                               .references(:slots)
-                               .where('slots.start_at >= ? AND slots.end_at <= ?', start_date, end_date)
+    display_window = window
 
     machine_ids = params[:m] || []
     service = Availabilities::PublicAvailabilitiesService.new(current_user)
     @availabilities = service.public_availabilities(
-      start_date,
-      end_date,
-      @reservations,
-      machines: machine_ids, spaces: params[:s]
+      display_window,
+      { machines: machine_ids, spaces: params[:s], trainings: params[:t] },
+      (params[:evt] && params[:evt] == 'true')
     )
 
     @title_filter = { machine_ids: machine_ids.map(&:to_i) }
@@ -47,10 +42,8 @@ class API::AvailabilitiesController < API::ApiController
     authorize Availability
     @availability = Availability.new(availability_params)
     if @availability.save
-      if params[:availability][:occurrences]
-        service = Availabilities::CreateAvailabilitiesService.new
-        service.create(@availability, params[:availability][:occurrences])
-      end
+      service = Availabilities::CreateAvailabilitiesService.new
+      service.create(@availability, params[:availability][:occurrences])
       render :show, status: :created, location: @availability
     else
       render json: @availability.errors, status: :unprocessable_entity
@@ -78,27 +71,32 @@ class API::AvailabilitiesController < API::ApiController
   end
 
   def machine
-    @current_user_role = current_user.role
-
-    service = Availabilities::AvailabilitiesService.new(current_user, other: @visi_max_other, year: @visi_max_year)
-    @slots = service.machines(params[:machine_id], user)
+    service = Availabilities::AvailabilitiesService.new(current_user)
+    @machine = Machine.friendly.find(params[:machine_id])
+    @slots = service.machines([@machine], @customer, window)
   end
 
   def trainings
-    service = Availabilities::AvailabilitiesService.new(current_user, other: @visi_max_other, year: @visi_max_year)
-    @availabilities = service.trainings(params[:training_id], user)
+    service = Availabilities::AvailabilitiesService.new(current_user)
+    @trainings = if params[:training_id].is_number? || (params[:training_id].length.positive? && params[:training_id] != 'all')
+                   [Training.friendly.find(params[:training_id])]
+                 else
+                   Training.all
+                 end
+    @slots = service.trainings(@trainings, @customer, window)
   end
 
   def spaces
-    @current_user_role = current_user.role
-
-    service = Availabilities::AvailabilitiesService.new(current_user, other: @visi_max_other, year: @visi_max_year)
-    @slots = service.spaces(params[:space_id], user)
+    service = Availabilities::AvailabilitiesService.new(current_user)
+    @space = Space.friendly.find(params[:space_id])
+    @slots = service.spaces([@space], @customer, window)
   end
 
   def reservations
     authorize Availability
-    @reservation_slots = @availability.slots.includes(reservations: [statistic_profile: [user: [:profile]]]).order('slots.start_at ASC')
+    @slots_reservations = @availability.slots_reservations
+                                       .includes(:slot, reservation: [statistic_profile: [user: [:profile]]])
+                                       .order('slots.start_at ASC')
   end
 
   def export_availabilities
@@ -131,12 +129,22 @@ class API::AvailabilitiesController < API::ApiController
 
   private
 
-  def user
-    if params[:member_id]
-      User.find(params[:member_id])
-    else
-      current_user
-    end
+  def window
+    start_date = ActiveSupport::TimeZone[params[:timezone]]&.parse(params[:start])
+    end_date = ActiveSupport::TimeZone[params[:timezone]]&.parse(params[:end])&.end_of_day
+    { start: start_date, end: end_date }
+  end
+
+  def set_customer
+    @customer = if params[:member_id]
+                  User.find(params[:member_id])
+                else
+                  current_user
+                end
+  end
+
+  def set_operator_role
+    @operator_role = current_user.role
   end
 
   def set_availability
@@ -155,43 +163,10 @@ class API::AvailabilitiesController < API::ApiController
   end
 
   def filter_availabilites(availabilities)
-    availabilities_filtered = []
-    availabilities.to_ary.each do |a|
-      # machine slot
-      if !a.try(:available_type)
-        availabilities_filtered << a
-      else
-        availabilities_filtered << a if filter_training?(a)
-        availabilities_filtered << a if filter_space?(a)
-        availabilities_filtered << a if filter_machine?(a)
-        availabilities_filtered << a if filter_event?(a)
-      end
-    end
-    availabilities_filtered.delete_if(&method(:remove_full?))
-  end
-
-  def filter_training?(availability)
-    params[:t] && availability.available_type == 'training' && params[:t].include?(availability.trainings.first.id.to_s)
-  end
-
-  def filter_space?(availability)
-    params[:s] && availability.available_type == 'space' && params[:s].include?(availability.spaces.first.id.to_s)
-  end
-
-  def filter_machine?(availability)
-    params[:m] && availability.available_type == 'machines' && (params[:m].map(&:to_i) & availability.machine_ids).any?
-  end
-
-  def filter_event?(availability)
-    params[:evt] && params[:evt] == 'true' && availability.available_type == 'event'
+    availabilities.delete_if(&method(:remove_full?))
   end
 
   def remove_full?(availability)
     params[:dispo] == 'false' && (availability.is_reserved || (availability.try(:full?) && availability.full?))
-  end
-
-  def define_max_visibility
-    @visi_max_year = Setting.get('visibility_yearly').to_i.months.since
-    @visi_max_other = Setting.get('visibility_others').to_i.months.since
   end
 end

@@ -20,6 +20,7 @@ class Availability < ApplicationRecord
   has_many :spaces, through: :spaces_availabilities
 
   has_many :slots
+  has_many :slots_reservations, through: :slots
   has_many :reservations, through: :slots
 
   has_one :event
@@ -36,7 +37,7 @@ class Availability < ApplicationRecord
   scope :trainings, -> { includes(:trainings).where(available_type: 'training') }
   scope :spaces, -> { includes(:spaces).where(available_type: 'space') }
 
-  attr_accessor :is_reserved, :slot_id, :can_modify
+  attr_accessor :is_reserved, :current_user_slots_reservations_ids, :can_modify
 
   validates :start_at, :end_at, presence: true
   validate :length_must_be_slot_multiple, unless: proc { end_at.blank? or start_at.blank? }
@@ -73,7 +74,7 @@ class Availability < ApplicationRecord
                                 .joins(:slots)
                                 .where('slots.availability_id = ?', id)
     else
-      STDERR.puts "[safe_destroy] Availability with unknown type #{available_type}"
+      Rails.logger.warn "[safe_destroy] Availability with unknown type #{available_type}"
       reservations = []
     end
     if reservations.size.zero?
@@ -106,7 +107,7 @@ class Availability < ApplicationRecord
     when 'space'
       spaces.map(&:name).join(' - ')
     else
-      STDERR.puts "[title] Availability with unknown type #{available_type}"
+      Rails.logger.warn "[title] Availability with unknown type #{available_type}"
       '???'
     end
   end
@@ -116,23 +117,25 @@ class Availability < ApplicationRecord
   def full?
     return false if nb_total_places.blank?
 
-    if available_type == 'training' || available_type == 'space'
-      nb_total_places <= slots.to_a.select { |s| s.canceled_at.nil? }.size
-    elsif available_type == 'event'
+    if available_type == 'event'
       event.nb_free_places.zero?
+    else
+      slots.map(&:full?).reduce(:&)
     end
   end
 
-  def nb_total_places
+  def available_places_per_slot(reservable = nil)
     case available_type
     when 'training'
-      super.presence || trainings.map(&:nb_total_places).reduce(:+)
+      nb_total_places || reservable&.nb_total_places || trainings.map(&:nb_total_places).max
     when 'event'
       event.nb_total_places
     when 'space'
-      super.presence || spaces.map(&:default_places).reduce(:+)
+      nb_total_places || reservable&.default_places || spaces.map(&:default_places).max
+    when 'machines'
+      reservable.nil? ? machines.count : 1
     else
-      nil
+      raise TypeError
     end
   end
 

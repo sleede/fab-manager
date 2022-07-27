@@ -38,7 +38,7 @@ class CartItem::EventReservation < CartItem::Reservation
     ::Reservation.new(
       reservable_id: @reservable.id,
       reservable_type: Event.name,
-      slots_attributes: slots_params,
+      slots_reservations_attributes: slots_params,
       tickets_attributes: tickets_params,
       nb_reserve_places: @normal_tickets,
       statistic_profile_id: StatisticProfile.find_by(user: @customer).id

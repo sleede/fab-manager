@@ -31,7 +31,7 @@ zu:
         user_changed_group_html: "crwdns3897:0%{NAME}crwdne3897:0"
         previous_group: "crwdns3899:0crwdne3899:0"
         new_group: "crwdns3901:0crwdne3901:0"
-        user_invalidated: "crwdns23044:0crwdne23044:0"
+        user_invalidated: "crwdns23996:0crwdne23996:0"
     notify_admin_subscription_extended:
       subject: "crwdns3903:0crwdne3903:0"
       body:
@@ -356,13 +356,13 @@ zu:
         user_update_proof_of_identity_file: "crwdns23584:0%{NAME}crwdne23584:0"
         validate_user: "crwdns23056:0crwdne23056:0"
     notify_user_is_validated:
-      subject: "crwdns23058:0crwdne23058:0"
+      subject: "crwdns23998:0crwdne23998:0"
       body:
-        account_validated: "crwdns23060:0crwdne23060:0"
+        account_validated: "crwdns24000:0crwdne24000:0"
     notify_user_is_invalidated:
-      subject: "crwdns23062:0crwdne23062:0"
+      subject: "crwdns24002:0crwdne24002:0"
       body:
-        account_invalidated: "crwdns23064:0crwdne23064:0"
+        account_invalidated: "crwdns24004:0crwdne24004:0"
     notify_user_proof_of_identity_refusal:
       subject: "crwdns23586:0crwdne23586:0"
       body:

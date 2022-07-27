@@ -29,7 +29,7 @@ class PDF::Invoice < Prawn::Document
     begin
       image StringIO.new(Base64.decode64(img_b64)), fit: [415, 40]
     rescue StandardError => e
-      puts "Unable to decode invoice logo from base64: #{e}"
+      Rails.logger.error "Unable to decode invoice logo from base64: #{e}"
     end
     move_down 20
     # the following line is a special comment to workaround RubyMine inspection problem
@@ -120,7 +120,7 @@ class PDF::Invoice < Prawn::Document
         when 'StatisticProfilePrepaidPack'
           object = I18n.t('invoices.prepaid_pack')
         else
-          puts "ERROR : specified main_item.object_type type (#{invoice.main_item.object_type}) is unknown"
+          Rails.logger.error "specified main_item.object_type type (#{invoice.main_item.object_type}) is unknown"
         end
       end
       text I18n.t('invoices.object') + ' ' + object
@@ -233,12 +233,14 @@ class PDF::Invoice < Prawn::Document
 
       # total verification
       total = invoice.total / 100.00
-      puts "ERROR: totals are NOT equals => expected: #{total}, computed: #{total_calc}" if total_calc != total
+      Rails.logger.error "totals are NOT equals => expected: #{total}, computed: #{total_calc}" if total_calc != total
 
       # TVA
       vat_service = VatHistoryService.new
       vat_rate_group = vat_service.invoice_vat(invoice)
-      if total_vat != 0
+      if total_vat.zero?
+        data += [[I18n.t('invoices.total_amount'), number_to_currency(total)]]
+      else
         data += [[I18n.t('invoices.total_including_all_taxes'), number_to_currency(total)]]
         vat_rate_group.each do |_type, rate|
           data += [[I18n.t('invoices.including_VAT_RATE', RATE: rate[:vat_rate], AMOUNT: number_to_currency(rate[:amount] / 100.00)), number_to_currency(rate[:total_vat] / 100.00)]]
@@ -247,13 +249,11 @@ class PDF::Invoice < Prawn::Document
         data += [[I18n.t('invoices.including_amount_payed_on_ordering'), number_to_currency(total)]]
 
         # checking the round number
-        rounded = sprintf('%.2f', total_vat / 100.00).to_f + sprintf('%.2f', total_ht / 100.00).to_f
-        if rounded != sprintf('%.2f', total_calc).to_f
-          puts 'ERROR: rounding the numbers cause an invoice inconsistency. ' \
-               "Total expected: #{sprintf('%.2f', total_calc)}, total computed: #{rounded}"
+        rounded = (sprintf('%.2f', total_vat / 100.00).to_f + sprintf('%.2f', total_ht / 100.00).to_f).to_s
+        if rounded != sprintf('%.2f', total_calc)
+          Rails.logger.error 'rounding the numbers cause an invoice inconsistency. ' \
+                             "Total expected: #{sprintf('%.2f', total_calc)}, total computed: #{rounded}"
         end
-      else
-        data += [[I18n.t('invoices.total_amount'), number_to_currency(total)]]
       end
 
       # display table
@@ -305,7 +305,7 @@ class PDF::Invoice < Prawn::Document
         when 'none'
           payment_verbose = I18n.t('invoices.no_refund')
         else
-          puts "ERROR : specified refunding method (#{payment_verbose}) is unknown"
+          Rails.logger.error "specified refunding method (#{payment_verbose}) is unknown"
         end
         payment_verbose += ' ' + I18n.t('invoices.for_an_amount_of_AMOUNT', AMOUNT: number_to_currency(total))
       else
