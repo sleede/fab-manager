@@ -21,6 +21,7 @@
 - Fix a bug: profile completion form is not shown is T&C were not filled
 - Fix a bug: Erroneous "cancelation failed" message if elasticsearch was disabled
 - Fix a bug: admin group being replaced in SSO authentication (#376)
+- Fix a bug: SSO data being overridden when it is empty and the user can change it (#377)
 - Fix a security issue: updated terser to 4.8.1 to fix [CVE-2022-25858](https://cve.mitre.org/cgi-bin/cvename.cgi?CVE-2022-25858)
 - Fix a security issue: updated tzinfo to 1.2.10 to fix [CVE-2022-31163](https://cve.mitre.org/cgi-bin/cvename.cgi?CVE-2022-31163)
 - Fix a security issue: updated rails to 5.2.8.1 to fix [CVE-2022-32224](https://cve.mitre.org/cgi-bin/cvename.cgi?CVE-2022-32224)
