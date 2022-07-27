@@ -8,7 +8,7 @@ import { Product } from '../../models/product';
 import { FormInput } from '../form/form-input';
 import { FormSwitch } from '../form/form-switch';
 import { FormSelect } from '../form/form-select';
-import { FormCheckList } from '../form/form-check-list';
+import { FormChecklist } from '../form/form-checklist';
 import { FormRichText } from '../form/form-rich-text';
 import { FabButton } from '../base/fab-button';
 import { FabAlert } from '../base/fab-alert';
@@ -177,7 +177,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
           <FabAlert level="warning">
             <HtmlTranslate trKey="app.admin.store.product_form.assigning_machines_info" />
           </FabAlert>
-          <FormCheckList options={machines}
+          <FormChecklist options={machines}
                          control={control}
                          id="machine_ids"
                          formState={formState} />

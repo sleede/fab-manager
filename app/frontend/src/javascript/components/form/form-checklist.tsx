@@ -1,4 +1,4 @@
-import React, { BaseSyntheticEvent } from 'react';
+import React from 'react';
 import { Controller, Path, FieldPathValue } from 'react-hook-form';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { FieldPath } from 'react-hook-form/dist/types/path';
@@ -13,16 +13,16 @@ import { FabButton } from '../base/fab-button';
  */
 export type ChecklistOption<TOptionValue> = { value: TOptionValue, label: string };
 
-interface FormCheckListProps<TFieldValues, TOptionValue, TContext extends object> extends FormControlledComponent<TFieldValues, TContext>, AbstractFormItemProps<TFieldValues> {
+interface FormChecklistProps<TFieldValues, TOptionValue, TContext extends object> extends FormControlledComponent<TFieldValues, TContext>, AbstractFormItemProps<TFieldValues> {
   defaultValue?: Array<TOptionValue>,
   options: Array<ChecklistOption<TOptionValue>>,
   onChange?: (values: Array<TOptionValue>) => void,
 }
 
 /**
- * This component is a template for an check list component to use within React Hook Form
+ * This component is a template for a checklist component to use within React Hook Form
  */
-export const FormCheckList = <TFieldValues extends FieldValues, TOptionValue, TContext extends object>({ id, control, label, tooltip, defaultValue, className, rules, disabled, error, warning, formState, onChange, options }: FormCheckListProps<TFieldValues, TOptionValue, TContext>) => {
+export const FormChecklist = <TFieldValues extends FieldValues, TOptionValue, TContext extends object>({ id, control, label, tooltip, defaultValue, className, rules, disabled, error, warning, formState, onChange, options }: FormChecklistProps<TFieldValues, TOptionValue, TContext>) => {
   const { t } = useTranslation('shared');
 
   /**
@@ -35,15 +35,15 @@ export const FormCheckList = <TFieldValues extends FieldValues, TOptionValue, TC
   /**
    * Callback triggered when a checkbox is ticked or unticked.
    */
-  const toggleCheckbox = (option: ChecklistOption<TOptionValue>, values: Array<TOptionValue> = [], cb: (value: Array<TOptionValue>) => void) => {
-    return (event: BaseSyntheticEvent) => {
+  const toggleCheckbox = (option: ChecklistOption<TOptionValue>, rhfValues: Array<TOptionValue> = [], rhfCallback: (value: Array<TOptionValue>) => void) => {
+    return (event: React.ChangeEvent<HTMLInputElement>) => {
       let newValues: Array<TOptionValue> = [];
       if (event.target.checked) {
-        newValues = values.concat(option.value);
+        newValues = rhfValues.concat(option.value);
       } else {
-        newValues = values.filter(v => v !== option.value);
+        newValues = rhfValues.filter(v => v !== option.value);
       }
-      cb(newValues);
+      rhfCallback(newValues);
       if (typeof onChange === 'function') {
         onChange(newValues);
       }
@@ -51,26 +51,33 @@ export const FormCheckList = <TFieldValues extends FieldValues, TOptionValue, TC
   };
 
   /**
-   * Callback triggered to select all options
+   * Mark all options as selected
    */
-  const allSelect = (cb: (value: Array<TOptionValue>) => void) => {
+  const selectAll = (rhfCallback: (value: Array<TOptionValue>) => void) => {
     return () => {
       const newValues: Array<TOptionValue> = options.map(o => o.value);
-      cb(newValues);
+      rhfCallback(newValues);
       if (typeof onChange === 'function') {
         onChange(newValues);
       }
     };
   };
 
-  // Compose classnames from props
-  const classNames = [
-    `${className || ''}`
-  ].join(' ');
+  /**
+   * Mark all options as non-selected
+   */
+  const unselectAll = (rhfCallback: (value: Array<TOptionValue>) => void) => {
+    return () => {
+      rhfCallback([]);
+      if (typeof onChange === 'function') {
+        onChange([]);
+      }
+    };
+  };
 
   return (
     <AbstractFormItem id={id} formState={formState} label={label}
-                      className={`form-check-list form-input ${classNames}`} tooltip={tooltip}
+                      className={`form-checklist form-input ${className || ''}`} tooltip={tooltip}
                       disabled={disabled}
                       rules={rules} error={error} warning={warning}>
         <Controller name={id as FieldPath<TFieldValues>}
@@ -90,7 +97,10 @@ export const FormCheckList = <TFieldValues extends FieldValues, TOptionValue, TC
                               );
                             })}
                           </div>
-                          <FabButton type="button" onClick={allSelect(onChange)} className="checklist-all-button">{t('app.shared.form_check_list.select_all')}</FabButton>
+                          <div className="actions">
+                            <FabButton type="button" onClick={selectAll(onChange)} className="checklist-all-button">{t('app.shared.form_checklist.select_all')}</FabButton>
+                            <FabButton type="button" onClick={unselectAll(onChange)} className="checklist-none-button">{t('app.shared.form_checklist.unselect_all')}</FabButton>
+                          </div>
                         </>
                       );
                     }} />
