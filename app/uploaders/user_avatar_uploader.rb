@@ -2,11 +2,12 @@
 
 # CarrierWave uploader for user's avatar.
 # This file defines the parameters for these uploads.
-class ProfilImageUploader < CarrierWave::Uploader::Base
+class UserAvatarUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
   include UploadHelper
+  include ContentTypeValidationFromFileContent 
 
   # Choose what kind of storage to use for this uploader:
   storage :file
@@ -59,7 +60,7 @@ class ProfilImageUploader < CarrierWave::Uploader::Base
   end
 
   def content_type_whitelist
-    [%r{image/}]
+    %w[image/jpeg image/gif image/png]
   end
 
   # Override the filename of the uploaded files:
