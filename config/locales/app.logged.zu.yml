@@ -112,6 +112,7 @@ zu:
           subscribe_for_credits: "crwdns21428:0crwdne21428:0"
           register_for_free: "crwdns21430:0crwdne21430:0"
           book_here: "crwdns21432:0crwdne21432:0"
+          canceled: "crwdns23726:0crwdne23726:0"
         #dashboard: my events
         events:
           your_next_events: "crwdns8699:0crwdne8699:0"
