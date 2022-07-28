@@ -47,6 +47,8 @@
     "@babel/preset-typescript": "^7.16.7",
     "@babel/runtime": "^7.17.2",
     "@claviska/jquery-minicolors": "^2.3.5",
+    "@dnd-kit/core": "^6.0.5",
+    "@dnd-kit/sortable": "^7.0.1",
     "@fortawesome/fontawesome-free": "5.14.0",
     "@lyracom/embedded-form-glue": "^0.3.3",
     "@stripe/react-stripe-js": "^1.4.0",

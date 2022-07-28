@@ -5,6 +5,7 @@ import ProductCategoryAPI from '../../../api/product-category';
 import { ManageProductCategory } from './manage-product-category';
 import { ProductCategoriesTree } from './product-categories-tree';
 import { FabAlert } from '../../base/fab-alert';
+import { FabButton } from '../../base/fab-button';
 import { HtmlTranslate } from '../../base/html-translate';
 import { IApplication } from '../../../models/application';
 import { Loader } from '../../base/loader';
@@ -42,27 +43,57 @@ const ProductCategories: React.FC<ProductCategoriesProps> = ({ onSuccess, onErro
   };
 
   /**
+   * Update state after drop
+   */
+  const handleDnd = (data: ProductCategory[]) => {
+    setProductCategories(data);
+  };
+
+  /**
    * Refresh the list of categories
    */
   const refreshCategories = () => {
     ProductCategoryAPI.index().then(data => {
-      setProductCategories(data);
+      // Translate ProductCategory.position to array index
+      const sortedCategories = data
+        .filter(c => !c.parent_id)
+        .sort((a, b) => a.position - b.position);
+      const childrenCategories = data
+        .filter(c => typeof c.parent_id === 'number')
+        .sort((a, b) => b.position - a.position);
+      childrenCategories.forEach(c => {
+        const parentIndex = sortedCategories.findIndex(i => i.id === c.parent_id);
+        sortedCategories.splice(parentIndex + 1, 0, c);
+      });
+      setProductCategories(sortedCategories);
     }).catch((error) => onError(error));
+  };
+
+  /**
+   * Save list's new order
+   */
+  const handleSave = () => {
+    // TODO: index to position -> send to API
+    console.log('save order:', productCategories);
   };
 
   return (
     <div className='product-categories'>
       <header>
         <h2>{t('app.admin.store.product_categories.title')}</h2>
-        <ManageProductCategory action='create'
-          productCategories={productCategories}
-          onSuccess={handleSuccess} onError={onError} />
+        <div className='grpBtn'>
+          <ManageProductCategory action='create'
+            productCategories={productCategories}
+            onSuccess={handleSuccess} onError={onError} />
+          <FabButton className='saveBtn' onClick={handleSave}>Plop</FabButton>
+        </div>
       </header>
       <FabAlert level="warning">
         <HtmlTranslate trKey="app.admin.store.product_categories.info" />
       </FabAlert>
       <ProductCategoriesTree
         productCategories={productCategories}
+        onDnd={handleDnd}
         onSuccess={handleSuccess} onError={onError} />
     </div>
   );
