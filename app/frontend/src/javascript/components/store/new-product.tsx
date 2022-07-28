@@ -43,7 +43,9 @@ const NewProduct: React.FC<NewProductProps> = ({ onSuccess, onError }) => {
   };
 
   return (
-    <ProductForm product={product} title={t('app.admin.store.new_product.add_a_new_product')} onSuccess={saveProductSuccess} onError={onError} />
+    <div className="new-product">
+      <ProductForm product={product} title={t('app.admin.store.new_product.add_a_new_product')} onSuccess={saveProductSuccess} onError={onError} />
+    </div>
   );
 };
 

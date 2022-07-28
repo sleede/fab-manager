@@ -119,19 +119,26 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
 
   return (
     <>
-      <h2>{title}</h2>
-      <FabButton className="save" onClick={handleSubmit(saveProduct)}>{t('app.admin.store.product_form.save')}</FabButton>
+      <header>
+        <h2>{title}</h2>
+        <div className="grpBtn">
+          <FabButton className="main-action-btn" onClick={handleSubmit(saveProduct)}>{t('app.admin.store.product_form.save')}</FabButton>
+        </div>
+      </header>
       <form className="product-form" onSubmit={onSubmit}>
-        <FormInput id="name"
-                   register={register}
-                   rules={{ required: true }}
-                   formState={formState}
-                   onChange={handleNameChange}
-                   label={t('app.admin.store.product_form.name')} />
-        <FormInput id="sku"
-                   register={register}
-                   formState={formState}
-                   label={t('app.admin.store.product_form.sku')} />
+        <div className="grp">
+          <FormInput id="name"
+                     register={register}
+                     rules={{ required: true }}
+                     formState={formState}
+                     onChange={handleNameChange}
+                     label={t('app.admin.store.product_form.name')}
+                     className='span-7' />
+          <FormInput id="sku"
+                     register={register}
+                     formState={formState}
+                     label={t('app.admin.store.product_form.sku')} />
+        </div>
         <FormInput id="slug"
                    register={register}
                    rules={{ required: true }}
@@ -141,29 +148,39 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
                     id="is_active"
                     formState={formState}
                     label={t('app.admin.store.product_form.is_show_in_store')} />
+
+        <hr />
+
         <div className="price-data">
-          <h4>{t('app.admin.store.product_form.price_and_rule_of_selling_product')}</h4>
-          <FormSwitch control={control}
-                      id="is_active_price"
-                      label={t('app.admin.store.product_form.is_active_price')}
-                      tooltip={t('app.admin.store.product_form.is_active_price')}
-                      defaultValue={isActivePrice}
-                      onChange={toggleIsActivePrice} />
+          <div className="grp">
+            <h4 className='span-7'>{t('app.admin.store.product_form.price_and_rule_of_selling_product')}</h4>
+            <FormSwitch control={control}
+                        id="is_active_price"
+                        label={t('app.admin.store.product_form.is_active_price')}
+                        tooltip={t('app.admin.store.product_form.is_active_price')}
+                        defaultValue={isActivePrice}
+                        onChange={toggleIsActivePrice} />
+          </div>
           {isActivePrice && <div className="price-fields">
-            <FormInput id="amount"
-                       type="number"
-                       register={register}
-                       rules={{ required: true, min: 0.01 }}
-                       step={0.01}
-                       formState={formState}
-                       label={t('app.admin.store.product_form.price')} />
-            <FormInput id="quantity_min"
-                       type="number"
-                       rules={{ required: true }}
-                       register={register}
-                       formState={formState}
-                       label={t('app.admin.store.product_form.quantity_min')} />
+            <div className="grp">
+              <FormInput id="amount"
+                         type="number"
+                         register={register}
+                         rules={{ required: true, min: 0.01 }}
+                         step={0.01}
+                         formState={formState}
+                         label={t('app.admin.store.product_form.price')} />
+              <FormInput id="quantity_min"
+                         type="number"
+                         rules={{ required: true }}
+                         register={register}
+                         formState={formState}
+                         label={t('app.admin.store.product_form.quantity_min')} />
+            </div>
           </div>}
+
+          <hr />
+
           <h4>{t('app.admin.store.product_form.assigning_category')}</h4>
           <FabAlert level="warning">
             <HtmlTranslate trKey="app.admin.store.product_form.assigning_category_info" />
@@ -173,6 +190,9 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
                       id="product_category_id"
                       formState={formState}
                       label={t('app.admin.store.product_form.linking_product_to_category')} />
+
+          <hr />
+
           <h4>{t('app.admin.store.product_form.assigning_machines')}</h4>
           <FabAlert level="warning">
             <HtmlTranslate trKey="app.admin.store.product_form.assigning_machines_info" />
@@ -181,6 +201,9 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
                          control={control}
                          id="machine_ids"
                          formState={formState} />
+
+          <hr />
+
           <h4>{t('app.admin.store.product_form.product_description')}</h4>
           <FabAlert level="warning">
             <HtmlTranslate trKey="app.admin.store.product_form.product_description_info" />
@@ -191,7 +214,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
                         id="description" />
         </div>
         <div className="main-actions">
-          <FabButton type="submit" className="submit-button">{t('app.admin.store.product_form.save')}</FabButton>
+          <FabButton type="submit" className="main-action-btn">{t('app.admin.store.product_form.save')}</FabButton>
         </div>
       </form>
     </>

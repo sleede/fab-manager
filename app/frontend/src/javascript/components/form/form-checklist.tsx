@@ -98,8 +98,8 @@ export const FormChecklist = <TFieldValues extends FieldValues, TOptionValue, TC
                             })}
                           </div>
                           <div className="actions">
-                            <FabButton type="button" onClick={selectAll(onChange)} className="checklist-all-button">{t('app.shared.form_checklist.select_all')}</FabButton>
-                            <FabButton type="button" onClick={unselectAll(onChange)} className="checklist-none-button">{t('app.shared.form_checklist.unselect_all')}</FabButton>
+                            <FabButton type="button" onClick={selectAll(onChange)} className="is-info">{t('app.shared.form_checklist.select_all')}</FabButton>
+                            <FabButton type="button" onClick={unselectAll(onChange)} className="is-info">{t('app.shared.form_checklist.unselect_all')}</FabButton>
                           </div>
                         </>
                       );
