@@ -22,6 +22,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    .grpBtn {
+      display: flex;
+      & > *:not(:first-child) { margin-left: 2.4rem; }
+      .saveBtn {
+        background-color: var(--main);
+        color: var(--gray-soft-lightest);
+        border: none;
+        &:hover { opacity: 0.75; }
+      }
+    }
     h2 {
       margin: 0;
       @include title-lg;
@@ -40,8 +50,8 @@
   }
 
   &-tree {
-    & > *:not(:last-of-type) {
-      margin-bottom: 1.6rem;
+    & > *:not(:first-child) {
+      margin-top: 1.6rem;
     }
   }
   &-item {
