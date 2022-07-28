@@ -1,7 +1,11 @@
 .fab-socials {
   .save-btn {
-    background-color: var(--secondary-dark);
-    border-color: var(--secondary-dark);
+    background-color: var(--secondary);
+    border-color: var(--secondary);
     color: var(--secondary-text-color);
+    &:hover {
+      background-color: var(--secondary-dark);
+      border-color: var(--secondary-dark);
+    }
   }
 }
