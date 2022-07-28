@@ -58,9 +58,13 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
   };
 
   return (
-    <div>
-      <h2>{t('app.admin.store.products.all_products')}</h2>
-      <FabButton className="save" onClick={newProduct}>{t('app.admin.store.products.create_a_product')}</FabButton>
+    <div className='products'>
+      <header>
+        <h2>{t('app.admin.store.products.all_products')}</h2>
+        <div className='grpBtn'>
+          <FabButton className="main-action-btn" onClick={newProduct}>{t('app.admin.store.products.create_a_product')}</FabButton>
+        </div>
+      </header>
       <ProductsList
         products={products}
         onEdit={editProduct}

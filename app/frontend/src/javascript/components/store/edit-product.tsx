@@ -39,7 +39,9 @@ const EditProduct: React.FC<EditProductProps> = ({ productId, onSuccess, onError
 
   if (product) {
     return (
-      <ProductForm product={product} title={product.name} onSuccess={saveProductSuccess} onError={onError} />
+      <div className="edit-product">
+        <ProductForm product={product} title={product.name} onSuccess={saveProductSuccess} onError={onError} />
+      </div>
     );
   }
   return null;

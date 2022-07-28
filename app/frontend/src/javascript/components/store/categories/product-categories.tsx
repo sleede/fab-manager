@@ -85,7 +85,7 @@ const ProductCategories: React.FC<ProductCategoriesProps> = ({ onSuccess, onErro
           <ManageProductCategory action='create'
             productCategories={productCategories}
             onSuccess={handleSuccess} onError={onError} />
-          <FabButton className='saveBtn' onClick={handleSave}>Plop</FabButton>
+          <FabButton className='main-action-btn' onClick={handleSave}>Plop</FabButton>
         </div>
       </header>
       <FabAlert level="warning">

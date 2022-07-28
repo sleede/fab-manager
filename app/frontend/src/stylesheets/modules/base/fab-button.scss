@@ -49,4 +49,17 @@
   &--icon-only {
     display: flex;
   }
+
+  // color variants
+  &.is-info {
+    border-color: var(--information);
+    background-color: var(--information);
+    color: var(--gray-soft-lightest);
+    &:hover {
+      border-color: var(--information);
+      background-color: var(--information);
+      color: var(--gray-soft-lightest);
+      opacity: 0.75;
+    }
+  }
 }
