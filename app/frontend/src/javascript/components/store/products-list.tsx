@@ -31,20 +31,26 @@ export const ProductsList: React.FC<ProductsListProps> = ({ products, onEdit, on
   };
 
   return (
-    <div>
+    <>
       {products.map((product) => (
-        <div key={product.id}>
-          {product.name}
-          <div className="buttons">
-            <FabButton className="edit-btn" onClick={editProduct(product)}>
-              <i className="fa fa-edit" />
-            </FabButton>
-            <FabButton className="delete-btn" onClick={deleteProduct(product.id)}>
-              <i className="fa fa-trash" />
-            </FabButton>
+        <div className='products-list-item' key={product.id}>
+          <div className='itemInfo'>
+            <img src='https://via.placeholder.com/300' alt='' className='itemInfo-thumbnail' />
+            <p className="itemInfo-name">{product.name}</p>
+          </div>
+          <div className=''></div>
+          <div className='actions'>
+            <div className='manage'>
+              <FabButton className='edit-btn' onClick={editProduct(product)}>
+                <i className='fas fa-pen' />
+              </FabButton>
+              <FabButton className='delete-btn' onClick={deleteProduct(product.id)}>
+                <i className='fa fa-trash' />
+              </FabButton>
+            </div>
           </div>
         </div>
       ))}
-    </div>
+    </>
   );
 };
