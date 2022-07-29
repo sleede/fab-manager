@@ -36,7 +36,7 @@ export const ProductCategoriesItem: React.FC<ProductCategoriesItemProps> = ({ pr
         <p className='itemInfo-name'>{category.name}</p>
         <span className='itemInfo-count'>[count]</span>
       </div>
-      <div className='action'>
+      <div className='actions'>
         <div className='manage'>
           <ManageProductCategory action='update'
             productCategories={productCategories}

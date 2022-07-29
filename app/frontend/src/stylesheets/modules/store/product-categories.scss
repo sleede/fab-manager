@@ -65,22 +65,22 @@
       }
     }
 
-    .action {
+    .actions {
       display: flex;
       justify-content: flex-end;
       align-items: center;
       .manage {
         overflow: hidden;
         display: flex;
-        border-radius: var(--border-radius);
+        border-radius: var(--border-radius-sm);
         button {
           @include btn;
           border-radius: 0;
           color: var(--gray-soft-lightest);
           &:hover { opacity: 0.75; }
         }
-        .edit-button {background: var(--gray-hard-darkest) }
-        .delete-button {background: var(--error) }
+        .edit-btn {background: var(--gray-hard-darkest) }
+        .delete-btn {background: var(--error) }
       }
     }
 
