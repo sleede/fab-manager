@@ -54,12 +54,12 @@ export const ManageProductCategory: React.FC<ManageProductCategoryProps> = ({ pr
       case 'update':
         return (<FabButton type='button'
           icon={<i className="fas fa-pen" />}
-          className="edit-button"
+          className="edit-btn"
           onClick={toggleModal} />);
       case 'delete':
         return (<FabButton type='button'
           icon={<i className="fa fa-trash" />}
-          className="delete-button"
+          className="delete-btn"
           onClick={toggleModal} />);
     }
   };
