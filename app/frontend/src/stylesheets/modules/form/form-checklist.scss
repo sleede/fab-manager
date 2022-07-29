@@ -7,7 +7,7 @@
 
   .checklist {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1.6rem 3.2rem;
 
     .checklist-item input {

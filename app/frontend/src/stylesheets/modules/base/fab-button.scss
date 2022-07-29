@@ -62,4 +62,15 @@
       opacity: 0.75;
     }
   }
+  &.is-black {
+    border-color: var(--gray-hard-darkest);
+    background-color: var(--gray-hard-darkest);
+    color: var(--gray-soft-lightest);
+    &:hover {
+      border-color: var(--gray-hard-darkest);
+      background-color: var(--gray-hard-darkest);
+      color: var(--gray-soft-lightest);
+      opacity: 0.75;
+    }
+  }
 }

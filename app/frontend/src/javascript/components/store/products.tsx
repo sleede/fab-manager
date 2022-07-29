@@ -65,11 +65,46 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
           <FabButton className="main-action-btn" onClick={newProduct}>{t('app.admin.store.products.create_a_product')}</FabButton>
         </div>
       </header>
-      <ProductsList
-        products={products}
-        onEdit={editProduct}
-        onDelete={deleteProduct}
-      />
+      <div className='layout'>
+        <div className='products-filters span-3'>
+          <header>
+            <h3>Filtrer</h3>
+            <div className='grpBtn'>
+            <FabButton className="is-black">Clear</FabButton>
+            </div>
+          </header>
+        </div>
+        <div className='products-list span-7'>
+          <div className='status'>
+            <div className='count'>
+              <p>Result count: <span>{products.length}</span></p>
+            </div>
+            <div className="">
+              <div className='sort'>
+                <p>Display options:</p>
+              </div>
+              <div className='visibility'>
+
+              </div>
+            </div>
+          </div>
+          <div className='features'>
+            <div className='features-item'>
+              <p>feature name</p>
+              <button><i className="fa fa-times" /></button>
+            </div>
+            <div className='features-item'>
+              <p>long feature name</p>
+              <button><i className="fa fa-times" /></button>
+            </div>
+          </div>
+          <ProductsList
+            products={products}
+            onEdit={editProduct}
+            onDelete={deleteProduct}
+          />
+        </div>
+      </div>
     </div>
   );
 };

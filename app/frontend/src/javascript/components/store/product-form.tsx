@@ -126,7 +126,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
         </div>
       </header>
       <form className="product-form" onSubmit={onSubmit}>
-        <div className="grp">
+        <div className="layout">
           <FormInput id="name"
                      register={register}
                      rules={{ required: true }}
@@ -137,32 +137,38 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
           <FormInput id="sku"
                      register={register}
                      formState={formState}
-                     label={t('app.admin.store.product_form.sku')} />
+                     label={t('app.admin.store.product_form.sku')}
+                     className='span-3' />
         </div>
-        <FormInput id="slug"
-                   register={register}
-                   rules={{ required: true }}
-                   formState={formState}
-                   label={t('app.admin.store.product_form.slug')} />
-        <FormSwitch control={control}
-                    id="is_active"
+        <div className="layout">
+          <FormInput id="slug"
+                    register={register}
+                    rules={{ required: true }}
                     formState={formState}
-                    label={t('app.admin.store.product_form.is_show_in_store')} />
+                    label={t('app.admin.store.product_form.slug')}
+                    className='span-7' />
+          <FormSwitch control={control}
+                      id="is_active"
+                      formState={formState}
+                      label={t('app.admin.store.product_form.is_show_in_store')}
+                      className='span-3' />
+        </div>
 
         <hr />
 
         <div className="price-data">
-          <div className="grp">
+          <div className="layout">
             <h4 className='span-7'>{t('app.admin.store.product_form.price_and_rule_of_selling_product')}</h4>
             <FormSwitch control={control}
                         id="is_active_price"
                         label={t('app.admin.store.product_form.is_active_price')}
                         tooltip={t('app.admin.store.product_form.is_active_price')}
                         defaultValue={isActivePrice}
-                        onChange={toggleIsActivePrice} />
+                        onChange={toggleIsActivePrice}
+                        className='span-3' />
           </div>
           {isActivePrice && <div className="price-fields">
-            <div className="grp">
+            <div className="flex">
               <FormInput id="amount"
                          type="number"
                          register={register}
