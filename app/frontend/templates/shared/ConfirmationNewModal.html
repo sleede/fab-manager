@@ -4,7 +4,6 @@
     <h1 translate>{{ 'app.public.common.confirm_my_account' }}</h1>
   </div>
   <div class="modal-body">
-    <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
     <div class="panel panel-default bg-light">
       <div class="panel-body">
         <p translate>{{ 'app.public.common.you_will_receive_confirmation_instructions_by_email' }}</p>

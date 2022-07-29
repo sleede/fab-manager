@@ -504,14 +504,8 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
               controller: ['$scope', '$uibModalInstance', '$http', function ($scope, $uibModalInstance, $http) {
                 $scope.user = { email: '' };
                 $scope.sendReset = function () {
-                  $scope.alerts = [];
                   return $http.post('/users/password.json', { user: $scope.user }).then(function () {
                     $uibModalInstance.close();
-                  }).catch(function () {
-                    $scope.alerts.push({
-                      msg: _t('app.public.common.your_email_address_is_unknown'),
-                      type: 'danger'
-                    });
                   });
                 };
               }]
@@ -526,14 +520,8 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
               controller: ['$scope', '$uibModalInstance', '$http', function ($scope, $uibModalInstance, $http) {
                 $scope.user = { email: '' };
                 $scope.submitConfirmationNewForm = function () {
-                  $scope.alerts = [];
                   return $http.post('/users/confirmation.json', { user: $scope.user }).then(function () {
                     $uibModalInstance.close();
-                  }).catch(function (res) {
-                    $scope.alerts.push({
-                      msg: res.data.errors.email[0],
-                      type: 'danger'
-                    });
                   });
                 };
               }]
