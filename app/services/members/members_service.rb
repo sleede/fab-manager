@@ -128,7 +128,7 @@ class Members::MembersService
 
   def password(params)
     if !params[:password] && !params[:password_confirmation]
-      Devise.friendly_token.first(8)
+      SecurePassword.generate
     else
       params[:password]
     end

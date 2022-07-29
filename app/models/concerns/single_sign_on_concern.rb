@@ -161,7 +161,7 @@ module SingleSignOnConcern
           user.set_data_from_sso_mapping(key, value)
         end
         logger.debug 'generating a new password'
-        user.password = Devise.friendly_token[0, 20]
+        user.password = SecurePassword.generate
       end
     end
   end
