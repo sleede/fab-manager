@@ -4,6 +4,7 @@
 
 - Added a test for multiple reservations on the same space slot
 - Fix a security issue: updated moment to 2.29.4 to fix [CVE-2022-31129](https://cve.mitre.org/cgi-bin/cvename.cgi?CVE-2022-31129)
+- Display the tag and theme field on the detail view of a project
 
 ## v5.4.13 2022 July 27
 
