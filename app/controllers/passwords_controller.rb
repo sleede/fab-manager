@@ -9,8 +9,6 @@ class PasswordsController < Devise::PasswordsController
 
     if successfully_sent?(resource)
       respond_with({}, location: after_sending_reset_password_instructions_path_for(resource_name))
-    else
-      head 404
     end
   end
 
