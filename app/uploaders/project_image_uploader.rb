@@ -5,6 +5,7 @@
 class ProjectImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
   include UploadHelper
+  include ContentTypeValidationFromFileContent
 
   # Choose what kind of storage to use for this uploader:
   storage :file

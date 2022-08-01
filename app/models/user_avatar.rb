@@ -3,5 +3,5 @@
 # UserAvatar is the profile picture for an User
 class UserAvatar < Asset
   include ImageValidatorConcern
-  mount_uploader :attachment, ProfilImageUploader
+  mount_uploader :attachment, UserAvatarUploader
 end
