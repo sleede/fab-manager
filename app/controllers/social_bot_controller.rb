@@ -14,7 +14,7 @@ class SocialBotController < ActionController::Base
       @training = Training.friendly.find(Regexp.last_match(3).to_s)
       render :training, status: :ok
     else
-      puts "unknown bot request : #{request.original_url}"
+      Rails.logger.warn "unknown bot request : #{request.original_url}"
     end
   end
 end

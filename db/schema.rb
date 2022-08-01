@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_31_160223) do
+ActiveRecord::Schema.define(version: 2022_07_20_135828) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -760,17 +760,16 @@ ActiveRecord::Schema.define(version: 2022_05_31_160223) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "availability_id"
-    t.datetime "ex_start_at"
-    t.datetime "ex_end_at"
-    t.datetime "canceled_at"
-    t.boolean "offered", default: false
-    t.boolean "destroying", default: false
     t.index ["availability_id"], name: "index_slots_on_availability_id"
   end
 
   create_table "slots_reservations", id: :serial, force: :cascade do |t|
     t.integer "slot_id"
     t.integer "reservation_id"
+    t.datetime "ex_start_at"
+    t.datetime "ex_end_at"
+    t.datetime "canceled_at"
+    t.boolean "offered", default: false
     t.index ["reservation_id"], name: "index_slots_reservations_on_reservation_id"
     t.index ["slot_id"], name: "index_slots_reservations_on_slot_id"
   end

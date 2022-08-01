@@ -32,7 +32,7 @@ class PDF::PaymentSchedule < Prawn::Document
     begin
       image StringIO.new(Base64.decode64(img_b64)), fit: [415, 40]
     rescue StandardError => e
-      puts "Unable to decode invoice logo from base64: #{e}"
+      Rails.logger.error "Unable to decode invoice logo from base64: #{e}"
     end
     move_down 20
     font('Open-Sans', size: 10) do

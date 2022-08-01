@@ -936,7 +936,7 @@ angular.module('application.router', ['ui.router'])
           groupsPromise: ['Group', function (Group) { return Group.query().$promise; }],
           tagsPromise: ['Tag', function (Tag) { return Tag.query().$promise; }],
           authProvidersPromise: ['AuthProvider', function (AuthProvider) { return AuthProvider.query().$promise; }],
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['feature_tour_display', 'user_validation_required']" }).$promise; }]
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['feature_tour_display', 'user_validation_required', 'show_username_in_admin_list']" }).$promise; }]
         }
       })
       .state('app.admin.members_new', {
@@ -1093,7 +1093,7 @@ angular.module('application.router', ['ui.router'])
                      "'link_name', 'home_content', 'home_css', 'phone_required', 'upcoming_events_shown', 'public_agenda_module'," +
                      "'renew_pack_threshold', 'pack_only_for_subscription', 'overlapping_categories', 'public_registrations'," +
                      "'extended_prices_in_same_day', 'recaptcha_site_key', 'recaptcha_secret_key', 'user_validation_required', " +
-                     "'user_validation_required_list', 'machines_module', 'user_change_group']"
+                     "'user_validation_required_list', 'machines_module', 'user_change_group', 'show_username_in_admin_list']"
             }).$promise;
           }],
           privacyDraftsPromise: ['Setting', function (Setting) { return Setting.get({ name: 'privacy_draft', history: true }).$promise; }],

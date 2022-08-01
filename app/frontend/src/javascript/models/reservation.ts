@@ -3,15 +3,19 @@ import { ApiFilter } from './api';
 
 export type ReservableType = 'Training' | 'Event' | 'Space' | 'Machine';
 
-export interface ReservationSlot {
+export interface SlotsReservation {
   id?: number,
-  start_at: TDateISO,
-  end_at: TDateISO,
   canceled_at?: TDateISO,
-  availability_id?: number,
   offered?: boolean,
-  is_reserved?: boolean
+  slot_id?: number,
+  slot_attributes?: {
+    id: number,
+    start_at: TDateISO,
+    end_at: TDateISO,
+    availability_id: number
+  }
 }
+// TODO, refactor Reservation for cart_items (in payment) => should use slot_id instead of (start_at + end_at)
 
 export interface Reservation {
   id?: number,
@@ -20,7 +24,7 @@ export interface Reservation {
   message?: string,
   reservable_id: number,
   reservable_type: ReservableType,
-  slots_attributes: Array<ReservationSlot>,
+  slots_reservations_attributes: Array<SlotsReservation>,
   reservable?: {
     id: number,
     name: string

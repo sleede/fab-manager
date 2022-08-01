@@ -391,6 +391,7 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$transi
      */
     $scope.markSlotAsAdded = function () {
       $scope.selectedEvent.backgroundColor = SELECTED_EVENT_BG_COLOR;
+      $scope.selectedEvent.oldTitle = $scope.selectedEvent.title;
       updateEvents($scope.selectedEvent);
     };
 
@@ -399,27 +400,22 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$transi
      */
     $scope.markSlotAsRemoved = function (slot) {
       slot.backgroundColor = 'white';
-      slot.title = '';
+      slot.title = slot.oldTitle;
       slot.borderColor = FREE_SLOT_BORDER_COLOR;
-      slot.slot_id = null;
-      slot.isValid = false;
-      slot.is_reserved = false;
-      slot.can_modify = false;
-      slot.offered = false;
-      if (slot.is_completed) { slot.is_completed = false; }
       updateEvents(slot);
     };
 
     /**
      * Callback when a slot was successfully cancelled. Reset the slot style as 'ready to book'
      */
-    $scope.slotCancelled = function () { $scope.markSlotAsRemoved($scope.selectedEvent); };
+    $scope.slotCancelled = function () { refreshCalendar(); };
 
     /**
      * Change the last selected slot's appearance to looks like 'currently looking for a new destination to exchange'
      */
     $scope.markSlotAsModifying = function () {
       $scope.selectedEvent.backgroundColor = '#eee';
+      $scope.selectedEvent.oldTitle = $scope.selectedEvent.title;
       $scope.selectedEvent.title = _t('app.logged.space_reserve.i_change');
       updateEvents($scope.selectedEvent);
     };
@@ -445,30 +441,7 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$transi
      * When modifying an already booked reservation, callback when the modification was successfully done.
      */
     $scope.modifySpaceSlot = function () {
-      const save = {
-        slotId: $scope.events.modifiable.slot_id,
-        borderColor: $scope.events.modifiable.borderColor,
-        title: _t('app.logged.space_reserve.i_ve_reserved')
-      };
-
-      $scope.events.modifiable.backgroundColor = 'white';
-      $scope.events.modifiable.title = '';
-      $scope.events.modifiable.borderColor = FREE_SLOT_BORDER_COLOR;
-      $scope.events.modifiable.slot_id = null;
-      $scope.events.modifiable.is_reserved = false;
-      $scope.events.modifiable.can_modify = false;
-      if ($scope.events.modifiable.is_completed) { $scope.events.modifiable.is_completed = false; }
-      updateEvents($scope.events.modifiable);
-
-      $scope.events.placable.title = save.title;
-      $scope.events.placable.backgroundColor = 'white';
-      $scope.events.placable.borderColor = save.borderColor;
-      $scope.events.placable.slot_id = save.slotId;
-      $scope.events.placable.is_reserved = true;
-      $scope.events.placable.can_modify = true;
-      updateEvents($scope.events.placable);
-
-      refetchCalendar();
+      refreshCalendar();
     };
 
     /**
@@ -493,14 +466,7 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$transi
       if ($scope.ctrl.member) {
         Member.get({ id: $scope.ctrl.member.id }, function (member) {
           $scope.ctrl.member = member;
-          return Availability.spaces({ spaceId: $scope.space.id, member_id: $scope.ctrl.member.id }, function (spaces) {
-            uiCalendarConfig.calendars.calendar.fullCalendar('removeEvents');
-            return $scope.eventSources.splice(0, 1, {
-              events: spaces,
-              textColor: 'black'
-            }
-            );
-          });
+          refreshCalendar();
         });
       }
       // as the events are re-fetched for the new user, we must re-init the cart
@@ -561,16 +527,6 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$transi
      */
     $scope.afterPayment = function (paymentDocument) {
       Reservation.get({ id: paymentDocument.main_object.id }, function (reservation) {
-        angular.forEach($scope.events.paid, function (spaceSlot, key) {
-          spaceSlot.is_reserved = true;
-          spaceSlot.can_modify = true;
-          spaceSlot.title = _t('app.logged.space_reserve.i_ve_reserved');
-          spaceSlot.backgroundColor = 'white';
-          spaceSlot.borderColor = RESERVED_SLOT_BORDER_COLOR;
-          updateSpaceSlotId(spaceSlot, reservation);
-          updateEvents(spaceSlot);
-        });
-
         if ($scope.selectedPlan) {
           $scope.ctrl.member.subscribed_plan = angular.copy($scope.selectedPlan);
           if ($scope.ctrl.member.id === Auth._currentUser.id) {
@@ -586,7 +542,7 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$transi
           Auth._currentUser.machine_credits = angular.copy(reservation.user.machine_credits);
         }
 
-        refetchCalendar();
+        refreshCalendar();
       });
     };
 
@@ -602,16 +558,13 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$transi
      */
     const initialize = function () {
       if ($scope.currentUser.role !== 'admin') {
+        $scope.ctrl.member = $scope.currentUser;
         Member.get({ id: $scope.currentUser.id }, function (member) { $scope.ctrl.member = member; });
       }
       // we load the availabilities from a callback function of the $scope.eventSources, instead of resolving a promise
       // in the router because this allows to refetchEvents from fullCalendar API.
       $scope.eventSources.push({
-        events: function (start, end, timezone, callback) {
-          Availability.spaces({ spaceId: $transition$.params().id }, function (availabilities) {
-            callback(availabilities);
-          });
-        },
+        url: `/api/availabilities/spaces/${$transition$.params().id}`,
         textColor: 'black'
       });
     };
@@ -632,6 +585,27 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$transi
     };
 
     /**
+     * Refetch all events from the API and re-populate the calendar with the resulting slots
+     */
+    const refreshCalendar = function () {
+      const view = uiCalendarConfig.calendars.calendar.fullCalendar('getView');
+      return Availability.spaces({
+        spaceId: $scope.space.id,
+        member_id: $scope.ctrl.member.id,
+        start: view.start,
+        end: view.end,
+        timezone: Fablab.timezone
+      }, function (spaces) {
+        uiCalendarConfig.calendars.calendar.fullCalendar('removeEvents');
+        return $scope.eventSources.splice(0, 1, {
+            events: spaces,
+            textColor: 'black'
+          }
+        );
+      });
+    };
+
+    /**
      * Triggered when fullCalendar tries to graphically render an event block.
      * Append the event tag into the block, just after the event title.
      * @see http://fullcalendar.io/docs/event_rendering/eventRender/
@@ -644,20 +618,6 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$transi
         }
         element.find('.fc-time').append(html);
       }
-    };
-
-    /**
-     * After payment, update the id of the newly reserved slot with the id returned by the server.
-     * This will allow the user to modify the reservation he just booked.
-     * @param slot {Object}
-     * @param reservation {Object}
-     */
-    const updateSpaceSlotId = function (slot, reservation) {
-      angular.forEach(reservation.slots, function (s) {
-        if (slot.start.isSame(s.start_at)) {
-          slot.slot_id = s.id;
-        }
-      });
     };
 
     /**

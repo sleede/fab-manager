@@ -40,37 +40,40 @@ module SingleSignOnConcern
     ## @param sso_mapping {String} must be of form 'user._field_' or 'profile._field_'. Eg. 'user.email'
     ## @param data {*} the data to put in the given key. Eg. 'user@example.com'
     def set_data_from_sso_mapping(sso_mapping, data)
+      return if data.nil? || data.blank?
+
       if sso_mapping.to_s.start_with? 'user.'
-        self[sso_mapping[5..-1].to_sym] = data unless data.nil? || data.blank?
+        self[sso_mapping[5..-1].to_sym] = data
       elsif sso_mapping.to_s.start_with? 'profile.'
         case sso_mapping.to_s
         when 'profile.avatar'
           profile.user_avatar ||= UserAvatar.new
           profile.user_avatar.remote_attachment_url = data
         when 'profile.address'
-          invoicing_profile ||= InvoicingProfile.new
-          invoicing_profile.address ||= Address.new
-          invoicing_profile.address.address = data
+          self.invoicing_profile ||= InvoicingProfile.new
+          self.invoicing_profile.address ||= Address.new
+          self.invoicing_profile.address.address = data
         when 'profile.organization_name'
-          invoicing_profile ||= InvoicingProfile.new
-          invoicing_profile.organization ||= Organization.new
-          invoicing_profile.organization.name = data
+          self.invoicing_profile ||= InvoicingProfile.new
+          self.invoicing_profile.organization ||= Organization.new
+          self.invoicing_profile.organization.name = data
         when 'profile.organization_address'
-          invoicing_profile ||= InvoicingProfile.new
-          invoicing_profile.organization ||= Organization.new
-          invoicing_profile.organization.address ||= Address.new
-          invoicing_profile.organization.address.address = data
+          self.invoicing_profile ||= InvoicingProfile.new
+          self.invoicing_profile.organization ||= Organization.new
+          self.invoicing_profile.organization.address ||= Address.new
+          self.invoicing_profile.organization.address.address = data
         when 'profile.gender'
-          statistic_profile ||= StatisticProfile.new
-          statistic_profile.gender = data
+          self.statistic_profile ||= StatisticProfile.new
+          self.statistic_profile.gender = data
         when 'profile.birthday'
-          statistic_profile ||= StatisticProfile.new
-          statistic_profile.birthday = data
+          self.statistic_profile ||= StatisticProfile.new
+          self.statistic_profile.birthday = data
         else
-          profile[sso_mapping[8..-1].to_sym] = data unless data.nil?
+          profile[sso_mapping[8..-1].to_sym] = data
         end
       end
-      return if data.nil? || data.blank? || mapped_from_sso&.include?(sso_mapping)
+
+      return if mapped_from_sso&.include?(sso_mapping)
 
       self.mapped_from_sso = [mapped_from_sso, sso_mapping].compact.join(',')
     end
@@ -121,7 +124,7 @@ module SingleSignOnConcern
         logger.debug "mapping sso field #{field} with value=#{value}"
         # we do not merge the email field if its end with the special value '-duplicate' as this means
         # that the user is currently merging with the account that have the same email than the sso
-        set_data_from_sso_mapping(field, value) unless field == 'user.email' && value.end_with?('-duplicate')
+        set_data_from_sso_mapping(field, value) unless (field == 'user.email' && value.end_with?('-duplicate')) || (field == 'user.group_id' && user.admin?)
       end
 
       # run the account transfer in an SQL transaction to ensure data integrity

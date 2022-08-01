@@ -191,6 +191,14 @@ Application.Filters.filter('humanReadablePlanName', ['$filter', function ($filte
   };
 }]);
 
+Application.Filters.filter('canceledReservationsFilter', [function () {
+  return function (elements) {
+    if (!angular.isUndefined(elements) && (elements != null)) {
+      return elements.filter(e => e.canceled_at === null);
+    }
+  };
+}]);
+
 Application.Filters.filter('trainingReservationsFilter', [function () {
   return function (elements, selectedScope) {
     if (!angular.isUndefined(elements) && !angular.isUndefined(selectedScope) && (elements != null) && (selectedScope != null)) {

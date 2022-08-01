@@ -50,6 +50,8 @@ The following guides should help those who want to contribute to the code.
 
 - [Plugins](plugins.md)
 
+- [How the data model works for Availabilities and Reservations](availabilities-reservations-models.md)
+
 #### How to setup a development environment
 - [With docker-compose](development_readme.md)
 

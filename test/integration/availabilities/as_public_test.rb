@@ -67,8 +67,8 @@ class Availabilities::AsPublicTest < ActionDispatch::IntegrationTest
   end
 
   test 'get public events availabilities' do
-    start_date = DateTime.parse('2016-04-18').to_date
-    end_date = DateTime.parse('2016-04-24').to_date
+    start_date = 8.days.from_now.to_date
+    end_date = 16.days.from_now.to_date
 
     get "/api/availabilities/public?start=#{start_date.to_s}&end=#{end_date.to_s}&timezone=Europe%2FParis&evt=true"
 

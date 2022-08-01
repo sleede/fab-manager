@@ -32,11 +32,9 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
                    reservation: {
                      reservable_id: machine.id,
                      reservable_type: machine.class.name,
-                     slots_attributes: [
+                     slots_reservations_attributes: [
                        {
-                         start_at: availability.start_at.to_s(:iso8601),
-                         end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-                         availability_id: availability.id
+                         slot_id: availability.slots.first.id
                        }
                      ]
                    }
@@ -105,11 +103,9 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
                    reservation: {
                      reservable_id: machine.id,
                      reservable_type: machine.class.name,
-                     slots_attributes: [
+                     slots_reservations_attributes: [
                        {
-                         start_at: availability.start_at.to_s(:iso8601),
-                         end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-                         availability_id: availability.id
+                         slot_id: availability.slots.first.id
                        }
                      ]
                    }
@@ -157,11 +153,9 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
                    reservation: {
                      reservable_id: training.id,
                      reservable_type: training.class.name,
-                     slots_attributes: [
+                     slots_reservations_attributes: [
                        {
-                         start_at: availability.start_at.to_s(:iso8601),
-                         end_at: availability.end_at.to_s(:iso8601),
-                         availability_id: availability.id
+                         slot_id: availability.slots.first.id
                        }
                      ]
                    }
@@ -229,16 +223,12 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
                    reservation: {
                      reservable_id: machine.id,
                      reservable_type: machine.class.name,
-                     slots_attributes: [
+                     slots_reservations_attributes: [
                        {
-                         start_at: availability.start_at.to_s(:iso8601),
-                         end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-                         availability_id: availability.id
+                         slot_id: availability.slots.first.id
                        },
                        {
-                         start_at: (availability.start_at + 1.hour).to_s(:iso8601),
-                         end_at: (availability.start_at + 2.hours).to_s(:iso8601),
-                         availability_id: availability.id
+                         slot_id: availability.slots.last.id
                        }
                      ]
                    }
@@ -314,11 +304,9 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
                  reservation: {
                    reservable_id: training.id,
                    reservable_type: training.class.name,
-                   slots_attributes: [
+                   slots_reservations_attributes: [
                      {
-                       start_at: availability.start_at.to_s(:iso8601),
-                       end_at: availability.end_at.to_s(:iso8601),
-                       availability_id: availability.id
+                       slot_id: availability.slots.first.id
                      }
                    ]
                  }
@@ -391,11 +379,9 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
                    reservation: {
                      reservable_id: machine.id,
                      reservable_type: machine.class.name,
-                     slots_attributes: [
+                     slots_reservations_attributes: [
                        {
-                         start_at: availability.start_at.to_s(:iso8601),
-                         end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-                         availability_id: availability.id
+                         slot_id: availability.slots.first.id
                        }
                      ]
                    }
@@ -476,11 +462,9 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
                    reservation: {
                      reservable_id: training.id,
                      reservable_type: training.class.name,
-                     slots_attributes: [
+                     slots_reservations_attributes: [
                        {
-                         start_at: availability.start_at.to_s(:iso8601),
-                         end_at: availability.end_at.to_s(:iso8601),
-                         availability_id: availability.id
+                         slot_id: availability.slots.first.id
                        }
                      ]
                    }
@@ -542,7 +526,7 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
     login_as(@user_without_subscription, scope: :user)
 
     machine = Machine.find(6)
-    plan = Plan.where(group_id: @user_without_subscription.group_id).first
+    plan = Plan.find(4)
     availability = machine.availabilities.first
 
     reservations_count = Reservation.count
@@ -561,11 +545,9 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
                    reservation: {
                      reservable_id: machine.id,
                      reservable_type: machine.class.name,
-                     slots_attributes: [
+                     slots_reservations_attributes: [
                        {
-                         start_at: availability.start_at.to_s(:iso8601),
-                         end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-                         availability_id: availability.id
+                         slot_id: availability.slots.first.id
                        }
                      ]
                    }
@@ -661,11 +643,9 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
                      reservable_id: training.id,
                      reservable_type: training.class.name,
                      card_token: stripe_payment_method,
-                     slots_attributes: [
+                     slots_reservations_attributes: [
                        {
-                         start_at: availability.start_at.to_s(:iso8601),
-                         end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-                         availability_id: availability.id
+                         slot_id: availability.slots.first.id
                        }
                      ]
                    }
@@ -714,11 +694,9 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
                    reservation: {
                      reservable_id: training.id,
                      reservable_type: training.class.name,
-                     slots_attributes: [
+                     slots_reservations_attributes: [
                        {
-                         start_at: availability.start_at.to_s(:iso8601),
-                         end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-                         availability_id: availability.id
+                         slot_id: availability.slots.first.id
                        }
                      ]
                    }
@@ -802,11 +780,9 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
                    reservation: {
                      reservable_id: machine.id,
                      reservable_type: machine.class.name,
-                     slots_attributes: [
+                     slots_reservations_attributes: [
                        {
-                         start_at: availability.start_at.to_s(:iso8601),
-                         end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-                         availability_id: availability.id
+                         slot_id: availability.slots.first.id
                        }
                      ]
                    }
@@ -899,11 +875,9 @@ class Reservations::CreateTest < ActionDispatch::IntegrationTest
                    reservation: {
                      reservable_id: space.id,
                      reservable_type: space.class.name,
-                     slots_attributes: [
+                     slots_reservations_attributes: [
                        {
-                         start_at: availability.start_at.to_s(:iso8601),
-                         end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-                         availability_id: availability.id
+                         slot_id: availability.slots.first.id
                        }
                      ]
                    }

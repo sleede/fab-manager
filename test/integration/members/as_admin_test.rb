@@ -25,6 +25,7 @@ class MembersTest < ActionDispatch::IntegrationTest
           phone: '0485232145'
         },
         invoicing_profile_attributes: {
+          organization: false,
           address_attributes: {
             address: '21 grand rue, 73110 Bourget-en-Huile'
           }
@@ -99,5 +100,24 @@ class MembersTest < ActionDispatch::IntegrationTest
     assert_equal 1, res.length
 
     assert_match(/Kevin/, res[0][:name])
+  end
+
+  test 'admin changes the group of a member' do
+    user = User.find(2)
+    patch "/api/members/#{user.id}/",
+          params: {
+            user: {
+              id: user.id,
+              group_id: 2
+            }
+          }
+
+    # Check response format & status
+    assert_equal 200, response.status, response.body
+    assert_equal Mime[:json], response.content_type
+
+    # Check search result
+    res = json_response(response.body)
+    assert_equal 2, res[:group_id]
   end
 end

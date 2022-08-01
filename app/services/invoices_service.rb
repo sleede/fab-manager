@@ -121,7 +121,7 @@ class InvoicesService
   def self.generate_event_item(invoice, reservation, payment_details, main = false)
     raise TypeError unless reservation.reservable.is_a? Event
 
-    reservation.slots.each do |slot|
+    reservation.slots_reservations.map(&:slot).each do |slot|
       description = "#{reservation.reservable.name}\n"
       description += if slot.start_at.to_date != slot.end_at.to_date
                        I18n.t('events.from_STARTDATE_to_ENDDATE',
@@ -152,7 +152,7 @@ class InvoicesService
   def self.generate_reservation_item(invoice, reservation, payment_details, main = false)
     raise TypeError unless [Space, Machine, Training].include? reservation.reservable.class
 
-    reservation.slots.each do |slot|
+    reservation.slots_reservations.map(&:slot).each do |slot|
       description = reservation.reservable.name +
                     " #{I18n.l slot.start_at, format: :long} - #{I18n.l slot.end_at, format: :hour_minute}"
 

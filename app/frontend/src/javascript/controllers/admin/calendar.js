@@ -18,8 +18,8 @@
  * Controller used in the calendar management page
  */
 
-Application.Controllers.controller('AdminCalendarController', ['$scope', '$state', '$uibModal', 'moment', 'AuthService', 'Availability', 'Slot', 'Setting', 'Export', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', 'machinesPromise', 'plansPromise', 'groupsPromise', 'settingsPromise', '_t', 'uiCalendarConfig', 'CalendarConfig', 'Member', 'uiTourService',
-  function ($scope, $state, $uibModal, moment, AuthService, Availability, Slot, Setting, Export, growl, dialogs, bookingWindowStart, bookingWindowEnd, machinesPromise, plansPromise, groupsPromise, settingsPromise, _t, uiCalendarConfig, CalendarConfig, Member, uiTourService) {
+Application.Controllers.controller('AdminCalendarController', ['$scope', '$state', '$uibModal', 'moment', 'AuthService', 'Availability', 'SlotsReservation', 'Setting', 'Export', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', 'machinesPromise', 'plansPromise', 'groupsPromise', 'settingsPromise', '_t', 'uiCalendarConfig', 'CalendarConfig', 'Member', 'uiTourService',
+  function ($scope, $state, $uibModal, moment, AuthService, Availability, SlotsReservation, Setting, Export, growl, dialogs, bookingWindowStart, bookingWindowEnd, machinesPromise, plansPromise, groupsPromise, settingsPromise, _t, uiCalendarConfig, CalendarConfig, Member, uiTourService) {
     /* PRIVATE STATIC CONSTANTS */
 
     // The calendar is divided in slots of 30 minutes
@@ -78,9 +78,9 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
 
     /**
      * Open a confirmation modal to cancel the booking of a user for the currently selected event.
-     * @param slot {Object} reservation slot of a user, inherited from $resource
+     * @param slot_reservation {Object} reserved slot, as returned by /api/availabilities/:id/reservations
      */
-    $scope.cancelBooking = function (slot) {
+    $scope.cancelBooking = function (slot_reservation) {
     // open a confirmation dialog
       dialogs.confirm(
         {
@@ -89,19 +89,19 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
               return {
                 title: _t('app.admin.calendar.confirmation_required'),
                 msg: _t('app.admin.calendar.do_you_really_want_to_cancel_the_USER_s_reservation_the_DATE_at_TIME_concerning_RESERVATION'
-                  , { GENDER: getGender($scope.currentUser), USER: slot.user.name, DATE: moment(slot.start_at).format('L'), TIME: moment(slot.start_at).format('LT'), RESERVATION: slot.reservable.name })
+                  , { GENDER: getGender($scope.currentUser), USER: slot_reservation.user.name, DATE: moment(slot_reservation.start_at).format('L'), TIME: moment(slot_reservation.start_at).format('LT'), RESERVATION: slot_reservation.reservable.name })
               };
             }
           }
         },
         function () {
-          // the admin has confirmed, cancel the subscription
-          Slot.cancel(
-            { id: slot.slot_id },
+          // the admin has confirmed, cancel the reservation
+          SlotsReservation.cancel(
+            { id: slot_reservation.id },
             function (data, status) { // success
               // update the canceled_at attribute
               for (const resa of Array.from($scope.reservations)) {
-                if (resa.slot_id === data.id) {
+                if (resa.id === data.id) {
                   resa.canceled_at = data.canceled_at;
                   break;
                 }

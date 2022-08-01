@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class SubscriptionExtensionAfterReservationTest < ActiveSupport::TestCase
@@ -12,10 +14,19 @@ class SubscriptionExtensionAfterReservationTest < ActiveSupport::TestCase
 
     @user.reservations.destroy_all # ensure no reservations
 
-    @availability = @machine.availabilities.first
-    slot = Slot.new(start_at: @availability.start_at, end_at: @availability.end_at, availability_id: @availability.id)
-    @reservation_machine = Reservation.new(statistic_profile: @user.statistic_profile, reservable: @machine, slots: [slot])
-    @reservation_training = Reservation.new(statistic_profile: @user.statistic_profile, reservable: @training, slots: [slot])
+    @slot_reservation_machine = SlotsReservation.new({ slot_id: @machine.availabilities.first.slots.first.id })
+    @slot_reservation_training = SlotsReservation.new({ slot_id: @training.availabilities.first.slots.first.id })
+
+    @reservation_machine = Reservation.new(
+      statistic_profile: @user.statistic_profile,
+      reservable: @machine,
+      slots_reservations: [@slot_reservation_machine]
+    )
+    @reservation_training = Reservation.new(
+      statistic_profile: @user.statistic_profile,
+      reservable: @training,
+      slots_reservations: [@slot_reservation_training]
+    )
     @reservation_training.save!
   end
 
@@ -45,6 +56,6 @@ class SubscriptionExtensionAfterReservationTest < ActiveSupport::TestCase
 
   test 'method extend_subscription' do
     SubscriptionExtensionAfterReservation.new(@reservation_training).extend_subscription
-    assert_equal @reservation_training.slots.first.start_at + @plan.duration, @user.subscription.expired_at
+    assert_equal @reservation_training.slots_reservations.first.slot.start_at + @plan.duration, @user.subscription.expired_at
   end
 end

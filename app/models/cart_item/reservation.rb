@@ -11,7 +11,7 @@ class CartItem::Reservation < CartItem::BaseItem
     @customer = customer
     @operator = operator
     @reservable = reservable
-    @slots = slots
+    @slots = slots.map { |s| expand_slot(s) }
     super
   end
 
@@ -43,33 +43,27 @@ class CartItem::Reservation < CartItem::BaseItem
   def valid?(all_items)
     pending_subscription = all_items.find { |i| i.is_a?(CartItem::Subscription) }
     @slots.each do |slot|
-      availability = Availability.find_by(id: slot[:availability_id])
-      if availability.nil?
-        @errors[:slot] = 'slot availability does not exist'
+      slot_db = Slot.find(slot[:slot_id])
+      if slot_db.nil?
+        @errors[:slot] = 'slot does not exist'
         return false
       end
 
-      if availability.available_type == 'machines'
-        s = Slot.includes(:reservations).where(start_at: slot[:start_at], end_at: slot[:end_at], availability_id: slot[:availability_id], canceled_at: nil, "reservations.reservable": @reservable)
-        unless s.empty?
-          @errors[:slot] = 'slot is reserved'
-          return false
-        end
-      elsif availability.available_type == 'space' && availability.spaces.first.disabled
-        @errors[:slot] = 'space is disabled'
+      availability = Availability.find_by(id: slot[:slot_attributes][:availability_id])
+      if availability.nil?
+        @errors[:availability] = 'availability does not exist'
         return false
-      elsif availability.full?
-        @errors[:slot] = 'availability is complete'
+      end
+
+      if slot_db.full?
+        @errors[:slot] = 'availability is full'
         return false
       end
 
       next if availability.plan_ids.empty?
-      next if (@customer.subscribed_plan && availability.plan_ids.include?(@customer.subscribed_plan.id)) ||
-              (pending_subscription && availability.plan_ids.include?(pending_subscription.plan.id)) ||
-              (@operator.manager? && @customer.id != @operator.id) ||
-              @operator.admin?
+      next if required_subscription?(availability, pending_subscription)
 
-      @errors[:slot] = 'slot is restricted for subscribers'
+      @errors[:availability] = 'availability is restricted for subscribers'
       return false
     end
 
@@ -88,7 +82,11 @@ class CartItem::Reservation < CartItem::BaseItem
   def grouped_slots
     return { all: @slots } unless Setting.get('extended_prices_in_same_day')
 
-    @slots.group_by { |slot| slot[:start_at].to_date }
+    @slots.group_by { |slot| slot[:slot_attributes][:start_at].to_date }
+  end
+
+  def expand_slot(slot)
+    slot.merge({ slot_attributes: Slot.find(slot[:slot_id]) })
   end
 
   ##
@@ -99,7 +97,7 @@ class CartItem::Reservation < CartItem::BaseItem
   def get_slot_price_from_prices(prices, slot, is_privileged, options = {})
     options = GET_SLOT_PRICE_DEFAULT_OPTS.merge(options)
 
-    slot_minutes = (slot[:end_at].to_time - slot[:start_at].to_time) / SECONDS_PER_MINUTE
+    slot_minutes = (slot[:slot_attributes][:end_at].to_time - slot[:slot_attributes][:start_at].to_time) / SECONDS_PER_MINUTE
     price = prices[:prices].find { |p| p[:duration] <= slot_minutes && p[:duration].positive? }
     price = prices[:prices].first if price.nil?
     hourly_rate = (price[:price].amount.to_f / price[:price].duration) * MINUTES_PER_HOUR
@@ -129,7 +127,7 @@ class CartItem::Reservation < CartItem::BaseItem
     options = GET_SLOT_PRICE_DEFAULT_OPTS.merge(options)
 
     slot_rate = options[:has_credits] || (slot[:offered] && is_privileged) ? 0 : hourly_rate
-    slot_minutes = (slot[:end_at].to_time - slot[:start_at].to_time) / SECONDS_PER_MINUTE
+    slot_minutes = (slot[:slot_attributes][:end_at].to_time - slot[:slot_attributes][:start_at].to_time) / SECONDS_PER_MINUTE
     # apply the base price to the real slot duration
     real_price = if options[:is_division]
                    (slot_rate / MINUTES_PER_HOUR) * slot_minutes
@@ -146,7 +144,7 @@ class CartItem::Reservation < CartItem::BaseItem
 
     unless options[:elements].nil?
       options[:elements][:slots].push(
-        start_at: slot[:start_at],
+        start_at: slot[:slot_attributes][:start_at],
         price: real_price,
         promo: (slot_rate != hourly_rate)
       )
@@ -160,7 +158,7 @@ class CartItem::Reservation < CartItem::BaseItem
   # and the base price (1 hours), we use the 7 hours price, then 3 hours price, and finally the base price twice (7+3+1+1 = 12).
   # All these prices are returned to be applied to the reservation.
   def applicable_prices(slots)
-    total_duration = slots.map { |slot| (slot[:end_at].to_time - slot[:start_at].to_time) / SECONDS_PER_MINUTE }.reduce(:+)
+    total_duration = slots.map { |slot| (slot[:slot_attributes][:end_at].to_time - slot[:slot_attributes][:start_at].to_time) / SECONDS_PER_MINUTE }.reduce(:+)
     rates = { prices: [] }
 
     remaining_duration = total_duration
@@ -196,6 +194,17 @@ class CartItem::Reservation < CartItem::BaseItem
   end
 
   def slots_params
-    @slots.map { |slot| slot.permit(:id, :start_at, :end_at, :availability_id, :offered) }
+    @slots.map { |slot| slot.permit(:id, :slot_id, :offered) }
+  end
+
+  ##
+  # Check if the given availability requires a valid subscription. If so, check if the current customer
+  # has the required susbcription, otherwise, check if the operator is privileged
+  ##
+  def required_subscription?(availability, pending_subscription)
+    (@customer.subscribed_plan && availability.plan_ids.include?(@customer.subscribed_plan.id)) ||
+      (pending_subscription && availability.plan_ids.include?(pending_subscription.plan.id)) ||
+      (@operator.manager? && @customer.id != @operator.id) ||
+      @operator.admin?
   end
 end

@@ -25,8 +25,8 @@ class Event < ApplicationRecord
 
   attr_accessor :recurrence, :recurrence_end_at
 
-  after_create :event_recurrence
   before_save :update_nb_free_places
+  after_create :event_recurrence
   # update event updated_at for index cache
   after_save -> { touch }
 
@@ -79,7 +79,10 @@ class Event < ApplicationRecord
     if nb_total_places.nil?
       self.nb_free_places = nil
     else
-      reserved_places = reservations.joins(:slots).where('slots.canceled_at': nil).map(&:total_booked_seats).inject(0) { |sum, t| sum + t }
+      reserved_places = reservations.joins(:slots_reservations)
+                                    .where('slots_reservations.canceled_at': nil)
+                                    .map(&:total_booked_seats)
+                                    .inject(0) { |sum, t| sum + t }
       self.nb_free_places = (nb_total_places - reserved_places)
     end
   end
@@ -106,6 +109,7 @@ class Event < ApplicationRecord
            nil
          end
     r = Recurrence.new(every: recurrence, on: on, starts: availability.start_at + 1.day, until: recurrence_end_at)
+    service = Availabilities::CreateAvailabilitiesService.new
     r.events.each do |date|
       days_diff = availability.end_at.day - availability.start_at.day
       start_at = DateTime.new(
@@ -154,6 +158,7 @@ class Event < ApplicationRecord
         recurrence_id: id
       )
       event.save
+      service.create_slots(event.availability)
     end
     update_columns(recurrence_id: id)
   end

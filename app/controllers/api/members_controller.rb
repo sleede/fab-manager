@@ -40,7 +40,7 @@ class API::MembersController < API::ApiController
   def create
     authorize :user, :create_member?
 
-    @member = User.new(user_params.permit!)
+    @member = User.new(Members::MembersService.handle_organization(user_params.permit!))
     members_service = Members::MembersService.new(@member)
 
     if members_service.create(current_user, user_params)

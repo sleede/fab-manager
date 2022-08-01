@@ -100,7 +100,7 @@ class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
     assert_equal Mime[:json], response.content_type
 
     # Check the error was handled
-    assert_match /plan is not compatible/, response.body
+    assert_match(/plan is not compatible/, response.body)
 
     # Check that the user has no subscription
     assert_nil @user.subscription, "user's subscription was found"

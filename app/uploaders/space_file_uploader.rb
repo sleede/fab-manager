@@ -6,6 +6,7 @@ class SpaceFileUploader < CarrierWave::Uploader::Base
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
   include UploadHelper
+  include ContentTypeValidationFromFileContent
 
   # Choose what kind of storage to use for this uploader:
   storage :file

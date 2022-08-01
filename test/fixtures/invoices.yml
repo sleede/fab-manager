@@ -19,6 +19,7 @@ invoice_1:
   invoicing_profile_id: 3
   operator_profile_id: 3
   statistic_profile_id: 3
+
 invoice_2:
   id: 2
   total: 2000
@@ -39,6 +40,7 @@ invoice_2:
   invoicing_profile_id: 4
   operator_profile_id: 1
   statistic_profile_id: 4
+
 invoice_3:
   id: 3
   total: 3000
@@ -59,6 +61,7 @@ invoice_3:
   invoicing_profile_id: 7
   operator_profile_id: 1
   statistic_profile_id: 7
+
 invoice_4:
   id: 4
   total: 0
@@ -79,6 +82,7 @@ invoice_4:
   invoicing_profile_id: 7
   operator_profile_id: 1
   statistic_profile_id: 7
+
 invoice_5:
   id: 5
   total: 1500
@@ -99,6 +103,7 @@ invoice_5:
   invoicing_profile_id: 3
   operator_profile_id: 1
   statistic_profile_id: 3
+
 invoice_6:
   id: 6
   total: 3000

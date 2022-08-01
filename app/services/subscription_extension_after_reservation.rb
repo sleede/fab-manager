@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# Extend the user's current subscription after his first training reservation if
+# he subscribed to a rolling plan
 class SubscriptionExtensionAfterReservation
   attr_accessor :user, :reservation
 
@@ -24,7 +26,7 @@ class SubscriptionExtensionAfterReservation
 
   def extend_subscription
     user.subscription.update_columns(
-      expiration_date: reservation.slots.first.start_at + user.subscribed_plan.duration
+      expiration_date: reservation.slots_reservations.first.slot.start_at + user.subscribed_plan.duration
     )
   end
 end

@@ -45,3 +45,12 @@ subscription_5:
   updated_at: 2021-06-14 12:24:45.836045000 Z
   expiration_date: 2022-06-14 12:24:45.836045000 Z
   canceled_at:
+
+subscription_6:
+  id: 6
+  plan_id: 4
+  statistic_profile_id: 10
+  created_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  updated_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  expiration_date: <%= 3.months.from_now.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  canceled_at:

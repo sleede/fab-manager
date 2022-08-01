@@ -59,7 +59,9 @@ export const EditSocials = <TFieldValues extends FieldValues>({ register, setVal
     <>
       <div className='social-icons'>
         {userNetworks.map((network, index) =>
-          !selectedNetworks.includes(network) && <img key={index} src={`${Icons}#${network.name}`} onClick={() => selectNetwork(network)}></img>
+          !selectedNetworks.includes(network) && <svg key={index} onClick={() => selectNetwork(network)} viewBox="0 0 24 24" >
+            <use href={`${Icons}#${network.name}`} />
+        </svg>
         )}
       </div>
       {selectNetwork.length && <div className='social-inputs'>
@@ -79,7 +81,7 @@ export const EditSocials = <TFieldValues extends FieldValues>({ register, setVal
                      label={network.name}
                      disabled={disabled}
                      placeholder={t('app.shared.edit_socials.url_placeholder')}
-                     icon={<img src={`${Icons}#${network.name}`}></img>}
+                     icon={<svg viewBox="0 0 24 24"><use href={`${Icons}#${network.name}`}/></svg>}
                      addOn={<Trash size={16} />}
                      addOnAction={() => dispatch({ type: 'delete', payload: { network, field: `profile_attributes.${network.name}` } })} />
         )}

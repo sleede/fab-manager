@@ -55,8 +55,10 @@ zu:
         url_placeholder: "crwdns23438:0crwdne23438:0"
         website_invalid: "crwdns23440:0crwdne23440:0"
       #user edition form
+      avatar_input:
+        add_an_avatar: "crwdns23722:0crwdne23722:0"
+        change: "crwdns23724:0crwdne23724:0"
       user_profile_form:
-        add_an_avatar: "crwdns22870:0crwdne22870:0"
         personal_data: "crwdns22872:0crwdne22872:0"
         account_data: "crwdns22874:0crwdne22874:0"
         account_networks: "crwdns22876:0crwdne22876:0"

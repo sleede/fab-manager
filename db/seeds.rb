@@ -917,6 +917,8 @@ end
 
 Setting.set('extended_prices_in_same_day', false) unless Setting.find_by(name: 'extended_prices_in_same_day').try(:value)
 
+Setting.set('show_username_in_admin_list', false) unless Setting.find_by(name: 'show_username_in_admin_list').try(:value)
+
 if StatisticCustomAggregation.count.zero?
   # available reservations hours for machines
   machine_hours = StatisticType.find_by(key: 'hour', statistic_index_id: 2)

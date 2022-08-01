@@ -2,6 +2,8 @@
 
 require 'sidekiq'
 require 'sidekiq-scheduler'
+require 'sidekiq/middleware/i18n'
+require 'sidekiq/server_locale'
 
 redis_host = ENV['REDIS_HOST'] || 'localhost'
 redis_url = "redis://#{redis_host}:6379"
@@ -35,6 +37,9 @@ Sidekiq.configure_client do |config|
 
   config.client_middleware do |chain|
     chain.add SidekiqUniqueJobs::Middleware::Client
+  end
+  config.server_middleware do |chain|
+    chain.add FabManager::Middleware::ServerLocale
   end
 end
 

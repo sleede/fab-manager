@@ -17,7 +17,7 @@ class Reservations::RestrictedTest < ActionDispatch::IntegrationTest
     reservations_count = Reservation.count
     availabilities_count = Availability.count
     invoices_count = Invoice.count
-    slots_count = Slot.count
+    slots_reservation_count = SlotsReservation.count
 
     # first, create the restricted availability
     date = 4.days.from_now.utc.change(hour: 8, min: 0, sec: 0)
@@ -47,6 +47,8 @@ class Reservations::RestrictedTest < ActionDispatch::IntegrationTest
     # change connected user
     login_as(@pdurand, scope: :user)
 
+    slot = Availability.find(availability[:id]).slots.first
+
     # book a reservation
     VCR.use_cassette('reservations_create_for_restricted_slot_success') do
       post '/api/stripe/confirm_payment',
@@ -58,11 +60,9 @@ class Reservations::RestrictedTest < ActionDispatch::IntegrationTest
                    reservation: {
                      reservable_id: 2,
                      reservable_type: 'Machine',
-                     slots_attributes: [
+                     slots_reservations_attributes: [
                        {
-                         start_at: availability[:start_at],
-                         end_at: (DateTime.parse(availability[:start_at]) + 1.hour).to_s(:iso8601),
-                         availability_id: availability[:id]
+                         slot_id: slot.id
                        }
                      ]
                    }
@@ -76,7 +76,7 @@ class Reservations::RestrictedTest < ActionDispatch::IntegrationTest
 
     assert_equal reservations_count + 1, Reservation.count
     assert_equal invoices_count + 1, Invoice.count
-    assert_equal slots_count + 1, Slot.count
+    assert_equal slots_reservation_count + 1, SlotsReservation.count
   end
 
   test 'unable to reserve slot restricted to subscribers' do
@@ -86,6 +86,7 @@ class Reservations::RestrictedTest < ActionDispatch::IntegrationTest
     availabilities_count = Availability.count
     invoices_count = Invoice.count
     slots_count = Slot.count
+    slots_reservation_count = SlotsReservation.count
 
     # first, create the restricted availability
     date = 4.days.from_now.utc.change(hour: 8, min: 0, sec: 0)
@@ -111,9 +112,11 @@ class Reservations::RestrictedTest < ActionDispatch::IntegrationTest
     assert_not_nil availability[:id], 'availability ID was unexpectedly nil'
 
     assert_equal availabilities_count + 1, Availability.count
+    assert_equal slots_count + 6, Slot.count
 
     # change connected user
     login_as(@jdupont, scope: :user)
+    slot = Availability.find(availability[:id]).slots.first
 
     # book a reservation
     VCR.use_cassette('reservations_create_for_restricted_slot_fails') do
@@ -126,11 +129,9 @@ class Reservations::RestrictedTest < ActionDispatch::IntegrationTest
                    reservation: {
                      reservable_id: 2,
                      reservable_type: 'Machine',
-                     slots_attributes: [
+                     slots_reservations_attributes: [
                        {
-                         start_at: availability[:start_at],
-                         end_at: (DateTime.parse(availability[:start_at]) + 1.hour).to_s(:iso8601),
-                         availability_id: availability[:id]
+                         slot_id: slot.id
                        }
                      ]
                    }
@@ -141,11 +142,11 @@ class Reservations::RestrictedTest < ActionDispatch::IntegrationTest
     end
 
     assert_equal 422, response.status
-    assert_match /unable to pay/, response.body
+    assert_match(/availability is restricted for subscribers/, response.body)
 
     assert_equal reservations_count, Reservation.count
     assert_equal invoices_count, Invoice.count
-    assert_equal slots_count, Slot.count
+    assert_equal slots_reservation_count, SlotsReservation.count
   end
 
   test 'admin force reservation of a slot restricted to subscribers' do
@@ -155,6 +156,7 @@ class Reservations::RestrictedTest < ActionDispatch::IntegrationTest
     availabilities_count = Availability.count
     invoices_count = Invoice.count
     slots_count = Slot.count
+    slots_reservation_count = SlotsReservation.count
 
     # first, create the restricted availability
     date = 4.days.from_now.utc.change(hour: 8, min: 0, sec: 0)
@@ -180,6 +182,9 @@ class Reservations::RestrictedTest < ActionDispatch::IntegrationTest
     assert_not_nil availability[:id], 'availability ID was unexpectedly nil'
 
     assert_equal availabilities_count + 1, Availability.count
+    assert_equal slots_count + 6, Slot.count
+
+    slot = Availability.find(availability[:id]).slots.first
 
     # book a reservation
     VCR.use_cassette('reservations_create_for_restricted_slot_forced') do
@@ -191,11 +196,9 @@ class Reservations::RestrictedTest < ActionDispatch::IntegrationTest
                  reservation: {
                    reservable_id: 2,
                    reservable_type: 'Machine',
-                   slots_attributes: [
+                   slots_reservations_attributes: [
                      {
-                       start_at: availability[:start_at],
-                       end_at: (DateTime.parse(availability[:start_at]) + 1.hour).to_s(:iso8601),
-                       availability_id: availability[:id]
+                       slot_id: slot.id
                      }
                    ]
                  }
@@ -212,7 +215,7 @@ class Reservations::RestrictedTest < ActionDispatch::IntegrationTest
 
     assert_equal reservations_count + 1, Reservation.count
     assert_equal invoices_count + 1, Invoice.count
-    assert_equal slots_count + 1, Slot.count
+    assert_equal slots_reservation_count + 1, SlotsReservation.count
   end
 
   test 'book a slot restricted to subscribers and a subscription at the same time' do
@@ -223,6 +226,7 @@ class Reservations::RestrictedTest < ActionDispatch::IntegrationTest
     invoices_count = Invoice.count
     invoice_items_count = InvoiceItem.count
     slots_count = Slot.count
+    slots_reservation_count = SlotsReservation.count
     subscriptions_count = Subscription.count
 
     # first, create the restricted availability
@@ -249,9 +253,11 @@ class Reservations::RestrictedTest < ActionDispatch::IntegrationTest
     assert_not_nil availability[:id], 'availability ID was unexpectedly nil'
 
     assert_equal availabilities_count + 1, Availability.count
+    assert_equal slots_count + 6, Slot.count
 
     # change connected user
     login_as(@jdupont, scope: :user)
+    slot = Availability.find(availability[:id]).slots.first
 
     # book a reservation
     VCR.use_cassette('reservations_and_subscription_create_for_restricted_slot_success') do
@@ -264,11 +270,9 @@ class Reservations::RestrictedTest < ActionDispatch::IntegrationTest
                    reservation: {
                      reservable_id: 2,
                      reservable_type: 'Machine',
-                     slots_attributes: [
+                     slots_reservations_attributes: [
                        {
-                         start_at: availability[:start_at],
-                         end_at: (DateTime.parse(availability[:start_at]) + 1.hour).to_s(:iso8601),
-                         availability_id: availability[:id]
+                         slot_id: slot.id
                        }
                      ]
                    }
@@ -291,7 +295,7 @@ class Reservations::RestrictedTest < ActionDispatch::IntegrationTest
 
     assert_equal reservations_count + 1, Reservation.count
     assert_equal invoices_count + 1, Invoice.count
-    assert_equal slots_count + 1, Slot.count
+    assert_equal slots_reservation_count + 1, SlotsReservation.count
     assert_equal subscriptions_count + 1, Subscription.count
     assert_equal invoice_items_count + 2, InvoiceItem.count
   end

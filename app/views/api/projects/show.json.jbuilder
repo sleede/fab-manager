@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-json.extract! @project, :id, :name, :description, :tags, :created_at, :updated_at, :licence_id, :slug
+json.extract! @project, :id, :name, :tags, :created_at, :updated_at, :licence_id, :slug
+json.description sanitize(@project.description)
 json.author_id @project.author.user_id
 json.project_image @project.project_image.attachment.large.url if @project.project_image
 json.project_full_image @project.project_image.attachment.url if @project.project_image
@@ -56,7 +57,7 @@ json.project_users @project.project_users do |pu|
 end
 json.project_steps_attributes @project.project_steps.order('project_steps.step_nb ASC') do |s|
   json.id s.id
-  json.description s.description
+  json.description sanitize(s.description)
   json.title s.title
   json.project_step_images_attributes s.project_step_images.order('created_at ASC') do |si|
     json.id si.id

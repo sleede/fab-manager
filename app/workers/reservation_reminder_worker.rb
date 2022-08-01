@@ -15,7 +15,9 @@ class ReservationReminderWorker
     starting = DateTime.current.beginning_of_hour + delay
     ending = starting + 1.hour
 
-    Reservation.joins(:slots).where('slots.start_at >= ? AND slots.start_at <= ? AND slots.canceled_at IS NULL', starting, ending).each do |r|
+    Reservation.joins(slots_reservations: :slot)
+               .where('slots.start_at >= ? AND slots.start_at <= ? AND slots_reservations.canceled_at IS NULL', starting, ending)
+               .each do |r|
       already_sent = Notification.where(
         attached_object_type: Reservation.name,
         attached_object_id: r.id,

@@ -29,6 +29,7 @@ export const FormSwitch = <TFieldValues, TContext extends object>({ id, label, t
     <AbstractFormItem id={id} formState={formState} label={label}
                       className={`form-switch ${className || ''}`} tooltip={tooltip}
                       disabled={disabled}
+                      inLine
                       rules={rules} error={error} warning={warning}>
         <Controller name={id as FieldPath<TFieldValues>}
                     control={control}

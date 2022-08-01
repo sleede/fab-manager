@@ -39,7 +39,7 @@
         </div>
         <div class="widget-content bg-light wrapper r-b">
           <ul class="list-unstyled" ng-if="user.training_reservations.length > 0">
-            <li ng-repeat="r in user.training_reservations | trainingReservationsFilter:'future'" class="m-b" data-label="{{ 'app.admin.event_reservations.canceled' | translate}}" ng-class="{'reservation-canceled':r.canceled_at}">
+            <li ng-repeat="r in user.training_reservations | trainingReservationsFilter:'future'" class="m-b" data-label="{{ 'app.logged.dashboard.trainings.canceled' | translate}}" ng-class="{'reservation-canceled':r.canceled_at}">
               <span class="font-sbold">{{r.reservable.name}}</span> - <span class="label label-warning wrapper-sm">{{ r.start_at | amDateFormat:'LLL' }} - {{ r.end_at | amDateFormat:'LT' }}</span>
             </li>
           </ul>
@@ -54,7 +54,7 @@
         </div>
         <div class="widget-content bg-light auto wrapper r-b">
           <ul class="list-unstyled" ng-if="user.training_reservations.length > 0">
-            <li ng-repeat="r in user.training_reservations | trainingReservationsFilter:'passed'" class="m-b" data-label="{{ 'app.admin.event_reservations.canceled' | translate}}" ng-class="{'reservation-canceled':r.canceled_at}">
+            <li ng-repeat="r in user.training_reservations | trainingReservationsFilter:'passed'" class="m-b" data-label="{{ 'app.logged.dashboard.trainings.canceled' | translate}}" ng-class="{'reservation-canceled':r.canceled_at}">
               <span class="font-sbold">{{r.reservable.name}}</span> - <span class="label label-info text-white wrapper-sm">{{ r.start_at | amDateFormat:'LLL' }} - {{ r.end_at | amDateFormat:'LT' }}</span>
             </li>
           </ul>

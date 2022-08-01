@@ -29,6 +29,8 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
   // saves the state of the discovery endpoint
   const [discoveryAvailable, setDiscoveryAvailable] = useState<boolean>(false);
   const [scopesAvailable, setScopesAvailable] = useState<string[]>(null);
+  // this is a workaround for https://github.com/JedWatson/react-select/issues/1879
+  const [selectKey, setSelectKey] = useState<number>(0);
 
   // when we have detected a discovery endpoint, we mark it as available
   useEffect(() => {
@@ -37,6 +39,11 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
       discoveryAvailable as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>
     );
   }, [discoveryAvailable]);
+
+  // this will force the scope "select" to re-fetch the options
+  useEffect(() => {
+    setSelectKey(selectKey + 1);
+  }, [scopesAvailable]);
 
   // when the component is mounted, we try to discover the discovery endpoint for the current configuration (if any)
   useEffect(() => {
@@ -69,7 +76,7 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
    * The resulting list is provided through the callback parameter.
    */
   const loadScopes = (inputValue: string, callback: (options: Array<{ value: string, label: string }>) => void): void => {
-    const current = currentFormValues.scope || [];
+    const current = currentFormValues?.scope || [];
     if (scopesAvailable) {
       // add custom scopes to the list of available scopes
       const unlisted = difference(current, scopesAvailable);
@@ -125,6 +132,7 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
                        label={t('app.admin.authentication.openid_connect_form.scope')}
                        tooltip={<HtmlTranslate trKey="app.admin.authentication.openid_connect_form.scope_help_html" />}
                        loadOptions={loadScopes}
+                       selectKey={selectKey.toString()}
                        creatable
                        control={control} />
       <FormSelect id="providable_attributes.prompt"

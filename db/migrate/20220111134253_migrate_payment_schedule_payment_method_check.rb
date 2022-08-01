@@ -18,7 +18,7 @@ class MigratePaymentSchedulePaymentMethodCheck < ActiveRecord::Migration[5.2]
     end
 
     # chain all records
-    puts 'Chaining all record. This may take a while...'
+    Rails.logger.info 'Chaining all record. This may take a while...'
     PaymentSchedule.order(:id).find_each(&:chain_record)
 
     # re-create all archives from the memory dump

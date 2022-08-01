@@ -73,7 +73,7 @@ class AddObjectToInvoiceItem < ActiveRecord::Migration[5.2]
     Invoice.reset_column_information
 
     # chain records
-    puts 'Chaining all record. This may take a while...'
+    Rails.logger.info 'Chaining all record. This may take a while...'
     InvoiceItem.order(:id).all.each(&:chain_record)
     Invoice.order(:id).all.each(&:chain_record)
 
@@ -121,7 +121,7 @@ class AddObjectToInvoiceItem < ActiveRecord::Migration[5.2]
     Invoice.reset_column_information
 
     # chain records
-    puts 'Chaining all record. This may take a while...'
+    Rails.logger.info 'Chaining all record. This may take a while...'
     InvoiceItem.order(:id).all.each(&:chain_record)
     Invoice.order(:id).all.each(&:chain_record)
 

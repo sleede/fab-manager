@@ -10,8 +10,8 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 'growl', 'Auth', 'Price', 'Wallet', 'CustomAsset', 'Slot', 'AuthService', 'Payment', 'helpers', '_t',
-  function ($rootScope, $uibModal, dialogs, growl, Auth, Price, Wallet, CustomAsset, Slot, AuthService, Payment, helpers, _t) {
+Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 'growl', 'Auth', 'Price', 'Wallet', 'CustomAsset', 'SlotsReservation', 'AuthService', 'Payment', 'helpers', '_t',
+  function ($rootScope, $uibModal, dialogs, growl, Auth, Price, Wallet, CustomAsset, SlotsReservation, AuthService, Payment, helpers, _t) {
     return ({
       restrict: 'E',
       scope: {
@@ -232,19 +232,17 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
          * When modifying an already booked reservation, confirm the modification.
          */
         $scope.modifySlot = function () {
-          Slot.update({ id: $scope.events.modifiable.slot_id }, {
-            slot: {
-              start_at: $scope.events.placable.start,
-              end_at: $scope.events.placable.end,
-              availability_id: $scope.events.placable.availability_id
+          SlotsReservation.update({ id: $scope.events.modifiable.slots_reservations_ids[0] }, {
+            slots_reservation: {
+              slot_id: $scope.events.placable.slot_id
             }
           }
-          , function () { // success
+          , function (slotReservation) { // success
             // -> run the callback
             if (typeof $scope.onSlotModifySuccess === 'function') { $scope.onSlotModifySuccess(); }
             // -> set the events as successfully moved (to display a summary)
             $scope.events.moved = {
-              newSlot: $scope.events.placable,
+              newSlot: Object.assign($scope.events.placable, { slots_reservations_ids: [slotReservation.id] }),
               oldSlot: $scope.events.modifiable
             };
             // -> reset the 'moving' status
@@ -462,11 +460,13 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
          */
         const validateSameTimeReservations = function (slot, callback) {
           let sameTimeReservations = $scope.settings.overlapping_categories.split(',').map(function (k) {
-            return _.filter($scope.user[k], function (r) {
-              return slot.start.isSame(r.start_at) ||
-                (slot.end.isAfter(r.start_at) && slot.end.isBefore(r.end_at)) ||
-                (slot.start.isAfter(r.start_at) && slot.start.isBefore(r.end_at)) ||
-                (slot.start.isBefore(r.start_at) && slot.end.isAfter(r.end_at));
+            return _.filter($scope.user[k], function (sr) {
+              return !sr.canceled_at && (
+                slot.start.isSame(sr.start_at) ||
+                (slot.end.isAfter(sr.start_at) && slot.end.isBefore(sr.end_at)) ||
+                (slot.start.isAfter(sr.start_at) && slot.start.isBefore(sr.end_at)) ||
+                (slot.start.isBefore(sr.start_at) && slot.end.isAfter(sr.end_at))
+              );
             });
           });
           sameTimeReservations = _.union.apply(null, sameTimeReservations);
@@ -519,10 +519,10 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
               $scope.slot.group_ids = $scope.slot.plansGrouped.map(function (g) { return g.id; });
             }
 
-            if (!$scope.slot.is_reserved && !$scope.events.modifiable && !$scope.slot.is_completed) {
-              // slot is not reserved and we are not currently modifying a slot
+            if (!$scope.slot.is_completed && $scope.slot.slots_reservations_ids.length === 0 && !$scope.events.modifiable) {
+              // slot is not fully reserved, and not reserved by the current user, and we are not currently modifying a slot
               // -> can be added to cart or removed if already present
-              const index = _.findIndex($scope.events.reserved, (e) => e._id === $scope.slot._id);
+              const index = _.findIndex($scope.events.reserved, (e) => e.slot_id === $scope.slot.slot_id);
               if (index === -1) {
                 if (($scope.limitToOneSlot === 'true') && $scope.events.reserved[0]) {
                 // if we limit the number of slots in the cart to 1, and there is already
@@ -540,25 +540,30 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
               resetCartState();
               // finally, we update the prices
               return updateCartPrice();
-            } else if (!$scope.slot.is_reserved && !$scope.slot.is_completed && $scope.events.modifiable) {
-              // slot is not reserved but we are currently modifying a slot
-              // -> we request the calender to change the rendering
+            } else if (!$scope.slot.is_completed && $scope.slot.slots_reservations_ids.length === 0 && $scope.events.modifiable) {
+              // slot is not fully reserved, not reserved by the current user, and we are currently modifying a slot
+              // -> we request the calendar to change the rendering
               if (typeof $scope.onSlotModifyUnselect === 'function') {
                 // if the callback return false, cancel the selection for the current modification
                 const res = $scope.onSlotModifyUnselect();
                 if (!res) return;
               }
               // -> then, we re-affect the destination slot
-              if (!$scope.events.placable || ($scope.events.placable._id !== $scope.slot._id)) {
+              if (!$scope.events.placable || ($scope.events.placable.slot_id !== $scope.slot.slot_id)) {
                 return $scope.events.placable = $scope.slot;
               } else {
                 return $scope.events.placable = null;
               }
-            } else if ($scope.slot.is_reserved && $scope.events.modifiable && ($scope.slot.is_reserved._id === $scope.events.modifiable._id)) {
+            } else if ($scope.slot.slots_reservations_ids.length > 0 &&
+              $scope.events.modifiable &&
+              ($scope.slot._id === $scope.events.modifiable._id)) {
               // slot is reserved and currently modified
               // -> we cancel the modification
               $scope.cancelModifySlot();
-            } else if ($scope.slot.is_reserved && (slotCanBeModified($scope.slot) || slotCanBeCanceled($scope.slot)) && !$scope.events.modifiable && ($scope.events.reserved.length === 0)) {
+            } else if ($scope.slot.slots_reservations_ids.length > 0 &&
+              (slotCanBeModified($scope.slot) || slotCanBeCanceled($scope.slot)) &&
+              !$scope.events.modifiable &&
+              $scope.events.reserved.length === 0) {
               // slot is reserved and is ok to be modified or cancelled
               // but we are not currently running a modification or having any slots in the cart
               // -> first affect the modification/cancellation rights attributes to the current slot
@@ -595,7 +600,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                       }
                     },
                     function () { // cancel confirmed
-                      Slot.cancel({ id: $scope.slot.slot_id }, function () { // successfully canceled
+                      SlotsReservation.cancel({ id: $scope.slot.slots_reservations_ids[0] }, function () { // successfully canceled
                         growl.success(_t('app.shared.cart.reservation_was_cancelled_successfully'));
                         if (typeof $scope.onSlotCancelSuccess === 'function') { return $scope.onSlotCancelSuccess(); }
                       }
@@ -707,20 +712,18 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
         /**
          * Create a hash map implementing the Reservation specs
          * @param slots {Array<Object>} Array of fullCalendar events: slots selected on the calendar
-         * @return {{reservation: {reservable_type: string, reservable_id: string, slots_attributes: []}}}
+         * @return {{reservation: Reservation}}
          */
         const mkReservation = function (slots) {
           const reservation = {
             reservable_id: $scope.reservableId,
             reservable_type: $scope.reservableType,
-            slots_attributes: []
+            slots_reservations_attributes: []
           };
           angular.forEach(slots, function (slot) {
-            reservation.slots_attributes.push({
-              start_at: slot.start,
-              end_at: slot.end,
-              availability_id: slot.availability_id,
-              offered: slot.offered || false
+            reservation.slots_reservations_attributes.push({
+              offered: slot.offered || false,
+              slot_id: slot.slot_id
             });
           });
 
@@ -730,7 +733,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
         /**
          * Create a hash map implementing the Subscription specs
          * @param planId {number}
-         * @return {{subscription: {plan_id: number}}}
+         * @return {{subscription: SubscriptionRequest}}
          */
         const mkSubscription = function (planId) {
           return {
@@ -742,7 +745,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
 
         /**
          * Build the ShoppingCart object, from the current reservation
-         * @param items {Array<{reservation:{reservable_type: string, reservable_id: string, slots_attributes: []}}|{subscription: {plan_id: number}}>}
+         * @param items {Array<CartItem>}
          * @param paymentMethod {string}
          * @return {ShoppingCart}
          */

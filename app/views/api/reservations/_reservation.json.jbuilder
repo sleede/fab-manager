@@ -4,12 +4,15 @@ json.id reservation.id
 json.user_id reservation.statistic_profile.user_id
 json.user_full_name reservation.user&.profile&.full_name
 json.message reservation.message
-json.slots_attributes reservation.slots do |s|
-  json.id s.id
-  json.start_at s.start_at.iso8601
-  json.end_at s.end_at.iso8601
-  json.canceled_at s.canceled_at&.iso8601
-  json.is_reserved true
+json.slots_reservations_attributes reservation.slots_reservations do |sr|
+  json.id sr.id
+  json.canceled_at sr.canceled_at&.iso8601
+  json.slot_attributes do
+    json.id sr.slot_id
+    json.start_at sr.slot.start_at.iso8601
+    json.end_at sr.slot.end_at.iso8601
+    json.availability_id sr.slot.availability_id
+  end
 end
 json.nb_reserve_places reservation.nb_reserve_places
 json.tickets_attributes reservation.tickets do |t|

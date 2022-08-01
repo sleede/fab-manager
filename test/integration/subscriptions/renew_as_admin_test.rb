@@ -4,7 +4,6 @@ require 'test_helper'
 
 module Subscriptions; end
 
-
 class Subscriptions::RenewAsAdminTest < ActionDispatch::IntegrationTest
   setup do
     @admin = User.find_by(username: 'admin')

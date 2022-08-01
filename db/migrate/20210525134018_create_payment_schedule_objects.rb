@@ -48,7 +48,7 @@ class CreatePaymentScheduleObjects < ActiveRecord::Migration[5.2]
     PaymentSchedule.reset_column_information
 
     # chain records
-    puts 'Chaining all record. This may take a while...'
+    Rails.logger.info 'Chaining all record. This may take a while...'
     PaymentScheduleItem.order(:id).all.each(&:chain_record)
     PaymentSchedule.order(:id).all.each(&:chain_record)
   end
@@ -87,7 +87,7 @@ class CreatePaymentScheduleObjects < ActiveRecord::Migration[5.2]
     PaymentSchedule.reset_column_information
 
     # chain records
-    puts 'Chaining all record. This may take a while...'
+    Rails.logger.info 'Chaining all record. This may take a while...'
     PaymentScheduleItem.order(:id).all.each(&:chain_record)
     PaymentSchedule.order(:id).all.each(&:chain_record)
   end

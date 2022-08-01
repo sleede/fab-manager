@@ -9,6 +9,7 @@ import { mappingType } from '../../models/authentication-provider';
 import { BooleanMappingForm } from './boolean-mapping-form';
 import { DateMappingForm } from './date-mapping-form';
 import { StringMappingForm } from './string-mapping-form';
+import { FormInput } from '../form/form-input';
 
 interface TypeMappingModalProps<TFieldValues, TContext extends object> {
   model: string,
@@ -38,6 +39,10 @@ export const TypeMappingModal = <TFieldValues extends FieldValues, TContext exte
               confirmButton={<i className="fa fa-check" />}
               onConfirm={toggleModal}>
       <span>{model} &gt; {field} ({t('app.admin.authentication.type_mapping_modal.TYPE_expected', { TYPE: t(`app.admin.authentication.type_mapping_modal.types.${type}`) })})</span>
+      <FormInput register={register}
+                 id={`auth_provider_mappings_attributes.${fieldMappingId}.transformation.type`}
+                 type="hidden"
+                 defaultValue={type} />
       {type === 'integer' && <IntegerMappingForm register={register} control={control} fieldMappingId={fieldMappingId} />}
       {type === 'boolean' && <BooleanMappingForm register={register} fieldMappingId={fieldMappingId} />}
       {type === 'date' && <DateMappingForm control={control} fieldMappingId={fieldMappingId} />}

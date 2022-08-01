@@ -7,6 +7,7 @@ import { FieldPathValue } from 'react-hook-form/dist/types/path';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { FormInput } from '../form/form-input';
 import { Avatar } from './avatar';
+import { useTranslation } from 'react-i18next';
 
 interface AvatarInputProps<TFieldValues> {
   register: UseFormRegister<TFieldValues>,
@@ -20,6 +21,8 @@ interface AvatarInputProps<TFieldValues> {
  * This component allows to set the user's avatar, in forms managed by react-hook-form.
  */
 export const AvatarInput = <TFieldValues extends FieldValues>({ currentAvatar, userName, register, setValue, size }: AvatarInputProps<TFieldValues>) => {
+  const { t } = useTranslation('shared');
+
   const [avatar, setAvatar] = useState<string|ArrayBuffer>(currentAvatar);
   /**
    * Check if the provided user has a configured avatar
@@ -70,8 +73,8 @@ export const AvatarInput = <TFieldValues extends FieldValues>({ currentAvatar, u
       <Avatar avatar={avatar} userName={userName} size="large" />
       <div className="buttons">
         <FabButton onClick={onAddAvatar} className="select-button">
-          {!hasAvatar() && <span>Add an avatar</span>}
-          {hasAvatar() && <span>Change</span>}
+          {!hasAvatar() && <span>{t('app.shared.avatar_input.add_an_avatar')}</span>}
+          {hasAvatar() && <span>{t('app.shared.avatar_input.change')}</span>}
           <FormInput className="avatar-file-input"
                      type="file"
                      accept="image/*"

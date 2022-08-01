@@ -50,9 +50,7 @@ class InvoiceItem < Footprintable
     return if Rails.env.test?
     return unless changed?
 
-    puts "WARNING: InvoiceItem update triggered [ id: #{id}, invoice reference: #{invoice.reference} ]"
-    puts '----------   changes   ----------'
-    puts changes
-    puts '---------------------------------'
+    Rails.logger.warn "InvoiceItem update triggered [ id: #{id}, invoice reference: #{invoice.reference} ]\n" \
+                      "----------   changes   ----------\n#{changes}\n---------------------------------"
   end
 end

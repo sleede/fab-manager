@@ -10,30 +10,30 @@ json.trainings @member.trainings do |t|
   json.id t.id
   json.name t.name
 end
-json.training_reservations @member.reservations.where(reservable_type: 'Training') do |r|
-  json.id r.id
-  json.start_at r.slots.first.start_at
-  json.end_at r.slots.first.end_at
-  json.reservable r.reservable
+json.training_reservations @member.reservations.where(reservable_type: 'Training').map(&:slots_reservations).flatten do |sr|
+  json.id sr.id
+  json.start_at sr.slot.start_at
+  json.end_at sr.slot.end_at
+  json.reservable sr.reservation.reservable
   json.reservable_type 'Training'
-  json.is_valid @member.statistic_profile.training_ids.include?(r.reservable_id)
-  json.canceled_at r.slots.first.canceled_at
+  json.is_valid @member.statistic_profile.training_ids.include?(sr.reservation.reservable_id)
+  json.canceled_at sr.canceled_at
 end
-json.machine_reservations @member.reservations.where(reservable_type: 'Machine') do |r|
-  json.id r.id
-  json.start_at r.slots.first.start_at
-  json.end_at r.slots.first.end_at
-  json.reservable r.reservable
+json.machine_reservations @member.reservations.where(reservable_type: 'Machine').map(&:slots_reservations).flatten do |sr|
+  json.id sr.id
+  json.start_at sr.slot.start_at
+  json.end_at sr.slot.end_at
+  json.reservable sr.reservation.reservable
   json.reservable_type 'Machine'
-  json.canceled_at r.slots.first.canceled_at
+  json.canceled_at sr.canceled_at
 end
-json.space_reservations @member.reservations.where(reservable_type: 'Space') do |r|
-  json.id r.id
-  json.start_at r.slots.first.start_at
-  json.end_at r.slots.first.end_at
-  json.reservable r.reservable
+json.space_reservations @member.reservations.where(reservable_type: 'Space').map(&:slots_reservations).flatten do |sr|
+  json.id sr.id
+  json.start_at sr.slot.start_at
+  json.end_at sr.slot.end_at
+  json.reservable sr.reservation.reservable
   json.reservable_type 'Space'
-  json.canceled_at r.slots.first.canceled_at
+  json.canceled_at sr.canceled_at
 end
 
 json.all_projects @member.all_projects do |project|
@@ -70,19 +70,20 @@ json.all_projects @member.all_projects do |project|
     end
   end
 end
-json.events_reservations @member.reservations.where(reservable_type: 'Event').joins(:slots).order('slots.start_at asc') do |r|
-  json.id r.id
-  json.start_at r.slots.first.start_at
-  json.end_at r.slots.first.end_at
-  json.nb_reserve_places r.nb_reserve_places
-  json.tickets r.tickets do |t|
+json.events_reservations @member.reservations.where(reservable_type: 'Event').joins(:slots).order('slots.start_at asc').map(&:slots_reservations).flatten do |sr|
+  json.id sr.id
+  json.start_at sr.slot.start_at
+  json.end_at sr.slot.end_at
+  json.nb_reserve_places sr.reservation.nb_reserve_places
+  json.tickets sr.reservation.tickets do |t|
     json.booked t.booked
     json.price_category do
       json.name t.event_price_category.price_category.name
     end
   end
-  json.reservable r.reservable
+  json.reservable sr.reservation.reservable
   json.reservable_type 'Event'
+  json.canceled_at sr.canceled_at
 end
 json.invoices @member.invoices.order('reference DESC') do |i|
   json.id i.id

@@ -112,7 +112,7 @@ Rails.application.routes.draw do
     resources :plans do
       get 'durations', on: :collection
     end
-    resources :slots, only: [:update] do
+    resources :slots_reservations, only: [:update] do
       put 'cancel', on: :member
     end
 

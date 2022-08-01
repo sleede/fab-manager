@@ -13,7 +13,7 @@ module OmniAuth::DataMapping
 
       def map_transformation(transformation, raw_data)
         value = nil
-        transformation['mapping'].each do |m|
+        transformation['mapping']&.each do |m|
           if m['from'] == raw_data
             value = m['to']
             break

@@ -36,17 +36,13 @@ class Members::MembersService
       end
     end
 
-    if params[:invoicing_profile_attributes][:organization] == 'false'
-      params[:invoicing_profile_attributes].reject! { |p| %w[organization_attributes organization].include?(p) }
-    else
-      params[:invoicing_profile_attributes].reject! { |p| p == 'organization' }
-    end
+    Members::MembersService.handle_organization(params)
 
     not_complete = member.need_completion?
     up_result = member.update(params)
 
     notify_user_profile_complete(not_complete) if up_result
-    member.notify_group_changed(ex_group, validated_at_changed) if group_changed
+    member.notify_group_changed(ex_group, validated_at_changed) if group_changed && !ex_group.nil?
     up_result
   end
 
@@ -97,6 +93,18 @@ class Members::MembersService
       end
     end
     is_updated
+  end
+
+  def self.handle_organization(params)
+    return params unless params[:invoicing_profile_attributes] && params[:invoicing_profile_attributes][:organization]
+
+    if params[:invoicing_profile_attributes][:organization] == 'false'
+      params[:invoicing_profile_attributes].reject! { |p| %w[organization_attributes organization].include?(p) }
+    else
+      params[:invoicing_profile_attributes].reject! { |p| p == 'organization' }
+    end
+
+    params
   end
 
   private

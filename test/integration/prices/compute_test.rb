@@ -12,6 +12,7 @@ module Prices
     test 'compute price for a simple training' do
       user = User.find_by(username: 'jdupond')
       availability = Availability.find(2)
+      slot = Availability.find(2).slots.first
       printer_training = availability.trainings.first
 
       post '/api/prices/compute',
@@ -22,12 +23,10 @@ module Prices
                  reservation: {
                    reservable_id: printer_training.id,
                    reservable_type: printer_training.class.name,
-                   slots_attributes: [
+                   slots_reservations_attributes: [
                      {
-                       availability_id: availability.id,
-                       end_at: availability.end_at,
-                       offered: false,
-                       start_at: availability.start_at
+                       slot_id: slot.id,
+                       offered: false
                      }
                    ]
                  }
@@ -51,7 +50,7 @@ module Prices
       user = User.find_by(username: 'jdupond')
       availability = Availability.find(3)
       laser = availability.machines.where(id: 1).first
-      plan = Plan.where(group_id: user.group_id, interval: 'month').first
+      plan = Plan.find_by(group_id: user.group_id, interval: 'month')
 
       post '/api/prices/compute',
            params: {
@@ -61,18 +60,14 @@ module Prices
                  reservation: {
                    reservable_id: laser.id,
                    reservable_type: laser.class.name,
-                   slots_attributes: [
+                   slots_reservations_attributes: [
                      {
-                       availability_id: availability.id,
-                       end_at: (availability.start_at + 1.hour).strftime('%Y-%m-%d %H:%M:%S.%9N Z'),
-                       offered: true,
-                       start_at: availability.start_at.strftime('%Y-%m-%d %H:%M:%S.%9N Z')
+                       slot_id: availability.slots.first.id,
+                       offered: true
                      },
                      {
-                       availability_id: availability.id,
-                       end_at: (availability.start_at + 2.hour).strftime('%Y-%m-%d %H:%M:%S.%9N Z'),
-                       offered: false,
-                       start_at: (availability.start_at + 1.hour).strftime('%Y-%m-%d %H:%M:%S.%9N Z')
+                       slot_id: availability.slots.last.id,
+                       offered: false
                      }
                    ]
                  }

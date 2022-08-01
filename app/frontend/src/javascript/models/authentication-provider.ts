@@ -25,10 +25,12 @@ export interface AuthenticationProviderMapping {
     format: 'iso8601' | 'rfc2822' | 'rfc3339' | 'timestamp-s' | 'timestamp-ms',
     true_value: string,
     false_value: string,
-    mapping: {
-      from: string,
-      to: number|string
-    }
+    mapping: [
+      {
+        from: string,
+        to: number|string
+      }
+    ]
   }
 }
 
