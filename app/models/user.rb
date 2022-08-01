@@ -78,6 +78,7 @@ class User < ApplicationRecord
   validate :cgu_must_accept, if: :new_record?
 
   validates :username, presence: true, uniqueness: true, length: { maximum: 30 }
+  validate :password_complexity
 
   scope :active, -> { where(is_active: true) }
   scope :without_subscription, -> { includes(statistic_profile: [:subscriptions]).where(subscriptions: { statistic_profile_id: nil }) }
@@ -346,5 +347,11 @@ class User < ApplicationRecord
       first_name: first_name,
       last_name: last_name
     )
+  end
+
+  def password_complexity
+    return if password.blank? || SecurePassword.is_secured?(password)
+    
+    errors.add I18n.t("app.public.common.password_is_too_weak"), I18n.t("app.public.common.password_is_too_weak_explanations")
   end
 end

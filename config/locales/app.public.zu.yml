@@ -71,7 +71,9 @@ zu:
         email_is_required: "crwdns8907:0crwdne8907:0"
         your_password: "crwdns8909:0crwdne8909:0"
         password_is_required: "crwdns8911:0crwdne8911:0"
-        password_is_too_short: "crwdns8913:0crwdne8913:0"
+        password_is_too_short: "crwdns24030:0crwdne24030:0"
+        password_is_too_weak: "crwdns24032:0crwdne24032:0"
+        password_is_too_weak_explanations: "crwdns24034:0crwdne24034:0"
         type_your_password_again: "crwdns8915:0crwdne8915:0"
         password_confirmation_is_required: "crwdns8917:0crwdne8917:0"
         password_does_not_match_with_confirmation: "crwdns8919:0crwdne8919:0"
@@ -101,7 +103,7 @@ zu:
         used_for_reservation: "crwdns8959:0crwdne8959:0"
         used_for_profile: "crwdns8961:0crwdne8961:0"
         public_profile: "crwdns8963:0crwdne8963:0"
-        you_will_receive_confirmation_instructions_by_email_detailed: "crwdns19598:0crwdne19598:0"
+        you_will_receive_confirmation_instructions_by_email_detailed: "crwdns24036:0crwdne24036:0"
         #password modification modal
         change_your_password: "crwdns8965:0crwdne8965:0"
         your_new_password: "crwdns8967:0crwdne8967:0"
@@ -117,8 +119,7 @@ zu:
         #confirmation modal
         you_will_receive_confirmation_instructions_by_email: "crwdns19602:0crwdne19602:0"
         #forgotten password modal
-        your_email_address_is_unknown: "crwdns8983:0crwdne8983:0"
-        you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password: "crwdns8985:0crwdne8985:0"
+        you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password: "crwdns24038:0crwdne24038:0"
         #Fab-manager's version
         version: "crwdns8987:0crwdne8987:0"
         upgrade_fabmanager: "crwdns19604:0crwdne19604:0"
