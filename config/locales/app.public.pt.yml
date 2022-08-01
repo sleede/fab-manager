@@ -71,7 +71,9 @@ pt:
         email_is_required: "E-mail é obrigatório."
         your_password: "Sua senha"
         password_is_required: "Senha é obrigatório."
-        password_is_too_short: "Senha muito curta (mínimo 8 caracteres)"
+        password_is_too_short: "Password is too short (minimum 12 characters)"
+        password_is_too_weak: "Password is too weak:"
+        password_is_too_weak_explanations: "minimum 12 characters, at least one uppercase letter, one lowercase letter, one number and one special character"
         type_your_password_again: "Digite sua senha novamente"
         password_confirmation_is_required: "Confirmação de senha é obrigatório."
         password_does_not_match_with_confirmation: "A senha não é igual ao da confirmação."
@@ -101,7 +103,7 @@ pt:
         used_for_reservation: "Estes dados serão utilizados em caso de alteração em uma das suas reservas"
         used_for_profile: "Estes dados serão exibidos apenas no seu perfil"
         public_profile: "Você terá um perfil público e outros usuários poderão associá-lo em seus projetos"
-        you_will_receive_confirmation_instructions_by_email_detailed: "Você receberá um email com instruções sobre como confirmar sua conta em alguns minutos."
+        you_will_receive_confirmation_instructions_by_email_detailed: "If your e-mail address is valid, you will receive an email with instructions about how to confirm your account in a few minutes."
         #password modification modal
         change_your_password: "Mudar sua senha"
         your_new_password: "Sua nova senha"
@@ -117,8 +119,7 @@ pt:
         #confirmation modal
         you_will_receive_confirmation_instructions_by_email: "Você receberá instruções de confirmação por e-mail."
         #forgotten password modal
-        your_email_address_is_unknown: "Seu e-mail não está cadastrado."
-        you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password: "Você irá receber um e-mail com as instruções para resetar sua senha."
+        you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password: "If your e-mail address is valid, you will receive in a moment an e-mail with instructions to reset your password."
         #Fab-manager's version
         version: "Versão:"
         upgrade_fabmanager: "Atualizar Fab-manager"
