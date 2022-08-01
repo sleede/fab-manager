@@ -3,7 +3,7 @@
 # helpers for managing users with special roles
 class UserService
   def self.create_partner(params)
-    generated_password = Devise.friendly_token.first(8)
+    generated_password = SecurePassword.generate
     group_id = Group.first.id
     user = User.new(
       email: params[:email],
@@ -31,7 +31,7 @@ class UserService
   end
 
   def self.create_admin(params)
-    generated_password = Devise.friendly_token.first(8)
+    generated_password = SecurePassword.generate
     admin = User.new(params.merge(password: generated_password))
     admin.send :set_slug
 
@@ -52,7 +52,7 @@ class UserService
   end
 
   def self.create_manager(params)
-    generated_password = Devise.friendly_token.first(8)
+    generated_password = SecurePassword.generate
     manager = User.new(params.merge(password: generated_password))
     manager.send :set_slug
 

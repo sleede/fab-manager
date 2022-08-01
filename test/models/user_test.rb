@@ -4,7 +4,7 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   test 'must create wallet and profiles after create user' do
-    u = User.create(username: 'user', email: 'userwallet@fabmanager.com', password: 'testpassword', password_confirmation: 'testpassword',
+    u = User.create(username: 'user', email: 'userwallet@fabmanager.com', password: 'Testpassword1$', password_confirmation: 'Testpassword1$',
                     profile_attributes: { first_name: 'user', last_name: 'wallet', phone: '0123456789' },
                     statistic_profile_attributes: { gender: true, birthday: 18.years.ago })
     assert u.wallet.present?

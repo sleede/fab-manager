@@ -142,7 +142,7 @@
                  class="form-control"
                  id="user_password"
                  placeholder="{{ 'app.shared.user.new_password' | translate }}"
-                 ng-minlength="8"
+                 ng-minlength="12"
                  required/>
         </div>
         <span class="help-block" ng-show="userForm['user[password]'].$dirty && userForm['user[password]'].$error.required" translate>{{ 'app.shared.user.password_is_required' }}</span>
@@ -158,7 +158,7 @@
                  class="form-control"
                  id="user_password_confirmation"
                  placeholder="{{ 'app.shared.user.confirmation_of_new_password' | translate }}"
-                 ng-minlength="8"
+                 ng-minlength="12"
                  required
                  match="user.password"/>
         </div>
