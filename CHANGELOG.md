@@ -2,9 +2,13 @@
 
 ## next release
 
+## v5.4.14 2022 August 1
+
 - Added a test for multiple reservations on the same space slot
-- Fix a security issue: updated moment to 2.29.4 to fix [CVE-2022-31129](https://cve.mitre.org/cgi-bin/cvename.cgi?CVE-2022-31129)
 - Display the tag and theme field on the detail view of a project
+- Improved file validation, validation is now based on content of the file in addition of the validation of the extension
+- Fix a security issue: xss vulnerability in projects
+- Fix a security issue: updated moment to 2.29.4 to fix [CVE-2022-31129](https://cve.mitre.org/cgi-bin/cvename.cgi?CVE-2022-31129)
 
 ## v5.4.13 2022 July 27
 
