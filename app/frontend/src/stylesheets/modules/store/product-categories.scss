@@ -41,50 +41,80 @@
   }
   &-item {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.6rem 1.6rem;
-    border: 1px solid var(--gray-soft-dark);
-    border-radius: var(--border-radius);
+    pointer-events: all;
 
-    .itemInfo {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      &-name {
-        margin: 0;
-        @include text-base;
-        font-weight: 600;
-        color: var(--gray-hard-darkest);
-      }
-      &-count {
-        margin-left: 2.4rem;
-        @include text-sm;
-        font-weight: 500;
-        color: var(--information);
-      }
+    &.is-collapsed {
+      height: 0;
+      margin: 0;
+      padding: 0;
+      border: none;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .offset {
+      width: 4.8rem;
     }
 
-    .actions {
+    .wrap {
+      width: 100%;
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
       align-items: center;
-      .manage {
-        overflow: hidden;
+      padding: 0.6rem 1.6rem;
+      border: 1px solid var(--gray-soft-dark);
+      border-radius: var(--border-radius);
+      background-color: var(--gray-soft-lightest);
+      .itemInfo {
         display: flex;
-        border-radius: var(--border-radius-sm);
-        button {
-          @include btn;
-          border-radius: 0;
-          color: var(--gray-soft-lightest);
-          &:hover { opacity: 0.75; }
+        align-items: center;
+        &-name {
+          margin: 0;
+          @include text-base;
+          font-weight: 600;
+          color: var(--gray-hard-darkest);
         }
-        .edit-btn {background: var(--gray-hard-darkest) }
-        .delete-btn {background: var(--error) }
+        &-count {
+          margin-left: 2.4rem;
+          @include text-sm;
+          font-weight: 500;
+          color: var(--information);
+        }
+      }
+
+      .actions {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        .manage {
+          overflow: hidden;
+          display: flex;
+          border-radius: var(--border-radius-sm);
+          button {
+            @include btn;
+            border-radius: 0;
+            color: var(--gray-soft-lightest);
+            &:hover { opacity: 0.75; }
+          }
+          .edit-btn { background: var(--gray-hard-darkest); }
+          .delete-btn { background: var(--error); }
+        }
       }
     }
 
-    .draghandle {
+    .collapse-handle {
+      width: 4rem;
+      margin: 0 0 0 -1rem;
+      button {
+        @include btn;
+        background: none;
+        border-radius: 0;
+        transition: transform 250ms ease-in-out;
+        &.rotate {
+          transform: rotateZ(-180deg);
+        }
+      }
+    }
+    .drag-handle button {
       @include btn;
       cursor: grab;
     }

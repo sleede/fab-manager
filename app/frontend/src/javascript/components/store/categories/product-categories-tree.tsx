@@ -1,9 +1,11 @@
+// TODO: Remove next eslint-disable
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { useImmer } from 'use-immer';
 import { ProductCategory } from '../../../models/product-category';
 import { DndContext, KeyboardSensor, PointerSensor, useSensor, useSensors, closestCenter, DragMoveEvent } from '@dnd-kit/core';
 import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 import { ProductCategoriesItem } from './product-categories-item';
 
 interface ProductCategoriesTreeProps {
@@ -18,13 +20,18 @@ interface ProductCategoriesTreeProps {
  */
 export const ProductCategoriesTree: React.FC<ProductCategoriesTreeProps> = ({ productCategories, onDnd, onSuccess, onError }) => {
   const [categoriesList, setCategoriesList] = useImmer<ProductCategory[]>(productCategories);
-  const [hiddenChildren, setHiddenChildren] = useState({});
+  const [activeData, setActiveData] = useImmer<ActiveData>(initActiveData);
+  // TODO: type extractedChildren: {[parentId]: ProductCategory[]} ???
+  const [extractedChildren, setExtractedChildren] = useImmer({});
+  const [collapsed, setCollapsed] = useImmer<number[]>([]);
+  const [offset, setOffset] = useState<boolean>(false);
 
-  // Initialize state from props, sorting list as a tree
+  // Initialize state from props
   useEffect(() => {
     setCategoriesList(productCategories);
   }, [productCategories]);
 
+  // Dnd Kit config
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -34,145 +41,238 @@ export const ProductCategoriesTree: React.FC<ProductCategoriesTreeProps> = ({ pr
 
   /**
    * On drag start
+   * Collect dragged items' data
+   * Extract children from list
    */
   const handleDragStart = ({ active }: DragMoveEvent) => {
-    hideChildren(active.id, categoriesList.findIndex(el => el.id === active.id));
-    const activeChildren = categoriesList.filter(c => c.parent_id === active.id);
-    if (activeChildren.length) {
-      setHiddenChildren({ [active.id]: activeChildren });
-      const activeIndex = categoriesList.findIndex(el => el.id === active.id);
-      const tmpList = [...categoriesList];
-      tmpList.splice(activeIndex + 1, activeChildren.length);
-      setCategoriesList(tmpList);
-    }
+    const activeIndex = active.data.current.sortable.index;
+    const children = getChildren(active.id);
+
+    setActiveData(draft => {
+      draft.index = activeIndex;
+      draft.category = getCategory(active.id);
+      draft.status = getStatus(active.id);
+      draft.children = children?.length ? children : null;
+    });
+
+    setExtractedChildren(draft => { draft[active.id] = children; });
+    hideChildren(active.id, activeIndex);
   };
 
   /**
    * On drag move
    */
-  const handleDragMove = ({ delta, over }: DragMoveEvent) => {
-    console.log(findCategory(over.id).name);
-    if (delta.x > 48) {
-      console.log('Child');
-    } else {
-      console.log('Parent');
+  const handleDragMove = ({ delta, active, over }: DragMoveEvent) => {
+    if ((getStatus(active.id) === 'single' || getStatus(active.id) === 'child') && getStatus(over.id) === 'single') {
+      if (delta.x > 32) {
+        setOffset(true);
+      } else {
+        setOffset(false);
+      }
     }
   };
 
   /**
-   * Update categories list after an item was dropped
+   * On drag End
+   * Insert children back in list
    */
-
   const handleDragEnd = ({ active, over }: DragMoveEvent) => {
     let newOrder = [...categoriesList];
+    const currentIdsOrder = over?.data.current.sortable.items;
+    let newIndex = over.data.current.sortable.index;
 
-    // si déplacé sur une autre catégorie…
-    if (active.id !== over.id) {
-      // liste d'ids des catégories visibles
-      const previousIdsOrder = over?.data.current.sortable.items;
-      // index dans previousIdsOrder de la catégorie déplacée
-      const oldIndex = active.data.current.sortable.index;
-      // index dans previousIdsOrder de la catégorie de réception
-      const newIndex = over.data.current.sortable.index;
-      // liste de catégories mise à jour après le drop
-      const newIdsOrder = arrayMove(previousIdsOrder, oldIndex, newIndex);
-      // id du parent de la catégorie de réception
-      const newParentId = categoriesList[newIndex].parent_id;
-
-      // nouvelle liste de catégories classées par newIdsOrder
+    // [A] Single |> [B] Single
+    if (getStatus(active.id) === 'single' && getStatus(over.id) === 'single') {
+      console.log('[A] Single |> [B] Single');
+      const newIdsOrder = arrayMove(currentIdsOrder, activeData.index, newIndex);
       newOrder = newIdsOrder.map(sortedId => {
-        // catégorie courante du map retrouvée grâce à l'id
-        const categoryFromId = findCategory(sortedId);
-        // si catégorie courante = catégorie déplacée…
-        if (categoryFromId.id === active.id) {
-          // maj du parent
-          categoryFromId.parent_id = newParentId;
+        let category = getCategory(sortedId);
+        if (offset && sortedId === active.id && activeData.index < newIndex) {
+          category = { ...category, parent_id: Number(over.id) };
         }
-        // retour de la catégorie courante
-        return categoryFromId;
+        return category;
       });
     }
-    // insert siblings back
-    if (hiddenChildren[active.id]?.length) {
-      newOrder.splice(over.data.current.sortable.index + 1, 0, ...hiddenChildren[active.id]);
-      setHiddenChildren({ ...hiddenChildren, [active.id]: null });
+
+    // [A] Child |> [B] Single
+    if ((getStatus(active.id) === 'child') && getStatus(over.id) === 'single') {
+      console.log('[A] Child |> [B] Single');
+      const newIdsOrder = arrayMove(currentIdsOrder, activeData.index, newIndex);
+      newOrder = newIdsOrder.map(sortedId => {
+        let category = getCategory(sortedId);
+        if (offset && sortedId === active.id && activeData.index < newIndex) {
+          category = { ...category, parent_id: Number(over.id) };
+        } else if (sortedId === active.id && activeData.index < newIndex) {
+          category = { ...category, parent_id: null };
+        }
+        return category;
+      });
     }
+
+    // [A] Single || Child |>…
+    if (getStatus(active.id) === 'single' || getStatus(active.id) === 'child') {
+      // [B] Parent
+      if (getStatus(over.id) === 'parent') {
+        if (activeData.index < newIndex) {
+          const newIdsOrder = arrayMove(currentIdsOrder, activeData.index, newIndex);
+          newOrder = newIdsOrder.map(sortedId => {
+            let category = getCategory(sortedId);
+            if (sortedId === active.id) {
+              category = { ...category, parent_id: Number(over.id) };
+            }
+            return category;
+          });
+        } else {
+          const newIdsOrder = arrayMove(currentIdsOrder, activeData.index, newIndex);
+          newOrder = newIdsOrder.map(sortedId => {
+            let category = getCategory(sortedId);
+            if (sortedId === active.id) {
+              category = { ...category, parent_id: null };
+            }
+            return category;
+          });
+        }
+      }
+      // [B] Child
+      if (getStatus(over.id) === 'child') {
+        const newIdsOrder = arrayMove(currentIdsOrder, activeData.index, newIndex);
+        newOrder = newIdsOrder.map(sortedId => {
+          let category = getCategory(sortedId);
+          if (sortedId === active.id) {
+            category = { ...category, parent_id: getCategory(over.id).parent_id };
+          }
+          return category;
+        });
+      }
+    }
+
+    // [A] Parent |>…
+    if (getStatus(active.id) === 'parent') {
+      // [B] Single
+      if (getStatus(over.id) === 'single') {
+        const newIdsOrder = arrayMove(currentIdsOrder, activeData.index, newIndex);
+        newOrder = newIdsOrder.map(sortedId => getCategory(sortedId));
+      }
+      // [B] Parent
+      if (getStatus(over.id) === 'parent') {
+        if (activeData.index < newIndex) {
+          const lastOverChildIndex = newOrder.findIndex(c => c.id === getChildren(over.id).pop().id);
+          newIndex = lastOverChildIndex;
+          const newIdsOrder = arrayMove(currentIdsOrder, activeData.index, newIndex);
+          newOrder = newIdsOrder.map(sortedId => getCategory(sortedId));
+        } else {
+          const newIdsOrder = arrayMove(currentIdsOrder, activeData.index, newIndex);
+          newOrder = newIdsOrder.map(sortedId => getCategory(sortedId));
+        }
+      }
+      // [B] Child
+      if (getStatus(over.id) === 'child') {
+        if (activeData.index < newIndex) {
+          const parent = newOrder.find(c => c.id === getCategory(over.id).parent_id);
+          const lastSiblingIndex = newOrder.findIndex(c => c.id === getChildren(parent.id).pop().id);
+          newIndex = lastSiblingIndex;
+          const newIdsOrder = arrayMove(currentIdsOrder, activeData.index, newIndex);
+          newOrder = newIdsOrder.map(sortedId => getCategory(sortedId));
+        } else {
+          const parentIndex = currentIdsOrder.indexOf(getCategory(over.id).parent_id);
+          newIndex = parentIndex;
+          const newIdsOrder = arrayMove(currentIdsOrder, activeData.index, newIndex);
+          newOrder = newIdsOrder.map(sortedId => getCategory(sortedId));
+        }
+      }
+      // insert children back
+      newOrder = showChildren(active.id, newOrder, newIndex);
+    }
+
     onDnd(newOrder);
+    setOffset(false);
   };
 
   /**
-   * Reset state if the drag was canceled
+   * On drag cancel
+   * Reset states
    */
   const handleDragCancel = ({ active }: DragMoveEvent) => {
-    setHiddenChildren({ ...hiddenChildren, [active.id]: null });
     setCategoriesList(productCategories);
+    setActiveData(initActiveData);
+    setExtractedChildren({ ...extractedChildren, [active.id]: null });
   };
 
   /**
-   * Hide children by their parent's id
+   * Get a category by its id
    */
-  const hideChildren = (parentId, parentIndex) => {
-    const children = findChildren(parentId);
-    if (children?.length) {
-      const tmpList = [...categoriesList];
-      tmpList.splice(parentIndex + 1, children.length);
-      setCategoriesList(tmpList);
-    }
-  };
-
-  /**
-   * Find a category by its id
-   */
-  const findCategory = (id) => {
+  const getCategory = (id) => {
     return categoriesList.find(c => c.id === id);
   };
+
   /**
-   * Find the children categories of a parent category by its id
+   * Get the children categories of a parent category by its id
    */
-  const findChildren = (id) => {
+  const getChildren = (id) => {
     const displayedChildren = categoriesList.filter(c => c.parent_id === id);
     if (displayedChildren.length) {
       return displayedChildren;
     }
-    return hiddenChildren[id];
+    return extractedChildren[id];
   };
+
   /**
-   * Find category's status by its id
-   * single | parent | child
+   * Get category's status by its id
+   * child | single | parent
    */
-  const categoryStatus = (id) => {
-    const c = findCategory(id);
-    if (!c.parent_id) {
-      if (findChildren(id)?.length) {
-        return 'parent';
-      }
-      return 'single';
-    } else {
-      return 'child';
+  const getStatus = (id) => {
+    const c = getCategory(id);
+    return !c.parent_id
+      ? getChildren(id)?.length
+        ? 'parent'
+        : 'single'
+      : 'child';
+  };
+
+  /**
+   * Extract children from the list by their parent's id
+   */
+  const hideChildren = (parentId, parentIndex) => {
+    const children = getChildren(parentId);
+    if (children?.length) {
+      const shortenList = [...categoriesList];
+      shortenList.splice(parentIndex + 1, children.length);
+      setCategoriesList(shortenList);
     }
   };
 
   /**
-   * Translate visual order into categories data positions
+   * Insert children back in the list by their parent's id
    */
-  const indexToPosition = (sortedIds: number[]) => {
-    const sort = sortedIds.map(sortedId => categoriesList.find(el => el.id === sortedId));
-    const newPositions = sort.map(c => {
-      if (typeof c.parent_id === 'number') {
-        const parentIndex = sort.findIndex(el => el.id === c.parent_id);
-        const currentIndex = sort.findIndex(el => el.id === c.id);
-        return { ...c, position: (currentIndex - parentIndex - 1) };
-      }
-      return c;
-    });
-    return newPositions;
+  const showChildren = (parentId, currentList, insertIndex) => {
+    if (extractedChildren[parentId]?.length) {
+      currentList.splice(insertIndex + 1, 0, ...extractedChildren[parentId]);
+      setExtractedChildren({ ...extractedChildren, [parentId]: null });
+    }
+    return currentList;
+  };
+
+  /**
+   * Toggle parent category by hidding/showing its children
+   */
+  const handleCollapse = (id) => {
+    const i = collapsed.findIndex(el => el === id);
+    if (i === -1) {
+      setCollapsed([...collapsed, id]);
+    } else {
+      const copy = [...collapsed];
+      copy.splice(i, 1);
+      setCollapsed(copy);
+    }
   };
 
   return (
     <DndContext
       sensors={sensors}
       collisionDetection={closestCenter}
+      modifiers={[restrictToWindowEdges]}
       onDragStart={handleDragStart}
+      onDragMove={handleDragMove}
       onDragEnd={handleDragEnd}
       onDragCancel={handleDragCancel}
     >
@@ -185,11 +285,29 @@ export const ProductCategoriesTree: React.FC<ProductCategoriesTreeProps> = ({ pr
                 category={category}
                 onSuccess={onSuccess}
                 onError={onError}
-                isChild={typeof category.parent_id === 'number'}
+                offset={category.id === activeData.category?.id && activeData?.offset}
+                collapsed={collapsed.includes(category.id) || collapsed.includes(category.parent_id)}
+                handleCollapse={handleCollapse}
+                status={getStatus(category.id)}
               />
             ))}
         </div>
       </SortableContext>
     </DndContext>
   );
+};
+
+interface ActiveData {
+  index: number,
+  category: ProductCategory,
+  status: 'child' | 'single' | 'parent',
+  children: ProductCategory[],
+  offset: boolean
+}
+const initActiveData: ActiveData = {
+  index: null,
+  category: null,
+  status: null,
+  children: [],
+  offset: false
 };
