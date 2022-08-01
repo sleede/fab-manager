@@ -71,7 +71,9 @@
         email_is_required: "E-post adresse er påkrevd."
         your_password: "Ditt passord"
         password_is_required: "Passord må fylles ut."
-        password_is_too_short: "Passordet er for kort (minimum 8 tegn)"
+        password_is_too_short: "Password is too short (minimum 12 characters)"
+        password_is_too_weak: "Password is too weak:"
+        password_is_too_weak_explanations: "minimum 12 characters, at least one uppercase letter, one lowercase letter, one number and one special character"
         type_your_password_again: "Skriv inn passordet igjen"
         password_confirmation_is_required: "Passordbekreftelse er påkrevd."
         password_does_not_match_with_confirmation: "Passordet stemmer ikke med bekreftelsen."
@@ -101,7 +103,7 @@
         used_for_reservation: "Disse dataene vil bli brukt i tilfelle endring på en av dine bestillinger"
         used_for_profile: "Disse dataene vil bare bli vist i profilen din"
         public_profile: "Du vil ha en offentlig profil og andre brukere vil kunne knytte deg til deres prosjekter"
-        you_will_receive_confirmation_instructions_by_email_detailed: "Du vil om noen minutter motta en e-post med instruksjoner om hvordan du bekrefter din e-postadresse."
+        you_will_receive_confirmation_instructions_by_email_detailed: "If your e-mail address is valid, you will receive an email with instructions about how to confirm your account in a few minutes."
         #password modification modal
         change_your_password: "Endre passord"
         your_new_password: "Ditt nye passord"
@@ -117,8 +119,7 @@
         #confirmation modal
         you_will_receive_confirmation_instructions_by_email: "Du vil motta instruksjoner om bekreftelse via e-post."
         #forgotten password modal
-        your_email_address_is_unknown: "E-postadressen er ukjent."
-        you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password: "Vi har sendt deg en e-post med instruksjoner for å resette passordet ditt."
+        you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password: "If your e-mail address is valid, you will receive in a moment an e-mail with instructions to reset your password."
         #Fab-manager's version
         version: "Versjon:"
         upgrade_fabmanager: "Oppgrader Fab-manager"

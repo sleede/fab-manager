@@ -71,7 +71,9 @@ de:
         email_is_required: "E-Mail-Adresse ist erforderlich."
         your_password: "Passwort"
         password_is_required: "Passwort ist erforderlich."
-        password_is_too_short: "Paßwort ist zu kurz (mindestens 8 Zeichen)"
+        password_is_too_short: "Password is too short (minimum 12 characters)"
+        password_is_too_weak: "Password is too weak:"
+        password_is_too_weak_explanations: "minimum 12 characters, at least one uppercase letter, one lowercase letter, one number and one special character"
         type_your_password_again: "Passwort erneut eingeben"
         password_confirmation_is_required: "Passwortbestätigung ist erforderlich."
         password_does_not_match_with_confirmation: "Die beiden Passworteingaben sind nicht identisch."
@@ -101,7 +103,7 @@ de:
         used_for_reservation: "Diese Daten werden im Fall einer Buchungsänderung verwendet"
         used_for_profile: "Diese Daten werden nur auf deinem Profil angezeigt"
         public_profile: "Sie werden über ein öffentliches Profil verfügen, andere Nutzer können Sie in ihren Projekten einbinden"
-        you_will_receive_confirmation_instructions_by_email_detailed: "In wenigen Minuten wirst Du eine Email erhalten mit der du deine Anmeldung bestätigen kannst."
+        you_will_receive_confirmation_instructions_by_email_detailed: "If your e-mail address is valid, you will receive an email with instructions about how to confirm your account in a few minutes."
         #password modification modal
         change_your_password: "Passwort ändern"
         your_new_password: "Ihr neues Passwort"
@@ -117,8 +119,7 @@ de:
         #confirmation modal
         you_will_receive_confirmation_instructions_by_email: "Sie erhalten eine Bestätigungsanleitung per E-Mail."
         #forgotten password modal
-        your_email_address_is_unknown: "Ihre E-Mail-Adresse ist unbekannt."
-        you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password: "Sie erhalten in Kürze eine E-Mail mit Anweisungen zum Zurücksetzen Ihres Passworts."
+        you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password: "If your e-mail address is valid, you will receive in a moment an e-mail with instructions to reset your password."
         #Fab-manager's version
         version: "Version:"
         upgrade_fabmanager: "Fab-Manager aktualisieren"
