@@ -84,8 +84,14 @@
       </div>
       <small class="text-xs m-b"><i>{{ 'app.public.projects_show.posted_on_' | translate }} {{project.created_at | amDateFormat: 'LL'}}</i></small>
 
+      <div class="m" ng-if="project.themes">
+        <span ng-repeat="theme in project.themes" class="badge m-r-sm">
+          {{theme.name}}
+        </span>
+      </div>
 
     </div>
+
 
     <section class="widget panel b-a m" ng-if="project.project_caos_attributes">
       <div class="panel-heading b-b">
@@ -147,6 +153,15 @@
       </div>
       <div class="panel-body">
         {{ project.licence.name }}
+      </div>
+    </section>
+
+    <section class="widget panel b-a m" ng-if="project.tags">
+      <div class="panel-heading b-b">
+        <h3 translate>{{ 'app.shared.project.tags' }}</h3>
+      </div>
+      <div class="panel-body">
+        <pre>{{ project.tags }}</pre>
       </div>
     </section>
 
