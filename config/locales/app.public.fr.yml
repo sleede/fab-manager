@@ -71,7 +71,9 @@ fr:
         email_is_required: "L'adresse de courriel est requise."
         your_password: "Votre mot de passe"
         password_is_required: "Le mot de passe est requis."
-        password_is_too_short: "Le mot de passe est trop court (au moins 8 caractères)"
+        password_is_too_short: "Password is too short (minimum 12 characters)"
+        password_is_too_weak: "Password is too weak:"
+        password_is_too_weak_explanations: "minimum 12 characters, at least one uppercase letter, one lowercase letter, one number and one special character"
         type_your_password_again: "Ressaisissez votre mot de passe"
         password_confirmation_is_required: "La confirmation du mot de passe est requise."
         password_does_not_match_with_confirmation: "Le mot de passe ne concorde pas avec la confirmation."
@@ -101,7 +103,7 @@ fr:
         used_for_reservation: "Cette donnée sera utilisée en cas de changement sur une de vos réservations"
         used_for_profile: "Cette donnée sera seulement affichée sur votre profil"
         public_profile: "Vous aurez un profil public et les autres utilisateurs pourront vous associer à leurs projets"
-        you_will_receive_confirmation_instructions_by_email_detailed: "Vous allez recevoir dans quelques minutes un email comportant des instructions pour confirmer votre compte."
+        you_will_receive_confirmation_instructions_by_email_detailed: "If your e-mail address is valid, you will receive an email with instructions about how to confirm your account in a few minutes."
         #password modification modal
         change_your_password: "Modifier votre mot de passe"
         your_new_password: "Votre nouveau mot de passe"
@@ -117,8 +119,7 @@ fr:
         #confirmation modal
         you_will_receive_confirmation_instructions_by_email: "Vous recevrez les instructions de confirmation par email."
         #forgotten password modal
-        your_email_address_is_unknown: "Votre adresse de courriel est inconnue."
-        you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password: "Vous allez recevoir sous quelques minutes un courriel vous indiquant comment réinitialiser votre mot de passe."
+        you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password: "If your e-mail address is valid, you will receive in a moment an e-mail with instructions to reset your password."
         #Fab-manager's version
         version: "Version :"
         upgrade_fabmanager: "Mettez à jour Fab-manager"
