@@ -2,6 +2,13 @@
 
 ## next release
 
+## v5.4.15 2022 August 1
+
+- Improved security: adds redis-session-store to store session
+- Improved security: makes rmagick, minimagick and mime types less explicit
+- Improved security: add complexity check of the user password
+- Improved security: prevents users enumeration attacks by not giving any info about the validity of the email
+
 ## v5.4.14 2022 August 1
 
 - Added a test for multiple reservations on the same space slot
