@@ -31,7 +31,9 @@ const NewProduct: React.FC<NewProductProps> = ({ onSuccess, onError }) => {
       external: 0
     },
     low_stock_alert: false,
-    machine_ids: []
+    machine_ids: [],
+    product_files_attributes: [],
+    product_images_attributes: []
   };
 
   /**

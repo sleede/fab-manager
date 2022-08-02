@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import slugify from 'slugify';
 import _ from 'lodash';
@@ -10,6 +10,8 @@ import { FormSwitch } from '../form/form-switch';
 import { FormSelect } from '../form/form-select';
 import { FormChecklist } from '../form/form-checklist';
 import { FormRichText } from '../form/form-rich-text';
+import { FormFileUpload } from '../form/form-file-upload';
+import { FormImageUpload } from '../form/form-image-upload';
 import { FabButton } from '../base/fab-button';
 import { FabAlert } from '../base/fab-alert';
 import ProductCategoryAPI from '../../api/product-category';
@@ -41,6 +43,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
   const { t } = useTranslation('admin');
 
   const { handleSubmit, register, control, formState, setValue, reset } = useForm<Product>({ defaultValues: { ...product } });
+  const output = useWatch<Product>({ control });
   const [isActivePrice, setIsActivePrice] = useState<boolean>(product.id && _.isFinite(product.amount) && product.amount > 0);
   const [productCategories, setProductCategories] = useState<selectOption[]>([]);
   const [machines, setMachines] = useState<checklistOption[]>([]);
@@ -117,6 +120,46 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
     }
   };
 
+  /**
+   * Add new product file
+   */
+  const addProductFile = () => {
+    setValue('product_files_attributes', output.product_files_attributes.concat({}));
+  };
+
+  /**
+   * Remove a product file
+   */
+  const handleRemoveProductFile = (i: number) => {
+    return () => {
+      const productFile = output.product_files_attributes[i];
+      if (!productFile.id) {
+        output.product_files_attributes.splice(i, 1);
+        setValue('product_files_attributes', output.product_files_attributes);
+      }
+    };
+  };
+
+  /**
+   * Add new product image
+   */
+  const addProductImage = () => {
+    setValue('product_images_attributes', output.product_images_attributes.concat({}));
+  };
+
+  /**
+   * Remove a product image
+   */
+  const handleRemoveProductImage = (i: number) => {
+    return () => {
+      const productImage = output.product_images_attributes[i];
+      if (!productImage.id) {
+        output.product_images_attributes.splice(i, 1);
+        setValue('product_images_attributes', output.product_images_attributes);
+      }
+    };
+  };
+
   return (
     <>
       <header>
@@ -187,6 +230,28 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
 
           <hr />
 
+          <div>
+            <h4>{t('app.admin.store.product_form.product_images')}</h4>
+            <FabAlert level="warning">
+              <HtmlTranslate trKey="app.admin.store.product_form.product_images_info" />
+            </FabAlert>
+            <div className="product-images">
+              {output.product_images_attributes.map((image, i) => (
+                <FormImageUpload key={i}
+                                 defaultImage={image}
+                                 id={`product_images_attributes[${i}]`}
+                                 accept="image/*"
+                                 size="large"
+                                 register={register}
+                                 setValue={setValue}
+                                 formState={formState}
+                                 className={image._destroy ? 'hidden' : ''}
+                                 onFileRemove={handleRemoveProductImage(i)}
+                                />
+              ))}
+            </div>
+            <FabButton onClick={addProductImage}>{t('app.admin.store.product_form.add_product_image')}</FabButton>
+          </div>
           <h4>{t('app.admin.store.product_form.assigning_category')}</h4>
           <FabAlert level="warning">
             <HtmlTranslate trKey="app.admin.store.product_form.assigning_category_info" />
@@ -218,6 +283,24 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
                         paragraphTools={true}
                         limit={1000}
                         id="description" />
+          <div>
+            <h4>{t('app.admin.store.product_form.product_files')}</h4>
+            <FabAlert level="warning">
+              <HtmlTranslate trKey="app.admin.store.product_form.product_files_info" />
+            </FabAlert>
+            {output.product_files_attributes.map((file, i) => (
+              <FormFileUpload key={i}
+                              defaultFile={file}
+                              id={`product_files_attributes[${i}]`}
+                              accept="application/pdf"
+                              register={register}
+                              setValue={setValue}
+                              formState={formState}
+                              className={file._destroy ? 'hidden' : ''}
+                              onFileRemove={handleRemoveProductFile(i)}/>
+            ))}
+            <FabButton onClick={addProductFile}>{t('app.admin.store.product_form.add_product_file')}</FabButton>
+          </div>
         </div>
         <div className="main-actions">
           <FabButton type="submit" className="main-action-btn">{t('app.admin.store.product_form.save')}</FabButton>

@@ -15,8 +15,13 @@ class API::ProductsController < API::ApiController
   def create
     authorize Product
     @product = Product.new(product_params)
-    @product.amount = nil if @product.amount.zero?
-    @product.amount *= 100 if @product.amount.present?
+    if @product.amount.present?
+      if @product.amount.zero?
+        @product.amount = nil
+      else
+        @product.amount *= 100
+      end
+    end
     if @product.save
       render status: :created
     else
@@ -28,8 +33,13 @@ class API::ProductsController < API::ApiController
     authorize @product
 
     product_parameters = product_params
-    product_parameters[:amount] = nil if product_parameters[:amount].zero?
-    product_parameters[:amount] = product_parameters[:amount] * 100 if product_parameters[:amount].present?
+    if product_parameters[:amount].present?
+      if product_parameters[:amount].zero?
+        product_parameters[:amount] = nil
+      else
+        product_parameters[:amount] *= 100
+      end
+    end
     if @product.update(product_parameters)
       render status: :ok
     else
@@ -52,6 +62,9 @@ class API::ProductsController < API::ApiController
   def product_params
     params.require(:product).permit(:name, :slug, :sku, :description, :is_active,
                                     :product_category_id, :amount, :quantity_min,
-                                    :low_stock_alert, :low_stock_threshold, machine_ids: [])
+                                    :low_stock_alert, :low_stock_threshold,
+                                    machine_ids: [],
+                                    product_files_attributes: %i[id attachment _destroy],
+                                    product_images_attributes: %i[id attachment _destroy])
   end
 end

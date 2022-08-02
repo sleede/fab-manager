@@ -553,3 +553,9 @@ en:
       form_checklist:
         select_all: "Select all"
         unselect_all: "Unselect all"
+      form_file_upload:
+        browse: "Browse"
+        edit: "Edit"
+      form_image_upload:
+        browse: "Browse"
+        edit: "Edit"

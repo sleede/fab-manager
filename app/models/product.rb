@@ -6,6 +6,12 @@ class Product < ApplicationRecord
 
   has_and_belongs_to_many :machines
 
+  has_many :product_files, as: :viewable, dependent: :destroy
+  accepts_nested_attributes_for :product_files, allow_destroy: true, reject_if: :all_blank
+
+  has_many :product_images, as: :viewable, dependent: :destroy
+  accepts_nested_attributes_for :product_images, allow_destroy: true, reject_if: :all_blank
+
   validates_numericality_of :amount, greater_than: 0, allow_nil: true
 
   scope :active, -> { where(is_active: true) }
