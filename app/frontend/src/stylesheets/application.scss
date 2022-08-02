@@ -39,6 +39,8 @@
 @import "modules/form/form-rich-text";
 @import "modules/form/form-switch";
 @import "modules/form/form-checklist";
+@import "modules/form/form-file-upload";
+@import "modules/form/form-image-upload";
 @import "modules/group/change-group";
 @import "modules/machines/machine-card";
 @import "modules/machines/machines-filters";
@@ -102,6 +104,7 @@
 @import "modules/user/gender-input";
 @import "modules/user/user-profile-form";
 @import "modules/user/user-validation";
+@import "modules/store/product-form";
 
 @import "modules/abuses";
 @import "modules/cookies";

@@ -552,3 +552,9 @@ fr:
         create_label: "Ajouter {VALUE}"
       form_check_list:
         select_all: "Tout sélectionner"
+      form_file_upload:
+        browse: "Parcourir"
+        edit: "Modifier"
+      form_image_upload:
+        browse: "Parcourir"
+        edit: "Modifier"
