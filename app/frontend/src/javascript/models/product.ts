@@ -27,7 +27,7 @@ export interface Product {
     attachment?: File,
     attachment_files?: FileList,
     attachment_name?: string,
-    attachment_url?: string
+    attachment_url?: string,
     _destroy?: boolean
   }>,
   product_images_attributes: Array<{
@@ -35,7 +35,8 @@ export interface Product {
     attachment?: File,
     attachment_files?: FileList,
     attachment_name?: string,
-    attachment_url?: string
-    _destroy?: boolean
+    attachment_url?: string,
+    _destroy?: boolean,
+    is_main?: boolean
   }>
 }

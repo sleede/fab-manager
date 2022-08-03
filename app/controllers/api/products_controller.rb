@@ -65,6 +65,6 @@ class API::ProductsController < API::ApiController
                                     :low_stock_alert, :low_stock_threshold,
                                     machine_ids: [],
                                     product_files_attributes: %i[id attachment _destroy],
-                                    product_images_attributes: %i[id attachment _destroy])
+                                    product_images_attributes: %i[id attachment is_main _destroy])
   end
 end
