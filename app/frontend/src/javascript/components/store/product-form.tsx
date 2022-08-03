@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useForm, useWatch } from 'react-hook-form';
+import { useForm, useWatch, Path } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import slugify from 'slugify';
 import _ from 'lodash';
@@ -11,7 +11,7 @@ import { FormSelect } from '../form/form-select';
 import { FormChecklist } from '../form/form-checklist';
 import { FormRichText } from '../form/form-rich-text';
 import { FormFileUpload } from '../form/form-file-upload';
-import { FormImageUpload } from '../form/form-image-upload';
+import { FormImageUpload, ImageType } from '../form/form-image-upload';
 import { FabButton } from '../base/fab-button';
 import { FabAlert } from '../base/fab-alert';
 import ProductCategoryAPI from '../../api/product-category';
@@ -144,7 +144,9 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
    * Add new product image
    */
   const addProductImage = () => {
-    setValue('product_images_attributes', output.product_images_attributes.concat({}));
+    setValue('product_images_attributes', output.product_images_attributes.concat({
+      is_main: output.product_images_attributes.length === 0
+    }));
   };
 
   /**
@@ -155,7 +157,59 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
       const productImage = output.product_images_attributes[i];
       if (!productImage.id) {
         output.product_images_attributes.splice(i, 1);
-        setValue('product_images_attributes', output.product_images_attributes);
+        if (productImage.is_main) {
+          setValue('product_images_attributes', output.product_images_attributes.map((image, k) => {
+            if (k === 0) {
+              return {
+                ...image,
+                is_main: true
+              };
+            }
+            return image;
+          }));
+        } else {
+          setValue('product_images_attributes', output.product_images_attributes);
+        }
+      } else {
+        if (productImage.is_main) {
+          let mainImage = false;
+          setValue('product_images_attributes', output.product_images_attributes.map((image, k) => {
+            if (i !== k && !mainImage) {
+              mainImage = true;
+              return {
+                ...image,
+                _destroy: i === k,
+                is_main: true
+              };
+            }
+            return {
+              ...image,
+              _destroy: i === k
+            };
+          }));
+        }
+      }
+    };
+  };
+
+  /**
+   * Remove main image in others product images
+   */
+  const handleSetMainImage = (i: number) => {
+    return () => {
+      if (output.product_images_attributes.length > 1) {
+        setValue('product_images_attributes', output.product_images_attributes.map((image, k) => {
+          if (i !== k) {
+            return {
+              ...image,
+              is_main: false
+            };
+          }
+          return {
+            ...image,
+            is_main: true
+          };
+        }));
       }
     };
   };
@@ -246,7 +300,9 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
                                  setValue={setValue}
                                  formState={formState}
                                  className={image._destroy ? 'hidden' : ''}
+                                 mainOption={true}
                                  onFileRemove={handleRemoveProductImage(i)}
+                                 onFileIsMain={handleSetMainImage(i)}
                                 />
               ))}
             </div>
