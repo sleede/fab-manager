@@ -1904,9 +1904,9 @@ fr:
           title: "Les catégories"
           info: "<strong>Information:</strong></br>Retrouvez ci-dessous toutes les catégories créés. Les catégories se rangent sur deux niveaux maximum, vous pouvez les agencer avec un glisser-déposer. L'ordre d'affichage des catégories sera identique sur la vue publique et la liste ci-dessous. Attention, Vous pouvez supprimer une catégorie ou une sous-catégorie même si elles sont associées à des produits. Ces derniers se retrouveront sans catégories. Si vous supprimez une catégorie contenant des sous-catégories, ces dernières seront elles aussi supprimées. <strong>Veillez au bon agencement de vos catégories et sauvegarder votre choix.</strong>"
         manage_product_category:
-          create: "Create a product category"
-          update: "Update the product category"
-          delete: "Delete the product category"
+          create: "Créer une catégorie"
+          update: "Modifier la catégorie"
+          delete: "Supprimer la catégorie"
         product_category_modal:
           new_product_category: "Créer une catégorie"
           edit_product_category: "Modifier la catégorie"
@@ -1921,12 +1921,12 @@ fr:
             error: "Impossible de modifier la catégorie : "
             success: "La nouvelle catégorie a bien été mise à jour."
           delete:
-            confirm: "Do you really want to delete this product category?"
+            confirm: "Voulez-vous vraiment supprimer cette catégorie de produits ?"
             error: "Impossible de supprimer the catégorie : "
             success: "La catégorie a bien été supprimée"
           save: "Enregistrer"
-          required: "This field is required"
-          slug_pattern: "Only lowercase alphanumeric groups of characters separated by an hyphen"
+          required: "Le champ est requise"
+          slug_pattern: "Uniquement des groupes de caractères alphanumériques minuscules séparés par un trait d'union."
         products:
           all_products: "Tous les produits"
           create_a_product: "Créer un produit"
