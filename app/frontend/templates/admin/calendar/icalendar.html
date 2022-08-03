@@ -38,7 +38,7 @@
         </thead>
         <tbody>
         <tr ng-repeat="calendar in calendars">
-          <td class="calendar-name">{{calendar.name}} plop</td>
+          <td class="calendar-name">{{calendar.name}}</td>
           <td class="calendar-url"><a href="{{calendar.url}}" target="_blank">{{calendar.url}}</a></td>
           <td class="calendar-legend-group"><span class="calendar-legend-item" ng-style="calendarStyle(calendar)" translate> {{ calendar.text_hidden ? '' : 'app.admin.icalendar.example' }}</span>
           <td class="calendar-actions">
