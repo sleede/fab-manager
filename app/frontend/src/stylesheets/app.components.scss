@@ -588,10 +588,18 @@
 .checkbox-group {
   display: flex;
   justify-content: flex-start;
+  align-items: flex-start;
 
   input[type=checkbox] {
-    font-size: 16px;
+    flex-shrink: 0;
     width: 2em;
+    height: 2rem;
+    margin-right: 0.5rem;
+    font-size: 16px;
+  }
+  label {
+    margin: 0;
+    font-weight: 500;
   }
 }
 

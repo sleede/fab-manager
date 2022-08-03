@@ -1,8 +1,7 @@
 .signup-form {
   .names-row {
-    input.form-control {
-      width: 89%;
-      display: inline-block;
+    & > div {
+      display: flex;
     }
   }
 
