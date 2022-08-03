@@ -8,7 +8,8 @@ import { FormInput } from '../form/form-input';
 import { FormComponent } from '../../models/form-component';
 import { AbstractFormItemProps } from './abstract-form-item';
 import { FabButton } from '../base/fab-button';
-import noAvatar from '../../../../images/no_avatar.png';
+import noImage from '../../../../images/no_image.png';
+import { Trash } from 'phosphor-react';
 
 export interface ImageType {
   id?: number,
@@ -86,6 +87,11 @@ export const FormImageUpload = <TFieldValues extends FieldValues>({ id, register
     }
   }
 
+  /**
+   * Returns placeholder text
+   */
+  const placeholder = (): string => hasImage() ? t('app.shared.form_image_upload.edit') : t('app.shared.form_image_upload.browse');
+
   // Compose classnames from props
   const classNames = [
     `${className || ''}`
@@ -94,25 +100,22 @@ export const FormImageUpload = <TFieldValues extends FieldValues>({ id, register
   return (
     <div className={`form-image-upload form-image-upload--${size} ${classNames}`}>
       <div className={`image image--${size}`}>
-        <img src={image || noAvatar} />
+        <img src={image || noImage} />
       </div>
-      <div className="buttons">
-        <FabButton className="select-button">
-          {!hasImage() && <span>{t('app.shared.form_image_upload.browse')}</span>}
-          {hasImage() && <span>{t('app.shared.form_image_upload.edit')}</span>}
-          <FormInput className="image-file-input"
-                     type="file"
-                     accept={accept}
-                     register={register}
-                     formState={formState}
-                     rules={rules}
-                     disabled={disabled}
-                     error={error}
-                     warning={warning}
-                     id={`${id}[attachment_files]`}
-                     onChange={onFileSelected}/>
-        </FabButton>
-        {hasImage() && <FabButton onClick={onRemoveFile} icon={<i className="fa fa-trash-o"/>} className="delete-image" />}
+      <div className="actions">
+        <FormInput className="image-file-input"
+                   type="file"
+                   accept={accept}
+                   register={register}
+                   formState={formState}
+                   rules={rules}
+                   disabled={disabled}
+                   error={error}
+                   warning={warning}
+                   id={`${id}[attachment_files]`}
+                   onChange={onFileSelected}
+                   placeholder={placeholder()}/>
+        {hasImage() && <FabButton onClick={onRemoveFile} icon={<Trash size={20} weight="fill" />} className="is-main" />}
       </div>
     </div>
   );

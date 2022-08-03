@@ -17,6 +17,7 @@ import { FabAlert } from '../base/fab-alert';
 import ProductCategoryAPI from '../../api/product-category';
 import MachineAPI from '../../api/machine';
 import ProductAPI from '../../api/product';
+import { Plus } from 'phosphor-react';
 
 interface ProductFormProps {
   product: Product,
@@ -194,6 +195,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
                       id="is_active"
                       formState={formState}
                       label={t('app.admin.store.product_form.is_show_in_store')}
+                      tooltip={t('app.admin.store.product_form.active_price_info')}
                       className='span-3' />
         </div>
 
@@ -205,7 +207,6 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
             <FormSwitch control={control}
                         id="is_active_price"
                         label={t('app.admin.store.product_form.is_active_price')}
-                        tooltip={t('app.admin.store.product_form.is_active_price')}
                         defaultValue={isActivePrice}
                         onChange={toggleIsActivePrice}
                         className='span-3' />
@@ -227,31 +228,43 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
                          label={t('app.admin.store.product_form.quantity_min')} />
             </div>
           </div>}
+        </div>
 
-          <hr />
+        <hr />
 
-          <div>
-            <h4>{t('app.admin.store.product_form.product_images')}</h4>
-            <FabAlert level="warning">
-              <HtmlTranslate trKey="app.admin.store.product_form.product_images_info" />
-            </FabAlert>
-            <div className="product-images">
+        <div>
+          <h4>{t('app.admin.store.product_form.product_images')}</h4>
+          <FabAlert level="warning">
+            <HtmlTranslate trKey="app.admin.store.product_form.product_images_info" />
+          </FabAlert>
+          <div className="product-images">
+            <div className="list">
               {output.product_images_attributes.map((image, i) => (
                 <FormImageUpload key={i}
-                                 defaultImage={image}
-                                 id={`product_images_attributes[${i}]`}
-                                 accept="image/*"
-                                 size="large"
-                                 register={register}
-                                 setValue={setValue}
-                                 formState={formState}
-                                 className={image._destroy ? 'hidden' : ''}
-                                 onFileRemove={handleRemoveProductImage(i)}
+                                  defaultImage={image}
+                                  id={`product_images_attributes[${i}]`}
+                                  accept="image/*"
+                                  size="small"
+                                  register={register}
+                                  setValue={setValue}
+                                  formState={formState}
+                                  className={image._destroy ? 'hidden' : ''}
+                                  onFileRemove={handleRemoveProductImage(i)}
                                 />
               ))}
             </div>
-            <FabButton onClick={addProductImage}>{t('app.admin.store.product_form.add_product_image')}</FabButton>
+          <FabButton
+            onClick={addProductImage}
+            className='is-info'
+            icon={<Plus size={24} />}>
+            {t('app.admin.store.product_form.add_product_image')}
+          </FabButton>
           </div>
+        </div>
+
+        <hr />
+
+        <div>
           <h4>{t('app.admin.store.product_form.assigning_category')}</h4>
           <FabAlert level="warning">
             <HtmlTranslate trKey="app.admin.store.product_form.assigning_category_info" />
@@ -261,20 +274,24 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
                       id="product_category_id"
                       formState={formState}
                       label={t('app.admin.store.product_form.linking_product_to_category')} />
+        </div>
 
-          <hr />
+        <hr />
 
+        <div>
           <h4>{t('app.admin.store.product_form.assigning_machines')}</h4>
           <FabAlert level="warning">
             <HtmlTranslate trKey="app.admin.store.product_form.assigning_machines_info" />
           </FabAlert>
           <FormChecklist options={machines}
-                         control={control}
-                         id="machine_ids"
-                         formState={formState} />
+                          control={control}
+                          id="machine_ids"
+                          formState={formState} />
+        </div>
 
-          <hr />
+        <hr />
 
+        <div>
           <h4>{t('app.admin.store.product_form.product_description')}</h4>
           <FabAlert level="warning">
             <HtmlTranslate trKey="app.admin.store.product_form.product_description_info" />
@@ -283,25 +300,38 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
                         paragraphTools={true}
                         limit={1000}
                         id="description" />
-          <div>
-            <h4>{t('app.admin.store.product_form.product_files')}</h4>
-            <FabAlert level="warning">
-              <HtmlTranslate trKey="app.admin.store.product_form.product_files_info" />
-            </FabAlert>
-            {output.product_files_attributes.map((file, i) => (
-              <FormFileUpload key={i}
-                              defaultFile={file}
-                              id={`product_files_attributes[${i}]`}
-                              accept="application/pdf"
-                              register={register}
-                              setValue={setValue}
-                              formState={formState}
-                              className={file._destroy ? 'hidden' : ''}
-                              onFileRemove={handleRemoveProductFile(i)}/>
-            ))}
-            <FabButton onClick={addProductFile}>{t('app.admin.store.product_form.add_product_file')}</FabButton>
+        </div>
+
+        <hr />
+
+        <div>
+          <h4>{t('app.admin.store.product_form.product_files')}</h4>
+          <FabAlert level="warning">
+            <HtmlTranslate trKey="app.admin.store.product_form.product_files_info" />
+          </FabAlert>
+          <div className="product-documents">
+            <div className="list">
+              {output.product_files_attributes.map((file, i) => (
+                <FormFileUpload key={i}
+                                defaultFile={file}
+                                id={`product_files_attributes[${i}]`}
+                                accept="application/pdf"
+                                register={register}
+                                setValue={setValue}
+                                formState={formState}
+                                className={file._destroy ? 'hidden' : ''}
+                                onFileRemove={handleRemoveProductFile(i)}/>
+              ))}
+            </div>
+            <FabButton
+              onClick={addProductFile}
+              className='is-info'
+              icon={<Plus size={24} />}>
+              {t('app.admin.store.product_form.add_product_file')}
+            </FabButton>
           </div>
         </div>
+
         <div className="main-actions">
           <FabButton type="submit" className="main-action-btn">{t('app.admin.store.product_form.save')}</FabButton>
         </div>

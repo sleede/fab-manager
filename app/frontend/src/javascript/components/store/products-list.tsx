@@ -1,6 +1,7 @@
 import React from 'react';
 import { FabButton } from '../base/fab-button';
 import { Product } from '../../models/product';
+import { PencilSimple, Trash } from 'phosphor-react';
 
 interface ProductsListProps {
   products: Array<Product>,
@@ -42,10 +43,10 @@ export const ProductsList: React.FC<ProductsListProps> = ({ products, onEdit, on
           <div className='actions'>
             <div className='manage'>
               <FabButton className='edit-btn' onClick={editProduct(product)}>
-                <i className='fas fa-pen' />
+                <PencilSimple size={20} weight="fill" />
               </FabButton>
               <FabButton className='delete-btn' onClick={deleteProduct(product.id)}>
-                <i className='fa fa-trash' />
+                <Trash size={20} weight="fill" />
               </FabButton>
             </div>
           </div>

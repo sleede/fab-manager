@@ -181,34 +181,4 @@
   max-width: 1300px;
   padding-right: 1.6rem; 
   padding-left: 1.6rem; 
-
-  .product-form {
-    .flex {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: flex-end;
-      gap: 0 3.2rem;
-      & > * {
-        flex: 1 1 320px;
-      }
-    }
-
-    .layout {
-      @media (max-width: 1023px) {
-        .span-3,
-        .span-7 {
-          flex-basis: 50%;
-        }
-      }
-      @media (max-width: 767px) {
-        flex-wrap: wrap;
-      }
-    }
-    
-    .price-data {
-      .layout {
-        align-items: center;
-      }
-    }
-  }
 }

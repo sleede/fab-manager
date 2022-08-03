@@ -7,6 +7,8 @@ import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { FormInput } from '../form/form-input';
 import { FormComponent } from '../../models/form-component';
 import { AbstractFormItemProps } from './abstract-form-item';
+import { FabButton } from '../base/fab-button';
+import { FilePdf, Trash } from 'phosphor-react';
 
 export interface FileType {
   id?: number,
@@ -81,49 +83,41 @@ export const FormFileUpload = <TFieldValues extends FieldValues>({ id, register,
     `${className || ''}`
   ].join(' ');
 
+  /**
+   * Returns placeholder text
+   */
+  const placeholder = (): string => hasFile() ? t('app.shared.form_file_upload.edit') : t('app.shared.form_file_upload.browse');
+
   return (
-    <div className={`form-file-upload fileinput ${classNames}`}>
-      <div className="filename-container">
-        {hasFile() && (
-          <div>
-            <i className="fa fa-file fileinput-exists" />
-            <span className="fileinput-filename">
-              {file.attachment_name}
-            </span>
-          </div>
-        )}
+    <div className={`form-file-upload ${classNames}`}>
+      {hasFile() && (
+        <span>{file.attachment_name}</span>
+      )}
+      <div className="actions">
         {file?.id && file?.attachment_url && (
           <a href={file.attachment_url}
             target="_blank"
-            className="file-download"
+            className="fab-button"
             rel="noreferrer">
-            <i className="fa fa-download"/>
+            <FilePdf size={24} />
           </a>
         )}
-      </div>
-      <span className="fileinput-button">
-        {!hasFile() && (
-          <span className="fileinput-new">{t('app.shared.form_file_upload.browse')}</span>
-        )}
-        {hasFile() && (
-          <span className="fileinput-exists">{t('app.shared.form_file_upload.edit')}</span>
-        )}
         <FormInput type="file"
-                   accept={accept}
-                   register={register}
-                   formState={formState}
-                   rules={rules}
-                   disabled={disabled}
-                   error={error}
-                   warning={warning}
-                   id={`${id}[attachment_files]`}
-                   onChange={onFileSelected}/>
-      </span>
-      {hasFile() && (
-        <a className="fileinput-exists fileinput-delete" onClick={onRemoveFile}>
-          <i className="fa fa-trash-o"></i>
-        </a>
-      )}
+                    className="image-file-input"
+                    accept={accept}
+                    register={register}
+                    formState={formState}
+                    rules={rules}
+                    disabled={disabled}
+                    error={error}
+                    warning={warning}
+                    id={`${id}[attachment_files]`}
+                    onChange={onFileSelected}
+                    placeholder={placeholder()}/>
+        {hasFile() &&
+          <FabButton onClick={onRemoveFile} icon={<Trash size={20} weight="fill" />} className="is-main" />
+        }
+      </div>
     </div>
   );
 };

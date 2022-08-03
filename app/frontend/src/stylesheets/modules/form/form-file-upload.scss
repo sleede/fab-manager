@@ -1,4 +1,30 @@
-.fileinput {
+.form-file-upload {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.6rem;
+  border: 1px solid var(--gray-soft-dark);
+  border-radius: var(--border-radius);
+  background-color: var(--gray-soft-lightest);
+
+  .actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    & > *:not(:first-child) {
+      margin-left: 1rem;
+    }
+    a {
+      display: flex;
+    }
+
+    .image-file-input {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.nope-fileinput {
   display: table;
   border-collapse: separate;
   position: relative;

@@ -65,7 +65,7 @@ export const ProductCategoriesItem: React.FC<ProductCategoriesItemProps> = ({ pr
           </div>
           <div className='drag-handle'>
             <button {...attributes} {...listeners}>
-              <DotsSixVertical size={16} />
+              <DotsSixVertical size={20} />
             </button>
           </div>
         </div>

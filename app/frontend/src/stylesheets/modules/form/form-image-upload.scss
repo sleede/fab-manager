@@ -1,48 +1,41 @@
 .form-image-upload {
+  &--small {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.6rem;
+    border: 1px solid var(--gray-soft-dark);
+    border-radius: var(--border-radius);
+    background-color: var(--gray-soft-lightest);
+  }
+  &--large {}
 
   .image {
-    background-color: #fff;
-    border: 1px solid var(--gray-soft);
-    padding: 4px;
-    display: inline-block;
-
-    &--small img {
-      width: 50px;
-      height: 50px;
-    }
-
-    &--large img {
-      width: 180px;
-      height: 180px;
-    }
-  }
-
-  .buttons {
+    flex-shrink: 0;
     display: flex;
-    justify-content: center;
-    margin-top: 20px;
-
-    .select-button {
-      position: relative;
-      .image-file-input {
-        position: absolute;
-        z-index: 2;
-        opacity: 0;
-        top: 0;
-        left: 0;
-      }
+    object-fit: cover;
+    border-radius: var(--border-radius-sm);
+    overflow: hidden;
+    &--small {
+      width: 8rem;
+      height: 8rem;
     }
-    .delete-image {
-      background-color: var(--error);
-      color: white;
+    &--large {}
+
+    img {
+      width: 100%;
     }
   }
 
-  &--large {
-    margin: 80px 40px;
-  }
+  .actions {
+    display: flex;
+    align-items: center;
+    & > *:not(:first-child) {
+      margin-left: 1rem;
+    }
 
-  &--small {
-    text-align: center;
+    .image-file-input {
+      margin: 0;
+    }
   }
 }

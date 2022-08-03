@@ -1,3 +1,4 @@
+import { PencilSimple, Trash } from 'phosphor-react';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ProductCategory } from '../../../models/product-category';
@@ -53,12 +54,12 @@ export const ManageProductCategory: React.FC<ManageProductCategoryProps> = ({ pr
         );
       case 'update':
         return (<FabButton type='button'
-          icon={<i className="fas fa-pen" />}
+          icon={<PencilSimple size={20} weight="fill" />}
           className="edit-btn"
           onClick={toggleModal} />);
       case 'delete':
         return (<FabButton type='button'
-          icon={<i className="fa fa-trash" />}
+          icon={<Trash size={20} weight="fill" />}
           className="delete-btn"
           onClick={toggleModal} />);
     }
