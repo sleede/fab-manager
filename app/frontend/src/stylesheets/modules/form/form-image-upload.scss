@@ -20,7 +20,14 @@
       width: 8rem;
       height: 8rem;
     }
-    &--large {}
+    &--medium {
+      width: 20rem;
+      height: 20rem;
+    }
+    &--large {
+      width: 40rem;
+      height: 40rem;
+    }
 
     img {
       width: 100%;
