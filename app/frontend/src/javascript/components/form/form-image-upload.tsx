@@ -22,7 +22,7 @@ interface FormImageUploadProps<TFieldValues> extends FormComponent<TFieldValues>
   setValue: UseFormSetValue<TFieldValues>,
   defaultImage?: ImageType,
   accept?: string,
-  size?: 'small' | 'medium' | 'large'
+  size?: 'small' | 'medium' | 'large',
   mainOption?: boolean,
   onFileChange?: (value: ImageType) => void,
   onFileRemove?: () => void,
@@ -125,6 +125,12 @@ export const FormImageUpload = <TFieldValues extends FieldValues>({ id, register
         <img src={image || noImage} />
       </div>
       <div className="actions">
+        {mainOption &&
+          <label className='fab-button'>
+            {t('app.shared.form_image_upload.main_image')}
+            <input type="radio" checked={!!file?.is_main} onChange={setMainImage} />
+          </label>
+        }
         <FormInput className="image-file-input"
                    type="file"
                    accept={accept}
@@ -139,12 +145,6 @@ export const FormImageUpload = <TFieldValues extends FieldValues>({ id, register
                    placeholder={placeholder()}/>
         {hasImage() && <FabButton onClick={onRemoveFile} icon={<Trash size={20} weight="fill" />} className="is-main" />}
       </div>
-      {mainOption &&
-        <div>
-          <input type="radio" checked={!!file?.is_main} onChange={setMainImage} />
-          <label>{t('app.shared.form_image_upload.main_image')}</label>
-        </div>
-      }
     </div>
   );
 };

@@ -1,14 +1,18 @@
+@mixin base {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.6rem;
+  border: 1px solid var(--gray-soft-dark);
+  border-radius: var(--border-radius);
+  background-color: var(--gray-soft-lightest);
+}
 .form-image-upload {
-  &--small {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.6rem;
-    border: 1px solid var(--gray-soft-dark);
-    border-radius: var(--border-radius);
-    background-color: var(--gray-soft-lightest);
+  &--small,
+  &--medium,
+  &--large {
+    @include base;
   }
-  &--large {}
 
   .image {
     flex-shrink: 0;
@@ -41,8 +45,10 @@
       margin-left: 1rem;
     }
 
+    input[type="radio"] { margin-left: 0.5rem; }
+
     .image-file-input {
-      margin: 0;
+      margin-bottom: 0;
     }
   }
 }
