@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Path } from 'react-hook-form';
 import { UnpackNestedValue, UseFormSetValue } from 'react-hook-form/dist/types/form';
@@ -14,7 +14,8 @@ import { Trash } from 'phosphor-react';
 export interface ImageType {
   id?: number,
   attachment_name?: string,
-  attachment_url?: string
+  attachment_url?: string,
+  is_main?: boolean
 }
 
 interface FormImageUploadProps<TFieldValues> extends FormComponent<TFieldValues>, AbstractFormItemProps<TFieldValues> {
@@ -22,18 +23,24 @@ interface FormImageUploadProps<TFieldValues> extends FormComponent<TFieldValues>
   defaultImage?: ImageType,
   accept?: string,
   size?: 'small' | 'large'
+  mainOption?: boolean,
   onFileChange?: (value: ImageType) => void,
   onFileRemove?: () => void,
+  onFileIsMain?: () => void,
 }
 
 /**
  * This component allows to upload image, in forms managed by react-hook-form.
  */
-export const FormImageUpload = <TFieldValues extends FieldValues>({ id, register, defaultImage, className, rules, disabled, error, warning, formState, onFileChange, onFileRemove, accept, setValue, size }: FormImageUploadProps<TFieldValues>) => {
+export const FormImageUpload = <TFieldValues extends FieldValues>({ id, register, defaultImage, className, rules, disabled, error, warning, formState, onFileChange, onFileRemove, accept, setValue, size, onFileIsMain, mainOption = false }: FormImageUploadProps<TFieldValues>) => {
   const { t } = useTranslation('shared');
 
   const [file, setFile] = useState<ImageType>(defaultImage);
   const [image, setImage] = useState<string | ArrayBuffer>(defaultImage.attachment_url);
+
+  useEffect(() => {
+    setFile(defaultImage);
+  }, [defaultImage]);
 
   /**
    * Check if image is selected
@@ -54,8 +61,13 @@ export const FormImageUpload = <TFieldValues extends FieldValues>({ id, register
       };
       reader.readAsDataURL(f);
       setFile({
+        ...file,
         attachment_name: f.name
       });
+      setValue(
+        `${id}[attachment_name]` as Path<TFieldValues>,
+        f.name as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>
+      );
       setValue(
         `${id}[_destroy]` as Path<TFieldValues>,
         false as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>
@@ -81,7 +93,6 @@ export const FormImageUpload = <TFieldValues extends FieldValues>({ id, register
       null as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>
     );
     setFile(null);
-    setImage(null);
     if (typeof onFileRemove === 'function') {
       onFileRemove();
     }
@@ -91,6 +102,17 @@ export const FormImageUpload = <TFieldValues extends FieldValues>({ id, register
    * Returns placeholder text
    */
   const placeholder = (): string => hasImage() ? t('app.shared.form_image_upload.edit') : t('app.shared.form_image_upload.browse');
+
+  /**
+   * Callback triggered when the user set the image is main
+   */
+  function setMainImage () {
+    setValue(
+      `${id}[is_main]` as Path<TFieldValues>,
+      true as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>
+    );
+    onFileIsMain();
+  }
 
   // Compose classnames from props
   const classNames = [
@@ -117,6 +139,12 @@ export const FormImageUpload = <TFieldValues extends FieldValues>({ id, register
                    placeholder={placeholder()}/>
         {hasImage() && <FabButton onClick={onRemoveFile} icon={<Trash size={20} weight="fill" />} className="is-main" />}
       </div>
+      {mainOption &&
+        <div>
+          <input type="radio" checked={!!file?.is_main} onChange={setMainImage} />
+          <label>{t('app.shared.form_image_upload.main_image')}</label>
+        </div>
+      }
     </div>
   );
 };

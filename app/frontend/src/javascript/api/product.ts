@@ -32,6 +32,7 @@ export default class ProductAPI {
     product.product_images_attributes?.forEach((image, i) => {
       if (image?.attachment_files && image?.attachment_files[0]) {
         data.set(`product[product_images_attributes][${i}][attachment]`, image.attachment_files[0]);
+        data.set(`product[product_images_attributes][${i}][is_main]`, (!!image.is_main).toString());
       }
     });
     const res: AxiosResponse<Product> = await apiClient.post('/api/products', data, {
@@ -73,6 +74,7 @@ export default class ProductAPI {
       if (image?._destroy) {
         data.set(`product[product_images_attributes][${i}][_destroy]`, image._destroy.toString());
       }
+      data.set(`product[product_images_attributes][${i}][is_main]`, (!!image.is_main).toString());
     });
     const res: AxiosResponse<Product> = await apiClient.patch(`/api/products/${product.id}`, data, {
       headers: {
