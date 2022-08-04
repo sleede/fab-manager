@@ -56,6 +56,12 @@
   font-size: 1.4rem;
   line-height: normal;
 }
+@mixin text-xs($weight: normal) {
+  font-family: var(--font-text);
+  font-weight: $weight;
+  font-size: 1.1rem;
+  line-height: 1.18;
+}
 
 // Text Editor
 @mixin editor {

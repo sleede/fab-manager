@@ -1933,6 +1933,13 @@ en:
           create_a_product: "Create a product"
           successfully_deleted: "The product has been successfully deleted"
           unable_to_delete: "Unable to delete the product: "
+        products_list:
+          visible: "visible"
+          hidden: "hidden"
+          stock:
+            internal: "Private stock"
+            external: "Public stock"
+          unit: "unit"
         new_product:
           add_a_new_product: "Add a new product"
           successfully_created: "The new product has been created."

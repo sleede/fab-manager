@@ -7,6 +7,7 @@ import { FabButton } from '../base/fab-button';
 import { ProductsList } from './products-list';
 import { Product } from '../../models/product';
 import ProductAPI from '../../api/product';
+import { X } from 'phosphor-react';
 
 declare const Application: IApplication;
 
@@ -91,11 +92,11 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
           <div className='features'>
             <div className='features-item'>
               <p>feature name</p>
-              <button><i className="fa fa-times" /></button>
+              <button><X size={16} /></button>
             </div>
             <div className='features-item'>
               <p>long feature name</p>
-              <button><i className="fa fa-times" /></button>
+              <button><X size={16} /></button>
             </div>
           </div>
           <ProductsList
