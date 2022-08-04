@@ -21,7 +21,7 @@ interface FormImageUploadProps<TFieldValues> extends FormComponent<TFieldValues>
   setValue: UseFormSetValue<TFieldValues>,
   defaultImage?: ImageType,
   accept?: string,
-  size?: 'small' | 'large'
+  size?: 'small' | 'medium' | 'large'
   mainOption?: boolean,
   onFileChange?: (value: ImageType) => void,
   onFileRemove?: () => void,

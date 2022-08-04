@@ -7,13 +7,18 @@
     display: inline-block;
 
     &--small img {
-      width: 50px;
-      height: 50px;
+      width: 80px;
+      height: 80px;
+    }
+
+    &--medium img {
+      width: 200px;
+      height: 200px;
     }
 
     &--large img {
-      width: 180px;
-      height: 180px;
+      width: 400px;
+      height: 400px;
     }
   }
 
@@ -39,6 +44,10 @@
   }
 
   &--large {
+    margin: 80px 40px;
+  }
+
+  &--medium {
     margin: 80px 40px;
   }
 
