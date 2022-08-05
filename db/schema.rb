@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_03_091913) do
+ActiveRecord::Schema.define(version: 2022_08_05_083431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -597,6 +597,18 @@ ActiveRecord::Schema.define(version: 2022_08_03_091913) do
     t.index ["parent_id"], name: "index_product_categories_on_parent_id"
   end
 
+  create_table "product_stock_movements", force: :cascade do |t|
+    t.bigint "product_id"
+    t.integer "quantity"
+    t.string "reason"
+    t.string "stock_type"
+    t.integer "remaining_stock"
+    t.datetime "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_product_stock_movements_on_product_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.string "slug"
@@ -1135,6 +1147,7 @@ ActiveRecord::Schema.define(version: 2022_08_03_091913) do
   add_foreign_key "prepaid_packs", "groups"
   add_foreign_key "prices", "groups"
   add_foreign_key "prices", "plans"
+  add_foreign_key "product_stock_movements", "products"
   add_foreign_key "products", "product_categories"
   add_foreign_key "project_steps", "projects"
   add_foreign_key "project_users", "projects"
