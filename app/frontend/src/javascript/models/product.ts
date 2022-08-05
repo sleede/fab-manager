@@ -1,3 +1,5 @@
+import { TDateISO } from '../typings/date-iso';
+
 export enum StockType {
   internal = 'internal',
   external = 'external'
@@ -38,5 +40,14 @@ export interface Product {
     attachment_url?: string,
     _destroy?: boolean,
     is_main?: boolean
-  }>
+  }>,
+  product_stock_movements_attributes: Array<{
+    id?: number,
+    quantity?: number,
+    reason?: string,
+    stock_type?: string,
+    remaining_stock?: number,
+    date?: TDateISO,
+    _destroy?: boolean
+  }>,
 }

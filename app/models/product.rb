@@ -12,7 +12,10 @@ class Product < ApplicationRecord
   has_many :product_images, as: :viewable, dependent: :destroy
   accepts_nested_attributes_for :product_images, allow_destroy: true, reject_if: :all_blank
 
-  validates_numericality_of :amount, greater_than: 0, allow_nil: true
+  has_many :product_stock_movements, dependent: :destroy
+  accepts_nested_attributes_for :product_stock_movements, allow_destroy: true, reject_if: :all_blank
+
+  validates :amount, numericality: { greater_than: 0, allow_nil: true }
 
   scope :active, -> { where(is_active: true) }
 end
