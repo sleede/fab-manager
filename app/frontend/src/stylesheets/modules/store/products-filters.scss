@@ -1,0 +1,86 @@
+.products-filters {
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--gray-soft-dark);
+
+  .accordion {
+    &-item:not(:last-of-type) {
+      margin-bottom: 1.6rem;
+      border-bottom: 1px solid var(--gray-soft-darkest);
+    }
+    &-item {
+      position: relative;
+      padding-bottom: 1.6rem;
+      
+      & > input[type=checkbox] {
+        position: absolute;
+        width: 100%;
+        z-index: 1;
+        opacity: 0;
+        cursor: pointer;
+      }
+      & > input[type=checkbox]:checked ~ .content {
+        max-height: 0;
+      }
+      & > input[type=checkbox]:checked ~ header svg {
+        transform: rotateZ(180deg);
+      }
+      header {
+        width: 100%;
+        padding: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: none;
+        border: none;
+        @include text-base(600);
+        svg { transition: transform 250ms ease-in-out; }
+      }
+      .content {
+        max-height: 24rem;
+        padding-top: 1.6rem;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        transition: max-height 500ms ease-in-out;
+        overflow: hidden;
+
+        .list {
+          overflow: hidden auto;
+          label {
+            display: flex;
+            align-items: center;
+            input[type=checkbox] { margin: 0 0.8rem 0 0; }
+            p { margin: 0; }
+            &.offset { margin-left: 1.6rem; }
+          }
+        }
+        button {
+          margin-top: 0.8rem;
+          justify-content: center;
+        }
+      }
+    }
+  }
+}
+
+// Custom scrollbar
+.scrollbar {
+  &::-webkit-scrollbar-track
+  {
+    border-radius: 6px;
+    background-color: #d9d9d9;
+  }
+  
+  &::-webkit-scrollbar
+  {
+    width: 12px;
+    background-color: #ffffff;
+  }
+  
+  &::-webkit-scrollbar-thumb
+  {
+    border-radius: 6px;
+    background-color: #2d2d2d;
+    border: 2px solid #d9d9d9
+  }
+}

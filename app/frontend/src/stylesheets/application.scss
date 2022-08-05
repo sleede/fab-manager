@@ -91,6 +91,9 @@
 @import "modules/store/_utilities";
 @import "modules/store/manage-product-category";
 @import "modules/store/product-categories";
+@import "modules/store/product-form";
+@import "modules/store/products-filters";
+@import "modules/store/products-list";
 @import "modules/store/products";
 @import "modules/subscriptions/free-extend-modal";
 @import "modules/subscriptions/renew-modal";
@@ -104,7 +107,6 @@
 @import "modules/user/gender-input";
 @import "modules/user/user-profile-form";
 @import "modules/user/user-validation";
-@import "modules/store/product-form";
 
 @import "modules/abuses";
 @import "modules/cookies";

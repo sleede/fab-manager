@@ -54,7 +54,7 @@ const ProductCategories: React.FC<ProductCategoriesProps> = ({ onSuccess, onErro
    */
   const refreshCategories = () => {
     ProductCategoryAPI.index().then(data => {
-      // Translate ProductCategory.position to array index
+      // Map product categories by position
       const sortedCategories = data
         .filter(c => !c.parent_id)
         .sort((a, b) => a.position - b.position);

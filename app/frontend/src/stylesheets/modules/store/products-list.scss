@@ -1,0 +1,181 @@
+.products-list {
+  .status {
+    padding: 1.6rem 2.4rem;
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--gray-soft);
+    border-radius: var(--border-radius);
+    p { margin: 0; }
+
+    .count {
+      p {
+        display: flex;
+        align-items: center;
+        @include text-sm;
+        span {
+          margin-left: 1.6rem;
+          @include text-lg(600);
+        }
+      }
+    }
+
+    .display {
+      display: flex;
+      align-items: center;
+      & > *:not(:first-child) {
+        margin-left: 2rem;
+        padding-left: 2rem;
+        border-left: 1px solid var(--gray-hard-darkest);
+      }
+
+      .sort {
+        display: flex;
+        align-items: center;
+      }
+
+      .visibility {
+        display: flex;
+        align-items: center;
+        label {
+          margin: 0;
+          display: flex;
+          align-items: center;
+          font-weight: 400;
+          cursor: pointer;
+          span {
+            margin-right: 1rem;
+          }
+        }
+      }
+    }
+  }
+
+  .features {
+    margin: 2.4rem 0 1.6rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.6rem 2.4rem;
+    &-item {
+      padding-left: 1.6rem;
+      display: flex;
+      align-items: center;
+      background-color: var(--information-light);
+      border-radius: 100px;
+      color: var(--information-dark);
+      overflow: hidden;
+      p { margin: 0; }
+      button {
+        width: 3.2rem;
+        height: 3.2rem;
+        margin-left: 0.8rem;
+        display: flex;
+        align-items: center;
+        background: none;
+        border: none;
+      }
+    }
+  }
+
+  &-item {
+    --status-color: var(--gray-hard-darkest);
+    &.low { --status-color: var(--alert-light); }
+    &.out-of-stock { --status-color: var(--alert); }
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.6rem 0.8rem;
+    border: 1px solid var(--gray-soft-dark);
+    border-radius: var(--border-radius);
+    background-color: var(--gray-soft-lightest);
+    &.out-of-stock { border-color: var(--status-color); }
+    &:not(:first-child) {
+      margin-top: 1.6rem;
+    }
+
+    .itemInfo {
+      min-width: 20ch;
+      flex: 1;
+      display: flex;
+      align-items: center;
+
+      &-thumbnail {
+        width: 4.8rem;
+        height: 4.8rem;
+        margin-right: 1.6rem;
+        object-fit: cover;
+        border-radius: var(--border-radius);
+        background-color: var(--gray-soft);
+      }
+      &-name {
+        margin: 0;
+        @include text-base;
+        font-weight: 600;
+        color: var(--gray-hard-darkest);
+      }
+    }
+    .details {
+      display: grid;
+      grid-template-columns: 120px repeat(2, minmax(min-content, 120px)) 120px;
+      justify-items: center;
+      align-items: center;
+      gap: 1.6rem;
+      margin-left: auto;
+      margin-right: 4rem;
+      p {
+        margin: 0;
+        @include text-base(600);
+      }
+
+      .visibility {
+        justify-self: center;
+        padding: 0.4rem 0.8rem;
+        display: flex;
+        align-items: center;
+        background-color: var(--gray-soft-light);
+        border-radius: var(--border-radius);
+        &::before {
+          flex-shrink: 0;
+          margin-right: 1rem;
+          content: "";
+          width: 1rem;
+          height: 1rem;
+          background-color: var(--gray-hard);
+          border-radius: 50%;
+        }
+        &.is-active::before {
+          background-color: var(--success);
+        }
+      }
+      .stock {
+        display: flex;
+        flex-direction: column;
+        color: var(--status-color);
+        span { @include text-xs; }
+      }
+      .price {
+        justify-self: flex-end;
+      }
+    }
+
+    .actions {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      .manage {
+        overflow: hidden;
+        display: flex;
+        border-radius: var(--border-radius-sm);
+        button {
+          @include btn;
+          border-radius: 0;
+          color: var(--gray-soft-lightest);
+          &:hover { opacity: 0.75; }
+        }
+        .edit-btn {background: var(--gray-hard-darkest) }
+        .delete-btn {background: var(--main) }
+      }
+    }
+  }
+}

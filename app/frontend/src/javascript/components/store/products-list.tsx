@@ -16,7 +16,6 @@ interface ProductsListProps {
  * This component shows a list of all Products
  */
 export const ProductsList: React.FC<ProductsListProps> = ({ products, onEdit, onDelete }) => {
-  console.log('products: ', products);
   const { t } = useTranslation('admin');
 
   /**
@@ -83,10 +82,12 @@ export const ProductsList: React.FC<ProductsListProps> = ({ products, onEdit, on
               <span>{t('app.admin.store.products_list.stock.external')}</span>
               <p>{product.stock.external}</p>
             </div>
-            <div>
-              <p>{FormatLib.price(product.amount)}</p>
-              <span>/ {t('app.admin.store.products_list.unit')}</span>
-            </div>
+            {product.amount &&
+              <div className='price'>
+                <p>{FormatLib.price(product.amount)}</p>
+                <span>/ {t('app.admin.store.products_list.unit')}</span>
+              </div>
+            }
           </div>
           <div className='actions'>
             <div className='manage'>
