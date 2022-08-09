@@ -14,3 +14,11 @@ json.product_images_attributes product.product_images do |f|
   json.attachment_url f.attachment_url
   json.is_main f.is_main
 end
+json.product_stock_movements_attributes product.product_stock_movements do |s|
+  json.id s.id
+  json.quantity s.quantity
+  json.reason s.reason
+  json.stock_type s.stock_type
+  json.remaining_stock s.remaining_stock
+  json.date s.date
+end
