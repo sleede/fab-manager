@@ -47,10 +47,19 @@
         .list {
           overflow: hidden auto;
           label {
+            margin: 0 0.8rem 0 0;
+            padding: 0.6rem;
             display: flex;
             align-items: center;
+            &:hover {
+              background-color: var(--gray-soft-light);
+              cursor: pointer;
+            }
             input[type=checkbox] { margin: 0 0.8rem 0 0; }
-            p { margin: 0; }
+            p {
+              margin: 0;
+              @include text-base;
+            }
             &.offset { margin-left: 1.6rem; }
           }
         }

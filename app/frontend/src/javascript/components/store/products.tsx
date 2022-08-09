@@ -15,6 +15,7 @@ import ProductCategoryAPI from '../../api/product-category';
 import MachineAPI from '../../api/machine';
 import { CaretDown, X } from 'phosphor-react';
 import Switch from 'react-switch';
+import { Machine } from '../../models/machine';
 
 declare const Application: IApplication;
 
@@ -141,6 +142,19 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
   };
 
   /**
+   * Filter: by machines
+   */
+  const handleSelectMachine = (m: checklistOption, checked) => {
+    const list = [...filters.machines];
+    checked
+      ? list.push(m.value)
+      : list.splice(list.indexOf(m.value), 1);
+    setFilters(draft => {
+      return { ...draft, machines: list };
+    });
+  };
+
+  /**
    * Apply filters
    */
   const applyFilters = () => {
@@ -150,6 +164,11 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
     }
     if (filters.categories.length) {
       updatedList = updatedList.filter(p => filters.categories.includes(p.product_category_id));
+    }
+    if (filters.machines.length) {
+      updatedList = updatedList.filter(p => {
+        return p.machine_ids.find(m => filters.machines.includes(m));
+      });
     }
     setFilteredProductList(updatedList);
   };
@@ -182,26 +201,34 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
             <div className='accordion-item'>
               <input type="checkbox" defaultChecked />
               <header>{t('app.admin.store.products.filter_categories')}
-              <CaretDown size={16} weight="bold" /></header>
+                <CaretDown size={16} weight="bold" /></header>
               <div className='content'>
                 <div className="list scrollbar">
                   {productCategories.map(pc => (
                     <label key={pc.id} className={pc.parent_id ? 'offset' : ''}>
                       <input type="checkbox" checked={filters.categories.includes(pc.id)} onChange={(event) => handleSelectCategory(pc, event.target.checked)} />
-                      <p key={pc.id}>{pc.name}</p>
+                      <p>{pc.name}</p>
                     </label>
                   ))}
                 </div>
                 <FabButton onClick={applyFilters} className="is-info">{t('app.admin.store.products.filter_apply')}</FabButton>
               </div>
             </div>
+
             <div className='accordion-item'>
               <input type="checkbox" defaultChecked />
               <header>{t('app.admin.store.products.filter_machines')}
-              <CaretDown size={16} weight="bold" /></header>
+                <CaretDown size={16} weight="bold" /></header>
               <div className='content'>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minus saepe aperiam autem eum magni nihil odio totam enim similique error! Est veritatis illum adipisci aspernatur sit nulla voluptate. Exercitationem, totam!
-                <FabButton className="is-info">{t('app.admin.store.products.filter_apply')}</FabButton>
+                <div className="list scrollbar">
+                  {machines.map(m => (
+                    <label key={m.value}>
+                      <input type="checkbox" checked={filters.machines.includes(m.value)} onChange={(event) => handleSelectMachine(m, event.target.checked)} />
+                      <p>{m.label}</p>
+                    </label>
+                  ))}
+                </div>
+                <FabButton onClick={applyFilters} className="is-info">{t('app.admin.store.products.filter_apply')}</FabButton>
               </div>
             </div>
           </div>
