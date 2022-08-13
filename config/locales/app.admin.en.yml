@@ -1945,6 +1945,11 @@ en:
           result_count: "Result count:"
           display_options: "Display options:"
           visible_only: "Visible products only"
+          sort:
+            name_az: "A-Z"
+            name_za: "Z-A"
+            price_low: "Price: low to high"
+            price_high: "Price: high to low"
         products_list:
           visible: "visible"
           hidden: "hidden"

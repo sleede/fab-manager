@@ -15,7 +15,7 @@ import ProductCategoryAPI from '../../api/product-category';
 import MachineAPI from '../../api/machine';
 import { CaretDown, X } from 'phosphor-react';
 import Switch from 'react-switch';
-import { Machine } from '../../models/machine';
+import Select from 'react-select';
 
 declare const Application: IApplication;
 
@@ -23,6 +23,11 @@ interface ProductsProps {
   onSuccess: (message: string) => void,
   onError: (message: string) => void,
 }
+/**
+ * Option format, expected by react-select
+ * @see https://github.com/JedWatson/react-select
+ */
+ type selectOption = { value: number, label: string };
 
 /**
  * This component shows all Products and filter
@@ -32,11 +37,14 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
 
   const [products, setProducts] = useState<Array<Product>>([]);
   const [filteredProductsList, setFilteredProductList] = useImmer<Array<Product>>([]);
+  const [features, setFeatures] = useImmer<Filters>(initFilters);
   const [filterVisible, setFilterVisible] = useState<boolean>(false);
-  const [clearFilters, setClearFilters] = useState<boolean>(false);
   const [filters, setFilters] = useImmer<Filters>(initFilters);
+  const [sortOption, setSortOption] = useState<number>(0);
+  const [clearFilters, setClearFilters] = useState<boolean>(false);
   const [productCategories, setProductCategories] = useState<ProductCategory[]>([]);
   const [machines, setMachines] = useState<checklistOption[]>([]);
+  const [update, setUpdate] = useState(false);
 
   useEffect(() => {
     ProductAPI.index().then(data => {
@@ -68,7 +76,8 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
   useEffect(() => {
     applyFilters();
     setClearFilters(false);
-  }, [filterVisible, clearFilters]);
+    setUpdate(false);
+  }, [filterVisible, clearFilters, update === true]);
 
   /**
    * Goto edit product page
@@ -108,27 +117,27 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
   /**
    * Filter: by categories
    */
-  const handleSelectCategory = (c: ProductCategory, checked) => {
+  const handleSelectCategory = (c: ProductCategory, checked, instantUpdate?) => {
     let list = [...filters.categories];
     const children = productCategories
-      .filter(el => el.parent_id === c.id)
-      .map(el => el.id);
+      .filter(el => el.parent_id === c.id);
     const siblings = productCategories
       .filter(el => el.parent_id === c.parent_id && el.parent_id !== null);
 
     if (checked) {
-      list.push(c.id);
+      list.push(c);
       if (children.length) {
-        const unic = Array.from(new Set([...list, ...children]));
-        list = [...unic];
+        const unique = Array.from(new Set([...list, ...children]));
+        list = [...unique];
       }
-      if (siblings.length && siblings.every(el => list.includes(el.id))) {
-        list.push(siblings[0].parent_id);
+      if (siblings.length && siblings.every(el => list.includes(el))) {
+        list.push(productCategories.find(p => p.id === siblings[0].parent_id));
       }
     } else {
-      list.splice(list.indexOf(c.id), 1);
-      if (c.parent_id && list.includes(c.parent_id)) {
-        list.splice(list.indexOf(c.parent_id), 1);
+      list.splice(list.indexOf(c), 1);
+      const parent = productCategories.find(p => p.id === c.parent_id);
+      if (c.parent_id && list.includes(parent)) {
+        list.splice(list.indexOf(parent), 1);
       }
       if (children.length) {
         children.forEach(child => {
@@ -139,19 +148,33 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
     setFilters(draft => {
       return { ...draft, categories: list };
     });
+    if (instantUpdate) {
+      setUpdate(true);
+    }
   };
 
   /**
    * Filter: by machines
    */
-  const handleSelectMachine = (m: checklistOption, checked) => {
+  const handleSelectMachine = (m: checklistOption, checked, instantUpdate?) => {
     const list = [...filters.machines];
     checked
-      ? list.push(m.value)
-      : list.splice(list.indexOf(m.value), 1);
+      ? list.push(m)
+      : list.splice(list.indexOf(m), 1);
     setFilters(draft => {
       return { ...draft, machines: list };
     });
+    if (instantUpdate) {
+      setUpdate(true);
+    }
+  };
+
+  /**
+   * Display option: sorting
+   */
+  const handleSorting = (value: number) => {
+    setSortOption(value);
+    setUpdate(true);
   };
 
   /**
@@ -159,17 +182,32 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
    */
   const applyFilters = () => {
     let updatedList = [...products];
+    let tags = initFilters;
     if (filterVisible) {
       updatedList = updatedList.filter(p => p.is_active);
     }
+
     if (filters.categories.length) {
-      updatedList = updatedList.filter(p => filters.categories.includes(p.product_category_id));
+      updatedList = updatedList.filter(p => filters.categories
+        .map(fc => fc.id)
+        .includes(p.product_category_id));
     }
+    tags = { ...tags, categories: [...filters.categories] };
+
     if (filters.machines.length) {
       updatedList = updatedList.filter(p => {
-        return p.machine_ids.find(m => filters.machines.includes(m));
+        return p.machine_ids.find(pmId => filters.machines
+          .map(fmId => fmId.value)
+          .includes(pmId));
       });
     }
+    tags = { ...tags, machines: [...filters.machines] };
+
+    if (sortOption >= 0) {
+      updatedList = sortProductsList(updatedList, sortOption);
+    }
+
+    setFeatures(tags);
     setFilteredProductList(updatedList);
   };
 
@@ -179,6 +217,33 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
   const clearAllFilters = () => {
     setFilters(initFilters);
     setClearFilters(true);
+  };
+
+  /**
+   * Creates sorting options to the react-select format
+   */
+  const buildOptions = (): Array<selectOption> => {
+    return [
+      { value: 0, label: t('app.admin.store.products.sort.name_az') },
+      { value: 1, label: t('app.admin.store.products.sort.name_za') }
+      //  { value: 2, label: t('app.admin.store.products.sort.price_low') },
+      //  { value: 3, label: t('app.admin.store.products.sort.price_high') }
+    ];
+  };
+  /**
+   * Sorts products list
+   */
+  const sortProductsList = (list: Product[], option: number): Product[] => {
+    switch (option) {
+      case 0:
+        return list.sort((a, b) => a.name.localeCompare(b.name));
+      case 1:
+        return list.sort((a, b) => b.name.localeCompare(a.name));
+      case 2:
+        return list.sort((a, b) => a.amount - b.amount);
+      case 3:
+        return list.sort((a, b) => b.amount - a.amount);
+    }
   };
 
   return (
@@ -206,7 +271,7 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
                 <div className="list scrollbar">
                   {productCategories.map(pc => (
                     <label key={pc.id} className={pc.parent_id ? 'offset' : ''}>
-                      <input type="checkbox" checked={filters.categories.includes(pc.id)} onChange={(event) => handleSelectCategory(pc, event.target.checked)} />
+                      <input type="checkbox" checked={filters.categories.includes(pc)} onChange={(event) => handleSelectCategory(pc, event.target.checked)} />
                       <p>{pc.name}</p>
                     </label>
                   ))}
@@ -223,7 +288,7 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
                 <div className="list scrollbar">
                   {machines.map(m => (
                     <label key={m.value}>
-                      <input type="checkbox" checked={filters.machines.includes(m.value)} onChange={(event) => handleSelectMachine(m, event.target.checked)} />
+                      <input type="checkbox" checked={filters.machines.includes(m)} onChange={(event) => handleSelectMachine(m, event.target.checked)} />
                       <p>{m.label}</p>
                     </label>
                   ))}
@@ -241,10 +306,12 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
             <div className="display">
               <div className='sort'>
                 <p>{t('app.admin.store.products.display_options')}</p>
-                <select>
-                  <option value="A">A</option>
-                  <option value="B">B</option>
-                </select>
+                <Select
+                  options={buildOptions()}
+                  onChange={evt => handleSorting(evt.value)}
+                  value={buildOptions[sortOption]}
+                  styles={customStyles}
+                />
               </div>
               <div className='visibility'>
                 <label>
@@ -262,14 +329,18 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
             </div>
           </div>
           <div className='features'>
-            <div className='features-item'>
-              <p>feature name</p>
-              <button><X size={16} weight="light" /></button>
-            </div>
-            <div className='features-item'>
-              <p>long feature name</p>
-              <button><X size={16} weight="light" /></button>
-            </div>
+            {features.categories.map(c => (
+              <div key={c.id} className='features-item'>
+                <p>{c.name}</p>
+                <button onClick={() => handleSelectCategory(c, false, true)}><X size={16} weight="light" /></button>
+              </div>
+            ))}
+            {features.machines.map(m => (
+              <div key={m.value} className='features-item'>
+                <p>{m.label}</p>
+                <button onClick={() => handleSelectMachine(m, false, true)}><X size={16} weight="light" /></button>
+              </div>
+            ))}
           </div>
           <ProductsList
             products={filteredProductsList}
@@ -307,6 +378,7 @@ const buildChecklistOptions = (items: Array<{ id?: number, name: string }>): Arr
 };
 
 const initFilters: Filters = {
+  instant: false,
   categories: [],
   machines: [],
   keywords: [],
@@ -326,9 +398,23 @@ interface Stock {
 }
 
 interface Filters {
-  categories: number[],
-  machines: number[],
+  instant: boolean,
+  categories: ProductCategory[],
+  machines: checklistOption[],
   keywords: string[],
   internalStock: Stock,
   externalStock: Stock
 }
+
+// Styles the React-select component
+const customStyles = {
+  control: base => ({
+    ...base,
+    width: '20ch',
+    border: 'none',
+    backgroundColor: 'transparent'
+  }),
+  indicatorSeparator: () => ({
+    display: 'none'
+  })
+};

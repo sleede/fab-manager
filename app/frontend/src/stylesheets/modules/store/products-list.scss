@@ -1,6 +1,6 @@
 .products-list {
   .status {
-    padding: 1.6rem 2.4rem;
+    padding: 0.8rem 2.4rem;
     display: flex;
     justify-content: space-between;
     background-color: var(--gray-soft);
@@ -8,9 +8,9 @@
     p { margin: 0; }
 
     .count {
+      display: flex;
+      align-items: center;
       p {
-        display: flex;
-        align-items: center;
         @include text-sm;
         span {
           margin-left: 1.6rem;
@@ -31,6 +31,7 @@
       .sort {
         display: flex;
         align-items: center;
+        p { margin-right: 0.8rem; }
       }
 
       .visibility {
