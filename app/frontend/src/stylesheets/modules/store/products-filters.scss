@@ -10,6 +10,10 @@
     &-item {
       position: relative;
       padding-bottom: 1.6rem;
+      &.collapsed {
+        .content { max-height: 0; }
+        header svg { transform: rotateZ(180deg); }
+      }
       
       & > input[type=checkbox] {
         position: absolute;
@@ -33,6 +37,7 @@
         background: none;
         border: none;
         @include text-base(600);
+        cursor: pointer;
         svg { transition: transform 250ms ease-in-out; }
       }
       .content {

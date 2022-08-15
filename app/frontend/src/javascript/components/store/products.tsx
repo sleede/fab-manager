@@ -13,7 +13,8 @@ import { ProductsList } from './products-list';
 import ProductAPI from '../../api/product';
 import ProductCategoryAPI from '../../api/product-category';
 import MachineAPI from '../../api/machine';
-import { CaretDown, X } from 'phosphor-react';
+import { AccordionItem } from './accordion-item';
+import { X } from 'phosphor-react';
 import Switch from 'react-switch';
 import Select from 'react-select';
 
@@ -45,15 +46,14 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
   const [productCategories, setProductCategories] = useState<ProductCategory[]>([]);
   const [machines, setMachines] = useState<checklistOption[]>([]);
   const [update, setUpdate] = useState(false);
+  const [accordion, setAccordion] = useState({});
 
   useEffect(() => {
     ProductAPI.index().then(data => {
       setProducts(data);
       setFilteredProductList(data);
     });
-  }, []);
 
-  useEffect(() => {
     ProductCategoryAPI.index().then(data => {
       // Map product categories by position
       const sortedCategories = data
@@ -68,6 +68,7 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
       });
       setProductCategories(sortedCategories);
     }).catch(onError);
+
     MachineAPI.index({ disabled: false }).then(data => {
       setMachines(buildChecklistOptions(data));
     }).catch(onError);
@@ -230,6 +231,7 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
       //  { value: 3, label: t('app.admin.store.products.sort.price_high') }
     ];
   };
+
   /**
    * Sorts products list
    */
@@ -244,6 +246,13 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
       case 3:
         return list.sort((a, b) => b.amount - a.amount);
     }
+  };
+
+  /**
+   * Open/close accordion items
+   */
+  const handleAccordion = (id, state) => {
+    setAccordion({ ...accordion, [id]: state });
   };
 
   return (
@@ -263,10 +272,11 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
             </div>
           </header>
           <div className='accordion'>
-            <div className='accordion-item'>
-              <input type="checkbox" defaultChecked />
-              <header>{t('app.admin.store.products.filter_categories')}
-                <CaretDown size={16} weight="bold" /></header>
+            <AccordionItem id={0}
+              isOpen={accordion[0]}
+              onChange={handleAccordion}
+              label={t('app.admin.store.products.filter_categories')}
+            >
               <div className='content'>
                 <div className="list scrollbar">
                   {productCategories.map(pc => (
@@ -278,12 +288,13 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
                 </div>
                 <FabButton onClick={applyFilters} className="is-info">{t('app.admin.store.products.filter_apply')}</FabButton>
               </div>
-            </div>
+            </AccordionItem>
 
-            <div className='accordion-item'>
-              <input type="checkbox" defaultChecked />
-              <header>{t('app.admin.store.products.filter_machines')}
-                <CaretDown size={16} weight="bold" /></header>
+            <AccordionItem id={1}
+              isOpen={accordion[1]}
+              onChange={handleAccordion}
+              label={t('app.admin.store.products.filter_machines')}
+            >
               <div className='content'>
                 <div className="list scrollbar">
                   {machines.map(m => (
@@ -295,7 +306,7 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
                 </div>
                 <FabButton onClick={applyFilters} className="is-info">{t('app.admin.store.products.filter_apply')}</FabButton>
               </div>
-            </div>
+            </AccordionItem>
           </div>
         </div>
         <div className='products-list span-7'>
