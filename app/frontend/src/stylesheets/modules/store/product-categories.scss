@@ -64,6 +64,7 @@
       border: 1px solid var(--gray-soft-dark);
       border-radius: var(--border-radius);
       background-color: var(--gray-soft-lightest);
+      &.is-child { margin-left: 4.8rem; }
       .itemInfo {
         display: flex;
         align-items: center;
