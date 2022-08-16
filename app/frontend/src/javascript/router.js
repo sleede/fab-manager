@@ -600,6 +600,28 @@ angular.module('application.router', ['ui.router'])
         }
       })
 
+      // store
+      .state('app.public.store', {
+        url: '/store',
+        views: {
+          'main@': {
+            templateUrl: '/store/index.html',
+            controller: 'StoreController'
+          }
+        }
+      })
+
+      // show product
+      .state('app.public.product_show', {
+        url: '/store/p/:slug',
+        views: {
+          'main@': {
+            templateUrl: '/products/show.html',
+            controller: 'ShowProductController'
+          }
+        }
+      })
+
       // --- namespace /admin/... ---
       // calendar
       .state('app.admin.calendar', {

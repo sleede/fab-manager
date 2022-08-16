@@ -43,6 +43,7 @@ fr:
         projects_gallery: "Galerie de projets"
         subscriptions: "Abonnements"
         public_calendar: "Agenda"
+        fablab_store: "Boutique Fablab"
         #left menu (admin)
         trainings_monitoring: "Formations"
         manage_the_calendar: "Agenda"
@@ -373,6 +374,16 @@ fr:
         characteristics: "Caractéristiques"
         files_to_download: "Fichiers à télécharger"
         projects_using_the_space: "Projets utilisant l'espace"
+      #public store
+      store:
+        fablab_store: "Boutique FabLab"
+        unexpected_error_occurred: "Une erreur inattendue s'est produite. Veuillez réessayer ultérieurement."
+      store_product_item:
+        available: "Disponible"
+        limited_stock: "Stock limité"
+        add: "Ajouter"
+      store_product:
+        unexpected_error_occurred: "An unexpected error occurred. Please try again later."
       tour:
         conclusion:
           title: "Merci de votre attention"

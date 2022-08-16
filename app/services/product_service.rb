@@ -2,8 +2,13 @@
 
 # Provides methods for Product
 class ProductService
-  def self.list
-    Product.all
+  def self.list(filters)
+    products = Product.includes(:product_images)
+    if filters[:is_active].present?
+      state = filters[:disabled] == 'false' ? [nil, false] : true
+      products = products.where(is_active: state)
+    end
+    products
   end
 
   # amount params multiplied by hundred

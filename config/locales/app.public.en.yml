@@ -43,6 +43,7 @@ en:
         projects_gallery: "Projects gallery"
         subscriptions: "Subscriptions"
         public_calendar: "Calendar"
+        fablab_store: "Fablab Store"
         #left menu (admin)
         trainings_monitoring: "Trainings"
         manage_the_calendar: "Calendar"
@@ -373,6 +374,16 @@ en:
         characteristics: "Characteristics"
         files_to_download: "Files to download"
         projects_using_the_space: "Projects using the space"
+      #public store
+      store:
+        fablab_store: "FabLab Store"
+        unexpected_error_occurred: "An unexpected error occurred. Please try again later."
+      store_product_item:
+        available: "Available"
+        limited_stock: "Limited stock"
+        add: "Add"
+      store_product:
+        unexpected_error_occurred: "An unexpected error occurred. Please try again later."
       tour:
         conclusion:
           title: "Thank you for your attention"

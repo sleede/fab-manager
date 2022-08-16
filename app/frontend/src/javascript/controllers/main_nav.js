@@ -53,6 +53,12 @@ Application.Controllers.controller('MainNavController', ['$scope', 'settingsProm
       linkIcon: 'tags',
       class: 'reserve-event-link'
     },
+    {
+      state: 'app.public.store',
+      linkText: 'app.public.common.fablab_store',
+      linkIcon: 'cart-plus',
+      class: 'store-link'
+    },
     { class: 'menu-spacer' },
     {
       state: 'app.public.projects_list',

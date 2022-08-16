@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useForm, useWatch, Path } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import slugify from 'slugify';
 import _ from 'lodash';
@@ -11,7 +11,7 @@ import { FormSelect } from '../form/form-select';
 import { FormChecklist } from '../form/form-checklist';
 import { FormRichText } from '../form/form-rich-text';
 import { FormFileUpload } from '../form/form-file-upload';
-import { FormImageUpload, ImageType } from '../form/form-image-upload';
+import { FormImageUpload } from '../form/form-image-upload';
 import { FabButton } from '../base/fab-button';
 import { FabAlert } from '../base/fab-alert';
 import ProductCategoryAPI from '../../api/product-category';

@@ -4,13 +4,15 @@
 # Products are used in store
 class API::ProductsController < API::ApiController
   before_action :authenticate_user!, except: %i[index show]
-  before_action :set_product, only: %i[show update destroy]
+  before_action :set_product, only: %i[update destroy]
 
   def index
-    @products = ProductService.list
+    @products = ProductService.list(params)
   end
 
-  def show; end
+  def show
+    @product = Product.includes(:product_images, :product_files).friendly.find(params[:id])
+  end
 
   def create
     authorize Product
