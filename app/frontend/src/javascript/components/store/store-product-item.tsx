@@ -3,16 +3,19 @@ import { useTranslation } from 'react-i18next';
 import _ from 'lodash';
 import { FabButton } from '../base/fab-button';
 import { Product } from '../../models/product';
+import { Order } from '../../models/order';
 import FormatLib from '../../lib/format';
+import CartAPI from '../../api/cart';
 
 interface StoreProductItemProps {
   product: Product,
+  cart: Order,
 }
 
 /**
  * This component shows a product item in store
  */
-export const StoreProductItem: React.FC<StoreProductItemProps> = ({ product }) => {
+export const StoreProductItem: React.FC<StoreProductItemProps> = ({ product, cart }) => {
   const { t } = useTranslation('public');
 
   /**
@@ -37,6 +40,15 @@ export const StoreProductItem: React.FC<StoreProductItemProps> = ({ product }) =
   };
 
   /**
+   * Add the product to cart
+   */
+  const addProductToCart = (e: React.BaseSyntheticEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    CartAPI.addItem(cart, product.id, 1);
+  };
+
+  /**
    * Goto show product page
    */
   const showProduct = (product: Product): void => {
@@ -54,7 +66,7 @@ export const StoreProductItem: React.FC<StoreProductItemProps> = ({ product }) =
           <div>{FormatLib.price(product.amount)}</div>
           {productStockStatus(product)}
         </span>
-        <FabButton className='edit-btn'>
+        <FabButton className="edit-btn" onClick={addProductToCart}>
           <i className="fas fa-cart-arrow-down" /> {t('app.public.store_product_item.add')}
         </FabButton>
       </div>

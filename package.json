@@ -121,6 +121,7 @@
     "jasny-bootstrap": "3.1",
     "jquery": ">=3.5.0",
     "jquery-ujs": "^1.2.2",
+    "js-cookie": "^3.0.1",
     "medium-editor": "^5.23.3",
     "mini-css-extract-plugin": "^2.6.0",
     "moment": "2.29",

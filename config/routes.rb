@@ -155,6 +155,11 @@ Rails.application.routes.draw do
     end
 
     resources :products
+    resources :cart, only: %i[create] do
+      put 'add_item', on: :collection
+      put 'remove_item', on: :collection
+      put 'set_quantity', on: :collection
+    end
 
     # for admin
     resources :trainings do
@@ -268,7 +273,7 @@ Rails.application.routes.draw do
   post '/stats/global/export', to: 'api/statistics#export_global'
   post '_search/scroll', to: 'api/statistics#scroll'
 
-  match '/project_collaborator/:valid_token', to: 'api/projects#collaborator_valid', via: :get
+  get '/project_collaborator/:valid_token', to: 'api/projects#collaborator_valid'
 
   authenticate :user, ->(u) { u.admin? } do
     mount Sidekiq::Web => '/admin/sidekiq'

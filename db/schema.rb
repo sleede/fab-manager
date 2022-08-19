@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_05_083431) do
+ActiveRecord::Schema.define(version: 2022_08_18_160821) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -443,6 +443,31 @@ ActiveRecord::Schema.define(version: 2022_08_05_083431) do
     t.string "profile_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.bigint "order_id"
+    t.string "orderable_type"
+    t.bigint "orderable_id"
+    t.integer "amount"
+    t.integer "quantity"
+    t.boolean "is_offered"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["orderable_type", "orderable_id"], name: "index_order_items_on_orderable_type_and_orderable_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.bigint "statistic_profile_id"
+    t.integer "operator_id"
+    t.string "token"
+    t.string "reference"
+    t.string "state"
+    t.integer "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["statistic_profile_id"], name: "index_orders_on_statistic_profile_id"
   end
 
   create_table "organizations", id: :serial, force: :cascade do |t|
@@ -1133,6 +1158,8 @@ ActiveRecord::Schema.define(version: 2022_08_05_083431) do
   add_foreign_key "invoices", "statistic_profiles"
   add_foreign_key "invoices", "wallet_transactions"
   add_foreign_key "invoicing_profiles", "users"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "orders", "statistic_profiles"
   add_foreign_key "organizations", "invoicing_profiles"
   add_foreign_key "payment_gateway_objects", "payment_gateway_objects"
   add_foreign_key "payment_schedule_items", "invoices"

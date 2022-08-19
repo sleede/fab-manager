@@ -7,6 +7,7 @@ import { FabButton } from '../base/fab-button';
 import { Product } from '../../models/product';
 import ProductAPI from '../../api/product';
 import { StoreProductItem } from './store-product-item';
+import useCart from '../../hooks/use-cart';
 
 declare const Application: IApplication;
 
@@ -19,6 +20,8 @@ interface StoreProps {
  */
 const Store: React.FC<StoreProps> = ({ onError }) => {
   const { t } = useTranslation('public');
+
+  const { cart } = useCart();
 
   const [products, setProducts] = useState<Array<Product>>([]);
 
@@ -68,7 +71,7 @@ const Store: React.FC<StoreProps> = ({ onError }) => {
 
           <div className="products">
             {products.map((product) => (
-              <StoreProductItem key={product.id} product={product} />
+              <StoreProductItem key={product.id} product={product} cart={cart}/>
             ))}
           </div>
         </div>

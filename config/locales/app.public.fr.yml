@@ -384,6 +384,8 @@ fr:
         add: "Ajouter"
       store_product:
         unexpected_error_occurred: "An unexpected error occurred. Please try again later."
+      cart:
+        my_cart: "Mon Panier"
       tour:
         conclusion:
           title: "Merci de votre attention"

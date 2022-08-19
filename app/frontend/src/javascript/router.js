@@ -622,6 +622,17 @@ angular.module('application.router', ['ui.router'])
         }
       })
 
+      // cart
+      .state('app.public.cart', {
+        url: '/cart',
+        views: {
+          'main@': {
+            templateUrl: '/cart/index.html',
+            controller: 'CartController'
+          }
+        }
+      })
+
       // --- namespace /admin/... ---
       // calendar
       .state('app.admin.calendar', {
