@@ -1,6 +1,6 @@
 
-Application.Controllers.controller('ApplicationController', ['$rootScope', '$scope', '$transitions', '$window', '$locale', '$timeout', 'Session', 'AuthService', 'Auth', '$uibModal', '$state', 'growl', 'Notification', '$interval', 'Setting', '_t', 'Version', 'Help',
-  function ($rootScope, $scope, $transitions, $window, $locale, $timeout, Session, AuthService, Auth, $uibModal, $state, growl, Notification, $interval, Setting, _t, Version, Help) {
+Application.Controllers.controller('ApplicationController', ['$rootScope', '$scope', '$transitions', '$window', '$locale', '$timeout', 'Session', 'AuthService', 'Auth', '$uibModal', '$state', 'growl', 'Notification', '$interval', 'Setting', '_t', 'Version', 'Help', '$cookies',
+  function ($rootScope, $scope, $transitions, $window, $locale, $timeout, Session, AuthService, Auth, $uibModal, $state, growl, Notification, $interval, Setting, _t, Version, Help, $cookies) {
   /* PRIVATE STATIC CONSTANTS */
 
     // User's notifications will get refreshed every 30s
@@ -58,6 +58,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
           total: 0,
           unread: 0
         };
+        $cookies.remove('fablab_cart_token');
         return $state.go('app.public.home');
       }, function (error) {
         console.error(`An error occurred logging out: ${error}`);

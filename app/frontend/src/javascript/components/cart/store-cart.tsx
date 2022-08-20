@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
 import { Loader } from '../base/loader';
@@ -7,20 +7,28 @@ import { FabButton } from '../base/fab-button';
 import useCart from '../../hooks/use-cart';
 import FormatLib from '../../lib/format';
 import CartAPI from '../../api/cart';
+import { User } from '../../models/user';
 
 declare const Application: IApplication;
 
 interface StoreCartProps {
   onError: (message: string) => void,
+  currentUser: User,
 }
 
 /**
  * This component shows user's cart
  */
-const StoreCart: React.FC<StoreCartProps> = ({ onError }) => {
+const StoreCart: React.FC<StoreCartProps> = ({ onError, currentUser }) => {
   const { t } = useTranslation('public');
 
-  const { cart, setCart } = useCart();
+  const { cart, setCart, reloadCart } = useCart();
+
+  useEffect(() => {
+    if (currentUser) {
+      reloadCart();
+    }
+  }, [currentUser]);
 
   /**
    * Remove the product from cart
@@ -79,12 +87,12 @@ const StoreCart: React.FC<StoreCartProps> = ({ onError }) => {
   );
 };
 
-const StoreCartWrapper: React.FC<StoreCartProps> = ({ onError }) => {
+const StoreCartWrapper: React.FC<StoreCartProps> = (props) => {
   return (
     <Loader>
-      <StoreCart onError={onError} />
+      <StoreCart {...props} />
     </Loader>
   );
 };
 
-Application.Components.component('storeCart', react2angular(StoreCartWrapper, ['onError']));
+Application.Components.component('storeCart', react2angular(StoreCartWrapper, ['onError', 'currentUser']));

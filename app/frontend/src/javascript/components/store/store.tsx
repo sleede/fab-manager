@@ -9,20 +9,22 @@ import ProductAPI from '../../api/product';
 import { StoreProductItem } from './store-product-item';
 import useCart from '../../hooks/use-cart';
 import { emitCustomEvent } from 'react-custom-events';
+import { User } from '../../models/user';
 
 declare const Application: IApplication;
 
 interface StoreProps {
   onError: (message: string) => void,
+  currentUser: User,
 }
 
 /**
  * This component shows public store
  */
-const Store: React.FC<StoreProps> = ({ onError }) => {
+const Store: React.FC<StoreProps> = ({ onError, currentUser }) => {
   const { t } = useTranslation('public');
 
-  const { cart, setCart } = useCart();
+  const { cart, setCart, reloadCart } = useCart();
 
   const [products, setProducts] = useState<Array<Product>>([]);
 
@@ -37,6 +39,12 @@ const Store: React.FC<StoreProps> = ({ onError }) => {
   useEffect(() => {
     emitCustomEvent('CartUpdate', cart);
   }, [cart]);
+
+  useEffect(() => {
+    if (currentUser) {
+      reloadCart();
+    }
+  }, [currentUser]);
 
   return (
     <div className="store">
@@ -85,12 +93,12 @@ const Store: React.FC<StoreProps> = ({ onError }) => {
   );
 };
 
-const StoreWrapper: React.FC<StoreProps> = ({ onError }) => {
+const StoreWrapper: React.FC<StoreProps> = (props) => {
   return (
     <Loader>
-      <Store onError={onError} />
+      <Store {...props} />
     </Loader>
   );
 };
 
-Application.Components.component('store', react2angular(StoreWrapper, ['onError']));
+Application.Components.component('store', react2angular(StoreWrapper, ['onError', 'currentUser']));

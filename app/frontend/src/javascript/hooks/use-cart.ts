@@ -25,5 +25,13 @@ export default function useCart () {
     }
   }, []);
 
-  return { loading, cart, error, setCart };
+  const reloadCart = async () => {
+    setLoading(true);
+    const currentCartToken = getCartToken();
+    const data = await CartAPI.create(currentCartToken);
+    setCart(data);
+    setLoading(false);
+  };
+
+  return { loading, cart, error, setCart, reloadCart };
 }

@@ -8,7 +8,9 @@ class CartPolicy < ApplicationPolicy
 
   %w[add_item remove_item set_quantity].each do |action|
     define_method "#{action}?" do
-      user.privileged? || (record.statistic_profile.user_id == user.id)
+      return user.privileged? || (record.statistic_profile_id == user.statistic_profile.id) if user
+
+      record.statistic_profile_id.nil?
     end
   end
 end
