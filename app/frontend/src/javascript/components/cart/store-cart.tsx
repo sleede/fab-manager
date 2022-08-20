@@ -20,7 +20,7 @@ interface StoreCartProps {
 const StoreCart: React.FC<StoreCartProps> = ({ onError }) => {
   const { t } = useTranslation('public');
 
-  const { loading, cart, setCart } = useCart();
+  const { cart, setCart } = useCart();
 
   /**
    * Remove the product from cart
@@ -35,21 +35,46 @@ const StoreCart: React.FC<StoreCartProps> = ({ onError }) => {
     };
   };
 
+  /**
+   * Change product quantity
+   */
+  const changeProductQuantity = (item) => {
+    return (e: React.BaseSyntheticEvent) => {
+      CartAPI.setQuantity(cart, item.orderable_id, e.target.value).then(data => {
+        setCart(data);
+      });
+    };
+  };
+
+  /**
+   * Checkout cart
+   */
+  const checkout = () => {
+    console.log('checkout .....');
+  };
+
   return (
     <div className="store-cart">
-      {loading && <p>loading</p>}
       {cart && cart.order_items_attributes.map(item => (
         <div key={item.id}>
           <div>{item.orderable_name}</div>
           <div>{FormatLib.price(item.amount)}</div>
           <div>{item.quantity}</div>
+          <select value={item.quantity} onChange={changeProductQuantity(item)}>
+            {Array.from({ length: 100 }, (_, i) => i + 1).map(v => (
+              <option key={v} value={v}>{v}</option>
+            ))}
+          </select>
           <div>{FormatLib.price(item.quantity * item.amount)}</div>
           <FabButton className="delete-btn" onClick={removeProductFromCart(item)}>
-            <i className="fa fa-trash" /> {t('app.public.store_cart.remove_item')}
+            <i className="fa fa-trash" />
           </FabButton>
         </div>
       ))}
-      {cart && <p>{cart.amount}</p>}
+      {cart && <p>Totale: {FormatLib.price(cart.amount)}</p>}
+      <FabButton className="checkout-btn" onClick={checkout}>
+        {t('app.public.store_cart.checkout')}
+      </FabButton>
     </div>
   );
 };

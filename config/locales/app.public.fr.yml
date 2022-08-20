@@ -381,11 +381,16 @@ fr:
       store_product_item:
         available: "Disponible"
         limited_stock: "Stock limité"
+        out_of_stock: "Épuisé"
         add: "Ajouter"
       store_product:
-        unexpected_error_occurred: "An unexpected error occurred. Please try again later."
+        unexpected_error_occurred: "Une erreur inattendue s'est produite. Veuillez réessayer ultérieurement."
       cart:
         my_cart: "Mon Panier"
+      cart_button:
+        my_cart: "Mon Panier"
+      store_cart:
+        checkout: "Valider mon panier"
       tour:
         conclusion:
           title: "Merci de votre attention"

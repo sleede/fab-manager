@@ -8,6 +8,7 @@ import { Product } from '../../models/product';
 import ProductAPI from '../../api/product';
 import { StoreProductItem } from './store-product-item';
 import useCart from '../../hooks/use-cart';
+import { emitCustomEvent } from 'react-custom-events';
 
 declare const Application: IApplication;
 
@@ -21,7 +22,7 @@ interface StoreProps {
 const Store: React.FC<StoreProps> = ({ onError }) => {
   const { t } = useTranslation('public');
 
-  const { cart } = useCart();
+  const { cart, setCart } = useCart();
 
   const [products, setProducts] = useState<Array<Product>>([]);
 
@@ -32,6 +33,10 @@ const Store: React.FC<StoreProps> = ({ onError }) => {
       onError(t('app.public.store.unexpected_error_occurred'));
     });
   }, []);
+
+  useEffect(() => {
+    emitCustomEvent('CartUpdate', cart);
+  }, [cart]);
 
   return (
     <div className="store">
@@ -71,7 +76,7 @@ const Store: React.FC<StoreProps> = ({ onError }) => {
 
           <div className="products">
             {products.map((product) => (
-              <StoreProductItem key={product.id} product={product} cart={cart}/>
+              <StoreProductItem key={product.id} product={product} cart={cart} onSuccessAddProductToCart={setCart} />
             ))}
           </div>
         </div>

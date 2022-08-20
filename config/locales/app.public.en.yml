@@ -381,11 +381,16 @@ en:
       store_product_item:
         available: "Available"
         limited_stock: "Limited stock"
+        out_of_stock: "Out of stock"
         add: "Add"
       store_product:
         unexpected_error_occurred: "An unexpected error occurred. Please try again later."
       cart:
         my_cart: "My Cart"
+      cart_button:
+        my_cart: "My Cart"
+      store_cart:
+        checkout: "Checkout"
       tour:
         conclusion:
           title: "Thank you for your attention"

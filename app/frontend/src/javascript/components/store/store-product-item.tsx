@@ -10,12 +10,13 @@ import CartAPI from '../../api/cart';
 interface StoreProductItemProps {
   product: Product,
   cart: Order,
+  onSuccessAddProductToCart: (cart: Order) => void
 }
 
 /**
  * This component shows a product item in store
  */
-export const StoreProductItem: React.FC<StoreProductItemProps> = ({ product, cart }) => {
+export const StoreProductItem: React.FC<StoreProductItemProps> = ({ product, cart, onSuccessAddProductToCart }) => {
   const { t } = useTranslation('public');
 
   /**
@@ -33,6 +34,9 @@ export const StoreProductItem: React.FC<StoreProductItemProps> = ({ product, car
    * Return product's stock status
    */
   const productStockStatus = (product: Product) => {
+    if (product.stock.external === 0) {
+      return <span>{t('app.public.store_product_item.out_of_stock')}</span>;
+    }
     if (product.low_stock_threshold && product.stock.external < product.low_stock_threshold) {
       return <span>{t('app.public.store_product_item.limited_stock')}</span>;
     }
@@ -45,7 +49,7 @@ export const StoreProductItem: React.FC<StoreProductItemProps> = ({ product, car
   const addProductToCart = (e: React.BaseSyntheticEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    CartAPI.addItem(cart, product.id, 1);
+    CartAPI.addItem(cart, product.id, 1).then(onSuccessAddProductToCart);
   };
 
   /**
@@ -66,9 +70,11 @@ export const StoreProductItem: React.FC<StoreProductItemProps> = ({ product, car
           <div>{FormatLib.price(product.amount)}</div>
           {productStockStatus(product)}
         </span>
-        <FabButton className="edit-btn" onClick={addProductToCart}>
-          <i className="fas fa-cart-arrow-down" /> {t('app.public.store_product_item.add')}
-        </FabButton>
+        {product.stock.external > 0 &&
+          <FabButton className="edit-btn" onClick={addProductToCart}>
+            <i className="fas fa-cart-arrow-down" /> {t('app.public.store_product_item.add')}
+          </FabButton>
+        }
       </div>
     </div>
   );
