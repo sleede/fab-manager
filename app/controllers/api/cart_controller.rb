@@ -9,8 +9,9 @@ class API::CartController < API::ApiController
     authorize :cart, :create?
     @order = Order.find_by(token: order_token)
     @order = Order.find_by(statistic_profile_id: current_user.statistic_profile.id, state: 'cart') if @order.nil? && current_user&.member?
-    if @order && @order.statistic_profile_id.nil? && current_user&.member?
-      @order.update(statistic_profile_id: current_user.statistic_profile.id)
+    if @order
+      @order.update(statistic_profile_id: current_user.statistic_profile.id) if @order.statistic_profile_id.nil? && current_user&.member?
+      @order.update(operator_id: current_user.id) if @order.operator_id.nil? && current_user&.privileged?
     end
     @order ||= Cart::CreateService.new.call(current_user)
     render 'api/orders/show'
