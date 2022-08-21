@@ -2,6 +2,8 @@
 
 # API Controller for manage user's cart
 class API::CartController < API::ApiController
+  include API::OrderConcern
+
   before_action :current_order, except: %i[create]
   before_action :ensure_order, except: %i[create]
 
@@ -36,18 +38,6 @@ class API::CartController < API::ApiController
   end
 
   private
-
-  def order_token
-    request.headers['X-Fablab-Order-Token'] || cart_params[:order_token]
-  end
-
-  def current_order
-    @current_order = Order.find_by(token: order_token)
-  end
-
-  def ensure_order
-    raise ActiveRecord::RecordNotFound if @current_order.nil?
-  end
 
   def orderable
     Product.find(cart_params[:orderable_id])
