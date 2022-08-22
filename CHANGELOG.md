@@ -2,6 +2,9 @@
 
 ## next release
 
+- Updated portuguese translations
+- Fix a bug: wrong variable reference in `SingleSignOnConcern:Merge_form_sso`
+
 ## v5.4.15 2022 August 1
 
 - Improved security: adds redis-session-store to store session
