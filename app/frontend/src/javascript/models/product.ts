@@ -1,4 +1,9 @@
 import { TDateISO } from '../typings/date-iso';
+import { ApiFilter } from './api';
+
+export interface ProductIndexFilter extends ApiFilter {
+  is_active: boolean,
+}
 
 export enum StockType {
   internal = 'internal',

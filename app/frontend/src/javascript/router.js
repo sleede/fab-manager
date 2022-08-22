@@ -600,6 +600,39 @@ angular.module('application.router', ['ui.router'])
         }
       })
 
+      // store
+      .state('app.public.store', {
+        url: '/store',
+        views: {
+          'main@': {
+            templateUrl: '/store/index.html',
+            controller: 'StoreController'
+          }
+        }
+      })
+
+      // show product
+      .state('app.public.product_show', {
+        url: '/store/p/:slug',
+        views: {
+          'main@': {
+            templateUrl: '/products/show.html',
+            controller: 'ShowProductController'
+          }
+        }
+      })
+
+      // cart
+      .state('app.public.cart', {
+        url: '/cart',
+        views: {
+          'main@': {
+            templateUrl: '/cart/index.html',
+            controller: 'CartController'
+          }
+        }
+      })
+
       // --- namespace /admin/... ---
       // calendar
       .state('app.admin.calendar', {

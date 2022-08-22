@@ -5272,6 +5272,11 @@ jquery@>=3.5.0:
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.6.0.tgz#c72a09f15c1bdce142f49dbf1170bdf8adac2470"
   integrity sha512-JVzAR/AjBvVt2BmYhxRCSYysDsPcssdmTFnzyLEts9qNwmjmu4JTAMYubEfwVOSwpQ1I1sKKFcxhZCI2buerfw==
 
+js-cookie@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/js-cookie/-/js-cookie-3.0.1.tgz#9e39b4c6c2f56563708d7d31f6f5f21873a92414"
+  integrity sha512-+0rgsUXZu4ncpPxRL+lNEptWMOWl9etvPHc/koSRp6MPwpRYAhmk0dUG00J4bxVV3r9uUzfo24wW0knS07SKSw==
+
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
@@ -6582,6 +6587,11 @@ react-cool-onclickoutside@^1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/react-cool-onclickoutside/-/react-cool-onclickoutside-1.7.0.tgz#abc844e14852220fe15f81d7ef44976d15cd9980"
   integrity sha512-HVZK2155Unee+enpoHKyYP2UdQK69thw90XAOUCjvJBcgRSgfRPgWWt/W1dYzoGp3+nleAa8SJxF1d4FMA4Qmw==
+
+react-custom-events@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-custom-events/-/react-custom-events-1.1.1.tgz#792f126e897043a14b9f27a4c5ab7072ff235ceb"
+  integrity sha512-71iEu3zHsBn3uvF+Sq4Fu5imtRt+cLZO6nG2zqUhdqGVIpZIfeLcl6yieqPghrE+18KFrS5BaHD0NBPP/EZJNw==
 
 react-dom@^17.0.2:
   version "17.0.2"

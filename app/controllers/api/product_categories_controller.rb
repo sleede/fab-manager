@@ -4,13 +4,15 @@
 # ProductCategorys are used to group products
 class API::ProductCategoriesController < API::ApiController
   before_action :authenticate_user!, except: :index
-  before_action :set_product_category, only: %i[show update destroy position]
+  before_action :set_product_category, only: %i[update destroy position]
 
   def index
     @product_categories = ProductCategoryService.list
   end
 
-  def show; end
+  def show
+    @product_category = ProductCategory.friendly.find(params[:id])
+  end
 
   def create
     authorize ProductCategory
