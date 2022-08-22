@@ -23,7 +23,7 @@ export const PasswordInput = <TFieldValues extends FieldValues>({ register, curr
                  rules={{
                    required: true,
                    validate: (value: string) => {
-                     if (value.length < 8) {
+                     if (value.length < 12) {
                        return t('app.shared.password_input.password_too_short') as string;
                      }
                      return true;
