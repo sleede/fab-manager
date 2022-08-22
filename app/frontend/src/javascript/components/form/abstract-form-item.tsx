@@ -9,15 +9,16 @@ export interface AbstractFormItemProps<TFieldValues> extends PropsWithChildren<A
   tooltip?: ReactNode,
   className?: string,
   disabled?: boolean|((id: string) => boolean),
-  onLabelClick?: (event: React.MouseEvent<HTMLLabelElement, MouseEvent>) => void,
+  onLabelClick?: (event: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => void,
   inLine?: boolean,
+  containerType?: 'label' | 'div'
 }
 
 /**
  * This abstract component should not be used directly.
  * Other forms components that are intended to be used with react-hook-form must extend this component.
  */
-export const AbstractFormItem = <TFieldValues extends FieldValues>({ id, label, tooltip, className, disabled, error, warning, rules, formState, onLabelClick, inLine, children }: AbstractFormItemProps<TFieldValues>) => {
+export const AbstractFormItem = <TFieldValues extends FieldValues>({ id, label, tooltip, className, disabled, error, warning, rules, formState, onLabelClick, inLine, containerType, children }: AbstractFormItemProps<TFieldValues>) => {
   const [isDirty, setIsDirty] = useState<boolean>(false);
   const [fieldError, setFieldError] = useState<{ message: string }>(error);
   const [isDisabled, setIsDisabled] = useState<boolean>(false);
@@ -52,16 +53,16 @@ export const AbstractFormItem = <TFieldValues extends FieldValues>({ id, label, 
    * This function is called when the label is clicked.
    * It is used to focus the input.
    */
-  function handleLabelClick (event: React.MouseEvent<HTMLLabelElement, MouseEvent>) {
+  function handleLabelClick (event: React.MouseEvent<HTMLParagraphElement, MouseEvent>) {
     if (typeof onLabelClick === 'function') {
       onLabelClick(event);
     }
   }
 
-  return (
-    <label className={`form-item ${classNames}`} onClick={handleLabelClick}>
+  return React.createElement(containerType, { className: `form-item ${classNames}` }, (
+    <>
       {(label && !inLine) && <div className='form-item-header'>
-        <p>{label}</p>
+        <p onClick={handleLabelClick}>{label}</p>
         {tooltip && <div className="item-tooltip">
           <span className="trigger"><i className="fa fa-question-circle" /></span>
           <div className="content">{tooltip}</div>
@@ -79,6 +80,8 @@ export const AbstractFormItem = <TFieldValues extends FieldValues>({ id, label, 
       </div>
       {(isDirty && fieldError) && <div className="form-item-error">{fieldError.message}</div> }
       {(isDirty && warning) && <div className="form-item-warning">{warning.message}</div> }
-    </label>
-  );
+    </>
+  ));
 };
+
+AbstractFormItem.defaultProps = { containerType: 'label' };

@@ -4,6 +4,7 @@
 
 - Updated portuguese translations
 - Fix a bug: wrong variable reference in `SingleSignOnConcern:Merge_form_sso`
+- Fix a bug: wrong focus behavior on text editor
 
 ## v5.4.15 2022 August 1
 
