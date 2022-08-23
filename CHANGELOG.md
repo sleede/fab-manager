@@ -8,6 +8,7 @@
 - Fix a bug: wrong variable reference in `SingleSignOnConcern:Merge_form_sso`
 - Fix a bug: wrong focus behavior on text editor
 - Fix a bug: trainings monitoring is not available
+- Fix a bug: invalid password length verification in profile edtion form
 
 ## v5.4.15 2022 August 1
 
