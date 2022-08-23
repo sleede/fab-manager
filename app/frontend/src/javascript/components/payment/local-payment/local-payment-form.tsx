@@ -5,7 +5,6 @@ import { GatewayFormProps } from '../abstract-payment-modal';
 import LocalPaymentAPI from '../../../api/local-payment';
 import FormatLib from '../../../lib/format';
 import SettingAPI from '../../../api/setting';
-import { SettingName } from '../../../models/setting';
 import { CardPaymentModal } from '../card-payment-modal';
 import { PaymentSchedule } from '../../../models/payment-schedule';
 import { HtmlTranslate } from '../../base/html-translate';

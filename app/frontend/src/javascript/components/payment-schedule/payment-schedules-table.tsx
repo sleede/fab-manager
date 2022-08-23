@@ -12,7 +12,7 @@ import FormatLib from '../../lib/format';
 import { PaymentScheduleItemActions, TypeOnce } from './payment-schedule-item-actions';
 import { StripeElements } from '../payment/stripe/stripe-elements';
 import SettingAPI from '../../api/setting';
-import { Setting, SettingName } from '../../models/setting';
+import { Setting } from '../../models/setting';
 
 interface PaymentSchedulesTableProps {
   paymentSchedules: Array<PaymentSchedule>,

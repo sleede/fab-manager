@@ -1,7 +1,6 @@
 import React, { memo, useEffect, useState } from 'react';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe, Stripe } from '@stripe/stripe-js';
-import { SettingName } from '../../../models/setting';
 import SettingAPI from '../../../api/setting';
 
 /**

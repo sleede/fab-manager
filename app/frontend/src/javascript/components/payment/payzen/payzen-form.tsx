@@ -2,7 +2,6 @@ import React, { FormEvent, FunctionComponent, useEffect, useRef, useState } from
 import KRGlue from '@lyracom/embedded-form-glue';
 import { GatewayFormProps } from '../abstract-payment-modal';
 import SettingAPI from '../../../api/setting';
-import { SettingName } from '../../../models/setting';
 import PayzenAPI from '../../../api/payzen';
 import {
   CreateTokenResponse,

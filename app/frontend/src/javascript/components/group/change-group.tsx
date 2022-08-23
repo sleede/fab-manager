@@ -11,7 +11,6 @@ import { useForm } from 'react-hook-form';
 import { FormSelect } from '../form/form-select';
 import MemberAPI from '../../api/member';
 import SettingAPI from '../../api/setting';
-import { SettingName } from '../../models/setting';
 import UserLib from '../../lib/user';
 
 declare const Application: IApplication;

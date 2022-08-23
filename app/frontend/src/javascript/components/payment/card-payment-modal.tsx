@@ -7,7 +7,7 @@ import { IApplication } from '../../models/application';
 import { ShoppingCart } from '../../models/payment';
 import { User } from '../../models/user';
 import { PaymentSchedule } from '../../models/payment-schedule';
-import { Setting, SettingName } from '../../models/setting';
+import { Setting } from '../../models/setting';
 import { Invoice } from '../../models/invoice';
 import SettingAPI from '../../api/setting';
 import { useTranslation } from 'react-i18next';

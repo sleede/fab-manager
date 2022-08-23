@@ -10,7 +10,6 @@ import { Machine } from '../../models/machine';
 import { User } from '../../models/user';
 import { IApplication } from '../../models/application';
 import SettingAPI from '../../api/setting';
-import { SettingName } from '../../models/setting';
 
 declare const Application: IApplication;
 

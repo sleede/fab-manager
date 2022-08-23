@@ -13,7 +13,6 @@ import PriceAPI from '../../api/price';
 import WalletAPI from '../../api/wallet';
 import { Invoice } from '../../models/invoice';
 import SettingAPI from '../../api/setting';
-import { SettingName } from '../../models/setting';
 import { GoogleTagManager } from '../../models/gtm';
 import { ComputePriceResult } from '../../models/price';
 import { Wallet } from '../../models/wallet';

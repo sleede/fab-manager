@@ -5,7 +5,6 @@ import { User } from '../../models/user';
 import { UserPack } from '../../models/user-pack';
 import UserPackAPI from '../../api/user-pack';
 import SettingAPI from '../../api/setting';
-import { SettingName } from '../../models/setting';
 import { FabButton } from '../base/fab-button';
 import { useTranslation } from 'react-i18next';
 import { ProposePacksModal } from './propose-packs-modal';
