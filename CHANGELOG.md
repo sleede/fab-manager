@@ -3,6 +3,7 @@
 ## next release
 
 - Updated portuguese translations
+- Added automatic RuboCop validation on pre-commit
 - Fix a bug: wrong variable reference in `SingleSignOnConcern:Merge_form_sso`
 - Fix a bug: wrong focus behavior on text editor
 
