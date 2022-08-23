@@ -9,6 +9,7 @@
 - Fix a bug: wrong focus behavior on text editor
 - Fix a bug: trainings monitoring is not available
 - Fix a bug: invalid password length verification in profile edtion form
+- Fix a bug: invalid password verification in setup script
 
 ## v5.4.15 2022 August 1
 

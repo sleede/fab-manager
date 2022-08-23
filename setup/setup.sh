@@ -412,8 +412,12 @@ read_password()
   local password confirmation
   >&2 echo "Please input a password for this administrator's account"
   read -rsp " > " password </dev/tty
-  if [ ${#password} -lt 8 ]; then
-    >&2 printf "\nError: password is too short (minimal length: 8 characters)\n"
+  if [ ${#password} -lt 12 ]; then
+    >&2 printf "\nError: password is too short (minimal length: 12 characters)\n"
+    password=$(read_password 'no-confirm')
+  fi
+  if [[ ! $password =~ [0-9] || ! $password =~ [a-z] || ! $password =~ [A-Z] || ! $password =~ [[:punct:]] ]]; then
+    >&2 printf "\nError: password is too weak (should contain uppercases, lowercases, digits and special characters)\n"
     password=$(read_password 'no-confirm')
   fi
   if [ "$1" != 'no-confirm' ]; then
