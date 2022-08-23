@@ -14,22 +14,12 @@
   </div>
 </section>
 
-<section class="edit-product m-lg admin-store-manage">
-  <div class="row">
-
-    <div class="col-md-12">
-      <a class="back-btn" ng-click="backProductsList()">
-        <i class="fas fa-angle-left"></i>
-        <span translate>{{ 'app.admin.store.back_products_list' }}</span>
-      </a>
-    </div>
-
+<section class="admin-store-manage">
+  <div class="edit-product-nav">
+    <a class="back-btn" ng-click="backProductsList()">
+      <i class="fas fa-angle-left"></i>
+      <span translate>{{ 'app.admin.store.back_products_list' }}</span>
+    </a>
   </div>
-  <div class="row">
-
-    <div>
-      <edit-product product-id="productId" on-success="onSuccess" on-error="onError"/>
-    </div>
-
-  </div>
+  <edit-product product-id="productId" on-success="onSuccess" on-error="onError"/>
 </section>

@@ -1,0 +1,9 @@
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3.2rem;
+
+  .store-product-item {
+    color: tomato;
+  }
+}

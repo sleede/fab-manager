@@ -9,14 +9,13 @@ import { IApplication } from '../../models/application';
 import { Product } from '../../models/product';
 import { ProductCategory } from '../../models/product-category';
 import { FabButton } from '../base/fab-button';
-import { ProductsList } from './products-list';
+import { ProductItem } from './product-item';
 import ProductAPI from '../../api/product';
 import ProductCategoryAPI from '../../api/product-category';
 import MachineAPI from '../../api/machine';
 import { AccordionItem } from './accordion-item';
 import { X } from 'phosphor-react';
-import Switch from 'react-switch';
-import Select from 'react-select';
+import { ProductsListHeader } from './products-list-header';
 
 declare const Application: IApplication;
 
@@ -31,7 +30,7 @@ interface ProductsProps {
  type selectOption = { value: number, label: string };
 
 /**
- * This component shows all Products and filter
+ * This component shows the admin view of the store
  */
 const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
   const { t } = useTranslation('admin');
@@ -173,9 +172,8 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
   /**
    * Display option: sorting
    */
-  const handleSorting = (value: number) => {
-    setSortOption(value);
-    setUpdate(true);
+  const handleSorting = (option: selectOption) => {
+    console.log('Sort option:', option);
   };
 
   /**
@@ -226,9 +224,9 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
   const buildOptions = (): Array<selectOption> => {
     return [
       { value: 0, label: t('app.admin.store.products.sort.name_az') },
-      { value: 1, label: t('app.admin.store.products.sort.name_za') }
-      //  { value: 2, label: t('app.admin.store.products.sort.price_low') },
-      //  { value: 3, label: t('app.admin.store.products.sort.price_high') }
+      { value: 1, label: t('app.admin.store.products.sort.name_za') },
+      { value: 2, label: t('app.admin.store.products.sort.price_low') },
+      { value: 3, label: t('app.admin.store.products.sort.price_high') }
     ];
   };
 
@@ -263,101 +261,82 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
           <FabButton className="main-action-btn" onClick={newProduct}>{t('app.admin.store.products.create_a_product')}</FabButton>
         </div>
       </header>
-      <div className='layout'>
-        <div className='products-filters span-3'>
-          <header>
-            <h3>{t('app.admin.store.products.filter')}</h3>
-            <div className='grpBtn'>
-              <FabButton onClick={clearAllFilters} className="is-black">{t('app.admin.store.products.filter_clear')}</FabButton>
-            </div>
-          </header>
-          <div className='accordion'>
-            <AccordionItem id={0}
-              isOpen={accordion[0]}
-              onChange={handleAccordion}
-              label={t('app.admin.store.products.filter_categories')}
-            >
-              <div className='content'>
-                <div className="list scrollbar">
-                  {productCategories.map(pc => (
-                    <label key={pc.id} className={pc.parent_id ? 'offset' : ''}>
-                      <input type="checkbox" checked={filters.categories.includes(pc)} onChange={(event) => handleSelectCategory(pc, event.target.checked)} />
-                      <p>{pc.name}</p>
-                    </label>
-                  ))}
-                </div>
-                <FabButton onClick={applyFilters} className="is-info">{t('app.admin.store.products.filter_apply')}</FabButton>
+      <div className='store-filters'>
+        <header>
+          <h3>{t('app.admin.store.products.filter')}</h3>
+          <div className='grpBtn'>
+            <FabButton onClick={clearAllFilters} className="is-black">{t('app.admin.store.products.filter_clear')}</FabButton>
+          </div>
+        </header>
+        <div className='accordion'>
+          <AccordionItem id={0}
+            isOpen={accordion[0]}
+            onChange={handleAccordion}
+            label={t('app.admin.store.products.filter_categories')}
+          >
+            <div className='content'>
+              <div className="list scrollbar">
+                {productCategories.map(pc => (
+                  <label key={pc.id} className={pc.parent_id ? 'offset' : ''}>
+                    <input type="checkbox" checked={filters.categories.includes(pc)} onChange={(event) => handleSelectCategory(pc, event.target.checked)} />
+                    <p>{pc.name}</p>
+                  </label>
+                ))}
               </div>
-            </AccordionItem>
+              <FabButton onClick={applyFilters} className="is-info">{t('app.admin.store.products.filter_apply')}</FabButton>
+            </div>
+          </AccordionItem>
 
-            <AccordionItem id={1}
-              isOpen={accordion[1]}
-              onChange={handleAccordion}
-              label={t('app.admin.store.products.filter_machines')}
-            >
-              <div className='content'>
-                <div className="list scrollbar">
-                  {machines.map(m => (
-                    <label key={m.value}>
-                      <input type="checkbox" checked={filters.machines.includes(m)} onChange={(event) => handleSelectMachine(m, event.target.checked)} />
-                      <p>{m.label}</p>
-                    </label>
-                  ))}
-                </div>
-                <FabButton onClick={applyFilters} className="is-info">{t('app.admin.store.products.filter_apply')}</FabButton>
+          <AccordionItem id={1}
+            isOpen={accordion[1]}
+            onChange={handleAccordion}
+            label={t('app.admin.store.products.filter_machines')}
+          >
+            <div className='content'>
+              <div className="list scrollbar">
+                {machines.map(m => (
+                  <label key={m.value}>
+                    <input type="checkbox" checked={filters.machines.includes(m)} onChange={(event) => handleSelectMachine(m, event.target.checked)} />
+                    <p>{m.label}</p>
+                  </label>
+                ))}
               </div>
-            </AccordionItem>
-          </div>
+              <FabButton onClick={applyFilters} className="is-info">{t('app.admin.store.products.filter_apply')}</FabButton>
+            </div>
+          </AccordionItem>
         </div>
-        <div className='products-list span-7'>
-          <div className='status'>
-            <div className='count'>
-              <p>{t('app.admin.store.products.result_count')}<span>{filteredProductsList.length}</span></p>
+      </div>
+      <div className='store-products-list'>
+        <ProductsListHeader
+          productsCount={filteredProductsList.length}
+          selectOptions={buildOptions()}
+          onSelectOptionsChange={handleSorting}
+          onSwitch={toggleVisible}
+        />
+        <div className='features'>
+          {features.categories.map(c => (
+            <div key={c.id} className='features-item'>
+              <p>{c.name}</p>
+              <button onClick={() => handleSelectCategory(c, false, true)}><X size={16} weight="light" /></button>
             </div>
-            <div className="display">
-              <div className='sort'>
-                <p>{t('app.admin.store.products.display_options')}</p>
-                <Select
-                  options={buildOptions()}
-                  onChange={evt => handleSorting(evt.value)}
-                  value={buildOptions[sortOption]}
-                  styles={customStyles}
-                />
-              </div>
-              <div className='visibility'>
-                <label>
-                  <span>{t('app.admin.store.products.visible_only')}</span>
-                  <Switch
-                    checked={filterVisible}
-                    onChange={(checked) => toggleVisible(checked)}
-                    width={40}
-                    height={19}
-                    uncheckedIcon={false}
-                    checkedIcon={false}
-                    handleDiameter={15} />
-                </label>
-              </div>
+          ))}
+          {features.machines.map(m => (
+            <div key={m.value} className='features-item'>
+              <p>{m.label}</p>
+              <button onClick={() => handleSelectMachine(m, false, true)}><X size={16} weight="light" /></button>
             </div>
-          </div>
-          <div className='features'>
-            {features.categories.map(c => (
-              <div key={c.id} className='features-item'>
-                <p>{c.name}</p>
-                <button onClick={() => handleSelectCategory(c, false, true)}><X size={16} weight="light" /></button>
-              </div>
-            ))}
-            {features.machines.map(m => (
-              <div key={m.value} className='features-item'>
-                <p>{m.label}</p>
-                <button onClick={() => handleSelectMachine(m, false, true)}><X size={16} weight="light" /></button>
-              </div>
-            ))}
-          </div>
-          <ProductsList
-            products={filteredProductsList}
-            onEdit={editProduct}
-            onDelete={deleteProduct}
-          />
+          ))}
+        </div>
+
+        <div className="products-list">
+          {filteredProductsList.map((product) => (
+            <ProductItem
+              key={product.id}
+              product={product}
+              onEdit={editProduct}
+              onDelete={deleteProduct}
+            />
+          ))}
         </div>
       </div>
     </div>

@@ -89,12 +89,14 @@
 @import "modules/settings/user-validation-setting";
 @import "modules/socials/fab-socials";
 @import "modules/store/_utilities";
-@import "modules/store/manage-product-category";
 @import "modules/store/product-categories";
 @import "modules/store/product-form";
-@import "modules/store/products-filters";
+@import "modules/store/products-grid";
+@import "modules/store/products-list-header";
 @import "modules/store/products-list";
 @import "modules/store/products";
+@import "modules/store/store-filters";
+@import "modules/store/store-products-list";
 @import "modules/store/store";
 @import "modules/subscriptions/free-extend-modal";
 @import "modules/subscriptions/renew-modal";

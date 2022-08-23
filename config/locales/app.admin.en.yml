@@ -1942,15 +1942,16 @@ en:
           filter_stock: "By stock status"
           filter_stock_from: "From"
           filter_stock_to: "to"
-          result_count: "Result count:"
-          display_options: "Display options:"
-          visible_only: "Visible products only"
           sort:
             name_az: "A-Z"
             name_za: "Z-A"
             price_low: "Price: low to high"
             price_high: "Price: high to low"
-        products_list:
+        products_list_header:
+          result_count: "Result count:"
+          display_options: "Display options:"
+          visible_only: "Visible products only"
+        product_item:
           visible: "visible"
           hidden: "hidden"
           stock:

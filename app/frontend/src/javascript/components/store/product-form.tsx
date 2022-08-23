@@ -224,21 +224,21 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
         </div>
       </header>
       <form className="product-form" onSubmit={onSubmit}>
-        <div className="layout">
+        <div className="subgrid">
           <FormInput id="name"
                      register={register}
                      rules={{ required: true }}
                      formState={formState}
                      onChange={handleNameChange}
                      label={t('app.admin.store.product_form.name')}
-                     className='span-7' />
+                     className="span-7" />
           <FormInput id="sku"
                      register={register}
                      formState={formState}
                      label={t('app.admin.store.product_form.sku')}
-                     className='span-3' />
+                     className="span-3" />
         </div>
-        <div className="layout">
+        <div className="subgrid">
           <FormInput id="slug"
                     register={register}
                     rules={{ required: true }}
@@ -256,7 +256,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
         <hr />
 
         <div className="price-data">
-          <div className="layout">
+          <div className="price-data-header">
             <h4 className='span-7'>{t('app.admin.store.product_form.price_and_rule_of_selling_product')}</h4>
             <FormSwitch control={control}
                         id="is_active_price"
@@ -265,22 +265,20 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
                         onChange={toggleIsActivePrice}
                         className='span-3' />
           </div>
-          {isActivePrice && <div className="price-fields">
-            <div className="flex">
-              <FormInput id="amount"
-                         type="number"
-                         register={register}
-                         rules={{ required: true, min: 0.01 }}
-                         step={0.01}
-                         formState={formState}
-                         label={t('app.admin.store.product_form.price')} />
-              <FormInput id="quantity_min"
-                         type="number"
-                         rules={{ required: true }}
-                         register={register}
-                         formState={formState}
-                         label={t('app.admin.store.product_form.quantity_min')} />
-            </div>
+          {isActivePrice && <div className="price-data-content">
+            <FormInput id="amount"
+                        type="number"
+                        register={register}
+                        rules={{ required: true, min: 0.01 }}
+                        step={0.01}
+                        formState={formState}
+                        label={t('app.admin.store.product_form.price')} />
+            <FormInput id="quantity_min"
+                        type="number"
+                        rules={{ required: true }}
+                        register={register}
+                        formState={formState}
+                        label={t('app.admin.store.product_form.quantity_min')} />
           </div>}
         </div>
 

@@ -378,11 +378,22 @@ en:
       store:
         fablab_store: "FabLab Store"
         unexpected_error_occurred: "An unexpected error occurred. Please try again later."
-      store_product_item:
-        available: "Available"
-        limited_stock: "Limited stock"
-        out_of_stock: "Out of stock"
-        add: "Add"
+        products:
+            filter: "Filter"
+            filter_clear: "Clear all"
+            filter_apply: "Apply"
+            filter_categories: "By categories"
+            filter_machines: "By machines"
+            filter_keywords_reference: "By keywords or reference"
+            filter_stock: "By stock status"
+            filter_stock_from: "From"
+            filter_stock_to: "to"
+            in_stock_only: "Available products only"
+            sort:
+              name_az: "A-Z"
+              name_za: "Z-A"
+              price_low: "Price: low to high"
+              price_high: "Price: high to low"
       store_product:
         unexpected_error_occurred: "An unexpected error occurred. Please try again later."
       cart:

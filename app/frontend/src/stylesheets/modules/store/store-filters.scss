@@ -1,6 +1,12 @@
-.products-filters {
+.store-filters {
+  grid-column: 1 / 4;
   padding-top: 1.6rem;
   border-top: 1px solid var(--gray-soft-dark);
+
+  header {
+    @include header();
+    padding: 0 0 2.4rem 0;
+  }
 
   .accordion {
     &-item:not(:last-of-type) {
