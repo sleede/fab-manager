@@ -55,7 +55,7 @@ export default class SettingAPI {
         itemData.localized = item.localized;
       }
 
-      map.set(item.name as SettingName, itemData);
+      map.set(item.name, itemData);
     });
     return map;
   }

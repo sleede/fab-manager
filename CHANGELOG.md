@@ -4,6 +4,7 @@
 
 - Updated portuguese translations
 - Added automatic RuboCop validation on pre-commit
+- Use union type instead of enum for SettingName
 - Fix a bug: wrong variable reference in `SingleSignOnConcern:Merge_form_sso`
 - Fix a bug: wrong focus behavior on text editor
 

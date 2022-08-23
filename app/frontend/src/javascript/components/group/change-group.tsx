@@ -46,7 +46,7 @@ export const ChangeGroup: React.FC<ChangeGroupProps> = ({ user, onSuccess, onErr
   useEffect(() => {
     GroupAPI.index({ disabled: false, admins: user?.role === 'admin' }).then(setGroups).catch(onError);
     MemberAPI.current().then(setOperator).catch(onError);
-    SettingAPI.get(SettingName.UserChangeGroup).then((setting) => {
+    SettingAPI.get('user_change_group').then((setting) => {
       setAllowedUserChangeGoup(setting.value === 'true');
     }).catch(onError);
   }, []);

@@ -44,10 +44,10 @@ const PacksSummary: React.FC<PacksSummaryProps> = ({ item, itemType, customer, o
   const [isPackOnlyForSubscription, setIsPackOnlyForSubscription] = useState<boolean>(true);
 
   useEffect(() => {
-    SettingAPI.get(SettingName.RenewPackThreshold)
+    SettingAPI.get('renew_pack_threshold')
       .then(data => setThreshold(parseFloat(data.value)))
       .catch(error => onError(error));
-    SettingAPI.get(SettingName.PackOnlyForSubscription)
+    SettingAPI.get('pack_only_for_subscription')
       .then(data => setIsPackOnlyForSubscription(data.value === 'true'))
       .catch(error => onError(error));
   }, []);

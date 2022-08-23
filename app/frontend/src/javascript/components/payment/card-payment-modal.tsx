@@ -35,7 +35,7 @@ const CardPaymentModal: React.FC<CardPaymentModalProps> = ({ isOpen, toggleModal
   const [gateway, setGateway] = useState<Setting>(null);
 
   useEffect(() => {
-    SettingAPI.get(SettingName.PaymentGateway)
+    SettingAPI.get('payment_gateway')
       .then(setting => setGateway(setting))
       .catch(error => onError(error));
   }, []);

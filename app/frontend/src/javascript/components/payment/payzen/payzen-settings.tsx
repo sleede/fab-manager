@@ -21,21 +21,21 @@ interface PayzenSettingsProps {
 const PAYZEN_HIDDEN = 'HiDdEnHIddEnHIdDEnHiDdEnHIddEnHIdDEn';
 
 // settings related to PayZen that can be shown publicly
-const payZenPublicSettings: Array<SettingName> = [SettingName.PayZenPublicKey, SettingName.PayZenEndpoint, SettingName.PayZenUsername];
+const payZenPublicSettings: Array<SettingName> = ['payzen_public_key', 'payzen_endpoint', 'payzen_username'];
 // settings related to PayZen that must be kept on server-side
-const payZenPrivateSettings: Array<SettingName> = [SettingName.PayZenPassword, SettingName.PayZenHmacKey];
+const payZenPrivateSettings: Array<SettingName> = ['payzen_password', 'payzen_hmac'];
 // other settings related to PayZen
-const payZenOtherSettings: Array<SettingName> = [SettingName.PayZenCurrency];
+const payZenOtherSettings: Array<SettingName> = ['payzen_currency'];
 // all PayZen settings
 const payZenSettings: Array<SettingName> = payZenPublicSettings.concat(payZenPrivateSettings).concat(payZenOtherSettings);
 
 // icons for the inputs of each setting
 const icons:Map<SettingName, string> = new Map([
-  [SettingName.PayZenHmacKey, 'subscript'],
-  [SettingName.PayZenPassword, 'key'],
-  [SettingName.PayZenUsername, 'user'],
-  [SettingName.PayZenEndpoint, 'link'],
-  [SettingName.PayZenPublicKey, 'info']
+  ['payzen_hmac', 'subscript'],
+  ['payzen_password', 'key'],
+  ['payzen_username', 'user'],
+  ['payzen_endpoint', 'link'],
+  ['payzen_public_key', 'info']
 ]);
 
 /**
@@ -55,11 +55,11 @@ export const PayzenSettings: React.FC<PayzenSettingsProps> = ({ onEditKeys, onCu
    */
   useEffect(() => {
     SettingAPI.query(payZenPublicSettings.concat(payZenOtherSettings)).then(payZenKeys => {
-      SettingAPI.isPresent(SettingName.PayZenPassword).then(pzPassword => {
-        SettingAPI.isPresent(SettingName.PayZenHmacKey).then(pzHmac => {
+      SettingAPI.isPresent('payzen_password').then(pzPassword => {
+        SettingAPI.isPresent('payzen_hmac').then(pzHmac => {
           const map = new Map(payZenKeys);
-          map.set(SettingName.PayZenPassword, pzPassword ? PAYZEN_HIDDEN : '');
-          map.set(SettingName.PayZenHmacKey, pzHmac ? PAYZEN_HIDDEN : '');
+          map.set('payzen_password', pzPassword ? PAYZEN_HIDDEN : '');
+          map.set('payzen_hmac', pzHmac ? PAYZEN_HIDDEN : '');
 
           updateSettings(map);
         }).catch(error => { console.error(error); });
@@ -81,7 +81,7 @@ export const PayzenSettings: React.FC<PayzenSettingsProps> = ({ onEditKeys, onCu
   const handleCurrencyUpdate = (value: string, validity?: ValidityState): void => {
     if (!validity || validity.valid) {
       setError('');
-      updateSettings(draft => draft.set(SettingName.PayZenCurrency, value));
+      updateSettings(draft => draft.set('payzen_currency', value));
     } else {
       setError(t('app.admin.invoices.payment.payzen_settings.currency_error'));
     }
@@ -92,9 +92,9 @@ export const PayzenSettings: React.FC<PayzenSettingsProps> = ({ onEditKeys, onCu
    * This will update the setting on the server.
    */
   const saveCurrency = (): void => {
-    SettingAPI.update(SettingName.PayZenCurrency, settings.get(SettingName.PayZenCurrency)).then(result => {
+    SettingAPI.update('payzen_currency', settings.get('payzen_currency')).then(result => {
       setError('');
-      updateSettings(draft => draft.set(SettingName.PayZenCurrency, result.value));
+      updateSettings(draft => draft.set('payzen_currency', result.value));
       onCurrencyUpdateSuccess(result.value);
     }, reason => {
       setError(t('app.admin.invoices.payment.payzen_settings.error_while_saving') + reason);
@@ -130,7 +130,7 @@ export const PayzenSettings: React.FC<PayzenSettingsProps> = ({ onEditKeys, onCu
         <div className="payzen-currency-form">
           <div className="currency-wrapper">
             <label htmlFor="payzen_currency">{t('app.admin.invoices.payment.payzen_settings.payzen_currency')}</label>
-            <FabInput defaultValue={settings.get(SettingName.PayZenCurrency)}
+            <FabInput defaultValue={settings.get('payzen_currency')}
               id="payzen_currency"
               icon={<i className="fas fa-money-bill" />}
               onChange={handleCurrencyUpdate}

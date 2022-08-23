@@ -40,7 +40,7 @@ const PaymentSchedulesTable: React.FC<PaymentSchedulesTableProps> = ({ paymentSc
   const [gateway, setGateway] = useState<Setting>(null);
 
   useEffect(() => {
-    SettingAPI.get(SettingName.PaymentGateway)
+    SettingAPI.get('payment_gateway')
       .then(setting => setGateway(setting))
       .catch(error => onError(error));
   }, []);

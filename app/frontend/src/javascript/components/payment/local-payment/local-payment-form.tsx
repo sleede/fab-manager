@@ -75,7 +75,7 @@ export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSucce
     if (paymentSchedule && method === 'card') {
       // check that the online payment is active
       try {
-        const online = await SettingAPI.get(SettingName.OnlinePaymentModule);
+        const online = await SettingAPI.get('online_payment_module');
         if (online.value !== 'true') {
           return onError(t('app.admin.local_payment_form.online_payment_disabled'));
         }
