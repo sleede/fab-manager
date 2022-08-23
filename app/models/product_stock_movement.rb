@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-# ProductStockMovement is a model for record the movements of product's stock
+# A ProductStockMovement records a movement of a product's stock.
+# Eg. 10 units of item X are added to the stock
 class ProductStockMovement < ApplicationRecord
   belongs_to :product
 

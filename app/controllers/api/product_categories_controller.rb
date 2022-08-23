@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # API Controller for resources of type ProductCategory
-# ProductCategorys are used to group products
+# ProductCategories are used to group Products
 class API::ProductCategoriesController < API::ApiController
   before_action :authenticate_user!, except: :index
   before_action :set_product_category, only: %i[update destroy position]

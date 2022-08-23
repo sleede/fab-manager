@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-# Product is a model for the merchandise hold information of product in store
+# Product is a model for the merchandise.
+# It holds data of products in the store
 class Product < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
