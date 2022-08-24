@@ -14,6 +14,7 @@
 - Fix a bug: invalid password verification in setup script
 - Fix a bug: during setup, unable to chown the installation folder, if the current user does not have a self-named group
 - Fix a bug: during setup, the current value in config/env is not shown
+- Fix a bug: disabling/removing a group has side effects on other groups
 
 ## v5.4.15 2022 August 1
 
