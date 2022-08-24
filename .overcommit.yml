@@ -6,3 +6,13 @@ PreCommit:
   TrailingWhitespace:
     enabled: true
 
+CommitMsg:
+  CapitalizedSubject:
+    enabled: false
+
+  MessageFormat:
+    enabled: true
+    pattern: ^\([a-z]+\) [\w ]+(\n\n.+)?
+    expected_pattern_message: (type) title\n\ndescription
+    sample_message: (bug) no validation on date\n\nThe birthdate was not validated...
+
