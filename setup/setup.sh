@@ -198,7 +198,7 @@ prepare_files()
   if [[ "$confirm" = "n" ]]; then exit 1; fi
 
   elevate_cmd mkdir -p "$FABMANAGER_PATH"
-  elevate_cmd chown -R "$(whoami):$(whoami)" "$FABMANAGER_PATH"
+  elevate_cmd chown -R "$(whoami)" "$FABMANAGER_PATH"
 
   # create folders before starting the containers, otherwise root will own them
   local folders=(accounting config elasticsearch/config exports imports invoices log payment_schedules plugins postgresql \
