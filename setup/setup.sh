@@ -384,7 +384,7 @@ configure_env_file()
     var_doc=$(get_md_anchor "$doc" "$variable")
     current=$(grep "$variable=" "$FABMANAGER_PATH/config/env")
     echo "$var_doc" | bat --file-name "$variable" --language md --color=always
-    printf "- \e[1mCurrent value: %s\e[21m\n- New value? (leave empty to keep the current value)\n" "$current"
+    printf -- "- \e[1mCurrent value: %s\e[21m\n- New value? (leave empty to keep the current value)\n" "$current"
     read -rep "  > " value </dev/tty
     if [ "$value" != "" ]; then
       esc_val=$(printf '%s\n' "$value" | sed -e 's/\//\\\//g')
