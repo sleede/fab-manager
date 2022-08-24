@@ -5,6 +5,7 @@
 - Updated portuguese translations
 - Added automatic RuboCop validation on pre-commit
 - Use union type instead of enum for SettingName
+- Clarified documentation about default values for environment variables
 - Fix a bug: wrong variable reference in `SingleSignOnConcern:Merge_form_sso`
 - Fix a bug: wrong focus behavior on text editor
 - Fix a bug: trainings monitoring is not available
