@@ -52,7 +52,13 @@ class API::TrainingsController < API::ApiController
     authorize Training
     @training = Training.find(params[:id])
     @availabilities = @training.availabilities
-                               .includes(slots: { slots_reservations: { reservations: { statistic_profile: [:trainings, user: [:profile]] } } })
+                               .includes(slots: {
+                                           slots_reservations: {
+                                             reservation: {
+                                               statistic_profile: [:trainings, { user: [:profile] }]
+                                             }
+                                           }
+                                         })
                                .where('slots_reservations.canceled_at': nil)
                                .order('availabilities.start_at DESC')
   end

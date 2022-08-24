@@ -10,7 +10,6 @@ import { Machine } from '../../models/machine';
 import { User } from '../../models/user';
 import { IApplication } from '../../models/application';
 import SettingAPI from '../../api/setting';
-import { SettingName } from '../../models/setting';
 
 declare const Application: IApplication;
 
@@ -46,7 +45,7 @@ const ReserveButton: React.FC<ReserveButtonProps> = ({ currentUser, machineId, o
   // check the trainings after we retrieved the machine data
   useEffect(() => checkTraining(), [machine]);
   useEffect(() => {
-    SettingAPI.get(SettingName.PackOnlyForSubscription)
+    SettingAPI.get('pack_only_for_subscription')
       .then(data => setIsPackOnlyForSubscription(data.value === 'true'))
       .catch(error => onError(error));
   }, []);

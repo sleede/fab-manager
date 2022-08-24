@@ -41,11 +41,11 @@
                 <button class="btn btn-default" ng-click="rowform.$show()">
                     <i class="fa fa-edit"></i> <span class="hidden-xs hidden-sm" translate>{{ 'app.shared.buttons.edit' }}</span>
                 </button>
-                <button class="btn btn-default" ng-click="toggleDisableGroup($index)">
+                <button class="btn btn-default" ng-click="toggleDisableGroup(group.id)">
                     <span ng-hide="group.disabled"><i class="fa fa-eye-slash"></i> <span translate>{{ 'app.admin.members.group_form.disable' }}</span></span>
                     <span ng-show="group.disabled"><i class="fa fa-eye"></i> <span translate>{{ 'app.admin.members.group_form.enable' }}</span></span>
                 </button>
-                <button class="btn btn-danger" ng-click="removeGroup($index)">
+                <button class="btn btn-danger" ng-click="removeGroup(group.id)">
                     <i class="fa fa-trash-o"></i>
                 </button>
             </div>

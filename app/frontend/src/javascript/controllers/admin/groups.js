@@ -70,20 +70,23 @@ Application.Controllers.controller('GroupsController', ['$scope', 'groupsPromise
 
   /**
    * Deletes the group at the specified index
-   * @param index {number} group index in the $scope.groups array
+   * @param groupId {number} group id to delete
    */
-  $scope.removeGroup = index =>
-    Group.delete({ id: $scope.groups[index].id }, function (resp) {
+  $scope.removeGroup = (groupId) => {
+    Group.delete({ id: groupId }, function (resp) {
       growl.success(_t('app.admin.members.group_form.group_successfully_deleted'));
-      return $scope.groups.splice(index, 1);
+      const index = $scope.groups.findIndex(e => e.id === groupId);
+      $scope.groups.splice(index, 1);
     }
     , () => growl.error(_t('app.admin.members.group_form.unable_to_delete_group_because_some_users_and_or_groups_are_still_linked_to_it')));
+  };
 
   /**
    * Enable/disable the group at the specified index
-   * @param index {number} group index in the $scope.groups array
+   * @param groupId {number} id of the group to enable/disable
    */
-  return $scope.toggleDisableGroup = function (index) {
+  return $scope.toggleDisableGroup = function (groupId) {
+    const index = $scope.groups.findIndex(e => e.id === groupId);
     const group = $scope.groups[index];
     if (!group.disabled && (group.users > 0)) {
       return growl.error(_t('app.admin.members.group_form.unable_to_disable_group_with_users', { USERS: group.users }));

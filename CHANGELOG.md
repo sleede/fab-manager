@@ -1,6 +1,20 @@
 # Changelog Fab-manager
 
-## next release
+## v5.4.16 2022 August 24
+
+- Updated portuguese translations
+- Added automatic RuboCop validation on pre-commit
+- Use union type instead of enum for SettingName
+- Clarified documentation about default values for environment variables
+- Updated documentation about the minimum RAM required (#385)
+- Fix a bug: wrong variable reference in `SingleSignOnConcern:Merge_form_sso`
+- Fix a bug: wrong focus behavior on text editor
+- Fix a bug: trainings monitoring is not available
+- Fix a bug: invalid password length verification in profile edtion form
+- Fix a bug: invalid password verification in setup script
+- Fix a bug: during setup, unable to chown the installation folder, if the current user does not have a self-named group
+- Fix a bug: during setup, the current value in config/env is not shown
+- Fix a bug: disabling/removing a group has side effects on other groups
 
 ## v5.4.15 2022 August 1
 

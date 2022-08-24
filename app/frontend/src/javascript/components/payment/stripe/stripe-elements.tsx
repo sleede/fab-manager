@@ -1,7 +1,6 @@
 import React, { memo, useEffect, useState } from 'react';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe, Stripe } from '@stripe/stripe-js';
-import { SettingName } from '../../../models/setting';
 import SettingAPI from '../../../api/setting';
 
 /**
@@ -14,7 +13,7 @@ export const StripeElements: React.FC = memo(({ children }) => {
    * When this component is mounted, we initialize the <Elements> tag with the Stripe's public key
    */
   useEffect(() => {
-    SettingAPI.get(SettingName.StripePublicKey).then(key => {
+    SettingAPI.get('stripe_public_key').then(key => {
       if (key?.value) {
         const promise = loadStripe(key.value);
         setStripe(promise);

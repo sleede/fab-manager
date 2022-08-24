@@ -7,7 +7,7 @@ import { IApplication } from '../../models/application';
 import { ShoppingCart } from '../../models/payment';
 import { User } from '../../models/user';
 import { PaymentSchedule } from '../../models/payment-schedule';
-import { Setting, SettingName } from '../../models/setting';
+import { Setting } from '../../models/setting';
 import { Invoice } from '../../models/invoice';
 import SettingAPI from '../../api/setting';
 import { useTranslation } from 'react-i18next';
@@ -35,7 +35,7 @@ const CardPaymentModal: React.FC<CardPaymentModalProps> = ({ isOpen, toggleModal
   const [gateway, setGateway] = useState<Setting>(null);
 
   useEffect(() => {
-    SettingAPI.get(SettingName.PaymentGateway)
+    SettingAPI.get('payment_gateway')
       .then(setting => setGateway(setting))
       .catch(error => onError(error));
   }, []);

@@ -13,7 +13,6 @@ import PriceAPI from '../../api/price';
 import WalletAPI from '../../api/wallet';
 import { Invoice } from '../../models/invoice';
 import SettingAPI from '../../api/setting';
-import { SettingName } from '../../models/setting';
 import { GoogleTagManager } from '../../models/gtm';
 import { ComputePriceResult } from '../../models/price';
 import { Wallet } from '../../models/wallet';
@@ -91,7 +90,7 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
   useEffect(() => {
     mounted.current = true;
     CustomAssetAPI.get(CustomAssetName.CgvFile).then(asset => setCgv(asset));
-    SettingAPI.get(SettingName.PaymentGateway).then((setting) => {
+    SettingAPI.get('payment_gateway').then((setting) => {
       // we capitalize the first letter of the name
       if (setting.value) {
         setGateway(setting.value.replace(/^\w/, (c) => c.toUpperCase()));

@@ -6,7 +6,7 @@ import { Loader } from '../base/loader';
 import { react2angular } from 'react2angular';
 import { IApplication } from '../../models/application';
 import SettingAPI from '../../api/setting';
-import { SettingName } from '../../models/setting';
+import { SettingName, titleSettings } from '../../models/setting';
 import UserLib from '../../lib/user';
 
 declare const Application: IApplication;
@@ -27,7 +27,7 @@ export const CompletionHeaderInfo: React.FC<CompletionHeaderInfoProps> = ({ user
   const userLib = new UserLib(user);
 
   useEffect(() => {
-    SettingAPI.query([SettingName.NameGenre, SettingName.FablabName]).then(setSettings).catch(onError);
+    SettingAPI.query(titleSettings).then(setSettings).catch(onError);
   }, []);
 
   return (
@@ -39,8 +39,8 @@ export const CompletionHeaderInfo: React.FC<CompletionHeaderInfoProps> = ({ user
         <p className="intro">
           <span>
             {t('app.logged.profile_completion.completion_header_info.sso_intro', {
-              GENDER: settings?.get(SettingName.NameGenre),
-              NAME: settings?.get(SettingName.FablabName)
+              GENDER: settings?.get('name_genre'),
+              NAME: settings?.get('fablab_name')
             })}
           </span>
           <span className="provider-name">

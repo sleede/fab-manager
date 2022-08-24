@@ -35,7 +35,9 @@ Choose one, depending on your budget, on the server's location, on the uptime gu
 #### System requirements
 ##### Memory
 
-If you do not plan to use the statistics module, you will need at least 2 GB of addressable memory (RAM + swap) to install and use Fab-manager.
+To install or upgrade Fab-manager you need at least 4 GB of RAM + 2 GB of swap to be able to compile the assets.
+
+Once installed, if you do not plan to use the statistics module, you will need at least 2 GB of addressable memory (RAM + swap) to use Fab-manager.
 We recommend 4 GB of RAM to take full advantage of Fab-manager and be able to use the statistics module.
 If you have a large community (~ 200 active membres), we recommend 4 GB of RAM, even without the statistics module.
 
@@ -47,10 +49,10 @@ Supported operating systems are Ubuntu LTS 16.04+ and Debian 8+ with an x86 64-b
 This might work on other linux systems, and CPU architectures but this is untested for now, and we do not recommend for production purposes.
 
 #### Software requirements
-`curl` and `bash` are needed to retrieve and run the automated deployment scripts.  
+`curl` and `bash` are needed to retrieve and run the automated deployment scripts.
 Then the various scripts will check for their own dependencies.
 
-Moreover, the main software dependencies to run fab-manager are [Docker](https://docs.docker.com/engine/installation/linux/docker-ce/debian/) v20.10 or above and [Docker Compose](https://docs.docker.com/compose/install/) 
+Moreover, the main software dependencies to run fab-manager are [Docker](https://docs.docker.com/engine/installation/linux/docker-ce/debian/) v20.10 or above and [Docker Compose](https://docs.docker.com/compose/install/)
 They can be easily installed using the [`prepare-vps.sleede.com` script below](#prepare-the-server).
 
 <a name="setup-the-domain-name"></a>
@@ -109,7 +111,7 @@ Then, you can remove the `elasticsearch` service from the [docker-compose.yml](.
 docker compose down && docker compose up -d
 ```
 
-Disabling ElasticSearch will save up to 800 Mb of memory. 
+Disabling ElasticSearch will save up to 800 Mb of memory.
 
 <a name="useful-commands"></a>
 ## Useful commands
@@ -143,7 +145,7 @@ When a new version is available, follow this procedure to update Fab-manager in 
 You can subscribe to [this atom feed](https://github.com/sleede/fab-manager/releases.atom) to get notified when a new release comes out.
 
 <a name="scripted-update"></a>
-### Scripted update 
+### Scripted update
 
 Starting with Fab-manager v4.5.0, you can upgrade Fab-manager in one single easy command, specified in the GitHub releases notes.
 To upgrade multiple versions at once, read the GitHub release notes of all versions between your current version, and the target version.
@@ -164,7 +166,7 @@ Then, you'll need to perform the upgrade with the following command:
 ```bash
 \curl -sSL upgrade.fab.mn | bash -s -- -e "VAR=value" -p "rails fablab:do:things" -c "rails fablab:setup:command"
 ```
-> ⚠ Do not confuse commands prefixed with `-p` and with `-c` because they are not intended to run at the same moment of the upgrade process. 
+> ⚠ Do not confuse commands prefixed with `-p` and with `-c` because they are not intended to run at the same moment of the upgrade process.
 
 <a name="update-manually"></a>
 ### Update manually
@@ -190,7 +192,7 @@ Then, you'll need to perform the upgrade with the following command:
 
    `cd /apps/fabmanager`
 
-2. Pull last docker images 
+2. Pull last docker images
 
    `docker compose pull`
 
@@ -208,9 +210,9 @@ Then, you'll need to perform the upgrade with the following command:
 
 6. Run specific commands
 
-   **Do not forget** to check if there are commands to run for your upgrade. Those commands 
+   **Do not forget** to check if there are commands to run for your upgrade. Those commands
    are always specified in the [CHANGELOG](https://github.com/sleede/fab-manager/blob/master/CHANGELOG.md) and prefixed by **[TODO DEPLOY]**.
- 
+
    Those commands execute specific tasks and have to be run manually.
    You must prefix the commands starting by `rails...` or `rake...` with: `docker compose run --rm fabmanager bundle exec`.
    In any other cases, the other commands (like those invoking curl `\curl -sSL... | bash`) must not be prefixed.
@@ -228,8 +230,8 @@ You can check that all containers are running with `docker compose ps`.
 <a name="upgrade-to-the-last-version"></a>
 ### Upgrade to the last version
 
-It's the default behaviour as `docker compose pull` command will fetch the latest versions of the docker images. 
-Be sure to run all the specific commands listed in the [CHANGELOG](https://github.com/sleede/fab-manager/blob/master/CHANGELOG.md) between your actual, and the new version in sequential order. 
+It's the default behaviour as `docker compose pull` command will fetch the latest versions of the docker images.
+Be sure to run all the specific commands listed in the [CHANGELOG](https://github.com/sleede/fab-manager/blob/master/CHANGELOG.md) between your actual, and the new version in sequential order.
 __Example:__ to update from v2.4.0 to v2.4.3, you will run the specific commands for the v2.4.1, v2.4.2 and v2.4.3.
 
 <a name="upgrade-to-a-specific-version"></a>
@@ -252,4 +254,4 @@ For example, here we want to use the v3.1.2:
 ```yaml
 image: sleede/fab-manager:release-v3.1.2
 ```
-Then run the normal upgrade procedure. 
+Then run the normal upgrade procedure.

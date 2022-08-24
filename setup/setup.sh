@@ -198,7 +198,7 @@ prepare_files()
   if [[ "$confirm" = "n" ]]; then exit 1; fi
 
   elevate_cmd mkdir -p "$FABMANAGER_PATH"
-  elevate_cmd chown -R "$(whoami):$(whoami)" "$FABMANAGER_PATH"
+  elevate_cmd chown -R "$(whoami)" "$FABMANAGER_PATH"
 
   # create folders before starting the containers, otherwise root will own them
   local folders=(accounting config elasticsearch/config exports imports invoices log payment_schedules plugins postgresql \
@@ -384,7 +384,7 @@ configure_env_file()
     var_doc=$(get_md_anchor "$doc" "$variable")
     current=$(grep "$variable=" "$FABMANAGER_PATH/config/env")
     echo "$var_doc" | bat --file-name "$variable" --language md --color=always
-    printf "- \e[1mCurrent value: %s\e[21m\n- New value? (leave empty to keep the current value)\n" "$current"
+    printf -- "- \e[1mCurrent value: %s\e[21m\n- New value? (leave empty to keep the current value)\n" "$current"
     read -rep "  > " value </dev/tty
     if [ "$value" != "" ]; then
       esc_val=$(printf '%s\n' "$value" | sed -e 's/\//\\\//g')
@@ -412,8 +412,12 @@ read_password()
   local password confirmation
   >&2 echo "Please input a password for this administrator's account"
   read -rsp " > " password </dev/tty
-  if [ ${#password} -lt 8 ]; then
-    >&2 printf "\nError: password is too short (minimal length: 8 characters)\n"
+  if [ ${#password} -lt 12 ]; then
+    >&2 printf "\nError: password is too short (minimal length: 12 characters)\n"
+    password=$(read_password 'no-confirm')
+  fi
+  if [[ ! $password =~ [0-9] || ! $password =~ [a-z] || ! $password =~ [A-Z] || ! $password =~ [[:punct:]] ]]; then
+    >&2 printf "\nError: password is too weak (should contain uppercases, lowercases, digits and special characters)\n"
     password=$(read_password 'no-confirm')
   fi
   if [ "$1" != 'no-confirm' ]; then
