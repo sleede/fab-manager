@@ -1,6 +1,6 @@
 # Changelog Fab-manager
 
-## next release
+## v5.4.16 2022 August 24
 
 - Updated portuguese translations
 - Added automatic RuboCop validation on pre-commit
