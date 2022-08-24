@@ -5,7 +5,10 @@
   .product-item {
     --status-color: var(--gray-hard-darkest);
     &.low { --status-color: var(--alert-light); }
-    &.out-of-stock { --status-color: var(--alert); }
+    &.out-of-stock {
+      --status-color: var(--alert);
+      .stock { color: var(--alert) !important; }
+    }
 
     width: 100%;
     display: flex;
@@ -74,8 +77,9 @@
       .stock {
         display: flex;
         flex-direction: column;
-        color: var(--status-color);
+        color: var(--gray-hard-darkest);
         span { @include text-xs; }
+        &.low { color: var(--alert-light); }
       }
       .price {
         justify-self: flex-end;

@@ -6,6 +6,7 @@ import { Product } from '../../models/product';
 import { Order } from '../../models/order';
 import FormatLib from '../../lib/format';
 import CartAPI from '../../api/cart';
+import noImage from '../../../../images/no_image.png';
 
 interface StoreProductItemProps {
   product: Product,
@@ -20,27 +21,14 @@ export const StoreProductItem: React.FC<StoreProductItemProps> = ({ product, car
   const { t } = useTranslation('public');
 
   /**
-   * Return main image of Product, if the product has not any image, show default image
+   * Return main image of Product, if the product has no image, show default image
    */
   const productImageUrl = (product: Product) => {
     const productImage = _.find(product.product_images_attributes, { is_main: true });
     if (productImage) {
       return productImage.attachment_url;
     }
-    return 'https://via.placeholder.com/300';
-  };
-
-  /**
-   * Return product's stock status
-   */
-  const productStockStatus = (product: Product) => {
-    if (product.stock.external === 0) {
-      return <span>{t('app.public.store_product_item.out_of_stock')}</span>;
-    }
-    if (product.low_stock_threshold && product.stock.external < product.low_stock_threshold) {
-      return <span>{t('app.public.store_product_item.limited_stock')}</span>;
-    }
-    return <span>{t('app.public.store_product_item.available')}</span>;
+    return noImage;
   };
 
   /**
@@ -59,23 +47,51 @@ export const StoreProductItem: React.FC<StoreProductItemProps> = ({ product, car
     window.location.href = `/#!/store/p/${product.slug}`;
   };
 
+  /**
+   * Returns CSS class from stock status
+   */
+  const statusColor = (product: Product) => {
+    if (product.stock.external === 0 && product.stock.internal === 0) {
+      return 'out-of-stock';
+    }
+    if (product.low_stock_alert) {
+      return 'low';
+    }
+  };
+
+  /**
+   * Return product's stock status
+   */
+  const productStockStatus = (product: Product) => {
+    if (product.stock.external === 0) {
+      return <span>{t('app.public.store_product_item.out_of_stock')}</span>;
+    }
+    if (product.low_stock_threshold && product.stock.external < product.low_stock_threshold) {
+      return <span>{t('app.public.store_product_item.limited_stock')}</span>;
+    }
+    return <span>{t('app.public.store_product_item.available')}</span>;
+  };
+
   return (
-    <div className="store-product-item" onClick={() => showProduct(product)}>
-      <div className='itemInfo-image'>
-        <img src={productImageUrl(product)} alt='' className='itemInfo-thumbnail' />
+    <div className={`store-product-item ${statusColor(product)}`} onClick={() => showProduct(product)}>
+      <div className="picture">
+        <img src={productImageUrl(product)} alt='' />
       </div>
-      <p className="itemInfo-name">{product.name}</p>
-      <div className=''>
-        <span>
-          <div>{FormatLib.price(product.amount)}</div>
-          {productStockStatus(product)}
-        </span>
-        {product.stock.external > 0 &&
-          <FabButton className="edit-btn" onClick={addProductToCart}>
-            <i className="fas fa-cart-arrow-down" /> {t('app.public.store_product_item.add')}
-          </FabButton>
-        }
+      <p className="name">{product.name}</p>
+      {product.amount &&
+        <div className='price'>
+          <p>{FormatLib.price(product.amount)}</p>
+          <span>/ {t('app.public.store_product_item.unit')}</span>
+        </div>
+      }
+      <div className="stock">
+        {productStockStatus(product)}
       </div>
+      {product.stock.external > 0 &&
+        <FabButton icon={<i className="fas fa-cart-arrow-down" />} className="main-action-btn" onClick={addProductToCart}>
+          {t('app.public.store_product_item.add')}
+        </FabButton>
+      }
     </div>
   );
 };

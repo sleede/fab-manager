@@ -49,7 +49,18 @@ const Store: React.FC<StoreProps> = ({ onError, currentUser }) => {
     });
 
     ProductCategoryAPI.index().then(data => {
-      setProductCategories(data);
+      // Map product categories by position
+      const sortedCategories = data
+        .filter(c => !c.parent_id)
+        .sort((a, b) => a.position - b.position);
+      const childrenCategories = data
+        .filter(c => typeof c.parent_id === 'number')
+        .sort((a, b) => b.position - a.position);
+      childrenCategories.forEach(c => {
+        const parentIndex = sortedCategories.findIndex(i => i.id === c.parent_id);
+        sortedCategories.splice(parentIndex + 1, 0, c);
+      });
+      setProductCategories(sortedCategories);
     }).catch(() => {
       onError(t('app.public.store.unexpected_error_occurred'));
     });

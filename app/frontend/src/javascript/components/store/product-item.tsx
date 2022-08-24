@@ -51,7 +51,7 @@ export const ProductItem: React.FC<ProductItemProps> = ({ product, onEdit, onDel
     if (product.stock.external === 0 && product.stock.internal === 0) {
       return 'out-of-stock';
     }
-    if (product.low_stock_alert) {
+    if (product.low_stock_threshold && (product.stock.external < product.low_stock_threshold || product.stock.internal < product.low_stock_threshold)) {
       return 'low';
     }
   };
@@ -70,11 +70,11 @@ export const ProductItem: React.FC<ProductItemProps> = ({ product, onEdit, onDel
             : t('app.admin.store.product_item.hidden')
           }
         </span>
-        <div className='stock'>
+        <div className={`stock ${product.stock.internal < product.low_stock_threshold ? 'low' : ''}`}>
           <span>{t('app.admin.store.product_item.stock.internal')}</span>
           <p>{product.stock.internal}</p>
         </div>
-        <div className='stock'>
+        <div className={`stock ${product.stock.external < product.low_stock_threshold ? 'low' : ''}`}>
           <span>{t('app.admin.store.product_item.stock.external')}</span>
           <p>{product.stock.external}</p>
         </div>

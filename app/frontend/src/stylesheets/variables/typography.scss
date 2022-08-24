@@ -71,7 +71,7 @@
   h3 {
     @include text-lg(600);
     margin: 0 0 1rem;
-    color: var(--gray-hard-darkest);
+    color: var(--gray-hard-darkest) !important;
   }
   ul {
     padding-inline-start: 2.2rem;

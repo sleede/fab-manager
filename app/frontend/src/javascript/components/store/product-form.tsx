@@ -352,7 +352,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
           </FabAlert>
           <FormRichText control={control}
                         paragraphTools={true}
-                        limit={1000}
+                        limit={6000}
                         id="description" />
         </div>
 

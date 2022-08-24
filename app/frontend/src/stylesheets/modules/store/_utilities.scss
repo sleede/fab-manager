@@ -40,7 +40,11 @@
   background-color: var(--main);
   color: var(--gray-soft-lightest);
   border: none;
-  &:hover { opacity: 0.75; }
+  &:hover {
+    background-color: var(--main);
+    color: var(--gray-soft-lightest);
+    opacity: 0.75;
+  }
 }
 
 @mixin header {

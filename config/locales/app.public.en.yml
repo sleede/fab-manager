@@ -396,6 +396,11 @@ en:
               price_high: "Price: high to low"
       store_product:
         unexpected_error_occurred: "An unexpected error occurred. Please try again later."
+        show_more: "Display more"
+        show_less: "Display less"
+        documentation: "Documentation"
+      store_product_item:
+        unit: "unit"
       cart:
         my_cart: "My Cart"
       cart_button:
