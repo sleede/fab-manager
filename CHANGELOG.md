@@ -2,6 +2,7 @@
 
 ## v5.4.16 2022 August 24
 
+- Updated user's manual for v5.4 (fr)
 - Updated portuguese translations
 - Added automatic RuboCop validation on pre-commit
 - Use union type instead of enum for SettingName
