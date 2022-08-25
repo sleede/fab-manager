@@ -108,7 +108,7 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
   };
 
   /**
-   * Filter: toggle hidden products visibility
+   * Filter: toggle non-available products visibility
    */
   const toggleVisible = (checked: boolean) => {
     setFilterVisible(checked);
@@ -275,7 +275,7 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
             label={t('app.admin.store.products.filter_categories')}
           >
             <div className='content'>
-              <div className="list scrollbar">
+              <div className="list u-scrollbar">
                 {productCategories.map(pc => (
                   <label key={pc.id} className={pc.parent_id ? 'offset' : ''}>
                     <input type="checkbox" checked={filters.categories.includes(pc)} onChange={(event) => handleSelectCategory(pc, event.target.checked)} />
@@ -293,7 +293,7 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
             label={t('app.admin.store.products.filter_machines')}
           >
             <div className='content'>
-              <div className="list scrollbar">
+              <div className="list u-scrollbar">
                 {machines.map(m => (
                   <label key={m.value}>
                     <input type="checkbox" checked={filters.machines.includes(m)} onChange={(event) => handleSelectMachine(m, event.target.checked)} />
@@ -395,16 +395,3 @@ interface Filters {
   internalStock: Stock,
   externalStock: Stock
 }
-
-// Styles the React-select component
-const customStyles = {
-  control: base => ({
-    ...base,
-    width: '20ch',
-    border: 'none',
-    backgroundColor: 'transparent'
-  }),
-  indicatorSeparator: () => ({
-    display: 'none'
-  })
-};

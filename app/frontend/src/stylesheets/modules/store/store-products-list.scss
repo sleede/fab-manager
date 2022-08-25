@@ -1,7 +1,10 @@
 .store-products-list {
   grid-column: 4 / -1;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.4rem 0; 
+
   .features {
-    margin: 2.4rem 0 1.6rem;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -26,5 +29,4 @@
       }
     }
   }
-
 }

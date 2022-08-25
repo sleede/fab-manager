@@ -38,6 +38,8 @@ const Store: React.FC<StoreProps> = ({ onError, currentUser }) => {
 
   const [products, setProducts] = useState<Array<Product>>([]);
   const [productCategories, setProductCategories] = useState<ProductCategory[]>([]);
+  const [categoriesTree, setCategoriesTree] = useState<ParentCategory[]>([]);
+  const [activeCategory, setActiveCategory] = useState<ActiveCategory>();
   const [machines, setMachines] = useState<checklistOption[]>([]);
   const [accordion, setAccordion] = useState({});
 
@@ -49,18 +51,8 @@ const Store: React.FC<StoreProps> = ({ onError, currentUser }) => {
     });
 
     ProductCategoryAPI.index().then(data => {
-      // Map product categories by position
-      const sortedCategories = data
-        .filter(c => !c.parent_id)
-        .sort((a, b) => a.position - b.position);
-      const childrenCategories = data
-        .filter(c => typeof c.parent_id === 'number')
-        .sort((a, b) => b.position - a.position);
-      childrenCategories.forEach(c => {
-        const parentIndex = sortedCategories.findIndex(i => i.id === c.parent_id);
-        sortedCategories.splice(parentIndex + 1, 0, c);
-      });
-      setProductCategories(sortedCategories);
+      setProductCategories(data);
+      formatCategories(data);
     }).catch(() => {
       onError(t('app.public.store.unexpected_error_occurred'));
     });
@@ -81,6 +73,29 @@ const Store: React.FC<StoreProps> = ({ onError, currentUser }) => {
       reloadCart();
     }
   }, [currentUser]);
+
+  /**
+   * Create categories tree (parent/children)
+   */
+  const formatCategories = (list: ProductCategory[]) => {
+    const tree = [];
+    const parents = list.filter(c => !c.parent_id);
+    const getChildren = (id) => {
+      return list.filter(c => c.parent_id === id);
+    };
+    parents.forEach(p => {
+      tree.push({ parent: p, children: getChildren(p.id) });
+    });
+    setCategoriesTree(tree);
+  };
+
+  /**
+   * Filter by category
+   */
+  const filterCategory = (id: number, parent?: number) => {
+    setActiveCategory({ id, parent });
+    console.log('Filter by category:', productCategories.find(c => c.id === id).name);
+  };
 
   /**
    * Apply filters
@@ -121,7 +136,7 @@ const Store: React.FC<StoreProps> = ({ onError, currentUser }) => {
   };
 
   /**
-   * Filter: toggle hidden products visibility
+   * Filter: toggle non-available products visibility
    */
   const toggleVisible = (checked: boolean) => {
     console.log('Display in stock only:', checked);
@@ -129,50 +144,79 @@ const Store: React.FC<StoreProps> = ({ onError, currentUser }) => {
 
   return (
     <div className="store">
-      <div className='store-filters'>
-        <header>
-          <h3>{t('app.public.store.products.filter')}</h3>
-          <div className='grpBtn'>
-            <FabButton onClick={clearAllFilters} className="is-black">{t('app.public.store.products.filter_clear')}</FabButton>
+      <ul className="breadcrumbs">
+        <li>
+          <span onClick={() => setActiveCategory(null)}>{t('app.public.store.products.all_products')}</span>
+        </li>
+        {activeCategory?.parent &&
+          <li>
+            <span onClick={() => filterCategory(activeCategory?.parent)}>
+              {productCategories.find(c => c.id === activeCategory.parent).name}
+            </span>
+          </li>
+        }
+        {activeCategory?.id &&
+          <li>
+            <span onClick={() => filterCategory(activeCategory?.id, activeCategory?.parent)}>
+              {productCategories.find(c => c.id === activeCategory.id).name}
+            </span>
+          </li>
+        }
+      </ul>
+      <aside className='store-filters'>
+        <div className="categories">
+          <header>
+            <h3>{t('app.public.store.products.filter_categories')}</h3>
+          </header>
+          <div className="list u-scrollbar">
+            {categoriesTree.map(c =>
+              <div key={c.parent.id} className={`parent ${activeCategory?.id === c.parent.id || activeCategory?.parent === c.parent.id ? 'is-active' : ''}`}>
+                <p onClick={() => filterCategory(c.parent.id)}>
+                  {c.parent.name}<span>(count)</span>
+                </p>
+                {c.children.length > 0 &&
+                  <div className='children'>
+                    {c.children.map(ch =>
+                      <p key={ch.id}
+                        className={activeCategory?.id === ch.id ? 'is-active' : ''}
+                        onClick={() => filterCategory(ch.id, c.parent.id)}>
+                        {ch.name}<span>(count)</span>
+                      </p>
+                    )}
+                  </div>
+                }
+              </div>
+            )}
           </div>
-        </header>
-        <div className="accordion">
-          <AccordionItem id={0}
-            isOpen={accordion[0]}
-            onChange={handleAccordion}
-            label={t('app.public.store.products.filter_categories')}
-          >
-            <div className='content'>
-              <div className="list scrollbar">
-                {productCategories.map(pc => (
-                  <label key={pc.id} className={pc.parent_id ? 'offset' : ''}>
-                    <input type="checkbox" />
-                    <p>{pc.name}</p>
-                  </label>
-                ))}
-              </div>
-              <FabButton onClick={applyFilters} className="is-info">{t('app.public.store.products.filter_apply')}</FabButton>
-            </div>
-          </AccordionItem>
-          <AccordionItem id={1}
-            isOpen={accordion[1]}
-            onChange={handleAccordion}
-            label={t('app.public.store.products.filter_machines')}
-          >
-            <div className='content'>
-              <div className="list scrollbar">
-                {machines.map(m => (
-                  <label key={m.value}>
-                    <input type="checkbox" />
-                    <p>{m.label}</p>
-                  </label>
-                ))}
-              </div>
-              <FabButton onClick={applyFilters} className="is-info">{t('app.public.store.products.filter_apply')}</FabButton>
-            </div>
-          </AccordionItem>
         </div>
-      </div>
+        <div className='filters'>
+          <header>
+            <h3>{t('app.public.store.products.filter')}</h3>
+            <div className='grpBtn'>
+              <FabButton onClick={clearAllFilters} className="is-black">{t('app.public.store.products.filter_clear')}</FabButton>
+            </div>
+          </header>
+          <div className="accordion">
+            <AccordionItem id={1}
+              isOpen={accordion[1]}
+              onChange={handleAccordion}
+              label={t('app.public.store.products.filter_machines')}
+            >
+              <div className='content'>
+                <div className="list u-scrollbar">
+                  {machines.map(m => (
+                    <label key={m.value}>
+                      <input type="checkbox" />
+                      <p>{m.label}</p>
+                    </label>
+                  ))}
+                </div>
+                <FabButton onClick={applyFilters} className="is-info">{t('app.public.store.products.filter_apply')}</FabButton>
+              </div>
+            </AccordionItem>
+          </div>
+        </div>
+      </aside>
       <div className='store-products-list'>
         <ProductsListHeader
           productsCount={products.length}
@@ -181,17 +225,6 @@ const Store: React.FC<StoreProps> = ({ onError, currentUser }) => {
           switchLabel={t('app.public.store.products.in_stock_only')}
           onSwitch={toggleVisible}
         />
-        <div className='features'>
-          <div className='features-item'>
-            <p>feature name</p>
-            <button><i className="fa fa-times" /></button>
-          </div>
-          <div className='features-item'>
-            <p>long feature name</p>
-            <button><i className="fa fa-times" /></button>
-          </div>
-        </div>
-
         <div className="products-grid">
           {products.map((product) => (
             <StoreProductItem key={product.id} product={product} cart={cart} onSuccessAddProductToCart={setCart} />
@@ -224,3 +257,12 @@ const StoreWrapper: React.FC<StoreProps> = (props) => {
 };
 
 Application.Components.component('store', react2angular(StoreWrapper, ['onError', 'currentUser']));
+
+interface ActiveCategory {
+  id: number,
+  parent: number
+}
+interface ParentCategory {
+  parent: ProductCategory,
+  children: ProductCategory[]
+}

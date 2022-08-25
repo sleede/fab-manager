@@ -1,7 +1,56 @@
 .store-filters {
   grid-column: 1 / 4;
-  padding-top: 1.6rem;
-  border-top: 1px solid var(--gray-soft-dark);
+
+  .categories {
+    margin-bottom: 3.2rem;
+    p {
+      display: flex;
+      align-items: baseline;
+      cursor: pointer;
+      span {
+        margin-left: 0.8rem;
+        @include text-xs;
+        color: var(--information);
+      }
+    }
+    .parent {
+      & > p {
+        margin-bottom: 2.4rem;
+        @include text-base(500);
+        color: var(--gray-hard);
+      }
+      &.is-active > p {
+        @include text-base(600);
+        color: var(--information);
+        .children {
+          max-height: 1000px;
+        }
+      }
+      &.is-active .children {
+        max-height: 1000px;
+        margin: -0.8rem 0 1.6rem;
+        transition: max-height 500ms ease-in-out;
+      }
+    }
+
+    .children {
+      max-height: 0;
+      overflow: hidden;
+      p {
+        margin-bottom: 1.6rem;
+        @include text-base(400);
+        color: var(--gray-hard-light);
+        &.is-active {
+          background-color: var(--gray-soft-light);
+        }
+      }
+    }
+  }
+
+  .filters {
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--gray-soft-dark);
+  }
 
   header {
     @include header();
@@ -20,20 +69,7 @@
         .content { max-height: 0; }
         header svg { transform: rotateZ(180deg); }
       }
-      
-      & > input[type=checkbox] {
-        position: absolute;
-        width: 100%;
-        z-index: 1;
-        opacity: 0;
-        cursor: pointer;
-      }
-      & > input[type=checkbox]:checked ~ .content {
-        max-height: 0;
-      }
-      & > input[type=checkbox]:checked ~ header svg {
-        transform: rotateZ(180deg);
-      }
+
       header {
         width: 100%;
         padding: 0;
@@ -80,27 +116,5 @@
         }
       }
     }
-  }
-}
-
-// Custom scrollbar
-.scrollbar {
-  &::-webkit-scrollbar-track
-  {
-    border-radius: 6px;
-    background-color: #d9d9d9;
-  }
-  
-  &::-webkit-scrollbar
-  {
-    width: 12px;
-    background-color: #ffffff;
-  }
-  
-  &::-webkit-scrollbar-thumb
-  {
-    border-radius: 6px;
-    background-color: #2d2d2d;
-    border: 2px solid #d9d9d9
   }
 }

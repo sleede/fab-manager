@@ -26,7 +26,6 @@ export const StoreProduct: React.FC<StoreProductProps> = ({ productSlug, onError
   const { t } = useTranslation('public');
 
   const [product, setProduct] = useState<Product>();
-  console.log('product: ', product);
   const [showImage, setShowImage] = useState<number>(null);
   const [toCartCount, setToCartCount] = useState<number>(0);
   const [displayToggle, setDisplayToggle] = useState<boolean>(false);
@@ -170,7 +169,7 @@ export const StoreProduct: React.FC<StoreProductProps> = ({ productSlug, onError
               <FabButton onClick={() => setCount('add')} icon={<Plus size={16} />} className="plus" />
               <FabButton onClick={() => console.log('Add', toCartCount, 'to cart')} icon={<i className="fas fa-cart-arrow-down" />}
                 className="main-action-btn">
-                {t('app.public.store_product_item.add')}
+                {t('app.public.store_product_item.add_to_cart')}
               </FabButton>
             </div>
           }

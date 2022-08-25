@@ -67,3 +67,25 @@
     color: var(--gray-hard-darkest) !important;
   }
 }
+
+// Custom scrollbar
+.u-scrollbar {
+  &::-webkit-scrollbar-track
+  {
+    border-radius: 6px;
+    background-color: #d9d9d9;
+  }
+  
+  &::-webkit-scrollbar
+  {
+    width: 12px;
+    background-color: #ffffff;
+  }
+  
+  &::-webkit-scrollbar-thumb
+  {
+    border-radius: 6px;
+    background-color: #2d2d2d;
+    border: 2px solid #d9d9d9
+  }
+}

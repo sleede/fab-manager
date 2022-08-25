@@ -2,9 +2,36 @@
 .store-product {
   max-width: 1600px;
   @include grid-col(12);
-  gap: 3.2rem;
+  gap: 2.4rem 3.2rem;
+  align-items: flex-start;
   margin: 0 auto;
   padding-bottom: 6rem;
+}
+
+.store {
+  .breadcrumbs {
+    grid-column: 1 / -1;
+    padding: 0.8rem 1.6rem;
+    display: flex;
+    list-style: none;
+    border-radius: var(--border-radius-sm);
+    background-color: var(--gray-soft-light);
+    li:not(:last-of-type)::after {
+      margin: 0 2.4rem;
+      content: "\f054";
+      font-family: 'Font Awesome 5 Free';
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: var(--gray-hard-darkest);
+    }
+    li:last-of-type:not(:first-of-type) span {
+      color: var(--information);
+    }
+    span {
+      color: var(--gray-hard-light);
+      cursor: pointer;
+    }
+  }
 }
 
 .store-product {
