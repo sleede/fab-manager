@@ -12,6 +12,7 @@ import { PaymentModal } from '../payment/stripe/payment-modal';
 import { PaymentMethod } from '../../models/payment';
 import { Order } from '../../models/order';
 import { MemberSelect } from '../user/member-select';
+import { CouponInput } from '../coupon/coupon-input';
 
 declare const Application: IApplication;
 
@@ -117,6 +118,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onError, currentUser }) => {
           </FabButton>
         </div>
       ))}
+      {cart && !cartIsEmpty() && <CouponInput user={cart.user} amount={cart.amount} />}
       {cart && !cartIsEmpty() && <p>Totale: {FormatLib.price(cart.amount)}</p>}
       {cart && !cartIsEmpty() && isPrivileged() && <MemberSelect defaultUser={cart.user} onSelected={handleChangeMember} />}
       {cart && !cartIsEmpty() &&
