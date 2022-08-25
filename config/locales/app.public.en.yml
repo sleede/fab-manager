@@ -219,6 +219,11 @@ en:
         new_availability: "Open reservations"
         book: "Book"
         _or_the_: " or the "
+        store_ad:
+          title: "Discover our store"
+          buy: "Check out products from members' projects along with consumable related to the different machines and tools of the workshop."
+          sell: "If you also want to sell your creations, please let us know."
+          link: "To the store"
       machines_filters:
         show_machines: "Show machines"
         status_enabled: "Enabled"
