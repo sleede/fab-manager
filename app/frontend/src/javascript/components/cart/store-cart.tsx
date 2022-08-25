@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
 import { Loader } from '../base/loader';
@@ -26,14 +26,8 @@ interface StoreCartProps {
 const StoreCart: React.FC<StoreCartProps> = ({ onError, currentUser }) => {
   const { t } = useTranslation('public');
 
-  const { cart, setCart, reloadCart } = useCart();
+  const { cart, setCart } = useCart(currentUser);
   const [paymentModal, setPaymentModal] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (currentUser) {
-      reloadCart();
-    }
-  }, [currentUser]);
 
   /**
    * Remove the product from cart
@@ -97,8 +91,16 @@ const StoreCart: React.FC<StoreCartProps> = ({ onError, currentUser }) => {
     return (currentUser?.role === 'admin' || currentUser?.role === 'manager');
   };
 
+  /**
+   * Check if the current cart is empty ?
+   */
+  const cartIsEmpty = (): boolean => {
+    return cart && cart.order_items_attributes.length === 0;
+  };
+
   return (
     <div className="store-cart">
+      {cart && cartIsEmpty() && <p>{t('app.public.store_cart.cart_is_empty')}</p>}
       {cart && cart.order_items_attributes.map(item => (
         <div key={item.id}>
           <div>{item.orderable_name}</div>
@@ -115,23 +117,23 @@ const StoreCart: React.FC<StoreCartProps> = ({ onError, currentUser }) => {
           </FabButton>
         </div>
       ))}
-      {cart && cart.order_items_attributes.length > 0 && <p>Totale: {FormatLib.price(cart.amount)}</p>}
-      {cart && isPrivileged() && <MemberSelect defaultUser={cart.user} onSelected={handleChangeMember} />}
-      {cart &&
+      {cart && !cartIsEmpty() && <p>Totale: {FormatLib.price(cart.amount)}</p>}
+      {cart && !cartIsEmpty() && isPrivileged() && <MemberSelect defaultUser={cart.user} onSelected={handleChangeMember} />}
+      {cart && !cartIsEmpty() &&
         <FabButton className="checkout-btn" onClick={checkout} disabled={!cart.user || cart.order_items_attributes.length === 0}>
           {t('app.public.store_cart.checkout')}
         </FabButton>
       }
-      {cart && cart.order_items_attributes.length > 0 && cart.user && <div>
+      {cart && !cartIsEmpty() && cart.user && <div>
         <PaymentModal isOpen={paymentModal}
           toggleModal={togglePaymentModal}
           afterSuccess={handlePaymentSuccess}
           onError={onError}
-          cart={{ customer_id: currentUser.id, items: [], payment_method: PaymentMethod.Card }}
+          cart={{ customer_id: cart.user.id, items: [], payment_method: PaymentMethod.Card }}
           order={cart}
           operator={currentUser}
           customer={cart.user}
-          updateCart={() => console.log('success')} />
+          updateCart={() => 'dont need update shopping cart'} />
       </div>}
     </div>
   );
