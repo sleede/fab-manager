@@ -5,10 +5,10 @@ class Order < ApplicationRecord
   belongs_to :statistic_profile
   has_many :order_items, dependent: :destroy
 
-  ALL_STATES = %w[cart].freeze
+  ALL_STATES = %w[cart in_progress ready canceled return].freeze
   enum state: ALL_STATES.zip(ALL_STATES).to_h
 
-  PAYMENT_STATES = %w[paid failed].freeze
+  PAYMENT_STATES = %w[paid failed refunded].freeze
   enum payment_state: PAYMENT_STATES.zip(PAYMENT_STATES).to_h
 
   validates :token, :state, presence: true

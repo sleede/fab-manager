@@ -6,6 +6,10 @@ class Checkout::PaymentService
   require 'stripe/helper'
 
   def payment(order, operator, payment_id = '')
+    raise Cart::OutStockError unless Orders::OrderService.new.in_stock?(order, 'external')
+
+    raise Cart::InactiveProductError unless Orders::OrderService.new.all_products_is_active?
+
     if operator.member?
       if Stripe::Helper.enabled?
         Payments::StripeService.new.payment(order, payment_id)

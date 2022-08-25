@@ -11,6 +11,8 @@ class Payments::PayzenService
   def payment(order)
     amount = debit_amount(order)
 
+    raise Cart::ZeroPriceError if amount.zero?
+
     id = PayZen::Helper.generate_ref(order, order.statistic_profile.user.id)
 
     client = PayZen::Charge.new

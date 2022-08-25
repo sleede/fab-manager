@@ -7,6 +7,9 @@ class Payments::StripeService
 
   def payment(order, payment_id)
     amount = debit_amount(order)
+
+    raise Cart::ZeroPriceError if amount.zero?
+
     # Create the PaymentIntent
     intent = Stripe::PaymentIntent.create(
       {
