@@ -22,4 +22,12 @@ class ProductService
     end
     nil
   end
+
+  def self.update_stock(product, stock_type, reason, quantity)
+    remaining_stock = product.stock[stock_type] + quantity
+    product.product_stock_movements.create(stock_type: stock_type, reason: reason, quantity: quantity, remaining_stock: remaining_stock,
+                                           date: DateTime.current)
+    product.stock[stock_type] = remaining_stock
+    product.save
+  end
 end

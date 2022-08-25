@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_18_160821) do
+ActiveRecord::Schema.define(version: 2022_08_22_081222) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -467,6 +467,7 @@ ActiveRecord::Schema.define(version: 2022_08_18_160821) do
     t.integer "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "payment_state"
     t.index ["statistic_profile_id"], name: "index_orders_on_statistic_profile_id"
   end
 

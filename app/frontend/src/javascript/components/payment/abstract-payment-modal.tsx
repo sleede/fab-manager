@@ -18,16 +18,18 @@ import { GoogleTagManager } from '../../models/gtm';
 import { ComputePriceResult } from '../../models/price';
 import { Wallet } from '../../models/wallet';
 import FormatLib from '../../lib/format';
+import { Order } from '../../models/order';
 
 export interface GatewayFormProps {
   onSubmit: () => void,
-  onSuccess: (result: Invoice|PaymentSchedule) => void,
+  onSuccess: (result: Invoice|PaymentSchedule|Order) => void,
   onError: (message: string) => void,
   customer: User,
   operator: User,
   className?: string,
   paymentSchedule?: PaymentSchedule,
   cart?: ShoppingCart,
+  order?: Order,
   updateCart?: (cart: ShoppingCart) => void,
   formId: string,
 }
@@ -35,9 +37,10 @@ export interface GatewayFormProps {
 interface AbstractPaymentModalProps {
   isOpen: boolean,
   toggleModal: () => void,
-  afterSuccess: (result: Invoice|PaymentSchedule) => void,
+  afterSuccess: (result: Invoice|PaymentSchedule|Order) => void,
   onError: (message: string) => void,
   cart: ShoppingCart,
+  order?: Order,
   updateCart?: (cart: ShoppingCart) => void,
   currentUser: User,
   schedule?: PaymentSchedule,
@@ -61,7 +64,7 @@ declare const GTM: GoogleTagManager;
  * This component must not be called directly but must be extended for each implemented payment gateway.
  * @see https://reactjs.org/docs/composition-vs-inheritance.html
  */
-export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, cart, updateCart, currentUser, schedule, customer, logoFooter, GatewayForm, formId, className, formClassName, title, preventCgv, preventScheduleInfo, modalSize }) => {
+export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, cart, updateCart, currentUser, schedule, customer, logoFooter, GatewayForm, formId, className, formClassName, title, preventCgv, preventScheduleInfo, modalSize, order }) => {
   // customer's wallet
   const [wallet, setWallet] = useState<Wallet>(null);
   // server-computed price with all details
@@ -108,16 +111,25 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
    * - Refresh the remaining price
    */
   useEffect(() => {
-    if (!cart) return;
-    WalletAPI.getByUser(cart.customer_id).then((wallet) => {
-      setWallet(wallet);
-      PriceAPI.compute(cart).then((res) => {
-        setPrice(res);
-        setRemainingPrice(new WalletLib(wallet).computeRemainingPrice(res.price));
+    if (order && order?.user?.id) {
+      WalletAPI.getByUser(order.user.id).then((wallet) => {
+        setWallet(wallet);
+        const p = { price: order.amount, price_without_coupon: order.amount };
+        setPrice(p);
+        setRemainingPrice(new WalletLib(wallet).computeRemainingPrice(p.price));
         setReady(true);
       });
-    });
-  }, [cart]);
+    } else if (cart && cart.customer_id) {
+      WalletAPI.getByUser(cart.customer_id).then((wallet) => {
+        setWallet(wallet);
+        PriceAPI.compute(cart).then((res) => {
+          setPrice(res);
+          setRemainingPrice(new WalletLib(wallet).computeRemainingPrice(res.price));
+          setReady(true);
+        });
+      });
+    }
+  }, [cart, order]);
 
   /**
    * Check if there is currently an error to display
@@ -157,7 +169,7 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
   /**
    * After sending the form with success, process the resulting payment method
    */
-  const handleFormSuccess = async (result: Invoice|PaymentSchedule): Promise<void> => {
+  const handleFormSuccess = async (result: Invoice|PaymentSchedule|Order): Promise<void> => {
     setSubmitState(false);
     GTM.trackPurchase(result.id, result.total);
     afterSuccess(result);
@@ -213,6 +225,7 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
           className={`gateway-form ${formClassName || ''}`}
           formId={formId}
           cart={cart}
+          order={order}
           updateCart={updateCart}
           customer={customer}
           paymentSchedule={schedule}>

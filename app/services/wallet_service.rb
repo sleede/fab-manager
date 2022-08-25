@@ -82,6 +82,8 @@ class WalletService
   def self.wallet_amount_debit(payment, user, coupon = nil)
     total = if payment.is_a? PaymentSchedule
               payment.payment_schedule_items.first.amount
+            elsif payment.is_a? Order
+              payment.amount
             else
               payment.total
             end
@@ -106,10 +108,9 @@ class WalletService
       # wallet debit success
       raise DebitWalletError unless wallet_transaction
 
-      payment.set_wallet_transaction(wallet_amount, wallet_transaction.id)
+      payment.set_wallet_transaction(wallet_amount, wallet_transaction.id) unless payment.is_a? Order
     else
-      payment.set_wallet_transaction(wallet_amount, nil)
+      payment.set_wallet_transaction(wallet_amount, nil) unless payment.is_a? Order
     end
   end
-
 end

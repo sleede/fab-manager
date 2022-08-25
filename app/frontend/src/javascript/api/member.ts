@@ -9,6 +9,16 @@ export default class MemberAPI {
     return res?.data;
   }
 
+  static async search (name: string): Promise<Array<User>> {
+    const res: AxiosResponse<Array<User>> = await apiClient.get(`/api/members/search/${name}`);
+    return res?.data;
+  }
+
+  static async get (id: number): Promise<User> {
+    const res: AxiosResponse<User> = await apiClient.get(`/api/members/${id}`);
+    return res?.data;
+  }
+
   static async create (user: User): Promise<User> {
     const data = serialize({ user });
     if (user.profile_attributes?.user_avatar_attributes?.attachment_files[0]) {
