@@ -39,7 +39,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onError, currentUser }) => {
       e.stopPropagation();
       CartAPI.removeItem(cart, item.orderable_id).then(data => {
         setCart(data);
-      });
+      }).catch(onError);
     };
   };
 
@@ -50,7 +50,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onError, currentUser }) => {
     return (e: React.BaseSyntheticEvent) => {
       CartAPI.setQuantity(cart, item.orderable_id, e.target.value).then(data => {
         setCart(data);
-      });
+      }).catch(onError);
     };
   };
 
@@ -82,7 +82,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onError, currentUser }) => {
   const handleChangeMember = (userId: number): void => {
     CartAPI.setCustomer(cart, userId).then(data => {
       setCart(data);
-    });
+    }).catch(onError);
   };
 
   /**
