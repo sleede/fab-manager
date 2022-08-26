@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 import { Order } from '../models/order';
 import CartAPI from '../api/cart';
 import { getCartToken, setCartToken } from '../lib/cart-token';
+import { User } from '../models/user';
 
-export default function useCart () {
+export default function useCart (user?: User) {
   const [cart, setCart] = useState<Order>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState(null);
@@ -32,6 +33,12 @@ export default function useCart () {
     setCart(data);
     setLoading(false);
   };
+
+  useEffect(() => {
+    if (user && cart && (!cart.statistic_profile_id || !cart.operator_id)) {
+      reloadCart();
+    }
+  }, [user]);
 
   return { loading, cart, error, setCart, reloadCart };
 }

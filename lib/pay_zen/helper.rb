@@ -59,10 +59,24 @@ class PayZen::Helper
     def generate_shopping_cart(cart_items, customer, operator)
       cart = if cart_items.is_a? ShoppingCart
                cart_items
+             elsif cart_items.is_a? Order
+               cart_items
              else
                cs = CartService.new(operator)
                cs.from_hash(cart_items)
              end
+      if cart.is_a? Order
+        return {
+          cartItemInfo: cart.order_items.map do |item|
+            {
+              productAmount: item.amount.to_i.to_s,
+              productLabel: item.orderable_id,
+              productQty: item.quantity.to_s,
+              productType: customer.organization? ? 'SERVICE_FOR_BUSINESS' : 'SERVICE_FOR_INDIVIDUAL'
+            }
+          end
+        }
+      end
       {
         cartItemInfo: cart.items.map do |item|
           {
