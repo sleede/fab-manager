@@ -5,6 +5,7 @@ class Order < ApplicationRecord
   belongs_to :statistic_profile
   belongs_to :operator_profile, class_name: 'InvoicingProfile'
   has_many :order_items, dependent: :destroy
+  has_one :payment_gateway_object, as: :item
 
   ALL_STATES = %w[cart in_progress ready canceled return].freeze
   enum state: ALL_STATES.zip(ALL_STATES).to_h

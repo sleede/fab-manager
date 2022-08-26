@@ -28,11 +28,11 @@ class Payments::PayzenService
     payzen_order = client.get(payment_id, operation_type: 'DEBIT')
 
     if payzen_order['answer']['transactions'].any? { |transaction| transaction['status'] == 'PAID' }
-      o = payment_success(order, 'card')
+      o = payment_success(order, 'card', payment_id, 'PayZen::Order')
       { order: o }
     else
       order.update(payment_state: 'failed')
-      { order: order, payment_error: payzen_order['answer'] }
+      { order: order, payment: { error: { statusText: payzen_order['answer'] } } }
     end
   end
 end

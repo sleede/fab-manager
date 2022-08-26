@@ -15,7 +15,7 @@ module Payments::PaymentConcern
     total - wallet_debit
   end
 
-  def payment_success(order, payment_method = '')
+  def payment_success(order, payment_method = '', payment_id = nil, payment_type = nil)
     ActiveRecord::Base.transaction do
       WalletService.debit_user_wallet(order, order.statistic_profile.user)
       order.operator_profile_id = order.statistic_profile.user.invoicing_profile.id if order.operator_profile.nil?
@@ -26,6 +26,9 @@ module Payments::PaymentConcern
                              end
       order.state = 'in_progress'
       order.payment_state = 'paid'
+      if payment_id && payment_type
+        order.payment_gateway_object = PaymentGatewayObject.new(gateway_object_id: payment_id, gateway_object_type: payment_type)
+      end
       order.order_items.each do |item|
         ProductService.update_stock(item.orderable, 'external', 'sold', -item.quantity, item.id)
       end
