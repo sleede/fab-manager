@@ -20,7 +20,7 @@ module Payments::PaymentConcern
       WalletService.debit_user_wallet(order, order.statistic_profile.user)
       order.update(state: 'in_progress', payment_state: 'paid')
       order.order_items.each do |item|
-        ProductService.update_stock(item.orderable, 'external', 'sold', -item.quantity)
+        ProductService.update_stock(item.orderable, 'external', 'sold', -item.quantity, item.id)
       end
       order.reload
     end

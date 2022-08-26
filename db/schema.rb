@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_26_074619) do
+ActiveRecord::Schema.define(version: 2022_08_26_085923) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -632,6 +632,7 @@ ActiveRecord::Schema.define(version: 2022_08_26_074619) do
     t.datetime "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "order_item_id"
     t.index ["product_id"], name: "index_product_stock_movements_on_product_id"
   end
 
