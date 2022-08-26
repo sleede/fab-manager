@@ -75,15 +75,13 @@ class WalletService
 
   ##
   # Compute the amount decreased from the user's wallet, if applicable
-  # @param payment {Invoice|PaymentSchedule}
+  # @param payment {Invoice|PaymentSchedule|Order}
   # @param user {User} the customer
   # @param coupon {Coupon|String} Coupon object or code
   ##
   def self.wallet_amount_debit(payment, user, coupon = nil)
     total = if payment.is_a? PaymentSchedule
               payment.payment_schedule_items.first.amount
-            elsif payment.is_a? Order
-              payment.amount
             else
               payment.total
             end
@@ -95,7 +93,7 @@ class WalletService
   end
 
   ##
-  # Subtract the amount of the payment document (Invoice|PaymentSchedule) from the customer's wallet
+  # Subtract the amount of the payment document (Invoice|PaymentSchedule|Order) from the customer's wallet
   # @param transaction, if false: the wallet is not debited, the transaction is only simulated on the payment document
   ##
   def self.debit_user_wallet(payment, user, transaction: true)

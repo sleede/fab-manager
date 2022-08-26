@@ -9,9 +9,7 @@ class API::CartController < API::ApiController
 
   def create
     authorize :cart, :create?
-    p '-----------------'
-    p current_user
-    @order = Order.find_by(token: order_token)
+    @order = Order.find_by(token: order_token, state: 'cart')
     if @order.nil?
       if current_user&.member?
         @order = Order.where(statistic_profile_id: current_user.statistic_profile.id,

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 json.extract! order, :id, :token, :statistic_profile_id, :operator_id, :reference, :state, :created_at
-json.amount order.amount / 100.0 if order.amount.present?
+json.total order.total / 100.0 if order.total.present?
 if order&.statistic_profile&.user
   json.user do
     json.id order.statistic_profile.user.id

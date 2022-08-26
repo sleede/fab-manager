@@ -8,7 +8,7 @@ class Checkout::PaymentService
   def payment(order, operator, payment_id = '')
     raise Cart::OutStockError unless Orders::OrderService.new.in_stock?(order, 'external')
 
-    raise Cart::InactiveProductError unless Orders::OrderService.new.all_products_is_active?
+    raise Cart::InactiveProductError unless Orders::OrderService.new.all_products_is_active?(order)
 
     if operator.member?
       if Stripe::Helper.enabled?

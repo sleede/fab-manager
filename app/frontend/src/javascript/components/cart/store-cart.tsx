@@ -72,8 +72,8 @@ const StoreCart: React.FC<StoreCartProps> = ({ onError, currentUser }) => {
    * Open/closes the payment modal
    */
   const handlePaymentSuccess = (data: Order): void => {
-    console.log(data);
     setPaymentModal(false);
+    window.location.href = '/#!/store';
   };
 
   /**
@@ -118,8 +118,8 @@ const StoreCart: React.FC<StoreCartProps> = ({ onError, currentUser }) => {
           </FabButton>
         </div>
       ))}
-      {cart && !cartIsEmpty() && <CouponInput user={cart.user} amount={cart.amount} />}
-      {cart && !cartIsEmpty() && <p>Totale: {FormatLib.price(cart.amount)}</p>}
+      {cart && !cartIsEmpty() && <CouponInput user={cart.user} amount={cart.total} />}
+      {cart && !cartIsEmpty() && <p>Totale: {FormatLib.price(cart.total)}</p>}
       {cart && !cartIsEmpty() && isPrivileged() && <MemberSelect defaultUser={cart.user} onSelected={handleChangeMember} />}
       {cart && !cartIsEmpty() &&
         <FabButton className="checkout-btn" onClick={checkout} disabled={!cart.user || cart.order_items_attributes.length === 0}>

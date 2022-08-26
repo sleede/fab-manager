@@ -114,7 +114,7 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
     if (order && order?.user?.id) {
       WalletAPI.getByUser(order.user.id).then((wallet) => {
         setWallet(wallet);
-        const p = { price: order.amount, price_without_coupon: order.amount };
+        const p = { price: order.total, price_without_coupon: order.total };
         setPrice(p);
         setRemainingPrice(new WalletLib(wallet).computeRemainingPrice(p.price));
         setReady(true);

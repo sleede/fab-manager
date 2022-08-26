@@ -11,7 +11,6 @@ export interface Order {
   operator_id?: number,
   reference?: string,
   state?: string,
-  amount?: number,
   total?: number,
   created_at?: TDateISO,
   order_items_attributes: Array<{

@@ -9,7 +9,7 @@ module API::OrderConcern
   end
 
   def current_order
-    @current_order = Order.find_by(token: order_token)
+    @current_order = Order.find_by(token: order_token, state: 'cart')
   end
 
   def ensure_order

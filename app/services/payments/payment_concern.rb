@@ -10,7 +10,7 @@ module Payments::PaymentConcern
   end
 
   def debit_amount(order)
-    total = order.amount
+    total = order.total
     wallet_debit = get_wallet_debit(order.statistic_profile.user, total)
     total - wallet_debit
   end

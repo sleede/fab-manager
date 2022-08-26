@@ -7,7 +7,7 @@ class Cart::RemoveItemService
 
     raise ActiveRecord::RecordNotFound if item.nil?
 
-    order.amount -= (item.amount * item.quantity.to_i)
+    order.total -= (item.amount * item.quantity.to_i)
     ActiveRecord::Base.transaction do
       item.destroy!
       order.save
