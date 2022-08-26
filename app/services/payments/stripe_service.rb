@@ -5,8 +5,8 @@ class Payments::StripeService
   require 'stripe/service'
   include Payments::PaymentConcern
 
-  def payment(order, payment_id)
-    amount = debit_amount(order)
+  def payment(order, coupon_code, payment_id)
+    amount = debit_amount(order, coupon_code)
 
     raise Cart::ZeroPriceError if amount.zero?
 
@@ -23,7 +23,7 @@ class Payments::StripeService
     )
 
     if intent&.status == 'succeeded'
-      o = payment_success(order, 'card', intent.id, intent.class.name)
+      o = payment_success(order, coupon_code, 'card', intent.id, intent.class.name)
       return { order: o }
     end
 
@@ -33,10 +33,10 @@ class Payments::StripeService
     end
   end
 
-  def confirm_payment(order, payment_id)
+  def confirm_payment(order, coupon_code, payment_id)
     intent = Stripe::PaymentIntent.confirm(payment_id, {}, { api_key: Setting.get('stripe_secret_key') })
     if intent&.status == 'succeeded'
-      o = payment_success(order, 'card', intent.id, intent.class.name)
+      o = payment_success(order, coupon_code, 'card', intent.id, intent.class.name)
       { order: o }
     else
       order.update(payment_state: 'failed')

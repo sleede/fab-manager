@@ -13,6 +13,8 @@ import { PaymentMethod } from '../../models/payment';
 import { Order } from '../../models/order';
 import { MemberSelect } from '../user/member-select';
 import { CouponInput } from '../coupon/coupon-input';
+import { Coupon } from '../../models/coupon';
+import { computePriceWithCoupon } from '../../lib/coupon';
 
 declare const Application: IApplication;
 
@@ -103,6 +105,16 @@ const StoreCart: React.FC<StoreCartProps> = ({ onError, currentUser }) => {
     return cart && cart.order_items_attributes.length === 0;
   };
 
+  /**
+   * Apply coupon to current cart
+   */
+  const applyCoupon = (coupon?: Coupon): void => {
+    if (coupon !== cart.coupon) {
+      cart.coupon = coupon;
+      setCart({ ...cart, coupon });
+    }
+  };
+
   return (
     <div className="store-cart">
       {cart && cartIsEmpty() && <p>{t('app.public.store_cart.cart_is_empty')}</p>}
@@ -122,8 +134,10 @@ const StoreCart: React.FC<StoreCartProps> = ({ onError, currentUser }) => {
           </FabButton>
         </div>
       ))}
-      {cart && !cartIsEmpty() && <CouponInput user={cart.user} amount={cart.total} />}
-      {cart && !cartIsEmpty() && <p>Totale: {FormatLib.price(cart.total)}</p>}
+      {cart && !cartIsEmpty() && cart.user && <CouponInput user={cart.user} amount={cart.total} onChange={applyCoupon} />}
+      {cart && !cartIsEmpty() && <p>Total produits: {FormatLib.price(cart.total)}</p>}
+      {cart && !cartIsEmpty() && cart.coupon && computePriceWithCoupon(cart.total, cart.coupon) !== cart.total && <p>Coupon réduction: {FormatLib.price(-(cart.total - computePriceWithCoupon(cart.total, cart.coupon)))}</p>}
+      {cart && !cartIsEmpty() && <p>Total panier: {FormatLib.price(computePriceWithCoupon(cart.total, cart.coupon))}</p>}
       {cart && !cartIsEmpty() && isPrivileged() && <MemberSelect defaultUser={cart.user} onSelected={handleChangeMember} />}
       {cart && !cartIsEmpty() &&
         <FabButton className="checkout-btn" onClick={checkout} disabled={!cart.user || cart.order_items_attributes.length === 0}>

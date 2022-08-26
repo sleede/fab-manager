@@ -4,6 +4,7 @@
 class Order < PaymentDocument
   belongs_to :statistic_profile
   belongs_to :operator_profile, class_name: 'InvoicingProfile'
+  belongs_to :coupon
   has_many :order_items, dependent: :destroy
   has_one :payment_gateway_object, as: :item
 
@@ -16,6 +17,8 @@ class Order < PaymentDocument
   validates :token, :state, presence: true
 
   before_create :add_environment
+
+  delegate :user, to: :statistic_profile
 
   def footprint_children
     order_items

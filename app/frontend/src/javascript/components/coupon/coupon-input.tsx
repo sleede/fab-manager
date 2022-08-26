@@ -9,7 +9,7 @@ import { User } from '../../models/user';
 interface CouponInputProps {
   amount: number,
   user?: User,
-  onChange?: (coupon: Coupon) => void
+  onChange?: (coupon?: Coupon) => void
 }
 
 interface Message {
@@ -58,7 +58,10 @@ export const CouponInput: React.FC<CouponInputProps> = ({ user, amount, onChange
         setCoupon(null);
         setLoading(false);
         setMessages([{ type: 'danger', message: t(`app.shared.coupon_input.unable_to_apply_the_coupon_because_${state}`) }]);
+        onChange(null);
       });
+    } else {
+      onChange(null);
     }
   };
 

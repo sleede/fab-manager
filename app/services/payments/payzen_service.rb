@@ -8,8 +8,8 @@ class Payments::PayzenService
   require 'pay_zen/service'
   include Payments::PaymentConcern
 
-  def payment(order)
-    amount = debit_amount(order)
+  def payment(order, coupon_code)
+    amount = debit_amount(order, coupon_code)
 
     raise Cart::ZeroPriceError if amount.zero?
 
@@ -23,12 +23,12 @@ class Payments::PayzenService
     { order: order, payment: { formToken: result['answer']['formToken'], orderId: id } }
   end
 
-  def confirm_payment(order, payment_id)
+  def confirm_payment(order, coupon_code, payment_id)
     client = PayZen::Order.new
     payzen_order = client.get(payment_id, operation_type: 'DEBIT')
 
     if payzen_order['answer']['transactions'].any? { |transaction| transaction['status'] == 'PAID' }
-      o = payment_success(order, 'card', payment_id, 'PayZen::Order')
+      o = payment_success(order, coupon_code, 'card', payment_id, 'PayZen::Order')
       { order: o }
     else
       order.update(payment_state: 'failed')

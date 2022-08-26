@@ -89,7 +89,7 @@ export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSucce
     try {
       let res;
       if (order) {
-        res = await CheckoutAPI.payment(order.token);
+        res = await CheckoutAPI.payment(order);
         res = res.order;
       } else {
         res = await LocalPaymentAPI.confirmPayment(cart);

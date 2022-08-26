@@ -2,6 +2,7 @@ import { TDateISO } from '../typings/date-iso';
 import { PaymentConfirmation } from './payment';
 import { CreateTokenResponse } from './payzen';
 import { User } from './user';
+import { Coupon } from './coupon';
 
 export interface Order {
   id: number,
@@ -13,6 +14,7 @@ export interface Order {
   state?: string,
   payment_state?: string,
   total?: number,
+  coupon?: Coupon,
   created_at?: TDateISO,
   order_items_attributes: Array<{
     id: number,
