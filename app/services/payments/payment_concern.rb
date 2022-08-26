@@ -32,6 +32,7 @@ module Payments::PaymentConcern
       order.order_items.each do |item|
         ProductService.update_stock(item.orderable, 'external', 'sold', -item.quantity, item.id)
       end
+      order.reference = order.generate_reference
       order.save
       order.reload
     end
