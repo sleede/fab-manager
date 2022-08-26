@@ -18,6 +18,7 @@ module Payments::PaymentConcern
   def payment_success(order, payment_method = '')
     ActiveRecord::Base.transaction do
       WalletService.debit_user_wallet(order, order.statistic_profile.user)
+      order.operator_profile_id = order.statistic_profile.user.invoicing_profile.id if order.operator_profile.nil?
       order.payment_method = if order.total == order.wallet_amount
                                'wallet'
                              else
