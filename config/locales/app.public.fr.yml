@@ -391,6 +391,10 @@ fr:
         my_cart: "Mon Panier"
       store_cart:
         checkout: "Valider mon panier"
+        cart_is_empty: "Votre panier est vide"
+      member_select:
+        select_a_member: "Sélectionnez un membre"
+        start_typing: "Commencez à écrire..."
       tour:
         conclusion:
           title: "Merci de votre attention"

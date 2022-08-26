@@ -9,10 +9,14 @@ module API::OrderConcern
   end
 
   def current_order
-    @current_order = Order.find_by(token: order_token)
+    @current_order = Order.find_by(token: order_token, state: 'cart')
   end
 
   def ensure_order
     raise ActiveRecord::RecordNotFound if @current_order.nil?
+  end
+
+  def cart_params
+    params.permit(:order_token, :orderable_id, :quantity, :user_id)
   end
 end

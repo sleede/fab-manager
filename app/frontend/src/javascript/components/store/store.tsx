@@ -24,7 +24,7 @@ interface StoreProps {
 const Store: React.FC<StoreProps> = ({ onError, currentUser }) => {
   const { t } = useTranslation('public');
 
-  const { cart, setCart, reloadCart } = useCart();
+  const { cart, setCart } = useCart(currentUser);
 
   const [products, setProducts] = useState<Array<Product>>([]);
 
@@ -39,12 +39,6 @@ const Store: React.FC<StoreProps> = ({ onError, currentUser }) => {
   useEffect(() => {
     emitCustomEvent('CartUpdate', cart);
   }, [cart]);
-
-  useEffect(() => {
-    if (currentUser) {
-      reloadCart();
-    }
-  }, [currentUser]);
 
   return (
     <div className="store">

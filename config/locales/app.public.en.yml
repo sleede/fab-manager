@@ -391,6 +391,10 @@ en:
         my_cart: "My Cart"
       store_cart:
         checkout: "Checkout"
+        cart_is_empty: "Your cart is empty"
+      member_select:
+        select_a_member: "Select a member"
+        start_typing: "Start typing..."
       tour:
         conclusion:
           title: "Thank you for your attention"

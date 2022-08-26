@@ -159,6 +159,11 @@ Rails.application.routes.draw do
       put 'add_item', on: :collection
       put 'remove_item', on: :collection
       put 'set_quantity', on: :collection
+      put 'set_customer', on: :collection
+    end
+    resources :checkout, only: %i[] do
+      post 'payment', on: :collection
+      post 'confirm_payment', on: :collection
     end
 
     # for admin
