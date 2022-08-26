@@ -8,7 +8,7 @@ export interface Order {
   token: string,
   statistic_profile_id?: number,
   user?: User,
-  operator_id?: number,
+  operator_profile_id?: number,
   reference?: string,
   state?: string,
   total?: number,

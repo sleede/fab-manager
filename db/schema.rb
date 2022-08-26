@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_26_091819) do
+ActiveRecord::Schema.define(version: 2022_08_26_093503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -460,7 +460,7 @@ ActiveRecord::Schema.define(version: 2022_08_26_091819) do
 
   create_table "orders", force: :cascade do |t|
     t.bigint "statistic_profile_id"
-    t.integer "operator_id"
+    t.integer "operator_profile_id"
     t.string "token"
     t.string "reference"
     t.string "state"
@@ -471,6 +471,7 @@ ActiveRecord::Schema.define(version: 2022_08_26_091819) do
     t.integer "wallet_amount"
     t.integer "wallet_transaction_id"
     t.string "payment_method"
+    t.index ["operator_profile_id"], name: "index_orders_on_operator_profile_id"
     t.index ["statistic_profile_id"], name: "index_orders_on_statistic_profile_id"
   end
 
@@ -1164,6 +1165,7 @@ ActiveRecord::Schema.define(version: 2022_08_26_091819) do
   add_foreign_key "invoices", "wallet_transactions"
   add_foreign_key "invoicing_profiles", "users"
   add_foreign_key "order_items", "orders"
+  add_foreign_key "orders", "invoicing_profiles", column: "operator_profile_id"
   add_foreign_key "orders", "statistic_profiles"
   add_foreign_key "organizations", "invoicing_profiles"
   add_foreign_key "payment_gateway_objects", "payment_gateway_objects"
