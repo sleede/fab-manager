@@ -3,6 +3,10 @@
 
   .categories {
     margin-bottom: 3.2rem;
+    .list {
+      max-height: 30vh;
+      overflow: auto;
+    }
     p {
       display: flex;
       align-items: baseline;

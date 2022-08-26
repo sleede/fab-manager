@@ -40,6 +40,7 @@ const Store: React.FC<StoreProps> = ({ onError, currentUser }) => {
   const [productCategories, setProductCategories] = useState<ProductCategory[]>([]);
   const [categoriesTree, setCategoriesTree] = useState<ParentCategory[]>([]);
   const [activeCategory, setActiveCategory] = useState<ActiveCategory>();
+  const [filterVisible, setFilterVisible] = useState<boolean>(false);
   const [machines, setMachines] = useState<checklistOption[]>([]);
   const [accordion, setAccordion] = useState({});
 
@@ -139,6 +140,7 @@ const Store: React.FC<StoreProps> = ({ onError, currentUser }) => {
    * Filter: toggle non-available products visibility
    */
   const toggleVisible = (checked: boolean) => {
+    setFilterVisible(!filterVisible);
     console.log('Display in stock only:', checked);
   };
 
@@ -223,6 +225,7 @@ const Store: React.FC<StoreProps> = ({ onError, currentUser }) => {
           selectOptions={buildOptions()}
           onSelectOptionsChange={handleSorting}
           switchLabel={t('app.public.store.products.in_stock_only')}
+          switchChecked={filterVisible}
           onSwitch={toggleVisible}
         />
         <div className="products-grid">

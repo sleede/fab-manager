@@ -8,6 +8,7 @@ interface ProductsListHeaderProps {
   selectOptions: selectOption[],
   onSelectOptionsChange: (option: selectOption) => void,
   switchLabel?: string,
+  switchChecked: boolean,
   onSwitch: (boolean) => void
 }
 /**
@@ -19,7 +20,7 @@ interface ProductsListHeaderProps {
 /**
  * Renders an accordion item
  */
-export const ProductsListHeader: React.FC<ProductsListHeaderProps> = ({ productsCount, selectOptions, onSelectOptionsChange, switchLabel, onSwitch }) => {
+export const ProductsListHeader: React.FC<ProductsListHeaderProps> = ({ productsCount, selectOptions, onSelectOptionsChange, switchLabel, switchChecked, onSwitch }) => {
   const { t } = useTranslation('admin');
 
   // Styles the React-select component
@@ -53,7 +54,7 @@ export const ProductsListHeader: React.FC<ProductsListHeaderProps> = ({ products
           <label>
             <span>{switchLabel || t('app.admin.store.products_list_header.visible_only')}</span>
             <Switch
-              checked={true}
+              checked={switchChecked}
               onChange={(checked) => onSwitch(checked)}
               width={40}
               height={19}

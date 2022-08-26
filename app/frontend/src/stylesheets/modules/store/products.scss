@@ -6,6 +6,7 @@
   padding-bottom: 6rem;
   @include grid-col(12);
   gap: 3.2rem;
+  align-items: flex-start;
 
   header {
     @include header();

@@ -40,7 +40,6 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
   const [features, setFeatures] = useImmer<Filters>(initFilters);
   const [filterVisible, setFilterVisible] = useState<boolean>(false);
   const [filters, setFilters] = useImmer<Filters>(initFilters);
-  const [sortOption, setSortOption] = useState<number>(0);
   const [clearFilters, setClearFilters] = useState<boolean>(false);
   const [productCategories, setProductCategories] = useState<ProductCategory[]>([]);
   const [machines, setMachines] = useState<checklistOption[]>([]);
@@ -111,13 +110,14 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
    * Filter: toggle non-available products visibility
    */
   const toggleVisible = (checked: boolean) => {
-    setFilterVisible(checked);
+    setFilterVisible(!filterVisible);
+    console.log('Display on the shelf product only:', checked);
   };
 
   /**
    * Filter: by categories
    */
-  const handleSelectCategory = (c: ProductCategory, checked, instantUpdate?) => {
+  const handleSelectCategory = (c: ProductCategory, checked: boolean, instantUpdate?: boolean) => {
     let list = [...filters.categories];
     const children = productCategories
       .filter(el => el.parent_id === c.id);
@@ -180,34 +180,18 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
    * Apply filters
    */
   const applyFilters = () => {
-    let updatedList = [...products];
     let tags = initFilters;
-    if (filterVisible) {
-      updatedList = updatedList.filter(p => p.is_active);
-    }
 
     if (filters.categories.length) {
-      updatedList = updatedList.filter(p => filters.categories
-        .map(fc => fc.id)
-        .includes(p.product_category_id));
+      tags = { ...tags, categories: [...filters.categories] };
     }
-    tags = { ...tags, categories: [...filters.categories] };
 
     if (filters.machines.length) {
-      updatedList = updatedList.filter(p => {
-        return p.machine_ids.find(pmId => filters.machines
-          .map(fmId => fmId.value)
-          .includes(pmId));
-      });
-    }
-    tags = { ...tags, machines: [...filters.machines] };
-
-    if (sortOption >= 0) {
-      updatedList = sortProductsList(updatedList, sortOption);
+      tags = { ...tags, machines: [...filters.machines] };
     }
 
     setFeatures(tags);
-    setFilteredProductList(updatedList);
+    console.log('Apply filters:', filters);
   };
 
   /**
@@ -216,6 +200,7 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
   const clearAllFilters = () => {
     setFilters(initFilters);
     setClearFilters(true);
+    console.log('Clear all filters');
   };
 
   /**
@@ -228,22 +213,6 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
       { value: 2, label: t('app.admin.store.products.sort.price_low') },
       { value: 3, label: t('app.admin.store.products.sort.price_high') }
     ];
-  };
-
-  /**
-   * Sorts products list
-   */
-  const sortProductsList = (list: Product[], option: number): Product[] => {
-    switch (option) {
-      case 0:
-        return list.sort((a, b) => a.name.localeCompare(b.name));
-      case 1:
-        return list.sort((a, b) => b.name.localeCompare(a.name));
-      case 2:
-        return list.sort((a, b) => a.amount - b.amount);
-      case 3:
-        return list.sort((a, b) => b.amount - a.amount);
-    }
   };
 
   /**
@@ -311,6 +280,7 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
           productsCount={filteredProductsList.length}
           selectOptions={buildOptions()}
           onSelectOptionsChange={handleSorting}
+          switchChecked={filterVisible}
           onSwitch={toggleVisible}
         />
         <div className='features'>
@@ -367,6 +337,20 @@ const buildChecklistOptions = (items: Array<{ id?: number, name: string }>): Arr
   });
 };
 
+interface Stock {
+  from: number,
+  to: number
+}
+
+interface Filters {
+  instant: boolean,
+  categories: ProductCategory[],
+  machines: checklistOption[],
+  keywords: string[],
+  internalStock: Stock,
+  externalStock: Stock
+}
+
 const initFilters: Filters = {
   instant: false,
   categories: [],
@@ -381,17 +365,3 @@ const initFilters: Filters = {
     to: null
   }
 };
-
-interface Stock {
-  from: number,
-  to: number
-}
-
-interface Filters {
-  instant: boolean,
-  categories: ProductCategory[],
-  machines: checklistOption[],
-  keywords: string[],
-  internalStock: Stock,
-  externalStock: Stock
-}
