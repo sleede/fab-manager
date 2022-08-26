@@ -72,8 +72,12 @@ const StoreCart: React.FC<StoreCartProps> = ({ onError, currentUser }) => {
    * Open/closes the payment modal
    */
   const handlePaymentSuccess = (data: Order): void => {
-    setPaymentModal(false);
-    window.location.href = '/#!/store';
+    if (data.payment_state === 'paid') {
+      setPaymentModal(false);
+      window.location.href = '/#!/store';
+    } else {
+      onError('Erreur inconnue after payment, please conntact admin');
+    }
   };
 
   /**
