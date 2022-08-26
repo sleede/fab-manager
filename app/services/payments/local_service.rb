@@ -5,7 +5,7 @@ class Payments::LocalService
   include Payments::PaymentConcern
 
   def payment(order)
-    o = payment_success(order)
+    o = payment_success(order, 'local')
     { order: o }
   end
 end

@@ -23,7 +23,7 @@ class Payments::StripeService
     )
 
     if intent&.status == 'succeeded'
-      o = payment_success(order)
+      o = payment_success(order, 'card')
       return { order: o }
     end
 
@@ -36,7 +36,7 @@ class Payments::StripeService
   def confirm_payment(order, payment_id)
     intent = Stripe::PaymentIntent.confirm(payment_id, {}, { api_key: Setting.get('stripe_secret_key') })
     if intent&.status == 'succeeded'
-      o = payment_success(order)
+      o = payment_success(order, 'card')
       { order: o }
     else
       order.update(payment_state: 'failed')

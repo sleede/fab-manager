@@ -15,10 +15,10 @@ module Payments::PaymentConcern
     total - wallet_debit
   end
 
-  def payment_success(order)
+  def payment_success(order, payment_method = '')
     ActiveRecord::Base.transaction do
       WalletService.debit_user_wallet(order, order.statistic_profile.user)
-      order.update(state: 'in_progress', payment_state: 'paid')
+      order.update(state: 'in_progress', payment_state: 'paid', payment_method: payment_method)
       order.order_items.each do |item|
         ProductService.update_stock(item.orderable, 'external', 'sold', -item.quantity, item.id)
       end
