@@ -12,4 +12,9 @@ class Order < ApplicationRecord
   enum payment_state: PAYMENT_STATES.zip(PAYMENT_STATES).to_h
 
   validates :token, :state, presence: true
+
+  def set_wallet_transaction(amount, transaction_id)
+    self.wallet_amount = amount
+    self.wallet_transaction_id = transaction_id
+  end
 end

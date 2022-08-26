@@ -106,9 +106,9 @@ class WalletService
       # wallet debit success
       raise DebitWalletError unless wallet_transaction
 
-      payment.set_wallet_transaction(wallet_amount, wallet_transaction.id) unless payment.is_a? Order
+      payment.set_wallet_transaction(wallet_amount, wallet_transaction.id)
     else
-      payment.set_wallet_transaction(wallet_amount, nil) unless payment.is_a? Order
+      payment.set_wallet_transaction(wallet_amount, nil)
     end
   end
 end
