@@ -4,13 +4,17 @@
 class Checkout::PaymentService
   require 'pay_zen/helper'
   require 'stripe/helper'
+  include Payments::PaymentConcern
 
   def payment(order, operator, payment_id = '')
     raise Cart::OutStockError unless Orders::OrderService.new.in_stock?(order, 'external')
 
     raise Cart::InactiveProductError unless Orders::OrderService.new.all_products_is_active?(order)
 
-    if operator.member?
+    amount = debit_amount(order)
+    if operator.privileged? || amount.zero?
+      Payments::LocalService.new.payment(order)
+    elsif operator.member?
       if Stripe::Helper.enabled?
         Payments::StripeService.new.payment(order, payment_id)
       elsif PayZen::Helper.enabled?
@@ -18,8 +22,6 @@ class Checkout::PaymentService
       else
         raise Error('Bad gateway or online payment is disabled')
       end
-    elsif operator.privileged?
-      Payments::LocalService.new.payment(order)
     end
   end
 
