@@ -8,7 +8,8 @@ class API::CheckoutController < API::ApiController
   before_action :ensure_order
 
   def payment
-    if order.statistic_profile_id.nil? && current_user.privileged?
+    authorize @current_order, policy_class: CheckoutPolicy
+    if @current_order.statistic_profile_id.nil? && current_user.privileged?
       user = User.find(params[:customer_id])
       @current_order.statistic_profile = user.statistic_profile
     end
@@ -20,6 +21,7 @@ class API::CheckoutController < API::ApiController
   end
 
   def confirm_payment
+    authorize @current_order, policy_class: CheckoutPolicy
     res = Checkout::PaymentService.new.confirm_payment(@current_order, current_user, params[:coupon_code], params[:payment_id])
     render json: res
   rescue StandardError => e
