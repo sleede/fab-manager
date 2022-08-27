@@ -46,12 +46,6 @@ class API::CartController < API::ApiController
     render 'api/orders/show'
   end
 
-  def set_customer
-    authorize @current_order, policy_class: CartPolicy
-    @order = Cart::SetCustomerService.new.call(@current_order, cart_params[:user_id])
-    render 'api/orders/show'
-  end
-
   private
 
   def orderable

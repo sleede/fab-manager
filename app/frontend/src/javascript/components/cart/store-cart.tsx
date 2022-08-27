@@ -86,9 +86,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onError, currentUser }) => {
    * Change cart's customer by admin/manger
    */
   const handleChangeMember = (userId: number): void => {
-    CartAPI.setCustomer(cart, userId).then(data => {
-      setCart(data);
-    }).catch(onError);
+    setCart({ ...cart, user: { id: userId, role: 'member' } });
   };
 
   /**
@@ -110,7 +108,6 @@ const StoreCart: React.FC<StoreCartProps> = ({ onError, currentUser }) => {
    */
   const applyCoupon = (coupon?: Coupon): void => {
     if (coupon !== cart.coupon) {
-      cart.coupon = coupon;
       setCart({ ...cart, coupon });
     }
   };
@@ -134,11 +131,11 @@ const StoreCart: React.FC<StoreCartProps> = ({ onError, currentUser }) => {
           </FabButton>
         </div>
       ))}
-      {cart && !cartIsEmpty() && cart.user && <CouponInput user={cart.user} amount={cart.total} onChange={applyCoupon} />}
+      {cart && !cartIsEmpty() && cart.user && <CouponInput user={cart.user as User} amount={cart.total} onChange={applyCoupon} />}
       {cart && !cartIsEmpty() && <p>Total produits: {FormatLib.price(cart.total)}</p>}
       {cart && !cartIsEmpty() && cart.coupon && computePriceWithCoupon(cart.total, cart.coupon) !== cart.total && <p>Coupon réduction: {FormatLib.price(-(cart.total - computePriceWithCoupon(cart.total, cart.coupon)))}</p>}
       {cart && !cartIsEmpty() && <p>Total panier: {FormatLib.price(computePriceWithCoupon(cart.total, cart.coupon))}</p>}
-      {cart && !cartIsEmpty() && isPrivileged() && <MemberSelect defaultUser={cart.user} onSelected={handleChangeMember} />}
+      {cart && !cartIsEmpty() && isPrivileged() && <MemberSelect onSelected={handleChangeMember} />}
       {cart && !cartIsEmpty() &&
         <FabButton className="checkout-btn" onClick={checkout} disabled={!cart.user || cart.order_items_attributes.length === 0}>
           {t('app.public.store_cart.checkout')}
@@ -152,7 +149,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onError, currentUser }) => {
           cart={{ customer_id: cart.user.id, items: [], payment_method: PaymentMethod.Card }}
           order={cart}
           operator={currentUser}
-          customer={cart.user}
+          customer={cart.user as User}
           updateCart={() => 'dont need update shopping cart'} />
       </div>}
     </div>
