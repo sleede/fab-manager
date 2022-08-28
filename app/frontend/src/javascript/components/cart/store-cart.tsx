@@ -20,13 +20,14 @@ declare const Application: IApplication;
 
 interface StoreCartProps {
   onError: (message: string) => void,
-  currentUser?: User,
+  userLogin: () => void,
+  currentUser?: User
 }
 
 /**
  * This component shows user's cart
  */
-const StoreCart: React.FC<StoreCartProps> = ({ onError, currentUser }) => {
+const StoreCart: React.FC<StoreCartProps> = ({ onError, currentUser, userLogin }) => {
   const { t } = useTranslation('public');
 
   const { cart, setCart } = useCart(currentUser);
@@ -60,7 +61,11 @@ const StoreCart: React.FC<StoreCartProps> = ({ onError, currentUser }) => {
    * Checkout cart
    */
   const checkout = () => {
-    setPaymentModal(true);
+    if (!currentUser) {
+      userLogin();
+    } else {
+      setPaymentModal(true);
+    }
   };
 
   /**
@@ -137,7 +142,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onError, currentUser }) => {
       {cart && !cartIsEmpty() && <p>Total panier: {FormatLib.price(computePriceWithCoupon(cart.total, cart.coupon))}</p>}
       {cart && !cartIsEmpty() && isPrivileged() && <MemberSelect onSelected={handleChangeMember} />}
       {cart && !cartIsEmpty() &&
-        <FabButton className="checkout-btn" onClick={checkout} disabled={!cart.user || cart.order_items_attributes.length === 0}>
+        <FabButton className="checkout-btn" onClick={checkout}>
           {t('app.public.store_cart.checkout')}
         </FabButton>
       }
@@ -164,4 +169,4 @@ const StoreCartWrapper: React.FC<StoreCartProps> = (props) => {
   );
 };
 
-Application.Components.component('storeCart', react2angular(StoreCartWrapper, ['onError', 'currentUser']));
+Application.Components.component('storeCart', react2angular(StoreCartWrapper, ['onError', 'currentUser', 'userLogin']));
