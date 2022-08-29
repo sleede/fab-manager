@@ -13,7 +13,7 @@ import ProductCategoryAPI from '../../api/product-category';
 import MachineAPI from '../../api/machine';
 import { AccordionItem } from './accordion-item';
 import { X } from 'phosphor-react';
-import { ProductsListHeader } from './products-list-header';
+import { StoreListHeader } from './store-list-header';
 
 declare const Application: IApplication;
 
@@ -274,8 +274,8 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
           </AccordionItem>
         </div>
       </div>
-      <div className='store-products-list'>
-        <ProductsListHeader
+      <div className='store-list'>
+        <StoreListHeader
           productsCount={filteredProductsList.length}
           selectOptions={buildOptions()}
           onSelectOptionsChange={handleSorting}

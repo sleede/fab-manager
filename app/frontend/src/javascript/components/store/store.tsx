@@ -14,7 +14,7 @@ import useCart from '../../hooks/use-cart';
 import { emitCustomEvent } from 'react-custom-events';
 import { User } from '../../models/user';
 import { AccordionItem } from './accordion-item';
-import { ProductsListHeader } from './products-list-header';
+import { StoreListHeader } from './store-list-header';
 
 declare const Application: IApplication;
 
@@ -213,8 +213,8 @@ const Store: React.FC<StoreProps> = ({ onError, currentUser }) => {
           </div>
         </div>
       </aside>
-      <div className='store-products-list'>
-        <ProductsListHeader
+      <div className='store-list'>
+        <StoreListHeader
           productsCount={products.length}
           selectOptions={buildOptions()}
           onSelectOptionsChange={handleSorting}

@@ -10,6 +10,7 @@
 
   header {
     @include header();
+    padding-bottom: 0;
     grid-column: 1 / -1;
   }
 }

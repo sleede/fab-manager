@@ -1947,7 +1947,7 @@ en:
             name_za: "Z-A"
             price_low: "Price: low to high"
             price_high: "Price: high to low"
-        products_list_header:
+        store_list_header:
           result_count: "Result count:"
           display_options: "Display options:"
           visible_only: "Visible products only"
@@ -1987,3 +1987,13 @@ en:
           product_images_info: "<strong>Advice</strong></br>We advise you to use a square format, jpg or png, for jpgs, please use white for the background colour. The main visual will be the visual presented first in the product sheet."
           add_product_image: "Add an image"
           save: "Save"
+        orders:
+          heading: "Orders"
+          create_order: "Create an order"
+          filter: "Filter"
+          filter_clear: "Clear all"
+          filter_apply: "Apply"
+          filter_status: "By status"
+          sort:
+            newest: "Newest first"
+            oldest: "Oldest first"
