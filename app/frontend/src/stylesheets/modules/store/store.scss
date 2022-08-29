@@ -57,19 +57,11 @@
   }
   .gallery {
     grid-area: 3 / 1 / 4 / 4;
-    .aspect-ratio {
-      position: relative;
-      width: 100%;
-      height: 0;
-      padding-bottom: 100%;
-      overflow: hidden;
+    .picture{
+      @include imageRatio;
       border-radius: var(--border-radius-sm);
       border: 1px solid var(--gray-soft-darkest);
       img {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
         object-fit: contain;
         cursor: pointer;
       }
@@ -184,6 +176,7 @@
       display: grid;
       grid-template-areas: "minus input plus"
                            "btn btn btn";
+      grid-template-columns: repeat(3, minmax(0, min-content));
       gap: 1.6rem;
       border-top: 1px solid var(--gray-soft-dark);
       .minus {

@@ -26,19 +26,8 @@
 
     .picture {
       grid-area: image;
-      position: relative;
-      width: 100%;
-      height: 0;
-      padding-bottom: 50%;
+      @include imageRatio(50%);
       border-radius: var(--border-radius);
-      overflow: hidden;
-      img {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
     }
     .name {
       margin: 2.4rem 0 1.6rem;

@@ -30,6 +30,8 @@
 @import "modules/base/fab-text-editor";
 @import "modules/base/labelled-input";
 @import "modules/calendar/calendar";
+@import "modules/cart/cart-button";
+@import "modules/cart/store-cart";
 @import "modules/dashboard/reservations/credits-panel";
 @import "modules/dashboard/reservations/reservations-dashboard";
 @import "modules/dashboard/reservations/reservations-panel";
@@ -42,6 +44,7 @@
 @import "modules/form/form-file-upload";
 @import "modules/form/form-image-upload";
 @import "modules/group/change-group";
+@import "modules/layout/header-page";
 @import "modules/machines/machine-card";
 @import "modules/machines/machines-filters";
 @import "modules/machines/machines-list";

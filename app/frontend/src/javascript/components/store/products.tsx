@@ -1,5 +1,3 @@
-// TODO: Remove next eslint-disable
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { useImmer } from 'use-immer';
 import { useTranslation } from 'react-i18next';
@@ -35,6 +33,7 @@ interface ProductsProps {
 const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
   const { t } = useTranslation('admin');
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [products, setProducts] = useState<Array<Product>>([]);
   const [filteredProductsList, setFilteredProductList] = useImmer<Array<Product>>([]);
   const [features, setFeatures] = useImmer<Filters>(initFilters);

@@ -69,12 +69,6 @@ const Store: React.FC<StoreProps> = ({ onError, currentUser }) => {
     emitCustomEvent('CartUpdate', cart);
   }, [cart]);
 
-  useEffect(() => {
-    if (currentUser) {
-      reloadCart();
-    }
-  }, [currentUser]);
-
   /**
    * Create categories tree (parent/children)
    */

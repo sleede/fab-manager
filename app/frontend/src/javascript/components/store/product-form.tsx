@@ -51,7 +51,18 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
 
   useEffect(() => {
     ProductCategoryAPI.index().then(data => {
-      setProductCategories(buildSelectOptions(data));
+      // Map product categories by position
+      const sortedCategories = data
+        .filter(c => !c.parent_id)
+        .sort((a, b) => a.position - b.position);
+      const childrenCategories = data
+        .filter(c => typeof c.parent_id === 'number')
+        .sort((a, b) => b.position - a.position);
+      childrenCategories.forEach(c => {
+        const parentIndex = sortedCategories.findIndex(i => i.id === c.parent_id);
+        sortedCategories.splice(parentIndex + 1, 0, c);
+      });
+      setProductCategories(buildSelectOptions(sortedCategories));
     }).catch(onError);
     MachineAPI.index({ disabled: false }).then(data => {
       setMachines(buildChecklistOptions(data));
