@@ -2,17 +2,14 @@
 
 require 'test_helper'
 
-class StatisticServiceTest < ActiveSupport::TestCase
+class StatisticServiceTest < ActionDispatch::IntegrationTest
   setup do
     @user = User.members.without_subscription.first
     @admin = User.with_role(:admin).first
     login_as(@admin, scope: :user)
   end
 
-  def test
-    machine_stats_count = Stats::Machine.all.count
-    subscription_stats_count = Stats::Subscription.all.count
-
+  test 'build stats' do
     # Create a reservation to generate an invoice
     machine = Machine.find(1)
     slot = Availability.find(19).slots.first
@@ -48,12 +45,40 @@ class StatisticServiceTest < ActiveSupport::TestCase
          }.to_json, headers: default_headers
 
     # Build the stats for today, we expect the above invoices (reservation+subscription) to appear in the resulting stats
-    StatisticService.new.generate_statistic(
-      start_date: DateTime.current.beginning_of_day,
-      end_date: DateTime.current.end_of_day
-    )
+    ::Statistics::BuilderService.generate_statistic({ start_date: DateTime.current.beginning_of_day,
+                                                      end_date: DateTime.current.end_of_day })
 
-    assert_equal machine_stats_count + 1, Stats::Machine.all.count
-    assert_equal subscription_stats_count + 1, Stats::Subscription.all.count
+    Stats::Machine.refresh_index!
+
+    stat_booking = Stats::Machine.search(query: { bool: { must: [{ term: { date: DateTime.current.to_date.iso8601 } },
+                                                                 { term: { type: 'booking' } }] } }).first
+    assert_not_nil stat_booking
+    assert_equal machine.friendly_id, stat_booking['subType']
+    check_statistics_on_user(stat_booking)
+
+    stat_hour = Stats::Machine.search(query: { bool: { must: [{ term: { date: DateTime.current.to_date.iso8601 } },
+                                                              { term: { type: 'hour' } }] } }).first
+
+    assert_not_nil stat_hour
+    assert_equal machine.friendly_id, stat_hour['subType']
+    check_statistics_on_user(stat_hour)
+
+    Stats::Subscription.refresh_index!
+
+    stat_subscription = Stats::Subscription.search(query: { bool: { must: [{ term: { date: DateTime.current.to_date.iso8601 } },
+                                                                           { term: { type: plan.find_statistic_type.key } }] } }).first
+
+    assert_not_nil stat_subscription
+    assert_equal plan.find_statistic_type.key, stat_subscription['type']
+    assert_equal plan.slug, stat_subscription['subType']
+    assert_equal plan.id, stat_subscription['planId']
+    assert_equal 1, stat_subscription['stat']
+    check_statistics_on_user(stat_subscription)
+  end
+
+  def check_statistics_on_user(stat)
+    assert_equal @user.statistic_profile.str_gender, stat['gender']
+    assert_equal @user.statistic_profile.age.to_i, stat['age']
+    assert_equal @user.statistic_profile.group.slug, stat['group']
   end
 end

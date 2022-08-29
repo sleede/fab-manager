@@ -10,7 +10,7 @@ namespace :fablab do
       start_date = Time.zone.local(year.to_i, month.to_i, 1)
       end_date = start_date.next_month
       puts "-> Start regenerate the invoices PDF between #{I18n.l start_date, format: :long} and " \
-         "#{I18n.l end_date - 1.minute, format: :long}"
+           "#{I18n.l end_date - 1.minute, format: :long}"
       invoices = Invoice.where('created_at >= :start_date AND created_at < :end_date', start_date: start_date, end_date: end_date)
                         .order(created_at: :asc)
       invoices.each(&:regenerate_invoice_pdf)
@@ -23,7 +23,7 @@ namespace :fablab do
       start_date = Time.zone.local(year.to_i, month.to_i, 1)
       end_date = start_date.next_month
       puts "-> Start regenerate the payment schedules PDF between #{I18n.l start_date, format: :long} and " \
-         "#{I18n.l end_date - 1.minute, format: :long}"
+           "#{I18n.l end_date - 1.minute, format: :long}"
       schedules = PaymentSchedule.where('created_at >= :start_date AND created_at < :end_date', start_date: start_date, end_date: end_date)
                                  .order(created_at: :asc)
       schedules.each(&:regenerate_pdf)
@@ -33,9 +33,7 @@ namespace :fablab do
     desc 'recreate every versions of images'
     task build_images_versions: :environment do
       Project.find_each do |project|
-        if project.project_image.present? && project.project_image.attachment.present?
-          project.project_image.attachment.recreate_versions!
-        end
+        project.project_image.attachment.recreate_versions! if project.project_image.present? && project.project_image.attachment.present?
       end
       ProjectStepImage.find_each do |project_step_image|
         project_step_image.attachment.recreate_versions! if project_step_image.present? && project_step_image.attachment.present?
@@ -59,7 +57,7 @@ namespace :fablab do
       count = User.where(is_active: false).count
       if count.positive?
         print "WARNING: You are about to delete #{count} users. Are you sure? (y/n) "
-        confirm = STDIN.gets.chomp
+        confirm = $stdin.gets.chomp
         next unless confirm == 'y'
 
         User.where(is_active: false).map(&:destroy!)
@@ -89,7 +87,6 @@ namespace :fablab do
 
     desc 'clean the cron workers'
     task clean_workers: :environment do
-
       Sidekiq::Cron::Job.destroy_all!
       Sidekiq::Queue.new('system').clear
       Sidekiq::Queue.new('default').clear
@@ -119,8 +116,8 @@ namespace :fablab do
       start_date = Time.zone.local(year.to_i, month.to_i, 1)
       end_date = yesterday.end_of_day
       puts "-> Start regenerate statistics between #{I18n.l start_date, format: :long} and " \
-         "#{I18n.l end_date, format: :long}"
-      StatisticService.new.generate_statistic(
+           "#{I18n.l end_date, format: :long}"
+      Statistics::BuilderService.generate_statistic(
         start_date: start_date,
         end_date: end_date
       )
@@ -134,7 +131,7 @@ namespace :fablab do
       start_date = Time.zone.local(year.to_i, month.to_i, 1)
       end_date = start_date.next_month
       puts "-> Start regenerate the invoices reference between #{I18n.l start_date, format: :long} and " \
-         "#{I18n.l end_date - 1.minute, format: :long}"
+           "#{I18n.l end_date - 1.minute, format: :long}"
       invoices = Invoice.where('created_at >= :start_date AND created_at < :end_date', start_date: start_date, end_date: end_date)
                         .order(created_at: :asc)
       invoices.each(&:update_reference)

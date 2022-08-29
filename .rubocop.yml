@@ -21,6 +21,7 @@ Metrics/BlockLength:
     - 'config/routes.rb'
     - 'app/pdfs/pdf/*.rb'
     - 'test/**/*.rb'
+    - '**/*_concern.rb'
 Metrics/ParameterLists:
   CountKeywordArgs: false
 Style/RegexpLiteral:

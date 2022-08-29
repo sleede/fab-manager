@@ -1,9 +1,10 @@
-module Stats
-  class Machine
-    include Elasticsearch::Persistence::Model
-    include StatConcern
-    include StatReservationConcern
+# frozen_string_literal: true
 
-    attribute :machineId, Integer
-  end
+# This is a statistical data saved in ElasticSearch, about a machine reservation
+class Stats::Machine
+  include Elasticsearch::Persistence::Model
+  include StatConcern
+  include StatReservationConcern
+
+  attribute :machineId, Integer
 end
