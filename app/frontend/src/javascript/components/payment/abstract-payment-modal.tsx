@@ -19,6 +19,7 @@ import { ComputePriceResult } from '../../models/price';
 import { Wallet } from '../../models/wallet';
 import FormatLib from '../../lib/format';
 import { Order } from '../../models/order';
+import { computePriceWithCoupon } from '../../lib/coupon';
 
 export interface GatewayFormProps {
   onSubmit: () => void,
@@ -114,7 +115,7 @@ export const AbstractPaymentModal: React.FC<AbstractPaymentModalProps> = ({ isOp
     if (order && order?.user?.id) {
       WalletAPI.getByUser(order.user.id).then((wallet) => {
         setWallet(wallet);
-        const p = { price: order.total, price_without_coupon: order.total };
+        const p = { price: computePriceWithCoupon(order.total, order.coupon), price_without_coupon: order.total };
         setPrice(p);
         setRemainingPrice(new WalletLib(wallet).computeRemainingPrice(p.price));
         setReady(true);

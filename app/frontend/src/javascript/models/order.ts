@@ -1,18 +1,24 @@
 import { TDateISO } from '../typings/date-iso';
 import { PaymentConfirmation } from './payment';
 import { CreateTokenResponse } from './payzen';
-import { User } from './user';
+import { UserRole } from './user';
+import { Coupon } from './coupon';
 
 export interface Order {
   id: number,
   token: string,
   statistic_profile_id?: number,
-  user?: User,
+  user?: {
+    id: number,
+    role: UserRole
+    name?: string,
+  },
   operator_profile_id?: number,
   reference?: string,
   state?: string,
   payment_state?: string,
   total?: number,
+  coupon?: Coupon,
   created_at?: TDateISO,
   order_items_attributes: Array<{
     id: number,

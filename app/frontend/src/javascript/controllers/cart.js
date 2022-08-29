@@ -4,11 +4,23 @@
 */
 'use strict';
 
-Application.Controllers.controller('CartController', ['$scope', 'CSRF', 'growl', '$state',
-  function ($scope, CSRF, growl, $state) {
+Application.Controllers.controller('CartController', ['$scope', 'CSRF', 'growl',
+  function ($scope, CSRF, growl) {
     /* PRIVATE SCOPE */
 
     /* PUBLIC SCOPE */
+
+    /**
+     * Open the modal dialog allowing the user to log into the system
+     */
+    $scope.userLogin = function () {
+      setTimeout(() => {
+        if (!$scope.isAuthenticated()) {
+          $scope.login();
+          $scope.$apply();
+        }
+      }, 50);
+    };
 
     /**
      * Callback triggered in case of error

@@ -89,7 +89,8 @@ export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSucce
     try {
       let res;
       if (order) {
-        res = await CheckoutAPI.payment(order.token);
+        res = await CheckoutAPI.payment(order);
+        res = res.order;
       } else {
         res = await LocalPaymentAPI.confirmPayment(cart);
       }
@@ -120,6 +121,9 @@ export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSucce
    * Get the type of the main item in the cart compile
    */
   const mainItemType = (): string => {
+    if (order) {
+      return '';
+    }
     return Object.keys(cart.items[0])[0];
   };
 

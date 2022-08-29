@@ -9,7 +9,7 @@ class PaymentSchedule < PaymentDocument
   belongs_to :coupon
   belongs_to :invoicing_profile
   belongs_to :statistic_profile
-  belongs_to :operator_profile, foreign_key: :operator_profile_id, class_name: 'InvoicingProfile'
+  belongs_to :operator_profile, class_name: 'InvoicingProfile'
 
   has_many :payment_schedule_items
   has_many :payment_gateway_objects, as: :item
@@ -61,9 +61,7 @@ class PaymentSchedule < PaymentDocument
     payment_schedule_objects.find_by(main: true)
   end
 
-  def user
-    invoicing_profile.user
-  end
+  delegate :user, to: :invoicing_profile
 
   # for debug & used by rake task "fablab:maintenance:regenerate_schedules"
   def regenerate_pdf

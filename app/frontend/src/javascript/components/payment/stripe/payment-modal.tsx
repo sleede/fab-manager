@@ -12,6 +12,7 @@ import { CardPaymentModal } from '../card-payment-modal';
 import PriceAPI from '../../../api/price';
 import { ComputePriceResult } from '../../../models/price';
 import { Order } from '../../../models/order';
+import { computePriceWithCoupon } from '../../../lib/coupon';
 
 interface PaymentModalProps {
   isOpen: boolean,
@@ -47,7 +48,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, toggleModal,
   // refresh the price when the cart changes
   useEffect(() => {
     if (order) {
-      setPrice({ price: order.total, price_without_coupon: order.total });
+      setPrice({ price: computePriceWithCoupon(order.total, order.coupon), price_without_coupon: order.total });
     } else {
       PriceAPI.compute(cart).then(price => {
         setPrice(price);

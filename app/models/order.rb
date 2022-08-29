@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 # Order is a model for the user hold information of order
-class Order < ApplicationRecord
+class Order < PaymentDocument
   belongs_to :statistic_profile
   belongs_to :operator_profile, class_name: 'InvoicingProfile'
+  belongs_to :coupon
   has_many :order_items, dependent: :destroy
+  has_one :payment_gateway_object, as: :item
 
   ALL_STATES = %w[cart in_progress ready canceled return].freeze
   enum state: ALL_STATES.zip(ALL_STATES).to_h
@@ -14,8 +16,19 @@ class Order < ApplicationRecord
 
   validates :token, :state, presence: true
 
-  def set_wallet_transaction(amount, transaction_id)
-    self.wallet_amount = amount
-    self.wallet_transaction_id = transaction_id
+  before_create :add_environment
+
+  delegate :user, to: :statistic_profile
+
+  def footprint_children
+    order_items
+  end
+
+  def paid_by_card?
+    !payment_gateway_object.nil? && payment_method == 'card'
+  end
+
+  def self.columns_out_of_footprint
+    %w[payment_method]
   end
 end

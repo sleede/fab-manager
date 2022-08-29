@@ -58,7 +58,7 @@ export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onE
     } else if (paymentSchedule) {
       return await PayzenAPI.chargeCreateToken(cart, customer);
     } else if (order) {
-      const res = await CheckoutAPI.payment(order.token);
+      const res = await CheckoutAPI.payment(order);
       return res.payment as CreateTokenResponse;
     } else {
       return await PayzenAPI.chargeCreatePayment(cart, customer);
@@ -97,7 +97,7 @@ export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onE
     if (paymentSchedule) {
       return await PayzenAPI.confirmPaymentSchedule(event.clientAnswer.orderDetails.orderId, transaction.uuid, cart);
     } else if (order) {
-      const res = await CheckoutAPI.confirmPayment(order.token, event.clientAnswer.orderDetails.orderId);
+      const res = await CheckoutAPI.confirmPayment(order, event.clientAnswer.orderDetails.orderId);
       return res.order;
     } else {
       return await PayzenAPI.confirm(event.clientAnswer.orderDetails.orderId, cart);
