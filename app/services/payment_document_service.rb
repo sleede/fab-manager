@@ -36,6 +36,18 @@ class PaymentDocumentService
         reference.gsub!(/R\[([^\]]+)\]/, ''.to_s)
         # remove information about payment schedule (S[text])
         reference.gsub!(/S\[([^\]]+)\]/, ''.to_s)
+      elsif document.is_a? Order
+        # information about online selling (X[text])
+        if document.paid_by_card?
+          reference.gsub!(/X\[([^\]]+)\]/, '\1')
+        else
+          reference.gsub!(/X\[([^\]]+)\]/, ''.to_s)
+        end
+
+        # remove information about refunds (R[text])
+        reference.gsub!(/R\[([^\]]+)\]/, ''.to_s)
+        # remove information about payment schedule (S[text])
+        reference.gsub!(/S\[([^\]]+)\]/, ''.to_s)
       else
         raise TypeError
       end

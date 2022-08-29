@@ -13,18 +13,21 @@ import { PaymentMethod } from '../../models/payment';
 import { Order } from '../../models/order';
 import { MemberSelect } from '../user/member-select';
 import { CouponInput } from '../coupon/coupon-input';
+import { Coupon } from '../../models/coupon';
+import { computePriceWithCoupon } from '../../lib/coupon';
 
 declare const Application: IApplication;
 
 interface StoreCartProps {
   onError: (message: string) => void,
-  currentUser?: User,
+  userLogin: () => void,
+  currentUser?: User
 }
 
 /**
  * This component shows user's cart
  */
-const StoreCart: React.FC<StoreCartProps> = ({ onError, currentUser }) => {
+const StoreCart: React.FC<StoreCartProps> = ({ onError, currentUser, userLogin }) => {
   const { t } = useTranslation('public');
 
   const { cart, setCart } = useCart(currentUser);
@@ -58,7 +61,11 @@ const StoreCart: React.FC<StoreCartProps> = ({ onError, currentUser }) => {
    * Checkout cart
    */
   const checkout = () => {
-    setPaymentModal(true);
+    if (!currentUser) {
+      userLogin();
+    } else {
+      setPaymentModal(true);
+    }
   };
 
   /**
@@ -84,9 +91,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onError, currentUser }) => {
    * Change cart's customer by admin/manger
    */
   const handleChangeMember = (userId: number): void => {
-    CartAPI.setCustomer(cart, userId).then(data => {
-      setCart(data);
-    }).catch(onError);
+    setCart({ ...cart, user: { id: userId, role: 'member' } });
   };
 
   /**
@@ -101,6 +106,15 @@ const StoreCart: React.FC<StoreCartProps> = ({ onError, currentUser }) => {
    */
   const cartIsEmpty = (): boolean => {
     return cart && cart.order_items_attributes.length === 0;
+  };
+
+  /**
+   * Apply coupon to current cart
+   */
+  const applyCoupon = (coupon?: Coupon): void => {
+    if (coupon !== cart.coupon) {
+      setCart({ ...cart, coupon });
+    }
   };
 
   return (
@@ -122,11 +136,13 @@ const StoreCart: React.FC<StoreCartProps> = ({ onError, currentUser }) => {
           </FabButton>
         </div>
       ))}
-      {cart && !cartIsEmpty() && <CouponInput user={cart.user} amount={cart.total} />}
-      {cart && !cartIsEmpty() && <p>Totale: {FormatLib.price(cart.total)}</p>}
-      {cart && !cartIsEmpty() && isPrivileged() && <MemberSelect defaultUser={cart.user} onSelected={handleChangeMember} />}
+      {cart && !cartIsEmpty() && cart.user && <CouponInput user={cart.user as User} amount={cart.total} onChange={applyCoupon} />}
+      {cart && !cartIsEmpty() && <p>Total produits: {FormatLib.price(cart.total)}</p>}
+      {cart && !cartIsEmpty() && cart.coupon && computePriceWithCoupon(cart.total, cart.coupon) !== cart.total && <p>Coupon réduction: {FormatLib.price(-(cart.total - computePriceWithCoupon(cart.total, cart.coupon)))}</p>}
+      {cart && !cartIsEmpty() && <p>Total panier: {FormatLib.price(computePriceWithCoupon(cart.total, cart.coupon))}</p>}
+      {cart && !cartIsEmpty() && isPrivileged() && <MemberSelect onSelected={handleChangeMember} />}
       {cart && !cartIsEmpty() &&
-        <FabButton className="checkout-btn" onClick={checkout} disabled={!cart.user || cart.order_items_attributes.length === 0}>
+        <FabButton className="checkout-btn" onClick={checkout}>
           {t('app.public.store_cart.checkout')}
         </FabButton>
       }
@@ -138,7 +154,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onError, currentUser }) => {
           cart={{ customer_id: cart.user.id, items: [], payment_method: PaymentMethod.Card }}
           order={cart}
           operator={currentUser}
-          customer={cart.user}
+          customer={cart.user as User}
           updateCart={() => 'dont need update shopping cart'} />
       </div>}
     </div>
@@ -153,4 +169,4 @@ const StoreCartWrapper: React.FC<StoreCartProps> = (props) => {
   );
 };
 
-Application.Components.component('storeCart', react2angular(StoreCartWrapper, ['onError', 'currentUser']));
+Application.Components.component('storeCart', react2angular(StoreCartWrapper, ['onError', 'currentUser', 'userLogin']));

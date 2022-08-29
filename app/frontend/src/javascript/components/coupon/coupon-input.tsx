@@ -5,11 +5,12 @@ import { FabAlert } from '../base/fab-alert';
 import CouponAPI from '../../api/coupon';
 import { Coupon } from '../../models/coupon';
 import { User } from '../../models/user';
+import FormatLib from '../../lib/format';
 
 interface CouponInputProps {
   amount: number,
   user?: User,
-  onChange?: (coupon: Coupon) => void
+  onChange?: (coupon?: Coupon) => void
 }
 
 interface Message {
@@ -42,7 +43,7 @@ export const CouponInput: React.FC<CouponInputProps> = ({ user, amount, onChange
         if (res.type === 'percent_off') {
           mgs.push({ type: 'info', message: t('app.shared.coupon_input.the_coupon_has_been_applied_you_get_PERCENT_discount', { PERCENT: res.percent_off }) });
         } else {
-          mgs.push({ type: 'info', message: t('app.shared.coupon_input.the_coupon_has_been_applied_you_get_AMOUNT_CURRENCY', { AMOUNT: res.amount_off, CURRENCY: 'euro' }) });
+          mgs.push({ type: 'info', message: t('app.shared.coupon_input.the_coupon_has_been_applied_you_get_AMOUNT_CURRENCY', { AMOUNT: res.amount_off, CURRENCY: FormatLib.currencySymbol() }) });
         }
         if (res.validity_per_user === 'once') {
           mgs.push({ type: 'warning', message: t('app.shared.coupon_input.coupon_validity_once') });
@@ -58,7 +59,10 @@ export const CouponInput: React.FC<CouponInputProps> = ({ user, amount, onChange
         setCoupon(null);
         setLoading(false);
         setMessages([{ type: 'danger', message: t(`app.shared.coupon_input.unable_to_apply_the_coupon_because_${state}`) }]);
+        onChange(null);
       });
+    } else {
+      onChange(null);
     }
   };
 

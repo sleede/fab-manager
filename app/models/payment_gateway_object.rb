@@ -15,6 +15,7 @@ class PaymentGatewayObject < ApplicationRecord
   belongs_to :machine, foreign_type: 'Machine', foreign_key: 'item_id'
   belongs_to :space, foreign_type: 'Space', foreign_key: 'item_id'
   belongs_to :training, foreign_type: 'Training', foreign_key: 'item_id'
+  belongs_to :order, foreign_type: 'Order', foreign_key: 'item_id'
 
   belongs_to :payment_gateway_object # some objects may require a reference to another object for remote recovery
 

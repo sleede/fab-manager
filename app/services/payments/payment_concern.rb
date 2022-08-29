@@ -9,19 +9,34 @@ module Payments::PaymentConcern
     wallet_amount >= total_amount ? total_amount : wallet_amount
   end
 
-  def debit_amount(order)
-    total = order.total
+  def debit_amount(order, coupon_code = nil)
+    total = CouponService.new.apply(order.total, coupon_code, order.statistic_profile.user)
     wallet_debit = get_wallet_debit(order.statistic_profile.user, total)
     total - wallet_debit
   end
 
-  def payment_success(order, payment_method = '')
+  def payment_success(order, coupon_code, payment_method = '', payment_id = nil, payment_type = nil)
     ActiveRecord::Base.transaction do
+      order.paid_total = debit_amount(order, coupon_code)
+      coupon = Coupon.find_by(code: coupon_code)
+      order.coupon_id = coupon.id if coupon
       WalletService.debit_user_wallet(order, order.statistic_profile.user)
-      order.update(state: 'in_progress', payment_state: 'paid', payment_method: payment_method)
+      order.operator_profile_id = order.statistic_profile.user.invoicing_profile.id if order.operator_profile.nil?
+      order.payment_method = if order.total == order.wallet_amount
+                               'wallet'
+                             else
+                               payment_method
+                             end
+      order.state = 'in_progress'
+      order.payment_state = 'paid'
+      if payment_id && payment_type
+        order.payment_gateway_object = PaymentGatewayObject.new(gateway_object_id: payment_id, gateway_object_type: payment_type)
+      end
       order.order_items.each do |item|
         ProductService.update_stock(item.orderable, 'external', 'sold', -item.quantity, item.id)
       end
+      order.reference = order.generate_reference
+      order.save
       order.reload
     end
   end
