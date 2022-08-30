@@ -240,6 +240,7 @@ Rails.application.routes.draw do
   namespace :open_api do
     namespace :v1 do
       scope only: :index do
+        resources :plans, only: %i[index show]
         resources :users
         resources :trainings
         resources :user_trainings

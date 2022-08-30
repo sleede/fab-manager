@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - OpenAPI spaces endpoints (index/show)
+- OpenAPI plans endpoints (index/show)
 - Improved automated test on statistics generation
 - Refactored statistics generation
 - Refactored test helpers
