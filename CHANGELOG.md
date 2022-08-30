@@ -2,6 +2,7 @@
 
 - OpenAPI spaces endpoints (index/show)
 - OpenAPI plans endpoints (index/show)
+- OpenAPI plans categories index endpoint
 - Improved automated test on statistics generation
 - Refactored statistics generation
 - Refactored test helpers

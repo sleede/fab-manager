@@ -60,7 +60,7 @@ class OpenAPI::V1::PlansDoc < OpenAPI::V1::BaseDoc
             "monthly_payment": true,
             "updated_at": "2020-12-14 14:10:11.056241000 Z",
             "created_at": "2020-12-14 14:10:11.056241000 Z"
-          },
+          }
         ]
       }
     PLANS

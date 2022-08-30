@@ -241,6 +241,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       scope only: :index do
         resources :plans, only: %i[index show]
+        resources :plan_categories
         resources :users
         resources :trainings
         resources :user_trainings
