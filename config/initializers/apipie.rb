@@ -5,7 +5,7 @@ Apipie.configure do |config|
   config.api_base_url            = '/open_api'
   config.doc_base_url            = '/open_api/doc'
   # where is your API defined?
-  config.api_controllers_matcher = "#{Rails.root}/app/controllers/open_api/v1/*.rb"
+  config.api_controllers_matcher = Rails.root.join('app/controllers/open_api/v1/*.rb')
   config.validate = false
   config.translate = false
   config.default_locale = nil
@@ -22,7 +22,12 @@ Apipie.configure do |config|
 
     = Json
     ---
-    Depending on your client, you may have to set header <tt>Accept: application/json</tt> for every request, 
+    Depending on your client, you may have to set header <tt>Accept: application/json</tt> for every request,
     otherwise some clients may request *html* by default which will result in error.
+
+   = Amounts
+   ---
+   Everywhere in the OpenAPI amounts are reported in cents. For exemple, if you get <tt>{ "amount" : 1000 }</tt>,
+   from the OpenAPI, this means that the price is 10 € (or whatever your currency is).
   RDOC
 end
