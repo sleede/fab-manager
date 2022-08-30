@@ -5,6 +5,7 @@
 - Refactored test helpers
 - Fix a bug: unable to generate statistics
 - Fix a bug: the automated test on statistics generation was not running
+- Fix a security issue: disable log4j format message lookup by default for new installations
 - [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2022,07]`
 
 ## v5.4.16 2022 August 24
