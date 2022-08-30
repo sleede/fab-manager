@@ -245,6 +245,7 @@ Rails.application.routes.draw do
         resources :user_trainings
         resources :reservations
         resources :machines, only: %i[index create update show destroy]
+        resources :spaces, only: %i[index show]
         resources :bookable_machines
         resources :invoices do
           get :download, on: :member
@@ -262,7 +263,7 @@ Rails.application.routes.draw do
   post '/stats/global/export', to: 'api/statistics#export_global'
   post '_search/scroll', to: 'api/statistics#scroll'
 
-  match '/project_collaborator/:valid_token', to: 'api/projects#collaborator_valid', via: :get
+  get '/project_collaborator/:valid_token', to: 'api/projects#collaborator_valid'
 
   authenticate :user, ->(u) { u.admin? } do
     mount Sidekiq::Web => '/admin/sidekiq'
