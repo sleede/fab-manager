@@ -70,10 +70,14 @@
       position: relative;
       padding-bottom: 1.6rem;
       &.collapsed {
-        .content { max-height: 0; }
         header svg { transform: rotateZ(180deg); }
+        .content {
+          max-height: 0;
+          overflow: hidden;
+          * { opacity: 0; }
+        }
       }
-
+      
       header {
         width: 100%;
         padding: 0;
@@ -93,10 +97,14 @@
         flex-direction: column;
         align-items: stretch;
         transition: max-height 500ms ease-in-out;
-        overflow: hidden;
-
-        .list {
-          overflow: hidden auto;
+        * { transition: opacity 250ms ease-in-out 300ms; }
+        
+        .group {
+          display: flex;
+          flex-direction: column;
+          opacity: 1;
+          &.u-scrollbar { overflow: hidden auto; }
+          
           label {
             margin: 0 0.8rem 0 0;
             padding: 0.6rem;
@@ -114,7 +122,9 @@
             &.offset { margin-left: 1.6rem; }
           }
         }
+
         button {
+          opacity: 100;
           margin-top: 0.8rem;
           justify-content: center;
         }

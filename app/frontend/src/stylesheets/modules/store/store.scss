@@ -36,8 +36,8 @@
 
 .store-product {
   --status-color: var(--success);
-    &.low { --status-color: var(--alert-light); }
-    &.out-of-stock { --status-color: var(--alert); }
+  &.low { --status-color: var(--alert-light); }
+  &.out-of-stock { --status-color: var(--alert); }
 
   padding-top: 4rem;
   gap: 0 3.2rem;

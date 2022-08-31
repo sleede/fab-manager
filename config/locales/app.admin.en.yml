@@ -1993,7 +1993,21 @@ en:
           filter: "Filter"
           filter_clear: "Clear all"
           filter_apply: "Apply"
+          filter_ref: "By reference"
           filter_status: "By status"
+          filter_client: "By client"
+          status:
+            error: "Payment error"
+            canceled: "Canceled"
+            pending: "Pending payment"
+            under_preparation: "Under preparation"
+            paid: "Paid"
+            ready: "Ready"
+            collected: "Collected"
+            refunded: "Refunded"
           sort:
             newest: "Newest first"
             oldest: "Oldest first"
+        order_item:
+          total: "Total"
+          client: "Client"
