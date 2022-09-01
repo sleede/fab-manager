@@ -141,7 +141,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
               <img alt=''src={noImage} />
             </div>
             <div className="ref">
-              <span>ref: </span>
+              <span>{t('app.public.store_cart.reference_short')} </span>
               <p>{item.orderable_name}</p>
             </div>
             <div className="actions">

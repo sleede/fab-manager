@@ -164,7 +164,7 @@ const Store: React.FC<StoreProps> = ({ onError, currentUser }) => {
           <header>
             <h3>{t('app.public.store.products.filter_categories')}</h3>
           </header>
-          <div className="list u-scrollbar">
+          <div className="group u-scrollbar">
             {categoriesTree.map(c =>
               <div key={c.parent.id} className={`parent ${activeCategory?.id === c.parent.id || activeCategory?.parent === c.parent.id ? 'is-active' : ''}`}>
                 <p onClick={() => filterCategory(c.parent.id)}>
@@ -199,7 +199,7 @@ const Store: React.FC<StoreProps> = ({ onError, currentUser }) => {
               label={t('app.public.store.products.filter_machines')}
             >
               <div className='content'>
-                <div className="list u-scrollbar">
+                <div className="group u-scrollbar">
                   {machines.map(m => (
                     <label key={m.value}>
                       <input type="checkbox" />

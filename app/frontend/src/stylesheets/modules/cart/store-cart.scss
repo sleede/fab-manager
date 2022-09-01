@@ -65,6 +65,14 @@
         }
         span { @include text-sm; }
       }
+      .count {
+        padding: 0.8rem 1.6rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--gray-soft);
+        border-radius: var(--border-radius-sm);
+      }
       .total {
         span {
           @include text-sm;
@@ -99,8 +107,6 @@
   }
   &-info {
     p { @include text-sm; }
-  }
-  &-coupon {
   }
 
   aside {

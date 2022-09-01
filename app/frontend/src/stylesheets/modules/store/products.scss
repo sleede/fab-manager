@@ -22,6 +22,7 @@
     max-width: 1600px;
     margin: 0 auto;
     @include grid-col(12);
+    gap: 3.2rem;
     justify-items: flex-start;
     & > * {
       grid-column: 2 / -2;

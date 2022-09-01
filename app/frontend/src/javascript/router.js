@@ -904,6 +904,17 @@ angular.module('application.router', ['ui.router'])
         }
       })
 
+      // show order
+      .state('app.admin.order_show', {
+        url: '/admin/store/o/:token',
+        views: {
+          'main@': {
+            templateUrl: '/admin/orders/show.html',
+            controller: 'ShowOrdersController'
+          }
+        }
+      })
+
       // invoices
       .state('app.admin.invoices', {
         url: '/admin/invoices',

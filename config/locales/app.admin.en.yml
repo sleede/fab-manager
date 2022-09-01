@@ -2011,3 +2011,19 @@ en:
         order_item:
           total: "Total"
           client: "Client"
+        show_order:
+          see_invoice: "See invoice"
+          client: "Client"
+          created_at: "Creation date"
+          last_update: "Last update"
+          cart: "Cart"
+          reference_short: "ref:"
+          unit: "Unit"
+          item_total: "Total"
+          payment_informations : "Payment informations"
+          amount: "Amount"
+          products_total: "Products total"
+          gift_total: "Discount total"
+          coupon: "Coupon"
+          cart_total: "Cart total"
+

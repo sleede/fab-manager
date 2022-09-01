@@ -7,6 +7,8 @@ import { IApplication } from '../../models/application';
 import { FabButton } from '../base/fab-button';
 import { StoreListHeader } from './store-list-header';
 import { AccordionItem } from './accordion-item';
+import { OrderItem } from './order-item';
+import { MemberSelect } from '../user/member-select';
 
 declare const Application: IApplication;
 
@@ -15,24 +17,15 @@ interface OrdersProps {
   onError: (message: string) => void,
 }
 /**
- * Option format, expected by react-select
- * @see https://github.com/JedWatson/react-select
- */
- type selectOption = { value: number, label: string };
- /**
- * Option format, expected by checklist
- */
+* Option format, expected by react-select
+* @see https://github.com/JedWatson/react-select
+*/
+type selectOption = { value: number, label: string };
+
+/**
+* Option format, expected by checklist
+*/
 type checklistOption = { value: number, label: string };
-const statusOptions: checklistOption[] = [
-  { value: 0, label: 'cart' },
-  { value: 1, label: 'paid by credit card' },
-  { value: 2, label: 'paid in cash' },
-  { value: 3, label: 'being processed' },
-  { value: 4, label: 'ready' },
-  { value: 5, label: 'delivered' },
-  { value: 6, label: 'canceled' },
-  { value: 7, label: 'refunded' }
-];
 
 /**
  * Admin list of orders
@@ -55,6 +48,17 @@ const Orders: React.FC<OrdersProps> = ({ onSuccess, onError }) => {
   const newOrder = () => {
     console.log('Create new order');
   };
+
+  const statusOptions: checklistOption[] = [
+    { value: 0, label: t('app.admin.store.orders.status.error') },
+    { value: 1, label: t('app.admin.store.orders.status.canceled') },
+    { value: 2, label: t('app.admin.store.orders.status.pending') },
+    { value: 3, label: t('app.admin.store.orders.status.under_preparation') },
+    { value: 4, label: t('app.admin.store.orders.status.paid') },
+    { value: 5, label: t('app.admin.store.orders.status.ready') },
+    { value: 6, label: t('app.admin.store.orders.status.collected') },
+    { value: 7, label: t('app.admin.store.orders.status.refunded') }
+  ];
 
   /**
    * Apply filters
@@ -102,19 +106,46 @@ const Orders: React.FC<OrdersProps> = ({ onSuccess, onError }) => {
   };
 
   /**
+   * Filter: by member
+   */
+  const handleSelectMember = (userId: number) => {
+    setFilters(draft => {
+      return { ...draft, memberId: userId };
+    });
+  };
+
+  /**
    * Open/close accordion items
    */
   const handleAccordion = (id, state) => {
     setAccordion({ ...accordion, [id]: state });
   };
 
+  /**
+   * Returns a className according to the status
+   */
+  const statusColor = (status: string) => {
+    switch (status) {
+      case 'error':
+        return 'error';
+      case 'canceled':
+        return 'canceled';
+      case 'pending' || 'under_preparation':
+        return 'pending';
+      default:
+        return 'normal';
+    }
+  };
+
   return (
     <div className='orders'>
       <header>
         <h2>{t('app.admin.store.orders.heading')}</h2>
-        <div className='grpBtn'>
-          <FabButton className="main-action-btn" onClick={newOrder}>{t('app.admin.store.orders.create_order')}</FabButton>
-        </div>
+        {false &&
+          <div className='grpBtn'>
+            <FabButton className="main-action-btn" onClick={newOrder}>{t('app.admin.store.orders.create_order')}</FabButton>
+          </div>
+        }
       </header>
 
       <div className="store-filters">
@@ -128,18 +159,42 @@ const Orders: React.FC<OrdersProps> = ({ onSuccess, onError }) => {
           <AccordionItem id={0}
             isOpen={accordion[0]}
             onChange={handleAccordion}
+            label={t('app.admin.store.orders.filter_ref')}
+          >
+            <div className='content'>
+              <div className="group">
+                <input type="text" />
+                <FabButton onClick={applyFilters} className="is-info">{t('app.admin.store.orders.filter_apply')}</FabButton>
+              </div>
+            </div>
+          </AccordionItem>
+          <AccordionItem id={1}
+            isOpen={accordion[1]}
+            onChange={handleAccordion}
             label={t('app.admin.store.orders.filter_status')}
           >
             <div className='content'>
-              <div className="list u-scrollbar">
+              <div className="group u-scrollbar">
                 {statusOptions.map(s => (
                   <label key={s.value}>
-                    <input type="checkbox" checked={filters.status.includes(s)} onChange={(event) => handleSelectStatus(s, event.target.checked)} />
+                    <input type="checkbox" checked={filters.status.some(o => o.label === s.label)} onChange={(event) => handleSelectStatus(s, event.target.checked)} />
                     <p>{s.label}</p>
                   </label>
                 ))}
               </div>
               <FabButton onClick={applyFilters} className="is-info">{t('app.admin.store.orders.filter_apply')}</FabButton>
+            </div>
+          </AccordionItem>
+          <AccordionItem id={2}
+            isOpen={accordion[2]}
+            onChange={handleAccordion}
+            label={t('app.admin.store.orders.filter_client')}
+          >
+            <div className='content'>
+              <div className="group">
+                <MemberSelect noHeader onSelected={handleSelectMember} />
+                <FabButton onClick={applyFilters} className="is-info">{t('app.admin.store.orders.filter_apply')}</FabButton>
+              </div>
             </div>
           </AccordionItem>
         </div>
@@ -151,6 +206,12 @@ const Orders: React.FC<OrdersProps> = ({ onSuccess, onError }) => {
           selectOptions={buildOptions()}
           onSelectOptionsChange={handleSorting}
         />
+        <div className="orders-list">
+          <OrderItem statusColor={statusColor('error')} />
+          <OrderItem statusColor={statusColor('canceled')} />
+          <OrderItem statusColor={statusColor('pending')} />
+          <OrderItem statusColor={statusColor('refunded')} />
+        </div>
       </div>
     </div>
   );
@@ -168,10 +229,12 @@ Application.Components.component('orders', react2angular(OrdersWrapper, ['onSucc
 
 interface Filters {
   reference: string,
-  status: checklistOption[]
+  status: checklistOption[],
+  memberId: number
 }
 
 const initFilters: Filters = {
   reference: '',
-  status: []
+  status: [],
+  memberId: null
 };

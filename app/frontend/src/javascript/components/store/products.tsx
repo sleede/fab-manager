@@ -243,7 +243,7 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
             label={t('app.admin.store.products.filter_categories')}
           >
             <div className='content'>
-              <div className="list u-scrollbar">
+              <div className="group u-scrollbar">
                 {productCategories.map(pc => (
                   <label key={pc.id} className={pc.parent_id ? 'offset' : ''}>
                     <input type="checkbox" checked={filters.categories.includes(pc)} onChange={(event) => handleSelectCategory(pc, event.target.checked)} />
@@ -261,7 +261,7 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
             label={t('app.admin.store.products.filter_machines')}
           >
             <div className='content'>
-              <div className="list u-scrollbar">
+              <div className="group u-scrollbar">
                 {machines.map(m => (
                   <label key={m.value}>
                     <input type="checkbox" checked={filters.machines.includes(m)} onChange={(event) => handleSelectMachine(m, event.target.checked)} />

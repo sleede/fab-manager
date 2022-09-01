@@ -8,12 +8,12 @@
   </div>
 </div>
 
-<section class="admin-store-manage">
-  <div class="edit-product-nav">
-    <a class="back-btn" ng-click="backProductsList()">
+<section>
+  <div class="show-order-nav">
+    <a class="back-btn" ng-click="backProductsList()" tabindex="0">
       <i class="fas fa-angle-left"></i>
       <span translate>{{ 'app.admin.store.back_products_list' }}</span>
     </a>
   </div>
-  <edit-product product-id="productId" on-success="onSuccess" on-error="onError"/>
+  <show-order order-token="orderToken" on-error="onError" on-success="onSuccess" />
 </section>
