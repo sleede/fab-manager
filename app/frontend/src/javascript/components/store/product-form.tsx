@@ -362,7 +362,10 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
             <HtmlTranslate trKey="app.admin.store.product_form.product_description_info" />
           </FabAlert>
           <FormRichText control={control}
-                        paragraphTools={true}
+                        heading
+                        bulletList
+                        blockquote
+                        link
                         limit={6000}
                         id="description" />
         </div>

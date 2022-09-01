@@ -2026,4 +2026,8 @@ en:
           gift_total: "Discount total"
           coupon: "Coupon"
           cart_total: "Cart total"
-
+      store_settings:
+        title: 'Settings'
+        withdrawal_instructions: 'Product withdrawal instructions'
+        withdrawal_info: "This text is displayed on the checkout page to inform the client about the products withdrawal method"
+        save: "Save"
