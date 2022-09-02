@@ -32,7 +32,7 @@
         background-color: var(--information-lightest);
         color: var(--information);
         border: 1px solid var(--information);
-        border-radius: 8px;
+        border-radius: var(--border-radius);
         font-size: 14px;
         font-weight: normal;
         line-height: 1.2em;

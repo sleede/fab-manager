@@ -383,6 +383,7 @@ en:
       store:
         fablab_store: "FabLab Store"
         unexpected_error_occurred: "An unexpected error occurred. Please try again later."
+        add_to_cart_success: "Product added to the cart."
         products:
           all_products: "All the products"
           filter: "Filter"

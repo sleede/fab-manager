@@ -16,6 +16,7 @@ import { CouponInput } from '../coupon/coupon-input';
 import { Coupon } from '../../models/coupon';
 import { computePriceWithCoupon } from '../../lib/coupon';
 import noImage from '../../../../images/no_image.png';
+import Switch from 'react-switch';
 
 declare const Application: IApplication;
 
@@ -113,6 +114,13 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
   };
 
   /**
+   * Toggle product offer
+   */
+  const onSwitch = (product, checked: boolean) => {
+    console.log('Offer ', product.orderable_name, ': ', checked);
+  };
+
+  /**
    * Apply coupon to current cart
    */
   const applyCoupon = (coupon?: Coupon): void => {
@@ -162,6 +170,21 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
                 <i className="fa fa-trash" />
               </FabButton>
             </div>
+            {isPrivileged() &&
+              <div className='offer'>
+                <label>
+                  <span>Offer the product</span>
+                  <Switch
+                  checked={item.is_offered}
+                  onChange={(checked) => onSwitch(item, checked)}
+                  width={40}
+                  height={19}
+                  uncheckedIcon={false}
+                  checkedIcon={false}
+                  handleDiameter={15} />
+                </label>
+              </div>
+            }
           </article>
         ))}
       </div>

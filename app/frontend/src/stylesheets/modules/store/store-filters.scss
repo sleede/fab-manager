@@ -123,6 +123,18 @@
           }
         }
 
+        input[type="text"] {
+          width: 100%;
+          min-height: 4rem;
+          padding: 0 0.8rem;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          border: 1px solid var(--gray-soft-dark);
+          border-radius: var(--border-radius-sm);
+          @include text-base;
+        }
+
         button {
           opacity: 100;
           margin-top: 0.8rem;

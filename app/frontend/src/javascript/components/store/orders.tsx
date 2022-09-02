@@ -9,6 +9,7 @@ import { StoreListHeader } from './store-list-header';
 import { AccordionItem } from './accordion-item';
 import { OrderItem } from './order-item';
 import { MemberSelect } from '../user/member-select';
+import { FabInput } from '../base/fab-input';
 
 declare const Application: IApplication;
 

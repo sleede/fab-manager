@@ -13,6 +13,7 @@ import { StoreProductItem } from './store-product-item';
 import useCart from '../../hooks/use-cart';
 import { emitCustomEvent } from 'react-custom-events';
 import { User } from '../../models/user';
+import { Order } from '../../models/order';
 import { AccordionItem } from './accordion-item';
 import { StoreListHeader } from './store-list-header';
 
@@ -20,6 +21,7 @@ declare const Application: IApplication;
 
 interface StoreProps {
   onError: (message: string) => void,
+  onSuccess: (message: string) => void,
   currentUser: User,
 }
 /**
@@ -31,7 +33,7 @@ interface StoreProps {
 /**
  * This component shows public store
  */
-const Store: React.FC<StoreProps> = ({ onError, currentUser }) => {
+const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser }) => {
   const { t } = useTranslation('public');
 
   const { cart, setCart } = useCart(currentUser);
@@ -138,6 +140,14 @@ const Store: React.FC<StoreProps> = ({ onError, currentUser }) => {
     console.log('Display in stock only:', checked);
   };
 
+  /**
+   * Add product to the cart
+   */
+  const addToCart = (cart: Order) => {
+    setCart(cart);
+    onSuccess(t('app.public.store.add_to_cart_success'));
+  };
+
   return (
     <div className="store">
       <ul className="breadcrumbs">
@@ -224,7 +234,7 @@ const Store: React.FC<StoreProps> = ({ onError, currentUser }) => {
         />
         <div className="products-grid">
           {products.map((product) => (
-            <StoreProductItem key={product.id} product={product} cart={cart} onSuccessAddProductToCart={setCart} />
+            <StoreProductItem key={product.id} product={product} cart={cart} onSuccessAddProductToCart={addToCart} />
           ))}
         </div>
       </div>
@@ -253,7 +263,7 @@ const StoreWrapper: React.FC<StoreProps> = (props) => {
   );
 };
 
-Application.Components.component('store', react2angular(StoreWrapper, ['onError', 'currentUser']));
+Application.Components.component('store', react2angular(StoreWrapper, ['onError', 'onSuccess', 'currentUser']));
 
 interface ActiveCategory {
   id: number,

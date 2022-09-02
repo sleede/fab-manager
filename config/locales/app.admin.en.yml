@@ -1964,6 +1964,8 @@ en:
         edit_product:
           successfully_updated: "The product has been updated."
         product_form:
+          product_parameters: "Product parameters"
+          stock_management: "Stock management"
           name: "Name of product"
           sku: "Reference product (SKU)"
           slug: "Name of URL"
@@ -1987,6 +1989,9 @@ en:
           product_images_info: "<strong>Advice</strong></br>We advise you to use a square format, jpg or png, for jpgs, please use white for the background colour. The main visual will be the visual presented first in the product sheet."
           add_product_image: "Add an image"
           save: "Save"
+        product_stock_form:
+          low_stock_threshold: "Define a low stock threshold"
+          toggle_stock_threshold: "Activate stock threshold"
         orders:
           heading: "Orders"
           create_order: "Create an order"

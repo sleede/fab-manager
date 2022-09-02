@@ -251,7 +251,7 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
                   </label>
                 ))}
               </div>
-              <FabButton onClick={applyFilters} className="is-info">{t('app.admin.store.products.filter_apply')}</FabButton>
+              <FabButton onClick={() => setUpdate(true)} className="is-info">{t('app.admin.store.products.filter_apply')}</FabButton>
             </div>
           </AccordionItem>
 
@@ -269,7 +269,7 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
                   </label>
                 ))}
               </div>
-              <FabButton onClick={applyFilters} className="is-info">{t('app.admin.store.products.filter_apply')}</FabButton>
+              <FabButton onClick={() => setUpdate(true)} className="is-info">{t('app.admin.store.products.filter_apply')}</FabButton>
             </div>
           </AccordionItem>
         </div>
