@@ -47,13 +47,13 @@ module Statistics::Concerns::ProjectsConcern
 
     def project_info_stat(project)
       {
-        projectId: project.project_id,
-        name: project.project_name,
-        licence: project.project_licence,
-        themes: project.project_themes,
-        components: project.project_components,
-        machines: project.project_machines,
-        users: project.project_users
+        projectId: project[:project_id],
+        name: project[:project_name],
+        licence: project[:project_licence],
+        themes: project[:project_themes],
+        components: project[:project_components],
+        machines: project[:project_machines],
+        users: project[:project_users]
       }
     end
   end
