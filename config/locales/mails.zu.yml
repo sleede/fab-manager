@@ -251,7 +251,7 @@ zu:
       body:
         enjoy_a_discount_of_PERCENT_with_code_CODE: "crwdns4183:0%{PERCENT}crwdnd4183:0%{CODE}crwdne4183:0"
         enjoy_a_discount_of_AMOUNT_with_code_CODE: "crwdns4185:0%{AMOUNT}crwdnd4185:0%{CODE}crwdne4185:0"
-        this_coupon_is_valid_USAGE_times_until_DATE_for_all_your_purchases: "crwdns4187:0USAGE={USAGE}crwdnd4187:0TYPE={TYPE}crwdnd4187:0DATE={DATE}crwdnd4187:0DATE={DATE}crwdne4187:0"
+        this_coupon_is_valid_USAGE_times_until_DATE_for_all_your_purchases: "crwdns4187:0{just once}crwdnd4187:0{many times}crwdnd4187:0{at least equal to the amount of the coupon}crwdnd4187:0{and without time limit}crwdnd4187:0{DATE}crwdne4187:0"
     notify_admin_free_disk_space:
       subject: "crwdns4189:0crwdne4189:0"
       body: "crwdns20156:0%{THRESHOLD}crwdnd20156:0%{AVAILABLE}crwdne20156:0"
