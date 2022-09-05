@@ -215,7 +215,7 @@ fr:
     local_payment: "Paiement à l'accueil"
     online_payment: "Paiement en ligne"
     deleted_user: "Utilisateur supprimé"
-    coupon: "Coupon used"
+    coupon: "Code promo utilisé"
   #subscriptions list export to EXCEL format
   export_subscriptions:
     subscriptions: "Abonnements"
