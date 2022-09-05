@@ -215,6 +215,7 @@
     local_payment: "Betaling i resepsjonen"
     online_payment: "Online betaling"
     deleted_user: "Slettet bruker"
+    coupon: "Coupon used"
   #subscriptions list export to EXCEL format
   export_subscriptions:
     subscriptions: "Medlemskap/abonnementer"
@@ -433,7 +434,7 @@
     account_creation: "Konto opprettet"
     project_publication: "Prosjekt publisert"
     duration: "Varighet"
-  #statistics exports to the excel file format
+  #statistics exports to the Excel file format
   export:
     entries: "Oppføringer"
     revenue: "Inntekter"

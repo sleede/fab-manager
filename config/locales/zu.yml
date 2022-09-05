@@ -215,6 +215,7 @@ zu:
     local_payment: "crwdns3503:0crwdne3503:0"
     online_payment: "crwdns3505:0crwdne3505:0"
     deleted_user: "crwdns20886:0crwdne20886:0"
+    coupon: "crwdns24040:0crwdne24040:0"
   #subscriptions list export to EXCEL format
   export_subscriptions:
     subscriptions: "crwdns3507:0crwdne3507:0"
@@ -433,7 +434,7 @@ zu:
     account_creation: "crwdns3735:0crwdne3735:0"
     project_publication: "crwdns3737:0crwdne3737:0"
     duration: "crwdns20282:0crwdne20282:0"
-  #statistics exports to the excel file format
+  #statistics exports to the Excel file format
   export:
     entries: "crwdns3739:0crwdne3739:0"
     revenue: "crwdns3741:0crwdne3741:0"
