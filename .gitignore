@@ -54,8 +54,9 @@
 .vagrant
 .docker
 
-# Do not versionate coveralls token
+# Do not versionate access tokens
 .coveralls.yml
+.crowdin
 
 # Plugins are versioned is their own repository
 /plugins/*
