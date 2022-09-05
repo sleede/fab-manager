@@ -162,7 +162,7 @@ GEM
       activesupport (>= 5.0)
     hashdiff (1.0.1)
     hashery (2.1.2)
-    hashie (4.1.0)
+    hashie (5.0.0)
     htmlentities (4.3.4)
     httparty (0.20.0)
       mime-types (~> 3.0)
@@ -248,7 +248,7 @@ GEM
       multi_xml (~> 0.5)
       rack (>= 1.2, < 3)
     oj (3.10.5)
-    omniauth (1.9.1)
+    omniauth (1.9.2)
       hashie (>= 3.4.6)
       rack (>= 1.6.2, < 3)
     omniauth-oauth2 (1.6.0)
@@ -533,7 +533,7 @@ DEPENDENCIES
   minitest-reporters
   notify_with
   oj
-  omniauth (~> 1.9.0)
+  omniauth (~> 1.9.2)
   omniauth-oauth2
   omniauth-rails_csrf_protection (~> 0.1)
   omniauth_openid_connect
