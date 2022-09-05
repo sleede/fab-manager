@@ -4,6 +4,7 @@
 - OpenAPI plans endpoints (index/show)
 - OpenAPI plans categories index endpoint
 - OpenAPI prices index endpoint
+- Export used coupon (if any), in the reservations export
 - Improved automated test on statistics generation
 - Refactored statistics generation
 - Refactored test helpers

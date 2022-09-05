@@ -11,11 +11,12 @@ wb.add_worksheet(name: t('export_reservations.reservations')) do |sheet|
   # heading labels
   columns = [t('export_reservations.customer_id'), t('export_reservations.customer'), t('export_reservations.email'),
              t('export_reservations.reservation_date'), t('export_reservations.reservation_type'), t('export_reservations.reservation_object'),
-             t('export_reservations.slots_number_hours_tickets'), t('export_reservations.payment_method')]
+             t('export_reservations.slots_number_hours_tickets'), t('export_reservations.payment_method'), t('export_reservations.coupon')]
   sheet.add_row columns, style: header
 
   # data rows
   @reservations.each do |resrv|
+    invoice = resrv.original_invoice
     data = [
       resrv.user&.id,
       resrv.user&.profile&.full_name || t('export_reservations.deleted_user'),
@@ -24,7 +25,8 @@ wb.add_worksheet(name: t('export_reservations.reservations')) do |sheet|
       resrv.reservable_type,
       resrv.reservable.nil? ? '' : resrv.reservable.name,
       resrv.reservable_type == 'Event' ? resrv.total_booked_seats : resrv.slots.count,
-      resrv.original_invoice&.paid_by_card? ? t('export_reservations.online_payment') : t('export_reservations.local_payment')
+      invoice&.paid_by_card? ? t('export_reservations.online_payment') : t('export_reservations.local_payment'),
+      invoice&.coupon&.nil? ? '' : invoice&.coupon&.name
     ]
     styles = [nil, nil, nil, date, nil, nil, nil, nil]
     types = %i[integer string string date string string integer string]

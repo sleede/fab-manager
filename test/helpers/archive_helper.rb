@@ -55,7 +55,7 @@ module ArchiveHelper
 
   def check_integrity(extracted_path)
     require 'integrity/checksum'
-    sumfile = File.read("#{dest}/checksum.sha256").split("\t")
+    sumfile = File.read("#{extracted_path}/checksum.sha256").split("\t")
     assert_equal sumfile[0], Integrity::Checksum.file("#{extracted_path}/#{sumfile[1]}"), 'archive checksum does not match'
     sumfile[1]
   end
