@@ -215,7 +215,7 @@ pt:
     local_payment: "Pagamento na recepção"
     online_payment: "Pagamento online"
     deleted_user: "Usuário deletado"
-    coupon: "Coupon used"
+    coupon: "Cupão usado"
   #subscriptions list export to EXCEL format
   export_subscriptions:
     subscriptions: "Assinaturas"
