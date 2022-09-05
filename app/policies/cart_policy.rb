@@ -10,7 +10,7 @@ class CartPolicy < ApplicationPolicy
     define_method "#{action}?" do
       return user.privileged? || (record.statistic_profile_id == user.statistic_profile.id) if user
 
-      record.statistic_profile_id.nil?
+      record.statistic_profile_id.nil? && record.operator_profile_id.nil?
     end
   end
 end
