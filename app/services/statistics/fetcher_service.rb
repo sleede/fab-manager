@@ -5,6 +5,7 @@
 class Statistics::FetcherService
   include Statistics::Concerns::HelpersConcern
   include Statistics::Concerns::ComputeConcern
+  include Statistics::Concerns::ProjectsConcern
 
   class << self
     def subscriptions_list(options = default_options)
