@@ -8,6 +8,7 @@
 - Improved automated test on statistics generation
 - Refactored statistics generation
 - Refactored test helpers
+- Script to upload translations sources to Crowdin
 - Fix a bug: unable to generate statistics
 - Fix a bug: the automated test on statistics generation was not running
 - Fix a bug: the events times are not displayed
