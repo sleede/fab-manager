@@ -84,7 +84,7 @@ export const StoreProductItem: React.FC<StoreProductItemProps> = ({ product, car
           <span>/ {t('app.public.store_product_item.unit')}</span>
         </div>
       }
-      <div className="stock">
+      <div className="stock-label">
         {productStockStatus(product)}
       </div>
       {product.stock.external > 0 &&

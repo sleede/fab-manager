@@ -242,7 +242,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
           <p className={stockTab ? 'is-active' : ''} onClick={() => setStockTab(true)}>{t('app.admin.store.product_form.stock_management')}</p>
         </div>
         {stockTab
-          ? <ProductStockForm product={product} control={control} onError={onError} onSuccess={onSuccess} />
+          ? <ProductStockForm product={product} register={register} control={control} id="stock" onError={onError} onSuccess={onSuccess} />
           : <section>
             <div className="subgrid">
               <FormInput id="name"
@@ -277,13 +277,12 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
 
             <div className="price-data">
               <div className="header-switch">
-                <h4 className='span-7'>{t('app.admin.store.product_form.price_and_rule_of_selling_product')}</h4>
+                <h4>{t('app.admin.store.product_form.price_and_rule_of_selling_product')}</h4>
                 <FormSwitch control={control}
                             id="is_active_price"
                             label={t('app.admin.store.product_form.is_active_price')}
                             defaultValue={isActivePrice}
-                            onChange={toggleIsActivePrice}
-                            className='span-3' />
+                            onChange={toggleIsActivePrice} />
               </div>
               {isActivePrice && <div className="price-data-content">
                 <FormInput id="amount"

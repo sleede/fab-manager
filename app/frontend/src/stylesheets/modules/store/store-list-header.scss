@@ -22,9 +22,13 @@
     display: flex;
     align-items: center;
     & > *:not(:first-child) {
-      margin-left: 2rem;
-      padding-left: 2rem;
-      border-left: 1px solid var(--gray-hard-darkest);
+      &::before {
+        content: "";
+        margin: 0 2rem;
+        width: 1px;
+        height: 2rem;
+        background-color: var(--gray-hard-darkest);
+      }
     }
 
     .sort {

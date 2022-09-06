@@ -160,7 +160,7 @@ export const StoreProduct: React.FC<StoreProductProps> = ({ productSlug, onError
         </div>
 
         <aside>
-          <div className="stock">
+          <div className="stock-label">
             {productStockStatus(product)}
           </div>
           <div className='price'>
