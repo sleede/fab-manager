@@ -36,18 +36,6 @@ class PaymentDocumentService
         reference.gsub!(/R\[([^\]]+)\]/, ''.to_s)
         # remove information about payment schedule (S[text])
         reference.gsub!(/S\[([^\]]+)\]/, ''.to_s)
-      elsif document.is_a? Order
-        # information about online selling (X[text])
-        if document.paid_by_card?
-          reference.gsub!(/X\[([^\]]+)\]/, '\1')
-        else
-          reference.gsub!(/X\[([^\]]+)\]/, ''.to_s)
-        end
-
-        # remove information about refunds (R[text])
-        reference.gsub!(/R\[([^\]]+)\]/, ''.to_s)
-        # remove information about payment schedule (S[text])
-        reference.gsub!(/S\[([^\]]+)\]/, ''.to_s)
       else
         raise TypeError
       end
@@ -55,16 +43,16 @@ class PaymentDocumentService
       reference
     end
 
-    def generate_order_number(invoice)
+    def generate_order_number(document)
       pattern = Setting.get('invoice_order-nb')
 
       # global document number (nn..nn)
       reference = pattern.gsub(/n+(?![^\[]*\])/) do |match|
-        pad_and_truncate(number_of_invoices('global'), match.to_s.length)
+        pad_and_truncate(number_of_invoices(document.is_a?(Order) ? 'order' : 'global'), match.to_s.length)
       end
 
-      reference = replace_invoice_number_pattern(reference, invoice.created_at)
-      replace_date_pattern(reference, invoice.created_at)
+      reference = replace_invoice_number_pattern(reference, document.created_at)
+      replace_date_pattern(reference, document.created_at)
     end
 
     private
@@ -95,13 +83,14 @@ class PaymentDocumentService
       when 'year'
         start = date.beginning_of_year
       else
-        return get_max_id(Invoice) + get_max_id(PaymentSchedule)
+        return get_max_id(Invoice) + get_max_id(PaymentSchedule) + get_max_id(Order)
       end
       ending = date
-      return Invoice.count + PaymentSchedule.count unless defined? start
+      return Invoice.count + PaymentSchedule.count + Order.count unless defined? start
 
       Invoice.where('created_at >= :start_date AND created_at <= :end_date', start_date: start, end_date: ending).length +
-        PaymentSchedule.where('created_at >= :start_date AND created_at <= :end_date', start_date: start, end_date: ending).length
+        PaymentSchedule.where('created_at >= :start_date AND created_at <= :end_date', start_date: start, end_date: ending).length +
+        Order.where('created_at >= :start_date AND created_at <= :end_date', start_date: start, end_date: ending).length
     end
 
     ##
@@ -113,21 +102,21 @@ class PaymentDocumentService
       copy = reference.dup
 
       # full year (YYYY)
-      copy.gsub!(/YYYY(?![^\[]*\])/, date.strftime('%Y'))
+      copy.gsub!(/(?![^\[]*\])YYYY(?![^\[]*\])/, date.strftime('%Y'))
       # year without century (YY)
-      copy.gsub!(/YY(?![^\[]*\])/, date.strftime('%y'))
+      copy.gsub!(/(?![^\[]*\])YY(?![^\[]*\])/, date.strftime('%y'))
 
       # abbreviated month name (MMM)
-      copy.gsub!(/MMM(?![^\[]*\])/, date.strftime('%^b'))
+      copy.gsub!(/(?![^\[]*\])MMM(?![^\[]*\])/, date.strftime('%^b'))
       # month of the year, zero-padded (MM)
-      copy.gsub!(/MM(?![^\[]*\])/, date.strftime('%m'))
+      copy.gsub!(/(?![^\[]*\])MM(?![^\[]*\])/, date.strftime('%m'))
       # month of the year, non zero-padded (M)
-      copy.gsub!(/M(?![^\[]*\])/, date.strftime('%-m'))
+      copy.gsub!(/(?![^\[]*\])M(?![^\[]*\])/, date.strftime('%-m'))
 
       # day of the month, zero-padded (DD)
-      copy.gsub!(/DD(?![^\[]*\])/, date.strftime('%d'))
+      copy.gsub!(/(?![^\[]*\])DD(?![^\[]*\])/, date.strftime('%d'))
       # day of the month, non zero-padded (DD)
-      copy.gsub!(/DD(?![^\[]*\])/, date.strftime('%-d'))
+      copy.gsub!(/(?![^\[]*\])DD(?![^\[]*\])/, date.strftime('%-d'))
 
       copy
     end
