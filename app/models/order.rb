@@ -17,6 +17,7 @@ class Order < PaymentDocument
   validates :token, :state, presence: true
 
   before_create :add_environment
+  after_create :update_reference
 
   delegate :user, to: :statistic_profile
 
