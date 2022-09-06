@@ -1,2 +1,247 @@
 pt:
-  app: 'logged:'
+  app:
+    logged:
+      #user's profile completion page when logging from an SSO provider
+      profile_completion:
+        confirm_your_new_account: "Confirme sua nova conta"
+        or: "ou"
+        do_you_already_have_an_account: "Já tem uma conta?"
+        do_not_fill_the_form_beside_but_specify_here_the_code_you_ve_received_by_email_to_recover_your_access: "Não preencha o formulário ao lado, mas especifique aqui o código que recebeu por e-mail, para recuperar o seu acesso."
+        just_specify_code_here_to_recover_access: "Basta especificar aqui o código que recebeu por e-mail para recuperar o seu acesso."
+        i_did_not_receive_the_code: "Eu não recebi o código"
+        authentification_code: "Código de autenticação"
+        confirm_my_code: "Confirmar meu código"
+        an_unexpected_error_occurred_check_your_authentication_code: "Um erro inexperado ocorreu, por favor cheque seu código de autenticação."
+        send_code_again: "Enviar código novamente"
+        email_address_associated_with_your_account: "Email associado com sua conta"
+        email_is_required: "Email é obrigatório"
+        email_format_is_incorrect: "Formato de email incorreto"
+        code_successfully_sent_again: "Código enviado novamente com sucesso"
+        used_for_statistics: "Estes dados serão utilizados para fins estatísticos"
+        your_user_s_profile: "Seu perfil de usuário"
+        user_s_profile_is_required: "Seu perfil de usuário é obrigatório."
+        i_ve_read_and_i_accept_: "Eu li e aceito"
+        _the_fablab_policy: "a política do FabLab"
+        your_profile_has_been_successfully_updated: "Seu perfil foi actualizado com êxito."
+        completion_header_info:
+          rules_changed: "Por favor, preencha o formulário a seguir para atualizar seu perfil e continuar a usar a plataforma."
+          sso_intro: "Você acabou de criar uma nova conta como {GENDER, select, male{o} female{a} neutral{} other{do}} {NAME}"
+          duplicate_email_info: "Parece que seu endereço de e-mail já é usado por outro usuário. Verifique seu endereço de e-mail e insira abaixo o código que você recebeu."
+          details_needed_info: "Para finalizar a sua conta, precisamos de mais alguns detalhes."
+        profile_form_option:
+          title: "Novo nessa plataforma?"
+          please_fill: "Por favor, preencha o seguinte formulário para criar sua conta."
+          disabled_data_from_sso: "Alguns dados podem já ter sido fornecidos por {NAME} e não podem ser modificados."
+          confirm_instructions_html: "Depois de finalizar, clique em <strong>Salvar</strong> para confirmar sua conta e começar a usar o aplicativo."
+          duplicate_email_html: "Parece que o endereço de e-mail <strong>({EMAIL})</strong> já está associado a outra conta. Se esta conta não é sua, por favor, clique no botão a seguir para alterar o e-mail associado à sua conta do {PROVIDER}."
+          edit_profile: "Alterar meus dados"
+          after_edition_info_html: "Após atualizar seus dados, <strong>clique no botão de sincronização abaixo</strong>, ou <strong>desconecte-se, então reconecte</strong> para que as alterações tenham efeito."
+          sync_profile: "Sincronizar meu perfil"
+      dashboard:
+        #dashboard: public profile
+        profile:
+          empty: ''
+        #dashboard: edit my profile
+        settings:
+          last_activity_on_: "Última atividade em {DATE}"
+          i_want_to_change_group: "Eu quero trocar de grupo!"
+          your_subscription_expires_on_: "Sua inscrição expira em"
+          no_subscriptions: "Sem inscrições"
+          i_want_to_subscribe: "Eu quero me inscrever!"
+          to_come: "futuros"
+          approved: "aprovado"
+          projects: "Projetos"
+          no_projects: "Sem projetos"
+          labels: "Etiquetas"
+          no_labels: "Sem etiquetas"
+          cookies: "Cookies"
+          cookies_accepted: "Você aceitou cookies"
+          cookies_declined: "Você recusou cookies"
+          cookies_unset: "Você ainda não escolheu"
+          reset_cookies: "Mude minha escolha"
+          delete_my_account: "Deletar minha conta"
+          edit_my_profile: "Editar meu perfil"
+          your_group_has_been_successfully_changed: "Seu grupo foi modificado com sucesso."
+          an_unexpected_error_prevented_your_group_from_being_changed: "Um erro inesperado impediu o seu grupo de ser alterado."
+          confirmation_required: "Confirmação obrigatória"
+          confirm_delete_your_account: "Você realmente deseja deletar sua conta?"
+          all_data_will_be_lost: "Todos os seus dados serão destruídos e não serão recuperáveis."
+          invoicing_data_kept: "De acordo com os regulamentos, todos os dados relacionados às suas faturas serão mantidos separadamente por 10 anos."
+          statistic_data_anonymized: "Alguns dados (sexo, data de nascimento, grupo) serão anonimizados e mantidos para fins estatísticos."
+          no_further_access_to_projects: "Seus projetos publicados ficarão anônimos e você não terá mais a capacidade de editá-los."
+          your_user_account_has_been_successfully_deleted_goodbye: "Sua conta de usuário foi excluída com êxito. Até mais."
+          an_error_occured_preventing_your_account_from_being_deleted: "Ocorreu um erro, impedindo que sua conta fosse excluída."
+          used_for_statistics: "Estes dados serão utilizados para fins estatísticos"
+          used_for_invoicing: "Esses dados serão usados para fins de faturamento"
+          used_for_reservation: "Estes dados serão utilizados em caso de alteração em uma das suas reservas"
+          used_for_profile: "Estes dados serão exibidos apenas no seu perfil"
+          used_for_pricing_stats: "Estes dados serão usados para determinar os preços a que você tem direito, e para fins estatísticos"
+          public_profile: "Você terá um perfil público e outros usuários poderão associá-lo em seus projetos"
+          trainings: "Treinamentos"
+          no_trainings: "Sem treinamentos"
+          subscription: "Assinatura"
+          group: "Grupo"
+          or: "ou"
+          confirm_changes: "Confirmar mudanças"
+          change_my_data: "Alterar meus dados"
+          sync_my_profile: "Sincronizar meu perfil"
+          once_your_data_are_up_to_date_: "Uma vez que seus dados estão atualizados,"
+          _click_on_the_synchronization_button_opposite_: "clique no botão de sincronização"
+          _disconnect_then_reconnect_: "disconecte e se conecte novamente"
+          _for_your_changes_to_take_effect: "para que suas alterações tenham efeitos."
+          your_profile_has_been_successfully_updated: "Seu perfil foi actualizado com êxito."
+        #dashboard: my projects
+        projects:
+          you_dont_have_any_projects: "Você não tem nenhum projeto."
+          add_a_project: "Adicionar projeto"
+          author: "Autor"
+          collaborator: "Colaborador"
+          rough_draft: "Rascunho"
+          description: "Descrição"
+          machines_and_materials: "Máquinas e materiais"
+          machines: "Máquinas"
+          materials: "Materiais"
+          collaborators: "Colaboradores"
+        #dashboard: my trainings
+        trainings:
+          your_next_trainings: "Seus próximos treinamentos"
+          your_previous_trainings: "Seus treinamentos anteriores"
+          your_approved_trainings: "Seus treinamentos aprovados"
+          no_trainings: "Sem treinamentos"
+          your_training_credits: "Seus créditos para treinamento"
+          subscribe_for_credits: "Inscreva-se para se beneficiar dos treinamentos gratuitos"
+          register_for_free: "Registre-se gratuitamente para os seguintes treinamentos:"
+          book_here: "Reserve aqui"
+          canceled: "Cancelado"
+        #dashboard: my events
+        events:
+          your_next_events: "Seus próximos eventos"
+          no_events_to_come: "Sem eventos futuros"
+          your_previous_events: "Seus eventos anteriores"
+          no_passed_events: "Sem eventos"
+          NUMBER_normal_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{lugar normal reservado} other{lugares normais reservados}}"
+          NUMBER_of_NAME_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{{NAME} lugar reservado} other{{NAME} lugares reservados}}"
+        #dashboard: my invoices
+        invoices:
+          reference_number: "Número de referência"
+          date: "Data"
+          price: "Preço"
+          download_the_invoice: "Baixar a fatura"
+          download_the_credit_note: "Baixar fatura de reembolso"
+          no_invoices_for_now: "Nenhuma fatura."
+        payment_schedules_dashboard:
+          no_payment_schedules: "Nenhuma assinatura para exibir"
+          load_more: "Ver mais"
+          card_updated_success: "O seu cartão foi atualizado com sucesso"
+        supporting_documents_files:
+          file_successfully_uploaded: "Os documentos foram enviados."
+          unable_to_upload: "Não foi possível enviar os documentos: "
+          supporting_documents_files: "Documentos"
+          my_documents_info: "Devido a sua declaração de grupo, alguns documentos são necessários. Uma vez enviados, esses documentos serão verificados pelo administrador."
+          upload_limits_alert_html: "Aviso!<br>Você pode enviar seus documentos como PDF ou imagens (JPEG, PNG). Tamanho máximo permitido: {SIZE} Mb"
+          file_size_error: "O tamanho do arquivo excede o limite de ({SIZE} MB)"
+          save: "Salvar"
+          browse: "Navegar"
+          edit: "Editar"
+        reservations:
+          reservations_panel:
+            title_Space: "Minhas reservas de espaços"
+            title_Machine: "Minhas reservas de máquinas"
+            upcoming: "Próximas"
+            past: "Passadas"
+            slots_details: "Detalhes da reserva"
+            no_reservations: "Sem reservas"
+            show_more: "Mostrar mais"
+          credits_panel:
+            title_Space: "Meus créditos de espaços"
+            title_Machine: "Meus créditos de máquinas"
+            reamaining_credits_html: "<strong>{NAME}</strong>: Você pode fazer <em>{REMAINING} {REMAINING, plural, one{reserva} other{reservas}}</em> gratuitamente. Você já usou {USED} {USED, plural, one{credito} other{creditos}} da sua assinatura."
+            no_credits: "Você não tem nenhum crédito ainda. Algumas assinaturas podem permitir que você reserve alguns slots gratuitamente."
+      #public profil of a member
+      members_show:
+        members_list: "Lista de membros"
+      #list of members accepting to be contacted
+      members:
+        the_fablab_members: "Membros do FabLab"
+        display_more_members: "Mostrar mais membros..."
+        no_members_for_now: "Sem membros"
+        avatar: "Imagem de Perfil"
+        user: "Usuário"
+        pseudonym: "Apelido"
+        email_address: "Email"
+      #add a new project
+      projects_new:
+        add_a_new_project: "Adicionar novo projeto"
+      #modify an existing project
+      projects_edit:
+        edit_the_project: "Editar projeto"
+        rough_draft: "Rascunho"
+        publish: "Publicar"
+      #book a machine
+      machines_reserve:
+        machine_planning: "Planejamento de máquinas"
+        i_ve_reserved: "Eu tenho reserva"
+        not_available: "Não disponível"
+        i_reserve: "Eu reservo"
+        i_shift: "Eu mudo"
+        i_change: "Eu altero"
+        do_you_really_want_to_cancel_this_reservation: "Você realmente quer cancelar essa reserva?"
+        reservation_was_cancelled_successfully: "Reserva a foi cancelada com sucesso."
+        cancellation_failed: "Cancelamento falhou."
+        a_problem_occured_during_the_payment_process_please_try_again_later: "Um problema ocorreu durante o processo de pagamento. Por favor tente novamente mais tarde."
+      #modal telling users that they must wait for their training validation before booking a machine
+      pending_training_modal:
+        machine_reservation: "Reserva de máquina"
+        wait_for_validated: "Você deve esperar que seu treinamento seja validado pela equipe do FabLab para reservar esta máquina."
+        training_will_occur_DATE_html: "Seu treinamento ocorrerá às <strong>{DATE}</strong>"
+        DATE_TIME: "{DATE} {TIME}"
+      #modal telling users that they need to pass a training before booking a machine
+      required_training_modal:
+        to_book_MACHINE_requires_TRAINING_html: "Para agendar \"{MACHINE}\" você deve completar o treinamento <strong>{TRAINING}</strong>."
+        training_or_training_html: "</strong> ou o treinamento <strong>"
+        enroll_now: "Inscrever-se no treinamento"
+        no_enroll_for_now: "Não desejo me inscrever agora"
+        close: "Fechar"
+      propose_packs_modal:
+        available_packs: "Pacotes pré-pagos disponíveis"
+        packs_proposed: "Você pode comprar um pacote de horas pré-pago para esta máquina. Estes pacotes permitem que você se beneficie de descontos por volume."
+        no_thanks: "Não, obrigado"
+        pack_DURATION: "{DURATION} horas"
+        buy_this_pack: "Comprar este pacote"
+        pack_bought_success: "Você comprou com sucesso este pacote de horas pré-pagas. Sua fatura estará disponível em breve no seu dashboard."
+        validity: "Usável para {COUNT} {PERIODS}"
+        period:
+          day: "{COUNT, plural, one{dia} other{dias}}"
+          week: "{COUNT, plural, =1 {semana} other {semanas}}"
+          month: "{COUNT, plural, =1 {mês} other {meses}}"
+          year: "{COUNT, plural, one{ano} other{anos}}"
+      packs_summary:
+        prepaid_hours: "Horas pré-pagas"
+        remaining_HOURS: "Você tem {HOURS} horas pré-pagas restantes para esta {ITEM, select, Machine{máquina} Space{espaço} other{}}."
+        no_hours: "Você não tem horas pré-pagas para {ITEM, select, Machine{esta máquina} Space{este espaço} other{}}."
+        buy_a_new_pack: "Comprar um pacote novo"
+        unable_to_use_pack_for_subsription_is_expired: "Você precisa ter uma assinatura válida para usar as suas horas restantes."
+      #book a training
+      trainings_reserve:
+        trainings_planning: "Planos de treinamento"
+        planning_of: "Planejamento de " #eg. Planning of 3d printer training
+        all_trainings: "Todos treinamentos"
+        cancel_my_selection: "Cancelar minha seleção"
+        i_change: "Eu altero"
+        i_shift: "Eu troco"
+        i_ve_reserved: "Eu reservei"
+      #book a space
+      space_reserve:
+        planning_of_space_NAME: "Plano de {NAME} espaço"
+        i_ve_reserved: "Eu reservei"
+        i_shift: "Eu troco"
+        i_change: "Eu altero"
+      notifications:
+        notifications_center: "Centro de notificações"
+        mark_all_as_read: "Marcar todas como lidas"
+        date: "Data"
+        notif_title: "Título"
+        no_new_notifications: "Nenhuma nova notificação."
+        archives: "Arquivos"
+        no_archived_notifications: "Sem notificações arquivadas."
+        load_the_next_notifications: "Carregar próximas notificações..."
