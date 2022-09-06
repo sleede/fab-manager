@@ -25,9 +25,9 @@ Apipie.configure do |config|
     Depending on your client, you may have to set header <tt>Accept: application/json</tt> for every request,
     otherwise some clients may request *html* by default which will result in error.
 
-   = Amounts
-   ---
-   Everywhere in the OpenAPI amounts are reported in cents. For exemple, if you get <tt>{ "amount" : 1000 }</tt>,
-   from the OpenAPI, this means that the price is 10 € (or whatever your currency is).
+    = Amounts
+    ---
+    Everywhere in the OpenAPI amounts are reported in cents. For exemple, if you get <tt>{ "amount" : 1000 }</tt>,
+    from the OpenAPI, this means that the price is 10 € (or whatever your currency is).
   RDOC
 end
