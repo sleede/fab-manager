@@ -95,6 +95,7 @@ GEM
     caxlsx_rails (0.6.2)
       actionpack (>= 3.1)
       caxlsx (>= 3.0)
+    childprocess (4.1.0)
     chroma (0.2.0)
     cldr-plurals-runtime-rb (1.0.1)
     coercible (1.0.0)
@@ -178,6 +179,7 @@ GEM
     image_processing (1.12.2)
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
+    iniparse (1.5.0)
     jbuilder (2.10.0)
       activesupport (>= 5.0.0)
     jbuilder_cache_multi (0.1.0)
@@ -274,6 +276,10 @@ GEM
     openlab_ruby (0.0.7)
       httparty (~> 0.20)
     orm_adapter (0.5.0)
+    overcommit (0.59.1)
+      childprocess (>= 0.6.3, < 5)
+      iniparse (~> 1.4)
+      rexml (~> 3.2)
     parallel (1.19.1)
     parser (3.1.2.0)
       ast (~> 2.4.1)
@@ -535,6 +541,7 @@ DEPENDENCIES
   omniauth-rails_csrf_protection (~> 0.1)
   omniauth_openid_connect
   openlab_ruby
+  overcommit
   pdf-reader
   pg
   pg_search

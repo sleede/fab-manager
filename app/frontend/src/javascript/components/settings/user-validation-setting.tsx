@@ -36,7 +36,7 @@ export const UserValidationSetting: React.FC<UserValidationSettingProps> = ({ on
   const updateSetting = (name: SettingName, value: string) => {
     SettingAPI.update(name, value)
       .then(() => {
-        if (name === SettingName.UserValidationRequired) {
+        if (name === 'user_validation_required') {
           onSuccess(t('app.admin.settings.account.user_validation_setting.customization_of_SETTING_successfully_saved', {
             SETTING: t(`app.admin.settings.account.${name}`) // eslint-disable-line fabmanager/scoped-translation
           }));
@@ -45,7 +45,7 @@ export const UserValidationSetting: React.FC<UserValidationSettingProps> = ({ on
         if (err.status === 304) return;
 
         if (err.status === 423) {
-          if (name === SettingName.UserValidationRequired) {
+          if (name === 'user_validation_required') {
             onError(t('app.admin.settings.account.user_validation_setting.error_SETTING_locked', {
               SETTING: t(`app.admin.settings.account.${name}`) // eslint-disable-line fabmanager/scoped-translation
             }));
@@ -62,19 +62,19 @@ export const UserValidationSetting: React.FC<UserValidationSettingProps> = ({ on
    * Callback triggered when the 'save' button is clicked.
    */
   const handleSave = () => {
-    updateSetting(SettingName.UserValidationRequired, userValidationRequired);
+    updateSetting('user_validation_required', userValidationRequired);
     if (userValidationRequiredList !== null) {
       if (userValidationRequired === 'true') {
-        updateSetting(SettingName.UserValidationRequiredList, userValidationRequiredList);
+        updateSetting('user_validation_required_list', userValidationRequiredList);
       } else {
-        updateSetting(SettingName.UserValidationRequiredList, null);
+        updateSetting('user_validation_required_list', null);
       }
     }
   };
 
   return (
     <div className="user-validation-setting">
-      <BooleanSetting name={SettingName.UserValidationRequired}
+      <BooleanSetting name={'user_validation_required'}
         label={t('app.admin.settings.account.user_validation_setting.user_validation_required_option_label')}
         hideSave={true}
         onChange={setUserValidationRequired}
@@ -90,7 +90,7 @@ export const UserValidationSetting: React.FC<UserValidationSettingProps> = ({ on
           <FabAlert level="warning">
             {t('app.admin.settings.account.user_validation_setting.user_validation_required_list_other_info')}
           </FabAlert>
-          <CheckListSetting name={SettingName.UserValidationRequiredList}
+          <CheckListSetting name={'user_validation_required_list'}
             label=""
             availableOptions={userValidationRequiredOptions}
             defaultValue={userValidationRequiredListDefault.join(',')}

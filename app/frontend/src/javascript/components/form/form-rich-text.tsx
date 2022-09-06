@@ -35,13 +35,14 @@ export const FormRichText = <TFieldValues extends FieldValues, TContext extends 
    * We do not want the default behavior (focus the first child, which is the Bold button)
    * but we want to focus the text edition area.
    */
-  function focusTextEditor (event: React.MouseEvent<HTMLLabelElement, MouseEvent>) {
+  function focusTextEditor (event: React.MouseEvent<HTMLParagraphElement, MouseEvent>) {
     event.preventDefault();
     textEditorRef.current.focus();
   }
 
   return (
     <AbstractFormItem id={id} label={label} tooltip={tooltip}
+                      containerType={'div'}
                       className={`form-rich-text ${className || ''}`}
                       error={error} warning={warning} rules={rules}
                       disabled={disabled} formState={formState} onLabelClick={focusTextEditor}>

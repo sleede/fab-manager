@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { HtmlTranslate } from '../../base/html-translate';
 import { FabInput } from '../../base/fab-input';
 import { Loader } from '../../base/loader';
-import { SettingName } from '../../../models/setting';
 import StripeAPI from '../../../api/external/stripe';
 import SettingAPI from '../../../api/setting';
 
@@ -42,9 +41,9 @@ const StripeKeysForm: React.FC<StripeKeysFormProps> = ({ onValidKeys, onInvalidK
   useEffect(() => {
     mounted.current = true;
 
-    SettingAPI.query([SettingName.StripePublicKey, SettingName.StripeSecretKey]).then(stripeKeys => {
-      setPublicKey(stripeKeys.get(SettingName.StripePublicKey));
-      setSecretKey(stripeKeys.get(SettingName.StripeSecretKey));
+    SettingAPI.query(['stripe_public_key', 'stripe_secret_key']).then(stripeKeys => {
+      setPublicKey(stripeKeys.get('stripe_public_key'));
+      setSecretKey(stripeKeys.get('stripe_secret_key'));
     }).catch(error => console.error(error));
 
     // when the component unmounts, mark it as unmounted

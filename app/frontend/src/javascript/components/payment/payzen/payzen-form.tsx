@@ -2,7 +2,6 @@ import React, { FormEvent, FunctionComponent, useEffect, useRef, useState } from
 import KRGlue from '@lyracom/embedded-form-glue';
 import { GatewayFormProps } from '../abstract-payment-modal';
 import SettingAPI from '../../../api/setting';
-import { SettingName } from '../../../models/setting';
 import PayzenAPI from '../../../api/payzen';
 import {
   CreateTokenResponse,
@@ -27,10 +26,10 @@ export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onE
   const [loadingClass, setLoadingClass] = useState<'hidden' | 'loader' | 'loader-overlay'>('loader');
 
   useEffect(() => {
-    SettingAPI.query([SettingName.PayZenEndpoint, SettingName.PayZenPublicKey]).then(settings => {
+    SettingAPI.query(['payzen_endpoint', 'payzen_public_key']).then(settings => {
       createToken().then(formToken => {
         // Load the remote library
-        KRGlue.loadLibrary(settings.get(SettingName.PayZenEndpoint), settings.get(SettingName.PayZenPublicKey))
+        KRGlue.loadLibrary(settings.get('payzen_endpoint'), settings.get('payzen_public_key'))
           .then(({ KR }) =>
             KR.setFormConfig({
               formToken: formToken.formToken

@@ -2,6 +2,13 @@
 
 ## next release
 
+- Updated portuguese translations
+- Added automatic RuboCop validation on pre-commit
+- Use union type instead of enum for SettingName
+- Fix a bug: wrong variable reference in `SingleSignOnConcern:Merge_form_sso`
+- Fix a bug: wrong focus behavior on text editor
+- Fix a bug: trainings monitoring is not available
+
 ## v5.4.15 2022 August 1
 
 - Improved security: adds redis-session-store to store session

@@ -5,7 +5,6 @@ import { User } from '../../models/user';
 import { UserPack } from '../../models/user-pack';
 import UserPackAPI from '../../api/user-pack';
 import SettingAPI from '../../api/setting';
-import { SettingName } from '../../models/setting';
 import { FabButton } from '../base/fab-button';
 import { useTranslation } from 'react-i18next';
 import { ProposePacksModal } from './propose-packs-modal';
@@ -44,10 +43,10 @@ const PacksSummary: React.FC<PacksSummaryProps> = ({ item, itemType, customer, o
   const [isPackOnlyForSubscription, setIsPackOnlyForSubscription] = useState<boolean>(true);
 
   useEffect(() => {
-    SettingAPI.get(SettingName.RenewPackThreshold)
+    SettingAPI.get('renew_pack_threshold')
       .then(data => setThreshold(parseFloat(data.value)))
       .catch(error => onError(error));
-    SettingAPI.get(SettingName.PackOnlyForSubscription)
+    SettingAPI.get('pack_only_for_subscription')
       .then(data => setIsPackOnlyForSubscription(data.value === 'true'))
       .catch(error => onError(error));
   }, []);

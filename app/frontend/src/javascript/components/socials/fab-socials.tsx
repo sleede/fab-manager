@@ -25,7 +25,7 @@ interface FabSocialsProps {
  */
 export const FabSocials: React.FC<FabSocialsProps> = ({ show = false, onError, onSuccess }) => {
   const { t } = useTranslation('shared');
-  // regular expression to validate the the input fields
+  // regular expression to validate the input fields
   const urlRegex = /^(https?:\/\/)([\da-z.-]+)\.([-a-z\d.]{2,30})([/\w .-]*)*\/?$/;
 
   const { handleSubmit, register, setValue, formState } = useForm();
