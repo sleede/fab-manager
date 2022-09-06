@@ -1,2 +1,465 @@
 "no":
-  app: 'public:'
+  app:
+    public:
+      #header and "about" page
+      common:
+        about_the_fablab: "Om..."
+        return: "Tilbake"
+        #cookies
+        cookies:
+          about_cookies: "Dette nettstedet bruker informasjonskapsler for å måle aktivitet på nettstedet."
+          learn_more: "Finn ut mer"
+          accept: "Godta informasjonskapsler"
+          decline: "Avslå"
+        #dashboard sections
+        dashboard: "Kontrollpanel"
+        my_profile: "Min profil"
+        my_settings: "Mine innstillinger"
+        my_supporting_documents_files: "My supporting documents"
+        my_projects: "Mine prosjekter"
+        my_trainings: "Mine opplæringer/kurs"
+        my_reservations: "My reservations"
+        my_events: "Mine arrangementer"
+        my_invoices: "Mine fakturaer"
+        my_payment_schedules: "Mine betalingsplaner"
+        my_wallet: "Min lommebok"
+        #contextual help
+        help: "Hjelp"
+        #login/logout
+        sign_out: "Logg av"
+        sign_up: "Melde deg på"
+        sign_in: "Logg inn"
+        #left menu
+        notifications: "Varsler"
+        admin: "Admin"
+        manager: "Leder"
+        reduce_panel: "Lukk sidepanel"
+        #left menu (public)
+        home: "Hjem"
+        reserve_a_machine: "Reservere en maskin"
+        trainings_registrations: "Registrering av opplæring/kurs"
+        events_registrations: "Arrangementer"
+        reserve_a_space: "Reservere plass/rom"
+        projects_gallery: "Prosjektgalleri"
+        subscriptions: "Medlemskap"
+        public_calendar: "Kalender"
+        #left menu (admin)
+        trainings_monitoring: "Opplæringer/kurs"
+        manage_the_calendar: "Kalender"
+        manage_the_users: "Brukere"
+        manage_the_invoices: "Fakturaer"
+        subscriptions_and_prices: "Abonnementer og priser"
+        manage_the_events: "Arrangementer"
+        manage_the_machines: "Maskiner"
+        manage_the_spaces: "Plasser/rom"
+        projects: "Prosjekter"
+        statistics: "Statistikk"
+        customization: "Tilpasninger"
+        open_api_clients: "OpenAPI-klienter"
+        #account creation modal
+        create_your_account: "Opprett konto"
+        man: "Mann"
+        woman: "Kvinne"
+        gender_is_required: "Kjønn er nødvendig."
+        your_first_name: "Fornavn"
+        first_name_is_required: "Fornavn er påkrevd."
+        your_surname: "Etternavn"
+        surname_is_required: "Etternavn er påkrevd."
+        your_pseudonym: "Kallenavn"
+        pseudonym_is_required: "Kallenavn er nødvendig."
+        your_email_address: "Din e-postadresse "
+        email_is_required: "E-post adresse er påkrevd."
+        your_password: "Ditt passord"
+        password_is_required: "Passord må fylles ut."
+        password_is_too_short: "Password is too short (minimum 12 characters)"
+        password_is_too_weak: "Password is too weak:"
+        password_is_too_weak_explanations: "minimum 12 characters, at least one uppercase letter, one lowercase letter, one number and one special character"
+        type_your_password_again: "Skriv inn passordet igjen"
+        password_confirmation_is_required: "Passordbekreftelse er påkrevd."
+        password_does_not_match_with_confirmation: "Passordet stemmer ikke med bekreftelsen."
+        i_am_an_organization: "Jeg er en organisasjon"
+        name_of_your_organization: "Navnet på organisasjonen din"
+        organization_name_is_required: "Navn på organisasjon er obligatorisk."
+        address_of_your_organization: "Adresse til skole eller organisasjon"
+        organization_address_is_required: "Organisasjonsadresse er påkrevd."
+        your_user_s_profile: "Din brukerprofil"
+        user_s_profile_is_required: "Brukerprofil er påkrevd."
+        birth_date: "Fødselsdato"
+        birth_date_is_required: "Fødselsdato er påkrevd."
+        phone_number: "Telefonnummer"
+        phone_number_is_required: "Telefonnummer er påkrevd."
+        address: "Adresse"
+        address_is_required: "Adresse er påkrevd"
+        i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "Jeg godkjenner at nettstedets brukere kan kontakte meg"
+        i_accept_to_receive_information_from_the_fablab: "Jeg aksepterer å motta informasjon"
+        i_ve_read_and_i_accept_: "Jeg har lest og aksepterer"
+        _the_fablab_policy: "Les policyen vår"
+        field_required: "Nødvendig felt"
+        profile_custom_field_is_required: "{FEILD} is required"
+        user_supporting_documents_required: "Warning!<br>You have declared to be \"{GROUP}\", supporting documents may be requested."
+        unexpected_error_occurred: "En uventet feil oppstod, vennligst forsøk igjen."
+        used_for_statistics: "Dataene vil bli brukt til statistiske formål"
+        used_for_invoicing: "Disse dataene vil bli brukt i fakturering"
+        used_for_reservation: "Disse dataene vil bli brukt i tilfelle endring på en av dine bestillinger"
+        used_for_profile: "Disse dataene vil bare bli vist i profilen din"
+        public_profile: "Du vil ha en offentlig profil og andre brukere vil kunne knytte deg til deres prosjekter"
+        you_will_receive_confirmation_instructions_by_email_detailed: "If your e-mail address is valid, you will receive an email with instructions about how to confirm your account in a few minutes."
+        #password modification modal
+        change_your_password: "Endre passord"
+        your_new_password: "Ditt nye passord"
+        your_password_was_successfully_changed: "Passordet ble endret."
+        #connection modal
+        connection: "Tilkobling"
+        password_forgotten: "Glemt passord?"
+        confirm_my_account: "Bekreft min e-post"
+        not_registered_to_the_fablab: "Ikke registrert?"
+        create_an_account: "Lag en konto"
+        wrong_email_or_password: "Feil e-postadresse eller passord."
+        caps_lock_is_on: "Caps Lock er på."
+        #confirmation modal
+        you_will_receive_confirmation_instructions_by_email: "Du vil motta instruksjoner om bekreftelse via e-post."
+        #forgotten password modal
+        you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password: "If your e-mail address is valid, you will receive in a moment an e-mail with instructions to reset your password."
+        #Fab-manager's version
+        version: "Versjon:"
+        upgrade_fabmanager: "Oppgrader Fab-manager"
+        current_version: "Du bruker for øyeblikket versjon {VERSION} av Fab-manager."
+        upgrade_to: "En ny versjon er tilgjengelig. Du kan oppgradere til versjon {VERSION}."
+        read_more: "Se detaljer for denne utgivelsen"
+        security_version_html: "<strong>Din nåværende versjon er sårbar!</strong><br> En senere versjon inkluderer sikkerhetskorrigeringer. Oppgrader så snart som mulig!"
+        how_to: "Hvordan oppgradere?"
+        #Notifications
+        and_NUMBER_other_notifications: "og {NUMBER, plural, one {} =0{ingen andre varsler} =1{et annen varsel} other{{NUMBER} andre varsler}}..."
+      #about page
+      about:
+        read_the_fablab_policy: "Les policyen vår"
+        read_the_fablab_s_general_terms_and_conditions: "Våre generelle vilkår og betingelser"
+        your_fablab_s_contacts: "Kontakter"
+        privacy_policy: "Persovernerklæring"
+      #'privacy policy' page
+      privacy:
+        title: "Persovernerklæring"
+        dpo: "Personvernansvarlig"
+        last_update: "Sist oppdatert"
+      #home page
+      home:
+        latest_documented_projects: "De siste dokumenterte prosjektene"
+        follow_us: "Følg oss"
+        latest_tweets: "Siste tweets"
+        latest_registered_members: "Siste registrerte medlemmer"
+        create_an_account: "Lag en konto"
+        discover_members: "Oppdag medlemmer"
+        #next events summary on the home page
+        fablab_s_next_events: "Fremtidige arrangementer"
+        every_events: "Alle arrangementer"
+      event_card:
+        on_the_date: "På {DATE}"
+        from_date_to_date: "Fra {START} til {END}"
+        from_time_to_time: "From {START} to {END}"
+        all_day: "Hele dagen"
+        still_available: "Tilgjengelig posisjoner: "
+        event_full: "Arrangementet er fullt"
+        without_reservation: "Ikke reservert"
+        free_admission: "Gratis adgang"
+        full_price: "Full pris: "
+      #projects gallery
+      projects_list:
+        the_fablab_projects: "Våre prosjekter"
+        add_a_project: "Legg til et prosjekt"
+        search_over_the_whole_network: "Søk over hele Fab-manager-nettverket"
+        tooltip_openlab_projects_switch: "Søk i hele nettverket lar deg søke i prosjekter for hver Fab-manager ved hjelp av denne funksjonen!"
+        openlab_search_not_available_at_the_moment: "Det er ikke mulig å søke over hele nettverket for øyeblikket. Du kan fortsatt søke over prosjektene her."
+        project_search_result_is_empty: "Beklager, fant vi ingen resultater som samsvarte med dine søkekriterier."
+        reset_all_filters: "Tilbakestill alle filtre"
+        keywords: "Nøkkelord"
+        search: "Søk"
+        all_projects: "Alle prosjekter"
+        my_projects: "Mine prosjekter"
+        projects_to_whom_i_take_part_in: "Prosjekter jeg deltar i"
+        all_machines: "Alle maskiner"
+        all_themes: "Alle temaer"
+        all_materials: "Alle materialer"
+        load_next_projects: "Last neste prosjekt"
+        rough_draft: "Tidlig utkast"
+      #details of a projet
+      projects_show:
+        rough_draft: "Utkast"
+        project_description: "Prosjektbeskrivelse"
+        by_name: "Av {NAME}"
+        step_N: "Trinn {INDEX}"
+        share_on_facebook: "Del på Facebook"
+        share_on_twitter: "Del på Twitter"
+        deleted_user: "Slettet bruker"
+        posted_on_: "Postet den"
+        CAD_file_to_download: "{COUNT, plural, one {} =0{Ingen CAD-filer} =1{CAD-fil for å laste ned} other{CAD-filer for å laste ned}}"
+        machines_and_materials: "Maskiner og materialer"
+        collaborators: "Samarbeidspartnere"
+        licence: "Lisens"
+        confirmation_required: "Bekreftelse påkrevd"
+        report_an_abuse: "Rapporter misbruk"
+        unauthorized_operation: "Uautorisert forsøk"
+        your_report_was_successful_thanks: "Rapporten var vellykket. Takk."
+        an_error_occured_while_sending_your_report: "En feil oppstod under sending av rapporten."
+        your_first_name: "Fornavn"
+        your_first_name_is_required: "Fornavn er påkrevd."
+        your_surname: "Etternavn"
+        your_surname_is_required: "Etternavn er påkrevd."
+        your_email_address: "Din e-postadresse"
+        your_email_address_is_required: "E-post-adresse er påkrevd."
+        tell_us_why_this_looks_abusive: "Tell us why this looks abusive"
+        message_is_required: "Melding er påkrevd."
+        report: "Rapporter"
+        do_you_really_want_to_delete_this_project: "Vil du virkelig slette dette prosjektet?"
+      #list of machines
+      machines_list:
+        the_fablab_s_machines: "Makerspacets maskiner"
+        add_a_machine: "Legg til en maskin"
+        new_availability: "Åpne reservasjoner"
+        book: "Reserver"
+        _or_the_: " eller den "
+      machines_filters:
+        show_machines: "Vis maskiner"
+        status_enabled: "Aktivert"
+        status_disabled: "Deaktivert"
+        status_all: "Alle"
+      machine_card:
+        book: "Reserver"
+        consult: "Se på"
+      #details of a machine
+      machines_show:
+        book_this_machine: "Reserver denne maskinen"
+        technical_specifications: "Tekniske detaljer"
+        files_to_download: "Filer som kan lastes ned"
+        projects_using_the_machine: "Prosjekter med denne maskinen"
+        _or_the_: " eller den "
+        confirmation_required: "Bekreftelse påkrevd"
+        do_you_really_want_to_delete_this_machine: "Vil du virkelig slette denne maskinen?"
+        unauthorized_operation: "Uautorisert operasjon"
+        the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users: "Maskinen kan ikke slettes fordi den allerede er reservert av noen brukere."
+      #list of trainings
+      trainings_list:
+        book: "Meld på"
+        the_trainings: "Kurs/opplæring"
+      #details of a training
+      training_show:
+        book_this_training: "Meld deg på denne"
+        do_you_really_want_to_delete_this_training: "Vil du virkelig slette denne opplæringen/kurset?"
+        unauthorized_operation: "Uautorisert operasjon"
+        confirmation_required: "Bekreftelse påkrevd"
+        the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "Treningen/kurset kan ikke slettes fordi det allerede er reservert av noen brukere."
+      plan_card:
+        AMOUNT_per_month: "{AMOUNT} / måned"
+        i_subscribe_online: "Online innmelding"
+        more_information: "Mer informasjon"
+        i_choose_that_plan: "Jeg velger dette abonnementet"
+        i_already_subscribed: "Allerede påmeldt"
+      #summary of the subscriptions
+      plans:
+        subscriptions: "Medlemskap"
+        your_subscription_expires_on_the_DATE: "Ditt abonnement utløper den {DATE}"
+        no_plans: "Ingen planer er tilgjengelige for din gruppe"
+        my_group: "Min gruppe"
+        his_group: "User's group"
+        he_wants_to_change_group: "Endre gruppe"
+        change_my_group: "Validate group change"
+        summary: "Sammendrag"
+        your_subscription_has_expired_on_the_DATE: "Ditt abonnement har utløpt {DATE}"
+        subscription_price: "Pris, medlemskap/abonnement"
+        you_ve_just_payed_the_subscription_html: "Du har akkurat betalt <strong>abonnementet</strong>:"
+        thank_you_your_subscription_is_successful: "Takk. Ditt abonnement er aktivt!"
+        your_invoice_will_be_available_soon_from_your_dashboard: "Fakturaen din vil bli tilgjengelig snart på oversikten din"
+        your_group_was_successfully_changed: "Gruppen din ble endret."
+        the_user_s_group_was_successfully_changed: "Brukerens gruppe ble endret."
+        an_error_prevented_your_group_from_being_changed: "En uventet feil forhindret gruppen din fra å bli endret."
+        an_error_prevented_to_change_the_user_s_group: "En feil hindret brukeren i å endre gruppe."
+      plans_filter:
+        i_am: "Jeg er"
+        select_group: "velg gruppe"
+        i_want_duration: "Jeg vil abonnere på"
+        all_durations: "Alle varigheter"
+        select_duration: "velg varighet"
+      #Fablab's events list
+      events_list:
+        the_fablab_s_events: "Våre arrangementer"
+        all_categories: "Alle kategorier"
+        for_all: "For alle"
+        sold_out: "Utsolgt"
+        cancelled: "Avslyst"
+        free_admission: "Gratis adgang"
+        still_available: "ledig"
+        without_reservation: "Uten reservasjon"
+        add_an_event: "Legg til arrangement"
+        load_the_next_events: "Last inn flere arrangementer..."
+        full_price_: "Full pris:"
+        to_date: "til" #e.g. from 01/01 to 01/05
+        all_themes: "Alle temaer"
+      #details and booking of an event
+      events_show:
+        event_description: "Arrangementsbeskrivelse"
+        downloadable_documents: "Nedlastbare dokumenter"
+        information_and_booking: "Informasjon og bestilling"
+        dates: "Datoer"
+        beginning: "Start:"
+        ending: "Slutt:"
+        opening_hours: "Åpningstider:"
+        all_day: "Hele dagen"
+        from_time: "Fra" #e.g. from 18:00 to 21:00
+        to_time: "til" #e.g. from 18:00 to 21:00
+        full_price_: "Full pris:"
+        tickets_still_availables: "Ledige plasser:"
+        sold_out: "Utsolgt."
+        without_reservation: "Uten reservasjon"
+        cancelled: "Avslyst"
+        ticket: "{NUMBER, plural, one{Billett} other{Billetter}}"
+        make_a_gift_of_this_reservation: "Gi denne reservasjonen som gave"
+        thank_you_your_payment_has_been_successfully_registered: "Tusen takk, betalingen din er registrert!"
+        you_can_find_your_reservation_s_details_on_your_: "Du kan finne reservasjonens detaljer på din"
+        dashboard: "kontrollpanel"
+        you_booked_DATE: "Du booket ({DATE}):"
+        canceled_reservation_SEATS: "Reservasjon avbestilt ({SEATS} plasser)"
+        book: "Meld på"
+        confirm_and_pay: "Bekreft og betal"
+        confirm_payment_of_html: "{ROLE, select, admin{Cash} other{Pay}}: {AMOUNT}" #(contexte : validate a payment of $20,00)
+        online_payment_disabled: "Elektronisk betaling er ikke tilgjengelig. Kontakt ledelsen."
+        please_select_a_member_first: "Vennligst velg et medlem først"
+        change_the_reservation: "Endre reservasjonen"
+        you_can_shift_this_reservation_on_the_following_slots: "Du kan flytte denne reservasjonen til følgende tidsluke:"
+        confirmation_required: "Bekreftelse påkrevd"
+        do_you_really_want_to_delete_this_event: "Vil du virkelig slette denne hendelsen?"
+        delete_recurring_event: "Du er ferd med å oppdatere en gjentakende hendelse. Hva vil du gjøre?"
+        delete_this_event: "Bare denne hendelsen"
+        delete_this_and_next: "Denne hendelsen og de følgende"
+        delete_all: "Alle hendelser"
+        event_successfully_deleted: "Hendelsen ble slettet."
+        events_deleted: "Arrangementer som starter {START} og {COUNT, plural, =1{en annen} other{{COUNT} andre}} er kansellert"
+        unable_to_delete_the_event: "Kan ikke slette hendelsen, den kan være reservert av et medlem"
+        events_not_deleted: "Av {TOTAL} gjeldende reservasjoner ble {COUNT, plural, =1{en ikke kanselllert} other{{COUNT} ikke kansellert}}. Noen reservasjoner kan fremdeles gjelde for {COUNT, plural, =1{it} other{disse}}."
+        cancel_the_reservation: "Avbryt reservasjonen"
+        do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "Vil du virkelig avbryte denne reservasjonen? Dette gjelder ALLE bestillte billetter."
+        reservation_was_successfully_cancelled: "Kansellering av reservasjon er gjennomført."
+        cancellation_failed: "Kansellering mislyktes."
+        event_is_over: "Dette arrangementet er avsluttet."
+        thanks_for_coming: "Takk for besøket!"
+        view_event_list: "Vis hendelser som kommer"
+        share_on_facebook: "Del på Facebook"
+        share_on_twitter: "Del på Twitter"
+      #public calendar
+      calendar:
+        calendar: "Kalender"
+        show_unavailables: "Vis utilgjengelige tidsluker"
+        filter_calendar: "Kalenderfilter"
+        trainings: "Opplæringer/kurs"
+        machines: "Maskiner"
+        spaces: "Plasser/rom"
+        events: "Arrangementer"
+        externals: "Andre kalendere"
+      #list of spaces
+      spaces_list:
+        the_spaces: "Plasser/rom"
+        new_availability: "Åpne reservasjoner"
+        add_a_space: "Legg til plass/rom"
+        status_enabled: "Aktive"
+        status_disabled: "Inaktive"
+        status_all: "Alle"
+        book: "Reserver"
+      #display the details of a space
+      space_show:
+        book_this_space: "Reserver dette rommet/plassen"
+        unauthorized_operation: "Uautorisert forsøk"
+        confirmation_required: "Bekreftelse påkrevd"
+        do_you_really_want_to_delete_this_space: "Vil du virkelig slette denne plassen/rommet?"
+        the_space_cant_be_deleted_because_it_is_already_reserved_by_some_users: "Kan ikke slette reservasjoen fordi det allerede er reservert av et medlem."
+        characteristics: "Egenskaper"
+        files_to_download: "Filer som kan lastes ned"
+        projects_using_the_space: "Prosjekter som bruker plassen/rommet"
+      tour:
+        conclusion:
+          title: "Takk for din oppmerksomhet"
+          content: "<p>Hvis du vil restarte denne kontekstuelle hjelpen, trykk <strong>F1</strong> når som helst eller klikk på « ? Hjelp » fra brukerens meny.</p><p>Hvis du trenger ytterligere hjelp, kan du <a href='http://guide-fr.fab.mn' target='_blank'>sjekke brukerveiledningen</a> (kun på fransk for nå).</p><p>Fab-lederens team tilbyr også personlig støtte (hjelp med å komme i gang, hjelp med installering, tilpasning, osv. , <a href='mailto:contact@fab-manager.com'>contact-us</a> for mer info.</p>"
+        welcome:
+          welcome:
+            title: "Velkommen til Fab-manager"
+            content: "For å hjelpe deg å komme i gang med programmet, vil vi raskt ta en titt på funksjonene."
+          home:
+            title: "Hjemmeside"
+            content: "Ved å klikke her kommer du tilbake til hjemmesiden."
+          machines:
+            title: "Maskiner"
+            content: "<p>Denne siden vil la deg sjekke listen over alle maskiner, og du kan reservere på vegne av et medlem.</p><p>En maskin kan for eksempel være en 3D-skriver.</p><p>Medlemmer kan også nå denne siden og reservere en maskin selv hvis kredittkortbetaling er aktivert, eller hvis noen priser er 0.</p>"
+          trainings:
+            title: "Opplæringer/kurs"
+            content: "<p>This page will allow you to consult the list of all training sessions and to register a member for a training session.</p><p>Trainings can be set as prerequisites before allowing reservation of certain machines.</p><p>Members can also access this page and register for a training session themselves, if credit card payment is enabled, or if some prices are equal to 0.</p>"
+          spaces:
+            title: "Plass/rom"
+            content: "<p>This page will allow you to consult the list of all available spaces and to reserve a place on a slot, on behalf of a member.</p><p>A space can be, for example, a woodshop or a meeting room.</p><p>Their particularity is that they can be booked by several people at the same time.</p><p>Members can also access this page and reserve a machine themselves, if credit card payment is enabled, or if some prices are equal to 0.</p>"
+          events:
+            title: "Arrangementer"
+            content: "<p>An open house evening or an internship to make your desk lamp? It's over here!</p><p>Events can be free or paid (with different prices), with or without reservation.</p><p>Again, members can access this page and book themselves places for free events, or paid events if credit card payment is enabled.</p>"
+          calendar:
+            title: "Dagsorden"
+            content: "Visualize at a glance everything that is scheduled for the next coming weeks (events, training, machines available, etc.)."
+          projects:
+            title: "Prosjekter"
+            content: "<p>Document and share all your creations with the community.</p><p>If you use OpenLab, you will also be able to consult the projects of the entire Fab-manager network. <a href='mailto:contact@fab-manager.com'>Contact-us</a> to get your access, it's free!</p>"
+          plans:
+            title: "Medlemskap"
+            content: "Subscriptions provide a way to segment your prices and provide benefits to regular users."
+          admin:
+            title: "{ROLE} section"
+            content: "<p>All of the elements below are only accessible to administrators and managers. They allow you to manage and configure Fab-manager.</p><p>At the end of this visit, click on one of them to find out more.</p>"
+          about:
+            title: "Om"
+            content: "A page that you can fully customize, to present your activity and your structure."
+          notifications:
+            title: "Varslingssenter"
+            content: "<p>Every time something important happens (reservations, creation of accounts, activity of your members, etc.), you will be notified here.</p><p>Your members also receive notifications there.</p>"
+          profile:
+            title: "User's menu"
+            content: "<p>Find your personal information here as well as all your activity on Fab-manager.</p><p>This space is also available for all your members.</p>"
+          news:
+            title: "Nyheter"
+            content: "<p>This space allows you to display the latest news from your structure.</p><p>You can easily change its content from « Customization », « Home page ».</p>"
+          last_projects:
+            title: "Siste prosjekter"
+            content: "<p>This carousel scrolls through the latest projects documented by your members.</p>"
+          last_tweet:
+            title: "Siste tweet"
+            content: "<p>The last tweet of your Tweeter feed can be shown here.</p><p>Configure it from « Customization », « Home page ».</p>"
+          last_members:
+            title: "Nye medlemmer"
+            content: "The last registered members who have validated their address and agreed to be contacted will be shown here."
+          next_events:
+            title: "Kommende hendelser"
+            content: "The next three scheduled events are displayed in this space."
+          customize:
+            title: "Tilpass hjemmeside"
+            content: "<p>This page can be fully personalized.</p><p>You can <a href='mailto:contact@fab-manager.com'>contact-us</a> to make a tailored customization of the home page.</p>"
+          version:
+            title: "Program versjon"
+            content: "Hover your cursor over this icon to find out the version of Fab-manager. If you are not up to date, this will be reported here and you'll be able to get details by clicking on it."
+        machines:
+          welcome:
+            title: "Maskiner"
+            content: "<p>Machines are the tools available for your users. You must create here the machines which can then be reserved by the members.</p><p>You can also create entries for non-bookable or free access machines, then you just need to not associate availability slots with them.</p>"
+          welcome_manager:
+            title: "Maskiner"
+            content: "Machines are the tools available for the users to reserve."
+          view:
+            title: "Vis"
+            content: "Klikk her for å endre eller slette en maskin. Du kan ikke slette en maskin som allerede har vært tilknyttet ledige steder, men du kan deaktivere den."
+          reserve:
+            title: "Reserver"
+            content: "Klikk her for å få tilgang til en agenda som viser ledige plasser. Dette vil la deg bestille denne maskinen for en bruker og administrere eksisterende reservasjoner."
+        spaces:
+          welcome:
+            title: "Plass/rom"
+            content: "<p>Spaces are places available for your users. For example, a meeting room or a woodshop. You must create here the spaces which can then be reserved by members.</p><p>The specificity of the spaces is that they can be reserved by several users at the same time.</p>"
+          welcome_manager:
+            title: "Plass/rom"
+            content: "<p>Spaces are places available to users, by reservation. For example, a meeting room or a woodshop.</p><p>The specificity of the spaces is that they can be reserved by several users at the same time.</p>"
+          view:
+            title: "Vis"
+            content: "To modify or delete a space, click here first. You will not be able to delete a space that has already been associated with availability slots, but you can deactivate it."
+          reserve:
+            title: "Reserver"
+            content: "Click here to access an agenda showing free slots. This will let you book this space for an user and manage existing reservations."
