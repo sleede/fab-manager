@@ -5,7 +5,6 @@ import { GatewayFormProps } from '../abstract-payment-modal';
 import LocalPaymentAPI from '../../../api/local-payment';
 import FormatLib from '../../../lib/format';
 import SettingAPI from '../../../api/setting';
-import { SettingName } from '../../../models/setting';
 import { CardPaymentModal } from '../card-payment-modal';
 import { PaymentSchedule } from '../../../models/payment-schedule';
 import { HtmlTranslate } from '../../base/html-translate';
@@ -76,7 +75,7 @@ export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSucce
     if (paymentSchedule && method === 'card') {
       // check that the online payment is active
       try {
-        const online = await SettingAPI.get(SettingName.OnlinePaymentModule);
+        const online = await SettingAPI.get('online_payment_module');
         if (online.value !== 'true') {
           return onError(t('app.admin.local_payment_form.online_payment_disabled'));
         }

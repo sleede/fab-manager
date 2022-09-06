@@ -1,144 +1,242 @@
 import { HistoryValue } from './history-value';
 import { TDateISO } from '../typings/date-iso';
 
-export enum SettingName {
-  AboutTitle = 'about_title',
-  AboutBody = 'about_body',
-  AboutContacts = 'about_contacts',
-  PrivacyDraft = 'privacy_draft',
-  PrivacyBody = 'privacy_body',
-  PrivacyDpo = 'privacy_dpo',
-  TwitterName = 'twitter_name',
-  HomeBlogpost = 'home_blogpost',
-  MachineExplicationsAlert = 'machine_explications_alert',
-  TrainingExplicationsAlert = 'training_explications_alert',
-  TrainingInformationMessage = 'training_information_message',
-  SubscriptionExplicationsAlert = 'subscription_explications_alert',
-  InvoiceLogo = 'invoice_logo',
-  InvoiceReference = 'invoice_reference',
-  InvoiceCodeActive = 'invoice_code-active',
-  InvoiceCodeValue = 'invoice_code-value',
-  InvoiceOrderNb = 'invoice_order-nb',
-  InvoiceVATActive = 'invoice_VAT-active',
-  InvoiceVATRate = 'invoice_VAT-rate',
-  InvoiceVATRateMachine = 'invoice_VAT-rate_Machine',
-  InvoiceVATRateTraining = 'invoice_VAT-rate_Training',
-  InvoiceVATRateSpace = 'invoice_VAT-rate_Space',
-  InvoiceVATRateEvent = 'invoice_VAT-rate_Event',
-  InvoiceVATRateSubscription = 'invoice_VAT-rate_Subscription',
-  InvoiceText = 'invoice_text',
-  InvoiceLegals = 'invoice_legals',
-  BookingWindowStart = 'booking_window_start',
-  BookingWindowEnd = 'booking_window_end',
-  BookingMoveEnable = 'booking_move_enable',
-  BookingMoveDelay = 'booking_move_delay',
-  BookingCancelEnable = 'booking_cancel_enable',
-  BookingCancelDelay = 'booking_cancel_delay',
-  MainColor = 'main_color',
-  SecondaryColor = 'secondary_color',
-  FablabName = 'fablab_name',
-  NameGenre = 'name_genre',
-  ReminderEnable = 'reminder_enable',
-  ReminderDelay = 'reminder_delay',
-  EventExplicationsAlert = 'event_explications_alert',
-  SpaceExplicationsAlert = 'space_explications_alert',
-  VisibilityYearly = 'visibility_yearly',
-  VisibilityOthers = 'visibility_others',
-  DisplayNameEnable = 'display_name_enable',
-  MachinesSortBy = 'machines_sort_by',
-  AccountingJournalCode = 'accounting_journal_code',
-  AccountingCardClientCode = 'accounting_card_client_code',
-  AccountingCardClientLabel = 'accounting_card_client_label',
-  AccountingWalletClientCode = 'accounting_wallet_client_code',
-  AccountingWalletClientLabel = 'accounting_wallet_client_label',
-  AccountingOtherClientCode = 'accounting_other_client_code',
-  AccountingOtherClientLabel = 'accounting_other_client_label',
-  AccountingWalletCode = 'accounting_wallet_code',
-  AccountingWalletLabel = 'accounting_wallet_label',
-  AccountingVATCode = 'accounting_VAT_code',
-  AccountingVATLabel = 'accounting_VAT_label',
-  AccountingSubscriptionCode = 'accounting_subscription_code',
-  AccountingSubscriptionLabel = 'accounting_subscription_label',
-  AccountingMachineCode = 'accounting_Machine_code',
-  AccountingMachineLabel = 'accounting_Machine_label',
-  AccountingTrainingCode = 'accounting_Training_code',
-  AccountingTrainingLabel = 'accounting_Training_label',
-  AccountingEventCode = 'accounting_Event_code',
-  AccountingEventLabel = 'accounting_Event_label',
-  AccountingSpaceCode = 'accounting_Space_code',
-  AccountingSpaceLabel = 'accounting_Space_label',
-  HubLastVersion = 'hub_last_version',
-  HubPublicKey = 'hub_public_key',
-  FabAnalytics = 'fab_analytics',
-  LinkName = 'link_name',
-  HomeContent = 'home_content',
-  HomeCss = 'home_css',
-  Origin = 'origin',
-  Uuid = 'uuid',
-  PhoneRequired = 'phone_required',
-  TrackingId = 'tracking_id',
-  BookOverlappingSlots = 'book_overlapping_slots',
-  SlotDuration = 'slot_duration',
-  EventsInCalendar = 'events_in_calendar',
-  SpacesModule = 'spaces_module',
-  PlansModule = 'plans_module',
-  InvoicingModule = 'invoicing_module',
-  FacebookAppId = 'facebook_app_id',
-  TwitterAnalytics = 'twitter_analytics',
-  RecaptchaSiteKey = 'recaptcha_site_key',
-  RecaptchaSecretKey = 'recaptcha_secret_key',
-  FeatureTourDisplay = 'feature_tour_display',
-  EmailFrom = 'email_from',
-  DisqusShortname = 'disqus_shortname',
-  AllowedCadExtensions = 'allowed_cad_extensions',
-  AllowedCadMimeTypes = 'allowed_cad_mime_types',
-  OpenlabAppId = 'openlab_app_id',
-  OpenlabAppSecret = 'openlab_app_secret',
-  OpenlabDefault = 'openlab_default',
-  OnlinePaymentModule = 'online_payment_module',
-  StripePublicKey = 'stripe_public_key',
-  StripeSecretKey = 'stripe_secret_key',
-  StripeCurrency = 'stripe_currency',
-  InvoicePrefix = 'invoice_prefix',
-  ConfirmationRequired = 'confirmation_required',
-  WalletModule = 'wallet_module',
-  StatisticsModule = 'statistics_module',
-  UpcomingEventsShown = 'upcoming_events_shown',
-  PaymentSchedulePrefix = 'payment_schedule_prefix',
-  TrainingsModule = 'trainings_module',
-  AddressRequired = 'address_required',
-  PaymentGateway = 'payment_gateway',
-  PayZenUsername = 'payzen_username',
-  PayZenPassword = 'payzen_password',
-  PayZenEndpoint = 'payzen_endpoint',
-  PayZenPublicKey = 'payzen_public_key',
-  PayZenHmacKey = 'payzen_hmac',
-  PayZenCurrency = 'payzen_currency',
-  PublicAgendaModule = 'public_agenda_module',
-  RenewPackThreshold = 'renew_pack_threshold',
-  PackOnlyForSubscription = 'pack_only_for_subscription',
-  OverlappingCategories = 'overlapping_categories',
-  ExtendedPricesInSameDay = 'extended_prices_in_same_day',
-  PublicRegistrations = 'public_registrations',
-  SocialsFacebook = 'facebook',
-  SocialsTwitter = 'twitter',
-  SocialsViadeo = 'viadeo',
-  SocialsLinkedin = 'linkedin',
-  SocialsInstagram = 'instagram',
-  SocialsYoutube = 'youtube',
-  SocialsVimeo = 'vimeo',
-  SocialsDailymotion = 'dailymotion',
-  SocialsGithub = 'github',
-  SocialsEchosciences = 'echosciences',
-  SocialsPinterest = 'pinterest',
-  SocialsLastfm = 'lastfm',
-  SocialsFlickr = 'flickr',
-  MachinesModule = 'machines_module',
-  UserChangeGroup = 'user_change_group',
-  UserValidationRequired = 'user_validation_required',
-  UserValidationRequiredList = 'user_validation_required_list',
-  ShowUsernameInAdminList = 'show_username_in_admin_list'
-}
+export const homePageSettings = [
+  'twitter_name',
+  'home_blogpost',
+  'home_content',
+  'home_css',
+  'upcoming_events_shown'
+];
+
+export const privacyPolicySettings = [
+  'privacy_draft',
+  'privacy_body',
+  'privacy_dpo'
+];
+
+export const aboutPageSettings = [
+  'about_title',
+  'about_body',
+  'about_contacts',
+  'link_name'
+];
+
+export const socialNetworksSettings = [
+  'facebook',
+  'twitter',
+  'viadeo',
+  'linkedin',
+  'instagram',
+  'youtube',
+  'vimeo',
+  'dailymotion',
+  'github',
+  'echosciences',
+  'pinterest',
+  'lastfm',
+  'flickr'
+];
+
+export const messagesSettings = [
+  'machine_explications_alert',
+  'training_explications_alert',
+  'training_information_message',
+  'subscription_explications_alert',
+  'event_explications_alert',
+  'space_explications_alert'
+];
+
+export const invoicesSettings = [
+  'invoice_logo',
+  'invoice_reference',
+  'invoice_code-active',
+  'invoice_code-value',
+  'invoice_order-nb',
+  'invoice_VAT-active',
+  'invoice_VAT-rate',
+  'invoice_VAT-rate_Machine',
+  'invoice_VAT-rate_Training',
+  'invoice_VAT-rate_Space',
+  'invoice_VAT-rate_Event',
+  'invoice_VAT-rate_Subscription',
+  'invoice_text',
+  'invoice_legals',
+  'invoice_prefix',
+  'payment_schedule_prefix'
+];
+
+export const bookingSettings = [
+  'booking_window_start',
+  'booking_window_end',
+  'booking_move_enable',
+  'booking_move_delay',
+  'booking_cancel_enable',
+  'booking_cancel_delay',
+  'reminder_enable',
+  'reminder_delay',
+  'visibility_yearly',
+  'visibility_others',
+  'display_name_enable',
+  'book_overlapping_slots',
+  'slot_duration',
+  'overlapping_categories'
+];
+
+export const themeSettings = [
+  'main_color',
+  'secondary_color'
+];
+
+export const titleSettings = [
+  'fablab_name',
+  'name_genre'
+];
+
+export const accountingSettings = [
+  'accounting_journal_code',
+  'accounting_card_client_code',
+  'accounting_card_client_label',
+  'accounting_wallet_client_code',
+  'accounting_wallet_client_label',
+  'accounting_other_client_code',
+  'accounting_other_client_label',
+  'accounting_wallet_code',
+  'accounting_wallet_label',
+  'accounting_VAT_code',
+  'accounting_VAT_label',
+  'accounting_subscription_code',
+  'accounting_subscription_label',
+  'accounting_Machine_code',
+  'accounting_Machine_label',
+  'accounting_Training_code',
+  'accounting_Training_label',
+  'accounting_Event_code',
+  'accounting_Event_label',
+  'accounting_Space_code',
+  'accounting_Space_label'
+];
+
+export const modulesSettings = [
+  'spaces_module',
+  'plans_module',
+  'wallet_module',
+  'statistics_module',
+  'trainings_module',
+  'machines_module',
+  'online_payment_module',
+  'public_agenda_module',
+  'invoicing_module'
+];
+
+export const stripeSettings = [
+  'stripe_public_key',
+  'stripe_secret_key',
+  'stripe_currency'
+];
+
+export const payzenSettings = [
+  'payzen_username',
+  'payzen_password',
+  'payzen_endpoint',
+  'payzen_public_key',
+  'payzen_hmac',
+  'payzen_currency'
+];
+
+export const openLabSettings = [
+  'openlab_app_id',
+  'openlab_app_secret',
+  'openlab_default'
+];
+
+export const accountSettings = [
+  'phone_required',
+  'confirmation_required',
+  'address_required',
+  'user_change_group',
+  'user_validation_required',
+  'user_validation_required_list'
+];
+
+export const analyticsSettings = [
+  'tracking_id',
+  'facebook_app_id',
+  'twitter_analytics'
+];
+
+export const fabHubSettings = [
+  'hub_last_version',
+  'hub_public_key',
+  'fab_analytics',
+  'origin',
+  'uuid'
+];
+
+export const projectsSettings = [
+  'allowed_cad_extensions',
+  'allowed_cad_mime_types',
+  'disqus_shortname'
+];
+
+export const prepaidPacksSettings = [
+  'renew_pack_threshold',
+  'pack_only_for_subscription'
+];
+
+export const registrationSettings = [
+  'public_registrations',
+  'recaptcha_site_key',
+  'recaptcha_secret_key'
+];
+
+export const adminSettings = [
+  'feature_tour_display',
+  'show_username_in_admin_list'
+];
+
+export const pricingSettings = [
+  'extended_prices_in_same_day'
+];
+
+export const poymentSettings = [
+  'payment_gateway'
+];
+
+export const displaySettings = [
+  'machines_sort_by',
+  'events_in_calendar',
+  'email_from'
+];
+
+export const allSettings = [
+  ...homePageSettings,
+  ...privacyPolicySettings,
+  ...aboutPageSettings,
+  ...socialNetworksSettings,
+  ...messagesSettings,
+  ...invoicesSettings,
+  ...bookingSettings,
+  ...themeSettings,
+  ...titleSettings,
+  ...accountingSettings,
+  ...modulesSettings,
+  ...stripeSettings,
+  ...payzenSettings,
+  ...openLabSettings,
+  ...accountSettings,
+  ...analyticsSettings,
+  ...fabHubSettings,
+  ...projectsSettings,
+  ...prepaidPacksSettings,
+  ...registrationSettings,
+  ...adminSettings,
+  ...pricingSettings,
+  ...poymentSettings,
+  ...displaySettings
+] as const;
+
+export type SettingName = typeof allSettings[number];
 
 export type SettingValue = string|boolean|number;
 
@@ -153,7 +251,7 @@ export interface Setting {
 export interface SettingError {
   error: string,
   id: number,
-  name: string
+  name: SettingName
 }
 
 export interface SettingBulkResult {

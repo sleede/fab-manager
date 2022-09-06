@@ -36,6 +36,7 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   # Preview mail in the browser
   gem 'listen', '~> 3.0.5'
+  gem 'overcommit'
   gem 'rb-readline'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'railroady'
@@ -66,7 +67,6 @@ gem 'pg_search'
 
 # authentication
 gem 'devise', '>= 4.6.0'
-
 gem 'omniauth', '~> 1.9.0'
 gem 'omniauth-oauth2'
 gem 'omniauth_openid_connect'

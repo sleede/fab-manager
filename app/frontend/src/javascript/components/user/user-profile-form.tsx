@@ -99,7 +99,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
       });
       setValue('invoicing_profile_attributes.user_profile_custom_fields_attributes', userProfileCustomFields);
     }).catch(error => onError(error));
-    SettingAPI.query([SettingName.PhoneRequired, SettingName.AddressRequired])
+    SettingAPI.query(['phone_required', 'address_required'])
       .then(settings => setRequiredFieldsSettings(settings))
       .catch(error => onError(error));
   }, []);
@@ -219,7 +219,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
                            value: phoneRegex,
                            message: t('app.shared.user_profile_form.phone_number_invalid')
                          },
-                         required: requiredFieldsSettings.get(SettingName.PhoneRequired) === 'true'
+                         required: requiredFieldsSettings.get('phone_required') === 'true'
                        }}
                        disabled={isDisabled}
                        formState={formState}
@@ -232,7 +232,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
             <FormInput id="invoicing_profile_attributes.address_attributes.address"
                        register={register}
                        disabled={isDisabled}
-                       rules={{ required: requiredFieldsSettings.get(SettingName.AddressRequired) === 'true' }}
+                       rules={{ required: requiredFieldsSettings.get('address_required') === 'true' }}
                        label={t('app.shared.user_profile_form.address')} />
           </div>
         </div>

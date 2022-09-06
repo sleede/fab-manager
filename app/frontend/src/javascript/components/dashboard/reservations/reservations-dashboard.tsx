@@ -20,17 +20,17 @@ const ReservationsDashboard: React.FC<ReservationsDashboardProps> = ({ onError, 
   const [modules, setModules] = useState<Map<SettingName, string>>();
 
   useEffect(() => {
-    SettingAPI.query([SettingName.SpacesModule, SettingName.MachinesModule])
+    SettingAPI.query(['spaces_module', 'machines_module'])
       .then(res => setModules(res))
       .catch(error => onError(error));
   }, []);
 
   return (
     <div className="reservations-dashboard">
-      {modules?.get(SettingName.MachinesModule) !== 'false' && <CreditsPanel userId={userId} onError={onError} reservableType="Machine" />}
-      {modules?.get(SettingName.SpacesModule) !== 'false' && <CreditsPanel userId={userId} onError={onError} reservableType="Space" />}
-      {modules?.get(SettingName.MachinesModule) !== 'false' && <ReservationsPanel userId={userId} onError={onError} reservableType="Machine" />}
-      {modules?.get(SettingName.SpacesModule) !== 'false' && <ReservationsPanel userId={userId} onError={onError} reservableType="Space" />}
+      {modules?.get('machines_module') !== 'false' && <CreditsPanel userId={userId} onError={onError} reservableType="Machine" />}
+      {modules?.get('spaces_module') !== 'false' && <CreditsPanel userId={userId} onError={onError} reservableType="Space" />}
+      {modules?.get('machines_module') !== 'false' && <ReservationsPanel userId={userId} onError={onError} reservableType="Machine" />}
+      {modules?.get('spaces_module') !== 'false' && <ReservationsPanel userId={userId} onError={onError} reservableType="Space" />}
     </div>
   );
 };

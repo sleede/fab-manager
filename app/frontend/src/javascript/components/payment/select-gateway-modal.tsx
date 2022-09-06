@@ -38,7 +38,7 @@ export const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isO
 
   // request the configured gateway to the API
   useEffect(() => {
-    SettingAPI.get(SettingName.PaymentGateway).then(gateway => {
+    SettingAPI.get('payment_gateway').then(gateway => {
       setSelectedGateway(gateway.value ? gateway.value : '');
     });
   }, []);
@@ -73,8 +73,8 @@ export const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isO
   const handleValidStripeKeys = (publicKey: string, secretKey: string): void => {
     setGatewayConfig((prev) => {
       const newMap = new Map(prev);
-      newMap.set(SettingName.StripeSecretKey, secretKey);
-      newMap.set(SettingName.StripePublicKey, publicKey);
+      newMap.set('stripe_secret_key', secretKey);
+      newMap.set('stripe_public_key', publicKey);
       return newMap;
     });
     setPreventConfirmGateway(false);
@@ -100,7 +100,7 @@ export const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isO
    */
   const updateSettings = (): void => {
     const settings = new Map<SettingName, string>(gatewayConfig);
-    settings.set(SettingName.PaymentGateway, selectedGateway);
+    settings.set('payment_gateway', selectedGateway);
 
     SettingAPI.bulkUpdate(settings, true).then(result => {
       const errorResults = Array.from(result.values()).filter(item => !item.status);
