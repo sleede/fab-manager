@@ -84,8 +84,8 @@
           <dt><i class="fa fa-calendar" aria-hidden="true"></i> {{ 'app.public.events_show.dates' | translate }}</dt>
           <dd>{{ 'app.public.events_show.beginning' | translate }} <span class="text-u-l">{{event.start_date | amDateFormat:'L'}}</span><br>{{ 'app.public.events_show.ending' | translate }} <span class="text-u-l">{{event.end_date | amDateFormat:'L'}}</span></dd>
           <dt><i class="fas fa-clock"></i> {{ 'app.public.events_show.opening_hours' | translate }}</dt>
-          <dd ng-if="event.all_day == 'true'"><span translate>{{ 'app.public.events_show.all_day' }}</span></dd>
-          <dd ng-if="event.all_day == 'false'">{{ 'app.public.events_show.from_time' | translate }} <span class="text-u-l">{{event.start_date | amDateFormat:'LT'}}</span> {{ 'app.public.events_show.to_time' | translate }} <span class="text-u-l">{{event.end_date | amDateFormat:'LT'}}</span></dd>
+          <dd ng-if="event.all_day"><span translate>{{ 'app.public.events_show.all_day' }}</span></dd>
+          <dd ng-if="!event.all_day">{{ 'app.public.events_show.from_time' | translate }} <span class="text-u-l">{{event.start_date | amDateFormat:'LT'}}</span> {{ 'app.public.events_show.to_time' | translate }} <span class="text-u-l">{{event.end_date | amDateFormat:'LT'}}</span></dd>
         </dl>
 
         <div class="text-sm" ng-if="event.amount">

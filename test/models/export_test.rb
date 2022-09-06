@@ -18,8 +18,6 @@ class ExportTest < ActiveSupport::TestCase
       query: '{"query":{"bool":{"must":[{"range":{"date":{"gte":"2016-06-25T02:00:00+02:00","lte":"2016-07-25T23:59:59+02:00"}}}]}}}'
     )
     e.save!
-    VCR.use_cassette('export_generate_an_xlsx_file', match_requests_on: [:query]) do
-      assert_export_xlsx e
-    end
+    assert_export_xlsx e
   end
 end

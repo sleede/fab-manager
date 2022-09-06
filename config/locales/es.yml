@@ -215,6 +215,7 @@ es:
     local_payment: "Pago en recepción"
     online_payment: "Pago online"
     deleted_user: "Usuario eliminado"
+    coupon: "Coupon used"
   #subscriptions list export to EXCEL format
   export_subscriptions:
     subscriptions: "Suscripciones"
@@ -433,7 +434,7 @@ es:
     account_creation: "Creación de cuenta"
     project_publication: "Publicación de proyectos"
     duration: "Duración"
-  #statistics exports to the excel file format
+  #statistics exports to the Excel file format
   export:
     entries: "Entradas"
     revenue: "Ingresos"

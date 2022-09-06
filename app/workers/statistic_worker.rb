@@ -8,6 +8,6 @@ class StatisticWorker
   def perform
     return unless Setting.get('statistics_module')
 
-    StatisticService.new.generate_statistic
+    Statistics::BuilderService.generate_statistic
   end
 end

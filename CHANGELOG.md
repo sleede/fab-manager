@@ -1,7 +1,27 @@
 # Changelog Fab-manager
 
+## v5.4.17 2022 September 06
+
+- OpenAPI spaces endpoints (index/show)
+- OpenAPI plans endpoints (index/show)
+- OpenAPI plans categories index endpoint
+- OpenAPI prices index endpoint
+- Export used coupon (if any), in the reservations export
+- Improved automated test on statistics generation
+- Refactored statistics generation
+- Refactored test helpers
+- Script to upload translations sources to Crowdin
+- Fix a bug: unable to generate statistics
+- Fix a bug: the automated test on statistics generation was not running
+- Fix a bug: the events times are not displayed
+- Fix a security issue: disable log4j format message lookup by default for new installations
+- Fix a security issue: updated omniauth to 1.9.2 to fix (CVE-2020-36599)[https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-36599]
+- Fix a security issue: updated moment-timezone to 0.5.35 to fix (GHSA-v78c-4p63-2j6c)[https://github.com/advisories/GHSA-v78c-4p63-2j6c] and (GHSA-56x4-j7p9-fcf9)[https://github.com/advisories/GHSA-56x4-j7p9-fcf9]
+- [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2022,07]`
+
 ## v5.4.16 2022 August 24
 
+- Updated user's manual for v5.4 (fr)
 - Updated portuguese translations
 - Added automatic RuboCop validation on pre-commit
 - Use union type instead of enum for SettingName
@@ -10,7 +30,7 @@
 - Fix a bug: wrong variable reference in `SingleSignOnConcern:Merge_form_sso`
 - Fix a bug: wrong focus behavior on text editor
 - Fix a bug: trainings monitoring is not available
-- Fix a bug: invalid password length verification in profile edtion form
+- Fix a bug: invalid password length verification in profile edition form
 - Fix a bug: invalid password verification in setup script
 - Fix a bug: during setup, unable to chown the installation folder, if the current user does not have a self-named group
 - Fix a bug: during setup, the current value in config/env is not shown

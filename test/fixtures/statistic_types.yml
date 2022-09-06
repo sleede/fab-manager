@@ -128,3 +128,13 @@ statistic_type_13:
   created_at: 2017-02-13 14:11:45.196140000 Z
   updated_at: 2017-02-13 14:11:45.196140000 Z
   simple: false
+
+statistic_type_14:
+  id: 14
+  statistic_index_id: 1
+  key: '31556952'
+  label: 'Durée : 1 year'
+  graph: true
+  created_at: 2016-04-04 15:17:24.950033000 Z
+  updated_at: 2016-04-04 15:17:24.950033000 Z
+  simple: true

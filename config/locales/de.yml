@@ -215,6 +215,7 @@ de:
     local_payment: "Zahlung an der Rezeption"
     online_payment: "Online-Zahlung"
     deleted_user: "Gelöschter Nutzer"
+    coupon: "Coupon used"
   #subscriptions list export to EXCEL format
   export_subscriptions:
     subscriptions: "Abonnements"
@@ -433,7 +434,7 @@ de:
     account_creation: "Benutzerkontenerstellung"
     project_publication: "Projektveröffentlichung"
     duration: "Dauer"
-  #statistics exports to the excel file format
+  #statistics exports to the Excel file format
   export:
     entries: "Einträge"
     revenue: "Einnahmen"

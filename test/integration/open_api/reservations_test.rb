@@ -12,11 +12,15 @@ class OpenApi::ReservationsTest < ActionDispatch::IntegrationTest
   test 'list all reservations' do
     get '/open_api/v1/reservations', headers: open_api_headers(@token)
     assert_response :success
+
+    assert_equal Reservation.count, json_response(response.body)[:reservations].length
   end
 
   test 'list all reservations with pagination' do
     get '/open_api/v1/reservations?page=1&per_page=5', headers: open_api_headers(@token)
     assert_response :success
+
+    assert json_response(response.body)[:reservations].length <= 5
   end
 
   test 'list all reservations for a user' do
