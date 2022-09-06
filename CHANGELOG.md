@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v5.4.17 2022 September 06
+
 - OpenAPI spaces endpoints (index/show)
 - OpenAPI plans endpoints (index/show)
 - OpenAPI plans categories index endpoint
