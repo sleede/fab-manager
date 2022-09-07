@@ -9,7 +9,6 @@ import { StoreListHeader } from './store-list-header';
 import { AccordionItem } from './accordion-item';
 import { OrderItem } from './order-item';
 import { MemberSelect } from '../user/member-select';
-import { FabInput } from '../base/fab-input';
 
 declare const Application: IApplication;
 
@@ -31,6 +30,8 @@ type checklistOption = { value: number, label: string };
 /**
  * Admin list of orders
  */
+// TODO: delete next eslint disable
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Orders: React.FC<OrdersProps> = ({ onSuccess, onError }) => {
   const { t } = useTranslation('admin');
 

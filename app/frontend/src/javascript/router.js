@@ -227,6 +227,15 @@ angular.module('application.router', ['ui.router'])
           }
         }
       })
+      .state('app.logged.dashboard.orders', {
+        url: '/orders',
+        views: {
+          'main@': {
+            templateUrl: '/dashboard/orders.html',
+            controller: 'DashboardController'
+          }
+        }
+      })
       .state('app.logged.dashboard.wallet', {
         url: '/wallet',
         abstract: !Fablab.walletModule,

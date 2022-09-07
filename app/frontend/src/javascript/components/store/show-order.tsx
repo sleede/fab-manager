@@ -16,6 +16,8 @@ interface ShowOrderProps {
 /**
  * This component shows an order details
  */
+// TODO: delete next eslint disable
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const ShowOrder: React.FC<ShowOrderProps> = ({ orderRef, onError, onSuccess }) => {
   const { t } = useTranslation('admin');
 

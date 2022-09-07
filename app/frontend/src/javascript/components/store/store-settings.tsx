@@ -22,6 +22,8 @@ interface Settings {
 /**
  * Shows store settings
  */
+// TODO: delete next eslint disable
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const StoreSettings: React.FC<StoreSettingsProps> = (onError, onSuccess) => {
   const { t } = useTranslation('admin');
 
