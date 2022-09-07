@@ -43,7 +43,7 @@ export const StoreListHeader: React.FC<StoreListHeaderProps> = ({ productsCount,
       </div>
       <div className="display">
         <div className='sort'>
-          <p>{t('app.admin.store.store_list_header.display_options')}</p>
+          <p>{t('app.admin.store.store_list_header.sort')}</p>
           <Select
             options={selectOptions}
             onChange={evt => onSelectOptionsChange(evt)}

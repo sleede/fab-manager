@@ -4,8 +4,8 @@
 */
 'use strict';
 
-Application.Controllers.controller('ShowOrdersController', ['$scope', 'CSRF', 'growl', '$state', '$transition$',
-  function ($scope, CSRF, growl, $state, $transition$) {
+Application.Controllers.controller('ShowOrdersController', ['$rootScope', '$scope', 'CSRF', 'growl', '$state', '$transition$',
+  function ($rootScope, $scope, CSRF, growl, $state, $transition$) {
     /* PRIVATE SCOPE */
 
     /* PUBLIC SCOPE */
@@ -31,6 +31,9 @@ Application.Controllers.controller('ShowOrdersController', ['$scope', 'CSRF', 'g
     $scope.backProductsList = () => {
       $state.go('app.admin.store.orders');
     };
+
+    // currently logged-in user
+    $scope.currentUser = $rootScope.currentUser;
 
     /* PRIVATE SCOPE */
 

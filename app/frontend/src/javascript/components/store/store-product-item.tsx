@@ -4,6 +4,7 @@ import _ from 'lodash';
 import { FabButton } from '../base/fab-button';
 import { Product } from '../../models/product';
 import { Order } from '../../models/order';
+import { FabStateLabel } from '../base/fab-state-label';
 import FormatLib from '../../lib/format';
 import CartAPI from '../../api/cart';
 import noImage from '../../../../images/no_image.png';
@@ -57,6 +58,7 @@ export const StoreProductItem: React.FC<StoreProductItemProps> = ({ product, car
     if (product.low_stock_alert) {
       return 'low';
     }
+    return '';
   };
 
   /**
@@ -84,9 +86,9 @@ export const StoreProductItem: React.FC<StoreProductItemProps> = ({ product, car
           <span>/ {t('app.public.store_product_item.unit')}</span>
         </div>
       }
-      <div className="stock-label">
+      <FabStateLabel status={statusColor(product)}>
         {productStockStatus(product)}
-      </div>
+      </FabStateLabel>
       {product.stock.external > 0 &&
         <FabButton icon={<i className="fas fa-cart-arrow-down" />} className="main-action-btn" onClick={addProductToCart}>
           {t('app.public.store_product_item.add')}

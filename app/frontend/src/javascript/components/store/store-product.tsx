@@ -11,6 +11,7 @@ import ProductAPI from '../../api/product';
 import noImage from '../../../../images/no_image.png';
 import { FabButton } from '../base/fab-button';
 import { FilePdf, Minus, Plus } from 'phosphor-react';
+import { FabStateLabel } from '../base/fab-state-label';
 
 declare const Application: IApplication;
 
@@ -112,7 +113,7 @@ export const StoreProduct: React.FC<StoreProductProps> = ({ productSlug, onError
 
   if (product) {
     return (
-      <div className={`store-product ${statusColor(product)}`}>
+      <div className={`store-product ${statusColor(product) || ''}`}>
         <span className='ref'>ref: {product.sku}</span>
         <h2 className='name'>{product.name}</h2>
         <div className='gallery'>
@@ -160,9 +161,9 @@ export const StoreProduct: React.FC<StoreProductProps> = ({ productSlug, onError
         </div>
 
         <aside>
-          <div className="stock-label">
+          <FabStateLabel status={statusColor(product)}>
             {productStockStatus(product)}
-          </div>
+          </FabStateLabel>
           <div className='price'>
             <p>{FormatLib.price(product.amount)} <sup>TTC</sup></p>
             <span>/ {t('app.public.store_product_item.unit')}</span>

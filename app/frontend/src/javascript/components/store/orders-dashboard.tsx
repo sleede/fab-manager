@@ -4,6 +4,7 @@ import { react2angular } from 'react2angular';
 import { Loader } from '../base/loader';
 import { IApplication } from '../../models/application';
 import { StoreListHeader } from './store-list-header';
+import { OrderItem } from './order-item';
 
 declare const Application: IApplication;
 
@@ -29,8 +30,8 @@ export const OrdersDashboard: React.FC<OrdersDashboardProps> = ({ onError }) => 
    */
   const buildOptions = (): Array<selectOption> => {
     return [
-      { value: 0, label: t('app.public.store.orders_dashboard.sort.newest') },
-      { value: 1, label: t('app.public.store.orders_dashboard.sort.oldest') }
+      { value: 0, label: t('app.public.orders_dashboard.sort.newest') },
+      { value: 1, label: t('app.public.orders_dashboard.sort.oldest') }
     ];
   };
   /**
@@ -43,7 +44,7 @@ export const OrdersDashboard: React.FC<OrdersDashboardProps> = ({ onError }) => 
   return (
     <section className="orders-dashboard">
       <header>
-        <h2>{t('app.public.store.orders_dashboard.heading')}</h2>
+        <h2>{t('app.public.orders_dashboard.heading')}</h2>
       </header>
 
       <div className="store-list">
@@ -52,6 +53,9 @@ export const OrdersDashboard: React.FC<OrdersDashboardProps> = ({ onError }) => 
           selectOptions={buildOptions()}
           onSelectOptionsChange={handleSorting}
         />
+        <div className="orders-list">
+          <OrderItem />
+        </div>
       </div>
     </section>
   );

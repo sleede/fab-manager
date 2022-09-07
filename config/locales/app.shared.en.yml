@@ -560,3 +560,7 @@ en:
         browse: "Browse"
         edit: "Edit"
         main_image: "Main image"
+      store:
+        order_item:
+            total: "Total"
+            client: "Client"

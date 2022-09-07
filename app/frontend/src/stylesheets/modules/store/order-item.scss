@@ -1,0 +1,47 @@
+.order-item {
+  width: 100%;
+  display: flex;
+  gap: 2.4rem;
+  justify-items: flex-start;
+  align-items: center;
+  padding: 1.6rem;
+  border: 1px solid var(--gray-soft-dark);
+  border-radius: var(--border-radius);
+  background-color: var(--gray-soft-lightest);
+  & > *:not(button) { flex: 0 1 40%; }
+
+  p { margin: 0; }
+  .ref {
+    flex: 1 1 100%;
+    @include text-base(600);
+  }
+  .fab-state-label {
+    --status-color: var(--success);
+    &.error { --status-color: var(--alert); }
+    &.canceled { --status-color: var(--alert-light); }
+    &.pending { --status-color: var(--information); }
+    &.normal { --status-color: var(--success); }
+    margin: 0 auto;
+  }
+  .status .state-label { margin: 0 auto; }
+  .client {
+    display: flex;
+    flex-direction: column;
+    span {
+      @include text-xs;
+      color: var(--gray-hard-light);
+    }
+    p { @include text-sm; }
+  }
+  .date { @include text-sm; }
+  .price {
+    display: flex;
+    flex-direction: column;
+    justify-self: flex-end;
+    span {
+      @include text-xs;
+      color: var(--gray-hard-light);
+    }
+    p { @include text-base(600); }
+  }
+}

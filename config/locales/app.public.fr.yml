@@ -392,6 +392,11 @@ fr:
       store_cart:
         checkout: "Valider mon panier"
         cart_is_empty: "Votre panier est vide"
+      orders_dashboard:
+        heading: "My orders"
+        sort:
+          newest: "Newest first"
+          oldest: "Oldest first"
       member_select:
         select_a_member: "Sélectionnez un membre"
         start_typing: "Commencez à écrire..."
