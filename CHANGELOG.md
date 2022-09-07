@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Script to download translations from Crowdin
+
 ## v5.4.17 2022 September 06
 
 - OpenAPI spaces endpoints (index/show)
