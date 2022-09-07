@@ -14,6 +14,7 @@ import MachineAPI from '../../api/machine';
 import { AccordionItem } from './accordion-item';
 import { X } from 'phosphor-react';
 import { StoreListHeader } from './store-list-header';
+import ProductLib from '../../lib/product';
 
 declare const Application: IApplication;
 
@@ -52,18 +53,7 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
     });
 
     ProductCategoryAPI.index().then(data => {
-      // Map product categories by position
-      const sortedCategories = data
-        .filter(c => !c.parent_id)
-        .sort((a, b) => a.position - b.position);
-      const childrenCategories = data
-        .filter(c => typeof c.parent_id === 'number')
-        .sort((a, b) => b.position - a.position);
-      childrenCategories.forEach(c => {
-        const parentIndex = sortedCategories.findIndex(i => i.id === c.parent_id);
-        sortedCategories.splice(parentIndex + 1, 0, c);
-      });
-      setProductCategories(sortedCategories);
+      setProductCategories(new ProductLib().sortCategories(data));
     }).catch(onError);
 
     MachineAPI.index({ disabled: false }).then(data => {

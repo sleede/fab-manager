@@ -69,7 +69,6 @@ export const ManageProductCategory: React.FC<ManageProductCategoryProps> = ({ pr
     <div className='manage-product-category'>
       { toggleBtn() }
       <FabModal title={t(`app.admin.store.manage_product_category.${action}`)}
-        className="fab-modal-lg"
         width={ModalSize.large}
         isOpen={isOpen}
         toggleModal={toggleModal}

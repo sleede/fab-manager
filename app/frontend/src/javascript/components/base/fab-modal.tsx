@@ -42,7 +42,7 @@ export const FabModal: React.FC<FabModalProps> = ({ title, isOpen, toggleModal, 
 
   return (
     <Modal isOpen={isOpen}
-      className={`fab-modal fab-modal-${width} ${className}`}
+      className={`fab-modal fab-modal-${width} ${className || ''}`}
       overlayClassName="fab-modal-overlay"
       onRequestClose={toggleModal}>
       {closeButton && <FabButton className="modal-btn--close" onClick={toggleModal}>{t('app.shared.fab_modal.close')}</FabButton>}
