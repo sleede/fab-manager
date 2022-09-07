@@ -35,7 +35,7 @@ export default function useCart (user?: User) {
   };
 
   useEffect(() => {
-    if (user && cart && (!cart.statistic_profile_id || !cart.operator_id)) {
+    if (user && cart && (!cart.statistic_profile_id || !cart.operator_profile_id)) {
       reloadCart();
     }
   }, [user]);
