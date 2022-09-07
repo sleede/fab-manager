@@ -34,7 +34,6 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
   const { t } = useTranslation('public');
 
   const { cart, setCart } = useCart(currentUser);
-  console.log('cart: ', cart);
   const [paymentModal, setPaymentModal] = useState<boolean>(false);
 
   /**
@@ -222,7 +221,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
             </div>
             <p className='total'>{t('app.public.store_cart.checkout_total')} <span>{FormatLib.price(computePriceWithCoupon(cart.total, cart.coupon))}</span></p>
           </div>
-          <FabButton className='checkout-btn' onClick={checkout} disabled={!cart.user || cart.order_items_attributes.length === 0}>
+          <FabButton className='checkout-btn' onClick={checkout}>
             {t('app.public.store_cart.checkout')}
           </FabButton>
         </>}
