@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_20_135828) do
+ActiveRecord::Schema.define(version: 2022_08_26_175129) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 2022_07_20_135828) do
   enable_extension "unaccent"
 
   create_table "abuses", id: :serial, force: :cascade do |t|
-    t.integer "signaled_id"
     t.string "signaled_type"
+    t.integer "signaled_id"
     t.string "first_name"
     t.string "last_name"
     t.string "email"
@@ -49,8 +49,8 @@ ActiveRecord::Schema.define(version: 2022_07_20_135828) do
     t.string "locality"
     t.string "country"
     t.string "postal_code"
-    t.integer "placeable_id"
     t.string "placeable_type"
+    t.integer "placeable_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -64,12 +64,13 @@ ActiveRecord::Schema.define(version: 2022_07_20_135828) do
   end
 
   create_table "assets", id: :serial, force: :cascade do |t|
-    t.integer "viewable_id"
     t.string "viewable_type"
+    t.integer "viewable_id"
     t.string "attachment"
     t.string "type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean "is_main"
   end
 
   create_table "auth_provider_mappings", id: :serial, force: :cascade do |t|
@@ -146,8 +147,8 @@ ActiveRecord::Schema.define(version: 2022_07_20_135828) do
   end
 
   create_table "credits", id: :serial, force: :cascade do |t|
-    t.integer "creditable_id"
     t.string "creditable_type"
+    t.integer "creditable_id"
     t.integer "plan_id"
     t.integer "hours"
     t.datetime "created_at"
@@ -367,17 +368,22 @@ ActiveRecord::Schema.define(version: 2022_07_20_135828) do
     t.index ["machine_id"], name: "index_machines_availabilities_on_machine_id"
   end
 
+  create_table "machines_products", id: false, force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "machine_id", null: false
+  end
+
   create_table "notifications", id: :serial, force: :cascade do |t|
     t.integer "receiver_id"
-    t.integer "attached_object_id"
     t.string "attached_object_type"
+    t.integer "attached_object_id"
     t.integer "notification_type_id"
     t.boolean "is_read", default: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string "receiver_type"
     t.boolean "is_send", default: false
-    t.jsonb "meta_data", default: {}
+    t.jsonb "meta_data", default: "{}"
     t.index ["notification_type_id"], name: "index_notifications_on_notification_type_id"
     t.index ["receiver_id"], name: "index_notifications_on_receiver_id"
   end
@@ -437,6 +443,41 @@ ActiveRecord::Schema.define(version: 2022_07_20_135828) do
     t.string "profile_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.bigint "order_id"
+    t.string "orderable_type"
+    t.bigint "orderable_id"
+    t.integer "amount"
+    t.integer "quantity"
+    t.boolean "is_offered"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["orderable_type", "orderable_id"], name: "index_order_items_on_orderable_type_and_orderable_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.bigint "statistic_profile_id"
+    t.integer "operator_profile_id"
+    t.string "token"
+    t.string "reference"
+    t.string "state"
+    t.integer "total"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "payment_state"
+    t.integer "wallet_amount"
+    t.integer "wallet_transaction_id"
+    t.string "payment_method"
+    t.string "footprint"
+    t.string "environment"
+    t.bigint "coupon_id"
+    t.integer "paid_total"
+    t.index ["coupon_id"], name: "index_orders_on_coupon_id"
+    t.index ["operator_profile_id"], name: "index_orders_on_operator_profile_id"
+    t.index ["statistic_profile_id"], name: "index_orders_on_statistic_profile_id"
   end
 
   create_table "organizations", id: :serial, force: :cascade do |t|
@@ -570,8 +611,8 @@ ActiveRecord::Schema.define(version: 2022_07_20_135828) do
   create_table "prices", id: :serial, force: :cascade do |t|
     t.integer "group_id"
     t.integer "plan_id"
-    t.integer "priceable_id"
     t.string "priceable_type"
+    t.integer "priceable_id"
     t.integer "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -579,6 +620,46 @@ ActiveRecord::Schema.define(version: 2022_07_20_135828) do
     t.index ["group_id"], name: "index_prices_on_group_id"
     t.index ["plan_id"], name: "index_prices_on_plan_id"
     t.index ["priceable_type", "priceable_id"], name: "index_prices_on_priceable_type_and_priceable_id"
+  end
+
+  create_table "product_categories", force: :cascade do |t|
+    t.string "name"
+    t.string "slug"
+    t.integer "parent_id"
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["parent_id"], name: "index_product_categories_on_parent_id"
+  end
+
+  create_table "product_stock_movements", force: :cascade do |t|
+    t.bigint "product_id"
+    t.integer "quantity"
+    t.string "reason"
+    t.string "stock_type"
+    t.integer "remaining_stock"
+    t.datetime "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "order_item_id"
+    t.index ["product_id"], name: "index_product_stock_movements_on_product_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.string "slug"
+    t.string "sku"
+    t.text "description"
+    t.boolean "is_active", default: false
+    t.bigint "product_category_id"
+    t.integer "amount"
+    t.integer "quantity_min"
+    t.jsonb "stock", default: {"external"=>0, "internal"=>0}
+    t.boolean "low_stock_alert", default: false
+    t.integer "low_stock_threshold"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_category_id"], name: "index_products_on_product_category_id"
   end
 
   create_table "profile_custom_fields", force: :cascade do |t|
@@ -729,8 +810,8 @@ ActiveRecord::Schema.define(version: 2022_07_20_135828) do
     t.text "message"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer "reservable_id"
     t.string "reservable_type"
+    t.integer "reservable_id"
     t.integer "nb_reserve_places"
     t.integer "statistic_profile_id"
     t.index ["reservable_type", "reservable_id"], name: "index_reservations_on_reservable_type_and_reservable_id"
@@ -739,8 +820,8 @@ ActiveRecord::Schema.define(version: 2022_07_20_135828) do
 
   create_table "roles", id: :serial, force: :cascade do |t|
     t.string "name"
-    t.integer "resource_id"
     t.string "resource_type"
+    t.integer "resource_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
@@ -1020,8 +1101,8 @@ ActiveRecord::Schema.define(version: 2022_07_20_135828) do
     t.boolean "is_allow_newsletter"
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
-    t.string "mapped_from_sso"
     t.datetime "validated_at"
+    t.string "mapped_from_sso"
     t.index ["auth_token"], name: "index_users_on_auth_token"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -1088,6 +1169,10 @@ ActiveRecord::Schema.define(version: 2022_07_20_135828) do
   add_foreign_key "invoices", "statistic_profiles"
   add_foreign_key "invoices", "wallet_transactions"
   add_foreign_key "invoicing_profiles", "users"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "orders", "coupons"
+  add_foreign_key "orders", "invoicing_profiles", column: "operator_profile_id"
+  add_foreign_key "orders", "statistic_profiles"
   add_foreign_key "organizations", "invoicing_profiles"
   add_foreign_key "payment_gateway_objects", "payment_gateway_objects"
   add_foreign_key "payment_schedule_items", "invoices"
@@ -1102,6 +1187,8 @@ ActiveRecord::Schema.define(version: 2022_07_20_135828) do
   add_foreign_key "prepaid_packs", "groups"
   add_foreign_key "prices", "groups"
   add_foreign_key "prices", "plans"
+  add_foreign_key "product_stock_movements", "products"
+  add_foreign_key "products", "product_categories"
   add_foreign_key "project_steps", "projects"
   add_foreign_key "project_users", "projects"
   add_foreign_key "project_users", "users"

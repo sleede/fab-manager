@@ -1,0 +1,54 @@
+@mixin base {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.6rem;
+  border: 1px solid var(--gray-soft-dark);
+  border-radius: var(--border-radius);
+  background-color: var(--gray-soft-lightest);
+}
+.form-image-upload {
+  &--small,
+  &--medium,
+  &--large {
+    @include base;
+  }
+
+  .image {
+    flex-shrink: 0;
+    display: flex;
+    object-fit: cover;
+    border-radius: var(--border-radius-sm);
+    overflow: hidden;
+    &--small {
+      width: 8rem;
+      height: 8rem;
+    }
+    &--medium {
+      width: 20rem;
+      height: 20rem;
+    }
+    &--large {
+      width: 40rem;
+      height: 40rem;
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    & > *:not(:first-child) {
+      margin-left: 1rem;
+    }
+
+    input[type="radio"] { margin-left: 0.5rem; }
+
+    .image-file-input {
+      margin-bottom: 0;
+    }
+  }
+}

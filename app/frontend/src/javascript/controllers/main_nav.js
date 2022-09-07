@@ -53,6 +53,12 @@ Application.Controllers.controller('MainNavController', ['$scope', 'settingsProm
       linkIcon: 'tags',
       class: 'reserve-event-link'
     },
+    {
+      state: 'app.public.store',
+      linkText: 'app.public.common.fablab_store',
+      linkIcon: 'cart-plus',
+      class: 'store-link'
+    },
     { class: 'menu-spacer' },
     {
       state: 'app.public.projects_list',
@@ -81,6 +87,12 @@ Application.Controllers.controller('MainNavController', ['$scope', 'settingsProm
       state: 'app.public.machines_list',
       linkText: 'app.public.common.manage_the_machines',
       linkIcon: 'cogs',
+      authorizedRoles: ['admin', 'manager']
+    },
+    {
+      state: 'app.admin.store.products',
+      linkText: 'app.public.common.manage_the_store',
+      linkIcon: 'cart-plus',
       authorizedRoles: ['admin', 'manager']
     },
     $scope.$root.modules.trainings && {

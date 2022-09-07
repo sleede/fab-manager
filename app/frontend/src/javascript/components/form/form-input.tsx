@@ -67,6 +67,7 @@ export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, re
           disabled={typeof disabled === 'function' ? disabled(id) : disabled}
           placeholder={placeholder}
           accept={accept} />
+        {(type === 'file' && placeholder) && <span className='fab-button is-black file-placeholder'>{placeholder}</span>}
         {addOn && <span onClick={addOnAction} className={`addon ${addOnClassName || ''} ${addOnAction ? 'is-btn' : ''}`}>{addOn}</span>}
     </AbstractFormItem>
   );

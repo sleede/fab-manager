@@ -1,0 +1,14 @@
+.orders-dashboard {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding-bottom: 6rem;
+  @include grid-col(12);
+  gap: 3.2rem;
+  align-items: flex-start;
+
+  header {
+    @include header();
+    padding-bottom: 0;
+    grid-column: 2 / -2;
+  }
+}

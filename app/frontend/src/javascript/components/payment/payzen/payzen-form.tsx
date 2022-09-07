@@ -11,6 +11,8 @@ import {
 } from '../../../models/payzen';
 import { PaymentSchedule } from '../../../models/payment-schedule';
 import { Invoice } from '../../../models/invoice';
+import CheckoutAPI from '../../../api/checkout';
+import { Order } from '../../../models/order';
 
 // we use these two additional parameters to update the card, if provided
 interface PayzenFormProps extends GatewayFormProps {
@@ -21,7 +23,7 @@ interface PayzenFormProps extends GatewayFormProps {
  * A form component to collect the credit card details and to create the payment method on Stripe.
  * The form validation button must be created elsewhere, using the attribute form={formId}.
  */
-export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onError, children, className, paymentSchedule, updateCard = false, cart, customer, formId }) => {
+export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onError, children, className, paymentSchedule, updateCard = false, cart, customer, formId, order }) => {
   const PayZenKR = useRef<KryptonClient>(null);
   const [loadingClass, setLoadingClass] = useState<'hidden' | 'loader' | 'loader-overlay'>('loader');
 
@@ -43,7 +45,7 @@ export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onE
           .catch(error => onError(error));
       }).catch(error => onError(error));
     });
-  }, [cart, paymentSchedule, customer]);
+  }, [cart, paymentSchedule, customer, order]);
 
   /**
    * Ask the API to create the form token.
@@ -54,6 +56,9 @@ export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onE
       return await PayzenAPI.updateToken(paymentSchedule?.id);
     } else if (paymentSchedule) {
       return await PayzenAPI.chargeCreateToken(cart, customer);
+    } else if (order) {
+      const res = await CheckoutAPI.payment(order);
+      return res.payment as CreateTokenResponse;
     } else {
       return await PayzenAPI.chargeCreatePayment(cart, customer);
     }
@@ -87,9 +92,12 @@ export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onE
   /**
    * Confirm the payment, depending on the current type of payment (single shot or recurring)
    */
-  const confirmPayment = async (event: ProcessPaymentAnswer, transaction: PaymentTransaction): Promise<Invoice|PaymentSchedule> => {
+  const confirmPayment = async (event: ProcessPaymentAnswer, transaction: PaymentTransaction): Promise<Invoice|PaymentSchedule|Order> => {
     if (paymentSchedule) {
       return await PayzenAPI.confirmPaymentSchedule(event.clientAnswer.orderDetails.orderId, transaction.uuid, cart);
+    } else if (order) {
+      const res = await CheckoutAPI.confirmPayment(order, event.clientAnswer.orderDetails.orderId);
+      return res.order;
     } else {
       return await PayzenAPI.confirm(event.clientAnswer.orderDetails.orderId, cart);
     }
@@ -131,7 +139,9 @@ export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onE
     try {
       const { result } = await PayZenKR.current.validateForm();
       if (result === null) {
-        await PayzenAPI.checkCart(cart, customer);
+        if (!order) {
+          await PayzenAPI.checkCart(cart, customer);
+        }
         await PayZenKR.current.onSubmit(onPaid);
         await PayZenKR.current.onError(handleError);
         await PayZenKR.current.submit();

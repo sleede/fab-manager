@@ -6,7 +6,10 @@ import { TextAa, TextBolder, TextItalic, TextUnderline, LinkSimpleHorizontal, Li
 
 interface MenuBarProps {
   editor?: Editor,
-  paragraphTools?: boolean,
+  heading?: boolean,
+  bulletList?: boolean,
+  blockquote?: boolean,
+  link?: boolean,
   video?: boolean,
   image?: boolean,
   disabled?: boolean,
@@ -15,7 +18,7 @@ interface MenuBarProps {
 /**
  * This component is the menu bar for the WYSIWYG text editor
  */
-export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, video, image, disabled = false }) => {
+export const MenuBar: React.FC<MenuBarProps> = ({ editor, heading, bulletList, blockquote, link, video, image, disabled = false }) => {
   const { t } = useTranslation('shared');
 
   const [submenu, setSubmenu] = useState('');
@@ -142,8 +145,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, video,
   return (
     <>
       <div className={`fab-text-editor-menu ${disabled ? 'fab-text-editor-menu--disabled' : ''}`}>
-        { paragraphTools &&
-        (<>
+        {heading &&
           <button
             type='button'
             onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
@@ -152,6 +154,8 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, video,
           >
             <TextAa size={24} />
           </button>
+        }
+        {bulletList &&
           <button
             type='button'
             onClick={() => editor.chain().focus().toggleBulletList().run()}
@@ -160,6 +164,8 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, video,
           >
             <ListBullets size={24} />
           </button>
+        }
+        {blockquote &&
           <button
             type='button'
             onClick={() => editor.chain().focus().toggleBlockquote().run()}
@@ -168,9 +174,8 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, video,
           >
             <Quotes size={24} />
           </button>
-          <span className='menu-divider'></span>
-        </>)
         }
+        { (heading || bulletList || blockquote) && <span className='menu-divider'></span> }
         <button
           type='button'
           onClick={() => editor.chain().focus().toggleBold().run()}
@@ -195,14 +200,16 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, paragraphTools, video,
         >
           <TextUnderline size={24} />
         </button>
-        <button
-          type='button'
-          onClick={() => toggleSubmenu('link')}
-          disabled={disabled}
-          className={`ignore-onclickoutside ${editor.isActive('link') ? 'is-active' : ''}`}
-        >
-          <LinkSimpleHorizontal size={24} />
-        </button>
+        {link &&
+          <button
+            type='button'
+            onClick={() => toggleSubmenu('link')}
+            disabled={disabled}
+            className={`ignore-onclickoutside ${editor.isActive('link') ? 'is-active' : ''}`}
+          >
+            <LinkSimpleHorizontal size={24} />
+          </button>
+        }
         { (video || image) && <span className='menu-divider'></span> }
         { video &&
         (<>

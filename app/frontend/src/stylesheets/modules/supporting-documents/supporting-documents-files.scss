@@ -12,7 +12,7 @@
 
   .file-item {
     &.has-error {
-      color: var(--error);
+      color: var(--alert);
     }
 
     label {
@@ -113,11 +113,15 @@
     }
   }
   .save-btn {
-    background-color: var(--secondary-dark);
-    border-color: var(--secondary-dark);
-    color: var(--secondary-text-color);
+    float: right;
     margin-bottom: 15px;
     margin-top: 15px;
-    float: right;
+    background-color: var(--secondary);
+    border-color: var(--secondary);
+    color: var(--secondary-text-color);
+    &:hover {
+      background-color: var(--secondary-dark);
+      border-color: var(--secondary-dark);
+    }
   }
 }

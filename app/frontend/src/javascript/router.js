@@ -227,6 +227,15 @@ angular.module('application.router', ['ui.router'])
           }
         }
       })
+      .state('app.logged.dashboard.orders', {
+        url: '/orders',
+        views: {
+          'main@': {
+            templateUrl: '/dashboard/orders.html',
+            controller: 'DashboardController'
+          }
+        }
+      })
       .state('app.logged.dashboard.wallet', {
         url: '/wallet',
         abstract: !Fablab.walletModule,
@@ -600,6 +609,39 @@ angular.module('application.router', ['ui.router'])
         }
       })
 
+      // store
+      .state('app.public.store', {
+        url: '/store',
+        views: {
+          'main@': {
+            templateUrl: '/store/index.html',
+            controller: 'StoreController'
+          }
+        }
+      })
+
+      // show product
+      .state('app.public.product_show', {
+        url: '/store/p/:slug',
+        views: {
+          'main@': {
+            templateUrl: '/products/show.html',
+            controller: 'ShowProductController'
+          }
+        }
+      })
+
+      // cart
+      .state('app.public.cart', {
+        url: '/cart',
+        views: {
+          'main@': {
+            templateUrl: '/cart/index.html',
+            controller: 'CartController'
+          }
+        }
+      })
+
       // --- namespace /admin/... ---
       // calendar
       .state('app.admin.calendar', {
@@ -871,6 +913,17 @@ angular.module('application.router', ['ui.router'])
         }
       })
 
+      // show order
+      .state('app.admin.order_show', {
+        url: '/admin/store/o/:token',
+        views: {
+          'main@': {
+            templateUrl: '/admin/orders/show.html',
+            controller: 'ShowOrdersController'
+          }
+        }
+      })
+
       // invoices
       .state('app.admin.invoices', {
         url: '/admin/invoices',
@@ -1101,6 +1154,71 @@ angular.module('application.router', ['ui.router'])
           cgvFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'cgv-file' }).$promise; }],
           faviconFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'favicon-file' }).$promise; }],
           profileImageFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'profile-image-file' }).$promise; }]
+        }
+      })
+
+      .state('app.admin.store', {
+        abstract: true,
+        url: '/admin/store'
+      })
+
+      .state('app.admin.store.settings', {
+        url: '/settings',
+        views: {
+          'main@': {
+            templateUrl: '/admin/store/index.html',
+            controller: 'AdminStoreController'
+          }
+        }
+      })
+
+      .state('app.admin.store.products', {
+        url: '/products',
+        views: {
+          'main@': {
+            templateUrl: '/admin/store/index.html',
+            controller: 'AdminStoreController'
+          }
+        }
+      })
+
+      .state('app.admin.store.products_new', {
+        url: '/products/new',
+        views: {
+          'main@': {
+            templateUrl: '/admin/store/product_new.html',
+            controller: 'AdminStoreProductController'
+          }
+        }
+      })
+
+      .state('app.admin.store.products_edit', {
+        url: '/products/:id/edit',
+        views: {
+          'main@': {
+            templateUrl: '/admin/store/product_edit.html',
+            controller: 'AdminStoreProductController'
+          }
+        }
+      })
+
+      .state('app.admin.store.categories', {
+        url: '/categories',
+        views: {
+          'main@': {
+            templateUrl: '/admin/store/index.html',
+            controller: 'AdminStoreController'
+          }
+        }
+      })
+
+      .state('app.admin.store.orders', {
+        url: '/orders',
+        views: {
+          'main@': {
+            templateUrl: '/admin/store/index.html',
+            controller: 'AdminStoreController'
+          }
         }
       })
 

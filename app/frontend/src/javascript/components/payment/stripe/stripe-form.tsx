@@ -6,12 +6,14 @@ import { PaymentConfirmation } from '../../../models/payment';
 import StripeAPI from '../../../api/stripe';
 import { Invoice } from '../../../models/invoice';
 import { PaymentSchedule } from '../../../models/payment-schedule';
+import CheckoutAPI from '../../../api/checkout';
+import { Order } from '../../../models/order';
 
 /**
  * A form component to collect the credit card details and to create the payment method on Stripe.
  * The form validation button must be created elsewhere, using the attribute form={formId}.
  */
-export const StripeForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, onError, children, className, paymentSchedule = false, cart, formId }) => {
+export const StripeForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, onError, children, className, paymentSchedule = false, cart, formId, order }) => {
   const { t } = useTranslation('shared');
 
   const stripe = useStripe();
@@ -41,9 +43,18 @@ export const StripeForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, on
     } else {
       try {
         if (!paymentSchedule) {
-          // process the normal payment pipeline, including SCA validation
-          const res = await StripeAPI.confirmMethod(paymentMethod.id, cart);
-          await handleServerConfirmation(res);
+          if (order) {
+            const res = await CheckoutAPI.payment(order, paymentMethod.id);
+            if (res.payment) {
+              await handleServerConfirmation(res.payment as PaymentConfirmation);
+            } else {
+              await handleServerConfirmation(res.order);
+            }
+          } else {
+            // process the normal payment pipeline, including SCA validation
+            const res = await StripeAPI.confirmMethod(paymentMethod.id, cart);
+            await handleServerConfirmation(res);
+          }
         } else {
           const res = await StripeAPI.setupSubscription(paymentMethod.id, cart);
           await handleServerConfirmation(res, paymentMethod.id);
@@ -61,7 +72,7 @@ export const StripeForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, on
    * @param paymentMethodId ID of the payment method, required only when confirming a payment schedule
    * @see app/controllers/api/stripe_controller.rb#confirm_payment
    */
-  const handleServerConfirmation = async (response: PaymentConfirmation|Invoice|PaymentSchedule, paymentMethodId?: string) => {
+  const handleServerConfirmation = async (response: PaymentConfirmation|Invoice|PaymentSchedule|Order, paymentMethodId?: string) => {
     if ('error' in response) {
       if (response.error.statusText) {
         onError(response.error.statusText);
@@ -78,8 +89,13 @@ export const StripeForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, on
           // The card action has been handled
           // The PaymentIntent can be confirmed again on the server
           try {
-            const confirmation = await StripeAPI.confirmIntent(result.paymentIntent.id, cart);
-            await handleServerConfirmation(confirmation);
+            if (order) {
+              const confirmation = await CheckoutAPI.confirmPayment(order, result.paymentIntent.id);
+              await handleServerConfirmation(confirmation.order);
+            } else {
+              const confirmation = await StripeAPI.confirmIntent(result.paymentIntent.id, cart);
+              await handleServerConfirmation(confirmation);
+            }
           } catch (e) {
             onError(e);
           }

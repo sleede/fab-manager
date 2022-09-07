@@ -1,0 +1,28 @@
+.form-checklist {
+  .form-item-field {
+    display: flex;
+    flex-direction: column;
+    border: none;
+  }
+
+  .checklist {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.6rem 3.2rem;
+
+    .checklist-item input {
+      margin-right: 1em;
+    }
+  }
+
+  .actions {
+    align-self: flex-end;
+    margin: 2.4rem 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    & > *:not(:first-child) {
+      margin-left: 1.6rem;
+    }
+  }
+}

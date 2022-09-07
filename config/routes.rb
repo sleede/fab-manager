@@ -150,6 +150,21 @@ Rails.application.routes.draw do
 
     resources :profile_custom_fields
 
+    resources :product_categories do
+      patch 'position', on: :member
+    end
+
+    resources :products
+    resources :cart, only: %i[create] do
+      put 'add_item', on: :collection
+      put 'remove_item', on: :collection
+      put 'set_quantity', on: :collection
+    end
+    resources :checkout, only: %i[] do
+      post 'payment', on: :collection
+      post 'confirm_payment', on: :collection
+    end
+
     # for admin
     resources :trainings do
       get :availabilities, on: :member

@@ -1,0 +1,36 @@
+<div class="header-page">
+  <div class="back">
+    <a ng-click="backPrevLocation($event)"><i class="fas fa-long-arrow-alt-left "></i></a>
+  </div>
+
+  <div class="center">
+    <h1 translate>{{ 'app.admin.store.manage_the_store' }}</h1>
+  </div>
+</div>
+
+<section class="m-lg admin-store-manage">
+  <div class="row">
+
+    <div>
+      <uib-tabset justified="true" active="tabs.active">
+
+        <uib-tab heading="{{ 'app.admin.store.settings' | translate }}" index="0" select="selectTab()">
+          <ng-include src="'/admin/store/settings.html'"></ng-include>
+        </uib-tab>
+
+        <uib-tab heading="{{ 'app.admin.store.all_products' | translate }}" index="1" select="selectTab()">
+          <ng-include src="'/admin/store/products.html'"></ng-include>
+        </uib-tab>
+
+        <uib-tab heading="{{ 'app.admin.store.categories_of_store' | translate }}" index="2" select="selectTab()">
+          <ng-include src="'/admin/store/categories.html'"></ng-include>
+        </uib-tab>
+
+        <uib-tab heading="{{ 'app.admin.store.the_orders' | translate }}" index="3" select="selectTab()">
+          <ng-include src="'/admin/store/orders.html'"></ng-include>
+        </uib-tab>
+      </uib-tabset>
+    </div>
+
+  </div>
+</section>

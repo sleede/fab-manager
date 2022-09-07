@@ -43,6 +43,7 @@ fr:
         projects_gallery: "Galerie de projets"
         subscriptions: "Abonnements"
         public_calendar: "Agenda"
+        fablab_store: "Boutique Fablab"
         #left menu (admin)
         trainings_monitoring: "Formations"
         manage_the_calendar: "Agenda"
@@ -51,6 +52,7 @@ fr:
         subscriptions_and_prices: "Abonnements & Tarifs"
         manage_the_events: "Événements"
         manage_the_machines: "Machines"
+        manage_the_store: "Gestion de la boutique"
         manage_the_spaces: "Espaces"
         projects: "Projets"
         statistics: "Statistiques"
@@ -372,6 +374,27 @@ fr:
         characteristics: "Caractéristiques"
         files_to_download: "Fichiers à télécharger"
         projects_using_the_space: "Projets utilisant l'espace"
+      #public store
+      store:
+        fablab_store: "Boutique FabLab"
+        unexpected_error_occurred: "Une erreur inattendue s'est produite. Veuillez réessayer ultérieurement."
+      store_product_item:
+        available: "Disponible"
+        limited_stock: "Stock limité"
+        out_of_stock: "Épuisé"
+        add: "Ajouter"
+      store_product:
+        unexpected_error_occurred: "Une erreur inattendue s'est produite. Veuillez réessayer ultérieurement."
+      cart:
+        my_cart: "Mon Panier"
+      cart_button:
+        my_cart: "Mon Panier"
+      store_cart:
+        checkout: "Valider mon panier"
+        cart_is_empty: "Votre panier est vide"
+      member_select:
+        select_a_member: "Sélectionnez un membre"
+        start_typing: "Commencez à écrire..."
       tour:
         conclusion:
           title: "Merci de votre attention"

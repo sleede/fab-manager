@@ -29,6 +29,7 @@ class Machine < ApplicationRecord
 
   has_one :payment_gateway_object, as: :item
 
+  has_and_belongs_to_many :products
 
   after_create :create_statistic_subtype
   after_create :create_machine_prices

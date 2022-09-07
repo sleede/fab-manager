@@ -10,15 +10,17 @@ import { ModalSize } from '../../base/fab-modal';
 import { Loader } from '../../base/loader';
 import { react2angular } from 'react2angular';
 import { IApplication } from '../../../models/application';
+import { Order } from '../../../models/order';
 
 declare const Application: IApplication;
 
 interface LocalPaymentModalProps {
   isOpen: boolean,
   toggleModal: () => void,
-  afterSuccess: (result: Invoice|PaymentSchedule) => void,
+  afterSuccess: (result: Invoice|PaymentSchedule|Order) => void,
   onError: (message: string) => void,
   cart: ShoppingCart,
+  order?: Order,
   updateCart: (cart: ShoppingCart) => void,
   currentUser: User,
   schedule?: PaymentSchedule,
@@ -28,7 +30,7 @@ interface LocalPaymentModalProps {
 /**
  * This component enables a privileged user to confirm a local payments.
  */
-const LocalPaymentModal: React.FC<LocalPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, cart, updateCart, currentUser, schedule, customer }) => {
+const LocalPaymentModal: React.FC<LocalPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, cart, updateCart, currentUser, schedule, customer, order }) => {
   const { t } = useTranslation('admin');
 
   /**
@@ -54,7 +56,7 @@ const LocalPaymentModal: React.FC<LocalPaymentModalProps> = ({ isOpen, toggleMod
   /**
    * Integrates the LocalPaymentForm into the parent AbstractPaymentModal
    */
-  const renderForm: FunctionComponent<GatewayFormProps> = ({ onSubmit, onSuccess, onError, operator, className, formId, cart, updateCart, customer, paymentSchedule, children }) => {
+  const renderForm: FunctionComponent<GatewayFormProps> = ({ onSubmit, onSuccess, onError, operator, className, formId, cart, updateCart, customer, paymentSchedule, children, order }) => {
     return (
       <LocalPaymentForm onSubmit={onSubmit}
         onSuccess={onSuccess}
@@ -63,6 +65,7 @@ const LocalPaymentModal: React.FC<LocalPaymentModalProps> = ({ isOpen, toggleMod
         className={className}
         formId={formId}
         cart={cart}
+        order={order}
         updateCart={updateCart}
         customer={customer}
         paymentSchedule={paymentSchedule}>
@@ -81,6 +84,7 @@ const LocalPaymentModal: React.FC<LocalPaymentModalProps> = ({ isOpen, toggleMod
       formClassName="local-payment-form"
       currentUser={currentUser}
       cart={cart}
+      order={order}
       updateCart={updateCart}
       customer={customer}
       afterSuccess={afterSuccess}
