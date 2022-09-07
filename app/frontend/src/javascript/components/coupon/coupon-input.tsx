@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FabInput } from '../base/fab-input';
 import { FabAlert } from '../base/fab-alert';
@@ -27,6 +27,12 @@ export const CouponInput: React.FC<CouponInputProps> = ({ user, amount, onChange
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const [coupon, setCoupon] = useState<Coupon>();
+
+  useEffect(() => {
+    if (user && coupon) {
+      handleChange(coupon.code);
+    }
+  }, [user]);
 
   /**
    * callback for validate the code

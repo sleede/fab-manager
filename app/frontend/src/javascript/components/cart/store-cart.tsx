@@ -194,7 +194,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
           <p>[TODO: texte venant des paramètres de la boutique…]</p>
         </div>
 
-        {cart && !cartIsEmpty() && cart.user &&
+        {cart && !cartIsEmpty() &&
           <div className='store-cart-coupon'>
             <CouponInput user={cart.user as User} amount={cart.total} onChange={applyCoupon} />
           </div>
