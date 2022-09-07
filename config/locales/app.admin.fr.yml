@@ -1134,7 +1134,7 @@ fr:
           data_mapping: "Correspondance des données"
           TYPE_expected: "{TYPE} attendu"
           types:
-            integer: "integer"
+            integer: "entier"
             string: "chaîne"
             text: "texte"
             date: "date"
@@ -1152,7 +1152,7 @@ fr:
         openid_connect_form:
           issuer: "Émetteur"
           issuer_help: "URL racine du serveur d'autorisation."
-          discovery: "Discovery"
+          discovery: "Découverte"
           discovery_help: "La découverte automatique OpenID doit-elle être utilisée ? Ceci est recommandé si l'IDP fournit un point d'accès de découverte automatique."
           discovery_unavailable: "La découverte automatique n'est pas disponible pour l'émetteur configuré."
           discovery_enabled: "Activer la découverte"
