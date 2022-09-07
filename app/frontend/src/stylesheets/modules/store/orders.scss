@@ -17,39 +17,6 @@
     & > *:not(:first-child) {
       margin-top: 1.6rem;
     }
-
-    .order-item {
-      width: 100%;
-      display: grid;
-      grid-auto-flow: column;
-      grid-template-columns: 1fr 15rem 15rem 10ch 12rem;
-      gap: 2.4rem;
-      justify-items: flex-start;
-      align-items: center;
-      padding: 1.6rem;
-      border: 1px solid var(--gray-soft-dark);
-      border-radius: var(--border-radius);
-      background-color: var(--gray-soft-lightest);
-
-      p { margin: 0; }
-      .ref {  @include text-base(600); }
-      .client {
-        span {
-          @include text-xs;
-          color: var(--gray-hard-light);
-        }
-        p { @include text-sm; }
-      }
-      .date { @include text-sm; }
-      .price {
-        justify-self: flex-end;
-        span {
-          @include text-xs;
-          color: var(--gray-hard-light);
-        }
-        p { @include text-base(600); }
-      }
-    }
   }
 }
 
@@ -86,6 +53,8 @@
       line-height: 1.18;
     }
     .group {
+      display: flex;
+      flex-direction: column;
       span {
         @include text-xs;
         color: var(--gray-hard-light);
@@ -93,7 +62,7 @@
     }
   }
 
-  & > .group {
+  .subgrid {
     grid-column: 2 / -2;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -130,29 +99,12 @@
       }
     }
   }
-}
 
-.order-status {
-  --status-color: var(--success);
-  &.error { --status-color: var(--alert); }
-  &.canceled { --status-color: var(--alert-light); }
-  &.pending { --status-color: var(--information); }
-  &.normal { --status-color: var(--success); }
-  padding: 0.4rem 0.8rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--gray-soft-light);
-  border-radius: var(--border-radius);
-  @include text-sm(500);
-  line-height: 1.714;
-
-  &::before {
-    content: "";
-    margin-right: 0.8rem;
-    width: 1rem;
-    height: 1rem;
-    background-color: var(--status-color);
-    border-radius: 50%;
+  .fab-state-label {
+    --status-color: var(--success);
+    &.error { --status-color: var(--alert); }
+    &.canceled { --status-color: var(--alert-light); }
+    &.pending { --status-color: var(--information); }
+    &.normal { --status-color: var(--success); }
   }
 }

@@ -49,7 +49,12 @@
         word-break: break-all;
       }
     }
-    .stock-label { grid-area: stock; }
+    .fab-state-label {
+      --status-color: var(--success);
+      &.low { --status-color: var(--alert-light); }
+      &.out-of-stock { --status-color: var(--alert); }
+      grid-area: stock;
+    }
     button {
       grid-area: btn;
       align-self: flex-end;

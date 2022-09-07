@@ -4,6 +4,7 @@ import { IApplication } from '../../models/application';
 import { react2angular } from 'react2angular';
 import { Loader } from '../base/loader';
 import noImage from '../../../../images/no_image.png';
+import { FabStateLabel } from '../base/fab-state-label';
 
 declare const Application: IApplication;
 
@@ -66,7 +67,9 @@ export const ShowOrder: React.FC<ShowOrderProps> = ({ orderRef, onError, onSucce
             <span>{t('app.admin.store.show_order.last_update')}</span>
             <p>order.???</p>
           </div>
-          <span className={`order-status ${statusColor('error')}`}>order.state</span>
+          <FabStateLabel status={statusColor('error')} background>
+            order.state
+          </FabStateLabel>
         </div>
       </div>
 
@@ -99,7 +102,7 @@ export const ShowOrder: React.FC<ShowOrderProps> = ({ orderRef, onError, onSucce
         </div>
       </div>
 
-      <div className="group">
+      <div className="subgrid">
         <div className="payment-info">
           <label>{t('app.admin.store.show_order.payment_informations')}</label>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum rerum commodi quaerat possimus! Odit, harum.</p>

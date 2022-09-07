@@ -9,10 +9,12 @@ import { StoreListHeader } from './store-list-header';
 import { AccordionItem } from './accordion-item';
 import { OrderItem } from './order-item';
 import { MemberSelect } from '../user/member-select';
+import { User } from '../../models/user';
 
 declare const Application: IApplication;
 
 interface OrdersProps {
+  currentUser?: User,
   onSuccess: (message: string) => void,
   onError: (message: string) => void,
 }
@@ -32,7 +34,8 @@ type checklistOption = { value: number, label: string };
  */
 // TODO: delete next eslint disable
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Orders: React.FC<OrdersProps> = ({ onSuccess, onError }) => {
+const Orders: React.FC<OrdersProps> = ({ currentUser, onSuccess, onError }) => {
+  console.log('currentUser: ', currentUser);
   const { t } = useTranslation('admin');
 
   const [filters, setFilters] = useImmer<Filters>(initFilters);
@@ -123,22 +126,6 @@ const Orders: React.FC<OrdersProps> = ({ onSuccess, onError }) => {
     setAccordion({ ...accordion, [id]: state });
   };
 
-  /**
-   * Returns a className according to the status
-   */
-  const statusColor = (status: string) => {
-    switch (status) {
-      case 'error':
-        return 'error';
-      case 'canceled':
-        return 'canceled';
-      case 'pending' || 'under_preparation':
-        return 'pending';
-      default:
-        return 'normal';
-    }
-  };
-
   return (
     <div className='orders'>
       <header>
@@ -209,10 +196,7 @@ const Orders: React.FC<OrdersProps> = ({ onSuccess, onError }) => {
           onSelectOptionsChange={handleSorting}
         />
         <div className="orders-list">
-          <OrderItem statusColor={statusColor('error')} />
-          <OrderItem statusColor={statusColor('canceled')} />
-          <OrderItem statusColor={statusColor('pending')} />
-          <OrderItem statusColor={statusColor('refunded')} />
+          <OrderItem currentUser={currentUser} />
         </div>
       </div>
     </div>
@@ -227,7 +211,7 @@ const OrdersWrapper: React.FC<OrdersProps> = (props) => {
   );
 };
 
-Application.Components.component('orders', react2angular(OrdersWrapper, ['onSuccess', 'onError']));
+Application.Components.component('orders', react2angular(OrdersWrapper, ['currentUser', 'onSuccess', 'onError']));
 
 interface Filters {
   reference: string,

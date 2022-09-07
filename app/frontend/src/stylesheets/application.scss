@@ -27,6 +27,7 @@
 @import "modules/base/fab-output-copy";
 @import "modules/base/fab-panel";
 @import "modules/base/fab-popover";
+@import "modules/base/fab-state-label";
 @import "modules/base/fab-text-editor";
 @import "modules/base/labelled-input";
 @import "modules/calendar/calendar";
@@ -92,6 +93,7 @@
 @import "modules/settings/user-validation-setting";
 @import "modules/socials/fab-socials";
 @import "modules/store/_utilities";
+@import "modules/store/order-item";
 @import "modules/store/orders-dashboard";
 @import "modules/store/orders";
 @import "modules/store/product-categories";

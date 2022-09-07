@@ -12,6 +12,7 @@ import { FabButton } from '../base/fab-button';
 import { PencilSimple } from 'phosphor-react';
 import { FabModal, ModalSize } from '../base/fab-modal';
 import { ProductStockModal } from './product-stock-modal';
+import { FabStateLabel } from '../base/fab-state-label';
 
 interface ProductStockFormProps<TFieldValues, TContext extends object> {
   product: Product,
@@ -135,7 +136,7 @@ export const ProductStockForm = <TFieldValues, TContext extends object> ({ produ
           <HtmlTranslate trKey="app.admin.store.product_stock_form.stock_threshold_information" />
         </FabAlert>
         {activeThreshold && <>
-          <span className='stock-label'>{t('app.admin.store.product_stock_form.low_stock')}</span>
+          <FabStateLabel>{t('app.admin.store.product_stock_form.low_stock')}</FabStateLabel>
           <div className="threshold-data-content">
           <FormInput id="threshold"
                      type="number"

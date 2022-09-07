@@ -631,6 +631,17 @@ angular.module('application.router', ['ui.router'])
         }
       })
 
+      // show order
+      .state('app.public.order_show', {
+        url: '/store/o/:token',
+        views: {
+          'main@': {
+            templateUrl: '/orders/show.html',
+            controller: 'ShowOrdersController'
+          }
+        }
+      })
+
       // cart
       .state('app.public.cart', {
         url: '/cart',

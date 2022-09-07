@@ -5,6 +5,7 @@ import { FabButton } from '../base/fab-button';
 import { Product } from '../../models/product';
 import { PencilSimple, Trash } from 'phosphor-react';
 import noImage from '../../../../images/no_image.png';
+import { FabStateLabel } from '../base/fab-state-label';
 
 interface ProductItemProps {
   product: Product,
@@ -64,12 +65,12 @@ export const ProductItem: React.FC<ProductItemProps> = ({ product, onEdit, onDel
         <p className="itemInfo-name">{product.name}</p>
       </div>
       <div className='details'>
-        <span className={`visibility ${product.is_active ? 'is-active' : ''}`}>
+        <FabStateLabel status={product.is_active ? 'is-active' : ''} background>
           {product.is_active
             ? t('app.admin.store.product_item.visible')
             : t('app.admin.store.product_item.hidden')
           }
-        </span>
+        </FabStateLabel>
         <div className={`stock ${product.stock.internal < product.low_stock_threshold ? 'low' : ''}`}>
           <span>{t('app.admin.store.product_item.stock.internal')}</span>
           <p>{product.stock.internal}</p>

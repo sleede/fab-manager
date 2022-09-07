@@ -54,25 +54,8 @@
         @include text-base(600);
       }
 
-      .visibility {
-        justify-self: center;
-        padding: 0.4rem 0.8rem;
-        display: flex;
-        align-items: center;
-        background-color: var(--gray-soft-light);
-        border-radius: var(--border-radius);
-        &::before {
-          flex-shrink: 0;
-          margin-right: 1rem;
-          content: "";
-          width: 1rem;
-          height: 1rem;
-          background-color: var(--gray-hard);
-          border-radius: 50%;
-        }
-        &.is-active::before {
-          background-color: var(--success);
-        }
+      .fab-state-label.is-active {
+        --status-color: var(--success);
       }
       .stock {
         display: flex;

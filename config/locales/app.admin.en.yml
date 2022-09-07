@@ -1949,7 +1949,7 @@ en:
             price_high: "Price: high to low"
         store_list_header:
           result_count: "Result count:"
-          display_options: "Display options:"
+          sort: "Sort:"
           visible_only: "Visible products only"
         product_item:
           visible: "visible"
@@ -2049,9 +2049,6 @@ en:
           sort:
             newest: "Newest first"
             oldest: "Oldest first"
-        order_item:
-          total: "Total"
-          client: "Client"
         show_order:
           see_invoice: "See invoice"
           client: "Client"
