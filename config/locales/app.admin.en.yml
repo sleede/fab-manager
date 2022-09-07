@@ -2037,6 +2037,7 @@ en:
           filter_ref: "By reference"
           filter_status: "By status"
           filter_client: "By client"
+          filter_period: "By period"
           status:
             error: "Payment error"
             canceled: "Canceled"
