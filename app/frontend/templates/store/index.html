@@ -1,24 +1,16 @@
-<section class="heading b-b">
-  <div class="row no-gutter">
-    <div class="col-xs-2 col-sm-2 col-md-1">
-      <section class="heading-btn">
-        <a ng-click="backPrevLocation($event)"><i class="fas fa-long-arrow-alt-left "></i></a>
-      </section>
-    </div>
-    <div class="col-xs-10 col-sm-10 col-md-8 b-l b-r-md">
-      <section class="heading-title">
-        <h1 translate>{{ 'app.public.store.fablab_store' }}</h1>
-      </section>
-    </div>
-
-    <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md">
-      <section class="heading-actions wrapper">
-        <cart-button />
-      </section>
-    </div>
+<div class="header-page">
+  <div class="back">
+    <a ng-click="backPrevLocation($event)"><i class="fas fa-long-arrow-alt-left "></i></a>
   </div>
-</section>
 
+  <div class="center">
+    <h1 translate>{{ 'app.public.store.fablab_store' }}</h1>
+  </div>
+
+  <div class="right">
+    <cart-button />
+  </div>
+</div>
 
 <section class="m-lg">
   <store current-user="currentUser" on-error="onError" on-success="onSuccess" />

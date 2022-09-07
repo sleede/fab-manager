@@ -25,16 +25,13 @@ const CartButton: React.FC = () => {
     window.location.href = '/#!/cart';
   };
 
-  if (cart) {
-    return (
-      <div className="cart-button" onClick={showCart}>
-        <i className="fas fa-cart-arrow-down" />
-        <span>{cart.order_items_attributes.length}</span>
-        <div>{t('app.public.cart_button.my_cart')}</div>
-      </div>
-    );
-  }
-  return null;
+  return (
+    <div className="cart-button" onClick={showCart}>
+      <i className="fas fa-cart-arrow-down" />
+      <span>{cart?.order_items_attributes?.length}</span>
+      <p>{t('app.public.cart_button.my_cart')}</p>
+    </div>
+  );
 };
 
 const CartButtonWrapper: React.FC = () => {

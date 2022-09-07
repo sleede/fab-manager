@@ -1,0 +1,108 @@
+.products-list {
+  & > *:not(:first-child) {
+    margin-top: 1.6rem;
+  }
+  .product-item {
+    --status-color: var(--gray-hard-darkest);
+    &.low { --status-color: var(--alert-light); }
+    &.out-of-stock {
+      --status-color: var(--alert);
+      .stock { color: var(--alert) !important; }
+    }
+
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.6rem 0.8rem;
+    border: 1px solid var(--gray-soft-dark);
+    border-radius: var(--border-radius);
+    background-color: var(--gray-soft-lightest);
+    &.out-of-stock { border-color: var(--status-color); }
+
+    .itemInfo {
+      min-width: 20ch;
+      flex: 1;
+      display: flex;
+      align-items: center;
+
+      &-thumbnail {
+        width: 4.8rem;
+        height: 4.8rem;
+        margin-right: 1.6rem;
+        object-fit: cover;
+        border-radius: var(--border-radius);
+        background-color: var(--gray-soft);
+      }
+      &-name {
+        margin: 0;
+        @include text-base;
+        font-weight: 600;
+        color: var(--gray-hard-darkest);
+      }
+    }
+    .details {
+      display: grid;
+      grid-template-columns: 120px repeat(2, minmax(min-content, 120px)) 120px;
+      justify-items: center;
+      align-items: center;
+      gap: 1.6rem;
+      margin-left: auto;
+      margin-right: 4rem;
+      p {
+        margin: 0;
+        @include text-base(600);
+      }
+
+      .visibility {
+        justify-self: center;
+        padding: 0.4rem 0.8rem;
+        display: flex;
+        align-items: center;
+        background-color: var(--gray-soft-light);
+        border-radius: var(--border-radius);
+        &::before {
+          flex-shrink: 0;
+          margin-right: 1rem;
+          content: "";
+          width: 1rem;
+          height: 1rem;
+          background-color: var(--gray-hard);
+          border-radius: 50%;
+        }
+        &.is-active::before {
+          background-color: var(--success);
+        }
+      }
+      .stock {
+        display: flex;
+        flex-direction: column;
+        color: var(--gray-hard-darkest);
+        span { @include text-xs; }
+        &.low { color: var(--alert-light); }
+      }
+      .price {
+        justify-self: flex-end;
+      }
+    }
+
+    .actions {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      .manage {
+        overflow: hidden;
+        display: flex;
+        border-radius: var(--border-radius-sm);
+        button {
+          @include btn;
+          border-radius: 0;
+          color: var(--gray-soft-lightest);
+          &:hover { opacity: 0.75; }
+        }
+        .edit-btn {background: var(--gray-hard-darkest) }
+        .delete-btn {background: var(--main) }
+      }
+    }
+  }
+}

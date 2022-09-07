@@ -17,6 +17,8 @@ import { FabAlert } from '../base/fab-alert';
 import ProductCategoryAPI from '../../api/product-category';
 import MachineAPI from '../../api/machine';
 import ProductAPI from '../../api/product';
+import { Plus } from 'phosphor-react';
+import { ProductStockForm } from './product-stock-form';
 
 interface ProductFormProps {
   product: Product,
@@ -47,10 +49,22 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
   const [isActivePrice, setIsActivePrice] = useState<boolean>(product.id && _.isFinite(product.amount) && product.amount > 0);
   const [productCategories, setProductCategories] = useState<selectOption[]>([]);
   const [machines, setMachines] = useState<checklistOption[]>([]);
+  const [stockTab, setStockTab] = useState<boolean>(false);
 
   useEffect(() => {
     ProductCategoryAPI.index().then(data => {
-      setProductCategories(buildSelectOptions(data));
+      // Map product categories by position
+      const sortedCategories = data
+        .filter(c => !c.parent_id)
+        .sort((a, b) => a.position - b.position);
+      const childrenCategories = data
+        .filter(c => typeof c.parent_id === 'number')
+        .sort((a, b) => b.position - a.position);
+      childrenCategories.forEach(c => {
+        const parentIndex = sortedCategories.findIndex(i => i.id === c.parent_id);
+        sortedCategories.splice(parentIndex + 1, 0, c);
+      });
+      setProductCategories(buildSelectOptions(sortedCategories));
     }).catch(onError);
     MachineAPI.index({ disabled: false }).then(data => {
       setMachines(buildChecklistOptions(data));
@@ -223,144 +237,182 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
         </div>
       </header>
       <form className="product-form" onSubmit={onSubmit}>
-        <div className="layout">
-          <FormInput id="name"
-                     register={register}
-                     rules={{ required: true }}
-                     formState={formState}
-                     onChange={handleNameChange}
-                     label={t('app.admin.store.product_form.name')}
-                     className='span-7' />
-          <FormInput id="sku"
-                     register={register}
-                     formState={formState}
-                     label={t('app.admin.store.product_form.sku')}
-                     className='span-3' />
+        <div className='tabs'>
+          <p className={!stockTab ? 'is-active' : ''} onClick={() => setStockTab(false)}>{t('app.admin.store.product_form.product_parameters')}</p>
+          <p className={stockTab ? 'is-active' : ''} onClick={() => setStockTab(true)}>{t('app.admin.store.product_form.stock_management')}</p>
         </div>
-        <div className="layout">
-          <FormInput id="slug"
-                    register={register}
-                    rules={{ required: true }}
-                    formState={formState}
-                    label={t('app.admin.store.product_form.slug')}
-                    className='span-7' />
-          <FormSwitch control={control}
-                      id="is_active"
-                      formState={formState}
-                      label={t('app.admin.store.product_form.is_show_in_store')}
-                      className='span-3' />
-        </div>
-
-        <hr />
-
-        <div className="price-data">
-          <div className="layout">
-            <h4 className='span-7'>{t('app.admin.store.product_form.price_and_rule_of_selling_product')}</h4>
-            <FormSwitch control={control}
-                        id="is_active_price"
-                        label={t('app.admin.store.product_form.is_active_price')}
-                        tooltip={t('app.admin.store.product_form.is_active_price')}
-                        defaultValue={isActivePrice}
-                        onChange={toggleIsActivePrice}
-                        className='span-3' />
-          </div>
-          {isActivePrice && <div className="price-fields">
-            <div className="flex">
-              <FormInput id="amount"
-                         type="number"
-                         register={register}
-                         rules={{ required: true, min: 0.01 }}
-                         step={0.01}
-                         formState={formState}
-                         label={t('app.admin.store.product_form.price')} />
-              <FormInput id="quantity_min"
-                         type="number"
-                         rules={{ required: true }}
-                         register={register}
-                         formState={formState}
-                         label={t('app.admin.store.product_form.quantity_min')} />
+        {stockTab
+          ? <ProductStockForm product={product} register={register} control={control} id="stock" onError={onError} onSuccess={onSuccess} />
+          : <section>
+            <div className="subgrid">
+              <FormInput id="name"
+                        register={register}
+                        rules={{ required: true }}
+                        formState={formState}
+                        onChange={handleNameChange}
+                        label={t('app.admin.store.product_form.name')}
+                        className="span-7" />
+              <FormInput id="sku"
+                        register={register}
+                        formState={formState}
+                        label={t('app.admin.store.product_form.sku')}
+                        className="span-3" />
             </div>
-          </div>}
-
-          <hr />
-
-          <div>
-            <h4>{t('app.admin.store.product_form.product_images')}</h4>
-            <FabAlert level="warning">
-              <HtmlTranslate trKey="app.admin.store.product_form.product_images_info" />
-            </FabAlert>
-            <div className="product-images">
-              {output.product_images_attributes.map((image, i) => (
-                <FormImageUpload key={i}
-                                 defaultImage={image}
-                                 id={`product_images_attributes[${i}]`}
-                                 accept="image/*"
-                                 size="large"
-                                 register={register}
-                                 setValue={setValue}
-                                 formState={formState}
-                                 className={image._destroy ? 'hidden' : ''}
-                                 mainOption={true}
-                                 onFileRemove={handleRemoveProductImage(i)}
-                                 onFileIsMain={handleSetMainImage(i)}
-                                />
-              ))}
+            <div className="subgrid">
+              <FormInput id="slug"
+                        register={register}
+                        rules={{ required: true }}
+                        formState={formState}
+                        label={t('app.admin.store.product_form.slug')}
+                        className='span-7' />
+              <FormSwitch control={control}
+                          id="is_active"
+                          formState={formState}
+                          label={t('app.admin.store.product_form.is_show_in_store')}
+                          tooltip={t('app.admin.store.product_form.active_price_info')}
+                          className='span-3' />
             </div>
-            <FabButton onClick={addProductImage}>{t('app.admin.store.product_form.add_product_image')}</FabButton>
-          </div>
-          <h4>{t('app.admin.store.product_form.assigning_category')}</h4>
-          <FabAlert level="warning">
-            <HtmlTranslate trKey="app.admin.store.product_form.assigning_category_info" />
-          </FabAlert>
-          <FormSelect options={productCategories}
-                      control={control}
-                      id="product_category_id"
-                      formState={formState}
-                      label={t('app.admin.store.product_form.linking_product_to_category')} />
 
-          <hr />
+            <hr />
 
-          <h4>{t('app.admin.store.product_form.assigning_machines')}</h4>
-          <FabAlert level="warning">
-            <HtmlTranslate trKey="app.admin.store.product_form.assigning_machines_info" />
-          </FabAlert>
-          <FormChecklist options={machines}
-                         control={control}
-                         id="machine_ids"
-                         formState={formState} />
+            <div className="price-data">
+              <div className="header-switch">
+                <h4>{t('app.admin.store.product_form.price_and_rule_of_selling_product')}</h4>
+                <FormSwitch control={control}
+                            id="is_active_price"
+                            label={t('app.admin.store.product_form.is_active_price')}
+                            defaultValue={isActivePrice}
+                            onChange={toggleIsActivePrice} />
+              </div>
+              {isActivePrice && <div className="price-data-content">
+                <FormInput id="amount"
+                            type="number"
+                            register={register}
+                            rules={{ required: true, min: 0.01 }}
+                            step={0.01}
+                            formState={formState}
+                            label={t('app.admin.store.product_form.price')} />
+                <FormInput id="quantity_min"
+                            type="number"
+                            rules={{ required: true }}
+                            register={register}
+                            formState={formState}
+                            label={t('app.admin.store.product_form.quantity_min')} />
+              </div>}
+            </div>
 
-          <hr />
+            <hr />
 
-          <h4>{t('app.admin.store.product_form.product_description')}</h4>
-          <FabAlert level="warning">
-            <HtmlTranslate trKey="app.admin.store.product_form.product_description_info" />
-          </FabAlert>
-          <FormRichText control={control}
-                        paragraphTools={true}
-                        limit={1000}
-                        id="description" />
-          <div>
-            <h4>{t('app.admin.store.product_form.product_files')}</h4>
-            <FabAlert level="warning">
-              <HtmlTranslate trKey="app.admin.store.product_form.product_files_info" />
-            </FabAlert>
-            {output.product_files_attributes.map((file, i) => (
-              <FormFileUpload key={i}
-                              defaultFile={file}
-                              id={`product_files_attributes[${i}]`}
-                              accept="application/pdf"
-                              register={register}
-                              setValue={setValue}
-                              formState={formState}
-                              className={file._destroy ? 'hidden' : ''}
-                              onFileRemove={handleRemoveProductFile(i)}/>
-            ))}
-            <FabButton onClick={addProductFile}>{t('app.admin.store.product_form.add_product_file')}</FabButton>
-          </div>
-        </div>
-        <div className="main-actions">
-          <FabButton type="submit" className="main-action-btn">{t('app.admin.store.product_form.save')}</FabButton>
-        </div>
+            <div>
+              <h4>{t('app.admin.store.product_form.product_images')}</h4>
+              <FabAlert level="warning">
+                <HtmlTranslate trKey="app.admin.store.product_form.product_images_info" />
+              </FabAlert>
+              <div className="product-images">
+                <div className="list">
+                  {output.product_images_attributes.map((image, i) => (
+                    <FormImageUpload key={i}
+                                    defaultImage={image}
+                                    id={`product_images_attributes[${i}]`}
+                                    accept="image/*"
+                                    size="small"
+                                    register={register}
+                                    setValue={setValue}
+                                    formState={formState}
+                                    className={image._destroy ? 'hidden' : ''}
+                                    mainOption={true}
+                                    onFileRemove={handleRemoveProductImage(i)}
+                                    onFileIsMain={handleSetMainImage(i)}
+                                    />
+                  ))}
+                </div>
+              <FabButton
+                onClick={addProductImage}
+                className='is-info'
+                icon={<Plus size={24} />}>
+                {t('app.admin.store.product_form.add_product_image')}
+              </FabButton>
+              </div>
+            </div>
+
+            <hr />
+
+            <div>
+              <h4>{t('app.admin.store.product_form.assigning_category')}</h4>
+              <FabAlert level="warning">
+                <HtmlTranslate trKey="app.admin.store.product_form.assigning_category_info" />
+              </FabAlert>
+              <FormSelect options={productCategories}
+                          control={control}
+                          id="product_category_id"
+                          formState={formState}
+                          label={t('app.admin.store.product_form.linking_product_to_category')} />
+            </div>
+
+            <hr />
+
+            <div>
+              <h4>{t('app.admin.store.product_form.assigning_machines')}</h4>
+              <FabAlert level="warning">
+                <HtmlTranslate trKey="app.admin.store.product_form.assigning_machines_info" />
+              </FabAlert>
+              <FormChecklist options={machines}
+                              control={control}
+                              id="machine_ids"
+                              formState={formState} />
+            </div>
+
+            <hr />
+
+            <div>
+              <h4>{t('app.admin.store.product_form.product_description')}</h4>
+              <FabAlert level="warning">
+                <HtmlTranslate trKey="app.admin.store.product_form.product_description_info" />
+              </FabAlert>
+              <FormRichText control={control}
+                            heading
+                            bulletList
+                            blockquote
+                            link
+                            limit={6000}
+                            id="description" />
+            </div>
+
+            <hr />
+
+            <div>
+              <h4>{t('app.admin.store.product_form.product_files')}</h4>
+              <FabAlert level="warning">
+                <HtmlTranslate trKey="app.admin.store.product_form.product_files_info" />
+              </FabAlert>
+              <div className="product-documents">
+                <div className="list">
+                  {output.product_files_attributes.map((file, i) => (
+                    <FormFileUpload key={i}
+                                    defaultFile={file}
+                                    id={`product_files_attributes[${i}]`}
+                                    accept="application/pdf"
+                                    register={register}
+                                    setValue={setValue}
+                                    formState={formState}
+                                    className={file._destroy ? 'hidden' : ''}
+                                    onFileRemove={handleRemoveProductFile(i)}/>
+                  ))}
+                </div>
+                <FabButton
+                  onClick={addProductFile}
+                  className='is-info'
+                  icon={<Plus size={24} />}>
+                  {t('app.admin.store.product_form.add_product_file')}
+                </FabButton>
+              </div>
+            </div>
+
+            <div className="main-actions">
+              <FabButton type="submit" className="main-action-btn">{t('app.admin.store.product_form.save')}</FabButton>
+            </div>
+          </section>
+        }
       </form>
     </>
   );

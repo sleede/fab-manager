@@ -1,0 +1,32 @@
+.store-list {
+  grid-column: 4 / -1;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.4rem 0; 
+
+  .features {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.6rem 2.4rem;
+    &-item {
+      padding-left: 1.6rem;
+      display: flex;
+      align-items: center;
+      background-color: var(--information-light);
+      border-radius: 100px;
+      color: var(--information-dark);
+      overflow: hidden;
+      p { margin: 0; }
+      button {
+        width: 3.2rem;
+        height: 3.2rem;
+        margin-left: 0.8rem;
+        display: flex;
+        align-items: center;
+        background: none;
+        border: none;
+      }
+    }
+  }
+}

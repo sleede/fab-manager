@@ -3,3 +3,18 @@
   --border-radius-sm: 4px;
   --shadow: 0 0 10px rgba(39, 32, 32, 0.25);
 }
+
+@mixin imageRatio($ratio: 100%) {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: $ratio;
+  overflow: hidden;
+  img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}

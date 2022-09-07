@@ -227,6 +227,15 @@ angular.module('application.router', ['ui.router'])
           }
         }
       })
+      .state('app.logged.dashboard.orders', {
+        url: '/orders',
+        views: {
+          'main@': {
+            templateUrl: '/dashboard/orders.html',
+            controller: 'DashboardController'
+          }
+        }
+      })
       .state('app.logged.dashboard.wallet', {
         url: '/wallet',
         abstract: !Fablab.walletModule,
@@ -901,6 +910,17 @@ angular.module('application.router', ['ui.router'])
         },
         resolve: {
           couponPromise: ['Coupon', '$transition$', function (Coupon, $transition$) { return Coupon.get({ id: $transition$.params().id }).$promise; }]
+        }
+      })
+
+      // show order
+      .state('app.admin.order_show', {
+        url: '/admin/store/o/:token',
+        views: {
+          'main@': {
+            templateUrl: '/admin/orders/show.html',
+            controller: 'ShowOrdersController'
+          }
         }
       })
 

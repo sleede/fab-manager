@@ -15,10 +15,13 @@ import { MemberSelect } from '../user/member-select';
 import { CouponInput } from '../coupon/coupon-input';
 import { Coupon } from '../../models/coupon';
 import { computePriceWithCoupon } from '../../lib/coupon';
+import noImage from '../../../../images/no_image.png';
+import Switch from 'react-switch';
 
 declare const Application: IApplication;
 
 interface StoreCartProps {
+  onSuccess: (message: string) => void,
   onError: (message: string) => void,
   userLogin: () => void,
   currentUser?: User
@@ -27,10 +30,11 @@ interface StoreCartProps {
 /**
  * This component shows user's cart
  */
-const StoreCart: React.FC<StoreCartProps> = ({ onError, currentUser, userLogin }) => {
+const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, userLogin }) => {
   const { t } = useTranslation('public');
 
   const { cart, setCart } = useCart(currentUser);
+  console.log('cart: ', cart);
   const [paymentModal, setPaymentModal] = useState<boolean>(false);
 
   /**
@@ -76,14 +80,15 @@ const StoreCart: React.FC<StoreCartProps> = ({ onError, currentUser, userLogin }
   };
 
   /**
-   * Open/closes the payment modal
+   * Handle payment
    */
   const handlePaymentSuccess = (data: Order): void => {
     if (data.payment_state === 'paid') {
       setPaymentModal(false);
       window.location.href = '/#!/store';
+      onSuccess(t('app.public.store_cart.checkout_success'));
     } else {
-      onError('Erreur inconnue after payment, please conntact admin');
+      onError(t('app.public.store_cart.checkout_error'));
     }
   };
 
@@ -109,6 +114,13 @@ const StoreCart: React.FC<StoreCartProps> = ({ onError, currentUser, userLogin }
   };
 
   /**
+   * Toggle product offer
+   */
+  const onSwitch = (product, checked: boolean) => {
+    console.log('Offer ', product.orderable_name, ': ', checked);
+  };
+
+  /**
    * Apply coupon to current cart
    */
   const applyCoupon = (coupon?: Coupon): void => {
@@ -117,35 +129,105 @@ const StoreCart: React.FC<StoreCartProps> = ({ onError, currentUser, userLogin }
     }
   };
 
+  /**
+   * Get the offered item total
+   */
+  const offeredAmount = (): number => {
+    return cart.order_items_attributes
+      .filter(i => i.is_offered)
+      .map(i => i.amount)
+      .reduce((acc, curr) => acc + curr, 0);
+  };
+
   return (
-    <div className="store-cart">
-      {cart && cartIsEmpty() && <p>{t('app.public.store_cart.cart_is_empty')}</p>}
-      {cart && cart.order_items_attributes.map(item => (
-        <div key={item.id}>
-          <div>{item.orderable_name}</div>
-          <div>{FormatLib.price(item.amount)}</div>
-          <div>{item.quantity}</div>
-          <select value={item.quantity} onChange={changeProductQuantity(item)}>
-            {Array.from({ length: 100 }, (_, i) => i + 1).map(v => (
-              <option key={v} value={v}>{v}</option>
-            ))}
-          </select>
-          <div>{FormatLib.price(item.quantity * item.amount)}</div>
-          <FabButton className="delete-btn" onClick={removeProductFromCart(item)}>
-            <i className="fa fa-trash" />
-          </FabButton>
+    <div className='store-cart'>
+      <div className="store-cart-list">
+        {cart && cartIsEmpty() && <p>{t('app.public.store_cart.cart_is_empty')}</p>}
+        {cart && cart.order_items_attributes.map(item => (
+          <article key={item.id} className='store-cart-list-item'>
+            <div className='picture'>
+              <img alt=''src={noImage} />
+            </div>
+            <div className="ref">
+              <span>{t('app.public.store_cart.reference_short')} </span>
+              <p>{item.orderable_name}</p>
+            </div>
+            <div className="actions">
+              <div className='price'>
+                <p>{FormatLib.price(item.amount)}</p>
+                <span>/ {t('app.public.store_cart.unit')}</span>
+              </div>
+              <select value={item.quantity} onChange={changeProductQuantity(item)}>
+                {Array.from({ length: 100 }, (_, i) => i + 1).map(v => (
+                  <option key={v} value={v}>{v}</option>
+                ))}
+              </select>
+              <div className='total'>
+                <span>{t('app.public.store_cart.total')}</span>
+                <p>{FormatLib.price(item.quantity * item.amount)}</p>
+              </div>
+              <FabButton className="main-action-btn" onClick={removeProductFromCart(item)}>
+                <i className="fa fa-trash" />
+              </FabButton>
+            </div>
+            {isPrivileged() &&
+              <div className='offer'>
+                <label>
+                  <span>Offer the product</span>
+                  <Switch
+                  checked={item.is_offered}
+                  onChange={(checked) => onSwitch(item, checked)}
+                  width={40}
+                  height={19}
+                  uncheckedIcon={false}
+                  checkedIcon={false}
+                  handleDiameter={15} />
+                </label>
+              </div>
+            }
+          </article>
+        ))}
+      </div>
+
+      <div className="group">
+        <div className='store-cart-info'>
+          <h3>{t('app.public.store_cart.pickup')}</h3>
+          <p>[TODO: texte venant des paramètres de la boutique…]</p>
         </div>
-      ))}
-      {cart && !cartIsEmpty() && cart.user && <CouponInput user={cart.user as User} amount={cart.total} onChange={applyCoupon} />}
-      {cart && !cartIsEmpty() && <p>Total produits: {FormatLib.price(cart.total)}</p>}
-      {cart && !cartIsEmpty() && cart.coupon && computePriceWithCoupon(cart.total, cart.coupon) !== cart.total && <p>Coupon réduction: {FormatLib.price(-(cart.total - computePriceWithCoupon(cart.total, cart.coupon)))}</p>}
-      {cart && !cartIsEmpty() && <p>Total panier: {FormatLib.price(computePriceWithCoupon(cart.total, cart.coupon))}</p>}
-      {cart && !cartIsEmpty() && isPrivileged() && <MemberSelect onSelected={handleChangeMember} />}
-      {cart && !cartIsEmpty() &&
-        <FabButton className="checkout-btn" onClick={checkout}>
-          {t('app.public.store_cart.checkout')}
-        </FabButton>
-      }
+
+        {cart && !cartIsEmpty() && cart.user &&
+          <div className='store-cart-coupon'>
+            <CouponInput user={cart.user as User} amount={cart.total} onChange={applyCoupon} />
+          </div>
+        }
+      </div>
+
+      <aside>
+        {cart && !cartIsEmpty() && isPrivileged() &&
+          <div> <MemberSelect onSelected={handleChangeMember} /></div>
+        }
+
+        {cart && !cartIsEmpty() && <>
+          <div className="checkout">
+            <h3>{t('app.public.store_cart.checkout_header')}</h3>
+            <span>{t('app.public.store_cart.checkout_products_COUNT', { COUNT: cart?.order_items_attributes.length })}</span>
+            <div className="list">
+              <p>{t('app.public.store_cart.checkout_products_total')} <span>{FormatLib.price(cart.total)}</span></p>
+              {offeredAmount() > 0 &&
+                <p className='gift'>{t('app.public.store_cart.checkout_gift_total')} <span>-{FormatLib.price(offeredAmount())}</span></p>
+              }
+              {cart.coupon && computePriceWithCoupon(cart.total, cart.coupon) !== cart.total &&
+                <p>{t('app.public.store_cart.checkout_coupon')} <span>{FormatLib.price(-(cart.total - computePriceWithCoupon(cart.total, cart.coupon)))}</span></p>
+              }
+            </div>
+            <p className='total'>{t('app.public.store_cart.checkout_total')} <span>{FormatLib.price(computePriceWithCoupon(cart.total, cart.coupon))}</span></p>
+          </div>
+          <FabButton className='checkout-btn' onClick={checkout} disabled={!cart.user || cart.order_items_attributes.length === 0}>
+            {t('app.public.store_cart.checkout')}
+          </FabButton>
+        </>}
+      </aside>
+
       {cart && !cartIsEmpty() && cart.user && <div>
         <PaymentModal isOpen={paymentModal}
           toggleModal={togglePaymentModal}
@@ -169,4 +251,4 @@ const StoreCartWrapper: React.FC<StoreCartProps> = (props) => {
   );
 };
 
-Application.Components.component('storeCart', react2angular(StoreCartWrapper, ['onError', 'currentUser', 'userLogin']));
+Application.Components.component('storeCart', react2angular(StoreCartWrapper, ['onSuccess', 'onError', 'currentUser', 'userLogin']));

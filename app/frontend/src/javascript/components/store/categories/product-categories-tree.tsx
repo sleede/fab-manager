@@ -21,17 +21,15 @@ interface ProductCategoriesTreeProps {
 export const ProductCategoriesTree: React.FC<ProductCategoriesTreeProps> = ({ productCategories, onDnd, onSuccess, onError }) => {
   const [categoriesList, setCategoriesList] = useImmer<ProductCategory[]>(productCategories);
   const [activeData, setActiveData] = useImmer<ActiveData>(initActiveData);
-  // TODO: type extractedChildren: {[parentId]: ProductCategory[]} ???
   const [extractedChildren, setExtractedChildren] = useImmer({});
   const [collapsed, setCollapsed] = useImmer<number[]>([]);
-  const [offset, setOffset] = useState<boolean>(false);
 
   // Initialize state from props
   useEffect(() => {
     setCategoriesList(productCategories);
   }, [productCategories]);
 
-  // Dnd Kit config
+  // @dnd-kit config
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -63,11 +61,31 @@ export const ProductCategoriesTree: React.FC<ProductCategoriesTreeProps> = ({ pr
    * On drag move
    */
   const handleDragMove = ({ delta, active, over }: DragMoveEvent) => {
-    if ((getStatus(active.id) === 'single' || getStatus(active.id) === 'child') && getStatus(over.id) === 'single') {
-      if (delta.x > 32) {
-        setOffset(true);
+    const activeStatus = getStatus(active.id);
+    if (activeStatus === 'single') {
+      if (Math.ceil(delta.x) > 32 && getStatus(over.id) !== 'child') {
+        setActiveData(draft => {
+          return { ...draft, offset: 'down' };
+        });
       } else {
-        setOffset(false);
+        setActiveData(draft => {
+          return { ...draft, offset: null };
+        });
+      }
+    }
+    if (activeStatus === 'child') {
+      if (Math.ceil(delta.x) > 32 && getStatus(over.id) !== 'child') {
+        setActiveData(draft => {
+          return { ...draft, offset: 'down' };
+        });
+      } else if (Math.ceil(delta.x) < -32 && getStatus(over.id) === 'child') {
+        setActiveData(draft => {
+          return { ...draft, offset: 'up' };
+        });
+      } else {
+        setActiveData(draft => {
+          return { ...draft, offset: null };
+        });
       }
     }
   };
@@ -83,12 +101,13 @@ export const ProductCategoriesTree: React.FC<ProductCategoriesTreeProps> = ({ pr
 
     // [A] Single |> [B] Single
     if (getStatus(active.id) === 'single' && getStatus(over.id) === 'single') {
-      console.log('[A] Single |> [B] Single');
       const newIdsOrder = arrayMove(currentIdsOrder, activeData.index, newIndex);
       newOrder = newIdsOrder.map(sortedId => {
         let category = getCategory(sortedId);
-        if (offset && sortedId === active.id && activeData.index < newIndex) {
+        if (activeData.offset === 'down' && sortedId === active.id && activeData.index < newIndex && active.id !== over.id) {
           category = { ...category, parent_id: Number(over.id) };
+        } else if (activeData.offset === 'down' && sortedId === active.id && (activeData.index > newIndex || active.id === over.id)) {
+          category = { ...category, parent_id: getPreviousAdopter(over.id) };
         }
         return category;
       });
@@ -96,13 +115,14 @@ export const ProductCategoriesTree: React.FC<ProductCategoriesTreeProps> = ({ pr
 
     // [A] Child |> [B] Single
     if ((getStatus(active.id) === 'child') && getStatus(over.id) === 'single') {
-      console.log('[A] Child |> [B] Single');
       const newIdsOrder = arrayMove(currentIdsOrder, activeData.index, newIndex);
       newOrder = newIdsOrder.map(sortedId => {
         let category = getCategory(sortedId);
-        if (offset && sortedId === active.id && activeData.index < newIndex) {
+        if (activeData.offset === 'down' && sortedId === active.id && activeData.index < newIndex) {
           category = { ...category, parent_id: Number(over.id) };
-        } else if (sortedId === active.id && activeData.index < newIndex) {
+        } else if (activeData.offset === 'down' && sortedId === active.id && activeData.index > newIndex) {
+          category = { ...category, parent_id: getPreviousAdopter(over.id) };
+        } else if (sortedId === active.id) {
           category = { ...category, parent_id: null };
         }
         return category;
@@ -113,8 +133,8 @@ export const ProductCategoriesTree: React.FC<ProductCategoriesTreeProps> = ({ pr
     if (getStatus(active.id) === 'single' || getStatus(active.id) === 'child') {
       // [B] Parent
       if (getStatus(over.id) === 'parent') {
+        const newIdsOrder = arrayMove(currentIdsOrder, activeData.index, newIndex);
         if (activeData.index < newIndex) {
-          const newIdsOrder = arrayMove(currentIdsOrder, activeData.index, newIndex);
           newOrder = newIdsOrder.map(sortedId => {
             let category = getCategory(sortedId);
             if (sortedId === active.id) {
@@ -122,12 +142,13 @@ export const ProductCategoriesTree: React.FC<ProductCategoriesTreeProps> = ({ pr
             }
             return category;
           });
-        } else {
-          const newIdsOrder = arrayMove(currentIdsOrder, activeData.index, newIndex);
+        } else if (activeData.index > newIndex) {
           newOrder = newIdsOrder.map(sortedId => {
             let category = getCategory(sortedId);
-            if (sortedId === active.id) {
+            if (sortedId === active.id && !activeData.offset) {
               category = { ...category, parent_id: null };
+            } else if (sortedId === active.id && activeData.offset === 'down') {
+              category = { ...category, parent_id: getPreviousAdopter(over.id) };
             }
             return category;
           });
@@ -183,9 +204,8 @@ export const ProductCategoriesTree: React.FC<ProductCategoriesTreeProps> = ({ pr
       // insert children back
       newOrder = showChildren(active.id, newOrder, newIndex);
     }
-
+    setActiveData(initActiveData);
     onDnd(newOrder);
-    setOffset(false);
   };
 
   /**
@@ -214,6 +234,16 @@ export const ProductCategoriesTree: React.FC<ProductCategoriesTreeProps> = ({ pr
       return displayedChildren;
     }
     return extractedChildren[id];
+  };
+
+  /**
+   * Get previous category that can have children
+   */
+  const getPreviousAdopter = (overId) => {
+    const reversedList = [...categoriesList].reverse();
+    const dropIndex = reversedList.findIndex(c => c.id === overId);
+    const adopter = reversedList.find((c, index) => index > dropIndex && !c.parent_id)?.id;
+    return adopter || null;
   };
 
   /**
@@ -285,7 +315,7 @@ export const ProductCategoriesTree: React.FC<ProductCategoriesTreeProps> = ({ pr
                 category={category}
                 onSuccess={onSuccess}
                 onError={onError}
-                offset={category.id === activeData.category?.id && activeData?.offset}
+                offset={category.id === activeData.category?.id ? activeData?.offset : null}
                 collapsed={collapsed.includes(category.id) || collapsed.includes(category.parent_id)}
                 handleCollapse={handleCollapse}
                 status={getStatus(category.id)}
@@ -302,12 +332,12 @@ interface ActiveData {
   category: ProductCategory,
   status: 'child' | 'single' | 'parent',
   children: ProductCategory[],
-  offset: boolean
+  offset: 'up' | 'down' | null
 }
 const initActiveData: ActiveData = {
   index: null,
   category: null,
   status: null,
   children: [],
-  offset: false
+  offset: null
 };

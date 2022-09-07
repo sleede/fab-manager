@@ -12,7 +12,7 @@
 
   .file-item {
     &.has-error {
-      color: var(--error);
+      color: var(--alert);
     }
 
     label {

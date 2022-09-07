@@ -1,40 +1,30 @@
 .product-categories {
-  max-width: 1300px;
+  max-width: 1600px;
   margin: 0 auto;
+  padding-bottom: 6rem;
+  @include grid-col(12);
+  gap: 0 3.2rem;
 
   header {
-    padding: 2.4rem 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    .grpBtn {
-      display: flex;
-      & > *:not(:first-child) { margin-left: 2.4rem; }
-      .create-button {
-        background-color: var(--gray-hard-darkest);
-        border-color: var(--gray-hard-darkest);
-        color: var(--gray-soft-lightest);
-        &:hover {
-          background-color: var(--gray-hard-light);
-          border-color: var(--gray-hard-light);
-        }
-      }
-    }
-    h2 {
-      margin: 0;
-      @include title-lg;
-      color: var(--gray-hard-darkest) !important;
-    }
-  }
+    @include header();
+    grid-column: 2 / -2;
 
-  .main-action-btn {
-    background-color: var(--main);
-    color: var(--gray-soft-lightest);
-    border: none;
-    &:hover { opacity: 0.75; }
+    .create-button {
+      background-color: var(--gray-hard-darkest);
+      border-color: var(--gray-hard-darkest);
+      color: var(--gray-soft-lightest);
+      &:hover {
+        background-color: var(--gray-hard-light);
+        border-color: var(--gray-hard-light);
+      }
+      }
+  }
+  .fab-alert {
+    grid-column: 2 / -2;
   }
 
   &-tree {
+    grid-column: 2 / -2;
     & > *:not(:first-child) {
       margin-top: 1.6rem;
     }
@@ -64,6 +54,7 @@
       border: 1px solid var(--gray-soft-dark);
       border-radius: var(--border-radius);
       background-color: var(--gray-soft-lightest);
+      &.is-child { margin-left: 4.8rem; }
       .itemInfo {
         display: flex;
         align-items: center;
@@ -96,7 +87,7 @@
             &:hover { opacity: 0.75; }
           }
           .edit-btn { background: var(--gray-hard-darkest); }
-          .delete-btn { background: var(--error); }
+          .delete-btn { background: var(--main); }
         }
       }
     }

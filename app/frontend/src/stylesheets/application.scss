@@ -30,6 +30,8 @@
 @import "modules/base/fab-text-editor";
 @import "modules/base/labelled-input";
 @import "modules/calendar/calendar";
+@import "modules/cart/cart-button";
+@import "modules/cart/store-cart";
 @import "modules/dashboard/reservations/credits-panel";
 @import "modules/dashboard/reservations/reservations-dashboard";
 @import "modules/dashboard/reservations/reservations-panel";
@@ -42,6 +44,7 @@
 @import "modules/form/form-file-upload";
 @import "modules/form/form-image-upload";
 @import "modules/group/change-group";
+@import "modules/layout/header-page";
 @import "modules/machines/machine-card";
 @import "modules/machines/machines-filters";
 @import "modules/machines/machines-list";
@@ -89,9 +92,19 @@
 @import "modules/settings/user-validation-setting";
 @import "modules/socials/fab-socials";
 @import "modules/store/_utilities";
-@import "modules/store/manage-product-category";
+@import "modules/store/orders-dashboard";
+@import "modules/store/orders";
 @import "modules/store/product-categories";
+@import "modules/store/product-form";
+@import "modules/store/product-stock-form";
+@import "modules/store/product-stock-modal";
+@import "modules/store/products-grid";
+@import "modules/store/products-list";
 @import "modules/store/products";
+@import "modules/store/store-filters";
+@import "modules/store/store-list-header";
+@import "modules/store/store-list";
+@import "modules/store/store-settings";
 @import "modules/store/store";
 @import "modules/subscriptions/free-extend-modal";
 @import "modules/subscriptions/renew-modal";
@@ -105,7 +118,6 @@
 @import "modules/user/gender-input";
 @import "modules/user/user-profile-form";
 @import "modules/user/user-validation";
-@import "modules/store/product-form";
 
 @import "modules/abuses";
 @import "modules/cookies";

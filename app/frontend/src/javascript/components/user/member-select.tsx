@@ -6,7 +6,8 @@ import { User } from '../../models/user';
 
 interface MemberSelectProps {
   defaultUser?: User,
-  onSelected?: (userId: number) => void
+  onSelected?: (userId: number) => void,
+  noHeader?: boolean
 }
 
 /**
@@ -18,7 +19,7 @@ type selectOption = { value: number, label: string };
 /**
  * This component renders the member select for manager.
  */
-export const MemberSelect: React.FC<MemberSelectProps> = ({ defaultUser, onSelected }) => {
+export const MemberSelect: React.FC<MemberSelectProps> = ({ defaultUser, onSelected, noHeader }) => {
   const { t } = useTranslation('public');
   const [value, setValue] = useState<selectOption>();
 
@@ -51,9 +52,11 @@ export const MemberSelect: React.FC<MemberSelectProps> = ({ defaultUser, onSelec
 
   return (
     <div className="member-select">
-      <div className="member-select-header">
-        <h3 className="member-select-title">{t('app.public.member_select.select_a_member')}</h3>
-      </div>
+      {!noHeader &&
+        <div className="member-select-header">
+          <h3 className="member-select-title">{t('app.public.member_select.select_a_member')}</h3>
+        </div>
+      }
       <AsyncSelect placeholder={t('app.public.member_select.start_typing')}
                    cacheOptions
                    loadOptions={loadMembers}

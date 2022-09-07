@@ -32,7 +32,7 @@
         background-color: var(--information-lightest);
         color: var(--information);
         border: 1px solid var(--information);
-        border-radius: 8px;
+        border-radius: var(--border-radius);
         font-size: 14px;
         font-weight: normal;
         line-height: 1.2em;
@@ -52,7 +52,7 @@
   &.is-required &-header p::after {
     content: "*";
     margin-left: 0.5ch;
-    color: var(--error);
+    color: var(--alert);
   }
 
   &-field {
@@ -152,19 +152,19 @@
     }
   }
   &.is-incorrect &-field {
-    border-color: var(--error);
+    border-color: var(--alert);
     .icon {
-      color: var(--error);
-      border-color: var(--error);
-      background-color: var(--error-lightest);
+      color: var(--alert);
+      border-color: var(--alert);
+      background-color: var(--alert-lightest);
     }
   }
   &.is-warned &-field {
-    border-color: var(--warning);
+    border-color: var(--notification);
     .icon {
-      color: var(--warning);
-      border-color: var(--warning);
-      background-color: var(--warning-lightest);
+      color: var(--notification);
+      border-color: var(--notification);
+      background-color: var(--notification-lightest);
     }
   }
   &.is-disabled &-field input,
@@ -174,10 +174,21 @@
 
   &-error {
     margin-top: 0.4rem;
-    color: var(--error);
+    color: var(--alert);
   }
   &-warning {
     margin-top: 0.4rem;
-    color: var(--warning);
+    color: var(--notification);
+  }
+
+  input[type='file'] {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+  }
+  .file-placeholder {
+    border: none;
   }
 }
