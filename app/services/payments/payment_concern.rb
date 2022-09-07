@@ -10,7 +10,7 @@ module Payments::PaymentConcern
   end
 
   def debit_amount(order, coupon_code = nil)
-    total = CouponService.new.apply(order.total, coupon_code, order.statistic_profile.user)
+    total = CouponService.new.apply(order.total, coupon_code, order.statistic_profile.user.id)
     wallet_debit = get_wallet_debit(order.statistic_profile.user, total)
     total - wallet_debit
   end
