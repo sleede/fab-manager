@@ -1,3 +1,4 @@
+/* eslint-disable fabmanager/scoped-translation */
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { IApplication } from '../../models/application';
@@ -5,6 +6,7 @@ import { react2angular } from 'react2angular';
 import { Loader } from '../base/loader';
 import noImage from '../../../../images/no_image.png';
 import { FabStateLabel } from '../base/fab-state-label';
+import Select from 'react-select';
 
 declare const Application: IApplication;
 
@@ -13,6 +15,11 @@ interface ShowOrderProps {
   onError: (message: string) => void,
   onSuccess: (message: string) => void
 }
+/**
+* Option format, expected by react-select
+* @see https://github.com/JedWatson/react-select
+*/
+type selectOption = { value: number, label: string };
 
 /**
  * This component shows an order details
@@ -21,6 +28,41 @@ interface ShowOrderProps {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const ShowOrder: React.FC<ShowOrderProps> = ({ orderRef, onError, onSuccess }) => {
   const { t } = useTranslation('admin');
+
+  /**
+   * Creates sorting options to the react-select format
+   */
+  const buildOptions = (): Array<selectOption> => {
+    return [
+      { value: 0, label: t('app.admin.store.orders.status.error') },
+      { value: 1, label: t('app.admin.store.orders.status.canceled') },
+      { value: 2, label: t('app.admin.store.orders.status.pending') },
+      { value: 3, label: t('app.admin.store.orders.status.under_preparation') },
+      { value: 4, label: t('app.admin.store.orders.status.paid') },
+      { value: 5, label: t('app.admin.store.orders.status.ready') },
+      { value: 6, label: t('app.admin.store.orders.status.collected') },
+      { value: 7, label: t('app.admin.store.orders.status.refunded') }
+    ];
+  };
+
+  /**
+   * Callback after selecting an action
+   */
+  const handleAction = (action: selectOption) => {
+    console.log('Action:', action);
+  };
+
+  // Styles the React-select component
+  const customStyles = {
+    control: base => ({
+      ...base,
+      width: '20ch',
+      backgroundColor: 'transparent'
+    }),
+    indicatorSeparator: () => ({
+      display: 'none'
+    })
+  };
 
   /**
    * Returns a className according to the status
@@ -43,6 +85,11 @@ export const ShowOrder: React.FC<ShowOrderProps> = ({ orderRef, onError, onSucce
       <header>
         <h2>[order.ref]</h2>
         <div className="grpBtn">
+          <Select
+            options={buildOptions()}
+            onChange={option => handleAction(option)}
+            styles={customStyles}
+          />
           <a href={''}
             target='_blank'
             className='fab-button is-black'
