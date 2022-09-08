@@ -1,11 +1,12 @@
 import { ProductCategory } from '../models/product-category';
+import { StockMovementReason } from '../models/product';
 
 export default class ProductLib {
   /**
    * Map product categories by position
    * @param categories unsorted categories, as returned by the API
    */
-  sortCategories = (categories: Array<ProductCategory>): Array<ProductCategory> => {
+  static sortCategories = (categories: Array<ProductCategory>): Array<ProductCategory> => {
     const sortedCategories = categories
       .filter(c => !c.parent_id)
       .sort((a, b) => a.position - b.position);
@@ -17,5 +18,12 @@ export default class ProductLib {
       sortedCategories.splice(parentIndex + 1, 0, c);
     });
     return sortedCategories;
+  };
+
+  /**
+   * Return the translation key associated with the given reason
+   */
+  static stockMovementReasonTrKey = (reason: StockMovementReason): string => {
+    return `app.admin.store.stock_movement_reason.${reason}`;
   };
 }

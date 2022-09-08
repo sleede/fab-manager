@@ -6,6 +6,8 @@ class API::ProductsController < API::ApiController
   before_action :authenticate_user!, except: %i[index show]
   before_action :set_product, only: %i[update destroy]
 
+  MOVEMENTS_PER_PAGE = 10
+
   def index
     @products = ProductService.list(params)
   end
@@ -43,6 +45,11 @@ class API::ProductsController < API::ApiController
     head :no_content
   end
 
+  def stock_movements
+    authorize Product
+    @movements = ProductStockMovement.where(product_id: params[:id]).order(date: :desc).page(params[:page]).per(MOVEMENTS_PER_PAGE)
+  end
+
   private
 
   def set_product
@@ -56,6 +63,6 @@ class API::ProductsController < API::ApiController
                                     machine_ids: [],
                                     product_files_attributes: %i[id attachment _destroy],
                                     product_images_attributes: %i[id attachment is_main _destroy],
-                                    product_stock_movements_attributes: %i[id quantity reason stock_type _destroy])
+                                    product_stock_movements_attributes: %i[id quantity reason stock_type])
   end
 end

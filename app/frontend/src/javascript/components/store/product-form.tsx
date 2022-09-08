@@ -54,7 +54,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
 
   useEffect(() => {
     ProductCategoryAPI.index().then(data => {
-      setProductCategories(buildSelectOptions(new ProductLib().sortCategories(data)));
+      setProductCategories(buildSelectOptions(ProductLib.sortCategories(data)));
     }).catch(onError);
     MachineAPI.index({ disabled: false }).then(data => {
       setMachines(buildChecklistOptions(data));
@@ -230,7 +230,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
           <p className={stockTab ? 'is-active' : ''} onClick={() => setStockTab(true)}>{t('app.admin.store.product_form.stock_management')}</p>
         </div>
         {stockTab
-          ? <ProductStockForm product={product} register={register} control={control} formState={formState} onError={onError} onSuccess={onSuccess} />
+          ? <ProductStockForm currentFormValues={output as Product} register={register} control={control} formState={formState} setValue={setValue} onError={onError} onSuccess={onSuccess} />
           : <section>
             <div className="subgrid">
               <FormInput id="name"

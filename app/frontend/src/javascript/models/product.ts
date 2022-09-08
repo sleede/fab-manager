@@ -5,14 +5,22 @@ export interface ProductIndexFilter extends ApiFilter {
   is_active: boolean,
 }
 
-export enum StockType {
-  internal = 'internal',
-  external = 'external'
-}
+export type StockType = 'internal' | 'external' | 'all';
+export type StockMovementReason = 'inward_stock' | 'returned' | 'cancelled' | 'inventory_fix' | 'sold' | 'missing' | 'damaged';
 
 export interface Stock {
   internal: number,
   external: number,
+}
+
+export interface ProductStockMovement {
+  id?: number,
+  product_id?: number,
+  quantity?: number,
+  reason?: StockMovementReason,
+  stock_type?: StockType,
+  remaining_stock?: number,
+  date?: TDateISO
 }
 
 export interface Product {
@@ -29,6 +37,7 @@ export interface Product {
   low_stock_alert: boolean,
   low_stock_threshold?: number,
   machine_ids: number[],
+  created_at?: TDateISO,
   product_files_attributes: Array<{
     id?: number,
     attachment?: File,
@@ -46,13 +55,5 @@ export interface Product {
     _destroy?: boolean,
     is_main?: boolean
   }>,
-  product_stock_movements_attributes: Array<{
-    id?: number,
-    quantity?: number,
-    reason?: string,
-    stock_type?: string,
-    remaining_stock?: number,
-    date?: TDateISO,
-    _destroy?: boolean
-  }>,
+  product_stock_movements_attributes: Array<ProductStockMovement>,
 }

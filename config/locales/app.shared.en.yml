@@ -562,5 +562,5 @@ en:
         main_image: "Main image"
       store:
         order_item:
-            total: "Total"
-            client: "Client"
+          total: "Total"
+          client: "Client"
