@@ -22,7 +22,7 @@ const CartButton: React.FC = () => {
    * Goto cart page
    */
   const showCart = () => {
-    window.location.href = '/#!/cart';
+    window.location.href = '/#!/store/cart';
   };
 
   return (
