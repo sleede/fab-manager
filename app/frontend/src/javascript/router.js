@@ -632,7 +632,7 @@ angular.module('application.router', ['ui.router'])
       })
 
       // cart
-      .state('app.public.cart', {
+      .state('app.public.store_cart', {
         url: '/store/cart',
         views: {
           'main@': {
