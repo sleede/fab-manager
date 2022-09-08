@@ -4,7 +4,7 @@
 */
 'use strict';
 
-Application.Controllers.controller('ShowOrdersController', ['$rootScope', '$scope', 'CSRF', 'growl', '$state', '$transition$',
+Application.Controllers.controller('AdminShowOrdersController', ['$rootScope', '$scope', 'CSRF', 'growl', '$state', '$transition$',
   function ($rootScope, $scope, CSRF, growl, $state, $transition$) {
     /* PRIVATE SCOPE */
 
@@ -29,7 +29,7 @@ Application.Controllers.controller('ShowOrdersController', ['$rootScope', '$scop
      * Click Callback triggered in case of back products list
      */
     $scope.backProductsList = () => {
-      $state.go('app.logged.dashboard.orders');
+      $state.go('app.admin.store.orders');
     };
 
     // currently logged-in user

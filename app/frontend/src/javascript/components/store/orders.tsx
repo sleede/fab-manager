@@ -4,12 +4,15 @@ import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
 import { Loader } from '../base/loader';
 import { IApplication } from '../../models/application';
+import { useForm } from 'react-hook-form';
 import { FabButton } from '../base/fab-button';
 import { StoreListHeader } from './store-list-header';
 import { AccordionItem } from './accordion-item';
 import { OrderItem } from './order-item';
 import { MemberSelect } from '../user/member-select';
 import { User } from '../../models/user';
+import { FormInput } from '../form/form-input';
+import { TDateISODate } from '../../typings/date-iso';
 
 declare const Application: IApplication;
 
@@ -35,8 +38,9 @@ type checklistOption = { value: number, label: string };
 // TODO: delete next eslint disable
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Orders: React.FC<OrdersProps> = ({ currentUser, onSuccess, onError }) => {
-  console.log('currentUser: ', currentUser);
   const { t } = useTranslation('admin');
+
+  const { register, getValues } = useForm();
 
   const [filters, setFilters] = useImmer<Filters>(initFilters);
   const [clearFilters, setClearFilters] = useState<boolean>(false);
@@ -120,6 +124,13 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onSuccess, onError }) => {
   };
 
   /**
+   * Filter: by period
+   */
+  const handlePeriod = () => {
+    console.log(getValues(['period_from', 'period_to']));
+  };
+
+  /**
    * Open/close accordion items
    */
   const handleAccordion = (id, state) => {
@@ -186,6 +197,27 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onSuccess, onError }) => {
               </div>
             </div>
           </AccordionItem>
+          <AccordionItem id={3}
+            isOpen={accordion[3]}
+            onChange={handleAccordion}
+            label={t('app.admin.store.orders.filter_period')}
+          >
+            <div className='content'>
+              <div className="group">
+                <div className="period">
+                  from
+                  <FormInput id="period_from"
+                             register={register}
+                             type="date" />
+                  to
+                  <FormInput id="period_to"
+                             register={register}
+                             type="date" />
+                </div>
+                <FabButton onClick={handlePeriod} className="is-info">{t('app.admin.store.orders.filter_apply')}</FabButton>
+              </div>
+            </div>
+          </AccordionItem>
         </div>
       </div>
 
@@ -216,11 +248,15 @@ Application.Components.component('orders', react2angular(OrdersWrapper, ['curren
 interface Filters {
   reference: string,
   status: checklistOption[],
-  memberId: number
+  memberId: number,
+  period_from: TDateISODate,
+  period_to: TDateISODate
 }
 
 const initFilters: Filters = {
   reference: '',
   status: [],
-  memberId: null
+  memberId: null,
+  period_from: null,
+  period_to: null
 };

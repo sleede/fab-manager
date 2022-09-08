@@ -930,7 +930,7 @@ angular.module('application.router', ['ui.router'])
         views: {
           'main@': {
             templateUrl: '/admin/orders/show.html',
-            controller: 'ShowOrdersController'
+            controller: 'AdminShowOrdersController'
           }
         }
       })

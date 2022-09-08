@@ -35,6 +35,7 @@
   }
   .date { @include text-sm; }
   .price {
+    flex: 0 1 30%;
     display: flex;
     flex-direction: column;
     justify-self: flex-end;
