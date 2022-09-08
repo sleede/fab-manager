@@ -1899,7 +1899,7 @@ en:
         all_products: "All products"
         categories_of_store: "Store's categories"
         the_orders: "Orders"
-        back_products_list: "Back to products list"
+        back_to_list: "Back to list"
         product_categories:
           title: "Categories"
           info: "<strong>Information:</strong></br>Find below all the categories created. The categories are arranged on two levels maximum, you can arrange them with a drag and drop. The order of the categories will be identical on the public view and the list below. Please note that you can delete a category or a sub-category even if they are associated with products. The latter will be left without categories. If you delete a category that contains sub-categories, the latter will also be deleted. <strong>Make sure that your categories are well arranged and save your choice.</strong>"
@@ -2050,21 +2050,6 @@ en:
           sort:
             newest: "Newest first"
             oldest: "Oldest first"
-        show_order:
-          see_invoice: "See invoice"
-          client: "Client"
-          created_at: "Creation date"
-          last_update: "Last update"
-          cart: "Cart"
-          reference_short: "ref:"
-          unit: "Unit"
-          item_total: "Total"
-          payment_informations : "Payment informations"
-          amount: "Amount"
-          products_total: "Products total"
-          gift_total: "Discount total"
-          coupon: "Coupon"
-          cart_total: "Cart total"
       store_settings:
         title: 'Settings'
         withdrawal_instructions: 'Product withdrawal instructions'

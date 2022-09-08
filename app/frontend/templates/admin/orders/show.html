@@ -12,8 +12,8 @@
   <div class="show-order-nav">
     <a class="back-btn" ng-click="backProductsList()" tabindex="0">
       <i class="fas fa-angle-left"></i>
-      <span translate>{{ 'app.admin.store.back_products_list' }}</span>
+      <span translate>{{ 'app.admin.store.back_to_list' }}</span>
     </a>
   </div>
-  <show-order order-token="orderToken" on-error="onError" on-success="onSuccess" />
+  <show-order current-user="currentUser" order-ref="orderRef" on-error="onError" on-success="onSuccess" />
 </section>
