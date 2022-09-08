@@ -29,6 +29,12 @@ export const MemberSelect: React.FC<MemberSelectProps> = ({ defaultUser, onSelec
     }
   }, []);
 
+  useEffect(() => {
+    if (!defaultUser && value) {
+      onSelected(value.value);
+    }
+  }, [defaultUser]);
+
   /**
    * search members by name
    */

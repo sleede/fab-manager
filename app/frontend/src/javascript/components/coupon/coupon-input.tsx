@@ -27,12 +27,19 @@ export const CouponInput: React.FC<CouponInputProps> = ({ user, amount, onChange
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const [coupon, setCoupon] = useState<Coupon>();
+  const [code, setCode] = useState<string>();
 
   useEffect(() => {
-    if (user && coupon) {
-      handleChange(coupon.code);
+    if (user && code) {
+      handleChange(code);
     }
   }, [user]);
+
+  useEffect(() => {
+    if (code) {
+      handleChange(code);
+    }
+  }, [amount]);
 
   /**
    * callback for validate the code
@@ -42,6 +49,7 @@ export const CouponInput: React.FC<CouponInputProps> = ({ user, amount, onChange
     setMessages([]);
     setError(false);
     setCoupon(null);
+    setCode(value);
     if (value) {
       setLoading(true);
       CouponAPI.validate(value, amount, user?.id).then((res) => {
