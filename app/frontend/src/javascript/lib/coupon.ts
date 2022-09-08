@@ -5,9 +5,9 @@ export const computePriceWithCoupon = (price: number, coupon?: Coupon): number =
     return price;
   }
   if (coupon.type === 'percent_off') {
-    return price - (price * coupon.percent_off / 100.00);
+    return (Math.trunc(price * 100) - (Math.trunc(price * 100) * coupon.percent_off / 100)) / 100;
   } else if (coupon.type === 'amount_off' && price > coupon.amount_off) {
-    return price - coupon.amount_off;
+    return (Math.trunc(price * 100) - Math.trunc(coupon.amount_off * 100)) / 100;
   }
   return price;
 };

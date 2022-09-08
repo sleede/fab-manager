@@ -15,7 +15,7 @@ class Cart::AddItemService
     else
       item.quantity += quantity.to_i
     end
-    order.total += (orderable.amount * quantity.to_i)
+    order.total += (item.amount * quantity.to_i)
     ActiveRecord::Base.transaction do
       item.save
       order.save

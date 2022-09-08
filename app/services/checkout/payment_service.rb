@@ -11,7 +11,7 @@ class Checkout::PaymentService
 
     raise Cart::InactiveProductError unless Orders::OrderService.new.all_products_is_active?(order)
 
-    CouponService.new.validate(coupon_code, order.statistic_profile.user)
+    CouponService.new.validate(coupon_code, order.statistic_profile.user.id)
 
     amount = debit_amount(order)
     if operator.privileged? || amount.zero?

@@ -11,7 +11,6 @@ import ProductCategoryAPI from '../../api/product-category';
 import MachineAPI from '../../api/machine';
 import { StoreProductItem } from './store-product-item';
 import useCart from '../../hooks/use-cart';
-import { emitCustomEvent } from 'react-custom-events';
 import { User } from '../../models/user';
 import { Order } from '../../models/order';
 import { AccordionItem } from './accordion-item';
@@ -66,10 +65,6 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser }) => {
       onError(t('app.public.store.unexpected_error_occurred'));
     });
   }, []);
-
-  useEffect(() => {
-    emitCustomEvent('CartUpdate', cart);
-  }, [cart]);
 
   /**
    * Create categories tree (parent/children)
@@ -234,7 +229,7 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser }) => {
         />
         <div className="products-grid">
           {products.map((product) => (
-            <StoreProductItem key={product.id} product={product} cart={cart} onSuccessAddProductToCart={addToCart} />
+            <StoreProductItem key={product.id} product={product} cart={cart} onSuccessAddProductToCart={addToCart} onError={onError} />
           ))}
         </div>
       </div>
