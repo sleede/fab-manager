@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { emitCustomEvent } from 'react-custom-events';
 import { Order } from '../models/order';
 import CartAPI from '../api/cart';
 import { getCartToken, setCartToken } from '../lib/cart-token';
@@ -13,7 +14,7 @@ export default function useCart (user?: User) {
     async function createCart () {
       const currentCartToken = getCartToken();
       const data = await CartAPI.create(currentCartToken);
-      setCart(data);
+      _setCart(data);
       setLoading(false);
       setCartToken(data.token);
     }
@@ -30,7 +31,7 @@ export default function useCart (user?: User) {
     setLoading(true);
     const currentCartToken = getCartToken();
     const data = await CartAPI.create(currentCartToken);
-    setCart(data);
+    _setCart(data);
     setLoading(false);
   };
 
@@ -40,5 +41,10 @@ export default function useCart (user?: User) {
     }
   }, [user]);
 
-  return { loading, cart, error, setCart, reloadCart };
+  const _setCart = (data: Order) => {
+    setCart(data);
+    emitCustomEvent('CartUpdate', data);
+  };
+
+  return { loading, cart, error, setCart: _setCart, reloadCart };
 }

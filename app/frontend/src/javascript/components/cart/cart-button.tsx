@@ -28,7 +28,9 @@ const CartButton: React.FC = () => {
   return (
     <div className="cart-button" onClick={showCart}>
       <i className="fas fa-cart-arrow-down" />
-      <span>{cart?.order_items_attributes?.length}</span>
+      {cart && cart.order_items_attributes.length > 0 &&
+        <span>{cart.order_items_attributes.length}</span>
+      }
       <p>{t('app.public.cart_button.my_cart')}</p>
     </div>
   );
