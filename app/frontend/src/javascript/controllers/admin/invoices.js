@@ -98,6 +98,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         rateTraining: '',
         rateEvent: '',
         rateSubscription: '',
+        rateProduct: '',
         editTemplateUrl: '/admin/invoices/settings/editMultiVAT.html',
         historyTemplateUrl: '/admin/invoices/settings/multiVATHistory.html'
       },
@@ -202,6 +203,14 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       packLabel: {
         name: 'accounting_Pack_label',
         value: settings.accounting_Pack_label
+      },
+      productCode: {
+        name: 'accounting_Product_code',
+        value: settings.accounting_Product_code
+      },
+      productLabel: {
+        name: 'accounting_Product_label',
+        value: settings.accounting_Product_label
       },
       errorCode: {
         name: 'accounting_Error_code',
@@ -550,7 +559,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
               }]
             });
             return editMultiVATModalInstance.result.then(function (result) {
-              ['Machine', 'Space', 'Training', 'Event', 'Subscription'].forEach(rateType => {
+              ['Machine', 'Space', 'Training', 'Event', 'Subscription', 'Product'].forEach(rateType => {
                 const value = _.isFinite(result.multiVAT[`rate${rateType}`]) ? result.multiVAT[`rate${rateType}`] + '' : '';
                 Setting.update({ name: `invoice_VAT-rate_${rateType}` }, { value }, function (data) {
                   return growl.success(_t('app.admin.invoices.VAT_rate_successfully_saved'));
@@ -1054,6 +1063,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       $scope.invoice.multiVAT.rateTraining = settings['invoice_VAT-rate_Training'] ? parseFloat(settings['invoice_VAT-rate_Training']) : '';
       $scope.invoice.multiVAT.rateEvent = settings['invoice_VAT-rate_Event'] ? parseFloat(settings['invoice_VAT-rate_Event']) : '';
       $scope.invoice.multiVAT.rateSubscription = settings['invoice_VAT-rate_Subscription'] ? parseFloat(settings['invoice_VAT-rate_Subscription']) : '';
+      $scope.invoice.multiVAT.rateProduct = settings['invoice_VAT-rate_Product'] ? parseFloat(settings['invoice_VAT-rate_Product']) : '';
       $scope.invoice.number.model = settings['invoice_order-nb'];
       $scope.invoice.code.model = settings['invoice_code-value'];
       $scope.invoice.code.active = (settings['invoice_code-active'] === 'true');

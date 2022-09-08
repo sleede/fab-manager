@@ -60,6 +60,7 @@ export const invoicesSettings = [
   'invoice_VAT-rate_Space',
   'invoice_VAT-rate_Event',
   'invoice_VAT-rate_Subscription',
+  'invoice_VAT-rate_Product',
   'invoice_text',
   'invoice_legals',
   'invoice_prefix',
@@ -114,7 +115,9 @@ export const accountingSettings = [
   'accounting_Event_code',
   'accounting_Event_label',
   'accounting_Space_code',
-  'accounting_Space_label'
+  'accounting_Space_label',
+  'accounting_Product_code',
+  'accounting_Product_label'
 ];
 
 export const modulesSettings = [

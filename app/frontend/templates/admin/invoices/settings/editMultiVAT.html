@@ -49,6 +49,14 @@
         <button class="btn pull-right" ng-click="showMultiRateHistory('Subscription')"><i class="fa fa-history"></i></button>
       </div>
     </div>
+    <div class="form-group">
+      <label for="vatRateProduct" class="control-label" translate>{{ 'app.admin.invoices.VAT_rate_product' }}</label>
+      <div class="input-group">
+        <span class="input-group-addon">% </span>
+        <input id="vatRateSubscription" type="number" ng-model="multiVAT.rateProduct" class="form-control multi-vat-rate-input" min="0" max="100"/>
+        <button class="btn pull-right" ng-click="showMultiRateHistory('Product')"><i class="fa fa-history"></i></button>
+      </div>
+    </div>
   </div>
   <div class="modal-footer">
     <button class="btn btn-warning" ng-click="ok()" translate>{{ 'app.shared.buttons.confirm' }}</button>

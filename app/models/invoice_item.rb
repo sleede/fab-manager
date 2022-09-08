@@ -23,7 +23,7 @@ class InvoiceItem < Footprintable
     # deduct VAT
     vat_service = VatHistoryService.new
     vat_rate = vat_service.invoice_item_vat(self)
-    Rational(amount_after_coupon / (vat_rate / 100.00 + 1)).round.to_f
+    Rational(amount_after_coupon / ((vat_rate / 100.00) + 1)).round.to_f
   end
 
   # return the VAT amount for this item
@@ -31,7 +31,7 @@ class InvoiceItem < Footprintable
     amount_after_coupon - net_amount
   end
 
-  # return invoice item type (Machine/Training/Space/Event/Subscription) used to determine the VAT rate
+  # return invoice item type (Machine/Training/Space/Event/Subscription/Order) used to determine the VAT rate
   def invoice_item_type
     if object_type == Reservation.name
       object.try(:reservable_type) || ''
@@ -39,6 +39,8 @@ class InvoiceItem < Footprintable
       Subscription.name
     elsif object_type == StatisticProfilePrepaidPack.name
       object.prepaid_pack.priceable_type
+    elsif object_type == Order.name
+      Product.name
     else
       ''
     end
