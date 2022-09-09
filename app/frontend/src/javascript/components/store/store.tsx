@@ -49,13 +49,12 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser }) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
-    ProductAPI.index({ page: 1 }).then(data => {
+    ProductAPI.index({ page: 1, is_active: true }).then(data => {
       setPageCount(data.total_pages);
       setProducts(data.products);
     }).catch(() => {
       onError(t('app.public.store.unexpected_error_occurred'));
     });
-
     ProductCategoryAPI.index().then(data => {
       setProductCategories(data);
       formatCategories(data);
@@ -69,14 +68,6 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser }) => {
       onError(t('app.public.store.unexpected_error_occurred'));
     });
   }, []);
-
-  useEffect(() => {
-    ProductAPI.index({ page: currentPage }).then(data => {
-      setProducts(data.products);
-      setPageCount(data.total_pages);
-      window.document.getElementById('content-main').scrollTo({ top: 100, behavior: 'smooth' });
-    });
-  }, [currentPage]);
 
   /**
    * Create categories tree (parent/children)
@@ -153,6 +144,22 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser }) => {
   const addToCart = (cart: Order) => {
     setCart(cart);
     onSuccess(t('app.public.store.add_to_cart_success'));
+  };
+
+  /**
+   * Handle products pagination
+   */
+  const handlePagination = (page: number) => {
+    if (page !== currentPage) {
+      ProductAPI.index({ page, is_active: true }).then(data => {
+        setCurrentPage(page);
+        setProducts(data.products);
+        setPageCount(data.total_pages);
+        window.document.getElementById('content-main').scrollTo({ top: 100, behavior: 'smooth' });
+      }).catch(() => {
+        onError(t('app.public.store.unexpected_error_occurred'));
+      });
+    }
   };
 
   return (
@@ -245,7 +252,7 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser }) => {
           ))}
         </div>
         {pageCount > 1 &&
-          <FabPagination pageCount={pageCount} currentPage={currentPage} selectPage={setCurrentPage} />
+          <FabPagination pageCount={pageCount} currentPage={currentPage} selectPage={handlePagination} />
         }
       </div>
     </div>

@@ -10,14 +10,17 @@ class ProductService
       state = filters[:disabled] == 'false' ? [nil, false] : true
       products = products.where(is_active: state)
     end
-    if filters[:page].present?
-      products = products.page(filters[:page]).per(PRODUCTS_PER_PAGE)
-    end
+    products = products.page(filters[:page]).per(PRODUCTS_PER_PAGE) if filters[:page].present?
     products
   end
 
-  def self.pages
-    Product.page(1).per(PRODUCTS_PER_PAGE).total_pages
+  def self.pages(filters)
+    products = Product.all
+    if filters[:is_active].present?
+      state = filters[:disabled] == 'false' ? [nil, false] : true
+      products = Product.where(is_active: state)
+    end
+    products.page(1).per(PRODUCTS_PER_PAGE).total_pages
   end
 
   # amount params multiplied by hundred

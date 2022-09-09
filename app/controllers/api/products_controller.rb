@@ -8,7 +8,7 @@ class API::ProductsController < API::ApiController
 
   def index
     @products = ProductService.list(params)
-    @pages = ProductService.pages if params[:page].present?
+    @pages = ProductService.pages(params) if params[:page].present?
   end
 
   def show
