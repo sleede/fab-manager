@@ -31,7 +31,7 @@ class InvoiceItem < Footprintable
     amount_after_coupon - net_amount
   end
 
-  # return invoice item type (Machine/Training/Space/Event/Subscription/Order) used to determine the VAT rate
+  # return invoice item type (Machine/Training/Space/Event/Subscription/OrderItem) used to determine the VAT rate
   def invoice_item_type
     if object_type == Reservation.name
       object.try(:reservable_type) || ''
@@ -39,7 +39,7 @@ class InvoiceItem < Footprintable
       Subscription.name
     elsif object_type == StatisticProfilePrepaidPack.name
       object.prepaid_pack.priceable_type
-    elsif object_type == Order.name
+    elsif object_type == OrderItem.name
       Product.name
     else
       ''

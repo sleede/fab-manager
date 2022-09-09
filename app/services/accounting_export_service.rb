@@ -72,7 +72,7 @@ class AccountingExportService
       rows << "#{wallet_row(invoice)}\n"
     when 'StatisticProfilePrepaidPack'
       rows << "#{pack_row(invoice)}\n"
-    when 'Order'
+    when 'OrderItem'
       rows << "#{product_row(invoice)}\n"
     when 'Error'
       items = invoice.invoice_items.reject { |ii| ii.object_type == 'Subscription' }
@@ -248,8 +248,8 @@ class AccountingExportService
         Rails.logger.debug { "WARN: Invoice #{invoice.id} has no prepaid-pack" }
       end
     when :product
-      if invoice.main_item.object_type == 'Order'
-        Setting.get("accounting_VAT_#{type}")
+      if invoice.main_item.object_type == 'OrderItem'
+        Setting.get("accounting_Product_#{type}")
       else
         Rails.logger.debug { "WARN: Invoice #{invoice.id} has no prepaid-pack" }
       end

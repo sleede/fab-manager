@@ -35,7 +35,21 @@ module Payments::PaymentConcern
       order.order_items.each do |item|
         ProductService.update_stock(item.orderable, 'external', 'sold', -item.quantity, item.id)
       end
-      order.save
+      if order.save
+        invoice = InvoicesService.create(
+          { total: order.total, coupon: coupon },
+          order.operator_profile_id,
+          order.order_items,
+          order.statistic_profile.user,
+          payment_id: payment_id,
+          payment_type: payment_type,
+          payment_method: order.payment_method
+        )
+        invoice.wallet_amount = order.wallet_amount
+        invoice.wallet_transaction_id = order.wallet_transaction_id
+        invoice.save
+        order.update_attribute(:invoice_id, invoice.id)
+      end
       order.reload
     end
   end
