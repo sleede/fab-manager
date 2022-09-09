@@ -6,6 +6,7 @@ import { Control, FormState } from 'react-hook-form/dist/types/form';
 import { FormSelect } from '../form/form-select';
 import { FormInput } from '../form/form-input';
 import { FabButton } from '../base/fab-button';
+import { FieldValues } from 'react-hook-form/dist/types/fields';
 
 type selectOption = { value: number, label: string };
 
@@ -23,7 +24,7 @@ interface ProductStockModalProps<TFieldValues, TContext extends object> {
  */
 // TODO: delete next eslint disable
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const ProductStockModal = <TFieldValues, TContext extends object> ({ product, register, control, formState, onError, onSuccess }: ProductStockModalProps<TFieldValues, TContext>) => {
+export const ProductStockModal = <TFieldValues extends FieldValues, TContext extends object> ({ product, register, control, formState, onError, onSuccess }: ProductStockModalProps<TFieldValues, TContext>) => {
   const { t } = useTranslation('admin');
 
   const [movement, setMovement] = useState<'in' | 'out'>('in');

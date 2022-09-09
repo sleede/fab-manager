@@ -22,11 +22,11 @@ export interface ProductsIndex {
 }
 
 export interface Product {
-  id: number,
+  id?: number,
   name: string,
   slug: string,
-  sku: string,
-  description: string,
+  sku?: string,
+  description?: string,
   is_active: boolean,
   product_category_id?: number,
   amount?: number,

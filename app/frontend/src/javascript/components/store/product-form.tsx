@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useForm, useWatch } from 'react-hook-form';
+import { SubmitHandler, useForm, useWatch } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import slugify from 'slugify';
 import _ from 'lodash';
@@ -19,6 +19,7 @@ import MachineAPI from '../../api/machine';
 import ProductAPI from '../../api/product';
 import { Plus } from 'phosphor-react';
 import { ProductStockForm } from './product-stock-form';
+import ProductLib from '../../lib/product';
 
 interface ProductFormProps {
   product: Product,
@@ -53,18 +54,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
 
   useEffect(() => {
     ProductCategoryAPI.index().then(data => {
-      // Map product categories by position
-      const sortedCategories = data
-        .filter(c => !c.parent_id)
-        .sort((a, b) => a.position - b.position);
-      const childrenCategories = data
-        .filter(c => typeof c.parent_id === 'number')
-        .sort((a, b) => b.position - a.position);
-      childrenCategories.forEach(c => {
-        const parentIndex = sortedCategories.findIndex(i => i.id === c.parent_id);
-        sortedCategories.splice(parentIndex + 1, 0, c);
-      });
-      setProductCategories(buildSelectOptions(sortedCategories));
+      setProductCategories(buildSelectOptions(new ProductLib().sortCategories(data)));
     }).catch(onError);
     MachineAPI.index({ disabled: false }).then(data => {
       setMachines(buildChecklistOptions(data));
@@ -111,10 +101,8 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
   /**
    * Callback triggered when the form is submitted: process with the product creation or update.
    */
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    return handleSubmit((data: Product) => {
-      saveProduct(data);
-    })(event);
+  const onSubmit: SubmitHandler<Product> = (data: Product) => {
+    saveProduct(data);
   };
 
   /**
@@ -236,13 +224,13 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
           <FabButton className="main-action-btn" onClick={handleSubmit(saveProduct)}>{t('app.admin.store.product_form.save')}</FabButton>
         </div>
       </header>
-      <form className="product-form" onSubmit={onSubmit}>
+      <form className="product-form" onSubmit={handleSubmit(onSubmit)}>
         <div className='tabs'>
           <p className={!stockTab ? 'is-active' : ''} onClick={() => setStockTab(false)}>{t('app.admin.store.product_form.product_parameters')}</p>
           <p className={stockTab ? 'is-active' : ''} onClick={() => setStockTab(true)}>{t('app.admin.store.product_form.stock_management')}</p>
         </div>
         {stockTab
-          ? <ProductStockForm product={product} register={register} control={control} id="stock" onError={onError} onSuccess={onSuccess} />
+          ? <ProductStockForm product={product} register={register} control={control} formState={formState} onError={onError} onSuccess={onSuccess} />
           : <section>
             <div className="subgrid">
               <FormInput id="name"

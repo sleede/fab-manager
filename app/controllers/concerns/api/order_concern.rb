@@ -17,6 +17,6 @@ module API::OrderConcern
   end
 
   def cart_params
-    params.permit(:order_token, :orderable_id, :quantity, :user_id)
+    params.permit(:order_token, :orderable_id, :quantity, :user_id, :is_offered)
   end
 end

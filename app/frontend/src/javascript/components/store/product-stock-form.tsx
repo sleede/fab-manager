@@ -12,6 +12,7 @@ import { FabButton } from '../base/fab-button';
 import { PencilSimple } from 'phosphor-react';
 import { FabModal, ModalSize } from '../base/fab-modal';
 import { ProductStockModal } from './product-stock-modal';
+import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { FabStateLabel } from '../base/fab-state-label';
 
 interface ProductStockFormProps<TFieldValues, TContext extends object> {
@@ -26,7 +27,7 @@ interface ProductStockFormProps<TFieldValues, TContext extends object> {
 /**
  * Form tab to manage a product's stock
  */
-export const ProductStockForm = <TFieldValues, TContext extends object> ({ product, register, control, formState, onError, onSuccess }: ProductStockFormProps<TFieldValues, TContext>) => {
+export const ProductStockForm = <TFieldValues extends FieldValues, TContext extends object> ({ product, register, control, formState, onError, onSuccess }: ProductStockFormProps<TFieldValues, TContext>) => {
   const { t } = useTranslation('admin');
 
   const [activeThreshold, setActiveThreshold] = useState<boolean>(false);
@@ -197,12 +198,11 @@ export const ProductStockForm = <TFieldValues, TContext extends object> ({ produ
       </div>
 
       <FabModal title={t('app.admin.store.product_stock_form.modal_title')}
-        className="fab-modal-lg"
         width={ModalSize.large}
         isOpen={isOpen}
         toggleModal={toggleModal}
         closeButton>
-          <ProductStockModal product={product} register={register} control={control} id="stock-modal" onError={onError} onSuccess={onSuccess} />
+          <ProductStockModal product={product} register={register} control={control} formState={formState} onError={onError} onSuccess={onSuccess} />
       </FabModal>
     </section>
   );

@@ -10,7 +10,7 @@ if order&.statistic_profile&.user
   end
 end
 
-json.order_items_attributes order.order_items do |item|
+json.order_items_attributes order.order_items.order(created_at: :asc) do |item|
   json.id item.id
   json.orderable_type item.orderable_type
   json.orderable_id item.orderable_id

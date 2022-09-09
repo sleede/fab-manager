@@ -31,6 +31,12 @@ class API::CartController < API::ApiController
     render 'api/orders/show'
   end
 
+  def set_offer
+    authorize @current_order, policy_class: CartPolicy
+    @order = Cart::SetOfferService.new.call(@current_order, orderable, cart_params[:is_offered])
+    render 'api/orders/show'
+  end
+
   private
 
   def orderable

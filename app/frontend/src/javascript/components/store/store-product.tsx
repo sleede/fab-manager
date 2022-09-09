@@ -7,9 +7,12 @@ import { Loader } from '../base/loader';
 import { IApplication } from '../../models/application';
 import _ from 'lodash';
 import { Product } from '../../models/product';
+import { User } from '../../models/user';
 import ProductAPI from '../../api/product';
+import CartAPI from '../../api/cart';
 import noImage from '../../../../images/no_image.png';
 import { FabButton } from '../base/fab-button';
+import useCart from '../../hooks/use-cart';
 import { FilePdf, Minus, Plus } from 'phosphor-react';
 import { FabStateLabel } from '../base/fab-state-label';
 
@@ -17,15 +20,18 @@ declare const Application: IApplication;
 
 interface StoreProductProps {
   productSlug: string,
+  onSuccess: (message: string) => void,
   onError: (message: string) => void,
+  currentUser?: User
 }
 
 /**
  * This component shows a product
  */
-export const StoreProduct: React.FC<StoreProductProps> = ({ productSlug, onError }) => {
+export const StoreProduct: React.FC<StoreProductProps> = ({ productSlug, currentUser, onSuccess, onError }) => {
   const { t } = useTranslation('public');
 
+  const { cart, setCart } = useCart(currentUser);
   const [product, setProduct] = useState<Product>();
   const [showImage, setShowImage] = useState<number>(null);
   const [toCartCount, setToCartCount] = useState<number>(0);
@@ -37,11 +43,13 @@ export const StoreProduct: React.FC<StoreProductProps> = ({ productSlug, onError
     ProductAPI.get(productSlug).then(data => {
       setProduct(data);
       const productImage = _.find(data.product_images_attributes, { is_main: true });
-      setShowImage(productImage.id);
+      if (productImage) {
+        setShowImage(productImage.id);
+      }
       setToCartCount(data.quantity_min ? data.quantity_min : 1);
       setDisplayToggle(descContainer.current.offsetHeight < descContainer.current.scrollHeight);
-    }).catch(() => {
-      onError(t('app.public.store_product.unexpected_error_occurred'));
+    }).catch((e) => {
+      onError(t('app.public.store_product.unexpected_error_occurred') + e);
     });
   }, []);
 
@@ -108,7 +116,10 @@ export const StoreProduct: React.FC<StoreProductProps> = ({ productSlug, onError
    * Add product to cart
    */
   const addToCart = () => {
-    console.log('Add', toCartCount, 'to cart');
+    CartAPI.addItem(cart, product.id, toCartCount).then(data => {
+      setCart(data);
+      onSuccess(t('app.public.store.add_to_cart_success'));
+    }).catch(onError);
   };
 
   if (product) {
@@ -188,12 +199,12 @@ export const StoreProduct: React.FC<StoreProductProps> = ({ productSlug, onError
   return null;
 };
 
-const StoreProductWrapper: React.FC<StoreProductProps> = ({ productSlug, onError }) => {
+const StoreProductWrapper: React.FC<StoreProductProps> = (props) => {
   return (
     <Loader>
-      <StoreProduct productSlug={productSlug} onError={onError} />
+      <StoreProduct {...props} />
     </Loader>
   );
 };
 
-Application.Components.component('storeProduct', react2angular(StoreProductWrapper, ['productSlug', 'onError']));
+Application.Components.component('storeProduct', react2angular(StoreProductWrapper, ['productSlug', 'currentUser', 'onSuccess', 'onError']));

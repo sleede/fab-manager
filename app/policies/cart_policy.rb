@@ -13,4 +13,8 @@ class CartPolicy < ApplicationPolicy
       record.statistic_profile_id.nil? && record.operator_profile_id.nil?
     end
   end
+
+  def set_offer?
+    user.privileged?
+  end
 end

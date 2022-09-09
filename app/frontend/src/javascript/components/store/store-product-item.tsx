@@ -12,13 +12,14 @@ import noImage from '../../../../images/no_image.png';
 interface StoreProductItemProps {
   product: Product,
   cart: Order,
-  onSuccessAddProductToCart: (cart: Order) => void
+  onSuccessAddProductToCart: (cart: Order) => void,
+  onError: (message: string) => void
 }
 
 /**
  * This component shows a product item in store
  */
-export const StoreProductItem: React.FC<StoreProductItemProps> = ({ product, cart, onSuccessAddProductToCart }) => {
+export const StoreProductItem: React.FC<StoreProductItemProps> = ({ product, cart, onSuccessAddProductToCart, onError }) => {
   const { t } = useTranslation('public');
 
   /**
@@ -38,7 +39,7 @@ export const StoreProductItem: React.FC<StoreProductItemProps> = ({ product, car
   const addProductToCart = (e: React.BaseSyntheticEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    CartAPI.addItem(cart, product.id, 1).then(onSuccessAddProductToCart);
+    CartAPI.addItem(cart, product.id, 1).then(onSuccessAddProductToCart).catch(onError);
   };
 
   /**
