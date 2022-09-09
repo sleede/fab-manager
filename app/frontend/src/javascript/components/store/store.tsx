@@ -16,6 +16,7 @@ import { User } from '../../models/user';
 import { Order } from '../../models/order';
 import { AccordionItem } from './accordion-item';
 import { StoreListHeader } from './store-list-header';
+import { FabPagination } from '../base/fab-pagination';
 
 declare const Application: IApplication;
 
@@ -45,10 +46,13 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser }) => {
   const [filterVisible, setFilterVisible] = useState<boolean>(false);
   const [machines, setMachines] = useState<checklistOption[]>([]);
   const [accordion, setAccordion] = useState({});
+  const [pageCount, setPageCount] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
-    ProductAPI.index({ is_active: true }).then(data => {
-      setProducts(data);
+    ProductAPI.index({ page: 1 }).then(data => {
+      setPageCount(data.total_pages);
+      setProducts(data.products);
     }).catch(() => {
       onError(t('app.public.store.unexpected_error_occurred'));
     });
@@ -70,6 +74,14 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser }) => {
   useEffect(() => {
     emitCustomEvent('CartUpdate', cart);
   }, [cart]);
+
+  useEffect(() => {
+    ProductAPI.index({ page: currentPage }).then(data => {
+      setProducts(data.products);
+      setPageCount(data.total_pages);
+      window.document.getElementById('content-main').scrollTo({ top: 100, behavior: 'smooth' });
+    });
+  }, [currentPage]);
 
   /**
    * Create categories tree (parent/children)
@@ -237,6 +249,9 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser }) => {
             <StoreProductItem key={product.id} product={product} cart={cart} onSuccessAddProductToCart={addToCart} />
           ))}
         </div>
+        {pageCount > 1 &&
+          <FabPagination pageCount={pageCount} currentPage={currentPage} selectPage={setCurrentPage} />
+        }
       </div>
     </div>
   );

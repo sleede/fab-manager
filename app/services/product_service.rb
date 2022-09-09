@@ -2,13 +2,22 @@
 
 # Provides methods for Product
 class ProductService
+  PRODUCTS_PER_PAGE = 2
+
   def self.list(filters)
     products = Product.includes(:product_images)
     if filters[:is_active].present?
       state = filters[:disabled] == 'false' ? [nil, false] : true
       products = products.where(is_active: state)
     end
+    if filters[:page].present?
+      products = products.page(filters[:page]).per(PRODUCTS_PER_PAGE)
+    end
     products
+  end
+
+  def self.pages
+    Product.page(1).per(PRODUCTS_PER_PAGE).total_pages
   end
 
   # amount params multiplied by hundred

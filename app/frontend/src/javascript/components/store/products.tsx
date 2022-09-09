@@ -14,6 +14,7 @@ import MachineAPI from '../../api/machine';
 import { AccordionItem } from './accordion-item';
 import { X } from 'phosphor-react';
 import { StoreListHeader } from './store-list-header';
+import { FabPagination } from '../base/fab-pagination';
 
 declare const Application: IApplication;
 
@@ -33,8 +34,6 @@ interface ProductsProps {
 const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
   const { t } = useTranslation('admin');
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [products, setProducts] = useState<Array<Product>>([]);
   const [filteredProductsList, setFilteredProductList] = useImmer<Array<Product>>([]);
   const [features, setFeatures] = useImmer<Filters>(initFilters);
   const [filterVisible, setFilterVisible] = useState<boolean>(false);
@@ -44,11 +43,13 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
   const [machines, setMachines] = useState<checklistOption[]>([]);
   const [update, setUpdate] = useState(false);
   const [accordion, setAccordion] = useState({});
+  const [pageCount, setPageCount] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
-    ProductAPI.index().then(data => {
-      setProducts(data);
-      setFilteredProductList(data);
+    ProductAPI.index({ page: 1 }).then(data => {
+      setPageCount(data.total_pages);
+      setFilteredProductList(data.products);
     });
 
     ProductCategoryAPI.index().then(data => {
@@ -72,6 +73,14 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
   }, []);
 
   useEffect(() => {
+    ProductAPI.index({ page: currentPage }).then(data => {
+      setFilteredProductList(data.products);
+      setPageCount(data.total_pages);
+      window.document.getElementById('content-main').scrollTo({ top: 100, behavior: 'smooth' });
+    });
+  }, [currentPage]);
+
+  useEffect(() => {
     applyFilters();
     setClearFilters(false);
     setUpdate(false);
@@ -91,7 +100,7 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
     try {
       await ProductAPI.destroy(productId);
       const data = await ProductAPI.index();
-      setProducts(data);
+      setFilteredProductList(data.products);
       onSuccess(t('app.admin.store.products.successfully_deleted'));
     } catch (e) {
       onError(t('app.admin.store.products.unable_to_delete') + e);
@@ -307,6 +316,9 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
             />
           ))}
         </div>
+        {pageCount > 1 &&
+          <FabPagination pageCount={pageCount} currentPage={currentPage} selectPage={setCurrentPage} />
+        }
       </div>
     </div>
   );

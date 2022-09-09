@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
 import { Loader } from '../base/loader';
 import { IApplication } from '../../models/application';
 import { StoreListHeader } from './store-list-header';
 import { OrderItem } from './order-item';
+import { FabPagination } from '../base/fab-pagination';
 
 declare const Application: IApplication;
 
@@ -24,6 +25,11 @@ type selectOption = { value: number, label: string };
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const OrdersDashboard: React.FC<OrdersDashboardProps> = ({ onError }) => {
   const { t } = useTranslation('public');
+
+  // TODO: delete next eslint disable
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [pageCount, setPageCount] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   /**
    * Creates sorting options to the react-select format
@@ -56,6 +62,9 @@ export const OrdersDashboard: React.FC<OrdersDashboardProps> = ({ onError }) => 
         <div className="orders-list">
           <OrderItem />
         </div>
+        {pageCount > 1 &&
+          <FabPagination pageCount={pageCount} currentPage={currentPage} selectPage={setCurrentPage} />
+        }
       </div>
     </section>
   );

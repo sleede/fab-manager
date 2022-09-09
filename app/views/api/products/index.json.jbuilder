@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-json.array! @products do |product|
+json.total_pages @pages if @pages.present?
+json.products @products do |product|
   json.extract! product, :id, :name, :slug, :sku, :is_active, :product_category_id, :quantity_min, :stock, :machine_ids,
                 :low_stock_threshold
   json.amount product.amount / 100.0 if product.amount.present?

@@ -2,7 +2,8 @@ import { TDateISO } from '../typings/date-iso';
 import { ApiFilter } from './api';
 
 export interface ProductIndexFilter extends ApiFilter {
-  is_active: boolean,
+  is_active?: boolean,
+  page?: number
 }
 
 export enum StockType {
@@ -13,6 +14,11 @@ export enum StockType {
 export interface Stock {
   internal: number,
   external: number,
+}
+
+export interface ProductsIndex {
+  total_pages?: number,
+  products: Array<Product>
 }
 
 export interface Product {
