@@ -2,7 +2,7 @@
 
 # Provides methods for Product
 class ProductService
-  PRODUCTS_PER_PAGE = 2
+  PRODUCTS_PER_PAGE = 12
 
   def self.list(filters)
     products = Product.includes(:product_images)
