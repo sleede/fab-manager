@@ -21,6 +21,10 @@ class Order < PaymentDocument
 
   delegate :user, to: :statistic_profile
 
+  def generate_reference(_date = DateTime.current)
+    self.reference = PaymentDocumentService.generate_order_number(self)
+  end
+
   def footprint_children
     order_items
   end
