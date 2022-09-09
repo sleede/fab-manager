@@ -33,6 +33,7 @@ class Setting < ApplicationRecord
                              invoice_VAT-rate_Space
                              invoice_VAT-rate_Event
                              invoice_VAT-rate_Subscription
+                             invoice_VAT-rate_Product
                              invoice_text
                              invoice_legals
                              booking_window_start
@@ -74,6 +75,8 @@ class Setting < ApplicationRecord
                              accounting_Event_label
                              accounting_Space_code
                              accounting_Space_label
+                             accounting_Product_code
+                             accounting_Product_label
                              hub_last_version
                              hub_public_key
                              fab_analytics

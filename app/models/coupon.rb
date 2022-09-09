@@ -83,7 +83,7 @@ class Coupon < ApplicationRecord
   end
 
   def users
-    invoices.map(&:user).concat(orders.map(&:user)).uniq(&:id)
+    invoices.map(&:user).uniq(&:id)
   end
 
   def users_ids

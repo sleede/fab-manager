@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_26_175129) do
+ActiveRecord::Schema.define(version: 2022_09_09_131300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -475,7 +475,9 @@ ActiveRecord::Schema.define(version: 2022_08_26_175129) do
     t.string "environment"
     t.bigint "coupon_id"
     t.integer "paid_total"
+    t.bigint "invoice_id"
     t.index ["coupon_id"], name: "index_orders_on_coupon_id"
+    t.index ["invoice_id"], name: "index_orders_on_invoice_id"
     t.index ["operator_profile_id"], name: "index_orders_on_operator_profile_id"
     t.index ["statistic_profile_id"], name: "index_orders_on_statistic_profile_id"
   end
@@ -1171,6 +1173,7 @@ ActiveRecord::Schema.define(version: 2022_08_26_175129) do
   add_foreign_key "invoicing_profiles", "users"
   add_foreign_key "order_items", "orders"
   add_foreign_key "orders", "coupons"
+  add_foreign_key "orders", "invoices"
   add_foreign_key "orders", "invoicing_profiles", column: "operator_profile_id"
   add_foreign_key "orders", "statistic_profiles"
   add_foreign_key "organizations", "invoicing_profiles"

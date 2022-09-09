@@ -5,6 +5,7 @@ class Order < PaymentDocument
   belongs_to :statistic_profile
   belongs_to :operator_profile, class_name: 'InvoicingProfile'
   belongs_to :coupon
+  belongs_to :invoice
   has_many :order_items, dependent: :destroy
   has_one :payment_gateway_object, as: :item
 
@@ -20,6 +21,10 @@ class Order < PaymentDocument
   after_create :update_reference
 
   delegate :user, to: :statistic_profile
+
+  def generate_reference(_date = DateTime.current)
+    self.reference = PaymentDocumentService.generate_order_number(self)
+  end
 
   def footprint_children
     order_items

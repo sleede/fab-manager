@@ -948,13 +948,13 @@ angular.module('application.router', ['ui.router'])
           settings: ['Setting', function (Setting) {
             return Setting.query({
               names: "['invoice_legals', 'invoice_text', 'invoice_VAT-rate', 'invoice_VAT-rate_Machine', 'invoice_VAT-rate_Training', 'invoice_VAT-rate_Space', " +
-                     "'invoice_VAT-rate_Event', 'invoice_VAT-rate_Subscription', 'invoice_VAT-active', 'invoice_order-nb', 'invoice_code-value', " +
+                     "'invoice_VAT-rate_Event', 'invoice_VAT-rate_Subscription', 'invoice_VAT-rate_Product', 'invoice_VAT-active', 'invoice_order-nb', 'invoice_code-value', " +
                      "'invoice_code-active', 'invoice_reference', 'invoice_logo', 'accounting_journal_code', 'accounting_card_client_code', " +
                      "'accounting_card_client_label', 'accounting_wallet_client_code', 'accounting_wallet_client_label', 'invoicing_module', " +
                      "'accounting_other_client_code', 'accounting_other_client_label', 'accounting_wallet_code', 'accounting_wallet_label', " +
                      "'accounting_VAT_code', 'accounting_VAT_label', 'accounting_subscription_code', 'accounting_subscription_label', " +
                      "'accounting_Machine_code', 'accounting_Machine_label', 'accounting_Training_code', 'accounting_Training_label', " +
-                     "'accounting_Event_code', 'accounting_Event_label', 'accounting_Space_code', 'accounting_Space_label', " +
+                     "'accounting_Event_code', 'accounting_Event_label', 'accounting_Space_code', 'accounting_Space_label', 'accounting_Product_code', 'accounting_Product_label', " +
                      "'payment_gateway', 'accounting_Error_code', 'accounting_Error_label', 'payment_schedule_prefix', " +
                      "'feature_tour_display', 'online_payment_module', 'stripe_public_key', 'stripe_currency', 'invoice_prefix', " +
                      "'accounting_Pack_code', 'accounting_Pack_label']"
