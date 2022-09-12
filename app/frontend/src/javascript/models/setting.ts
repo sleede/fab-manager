@@ -7,20 +7,20 @@ export const homePageSettings = [
   'home_content',
   'home_css',
   'upcoming_events_shown'
-];
+] as const;
 
 export const privacyPolicySettings = [
   'privacy_draft',
   'privacy_body',
   'privacy_dpo'
-];
+] as const;
 
 export const aboutPageSettings = [
   'about_title',
   'about_body',
   'about_contacts',
   'link_name'
-];
+] as const;
 
 export const socialNetworksSettings = [
   'facebook',
@@ -36,7 +36,7 @@ export const socialNetworksSettings = [
   'pinterest',
   'lastfm',
   'flickr'
-];
+] as const;
 
 export const messagesSettings = [
   'machine_explications_alert',
@@ -45,7 +45,7 @@ export const messagesSettings = [
   'subscription_explications_alert',
   'event_explications_alert',
   'space_explications_alert'
-];
+] as const;
 
 export const invoicesSettings = [
   'invoice_logo',
@@ -64,7 +64,7 @@ export const invoicesSettings = [
   'invoice_legals',
   'invoice_prefix',
   'payment_schedule_prefix'
-];
+] as const;
 
 export const bookingSettings = [
   'booking_window_start',
@@ -81,17 +81,17 @@ export const bookingSettings = [
   'book_overlapping_slots',
   'slot_duration',
   'overlapping_categories'
-];
+] as const;
 
 export const themeSettings = [
   'main_color',
   'secondary_color'
-];
+] as const;
 
 export const titleSettings = [
   'fablab_name',
   'name_genre'
-];
+] as const;
 
 export const accountingSettings = [
   'accounting_journal_code',
@@ -115,7 +115,7 @@ export const accountingSettings = [
   'accounting_Event_label',
   'accounting_Space_code',
   'accounting_Space_label'
-];
+] as const;
 
 export const modulesSettings = [
   'spaces_module',
@@ -127,13 +127,13 @@ export const modulesSettings = [
   'online_payment_module',
   'public_agenda_module',
   'invoicing_module'
-];
+] as const;
 
 export const stripeSettings = [
   'stripe_public_key',
   'stripe_secret_key',
   'stripe_currency'
-];
+] as const;
 
 export const payzenSettings = [
   'payzen_username',
@@ -142,13 +142,13 @@ export const payzenSettings = [
   'payzen_public_key',
   'payzen_hmac',
   'payzen_currency'
-];
+] as const;
 
 export const openLabSettings = [
   'openlab_app_id',
   'openlab_app_secret',
   'openlab_default'
-];
+] as const;
 
 export const accountSettings = [
   'phone_required',
@@ -157,13 +157,13 @@ export const accountSettings = [
   'user_change_group',
   'user_validation_required',
   'user_validation_required_list'
-];
+] as const;
 
 export const analyticsSettings = [
   'tracking_id',
   'facebook_app_id',
   'twitter_analytics'
-];
+] as const;
 
 export const fabHubSettings = [
   'hub_last_version',
@@ -171,43 +171,43 @@ export const fabHubSettings = [
   'fab_analytics',
   'origin',
   'uuid'
-];
+] as const;
 
 export const projectsSettings = [
   'allowed_cad_extensions',
   'allowed_cad_mime_types',
   'disqus_shortname'
-];
+] as const;
 
 export const prepaidPacksSettings = [
   'renew_pack_threshold',
   'pack_only_for_subscription'
-];
+] as const;
 
 export const registrationSettings = [
   'public_registrations',
   'recaptcha_site_key',
   'recaptcha_secret_key'
-];
+] as const;
 
 export const adminSettings = [
   'feature_tour_display',
   'show_username_in_admin_list'
-];
+] as const;
 
 export const pricingSettings = [
   'extended_prices_in_same_day'
-];
+] as const;
 
 export const poymentSettings = [
   'payment_gateway'
-];
+] as const;
 
 export const displaySettings = [
   'machines_sort_by',
   'events_in_calendar',
   'email_from'
-];
+] as const;
 
 export const allSettings = [
   ...homePageSettings,

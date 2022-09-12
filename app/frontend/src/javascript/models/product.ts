@@ -6,7 +6,12 @@ export interface ProductIndexFilter extends ApiFilter {
 }
 
 export type StockType = 'internal' | 'external' | 'all';
-export type StockMovementReason = 'inward_stock' | 'returned' | 'cancelled' | 'inventory_fix' | 'sold' | 'missing' | 'damaged';
+
+export const stockMovementInReasons = ['inward_stock', 'returned', 'cancelled', 'inventory_fix'] as const;
+export const stockMovementOutReasons = ['sold', 'missing', 'damaged'] as const;
+export const stockMovementAllReasons = [...stockMovementInReasons, ...stockMovementOutReasons] as const;
+
+export type StockMovementReason = typeof stockMovementAllReasons[number];
 
 export interface Stock {
   internal: number,

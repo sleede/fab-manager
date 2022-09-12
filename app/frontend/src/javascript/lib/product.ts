@@ -1,5 +1,5 @@
 import { ProductCategory } from '../models/product-category';
-import { StockMovementReason } from '../models/product';
+import { stockMovementInReasons, stockMovementOutReasons, StockMovementReason } from '../models/product';
 
 export default class ProductLib {
   /**
@@ -25,5 +25,26 @@ export default class ProductLib {
    */
   static stockMovementReasonTrKey = (reason: StockMovementReason): string => {
     return `app.admin.store.stock_movement_reason.${reason}`;
+  };
+
+  /**
+   * Check if the given stock movement is of type 'in' or 'out'
+   */
+  static stockMovementType = (reason: StockMovementReason): 'in' | 'out' => {
+    if ((stockMovementInReasons as readonly StockMovementReason[]).includes(reason)) return 'in';
+    if ((stockMovementOutReasons as readonly StockMovementReason[]).includes(reason)) return 'out';
+
+    throw new Error(`Unexpected stock movement reason: ${reason}`);
+  };
+
+  /**
+   * Return the given quantity, prefixed by its addition operator (- or +)
+   */
+  static absoluteStockMovement = (quantity: number, reason: StockMovementReason): string => {
+    if (ProductLib.stockMovementType(reason) === 'in') {
+      return `+${quantity}`;
+    } else {
+      return `-${quantity}`;
+    }
   };
 }

@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ProductStockMovement, StockMovementReason, StockType } from '../../models/product';
+import {
+  ProductStockMovement,
+  stockMovementInReasons,
+  stockMovementOutReasons,
+  StockMovementReason,
+  StockType
+} from '../../models/product';
 import { FormSelect } from '../form/form-select';
 import { FormInput } from '../form/form-input';
 import { FabButton } from '../base/fab-button';
@@ -57,12 +63,7 @@ export const ProductStockModal: React.FC<ProductStockModalProps> = ({ onError, o
    * Creates sorting options to the react-select format
    */
   const buildEventsOptions = (): Array<reasonSelectOption> => {
-    const options: Record<string, Array<StockMovementReason>> = {
-      in: ['inward_stock', 'returned', 'cancelled', 'inventory_fix'],
-      out: ['sold', 'missing', 'damaged']
-    };
-
-    return options[movement].map(key => {
+    return (movement === 'in' ? stockMovementInReasons : stockMovementOutReasons).map(key => {
       return { value: key, label: t(ProductLib.stockMovementReasonTrKey(key)) };
     });
   };

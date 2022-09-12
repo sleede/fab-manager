@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
-import { PencilSimple } from 'phosphor-react';
-import { ArrayPath, Path, useFieldArray, UseFormRegister } from 'react-hook-form';
-import { FieldValues } from 'react-hook-form/dist/types/fields';
-import { Control, FormState, UnpackNestedValue, UseFormSetValue } from 'react-hook-form/dist/types/form';
+import { PencilSimple, X } from 'phosphor-react';
+import { useFieldArray, UseFormRegister } from 'react-hook-form';
+import { Control, FormState, UseFormSetValue } from 'react-hook-form/dist/types/form';
 import { useTranslation } from 'react-i18next';
 import { Product, ProductStockMovement, StockMovementReason, StockType } from '../../models/product';
 import { HtmlTranslate } from '../base/html-translate';
@@ -15,15 +14,14 @@ import { ProductStockModal } from './product-stock-modal';
 import { FabStateLabel } from '../base/fab-state-label';
 import ProductAPI from '../../api/product';
 import FormatLib from '../../lib/format';
-import { FieldPathValue } from 'react-hook-form/dist/types/path';
 import ProductLib from '../../lib/product';
 
-interface ProductStockFormProps<TFieldValues, TContext extends object> {
+interface ProductStockFormProps<TContext extends object> {
   currentFormValues: Product,
-  register: UseFormRegister<TFieldValues>,
-  control: Control<TFieldValues, TContext>,
-  formState: FormState<TFieldValues>,
-  setValue: UseFormSetValue<TFieldValues>,
+  register: UseFormRegister<Product>,
+  control: Control<Product, TContext>,
+  formState: FormState<Product>,
+  setValue: UseFormSetValue<Product>,
   onSuccess: (product: Product) => void,
   onError: (message: string) => void,
 }
@@ -33,7 +31,7 @@ const DEFAULT_LOW_STOCK_THRESHOLD = 30;
 /**
  * Form tab to manage a product's stock
  */
-export const ProductStockForm = <TFieldValues extends FieldValues, TContext extends object> ({ currentFormValues, register, control, formState, setValue, onError }: ProductStockFormProps<TFieldValues, TContext>) => {
+export const ProductStockForm = <TContext extends object> ({ currentFormValues, register, control, formState, setValue, onError }: ProductStockFormProps<TContext>) => {
   const { t } = useTranslation('admin');
 
   const [activeThreshold, setActiveThreshold] = useState<boolean>(currentFormValues.low_stock_threshold != null);
@@ -41,7 +39,7 @@ export const ProductStockForm = <TFieldValues extends FieldValues, TContext exte
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [stockMovements, setStockMovements] = useState<Array<ProductStockMovement>>([]);
 
-  const { fields, append } = useFieldArray({ control, name: 'product_stock_movements_attributes' as ArrayPath<TFieldValues> });
+  const { fields, append, remove } = useFieldArray({ control, name: 'product_stock_movements_attributes' });
 
   useEffect(() => {
     if (!currentFormValues?.id) return;
@@ -103,8 +101,8 @@ export const ProductStockForm = <TFieldValues extends FieldValues, TContext exte
   const toggleStockThreshold = (checked: boolean) => {
     setActiveThreshold(checked);
     setValue(
-      'low_stock_threshold' as Path<TFieldValues>,
-      (checked ? DEFAULT_LOW_STOCK_THRESHOLD : null) as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>
+      'low_stock_threshold',
+      (checked ? DEFAULT_LOW_STOCK_THRESHOLD : null)
     );
   };
 
@@ -154,6 +152,35 @@ export const ProductStockForm = <TFieldValues extends FieldValues, TContext exte
         </div>
         <FabButton onClick={toggleModal} icon={<PencilSimple size={20} weight="fill" />} className="is-black">Modifier</FabButton>
       </div>
+
+      {fields.length > 0 && <div className="ongoing-stocks">
+        <span className="title">{t('app.admin.store.product_stock_form.ongoing_operations')}</span>
+        <span className="save-notice">{t('app.admin.store.product_stock_form.save_reminder')}</span>
+        {fields.map((newMovement, index) => (
+          <div key={index} className="unsaved-stock-movement stock-item">
+            <div className="group">
+              <p>{t(`app.admin.store.product_stock_form.type_${ProductLib.stockMovementType(newMovement.reason)}`)}</p>
+            </div>
+            <div className="group">
+              <span>{t(`app.admin.store.product_stock_form.${newMovement.stock_type}`)}</span>
+              <p>{ProductLib.absoluteStockMovement(newMovement.quantity, newMovement.reason)}</p>
+            </div>
+            <div className="group">
+              <span>{t('app.admin.store.product_stock_form.reason')}</span>
+              <p>{t(ProductLib.stockMovementReasonTrKey(newMovement.reason))}</p>
+            </div>
+            <p className="cancel-action" onClick={() => remove(index)}>
+              {t('app.admin.store.product_stock_form.cancel')}
+              <X size={20} />
+            </p>
+            <FormInput id={`product_stock_movements_attributes.${index}.stock_type`} register={register}
+                       type="hidden" />
+            <FormInput id={`product_stock_movements_attributes.${index}.quantity`} register={register} type="hidden" />
+            <FormInput id={`product_stock_movements_attributes.${index}.reason`} register={register} type="hidden" />
+          </div>
+        ))}
+      </div>}
+
       <hr />
 
       <div className="threshold-data">
@@ -213,15 +240,15 @@ export const ProductStockForm = <TFieldValues extends FieldValues, TContext exte
             <p className='title'>{currentFormValues.name}</p>
             <p>{FormatLib.date(movement.date)}</p>
             <div className="group">
-              <span>{movement.stock_type}</span>
-              <p>{movement.quantity}</p>
+              <span>{t(`app.admin.store.product_stock_form.${movement.stock_type}`)}</span>
+              <p>{ProductLib.absoluteStockMovement(movement.quantity, movement.reason)}</p>
             </div>
             <div className="group">
-              <span>{t('app.admin.store.product_stock_form.event_type')}</span>
-              <p>{movement.reason}</p>
+              <span>{t('app.admin.store.product_stock_form.reason')}</span>
+              <p>{t(ProductLib.stockMovementReasonTrKey(movement.reason))}</p>
             </div>
             <div className="group">
-              <span>{t('app.admin.store.product_stock_form.stock_level')}</span>
+              <span>{t('app.admin.store.product_stock_form.remaining_stock')}</span>
               <p>{movement.remaining_stock}</p>
             </div>
           </div>
@@ -231,13 +258,6 @@ export const ProductStockForm = <TFieldValues extends FieldValues, TContext exte
                          onSuccess={onNewStockMovement}
                          isOpen={isOpen}
                          toggleModal={toggleModal} />
-      {fields.map((newMovement, index) => (
-        <div key={index}>
-          <FormInput id={`product_stock_movements_attributes.${index}.stock_type`} register={register} type="hidden" />
-          <FormInput id={`product_stock_movements_attributes.${index}.quantity`} register={register} type="hidden" />
-          <FormInput id={`product_stock_movements_attributes.${index}.reason`} register={register} type="hidden" />
-        </div>
-      ))}
     </section>
   );
 };
