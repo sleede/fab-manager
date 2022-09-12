@@ -2,7 +2,8 @@
 
 - Script to download translations from Crowdin
 - Fix a bug: admin and managers can't cancel or move event reservations
-- Fix a bug: phone numbers with hyphens and spaces prevent profile completion when the data is provided by a SSO
+- Fix a bug: phone numbers with hyphens and spaces prevent profile completion when the data is provided by an SSO
+- Fix a bug: unable to complete profile from SSO when the account validation is enabled
 
 ## v5.4.17 2022 September 06
 
