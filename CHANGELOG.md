@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Script to download translations from Crowdin
+- Fix a bug: admin and managers can't cancel or move event reservations
 
 ## v5.4.17 2022 September 06
 
