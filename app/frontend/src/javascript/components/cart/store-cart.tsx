@@ -14,9 +14,9 @@ import { Order } from '../../models/order';
 import { MemberSelect } from '../user/member-select';
 import { CouponInput } from '../coupon/coupon-input';
 import { Coupon } from '../../models/coupon';
-import { computePriceWithCoupon } from '../../lib/coupon';
 import noImage from '../../../../images/no_image.png';
 import Switch from 'react-switch';
+import OrderLib from '../../lib/order';
 
 declare const Application: IApplication;
 
@@ -132,52 +132,6 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
     }
   };
 
-  /**
-   * Get the item total
-   */
-  const itemAmount = (item): number => {
-    return item.quantity * Math.trunc(item.amount * 100) / 100;
-  };
-
-  /**
-   * return true if cart has offered item
-   */
-  const hasOfferedItem = (): boolean => {
-    return cart.order_items_attributes
-      .filter(i => i.is_offered).length > 0;
-  };
-
-  /**
-   * Get the offered item total
-   */
-  const offeredAmount = (): number => {
-    return cart.order_items_attributes
-      .filter(i => i.is_offered)
-      .map(i => Math.trunc(i.amount * 100) * i.quantity)
-      .reduce((acc, curr) => acc + curr, 0) / 100;
-  };
-
-  /**
-   * Get the total amount before offered amount
-   */
-  const totalBeforeOfferedAmount = (): number => {
-    return (Math.trunc(cart.total * 100) + Math.trunc(offeredAmount() * 100)) / 100;
-  };
-
-  /**
-   * Get the coupon amount
-   */
-  const couponAmount = (): number => {
-    return (Math.trunc(cart.total * 100) - Math.trunc(computePriceWithCoupon(cart.total, cart.coupon) * 100)) / 100.00;
-  };
-
-  /**
-   * Get the paid total amount
-   */
-  const paidTotal = (): number => {
-    return computePriceWithCoupon(cart.total, cart.coupon);
-  };
-
   return (
     <div className='store-cart'>
       <div className="store-cart-list">
@@ -185,7 +139,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
         {cart && cart.order_items_attributes.map(item => (
           <article key={item.id} className='store-cart-list-item'>
             <div className='picture'>
-              <img alt=''src={noImage} />
+              <img alt=''src={item.orderable_main_image_url || noImage} />
             </div>
             <div className="ref">
               <span>{t('app.public.store_cart.reference_short')} </span>
@@ -203,7 +157,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
               </select>
               <div className='total'>
                 <span>{t('app.public.store_cart.total')}</span>
-                <p>{FormatLib.price(itemAmount(item))}</p>
+                <p>{FormatLib.price(OrderLib.itemAmount(item))}</p>
               </div>
               <FabButton className="main-action-btn" onClick={removeProductFromCart(item)}>
                 <i className="fa fa-trash" />
@@ -251,15 +205,15 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
             <h3>{t('app.public.store_cart.checkout_header')}</h3>
             <span>{t('app.public.store_cart.checkout_products_COUNT', { COUNT: cart?.order_items_attributes.length })}</span>
             <div className="list">
-              <p>{t('app.public.store_cart.checkout_products_total')} <span>{FormatLib.price(totalBeforeOfferedAmount())}</span></p>
-              {hasOfferedItem() &&
-                <p className='gift'>{t('app.public.store_cart.checkout_gift_total')} <span>-{FormatLib.price(offeredAmount())}</span></p>
+              <p>{t('app.public.store_cart.checkout_products_total')} <span>{FormatLib.price(OrderLib.totalBeforeOfferedAmount(cart))}</span></p>
+              {OrderLib.hasOfferedItem(cart) &&
+                <p className='gift'>{t('app.public.store_cart.checkout_gift_total')} <span>-{FormatLib.price(OrderLib.offeredAmount(cart))}</span></p>
               }
               {cart.coupon &&
-                <p>{t('app.public.store_cart.checkout_coupon')} <span>-{FormatLib.price(couponAmount())}</span></p>
+                <p>{t('app.public.store_cart.checkout_coupon')} <span>-{FormatLib.price(OrderLib.couponAmount(cart))}</span></p>
               }
             </div>
-            <p className='total'>{t('app.public.store_cart.checkout_total')} <span>{FormatLib.price(paidTotal())}</span></p>
+            <p className='total'>{t('app.public.store_cart.checkout_total')} <span>{FormatLib.price(OrderLib.paidTotal(cart))}</span></p>
           </div>
           <FabButton className='checkout-btn' onClick={checkout} disabled={!cart.user}>
             {t('app.public.store_cart.checkout')}

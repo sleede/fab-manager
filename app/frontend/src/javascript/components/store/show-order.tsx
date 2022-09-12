@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IApplication } from '../../models/application';
 import { User } from '../../models/user';
@@ -7,11 +7,15 @@ import { Loader } from '../base/loader';
 import noImage from '../../../../images/no_image.png';
 import { FabStateLabel } from '../base/fab-state-label';
 import Select from 'react-select';
+import OrderAPI from '../../api/order';
+import { Order } from '../../models/order';
+import FormatLib from '../../lib/format';
+import OrderLib from '../../lib/order';
 
 declare const Application: IApplication;
 
 interface ShowOrderProps {
-  orderRef: string,
+  orderId: string,
   currentUser?: User,
   onError: (message: string) => void,
   onSuccess: (message: string) => void
@@ -27,8 +31,16 @@ type selectOption = { value: number, label: string };
  */
 // TODO: delete next eslint disable
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const ShowOrder: React.FC<ShowOrderProps> = ({ orderRef, currentUser, onError, onSuccess }) => {
+export const ShowOrder: React.FC<ShowOrderProps> = ({ orderId, currentUser, onError, onSuccess }) => {
   const { t } = useTranslation('shared');
+
+  const [order, setOrder] = useState<Order>();
+
+  useEffect(() => {
+    OrderAPI.get(orderId).then(data => {
+      setOrder(data);
+    });
+  }, []);
 
   /**
    * Check if the current operator has administrative rights or is a normal member
@@ -42,14 +54,14 @@ export const ShowOrder: React.FC<ShowOrderProps> = ({ orderRef, currentUser, onE
    */
   const buildOptions = (): Array<selectOption> => {
     return [
-      { value: 0, label: t('app.shared.store.show_order.status.error') },
-      { value: 1, label: t('app.shared.store.show_order.status.canceled') },
-      { value: 2, label: t('app.shared.store.show_order.status.pending') },
-      { value: 3, label: t('app.shared.store.show_order.status.under_preparation') },
-      { value: 4, label: t('app.shared.store.show_order.status.paid') },
-      { value: 5, label: t('app.shared.store.show_order.status.ready') },
-      { value: 6, label: t('app.shared.store.show_order.status.collected') },
-      { value: 7, label: t('app.shared.store.show_order.status.refunded') }
+      { value: 0, label: t('app.shared.store.show_order.state.error') },
+      { value: 1, label: t('app.shared.store.show_order.state.canceled') },
+      { value: 2, label: t('app.shared.store.show_order.state.pending') },
+      { value: 3, label: t('app.shared.store.show_order.state.under_preparation') },
+      { value: 4, label: t('app.shared.store.show_order.state.paid') },
+      { value: 5, label: t('app.shared.store.show_order.state.ready') },
+      { value: 6, label: t('app.shared.store.show_order.state.collected') },
+      { value: 7, label: t('app.shared.store.show_order.state.refunded') }
     ];
   };
 
@@ -81,17 +93,21 @@ export const ShowOrder: React.FC<ShowOrderProps> = ({ orderRef, currentUser, onE
         return 'error';
       case 'canceled':
         return 'canceled';
-      case 'pending' || 'under_preparation':
+      case 'in_progress':
         return 'pending';
       default:
         return 'normal';
     }
   };
 
+  if (!order) {
+    return null;
+  }
+
   return (
     <div className='show-order'>
       <header>
-        <h2>[order.ref]</h2>
+        <h2>[{order.reference}]</h2>
         <div className="grpBtn">
           {isPrivileged() &&
             <Select
@@ -100,19 +116,21 @@ export const ShowOrder: React.FC<ShowOrderProps> = ({ orderRef, currentUser, onE
               styles={customStyles}
             />
           }
-          <a href={''}
-            target='_blank'
-            className='fab-button is-black'
-            rel='noreferrer'>
-            {t('app.shared.store.show_order.see_invoice')}
-          </a>
+          {order?.invoice_id && (
+            <a href={`/api/invoices/${order?.invoice_id}/download`}
+              target='_blank'
+              className='fab-button is-black'
+              rel='noreferrer'>
+              {t('app.shared.store.show_order.see_invoice')}
+            </a>
+          )}
         </div>
       </header>
 
       <div className="client-info">
         <label>{t('app.shared.store.show_order.tracking')}</label>
         <div className="content">
-          {isPrivileged() &&
+          {isPrivileged() && order.user &&
             <div className='group'>
               <span>{t('app.shared.store.show_order.client')}</span>
               <p>order.user.name</p>
@@ -120,14 +138,14 @@ export const ShowOrder: React.FC<ShowOrderProps> = ({ orderRef, currentUser, onE
           }
           <div className='group'>
             <span>{t('app.shared.store.show_order.created_at')}</span>
-            <p>order.created_at</p>
+            <p>{FormatLib.date(order.created_at)}</p>
           </div>
           <div className='group'>
             <span>{t('app.shared.store.show_order.last_update')}</span>
-            <p>order.???</p>
+            <p>{FormatLib.date(order.updated_at)}</p>
           </div>
-          <FabStateLabel status={statusColor('error')} background>
-            order.state
+          <FabStateLabel status={statusColor(order.state)} background>
+            {t(`app.shared.store.show_order.state.${order.state}`)}
           </FabStateLabel>
         </div>
       </div>
@@ -135,29 +153,30 @@ export const ShowOrder: React.FC<ShowOrderProps> = ({ orderRef, currentUser, onE
       <div className="cart">
         <label>{t('app.shared.store.show_order.cart')}</label>
         <div>
-          {/* loop sur les articles du panier */}
-          <article className='store-cart-list-item'>
-            <div className='picture'>
-              <img alt=''src={noImage} />
-            </div>
-            <div className="ref">
-              <span>{t('app.shared.store.show_order.reference_short')} orderable_id?</span>
-              <p>o.orderable_name</p>
-            </div>
-            <div className="actions">
-              <div className='price'>
-                <p>o.amount</p>
-                <span>/ {t('app.shared.store.show_order.unit')}</span>
+          {order.order_items_attributes.map(item => (
+            <article className='store-cart-list-item' key={item.id}>
+              <div className='picture'>
+                <img alt=''src={item.orderable_main_image_url || noImage} />
               </div>
-
-              <span className="count">o.quantity</span>
-
-              <div className='total'>
-                <span>{t('app.shared.store.show_order.item_total')}</span>
-                <p>o.quantity * o.amount</p>
+              <div className="ref">
+                <span>{t('app.shared.store.show_order.reference_short')}</span>
+                <p>{item.orderable_name}</p>
               </div>
-            </div>
-          </article>
+              <div className="actions">
+                <div className='price'>
+                  <p>{FormatLib.price(item.amount)}</p>
+                  <span>/ {t('app.shared.store.show_order.unit')}</span>
+                </div>
+
+                <span className="count">{item.quantity}</span>
+
+                <div className='total'>
+                  <span>{t('app.shared.store.show_order.item_total')}</span>
+                  <p>{FormatLib.price(OrderLib.itemAmount(item))}</p>
+                </div>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
 
@@ -168,10 +187,14 @@ export const ShowOrder: React.FC<ShowOrderProps> = ({ orderRef, currentUser, onE
         </div>
         <div className="amount">
           <label>{t('app.shared.store.show_order.amount')}</label>
-          <p>{t('app.shared.store.show_order.products_total')}<span>order.amount</span></p>
-          <p className='gift'>{t('app.shared.store.show_order.gift_total')}<span>-order.amount</span></p>
-          <p>{t('app.shared.store.show_order.coupon')}<span>order.amount</span></p>
-          <p className='total'>{t('app.shared.store.show_order.cart_total')} <span>order.total</span></p>
+          <p>{t('app.shared.store.show_order.products_total')}<span>{FormatLib.price(OrderLib.totalBeforeOfferedAmount(order))}</span></p>
+          {OrderLib.hasOfferedItem(order) &&
+            <p className='gift'>{t('app.shared.store.show_order.gift_total')}<span>-{FormatLib.price(OrderLib.offeredAmount(order))}</span></p>
+          }
+          {order.coupon &&
+            <p>{t('app.shared.store.show_order.coupon')}<span>-{FormatLib.price(OrderLib.couponAmount(order))}</span></p>
+          }
+          <p className='total'>{t('app.shared.store.show_order.cart_total')} <span>{FormatLib.price(OrderLib.paidTotal(order))}</span></p>
         </div>
       </div>
     </div>
@@ -186,4 +209,4 @@ const ShowOrderWrapper: React.FC<ShowOrderProps> = (props) => {
   );
 };
 
-Application.Components.component('showOrder', react2angular(ShowOrderWrapper, ['orderRef', 'currentUser', 'onError', 'onSuccess']));
+Application.Components.component('showOrder', react2angular(ShowOrderWrapper, ['orderId', 'currentUser', 'onError', 'onSuccess']));

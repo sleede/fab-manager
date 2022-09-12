@@ -23,4 +23,8 @@ class Product < ApplicationRecord
   validates :amount, numericality: { greater_than: 0, allow_nil: true }
 
   scope :active, -> { where(is_active: true) }
+
+  def main_image
+    product_images.find_by(is_main: true)
+  end
 end

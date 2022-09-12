@@ -19,10 +19,10 @@ export const OrderItem: React.FC<OrderItemProps> = ({ order, currentUser }) => {
   /**
    * Go to order page
    */
-  const showOrder = (ref: string) => {
+  const showOrder = (order: Order) => {
     isPrivileged()
-      ? window.location.href = `/#!/admin/store/o/${ref}`
-      : window.location.href = `/#!/store/o/${ref}`;
+      ? window.location.href = `/#!/admin/store/orders/${order.id}`
+      : window.location.href = `/#!/dashboard/orders/${order.id}`;
   };
 
   /**
@@ -41,7 +41,7 @@ export const OrderItem: React.FC<OrderItemProps> = ({ order, currentUser }) => {
         return 'error';
       case 'canceled':
         return 'canceled';
-      case 'pending' || 'under_preparation':
+      case 'in_progress':
         return 'pending';
       default:
         return 'normal';
@@ -50,24 +50,24 @@ export const OrderItem: React.FC<OrderItemProps> = ({ order, currentUser }) => {
 
   return (
     <div className='order-item'>
-      <p className="ref">order.ref</p>
+      <p className="ref">{order.reference}</p>
       <div>
-        <FabStateLabel status={statusColor('pending')} background>
-          order.state
+        <FabStateLabel status={statusColor(order.state)} background>
+          {t(`app.shared.store.order_item.state.${order.state}`)}
         </FabStateLabel>
       </div>
       {isPrivileged() &&
         <div className='client'>
           <span>{t('app.shared.store.order_item.client')}</span>
-          <p>order.user.name</p>
+          <p>{order?.user?.name || ''}</p>
         </div>
       }
-      <p className="date">order.created_at</p>
+      <p className="date">{FormatLib.date(order.created_at)}</p>
       <div className='price'>
         <span>{t('app.shared.store.order_item.total')}</span>
         <p>{FormatLib.price(order?.total)}</p>
       </div>
-      <FabButton onClick={() => showOrder('orderRef')} icon={<i className="fas fa-eye" />} className="is-black" />
+      <FabButton onClick={() => showOrder(order)} icon={<i className="fas fa-eye" />} className="is-black" />
     </div>
   );
 };

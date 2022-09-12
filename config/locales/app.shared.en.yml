@@ -562,8 +562,11 @@ en:
         main_image: "Main image"
       store:
         order_item:
-            total: "Total"
-            client: "Client"
+          total: "Total"
+          client: "Client"
+          state:
+            cart: 'Cart'
+            in_progress: 'In progress'
         show_order:
           back_to_list: "Back to list"
           see_invoice: "See invoice"
@@ -581,7 +584,9 @@ en:
           gift_total: "Discount total"
           coupon: "Coupon"
           cart_total: "Cart total"
-          status:
+          state:
+            cart: 'Cart'
+            in_progress: 'In progress'
             error: "Payment error"
             canceled: "Canceled"
             pending: "Pending payment"

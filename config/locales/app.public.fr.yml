@@ -23,6 +23,7 @@ fr:
         my_invoices: "Mes factures"
         my_payment_schedules: "Mes échéanciers"
         my_wallet: "Mon porte-monnaie"
+        my_orders: "Mes commandes"
         #contextual help
         help: "Aide"
         #login/logout

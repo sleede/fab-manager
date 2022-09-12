@@ -13,6 +13,8 @@ import { MemberSelect } from '../user/member-select';
 import { User } from '../../models/user';
 import { FormInput } from '../form/form-input';
 import { TDateISODate } from '../../typings/date-iso';
+import OrderAPI from '../../api/order';
+import { Order } from '../../models/order';
 
 declare const Application: IApplication;
 
@@ -42,9 +44,16 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onSuccess, onError }) => {
 
   const { register, getValues } = useForm();
 
+  const [orders, setOrders] = useState<Array<Order>>([]);
   const [filters, setFilters] = useImmer<Filters>(initFilters);
   const [clearFilters, setClearFilters] = useState<boolean>(false);
   const [accordion, setAccordion] = useState({});
+
+  useEffect(() => {
+    OrderAPI.index({}).then(res => {
+      setOrders(res.data);
+    }).catch(onError);
+  }, []);
 
   useEffect(() => {
     applyFilters();
@@ -228,7 +237,9 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onSuccess, onError }) => {
           onSelectOptionsChange={handleSorting}
         />
         <div className="orders-list">
-          <OrderItem currentUser={currentUser} />
+          {orders.map(order => (
+            <OrderItem key={order.id} order={order} currentUser={currentUser} />
+          ))}
         </div>
       </div>
     </div>

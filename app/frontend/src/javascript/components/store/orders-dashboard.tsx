@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
 import { Loader } from '../base/loader';
@@ -6,10 +6,14 @@ import { IApplication } from '../../models/application';
 import { StoreListHeader } from './store-list-header';
 import { OrderItem } from './order-item';
 import { FabPagination } from '../base/fab-pagination';
+import OrderAPI from '../../api/order';
+import { Order } from '../../models/order';
+import { User } from '../../models/user';
 
 declare const Application: IApplication;
 
 interface OrdersDashboardProps {
+  currentUser: User,
   onError: (message: string) => void
 }
 /**
@@ -21,15 +25,21 @@ type selectOption = { value: number, label: string };
 /**
  * This component shows a list of all orders from the store for the current user
  */
-// TODO: delete next eslint disable
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const OrdersDashboard: React.FC<OrdersDashboardProps> = ({ onError }) => {
+export const OrdersDashboard: React.FC<OrdersDashboardProps> = ({ currentUser, onError }) => {
   const { t } = useTranslation('public');
 
-  // TODO: delete next eslint disable
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [orders, setOrders] = useState<Array<Order>>([]);
   const [pageCount, setPageCount] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [totalCount, setTotalCount] = useState<number>(1);
+
+  useEffect(() => {
+    OrderAPI.index({}).then(res => {
+      setPageCount(res.total_pages);
+      setTotalCount(res.total_count);
+      setOrders(res.data);
+    }).catch(onError);
+  }, []);
 
   /**
    * Creates sorting options to the react-select format
@@ -44,7 +54,26 @@ export const OrdersDashboard: React.FC<OrdersDashboardProps> = ({ onError }) => 
    * Display option: sorting
    */
   const handleSorting = (option: selectOption) => {
-    console.log('Sort option:', option);
+    OrderAPI.index({ page: 1, sort: option.value ? 'ASC' : 'DESC' }).then(res => {
+      setCurrentPage(1);
+      setOrders(res.data);
+      setPageCount(res.total_pages);
+      setTotalCount(res.total_count);
+    }).catch(onError);
+  };
+
+  /**
+   * Handle orders pagination
+   */
+  const handlePagination = (page: number) => {
+    if (page !== currentPage) {
+      OrderAPI.index({ page }).then(res => {
+        setCurrentPage(page);
+        setOrders(res.data);
+        setPageCount(res.total_pages);
+        setTotalCount(res.total_count);
+      }).catch(onError);
+    }
   };
 
   return (
@@ -55,15 +84,17 @@ export const OrdersDashboard: React.FC<OrdersDashboardProps> = ({ onError }) => 
 
       <div className="store-list">
         <StoreListHeader
-          productsCount={0}
+          productsCount={totalCount}
           selectOptions={buildOptions()}
           onSelectOptionsChange={handleSorting}
         />
         <div className="orders-list">
-          <OrderItem />
+          {orders.map(order => (
+            <OrderItem key={order.id} order={order} currentUser={currentUser} />
+          ))}
         </div>
         {pageCount > 1 &&
-          <FabPagination pageCount={pageCount} currentPage={currentPage} selectPage={setCurrentPage} />
+          <FabPagination pageCount={pageCount} currentPage={currentPage} selectPage={handlePagination} />
         }
       </div>
     </section>
@@ -78,4 +109,4 @@ const OrdersDashboardWrapper: React.FC<OrdersDashboardProps> = (props) => {
   );
 };
 
-Application.Components.component('ordersDashboard', react2angular(OrdersDashboardWrapper, ['onError']));
+Application.Components.component('ordersDashboard', react2angular(OrdersDashboardWrapper, ['onError', 'currentUser']));
