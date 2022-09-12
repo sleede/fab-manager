@@ -9,19 +9,19 @@ class Members::MembersService
   end
 
   def update(params)
-    if params[:group_id] && @member.group_id != params[:group_id].to_i && !@member.subscribed_plan.nil?
+    if subscriber_group_change?(params)
       # here a group change is requested but unprocessable, handle the exception
       @member.errors.add(:group_id, I18n.t('members.unable_to_change_the_group_while_a_subscription_is_running'))
       return false
     end
 
-    if params[:group_id] && params[:group_id].to_i != Group.find_by(slug: 'admins').id && @member.admin?
+    if admin_group_change?(params)
       # an admin cannot change his group
       @member.errors.add(:group_id, I18n.t('members.admins_cant_change_group'))
       return false
     end
 
-    group_changed = params[:group_id] && @member.group_id != params[:group_id].to_i
+    group_changed = user_group_change?(params)
     ex_group = @member.group
 
     user_validation_required = Setting.get('user_validation_required')
@@ -80,7 +80,7 @@ class Members::MembersService
   end
 
   def validate(is_valid)
-    is_updated = member.update(validated_at: is_valid ? Time.now : nil)
+    is_updated = member.update(validated_at: is_valid ? DateTime.current : nil)
     if is_updated
       if is_valid
         NotificationCenter.call type: 'notify_user_is_validated',
@@ -132,5 +132,17 @@ class Members::MembersService
     else
       params[:password]
     end
+  end
+
+  def subscriber_group_change?(params)
+    params[:group_id] && @member.group_id != params[:group_id].to_i && !@member.subscribed_plan.nil?
+  end
+
+  def admin_group_change?(params)
+    params[:group_id] && params[:group_id].to_i != Group.find_by(slug: 'admins').id && @member.admin?
+  end
+
+  def user_group_change?(params)
+    @member.group_id && params[:group_id] && @member.group_id != params[:group_id].to_i
   end
 end

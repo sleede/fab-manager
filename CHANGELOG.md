@@ -1,5 +1,12 @@
 # Changelog Fab-manager
 
+## v5.4.18 2022 September 12
+
+- Script to download translations from Crowdin
+- Fix a bug: admin and managers can't cancel or move event reservations
+- Fix a bug: phone numbers with hyphens and spaces prevent profile completion when the data is provided by an SSO
+- Fix a bug: unable to complete profile from SSO when the account validation is enabled
+
 ## v5.4.17 2022 September 06
 
 - OpenAPI spaces endpoints (index/show)
@@ -15,8 +22,8 @@
 - Fix a bug: the automated test on statistics generation was not running
 - Fix a bug: the events times are not displayed
 - Fix a security issue: disable log4j format message lookup by default for new installations
-- Fix a security issue: updated omniauth to 1.9.2 to fix (CVE-2020-36599)[https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-36599]
-- Fix a security issue: updated moment-timezone to 0.5.35 to fix (GHSA-v78c-4p63-2j6c)[https://github.com/advisories/GHSA-v78c-4p63-2j6c] and (GHSA-56x4-j7p9-fcf9)[https://github.com/advisories/GHSA-56x4-j7p9-fcf9]
+- Fix a security issue: updated omniauth to 1.9.2 to fix [CVE-2020-36599](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-36599)
+- Fix a security issue: updated moment-timezone to 0.5.35 to fix [GHSA-v78c-4p63-2j6c](https://github.com/advisories/GHSA-v78c-4p63-2j6c) and [GHSA-56x4-j7p9-fcf9](https://github.com/advisories/GHSA-56x4-j7p9-fcf9)
 - [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2022,07]`
 
 ## v5.4.16 2022 August 24
