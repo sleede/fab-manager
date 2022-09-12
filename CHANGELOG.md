@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v5.4.18 2022 September 12
+
 - Script to download translations from Crowdin
 - Fix a bug: admin and managers can't cancel or move event reservations
 - Fix a bug: phone numbers with hyphens and spaces prevent profile completion when the data is provided by an SSO
