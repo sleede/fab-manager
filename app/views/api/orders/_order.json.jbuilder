@@ -3,6 +3,9 @@
 json.extract! order, :id, :token, :statistic_profile_id, :operator_profile_id, :reference, :state, :created_at, :updated_at, :invoice_id,
               :payment_method
 json.total order.total / 100.0 if order.total.present?
+json.payment_date order.invoice.created_at if order.invoice_id.present?
+json.wallet_amount order.wallet_amount / 100.0 if order.wallet_amount.present?
+json.paid_total order.paid_total / 100.0 if order.paid_total.present?
 if order.coupon_id
   json.coupon do
     json.extract! order.coupon, :id, :code, :type, :percent_off, :validity_per_user

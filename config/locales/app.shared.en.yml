@@ -595,3 +595,11 @@ en:
             ready: "Ready"
             collected: "Collected"
             refunded: "Refunded"
+          payment:
+            by_wallet: "by wallet"
+            settlement_by_debit_card: "Settlement by debit card"
+            settlement_done_at_the_reception: "Settlement done at the reception"
+            settlement_by_wallet: "Settlement by wallet"
+            on_DATE_at_TIME: "on {DATE} at {TIME},"
+            for_an_amount_of_AMOUNT: "for an amount of {AMOUNT}"
+            and: 'and'

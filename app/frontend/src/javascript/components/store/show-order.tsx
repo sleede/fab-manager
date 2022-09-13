@@ -100,6 +100,36 @@ export const ShowOrder: React.FC<ShowOrderProps> = ({ orderId, currentUser, onEr
     }
   };
 
+  /**
+   * Returns order's payment info
+   */
+  const paymentInfo = (): string => {
+    let paymentVerbose = '';
+    if (order.payment_method === 'card') {
+      paymentVerbose = t('app.shared.store.show_order.payment.settlement_by_debit_card');
+    } else if (order.payment_method === 'wallet') {
+      paymentVerbose = t('app.shared.store.show_order.payment.settlement_by_wallet');
+    } else {
+      paymentVerbose = t('app.shared.store.show_order.payment.settlement_done_at_the_reception');
+    }
+    paymentVerbose += ' ' + t('app.shared.store.show_order.payment.on_DATE_at_TIME', {
+      DATE: FormatLib.date(order.payment_date),
+      TIME: FormatLib.time(order.payment_date)
+    });
+    if (order.payment_method !== 'wallet') {
+      paymentVerbose += ' ' + t('app.shared.store.show_order.payment.for_an_amount_of_AMOUNT', { AMOUNT: FormatLib.price(order.paid_total) });
+    }
+    if (order.wallet_amount) {
+      if (order.payment_method === 'wallet') {
+        paymentVerbose += ' ' + t('app.shared.store.show_order.payment.for_an_amount_of_AMOUNT', { AMOUNT: FormatLib.price(order.wallet_amount) });
+      } else {
+        paymentVerbose += ' ' + t('app.shared.store.show_order.payment.and') + ' ' + t('app.shared.store.show_order.payment.by_wallet') + ' ' +
+                                 t('app.shared.store.show_order.payment.for_an_amount_of_AMOUNT', { AMOUNT: FormatLib.price(order.wallet_amount) });
+      }
+    }
+    return paymentVerbose;
+  };
+
   if (!order) {
     return null;
   }
@@ -183,7 +213,7 @@ export const ShowOrder: React.FC<ShowOrderProps> = ({ orderId, currentUser, onEr
       <div className="subgrid">
         <div className="payment-info">
           <label>{t('app.shared.store.show_order.payment_informations')}</label>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum rerum commodi quaerat possimus! Odit, harum.</p>
+          {order.invoice_id && <p>{paymentInfo()}</p>}
         </div>
         <div className="amount">
           <label>{t('app.shared.store.show_order.amount')}</label>

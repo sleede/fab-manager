@@ -22,6 +22,10 @@ export interface Order {
   created_at?: TDateISO,
   updated_at?: TDateISO,
   invoice_id?: number,
+  payment_method?: string,
+  payment_date?: TDateISO,
+  wallet_amount?: number,
+  paid_total?: number,
   order_items_attributes: Array<{
     id: number,
     orderable_type: string,
