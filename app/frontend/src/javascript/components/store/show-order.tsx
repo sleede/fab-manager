@@ -147,7 +147,7 @@ export const ShowOrder: React.FC<ShowOrderProps> = ({ orderId, currentUser, onEr
           {isPrivileged() && order.user &&
             <div className='group'>
               <span>{t('app.shared.store.show_order.client')}</span>
-              <p>order.user.name</p>
+              <p>{order.user.name}</p>
             </div>
           }
           <div className='group'>
