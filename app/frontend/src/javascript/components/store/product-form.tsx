@@ -20,12 +20,15 @@ import ProductAPI from '../../api/product';
 import { Plus } from 'phosphor-react';
 import { ProductStockForm } from './product-stock-form';
 import ProductLib from '../../lib/product';
+import { UnsavedFormAlert } from '../form/unsaved-form-alert';
+import { UIRouter } from '@uirouter/angularjs';
 
 interface ProductFormProps {
   product: Product,
   title: string,
   onSuccess: (product: Product) => void,
   onError: (message: string) => void,
+  uiRouter: UIRouter
 }
 
 /**
@@ -42,7 +45,7 @@ type checklistOption = { value: number, label: string };
 /**
  * Form component to create or update a product
  */
-export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSuccess, onError }) => {
+export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSuccess, onError, uiRouter }) => {
   const { t } = useTranslation('admin');
 
   const { handleSubmit, register, control, formState, setValue, reset } = useForm<Product>({ defaultValues: { ...product } });
@@ -224,6 +227,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
           <FabButton className="main-action-btn" onClick={handleSubmit(saveProduct)}>{t('app.admin.store.product_form.save')}</FabButton>
         </div>
       </header>
+      <UnsavedFormAlert uiRouter={uiRouter} formState={formState} />
       <form className="product-form" onSubmit={handleSubmit(onSubmit)}>
         <div className='tabs'>
           <p className={!stockTab ? 'is-active' : ''} onClick={() => setStockTab(false)}>{t('app.admin.store.product_form.product_parameters')}</p>

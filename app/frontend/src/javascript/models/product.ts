@@ -60,5 +60,5 @@ export interface Product {
     _destroy?: boolean,
     is_main?: boolean
   }>,
-  product_stock_movements_attributes: Array<ProductStockMovement>,
+  product_stock_movements_attributes?: Array<ProductStockMovement>,
 }

@@ -4,10 +4,13 @@
 */
 'use strict';
 
-Application.Controllers.controller('AdminStoreProductController', ['$scope', 'CSRF', 'growl', '$state', '$transition$',
-  function ($scope, CSRF, growl, $state, $transition$) {
+Application.Controllers.controller('AdminStoreProductController', ['$scope', 'CSRF', 'growl', '$state', '$transition$', '$uiRouter',
+  function ($scope, CSRF, growl, $state, $transition$, $uiRouter) {
     /* PUBLIC SCOPE */
     $scope.productId = $transition$.params().id;
+
+    // the following item is used by the UnsavedFormAlert component to detect a page change
+    $scope.uiRouter = $uiRouter;
 
     /**
      * Callback triggered in case of error
