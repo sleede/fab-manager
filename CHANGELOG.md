@@ -1,5 +1,8 @@
 # Changelog Fab-manager
 
+## v5.4.19 2022 September 13
+- Fix a bug: comput the wallet amount that can't apply coupon
+
 ## v5.4.18 2022 September 12
 
 - Script to download translations from Crowdin
