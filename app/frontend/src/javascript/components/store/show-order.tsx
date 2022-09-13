@@ -173,7 +173,7 @@ export const ShowOrder: React.FC<ShowOrderProps> = ({ orderId, currentUser, onEr
                 <img alt=''src={item.orderable_main_image_url || noImage} />
               </div>
               <div className="ref">
-                <span>{t('app.shared.store.show_order.reference_short')}</span>
+                <span>{t('app.shared.store.show_order.reference_short')} {item.orderable_ref || ''}</span>
                 <p>{item.orderable_name}</p>
               </div>
               <div className="actions">

@@ -25,6 +25,7 @@ json.order_items_attributes order.order_items.order(created_at: :asc) do |item|
   json.orderable_type item.orderable_type
   json.orderable_id item.orderable_id
   json.orderable_name item.orderable.name
+  json.orderable_ref item.orderable.sku
   json.orderable_main_image_url item.orderable.main_image&.attachment_url
   json.quantity item.quantity
   json.quantity_min item.orderable.quantity_min
