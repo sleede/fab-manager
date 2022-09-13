@@ -17,7 +17,7 @@ class Orders::OrderService
       orders = orders.where(statistic_profile_id: current_user.statistic_profile.id)
     end
     orders = orders.where.not(state: 'cart') if current_user.member?
-    orders = orders.order(updated_at: filters[:page].present? ? filters[:sort] : 'DESC')
+    orders = orders.order(created_at: filters[:page].present? ? filters[:sort] : 'DESC')
     orders = orders.page(filters[:page]).per(ORDERS_PER_PAGE) if filters[:page].present?
     {
       data: orders,
