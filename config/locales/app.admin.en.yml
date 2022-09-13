@@ -2030,6 +2030,8 @@ en:
           sold: "Sold"
           missing: "Missing in stock"
           damaged: "Damaged product"
+          other_in: "Other"
+          other_out: "Other"
         orders:
           heading: "Orders"
           create_order: "Create an order"

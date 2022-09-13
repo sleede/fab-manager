@@ -33,7 +33,8 @@ module Payments::PaymentConcern
         order.payment_gateway_object = PaymentGatewayObject.new(gateway_object_id: payment_id, gateway_object_type: payment_type)
       end
       order.order_items.each do |item|
-        ProductService.update_stock(item.orderable, 'external', 'sold', -item.quantity, item.id)
+        ProductService.update_stock(item.orderable,
+                                    [{ stock_type: 'external', reason: 'sold', quantity: item.quantity, order_item_id: item.id }]).save
       end
       order.save
       order.reload

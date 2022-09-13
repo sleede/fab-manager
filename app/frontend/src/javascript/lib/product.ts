@@ -38,12 +38,13 @@ export default class ProductLib {
   };
 
   /**
-   * Return the given quantity, prefixed by its addition operator (- or +)
+   * Return the given quantity, prefixed by its addition operator (- or +), if needed
    */
   static absoluteStockMovement = (quantity: number, reason: StockMovementReason): string => {
     if (ProductLib.stockMovementType(reason) === 'in') {
       return `+${quantity}`;
     } else {
+      if (quantity < 0) return quantity.toString();
       return `-${quantity}`;
     }
   };

@@ -8,7 +8,9 @@ class ProductStockMovement < ApplicationRecord
   ALL_STOCK_TYPES = %w[internal external].freeze
   enum stock_type: ALL_STOCK_TYPES.zip(ALL_STOCK_TYPES).to_h
 
-  ALL_REASONS = %w[inward_stock returned cancelled inventory_fix sold missing damaged].freeze
+  INCOMING_REASONS = %w[inward_stock returned cancelled inventory_fix other_in].freeze
+  OUTGOING_REASONS = %w[sold missing damaged other_out].freeze
+  ALL_REASONS = [].concat(INCOMING_REASONS).concat(OUTGOING_REASONS).freeze
   enum reason: ALL_REASONS.zip(ALL_REASONS).to_h
 
   validates :stock_type, presence: true
@@ -16,10 +18,4 @@ class ProductStockMovement < ApplicationRecord
 
   validates :reason, presence: true
   validates :reason, inclusion: { in: ALL_REASONS }
-
-  before_create :set_date
-
-  def set_date
-    self.date = DateTime.current
-  end
 end
