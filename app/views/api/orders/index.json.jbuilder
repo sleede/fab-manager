@@ -5,7 +5,7 @@ json.total_pages @result[:total_pages]
 json.page_size @result[:page_size]
 json.total_count @result[:total_count]
 json.data @result[:data] do |order|
-  json.extract! order, :id, :statistic_profile_id, :reference, :state, :created_at
+  json.extract! order, :id, :statistic_profile_id, :reference, :state, :created_at, :payment_state, :updated_at
   json.total order.total / 100.0 if order.total.present?
   json.paid_total order.paid_total / 100.0 if order.paid_total.present?
   if order&.statistic_profile&.user

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 json.extract! order, :id, :token, :statistic_profile_id, :operator_profile_id, :reference, :state, :created_at, :updated_at, :invoice_id,
-              :payment_method
+              :payment_method, :payment_state
 json.total order.total / 100.0 if order.total.present?
 json.payment_date order.invoice.created_at if order.invoice_id.present?
 json.wallet_amount order.wallet_amount / 100.0 if order.wallet_amount.present?

@@ -85,22 +85,6 @@ export const ShowOrder: React.FC<ShowOrderProps> = ({ orderId, currentUser, onEr
   };
 
   /**
-   * Returns a className according to the status
-   */
-  const statusColor = (status: string) => {
-    switch (status) {
-      case 'error':
-        return 'error';
-      case 'canceled':
-        return 'canceled';
-      case 'in_progress':
-        return 'pending';
-      default:
-        return 'normal';
-    }
-  };
-
-  /**
    * Returns order's payment info
    */
   const paymentInfo = (): string => {
@@ -174,8 +158,8 @@ export const ShowOrder: React.FC<ShowOrderProps> = ({ orderId, currentUser, onEr
             <span>{t('app.shared.store.show_order.last_update')}</span>
             <p>{FormatLib.date(order.updated_at)}</p>
           </div>
-          <FabStateLabel status={statusColor(order.state)} background>
-            {t(`app.shared.store.show_order.state.${order.state}`)}
+          <FabStateLabel status={OrderLib.statusColor(order)} background>
+            {t(`app.shared.store.show_order.state.${OrderLib.statusText(order)}`)}
           </FabStateLabel>
         </div>
       </div>

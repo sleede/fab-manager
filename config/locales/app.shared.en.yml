@@ -567,6 +567,11 @@ en:
           state:
             cart: 'Cart'
             in_progress: 'In progress'
+            payment_paid: "Paid"
+            payment_failed: "Payment error"
+            canceled: "Canceled"
+            ready: "Ready"
+            refunded: "Refunded"
         show_order:
           back_to_list: "Back to list"
           see_invoice: "See invoice"
@@ -587,13 +592,10 @@ en:
           state:
             cart: 'Cart'
             in_progress: 'In progress'
-            error: "Payment error"
+            payment_paid: "Paid"
+            payment_failed: "Payment error"
             canceled: "Canceled"
-            pending: "Pending payment"
-            under_preparation: "Under preparation"
-            paid: "Paid"
             ready: "Ready"
-            collected: "Collected"
             refunded: "Refunded"
           payment:
             by_wallet: "by wallet"

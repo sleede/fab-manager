@@ -5,6 +5,7 @@ import FormatLib from '../../lib/format';
 import { FabButton } from '../base/fab-button';
 import { User } from '../../models/user';
 import { FabStateLabel } from '../base/fab-state-label';
+import OrderLib from '../../lib/order';
 
 interface OrderItemProps {
   order?: Order,
@@ -32,28 +33,12 @@ export const OrderItem: React.FC<OrderItemProps> = ({ order, currentUser }) => {
     return (currentUser?.role === 'admin' || currentUser?.role === 'manager');
   };
 
-  /**
-   * Returns a className according to the status
-   */
-  const statusColor = (status: string) => {
-    switch (status) {
-      case 'error':
-        return 'error';
-      case 'canceled':
-        return 'canceled';
-      case 'in_progress':
-        return 'pending';
-      default:
-        return 'normal';
-    }
-  };
-
   return (
     <div className='order-item'>
       <p className="ref">{order.reference}</p>
       <div>
-        <FabStateLabel status={statusColor(order.state)} background>
-          {t(`app.shared.store.order_item.state.${order.state}`)}
+        <FabStateLabel status={OrderLib.statusColor(order)} background>
+          {t(`app.shared.store.order_item.state.${OrderLib.statusText(order)}`)}
         </FabStateLabel>
       </div>
       {isPrivileged() &&

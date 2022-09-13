@@ -27,7 +27,7 @@ module Payments::PaymentConcern
                              else
                                payment_method
                              end
-      order.state = 'in_progress'
+      order.state = 'payment'
       order.payment_state = 'paid'
       if payment_id && payment_type
         order.payment_gateway_object = PaymentGatewayObject.new(gateway_object_id: payment_id, gateway_object_type: payment_type)
