@@ -5,6 +5,8 @@ class Cart::SetQuantityService
   def call(order, orderable, quantity = nil)
     return order if quantity.to_i.zero?
 
+    quantity = orderable.quantity_min > quantity.to_i ? orderable.quantity_min : quantity.to_i
+
     raise Cart::OutStockError if quantity.to_i > orderable.stock['external']
 
     item = order.order_items.find_by(orderable: orderable)

@@ -151,7 +151,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
                 <span>/ {t('app.public.store_cart.unit')}</span>
               </div>
               <select value={item.quantity} onChange={changeProductQuantity(item)}>
-                {Array.from({ length: 100 }, (_, i) => i + 1).map(v => (
+                {Array.from({ length: 100 }, (_, i) => i + item.quantity_min).map(v => (
                   <option key={v} value={v}>{v}</option>
                 ))}
               </select>

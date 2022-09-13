@@ -33,6 +33,7 @@ export interface Order {
     orderable_name: string,
     orderable_main_image_url?: string,
     quantity: number,
+    quantity_min: number,
     amount: number,
     is_offered: boolean
   }>,

@@ -7,6 +7,8 @@ class Cart::AddItemService
 
     raise Cart::InactiveProductError unless orderable.is_active
 
+    quantity = orderable.quantity_min > quantity.to_i ? orderable.quantity_min : quantity.to_i
+
     raise Cart::OutStockError if quantity > orderable.stock['external']
 
     item = order.order_items.find_by(orderable: orderable)
