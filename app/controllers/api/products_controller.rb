@@ -18,7 +18,7 @@ class API::ProductsController < API::ApiController
   def create
     authorize Product
     @product = Product.new(product_params)
-    @product.amount = ProductService.amount_multiplied_by_hundred(@product.amount)
+    @product.amount = ProductService.amount_multiplied_by_hundred(product_params[:amount])
     if @product.save
       render status: :created
     else
