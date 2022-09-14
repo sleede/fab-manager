@@ -82,7 +82,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
    * Handle payment
    */
   const handlePaymentSuccess = (data: Order): void => {
-    if (data.payment_state === 'paid') {
+    if (data.state === 'paid') {
       setPaymentModal(false);
       window.location.href = '/#!/store';
       onSuccess(t('app.public.store_cart.checkout_success'));
@@ -94,8 +94,8 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
   /**
    * Change cart's customer by admin/manger
    */
-  const handleChangeMember = (userId: number): void => {
-    setCart({ ...cart, user: { id: userId, role: 'member' } });
+  const handleChangeMember = (user: User): void => {
+    setCart({ ...cart, user: { id: user.id, role: 'member' } });
   };
 
   /**

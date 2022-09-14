@@ -16,7 +16,6 @@ export interface Order {
   operator_profile_id?: number,
   reference?: string,
   state?: string,
-  payment_state?: string,
   total?: number,
   coupon?: Coupon,
   created_at?: TDateISO,
@@ -54,7 +53,11 @@ export interface OrderIndex {
 }
 
 export interface OrderIndexFilter {
+  reference?: string,
   user_id?: number,
   page?: number,
   sort?: 'DESC'|'ASC'
+  states?: Array<string>,
+  period_from?: string,
+  period_to?: string
 }

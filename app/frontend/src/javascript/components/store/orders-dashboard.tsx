@@ -31,7 +31,7 @@ export const OrdersDashboard: React.FC<OrdersDashboardProps> = ({ currentUser, o
   const [orders, setOrders] = useState<Array<Order>>([]);
   const [pageCount, setPageCount] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [totalCount, setTotalCount] = useState<number>(1);
+  const [totalCount, setTotalCount] = useState<number>(0);
 
   useEffect(() => {
     OrderAPI.index({}).then(res => {

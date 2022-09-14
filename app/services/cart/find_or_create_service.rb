@@ -47,11 +47,11 @@ class Cart::FindOrCreateService
     end
     @order = nil if @order && !@user && (@order.statistic_profile_id.present? || @order.operator_profile_id.present?)
     if @order && @order.statistic_profile_id.present? && Order.where(statistic_profile_id: @order.statistic_profile_id,
-                                                                     payment_state: 'paid').where('created_at > ?', @order.created_at).last.present?
+                                                                     state: 'paid').where('created_at > ?', @order.created_at).last.present?
       @order = nil
     end
     if @order && @order.operator_profile_id.present? && Order.where(operator_profile_id: @order.operator_profile_id,
-                                                                    payment_state: 'paid').where('created_at > ?', @order.created_at).last.present?
+                                                                    state: 'paid').where('created_at > ?', @order.created_at).last.present?
       @order = nil
     end
   end
@@ -60,7 +60,7 @@ class Cart::FindOrCreateService
   def set_last_cart_if_user_login
     if @user&.member?
       last_paid_order = Order.where(statistic_profile_id: @user.statistic_profile.id,
-                                    payment_state: 'paid').last
+                                    state: 'paid').last
       @order = if last_paid_order
                  Order.where(statistic_profile_id: @user.statistic_profile.id,
                              state: 'cart').where('created_at > ?', last_paid_order.created_at).last
@@ -70,7 +70,7 @@ class Cart::FindOrCreateService
     end
     if @user&.privileged?
       last_paid_order = Order.where(operator_profile_id: @user.invoicing_profile.id,
-                                    payment_state: 'paid').last
+                                    state: 'paid').last
       @order = if last_paid_order
                  Order.where(operator_profile_id: @user.invoicing_profile.id,
                              state: 'cart').where('created_at > ?', last_paid_order.created_at).last
@@ -85,7 +85,7 @@ class Cart::FindOrCreateService
     last_unpaid_order = nil
     if @user&.member?
       last_paid_order = Order.where(statistic_profile_id: @user.statistic_profile.id,
-                                    payment_state: 'paid').last
+                                    state: 'paid').last
       last_unpaid_order = if last_paid_order
                             Order.where(statistic_profile_id: @user.statistic_profile.id,
                                         state: 'cart').where('created_at > ?', last_paid_order.created_at).last
@@ -95,7 +95,7 @@ class Cart::FindOrCreateService
     end
     if @user&.privileged?
       last_paid_order = Order.where(operator_profile_id: @user.invoicing_profile.id,
-                                    payment_state: 'paid').last
+                                    state: 'paid').last
       last_unpaid_order = if last_paid_order
                             Order.where(operator_profile_id: @user.invoicing_profile.id,
                                         state: 'cart').where('created_at > ?', last_paid_order.created_at).last

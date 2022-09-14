@@ -39,7 +39,7 @@ class Payments::StripeService
       o = payment_success(order, coupon_code, 'card', intent.id, intent.class.name)
       { order: o }
     else
-      order.update(payment_state: 'failed')
+      order.update(state: 'payment_failed')
       { order: order, payment: { error: { statusText: 'payment failed' } } }
     end
   end

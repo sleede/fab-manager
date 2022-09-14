@@ -18,15 +18,28 @@ class Orders::OrderService
     else
       orders = orders.where.not(statistic_profile_id: nil)
     end
+
+    orders = orders.where(reference: filters[:reference]) if filters[:reference].present? && current_user.privileged?
+
+    if filters[:states].present?
+      state = filters[:states].split(',')
+      orders = orders.where(state: state) unless state.empty?
+    end
+
+    if filters[:period_from].present? && filters[:period_to].present?
+      orders = orders.where(created_at: DateTime.parse(filters[:period_from])..DateTime.parse(filters[:period_to]).end_of_day)
+    end
+
     orders = orders.where.not(state: 'cart') if current_user.member?
-    orders = orders.order(created_at: filters[:page].present? ? filters[:sort] : 'DESC')
-    orders = orders.page(filters[:page]).per(ORDERS_PER_PAGE) if filters[:page].present?
+    orders = orders.order(created_at: filters[:sort] || 'DESC')
+    total_count = orders.count
+    orders = orders.page(filters[:page] || 1).per(ORDERS_PER_PAGE)
     {
       data: orders,
       page: filters[:page] || 1,
       total_pages: orders.page(1).per(ORDERS_PER_PAGE).total_pages,
       page_size: ORDERS_PER_PAGE,
-      total_count: orders.count
+      total_count: total_count
     }
   end
 

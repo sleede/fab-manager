@@ -567,7 +567,7 @@ en:
           state:
             cart: 'Cart'
             in_progress: 'In progress'
-            payment_paid: "Paid"
+            paid: "Paid"
             payment_failed: "Payment error"
             canceled: "Canceled"
             ready: "Ready"
@@ -592,7 +592,7 @@ en:
           state:
             cart: 'Cart'
             in_progress: 'In progress'
-            payment_paid: "Paid"
+            paid: "Paid"
             payment_failed: "Payment error"
             canceled: "Canceled"
             ready: "Ready"

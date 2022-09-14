@@ -55,11 +55,8 @@ export default class OrderLib {
     switch (order.state) {
       case 'cart':
         return 'cart';
-      case 'payment':
-        if (order.payment_state === 'failed') {
-          return 'error';
-        }
-        return 'normal';
+      case 'payment_failed':
+        return 'error';
       case 'canceled':
         return 'canceled';
       case 'in_progress':
@@ -73,9 +70,6 @@ export default class OrderLib {
    * Returns a status text according to the status
    */
   static statusText = (order: Order) => {
-    if (order.state === 'payment') {
-      return `payment_${order.payment_state}`;
-    }
     return order.state;
   };
 }
