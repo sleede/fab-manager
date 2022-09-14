@@ -53,6 +53,8 @@ export default class OrderLib {
    */
   static statusColor = (order: Order) => {
     switch (order.state) {
+      case 'cart':
+        return 'cart';
       case 'payment':
         if (order.payment_state === 'failed') {
           return 'error';

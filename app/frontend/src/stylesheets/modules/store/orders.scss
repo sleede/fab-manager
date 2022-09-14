@@ -21,7 +21,7 @@
 }
 
 .show-order {
-  &-nav { 
+  &-nav {
     max-width: 1600px;
     margin: 0 auto;
     @include grid-col(12);
@@ -102,6 +102,7 @@
 
   .fab-state-label {
     --status-color: var(--success);
+    &.cart { --status-color: var(--secondary-light); }
     &.error { --status-color: var(--alert); }
     &.canceled { --status-color: var(--alert-light); }
     &.pending { --status-color: var(--information); }
