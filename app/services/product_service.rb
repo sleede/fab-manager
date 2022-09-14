@@ -25,7 +25,7 @@ class ProductService
     end
 
     # amount params multiplied by hundred
-    def self.amount_multiplied_by_hundred(amount)
+    def amount_multiplied_by_hundred(amount)
       if amount.present?
         v = amount.to_f
 
