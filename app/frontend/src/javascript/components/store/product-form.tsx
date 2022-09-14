@@ -227,8 +227,8 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
           <FabButton className="main-action-btn" onClick={handleSubmit(saveProduct)}>{t('app.admin.store.product_form.save')}</FabButton>
         </div>
       </header>
-      <UnsavedFormAlert uiRouter={uiRouter} formState={formState} />
       <form className="product-form" onSubmit={handleSubmit(onSubmit)}>
+        <UnsavedFormAlert uiRouter={uiRouter} formState={formState} />
         <div className='tabs'>
           <p className={!stockTab ? 'is-active' : ''} onClick={() => setStockTab(false)}>{t('app.admin.store.product_form.product_parameters')}</p>
           <p className={stockTab ? 'is-active' : ''} onClick={() => setStockTab(true)}>{t('app.admin.store.product_form.stock_management')}</p>

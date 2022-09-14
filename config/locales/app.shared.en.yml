@@ -564,3 +564,7 @@ en:
         order_item:
           total: "Total"
           client: "Client"
+      unsaved_form_alert:
+        modal_title: "You have some unsaved changes"
+        confirmation_message: "If you leave this page, your changes will be lost. Are you sure you want to continue?"
+        confirmation_button: "Yes, don't save"
