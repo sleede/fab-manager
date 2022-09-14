@@ -113,36 +113,41 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
   };
 
   /**
-   * Filter: by categories
+   * Callback triggered when a category filter is selected or unselected.
+   * This may cause other filters to be selected or unselected accordingly.
    */
-  const handleSelectCategory = (c: ProductCategory, checked: boolean, instantUpdate?: boolean) => {
+  const handleSelectCategory = (currentCategory: ProductCategory, checked: boolean, instantUpdate?: boolean) => {
     let list = [...filters.categories];
     const children = productCategories
-      .filter(el => el.parent_id === c.id);
+      .filter(el => el.parent_id === currentCategory.id);
     const siblings = productCategories
-      .filter(el => el.parent_id === c.parent_id && el.parent_id !== null);
+      .filter(el => el.parent_id === currentCategory.parent_id && el.parent_id !== null);
 
     if (checked) {
-      list.push(c);
+      list.push(currentCategory);
       if (children.length) {
-        const unique = Array.from(new Set([...list, ...children]));
-        list = [...unique];
+        // if a parent category is selected, we automatically select all its children
+        list = [...Array.from(new Set([...list, ...children]))];
       }
       if (siblings.length && siblings.every(el => list.includes(el))) {
+        // if a child category is selected, with every sibling of it, we automatically select its parent
         list.push(productCategories.find(p => p.id === siblings[0].parent_id));
       }
     } else {
-      list.splice(list.indexOf(c), 1);
-      const parent = productCategories.find(p => p.id === c.parent_id);
-      if (c.parent_id && list.includes(parent)) {
+      list.splice(list.indexOf(currentCategory), 1);
+      const parent = productCategories.find(p => p.id === currentCategory.parent_id);
+      if (currentCategory.parent_id && list.includes(parent)) {
+        // if a child category is unselected, we unselect its parent
         list.splice(list.indexOf(parent), 1);
       }
       if (children.length) {
+        // if a parent category is unselected, we unselect all its children
         children.forEach(child => {
           list.splice(list.indexOf(child), 1);
         });
       }
     }
+
     setFilters(draft => {
       return { ...draft, categories: list };
     });
@@ -152,13 +157,13 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
   };
 
   /**
-   * Filter: by machines
+   * Callback triggered when a machine filter is seleced or unselected.
    */
-  const handleSelectMachine = (m: checklistOption, checked, instantUpdate?) => {
+  const handleSelectMachine = (currentMachine: checklistOption, checked: boolean, instantUpdate?: boolean) => {
     const list = [...filters.machines];
     checked
-      ? list.push(m)
-      : list.splice(list.indexOf(m), 1);
+      ? list.push(currentMachine)
+      : list.splice(list.indexOf(currentMachine), 1);
     setFilters(draft => {
       return { ...draft, machines: list };
     });
