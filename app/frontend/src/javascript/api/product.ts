@@ -1,7 +1,7 @@
 import apiClient from './clients/api-client';
 import { AxiosResponse } from 'axios';
 import { serialize } from 'object-to-formdata';
-import { Product, ProductIndexFilter, ProductsIndex } from '../models/product';
+import { Product, ProductIndexFilter, ProductsIndex, ProductStockMovement } from '../models/product';
 import ApiLib from '../lib/api';
 
 export default class ProductAPI {
@@ -87,6 +87,11 @@ export default class ProductAPI {
 
   static async destroy (productId: number): Promise<void> {
     const res: AxiosResponse<void> = await apiClient.delete(`/api/products/${productId}`);
+    return res?.data;
+  }
+
+  static async stockMovements (productId: number, page = 1): Promise<Array<ProductStockMovement>> {
+    const res: AxiosResponse<Array<ProductStockMovement>> = await apiClient.get(`/api/products/${productId}/stock_movements?page=${page}`);
     return res?.data;
   }
 }

@@ -33,24 +33,27 @@ module Payments::PaymentConcern
         order.payment_gateway_object = PaymentGatewayObject.new(gateway_object_id: payment_id, gateway_object_type: payment_type)
       end
       order.order_items.each do |item|
-        ProductService.update_stock(item.orderable, 'external', 'sold', -item.quantity, item.id)
+        ProductService.update_stock(item.orderable,
+                                    [{ stock_type: 'external', reason: 'sold', quantity: item.quantity, order_item_id: item.id }]).save
       end
-      if order.save
-        invoice = InvoicesService.create(
-          { total: order.total, coupon: coupon },
-          order.operator_profile_id,
-          order.order_items,
-          order.statistic_profile.user,
-          payment_id: payment_id,
-          payment_type: payment_type,
-          payment_method: order.payment_method
-        )
-        invoice.wallet_amount = order.wallet_amount
-        invoice.wallet_transaction_id = order.wallet_transaction_id
-        invoice.save
-        order.update_attribute(:invoice_id, invoice.id)
-      end
+      create_invoice(order, coupon, payment_id, payment_type) if order.save
       order.reload
     end
+  end
+
+  def create_invoice(order, coupon, payment_id, payment_type)
+    invoice = InvoicesService.create(
+      { total: order.total, coupon: coupon },
+      order.operator_profile_id,
+      order.order_items,
+      order.statistic_profile.user,
+      payment_id: payment_id,
+      payment_type: payment_type,
+      payment_method: order.payment_method
+    )
+    invoice.wallet_amount = order.wallet_amount
+    invoice.wallet_transaction_id = order.wallet_transaction_id
+    invoice.save
+    order.update(invoice_id: invoice.id)
   end
 end

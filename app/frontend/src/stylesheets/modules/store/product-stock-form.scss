@@ -1,6 +1,31 @@
 .product-stock-form {
   h4 span { @include text-sm; }
 
+  .ongoing-stocks {
+    margin: 2.4rem 0;
+    .save-notice {
+      @include text-xs;
+      margin-left: 1rem;
+      color: var(--alert);
+    }
+    .unsaved-stock-movement {
+      background-color: var(--gray-soft-light);
+      border: 0;
+      padding: 1.2rem;
+      margin-top: 1rem;
+
+      .cancel-action {
+        &:hover {
+          text-decoration: underline;
+          cursor: pointer;
+        }
+        svg {
+          margin-left: 1rem;
+          vertical-align: middle;
+        }
+      }
+    }
+  }
   .store-list {
     h4 { margin: 0; }
   }

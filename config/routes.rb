@@ -154,7 +154,9 @@ Rails.application.routes.draw do
       patch 'position', on: :member
     end
 
-    resources :products
+    resources :products do
+      get 'stock_movements', on: :member
+    end
     resources :cart, only: %i[create] do
       put 'add_item', on: :collection
       put 'remove_item', on: :collection
