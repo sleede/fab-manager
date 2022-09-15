@@ -69,6 +69,8 @@ class NotificationType
     notify_user_is_invalidated
     notify_user_proof_of_identity_refusal
     notify_admin_user_proof_of_identity_refusal
+    notify_user_order_is_ready
+    notify_user_order_is_canceled
   ]
   # deprecated:
   # - notify_member_subscribed_plan_is_changed

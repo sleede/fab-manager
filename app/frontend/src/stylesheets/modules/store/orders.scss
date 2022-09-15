@@ -103,6 +103,8 @@
   .fab-state-label {
     --status-color: var(--success);
     &.cart { --status-color: var(--secondary-dark); }
+    &.paid { --status-color: var(--success-light); }
+    &.ready { --status-color: var(--success); }
     &.error { --status-color: var(--alert); }
     &.canceled { --status-color: var(--alert-light); }
     &.pending { --status-color: var(--information); }

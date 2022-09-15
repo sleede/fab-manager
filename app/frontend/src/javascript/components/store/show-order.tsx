@@ -24,7 +24,7 @@ interface ShowOrderProps {
 * Option format, expected by react-select
 * @see https://github.com/JedWatson/react-select
 */
-type selectOption = { value: number, label: string };
+type selectOption = { value: string, label: string };
 
 /**
  * This component shows an order details
@@ -35,11 +35,12 @@ export const ShowOrder: React.FC<ShowOrderProps> = ({ orderId, currentUser, onEr
   const { t } = useTranslation('shared');
 
   const [order, setOrder] = useState<Order>();
+  const [currentAction, setCurrentAction] = useState<selectOption>();
 
   useEffect(() => {
     OrderAPI.get(orderId).then(data => {
       setOrder(data);
-    });
+    }).catch(onError);
   }, []);
 
   /**
@@ -53,23 +54,43 @@ export const ShowOrder: React.FC<ShowOrderProps> = ({ orderId, currentUser, onEr
    * Creates sorting options to the react-select format
    */
   const buildOptions = (): Array<selectOption> => {
-    return [
-      { value: 0, label: t('app.shared.store.show_order.state.error') },
-      { value: 1, label: t('app.shared.store.show_order.state.canceled') },
-      { value: 2, label: t('app.shared.store.show_order.state.pending') },
-      { value: 3, label: t('app.shared.store.show_order.state.under_preparation') },
-      { value: 4, label: t('app.shared.store.show_order.state.paid') },
-      { value: 5, label: t('app.shared.store.show_order.state.ready') },
-      { value: 6, label: t('app.shared.store.show_order.state.collected') },
-      { value: 7, label: t('app.shared.store.show_order.state.refunded') }
-    ];
+    let actions = [];
+    switch (order.state) {
+      case 'paid':
+        actions = actions.concat(['in_progress', 'ready', 'canceled', 'refunded']);
+        break;
+      case 'payment_failed':
+        actions = actions.concat(['canceled']);
+        break;
+      case 'in_progress':
+        actions = actions.concat(['ready', 'canceled', 'refunded']);
+        break;
+      case 'ready':
+        actions = actions.concat(['canceled', 'refunded']);
+        break;
+      case 'canceled':
+        actions = actions.concat(['refunded']);
+        break;
+      default:
+        actions = [];
+    }
+    return actions.map(action => {
+      return { value: action, label: t(`app.shared.store.show_order.state.${action}`) };
+    });
   };
 
   /**
    * Callback after selecting an action
    */
   const handleAction = (action: selectOption) => {
-    console.log('Action:', action);
+    setCurrentAction(action);
+    OrderAPI.updateState(order, action.value, action.value).then(data => {
+      setOrder(data);
+      setCurrentAction(null);
+    }).catch((e) => {
+      onError(e);
+      setCurrentAction(null);
+    });
   };
 
   // Styles the React-select component
@@ -127,6 +148,7 @@ export const ShowOrder: React.FC<ShowOrderProps> = ({ orderId, currentUser, onEr
             <Select
               options={buildOptions()}
               onChange={option => handleAction(option)}
+              value={currentAction}
               styles={customStyles}
             />
           }

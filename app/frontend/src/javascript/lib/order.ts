@@ -55,8 +55,12 @@ export default class OrderLib {
     switch (order.state) {
       case 'cart':
         return 'cart';
+      case 'paid':
+        return 'paid';
       case 'payment_failed':
         return 'error';
+      case 'ready':
+        return 'ready';
       case 'canceled':
         return 'canceled';
       case 'in_progress':

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_14_145334) do
+ActiveRecord::Schema.define(version: 2022_09_15_133100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -443,6 +443,17 @@ ActiveRecord::Schema.define(version: 2022_09_14_145334) do
     t.string "profile_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "order_activities", force: :cascade do |t|
+    t.bigint "order_id"
+    t.bigint "operator_profile_id"
+    t.string "activity_type"
+    t.text "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["operator_profile_id"], name: "index_order_activities_on_operator_profile_id"
+    t.index ["order_id"], name: "index_order_activities_on_order_id"
   end
 
   create_table "order_items", force: :cascade do |t|
@@ -1170,6 +1181,8 @@ ActiveRecord::Schema.define(version: 2022_09_14_145334) do
   add_foreign_key "invoices", "statistic_profiles"
   add_foreign_key "invoices", "wallet_transactions"
   add_foreign_key "invoicing_profiles", "users"
+  add_foreign_key "order_activities", "invoicing_profiles", column: "operator_profile_id"
+  add_foreign_key "order_activities", "orders"
   add_foreign_key "order_items", "orders"
   add_foreign_key "orders", "coupons"
   add_foreign_key "orders", "invoices"

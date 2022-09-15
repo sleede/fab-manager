@@ -15,11 +15,8 @@ class API::OrdersController < API::ApiController
   def update
     authorize @order
 
-    if @order.update(order_parameters)
-      render status: :ok
-    else
-      render json: @order.errors.full_messages, status: :unprocessable_entity
-    end
+    @order = ::Orders::OrderService.update_state(@order, current_user, order_params[:state], order_params[:note])
+    render :show
   end
 
   def destroy
@@ -35,6 +32,6 @@ class API::OrdersController < API::ApiController
   end
 
   def order_params
-    params.require(:order).permit(:state)
+    params.require(:order).permit(:state, :note)
   end
 end
