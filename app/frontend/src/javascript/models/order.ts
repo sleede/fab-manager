@@ -55,6 +55,10 @@ export interface OrderIndex {
 export interface OrderIndexFilter {
   reference?: string,
   user_id?: number,
+  user?: {
+    id: number,
+    name?: string,
+  },
   page?: number,
   sort?: 'DESC'|'ASC'
   states?: Array<string>,

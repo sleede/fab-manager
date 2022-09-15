@@ -15,13 +15,11 @@ import { FormInput } from '../form/form-input';
 import OrderAPI from '../../api/order';
 import { Order, OrderIndexFilter } from '../../models/order';
 import { FabPagination } from '../base/fab-pagination';
-import { TDateISO } from '../../typings/date-iso';
 
 declare const Application: IApplication;
 
 interface OrdersProps {
   currentUser?: User,
-  onSuccess: (message: string) => void,
   onError: (message: string) => void,
 }
 /**
@@ -35,28 +33,36 @@ type selectOption = { value: number, label: string };
 */
 type checklistOption = { value: string, label: string };
 
+const initFilters: OrderIndexFilter = {
+  reference: '',
+  states: [],
+  page: 1,
+  sort: 'DESC'
+};
+
+const FablabOrdersFilters = 'FablabOrdersFilters';
+
 /**
  * Admin list of orders
  */
-// TODO: delete next eslint disable
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Orders: React.FC<OrdersProps> = ({ currentUser, onSuccess, onError }) => {
+const Orders: React.FC<OrdersProps> = ({ currentUser, onError }) => {
   const { t } = useTranslation('admin');
 
-  const { register, getValues, setValue } = useForm();
+  const { register, setValue } = useForm();
 
   const [orders, setOrders] = useState<Array<Order>>([]);
-  const [filters, setFilters] = useImmer<OrderIndexFilter>(initFilters);
+  const [filters, setFilters] = useImmer<OrderIndexFilter>(window[FablabOrdersFilters] || initFilters);
   const [accordion, setAccordion] = useState({});
   const [pageCount, setPageCount] = useState<number>(0);
   const [totalCount, setTotalCount] = useState<number>(0);
   const [reference, setReference] = useState<string>(filters.reference);
   const [states, setStates] = useState<Array<string>>(filters.states);
-  const [user, setUser] = useState<User>();
-  const [periodFrom, setPeriodFrom] = useState<string>();
-  const [periodTo, setPeriodTo] = useState<string>();
+  const [user, setUser] = useState<{ id: number, name?: string }>(filters.user);
+  const [periodFrom, setPeriodFrom] = useState<string>(filters.period_from);
+  const [periodTo, setPeriodTo] = useState<string>(filters.period_to);
 
   useEffect(() => {
+    window[FablabOrdersFilters] = filters;
     OrderAPI.index(filters).then(res => {
       setPageCount(res.total_pages);
       setTotalCount(res.total_count);
@@ -95,6 +101,7 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onSuccess, onError }) => {
             break;
           case 'user':
             draft.user_id = user.id;
+            draft.user = user;
             break;
           case 'period':
             if (periodFrom && periodTo) {
@@ -104,6 +111,40 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onSuccess, onError }) => {
               draft.period_from = '';
               draft.period_to = '';
             }
+            break;
+          default:
+        }
+      });
+    };
+  };
+
+  /**
+   * Clear filter by type
+   */
+  const removefilter = (filterType: string) => {
+    return () => {
+      setFilters(draft => {
+        draft.page = 1;
+        draft.sort = 'DESC';
+        switch (filterType) {
+          case 'reference':
+            draft.reference = '';
+            setReference('');
+            break;
+          case 'states':
+            draft.states = [];
+            setStates([]);
+            break;
+          case 'user':
+            delete draft.user_id;
+            delete draft.user;
+            setUser(null);
+            break;
+          case 'period':
+            draft.period_from = '';
+            draft.period_to = '';
+            setPeriodFrom(null);
+            setPeriodTo(null);
             break;
           default:
         }
@@ -219,10 +260,10 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onSuccess, onError }) => {
           </div>
         </header>
         <div>
-          {filters.reference && <div>{filters.reference}</div>}
-          {filters.states.length > 0 && <div>{filters.states.join(', ')}</div>}
-          {filters.user_id > 0 && <div>{user?.name}</div>}
-          {filters.period_from && <div>{filters.period_from} - {filters.period_to}</div>}
+          {filters.reference && <div>{filters.reference} <i onClick={removefilter('reference')}>x</i></div>}
+          {filters.states.length > 0 && <div>{filters.states.join(', ')} <i onClick={removefilter('states')}>x</i></div>}
+          {filters.user_id > 0 && <div>{user?.name} <i onClick={removefilter('user')}>x</i></div>}
+          {filters.period_from && <div>{filters.period_from} - {filters.period_to} <i onClick={removefilter('period')}>x</i></div>}
         </div>
         <div className="accordion">
           <AccordionItem id={0}
@@ -261,7 +302,7 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onSuccess, onError }) => {
           >
             <div className='content'>
               <div className="group">
-                <MemberSelect noHeader value={user} onSelected={handleSelectMember} />
+                <MemberSelect noHeader value={user as User} onSelected={handleSelectMember} />
                 <FabButton onClick={applyFilters('user')} className="is-info">{t('app.admin.store.orders.filter_apply')}</FabButton>
               </div>
             </div>
@@ -278,11 +319,13 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onSuccess, onError }) => {
                   <FormInput id="period_from"
                              register={register}
                              onChange={handlePeriodChanged('period_from')}
+                             defaultValue={periodFrom}
                              type="date" />
                   to
                   <FormInput id="period_to"
                              register={register}
                              onChange={handlePeriodChanged('period_to')}
+                             defaultValue={periodTo}
                              type="date" />
                 </div>
                 <FabButton onClick={applyFilters('period')} className="is-info">{t('app.admin.store.orders.filter_apply')}</FabButton>
@@ -296,6 +339,7 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onSuccess, onError }) => {
         <StoreListHeader
           productsCount={totalCount}
           selectOptions={buildOptions()}
+          selectValue={filters.sort === 'ASC' ? 1 : 0}
           onSelectOptionsChange={handleSorting}
         />
         <div className="orders-list">
@@ -319,11 +363,4 @@ const OrdersWrapper: React.FC<OrdersProps> = (props) => {
   );
 };
 
-Application.Components.component('orders', react2angular(OrdersWrapper, ['currentUser', 'onSuccess', 'onError']));
-
-const initFilters: OrderIndexFilter = {
-  reference: '',
-  states: [],
-  page: 1,
-  sort: 'DESC'
-};
+Application.Components.component('orders', react2angular(OrdersWrapper, ['currentUser', 'onError']));
