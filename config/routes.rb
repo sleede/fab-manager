@@ -167,6 +167,7 @@ Rails.application.routes.draw do
       post 'payment', on: :collection
       post 'confirm_payment', on: :collection
     end
+    resources :orders, except: %i[create]
 
     # for admin
     resources :trainings do

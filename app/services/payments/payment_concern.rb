@@ -27,11 +27,11 @@ module Payments::PaymentConcern
                              else
                                payment_method
                              end
-      order.state = 'in_progress'
-      order.payment_state = 'paid'
+      order.state = 'paid'
       if payment_id && payment_type
         order.payment_gateway_object = PaymentGatewayObject.new(gateway_object_id: payment_id, gateway_object_type: payment_type)
       end
+      order.order_activities.create(activity_type: 'paid')
       order.order_items.each do |item|
         ProductService.update_stock(item.orderable,
                                     [{ stock_type: 'external', reason: 'sold', quantity: item.quantity, order_item_id: item.id }]).save

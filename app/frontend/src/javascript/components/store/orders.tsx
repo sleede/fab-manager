@@ -12,13 +12,14 @@ import { OrderItem } from './order-item';
 import { MemberSelect } from '../user/member-select';
 import { User } from '../../models/user';
 import { FormInput } from '../form/form-input';
-import { TDateISODate } from '../../typings/date-iso';
+import OrderAPI from '../../api/order';
+import { Order, OrderIndexFilter } from '../../models/order';
+import { FabPagination } from '../base/fab-pagination';
 
 declare const Application: IApplication;
 
 interface OrdersProps {
   currentUser?: User,
-  onSuccess: (message: string) => void,
   onError: (message: string) => void,
 }
 /**
@@ -30,26 +31,44 @@ type selectOption = { value: number, label: string };
 /**
 * Option format, expected by checklist
 */
-type checklistOption = { value: number, label: string };
+type checklistOption = { value: string, label: string };
+
+const initFilters: OrderIndexFilter = {
+  reference: '',
+  states: [],
+  page: 1,
+  sort: 'DESC'
+};
+
+const FablabOrdersFilters = 'FablabOrdersFilters';
 
 /**
  * Admin list of orders
  */
-// TODO: delete next eslint disable
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Orders: React.FC<OrdersProps> = ({ currentUser, onSuccess, onError }) => {
+const Orders: React.FC<OrdersProps> = ({ currentUser, onError }) => {
   const { t } = useTranslation('admin');
 
-  const { register, getValues } = useForm();
+  const { register, setValue } = useForm();
 
-  const [filters, setFilters] = useImmer<Filters>(initFilters);
-  const [clearFilters, setClearFilters] = useState<boolean>(false);
+  const [orders, setOrders] = useState<Array<Order>>([]);
+  const [filters, setFilters] = useImmer<OrderIndexFilter>(window[FablabOrdersFilters] || initFilters);
   const [accordion, setAccordion] = useState({});
+  const [pageCount, setPageCount] = useState<number>(0);
+  const [totalCount, setTotalCount] = useState<number>(0);
+  const [reference, setReference] = useState<string>(filters.reference);
+  const [states, setStates] = useState<Array<string>>(filters.states);
+  const [user, setUser] = useState<{ id: number, name?: string }>(filters.user);
+  const [periodFrom, setPeriodFrom] = useState<string>(filters.period_from);
+  const [periodTo, setPeriodTo] = useState<string>(filters.period_to);
 
   useEffect(() => {
-    applyFilters();
-    setClearFilters(false);
-  }, [clearFilters]);
+    window[FablabOrdersFilters] = filters;
+    OrderAPI.index(filters).then(res => {
+      setPageCount(res.total_pages);
+      setTotalCount(res.total_count);
+      setOrders(res.data);
+    }).catch(onError);
+  }, [filters]);
 
   /**
    * Create a new order
@@ -59,21 +78,78 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onSuccess, onError }) => {
   };
 
   const statusOptions: checklistOption[] = [
-    { value: 0, label: t('app.admin.store.orders.status.error') },
-    { value: 1, label: t('app.admin.store.orders.status.canceled') },
-    { value: 2, label: t('app.admin.store.orders.status.pending') },
-    { value: 3, label: t('app.admin.store.orders.status.under_preparation') },
-    { value: 4, label: t('app.admin.store.orders.status.paid') },
-    { value: 5, label: t('app.admin.store.orders.status.ready') },
-    { value: 6, label: t('app.admin.store.orders.status.collected') },
-    { value: 7, label: t('app.admin.store.orders.status.refunded') }
+    { value: 'cart', label: t('app.admin.store.orders.state.cart') },
+    { value: 'paid', label: t('app.admin.store.orders.state.paid') },
+    { value: 'payment_failed', label: t('app.admin.store.orders.state.payment_failed') },
+    { value: 'in_progress', label: t('app.admin.store.orders.state.in_progress') },
+    { value: 'ready', label: t('app.admin.store.orders.state.ready') },
+    { value: 'canceled', label: t('app.admin.store.orders.state.canceled') }
   ];
 
   /**
    * Apply filters
    */
-  const applyFilters = () => {
-    console.log('Apply filters:', filters);
+  const applyFilters = (filterType: string) => {
+    return () => {
+      setFilters(draft => {
+        switch (filterType) {
+          case 'reference':
+            draft.reference = reference;
+            break;
+          case 'states':
+            draft.states = states;
+            break;
+          case 'user':
+            draft.user_id = user.id;
+            draft.user = user;
+            break;
+          case 'period':
+            if (periodFrom && periodTo) {
+              draft.period_from = periodFrom;
+              draft.period_to = periodTo;
+            } else {
+              draft.period_from = '';
+              draft.period_to = '';
+            }
+            break;
+          default:
+        }
+      });
+    };
+  };
+
+  /**
+   * Clear filter by type
+   */
+  const removefilter = (filterType: string) => {
+    return () => {
+      setFilters(draft => {
+        draft.page = 1;
+        draft.sort = 'DESC';
+        switch (filterType) {
+          case 'reference':
+            draft.reference = '';
+            setReference('');
+            break;
+          case 'states':
+            draft.states = [];
+            setStates([]);
+            break;
+          case 'user':
+            delete draft.user_id;
+            delete draft.user;
+            setUser(null);
+            break;
+          case 'period':
+            draft.period_from = '';
+            draft.period_to = '';
+            setPeriodFrom(null);
+            setPeriodTo(null);
+            break;
+          default:
+        }
+      });
+    };
   };
 
   /**
@@ -81,8 +157,13 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onSuccess, onError }) => {
    */
   const clearAllFilters = () => {
     setFilters(initFilters);
-    setClearFilters(true);
-    console.log('Clear all filters');
+    setReference('');
+    setStates([]);
+    setUser(null);
+    setPeriodFrom(null);
+    setPeriodTo(null);
+    setValue('period_from', '');
+    setValue('period_to', '');
   };
 
   /**
@@ -94,40 +175,54 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onSuccess, onError }) => {
       { value: 1, label: t('app.admin.store.orders.sort.oldest') }
     ];
   };
+
   /**
    * Display option: sorting
    */
   const handleSorting = (option: selectOption) => {
-    console.log('Sort option:', option);
+    setFilters(draft => {
+      draft.sort = option.value ? 'ASC' : 'DESC';
+    });
+  };
+
+  /**
+   * Filter: by reference
+   */
+  const handleReferenceChanged = (value: string) => {
+    setReference(value);
   };
 
   /**
    * Filter: by status
    */
-  const handleSelectStatus = (s: checklistOption, checked) => {
-    const list = [...filters.status];
+  const handleSelectStatus = (s: checklistOption, checked: boolean) => {
+    const list = [...states];
     checked
-      ? list.push(s)
-      : list.splice(list.indexOf(s), 1);
-    setFilters(draft => {
-      return { ...draft, status: list };
-    });
+      ? list.push(s.value)
+      : list.splice(list.indexOf(s.value), 1);
+    setStates(list);
   };
 
   /**
    * Filter: by member
    */
-  const handleSelectMember = (userId: number) => {
-    setFilters(draft => {
-      return { ...draft, memberId: userId };
-    });
+  const handleSelectMember = (user: User) => {
+    setUser(user);
   };
 
   /**
    * Filter: by period
    */
-  const handlePeriod = () => {
-    console.log(getValues(['period_from', 'period_to']));
+  const handlePeriodChanged = (period: string) => {
+    return (event: React.ChangeEvent<HTMLInputElement>) => {
+      const value = event.target.value;
+      if (period === 'period_from') {
+        setPeriodFrom(value);
+      }
+      if (period === 'period_to') {
+        setPeriodTo(value);
+      }
+    };
   };
 
   /**
@@ -135,6 +230,15 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onSuccess, onError }) => {
    */
   const handleAccordion = (id, state) => {
     setAccordion({ ...accordion, [id]: state });
+  };
+
+  /**
+   * Handle orders pagination
+   */
+  const handlePagination = (page: number) => {
+    setFilters(draft => {
+      draft.page = page;
+    });
   };
 
   return (
@@ -155,6 +259,12 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onSuccess, onError }) => {
             <FabButton onClick={clearAllFilters} className="is-black">{t('app.admin.store.orders.filter_clear')}</FabButton>
           </div>
         </header>
+        <div>
+          {filters.reference && <div>{filters.reference} <i onClick={removefilter('reference')}>x</i></div>}
+          {filters.states.length > 0 && <div>{filters.states.join(', ')} <i onClick={removefilter('states')}>x</i></div>}
+          {filters.user_id > 0 && <div>{user?.name} <i onClick={removefilter('user')}>x</i></div>}
+          {filters.period_from && <div>{filters.period_from} - {filters.period_to} <i onClick={removefilter('period')}>x</i></div>}
+        </div>
         <div className="accordion">
           <AccordionItem id={0}
             isOpen={accordion[0]}
@@ -163,8 +273,8 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onSuccess, onError }) => {
           >
             <div className='content'>
               <div className="group">
-                <input type="text" />
-                <FabButton onClick={applyFilters} className="is-info">{t('app.admin.store.orders.filter_apply')}</FabButton>
+                <input type="text" value={reference} onChange={(event) => handleReferenceChanged(event.target.value)}/>
+                <FabButton onClick={applyFilters('reference')} className="is-info">{t('app.admin.store.orders.filter_apply')}</FabButton>
               </div>
             </div>
           </AccordionItem>
@@ -177,12 +287,12 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onSuccess, onError }) => {
               <div className="group u-scrollbar">
                 {statusOptions.map(s => (
                   <label key={s.value}>
-                    <input type="checkbox" checked={filters.status.some(o => o.label === s.label)} onChange={(event) => handleSelectStatus(s, event.target.checked)} />
+                    <input type="checkbox" checked={states.some(o => o === s.value)} onChange={(event) => handleSelectStatus(s, event.target.checked)} />
                     <p>{s.label}</p>
                   </label>
                 ))}
               </div>
-              <FabButton onClick={applyFilters} className="is-info">{t('app.admin.store.orders.filter_apply')}</FabButton>
+              <FabButton onClick={applyFilters('states')} className="is-info">{t('app.admin.store.orders.filter_apply')}</FabButton>
             </div>
           </AccordionItem>
           <AccordionItem id={2}
@@ -192,8 +302,8 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onSuccess, onError }) => {
           >
             <div className='content'>
               <div className="group">
-                <MemberSelect noHeader onSelected={handleSelectMember} />
-                <FabButton onClick={applyFilters} className="is-info">{t('app.admin.store.orders.filter_apply')}</FabButton>
+                <MemberSelect noHeader value={user as User} onSelected={handleSelectMember} />
+                <FabButton onClick={applyFilters('user')} className="is-info">{t('app.admin.store.orders.filter_apply')}</FabButton>
               </div>
             </div>
           </AccordionItem>
@@ -208,13 +318,17 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onSuccess, onError }) => {
                   from
                   <FormInput id="period_from"
                              register={register}
+                             onChange={handlePeriodChanged('period_from')}
+                             defaultValue={periodFrom}
                              type="date" />
                   to
                   <FormInput id="period_to"
                              register={register}
+                             onChange={handlePeriodChanged('period_to')}
+                             defaultValue={periodTo}
                              type="date" />
                 </div>
-                <FabButton onClick={handlePeriod} className="is-info">{t('app.admin.store.orders.filter_apply')}</FabButton>
+                <FabButton onClick={applyFilters('period')} className="is-info">{t('app.admin.store.orders.filter_apply')}</FabButton>
               </div>
             </div>
           </AccordionItem>
@@ -223,13 +337,19 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onSuccess, onError }) => {
 
       <div className="store-list">
         <StoreListHeader
-          productsCount={0}
+          productsCount={totalCount}
           selectOptions={buildOptions()}
+          selectValue={filters.sort === 'ASC' ? 1 : 0}
           onSelectOptionsChange={handleSorting}
         />
         <div className="orders-list">
-          <OrderItem currentUser={currentUser} />
+          {orders.map(order => (
+            <OrderItem key={order.id} order={order} currentUser={currentUser} />
+          ))}
         </div>
+        {orders.length > 0 &&
+          <FabPagination pageCount={pageCount} currentPage={filters.page} selectPage={handlePagination} />
+        }
       </div>
     </div>
   );
@@ -243,20 +363,4 @@ const OrdersWrapper: React.FC<OrdersProps> = (props) => {
   );
 };
 
-Application.Components.component('orders', react2angular(OrdersWrapper, ['currentUser', 'onSuccess', 'onError']));
-
-interface Filters {
-  reference: string,
-  status: checklistOption[],
-  memberId: number,
-  period_from: TDateISODate,
-  period_to: TDateISODate
-}
-
-const initFilters: Filters = {
-  reference: '',
-  status: [],
-  memberId: null,
-  period_from: null,
-  period_to: null
-};
+Application.Components.component('orders', react2angular(OrdersWrapper, ['currentUser', 'onError']));

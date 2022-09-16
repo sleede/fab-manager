@@ -374,3 +374,11 @@ en:
         user_proof_of_identity_files_refusal: "Member %{NAME}'s supporting documents were rejected by %{OPERATOR}:"
     shared:
       hello: "Hello %{user_name}"
+    notify_user_order_is_ready:
+      subject: "Your command is ready"
+      body:
+        notify_user_order_is_ready: "Your command %{REFERENCE} is ready:"
+    notify_user_order_is_canceled:
+      subject: "Your command is canceled"
+      body:
+        notify_user_order_is_canceled: "Your command %{REFERENCE} is canceled:"

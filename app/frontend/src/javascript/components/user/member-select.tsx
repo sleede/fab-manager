@@ -6,7 +6,8 @@ import { User } from '../../models/user';
 
 interface MemberSelectProps {
   defaultUser?: User,
-  onSelected?: (userId: number) => void,
+  value?: User,
+  onSelected?: (user: { id: number, name: string }) => void,
   noHeader?: boolean
 }
 
@@ -19,21 +20,30 @@ type selectOption = { value: number, label: string };
 /**
  * This component renders the member select for manager.
  */
-export const MemberSelect: React.FC<MemberSelectProps> = ({ defaultUser, onSelected, noHeader }) => {
+export const MemberSelect: React.FC<MemberSelectProps> = ({ defaultUser, value, onSelected, noHeader }) => {
   const { t } = useTranslation('public');
-  const [value, setValue] = useState<selectOption>();
+  const [option, setOption] = useState<selectOption>();
 
   useEffect(() => {
     if (defaultUser) {
-      setValue({ value: defaultUser.id, label: defaultUser.name });
+      setOption({ value: defaultUser.id, label: defaultUser.name });
     }
   }, []);
 
   useEffect(() => {
-    if (!defaultUser && value) {
-      onSelected(value.value);
+    if (!defaultUser && option) {
+      onSelected({ id: option.value, name: option.label });
     }
   }, [defaultUser]);
+
+  useEffect(() => {
+    if (value && value?.id !== option?.value) {
+      setOption({ value: value.id, label: value.name });
+    }
+    if (!value) {
+      setOption(null);
+    }
+  }, [value]);
 
   /**
    * search members by name
@@ -52,8 +62,8 @@ export const MemberSelect: React.FC<MemberSelectProps> = ({ defaultUser, onSelec
    * callback for handle select changed
    */
   const onChange = (v: selectOption) => {
-    setValue(v);
-    onSelected(v.value);
+    setOption(v);
+    onSelected({ id: v.value, name: v.label });
   };
 
   return (
@@ -68,7 +78,7 @@ export const MemberSelect: React.FC<MemberSelectProps> = ({ defaultUser, onSelec
                    loadOptions={loadMembers}
                    defaultOptions
                    onChange={onChange}
-                   value={value}
+                   value={option}
       />
     </div>
   );

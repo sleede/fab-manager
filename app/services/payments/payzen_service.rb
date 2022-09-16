@@ -31,7 +31,7 @@ class Payments::PayzenService
       o = payment_success(order, coupon_code, 'card', payment_id, 'PayZen::Order')
       { order: o }
     else
-      order.update(payment_state: 'failed')
+      order.update(state: 'payment_failed')
       { order: order, payment: { error: { statusText: payzen_order['answer'] } } }
     end
   end

@@ -54,6 +54,7 @@ class ProductService
 
     def create(product_params, stock_movement_params = [])
       product = Product.new(product_params)
+      product.amount = amount_multiplied_by_hundred(product_params[:amount])
       update(product, product_params, stock_movement_params)
     end
 
