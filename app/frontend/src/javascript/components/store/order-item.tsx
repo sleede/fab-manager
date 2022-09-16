@@ -6,6 +6,7 @@ import { FabButton } from '../base/fab-button';
 import { User } from '../../models/user';
 import { FabStateLabel } from '../base/fab-state-label';
 import OrderLib from '../../lib/order';
+import { ArrowClockwise } from 'phosphor-react';
 
 interface OrderItemProps {
   order?: Order,
@@ -47,7 +48,18 @@ export const OrderItem: React.FC<OrderItemProps> = ({ order, currentUser }) => {
           <p>{order?.user?.name || ''}</p>
         </div>
       }
-      <p className="date">{FormatLib.date(order.created_at)}</p>
+      <div className="date">
+        <span>{t('app.shared.store.order_item.created_at')}</span>
+        <p>{FormatLib.date(order.created_at)}
+          <div className="fab-tooltip">
+            <span className="trigger"><ArrowClockwise size={16} weight="light" /></span>
+            <div className="content">
+              {t('app.shared.store.order_item.last_update')}<br />
+              {FormatLib.date(order.updated_at)}
+            </div>
+          </div>
+        </p>
+      </div>
       <div className='price'>
         <span>{t('app.shared.store.order_item.total')}</span>
         <p>{FormatLib.price(order.state === 'cart' ? order.total : order.paid_total)}</p>
