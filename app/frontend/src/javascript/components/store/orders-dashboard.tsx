@@ -34,7 +34,7 @@ export const OrdersDashboard: React.FC<OrdersDashboardProps> = ({ currentUser, o
   const [totalCount, setTotalCount] = useState<number>(0);
 
   useEffect(() => {
-    OrderAPI.index({}).then(res => {
+    OrderAPI.index({ user_id: currentUser.id }).then(res => {
       setPageCount(res.total_pages);
       setTotalCount(res.total_count);
       setOrders(res.data);
@@ -67,7 +67,7 @@ export const OrdersDashboard: React.FC<OrdersDashboardProps> = ({ currentUser, o
    */
   const handlePagination = (page: number) => {
     if (page !== currentPage) {
-      OrderAPI.index({ page }).then(res => {
+      OrderAPI.index({ user_id: currentUser.id, page }).then(res => {
         setCurrentPage(page);
         setOrders(res.data);
         setPageCount(res.total_pages);
