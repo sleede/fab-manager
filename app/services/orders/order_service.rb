@@ -46,7 +46,8 @@ class Orders::OrderService
   def self.update_state(order, current_user, state, note = nil)
     return ::Orders::SetInProgressService.new.call(order, current_user) if state == 'in_progress'
     return ::Orders::OrderReadyService.new.call(order, current_user, note) if state == 'ready'
-    return ::Orders::CancelOrderService.new.call(order, current_user) if state == 'canceled'
+    return ::Orders::OrderCanceledService.new.call(order, current_user) if state == 'canceled'
+    return ::Orders::OrderDeliveredService.new.call(order, current_user) if state == 'delivered'
   end
 
   def in_stock?(order, stock_type = 'external')

@@ -2055,6 +2055,7 @@ en:
             canceled: "Canceled"
             ready: "Ready"
             refunded: "Refunded"
+            delivered: "Delivered"
           sort:
             newest: "Newest first"
             oldest: "Oldest first"

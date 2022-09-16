@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 # Provides methods for cancel an order
-class Orders::CancelOrderService
+class Orders::OrderCanceledService
   def call(order, current_user)
-    raise ::UpdateOrderStateError if %w[cart payment_failed canceled refunded].include?(order.state)
+    raise ::UpdateOrderStateError if %w[cart canceled refunded delivered].include?(order.state)
 
     order.state = 'canceled'
     ActiveRecord::Base.transaction do
