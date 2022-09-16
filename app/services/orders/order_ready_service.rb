@@ -3,7 +3,7 @@
 # Provides methods for set order to ready state
 class Orders::OrderReadyService
   def call(order, current_user, note = '')
-    raise ::UpdateOrderStateError if %w[cart payment_failed ready canceled refunded].include?(order.state)
+    raise ::UpdateOrderStateError if %w[cart payment_failed ready canceled refunded delivered].include?(order.state)
 
     order.state = 'ready'
     ActiveRecord::Base.transaction do

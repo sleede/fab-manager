@@ -53,16 +53,16 @@ export const OrderActions: React.FC<OrderActionsProps> = ({ order, onSuccess, on
     let actions = [];
     switch (order.state) {
       case 'paid':
-        actions = actions.concat(['in_progress', 'ready', 'canceled', 'refunded']);
+        actions = actions.concat(['in_progress', 'ready', 'delivered', 'canceled', 'refunded']);
         break;
       case 'payment_failed':
         actions = actions.concat(['canceled']);
         break;
       case 'in_progress':
-        actions = actions.concat(['ready', 'canceled', 'refunded']);
+        actions = actions.concat(['ready', 'delivered', 'canceled', 'refunded']);
         break;
       case 'ready':
-        actions = actions.concat(['canceled', 'refunded']);
+        actions = actions.concat(['delivered', 'canceled', 'refunded']);
         break;
       case 'canceled':
         actions = actions.concat(['refunded']);
@@ -100,12 +100,14 @@ export const OrderActions: React.FC<OrderActionsProps> = ({ order, onSuccess, on
 
   return (
     <>
-      <Select
-        options={buildOptions()}
-        onChange={option => handleAction(option)}
-        value={currentAction}
-        styles={customStyles}
-      />
+      {buildOptions().length > 0 &&
+        <Select
+          options={buildOptions()}
+          onChange={option => handleAction(option)}
+          value={currentAction}
+          styles={customStyles}
+        />
+      }
       <FabModal title={t('app.shared.store.order_actions.confirmation_required')}
         isOpen={modalIsOpen}
         toggleModal={closeModal}
