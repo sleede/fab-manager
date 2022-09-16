@@ -6,36 +6,28 @@ import { react2angular } from 'react2angular';
 import { Loader } from '../base/loader';
 import noImage from '../../../../images/no_image.png';
 import { FabStateLabel } from '../base/fab-state-label';
-import Select from 'react-select';
 import OrderAPI from '../../api/order';
 import { Order } from '../../models/order';
 import FormatLib from '../../lib/format';
 import OrderLib from '../../lib/order';
+import { OrderActions } from './order-actions';
 
 declare const Application: IApplication;
 
 interface ShowOrderProps {
   orderId: string,
   currentUser?: User,
+  onSuccess: (message: string) => void,
   onError: (message: string) => void,
-  onSuccess: (message: string) => void
 }
-/**
-* Option format, expected by react-select
-* @see https://github.com/JedWatson/react-select
-*/
-type selectOption = { value: string, label: string };
 
 /**
  * This component shows an order details
  */
-// TODO: delete next eslint disable
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const ShowOrder: React.FC<ShowOrderProps> = ({ orderId, currentUser, onError, onSuccess }) => {
+export const ShowOrder: React.FC<ShowOrderProps> = ({ orderId, currentUser, onSuccess, onError }) => {
   const { t } = useTranslation('shared');
 
   const [order, setOrder] = useState<Order>();
-  const [currentAction, setCurrentAction] = useState<selectOption>();
 
   useEffect(() => {
     OrderAPI.get(orderId).then(data => {
@@ -48,61 +40,6 @@ export const ShowOrder: React.FC<ShowOrderProps> = ({ orderId, currentUser, onEr
    */
   const isPrivileged = (): boolean => {
     return (currentUser?.role === 'admin' || currentUser?.role === 'manager');
-  };
-
-  /**
-   * Creates sorting options to the react-select format
-   */
-  const buildOptions = (): Array<selectOption> => {
-    let actions = [];
-    switch (order.state) {
-      case 'paid':
-        actions = actions.concat(['in_progress', 'ready', 'canceled', 'refunded']);
-        break;
-      case 'payment_failed':
-        actions = actions.concat(['canceled']);
-        break;
-      case 'in_progress':
-        actions = actions.concat(['ready', 'canceled', 'refunded']);
-        break;
-      case 'ready':
-        actions = actions.concat(['canceled', 'refunded']);
-        break;
-      case 'canceled':
-        actions = actions.concat(['refunded']);
-        break;
-      default:
-        actions = [];
-    }
-    return actions.map(action => {
-      return { value: action, label: t(`app.shared.store.show_order.state.${action}`) };
-    });
-  };
-
-  /**
-   * Callback after selecting an action
-   */
-  const handleAction = (action: selectOption) => {
-    setCurrentAction(action);
-    OrderAPI.updateState(order, action.value, action.value).then(data => {
-      setOrder(data);
-      setCurrentAction(null);
-    }).catch((e) => {
-      onError(e);
-      setCurrentAction(null);
-    });
-  };
-
-  // Styles the React-select component
-  const customStyles = {
-    control: base => ({
-      ...base,
-      width: '20ch',
-      backgroundColor: 'transparent'
-    }),
-    indicatorSeparator: () => ({
-      display: 'none'
-    })
   };
 
   /**
@@ -135,6 +72,14 @@ export const ShowOrder: React.FC<ShowOrderProps> = ({ orderId, currentUser, onEr
     return paymentVerbose;
   };
 
+  /**
+   * Callback after action success
+   */
+  const handleActionSuccess = (data: Order, message: string) => {
+    setOrder(data);
+    onSuccess(message);
+  };
+
   if (!order) {
     return null;
   }
@@ -145,12 +90,7 @@ export const ShowOrder: React.FC<ShowOrderProps> = ({ orderId, currentUser, onEr
         <h2>[{order.reference}]</h2>
         <div className="grpBtn">
           {isPrivileged() &&
-            <Select
-              options={buildOptions()}
-              onChange={option => handleAction(option)}
-              value={currentAction}
-              styles={customStyles}
-            />
+            <OrderActions order={order} onSuccess={handleActionSuccess} onError={onError} />
           }
           {order?.invoice_id && (
             <a href={`/api/invoices/${order?.invoice_id}/download`}
