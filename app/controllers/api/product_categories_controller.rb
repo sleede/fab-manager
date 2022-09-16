@@ -40,7 +40,7 @@ class API::ProductCategoriesController < API::ApiController
     if @product_category.insert_at(params[:position])
       render :show
     else
-      render json: @product_category.errors.full_messages, status: :unprocessable_entity
+      render json: @product_category.errors, status: :unprocessable_entity
     end
   end
 

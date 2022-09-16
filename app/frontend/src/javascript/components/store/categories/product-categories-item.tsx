@@ -1,11 +1,9 @@
-// TODO: Remove next eslint-disable
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 import { ProductCategory } from '../../../models/product-category';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { ManageProductCategory } from './manage-product-category';
-import { ArrowElbowDownRight, ArrowElbowLeftUp, CaretDown, DotsSixVertical } from 'phosphor-react';
+import { ArrowElbowDownRight, ArrowLeft, CaretDown, DotsSixVertical } from 'phosphor-react';
 
 interface ProductCategoriesItemProps {
   productCategories: Array<ProductCategory>,
@@ -42,7 +40,7 @@ export const ProductCategoriesItem: React.FC<ProductCategoriesItemProps> = ({ pr
       {((isDragging && offset) || status === 'child') &&
         <div className='offset'>
           {(offset === 'down') && <ArrowElbowDownRight size={32} weight="light" />}
-          {(offset === 'up') && <ArrowElbowLeftUp size={32} weight="light" />}
+          {(offset === 'up') && <ArrowLeft size={32} weight="light" />}
         </div>
       }
       <div className='wrap'>

@@ -46,8 +46,16 @@ const ProductCategories: React.FC<ProductCategoriesProps> = ({ onSuccess, onErro
   /**
    * Update state after drop
    */
-  const handleDnd = (data: ProductCategory[]) => {
-    setProductCategories(data);
+  const handleDnd = (list: ProductCategory[], activeCategory: ProductCategory, position: number) => {
+    setProductCategories(list);
+    ProductCategoryAPI
+      .update(activeCategory)
+      .then(c => {
+        ProductCategoryAPI
+          .updatePosition(c, position)
+          .catch(error => onError(error));
+      })
+      .catch(error => onError(error));
   };
 
   /**
@@ -60,10 +68,9 @@ const ProductCategories: React.FC<ProductCategoriesProps> = ({ onSuccess, onErro
   };
 
   /**
-   * Save list's new order
+   * tmp: check list
    */
   const handleSave = () => {
-    // TODO: index to position -> send to API
     console.log('save order:', productCategories);
   };
 
@@ -75,7 +82,7 @@ const ProductCategories: React.FC<ProductCategoriesProps> = ({ onSuccess, onErro
           <ManageProductCategory action='create'
             productCategories={productCategories}
             onSuccess={handleSuccess} onError={onError} />
-          <FabButton className='main-action-btn' onClick={handleSave}>Save</FabButton>
+          <FabButton className='main-action-btn' onClick={handleSave}>[log]</FabButton>
         </div>
       </header>
       <FabAlert level="warning">
