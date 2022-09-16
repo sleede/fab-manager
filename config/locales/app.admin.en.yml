@@ -1934,6 +1934,7 @@ en:
           required: "This field is required"
           slug_pattern: "Only lowercase alphanumeric groups of characters separated by an hyphen"
         products:
+          unexpected_error_occurred: "An unexpected error occurred. Please try again later."
           all_products: "All products"
           create_a_product: "Create a product"
           successfully_deleted: "The product has been successfully deleted"
@@ -1945,6 +1946,8 @@ en:
           filter_machines: "By machines"
           filter_keywords_reference: "By keywords or reference"
           filter_stock: "By stock status"
+          stock_internal: "Private stock"
+          stock_external: "Public stock"
           filter_stock_from: "From"
           filter_stock_to: "to"
           sort:
@@ -2043,6 +2046,8 @@ en:
           filter_status: "By status"
           filter_client: "By client"
           filter_period: "By period"
+          filter_period_from: "From"
+          filter_period_to: "to"
           status:
             error: "Payment error"
             canceled: "Canceled"
