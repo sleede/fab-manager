@@ -15,6 +15,7 @@ import { FormInput } from '../form/form-input';
 import OrderAPI from '../../api/order';
 import { Order, OrderIndexFilter } from '../../models/order';
 import { FabPagination } from '../base/fab-pagination';
+import { X } from 'phosphor-react';
 
 declare const Application: IApplication;
 
@@ -121,7 +122,7 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onError }) => {
   /**
    * Clear filter by type
    */
-  const removefilter = (filterType: string) => {
+  const removeFilter = (filterType: string, state?: string) => {
     return () => {
       setFilters(draft => {
         draft.page = 1;
@@ -131,10 +132,13 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onError }) => {
             draft.reference = '';
             setReference('');
             break;
-          case 'states':
-            draft.states = [];
-            setStates([]);
+          case 'states': {
+            const s = [...draft.states];
+            s.splice(states.indexOf(state), 1);
+            setStates(s);
+            draft.states = s;
             break;
+          }
           case 'user':
             delete draft.user_id;
             delete draft.user;
@@ -259,12 +263,6 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onError }) => {
             <FabButton onClick={clearAllFilters} className="is-black">{t('app.admin.store.orders.filter_clear')}</FabButton>
           </div>
         </header>
-        <div>
-          {filters.reference && <div>{filters.reference} <i onClick={removefilter('reference')}>x</i></div>}
-          {filters.states.length > 0 && <div>{filters.states.join(', ')} <i onClick={removefilter('states')}>x</i></div>}
-          {filters.user_id > 0 && <div>{user?.name} <i onClick={removefilter('user')}>x</i></div>}
-          {filters.period_from && <div>{filters.period_from} - {filters.period_to} <i onClick={removefilter('period')}>x</i></div>}
-        </div>
         <div className="accordion">
           <AccordionItem id={0}
             isOpen={accordion[0]}
@@ -342,12 +340,33 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onError }) => {
           selectValue={filters.sort === 'ASC' ? 1 : 0}
           onSelectOptionsChange={handleSorting}
         />
+        <div className='features'>
+          {filters.reference && <div className='features-item'>
+            <p>{filters.reference}</p>
+            <button onClick={removeFilter('reference')}><X size={16} weight="light" /></button>
+          </div>}
+          {filters.states?.map((f, index) => (
+            <div key={index} className='features-item'>
+              <p>{f}</p>
+              <button onClick={removeFilter('states', f)}><X size={16} weight="light" /></button>
+            </div>
+          ))}
+          {filters.user_id > 0 && <div className='features-item'>
+            <p>{user?.name}</p>
+            <button onClick={removeFilter('user')}><X size={16} weight="light" /></button>
+          </div>}
+          {filters.period_from && <div className='features-item'>
+            <p>{filters.period_from} - {filters.period_to}</p>
+            <button onClick={removeFilter('period')}><X size={16} weight="light" /></button>
+          </div>}
+        </div>
+
         <div className="orders-list">
           {orders.map(order => (
             <OrderItem key={order.id} order={order} currentUser={currentUser} />
           ))}
         </div>
-        {orders.length > 0 &&
+        {pageCount > 1 &&
           <FabPagination pageCount={pageCount} currentPage={filters.page} selectPage={handlePagination} />
         }
       </div>
