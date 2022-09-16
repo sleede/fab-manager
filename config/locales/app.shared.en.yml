@@ -564,6 +564,8 @@ en:
         order_item:
           total: "Total"
           client: "Client"
+          created_at: "Order creation"
+          last_update: "Last update"
           state:
             cart: 'Cart'
             in_progress: 'Under preparation'

@@ -36,7 +36,20 @@
     }
     p { @include text-sm; }
   }
-  .date { @include text-sm; }
+  .date {
+    & > span {
+      @include text-xs;
+      color: var(--gray-hard-light);
+    }
+    p {
+      display: flex;
+      @include text-sm;
+      .fab-tooltip {
+        margin-left: 1rem;
+        color: var(--information);
+      }
+    }
+  }
   .price {
     flex: 0 1 30%;
     display: flex;

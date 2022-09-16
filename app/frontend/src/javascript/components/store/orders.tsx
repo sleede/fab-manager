@@ -356,7 +356,7 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onError }) => {
             <button onClick={removeFilter('user')}><X size={16} weight="light" /></button>
           </div>}
           {filters.period_from && <div className='features-item'>
-            <p>{filters.period_from} - {filters.period_to}</p>
+            <p>{filters.period_from} {'>'} {filters.period_to}</p>
             <button onClick={removeFilter('period')}><X size={16} weight="light" /></button>
           </div>}
         </div>
