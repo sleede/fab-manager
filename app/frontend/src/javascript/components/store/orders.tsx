@@ -345,10 +345,10 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onError }) => {
             <p>{filters.reference}</p>
             <button onClick={removeFilter('reference')}><X size={16} weight="light" /></button>
           </div>}
-          {filters.states?.map((f, index) => (
+          {filters.states?.map((status, index) => (
             <div key={index} className='features-item'>
-              <p>{f}</p>
-              <button onClick={removeFilter('states', f)}><X size={16} weight="light" /></button>
+              <p>{t(`app.admin.store.orders.state.${status}`)}</p>
+              <button onClick={removeFilter('states', status)}><X size={16} weight="light" /></button>
             </div>
           ))}
           {filters.user_id > 0 && <div className='features-item'>
