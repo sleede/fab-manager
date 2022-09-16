@@ -314,15 +314,15 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onError }) => {
           >
             <div className='content'>
               <div className="group">
-                <div className="period">
-                  from
+                <div className="range">
                   <FormInput id="period_from"
+                             label={t('app.admin.store.orders.filter_period_from')}
                              register={register}
                              onChange={handlePeriodChanged('period_from')}
                              defaultValue={periodFrom}
                              type="date" />
-                  to
                   <FormInput id="period_to"
+                             label={t('app.admin.store.orders.filter_period_to')}
                              register={register}
                              onChange={handlePeriodChanged('period_to')}
                              defaultValue={periodTo}

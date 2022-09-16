@@ -6,6 +6,7 @@ import { Loader } from '../base/loader';
 import { IApplication } from '../../models/application';
 import { Product } from '../../models/product';
 import { ProductCategory } from '../../models/product-category';
+import { useForm } from 'react-hook-form';
 import { FabButton } from '../base/fab-button';
 import { ProductItem } from './product-item';
 import ProductAPI from '../../api/product';
@@ -16,6 +17,8 @@ import { X } from 'phosphor-react';
 import { StoreListHeader } from './store-list-header';
 import { FabPagination } from '../base/fab-pagination';
 import ProductLib from '../../lib/product';
+import { FormInput } from '../form/form-input';
+import { FormSelect } from '../form/form-select';
 
 declare const Application: IApplication;
 
@@ -29,11 +32,11 @@ interface ProductsProps {
  */
  type selectOption = { value: number, label: string };
 
-/**
- * This component shows the admin view of the store
- */
+/** This component shows the admin view of the store */
 const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
   const { t } = useTranslation('admin');
+
+  const { register, control, getValues } = useForm();
 
   const [filteredProductsList, setFilteredProductList] = useImmer<Array<Product>>([]);
   const [features, setFeatures] = useImmer<Filters>(initFilters);
@@ -48,7 +51,7 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
-    ProductAPI.index({ page: 1 }).then(data => {
+    ProductAPI.index({ page: 1, is_active: filterVisible }).then(data => {
       setPageCount(data.total_pages);
       setFilteredProductList(data.products);
     });
@@ -63,29 +66,31 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
   }, []);
 
   useEffect(() => {
-    ProductAPI.index({ page: currentPage }).then(data => {
-      setFilteredProductList(data.products);
-      setPageCount(data.total_pages);
-      window.document.getElementById('content-main').scrollTo({ top: 100, behavior: 'smooth' });
-    });
-  }, [currentPage]);
-
-  useEffect(() => {
     applyFilters();
     setClearFilters(false);
     setUpdate(false);
   }, [filterVisible, clearFilters, update === true]);
 
-  /**
-   * Goto edit product page
-   */
+  /** Handle products pagination */
+  const handlePagination = (page: number) => {
+    if (page !== currentPage) {
+      ProductAPI.index({ page, is_active: filterVisible }).then(data => {
+        setCurrentPage(page);
+        setFilteredProductList(data.products);
+        setPageCount(data.total_pages);
+        window.document.getElementById('content-main').scrollTo({ top: 100, behavior: 'smooth' });
+      }).catch(() => {
+        onError(t('app.admin.store.products.unexpected_error_occurred'));
+      });
+    }
+  };
+
+  /** Goto edit product page */
   const editProduct = (product: Product) => {
     window.location.href = `/#!/admin/store/products/${product.id}/edit`;
   };
 
-  /**
-   * Delete a product
-   */
+  /** Delete a product */
   const deleteProduct = async (productId: number): Promise<void> => {
     try {
       await ProductAPI.destroy(productId);
@@ -97,16 +102,12 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
     }
   };
 
-  /**
-   * Goto new product page
-   */
+  /** Goto new product page */
   const newProduct = (): void => {
     window.location.href = '/#!/admin/store/products/new';
   };
 
-  /**
-   * Filter: toggle non-available products visibility
-   */
+  /** Filter: toggle non-available products visibility */
   const toggleVisible = (checked: boolean) => {
     setFilterVisible(!filterVisible);
     console.log('Display on the shelf product only:', checked);
@@ -172,16 +173,39 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
     }
   };
 
-  /**
-   * Display option: sorting
-   */
+  /** Filter: by keyword or ref */
+  const handleKeyword = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    setFilters(draft => {
+      return { ...draft, keywords: evt.target.value };
+    });
+  };
+
+  /** Filter: by stock range */
+  const handleStockRange = () => {
+    setFilters(draft => {
+      return {
+        ...draft,
+        stock_type: buildStockOptions()[getValues('stock_type')].label,
+        stock_from: getValues('stock_from'),
+        stock_to: getValues('stock_to')
+      };
+    });
+  };
+
+  /** Creates sorting options to the react-select format */
+  const buildStockOptions = (): Array<selectOption> => {
+    return [
+      { value: 0, label: t('app.admin.store.products.stock_internal') },
+      { value: 1, label: t('app.admin.store.products.stock_external') }
+    ];
+  };
+
+  /** Display option: sorting */
   const handleSorting = (option: selectOption) => {
     console.log('Sort option:', option);
   };
 
-  /**
-   * Apply filters
-   */
+  /** Apply filters */
   const applyFilters = () => {
     let tags = initFilters;
 
@@ -197,19 +221,15 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
     console.log('Apply filters:', filters);
   };
 
-  /**
-   * Clear filters
-   */
+  /** Clear filters */
   const clearAllFilters = () => {
     setFilters(initFilters);
     setClearFilters(true);
     console.log('Clear all filters');
   };
 
-  /**
-   * Creates sorting options to the react-select format
-   */
-  const buildOptions = (): Array<selectOption> => {
+  /** Creates sorting options to the react-select format */
+  const buildSortOptions = (): Array<selectOption> => {
     return [
       { value: 0, label: t('app.admin.store.products.sort.name_az') },
       { value: 1, label: t('app.admin.store.products.sort.name_za') },
@@ -218,9 +238,7 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
     ];
   };
 
-  /**
-   * Open/close accordion items
-   */
+  /** Open/close accordion items */
   const handleAccordion = (id, state) => {
     setAccordion({ ...accordion, [id]: state });
   };
@@ -276,12 +294,54 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
               <FabButton onClick={() => setUpdate(true)} className="is-info">{t('app.admin.store.products.filter_apply')}</FabButton>
             </div>
           </AccordionItem>
+
+          <AccordionItem id={2}
+            isOpen={accordion[2]}
+            onChange={handleAccordion}
+            label={t('app.admin.store.products.filter_keywords_reference')}
+          >
+            <div className="content">
+              <div className="group">
+                <input type="text" onChange={event => handleKeyword(event)} />
+                <FabButton onClick={() => setUpdate(true)} className="is-info">{t('app.admin.store.products.filter_apply')}</FabButton>
+              </div>
+            </div>
+          </AccordionItem>
+
+          <AccordionItem id={3}
+            isOpen={accordion[3]}
+            onChange={handleAccordion}
+            label={t('app.admin.store.products.filter_stock')}
+          >
+            <div className="content">
+              <div className="group">
+                <FormSelect id="stock_type"
+                            options={buildStockOptions()}
+                            valueDefault={0}
+                            control={control}
+                />
+                <div className='range'>
+                  <FormInput id="stock_from"
+                             label={t('app.admin.store.products.filter_stock_from')}
+                             register={register}
+                             defaultValue={filters.stock_from}
+                             type="number" />
+                  <FormInput id="stock_to"
+                             label={t('app.admin.store.products.filter_stock_to')}
+                             register={register}
+                             defaultValue={filters.stock_to}
+                             type="number" />
+                </div>
+                <FabButton onClick={handleStockRange} className="is-info">{t('app.admin.store.products.filter_apply')}</FabButton>
+              </div>
+            </div>
+          </AccordionItem>
         </div>
       </div>
       <div className='store-list'>
         <StoreListHeader
           productsCount={filteredProductsList.length}
-          selectOptions={buildOptions()}
+          selectOptions={buildSortOptions()}
           onSelectOptionsChange={handleSorting}
           switchChecked={filterVisible}
           onSwitch={toggleVisible}
@@ -312,7 +372,7 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
           ))}
         </div>
         {pageCount > 1 &&
-          <FabPagination pageCount={pageCount} currentPage={currentPage} selectPage={setCurrentPage} />
+          <FabPagination pageCount={pageCount} currentPage={currentPage} selectPage={handlePagination} />
         }
       </div>
     </div>
@@ -329,45 +389,30 @@ const ProductsWrapper: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
 
 Application.Components.component('products', react2angular(ProductsWrapper, ['onSuccess', 'onError']));
 
-/**
- * Option format, expected by checklist
- */
+/** Option format, expected by checklist */
 type checklistOption = { value: number, label: string };
 
-/**
- * Convert the provided array of items to the checklist format
- */
+/** Convert the provided array of items to the checklist format */
 const buildChecklistOptions = (items: Array<{ id?: number, name: string }>): Array<checklistOption> => {
   return items.map(t => {
     return { value: t.id, label: t.name };
   });
 };
 
-interface Stock {
-  from: number,
-  to: number
-}
-
 interface Filters {
-  instant: boolean,
   categories: ProductCategory[],
   machines: checklistOption[],
   keywords: string[],
-  internalStock: Stock,
-  externalStock: Stock
+  stock_type: 'internal' | 'external',
+  stock_from: number,
+  stock_to: number
 }
 
 const initFilters: Filters = {
-  instant: false,
   categories: [],
   machines: [],
   keywords: [],
-  internalStock: {
-    from: 0,
-    to: null
-  },
-  externalStock: {
-    from: 0,
-    to: null
-  }
+  stock_type: 'internal',
+  stock_from: 0,
+  stock_to: 0
 };
