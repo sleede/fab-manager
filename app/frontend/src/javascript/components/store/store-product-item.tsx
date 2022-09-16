@@ -53,10 +53,10 @@ export const StoreProductItem: React.FC<StoreProductItemProps> = ({ product, car
    * Returns CSS class from stock status
    */
   const statusColor = (product: Product) => {
-    if (product.stock.external === 0 && product.stock.internal === 0) {
+    if (product.stock.external < (product.quantity_min || 1)) {
       return 'out-of-stock';
     }
-    if (product.low_stock_alert) {
+    if (product.low_stock_threshold && product.stock.external < product.low_stock_threshold) {
       return 'low';
     }
     return '';
@@ -90,7 +90,7 @@ export const StoreProductItem: React.FC<StoreProductItemProps> = ({ product, car
       <FabStateLabel status={statusColor(product)}>
         {productStockStatus(product)}
       </FabStateLabel>
-      {product.stock.external > 0 &&
+      {product.stock.external > (product.quantity_min || 1) &&
         <FabButton icon={<i className="fas fa-cart-arrow-down" />} className="main-action-btn" onClick={addProductToCart}>
           {t('app.public.store_product_item.add')}
         </FabButton>

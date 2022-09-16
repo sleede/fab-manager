@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
+import _ from 'lodash';
 import { Loader } from '../base/loader';
 import { IApplication } from '../../models/application';
 import { FabButton } from '../base/fab-button';
@@ -151,7 +152,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
                 <span>/ {t('app.public.store_cart.unit')}</span>
               </div>
               <select value={item.quantity} onChange={changeProductQuantity(item)}>
-                {Array.from({ length: 100 }, (_, i) => i + item.quantity_min).map(v => (
+                {_.range(item.quantity_min, item.orderable_external_stock + 1, 1).map(v => (
                   <option key={v} value={v}>{v}</option>
                 ))}
               </select>

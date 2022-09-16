@@ -49,7 +49,7 @@ export const ProductItem: React.FC<ProductItemProps> = ({ product, onEdit, onDel
    * Returns CSS class from stock status
    */
   const statusColor = (product: Product) => {
-    if (product.stock.external === 0 && product.stock.internal === 0) {
+    if (product.stock.external < 1 && product.stock.internal < 1) {
       return 'out-of-stock';
     }
     if (product.low_stock_threshold && (product.stock.external < product.low_stock_threshold || product.stock.internal < product.low_stock_threshold)) {

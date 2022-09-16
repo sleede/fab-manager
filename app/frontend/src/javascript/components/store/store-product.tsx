@@ -68,10 +68,10 @@ export const StoreProduct: React.FC<StoreProductProps> = ({ productSlug, current
    * Returns CSS class from stock status
    */
   const statusColor = (product: Product) => {
-    if (product.stock.external === 0 && product.stock.internal === 0) {
+    if (product.stock.external < (product.quantity_min || 1)) {
       return 'out-of-stock';
     }
-    if (product.low_stock_alert) {
+    if (product.low_stock_threshold && product.stock.external < product.low_stock_threshold) {
       return 'low';
     }
   };
@@ -80,7 +80,7 @@ export const StoreProduct: React.FC<StoreProductProps> = ({ productSlug, current
    * Return product's stock status
    */
   const productStockStatus = (product: Product) => {
-    if (product.stock.external === 0) {
+    if (product.stock.external < (product.quantity_min || 1)) {
       return <span>{t('app.public.store_product_item.out_of_stock')}</span>;
     }
     if (product.low_stock_threshold && product.stock.external < product.low_stock_threshold) {
@@ -95,7 +95,9 @@ export const StoreProduct: React.FC<StoreProductProps> = ({ productSlug, current
   const setCount = (type: 'add' | 'remove') => {
     switch (type) {
       case 'add':
-        setToCartCount(toCartCount + 1);
+        if (toCartCount < product.stock.external) {
+          setToCartCount(toCartCount + 1);
+        }
         break;
       case 'remove':
         if (toCartCount > product.quantity_min) {
@@ -116,10 +118,12 @@ export const StoreProduct: React.FC<StoreProductProps> = ({ productSlug, current
    * Add product to cart
    */
   const addToCart = () => {
-    CartAPI.addItem(cart, product.id, toCartCount).then(data => {
-      setCart(data);
-      onSuccess(t('app.public.store.add_to_cart_success'));
-    }).catch(onError);
+    if (toCartCount <= product.stock.external) {
+      CartAPI.addItem(cart, product.id, toCartCount).then(data => {
+        setCart(data);
+        onSuccess(t('app.public.store.add_to_cart_success'));
+      }).catch(onError);
+    }
   };
 
   if (product) {
@@ -179,11 +183,13 @@ export const StoreProduct: React.FC<StoreProductProps> = ({ productSlug, current
             <p>{FormatLib.price(product.amount)} <sup>TTC</sup></p>
             <span>/ {t('app.public.store_product_item.unit')}</span>
           </div>
-          {product.stock.external > 0 &&
+          {product.stock.external > (product.quantity_min || 1) &&
             <div className='to-cart'>
               <FabButton onClick={() => setCount('remove')} icon={<Minus size={16} />} className="minus" />
               <input type="number"
                 value={toCartCount}
+                min={product.quantity_min}
+                max={product.stock.external}
                 onChange={evt => typeCount(evt)} />
               <FabButton onClick={() => setCount('add')} icon={<Plus size={16} />} className="plus" />
               <FabButton onClick={() => addToCart()} icon={<i className="fas fa-cart-arrow-down" />}
