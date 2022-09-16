@@ -1,0 +1,8 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p>
+<%= t('.body.notify_user_order_is_ready', REFERENCE: @attached_object.order.reference) %>
+</p>
+<p>
+  <%= @attached_object.note %>
+</p>

@@ -236,6 +236,15 @@ angular.module('application.router', ['ui.router'])
           }
         }
       })
+      .state('app.logged.dashboard.order_show', {
+        url: '/orders/:id',
+        views: {
+          'main@': {
+            templateUrl: '/orders/show.html',
+            controller: 'ShowOrdersController'
+          }
+        }
+      })
       .state('app.logged.dashboard.wallet', {
         url: '/wallet',
         abstract: !Fablab.walletModule,
@@ -631,17 +640,6 @@ angular.module('application.router', ['ui.router'])
         }
       })
 
-      // show order
-      .state('app.public.order_show', {
-        url: '/store/o/:token',
-        views: {
-          'main@': {
-            templateUrl: '/orders/show.html',
-            controller: 'ShowOrdersController'
-          }
-        }
-      })
-
       // cart
       .state('app.public.store_cart', {
         url: '/store/cart',
@@ -926,7 +924,7 @@ angular.module('application.router', ['ui.router'])
 
       // show order
       .state('app.admin.order_show', {
-        url: '/admin/store/o/:token',
+        url: '/admin/store/orders/:id',
         views: {
           'main@': {
             templateUrl: '/admin/orders/show.html',

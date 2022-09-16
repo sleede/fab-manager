@@ -7,6 +7,7 @@ interface StoreListHeaderProps {
   productsCount: number,
   selectOptions: selectOption[],
   onSelectOptionsChange: (option: selectOption) => void,
+  selectValue?: number,
   switchLabel?: string,
   switchChecked?: boolean,
   onSwitch?: (boolean) => void
@@ -20,7 +21,7 @@ interface StoreListHeaderProps {
 /**
  * Renders an accordion item
  */
-export const StoreListHeader: React.FC<StoreListHeaderProps> = ({ productsCount, selectOptions, onSelectOptionsChange, switchLabel, switchChecked, onSwitch }) => {
+export const StoreListHeader: React.FC<StoreListHeaderProps> = ({ productsCount, selectOptions, onSelectOptionsChange, switchLabel, switchChecked, onSwitch, selectValue }) => {
   const { t } = useTranslation('admin');
 
   // Styles the React-select component
@@ -47,6 +48,7 @@ export const StoreListHeader: React.FC<StoreListHeaderProps> = ({ productsCount,
           <Select
             options={selectOptions}
             onChange={evt => onSelectOptionsChange(evt)}
+            value={selectOptions.find(option => option.value === selectValue)}
             styles={customStyles}
           />
         </div>

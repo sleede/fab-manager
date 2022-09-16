@@ -6,6 +6,8 @@ class API::ProductsController < API::ApiController
   before_action :authenticate_user!, except: %i[index show]
   before_action :set_product, only: %i[update destroy]
 
+  MOVEMENTS_PER_PAGE = 10
+
   def index
     @products = ProductService.list(params)
     @pages = ProductService.pages(params) if params[:page].present?
@@ -17,8 +19,7 @@ class API::ProductsController < API::ApiController
 
   def create
     authorize Product
-    @product = Product.new(product_params)
-    @product.amount = ProductService.amount_multiplied_by_hundred(@product.amount)
+    @product = ProductService.create(product_params, params[:product][:product_stock_movements_attributes])
     if @product.save
       render status: :created
     else
@@ -29,9 +30,8 @@ class API::ProductsController < API::ApiController
   def update
     authorize @product
 
-    product_parameters = product_params
-    product_parameters[:amount] = ProductService.amount_multiplied_by_hundred(product_parameters[:amount])
-    if @product.update(product_parameters)
+    @product = ProductService.update(@product, product_params, params[:product][:product_stock_movements_attributes])
+    if @product.save
       render status: :ok
     else
       render json: @product.errors.full_messages, status: :unprocessable_entity
@@ -42,6 +42,11 @@ class API::ProductsController < API::ApiController
     authorize @product
     @product.destroy
     head :no_content
+  end
+
+  def stock_movements
+    authorize Product
+    @movements = ProductStockMovement.where(product_id: params[:id]).order(date: :desc).page(params[:page]).per(MOVEMENTS_PER_PAGE)
   end
 
   private
@@ -56,7 +61,6 @@ class API::ProductsController < API::ApiController
                                     :low_stock_alert, :low_stock_threshold,
                                     machine_ids: [],
                                     product_files_attributes: %i[id attachment _destroy],
-                                    product_images_attributes: %i[id attachment is_main _destroy],
-                                    product_stock_movements_attributes: %i[id quantity reason stock_type _destroy])
+                                    product_images_attributes: %i[id attachment is_main _destroy])
   end
 end

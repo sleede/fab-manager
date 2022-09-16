@@ -55,7 +55,7 @@ const ProductCategories: React.FC<ProductCategoriesProps> = ({ onSuccess, onErro
    */
   const refreshCategories = () => {
     ProductCategoryAPI.index().then(data => {
-      setProductCategories(new ProductLib().sortCategories(data));
+      setProductCategories(ProductLib.sortCategories(data));
     }).catch((error) => onError(error));
   };
 

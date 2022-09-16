@@ -5,6 +5,7 @@ import FormatLib from '../../lib/format';
 import { FabButton } from '../base/fab-button';
 import { User } from '../../models/user';
 import { FabStateLabel } from '../base/fab-state-label';
+import OrderLib from '../../lib/order';
 
 interface OrderItemProps {
   order?: Order,
@@ -19,10 +20,10 @@ export const OrderItem: React.FC<OrderItemProps> = ({ order, currentUser }) => {
   /**
    * Go to order page
    */
-  const showOrder = (ref: string) => {
+  const showOrder = (order: Order) => {
     isPrivileged()
-      ? window.location.href = `/#!/admin/store/o/${ref}`
-      : window.location.href = `/#!/store/o/${ref}`;
+      ? window.location.href = `/#!/admin/store/orders/${order.id}`
+      : window.location.href = `/#!/dashboard/orders/${order.id}`;
   };
 
   /**
@@ -32,42 +33,26 @@ export const OrderItem: React.FC<OrderItemProps> = ({ order, currentUser }) => {
     return (currentUser?.role === 'admin' || currentUser?.role === 'manager');
   };
 
-  /**
-   * Returns a className according to the status
-   */
-  const statusColor = (status: string) => {
-    switch (status) {
-      case 'error':
-        return 'error';
-      case 'canceled':
-        return 'canceled';
-      case 'pending' || 'under_preparation':
-        return 'pending';
-      default:
-        return 'normal';
-    }
-  };
-
   return (
     <div className='order-item'>
-      <p className="ref">order.ref</p>
+      <p className="ref">{order.reference}</p>
       <div>
-        <FabStateLabel status={statusColor('pending')} background>
-          order.state
+        <FabStateLabel status={OrderLib.statusColor(order)} background>
+          {t(`app.shared.store.order_item.state.${OrderLib.statusText(order)}`)}
         </FabStateLabel>
       </div>
       {isPrivileged() &&
         <div className='client'>
           <span>{t('app.shared.store.order_item.client')}</span>
-          <p>order.user.name</p>
+          <p>{order?.user?.name || ''}</p>
         </div>
       }
-      <p className="date">order.created_at</p>
+      <p className="date">{FormatLib.date(order.created_at)}</p>
       <div className='price'>
         <span>{t('app.shared.store.order_item.total')}</span>
-        <p>{FormatLib.price(order?.total)}</p>
+        <p>{FormatLib.price(order.state === 'cart' ? order.total : order.paid_total)}</p>
       </div>
-      <FabButton onClick={() => showOrder('orderRef')} icon={<i className="fas fa-eye" />} className="is-black" />
+      <FabButton onClick={() => showOrder(order)} icon={<i className="fas fa-eye" />} className="is-black" />
     </div>
   );
 };

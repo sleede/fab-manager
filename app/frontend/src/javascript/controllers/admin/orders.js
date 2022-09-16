@@ -9,7 +9,7 @@ Application.Controllers.controller('AdminShowOrdersController', ['$rootScope', '
     /* PRIVATE SCOPE */
 
     /* PUBLIC SCOPE */
-    $scope.orderToken = $transition$.params().token;
+    $scope.orderId = $transition$.params().id;
 
     /**
      * Callback triggered in case of error

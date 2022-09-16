@@ -13,4 +13,8 @@ class ProductPolicy < ApplicationPolicy
   def destroy?
     user.privileged?
   end
+
+  def stock_movements?
+    user.privileged?
+  end
 end

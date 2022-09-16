@@ -79,13 +79,13 @@ class WalletService
   # @param user {User} the customer
   # @param coupon {Coupon|String} Coupon object or code
   ##
-  def self.wallet_amount_debit(payment, user, coupon = nil)
+  def self.wallet_amount_debit(payment, user)
     total = if payment.is_a? PaymentSchedule
               payment.payment_schedule_items.first.amount
             else
               payment.total
             end
-    total = CouponService.new.apply(total, coupon, user.id) if coupon
+    total = CouponService.new.apply(total, payment.coupon, user.id) if payment.coupon
 
     wallet_amount = (user.wallet.amount * 100).to_i
 

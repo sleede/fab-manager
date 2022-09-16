@@ -20,12 +20,15 @@ import ProductAPI from '../../api/product';
 import { Plus } from 'phosphor-react';
 import { ProductStockForm } from './product-stock-form';
 import ProductLib from '../../lib/product';
+import { UnsavedFormAlert } from '../form/unsaved-form-alert';
+import { UIRouter } from '@uirouter/angularjs';
 
 interface ProductFormProps {
   product: Product,
   title: string,
   onSuccess: (product: Product) => void,
   onError: (message: string) => void,
+  uiRouter: UIRouter
 }
 
 /**
@@ -42,7 +45,7 @@ type checklistOption = { value: number, label: string };
 /**
  * Form component to create or update a product
  */
-export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSuccess, onError }) => {
+export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSuccess, onError, uiRouter }) => {
   const { t } = useTranslation('admin');
 
   const { handleSubmit, register, control, formState, setValue, reset } = useForm<Product>({ defaultValues: { ...product } });
@@ -54,7 +57,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
 
   useEffect(() => {
     ProductCategoryAPI.index().then(data => {
-      setProductCategories(buildSelectOptions(new ProductLib().sortCategories(data)));
+      setProductCategories(buildSelectOptions(ProductLib.sortCategories(data)));
     }).catch(onError);
     MachineAPI.index({ disabled: false }).then(data => {
       setMachines(buildChecklistOptions(data));
@@ -225,12 +228,13 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
         </div>
       </header>
       <form className="product-form" onSubmit={handleSubmit(onSubmit)}>
+        <UnsavedFormAlert uiRouter={uiRouter} formState={formState} />
         <div className='tabs'>
           <p className={!stockTab ? 'is-active' : ''} onClick={() => setStockTab(false)}>{t('app.admin.store.product_form.product_parameters')}</p>
           <p className={stockTab ? 'is-active' : ''} onClick={() => setStockTab(true)}>{t('app.admin.store.product_form.stock_management')}</p>
         </div>
         {stockTab
-          ? <ProductStockForm product={product} register={register} control={control} formState={formState} onError={onError} onSuccess={onSuccess} />
+          ? <ProductStockForm currentFormValues={output as Product} register={register} control={control} formState={formState} setValue={setValue} onError={onError} onSuccess={onSuccess} />
           : <section>
             <div className="subgrid">
               <FormInput id="name"

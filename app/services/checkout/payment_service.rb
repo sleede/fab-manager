@@ -28,14 +28,14 @@ class Checkout::PaymentService
   end
 
   def confirm_payment(order, operator, coupon_code, payment_id = '')
-    if operator.member?
-      if Stripe::Helper.enabled?
-        Payments::StripeService.new.confirm_payment(order, coupon_code, payment_id)
-      elsif PayZen::Helper.enabled?
-        Payments::PayzenService.new.confirm_payment(order, coupon_code, payment_id)
-      else
-        raise Error('Bad gateway or online payment is disabled')
-      end
+    return unless operator.member?
+
+    if Stripe::Helper.enabled?
+      Payments::StripeService.new.confirm_payment(order, coupon_code, payment_id)
+    elsif PayZen::Helper.enabled?
+      Payments::PayzenService.new.confirm_payment(order, coupon_code, payment_id)
+    else
+      raise Error('Bad gateway or online payment is disabled')
     end
   end
 end

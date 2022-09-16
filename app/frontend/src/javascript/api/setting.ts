@@ -8,7 +8,7 @@ export default class SettingAPI {
     return res?.data?.setting;
   }
 
-  static async query (names: Array<SettingName>): Promise<Map<SettingName, string>> {
+  static async query (names: readonly SettingName[]): Promise<Map<SettingName, string>> {
     const params = new URLSearchParams();
     params.append('names', `['${names.join("','")}']`);
 
@@ -32,7 +32,7 @@ export default class SettingAPI {
     return res?.data?.isPresent;
   }
 
-  private static toSettingsMap (names: Array<SettingName>, data: Record<string, string|null>): Map<SettingName, string> {
+  private static toSettingsMap (names: readonly SettingName[], data: Record<string, string|null>): Map<SettingName, string> {
     const map = new Map();
     names.forEach(name => {
       map.set(name, data[name] || '');

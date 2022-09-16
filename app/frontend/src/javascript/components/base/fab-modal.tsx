@@ -23,6 +23,7 @@ interface FabModalProps {
   customHeader?: ReactNode,
   customFooter?: ReactNode,
   onConfirm?: (event: BaseSyntheticEvent) => void,
+  onClose?: (event: BaseSyntheticEvent) => void,
   preventConfirm?: boolean,
   onCreation?: () => void,
   onConfirmSendFormId?: string,
@@ -31,7 +32,7 @@ interface FabModalProps {
 /**
  * This component is a template for a modal dialog that wraps the application style
  */
-export const FabModal: React.FC<FabModalProps> = ({ title, isOpen, toggleModal, children, confirmButton, className, width = 'sm', closeButton, customHeader, customFooter, onConfirm, preventConfirm, onCreation, onConfirmSendFormId }) => {
+export const FabModal: React.FC<FabModalProps> = ({ title, isOpen, toggleModal, children, confirmButton, className, width = 'sm', closeButton, customHeader, customFooter, onConfirm, onClose, preventConfirm, onCreation, onConfirmSendFormId }) => {
   const { t } = useTranslation('shared');
 
   useEffect(() => {
@@ -40,12 +41,20 @@ export const FabModal: React.FC<FabModalProps> = ({ title, isOpen, toggleModal, 
     }
   }, [isOpen]);
 
+  /**
+   * Callback triggered when the user request to close the modal without confirming.
+   */
+  const handleClose = (event) => {
+    if (typeof onClose === 'function') onClose(event);
+    toggleModal();
+  };
+
   return (
     <Modal isOpen={isOpen}
       className={`fab-modal fab-modal-${width} ${className || ''}`}
       overlayClassName="fab-modal-overlay"
-      onRequestClose={toggleModal}>
-      {closeButton && <FabButton className="modal-btn--close" onClick={toggleModal}>{t('app.shared.fab_modal.close')}</FabButton>}
+      onRequestClose={handleClose}>
+      {closeButton && <FabButton className="modal-btn--close" onClick={handleClose}>{t('app.shared.fab_modal.close')}</FabButton>}
       <div className="fab-modal-header">
         {!customHeader && <h1>{ title }</h1>}
         {customHeader && customHeader}
