@@ -48,6 +48,7 @@ class Orders::OrderService
     return ::Orders::OrderReadyService.new.call(order, current_user, note) if state == 'ready'
     return ::Orders::OrderCanceledService.new.call(order, current_user) if state == 'canceled'
     return ::Orders::OrderDeliveredService.new.call(order, current_user) if state == 'delivered'
+    return ::Orders::OrderRefundedService.new.call(order, current_user) if state == 'refunded'
   end
 
   def in_stock?(order, stock_type = 'external')

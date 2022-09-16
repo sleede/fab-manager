@@ -628,6 +628,8 @@ en:
           order_delivered_success: "Order is delivered"
           confirm_order_canceled: "Do you want to cancel this order ? You can modify product stock in stock manage."
           order_canceled_success: "Order is canceled"
+          confirm_order_refunded: "Do you want to refund this order ? You can modify product stock in stock manage."
+          order_refunded_success: "Order is refunded"
       unsaved_form_alert:
         modal_title: "You have some unsaved changes"
         confirmation_message: "If you leave this page, your changes will be lost. Are you sure you want to continue?"

@@ -100,7 +100,7 @@ export const OrderActions: React.FC<OrderActionsProps> = ({ order, onSuccess, on
 
   return (
     <>
-      {buildOptions.length > 0 &&
+      {buildOptions().length > 0 &&
         <Select
           options={buildOptions()}
           onChange={option => handleAction(option)}
