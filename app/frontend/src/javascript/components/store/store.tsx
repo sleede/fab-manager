@@ -49,7 +49,7 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser }) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
-    ProductAPI.index({ page: 1, is_active: true }).then(data => {
+    ProductAPI.index({ page: 1, is_active: filterVisible }).then(data => {
       setPageCount(data.total_pages);
       setProducts(data.products);
     }).catch(() => {
@@ -151,7 +151,7 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser }) => {
    */
   const handlePagination = (page: number) => {
     if (page !== currentPage) {
-      ProductAPI.index({ page, is_active: true }).then(data => {
+      ProductAPI.index({ page, is_active: filterVisible }).then(data => {
         setCurrentPage(page);
         setProducts(data.products);
         setPageCount(data.total_pages);
