@@ -2049,7 +2049,7 @@ en:
           filter_period: "By period"
           state:
             cart: 'Cart'
-            in_progress: 'In progress'
+            in_progress: 'Under preparation'
             paid: "Paid"
             payment_failed: "Payment error"
             canceled: "Canceled"

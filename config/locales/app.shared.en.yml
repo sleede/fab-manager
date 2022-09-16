@@ -566,7 +566,7 @@ en:
           client: "Client"
           state:
             cart: 'Cart'
-            in_progress: 'In progress'
+            in_progress: 'Under preparation'
             paid: "Paid"
             payment_failed: "Payment error"
             canceled: "Canceled"
@@ -591,7 +591,7 @@ en:
           cart_total: "Cart total"
           state:
             cart: 'Cart'
-            in_progress: 'In progress'
+            in_progress: 'Under preparation'
             paid: "Paid"
             payment_failed: "Payment error"
             canceled: "Canceled"
@@ -608,7 +608,7 @@ en:
         order_actions:
           state:
             cart: 'Cart'
-            in_progress: 'In progress'
+            in_progress: 'Under preparation'
             paid: "Paid"
             payment_failed: "Payment error"
             canceled: "Canceled"
@@ -619,9 +619,9 @@ en:
           confirm_order_in_progress: "This order is in the process of being prepared ?"
           order_in_progress_success: "Order is under preparation"
           confirm_order_ready: "This order is ready ?"
-          order_ready_note: ''
+          order_ready_note: 'Leave your message'
           order_ready_success: "Order is ready"
-          confirm_order_canceled: "Do you want to cancel this order ?"
+          confirm_order_canceled: "Do you want to cancel this order ? You can modify product stock in stock manage."
           order_canceled_success: "Order is canceled"
       unsaved_form_alert:
         modal_title: "You have some unsaved changes"
