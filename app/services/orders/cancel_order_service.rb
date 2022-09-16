@@ -9,7 +9,7 @@ class Orders::CancelOrderService
     ActiveRecord::Base.transaction do
       activity = order.order_activities.create(activity_type: 'canceled', operator_profile_id: current_user.invoicing_profile.id)
       order.order_items.each do |item|
-        ProductService.update_stock(item.orderable, 'external', 'cancelled_by_customer', item.quantity, item.id)
+        ProductService.update_stock(item.orderable, 'external', 'cancelled', item.quantity, item.id)
       end
       order.save
       NotificationCenter.call type: 'notify_user_order_is_canceled',
