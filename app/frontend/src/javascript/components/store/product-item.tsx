@@ -79,12 +79,10 @@ export const ProductItem: React.FC<ProductItemProps> = ({ product, onEdit, onDel
           <span>{t('app.admin.store.product_item.stock.external')}</span>
           <p>{product.stock.external}</p>
         </div>
-        {product.amount &&
-          <div className='price'>
-            <p>{FormatLib.price(product.amount)}</p>
-            <span>/ {t('app.admin.store.product_item.unit')}</span>
-          </div>
-        }
+        <div className='price'>
+          <p>{FormatLib.price(product.amount || 0)}</p>
+          <span>/ {t('app.admin.store.product_item.unit')}</span>
+        </div>
       </div>
       <div className='actions'>
         <div className='manage'>

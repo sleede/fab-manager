@@ -180,7 +180,7 @@ export const StoreProduct: React.FC<StoreProductProps> = ({ productSlug, current
             {productStockStatus(product)}
           </FabStateLabel>
           <div className='price'>
-            <p>{FormatLib.price(product.amount)} <sup>TTC</sup></p>
+            <p>{FormatLib.price(product.amount || 0)} <sup>TTC</sup></p>
             <span>/ {t('app.public.store_product_item.unit')}</span>
           </div>
           {product.stock.external > (product.quantity_min || 1) &&

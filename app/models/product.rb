@@ -20,7 +20,7 @@ class Product < ApplicationRecord
   accepts_nested_attributes_for :product_stock_movements, allow_destroy: true, reject_if: :all_blank
 
   validates :name, :slug, presence: true
-  validates :amount, numericality: { greater_than: 0, allow_nil: true }
+  validates :amount, numericality: { greater_than_or_equal_to: 0, allow_nil: true }
 
   scope :active, -> { where(is_active: true) }
 
