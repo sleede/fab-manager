@@ -81,12 +81,10 @@ export const StoreProductItem: React.FC<StoreProductItemProps> = ({ product, car
         <img src={productImageUrl(product)} alt='' />
       </div>
       <p className="name">{product.name}</p>
-      {product.amount &&
-        <div className='price'>
-          <p>{FormatLib.price(product.amount)}</p>
-          <span>/ {t('app.public.store_product_item.unit')}</span>
-        </div>
-      }
+      <div className='price'>
+        <p>{FormatLib.price(product.amount || 0)}</p>
+        <span>/ {t('app.public.store_product_item.unit')}</span>
+      </div>
       <FabStateLabel status={statusColor(product)}>
         {productStockStatus(product)}
       </FabStateLabel>

@@ -11,7 +11,7 @@ class Cart::AddItemService
     quantity = orderable.quantity_min > quantity.to_i && item.nil? ? orderable.quantity_min : quantity.to_i
 
     if item.nil?
-      item = order.order_items.new(quantity: quantity, orderable: orderable, amount: orderable.amount)
+      item = order.order_items.new(quantity: quantity, orderable: orderable, amount: orderable.amount || 0)
     else
       item.quantity += quantity.to_i
     end

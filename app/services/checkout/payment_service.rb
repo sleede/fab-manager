@@ -7,9 +7,13 @@ class Checkout::PaymentService
   include Payments::PaymentConcern
 
   def payment(order, operator, coupon_code, payment_id = '')
+    raise Cart::InactiveProductError unless Orders::OrderService.new.all_products_is_active?(order)
+
     raise Cart::OutStockError unless Orders::OrderService.new.in_stock?(order, 'external')
 
-    raise Cart::InactiveProductError unless Orders::OrderService.new.all_products_is_active?(order)
+    raise Cart::QuantityMinError unless Orders::OrderService.new.greater_than_quantity_min?(order)
+
+    raise Cart::ItemAmountError unless Orders::OrderService.new.item_amount_not_equal?(order)
 
     CouponService.new.validate(coupon_code, order.statistic_profile.user.id)
 
