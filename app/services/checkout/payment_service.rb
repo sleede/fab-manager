@@ -7,9 +7,9 @@ class Checkout::PaymentService
   include Payments::PaymentConcern
 
   def payment(order, operator, coupon_code, payment_id = '')
-    raise Cart::OutStockError unless Orders::OrderService.new.in_stock?(order, 'external')
-
     raise Cart::InactiveProductError unless Orders::OrderService.new.all_products_is_active?(order)
+
+    raise Cart::OutStockError unless Orders::OrderService.new.in_stock?(order, 'external')
 
     CouponService.new.validate(coupon_code, order.statistic_profile.user.id)
 

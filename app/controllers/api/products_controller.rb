@@ -40,7 +40,7 @@ class API::ProductsController < API::ApiController
 
   def destroy
     authorize @product
-    @product.destroy
+    ProductService.destroy(@product)
     head :no_content
   end
 

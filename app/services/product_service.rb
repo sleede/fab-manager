@@ -64,5 +64,20 @@ class ProductService
       update_stock(product, stock_movement_params)
       product
     end
+
+    def destroy(product)
+      used_in_order = OrderItem.joins(:order).where.not('orders.state' => 'cart')
+                               .exists?(orderable: product)
+      raise CannotDeleteProductError if used_in_order
+
+      ActiveRecord::Base.transaction do
+        orders_with_product = Order.joins(:order_items).where(state: 'cart').where('order_items.orderable': product)
+        orders_with_product.each do |order|
+          ::Cart::RemoveItemService.new.call(order, product)
+        end
+
+        product.destroy
+      end
+    end
   end
 end
