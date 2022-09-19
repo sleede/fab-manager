@@ -7,7 +7,7 @@ import { IApplication } from '../../models/application';
 import { useForm } from 'react-hook-form';
 import { FabButton } from '../base/fab-button';
 import { StoreListHeader } from './store-list-header';
-import { AccordionItem } from './accordion-item';
+import { AccordionItem } from '../base/accordion-item';
 import { OrderItem } from './order-item';
 import { MemberSelect } from '../user/member-select';
 import { User } from '../../models/user';

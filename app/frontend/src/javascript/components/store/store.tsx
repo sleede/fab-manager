@@ -13,7 +13,7 @@ import { StoreProductItem } from './store-product-item';
 import useCart from '../../hooks/use-cart';
 import { User } from '../../models/user';
 import { Order } from '../../models/order';
-import { AccordionItem } from './accordion-item';
+import { AccordionItem } from '../base/accordion-item';
 import { StoreListHeader } from './store-list-header';
 import { FabPagination } from '../base/fab-pagination';
 
