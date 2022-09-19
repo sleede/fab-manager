@@ -58,6 +58,20 @@ class Orders::OrderService
     true
   end
 
+  def greater_than_quantity_min?(order)
+    order.order_items.each do |item|
+      return false if item.quantity < item.orderable.quantity_min
+    end
+    true
+  end
+
+  def item_amount_not_equal?(order)
+    order.order_items.each do |item|
+      return false if item.amount != item.orderable.amount
+    end
+    true
+  end
+
   def all_products_is_active?(order)
     order.order_items.each do |item|
       return false unless item.orderable.is_active
