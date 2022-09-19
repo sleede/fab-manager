@@ -7,6 +7,7 @@ class ProductCategory < ApplicationRecord
   friendly_id :name, use: :slugged
 
   validates :name, :slug, presence: true
+  validates :slug, uniqueness: true
 
   belongs_to :parent, class_name: 'ProductCategory'
   has_many :children, class_name: 'ProductCategory', foreign_key: :parent_id
