@@ -181,6 +181,9 @@ export const StoreProduct: React.FC<StoreProductProps> = ({ productSlug, current
           </div>
           {product.stock.external > 0 &&
             <div className='to-cart'>
+              {product.quantity_min > 1 &&
+                <span className='min'>{t('app.public.store_product_item.minimum_purchase')}{product.quantity_min}</span>
+              }
               <FabButton onClick={() => setCount('remove')} icon={<Minus size={16} />} className="minus" />
               <input type="number"
                 value={toCartCount}

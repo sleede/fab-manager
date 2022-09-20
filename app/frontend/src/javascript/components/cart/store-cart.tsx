@@ -144,6 +144,9 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
             <div className="ref">
               <span>{t('app.public.store_cart.reference_short')} {item.orderable_ref || ''}</span>
               <p>{item.orderable_name}</p>
+              {item.quantity_min > 1 &&
+                <span className='min'>{t('app.public.store_cart.minimum_purchase')}{item.quantity_min}</span>
+              }
             </div>
             <div className="actions">
               <div className='price'>

@@ -13,7 +13,7 @@ import ProductAPI from '../../api/product';
 import ProductCategoryAPI from '../../api/product-category';
 import MachineAPI from '../../api/machine';
 import { AccordionItem } from './accordion-item';
-import { X } from 'phosphor-react';
+import { CaretDoubleUp, X } from 'phosphor-react';
 import { StoreListHeader } from './store-list-header';
 import { FabPagination } from '../base/fab-pagination';
 import ProductLib from '../../lib/product';
@@ -47,6 +47,7 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
   const [machines, setMachines] = useState<checklistOption[]>([]);
   const [update, setUpdate] = useState(false);
   const [accordion, setAccordion] = useState({});
+  const [filtersPanel, setFiltersPanel] = useState<boolean>(true);
   const [pageCount, setPageCount] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
@@ -242,14 +243,15 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
           <FabButton className="main-action-btn" onClick={newProduct}>{t('app.admin.store.products.create_a_product')}</FabButton>
         </div>
       </header>
-      <div className='store-filters'>
+      <aside className={`store-filters ${filtersPanel ? '' : 'collapsed'}`}>
         <header>
           <h3>{t('app.admin.store.products.filter')}</h3>
           <div className='grpBtn'>
             <FabButton onClick={clearAllFilters} className="is-black">{t('app.admin.store.products.filter_clear')}</FabButton>
+            <CaretDoubleUp className='filters-toggle' size={16} weight="bold" onClick={() => setFiltersPanel(!filtersPanel)} />
           </div>
         </header>
-        <div className='accordion'>
+        <div className='grp accordion'>
           <AccordionItem id={0}
             isOpen={accordion[0]}
             onChange={handleAccordion}
@@ -328,7 +330,7 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
             </div>
           </AccordionItem>
         </div>
-      </div>
+      </aside>
       <div className='store-list'>
         <StoreListHeader
           productsCount={filteredProductsList.length}

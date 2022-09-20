@@ -15,7 +15,7 @@ import { FormInput } from '../form/form-input';
 import OrderAPI from '../../api/order';
 import { Order, OrderIndexFilter } from '../../models/order';
 import { FabPagination } from '../base/fab-pagination';
-import { X } from 'phosphor-react';
+import { CaretDoubleUp, X } from 'phosphor-react';
 
 declare const Application: IApplication;
 
@@ -54,6 +54,7 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onError }) => {
   const [orders, setOrders] = useState<Array<Order>>([]);
   const [filters, setFilters] = useImmer<OrderIndexFilter>(window[FablabOrdersFilters] || initFilters);
   const [accordion, setAccordion] = useState({});
+  const [filtersPanel, setFiltersPanel] = useState<boolean>(true);
   const [pageCount, setPageCount] = useState<number>(0);
   const [totalCount, setTotalCount] = useState<number>(0);
   const [reference, setReference] = useState<string>(filters.reference);
@@ -256,14 +257,15 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onError }) => {
         }
       </header>
 
-      <div className="store-filters">
+      <aside className={`store-filters ${filtersPanel ? '' : 'collapsed'}`}>
         <header>
           <h3>{t('app.admin.store.orders.filter')}</h3>
           <div className='grpBtn'>
             <FabButton onClick={clearAllFilters} className="is-black">{t('app.admin.store.orders.filter_clear')}</FabButton>
+            <CaretDoubleUp className='filters-toggle' size={16} weight="bold" onClick={() => setFiltersPanel(!filtersPanel)} />
           </div>
         </header>
-        <div className="accordion">
+        <div className="grp accordion">
           <AccordionItem id={0}
             isOpen={accordion[0]}
             onChange={handleAccordion}
@@ -331,7 +333,7 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onError }) => {
             </div>
           </AccordionItem>
         </div>
-      </div>
+      </aside>
 
       <div className="store-list">
         <StoreListHeader

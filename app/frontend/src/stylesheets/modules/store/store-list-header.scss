@@ -1,12 +1,14 @@
 .store-list-header {
   padding: 0.8rem 2.4rem;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   background-color: var(--gray-soft);
   border-radius: var(--border-radius);
   p { margin: 0; }
 
   .count {
+    margin-right: 2.4rem;
     display: flex;
     align-items: center;
     p {
@@ -19,15 +21,22 @@
   }
 
   .display {
+    width: 100%;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     align-items: center;
-    & > *:not(:first-child) {
-      &::before {
-        content: "";
-        margin: 0 2rem;
-        width: 1px;
-        height: 2rem;
-        background-color: var(--gray-hard-darkest);
+
+    @media (min-width: 1024px) {
+      width: auto;
+      & > *:not(:first-child) {
+        &::before {
+          content: "";
+          margin: 0 2rem;
+          width: 1px;
+          height: 2rem;
+          background-color: var(--gray-hard-darkest);
+        }
       }
     }
 

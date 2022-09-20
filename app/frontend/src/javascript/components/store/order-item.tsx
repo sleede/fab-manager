@@ -6,7 +6,7 @@ import { FabButton } from '../base/fab-button';
 import { User } from '../../models/user';
 import { FabStateLabel } from '../base/fab-state-label';
 import OrderLib from '../../lib/order';
-import { ArrowClockwise } from 'phosphor-react';
+import { PlusCircle } from 'phosphor-react';
 
 interface OrderItemProps {
   order?: Order,
@@ -37,11 +37,9 @@ export const OrderItem: React.FC<OrderItemProps> = ({ order, currentUser }) => {
   return (
     <div className='order-item'>
       <p className="ref">{order.reference}</p>
-      <div>
-        <FabStateLabel status={OrderLib.statusColor(order)} background>
-          {t(`app.shared.store.order_item.state.${OrderLib.statusText(order)}`)}
-        </FabStateLabel>
-      </div>
+      <FabStateLabel status={OrderLib.statusColor(order)} background>
+        {t(`app.shared.store.order_item.state.${OrderLib.statusText(order)}`)}
+      </FabStateLabel>
       {isPrivileged() &&
         <div className='client'>
           <span>{t('app.shared.store.order_item.client')}</span>
@@ -52,7 +50,7 @@ export const OrderItem: React.FC<OrderItemProps> = ({ order, currentUser }) => {
         <span>{t('app.shared.store.order_item.created_at')}</span>
         <p>{FormatLib.date(order.created_at)}
           <div className="fab-tooltip">
-            <span className="trigger"><ArrowClockwise size={16} weight="light" /></span>
+            <span className="trigger"><PlusCircle size={16} weight="light" /></span>
             <div className="content">
               {t('app.shared.store.order_item.last_update')}<br />
               {FormatLib.date(order.updated_at)}

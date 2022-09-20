@@ -16,6 +16,7 @@ import { Order } from '../../models/order';
 import { AccordionItem } from './accordion-item';
 import { StoreListHeader } from './store-list-header';
 import { FabPagination } from '../base/fab-pagination';
+import { CaretDoubleDown } from 'phosphor-react';
 
 declare const Application: IApplication;
 
@@ -45,6 +46,7 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser }) => {
   const [filterVisible, setFilterVisible] = useState<boolean>(false);
   const [machines, setMachines] = useState<checklistOption[]>([]);
   const [accordion, setAccordion] = useState({});
+  const [filtersPanel, setFiltersPanel] = useState<boolean>(false);
   const [pageCount, setPageCount] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
@@ -183,57 +185,60 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser }) => {
           </li>
         }
       </ul>
-      <aside className='store-filters'>
-        <div className="categories">
-          <header>
-            <h3>{t('app.public.store.products.filter_categories')}</h3>
-          </header>
-          <div className="group u-scrollbar">
-            {categoriesTree.map(c =>
-              <div key={c.parent.id} className={`parent ${activeCategory?.id === c.parent.id || activeCategory?.parent === c.parent.id ? 'is-active' : ''}`}>
-                <p onClick={() => filterCategory(c.parent.id)}>
-                  {c.parent.name}<span>(count)</span>
-                </p>
-                {c.children.length > 0 &&
-                  <div className='children'>
-                    {c.children.map(ch =>
-                      <p key={ch.id}
-                        className={activeCategory?.id === ch.id ? 'is-active' : ''}
-                        onClick={() => filterCategory(ch.id, c.parent.id)}>
-                        {ch.name}<span>(count)</span>
-                      </p>
-                    )}
-                  </div>
-                }
-              </div>
-            )}
+      <aside className={`store-filters ${filtersPanel ? '' : 'collapsed'}`}>
+        <header>
+          <h3>{t('app.public.store.products.filter')}</h3>
+          <div className='grpBtn'>
+            <FabButton onClick={clearAllFilters} className="is-black">{t('app.public.store.products.filter_clear')}</FabButton>
+            <CaretDoubleDown className='filters-toggle' size={16} weight="bold" onClick={() => setFiltersPanel(!filtersPanel)} />
           </div>
-        </div>
-        <div className='filters'>
-          <header>
-            <h3>{t('app.public.store.products.filter')}</h3>
-            <div className='grpBtn'>
-              <FabButton onClick={clearAllFilters} className="is-black">{t('app.public.store.products.filter_clear')}</FabButton>
-            </div>
-          </header>
-          <div className="accordion">
-            <AccordionItem id={1}
-              isOpen={accordion[1]}
-              onChange={handleAccordion}
-              label={t('app.public.store.products.filter_machines')}
-            >
-              <div className='content'>
-                <div className="group u-scrollbar">
-                  {machines.map(m => (
-                    <label key={m.value}>
-                      <input type="checkbox" />
-                      <p>{m.label}</p>
-                    </label>
-                  ))}
+        </header>
+        <div className='grp'>
+          <div className="categories">
+            <header>
+              <h3>{t('app.public.store.products.filter_categories')}</h3>
+            </header>
+            <div className="list u-scrollbar">
+              {categoriesTree.map(c =>
+                <div key={c.parent.id} className={`parent ${activeCategory?.id === c.parent.id || activeCategory?.parent === c.parent.id ? 'is-active' : ''}`}>
+                  <p onClick={() => filterCategory(c.parent.id)}>
+                    {c.parent.name}<span>(count)</span>
+                  </p>
+                  {c.children.length > 0 &&
+                    <div className='children'>
+                      {c.children.map(ch =>
+                        <p key={ch.id}
+                          className={activeCategory?.id === ch.id ? 'is-active' : ''}
+                          onClick={() => filterCategory(ch.id, c.parent.id)}>
+                          {ch.name}<span>(count)</span>
+                        </p>
+                      )}
+                    </div>
+                  }
                 </div>
-                <FabButton onClick={applyFilters} className="is-info">{t('app.public.store.products.filter_apply')}</FabButton>
-              </div>
-            </AccordionItem>
+              )}
+            </div>
+          </div>
+          <div className='filters'>
+            <div className="accordion">
+              <AccordionItem id={1}
+                isOpen={accordion[1]}
+                onChange={handleAccordion}
+                label={t('app.public.store.products.filter_machines')}
+              >
+                <div className='content'>
+                  <div className="group u-scrollbar">
+                    {machines.map(m => (
+                      <label key={m.value}>
+                        <input type="checkbox" />
+                        <p>{m.label}</p>
+                      </label>
+                    ))}
+                  </div>
+                  <FabButton onClick={applyFilters} className="is-info">{t('app.public.store.products.filter_apply')}</FabButton>
+                </div>
+              </AccordionItem>
+            </div>
           </div>
         </div>
       </aside>
