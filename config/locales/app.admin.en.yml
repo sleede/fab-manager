@@ -2054,12 +2054,13 @@ en:
           filter_period_to: "to"
           state:
             cart: 'Cart'
-            in_progress: 'In progress'
+            in_progress: 'Under preparation'
             paid: "Paid"
             payment_failed: "Payment error"
             canceled: "Canceled"
             ready: "Ready"
             refunded: "Refunded"
+            delivered: "Delivered"
           sort:
             newest: "Newest first"
             oldest: "Oldest first"

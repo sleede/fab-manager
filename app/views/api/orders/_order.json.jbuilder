@@ -27,6 +27,7 @@ json.order_items_attributes order.order_items.order(created_at: :asc) do |item|
   json.orderable_name item.orderable.name
   json.orderable_ref item.orderable.sku
   json.orderable_main_image_url item.orderable.main_image&.attachment_url
+  json.orderable_external_stock item.orderable.stock['external']
   json.quantity item.quantity
   json.quantity_min item.orderable.quantity_min
   json.amount item.amount / 100.0

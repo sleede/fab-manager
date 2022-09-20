@@ -55,7 +55,8 @@ class ProductService
     def create(product_params, stock_movement_params = [])
       product = Product.new(product_params)
       product.amount = amount_multiplied_by_hundred(product_params[:amount])
-      update(product, product_params, stock_movement_params)
+      update_stock(product, stock_movement_params)
+      product
     end
 
     def update(product, product_params, stock_movement_params = [])
@@ -63,6 +64,21 @@ class ProductService
       product.attributes = product_params
       update_stock(product, stock_movement_params)
       product
+    end
+
+    def destroy(product)
+      used_in_order = OrderItem.joins(:order).where.not('orders.state' => 'cart')
+                               .exists?(orderable: product)
+      raise CannotDeleteProductError if used_in_order
+
+      ActiveRecord::Base.transaction do
+        orders_with_product = Order.joins(:order_items).where(state: 'cart').where('order_items.orderable': product)
+        orders_with_product.each do |order|
+          ::Cart::RemoveItemService.new.call(order, product)
+        end
+
+        product.destroy
+      end
     end
   end
 end

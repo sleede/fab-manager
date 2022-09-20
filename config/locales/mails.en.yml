@@ -381,4 +381,8 @@ en:
     notify_user_order_is_canceled:
       subject: "Your command is canceled"
       body:
-        notify_user_order_is_canceled: "Your command %{REFERENCE} is canceled:"
+        notify_user_order_is_canceled: "Your command %{REFERENCE} is canceled."
+    notify_user_order_is_refunded:
+      subject: "Your command is refunded"
+      body:
+        notify_user_order_is_refunded: "Your command %{REFERENCE} is refunded:"

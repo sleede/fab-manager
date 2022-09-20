@@ -46,12 +46,28 @@ class Orders::OrderService
   def self.update_state(order, current_user, state, note = nil)
     return ::Orders::SetInProgressService.new.call(order, current_user) if state == 'in_progress'
     return ::Orders::OrderReadyService.new.call(order, current_user, note) if state == 'ready'
-    return ::Orders::CancelOrderService.new.call(order, current_user) if state == 'canceled'
+    return ::Orders::OrderCanceledService.new.call(order, current_user) if state == 'canceled'
+    return ::Orders::OrderDeliveredService.new.call(order, current_user) if state == 'delivered'
+    return ::Orders::OrderRefundedService.new.call(order, current_user) if state == 'refunded'
   end
 
   def in_stock?(order, stock_type = 'external')
     order.order_items.each do |item|
       return false if item.orderable.stock[stock_type] < item.quantity
+    end
+    true
+  end
+
+  def greater_than_quantity_min?(order)
+    order.order_items.each do |item|
+      return false if item.quantity < item.orderable.quantity_min
+    end
+    true
+  end
+
+  def item_amount_not_equal?(order)
+    order.order_items.each do |item|
+      return false if item.amount != item.orderable.amount
     end
     true
   end

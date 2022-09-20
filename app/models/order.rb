@@ -10,7 +10,7 @@ class Order < PaymentDocument
   has_one :payment_gateway_object, as: :item
   has_many :order_activities, dependent: :destroy
 
-  ALL_STATES = %w[cart paid payment_failed refunded in_progress ready canceled return].freeze
+  ALL_STATES = %w[cart paid payment_failed refunded in_progress ready canceled delivered].freeze
   enum state: ALL_STATES.zip(ALL_STATES).to_h
 
   validates :token, :state, presence: true
