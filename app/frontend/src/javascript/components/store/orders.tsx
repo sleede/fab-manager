@@ -13,7 +13,7 @@ import { MemberSelect } from '../user/member-select';
 import { User } from '../../models/user';
 import { FormInput } from '../form/form-input';
 import OrderAPI from '../../api/order';
-import { Order, OrderIndexFilter } from '../../models/order';
+import { Order, OrderIndexFilter, OrderSortOption } from '../../models/order';
 import { FabPagination } from '../base/fab-pagination';
 import { X } from 'phosphor-react';
 
@@ -27,7 +27,7 @@ interface OrdersProps {
 * Option format, expected by react-select
 * @see https://github.com/JedWatson/react-select
 */
-type selectOption = { value: number, label: string };
+type selectOption = { value: OrderSortOption, label: string };
 
 /**
 * Option format, expected by checklist
@@ -38,7 +38,7 @@ const initFilters: OrderIndexFilter = {
   reference: '',
   states: [],
   page: 1,
-  sort: 'DESC'
+  sort: 'created_at-desc'
 };
 
 const FablabOrdersFilters = 'FablabOrdersFilters';
@@ -126,7 +126,7 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onError }) => {
     return () => {
       setFilters(draft => {
         draft.page = 1;
-        draft.sort = 'DESC';
+        draft.sort = 'created_at-desc';
         switch (filterType) {
           case 'reference':
             draft.reference = '';
@@ -175,8 +175,8 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onError }) => {
    */
   const buildOptions = (): Array<selectOption> => {
     return [
-      { value: 0, label: t('app.admin.store.orders.sort.newest') },
-      { value: 1, label: t('app.admin.store.orders.sort.oldest') }
+      { value: 'created_at-desc', label: t('app.admin.store.orders.sort.newest') },
+      { value: 'created_at-asc', label: t('app.admin.store.orders.sort.oldest') }
     ];
   };
 
@@ -185,7 +185,7 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onError }) => {
    */
   const handleSorting = (option: selectOption) => {
     setFilters(draft => {
-      draft.sort = option.value ? 'ASC' : 'DESC';
+      draft.sort = option.value;
     });
   };
 
@@ -337,7 +337,7 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onError }) => {
         <StoreListHeader
           productsCount={totalCount}
           selectOptions={buildOptions()}
-          selectValue={filters.sort === 'ASC' ? 1 : 0}
+          selectValue={filters.sort}
           onSelectOptionsChange={handleSorting}
         />
         <div className='features'>

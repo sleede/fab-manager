@@ -8,3 +8,5 @@ export interface PaginatedIndex<T> {
   total_count: number,
   data: Array<T>
 }
+
+export type SortOption = `${string}-${'asc' | 'desc'}` | '';

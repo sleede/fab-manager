@@ -75,8 +75,7 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
       setProductsCount(data.total_count);
       return data;
     } catch (error) {
-      onError(t('app.admin.store.products.unexpected_error_occurred'));
-      console.error(error);
+      onError(t('app.admin.store.products.unexpected_error_occurred') + error);
     }
   };
 

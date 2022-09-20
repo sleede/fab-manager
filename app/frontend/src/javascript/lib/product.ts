@@ -98,8 +98,8 @@ export default class ProductLib {
   static indexFiltersToIds = (filters: ProductIndexFilter): ProductIndexFilterIds => {
     return {
       ...filters,
-      categories: filters.categories.map(c => c.id),
-      machines: filters.machines.map(m => m.id)
+      categories: filters.categories?.map(c => c.id),
+      machines: filters.machines?.map(m => m.id)
     };
   };
 }

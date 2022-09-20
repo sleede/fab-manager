@@ -48,6 +48,8 @@ export interface OrderPayment {
 
 export type OrderIndex = PaginatedIndex<Order>;
 
+export type OrderSortOption = 'created_at-asc' | 'created_at-desc' | '';
+
 export interface OrderIndexFilter extends ApiFilter {
   reference?: string,
   user_id?: number,
@@ -56,7 +58,7 @@ export interface OrderIndexFilter extends ApiFilter {
     name?: string,
   },
   page?: number,
-  sort?: 'DESC'|'ASC'
+  sort?: OrderSortOption
   states?: Array<string>,
   period_from?: string,
   period_to?: string

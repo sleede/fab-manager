@@ -118,7 +118,7 @@ class ProductService
     end
 
     def products_ordering(products, filters)
-      key, order = filters[:sort].split('-')
+      key, order = filters[:sort]&.split('-')
       key ||= 'created_at'
       order ||= 'desc'
 

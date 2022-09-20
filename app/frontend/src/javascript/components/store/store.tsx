@@ -4,7 +4,7 @@ import { react2angular } from 'react2angular';
 import { Loader } from '../base/loader';
 import { IApplication } from '../../models/application';
 import { FabButton } from '../base/fab-button';
-import { Product } from '../../models/product';
+import { Product, ProductSortOption } from '../../models/product';
 import { ProductCategory } from '../../models/product-category';
 import ProductAPI from '../../api/product';
 import ProductCategoryAPI from '../../api/product-category';
@@ -28,7 +28,7 @@ interface StoreProps {
  * Option format, expected by react-select
  * @see https://github.com/JedWatson/react-select
  */
- type selectOption = { value: number, label: string };
+ type selectOption = { value: ProductSortOption, label: string };
 
 /**
  * This component shows public store
@@ -51,21 +51,21 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser }) => {
   useEffect(() => {
     ProductAPI.index({ page: 1, is_active: filterVisible }).then(data => {
       setPageCount(data.total_pages);
-      setProducts(data.products);
-    }).catch(() => {
-      onError(t('app.public.store.unexpected_error_occurred'));
+      setProducts(data.data);
+    }).catch(error => {
+      onError(t('app.public.store.unexpected_error_occurred') + error);
     });
     ProductCategoryAPI.index().then(data => {
       setProductCategories(data);
       formatCategories(data);
-    }).catch(() => {
-      onError(t('app.public.store.unexpected_error_occurred'));
+    }).catch(error => {
+      onError(t('app.public.store.unexpected_error_occurred') + error);
     });
 
     MachineAPI.index({ disabled: false }).then(data => {
       setMachines(buildChecklistOptions(data));
-    }).catch(() => {
-      onError(t('app.public.store.unexpected_error_occurred'));
+    }).catch(error => {
+      onError(t('app.public.store.unexpected_error_occurred') + error);
     });
   }, []);
 
@@ -117,10 +117,10 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser }) => {
    */
   const buildOptions = (): Array<selectOption> => {
     return [
-      { value: 0, label: t('app.public.store.products.sort.name_az') },
-      { value: 1, label: t('app.public.store.products.sort.name_za') },
-      { value: 2, label: t('app.public.store.products.sort.price_low') },
-      { value: 3, label: t('app.public.store.products.sort.price_high') }
+      { value: 'name-asc', label: t('app.public.store.products.sort.name_az') },
+      { value: 'name-desc', label: t('app.public.store.products.sort.name_za') },
+      { value: 'amount-asc', label: t('app.public.store.products.sort.price_low') },
+      { value: 'amount-desc', label: t('app.public.store.products.sort.price_high') }
     ];
   };
   /**
@@ -153,7 +153,7 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser }) => {
     if (page !== currentPage) {
       ProductAPI.index({ page, is_active: filterVisible }).then(data => {
         setCurrentPage(page);
-        setProducts(data.products);
+        setProducts(data.data);
         setPageCount(data.total_pages);
         window.document.getElementById('content-main').scrollTo({ top: 100, behavior: 'smooth' });
       }).catch(() => {

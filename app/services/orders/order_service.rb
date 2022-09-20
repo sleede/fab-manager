@@ -13,7 +13,7 @@ class Orders::OrderService
       orders = filter_by_period(orders, filters)
 
       orders = orders.where.not(state: 'cart') if current_user.member?
-      orders = orders.order(created_at: filters[:sort] || 'DESC')
+      orders = orders_ordering(orders, filters)
       total_count = orders.count
       orders = orders.page(filters[:page] || 1).per(ORDERS_PER_PAGE)
       {
@@ -105,6 +105,14 @@ class Orders::OrderService
       return orders unless filters[:period_from].present? && filters[:period_to].present?
 
       orders.where(created_at: DateTime.parse(filters[:period_from])..DateTime.parse(filters[:period_to]).end_of_day)
+    end
+
+    def orders_ordering(orders, filters)
+      key, order = filters[:sort]&.split('-')
+      key ||= 'created_at'
+      order ||= 'desc'
+
+      orders.order(key => order)
     end
   end
 end
