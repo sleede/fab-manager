@@ -47,7 +47,7 @@ export const MachinesFilter: React.FC<MachinesFilterProps> = ({ onError, onApply
    * Callback triggered when a machine filter is seleced or unselected.
    */
   const handleSelectMachine = (currentMachine: Machine, checked: boolean) => {
-    const list = [...machines];
+    const list = [...selectedMachines];
     checked
       ? list.push(currentMachine)
       : list.splice(list.indexOf(currentMachine), 1);
@@ -63,13 +63,12 @@ export const MachinesFilter: React.FC<MachinesFilterProps> = ({ onError, onApply
       <AccordionItem id={1}
                      isOpen={openedAccordion}
                      onChange={handleAccordion}
-                     label={t('app.admin.store.machines_filter.filter_machines')}
-      >
+                     label={t('app.admin.store.machines_filter.filter_machines')}>
         <div className='content'>
           <div className="group u-scrollbar">
             {machines.map(m => (
               <label key={m.id}>
-                <input type="checkbox" checked={machines.includes(m)} onChange={(event) => handleSelectMachine(m, event.target.checked)} />
+                <input type="checkbox" checked={selectedMachines.includes(m)} onChange={(event) => handleSelectMachine(m, event.target.checked)} />
                 <p>{m.name}</p>
               </label>
             ))}

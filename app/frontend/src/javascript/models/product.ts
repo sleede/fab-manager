@@ -1,9 +1,22 @@
 import { TDateISO } from '../typings/date-iso';
-import { ApiFilter } from './api';
+import { ApiFilter, PaginatedIndex } from './api';
+import { ProductCategory } from './product-category';
+import { Machine } from './machine';
 
-export interface ProductIndexFilter extends ApiFilter {
+export interface ProductIndexFilter {
   is_active?: boolean,
-  page?: number
+  page?: number,
+  categories?: ProductCategory[],
+  machines?: Machine[],
+  keywords?: string[],
+  stock_type?: 'internal' | 'external',
+  stock_from?: number,
+  stock_to?: number,
+}
+
+export interface ProductIndexFilterIds extends Omit<Omit<ProductIndexFilter, 'categories'>, 'machines'>, ApiFilter {
+  categories?: Array<number>,
+  machines?: Array<number>,
 }
 
 export type StockType = 'internal' | 'external' | 'all';
@@ -19,10 +32,7 @@ export interface Stock {
   external: number,
 }
 
-export interface ProductsIndex {
-  total_pages?: number,
-  products: Array<Product>
-}
+export type ProductsIndex = PaginatedIndex<Product>;
 
 export interface ProductStockMovement {
   id?: number,

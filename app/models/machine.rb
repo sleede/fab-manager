@@ -10,12 +10,14 @@ class Machine < ApplicationRecord
   has_many :machine_files, as: :viewable, dependent: :destroy
   accepts_nested_attributes_for :machine_files, allow_destroy: true, reject_if: :all_blank
 
-  has_and_belongs_to_many :projects, join_table: 'projects_machines'
+  has_many :projects_machines, dependent: :destroy
+  has_many :projects, through: :projects_machines
 
   has_many :machines_availabilities, dependent: :destroy
   has_many :availabilities, through: :machines_availabilities
 
-  has_and_belongs_to_many :trainings, join_table: 'trainings_machines'
+  has_many :trainings_machines, dependent: :destroy
+  has_many :trainings, through: :trainings_machines
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :description, presence: true
@@ -27,9 +29,10 @@ class Machine < ApplicationRecord
   has_many :credits, as: :creditable, dependent: :destroy
   has_many :plans, through: :credits
 
-  has_one :payment_gateway_object, as: :item
+  has_one :payment_gateway_object, as: :item, dependent: :destroy
 
-  has_and_belongs_to_many :products
+  has_many :machines_products, dependent: :destroy
+  has_many :products, through: :machines_products
 
   after_create :create_statistic_subtype
   after_create :create_machine_prices
@@ -66,11 +69,11 @@ class Machine < ApplicationRecord
   end
 
   def create_machine_prices
-    Group.all.each do |group|
+    Group.find_each do |group|
       Price.create(priceable: self, group: group, amount: 0)
     end
 
-    Plan.all.includes(:group).each do |plan|
+    Plan.includes(:group).find_each do |plan|
       Price.create(group: plan.group, plan: plan, priceable: self, amount: 0)
     end
   end

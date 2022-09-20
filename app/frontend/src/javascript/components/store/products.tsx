@@ -4,19 +4,21 @@ import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
 import { Loader } from '../base/loader';
 import { IApplication } from '../../models/application';
-import { Product } from '../../models/product';
+import { Product, ProductIndexFilter, ProductsIndex } from '../../models/product';
 import { ProductCategory } from '../../models/product-category';
 import { FabButton } from '../base/fab-button';
 import { ProductItem } from './product-item';
 import ProductAPI from '../../api/product';
-import { X } from 'phosphor-react';
 import { StoreListHeader } from './store-list-header';
 import { FabPagination } from '../base/fab-pagination';
 import { CategoriesFilter } from './filters/categories-filter';
 import { Machine } from '../../models/machine';
 import { MachinesFilter } from './filters/machines-filter';
 import { KeywordFilter } from './filters/keyword-filter';
-import { StockFilter, StockFilterData } from './filters/stock-filter';
+import { StockFilter } from './filters/stock-filter';
+import ProductCategoryAPI from '../../api/product-category';
+import ProductLib from '../../lib/product';
+import { ActiveFiltersTags } from './filters/active-filters-tags';
 
 declare const Application: IApplication;
 
@@ -34,40 +36,55 @@ interface ProductsProps {
 const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
   const { t } = useTranslation('admin');
 
-  const [filteredProductsList, setFilteredProductList] = useImmer<Array<Product>>([]);
-  const [features, setFeatures] = useImmer<Filters>(initFilters);
-  const [filterVisible, setFilterVisible] = useState<boolean>(false);
-  const [filters, setFilters] = useImmer<Filters>(initFilters);
-  const [clearFilters, setClearFilters] = useState<boolean>(false);
-  const [update, setUpdate] = useState(false);
+  const [productCategories, setProductCategories] = useState<Array<ProductCategory>>([]);
+  const [productsList, setProductList] = useState<Array<Product>>([]);
+  const [filters, setFilters] = useImmer<ProductIndexFilter>(initFilters);
   const [pageCount, setPageCount] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [productsCount, setProductsCount] = useState<number>(0);
 
   useEffect(() => {
-    ProductAPI.index({ page: 1, is_active: filterVisible }).then(data => {
-      setPageCount(data.total_pages);
-      setFilteredProductList(data.products);
-    });
+    fetchProducts().then(scrollToProducts);
+    ProductCategoryAPI.index().then(data => {
+      setProductCategories(ProductLib.sortCategories(data));
+    }).catch(onError);
   }, []);
 
   useEffect(() => {
-    applyFilters();
-    setClearFilters(false);
-    setUpdate(false);
-  }, [filterVisible, clearFilters, update === true]);
+    fetchProducts().then(scrollToProducts);
+  }, [filters]);
 
   /** Handle products pagination */
   const handlePagination = (page: number) => {
     if (page !== currentPage) {
-      ProductAPI.index({ page, is_active: filterVisible }).then(data => {
-        setCurrentPage(page);
-        setFilteredProductList(data.products);
-        setPageCount(data.total_pages);
-        window.document.getElementById('content-main').scrollTo({ top: 100, behavior: 'smooth' });
-      }).catch(() => {
-        onError(t('app.admin.store.products.unexpected_error_occurred'));
+      setFilters(draft => {
+        return { ...draft, page };
       });
     }
+  };
+
+  /**
+   * Fetch the products from the API, according to the current filters
+   */
+  const fetchProducts = async (): Promise<ProductsIndex> => {
+    try {
+      const data = await ProductAPI.index(filters);
+      setCurrentPage(data.page);
+      setProductList(data.data);
+      setPageCount(data.total_pages);
+      setProductsCount(data.total_count);
+      return data;
+    } catch (error) {
+      onError(t('app.admin.store.products.unexpected_error_occurred'));
+      console.error(error);
+    }
+  };
+
+  /**
+   * Scroll the view to the product list
+   */
+  const scrollToProducts = () => {
+    window.document.getElementById('content-main').scrollTo({ top: 100, behavior: 'smooth' });
   };
 
   /** Goto edit product page */
@@ -79,8 +96,8 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
   const deleteProduct = async (productId: number): Promise<void> => {
     try {
       await ProductAPI.destroy(productId);
-      const data = await ProductAPI.index();
-      setFilteredProductList(data.products);
+      await fetchProducts();
+      scrollToProducts();
       onSuccess(t('app.admin.store.products.successfully_deleted'));
     } catch (e) {
       onError(t('app.admin.store.products.unable_to_delete') + e);
@@ -94,8 +111,9 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
 
   /** Filter: toggle non-available products visibility */
   const toggleVisible = (checked: boolean) => {
-    setFilterVisible(!filterVisible);
-    console.log('Display on the shelf product only:', checked);
+    setFilters(draft => {
+      return { ...draft, is_active: checked };
+    });
   };
 
   /**
@@ -105,6 +123,14 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
     setFilters(draft => {
       return { ...draft, categories };
     });
+  };
+
+  /**
+   * Remove the provided category from the filters selection
+   */
+  const handleRemoveCategory = (category: ProductCategory) => {
+    const list = ProductLib.categoriesSelectionTree(productCategories, filters.categories, category, 'remove');
+    handleCategoriesFilterUpdate(list);
   };
 
   /**
@@ -126,7 +152,7 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
   };
 
   /** Filter: by stock range */
-  const handleStockFilterUpdate = (filters: StockFilterData) => {
+  const handleStockFilterUpdate = (filters: ProductIndexFilter) => {
     setFilters(draft => {
       return {
         ...draft,
@@ -140,27 +166,9 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
     console.log('Sort option:', option);
   };
 
-  /** Apply filters */
-  const applyFilters = () => {
-    let tags = initFilters;
-
-    if (filters.categories.length) {
-      tags = { ...tags, categories: [...filters.categories] };
-    }
-
-    if (filters.machines.length) {
-      tags = { ...tags, machines: [...filters.machines] };
-    }
-
-    setFeatures(tags);
-    console.log('Apply filters:', filters);
-  };
-
   /** Clear filters */
   const clearAllFilters = () => {
     setFilters(initFilters);
-    setClearFilters(true);
-    console.log('Clear all filters');
   };
 
   /** Creates sorting options to the react-select format */
@@ -189,7 +197,7 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
           </div>
         </header>
         <div className='accordion'>
-          <CategoriesFilter onError={onError}
+          <CategoriesFilter productCategories={productCategories}
                             onApplyFilters={handleCategoriesFilterUpdate}
                             currentFilters={filters.categories} />
 
@@ -197,7 +205,7 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
                           onApplyFilters={handleMachinesFilterUpdate}
                           currentFilters={filters.machines} />
 
-          <KeywordFilter onApplyFilters={keyword => handleKeywordFilterUpdate([...filters.keywords, keyword])}
+          <KeywordFilter onApplyFilters={keyword => handleKeywordFilterUpdate([keyword])}
                          currentFilters={filters.keywords[0]} />
 
           <StockFilter onApplyFilters={handleStockFilterUpdate}
@@ -206,35 +214,22 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
       </div>
       <div className='store-list'>
         <StoreListHeader
-          productsCount={filteredProductsList.length}
+          productsCount={productsCount}
           selectOptions={buildSortOptions()}
           onSelectOptionsChange={handleSorting}
-          switchChecked={filterVisible}
+          switchChecked={filters.is_active}
           onSwitch={toggleVisible}
         />
         <div className='features'>
-          {features.categories.map(c => (
-            <div key={c.id} className='features-item'>
-              <p>{c.name}</p>
-              <button onClick={() => handleCategoriesFilterUpdate(filters.categories.filter(cat => cat !== c))}><X size={16} weight="light" /></button>
-            </div>
-          ))}
-          {features.machines.map(m => (
-            <div key={m.id} className='features-item'>
-              <p>{m.name}</p>
-              <button onClick={() => handleMachinesFilterUpdate(filters.machines.filter(machine => machine !== m))}><X size={16} weight="light" /></button>
-            </div>
-          ))}
-          {features.keywords.map(k => (
-            <div key={k} className='features-item'>
-              <p>{k}</p>
-              <button onClick={() => handleKeywordFilterUpdate(filters.keywords.filter(keyword => keyword !== k))}><X size={16} weight="light" /></button>
-            </div>
-          ))}
+          <ActiveFiltersTags filters={filters}
+                             onRemoveCategory={handleRemoveCategory}
+                             onRemoveMachine={(m) => handleMachinesFilterUpdate(filters.machines.filter(machine => machine !== m))}
+                             onRemoveKeyword={() => handleKeywordFilterUpdate([])}
+                             onRemoveStock={() => handleStockFilterUpdate({ stock_type: 'internal', stock_to: 0, stock_from: 0 })} />
         </div>
 
         <div className="products-list">
-          {filteredProductsList.map((product) => (
+          {productsList.map((product) => (
             <ProductItem
               key={product.id}
               product={product}
@@ -261,20 +256,13 @@ const ProductsWrapper: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
 
 Application.Components.component('products', react2angular(ProductsWrapper, ['onSuccess', 'onError']));
 
-interface Filters {
-  categories: ProductCategory[],
-  machines: Machine[],
-  keywords: string[],
-  stock_type: 'internal' | 'external',
-  stock_from: number,
-  stock_to: number
-}
-
-const initFilters: Filters = {
+const initFilters: ProductIndexFilter = {
   categories: [],
   machines: [],
   keywords: [],
   stock_type: 'internal',
   stock_from: 0,
-  stock_to: 0
+  stock_to: 0,
+  is_active: false,
+  page: 1
 };

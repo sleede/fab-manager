@@ -7,21 +7,21 @@ class ProductService
 
     def list(filters)
       products = Product.includes(:product_images)
-      if filters[:is_active].present?
-        state = filters[:disabled] == 'false' ? [nil, false] : true
-        products = products.where(is_active: state)
-      end
-      products = products.page(filters[:page]).per(PRODUCTS_PER_PAGE) if filters[:page].present?
-      products
-    end
+      products = filter_by_active(products, filters)
+      products = filter_by_categories(products, filters)
+      products = filter_by_machines(products, filters)
+      products = filter_by_keyword_or_reference(products, filters)
+      products = filter_by_stock(products, filters)
 
-    def pages(filters)
-      products = Product.all
-      if filters[:is_active].present?
-        state = filters[:disabled] == 'false' ? [nil, false] : true
-        products = Product.where(is_active: state)
-      end
-      products.page(1).per(PRODUCTS_PER_PAGE).total_pages
+      total_count = products.count
+      products = products.page(filters[:page] || 1).per(PRODUCTS_PER_PAGE)
+      {
+        data: products,
+        page: filters[:page]&.to_i || 1,
+        total_pages: products.page(1).per(PRODUCTS_PER_PAGE).total_pages,
+        page_size: PRODUCTS_PER_PAGE,
+        total_count: total_count
+      }
     end
 
     # amount params multiplied by hundred
@@ -79,6 +79,41 @@ class ProductService
 
         product.destroy
       end
+    end
+
+    private
+
+    def filter_by_active(products, filters)
+      return products if filters[:is_active].blank?
+
+      state = filters[:is_active] == 'false' ? [nil, false, true] : true
+      products.where(is_active: state)
+    end
+
+    def filter_by_categories(products, filters)
+      return products if filters[:categories].blank?
+
+      products.where(product_category_id: filters[:categories].split(','))
+    end
+
+    def filter_by_machines(products, filters)
+      return products if filters[:machines].blank?
+
+      products.includes(:machines_products).where('machines_products.machine_id': filters[:machines].split(','))
+    end
+
+    def filter_by_keyword_or_reference(products, filters)
+      return products if filters[:keywords].blank?
+
+      products.where('sku = :sku OR name ILIKE :query OR description ILIKE :query',
+                     { sku: filters[:keywords], query: "%#{filters[:keywords]}%" })
+    end
+
+    def filter_by_stock(products, filters)
+      products.where("(stock ->> '#{filters[:stock_type]}')::int >= #{filters[:stock_from]}") if filters[:stock_from].to_i.positive?
+      products.where("(stock ->> '#{filters[:stock_type]}')::int <= #{filters[:stock_to]}") if filters[:stock_to].to_i.positive?
+
+      products
     end
   end
 end

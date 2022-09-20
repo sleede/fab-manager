@@ -6,7 +6,7 @@ import _ from 'lodash';
 
 interface KeywordFilterProps {
   onApplyFilters: (keywork: string) => void,
-  currentFilters: string,
+  currentFilters?: string,
   openDefault?: boolean,
   instantUpdate?: boolean,
 }
@@ -14,14 +14,14 @@ interface KeywordFilterProps {
 /**
  * Component to filter the products list by keyword or product reference
  */
-export const KeywordFilter: React.FC<KeywordFilterProps> = ({ onApplyFilters, currentFilters, openDefault = false, instantUpdate = false }) => {
+export const KeywordFilter: React.FC<KeywordFilterProps> = ({ onApplyFilters, currentFilters = '', openDefault = false, instantUpdate = false }) => {
   const { t } = useTranslation('admin');
 
   const [openedAccordion, setOpenedAccordion] = useState<boolean>(openDefault);
-  const [keyword, setKeyword] = useState<string>(currentFilters);
+  const [keyword, setKeyword] = useState<string>(currentFilters || '');
 
   useEffect(() => {
-    if (currentFilters && !_.isEqual(currentFilters, keyword)) {
+    if (!_.isEqual(currentFilters, keyword)) {
       setKeyword(currentFilters);
     }
   }, [currentFilters]);
@@ -53,8 +53,8 @@ export const KeywordFilter: React.FC<KeywordFilterProps> = ({ onApplyFilters, cu
       >
         <div className="content">
           <div className="group">
-            <input type="text" onChange={event => handleKeywordTyping(event)} />
-            <FabButton onClick={() => onApplyFilters(keyword)} className="is-info">{t('app.admin.store.keyword_filter.filter_apply')}</FabButton>
+            <input type="text" onChange={event => handleKeywordTyping(event)} value={keyword} />
+            <FabButton onClick={() => onApplyFilters(keyword || undefined)} className="is-info">{t('app.admin.store.keyword_filter.filter_apply')}</FabButton>
           </div>
         </div>
       </AccordionItem>

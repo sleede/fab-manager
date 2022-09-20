@@ -2,21 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { FabButton } from '../../base/fab-button';
 import { AccordionItem } from '../../base/accordion-item';
 import { useTranslation } from 'react-i18next';
-import { StockType } from '../../../models/product';
+import { ProductIndexFilter, StockType } from '../../../models/product';
 import { FormSelect } from '../../form/form-select';
 import { FormInput } from '../../form/form-input';
 import { useForm } from 'react-hook-form';
 import _ from 'lodash';
 
-export interface StockFilterData {
-  stock_type: StockType,
-  stock_from: number,
-  stock_to: number
-}
-
 interface StockFilterProps {
-  onApplyFilters: (filters: StockFilterData) => void,
-  currentFilters: StockFilterData,
+  onApplyFilters: (filters: ProductIndexFilter) => void,
+  currentFilters: ProductIndexFilter,
   openDefault?: boolean
 }
 
@@ -34,7 +28,7 @@ export const StockFilter: React.FC<StockFilterProps> = ({ onApplyFilters, curren
 
   const [openedAccordion, setOpenedAccordion] = useState<boolean>(openDefault);
 
-  const { register, control, handleSubmit, getValues, reset } = useForm<StockFilterData>({ defaultValues: { ...currentFilters } });
+  const { register, control, handleSubmit, getValues, reset } = useForm<ProductIndexFilter>({ defaultValues: { ...currentFilters } });
 
   useEffect(() => {
     if (currentFilters && !_.isEqual(currentFilters, getValues())) {
@@ -52,7 +46,7 @@ export const StockFilter: React.FC<StockFilterProps> = ({ onApplyFilters, curren
   /**
    * Callback triggered when the user clicks on "apply" to apply teh current filters.
    */
-  const onSubmit = (data: StockFilterData) => {
+  const onSubmit = (data: ProductIndexFilter) => {
     onApplyFilters(data);
   };
 

@@ -3,6 +3,7 @@ import { PaymentConfirmation } from './payment';
 import { CreateTokenResponse } from './payzen';
 import { UserRole } from './user';
 import { Coupon } from './coupon';
+import { ApiFilter, PaginatedIndex } from './api';
 
 export interface Order {
   id: number,
@@ -45,15 +46,9 @@ export interface OrderPayment {
   payment?: PaymentConfirmation|CreateTokenResponse
 }
 
-export interface OrderIndex {
-  page: number,
-  total_pages: number,
-  page_size: number,
-  total_count: number,
-  data: Array<Order>
-}
+export type OrderIndex = PaginatedIndex<Order>;
 
-export interface OrderIndexFilter {
+export interface OrderIndexFilter extends ApiFilter {
   reference?: string,
   user_id?: number,
   user?: {

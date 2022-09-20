@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import _ from 'lodash';
-import ProductCategoryAPI from '../../../api/product-category';
 import ProductLib from '../../../lib/product';
 import { ProductCategory } from '../../../models/product-category';
 import { FabButton } from '../../base/fab-button';
@@ -8,7 +7,7 @@ import { AccordionItem } from '../../base/accordion-item';
 import { useTranslation } from 'react-i18next';
 
 interface CategoriesFilterProps {
-  onError: (message: string) => void,
+  productCategories: Array<ProductCategory>,
   onApplyFilters: (categories: Array<ProductCategory>) => void,
   currentFilters: Array<ProductCategory>,
   openDefault?: boolean,
@@ -18,18 +17,11 @@ interface CategoriesFilterProps {
 /**
  * Component to filter the products list by categories
  */
-export const CategoriesFilter: React.FC<CategoriesFilterProps> = ({ onError, onApplyFilters, currentFilters, openDefault = false, instantUpdate = false }) => {
+export const CategoriesFilter: React.FC<CategoriesFilterProps> = ({ productCategories, onApplyFilters, currentFilters, openDefault = false, instantUpdate = false }) => {
   const { t } = useTranslation('admin');
 
-  const [productCategories, setProductCategories] = useState<ProductCategory[]>([]);
   const [openedAccordion, setOpenedAccordion] = useState<boolean>(openDefault);
   const [selectedCategories, setSelectedCategories] = useState<ProductCategory[]>(currentFilters || []);
-
-  useEffect(() => {
-    ProductCategoryAPI.index().then(data => {
-      setProductCategories(ProductLib.sortCategories(data));
-    }).catch(onError);
-  }, []);
 
   useEffect(() => {
     if (currentFilters && !_.isEqual(currentFilters, selectedCategories)) {
@@ -49,36 +41,7 @@ export const CategoriesFilter: React.FC<CategoriesFilterProps> = ({ onError, onA
    * This may cause other categories to be selected or unselected accordingly.
    */
   const handleSelectCategory = (currentCategory: ProductCategory, checked: boolean) => {
-    let list = [...selectedCategories];
-    const children = productCategories
-      .filter(el => el.parent_id === currentCategory.id);
-    const siblings = productCategories
-      .filter(el => el.parent_id === currentCategory.parent_id && el.parent_id !== null);
-
-    if (checked) {
-      list.push(currentCategory);
-      if (children.length) {
-        // if a parent category is selected, we automatically select all its children
-        list = [...Array.from(new Set([...list, ...children]))];
-      }
-      if (siblings.length && siblings.every(el => list.includes(el))) {
-        // if a child category is selected, with every sibling of it, we automatically select its parent
-        list.push(productCategories.find(p => p.id === siblings[0].parent_id));
-      }
-    } else {
-      list.splice(list.indexOf(currentCategory), 1);
-      const parent = productCategories.find(p => p.id === currentCategory.parent_id);
-      if (currentCategory.parent_id && list.includes(parent)) {
-        // if a child category is unselected, we unselect its parent
-        list.splice(list.indexOf(parent), 1);
-      }
-      if (children.length) {
-        // if a parent category is unselected, we unselect all its children
-        children.forEach(child => {
-          list.splice(list.indexOf(child), 1);
-        });
-      }
-    }
+    const list = ProductLib.categoriesSelectionTree(productCategories, selectedCategories, currentCategory, checked ? 'add' : 'remove');
 
     setSelectedCategories(list);
     if (instantUpdate) {

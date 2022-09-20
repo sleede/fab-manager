@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
-json.page @result[:page]
-json.total_pages @result[:total_pages]
-json.page_size @result[:page_size]
-json.total_count @result[:total_count]
+json.extract! @result, :page, :total_pages, :page_size, :total_count
 json.data @result[:data] do |order|
   json.extract! order, :id, :statistic_profile_id, :reference, :state, :created_at, :updated_at
   json.total order.total / 100.0 if order.total.present?
