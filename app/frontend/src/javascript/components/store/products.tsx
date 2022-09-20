@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
 import { Loader } from '../base/loader';
 import { IApplication } from '../../models/application';
-import { Product, ProductIndexFilter, ProductsIndex } from '../../models/product';
+import { Product, ProductIndexFilter, ProductsIndex, ProductSortOption } from '../../models/product';
 import { ProductCategory } from '../../models/product-category';
 import { FabButton } from '../base/fab-button';
 import { ProductItem } from './product-item';
@@ -30,7 +30,7 @@ interface ProductsProps {
  * Option format, expected by react-select
  * @see https://github.com/JedWatson/react-select
  */
- type selectOption = { value: number, label: string };
+ type selectOption = { value: ProductSortOption, label: string };
 
 /** This component shows the admin view of the store */
 const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
@@ -163,7 +163,12 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
 
   /** Display option: sorting */
   const handleSorting = (option: selectOption) => {
-    console.log('Sort option:', option);
+    setFilters(draft => {
+      return {
+        ...draft,
+        sort: option.value
+      };
+    });
   };
 
   /** Clear filters */
@@ -174,10 +179,10 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
   /** Creates sorting options to the react-select format */
   const buildSortOptions = (): Array<selectOption> => {
     return [
-      { value: 0, label: t('app.admin.store.products.sort.name_az') },
-      { value: 1, label: t('app.admin.store.products.sort.name_za') },
-      { value: 2, label: t('app.admin.store.products.sort.price_low') },
-      { value: 3, label: t('app.admin.store.products.sort.price_high') }
+      { value: 'name-asc', label: t('app.admin.store.products.sort.name_az') },
+      { value: 'name-desc', label: t('app.admin.store.products.sort.name_za') },
+      { value: 'amount-asc', label: t('app.admin.store.products.sort.price_low') },
+      { value: 'amount-desc', label: t('app.admin.store.products.sort.price_high') }
     ];
   };
 
@@ -264,5 +269,6 @@ const initFilters: ProductIndexFilter = {
   stock_from: 0,
   stock_to: 0,
   is_active: false,
-  page: 1
+  page: 1,
+  sort: ''
 };

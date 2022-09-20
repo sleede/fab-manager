@@ -12,6 +12,7 @@ class ProductService
       products = filter_by_machines(products, filters)
       products = filter_by_keyword_or_reference(products, filters)
       products = filter_by_stock(products, filters)
+      products = products_ordering(products, filters)
 
       total_count = products.count
       products = products.page(filters[:page] || 1).per(PRODUCTS_PER_PAGE)
@@ -114,6 +115,14 @@ class ProductService
       products.where("(stock ->> '#{filters[:stock_type]}')::int <= #{filters[:stock_to]}") if filters[:stock_to].to_i.positive?
 
       products
+    end
+
+    def products_ordering(products, filters)
+      key, order = filters[:sort].split('-')
+      key ||= 'created_at'
+      order ||= 'desc'
+
+      products.order(key => order)
     end
   end
 end

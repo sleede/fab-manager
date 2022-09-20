@@ -3,6 +3,8 @@ import { ApiFilter, PaginatedIndex } from './api';
 import { ProductCategory } from './product-category';
 import { Machine } from './machine';
 
+export type ProductSortOption = 'name-asc' | 'name-desc' | 'amount-asc' | 'amount-desc' | '';
+
 export interface ProductIndexFilter {
   is_active?: boolean,
   page?: number,
@@ -12,6 +14,7 @@ export interface ProductIndexFilter {
   stock_type?: 'internal' | 'external',
   stock_from?: number,
   stock_to?: number,
+  sort?: ProductSortOption
 }
 
 export interface ProductIndexFilterIds extends Omit<Omit<ProductIndexFilter, 'categories'>, 'machines'>, ApiFilter {
