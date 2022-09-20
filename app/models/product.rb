@@ -8,7 +8,8 @@ class Product < ApplicationRecord
 
   belongs_to :product_category
 
-  has_and_belongs_to_many :machines
+  has_many :machines_products, dependent: :destroy
+  has_many :machines, through: :machines_products
 
   has_many :product_files, as: :viewable, dependent: :destroy
   accepts_nested_attributes_for :product_files, allow_destroy: true, reject_if: :all_blank

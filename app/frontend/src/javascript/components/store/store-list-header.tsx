@@ -2,12 +2,13 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import Select from 'react-select';
 import Switch from 'react-switch';
+import { SortOption } from '../../models/api';
 
 interface StoreListHeaderProps {
   productsCount: number,
   selectOptions: selectOption[],
   onSelectOptionsChange: (option: selectOption) => void,
-  selectValue?: number,
+  selectValue?: SortOption,
   switchLabel?: string,
   switchChecked?: boolean,
   onSwitch?: (boolean) => void
@@ -16,7 +17,7 @@ interface StoreListHeaderProps {
  * Option format, expected by react-select
  * @see https://github.com/JedWatson/react-select
  */
- type selectOption = { value: number, label: string };
+ type selectOption = { value: SortOption, label: string };
 
 /**
  * Renders an accordion item

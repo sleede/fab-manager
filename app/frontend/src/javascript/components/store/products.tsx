@@ -4,21 +4,22 @@ import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
 import { Loader } from '../base/loader';
 import { IApplication } from '../../models/application';
-import { Product } from '../../models/product';
+import { Product, ProductIndexFilter, ProductsIndex, ProductSortOption } from '../../models/product';
 import { ProductCategory } from '../../models/product-category';
-import { useForm } from 'react-hook-form';
 import { FabButton } from '../base/fab-button';
 import { ProductItem } from './product-item';
 import ProductAPI from '../../api/product';
-import ProductCategoryAPI from '../../api/product-category';
-import MachineAPI from '../../api/machine';
-import { AccordionItem } from './accordion-item';
-import { CaretDoubleUp, X } from 'phosphor-react';
 import { StoreListHeader } from './store-list-header';
 import { FabPagination } from '../base/fab-pagination';
+import { CategoriesFilter } from './filters/categories-filter';
+import { Machine } from '../../models/machine';
+import { MachinesFilter } from './filters/machines-filter';
+import { KeywordFilter } from './filters/keyword-filter';
+import { StockFilter } from './filters/stock-filter';
+import ProductCategoryAPI from '../../api/product-category';
 import ProductLib from '../../lib/product';
-import { FormInput } from '../form/form-input';
-import { FormSelect } from '../form/form-select';
+import { ActiveFiltersTags } from './filters/active-filters-tags';
+import { CaretDoubleUp } from 'phosphor-react';
 
 declare const Application: IApplication;
 
@@ -30,60 +31,61 @@ interface ProductsProps {
  * Option format, expected by react-select
  * @see https://github.com/JedWatson/react-select
  */
- type selectOption = { value: number, label: string };
+ type selectOption = { value: ProductSortOption, label: string };
 
 /** This component shows the admin view of the store */
 const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
   const { t } = useTranslation('admin');
 
-  const { register, control, getValues } = useForm();
-
-  const [filteredProductsList, setFilteredProductList] = useImmer<Array<Product>>([]);
-  const [features, setFeatures] = useImmer<Filters>(initFilters);
-  const [filterVisible, setFilterVisible] = useState<boolean>(false);
-  const [filters, setFilters] = useImmer<Filters>(initFilters);
-  const [clearFilters, setClearFilters] = useState<boolean>(false);
-  const [productCategories, setProductCategories] = useState<ProductCategory[]>([]);
-  const [machines, setMachines] = useState<checklistOption[]>([]);
-  const [update, setUpdate] = useState(false);
-  const [accordion, setAccordion] = useState({});
-  const [filtersPanel, setFiltersPanel] = useState<boolean>(true);
+  const [productCategories, setProductCategories] = useState<Array<ProductCategory>>([]);
+  const [productsList, setProductList] = useState<Array<Product>>([]);
+  const [filters, setFilters] = useImmer<ProductIndexFilter>(initFilters);
   const [pageCount, setPageCount] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [productsCount, setProductsCount] = useState<number>(0);
+  const [filtersPanel, setFiltersPanel] = useState<boolean>(true);
 
   useEffect(() => {
-    ProductAPI.index({ page: 1, is_active: filterVisible }).then(data => {
-      setPageCount(data.total_pages);
-      setFilteredProductList(data.products);
-    });
-
+    fetchProducts().then(scrollToProducts);
     ProductCategoryAPI.index().then(data => {
       setProductCategories(ProductLib.sortCategories(data));
-    }).catch(onError);
-
-    MachineAPI.index({ disabled: false }).then(data => {
-      setMachines(buildChecklistOptions(data));
     }).catch(onError);
   }, []);
 
   useEffect(() => {
-    applyFilters();
-    setClearFilters(false);
-    setUpdate(false);
-  }, [filterVisible, clearFilters, update === true]);
+    fetchProducts().then(scrollToProducts);
+  }, [filters]);
 
   /** Handle products pagination */
   const handlePagination = (page: number) => {
     if (page !== currentPage) {
-      ProductAPI.index({ page, is_active: filterVisible }).then(data => {
-        setCurrentPage(page);
-        setFilteredProductList(data.products);
-        setPageCount(data.total_pages);
-        window.document.getElementById('content-main').scrollTo({ top: 100, behavior: 'smooth' });
-      }).catch(() => {
-        onError(t('app.admin.store.products.unexpected_error_occurred'));
+      setFilters(draft => {
+        return { ...draft, page };
       });
     }
+  };
+
+  /**
+   * Fetch the products from the API, according to the current filters
+   */
+  const fetchProducts = async (): Promise<ProductsIndex> => {
+    try {
+      const data = await ProductAPI.index(filters);
+      setCurrentPage(data.page);
+      setProductList(data.data);
+      setPageCount(data.total_pages);
+      setProductsCount(data.total_count);
+      return data;
+    } catch (error) {
+      onError(t('app.admin.store.products.unexpected_error_occurred') + error);
+    }
+  };
+
+  /**
+   * Scroll the view to the product list
+   */
+  const scrollToProducts = () => {
+    window.document.getElementById('content-main').scrollTo({ top: 100, behavior: 'smooth' });
   };
 
   /** Goto edit product page */
@@ -95,8 +97,8 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
   const deleteProduct = async (productId: number): Promise<void> => {
     try {
       await ProductAPI.destroy(productId);
-      const data = await ProductAPI.index();
-      setFilteredProductList(data.products);
+      await fetchProducts();
+      scrollToProducts();
       onSuccess(t('app.admin.store.products.successfully_deleted'));
     } catch (e) {
       onError(t('app.admin.store.products.unable_to_delete') + e);
@@ -110,129 +112,79 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
 
   /** Filter: toggle non-available products visibility */
   const toggleVisible = (checked: boolean) => {
-    setFilterVisible(!filterVisible);
-    console.log('Display on the shelf product only:', checked);
-  };
-
-  /** Filter: by categories */
-  const handleSelectCategory = (c: ProductCategory, checked: boolean, instantUpdate?: boolean) => {
-    let list = [...filters.categories];
-    const children = productCategories
-      .filter(el => el.parent_id === c.id);
-    const siblings = productCategories
-      .filter(el => el.parent_id === c.parent_id && el.parent_id !== null);
-
-    if (checked) {
-      list.push(c);
-      if (children.length) {
-        const unique = Array.from(new Set([...list, ...children]));
-        list = [...unique];
-      }
-      if (siblings.length && siblings.every(el => list.includes(el))) {
-        list.push(productCategories.find(p => p.id === siblings[0].parent_id));
-      }
-    } else {
-      list.splice(list.indexOf(c), 1);
-      const parent = productCategories.find(p => p.id === c.parent_id);
-      if (c.parent_id && list.includes(parent)) {
-        list.splice(list.indexOf(parent), 1);
-      }
-      if (children.length) {
-        children.forEach(child => {
-          list.splice(list.indexOf(child), 1);
-        });
-      }
-    }
     setFilters(draft => {
-      return { ...draft, categories: list };
+      return { ...draft, is_active: checked };
     });
-    if (instantUpdate) {
-      setUpdate(true);
-    }
   };
 
-  /** Filter: by machines */
-  const handleSelectMachine = (m: checklistOption, checked, instantUpdate?) => {
-    const list = [...filters.machines];
-    checked
-      ? list.push(m)
-      : list.splice(list.indexOf(m), 1);
+  /**
+   * Update the list of applied filters with the given categories
+   */
+  const handleCategoriesFilterUpdate = (categories: Array<ProductCategory>) => {
     setFilters(draft => {
-      return { ...draft, machines: list };
+      return { ...draft, categories };
     });
-    if (instantUpdate) {
-      setUpdate(true);
-    }
   };
 
-  /** Filter: by keyword or ref */
-  const handleKeyword = (evt: React.ChangeEvent<HTMLInputElement>) => {
+  /**
+   * Remove the provided category from the filters selection
+   */
+  const handleRemoveCategory = (category: ProductCategory) => {
+    const list = ProductLib.categoriesSelectionTree(productCategories, filters.categories, category, 'remove');
+    handleCategoriesFilterUpdate(list);
+  };
+
+  /**
+   * Update the list of applied filters with the given machines
+   */
+  const handleMachinesFilterUpdate = (machines: Array<Machine>) => {
     setFilters(draft => {
-      return { ...draft, keywords: evt.target.value };
+      return { ...draft, machines };
+    });
+  };
+
+  /**
+   * Update the list of applied filters with the given keywords (or reference)
+   */
+  const handleKeywordFilterUpdate = (keywords: Array<string>) => {
+    setFilters(draft => {
+      return { ...draft, keywords };
     });
   };
 
   /** Filter: by stock range */
-  const handleStockRange = () => {
+  const handleStockFilterUpdate = (filters: ProductIndexFilter) => {
     setFilters(draft => {
       return {
         ...draft,
-        stock_type: buildStockOptions()[getValues('stock_type')].label,
-        stock_from: getValues('stock_from'),
-        stock_to: getValues('stock_to')
+        ...filters
       };
     });
   };
 
-  /** Creates sorting options to the react-select format */
-  const buildStockOptions = (): Array<selectOption> => {
-    return [
-      { value: 0, label: t('app.admin.store.products.stock_internal') },
-      { value: 1, label: t('app.admin.store.products.stock_external') }
-    ];
-  };
-
   /** Display option: sorting */
   const handleSorting = (option: selectOption) => {
-    console.log('Sort option:', option);
-  };
-
-  /** Apply filters */
-  const applyFilters = () => {
-    let tags = initFilters;
-
-    if (filters.categories.length) {
-      tags = { ...tags, categories: [...filters.categories] };
-    }
-
-    if (filters.machines.length) {
-      tags = { ...tags, machines: [...filters.machines] };
-    }
-
-    setFeatures(tags);
-    console.log('Apply filters:', filters);
+    setFilters(draft => {
+      return {
+        ...draft,
+        sort: option.value
+      };
+    });
   };
 
   /** Clear filters */
   const clearAllFilters = () => {
     setFilters(initFilters);
-    setClearFilters(true);
-    console.log('Clear all filters');
   };
 
   /** Creates sorting options to the react-select format */
   const buildSortOptions = (): Array<selectOption> => {
     return [
-      { value: 0, label: t('app.admin.store.products.sort.name_az') },
-      { value: 1, label: t('app.admin.store.products.sort.name_za') },
-      { value: 2, label: t('app.admin.store.products.sort.price_low') },
-      { value: 3, label: t('app.admin.store.products.sort.price_high') }
+      { value: 'name-asc', label: t('app.admin.store.products.sort.name_az') },
+      { value: 'name-desc', label: t('app.admin.store.products.sort.name_za') },
+      { value: 'amount-asc', label: t('app.admin.store.products.sort.price_low') },
+      { value: 'amount-desc', label: t('app.admin.store.products.sort.price_high') }
     ];
-  };
-
-  /** Open/close accordion items */
-  const handleAccordion = (id, state) => {
-    setAccordion({ ...accordion, [id]: state });
   };
 
   return (
@@ -252,110 +204,39 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
           </div>
         </header>
         <div className='grp accordion'>
-          <AccordionItem id={0}
-            isOpen={accordion[0]}
-            onChange={handleAccordion}
-            label={t('app.admin.store.products.filter_categories')}
-          >
-            <div className='content'>
-              <div className="group u-scrollbar">
-                {productCategories.map(pc => (
-                  <label key={pc.id} className={pc.parent_id ? 'offset' : ''}>
-                    <input type="checkbox" checked={filters.categories.includes(pc)} onChange={(event) => handleSelectCategory(pc, event.target.checked)} />
-                    <p>{pc.name}</p>
-                  </label>
-                ))}
-              </div>
-              <FabButton onClick={() => setUpdate(true)} className="is-info">{t('app.admin.store.products.filter_apply')}</FabButton>
-            </div>
-          </AccordionItem>
+          <CategoriesFilter productCategories={productCategories}
+                            onApplyFilters={handleCategoriesFilterUpdate}
+                            currentFilters={filters.categories} />
 
-          <AccordionItem id={1}
-            isOpen={accordion[1]}
-            onChange={handleAccordion}
-            label={t('app.admin.store.products.filter_machines')}
-          >
-            <div className='content'>
-              <div className="group u-scrollbar">
-                {machines.map(m => (
-                  <label key={m.value}>
-                    <input type="checkbox" checked={filters.machines.includes(m)} onChange={(event) => handleSelectMachine(m, event.target.checked)} />
-                    <p>{m.label}</p>
-                  </label>
-                ))}
-              </div>
-              <FabButton onClick={() => setUpdate(true)} className="is-info">{t('app.admin.store.products.filter_apply')}</FabButton>
-            </div>
-          </AccordionItem>
+          <MachinesFilter onError={onError}
+                          onApplyFilters={handleMachinesFilterUpdate}
+                          currentFilters={filters.machines} />
 
-          <AccordionItem id={2}
-            isOpen={accordion[2]}
-            onChange={handleAccordion}
-            label={t('app.admin.store.products.filter_keywords_reference')}
-          >
-            <div className="content">
-              <div className="group">
-                <input type="text" onChange={event => handleKeyword(event)} />
-                <FabButton onClick={() => setUpdate(true)} className="is-info">{t('app.admin.store.products.filter_apply')}</FabButton>
-              </div>
-            </div>
-          </AccordionItem>
+          <KeywordFilter onApplyFilters={keyword => handleKeywordFilterUpdate([keyword])}
+                         currentFilters={filters.keywords[0]} />
 
-          <AccordionItem id={3}
-            isOpen={accordion[3]}
-            onChange={handleAccordion}
-            label={t('app.admin.store.products.filter_stock')}
-          >
-            <div className="content">
-              <div className="group">
-                <FormSelect id="stock_type"
-                            options={buildStockOptions()}
-                            valueDefault={0}
-                            control={control}
-                />
-                <div className='range'>
-                  <FormInput id="stock_from"
-                             label={t('app.admin.store.products.filter_stock_from')}
-                             register={register}
-                             defaultValue={filters.stock_from}
-                             type="number" />
-                  <FormInput id="stock_to"
-                             label={t('app.admin.store.products.filter_stock_to')}
-                             register={register}
-                             defaultValue={filters.stock_to}
-                             type="number" />
-                </div>
-                <FabButton onClick={handleStockRange} className="is-info">{t('app.admin.store.products.filter_apply')}</FabButton>
-              </div>
-            </div>
-          </AccordionItem>
+          <StockFilter onApplyFilters={handleStockFilterUpdate}
+                       currentFilters={filters} />
         </div>
       </aside>
       <div className='store-list'>
         <StoreListHeader
-          productsCount={filteredProductsList.length}
+          productsCount={productsCount}
           selectOptions={buildSortOptions()}
           onSelectOptionsChange={handleSorting}
-          switchChecked={filterVisible}
+          switchChecked={filters.is_active}
           onSwitch={toggleVisible}
         />
         <div className='features'>
-          {features.categories.map(c => (
-            <div key={c.id} className='features-item'>
-              <p>{c.name}</p>
-              <button onClick={() => handleSelectCategory(c, false, true)}><X size={16} weight="light" /></button>
-            </div>
-          ))}
-          {features.machines.map(m => (
-            <div key={m.value} className='features-item'>
-              <p>{m.label}</p>
-              <button onClick={() => handleSelectMachine(m, false, true)}><X size={16} weight="light" /></button>
-            </div>
-          ))}
+          <ActiveFiltersTags filters={filters}
+                             onRemoveCategory={handleRemoveCategory}
+                             onRemoveMachine={(m) => handleMachinesFilterUpdate(filters.machines.filter(machine => machine !== m))}
+                             onRemoveKeyword={() => handleKeywordFilterUpdate([])}
+                             onRemoveStock={() => handleStockFilterUpdate({ stock_type: 'internal', stock_to: 0, stock_from: 0 })} />
         </div>
 
         <div className="products-list">
-          {filteredProductsList.map((product) => (
+          {productsList.map((product) => (
             <ProductItem
               key={product.id}
               product={product}
@@ -382,30 +263,14 @@ const ProductsWrapper: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
 
 Application.Components.component('products', react2angular(ProductsWrapper, ['onSuccess', 'onError']));
 
-/** Option format, expected by checklist */
-type checklistOption = { value: number, label: string };
-
-/** Convert the provided array of items to the checklist format */
-const buildChecklistOptions = (items: Array<{ id?: number, name: string }>): Array<checklistOption> => {
-  return items.map(t => {
-    return { value: t.id, label: t.name };
-  });
-};
-
-interface Filters {
-  categories: ProductCategory[],
-  machines: checklistOption[],
-  keywords: string[],
-  stock_type: 'internal' | 'external',
-  stock_from: number,
-  stock_to: number
-}
-
-const initFilters: Filters = {
+const initFilters: ProductIndexFilter = {
   categories: [],
   machines: [],
   keywords: [],
   stock_type: 'internal',
   stock_from: 0,
-  stock_to: 0
+  stock_to: 0,
+  is_active: false,
+  page: 1,
+  sort: ''
 };

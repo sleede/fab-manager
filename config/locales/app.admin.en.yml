@@ -1933,6 +1933,22 @@ en:
           save: "Save"
           required: "This field is required"
           slug_pattern: "Only lowercase alphanumeric groups of characters separated by an hyphen"
+        categories_filter:
+          filter_categories: "By categories"
+          filter_apply: "Apply"
+        machines_filter:
+          filter_machines: "By machines"
+          filter_apply: "Apply"
+        keyword_filter:
+          filter_keywords_reference: "By keywords or reference"
+          filter_apply: "Apply"
+        stock_filter:
+          stock_internal: "Private stock"
+          stock_external: "Public stock"
+          filter_stock: "By stock status"
+          filter_stock_from: "From"
+          filter_stock_to: "to"
+          filter_apply: "Apply"
         products:
           unexpected_error_occurred: "An unexpected error occurred. Please try again later."
           all_products: "All products"

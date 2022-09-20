@@ -104,7 +104,7 @@
           * { opacity: 0; }
         }
       }
-      
+
       header {
         width: 100%;
         padding: 0;
@@ -125,7 +125,7 @@
         align-items: stretch;
         transition: max-height 500ms ease-in-out;
         * { transition: opacity 250ms ease-in-out 300ms; }
-        
+
         .group {
           display: flex;
           flex-direction: column;

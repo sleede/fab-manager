@@ -1,4 +1,3 @@
-/* eslint-disable fabmanager/scoped-translation */
 import React, { useState, useEffect } from 'react';
 import { CaretDown } from 'phosphor-react';
 
@@ -14,6 +13,7 @@ interface AccordionItemProps {
  */
 export const AccordionItem: React.FC<AccordionItemProps> = ({ isOpen, onChange, id, label, children }) => {
   const [state, setState] = useState(isOpen);
+
   useEffect(() => {
     onChange(id, state);
   }, [state]);
