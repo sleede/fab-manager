@@ -100,7 +100,7 @@ en:
         delete_this_and_next: "This slot and the following"
         delete_all: "All slots"
         event_in_the_past: "Create a slot in the past"
-        confirm_create_event_in_the_past: "You are about to create a slot in the past. Are you sure you want to do this? Members on the store? will not be able to book this slot."
+        confirm_create_event_in_the_past: "You are about to create a slot in the past. Are you sure you want to do this? Members will not be able to book this slot."
         edit_event: "Edit the event"
         view_reservations: "View reservations"
         legend: "Legend"
