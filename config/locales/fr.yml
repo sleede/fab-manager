@@ -121,6 +121,7 @@ fr:
     error_invoice: "Facture en erreur. Les éléments ci-dessous n'ont pas été réservés. Veuillez contacter le Fablab pour un remboursement."
     prepaid_pack: "Paquet d'heures prépayé"
     pack_item: "Pack de %{COUNT} heures pour la %{ITEM}"
+    order: "Your order of the store"
   #PDF payment schedule generation
   payment_schedules:
     schedule_reference: "Référence de l'échéancier : %{REF}"
@@ -406,6 +407,12 @@ fr:
         refusal: "Votre justificatif n'est pas accepté"
       notify_admin_user_proof_of_identity_refusal:
         refusal: "Le justificatif du membre <strong><em>%{NAME}</strong></em> a été refusé."
+      notify_user_order_is_ready:
+        order_ready: "Votre commande %{REFERENCE} est prête"
+      notify_user_order_is_canceled:
+        order_canceled: "Votre commande %{REFERENCE} est annulée"
+      notify_user_order_is_refunded:
+        order_refunded: "Votre commande %{REFERENCE} est remboursée"
   #statistics tools for admins
   statistics:
     subscriptions: "Abonnements"
