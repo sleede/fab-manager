@@ -121,6 +121,7 @@ es:
     error_invoice: "Erroneous invoice. The items below ware not booked. Please contact the FabLab for a refund."
     prepaid_pack: "Prepaid pack of hours"
     pack_item: "Pack of %{COUNT} hours for the %{ITEM}"
+    order: "Your order of the store"
   #PDF payment schedule generation
   payment_schedules:
     schedule_reference: "Payment schedule reference: %{REF}"
@@ -406,6 +407,12 @@ es:
         refusal: "Your proof of identity are not accepted"
       notify_admin_user_proof_of_identity_refusal:
         refusal: "Member's proof of identity <strong><em>%{NAME}</strong></em> refused."
+      notify_user_order_is_ready:
+        order_ready: "Your command %{REFERENCE} is ready"
+      notify_user_order_is_canceled:
+        order_canceled: "Your command %{REFERENCE} is canceled"
+      notify_user_order_is_refunded:
+        order_refunded: "Your command %{REFERENCE} is refunded"
   #statistics tools for admins
   statistics:
     subscriptions: "Suscripciones"
