@@ -22,6 +22,12 @@ export interface ProductIndexFilterIds extends Omit<Omit<ProductIndexFilter, 'ca
   machines?: Array<number>,
 }
 
+export interface ProductIndexFilterUrl extends Omit<Omit<ProductIndexFilter, 'categories'>, 'machines'> {
+  categoryTypeUrl?: 'c' | 'sc',
+  category?: string,
+  machines?: Array<string>,
+}
+
 export type StockType = 'internal' | 'external' | 'all';
 
 export const stockMovementInReasons = ['inward_stock', 'returned', 'cancelled', 'inventory_fix', 'other_in'] as const;

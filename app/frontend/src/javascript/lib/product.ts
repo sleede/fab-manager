@@ -1,6 +1,7 @@
 import { ProductCategory } from '../models/product-category';
 import {
-  ProductIndexFilter, ProductIndexFilterIds,
+  ProductIndexFilter,
+  ProductIndexFilterIds, ProductIndexFilterUrl,
   stockMovementInReasons,
   stockMovementOutReasons,
   StockMovementReason
@@ -101,5 +102,47 @@ export default class ProductLib {
       categories: filters.categories?.map(c => c.id),
       machines: filters.machines?.map(m => m.id)
     };
+  };
+
+  /**
+   * Prepare the filtering data from the filters to pass them to the router URL
+   */
+  static indexFiltersToRouterParams = (filters: ProductIndexFilter): ProductIndexFilterUrl => {
+    let categoryTypeUrl = null;
+    let category = null;
+    if (filters.categories.length > 0) {
+      categoryTypeUrl = filters.categories[0].parent_id === null ? 'c' : 'sc';
+      category = filters.categories.map(c => c.slug)[0];
+    }
+    return {
+      ...filters,
+      machines: filters.machines?.map(m => m.slug),
+      category,
+      categoryTypeUrl
+    };
+  };
+
+  /**
+   * Parse the provided URL and return a ready-to-use filter object
+   * FIXME
+   */
+  static readFiltersFromUrl = (url: string): ProductIndexFilterIds => {
+    const res: ProductIndexFilterIds = {};
+    for (const [key, value] of new URLSearchParams(url.split('?')[1])) {
+      let parsedValue: string|number|boolean = value;
+      if (['true', 'false'].includes(value)) {
+        parsedValue = (value === 'true');
+      } else if (parseInt(value, 10).toString() === value) {
+        parsedValue = parseInt(value, 10);
+      }
+      if (res[key] === undefined) {
+        res[key] = parsedValue;
+      } else if (Array.isArray(res[key])) {
+        res[key] = [...res[key] as Array<unknown>, parsedValue];
+      } else {
+        res[key] = [res[key], parsedValue];
+      }
+    }
+    return res;
   };
 }

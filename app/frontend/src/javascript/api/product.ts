@@ -1,13 +1,12 @@
 import apiClient from './clients/api-client';
 import { AxiosResponse } from 'axios';
 import { serialize } from 'object-to-formdata';
-import { Product, ProductIndexFilter, ProductsIndex, ProductStockMovement } from '../models/product';
+import { Product, ProductIndexFilterIds, ProductsIndex, ProductStockMovement } from '../models/product';
 import ApiLib from '../lib/api';
-import ProductLib from '../lib/product';
 
 export default class ProductAPI {
-  static async index (filters?: ProductIndexFilter): Promise<ProductsIndex> {
-    const res: AxiosResponse<ProductsIndex> = await apiClient.get(`/api/products${ApiLib.filtersToQuery(ProductLib.indexFiltersToIds(filters))}`);
+  static async index (filters?: ProductIndexFilterIds): Promise<ProductsIndex> {
+    const res: AxiosResponse<ProductsIndex> = await apiClient.get(`/api/products${ApiLib.filtersToQuery(filters)}`);
     return res?.data;
   }
 

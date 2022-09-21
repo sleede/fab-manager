@@ -620,11 +620,49 @@ angular.module('application.router', ['ui.router'])
 
       // store
       .state('app.public.store', {
-        url: '/store',
+        url: '/store/:categoryTypeUrl/:category?{machines:string}{keywords:string}{is_active:string}{page:string}{sort:string}',
         views: {
           'main@': {
             templateUrl: '/store/index.html',
             controller: 'StoreController'
+          }
+        },
+        params: {
+          categoryTypeUrl: {
+            dynamic: true,
+            raw: true,
+            type: 'path',
+            value: null,
+            squash: true
+          },
+          category: {
+            dynamic: true,
+            type: 'path',
+            raw: true,
+            value: null,
+            squash: true
+          },
+          machines: {
+            array: true,
+            dynamic: true,
+            type: 'query',
+            raw: true
+          },
+          keywords: {
+            dynamic: true,
+            type: 'query'
+          },
+          is_active: {
+            dynamic: true,
+            type: 'query'
+          },
+          page: {
+            dynamic: true,
+            type: 'query'
+          },
+          sort: {
+            dynamic: true,
+            type: 'query'
           }
         }
       })

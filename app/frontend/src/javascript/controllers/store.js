@@ -1,14 +1,11 @@
-/* eslint-disable
-    no-return-assign,
-    no-undef,
-*/
 'use strict';
 
-Application.Controllers.controller('StoreController', ['$scope', 'CSRF', 'growl', '$state',
-  function ($scope, CSRF, growl, $state) {
-    /* PRIVATE SCOPE */
-
+Application.Controllers.controller('StoreController', ['$scope', 'CSRF', 'growl', '$uiRouter',
+  function ($scope, CSRF, growl, $uiRouter) {
     /* PUBLIC SCOPE */
+
+    // the following item is used by the Store component to store the filters in te URL
+    $scope.uiRouter = $uiRouter;
 
     /**
      * Callback triggered in case of error

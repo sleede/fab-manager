@@ -70,7 +70,7 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
    */
   const fetchProducts = async (): Promise<ProductsIndex> => {
     try {
-      const data = await ProductAPI.index(filters);
+      const data = await ProductAPI.index(ProductLib.indexFiltersToIds(filters));
       setCurrentPage(data.page);
       setProductList(data.data);
       setPageCount(data.total_pages);

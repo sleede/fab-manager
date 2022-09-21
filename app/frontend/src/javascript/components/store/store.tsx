@@ -20,6 +20,7 @@ import { Machine } from '../../models/machine';
 import { KeywordFilter } from './filters/keyword-filter';
 import { ActiveFiltersTags } from './filters/active-filters-tags';
 import ProductLib from '../../lib/product';
+import { UIRouter } from '@uirouter/angularjs';
 
 declare const Application: IApplication;
 
@@ -27,6 +28,7 @@ interface StoreProps {
   onError: (message: string) => void,
   onSuccess: (message: string) => void,
   currentUser: User,
+  uiRouter: UIRouter,
 }
 /**
  * Option format, expected by react-select
@@ -37,7 +39,7 @@ interface StoreProps {
 /**
  * This component shows public store
  */
-const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser }) => {
+const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter }) => {
   const { t } = useTranslation('public');
 
   const { cart, setCart } = useCart(currentUser);
@@ -51,6 +53,8 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser }) => {
   const [filters, setFilters] = useImmer<ProductIndexFilter>(initFilters);
 
   useEffect(() => {
+    // TODO, set the filters in the state
+    console.log(ProductLib.readFiltersFromUrl(location.href));
     fetchProducts().then(scrollToProducts);
     ProductCategoryAPI.index().then(data => {
       setProductCategories(data);
@@ -62,6 +66,7 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser }) => {
 
   useEffect(() => {
     fetchProducts().then(scrollToProducts);
+    uiRouter.stateService.transitionTo(uiRouter.globals.current, ProductLib.indexFiltersToRouterParams(filters));
   }, [filters]);
 
   /**
@@ -173,7 +178,7 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser }) => {
   */
   const fetchProducts = async (): Promise<ProductsIndex> => {
     try {
-      const data = await ProductAPI.index(filters);
+      const data = await ProductAPI.index(ProductLib.indexFiltersToIds(filters));
       setCurrentPage(data.page);
       setProducts(data.data);
       setPageCount(data.total_pages);
@@ -287,7 +292,7 @@ const StoreWrapper: React.FC<StoreProps> = (props) => {
   );
 };
 
-Application.Components.component('store', react2angular(StoreWrapper, ['onError', 'onSuccess', 'currentUser']));
+Application.Components.component('store', react2angular(StoreWrapper, ['onError', 'onSuccess', 'currentUser', 'uiRouter']));
 
 interface CategoryTree {
   parent: ProductCategory,
