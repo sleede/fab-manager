@@ -4,18 +4,22 @@ import { react2angular } from 'react2angular';
 import { Loader } from '../base/loader';
 import { IApplication } from '../../models/application';
 import { FabButton } from '../base/fab-button';
-import { Product, ProductSortOption } from '../../models/product';
+import { Product, ProductIndexFilter, ProductsIndex, ProductSortOption } from '../../models/product';
 import { ProductCategory } from '../../models/product-category';
 import ProductAPI from '../../api/product';
 import ProductCategoryAPI from '../../api/product-category';
-import MachineAPI from '../../api/machine';
 import { StoreProductItem } from './store-product-item';
 import useCart from '../../hooks/use-cart';
 import { User } from '../../models/user';
 import { Order } from '../../models/order';
-import { AccordionItem } from '../base/accordion-item';
 import { StoreListHeader } from './store-list-header';
 import { FabPagination } from '../base/fab-pagination';
+import { MachinesFilter } from './filters/machines-filter';
+import { useImmer } from 'use-immer';
+import { Machine } from '../../models/machine';
+import { KeywordFilter } from './filters/keyword-filter';
+import { ActiveFiltersTags } from './filters/active-filters-tags';
+import ProductLib from '../../lib/product';
 
 declare const Application: IApplication;
 
@@ -40,76 +44,77 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser }) => {
 
   const [products, setProducts] = useState<Array<Product>>([]);
   const [productCategories, setProductCategories] = useState<ProductCategory[]>([]);
-  const [categoriesTree, setCategoriesTree] = useState<ParentCategory[]>([]);
-  const [activeCategory, setActiveCategory] = useState<ActiveCategory>();
-  const [filterVisible, setFilterVisible] = useState<boolean>(false);
-  const [machines, setMachines] = useState<checklistOption[]>([]);
-  const [accordion, setAccordion] = useState({});
+  const [categoriesTree, setCategoriesTree] = useState<CategoryTree[]>([]);
   const [pageCount, setPageCount] = useState<number>(0);
+  const [productsCount, setProductsCount] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [filters, setFilters] = useImmer<ProductIndexFilter>(initFilters);
 
   useEffect(() => {
-    ProductAPI.index({ page: 1, is_active: filterVisible }).then(data => {
-      setPageCount(data.total_pages);
-      setProducts(data.data);
-    }).catch(error => {
-      onError(t('app.public.store.unexpected_error_occurred') + error);
-    });
+    fetchProducts().then(scrollToProducts);
     ProductCategoryAPI.index().then(data => {
       setProductCategories(data);
       formatCategories(data);
     }).catch(error => {
       onError(t('app.public.store.unexpected_error_occurred') + error);
     });
-
-    MachineAPI.index({ disabled: false }).then(data => {
-      setMachines(buildChecklistOptions(data));
-    }).catch(error => {
-      onError(t('app.public.store.unexpected_error_occurred') + error);
-    });
   }, []);
+
+  useEffect(() => {
+    fetchProducts().then(scrollToProducts);
+  }, [filters]);
 
   /**
    * Create categories tree (parent/children)
    */
   const formatCategories = (list: ProductCategory[]) => {
-    const tree = [];
+    const tree: Array<CategoryTree> = [];
     const parents = list.filter(c => !c.parent_id);
-    const getChildren = (id) => {
-      return list.filter(c => c.parent_id === id);
-    };
     parents.forEach(p => {
-      tree.push({ parent: p, children: getChildren(p.id) });
+      tree.push({
+        parent: p,
+        children: list.filter(c => c.parent_id === p.id)
+      });
     });
     setCategoriesTree(tree);
   };
 
   /**
-   * Filter by category
+   * Filter by category: the selected category will always be first
    */
-  const filterCategory = (id: number, parent?: number) => {
-    setActiveCategory({ id, parent });
-    console.log('Filter by category:', productCategories.find(c => c.id === id).name);
+  const filterCategory = (category: ProductCategory) => {
+    setFilters(draft => {
+      return {
+        ...draft,
+        categories: category
+          ? Array.from(new Set([category, ...ProductLib.categoriesSelectionTree(productCategories, [], category, 'add')]))
+          : []
+      };
+    });
   };
 
   /**
-   * Apply filters
+   * Update the list of applied filters with the given machines
    */
-  const applyFilters = () => {
-    console.log('Filter products');
+  const applyMachineFilters = (machines: Array<Machine>) => {
+    setFilters(draft => {
+      return { ...draft, machines };
+    });
+  };
+
+  /**
+   * Update the list of applied filters with the given keywords (or reference)
+   */
+  const applyKeywordFilter = (keywords: Array<string>) => {
+    setFilters(draft => {
+      return { ...draft, keywords };
+    });
   };
   /**
    * Clear filters
    */
   const clearAllFilters = () => {
-    console.log('Clear filters');
-  };
-
-  /**
-   * Open/close accordion items
-   */
-  const handleAccordion = (id, state) => {
-    setAccordion({ ...accordion, [id]: state });
+    setFilters(initFilters);
   };
 
   /**
@@ -127,15 +132,21 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser }) => {
    * Display option: sorting
    */
   const handleSorting = (option: selectOption) => {
-    console.log('Sort option:', option);
+    setFilters(draft => {
+      return {
+        ...draft,
+        sort: option.value
+      };
+    });
   };
 
   /**
    * Filter: toggle non-available products visibility
    */
   const toggleVisible = (checked: boolean) => {
-    setFilterVisible(!filterVisible);
-    console.log('Display in stock only:', checked);
+    setFilters(draft => {
+      return { ...draft, is_active: checked };
+    });
   };
 
   /**
@@ -151,34 +162,54 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser }) => {
    */
   const handlePagination = (page: number) => {
     if (page !== currentPage) {
-      ProductAPI.index({ page, is_active: filterVisible }).then(data => {
-        setCurrentPage(page);
-        setProducts(data.data);
-        setPageCount(data.total_pages);
-        window.document.getElementById('content-main').scrollTo({ top: 100, behavior: 'smooth' });
-      }).catch(() => {
-        onError(t('app.public.store.unexpected_error_occurred'));
+      setFilters(draft => {
+        return { ...draft, page };
       });
     }
   };
 
+  /**
+  * Fetch the products from the API, according to the current filters
+  */
+  const fetchProducts = async (): Promise<ProductsIndex> => {
+    try {
+      const data = await ProductAPI.index(filters);
+      setCurrentPage(data.page);
+      setProducts(data.data);
+      setPageCount(data.total_pages);
+      setProductsCount(data.total_count);
+      return data;
+    } catch (error) {
+      onError(t('app.public.store.unexpected_error_occurred') + error);
+    }
+  };
+
+  /**
+   * Scroll the view to the product list
+   */
+  const scrollToProducts = () => {
+    window.document.getElementById('content-main').scrollTo({ top: 100, behavior: 'smooth' });
+  };
+
+  const selectedCategory = filters.categories[0];
+  const parent = productCategories.find(c => c.id === selectedCategory?.parent_id);
   return (
     <div className="store">
       <ul className="breadcrumbs">
         <li>
-          <span onClick={() => setActiveCategory(null)}>{t('app.public.store.products.all_products')}</span>
+          <span onClick={() => filterCategory(null)}>{t('app.public.store.products.all_products')}</span>
         </li>
-        {activeCategory?.parent &&
+        {parent &&
           <li>
-            <span onClick={() => filterCategory(activeCategory?.parent)}>
-              {productCategories.find(c => c.id === activeCategory.parent).name}
+            <span onClick={() => filterCategory(parent)}>
+              {parent.name}
             </span>
           </li>
-        }
-        {activeCategory?.id &&
+          }
+        {selectedCategory &&
           <li>
-            <span onClick={() => filterCategory(activeCategory?.id, activeCategory?.parent)}>
-              {productCategories.find(c => c.id === activeCategory.id).name}
+            <span onClick={() => filterCategory(selectedCategory)}>
+              {selectedCategory.name}
             </span>
           </li>
         }
@@ -190,16 +221,16 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser }) => {
           </header>
           <div className="group u-scrollbar">
             {categoriesTree.map(c =>
-              <div key={c.parent.id} className={`parent ${activeCategory?.id === c.parent.id || activeCategory?.parent === c.parent.id ? 'is-active' : ''}`}>
-                <p onClick={() => filterCategory(c.parent.id)}>
+              <div key={c.parent.id} className={`parent ${selectedCategory?.id === c.parent.id || selectedCategory?.parent_id === c.parent.id ? 'is-active' : ''}`}>
+                <p onClick={() => filterCategory(c.parent)}>
                   {c.parent.name}<span>(count)</span>
                 </p>
                 {c.children.length > 0 &&
                   <div className='children'>
                     {c.children.map(ch =>
                       <p key={ch.id}
-                        className={activeCategory?.id === ch.id ? 'is-active' : ''}
-                        onClick={() => filterCategory(ch.id, c.parent.id)}>
+                        className={selectedCategory?.id === ch.id ? 'is-active' : ''}
+                        onClick={() => filterCategory(ch)}>
                         {ch.name}<span>(count)</span>
                       </p>
                     )}
@@ -216,36 +247,25 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser }) => {
               <FabButton onClick={clearAllFilters} className="is-black">{t('app.public.store.products.filter_clear')}</FabButton>
             </div>
           </header>
-          <div className="accordion">
-            <AccordionItem id={1}
-              isOpen={accordion[1]}
-              onChange={handleAccordion}
-              label={t('app.public.store.products.filter_machines')}
-            >
-              <div className='content'>
-                <div className="group u-scrollbar">
-                  {machines.map(m => (
-                    <label key={m.value}>
-                      <input type="checkbox" />
-                      <p>{m.label}</p>
-                    </label>
-                  ))}
-                </div>
-                <FabButton onClick={applyFilters} className="is-info">{t('app.public.store.products.filter_apply')}</FabButton>
-              </div>
-            </AccordionItem>
-          </div>
+          <MachinesFilter onError={onError} onApplyFilters={applyMachineFilters} currentFilters={filters.machines} />
+          <KeywordFilter onApplyFilters={keyword => applyKeywordFilter([keyword])} currentFilters={filters.keywords[0]} />
         </div>
       </aside>
       <div className='store-list'>
         <StoreListHeader
-          productsCount={products.length}
+          productsCount={productsCount}
           selectOptions={buildOptions()}
           onSelectOptionsChange={handleSorting}
           switchLabel={t('app.public.store.products.in_stock_only')}
-          switchChecked={filterVisible}
+          switchChecked={filters.is_active}
           onSwitch={toggleVisible}
         />
+        <div className='features'>
+          <ActiveFiltersTags filters={filters}
+                             displayCategories={false}
+                             onRemoveMachine={(m) => applyMachineFilters(filters.machines.filter(machine => machine !== m))}
+                             onRemoveKeyword={() => applyKeywordFilter([])} />
+        </div>
         <div className="products-grid">
           {products.map((product) => (
             <StoreProductItem key={product.id} product={product} cart={cart} onSuccessAddProductToCart={addToCart} onError={onError} />
@@ -259,19 +279,6 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser }) => {
   );
 };
 
-/**
- * Option format, expected by checklist
- */
- type checklistOption = { value: number, label: string };
-/**
- * Convert the provided array of items to the checklist format
- */
-const buildChecklistOptions = (items: Array<{ id?: number, name: string }>): Array<checklistOption> => {
-  return items.map(t => {
-    return { value: t.id, label: t.name };
-  });
-};
-
 const StoreWrapper: React.FC<StoreProps> = (props) => {
   return (
     <Loader>
@@ -282,11 +289,16 @@ const StoreWrapper: React.FC<StoreProps> = (props) => {
 
 Application.Components.component('store', react2angular(StoreWrapper, ['onError', 'onSuccess', 'currentUser']));
 
-interface ActiveCategory {
-  id: number,
-  parent: number
-}
-interface ParentCategory {
+interface CategoryTree {
   parent: ProductCategory,
   children: ProductCategory[]
 }
+
+const initFilters: ProductIndexFilter = {
+  categories: [],
+  keywords: [],
+  machines: [],
+  is_active: false,
+  page: 1,
+  sort: ''
+};

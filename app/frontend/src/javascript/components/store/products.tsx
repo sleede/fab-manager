@@ -54,7 +54,9 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
     fetchProducts().then(scrollToProducts);
   }, [filters]);
 
-  /** Handle products pagination */
+  /**
+   * Handle products pagination
+   */
   const handlePagination = (page: number) => {
     if (page !== currentPage) {
       setFilters(draft => {

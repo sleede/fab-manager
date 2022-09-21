@@ -637,5 +637,6 @@ en:
         confirmation_message: "If you leave this page, your changes will be lost. Are you sure you want to continue?"
         confirmation_button: "Yes, don't save"
       active_filters_tags:
+        keyword: "Keyword: {KEYWORD}"
         stock_internal: "Private stock"
         stock_external: "Public stock"
