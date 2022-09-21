@@ -564,15 +564,15 @@ fr:
         order_item:
           total: "Total"
           client: "Client"
-          created_at: "Order creation"
-          last_update: "Last update"
+          created_at: "Création d'une commande"
+          last_update: "Dernière mise à jour"
           state:
-            cart: 'Cart'
-            in_progress: 'Under preparation'
-            paid: "Paid"
-            payment_failed: "Payment error"
-            canceled: "Canceled"
-            ready: "Ready"
+            cart: 'Panier'
+            in_progress: 'En cours de préparation'
+            paid: "Payée"
+            payment_failed: "Erreur de paiement"
+            canceled: "Annulée"
+            ready: "Prête"
             refunded: "Remboursée"
             delivered: "Livrée"
         show_order:
@@ -605,27 +605,27 @@ fr:
             by_wallet: "par porte-monnaie"
             settlement_by_debit_card: "Paiement par carte bancaire"
             settlement_done_at_the_reception: "Règlement effectué à l'accueil"
-            settlement_by_wallet: "Settlement by wallet"
-            on_DATE_at_TIME: "on {DATE} at {TIME},"
-            for_an_amount_of_AMOUNT: "for an amount of {AMOUNT}"
-            and: 'and'
+            settlement_by_wallet: "Règlement effectué par porte-monnaie"
+            on_DATE_at_TIME: "le {DATE} à {TIME},"
+            for_an_amount_of_AMOUNT: "pour un montant de {AMOUNT}"
+            and: 'et'
         order_actions:
           state:
-            cart: 'Cart'
-            in_progress: 'Under preparation'
-            paid: "Paid"
-            payment_failed: "Payment error"
-            canceled: "Canceled"
-            ready: "Ready"
-            refunded: "Refunded"
-            delivered: "Delivered"
-          confirm: 'Confirm'
-          confirmation_required: "Confirmation required"
+            cart: 'Panier'
+            in_progress: 'En cours de préparation'
+            paid: "Payée"
+            payment_failed: "Erreur de paiement"
+            canceled: "Annulée"
+            ready: "Prête"
+            refunded: "Remboursée"
+            delivered: "Livrée"
+          confirm: 'Confirmer'
+          confirmation_required: "Confirmation requise"
           confirm_order_in_progress: "This order is in the process of being prepared ?"
-          order_in_progress_success: "Order is under preparation"
+          order_in_progress_success: "La commande est en cours de préparation"
           confirm_order_ready: "This order is ready ?"
-          order_ready_note: 'Leave your message'
-          order_ready_success: "Order is ready"
+          order_ready_note: 'Laissez votre message'
+          order_ready_success: "La commande est prête"
           confirm_order_delivered: "This order is delivered ?"
           order_delivered_success: "Order is delivered"
           confirm_order_canceled: "Do you want to cancel this order ? You can modify product stock in stock manage."
@@ -633,9 +633,9 @@ fr:
           confirm_order_refunded: "Do you want to refund this order ? You can modify product stock in stock manage."
           order_refunded_success: "Order is refunded"
       unsaved_form_alert:
-        modal_title: "You have some unsaved changes"
-        confirmation_message: "If you leave this page, your changes will be lost. Are you sure you want to continue?"
-        confirmation_button: "Yes, don't save"
+        modal_title: "Vous avez des modifications non enregistrées"
+        confirmation_message: "Si vous quittez cette page, vos modifications seront perdues. Êtes-vous sûr(e) de vouloir continuer ?"
+        confirmation_button: "Oui, ne pas enregistrer"
       active_filters_tags:
-        stock_internal: "Private stock"
-        stock_external: "Public stock"
+        stock_internal: "Stock interne"
+        stock_external: "Stock externe"
