@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
-import _ from 'lodash';
 import { Loader } from '../base/loader';
 import { IApplication } from '../../models/application';
 import { FabButton } from '../base/fab-button';
@@ -18,6 +17,7 @@ import { Coupon } from '../../models/coupon';
 import noImage from '../../../../images/no_image.png';
 import Switch from 'react-switch';
 import OrderLib from '../../lib/order';
+import { CaretDown, CaretUp } from 'phosphor-react';
 
 declare const Application: IApplication;
 
@@ -35,7 +35,15 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
   const { t } = useTranslation('public');
 
   const { cart, setCart } = useCart(currentUser);
+  const [itemsQuantity, setItemsQuantity] = useState<{ id: number; quantity: number; }[]>();
   const [paymentModal, setPaymentModal] = useState<boolean>(false);
+
+  useEffect(() => {
+    const quantities = cart?.order_items_attributes.map(i => {
+      return { id: i.id, quantity: i.quantity };
+    });
+    setItemsQuantity(quantities);
+  }, [cart]);
 
   /**
    * Remove the product from cart
@@ -53,12 +61,20 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
   /**
    * Change product quantity
    */
-  const changeProductQuantity = (item) => {
-    return (e: React.BaseSyntheticEvent) => {
-      CartAPI.setQuantity(cart, item.orderable_id, e.target.value).then(data => {
+  const changeProductQuantity = (e: React.BaseSyntheticEvent, item) => {
+    CartAPI.setQuantity(cart, item.orderable_id, e.target.value)
+      .then(data => {
         setCart(data);
-      }).catch(onError);
-    };
+      })
+      .catch(() => onError(t('app.public.store_cart.stock_limit')));
+  };
+  /** Increment/decrement product quantity  */
+  const handleInputNumber = (item, direction: 'up' | 'down') => {
+    CartAPI.setQuantity(cart, item.orderable_id, direction === 'up' ? item.quantity + 1 : item.quantity - 1)
+      .then(data => {
+        setCart(data);
+      })
+      .catch(() => onError(t('app.public.store_cart.stock_limit')));
   };
 
   /**
@@ -116,7 +132,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
   /**
    * Toggle product offer
    */
-  const toogleProductOffer = (item) => {
+  const toggleProductOffer = (item) => {
     return (checked: boolean) => {
       CartAPI.setOffer(cart, item.orderable_id, checked).then(data => {
         setCart(data);
@@ -154,11 +170,16 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
                 <p>{FormatLib.price(item.amount)}</p>
                 <span>/ {t('app.public.store_cart.unit')}</span>
               </div>
-              <select value={item.quantity} onChange={changeProductQuantity(item)}>
-                {_.range(item.quantity_min, item.orderable_external_stock + 1, 1).map(v => (
-                  <option key={v} value={v}>{v}</option>
-                ))}
-              </select>
+              <div className='quantity'>
+                <input type='number'
+                  onChange={e => changeProductQuantity(e, item)}
+                  min={item.quantity_min}
+                  max={item.orderable_external_stock}
+                  value={itemsQuantity?.find(i => i.id === item.id).quantity}
+                />
+                <button onClick={() => handleInputNumber(item, 'up')}><CaretUp size={12} weight="fill" /></button>
+                <button onClick={() => handleInputNumber(item, 'down')}><CaretDown size={12} weight="fill" /></button>
+              </div>
               <div className='total'>
                 <span>{t('app.public.store_cart.total')}</span>
                 <p>{FormatLib.price(OrderLib.itemAmount(item))}</p>
@@ -173,7 +194,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
                   <span>Offer the product</span>
                   <Switch
                   checked={item.is_offered}
-                  onChange={toogleProductOffer(item)}
+                  onChange={toggleProductOffer(item)}
                   width={40}
                   height={19}
                   uncheckedIcon={false}

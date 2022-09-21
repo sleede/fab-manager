@@ -78,6 +78,36 @@
           span { margin-right: 0.8rem; }
         }
       }
+      .quantity {
+        padding: 0.8rem 1.6rem 0.8rem 1.2rem;
+        display: grid;
+        grid-auto-flow: column;
+        gap: 0 0.8rem;
+        background-color: var(--gray-soft);
+        border-radius: var(--border-radius-sm);
+        input[type="number"] {
+          grid-area: 1 / 1 / 3 / 2;
+          width: 4ch;
+          min-width: fit-content;
+          background-color: transparent;
+          border: none;
+          text-align: right;
+          @include text-base(400);
+          -webkit-appearance: textfield;
+             -moz-appearance: textfield;
+                  appearance: textfield;
+        }
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+          -webkit-appearance: none;
+        }
+        button {
+          padding: 0;
+          display: flex;
+          background-color: transparent;
+          border: none;
+        }
+      }
       .price,
       .total {
         min-width: 10rem;
@@ -189,32 +219,31 @@
 
   @media (min-width: 1024px) {
     &-list-item {
-      .ref { grid-area: 1 / 2 / 2 / 4; }
-      .actions { grid-area: 2 / 1 / 3 / 3; }
-      .offer { grid-area: 2 / 3 / 3 / 4; }
+      .ref { grid-area: 1 / 2 / 2 / 3; }
+      .actions { grid-area: 2 / 1 / 3 / 4; }
+      .offer { grid-area: 1 / 3 / 2 / 4; }
+    }
+  }
+  @media (min-width: 1200px) {
+    &-list-item {
+      grid-auto-flow: column;
+      grid-template-columns: min-content 1fr 1fr;
+      justify-content: space-between;
+      align-items: center;
+      .picture { grid-area: auto; }
+      .ref { grid-area: auto; }
+      .actions { grid-area: auto; }
+      .offer {
+        grid-area: auto;
+        align-self: flex-start;
+      }
     }
   }
   @media (min-width: 1440px) {
     grid-template-columns: repeat(12, minmax(0, 1fr));
     grid-template-rows: minmax(0, min-content);
 
-    &-list {
-      grid-area: 1 / 1 / 2 / 10;
-
-      &-item {
-        grid-auto-flow: column;
-        grid-template-columns: min-content 1fr;
-        justify-content: space-between;
-        align-items: center;
-        .picture { grid-area: auto; }
-        .ref { grid-area: auto; }
-        .actions { grid-area: auto; }
-        .offer {
-          grid-area: auto;
-          align-self: flex-start;
-        }
-      }
-    }
+    &-list { grid-area: 1 / 1 / 2 / 10; }
     .group { grid-area: 2 / 1 / 3 / 10; }
     aside { grid-area: 1 / 10 / 3 / 13; }
   }
