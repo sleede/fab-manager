@@ -22,8 +22,8 @@ fr:
         my_events: "Mes événements"
         my_invoices: "Mes factures"
         my_payment_schedules: "Mes échéanciers"
-        my_wallet: "Mon porte-monnaie"
         my_orders: "Mes commandes"
+        my_wallet: "Mon porte-monnaie"
         #contextual help
         help: "Aide"
         #login/logout
@@ -44,7 +44,7 @@ fr:
         projects_gallery: "Galerie de projets"
         subscriptions: "Abonnements"
         public_calendar: "Agenda"
-        fablab_store: "Boutique Fablab"
+        fablab_store: "Fablab Store"
         #left menu (admin)
         trainings_monitoring: "Formations"
         manage_the_calendar: "Agenda"
@@ -53,7 +53,7 @@ fr:
         subscriptions_and_prices: "Abonnements & Tarifs"
         manage_the_events: "Événements"
         manage_the_machines: "Machines"
-        manage_the_store: "Gestion de la boutique"
+        manage_the_store: "Boutique"
         manage_the_spaces: "Espaces"
         projects: "Projets"
         statistics: "Statistiques"
@@ -220,6 +220,11 @@ fr:
         new_availability: "Ouvrir des réservations"
         book: "Réserver"
         _or_the_: " ou la "
+        store_ad:
+          title: "Découvrez notre boutique"
+          buy: "Consultez les produits des projets des membres ainsi que les consommables liés aux différentes machines et outils de l'atelier."
+          sell: "Si vous voulez également vendre vos créations, veuillez nous le faire savoir."
+          link: "Vers la boutique"
       machines_filters:
         show_machines: "Afficher les machines"
         status_enabled: "Actives"
@@ -377,27 +382,57 @@ fr:
         projects_using_the_space: "Projets utilisant l'espace"
       #public store
       store:
-        fablab_store: "Boutique FabLab"
-        unexpected_error_occurred: "Une erreur inattendue s'est produite. Veuillez réessayer ultérieurement."
+        fablab_store: "FabLab Store"
+        unexpected_error_occurred: "Une erreur inattendue s'est produite. Veuillez réessayer plus tard."
+        add_to_cart_success: "Produit ajouté au panier."
+        products:
+          all_products: "Tous les produits"
+          filter: "Filtrer"
+          filter_clear: "Tout effacer"
+          filter_apply: "Appliquer"
+          filter_categories: "Catégories"
+          filter_machines: "Par machines"
+          filter_keywords_reference: "Par mots-clés ou référence"
+          in_stock_only: "Produits disponibles uniquement"
+          sort:
+            name_az: "Alphabétique"
+            name_za: "Alphabétique inverse"
+            price_low: "Prix : croissant"
+            price_high: "Prix : décroissant"
+      store_product:
+        unexpected_error_occurred: "Une erreur inattendue s'est produite. Veuillez réessayer plus tard."
+        show_more: "Afficher plus"
+        show_less: "Afficher moins"
+        documentation: "Documentation"
       store_product_item:
         available: "Disponible"
         limited_stock: "Stock limité"
-        out_of_stock: "Épuisé"
+        out_of_stock: "Rupture de stock"
+        minimum_purchase: "Achat minimum : "
         add: "Ajouter"
-      store_product:
-        unexpected_error_occurred: "Une erreur inattendue s'est produite. Veuillez réessayer ultérieurement."
+        add_to_cart: "Ajouter au panier"
+        unit: "unité"
       cart:
-        my_cart: "Mon Panier"
+        my_cart: "Mon panier"
       cart_button:
-        my_cart: "Mon Panier"
+        my_cart: "Mon panier"
       store_cart:
         checkout: "Valider mon panier"
         cart_is_empty: "Votre panier est vide"
-      orders_dashboard:
-        heading: "My orders"
-        sort:
-          newest: "Newest first"
-          oldest: "Oldest first"
+        pickup: "Retirer vos produits"
+        reference_short: "réf. :"
+        minimum_purchase: "Achat minimum : "
+        stock_limit: "Vous avez atteint la limite actuelle de stock"
+        unit: "Unité"
+        total: "Total"
+        checkout_header: "Montant total pour votre panier"
+        checkout_products_COUNT: "Votre panier contient {COUNT} {COUNT, plural, one {}=1{produit} other{produits}}"
+        checkout_products_total: "Total des produits"
+        checkout_gift_total: "Total remise"
+        checkout_coupon: "Code promo"
+        checkout_total: "Total du panier"
+        checkout_error: "Une erreur inattendue s'est produite. Veuillez contacter l'administrateur."
+        checkout_success: "Achat confirmé. Merci !"
       member_select:
         select_a_member: "Sélectionnez un membre"
         start_typing: "Commencez à écrire..."

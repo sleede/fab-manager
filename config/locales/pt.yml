@@ -121,6 +121,7 @@ pt:
     error_invoice: "Esta fatura está incorreta. Os itens abaixo que não foram reservados. Por favor contate o FabLab para um reembolso."
     prepaid_pack: "Pacote de horas pré-pago"
     pack_item: "Pacote de %{COUNT} horas para a %{ITEM}"
+    order: "Your order of the store"
   #PDF payment schedule generation
   payment_schedules:
     schedule_reference: "Agendamento de pagamento: %{REF}"
@@ -406,6 +407,12 @@ pt:
         refusal: "Seu comprovante de identidade não foi aceito"
       notify_admin_user_proof_of_identity_refusal:
         refusal: "Prova de identidade do membro <strong><em>%{NAME}</strong></em> recusada."
+      notify_user_order_is_ready:
+        order_ready: "Your command %{REFERENCE} is ready"
+      notify_user_order_is_canceled:
+        order_canceled: "Your command %{REFERENCE} is canceled"
+      notify_user_order_is_refunded:
+        order_refunded: "Your command %{REFERENCE} is refunded"
   #statistics tools for admins
   statistics:
     subscriptions: "Assinaturas"

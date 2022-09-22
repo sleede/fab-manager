@@ -374,3 +374,15 @@ fr:
         user_proof_of_identity_files_refusal: "Le justificatif du membre %{NAME} a été refusé par %{OPERATOR} :"
     shared:
       hello: "Bonjour %{user_name}"
+    notify_user_order_is_ready:
+      subject: "Votre commande est prête"
+      body:
+        notify_user_order_is_ready: "Votre commande %{REFERENCE} est prête :"
+    notify_user_order_is_canceled:
+      subject: "Votre commande est annulée"
+      body:
+        notify_user_order_is_canceled: "Votre commande %{REFERENCE} est annulée."
+    notify_user_order_is_refunded:
+      subject: "Votre commande est remboursée"
+      body:
+        notify_user_order_is_refunded: "Votre commande %{REFERENCE} est remboursée :"

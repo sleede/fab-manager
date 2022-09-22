@@ -374,3 +374,15 @@ zu:
         user_proof_of_identity_files_refusal: "crwdns29972:0%{NAME}crwdnd29972:0%{OPERATOR}crwdne29972:0"
     shared:
       hello: "crwdns29974:0%{user_name}crwdne29974:0"
+    notify_user_order_is_ready:
+      subject: "crwdns30576:0crwdne30576:0"
+      body:
+        notify_user_order_is_ready: "crwdns30578:0%{REFERENCE}crwdne30578:0"
+    notify_user_order_is_canceled:
+      subject: "crwdns30580:0crwdne30580:0"
+      body:
+        notify_user_order_is_canceled: "crwdns30582:0%{REFERENCE}crwdne30582:0"
+    notify_user_order_is_refunded:
+      subject: "crwdns30584:0crwdne30584:0"
+      body:
+        notify_user_order_is_refunded: "crwdns30586:0%{REFERENCE}crwdne30586:0"

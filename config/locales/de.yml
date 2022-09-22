@@ -121,6 +121,7 @@ de:
     error_invoice: "Fehlerhafte Rechnung. Die folgenden Artikel sind nicht gebucht. Bitte kontaktieren Sie das FabLab für eine Rückerstattung."
     prepaid_pack: "Prepaid-Stundenpaket"
     pack_item: "Paket von %{COUNT} Stunden für %{ITEM}"
+    order: "Your order of the store"
   #PDF payment schedule generation
   payment_schedules:
     schedule_reference: "Zahlungsplan Referenz: %{REF}"
@@ -406,6 +407,12 @@ de:
         refusal: "Your proof of identity are not accepted"
       notify_admin_user_proof_of_identity_refusal:
         refusal: "Member's proof of identity <strong><em>%{NAME}</strong></em> refused."
+      notify_user_order_is_ready:
+        order_ready: "Your command %{REFERENCE} is ready"
+      notify_user_order_is_canceled:
+        order_canceled: "Your command %{REFERENCE} is canceled"
+      notify_user_order_is_refunded:
+        order_refunded: "Your command %{REFERENCE} is refunded"
   #statistics tools for admins
   statistics:
     subscriptions: "Abonnements"

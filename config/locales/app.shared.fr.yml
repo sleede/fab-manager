@@ -552,11 +552,90 @@ fr:
         create_label: "Ajouter {VALUE}"
       form_checklist:
         select_all: "Tout sélectionner"
-        unselect_all: "Tout désélectionner"
+        unselect_all: "Tout déselectionner"
       form_file_upload:
         browse: "Parcourir"
         edit: "Modifier"
       form_image_upload:
         browse: "Parcourir"
         edit: "Modifier"
-        main_image: "Visuel principal"
+        main_image: "Image principale"
+      store:
+        order_item:
+          total: "Total"
+          client: "Client"
+          created_at: "Création d'une commande"
+          last_update: "Dernière mise à jour"
+          state:
+            cart: 'Panier'
+            in_progress: 'En cours de préparation'
+            paid: "Payée"
+            payment_failed: "Erreur de paiement"
+            canceled: "Annulée"
+            ready: "Prête"
+            refunded: "Remboursée"
+            delivered: "Livrée"
+        show_order:
+          back_to_list: "Retour à la liste"
+          see_invoice: "Voir la facture"
+          tracking: "Suivi de commande"
+          client: "Client"
+          created_at: "Date de création"
+          last_update: "Dernière mise à jour"
+          cart: "Panier"
+          reference_short: "réf. :"
+          unit: "Unité"
+          item_total: "Total"
+          payment_informations: "Informations de paiement"
+          amount: "Montant"
+          products_total: "Total des produits"
+          gift_total: "Total remise"
+          coupon: "Code promo"
+          cart_total: "Total du panier"
+          state:
+            cart: 'Panier'
+            in_progress: 'En cours de préparation'
+            paid: "Payée"
+            payment_failed: "Erreur de paiement"
+            canceled: "Annulée"
+            ready: "Prête"
+            refunded: "Remboursée"
+            delivered: "Livrée"
+          payment:
+            by_wallet: "par porte-monnaie"
+            settlement_by_debit_card: "Paiement par carte bancaire"
+            settlement_done_at_the_reception: "Règlement effectué à l'accueil"
+            settlement_by_wallet: "Règlement effectué par porte-monnaie"
+            on_DATE_at_TIME: "le {DATE} à {TIME},"
+            for_an_amount_of_AMOUNT: "pour un montant de {AMOUNT}"
+            and: 'et'
+        order_actions:
+          state:
+            cart: 'Panier'
+            in_progress: 'En cours de préparation'
+            paid: "Payée"
+            payment_failed: "Erreur de paiement"
+            canceled: "Annulée"
+            ready: "Prête"
+            refunded: "Remboursée"
+            delivered: "Livrée"
+          confirm: 'Confirmer'
+          confirmation_required: "Confirmation requise"
+          confirm_order_in_progress: "This order is in the process of being prepared ?"
+          order_in_progress_success: "La commande est en cours de préparation"
+          confirm_order_ready: "This order is ready ?"
+          order_ready_note: 'Laissez votre message'
+          order_ready_success: "La commande est prête"
+          confirm_order_delivered: "This order is delivered ?"
+          order_delivered_success: "Order is delivered"
+          confirm_order_canceled: "Do you want to cancel this order ? You can modify product stock in stock manage."
+          order_canceled_success: "Order is canceled"
+          confirm_order_refunded: "Do you want to refund this order ? You can modify product stock in stock manage."
+          order_refunded_success: "Order is refunded"
+      unsaved_form_alert:
+        modal_title: "Vous avez des modifications non enregistrées"
+        confirmation_message: "Si vous quittez cette page, vos modifications seront perdues. Êtes-vous sûr(e) de vouloir continuer ?"
+        confirmation_button: "Oui, ne pas enregistrer"
+      active_filters_tags:
+        stock_internal: "Stock interne"
+        stock_external: "Stock externe"
