@@ -564,7 +564,7 @@ fr:
         order_item:
           total: "Total"
           client: "Client"
-          created_at: "Création d'une commande"
+          created_at: "Date de création"
           last_update: "Dernière mise à jour"
           state:
             cart: 'Panier'
