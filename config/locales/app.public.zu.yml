@@ -425,6 +425,7 @@ zu:
         stock_limit: "crwdns30390:0crwdne30390:0"
         unit: "crwdns30392:0crwdne30392:0"
         total: "crwdns30394:0crwdne30394:0"
+        offer_product: "crwdns30640:0crwdne30640:0"
         checkout_header: "crwdns30396:0crwdne30396:0"
         checkout_products_COUNT: "crwdns30398:0COUNT={COUNT}crwdnd30398:0COUNT={COUNT}crwdne30398:0"
         checkout_products_total: "crwdns30400:0crwdne30400:0"
@@ -433,6 +434,11 @@ zu:
         checkout_total: "crwdns30406:0crwdne30406:0"
         checkout_error: "crwdns30408:0crwdne30408:0"
         checkout_success: "crwdns30410:0crwdne30410:0"
+      orders_dashboard:
+        heading: "crwdns30642:0crwdne30642:0"
+        sort:
+          newest: "crwdns30644:0crwdne30644:0"
+          oldest: "crwdns30646:0crwdne30646:0"
       member_select:
         select_a_member: "crwdns30412:0crwdne30412:0"
         start_typing: "crwdns30414:0crwdne30414:0"
