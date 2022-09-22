@@ -44,7 +44,7 @@ es:
         projects_gallery: "Galería de proyectos"
         subscriptions: "Suscripciones"
         public_calendar: "Agenda"
-        fablab_store: "Fablab Store"
+        fablab_store: "Store"
         #left menu (admin)
         trainings_monitoring: "Cursos"
         manage_the_calendar: "Agenda"
@@ -382,7 +382,7 @@ es:
         projects_using_the_space: "Proyectos que usan el espacio"
       #public store
       store:
-        fablab_store: "FabLab Store"
+        fablab_store: "Store"
         unexpected_error_occurred: "An unexpected error occurred. Please try again later."
         add_to_cart_success: "Product added to the cart."
         products:
