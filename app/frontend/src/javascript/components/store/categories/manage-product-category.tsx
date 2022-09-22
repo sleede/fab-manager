@@ -47,7 +47,7 @@ export const ManageProductCategory: React.FC<ManageProductCategoryProps> = ({ pr
       case 'create':
         return (
           <FabButton type='button'
-            className="create-button"
+            className="main-action-btn"
             onClick={toggleModal}>
             {t('app.admin.store.manage_product_category.create')}
           </FabButton>

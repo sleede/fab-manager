@@ -1907,7 +1907,7 @@ fr:
         back_to_list: "Retour à la liste"
         product_categories:
           title: "Catégories"
-          info: "<strong>Informations :</strong></br>Trouvez ci-dessous toutes les catégories créées. Les catégories sont disposées sur deux niveaux maximum, vous pouvez les organiser avec un glisser-déposer. L'ordre des catégories sera identique dans la vue publique et dans la liste ci-dessous. Veuillez noter que vous pouvez supprimer une catégorie ou une sous-catégorie même si elles sont associées à des produits. Ces derniers seront laissés sans catégorie. Si vous supprimez une catégorie qui contient des sous-catégories, celles-ci seront également supprimées. <strong>Assurez-vous que vos catégories sont bien classées et sauvegardez votre choix.</strong>"
+          info: "<strong>Informations :</strong></br>Trouvez ci-dessous toutes les catégories créées. Les catégories sont disposées sur deux niveaux maximum, vous pouvez les organiser avec un glisser-déposer. L'ordre des catégories sera identique dans la vue publique et dans la liste ci-dessous. Veuillez noter que vous pouvez supprimer une catégorie ou une sous-catégorie même si elles sont associées à des produits. Ces derniers seront laissés sans catégorie. Si vous supprimez une catégorie qui contient des sous-catégories, celles-ci seront également supprimées."
         manage_product_category:
           create: "Créer une catégorie de produit"
           update: "Modifier la catégorie de produit"

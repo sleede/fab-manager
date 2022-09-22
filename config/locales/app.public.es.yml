@@ -425,6 +425,7 @@ es:
         stock_limit: "You have reached the current stock limit"
         unit: "Unit"
         total: "Total"
+        offer_product: "Offer the product"
         checkout_header: "Total amount for your cart"
         checkout_products_COUNT: "Your cart contains {COUNT} {COUNT, plural, =1{product} other{products}}"
         checkout_products_total: "Products total"
@@ -433,6 +434,11 @@ es:
         checkout_total: "Cart total"
         checkout_error: "An unexpected error occurred. Please contact the administrator."
         checkout_success: "Purchase confirmed. Thanks!"
+      orders_dashboard:
+        heading: "My orders"
+        sort:
+          newest: "Newest first"
+          oldest: "Oldest first"
       member_select:
         select_a_member: "Select a member"
         start_typing: "Start typing..."

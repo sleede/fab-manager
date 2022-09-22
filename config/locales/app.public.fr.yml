@@ -425,6 +425,7 @@ fr:
         stock_limit: "Vous avez atteint la limite actuelle de stock"
         unit: "Unité"
         total: "Total"
+        offer_product: "Offrir le produit"
         checkout_header: "Montant total pour votre panier"
         checkout_products_COUNT: "Votre panier contient {COUNT} {COUNT, plural, one {}=1{produit} other{produits}}"
         checkout_products_total: "Total des produits"
@@ -433,6 +434,11 @@ fr:
         checkout_total: "Total du panier"
         checkout_error: "Une erreur inattendue s'est produite. Veuillez contacter l'administrateur."
         checkout_success: "Achat confirmé. Merci !"
+      orders_dashboard:
+        heading: "Mes commandes"
+        sort:
+          newest: "Plus récente en premier"
+          oldest: "Plus ancienne en premier"
       member_select:
         select_a_member: "Sélectionnez un membre"
         start_typing: "Commencez à écrire..."

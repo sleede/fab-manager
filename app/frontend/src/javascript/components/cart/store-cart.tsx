@@ -191,7 +191,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
             {isPrivileged() &&
               <div className='offer'>
                 <label>
-                  <span>Offer the product</span>
+                  <span>{t('app.public.store_cart.offer_product')}</span>
                   <Switch
                   checked={item.is_offered}
                   onChange={toggleProductOffer(item)}

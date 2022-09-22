@@ -8,16 +8,6 @@
   header {
     @include header();
     grid-column: 2 / -2;
-
-    .create-button {
-      background-color: var(--gray-hard-darkest);
-      border-color: var(--gray-hard-darkest);
-      color: var(--gray-soft-lightest);
-      &:hover {
-        background-color: var(--gray-hard-light);
-        border-color: var(--gray-hard-light);
-      }
-      }
   }
   .fab-alert {
     grid-column: 2 / -2;

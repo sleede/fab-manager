@@ -5,7 +5,6 @@ import ProductCategoryAPI from '../../../api/product-category';
 import { ManageProductCategory } from './manage-product-category';
 import { ProductCategoriesTree } from './product-categories-tree';
 import { FabAlert } from '../../base/fab-alert';
-import { FabButton } from '../../base/fab-button';
 import { HtmlTranslate } from '../../base/html-translate';
 import { IApplication } from '../../../models/application';
 import { Loader } from '../../base/loader';
@@ -67,13 +66,6 @@ const ProductCategories: React.FC<ProductCategoriesProps> = ({ onSuccess, onErro
     }).catch((error) => onError(error));
   };
 
-  /**
-   * tmp: check list
-   */
-  const handleSave = () => {
-    console.log('save order:', productCategories);
-  };
-
   return (
     <div className='product-categories'>
       <header>
@@ -82,7 +74,6 @@ const ProductCategories: React.FC<ProductCategoriesProps> = ({ onSuccess, onErro
           <ManageProductCategory action='create'
             productCategories={productCategories}
             onSuccess={handleSuccess} onError={onError} />
-          <FabButton className='main-action-btn' onClick={handleSave}>[log]</FabButton>
         </div>
       </header>
       <FabAlert level="warning">

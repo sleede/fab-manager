@@ -1907,7 +1907,7 @@ en:
         back_to_list: "Back to list"
         product_categories:
           title: "Categories"
-          info: "<strong>Information:</strong></br>Find below all the categories created. The categories are arranged on two levels maximum, you can arrange them with a drag and drop. The order of the categories will be identical on the public view and the list below. Please note that you can delete a category or a sub-category even if they are associated with products. The latter will be left without categories. If you delete a category that contains sub-categories, the latter will also be deleted. <strong>Make sure that your categories are well arranged and save your choice.</strong>"
+          info: "<strong>Information:</strong></br>Find below all the categories created. The categories are arranged on two levels maximum, you can arrange them with a drag and drop. The order of the categories will be identical on the public view and the list below. Please note that you can delete a category or a sub-category even if they are associated with products. The latter will be left without categories. If you delete a category that contains sub-categories, the latter will also be deleted."
         manage_product_category:
           create: "Create a product category"
           update: "Modify the product category"
