@@ -121,7 +121,7 @@
     error_invoice: "Feil i faktura. Elementene under varen som ikke er bestilt. Kontakt oss for refusjon."
     prepaid_pack: "Forhåndsbetalt pakke med timer"
     pack_item: "Pakke med %{COUNT} timer for %{ITEM}"
-    order: "Your order of the store"
+    order: "Your order on the store"
   #PDF payment schedule generation
   payment_schedules:
     schedule_reference: "Referanse til betalingsplanen: %{REF}"
