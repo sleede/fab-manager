@@ -121,7 +121,7 @@ de:
     error_invoice: "Fehlerhafte Rechnung. Die folgenden Artikel sind nicht gebucht. Bitte kontaktieren Sie das FabLab für eine Rückerstattung."
     prepaid_pack: "Prepaid-Stundenpaket"
     pack_item: "Paket von %{COUNT} Stunden für %{ITEM}"
-    order: "Your order of the store"
+    order: "Your order on the store"
   #PDF payment schedule generation
   payment_schedules:
     schedule_reference: "Zahlungsplan Referenz: %{REF}"

@@ -121,7 +121,7 @@ es:
     error_invoice: "Erroneous invoice. The items below ware not booked. Please contact the FabLab for a refund."
     prepaid_pack: "Prepaid pack of hours"
     pack_item: "Pack of %{COUNT} hours for the %{ITEM}"
-    order: "Your order of the store"
+    order: "Your order on the store"
   #PDF payment schedule generation
   payment_schedules:
     schedule_reference: "Payment schedule reference: %{REF}"

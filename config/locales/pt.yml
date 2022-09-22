@@ -121,7 +121,7 @@ pt:
     error_invoice: "Esta fatura está incorreta. Os itens abaixo que não foram reservados. Por favor contate o FabLab para um reembolso."
     prepaid_pack: "Pacote de horas pré-pago"
     pack_item: "Pacote de %{COUNT} horas para a %{ITEM}"
-    order: "Your order of the store"
+    order: "Your order on the store"
   #PDF payment schedule generation
   payment_schedules:
     schedule_reference: "Agendamento de pagamento: %{REF}"

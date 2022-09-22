@@ -44,7 +44,7 @@ zu:
         projects_gallery: "crwdns27848:0crwdne27848:0"
         subscriptions: "crwdns27850:0crwdne27850:0"
         public_calendar: "crwdns27852:0crwdne27852:0"
-        fablab_store: "crwdns30312:0crwdne30312:0"
+        fablab_store: "crwdns30612:0crwdne30612:0"
         #left menu (admin)
         trainings_monitoring: "crwdns27854:0crwdne27854:0"
         manage_the_calendar: "crwdns27856:0crwdne27856:0"
@@ -382,7 +382,7 @@ zu:
         projects_using_the_space: "crwdns28422:0crwdne28422:0"
       #public store
       store:
-        fablab_store: "crwdns30324:0crwdne30324:0"
+        fablab_store: "crwdns30614:0crwdne30614:0"
         unexpected_error_occurred: "crwdns30326:0crwdne30326:0"
         add_to_cart_success: "crwdns30328:0crwdne30328:0"
         products:
