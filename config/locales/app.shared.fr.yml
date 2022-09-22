@@ -551,15 +551,15 @@ fr:
       form_multi_select:
         create_label: "Ajouter {VALUE}"
       form_checklist:
-        select_all: "Select all"
-        unselect_all: "Unselect all"
+        select_all: "Tout sélectionner"
+        unselect_all: "Tout déselectionner"
       form_file_upload:
-        browse: "Browse"
-        edit: "Edit"
+        browse: "Parcourir"
+        edit: "Modifier"
       form_image_upload:
-        browse: "Browse"
-        edit: "Edit"
-        main_image: "Main image"
+        browse: "Parcourir"
+        edit: "Modifier"
+        main_image: "Image principale"
       store:
         order_item:
           total: "Total"
@@ -621,17 +621,17 @@ fr:
             delivered: "Livrée"
           confirm: 'Confirmer'
           confirmation_required: "Confirmation requise"
-          confirm_order_in_progress: "This order is in the process of being prepared ?"
+          confirm_order_in_progress: "Is this order in the process of being prepared?"
           order_in_progress_success: "La commande est en cours de préparation"
-          confirm_order_ready: "This order is ready ?"
+          confirm_order_ready: "Is this order ready?"
           order_ready_note: 'Laissez votre message'
           order_ready_success: "La commande est prête"
-          confirm_order_delivered: "This order is delivered ?"
-          order_delivered_success: "Order is delivered"
-          confirm_order_canceled: "Do you want to cancel this order ? You can modify product stock in stock manage."
-          order_canceled_success: "Order is canceled"
-          confirm_order_refunded: "Do you want to refund this order ? You can modify product stock in stock manage."
-          order_refunded_success: "Order is refunded"
+          confirm_order_delivered: "Is this order delivered?"
+          order_delivered_success: "Order was delivered"
+          confirm_order_canceled: "Do you want to cancel this order? You can modify product stock in stock manage."
+          order_canceled_success: "Order was canceled"
+          confirm_order_refunded: "Do you want to refund this order? You can modify product stock in stock manage."
+          order_refunded_success: "Order was refunded"
       unsaved_form_alert:
         modal_title: "Vous avez des modifications non enregistrées"
         confirmation_message: "Si vous quittez cette page, vos modifications seront perdues. Êtes-vous sûr(e) de vouloir continuer ?"
