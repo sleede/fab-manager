@@ -121,7 +121,7 @@ zu:
     error_invoice: "crwdns21480:0crwdne21480:0"
     prepaid_pack: "crwdns22022:0crwdne22022:0"
     pack_item: "crwdns22024:0%{COUNT}crwdnd22024:0%{ITEM}crwdne22024:0"
-    order: "crwdns30568:0crwdne30568:0"
+    order: "crwdns30632:0crwdne30632:0"
   #PDF payment schedule generation
   payment_schedules:
     schedule_reference: "crwdns21094:0%{REF}crwdne21094:0"
