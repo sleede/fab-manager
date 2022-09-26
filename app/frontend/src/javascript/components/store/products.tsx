@@ -27,6 +27,7 @@ import ProductLib from '../../lib/product';
 import { ActiveFiltersTags } from './filters/active-filters-tags';
 import SettingAPI from '../../api/setting';
 import { UIRouter } from '@uirouter/angularjs';
+import { CaretDoubleUp } from 'phosphor-react';
 
 declare const Application: IApplication;
 
@@ -52,6 +53,7 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError, uiRouter }) => 
   const [pageCount, setPageCount] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [productsCount, setProductsCount] = useState<number>(0);
+  const [filtersPanel, setFiltersPanel] = useState<boolean>(true);
 
   useEffect(() => {
     fetchProducts().then(scrollToProducts);
@@ -207,14 +209,15 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError, uiRouter }) => 
           <FabButton className="main-action-btn" onClick={newProduct}>{t('app.admin.store.products.create_a_product')}</FabButton>
         </div>
       </header>
-      <div className='store-filters'>
+      <aside className={`store-filters ${filtersPanel ? '' : 'collapsed'}`}>
         <header>
           <h3>{t('app.admin.store.products.filter')}</h3>
           <div className='grpBtn'>
             <FabButton onClick={clearAllFilters} className="is-black">{t('app.admin.store.products.filter_clear')}</FabButton>
+            <CaretDoubleUp className='filters-toggle' size={16} weight="bold" onClick={() => setFiltersPanel(!filtersPanel)} />
           </div>
         </header>
-        <div className='accordion'>
+        <div className='grp accordion'>
           <CategoriesFilter productCategories={resources.categories.data}
                             onApplyFilters={handleCategoriesFilterUpdate}
                             currentFilters={resources.filters.data.categories} />
@@ -230,7 +233,7 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError, uiRouter }) => 
           <StockFilter onApplyFilters={handleStockFilterUpdate}
                        currentFilters={resources.filters.data} />
         </div>
-      </div>
+      </aside>
       <div className='store-list'>
         <StoreListHeader
           productsCount={productsCount}

@@ -1,33 +1,33 @@
 .order-item {
   width: 100%;
-  display: flex;
-  gap: 2.4rem;
-  justify-items: flex-start;
+  display: grid;
+  grid-template-rows: repeat(2, min-content);
+  grid-template-columns: 2fr 1fr 10ch;
+  gap: 1.6rem 2.4rem;
   align-items: center;
   padding: 1.6rem;
   border: 1px solid var(--gray-soft-dark);
   border-radius: var(--border-radius);
   background-color: var(--gray-soft-lightest);
-  & > *:not(button) { flex: 0 1 40%; }
 
   p { margin: 0; }
   .ref {
-    flex: 1 1 100%;
+    grid-area: 1 / 1 / 2 / 2;
     @include text-base(600);
   }
   .fab-state-label {
     --status-color: var(--success);
-    &.cart { --status-color: var(--secondary-dark); }
-    &.paid { --status-color: var(--success-light); }
+    &.cart { --status-color: var(--information); }
+    &.paid { --status-color: var(--success); }
     &.ready { --status-color: var(--success); }
     &.error { --status-color: var(--alert); }
     &.canceled { --status-color: var(--alert-light); }
     &.pending { --status-color: var(--information); }
     &.normal { --status-color: var(--success); }
-    margin: 0 auto;
+    grid-area: 1 / 2 / 2 / 3;
   }
-  .status .state-label { margin: 0 auto; }
   .client {
+    grid-area: 2 / 1 / 3 / 2;
     display: flex;
     flex-direction: column;
     span {
@@ -37,6 +37,7 @@
     p { @include text-sm; }
   }
   .date {
+    grid-area: 2 / 2 / 3 / 3;
     & > span {
       @include text-xs;
       color: var(--gray-hard-light);
@@ -51,7 +52,7 @@
     }
   }
   .price {
-    flex: 0 1 30%;
+    grid-area: 1 / 3 / 3 / 4;
     display: flex;
     flex-direction: column;
     justify-self: flex-end;
@@ -60,5 +61,21 @@
       color: var(--gray-hard-light);
     }
     p { @include text-base(600); }
+  }
+  button { grid-area: 1 / 4 / 3 / 5; }
+
+  @media (min-width: 1440px) {
+    grid-auto-flow: column;
+    grid-template-rows: auto;
+    grid-template-columns: 1fr minmax(max-content, 1fr) 2fr 12ch 12ch;
+    gap: 2.4rem;
+
+    .ref,
+    .fab-state-label,
+    .client,
+    .date,
+    .price,
+    button { grid-area: auto; }
+    .fab-state-label { justify-self: center; }
   }
 }

@@ -1,18 +1,14 @@
-.store,
-.store-product {
+.store {
   max-width: 1600px;
-  @include grid-col(12);
-  gap: 2.4rem 3.2rem;
-  align-items: flex-start;
   margin: 0 auto;
   padding-bottom: 6rem;
-}
+  display: grid;
+  grid-template-rows: min-content 8rem 1fr;
+  align-items: flex-start;
 
-.store {
   .breadcrumbs {
-    grid-column: 1 / -1;
+    display: none;
     padding: 0.8rem 1.6rem;
-    display: flex;
     list-style: none;
     border-radius: var(--border-radius-sm);
     background-color: var(--gray-soft-light);
@@ -31,6 +27,31 @@
       color: var(--gray-hard-light);
       cursor: pointer;
     }
+
+  }
+
+  &-filters {
+    grid-area: 2 / 1 / 4 / 2;
+    background-color: var(--gray-soft-lightest);
+    z-index: 1;
+  }
+  &-list { grid-area: 3 / 1 / 4 / 2; }
+
+  @media (min-width: 768px) {
+    .breadcrumbs { display: flex; }
+  }
+
+  @media (min-width: 1200px) {
+    @include grid-col(12);
+    grid-template-rows: min-content 1fr;
+    gap: 2.4rem 3.2rem;
+    align-items: flex-start;
+    .breadcrumbs { grid-column: 1 / -1; }
+    &-filters {
+      position: static;
+      grid-area: 2 / 1 / 3 / 4;
+    }
+    &-list { grid-area: 2 / 4 / 3 / -1; }
   }
 }
 
@@ -39,24 +60,31 @@
   &.low { --status-color: var(--alert-light); }
   &.out-of-stock { --status-color: var(--alert); }
 
-  padding-top: 4rem;
-  gap: 0 3.2rem;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 4rem 0 6rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: flex-start;
   align-items: flex-start;
+  gap: 0 3.2rem;
 
   .ref {
-    grid-area: 1 / 1 / 2 / 9;
+    grid-row: 1 / 2;
     @include text-sm;
     color: var(--gray-hard-lightest);
     text-transform: uppercase;
   }
   .name {
-    grid-area: 2 / 1 / 3 / 9;
+    grid-row: 2 / 3;
     margin: 0.8rem 0 3.2rem;
     @include title-lg;
     color: var(--gray-hard-darkest) !important;
   }
   .gallery {
-    grid-area: 3 / 1 / 4 / 4;
+    grid-row: 3 / 4;
+    width: 100%;
+    max-width: 50rem;
     .picture{
       @include imageRatio;
       border-radius: var(--border-radius-sm);
@@ -78,7 +106,7 @@
     }
   }
   .description {
-    grid-area: 3 / 4 / 4 / 9;
+    grid-row: 5 / 6;
     &-text {
       padding-bottom: 4rem;
       overflow: hidden;
@@ -121,6 +149,7 @@
     &-document {
       padding: 2.4rem;
       background-color: var(--gray-soft-light);
+      border-radius: var(--border-radius-sm);
       p { @include text-sm(500); }
       .list {
         display: flex;
@@ -135,8 +164,8 @@
     }
   }
   aside {
-    grid-area: 1 / -4 / 4 / -1;
-    position: sticky;
+    margin: 2.4rem 0;
+    grid-row: 4 / 5;
     top: 4rem;
     padding: 4rem;
     background-color: var(--gray-soft-light);
@@ -166,11 +195,20 @@
       margin-top: 1.6rem;
       padding-top: 3.2rem;
       display: grid;
-      grid-template-areas: "minus input plus"
+      grid-template-areas: "min min min"
+                           "minus input plus"
                            "btn btn btn";
-      grid-template-columns: repeat(3, minmax(0, min-content));
+      grid-template-columns: repeat(4, minmax(0, min-content));
+      justify-content: center;
       gap: 1.6rem;
       border-top: 1px solid var(--gray-soft-dark);
+      .min {
+        grid-area: min;
+        display: flex;
+        justify-content: center;
+        @include text-sm;
+        color: var(--alert);
+      }
       .minus {
         grid-area: minus;
         color: var(--gray-hard-darkest);
@@ -188,5 +226,36 @@
         justify-content: center;
       }
     }
+  }
+
+  @media (min-width: 1024px) {
+    .ref { grid-area: 1 / 1 / 2 / 3; }
+    .name { grid-area: 2 / 1 / 3 / 3; }
+    .gallery { grid-area: 3 / 1 / 4 / 2; }
+    .description {
+      margin-top: 2.4rem;
+      grid-area: 4 / 1 / 5 / 3;
+    }
+    aside {
+      margin: 0;
+      grid-area: 3 / 2 / 4 / 3;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    @include grid-col(12);
+    grid-template-rows: repeat(2, min-content) 1fr;
+    align-items: flex-start;
+    .ref { grid-area: 1 / 1 / 2 / 9; }
+    .name { grid-area: 2 / 1 / 3 / 9; }
+    .gallery { grid-area: 3 / 1 / 4 / 4; }
+    .description { grid-area: 3 / 4 / 4 / 9; }
+    aside {
+      grid-area: 1 / 9 / 4 / -1;
+      position: sticky;
+    }
+  }
+  @media (min-width: 1600px) {
+    aside { grid-area: 1 / 10 / 4 / -1; }
   }
 }

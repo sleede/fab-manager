@@ -19,9 +19,9 @@ fr:
       extension_whitelist_error: "Vous n'êtes pas autorisé à envoyer des fichiers %{extension}, les types autorisés sont : %{allowed_types}"
       extension_blacklist_error: "Vous n'êtes pas autorisé à envoyer des fichiers %{extension}, les types interdits sont : %{prohibited_types}"
       content_type_whitelist_error: "Vous n'êtes pas autorisé à envoyer des fichiers %{content_type}, les types autorisés sont : %{allowed_types}"
-      rmagick_processing_error: "Impossible de manipuler avec rmagick, peut-être n'est-ce pas une image ?"
-      mime_types_processing_error: "Impossible de traiter le fichier avec MIME::Types , peut-être pas de type de contenu valide ?"
-      mini_magick_processing_error: "Impossible de manipuler le fichier, peut-être n'est-ce pas une image ?"
+      rmagick_processing_error: "Impossible de manipuler avec rmagick. Peut-être que ce n'est pas une image ?"
+      mime_types_processing_error: "Impossible de traiter le fichier avec MIME::Types. Le type de contenu n'est peut-être pas valide ?"
+      mini_magick_processing_error: "Impossible de manipuler le fichier. Peut-être que ce n'est pas une image ?"
       wrong_size: "ne fait pas la bonne taille (doit comporter %{file_size})"
       size_too_small: "est trop petit (au moins %{file_size})"
       size_too_big: "est trop grand (pas plus de %{file_size})"
@@ -121,7 +121,7 @@ fr:
     error_invoice: "Facture en erreur. Les éléments ci-dessous n'ont pas été réservés. Veuillez contacter le Fablab pour un remboursement."
     prepaid_pack: "Paquet d'heures prépayé"
     pack_item: "Pack de %{COUNT} heures pour la %{ITEM}"
-    order: "Votre commande de la boutique"
+    order: "Votre commande sur la boutique"
   #PDF payment schedule generation
   payment_schedules:
     schedule_reference: "Référence de l'échéancier : %{REF}"
@@ -407,6 +407,12 @@ fr:
         refusal: "Votre justificatif n'est pas accepté"
       notify_admin_user_proof_of_identity_refusal:
         refusal: "Le justificatif du membre <strong><em>%{NAME}</strong></em> a été refusé."
+      notify_user_order_is_ready:
+        order_ready: "Votre commande %{REFERENCE} est prête"
+      notify_user_order_is_canceled:
+        order_canceled: "Votre commande %{REFERENCE} est annulée"
+      notify_user_order_is_refunded:
+        order_refunded: "Votre commande %{REFERENCE} est remboursée"
   #statistics tools for admins
   statistics:
     subscriptions: "Abonnements"

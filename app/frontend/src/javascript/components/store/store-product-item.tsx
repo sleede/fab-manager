@@ -81,6 +81,9 @@ export const StoreProductItem: React.FC<StoreProductItemProps> = ({ product, car
         <img src={productImageUrl(product)} alt='' />
       </div>
       <p className="name">{product.name}</p>
+      {product.quantity_min > 1 &&
+        <span className='min'>{t('app.public.store_product_item.minimum_purchase')}{product.quantity_min}</span>
+      }
       <div className='price'>
         <p>{FormatLib.price(product.amount || 0)}</p>
         <span>/ {t('app.public.store_product_item.unit')}</span>

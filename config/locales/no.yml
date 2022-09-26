@@ -121,6 +121,7 @@
     error_invoice: "Feil i faktura. Elementene under varen som ikke er bestilt. Kontakt oss for refusjon."
     prepaid_pack: "Forhåndsbetalt pakke med timer"
     pack_item: "Pakke med %{COUNT} timer for %{ITEM}"
+    order: "Your order on the store"
   #PDF payment schedule generation
   payment_schedules:
     schedule_reference: "Referanse til betalingsplanen: %{REF}"
@@ -406,6 +407,12 @@
         refusal: "Your proof of identity are not accepted"
       notify_admin_user_proof_of_identity_refusal:
         refusal: "Member's proof of identity <strong><em>%{NAME}</strong></em> refused."
+      notify_user_order_is_ready:
+        order_ready: "Your command %{REFERENCE} is ready"
+      notify_user_order_is_canceled:
+        order_canceled: "Your command %{REFERENCE} is canceled"
+      notify_user_order_is_refunded:
+        order_refunded: "Your command %{REFERENCE} is refunded"
   #statistics tools for admins
   statistics:
     subscriptions: "Subscriptions"

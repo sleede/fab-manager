@@ -28,6 +28,7 @@ import { ActiveFiltersTags } from './filters/active-filters-tags';
 import ProductLib from '../../lib/product';
 import { UIRouter } from '@uirouter/angularjs';
 import SettingAPI from '../../api/setting';
+import { CaretDoubleDown } from 'phosphor-react';
 
 declare const Application: IApplication;
 
@@ -56,6 +57,7 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
   const [resources, setResources] = useImmer<ProductResourcesFetching>(initialResources);
   const [machinesModule, setMachinesModule] = useState<boolean>(false);
   const [categoriesTree, setCategoriesTree] = useState<CategoryTree[]>([]);
+  const [filtersPanel, setFiltersPanel] = useState<boolean>(false);
   const [pageCount, setPageCount] = useState<number>(0);
   const [productsCount, setProductsCount] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -236,46 +238,55 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
           </li>
         }
       </ul>
-      <aside className='store-filters'>
-        <div className="categories">
-          <header>
-            <h3>{t('app.public.store.products.filter_categories')}</h3>
-          </header>
-          <div className="group u-scrollbar">
-            {categoriesTree.map(c =>
-              <div key={c.parent.id} className={`parent ${selectedCategory?.id === c.parent.id || selectedCategory?.parent_id === c.parent.id ? 'is-active' : ''}`}>
-                <p onClick={() => filterCategory(c.parent)}>
-                  {c.parent.name}<span>(count)</span>
-                </p>
-                {c.children.length > 0 &&
-                  <div className='children'>
-                    {c.children.map(ch =>
-                      <p key={ch.id}
-                        className={selectedCategory?.id === ch.id ? 'is-active' : ''}
-                        onClick={() => filterCategory(ch)}>
-                        {ch.name}<span>(count)</span>
-                      </p>
-                    )}
-                  </div>
-                }
-              </div>
-            )}
+      <aside className={`store-filters ${filtersPanel ? '' : 'collapsed'}`}>
+        <header>
+          <h3>{t('app.public.store.products.filter')}</h3>
+          <div className='grpBtn'>
+            <FabButton onClick={clearAllFilters} className="is-black">{t('app.public.store.products.filter_clear')}</FabButton>
+            <CaretDoubleDown className='filters-toggle' size={16} weight="bold" onClick={() => setFiltersPanel(!filtersPanel)} />
           </div>
-        </div>
-        <div className='filters'>
-          <header>
-            <h3>{t('app.public.store.products.filter')}</h3>
-            <div className='grpBtn'>
-              <FabButton onClick={clearAllFilters} className="is-black">{t('app.public.store.products.filter_clear')}</FabButton>
+        </header>
+        <div className='grp'>
+          <div className="categories">
+            <header>
+              <h3>{t('app.public.store.products.filter_categories')}</h3>
+            </header>
+            <div className="group u-scrollbar">
+              {categoriesTree.map(c =>
+                <div key={c.parent.id} className={`parent ${selectedCategory?.id === c.parent.id || selectedCategory?.parent_id === c.parent.id ? 'is-active' : ''}`}>
+                  <p onClick={() => filterCategory(c.parent)}>
+                    {c.parent.name}<span>(count)</span>
+                  </p>
+                  {c.children.length > 0 &&
+                    <div className='children'>
+                      {c.children.map(ch =>
+                        <p key={ch.id}
+                          className={selectedCategory?.id === ch.id ? 'is-active' : ''}
+                          onClick={() => filterCategory(ch)}>
+                          {ch.name}<span>(count)</span>
+                        </p>
+                      )}
+                    </div>
+                  }
+                </div>
+              )}
             </div>
-          </header>
-          {machinesModule && resources.machines.ready &&
-            <MachinesFilter allMachines={resources.machines.data}
-                            onError={onError}
-                            onApplyFilters={applyMachineFilters}
-                            currentFilters={resources.filters.data.machines} />
-          }
-          <KeywordFilter onApplyFilters={keyword => applyKeywordFilter([keyword])} currentFilters={resources.filters.data.keywords[0]} />
+          </div>
+          <div className='filters'>
+            <header>
+              <h3>{t('app.public.store.products.filter')}</h3>
+              <div className='grpBtn'>
+                <FabButton onClick={clearAllFilters} className="is-black">{t('app.public.store.products.filter_clear')}</FabButton>
+              </div>
+            </header>
+            {machinesModule && resources.machines.ready &&
+              <MachinesFilter allMachines={resources.machines.data}
+                              onError={onError}
+                              onApplyFilters={applyMachineFilters}
+                              currentFilters={resources.filters.data.machines} />
+            }
+            <KeywordFilter onApplyFilters={keyword => applyKeywordFilter([keyword])} currentFilters={resources.filters.data.keywords[0]} />
+          </div>
         </div>
       </aside>
       <div className='store-list'>

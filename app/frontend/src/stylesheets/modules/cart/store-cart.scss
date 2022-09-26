@@ -2,35 +2,33 @@
   width: 100%;
   max-width: 1600px;
   margin: 0 auto;
+  padding-bottom: 6rem;
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  grid-template-rows: minmax(0, min-content);
   gap: 3.2rem;
   align-items: flex-start;
 
   &-list {
-    grid-area: 1 / 1 / 2 / 10;
     display: grid;
     gap: 1.6rem;
 
     &-item {
       padding: 0.8rem;
       display: grid;
-      grid-auto-flow: column;
-      grid-template-columns: min-content 1fr;
       gap: 1.6rem;
-      justify-content: space-between;
+      grid-template-columns: min-content 1fr;
       align-items: center;
       background-color: var(--gray-soft-lightest);
       border: 1px solid var(--gray-soft-dark);
       border-radius: var(--border-radius);
-      
+
       .picture {
+        grid-area: 1 / 1 / 2 / 2;
         width: 10rem !important;
         @include imageRatio(76%);
         border-radius: var(--border-radius);
       }
       .ref {
+        grid-area: 1 / 2 / 2 / 3;
         display: flex;
         flex-direction: column;
         span {
@@ -43,8 +41,14 @@
           margin: 0;
           @include text-base(600);
         }
+        .min {
+          margin-top: 0.8rem;
+          color: var(--alert);
+          text-transform: none;
+        }
       }
       .actions {
+        grid-area: 2 / 1 / 3 / 3;
         align-self: stretch;
         padding: 0.8rem;
         display: grid;
@@ -56,7 +60,8 @@
         border-radius: var(--border-radius);
       }
       .offer {
-        align-self: stretch;
+        grid-area: 3 / 1 / 4 / 3;
+        justify-self: flex-end;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -71,6 +76,36 @@
           @include text-base;
           cursor: pointer;
           span { margin-right: 0.8rem; }
+        }
+      }
+      .quantity {
+        padding: 0.8rem 1.6rem 0.8rem 1.2rem;
+        display: grid;
+        grid-auto-flow: column;
+        gap: 0 0.8rem;
+        background-color: var(--gray-soft);
+        border-radius: var(--border-radius-sm);
+        input[type="number"] {
+          grid-area: 1 / 1 / 3 / 2;
+          width: 4ch;
+          min-width: fit-content;
+          background-color: transparent;
+          border: none;
+          text-align: right;
+          @include text-base(400);
+          -webkit-appearance: textfield;
+             -moz-appearance: textfield;
+                  appearance: textfield;
+        }
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+        }
+        button {
+          padding: 0;
+          display: flex;
+          background-color: transparent;
+          border: none;
         }
       }
       .price,
@@ -101,7 +136,6 @@
     }
   }
   .group {
-    grid-area: 2 / 1 / 3 / 10;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 2.4rem;
@@ -128,7 +162,6 @@
   }
 
   aside {
-    grid-area: 1 / 10 / 3 / 13;
     & > div {
       margin-bottom: 3.2rem;
       padding: 1.6rem;
@@ -165,7 +198,7 @@
         @include text-base(600);
         span { @include title-lg; }
       }
-      
+
       &-btn {
         width: 100%;
         height: auto;
@@ -182,5 +215,36 @@
         }
       }
     }
+  }
+
+  @media (min-width: 1024px) {
+    &-list-item {
+      .ref { grid-area: 1 / 2 / 2 / 3; }
+      .actions { grid-area: 2 / 1 / 3 / 4; }
+      .offer { grid-area: 1 / 3 / 2 / 4; }
+    }
+  }
+  @media (min-width: 1200px) {
+    &-list-item {
+      grid-auto-flow: column;
+      grid-template-columns: min-content 1fr 1fr;
+      justify-content: space-between;
+      align-items: center;
+      .picture { grid-area: auto; }
+      .ref { grid-area: auto; }
+      .actions { grid-area: auto; }
+      .offer {
+        grid-area: auto;
+        align-self: flex-start;
+      }
+    }
+  }
+  @media (min-width: 1440px) {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-template-rows: minmax(0, min-content);
+
+    &-list { grid-area: 1 / 1 / 2 / 10; }
+    .group { grid-area: 2 / 1 / 3 / 10; }
+    aside { grid-area: 1 / 10 / 3 / 13; }
   }
 }
