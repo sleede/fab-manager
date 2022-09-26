@@ -9,7 +9,7 @@ class API::ProductsController < API::ApiController
   MOVEMENTS_PER_PAGE = 10
 
   def index
-    @products = ProductService.list(params)
+    @products = ProductService.list(params, current_user)
   end
 
   def show

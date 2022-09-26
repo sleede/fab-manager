@@ -89,8 +89,8 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
   }, []);
 
   useEffect(() => {
-    fetchProducts().then(scrollToProducts);
     if (resources.filters.ready) {
+      fetchProducts().then(scrollToProducts);
       uiRouter.stateService.transitionTo(uiRouter.globals.current, ProductLib.indexFiltersToRouterParams(resources.filters.data));
     }
   }, [resources.filters]);
@@ -188,7 +188,10 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
         ...draft,
         filters: {
           ...draft.filters,
-          data: initFilters
+          data: {
+            ...initFilters,
+            categories: draft.filters.data.categories
+          }
         }
       };
     });

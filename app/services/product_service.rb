@@ -5,13 +5,13 @@ class ProductService
   class << self
     PRODUCTS_PER_PAGE = 12
 
-    def list(filters)
+    def list(filters, operator)
       products = Product.includes(:product_images)
       products = filter_by_active(products, filters)
       products = filter_by_categories(products, filters)
       products = filter_by_machines(products, filters)
       products = filter_by_keyword_or_reference(products, filters)
-      products = filter_by_stock(products, filters)
+      products = filter_by_stock(products, filters, operator)
       products = products_ordering(products, filters)
 
       total_count = products.count
@@ -110,7 +110,9 @@ class ProductService
                      { sku: filters[:keywords], query: "%#{filters[:keywords]}%" })
     end
 
-    def filter_by_stock(products, filters)
+    def filter_by_stock(products, filters, operator)
+      filters[:stock_type] = 'external' unless operator.privileged?
+
       products.where("(stock ->> '#{filters[:stock_type]}')::int >= #{filters[:stock_from]}") if filters[:stock_from].to_i.positive?
       products.where("(stock ->> '#{filters[:stock_type]}')::int <= #{filters[:stock_to]}") if filters[:stock_to].to_i.positive?
 
