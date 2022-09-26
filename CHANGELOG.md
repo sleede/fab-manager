@@ -1,6 +1,8 @@
 # Changelog Fab-manager
 
 - Fix a bug: unable to show the daily view of the public agenda, if it contains trainings or events
+- Fix a bug: plan's categories descriptions are not shown
+- Fix a bug: groups without plans are shown but empty
 
 ## v5.4.19 2022 September 13
 - Fix a bug: computing the wallet amount to debit ignores the applied coupon
