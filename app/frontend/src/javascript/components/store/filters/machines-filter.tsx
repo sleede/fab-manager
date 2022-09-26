@@ -7,27 +7,30 @@ import MachineAPI from '../../../api/machine';
 import _ from 'lodash';
 
 interface MachinesFilterProps {
+  allMachines?: Array<Machine>,
   onError: (message: string) => void,
   onApplyFilters: (categories: Array<Machine>) => void,
   currentFilters: Array<Machine>,
   openDefault?: boolean,
-  instantUpdate?: boolean,
+  instantUpdate?: boolean
 }
 
 /**
  * Component to filter the products list by associated machine
  */
-export const MachinesFilter: React.FC<MachinesFilterProps> = ({ onError, onApplyFilters, currentFilters, openDefault = false, instantUpdate = false }) => {
+export const MachinesFilter: React.FC<MachinesFilterProps> = ({ allMachines, onError, onApplyFilters, currentFilters, openDefault = false, instantUpdate = false }) => {
   const { t } = useTranslation('admin');
 
-  const [machines, setMachines] = useState<Machine[]>([]);
+  const [machines, setMachines] = useState<Machine[]>(allMachines);
   const [openedAccordion, setOpenedAccordion] = useState<boolean>(openDefault);
   const [selectedMachines, setSelectedMachines] = useState<Machine[]>(currentFilters || []);
 
   useEffect(() => {
-    MachineAPI.index({ disabled: false }).then(data => {
-      setMachines(data);
-    }).catch(onError);
+    if (_.isEmpty(allMachines)) {
+      MachineAPI.index({ disabled: false }).then(data => {
+        setMachines(data);
+      }).catch(onError);
+    }
   }, []);
 
   useEffect(() => {

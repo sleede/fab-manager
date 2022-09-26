@@ -6,6 +6,9 @@ import {
   stockMovementOutReasons,
   StockMovementReason
 } from '../models/product';
+import { Machine } from '../models/machine';
+import { StateParams } from '@uirouter/angularjs';
+import ParsingLib from './parsing';
 
 export default class ProductLib {
   /**
@@ -124,25 +127,38 @@ export default class ProductLib {
 
   /**
    * Parse the provided URL and return a ready-to-use filter object
-   * FIXME
    */
-  static readFiltersFromUrl = (url: string): ProductIndexFilterIds => {
-    const res: ProductIndexFilterIds = {};
-    for (const [key, value] of new URLSearchParams(url.split('?')[1])) {
-      let parsedValue: string|number|boolean = value;
-      if (['true', 'false'].includes(value)) {
-        parsedValue = (value === 'true');
-      } else if (parseInt(value, 10).toString() === value) {
-        parsedValue = parseInt(value, 10);
-      }
-      if (res[key] === undefined) {
-        res[key] = parsedValue;
-      } else if (Array.isArray(res[key])) {
-        res[key] = [...res[key] as Array<unknown>, parsedValue];
-      } else {
-        res[key] = [res[key], parsedValue];
+  static readFiltersFromUrl = (params: StateParams, machines: Array<Machine>, categories: Array<ProductCategory>): ProductIndexFilter => {
+    const res: ProductIndexFilter = { ...initFilters };
+    for (const key in params) {
+      if (['#', 'categoryTypeUrl'].includes(key) || !Object.prototype.hasOwnProperty.call(params, key)) continue;
+
+      const value = ParsingLib.parse(params[key]) || initFilters[key];
+      switch (key) {
+        case 'category':
+          const parents = categories?.filter(c => (value as Array<string>)?.includes(c.slug));
+          // we may also add to the selection children categories
+          res.categories = [...parents, ...categories?.filter(c => parents.map(c => c.id).includes(c.parent_id))];
+          break;
+        case 'machines':
+          res.machines = machines?.filter(m => (value as Array<string>)?.includes(m.slug));
+          break;
+        default:
+          res[key] = value;
       }
     }
     return res;
   };
 }
+
+export const initFilters: ProductIndexFilter = {
+  categories: [],
+  keywords: [],
+  machines: [],
+  is_active: false,
+  stock_type: 'internal',
+  stock_from: 0,
+  stock_to: 0,
+  page: 1,
+  sort: ''
+};

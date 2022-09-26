@@ -19,8 +19,11 @@ import { useImmer } from 'use-immer';
 import { Machine } from '../../models/machine';
 import { KeywordFilter } from './filters/keyword-filter';
 import { ActiveFiltersTags } from './filters/active-filters-tags';
-import ProductLib from '../../lib/product';
+import ProductLib, { initFilters } from '../../lib/product';
 import { UIRouter } from '@uirouter/angularjs';
+import MachineAPI from '../../api/machine';
+import SettingAPI from '../../api/setting';
+import { ApiResource } from '../../models/api';
 
 declare const Application: IApplication;
 
@@ -45,29 +48,66 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
   const { cart, setCart } = useCart(currentUser);
 
   const [products, setProducts] = useState<Array<Product>>([]);
-  const [productCategories, setProductCategories] = useState<ProductCategory[]>([]);
+  // this includes the resources fetch from the API (machines, categories) and from the URL (filters)
+  const [resources, setResources] = useImmer<FetchResources>(initialResources);
+  const [machinesModule, setMachinesModule] = useState<boolean>(false);
   const [categoriesTree, setCategoriesTree] = useState<CategoryTree[]>([]);
   const [pageCount, setPageCount] = useState<number>(0);
   const [productsCount, setProductsCount] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [filters, setFilters] = useImmer<ProductIndexFilter>(initFilters);
 
   useEffect(() => {
-    // TODO, set the filters in the state
-    console.log(ProductLib.readFiltersFromUrl(location.href));
     fetchProducts().then(scrollToProducts);
     ProductCategoryAPI.index().then(data => {
-      setProductCategories(data);
+      setResources(draft => {
+        return {
+          ...draft,
+          categories: {
+            data,
+            ready: true
+          }
+        };
+      });
       formatCategories(data);
     }).catch(error => {
       onError(t('app.public.store.unexpected_error_occurred') + error);
     });
+    MachineAPI.index({ disabled: false }).then(data => {
+      setResources(draft => {
+        return {
+          ...draft,
+          machines: {
+            data,
+            ready: true
+          }
+        };
+      });
+    }).catch(onError);
+    SettingAPI.get('machines_module').then(data => {
+      setMachinesModule(data.value === 'true');
+    }).catch(onError);
   }, []);
 
   useEffect(() => {
     fetchProducts().then(scrollToProducts);
-    uiRouter.stateService.transitionTo(uiRouter.globals.current, ProductLib.indexFiltersToRouterParams(filters));
-  }, [filters]);
+    if (resources.filters.ready) {
+      uiRouter.stateService.transitionTo(uiRouter.globals.current, ProductLib.indexFiltersToRouterParams(resources.filters.data));
+    }
+  }, [resources.filters]);
+
+  useEffect(() => {
+    if (resources.machines.ready && resources.categories.ready) {
+      setResources(draft => {
+        return {
+          ...draft,
+          filters: {
+            data: ProductLib.readFiltersFromUrl(uiRouter.globals.params, resources.machines.data, resources.categories.data),
+            ready: true
+          }
+        };
+      });
+    }
+  }, [resources.machines, resources.categories]);
 
   /**
    * Create categories tree (parent/children)
@@ -88,12 +128,18 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
    * Filter by category: the selected category will always be first
    */
   const filterCategory = (category: ProductCategory) => {
-    setFilters(draft => {
+    setResources(draft => {
       return {
         ...draft,
-        categories: category
-          ? Array.from(new Set([category, ...ProductLib.categoriesSelectionTree(productCategories, [], category, 'add')]))
-          : []
+        filters: {
+          ...draft.filters,
+          data: {
+            ...draft.filters.data,
+            categories: category
+              ? Array.from(new Set([category, ...ProductLib.categoriesSelectionTree(resources.categories.data, [], category, 'add')]))
+              : []
+          }
+        }
       };
     });
   };
@@ -102,8 +148,17 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
    * Update the list of applied filters with the given machines
    */
   const applyMachineFilters = (machines: Array<Machine>) => {
-    setFilters(draft => {
-      return { ...draft, machines };
+    setResources(draft => {
+      return {
+        ...draft,
+        filters: {
+          ...draft.filters,
+          data: {
+            ...draft.filters.data,
+            machines
+          }
+        }
+      };
     });
   };
 
@@ -111,15 +166,32 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
    * Update the list of applied filters with the given keywords (or reference)
    */
   const applyKeywordFilter = (keywords: Array<string>) => {
-    setFilters(draft => {
-      return { ...draft, keywords };
+    setResources(draft => {
+      return {
+        ...draft,
+        filters: {
+          ...draft.filters,
+          data: {
+            ...draft.filters.data,
+            keywords
+          }
+        }
+      };
     });
   };
   /**
    * Clear filters
    */
   const clearAllFilters = () => {
-    setFilters(initFilters);
+    setResources(draft => {
+      return {
+        ...draft,
+        filters: {
+          ...draft.filters,
+          data: initFilters
+        }
+      };
+    });
   };
 
   /**
@@ -137,10 +209,16 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
    * Display option: sorting
    */
   const handleSorting = (option: selectOption) => {
-    setFilters(draft => {
+    setResources(draft => {
       return {
         ...draft,
-        sort: option.value
+        filters: {
+          ...draft.filters,
+          data: {
+            ...draft.filters.data,
+            sort: option.value
+          }
+        }
       };
     });
   };
@@ -149,8 +227,17 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
    * Filter: toggle non-available products visibility
    */
   const toggleVisible = (checked: boolean) => {
-    setFilters(draft => {
-      return { ...draft, is_active: checked };
+    setResources(draft => {
+      return {
+        ...draft,
+        filters: {
+          ...draft.filters,
+          data: {
+            ...draft.filters.data,
+            is_active: checked
+          }
+        }
+      };
     });
   };
 
@@ -167,8 +254,17 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
    */
   const handlePagination = (page: number) => {
     if (page !== currentPage) {
-      setFilters(draft => {
-        return { ...draft, page };
+      setResources(draft => {
+        return {
+          ...draft,
+          filters: {
+            ...draft.filters,
+            data: {
+              ...draft.filters.data,
+              page
+            }
+          }
+        };
       });
     }
   };
@@ -178,7 +274,7 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
   */
   const fetchProducts = async (): Promise<ProductsIndex> => {
     try {
-      const data = await ProductAPI.index(ProductLib.indexFiltersToIds(filters));
+      const data = await ProductAPI.index(resources.filters.data);
       setCurrentPage(data.page);
       setProducts(data.data);
       setPageCount(data.total_pages);
@@ -196,8 +292,8 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
     window.document.getElementById('content-main').scrollTo({ top: 100, behavior: 'smooth' });
   };
 
-  const selectedCategory = filters.categories[0];
-  const parent = productCategories.find(c => c.id === selectedCategory?.parent_id);
+  const selectedCategory = resources.filters.data.categories[0];
+  const parent = resources.categories.data.find(c => c.id === selectedCategory?.parent_id);
   return (
     <div className="store">
       <ul className="breadcrumbs">
@@ -252,8 +348,13 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
               <FabButton onClick={clearAllFilters} className="is-black">{t('app.public.store.products.filter_clear')}</FabButton>
             </div>
           </header>
-          <MachinesFilter onError={onError} onApplyFilters={applyMachineFilters} currentFilters={filters.machines} />
-          <KeywordFilter onApplyFilters={keyword => applyKeywordFilter([keyword])} currentFilters={filters.keywords[0]} />
+          {machinesModule && resources.machines.ready &&
+            <MachinesFilter allMachines={resources.machines.data}
+                            onError={onError}
+                            onApplyFilters={applyMachineFilters}
+                            currentFilters={resources.filters.data.machines} />
+          }
+          <KeywordFilter onApplyFilters={keyword => applyKeywordFilter([keyword])} currentFilters={resources.filters.data.keywords[0]} />
         </div>
       </aside>
       <div className='store-list'>
@@ -262,13 +363,14 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
           selectOptions={buildOptions()}
           onSelectOptionsChange={handleSorting}
           switchLabel={t('app.public.store.products.in_stock_only')}
-          switchChecked={filters.is_active}
+          switchChecked={resources.filters.data.is_active}
+          selectValue={resources.filters.data.sort}
           onSwitch={toggleVisible}
         />
         <div className='features'>
-          <ActiveFiltersTags filters={filters}
+          <ActiveFiltersTags filters={resources.filters.data}
                              displayCategories={false}
-                             onRemoveMachine={(m) => applyMachineFilters(filters.machines.filter(machine => machine !== m))}
+                             onRemoveMachine={(m) => applyMachineFilters(resources.filters.data.machines.filter(machine => machine !== m))}
                              onRemoveKeyword={() => applyKeywordFilter([])} />
         </div>
         <div className="products-grid">
@@ -299,11 +401,23 @@ interface CategoryTree {
   children: ProductCategory[]
 }
 
-const initFilters: ProductIndexFilter = {
-  categories: [],
-  keywords: [],
-  machines: [],
-  is_active: false,
-  page: 1,
-  sort: ''
+interface FetchResources {
+  machines: ApiResource<Array<Machine>>,
+  categories: ApiResource<Array<ProductCategory>>,
+  filters: ApiResource<ProductIndexFilter>
+}
+
+const initialResources: FetchResources = {
+  machines: {
+    data: [],
+    ready: false
+  },
+  categories: {
+    data: [],
+    ready: false
+  },
+  filters: {
+    data: initFilters,
+    ready: false
+  }
 };

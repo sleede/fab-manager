@@ -10,3 +10,8 @@ export interface PaginatedIndex<T> {
 }
 
 export type SortOption = `${string}-${'asc' | 'desc'}` | '';
+
+export interface ApiResource<T> {
+  data: T,
+  ready: boolean
+}

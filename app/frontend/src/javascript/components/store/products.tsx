@@ -17,7 +17,7 @@ import { MachinesFilter } from './filters/machines-filter';
 import { KeywordFilter } from './filters/keyword-filter';
 import { StockFilter } from './filters/stock-filter';
 import ProductCategoryAPI from '../../api/product-category';
-import ProductLib from '../../lib/product';
+import ProductLib, { initFilters } from '../../lib/product';
 import { ActiveFiltersTags } from './filters/active-filters-tags';
 
 declare const Application: IApplication;
@@ -70,7 +70,7 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
    */
   const fetchProducts = async (): Promise<ProductsIndex> => {
     try {
-      const data = await ProductAPI.index(ProductLib.indexFiltersToIds(filters));
+      const data = await ProductAPI.index(filters);
       setCurrentPage(data.page);
       setProductList(data.data);
       setPageCount(data.total_pages);
@@ -261,15 +261,3 @@ const ProductsWrapper: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
 };
 
 Application.Components.component('products', react2angular(ProductsWrapper, ['onSuccess', 'onError']));
-
-const initFilters: ProductIndexFilter = {
-  categories: [],
-  machines: [],
-  keywords: [],
-  stock_type: 'internal',
-  stock_from: 0,
-  stock_to: 0,
-  is_active: false,
-  page: 1,
-  sort: ''
-};
