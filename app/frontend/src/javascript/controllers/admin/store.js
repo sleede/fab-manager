@@ -4,8 +4,8 @@
 */
 'use strict';
 
-Application.Controllers.controller('AdminStoreController', ['$scope', 'CSRF', 'growl', '$state',
-  function ($scope, CSRF, growl, $state) {
+Application.Controllers.controller('AdminStoreController', ['$scope', 'CSRF', 'growl', '$state', '$uiRouter',
+  function ($scope, CSRF, growl, $state, $uiRouter) {
     /* PRIVATE SCOPE */
     // Map of tab state and index
     const TABS = {
@@ -20,6 +20,9 @@ Application.Controllers.controller('AdminStoreController', ['$scope', 'CSRF', 'g
     $scope.tabs = {
       active: TABS[$state.current.name]
     };
+
+    // the following item is used by the Products component to save/restore filters in the URL
+    $scope.uiRouter = $uiRouter;
 
     /**
      * Callback triggered in click tab

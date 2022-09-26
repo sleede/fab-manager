@@ -628,42 +628,13 @@ angular.module('application.router', ['ui.router'])
           }
         },
         params: {
-          categoryTypeUrl: {
-            dynamic: true,
-            raw: true,
-            type: 'path',
-            value: null,
-            squash: true
-          },
-          category: {
-            dynamic: true,
-            type: 'path',
-            raw: true,
-            value: null,
-            squash: true
-          },
-          machines: {
-            array: true,
-            dynamic: true,
-            type: 'query',
-            raw: true
-          },
-          keywords: {
-            dynamic: true,
-            type: 'query'
-          },
-          is_active: {
-            dynamic: true,
-            type: 'query'
-          },
-          page: {
-            dynamic: true,
-            type: 'query'
-          },
-          sort: {
-            dynamic: true,
-            type: 'query'
-          }
+          categoryTypeUrl: { dynamic: true, raw: true, type: 'path', value: null, squash: true },
+          category: { dynamic: true, type: 'path', raw: true, value: null, squash: true },
+          machines: { array: true, dynamic: true, type: 'query', raw: true },
+          keywords: { dynamic: true, type: 'query' },
+          is_active: { dynamic: true, type: 'query', value: 'false', squash: true },
+          page: { dynamic: true, type: 'query', value: '1', squash: true },
+          sort: { dynamic: true, type: 'query' }
         }
       })
 
@@ -1220,12 +1191,23 @@ angular.module('application.router', ['ui.router'])
       })
 
       .state('app.admin.store.products', {
-        url: '/products',
+        url: '/products?{categories:string}{machines:string}{keywords:string}{stock_type:string}{stock_from:string}{stock_to:string}{is_active:string}{page:string}{sort:string}',
         views: {
           'main@': {
             templateUrl: '/admin/store/index.html',
             controller: 'AdminStoreController'
           }
+        },
+        params: {
+          categories: { array: true, dynamic: true, type: 'query', raw: true },
+          machines: { array: true, dynamic: true, type: 'query', raw: true },
+          keywords: { dynamic: true, type: 'query' },
+          stock_type: { dynamic: true, type: 'query', value: 'internal', squash: true },
+          stock_from: { dynamic: true, type: 'query', value: '0', squash: true },
+          stock_to: { dynamic: true, type: 'query', value: '0', squash: true },
+          is_active: { dynamic: true, type: 'query', value: 'false', squash: true },
+          page: { dynamic: true, type: 'query', value: '1', squash: true },
+          sort: { dynamic: true, type: 'query' }
         }
       })
 

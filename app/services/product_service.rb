@@ -111,10 +111,12 @@ class ProductService
     end
 
     def filter_by_stock(products, filters, operator)
-      filters[:stock_type] = 'external' unless operator.privileged?
+      return products if filters[:stock_type] == 'internal' && !operator.privileged?
 
-      products.where("(stock ->> '#{filters[:stock_type]}')::int >= #{filters[:stock_from]}") if filters[:stock_from].to_i.positive?
-      products.where("(stock ->> '#{filters[:stock_type]}')::int <= #{filters[:stock_to]}") if filters[:stock_to].to_i.positive?
+      if filters[:stock_from].to_i.positive?
+        products = products.where('(stock ->> ?)::int >= ?', filters[:stock_type], filters[:stock_from])
+      end
+      products = products.where('(stock ->> ?)::int <= ?', filters[:stock_type], filters[:stock_to]) if filters[:stock_to].to_i.positive?
 
       products
     end

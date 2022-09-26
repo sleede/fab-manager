@@ -4,10 +4,16 @@ import { react2angular } from 'react2angular';
 import { Loader } from '../base/loader';
 import { IApplication } from '../../models/application';
 import { FabButton } from '../base/fab-button';
-import { Product, ProductIndexFilter, ProductsIndex, ProductSortOption } from '../../models/product';
+import {
+  initialFilters,
+  initialResources,
+  Product,
+  ProductResourcesFetching,
+  ProductsIndex,
+  ProductSortOption
+} from '../../models/product';
 import { ProductCategory } from '../../models/product-category';
 import ProductAPI from '../../api/product';
-import ProductCategoryAPI from '../../api/product-category';
 import { StoreProductItem } from './store-product-item';
 import useCart from '../../hooks/use-cart';
 import { User } from '../../models/user';
@@ -19,11 +25,9 @@ import { useImmer } from 'use-immer';
 import { Machine } from '../../models/machine';
 import { KeywordFilter } from './filters/keyword-filter';
 import { ActiveFiltersTags } from './filters/active-filters-tags';
-import ProductLib, { initFilters } from '../../lib/product';
+import ProductLib from '../../lib/product';
 import { UIRouter } from '@uirouter/angularjs';
-import MachineAPI from '../../api/machine';
 import SettingAPI from '../../api/setting';
-import { ApiResource } from '../../models/api';
 
 declare const Application: IApplication;
 
@@ -49,7 +53,7 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
 
   const [products, setProducts] = useState<Array<Product>>([]);
   // this includes the resources fetch from the API (machines, categories) and from the URL (filters)
-  const [resources, setResources] = useImmer<FetchResources>(initialResources);
+  const [resources, setResources] = useImmer<ProductResourcesFetching>(initialResources);
   const [machinesModule, setMachinesModule] = useState<boolean>(false);
   const [categoriesTree, setCategoriesTree] = useState<CategoryTree[]>([]);
   const [pageCount, setPageCount] = useState<number>(0);
@@ -58,31 +62,7 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
 
   useEffect(() => {
     fetchProducts().then(scrollToProducts);
-    ProductCategoryAPI.index().then(data => {
-      setResources(draft => {
-        return {
-          ...draft,
-          categories: {
-            data,
-            ready: true
-          }
-        };
-      });
-      formatCategories(data);
-    }).catch(error => {
-      onError(t('app.public.store.unexpected_error_occurred') + error);
-    });
-    MachineAPI.index({ disabled: false }).then(data => {
-      setResources(draft => {
-        return {
-          ...draft,
-          machines: {
-            data,
-            ready: true
-          }
-        };
-      });
-    }).catch(onError);
+    ProductLib.fetchInitialResources(setResources, onError, formatCategories);
     SettingAPI.get('machines_module').then(data => {
       setMachinesModule(data.value === 'true');
     }).catch(onError);
@@ -128,56 +108,27 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
    * Filter by category: the selected category will always be first
    */
   const filterCategory = (category: ProductCategory) => {
-    setResources(draft => {
-      return {
-        ...draft,
-        filters: {
-          ...draft.filters,
-          data: {
-            ...draft.filters.data,
-            categories: category
-              ? Array.from(new Set([category, ...ProductLib.categoriesSelectionTree(resources.categories.data, [], category, 'add')]))
-              : []
-          }
-        }
-      };
-    });
+    ProductLib.updateFilter(
+      setResources,
+      'categories',
+      category
+        ? Array.from(new Set([category, ...ProductLib.categoriesSelectionTree(resources.categories.data, [], category, 'add')]))
+        : []
+    );
   };
 
   /**
    * Update the list of applied filters with the given machines
    */
   const applyMachineFilters = (machines: Array<Machine>) => {
-    setResources(draft => {
-      return {
-        ...draft,
-        filters: {
-          ...draft.filters,
-          data: {
-            ...draft.filters.data,
-            machines
-          }
-        }
-      };
-    });
+    ProductLib.updateFilter(setResources, 'machines', machines);
   };
 
   /**
    * Update the list of applied filters with the given keywords (or reference)
    */
   const applyKeywordFilter = (keywords: Array<string>) => {
-    setResources(draft => {
-      return {
-        ...draft,
-        filters: {
-          ...draft.filters,
-          data: {
-            ...draft.filters.data,
-            keywords
-          }
-        }
-      };
-    });
+    ProductLib.updateFilter(setResources, 'keywords', keywords);
   };
   /**
    * Clear filters
@@ -189,7 +140,7 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
         filters: {
           ...draft.filters,
           data: {
-            ...initFilters,
+            ...initialFilters,
             categories: draft.filters.data.categories
           }
         }
@@ -212,36 +163,14 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
    * Display option: sorting
    */
   const handleSorting = (option: selectOption) => {
-    setResources(draft => {
-      return {
-        ...draft,
-        filters: {
-          ...draft.filters,
-          data: {
-            ...draft.filters.data,
-            sort: option.value
-          }
-        }
-      };
-    });
+    ProductLib.updateFilter(setResources, 'sort', option.value);
   };
 
   /**
    * Filter: toggle non-available products visibility
    */
   const toggleVisible = (checked: boolean) => {
-    setResources(draft => {
-      return {
-        ...draft,
-        filters: {
-          ...draft.filters,
-          data: {
-            ...draft.filters.data,
-            is_active: checked
-          }
-        }
-      };
-    });
+    ProductLib.updateFilter(setResources, 'is_active', checked);
   };
 
   /**
@@ -257,18 +186,7 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
    */
   const handlePagination = (page: number) => {
     if (page !== currentPage) {
-      setResources(draft => {
-        return {
-          ...draft,
-          filters: {
-            ...draft.filters,
-            data: {
-              ...draft.filters.data,
-              page
-            }
-          }
-        };
-      });
+      ProductLib.updateFilter(setResources, 'page', page);
     }
   };
 
@@ -403,24 +321,3 @@ interface CategoryTree {
   parent: ProductCategory,
   children: ProductCategory[]
 }
-
-interface FetchResources {
-  machines: ApiResource<Array<Machine>>,
-  categories: ApiResource<Array<ProductCategory>>,
-  filters: ApiResource<ProductIndexFilter>
-}
-
-const initialResources: FetchResources = {
-  machines: {
-    data: [],
-    ready: false
-  },
-  categories: {
-    data: [],
-    ready: false
-  },
-  filters: {
-    data: initFilters,
-    ready: false
-  }
-};

@@ -4,7 +4,14 @@ import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
 import { Loader } from '../base/loader';
 import { IApplication } from '../../models/application';
-import { Product, ProductIndexFilter, ProductsIndex, ProductSortOption } from '../../models/product';
+import {
+  initialFilters, initialResources,
+  Product,
+  ProductIndexFilter,
+  ProductResourcesFetching,
+  ProductsIndex,
+  ProductSortOption
+} from '../../models/product';
 import { ProductCategory } from '../../models/product-category';
 import { FabButton } from '../base/fab-button';
 import { ProductItem } from './product-item';
@@ -16,15 +23,17 @@ import { Machine } from '../../models/machine';
 import { MachinesFilter } from './filters/machines-filter';
 import { KeywordFilter } from './filters/keyword-filter';
 import { StockFilter } from './filters/stock-filter';
-import ProductCategoryAPI from '../../api/product-category';
-import ProductLib, { initFilters } from '../../lib/product';
+import ProductLib from '../../lib/product';
 import { ActiveFiltersTags } from './filters/active-filters-tags';
+import SettingAPI from '../../api/setting';
+import { UIRouter } from '@uirouter/angularjs';
 
 declare const Application: IApplication;
 
 interface ProductsProps {
   onSuccess: (message: string) => void,
   onError: (message: string) => void,
+  uiRouter: UIRouter,
 }
 /**
  * Option format, expected by react-select
@@ -33,35 +42,52 @@ interface ProductsProps {
  type selectOption = { value: ProductSortOption, label: string };
 
 /** This component shows the admin view of the store */
-const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
+const Products: React.FC<ProductsProps> = ({ onSuccess, onError, uiRouter }) => {
   const { t } = useTranslation('admin');
 
-  const [productCategories, setProductCategories] = useState<Array<ProductCategory>>([]);
   const [productsList, setProductList] = useState<Array<Product>>([]);
-  const [filters, setFilters] = useImmer<ProductIndexFilter>(initFilters);
+  // this includes the resources fetch from the API (machines, categories) and from the URL (filters)
+  const [resources, setResources] = useImmer<ProductResourcesFetching>(initialResources);
+  const [machinesModule, setMachinesModule] = useState<boolean>(false);
   const [pageCount, setPageCount] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [productsCount, setProductsCount] = useState<number>(0);
 
   useEffect(() => {
     fetchProducts().then(scrollToProducts);
-    ProductCategoryAPI.index().then(data => {
-      setProductCategories(ProductLib.sortCategories(data));
+    ProductLib.fetchInitialResources(setResources, onError);
+    SettingAPI.get('machines_module').then(data => {
+      setMachinesModule(data.value === 'true');
     }).catch(onError);
   }, []);
 
   useEffect(() => {
-    fetchProducts().then(scrollToProducts);
-  }, [filters]);
+    if (resources.filters.ready) {
+      fetchProducts().then(scrollToProducts);
+      uiRouter.stateService.transitionTo(uiRouter.globals.current, ProductLib.indexFiltersToRouterParams(resources.filters.data));
+    }
+  }, [resources.filters]);
+
+  useEffect(() => {
+    if (resources.machines.ready && resources.categories.ready) {
+      setResources(draft => {
+        return {
+          ...draft,
+          filters: {
+            data: ProductLib.readFiltersFromUrl(uiRouter.globals.params, resources.machines.data, resources.categories.data),
+            ready: true
+          }
+        };
+      });
+    }
+  }, [resources.machines, resources.categories]);
 
   /**
    * Handle products pagination
    */
   const handlePagination = (page: number) => {
     if (page !== currentPage) {
-      setFilters(draft => {
-        return { ...draft, page };
-      });
+      ProductLib.updateFilter(setResources, 'page', page);
     }
   };
 
@@ -70,7 +96,7 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
    */
   const fetchProducts = async (): Promise<ProductsIndex> => {
     try {
-      const data = await ProductAPI.index(filters);
+      const data = await ProductAPI.index(resources.filters.data);
       setCurrentPage(data.page);
       setProductList(data.data);
       setPageCount(data.total_pages);
@@ -112,25 +138,21 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
 
   /** Filter: toggle non-available products visibility */
   const toggleVisible = (checked: boolean) => {
-    setFilters(draft => {
-      return { ...draft, is_active: checked };
-    });
+    ProductLib.updateFilter(setResources, 'is_active', checked);
   };
 
   /**
    * Update the list of applied filters with the given categories
    */
   const handleCategoriesFilterUpdate = (categories: Array<ProductCategory>) => {
-    setFilters(draft => {
-      return { ...draft, categories };
-    });
+    ProductLib.updateFilter(setResources, 'categories', categories);
   };
 
   /**
    * Remove the provided category from the filters selection
    */
   const handleRemoveCategory = (category: ProductCategory) => {
-    const list = ProductLib.categoriesSelectionTree(productCategories, filters.categories, category, 'remove');
+    const list = ProductLib.categoriesSelectionTree(resources.categories.data, resources.filters.data.categories, category, 'remove');
     handleCategoriesFilterUpdate(list);
   };
 
@@ -138,43 +160,33 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
    * Update the list of applied filters with the given machines
    */
   const handleMachinesFilterUpdate = (machines: Array<Machine>) => {
-    setFilters(draft => {
-      return { ...draft, machines };
-    });
+    ProductLib.updateFilter(setResources, 'machines', machines);
   };
 
   /**
    * Update the list of applied filters with the given keywords (or reference)
    */
   const handleKeywordFilterUpdate = (keywords: Array<string>) => {
-    setFilters(draft => {
-      return { ...draft, keywords };
-    });
+    ProductLib.updateFilter(setResources, 'keywords', keywords);
   };
 
   /** Filter: by stock range */
   const handleStockFilterUpdate = (filters: ProductIndexFilter) => {
-    setFilters(draft => {
-      return {
-        ...draft,
-        ...filters
-      };
+    setResources(draft => {
+      return { ...draft, filters: { ...draft.filters, data: { ...draft.filters.data, ...filters } } };
     });
   };
 
   /** Display option: sorting */
   const handleSorting = (option: selectOption) => {
-    setFilters(draft => {
-      return {
-        ...draft,
-        sort: option.value
-      };
-    });
+    ProductLib.updateFilter(setResources, 'sort', option.value);
   };
 
   /** Clear filters */
   const clearAllFilters = () => {
-    setFilters(initFilters);
+    setResources(draft => {
+      return { ...draft, filters: { ...draft.filters, data: initialFilters } };
+    });
   };
 
   /** Creates sorting options to the react-select format */
@@ -203,19 +215,20 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
           </div>
         </header>
         <div className='accordion'>
-          <CategoriesFilter productCategories={productCategories}
+          <CategoriesFilter productCategories={resources.categories.data}
                             onApplyFilters={handleCategoriesFilterUpdate}
-                            currentFilters={filters.categories} />
+                            currentFilters={resources.filters.data.categories} />
 
-          <MachinesFilter onError={onError}
-                          onApplyFilters={handleMachinesFilterUpdate}
-                          currentFilters={filters.machines} />
+          {machinesModule && <MachinesFilter onError={onError}
+                                             allMachines={resources.machines.data}
+                                             onApplyFilters={handleMachinesFilterUpdate}
+                                             currentFilters={resources.filters.data.machines} />}
 
           <KeywordFilter onApplyFilters={keyword => handleKeywordFilterUpdate([keyword])}
-                         currentFilters={filters.keywords[0]} />
+                         currentFilters={resources.filters.data.keywords[0]} />
 
           <StockFilter onApplyFilters={handleStockFilterUpdate}
-                       currentFilters={filters} />
+                       currentFilters={resources.filters.data} />
         </div>
       </div>
       <div className='store-list'>
@@ -223,13 +236,14 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
           productsCount={productsCount}
           selectOptions={buildSortOptions()}
           onSelectOptionsChange={handleSorting}
-          switchChecked={filters.is_active}
+          selectValue={resources.filters.data.sort}
+          switchChecked={resources.filters.data.is_active}
           onSwitch={toggleVisible}
         />
         <div className='features'>
-          <ActiveFiltersTags filters={filters}
+          <ActiveFiltersTags filters={resources.filters.data}
                              onRemoveCategory={handleRemoveCategory}
-                             onRemoveMachine={(m) => handleMachinesFilterUpdate(filters.machines.filter(machine => machine !== m))}
+                             onRemoveMachine={(m) => handleMachinesFilterUpdate(resources.filters.data.machines.filter(machine => machine !== m))}
                              onRemoveKeyword={() => handleKeywordFilterUpdate([])}
                              onRemoveStock={() => handleStockFilterUpdate({ stock_type: 'internal', stock_to: 0, stock_from: 0 })} />
         </div>
@@ -252,12 +266,12 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
   );
 };
 
-const ProductsWrapper: React.FC<ProductsProps> = ({ onSuccess, onError }) => {
+const ProductsWrapper: React.FC<ProductsProps> = (props) => {
   return (
     <Loader>
-      <Products onSuccess={onSuccess} onError={onError} />
+      <Products {...props} />
     </Loader>
   );
 };
 
-Application.Components.component('products', react2angular(ProductsWrapper, ['onSuccess', 'onError']));
+Application.Components.component('products', react2angular(ProductsWrapper, ['onSuccess', 'onError', 'uiRouter']));

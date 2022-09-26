@@ -1,7 +1,8 @@
 import { ProductCategory } from '../models/product-category';
 import {
+  initialFilters,
   ProductIndexFilter,
-  ProductIndexFilterIds, ProductIndexFilterUrl,
+  ProductIndexFilterIds, ProductIndexFilterUrl, ProductResourcesFetching,
   stockMovementInReasons,
   stockMovementOutReasons,
   StockMovementReason
@@ -9,6 +10,9 @@ import {
 import { Machine } from '../models/machine';
 import { StateParams } from '@uirouter/angularjs';
 import ParsingLib from './parsing';
+import ProductCategoryAPI from '../api/product-category';
+import MachineAPI from '../api/machine';
+import { Updater } from 'use-immer';
 
 export default class ProductLib {
   /**
@@ -120,6 +124,7 @@ export default class ProductLib {
     return {
       ...filters,
       machines: filters.machines?.map(m => m.slug),
+      categories: filters.categories?.map(c => c.slug),
       category,
       categoryTypeUrl
     };
@@ -129,16 +134,19 @@ export default class ProductLib {
    * Parse the provided URL and return a ready-to-use filter object
    */
   static readFiltersFromUrl = (params: StateParams, machines: Array<Machine>, categories: Array<ProductCategory>): ProductIndexFilter => {
-    const res: ProductIndexFilter = { ...initFilters };
+    const res: ProductIndexFilter = { ...initialFilters };
     for (const key in params) {
       if (['#', 'categoryTypeUrl'].includes(key) || !Object.prototype.hasOwnProperty.call(params, key)) continue;
 
-      const value = ParsingLib.parse(params[key]) || initFilters[key];
+      const value = ParsingLib.parse(params[key]) || initialFilters[key];
       switch (key) {
         case 'category':
           const parents = categories?.filter(c => (value as Array<string>)?.includes(c.slug));
           // we may also add to the selection children categories
           res.categories = [...parents, ...categories?.filter(c => parents.map(c => c.id).includes(c.parent_id))];
+          break;
+        case 'categories':
+          res.categories = [...categories?.filter(c => (value as Array<string>)?.includes(c.slug))];
           break;
         case 'machines':
           res.machines = machines?.filter(m => (value as Array<string>)?.includes(m.slug));
@@ -149,16 +157,41 @@ export default class ProductLib {
     }
     return res;
   };
-}
 
-export const initFilters: ProductIndexFilter = {
-  categories: [],
-  keywords: [],
-  machines: [],
-  is_active: false,
-  stock_type: 'internal',
-  stock_from: 0,
-  stock_to: 0,
-  page: 1,
-  sort: ''
-};
+  /**
+   * Fetch the initial ressources needed to initialise the store and its filters (categories and machines)
+   */
+  static fetchInitialResources = (setResources: Updater<ProductResourcesFetching>, onError: (message: string) => void, onProductCategoryFetched?: (data: Array<ProductCategory>) => void) => {
+    ProductCategoryAPI.index().then(data => {
+      setResources(draft => {
+        return { ...draft, categories: { data: ProductLib.sortCategories(data), ready: true } };
+      });
+      if (typeof onProductCategoryFetched === 'function') onProductCategoryFetched(data);
+    }).catch(error => {
+      onError(error);
+    });
+    MachineAPI.index({ disabled: false }).then(data => {
+      setResources(draft => {
+        return { ...draft, machines: { data, ready: true } };
+      });
+    }).catch(onError);
+  };
+
+  /**
+   * Update the given filter in memory with the new provided value
+   */
+  static updateFilter = (setResources: Updater<ProductResourcesFetching>, key: keyof ProductIndexFilter, value: unknown): void => {
+    setResources(draft => {
+      return {
+        ...draft,
+        filters: {
+          ...draft.filters,
+          data: {
+            ...draft.filters.data,
+            [key]: value
+          }
+        }
+      };
+    });
+  };
+}

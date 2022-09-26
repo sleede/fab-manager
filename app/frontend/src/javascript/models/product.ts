@@ -1,5 +1,5 @@
 import { TDateISO } from '../typings/date-iso';
-import { ApiFilter, PaginatedIndex } from './api';
+import { ApiFilter, ApiResource, PaginatedIndex } from './api';
 import { ProductCategory } from './product-category';
 import { Machine } from './machine';
 
@@ -26,7 +26,41 @@ export interface ProductIndexFilterUrl extends Omit<Omit<ProductIndexFilter, 'ca
   categoryTypeUrl?: 'c' | 'sc',
   category?: string,
   machines?: Array<string>,
+  categories?: Array<string>,
 }
+
+export interface ProductResourcesFetching {
+  machines: ApiResource<Array<Machine>>,
+  categories: ApiResource<Array<ProductCategory>>,
+  filters: ApiResource<ProductIndexFilter>
+}
+
+export const initialFilters: ProductIndexFilter = {
+  categories: [],
+  keywords: [],
+  machines: [],
+  is_active: false,
+  stock_type: 'internal',
+  stock_from: 0,
+  stock_to: 0,
+  page: 1,
+  sort: ''
+};
+
+export const initialResources: ProductResourcesFetching = {
+  machines: {
+    data: [],
+    ready: false
+  },
+  categories: {
+    data: [],
+    ready: false
+  },
+  filters: {
+    data: initialFilters,
+    ready: false
+  }
+};
 
 export type StockType = 'internal' | 'external' | 'all';
 

@@ -4,7 +4,7 @@ Application.Controllers.controller('StoreController', ['$scope', 'CSRF', 'growl'
   function ($scope, CSRF, growl, $uiRouter) {
     /* PUBLIC SCOPE */
 
-    // the following item is used by the Store component to store the filters in te URL
+    // the following item is used by the Store component to store the filters in the URL
     $scope.uiRouter = $uiRouter;
 
     /**
