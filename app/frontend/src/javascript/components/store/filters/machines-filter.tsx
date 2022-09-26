@@ -21,7 +21,7 @@ interface MachinesFilterProps {
 export const MachinesFilter: React.FC<MachinesFilterProps> = ({ allMachines, onError, onApplyFilters, currentFilters, openDefault = false, instantUpdate = false }) => {
   const { t } = useTranslation('admin');
 
-  const [machines, setMachines] = useState<Machine[]>(allMachines);
+  const [machines, setMachines] = useState<Machine[]>(allMachines || []);
   const [openedAccordion, setOpenedAccordion] = useState<boolean>(openDefault);
   const [selectedMachines, setSelectedMachines] = useState<Machine[]>(currentFilters || []);
 
