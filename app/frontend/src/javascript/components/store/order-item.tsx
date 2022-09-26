@@ -36,7 +36,7 @@ export const OrderItem: React.FC<OrderItemProps> = ({ order, currentUser }) => {
 
   return (
     <div className='order-item'>
-      <p className="ref">{order.reference}</p>
+      <div className="ref">{order.reference}</div>
       <div>
         <FabStateLabel status={OrderLib.statusColor(order)} background>
           {t(`app.shared.store.order_item.state.${OrderLib.statusText(order)}`)}
@@ -50,7 +50,7 @@ export const OrderItem: React.FC<OrderItemProps> = ({ order, currentUser }) => {
       }
       <div className="date">
         <span>{t('app.shared.store.order_item.created_at')}</span>
-        <p>{FormatLib.date(order.created_at)}
+        <div>{FormatLib.date(order.created_at)}
           <span className="fab-tooltip">
             <span className="trigger"><ArrowClockwise size={16} weight="light" /></span>
             <div className="content">
@@ -58,7 +58,7 @@ export const OrderItem: React.FC<OrderItemProps> = ({ order, currentUser }) => {
               {FormatLib.date(order.updated_at)}
             </div>
           </span>
-        </p>
+        </div>
       </div>
       <div className='price'>
         <span>{t('app.shared.store.order_item.total')}</span>
