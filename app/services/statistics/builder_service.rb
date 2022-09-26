@@ -2,6 +2,8 @@
 
 # This will generate statistics indicators. Those will be saved in the ElasticSearch database
 class Statistics::BuilderService
+  include Statistics::Concerns::HelpersConcern
+  
   class << self
     def generate_statistic(options = default_options)
       # remove data exists
