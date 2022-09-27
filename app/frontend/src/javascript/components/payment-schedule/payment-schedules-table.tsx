@@ -208,12 +208,12 @@ const PaymentSchedulesTable: React.FC<PaymentSchedulesTableProps> = ({ paymentSc
         </StripeElements>
       );
     case 'payzen':
+    case null:
       return (
         <div>
           {renderPaymentSchedulesTable()}
         </div>
       );
-    case null:
     default:
       console.error(`[PaymentSchedulesTable] Unimplemented gateway: ${gateway.value}`);
       return <div />;

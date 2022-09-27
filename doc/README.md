@@ -14,7 +14,7 @@
 
 ### User's manual
 The following guide describes what you can do and how to use Fab-manager.
- - [Français](fr/guide_utilisation_fab_manager_v5.0.pdf)
+ - [Français](http://guide-fr.fab.mn/)
 
 ### System administrator
 The following guides are designed for the people that perform software maintenance.
