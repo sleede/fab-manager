@@ -41,7 +41,7 @@
           margin: 0;
           @include text-base(600);
         }
-        .min {
+        .min,.error {
           margin-top: 0.8rem;
           color: var(--alert);
           text-transform: none;
@@ -132,6 +132,9 @@
           color: var(--main);
           text-transform: uppercase;
         }
+      }
+      &.error {
+        border-color: var(--alert);
       }
     }
   }

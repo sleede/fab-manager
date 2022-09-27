@@ -58,7 +58,8 @@ class Orders::OrderService
 
     def item_amount_not_equal?(order)
       order.order_items.each do |item|
-        return false if item.amount != item.orderable.amount
+        orderable_amount = item.orderable.amount || 0
+        return false if item.amount != orderable_amount
       end
       true
     end

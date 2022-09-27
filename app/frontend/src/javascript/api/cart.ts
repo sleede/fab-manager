@@ -1,6 +1,6 @@
 import apiClient from './clients/api-client';
 import { AxiosResponse } from 'axios';
-import { Order } from '../models/order';
+import { Order, OrderErrors } from '../models/order';
 
 export default class CartAPI {
   static async create (token?: string): Promise<Order> {
@@ -25,6 +25,16 @@ export default class CartAPI {
 
   static async setOffer (order: Order, orderableId: number, isOffered: boolean): Promise<Order> {
     const res: AxiosResponse<Order> = await apiClient.put('/api/cart/set_offer', { order_token: order.token, orderable_id: orderableId, is_offered: isOffered });
+    return res?.data;
+  }
+
+  static async refreshItem (order: Order, orderableId: number): Promise<Order> {
+    const res: AxiosResponse<Order> = await apiClient.put('/api/cart/refresh_item', { order_token: order.token, orderable_id: orderableId });
+    return res?.data;
+  }
+
+  static async validate (order: Order): Promise<OrderErrors> {
+    const res: AxiosResponse<OrderErrors> = await apiClient.post('/api/cart/validate', { order_token: order.token });
     return res?.data;
   }
 }

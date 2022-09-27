@@ -162,6 +162,8 @@ Rails.application.routes.draw do
       put 'remove_item', on: :collection
       put 'set_quantity', on: :collection
       put 'set_offer', on: :collection
+      put 'refresh_item', on: :collection
+      post 'validate', on: :collection
     end
     resources :checkout, only: %i[] do
       post 'payment', on: :collection
