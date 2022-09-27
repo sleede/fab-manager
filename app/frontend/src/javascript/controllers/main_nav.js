@@ -89,12 +89,6 @@ Application.Controllers.controller('MainNavController', ['$scope', 'settingsProm
       linkIcon: 'cogs',
       authorizedRoles: ['admin', 'manager']
     },
-    {
-      state: 'app.admin.store.products',
-      linkText: 'app.public.common.manage_the_store',
-      linkIcon: 'cart-plus',
-      authorizedRoles: ['admin', 'manager']
-    },
     $scope.$root.modules.trainings && {
       state: 'app.admin.trainings',
       linkText: 'app.public.common.trainings_monitoring',
@@ -110,6 +104,12 @@ Application.Controllers.controller('MainNavController', ['$scope', 'settingsProm
       state: 'app.admin.events',
       linkText: 'app.public.common.manage_the_events',
       linkIcon: 'tags',
+      authorizedRoles: ['admin', 'manager']
+    },
+    {
+      state: 'app.admin.store.products',
+      linkText: 'app.public.common.manage_the_store',
+      linkIcon: 'cart-plus',
       authorizedRoles: ['admin', 'manager']
     },
     { class: 'menu-spacer' },
