@@ -92,7 +92,7 @@ Group.create! name: I18n.t('group.admins'), slug: 'admins' unless Group.find_by(
 # Create the default admin if none exists yet
 if Role.where(name: 'admin').joins(:users).count.zero?
   admin = User.new(username: 'admin', email: ENV.fetch('ADMIN_EMAIL'), password: ENV.fetch('ADMIN_PASSWORD'),
-                   password_confirmation: Rails.application.secrets.admin_password, group_id: Group.find_by(slug: 'admins').id,
+                   group_id: Group.find_by(slug: 'admins').id,
                    profile_attributes: { first_name: 'admin', last_name: 'admin', phone: '0123456789' },
                    statistic_profile_attributes: { gender: true, birthday: Date.current })
   admin.add_role 'admin'
