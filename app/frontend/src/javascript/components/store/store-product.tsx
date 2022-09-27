@@ -26,7 +26,7 @@ interface StoreProductProps {
 }
 
 /**
- * This component shows a product
+ * This component shows the details of a single product, in full page
  */
 export const StoreProduct: React.FC<StoreProductProps> = ({ productSlug, currentUser, onSuccess, onError }) => {
   const { t } = useTranslation('public');
@@ -129,7 +129,7 @@ export const StoreProduct: React.FC<StoreProductProps> = ({ productSlug, current
   if (product) {
     return (
       <div className={`store-product ${statusColor(product) || ''}`}>
-        <span className='ref'>ref: {product.sku}</span>
+        {product.sku && <span className='ref'>{t('app.public.store_product.ref', { REF: product.sku })}</span>}
         <h2 className='name'>{product.name}</h2>
         <div className='gallery'>
           <div className='main'>
