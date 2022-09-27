@@ -400,18 +400,25 @@ en:
             price_low: "Price: low to high"
             price_high: "Price: high to low"
       store_product:
+        ref: "ref: {REF}"
+        add_to_cart_success: "Product added to the cart."
         unexpected_error_occurred: "An unexpected error occurred. Please try again later."
         show_more: "Display more"
         show_less: "Display less"
         documentation: "Documentation"
-      store_product_item:
+        minimum_purchase: "Minimum purchase: "
+        add_to_cart: "Add to cart"
+      stock_status:
         available: "Available"
         limited_stock: "Limited stock"
         out_of_stock: "Out of stock"
+      store_product_item:
         minimum_purchase: "Minimum purchase: "
         add: "Add"
         add_to_cart: "Add to cart"
-        unit: "unit"
+      product_price:
+        per_unit: "/ unit"
+        free: "Free"
       cart:
         my_cart: "My Cart"
       cart_button:

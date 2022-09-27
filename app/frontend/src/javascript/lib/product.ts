@@ -1,6 +1,6 @@
 import { ProductCategory } from '../models/product-category';
 import {
-  initialFilters,
+  initialFilters, Product,
   ProductIndexFilter,
   ProductIndexFilterIds, ProductIndexFilterUrl, ProductResourcesFetching,
   stockMovementInReasons,
@@ -38,6 +38,16 @@ export default class ProductLib {
    */
   static stockMovementReasonTrKey = (reason: StockMovementReason): string => {
     return `app.admin.store.stock_movement_reason.${reason}`;
+  };
+
+  static stockStatusTrKey = (product: Product): string => {
+    if (product.stock.external === 0) {
+      return 'app.public.stock_status.out_of_stock';
+    }
+    if (product.low_stock_threshold && product.stock.external < product.low_stock_threshold) {
+      return 'app.public.stock_status.limited_stock';
+    }
+    return 'app.public.stock_status.available';
   };
 
   /**

@@ -8,6 +8,7 @@ import { FabStateLabel } from '../base/fab-state-label';
 import CartAPI from '../../api/cart';
 import noImage from '../../../../images/no_image.png';
 import { ProductPrice } from './product-price';
+import ProductLib from '../../lib/product';
 
 interface StoreProductItemProps {
   product: Product,
@@ -62,19 +63,6 @@ export const StoreProductItem: React.FC<StoreProductItemProps> = ({ product, car
     return '';
   };
 
-  /**
-   * Return product's stock status
-   */
-  const productStockStatus = (product: Product) => {
-    if (product.stock.external === 0) {
-      return <span>{t('app.public.store_product_item.out_of_stock')}</span>;
-    }
-    if (product.low_stock_threshold && product.stock.external < product.low_stock_threshold) {
-      return <span>{t('app.public.store_product_item.limited_stock')}</span>;
-    }
-    return <span>{t('app.public.store_product_item.available')}</span>;
-  };
-
   return (
     <div className={`store-product-item ${statusColor(product)}`} onClick={() => showProduct(product)}>
       <div className="picture">
@@ -86,7 +74,7 @@ export const StoreProductItem: React.FC<StoreProductItemProps> = ({ product, car
       }
       <ProductPrice product={product} className="price" />
       <FabStateLabel status={statusColor(product)}>
-        {productStockStatus(product)}
+        <span>{t(ProductLib.stockStatusTrKey(product))}</span>
       </FabStateLabel>
       {product.stock.external > (product.quantity_min || 1) &&
         <FabButton icon={<i className="fas fa-cart-arrow-down" />} className="main-action-btn" onClick={addProductToCart}>

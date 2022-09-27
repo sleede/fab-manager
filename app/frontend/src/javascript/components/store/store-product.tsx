@@ -1,4 +1,3 @@
-/* eslint-disable fabmanager/scoped-translation */
 import React, { useEffect, useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
@@ -15,6 +14,7 @@ import useCart from '../../hooks/use-cart';
 import { FilePdf, Minus, Plus } from 'phosphor-react';
 import { FabStateLabel } from '../base/fab-state-label';
 import { ProductPrice } from './product-price';
+import ProductLib from '../../lib/product';
 
 declare const Application: IApplication;
 
@@ -77,19 +77,6 @@ export const StoreProduct: React.FC<StoreProductProps> = ({ productSlug, current
   };
 
   /**
-   * Return product's stock status
-   */
-  const productStockStatus = (product: Product) => {
-    if (product.stock.external < (product.quantity_min || 1)) {
-      return <span>{t('app.public.store_product_item.out_of_stock')}</span>;
-    }
-    if (product.low_stock_threshold && product.stock.external < product.low_stock_threshold) {
-      return <span>{t('app.public.store_product_item.limited_stock')}</span>;
-    }
-    return <span>{t('app.public.store_product_item.available')}</span>;
-  };
-
-  /**
    * Update product count
    */
   const setCount = (type: 'add' | 'remove') => {
@@ -121,7 +108,7 @@ export const StoreProduct: React.FC<StoreProductProps> = ({ productSlug, current
     if (toCartCount <= product.stock.external) {
       CartAPI.addItem(cart, product.id, toCartCount).then(data => {
         setCart(data);
-        onSuccess(t('app.public.store.add_to_cart_success'));
+        onSuccess(t('app.public.store_product.add_to_cart_success'));
       }).catch(onError);
     }
   };
@@ -177,13 +164,13 @@ export const StoreProduct: React.FC<StoreProductProps> = ({ productSlug, current
 
         <aside>
           <FabStateLabel status={statusColor(product)}>
-            {productStockStatus(product)}
+            <span>{t(ProductLib.stockStatusTrKey(product))}</span>
           </FabStateLabel>
           <ProductPrice product={product} className="price" />
           {product.stock.external > (product.quantity_min || 1) &&
             <div className='to-cart'>
               {product.quantity_min > 1 &&
-                <span className='min'>{t('app.public.store_product_item.minimum_purchase')}{product.quantity_min}</span>
+                <span className='min'>{t('app.public.store_product.minimum_purchase')}{product.quantity_min}</span>
               }
               <FabButton onClick={() => setCount('remove')} icon={<Minus size={16} />} className="minus" />
               <input type="number"
@@ -194,7 +181,7 @@ export const StoreProduct: React.FC<StoreProductProps> = ({ productSlug, current
               <FabButton onClick={() => setCount('add')} icon={<Plus size={16} />} className="plus" />
               <FabButton onClick={() => addToCart()} icon={<i className="fas fa-cart-arrow-down" />}
                 className="main-action-btn">
-                {t('app.public.store_product_item.add_to_cart')}
+                {t('app.public.store_product.add_to_cart')}
               </FabButton>
             </div>
           }
