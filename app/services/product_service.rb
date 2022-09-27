@@ -111,7 +111,7 @@ class ProductService
     end
 
     def filter_by_stock(products, filters, operator)
-      return products if filters[:stock_type] == 'internal' && !operator.privileged?
+      return products if filters[:stock_type] == 'internal' && !operator&.privileged?
 
       if filters[:stock_from].to_i.positive?
         products = products.where('(stock ->> ?)::int >= ?', filters[:stock_type], filters[:stock_from])
