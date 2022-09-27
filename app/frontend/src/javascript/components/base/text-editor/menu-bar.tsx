@@ -75,8 +75,14 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, heading, bulletList, b
   // Support keyboard "Enter" key event to validate
   const handleEnter = (evt) => {
     if (evt.keyCode === 13) {
-      setLink();
+      setLink(true);
     }
+  };
+
+  // prevent form submition propagation to parent forms
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
   };
 
   // Update the selected link
@@ -235,7 +241,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, heading, bulletList, b
         }
       </div>
 
-      <div ref={ref} className={`fab-text-editor-subMenu ${submenu ? 'is-active' : ''}`}>
+      <form ref={ref} className={`fab-text-editor-subMenu ${submenu ? 'is-active' : ''}`} onSubmit={handleSubmit}>
         { submenu === 'link' &&
           (<>
             <h6>{t('app.shared.text_editor.menu_bar.add_link')}</h6>
@@ -284,7 +290,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, heading, bulletList, b
             </div>
           </>)
         }
-      </div>
+      </form>
     </>
   );
 };
