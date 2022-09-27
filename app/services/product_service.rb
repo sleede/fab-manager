@@ -30,8 +30,6 @@ class ProductService
       if amount.present?
         v = amount.to_f
 
-        return nil if v.zero?
-
         return v * 100
       end
       nil

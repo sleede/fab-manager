@@ -95,6 +95,7 @@ export interface Product {
   description?: string,
   is_active: boolean,
   product_category_id?: number,
+  is_active_price?: boolean,
   amount?: number,
   quantity_min?: number,
   stock: Stock,

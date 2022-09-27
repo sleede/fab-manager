@@ -10,6 +10,10 @@ en:
     week:
       one: 'one week'
       other: '%{count} weeks'
+  activerecord:
+    attributes:
+      product:
+        amount: "The price"
   errors:
     #CarrierWave
     messages:
@@ -38,6 +42,7 @@ en:
       invalid_duration: "The allowed duration must be between 1 day and 1 year. Your period is %{DAYS} days long."
       must_be_in_the_past: "The period must be strictly prior to today's date."
       registration_disabled: "Registration is disabled"
+      undefined_in_store: "must be defined to make the product available in the store"
   apipie:
     api_documentation: "API Documentation"
     code: "HTTP code"

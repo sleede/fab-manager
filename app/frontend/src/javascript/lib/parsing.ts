@@ -14,11 +14,25 @@ export default class ParsingLib {
       for (const item of value) {
         parsedValue.push(ParsingLib.parse(item));
       }
-    } else if (['true', 'false'].includes(value)) {
+    } else if (ParsingLib.isBoolean(value)) {
       parsedValue = (value === 'true');
-    } else if (parseInt(value, 10).toString() === value) {
+    } else if (ParsingLib.isInteger(value)) {
       parsedValue = parseInt(value, 10);
     }
     return parsedValue;
+  };
+
+  /**
+   * Check if the provided string represents an integer
+   */
+  static isInteger = (value: string): boolean => {
+    return (parseInt(value, 10).toString() === value);
+  };
+
+  /**
+   * Check if the provided string represents a boolean value
+   */
+  static isBoolean = (value: string): boolean => {
+    return ['true', 'false'].includes(value);
   };
 }

@@ -50,7 +50,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
 
   const { handleSubmit, register, control, formState, setValue, reset } = useForm<Product>({ defaultValues: { ...product } });
   const output = useWatch<Product>({ control });
-  const [isActivePrice, setIsActivePrice] = useState<boolean>(product.id && _.isFinite(product.amount) && product.amount > 0);
+  const [isActivePrice, setIsActivePrice] = useState<boolean>(product.id && _.isFinite(product.amount));
   const [productCategories, setProductCategories] = useState<selectOption[]>([]);
   const [machines, setMachines] = useState<checklistOption[]>([]);
   const [stockTab, setStockTab] = useState<boolean>(false);
@@ -92,11 +92,22 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
   };
 
   /**
+   * Callback triggered when the user toggles the visibility of the product in the store.
+   */
+  const handleIsActiveChanged = (value: boolean): void => {
+    if (value) {
+      setValue('is_active_price', true);
+      setIsActivePrice(true);
+    }
+  };
+
+  /**
    * Callback triggered when is active price has changed.
    */
   const toggleIsActivePrice = (value: boolean) => {
     if (!value) {
       setValue('amount', null);
+      setValue('is_active', false);
     }
     setIsActivePrice(value);
   };
@@ -262,6 +273,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
                           formState={formState}
                           label={t('app.admin.store.product_form.is_show_in_store')}
                           tooltip={t('app.admin.store.product_form.active_price_info')}
+                          onChange={handleIsActiveChanged}
                           className='span-3' />
             </div>
 
@@ -280,10 +292,11 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
                 <FormInput id="amount"
                             type="number"
                             register={register}
-                            rules={{ required: true, min: 0 }}
+                            rules={{ required: isActivePrice, min: 0 }}
                             step={0.01}
                             formState={formState}
-                            label={t('app.admin.store.product_form.price')} />
+                            label={t('app.admin.store.product_form.price')}
+                            nullable />
                 <FormInput id="quantity_min"
                             type="number"
                             rules={{ required: true }}

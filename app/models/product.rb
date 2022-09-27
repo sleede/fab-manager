@@ -23,6 +23,7 @@ class Product < ApplicationRecord
   validates :name, :slug, presence: true
   validates :slug, uniqueness: true
   validates :amount, numericality: { greater_than_or_equal_to: 0, allow_nil: true }
+  validates :amount, exclusion: { in: [nil], message: I18n.t('.errors.messages.undefined_in_store') }, if: -> { is_active }
 
   scope :active, -> { where(is_active: true) }
 
