@@ -9,6 +9,7 @@ json.data @products[:data] do |product|
     json.id f.id
     json.attachment_name f.attachment_identifier
     json.attachment_url f.attachment_url
+    json.thumb_attachment_url f.attachment.thumb.url
     json.is_main f.is_main
   end
 end

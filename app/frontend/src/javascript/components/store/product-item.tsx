@@ -23,9 +23,7 @@ export const ProductItem: React.FC<ProductItemProps> = ({ product, onEdit, onDel
    * Get the main image
    */
   const thumbnail = () => {
-    const image = product.product_images_attributes
-      .find(att => att.is_main);
-    return image;
+    return product.product_images_attributes.find(att => att.is_main);
   };
   /**
    * Init the process of editing the given product
@@ -60,8 +58,7 @@ export const ProductItem: React.FC<ProductItemProps> = ({ product, onEdit, onDel
   return (
     <div className={`product-item ${statusColor(product)}`}>
       <div className='itemInfo'>
-        {/* TODO: image size version ? */}
-        <img src={thumbnail()?.attachment_url || noImage} alt='' className='itemInfo-thumbnail' />
+        <img src={thumbnail()?.thumb_attachment_url || noImage} alt='' className='itemInfo-thumbnail' />
         <p className="itemInfo-name">{product.name}</p>
       </div>
       <div className='details'>

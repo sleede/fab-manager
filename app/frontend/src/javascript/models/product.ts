@@ -116,6 +116,7 @@ export interface Product {
     attachment_files?: FileList,
     attachment_name?: string,
     attachment_url?: string,
+    thumb_attachment_url?: string,
     _destroy?: boolean,
     is_main?: boolean
   }>,

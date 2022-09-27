@@ -141,7 +141,7 @@ export const StoreProduct: React.FC<StoreProductProps> = ({ productSlug, current
             <div className='thumbnails'>
               {product.product_images_attributes.map(i => (
                 <div key={i.id} className={`picture ${i.id === showImage ? 'is-active' : ''}`}>
-                  <img alt='' onClick={() => setShowImage(i.id)} src={i.attachment_url} />
+                  <img alt='' onClick={() => setShowImage(i.id)} src={i.thumb_attachment_url} />
                 </div>
               ))}
             </div>
