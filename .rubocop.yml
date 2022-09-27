@@ -34,3 +34,5 @@ Style/AndOr:
   EnforcedStyle: conditionals
 Style/FormatString:
   EnforcedStyle: sprintf
+Style/FormatStringToken:
+  EnforcedStyle: template

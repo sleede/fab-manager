@@ -129,7 +129,8 @@ export const modulesSettings = [
   'machines_module',
   'online_payment_module',
   'public_agenda_module',
-  'invoicing_module'
+  'invoicing_module',
+  'store_module'
 ] as const;
 
 export const stripeSettings = [

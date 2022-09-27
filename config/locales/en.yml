@@ -600,3 +600,4 @@ en:
     machines_module: "Machines module"
     user_change_group: "Allow users to change their group"
     show_username_in_admin_list: "Show the username in the admin's members list"
+    store_module: "Store module"

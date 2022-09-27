@@ -1,6 +1,8 @@
 # Changelog Fab-manager
 
 - Script to download translations from Crowdin
+- Fablab's store module
+- [TODO DEPLOY] `rails db:seed`
 
 ## v5.4.17 2022 September 06
 

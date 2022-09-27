@@ -453,6 +453,15 @@
                        class-name="'m-l'"></boolean-setting>
     </div>
     <div class="row">
+      <h3 class="m-l" translate>{{ 'app.admin.settings.store' }}</h3>
+      <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.store_info_html' | translate"></p>
+      <boolean-setting name="'store_module'"
+                       label="'app.admin.settings.enable_store' | translate"
+                       on-success="onSuccess"
+                       on-error="onError"
+                       class-name="'m-l'"></boolean-setting>
+    </div>
+    <div class="row">
       <h3 class="m-l" translate>{{ 'app.admin.settings.invoicing' }}</h3>
       <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.invoicing_info_html' | translate"></p>
       <boolean-setting name="'invoicing_module'"

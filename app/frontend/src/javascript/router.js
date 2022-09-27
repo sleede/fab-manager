@@ -27,7 +27,7 @@ angular.module('application.router', ['ui.router'])
           logoFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'logo-file' }).$promise; }],
           logoBlackFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'logo-black-file' }).$promise; }],
           sharedTranslations: ['Translations', function (Translations) { return Translations.query(['app.shared', 'app.public.common']).$promise; }],
-          modulesPromise: ['Setting', function (Setting) { return Setting.query({ names: "['machines_module', 'spaces_module', 'plans_module', 'invoicing_module', 'wallet_module', 'statistics_module', 'trainings_module', 'public_agenda_module']" }).$promise; }],
+          modulesPromise: ['Setting', function (Setting) { return Setting.query({ names: "['machines_module', 'spaces_module', 'plans_module', 'invoicing_module', 'wallet_module', 'statistics_module', 'trainings_module', 'public_agenda_module', 'store_module']" }).$promise; }],
           settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['public_registrations']" }).$promise; }]
         },
         onEnter: ['$rootScope', 'logoFile', 'logoBlackFile', 'modulesPromise', 'CSRF', function ($rootScope, logoFile, logoBlackFile, modulesPromise, CSRF) {
@@ -41,6 +41,7 @@ angular.module('application.router', ['ui.router'])
             spaces: (modulesPromise.spaces_module === 'true'),
             plans: (modulesPromise.plans_module === 'true'),
             trainings: (modulesPromise.trainings_module === 'true'),
+            store: (modulesPromise.store_module === 'true'),
             invoicing: (modulesPromise.invoicing_module === 'true'),
             wallet: (modulesPromise.wallet_module === 'true'),
             publicAgenda: (modulesPromise.public_agenda_module === 'true'),
@@ -346,6 +347,7 @@ angular.module('application.router', ['ui.router'])
       // machines
       .state('app.public.machines_list', {
         url: '/machines',
+        abstract: !Fablab.machinesModule,
         views: {
           'main@': {
             templateUrl: '/machines/index.html',
@@ -359,6 +361,7 @@ angular.module('application.router', ['ui.router'])
       })
       .state('app.admin.machines_new', {
         url: '/machines/new',
+        abstract: !Fablab.machinesModule,
         views: {
           'main@': {
             templateUrl: '/machines/new.html',
@@ -368,6 +371,7 @@ angular.module('application.router', ['ui.router'])
       })
       .state('app.public.machines_show', {
         url: '/machines/:id',
+        abstract: !Fablab.machinesModule,
         views: {
           'main@': {
             templateUrl: '/machines/show.html',
@@ -380,6 +384,7 @@ angular.module('application.router', ['ui.router'])
       })
       .state('app.logged.machines_reserve', {
         url: '/machines/:id/reserve',
+        abstract: !Fablab.machinesModule,
         views: {
           'main@': {
             templateUrl: '/machines/reserve.html',
@@ -401,6 +406,7 @@ angular.module('application.router', ['ui.router'])
       })
       .state('app.admin.machines_edit', {
         url: '/machines/:id/edit',
+        abstract: !Fablab.machinesModule,
         views: {
           'main@': {
             templateUrl: '/machines/edit.html',
@@ -621,6 +627,7 @@ angular.module('application.router', ['ui.router'])
       // store
       .state('app.public.store', {
         url: '/store/:categoryTypeUrl/:category?{machines:string}{keywords:string}{is_active:string}{page:string}{sort:string}',
+        abstract: !Fablab.storeModule,
         views: {
           'main@': {
             templateUrl: '/store/index.html',
@@ -641,6 +648,7 @@ angular.module('application.router', ['ui.router'])
       // show product
       .state('app.public.product_show', {
         url: '/store/p/:slug',
+        abstract: !Fablab.storeModule,
         views: {
           'main@': {
             templateUrl: '/products/show.html',
@@ -652,6 +660,7 @@ angular.module('application.router', ['ui.router'])
       // cart
       .state('app.public.store_cart', {
         url: '/store/cart',
+        abstract: !Fablab.storeModule,
         views: {
           'main@': {
             templateUrl: '/cart/index.html',
@@ -934,6 +943,7 @@ angular.module('application.router', ['ui.router'])
       // show order
       .state('app.admin.order_show', {
         url: '/admin/store/orders/:id',
+        abstract: !Fablab.storeModule,
         views: {
           'main@': {
             templateUrl: '/admin/orders/show.html',
@@ -1164,7 +1174,8 @@ angular.module('application.router', ['ui.router'])
                      "'link_name', 'home_content', 'home_css', 'phone_required', 'upcoming_events_shown', 'public_agenda_module'," +
                      "'renew_pack_threshold', 'pack_only_for_subscription', 'overlapping_categories', 'public_registrations'," +
                      "'extended_prices_in_same_day', 'recaptcha_site_key', 'recaptcha_secret_key', 'user_validation_required', " +
-                     "'user_validation_required_list', 'machines_module', 'user_change_group', 'show_username_in_admin_list']"
+                     "'user_validation_required_list', 'machines_module', 'user_change_group', 'show_username_in_admin_list', " +
+                     "'store_module']"
             }).$promise;
           }],
           privacyDraftsPromise: ['Setting', function (Setting) { return Setting.get({ name: 'privacy_draft', history: true }).$promise; }],
@@ -1182,6 +1193,7 @@ angular.module('application.router', ['ui.router'])
 
       .state('app.admin.store.settings', {
         url: '/settings',
+        abstract: !Fablab.storeModule,
         views: {
           'main@': {
             templateUrl: '/admin/store/index.html',
@@ -1192,6 +1204,7 @@ angular.module('application.router', ['ui.router'])
 
       .state('app.admin.store.products', {
         url: '/products?{categories:string}{machines:string}{keywords:string}{stock_type:string}{stock_from:string}{stock_to:string}{is_active:string}{page:string}{sort:string}',
+        abstract: !Fablab.storeModule,
         views: {
           'main@': {
             templateUrl: '/admin/store/index.html',
@@ -1213,6 +1226,7 @@ angular.module('application.router', ['ui.router'])
 
       .state('app.admin.store.products_new', {
         url: '/products/new',
+        abstract: !Fablab.storeModule,
         views: {
           'main@': {
             templateUrl: '/admin/store/product_new.html',
@@ -1223,6 +1237,7 @@ angular.module('application.router', ['ui.router'])
 
       .state('app.admin.store.products_edit', {
         url: '/products/:id/edit',
+        abstract: !Fablab.storeModule,
         views: {
           'main@': {
             templateUrl: '/admin/store/product_edit.html',
@@ -1233,6 +1248,7 @@ angular.module('application.router', ['ui.router'])
 
       .state('app.admin.store.categories', {
         url: '/categories',
+        abstract: !Fablab.storeModule,
         views: {
           'main@': {
             templateUrl: '/admin/store/index.html',
@@ -1243,6 +1259,7 @@ angular.module('application.router', ['ui.router'])
 
       .state('app.admin.store.orders', {
         url: '/orders',
+        abstract: !Fablab.storeModule,
         views: {
           'main@': {
             templateUrl: '/admin/store/index.html',

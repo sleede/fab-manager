@@ -53,7 +53,7 @@ Application.Controllers.controller('MainNavController', ['$scope', 'settingsProm
       linkIcon: 'tags',
       class: 'reserve-event-link'
     },
-    {
+    $scope.$root.modules.store && {
       state: 'app.public.store',
       linkText: 'app.public.common.fablab_store',
       linkIcon: 'cart-plus',
@@ -106,7 +106,7 @@ Application.Controllers.controller('MainNavController', ['$scope', 'settingsProm
       linkIcon: 'tags',
       authorizedRoles: ['admin', 'manager']
     },
-    {
+    $scope.$root.modules.store && {
       state: 'app.admin.store.products',
       linkText: 'app.public.common.manage_the_store',
       linkIcon: 'cart-plus',
