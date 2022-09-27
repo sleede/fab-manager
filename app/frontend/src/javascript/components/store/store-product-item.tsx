@@ -5,9 +5,9 @@ import { FabButton } from '../base/fab-button';
 import { Product } from '../../models/product';
 import { Order } from '../../models/order';
 import { FabStateLabel } from '../base/fab-state-label';
-import FormatLib from '../../lib/format';
 import CartAPI from '../../api/cart';
 import noImage from '../../../../images/no_image.png';
+import { ProductPrice } from './product-price';
 
 interface StoreProductItemProps {
   product: Product,
@@ -17,7 +17,7 @@ interface StoreProductItemProps {
 }
 
 /**
- * This component shows a product item in store
+ * This component shows a product item "card" in the public store list
  */
 export const StoreProductItem: React.FC<StoreProductItemProps> = ({ product, cart, onSuccessAddProductToCart, onError }) => {
   const { t } = useTranslation('public');
@@ -84,10 +84,7 @@ export const StoreProductItem: React.FC<StoreProductItemProps> = ({ product, car
       {product.quantity_min > 1 &&
         <span className='min'>{t('app.public.store_product_item.minimum_purchase')}{product.quantity_min}</span>
       }
-      <div className='price'>
-        <p>{FormatLib.price(product.amount || 0)}</p>
-        <span>/ {t('app.public.store_product_item.unit')}</span>
-      </div>
+      <ProductPrice product={product} className="price" />
       <FabStateLabel status={statusColor(product)}>
         {productStockStatus(product)}
       </FabStateLabel>

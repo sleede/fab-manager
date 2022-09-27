@@ -1,7 +1,6 @@
 /* eslint-disable fabmanager/scoped-translation */
 import React, { useEffect, useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import FormatLib from '../../lib/format';
 import { react2angular } from 'react2angular';
 import { Loader } from '../base/loader';
 import { IApplication } from '../../models/application';
@@ -15,6 +14,7 @@ import { FabButton } from '../base/fab-button';
 import useCart from '../../hooks/use-cart';
 import { FilePdf, Minus, Plus } from 'phosphor-react';
 import { FabStateLabel } from '../base/fab-state-label';
+import { ProductPrice } from './product-price';
 
 declare const Application: IApplication;
 
@@ -179,10 +179,7 @@ export const StoreProduct: React.FC<StoreProductProps> = ({ productSlug, current
           <FabStateLabel status={statusColor(product)}>
             {productStockStatus(product)}
           </FabStateLabel>
-          <div className='price'>
-            <p>{FormatLib.price(product.amount || 0)} <sup>TTC</sup></p>
-            <span>/ {t('app.public.store_product_item.unit')}</span>
-          </div>
+          <ProductPrice product={product} className="price" />
           {product.stock.external > (product.quantity_min || 1) &&
             <div className='to-cart'>
               {product.quantity_min > 1 &&
