@@ -13,7 +13,7 @@ Metrics/PerceivedComplexity:
 Metrics/AbcSize:
   Max: 45
 Metrics/ClassLength:
-  Max: 200
+  Max: 210
 Metrics/BlockLength:
   Max: 30
   Exclude:
