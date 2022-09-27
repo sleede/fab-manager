@@ -126,7 +126,11 @@ class ProductService
       key ||= 'created_at'
       order ||= 'desc'
 
-      products.order(key => order)
+      if key == 'amount'
+        products.order("COALESCE(amount, 0) #{order.upcase}")
+      else
+        products.order(key => order)
+      end
     end
   end
 end
