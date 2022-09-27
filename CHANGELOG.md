@@ -1,11 +1,14 @@
 # Changelog Fab-manager
 
+## v5.4.20 2022 September 27
+
 - Fix a bug: unable to show the daily view of the public agenda, if it contains trainings or events
 - Fix a bug: plan's categories descriptions are not shown
 - Fix a bug: groups without plans are shown but empty
 - Fix a bug: unable to display the payment schedules management interface
 
 ## v5.4.19 2022 September 13
+
 - Fix a bug: computing the wallet amount to debit ignores the applied coupon
 
 ## v5.4.18 2022 September 12
