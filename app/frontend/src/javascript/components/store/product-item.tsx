@@ -1,11 +1,11 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import FormatLib from '../../lib/format';
 import { FabButton } from '../base/fab-button';
 import { Product } from '../../models/product';
 import { PencilSimple, Trash } from 'phosphor-react';
 import noImage from '../../../../images/no_image.png';
 import { FabStateLabel } from '../base/fab-state-label';
+import { ProductPrice } from './product-price';
 
 interface ProductItemProps {
   product: Product,
@@ -76,10 +76,7 @@ export const ProductItem: React.FC<ProductItemProps> = ({ product, onEdit, onDel
           <span>{t('app.admin.store.product_item.stock.external')}</span>
           <p>{product.stock.external}</p>
         </div>
-        <div className='price'>
-          <p>{FormatLib.price(product.amount || 0)}</p>
-          <span>/ {t('app.admin.store.product_item.unit')}</span>
-        </div>
+        <ProductPrice product={product} className="price" />
       </div>
       <div className='actions'>
         <div className='manage'>

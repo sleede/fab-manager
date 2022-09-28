@@ -18,8 +18,11 @@ export const ProductPrice: React.FC<ProductPriceProps> = ({ product, className }
    * Return the formatted price data
    */
   const renderPrice = (product: Product) => {
-    if ([0, null, undefined].includes(product.amount)) {
+    if (product.amount === 0) {
       return <p>{t('app.public.product_price.free')}</p>;
+    }
+    if ([null, undefined].includes(product.amount)) {
+      return <div/>;
     }
     return <>
       <p>{FormatLib.price(product.amount)}</p>
