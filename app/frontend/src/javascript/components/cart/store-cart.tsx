@@ -37,14 +37,9 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
 
   const { cart, setCart, reloadCart } = useCart(currentUser);
   const [cartErrors, setCartErrors] = useState<OrderErrors>(null);
-  const [itemsQuantity, setItemsQuantity] = useState<{ id: number; quantity: number; }[]>();
   const [paymentModal, setPaymentModal] = useState<boolean>(false);
 
   useEffect(() => {
-    const quantities = cart?.order_items_attributes.map(i => {
-      return { id: i.id, quantity: i.quantity };
-    });
-    setItemsQuantity(quantities);
     if (cart) {
       checkCart();
     }
@@ -78,8 +73,11 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
       })
       .catch(() => onError(t('app.public.store_cart.stock_limit')));
   };
-  /** Increment/decrement product quantity  */
-  const handleInputNumber = (item, direction: 'up' | 'down') => {
+
+  /**
+   * Increment/decrement product quantity
+   */
+  const increaseOrDecreaseProductQuantity = (item, direction: 'up' | 'down') => {
     CartAPI.setQuantity(cart, item.orderable_id, direction === 'up' ? item.quantity + 1 : item.quantity - 1)
       .then(data => {
         setCart(data);
@@ -261,10 +259,10 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
                   onChange={e => changeProductQuantity(e, item)}
                   min={item.quantity_min}
                   max={item.orderable_external_stock}
-                  value={itemsQuantity?.find(i => i.id === item.id).quantity}
+                  value={item.quantity}
                 />
-                <button onClick={() => handleInputNumber(item, 'up')}><CaretUp size={12} weight="fill" /></button>
-                <button onClick={() => handleInputNumber(item, 'down')}><CaretDown size={12} weight="fill" /></button>
+                <button onClick={() => increaseOrDecreaseProductQuantity(item, 'up')}><CaretUp size={12} weight="fill" /></button>
+                <button onClick={() => increaseOrDecreaseProductQuantity(item, 'down')}><CaretDown size={12} weight="fill" /></button>
               </div>
               <div className='total'>
                 <span>{t('app.public.store_cart.total')}</span>
