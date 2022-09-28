@@ -2,6 +2,7 @@
 
 - Script to download translations from Crowdin
 - Fablab's store module
+- Fix a bug: missing translations in PayZen configuration screens
 - [TODO DEPLOY] `rails db:seed`
 
 ## v5.4.17 2022 September 06
