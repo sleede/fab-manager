@@ -434,6 +434,13 @@ en:
         checkout_total: "Cart total"
         checkout_error: "An unexpected error occurred. Please contact the administrator."
         checkout_success: "Purchase confirmed. Thanks!"
+        update_item: "Update"
+        errors:
+          product_not_found: "This product is not available, please remove it in cart."
+          out_of_stock: "This product is out of stock. Please remove this item to before checkout the cart."
+          stock_limit_QUANTITY: "This product has only {QUANTITY} {QUANTITY, plural, =1{unit} other{units}} in stock, please change the quantity of item."
+          quantity_min_QUANTITY: "Minimum number of product was changed to {QUANTITY}, please change the quantity of item."
+          price_changed_PRICE: "The price of product was modified to {PRICE}"
       orders_dashboard:
         heading: "My orders"
         sort:

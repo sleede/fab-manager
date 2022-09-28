@@ -35,7 +35,7 @@ interface StoreCartProps {
 const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, userLogin }) => {
   const { t } = useTranslation('public');
 
-  const { cart, setCart } = useCart(currentUser);
+  const { cart, setCart, reloadCart } = useCart(currentUser);
   const [cartErrors, setCartErrors] = useState<OrderErrors>(null);
   const [itemsQuantity, setItemsQuantity] = useState<{ id: number; quantity: number; }[]>();
   const [paymentModal, setPaymentModal] = useState<boolean>(false);
@@ -45,6 +45,9 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
       return { id: i.id, quantity: i.quantity };
     });
     setItemsQuantity(quantities);
+    if (cart) {
+      checkCart();
+    }
   }, [cart]);
 
   /**
@@ -54,10 +57,14 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
     return (e: React.BaseSyntheticEvent) => {
       e.preventDefault();
       e.stopPropagation();
-      CartAPI.removeItem(cart, item.orderable_id).then(data => {
-        setCart(data);
-        checkCart();
-      }).catch(onError);
+      const errors = getItemErrors(item);
+      if (errors.length === 1 && errors[0].error === 'not_found') {
+        reloadCart().catch(onError);
+      } else {
+        CartAPI.removeItem(cart, item.orderable_id).then(data => {
+          setCart(data);
+        }).catch(onError);
+      }
     };
   };
 
@@ -68,7 +75,6 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
     CartAPI.setQuantity(cart, item.orderable_id, e.target.value)
       .then(data => {
         setCart(data);
-        checkCart();
       })
       .catch(() => onError(t('app.public.store_cart.stock_limit')));
   };
@@ -77,7 +83,6 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
     CartAPI.setQuantity(cart, item.orderable_id, direction === 'up' ? item.quantity + 1 : item.quantity - 1)
       .then(data => {
         setCart(data);
-        checkCart();
       })
       .catch(() => onError(t('app.public.store_cart.stock_limit')));
   };
@@ -91,7 +96,6 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
       e.stopPropagation();
       CartAPI.refreshItem(cart, item.orderable_id).then(data => {
         setCart(data);
-        checkCart();
       }).catch(onError);
     };
   };
@@ -138,7 +142,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
   const getItemErrors = (item) => {
     if (!cartErrors) return [];
     const errors = _.find(cartErrors.details, (e) => e.item_id === item.id);
-    return errors.errors || [{ error: 'not_found' }];
+    return errors?.errors || [{ error: 'not_found' }];
   };
 
   /**
@@ -207,21 +211,21 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
    */
   const itemError = (item, error) => {
     if (error.error === 'is_active' || error.error === 'not_found') {
-      return <div className='error'>This product is not available, please remove it in cart</div>;
+      return <div className='error'>{t('app.public.store_cart.errors.product_not_found')}</div>;
     }
     if (error.error === 'stock' && error.value === 0) {
-      return <div className='error'>This product is out of stock. Please remove this item to before checkout the cart.</div>;
+      return <div className='error'>{t('app.public.store_cart.errors.out_of_stock')}</div>;
     }
     if (error.error === 'stock' && error.value > 0) {
-      return <div className='error'>This product has only {error.value} unit in stock, please change the quantity of item.</div>;
+      return <div className='error'>{t('app.public.store_cart.errors.stock_limit_QUANTITY', { QUANTITY: error.value })}</div>;
     }
     if (error.error === 'quantity_min') {
-      return <div className='error'>Minimum number of product was changed to {error.value}, please change the quantity of item</div>;
+      return <div className='error'>{t('app.public.store_cart.errors.quantity_min_QUANTITY', { QUANTITY: error.value })}</div>;
     }
     if (error.error === 'amount') {
       return <div className='error'>
-        The price of product was modified to {FormatLib.price(error.value)} / {t('app.public.store_cart.unit')}
-        <span onClick={refreshItem(item)}>Update</span>
+        {t('app.public.store_cart.errors.price_changed_PRICE', { PRICE: `${FormatLib.price(error.value)} / ${t('app.public.store_cart.unit')}` })}
+        <span onClick={refreshItem(item)}>{t('app.public.store_cart.update_item')}</span>
         </div>;
     }
   };

@@ -44,7 +44,7 @@ class Orders::OrderService
 
     def in_stock?(order, stock_type = 'external')
       order.order_items.each do |item|
-        return false if item.orderable.stock[stock_type] < item.quantity
+        return false if item.orderable.stock[stock_type] < item.quantity || item.orderable.stock[stock_type] < item.orderable.quantity_min
       end
       true
     end
