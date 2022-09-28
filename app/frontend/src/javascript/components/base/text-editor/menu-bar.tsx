@@ -79,12 +79,6 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, heading, bulletList, b
     }
   };
 
-  // prevent form submition propagation to parent forms
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-  };
-
   // Update the selected link
   const setLink = useCallback((closeLinkMenu?: boolean) => {
     if (url.href === '') {
@@ -241,7 +235,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, heading, bulletList, b
         }
       </div>
 
-      <form ref={ref} className={`fab-text-editor-subMenu ${submenu ? 'is-active' : ''}`} onSubmit={handleSubmit}>
+      <div ref={ref} className={`fab-text-editor-subMenu ${submenu ? 'is-active' : ''}`}>
         { submenu === 'link' &&
           (<>
             <h6>{t('app.shared.text_editor.menu_bar.add_link')}</h6>
@@ -290,7 +284,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, heading, bulletList, b
             </div>
           </>)
         }
-      </form>
+      </div>
     </>
   );
 };

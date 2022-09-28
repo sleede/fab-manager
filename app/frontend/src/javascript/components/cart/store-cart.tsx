@@ -18,6 +18,8 @@ import noImage from '../../../../images/no_image.png';
 import Switch from 'react-switch';
 import OrderLib from '../../lib/order';
 import { CaretDown, CaretUp } from 'phosphor-react';
+import SettingAPI from '../../api/setting';
+import { SettingName } from '../../models/setting';
 
 declare const Application: IApplication;
 
@@ -35,8 +37,15 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
   const { t } = useTranslation('public');
 
   const { cart, setCart } = useCart(currentUser);
-  const [itemsQuantity, setItemsQuantity] = useState<{ id: number; quantity: number; }[]>();
+  const [itemsQuantity, setItemsQuantity] = useState<{ id: number; quantity: number; }[]>([]);
   const [paymentModal, setPaymentModal] = useState<boolean>(false);
+  const [settings, setSettings] = useState<Map<SettingName, string>>(null);
+
+  useEffect(() => {
+    SettingAPI.query(['store_withdrawal_instructions', 'fablab_name'])
+      .then(res => setSettings(res))
+      .catch(onError);
+  }, []);
 
   useEffect(() => {
     const quantities = cart?.order_items_attributes.map(i => {
@@ -153,6 +162,17 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
     }
   };
 
+  /**
+   * Text instructions for the customer
+   */
+  const withdrawalInstructions = (): string => {
+    const instructions = settings?.get('store_withdrawal_instructions');
+    if (instructions) {
+      return instructions;
+    }
+    return t('app.public.store_cart.please_contact_FABLAB', { FABLAB: settings?.get('fablab_name') });
+  };
+
   return (
     <div className='store-cart'>
       <div className="store-cart-list">
@@ -160,7 +180,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
         {cart && cart.order_items_attributes.map(item => (
           <article key={item.id} className='store-cart-list-item'>
             <div className='picture'>
-              <img alt=''src={item.orderable_main_image_url || noImage} />
+              <img alt='' src={item.orderable_main_image_url || noImage} />
             </div>
             <div className="ref">
               <span>{t('app.public.store_cart.reference_short')} {item.orderable_ref || ''}</span>
@@ -179,7 +199,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
                   onChange={e => changeProductQuantity(e, item)}
                   min={item.quantity_min}
                   max={item.orderable_external_stock}
-                  value={itemsQuantity?.find(i => i.id === item.id).quantity}
+                  value={itemsQuantity?.find(i => i.id === item.id)?.quantity || 1}
                 />
                 <button onClick={() => handleInputNumber(item, 'up')}><CaretUp size={12} weight="fill" /></button>
                 <button onClick={() => handleInputNumber(item, 'down')}><CaretDown size={12} weight="fill" /></button>
@@ -197,7 +217,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
                 <label>
                   <span>{t('app.public.store_cart.offer_product')}</span>
                   <Switch
-                  checked={item.is_offered}
+                  checked={item.is_offered || false}
                   onChange={toggleProductOffer(item)}
                   width={40}
                   height={19}
@@ -214,7 +234,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
       <div className="group">
         <div className='store-cart-info'>
           <h3>{t('app.public.store_cart.pickup')}</h3>
-          <p>[TODO: texte venant des paramètres de la boutique…]</p>
+          <p dangerouslySetInnerHTML={{ __html: withdrawalInstructions() }} />
         </div>
 
         {cart && !cartIsEmpty() &&

@@ -213,6 +213,10 @@ export const displaySettings = [
   'email_from'
 ] as const;
 
+export const storeSettings = [
+  'store_withdrawal_instructions'
+] as const;
+
 export const allSettings = [
   ...homePageSettings,
   ...privacyPolicySettings,
@@ -237,7 +241,8 @@ export const allSettings = [
   ...adminSettings,
   ...pricingSettings,
   ...poymentSettings,
-  ...displaySettings
+  ...displaySettings,
+  ...storeSettings
 ] as const;
 
 export type SettingName = typeof allSettings[number];
@@ -264,3 +269,5 @@ export interface SettingBulkResult {
   error?: string,
   localized?: string,
 }
+
+export type SettingBulkArray = Array<{ name: SettingName, value: SettingValue }>;

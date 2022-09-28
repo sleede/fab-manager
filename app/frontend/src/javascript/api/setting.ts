@@ -1,6 +1,13 @@
 import apiClient from './clients/api-client';
 import { AxiosResponse } from 'axios';
-import { Setting, SettingBulkResult, SettingError, SettingName, SettingValue } from '../models/setting';
+import {
+  Setting,
+  SettingBulkArray,
+  SettingBulkResult,
+  SettingError,
+  SettingName,
+  SettingValue
+} from '../models/setting';
 
 export default class SettingAPI {
   static async get (name: SettingName): Promise<Setting> {
@@ -60,7 +67,7 @@ export default class SettingAPI {
     return map;
   }
 
-  private static toObjectArray (data: Map<SettingName, SettingValue>): Array<Record<string, SettingValue>> {
+  private static toObjectArray (data: Map<SettingName, SettingValue>): SettingBulkArray {
     const array = [];
     data.forEach((value, key) => {
       array.push({

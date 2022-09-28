@@ -150,11 +150,12 @@ export default class ProductLib {
 
       const value = ParsingLib.parse(params[key]) || initialFilters[key];
       switch (key) {
-        case 'category':
+        case 'category': {
           const parents = categories?.filter(c => (value as Array<string>)?.includes(c.slug));
           // we may also add to the selection children categories
           res.categories = [...parents, ...categories?.filter(c => parents.map(c => c.id).includes(c.parent_id))];
           break;
+        }
         case 'categories':
           res.categories = [...categories?.filter(c => (value as Array<string>)?.includes(c.slug))];
           break;

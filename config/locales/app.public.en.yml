@@ -442,6 +442,7 @@ en:
         checkout_error: "An unexpected error occurred. Please contact the administrator."
         checkout_success: "Purchase confirmed. Thanks!"
         select_user: "Please select a user before continuing."
+        please_contact_FABLAB: "Please contact {FABLAB, select, undefined{us} other{{FABLAB}}} for withdrawal instructions."
       orders_dashboard:
         heading: "My orders"
         sort:
