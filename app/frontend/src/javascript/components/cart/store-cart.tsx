@@ -209,21 +209,21 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
    */
   const itemError = (item, error) => {
     if (error.error === 'is_active' || error.error === 'not_found') {
-      return <div className='error'>{t('app.public.store_cart.errors.product_not_found')}</div>;
+      return <div className='error'><p>{t('app.public.store_cart.errors.product_not_found')}</p></div>;
     }
     if (error.error === 'stock' && error.value === 0) {
-      return <div className='error'>{t('app.public.store_cart.errors.out_of_stock')}</div>;
+      return <div className='error'><p>{t('app.public.store_cart.errors.out_of_stock')}</p></div>;
     }
     if (error.error === 'stock' && error.value > 0) {
-      return <div className='error'>{t('app.public.store_cart.errors.stock_limit_QUANTITY', { QUANTITY: error.value })}</div>;
+      return <div className='error'><p>{t('app.public.store_cart.errors.stock_limit_QUANTITY', { QUANTITY: error.value })}</p></div>;
     }
     if (error.error === 'quantity_min') {
-      return <div className='error'>{t('app.public.store_cart.errors.quantity_min_QUANTITY', { QUANTITY: error.value })}</div>;
+      return <div className='error'><p>{t('app.public.store_cart.errors.quantity_min_QUANTITY', { QUANTITY: error.value })}</p></div>;
     }
     if (error.error === 'amount') {
       return <div className='error'>
-        {t('app.public.store_cart.errors.price_changed_PRICE', { PRICE: `${FormatLib.price(error.value)} / ${t('app.public.store_cart.unit')}` })}
-        <span onClick={refreshItem(item)}>{t('app.public.store_cart.update_item')}</span>
+        <p>{t('app.public.store_cart.errors.price_changed_PRICE', { PRICE: `${FormatLib.price(error.value)} / ${t('app.public.store_cart.unit')}` })}</p>
+        <span className='refresh-btn' onClick={refreshItem(item)}>{t('app.public.store_cart.update_item')}</span>
         </div>;
     }
   };
@@ -243,11 +243,9 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
               {item.quantity_min > 1 &&
                 <span className='min'>{t('app.public.store_cart.minimum_purchase')}{item.quantity_min}</span>
               }
-              <div>
-                {getItemErrors(item).map(e => {
-                  return itemError(item, e);
-                })}
-              </div>
+              {getItemErrors(item).map(e => {
+                return itemError(item, e);
+              })}
             </div>
             <div className="actions">
               <div className='price'>
