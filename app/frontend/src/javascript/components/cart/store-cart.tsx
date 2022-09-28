@@ -84,7 +84,11 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
     if (!currentUser) {
       userLogin();
     } else {
-      setPaymentModal(true);
+      if (!cart.user) {
+        onError(t('app.public.store_cart.select_user'));
+      } else {
+        setPaymentModal(true);
+      }
     }
   };
 
@@ -240,7 +244,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
             </div>
             <p className='total'>{t('app.public.store_cart.checkout_total')} <span>{FormatLib.price(OrderLib.paidTotal(cart))}</span></p>
           </div>
-          <FabButton className='checkout-btn' onClick={checkout} disabled={!cart.user}>
+          <FabButton className='checkout-btn' onClick={checkout}>
             {t('app.public.store_cart.checkout')}
           </FabButton>
         </>}

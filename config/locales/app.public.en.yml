@@ -441,6 +441,7 @@ en:
         checkout_total: "Cart total"
         checkout_error: "An unexpected error occurred. Please contact the administrator."
         checkout_success: "Purchase confirmed. Thanks!"
+        select_user: "Please select a user before continuing."
       orders_dashboard:
         heading: "My orders"
         sort:
