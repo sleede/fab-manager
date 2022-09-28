@@ -3,6 +3,7 @@
 - Script to download translations from Crowdin
 - Fablab's store module
 - Fix a bug: missing translations in PayZen configuration screens
+- Fix a bug: wrong translation key prevents the display of the schedule deadline's payment mean
 - [TODO DEPLOY] `rails db:seed`
 
 ## v5.4.17 2022 September 06
