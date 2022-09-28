@@ -43,6 +43,9 @@ en:
       must_be_in_the_past: "The period must be strictly prior to today's date."
       registration_disabled: "Registration is disabled"
       undefined_in_store: "must be defined to make the product available in the store"
+      gateway_error: "Payement gateway error: %{MESSAGE}"
+      gateway_amount_too_small: "Payments under %{AMOUNT} are not supported. Please contact reception directly."
+      gateway_amount_too_large: "Payments above %{AMOUNT} are not supported. Please contact reception directly."
   apipie:
     api_documentation: "API Documentation"
     code: "HTTP code"
