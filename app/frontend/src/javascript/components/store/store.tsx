@@ -28,7 +28,6 @@ import { ActiveFiltersTags } from './filters/active-filters-tags';
 import ProductLib from '../../lib/product';
 import { UIRouter } from '@uirouter/angularjs';
 import SettingAPI from '../../api/setting';
-import { CaretDoubleDown } from 'phosphor-react';
 
 declare const Application: IApplication;
 
@@ -57,13 +56,14 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
   const [resources, setResources] = useImmer<ProductResourcesFetching>(initialResources);
   const [machinesModule, setMachinesModule] = useState<boolean>(false);
   const [categoriesTree, setCategoriesTree] = useState<CategoryTree[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [filtersPanel, setFiltersPanel] = useState<boolean>(false);
   const [pageCount, setPageCount] = useState<number>(0);
   const [productsCount, setProductsCount] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
-    fetchProducts().then(scrollToProducts);
+    fetchProducts();
     ProductLib.fetchInitialResources(setResources, onError, formatCategories);
     SettingAPI.get('machines_module').then(data => {
       setMachinesModule(data.value === 'true');
@@ -72,7 +72,7 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
 
   useEffect(() => {
     if (resources.filters.ready) {
-      fetchProducts().then(scrollToProducts);
+      fetchProducts();
       uiRouter.stateService.transitionTo(uiRouter.globals.current, ProductLib.indexFiltersToRouterParams(resources.filters.data));
     }
   }, [resources.filters]);
@@ -208,13 +208,6 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
     }
   };
 
-  /**
-   * Scroll the view to the product list
-   */
-  const scrollToProducts = () => {
-    window.document.getElementById('content-main').scrollTo({ top: 100, behavior: 'smooth' });
-  };
-
   const selectedCategory = resources.filters.data.categories[0];
   const parent = resources.categories.data.find(c => c.id === selectedCategory?.parent_id);
   return (
@@ -239,13 +232,6 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
         }
       </ul>
       <aside className={`store-filters ${filtersPanel ? '' : 'collapsed'}`}>
-        <header>
-          <h3>{t('app.public.store.products.filter')}</h3>
-          <div className='grpBtn'>
-            <FabButton onClick={clearAllFilters} className="is-black">{t('app.public.store.products.filter_clear')}</FabButton>
-            <CaretDoubleDown className='filters-toggle' size={16} weight="bold" onClick={() => setFiltersPanel(!filtersPanel)} />
-          </div>
-        </header>
         <div className='grp'>
           <div className="categories">
             <header>
