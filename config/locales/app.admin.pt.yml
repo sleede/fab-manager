@@ -2010,13 +2010,13 @@ pt:
           product_files_info: "<strong>Information</strong></br>Add documents related to this product. They will be presented in the product sheet, in a separate block. You can only upload pdf documents."
           add_product_file: "Adicionar um documento"
           product_images: "Fotos do produto"
-          product_images_info: "<strong>Advice</strong></br>We advise you to use a square format, JPG or PNG. For JPG, please use white for the background colour. The main visual will be the first presented in the product sheet."
+          product_images_info: "<strong>Dica</strong></br>Aconselhamos que você use um formato quadrado, JPG ou PNG. Para JPG, por favor, use branco para a cor de fundo. O visual principal será o primeiro apresentado na folha de produto."
           add_product_image: "Adicionar uma imagem"
           save: "Salvar"
         product_stock_form:
-          stock_up_to_date: "Stock up to date"
+          stock_up_to_date: "Estoque atualizado"
           date_time: "{DATE} - {TIME}"
-          ongoing_operations: "Ongoing stock operations"
+          ongoing_operations: "Operações de estoque em andamento"
           save_reminder: "Don't forget to save your operations"
           low_stock_threshold: "Define a low stock threshold"
           stock_threshold_toggle: "Activate stock threshold"
@@ -2045,7 +2045,7 @@ pt:
           update_stock: "Update stock"
           reason_type: "Reason"
           stocks: "Stock:"
-          quantity: "Quantity"
+          quantity: "Quantidade"
         stock_movement_reason:
           inward_stock: "Inward stock"
           returned: "Returned by client"
@@ -2059,29 +2059,29 @@ pt:
         orders:
           heading: "Orders"
           create_order: "Create an order"
-          filter: "Filter"
-          filter_clear: "Clear all"
-          filter_apply: "Apply"
+          filter: "Filtro"
+          filter_clear: "Limpar tudo"
+          filter_apply: "Aplicar"
           filter_ref: "By reference"
           filter_status: "By status"
           filter_client: "By client"
           filter_period: "By period"
-          filter_period_from: "From"
+          filter_period_from: "De"
           filter_period_to: "to"
           state:
             cart: 'Cart'
             in_progress: 'Under preparation'
-            paid: "Paid"
-            payment_failed: "Payment error"
-            canceled: "Canceled"
-            ready: "Ready"
-            refunded: "Refunded"
-            delivered: "Delivered"
+            paid: "Pago"
+            payment_failed: "Erro no pagamento"
+            canceled: "Cancelado"
+            ready: "Pronto"
+            refunded: "Reembolsado"
+            delivered: "Entregue"
           sort:
-            newest: "Newest first"
-            oldest: "Oldest first"
+            newest: "Mais recentes primeiro"
+            oldest: "Mais antigos primeiro"
       store_settings:
-        title: 'Settings'
+        title: 'Configurações'
         withdrawal_instructions: 'Product withdrawal instructions'
         withdrawal_info: "This text is displayed on the checkout page to inform the client about the products withdrawal method"
-        save: "Save"
+        save: "Salvar"
