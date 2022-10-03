@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Ability to dismiss a user to a lower privileged role
+
 ## v5.4.20 2022 September 27
 
 - Fix a bug: unable to show the daily view of the public agenda, if it contains trainings or events
