@@ -8,6 +8,7 @@ class ProductService
     def list(filters, operator)
       products = Product.includes(:product_images)
       products = filter_by_active(products, filters)
+      products = filter_by_available(products, filters, operator)
       products = filter_by_categories(products, filters)
       products = filter_by_machines(products, filters)
       products = filter_by_keyword_or_reference(products, filters)
@@ -87,6 +88,12 @@ class ProductService
 
       state = filters[:is_active] == 'false' ? [nil, false, true] : true
       products.where(is_active: state)
+    end
+
+    def filter_by_available(products, filters, operator)
+      return products if filters[:is_available].blank? || filters[:is_available] == 'false'
+
+      filter_by_stock(products, { stock_type: 'external', stock_from: '1' }, operator)
     end
 
     def filter_by_categories(products, filters)

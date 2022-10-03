@@ -7,6 +7,7 @@ export type ProductSortOption = 'name-asc' | 'name-desc' | 'amount-asc' | 'amoun
 
 export interface ProductIndexFilter {
   is_active?: boolean,
+  is_available?: boolean,
   page?: number,
   categories?: ProductCategory[],
   machines?: Machine[],
@@ -40,6 +41,7 @@ export const initialFilters: ProductIndexFilter = {
   keywords: [],
   machines: [],
   is_active: false,
+  is_available: false,
   stock_type: 'internal',
   stock_from: 0,
   stock_to: 0,

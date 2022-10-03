@@ -143,12 +143,12 @@ export default class ProductLib {
   /**
    * Parse the provided URL and return a ready-to-use filter object
    */
-  static readFiltersFromUrl = (params: StateParams, machines: Array<Machine>, categories: Array<ProductCategory>): ProductIndexFilter => {
-    const res: ProductIndexFilter = { ...initialFilters };
+  static readFiltersFromUrl = (params: StateParams, machines: Array<Machine>, categories: Array<ProductCategory>, defaultFilters = initialFilters): ProductIndexFilter => {
+    const res: ProductIndexFilter = { ...defaultFilters };
     for (const key in params) {
       if (['#', 'categoryTypeUrl'].includes(key) || !Object.prototype.hasOwnProperty.call(params, key)) continue;
 
-      const value = ParsingLib.parse(params[key]) || initialFilters[key];
+      const value = ParsingLib.parse(params[key]) || defaultFilters[key];
       switch (key) {
         case 'category': {
           const parents = categories?.filter(c => (value as Array<string>)?.includes(c.slug));
