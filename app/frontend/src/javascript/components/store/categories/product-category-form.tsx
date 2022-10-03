@@ -62,7 +62,7 @@ export const ProductCategoryForm: React.FC<ProductCategoryFormProps> = ({ action
   }, [watch]);
   // Check slug pattern
   // Only lowercase alphanumeric groups of characters separated by an hyphen
-  const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/g;
+  const slugPattern = /^[a-z\d]+(?:-[a-z\d]+)*$/g;
 
   // Form submit
   const onSubmit: SubmitHandler<ProductCategory> = (category: ProductCategory) => {

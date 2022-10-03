@@ -77,7 +77,8 @@ export const ManageProductCategory: React.FC<ManageProductCategoryProps> = ({ pr
         <ProductCategoryForm action={action}
           productCategories={productCategories}
           productCategory={productCategory}
-          onSuccess={handleSuccess} onError={onError} />
+          onSuccess={handleSuccess}
+          onError={onError} />
       </FabModal>
     </div>
   );
