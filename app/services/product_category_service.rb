@@ -3,7 +3,9 @@
 # Provides methods for ProductCategory
 class ProductCategoryService
   def self.list
-    ProductCategory.all.order(parent_id: :asc, position: :asc)
+    ProductCategory.left_outer_joins(:products)
+                   .select('product_categories.*, count(products.*) as products_count')
+                   .group('product_categories.id')
   end
 
   def self.destroy(product_category)

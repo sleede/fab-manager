@@ -255,7 +255,16 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
               {categoriesTree.map(c =>
                 <div key={c.parent.id} className={`parent ${selectedCategory?.id === c.parent.id || selectedCategory?.parent_id === c.parent.id ? 'is-active' : ''}`}>
                   <p onClick={() => filterCategory(c.parent)}>
-                    {c.parent.name}<span>(count)</span>
+                    {c.parent.name}
+                    <span>
+                      {/* here we add the parent count with the sum of all children counts */}
+                      {
+                        c.parent.products_count +
+                        c.children
+                          .map(ch => ch.products_count)
+                          .reduce((sum, val) => sum + val, 0)
+                      }
+                    </span>
                   </p>
                   {c.children.length > 0 &&
                     <div className='children'>
@@ -263,7 +272,7 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
                         <p key={ch.id}
                           className={selectedCategory?.id === ch.id ? 'is-active' : ''}
                           onClick={() => filterCategory(ch)}>
-                          {ch.name}<span>(count)</span>
+                          {ch.name}<span>{ch.products_count}</span>
                         </p>
                       )}
                     </div>
