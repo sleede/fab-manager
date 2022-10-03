@@ -121,7 +121,7 @@ class ProductService
       if filters[:stock_from].to_i.positive?
         products = products.where('(stock ->> ?)::int >= ?', filters[:stock_type], filters[:stock_from])
       end
-      products = products.where('(stock ->> ?)::int <= ?', filters[:stock_type], filters[:stock_to]) if filters[:stock_to].to_i.positive?
+      products = products.where('(stock ->> ?)::int <= ?', filters[:stock_type], filters[:stock_to]) if filters[:stock_to].to_i != 0
 
       products
     end
