@@ -33,7 +33,7 @@ export const CouponInput: React.FC<CouponInputProps> = ({ user, amount, onChange
     if (user && code) {
       handleChange(code);
     }
-  }, [user]);
+  }, [user?.id]);
 
   useEffect(() => {
     if (code) {
