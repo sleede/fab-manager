@@ -10,7 +10,7 @@ import CartAPI from '../../api/cart';
 import { User } from '../../models/user';
 import { PaymentModal } from '../payment/stripe/payment-modal';
 import { PaymentMethod } from '../../models/payment';
-import { Order } from '../../models/order';
+import { Order, OrderErrors } from '../../models/order';
 import { MemberSelect } from '../user/member-select';
 import { CouponInput } from '../coupon/coupon-input';
 import { Coupon } from '../../models/coupon';
@@ -20,6 +20,7 @@ import OrderLib from '../../lib/order';
 import { CaretDown, CaretUp } from 'phosphor-react';
 import SettingAPI from '../../api/setting';
 import { SettingName } from '../../models/setting';
+import _ from 'lodash';
 
 declare const Application: IApplication;
 
@@ -36,8 +37,8 @@ interface StoreCartProps {
 const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, userLogin }) => {
   const { t } = useTranslation('public');
 
-  const { cart, setCart } = useCart(currentUser);
-  const [itemsQuantity, setItemsQuantity] = useState<{ id: number; quantity: number; }[]>([]);
+  const { cart, setCart, reloadCart } = useCart(currentUser);
+  const [cartErrors, setCartErrors] = useState<OrderErrors>(null);
   const [paymentModal, setPaymentModal] = useState<boolean>(false);
   const [settings, setSettings] = useState<Map<SettingName, string>>(null);
 
@@ -48,10 +49,9 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
   }, []);
 
   useEffect(() => {
-    const quantities = cart?.order_items_attributes.map(i => {
-      return { id: i.id, quantity: i.quantity };
-    });
-    setItemsQuantity(quantities);
+    if (cart) {
+      checkCart();
+    }
   }, [cart]);
 
   /**
@@ -61,9 +61,14 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
     return (e: React.BaseSyntheticEvent) => {
       e.preventDefault();
       e.stopPropagation();
-      CartAPI.removeItem(cart, item.orderable_id).then(data => {
-        setCart(data);
-      }).catch(onError);
+      const errors = getItemErrors(item);
+      if (errors.length === 1 && errors[0].error === 'not_found') {
+        reloadCart().catch(onError);
+      } else {
+        CartAPI.removeItem(cart, item.orderable_id).then(data => {
+          setCart(data);
+        }).catch(onError);
+      }
     };
   };
 
@@ -77,13 +82,38 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
       })
       .catch(() => onError(t('app.public.store_cart.stock_limit')));
   };
-  /** Increment/decrement product quantity  */
-  const handleInputNumber = (item, direction: 'up' | 'down') => {
+
+  /**
+   * Increment/decrement product quantity
+   */
+  const increaseOrDecreaseProductQuantity = (item, direction: 'up' | 'down') => {
     CartAPI.setQuantity(cart, item.orderable_id, direction === 'up' ? item.quantity + 1 : item.quantity - 1)
       .then(data => {
         setCart(data);
       })
       .catch(() => onError(t('app.public.store_cart.stock_limit')));
+  };
+
+  /**
+   * Refresh product amount
+   */
+  const refreshItem = (item) => {
+    return (e: React.BaseSyntheticEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      CartAPI.refreshItem(cart, item.orderable_id).then(data => {
+        setCart(data);
+      }).catch(onError);
+    };
+  };
+
+  /**
+   * Check the current cart's items (available, price, stock, quantity_min)
+   */
+  const checkCart = async (): Promise<OrderErrors> => {
+    const errors = await CartAPI.validate(cart);
+    setCartErrors(errors);
+    return errors;
   };
 
   /**
@@ -96,9 +126,34 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
       if (!cart.user) {
         onError(t('app.public.store_cart.select_user'));
       } else {
-        setPaymentModal(true);
+        checkCart().then(errors => {
+          if (!hasCartErrors(errors)) {
+            setPaymentModal(true);
+          }
+        });
       }
     }
+  };
+
+  /**
+   * Check if the carrent cart has any error
+   */
+  const hasCartErrors = (errors: OrderErrors) => {
+    if (!errors) return false;
+    for (const item of cart.order_items_attributes) {
+      const error = _.find(errors.details, (e) => e.item_id === item.id);
+      if (!error || error?.errors?.length > 0) return true;
+    }
+    return false;
+  };
+
+  /**
+   * get givean item's error
+   */
+  const getItemErrors = (item) => {
+    if (!cartErrors) return [];
+    const errors = _.find(cartErrors.details, (e) => e.item_id === item.id);
+    return errors?.errors || [{ error: 'not_found' }];
   };
 
   /**
@@ -163,6 +218,30 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
   };
 
   /**
+   * Show item error
+   */
+  const itemError = (item, error) => {
+    if (error.error === 'is_active' || error.error === 'not_found') {
+      return <div className='error'><p>{t('app.public.store_cart.errors.product_not_found')}</p></div>;
+    }
+    if (error.error === 'stock' && error.value === 0) {
+      return <div className='error'><p>{t('app.public.store_cart.errors.out_of_stock')}</p></div>;
+    }
+    if (error.error === 'stock' && error.value > 0) {
+      return <div className='error'><p>{t('app.public.store_cart.errors.stock_limit_QUANTITY', { QUANTITY: error.value })}</p></div>;
+    }
+    if (error.error === 'quantity_min') {
+      return <div className='error'><p>{t('app.public.store_cart.errors.quantity_min_QUANTITY', { QUANTITY: error.value })}</p></div>;
+    }
+    if (error.error === 'amount') {
+      return <div className='error'>
+        <p>{t('app.public.store_cart.errors.price_changed_PRICE', { PRICE: `${FormatLib.price(error.value)} / ${t('app.public.store_cart.unit')}` })}</p>
+        <span className='refresh-btn' onClick={refreshItem(item)}>{t('app.public.store_cart.update_item')}</span>
+        </div>;
+    }
+  };
+
+  /**
    * Text instructions for the customer
    */
   const withdrawalInstructions = (): string => {
@@ -178,7 +257,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
       <div className="store-cart-list">
         {cart && cartIsEmpty() && <p>{t('app.public.store_cart.cart_is_empty')}</p>}
         {cart && cart.order_items_attributes.map(item => (
-          <article key={item.id} className='store-cart-list-item'>
+          <article key={item.id} className={`store-cart-list-item ${getItemErrors(item).length > 0 ? 'error' : ''}`}>
             <div className='picture'>
               <img alt='' src={item.orderable_main_image_url || noImage} />
             </div>
@@ -188,6 +267,9 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
               {item.quantity_min > 1 &&
                 <span className='min'>{t('app.public.store_cart.minimum_purchase')}{item.quantity_min}</span>
               }
+              {getItemErrors(item).map(e => {
+                return itemError(item, e);
+              })}
             </div>
             <div className="actions">
               <div className='price'>
@@ -199,10 +281,10 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
                   onChange={e => changeProductQuantity(e, item)}
                   min={item.quantity_min}
                   max={item.orderable_external_stock}
-                  value={itemsQuantity?.find(i => i.id === item.id)?.quantity || 1}
+                  value={item.quantity}
                 />
-                <button onClick={() => handleInputNumber(item, 'up')}><CaretUp size={12} weight="fill" /></button>
-                <button onClick={() => handleInputNumber(item, 'down')}><CaretDown size={12} weight="fill" /></button>
+                <button onClick={() => increaseOrDecreaseProductQuantity(item, 'up')}><CaretUp size={12} weight="fill" /></button>
+                <button onClick={() => increaseOrDecreaseProductQuantity(item, 'down')}><CaretDown size={12} weight="fill" /></button>
               </div>
               <div className='total'>
                 <span>{t('app.public.store_cart.total')}</span>

@@ -37,6 +37,18 @@ class API::CartController < API::ApiController
     render 'api/orders/show'
   end
 
+  def refresh_item
+    authorize @current_order, policy_class: CartPolicy
+    @order = Cart::RefreshItemService.new.call(@current_order, orderable)
+    render 'api/orders/show'
+  end
+
+  def validate
+    authorize @current_order, policy_class: CartPolicy
+    @order_errors = Cart::CheckCartService.new.call(@current_order)
+    render json: @order_errors
+  end
+
   private
 
   def orderable
