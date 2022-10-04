@@ -249,7 +249,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
    */
   const withdrawalInstructions = (): string => {
     const instructions = settings?.get('store_withdrawal_instructions');
-    if (instructions) {
+    if (!_.isEmpty(instructions)) {
       return instructions;
     }
     return t('app.public.store_cart.please_contact_FABLAB', { FABLAB: settings?.get('fablab_name') });

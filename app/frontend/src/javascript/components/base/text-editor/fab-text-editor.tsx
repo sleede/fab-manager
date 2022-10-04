@@ -33,7 +33,7 @@ export interface FabTextEditorRef {
 /**
  * This component is a WYSIWYG text editor
  */
-export const FabTextEditor: React.ForwardRefRenderFunction<FabTextEditorRef, FabTextEditorProps> = ({ heading, bulletList, blockquote, content, limit = 400, video, image, link, onChange, placeholder, error, disabled = false }, ref: RefObject<FabTextEditorRef>) => {
+const FabTextEditor: React.ForwardRefRenderFunction<FabTextEditorRef, FabTextEditorProps> = ({ heading, bulletList, blockquote, content, limit = 400, video, image, link, onChange, placeholder, error, disabled = false }, ref: RefObject<FabTextEditorRef>) => {
   const { t } = useTranslation('shared');
   const placeholderText = placeholder || t('app.shared.text_editor.fab_text_editor.text_placeholder');
   // TODO: Add ctrl+click on link to visit
@@ -75,7 +75,11 @@ export const FabTextEditor: React.ForwardRefRenderFunction<FabTextEditorRef, Fab
     ],
     content,
     onUpdate: ({ editor }) => {
-      onChange(editor.getHTML());
+      if (editor.isEmpty) {
+        onChange('');
+      } else {
+        onChange(editor.getHTML());
+      }
     }
   });
 
@@ -94,7 +98,7 @@ export const FabTextEditor: React.ForwardRefRenderFunction<FabTextEditorRef, Fab
   editorRef.current = editor;
 
   return (
-    <div className={`fab-text-editor ${disabled && 'is-disabled'}`}>
+    <div className={`fab-text-editor ${disabled ? 'is-disabled' : ''}`}>
       <MenuBar editor={editor} heading={heading} bulletList={bulletList} blockquote={blockquote} video={video} image={image} link={link} disabled={disabled} />
       <EditorContent editor={editor} />
       <div className="fab-text-editor-character-count">

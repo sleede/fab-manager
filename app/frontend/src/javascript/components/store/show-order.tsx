@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import _ from 'lodash';
 import { IApplication } from '../../models/application';
 import { User } from '../../models/user';
 import { react2angular } from 'react2angular';
@@ -83,7 +84,7 @@ export const ShowOrder: React.FC<ShowOrderProps> = ({ orderId, currentUser, onSu
    */
   const withdrawalInstructions = (): string => {
     const instructions = settings?.get('store_withdrawal_instructions');
-    if (instructions) {
+    if (!_.isEmpty(instructions)) {
       return instructions;
     }
     return t('app.shared.store.show_order.please_contact_FABLAB', { FABLAB: settings?.get('fablab_name') });
@@ -149,7 +150,7 @@ export const ShowOrder: React.FC<ShowOrderProps> = ({ orderId, currentUser, onSu
           {order.order_items_attributes.map(item => (
             <article className='store-cart-list-item' key={item.id}>
               <div className='picture'>
-                <img alt=''src={item.orderable_main_image_url || noImage} />
+                <img alt='' src={item.orderable_main_image_url || noImage} />
               </div>
               <div className="ref">
                 <span>{t('app.shared.store.show_order.reference_short')} {item.orderable_ref || ''}</span>

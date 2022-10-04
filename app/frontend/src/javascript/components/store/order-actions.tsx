@@ -1,9 +1,11 @@
-import React, { useState, BaseSyntheticEvent } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Select from 'react-select';
 import { FabModal } from '../base/fab-modal';
 import OrderAPI from '../../api/order';
 import { Order } from '../../models/order';
+import FabTextEditor from '../base/text-editor/fab-text-editor';
+import { HtmlTranslate } from '../base/html-translate';
 
 interface OrderActionsProps {
   order: Order,
@@ -115,15 +117,12 @@ export const OrderActions: React.FC<OrderActionsProps> = ({ order, onSuccess, on
         confirmButton={t('app.shared.store.order_actions.confirm')}
         onConfirm={handleActionConfirmation}
         className="order-actions-confirmation-modal">
-        <p>{t(`app.shared.store.order_actions.confirm_order_${currentAction?.value}`)}</p>
+        <HtmlTranslate trKey={`app.shared.store.order_actions.confirm_order_${currentAction?.value}_html`} />
         {currentAction?.value === 'ready' &&
-          <textarea
-            id="order-ready-note"
-            value={readyNote}
+          <FabTextEditor
+            content={readyNote}
             placeholder={t('app.shared.store.order_actions.order_ready_note')}
-            onChange={(e: BaseSyntheticEvent) => setReadyNote(e.target.value)}
-            style={{ width: '100%' }}
-            rows={5} />
+            onChange={setReadyNote} />
         }
       </FabModal>
     </>
