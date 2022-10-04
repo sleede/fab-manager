@@ -26,6 +26,7 @@ json.order_items_attributes order.order_items.order(created_at: :asc) do |item|
   json.orderable_id item.orderable_id
   json.orderable_name item.orderable.name
   json.orderable_ref item.orderable.sku
+  json.orderable_slug item.orderable.slug
   json.orderable_main_image_url item.orderable.main_image&.attachment_url
   json.orderable_external_stock item.orderable.stock['external']
   json.quantity item.quantity

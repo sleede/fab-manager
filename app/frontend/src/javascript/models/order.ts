@@ -31,6 +31,7 @@ export interface Order {
     orderable_type: string,
     orderable_id: number,
     orderable_name: string,
+    orderable_slug: string,
     orderable_ref?: string,
     orderable_main_image_url?: string,
     orderable_external_stock: number,

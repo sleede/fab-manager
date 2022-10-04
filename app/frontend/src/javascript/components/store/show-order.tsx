@@ -97,6 +97,16 @@ export const ShowOrder: React.FC<ShowOrderProps> = ({ orderId, currentUser, onSu
     onSuccess(message);
   };
 
+  /**
+   * Ruturn item's ordrable url
+   */
+  const itemOrderableUrl = (item) => {
+    if (isPrivileged()) {
+      return `/#!/admin/store/products/${item.orderable_id}/edit`;
+    }
+    return `/#!/store/p/${item.orderable_slug}`;
+  };
+
   if (!order) {
     return null;
   }
@@ -153,7 +163,7 @@ export const ShowOrder: React.FC<ShowOrderProps> = ({ orderId, currentUser, onSu
               </div>
               <div className="ref">
                 <span>{t('app.shared.store.show_order.reference_short')} {item.orderable_ref || ''}</span>
-                <p>{item.orderable_name}</p>
+                <p><a className="text-black" href={itemOrderableUrl(item)}>{item.orderable_name}</a></p>
               </div>
               <div className="actions">
                 <div className='price'>
