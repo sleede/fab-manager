@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
-import { Loader } from '../base/loader';
-import { IApplication } from '../../models/application';
-import { StoreListHeader } from './store-list-header';
-import { OrderItem } from './order-item';
-import { FabPagination } from '../base/fab-pagination';
-import OrderAPI from '../../api/order';
-import { Order, OrderSortOption } from '../../models/order';
-import { User } from '../../models/user';
+import { Loader } from '../../base/loader';
+import { IApplication } from '../../../models/application';
+import { StoreListHeader } from '../../store/store-list-header';
+import { OrderItem } from '../../store/order-item';
+import { FabPagination } from '../../base/fab-pagination';
+import OrderAPI from '../../../api/order';
+import { Order, OrderSortOption } from '../../../models/order';
+import { User } from '../../../models/user';
 
 declare const Application: IApplication;
 
