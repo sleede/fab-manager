@@ -39,6 +39,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
 
   const { cart, setCart, reloadCart } = useCart(currentUser);
   const [cartErrors, setCartErrors] = useState<OrderErrors>(null);
+  const [noMemberError, setNoMemberError] = useState<boolean>(false);
   const [paymentModal, setPaymentModal] = useState<boolean>(false);
   const [settings, setSettings] = useState<Map<SettingName, string>>(null);
 
@@ -124,8 +125,10 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
       userLogin();
     } else {
       if (!cart.user) {
+        setNoMemberError(true);
         onError(t('app.public.store_cart.select_user'));
       } else {
+        setNoMemberError(false);
         checkCart().then(errors => {
           if (!hasCartErrors(errors)) {
             setPaymentModal(true);
@@ -328,7 +331,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
 
       <aside>
         {cart && !cartIsEmpty() && isPrivileged() &&
-          <div> <MemberSelect onSelected={handleChangeMember} defaultUser={cart.user as User} /></div>
+          <div> <MemberSelect onSelected={handleChangeMember} defaultUser={cart.user as User} hasError={noMemberError} /></div>
         }
 
         {cart && !cartIsEmpty() && <>
