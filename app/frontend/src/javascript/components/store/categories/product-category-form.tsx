@@ -54,7 +54,7 @@ export const ProductCategoryForm: React.FC<ProductCategoryFormProps> = ({ action
   useEffect(() => {
     const subscription = watch((value, { name }) => {
       if (name === 'name') {
-        const _slug = slugify(value.name, { lower: true });
+        const _slug = slugify(value.name, { lower: true, strict: true });
         setValue('slug', _slug);
       }
     });
