@@ -6,8 +6,8 @@ import { FormInput } from '../../form/form-input';
 import { FormSelect } from '../../form/form-select';
 import { ProductCategory } from '../../../models/product-category';
 import { FabButton } from '../../base/fab-button';
-import { FabAlert } from '../../base/fab-alert';
 import ProductCategoryAPI from '../../../api/product-category';
+import { HtmlTranslate } from '../../base/html-translate';
 
 interface ProductCategoryFormProps {
   action: 'create' | 'update' | 'delete',
@@ -95,10 +95,8 @@ export const ProductCategoryForm: React.FC<ProductCategoryFormProps> = ({ action
     <form onSubmit={handleSubmit(onSubmit)} name="productCategoryForm" className="product-category-form">
       { action === 'delete'
         ? <>
-            <FabAlert level='danger'>
-              {t('app.admin.store.product_category_form.delete.confirm')}
-            </FabAlert>
-            <FabButton type='submit'>{t('app.admin.store.product_category_form.save')}</FabButton>
+            <HtmlTranslate trKey="app.admin.store.product_category_form.delete.confirm" options={{ CATEGORY: productCategory?.name }} />
+            <FabButton type='submit'>{t('app.admin.store.product_category_form.delete.save')}</FabButton>
           </>
         : <>
             <FormInput id='name'
