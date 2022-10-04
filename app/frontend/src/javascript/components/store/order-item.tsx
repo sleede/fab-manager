@@ -48,14 +48,16 @@ export const OrderItem: React.FC<OrderItemProps> = ({ order, currentUser }) => {
       }
       <div className="date">
         <span>{t('app.shared.store.order_item.created_at')}</span>
-        <div>{FormatLib.date(order.created_at)}
-          <div className="fab-tooltip">
-            <span className="trigger"><PlusCircle size={16} weight="light" /></span>
-            <div className="content">
-              {t('app.shared.store.order_item.last_update')}<br />
-              {FormatLib.date(order.updated_at)}
+        <div>
+          <p>{FormatLib.date(order.created_at)}
+            <div className="fab-tooltip">
+              <span className="trigger"><PlusCircle size={16} weight="light" /></span>
+              <div className="content">
+                {t('app.shared.store.order_item.last_update')}<br />
+                {FormatLib.date(order.updated_at)}
+              </div>
             </div>
-          </div>
+          </p>
         </div>
       </div>
       <div className='price'>

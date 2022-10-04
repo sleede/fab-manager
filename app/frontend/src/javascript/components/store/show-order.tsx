@@ -11,6 +11,8 @@ import { Order } from '../../models/order';
 import FormatLib from '../../lib/format';
 import OrderLib from '../../lib/order';
 import { OrderActions } from './order-actions';
+import SettingAPI from '../../api/setting';
+import { SettingName } from '../../models/setting';
 
 declare const Application: IApplication;
 
@@ -28,11 +30,15 @@ export const ShowOrder: React.FC<ShowOrderProps> = ({ orderId, currentUser, onSu
   const { t } = useTranslation('shared');
 
   const [order, setOrder] = useState<Order>();
+  const [settings, setSettings] = useState<Map<SettingName, string>>(null);
 
   useEffect(() => {
     OrderAPI.get(orderId).then(data => {
       setOrder(data);
     }).catch(onError);
+    SettingAPI.query(['store_withdrawal_instructions', 'fablab_name'])
+      .then(res => setSettings(res))
+      .catch(onError);
   }, []);
 
   /**
@@ -70,6 +76,17 @@ export const ShowOrder: React.FC<ShowOrderProps> = ({ orderId, currentUser, onSu
       }
     }
     return paymentVerbose;
+  };
+
+  /**
+   * Text instructions for the customer
+   */
+  const withdrawalInstructions = (): string => {
+    const instructions = settings?.get('store_withdrawal_instructions');
+    if (instructions) {
+      return instructions;
+    }
+    return t('app.shared.store.show_order.please_contact_FABLAB', { FABLAB: settings?.get('fablab_name') });
   };
 
   /**
@@ -171,6 +188,10 @@ export const ShowOrder: React.FC<ShowOrderProps> = ({ orderId, currentUser, onSu
             <p>{t('app.shared.store.show_order.coupon')}<span>-{FormatLib.price(OrderLib.couponAmount(order))}</span></p>
           }
           <p className='total'>{t('app.shared.store.show_order.cart_total')} <span>{FormatLib.price(OrderLib.paidTotal(order))}</span></p>
+        </div>
+        <div className="withdrawal-instructions">
+          <label>{t('app.shared.store.show_order.pickup')}</label>
+          <p dangerouslySetInnerHTML={{ __html: withdrawalInstructions() }} />
         </div>
       </div>
     </div>

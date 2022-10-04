@@ -101,7 +101,8 @@
     align-items: flex-start;
 
     .payment-info,
-    .amount {
+    .amount,
+    .withdrawal-instructions {
       padding: 2.4rem;
       border: 1px solid var(--gray-soft);
       border-radius: var(--border-radius);
