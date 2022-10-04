@@ -164,6 +164,7 @@
     }
   }
   aside {
+    justify-self: stretch;
     margin: 2.4rem 0;
     grid-row: 4 / 5;
     top: 4rem;
@@ -198,7 +199,7 @@
       grid-template-areas: "min min min"
                            "minus input plus"
                            "btn btn btn";
-      grid-template-columns: repeat(4, minmax(0, min-content));
+      grid-template-columns: min-content 1fr min-content;
       justify-content: center;
       gap: 1.6rem;
       border-top: 1px solid var(--gray-soft-dark);

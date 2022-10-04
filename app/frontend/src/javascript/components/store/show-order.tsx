@@ -128,7 +128,7 @@ export const ShowOrder: React.FC<ShowOrderProps> = ({ orderId, currentUser, onSu
 
       <div className="cart">
         <label>{t('app.shared.store.show_order.cart')}</label>
-        <div>
+        <div className='store-cart-list'>
           {order.order_items_attributes.map(item => (
             <article className='store-cart-list-item' key={item.id}>
               <div className='picture'>

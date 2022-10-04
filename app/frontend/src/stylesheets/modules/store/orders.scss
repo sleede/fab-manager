@@ -91,6 +91,10 @@
         color: var(--gray-hard-light);
       }
     }
+    .actions {
+      grid-template-columns: auto;
+      grid-auto-flow: column;
+    }
   }
 
   .subgrid {
