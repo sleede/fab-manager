@@ -623,16 +623,16 @@ en:
             delivered: "Delivered"
           confirm: 'Confirm'
           confirmation_required: "Confirmation required"
-          confirm_order_in_progress: "Is this order in the process of being prepared?"
+          confirm_order_in_progress_html: "Please confirm this order in being prepared."
           order_in_progress_success: "Order is under preparation"
-          confirm_order_ready: "Is this order ready?"
-          order_ready_note: 'Leave your message'
+          confirm_order_ready_html: "Please confirm this order is ready."
+          order_ready_note: 'You can leave a message to the customer about withdrawal instructions'
           order_ready_success: "Order is ready"
-          confirm_order_delivered: "Is this order delivered?"
+          confirm_order_delivered_html: "Please confirm this order was delivered."
           order_delivered_success: "Order was delivered"
-          confirm_order_canceled: "Do you want to cancel this order? You can modify product stock in stock manage."
+          confirm_order_canceled_html: "<strong>Do you really want to cancel this order?</strong><p>If this impacts stock, please reflect the change in <em>edit product &gt; stock management</em>. This won't be automatic.</p>"
           order_canceled_success: "Order was canceled"
-          confirm_order_refunded: "Do you want to refund this order? You can modify product stock in stock manage."
+          confirm_order_refunded_html: "<stong>Do you really want to refund this order?</strong><p>If this impacts stock, please reflect the change in <em>edit product &gt; stock management</em>. This won't be automatic.</p>"
           order_refunded_success: "Order was refunded"
       unsaved_form_alert:
         modal_title: "You have some unsaved changes"
