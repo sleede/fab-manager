@@ -14,5 +14,5 @@ class ProductCategory < ApplicationRecord
 
   has_many :products, dependent: :nullify
 
-  acts_as_list scope: :parent, top_of_list: 0
+  acts_as_list scope: :parent, top_of_list: 1
 end

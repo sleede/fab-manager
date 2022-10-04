@@ -52,6 +52,7 @@ const ProductCategories: React.FC<ProductCategoriesProps> = ({ onSuccess, onErro
       .then(c => {
         ProductCategoryAPI
           .updatePosition(c, position)
+          .then(refreshCategories)
           .catch(error => onError(error));
       })
       .catch(error => onError(error));
