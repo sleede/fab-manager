@@ -1937,7 +1937,8 @@ en:
             error: "Unable to modify the category: "
             success: "The category has been modified."
           delete:
-            confirm: "Do you really want to delete this product category?"
+            confirm: "Do you really want to delete <strong>{CATEGORY}</strong>?<br>If it has sub-categories, they will also be deleted."
+            save: "Delete"
             error: "Unable to delete the category: "
             success: "The category has been successfully deleted"
           save: "Save"

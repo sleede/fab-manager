@@ -73,7 +73,7 @@ export const ManageProductCategory: React.FC<ManageProductCategoryProps> = ({ pr
         isOpen={isOpen}
         toggleModal={toggleModal}
         closeButton>
-          { (action === 'update' || action === 'delete') && <p className='subtitle'>{productCategory.name}</p>}
+          { action === 'update' && <p className='subtitle'>{productCategory.name}</p>}
         <ProductCategoryForm action={action}
           productCategories={productCategories}
           productCategory={productCategory}
