@@ -7,7 +7,7 @@ import { StoreListHeader } from './store-list-header';
 import { OrderItem } from './order-item';
 import { FabPagination } from '../base/fab-pagination';
 import OrderAPI from '../../api/order';
-import { Order } from '../../models/order';
+import { Order, OrderSortOption } from '../../models/order';
 import { User } from '../../models/user';
 
 declare const Application: IApplication;
@@ -20,7 +20,7 @@ interface OrdersDashboardProps {
 * Option format, expected by react-select
 * @see https://github.com/JedWatson/react-select
 */
-type selectOption = { value: number, label: string };
+type selectOption = { value: OrderSortOption, label: string };
 
 /**
  * This component shows a list of all orders from the store for the current user
@@ -46,15 +46,15 @@ export const OrdersDashboard: React.FC<OrdersDashboardProps> = ({ currentUser, o
    */
   const buildOptions = (): Array<selectOption> => {
     return [
-      { value: 0, label: t('app.public.orders_dashboard.sort.newest') },
-      { value: 1, label: t('app.public.orders_dashboard.sort.oldest') }
+      { value: 'created_at-desc', label: t('app.public.orders_dashboard.sort.newest') },
+      { value: 'created_at-asc', label: t('app.public.orders_dashboard.sort.oldest') }
     ];
   };
   /**
    * Display option: sorting
    */
   const handleSorting = (option: selectOption) => {
-    OrderAPI.index({ page: 1, sort: option.value ? 'ASC' : 'DESC' }).then(res => {
+    OrderAPI.index({ page: 1, sort: option.value }).then(res => {
       setCurrentPage(1);
       setOrders(res.data);
       setPageCount(res.total_pages);
