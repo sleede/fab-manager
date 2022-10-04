@@ -6,7 +6,7 @@ export default class OrderLib {
    * Get the order item total
    */
   static itemAmount = (item): number => {
-    return item.quantity * Math.trunc(item.amount * 100) / 100;
+    return item.quantity * Math.round(item.amount * 100) / 100;
   };
 
   /**
@@ -23,7 +23,7 @@ export default class OrderLib {
   static offeredAmount = (order: Order): number => {
     return order.order_items_attributes
       .filter(i => i.is_offered)
-      .map(i => Math.trunc(i.amount * 100) * i.quantity)
+      .map(i => Math.round(i.amount * 100) * i.quantity)
       .reduce((acc, curr) => acc + curr, 0) / 100;
   };
 
@@ -31,14 +31,14 @@ export default class OrderLib {
    * Get the total amount before offered amount
    */
   static totalBeforeOfferedAmount = (order: Order): number => {
-    return (Math.trunc(order.total * 100) + Math.trunc(this.offeredAmount(order) * 100)) / 100;
+    return (Math.round(order.total * 100) + Math.round(this.offeredAmount(order) * 100)) / 100;
   };
 
   /**
    * Get the coupon amount
    */
   static couponAmount = (order: Order): number => {
-    return (Math.trunc(order.total * 100) - Math.trunc(computePriceWithCoupon(order.total, order.coupon) * 100)) / 100.00;
+    return (Math.round(order.total * 100) - Math.round(computePriceWithCoupon(order.total, order.coupon) * 100)) / 100.00;
   };
 
   /**
