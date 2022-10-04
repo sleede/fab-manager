@@ -592,6 +592,8 @@ en:
           gift_total: "Discount total"
           coupon: "Coupon"
           cart_total: "Cart total"
+          pickup: "Pickup your products"
+          please_contact_FABLAB: "Please contact {FABLAB, select, undefined{us} other{{FABLAB}}} for withdrawal instructions."
           state:
             cart: 'Cart'
             in_progress: 'Under preparation'
