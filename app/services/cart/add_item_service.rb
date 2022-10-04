@@ -17,7 +17,7 @@ class Cart::AddItemService
     end
     raise Cart::OutStockError if item.quantity > orderable.stock['external']
 
-    order.total += (item.amount * quantity.to_i)
+    order.total += (item.amount * item.quantity.to_i) unless item.is_offered
     ActiveRecord::Base.transaction do
       item.save
       order.save
