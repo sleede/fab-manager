@@ -6,7 +6,7 @@ class CartPolicy < ApplicationPolicy
     true
   end
 
-  %w[add_item remove_item set_quantity].each do |action|
+  %w[add_item remove_item set_quantity refresh_item validate].each do |action|
     define_method "#{action}?" do
       return user.privileged? || (record.statistic_profile_id == user.statistic_profile.id) if user
 

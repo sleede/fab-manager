@@ -4,4 +4,5 @@ export interface ProductCategory {
   slug: string,
   parent_id?: number,
   position: number,
+  products_count: number
 }

@@ -626,7 +626,7 @@ angular.module('application.router', ['ui.router'])
 
       // store
       .state('app.public.store', {
-        url: '/store/:categoryTypeUrl/:category?{machines:string}{keywords:string}{is_active:string}{page:string}{sort:string}',
+        url: '/store/:categoryTypeUrl/:category?{machines:string}{keywords:string}{is_active:string}{is_available:string}{page:string}{sort:string}',
         abstract: !Fablab.storeModule,
         views: {
           'main@': {
@@ -639,7 +639,8 @@ angular.module('application.router', ['ui.router'])
           category: { dynamic: true, type: 'path', raw: true, value: null, squash: true },
           machines: { array: true, dynamic: true, type: 'query', raw: true },
           keywords: { dynamic: true, type: 'query' },
-          is_active: { dynamic: true, type: 'query', value: 'false', squash: true },
+          is_active: { dynamic: true, type: 'query', value: 'true', squash: true },
+          is_available: { dynamic: true, type: 'query', value: 'false', squash: true },
           page: { dynamic: true, type: 'query', value: '1', squash: true },
           sort: { dynamic: true, type: 'query' }
         }

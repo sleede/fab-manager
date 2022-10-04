@@ -41,7 +41,7 @@ export default class ProductLib {
   };
 
   static stockStatusTrKey = (product: Product): string => {
-    if (product.stock.external === 0) {
+    if (product.stock.external <= (product.quantity_min || 0)) {
       return 'app.public.stock_status.out_of_stock';
     }
     if (product.low_stock_threshold && product.stock.external < product.low_stock_threshold) {
@@ -143,18 +143,19 @@ export default class ProductLib {
   /**
    * Parse the provided URL and return a ready-to-use filter object
    */
-  static readFiltersFromUrl = (params: StateParams, machines: Array<Machine>, categories: Array<ProductCategory>): ProductIndexFilter => {
-    const res: ProductIndexFilter = { ...initialFilters };
+  static readFiltersFromUrl = (params: StateParams, machines: Array<Machine>, categories: Array<ProductCategory>, defaultFilters = initialFilters): ProductIndexFilter => {
+    const res: ProductIndexFilter = { ...defaultFilters };
     for (const key in params) {
       if (['#', 'categoryTypeUrl'].includes(key) || !Object.prototype.hasOwnProperty.call(params, key)) continue;
 
-      const value = ParsingLib.parse(params[key]) || initialFilters[key];
+      const value = ParsingLib.parse(params[key]) || defaultFilters[key];
       switch (key) {
-        case 'category':
+        case 'category': {
           const parents = categories?.filter(c => (value as Array<string>)?.includes(c.slug));
           // we may also add to the selection children categories
           res.categories = [...parents, ...categories?.filter(c => parents.map(c => c.id).includes(c.parent_id))];
           break;
+        }
         case 'categories':
           res.categories = [...categories?.filter(c => (value as Array<string>)?.includes(c.slug))];
           break;

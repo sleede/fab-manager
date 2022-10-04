@@ -442,6 +442,14 @@ en:
         checkout_error: "An unexpected error occurred. Please contact the administrator."
         checkout_success: "Purchase confirmed. Thanks!"
         select_user: "Please select a user before continuing."
+        please_contact_FABLAB: "Please contact {FABLAB, select, undefined{us} other{{FABLAB}}} for withdrawal instructions."
+        update_item: "Update"
+        errors:
+          product_not_found: "This product is no longer available, please remove it from your cart."
+          out_of_stock: "This product is out of stock, please remove it from your cart."
+          stock_limit_QUANTITY: "Only {QUANTITY} {QUANTITY, plural, =1{unit} other{units}} left in stock, please adjust the quantity of items."
+          quantity_min_QUANTITY: "Minimum number of product was changed to {QUANTITY}, please adjust the quantity of items."
+          price_changed_PRICE: "The product price was modified to {PRICE}"
       orders_dashboard:
         heading: "My orders"
         sort:

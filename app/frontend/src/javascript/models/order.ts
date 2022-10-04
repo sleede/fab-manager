@@ -63,3 +63,14 @@ export interface OrderIndexFilter extends ApiFilter {
   period_from?: string,
   period_to?: string
 }
+
+export interface OrderErrors {
+  order_id: number,
+  details: Array<{
+    item_id: number,
+    errors: Array<{
+      error: string,
+      value: string|number
+    }>
+  }>
+}

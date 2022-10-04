@@ -83,6 +83,12 @@ export const FabTextEditor: React.ForwardRefRenderFunction<FabTextEditorRef, Fab
     editor?.setEditable(!disabled);
   }, [disabled]);
 
+  useEffect(() => {
+    if (editor?.getHTML() !== content) {
+      editor?.commands.setContent(content);
+    }
+  }, [content]);
+
   // bind the editor to the ref, once it is ready
   if (!editor) return null;
   editorRef.current = editor;

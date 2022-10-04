@@ -8,7 +8,8 @@ interface MemberSelectProps {
   defaultUser?: User,
   value?: User,
   onSelected?: (user: { id: number, name: string }) => void,
-  noHeader?: boolean
+  noHeader?: boolean,
+  hasError?: boolean
 }
 
 /**
@@ -20,7 +21,7 @@ type selectOption = { value: number, label: string };
 /**
  * This component renders the member select for manager.
  */
-export const MemberSelect: React.FC<MemberSelectProps> = ({ defaultUser, value, onSelected, noHeader }) => {
+export const MemberSelect: React.FC<MemberSelectProps> = ({ defaultUser, value, onSelected, noHeader, hasError }) => {
   const { t } = useTranslation('public');
   const [option, setOption] = useState<selectOption>();
 
@@ -67,13 +68,14 @@ export const MemberSelect: React.FC<MemberSelectProps> = ({ defaultUser, value, 
   };
 
   return (
-    <div className="member-select">
+    <div className={`member-select ${hasError ? 'error' : ''}`}>
       {!noHeader &&
         <div className="member-select-header">
           <h3 className="member-select-title">{t('app.public.member_select.select_a_member')}</h3>
         </div>
       }
       <AsyncSelect placeholder={t('app.public.member_select.start_typing')}
+                   className="select-input"
                    cacheOptions
                    loadOptions={loadMembers}
                    defaultOptions
@@ -82,4 +84,8 @@ export const MemberSelect: React.FC<MemberSelectProps> = ({ defaultUser, value, 
       />
     </div>
   );
+};
+
+MemberSelect.defaultProps = {
+  hasError: false
 };

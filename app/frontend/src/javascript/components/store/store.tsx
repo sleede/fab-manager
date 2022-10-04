@@ -31,6 +31,19 @@ import SettingAPI from '../../api/setting';
 
 declare const Application: IApplication;
 
+const storeInitialFilters = {
+  ...initialFilters,
+  is_active: true
+};
+
+const storeInitialResources = {
+  ...initialResources,
+  filters: {
+    data: storeInitialFilters,
+    ready: false
+  }
+};
+
 interface StoreProps {
   onError: (message: string) => void,
   onSuccess: (message: string) => void,
@@ -53,7 +66,7 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
 
   const [products, setProducts] = useState<Array<Product>>([]);
   // this includes the resources fetch from the API (machines, categories) and from the URL (filters)
-  const [resources, setResources] = useImmer<ProductResourcesFetching>(initialResources);
+  const [resources, setResources] = useImmer<ProductResourcesFetching>(storeInitialResources);
   const [machinesModule, setMachinesModule] = useState<boolean>(false);
   const [categoriesTree, setCategoriesTree] = useState<CategoryTree[]>([]);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -83,7 +96,7 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
         return {
           ...draft,
           filters: {
-            data: ProductLib.readFiltersFromUrl(uiRouter.globals.params, resources.machines.data, resources.categories.data),
+            data: ProductLib.readFiltersFromUrl(uiRouter.globals.params, resources.machines.data, resources.categories.data, storeInitialFilters),
             ready: true
           }
         };
@@ -142,7 +155,7 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
         filters: {
           ...draft.filters,
           data: {
-            ...initialFilters,
+            ...storeInitialFilters,
             categories: draft.filters.data.categories
           }
         }
@@ -172,7 +185,7 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
    * Filter: toggle non-available products visibility
    */
   const toggleVisible = (checked: boolean) => {
-    ProductLib.updateFilter(setResources, 'is_active', checked);
+    ProductLib.updateFilter(setResources, 'is_available', checked);
   };
 
   /**
@@ -241,7 +254,16 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
               {categoriesTree.map(c =>
                 <div key={c.parent.id} className={`parent ${selectedCategory?.id === c.parent.id || selectedCategory?.parent_id === c.parent.id ? 'is-active' : ''}`}>
                   <p onClick={() => filterCategory(c.parent)}>
-                    {c.parent.name}<span>(count)</span>
+                    {c.parent.name}
+                    <span>
+                      {/* here we add the parent count with the sum of all children counts */}
+                      {
+                        c.parent.products_count +
+                        c.children
+                          .map(ch => ch.products_count)
+                          .reduce((sum, val) => sum + val, 0)
+                      }
+                    </span>
                   </p>
                   {c.children.length > 0 &&
                     <div className='children'>
@@ -249,7 +271,7 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
                         <p key={ch.id}
                           className={selectedCategory?.id === ch.id ? 'is-active' : ''}
                           onClick={() => filterCategory(ch)}>
-                          {ch.name}<span>(count)</span>
+                          {ch.name}<span>{ch.products_count}</span>
                         </p>
                       )}
                     </div>
@@ -281,7 +303,7 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
           selectOptions={buildOptions()}
           onSelectOptionsChange={handleSorting}
           switchLabel={t('app.public.store.products.in_stock_only')}
-          switchChecked={resources.filters.data.is_active}
+          switchChecked={resources.filters.data.is_available}
           selectValue={resources.filters.data.sort}
           onSwitch={toggleVisible}
         />

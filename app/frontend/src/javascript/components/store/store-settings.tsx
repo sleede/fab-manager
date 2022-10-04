@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { react2angular } from 'react2angular';
 import { Loader } from '../base/loader';
 import { IApplication } from '../../models/application';
@@ -8,6 +8,9 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { FabAlert } from '../base/fab-alert';
 import { FormRichText } from '../form/form-rich-text';
 import { FabButton } from '../base/fab-button';
+import SettingAPI from '../../api/setting';
+import SettingLib from '../../lib/setting';
+import { SettingName, SettingValue, storeSettings } from '../../models/setting';
 
 declare const Application: IApplication;
 
@@ -15,25 +18,32 @@ interface StoreSettingsProps {
   onError: (message: string) => void,
   onSuccess: (message: string) => void
 }
-interface Settings {
-  withdrawal: string
-}
 
 /**
- * Shows store settings
+ * Store settings display and edition
  */
-// TODO: delete next eslint disable
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const StoreSettings: React.FC<StoreSettingsProps> = (onError, onSuccess) => {
+export const StoreSettings: React.FC<StoreSettingsProps> = ({ onError, onSuccess }) => {
   const { t } = useTranslation('admin');
+  const { control, handleSubmit, reset } = useForm<Record<SettingName, SettingValue>>();
 
-  const { control, handleSubmit } = useForm<Settings>();
+  useEffect(() => {
+    SettingAPI.query(storeSettings)
+      .then(settings => {
+        const data = SettingLib.mapToBulkObject(settings);
+        reset(data);
+      })
+      .catch(onError);
+  }, []);
 
   /**
-   * Callback triggered when the form is submitted: process with the product creation or update.
+   * Callback triggered when the form is submitted: save the settings
    */
-  const onSubmit: SubmitHandler<Settings> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<Record<SettingName, SettingValue>> = (data) => {
+    SettingAPI.bulkUpdate(SettingLib.bulkObjectToMap(data)).then(() => {
+      onSuccess(t('app.admin.store_settings.update_success'));
+    }, reason => {
+      onError(reason);
+    });
   };
 
   return (
@@ -51,7 +61,7 @@ export const StoreSettings: React.FC<StoreSettingsProps> = (onError, onSuccess) 
                       bulletList
                       link
                       limit={400}
-                      id="withdrawal" />
+                      id="store_withdrawal_instructions" />
         <FabButton type='submit' className='save-btn'>{t('app.admin.store_settings.save')}</FabButton>
       </form>
     </div>
