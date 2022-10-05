@@ -10,6 +10,10 @@ es:
     week:
       one: 'una semana'
       other: '%{count} semanas'
+  activerecord:
+    attributes:
+      product:
+        amount: "The price"
   errors:
     #CarrierWave
     messages:
@@ -38,6 +42,10 @@ es:
       invalid_duration: "La duración permitida es de 1 día a 1 año. Su período es %{DAYS} días de largo."
       must_be_in_the_past: "El período debe ser estrictamente anterior a la fecha de hoy."
       registration_disabled: "Registration is disabled"
+      undefined_in_store: "must be defined to make the product available in the store"
+      gateway_error: "Payement gateway error: %{MESSAGE}"
+      gateway_amount_too_small: "Payments under %{AMOUNT} are not supported. Please contact reception directly."
+      gateway_amount_too_large: "Payments above %{AMOUNT} are not supported. Please contact reception directly."
   apipie:
     api_documentation: "Documentación API"
     code: "HTTP code"
@@ -600,3 +608,5 @@ es:
     machines_module: "Machines module"
     user_change_group: "Allow users to change their group"
     show_username_in_admin_list: "Show the username in the admin's members list"
+    store_module: "Store module"
+    store_withdrawal_instructions: "Withdrawal instructions"
