@@ -246,6 +246,12 @@ zu:
         you_made_an_import: "crwdns29810:0%{CATEGORY}crwdne29810:0"
         category_members: "crwdns29812:0crwdne29812:0"
         click_to_view_results: "crwdns29814:0crwdne29814:0"
+    notify_admin_low_stock_threshold:
+      subject: "crwdns31144:0crwdne31144:0"
+      body:
+        low_stock: "crwdns31146:0%{PRODUCT}crwdne31146:0"
+        stocks_state_html: "crwdns31148:0%{INTERNAL}crwdnd31148:0%{EXTERNAL}crwdne31148:0"
+        manage_stock: "crwdns31150:0crwdne31150:0"
     notify_member_about_coupon:
       subject: "crwdns29816:0crwdne29816:0"
       body:
