@@ -378,7 +378,6 @@ fr:
       subject: "Votre commande est prête"
       body:
         notify_user_order_is_ready: "Votre commande %{REFERENCE} est prête :"
-        please_contact_FABLAB: "Please contact {FABLAB, select, undefined{us} other{{FABLAB}}} for withdrawal instructions."
     notify_user_order_is_canceled:
       subject: "Votre commande est annulée"
       body:
