@@ -592,6 +592,8 @@ fr:
           gift_total: "Total remise"
           coupon: "Code promo"
           cart_total: "Total du panier"
+          pickup: "Pickup your products"
+          please_contact_FABLAB: "Please contact {FABLAB, select, undefined{us} other{{FABLAB}}} for withdrawal instructions."
           state:
             cart: 'Panier'
             in_progress: 'En cours de préparation'
@@ -621,21 +623,22 @@ fr:
             delivered: "Livrée"
           confirm: 'Confirmer'
           confirmation_required: "Confirmation requise"
-          confirm_order_in_progress: "Cette commande est-elle en cours de préparation ?"
+          confirm_order_in_progress_html: "Please confirm this order in being prepared."
           order_in_progress_success: "La commande est en cours de préparation"
-          confirm_order_ready: "Cette commande est-elle prête ?"
+          confirm_order_ready_html: "Please confirm this order is ready."
           order_ready_note: 'Laissez votre message'
           order_ready_success: "La commande est prête"
-          confirm_order_delivered: "Cette commande a-t-elle été livrée ?"
+          confirm_order_delivered_html: "Please confirm this order was delivered."
           order_delivered_success: "La commande a été livrée"
-          confirm_order_canceled: "Voulez-vous annuler cette commande ? Vous pouvez modifier le stock du produit dans la gestion du stock."
+          confirm_order_canceled_html: "<strong>Do you really want to cancel this order?</strong><p>If this impacts stock, please reflect the change in <em>edit product &gt; stock management</em>. This won't be automatic.</p>"
           order_canceled_success: "La commande a été annulée"
-          confirm_order_refunded: "Voulez-vous rembourser cette commande ? Vous pouvez modifier le stock du produit dans la gestion du stock."
+          confirm_order_refunded_html: "<stong>Do you really want to refund this order?</strong><p>If this impacts stock, please reflect the change in <em>edit product &gt; stock management</em>. This won't be automatic.</p>"
           order_refunded_success: "La commande a été remboursée"
       unsaved_form_alert:
         modal_title: "Vous avez des modifications non enregistrées"
         confirmation_message: "Si vous quittez cette page, vos modifications seront perdues. Êtes-vous sûr(e) de vouloir continuer ?"
         confirmation_button: "Oui, ne pas enregistrer"
       active_filters_tags:
+        keyword: "Keyword: {KEYWORD}"
         stock_internal: "Stock interne"
         stock_external: "Stock externe"
