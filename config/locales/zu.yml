@@ -10,6 +10,10 @@ zu:
     week:
       one: 'crwdns3161:1crwdne3161:1'
       other: 'crwdns3161:5%{count}crwdne3161:5'
+  activerecord:
+    attributes:
+      product:
+        amount: "crwdns30724:0crwdne30724:0"
   errors:
     #CarrierWave
     messages:
@@ -38,6 +42,10 @@ zu:
       invalid_duration: "crwdns3207:0%{DAYS}crwdne3207:0"
       must_be_in_the_past: "crwdns3209:0crwdne3209:0"
       registration_disabled: "crwdns22285:0crwdne22285:0"
+      undefined_in_store: "crwdns30726:0crwdne30726:0"
+      gateway_error: "crwdns30728:0%{MESSAGE}crwdne30728:0"
+      gateway_amount_too_small: "crwdns30730:0%{AMOUNT}crwdne30730:0"
+      gateway_amount_too_large: "crwdns30732:0%{AMOUNT}crwdne30732:0"
   apipie:
     api_documentation: "crwdns3257:0crwdne3257:0"
     code: "crwdns20914:0crwdne20914:0"
@@ -600,3 +608,5 @@ zu:
     machines_module: "crwdns23038:0crwdne23038:0"
     user_change_group: "crwdns23040:0crwdne23040:0"
     show_username_in_admin_list: "crwdns24016:0crwdne24016:0"
+    store_module: "crwdns30734:0crwdne30734:0"
+    store_withdrawal_instructions: "crwdns30736:0crwdne30736:0"
