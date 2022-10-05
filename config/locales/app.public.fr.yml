@@ -442,14 +442,13 @@ fr:
         checkout_error: "Une erreur inattendue s'est produite. Veuillez contacter l'administrateur."
         checkout_success: "Achat confirmé. Merci !"
         select_user: "Veuillez sélectionner un utilisateur avant de continuer."
-        please_contact_FABLAB: "Please contact {FABLAB, select, undefined{us} other{{FABLAB}}} for withdrawal instructions."
-        update_item: "Update"
+        update_item: "Mettre à jour"
         errors:
-          product_not_found: "This product is no longer available, please remove it from your cart."
-          out_of_stock: "This product is out of stock, please remove it from your cart."
-          stock_limit_QUANTITY: "Only {QUANTITY} {QUANTITY, plural, =1{unit} other{units}} left in stock, please adjust the quantity of items."
-          quantity_min_QUANTITY: "Minimum number of product was changed to {QUANTITY}, please adjust the quantity of items."
-          price_changed_PRICE: "The product price was modified to {PRICE}"
+          product_not_found: "Ce produit n'est plus disponible, veuillez le retirer de votre panier."
+          out_of_stock: "Ce produit est en rupture de stock, veuillez le retirer de votre panier."
+          stock_limit_QUANTITY: "Seulement {QUANTITY} {QUANTITY, plural, one {}=1{unité} other{unités}} restant en stock, veuillez ajuster la quantité d'articles."
+          quantity_min_QUANTITY: "Le nombre minimum de produits a été changé à {QUANTITY}, veuillez ajuster la quantité d'articles."
+          price_changed_PRICE: "Le prix du produit a été modifié à {PRICE}"
       orders_dashboard:
         heading: "Mes commandes"
         sort:
