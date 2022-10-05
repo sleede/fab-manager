@@ -254,8 +254,7 @@ export const ProductStockForm = <TContext extends object> ({ currentFormValues, 
           </div>
         </div>)}
       </div>
-      <ProductStockModal onError={onError}
-                         onSuccess={onNewStockMovement}
+      <ProductStockModal onSuccess={onNewStockMovement}
                          isOpen={isOpen}
                          toggleModal={toggleModal} />
     </section>

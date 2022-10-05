@@ -19,7 +19,6 @@ type typeSelectOption = { value: StockType, label: string };
 
 interface ProductStockModalProps {
   onSuccess: (movement: ProductStockMovement) => void,
-  onError: (message: string) => void,
   isOpen: boolean,
   toggleModal: () => void,
 }
@@ -27,9 +26,7 @@ interface ProductStockModalProps {
 /**
  * Form to manage a product's stock movement and quantity
  */
-// TODO: delete next eslint disable
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const ProductStockModal: React.FC<ProductStockModalProps> = ({ onError, onSuccess, isOpen, toggleModal }) => {
+export const ProductStockModal: React.FC<ProductStockModalProps> = ({ onSuccess, isOpen, toggleModal }) => {
   const { t } = useTranslation('admin');
 
   const [movement, setMovement] = useState<'in' | 'out'>('in');
