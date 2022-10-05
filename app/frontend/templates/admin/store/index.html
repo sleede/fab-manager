@@ -14,7 +14,7 @@
     <div>
       <uib-tabset justified="true" active="tabs.active">
 
-        <uib-tab heading="{{ 'app.admin.store.settings' | translate }}" index="0" select="selectTab()">
+        <uib-tab heading="{{ 'app.admin.store.settings' | translate }}" index="0" select="selectTab()" ng-hide="currentUser.role == 'manager'">
           <ng-include src="'/admin/store/settings.html'"></ng-include>
         </uib-tab>
 

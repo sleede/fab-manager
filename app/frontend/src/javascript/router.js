@@ -1195,6 +1195,9 @@ angular.module('application.router', ['ui.router'])
       .state('app.admin.store.settings', {
         url: '/settings',
         abstract: !Fablab.storeModule,
+        data: {
+          authorizedRoles: ['admin']
+        },
         views: {
           'main@': {
             templateUrl: '/admin/store/index.html',

@@ -353,6 +353,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
           if (AuthService.isAuthenticated()) {
           // user is not allowed
             console.error('[ApplicationController::initialize] user is not allowed');
+            return false;
           } else {
           // user is not logged in
             openLoginModal(trans.$to().name, trans.$to().params);
