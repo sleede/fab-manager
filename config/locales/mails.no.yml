@@ -246,6 +246,12 @@
         you_made_an_import: "You have initiated an import %{CATEGORY}"
         category_members: "of the members"
         click_to_view_results: "Click here to view results"
+    notify_admin_low_stock_threshold:
+      subject: "Low stock alert"
+      body:
+        low_stock: "A new stock movement of %{PRODUCT} has exceeded the low stock threshold."
+        stocks_state_html: "Current stock status: <ul><li>internal: %{INTERNAL}</li><li>external: %{EXTERNAL}</li></ul>"
+        manage_stock: "Manage stocks for this product"
     notify_member_about_coupon:
       subject: "Coupon"
       body:
