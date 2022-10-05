@@ -9,6 +9,10 @@ class StatisticServiceTest < ActionDispatch::IntegrationTest
     login_as(@admin, scope: :user)
   end
 
+  test 'build default stats' do
+    ::Statistics::BuilderService.generate_statistic
+  end
+
   test 'build stats' do
     # Create a reservation to generate an invoice
     machine = Machine.find(1)
