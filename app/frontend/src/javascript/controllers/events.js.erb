@@ -483,6 +483,8 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
      * @param reservation {Reservation}
      */
     $scope.reservationCanModify = function (reservation) {
+      if (AuthService.isAuthorized(['admin', 'manager'])) return true;
+
       const slotStart = moment(reservation.slots_reservations_attributes[0].slot_attributes.start_at);
       const now = moment();
 
@@ -498,6 +500,8 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
      * @param reservation {Reservation}
      */
     $scope.reservationCanCancel = function(reservation) {
+      if (AuthService.isAuthorized(['admin', 'manager'])) return true;
+
       const slotStart = moment(reservation.slots_reservations_attributes[0].slot_attributes.start_at);
       const now = moment();
       return $scope.enableBookingCancel && slotStart.diff(now, "hours") >= $scope.cancelBookingDelay;

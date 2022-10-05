@@ -1,0 +1,9 @@
+.form-select {
+  .rs__menu .rs__menu-list {
+    .rs__option {
+      &--is-disabled {
+        color: var(--gray-hard-lightest);
+      }
+    }
+  }
+}

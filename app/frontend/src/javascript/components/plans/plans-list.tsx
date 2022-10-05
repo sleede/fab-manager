@@ -117,10 +117,10 @@ export const PlansList: React.FC<PlansListProps> = ({ onError, onPlanSelection, 
   };
 
   /**
-   * When called with a category ID, returns the name of the requested plan-category
+   * When called with a category ID, returns the requested plan-category
    */
-  const categoryName = (categoryId: number): string => {
-    return planCategories.find(c => c.id === categoryId)?.name;
+  const findCategory = (categoryId: number): PlanCategory => {
+    return planCategories.find(c => c.id === categoryId);
   };
 
   /**
@@ -193,10 +193,13 @@ export const PlansList: React.FC<PlansListProps> = ({ onError, onPlanSelection, 
     return (
       <div className="list-of-categories">
         {Array.from(plans).sort(compareCategories).map(([categoryId, plansByCategory]) => {
+          const category = findCategory(categoryId);
           const categoryPlans = plansByCategory.filter(filterPlan);
+          const isShown = !!categoryId && categoryPlans.length > 0;
           return (
             <div key={categoryId} className={`plans-per-category ${categoryId ? 'with-category' : 'no-category'}`}>
-              {!!categoryId && categoryPlans.length > 0 && <h3 className="category-title">{ categoryName(categoryId) }</h3>}
+              {isShown && <h3 className="category-title">{ category.name }</h3>}
+              {isShown && <p className="category-description" dangerouslySetInnerHTML={{ __html: category.description }} />}
               {renderPlans(categoryPlans)}
             </div>
           );
@@ -232,7 +235,7 @@ export const PlansList: React.FC<PlansListProps> = ({ onError, onPlanSelection, 
       {plans && Array.from(filteredPlans()).map(([groupId, plansByGroup]) => {
         return (
           <div key={groupId} className="plans-per-group">
-            <h2 className="group-title">{ groupName(groupId) }</h2>
+            {plansByGroup.size > 0 && <h2 className="group-title">{ groupName(groupId) }</h2>}
             {plansByGroup && renderPlansByCategory(plansByGroup)}
           </div>
         );

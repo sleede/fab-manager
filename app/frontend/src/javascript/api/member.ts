@@ -1,7 +1,7 @@
 import apiClient from './clients/api-client';
 import { AxiosResponse } from 'axios';
 import { serialize } from 'object-to-formdata';
-import { User, UserIndexFilter } from '../models/user';
+import { User, UserIndexFilter, UserRole } from '../models/user';
 
 export default class MemberAPI {
   static async list (filters: UserIndexFilter): Promise<Array<User>> {
@@ -42,6 +42,11 @@ export default class MemberAPI {
         'Content-Type': 'multipart/form-data'
       }
     });
+    return res?.data;
+  }
+
+  static async updateRole (user: User, role: UserRole, groupId?: number): Promise<User> {
+    const res: AxiosResponse<User> = await apiClient.patch(`/api/members/${user.id}/update_role`, { role, group_id: groupId });
     return res?.data;
   }
 

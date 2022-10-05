@@ -24,7 +24,7 @@ class WalletService
           NotificationCenter.call type: 'notify_admin_user_wallet_is_credited',
                                   receiver: User.admins_and_managers,
                                   attached_object: transaction
-          return transaction
+          transaction
         end
       end
       raise ActiveRecord::Rollback
@@ -43,7 +43,7 @@ class WalletService
           amount: amount
         )
 
-        return transaction if transaction.save
+        transaction if transaction.save
       end
       raise ActiveRecord::Rollback
     end
@@ -77,7 +77,6 @@ class WalletService
   # Compute the amount decreased from the user's wallet, if applicable
   # @param payment {Invoice|PaymentSchedule|Order}
   # @param user {User} the customer
-  # @param coupon {Coupon|String} Coupon object or code
   ##
   def self.wallet_amount_debit(payment, user)
     total = if payment.is_a? PaymentSchedule

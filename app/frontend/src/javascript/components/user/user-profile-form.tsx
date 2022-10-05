@@ -59,7 +59,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
   const { t } = useTranslation('shared');
 
   // regular expression to validate the input fields
-  const phoneRegex = /^((00|\+)\d{2,3})?\d{4,14}$/;
+  const phoneRegex = /^((00|\+)\d{2,3})?[\d -]{4,14}$/;
   const urlRegex = /^(https?:\/\/)([^.]+)\.(.{2,30})(\/.*)*\/?$/;
 
   const { handleSubmit, register, control, formState, setValue, reset } = useForm<User>({ defaultValues: { ...user } });

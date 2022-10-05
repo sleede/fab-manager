@@ -1,10 +1,33 @@
 # Changelog Fab-manager
 
-- Script to download translations from Crowdin
 - Fablab's store module
 - Fix a bug: missing translations in PayZen configuration screens
 - Fix a bug: wrong translation key prevents the display of the schedule deadline's payment mean
 - [TODO DEPLOY] `rails db:seed`
+
+## v5.4.21 2022 October 05
+
+- Ability to dismiss a user to a lower privileged role
+- Fix a bug: unable to generate statistics
+- [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2022,08]`
+
+## v5.4.20 2022 September 27
+
+- Fix a bug: unable to show the daily view of the public agenda, if it contains trainings or events
+- Fix a bug: plan's categories descriptions are not shown
+- Fix a bug: groups without plans are shown but empty
+- Fix a bug: unable to display the payment schedules management interface
+
+## v5.4.19 2022 September 13
+
+- Fix a bug: computing the wallet amount to debit ignores the applied coupon
+
+## v5.4.18 2022 September 12
+
+- Script to download translations from Crowdin
+- Fix a bug: admin and managers can't cancel or move event reservations
+- Fix a bug: phone numbers with hyphens and spaces prevent profile completion when the data is provided by an SSO
+- Fix a bug: unable to complete profile from SSO when the account validation is enabled
 
 ## v5.4.17 2022 September 06
 

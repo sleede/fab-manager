@@ -9,19 +9,19 @@ class Members::MembersService
   end
 
   def update(params)
-    if params[:group_id] && @member.group_id != params[:group_id].to_i && !@member.subscribed_plan.nil?
+    if subscriber_group_change?(params)
       # here a group change is requested but unprocessable, handle the exception
       @member.errors.add(:group_id, I18n.t('members.unable_to_change_the_group_while_a_subscription_is_running'))
       return false
     end
 
-    if params[:group_id] && params[:group_id].to_i != Group.find_by(slug: 'admins').id && @member.admin?
+    if admin_group_change?(params)
       # an admin cannot change his group
       @member.errors.add(:group_id, I18n.t('members.admins_cant_change_group'))
       return false
     end
 
-    group_changed = params[:group_id] && @member.group_id != params[:group_id].to_i
+    group_changed = user_group_change?(params)
     ex_group = @member.group
 
     user_validation_required = Setting.get('user_validation_required')
@@ -80,7 +80,7 @@ class Members::MembersService
   end
 
   def validate(is_valid)
-    is_updated = member.update(validated_at: is_valid ? Time.now : nil)
+    is_updated = member.update(validated_at: is_valid ? DateTime.current : nil)
     if is_updated
       if is_valid
         NotificationCenter.call type: 'notify_user_is_validated',
@@ -105,6 +105,44 @@ class Members::MembersService
     end
 
     params
+  end
+
+  def self.last_registered(limit)
+    query = User.active.with_role(:member)
+                .includes(:statistic_profile, profile: [:user_avatar])
+                .where('is_allow_contact = true AND confirmed_at IS NOT NULL')
+                .order('created_at desc')
+                .limit(limit)
+
+    # remove unmerged profiles from list
+    members = query.to_a
+    members.delete_if(&:need_completion?)
+
+    [query, members]
+  end
+
+  def update_role(new_role, new_group_id = Group.first.id)
+    # do nothing if the role does not change
+    return if new_role == @member.role
+
+    # update role
+    ex_role = @member.role.to_sym
+    @member.remove_role ex_role
+    @member.add_role new_role
+
+    # if the new role is 'admin', then change the group to the admins group, otherwise to change to the provided group
+    group_id = new_role == 'admin' ? Group.find_by(slug: 'admins').id : new_group_id
+    @member.update(group_id: group_id)
+
+    # notify
+    NotificationCenter.call type: 'notify_user_role_update',
+                            receiver: @member,
+                            attached_object: @member
+
+    NotificationCenter.call type: 'notify_admins_role_update',
+                            receiver: User.admins_and_managers,
+                            attached_object: @member,
+                            meta_data: { ex_role: ex_role }
   end
 
   private
@@ -132,5 +170,17 @@ class Members::MembersService
     else
       params[:password]
     end
+  end
+
+  def subscriber_group_change?(params)
+    params[:group_id] && @member.group_id != params[:group_id].to_i && !@member.subscribed_plan.nil?
+  end
+
+  def admin_group_change?(params)
+    params[:group_id] && params[:group_id].to_i != Group.find_by(slug: 'admins').id && @member.admin?
+  end
+
+  def user_group_change?(params)
+    @member.group_id && params[:group_id] && @member.group_id != params[:group_id].to_i
   end
 end
