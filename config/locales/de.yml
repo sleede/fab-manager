@@ -44,8 +44,8 @@ de:
       registration_disabled: "Registrierung ist deaktiviert"
       undefined_in_store: "must be defined to make the product available in the store"
       gateway_error: "Payement gateway error: %{MESSAGE}"
-      gateway_amount_too_small: "Payments under %{AMOUNT} are not supported. Please contact reception directly."
-      gateway_amount_too_large: "Payments above %{AMOUNT} are not supported. Please contact reception directly."
+      gateway_amount_too_small: "Payments under %{AMOUNT} are not supported. Please order directly at the reception."
+      gateway_amount_too_large: "Payments above %{AMOUNT} are not supported. Please order directly at the reception."
   apipie:
     api_documentation: "API-Dokumentation"
     code: "HTTP-Code"
@@ -475,6 +475,8 @@ de:
     free_extension: "Kostenlose Verlängerung eines Abonnements bis %{DATE}"
   statistic_profile:
     birthday_in_past: "Geburtsdatum muss in der Vergangenheit liegen"
+  order:
+    please_contact_FABLAB: "Please contact {FABLAB, select, empty{us} other{{FABLAB}}} for withdrawal instructions."
   settings:
     locked_setting: "die Einstellung ist gesperrt."
     about_title: "Seitentitel \"Über\""
