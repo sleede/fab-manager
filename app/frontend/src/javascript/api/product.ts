@@ -1,7 +1,12 @@
 import apiClient from './clients/api-client';
 import { AxiosResponse } from 'axios';
 import { serialize } from 'object-to-formdata';
-import { Product, ProductIndexFilter, ProductsIndex, ProductStockMovement } from '../models/product';
+import {
+  Product,
+  ProductIndexFilter,
+  ProductsIndex,
+  StockMovementIndex, StockMovementIndexFilter
+} from '../models/product';
 import ApiLib from '../lib/api';
 import ProductLib from '../lib/product';
 
@@ -91,8 +96,8 @@ export default class ProductAPI {
     return res?.data;
   }
 
-  static async stockMovements (productId: number, page = 1): Promise<Array<ProductStockMovement>> {
-    const res: AxiosResponse<Array<ProductStockMovement>> = await apiClient.get(`/api/products/${productId}/stock_movements?page=${page}`);
+  static async stockMovements (productId: number, filters: StockMovementIndexFilter): Promise<StockMovementIndex> {
+    const res: AxiosResponse<StockMovementIndex> = await apiClient.get(`/api/products/${productId}/stock_movements${ApiLib.filtersToQuery(filters)}`);
     return res?.data;
   }
 }

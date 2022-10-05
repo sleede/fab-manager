@@ -4,6 +4,7 @@
 class ProductService
   class << self
     PRODUCTS_PER_PAGE = 12
+    MOVEMENTS_PER_PAGE = 10
 
     def list(filters, operator)
       products = Product.includes(:product_images)
@@ -88,6 +89,22 @@ class ProductService
       end
     end
 
+    def stock_movements(filters)
+      movements = ProductStockMovement.where(product_id: filters[:id]).order(date: :desc)
+      movements = filter_by_stock_type(movements, filters)
+      movements = filter_by_reason(movements, filters)
+
+      total_count = movements.count
+      movements = movements.page(filters[:page] || 1).per(MOVEMENTS_PER_PAGE)
+      {
+        data: movements,
+        page: filters[:page]&.to_i || 1,
+        total_pages: movements.page(1).per(MOVEMENTS_PER_PAGE).total_pages,
+        page_size: MOVEMENTS_PER_PAGE,
+        total_count: total_count
+      }
+    end
+
     private
 
     def filter_by_active(products, filters)
@@ -143,6 +160,18 @@ class ProductService
       else
         products.order(key => order)
       end
+    end
+
+    def filter_by_stock_type(movements, filters)
+      return movements if filters[:stock_type].blank? || filters[:stock_type] == 'all'
+
+      movements.where(stock_type: filters[:stock_type])
+    end
+
+    def filter_by_reason(movements, filters)
+      return movements if filters[:reason].blank?
+
+      movements.where(reason: filters[:reason])
     end
   end
 end

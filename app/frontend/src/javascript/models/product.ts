@@ -89,6 +89,14 @@ export interface ProductStockMovement {
   date?: TDateISO
 }
 
+export type StockMovementIndex = PaginatedIndex<ProductStockMovement>;
+
+export interface StockMovementIndexFilter extends ApiFilter {
+  reason?: StockMovementReason,
+  stock_type?: StockType,
+  page?: number,
+}
+
 export interface Product {
   id?: number,
   name: string,

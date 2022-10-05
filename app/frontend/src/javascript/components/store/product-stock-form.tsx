@@ -4,7 +4,12 @@ import { PencilSimple, X } from 'phosphor-react';
 import { useFieldArray, UseFormRegister } from 'react-hook-form';
 import { Control, FormState, UseFormSetValue } from 'react-hook-form/dist/types/form';
 import { useTranslation } from 'react-i18next';
-import { Product, ProductStockMovement, StockMovementReason, StockType } from '../../models/product';
+import {
+  Product,
+  stockMovementAllReasons, StockMovementIndex, StockMovementIndexFilter,
+  StockMovementReason,
+  StockType
+} from '../../models/product';
 import { HtmlTranslate } from '../base/html-translate';
 import { FormSwitch } from '../form/form-switch';
 import { FormInput } from '../form/form-input';
@@ -15,6 +20,8 @@ import { FabStateLabel } from '../base/fab-state-label';
 import ProductAPI from '../../api/product';
 import FormatLib from '../../lib/format';
 import ProductLib from '../../lib/product';
+import { useImmer } from 'use-immer';
+import { FabPagination } from '../base/fab-pagination';
 
 interface ProductStockFormProps<TContext extends object> {
   currentFormValues: Product,
@@ -37,15 +44,16 @@ export const ProductStockForm = <TContext extends object> ({ currentFormValues, 
   const [activeThreshold, setActiveThreshold] = useState<boolean>(currentFormValues.low_stock_threshold != null);
   // is the update stock modal open?
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [stockMovements, setStockMovements] = useState<Array<ProductStockMovement>>([]);
+  const [stockMovements, setStockMovements] = useState<StockMovementIndex>(null);
+  const [filters, setFilters] = useImmer<StockMovementIndexFilter>({ page: 1 });
 
   const { fields, append, remove } = useFieldArray({ control, name: 'product_stock_movements_attributes' });
 
   useEffect(() => {
     if (!currentFormValues?.id) return;
 
-    ProductAPI.stockMovements(currentFormValues.id).then(setStockMovements).catch(onError);
-  }, []);
+    ProductAPI.stockMovements(currentFormValues.id, filters).then(setStockMovements).catch(onError);
+  }, [filters]);
 
   // Styles the React-select component
   const customStyles = {
@@ -65,7 +73,7 @@ export const ProductStockForm = <TContext extends object> ({ currentFormValues, 
    * Creates sorting options to the react-select format
    */
   const buildReasonsOptions = (): Array<reasonSelectOption> => {
-    return (['inward_stock', 'returned', 'cancelled', 'inventory_fix', 'sold', 'missing', 'damaged'] as Array<StockMovementReason>).map(key => {
+    return stockMovementAllReasons.map(key => {
       return { value: key, label: t(ProductLib.stockMovementReasonTrKey(key)) };
     });
   };
@@ -83,16 +91,38 @@ export const ProductStockForm = <TContext extends object> ({ currentFormValues, 
   };
 
   /**
-   * On events option change
+   * On stock movement reason filter change
    */
   const eventsOptionsChange = (evt: reasonSelectOption) => {
-    console.log('Event option:', evt);
+    setFilters(draft => {
+      return {
+        ...draft,
+        reason: evt.value
+      };
+    });
   };
   /**
-   * On stocks option change
+   * On stocks type filter change
    */
   const stocksOptionsChange = (evt: typeSelectOption) => {
-    console.log('Stocks option:', evt);
+    setFilters(draft => {
+      return {
+        ...draft,
+        stock_type: evt.value
+      };
+    });
+  };
+
+  /**
+   * Callback triggered when the user wants to swich the current page of stock movements
+   */
+  const handlePagination = (page: number) => {
+    setFilters(draft => {
+      return {
+        ...draft,
+        page
+      };
+    });
   };
 
   /**
@@ -124,8 +154,8 @@ export const ProductStockForm = <TContext extends object> ({ currentFormValues, 
    * Return the data of the update of the stock for the current product
    */
   const lastStockUpdate = () => {
-    if (stockMovements[0]) {
-      return stockMovements[0].date;
+    if (stockMovements?.data[0]) {
+      return stockMovements?.data[0].date;
     } else {
       return currentFormValues?.created_at || new Date();
     }
@@ -235,7 +265,7 @@ export const ProductStockForm = <TContext extends object> ({ currentFormValues, 
             />
           </div>
         </div>
-        {stockMovements.map(movement => <div className="stock-history" key={movement.id}>
+        {stockMovements?.data?.map(movement => <div className="stock-history" key={movement.id}>
           <div className="stock-item">
             <p className='title'>{currentFormValues.name}</p>
             <p>{FormatLib.date(movement.date)}</p>
@@ -253,6 +283,11 @@ export const ProductStockForm = <TContext extends object> ({ currentFormValues, 
             </div>
           </div>
         </div>)}
+        {stockMovements?.total_pages > 1 &&
+          <FabPagination pageCount={stockMovements.total_pages}
+                         currentPage={stockMovements.page}
+                         selectPage={handlePagination} />
+        }
       </div>
       <ProductStockModal onSuccess={onNewStockMovement}
                          isOpen={isOpen}

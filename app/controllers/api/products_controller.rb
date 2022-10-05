@@ -6,8 +6,6 @@ class API::ProductsController < API::ApiController
   before_action :authenticate_user!, except: %i[index show]
   before_action :set_product, only: %i[update destroy]
 
-  MOVEMENTS_PER_PAGE = 10
-
   def index
     @products = ProductService.list(params, current_user)
   end
@@ -45,7 +43,7 @@ class API::ProductsController < API::ApiController
 
   def stock_movements
     authorize Product
-    @movements = ProductStockMovement.where(product_id: params[:id]).order(date: :desc).page(params[:page]).per(MOVEMENTS_PER_PAGE)
+    @movements = ProductService.stock_movements(params)
   end
 
   private

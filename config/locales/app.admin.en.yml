@@ -2046,6 +2046,7 @@ en:
           type_in: "Add"
           type_out: "Remove"
           cancel: "Cancel this operation"
+          load_more: "Load more"
         product_stock_modal:
           modal_title: "Manage stock"
           internal: "Private stock"
@@ -2065,8 +2066,8 @@ en:
           sold: "Sold"
           missing: "Missing in stock"
           damaged: "Damaged product"
-          other_in: "Other"
-          other_out: "Other"
+          other_in: "Other (in)"
+          other_out: "Other (out)"
         orders:
           heading: "Orders"
           create_order: "Create an order"
