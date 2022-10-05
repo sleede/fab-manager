@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v5.4.21 2022 October 05
+
 - Ability to dismiss a user to a lower privileged role
 - Fix a bug: unable to generate statistics
 - [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2022,08]`
