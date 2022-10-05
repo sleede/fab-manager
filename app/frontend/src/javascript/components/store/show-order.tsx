@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import _ from 'lodash';
 import { IApplication } from '../../models/application';
 import { User } from '../../models/user';
 import { react2angular } from 'react2angular';
@@ -12,8 +11,6 @@ import { Order } from '../../models/order';
 import FormatLib from '../../lib/format';
 import OrderLib from '../../lib/order';
 import { OrderActions } from './order-actions';
-import SettingAPI from '../../api/setting';
-import { SettingName } from '../../models/setting';
 
 declare const Application: IApplication;
 
@@ -31,16 +28,19 @@ export const ShowOrder: React.FC<ShowOrderProps> = ({ orderId, currentUser, onSu
   const { t } = useTranslation('shared');
 
   const [order, setOrder] = useState<Order>();
-  const [settings, setSettings] = useState<Map<SettingName, string>>(null);
+  const [withdrawalInstructions, setWithdrawalInstructions] = useState<string>(null);
 
   useEffect(() => {
     OrderAPI.get(orderId).then(data => {
       setOrder(data);
     }).catch(onError);
-    SettingAPI.query(['store_withdrawal_instructions', 'fablab_name'])
-      .then(res => setSettings(res))
-      .catch(onError);
   }, []);
+
+  useEffect(() => {
+    OrderAPI.withdrawalInstructions(order)
+      .then(setWithdrawalInstructions)
+      .catch(onError);
+  }, [order]);
 
   /**
    * Check if the current operator has administrative rights or is a normal member
@@ -77,17 +77,6 @@ export const ShowOrder: React.FC<ShowOrderProps> = ({ orderId, currentUser, onSu
       }
     }
     return paymentVerbose;
-  };
-
-  /**
-   * Text instructions for the customer
-   */
-  const withdrawalInstructions = (): string => {
-    const instructions = settings?.get('store_withdrawal_instructions');
-    if (!_.isEmpty(instructions)) {
-      return instructions;
-    }
-    return t('app.shared.store.show_order.please_contact_FABLAB', { FABLAB: settings?.get('fablab_name') });
   };
 
   /**
@@ -202,7 +191,7 @@ export const ShowOrder: React.FC<ShowOrderProps> = ({ orderId, currentUser, onSu
         </div>
         <div className="withdrawal-instructions">
           <label>{t('app.shared.store.show_order.pickup')}</label>
-          <p dangerouslySetInnerHTML={{ __html: withdrawalInstructions() }} />
+          <p dangerouslySetInnerHTML={{ __html: withdrawalInstructions }} />
         </div>
       </div>
     </div>

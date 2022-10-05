@@ -25,6 +25,17 @@ class API::OrdersController < API::ApiController
     head :no_content
   end
 
+  def withdrawal_instructions
+    begin
+      order = Order.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      order = nil
+    end
+    authorize order || Order
+
+    render html: ::Orders::OrderService.withdrawal_instructions(order)
+  end
+
   private
 
   def set_order

@@ -378,12 +378,11 @@ en:
       subject: "Your command is ready"
       body:
         notify_user_order_is_ready: "Your command %{REFERENCE} is ready:"
-        please_contact_FABLAB: "Please contact {FABLAB, select, undefined{us} other{{FABLAB}}} for withdrawal instructions."
     notify_user_order_is_canceled:
-      subject: "Your command is canceled"
+      subject: "Your command was canceled"
       body:
-        notify_user_order_is_canceled: "Your command %{REFERENCE} is canceled."
+        notify_user_order_is_canceled: "Your command %{REFERENCE} was canceled."
     notify_user_order_is_refunded:
-      subject: "Your command is refunded"
+      subject: "Your command was refunded"
       body:
-        notify_user_order_is_refunded: "Your command %{REFERENCE} is refunded:"
+        notify_user_order_is_refunded: "Your command %{REFERENCE} was refunded."

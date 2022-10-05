@@ -18,9 +18,8 @@ import noImage from '../../../../images/no_image.png';
 import Switch from 'react-switch';
 import OrderLib from '../../lib/order';
 import { CaretDown, CaretUp } from 'phosphor-react';
-import SettingAPI from '../../api/setting';
-import { SettingName } from '../../models/setting';
 import _ from 'lodash';
+import OrderAPI from '../../api/order';
 
 declare const Application: IApplication;
 
@@ -41,11 +40,11 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
   const [cartErrors, setCartErrors] = useState<OrderErrors>(null);
   const [noMemberError, setNoMemberError] = useState<boolean>(false);
   const [paymentModal, setPaymentModal] = useState<boolean>(false);
-  const [settings, setSettings] = useState<Map<SettingName, string>>(null);
+  const [withdrawalInstructions, setWithdrawalInstructions] = useState<string>(null);
 
   useEffect(() => {
-    SettingAPI.query(['store_withdrawal_instructions', 'fablab_name'])
-      .then(res => setSettings(res))
+    OrderAPI.withdrawalInstructions(cart)
+      .then(setWithdrawalInstructions)
       .catch(onError);
   }, []);
 
@@ -244,17 +243,6 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
     }
   };
 
-  /**
-   * Text instructions for the customer
-   */
-  const withdrawalInstructions = (): string => {
-    const instructions = settings?.get('store_withdrawal_instructions');
-    if (!_.isEmpty(instructions)) {
-      return instructions;
-    }
-    return t('app.public.store_cart.please_contact_FABLAB', { FABLAB: settings?.get('fablab_name') });
-  };
-
   return (
     <div className='store-cart'>
       <div className="store-cart-list">
@@ -319,7 +307,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
       <div className="group">
         <div className='store-cart-info'>
           <h3>{t('app.public.store_cart.pickup')}</h3>
-          <p dangerouslySetInnerHTML={{ __html: withdrawalInstructions() }} />
+          <p dangerouslySetInnerHTML={{ __html: withdrawalInstructions }} />
         </div>
 
         {cart && !cartIsEmpty() &&

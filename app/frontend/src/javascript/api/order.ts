@@ -18,4 +18,9 @@ export default class OrderAPI {
     const res: AxiosResponse<Order> = await apiClient.patch(`/api/orders/${order.id}`, { order: { state, note } });
     return res?.data;
   }
+
+  static async withdrawalInstructions (order?: Order): Promise<string> {
+    const res: AxiosResponse<string> = await apiClient.get(`/api/orders/${order?.id}/withdrawal_instructions`);
+    return res?.data;
+  }
 }

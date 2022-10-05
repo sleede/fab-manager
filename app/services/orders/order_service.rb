@@ -3,6 +3,8 @@
 # Provides methods for Order
 class Orders::OrderService
   class << self
+    include ApplicationHelper
+
     ORDERS_PER_PAGE = 20
 
     def list(filters, current_user)
@@ -69,6 +71,14 @@ class Orders::OrderService
         return false unless item.orderable.is_active
       end
       true
+    end
+
+    def withdrawal_instructions(order)
+      res = order&.order_activities&.find_by(activity_type: 'ready')&.note.presence ||
+            Setting.get('store_withdrawal_instructions').presence ||
+            _t('order.please_contact_FABLAB', FABLAB: Setting.get('fablab_name').presence || 'empty')
+
+      ActionController::Base.helpers.sanitize(res, tags: %w[p ul li h3 u em strong a], attributes: %w[target rel href])
     end
 
     private

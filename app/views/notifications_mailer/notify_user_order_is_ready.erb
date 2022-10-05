@@ -4,5 +4,5 @@
 <%= t('.body.notify_user_order_is_ready', REFERENCE: @attached_object.order.reference) %>
 </p>
 <p>
-  <%= sanitize @attached_object.note.presence || Setting.get('store_withdrawal_istructions').presence || _t('notify_user_order_is_ready.body.please_contact_FABLAB', FABLAB: Setting.get('fablab_name')) %>
+  <%= ::Orders::OrderService.withdrawal_instructions(@attached_object.order) %>
 </p>
