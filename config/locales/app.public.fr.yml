@@ -400,18 +400,25 @@ fr:
             price_low: "Prix : croissant"
             price_high: "Prix : décroissant"
       store_product:
+        ref: "ref: {REF}"
+        add_to_cart_success: "Produit ajouté au panier."
         unexpected_error_occurred: "Une erreur inattendue s'est produite. Veuillez réessayer plus tard."
         show_more: "Afficher plus"
         show_less: "Afficher moins"
         documentation: "Documentation"
-      store_product_item:
+        minimum_purchase: "Achat minimum : "
+        add_to_cart: "Ajouter au panier"
+      stock_status:
         available: "Disponible"
         limited_stock: "Stock limité"
         out_of_stock: "Rupture de stock"
+      store_product_item:
         minimum_purchase: "Achat minimum : "
         add: "Ajouter"
         add_to_cart: "Ajouter au panier"
-        unit: "unité"
+      product_price:
+        per_unit: "/ unité"
+        free: "Gratuit"
       cart:
         my_cart: "Mon panier"
       cart_button:
@@ -434,6 +441,15 @@ fr:
         checkout_total: "Total du panier"
         checkout_error: "Une erreur inattendue s'est produite. Veuillez contacter l'administrateur."
         checkout_success: "Achat confirmé. Merci !"
+        select_user: "Veuillez sélectionner un utilisateur avant de continuer."
+        please_contact_FABLAB: "Please contact {FABLAB, select, undefined{us} other{{FABLAB}}} for withdrawal instructions."
+        update_item: "Update"
+        errors:
+          product_not_found: "This product is no longer available, please remove it from your cart."
+          out_of_stock: "This product is out of stock, please remove it from your cart."
+          stock_limit_QUANTITY: "Only {QUANTITY} {QUANTITY, plural, =1{unit} other{units}} left in stock, please adjust the quantity of items."
+          quantity_min_QUANTITY: "Minimum number of product was changed to {QUANTITY}, please adjust the quantity of items."
+          price_changed_PRICE: "The product price was modified to {PRICE}"
       orders_dashboard:
         heading: "Mes commandes"
         sort:
