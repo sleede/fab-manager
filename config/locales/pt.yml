@@ -10,6 +10,10 @@ pt:
     week:
       one: 'uma semana'
       other: '%{count} semanas'
+  activerecord:
+    attributes:
+      product:
+        amount: "The price"
   errors:
     #CarrierWave
     messages:
@@ -38,6 +42,10 @@ pt:
       invalid_duration: "A duração permitida deve ter entre 1 dia e 1 ano. Sua menstruação tem %{DAYS} dias."
       must_be_in_the_past: "O período deve ser estritamente anterior à data de hoje."
       registration_disabled: "Registo está desabilitado"
+      undefined_in_store: "must be defined to make the product available in the store"
+      gateway_error: "Payement gateway error: %{MESSAGE}"
+      gateway_amount_too_small: "Payments under %{AMOUNT} are not supported. Please order directly at the reception."
+      gateway_amount_too_large: "Payments above %{AMOUNT} are not supported. Please order directly at the reception."
   apipie:
     api_documentation: "Documentação da API"
     code: "Código HTTP"
@@ -467,6 +475,8 @@ pt:
     free_extension: "Extensão gratuita de uma assinatura, até %{DATE}"
   statistic_profile:
     birthday_in_past: "A data de nascimento deve estar no passado"
+  order:
+    please_contact_FABLAB: "Please contact {FABLAB, select, empty{us} other{{FABLAB}}} for withdrawal instructions."
   settings:
     locked_setting: "a configuração está bloqueada."
     about_title: "\"Sobre\" título da página"
@@ -600,3 +610,5 @@ pt:
     machines_module: "Módulo de Máquinas"
     user_change_group: "Permitir que os usuários mudem de grupo"
     show_username_in_admin_list: "Mostrar o nome de usuário na lista de membros do administrador"
+    store_module: "Store module"
+    store_withdrawal_instructions: "Withdrawal instructions"

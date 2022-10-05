@@ -10,6 +10,10 @@ fr:
     week:
       one: 'une semaine'
       other: '%{count} semaines'
+  activerecord:
+    attributes:
+      product:
+        amount: "Le Prix"
   errors:
     #CarrierWave
     messages:
@@ -38,6 +42,10 @@ fr:
       invalid_duration: "La durée doit être comprise entre 1 jour et 1 an. Votre période dure %{DAYS} jours."
       must_be_in_the_past: "La période doit être strictement antérieure à la date du jour."
       registration_disabled: "L'inscription est désactivée"
+      undefined_in_store: "doit être défini pour rendre le produit disponible dans la boutique"
+      gateway_error: "Erreur de la passerelle de paiement : %{MESSAGE}"
+      gateway_amount_too_small: "Les paiements inférieurs à %{AMOUNT} ne sont pas pris en charge. Merci de passer commande directement à l'accueil."
+      gateway_amount_too_large: "Les paiements supérieurs à %{AMOUNT} ne sont pas pris en charge. Merci de passer commande directement à l'accueil."
   apipie:
     api_documentation: "Documentation de l'API"
     code: "Code HTTP "
@@ -467,6 +475,8 @@ fr:
     free_extension: "Extension gratuite d'un abonnement, jusqu'au %{DATE}"
   statistic_profile:
     birthday_in_past: "La date de naissance doit être dans le passé"
+  order:
+    please_contact_FABLAB: "Veuillez {FABLAB, select, empty{nous contacter} other{contacter {FABLAB}}} pour les instructions de retrait."
   settings:
     locked_setting: "le paramètre est verrouillé."
     about_title: "Le titre de la page \"À propos\""
@@ -600,3 +610,5 @@ fr:
     machines_module: "Module machines"
     user_change_group: "Permettre aux utilisateurs de changer leur groupe"
     show_username_in_admin_list: "Afficher le nom d'utilisateur dans la liste des membres de l'administrateur"
+    store_module: "Module boutique"
+    store_withdrawal_instructions: "Instructions de retrait"

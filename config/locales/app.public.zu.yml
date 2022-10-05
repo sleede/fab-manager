@@ -400,18 +400,25 @@ zu:
             price_low: "crwdns30350:0crwdne30350:0"
             price_high: "crwdns30352:0crwdne30352:0"
       store_product:
+        ref: "crwdns30674:0{REF}crwdne30674:0"
+        add_to_cart_success: "crwdns30676:0crwdne30676:0"
         unexpected_error_occurred: "crwdns30354:0crwdne30354:0"
         show_more: "crwdns30356:0crwdne30356:0"
         show_less: "crwdns30358:0crwdne30358:0"
         documentation: "crwdns30360:0crwdne30360:0"
+        minimum_purchase: "crwdns30678:0crwdne30678:0"
+        add_to_cart: "crwdns30680:0crwdne30680:0"
+      stock_status:
+        available: "crwdns30682:0crwdne30682:0"
+        limited_stock: "crwdns30684:0crwdne30684:0"
+        out_of_stock: "crwdns30686:0crwdne30686:0"
       store_product_item:
-        available: "crwdns30362:0crwdne30362:0"
-        limited_stock: "crwdns30364:0crwdne30364:0"
-        out_of_stock: "crwdns30366:0crwdne30366:0"
         minimum_purchase: "crwdns30368:0crwdne30368:0"
         add: "crwdns30370:0crwdne30370:0"
         add_to_cart: "crwdns30372:0crwdne30372:0"
-        unit: "crwdns30374:0crwdne30374:0"
+      product_price:
+        per_unit: "crwdns30688:0crwdne30688:0"
+        free: "crwdns30690:0crwdne30690:0"
       cart:
         my_cart: "crwdns30376:0crwdne30376:0"
       cart_button:
@@ -434,6 +441,14 @@ zu:
         checkout_total: "crwdns30406:0crwdne30406:0"
         checkout_error: "crwdns30408:0crwdne30408:0"
         checkout_success: "crwdns30410:0crwdne30410:0"
+        select_user: "crwdns30692:0crwdne30692:0"
+        update_item: "crwdns30696:0crwdne30696:0"
+        errors:
+          product_not_found: "crwdns30698:0crwdne30698:0"
+          out_of_stock: "crwdns30700:0crwdne30700:0"
+          stock_limit_QUANTITY: "crwdns30702:0QUANTITY={QUANTITY}crwdnd30702:0QUANTITY={QUANTITY}crwdne30702:0"
+          quantity_min_QUANTITY: "crwdns30704:0{QUANTITY}crwdne30704:0"
+          price_changed_PRICE: "crwdns30706:0{PRICE}crwdne30706:0"
       orders_dashboard:
         heading: "crwdns30642:0crwdne30642:0"
         sort:

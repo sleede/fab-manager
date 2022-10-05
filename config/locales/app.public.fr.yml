@@ -400,18 +400,25 @@ fr:
             price_low: "Prix : croissant"
             price_high: "Prix : décroissant"
       store_product:
+        ref: "ref: {REF}"
+        add_to_cart_success: "Produit ajouté au panier."
         unexpected_error_occurred: "Une erreur inattendue s'est produite. Veuillez réessayer plus tard."
         show_more: "Afficher plus"
         show_less: "Afficher moins"
         documentation: "Documentation"
-      store_product_item:
+        minimum_purchase: "Achat minimum : "
+        add_to_cart: "Ajouter au panier"
+      stock_status:
         available: "Disponible"
         limited_stock: "Stock limité"
         out_of_stock: "Rupture de stock"
+      store_product_item:
         minimum_purchase: "Achat minimum : "
         add: "Ajouter"
         add_to_cart: "Ajouter au panier"
-        unit: "unité"
+      product_price:
+        per_unit: "/ unité"
+        free: "Gratuit"
       cart:
         my_cart: "Mon panier"
       cart_button:
@@ -434,6 +441,14 @@ fr:
         checkout_total: "Total du panier"
         checkout_error: "Une erreur inattendue s'est produite. Veuillez contacter l'administrateur."
         checkout_success: "Achat confirmé. Merci !"
+        select_user: "Veuillez sélectionner un utilisateur avant de continuer."
+        update_item: "Mettre à jour"
+        errors:
+          product_not_found: "Ce produit n'est plus disponible, veuillez le retirer de votre panier."
+          out_of_stock: "Ce produit est en rupture de stock, veuillez le retirer de votre panier."
+          stock_limit_QUANTITY: "Seulement {QUANTITY} {QUANTITY, plural, one {}=1{unité} other{unités}} restant en stock, veuillez ajuster la quantité d'articles."
+          quantity_min_QUANTITY: "Le nombre minimum de produits a été changé à {QUANTITY}, veuillez ajuster la quantité d'articles."
+          price_changed_PRICE: "Le prix du produit a été modifié à {PRICE}"
       orders_dashboard:
         heading: "Mes commandes"
         sort:
