@@ -2018,7 +2018,7 @@ en:
           product_description: "Product description"
           product_description_info: "<strong>Information</strong></br>This product description will be presented in the product sheet. You have a few editorial styles at your disposal to create the product sheet."
           product_files: "Document"
-          product_files_info: "<strong>Information</strong></br>Add documents related to this product. They will be presented in the product sheet, in a separate block. You can only upload pdf documents."
+          product_files_info: "<strong>Information</strong></br>Add documents related to this product. They will be presented in the product sheet, in a separate block. You can only upload PDF documents."
           add_product_file: "Add a document"
           product_images: "Pictures of the product"
           product_images_info: "<strong>Advice</strong></br>We advise you to use a square format, JPG or PNG. For JPG, please use white for the background colour. The main visual will be the first presented in the product sheet."
@@ -2046,7 +2046,6 @@ en:
           type_in: "Add"
           type_out: "Remove"
           cancel: "Cancel this operation"
-          load_more: "Load more"
         product_stock_modal:
           modal_title: "Manage stock"
           internal: "Private stock"
