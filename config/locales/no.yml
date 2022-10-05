@@ -10,6 +10,10 @@
     week:
       one: 'en uke'
       other: '%{count} weeks'
+  activerecord:
+    attributes:
+      product:
+        amount: "The price"
   errors:
     #CarrierWave
     messages:
@@ -38,6 +42,10 @@
       invalid_duration: "Den tillatte varigheten må være mellom 1 dag og 1 år. Din periode er %{DAYS} dager lang."
       must_be_in_the_past: "Perioden må være før dagens dato."
       registration_disabled: "Registration is disabled"
+      undefined_in_store: "must be defined to make the product available in the store"
+      gateway_error: "Payement gateway error: %{MESSAGE}"
+      gateway_amount_too_small: "Payments under %{AMOUNT} are not supported. Please contact reception directly."
+      gateway_amount_too_large: "Payments above %{AMOUNT} are not supported. Please contact reception directly."
   apipie:
     api_documentation: "API-dokumentasjon"
     code: "HTTP kode"
@@ -600,3 +608,5 @@
     machines_module: "Machines module"
     user_change_group: "Allow users to change their group"
     show_username_in_admin_list: "Show the username in the admin's members list"
+    store_module: "Store module"
+    store_withdrawal_instructions: "Withdrawal instructions"
