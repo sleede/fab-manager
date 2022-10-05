@@ -592,6 +592,8 @@ zu:
           gift_total: "crwdns30480:0crwdne30480:0"
           coupon: "crwdns30482:0crwdne30482:0"
           cart_total: "crwdns30484:0crwdne30484:0"
+          pickup: "crwdns30708:0crwdne30708:0"
+          please_contact_FABLAB: "crwdns30710:0FABLAB={FABLAB}crwdnd30710:0FABLAB={FABLAB}crwdne30710:0"
           state:
             cart: 'crwdns30486:0crwdne30486:0'
             in_progress: 'crwdns30488:0crwdne30488:0'
@@ -621,21 +623,22 @@ zu:
             delivered: "crwdns30530:0crwdne30530:0"
           confirm: 'crwdns30532:0crwdne30532:0'
           confirmation_required: "crwdns30534:0crwdne30534:0"
-          confirm_order_in_progress: "crwdns30616:0crwdne30616:0"
+          confirm_order_in_progress_html: "crwdns30712:0crwdne30712:0"
           order_in_progress_success: "crwdns30538:0crwdne30538:0"
-          confirm_order_ready: "crwdns30618:0crwdne30618:0"
+          confirm_order_ready_html: "crwdns30714:0crwdne30714:0"
           order_ready_note: 'crwdns30542:0crwdne30542:0'
           order_ready_success: "crwdns30544:0crwdne30544:0"
-          confirm_order_delivered: "crwdns30620:0crwdne30620:0"
+          confirm_order_delivered_html: "crwdns30716:0crwdne30716:0"
           order_delivered_success: "crwdns30622:0crwdne30622:0"
-          confirm_order_canceled: "crwdns30624:0crwdne30624:0"
+          confirm_order_canceled_html: "crwdns30718:0crwdne30718:0"
           order_canceled_success: "crwdns30626:0crwdne30626:0"
-          confirm_order_refunded: "crwdns30628:0crwdne30628:0"
+          confirm_order_refunded_html: "crwdns30720:0crwdne30720:0"
           order_refunded_success: "crwdns30630:0crwdne30630:0"
       unsaved_form_alert:
         modal_title: "crwdns30558:0crwdne30558:0"
         confirmation_message: "crwdns30560:0crwdne30560:0"
         confirmation_button: "crwdns30562:0crwdne30562:0"
       active_filters_tags:
+        keyword: "crwdns30722:0{KEYWORD}crwdne30722:0"
         stock_internal: "crwdns30564:0crwdne30564:0"
         stock_external: "crwdns30566:0crwdne30566:0"
