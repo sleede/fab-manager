@@ -46,6 +46,7 @@ en:
       gateway_error: "Payement gateway error: %{MESSAGE}"
       gateway_amount_too_small: "Payments under %{AMOUNT} are not supported. Please order directly at the reception."
       gateway_amount_too_large: "Payments above %{AMOUNT} are not supported. Please order directly at the reception."
+      product_in_use: "This product have already been ordered"
   apipie:
     api_documentation: "API Documentation"
     code: "HTTP code"

@@ -69,7 +69,7 @@ class ProductService
     def destroy(product)
       used_in_order = OrderItem.joins(:order).where.not('orders.state' => 'cart')
                                .exists?(orderable: product)
-      raise CannotDeleteProductError if used_in_order
+      raise CannotDeleteProductError, I18n.t('errors.messages.product_in_use') if used_in_order
 
       ActiveRecord::Base.transaction do
         orders_with_product = Order.joins(:order_items).where(state: 'cart').where('order_items.orderable': product)
