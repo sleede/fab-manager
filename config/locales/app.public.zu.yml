@@ -442,7 +442,6 @@ zu:
         checkout_error: "crwdns30408:0crwdne30408:0"
         checkout_success: "crwdns30410:0crwdne30410:0"
         select_user: "crwdns30692:0crwdne30692:0"
-        please_contact_FABLAB: "crwdns30694:0FABLAB={FABLAB}crwdnd30694:0FABLAB={FABLAB}crwdne30694:0"
         update_item: "crwdns30696:0crwdne30696:0"
         errors:
           product_not_found: "crwdns30698:0crwdne30698:0"
