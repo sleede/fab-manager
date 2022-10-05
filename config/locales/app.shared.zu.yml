@@ -593,7 +593,6 @@ zu:
           coupon: "crwdns30482:0crwdne30482:0"
           cart_total: "crwdns30484:0crwdne30484:0"
           pickup: "crwdns30708:0crwdne30708:0"
-          please_contact_FABLAB: "crwdns30710:0FABLAB={FABLAB}crwdnd30710:0FABLAB={FABLAB}crwdne30710:0"
           state:
             cart: 'crwdns30486:0crwdne30486:0'
             in_progress: 'crwdns30488:0crwdne30488:0'
