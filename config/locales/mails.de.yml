@@ -378,6 +378,7 @@ de:
       subject: "Your command is ready"
       body:
         notify_user_order_is_ready: "Your command %{REFERENCE} is ready:"
+        please_contact_FABLAB: "Please contact {FABLAB, select, undefined{us} other{{FABLAB}}} for withdrawal instructions."
     notify_user_order_is_canceled:
       subject: "Your command is canceled"
       body:
