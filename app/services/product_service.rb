@@ -49,6 +49,13 @@ class ProductService
         }
       end || {}
       product.stock = remaining_stock
+      affected_stocks = stock_movements&.map { |m| m[:stock_type] }&.uniq
+      if (remaining_stock[:internal] < product.low_stock_threshold && affected_stocks&.include?('internal')) ||
+         (remaining_stock[:external] < product.low_stock_threshold && affected_stocks&.include?('external'))
+        NotificationCenter.call type: 'notify_admin_low_stock_threshold',
+                                receiver: User.admins_and_managers,
+                                attached_object: product
+      end
       product
     end
 

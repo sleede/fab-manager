@@ -72,6 +72,7 @@ class NotificationType
     notify_user_order_is_ready
     notify_user_order_is_canceled
     notify_user_order_is_refunded
+    notify_admin_low_stock_threshold
   ]
   # deprecated:
   # - notify_member_subscribed_plan_is_changed
