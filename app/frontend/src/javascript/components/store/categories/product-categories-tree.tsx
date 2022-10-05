@@ -113,9 +113,13 @@ export const ProductCategoriesTree: React.FC<ProductCategoriesTreeProps> = ({ pr
         if (activeData.offset === 'down' && sortedId === active.id && activeData.index < newIndex && active.id !== over.id) {
           category = { ...category, parent_id: Number(over.id) };
           droppedItem = category;
+          newPosition = 1;
         } else if (activeData.offset === 'down' && sortedId === active.id && (activeData.index > newIndex || active.id === over.id)) {
-          category = { ...category, parent_id: getPreviousAdopter(over.id) };
+          const adopter = getPreviousAdopter(over.id);
+          const siblingsLength = getChildren(adopter)?.length | 0;
+          category = { ...category, parent_id: adopter };
           droppedItem = category;
+          newPosition = siblingsLength + 1;
         }
         return category;
       });
@@ -129,14 +133,15 @@ export const ProductCategoriesTree: React.FC<ProductCategoriesTreeProps> = ({ pr
         if (activeData.offset === 'down' && sortedId === active.id && activeData.index < newIndex) {
           category = { ...category, parent_id: Number(over.id) };
           droppedItem = category;
-          newPosition = 0;
+          newPosition = 1;
         } else if (activeData.offset === 'down' && sortedId === active.id && activeData.index > newIndex) {
           category = { ...category, parent_id: getPreviousAdopter(over.id) };
           droppedItem = category;
-          newPosition = getChildren(getPreviousAdopter(over.id))?.length || 0;
+          newPosition = getChildren(getPreviousAdopter(over.id))?.length || 1;
         } else if (sortedId === active.id) {
           category = { ...category, parent_id: null };
           droppedItem = category;
+          newPosition = getCategory(over.id).position + 1;
         }
         return category;
       });
@@ -153,7 +158,7 @@ export const ProductCategoriesTree: React.FC<ProductCategoriesTreeProps> = ({ pr
             if (sortedId === active.id) {
               category = { ...category, parent_id: Number(over.id) };
               droppedItem = category;
-              newPosition = 0;
+              newPosition = 1;
             }
             return category;
           });
@@ -166,7 +171,7 @@ export const ProductCategoriesTree: React.FC<ProductCategoriesTreeProps> = ({ pr
             } else if (sortedId === active.id && activeData.offset === 'down') {
               category = { ...category, parent_id: getPreviousAdopter(over.id) };
               droppedItem = category;
-              newPosition = getChildren(getPreviousAdopter(over.id))?.length || 0;
+              newPosition = getChildren(getPreviousAdopter(over.id))?.length || 1;
             }
             return category;
           });
@@ -182,6 +187,7 @@ export const ProductCategoriesTree: React.FC<ProductCategoriesTreeProps> = ({ pr
             if (sortedId === active.id) {
               category = { ...category, parent_id: null };
               droppedItem = category;
+              newPosition = getCategory(getCategory(over.id).parent_id).position + 1;
             }
             return category;
           });
@@ -219,15 +225,17 @@ export const ProductCategoriesTree: React.FC<ProductCategoriesTreeProps> = ({ pr
       }
       // [B]:Child
       if (overStatus === 'child') {
+        const parent = newOrder.find(c => c.id === getCategory(over.id).parent_id);
         if (activeData.index < newIndex) {
-          const parent = newOrder.find(c => c.id === getCategory(over.id).parent_id);
           newIndex = newOrder.findIndex(c => c.id === getChildren(parent.id).pop().id);
           const newIdsOrder = arrayMove(currentIdsOrder, activeData.index, newIndex);
           newOrder = newIdsOrder.map(sortedId => getCategory(sortedId));
+          newPosition = parent.position;
         } else {
           newIndex = currentIdsOrder.indexOf(getCategory(over.id).parent_id);
           const newIdsOrder = arrayMove(currentIdsOrder, activeData.index, newIndex);
           newOrder = newIdsOrder.map(sortedId => getCategory(sortedId));
+          newPosition = parent.position;
         }
       }
       // insert children back

@@ -36,11 +36,12 @@ class API::ProductCategoriesController < API::ApiController
 
   def position
     authorize @product_category
+    render json: @product_category, status: :not_modified and return if @product_category.position == params[:position]
 
     if @product_category.insert_at(params[:position])
       render :show
     else
-      render json: @product_category.errors, status: :unprocessable_entity
+      render json: @product_category.errors.full_messages, status: :unprocessable_entity
     end
   end
 
