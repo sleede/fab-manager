@@ -44,8 +44,8 @@ pt:
       registration_disabled: "Registo está desabilitado"
       undefined_in_store: "must be defined to make the product available in the store"
       gateway_error: "Payement gateway error: %{MESSAGE}"
-      gateway_amount_too_small: "Payments under %{AMOUNT} are not supported. Please contact reception directly."
-      gateway_amount_too_large: "Payments above %{AMOUNT} are not supported. Please contact reception directly."
+      gateway_amount_too_small: "Payments under %{AMOUNT} are not supported. Please order directly at the reception."
+      gateway_amount_too_large: "Payments above %{AMOUNT} are not supported. Please order directly at the reception."
   apipie:
     api_documentation: "Documentação da API"
     code: "Código HTTP"
@@ -475,6 +475,8 @@ pt:
     free_extension: "Extensão gratuita de uma assinatura, até %{DATE}"
   statistic_profile:
     birthday_in_past: "A data de nascimento deve estar no passado"
+  order:
+    please_contact_FABLAB: "Please contact {FABLAB, select, empty{us} other{{FABLAB}}} for withdrawal instructions."
   settings:
     locked_setting: "a configuração está bloqueada."
     about_title: "\"Sobre\" título da página"
