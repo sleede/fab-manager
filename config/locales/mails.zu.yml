@@ -378,7 +378,6 @@ zu:
       subject: "crwdns30576:0crwdne30576:0"
       body:
         notify_user_order_is_ready: "crwdns30578:0%{REFERENCE}crwdne30578:0"
-        please_contact_FABLAB: "crwdns30738:0FABLAB={FABLAB}crwdnd30738:0FABLAB={FABLAB}crwdne30738:0"
     notify_user_order_is_canceled:
       subject: "crwdns30580:0crwdne30580:0"
       body:
