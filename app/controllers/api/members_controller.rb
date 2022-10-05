@@ -18,15 +18,7 @@ class API::MembersController < API::ApiController
   end
 
   def last_subscribed
-    @query = User.active.with_role(:member)
-                 .includes(:statistic_profile, profile: [:user_avatar])
-                 .where('is_allow_contact = true AND confirmed_at IS NOT NULL')
-                 .order('created_at desc')
-                 .limit(params[:last])
-
-    # remove unmerged profiles from list
-    @members = @query.to_a
-    @members.delete_if(&:need_completion?)
+    @query, @members = Members::MembersService.last_registered(params[:last])
 
     @requested_attributes = ['profile']
     render :index
@@ -74,9 +66,7 @@ class API::MembersController < API::ApiController
   def export_subscriptions
     authorize :export
 
-    export = Export.where(category: 'users', export_type: 'subscriptions')
-                   .where('created_at > ?', Subscription.maximum('updated_at'))
-                   .last
+    export = ExportService.last_export('users/subscription')
     if export.nil? || !FileTest.exist?(export.file)
       @export = Export.new(category: 'users', export_type: 'subscriptions', user: current_user)
       if @export.save
@@ -85,7 +75,7 @@ class API::MembersController < API::ApiController
         render json: @export.errors, status: :unprocessable_entity
       end
     else
-      send_file File.join(Rails.root, export.file),
+      send_file Rails.root.join(export.file),
                 type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
                 disposition: 'attachment'
     end
@@ -95,9 +85,7 @@ class API::MembersController < API::ApiController
   def export_reservations
     authorize :export
 
-    export = Export.where(category: 'users', export_type: 'reservations')
-                   .where('created_at > ?', Reservation.maximum('updated_at'))
-                   .last
+    export = ExportService.last_export('users/reservations')
     if export.nil? || !FileTest.exist?(export.file)
       @export = Export.new(category: 'users', export_type: 'reservations', user: current_user)
       if @export.save
@@ -106,7 +94,7 @@ class API::MembersController < API::ApiController
         render json: @export.errors, status: :unprocessable_entity
       end
     else
-      send_file File.join(Rails.root, export.file),
+      send_file Rails.root.join(export.file),
                 type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
                 disposition: 'attachment'
     end
@@ -115,17 +103,7 @@ class API::MembersController < API::ApiController
   def export_members
     authorize :export
 
-    last_update = [
-      User.members.maximum('updated_at'),
-      Profile.where(user_id: User.members).maximum('updated_at'),
-      InvoicingProfile.where(user_id: User.members).maximum('updated_at'),
-      StatisticProfile.where(user_id: User.members).maximum('updated_at'),
-      Subscription.maximum('updated_at') || DateTime.current
-    ].max
-
-    export = Export.where(category: 'users', export_type: 'members')
-                   .where('created_at > ?', last_update)
-                   .last
+    export = ExportService.last_export('users/members')
     if export.nil? || !FileTest.exist?(export.file)
       @export = Export.new(category: 'users', export_type: 'members', user: current_user)
       if @export.save
@@ -134,7 +112,7 @@ class API::MembersController < API::ApiController
         render json: @export.errors, status: :unprocessable_entity
       end
     else
-      send_file File.join(Rails.root, export.file),
+      send_file Rails.root.join(export.file),
                 type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
                 disposition: 'attachment'
     end
@@ -158,8 +136,8 @@ class API::MembersController < API::ApiController
         else
           render json: @member.errors, status: :unprocessable_entity
         end
-      rescue DuplicateIndexError => error
-        render json: { error: t('members.please_input_the_authentication_code_sent_to_the_address', EMAIL: error.message) },
+      rescue DuplicateIndexError => e
+        render json: { error: t('members.please_input_the_authentication_code_sent_to_the_address', EMAIL: e.message) },
                status: :unprocessable_entity
       end
     else
@@ -176,7 +154,6 @@ class API::MembersController < API::ApiController
     query = Members::ListService.list(query_params)
     @max_members = query.except(:offset, :limit, :order).count
     @members = query.to_a
-
   end
 
   def search
@@ -196,7 +173,7 @@ class API::MembersController < API::ApiController
       render json: { tours: [params[:tour]] }
     else
       tours = "#{@member.profile.tours} #{params[:tour]}"
-      @member.profile.update_attributes(tours: tours.strip)
+      @member.profile.update(tours: tours.strip)
 
       render json: { tours: @member.profile.tours.split }
     end
@@ -205,31 +182,8 @@ class API::MembersController < API::ApiController
   def update_role
     authorize @member
 
-    # we do not allow dismissing a user to a lower role
-    if params[:role] == 'member'
-      render 403 and return if @member.role == 'admin' || @member.role == 'manager'
-    elsif params[:role] == 'manager'
-      render 403 and return if @member.role == 'admin'
-    end
-
-    # do nothing if the role does not change
-    render json: @member and return if params[:role] == @member.role
-
-    ex_role = @member.role.to_sym
-    @member.remove_role ex_role
-    @member.add_role params[:role]
-
-    # if the new role is 'admin', then change the group to the admins group
-    @member.update_attributes(group_id: Group.find_by(slug: 'admins').id) if params[:role] == 'admin'
-
-    NotificationCenter.call type: 'notify_user_role_update',
-                            receiver: @member,
-                            attached_object: @member
-
-    NotificationCenter.call type: 'notify_admins_role_update',
-                            receiver: User.admins_and_managers,
-                            attached_object: @member,
-                            meta_data: { ex_role: ex_role }
+    service = Members::MembersService.new(@member)
+    service.update_role(params[:role], params[:group_id])
 
     render json: @member
   end
@@ -265,12 +219,14 @@ class API::MembersController < API::ApiController
                                    profile_attributes: [:id, :first_name, :last_name, :phone, :interest, :software_mastered, :website, :job,
                                                         :facebook, :twitter, :google_plus, :viadeo, :linkedin, :instagram, :youtube, :vimeo,
                                                         :dailymotion, :github, :echosciences, :pinterest, :lastfm, :flickr,
-                                                        user_avatar_attributes: %i[id attachment destroy]],
+                                                        { user_avatar_attributes: %i[id attachment destroy] }],
                                    invoicing_profile_attributes: [
                                      :id, :organization,
-                                     address_attributes: %i[id address],
-                                     organization_attributes: [:id, :name, address_attributes: %i[id address]],
-                                     user_profile_custom_fields_attributes: %i[id value invoicing_profile_id profile_custom_field_id]
+                                     {
+                                       address_attributes: %i[id address],
+                                       organization_attributes: [:id, :name, { address_attributes: %i[id address] }],
+                                       user_profile_custom_fields_attributes: %i[id value invoicing_profile_id profile_custom_field_id]
+                                     }
                                    ],
                                    statistic_profile_attributes: %i[id gender birthday])
 
@@ -280,14 +236,16 @@ class API::MembersController < API::ApiController
                                    profile_attributes: [:id, :first_name, :last_name, :phone, :interest, :software_mastered, :website, :job,
                                                         :facebook, :twitter, :google_plus, :viadeo, :linkedin, :instagram, :youtube, :vimeo,
                                                         :dailymotion, :github, :echosciences, :pinterest, :lastfm, :flickr,
-                                                        user_avatar_attributes: %i[id attachment destroy]],
+                                                        { user_avatar_attributes: %i[id attachment destroy] }],
                                    invoicing_profile_attributes: [
                                      :id, :organization,
-                                     address_attributes: %i[id address],
-                                     organization_attributes: [:id, :name, address_attributes: %i[id address]],
-                                     user_profile_custom_fields_attributes: %i[id value invoicing_profile_id profile_custom_field_id]
+                                     {
+                                       address_attributes: %i[id address],
+                                       organization_attributes: [:id, :name, { address_attributes: %i[id address] }],
+                                       user_profile_custom_fields_attributes: %i[id value invoicing_profile_id profile_custom_field_id]
+                                     }
                                    ],
-                                   statistic_profile_attributes: [:id, :gender, :birthday, training_ids: []])
+                                   statistic_profile_attributes: [:id, :gender, :birthday, { training_ids: [] }])
 
     end
   end

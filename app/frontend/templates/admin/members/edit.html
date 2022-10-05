@@ -21,9 +21,10 @@
 
       <div class="col-md-3">
         <section class="heading-actions wrapper">
-         <div class="btn btn-lg btn-block btn-default promote-member m-t-xs" ng-click="changeUserRole()" ng-show="isAuthorized('admin')">
+         <div class="btn btn-lg btn-block btn-default promote-member m-t-xs" ng-click="toggleChangeRoleModal()" ng-show="isAuthorized('admin')">
            <img src="/rank-icon.svg" alt="role icon" /><span class="m-l" translate>{{ 'app.admin.members_edit.change_role' }}</span>
          </div>
+          <change-role-modal is-open="isOpenChangeRoleModal" toggle-modal="toggleChangeRoleModal" user="user" on-success="onSuccess" onError="onError" />
         </section>
 
       </div>

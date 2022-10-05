@@ -12,5 +12,15 @@ class Statistics::BuilderService
       Statistics::Builders::MembersBuilderService.build(options)
       Statistics::Builders::ProjectsBuilderService.build(options)
     end
+
+    private
+
+    def default_options
+      yesterday = 1.day.ago
+      {
+        start_date: yesterday.beginning_of_day,
+        end_date: yesterday.end_of_day
+      }
+    end
   end
 end

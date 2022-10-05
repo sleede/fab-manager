@@ -724,6 +724,9 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
     // modal dialog to take a new subscription
     $scope.isOpenSubscribeModal = false;
 
+    // modal dialog to change the user's role
+    $scope.isOpenChangeRoleModal = false;
+
     /**
      * Open a modal dialog asking for confirmation to change the role of the given user
      * @returns {*}
@@ -800,6 +803,17 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
         $scope.$apply();
       }, 50);
     };
+
+    /**
+     * Opens/closes the modal dialog to change the user's role
+     */
+    $scope.toggleChangeRoleModal = () => {
+      setTimeout(() => {
+        $scope.isOpenChangeRoleModal = !$scope.isOpenChangeRoleModal;
+        $scope.$apply();
+      }, 0);
+    };
+
     /**
      * Callback triggered if the subscription was successfully extended
      */

@@ -107,6 +107,44 @@ class Members::MembersService
     params
   end
 
+  def self.last_registered(limit)
+    query = User.active.with_role(:member)
+                .includes(:statistic_profile, profile: [:user_avatar])
+                .where('is_allow_contact = true AND confirmed_at IS NOT NULL')
+                .order('created_at desc')
+                .limit(limit)
+
+    # remove unmerged profiles from list
+    members = query.to_a
+    members.delete_if(&:need_completion?)
+
+    [query, members]
+  end
+
+  def update_role(new_role, new_group_id = Group.first.id)
+    # do nothing if the role does not change
+    return if new_role == @member.role
+
+    # update role
+    ex_role = @member.role.to_sym
+    @member.remove_role ex_role
+    @member.add_role new_role
+
+    # if the new role is 'admin', then change the group to the admins group, otherwise to change to the provided group
+    group_id = new_role == 'admin' ? Group.find_by(slug: 'admins').id : new_group_id
+    @member.update(group_id: group_id)
+
+    # notify
+    NotificationCenter.call type: 'notify_user_role_update',
+                            receiver: @member,
+                            attached_object: @member
+
+    NotificationCenter.call type: 'notify_admins_role_update',
+                            receiver: User.admins_and_managers,
+                            attached_object: @member,
+                            meta_data: { ex_role: ex_role }
+  end
+
   private
 
   def notify_user_profile_complete(previous_state)
