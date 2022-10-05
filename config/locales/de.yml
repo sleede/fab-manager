@@ -46,6 +46,7 @@ de:
       gateway_error: "Payement gateway error: %{MESSAGE}"
       gateway_amount_too_small: "Payments under %{AMOUNT} are not supported. Please order directly at the reception."
       gateway_amount_too_large: "Payments above %{AMOUNT} are not supported. Please order directly at the reception."
+      product_in_use: "This product have already been ordered"
   apipie:
     api_documentation: "API-Dokumentation"
     code: "HTTP-Code"
@@ -364,6 +365,9 @@ de:
         import_over: "%{CATEGORY} Import ist beendet. "
         members: "Mitglieder"
         view_results: "Ergebnisse anzeigen."
+      notify_admin_low_stock_threshold:
+        low_stock: "Low stock for %{PRODUCT}. "
+        view_product: "View the product."
       notify_member_about_coupon:
         enjoy_a_discount_of_PERCENT_with_code_CODE: "Erhalten Sie %{PERCENT}% Rabatt mit dem Code %{CODE}"
         enjoy_a_discount_of_AMOUNT_with_code_CODE: "Erhalten Sie %{AMOUNT}% Rabatt mit dem Code %{CODE}"

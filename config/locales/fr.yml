@@ -46,6 +46,7 @@ fr:
       gateway_error: "Erreur de la passerelle de paiement : %{MESSAGE}"
       gateway_amount_too_small: "Les paiements inférieurs à %{AMOUNT} ne sont pas pris en charge. Merci de passer commande directement à l'accueil."
       gateway_amount_too_large: "Les paiements supérieurs à %{AMOUNT} ne sont pas pris en charge. Merci de passer commande directement à l'accueil."
+      product_in_use: "Cet article a déjà été commandé"
   apipie:
     api_documentation: "Documentation de l'API"
     code: "Code HTTP "
@@ -364,6 +365,9 @@ fr:
         import_over: "L'import %{CATEGORY} est terminé. "
         members: "des membres"
         view_results: "Voir les résultats."
+      notify_admin_low_stock_threshold:
+        low_stock: "Stock faible pour %{PRODUCT}. "
+        view_product: "Voir le produit."
       notify_member_about_coupon:
         enjoy_a_discount_of_PERCENT_with_code_CODE: "Bénéficiez d'une remise de %{PERCENT} % avec le code %{CODE}"
         enjoy_a_discount_of_AMOUNT_with_code_CODE: "Bénéficiez d'une remise de %{AMOUNT} avec le code %{CODE}"

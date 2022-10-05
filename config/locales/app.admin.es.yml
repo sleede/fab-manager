@@ -985,15 +985,20 @@ es:
         to_complete: "To complete"
         refuse_documents: "Refusing the documents"
         refuse_documents_info: "After verification, you may notify the member that the evidence submitted is not acceptable. You can specify the reasons for your refusal and indicate the actions to be taken. The member will be notified by e-mail."
-      #edit a member
-      members_edit:
+      change_role_modal:
         change_role: "Change role"
-        warning_role_change: "<p><strong>Warning:</strong> changing the role of a user is not a harmless operation. Is not currently possible to dismiss a user to a lower privileged role.</p><ul><li><strong>Members</strong> can only book reservations for themselves, paying by card or wallet.</li><li><strong>Managers</strong> can book reservations for themselves, paying by card or wallet, and for other members and managers, by collecting payments at the checkout.</li><li><strong>Administrators</strong> can only book reservations for members and managers, by collecting payments at the checkout. Moreover, they can change every settings of the application.</li></ul>"
+        warning_role_change: "<p><strong>Warning:</strong> changing the role of a user is not a harmless operation.</p><ul><li><strong>Members</strong> can only book reservations for themselves, paying by card or wallet.</li><li><strong>Managers</strong> can book reservations for themselves, paying by card or wallet, and for other members and managers, by collecting payments at the checkout.</li><li><strong>Administrators</strong> can only book reservations for members and managers, by collecting payments at the checkout. Moreover, they can change every settings of the application.</li></ul>"
+        new_role: "New role"
         admin: "Administrator"
         manager: "Manager"
         member: "Member"
+        new_group: "New group"
+        new_group_help: "Members and managers must be placed in a group."
+        confirm: "Change role"
         role_changed: "Role successfully changed from {OLD} to {NEW}."
         error_while_changing_role: "An error occurred while changing the role. Please try again later."
+      #edit a member
+      members_edit:
         subscription: "Subscription"
         duration: "Duración:"
         expires_at: "Caduca en:"
@@ -2018,7 +2023,7 @@ es:
           product_description: "Product description"
           product_description_info: "<strong>Information</strong></br>This product description will be presented in the product sheet. You have a few editorial styles at your disposal to create the product sheet."
           product_files: "Document"
-          product_files_info: "<strong>Information</strong></br>Add documents related to this product. They will be presented in the product sheet, in a separate block. You can only upload pdf documents."
+          product_files_info: "<strong>Information</strong></br>Add documents related to this product. They will be presented in the product sheet, in a separate block. You can only upload PDF documents."
           add_product_file: "Add a document"
           product_images: "Pictures of the product"
           product_images_info: "<strong>Advice</strong></br>We advise you to use a square format, JPG or PNG. For JPG, please use white for the background colour. The main visual will be the first presented in the product sheet."
@@ -2065,8 +2070,8 @@ es:
           sold: "Sold"
           missing: "Missing in stock"
           damaged: "Damaged product"
-          other_in: "Other"
-          other_out: "Other"
+          other_in: "Other (in)"
+          other_out: "Other (out)"
         orders:
           heading: "Orders"
           create_order: "Create an order"

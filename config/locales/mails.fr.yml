@@ -246,6 +246,12 @@ fr:
         you_made_an_import: "Vous avez initié un import %{CATEGORY}"
         category_members: "des membres"
         click_to_view_results: "Cliquez ici pour voir les résultats"
+    notify_admin_low_stock_threshold:
+      subject: "Alerte de stock faible"
+      body:
+        low_stock: "Un nouveau mouvement de stock de %{PRODUCT} a dépassé le seuil de stock faible."
+        stocks_state_html: "Statut actuel des stocks : <ul><li>interne : %{INTERNAL}</li><li>externe : %{EXTERNAL}</li></ul>"
+        manage_stock: "Gérer les stocks de ce produit"
     notify_member_about_coupon:
       subject: "Code promo"
       body:

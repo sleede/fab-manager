@@ -46,6 +46,7 @@ zu:
       gateway_error: "crwdns30728:0%{MESSAGE}crwdne30728:0"
       gateway_amount_too_small: "crwdns30730:0%{AMOUNT}crwdne30730:0"
       gateway_amount_too_large: "crwdns30732:0%{AMOUNT}crwdne30732:0"
+      product_in_use: "crwdns31138:0crwdne31138:0"
   apipie:
     api_documentation: "crwdns3257:0crwdne3257:0"
     code: "crwdns20914:0crwdne20914:0"
@@ -364,6 +365,9 @@ zu:
         import_over: "crwdns3667:0%{CATEGORY}crwdne3667:0"
         members: "crwdns3669:0crwdne3669:0"
         view_results: "crwdns3671:0crwdne3671:0"
+      notify_admin_low_stock_threshold:
+        low_stock: "crwdns31140:0%{PRODUCT}crwdne31140:0"
+        view_product: "crwdns31142:0crwdne31142:0"
       notify_member_about_coupon:
         enjoy_a_discount_of_PERCENT_with_code_CODE: "crwdns3673:0%{PERCENT}crwdnd3673:0%{CODE}crwdne3673:0"
         enjoy_a_discount_of_AMOUNT_with_code_CODE: "crwdns3675:0%{AMOUNT}crwdnd3675:0%{CODE}crwdne3675:0"
