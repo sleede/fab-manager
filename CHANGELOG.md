@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v5.4.22 2022 October 10
+
 - Fix a bug: erroneous statistics
 - [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2021,6]`
 
