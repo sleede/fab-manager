@@ -1,5 +1,10 @@
 # Changelog Fab-manager
 
+## v5.4.22 2022 October 10
+
+- Fix a bug: erroneous statistics
+- [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2021,6]`
+
 ## v5.4.21 2022 October 05
 
 - Ability to dismiss a user to a lower privileged role
@@ -563,7 +568,7 @@
 - Improved stripe 3D secure payment on payment schedules
 - Disable monthly payment for the subscription with interval 1 month
 - Fix a bug: unable to show statistics module in nav menu after login
-- Fix a bug: plans page show an error if admin dont create any plans
+- Fix a bug: plans page show an error if admin don't create any plans
 
 ## v5.0.12 2021 August 24
 
@@ -572,7 +577,7 @@
 ## v5.0.11 2021 August 6
 
 - Fix a bug: unable to generate avoir of wallet
-- Fix a bug: manager cant reserve training for user
+- Fix a bug: manager can't reserve any training for users
 
 ## v5.0.10 2021 August 2
 
@@ -1782,7 +1787,7 @@
 - Fix a bug: when deleting an availability just after its creation, the indexer workers crash and retries for a month
 - [TODO DEPLOY] remove possible value `application/` in `ALLOWED_MIME_TYPES` list, in environment variable
 - [TODO DEPLOY] `rails runner StatisticCustomAggregation.destroy_all`, then `rake db:seed`, then `rake fablab:es:build_availabilities_index` (1)
-- [TODO DEPLOY] `rake fablab:es:generate_stats[1095]` if you already has regenerated the statistics in the past, then they are very likely corrupted. Run this task to fix (2)
+- [TODO DEPLOY] `rake fablab:es:generate_stats[1095]` if you already had regenerated the statistics in the past, then they are very likely corrupted. Run this task to fix (2)
 
 ## v2.4.8 2016 December 15
 

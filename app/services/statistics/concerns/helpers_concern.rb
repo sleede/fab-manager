@@ -17,10 +17,14 @@ module Statistics::Concerns::HelpersConcern
     end
 
     def format_date(date)
+      to_date(date).strftime('%Y-%m-%d')
+    end
+
+    def to_date(date)
       if date.is_a?(String)
-        Date.strptime(date, '%Y%m%d').strftime('%Y-%m-%d')
+        Date.strptime(date, '%Y%m%d')
       else
-        date.strftime('%Y-%m-%d')
+        date
       end
     end
 

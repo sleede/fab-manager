@@ -12,7 +12,15 @@ class Statistics::CleanerService
         client.delete_by_query(
           index: model.index_name,
           type: model.document_type,
-          body: { query: { match: { date: format_date(options[:start_date]) } } }
+          body: {
+            query: {
+              terms: {
+                date: (to_date(options[:start_date]).to_date..to_date(options[:end_date]).to_date)
+                        .to_a
+                        .map { |d| format_date(d) }
+              }
+            }
+          }
         )
       end
     end

@@ -23,7 +23,7 @@ class Statistics::FetcherService
         ca /= 100.00
         profile = sub.statistic_profile
         p = sub.plan
-        result.push({ date: options[:start_date].to_date,
+        result.push({ date: i.created_at.to_date,
                       plan: p.group.slug,
                       plan_id: p.id,
                       plan_interval: p.interval,
@@ -48,7 +48,7 @@ class Statistics::FetcherService
         next unless r.reservable
 
         profile = r.statistic_profile
-        result.push({ date: options[:start_date].to_date,
+        result.push({ date: r.created_at.to_date,
                       reservation_id: r.id,
                       machine_id: r.reservable.id,
                       machine_type: r.reservable.friendly_id,
@@ -69,7 +69,7 @@ class Statistics::FetcherService
         next unless r.reservable
 
         profile = r.statistic_profile
-        result.push({ date: options[:start_date].to_date,
+        result.push({ date: r.created_at.to_date,
                       reservation_id: r.id,
                       space_id: r.reservable.id,
                       space_name: r.reservable.name,
@@ -91,7 +91,7 @@ class Statistics::FetcherService
 
         profile = r.statistic_profile
         slot = r.slots.first
-        result.push({ date: options[:start_date].to_date,
+        result.push({ date: r.created_at.to_date,
                       reservation_id: r.id,
                       training_id: r.reservable.id,
                       training_type: r.reservable.friendly_id,
@@ -114,7 +114,7 @@ class Statistics::FetcherService
 
         profile = r.statistic_profile
         slot = r.slots.first
-        result.push({ date: options[:start_date].to_date,
+        result.push({ date: r.created_at.to_date,
                       reservation_id: r.id,
                       event_id: r.reservable.id,
                       event_type: r.reservable.category.slug,
@@ -140,7 +140,7 @@ class Statistics::FetcherService
         next unless r.reservable
 
         reservations_ca_list.push(
-          { date: options[:start_date].to_date, ca: calcul_ca(r.original_invoice) || 0 }.merge(user_info(r.statistic_profile))
+          { date: r.created_at.to_date, ca: calcul_ca(r.original_invoice) || 0 }.merge(user_info(r.statistic_profile))
         )
       end
       Avoir.where('invoices.created_at >= :start_date AND invoices.created_at <= :end_date', options)
@@ -148,12 +148,12 @@ class Statistics::FetcherService
            .each do |i|
         # the following line is a workaround for issue #196
         profile = i.statistic_profile || i.main_item.object&.wallet&.user&.statistic_profile
-        avoirs_ca_list.push({ date: options[:start_date].to_date, ca: calcul_avoir_ca(i) || 0 }.merge(user_info(profile)))
+        avoirs_ca_list.push({ date: i.created_at.to_date, ca: calcul_avoir_ca(i) || 0 }.merge(user_info(profile)))
       end
       reservations_ca_list.concat(subscriptions_ca_list).concat(avoirs_ca_list).each do |e|
         profile = StatisticProfile.find(e[:statistic_profile_id])
         u = find_or_create_user_info(profile, users_list)
-        u[:date] = options[:start_date].to_date
+        u[:date] = e[:date]
         add_ca(u, e[:ca], users_list)
       end
       users_list
@@ -167,7 +167,7 @@ class Statistics::FetcherService
                       .each do |sp|
         next if sp.user&.need_completion?
 
-        result.push({ date: options[:start_date].to_date }.merge(user_info(sp)))
+        result.push({ date: sp.created_at.to_date }.merge(user_info(sp)))
       end
       result
     end
@@ -177,7 +177,7 @@ class Statistics::FetcherService
       Project.where('projects.published_at >= :start_date AND projects.published_at <= :end_date', options)
              .eager_load(:licence, :themes, :components, :machines, :project_users, author: [:group])
              .each do |p|
-        result.push({ date: options[:start_date].to_date }.merge(user_info(p.author)).merge(project_info(p)))
+        result.push({ date: p.created_at.to_date }.merge(user_info(p.author)).merge(project_info(p)))
       end
       result
     end
