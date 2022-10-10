@@ -14,9 +14,46 @@ class StatisticServiceTest < ActionDispatch::IntegrationTest
   end
 
   test 'build stats' do
-    # Create a reservation to generate an invoice
+    # Create a reservation to generate an invoice (2 days ago)
     machine = Machine.find(1)
     slot = Availability.find(19).slots.first
+    travel_to(2.days.ago)
+    post '/api/local_payment/confirm_payment', params: {
+      customer_id: @user.id,
+      items: [
+        {
+          reservation: {
+            reservable_id: machine.id,
+            reservable_type: machine.class.name,
+            slots_reservations_attributes: [
+              {
+                slot_id: slot.id
+              }
+            ]
+          }
+        }
+      ]
+    }.to_json, headers: default_headers
+    travel_back
+
+    # Create a subscription to generate another invoice (1 day ago)
+    plan = Plan.find_by(group_id: @user.group.id, type: 'Plan')
+    travel_to(1.day.ago)
+    post '/api/local_payment/confirm_payment',
+         params: {
+           customer_id: @user.id,
+           items: [
+             {
+               subscription: {
+                 plan_id: plan.id
+               }
+             }
+           ]
+         }.to_json, headers: default_headers
+    travel_back
+
+    # Crate another machine reservation (today)
+    slot = Availability.find(19).slots.last
     post '/api/local_payment/confirm_payment', params: {
       customer_id: @user.id,
       items: [
@@ -34,26 +71,27 @@ class StatisticServiceTest < ActionDispatch::IntegrationTest
       ]
     }.to_json, headers: default_headers
 
-    # Create a subscription to generate another invoice
-    plan = Plan.find_by(group_id: @user.group.id, type: 'Plan')
-    post '/api/local_payment/confirm_payment',
-         params: {
-           customer_id: @user.id,
-           items: [
-             {
-               subscription: {
-                 plan_id: plan.id
-               }
-             }
-           ]
-         }.to_json, headers: default_headers
-
-    # Build the stats for today, we expect the above invoices (reservation+subscription) to appear in the resulting stats
-    ::Statistics::BuilderService.generate_statistic({ start_date: DateTime.current.beginning_of_day,
+    # Build the stats for the last 3 days, we expect the above invoices (reservations+subscription) to appear in the resulting stats
+    ::Statistics::BuilderService.generate_statistic({ start_date: 2.days.ago.beginning_of_day,
                                                       end_date: DateTime.current.end_of_day })
 
     Stats::Machine.refresh_index!
 
+    # first machine reservation (2 days ago)
+    stat_booking = Stats::Machine.search(query: { bool: { must: [{ term: { date: 2.days.ago.to_date.iso8601 } },
+                                                                 { term: { type: 'booking' } }] } }).first
+    assert_not_nil stat_booking
+    assert_equal machine.friendly_id, stat_booking['subType']
+    check_statistics_on_user(stat_booking)
+
+    stat_hour = Stats::Machine.search(query: { bool: { must: [{ term: { date: 2.days.ago.to_date.iso8601 } },
+                                                              { term: { type: 'hour' } }] } }).first
+
+    assert_not_nil stat_hour
+    assert_equal machine.friendly_id, stat_hour['subType']
+    check_statistics_on_user(stat_hour)
+
+    # second machine reservation (today)
     stat_booking = Stats::Machine.search(query: { bool: { must: [{ term: { date: DateTime.current.to_date.iso8601 } },
                                                                  { term: { type: 'booking' } }] } }).first
     assert_not_nil stat_booking
@@ -67,9 +105,10 @@ class StatisticServiceTest < ActionDispatch::IntegrationTest
     assert_equal machine.friendly_id, stat_hour['subType']
     check_statistics_on_user(stat_hour)
 
+    # subscription
     Stats::Subscription.refresh_index!
 
-    stat_subscription = Stats::Subscription.search(query: { bool: { must: [{ term: { date: DateTime.current.to_date.iso8601 } },
+    stat_subscription = Stats::Subscription.search(query: { bool: { must: [{ term: { date: 1.day.ago.to_date.iso8601 } },
                                                                            { term: { type: plan.find_statistic_type.key } }] } }).first
 
     assert_not_nil stat_subscription
