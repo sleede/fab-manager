@@ -50,14 +50,7 @@ class ProductService
         }
       end || {}
       product.stock = remaining_stock
-      affected_stocks = stock_movements&.map { |m| m[:stock_type] }&.uniq
-      if (remaining_stock[:internal] < product.low_stock_threshold && affected_stocks&.include?('internal')) ||
-         (remaining_stock[:external] < product.low_stock_threshold && affected_stocks&.include?('external'))
-        NotificationCenter.call type: 'notify_admin_low_stock_threshold',
-                                receiver: User.admins_and_managers,
-                                attached_object: product
-      end
-      product
+      notify_on_low_stock(product, stock_movements)
     end
 
     def create(product_params, stock_movement_params = [])
@@ -172,6 +165,19 @@ class ProductService
       return movements if filters[:reason].blank?
 
       movements.where(reason: filters[:reason])
+    end
+
+    def notify_on_low_stock(product, stock_movements)
+      return product unless product.low_stock_threshold
+
+      affected_stocks = stock_movements&.map { |m| m[:stock_type] }&.uniq
+      if (remaining_stock[:internal] < product.low_stock_threshold && affected_stocks&.include?('internal')) ||
+         (remaining_stock[:external] < product.low_stock_threshold && affected_stocks&.include?('external'))
+        NotificationCenter.call type: 'notify_admin_low_stock_threshold',
+                                receiver: User.admins_and_managers,
+                                attached_object: product
+      end
+      product
     end
   end
 end

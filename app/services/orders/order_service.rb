@@ -8,7 +8,7 @@ class Orders::OrderService
     ORDERS_PER_PAGE = 20
 
     def list(filters, current_user)
-      orders = Order.includes(statistic_profile: [:user]).where(nil)
+      orders = Order.includes(statistic_profile: [user: [:profile]]).where(nil)
       orders = filter_by_user(orders, filters, current_user)
       orders = filter_by_reference(orders, filters, current_user)
       orders = filter_by_state(orders, filters)
