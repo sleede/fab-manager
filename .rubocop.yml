@@ -36,3 +36,5 @@ Style/FormatString:
   EnforcedStyle: sprintf
 Style/FormatStringToken:
   EnforcedStyle: template
+Rails/RedundantPresenceValidationOnBelongsTo:
+  Enabled: false

@@ -18,7 +18,7 @@ class API::WalletController < API::ApiController
   end
 
   def credit
-    return head 422 unless Setting.get('wallet_module')
+    return head :unprocessable_entity unless Setting.get('wallet_module')
 
     @wallet = Wallet.find(credit_params[:id])
     authorize @wallet
@@ -28,7 +28,7 @@ class API::WalletController < API::ApiController
       service.create_avoir(transaction, credit_params[:avoir_date], credit_params[:avoir_description]) if credit_params[:avoir]
       render :show
     else
-      head 422
+      head :unprocessable_entity
     end
   end
 

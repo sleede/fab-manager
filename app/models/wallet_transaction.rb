@@ -14,6 +14,7 @@ class WalletTransaction < ApplicationRecord
   has_one :invoice_item, as: :object, dependent: :destroy
 
   validates :transaction_type, inclusion: { in: %w[credit debit] }
+  validates :invoicing_profile, :wallet, presence: true
 
   delegate :user, to: :invoicing_profile
 
