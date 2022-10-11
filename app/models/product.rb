@@ -8,7 +8,7 @@ class Product < ApplicationRecord
 
   belongs_to :product_category
 
-  has_many :machines_products, dependent: :destroy
+  has_many :machines_products, dependent: :delete_all
   has_many :machines, through: :machines_products
 
   has_many :product_files, as: :viewable, dependent: :destroy
