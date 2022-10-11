@@ -67,6 +67,27 @@ class ProductService
       product
     end
 
+    def clone(product, product_params)
+      new_product = product.dup
+      new_product.name = product_params[:name]
+      new_product.sku = product_params[:sku]
+      new_product.is_active = product_params[:is_active]
+      new_product.stock['internal'] = 0
+      new_product.stock['external'] = 0
+      new_product.machine_ids = product.machine_ids
+      new_product.machine_ids = product.machine_ids
+      product.product_images.each do |image|
+        pi = new_product.product_images.build
+        pi.is_main = image.is_main
+        pi.attachment = File.open(image.attachment.file.file)
+      end
+      product.product_files.each do |file|
+        pf = new_product.product_files.build
+        pf.attachment = File.open(file.attachment.file.file)
+      end
+      new_product
+    end
+
     def destroy(product)
       used_in_order = OrderItem.joins(:order).where.not('orders.state' => 'cart')
                                .exists?(orderable: product)

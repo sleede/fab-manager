@@ -19,6 +19,7 @@ import MachineAPI from '../../api/machine';
 import ProductAPI from '../../api/product';
 import { Plus } from 'phosphor-react';
 import { ProductStockForm } from './product-stock-form';
+import { CloneProductModal } from './clone-product-modal';
 import ProductLib from '../../lib/product';
 import { UnsavedFormAlert } from '../form/unsaved-form-alert';
 import { UIRouter } from '@uirouter/angularjs';
@@ -54,6 +55,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
   const [productCategories, setProductCategories] = useState<selectOption[]>([]);
   const [machines, setMachines] = useState<checklistOption[]>([]);
   const [stockTab, setStockTab] = useState<boolean>(false);
+  const [openCloneModal, setOpenCloneModal] = useState<boolean>(false);
 
   useEffect(() => {
     ProductCategoryAPI.index().then(data => {
@@ -134,6 +136,13 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
         onSuccess(res);
       }).catch(onError);
     }
+  };
+
+  /**
+   * Toggle clone product modal
+   */
+  const toggleCloneModal = () => {
+    setOpenCloneModal(!openCloneModal);
   };
 
   /**
@@ -235,6 +244,12 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
       <header>
         <h2>{title}</h2>
         <div className="grpBtn">
+          {product.id &&
+            <>
+              <FabButton className="main-action-btn" onClick={toggleCloneModal}>{t('app.admin.store.product_form.clone')}</FabButton>
+              <CloneProductModal isOpen={openCloneModal} toggleModal={toggleCloneModal} product={product} onSuccess={onSuccess} onError={onError} />
+            </>
+          }
           <FabButton className="main-action-btn" onClick={handleSubmit(saveProduct)}>{t('app.admin.store.product_form.save')}</FabButton>
         </div>
       </header>

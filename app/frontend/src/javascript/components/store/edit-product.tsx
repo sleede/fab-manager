@@ -33,10 +33,17 @@ const EditProduct: React.FC<EditProductProps> = ({ productId, onSuccess, onError
 
   /**
    * Success to save product and return to product list
+   * or
+   * Success to clone product and return to new product
    */
-  const saveProductSuccess = () => {
-    onSuccess(t('app.admin.store.edit_product.successfully_updated'));
-    window.location.href = '/#!/admin/store/products';
+  const saveProductSuccess = (data: Product) => {
+    if (data.id === product.id) {
+      onSuccess(t('app.admin.store.edit_product.successfully_updated'));
+      window.location.href = '/#!/admin/store/products';
+    } else {
+      onSuccess(t('app.admin.store.edit_product.successfully_cloned'));
+      window.location.href = `/#!/admin/store/products/${data.id}/edit`;
+    }
   };
 
   if (product) {

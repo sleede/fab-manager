@@ -10,6 +10,10 @@ class ProductPolicy < ApplicationPolicy
     user.privileged?
   end
 
+  def clone?
+    user.privileged?
+  end
+
   def destroy?
     user.privileged?
   end

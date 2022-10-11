@@ -155,6 +155,7 @@ Rails.application.routes.draw do
     end
 
     resources :products do
+      put 'clone', on: :member
       get 'stock_movements', on: :member
     end
     resources :cart, only: %i[create] do

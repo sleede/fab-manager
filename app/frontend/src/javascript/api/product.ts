@@ -91,6 +91,13 @@ export default class ProductAPI {
     return res?.data;
   }
 
+  static async clone (product: Product, data: Product): Promise<Product> {
+    const res: AxiosResponse<Product> = await apiClient.put(`/api/products/${product.id}/clone`, {
+      product: data
+    });
+    return res?.data;
+  }
+
   static async destroy (productId: number): Promise<void> {
     const res: AxiosResponse<void> = await apiClient.delete(`/api/products/${productId}`);
     return res?.data;

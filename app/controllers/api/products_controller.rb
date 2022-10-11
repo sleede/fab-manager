@@ -4,7 +4,7 @@
 # Products are used in store
 class API::ProductsController < API::ApiController
   before_action :authenticate_user!, except: %i[index show]
-  before_action :set_product, only: %i[update destroy]
+  before_action :set_product, only: %i[update clone destroy]
 
   def index
     @products = ProductService.list(params, current_user)
@@ -28,6 +28,17 @@ class API::ProductsController < API::ApiController
     authorize @product
 
     @product = ProductService.update(@product, product_params, params[:product][:product_stock_movements_attributes])
+    if @product.save
+      render status: :ok
+    else
+      render json: @product.errors.full_messages, status: :unprocessable_entity
+    end
+  end
+
+  def clone
+    authorize @product
+
+    @product = ProductService.clone(@product, product_params)
     if @product.save
       render status: :ok
     else

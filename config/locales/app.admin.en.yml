@@ -2003,6 +2003,7 @@ en:
           successfully_created: "The new product has been created."
         edit_product:
           successfully_updated: "The product has been updated."
+          successfully_cloned: "The product has been cloned."
         product_form:
           product_parameters: "Product parameters"
           stock_management: "Stock management"
@@ -2029,6 +2030,7 @@ en:
           product_images_info: "<strong>Advice</strong></br>We advise you to use a square format, JPG or PNG. For JPG, please use white for the background colour. The main visual will be the first presented in the product sheet."
           add_product_image: "Add an image"
           save: "Save"
+          clone: "Clone"
         product_stock_form:
           stock_up_to_date: "Stock up to date"
           date_time: "{DATE} - {TIME}"
@@ -2072,6 +2074,9 @@ en:
           damaged: "Damaged product"
           other_in: "Other (in)"
           other_out: "Other (out)"
+        clone_product_model:
+          clone_product: "Clone the product"
+          clone: "Clone"
         orders:
           heading: "Orders"
           create_order: "Create an order"
