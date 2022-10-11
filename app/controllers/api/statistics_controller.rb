@@ -9,7 +9,7 @@ class API::StatisticsController < API::ApiController
     @statistics = StatisticIndex.all
   end
 
-  %w[account event machine project subscription training user space].each do |path|
+  %w[account event machine project subscription training user space order].each do |path|
     class_eval %{
       def #{path}
         authorize :statistic, :#{path}?
@@ -30,11 +30,7 @@ class API::StatisticsController < API::ApiController
         # return result
         render json: results
       end
-    }, __FILE__, __LINE__ - 20
-  end
 
-  %w[account event machine project subscription training user space].each do |path|
-    class_eval %{
       def export_#{path}
         authorize :statistic, :export_#{path}?
 
@@ -56,7 +52,7 @@ class API::StatisticsController < API::ApiController
                     disposition: 'attachment'
         end
       end
-    }, __FILE__, __LINE__ - 22
+    }, __FILE__, __LINE__ - 42
   end
 
   def export_global

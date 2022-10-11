@@ -8,11 +8,11 @@ class Subscription < ApplicationRecord
   belongs_to :statistic_profile
 
   has_one :payment_schedule_object, as: :object, dependent: :destroy
-  has_one :payment_gateway_object, as: :item
+  has_one :payment_gateway_object, as: :item, dependent: :destroy
   has_many :invoice_items, as: :object, dependent: :destroy
   has_many :offer_days, dependent: :destroy
 
-  validates_presence_of :plan_id
+  validates :plan_id, presence: true
   validates_with SubscriptionGroupValidator
 
   # creation
@@ -21,18 +21,21 @@ class Subscription < ApplicationRecord
   after_save :notify_admin_subscribed_plan
   after_save :notify_partner_subscribed_plan, if: :of_partner_plan?
 
+  delegate :user, to: :statistic_profile
+
   def generate_and_save_invoice(operator_profile_id)
     generate_invoice(operator_profile_id).save
   end
 
   def expire(time)
-    if !expired?
-      update_columns(expiration_date: time, canceled_at: time)
+    if expired?
+      false
+    else
+      # TODO, check if the rubocop:disable directove can be deleted
+      update_columns(expiration_date: time, canceled_at: time) # rubocop:disable Rails/SkipsModelValidations
       notify_admin_subscription_canceled
       notify_member_subscription_canceled
       true
-    else
-      false
     end
   end
 
@@ -45,10 +48,6 @@ class Subscription < ApplicationRecord
     return last_offered.end_at if last_offered
 
     expiration_date
-  end
-
-  def user
-    statistic_profile.user
   end
 
   def original_payment_schedule

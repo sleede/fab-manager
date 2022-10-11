@@ -1027,6 +1027,14 @@ unless StatisticIndex.find_by(es_type_key: 'space')
                         ])
 end
 
+unless StatisticIndex.find_by(es_type_key: 'order')
+  index = StatisticIndex.create!(es_type_key: 'order', label: I18n.t('statistics.orders'))
+  StatisticType.create!([
+                          { statistic_index_id: index.id, key: 'store', label: I18n.t('statistics.store'),
+                            graph: true, simple: true }
+                        ])
+end
+
 ProfileCustomField.find_or_create_by(label: 'N° SIRET')
 ProfileCustomField.find_or_create_by(label: 'Code NAF')
 ProfileCustomField.find_or_create_by(label: 'N° TVA intracommunautaire')

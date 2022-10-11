@@ -186,9 +186,9 @@ class Statistics::FetcherService
     def store_orders_list(options = default_options)
       result = []
       Order.includes(order_items: [:orderable])
-           .joins(:order_items)
+           .joins(:order_items, :order_activities)
            .where("order_items.orderable_type = 'Product'")
-           .where('orders.created_at >= :start_date AND orders.created_at <= :end_date', options)
+           .where('order_activities.created_at >= :start_date AND order_activities.created_at <= :end_date', options)
            .each do |o|
         result.push({ date: o.created_at.to_date, ca: calcul_ca(o.invoice) }
                       .merge(user_info(o.statistic_profile))

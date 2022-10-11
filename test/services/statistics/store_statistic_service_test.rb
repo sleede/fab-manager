@@ -12,11 +12,11 @@ class StoreStatisticServiceTest < ActionDispatch::IntegrationTest
     ::Statistics::BuilderService.generate_statistic({ start_date: DateTime.current.beginning_of_day,
                                                       end_date: DateTime.current.end_of_day })
 
-    Stats::StoreOrder.refresh_index!
+    Stats::Order.refresh_index!
 
     # we should find order id 15 (created today)
-    stat_order = Stats::StoreOrder.search(query: { bool: { must: [{ term: { date: DateTime.current.to_date.iso8601 } },
-                                                                  { term: { type: 'order' } }] } }).first
+    stat_order = Stats::Order.search(query: { bool: { must: [{ term: { date: DateTime.current.to_date.iso8601 } },
+                                                             { term: { type: 'order' } }] } }).first
     assert_not_nil stat_order
     assert_equal @order.id, stat_order['orderId']
     check_statistics_on_user(stat_order)
