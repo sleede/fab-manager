@@ -1,0 +1,129 @@
+order_activity_1:
+  id: 1
+  order_id: 1
+  operator_profile_id:
+  activity_type: paid
+  note:
+  created_at: '2022-09-20 15:14:22.596166'
+  updated_at: '2022-09-20 15:14:22.596166'
+order_activity_2:
+  id: 2
+  order_id: 2
+  operator_profile_id:
+  activity_type: paid
+  note:
+  created_at: '2022-09-20 15:14:48.328689'
+  updated_at: '2022-09-20 15:14:48.328689'
+order_activity_6:
+  id: 6
+  order_id: 9
+  operator_profile_id:
+  activity_type: paid
+  note:
+  created_at: '2022-10-04 12:36:02.719677'
+  updated_at: '2022-10-04 12:36:02.719677'
+order_activity_7:
+  id: 7
+  order_id: 2
+  operator_profile_id: 2437
+  activity_type: ready
+  note: Merci de venir retirer la commande
+  created_at: '2022-10-04 13:37:49.932146'
+  updated_at: '2022-10-04 13:37:49.932146'
+order_activity_11:
+  id: 11
+  order_id: 9
+  operator_profile_id: 2437
+  activity_type: ready
+  note: ''
+  created_at: '2022-10-04 13:50:30.609274'
+  updated_at: '2022-10-04 13:50:30.609274'
+order_activity_12:
+  id: 12
+  order_id: 10
+  operator_profile_id:
+  activity_type: paid
+  note:
+  created_at: '2022-10-04 13:54:42.749983'
+  updated_at: '2022-10-04 13:54:42.749983'
+order_activity_13:
+  id: 13
+  order_id: 10
+  operator_profile_id: 2437
+  activity_type: ready
+  note: ''
+  created_at: '2022-10-04 13:54:56.790702'
+  updated_at: '2022-10-04 13:54:56.790702'
+order_activity_14:
+  id: 14
+  order_id: 11
+  operator_profile_id:
+  activity_type: paid
+  note:
+  created_at: '2022-10-04 14:04:12.721800'
+  updated_at: '2022-10-04 14:04:12.721800'
+order_activity_15:
+  id: 15
+  order_id: 11
+  operator_profile_id: 2437
+  activity_type: ready
+  note: ''
+  created_at: '2022-10-04 14:04:28.489152'
+  updated_at: '2022-10-04 14:04:28.489152'
+order_activity_16:
+  id: 16
+  order_id: 12
+  operator_profile_id:
+  activity_type: paid
+  note:
+  created_at: '2022-10-04 14:17:52.835587'
+  updated_at: '2022-10-04 14:17:52.835587'
+order_activity_17:
+  id: 17
+  order_id: 12
+  operator_profile_id: 2437
+  activity_type: ready
+  note: "<p>je ne sais pas que te dire <u>mon ami</u></p>"
+  created_at: '2022-10-04 14:22:54.560670'
+  updated_at: '2022-10-04 14:22:54.560670'
+order_activity_18:
+  id: 18
+  order_id: 5
+  operator_profile_id:
+  activity_type: paid
+  note:
+  created_at: '2022-10-04 14:25:37.278540'
+  updated_at: '2022-10-04 14:25:37.278540'
+order_activity_19:
+  id: 19
+  order_id: 14
+  operator_profile_id:
+  activity_type: paid
+  note:
+  created_at: '2022-10-04 14:32:27.965847'
+  updated_at: '2022-10-04 14:32:27.965847'
+order_activity_20:
+  id: 20
+  order_id: 14
+  operator_profile_id: 2437
+  activity_type: ready
+  note: "<p><strong>Lorem ipsum</strong> dolor sit amet</p>"
+  created_at: '2022-10-04 14:33:17.067080'
+  updated_at: '2022-10-04 14:33:17.067080'
+order_activity_21:
+  id: 21
+  order_id: 15
+  operator_profile_id:
+  activity_type: paid
+  note:
+  created_at: '2022-10-04 14:35:40.554303'
+  updated_at: '2022-10-04 14:35:40.554303'
+order_activity_22:
+  id: 22
+  order_id: 15
+  operator_profile_id: 2437
+  activity_type: ready
+  note: "<p>Votre <em>commande</em> est prête, merci de venir la récupérer <strong>jeudi</strong>
+    <u>après 14 h</u>.</p>"
+  created_at: '2022-10-05 10:04:53.113486'
+  updated_at: '2022-10-05 10:04:53.113486'

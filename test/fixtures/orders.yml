@@ -1,0 +1,162 @@
+order_1:
+  id: 1
+  statistic_profile_id: 3
+  operator_profile_id: 1
+  token: 3R9wtsPjyYMHKqy-I2V5Cg1661868752184
+  reference:
+  state: paid
+  total: 4500
+  created_at: '2022-08-30 14:12:32.213832'
+  updated_at: '2022-09-20 15:14:23.501369'
+  wallet_amount:
+  wallet_transaction_id:
+  payment_method: local
+  footprint:
+  environment: test
+  coupon_id:
+  paid_total: 4500
+  invoice_id: 5811
+order_2:
+  id: 2
+  statistic_profile_id: 7
+  operator_profile_id: 1
+  token: TDKq6p4f3WgDRMIvplEqpg1663686863871
+  reference: '005877-09-22'
+  state: ready
+  total: 6000
+  created_at: '2022-09-20 15:14:23.887098'
+  updated_at: '2022-10-04 13:37:49.935380'
+  wallet_amount:
+  wallet_transaction_id:
+  payment_method: local
+  footprint:
+  environment: test
+  coupon_id:
+  paid_total: 6000
+  invoice_id: 5812
+order_5:
+  id: 5
+  statistic_profile_id: 3
+  operator_profile_id: 1
+  token: UbTOaTePhajDJPPH42e3yw1664353619348
+  reference: '005882-09-22'
+  state: paid
+  total: 12000
+  created_at: '2022-09-28 08:26:59.368029'
+  updated_at: '2022-10-04 14:25:37.345897'
+  wallet_amount:
+  wallet_transaction_id:
+  payment_method: local
+  footprint:
+  environment: test
+  coupon_id:
+  paid_total: 12000
+  invoice_id: 5820
+order_9:
+  id: 9
+  statistic_profile_id: 4
+  operator_profile_id: 4
+  token: 8jOZwd2vkE86x26cg167iQ1664886886040
+  reference: '005888-10-22'
+  state: ready
+  total: 319
+  created_at: '2022-10-04 12:34:46.054976'
+  updated_at: '2022-10-04 13:50:30.611456'
+  wallet_amount:
+  wallet_transaction_id:
+  payment_method: card
+  footprint:
+  environment: test
+  coupon_id:
+  paid_total: 319
+  invoice_id: 5816
+order_10:
+  id: 10
+  statistic_profile_id: 4
+  operator_profile_id: 4
+  token: ryrsm4yj21DTJv1qIgMuGA1664886964105
+  reference: '005890-10-22'
+  state: ready
+  total: 1619
+  created_at: '2022-10-04 12:36:04.117389'
+  updated_at: '2022-10-04 13:54:56.792550'
+  wallet_amount:
+  wallet_transaction_id:
+  payment_method: card
+  footprint:
+  environment: test
+  coupon_id: 30
+  paid_total: 1296
+  invoice_id: 5817
+order_11:
+  id: 11
+  statistic_profile_id: 4
+  operator_profile_id: 4
+  token: ogvv31XzLE0zFLc_c8k4Sw1664891683573
+  reference: '005892-10-22'
+  state: ready
+  total: 1000
+  created_at: '2022-10-04 13:54:43.617309'
+  updated_at: '2022-10-04 14:04:28.490690'
+  wallet_amount:
+  wallet_transaction_id:
+  payment_method: card
+  footprint:
+  environment: test
+  coupon_id:
+  paid_total: 1000
+  invoice_id: 5818
+order_12:
+  id: 12
+  statistic_profile_id: 4
+  operator_profile_id: 4
+  token: ttG9U892Bu0gbu8OnJkwTw1664892253183
+  reference: '005894-10-22'
+  state: ready
+  total: 4002
+  created_at: '2022-10-04 14:04:13.206078'
+  updated_at: '2022-10-04 14:22:54.562186'
+  wallet_amount:
+  wallet_transaction_id:
+  payment_method: card
+  footprint:
+  environment: test
+  coupon_id:
+  paid_total: 4002
+  invoice_id: 5819
+order_14:
+  id: 14
+  statistic_profile_id: 2
+  operator_profile_id: 1
+  token: QsDdf_8YHL6mxUSMno-deg1664893537749
+  reference: '005898-10-22'
+  state: ready
+  total: 12000
+  created_at: '2022-10-04 14:25:37.773536'
+  updated_at: '2022-10-04 14:33:17.068764'
+  wallet_amount:
+  wallet_transaction_id:
+  payment_method: local
+  footprint:
+  environment: test
+  coupon_id:
+  paid_total: 12000
+  invoice_id: 5821
+order_15:
+  id: 15
+  statistic_profile_id: 2
+  operator_profile_id: 1
+  token: JOLm4fAZjFSkmWzAX3KObw1664893948693
+  reference: '005900-10-22'
+  state: ready
+  total: 3000
+  created_at: '2022-10-04 14:32:28.706806'
+  updated_at: '2022-10-05 10:04:53.142267'
+  wallet_amount:
+  wallet_transaction_id:
+  payment_method: local
+  footprint:
+  environment: test
+  coupon_id:
+  paid_total: 3000
+  invoice_id: 5822

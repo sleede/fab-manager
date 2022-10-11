@@ -1,0 +1,49 @@
+product_category_1:
+  id: 1
+  name: Consommables
+  slug: consommables
+  parent_id:
+  position: 0
+  created_at: '2022-08-23 07:55:35.573968'
+  updated_at: '2022-08-23 07:55:35.573968'
+product_category_2:
+  id: 2
+  name: Fournitures
+  slug: fournitures
+  parent_id:
+  position: 1
+  created_at: '2022-08-23 07:55:49.380035'
+  updated_at: '2022-10-05 11:42:52.965226'
+product_category_3:
+  id: 3
+  name: Filament imprimante 3D
+  slug: filament-imprimante-3d
+  parent_id: 1
+  position: 0
+  created_at: '2022-08-23 07:56:05.254962'
+  updated_at: '2022-08-23 07:56:05.254962'
+product_category_4:
+  id: 4
+  name: Objets créés au fablab
+  slug: objets-crees-au-fablab
+  parent_id:
+  position: 2
+  created_at: '2022-09-14 13:39:03.170717'
+  updated_at: '2022-10-05 11:42:52.965226'
+product_category_5:
+  id: 5
+  name: Bois
+  slug: bois
+  parent_id: 1
+  position: 1
+  created_at: '2022-09-14 14:57:58.136610'
+  updated_at: '2022-09-14 14:57:58.136610'
+product_category_6:
+  id: 6
+  name: Stickers
+  slug: stickers
+  parent_id: 4
+  position: 0
+  created_at: '2022-09-28 08:12:35.823487'
+  updated_at: '2022-09-28 08:12:35.823487'
+
