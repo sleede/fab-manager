@@ -126,5 +126,5 @@ order_item_24:
   amount: 3000
   quantity: 1
   is_offered:
-  created_at: '2022-10-04 14:35:29.003092'
-  updated_at: '2022-10-04 14:35:29.003092'
+  created_at: <%= DateTime.current.utc.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  updated_at: <%= DateTime.current.utc.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>

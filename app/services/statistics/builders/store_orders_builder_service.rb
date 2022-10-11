@@ -15,6 +15,8 @@ class Statistics::Builders::StoreOrdersBuilderService
                                    ca: o[:ca],
                                    products: o[:order_products],
                                    categories: o[:order_categories],
+                                   orderId: o[:order_id],
+                                   orderState: o[:order_state],
                                    stat: 1 }.merge(user_info_stat(o)))
       end
     end

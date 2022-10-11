@@ -6,6 +6,7 @@ class Statistics::FetcherService
   include Statistics::Concerns::HelpersConcern
   include Statistics::Concerns::ComputeConcern
   include Statistics::Concerns::ProjectsConcern
+  include Statistics::Concerns::StoreOrdersConcern
 
   class << self
     def subscriptions_list(options = default_options)
@@ -185,7 +186,8 @@ class Statistics::FetcherService
     def store_orders_list(options = default_options)
       result = []
       Order.includes(order_items: [:orderable])
-           .where('order_items.orderable_type == "Product"')
+           .joins(:order_items)
+           .where("order_items.orderable_type = 'Product'")
            .where('orders.created_at >= :start_date AND orders.created_at <= :end_date', options)
            .each do |o|
         result.push({ date: o.created_at.to_date, ca: calcul_ca(o.invoice) }
