@@ -7,7 +7,7 @@ class Order < PaymentDocument
   belongs_to :coupon
   belongs_to :invoice
   has_many :order_items, dependent: :destroy
-  has_one :payment_gateway_object, as: :item
+  has_one :payment_gateway_object, as: :item, dependent: :destroy
   has_many :order_activities, dependent: :destroy
 
   ALL_STATES = %w[cart paid payment_failed refunded in_progress ready canceled delivered].freeze
