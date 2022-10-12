@@ -47,6 +47,10 @@ export const MenuBar: React.FC<MenuBarProps> = ({ editor, heading, bulletList, b
     if (submenu !== type) {
       setSubmenu(type);
       if (type === 'link') {
+        if (editor.view.state.selection.from === editor.view.state.selection.to) {
+          setSubmenu('');
+          return;
+        }
         const previousUrl = {
           href: editor.getAttributes('link').href,
           target: editor.getAttributes('link').target || ''
