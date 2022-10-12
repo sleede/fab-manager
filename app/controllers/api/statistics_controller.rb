@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# API Controller for resources of type Space
+# API Controller for various statistical resources (gateway to elasticsearch DB)
 class API::StatisticsController < API::ApiController
   before_action :authenticate_user!
 
@@ -9,49 +9,25 @@ class API::StatisticsController < API::ApiController
     @statistics = StatisticIndex.all
   end
 
-  %w[account event machine project subscription training user space].each do |path|
+  %w[account event machine project subscription training user space order].each do |path|
     class_eval %{
-      def #{path}
-        authorize :statistic, :#{path}?
+      def #{path}                                                       # def account
+        authorize :statistic, :#{path}?                                 #   authorize :statistic, :account
+        render json: Statistics::QueryService.query('#{path}', request) #   render json: Statistics::QueryService.query('account', request)
+      end                                                               # end
 
-        # remove additional parameters
-        statistic_type = request.query_parameters.delete('stat-type')
-        custom_query = request.query_parameters.delete('custom-query')
-        start_date = request.query_parameters.delete('start-date')
-        end_date = request.query_parameters.delete('end-date')
+      def export_#{path}                                                # def export_account
+        authorize :statistic, :export_#{path}?                          # authorize :statistic, :export_account?
 
-        # run main query in elasticSearch
-        query = MultiJson.load(request.body.read)
-        results = Stats::#{path.classify}.search(query, request.query_parameters.symbolize_keys).response
-
-        # run additional custom aggregations, if any
-        CustomAggregationService.new.("#{path}", statistic_type, start_date, end_date, custom_query, results)
-
-        # return result
-        render json: results
-      end
-    }, __FILE__, __LINE__ - 20
-  end
-
-  %w[account event machine project subscription training user space].each do |path|
-    class_eval %{
-      def export_#{path}
-        authorize :statistic, :export_#{path}?
-
-        export = Export.where(category:'statistics', export_type: '#{path}', query: params[:body], key: params[:type_key]).last
-        if export.nil? || !FileTest.exist?(export.file)
-          @export = Export.new(category:'statistics',
-                               export_type: '#{path}',
-                               user: current_user,
-                               query: params[:body],
-                               key: params[:type_key])
+        @export = Statistics::QueryService.export('#{path}', params)    # @export = Statistics::QueryService.export('account', params)
+        if @export.is_a?(Export)
           if @export.save
-            render json: {export_id: @export.id}, status: :ok
+            render json: { export_id: @export.id }, status: :ok
           else
             render json: @export.errors, status: :unprocessable_entity
           end
         else
-          send_file File.join(Rails.root, export.file),
+          send_file @export,
                     type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
                     disposition: 'attachment'
         end
@@ -62,16 +38,15 @@ class API::StatisticsController < API::ApiController
   def export_global
     authorize :statistic, :export_global?
 
-    export = Export.where(category: 'statistics', export_type: 'global', query: params[:body]).last
-    if export.nil? || !FileTest.exist?(export.file)
-      @export = Export.new(category: 'statistics', export_type: 'global', user: current_user, query: params[:body])
+    @export = Statistics::QueryService.export(global, params)
+    if @export.is_a?(Export)
       if @export.save
         render json: { export_id: @export.id }, status: :ok
       else
         render json: @export.errors, status: :unprocessable_entity
       end
     else
-      send_file File.join(Rails.root, export.file),
+      send_file @export,
                 type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
                 disposition: 'attachment'
     end

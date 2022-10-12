@@ -1027,6 +1027,30 @@ unless StatisticIndex.find_by(es_type_key: 'space')
                         ])
 end
 
+unless StatisticIndex.find_by(es_type_key: 'order')
+  index = StatisticIndex.create!(es_type_key: 'order', label: I18n.t('statistics.orders'))
+  type = StatisticType.create!([
+                                 { statistic_index_id: index.id, key: 'store', label: I18n.t('statistics.store'),
+                                   graph: true, simple: true }
+                               ])
+  StatisticSubType.create!([
+                             { key: 'paid-processed', label: I18n.t('statistics.paid-processed'), statistic_types: [type] },
+                             { key: 'aborted', label: I18n.t('statistics.aborted'), statistic_types: [type] }
+                           ])
+
+  # average cart price for orders
+  average_cart = StatisticCustomAggregation.new(
+    statistic_type_id: type.id,
+    es_index: 'stats',
+    es_type: 'order',
+    field: 'average_cart',
+    query: '{"size":0, "aggregations":{"%{aggs_name}":{"avg":{"field":"ca", ' \
+           '"script":"BigDecimal.valueOf(_value).setScale(1, RoundingMode.HALF_UP)", "missing": 0}}}, ' \
+           '"query":{"bool":{"must":[{"range": {"date":{"gte":"%{start_date}", "lte":"%{end_date}"}}}]}}}'
+  )
+  average_cart.save!
+end
+
 ProfileCustomField.find_or_create_by(label: 'N° SIRET')
 ProfileCustomField.find_or_create_by(label: 'Code NAF')
 ProfileCustomField.find_or_create_by(label: 'N° TVA intracommunautaire')

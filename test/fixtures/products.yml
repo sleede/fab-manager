@@ -1,0 +1,182 @@
+product_3:
+  id: 3
+  name: Caisse en bois
+  slug: caisse-en-bois
+  sku: '1694813216840'
+  description: "<p>C'est un superbe caisse en bois massif</p>"
+  is_active: true
+  product_category_id: 4
+  amount: 52300
+  quantity_min: 10
+  stock: '{"external": 0, "internal": 1}'
+  low_stock_alert: true
+  low_stock_threshold: 10
+  created_at: '2022-09-13 10:05:07.010322'
+  updated_at: '2022-09-14 13:39:55.309956'
+product_11:
+  id: 11
+  name: Bulldozer
+  slug: bulldozer
+  sku: '816516515'
+  description: "<p>Jouet pour enfants</p>"
+  is_active: true
+  product_category_id: 4
+  amount: 1000
+  quantity_min: 1
+  stock: '{"external": 9, "internal": 0}'
+  low_stock_alert: false
+  low_stock_threshold:
+  created_at: '2022-09-14 13:41:16.207154'
+  updated_at: '2022-10-04 14:04:12.727452'
+product_12:
+  id: 12
+  name: Casque à pointe
+  slug: casque-a-pointe
+  sku: '10210706'
+  description: "<p>Authentique casque à pointe allemand de la 1ère guerre mondiale</p>"
+  is_active: true
+  product_category_id: 4
+  amount: 142300
+  quantity_min: 1
+  stock: '{"external": 0, "internal": 1}'
+  low_stock_alert: false
+  low_stock_threshold:
+  created_at: '2022-09-14 13:42:36.729625'
+  updated_at: '2022-09-14 13:42:53.704455'
+product_13:
+  id: 13
+  name: Panneaux de MDF
+  slug: panneaux-de-mdf
+  sku: 3-8612
+  description: ''
+  is_active: true
+  product_category_id: 5
+  amount: 500
+  quantity_min: 1
+  stock: '{"external": 999, "internal": 0}'
+  low_stock_alert: false
+  low_stock_threshold:
+  created_at: '2022-09-14 13:47:18.123531'
+  updated_at: '2022-09-20 15:14:22.690742'
+product_14:
+  id: 14
+  name: Panneau de mélaminé
+  slug: panneau-de-melamine
+  sku: 12-4512
+  description: ''
+  is_active: true
+  product_category_id: 5
+  amount: 1000
+  quantity_min: 1
+  stock: '{"external": 800, "internal": 0}'
+  low_stock_alert: false
+  low_stock_threshold:
+  created_at: '2022-09-14 13:48:05.028266'
+  updated_at: '2022-09-14 14:58:28.577253'
+product_15:
+  id: 15
+  name: Panneau de contre-plaqué
+  slug: panneau-de-contre-plaque
+  sku: 12-4613
+  description: ''
+  is_active: true
+  product_category_id: 5
+  amount: 1500
+  quantity_min: 1
+  stock: '{"external": 595, "internal": 0}'
+  low_stock_alert: false
+  low_stock_threshold:
+  created_at: '2022-09-14 13:49:08.233064'
+  updated_at: '2022-10-04 13:54:42.787290'
+product_16:
+  id: 16
+  name: Panneau d'OSB
+  slug: panneau-osb
+  sku: 14-14488
+  description: ''
+  is_active: true
+  product_category_id: 5
+  amount: 1300
+  quantity_min: 1
+  stock: '{"external": 100, "internal": 0}'
+  low_stock_alert: false
+  low_stock_threshold:
+  created_at: '2022-09-14 13:50:12.584041'
+  updated_at: '2022-09-14 14:58:38.374112'
+product_17:
+  id: 17
+  name: Panneau de 3 plis mélèze
+  slug: panneau-de-3-plis-meleze
+  sku: 14-47887
+  description: ''
+  is_active: true
+  product_category_id: 5
+  amount: 3000
+  quantity_min: 1
+  stock: '{"external": 99, "internal": 0}'
+  low_stock_alert: false
+  low_stock_threshold:
+  created_at: '2022-09-14 13:51:12.630109'
+  updated_at: '2022-10-04 14:35:40.558485'
+product_18:
+  id: 18
+  name: Tablette lamellé-collé
+  slug: tablette-lamelle-colle
+  sku: 14-879895
+  description: ''
+  is_active: true
+  product_category_id: 5
+  amount: 4000
+  quantity_min: 1
+  stock: '{"external": 12, "internal": 0}'
+  low_stock_alert: false
+  low_stock_threshold:
+  created_at: '2022-09-14 13:52:08.659248'
+  updated_at: '2022-10-04 14:32:28.021046'
+product_20:
+  id: 20
+  name: Sticker Hello
+  slug: sticker-hello
+  sku: 63-44801
+  description: <p>un joli sticker en forme de  <a target="_blank" rel="noopener noreferrer nofollow"
+    href="https://www.example.com/hello">smiley</a> qui dit bonjour</p>
+  is_active: true
+  product_category_id: 6
+  amount: 1
+  quantity_min: 1
+  stock: '{"external": 15, "internal": 0}'
+  low_stock_alert: false
+  low_stock_threshold:
+  created_at: '2022-09-28 08:16:32.348880'
+  updated_at: '2022-10-04 14:17:52.839249'
+product_22:
+  id: 22
+  name: Filament PLA bleu
+  slug: filament-pla-bleu
+  sku: 984-777
+  description: <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://www.filimprimante3d.fr/content/80-le-pla-c-est-quoi-comment-choisir-son-filament-pla">Filament
+    PLA</a> 1,75 mm de couleur bleue</p>
+  is_active: true
+  product_category_id: 3
+  amount: 200
+  quantity_min: 1
+  stock: '{"external": 999, "internal": 1000}'
+  low_stock_alert: false
+  low_stock_threshold:
+  created_at: '2022-10-03 14:00:49.967342'
+  updated_at: '2022-10-04 12:36:02.830248'
+product_23:
+  id: 23
+  name: Filament PLA blanc
+  slug: filament-pla-blanc
+  sku: 178-774
+  description: "<p>Filament PLA 1,75 mm blanc</p>"
+  is_active: true
+  product_category_id: 3
+  amount: 119
+  quantity_min: 1
+  stock: '{"external": 998, "internal": 1000}'
+  low_stock_alert: false
+  low_stock_threshold:
+  created_at: '2022-10-03 14:01:43.706366'
+  updated_at: '2022-10-04 13:54:42.782174'

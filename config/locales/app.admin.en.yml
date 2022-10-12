@@ -1258,6 +1258,7 @@ en:
         export_is_running_you_ll_be_notified_when_its_ready: "Export is running. You'll be notified when it's ready."
         create_plans_to_start: "Start by creating new subscription plans."
         click_here: "Click here to create your first one."
+        average_cart: "Average cart:"
       #statistics graphs
       stats_graphs:
         statistics: "Statistics"

@@ -8,17 +8,15 @@ class WalletTransaction < ApplicationRecord
   belongs_to :wallet
   belongs_to :reservation
   # what was paid with the wallet
-  has_one :invoice
-  has_one :payment_schedule
+  has_one :invoice, dependent: :nullify
+  has_one :payment_schedule, dependent: :nullify
   # how the wallet was credited
   has_one :invoice_item, as: :object, dependent: :destroy
 
-  validates_inclusion_of :transaction_type, in: %w[credit debit]
+  validates :transaction_type, inclusion: { in: %w[credit debit] }
   validates :invoicing_profile, :wallet, presence: true
 
-  def user
-    invoicing_profile.user
-  end
+  delegate :user, to: :invoicing_profile
 
   def original_invoice
     invoice_item.invoice

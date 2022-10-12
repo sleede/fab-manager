@@ -15,22 +15,23 @@ class Reservation < ApplicationRecord
   accepts_nested_attributes_for :slots_reservations, allow_destroy: true
   belongs_to :reservable, polymorphic: true
 
-  has_many :tickets
+  has_many :tickets, dependent: :destroy
   accepts_nested_attributes_for :tickets, allow_destroy: false
 
   has_many :invoice_items, as: :object, dependent: :destroy
   has_one :payment_schedule_object, as: :object, dependent: :destroy
 
-  validates_presence_of :reservable_id, :reservable_type
+  validates :reservable_id, :reservable_type, presence: true
   validate :machine_not_already_reserved, if: -> { reservable.is_a?(Machine) }
   validate :training_not_fully_reserved, if: -> { reservable.is_a?(Training) }
   validate :slots_not_locked
 
+  after_save :update_event_nb_free_places, if: proc { |reservation| reservation.reservable_type == 'Event' }
   after_commit :notify_member_create_reservation, on: :create
   after_commit :notify_admin_member_create_reservation, on: :create
   after_commit :extend_subscription, on: :create
-  after_save :update_event_nb_free_places, if: proc { |reservation| reservation.reservable_type == 'Event' }
 
+  delegate :user, to: :statistic_profile
 
   # @param canceled    if true, count the number of seats for this reservation, including canceled seats
   def total_booked_seats(canceled: false)
@@ -48,10 +49,6 @@ class Reservation < ApplicationRecord
     end
 
     total
-  end
-
-  def user
-    statistic_profile.user
   end
 
   def update_event_nb_free_places
@@ -83,11 +80,11 @@ class Reservation < ApplicationRecord
       daily_slots[1..].each do |slot|
         found = false
         result[date].each do |group_start, group_slots|
-          if slot[:start_at] === group_slots.last[:end_at]
-            result[date][group_start].push(slot)
-            found = true
-            break
-          end
+          next unless slot[:start_at] == group_slots.last[:end_at]
+
+          result[date][group_start].push(slot)
+          found = true
+          break
         end
         result[date][slot[:start_at]] = [slot] unless found
       end

@@ -6,6 +6,7 @@ class Statistics::FetcherService
   include Statistics::Concerns::HelpersConcern
   include Statistics::Concerns::ComputeConcern
   include Statistics::Concerns::ProjectsConcern
+  include Statistics::Concerns::StoreOrdersConcern
 
   class << self
     def subscriptions_list(options = default_options)
@@ -178,6 +179,22 @@ class Statistics::FetcherService
              .eager_load(:licence, :themes, :components, :machines, :project_users, author: [:group])
              .each do |p|
         result.push({ date: p.created_at.to_date }.merge(user_info(p.author)).merge(project_info(p)))
+      end
+      result
+    end
+
+    def store_orders_list(states, options = default_options)
+      result = []
+      Order.includes(order_items: [:orderable])
+           .joins(:order_items, :order_activities)
+           .where(order_items: { orderable_type: 'Product' })
+           .where(orders: { state: states })
+           .where('order_activities.created_at >= :start_date AND order_activities.created_at <= :end_date', options)
+           .group('orders.id')
+           .each do |o|
+        result.push({ date: o.created_at.to_date, ca: calcul_ca(o.invoice) }
+                      .merge(user_info(o.statistic_profile))
+                      .merge(store_order_info(o)))
       end
       result
     end
