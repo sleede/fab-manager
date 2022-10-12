@@ -11,6 +11,7 @@ import { FabButton } from '../base/fab-button';
 import SettingAPI from '../../api/setting';
 import SettingLib from '../../lib/setting';
 import { SettingName, SettingValue, storeSettings } from '../../models/setting';
+import { FormSwitch } from '../form/form-switch';
 
 declare const Application: IApplication;
 
@@ -29,7 +30,7 @@ export const StoreSettings: React.FC<StoreSettingsProps> = ({ onError, onSuccess
   useEffect(() => {
     SettingAPI.query(storeSettings)
       .then(settings => {
-        const data = SettingLib.mapToBulkObject(settings);
+        const data = SettingLib.bulkMapToObject(settings);
         reset(data);
       })
       .catch(onError);
@@ -39,7 +40,7 @@ export const StoreSettings: React.FC<StoreSettingsProps> = ({ onError, onSuccess
    * Callback triggered when the form is submitted: save the settings
    */
   const onSubmit: SubmitHandler<Record<SettingName, SettingValue>> = (data) => {
-    SettingAPI.bulkUpdate(SettingLib.bulkObjectToMap(data)).then(() => {
+    SettingAPI.bulkUpdate(SettingLib.objectToBulkMap(data)).then(() => {
       onSuccess(t('app.admin.store_settings.update_success'));
     }, reason => {
       onError(reason);
@@ -52,16 +53,25 @@ export const StoreSettings: React.FC<StoreSettingsProps> = ({ onError, onSuccess
         <h2>{t('app.admin.store_settings.title')}</h2>
       </header>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <p>{t('app.admin.store_settings.withdrawal_instructions')}</p>
-        <FabAlert level="warning">
-          <HtmlTranslate trKey="app.admin.store_settings.withdrawal_info" />
-        </FabAlert>
-        <FormRichText control={control}
-                      heading
-                      bulletList
-                      link
-                      limit={400}
-                      id="store_withdrawal_instructions" />
+        <div className="setting-section">
+          <p className="section-title">{t('app.admin.store_settings.withdrawal_instructions')}</p>
+          <FabAlert level="warning">
+            <HtmlTranslate trKey="app.admin.store_settings.withdrawal_info" />
+          </FabAlert>
+          <FormRichText control={control}
+                        heading
+                        bulletList
+                        link
+                        limit={400}
+                        id="store_withdrawal_instructions" />
+        </div>
+        <div className="setting-section">
+          <p className="section-title">{t('app.admin.store_settings.store_hidden_title')}</p>
+          <FabAlert level="warning">
+            <HtmlTranslate trKey="app.admin.store_settings.store_hidden_info" />
+          </FabAlert>
+          <FormSwitch control={control} id="store_hidden" label={t('app.admin.store_settings.store_hidden')} />
+        </div>
         <FabButton type='submit' className='save-btn'>{t('app.admin.store_settings.save')}</FabButton>
       </form>
     </div>

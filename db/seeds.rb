@@ -991,6 +991,8 @@ Setting.set('show_username_in_admin_list', false) unless Setting.find_by(name: '
 
 Setting.set('store_module', false) unless Setting.find_by(name: 'store_module').try(:value)
 
+Setting.set('store_hidden', true) unless Setting.find_by(name: 'store_hidden').try(:value)
+
 if StatisticCustomAggregation.count.zero?
   # available reservations hours for machines
   machine_hours = StatisticType.find_by(key: 'hour', statistic_index_id: 2)

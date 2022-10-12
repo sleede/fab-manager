@@ -214,7 +214,8 @@ export const displaySettings = [
 ] as const;
 
 export const storeSettings = [
-  'store_withdrawal_instructions'
+  'store_withdrawal_instructions',
+  'store_hidden'
 ] as const;
 
 export const allSettings = [

@@ -154,7 +154,8 @@ class Setting < ApplicationRecord
                              user_validation_required_list
                              show_username_in_admin_list
                              store_module
-                             store_withdrawal_instructions] }
+                             store_withdrawal_instructions
+                             store_hidden] }
   # WARNING: when adding a new key, you may also want to add it in:
   # - config/locales/en.yml#settings
   # - app/frontend/src/javascript/models/setting.ts#SettingName

@@ -2106,5 +2106,8 @@ en:
         title: 'Settings'
         withdrawal_instructions: 'Product withdrawal instructions'
         withdrawal_info: "This text is displayed on the checkout page to inform the client about the products withdrawal method"
+        store_hidden_title: "Store publicly available"
+        store_hidden_info: "You can hide the store to the eyes of the members and the visitors."
+        store_hidden: "Hide the store"
         save: "Save"
         update_success: "The settings were successfully updated"

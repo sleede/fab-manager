@@ -620,3 +620,4 @@ en:
     show_username_in_admin_list: "Show the username in the admin's members list"
     store_module: "Store module"
     store_withdrawal_instructions: "Withdrawal instructions"
+    store_hidden: "Store hidden to the public"

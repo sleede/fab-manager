@@ -14,7 +14,19 @@ export default class ParsingLib {
       for (const item of value) {
         parsedValue.push(ParsingLib.parse(item));
       }
-    } else if (ParsingLib.isBoolean(value)) {
+    } else {
+      parsedValue = ParsingLib.simpleParse(value);
+    }
+    return parsedValue;
+  };
+
+  /**
+   * Try to parse the given value to get the value with the matching type.
+   * Arrays are not supported.
+   */
+  static simpleParse = (value: string): baseType => {
+    let parsedValue: baseType = value;
+    if (ParsingLib.isBoolean(value)) {
       parsedValue = (value === 'true');
     } else if (ParsingLib.isInteger(value)) {
       parsedValue = parseInt(value, 10);

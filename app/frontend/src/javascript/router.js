@@ -28,7 +28,7 @@ angular.module('application.router', ['ui.router'])
           logoBlackFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'logo-black-file' }).$promise; }],
           sharedTranslations: ['Translations', function (Translations) { return Translations.query(['app.shared', 'app.public.common']).$promise; }],
           modulesPromise: ['Setting', function (Setting) { return Setting.query({ names: "['machines_module', 'spaces_module', 'plans_module', 'invoicing_module', 'wallet_module', 'statistics_module', 'trainings_module', 'public_agenda_module', 'store_module']" }).$promise; }],
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['public_registrations']" }).$promise; }]
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['public_registrations', 'store_hidden']" }).$promise; }]
         },
         onEnter: ['$rootScope', 'logoFile', 'logoBlackFile', 'modulesPromise', 'CSRF', function ($rootScope, logoFile, logoBlackFile, modulesPromise, CSRF) {
           // Retrieve Anti-CSRF tokens from cookies
@@ -634,6 +634,9 @@ angular.module('application.router', ['ui.router'])
             controller: 'StoreController'
           }
         },
+        data: {
+          authorizedRoles: Fablab.storeHidden ? ['admin', 'manager'] : undefined
+        },
         params: {
           categoryTypeUrl: { dynamic: true, raw: true, type: 'path', value: null, squash: true },
           category: { dynamic: true, type: 'path', raw: true, value: null, squash: true },
@@ -642,7 +645,8 @@ angular.module('application.router', ['ui.router'])
           is_active: { dynamic: true, type: 'query', value: 'true', squash: true },
           is_available: { dynamic: true, type: 'query', value: 'false', squash: true },
           page: { dynamic: true, type: 'query', value: '1', squash: true },
-          sort: { dynamic: true, type: 'query' }
+          sort: { dynamic: true, type: 'query' },
+          authorizedRoles: { dynamic: true, raw: true }
         }
       })
 

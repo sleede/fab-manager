@@ -11,8 +11,13 @@
     grid-column: 2 / -2;
   }
   form {
-    grid-column: 2 / 7;
-    p { @include title-base; }
+    grid-column: 1 / -1;
+    display: flex;
+    .setting-section {
+      margin: 1rem 2rem;
+      width: 50%;
+    }
+    .section-title { @include title-base; }
     .save-btn {
       background-color: var(--main);
       color: var(--gray-soft-lightest);

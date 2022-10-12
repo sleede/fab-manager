@@ -44,6 +44,7 @@
       Fablab.trackingId = "<%= Setting.get('tracking_id') %>";
       Fablab.adminSysId = parseInt("<%= User.adminsys&.id %>", 10);
       Fablab.activeProviderType = "<%= AuthProvider.active&.providable_type %>";
+      Fablab.storeHidden = ('<%= Setting.get('store_hidden') %>' === 'true');
 
       // i18n stuff
       Fablab.locale = "<%= Rails.application.secrets.app_locale %>";

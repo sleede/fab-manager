@@ -1,24 +1,25 @@
 import { SettingName, SettingValue } from '../models/setting';
+import ParsingLib from './parsing';
 
 export default class SettingLib {
   /**
    * Convert the provided data to a map, as expected by BulkUpdate
    */
-  static bulkObjectToMap = (data: Record<SettingName, SettingValue>): Map<SettingName, SettingValue> => {
-    const res = new Map<SettingName, SettingValue>();
+  static objectToBulkMap = (data: Record<SettingName, SettingValue>): Map<SettingName, string> => {
+    const res = new Map<SettingName, string>();
     for (const key in data) {
-      res.set(key as SettingName, data[key]);
+      res.set(key as SettingName, `${data[key]}`);
     }
     return res;
   };
 
   /**
-   * Convert the provided map to a simple javascript object
+   * Convert the provided map to a simple javascript object, usable by react-hook-form
    */
-  static mapToBulkObject = (data: Map<SettingName, SettingValue>): Record<SettingName, SettingValue> => {
+  static bulkMapToObject = (data: Map<SettingName, string>): Record<SettingName, SettingValue> => {
     const res = {} as Record<SettingName, SettingValue>;
     data.forEach((value, key) => {
-      res[key] = value;
+      res[key] = ParsingLib.simpleParse(value);
     });
     return res;
   };

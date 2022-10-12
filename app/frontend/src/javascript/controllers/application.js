@@ -357,6 +357,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
           } else {
           // user is not logged in
             openLoginModal(trans.$to().name, trans.$to().params);
+            return false;
           }
         }
       });
