@@ -1,5 +1,9 @@
 # Changelog Fab-manager
 
+## v5.4.23 2022 October 12
+
+- Fix a bug: unable to build docker image
+
 ## v5.4.22 2022 October 10
 
 - Fix a bug: erroneous statistics
