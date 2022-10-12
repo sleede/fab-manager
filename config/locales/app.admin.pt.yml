@@ -1258,6 +1258,7 @@ pt:
         export_is_running_you_ll_be_notified_when_its_ready: "A exportação está em execução. Você será notificado quando estiver pronto."
         create_plans_to_start: "Comece criando novos planos de assinatura."
         click_here: "Clique aqui para criar o seu primeiro."
+        average_cart: "Average cart:"
       #statistics graphs
       stats_graphs:
         statistics: "Estatísticas"
@@ -2003,6 +2004,7 @@ pt:
           successfully_created: "The new product has been created."
         edit_product:
           successfully_updated: "The product has been updated."
+          successfully_cloned: "The product has been cloned."
         product_form:
           product_parameters: "Product parameters"
           stock_management: "Stock management"
@@ -2029,6 +2031,7 @@ pt:
           product_images_info: "<strong>Advice</strong></br>We advise you to use a square format, JPG or PNG. For JPG, please use white for the background colour. The main visual will be the first presented in the product sheet."
           add_product_image: "Add an image"
           save: "Save"
+          clone: "Clone"
         product_stock_form:
           stock_up_to_date: "Stock up to date"
           date_time: "{DATE} - {TIME}"
@@ -2072,6 +2075,9 @@ pt:
           damaged: "Damaged product"
           other_in: "Other (in)"
           other_out: "Other (out)"
+        clone_product_model:
+          clone_product: "Clone the product"
+          clone: "Clone"
         orders:
           heading: "Orders"
           create_order: "Create an order"
@@ -2100,5 +2106,8 @@ pt:
         title: 'Settings'
         withdrawal_instructions: 'Product withdrawal instructions'
         withdrawal_info: "This text is displayed on the checkout page to inform the client about the products withdrawal method"
+        store_hidden_title: "Store publicly available"
+        store_hidden_info: "You can hide the store to the eyes of the members and the visitors."
+        store_hidden: "Hide the store"
         save: "Save"
         update_success: "The settings were successfully updated"

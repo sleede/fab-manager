@@ -430,6 +430,7 @@ zu:
     subscriptions: "crwdns3689:0crwdne3689:0"
     machines_hours: "crwdns4561:0crwdne4561:0"
     spaces: "crwdns3693:0crwdne3693:0"
+    orders: "crwdns31190:0crwdne31190:0"
     trainings: "crwdns3695:0crwdne3695:0"
     events: "crwdns3697:0crwdne3697:0"
     registrations: "crwdns3699:0crwdne3699:0"
@@ -453,6 +454,9 @@ zu:
     account_creation: "crwdns3735:0crwdne3735:0"
     project_publication: "crwdns3737:0crwdne3737:0"
     duration: "crwdns20282:0crwdne20282:0"
+    store: "crwdns31192:0crwdne31192:0"
+    paid-processed: "crwdns31194:0crwdne31194:0"
+    aborted: "crwdns31196:0crwdne31196:0"
   #statistics exports to the Excel file format
   export:
     entries: "crwdns3739:0crwdne3739:0"
@@ -616,3 +620,4 @@ zu:
     show_username_in_admin_list: "crwdns24016:0crwdne24016:0"
     store_module: "crwdns30734:0crwdne30734:0"
     store_withdrawal_instructions: "crwdns30736:0crwdne30736:0"
+    store_hidden: "crwdns31198:0crwdne31198:0"

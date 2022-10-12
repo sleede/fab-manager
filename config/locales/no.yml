@@ -430,6 +430,7 @@
     subscriptions: "Subscriptions"
     machines_hours: "Machines slots"
     spaces: "Spaces"
+    orders: "Orders"
     trainings: "Trainings"
     events: "Events"
     registrations: "Registrations"
@@ -453,6 +454,9 @@
     account_creation: "Konto opprettet"
     project_publication: "Prosjekt publisert"
     duration: "Varighet"
+    store: "Boutique"
+    paid-processed: "Paid and/or processed"
+    aborted: "Aborted"
   #statistics exports to the Excel file format
   export:
     entries: "Oppføringer"
@@ -616,3 +620,4 @@
     show_username_in_admin_list: "Show the username in the admin's members list"
     store_module: "Store module"
     store_withdrawal_instructions: "Withdrawal instructions"
+    store_hidden: "Store hidden to the public"
