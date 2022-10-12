@@ -1258,6 +1258,7 @@ zu:
         export_is_running_you_ll_be_notified_when_its_ready: "crwdns26298:0crwdne26298:0"
         create_plans_to_start: "crwdns26300:0crwdne26300:0"
         click_here: "crwdns26302:0crwdne26302:0"
+        average_cart: "crwdns31174:0crwdne31174:0"
       #statistics graphs
       stats_graphs:
         statistics: "crwdns26304:0crwdne26304:0"
@@ -2003,6 +2004,7 @@ zu:
           successfully_created: "crwdns30950:0crwdne30950:0"
         edit_product:
           successfully_updated: "crwdns30952:0crwdne30952:0"
+          successfully_cloned: "crwdns31176:0crwdne31176:0"
         product_form:
           product_parameters: "crwdns30954:0crwdne30954:0"
           stock_management: "crwdns30956:0crwdne30956:0"
@@ -2029,6 +2031,7 @@ zu:
           product_images_info: "crwdns30998:0crwdne30998:0"
           add_product_image: "crwdns31000:0crwdne31000:0"
           save: "crwdns31002:0crwdne31002:0"
+          clone: "crwdns31178:0crwdne31178:0"
         product_stock_form:
           stock_up_to_date: "crwdns31004:0crwdne31004:0"
           date_time: "crwdns31006:0{DATE}crwdnd31006:0{TIME}crwdne31006:0"
@@ -2072,6 +2075,9 @@ zu:
           damaged: "crwdns31080:0crwdne31080:0"
           other_in: "crwdns31082:0crwdne31082:0"
           other_out: "crwdns31084:0crwdne31084:0"
+        clone_product_model:
+          clone_product: "crwdns31180:0crwdne31180:0"
+          clone: "crwdns31182:0crwdne31182:0"
         orders:
           heading: "crwdns31086:0crwdne31086:0"
           create_order: "crwdns31088:0crwdne31088:0"
@@ -2100,5 +2106,8 @@ zu:
         title: 'crwdns31128:0crwdne31128:0'
         withdrawal_instructions: 'crwdns31130:0crwdne31130:0'
         withdrawal_info: "crwdns31132:0crwdne31132:0"
+        store_hidden_title: "crwdns31184:0crwdne31184:0"
+        store_hidden_info: "crwdns31186:0crwdne31186:0"
+        store_hidden: "crwdns31188:0crwdne31188:0"
         save: "crwdns31134:0crwdne31134:0"
         update_success: "crwdns31136:0crwdne31136:0"
