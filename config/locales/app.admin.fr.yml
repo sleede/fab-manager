@@ -1258,6 +1258,7 @@ fr:
         export_is_running_you_ll_be_notified_when_its_ready: "L'export est en cours. Vous serez notifié lorsqu'il sera prêt."
         create_plans_to_start: "Pour commencer, créez de nouvelles formules d'abonnement."
         click_here: "Cliquez ici pour créer votre première formule."
+        average_cart: "Average cart:"
       #statistics graphs
       stats_graphs:
         statistics: "Statistiques"
@@ -2003,6 +2004,7 @@ fr:
           successfully_created: "Le nouveau produit a été créé."
         edit_product:
           successfully_updated: "Le produit a été modifié."
+          successfully_cloned: "The product has been cloned."
         product_form:
           product_parameters: "Paramètres du produit"
           stock_management: "Gestion des stocks"
@@ -2029,6 +2031,7 @@ fr:
           product_images_info: "<strong>Conseil</strong></br>Nous vous conseillons d'utiliser un format carré, JPG ou PNG. Pour le JPG, veuillez utiliser le blanc pour la couleur de fond. Le visuel principal sera le premier présenté dans la fiche produit."
           add_product_image: "Ajouter une image"
           save: "Enregistrer"
+          clone: "Clone"
         product_stock_form:
           stock_up_to_date: "Stock à jour"
           date_time: "{DATE} - {TIME}"
@@ -2072,6 +2075,9 @@ fr:
           damaged: "Produit endommagé"
           other_in: "Autre (entrant)"
           other_out: "Autre (sortant)"
+        clone_product_model:
+          clone_product: "Clone the product"
+          clone: "Clone"
         orders:
           heading: "Commandes"
           create_order: "Créer une commande"
@@ -2100,5 +2106,8 @@ fr:
         title: 'Paramètres'
         withdrawal_instructions: 'Instructions de retrait du produit'
         withdrawal_info: "Ce texte est affiché sur la page de paiement pour informer le client de la méthode de retrait des produits"
+        store_hidden_title: "Store publicly available"
+        store_hidden_info: "You can hide the store to the eyes of the members and the visitors."
+        store_hidden: "Hide the store"
         save: "Enregistrer"
         update_success: "Les paramètres ont bien été mis à jour"
