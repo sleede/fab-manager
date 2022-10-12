@@ -430,6 +430,7 @@ fr:
     subscriptions: "Abonnements"
     machines_hours: "Créneaux machines"
     spaces: "Espaces"
+    orders: "Orders"
     trainings: "Formations"
     events: "Événements"
     registrations: "Inscriptions"
@@ -453,6 +454,9 @@ fr:
     account_creation: "Création de compte"
     project_publication: "Publication de projet"
     duration: "Durée"
+    store: "Boutique"
+    paid-processed: "Paid and/or processed"
+    aborted: "Aborted"
   #statistics exports to the Excel file format
   export:
     entries: "Entrées"
@@ -616,3 +620,4 @@ fr:
     show_username_in_admin_list: "Afficher le nom d'utilisateur dans la liste des membres de l'administrateur"
     store_module: "Module boutique"
     store_withdrawal_instructions: "Instructions de retrait"
+    store_hidden: "Store hidden to the public"
