@@ -748,8 +748,8 @@ unless Setting.find_by(name: 'privacy_draft').try(:value)
     éventuelles modifications.</p><h3>I. DONNÉES PERSONNELLES</h3><p>D’une manière générale, il vous est possible de visiter le site de
     _________ sans communiquer aucune information personnelle vous concernant. En toute hypothèse, vous n’êtes en aucune manière obligé de
     transmettre ces informations à _________.</p><p>Néanmoins, en cas de refus, il se peut que vous ne puissiez pas bénéficier de
-    certaines informations ou services que vous avez demandé. A ce titre en effet, _________ peut être amené dans certains cas à vous
-    demander de renseigner vos nom, prénom, pseudonyme, sexe, adresse mail, numéro de téléphone, entreprise et date de naissance (ci-après
+    certaines informations ou services que vous avez demandés. À ce titre en effet, _________ peut être amené dans certains cas à vous
+    demander de renseigner votre nom, prénom, pseudonyme, sexe, adresse mail, numéro de téléphone, entreprise et date de naissance (ci-après
     vos « Informations Personnelles »). En fournissant ces informations, vous acceptez expressément qu’elles soient traitées par
     _________, aux fins indiquées au point 2 ci-dessous.</p><p>Conformément au Règlement Général sur la Protection des Données (General
     Data Protection Regulation) adopté par le Parlement européen le 14 avril 2016, et à la Loi Informatique et Libertés du 6 janvier 1978
@@ -793,10 +793,10 @@ unless Setting.find_by(name: 'privacy_draft').try(:value)
     adressée à l’adresse postale indiquée au point 1, vous trouverez en cliquant sur le <a
     href="https://www.cnil.fr/fr/modele/courrier/supprimer-des-informations-vous-concernant-dun-site-internet">lien</a> suivant un modèle de
     courrier élaboré par la CNIL.</p><h4>6. Délais de réponse</h4><p> _________ s’engage à répondre à votre demande d’accès, de rectification
-    ou d’opposition ou toute autre demande complémentaire  d’informations dans un délai raisonnable qui ne saurait dépasser 1 mois à compter
+    ou d’opposition ou toute autre demande complémentaire d’informations dans un délai raisonnable qui ne saurait dépasser 1 mois à compter
     de la réception de votre demande.</p><h4>7. Prestataires habilités et transfert vers un pays tiers de l’Union Européenne</h4><p>_________
     vous informe qu’il a recours à ses prestataires habilités pour faciliter le recueil et le traitement des données que vous nous avez
-    communiqué. Ces prestataires peuvent être situés en dehors de  l’Union Européenne et ont communication des données recueillies par le
+    communiquées. Ces prestataires peuvent être situés en dehors de l’Union Européenne et ont communication des données recueillies par le
     biais des divers formulaires présents sur le Site.</p><p>_________ s’est préalablement assuré de la mise en œuvre par ses prestataires de
     garanties adéquates et du respect de conditions strictes en matière de confidentialité, d’usage et de protection des données. Tout
     particulièrement, la vigilance s’est portée sur l’existence d’un fondement légal pour effectuer un quelconque transfert de données vers un
@@ -823,16 +823,18 @@ unless Setting.find_by(name: 'privacy_draft').try(:value)
     le site web de _________, leur nom, leur finalité ainsi que leur durée de conservation.</p><h4>2. Configuration de vos préférences sur les
     cookies</h4><p>Vous pouvez accepter ou refuser le dépôt de cookies à tout moment.</p><p>Lors de votre première connexion sur le site web
     de _________, une bannière présentant brièvement des informations relatives au dépôt de cookies et de technologies similaires apparaît en
-    bas de votre écran. Cette bannière vous demande de choisir explicitement d'acceptez ou non le dépôt de cookies sur votre terminal.
+    bas de votre écran. Cette bannière vous demande de choisir explicitement d'accepter ou non le dépôt de cookies sur votre terminal.
     </p><p>Après avoir fait votre choix, vous pouvez le modifier ultérieurement&nbsp; en vous connectant à votre compte utilisateur puis en
     naviguant dans la section intitulée « mes paramètres&nbsp;», accessible via un clic sur votre nom, en haut à droite de l'écran.</p>
     <p>Selon le type de cookie en cause, le recueil de votre consentement au dépôt et à la lecture de cookies sur votre terminal peut être
     impératif.</p><h4>a. Les cookies exemptés de consentement</h4><p>Conformément aux recommandations de la Commission Nationale de
     l’Informatique et des Libertés (CNIL), certains cookies sont dispensés du recueil préalable de votre consentement dans la mesure où ils
     sont strictement nécessaires au fonctionnement du site internet ou ont pour finalité exclusive de permettre ou faciliter la communication
-    par voie électronique.  Il s’agit des cookies suivants :</p><p><b>o Identifiant de session</b> et&nbsp;<b>authentification</b> sur l'API.
-    Ces cookies sont intégralement soumis à la présente politique dans la mesure où ils sont émis et gérés par _________.</p><p>
-    <b>o Stripe</b>, permettant de gérer les paiements par carte bancaire et dont la politique de confidentialité est accessible sur ce
+    par voie électronique. Il s’agit des cookies suivants :</p><p><b>o Identifiant de session</b> et&nbsp;<b>d'authentification</b> sur l'API de
+    Fab-manager.</p><p><b>o Identifiant de panier d'achat</b></b>, permettant de sauvegarder le contenu de votre panier d'achat, même lorsque
+    vous n'êtes pas connecté.</p>
+    <p><em>Les cookies ci-dessus sont intégralement soumis à la présente politique dans la mesure où ils sont émis et gérés par _________.</em></p>
+    <p><b>o Stripe</b>, permettant de gérer les paiements par carte bancaire et dont la politique de confidentialité est accessible sur ce
     <a href="https://stripe.com/fr/privacy">lien</a>.</p><p><b>o Disqus</b>, permettant de poster des commentaires sur les fiches projet et
     dont la politique de confidentialité est accessible sur ce <a href="https://help.disqus.com/articles/1717103-disqus-privacy-policy">lien
     </a>.</p><h4>b. Les cookies nécessitant le recueil préalable de votre consentement</h4><p>Cette
@@ -846,7 +848,7 @@ unless Setting.find_by(name: 'privacy_draft').try(:value)
     confidentialité est disponible (uniquement en anglais) à partir du <a href="https://policies.google.com/privacy?hl=fr&amp;gl=ZZ">lien
     </a> suivant. </p><h4>c. Vous disposez de divers outils de paramétrage des cookies</h4><p>La plupart
     des navigateurs Internet sont configurés par défaut de façon à ce que le dépôt de cookies soit autorisé. Votre navigateur vous offre
-    l’opportunité de modifier ces paramètres standards de manière à ce que l’ensemble des cookies soit rejeté systématiquement ou bien à ce
+    l’opportunité de modifier ces paramètres standards de manière que l’ensemble des cookies soit rejeté systématiquement ou bien à ce
     qu’une partie seulement des cookies soit acceptée ou refusée en fonction de leur émetteur.</p><p><b>ATTENTION</b> : Nous attirons votre
     attention sur le fait que le refus du dépôt de cookies sur votre terminal est néanmoins susceptible d’altérer votre expérience
     d’utilisateur ainsi que votre accès à certains services ou fonctionnalités du présent site web. Le cas échéant, _________ décline toute
@@ -855,21 +857,21 @@ unless Setting.find_by(name: 'privacy_draft').try(:value)
     Ces conséquences ne sauraient constituer un dommage et vous ne pourrez prétendre à aucune indemnité de ce fait.</p>
     <p>Votre navigateur vous permet également de supprimer les cookies existants sur votre
     terminal ou encore de vous signaler lorsque de nouveaux cookies sont susceptibles d’être déposés sur votre terminal. Ces paramètres n’ont
-    pas d’incidence sur votre navigation mais vous font perdre tout le bénéfice apporté par le cookie.</p><p>Veuillez ci-dessous prendre
+    pas d’incidence sur votre navigation, mais vous font perdre tout le bénéfice apporté par le cookie.</p><p>Veuillez ci-dessous prendre
     connaissance des multiples outils mis à votre disposition afin que vous puissiez paramétrer les cookies déposés sur votre terminal.</p>
     <h4>d. Le paramétrage de votre navigateur Internet</h4><p>Chaque navigateur Internet propose ses propres paramètres de gestion des
     cookies. Pour savoir de quelle manière modifier vos préférences en matière de cookies, vous trouverez ci-dessous les liens vers l’aide
     nécessaire pour accéder au menu de votre navigateur prévu à cet effet :</p>
     <ul>
       <li><a href="https://support.google.com/chrome/answer/95647?hl=fr">Chrome</a></li>
-      <li><a href="https://support.mozilla.org/fr/kb/activer-desactiver-cookies">Firefox</a></li>
-      <li><a href="https://support.microsoft.com/fr-fr/help/17442/windows-internet-explorer-delete-manage-cookies#ie=ie-11">Internet
-      Explorer</a></li>
-      <li><a href="http://help.opera.com/Windows/10.20/fr/cookies.html">Opera</a></li>
-      <li><a href="https://support.apple.com/kb/PH21411?viewlocale=fr_FR&amp;locale=fr_FR">Safari</a></li>
+      <li><a href="https://mzl.la/3BX2oBb">Firefox</a></li>
+      <li><a href="https://support.microsoft.com/fr-fr/microsoft-edge/supprimer-les-cookies-dans-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09">
+      Microsoft Edge</a></li>
+      <li><a href="https://help.opera.com/en/latest/web-preferences/#cookies">Opera</a></li>
+      <li><a href="https://support.apple.com/fr-fr/HT201265">Safari</a></li>
     </ul>
     <p>Pour de plus amples informations concernant les outils de maîtrise des cookies, vous pouvez consulter le
-    <a href="https://www.cnil.fr/fr/cookies-les-outils-pour-les-maitriser">site internet</a> de la CNIL.</p>
+    <a href="https://www.cnil.fr/fr/cookies-et-autres-traceurs/comment-se-proteger/maitriser-votre-navigateur">site internet</a> de la CNIL.</p>
   HTML
   setting.save
 end
