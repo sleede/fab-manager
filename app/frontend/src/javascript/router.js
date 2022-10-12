@@ -634,9 +634,6 @@ angular.module('application.router', ['ui.router'])
             controller: 'StoreController'
           }
         },
-        data: {
-          authorizedRoles: Fablab.storeHidden ? ['admin', 'manager'] : undefined
-        },
         params: {
           categoryTypeUrl: { dynamic: true, raw: true, type: 'path', value: null, squash: true },
           category: { dynamic: true, type: 'path', raw: true, value: null, squash: true },
