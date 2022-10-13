@@ -15,19 +15,27 @@
       <uib-tabset justified="true" active="tabs.active">
 
         <uib-tab heading="{{ 'app.admin.store.settings' | translate }}" index="0" select="selectTab()" ng-hide="currentUser.role == 'manager'">
-          <ng-include src="'/admin/store/settings.html'"></ng-include>
+          <div ng-if="tabs.active === 0">
+            <ng-include src="'/admin/store/settings.html'"></ng-include>
+          </div>
         </uib-tab>
 
         <uib-tab heading="{{ 'app.admin.store.all_products' | translate }}" index="1" select="selectTab()">
-          <ng-include src="'/admin/store/products.html'"></ng-include>
+          <div ng-if="tabs.active === 1">
+            <ng-include src="'/admin/store/products.html'"></ng-include>
+          </div>
         </uib-tab>
 
         <uib-tab heading="{{ 'app.admin.store.categories_of_store' | translate }}" index="2" select="selectTab()">
-          <ng-include src="'/admin/store/categories.html'"></ng-include>
+          <div ng-if="tabs.active === 2">
+            <ng-include src="'/admin/store/categories.html'"></ng-include>
+          </div>
         </uib-tab>
 
         <uib-tab heading="{{ 'app.admin.store.the_orders' | translate }}" index="3" select="selectTab()">
-          <ng-include src="'/admin/store/orders.html'"></ng-include>
+          <div ng-if="tabs.active === 3">
+            <ng-include src="'/admin/store/orders.html'"></ng-include>
+          </div>
         </uib-tab>
       </uib-tabset>
     </div>
