@@ -15,6 +15,6 @@ class OrderPolicy < ApplicationPolicy
   end
 
   def withdrawal_instructions?
-    user.privileged? || (record&.statistic_profile_id == user.statistic_profile.id)
+    user&.privileged? || (record&.statistic_profile_id == user&.statistic_profile&.id)
   end
 end

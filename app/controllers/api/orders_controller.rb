@@ -3,7 +3,7 @@
 # API Controller for resources of type Order
 # Orders are used in store
 class API::OrdersController < API::ApiController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: %i[withdrawal_instructions]
   before_action :set_order, only: %i[show update destroy withdrawal_instructions]
 
   def index
