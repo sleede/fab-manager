@@ -43,14 +43,13 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
   const [withdrawalInstructions, setWithdrawalInstructions] = useState<string>(null);
 
   useEffect(() => {
-    OrderAPI.withdrawalInstructions(cart)
-      .then(setWithdrawalInstructions)
-      .catch(onError);
-  }, []);
-
-  useEffect(() => {
     if (cart) {
       checkCart();
+    }
+    if (cart && !withdrawalInstructions) {
+      OrderAPI.withdrawalInstructions(cart)
+        .then(setWithdrawalInstructions)
+        .catch(onError);
     }
   }, [cart]);
 
@@ -305,10 +304,12 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
       </div>
 
       <div className="group">
-        <div className='store-cart-info'>
-          <h3>{t('app.public.store_cart.pickup')}</h3>
-          <p dangerouslySetInnerHTML={{ __html: withdrawalInstructions }} />
-        </div>
+        {cart && !cartIsEmpty() &&
+          <div className='store-cart-info'>
+            <h3>{t('app.public.store_cart.pickup')}</h3>
+            <p dangerouslySetInnerHTML={{ __html: withdrawalInstructions }} />
+          </div>
+        }
 
         {cart && !cartIsEmpty() &&
           <div className='store-cart-coupon'>

@@ -4,7 +4,7 @@
 # Orders are used in store
 class API::OrdersController < API::ApiController
   before_action :authenticate_user!
-  before_action :set_order, only: %i[show update destroy]
+  before_action :set_order, only: %i[show update destroy withdrawal_instructions]
 
   def index
     @result = ::Orders::OrderService.list(params, current_user)
@@ -26,14 +26,9 @@ class API::OrdersController < API::ApiController
   end
 
   def withdrawal_instructions
-    begin
-      order = Order.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      order = nil
-    end
-    authorize order || Order
+    authorize @order
 
-    render html: ::Orders::OrderService.withdrawal_instructions(order)
+    render html: ::Orders::OrderService.withdrawal_instructions(@order)
   end
 
   private

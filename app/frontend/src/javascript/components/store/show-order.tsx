@@ -33,14 +33,11 @@ export const ShowOrder: React.FC<ShowOrderProps> = ({ orderId, currentUser, onSu
   useEffect(() => {
     OrderAPI.get(orderId).then(data => {
       setOrder(data);
+      OrderAPI.withdrawalInstructions(data)
+        .then(setWithdrawalInstructions)
+        .catch(onError);
     }).catch(onError);
   }, []);
-
-  useEffect(() => {
-    OrderAPI.withdrawalInstructions(order)
-      .then(setWithdrawalInstructions)
-      .catch(onError);
-  }, [order]);
 
   /**
    * Check if the current operator has administrative rights or is a normal member
