@@ -274,7 +274,7 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onError }) => {
             <div className='content'>
               <div className="group">
                 <input type="text" value={reference} onChange={(event) => handleReferenceChanged(event.target.value)}/>
-                <FabButton onClick={applyFilters('reference')} className="is-info">{t('app.admin.store.orders.filter_apply')}</FabButton>
+                <FabButton onClick={applyFilters('reference')} className="is-secondary">{t('app.admin.store.orders.filter_apply')}</FabButton>
               </div>
             </div>
           </AccordionItem>
@@ -292,7 +292,7 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onError }) => {
                   </label>
                 ))}
               </div>
-              <FabButton onClick={applyFilters('states')} className="is-info">{t('app.admin.store.orders.filter_apply')}</FabButton>
+              <FabButton onClick={applyFilters('states')} className="is-secondary">{t('app.admin.store.orders.filter_apply')}</FabButton>
             </div>
           </AccordionItem>
           <AccordionItem id={2}
@@ -303,7 +303,7 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onError }) => {
             <div className='content'>
               <div className="group">
                 <MemberSelect noHeader value={user as User} onSelected={handleSelectMember} />
-                <FabButton onClick={applyFilters('user')} className="is-info">{t('app.admin.store.orders.filter_apply')}</FabButton>
+                <FabButton onClick={applyFilters('user')} className="is-secondary">{t('app.admin.store.orders.filter_apply')}</FabButton>
               </div>
             </div>
           </AccordionItem>
@@ -328,7 +328,7 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onError }) => {
                              defaultValue={periodTo}
                              type="date" />
                 </div>
-                <FabButton onClick={applyFilters('period')} className="is-info">{t('app.admin.store.orders.filter_apply')}</FabButton>
+                <FabButton onClick={applyFilters('period')} className="is-secondary">{t('app.admin.store.orders.filter_apply')}</FabButton>
               </div>
             </div>
           </AccordionItem>

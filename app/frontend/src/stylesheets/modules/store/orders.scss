@@ -125,7 +125,7 @@
         align-items: center;
         span { @include title-base; }
       }
-      .gift { color: var(--information); }
+      .gift { color: var(--gray-hard-dark); }
       .total {
         padding: 1.6rem 0 0;
         align-items: flex-start;

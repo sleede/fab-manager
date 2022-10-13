@@ -66,6 +66,9 @@
   &.is-info {
     @include colorVariant(var(--information), var(--gray-soft-lightest));
   }
+  &.is-secondary {
+    @include colorVariant(var(--secondary), var(--gray-hard-darkest));
+  }
   &.is-black {
     @include colorVariant(var(--gray-hard-darkest), var(--gray-soft-lightest));
   }

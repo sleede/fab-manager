@@ -21,7 +21,7 @@
       color: var(--gray-hard-darkest);
     }
     li:last-of-type:not(:first-of-type) span {
-      color: var(--information);
+      color: var(--gray-hard-dark);
     }
     span {
       color: var(--gray-hard-light);
@@ -137,12 +137,12 @@
         content: '';
         width: 100%;
         height: 1px;
-        background-color: var(--information);
+        background-color: var(--gray-hard-dark);
         z-index: -1;
       }
       span {
         padding: 0 1.6rem;
-        color: var(--information);
+        color: var(--gray-hard-dark);
         background-color: var(--gray-soft-lightest);
       }
     }

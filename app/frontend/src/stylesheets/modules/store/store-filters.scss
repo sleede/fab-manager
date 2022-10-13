@@ -47,7 +47,7 @@
       span {
         margin-left: 0.8rem;
         @include text-xs;
-        color: var(--information);
+        color: var(--gray-hard-dark);
       }
     }
     .parent {
@@ -58,7 +58,7 @@
       }
       &.is-active > p {
         @include text-base(600);
-        color: var(--information);
+        color: var(--primary);
         .children {
           max-height: 1000px;
         }

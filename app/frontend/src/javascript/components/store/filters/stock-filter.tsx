@@ -83,7 +83,7 @@ export const StockFilter: React.FC<StockFilterProps> = ({ onApplyFilters, curren
                          defaultValue={0}
                          type="number" />
             </div>
-            <FabButton type="submit" className="is-info">{t('app.admin.store.stock_filter.filter_apply')}</FabButton>
+            <FabButton type="submit" className="is-secondary">{t('app.admin.store.stock_filter.filter_apply')}</FabButton>
           </div>
         </form>
       </AccordionItem>

@@ -64,7 +64,7 @@ export const CategoriesFilter: React.FC<CategoriesFilterProps> = ({ productCateg
               </label>
             ))}
           </div>
-          <FabButton onClick={() => onApplyFilters(selectedCategories)} className="is-info">{t('app.admin.store.categories_filter.filter_apply')}</FabButton>
+          <FabButton onClick={() => onApplyFilters(selectedCategories)} className="is-secondary">{t('app.admin.store.categories_filter.filter_apply')}</FabButton>
         </div>
       </AccordionItem>
     </>

@@ -1048,6 +1048,7 @@ fr:
         validate_member_error: "Une erreur est survenue : impossible de valider ce membre."
         invalidate_member_error: "Une erreur est survenue : impossible d'invalider ce membre."
         supporting_documents: "Pièces justificatives"
+        change_role: "Changer le rôle"
       #extend a subscription for free
       free_extend_modal:
         extend_subscription: "Prolonger l'abonnement"
@@ -1421,7 +1422,7 @@ fr:
         overlapping_categories_info: "Éviter la réservation de créneaux qui se chevauchent sera effectué en comparant la date et l'heure des catégories de réservations suivantes."
         default_slot_duration: "Durée par défaut pour les créneaux"
         duration_minutes: "Durée (en minutes)"
-        default_slot_duration_info: "Les disponibilités des machines et des espaces sont divisées en plusieurs créneaux de cette durée. Cette valeur peur être changée pour chaque disponibilité."
+        default_slot_duration_info: "Les disponibilités des machines et des espaces sont divisées en plusieurs créneaux de cette durée. Cette valeur peut être changée pour chaque disponibilité."
         modules: "Modules"
         machines: "Machines"
         machines_info_html: "Le module Réserver une machine peut être désactivé."
@@ -1647,7 +1648,7 @@ fr:
             online_payment: "Le module de paiement par carte bancaire est-il actif ?"
             invoices: "Le module est facturation est-il actif ?"
             openlab: "Le module de partage de projets (OpenLab) est-il actif ?"
-          tracking_id_info_html: "Pour activer les suivi statistique des visites utilisant Google Analytics V4, définissez ici votre ID de suivi. Il se présente sous la forme G-XXXXXX. Visitez <a href='https://analytics.google.com/analytics/web/' target='_blank'>le site web de Google Analytics</a> pour en obtenir un.<br/><strong>Attention :</strong> si vous activez cette fonctionnalité, une cookie sera créé. Pensez à l'indiquer dans votre politique de confidentialité, ci-dessus."
+          tracking_id_info_html: "Pour activer les suivi statistique des visites utilisant Google Analytics V4, définissez ici votre ID de suivi. Il se présente sous la forme G-XXXXXX-X. Visitez <a href='https://analytics.google.com/analytics/web/' target='_blank'>le site web de Google Analytics</a> pour en obtenir un.<br/><strong>Attention :</strong> si vous activez cette fonctionnalité, une cookie sera créé. Pensez à l'indiquer dans votre politique de confidentialité, ci-dessus."
           tracking_id: "ID de suivi"
       open_api_clients:
         add_new_client: "Créer un compte client"
