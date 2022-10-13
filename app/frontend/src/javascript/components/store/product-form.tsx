@@ -349,7 +349,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
                 </div>
               <FabButton
                 onClick={addProductImage}
-                className='is-info'
+                className='is-secondary'
                 icon={<Plus size={24} />}>
                 {t('app.admin.store.product_form.add_product_image')}
               </FabButton>
@@ -422,7 +422,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
                 </div>
                 <FabButton
                   onClick={addProductFile}
-                  className='is-info'
+                  className='is-secondary'
                   icon={<Plus size={24} />}>
                   {t('app.admin.store.product_form.add_product_file')}
                 </FabButton>

@@ -76,7 +76,7 @@ export const MachinesFilter: React.FC<MachinesFilterProps> = ({ allMachines, onE
               </label>
             ))}
           </div>
-          <FabButton onClick={() => onApplyFilters(selectedMachines)} className="is-info">{t('app.admin.store.machines_filter.filter_apply')}</FabButton>
+          <FabButton onClick={() => onApplyFilters(selectedMachines)} className="is-secondary">{t('app.admin.store.machines_filter.filter_apply')}</FabButton>
         </div>
       </AccordionItem>
     </>

@@ -54,7 +54,7 @@ export const KeywordFilter: React.FC<KeywordFilterProps> = ({ onApplyFilters, cu
         <div className="content">
           <div className="group">
             <input type="text" onChange={event => handleKeywordTyping(event)} value={keyword} />
-            <FabButton onClick={() => onApplyFilters(keyword || undefined)} className="is-info">{t('app.admin.store.keyword_filter.filter_apply')}</FabButton>
+            <FabButton onClick={() => onApplyFilters(keyword || undefined)} className="is-secondary">{t('app.admin.store.keyword_filter.filter_apply')}</FabButton>
           </div>
         </div>
       </AccordionItem>
