@@ -170,7 +170,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
    */
   const addProductImage = () => {
     setValue('product_images_attributes', output.product_images_attributes.concat({
-      is_main: output.product_images_attributes.length === 0
+      is_main: output.product_images_attributes.filter(i => i.is_main).length === 0
     }));
   };
 
@@ -209,6 +209,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
             }
             return {
               ...image,
+              is_main: i === k ? false : image.is_main,
               _destroy: i === k
             };
           }));
