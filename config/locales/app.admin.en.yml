@@ -1048,6 +1048,7 @@ en:
         validate_member_error: "An error occurred: impossible to validate from this member."
         invalidate_member_error: "An error occurred: impossible to invalidate from this member."
         supporting_documents: "Supporting documents"
+        change_role: "Change role"
       # extend a subscription for free
       free_extend_modal:
         extend_subscription: "Extend the subscription"
