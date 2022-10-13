@@ -74,6 +74,7 @@ export const StoreProduct: React.FC<StoreProductProps> = ({ productSlug, current
     if (product.low_stock_threshold && product.stock.external < product.low_stock_threshold) {
       return 'low';
     }
+    return '';
   };
 
   /**
@@ -115,7 +116,7 @@ export const StoreProduct: React.FC<StoreProductProps> = ({ productSlug, current
 
   if (product) {
     return (
-      <div className={`store-product ${statusColor(product) || ''}`}>
+      <div className={`store-product ${statusColor(product)}`}>
         {product.sku && <span className='ref'>{t('app.public.store_product.ref', { REF: product.sku })}</span>}
         <h2 className='name'>{product.name}</h2>
         <div className='gallery'>
@@ -167,7 +168,7 @@ export const StoreProduct: React.FC<StoreProductProps> = ({ productSlug, current
             <span>{t(ProductLib.stockStatusTrKey(product))}</span>
           </FabStateLabel>
           <ProductPrice product={product} className="price" />
-          {product.stock.external > (product.quantity_min || 1) &&
+          {product.stock.external >= (product.quantity_min || 1) &&
             <div className='to-cart'>
               {product.quantity_min > 1 &&
                 <span className='min'>{t('app.public.store_product.minimum_purchase')}{product.quantity_min}</span>

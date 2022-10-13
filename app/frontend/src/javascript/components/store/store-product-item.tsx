@@ -76,7 +76,7 @@ export const StoreProductItem: React.FC<StoreProductItemProps> = ({ product, car
       <FabStateLabel status={statusColor(product)}>
         <span>{t(ProductLib.stockStatusTrKey(product))}</span>
       </FabStateLabel>
-      {product.stock.external > (product.quantity_min || 1) &&
+      {product.stock.external >= (product.quantity_min || 1) &&
         <FabButton icon={<i className="fas fa-cart-arrow-down" />} className="main-action-btn" onClick={addProductToCart}>
           {t('app.public.store_product_item.add')}
         </FabButton>
