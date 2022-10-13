@@ -39,6 +39,7 @@ export const CloneProductModal: React.FC<CloneProductModalProps> = ({ isOpen, to
 
   return (
     <FabModal title={t('app.admin.store.clone_product_model.clone_product')}
+      closeButton
       isOpen={isOpen}
       toggleModal={toggleModal}
       width={ModalSize.medium}

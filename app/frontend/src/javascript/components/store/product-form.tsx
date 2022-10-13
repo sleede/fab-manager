@@ -247,7 +247,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
         <div className="grpBtn">
           {product.id &&
             <>
-              <FabButton className="main-action-btn" onClick={toggleCloneModal}>{t('app.admin.store.product_form.clone')}</FabButton>
+              <FabButton onClick={toggleCloneModal}>{t('app.admin.store.product_form.clone')}</FabButton>
               <CloneProductModal isOpen={openCloneModal} toggleModal={toggleCloneModal} product={product} onSuccess={onSuccess} onError={onError} />
             </>
           }
