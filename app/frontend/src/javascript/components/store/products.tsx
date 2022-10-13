@@ -56,7 +56,7 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError, uiRouter }) => 
   const [filtersPanel, setFiltersPanel] = useState<boolean>(true);
 
   useEffect(() => {
-    fetchProducts().then(scrollToProducts);
+    fetchProducts();
     ProductLib.fetchInitialResources(setResources, onError);
     SettingAPI.get('machines_module').then(data => {
       setMachinesModule(data.value === 'true');
@@ -65,7 +65,7 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError, uiRouter }) => 
 
   useEffect(() => {
     if (resources.filters.ready) {
-      fetchProducts().then(scrollToProducts);
+      fetchProducts();
       uiRouter.stateService.transitionTo(uiRouter.globals.current, ProductLib.indexFiltersToRouterParams(resources.filters.data));
     }
   }, [resources.filters]);
@@ -109,13 +109,6 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError, uiRouter }) => 
     }
   };
 
-  /**
-   * Scroll the view to the product list
-   */
-  const scrollToProducts = () => {
-    window.document.getElementById('content-main').scrollTo({ top: 100, behavior: 'smooth' });
-  };
-
   /** Goto edit product page */
   const editProduct = (product: Product) => {
     window.location.href = `/#!/admin/store/products/${product.id}/edit`;
@@ -126,7 +119,6 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError, uiRouter }) => 
     try {
       await ProductAPI.destroy(productId);
       await fetchProducts();
-      scrollToProducts();
       onSuccess(t('app.admin.store.products.successfully_deleted'));
     } catch (e) {
       onError(t('app.admin.store.products.unable_to_delete') + e);
