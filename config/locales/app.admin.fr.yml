@@ -1048,6 +1048,7 @@ fr:
         validate_member_error: "Une erreur est survenue : impossible de valider ce membre."
         invalidate_member_error: "Une erreur est survenue : impossible d'invalider ce membre."
         supporting_documents: "Pièces justificatives"
+        change_role: "Changer le rôle"
       #extend a subscription for free
       free_extend_modal:
         extend_subscription: "Prolonger l'abonnement"
@@ -1421,7 +1422,7 @@ fr:
         overlapping_categories_info: "Éviter la réservation de créneaux qui se chevauchent sera effectué en comparant la date et l'heure des catégories de réservations suivantes."
         default_slot_duration: "Durée par défaut pour les créneaux"
         duration_minutes: "Durée (en minutes)"
-        default_slot_duration_info: "Les disponibilités des machines et des espaces sont divisées en plusieurs créneaux de cette durée. Cette valeur peur être changée pour chaque disponibilité."
+        default_slot_duration_info: "Les disponibilités des machines et des espaces sont divisées en plusieurs créneaux de cette durée. Cette valeur peut être changée pour chaque disponibilité."
         modules: "Modules"
         machines: "Machines"
         machines_info_html: "Le module Réserver une machine peut être désactivé."
