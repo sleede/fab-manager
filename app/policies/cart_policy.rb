@@ -3,7 +3,7 @@
 # Check the access policies for API::CartController
 class CartPolicy < ApplicationPolicy
   def create?
-    true
+    !Setting.get('store_hidden') || user&.privileged?
   end
 
   %w[add_item remove_item set_quantity refresh_item validate].each do |action|
