@@ -1048,6 +1048,7 @@ pt:
         validate_member_error: "Ocorreu um erro: impossível validar este membro."
         invalidate_member_error: "Ocorreu um erro: impossível invalidar este membro."
         supporting_documents: "Documentos"
+        change_role: "Change role"
       #extend a subscription for free
       free_extend_modal:
         extend_subscription: "Estender assinatura"
