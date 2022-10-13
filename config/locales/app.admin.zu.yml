@@ -1048,6 +1048,7 @@ zu:
         validate_member_error: "crwdns25940:0crwdne25940:0"
         invalidate_member_error: "crwdns25942:0crwdne25942:0"
         supporting_documents: "crwdns25944:0crwdne25944:0"
+        change_role: "crwdns31200:0crwdne31200:0"
       #extend a subscription for free
       free_extend_modal:
         extend_subscription: "crwdns25946:0crwdne25946:0"
