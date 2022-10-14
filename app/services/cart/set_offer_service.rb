@@ -7,14 +7,10 @@ class Cart::SetOfferService
 
     raise ActiveRecord::RecordNotFound if item.nil?
 
-    if !item.is_offered && is_offered
-      order.total -= (item.amount * item.quantity)
-    elsif item.is_offered && !is_offered
-      order.total += (item.amount * item.quantity)
-    end
     item.is_offered = is_offered
     ActiveRecord::Base.transaction do
       item.save
+      Cart::UpdateTotalService.new.call(order)
       order.save
     end
     order.reload

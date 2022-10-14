@@ -13,10 +13,9 @@ class Cart::SetQuantityService
 
     raise ActiveRecord::RecordNotFound if item.nil?
 
-    different_quantity = quantity.to_i - item.quantity
-    order.total += (item.amount * different_quantity) unless item.is_offered
     ActiveRecord::Base.transaction do
       item.update(quantity: quantity.to_i)
+      Cart::UpdateTotalService.new.call(order)
       order.save
     end
     order.reload

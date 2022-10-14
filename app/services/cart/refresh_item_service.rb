@@ -9,11 +9,10 @@ class Cart::RefreshItemService
 
     raise ActiveRecord::RecordNotFound if item.nil?
 
-    order.total -= (item.amount * item.quantity.to_i) unless item.is_offered
     item.amount = orderable.amount || 0
-    order.total += (item.amount * item.quantity.to_i) unless item.is_offered
     ActiveRecord::Base.transaction do
       item.save
+      Cart::UpdateTotalService.new.call(order)
       order.save
     end
     order.reload

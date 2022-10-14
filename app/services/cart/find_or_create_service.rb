@@ -18,6 +18,7 @@ class Cart::FindOrCreateService
       clean_old_cart if @user
       @order.update(statistic_profile_id: @user.statistic_profile.id) if @order.statistic_profile_id.nil? && @user&.member?
       @order.update(operator_profile_id: @user.invoicing_profile.id) if @order.operator_profile_id.nil? && @user&.privileged?
+      Cart::UpdateTotalService.new.call(@order)
       return @order
     end
 
