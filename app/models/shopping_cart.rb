@@ -160,6 +160,7 @@ class ShoppingCart
   # The total booked minutes are subtracted from the user's prepaid minutes
   def update_packs(objects)
     objects.filter { |o| o.is_a? Reservation }.each do |reservation|
+      reservation.reload
       PrepaidPackService.update_user_minutes(@customer, reservation)
     end
   end
