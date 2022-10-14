@@ -2028,9 +2028,9 @@ zu:
           product_files: "crwdns30990:0crwdne30990:0"
           product_files_info: "crwdns30992:0crwdne30992:0"
           add_product_file: "crwdns30994:0crwdne30994:0"
-          product_images: "crwdns30996:0crwdne30996:0"
+          product_images: "crwdns31202:0crwdne31202:0"
           product_images_info: "crwdns30998:0crwdne30998:0"
-          add_product_image: "crwdns31000:0crwdne31000:0"
+          add_product_image: "crwdns31204:0crwdne31204:0"
           save: "crwdns31002:0crwdne31002:0"
           clone: "crwdns31178:0crwdne31178:0"
         product_stock_form:

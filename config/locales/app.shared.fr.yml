@@ -559,7 +559,7 @@ fr:
       form_image_upload:
         browse: "Parcourir"
         edit: "Modifier"
-        main_image: "Image principale"
+        main_image: "Visuel principal"
       store:
         order_item:
           total: "Total"
