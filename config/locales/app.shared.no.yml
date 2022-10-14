@@ -559,7 +559,7 @@
       form_image_upload:
         browse: "Browse"
         edit: "Edit"
-        main_image: "Main image"
+        main_image: "Main visual"
       store:
         order_item:
           total: "Total"
