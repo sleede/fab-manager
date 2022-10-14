@@ -48,8 +48,12 @@ class API::ProductsController < API::ApiController
 
   def destroy
     authorize @product
-    ProductService.destroy(@product)
-    head :no_content
+    begin
+      ProductService.destroy(@product)
+      head :no_content
+    rescue StandardError => e
+      render json: e, status: :unprocessable_entity
+    end
   end
 
   def stock_movements

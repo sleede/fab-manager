@@ -40,7 +40,9 @@ export const StoreProductItem: React.FC<StoreProductItemProps> = ({ product, car
   const addProductToCart = (e: React.BaseSyntheticEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    CartAPI.addItem(cart, product.id, 1).then(onSuccessAddProductToCart).catch(onError);
+    CartAPI.addItem(cart, product.id, 1).then(onSuccessAddProductToCart).catch(() => {
+      onError(t('app.public.store_product_item.stock_limit'));
+    });
   };
 
   /**

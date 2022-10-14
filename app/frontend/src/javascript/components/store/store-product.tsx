@@ -110,7 +110,9 @@ export const StoreProduct: React.FC<StoreProductProps> = ({ productSlug, current
       CartAPI.addItem(cart, product.id, toCartCount).then(data => {
         setCart(data);
         onSuccess(t('app.public.store_product.add_to_cart_success'));
-      }).catch(onError);
+      }).catch(() => {
+        onError(t('app.public.store_product.stock_limit'));
+      });
     }
   };
 
