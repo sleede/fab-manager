@@ -2028,9 +2028,9 @@ fr:
           product_files: "Document"
           product_files_info: "<strong>Informations</strong></br>Ajouter des documents liés à ce produit. Ils seront présentés dans la fiche produit, dans un bloc séparé. Vous ne pouvez télécharger que des documents PDF."
           add_product_file: "Ajouter un document"
-          product_images: "Photos du produit"
+          product_images: "Visuels du produit"
           product_images_info: "<strong>Conseil</strong></br>Nous vous conseillons d'utiliser un format carré, JPG ou PNG. Pour le JPG, veuillez utiliser le blanc pour la couleur de fond. Le visuel principal sera le premier présenté dans la fiche produit."
-          add_product_image: "Ajouter une image"
+          add_product_image: "Ajouter un visuel"
           save: "Enregistrer"
           clone: "Cloner"
         product_stock_form:
