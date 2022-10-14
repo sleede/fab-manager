@@ -57,7 +57,7 @@ export const StoreProductItem: React.FC<StoreProductItemProps> = ({ product, car
     if (product.stock.external < (product.quantity_min || 1)) {
       return 'out-of-stock';
     }
-    if (product.low_stock_threshold && product.stock.external < product.low_stock_threshold) {
+    if (product.low_stock_threshold && product.stock.external <= product.low_stock_threshold) {
       return 'low';
     }
     return '';

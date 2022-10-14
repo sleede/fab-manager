@@ -192,8 +192,8 @@ class ProductService
     def notify_on_low_stock(product)
       return product unless product.low_stock_threshold
 
-      if (product.stock['internal'] < product.low_stock_threshold) ||
-         (product.stock['external'] < product.low_stock_threshold)
+      if (product.stock['internal'] <= product.low_stock_threshold) ||
+         (product.stock['external'] <= product.low_stock_threshold)
         NotificationCenter.call type: 'notify_admin_low_stock_threshold',
                                 receiver: User.admins_and_managers,
                                 attached_object: product

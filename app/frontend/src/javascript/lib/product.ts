@@ -44,7 +44,7 @@ export default class ProductLib {
     if (product.stock.external < (product.quantity_min || 1)) {
       return 'app.public.stock_status.out_of_stock';
     }
-    if (product.low_stock_threshold && product.stock.external < product.low_stock_threshold) {
+    if (product.low_stock_threshold && product.stock.external <= product.low_stock_threshold) {
       return 'app.public.stock_status.limited_stock';
     }
     return 'app.public.stock_status.available';

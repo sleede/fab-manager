@@ -63,6 +63,7 @@
         color: var(--gray-hard-darkest);
         span { @include text-xs; }
         &.low { color: var(--alert-light); }
+        &.out-of-stock { color: var(--alert); }
       }
       .price {
         justify-self: flex-end;
