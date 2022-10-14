@@ -1,5 +1,9 @@
 # Changelog Fab-manager
 
+## v5.4.24 2022 October 14
+
+- Fix a bug: unable debit hours of prepaid pack after a reservation of machine
+
 ## v5.4.23 2022 October 12
 
 - Fix a bug: unable to build docker image
