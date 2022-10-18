@@ -12,7 +12,8 @@ if StatisticIndex.count.zero?
                            { id: 4, es_type_key: 'event', label: I18n.t('statistics.events') },
                            { id: 5, es_type_key: 'account', label: I18n.t('statistics.registrations'), ca: false },
                            { id: 6, es_type_key: 'project', label: I18n.t('statistics.projects'), ca: false },
-                           { id: 7, es_type_key: 'user', label: I18n.t('statistics.users'), table: false, ca: false }
+                           { id: 7, es_type_key: 'user', label: I18n.t('statistics.users'), table: false, ca: false },
+                           { id: 8, es_type_key: 'order', label: I18n.t('statistics.orders') }
                          ])
   connection = ActiveRecord::Base.connection
   connection.execute("SELECT setval('statistic_indices_id_seq', 7);") if connection.instance_values['config'][:adapter] == 'postgresql'
