@@ -2005,7 +2005,7 @@ fr:
           successfully_created: "Le nouveau produit a été créé."
         edit_product:
           successfully_updated: "Le produit a été modifié."
-          successfully_cloned: "The product has been duplicated."
+          successfully_cloned: "Le produit a été dupliqué."
         product_form:
           product_parameters: "Paramètres du produit"
           stock_management: "Gestion des stocks"
@@ -2032,7 +2032,7 @@ fr:
           product_images_info: "<strong>Conseil</strong></br>Nous vous conseillons d'utiliser un format carré, JPG ou PNG. Pour le JPG, veuillez utiliser le blanc pour la couleur de fond. Le visuel principal sera le premier présenté dans la fiche produit."
           add_product_image: "Ajouter un visuel"
           save: "Enregistrer"
-          clone: "Duplicate"
+          clone: "Dupliquer"
         product_stock_form:
           stock_up_to_date: "Stock à jour"
           date_time: "{DATE} - {TIME}"
@@ -2077,8 +2077,8 @@ fr:
           other_in: "Autre (entrant)"
           other_out: "Autre (sortant)"
         clone_product_model:
-          clone_product: "Duplicate the product"
-          clone: "Duplicate"
+          clone_product: "Dupliquer le produit"
+          clone: "Dupliquer"
         orders:
           heading: "Commandes"
           create_order: "Créer une commande"
