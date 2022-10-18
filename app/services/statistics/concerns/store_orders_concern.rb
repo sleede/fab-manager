@@ -16,6 +16,7 @@ module Statistics::Concerns::StoreOrdersConcern
            .where(orderable_type: 'Product')
            .map(&:orderable)
            .map(&:product_category)
+           .compact
            .map { |cat| { id: cat.id, name: cat.name } }
            .uniq
     end
