@@ -2005,7 +2005,7 @@ fr:
           successfully_created: "Le nouveau produit a été créé."
         edit_product:
           successfully_updated: "Le produit a été modifié."
-          successfully_cloned: "Le produit a été cloné."
+          successfully_cloned: "Le produit a été dupliqué."
         product_form:
           product_parameters: "Paramètres du produit"
           stock_management: "Gestion des stocks"
@@ -2032,7 +2032,7 @@ fr:
           product_images_info: "<strong>Conseil</strong></br>Nous vous conseillons d'utiliser un format carré, JPG ou PNG. Pour le JPG, veuillez utiliser le blanc pour la couleur de fond. Le visuel principal sera le premier présenté dans la fiche produit."
           add_product_image: "Ajouter un visuel"
           save: "Enregistrer"
-          clone: "Cloner"
+          clone: "Dupliquer"
         product_stock_form:
           stock_up_to_date: "Stock à jour"
           date_time: "{DATE} - {TIME}"
@@ -2040,8 +2040,8 @@ fr:
           save_reminder: "N'oubliez pas de sauvegarder vos opérations"
           low_stock_threshold: "Définir un seuil de stock bas"
           stock_threshold_toggle: "Activer le seuil de stock"
-          stock_threshold_information: "<strong>Informations</strong></br>Définissez un seuil de stock bas et recevez une notification quand il est atteint.<br>Au-dessus du seuil, le produit est disponible dans la boutique. Lorsque le seuil est atteint, la quantité de produit est étiquetée comme faible."
-          low_stock: "Stock faible"
+          stock_threshold_information: "<strong>Informations</strong></br>Définissez un seuil de stock bas et recevez une notification quand il est atteint.<br>Au-dessus du seuil, le produit est disponible dans la boutique. Lorsque le seuil est atteint, la quantité de produit est étiquetée comme limité."
+          low_stock: "Stock limité"
           threshold_level: "Niveau de seuil minimum"
           threshold_alert: "M'avertir lorsque le seuil est atteint"
           events_history: "Historique des événements"
@@ -2077,8 +2077,8 @@ fr:
           other_in: "Autre (entrant)"
           other_out: "Autre (sortant)"
         clone_product_model:
-          clone_product: "Cloner le produit"
-          clone: "Cloner"
+          clone_product: "Dupliquer le produit"
+          clone: "Dupliquer"
         orders:
           heading: "Commandes"
           create_order: "Créer une commande"

@@ -2005,7 +2005,7 @@ zu:
           successfully_created: "crwdns30950:0crwdne30950:0"
         edit_product:
           successfully_updated: "crwdns30952:0crwdne30952:0"
-          successfully_cloned: "crwdns31176:0crwdne31176:0"
+          successfully_cloned: "crwdns31208:0crwdne31208:0"
         product_form:
           product_parameters: "crwdns30954:0crwdne30954:0"
           stock_management: "crwdns30956:0crwdne30956:0"
@@ -2032,7 +2032,7 @@ zu:
           product_images_info: "crwdns30998:0crwdne30998:0"
           add_product_image: "crwdns31204:0crwdne31204:0"
           save: "crwdns31002:0crwdne31002:0"
-          clone: "crwdns31178:0crwdne31178:0"
+          clone: "crwdns31210:0crwdne31210:0"
         product_stock_form:
           stock_up_to_date: "crwdns31004:0crwdne31004:0"
           date_time: "crwdns31006:0{DATE}crwdnd31006:0{TIME}crwdne31006:0"
@@ -2077,8 +2077,8 @@ zu:
           other_in: "crwdns31082:0crwdne31082:0"
           other_out: "crwdns31084:0crwdne31084:0"
         clone_product_model:
-          clone_product: "crwdns31180:0crwdne31180:0"
-          clone: "crwdns31182:0crwdne31182:0"
+          clone_product: "crwdns31212:0crwdne31212:0"
+          clone: "crwdns31214:0crwdne31214:0"
         orders:
           heading: "crwdns31086:0crwdne31086:0"
           create_order: "crwdns31088:0crwdne31088:0"
