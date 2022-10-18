@@ -12,7 +12,7 @@ class Statistics::QueryService
 
       # run main query in elasticSearch
       query = MultiJson.load(request.body.read)
-      model = "Stats::#{statistic_index}".constantize
+      model = "Stats::#{statistic_index.capitalize}".constantize
       results = model.search(query, request.query_parameters.symbolize_keys).response
 
       # run additional custom aggregations, if any
