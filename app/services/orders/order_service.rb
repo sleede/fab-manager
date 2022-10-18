@@ -46,6 +46,8 @@ class Orders::OrderService
       # update in elasticsearch (statistics)
       stat_order = Stats::Order.search(query: { term: { orderId: order.id } })
       stat_order.map { |s| s.update(state: state) }
+
+      order
     end
 
     def in_stock?(order, stock_type = 'external')
