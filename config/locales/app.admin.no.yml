@@ -2005,7 +2005,7 @@
           successfully_created: "The new product has been created."
         edit_product:
           successfully_updated: "The product has been updated."
-          successfully_cloned: "The product has been cloned."
+          successfully_cloned: "The product has been duplicated."
         product_form:
           product_parameters: "Product parameters"
           stock_management: "Stock management"
@@ -2028,11 +2028,11 @@
           product_files: "Document"
           product_files_info: "<strong>Information</strong></br>Add documents related to this product. They will be presented in the product sheet, in a separate block. You can only upload PDF documents."
           add_product_file: "Add a document"
-          product_images: "Pictures of the product"
+          product_images: "Visuals of the product"
           product_images_info: "<strong>Advice</strong></br>We advise you to use a square format, JPG or PNG. For JPG, please use white for the background colour. The main visual will be the first presented in the product sheet."
-          add_product_image: "Add an image"
+          add_product_image: "Add a visual"
           save: "Save"
-          clone: "Clone"
+          clone: "Duplicate"
         product_stock_form:
           stock_up_to_date: "Stock up to date"
           date_time: "{DATE} - {TIME}"
@@ -2077,8 +2077,8 @@
           other_in: "Other (in)"
           other_out: "Other (out)"
         clone_product_model:
-          clone_product: "Clone the product"
-          clone: "Clone"
+          clone_product: "Duplicate the product"
+          clone: "Duplicate"
         orders:
           heading: "Orders"
           create_order: "Create an order"

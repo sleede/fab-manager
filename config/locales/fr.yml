@@ -366,7 +366,7 @@ fr:
         members: "des membres"
         view_results: "Voir les résultats."
       notify_admin_low_stock_threshold:
-        low_stock: "Stock faible pour %{PRODUCT}. "
+        low_stock: "Stock limité pour %{PRODUCT}. "
         view_product: "Voir le produit."
       notify_member_about_coupon:
         enjoy_a_discount_of_PERCENT_with_code_CODE: "Bénéficiez d'une remise de %{PERCENT} % avec le code %{CODE}"
