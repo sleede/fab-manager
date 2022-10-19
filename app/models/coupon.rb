@@ -82,7 +82,8 @@ class Coupon < ApplicationRecord
   end
 
   def users
-    invoices.map(&:user)
+    # compact to user removed
+    invoices.map(&:user).compact
   end
 
   def users_ids
@@ -104,5 +105,4 @@ class Coupon < ApplicationRecord
   def delete_gateway_coupon
     PaymentGatewayService.new.delete_coupon(id)
   end
-
 end
