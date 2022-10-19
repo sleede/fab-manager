@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined. If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+prepaid_pack_1:
+  id: 1
+  priceable_type: Machine
+  priceable_id: 1
+  group_id: 1
+  amount: 1000
+  minutes: 600
+  validity_interval: month
+  validity_count: 12
