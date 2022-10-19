@@ -1,5 +1,10 @@
 # Changelog Fab-manager
 
+## v5.4.25 2022 October 19
+
+- Fix a bug: unable apply a coupon if this coupon has used by an user removed
+- Improved automated test on prepaid pack
+
 ## v5.4.24 2022 October 14
 
 - Fix a bug: unable debit hours of prepaid pack after a reservation of machine
