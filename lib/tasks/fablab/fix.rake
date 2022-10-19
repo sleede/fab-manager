@@ -204,5 +204,79 @@ namespace :fablab do
         ip.update_attribute('email', ip.user.email)
       end
     end
+
+    desc '[release 5.4.24] fix prepaid pack hours dont count down after a reservation of machine'
+    task :prepaid_pack_count_down, %i[start_date end_date] => :environment do |_task, args|
+      # set start date to the date of deployment of v5.4.13 that product the bug
+      start_date = DateTime.parse('2022-07-28T10:00:00+02:00')
+      if args.start_date
+        begin
+          start_date = DateTime.parse(args.start_date)
+        rescue ArgumentError => e
+          raise e
+        end
+      end
+      # set end date to the date of deployment of v5.4.24 after fix the bug
+      end_date = DateTime.parse('2022-10-14T18:40:00+02:00')
+      if args.end_date
+        begin
+          end_date = DateTime.parse(args.end_date)
+        rescue ArgumentError => e
+          raise e
+        end
+      end
+      # find all machines that has prepaid pack
+      machine_ids = PrepaidPack.where(disabled: nil).all.map(&:priceable_id).uniq
+      # find all memders that bought a prepaid pack
+      statistic_profile_ids = StatisticProfilePrepaidPack.all.map(&:statistic_profile_id).uniq
+      # find the reservations that use prepaid pack by machine_ids, members and preriod
+      reservations = Reservation.where(reservable_type: 'Machine', reservable_id: machine_ids, statistic_profile_id: statistic_profile_ids,
+                                       created_at: start_date..end_date).order(statistic_profile_id: 'ASC', created_at: 'ASC')
+      infos = []
+      reservations.each do |reservation|
+        # find pack by pack's created_at before reservation's create_at and pack's expries_at before start_date
+        packs = StatisticProfilePrepaidPack
+                .includes(:prepaid_pack)
+                .references(:prepaid_packs)
+                .where('prepaid_packs.priceable_id = ?', reservation.reservable.id)
+                .where('prepaid_packs.priceable_type = ?', reservation.reservable.class.name)
+                .where(statistic_profile_id: reservation.statistic_profile_id)
+                .where('statistic_profile_prepaid_packs.created_at <= ?', reservation.created_at)
+                .where('expires_at is NULL or expires_at > ?', start_date)
+                .order(created_at: 'ASC')
+
+        # passe reservation if cannot find any pack
+        next unless packs.length > 0
+
+        user = reservation.statistic_profile.user
+        pack = packs.last
+
+        slots_minutes = reservation.slots.map do |slot|
+          (slot.end_at.to_time - slot.start_at.to_time) / 60.0
+        end
+        # get reservation total minutes
+        reservation_minutes = slots_minutes.reduce(:+) || 0
+
+        info = {
+          user: "#{user.profile.full_name} - #{user.email}",
+          reservation: "Reservation #{reservation.original_invoice.reference} for the machine #{reservation.reservable.name} by #{reservation_minutes / 60.0} hours at #{I18n.l(reservation.created_at.to_date)}",
+          pack_before: "Prepaid pack of hours has used #{pack.minutes_used / 60.0} hours / #{pack.prepaid_pack.minutes / 60.0} hours"
+        }
+
+        if pack.minutes_used == pack.prepaid_pack.minutes && pack.updated_at > start_date
+          info[:pack_after] = 'Reservation minutes is exceed prepaid pack of hours'
+          infos.push(info)
+        elsif pack.minutes_used < pack.prepaid_pack.minutes
+          PrepaidPackService.update_user_minutes(user, reservation)
+          pack.reload
+          info[:pack_after] = "Prepaid pack of hours used #{pack.minutes_used / 60.0} hours after paid this reservation"
+          infos.push(info)
+        end
+      end
+
+      infos.each do |i|
+        puts i
+      end
+    end
   end
 end
