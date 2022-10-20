@@ -29,8 +29,13 @@ Application.Controllers.controller('AdminStoreProductController', ['$scope', 'CS
     /**
      * Click Callback triggered in case of back products list
      */
-    $scope.backProductsList = () => {
-      $state.go('app.admin.store.products');
+    $scope.backProductsList = (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      if ($state.prevState === '') {
+        $state.prevState = 'app.admin.store.products';
+      }
+      window.history.back();
     };
 
     /* PRIVATE SCOPE */

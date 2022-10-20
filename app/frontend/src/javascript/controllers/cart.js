@@ -4,8 +4,8 @@
 */
 'use strict';
 
-Application.Controllers.controller('CartController', ['$scope', 'CSRF', 'growl',
-  function ($scope, CSRF, growl) {
+Application.Controllers.controller('CartController', ['$scope', 'CSRF', 'growl', '$state',
+  function ($scope, CSRF, growl, $state) {
     /* PRIVATE SCOPE */
 
     /* PUBLIC SCOPE */
@@ -20,6 +20,19 @@ Application.Controllers.controller('CartController', ['$scope', 'CSRF', 'growl',
           $scope.$apply();
         }
       }, 50);
+    };
+
+    /**
+     * Overlap global function to allow the user to navigate to the previous screen
+     * If no previous $state were recorded, navigate to the project list page
+     */
+    $scope.backPrevLocation = function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      if ($state.prevState === '') {
+        $state.prevState = 'app.public.store';
+      }
+      window.history.back();
     };
 
     /**

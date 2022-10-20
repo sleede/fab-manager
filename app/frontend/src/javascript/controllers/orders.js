@@ -26,9 +26,9 @@ Application.Controllers.controller('ShowOrdersController', ['$rootScope', '$scop
     };
 
     /**
-     * Click Callback triggered in case of back products list
+     * Click Callback triggered in case of back orders list
      */
-    $scope.backProductsList = () => {
+    $scope.backOrdersList = () => {
       $state.go('app.logged.dashboard.orders');
     };
 
