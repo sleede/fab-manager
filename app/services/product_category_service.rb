@@ -4,7 +4,7 @@
 class ProductCategoryService
   def self.list
     ProductCategory.left_outer_joins(:products)
-                   .select('product_categories.*, count(products.*) as products_count')
+                   .select('product_categories.*, count(products.*) filter (where is_active is true) as products_count')
                    .group('product_categories.id')
   end
 
