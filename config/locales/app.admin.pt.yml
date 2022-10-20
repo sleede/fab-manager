@@ -2040,7 +2040,7 @@ pt:
           save_reminder: "Don't forget to save your operations"
           low_stock_threshold: "Define a low stock threshold"
           stock_threshold_toggle: "Activate stock threshold"
-          stock_threshold_information: "<strong>Information</strong></br>Define a low stock threshold and receive a notification when it's reached.<br>Above the threshold, the product is available in the store. When the threshold is reached, the product quantity is labeled as low."
+          stock_threshold_information: "<strong>Information</strong></br>Define a low stock threshold and receive a notification when it's reached.<br>When the threshold is reached, the product quantity is labeled as low."
           low_stock: "Low stock"
           threshold_level: "Minimum threshold level"
           threshold_alert: "Notify me when the threshold is reached"

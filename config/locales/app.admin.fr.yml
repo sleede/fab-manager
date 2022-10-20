@@ -2040,7 +2040,7 @@ fr:
           save_reminder: "N'oubliez pas de sauvegarder vos opérations"
           low_stock_threshold: "Définir un seuil de stock bas"
           stock_threshold_toggle: "Activer le seuil de stock"
-          stock_threshold_information: "<strong>Informations</strong></br>Définissez un seuil de stock bas et recevez une notification quand il est atteint.<br>Au-dessus du seuil, le produit est disponible dans la boutique. Lorsque le seuil est atteint, la quantité de produit est étiquetée comme limité."
+          stock_threshold_information: "<strong>Informations</strong></br>Définissez un seuil de stock bas et recevez une notification quand il est atteint.<br>Lorsque le seuil est atteint, la quantité de produit est étiquetée comme faible."
           low_stock: "Stock limité"
           threshold_level: "Niveau de seuil minimum"
           threshold_alert: "M'avertir lorsque le seuil est atteint"

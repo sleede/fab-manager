@@ -2040,7 +2040,7 @@ zu:
           save_reminder: "crwdns31010:0crwdne31010:0"
           low_stock_threshold: "crwdns31012:0crwdne31012:0"
           stock_threshold_toggle: "crwdns31014:0crwdne31014:0"
-          stock_threshold_information: "crwdns31016:0crwdne31016:0"
+          stock_threshold_information: "crwdns31216:0crwdne31216:0"
           low_stock: "crwdns31018:0crwdne31018:0"
           threshold_level: "crwdns31020:0crwdne31020:0"
           threshold_alert: "crwdns31022:0crwdne31022:0"
