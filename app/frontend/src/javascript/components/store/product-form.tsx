@@ -36,7 +36,7 @@ interface ProductFormProps {
  * Option format, expected by react-select
  * @see https://github.com/JedWatson/react-select
  */
-type selectOption = { value: number, label: string };
+type selectOption = { value: number, label: string | JSX.Element };
 
 /**
  * Option format, expected by checklist
@@ -69,9 +69,14 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
   /**
    * Convert the provided array of items to the react-select format
    */
-  const buildSelectOptions = (items: Array<{ id?: number, name: string }>): Array<selectOption> => {
+  const buildSelectOptions = (items: Array<{ id?: number, name: string, parent_id?: number }>): Array<selectOption> => {
     return items.map(t => {
-      return { value: t.id, label: t.name };
+      return {
+        value: t.id,
+        label: t.parent_id
+          ? <span className='u-leading-space'>{t.name}</span>
+          : t.name
+      };
     });
   };
 
