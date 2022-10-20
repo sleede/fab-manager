@@ -132,7 +132,7 @@ class ProductService
     def filter_by_available(products, filters, operator)
       return products if filters[:is_available].blank? || filters[:is_available] == 'false'
 
-      filter_by_stock(products, { stock_type: 'external', stock_from: '1' }, operator)
+      filter_by_stock(products, { stock_type: 'external' }, operator)
     end
 
     def filter_by_categories(products, filters)
@@ -157,9 +157,11 @@ class ProductService
     def filter_by_stock(products, filters, operator)
       return products if filters[:stock_type] == 'internal' && !operator&.privileged?
 
-      if filters[:stock_from].to_i.positive?
-        products = products.where('(stock ->> ?)::int >= ?', filters[:stock_type], filters[:stock_from])
-      end
+      products = if filters[:stock_from].to_i.positive?
+                   products.where('(stock ->> ?)::int >= ?', filters[:stock_type], filters[:stock_from])
+                 else
+                   products.where('(stock ->> ?)::int >= quantity_min', filters[:stock_type])
+                 end
       products = products.where('(stock ->> ?)::int <= ?', filters[:stock_type], filters[:stock_to]) if filters[:stock_to].to_i != 0
 
       products
