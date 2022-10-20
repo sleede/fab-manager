@@ -159,8 +159,10 @@ class ProductService
 
       products = if filters[:stock_from].to_i.positive?
                    products.where('(stock ->> ?)::int >= ?', filters[:stock_type], filters[:stock_from])
-                 else
+                 elsif !operator&.privileged?
                    products.where('(stock ->> ?)::int >= quantity_min', filters[:stock_type])
+                 else
+                   products
                  end
       products = products.where('(stock ->> ?)::int <= ?', filters[:stock_type], filters[:stock_to]) if filters[:stock_to].to_i != 0
 
