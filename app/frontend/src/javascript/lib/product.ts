@@ -177,7 +177,7 @@ export default class ProductLib {
       setResources(draft => {
         return { ...draft, categories: { data: ProductLib.sortCategories(data), ready: true } };
       });
-      if (typeof onProductCategoryFetched === 'function') onProductCategoryFetched(data);
+      if (typeof onProductCategoryFetched === 'function') onProductCategoryFetched(ProductLib.sortCategories(data));
     }).catch(error => {
       onError(error);
     });
