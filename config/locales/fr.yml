@@ -484,7 +484,7 @@ fr:
   statistic_profile:
     birthday_in_past: "La date de naissance doit être dans le passé"
   order:
-    please_contact_FABLAB: "Veuillez {FABLAB, select, empty{nous contacter} other{contacter {FABLAB}}} pour les instructions de retrait."
+    please_contact_FABLAB: "Veuillez nous contacter pour des instructions de retrait."
   settings:
     locked_setting: "le paramètre est verrouillé."
     about_title: "Le titre de la page \"À propos\""
