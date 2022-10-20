@@ -6,11 +6,7 @@
   .store-product-item {
     --status-color: var(--success);
     &.low { --status-color: var(--alert-light); }
-    &.out-of-stock {
-      --status-color: var(--alert);
-      background-color: var(--gray-soft-light);
-      border: none;
-    }
+    &.out-of-stock { --status-color: var(--alert); }
 
     padding: 1.6rem 2.4rem;
     display: grid;
@@ -29,6 +25,7 @@
       grid-area: image;
       @include imageRatio(50%);
       border-radius: var(--border-radius);
+      img { object-fit: contain; }
     }
     .name {
       margin: 1.6rem 0 0.8rem;

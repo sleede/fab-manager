@@ -20,7 +20,7 @@
     border: 1px solid var(--gray-soft-dark);
     border-radius: var(--border-radius);
     background-color: var(--gray-soft-lightest);
-    &.out-of-stock { border-color: var(--status-color); }
+    &.warning { border-color: var(--alert-light); }
 
     .itemInfo {
       grid-area: 1 / 1 / 2 / 2;
@@ -31,7 +31,7 @@
         width: 4.8rem;
         height: 4.8rem;
         margin-right: 1.6rem;
-        object-fit: cover;
+        object-fit: contain;
         border-radius: var(--border-radius);
         background-color: var(--gray-soft);
       }
