@@ -51,7 +51,7 @@ export const ProductCategoriesItem: React.FC<ProductCategoriesItemProps> = ({ pr
             </button>
           </div>}
           <p className='itemInfo-name'>{category.name}</p>
-          <span className='itemInfo-count'>{category.products_count}</span>
+          <span className='itemInfo-count' hidden>{category.products_count}</span>
         </div>
         <div className='actions'>
           {!isDragging &&
