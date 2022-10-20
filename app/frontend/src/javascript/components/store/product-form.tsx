@@ -56,6 +56,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
   const [machines, setMachines] = useState<checklistOption[]>([]);
   const [stockTab, setStockTab] = useState<boolean>(false);
   const [openCloneModal, setOpenCloneModal] = useState<boolean>(false);
+  const [saving, setSaving] = useState<boolean>(false);
 
   useEffect(() => {
     ProductCategoryAPI.index().then(data => {
@@ -130,16 +131,24 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
    * Call product creation or update api
    */
   const saveProduct = (data: Product) => {
+    setSaving(true);
     if (product.id) {
       ProductAPI.update(data).then((res) => {
         reset(res);
+        setSaving(false);
         onSuccess(res);
-      }).catch(onError);
+      }).catch(e => {
+        setSaving(false);
+        onError(e);
+      });
     } else {
       ProductAPI.create(data).then((res) => {
         reset(res);
         onSuccess(res);
-      }).catch(onError);
+      }).catch(e => {
+        setSaving(false);
+        onError(e);
+      });
     }
   };
 
@@ -256,7 +265,10 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
               <CloneProductModal isOpen={openCloneModal} toggleModal={toggleCloneModal} product={product} onSuccess={onSuccess} onError={onError} />
             </>
           }
-          <FabButton className="main-action-btn" onClick={handleSubmit(saveProduct)}>{t('app.admin.store.product_form.save')}</FabButton>
+          <FabButton className="main-action-btn" onClick={handleSubmit(saveProduct)} disabled={saving}>
+            {!saving && t('app.admin.store.product_form.save')}
+            {saving && <i className="fa fa-spinner fa-pulse fa-fw text-white" />}
+          </FabButton>
         </div>
       </header>
       <form className="product-form" onSubmit={handleSubmit(onSubmit)}>
@@ -435,7 +447,10 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
             </div>
 
             <div className="main-actions">
-              <FabButton type="submit" className="main-action-btn">{t('app.admin.store.product_form.save')}</FabButton>
+              <FabButton type="submit" className="main-action-btn" disabled={saving}>
+                {!saving && t('app.admin.store.product_form.save')}
+                {saving && <i className="fa fa-spinner fa-pulse fa-fw" />}
+              </FabButton>
             </div>
           </section>
         }
