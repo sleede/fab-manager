@@ -150,8 +150,8 @@ class ProductService
     def filter_by_keyword_or_reference(products, filters)
       return products if filters[:keywords].blank?
 
-      products.where('sku = :sku OR name ILIKE :query OR description ILIKE :query',
-                     { sku: filters[:keywords], query: "%#{filters[:keywords]}%" })
+      products.where('sku = :sku OR lower(f_unaccent(name)) ILIKE :query OR lower(f_unaccent(description)) ILIKE :query',
+                     { sku: (filters[:keywords]), query: "%#{I18n.transliterate(filters[:keywords])}%" })
     end
 
     def filter_by_stock(products, filters, operator)
