@@ -56,7 +56,6 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError, uiRouter }) => 
   const [filtersPanel, setFiltersPanel] = useState<boolean>(true);
 
   useEffect(() => {
-    fetchProducts();
     ProductLib.fetchInitialResources(setResources, onError);
     SettingAPI.get('machines_module').then(data => {
       setMachinesModule(data.value === 'true');

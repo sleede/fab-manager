@@ -76,7 +76,6 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
-    fetchProducts();
     ProductLib.fetchInitialResources(setResources, onError, formatCategories);
     SettingAPI.get('machines_module').then(data => {
       setMachinesModule(data.value === 'true');
