@@ -14,6 +14,7 @@ fr:
     attributes:
       product:
         amount: "Le Prix"
+        slug: "URL"
   errors:
     #CarrierWave
     messages:
@@ -47,6 +48,7 @@ fr:
       gateway_amount_too_small: "Les paiements inférieurs à %{AMOUNT} ne sont pas pris en charge. Merci de passer commande directement à l'accueil."
       gateway_amount_too_large: "Les paiements supérieurs à %{AMOUNT} ne sont pas pris en charge. Merci de passer commande directement à l'accueil."
       product_in_use: "Ce produit a déjà été commandé"
+      slug_already_used: "est déjà utilisée"
   apipie:
     api_documentation: "Documentation de l'API"
     code: "Code HTTP "
@@ -130,7 +132,7 @@ fr:
     error_invoice: "Facture en erreur. Les éléments ci-dessous n'ont pas été réservés. Veuillez contacter le Fablab pour un remboursement."
     prepaid_pack: "Paquet d'heures prépayé"
     pack_item: "Pack de %{COUNT} heures pour la %{ITEM}"
-    order: "Your order on the store"
+    order: "Votre commande sur la boutique"
   #PDF payment schedule generation
   payment_schedules:
     schedule_reference: "Référence de l'échéancier : %{REF}"
@@ -366,8 +368,8 @@ fr:
         members: "des membres"
         view_results: "Voir les résultats."
       notify_admin_low_stock_threshold:
-        low_stock: "Low stock for %{PRODUCT}. "
-        view_product: "View the product."
+        low_stock: "Stock limité pour %{PRODUCT}. "
+        view_product: "Voir le produit."
       notify_member_about_coupon:
         enjoy_a_discount_of_PERCENT_with_code_CODE: "Bénéficiez d'une remise de %{PERCENT} % avec le code %{CODE}"
         enjoy_a_discount_of_AMOUNT_with_code_CODE: "Bénéficiez d'une remise de %{AMOUNT} avec le code %{CODE}"
@@ -420,17 +422,17 @@ fr:
       notify_admin_user_proof_of_identity_refusal:
         refusal: "Le justificatif du membre <strong><em>%{NAME}</strong></em> a été refusé."
       notify_user_order_is_ready:
-        order_ready: "Your command %{REFERENCE} is ready"
+        order_ready: "Votre commande %{REFERENCE} est prête"
       notify_user_order_is_canceled:
-        order_canceled: "Your command %{REFERENCE} is canceled"
+        order_canceled: "Votre commande %{REFERENCE} est annulée"
       notify_user_order_is_refunded:
-        order_refunded: "Your command %{REFERENCE} is refunded"
+        order_refunded: "Votre commande %{REFERENCE} est remboursée"
   #statistics tools for admins
   statistics:
     subscriptions: "Abonnements"
     machines_hours: "Créneaux machines"
     spaces: "Espaces"
-    orders: "Orders"
+    orders: "Commandes"
     trainings: "Formations"
     events: "Événements"
     registrations: "Inscriptions"
@@ -455,8 +457,8 @@ fr:
     project_publication: "Publication de projet"
     duration: "Durée"
     store: "Boutique"
-    paid-processed: "Paid and/or processed"
-    aborted: "Aborted"
+    paid-processed: "Payée et/ou traitée"
+    aborted: "Interrompue"
   #statistics exports to the Excel file format
   export:
     entries: "Entrées"
@@ -484,7 +486,7 @@ fr:
   statistic_profile:
     birthday_in_past: "La date de naissance doit être dans le passé"
   order:
-    please_contact_FABLAB: "Please contact us for withdrawal instructions."
+    please_contact_FABLAB: "Veuillez nous contacter pour des instructions de retrait."
   settings:
     locked_setting: "le paramètre est verrouillé."
     about_title: "Le titre de la page \"À propos\""
@@ -618,6 +620,6 @@ fr:
     machines_module: "Module machines"
     user_change_group: "Permettre aux utilisateurs de changer leur groupe"
     show_username_in_admin_list: "Afficher le nom d'utilisateur dans la liste des membres de l'administrateur"
-    store_module: "Store module"
-    store_withdrawal_instructions: "Withdrawal instructions"
-    store_hidden: "Store hidden to the public"
+    store_module: "Module boutique"
+    store_withdrawal_instructions: "Instructions de retrait"
+    store_hidden: "Boutique masquée au public"
