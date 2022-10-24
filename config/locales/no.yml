@@ -10,10 +10,6 @@
     week:
       one: 'en uke'
       other: '%{count} weeks'
-  activerecord:
-    attributes:
-      product:
-        amount: "The price"
   errors:
     #CarrierWave
     messages:
@@ -42,11 +38,6 @@
       invalid_duration: "Den tillatte varigheten må være mellom 1 dag og 1 år. Din periode er %{DAYS} dager lang."
       must_be_in_the_past: "Perioden må være før dagens dato."
       registration_disabled: "Registration is disabled"
-      undefined_in_store: "must be defined to make the product available in the store"
-      gateway_error: "Payement gateway error: %{MESSAGE}"
-      gateway_amount_too_small: "Payments under %{AMOUNT} are not supported. Please order directly at the reception."
-      gateway_amount_too_large: "Payments above %{AMOUNT} are not supported. Please order directly at the reception."
-      product_in_use: "This product have already been ordered"
   apipie:
     api_documentation: "API-dokumentasjon"
     code: "HTTP kode"
@@ -130,7 +121,6 @@
     error_invoice: "Feil i faktura. Elementene under varen som ikke er bestilt. Kontakt oss for refusjon."
     prepaid_pack: "Forhåndsbetalt pakke med timer"
     pack_item: "Pakke med %{COUNT} timer for %{ITEM}"
-    order: "Your order on the store"
   #PDF payment schedule generation
   payment_schedules:
     schedule_reference: "Referanse til betalingsplanen: %{REF}"
@@ -365,9 +355,6 @@
         import_over: "%{CATEGORY} import is over. "
         members: "Members"
         view_results: "View results."
-      notify_admin_low_stock_threshold:
-        low_stock: "Low stock for %{PRODUCT}. "
-        view_product: "View the product."
       notify_member_about_coupon:
         enjoy_a_discount_of_PERCENT_with_code_CODE: "Enjoy a discount of %{PERCENT}% with code %{CODE}"
         enjoy_a_discount_of_AMOUNT_with_code_CODE: "Enjoy a discount of %{AMOUNT} with code %{CODE}"
@@ -419,18 +406,11 @@
         refusal: "Your proof of identity are not accepted"
       notify_admin_user_proof_of_identity_refusal:
         refusal: "Member's proof of identity <strong><em>%{NAME}</strong></em> refused."
-      notify_user_order_is_ready:
-        order_ready: "Your command %{REFERENCE} is ready"
-      notify_user_order_is_canceled:
-        order_canceled: "Your command %{REFERENCE} is canceled"
-      notify_user_order_is_refunded:
-        order_refunded: "Your command %{REFERENCE} is refunded"
   #statistics tools for admins
   statistics:
     subscriptions: "Subscriptions"
     machines_hours: "Machines slots"
     spaces: "Spaces"
-    orders: "Orders"
     trainings: "Trainings"
     events: "Events"
     registrations: "Registrations"
@@ -454,9 +434,6 @@
     account_creation: "Konto opprettet"
     project_publication: "Prosjekt publisert"
     duration: "Varighet"
-    store: "Boutique"
-    paid-processed: "Paid and/or processed"
-    aborted: "Aborted"
   #statistics exports to the Excel file format
   export:
     entries: "Oppføringer"
@@ -483,8 +460,6 @@
     free_extension: "Free extension of a subscription, until %{DATE}"
   statistic_profile:
     birthday_in_past: "The date of birth must be in the past"
-  order:
-    please_contact_FABLAB: "Please contact us for withdrawal instructions."
   settings:
     locked_setting: "innstillingen er låst."
     about_title: "\"Om\" sidetittel"
@@ -618,6 +593,3 @@
     machines_module: "Machines module"
     user_change_group: "Allow users to change their group"
     show_username_in_admin_list: "Show the username in the admin's members list"
-    store_module: "Store module"
-    store_withdrawal_instructions: "Withdrawal instructions"
-    store_hidden: "Store hidden to the public"
