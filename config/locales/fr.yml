@@ -14,6 +14,7 @@ fr:
     attributes:
       product:
         amount: "Le Prix"
+        slug: "URL"
   errors:
     #CarrierWave
     messages:
@@ -46,7 +47,8 @@ fr:
       gateway_error: "Erreur de la passerelle de paiement : %{MESSAGE}"
       gateway_amount_too_small: "Les paiements inférieurs à %{AMOUNT} ne sont pas pris en charge. Merci de passer commande directement à l'accueil."
       gateway_amount_too_large: "Les paiements supérieurs à %{AMOUNT} ne sont pas pris en charge. Merci de passer commande directement à l'accueil."
-      product_in_use: "Cet article a déjà été commandé"
+      product_in_use: "Ce produit a déjà été commandé"
+      slug_already_used: "est déjà utilisée"
   apipie:
     api_documentation: "Documentation de l'API"
     code: "Code HTTP "

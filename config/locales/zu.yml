@@ -13,7 +13,8 @@ zu:
   activerecord:
     attributes:
       product:
-        amount: "crwdns30724:0crwdne30724:0"
+        amount: "crwdns31600:0crwdne31600:0"
+        slug: "crwdns31640:0crwdne31640:0"
   errors:
     #CarrierWave
     messages:
@@ -42,11 +43,12 @@ zu:
       invalid_duration: "crwdns3207:0%{DAYS}crwdne3207:0"
       must_be_in_the_past: "crwdns3209:0crwdne3209:0"
       registration_disabled: "crwdns22285:0crwdne22285:0"
-      undefined_in_store: "crwdns30726:0crwdne30726:0"
-      gateway_error: "crwdns30728:0%{MESSAGE}crwdne30728:0"
-      gateway_amount_too_small: "crwdns30730:0%{AMOUNT}crwdne30730:0"
-      gateway_amount_too_large: "crwdns30732:0%{AMOUNT}crwdne30732:0"
-      product_in_use: "crwdns31138:0crwdne31138:0"
+      undefined_in_store: "crwdns31602:0crwdne31602:0"
+      gateway_error: "crwdns31604:0%{MESSAGE}crwdne31604:0"
+      gateway_amount_too_small: "crwdns31606:0%{AMOUNT}crwdne31606:0"
+      gateway_amount_too_large: "crwdns31608:0%{AMOUNT}crwdne31608:0"
+      product_in_use: "crwdns31610:0crwdne31610:0"
+      slug_already_used: "crwdns31642:0crwdne31642:0"
   apipie:
     api_documentation: "crwdns3257:0crwdne3257:0"
     code: "crwdns20914:0crwdne20914:0"
@@ -130,7 +132,7 @@ zu:
     error_invoice: "crwdns21480:0crwdne21480:0"
     prepaid_pack: "crwdns22022:0crwdne22022:0"
     pack_item: "crwdns22024:0%{COUNT}crwdnd22024:0%{ITEM}crwdne22024:0"
-    order: "crwdns30632:0crwdne30632:0"
+    order: "crwdns31612:0crwdne31612:0"
   #PDF payment schedule generation
   payment_schedules:
     schedule_reference: "crwdns21094:0%{REF}crwdne21094:0"
@@ -366,8 +368,8 @@ zu:
         members: "crwdns3669:0crwdne3669:0"
         view_results: "crwdns3671:0crwdne3671:0"
       notify_admin_low_stock_threshold:
-        low_stock: "crwdns31140:0%{PRODUCT}crwdne31140:0"
-        view_product: "crwdns31142:0crwdne31142:0"
+        low_stock: "crwdns31614:0%{PRODUCT}crwdne31614:0"
+        view_product: "crwdns31616:0crwdne31616:0"
       notify_member_about_coupon:
         enjoy_a_discount_of_PERCENT_with_code_CODE: "crwdns3673:0%{PERCENT}crwdnd3673:0%{CODE}crwdne3673:0"
         enjoy_a_discount_of_AMOUNT_with_code_CODE: "crwdns3675:0%{AMOUNT}crwdnd3675:0%{CODE}crwdne3675:0"
@@ -420,17 +422,17 @@ zu:
       notify_admin_user_proof_of_identity_refusal:
         refusal: "crwdns23010:0%{NAME}crwdne23010:0"
       notify_user_order_is_ready:
-        order_ready: "crwdns30570:0%{REFERENCE}crwdne30570:0"
+        order_ready: "crwdns31618:0%{REFERENCE}crwdne31618:0"
       notify_user_order_is_canceled:
-        order_canceled: "crwdns30572:0%{REFERENCE}crwdne30572:0"
+        order_canceled: "crwdns31620:0%{REFERENCE}crwdne31620:0"
       notify_user_order_is_refunded:
-        order_refunded: "crwdns30574:0%{REFERENCE}crwdne30574:0"
+        order_refunded: "crwdns31622:0%{REFERENCE}crwdne31622:0"
   #statistics tools for admins
   statistics:
     subscriptions: "crwdns3689:0crwdne3689:0"
     machines_hours: "crwdns4561:0crwdne4561:0"
     spaces: "crwdns3693:0crwdne3693:0"
-    orders: "crwdns31190:0crwdne31190:0"
+    orders: "crwdns31624:0crwdne31624:0"
     trainings: "crwdns3695:0crwdne3695:0"
     events: "crwdns3697:0crwdne3697:0"
     registrations: "crwdns3699:0crwdne3699:0"
@@ -454,9 +456,9 @@ zu:
     account_creation: "crwdns3735:0crwdne3735:0"
     project_publication: "crwdns3737:0crwdne3737:0"
     duration: "crwdns20282:0crwdne20282:0"
-    store: "crwdns31192:0crwdne31192:0"
-    paid-processed: "crwdns31194:0crwdne31194:0"
-    aborted: "crwdns31196:0crwdne31196:0"
+    store: "crwdns31644:0crwdne31644:0"
+    paid-processed: "crwdns31628:0crwdne31628:0"
+    aborted: "crwdns31630:0crwdne31630:0"
   #statistics exports to the Excel file format
   export:
     entries: "crwdns3739:0crwdne3739:0"
@@ -484,7 +486,7 @@ zu:
   statistic_profile:
     birthday_in_past: "crwdns22127:0crwdne22127:0"
   order:
-    please_contact_FABLAB: "crwdns31218:0crwdne31218:0"
+    please_contact_FABLAB: "crwdns31632:0crwdne31632:0"
   settings:
     locked_setting: "crwdns21632:0crwdne21632:0"
     about_title: "crwdns21634:0crwdne21634:0"
@@ -618,6 +620,6 @@ zu:
     machines_module: "crwdns23038:0crwdne23038:0"
     user_change_group: "crwdns23040:0crwdne23040:0"
     show_username_in_admin_list: "crwdns24016:0crwdne24016:0"
-    store_module: "crwdns30734:0crwdne30734:0"
-    store_withdrawal_instructions: "crwdns30736:0crwdne30736:0"
-    store_hidden: "crwdns31198:0crwdne31198:0"
+    store_module: "crwdns31634:0crwdne31634:0"
+    store_withdrawal_instructions: "crwdns31636:0crwdne31636:0"
+    store_hidden: "crwdns31638:0crwdne31638:0"

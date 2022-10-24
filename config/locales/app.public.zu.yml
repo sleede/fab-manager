@@ -408,6 +408,7 @@ zu:
         documentation: "crwdns30360:0crwdne30360:0"
         minimum_purchase: "crwdns30678:0crwdne30678:0"
         add_to_cart: "crwdns30680:0crwdne30680:0"
+        stock_limit: "crwdns31596:0crwdne31596:0"
       stock_status:
         available: "crwdns30682:0crwdne30682:0"
         limited_stock: "crwdns30684:0crwdne30684:0"
@@ -416,6 +417,7 @@ zu:
         minimum_purchase: "crwdns30368:0crwdne30368:0"
         add: "crwdns30370:0crwdne30370:0"
         add_to_cart: "crwdns30372:0crwdne30372:0"
+        stock_limit: "crwdns31598:0crwdne31598:0"
       product_price:
         per_unit: "crwdns30688:0crwdne30688:0"
         free: "crwdns30690:0crwdne30690:0"

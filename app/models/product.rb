@@ -21,7 +21,7 @@ class Product < ApplicationRecord
   accepts_nested_attributes_for :product_stock_movements, allow_destroy: true, reject_if: :all_blank
 
   validates :name, :slug, presence: true
-  validates :slug, uniqueness: true
+  validates :slug, uniqueness: { message: I18n.t('.errors.messages.slug_already_used') }
   validates :amount, numericality: { greater_than_or_equal_to: 0, allow_nil: true }
   validates :amount, exclusion: { in: [nil], message: I18n.t('.errors.messages.undefined_in_store') }, if: -> { is_active }
 

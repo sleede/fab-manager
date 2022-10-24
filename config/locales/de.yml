@@ -14,6 +14,7 @@ de:
     attributes:
       product:
         amount: "The price"
+        slug: "URL"
   errors:
     #CarrierWave
     messages:
@@ -47,6 +48,7 @@ de:
       gateway_amount_too_small: "Payments under %{AMOUNT} are not supported. Please order directly at the reception."
       gateway_amount_too_large: "Payments above %{AMOUNT} are not supported. Please order directly at the reception."
       product_in_use: "This product have already been ordered"
+      slug_already_used: "is already used"
   apipie:
     api_documentation: "API-Dokumentation"
     code: "HTTP-Code"
@@ -454,7 +456,7 @@ de:
     account_creation: "Benutzerkontenerstellung"
     project_publication: "Projektveröffentlichung"
     duration: "Dauer"
-    store: "Boutique"
+    store: "Store"
     paid-processed: "Paid and/or processed"
     aborted: "Aborted"
   #statistics exports to the Excel file format

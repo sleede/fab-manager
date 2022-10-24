@@ -408,6 +408,7 @@ es:
         documentation: "Documentation"
         minimum_purchase: "Minimum purchase: "
         add_to_cart: "Add to cart"
+        stock_limit: "You have reached the current stock limit"
       stock_status:
         available: "Available"
         limited_stock: "Limited stock"
@@ -416,6 +417,7 @@ es:
         minimum_purchase: "Minimum purchase: "
         add: "Add"
         add_to_cart: "Add to cart"
+        stock_limit: "You have reached the current stock limit"
       product_price:
         per_unit: "/ unit"
         free: "Free"
