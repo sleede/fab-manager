@@ -54,7 +54,8 @@ class Members::ListService
                     .where("users.is_active = 'true'")
                     .limit(50)
       query.downcase.split(' ').each do |word|
-        members = members.where('lower(f_unaccent(profiles.first_name)) ~ :search OR ' \
+        members = members.where('lower(f_unaccent(users.username)) ~ :search OR ' \
+                                'lower(f_unaccent(profiles.first_name)) ~ :search OR ' \
                                 'lower(f_unaccent(profiles.last_name)) ~ :search',
                                 search: word)
       end
