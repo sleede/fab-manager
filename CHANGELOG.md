@@ -3,6 +3,7 @@
 - Allow searching by username (#401)
 - Fix a bug: portuguese time formatting (#405)
 - Fix a bug: admin users groups being overriden by SSO group_id (#404)
+- Fix a bug: no statistics on trainings and spaces reservations
 - Fix a security issue: updated nokogiri to 1.13.9 to fix [GHSA-2qc6-mcvw-92cw](https://github.com/advisories/GHSA-2qc6-mcvw-92cw)
 
 ## v5.4.25 2022 October 19
