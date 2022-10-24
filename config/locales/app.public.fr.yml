@@ -408,6 +408,7 @@ fr:
         documentation: "Documentation"
         minimum_purchase: "Achat minimum : "
         add_to_cart: "Ajouter au panier"
+        stock_limit: "You have reached the current stock limit"
       stock_status:
         available: "Disponible"
         limited_stock: "Stock limité"
@@ -416,6 +417,7 @@ fr:
         minimum_purchase: "Achat minimum : "
         add: "Ajouter"
         add_to_cart: "Ajouter au panier"
+        stock_limit: "You have reached the current stock limit"
       product_price:
         per_unit: "/ unité"
         free: "Gratuit"
