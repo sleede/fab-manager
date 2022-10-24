@@ -124,7 +124,7 @@ module SingleSignOnConcern
         logger.debug "mapping sso field #{field} with value=#{value}"
         # we do not merge the email field if its end with the special value '-duplicate' as this means
         # that the user is currently merging with the account that have the same email than the sso
-        set_data_from_sso_mapping(field, value) unless (field == 'user.email' && value.end_with?('-duplicate')) || (field == 'user.group_id' && sso_user.admin?)
+        set_data_from_sso_mapping(field, value) unless (field == 'user.email' && value.end_with?('-duplicate')) || (field == 'user.group_id' && self.admin?)
       end
 
       # run the account transfer in an SQL transaction to ensure data integrity
