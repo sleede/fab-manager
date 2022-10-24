@@ -111,7 +111,7 @@ zu:
     notify_member_invoice_ready:
       subject: "crwdns29626:0crwdne29626:0"
       body:
-        please_find_attached_html: "crwdns29628:0DATE={DATE}crwdnd29628:0AMOUNT={AMOUNT}crwdnd29628:0TYPE={TYPE}crwdne29628:0" #messageFormat interpolation
+        please_find_attached_html: "crwdns31646:0DATE={DATE}crwdnd31646:0AMOUNT={AMOUNT}crwdnd31646:0TYPE={TYPE}crwdne31646:0" #messageFormat interpolation
         invoice_in_your_dashboard_html: "crwdns29630:0%{DASHBOARD}crwdne29630:0"
         your_dashboard: "crwdns29632:0crwdne29632:0"
     notify_member_reservation_reminder:
