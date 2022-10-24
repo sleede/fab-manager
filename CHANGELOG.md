@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Allow searching by username (#401)
+- Fix a bug: adding a new event without updating the dates results in internal server error (undefined method `div' for nil)
 - Fix a bug: portuguese time formatting (#405)
 - Fix a bug: admin users groups being overriden by SSO group_id (#404)
 - Fix a bug: no statistics on trainings and spaces reservations
