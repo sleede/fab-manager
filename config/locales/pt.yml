@@ -10,6 +10,10 @@ pt:
     week:
       one: 'uma semana'
       other: '%{count} semanas'
+  activerecord:
+    attributes:
+      product:
+        amount: "The price"
   errors:
     #CarrierWave
     messages:
@@ -38,6 +42,11 @@ pt:
       invalid_duration: "A duração permitida deve ter entre 1 dia e 1 ano. Sua menstruação tem %{DAYS} dias."
       must_be_in_the_past: "O período deve ser estritamente anterior à data de hoje."
       registration_disabled: "Registo está desabilitado"
+      undefined_in_store: "must be defined to make the product available in the store"
+      gateway_error: "Payement gateway error: %{MESSAGE}"
+      gateway_amount_too_small: "Payments under %{AMOUNT} are not supported. Please order directly at the reception."
+      gateway_amount_too_large: "Payments above %{AMOUNT} are not supported. Please order directly at the reception."
+      product_in_use: "This product have already been ordered"
   apipie:
     api_documentation: "Documentação da API"
     code: "Código HTTP"
@@ -121,6 +130,7 @@ pt:
     error_invoice: "Esta fatura está incorreta. Os itens abaixo que não foram reservados. Por favor contate o FabLab para um reembolso."
     prepaid_pack: "Pacote de horas pré-pago"
     pack_item: "Pacote de %{COUNT} horas para a %{ITEM}"
+    order: "Your order on the store"
   #PDF payment schedule generation
   payment_schedules:
     schedule_reference: "Agendamento de pagamento: %{REF}"
@@ -355,6 +365,9 @@ pt:
         import_over: "A importação de %{CATEGORY} terminou. "
         members: "Membros"
         view_results: "Ver resultados."
+      notify_admin_low_stock_threshold:
+        low_stock: "Low stock for %{PRODUCT}. "
+        view_product: "View the product."
       notify_member_about_coupon:
         enjoy_a_discount_of_PERCENT_with_code_CODE: "Desfrute de um desconto de %{PERCENT}% com o código %{CODE}"
         enjoy_a_discount_of_AMOUNT_with_code_CODE: "Desfrute de um desconto de %{AMOUNT} com o código %{CODE}"
@@ -406,11 +419,18 @@ pt:
         refusal: "Seu comprovante de identidade não foi aceito"
       notify_admin_user_proof_of_identity_refusal:
         refusal: "Prova de identidade do membro <strong><em>%{NAME}</strong></em> recusada."
+      notify_user_order_is_ready:
+        order_ready: "Your command %{REFERENCE} is ready"
+      notify_user_order_is_canceled:
+        order_canceled: "Your command %{REFERENCE} is canceled"
+      notify_user_order_is_refunded:
+        order_refunded: "Your command %{REFERENCE} is refunded"
   #statistics tools for admins
   statistics:
     subscriptions: "Assinaturas"
     machines_hours: "Slots de máquina"
     spaces: "Espaços"
+    orders: "Orders"
     trainings: "Treinamentos"
     events: "Eventos"
     registrations: "Inscrições"
@@ -434,6 +454,9 @@ pt:
     account_creation: "Criação de conta"
     project_publication: "Publicação de projeto"
     duration: "Duração"
+    store: "Boutique"
+    paid-processed: "Paid and/or processed"
+    aborted: "Aborted"
   #statistics exports to the Excel file format
   export:
     entries: "Entradas"
@@ -460,6 +483,8 @@ pt:
     free_extension: "Extensão gratuita de uma assinatura, até %{DATE}"
   statistic_profile:
     birthday_in_past: "A data de nascimento deve estar no passado"
+  order:
+    please_contact_FABLAB: "Please contact us for withdrawal instructions."
   settings:
     locked_setting: "a configuração está bloqueada."
     about_title: "\"Sobre\" título da página"
@@ -593,3 +618,6 @@ pt:
     machines_module: "Módulo de Máquinas"
     user_change_group: "Permitir que os usuários mudem de grupo"
     show_username_in_admin_list: "Mostrar o nome de usuário na lista de membros do administrador"
+    store_module: "Store module"
+    store_withdrawal_instructions: "Withdrawal instructions"
+    store_hidden: "Store hidden to the public"
