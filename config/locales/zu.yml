@@ -14,6 +14,7 @@ zu:
     attributes:
       product:
         amount: "crwdns31600:0crwdne31600:0"
+        slug: "crwdns31640:0crwdne31640:0"
   errors:
     #CarrierWave
     messages:
@@ -47,6 +48,7 @@ zu:
       gateway_amount_too_small: "crwdns31606:0%{AMOUNT}crwdne31606:0"
       gateway_amount_too_large: "crwdns31608:0%{AMOUNT}crwdne31608:0"
       product_in_use: "crwdns31610:0crwdne31610:0"
+      slug_already_used: "crwdns31642:0crwdne31642:0"
   apipie:
     api_documentation: "crwdns3257:0crwdne3257:0"
     code: "crwdns20914:0crwdne20914:0"
@@ -454,7 +456,7 @@ zu:
     account_creation: "crwdns3735:0crwdne3735:0"
     project_publication: "crwdns3737:0crwdne3737:0"
     duration: "crwdns20282:0crwdne20282:0"
-    store: "crwdns31626:0crwdne31626:0"
+    store: "crwdns31644:0crwdne31644:0"
     paid-processed: "crwdns31628:0crwdne31628:0"
     aborted: "crwdns31630:0crwdne31630:0"
   #statistics exports to the Excel file format
