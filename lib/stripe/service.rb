@@ -53,15 +53,16 @@ class Stripe::Service < Payment::Service
   end
 
   def create_user(user_id)
-    StripeWorker.perform_async(:create_stripe_customer, user_id)
+    StripeWorker.perform_async('create_stripe_customer', user_id)
   end
 
   def create_coupon(coupon_id)
     coupon = Coupon.find(coupon_id)
     stp_coupon = { id: coupon.code }
-    if coupon.type == 'percent_off'
+    case coupon.type
+    when 'percent_off'
       stp_coupon[:percent_off] = coupon.percent_off
-    elsif coupon.type == stripe_amount('amount_off')
+    when stripe_amount('amount_off')
       stp_coupon[:amount_off] = coupon.amount_off
       stp_coupon[:currency] = Setting.get('stripe_currency')
     end
@@ -97,7 +98,7 @@ class Stripe::Service < Payment::Service
     if stp_subscription.status == 'canceled'
       # the subscription was canceled by the gateway => notify & update the status
       notify_payment_schedule_gateway_canceled(payment_schedule_item)
-      payment_schedule_item.update_attributes(state: 'gateway_canceled')
+      payment_schedule_item.update(state: 'gateway_canceled')
       return
     end
     stp_invoice = Stripe::Invoice.retrieve(stp_subscription.latest_invoice, api_key: stripe_key)
@@ -107,7 +108,7 @@ class Stripe::Service < Payment::Service
                                                   payment_method: 'card',
                                                   payment_id: stp_invoice.payment_intent,
                                                   payment_type: 'Stripe::PaymentIntent')
-      payment_schedule_item.update_attributes(state: 'paid', payment_method: 'card')
+      payment_schedule_item.update(state: 'paid', payment_method: 'card')
       pgo = PaymentGatewayObject.find_or_initialize_by(item: payment_schedule_item)
       pgo.gateway_object = stp_invoice
       pgo.save!
@@ -115,29 +116,30 @@ class Stripe::Service < Payment::Service
       ##### Payment error
       notify_payment_schedule_item_failed(payment_schedule_item)
       stp_payment_intent = Stripe::PaymentIntent.retrieve(stp_invoice.payment_intent, api_key: stripe_key)
-      payment_schedule_item.update_attributes(state: stp_payment_intent.status,
-                                              client_secret: stp_payment_intent.client_secret)
+      payment_schedule_item.update(state: stp_payment_intent.status,
+                                   client_secret: stp_payment_intent.client_secret)
       pgo = PaymentGatewayObject.find_or_initialize_by(item: payment_schedule_item)
       pgo.gateway_object = stp_invoice
       pgo.save!
     elsif stp_invoice.status == 'draft'
-      return # Could be that the stripe invoice does not yet reflect the payment made by the member, because we called that service just after payment is made. We call return here and PaymentScheduleItemWorker will anyway call that method every hour
+      # Could be that the stripe invoice does not yet reflect the payment made by the member, because we called that service
+      # just after payment is made. We just return here and PaymentScheduleItemWorker will anyway call that method every hour
     else
       notify_payment_schedule_item_error(payment_schedule_item)
-      payment_schedule_item.update_attributes(state: 'error')
+      payment_schedule_item.update(state: 'error')
     end
   end
 
   def pay_payment_schedule_item(payment_schedule_item)
-    stripe_key = Setting.get('stripe_secret_key')
-    stp_invoice = Stripe::Invoice.pay(@payment_schedule_item.payment_gateway_object.gateway_object_id, {}, { api_key: stripe_key })
-    PaymentScheduleItemWorker.new.perform(@payment_schedule_item.id)
+    stripe_key = Setting.get('stripe_secret_key') # TODO, test me
+    stp_invoice = Stripe::Invoice.pay(payment_schedule_item.payment_gateway_object.gateway_object_id, {}, { api_key: stripe_key })
+    PaymentScheduleItemWorker.new.perform(payment_schedule_item.id)
 
     { status: stp_invoice.status }
   rescue Stripe::StripeError => e
     stripe_key = Setting.get('stripe_secret_key')
-    stp_invoice = Stripe::Invoice.retrieve(@payment_schedule_item.payment_gateway_object.gateway_object_id, api_key: stripe_key)
-    PaymentScheduleItemWorker.new.perform(@payment_schedule_item.id)
+    stp_invoice = Stripe::Invoice.retrieve(payment_schedule_item.payment_gateway_object.gateway_object_id, api_key: stripe_key)
+    PaymentScheduleItemWorker.new.perform(payment_schedule_item.id)
 
     { status: stp_invoice.status, error: e }
   end

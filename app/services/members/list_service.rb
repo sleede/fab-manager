@@ -28,7 +28,7 @@ class Members::ListService
       if params[:search].size.positive?
         @query = @query.where('users.username ILIKE :search OR ' \
                               'profiles.first_name ILIKE :search OR ' \
-                              'profiles.last_name ILIKE :search OR '  \
+                              'profiles.last_name ILIKE :search OR ' \
                               'profiles.phone ILIKE :search OR ' \
                               'email ILIKE :search OR ' \
                               'groups.name ILIKE :search OR ' \
@@ -41,19 +41,19 @@ class Members::ListService
       @query
     end
 
-    def search(current_user, query, subscription, include_admins = 'false')
+    def search(current_user, query, subscription)
       members = User.includes(:profile, :statistic_profile)
                     .joins(:profile,
                            :statistic_profile,
                            :roles,
                            'LEFT JOIN "subscriptions" ON "subscriptions"."statistic_profile_id" = "statistic_profiles"."id" AND ' \
                            '"subscriptions"."created_at" = ( ' \
-                             'SELECT max("created_at") ' \
-                             'FROM "subscriptions" ' \
-                             'WHERE "statistic_profile_id" = "statistic_profiles"."id")')
+                           'SELECT max("created_at") ' \
+                           'FROM "subscriptions" ' \
+                           'WHERE "statistic_profile_id" = "statistic_profiles"."id")')
                     .where("users.is_active = 'true'")
                     .limit(50)
-      query.downcase.split(' ').each do |word|
+      query.downcase.split.each do |word|
         members = members.where('lower(f_unaccent(users.username)) ~ :search OR ' \
                                 'lower(f_unaccent(profiles.first_name)) ~ :search OR ' \
                                 'lower(f_unaccent(profiles.last_name)) ~ :search',
@@ -66,12 +66,10 @@ class Members::ListService
         members = members.where("users.is_allow_contact = 'true'")
       elsif subscription == 'true'
         # only admins have the ability to filter by subscription
-        members = members.where('subscriptions.id IS NOT NULL AND subscriptions.expiration_date >= :now', now: Date.today.to_s)
+        members = members.where('subscriptions.id IS NOT NULL AND subscriptions.expiration_date >= :now', now: Time.zone.today.to_s)
       elsif subscription == 'false'
-        members = members.where('subscriptions.id IS NULL OR subscriptions.expiration_date < :now', now: Date.today.to_s)
+        members = members.where('subscriptions.id IS NULL OR subscriptions.expiration_date < :now', now: Time.zone.today.to_s)
       end
-
-      members = members.where("roles.name = 'member' OR roles.name = 'manager'") if include_admins == 'false' || include_admins.blank?
 
       members.to_a.filter(&:valid?)
     end

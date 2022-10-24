@@ -7,6 +7,7 @@
 - Fix a bug: no statistics on trainings and spaces reservations
 - Fix a security issue: updated nokogiri to 1.13.9 to fix [GHSA-2qc6-mcvw-92cw](https://github.com/advisories/GHSA-2qc6-mcvw-92cw)
 - [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2021,6]`
+- [TODO DEPLOY] `rails fablab:setup:set_admins_group`
 
 ## v5.4.25 2022 October 19
 

@@ -107,5 +107,30 @@ namespace :fablab do
         setting.save
       end
     end
+
+    desc 'migrate administrators to normal groups'
+    task set_admins_group: :environment do
+      groups = Group.where.not(slug: 'admins').where(disabled: [false, nil]).order(:id)
+      User.admins.each do |admin|
+        print "\e[91m::\e[0m \e[1mMove admin #{admin.profile} to group\e[0m:\n"
+        admin.update(group_id: select_group(groups))
+        PaymentGatewayService.new.create_user(admin.id)
+      end
+      print "\e[32m✅\e[0m \e[1mDone\e[0m\n"
+    end
+
+    def select_group(groups)
+      groups.each do |g|
+        print "#{g.id}) #{g.name}\n"
+      end
+      print '> '
+      group_id = $stdin.gets.chomp
+      if groups.map(&:id).include?(group_id.to_i)
+        group_id
+      else
+        warn "\e[91m[ ❌ ] Please select a valid group number \e[39m"
+        select_group(groups)
+      end
+    end
   end
 end

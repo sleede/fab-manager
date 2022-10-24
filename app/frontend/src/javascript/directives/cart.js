@@ -291,13 +291,11 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
         };
 
         /**
-         * Check if the currently logged user has the 'admin' role OR the 'manager' role, but is not taking reseravtion for himself
+         * Check if the currently logged user has the 'admin' OR 'manager' role, but is not taking reseravtion for himself
          * @returns {boolean}
          */
         $scope.isAuthorized = function () {
-          if (AuthService.isAuthorized('admin')) return true;
-
-          if (AuthService.isAuthorized('manager')) {
+          if (AuthService.isAuthorized(['admin', 'manager'])) {
             return ($rootScope.currentUser.id !== $scope.user.id);
           }
 
@@ -823,11 +821,10 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
           return Wallet.getWalletByUser({ user_id: $scope.user.id }, function (wallet) {
             const amountToPay = helpers.getAmountToPay($scope.amountTotal, wallet.amount);
             if ((AuthService.isAuthorized(['member']) && (amountToPay > 0 || (amountToPay === 0 && hasOtherDeadlines()))) ||
-              (AuthService.isAuthorized('manager') && $scope.user.id === $rootScope.currentUser.id && amountToPay > 0)) {
+              ($scope.user.id === $rootScope.currentUser.id && amountToPay > 0)) {
               return payOnline(items);
             } else {
-              if (AuthService.isAuthorized(['admin']) ||
-                (AuthService.isAuthorized('manager') && $scope.user.id !== $rootScope.currentUser.id) ||
+              if (AuthService.isAuthorized(['admin', 'manager'] && $scope.user.id !== $rootScope.currentUser.id) ||
                 (amountToPay === 0 && !hasOtherDeadlines())) {
                 return payOnSite(items);
               }
