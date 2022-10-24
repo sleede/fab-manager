@@ -13,27 +13,8 @@ module SingleSignOnConcern
     ## Retrieve the requested data in the User and user's Profile tables
     ## @param sso_mapping {String} must be of form 'user._field_' or 'profile._field_'. Eg. 'user.email'
     def get_data_from_sso_mapping(sso_mapping)
-      parsed = /^(user|profile)\.(.+)$/.match(sso_mapping)
-      if parsed[1] == 'user'
-        self[parsed[2].to_sym]
-      elsif parsed[1] == 'profile'
-        case sso_mapping
-        when 'profile.avatar'
-          profile.user_avatar.remote_attachment_url
-        when 'profile.address'
-          invoicing_profile.address&.address
-        when 'profile.organization_name'
-          invoicing_profile.organization&.name
-        when 'profile.organization_address'
-          invoicing_profile.organization&.address&.address
-        when 'profile.gender'
-          statistic_profile.gender
-        when 'profile.birthday'
-          statistic_profile.birthday
-        else
-          profile[parsed[2].to_sym]
-        end
-      end
+      service = UserSetterService.new(self)
+      service.read_attribute(sso_mapping)
     end
 
     ## Set some data on the current user, according to the sso_key given
@@ -42,36 +23,8 @@ module SingleSignOnConcern
     def set_data_from_sso_mapping(sso_mapping, data)
       return if data.nil? || data.blank?
 
-      if sso_mapping.to_s.start_with? 'user.'
-        self[sso_mapping[5..-1].to_sym] = data
-      elsif sso_mapping.to_s.start_with? 'profile.'
-        case sso_mapping.to_s
-        when 'profile.avatar'
-          profile.user_avatar ||= UserAvatar.new
-          profile.user_avatar.remote_attachment_url = data
-        when 'profile.address'
-          self.invoicing_profile ||= InvoicingProfile.new
-          self.invoicing_profile.address ||= Address.new
-          self.invoicing_profile.address.address = data
-        when 'profile.organization_name'
-          self.invoicing_profile ||= InvoicingProfile.new
-          self.invoicing_profile.organization ||= Organization.new
-          self.invoicing_profile.organization.name = data
-        when 'profile.organization_address'
-          self.invoicing_profile ||= InvoicingProfile.new
-          self.invoicing_profile.organization ||= Organization.new
-          self.invoicing_profile.organization.address ||= Address.new
-          self.invoicing_profile.organization.address.address = data
-        when 'profile.gender'
-          self.statistic_profile ||= StatisticProfile.new
-          self.statistic_profile.gender = data
-        when 'profile.birthday'
-          self.statistic_profile ||= StatisticProfile.new
-          self.statistic_profile.birthday = data
-        else
-          profile[sso_mapping[8..-1].to_sym] = data
-        end
-      end
+      service = UserSetterService.new(self)
+      service.assign_attibute(sso_mapping, data)
 
       return if mapped_from_sso&.include?(sso_mapping)
 
@@ -80,7 +33,7 @@ module SingleSignOnConcern
 
     ## used to allow the migration of existing users between authentication providers
     def generate_auth_migration_token
-      update_attributes(auth_token: Devise.friendly_token)
+      update(auth_token: Devise.friendly_token)
     end
 
     ## link the current user to the given provider (omniauth attributes hash)
@@ -93,7 +46,7 @@ module SingleSignOnConcern
         raise DuplicateIndexError, "This #{active_provider.name} account is already linked to an existing user"
       end
 
-      update_attributes(provider: auth.provider, uid: auth.uid, auth_token: nil)
+      update(provider: auth.provider, uid: auth.uid, auth_token: nil)
     end
 
     ## Merge the provided User's SSO details into the current user and drop the provided user to ensure the unity
@@ -118,13 +71,16 @@ module SingleSignOnConcern
 
       # update the user's profile to set the data managed by the SSO
       auth_provider = AuthProvider.from_strategy_name(sso_user.provider)
-      logger.debug "found auth_provider=#{auth_provider.name}"
-      auth_provider.sso_fields.each do |field|
+      logger.debug "found auth_provider=#{auth_provider&.name}"
+      auth_provider&.sso_fields&.each do |field|
         value = sso_user.get_data_from_sso_mapping(field)
         logger.debug "mapping sso field #{field} with value=#{value}"
-        # we do not merge the email field if its end with the special value '-duplicate' as this means
-        # that the user is currently merging with the account that have the same email than the sso
-        set_data_from_sso_mapping(field, value) unless (field == 'user.email' && value.end_with?('-duplicate')) || (field == 'user.group_id' && self.admin?)
+        # We do not merge the email field if its end with the special value '-duplicate' as this means
+        # that the user is currently merging with the account that have the same email than the sso.
+        # Moreover, if the user is an administrator, we must keep him in his group
+        unless (field == 'user.email' && value.end_with?('-duplicate')) || (field == 'user.group_id' && admin?)
+          set_data_from_sso_mapping(field, value)
+        end
       end
 
       # run the account transfer in an SQL transaction to ensure data integrity
