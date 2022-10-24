@@ -9,7 +9,6 @@ class ProductService
     def list(filters, operator)
       products = Product.includes(:product_images)
       products = filter_by_active(products, filters)
-      products = filter_by_available(products, filters, operator)
       products = filter_by_categories(products, filters)
       products = filter_by_machines(products, filters)
       products = filter_by_keyword_or_reference(products, filters)
@@ -129,12 +128,6 @@ class ProductService
       products.where(is_active: state)
     end
 
-    def filter_by_available(products, filters, operator)
-      return products if filters[:is_available].blank? || filters[:is_available] == 'false'
-
-      filter_by_stock(products, { stock_type: 'external' }, operator)
-    end
-
     def filter_by_categories(products, filters)
       return products if filters[:categories].blank?
 
@@ -159,7 +152,7 @@ class ProductService
 
       products = if filters[:stock_from].to_i.positive?
                    products.where('(stock ->> ?)::int >= ?', filters[:stock_type], filters[:stock_from])
-                 elsif !operator&.privileged?
+                 elsif filters[:store] == 'true' && filters[:is_available] == 'true'
                    products.where('(stock ->> ?)::int >= quantity_min', filters[:stock_type])
                  else
                    products

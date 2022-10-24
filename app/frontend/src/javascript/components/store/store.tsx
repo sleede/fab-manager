@@ -209,7 +209,7 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
   */
   const fetchProducts = async (): Promise<ProductsIndex> => {
     try {
-      const data = await ProductAPI.index(resources.filters.data);
+      const data = await ProductAPI.index(Object.assign({ store: true }, resources.filters.data));
       setCurrentPage(data.page);
       setProducts(data.data);
       setPageCount(data.total_pages);

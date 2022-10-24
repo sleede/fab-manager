@@ -42,7 +42,7 @@ export const initialFilters: ProductIndexFilter = {
   machines: [],
   is_active: false,
   is_available: false,
-  stock_type: 'internal',
+  stock_type: 'external',
   stock_from: 0,
   stock_to: 0,
   page: 1,
