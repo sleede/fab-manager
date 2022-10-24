@@ -10,6 +10,10 @@ fr:
     week:
       one: 'une semaine'
       other: '%{count} semaines'
+  activerecord:
+    attributes:
+      product:
+        amount: "Le Prix"
   errors:
     #CarrierWave
     messages:
@@ -38,6 +42,11 @@ fr:
       invalid_duration: "La durée doit être comprise entre 1 jour et 1 an. Votre période dure %{DAYS} jours."
       must_be_in_the_past: "La période doit être strictement antérieure à la date du jour."
       registration_disabled: "L'inscription est désactivée"
+      undefined_in_store: "doit être défini pour rendre le produit disponible dans la boutique"
+      gateway_error: "Erreur de la passerelle de paiement : %{MESSAGE}"
+      gateway_amount_too_small: "Les paiements inférieurs à %{AMOUNT} ne sont pas pris en charge. Merci de passer commande directement à l'accueil."
+      gateway_amount_too_large: "Les paiements supérieurs à %{AMOUNT} ne sont pas pris en charge. Merci de passer commande directement à l'accueil."
+      product_in_use: "Ce produit a déjà été commandé"
   apipie:
     api_documentation: "Documentation de l'API"
     code: "Code HTTP "
@@ -121,6 +130,7 @@ fr:
     error_invoice: "Facture en erreur. Les éléments ci-dessous n'ont pas été réservés. Veuillez contacter le Fablab pour un remboursement."
     prepaid_pack: "Paquet d'heures prépayé"
     pack_item: "Pack de %{COUNT} heures pour la %{ITEM}"
+    order: "Your order on the store"
   #PDF payment schedule generation
   payment_schedules:
     schedule_reference: "Référence de l'échéancier : %{REF}"
@@ -355,6 +365,9 @@ fr:
         import_over: "L'import %{CATEGORY} est terminé. "
         members: "des membres"
         view_results: "Voir les résultats."
+      notify_admin_low_stock_threshold:
+        low_stock: "Low stock for %{PRODUCT}. "
+        view_product: "View the product."
       notify_member_about_coupon:
         enjoy_a_discount_of_PERCENT_with_code_CODE: "Bénéficiez d'une remise de %{PERCENT} % avec le code %{CODE}"
         enjoy_a_discount_of_AMOUNT_with_code_CODE: "Bénéficiez d'une remise de %{AMOUNT} avec le code %{CODE}"
@@ -406,11 +419,18 @@ fr:
         refusal: "Votre justificatif n'est pas accepté"
       notify_admin_user_proof_of_identity_refusal:
         refusal: "Le justificatif du membre <strong><em>%{NAME}</strong></em> a été refusé."
+      notify_user_order_is_ready:
+        order_ready: "Your command %{REFERENCE} is ready"
+      notify_user_order_is_canceled:
+        order_canceled: "Your command %{REFERENCE} is canceled"
+      notify_user_order_is_refunded:
+        order_refunded: "Your command %{REFERENCE} is refunded"
   #statistics tools for admins
   statistics:
     subscriptions: "Abonnements"
     machines_hours: "Créneaux machines"
     spaces: "Espaces"
+    orders: "Orders"
     trainings: "Formations"
     events: "Événements"
     registrations: "Inscriptions"
@@ -434,6 +454,9 @@ fr:
     account_creation: "Création de compte"
     project_publication: "Publication de projet"
     duration: "Durée"
+    store: "Boutique"
+    paid-processed: "Paid and/or processed"
+    aborted: "Aborted"
   #statistics exports to the Excel file format
   export:
     entries: "Entrées"
@@ -460,6 +483,8 @@ fr:
     free_extension: "Extension gratuite d'un abonnement, jusqu'au %{DATE}"
   statistic_profile:
     birthday_in_past: "La date de naissance doit être dans le passé"
+  order:
+    please_contact_FABLAB: "Please contact us for withdrawal instructions."
   settings:
     locked_setting: "le paramètre est verrouillé."
     about_title: "Le titre de la page \"À propos\""
@@ -593,3 +618,6 @@ fr:
     machines_module: "Module machines"
     user_change_group: "Permettre aux utilisateurs de changer leur groupe"
     show_username_in_admin_list: "Afficher le nom d'utilisateur dans la liste des membres de l'administrateur"
+    store_module: "Store module"
+    store_withdrawal_instructions: "Withdrawal instructions"
+    store_hidden: "Store hidden to the public"
