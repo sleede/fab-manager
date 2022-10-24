@@ -111,7 +111,7 @@ fr:
     notify_member_invoice_ready:
       subject: "Votre facture du FabLab"
       body:
-        please_find_attached_html: "Vous trouverez en pièce jointe votre facture du {DATE}, d'un montant de {AMOUNT} concernant votre {TYPE, select, Reservation{réservation} other{abonnement}}." #messageFormat interpolation
+        please_find_attached_html: "Veuillez trouver en pièce jointe votre facture de {DATE}, avec un montant de {AMOUNT} concernant votre {TYPE, select, Reservation{réservation} OrderItem{commande} other{abonnement}}. ." #messageFormat interpolation
         invoice_in_your_dashboard_html: "Vous pouvez à tout moment retrouver votre facture dans %{DASHBOARD} sur le site du Fab Lab."
         your_dashboard: "votre tableau de bord"
     notify_member_reservation_reminder:
