@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a security issue: updated nokogiri to 1.13.9 to fix [GHSA-2qc6-mcvw-92cw](https://github.com/advisories/GHSA-2qc6-mcvw-92cw)
+
 ## v5.4.25 2022 October 19
 
 - Fix a bug: unable apply a coupon if this coupon has used by an user removed
