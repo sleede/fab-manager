@@ -81,7 +81,8 @@ class Exports::AccountingExportTest < ActionDispatch::IntegrationTest
     end
 
     if first_invoice.wallet_transaction_id.nil?
-      assert_equal first_invoice.total / 100.00, data[0][I18n.t('accounting_export.debit_origin')].to_f, 'Origin debit amount does not match'
+      assert_equal first_invoice.total / 100.00, data[0][I18n.t('accounting_export.debit_origin')].to_f,
+                   'Origin debit amount does not match'
       assert_equal first_invoice.total / 100.00, data[0][I18n.t('accounting_export.debit_euro')].to_f, 'Euro debit amount does not match'
     else
       warn "WARNING: unable to test accurately accounting export: invoice #{first_invoice.id} is using wallet"
@@ -119,6 +120,9 @@ class Exports::AccountingExportTest < ActionDispatch::IntegrationTest
     client_row = data[data.length - 4]
     item_row = data[data.length - 3]
 
+    data.each do |a|
+      p a
+    end
     if machine_invoice.main_item.object_type == 'Reservation' && machine_invoice.main_item.object.reservable_type == 'Machine'
       assert_match I18n.t('accounting_export.Machine_reservation'),
                    client_row[I18n.t('accounting_export.line_label')],
