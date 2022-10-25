@@ -635,8 +635,8 @@ angular.module('application.router', ['ui.router'])
           }
         },
         params: {
-          categoryTypeUrl: { dynamic: true, raw: true, type: 'path', value: null, squash: true },
-          category: { dynamic: true, type: 'path', raw: true, value: null, squash: true },
+          categoryTypeUrl: { raw: true, type: 'path', value: null, squash: true },
+          category: { type: 'path', raw: true, value: null, squash: true },
           machines: { array: true, dynamic: true, type: 'query', raw: true },
           keywords: { dynamic: true, type: 'query' },
           is_active: { dynamic: true, type: 'query', value: 'true', squash: true },
