@@ -7,18 +7,13 @@ import { FormSelect } from '../../form/form-select';
 import { FormInput } from '../../form/form-input';
 import { useForm } from 'react-hook-form';
 import _ from 'lodash';
+import { SelectOption } from '../../../models/select';
 
 interface StockFilterProps {
   onApplyFilters: (filters: ProductIndexFilter) => void,
   currentFilters: ProductIndexFilter,
   openDefault?: boolean
 }
-
-/**
- * Option format, expected by react-select
- * @see https://github.com/JedWatson/react-select
- */
-type selectOption = { value: StockType, label: string };
 
 /**
  * Component to filter the products list by stock
@@ -51,7 +46,7 @@ export const StockFilter: React.FC<StockFilterProps> = ({ onApplyFilters, curren
   };
 
   /** Creates sorting options to the react-select format */
-  const buildStockOptions = (): Array<selectOption> => {
+  const buildStockOptions = (): Array<SelectOption<StockType>> => {
     return [
       { value: 'internal', label: t('app.admin.store.stock_filter.stock_internal') },
       { value: 'external', label: t('app.admin.store.stock_filter.stock_external') }

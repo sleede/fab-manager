@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { FabModal } from '../base/fab-modal';
 import { PaymentMethod, PaymentSchedule } from '../../models/payment-schedule';
 import PaymentScheduleAPI from '../../api/payment-schedule';
+import { SelectOption } from '../../models/select';
 
 interface UpdatePaymentMeanModalProps {
   isOpen: boolean,
@@ -12,12 +13,6 @@ interface UpdatePaymentMeanModalProps {
   afterSuccess: () => void,
   paymentSchedule: PaymentSchedule
 }
-
-/**
- * Option format, expected by react-select
- * @see https://github.com/JedWatson/react-select
- */
-type selectOption = { value: PaymentMethod, label: string };
 
 /**
  * Component to allow the member to change his payment mean for the given payment schedule (e.g. from card to transfer)
@@ -30,7 +25,7 @@ export const UpdatePaymentMeanModal: React.FC<UpdatePaymentMeanModalProps> = ({ 
   /**
    * Convert all payment means to the react-select format
    */
-  const buildOptions = (): Array<selectOption> => {
+  const buildOptions = (): Array<SelectOption<PaymentMethod>> => {
     return Object.keys(PaymentMethod).filter(pm => PaymentMethod[pm] !== PaymentMethod.Card).map(pm => {
       return { value: PaymentMethod[pm], label: t(`app.admin.update_payment_mean_modal.method_${pm}`) };
     });
@@ -39,7 +34,7 @@ export const UpdatePaymentMeanModal: React.FC<UpdatePaymentMeanModalProps> = ({ 
   /**
    * When the payment mean is changed in the select, update the state
    */
-  const handleMeanSelected = (option: selectOption): void => {
+  const handleMeanSelected = (option: SelectOption<PaymentMethod>): void => {
     setPaymentMean(option.value);
   };
 

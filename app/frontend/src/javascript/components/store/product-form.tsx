@@ -23,6 +23,7 @@ import { CloneProductModal } from './clone-product-modal';
 import ProductLib from '../../lib/product';
 import { UnsavedFormAlert } from '../form/unsaved-form-alert';
 import { UIRouter } from '@uirouter/angularjs';
+import { SelectOption, ChecklistOption } from '../../models/select';
 
 interface ProductFormProps {
   product: Product,
@@ -33,17 +34,6 @@ interface ProductFormProps {
 }
 
 /**
- * Option format, expected by react-select
- * @see https://github.com/JedWatson/react-select
- */
-type selectOption = { value: number, label: string | JSX.Element };
-
-/**
- * Option format, expected by checklist
- */
-type checklistOption = { value: number, label: string };
-
-/**
  * Form component to create or update a product
  */
 export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSuccess, onError, uiRouter }) => {
@@ -52,8 +42,8 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
   const { handleSubmit, register, control, formState, setValue, reset } = useForm<Product>({ defaultValues: { ...product } });
   const output = useWatch<Product>({ control });
   const [isActivePrice, setIsActivePrice] = useState<boolean>(product.id && _.isFinite(product.amount));
-  const [productCategories, setProductCategories] = useState<selectOption[]>([]);
-  const [machines, setMachines] = useState<checklistOption[]>([]);
+  const [productCategories, setProductCategories] = useState<SelectOption<number, string | JSX.Element>[]>([]);
+  const [machines, setMachines] = useState<ChecklistOption<number>[]>([]);
   const [stockTab, setStockTab] = useState<boolean>(false);
   const [openCloneModal, setOpenCloneModal] = useState<boolean>(false);
   const [saving, setSaving] = useState<boolean>(false);
@@ -70,7 +60,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
   /**
    * Convert the provided array of items to the react-select format
    */
-  const buildSelectOptions = (items: Array<{ id?: number, name: string, parent_id?: number }>): Array<selectOption> => {
+  const buildSelectOptions = (items: Array<{ id?: number, name: string, parent_id?: number }>): Array<SelectOption<number, string | JSX.Element>> => {
     return items.map(t => {
       return {
         value: t.id,
@@ -84,7 +74,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
   /**
    * Convert the provided array of items to the checklist format
    */
-  const buildChecklistOptions = (items: Array<{ id?: number, name: string }>): Array<checklistOption> => {
+  const buildChecklistOptions = (items: Array<{ id?: number, name: string }>): Array<ChecklistOption<number>> => {
     return items.map(t => {
       return { value: t.id, label: t.name };
     });

@@ -8,6 +8,7 @@ import { ProductCategory } from '../../../models/product-category';
 import { FabButton } from '../../base/fab-button';
 import ProductCategoryAPI from '../../../api/product-category';
 import { HtmlTranslate } from '../../base/html-translate';
+import { SelectOption } from '../../../models/select';
 
 interface ProductCategoryFormProps {
   action: 'create' | 'update' | 'delete',
@@ -16,12 +17,6 @@ interface ProductCategoryFormProps {
   onSuccess: (message: string) => void,
   onError: (message: string) => void,
 }
-
-/**
- * Option format, expected by react-select
- * @see https://github.com/JedWatson/react-select
- */
- type selectOption = { value: number, label: string };
 
 /**
  * Form to create/edit/delete a product category
@@ -40,7 +35,7 @@ export const ProductCategoryForm: React.FC<ProductCategoryFormProps> = ({ action
   /**
    * Convert all parents to the react-select format
    */
-  const buildOptions = (): Array<selectOption> => {
+  const buildOptions = (): Array<SelectOption<number>> => {
     const options = parents.map(t => {
       return { value: t.id, label: t.name };
     });

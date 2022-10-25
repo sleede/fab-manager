@@ -9,15 +9,10 @@ import { CardPaymentModal } from '../card-payment-modal';
 import { PaymentSchedule } from '../../../models/payment-schedule';
 import { HtmlTranslate } from '../../base/html-translate';
 import CheckoutAPI from '../../../api/checkout';
+import { SelectOption } from '../../../models/select';
 
 const ALL_SCHEDULE_METHODS = ['card', 'check', 'transfer'] as const;
 type scheduleMethod = typeof ALL_SCHEDULE_METHODS[number];
-
-/**
- * Option format, expected by react-select
- * @see https://github.com/JedWatson/react-select
- */
-type selectOption = { value: scheduleMethod, label: string };
 
 /**
  * A form component to ask for confirmation before cashing a payment directly at the FabLab's reception.
@@ -44,14 +39,14 @@ export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSucce
   /**
    * Convert all payement methods for schedules to the react-select format
    */
-  const buildMethodOptions = (): Array<selectOption> => {
+  const buildMethodOptions = (): Array<SelectOption<scheduleMethod>> => {
     return ALL_SCHEDULE_METHODS.map(i => methodToOption(i));
   };
 
   /**
    * Convert the given payment-method to the react-select format
    */
-  const methodToOption = (value: scheduleMethod): selectOption => {
+  const methodToOption = (value: scheduleMethod): SelectOption<scheduleMethod> => {
     if (!value) return { value, label: '' };
 
     return { value, label: t(`app.admin.local_payment_form.method_${value}`) };
@@ -60,7 +55,7 @@ export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSucce
   /**
    * Callback triggered when the user selects a payment method for the current payment schedule.
    */
-  const handleUpdateMethod = (option: selectOption) => {
+  const handleUpdateMethod = (option: SelectOption<scheduleMethod>) => {
     updateCart(Object.assign({}, cart, { payment_method: option.value }));
     setMethod(option.value);
   };

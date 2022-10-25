@@ -80,10 +80,6 @@ export default class ProductLib {
     let list = [...currentSelection];
     const children = allCategories
       .filter(el => el.parent_id === category.id);
-    /*
-    const siblings = allCategories
-      .filter(el => el.parent_id === category.parent_id && el.parent_id !== null);
-    */
 
     if (operation === 'add') {
       list.push(category);
@@ -91,12 +87,6 @@ export default class ProductLib {
         // if a parent category is selected, we automatically select all its children
         list = [...Array.from(new Set([...list, ...children]))];
       }
-      /*
-      if (siblings.length && siblings.every(el => list.includes(el))) {
-        // if a child category is selected, with every sibling of it, we automatically select its parent
-        list.push(allCategories.find(p => p.id === siblings[0].parent_id));
-      }
-      */
     } else {
       list.splice(list.indexOf(category), 1);
       const parent = allCategories.find(p => p.id === category.parent_id);

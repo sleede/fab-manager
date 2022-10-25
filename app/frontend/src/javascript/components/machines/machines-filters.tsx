@@ -1,16 +1,11 @@
 import React from 'react';
 import Select from 'react-select';
 import { useTranslation } from 'react-i18next';
+import { SelectOption } from '../../models/select';
 
 interface MachinesFiltersProps {
   onStatusSelected: (enabled: boolean) => void,
 }
-
-/**
- * Option format, expected by react-select
- * @see https://github.com/JedWatson/react-select
- */
-type selectOption = { value: boolean, label: string };
 
 /**
  * Allows filtering on machines list
@@ -23,7 +18,7 @@ export const MachinesFilters: React.FC<MachinesFiltersProps> = ({ onStatusSelect
   /**
    * Provides boolean options in the react-select format (yes/no/all)
    */
-  const buildBooleanOptions = (): Array<selectOption> => {
+  const buildBooleanOptions = (): Array<SelectOption<boolean>> => {
     return [
       defaultValue,
       { value: false, label: t('app.public.machines_filters.status_disabled') },
@@ -34,7 +29,7 @@ export const MachinesFilters: React.FC<MachinesFiltersProps> = ({ onStatusSelect
   /**
    * Callback triggered when the user selects a machine status in the dropdown list
    */
-  const handleStatusSelected = (option: selectOption): void => {
+  const handleStatusSelected = (option: SelectOption<boolean>): void => {
     onStatusSelected(option.value);
   };
 
