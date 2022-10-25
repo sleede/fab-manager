@@ -7,7 +7,6 @@ module Stripe; end
 
 ## create remote objects on stripe
 class Stripe::Service < Payment::Service
-
   # Build the subscription base on the given shopping cart and create it on the remote stripe API
   def subscribe(payment_method_id, shopping_cart)
     price_details = shopping_cart.total
@@ -15,7 +14,7 @@ class Stripe::Service < Payment::Service
     payment_schedule = price_details[:schedule][:payment_schedule]
     payment_schedule.payment_schedule_items = price_details[:schedule][:items]
     first_item = price_details[:schedule][:items].min_by(&:due_date)
-    subscription = shopping_cart.items.find { |item| item.class == CartItem::Subscription }.to_object
+    subscription = shopping_cart.items.find { |item| item.instance_of?(CartItem::Subscription) }.to_object
     reservable_stp_id = shopping_cart.items.find { |item| item.is_a?(CartItem::Reservation) }&.to_object
                           &.reservable&.payment_gateway_object&.gateway_object_id
 
@@ -131,7 +130,7 @@ class Stripe::Service < Payment::Service
   end
 
   def pay_payment_schedule_item(payment_schedule_item)
-    stripe_key = Setting.get('stripe_secret_key') # TODO, test me
+    stripe_key = Setting.get('stripe_secret_key')
     stp_invoice = Stripe::Invoice.pay(payment_schedule_item.payment_gateway_object.gateway_object_id, {}, { api_key: stripe_key })
     PaymentScheduleItemWorker.new.perform(payment_schedule_item.id)
 
@@ -163,7 +162,6 @@ class Stripe::Service < Payment::Service
   end
 
   private
-
 
   # Create the provided PaymentSchedule on Stripe, using the Subscription API
   def create_remote_subscription(shopping_cart, payment_schedule, items, price, payment_method_id)

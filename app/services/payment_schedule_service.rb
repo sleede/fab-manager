@@ -17,35 +17,14 @@ class PaymentScheduleService
     ps = PaymentSchedule.new(total: price + other_items, coupon: coupon)
     deadlines = plan.duration / 1.month
     per_month = (price / deadlines).truncate
-    adjustment = if per_month * deadlines + other_items.truncate != ps.total
-                   ps.total - (per_month * deadlines + other_items.truncate)
-                 else
+    adjustment = if (per_month * deadlines) + other_items.truncate == ps.total
                    0
+                 else
+                   ps.total - ((per_month * deadlines) + other_items.truncate)
                  end
     items = []
     (0..deadlines - 1).each do |i|
-      date = (start_at || DateTime.current) + i.months
-      details = { recurring: per_month }
-      amount = if i.zero?
-                 details[:adjustment] = adjustment.truncate
-                 details[:other_items] = other_items.truncate
-                 per_month + adjustment.truncate + other_items.truncate
-               else
-                 per_month
-               end
-      if coupon
-        cs = CouponService.new
-        if (coupon.validity_per_user == 'once' && i.zero?) || coupon.validity_per_user == 'forever'
-          details[:without_coupon] = amount
-          amount = cs.apply(amount, coupon)
-        end
-      end
-      items.push PaymentScheduleItem.new(
-        amount: amount,
-        due_date: date,
-        payment_schedule: ps,
-        details: details
-      )
+      items.push compute_deadline(i, ps, per_month, adjustment, other_items, coupon: coupon, schedule_start_at: start_at)
     end
     ps.start_at = start_at
     ps.total = items.map(&:amount).reduce(:+)
@@ -54,9 +33,35 @@ class PaymentScheduleService
     { payment_schedule: ps, items: items }
   end
 
+  def compute_deadline(deadline_index, payment_schedule, price_per_month, adjustment_price, other_items_price,
+                       coupon: nil, schedule_start_at: nil)
+    date = (schedule_start_at || DateTime.current) + deadline_index.months
+    details = { recurring: price_per_month }
+    amount = if deadline_index.zero?
+               details[:adjustment] = adjustment_price.truncate
+               details[:other_items] = other_items_price.truncate
+               price_per_month + adjustment_price.truncate + other_items_price.truncate
+             else
+               price_per_month
+             end
+    if coupon
+      cs = CouponService.new
+      if (coupon.validity_per_user == 'once' && deadline_index.zero?) || coupon.validity_per_user == 'forever'
+        details[:without_coupon] = amount
+        amount = cs.apply(amount, coupon)
+      end
+    end
+    PaymentScheduleItem.new(
+      amount: amount,
+      due_date: date,
+      payment_schedule: payment_schedule,
+      details: details
+    )
+  end
+
   def create(objects, total, customer, coupon: nil, operator: nil, payment_method: nil,
              payment_id: nil, payment_type: nil)
-    subscription = objects.find { |item| item.class == Subscription }
+    subscription = objects.find { |item| item.instance_of?(Subscription) }
 
     schedule = compute(subscription.plan, total, customer, coupon: coupon, start_at: subscription.start_at)
     ps = schedule[:payment_schedule]
@@ -80,7 +85,7 @@ class PaymentScheduleService
   def build_objects(objects)
     res = []
     res.push(PaymentScheduleObject.new(object: objects[0], main: true))
-    objects[1..-1].each do |object|
+    objects[1..].each do |object|
       res.push(PaymentScheduleObject.new(object: object))
     end
     res
@@ -117,7 +122,7 @@ class PaymentScheduleService
 
     # save the results
     invoice.save
-    payment_schedule_item.update_attributes(invoice_id: invoice.id)
+    payment_schedule_item.update(invoice_id: invoice.id)
   end
 
   ##
@@ -132,7 +137,6 @@ class PaymentScheduleService
                         .order('payment_schedules.created_at DESC')
                         .page(page)
                         .per(size)
-
 
     unless filters[:reference].nil?
       ps = ps.where(
@@ -168,7 +172,7 @@ class PaymentScheduleService
     payment_schedule.ordered_items.each do |item|
       next if item.state == 'paid'
 
-      item.update_attributes(state: 'canceled')
+      item.update(state: 'canceled')
     end
     # cancel subscription
     subscription = payment_schedule.payment_schedule_objects.find { |pso| pso.object_type == Subscription.name }.subscription
@@ -192,7 +196,7 @@ class PaymentScheduleService
   ##
   def reset_erroneous_payment_schedule_items(payment_schedule)
     results = payment_schedule.payment_schedule_items.where(state: %w[error gateway_canceled]).map do |item|
-      item.update_attributes(state: item.due_date < DateTime.current ? 'pending' : 'new')
+      item.update(state: item.due_date < DateTime.current ? 'pending' : 'new')
     end
     results.reduce(true) { |acc, item| acc && item }
   end
@@ -208,7 +212,10 @@ class PaymentScheduleService
     }
 
     # the subscription and reservation items
-    subscription = payment_schedule_item.payment_schedule.payment_schedule_objects.find { |pso| pso.object_type == Subscription.name }.subscription
+    subscription = payment_schedule_item.payment_schedule
+                                        .payment_schedule_objects
+                                        .find { |pso| pso.object_type == Subscription.name }
+                                        .subscription
     if payment_schedule_item.payment_schedule.main_object.object_type == Reservation.name
       details[:reservation] = payment_schedule_item.details['other_items']
       reservation = payment_schedule_item.payment_schedule.main_object.reservation
@@ -227,7 +234,10 @@ class PaymentScheduleService
   ##
   def complete_next_invoice(payment_schedule_item, invoice)
     # the subscription item
-    subscription = payment_schedule_item.payment_schedule.payment_schedule_objects.find { |pso| pso.object_type == Subscription.name }.subscription
+    subscription = payment_schedule_item.payment_schedule
+                                        .payment_schedule_objects
+                                        .find { |pso| pso.object_type == Subscription.name }
+                                        .subscription
 
     # sub-price for the subscription
     details = { subscription: payment_schedule_item.details['recurring'] }
@@ -244,7 +254,7 @@ class PaymentScheduleService
 
     return unless subscription
 
-    generate_subscription_item(invoice, subscription, payment_details, reservation.nil?)
+    generate_subscription_item(invoice, subscription, payment_details, main: reservation.nil?)
   end
 
   ##
@@ -271,7 +281,7 @@ class PaymentScheduleService
   # Generate an InvoiceItem for the given subscription and save it in invoice.invoice_items.
   # This method must be called only with a valid subscription
   ##
-  def generate_subscription_item(invoice, subscription, payment_details, main = true)
+  def generate_subscription_item(invoice, subscription, payment_details, main: true)
     raise TypeError unless subscription
 
     invoice.invoice_items.push InvoiceItem.new(
@@ -291,11 +301,9 @@ class PaymentScheduleService
 
     total = invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+)
 
-    unless coupon.nil?
-      if (coupon.validity_per_user == 'once' && payment_schedule_item.first?) || coupon.validity_per_user == 'forever'
-        total = CouponService.new.apply(total, coupon, user.id)
-        invoice.coupon_id = coupon.id
-      end
+    if !coupon.nil? && ((coupon.validity_per_user == 'once' && payment_schedule_item.first?) || coupon.validity_per_user == 'forever')
+      total = CouponService.new.apply(total, coupon, user.id)
+      invoice.coupon_id = coupon.id
     end
 
     invoice.total = total

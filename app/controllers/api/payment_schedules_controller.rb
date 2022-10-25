@@ -8,7 +8,7 @@ class API::PaymentSchedulesController < API::ApiController
 
   # retrieve all payment schedules for the current user, paginated
   def index
-    @payment_schedules = PaymentSchedule.where('invoicing_profile_id = ?', current_user.invoicing_profile.id)
+    @payment_schedules = PaymentSchedule.where(invoicing_profile_id: current_user.invoicing_profile.id)
                                         .includes(:invoicing_profile, :payment_schedule_items, :payment_schedule_objects)
                                         .joins(:invoicing_profile)
                                         .order('payment_schedules.created_at DESC')
@@ -34,14 +34,14 @@ class API::PaymentSchedulesController < API::ApiController
 
   def download
     authorize @payment_schedule
-    send_file File.join(Rails.root, @payment_schedule.file), type: 'application/pdf', disposition: 'attachment'
+    send_file Rails.root.join(@payment_schedule.file), type: 'application/pdf', disposition: 'attachment'
   end
 
   def cash_check
     authorize @payment_schedule_item.payment_schedule
     PaymentScheduleService.new.generate_invoice(@payment_schedule_item, payment_method: 'check')
     attrs = { state: 'paid', payment_method: 'check' }
-    @payment_schedule_item.update_attributes(attrs)
+    @payment_schedule_item.update(attrs)
 
     render json: attrs, status: :ok
   end
@@ -50,7 +50,7 @@ class API::PaymentSchedulesController < API::ApiController
     authorize @payment_schedule_item.payment_schedule
     PaymentScheduleService.new.generate_invoice(@payment_schedule_item, payment_method: 'transfer')
     attrs = { state: 'paid', payment_method: 'transfer' }
-    @payment_schedule_item.update_attributes(attrs)
+    @payment_schedule_item.update(attrs)
 
     render json: attrs, status: :ok
   end
