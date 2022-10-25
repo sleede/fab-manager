@@ -16,7 +16,7 @@ class StoreStatisticServiceTest < ActionDispatch::IntegrationTest
 
     # we should find order id 15 (created today)
     stat_order = Stats::Order.search(query: { bool: { must: [{ term: { date: DateTime.current.to_date.iso8601 } },
-                                                             { term: { type: 'order' } }] } }).first
+                                                             { term: { type: 'store' } }] } }).first
     assert_not_nil stat_order
     assert_equal @order.id, stat_order['orderId']
     check_statistics_on_user(stat_order)

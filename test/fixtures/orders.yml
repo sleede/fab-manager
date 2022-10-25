@@ -160,3 +160,93 @@ order_15:
   coupon_id:
   paid_total: 3000
   invoice_id: 5822
+order_16:
+  id: 16
+  statistic_profile_id: 10
+  operator_profile_id:
+  token: 9VWkmJDSx7QixRusL7ppWg1666628033284
+  reference: '005901-<%= DateTime.current.utc.strftime('%m') %>-<%= DateTime.current.utc.strftime('%d') %>'
+  state: cart
+  total: 0
+  created_at: <%= DateTime.current.utc.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  updated_at: <%= DateTime.current.utc.change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  wallet_amount:
+  wallet_transaction_id:
+  payment_method:
+  footprint:
+  environment: test
+  coupon_id:
+  paid_total:
+  invoice_id:
+order_17:
+  id: 17
+  statistic_profile_id:
+  operator_profile_id:
+  token: MkI5z9qVxe_YdNYCR_WN6g1666628074732
+  reference: '005902-<%= DateTime.current.utc.strftime('%m') %>-<%= DateTime.current.utc.strftime('%d') %>'
+  state: cart
+  total: 0
+  created_at: <%= DateTime.current.utc.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  updated_at: <%= DateTime.current.utc.change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  wallet_amount:
+  wallet_transaction_id:
+  payment_method:
+  footprint:
+  environment: test
+  coupon_id:
+  paid_total:
+  invoice_id:
+order_18:
+  id: 18
+  statistic_profile_id: 9
+  operator_profile_id:
+  token: KbSmmD_gi9w_CrpwtK9OwA1666687433963
+  reference: '005902-<%= DateTime.current.utc.strftime('%m') %>-<%= DateTime.current.utc.strftime('%d') %>'
+  state: cart
+  total: 500
+  created_at: <%= DateTime.current.utc.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  updated_at: <%= DateTime.current.utc.change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  wallet_amount:
+  wallet_transaction_id:
+  payment_method:
+  footprint:
+  environment: test
+  coupon_id:
+  paid_total:
+  invoice_id:
+order_19:
+  id: 19
+  statistic_profile_id:
+  operator_profile_id:
+  token: 4bB96D-MlqJGBr5T8eui-g1666690417460
+  reference: '005903-<%= DateTime.current.utc.strftime('%m') %>-<%= DateTime.current.utc.strftime('%d') %>'
+  state: cart
+  total: 261500
+  created_at: <%= DateTime.current.utc.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  updated_at: <%= DateTime.current.utc.change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  wallet_amount:
+  wallet_transaction_id:
+  payment_method:
+  footprint:
+  environment: test
+  coupon_id:
+  paid_total:
+  invoice_id:
+order_20:
+  id: 20
+  statistic_profile_id:
+  operator_profile_id: 1
+  token: 0DKxbAOzSXRx-amXyhmDdg1666691976019
+  reference: '005904-<%= DateTime.current.utc.strftime('%m') %>-<%= DateTime.current.utc.strftime('%d') %>'
+  state: cart
+  total: 261500
+  created_at: <%= DateTime.current.utc.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  updated_at: <%= DateTime.current.utc.change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  wallet_amount:
+  wallet_transaction_id:
+  payment_method:
+  footprint:
+  environment: test
+  coupon_id:
+  paid_total:
+  invoice_id:

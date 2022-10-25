@@ -7,8 +7,10 @@ product_3:
   is_active: true
   product_category_id: 4
   amount: 52300
-  quantity_min: 10
-  stock: '{"external": 0, "internal": 1}'
+  quantity_min: 5
+  stock:
+    external: 100
+    internal: 1
   low_stock_alert: true
   low_stock_threshold: 10
   created_at: '2022-09-13 10:05:07.010322'
@@ -23,7 +25,9 @@ product_11:
   product_category_id: 4
   amount: 1000
   quantity_min: 1
-  stock: '{"external": 9, "internal": 0}'
+  stock:
+    external: 40
+    internal: 1
   low_stock_alert: false
   low_stock_threshold:
   created_at: '2022-09-14 13:41:16.207154'
@@ -38,7 +42,9 @@ product_12:
   product_category_id: 4
   amount: 142300
   quantity_min: 1
-  stock: '{"external": 0, "internal": 1}'
+  stock:
+    external: 0
+    internal: 1
   low_stock_alert: false
   low_stock_threshold:
   created_at: '2022-09-14 13:42:36.729625'
@@ -53,7 +59,9 @@ product_13:
   product_category_id: 5
   amount: 500
   quantity_min: 1
-  stock: '{"external": 999, "internal": 0}'
+  stock:
+    external: 999
+    internal: 0
   low_stock_alert: false
   low_stock_threshold:
   created_at: '2022-09-14 13:47:18.123531'
@@ -68,7 +76,9 @@ product_14:
   product_category_id: 5
   amount: 1000
   quantity_min: 1
-  stock: '{"external": 800, "internal": 0}'
+  stock:
+    external: 800
+    internal: 0
   low_stock_alert: false
   low_stock_threshold:
   created_at: '2022-09-14 13:48:05.028266'
@@ -83,7 +93,9 @@ product_15:
   product_category_id: 5
   amount: 1500
   quantity_min: 1
-  stock: '{"external": 595, "internal": 0}'
+  stock:
+    external: 595
+    internal: 0
   low_stock_alert: false
   low_stock_threshold:
   created_at: '2022-09-14 13:49:08.233064'
@@ -98,7 +110,9 @@ product_16:
   product_category_id: 5
   amount: 1300
   quantity_min: 1
-  stock: '{"external": 100, "internal": 0}'
+  stock:
+    external: 500
+    internal: 0
   low_stock_alert: false
   low_stock_threshold:
   created_at: '2022-09-14 13:50:12.584041'
@@ -113,7 +127,9 @@ product_17:
   product_category_id: 5
   amount: 3000
   quantity_min: 1
-  stock: '{"external": 99, "internal": 0}'
+  stock:
+    external: 99
+    internal: 0
   low_stock_alert: false
   low_stock_threshold:
   created_at: '2022-09-14 13:51:12.630109'
@@ -128,7 +144,9 @@ product_18:
   product_category_id: 5
   amount: 4000
   quantity_min: 1
-  stock: '{"external": 12, "internal": 0}'
+  stock:
+    external: 12
+    internal: 0
   low_stock_alert: false
   low_stock_threshold:
   created_at: '2022-09-14 13:52:08.659248'
@@ -140,11 +158,13 @@ product_20:
   sku: 63-44801
   description: <p>un joli sticker en forme de  <a target="_blank" rel="noopener noreferrer nofollow"
     href="https://www.example.com/hello">smiley</a> qui dit bonjour</p>
-  is_active: true
+  is_active: false
   product_category_id: 6
   amount: 1
   quantity_min: 1
-  stock: '{"external": 15, "internal": 0}'
+  stock:
+    external: 15
+    internal: 0
   low_stock_alert: false
   low_stock_threshold:
   created_at: '2022-09-28 08:16:32.348880'
@@ -160,7 +180,9 @@ product_22:
   product_category_id: 3
   amount: 200
   quantity_min: 1
-  stock: '{"external": 999, "internal": 1000}'
+  stock:
+    external: 999
+    internal: 1000
   low_stock_alert: false
   low_stock_threshold:
   created_at: '2022-10-03 14:00:49.967342'
@@ -175,7 +197,9 @@ product_23:
   product_category_id: 3
   amount: 119
   quantity_min: 1
-  stock: '{"external": 998, "internal": 1000}'
+  stock:
+    external: 998
+    internal: 1000
   low_stock_alert: false
   low_stock_threshold:
   created_at: '2022-10-03 14:01:43.706366'
