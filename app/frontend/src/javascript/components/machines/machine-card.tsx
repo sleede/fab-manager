@@ -49,7 +49,7 @@ const MachineCard: React.FC<MachineCardProps> = ({ user, machine, onShowMachine,
     }
 
     return (
-      <div className="machine-picture" style={{ backgroundImage: `url(${machine.machine_image})` }} onClick={handleShowMachine} />
+      <div className="machine-picture" style={{ backgroundImage: `url(${machine.machine_image}), url('/default-image.png')` }} onClick={handleShowMachine} />
     );
   };
 
