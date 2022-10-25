@@ -1001,7 +1001,8 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['phone_required', 'address_required']" }).$promise; }]
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['phone_required', 'address_required']" }).$promise; }],
+          groupsPromise: ['Group', function (Group) { return Group.query({ disabled: false }).$promise; }]
         }
       })
       .state('app.admin.managers_new', {

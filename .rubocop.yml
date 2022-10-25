@@ -34,3 +34,7 @@ Style/AndOr:
   EnforcedStyle: conditionals
 Style/FormatString:
   EnforcedStyle: sprintf
+Rails/RedundantPresenceValidationOnBelongsTo:
+  Enabled: false
+Rails/UnknownEnv:
+ Environments: development, test, staging, production

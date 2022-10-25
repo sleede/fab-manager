@@ -39,7 +39,7 @@ export const PlansFilter: React.FC<PlansFilterProps> = ({ user, groups, onGroupS
    * Convert all groups to the react-select format
    */
   const buildGroupOptions = (): Array<selectOption> => {
-    return groups.filter(g => !g.disabled && g.slug !== 'admins').map(g => {
+    return groups.filter(g => !g.disabled).map(g => {
       return { value: g.id, label: g.name };
     });
   };

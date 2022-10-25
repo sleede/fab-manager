@@ -12,7 +12,9 @@ namespace :fablab do
 
     desc 'add missing VAT rate to history'
     task :add_vat_rate, %i[rate date] => :environment do |_task, args|
-      raise 'Missing argument. Usage exemple: rails fablab:setup:add_vat_rate[20,2014-01-01]. Use 0 to disable' unless args.rate && args.date
+      unless args.rate && args.date
+        raise 'Missing argument. Usage exemple: rails fablab:setup:add_vat_rate[20,2014-01-01]. Use 0 to disable'
+      end
 
       if args.rate == '0'
         setting = Setting.find_by(name: 'invoice_VAT-active')
@@ -116,6 +118,8 @@ namespace :fablab do
         admin.update(group_id: select_group(groups))
         PaymentGatewayService.new.create_user(admin.id)
       end
+      print "\e[91m::\e[0m \e[1mRemoving the 'admins' group...\e[0m\n"
+      Group.find_by(slug: 'admins').destroy
       print "\e[32m✅\e[0m \e[1mDone\e[0m\n"
     end
 

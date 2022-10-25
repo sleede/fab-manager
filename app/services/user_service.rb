@@ -36,9 +36,6 @@ class UserService
       admin = User.new(params.merge(password: generated_password))
       admin.send :set_slug
 
-      # we associate the admin group to prevent linking any other 'normal' group (which won't be deletable afterwards)
-      admin.group = Group.find_by(slug: 'admins')
-
       # if the authentication is made through an SSO, generate a migration token
       admin.generate_auth_migration_token unless AuthProvider.active.providable_type == DatabaseProvider.name
 

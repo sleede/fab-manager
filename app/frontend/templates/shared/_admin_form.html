@@ -119,6 +119,19 @@
                ng-required="phoneRequired">
       </div>
     </div>
+
+    <div class="form-group" ng-class="{'has-error': adminForm['admin[group_id]'].$dirty && adminForm['admin[group_id]'].$invalid}">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-group"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
+        <select ng-model="admin.group_id"
+                name="admin[group_id]"
+                class="form-control"
+                id="group_id"
+                required
+                ng-options="g.id as g.name for g in groups">
+        </select>
+      </div>
+    </div>
   </div>
 
 </div>
