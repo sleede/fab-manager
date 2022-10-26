@@ -5,6 +5,9 @@
 - Fix a bug: portuguese time formatting (#405)
 - Fix a bug: admin users groups being overriden by SSO group_id (#404)
 - Fix a bug: no statistics on trainings and spaces reservations
+- Fix a bug: invalid ventilation for amount coupons
+- Fix a bug: invalid VAT for invoices using amount coupons
+- Fix a bug: invalid 1 cent rounding for invoices using coupons
 - Fix a security issue: updated nokogiri to 1.13.9 to fix [GHSA-2qc6-mcvw-92cw](https://github.com/advisories/GHSA-2qc6-mcvw-92cw)
 - [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2021,6]`
 - [TODO DEPLOY] `rails fablab:setup:set_admins_group`

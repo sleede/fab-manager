@@ -41,6 +41,6 @@ class CartItem::SpaceReservation < CartItem::Reservation
     return 0 if @plan.nil?
 
     space_credit = @plan.space_credits.find { |credit| credit.creditable_id == @reservable.id }
-    credits_hours(space_credit, @new_subscription)
+    credits_hours(space_credit, new_plan_being_bought: @new_subscription)
   end
 end
