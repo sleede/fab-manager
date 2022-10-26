@@ -72,6 +72,8 @@ class AccountingExportService
       rows << "#{wallet_row(invoice)}\n"
     when 'StatisticProfilePrepaidPack'
       rows << "#{pack_row(invoice)}\n"
+    when 'OrderItem'
+      rows << "#{product_row(invoice)}\n"
     when 'Error'
       items = invoice.invoice_items.reject { |ii| ii.object_type == 'Subscription' }
       items.each do |item|
@@ -143,6 +145,16 @@ class AccountingExportService
       invoice,
       account(invoice, :pack),
       account(invoice, :pack, type: :label),
+      invoice.invoice_items.first.net_amount / 100.00,
+      line_label: label(invoice)
+    )
+  end
+
+  def product_row(invoice)
+    row(
+      invoice,
+      account(invoice, :product),
+      account(invoice, :product, type: :label),
       invoice.invoice_items.first.net_amount / 100.00,
       line_label: label(invoice)
     )
@@ -235,6 +247,12 @@ class AccountingExportService
       else
         Rails.logger.debug { "WARN: Invoice #{invoice.id} has no prepaid-pack" }
       end
+    when :product
+      if invoice.main_item.object_type == 'OrderItem'
+        Setting.get("accounting_Product_#{type}")
+      else
+        Rails.logger.debug { "WARN: Invoice #{invoice.id} has no prepaid-pack" }
+      end
     when :error
       Setting.get("accounting_Error_#{type}")
     else
@@ -275,7 +293,9 @@ class AccountingExportService
     reference = invoice.reference
 
     items = invoice.subscription_invoice? ? [I18n.t('accounting_export.subscription')] : []
-    items.push I18n.t("accounting_export.#{invoice.main_item.object.reservable_type}_reservation") if invoice.main_item.object_type == 'Reservation'
+    if invoice.main_item.object_type == 'Reservation'
+      items.push I18n.t("accounting_export.#{invoice.main_item.object.reservable_type}_reservation")
+    end
     items.push I18n.t('accounting_export.wallet') if invoice.main_item.object_type == 'WalletTransaction'
 
     summary = items.join(' + ')

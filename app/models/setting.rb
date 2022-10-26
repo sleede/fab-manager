@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 # Setting is a configuration element of the platform. Only administrators are allowed to modify Settings
-# For some settings, changing them will involve some callback actions (like rebuilding the stylesheets if the theme color Setting is changed).
+# For some settings, changing them will involve some callback actions (like rebuilding the stylesheets
+# if the theme color Setting has changed).
 # A full history of the previous values is kept in database with the date and the author of the change
 # after_update callback is handled by SettingService
 class Setting < ApplicationRecord
-  has_many :history_values
+  has_many :history_values, dependent: :destroy
   # The following list contains all the settings that can be customized from the Fab-manager's UI.
   # A few of them that are system settings, that should not be updated manually (uuid, origin...).
   validates :name, inclusion:
@@ -33,6 +34,7 @@ class Setting < ApplicationRecord
                              invoice_VAT-rate_Space
                              invoice_VAT-rate_Event
                              invoice_VAT-rate_Subscription
+                             invoice_VAT-rate_Product
                              invoice_text
                              invoice_legals
                              booking_window_start
@@ -74,6 +76,8 @@ class Setting < ApplicationRecord
                              accounting_Event_label
                              accounting_Space_code
                              accounting_Space_label
+                             accounting_Product_code
+                             accounting_Product_label
                              hub_last_version
                              hub_public_key
                              fab_analytics
@@ -148,7 +152,10 @@ class Setting < ApplicationRecord
                              user_change_group
                              user_validation_required
                              user_validation_required_list
-                             show_username_in_admin_list] }
+                             show_username_in_admin_list
+                             store_module
+                             store_withdrawal_instructions
+                             store_hidden] }
   # WARNING: when adding a new key, you may also want to add it in:
   # - config/locales/en.yml#settings
   # - app/frontend/src/javascript/models/setting.ts#SettingName
@@ -185,6 +192,7 @@ class Setting < ApplicationRecord
     previous_value&.created_at
   end
 
+  # @deprecated, prefer Setting.set() instead
   def value=(val)
     admin = User.admins.first
     save && history_values.create(invoicing_profile: admin.invoicing_profile, value: val)
@@ -220,6 +228,6 @@ class Setting < ApplicationRecord
   # Check if the given setting was set
   ##
   def self.set?(name)
-    find_by(name: name)&.value.nil? ? false : true
+    !find_by(name: name)&.value.nil?
   end
 end

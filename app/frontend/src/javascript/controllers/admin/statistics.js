@@ -187,7 +187,8 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
         return ((tab.es_type_key === 'subscription' && !$rootScope.modules.plans) ||
           (tab.es_type_key === 'training' && !$rootScope.modules.trainings) ||
           (tab.es_type_key === 'space' && !$rootScope.modules.spaces) ||
-          (tab.es_type_key === 'machine' && !$rootScope.modules.machines)
+          (tab.es_type_key === 'machine' && !$rootScope.modules.machines) ||
+          (tab.es_type_key === 'order' && !$rootScope.modules.store)
         );
       } else {
         return true;

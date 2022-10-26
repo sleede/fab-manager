@@ -1,0 +1,19 @@
+<div class="header-page">
+  <div class="back">
+    <a ng-click="backProductsList($event)"><i class="fas fa-long-arrow-alt-left "></i></a>
+  </div>
+
+  <div class="center">
+    <h1 translate>{{ 'app.admin.store.manage_the_store' }}</h1>
+  </div>
+</div>
+
+<section>
+  <div class="new-product-nav">
+    <a class="back-btn" ng-click="backProductsList($event)" tabindex="0">
+      <i class="fas fa-angle-left"></i>
+      <span translate>{{ 'app.admin.store.back_to_list' }}</span>
+    </a>
+  </div>
+  <new-product on-success="onSuccess" on-error="onError" ui-router="uiRouter"/>
+</section>

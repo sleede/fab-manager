@@ -10,15 +10,18 @@ import { FieldPathValue, UnpackNestedValue } from 'react-hook-form/dist/types';
 interface FormRichTextProps<TFieldValues, TContext extends object> extends FormControlledComponent<TFieldValues, TContext>, AbstractFormItemProps<TFieldValues> {
   valueDefault?: string,
   limit?: number,
-  paragraphTools?: boolean,
+  heading?: boolean,
+  bulletList?: boolean,
+  blockquote?: boolean,
+  link?: boolean,
   video?: boolean,
-  image?: boolean,
+  image?: boolean
 }
 
 /**
  * This component is a rich-text editor to use with react-hook-form.
  */
-export const FormRichText = <TFieldValues extends FieldValues, TContext extends object>({ id, label, tooltip, className, control, valueDefault, error, warning, rules, disabled = false, formState, limit, paragraphTools, video, image }: FormRichTextProps<TFieldValues, TContext>) => {
+export const FormRichText = <TFieldValues extends FieldValues, TContext extends object>({ id, label, tooltip, className, control, valueDefault, error, warning, rules, disabled = false, formState, limit, heading, bulletList, blockquote, video, image, link }: FormRichTextProps<TFieldValues, TContext>) => {
   const textEditorRef = React.useRef<FabTextEditorRef>();
   const [isDisabled, setIsDisabled] = React.useState<boolean>(false);
 
@@ -54,9 +57,12 @@ export const FormRichText = <TFieldValues extends FieldValues, TContext extends 
         <FabTextEditor onChange={onChange}
                        content={value}
                        limit={limit}
-                       paragraphTools={paragraphTools}
+                       heading={heading}
+                       bulletList={bulletList}
+                       blockquote={blockquote}
                        video={video}
                        image={image}
+                       link={link}
                        disabled={isDisabled}
                        ref={textEditorRef} />
       } />

@@ -230,3 +230,17 @@ pgo33:
   item_type: PaymentSchedule
   item_id: 13
   payment_gateway_object_id: 32
+
+pgo34:
+  id: 34
+  item_type: 'User'
+  item_id: 9
+  gateway_object_type: 'Stripe::Customer'
+  gateway_object_id: 'cus_IhIynmoJbzLpwX'
+
+pgo35:
+  id: 35
+  item_type: 'User'
+  item_id: 10
+  gateway_object_type: 'Stripe::Customer'
+  gateway_object_id: 'cus_IhIynmoJbzLpwX'

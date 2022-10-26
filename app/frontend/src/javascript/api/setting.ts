@@ -1,6 +1,13 @@
 import apiClient from './clients/api-client';
 import { AxiosResponse } from 'axios';
-import { Setting, SettingBulkResult, SettingError, SettingName, SettingValue } from '../models/setting';
+import {
+  Setting,
+  SettingBulkArray,
+  SettingBulkResult,
+  SettingError,
+  SettingName,
+  SettingValue
+} from '../models/setting';
 
 export default class SettingAPI {
   static async get (name: SettingName): Promise<Setting> {
@@ -8,7 +15,7 @@ export default class SettingAPI {
     return res?.data?.setting;
   }
 
-  static async query (names: Array<SettingName>): Promise<Map<SettingName, string>> {
+  static async query (names: readonly SettingName[]): Promise<Map<SettingName, string>> {
     const params = new URLSearchParams();
     params.append('names', `['${names.join("','")}']`);
 
@@ -32,7 +39,7 @@ export default class SettingAPI {
     return res?.data?.isPresent;
   }
 
-  private static toSettingsMap (names: Array<SettingName>, data: Record<string, string|null>): Map<SettingName, string> {
+  private static toSettingsMap (names: readonly SettingName[], data: Record<string, string|null>): Map<SettingName, string> {
     const map = new Map();
     names.forEach(name => {
       map.set(name, data[name] || '');
@@ -60,7 +67,7 @@ export default class SettingAPI {
     return map;
   }
 
-  private static toObjectArray (data: Map<SettingName, SettingValue>): Array<Record<string, SettingValue>> {
+  private static toObjectArray (data: Map<SettingName, SettingValue>): SettingBulkArray {
     const array = [];
     data.forEach((value, key) => {
       array.push({

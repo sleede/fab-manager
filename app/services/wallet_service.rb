@@ -9,33 +9,33 @@ class WalletService
 
   ## credit an amount to wallet, if credit success then return a wallet transaction and notify to admin
   def credit(amount)
+    transaction = nil
     ActiveRecord::Base.transaction do
-      if @wallet.credit(amount)
+      if @wallet&.credit(amount)
         transaction = WalletTransaction.new(
-          invoicing_profile: @user.invoicing_profile,
+          invoicing_profile: @user&.invoicing_profile,
           wallet: @wallet,
           transaction_type: 'credit',
           amount: amount
         )
-        if transaction.save
-          NotificationCenter.call type: 'notify_user_wallet_is_credited',
-                                  receiver: @wallet.user,
-                                  attached_object: transaction
-          NotificationCenter.call type: 'notify_admin_user_wallet_is_credited',
-                                  receiver: User.admins_and_managers,
-                                  attached_object: transaction
-          return transaction
-        end
+        raise ActiveRecord::Rollback unless transaction.save
+
+        NotificationCenter.call type: 'notify_user_wallet_is_credited',
+                                receiver: @wallet&.user,
+                                attached_object: transaction
+        NotificationCenter.call type: 'notify_admin_user_wallet_is_credited',
+                                receiver: User.admins_and_managers,
+                                attached_object: transaction
       end
-      raise ActiveRecord::Rollback
     end
-    false
+    transaction
   end
 
   ## debit an amount to wallet, if debit success then return a wallet transaction
   def debit(amount)
+    transaction = nil
     ActiveRecord::Base.transaction do
-      if @wallet.debit(amount)
+      if @wallet&.debit(amount)
         transaction = WalletTransaction.new(
           invoicing_profile: @user&.invoicing_profile,
           wallet: @wallet,
@@ -43,11 +43,10 @@ class WalletService
           amount: amount
         )
 
-        return transaction if transaction.save
+        raise ActiveRecord::Rollback unless transaction.save
       end
-      raise ActiveRecord::Rollback
     end
-    false
+    transaction
   end
 
   ## create a refund invoice associated with the given wallet transaction
@@ -92,7 +91,7 @@ class WalletService
   end
 
   ##
-  # Subtract the amount of the payment document (Invoice|PaymentSchedule) from the customer's wallet
+  # Subtract the amount of the payment document (Invoice|PaymentSchedule|Order) from the customer's wallet
   # @param transaction, if false: the wallet is not debited, the transaction is only simulated on the payment document
   ##
   def self.debit_user_wallet(payment, user, transaction: true)
@@ -110,5 +109,4 @@ class WalletService
       payment.set_wallet_transaction(wallet_amount, nil)
     end
   end
-
 end

@@ -27,8 +27,8 @@ angular.module('application.router', ['ui.router'])
           logoFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'logo-file' }).$promise; }],
           logoBlackFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'logo-black-file' }).$promise; }],
           sharedTranslations: ['Translations', function (Translations) { return Translations.query(['app.shared', 'app.public.common']).$promise; }],
-          modulesPromise: ['Setting', function (Setting) { return Setting.query({ names: "['machines_module', 'spaces_module', 'plans_module', 'invoicing_module', 'wallet_module', 'statistics_module', 'trainings_module', 'public_agenda_module']" }).$promise; }],
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['public_registrations']" }).$promise; }]
+          modulesPromise: ['Setting', function (Setting) { return Setting.query({ names: "['machines_module', 'spaces_module', 'plans_module', 'invoicing_module', 'wallet_module', 'statistics_module', 'trainings_module', 'public_agenda_module', 'store_module']" }).$promise; }],
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['public_registrations', 'store_hidden']" }).$promise; }]
         },
         onEnter: ['$rootScope', 'logoFile', 'logoBlackFile', 'modulesPromise', 'CSRF', function ($rootScope, logoFile, logoBlackFile, modulesPromise, CSRF) {
           // Retrieve Anti-CSRF tokens from cookies
@@ -41,6 +41,7 @@ angular.module('application.router', ['ui.router'])
             spaces: (modulesPromise.spaces_module === 'true'),
             plans: (modulesPromise.plans_module === 'true'),
             trainings: (modulesPromise.trainings_module === 'true'),
+            store: (modulesPromise.store_module === 'true'),
             invoicing: (modulesPromise.invoicing_module === 'true'),
             wallet: (modulesPromise.wallet_module === 'true'),
             publicAgenda: (modulesPromise.public_agenda_module === 'true'),
@@ -227,6 +228,24 @@ angular.module('application.router', ['ui.router'])
           }
         }
       })
+      .state('app.logged.dashboard.orders', {
+        url: '/orders',
+        views: {
+          'main@': {
+            templateUrl: '/dashboard/orders.html',
+            controller: 'DashboardController'
+          }
+        }
+      })
+      .state('app.logged.dashboard.order_show', {
+        url: '/orders/:id',
+        views: {
+          'main@': {
+            templateUrl: '/orders/show.html',
+            controller: 'ShowOrdersController'
+          }
+        }
+      })
       .state('app.logged.dashboard.wallet', {
         url: '/wallet',
         abstract: !Fablab.walletModule,
@@ -328,6 +347,7 @@ angular.module('application.router', ['ui.router'])
       // machines
       .state('app.public.machines_list', {
         url: '/machines',
+        abstract: !Fablab.machinesModule,
         views: {
           'main@': {
             templateUrl: '/machines/index.html',
@@ -341,6 +361,7 @@ angular.module('application.router', ['ui.router'])
       })
       .state('app.admin.machines_new', {
         url: '/machines/new',
+        abstract: !Fablab.machinesModule,
         views: {
           'main@': {
             templateUrl: '/machines/new.html',
@@ -350,6 +371,7 @@ angular.module('application.router', ['ui.router'])
       })
       .state('app.public.machines_show', {
         url: '/machines/:id',
+        abstract: !Fablab.machinesModule,
         views: {
           'main@': {
             templateUrl: '/machines/show.html',
@@ -362,6 +384,7 @@ angular.module('application.router', ['ui.router'])
       })
       .state('app.logged.machines_reserve', {
         url: '/machines/:id/reserve',
+        abstract: !Fablab.machinesModule,
         views: {
           'main@': {
             templateUrl: '/machines/reserve.html',
@@ -383,6 +406,7 @@ angular.module('application.router', ['ui.router'])
       })
       .state('app.admin.machines_edit', {
         url: '/machines/:id/edit',
+        abstract: !Fablab.machinesModule,
         views: {
           'main@': {
             templateUrl: '/machines/edit.html',
@@ -597,6 +621,53 @@ angular.module('application.router', ['ui.router'])
           machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
           spacesPromise: ['Space', function (Space) { return Space.query().$promise; }],
           iCalendarPromise: ['ICalendar', function (ICalendar) { return ICalendar.query().$promise; }]
+        }
+      })
+
+      // store
+      .state('app.public.store', {
+        url: '/store/:categoryTypeUrl/:category?{machines:string}{keywords:string}{is_active:string}{is_available:string}{page:string}{sort:string}',
+        abstract: !Fablab.storeModule,
+        views: {
+          'main@': {
+            templateUrl: '/store/index.html',
+            controller: 'StoreController'
+          }
+        },
+        params: {
+          categoryTypeUrl: { raw: true, type: 'path', value: null, squash: true },
+          category: { type: 'path', raw: true, value: null, squash: true },
+          machines: { array: true, dynamic: true, type: 'query', raw: true },
+          keywords: { dynamic: true, type: 'query' },
+          is_active: { dynamic: true, type: 'query', value: 'true', squash: true },
+          is_available: { dynamic: true, type: 'query', value: 'false', squash: true },
+          page: { dynamic: true, type: 'query', value: '1', squash: true },
+          sort: { dynamic: true, type: 'query' },
+          authorizedRoles: { dynamic: true, raw: true }
+        }
+      })
+
+      // show product
+      .state('app.public.product_show', {
+        url: '/store/p/:slug',
+        abstract: !Fablab.storeModule,
+        views: {
+          'main@': {
+            templateUrl: '/products/show.html',
+            controller: 'ShowProductController'
+          }
+        }
+      })
+
+      // cart
+      .state('app.public.store_cart', {
+        url: '/store/cart',
+        abstract: !Fablab.storeModule,
+        views: {
+          'main@': {
+            templateUrl: '/cart/index.html',
+            controller: 'CartController'
+          }
         }
       })
 
@@ -871,6 +942,18 @@ angular.module('application.router', ['ui.router'])
         }
       })
 
+      // show order
+      .state('app.admin.order_show', {
+        url: '/admin/store/orders/:id',
+        abstract: !Fablab.storeModule,
+        views: {
+          'main@': {
+            templateUrl: '/admin/orders/show.html',
+            controller: 'AdminShowOrdersController'
+          }
+        }
+      })
+
       // invoices
       .state('app.admin.invoices', {
         url: '/admin/invoices',
@@ -884,13 +967,13 @@ angular.module('application.router', ['ui.router'])
           settings: ['Setting', function (Setting) {
             return Setting.query({
               names: "['invoice_legals', 'invoice_text', 'invoice_VAT-rate', 'invoice_VAT-rate_Machine', 'invoice_VAT-rate_Training', 'invoice_VAT-rate_Space', " +
-                     "'invoice_VAT-rate_Event', 'invoice_VAT-rate_Subscription', 'invoice_VAT-active', 'invoice_order-nb', 'invoice_code-value', " +
+                     "'invoice_VAT-rate_Event', 'invoice_VAT-rate_Subscription', 'invoice_VAT-rate_Product', 'invoice_VAT-active', 'invoice_order-nb', 'invoice_code-value', " +
                      "'invoice_code-active', 'invoice_reference', 'invoice_logo', 'accounting_journal_code', 'accounting_card_client_code', " +
                      "'accounting_card_client_label', 'accounting_wallet_client_code', 'accounting_wallet_client_label', 'invoicing_module', " +
                      "'accounting_other_client_code', 'accounting_other_client_label', 'accounting_wallet_code', 'accounting_wallet_label', " +
                      "'accounting_VAT_code', 'accounting_VAT_label', 'accounting_subscription_code', 'accounting_subscription_label', " +
                      "'accounting_Machine_code', 'accounting_Machine_label', 'accounting_Training_code', 'accounting_Training_label', " +
-                     "'accounting_Event_code', 'accounting_Event_label', 'accounting_Space_code', 'accounting_Space_label', " +
+                     "'accounting_Event_code', 'accounting_Event_label', 'accounting_Space_code', 'accounting_Space_label', 'accounting_Product_code', 'accounting_Product_label', " +
                      "'payment_gateway', 'accounting_Error_code', 'accounting_Error_label', 'payment_schedule_prefix', " +
                      "'feature_tour_display', 'online_payment_module', 'stripe_public_key', 'stripe_currency', 'invoice_prefix', " +
                      "'accounting_Pack_code', 'accounting_Pack_label']"
@@ -1094,7 +1177,8 @@ angular.module('application.router', ['ui.router'])
                      "'link_name', 'home_content', 'home_css', 'phone_required', 'upcoming_events_shown', 'public_agenda_module'," +
                      "'renew_pack_threshold', 'pack_only_for_subscription', 'overlapping_categories', 'public_registrations'," +
                      "'extended_prices_in_same_day', 'recaptcha_site_key', 'recaptcha_secret_key', 'user_validation_required', " +
-                     "'user_validation_required_list', 'machines_module', 'user_change_group', 'show_username_in_admin_list']"
+                     "'user_validation_required_list', 'machines_module', 'user_change_group', 'show_username_in_admin_list', " +
+                     "'store_module']"
             }).$promise;
           }],
           privacyDraftsPromise: ['Setting', function (Setting) { return Setting.get({ name: 'privacy_draft', history: true }).$promise; }],
@@ -1102,6 +1186,91 @@ angular.module('application.router', ['ui.router'])
           cgvFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'cgv-file' }).$promise; }],
           faviconFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'favicon-file' }).$promise; }],
           profileImageFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'profile-image-file' }).$promise; }]
+        }
+      })
+
+      .state('app.admin.store', {
+        abstract: true,
+        url: '/admin/store'
+      })
+
+      .state('app.admin.store.settings', {
+        url: '/settings',
+        abstract: !Fablab.storeModule,
+        data: {
+          authorizedRoles: ['admin']
+        },
+        views: {
+          'main@': {
+            templateUrl: '/admin/store/index.html',
+            controller: 'AdminStoreController'
+          }
+        }
+      })
+
+      .state('app.admin.store.products', {
+        url: '/products?{categories:string}{machines:string}{keywords:string}{stock_type:string}{stock_from:string}{stock_to:string}{is_active:string}{page:string}{sort:string}',
+        abstract: !Fablab.storeModule,
+        views: {
+          'main@': {
+            templateUrl: '/admin/store/index.html',
+            controller: 'AdminStoreController'
+          }
+        },
+        params: {
+          categories: { array: true, dynamic: true, type: 'query', raw: true },
+          machines: { array: true, dynamic: true, type: 'query', raw: true },
+          keywords: { dynamic: true, type: 'query' },
+          stock_type: { dynamic: true, type: 'query', value: 'internal', squash: true },
+          stock_from: { dynamic: true, type: 'query', value: '0', squash: true },
+          stock_to: { dynamic: true, type: 'query', value: '0', squash: true },
+          is_active: { dynamic: true, type: 'query', value: 'false', squash: true },
+          page: { dynamic: true, type: 'query', value: '1', squash: true },
+          sort: { dynamic: true, type: 'query' }
+        }
+      })
+
+      .state('app.admin.store.products_new', {
+        url: '/products/new',
+        abstract: !Fablab.storeModule,
+        views: {
+          'main@': {
+            templateUrl: '/admin/store/product_new.html',
+            controller: 'AdminStoreProductController'
+          }
+        }
+      })
+
+      .state('app.admin.store.products_edit', {
+        url: '/products/:id/edit',
+        abstract: !Fablab.storeModule,
+        views: {
+          'main@': {
+            templateUrl: '/admin/store/product_edit.html',
+            controller: 'AdminStoreProductController'
+          }
+        }
+      })
+
+      .state('app.admin.store.categories', {
+        url: '/categories',
+        abstract: !Fablab.storeModule,
+        views: {
+          'main@': {
+            templateUrl: '/admin/store/index.html',
+            controller: 'AdminStoreController'
+          }
+        }
+      })
+
+      .state('app.admin.store.orders', {
+        url: '/orders',
+        abstract: !Fablab.storeModule,
+        views: {
+          'main@': {
+            templateUrl: '/admin/store/index.html',
+            controller: 'AdminStoreController'
+          }
         }
       })
 

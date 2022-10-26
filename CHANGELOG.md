@@ -21,6 +21,10 @@
 ## v5.4.23 2022 October 12
 
 - Fix a bug: unable to build docker image
+- Fablab's store module
+- Fix a bug: missing translations in PayZen configuration screens
+- Fix a bug: wrong translation key prevents the display of the schedule deadline's payment mean
+- [TODO DEPLOY] `rails db:seed`
 
 ## v5.4.22 2022 October 10
 

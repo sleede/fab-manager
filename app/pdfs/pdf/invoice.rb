@@ -41,15 +41,10 @@ class PDF::Invoice < Prawn::Document
       else
         text I18n.t('invoices.invoice_reference', REF: invoice.reference), leading: 3
       end
-      if Setting.get('invoice_code-active')
-        text I18n.t('invoices.code', CODE: Setting.get('invoice_code-value')), leading: 3
-      end
+      text I18n.t('invoices.code', CODE: Setting.get('invoice_code-value')), leading: 3 if Setting.get('invoice_code-active')
       if invoice.main_item.object_type != WalletTransaction.name
-        if invoice.is_a?(Avoir)
-          text I18n.t('invoices.order_number', NUMBER: invoice.invoice.order_number), leading: 3
-        else
-          text I18n.t('invoices.order_number', NUMBER: invoice.order_number), leading: 3
-        end
+        order_number = invoice.main_item.object_type == OrderItem.name ? invoice.main_item.object.order.reference : invoice.order_number
+        text I18n.t('invoices.order_number', NUMBER: order_number), leading: 3
       end
       if invoice.is_a?(Avoir)
         text I18n.t('invoices.refund_invoice_issued_on_DATE', DATE: I18n.l(invoice.avoir_date.to_date))
@@ -119,6 +114,8 @@ class PDF::Invoice < Prawn::Document
           object = I18n.t('invoices.error_invoice')
         when 'StatisticProfilePrepaidPack'
           object = I18n.t('invoices.prepaid_pack')
+        when 'OrderItem'
+          object = I18n.t('invoices.order')
         else
           Rails.logger.error "specified main_item.object_type type (#{invoice.main_item.object_type}) is unknown"
         end
@@ -136,7 +133,6 @@ class PDF::Invoice < Prawn::Document
       total_vat = 0
       # going through invoice_items
       invoice.invoice_items.each do |item|
-
         price = item.amount.to_i / 100.00
 
         details = invoice.is_a?(Avoir) ? I18n.t('invoices.cancellation') + ' - ' : ''
@@ -161,7 +157,6 @@ class PDF::Invoice < Prawn::Document
                               START: I18n.l(subscription_start_at.to_date),
                               END: I18n.l(subscription_end_at.to_date))
           end
-
 
         elsif item.object_type == Reservation.name
           case invoice.main_item.object.try(:reservable_type)
@@ -243,7 +238,8 @@ class PDF::Invoice < Prawn::Document
       else
         data += [[I18n.t('invoices.total_including_all_taxes'), number_to_currency(total)]]
         vat_rate_group.each do |_type, rate|
-          data += [[I18n.t('invoices.including_VAT_RATE', RATE: rate[:vat_rate], AMOUNT: number_to_currency(rate[:amount] / 100.00)), number_to_currency(rate[:total_vat] / 100.00)]]
+          data += [[I18n.t('invoices.including_VAT_RATE', RATE: rate[:vat_rate], AMOUNT: number_to_currency(rate[:amount] / 100.00)),
+                    number_to_currency(rate[:total_vat] / 100.00)]]
         end
         data += [[I18n.t('invoices.including_total_excluding_taxes'), number_to_currency(total_ht / 100.00)]]
         data += [[I18n.t('invoices.including_amount_payed_on_ordering'), number_to_currency(total)]]
@@ -290,7 +286,7 @@ class PDF::Invoice < Prawn::Document
       # payment details
       move_down 20
       if invoice.is_a?(Avoir)
-        payment_verbose = I18n.t('invoices.refund_on_DATE', DATE:I18n.l(invoice.avoir_date.to_date)) + ' '
+        payment_verbose = I18n.t('invoices.refund_on_DATE', DATE: I18n.l(invoice.avoir_date.to_date)) + ' '
         case invoice.payment_method
         when 'stripe'
           payment_verbose += I18n.t('invoices.by_card_online_payment')
@@ -350,7 +346,6 @@ class PDF::Invoice < Prawn::Document
       txt.each_line do |line|
         text line, style: :bold, inline_format: true
       end
-
 
       # address and legals information
       move_down 40

@@ -527,6 +527,19 @@
   }
 }
 
+.nav {
+  &.nav-tabs {
+    display: flex;
+    & > li {
+      flex: 1;
+      width: auto;
+      display: block;
+      float: none;
+      a { height: 100%; }
+    }
+  }
+}
+
 // overrides bootstrap
 .nav-justified > li, .nav-tabs.nav-justified > li {
   cursor: pointer;

@@ -1,4 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
+import ParsingLib from '../../lib/parsing';
 
 type Error = { error: string };
 
@@ -48,7 +49,9 @@ function extractHumanReadableMessage (error: string|Error): string {
     // iterate through all the keys to build the message
     for (const key in error) {
       if (Object.prototype.hasOwnProperty.call(error, key)) {
-        message += `${key} : `;
+        if (!ParsingLib.isInteger(key)) {
+          message += `${key} : `;
+        }
         if (error[key] instanceof Array) {
           // standard rails messages are stored as {field: [error1, error2]}
           // we rebuild them as "field: error1, error2"
