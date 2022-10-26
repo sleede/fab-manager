@@ -204,7 +204,7 @@ class Setting < ApplicationRecord
   # @return {String|Boolean}
   ##
   def self.get(name)
-    res = find_by(name: name)&.value
+    res = find_by('LOWER(name) = ? ', name.downcase)&.value
 
     # handle boolean values
     return true if res == 'true'

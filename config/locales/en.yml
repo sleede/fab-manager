@@ -164,6 +164,7 @@ en:
     Event_reservation: "event reserv."
     Space_reservation: "space reserv."
     wallet: "wallet"
+    shop_order: "shop order"
   vat_export:
     start_date: "Start date"
     end_date: "End date"

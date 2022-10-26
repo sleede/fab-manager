@@ -61,28 +61,21 @@ class AccountingExportService
 
   # Generate the "subscription" and "reservation" rows associated with the provided invoice
   def items_rows(invoice)
-    rows = invoice.subscription_invoice? ? "#{subscription_row(invoice)}\n" : ''
-    case invoice.main_item.object_type
-    when 'Reservation'
-      items = invoice.invoice_items.reject { |ii| ii.object_type == 'Subscription' }
+    rows = ''
+    {
+      subscription: 'Subscription', reservation: 'Reservation', wallet: 'WalletTransaction',
+      pack: 'StatisticProfilePrepaidPack', product: 'OrderItem', error: 'Error'
+    }.each do |type, object_type|
+      items = invoice.invoice_items.filter { |ii| ii.object_type == object_type }
       items.each do |item|
-        rows << "#{reservation_row(invoice, item)}\n"
+        rows << "#{row(
+          invoice,
+          account(invoice, type),
+          account(invoice, type, type: :label),
+          item.net_amount / 100.00,
+          line_label: label(invoice)
+        )}\n"
       end
-    when 'WalletTransaction'
-      rows << "#{wallet_row(invoice)}\n"
-    when 'StatisticProfilePrepaidPack'
-      rows << "#{pack_row(invoice)}\n"
-    when 'OrderItem'
-      rows << "#{product_row(invoice)}\n"
-    when 'Error'
-      items = invoice.invoice_items.reject { |ii| ii.object_type == 'Subscription' }
-      items.each do |item|
-        rows << "#{error_row(invoice, item)}\n"
-      end
-    when 'Subscription'
-      # do nothing, subscription was already handled by subscription_row
-    else
-      Rails.logger.warn { "Unknown main object type #{invoice.main_item.object_type}" }
     end
     rows
   end
@@ -93,8 +86,8 @@ class AccountingExportService
     invoice.payment_means.each do |details|
       rows << row(
         invoice,
-        account(invoice, :projets, means: details[:means]),
-        account(invoice, :projets, means: details[:means], type: :label),
+        account(invoice, :client, means: details[:means]),
+        account(invoice, :client, means: details[:means], type: :label),
         details[:amount] / 100.00,
         line_label: label(invoice),
         debit_method: :debit_client,
@@ -103,61 +96,6 @@ class AccountingExportService
       rows << "\n"
     end
     rows
-  end
-
-  # Generate the "reservation" row, which contains the credit to the reservation account, all taxes excluded
-  def reservation_row(invoice, item)
-    row(
-      invoice,
-      account(invoice, :reservation),
-      account(invoice, :reservation, type: :label),
-      item.net_amount / 100.00,
-      line_label: label(invoice)
-    )
-  end
-
-  # Generate the "subscription" row, which contains the credit to the subscription account, all taxes excluded
-  def subscription_row(invoice)
-    subscription_item = invoice.invoice_items.select { |ii| ii.object_type == 'Subscription' }.first
-    row(
-      invoice,
-      account(invoice, :subscription),
-      account(invoice, :subscription, type: :label),
-      subscription_item.net_amount / 100.00,
-      line_label: label(invoice)
-    )
-  end
-
-  # Generate the "wallet" row, which contains the credit to the wallet account, all taxes excluded
-  # This applies to wallet crediting, when an Avoir is generated at this time
-  def wallet_row(invoice)
-    row(
-      invoice,
-      account(invoice, :wallet),
-      account(invoice, :wallet, type: :label),
-      invoice.invoice_items.first.net_amount / 100.00,
-      line_label: label(invoice)
-    )
-  end
-
-  def pack_row(invoice)
-    row(
-      invoice,
-      account(invoice, :pack),
-      account(invoice, :pack, type: :label),
-      invoice.invoice_items.first.net_amount / 100.00,
-      line_label: label(invoice)
-    )
-  end
-
-  def product_row(invoice)
-    row(
-      invoice,
-      account(invoice, :product),
-      account(invoice, :product, type: :label),
-      invoice.invoice_items.first.net_amount / 100.00,
-      line_label: label(invoice)
-    )
   end
 
   # Generate the "VAT" row, which contains the credit to the VAT account, with VAT amount only
@@ -171,16 +109,6 @@ class AccountingExportService
       account(invoice, :vat),
       account(invoice, :vat, type: :label),
       invoice.invoice_items.map(&:vat).map(&:to_i).reduce(:+) / 100.00,
-      line_label: label(invoice)
-    )
-  end
-
-  def error_row(invoice, item)
-    row(
-      invoice,
-      account(invoice, :error),
-      account(invoice, :error, type: :label),
-      item.net_amount / 100.00,
       line_label: label(invoice)
     )
   end
@@ -219,44 +147,12 @@ class AccountingExportService
   # Get the account code (or label) for the given invoice and the specified line type (client, vat, subscription or reservation)
   def account(invoice, account, type: :code, means: :other)
     case account
-    when :projets
+    when :client
       Setting.get("accounting_#{means}_client_#{type}")
-    when :vat
-      Setting.get("accounting_VAT_#{type}")
-    when :subscription
-      if invoice.subscription_invoice?
-        Setting.get("accounting_subscription_#{type}")
-      else
-        Rails.logger.debug { "WARN: Invoice #{invoice.id} has no subscription" }
-      end
     when :reservation
-      if invoice.main_item.object_type == 'Reservation'
-        Setting.get("accounting_#{invoice.main_item.object.reservable_type}_#{type}")
-      else
-        Rails.logger.debug { "WARN: Invoice #{invoice.id} has no reservation" }
-      end
-    when :wallet
-      if invoice.main_item.object_type == 'WalletTransaction'
-        Setting.get("accounting_wallet_#{type}")
-      else
-        Rails.logger.debug { "WARN: Invoice #{invoice.id} is not a wallet credit" }
-      end
-    when :pack
-      if invoice.main_item.object_type == 'StatisticProfilePrepaidPack'
-        Setting.get("accounting_Pack_#{type}")
-      else
-        Rails.logger.debug { "WARN: Invoice #{invoice.id} has no prepaid-pack" }
-      end
-    when :product
-      if invoice.main_item.object_type == 'OrderItem'
-        Setting.get("accounting_Product_#{type}")
-      else
-        Rails.logger.debug { "WARN: Invoice #{invoice.id} has no prepaid-pack" }
-      end
-    when :error
-      Setting.get("accounting_Error_#{type}")
+      Setting.get("accounting_#{invoice.main_item.object.reservable_type}_#{type}") if invoice.main_item.object_type == 'Reservation'
     else
-      Rails.logger.debug { "Unsupported account #{account}" }
+      Setting.get("accounting_#{account}_#{type}")
     end || ''
   end
 
@@ -297,6 +193,7 @@ class AccountingExportService
       items.push I18n.t("accounting_export.#{invoice.main_item.object.reservable_type}_reservation")
     end
     items.push I18n.t('accounting_export.wallet') if invoice.main_item.object_type == 'WalletTransaction'
+    items.push I18n.t('accounting_export.shop_order') if invoice.main_item.object_type == 'OrderItem'
 
     summary = items.join(' + ')
     res = "#{reference}, #{summary}"
