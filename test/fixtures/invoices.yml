@@ -186,7 +186,7 @@ invoice_5816:
   statistic_profile_id: 4
 invoice_5817:
   id: 5817
-  total: 1296
+  total: 1295
   created_at: '2022-10-04 13:54:42.975196'
   updated_at: '2022-10-04 13:54:43.070098'
   reference: 2210004/VL
