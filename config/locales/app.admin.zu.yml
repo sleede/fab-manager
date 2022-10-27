@@ -2076,9 +2076,13 @@ zu:
           damaged: "crwdns31528:0crwdne31528:0"
           other_in: "crwdns31530:0crwdne31530:0"
           other_out: "crwdns31532:0crwdne31532:0"
-        clone_product_model:
-          clone_product: "crwdns31534:0crwdne31534:0"
-          clone: "crwdns31536:0crwdne31536:0"
+        clone_product_modal:
+          clone_product: "crwdns31648:0crwdne31648:0"
+          clone: "crwdns31650:0crwdne31650:0"
+          name: "crwdns31652:0crwdne31652:0"
+          sku: "crwdns31654:0crwdne31654:0"
+          is_show_in_store: "crwdns31656:0crwdne31656:0"
+          active_price_info: "crwdns31658:0crwdne31658:0"
         orders:
           heading: "crwdns31538:0crwdne31538:0"
           create_order: "crwdns31540:0crwdne31540:0"
