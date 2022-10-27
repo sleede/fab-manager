@@ -2076,9 +2076,13 @@ es:
           damaged: "Damaged product"
           other_in: "Other (in)"
           other_out: "Other (out)"
-        clone_product_model:
+        clone_product_modal:
           clone_product: "Duplicate the product"
           clone: "Duplicate"
+          name: "Name"
+          sku: "URL"
+          is_show_in_store: "Available in the store"
+          active_price_info: "Is this product visible by the members on the store?"
         orders:
           heading: "Orders"
           create_order: "Create an order"
