@@ -46,18 +46,6 @@ export const ProductItem: React.FC<ProductItemProps> = ({ product, onEdit, onDel
   /**
    * Returns CSS class from stock status
    */
-  const statusColor = (product: Product) => {
-    if (product.stock.internal < (product.quantity_min || 1) ||
-      product.stock.external < (product.quantity_min || 1) ||
-      (product.low_stock_threshold && product.stock.internal <= product.low_stock_threshold) ||
-      (product.low_stock_threshold && product.stock.external <= product.low_stock_threshold)) {
-      return 'warning';
-    }
-    return '';
-  };
-  /**
-   * Returns CSS class from stock status
-   */
   const stockColor = (product: Product, stockType: string) => {
     if (product.stock[stockType] < (product.quantity_min || 1)) {
       return 'out-of-stock';
@@ -69,7 +57,7 @@ export const ProductItem: React.FC<ProductItemProps> = ({ product, onEdit, onDel
   };
 
   return (
-    <div className={`product-item ${statusColor(product)}`}>
+    <div className='product-item'>
       <div className='itemInfo'>
         <img src={thumbnail()?.thumb_attachment_url || noImage} alt='' className='itemInfo-thumbnail' />
         <p className="itemInfo-name">{product.name}</p>
