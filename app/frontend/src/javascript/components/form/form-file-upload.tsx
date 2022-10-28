@@ -4,17 +4,13 @@ import { Path } from 'react-hook-form';
 import { UnpackNestedValue, UseFormSetValue } from 'react-hook-form/dist/types/form';
 import { FieldPathValue } from 'react-hook-form/dist/types/path';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
-import { FormInput } from '../form/form-input';
+import { FormInput } from './form-input';
 import { FormComponent } from '../../models/form-component';
 import { AbstractFormItemProps } from './abstract-form-item';
 import { FabButton } from '../base/fab-button';
 import { FilePdf, Trash } from 'phosphor-react';
-
-export interface FileType {
-  id?: number,
-  attachment_name?: string,
-  attachment_url?: string
-}
+import { FileType } from '../../models/file';
+import FileUploadLib from '../../lib/file-upload';
 
 interface FormFileUploadProps<TFieldValues> extends FormComponent<TFieldValues>, AbstractFormItemProps<TFieldValues> {
   setValue: UseFormSetValue<TFieldValues>,
@@ -36,7 +32,7 @@ export const FormFileUpload = <TFieldValues extends FieldValues>({ id, register,
    * Check if file is selected
    */
   const hasFile = (): boolean => {
-    return !!file?.attachment_name;
+    return FileUploadLib.hasFile(file);
   };
 
   /**
@@ -62,20 +58,7 @@ export const FormFileUpload = <TFieldValues extends FieldValues>({ id, register,
    * Callback triggered when the user clicks on the delete button.
    */
   function onRemoveFile () {
-    if (file?.id) {
-      setValue(
-        `${id}[_destroy]` as Path<TFieldValues>,
-        true as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>
-      );
-    }
-    setValue(
-      `${id}[attachment_files]` as Path<TFieldValues>,
-      null as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>
-    );
-    setFile(null);
-    if (typeof onFileRemove === 'function') {
-      onFileRemove();
-    }
+    FileUploadLib.onRemoveFile(file, id, setFile, setValue, onFileRemove);
   }
 
   // Compose classnames from props
